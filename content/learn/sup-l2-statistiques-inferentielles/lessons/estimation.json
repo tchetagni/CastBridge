@@ -1,0 +1,842 @@
+{
+ "chapter": "sup-l2-statistiques-inferentielles-estimation",
+ "lessons": [
+  {
+   "id": "sup-l2-statistiques-inferentielles-echantillonnage",
+   "title": "Échantillonnage et estimation ponctuelle",
+   "minutes": 45,
+   "programRef": "Statistiques inférentielles de deuxième année de Licence — à comparer au programme de l'établissement",
+   "status": "draft",
+   "author": "CastBridge (brouillon IA)",
+   "source": "Rédaction originale ; à relire par un enseignant",
+   "objectives": [
+    "Distinguer population, échantillon, paramètre et estimateur.",
+    "Calculer la moyenne, la variance corrigée et la proportion d'un échantillon.",
+    "Utiliser $E(\\bar{X})=μ$ et $σ(\\bar{X})=\\frac{σ}{\\sqrt{n}}$.",
+    "Comprendre le rôle de la taille de l'échantillon."
+   ],
+   "exercises": [
+    "sup-l2-statistiques-inferentielles-echantillonnage-01",
+    "sup-l2-statistiques-inferentielles-echantillonnage-02",
+    "sup-l2-statistiques-inferentielles-echantillonnage-03",
+    "sup-l2-statistiques-inferentielles-echantillonnage-04",
+    "sup-l2-statistiques-inferentielles-echantillonnage-05",
+    "sup-l2-statistiques-inferentielles-echantillonnage-06"
+   ],
+   "selfCheck": [
+    "sup-l2-statistiques-inferentielles-echantillonnage-q1",
+    "sup-l2-statistiques-inferentielles-echantillonnage-q2",
+    "sup-l2-statistiques-inferentielles-echantillonnage-q3",
+    "sup-l2-statistiques-inferentielles-echantillonnage-q4",
+    "sup-l2-statistiques-inferentielles-echantillonnage-q5"
+   ],
+   "reviewNotes": [
+    "Le théorème central limite est énoncé sans démonstration ; vérifier la formulation avec l'enseignant.",
+    "Échantillon aléatoire simple supposé (tirage indépendant) : hypothèse à rappeler."
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Population, échantillon, paramètre",
+     "md": "La **population** est l'ensemble étudié (ex. tous les sacs de riz d'un entrepôt) ; ses caractéristiques (moyenne $μ$, écart-type $σ$, proportion $p$) sont les **paramètres**, inconnus. Un **échantillon** de taille $n$ est un sous-ensemble tiré **au hasard** (aléatoire simple : chaque individu a la même chance, tirages indépendants). Une **statistique** calculée sur l'échantillon sert d'**estimateur** du paramètre."
+    },
+    {
+     "type": "key",
+     "style": "formule",
+     "title": "Estimateurs usuels",
+     "md": "Moyenne d'échantillon : $\\bar{x}=\\frac{1}{n}\\sum x_{i}$ (estimateur de $μ$). Proportion d'échantillon : $\\hat{p}=\\frac{k}{n}$ où $k$ est le nombre de « succès » (estimateur de $p$). Variance **corrigée** : $s^{2}=\\frac{1}{n-1}\\sum (x_{i}-\\bar{x})^{2}$ (estimateur sans biais de $σ^{2}$) ; on divise par $n-1$ et non $n$.",
+     "tex": "s^{2}=\\frac{1}{n-1}\\sum (x_{i}-\\bar{x})^{2}"
+    },
+    {
+     "type": "key",
+     "style": "propriete",
+     "title": "Distribution d'échantillonnage de la moyenne",
+     "md": "Pour un échantillon aléatoire simple de taille $n$ d'une population de moyenne $μ$ et d'écart-type $σ$ : $E(\\bar{X})=μ$ et $σ(\\bar{X})=\\frac{σ}{\\sqrt{n}}$ (**erreur standard**). Si la population est normale, $\\bar{X}$ l'est aussi ; pour $n$ grand (règle usuelle : $n≥30$), $\\bar{X}$ est **approximativement normale** quelle que soit la population (théorème central limite, admis).",
+     "tex": "σ(\\bar{X})=\\frac{σ}{\\sqrt{n}}"
+    },
+    {
+     "type": "key",
+     "style": "propriete",
+     "title": "Distribution d'échantillonnage d'une proportion",
+     "md": "Si la proportion dans la population est $p$, alors $E(\\hat{p})=p$ et $σ(\\hat{p})=\\sqrt{\\frac{p(1-p)}{n}}$. Pour $n$ grand (par exemple $np≥5$ et $n(1-p)≥5$), $\\hat{p}$ est approximativement normale."
+    },
+    {
+     "type": "illustration",
+     "figure": {
+      "kind": "bars",
+      "w": 400,
+      "h": 250,
+      "unit": "erreur standard (σ = 12)",
+      "bars": [
+       {
+        "label": "n=4",
+        "value": 6.0,
+        "color": [
+         "blue"
+        ]
+       },
+       {
+        "label": "n=9",
+        "value": 4.0,
+        "color": [
+         "blue"
+        ]
+       },
+       {
+        "label": "n=16",
+        "value": 3.0,
+        "color": [
+         "blue"
+        ]
+       },
+       {
+        "label": "n=36",
+        "value": 2.0,
+        "color": [
+         "blue"
+        ]
+       },
+       {
+        "label": "n=100",
+        "value": 1.2,
+        "color": [
+         "blue"
+        ]
+       }
+      ]
+     },
+     "caption": "L'erreur standard $σ/\\sqrt{n}$ diminue quand la taille $n$ augmente (σ = 12).",
+     "alt": "Cinq barres décroissantes : 6 pour n=4, 4 pour n=9, 3 pour n=16, 2 pour n=36 et 1,2 pour n=100."
+    },
+    {
+     "type": "example",
+     "title": "Exemple 1 — moyenne et variance corrigée",
+     "statement": "Cinq sacs fictifs ont pour masses (kg) : 8, 10, 12, 14, 16. Estimer la moyenne et la variance de la population.",
+     "steps": [
+      {
+       "md": "$\\bar{x}=\\frac{8+10+12+14+16}{5}=12$.",
+       "tex": "\\bar{x}=\\frac{60}{5}=12"
+      },
+      {
+       "md": "Écarts : $-4,-2,0,2,4$ ; carrés : $16,4,0,4,16$ ; somme $=40$."
+      },
+      {
+       "md": "$s^{2}=\\frac{40}{5-1}=10$ ; $s=\\sqrt{10}≈3{,}16$.",
+       "tex": "s^{2}=\\frac{40}{4}=10"
+      }
+     ],
+     "answer": "**$\\bar{x}=12$ kg ; $s^{2}=10$ ; $s≈3{,}16$ kg.**"
+    },
+    {
+     "type": "example",
+     "title": "Exemple 2 — erreur standard",
+     "statement": "Une machine fictive remplit des sachets ; $σ=12$ g. Quelle est l'erreur standard de la moyenne d'un échantillon de $n=36$ sachets ? Et pour $n=144$ ?",
+     "steps": [
+      {
+       "md": "$n=36$ : $\\frac{12}{\\sqrt{36}}=\\frac{12}{6}=2$ g.",
+       "tex": "\\frac{12}{\\sqrt{36}}=2"
+      },
+      {
+       "md": "$n=144$ : $\\frac{12}{12}=1$ g.",
+       "tex": "\\frac{12}{\\sqrt{144}}=1"
+      },
+      {
+       "md": "Multiplier $n$ par 4 divise l'erreur standard par 2 (racine carrée)."
+      }
+     ],
+     "answer": "**2 g puis 1 g.**"
+    },
+    {
+     "type": "example",
+     "title": "Exemple 3 — proportion",
+     "statement": "Dans un échantillon aléatoire de 60 clients fictifs, 18 utilisent le paiement mobile. Estimer la proportion $p$ et l'erreur standard de $\\hat{p}$.",
+     "steps": [
+      {
+       "md": "$\\hat{p}=\\frac{18}{60}=0{,}3$.",
+       "tex": "\\hat{p}=\\frac{18}{60}=0{,}3"
+      },
+      {
+       "md": "On remplace $p$ par $\\hat{p}$ : $\\sqrt{\\frac{0{,}3×0{,}7}{60}}=\\sqrt{0{,}0035}≈0{,}0592$.",
+       "tex": "\\sqrt{\\frac{0{,}3×0{,}7}{60}}≈0{,}0592"
+      }
+     ],
+     "answer": "**$\\hat{p}=0{,}3$ ; erreur standard ≈ 0{,}0592.**"
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Erreurs fréquentes",
+     "md": "- Diviser par $n$ au lieu de $n-1$ pour la variance **corrigée**.\n- Confondre $σ$ (écart-type de la population) et $\\frac{σ}{\\sqrt{n}}$ (écart-type de la moyenne d'échantillon).\n- Croire qu'un grand échantillon **non aléatoire** est meilleur qu'un petit échantillon aléatoire (biais de sélection).\n- Oublier que $\\bar{x}$ varie d'un échantillon à l'autre."
+    },
+    {
+     "type": "more",
+     "items": [
+      "Un estimateur est **sans biais** si son espérance égale le paramètre ; la précision dépend de sa variance.",
+      "Un sondage réel exige de définir soigneusement la base de sondage et la méthode de tirage."
+     ]
+    },
+    {
+     "type": "exercise",
+     "ref": "sup-l2-statistiques-inferentielles-echantillonnage-01"
+    }
+   ]
+  },
+  {
+   "id": "sup-l2-statistiques-inferentielles-intervalles-confiance",
+   "title": "Intervalles de confiance",
+   "minutes": 50,
+   "programRef": "Statistiques inférentielles de deuxième année de Licence — à comparer au programme de l'établissement",
+   "status": "draft",
+   "author": "CastBridge (brouillon IA)",
+   "source": "Rédaction originale ; à relire par un enseignant",
+   "objectives": [
+    "Construire un intervalle de confiance d'une moyenne et d'une proportion.",
+    "Interpréter correctement un niveau de confiance.",
+    "Voir l'effet de $n$ et du niveau de confiance sur la largeur.",
+    "Déterminer la taille d'échantillon pour une marge donnée."
+   ],
+   "prerequisites": [
+    "sup-l2-statistiques-inferentielles-echantillonnage"
+   ],
+   "exercises": [
+    "sup-l2-statistiques-inferentielles-intervalles-confiance-01",
+    "sup-l2-statistiques-inferentielles-intervalles-confiance-02",
+    "sup-l2-statistiques-inferentielles-intervalles-confiance-03",
+    "sup-l2-statistiques-inferentielles-intervalles-confiance-04",
+    "sup-l2-statistiques-inferentielles-intervalles-confiance-05",
+    "sup-l2-statistiques-inferentielles-intervalles-confiance-06"
+   ],
+   "selfCheck": [
+    "sup-l2-statistiques-inferentielles-intervalles-confiance-q1",
+    "sup-l2-statistiques-inferentielles-intervalles-confiance-q2",
+    "sup-l2-statistiques-inferentielles-intervalles-confiance-q3",
+    "sup-l2-statistiques-inferentielles-intervalles-confiance-q4",
+    "sup-l2-statistiques-inferentielles-intervalles-confiance-q5"
+   ],
+   "reviewNotes": [
+    "Valeurs critiques normales et de Student fournies dans les énoncés ($z$ : 1,645 ; 1,96 ; 2,576 ; $t=2{,}306$ pour 8 ddl, 95 %) ; à comparer aux tables du cours.",
+    "Interprétation fréquentiste de la confiance : formulation à valider avec l'enseignant."
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Intervalle de confiance",
+     "md": "Un **intervalle de confiance au niveau $1-α$** pour un paramètre est un intervalle construit à partir de l'échantillon qui, **sur l'ensemble des échantillons possibles**, contient la vraie valeur dans $(1-α)$ des cas (ex. 95 %). Une fois calculé, l'intervalle contient le paramètre ou non : on ne parle pas de « probabilité 95 % » pour **cet** intervalle précis."
+    },
+    {
+     "type": "key",
+     "style": "formule",
+     "title": "Moyenne, écart-type $σ$ connu (ou $n$ grand)",
+     "md": "$\\left[\\bar{x}-z\\frac{σ}{\\sqrt{n}}\\,;\\ \\bar{x}+z\\frac{σ}{\\sqrt{n}}\\right]$ où $z$ est la valeur critique de la loi normale (1,645 pour 90 %, 1,96 pour 95 %, 2,576 pour 99 %). Si $σ$ est inconnu et $n$ grand, on remplace $σ$ par $s$. La **marge d'erreur** est $e=z\\frac{σ}{\\sqrt{n}}$.",
+     "tex": "\\bar{x}\\pm z\\frac{σ}{\\sqrt{n}}"
+    },
+    {
+     "type": "key",
+     "style": "formule",
+     "title": "Moyenne, $σ$ inconnu et petit échantillon",
+     "md": "Si la population est **normale** et $σ$ inconnu, on utilise la loi de **Student** à $n-1$ degrés de liberté : $\\bar{x}\\pm t\\frac{s}{\\sqrt{n}}$, où $t$ est lu dans une table (fournie dans l'énoncé). Pour $n$ petit, $t>z$ : l'intervalle est plus large.",
+     "tex": "\\bar{x}\\pm t\\frac{s}{\\sqrt{n}}"
+    },
+    {
+     "type": "key",
+     "style": "formule",
+     "title": "Proportion",
+     "md": "Pour $n$ grand (conditions $n\\hat{p}≥5$ et $n(1-\\hat{p})≥5$ par exemple) : $\\hat{p}\\pm z\\sqrt{\\frac{\\hat{p}(1-\\hat{p})}{n}}$. Pour une marge $e$ donnée, la taille minimale pour une moyenne est $n≥\\left(\\frac{zσ}{e}\\right)^{2}$ (toujours arrondie à l'entier **supérieur**).",
+     "tex": "\\hat{p}\\pm z\\sqrt{\\frac{\\hat{p}(1-\\hat{p})}{n}}"
+    },
+    {
+     "type": "illustration",
+     "figure": {
+      "kind": "shapes",
+      "w": 420,
+      "h": 150,
+      "items": [
+       {
+        "t": "line",
+        "x1": 40,
+        "y1": 90,
+        "x2": 380,
+        "y2": 90,
+        "color": "ink",
+        "width": 2,
+        "arrow": "end"
+       },
+       {
+        "t": "line",
+        "x1": 110,
+        "y1": 70,
+        "x2": 110,
+        "y2": 110,
+        "color": "blue",
+        "width": 3
+       },
+       {
+        "t": "line",
+        "x1": 310,
+        "y1": 70,
+        "x2": 310,
+        "y2": 110,
+        "color": "blue",
+        "width": 3
+       },
+       {
+        "t": "line",
+        "x1": 110,
+        "y1": 90,
+        "x2": 310,
+        "y2": 90,
+        "color": "blue",
+        "width": 4
+       },
+       {
+        "t": "circle",
+        "cx": 210,
+        "cy": 90,
+        "r": 6,
+        "fill": "red",
+        "stroke": "red",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 110,
+        "y": 60,
+        "text": "51,42",
+        "size": 14,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "text",
+        "x": 310,
+        "y": 60,
+        "text": "53,38",
+        "size": 14,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "text",
+        "x": 210,
+        "y": 125,
+        "text": "x̄ = 52,4",
+        "size": 14,
+        "color": "red",
+        "anchor": "middle"
+       }
+      ]
+     },
+     "caption": "Intervalle de confiance à 95 % centré sur la moyenne d'échantillon.",
+     "alt": "Un segment horizontal bleu de 51,42 à 53,38 avec un point rouge en son centre représentant la moyenne d'échantillon 52,4."
+    },
+    {
+     "type": "example",
+     "title": "Exemple 1 — moyenne, σ connu",
+     "statement": "Une machine fictive remplit des sacs ; $σ=3$ kg. Sur 36 sacs, $\\bar{x}=52{,}4$ kg. Construire l'intervalle de confiance à 95 %. Valeurs critiques fournies : $z=1{,}645$ (confiance 90 %), $z=1{,}96$ (95 %), $z=2{,}576$ (99 %).",
+     "steps": [
+      {
+       "md": "Erreur standard : $\\frac{3}{\\sqrt{36}}=0{,}5$.",
+       "tex": "\\frac{3}{6}=0{,}5"
+      },
+      {
+       "md": "Marge : $1{,}96×0{,}5=0{,}98$.",
+       "tex": "e=1{,}96×0{,}5=0{,}98"
+      },
+      {
+       "md": "Intervalle : $52{,}4\\pm0{,}98=[51{,}42\\,;53{,}38]$.",
+       "tex": "[51{,}42\\,;53{,}38]"
+      }
+     ],
+     "answer": "**IC à 95 % : $[51{,}42\\,;53{,}38]$ kg.**"
+    },
+    {
+     "type": "example",
+     "title": "Exemple 2 — proportion",
+     "statement": "Sur 400 clients fictifs interrogés, 120 sont satisfaits. Intervalle de confiance à 95 % de la proportion $p$ de clients satisfaits. Valeurs critiques fournies : $z=1{,}645$ (confiance 90 %), $z=1{,}96$ (95 %), $z=2{,}576$ (99 %).",
+     "steps": [
+      {
+       "md": "$\\hat{p}=\\frac{120}{400}=0{,}3$ ; conditions : $400×0{,}3=120≥5$ et $400×0{,}7=280≥5$ ✓."
+      },
+      {
+       "md": "Erreur standard : $\\sqrt{\\frac{0{,}3×0{,}7}{400}}≈0{,}0229$.",
+       "tex": "\\sqrt{\\frac{0{,}21}{400}}≈0{,}0229"
+      },
+      {
+       "md": "Marge : $1{,}96×0{,}0229≈0{,}0449$ ; intervalle : $[0{,}2551\\,;0{,}3449]$."
+      }
+     ],
+     "answer": "**IC à 95 % : $[0{,}255\\,;0{,}345]$, soit environ de 25,5 % à 34,5 %.**"
+    },
+    {
+     "type": "example",
+     "title": "Exemple 3 — petit échantillon (Student)",
+     "statement": "Neuf durées fictives de réparation (supposées normales) donnent $\\bar{x}=48$ min et $s=3$ min. Table fournie : pour 8 degrés de liberté et 95 %, $t=2{,}306$. Donner l'intervalle de confiance à 95 %.",
+     "steps": [
+      {
+       "md": "Erreur standard : $\\frac{s}{\\sqrt{n}}=\\frac{3}{3}=1$.",
+       "tex": "\\frac{3}{3}=1"
+      },
+      {
+       "md": "Marge : $2{,}306×1=2{,}306$.",
+       "tex": "e=2{,}306"
+      },
+      {
+       "md": "Intervalle : $48\\pm2{,}306=[45{,}694\\,;50{,}306]$.",
+       "tex": "[45{,}694\\,;50{,}306]"
+      }
+     ],
+     "answer": "**IC à 95 % : $[45{,}69\\,;50{,}31]$ min.** Avec $z=1{,}96$ on aurait trouvé un intervalle trop étroit."
+    },
+    {
+     "type": "example",
+     "title": "Exemple 4 — taille d'échantillon",
+     "statement": "Avec $σ=3$ et une confiance de 95 %, quelle taille minimale pour une marge d'erreur $e≤0{,}5$ ?",
+     "steps": [
+      {
+       "md": "$n≥\\left(\\frac{1{,}96×3}{0{,}5}\\right)^{2}=(11{,}76)^{2}≈138{,}3$.",
+       "tex": "n≥(11{,}76)^{2}≈138{,}3"
+      },
+      {
+       "md": "On arrondit à l'entier supérieur : $n=139$."
+      }
+     ],
+     "answer": "**$n=139$.**"
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Erreurs fréquentes",
+     "md": "- Dire que « le paramètre a 95 % de chances d'être dans cet intervalle précis » : c'est la **méthode** qui réussit dans 95 % des échantillons.\n- Utiliser $z$ au lieu de $t$ pour un petit échantillon à $σ$ inconnu.\n- Arrondir la taille d'échantillon à l'entier **inférieur**.\n- Oublier que viser une confiance plus élevée **élargit** l'intervalle, et que doubler la précision exige **quatre fois** plus d'individus."
+    },
+    {
+     "type": "more",
+     "items": [
+      "Les intervalles de confiance unilatéraux (« au moins ») existent aussi.",
+      "Pour une proportion, la pire marge est obtenue pour $\\hat{p}=0{,}5$ : $e≈\\frac{1}{\\sqrt{n}}$ à 95 %."
+     ]
+    },
+    {
+     "type": "exercise",
+     "ref": "sup-l2-statistiques-inferentielles-intervalles-confiance-01"
+    }
+   ]
+  }
+ ],
+ "exercises": [
+  {
+   "id": "sup-l2-statistiques-inferentielles-echantillonnage-01",
+   "kind": "numeric",
+   "tier": "application",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "sup-l2-statistiques-inferentielles-echantillonnage",
+   "prompt": "$σ=15$ et $n=25$. Calculer l'erreur standard $\\frac{σ}{\\sqrt{n}}$.",
+   "explanation": "$\\frac{15}{5}=3$.",
+   "source": "Exercice original",
+   "answer": 3,
+   "tolerance": 0
+  },
+  {
+   "id": "sup-l2-statistiques-inferentielles-echantillonnage-02",
+   "kind": "mcq",
+   "tier": "application",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "sup-l2-statistiques-inferentielles-echantillonnage",
+   "prompt": "La variance corrigée $s^{2}$ s'obtient en divisant la somme des carrés des écarts par :",
+   "explanation": "On divise par $n-1$ pour obtenir un estimateur sans biais.",
+   "source": "Exercice original",
+   "choices": [
+    "$n-1$",
+    "$n$",
+    "$n+1$",
+    "$\\sqrt{n}$"
+   ],
+   "answer": 0
+  },
+  {
+   "id": "sup-l2-statistiques-inferentielles-echantillonnage-03",
+   "kind": "truefalse",
+   "tier": "application",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "sup-l2-statistiques-inferentielles-echantillonnage",
+   "prompt": "Si on multiplie la taille de l'échantillon par 4, l'erreur standard de la moyenne est divisée par 2.",
+   "explanation": "$\\frac{σ}{\\sqrt{4n}}=\\frac{1}{2}\\frac{σ}{\\sqrt{n}}$.",
+   "source": "Exercice original",
+   "answer": true
+  },
+  {
+   "id": "sup-l2-statistiques-inferentielles-echantillonnage-04",
+   "kind": "numeric",
+   "tier": "approfondissement",
+   "difficulty": 2,
+   "points": 2,
+   "lesson": "sup-l2-statistiques-inferentielles-echantillonnage",
+   "prompt": "Calculer la variance corrigée de 4, 6, 8, 10 (arrondie au centième).",
+   "explanation": "Moyenne 7 ; carrés des écarts : $9+1+1+9=20$ ; $\\frac{20}{3}≈6{,}67$.",
+   "source": "Exercice original",
+   "answer": 6.666666666666667,
+   "tolerance": 0.01
+  },
+  {
+   "id": "sup-l2-statistiques-inferentielles-echantillonnage-05",
+   "kind": "numeric",
+   "tier": "approfondissement",
+   "difficulty": 2,
+   "points": 2,
+   "lesson": "sup-l2-statistiques-inferentielles-echantillonnage",
+   "prompt": "On veut une erreur standard d'au plus 1 avec $σ=10$. Quelle taille minimale $n$ ?",
+   "explanation": "$\\frac{10}{\\sqrt{n}}≤1$ ⇔ $\\sqrt{n}≥10$ ⇔ $n≥100$.",
+   "source": "Exercice original",
+   "answer": 100,
+   "tolerance": 0,
+   "unit": "individus"
+  },
+  {
+   "id": "sup-l2-statistiques-inferentielles-echantillonnage-06",
+   "kind": "problem",
+   "tier": "examen",
+   "difficulty": 2,
+   "lesson": "sup-l2-statistiques-inferentielles-echantillonnage",
+   "prompt": "Un échantillon aléatoire de 49 sacs de maïs fictifs a pour moyenne 50,6 kg et pour écart-type corrigé $s=7$ kg. Dans un autre échantillon de 60 sacs, 18 sont abîmés.",
+   "method": "Identifier le paramètre, l'estimateur, puis l'erreur standard.",
+   "mistakes": [
+    "Utiliser $s$ au lieu de $s/\\sqrt{n}$."
+   ],
+   "source": "Exercice original",
+   "parts": [
+    {
+     "id": "sup-l2-statistiques-inferentielles-echantillonnage-06-a",
+     "points": 1,
+     "prompt": "Calculer l'erreur standard estimée de la moyenne $\\frac{s}{\\sqrt{n}}$ (kg).",
+     "explanation": "$\\frac{7}{\\sqrt{49}}=1$.",
+     "kind": "numeric",
+     "answer": 1,
+     "tolerance": 0.001,
+     "unit": "kg"
+    },
+    {
+     "id": "sup-l2-statistiques-inferentielles-echantillonnage-06-b",
+     "points": 1,
+     "prompt": "Calculer la proportion de sacs abîmés dans le second échantillon.",
+     "explanation": "$\\frac{18}{60}=0{,}3$.",
+     "kind": "numeric",
+     "answer": 0.3,
+     "tolerance": 0.0001
+    },
+    {
+     "id": "sup-l2-statistiques-inferentielles-echantillonnage-06-c",
+     "points": 1,
+     "prompt": "Estimer l'erreur standard de cette proportion (arrondi au millième).",
+     "explanation": "$\\sqrt{\\frac{0{,}3×0{,}7}{60}}≈0{,}059$.",
+     "kind": "numeric",
+     "answer": 0.05916079783099616,
+     "tolerance": 0.001
+    },
+    {
+     "id": "sup-l2-statistiques-inferentielles-echantillonnage-06-d",
+     "points": 1,
+     "prompt": "Quel est l'estimateur ponctuel de la masse moyenne $μ$ de la population ?",
+     "explanation": "La moyenne d'échantillon estime $μ$.",
+     "kind": "mcq",
+     "choices": [
+      "7 kg",
+      "49 kg",
+      "1 kg",
+      "50,6 kg (moyenne d'échantillon)"
+     ],
+     "answer": 3
+    }
+   ]
+  },
+  {
+   "id": "sup-l2-statistiques-inferentielles-echantillonnage-q1",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "sup-l2-statistiques-inferentielles-echantillonnage",
+   "prompt": "L'estimateur naturel de la proportion $p$ est :",
+   "choices": [
+    "$\\bar{x}$",
+    "$\\hat{p}=\\frac{k}{n}$",
+    "$s^{2}$",
+    "$\\frac{n}{k}$"
+   ],
+   "answer": 1,
+   "explanation": "Fréquence observée."
+  },
+  {
+   "id": "sup-l2-statistiques-inferentielles-echantillonnage-q2",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "sup-l2-statistiques-inferentielles-echantillonnage",
+   "prompt": "L'espérance de $\\bar{X}$ est :",
+   "choices": [
+    "$σ$",
+    "$μ$",
+    "$\\frac{μ}{n}$",
+    "$nμ$"
+   ],
+   "answer": 1,
+   "explanation": "$\\bar{X}$ est un estimateur sans biais de $μ$."
+  },
+  {
+   "id": "sup-l2-statistiques-inferentielles-echantillonnage-q3",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "sup-l2-statistiques-inferentielles-echantillonnage",
+   "prompt": "L'écart-type de $\\bar{X}$ vaut :",
+   "choices": [
+    "$σ\\sqrt{n}$",
+    "$\\frac{σ}{n}$",
+    "$σ^{2}$",
+    "$\\frac{σ}{\\sqrt{n}}$"
+   ],
+   "answer": 3,
+   "explanation": "Erreur standard."
+  },
+  {
+   "id": "sup-l2-statistiques-inferentielles-echantillonnage-q4",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "sup-l2-statistiques-inferentielles-echantillonnage",
+   "prompt": "Un échantillon aléatoire simple est tel que :",
+   "choices": [
+    "chaque individu a la même chance d'être choisi",
+    "on choisit les individus les plus accessibles",
+    "on prend les plus grands",
+    "on prend les 10 premiers"
+   ],
+   "answer": 0,
+   "explanation": "Condition d'aléa."
+  },
+  {
+   "id": "sup-l2-statistiques-inferentielles-echantillonnage-q5",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "sup-l2-statistiques-inferentielles-echantillonnage",
+   "prompt": "Le théorème central limite dit que, pour $n$ grand, $\\bar{X}$ est :",
+   "choices": [
+    "constante",
+    "uniforme",
+    "approximativement normale",
+    "toujours égale à $μ$"
+   ],
+   "answer": 2,
+   "explanation": "Quelle que soit la population (variance finie)."
+  },
+  {
+   "id": "sup-l2-statistiques-inferentielles-intervalles-confiance-01",
+   "kind": "numeric",
+   "tier": "application",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "sup-l2-statistiques-inferentielles-intervalles-confiance",
+   "prompt": "$σ=10$, $n=100$, confiance 95 % ($z=1{,}96$). Calculer la marge d'erreur.",
+   "explanation": "$1{,}96×\\frac{10}{10}=1{,}96$.",
+   "source": "Exercice original",
+   "answer": 1.96,
+   "tolerance": 0.001
+  },
+  {
+   "id": "sup-l2-statistiques-inferentielles-intervalles-confiance-02",
+   "kind": "mcq",
+   "tier": "application",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "sup-l2-statistiques-inferentielles-intervalles-confiance",
+   "prompt": "Toutes choses égales, passer de 95 % à 99 % de confiance rend l'intervalle :",
+   "explanation": "Il faut une valeur critique plus grande ($2{,}576>1{,}96$).",
+   "source": "Exercice original",
+   "choices": [
+    "plus étroit",
+    "identique",
+    "décalé vers la gauche",
+    "plus large"
+   ],
+   "answer": 3
+  },
+  {
+   "id": "sup-l2-statistiques-inferentielles-intervalles-confiance-03",
+   "kind": "truefalse",
+   "tier": "application",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "sup-l2-statistiques-inferentielles-intervalles-confiance",
+   "prompt": "Un intervalle de confiance à 95 % déjà calculé contient la vraie moyenne avec une probabilité de 95 %.",
+   "explanation": "Faux : une fois calculé, il contient la vraie valeur ou non. Le niveau 95 % décrit la procédure sur l'ensemble des échantillons.",
+   "source": "Exercice original",
+   "answer": false
+  },
+  {
+   "id": "sup-l2-statistiques-inferentielles-intervalles-confiance-04",
+   "kind": "numeric",
+   "tier": "approfondissement",
+   "difficulty": 2,
+   "points": 2,
+   "lesson": "sup-l2-statistiques-inferentielles-intervalles-confiance",
+   "prompt": "Sur 400 interrogés, 120 sont favorables. Calculer la marge d'erreur à 95 % de la proportion (arrondie à $10^{-4}$).",
+   "explanation": "$1{,}96×\\sqrt{\\frac{0{,}3×0{,}7}{400}}≈0{,}0449$.",
+   "source": "Exercice original",
+   "answer": 0.044909241810567234,
+   "tolerance": 0.0002
+  },
+  {
+   "id": "sup-l2-statistiques-inferentielles-intervalles-confiance-05",
+   "kind": "numeric",
+   "tier": "approfondissement",
+   "difficulty": 2,
+   "points": 2,
+   "lesson": "sup-l2-statistiques-inferentielles-intervalles-confiance",
+   "prompt": "$σ=3$, confiance 95 %, marge souhaitée $0{,}5$. Quelle taille minimale d'échantillon ?",
+   "explanation": "$n≥(1{,}96×3/0{,}5)^{2}≈138{,}3$ : on arrondit à 139.",
+   "source": "Exercice original",
+   "answer": 139,
+   "tolerance": 0,
+   "unit": "individus"
+  },
+  {
+   "id": "sup-l2-statistiques-inferentielles-intervalles-confiance-06",
+   "kind": "problem",
+   "tier": "examen",
+   "difficulty": 2,
+   "lesson": "sup-l2-statistiques-inferentielles-intervalles-confiance",
+   "prompt": "On suppose normale la durée de vie (en mois) d'un modèle de batterie fictif. Sur 9 batteries : $\\bar{x}=48$ et $s=3$. Table fournie : pour 8 ddl et 95 %, $t=2{,}306$.",
+   "method": "Marge = valeur critique × erreur standard, puis centrer sur la moyenne.",
+   "mistakes": [
+    "Utiliser 1,96 à la place de 2,306."
+   ],
+   "source": "Exercice original",
+   "parts": [
+    {
+     "id": "sup-l2-statistiques-inferentielles-intervalles-confiance-06-a",
+     "points": 1,
+     "prompt": "Calculer la marge d'erreur.",
+     "explanation": "$2{,}306×\\frac{3}{\\sqrt{9}}=2{,}306$.",
+     "kind": "numeric",
+     "answer": 2.306,
+     "tolerance": 0.001
+    },
+    {
+     "id": "sup-l2-statistiques-inferentielles-intervalles-confiance-06-b",
+     "points": 1,
+     "prompt": "Borne inférieure de l'intervalle à 95 %.",
+     "explanation": "$48-2{,}306=45{,}694$.",
+     "kind": "numeric",
+     "answer": 45.694,
+     "tolerance": 0.001
+    },
+    {
+     "id": "sup-l2-statistiques-inferentielles-intervalles-confiance-06-c",
+     "points": 1,
+     "prompt": "Borne supérieure de l'intervalle à 95 %.",
+     "explanation": "$48+2{,}306=50{,}306$.",
+     "kind": "numeric",
+     "answer": 50.306,
+     "tolerance": 0.001
+    },
+    {
+     "id": "sup-l2-statistiques-inferentielles-intervalles-confiance-06-d",
+     "points": 1,
+     "prompt": "Pourquoi utilise-t-on la loi de Student ici ?",
+     "explanation": "Avec $n=9$ et $σ$ inconnu, il faut la valeur de Student.",
+     "kind": "mcq",
+     "choices": [
+      "l'échantillon est très grand",
+      "$σ$ est inconnu et l'échantillon est petit",
+      "la population n'est pas aléatoire",
+      "on veut une confiance de 100 %"
+     ],
+     "answer": 1
+    }
+   ]
+  },
+  {
+   "id": "sup-l2-statistiques-inferentielles-intervalles-confiance-q1",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "sup-l2-statistiques-inferentielles-intervalles-confiance",
+   "prompt": "Une marge d'erreur plus petite s'obtient avec :",
+   "choices": [
+    "un niveau de confiance plus élevé",
+    "un $σ$ plus grand",
+    "un échantillon plus grand",
+    "un $z$ plus grand"
+   ],
+   "answer": 2,
+   "explanation": "Erreur standard $\\frac{σ}{\\sqrt{n}}$ plus petite."
+  },
+  {
+   "id": "sup-l2-statistiques-inferentielles-intervalles-confiance-q2",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "sup-l2-statistiques-inferentielles-intervalles-confiance",
+   "prompt": "La valeur critique $z$ à 95 % est :",
+   "choices": [
+    "1,96",
+    "1,645",
+    "2,576",
+    "1"
+   ],
+   "answer": 0,
+   "explanation": "Pour le niveau 95 % (bilatéral)."
+  },
+  {
+   "id": "sup-l2-statistiques-inferentielles-intervalles-confiance-q3",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "sup-l2-statistiques-inferentielles-intervalles-confiance",
+   "prompt": "La taille minimale d'échantillon se calcule en arrondissant :",
+   "choices": [
+    "à l'entier inférieur",
+    "au plus proche entier pair",
+    "à l'entier supérieur",
+    "au dixième"
+   ],
+   "answer": 2,
+   "explanation": "Pour garantir la marge d'erreur voulue."
+  },
+  {
+   "id": "sup-l2-statistiques-inferentielles-intervalles-confiance-q4",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "sup-l2-statistiques-inferentielles-intervalles-confiance",
+   "prompt": "Pour un petit échantillon normal et $σ$ inconnu, on utilise :",
+   "choices": [
+    "la loi de Student à $n-1$ ddl",
+    "la loi de Poisson",
+    "la loi uniforme",
+    "la loi exponentielle"
+   ],
+   "answer": 0,
+   "explanation": "Valeur $t$ au lieu de $z$."
+  },
+  {
+   "id": "sup-l2-statistiques-inferentielles-intervalles-confiance-q5",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "sup-l2-statistiques-inferentielles-intervalles-confiance",
+   "prompt": "L'intervalle de confiance d'une proportion est centré sur :",
+   "choices": [
+    "$p$ (inconnue)",
+    "0,5 toujours",
+    "$n$",
+    "$\\hat{p}$"
+   ],
+   "answer": 3,
+   "explanation": "On construit autour de la valeur observée."
+  }
+ ]
+}

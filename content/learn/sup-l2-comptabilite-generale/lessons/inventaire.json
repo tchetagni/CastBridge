@@ -1,0 +1,1273 @@
+{
+ "chapter": "sup-l2-comptabilite-generale-inventaire",
+ "lessons": [
+  {
+   "id": "sup-l2-comptabilite-generale-amortissements",
+   "title": "Amortissements : linéaire et dégressif",
+   "minutes": 55,
+   "programRef": "L2 — Opérations d'inventaire : amortissements (à vérifier sur la maquette)",
+   "status": "draft",
+   "author": "CastBridge (brouillon IA)",
+   "source": "Rédaction originale ; à relire par un enseignant",
+   "objectives": [
+    "Expliquer pourquoi et comment on constate l'amortissement d'une immobilisation.",
+    "Établir un plan d'amortissement linéaire, avec prorata temporis.",
+    "Établir un plan d'amortissement dégressif (coefficient donné) avec passage au linéaire.",
+    "Enregistrer la dotation et calculer la valeur nette comptable."
+   ],
+   "exercises": [
+    "sup-l2-comptabilite-generale-amortissements-01",
+    "sup-l2-comptabilite-generale-amortissements-02",
+    "sup-l2-comptabilite-generale-amortissements-03",
+    "sup-l2-comptabilite-generale-amortissements-04",
+    "sup-l2-comptabilite-generale-amortissements-05",
+    "sup-l2-comptabilite-generale-amortissements-06",
+    "sup-l2-comptabilite-generale-amortissements-07"
+   ],
+   "selfCheck": [
+    "sup-l2-comptabilite-generale-amortissements-q1",
+    "sup-l2-comptabilite-generale-amortissements-q2",
+    "sup-l2-comptabilite-generale-amortissements-q3",
+    "sup-l2-comptabilite-generale-amortissements-q4",
+    "sup-l2-comptabilite-generale-amortissements-q5"
+   ],
+   "reviewNotes": [
+    "Les intitulés de comptes sont en langage courant (« Dotations aux amortissements », « Dépréciations des créances », etc.) : à adapter aux libellés exacts du plan SYSCOHADA révisé, sans numéros de comptes.",
+    "Amortissement dégressif présenté en principe ; le coefficient (2) est une donnée d'exercice, pas une règle fiscale. Les conditions de déductibilité fiscale et les règles du SYSCOHADA révisé sur les composants ne sont pas traitées.",
+    "Prorata temporis en mois (convention simplifiée de l'énoncé) ; vérifier la convention du cours (mois entier, jours)."
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Amortissement",
+     "md": "Une **immobilisation** (matériel, véhicule, bâtiment) perd de la valeur par l'usage, le temps, le progrès technique. L'**amortissement** est la constatation comptable de cette dépréciation **certaine et irréversible** : on répartit le coût d'acquisition sur la **durée d'utilisation** du bien. La **dotation** de l'exercice est une charge ; l'amortissement **cumulé** vient en déduction de l'actif."
+    },
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Vocabulaire",
+     "md": "- **Base amortissable** : coût d'acquisition (moins valeur résiduelle éventuelle) ;\n- **Durée d'utilisation** $n$ ; **taux linéaire** $= 1/n$ ;\n- **Dotation** : charge de l'exercice ;\n- **Amortissements cumulés** : somme des dotations ;\n- **Valeur nette comptable** (VNC) $=$ coût d'acquisition $-$ amortissements cumulés."
+    },
+    {
+     "type": "key",
+     "style": "formule",
+     "title": "Amortissement linéaire",
+     "md": "La dotation annuelle est constante :",
+     "tex": "a = \\frac{\\text{base amortissable}}{n} = \\text{base} \\times \\frac{1}{n}"
+    },
+    {
+     "type": "key",
+     "style": "methode",
+     "title": "Prorata temporis",
+     "md": "Si le bien est mis en service en cours d'année, la première annuité est calculée **au prorata** du nombre de mois d'utilisation : $a_1 = a \\times \\frac{m}{12}$. La dernière année complète le total."
+    },
+    {
+     "type": "example",
+     "title": "Exemple 1 — linéaire avec prorata",
+     "statement": "Un matériel de 6 000 000 FCFA est mis en service le 1er juillet de l'année N. Durée d'utilisation : 5 ans, amortissement linéaire, valeur résiduelle nulle. Établis le plan d'amortissement et la VNC fin N.",
+     "steps": [
+      {
+       "md": "Taux = 1/5 = 20 % ; annuité pleine = 6 000 000 × 0,20 = 1 200 000."
+      },
+      {
+       "md": "Année N : 6 mois seulement : 1 200 000 × 6/12 = 600 000. Années N+1 à N+4 : 1 200 000 chacune."
+      },
+      {
+       "md": "Année N+5 : 6 mois restants : 600 000. Total = 600 000 + 4 × 1 200 000 + 600 000 = 6 000 000 = coût d'acquisition."
+      },
+      {
+       "md": "VNC fin N = 6 000 000 − 600 000 = 5 400 000. Écriture fin N : D **Dotations aux amortissements** 600 000 ; C **Amortissements du matériel** 600 000."
+      }
+     ],
+     "answer": "**Annuités : 600 000 ; 1 200 000 (×4) ; 600 000. VNC fin N : 5 400 000 FCFA.**"
+    },
+    {
+     "type": "key",
+     "style": "formule",
+     "title": "Amortissement dégressif (en principe)",
+     "md": "On applique à la **VNC de début d'année** un taux dégressif $= $ taux linéaire $\\times$ **coefficient** (donné par l'énoncé, par exemple 2). Quand l'annuité linéaire calculée sur la VNC restante et les années restantes dépasse l'annuité dégressive, on **passe au linéaire** pour le reste de la durée.",
+     "tex": "a_k = \\text{VNC}_{k-1} \\times \\left( \\frac{1}{n} \\times \\text{coefficient} \\right)"
+    },
+    {
+     "type": "illustration",
+     "figure": {
+      "kind": "bars",
+      "w": 440,
+      "h": 250,
+      "unit": "milliers de FCFA",
+      "bars": [
+       {
+        "label": "Année 1",
+        "value": 2400.0,
+        "color": [
+         "orange"
+        ]
+       },
+       {
+        "label": "Année 2",
+        "value": 1440.0,
+        "color": [
+         "orange"
+        ]
+       },
+       {
+        "label": "Année 3",
+        "value": 864.0,
+        "color": [
+         "orange"
+        ]
+       },
+       {
+        "label": "Année 4",
+        "value": 648.0,
+        "color": [
+         "orange"
+        ]
+       },
+       {
+        "label": "Année 5",
+        "value": 648.0,
+        "color": [
+         "orange"
+        ]
+       }
+      ]
+     },
+     "caption": "Annuités dégressives de l'exemple 2 (milliers de FCFA).",
+     "alt": "Cinq barres : 2 400, 1 440, 864, 648 et 648 milliers de FCFA ; les trois premières décroissent, les deux dernières sont égales (passage au linéaire)."
+    },
+    {
+     "type": "example",
+     "title": "Exemple 2 — dégressif avec coefficient 2",
+     "statement": "Même matériel de 6 000 000 FCFA acquis le 1er janvier, durée 5 ans, amortissement dégressif avec un coefficient de 2 (donné par l'énoncé). Établis le plan.",
+     "steps": [
+      {
+       "md": "Taux dégressif = (1/5) × 2 = 40 %. Année 1 : 6 000 000 × 40 % = 2 400 000 ; VNC = 3 600 000."
+      },
+      {
+       "md": "Année 2 : 3 600 000 × 40 % = 1 440 000 ; VNC = 2 160 000. Année 3 : 2 160 000 × 40 % = 864 000 ; VNC = 1 296 000."
+      },
+      {
+       "md": "Année 4 : dégressif = 518 400 mais linéaire sur 2 ans restants = 1 296 000/2 = 648 000 ; le linéaire est plus fort, on bascule."
+      },
+      {
+       "md": "Années 4 et 5 : 648 000 chacune. Total = 6 000 000."
+      }
+     ],
+     "answer": "**Annuités : 2 400 000, 1 440 000, 864 000, 648 000, 648 000. VNC finale : 0.**"
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Erreurs fréquentes",
+     "md": "- Oublier le **prorata** de la première année (et la dernière annuité qui le complète).\n- Appliquer le taux dégressif au **coût d'acquisition** à chaque année au lieu de la **VNC**.\n- Oublier de **basculer au linéaire** quand il devient plus avantageux, ce qui dépasse ou ne solde pas le bien.\n- Confondre **amortissement** (charge, dépréciation certaine) et **remboursement** d'un emprunt.\n- Enregistrer l'amortissement en **créditant le compte du bien** (selon les cours, on crédite un compte d'amortissement distinct)."
+    },
+    {
+     "type": "more",
+     "items": [
+      "L'amortissement n'est **pas une sortie de trésorerie** : c'est une charge calculée (non décaissée).",
+      "À la **cession** d'une immobilisation, on compare le prix de cession à la VNC pour constater une plus-value ou moins-value.",
+      "Un bien peut être décomposé en **composants** à durées d'utilisation différentes ; la pratique de la zone suit le référentiel en vigueur."
+     ]
+    },
+    {
+     "type": "exercise",
+     "ref": "sup-l2-comptabilite-generale-amortissements-01"
+    }
+   ]
+  },
+  {
+   "id": "sup-l2-comptabilite-generale-depreciations",
+   "title": "Dépréciations et provisions",
+   "minutes": 50,
+   "programRef": "L2 — Opérations d'inventaire : dépréciations et provisions (à vérifier sur la maquette)",
+   "status": "draft",
+   "author": "CastBridge (brouillon IA)",
+   "source": "Rédaction originale ; à relire par un enseignant",
+   "objectives": [
+    "Distinguer amortissement, dépréciation et provision.",
+    "Calculer et enregistrer une dépréciation de créance client douteuse et son ajustement d'un exercice à l'autre.",
+    "Calculer une dépréciation de stock à partir de la valeur d'inventaire.",
+    "Comptabiliser une provision pour risque et sa reprise."
+   ],
+   "prerequisites": [
+    "sup-l2-comptabilite-generale-amortissements"
+   ],
+   "exercises": [
+    "sup-l2-comptabilite-generale-depreciations-01",
+    "sup-l2-comptabilite-generale-depreciations-02",
+    "sup-l2-comptabilite-generale-depreciations-03",
+    "sup-l2-comptabilite-generale-depreciations-04",
+    "sup-l2-comptabilite-generale-depreciations-05",
+    "sup-l2-comptabilite-generale-depreciations-06",
+    "sup-l2-comptabilite-generale-depreciations-07"
+   ],
+   "selfCheck": [
+    "sup-l2-comptabilite-generale-depreciations-q1",
+    "sup-l2-comptabilite-generale-depreciations-q2",
+    "sup-l2-comptabilite-generale-depreciations-q3",
+    "sup-l2-comptabilite-generale-depreciations-q4",
+    "sup-l2-comptabilite-generale-depreciations-q5"
+   ],
+   "reviewNotes": [
+    "Les intitulés de comptes sont en langage courant (« Dotations aux amortissements », « Dépréciations des créances », etc.) : à adapter aux libellés exacts du plan SYSCOHADA révisé, sans numéros de comptes.",
+    "Distinction dépréciation / provision : formulation générale (la dépréciation vise un actif, la provision une charge ou un risque probable) ; à confronter au SYSCOHADA révisé et au vocabulaire du cours.",
+    "Calculs sur le HT pour les créances douteuses : convention simplifiée ; la règle exacte de l'assiette (HT/TTC) est à vérifier."
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Trois notions voisines",
+     "md": "- **Amortissement** : dépréciation **certaine et irréversible** d'un actif immobilisé (usure, temps).\n- **Dépréciation** : perte de valeur **probable** et possible à **corriger** (réversible) d'un actif : créance client douteuse, stock invendable, titre.\n- **Provision** : **charge ou risque** probable, dont l'échéance ou le montant sont incertains (litige, garantie, réparation importante). Elle figure au passif."
+    },
+    {
+     "type": "key",
+     "style": "propriete",
+     "title": "Prudence et inventaire",
+     "md": "Le principe de **prudence** impose de tenir compte, à la clôture, des pertes probables même si elles ne sont pas encore réalisées. À chaque inventaire, on **ajuste** la dépréciation ou la provision au niveau estimé : si elle augmente, on constate une **dotation** (charge) ; si elle diminue, une **reprise** (produit).",
+     "review": true
+    },
+    {
+     "type": "key",
+     "style": "formule",
+     "title": "Ajustement d'une dépréciation",
+     "md": "À la clôture de chaque exercice :",
+     "tex": "\\text{dotation (ou reprise)} = \\text{dépréciation nécessaire} - \\text{dépréciation déjà constatée}"
+    },
+    {
+     "type": "example",
+     "title": "Exemple 1 — créance douteuse",
+     "statement": "Un client fictif doit 1 000 000 FCFA HT et devient douteux fin N. L'entreprise estime la perte probable à 40 %. Fin N+1, la perte probable n'est plus estimée qu'à 250 000 FCFA. Calcule les écritures de fin N et de fin N+1.",
+     "steps": [
+      {
+       "md": "Fin N : dépréciation nécessaire = 1 000 000 × 0,40 = 400 000. Écriture : D **Dotations aux dépréciations** 400 000 ; C **Dépréciations des créances clients** 400 000."
+      },
+      {
+       "md": "Fin N+1 : dépréciation nécessaire = 250 000 ; déjà constatée = 400 000 ; différence = −150 000 : **reprise** de 150 000."
+      },
+      {
+       "md": "Écriture : D **Dépréciations des créances clients** 150 000 ; C **Reprises de dépréciations** 150 000."
+      }
+     ],
+     "answer": "**Dotation N : 400 000 ; reprise N+1 : 150 000.**"
+    },
+    {
+     "type": "example",
+     "title": "Exemple 2 — dépréciation d'un stock",
+     "statement": "Un stock de marchandises est enregistré pour 800 000 FCFA (coût d'achat). À l'inventaire, sa valeur de réalisation (prix de vente attendu net des frais) n'est plus que de 650 000 FCFA. Quelle dépréciation constater ?",
+     "steps": [
+      {
+       "md": "On compare le coût (800 000) à la valeur de réalisation (650 000) et on retient la plus **faible** (prudence)."
+      },
+      {
+       "md": "Dépréciation = 800 000 − 650 000 = 150 000.",
+       "tex": "800000 - 650000 = 150000"
+      },
+      {
+       "md": "Écriture : D **Dotations aux dépréciations** 150 000 ; C **Dépréciations des stocks** 150 000. Au bilan, le stock figure pour 650 000 net."
+      }
+     ],
+     "answer": "**Dépréciation de 150 000 FCFA ; stock net : 650 000.**"
+    },
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Provision pour risques et charges",
+     "md": "Une **provision** est constatée si, à la clôture, il existe une obligation envers un tiers dont la sortie de ressources est **probable** et le montant **estimable** (litige en cours, garantie accordée aux clients). Écriture : débit **Dotations aux provisions** (charge) / crédit **Provisions pour risques** (passif). Si le risque disparaît ou diminue, on **reprend** (produit).",
+     "review": true
+    },
+    {
+     "type": "example",
+     "title": "Exemple 3 — provision pour litige",
+     "statement": "Fin N, un litige commercial est jugé probable : l'avocat estime la sortie de ressources à 500 000 FCFA. En N+1, l'entreprise paie finalement 350 000 FCFA. Quelle est la reprise de provision et quel est son effet sur le résultat de N+1 ?",
+     "steps": [
+      {
+       "md": "Fin N : D Dotations aux provisions 500 000 / C Provisions pour risques 500 000 : charge de N de 500 000."
+      },
+      {
+       "md": "En N+1 : paiement de 350 000 (charge ou perte) ; la provision de 500 000 devient sans objet : reprise de 500 000."
+      },
+      {
+       "md": "Effet net sur N+1 : reprise (produit) 500 000 − charge 350 000 = + 150 000 : l'estimation était trop prudente."
+      }
+     ],
+     "answer": "**Reprise : 500 000 ; produit net en N+1 : 150 000 FCFA.**"
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Erreurs fréquentes",
+     "md": "- Passer par une **dotation** quand la dépréciation nécessaire a **baissé** : c'est une **reprise**.\n- Calculer la dotation sur le **montant de la dépréciation nécessaire** sans retrancher celle **déjà constatée**.\n- Confondre dépréciation (actif) et provision (passif).\n- Constater une **perte définitive** (client insolvable) avec une simple dépréciation : on passe la créance en perte."
+    },
+    {
+     "type": "more",
+     "items": [
+      "Quand le client est déclaré **insolvable**, la créance est portée en **perte** et on **reprend** la dépréciation correspondante.",
+      "Les **titres** et **immobilisations** peuvent aussi être dépréciés si leur valeur d'usage baisse durablement.",
+      "Les dépréciations et provisions ne sont pas des sorties de trésorerie."
+     ]
+    },
+    {
+     "type": "exercise",
+     "ref": "sup-l2-comptabilite-generale-depreciations-01"
+    }
+   ]
+  },
+  {
+   "id": "sup-l2-comptabilite-generale-stocks-regul",
+   "title": "Stocks (CUMP, FIFO) et régularisations",
+   "minutes": 60,
+   "programRef": "L2 — Opérations d'inventaire : stocks, régularisations (à vérifier sur la maquette)",
+   "status": "draft",
+   "author": "CastBridge (brouillon IA)",
+   "source": "Rédaction originale ; à relire par un enseignant",
+   "objectives": [
+    "Valoriser les sorties et le stock final par la méthode du CUMP et du FIFO.",
+    "Calculer la variation de stocks et en comprendre l'effet sur le résultat.",
+    "Identifier les quatre régularisations : charges constatées d'avance, charges à payer, produits constatés d'avance, produits à recevoir.",
+    "Calculer le montant d'une régularisation au prorata temporis."
+   ],
+   "prerequisites": [
+    "sup-l2-comptabilite-generale-depreciations"
+   ],
+   "exercises": [
+    "sup-l2-comptabilite-generale-stocks-regul-01",
+    "sup-l2-comptabilite-generale-stocks-regul-02",
+    "sup-l2-comptabilite-generale-stocks-regul-03",
+    "sup-l2-comptabilite-generale-stocks-regul-04",
+    "sup-l2-comptabilite-generale-stocks-regul-05",
+    "sup-l2-comptabilite-generale-stocks-regul-06",
+    "sup-l2-comptabilite-generale-stocks-regul-07"
+   ],
+   "selfCheck": [
+    "sup-l2-comptabilite-generale-stocks-regul-q1",
+    "sup-l2-comptabilite-generale-stocks-regul-q2",
+    "sup-l2-comptabilite-generale-stocks-regul-q3",
+    "sup-l2-comptabilite-generale-stocks-regul-q4",
+    "sup-l2-comptabilite-generale-stocks-regul-q5"
+   ],
+   "reviewNotes": [
+    "Les intitulés de comptes sont en langage courant (« Dotations aux amortissements », « Dépréciations des créances », etc.) : à adapter aux libellés exacts du plan SYSCOHADA révisé, sans numéros de comptes.",
+    "Méthodes de valorisation présentées : CUMP (après chaque entrée) et FIFO ; l'inventaire permanent est le cadre implicite. Le cours peut utiliser un CUMP en fin de période : à adapter.",
+    "Présentation du mécanisme de la variation de stocks simplifiée ; à confronter au traitement exact du plan comptable.",
+    "Intitulés « charges constatées d'avance », « charges à payer », « produits constatés d'avance », « produits à recevoir » en langage courant."
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Valorisation des stocks",
+     "md": "À chaque sortie, il faut évaluer le **coût** des unités sorties. Deux méthodes :\n- **CUMP** (coût unitaire moyen pondéré) : après chaque entrée, on calcule $\\text{CUMP} = \\frac{\\text{valeur du stock} + \\text{valeur de l'entrée}}{\\text{quantité en stock} + \\text{quantité entrée}}$ ; les sorties sont évaluées à ce coût ;\n- **FIFO** (premier entré, premier sorti) : les unités sortent dans l'ordre où elles sont entrées ; le stock restant est évalué aux **coûts les plus récents**."
+    },
+    {
+     "type": "illustration",
+     "figure": {
+      "kind": "bars",
+      "w": 400,
+      "h": 230,
+      "unit": "milliers de FCFA",
+      "bars": [
+       {
+        "label": "CUMP",
+        "value": 148,
+        "color": [
+         "blue"
+        ]
+       },
+       {
+        "label": "FIFO",
+        "value": 145,
+        "color": [
+         "orange"
+        ]
+       }
+      ]
+     },
+     "caption": "Coût des sorties selon la méthode (exemple 1).",
+     "alt": "Deux barres : coût des sorties 148,7 milliers de FCFA avec le CUMP et 145,2 avec le FIFO."
+    },
+    {
+     "type": "example",
+     "title": "Exemple 1 — CUMP et FIFO",
+     "statement": "Stock initial : 100 unités à 500 FCFA. Entrée n°1 : 200 unités à 560. Sortie n°1 : 150 unités. Entrée n°2 : 100 unités à 600. Sortie n°2 : 120 unités. Valorise les sorties et le stock final par chaque méthode.",
+     "steps": [
+      {
+       "md": "CUMP après l'entrée 1 : (50 000 + 112 000) / 300 = 540. Sortie 1 : 150 × 540 = 81 000 ; stock : 150 u = 81 000."
+      },
+      {
+       "md": "CUMP après l'entrée 2 : (81 000 + 60 000) / 250 = 564. Sortie 2 : 120 × 564 = 67 680 ; stock final : 130 u × 564 = 73 320."
+      },
+      {
+       "md": "FIFO : sortie 1 = 100 × 500 + 50 × 560 = 78 000 ; sortie 2 = 120 × 560 = 67 200 ; stock final = 30 × 560 + 100 × 600 = 76 800."
+      },
+      {
+       "md": "Contrôle : CUMP 148 680 + 73 320 = 222 000 ; FIFO 145 200 + 76 800 = 222 000 (total disponible)."
+      }
+     ],
+     "answer": "**CUMP : sorties 148 680, stock final 73 320 ; FIFO : sorties 145 200, stock final 76 800.**"
+    },
+    {
+     "type": "key",
+     "style": "formule",
+     "title": "Variation de stocks",
+     "md": "En fin d'exercice, on ajuste le stock comptable au stock **inventorié** :",
+     "tex": "\\text{Variation de stocks} = \\text{stock initial} - \\text{stock final}"
+    },
+    {
+     "type": "text",
+     "md": "Si le stock final est supérieur au stock initial, la variation de stocks est **négative** : elle vient **diminuer** les charges (une partie des achats n'a pas été consommée). Si le stock a diminué, la variation est **positive** : elle **augmente** les charges. Le coût d'achat des marchandises vendues est donc : achats + stock initial − stock final."
+    },
+    {
+     "type": "example",
+     "title": "Exemple 2 — coût des marchandises vendues",
+     "statement": "Stock initial : 500 000 ; achats de l'exercice : 3 200 000 ; stock final d'inventaire : 640 000. Calcule la variation de stocks et le coût d'achat des marchandises vendues.",
+     "steps": [
+      {
+       "md": "Variation de stocks = 500 000 − 640 000 = −140 000 (négative : le stock a augmenté)."
+      },
+      {
+       "md": "Coût d'achat des marchandises vendues = achats + variation = 3 200 000 + (−140 000) = 3 060 000.",
+       "tex": "3200000 + 500000 - 640000 = 3060000"
+      }
+     ],
+     "answer": "**Coût des marchandises vendues : 3 060 000 FCFA.**"
+    },
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Régularisations de fin d'exercice",
+     "md": "Pour respecter l'**indépendance des exercices**, on rattache à chaque exercice ses charges et ses produits :\n- **Charge constatée d'avance** : charge payée, mais qui concerne l'exercice suivant (actif) ;\n- **Charge à payer** : charge de l'exercice non encore facturée ou payée (passif) ;\n- **Produit constaté d'avance** : produit encaissé qui concerne l'exercice suivant (passif) ;\n- **Produit à recevoir** : produit acquis non encore encaissé (actif)."
+    },
+    {
+     "type": "illustration",
+     "figure": {
+      "kind": "shapes",
+      "w": 440,
+      "h": 170,
+      "items": [
+       {
+        "t": "line",
+        "x1": 30,
+        "y1": 90,
+        "x2": 410,
+        "y2": 90,
+        "color": "ink",
+        "width": 3,
+        "arrow": "end"
+       },
+       {
+        "t": "line",
+        "x1": 220,
+        "y1": 70,
+        "x2": 220,
+        "y2": 110,
+        "color": "ink",
+        "width": 3
+       },
+       {
+        "t": "text",
+        "x": 125,
+        "y": 60,
+        "text": "Exercice N",
+        "size": 14,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 325,
+        "y": 60,
+        "text": "Exercice N+1",
+        "size": 14,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 60,
+        "y": 130,
+        "text": "1er oct.",
+        "size": 13,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "text",
+        "x": 220,
+        "y": 130,
+        "text": "31 déc.",
+        "size": 13,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "text",
+        "x": 380,
+        "y": 130,
+        "text": "30 sept.",
+        "size": 13,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "rect",
+        "x": 60,
+        "y": 80,
+        "w": 160,
+        "h": 20,
+        "fill": "lightorange",
+        "stroke": "orange",
+        "width": 2
+       },
+       {
+        "t": "rect",
+        "x": 220,
+        "y": 80,
+        "w": 160,
+        "h": 20,
+        "fill": "lightblue",
+        "stroke": "blue",
+        "width": 2
+       }
+      ]
+     },
+     "caption": "Assurance payée le 1er octobre N pour 12 mois : 3 mois en N, 9 mois en N+1.",
+     "alt": "Frise horizontale : de début octobre à fin décembre, 3 mois rattachés à l'exercice N (zone orange) ; de janvier à fin septembre, 9 mois rattachés à l'exercice N+1 (zone bleue)."
+    },
+    {
+     "type": "example",
+     "title": "Exemple 3 — charge constatée d'avance",
+     "statement": "Le 1er octobre N, une entreprise paie 480 000 FCFA de prime d'assurance couvrant 12 mois. L'exercice coïncide avec l'année civile. Quelle part est à étaler sur N+1 ?",
+     "steps": [
+      {
+       "md": "Part de N : 3 mois (octobre, novembre, décembre) = 120 000."
+      },
+      {
+       "md": "Part de N+1 : 9 mois = 480 000 × 9/12 = 360 000.",
+       "tex": "480000 \\times \\frac{9}{12} = 360000"
+      },
+      {
+       "md": "Écriture de régularisation au 31/12/N : D **Charges constatées d'avance** 360 000 ; C **Charges d'assurance** 360 000."
+      }
+     ],
+     "answer": "**Charge constatée d'avance : 360 000 FCFA.**"
+    },
+    {
+     "type": "example",
+     "title": "Exemple 4 — produits et charges à rattacher",
+     "statement": "(a) Le 1er novembre N, une entreprise reçoit 900 000 FCFA de loyers pour 6 mois. (b) À fin N, la facture d'électricité de décembre (85 000 FCFA) n'est pas parvenue. (c) 120 000 FCFA d'intérêts sont courus mais non encaissés. Régularise.",
+     "steps": [
+      {
+       "md": "(a) Part de N+1 : 4 mois sur 6 = 900 000 × 4/6 = 600 000 : produit constaté d'avance. D **Loyers (produits)** 600 000 ; C **Produits constatés d'avance** 600 000."
+      },
+      {
+       "md": "(b) Charge de N non facturée : D **Électricité (charge)** 85 000 ; C **Charges à payer** 85 000."
+      },
+      {
+       "md": "(c) Produit de N à recevoir : D **Produits à recevoir** 120 000 ; C **Intérêts (produits)** 120 000."
+      }
+     ],
+     "answer": "**Produit constaté d'avance : 600 000 ; charge à payer : 85 000 ; produit à recevoir : 120 000.**"
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Erreurs fréquentes",
+     "md": "- Valoriser le stock final en **FIFO** avec les coûts **anciens** : il faut les coûts les **plus récents**.\n- Oublier de recalculer le **CUMP après chaque entrée**.\n- Se tromper de signe pour la variation de stocks.\n- Confondre **charge constatée d'avance** (actif) et **charge à payer** (passif).\n- Oublier la contre-passation des régularisations à l'ouverture de l'exercice suivant (selon la méthode du cours)."
+    },
+    {
+     "type": "more",
+     "items": [
+      "En période d'**inflation**, le FIFO donne un résultat plus élevé (sorties à un coût ancien plus faible) que le CUMP.",
+      "Les **stocks** doivent faire l'objet d'un inventaire physique au moins une fois par an.",
+      "Les régularisations sont **extra-comptables** au sens où elles ne correspondent à aucun flux de trésorerie : elles ajustent la mesure du résultat."
+     ]
+    },
+    {
+     "type": "exercise",
+     "ref": "sup-l2-comptabilite-generale-stocks-regul-01"
+    }
+   ]
+  }
+ ],
+ "exercises": [
+  {
+   "id": "sup-l2-comptabilite-generale-amortissements-01",
+   "kind": "numeric",
+   "tier": "application",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "sup-l2-comptabilite-generale-amortissements",
+   "prompt": "Matériel : 4 500 000 FCFA ; durée 6 ans ; amortissement linéaire sans valeur résiduelle. Calcule l'annuité.",
+   "explanation": "4 500 000 / 6 = 750 000 FCFA.",
+   "source": "Exercice original",
+   "answer": 750000.0,
+   "tolerance": 0,
+   "unit": "FCFA"
+  },
+  {
+   "id": "sup-l2-comptabilite-generale-amortissements-02",
+   "kind": "numeric",
+   "tier": "application",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "sup-l2-comptabilite-generale-amortissements",
+   "prompt": "Véhicule acquis 8 000 000 FCFA ; amortissement linéaire 5 ans. Calcule la VNC à la fin de la 2e année.",
+   "explanation": "Annuité 1 600 000 ; cumul après 2 ans = 3 200 000 ; VNC = 8 000 000 − 3 200 000 = 4 800 000.",
+   "method": "VNC = coût − cumul des annuités.",
+   "source": "Exercice original",
+   "answer": 4800000.0,
+   "tolerance": 0,
+   "unit": "FCFA"
+  },
+  {
+   "id": "sup-l2-comptabilite-generale-amortissements-03",
+   "kind": "mcq",
+   "tier": "application",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "sup-l2-comptabilite-generale-amortissements",
+   "prompt": "L'écriture de la dotation aux amortissements de l'exercice est :",
+   "explanation": "On constate une charge (débit) et on crédite le compte d'amortissement cumulé.",
+   "source": "Exercice original",
+   "choices": [
+    "D Matériel / C Dotations",
+    "D Banque / C Amortissements",
+    "D Amortissements du matériel / C Dotations",
+    "D Dotations aux amortissements / C Amortissements du matériel"
+   ],
+   "answer": 3
+  },
+  {
+   "id": "sup-l2-comptabilite-generale-amortissements-04",
+   "kind": "truefalse",
+   "tier": "approfondissement",
+   "difficulty": 2,
+   "points": 1,
+   "lesson": "sup-l2-comptabilite-generale-amortissements",
+   "prompt": "L'amortissement d'un bien représente une sortie d'argent de l'exercice.",
+   "explanation": "C'est une charge calculée : aucun décaissement ; le décaissement a eu lieu à l'achat.",
+   "source": "Exercice original",
+   "answer": false
+  },
+  {
+   "id": "sup-l2-comptabilite-generale-amortissements-05",
+   "kind": "numeric",
+   "tier": "approfondissement",
+   "difficulty": 2,
+   "points": 2,
+   "lesson": "sup-l2-comptabilite-generale-amortissements",
+   "prompt": "Matériel de 3 000 000 FCFA mis en service le 1er octobre, amortissement linéaire sur 5 ans. Calcule la dotation de la première année (au prorata, 3 mois).",
+   "explanation": "Annuité pleine 600 000 ; prorata 3/12 : 150 000 FCFA.",
+   "method": "Annuité × mois/12.",
+   "source": "Exercice original",
+   "answer": 150000.0,
+   "tolerance": 0,
+   "unit": "FCFA"
+  },
+  {
+   "id": "sup-l2-comptabilite-generale-amortissements-06",
+   "kind": "open",
+   "tier": "approfondissement",
+   "difficulty": 2,
+   "points": 3,
+   "lesson": "sup-l2-comptabilite-generale-amortissements",
+   "prompt": "Pourquoi l'amortissement dégressif conduit-il à une charge plus forte les premières années ? Quand bascule-t-on au linéaire ?",
+   "explanation": "Le dégressif accélère l'amortissement des premières années.",
+   "method": "Comparer les deux annuités chaque année.",
+   "source": "Exercice original",
+   "model": "Le taux dégressif s'applique à la VNC de début d'année, qui est élevée au début : la dotation est donc forte, puis décroît. On bascule au linéaire dès que l'annuité linéaire (VNC restante / années restantes) devient supérieure à l'annuité dégressive, pour solder le bien exactement à la fin de la durée.",
+   "rubric": [
+    "Taux appliqué à la VNC",
+    "Charge forte au début puis décroissante",
+    "Basculement quand linéaire ≥ dégressif"
+   ]
+  },
+  {
+   "id": "sup-l2-comptabilite-generale-amortissements-07",
+   "kind": "problem",
+   "tier": "examen",
+   "difficulty": 3,
+   "lesson": "sup-l2-comptabilite-generale-amortissements",
+   "prompt": "Une société fictive acquiert le 1er janvier un équipement de 2 400 000 FCFA, durée 4 ans. Amortissement dégressif avec un coefficient de 1,5 (donné par l'énoncé), valeur résiduelle nulle.",
+   "method": "Annuité dégressive = VNC × taux ; comparer à VNC/années restantes.",
+   "mistakes": [
+    "Garder le dégressif jusqu'au bout sans solder le bien."
+   ],
+   "source": "Exercice original",
+   "parts": [
+    {
+     "id": "sup-l2-comptabilite-generale-amortissements-07-a",
+     "points": 1,
+     "prompt": "Taux dégressif, en % ?",
+     "explanation": "Taux linéaire 25 % × 1,5 = 37,5 %.",
+     "kind": "numeric",
+     "answer": 37.5,
+     "tolerance": 0
+    },
+    {
+     "id": "sup-l2-comptabilite-generale-amortissements-07-b",
+     "points": 1,
+     "prompt": "Annuité de la 1re année ?",
+     "explanation": "2 400 000 × 0,375 = 900 000.",
+     "kind": "numeric",
+     "answer": 900000.0,
+     "tolerance": 0
+    },
+    {
+     "id": "sup-l2-comptabilite-generale-amortissements-07-c",
+     "points": 1,
+     "prompt": "Annuité de la 2e année ?",
+     "explanation": "VNC après année 1 = 1 500 000 ; × 0,375 = 562 500 (linéaire sur 3 ans = 500 000 : le dégressif est encore supérieur).",
+     "kind": "numeric",
+     "answer": 562500.0,
+     "tolerance": 0
+    },
+    {
+     "id": "sup-l2-comptabilite-generale-amortissements-07-d",
+     "points": 1,
+     "prompt": "Annuité de la 3e année ?",
+     "explanation": "VNC début année 3 = 937 500 ; dégressif = 351 562,50 ; linéaire sur 2 ans = 468 750 ; on retient le linéaire : 468 750.",
+     "kind": "numeric",
+     "answer": 468750.0,
+     "tolerance": 0
+    }
+   ]
+  },
+  {
+   "id": "sup-l2-comptabilite-generale-amortissements-q1",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "sup-l2-comptabilite-generale-amortissements",
+   "prompt": "La VNC d'une immobilisation est :",
+   "choices": [
+    "Coût d'acquisition − amortissements cumulés",
+    "Son prix de vente",
+    "Sa valeur résiduelle",
+    "Le cumul des dotations seul"
+   ],
+   "answer": 0,
+   "explanation": "Définition."
+  },
+  {
+   "id": "sup-l2-comptabilite-generale-amortissements-q2",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "sup-l2-comptabilite-generale-amortissements",
+   "prompt": "Matériel de 1 200 000 ; amortissement linéaire sur 4 ans. L'annuité est :",
+   "choices": [
+    "480 000",
+    "1 200 000",
+    "400 000",
+    "300 000"
+   ],
+   "answer": 3,
+   "explanation": "1 200 000/4."
+  },
+  {
+   "id": "sup-l2-comptabilite-generale-amortissements-q3",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "sup-l2-comptabilite-generale-amortissements",
+   "prompt": "L'amortissement est une charge :",
+   "choices": [
+    "Décaissée à chaque dotation",
+    "Réservée au dégressif",
+    "Toujours nulle",
+    "Calculée, sans décaissement"
+   ],
+   "answer": 3,
+   "explanation": "Charge calculée."
+  },
+  {
+   "id": "sup-l2-comptabilite-generale-amortissements-q4",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "sup-l2-comptabilite-generale-amortissements",
+   "prompt": "En dégressif, l'annuité est calculée sur :",
+   "choices": [
+    "La valeur résiduelle",
+    "Le coût d'acquisition à chaque année",
+    "La VNC de début d'année",
+    "Le chiffre d'affaires"
+   ],
+   "answer": 2,
+   "explanation": "Taux × VNC."
+  },
+  {
+   "id": "sup-l2-comptabilite-generale-amortissements-q5",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "sup-l2-comptabilite-generale-amortissements",
+   "prompt": "Un bien est mis en service le 1er avril (année civile, linéaire). Le prorata de la 1re année est :",
+   "choices": [
+    "3/12",
+    "4/12",
+    "9/12",
+    "12/12"
+   ],
+   "answer": 2,
+   "explanation": "Avril à décembre = 9 mois."
+  },
+  {
+   "id": "sup-l2-comptabilite-generale-depreciations-01",
+   "kind": "numeric",
+   "tier": "application",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "sup-l2-comptabilite-generale-depreciations",
+   "prompt": "Créance douteuse : 600 000 FCFA HT ; perte probable estimée à 50 %. Calcule la dépréciation.",
+   "explanation": "600 000 × 0,50 = 300 000.",
+   "source": "Exercice original",
+   "answer": 300000.0,
+   "tolerance": 0,
+   "unit": "FCFA"
+  },
+  {
+   "id": "sup-l2-comptabilite-generale-depreciations-02",
+   "kind": "numeric",
+   "tier": "application",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "sup-l2-comptabilite-generale-depreciations",
+   "prompt": "Dépréciation déjà constatée : 200 000 ; dépréciation nécessaire fin d'exercice : 320 000. Calcule la dotation de l'exercice.",
+   "explanation": "Dotation = nécessaire − déjà constatée = 120 000.",
+   "method": "Comparer nécessaire et existant.",
+   "source": "Exercice original",
+   "answer": 120000.0,
+   "tolerance": 0,
+   "unit": "FCFA"
+  },
+  {
+   "id": "sup-l2-comptabilite-generale-depreciations-03",
+   "kind": "mcq",
+   "tier": "application",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "sup-l2-comptabilite-generale-depreciations",
+   "prompt": "Un stock coûte 500 000 et sa valeur de réalisation est de 430 000. La dépréciation est :",
+   "explanation": "On retient la valeur la plus faible : 500 000 − 430 000 = 70 000.",
+   "source": "Exercice original",
+   "choices": [
+    "430 000",
+    "930 000",
+    "500 000",
+    "70 000"
+   ],
+   "answer": 3
+  },
+  {
+   "id": "sup-l2-comptabilite-generale-depreciations-04",
+   "kind": "truefalse",
+   "tier": "approfondissement",
+   "difficulty": 2,
+   "points": 1,
+   "lesson": "sup-l2-comptabilite-generale-depreciations",
+   "prompt": "Une provision pour risque est inscrite à l'actif du bilan.",
+   "explanation": "Elle représente une obligation probable : elle figure au passif.",
+   "source": "Exercice original",
+   "answer": false
+  },
+  {
+   "id": "sup-l2-comptabilite-generale-depreciations-05",
+   "kind": "numeric",
+   "tier": "approfondissement",
+   "difficulty": 2,
+   "points": 2,
+   "lesson": "sup-l2-comptabilite-generale-depreciations",
+   "prompt": "Dépréciation de clients : 300 000 fin N ; 180 000 nécessaires fin N+1. Calcule la reprise de l'exercice N+1.",
+   "explanation": "300 000 − 180 000 = 120 000 de reprise (produit).",
+   "source": "Exercice original",
+   "answer": 120000.0,
+   "tolerance": 0,
+   "unit": "FCFA"
+  },
+  {
+   "id": "sup-l2-comptabilite-generale-depreciations-06",
+   "kind": "open",
+   "tier": "approfondissement",
+   "difficulty": 2,
+   "points": 3,
+   "lesson": "sup-l2-comptabilite-generale-depreciations",
+   "prompt": "Distingue en quelques lignes amortissement, dépréciation et provision, avec un exemple pour chacun.",
+   "explanation": "Les trois sont liés à la prudence mais diffèrent par la certitude et la place au bilan.",
+   "method": "Utiliser les critères : certitude, objet (actif/passif), réversibilité.",
+   "source": "Exercice original",
+   "model": "L'amortissement constate l'usure certaine d'une immobilisation (camion). La dépréciation constate une perte de valeur probable d'un actif (créance sur un client en difficulté, stock invendable). La provision couvre un risque ou une charge probable d'un montant incertain (litige en cours) et figure au passif.",
+   "rubric": [
+    "Amortissement certain et irréversible",
+    "Dépréciation d'un actif, réversible",
+    "Provision = passif, risque probable",
+    "Un exemple pour chacun"
+   ]
+  },
+  {
+   "id": "sup-l2-comptabilite-generale-depreciations-07",
+   "kind": "problem",
+   "tier": "examen",
+   "difficulty": 3,
+   "lesson": "sup-l2-comptabilite-generale-depreciations",
+   "prompt": "Une entreprise fictive détient une créance de 1 200 000 FCFA HT sur un client douteux. Fin N, perte probable estimée à 30 % ; fin N+1, estimée à 55 %. Elle détient aussi un stock enregistré pour 900 000 FCFA dont la valeur de réalisation est de 780 000.",
+   "method": "Toujours comparer la dépréciation nécessaire à celle déjà constatée.",
+   "mistakes": [
+    "Oublier la dépréciation déjà constatée."
+   ],
+   "source": "Exercice original",
+   "parts": [
+    {
+     "id": "sup-l2-comptabilite-generale-depreciations-07-a",
+     "points": 1,
+     "prompt": "Dépréciation de la créance fin N ?",
+     "explanation": "1 200 000 × 0,30 = 360 000.",
+     "kind": "numeric",
+     "answer": 360000.0,
+     "tolerance": 0
+    },
+    {
+     "id": "sup-l2-comptabilite-generale-depreciations-07-b",
+     "points": 1,
+     "prompt": "Dotation complémentaire fin N+1 ?",
+     "explanation": "Nécessaire 660 000 − constatée 360 000 = 300 000.",
+     "kind": "numeric",
+     "answer": 300000.0,
+     "tolerance": 0
+    },
+    {
+     "id": "sup-l2-comptabilite-generale-depreciations-07-c",
+     "points": 1,
+     "prompt": "Dépréciation du stock ?",
+     "explanation": "900 000 − 780 000 = 120 000.",
+     "kind": "numeric",
+     "answer": 120000.0,
+     "tolerance": 0
+    },
+    {
+     "id": "sup-l2-comptabilite-generale-depreciations-07-d",
+     "points": 1,
+     "prompt": "Valeur nette du stock au bilan après dépréciation ?",
+     "explanation": "900 000 − 120 000 = 780 000 (la valeur de réalisation).",
+     "kind": "numeric",
+     "answer": 780000.0,
+     "tolerance": 0
+    }
+   ]
+  },
+  {
+   "id": "sup-l2-comptabilite-generale-depreciations-q1",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "sup-l2-comptabilite-generale-depreciations",
+   "prompt": "Une provision représente :",
+   "choices": [
+    "Un apport en capital",
+    "Un produit encaissé",
+    "Une obligation ou un risque probable à la clôture",
+    "Un actif certain"
+   ],
+   "answer": 2,
+   "explanation": "Elle figure au passif."
+  },
+  {
+   "id": "sup-l2-comptabilite-generale-depreciations-q2",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "sup-l2-comptabilite-generale-depreciations",
+   "prompt": "La dépréciation d'une créance client se calcule à partir :",
+   "choices": [
+    "Du chiffre d'affaires",
+    "Du loyer",
+    "De la perte probable estimée",
+    "Du capital"
+   ],
+   "answer": 2,
+   "explanation": "Perte probable × montant (HT ici)."
+  },
+  {
+   "id": "sup-l2-comptabilite-generale-depreciations-q3",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "sup-l2-comptabilite-generale-depreciations",
+   "prompt": "Si la dépréciation nécessaire diminue, on constate :",
+   "choices": [
+    "Une provision",
+    "Un amortissement",
+    "Une reprise",
+    "Une dotation"
+   ],
+   "answer": 2,
+   "explanation": "Reprise = produit."
+  },
+  {
+   "id": "sup-l2-comptabilite-generale-depreciations-q4",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "sup-l2-comptabilite-generale-depreciations",
+   "prompt": "Le principe qui justifie les dépréciations est :",
+   "choices": [
+    "Le coût historique uniquement",
+    "La prudence",
+    "La continuité seulement",
+    "La permanence des méthodes"
+   ],
+   "answer": 1,
+   "explanation": "Prise en compte des pertes probables."
+  },
+  {
+   "id": "sup-l2-comptabilite-generale-depreciations-q5",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "sup-l2-comptabilite-generale-depreciations",
+   "prompt": "Une dépréciation de stock est calculée en comparant :",
+   "choices": [
+    "Coût et valeur de réalisation",
+    "Prix de vente et capital",
+    "Stock initial et crédits",
+    "Coût et chiffre d'affaires"
+   ],
+   "answer": 0,
+   "explanation": "On retient la plus faible des deux valeurs."
+  },
+  {
+   "id": "sup-l2-comptabilite-generale-stocks-regul-01",
+   "kind": "numeric",
+   "tier": "application",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "sup-l2-comptabilite-generale-stocks-regul",
+   "prompt": "Stock : 50 unités à 800 FCFA. Entrée : 150 unités à 900 FCFA. Calcule le CUMP après l'entrée.",
+   "explanation": "(40 000 + 135 000)/200 = 875 FCFA.",
+   "method": "Valeur totale / quantité totale.",
+   "source": "Exercice original",
+   "answer": 875.0,
+   "tolerance": 0,
+   "unit": "FCFA"
+  },
+  {
+   "id": "sup-l2-comptabilite-generale-stocks-regul-02",
+   "kind": "numeric",
+   "tier": "application",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "sup-l2-comptabilite-generale-stocks-regul",
+   "prompt": "Stock initial 400 000 ; achats 2 100 000 ; stock final 350 000. Calcule le coût d'achat des marchandises vendues.",
+   "explanation": "400 000 + 2 100 000 − 350 000 = 2 150 000.",
+   "source": "Exercice original",
+   "answer": 2150000.0,
+   "tolerance": 0,
+   "unit": "FCFA"
+  },
+  {
+   "id": "sup-l2-comptabilite-generale-stocks-regul-03",
+   "kind": "mcq",
+   "tier": "application",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "sup-l2-comptabilite-generale-stocks-regul",
+   "prompt": "Un loyer de 300 000 payé le 1er décembre pour 3 mois (décembre à février). La charge constatée d'avance au 31/12 est :",
+   "explanation": "Décembre = 1 mois sur 3 en N ; 2 mois en N+1 : 300 000 × 2/3 = 200 000.",
+   "source": "Exercice original",
+   "choices": [
+    "100 000",
+    "0",
+    "200 000",
+    "300 000"
+   ],
+   "answer": 2
+  },
+  {
+   "id": "sup-l2-comptabilite-generale-stocks-regul-04",
+   "kind": "truefalse",
+   "tier": "approfondissement",
+   "difficulty": 2,
+   "points": 1,
+   "lesson": "sup-l2-comptabilite-generale-stocks-regul",
+   "prompt": "Une charge à payer est inscrite à l'actif du bilan.",
+   "explanation": "C'est une dette : elle figure au passif.",
+   "source": "Exercice original",
+   "answer": false
+  },
+  {
+   "id": "sup-l2-comptabilite-generale-stocks-regul-05",
+   "kind": "numeric",
+   "tier": "approfondissement",
+   "difficulty": 2,
+   "points": 2,
+   "lesson": "sup-l2-comptabilite-generale-stocks-regul",
+   "prompt": "Entrées FIFO : 100 u à 500 puis 100 u à 560 ; on sort 150 unités. Calcule le coût de la sortie.",
+   "explanation": "100 × 500 + 50 × 560 = 78 000 FCFA.",
+   "method": "Consommer les couches les plus anciennes d'abord.",
+   "source": "Exercice original",
+   "answer": 78000.0,
+   "tolerance": 0,
+   "unit": "FCFA"
+  },
+  {
+   "id": "sup-l2-comptabilite-generale-stocks-regul-06",
+   "kind": "open",
+   "tier": "approfondissement",
+   "difficulty": 2,
+   "points": 3,
+   "lesson": "sup-l2-comptabilite-generale-stocks-regul",
+   "prompt": "Pourquoi les régularisations sont-elles nécessaires pour déterminer correctement le résultat d'un exercice ?",
+   "explanation": "Régulariser = mesurer le résultat de la bonne période.",
+   "method": "Dater la période concernée, pas le paiement.",
+   "source": "Exercice original",
+   "model": "Le résultat doit rapprocher les charges et les produits qui concernent l'exercice, quelle que soit la date de paiement ou d'encaissement (indépendance des exercices). Sans régularisation, une charge payée d'avance serait comptée deux fois dans le mauvais exercice et un produit non encaissé serait ignoré.",
+   "rubric": [
+    "Indépendance des exercices",
+    "Rattachement indépendant des flux de trésorerie",
+    "Exemple : assurance payée d'avance"
+   ]
+  },
+  {
+   "id": "sup-l2-comptabilite-generale-stocks-regul-07",
+   "kind": "problem",
+   "tier": "examen",
+   "difficulty": 3,
+   "lesson": "sup-l2-comptabilite-generale-stocks-regul",
+   "prompt": "Au 31 décembre N, une entreprise fictive relève : (a) assurance payée le 1er septembre N pour 12 mois : 720 000 FCFA ; (b) loyers perçus le 1er octobre N pour 6 mois : 600 000 FCFA ; (c) facture d'eau de décembre non parvenue : 45 000 FCFA ; (d) intérêts courus non encaissés : 80 000 FCFA.",
+   "method": "Pour chaque cas, déterminer les mois concernant N et N+1.",
+   "mistakes": [
+    "Compter 12/12 de l'assurance en N."
+   ],
+   "source": "Exercice original",
+   "parts": [
+    {
+     "id": "sup-l2-comptabilite-generale-stocks-regul-07-a",
+     "points": 1,
+     "prompt": "Charge constatée d'avance sur l'assurance ?",
+     "explanation": "De septembre à décembre : 4 mois en N ; reste 8 mois en N+1 : 720 000 × 8/12 = 480 000.",
+     "kind": "numeric",
+     "answer": 480000.0,
+     "tolerance": 0
+    },
+    {
+     "id": "sup-l2-comptabilite-generale-stocks-regul-07-b",
+     "points": 1,
+     "prompt": "Produit constaté d'avance sur les loyers ?",
+     "explanation": "3 mois en N (oct., nov., déc.) ; 3 mois en N+1 : 600 000 × 3/6 = 300 000.",
+     "kind": "numeric",
+     "answer": 300000.0,
+     "tolerance": 0
+    },
+    {
+     "id": "sup-l2-comptabilite-generale-stocks-regul-07-c",
+     "points": 1,
+     "prompt": "La facture d'eau de décembre est enregistrée comme :",
+     "explanation": "Charge de N non encore facturée : charge à payer (passif).",
+     "kind": "mcq",
+     "choices": [
+      "Charge à payer",
+      "Produit constaté d'avance",
+      "Produit à recevoir",
+      "Charge constatée d'avance"
+     ],
+     "answer": 0
+    },
+    {
+     "id": "sup-l2-comptabilite-generale-stocks-regul-07-d",
+     "points": 1,
+     "prompt": "Effet net sur le résultat de N de ces quatre régularisations (charges évitées/ajoutées et produits) ? (Hypothèse : dépenses et recettes avaient été initialement toutes enregistrées en charges et produits.)",
+     "explanation": "Charge constatée d'avance : +480 000 (charges de N réduites). Produit constaté d'avance : −300 000. Charge à payer : −45 000. Produit à recevoir : +80 000. Total : +215 000.",
+     "kind": "numeric",
+     "answer": 215000.0,
+     "tolerance": 0
+    }
+   ]
+  },
+  {
+   "id": "sup-l2-comptabilite-generale-stocks-regul-q1",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "sup-l2-comptabilite-generale-stocks-regul",
+   "prompt": "Le CUMP se calcule :",
+   "choices": [
+    "En divisant les achats par le nombre de fournisseurs",
+    "Au prix le plus bas",
+    "Valeur totale du stock / quantité totale après chaque entrée",
+    "En prenant le dernier prix"
+   ],
+   "answer": 2,
+   "explanation": "Moyenne pondérée."
+  },
+  {
+   "id": "sup-l2-comptabilite-generale-stocks-regul-q2",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "sup-l2-comptabilite-generale-stocks-regul",
+   "prompt": "En FIFO, le stock final est évalué :",
+   "choices": [
+    "Aux coûts les plus anciens",
+    "Aux coûts les plus récents",
+    "À zéro",
+    "Au CUMP"
+   ],
+   "answer": 1,
+   "explanation": "Les unités restantes sont les dernières entrées."
+  },
+  {
+   "id": "sup-l2-comptabilite-generale-stocks-regul-q3",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "sup-l2-comptabilite-generale-stocks-regul",
+   "prompt": "Une charge constatée d'avance figure :",
+   "choices": [
+    "À l'actif",
+    "Dans les produits",
+    "Au capital",
+    "Au passif"
+   ],
+   "answer": 0,
+   "explanation": "C'est un droit sur l'exercice suivant."
+  },
+  {
+   "id": "sup-l2-comptabilite-generale-stocks-regul-q4",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "sup-l2-comptabilite-generale-stocks-regul",
+   "prompt": "Stock initial 100 ; achats 600 ; stock final 150. Le coût des marchandises vendues vaut :",
+   "choices": [
+    "450",
+    "650",
+    "850",
+    "550"
+   ],
+   "answer": 3,
+   "explanation": "100 + 600 − 150."
+  },
+  {
+   "id": "sup-l2-comptabilite-generale-stocks-regul-q5",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "sup-l2-comptabilite-generale-stocks-regul",
+   "prompt": "Un produit à recevoir est :",
+   "choices": [
+    "Une charge à payer",
+    "Un produit encaissé d'avance",
+    "Une dépréciation",
+    "Un produit acquis non encaissé"
+   ],
+   "answer": 3,
+   "explanation": "Il est enregistré à l'actif."
+  }
+ ]
+}

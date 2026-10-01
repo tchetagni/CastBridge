@@ -1,0 +1,1199 @@
+{
+ "chapter": "sup-l2-probabilites-variables-aleatoires",
+ "lessons": [
+  {
+   "id": "sup-l2-probabilites-va-discretes",
+   "title": "Variables aléatoires discrètes : espérance et variance",
+   "minutes": 50,
+   "programRef": "Probabilités de deuxième année de Licence — à comparer au programme de l'établissement",
+   "status": "draft",
+   "author": "CastBridge (brouillon IA)",
+   "source": "Rédaction originale ; à relire par un enseignant",
+   "objectives": [
+    "Définir une variable aléatoire discrète et sa loi.",
+    "Calculer espérance, variance et écart-type.",
+    "Utiliser la linéarité de l'espérance et l'effet de $aX+b$ sur la variance.",
+    "Interpréter l'espérance (jeu équitable, gain moyen)."
+   ],
+   "prerequisites": [
+    "sup-l2-probabilites-conditionnement-bayes"
+   ],
+   "exercises": [
+    "sup-l2-probabilites-va-discretes-01",
+    "sup-l2-probabilites-va-discretes-02",
+    "sup-l2-probabilites-va-discretes-03",
+    "sup-l2-probabilites-va-discretes-04",
+    "sup-l2-probabilites-va-discretes-05",
+    "sup-l2-probabilites-va-discretes-06"
+   ],
+   "selfCheck": [
+    "sup-l2-probabilites-va-discretes-q1",
+    "sup-l2-probabilites-va-discretes-q2",
+    "sup-l2-probabilites-va-discretes-q3",
+    "sup-l2-probabilites-va-discretes-q4",
+    "sup-l2-probabilites-va-discretes-q5"
+   ],
+   "reviewNotes": [
+    "Montants fictifs (kermesse, colis).",
+    "Variance de population ($E(X^{2})-E(X)^{2}$) : standard en probabilités."
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Variable aléatoire discrète",
+     "md": "Une **variable aléatoire** (v.a.) $X$ associe un nombre à chaque issue d'une expérience aléatoire. Elle est **discrète** si elle prend un nombre fini (ou dénombrable) de valeurs $x_{1},x_{2},\\dots$ ; sa **loi** est la liste des $p_{i}=P(X=x_{i})$, avec $p_{i}≥0$ et $\\sum p_{i}=1$."
+    },
+    {
+     "type": "key",
+     "style": "formule",
+     "title": "Espérance",
+     "md": "$E(X)=\\sum_{i}x_{i}\\,p_{i}$ : moyenne des valeurs pondérées par leurs probabilités (valeur moyenne à long terme). Propriétés : $E(aX+b)=aE(X)+b$ ; $E(X+Y)=E(X)+E(Y)$ (toujours, même sans indépendance).",
+     "tex": "E(X)=\\sum x_{i}\\,p_{i}"
+    },
+    {
+     "type": "key",
+     "style": "formule",
+     "title": "Variance et écart-type",
+     "md": "$V(X)=E\\big((X-E(X))^{2}\\big)=E(X^{2})-E(X)^{2}$ avec $E(X^{2})=\\sum x_{i}^{2}p_{i}$. L'écart-type est $\\sigma(X)=\\sqrt{V(X)}$. Propriétés : $V(aX+b)=a^{2}V(X)$ ; si $X$ et $Y$ sont **indépendantes**, $V(X+Y)=V(X)+V(Y)$.",
+     "tex": "V(X)=E(X^{2})-E(X)^{2}"
+    },
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Jeu équitable",
+     "md": "Dans un jeu où l'on mise $m$ pour obtenir un gain aléatoire $G$, le **gain algébrique** est $G-m$. Le jeu est **équitable** si $E(G-m)=0$, c'est-à-dire si $E(G)=m$ ; il est **défavorable** au joueur si $E(G-m)<0$."
+    },
+    {
+     "type": "illustration",
+     "figure": {
+      "kind": "bars",
+      "w": 340,
+      "h": 230,
+      "unit": "probabilité (gain en FCFA)",
+      "bars": [
+       {
+        "label": "0",
+        "value": 0.7,
+        "color": [
+         "grey"
+        ]
+       },
+       {
+        "label": "1 000",
+        "value": 0.2,
+        "color": [
+         "blue"
+        ]
+       },
+       {
+        "label": "3 000",
+        "value": 0.1,
+        "color": [
+         "green"
+        ]
+       }
+      ]
+     },
+     "caption": "Loi du gain G de la kermesse (valeurs 0, 1 000 et 3 000 FCFA).",
+     "alt": "Trois barres : probabilité 0,7 pour un gain de 0, 0,2 pour 1 000 FCFA, 0,1 pour 3 000 FCFA."
+    },
+    {
+     "type": "example",
+     "title": "Exemple 1 — loi de $X$ = nombre de piles",
+     "statement": "On lance deux pièces équilibrées ; $X$ est le nombre de « pile ». Donner la loi, $E(X)$ et $V(X)$.",
+     "steps": [
+      {
+       "md": "Issues équiprobables PP, PF, FP, FF : $P(X=0)=\\frac{1}{4}$, $P(X=1)=\\frac{1}{2}$, $P(X=2)=\\frac{1}{4}$."
+      },
+      {
+       "md": "$E(X)=0×\\frac{1}{4}+1×\\frac{1}{2}+2×\\frac{1}{4}=1$.",
+       "tex": "E(X)=1"
+      },
+      {
+       "md": "$E(X^{2})=0+\\frac{1}{2}+4×\\frac{1}{4}=\\frac{3}{2}$, donc $V(X)=\\frac{3}{2}-1=\\frac{1}{2}$.",
+       "tex": "V(X)=\\frac{3}{2}-1=\\frac{1}{2}"
+      }
+     ],
+     "answer": "**$E(X)=1$ ; $V(X)=0{,}5$ ; $\\sigma≈0{,}707$.**"
+    },
+    {
+     "type": "example",
+     "title": "Exemple 2 — jeu de kermesse",
+     "statement": "Un jeu fictif coûte 500 FCFA. Le gain $G$ vaut 0 (probabilité 0,7), 1 000 (probabilité 0,2) ou 3 000 FCFA (probabilité 0,1). Le jeu est-il équitable ? Calculer $V(G)$.",
+     "steps": [
+      {
+       "md": "$E(G)=0×0{,}7+1000×0{,}2+3000×0{,}1=200+300=500$.",
+       "tex": "E(G)=200+300=500"
+      },
+      {
+       "md": "$E(G)=500=$ mise : $E(G-500)=0$ : le jeu est **équitable**."
+      },
+      {
+       "md": "$E(G^{2})=1000^{2}×0{,}2+3000^{2}×0{,}1=200\\,000+900\\,000=1\\,100\\,000$.",
+       "tex": "E(G^{2})=1\\,100\\,000"
+      },
+      {
+       "md": "$V(G)=1\\,100\\,000-500^{2}=850\\,000$ ; $\\sigma≈922$ FCFA.",
+       "tex": "V(G)=850\\,000"
+      }
+     ],
+     "answer": "**Équitable ; $V(G)=850\\,000$, $\\sigma≈922$ FCFA** (forte dispersion pour une même moyenne)."
+    },
+    {
+     "type": "example",
+     "title": "Exemple 3 — transformation affine",
+     "statement": "$X$ a pour espérance 4 et pour variance 9. Calculer $E(2X+3)$, $V(2X+3)$ et $\\sigma(2X+3)$.",
+     "steps": [
+      {
+       "md": "$E(2X+3)=2×4+3=11$.",
+       "tex": "E(2X+3)=11"
+      },
+      {
+       "md": "$V(2X+3)=2^{2}×9=36$ : le $+3$ n'agit pas.",
+       "tex": "V(2X+3)=36"
+      },
+      {
+       "md": "$\\sigma=\\sqrt{36}=6$."
+      }
+     ],
+     "answer": "**11 ; 36 ; 6.**"
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Erreurs fréquentes",
+     "md": "- Oublier de vérifier que $\\sum p_{i}=1$.\n- Écrire $E(X^{2})=E(X)^{2}$ : c'est faux sauf si $X$ est constante.\n- Écrire $V(aX+b)=aV(X)+b$ : c'est $a^{2}V(X)$.\n- Additionner les variances de deux variables **non indépendantes**."
+    },
+    {
+     "type": "more",
+     "items": [
+      "L'espérance est l'équivalent de la moyenne d'une série pour une loi de probabilité ; la loi des grands nombres relie les deux.",
+      "Pour un jeu défavorable, un joueur perd en moyenne la différence $m-E(G)$ à chaque partie."
+     ]
+    },
+    {
+     "type": "exercise",
+     "ref": "sup-l2-probabilites-va-discretes-01"
+    }
+   ]
+  },
+  {
+   "id": "sup-l2-probabilites-binomiale-poisson",
+   "title": "Lois usuelles discrètes : binomiale et de Poisson",
+   "minutes": 50,
+   "programRef": "Probabilités de deuxième année de Licence — à comparer au programme de l'établissement",
+   "status": "draft",
+   "author": "CastBridge (brouillon IA)",
+   "source": "Rédaction originale ; à relire par un enseignant",
+   "objectives": [
+    "Reconnaître une loi binomiale et calculer $P(X=k)$, $E(X)$, $V(X)$.",
+    "Reconnaître une loi de Poisson et calculer ses probabilités.",
+    "Utiliser le complémentaire pour « au moins un ».",
+    "Comprendre l'approximation de la loi binomiale par une loi de Poisson."
+   ],
+   "prerequisites": [
+    "sup-l2-probabilites-va-discretes"
+   ],
+   "exercises": [
+    "sup-l2-probabilites-binomiale-poisson-01",
+    "sup-l2-probabilites-binomiale-poisson-02",
+    "sup-l2-probabilites-binomiale-poisson-03",
+    "sup-l2-probabilites-binomiale-poisson-04",
+    "sup-l2-probabilites-binomiale-poisson-05",
+    "sup-l2-probabilites-binomiale-poisson-06"
+   ],
+   "selfCheck": [
+    "sup-l2-probabilites-binomiale-poisson-q1",
+    "sup-l2-probabilites-binomiale-poisson-q2",
+    "sup-l2-probabilites-binomiale-poisson-q3",
+    "sup-l2-probabilites-binomiale-poisson-q4",
+    "sup-l2-probabilites-binomiale-poisson-q5"
+   ],
+   "reviewNotes": [
+    "Condition d'approximation binomiale → Poisson : les seuils varient selon les cours ; vérifier avec l'enseignant.",
+    "Valeurs numériques calculées avec Python."
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Loi de Bernoulli et loi binomiale",
+     "md": "Une **épreuve de Bernoulli** a deux issues : succès (probabilité $p$) ou échec ($q=1-p$). On répète $n$ fois, **de façon indépendante**, et $X$ compte les succès : $X$ suit la **loi binomiale** $B(n,p)$ avec $P(X=k)=C_{n}^{k}\\,p^{k}\\,q^{\\,n-k}$ pour $k=0,\\dots,n$.",
+     "tex": "P(X=k)=C_{n}^{k}\\,p^{k}\\,q^{n-k}"
+    },
+    {
+     "type": "key",
+     "style": "formule",
+     "title": "Paramètres de la binomiale",
+     "md": "$E(X)=np$ et $V(X)=npq=np(1-p)$. Pour « au moins un succès » : $P(X≥1)=1-P(X=0)=1-q^{n}$."
+    },
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Loi de Poisson",
+     "md": "$X$ suit une **loi de Poisson** de paramètre $λ>0$, notée $P(λ)$, si $X$ prend les valeurs entières $k=0,1,2,\\dots$ avec $P(X=k)=e^{-λ}\\frac{λ^{k}}{k!}$. Elle modélise un **nombre d'événements rares** (appels reçus, pannes, arrivées) sur une période fixée. $E(X)=V(X)=λ$.",
+     "tex": "P(X=k)=e^{-λ}\\frac{λ^{k}}{k!}"
+    },
+    {
+     "type": "key",
+     "style": "propriete",
+     "title": "Approximation par une loi de Poisson",
+     "md": "Quand $n$ est grand et $p$ petit, la loi $B(n,p)$ est bien approchée par $P(λ)$ avec $λ=np$. Une règle courante (qui varie selon les cours) : $n≥30$, $p≤0{,}1$ et $np$ pas trop grand. Cela évite les coefficients binomiaux gigantesques."
+    },
+    {
+     "type": "illustration",
+     "figure": {
+      "kind": "bars",
+      "w": 400,
+      "h": 240,
+      "unit": "P(X=k), loi de Poisson λ=3",
+      "bars": [
+       {
+        "label": "0",
+        "value": 0.049787068367863944,
+        "color": [
+         "blue"
+        ]
+       },
+       {
+        "label": "1",
+        "value": 0.14936120510359183,
+        "color": [
+         "blue"
+        ]
+       },
+       {
+        "label": "2",
+        "value": 0.22404180765538775,
+        "color": [
+         "blue"
+        ]
+       },
+       {
+        "label": "3",
+        "value": 0.22404180765538775,
+        "color": [
+         "blue"
+        ]
+       },
+       {
+        "label": "4",
+        "value": 0.16803135574154082,
+        "color": [
+         "blue"
+        ]
+       },
+       {
+        "label": "5",
+        "value": 0.10081881344492448,
+        "color": [
+         "blue"
+        ]
+       },
+       {
+        "label": "6",
+        "value": 0.05040940672246225,
+        "color": [
+         "blue"
+        ]
+       },
+       {
+        "label": "7",
+        "value": 0.02160403145248382,
+        "color": [
+         "blue"
+        ]
+       },
+       {
+        "label": "8",
+        "value": 0.008101511794681432,
+        "color": [
+         "blue"
+        ]
+       }
+      ]
+     },
+     "caption": "Loi de Poisson de paramètre 3 : le maximum est atteint en k = 2 et k = 3.",
+     "alt": "Neuf barres pour k de 0 à 8 : environ 0,05 pour k=0, 0,15 pour k=1, 0,22 pour k=2 et k=3, puis décroissance."
+    },
+    {
+     "type": "example",
+     "title": "Exemple 1 — binomiale",
+     "statement": "Un contrôle fictif prélève 10 pièces ; chaque pièce est défectueuse avec la probabilité 0,1, indépendamment. Soit $X$ le nombre de pièces défectueuses. Calculer $P(X=2)$, $P(X≥1)$, $E(X)$ et $V(X)$.",
+     "steps": [
+      {
+       "md": "$X$ suit $B(10\\,;0{,}1)$."
+      },
+      {
+       "md": "$P(X=2)=C_{10}^{2}×0{,}1^{2}×0{,}9^{8}=45×0{,}01×0{,}43047≈0{,}1937$.",
+       "tex": "P(X=2)=45×0{,}01×0{,}9^{8}"
+      },
+      {
+       "md": "$P(X≥1)=1-0{,}9^{10}=1-0{,}34868≈0{,}6513$.",
+       "tex": "P(X≥1)=1-0{,}9^{10}"
+      },
+      {
+       "md": "$E(X)=10×0{,}1=1$ ; $V(X)=10×0{,}1×0{,}9=0{,}9$."
+      }
+     ],
+     "answer": "**$P(X=2)≈0{,}1937$ ; $P(X≥1)≈0{,}6513$ ; $E=1$, $V=0{,}9$.**"
+    },
+    {
+     "type": "example",
+     "title": "Exemple 2 — Poisson",
+     "statement": "Un standard téléphonique fictif reçoit en moyenne 3 appels par heure ; on modélise le nombre d'appels par une loi de Poisson $P(3)$. Calculer $P(X=0)$, $P(X=2)$ et $P(X≤1)$.",
+     "steps": [
+      {
+       "md": "$P(X=0)=e^{-3}≈0{,}0498$.",
+       "tex": "P(X=0)=e^{-3}"
+      },
+      {
+       "md": "$P(X=2)=e^{-3}\\frac{3^{2}}{2!}=4{,}5\\,e^{-3}≈0{,}224$.",
+       "tex": "P(X=2)=4{,}5e^{-3}"
+      },
+      {
+       "md": "$P(X≤1)=e^{-3}(1+3)=4\\,e^{-3}≈0{,}1991$.",
+       "tex": "P(X≤1)=e^{-3}(1+3)"
+      }
+     ],
+     "answer": "**0{,}0498 ; 0{,}224 ; 0{,}1991.**"
+    },
+    {
+     "type": "example",
+     "title": "Exemple 3 — approximation",
+     "statement": "Sur 200 colis fictifs, chacun est endommagé avec la probabilité 0,01. Approcher $P(X=3)$ par une loi de Poisson et comparer à la valeur exacte binomiale.",
+     "steps": [
+      {
+       "md": "$X$ suit $B(200\\,;0{,}01)$ ; $np=2$ : on approche par $P(2)$."
+      },
+      {
+       "md": "Poisson : $P(X=3)=e^{-2}\\frac{2^{3}}{3!}≈0{,}1804$.",
+       "tex": "e^{-2}\\frac{8}{6}"
+      },
+      {
+       "md": "Exact : $C_{200}^{3}×0{,}01^{3}×0{,}99^{197}≈0{,}1814$."
+      },
+      {
+       "md": "Les deux valeurs sont proches : l'approximation est bonne."
+      }
+     ],
+     "answer": "**Poisson : 0{,}1804 ; exact : 0{,}1814.**"
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Erreurs fréquentes",
+     "md": "- Utiliser la binomiale quand les épreuves ne sont **pas indépendantes** (tirage sans remise dans un petit lot).\n- Oublier le coefficient $C_{n}^{k}$.\n- Confondre $n$ (nombre d'épreuves) et $k$ (nombre de succès).\n- Utiliser la loi de Poisson sans que l'événement soit « rare » ou que $λ$ soit défini pour la période étudiée (changer d'unité de temps change $λ$)."
+    },
+    {
+     "type": "more",
+     "items": [
+      "Si le nombre d'appels est de 3 par heure, alors sur une demi-heure on prend $λ=1{,}5$ (le paramètre est proportionnel à la durée).",
+      "Une somme de deux variables de Poisson indépendantes de paramètres $λ_{1},λ_{2}$ suit une loi de Poisson de paramètre $λ_{1}+λ_{2}$."
+     ]
+    },
+    {
+     "type": "exercise",
+     "ref": "sup-l2-probabilites-binomiale-poisson-01"
+    }
+   ]
+  },
+  {
+   "id": "sup-l2-probabilites-normale-continues",
+   "title": "Variables continues et loi normale",
+   "minutes": 55,
+   "programRef": "Probabilités de deuxième année de Licence — à comparer au programme de l'établissement",
+   "status": "draft",
+   "author": "CastBridge (brouillon IA)",
+   "source": "Rédaction originale ; à relire par un enseignant",
+   "objectives": [
+    "Définir une densité de probabilité et calculer $P(a≤X≤b)$ par intégrale.",
+    "Calculer espérance et probabilités pour une loi à densité simple.",
+    "Standardiser une variable normale.",
+    "Lire une table de la loi normale centrée réduite fournie dans l'énoncé."
+   ],
+   "prerequisites": [
+    "sup-l2-probabilites-binomiale-poisson"
+   ],
+   "exercises": [
+    "sup-l2-probabilites-normale-continues-01",
+    "sup-l2-probabilites-normale-continues-02",
+    "sup-l2-probabilites-normale-continues-03",
+    "sup-l2-probabilites-normale-continues-04",
+    "sup-l2-probabilites-normale-continues-05",
+    "sup-l2-probabilites-normale-continues-06"
+   ],
+   "selfCheck": [
+    "sup-l2-probabilites-normale-continues-q1",
+    "sup-l2-probabilites-normale-continues-q2",
+    "sup-l2-probabilites-normale-continues-q3",
+    "sup-l2-probabilites-normale-continues-q4",
+    "sup-l2-probabilites-normale-continues-q5"
+   ],
+   "reviewNotes": [
+    "Les valeurs de la table de la loi normale sont fournies dans les énoncés et arrondies à $10^{-4}$ ; elles ont été recalculées par programme ; à comparer à la table du cours.",
+    "Intégrales simples seulement (densité polynomiale)."
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Densité de probabilité",
+     "md": "Une v.a. $X$ est **continue** (à densité) s'il existe une fonction $f$, positive, d'intégrale 1 sur ℝ, telle que $P(a≤X≤b)=\\int_{a}^{b}f(x)\\,dx$. Conséquence : $P(X=a)=0$ pour tout $a$, donc on peut remplacer $≤$ par $<$. La **fonction de répartition** est $F(x)=P(X≤x)$.",
+     "tex": "P(a≤X≤b)=\\int_{a}^{b}f(x)\\,dx"
+    },
+    {
+     "type": "key",
+     "style": "formule",
+     "title": "Espérance et variance",
+     "md": "$E(X)=\\int x\\,f(x)\\,dx$ et $V(X)=E(X^{2})-E(X)^{2}$ avec $E(X^{2})=\\int x^{2}f(x)\\,dx$ (les intégrales sont prises sur le domaine où $f≠0$). **Loi uniforme** sur $[a\\,;b]$ : $f=\\frac{1}{b-a}$, $E(X)=\\frac{a+b}{2}$."
+    },
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Loi normale",
+     "md": "$X$ suit la **loi normale** $N(μ\\,;σ^{2})$ si sa densité a la forme d'une courbe en cloche symétrique autour de $μ$, avec $E(X)=μ$ et $\\sigma(X)=σ$. La loi **centrée réduite** est $N(0\\,;1)$ ; sa fonction de répartition est notée $Φ$."
+    },
+    {
+     "type": "key",
+     "style": "methode",
+     "title": "Standardisation et lecture de la table",
+     "md": "Si $X$ suit $N(μ\\,;σ^{2})$, alors $Z=\\frac{X-μ}{σ}$ suit $N(0\\,;1)$. On a $P(X≤x)=Φ\\left(\\frac{x-μ}{σ}\\right)$. Par symétrie : $Φ(-z)=1-Φ(z)$ ; $P(a≤X≤b)=Φ(z_{b})-Φ(z_{a})$. **Dans les exercices, les valeurs de $Φ$ nécessaires sont fournies** dans l'énoncé.",
+     "tex": "Z=\\frac{X-μ}{σ}"
+    },
+    {
+     "type": "illustration",
+     "figure": {
+      "kind": "plot",
+      "w": 400,
+      "h": 260,
+      "xmin": -4,
+      "xmax": 4,
+      "ymin": 0,
+      "ymax": 0.5,
+      "grid": 1,
+      "xlabel": "z",
+      "ylabel": "densité",
+      "curves": [
+       {
+        "expr": "exp(-x^2/2)/sqrt(2*pi)",
+        "color": "blue",
+        "label": "N(0;1)"
+       }
+      ],
+      "segments": [
+       {
+        "x1": -1,
+        "y1": 0,
+        "x2": -1,
+        "y2": 0.242,
+        "color": "red",
+        "dash": true
+       },
+       {
+        "x1": 1,
+        "y1": 0,
+        "x2": 1,
+        "y2": 0.242,
+        "color": "red",
+        "dash": true
+       },
+       {
+        "x1": 0,
+        "y1": 0,
+        "x2": 0,
+        "y2": 0.399,
+        "color": "grey",
+        "dash": true
+       }
+      ]
+     },
+     "caption": "Densité de la loi normale centrée réduite ; les traits rouges marquent $z=-1$ et $z=1$.",
+     "alt": "Courbe en cloche symétrique centrée en 0, de maximum environ 0,4 ; deux traits verticaux en z=-1 et z=1."
+    },
+    {
+     "type": "example",
+     "title": "Exemple 1 — densité polynomiale",
+     "statement": "Soit $f(x)=2x$ sur $[0\\,;1]$ (0 ailleurs). Vérifier que c'est une densité, puis calculer $P(X≤0{,}5)$ et $E(X)$.",
+     "steps": [
+      {
+       "md": "$f≥0$ et $\\int_{0}^{1}2x\\,dx=\\left[x^{2}\\right]_{0}^{1}=1$ : c'est une densité.",
+       "tex": "\\int_{0}^{1}2x\\,dx=1"
+      },
+      {
+       "md": "$P(X≤0{,}5)=\\int_{0}^{0{,}5}2x\\,dx=0{,}5^{2}=0{,}25$.",
+       "tex": "P(X≤0{,}5)=0{,}25"
+      },
+      {
+       "md": "$E(X)=\\int_{0}^{1}x×2x\\,dx=\\left[\\frac{2x^{3}}{3}\\right]_{0}^{1}=\\frac{2}{3}$.",
+       "tex": "E(X)=\\frac{2}{3}"
+      }
+     ],
+     "answer": "**$P(X≤0{,}5)=0{,}25$ ; $E(X)=\\frac{2}{3}$.**"
+    },
+    {
+     "type": "example",
+     "title": "Exemple 2 — lecture de table",
+     "statement": "Le poids (en kg) d'un sac de ciment fictif suit $N(50\\,;2^{2})$. Table fournie : Φ(0,5)=0,6915 ; Φ(1)=0,8413 ; Φ(1,5)=0,9332 ; Φ(2)=0,9772 ; Φ(2,5)=0,9938. Calculer $P(X≤52)$, $P(X≥47)$ et $P(48≤X≤54)$.",
+     "steps": [
+      {
+       "md": "$P(X≤52)=Φ\\left(\\frac{52-50}{2}\\right)=Φ(1)=0{,}8413$.",
+       "tex": "Z=\\frac{52-50}{2}=1"
+      },
+      {
+       "md": "$P(X≥47)=1-Φ\\left(\\frac{47-50}{2}\\right)=1-Φ(-1{,}5)=Φ(1{,}5)=0{,}9332$.",
+       "tex": "P(X≥47)=Φ(1{,}5)"
+      },
+      {
+       "md": "$P(48≤X≤54)=Φ(2)-Φ(-1)=0{,}9772-(1-0{,}8413)=0{,}8185$.",
+       "tex": "Φ(2)-Φ(-1)=0{,}9772-0{,}1587"
+      }
+     ],
+     "answer": "**0,8413 ; 0,9332 ; 0,8185.**"
+    },
+    {
+     "type": "example",
+     "title": "Exemple 3 — intervalle autour de la moyenne",
+     "statement": "Avec $X$ de loi $N(μ\\,;σ^{2})$, calculer $P(μ-σ≤X≤μ+σ)$ puis $P(μ-2σ≤X≤μ+2σ)$. Table fournie : Φ(0,5)=0,6915 ; Φ(1)=0,8413 ; Φ(1,5)=0,9332 ; Φ(2)=0,9772 ; Φ(2,5)=0,9938.",
+     "steps": [
+      {
+       "md": "$P(μ-σ≤X≤μ+σ)=Φ(1)-Φ(-1)=2Φ(1)-1=2×0{,}8413-1=0{,}6826$.",
+       "tex": "2Φ(1)-1=0{,}6826"
+      },
+      {
+       "md": "$P(μ-2σ≤X≤μ+2σ)=2Φ(2)-1=2×0{,}9772-1=0{,}9544$.",
+       "tex": "2Φ(2)-1=0{,}9544"
+      }
+     ],
+     "answer": "**Environ 68 % et 95 % des valeurs sont à moins de $σ$ et $2σ$ de la moyenne.**"
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Erreurs fréquentes",
+     "md": "- Calculer $P(X=a)$ pour une loi continue : cette probabilité est **nulle**.\n- Oublier de standardiser (diviser par $σ$ et non par $σ^{2}$).\n- Lire $Φ(-z)$ directement dans la table : utiliser $Φ(-z)=1-Φ(z)$.\n- Confondre la variance $σ^{2}$ et l'écart-type $σ$ dans l'écriture $N(μ\\,;σ^{2})$ (selon les cours, on écrit aussi $N(μ\\,;σ)$ : lire l'énoncé)."
+    },
+    {
+     "type": "more",
+     "items": [
+      "Le théorème central limite explique l'omniprésence de la loi normale : la somme (ou la moyenne) d'un grand nombre de variables indépendantes est approximativement normale.",
+      "La loi binomiale $B(n,p)$ peut être approchée par une loi normale pour $n$ grand (hors de cette fiche)."
+     ]
+    },
+    {
+     "type": "exercise",
+     "ref": "sup-l2-probabilites-normale-continues-01"
+    }
+   ]
+  }
+ ],
+ "exercises": [
+  {
+   "id": "sup-l2-probabilites-va-discretes-01",
+   "kind": "numeric",
+   "tier": "application",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "sup-l2-probabilites-va-discretes",
+   "prompt": "La loi de $X$ est : $P(X=1)=0{,}2$, $P(X=2)=0{,}3$, $P(X=4)=0{,}1$ et $P(X=5)=a$. Calculer $a$.",
+   "explanation": "$a=1-(0{,}2+0{,}3+0{,}1)=0{,}4$.",
+   "source": "Exercice original",
+   "answer": 0.4,
+   "tolerance": 0.0001
+  },
+  {
+   "id": "sup-l2-probabilites-va-discretes-02",
+   "kind": "numeric",
+   "tier": "application",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "sup-l2-probabilites-va-discretes",
+   "prompt": "$X$ prend les valeurs 1, 2, 3 avec les probabilités 0,2 ; 0,5 ; 0,3. Calculer $E(X)$.",
+   "explanation": "$0{,}2+1+0{,}9=2{,}1$.",
+   "source": "Exercice original",
+   "answer": 2.1,
+   "tolerance": 0.001
+  },
+  {
+   "id": "sup-l2-probabilites-va-discretes-03",
+   "kind": "truefalse",
+   "tier": "application",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "sup-l2-probabilites-va-discretes",
+   "prompt": "Une variance peut être négative.",
+   "explanation": "$V(X)=E((X-E(X))^{2})≥0$.",
+   "source": "Exercice original",
+   "answer": false
+  },
+  {
+   "id": "sup-l2-probabilites-va-discretes-04",
+   "kind": "numeric",
+   "tier": "approfondissement",
+   "difficulty": 2,
+   "points": 2,
+   "lesson": "sup-l2-probabilites-va-discretes",
+   "prompt": "Pour la même variable ($1,2,3$ ; $0{,}2$, $0{,}5$, $0{,}3$), calculer $V(X)$.",
+   "explanation": "$E(X^{2})=0{,}2+2+2{,}7=4{,}9$ ; $V=4{,}9-2{,}1^{2}=4{,}9-4{,}41=0{,}49$.",
+   "source": "Exercice original",
+   "answer": 0.49,
+   "tolerance": 0.0001
+  },
+  {
+   "id": "sup-l2-probabilites-va-discretes-05",
+   "kind": "numeric",
+   "tier": "approfondissement",
+   "difficulty": 2,
+   "points": 2,
+   "lesson": "sup-l2-probabilites-va-discretes",
+   "prompt": "Toujours pour cette variable, calculer $E(3X-2)$.",
+   "explanation": "$3×2{,}1-2=4{,}3$.",
+   "source": "Exercice original",
+   "answer": 4.3,
+   "tolerance": 0.001
+  },
+  {
+   "id": "sup-l2-probabilites-va-discretes-06",
+   "kind": "problem",
+   "tier": "examen",
+   "difficulty": 2,
+   "lesson": "sup-l2-probabilites-va-discretes",
+   "prompt": "Un transporteur fictif reçoit chaque jour $X$ colis : 0 (probabilité 0,1) ; 1 (0,3) ; 2 (0,4) ; 3 (0,2). Il gagne 2 000 FCFA par colis et supporte une charge fixe journalière de 1 500 FCFA.",
+   "method": "Loi → E(X), E(X²), V(X) ; puis propriétés de aX+b.",
+   "mistakes": [
+    "Oublier le carré du coefficient dans la variance de $aX+b$."
+   ],
+   "source": "Exercice original",
+   "parts": [
+    {
+     "id": "sup-l2-probabilites-va-discretes-06-a",
+     "points": 1,
+     "prompt": "Calculer $E(X)$.",
+     "explanation": "$0+0{,}3+0{,}8+0{,}6=1{,}7$.",
+     "kind": "numeric",
+     "answer": 1.7,
+     "tolerance": 0.001
+    },
+    {
+     "id": "sup-l2-probabilites-va-discretes-06-b",
+     "points": 1,
+     "prompt": "Calculer $V(X)$.",
+     "explanation": "$E(X^{2})=0+0{,}3+1{,}6+1{,}8=3{,}7$ ; $V=3{,}7-1{,}7^{2}=0{,}81$.",
+     "kind": "numeric",
+     "answer": 0.81,
+     "tolerance": 0.0001
+    },
+    {
+     "id": "sup-l2-probabilites-va-discretes-06-c",
+     "points": 1,
+     "prompt": "Le bénéfice journalier est $B=2000X-1500$. Calculer $E(B)$ (FCFA).",
+     "explanation": "$E(B)=2000×1{,}7-1500=1900$.",
+     "kind": "numeric",
+     "answer": 1900.0,
+     "tolerance": 0.5,
+     "unit": "FCFA"
+    },
+    {
+     "id": "sup-l2-probabilites-va-discretes-06-d",
+     "points": 1,
+     "prompt": "Calculer l'écart-type de $B$ (FCFA).",
+     "explanation": "$\\sigma(B)=2000×\\sigma(X)=2000×0{,}9=1800$.",
+     "kind": "numeric",
+     "answer": 1800.0,
+     "tolerance": 0.5,
+     "unit": "FCFA"
+    }
+   ]
+  },
+  {
+   "id": "sup-l2-probabilites-va-discretes-q1",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "sup-l2-probabilites-va-discretes",
+   "prompt": "L'espérance d'une variable discrète est :",
+   "choices": [
+    "$\\sum p_{i}$",
+    "$\\sum x_{i}$",
+    "$\\max x_{i}$",
+    "$\\sum x_{i}p_{i}$"
+   ],
+   "answer": 3,
+   "explanation": "Moyenne pondérée par les probabilités."
+  },
+  {
+   "id": "sup-l2-probabilites-va-discretes-q2",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "sup-l2-probabilites-va-discretes",
+   "prompt": "$V(aX+b)$ vaut :",
+   "choices": [
+    "$aV(X)+b$",
+    "$a^{2}V(X)$",
+    "$a^{2}V(X)+b$",
+    "$V(X)+b^{2}$"
+   ],
+   "answer": 1,
+   "explanation": "La constante $b$ ne modifie pas la dispersion."
+  },
+  {
+   "id": "sup-l2-probabilites-va-discretes-q3",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "sup-l2-probabilites-va-discretes",
+   "prompt": "Un jeu est équitable si :",
+   "choices": [
+    "on gagne toujours",
+    "l'espérance du gain algébrique est nulle",
+    "la variance est nulle",
+    "la mise est nulle"
+   ],
+   "answer": 1,
+   "explanation": "$E(G-m)=0$."
+  },
+  {
+   "id": "sup-l2-probabilites-va-discretes-q4",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "sup-l2-probabilites-va-discretes",
+   "prompt": "La somme des probabilités de la loi vaut :",
+   "choices": [
+    "0",
+    "$E(X)$",
+    "$n$",
+    "1"
+   ],
+   "answer": 3,
+   "explanation": "Condition de normalisation."
+  },
+  {
+   "id": "sup-l2-probabilites-va-discretes-q5",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "sup-l2-probabilites-va-discretes",
+   "prompt": "La formule de König–Huygens pour la variance est :",
+   "choices": [
+    "$E(X^{2})-E(X)^{2}$",
+    "$E(X)^{2}-E(X^{2})$",
+    "$E(X^{2})+E(X)^{2}$",
+    "$E(X)$"
+   ],
+   "answer": 0,
+   "explanation": "Même formule que pour une série statistique."
+  },
+  {
+   "id": "sup-l2-probabilites-binomiale-poisson-01",
+   "kind": "numeric",
+   "tier": "application",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "sup-l2-probabilites-binomiale-poisson",
+   "prompt": "$X$ suit $B(4\\,;0{,}5)$. Calculer $P(X=2)$.",
+   "explanation": "$C_{4}^{2}×0{,}5^{4}=6×0{,}0625=0{,}375$.",
+   "source": "Exercice original",
+   "answer": 0.375,
+   "tolerance": 0.0001
+  },
+  {
+   "id": "sup-l2-probabilites-binomiale-poisson-02",
+   "kind": "numeric",
+   "tier": "application",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "sup-l2-probabilites-binomiale-poisson",
+   "prompt": "$X$ suit $B(20\\,;0{,}3)$. Calculer $E(X)$.",
+   "explanation": "$np=20×0{,}3=6$.",
+   "source": "Exercice original",
+   "answer": 6,
+   "tolerance": 0
+  },
+  {
+   "id": "sup-l2-probabilites-binomiale-poisson-03",
+   "kind": "truefalse",
+   "tier": "application",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "sup-l2-probabilites-binomiale-poisson",
+   "prompt": "Pour une loi de Poisson $P(λ)$, l'espérance et la variance sont égales.",
+   "explanation": "$E(X)=V(X)=λ$.",
+   "source": "Exercice original",
+   "answer": true
+  },
+  {
+   "id": "sup-l2-probabilites-binomiale-poisson-04",
+   "kind": "numeric",
+   "tier": "approfondissement",
+   "difficulty": 2,
+   "points": 2,
+   "lesson": "sup-l2-probabilites-binomiale-poisson",
+   "prompt": "$X$ suit $B(5\\,;0{,}2)$. Calculer $P(X≥1)$.",
+   "explanation": "$1-0{,}8^{5}=1-0{,}32768=0{,}67232$.",
+   "method": "Passer par le complémentaire $1-P(X=0)$.",
+   "mistakes": [
+    "Additionner $P(X=1)+\\dots+P(X=5)$ par erreur d'arrondi."
+   ],
+   "source": "Exercice original",
+   "answer": 0.6723199999999999,
+   "tolerance": 0.0001
+  },
+  {
+   "id": "sup-l2-probabilites-binomiale-poisson-05",
+   "kind": "numeric",
+   "tier": "approfondissement",
+   "difficulty": 2,
+   "points": 2,
+   "lesson": "sup-l2-probabilites-binomiale-poisson",
+   "prompt": "$X$ suit $P(2)$. Calculer $P(X=0)$ (arrondi à $10^{-4}$).",
+   "explanation": "$e^{-2}≈0{,}1353$.",
+   "source": "Exercice original",
+   "answer": 0.1353352832366127,
+   "tolerance": 0.0001
+  },
+  {
+   "id": "sup-l2-probabilites-binomiale-poisson-06",
+   "kind": "problem",
+   "tier": "examen",
+   "difficulty": 3,
+   "lesson": "sup-l2-probabilites-binomiale-poisson",
+   "prompt": "Un centre d'appels fictif reçoit en moyenne 4 appels par minute ; on modélise le nombre d'appels par minute par une loi de Poisson $P(4)$. On donne $e^{-4}≈0{,}0183$.",
+   "method": "Écrire la loi, appliquer la formule, vérifier que le paramètre correspond à la période.",
+   "mistakes": [
+    "Ne pas adapter $λ$ à la période."
+   ],
+   "source": "Exercice original",
+   "parts": [
+    {
+     "id": "sup-l2-probabilites-binomiale-poisson-06-a",
+     "points": 1,
+     "prompt": "Calculer $P(X=0)$ (arrondi à $10^{-4}$).",
+     "explanation": "$e^{-4}≈0{,}0183$.",
+     "kind": "numeric",
+     "answer": 0.01831563888873418,
+     "tolerance": 0.0001
+    },
+    {
+     "id": "sup-l2-probabilites-binomiale-poisson-06-b",
+     "points": 1,
+     "prompt": "Calculer $P(X=2)$.",
+     "explanation": "$e^{-4}\\frac{4^{2}}{2}=8e^{-4}≈0{,}1465$.",
+     "kind": "numeric",
+     "answer": 0.14652511110987343,
+     "tolerance": 0.001
+    },
+    {
+     "id": "sup-l2-probabilites-binomiale-poisson-06-c",
+     "points": 1,
+     "prompt": "Calculer $P(X≤1)$.",
+     "explanation": "$e^{-4}(1+4)=5e^{-4}≈0{,}0916$.",
+     "kind": "numeric",
+     "answer": 0.0915781944436709,
+     "tolerance": 0.001
+    },
+    {
+     "id": "sup-l2-probabilites-binomiale-poisson-06-d",
+     "points": 1,
+     "prompt": "Combien d'appels en moyenne sur 30 secondes ?",
+     "explanation": "Le paramètre est proportionnel à la durée : $4×\\frac{1}{2}=2$.",
+     "kind": "mcq",
+     "choices": [
+      "4",
+      "8",
+      "2",
+      "1"
+     ],
+     "answer": 2
+    }
+   ]
+  },
+  {
+   "id": "sup-l2-probabilites-binomiale-poisson-q1",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "sup-l2-probabilites-binomiale-poisson",
+   "prompt": "L'espérance de $B(n,p)$ est :",
+   "choices": [
+    "$npq$",
+    "$n+p$",
+    "$\\frac{n}{p}$",
+    "$np$"
+   ],
+   "answer": 3,
+   "explanation": "$E(X)=np$."
+  },
+  {
+   "id": "sup-l2-probabilites-binomiale-poisson-q2",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "sup-l2-probabilites-binomiale-poisson",
+   "prompt": "La variance de $B(10\\,;0{,}2)$ est :",
+   "choices": [
+    "2",
+    "1,6",
+    "0,16",
+    "8"
+   ],
+   "answer": 1,
+   "explanation": "$npq=10×0{,}2×0{,}8=1{,}6$."
+  },
+  {
+   "id": "sup-l2-probabilites-binomiale-poisson-q3",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "sup-l2-probabilites-binomiale-poisson",
+   "prompt": "La loi de Poisson modélise plutôt :",
+   "choices": [
+    "des mesures de tailles",
+    "des tirages sans remise",
+    "des événements rares sur une période",
+    "des événements certains"
+   ],
+   "answer": 2,
+   "explanation": "Nombre d'événements dans un intervalle."
+  },
+  {
+   "id": "sup-l2-probabilites-binomiale-poisson-q4",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "sup-l2-probabilites-binomiale-poisson",
+   "prompt": "$P(X≥1)$ pour $B(n,p)$ vaut :",
+   "choices": [
+    "$1-q^{n}$",
+    "$q^{n}$",
+    "$np$",
+    "$1-p^{n}$"
+   ],
+   "answer": 0,
+   "explanation": "Complémentaire de « aucun succès »."
+  },
+  {
+   "id": "sup-l2-probabilites-binomiale-poisson-q5",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "sup-l2-probabilites-binomiale-poisson",
+   "prompt": "$B(200\\,;0{,}01)$ est approchée par une loi de Poisson de paramètre :",
+   "choices": [
+    "0,01",
+    "200",
+    "2",
+    "1,98"
+   ],
+   "answer": 2,
+   "explanation": "$λ=np=2$."
+  },
+  {
+   "id": "sup-l2-probabilites-normale-continues-01",
+   "kind": "numeric",
+   "tier": "application",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "sup-l2-probabilites-normale-continues",
+   "prompt": "$X$ suit $N(50\\,;4^{2})$. Calculer la valeur standardisée $z$ pour $x=56$.",
+   "explanation": "$z=\\frac{56-50}{4}=1{,}5$.",
+   "source": "Exercice original",
+   "answer": 1.5,
+   "tolerance": 0.0001
+  },
+  {
+   "id": "sup-l2-probabilites-normale-continues-02",
+   "kind": "mcq",
+   "tier": "application",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "sup-l2-probabilites-normale-continues",
+   "prompt": "Pour $Z$ de loi $N(0\\,;1)$, $P(Z≤0)$ vaut :",
+   "explanation": "La loi est symétrique par rapport à 0.",
+   "source": "Exercice original",
+   "choices": [
+    "0,5",
+    "0",
+    "1",
+    "0,25"
+   ],
+   "answer": 0
+  },
+  {
+   "id": "sup-l2-probabilites-normale-continues-03",
+   "kind": "truefalse",
+   "tier": "application",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "sup-l2-probabilites-normale-continues",
+   "prompt": "Pour une variable à densité, $P(X=3)=0$.",
+   "explanation": "Une intégrale sur un intervalle réduit à un point vaut 0.",
+   "source": "Exercice original",
+   "answer": true
+  },
+  {
+   "id": "sup-l2-probabilites-normale-continues-04",
+   "kind": "numeric",
+   "tier": "approfondissement",
+   "difficulty": 2,
+   "points": 2,
+   "lesson": "sup-l2-probabilites-normale-continues",
+   "prompt": "$X$ suit $N(100\\,;10^{2})$. Avec $Φ(1{,}5)=0{,}9332$, calculer $P(X≤115)$.",
+   "explanation": "$z=\\frac{115-100}{10}=1{,}5$ ; $P=Φ(1{,}5)=0{,}9332$.",
+   "source": "Exercice original",
+   "answer": 0.9332,
+   "tolerance": 0.0001
+  },
+  {
+   "id": "sup-l2-probabilites-normale-continues-05",
+   "kind": "numeric",
+   "tier": "approfondissement",
+   "difficulty": 2,
+   "points": 2,
+   "lesson": "sup-l2-probabilites-normale-continues",
+   "prompt": "$X$ suit $N(100\\,;10^{2})$. Avec $Φ(1{,}5)=0{,}9332$ et $Φ(2)=0{,}9772$, calculer $P(85≤X≤120)$.",
+   "explanation": "$z_{a}=-1{,}5$ et $z_{b}=2$ : $0{,}9772-(1-0{,}9332)=0{,}9772-0{,}0668=0{,}9104$.",
+   "source": "Exercice original",
+   "answer": 0.9104,
+   "tolerance": 0.0001
+  },
+  {
+   "id": "sup-l2-probabilites-normale-continues-06",
+   "kind": "problem",
+   "tier": "examen",
+   "difficulty": 2,
+   "lesson": "sup-l2-probabilites-normale-continues",
+   "prompt": "La durée de vie $X$ (en heures) d'une ampoule fictive suit $N(1000\\,;100^{2})$. Table fournie : Φ(0,5)=0,6915 ; Φ(1)=0,8413 ; Φ(1,5)=0,9332 ; Φ(2)=0,9772 ; Φ(2,5)=0,9938.",
+   "method": "Standardiser, utiliser la symétrie, lire la table fournie.",
+   "mistakes": [
+    "Diviser par $σ^{2}$ au lieu de $σ$."
+   ],
+   "source": "Exercice original",
+   "parts": [
+    {
+     "id": "sup-l2-probabilites-normale-continues-06-a",
+     "points": 1,
+     "prompt": "Calculer $P(X≤900)$.",
+     "explanation": "$z=\\frac{900-1000}{100}=-1$ ; $Φ(-1)=1-0{,}8413=0{,}1587$.",
+     "kind": "numeric",
+     "answer": 0.15869999999999995,
+     "tolerance": 0.0001
+    },
+    {
+     "id": "sup-l2-probabilites-normale-continues-06-b",
+     "points": 1,
+     "prompt": "Calculer $P(X≥1200)$.",
+     "explanation": "$z=2$ ; $1-Φ(2)=1-0{,}9772=0{,}0228$.",
+     "kind": "numeric",
+     "answer": 0.022800000000000042,
+     "tolerance": 0.0001
+    },
+    {
+     "id": "sup-l2-probabilites-normale-continues-06-c",
+     "points": 1,
+     "prompt": "Calculer $P(900≤X≤1100)$.",
+     "explanation": "$Φ(1)-Φ(-1)=2×0{,}8413-1=0{,}6826$.",
+     "kind": "numeric",
+     "answer": 0.6826000000000001,
+     "tolerance": 0.0001
+    },
+    {
+     "id": "sup-l2-probabilites-normale-continues-06-d",
+     "points": 1,
+     "prompt": "Dans quel intervalle trouve-t-on environ 95 % des durées de vie ?",
+     "explanation": "$μ±2σ=1000±200$ : $P=2Φ(2)-1≈0{,}954$.",
+     "kind": "mcq",
+     "choices": [
+      "de 900 à 1 100 heures",
+      "de 700 à 1 300 heures",
+      "de 0 à 1 000 heures",
+      "de 800 à 1 200 heures"
+     ],
+     "answer": 3
+    }
+   ]
+  },
+  {
+   "id": "sup-l2-probabilites-normale-continues-q1",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "sup-l2-probabilites-normale-continues",
+   "prompt": "Si $X$ suit $N(μ\\,;σ^{2})$, la variable $\\frac{X-μ}{σ}$ suit :",
+   "choices": [
+    "$N(μ\\,;1)$",
+    "$N(0\\,;1)$",
+    "$N(0\\,;σ^{2})$",
+    "une loi de Poisson"
+   ],
+   "answer": 1,
+   "explanation": "Standardisation."
+  },
+  {
+   "id": "sup-l2-probabilites-normale-continues-q2",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "sup-l2-probabilites-normale-continues",
+   "prompt": "$Φ(-1)$ vaut :",
+   "choices": [
+    "$-Φ(1)$",
+    "$1-Φ(1)$",
+    "$Φ(1)$",
+    "$\\frac{1}{Φ(1)}$"
+   ],
+   "answer": 1,
+   "explanation": "Symétrie de la loi normale centrée réduite."
+  },
+  {
+   "id": "sup-l2-probabilites-normale-continues-q3",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "sup-l2-probabilites-normale-continues",
+   "prompt": "Une densité de probabilité $f$ vérifie :",
+   "choices": [
+    "$f≤1$ partout",
+    "$f$ est croissante",
+    "$f(0)=0$",
+    "$f≥0$ et $\\int f=1$"
+   ],
+   "answer": 3,
+   "explanation": "Positivité et normalisation."
+  },
+  {
+   "id": "sup-l2-probabilites-normale-continues-q4",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "sup-l2-probabilites-normale-continues",
+   "prompt": "Pour une loi uniforme sur $[2\\,;8]$, l'espérance est :",
+   "choices": [
+    "5",
+    "6",
+    "3",
+    "10"
+   ],
+   "answer": 0,
+   "explanation": "$\\frac{2+8}{2}=5$."
+  },
+  {
+   "id": "sup-l2-probabilites-normale-continues-q5",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "sup-l2-probabilites-normale-continues",
+   "prompt": "Environ quelle proportion des valeurs d'une loi normale est dans $[μ-σ\\,;μ+σ]$ ?",
+   "choices": [
+    "50 %",
+    "95 %",
+    "68 %",
+    "99,9 %"
+   ],
+   "answer": 2,
+   "explanation": "$2Φ(1)-1≈0{,}683$."
+  }
+ ]
+}

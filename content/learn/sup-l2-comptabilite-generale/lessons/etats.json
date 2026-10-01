@@ -1,0 +1,497 @@
+{
+ "chapter": "sup-l2-comptabilite-generale-etats",
+ "lessons": [
+  {
+   "id": "sup-l2-comptabilite-generale-resultat-etats",
+   "title": "Résultat, bilan après répartition et états financiers",
+   "minutes": 55,
+   "programRef": "L2 — Résultat, répartition, bilan, états financiers (notions) (à vérifier sur la maquette)",
+   "status": "draft",
+   "author": "CastBridge (brouillon IA)",
+   "source": "Rédaction originale ; à relire par un enseignant",
+   "objectives": [
+    "Déterminer le résultat de l'exercice après les opérations d'inventaire.",
+    "Répartir un résultat (réserve, dividendes, report à nouveau) à partir de données fournies.",
+    "Dresser un bilan avant puis après répartition.",
+    "Citer le contenu général des états financiers annuels."
+   ],
+   "prerequisites": [
+    "sup-l2-comptabilite-generale-stocks-regul"
+   ],
+   "exercises": [
+    "sup-l2-comptabilite-generale-resultat-etats-01",
+    "sup-l2-comptabilite-generale-resultat-etats-02",
+    "sup-l2-comptabilite-generale-resultat-etats-03",
+    "sup-l2-comptabilite-generale-resultat-etats-04",
+    "sup-l2-comptabilite-generale-resultat-etats-05",
+    "sup-l2-comptabilite-generale-resultat-etats-06",
+    "sup-l2-comptabilite-generale-resultat-etats-07"
+   ],
+   "selfCheck": [
+    "sup-l2-comptabilite-generale-resultat-etats-q1",
+    "sup-l2-comptabilite-generale-resultat-etats-q2",
+    "sup-l2-comptabilite-generale-resultat-etats-q3",
+    "sup-l2-comptabilite-generale-resultat-etats-q4",
+    "sup-l2-comptabilite-generale-resultat-etats-q5"
+   ],
+   "reviewNotes": [
+    "Taux de mise en réserve : donnée d'énoncé (10 %) ; aucune règle légale n'est affirmée. À confronter aux dispositions en vigueur (Acte uniforme sur les sociétés commerciales) et au cours.",
+    "États financiers : liste générale (bilan, compte de résultat, tableau des flux de trésorerie, notes annexes) ; vérifier la liste et les noms exacts du système normal du SYSCOHADA révisé.",
+    "Bilan en présentation simplifiée (sans sous-totaux ni numéros de comptes)."
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "methode",
+     "title": "Du résultat avant inventaire au résultat net",
+     "md": "On part du résultat provisoire constaté avant les opérations d'inventaire, puis on intègre toutes les **écritures d'inventaire** : dotations aux amortissements, dépréciations et provisions (charges), régularisations (charges et produits), variation de stocks.",
+     "tex": "\\text{Résultat net} = \\text{Produits} - \\text{Charges}"
+    },
+    {
+     "type": "example",
+     "title": "Exemple 1 — résultat après inventaire",
+     "statement": "Avant inventaire : produits 12 000 000 ; charges 9 095 000. À l'inventaire : dotation aux amortissements 900 000 ; dotation aux dépréciations 400 000 ; charge à payer 85 000 ; charge constatée d'avance 360 000 ; produit constaté d'avance 600 000 ; produit à recevoir 120 000. Calcule le résultat net.",
+     "steps": [
+      {
+       "md": "Résultat avant inventaire = 12 000 000 − 9 095 000 = 2 905 000."
+      },
+      {
+       "md": "Charges supplémentaires : 900 000 + 400 000 + 85 000 = 1 385 000 ; charges évitées (constatées d'avance) : − 360 000."
+      },
+      {
+       "md": "Produits : − 600 000 (produit constaté d'avance) + 120 000 (à recevoir) = − 480 000."
+      },
+      {
+       "md": "Résultat net = 2 905 000 − 1 385 000 + 360 000 − 480 000 = 1 400 000.",
+       "tex": "2905000 - 1\\,385\\,000 + 360\\,000 - 480\\,000 = 1400000"
+      }
+     ],
+     "answer": "**Résultat net : bénéfice de 1 400 000 FCFA.**"
+    },
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Affectation du résultat",
+     "md": "Le bénéfice est soumis à l'assemblée des associés, qui décide de son **affectation** : mise en **réserves**, versement de **dividendes**, ou **report à nouveau** (bénéfice conservé en attente). Une **perte** peut être reportée à nouveau ou imputée sur les réserves. Les taux de réserve ou de dividende sont ici **fournis par l'énoncé**.",
+     "review": true
+    },
+    {
+     "type": "example",
+     "title": "Exemple 2 — bilan avant et après répartition",
+     "statement": "Bilan avant répartition (passif) : capital 5 000 000 ; réserves 600 000 ; résultat de l'exercice 1 400 000 ; dettes 2 500 000. L'assemblée décide (données fournies) : 10 % du bénéfice en réserves, dividendes de 700 000, le reste en report à nouveau. Établis le passif après répartition.",
+     "steps": [
+      {
+       "md": "Total du passif avant répartition = 5 000 000 + 600 000 + 1 400 000 + 2 500 000 = 9 500 000."
+      },
+      {
+       "md": "Réserve = 10 % × 1 400 000 = 140 000 ; dividendes = 700 000 ; report à nouveau = 1 400 000 − 140 000 − 700 000 = 560 000."
+      },
+      {
+       "md": "Après répartition : capital 5 000 000 ; réserves 740 000 ; report à nouveau 560 000 ; dettes 2 500 000 + dividendes à payer 700 000 = 3 200 000."
+      },
+      {
+       "md": "Total = 5 000 000 + 740 000 + 560 000 + 3 200 000 = 9 500 000 : le total du bilan est inchangé ; le résultat a disparu en devenant réserves, report et dette envers les associés."
+      }
+     ],
+     "answer": "**Passif après répartition : capital 5 000 000 ; réserves 740 000 ; report à nouveau 560 000 ; dettes 3 200 000 (total 9 500 000).**"
+    },
+    {
+     "type": "illustration",
+     "figure": {
+      "kind": "shapes",
+      "w": 460,
+      "h": 260,
+      "items": [
+       {
+        "t": "rect",
+        "x": 10,
+        "y": 20,
+        "w": 210,
+        "h": 220,
+        "fill": "lightgreen",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "rect",
+        "x": 240,
+        "y": 20,
+        "w": 210,
+        "h": 220,
+        "fill": "lightyellow",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 115,
+        "y": 44,
+        "text": "Avant répartition",
+        "size": 15,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 345,
+        "y": 44,
+        "text": "Après répartition",
+        "size": 15,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 20,
+        "y": 82,
+        "text": "Capital : 5000 k",
+        "size": 13,
+        "color": "ink",
+        "anchor": "start"
+       },
+       {
+        "t": "text",
+        "x": 20,
+        "y": 112,
+        "text": "Réserves : 600 k",
+        "size": 13,
+        "color": "ink",
+        "anchor": "start"
+       },
+       {
+        "t": "text",
+        "x": 20,
+        "y": 142,
+        "text": "Résultat : 1400 k",
+        "size": 13,
+        "color": "ink",
+        "anchor": "start"
+       },
+       {
+        "t": "text",
+        "x": 20,
+        "y": 172,
+        "text": "Dettes : 2500 k",
+        "size": 13,
+        "color": "ink",
+        "anchor": "start"
+       },
+       {
+        "t": "text",
+        "x": 250,
+        "y": 82,
+        "text": "Capital : 5000 k",
+        "size": 13,
+        "color": "ink",
+        "anchor": "start"
+       },
+       {
+        "t": "text",
+        "x": 250,
+        "y": 112,
+        "text": "Réserves : 740.0 k",
+        "size": 13,
+        "color": "ink",
+        "anchor": "start"
+       },
+       {
+        "t": "text",
+        "x": 250,
+        "y": 142,
+        "text": "Report à nouveau : 560.0 k",
+        "size": 13,
+        "color": "ink",
+        "anchor": "start"
+       },
+       {
+        "t": "text",
+        "x": 250,
+        "y": 172,
+        "text": "Dettes : 3200 k",
+        "size": 13,
+        "color": "ink",
+        "anchor": "start"
+       },
+       {
+        "t": "text",
+        "x": 115,
+        "y": 226,
+        "text": "Total : 9 500 k",
+        "size": 14,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 345,
+        "y": 226,
+        "text": "Total : 9 500 k",
+        "size": 14,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       }
+      ]
+     },
+     "caption": "Passif avant et après répartition (milliers de FCFA).",
+     "alt": "Deux colonnes. Avant : capital 5 000, réserves 600, résultat 1 400, dettes 2 500. Après : capital 5 000, réserves 740, report à nouveau 560, dettes 3 200 (dont dividendes à payer 700). Total 9 500 de chaque côté."
+    },
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Les états financiers annuels (notions)",
+     "md": "À la clôture, l'entité établit des **états financiers** : le **bilan** (situation patrimoniale), le **compte de résultat** (performance), le **tableau des flux de trésorerie** (origine et emploi de la trésorerie) et les **notes annexes** (méthodes, détails, engagements). Ils doivent donner une **image fidèle** de la situation. Le contenu exact dépend du système (normal ou allégé) prévu par le référentiel.",
+     "review": true
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Erreurs fréquentes",
+     "md": "- Oublier une opération d'inventaire dans le calcul du **résultat net**.\n- Traiter les **dividendes** comme une charge : ils sont une **affectation** du résultat, non une charge.\n- Mettre les dividendes à payer en **capitaux propres** après répartition : ce sont des **dettes**.\n- Oublier que le **total du bilan** ne change pas par la seule répartition."
+    },
+    {
+     "type": "more",
+     "items": [
+      "Le **tableau des flux de trésorerie** explique la variation de la trésorerie : flux d'exploitation, d'investissement, de financement.",
+      "La **capacité d'autofinancement** (résultat + charges calculées non décaissées) mesure les ressources internes dégagées.",
+      "Un **audit** ou une **certification** des comptes peut être exigé selon la taille de l'entité."
+     ]
+    },
+    {
+     "type": "exercise",
+     "ref": "sup-l2-comptabilite-generale-resultat-etats-01"
+    }
+   ]
+  }
+ ],
+ "exercises": [
+  {
+   "id": "sup-l2-comptabilite-generale-resultat-etats-01",
+   "kind": "numeric",
+   "tier": "application",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "sup-l2-comptabilite-generale-resultat-etats",
+   "prompt": "Résultat avant inventaire : 1 800 000 ; dotation aux amortissements : 500 000 ; dépréciation : 150 000. Calcule le résultat net.",
+   "explanation": "1 800 000 − 500 000 − 150 000 = 1 150 000 FCFA.",
+   "source": "Exercice original",
+   "answer": 1150000.0,
+   "tolerance": 0,
+   "unit": "FCFA"
+  },
+  {
+   "id": "sup-l2-comptabilite-generale-resultat-etats-02",
+   "kind": "numeric",
+   "tier": "application",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "sup-l2-comptabilite-generale-resultat-etats",
+   "prompt": "Bénéfice : 2 000 000 ; mise en réserve de 10 % (donnée). Calcule la réserve.",
+   "explanation": "2 000 000 × 0,10 = 200 000.",
+   "source": "Exercice original",
+   "answer": 200000.0,
+   "tolerance": 0,
+   "unit": "FCFA"
+  },
+  {
+   "id": "sup-l2-comptabilite-generale-resultat-etats-03",
+   "kind": "truefalse",
+   "tier": "application",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "sup-l2-comptabilite-generale-resultat-etats",
+   "prompt": "Les dividendes votés mais non encore payés sont des dettes envers les associés.",
+   "explanation": "Après décision de l'assemblée, ils sont une dette à payer.",
+   "source": "Exercice original",
+   "answer": true
+  },
+  {
+   "id": "sup-l2-comptabilite-generale-resultat-etats-04",
+   "kind": "numeric",
+   "tier": "approfondissement",
+   "difficulty": 2,
+   "points": 2,
+   "lesson": "sup-l2-comptabilite-generale-resultat-etats",
+   "prompt": "Bénéfice 1 500 000 ; réserve 150 000 ; dividendes 800 000. Calcule le report à nouveau.",
+   "explanation": "1 500 000 − 150 000 − 800 000 = 550 000.",
+   "source": "Exercice original",
+   "answer": 550000.0,
+   "tolerance": 0,
+   "unit": "FCFA"
+  },
+  {
+   "id": "sup-l2-comptabilite-generale-resultat-etats-05",
+   "kind": "mcq",
+   "tier": "approfondissement",
+   "difficulty": 2,
+   "points": 2,
+   "lesson": "sup-l2-comptabilite-generale-resultat-etats",
+   "prompt": "Quelle affirmation est exacte à propos du bilan avant et après répartition ?",
+   "explanation": "La répartition recompose le passif sans changer le total.",
+   "mistakes": [
+    "Croire que les dividendes disparaissent du bilan."
+   ],
+   "source": "Exercice original",
+   "choices": [
+    "Le total est inchangé",
+    "Le total augmente du montant des dividendes",
+    "Les dettes diminuent",
+    "Le résultat reste sous son nom"
+   ],
+   "answer": 0
+  },
+  {
+   "id": "sup-l2-comptabilite-generale-resultat-etats-06",
+   "kind": "open",
+   "tier": "approfondissement",
+   "difficulty": 2,
+   "points": 3,
+   "lesson": "sup-l2-comptabilite-generale-resultat-etats",
+   "prompt": "Cite les états financiers annuels et explique en une phrase le rôle de chacun.",
+   "explanation": "Quatre états complémentaires.",
+   "method": "Un état par question : quoi, performance, trésorerie, détails.",
+   "source": "Exercice original",
+   "model": "Le bilan montre le patrimoine à la clôture ; le compte de résultat récapitule charges et produits de l'exercice et donne le résultat ; le tableau des flux de trésorerie explique la variation de la trésorerie ; les notes annexes précisent les méthodes et détaillent les postes.",
+   "rubric": [
+    "Bilan",
+    "Compte de résultat",
+    "Tableau des flux de trésorerie",
+    "Notes annexes"
+   ]
+  },
+  {
+   "id": "sup-l2-comptabilite-generale-resultat-etats-07",
+   "kind": "problem",
+   "tier": "examen",
+   "difficulty": 3,
+   "lesson": "sup-l2-comptabilite-generale-resultat-etats",
+   "prompt": "Une société fictive présente avant inventaire un résultat provisoire de 3 400 000 FCFA. À l'inventaire : dotation aux amortissements 1 000 000 ; dotation aux dépréciations 300 000 ; charges constatées d'avance 200 000 ; produits constatés d'avance 150 000. Passif avant répartition : capital 4 000 000 ; réserves 500 000 ; dettes 1 800 000. L'assemblée décide (données fournies) : 10 % du bénéfice en réserves, dividendes de 1 000 000, le solde en report à nouveau.",
+   "method": "Résultat net, puis affectation, puis recomposition du passif.",
+   "mistakes": [
+    "Compter les dividendes comme charge."
+   ],
+   "source": "Exercice original",
+   "parts": [
+    {
+     "id": "sup-l2-comptabilite-generale-resultat-etats-07-a",
+     "points": 1,
+     "prompt": "Résultat net de l'exercice ?",
+     "explanation": "3 400 000 − 1 000 000 − 300 000 + 200 000 − 150 000 = 2 150 000.",
+     "kind": "numeric",
+     "answer": 2150000.0,
+     "tolerance": 0
+    },
+    {
+     "id": "sup-l2-comptabilite-generale-resultat-etats-07-b",
+     "points": 1,
+     "prompt": "Réserve (10 %) ?",
+     "explanation": "10 % × 2 150 000 = 215 000.",
+     "kind": "numeric",
+     "answer": 215000.0,
+     "tolerance": 0
+    },
+    {
+     "id": "sup-l2-comptabilite-generale-resultat-etats-07-c",
+     "points": 1,
+     "prompt": "Report à nouveau ?",
+     "explanation": "2 150 000 − 215 000 − 1 000 000 = 935 000.",
+     "kind": "numeric",
+     "answer": 935000.0,
+     "tolerance": 0
+    },
+    {
+     "id": "sup-l2-comptabilite-generale-resultat-etats-07-d",
+     "points": 1,
+     "prompt": "Total du passif après répartition ?",
+     "explanation": "Total inchangé : capital 4 000 000 + réserves 715 000 + report 935 000 + dettes 2 800 000 = 8 450 000.",
+     "kind": "numeric",
+     "answer": 8450000.0,
+     "tolerance": 0
+    }
+   ]
+  },
+  {
+   "id": "sup-l2-comptabilite-generale-resultat-etats-q1",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "sup-l2-comptabilite-generale-resultat-etats",
+   "prompt": "Les dividendes sont :",
+   "choices": [
+    "Une charge de l'exercice",
+    "Un produit",
+    "Une affectation du résultat",
+    "Un amortissement"
+   ],
+   "answer": 2,
+   "explanation": "Ils sont prélevés sur le bénéfice."
+  },
+  {
+   "id": "sup-l2-comptabilite-generale-resultat-etats-q2",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "sup-l2-comptabilite-generale-resultat-etats",
+   "prompt": "Le report à nouveau est :",
+   "choices": [
+    "Un emprunt",
+    "Une dépréciation",
+    "La part du résultat conservée en attente d'affectation",
+    "Une charge à payer"
+   ],
+   "answer": 2,
+   "explanation": "Bénéfice conservé."
+  },
+  {
+   "id": "sup-l2-comptabilite-generale-resultat-etats-q3",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "sup-l2-comptabilite-generale-resultat-etats",
+   "prompt": "Après répartition, les dividendes décidés mais non payés figurent :",
+   "choices": [
+    "En dettes",
+    "En produits",
+    "À l'actif",
+    "En capital"
+   ],
+   "answer": 0,
+   "explanation": "Dette envers les associés."
+  },
+  {
+   "id": "sup-l2-comptabilite-generale-resultat-etats-q4",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "sup-l2-comptabilite-generale-resultat-etats",
+   "prompt": "Un tableau des flux de trésorerie décrit :",
+   "choices": [
+    "La liste des clients",
+    "La variation de la trésorerie",
+    "Le stock",
+    "Les salaires de chaque employé"
+   ],
+   "answer": 1,
+   "explanation": "Origine et emploi de la trésorerie."
+  },
+  {
+   "id": "sup-l2-comptabilite-generale-resultat-etats-q5",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "sup-l2-comptabilite-generale-resultat-etats",
+   "prompt": "Le total du bilan après répartition par rapport à avant est :",
+   "choices": [
+    "Identique",
+    "Doublé",
+    "Augmenté du bénéfice",
+    "Diminué du dividende"
+   ],
+   "answer": 0,
+   "explanation": "La répartition recompose le passif."
+  }
+ ]
+}
