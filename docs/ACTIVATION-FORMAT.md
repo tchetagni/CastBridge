@@ -1,6 +1,6 @@
 # Format filaire des activations (version 1)
 
-> **Spécification exacte**, destinée aux trois outils d'émission (application de bureau, console du téléphone propriétaire, serveur) et au vérificateur de la TV/du téléphone. Elle est **vérifiée par deux implémentations indépendantes** : le code Kotlin de `core` (`castbridge.core.owner`, `ActivationIssuer`, `ActivationVerifier`) et `tools/activation/verify_vectors.py` (Python, écrit à partir de ce seul document), sur les **65 vecteurs** de `tools/activation/test-vectors.json` (valides **et** invalides, 70 contrôles). **Mêmes entrées → mêmes octets** : les signatures Ed25519 sont déterministes. **Ne jamais écrire un quatrième format.**
+> **Spécification exacte**, destinée aux trois outils d'émission (application de bureau, console du téléphone propriétaire, serveur) et au vérificateur de la TV/du téléphone. Elle est **vérifiée par deux implémentations indépendantes** : le code Kotlin de `core` (`castbridge.core.owner`, `ActivationIssuer`, `ActivationVerifier`) et `tools/activation/verify_vectors.py` (Python, écrit à partir de ce seul document), sur les **78 vecteurs** de `tools/activation/test-vectors.json` (valides **et** invalides, 86 contrôles : identité, codages, activations, clé compacte, commandes, émission, **licences et transferts**). **Mêmes entrées → mêmes octets** : les signatures Ed25519 sont déterministes. **Ne jamais écrire un quatrième format.**
 > Cadre : [TRIAL-EDITION.md](TRIAL-EDITION.md) · console : [OWNER-CONSOLE.md](OWNER-CONSOLE.md). **Aucun secret** : les graines des vecteurs sont des clés de **test** dérivées de textes publics.
 
 ## 0. Conventions
@@ -131,11 +131,57 @@ Après la **poignée** `CBTO` (4 octets ASCII), des trames `[type : 1 octet][lon
 ## 6. Temps sur la TV (rappel pour les émetteurs)
 La TV retient `max(horloge, dernier instant vu, plancher signé)` ; un retour en arrière ne change rien ; un saut en avant de plus de **400 jours** n'est pas cru tant qu'un message signé ne le confirme pas (`TvClock`). Un émetteur choisit donc **`issuedAt` = l'heure réelle de l'émission** (jamais dans le futur) et une fenêtre `notBefore` ≤ `issuedAt`.
 
-## 7. Révocation, licences, postes, transfert
-Voir § 8 à 10 (licence et registre signé, transfert, liste de révocation `cbr1`), ajoutés avec le modèle de licence.
+## 7. Révocation (`cbr1`)
+Liste signée de ce qu'un appareil doit **oublier** : des **clés** (`kid`) et des **postes** (`licence|poste` avec une date). Jeton `cbr1.` + Base64url(charge utile) + `.` + Base64(signature) ; charge utile (une ligne par champ, clés triées puis postes triés) :
+```
+castbridge-revocation-v1
+kid=<signataire>
+issuedAt=<ms>
+key=<kid révoqué>              (0 ou plusieurs, triées)
+seat=<licence>|<poste>|<date ms>   (0 ou plusieurs, triées)
+```
+Signée par une clé **connue, non révoquée, portée `REVOKE`**, forme canonique obligatoire. L'appareil la **fusionne** à son état (`RevocationState` : union des clés, maximum des dates par poste) et l'applique à toute activation : clé révoquée → `REVOKED_KEY` ; **poste** révoqué si `issuedAt` de l'activation **≤ date** (une activation **réémise après** la révocation pour le même poste est valide : c'est ainsi que le nouveau matériel d'un transfert est accepté). Livrée par Bluetooth, par fichier sur la clé USB ou par le serveur à la connexion suivante. **Limite honnête** : hors ligne, un appareil ne l'apprend qu'à son prochain message signé.
 
-## 8–10. (suite : licences, registre, transfert)
-*(Section complétée par le modèle de licence : voir la fin de ce document.)*
+## 8. Licences, postes et registre
+Une **licence** est l'unité de décompte : un `licenseId` par achat, un **nombre de postes**, un **plafond de transferts par an** (2 par défaut, réglable), les droits portés par ses activations. Un **poste** = « cette licence sur ce matériel » (téléphone et TV sont des postes distincts : `subject`). Les clés d'**essai** (`license=trial`) sont journalisées mais **ne comptent jamais** comme poste.
+
+Tout ce que font les outils s'écrit sous forme d'**événements signés** ; le **registre** est l'ensemble des événements (fichier JSON, § 9). Rejouer les événements donne l'état : **la fusion de deux registres est une union**, sans doublon, **indépendante de l'ordre**.
+
+### 8.1 Événement
+```
+castbridge-licence-event-v1
+type=<license|issue|transfer|revoke>
+kid=<signataire>
+at=<ms>
+… champs du type …
+factor=<TYPE>|<32 hex>     (issue et transfer : l'ensemble des empreintes, ordre canonique)
+```
+Signature **Ed25519** des octets UTF-8 du texte ; **identifiant** de l'événement = `hex( SHA-256( kid + "|" + texte )[0:8] )`. Champs : `license` (`license`, `seats`, `maxTransfersPerYear`) ; `issue` (`license`, `seat`, `subject`, `kind`, `nonce`, `notAfter`, `k`, `at` = `issuedAt` de l'activation) ; `transfer` (`license`, `seat`, `k`, `nonce`, `at`, facteurs = **nouveau** matériel) ; `revoke` (`target` = `key` ou `seat`, `value` = `kid` ou `licence|poste`).
+**Portée exigée** : `license` et `issue` → `ISSUE_PRODUCTION` (`ISSUE_TRIAL` si `kind=trial`) ; `transfer` → **`TRANSFER` (jamais la clé serveur)** ; `revoke` → `REVOKE`.
+
+### 8.2 Rejeu (règles exactes, identiques dans les trois outils)
+Dédoublonner par identifiant, trier par `(at, identifiant)`, puis pour chaque événement : clé inconnue → `UNKNOWN_KEY` ; clé révoquée → `REVOKED_KEY` ; signature fausse → `BAD_SIGNATURE` ; type inconnu → `MALFORMED` ; portée absente → `KEY_NOT_ALLOWED` (l'événement est **ignoré** et listé dans les rejets). Puis :
+- `license` : crée la licence (le premier gagne).
+- `issue` : licence `trial` → ignoré ; licence inconnue → `UNKNOWN_LICENSE` ; poste déjà connu (ou fusionné) → mise à jour ; sinon, si un poste **du même type d'appareil** de la licence **correspond au matériel** (k parmi n, § 1.3) sous un autre identifiant → **doublon matériel** : le plus ancien est gardé, l'autre devient son alias, **compté une fois** ; sinon **nouveau poste** (avertissement si on dépasse le nombre de postes : **signalé, jamais caché**, l'activation étant déjà émise).
+- `transfer` : licence ou poste inconnu → `UNKNOWN_LICENSE` ; si les transferts de la licence sur l'**année glissante** (date > `at − 365 jours` et ≤ `at`) atteignent le plafond → `TRANSFER_LIMIT` (rejeté) ; sinon le poste prend les **nouveaux facteurs** et une **révocation du poste** est enregistrée à la date `at` (l'ancienne activation, émise avant, est révoquée).
+- `revoke` : ajoute la clé ou le poste (date) aux révocations.
+
+### 8.3 Ré-activation (même matériel, sans consommer un poste)
+`plan(licence, sujet, facteurs)` : si un poste de cette licence et de ce sujet **correspond** au matériel (au moins k facteurs sur n, § 1.3, donc même après le remplacement d'un module) → **réutiliser ce poste** (`seat` inchangé, nouveau `nonce`/`issuedAt` : **aucun poste consommé**, quel que soit l'outil qui répond) ; sinon, s'il reste un poste → **nouveau poste** (`seat` par défaut `SHA-256("castbridge-seat|licence|hex(H)")[0:8]`, **identique dans les trois outils**) ; sinon **refus** `NO_SEAT_LEFT` (il faut un transfert). Côté TV, une application **réinstallée** sur le même matériel **retrouve** son fichier `activation` (clé USB `Download/CastBridge/`, copie gardée par le téléphone qui l'a livré, renvoi par Bluetooth) et le **revérifie hors ligne** (§ 3.5) ; si le fichier est perdu, n'importe quel outil réémet **la même activation** pour le même code d'appareil.
+
+### 8.4 Transfert
+Événement `transfer` (portée `TRANSFER` : bureau et téléphone propriétaire, **jamais le serveur** ; un registre qui contient un transfert signé par une clé sans cette portée le **rejette** à la fusion). Effets : le poste suit le nouveau matériel, l'ancienne activation est révoquée (à `at`) dès que la **liste de révocation** (§ 7) atteint l'ancienne TV ; une **nouvelle activation** est émise pour le nouveau matériel **avec `issuedAt` > `at`** (même `license` et même `seat`). Plafond : **2 par licence et par an** (réglable par licence).
+**Limite honnête** : hors ligne, l'ancienne TV **n'apprend pas** qu'elle a perdu ses droits ; la protection est **comptable** (le registre dit qui a quel poste). En ligne, le serveur compte les postes et peut pousser une révocation que la TV applique à sa prochaine connexion.
+
+## 9. Fichier de registre (synchronisation des trois outils)
+```json
+{"format": "castbridge-licence-registry-v1",
+ "events": [ {"id": "<16 hex>", "kid": "<16 hex>", "text": "<texte canonique de l'événement>", "signature": "<Base64>"} , … ]}
+```
+Export : événements triés par `(at, id)`, sans doublon. **Import** : on **ignore** (jamais on ne se fie à) toute entrée dont l'`id` ne correspond pas au texte ; les **signatures sont vérifiées au rejeu**, pas à l'import. **Fusion** = union par identifiant ; l'état (`postes`, `utilisés`, `transferts`, `doublons`, `rejets`, `révocations`) est le même quel que soit l'ordre ou le nombre de fusions (testé : trois journaux fusionnés dans deux ordres, fusion répétée). Qui a émis quoi : chaque événement `issue` porte le `kid` de l'outil ; un **même poste émis par deux outils** apparaît dans `issuedBy` et, s'il l'a été sous deux identifiants, dans les **doublons**.
+
+## 10. Messages d'erreur d'émission
+`ActivationIssuer` refuse (`IssueException`, message français) : code d'appareil mal formé ou ne correspondant pas aux empreintes, durée hors de 1 à 366 jours, droit sans produit ou sans bouquet valide, abonnement dont la fin précède le début ou tolérance > 30 jours, « tout ouvert » > 30 jours ou sans la portée, clé d'essai avec des droits, production sans droit, portée de la clé insuffisante, nonce ou poste mal formés. Les vecteurs `build-activation` contiennent des **refus** attendus.
 
 ## 11. Vecteurs de test
-`tools/activation/test-vectors.json` : `keys` (graines de test, clés publiques, `kid`, portées), `devices` (facteurs bruts, empreintes, code), puis `cases` de types : `fingerprints`, `base32`, `grouped`, `grouped-decode`, `device-code-parse`, `activation` (jeton, appareil, instant, clés de confiance, clés révoquées, postes révoqués → résultat et raison), `compact`, `command` (défis ouverts, étapes successives : rejeu), `build-activation`, `build-compact`, `build-command` (**mêmes entrées → mêmes octets**, dont des **refus** : durée hors bornes, portée absente, code mal formé, droit hors limite). Un outil est conforme s'il passe **tous** les vecteurs. `python3 tools/activation/verify_vectors.py` en est une implémentation de référence (à lire avant d'écrire la sienne). **Régénération** (changement de format voulu) : `CASTBRIDGE_WRITE_VECTORS=1 gradle :core:test --tests '*ActivationVectorsTest*'`.
+`tools/activation/test-vectors.json` : `keys` (graines de test, clés publiques, `kid`, portées), `devices` (facteurs bruts, empreintes, code), puis `cases` de types : `fingerprints`, `base32`, `grouped`, `grouped-decode`, `device-code-parse`, `activation` (jeton, appareil, instant, clés de confiance, clés révoquées, postes révoqués → résultat et raison), `compact`, `command` (défis ouverts, étapes successives : rejeu), `licence` (événements signés → postes utilisés, doublons, transferts, rejets, plans de ré-activation), `build-activation`, `build-compact`, `build-command` (**mêmes entrées → mêmes octets**, dont des **refus** : durée hors bornes, portée absente, code mal formé, droit hors limite). Un outil est conforme s'il passe **tous** les vecteurs. `python3 tools/activation/verify_vectors.py` en est une implémentation de référence (à lire avant d'écrire la sienne). **Régénération** (changement de format voulu) : `CASTBRIDGE_WRITE_VECTORS=1 gradle :core:test --tests '*ActivationVectorsTest*'`.

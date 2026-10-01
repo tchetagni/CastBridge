@@ -38,6 +38,9 @@ class ActivationVectorsTest {
         Dev("tvB-no-ethernet-usb-wifi", RawFactors("FLASHSERIAL-B2", "cid-b2", null, "10:20:30:40:50:02", usb, "SYSB0002", "11:22:33:44:55:02")),
         Dev("tvC-weak", RawFactors(systemSerial = "SYSC0003")),
         Dev("phoneP", RawFactors(systemSerial = "androidid:9774d56d682e549c")),
+        Dev("tvN1", RawFactors("FLASHSERIAL-N1", "cid-n1", "AA:BB:CC:00:11:11", "10:20:30:40:50:11", soldered, "SYSN0001", "11:22:33:44:55:11")),
+        Dev("tvN2", RawFactors("FLASHSERIAL-N2", "cid-n2", "AA:BB:CC:00:11:12", "10:20:30:40:50:12", soldered, "SYSN0002", "11:22:33:44:55:12")),
+        Dev("tvN3", RawFactors("FLASHSERIAL-N3", "cid-n3", "AA:BB:CC:00:11:13", "10:20:30:40:50:13", soldered, "SYSN0003", "11:22:33:44:55:13")),
     )
     private fun dev(n: String) = devices.first { it.name == n }
 
@@ -192,11 +195,62 @@ class ActivationVectorsTest {
         cases += refuse("build-refuse-no-rights", "production sans droit", "desk", req("tvA", rights = emptyList()), "tvA")
         cases += J("type" to "build-activation", "id" to "build-refuse-bad-code", "description" to "code d'appareil mal formé", "signer" to "desk",
             "request" to reqJson(req("tvA"), "tvA") + mapOf("deviceCodeOverride" to "ABCD-EFGH-JKMN-PQRZ"), "expect" to J("refused" to true))
+        cases += licenceCases()
         return J("format" to "castbridge-activation-test-vectors-v1", "warning" to "CLÉS DE TEST UNIQUEMENT : ces graines sont dérivées de textes publics et ne valent rien ; ne jamais les utiliser ailleurs que dans les tests",
             "nowMs" to t0, "compactEpochMs" to CompactActivation.EPOCH_MS,
             "keys" to keys.map { J("name" to it.name, "seed" to hex(seedOf(it.name)), "publicKey" to it.signer.publicKeyBase64, "kid" to it.signer.keyId, "scopes" to it.scopes.map { s -> s.name }.sorted()) },
             "devices" to devices.map { J("name" to it.name, "raw" to rawJson(it.raw), "code" to it.code, "fingerprints" to it.fp.byKind.mapKeys { e -> e.key.name }) },
             "cases" to cases)
+    }
+
+    // ---- licences: events -> state (the three tools must apply the same accounting) ----
+    private fun licenceCases(): List<Map<String, Any?>> {
+        fun sg(k: String) = key(k).signer
+        fun act(k: String, d: String, license: String, at: Long = t0, seat: String? = null, nonce: String = "00112233445566778899aabbccddeeff") =
+            issuer(k).issue(req(d, license = license, issuedAt = at, notBefore = at - day, seat = seat, nonce = nonce)).activation
+        val lic1 = LicenseEvent.license(sg("desk"), t0 - 10 * day, "lic-0001", 2, 2)
+        fun evJson(e: LicenseEvent) = J("id" to e.id, "kid" to e.keyId, "text" to e.text, "signature" to e.signature)
+        fun case(id: String, why: String, events: List<LicenseEvent>, plans: List<Triple<String, String, String>> = emptyList(), subjects: Map<String, Subject> = emptyMap()): Map<String, Any?> {
+            val ring = ringOf(listOf("desk", "phone", "server"), emptyList())
+            val st = LicenseBook.replay(events, ring)
+            val planOut = plans.map { (lic, dev, subj) ->
+                val p = LicenseBook.plan(st, lic, Subject.valueOf(subj.uppercase()), dev(dev).fp)
+                J("license" to lic, "device" to dev, "subject" to subj, "expect" to when (p) {
+                    is Plan.Reuse -> J("plan" to "reuse", "seat" to p.seat.seatId)
+                    is Plan.NewSeat -> J("plan" to "new", "seat" to p.seatId, "left" to p.seatsLeftAfter)
+                    is Plan.Refused -> J("plan" to "refused", "reason" to p.reason.name)
+                })
+            }
+            return J("type" to "licence", "id" to id, "description" to why, "trustedKeys" to listOf("desk", "phone", "server"), "events" to events.map(::evJson), "plans" to planOut,
+                "expect" to J("seats" to st.seats.values.map { "${it.license}|${it.seatId}" }.sorted(), "used" to st.licenses.keys.sorted().associateWith { st.usedSeats(it) },
+                    "transfers" to st.transfers.size, "duplicates" to st.duplicates.size, "rejected" to st.rejected.map { it.second.name }.sorted(), "revokedSeats" to st.revocations.seats.toSortedMap(),
+                    "warnings" to st.warnings.size))
+        }
+        val a1 = act("desk", "tvA", "lic-0001"); val a1b = act("phone", "tvA", "lic-0001", t0 + day, a1.seat, "ffeeddccbbaa99887766554433221100")
+        val a2 = act("desk", "tvB-no-ethernet-usb-wifi", "lic-0001", t0 + 2 * day)
+        val swapped = act("phone", "tvA-swapped-wifi", "lic-0001", t0 + day)
+        val out = ArrayList<Map<String, Any?>>()
+        out += case("lic-seat-reuse", "même matériel : le poste est réutilisé quel que soit l'outil (aussi avec un module remplacé), un autre matériel prend le second poste",
+            listOf(lic1, LicenseEvent.issue(sg("desk"), a1), LicenseEvent.issue(sg("phone"), a1b)),
+            listOf(Triple("lic-0001", "tvA", "tv"), Triple("lic-0001", "tvA-swapped-wifi", "tv"), Triple("lic-0001", "tvB-no-ethernet-usb-wifi", "tv"), Triple("lic-0001", "tvA", "phone"), Triple("nope", "tvA", "tv")))
+        out += case("lic-no-seat-left", "licence à un poste : le second matériel est refusé, il faut un transfert",
+            listOf(LicenseEvent.license(sg("desk"), t0 - 10 * day, "lic-0001", 1, 2), LicenseEvent.issue(sg("desk"), a1)), listOf(Triple("lic-0001", "tvB-no-ethernet-usb-wifi", "tv"), Triple("lic-0001", "tvA", "tv")))
+        out += case("lic-duplicate-hardware", "deux outils ont émis le même matériel sous deux identifiants de poste : détecté, compté une fois, le plus ancien gardé",
+            listOf(lic1, LicenseEvent.issue(sg("desk"), a1), LicenseEvent.issue(sg("phone"), swapped)))
+        out += case("lic-over-issued", "plus de postes émis que prévu : signalé (avertissement), jamais caché", listOf(LicenseEvent.license(sg("desk"), t0 - 10 * day, "lic-0001", 1, 2), LicenseEvent.issue(sg("desk"), a1), LicenseEvent.issue(sg("desk"), a2)))
+        val tr1 = LicenseEvent.transfer(sg("desk"), t0 + 5 * day, "lic-0001", a1.seat, dev("tvN1").fp, nonce = "a1a1a1a1a1a1a1a1")
+        out += case("lic-transfer-ok", "transfert du poste vers un autre matériel : l'ancien poste est révoqué, le nouveau matériel retrouve le poste",
+            listOf(lic1, LicenseEvent.issue(sg("desk"), a1), tr1), listOf(Triple("lic-0001", "tvN1", "tv"), Triple("lic-0001", "tvA", "tv")))
+        val tr2 = LicenseEvent.transfer(sg("phone"), t0 + 6 * day, "lic-0001", a1.seat, dev("tvN2").fp, nonce = "a2a2a2a2a2a2a2a2")
+        val tr3 = LicenseEvent.transfer(sg("desk"), t0 + 7 * day, "lic-0001", a1.seat, dev("tvN3").fp, nonce = "a3a3a3a3a3a3a3a3")
+        out += case("lic-transfer-cap", "plafond de 2 transferts par an : le troisième est refusé", listOf(lic1, LicenseEvent.issue(sg("desk"), a1), tr1, tr2, tr3))
+        val tr3late = LicenseEvent.transfer(sg("desk"), t0 + 400 * day, "lic-0001", a1.seat, dev("tvN3").fp, nonce = "a4a4a4a4a4a4a4a4")
+        out += case("lic-transfer-next-year", "un an plus tard le transfert est de nouveau permis", listOf(lic1, LicenseEvent.issue(sg("desk"), a1), tr1, tr2, tr3late))
+        out += case("lic-server-cannot-transfer", "la clé serveur n'a pas la portée transfer", listOf(lic1, LicenseEvent.issue(sg("desk"), a1), LicenseEvent.transfer(sg("server"), t0 + 5 * day, "lic-0001", a1.seat, dev("tvN1").fp, nonce = "b1b1b1b1b1b1b1b1")))
+        val forged = LicenseEvent(lic1.keyId, lic1.text.replace("seats=2", "seats=200"), lic1.signature)
+        out += case("lic-forged-and-unknown", "événement falsifié et événement d'une clé inconnue : refusés", listOf(forged, LicenseEvent.license(sg("rogue"), t0, "lic-evil", 99)))
+        out += case("lic-revoke-seat", "révocation explicite d'un poste", listOf(lic1, LicenseEvent.issue(sg("desk"), a1), LicenseEvent.revokeSeat(sg("server"), t0 + 3 * day, "lic-0001", a1.seat)))
+        return out
     }
 
     private fun rawJson(r: RawFactors) = J("flashSerial" to r.flashSerial, "flashCid" to r.flashCid, "ethernetMac" to r.ethernetMac, "wifiMac" to r.wifiMac, "wifiSysfsPath" to r.wifiSysfsPath, "systemSerial" to r.systemSerial, "bluetoothAddress" to r.bluetoothAddress)
@@ -278,6 +332,19 @@ class ActivationVectorsTest {
                 "device-code-parse" -> {
                     val p = DeviceCode.parse(c["text"] as String)
                     if (expect!!["result"] == "ok") assertEquals(expect["code"], p, id) else assertNull(p, id)
+                }
+                "licence" -> {
+                    @Suppress("UNCHECKED_CAST") val evs = (c["events"] as List<Map<String, Any?>>).map { LicenseEvent.fromMap(it) ?: LicenseEvent(it["kid"] as String, it["text"] as String, it["signature"] as String) }
+                    val ring = KeyRing(trusted(c["trustedKeys"] as List<*>))
+                    val st = LicenseBook.replay(evs, ring)
+                    assertEquals(expect!!["seats"], st.seats.values.map { "${it.license}|${it.seatId}" }.sorted(), id)
+                    assertEquals((expect["transfers"] as Number).toInt(), st.transfers.size, id); assertEquals((expect["duplicates"] as Number).toInt(), st.duplicates.size, id)
+                    assertEquals(expect["rejected"], st.rejected.map { it.second.name }.sorted(), id)
+                    for (p in c["plans"] as List<*>) {
+                        @Suppress("UNCHECKED_CAST") val pm = p as Map<String, Any?>; @Suppress("UNCHECKED_CAST") val pe = pm["expect"] as Map<String, Any?>
+                        val plan = LicenseBook.plan(st, pm["license"] as String, Subject.valueOf((pm["subject"] as String).uppercase()), fp(pm["device"] as String))
+                        when (pe["plan"]) { "reuse" -> assertEquals(pe["seat"], (plan as Plan.Reuse).seat.seatId, id); "new" -> assertEquals(pe["seat"], (plan as Plan.NewSeat).seatId, id); else -> assertEquals(pe["reason"], (plan as Plan.Refused).reason.name, id) }
+                    }
                 }
                 "build-activation" -> {
                     @Suppress("UNCHECKED_CAST") val rq = c["request"] as Map<String, Any?>; val dv = rq["device"] as String

@@ -463,6 +463,100 @@ def issue_compact(c, keys):
     return compact_encode(header, sign(key["seed"], compact_signed_text(header).encode()))
 
 
+# ------------------------------------------------------------------ licences (registre d'événements signés)
+
+YEAR = 365 * DAY
+
+
+def parse_event(e):
+    lines = e["text"].split("\n")
+    if lines[0] != "castbridge-licence-event-v1":
+        return None
+    f, factors = {}, {}
+    for l in lines[1:]:
+        if l.startswith("factor="):
+            kind, h = l[7:].split("|")
+            factors[kind] = h
+        else:
+            f[l.split("=", 1)[0]] = l.split("=", 1)[1]
+    eid = hashlib.sha256((e["kid"] + "|" + e["text"]).encode()).digest()[:8].hex()
+    if e.get("id") not in (None, eid):
+        return None
+    return {"id": eid, "kid": e["kid"], "text": e["text"], "signature": e["signature"], "f": f, "factors": factors, "at": int(f.get("at", "0"))}
+
+
+def replay_licences(raw_events, keys_by_kid):
+    licenses, seats, alias, transfers, duplicates, warnings, rejected = {}, {}, {}, [], [], [], []
+    rev_seats = {}
+    seen = set()
+    events = [x for x in (parse_event(e) for e in raw_events) if x]
+    for e in sorted(events, key=lambda x: (x["at"], x["id"])):
+        if e["id"] in seen:
+            continue
+        seen.add(e["id"])
+        key = keys_by_kid.get(e["kid"])
+        t = e["f"].get("type")
+        scope = {"license": None, "issue": None, "transfer": "TRANSFER", "revoke": "REVOKE"}.get(t, "?")
+        if t in ("license", "issue"):
+            scope = "ISSUE_TRIAL" if e["f"].get("kind") == "trial" else "ISSUE_PRODUCTION"
+        if key is None:
+            rejected.append("UNKNOWN_KEY"); continue
+        if not verify_sig(key["publicKey"], e["text"].encode(), base64.b64decode(e["signature"])):
+            rejected.append("BAD_SIGNATURE"); continue
+        if scope == "?":
+            rejected.append("MALFORMED"); continue
+        if scope not in key["scopes"]:
+            rejected.append("KEY_NOT_ALLOWED"); continue
+        f = e["f"]
+        if t == "license":
+            licenses.setdefault(f["license"], {"seats": int(f.get("seats", 0)), "cap": int(f.get("maxTransfersPerYear", 2))})
+        elif t == "issue":
+            lic, seat = f["license"], f["seat"]
+            if lic == "trial":
+                continue
+            if lic not in licenses:
+                rejected.append("UNKNOWN_LICENSE"); continue
+            subject, k = f.get("subject", "tv"), int(f.get("k", 1))
+            ko = "%s|%s" % (lic, alias.get("%s|%s" % (lic, seat), seat))
+            if ko in seats:
+                seats[ko]["last"] = max(seats[ko]["last"], e["at"]); continue
+            same = next((s for s in seats.values() if s["license"] == lic and s["subject"] == subject and matches(s["factors"], s["k"], e["factors"])), None)
+            if same:
+                duplicates.append(("%s|%s" % (lic, same["seat"]), "%s|%s" % (lic, seat)))
+                alias["%s|%s" % (lic, seat)] = same["seat"]
+                continue
+            if sum(1 for s in seats.values() if s["license"] == lic) >= licenses[lic]["seats"]:
+                warnings.append(lic)
+            seats[ko] = {"license": lic, "seat": seat, "subject": subject, "factors": e["factors"], "k": k, "last": e["at"]}
+        elif t == "transfer":
+            lic = f["license"]
+            seat = alias.get("%s|%s" % (lic, f["seat"]), f["seat"])
+            cur = seats.get("%s|%s" % (lic, seat))
+            if lic not in licenses or cur is None:
+                rejected.append("UNKNOWN_LICENSE"); continue
+            if sum(1 for x in transfers if x[0] == lic and e["at"] - YEAR < x[2] <= e["at"]) >= licenses[lic]["cap"]:
+                rejected.append("TRANSFER_LIMIT"); continue
+            cur["factors"], cur["k"] = e["factors"], int(f.get("k", cur["k"]))
+            transfers.append((lic, seat, e["at"]))
+            rev_seats["%s|%s" % (lic, seat)] = max(rev_seats.get("%s|%s" % (lic, seat), 0), e["at"])
+        elif t == "revoke" and f.get("target") == "seat":
+            rev_seats[f["value"]] = max(rev_seats.get(f["value"], 0), e["at"])
+    return {"licenses": licenses, "seats": seats, "transfers": transfers, "duplicates": duplicates, "warnings": warnings, "rejected": rejected, "revokedSeats": rev_seats}
+
+
+def plan_licence(st, lic, subject, fp):
+    if lic not in st["licenses"]:
+        return ("refused", "UNKNOWN_LICENSE")
+    for s in st["seats"].values():
+        if s["license"] == lic and s["subject"] == subject and matches(s["factors"], s["k"], fp):
+            return ("reuse", s["seat"])
+    used = sum(1 for s in st["seats"].values() if s["license"] == lic)
+    left = st["licenses"][lic]["seats"] - used
+    if left <= 0:
+        return ("refused", "NO_SEAT_LEFT")
+    return ("new", hashlib.sha256(("castbridge-seat|%s|%s" % (lic, set_hash(fp).hex())).encode()).digest()[:8].hex(), left - 1)
+
+
 def main():
     path = os.path.join(os.path.dirname(os.path.abspath(__file__)), "test-vectors.json")
     v = json.load(open(path, encoding="utf-8"))
@@ -510,6 +604,18 @@ def main():
                 se = step["expect"]
                 ok = ok and ((r[0] == "accepted" and se["result"] == "accepted" and r[1] == se["untilMs"]) or (r[0] == "rejected" and se["result"] == "rejected" and r[1] == se["reason"]))
             check(cid, ok, str(res))
+        elif t == "licence":
+            tk = {keys[n]["kid"]: keys[n] for n in c["trustedKeys"]}
+            st = replay_licences(c["events"], tk)
+            ok = sorted(st["seats"]) == e["seats"] and len(st["transfers"]) == e["transfers"] and len(st["duplicates"]) == e["duplicates"] and sorted(st["rejected"]) == e["rejected"]
+            ok = ok and len(st["warnings"]) == e["warnings"] and {l: sum(1 for s in st["seats"].values() if s["license"] == l) for l in sorted(st["licenses"])} == e["used"]
+            ok = ok and {k: v for k, v in sorted(st["revokedSeats"].items())} == e["revokedSeats"]
+            for p in c["plans"]:
+                r = plan_licence(st, p["license"], p["subject"], devices[p["device"]]["fingerprints"])
+                pe = p["expect"]
+                ok = ok and ((pe["plan"] == "reuse" and r[0] == "reuse" and r[1] == pe["seat"]) or (pe["plan"] == "new" and r[0] == "new" and r[1] == pe["seat"] and r[2] == pe["left"])
+                             or (pe["plan"] == "refused" and r[0] == "refused" and r[1] == pe["reason"]))
+            check(cid, ok, str(st["rejected"]))
         elif t == "build-activation":
             tok = issue_activation(c, keys, devices)
             check(cid, (e.get("refused") and tok is None) or (tok == e.get("token")), "jeton différent" if tok else "refusé")

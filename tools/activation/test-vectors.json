@@ -130,6 +130,66 @@
       "fingerprints": {
         "SYSTEM_SERIAL": "bf398694573db9e7d052b335b1c51e10"
       }
+    },
+    {
+      "name": "tvN1",
+      "raw": {
+        "flashSerial": "FLASHSERIAL-N1",
+        "flashCid": "cid-n1",
+        "ethernetMac": "AA:BB:CC:00:11:11",
+        "wifiMac": "10:20:30:40:50:11",
+        "wifiSysfsPath": "/sys/devices/platform/soc/ffe03000.sd/mmc_host/mmc1/mmc1:0001/net/wlan0",
+        "systemSerial": "SYSN0001",
+        "bluetoothAddress": "11:22:33:44:55:11"
+      },
+      "code": "Z5MM-152E-TM7N-P3XP",
+      "fingerprints": {
+        "FLASH": "10d123edb545f91fabebe21e2016c1ed",
+        "ETHERNET": "83b03b3f4ba4617a09264faa6fc31d78",
+        "WIFI": "44e6abc95cd4a3682b49152f4b621c4f",
+        "SYSTEM_SERIAL": "c44a4a0841d7abd8dd38f29fc2d205f6",
+        "BLUETOOTH": "af004d08653b0d081bbf216f082f78f5"
+      }
+    },
+    {
+      "name": "tvN2",
+      "raw": {
+        "flashSerial": "FLASHSERIAL-N2",
+        "flashCid": "cid-n2",
+        "ethernetMac": "AA:BB:CC:00:11:12",
+        "wifiMac": "10:20:30:40:50:12",
+        "wifiSysfsPath": "/sys/devices/platform/soc/ffe03000.sd/mmc_host/mmc1/mmc1:0001/net/wlan0",
+        "systemSerial": "SYSN0002",
+        "bluetoothAddress": "11:22:33:44:55:12"
+      },
+      "code": "ZMXA-6TJY-Y7YM-ADNH",
+      "fingerprints": {
+        "FLASH": "e32c14fac420b4484777764c85d77a67",
+        "ETHERNET": "ea713de37c8c3382760664841093a5b5",
+        "WIFI": "7c06c397bfd0ec9ea44ee605c272b3b6",
+        "SYSTEM_SERIAL": "6af178dca910403de7a0f475ef6e9580",
+        "BLUETOOTH": "f7df24c4473f5b38ec92ae4c8bf81ab4"
+      }
+    },
+    {
+      "name": "tvN3",
+      "raw": {
+        "flashSerial": "FLASHSERIAL-N3",
+        "flashCid": "cid-n3",
+        "ethernetMac": "AA:BB:CC:00:11:13",
+        "wifiMac": "10:20:30:40:50:13",
+        "wifiSysfsPath": "/sys/devices/platform/soc/ffe03000.sd/mmc_host/mmc1/mmc1:0001/net/wlan0",
+        "systemSerial": "SYSN0003",
+        "bluetoothAddress": "11:22:33:44:55:13"
+      },
+      "code": "Z601-1J4G-5TH4-9ED3",
+      "fingerprints": {
+        "FLASH": "3f71d6c11d29fe6c7e40d260f8f4398f",
+        "ETHERNET": "1d804ca7a15b4b0681b9088fc89e3494",
+        "WIFI": "2272ad38a17ee952f59db46f5604b5ad",
+        "SYSTEM_SERIAL": "c69e20e6e067b8cd30940c0d6e510399",
+        "BLUETOOTH": "ad95dd5bfd5e43868db59d0b7f0054c2"
+      }
     }
   ],
   "cases": [
@@ -256,6 +316,87 @@
         "k": 1,
         "weak": true,
         "setHash": "1d3f7b57a057413178bf87971d34d19f5326d28fd721bf51f8b5704de26983de"
+      }
+    },
+    {
+      "type": "fingerprints",
+      "id": "fp-tvN1",
+      "description": "facteurs bruts -> empreintes, code d'appareil, k",
+      "raw": {
+        "flashSerial": "FLASHSERIAL-N1",
+        "flashCid": "cid-n1",
+        "ethernetMac": "AA:BB:CC:00:11:11",
+        "wifiMac": "10:20:30:40:50:11",
+        "wifiSysfsPath": "/sys/devices/platform/soc/ffe03000.sd/mmc_host/mmc1/mmc1:0001/net/wlan0",
+        "systemSerial": "SYSN0001",
+        "bluetoothAddress": "11:22:33:44:55:11"
+      },
+      "expect": {
+        "fingerprints": {
+          "FLASH": "10d123edb545f91fabebe21e2016c1ed",
+          "ETHERNET": "83b03b3f4ba4617a09264faa6fc31d78",
+          "WIFI": "44e6abc95cd4a3682b49152f4b621c4f",
+          "SYSTEM_SERIAL": "c44a4a0841d7abd8dd38f29fc2d205f6",
+          "BLUETOOTH": "af004d08653b0d081bbf216f082f78f5"
+        },
+        "code": "Z5MM-152E-TM7N-P3XP",
+        "k": 4,
+        "weak": false,
+        "setHash": "2d281289daa1eb61f5dc7b2c4bc5bdb4e550e617a1ddc8a902eaa9ce7fc2f502"
+      }
+    },
+    {
+      "type": "fingerprints",
+      "id": "fp-tvN2",
+      "description": "facteurs bruts -> empreintes, code d'appareil, k",
+      "raw": {
+        "flashSerial": "FLASHSERIAL-N2",
+        "flashCid": "cid-n2",
+        "ethernetMac": "AA:BB:CC:00:11:12",
+        "wifiMac": "10:20:30:40:50:12",
+        "wifiSysfsPath": "/sys/devices/platform/soc/ffe03000.sd/mmc_host/mmc1/mmc1:0001/net/wlan0",
+        "systemSerial": "SYSN0002",
+        "bluetoothAddress": "11:22:33:44:55:12"
+      },
+      "expect": {
+        "fingerprints": {
+          "FLASH": "e32c14fac420b4484777764c85d77a67",
+          "ETHERNET": "ea713de37c8c3382760664841093a5b5",
+          "WIFI": "7c06c397bfd0ec9ea44ee605c272b3b6",
+          "SYSTEM_SERIAL": "6af178dca910403de7a0f475ef6e9580",
+          "BLUETOOTH": "f7df24c4473f5b38ec92ae4c8bf81ab4"
+        },
+        "code": "ZMXA-6TJY-Y7YM-ADNH",
+        "k": 4,
+        "weak": false,
+        "setHash": "a7546d4bde3fa8a6d4715feaa69a9a48db505a802b58cf11202be10c7848dd9f"
+      }
+    },
+    {
+      "type": "fingerprints",
+      "id": "fp-tvN3",
+      "description": "facteurs bruts -> empreintes, code d'appareil, k",
+      "raw": {
+        "flashSerial": "FLASHSERIAL-N3",
+        "flashCid": "cid-n3",
+        "ethernetMac": "AA:BB:CC:00:11:13",
+        "wifiMac": "10:20:30:40:50:13",
+        "wifiSysfsPath": "/sys/devices/platform/soc/ffe03000.sd/mmc_host/mmc1/mmc1:0001/net/wlan0",
+        "systemSerial": "SYSN0003",
+        "bluetoothAddress": "11:22:33:44:55:13"
+      },
+      "expect": {
+        "fingerprints": {
+          "FLASH": "3f71d6c11d29fe6c7e40d260f8f4398f",
+          "ETHERNET": "1d804ca7a15b4b0681b9088fc89e3494",
+          "WIFI": "2272ad38a17ee952f59db46f5604b5ad",
+          "SYSTEM_SERIAL": "c69e20e6e067b8cd30940c0d6e510399",
+          "BLUETOOTH": "ad95dd5bfd5e43868db59d0b7f0054c2"
+        },
+        "code": "Z601-1J4G-5TH4-9ED3",
+        "k": 4,
+        "weak": false,
+        "setHash": "3002191205d448973588713ba865087999c407deeda0f453309aaf34254cbb6d"
       }
     },
     {
@@ -1328,6 +1469,491 @@
       },
       "expect": {
         "refused": true
+      }
+    },
+    {
+      "type": "licence",
+      "id": "lic-seat-reuse",
+      "description": "même matériel : le poste est réutilisé quel que soit l'outil (aussi avec un module remplacé), un autre matériel prend le second poste",
+      "trustedKeys": ["desk", "phone", "server"],
+      "events": [
+        {
+          "id": "09d7e31c1341f890",
+          "kid": "b2e5b41860d1d8be",
+          "text": "castbridge-licence-event-v1\ntype=license\nkid=b2e5b41860d1d8be\nat=1799136000000\nlicense=lic-0001\nseats=2\nmaxTransfersPerYear=2",
+          "signature": "V81Zruyxs9C78InxUAn2LB65E/TXJBZ9hjcqk3PZmGHwHrDX7hgBevsRzAv8lMj5w1k+9/ii58WzHBS3Klh4Cw=="
+        },
+        {
+          "id": "a164326828003f17",
+          "kid": "b2e5b41860d1d8be",
+          "text": "castbridge-licence-event-v1\ntype=issue\nkid=b2e5b41860d1d8be\nat=1800000000000\nlicense=lic-0001\nseat=f36757c226dd2ee4\nsubject=tv\nkind=production\nnonce=00112233445566778899aabbccddeeff\nnotAfter=1825833600000\nk=4\nfactor=FLASH|c48cacd81b9663d0ba97c221cbd17f4f\nfactor=ETHERNET|f91efd89e0025c2262da12cfbed43632\nfactor=WIFI|ea8b552e2240bbdd8c88c42313c4deab\nfactor=SYSTEM_SERIAL|774beacbf351b0d205f9166669e4d3c7\nfactor=BLUETOOTH|d365ea67e00585edaf8bef4d7378850d",
+          "signature": "YnUgUXvMgBAIFg3JaIYF0zi7osU+XYtuhN7ECEKqTRe4XzSNMUrmY7EZIB3imtSWhbLf2bCUlKiAXTJdZj5LDg=="
+        },
+        {
+          "id": "971c247a0f5f8a16",
+          "kid": "edec55f2f651c508",
+          "text": "castbridge-licence-event-v1\ntype=issue\nkid=edec55f2f651c508\nat=1800086400000\nlicense=lic-0001\nseat=f36757c226dd2ee4\nsubject=tv\nkind=production\nnonce=ffeeddccbbaa99887766554433221100\nnotAfter=1825920000000\nk=4\nfactor=FLASH|c48cacd81b9663d0ba97c221cbd17f4f\nfactor=ETHERNET|f91efd89e0025c2262da12cfbed43632\nfactor=WIFI|ea8b552e2240bbdd8c88c42313c4deab\nfactor=SYSTEM_SERIAL|774beacbf351b0d205f9166669e4d3c7\nfactor=BLUETOOTH|d365ea67e00585edaf8bef4d7378850d",
+          "signature": "fHxIpL+lw9sjbFkLtWL0NQ6iwm83v1K9QwYVT5uInpSpfuRaVVjXRy3oRKMIhQ4NlS/LkZv9wcGW7/I/PoLyBA=="
+        }
+      ],
+      "plans": [
+        {
+          "license": "lic-0001",
+          "device": "tvA",
+          "subject": "tv",
+          "expect": {
+            "plan": "reuse",
+            "seat": "f36757c226dd2ee4"
+          }
+        },
+        {
+          "license": "lic-0001",
+          "device": "tvA-swapped-wifi",
+          "subject": "tv",
+          "expect": {
+            "plan": "reuse",
+            "seat": "f36757c226dd2ee4"
+          }
+        },
+        {
+          "license": "lic-0001",
+          "device": "tvB-no-ethernet-usb-wifi",
+          "subject": "tv",
+          "expect": {
+            "plan": "new",
+            "seat": "3cd2bf1e6e056494",
+            "left": 0
+          }
+        },
+        {
+          "license": "lic-0001",
+          "device": "tvA",
+          "subject": "phone",
+          "expect": {
+            "plan": "new",
+            "seat": "f36757c226dd2ee4",
+            "left": 0
+          }
+        },
+        {
+          "license": "nope",
+          "device": "tvA",
+          "subject": "tv",
+          "expect": {
+            "plan": "refused",
+            "reason": "UNKNOWN_LICENSE"
+          }
+        }
+      ],
+      "expect": {
+        "seats": ["lic-0001|f36757c226dd2ee4"],
+        "used": {
+          "lic-0001": 1
+        },
+        "transfers": 0,
+        "duplicates": 0,
+        "rejected": [],
+        "revokedSeats": {},
+        "warnings": 0
+      }
+    },
+    {
+      "type": "licence",
+      "id": "lic-no-seat-left",
+      "description": "licence à un poste : le second matériel est refusé, il faut un transfert",
+      "trustedKeys": ["desk", "phone", "server"],
+      "events": [
+        {
+          "id": "c16f57de58033986",
+          "kid": "b2e5b41860d1d8be",
+          "text": "castbridge-licence-event-v1\ntype=license\nkid=b2e5b41860d1d8be\nat=1799136000000\nlicense=lic-0001\nseats=1\nmaxTransfersPerYear=2",
+          "signature": "m6HFJgqFv05BCbjl98ONbyk8g+k9YTd6F4e/kC79SEgFJuGJYzYPwVZlTIMxF3iB3mYl6dRIZC0YJisbU2uEAw=="
+        },
+        {
+          "id": "a164326828003f17",
+          "kid": "b2e5b41860d1d8be",
+          "text": "castbridge-licence-event-v1\ntype=issue\nkid=b2e5b41860d1d8be\nat=1800000000000\nlicense=lic-0001\nseat=f36757c226dd2ee4\nsubject=tv\nkind=production\nnonce=00112233445566778899aabbccddeeff\nnotAfter=1825833600000\nk=4\nfactor=FLASH|c48cacd81b9663d0ba97c221cbd17f4f\nfactor=ETHERNET|f91efd89e0025c2262da12cfbed43632\nfactor=WIFI|ea8b552e2240bbdd8c88c42313c4deab\nfactor=SYSTEM_SERIAL|774beacbf351b0d205f9166669e4d3c7\nfactor=BLUETOOTH|d365ea67e00585edaf8bef4d7378850d",
+          "signature": "YnUgUXvMgBAIFg3JaIYF0zi7osU+XYtuhN7ECEKqTRe4XzSNMUrmY7EZIB3imtSWhbLf2bCUlKiAXTJdZj5LDg=="
+        }
+      ],
+      "plans": [
+        {
+          "license": "lic-0001",
+          "device": "tvB-no-ethernet-usb-wifi",
+          "subject": "tv",
+          "expect": {
+            "plan": "refused",
+            "reason": "NO_SEAT_LEFT"
+          }
+        },
+        {
+          "license": "lic-0001",
+          "device": "tvA",
+          "subject": "tv",
+          "expect": {
+            "plan": "reuse",
+            "seat": "f36757c226dd2ee4"
+          }
+        }
+      ],
+      "expect": {
+        "seats": ["lic-0001|f36757c226dd2ee4"],
+        "used": {
+          "lic-0001": 1
+        },
+        "transfers": 0,
+        "duplicates": 0,
+        "rejected": [],
+        "revokedSeats": {},
+        "warnings": 0
+      }
+    },
+    {
+      "type": "licence",
+      "id": "lic-duplicate-hardware",
+      "description": "deux outils ont émis le même matériel sous deux identifiants de poste : détecté, compté une fois, le plus ancien gardé",
+      "trustedKeys": ["desk", "phone", "server"],
+      "events": [
+        {
+          "id": "09d7e31c1341f890",
+          "kid": "b2e5b41860d1d8be",
+          "text": "castbridge-licence-event-v1\ntype=license\nkid=b2e5b41860d1d8be\nat=1799136000000\nlicense=lic-0001\nseats=2\nmaxTransfersPerYear=2",
+          "signature": "V81Zruyxs9C78InxUAn2LB65E/TXJBZ9hjcqk3PZmGHwHrDX7hgBevsRzAv8lMj5w1k+9/ii58WzHBS3Klh4Cw=="
+        },
+        {
+          "id": "a164326828003f17",
+          "kid": "b2e5b41860d1d8be",
+          "text": "castbridge-licence-event-v1\ntype=issue\nkid=b2e5b41860d1d8be\nat=1800000000000\nlicense=lic-0001\nseat=f36757c226dd2ee4\nsubject=tv\nkind=production\nnonce=00112233445566778899aabbccddeeff\nnotAfter=1825833600000\nk=4\nfactor=FLASH|c48cacd81b9663d0ba97c221cbd17f4f\nfactor=ETHERNET|f91efd89e0025c2262da12cfbed43632\nfactor=WIFI|ea8b552e2240bbdd8c88c42313c4deab\nfactor=SYSTEM_SERIAL|774beacbf351b0d205f9166669e4d3c7\nfactor=BLUETOOTH|d365ea67e00585edaf8bef4d7378850d",
+          "signature": "YnUgUXvMgBAIFg3JaIYF0zi7osU+XYtuhN7ECEKqTRe4XzSNMUrmY7EZIB3imtSWhbLf2bCUlKiAXTJdZj5LDg=="
+        },
+        {
+          "id": "d5a5a2cd9610a3d0",
+          "kid": "edec55f2f651c508",
+          "text": "castbridge-licence-event-v1\ntype=issue\nkid=edec55f2f651c508\nat=1800086400000\nlicense=lic-0001\nseat=aa3f971650513434\nsubject=tv\nkind=production\nnonce=00112233445566778899aabbccddeeff\nnotAfter=1825920000000\nk=4\nfactor=FLASH|c48cacd81b9663d0ba97c221cbd17f4f\nfactor=ETHERNET|f91efd89e0025c2262da12cfbed43632\nfactor=WIFI|3b3be8657cfa25b97f464ec3d62efb8e\nfactor=SYSTEM_SERIAL|774beacbf351b0d205f9166669e4d3c7\nfactor=BLUETOOTH|d365ea67e00585edaf8bef4d7378850d",
+          "signature": "TCFB8Xt3UXGKGmpdwPYyvCH4msIsVRAVTBk4krliVthZgWHJ6wt/otaRJ5smosFGAOtuAHqUEw0N/jGF8FKVCw=="
+        }
+      ],
+      "plans": [],
+      "expect": {
+        "seats": ["lic-0001|f36757c226dd2ee4"],
+        "used": {
+          "lic-0001": 1
+        },
+        "transfers": 0,
+        "duplicates": 1,
+        "rejected": [],
+        "revokedSeats": {},
+        "warnings": 0
+      }
+    },
+    {
+      "type": "licence",
+      "id": "lic-over-issued",
+      "description": "plus de postes émis que prévu : signalé (avertissement), jamais caché",
+      "trustedKeys": ["desk", "phone", "server"],
+      "events": [
+        {
+          "id": "c16f57de58033986",
+          "kid": "b2e5b41860d1d8be",
+          "text": "castbridge-licence-event-v1\ntype=license\nkid=b2e5b41860d1d8be\nat=1799136000000\nlicense=lic-0001\nseats=1\nmaxTransfersPerYear=2",
+          "signature": "m6HFJgqFv05BCbjl98ONbyk8g+k9YTd6F4e/kC79SEgFJuGJYzYPwVZlTIMxF3iB3mYl6dRIZC0YJisbU2uEAw=="
+        },
+        {
+          "id": "a164326828003f17",
+          "kid": "b2e5b41860d1d8be",
+          "text": "castbridge-licence-event-v1\ntype=issue\nkid=b2e5b41860d1d8be\nat=1800000000000\nlicense=lic-0001\nseat=f36757c226dd2ee4\nsubject=tv\nkind=production\nnonce=00112233445566778899aabbccddeeff\nnotAfter=1825833600000\nk=4\nfactor=FLASH|c48cacd81b9663d0ba97c221cbd17f4f\nfactor=ETHERNET|f91efd89e0025c2262da12cfbed43632\nfactor=WIFI|ea8b552e2240bbdd8c88c42313c4deab\nfactor=SYSTEM_SERIAL|774beacbf351b0d205f9166669e4d3c7\nfactor=BLUETOOTH|d365ea67e00585edaf8bef4d7378850d",
+          "signature": "YnUgUXvMgBAIFg3JaIYF0zi7osU+XYtuhN7ECEKqTRe4XzSNMUrmY7EZIB3imtSWhbLf2bCUlKiAXTJdZj5LDg=="
+        },
+        {
+          "id": "c382e1d5fdc9be3b",
+          "kid": "b2e5b41860d1d8be",
+          "text": "castbridge-licence-event-v1\ntype=issue\nkid=b2e5b41860d1d8be\nat=1800172800000\nlicense=lic-0001\nseat=3cd2bf1e6e056494\nsubject=tv\nkind=production\nnonce=00112233445566778899aabbccddeeff\nnotAfter=1826006400000\nk=2\nfactor=FLASH|7ce26676ef99dd28f2f66ab38eaf5c8c\nfactor=SYSTEM_SERIAL|bda7f8b8f612a9d126fc3252b4a6b514\nfactor=BLUETOOTH|29094a4d59e4ab6b18d658efa9bcdbdb",
+          "signature": "YL/cM3k1SbDWLjqE0TpUzAcKiPTRLyYsFEc7BP1sAJ9ij/eew1LebE3LAMkwqbYtREQ/z1YUud4hJlhhqWqwCg=="
+        }
+      ],
+      "plans": [],
+      "expect": {
+        "seats": ["lic-0001|3cd2bf1e6e056494", "lic-0001|f36757c226dd2ee4"],
+        "used": {
+          "lic-0001": 2
+        },
+        "transfers": 0,
+        "duplicates": 0,
+        "rejected": [],
+        "revokedSeats": {},
+        "warnings": 1
+      }
+    },
+    {
+      "type": "licence",
+      "id": "lic-transfer-ok",
+      "description": "transfert du poste vers un autre matériel : l'ancien poste est révoqué, le nouveau matériel retrouve le poste",
+      "trustedKeys": ["desk", "phone", "server"],
+      "events": [
+        {
+          "id": "09d7e31c1341f890",
+          "kid": "b2e5b41860d1d8be",
+          "text": "castbridge-licence-event-v1\ntype=license\nkid=b2e5b41860d1d8be\nat=1799136000000\nlicense=lic-0001\nseats=2\nmaxTransfersPerYear=2",
+          "signature": "V81Zruyxs9C78InxUAn2LB65E/TXJBZ9hjcqk3PZmGHwHrDX7hgBevsRzAv8lMj5w1k+9/ii58WzHBS3Klh4Cw=="
+        },
+        {
+          "id": "a164326828003f17",
+          "kid": "b2e5b41860d1d8be",
+          "text": "castbridge-licence-event-v1\ntype=issue\nkid=b2e5b41860d1d8be\nat=1800000000000\nlicense=lic-0001\nseat=f36757c226dd2ee4\nsubject=tv\nkind=production\nnonce=00112233445566778899aabbccddeeff\nnotAfter=1825833600000\nk=4\nfactor=FLASH|c48cacd81b9663d0ba97c221cbd17f4f\nfactor=ETHERNET|f91efd89e0025c2262da12cfbed43632\nfactor=WIFI|ea8b552e2240bbdd8c88c42313c4deab\nfactor=SYSTEM_SERIAL|774beacbf351b0d205f9166669e4d3c7\nfactor=BLUETOOTH|d365ea67e00585edaf8bef4d7378850d",
+          "signature": "YnUgUXvMgBAIFg3JaIYF0zi7osU+XYtuhN7ECEKqTRe4XzSNMUrmY7EZIB3imtSWhbLf2bCUlKiAXTJdZj5LDg=="
+        },
+        {
+          "id": "672dc4a7e0097b8d",
+          "kid": "b2e5b41860d1d8be",
+          "text": "castbridge-licence-event-v1\ntype=transfer\nkid=b2e5b41860d1d8be\nat=1800432000000\nlicense=lic-0001\nseat=f36757c226dd2ee4\nk=4\nnonce=a1a1a1a1a1a1a1a1\nfactor=FLASH|10d123edb545f91fabebe21e2016c1ed\nfactor=ETHERNET|83b03b3f4ba4617a09264faa6fc31d78\nfactor=WIFI|44e6abc95cd4a3682b49152f4b621c4f\nfactor=SYSTEM_SERIAL|c44a4a0841d7abd8dd38f29fc2d205f6\nfactor=BLUETOOTH|af004d08653b0d081bbf216f082f78f5",
+          "signature": "CZbW7O9t2U65HTBc4NUdWq2bfr7YN+VWBA59mKbAqO+Ob1yYXk/Vn59GHn35NOXFQrVNssUdCqfMOIXO4qCUBg=="
+        }
+      ],
+      "plans": [
+        {
+          "license": "lic-0001",
+          "device": "tvN1",
+          "subject": "tv",
+          "expect": {
+            "plan": "reuse",
+            "seat": "f36757c226dd2ee4"
+          }
+        },
+        {
+          "license": "lic-0001",
+          "device": "tvA",
+          "subject": "tv",
+          "expect": {
+            "plan": "new",
+            "seat": "f36757c226dd2ee4",
+            "left": 0
+          }
+        }
+      ],
+      "expect": {
+        "seats": ["lic-0001|f36757c226dd2ee4"],
+        "used": {
+          "lic-0001": 1
+        },
+        "transfers": 1,
+        "duplicates": 0,
+        "rejected": [],
+        "revokedSeats": {
+          "lic-0001|f36757c226dd2ee4": 1800432000000
+        },
+        "warnings": 0
+      }
+    },
+    {
+      "type": "licence",
+      "id": "lic-transfer-cap",
+      "description": "plafond de 2 transferts par an : le troisième est refusé",
+      "trustedKeys": ["desk", "phone", "server"],
+      "events": [
+        {
+          "id": "09d7e31c1341f890",
+          "kid": "b2e5b41860d1d8be",
+          "text": "castbridge-licence-event-v1\ntype=license\nkid=b2e5b41860d1d8be\nat=1799136000000\nlicense=lic-0001\nseats=2\nmaxTransfersPerYear=2",
+          "signature": "V81Zruyxs9C78InxUAn2LB65E/TXJBZ9hjcqk3PZmGHwHrDX7hgBevsRzAv8lMj5w1k+9/ii58WzHBS3Klh4Cw=="
+        },
+        {
+          "id": "a164326828003f17",
+          "kid": "b2e5b41860d1d8be",
+          "text": "castbridge-licence-event-v1\ntype=issue\nkid=b2e5b41860d1d8be\nat=1800000000000\nlicense=lic-0001\nseat=f36757c226dd2ee4\nsubject=tv\nkind=production\nnonce=00112233445566778899aabbccddeeff\nnotAfter=1825833600000\nk=4\nfactor=FLASH|c48cacd81b9663d0ba97c221cbd17f4f\nfactor=ETHERNET|f91efd89e0025c2262da12cfbed43632\nfactor=WIFI|ea8b552e2240bbdd8c88c42313c4deab\nfactor=SYSTEM_SERIAL|774beacbf351b0d205f9166669e4d3c7\nfactor=BLUETOOTH|d365ea67e00585edaf8bef4d7378850d",
+          "signature": "YnUgUXvMgBAIFg3JaIYF0zi7osU+XYtuhN7ECEKqTRe4XzSNMUrmY7EZIB3imtSWhbLf2bCUlKiAXTJdZj5LDg=="
+        },
+        {
+          "id": "672dc4a7e0097b8d",
+          "kid": "b2e5b41860d1d8be",
+          "text": "castbridge-licence-event-v1\ntype=transfer\nkid=b2e5b41860d1d8be\nat=1800432000000\nlicense=lic-0001\nseat=f36757c226dd2ee4\nk=4\nnonce=a1a1a1a1a1a1a1a1\nfactor=FLASH|10d123edb545f91fabebe21e2016c1ed\nfactor=ETHERNET|83b03b3f4ba4617a09264faa6fc31d78\nfactor=WIFI|44e6abc95cd4a3682b49152f4b621c4f\nfactor=SYSTEM_SERIAL|c44a4a0841d7abd8dd38f29fc2d205f6\nfactor=BLUETOOTH|af004d08653b0d081bbf216f082f78f5",
+          "signature": "CZbW7O9t2U65HTBc4NUdWq2bfr7YN+VWBA59mKbAqO+Ob1yYXk/Vn59GHn35NOXFQrVNssUdCqfMOIXO4qCUBg=="
+        },
+        {
+          "id": "a7b53e6087aec40f",
+          "kid": "edec55f2f651c508",
+          "text": "castbridge-licence-event-v1\ntype=transfer\nkid=edec55f2f651c508\nat=1800518400000\nlicense=lic-0001\nseat=f36757c226dd2ee4\nk=4\nnonce=a2a2a2a2a2a2a2a2\nfactor=FLASH|e32c14fac420b4484777764c85d77a67\nfactor=ETHERNET|ea713de37c8c3382760664841093a5b5\nfactor=WIFI|7c06c397bfd0ec9ea44ee605c272b3b6\nfactor=SYSTEM_SERIAL|6af178dca910403de7a0f475ef6e9580\nfactor=BLUETOOTH|f7df24c4473f5b38ec92ae4c8bf81ab4",
+          "signature": "0abiZqsHuKwbbb/8PoEozKN4ObvlNHtDGfGe4XgG4eBAgE6uXMorRd2eAME2cCfZXwTe+2RFpPf9avFi6wO/AA=="
+        },
+        {
+          "id": "b528a73d0e3e3f10",
+          "kid": "b2e5b41860d1d8be",
+          "text": "castbridge-licence-event-v1\ntype=transfer\nkid=b2e5b41860d1d8be\nat=1800604800000\nlicense=lic-0001\nseat=f36757c226dd2ee4\nk=4\nnonce=a3a3a3a3a3a3a3a3\nfactor=FLASH|3f71d6c11d29fe6c7e40d260f8f4398f\nfactor=ETHERNET|1d804ca7a15b4b0681b9088fc89e3494\nfactor=WIFI|2272ad38a17ee952f59db46f5604b5ad\nfactor=SYSTEM_SERIAL|c69e20e6e067b8cd30940c0d6e510399\nfactor=BLUETOOTH|ad95dd5bfd5e43868db59d0b7f0054c2",
+          "signature": "LMUWg55k2/dyAMFNBkk3GL4ZRqScqe2/zERUJ+yFxJiUEVY1FTelQJosIpY450Rjkb8ot8weLAGcYKFrNPpQCQ=="
+        }
+      ],
+      "plans": [],
+      "expect": {
+        "seats": ["lic-0001|f36757c226dd2ee4"],
+        "used": {
+          "lic-0001": 1
+        },
+        "transfers": 2,
+        "duplicates": 0,
+        "rejected": ["TRANSFER_LIMIT"],
+        "revokedSeats": {
+          "lic-0001|f36757c226dd2ee4": 1800518400000
+        },
+        "warnings": 0
+      }
+    },
+    {
+      "type": "licence",
+      "id": "lic-transfer-next-year",
+      "description": "un an plus tard le transfert est de nouveau permis",
+      "trustedKeys": ["desk", "phone", "server"],
+      "events": [
+        {
+          "id": "09d7e31c1341f890",
+          "kid": "b2e5b41860d1d8be",
+          "text": "castbridge-licence-event-v1\ntype=license\nkid=b2e5b41860d1d8be\nat=1799136000000\nlicense=lic-0001\nseats=2\nmaxTransfersPerYear=2",
+          "signature": "V81Zruyxs9C78InxUAn2LB65E/TXJBZ9hjcqk3PZmGHwHrDX7hgBevsRzAv8lMj5w1k+9/ii58WzHBS3Klh4Cw=="
+        },
+        {
+          "id": "a164326828003f17",
+          "kid": "b2e5b41860d1d8be",
+          "text": "castbridge-licence-event-v1\ntype=issue\nkid=b2e5b41860d1d8be\nat=1800000000000\nlicense=lic-0001\nseat=f36757c226dd2ee4\nsubject=tv\nkind=production\nnonce=00112233445566778899aabbccddeeff\nnotAfter=1825833600000\nk=4\nfactor=FLASH|c48cacd81b9663d0ba97c221cbd17f4f\nfactor=ETHERNET|f91efd89e0025c2262da12cfbed43632\nfactor=WIFI|ea8b552e2240bbdd8c88c42313c4deab\nfactor=SYSTEM_SERIAL|774beacbf351b0d205f9166669e4d3c7\nfactor=BLUETOOTH|d365ea67e00585edaf8bef4d7378850d",
+          "signature": "YnUgUXvMgBAIFg3JaIYF0zi7osU+XYtuhN7ECEKqTRe4XzSNMUrmY7EZIB3imtSWhbLf2bCUlKiAXTJdZj5LDg=="
+        },
+        {
+          "id": "672dc4a7e0097b8d",
+          "kid": "b2e5b41860d1d8be",
+          "text": "castbridge-licence-event-v1\ntype=transfer\nkid=b2e5b41860d1d8be\nat=1800432000000\nlicense=lic-0001\nseat=f36757c226dd2ee4\nk=4\nnonce=a1a1a1a1a1a1a1a1\nfactor=FLASH|10d123edb545f91fabebe21e2016c1ed\nfactor=ETHERNET|83b03b3f4ba4617a09264faa6fc31d78\nfactor=WIFI|44e6abc95cd4a3682b49152f4b621c4f\nfactor=SYSTEM_SERIAL|c44a4a0841d7abd8dd38f29fc2d205f6\nfactor=BLUETOOTH|af004d08653b0d081bbf216f082f78f5",
+          "signature": "CZbW7O9t2U65HTBc4NUdWq2bfr7YN+VWBA59mKbAqO+Ob1yYXk/Vn59GHn35NOXFQrVNssUdCqfMOIXO4qCUBg=="
+        },
+        {
+          "id": "a7b53e6087aec40f",
+          "kid": "edec55f2f651c508",
+          "text": "castbridge-licence-event-v1\ntype=transfer\nkid=edec55f2f651c508\nat=1800518400000\nlicense=lic-0001\nseat=f36757c226dd2ee4\nk=4\nnonce=a2a2a2a2a2a2a2a2\nfactor=FLASH|e32c14fac420b4484777764c85d77a67\nfactor=ETHERNET|ea713de37c8c3382760664841093a5b5\nfactor=WIFI|7c06c397bfd0ec9ea44ee605c272b3b6\nfactor=SYSTEM_SERIAL|6af178dca910403de7a0f475ef6e9580\nfactor=BLUETOOTH|f7df24c4473f5b38ec92ae4c8bf81ab4",
+          "signature": "0abiZqsHuKwbbb/8PoEozKN4ObvlNHtDGfGe4XgG4eBAgE6uXMorRd2eAME2cCfZXwTe+2RFpPf9avFi6wO/AA=="
+        },
+        {
+          "id": "1c6f883f31bc5b49",
+          "kid": "b2e5b41860d1d8be",
+          "text": "castbridge-licence-event-v1\ntype=transfer\nkid=b2e5b41860d1d8be\nat=1834560000000\nlicense=lic-0001\nseat=f36757c226dd2ee4\nk=4\nnonce=a4a4a4a4a4a4a4a4\nfactor=FLASH|3f71d6c11d29fe6c7e40d260f8f4398f\nfactor=ETHERNET|1d804ca7a15b4b0681b9088fc89e3494\nfactor=WIFI|2272ad38a17ee952f59db46f5604b5ad\nfactor=SYSTEM_SERIAL|c69e20e6e067b8cd30940c0d6e510399\nfactor=BLUETOOTH|ad95dd5bfd5e43868db59d0b7f0054c2",
+          "signature": "BlaXoKcav4zhKN++5Gu5lq2pHUPIq9AAR251KGCh6HFu/dwMi1Ape8oeAH/rbm675sX/neKIjuWWLbbe/fCcAg=="
+        }
+      ],
+      "plans": [],
+      "expect": {
+        "seats": ["lic-0001|f36757c226dd2ee4"],
+        "used": {
+          "lic-0001": 1
+        },
+        "transfers": 3,
+        "duplicates": 0,
+        "rejected": [],
+        "revokedSeats": {
+          "lic-0001|f36757c226dd2ee4": 1834560000000
+        },
+        "warnings": 0
+      }
+    },
+    {
+      "type": "licence",
+      "id": "lic-server-cannot-transfer",
+      "description": "la clé serveur n'a pas la portée transfer",
+      "trustedKeys": ["desk", "phone", "server"],
+      "events": [
+        {
+          "id": "09d7e31c1341f890",
+          "kid": "b2e5b41860d1d8be",
+          "text": "castbridge-licence-event-v1\ntype=license\nkid=b2e5b41860d1d8be\nat=1799136000000\nlicense=lic-0001\nseats=2\nmaxTransfersPerYear=2",
+          "signature": "V81Zruyxs9C78InxUAn2LB65E/TXJBZ9hjcqk3PZmGHwHrDX7hgBevsRzAv8lMj5w1k+9/ii58WzHBS3Klh4Cw=="
+        },
+        {
+          "id": "a164326828003f17",
+          "kid": "b2e5b41860d1d8be",
+          "text": "castbridge-licence-event-v1\ntype=issue\nkid=b2e5b41860d1d8be\nat=1800000000000\nlicense=lic-0001\nseat=f36757c226dd2ee4\nsubject=tv\nkind=production\nnonce=00112233445566778899aabbccddeeff\nnotAfter=1825833600000\nk=4\nfactor=FLASH|c48cacd81b9663d0ba97c221cbd17f4f\nfactor=ETHERNET|f91efd89e0025c2262da12cfbed43632\nfactor=WIFI|ea8b552e2240bbdd8c88c42313c4deab\nfactor=SYSTEM_SERIAL|774beacbf351b0d205f9166669e4d3c7\nfactor=BLUETOOTH|d365ea67e00585edaf8bef4d7378850d",
+          "signature": "YnUgUXvMgBAIFg3JaIYF0zi7osU+XYtuhN7ECEKqTRe4XzSNMUrmY7EZIB3imtSWhbLf2bCUlKiAXTJdZj5LDg=="
+        },
+        {
+          "id": "d26c5a9c0a76efb2",
+          "kid": "ce202dfdbe57b99a",
+          "text": "castbridge-licence-event-v1\ntype=transfer\nkid=ce202dfdbe57b99a\nat=1800432000000\nlicense=lic-0001\nseat=f36757c226dd2ee4\nk=4\nnonce=b1b1b1b1b1b1b1b1\nfactor=FLASH|10d123edb545f91fabebe21e2016c1ed\nfactor=ETHERNET|83b03b3f4ba4617a09264faa6fc31d78\nfactor=WIFI|44e6abc95cd4a3682b49152f4b621c4f\nfactor=SYSTEM_SERIAL|c44a4a0841d7abd8dd38f29fc2d205f6\nfactor=BLUETOOTH|af004d08653b0d081bbf216f082f78f5",
+          "signature": "2+pE3GsTWnbCbp6PUYehaCclrR0KEqqVgPaToRwx6Cmh3JYJqNERFgSMliVI9VgN9ldF7hFSqBPDmyG8c0ZxAg=="
+        }
+      ],
+      "plans": [],
+      "expect": {
+        "seats": ["lic-0001|f36757c226dd2ee4"],
+        "used": {
+          "lic-0001": 1
+        },
+        "transfers": 0,
+        "duplicates": 0,
+        "rejected": ["KEY_NOT_ALLOWED"],
+        "revokedSeats": {},
+        "warnings": 0
+      }
+    },
+    {
+      "type": "licence",
+      "id": "lic-forged-and-unknown",
+      "description": "événement falsifié et événement d'une clé inconnue : refusés",
+      "trustedKeys": ["desk", "phone", "server"],
+      "events": [
+        {
+          "id": "006bcf29c0ccdd84",
+          "kid": "b2e5b41860d1d8be",
+          "text": "castbridge-licence-event-v1\ntype=license\nkid=b2e5b41860d1d8be\nat=1799136000000\nlicense=lic-0001\nseats=200\nmaxTransfersPerYear=2",
+          "signature": "V81Zruyxs9C78InxUAn2LB65E/TXJBZ9hjcqk3PZmGHwHrDX7hgBevsRzAv8lMj5w1k+9/ii58WzHBS3Klh4Cw=="
+        },
+        {
+          "id": "8276190c7bcf1cb5",
+          "kid": "df9e7c0d8cc2809d",
+          "text": "castbridge-licence-event-v1\ntype=license\nkid=df9e7c0d8cc2809d\nat=1800000000000\nlicense=lic-evil\nseats=99\nmaxTransfersPerYear=2",
+          "signature": "H2FtEsBGVp4GZeWEkaBcUutiDuRdkwTYlV77vgbgGckd4751siITKdA7yTc3uotYtiD2Km135UVFlOXKSMrEDg=="
+        }
+      ],
+      "plans": [],
+      "expect": {
+        "seats": [],
+        "used": {},
+        "transfers": 0,
+        "duplicates": 0,
+        "rejected": ["BAD_SIGNATURE", "UNKNOWN_KEY"],
+        "revokedSeats": {},
+        "warnings": 0
+      }
+    },
+    {
+      "type": "licence",
+      "id": "lic-revoke-seat",
+      "description": "révocation explicite d'un poste",
+      "trustedKeys": ["desk", "phone", "server"],
+      "events": [
+        {
+          "id": "09d7e31c1341f890",
+          "kid": "b2e5b41860d1d8be",
+          "text": "castbridge-licence-event-v1\ntype=license\nkid=b2e5b41860d1d8be\nat=1799136000000\nlicense=lic-0001\nseats=2\nmaxTransfersPerYear=2",
+          "signature": "V81Zruyxs9C78InxUAn2LB65E/TXJBZ9hjcqk3PZmGHwHrDX7hgBevsRzAv8lMj5w1k+9/ii58WzHBS3Klh4Cw=="
+        },
+        {
+          "id": "a164326828003f17",
+          "kid": "b2e5b41860d1d8be",
+          "text": "castbridge-licence-event-v1\ntype=issue\nkid=b2e5b41860d1d8be\nat=1800000000000\nlicense=lic-0001\nseat=f36757c226dd2ee4\nsubject=tv\nkind=production\nnonce=00112233445566778899aabbccddeeff\nnotAfter=1825833600000\nk=4\nfactor=FLASH|c48cacd81b9663d0ba97c221cbd17f4f\nfactor=ETHERNET|f91efd89e0025c2262da12cfbed43632\nfactor=WIFI|ea8b552e2240bbdd8c88c42313c4deab\nfactor=SYSTEM_SERIAL|774beacbf351b0d205f9166669e4d3c7\nfactor=BLUETOOTH|d365ea67e00585edaf8bef4d7378850d",
+          "signature": "YnUgUXvMgBAIFg3JaIYF0zi7osU+XYtuhN7ECEKqTRe4XzSNMUrmY7EZIB3imtSWhbLf2bCUlKiAXTJdZj5LDg=="
+        },
+        {
+          "id": "c387397cded30477",
+          "kid": "ce202dfdbe57b99a",
+          "text": "castbridge-licence-event-v1\ntype=revoke\nkid=ce202dfdbe57b99a\nat=1800259200000\ntarget=seat\nvalue=lic-0001|f36757c226dd2ee4",
+          "signature": "eE6mEhyLQGgrybNFcQodis8L6z9mp29JavO8WXpcza1qn66URC1DYAGJ1C3tc11C99PLNn+EyfU8+A2PIHUCDA=="
+        }
+      ],
+      "plans": [],
+      "expect": {
+        "seats": ["lic-0001|f36757c226dd2ee4"],
+        "used": {
+          "lic-0001": 1
+        },
+        "transfers": 0,
+        "duplicates": 0,
+        "rejected": [],
+        "revokedSeats": {
+          "lic-0001|f36757c226dd2ee4": 1800259200000
+        },
+        "warnings": 0
       }
     }
   ]
