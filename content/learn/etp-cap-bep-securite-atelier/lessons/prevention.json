@@ -1,0 +1,922 @@
+{
+ "chapter": "etp-cap-bep-securite-atelier-prevention",
+ "lessons": [
+  {
+   "id": "etp-cap-bep-securite-atelier-epi-risques",
+   "title": "Équipements de protection et risques de l'atelier",
+   "minutes": 40,
+   "programRef": "Programme de sciences / prévention santé-environnement de l'enseignement technique (CAP/BEP) — à vérifier sur le texte officiel",
+   "status": "draft",
+   "author": "CastBridge (brouillon IA)",
+   "source": "Rédaction originale ; à relire par un enseignant",
+   "objectives": [
+    "Définir danger, risque et prévention.",
+    "Choisir un équipement de protection individuelle adapté.",
+    "Identifier les principaux risques d'un atelier.",
+    "Appliquer l'ordre de la prévention : supprimer, réduire, protéger."
+   ],
+   "exercises": [
+    "etp-cap-bep-securite-atelier-epi-risques-01",
+    "etp-cap-bep-securite-atelier-epi-risques-02",
+    "etp-cap-bep-securite-atelier-epi-risques-03",
+    "etp-cap-bep-securite-atelier-epi-risques-04",
+    "etp-cap-bep-securite-atelier-epi-risques-05",
+    "etp-cap-bep-securite-atelier-epi-risques-06"
+   ],
+   "selfCheck": [
+    "etp-cap-bep-securite-atelier-epi-risques-q1",
+    "etp-cap-bep-securite-atelier-epi-risques-q2",
+    "etp-cap-bep-securite-atelier-epi-risques-q3",
+    "etp-cap-bep-securite-atelier-epi-risques-q4",
+    "etp-cap-bep-securite-atelier-epi-risques-q5"
+   ],
+   "reviewNotes": [
+    "Le catalogue n'a pas de niveau CAP/BEP : pack placé en 4e (à ajuster quand le catalogue sera étendu).",
+    "Principes généraux de prévention uniquement ; les consignes précises (équipements, extincteurs, règlement) dépendent de l'atelier et de la réglementation locale.",
+    "Relire par un enseignant technique ou un responsable sécurité : cohérence avec les règles de l'atelier."
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Danger, risque, prévention",
+     "md": "Un **danger** est ce qui peut causer un dommage (une meule qui tourne, un câble dénudé). Un **risque** est la possibilité que ce danger blesse quelqu'un. La **prévention** regroupe les mesures qui évitent l'accident."
+    },
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Équipement de protection individuelle (EPI)",
+     "md": "Un **EPI** est un équipement porté par la personne pour se protéger d'un risque qui reste présent : lunettes, gants, chaussures de sécurité, casque, protections auditives, masque, blouse. Il protège une personne à la fois et ne supprime pas le danger."
+    },
+    {
+     "type": "key",
+     "style": "methode",
+     "title": "Ordre de la prévention",
+     "md": "1. **Supprimer** le danger si possible.\n2. **Réduire** le risque (machine protégée, produit moins dangereux).\n3. **Protection collective** (carter, ventilation, barrière).\n4. **Protection individuelle** (EPI) en dernier recours, en complément."
+    },
+    {
+     "type": "key",
+     "style": "propriete",
+     "title": "Les grands risques d'atelier",
+     "md": "- **Électrique** : fils abîmés, mains mouillées.\n- **Mécanique** : pièces en mouvement, coupures, projections.\n- **Chimique** : produits irritants, vapeurs.\n- **Incendie** : produits inflammables, étincelles.\n- **Chute** : sol glissant, encombré, travail en hauteur.\n- **Bruit** : machines, outils bruyants."
+    },
+    {
+     "type": "illustration",
+     "figure": {
+      "kind": "shapes",
+      "w": 400,
+      "h": 270,
+      "items": [
+       {
+        "t": "text",
+        "x": 200,
+        "y": 22,
+        "text": "Hiérarchie de la prévention",
+        "size": 15,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 110,
+        "y": 40,
+        "w": 180,
+        "h": 40,
+        "fill": "lightgreen",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 200.0,
+        "y": 64.9,
+        "text": "1. Supprimer",
+        "size": 14,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 70,
+        "y": 90,
+        "w": 260,
+        "h": 40,
+        "fill": "lightyellow",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 200.0,
+        "y": 114.9,
+        "text": "2. Réduire le risque",
+        "size": 14,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 30,
+        "y": 140,
+        "w": 340,
+        "h": 40,
+        "fill": "lightorange",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 200.0,
+        "y": 164.9,
+        "text": "3. Protection collective",
+        "size": 14,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 10,
+        "y": 190,
+        "w": 380,
+        "h": 40,
+        "fill": "lightblue",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 200.0,
+        "y": 214.9,
+        "text": "4. EPI en dernier recours",
+        "size": 14,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 200,
+        "y": 255,
+        "text": "Du plus efficace (haut) au moins efficace (bas)",
+        "size": 13,
+        "color": "ink",
+        "anchor": "middle"
+       }
+      ]
+     },
+     "caption": "L'ordre de la prévention.",
+     "alt": "Quatre bandes de plus en plus larges, de haut en bas : supprimer, réduire le risque, protection collective, EPI en dernier recours."
+    },
+    {
+     "type": "example",
+     "title": "Exemple 1 — associer EPI et risque",
+     "statement": "Un apprenti doit meuler une pièce métallique. Quels EPI et pourquoi ?",
+     "steps": [
+      {
+       "md": "Risques : projections d'étincelles et de particules, bruit, coupures."
+      },
+      {
+       "md": "EPI : lunettes ou écran de protection, gants adaptés, protections auditives, chaussures de sécurité."
+      }
+     ],
+     "answer": "**Chaque EPI répond à un risque précis.**"
+    },
+    {
+     "type": "example",
+     "title": "Exemple 2 — appliquer la hiérarchie",
+     "statement": "Le sol d'un atelier est glissant à cause d'une fuite d'huile. Que faire en priorité ?",
+     "steps": [
+      {
+       "md": "Supprimer la cause : réparer la fuite et nettoyer l'huile."
+      },
+      {
+       "md": "En attendant : balisage et signalisation ; les chaussures antidérapantes sont un complément."
+      }
+     ],
+     "answer": "**On agit d'abord sur la cause, pas seulement sur la protection de la personne.**"
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Erreurs fréquentes",
+     "md": "- Croire que l'EPI supprime le danger.\n- Porter un EPI abîmé ou inadapté.\n- Enlever ses lunettes « juste un instant ».\n- Mettre des gants près d'une machine tournante qui peut les happer (selon la consigne de l'atelier)."
+    },
+    {
+     "type": "more",
+     "items": [
+      "Dresse la liste des risques de ton atelier et note la protection prévue.",
+      "Un accident évité s'appelle parfois « presque accident » : il faut le signaler."
+     ]
+    },
+    {
+     "type": "exercise",
+     "ref": "etp-cap-bep-securite-atelier-epi-risques-01"
+    }
+   ]
+  },
+  {
+   "id": "etp-cap-bep-securite-atelier-signalisation-poste",
+   "title": "Signalisation, rangement, ergonomie et organisation du poste",
+   "minutes": 40,
+   "programRef": "Programme de sciences / prévention santé-environnement de l'enseignement technique (CAP/BEP) — à vérifier sur le texte officiel",
+   "status": "draft",
+   "author": "CastBridge (brouillon IA)",
+   "source": "Rédaction originale ; à relire par un enseignant",
+   "objectives": [
+    "Lire les formes et couleurs générales de la signalisation de sécurité.",
+    "Ranger l'atelier de façon sûre.",
+    "Adopter des postures et des gestes économes.",
+    "Organiser son poste de travail."
+   ],
+   "prerequisites": [
+    "etp-cap-bep-securite-atelier-epi-risques"
+   ],
+   "exercises": [
+    "etp-cap-bep-securite-atelier-signalisation-poste-01",
+    "etp-cap-bep-securite-atelier-signalisation-poste-02",
+    "etp-cap-bep-securite-atelier-signalisation-poste-03",
+    "etp-cap-bep-securite-atelier-signalisation-poste-04",
+    "etp-cap-bep-securite-atelier-signalisation-poste-05",
+    "etp-cap-bep-securite-atelier-signalisation-poste-06"
+   ],
+   "selfCheck": [
+    "etp-cap-bep-securite-atelier-signalisation-poste-q1",
+    "etp-cap-bep-securite-atelier-signalisation-poste-q2",
+    "etp-cap-bep-securite-atelier-signalisation-poste-q3",
+    "etp-cap-bep-securite-atelier-signalisation-poste-q4",
+    "etp-cap-bep-securite-atelier-signalisation-poste-q5"
+   ],
+   "reviewNotes": [
+    "Le catalogue n'a pas de niveau CAP/BEP : pack placé en 4e (à ajuster quand le catalogue sera étendu).",
+    "Principes généraux de prévention uniquement ; les consignes précises (équipements, extincteurs, règlement) dépendent de l'atelier et de la réglementation locale.",
+    "Vérifier la description des formes et couleurs sur les panneaux réellement utilisés dans l'atelier.",
+    "Consignes de manutention données en principes, sans valeurs de charge."
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "propriete",
+     "title": "Formes et couleurs",
+     "md": "- **Rond rouge barré** : interdiction.\n- **Rond bleu** : obligation (ex. porter un EPI).\n- **Triangle jaune ou orange** : danger, avertissement.\n- **Carré vert** : secours, sortie, évacuation.\n- **Carré rouge** : matériel de lutte contre l'incendie.",
+     "review": true
+    },
+    {
+     "type": "key",
+     "style": "retenir",
+     "title": "Rangement",
+     "md": "Un atelier rangé évite les chutes et les pertes de temps : **une place pour chaque chose**, allées dégagées, sorties libres, outils rangés après usage, déchets triés, produits fermés et étiquetés."
+    },
+    {
+     "type": "key",
+     "style": "methode",
+     "title": "Ergonomie",
+     "md": "L'ergonomie adapte le travail à la personne. **Plie les jambes, garde le dos droit**, rapproche la charge du corps, évite de tourner le buste en portant, demande de l'aide pour une charge lourde, alterne les postures."
+    },
+    {
+     "type": "key",
+     "style": "methode",
+     "title": "Organiser son poste",
+     "md": "1. Dégager le plan de travail.\n2. Placer les outils utilisés souvent à portée de main.\n3. Vérifier l'état du matériel et des EPI.\n4. S'assurer d'un bon éclairage et d'un sol sec.\n5. En fin de travail, nettoyer et ranger."
+    },
+    {
+     "type": "illustration",
+     "figure": {
+      "kind": "shapes",
+      "w": 400,
+      "h": 140,
+      "items": [
+       {
+        "t": "circle",
+        "cx": 55,
+        "cy": 55,
+        "r": 32,
+        "fill": "white",
+        "stroke": "red",
+        "width": 5
+       },
+       {
+        "t": "line",
+        "x1": 33,
+        "y1": 77,
+        "x2": 77,
+        "y2": 33,
+        "color": "red",
+        "width": 5
+       },
+       {
+        "t": "text",
+        "x": 55,
+        "y": 110,
+        "text": "Interdiction",
+        "size": 13,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "circle",
+        "cx": 150,
+        "cy": 55,
+        "r": 32,
+        "fill": "lightblue",
+        "stroke": "blue",
+        "width": 4
+       },
+       {
+        "t": "text",
+        "x": 150,
+        "y": 60,
+        "text": "EPI",
+        "size": 14,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 150,
+        "y": 110,
+        "text": "Obligation",
+        "size": 13,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "poly",
+        "pts": [
+         250,
+         25,
+         220,
+         80,
+         280,
+         80
+        ],
+        "fill": "lightyellow",
+        "stroke": "orange",
+        "width": 4,
+        "closed": true
+       },
+       {
+        "t": "text",
+        "x": 250,
+        "y": 72,
+        "text": "!",
+        "size": 18,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 250,
+        "y": 110,
+        "text": "Danger",
+        "size": 13,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "rect",
+        "x": 315,
+        "y": 25,
+        "w": 60,
+        "h": 55,
+        "fill": "lightgreen",
+        "stroke": "green",
+        "width": 4
+       },
+       {
+        "t": "text",
+        "x": 345,
+        "y": 60,
+        "text": "Sortie",
+        "size": 13,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 345,
+        "y": 110,
+        "text": "Secours",
+        "size": 13,
+        "color": "ink",
+        "anchor": "middle"
+       }
+      ]
+     },
+     "caption": "Quatre familles de panneaux.",
+     "alt": "Un rond rouge barré (interdiction), un rond bleu avec EPI (obligation), un triangle jaune avec un point d'exclamation (danger), un carré vert (secours).",
+     "review": true
+    },
+    {
+     "type": "example",
+     "title": "Exemple 1 — lire un panneau",
+     "statement": "Un panneau rond bleu avec un casque est affiché à l'entrée du chantier fictif. Que signifie-t-il ?",
+     "steps": [
+      {
+       "md": "Forme ronde et couleur bleue : une obligation."
+      },
+      {
+       "md": "Le dessin du casque précise laquelle : le port du casque est obligatoire."
+      }
+     ],
+     "answer": "**Obligation de porter un casque.**"
+    },
+    {
+     "type": "example",
+     "title": "Exemple 2 — poste de travail",
+     "statement": "Un apprenti travaille sur un établi encombré, avec ses outils éparpillés. Quelles corrections ?",
+     "steps": [
+      {
+       "md": "Dégager l'établi et ranger les outils à leur place."
+      },
+      {
+       "md": "Placer les outils fréquents à portée de main et vérifier l'éclairage."
+      }
+     ],
+     "answer": "**Poste dégagé, outils à portée, éclairage correct.**"
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Erreurs fréquentes",
+     "md": "- Poser un carton devant une sortie « le temps de ranger ».\n- Porter une charge le dos courbé.\n- Ignorer un panneau parce qu'on le connaît.\n- Laisser traîner un câble dans une allée."
+    },
+    {
+     "type": "more",
+     "items": [
+      "Fais le tour de ton atelier : quels panneaux vois-tu ? Que signifient-ils ?",
+      "Un bon éclairage réduit les accidents et la fatigue."
+     ]
+    },
+    {
+     "type": "exercise",
+     "ref": "etp-cap-bep-securite-atelier-signalisation-poste-01"
+    }
+   ]
+  }
+ ],
+ "exercises": [
+  {
+   "id": "etp-cap-bep-securite-atelier-epi-risques-01",
+   "kind": "mcq",
+   "tier": "application",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "etp-cap-bep-securite-atelier-epi-risques",
+   "prompt": "Les lunettes de protection protègent contre :",
+   "explanation": "Elles protègent les yeux des projections.",
+   "source": "Exercice original",
+   "choices": [
+    "Le bruit",
+    "Les projections dans les yeux",
+    "Les chutes",
+    "Le froid"
+   ],
+   "answer": 1
+  },
+  {
+   "id": "etp-cap-bep-securite-atelier-epi-risques-02",
+   "kind": "truefalse",
+   "tier": "application",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "etp-cap-bep-securite-atelier-epi-risques",
+   "prompt": "Un EPI supprime le danger.",
+   "explanation": "Il protège la personne mais le danger reste.",
+   "source": "Exercice original",
+   "answer": false
+  },
+  {
+   "id": "etp-cap-bep-securite-atelier-epi-risques-03",
+   "kind": "mcq",
+   "tier": "application",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "etp-cap-bep-securite-atelier-epi-risques",
+   "prompt": "Une mesure qui supprime le danger à la source se place :",
+   "explanation": "La suppression est la priorité.",
+   "source": "Exercice original",
+   "choices": [
+    "en dernier",
+    "en premier",
+    "après les EPI",
+    "n'existe pas"
+   ],
+   "answer": 1
+  },
+  {
+   "id": "etp-cap-bep-securite-atelier-epi-risques-04",
+   "kind": "matching",
+   "tier": "approfondissement",
+   "difficulty": 2,
+   "points": 2,
+   "lesson": "etp-cap-bep-securite-atelier-epi-risques",
+   "prompt": "Associe chaque risque à un exemple.",
+   "explanation": "Chaque risque a ses sources propres.",
+   "source": "Exercice original",
+   "pairs": [
+    [
+     "Électrique",
+     "Câble dénudé"
+    ],
+    [
+     "Mécanique",
+     "Pièce qui tourne"
+    ],
+    [
+     "Chimique",
+     "Solvant irritant"
+    ],
+    [
+     "Chute",
+     "Sol encombré"
+    ]
+   ]
+  },
+  {
+   "id": "etp-cap-bep-securite-atelier-epi-risques-05",
+   "kind": "open",
+   "tier": "approfondissement",
+   "difficulty": 2,
+   "points": 3,
+   "lesson": "etp-cap-bep-securite-atelier-epi-risques",
+   "prompt": "Décris trois risques d'un atelier de ton choix et une mesure de prévention pour chacun.",
+   "explanation": "Chaque risque est relié à une prévention.",
+   "method": "Risque → cause → mesure.",
+   "source": "Exercice original",
+   "model": "Atelier de menuiserie : coupure par la scie (carter, consignes), bruit des machines (protections auditives), poussière (aspiration et masque).",
+   "rubric": [
+    "Trois risques distincts",
+    "Une mesure par risque",
+    "Mesures cohérentes",
+    "Vocabulaire précis"
+   ]
+  },
+  {
+   "id": "etp-cap-bep-securite-atelier-epi-risques-06",
+   "kind": "problem",
+   "tier": "examen",
+   "difficulty": 2,
+   "lesson": "etp-cap-bep-securite-atelier-epi-risques",
+   "prompt": "Dans un atelier fictif, un élève utilise une perceuse sans lunettes ; un câble de rallonge traîne au sol près d'une flaque.",
+   "method": "Repérer le danger, le risque, la cause, la mesure.",
+   "source": "Exercice original",
+   "review": true,
+   "reviewNote": "Mettre à jour selon les règles de l'atelier.",
+   "parts": [
+    {
+     "id": "etp-cap-bep-securite-atelier-epi-risques-06-a",
+     "points": 1,
+     "prompt": "Quel risque principal est lié au câble et à la flaque ?",
+     "explanation": "Contact avec l'eau et trébuchement.",
+     "kind": "mcq",
+     "choices": [
+      "Chimique",
+      "Électrique et chute",
+      "Bruit",
+      "Aucun"
+     ],
+     "answer": 1
+    },
+    {
+     "id": "etp-cap-bep-securite-atelier-epi-risques-06-b",
+     "points": 1,
+     "prompt": "Quel EPI manque à l'élève ?",
+     "explanation": "Le perçage peut projeter des copeaux.",
+     "kind": "mcq",
+     "choices": [
+      "Des lunettes de protection",
+      "Un parapluie",
+      "Un tablier de cuisine",
+      "Des palmes"
+     ],
+     "answer": 0
+    },
+    {
+     "id": "etp-cap-bep-securite-atelier-epi-risques-06-c",
+     "points": 2,
+     "prompt": "Propose deux actions pour corriger la situation.",
+     "explanation": "On supprime d'abord la cause puis on protège.",
+     "kind": "open",
+     "model": "Éteindre et débrancher, nettoyer la flaque, ranger le câble, faire porter les lunettes à l'élève.",
+     "rubric": [
+      "Supprimer la cause",
+      "EPI en complément",
+      "Information de l'élève"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "etp-cap-bep-securite-atelier-epi-risques-q1",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "etp-cap-bep-securite-atelier-epi-risques",
+   "prompt": "Un danger est :",
+   "choices": [
+    "Ce qui peut causer un dommage",
+    "Un équipement",
+    "Un extincteur",
+    "Un sol propre"
+   ],
+   "answer": 0,
+   "explanation": "Le danger est la source potentielle de dommage."
+  },
+  {
+   "id": "etp-cap-bep-securite-atelier-epi-risques-q2",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "etp-cap-bep-securite-atelier-epi-risques",
+   "prompt": "Un EPI se porte :",
+   "choices": [
+    "Seulement pour faire joli",
+    "Pour se protéger d'un risque",
+    "Quand on est pressé",
+    "Jamais"
+   ],
+   "answer": 1,
+   "explanation": "Il protège l'utilisateur."
+  },
+  {
+   "id": "etp-cap-bep-securite-atelier-epi-risques-q3",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "etp-cap-bep-securite-atelier-epi-risques",
+   "prompt": "Le bruit est un risque :",
+   "choices": [
+    "électrique",
+    "sonore",
+    "chimique",
+    "optique"
+   ],
+   "answer": 1,
+   "explanation": "Le bruit est un risque sonore."
+  },
+  {
+   "id": "etp-cap-bep-securite-atelier-epi-risques-q4",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "etp-cap-bep-securite-atelier-epi-risques",
+   "prompt": "La protection collective protège :",
+   "choices": [
+    "une seule personne",
+    "plusieurs personnes",
+    "personne",
+    "seulement le chef"
+   ],
+   "answer": 1,
+   "explanation": "Elle protège tout le monde autour (carter, ventilation)."
+  },
+  {
+   "id": "etp-cap-bep-securite-atelier-epi-risques-q5",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "etp-cap-bep-securite-atelier-epi-risques",
+   "prompt": "Pour un risque d'incendie, on évite :",
+   "choices": [
+    "de ranger les chiffons gras à l'écart",
+    "les sources de chaleur près des produits inflammables",
+    "d'avoir un extincteur",
+    "d'aérer"
+   ],
+   "answer": 1,
+   "explanation": "On éloigne chaleur et inflammables."
+  },
+  {
+   "id": "etp-cap-bep-securite-atelier-signalisation-poste-01",
+   "kind": "mcq",
+   "tier": "application",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "etp-cap-bep-securite-atelier-signalisation-poste",
+   "prompt": "Un triangle jaune signale :",
+   "explanation": "Le triangle avertit d'un danger.",
+   "source": "Exercice original",
+   "choices": [
+    "Une obligation",
+    "Un danger",
+    "Une sortie",
+    "Un jeu"
+   ],
+   "answer": 1
+  },
+  {
+   "id": "etp-cap-bep-securite-atelier-signalisation-poste-02",
+   "kind": "truefalse",
+   "tier": "application",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "etp-cap-bep-securite-atelier-signalisation-poste",
+   "prompt": "Les allées de l'atelier doivent rester dégagées.",
+   "explanation": "On évite chutes et blocages d'évacuation.",
+   "source": "Exercice original",
+   "answer": true
+  },
+  {
+   "id": "etp-cap-bep-securite-atelier-signalisation-poste-03",
+   "kind": "mcq",
+   "tier": "application",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "etp-cap-bep-securite-atelier-signalisation-poste",
+   "prompt": "Pour soulever une charge, on doit :",
+   "explanation": "C'est le principe de base.",
+   "source": "Exercice original",
+   "choices": [
+    "plier le dos",
+    "plier les jambes et garder le dos droit",
+    "tourner le buste",
+    "la tenir loin du corps"
+   ],
+   "answer": 1
+  },
+  {
+   "id": "etp-cap-bep-securite-atelier-signalisation-poste-04",
+   "kind": "matching",
+   "tier": "approfondissement",
+   "difficulty": 2,
+   "points": 2,
+   "lesson": "etp-cap-bep-securite-atelier-signalisation-poste",
+   "prompt": "Associe forme/couleur et signification.",
+   "explanation": "Les familles de panneaux suivent des codes simples.",
+   "source": "Exercice original",
+   "review": true,
+   "pairs": [
+    [
+     "Rond rouge barré",
+     "Interdiction"
+    ],
+    [
+     "Rond bleu",
+     "Obligation"
+    ],
+    [
+     "Carré vert",
+     "Secours, sortie"
+    ],
+    [
+     "Triangle jaune",
+     "Danger"
+    ]
+   ]
+  },
+  {
+   "id": "etp-cap-bep-securite-atelier-signalisation-poste-05",
+   "kind": "open",
+   "tier": "approfondissement",
+   "difficulty": 2,
+   "points": 3,
+   "lesson": "etp-cap-bep-securite-atelier-signalisation-poste",
+   "prompt": "Décris cinq règles de rangement et d'organisation pour ton poste de travail.",
+   "explanation": "Un poste ordonné réduit les risques.",
+   "source": "Exercice original",
+   "model": "Je dégage mon plan de travail ; je range mes outils après usage ; je garde les allées libres ; je ferme et étiquette les produits ; je nettoie en fin de travail.",
+   "rubric": [
+    "Au moins cinq règles",
+    "Règles réalistes",
+    "Justification (sécurité)",
+    "Vocabulaire clair"
+   ]
+  },
+  {
+   "id": "etp-cap-bep-securite-atelier-signalisation-poste-06",
+   "kind": "problem",
+   "tier": "examen",
+   "difficulty": 2,
+   "lesson": "etp-cap-bep-securite-atelier-signalisation-poste",
+   "prompt": "Dans un atelier fictif, un extincteur est caché derrière des caisses ; la porte de sortie est bloquée ; un apprenti porte seul un lourd sac en se courbant.",
+   "method": "Repérer ce qui gêne l'évacuation et la sécurité.",
+   "source": "Exercice original",
+   "review": true,
+   "reviewNote": "Vérifier les consignes d'évacuation de l'atelier.",
+   "parts": [
+    {
+     "id": "etp-cap-bep-securite-atelier-signalisation-poste-06-a",
+     "points": 1,
+     "prompt": "Quel problème est le plus grave pour l'évacuation ?",
+     "explanation": "En cas d'urgence il faut pouvoir sortir.",
+     "kind": "mcq",
+     "choices": [
+      "La porte de sortie bloquée",
+      "Le sac",
+      "La couleur des murs",
+      "L'heure"
+     ],
+     "answer": 0
+    },
+    {
+     "id": "etp-cap-bep-securite-atelier-signalisation-poste-06-b",
+     "points": 1,
+     "prompt": "Un extincteur doit être visible et accessible.",
+     "explanation": "On doit pouvoir l'atteindre sans obstacle.",
+     "kind": "truefalse",
+     "answer": true
+    },
+    {
+     "id": "etp-cap-bep-securite-atelier-signalisation-poste-06-c",
+     "points": 2,
+     "prompt": "Explique deux corrections à effectuer.",
+     "explanation": "Chaque correction répond à un danger.",
+     "kind": "open",
+     "model": "Dégager l'accès à l'extincteur et à la sortie ; faire porter le sac en pliant les jambes, ou à deux.",
+     "rubric": [
+      "Sortie dégagée",
+      "Extincteur visible",
+      "Posture ou aide"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "etp-cap-bep-securite-atelier-signalisation-poste-q1",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "etp-cap-bep-securite-atelier-signalisation-poste",
+   "prompt": "Un rond bleu signifie :",
+   "choices": [
+    "Obligation",
+    "Interdiction",
+    "Sortie",
+    "Danger"
+   ],
+   "answer": 0,
+   "explanation": "Le bleu indique une obligation."
+  },
+  {
+   "id": "etp-cap-bep-securite-atelier-signalisation-poste-q2",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "etp-cap-bep-securite-atelier-signalisation-poste",
+   "prompt": "Un carré vert indique :",
+   "choices": [
+    "Un danger",
+    "Un secours ou une sortie",
+    "Un incendie",
+    "Une interdiction"
+   ],
+   "answer": 1,
+   "explanation": "Le vert concerne les secours."
+  },
+  {
+   "id": "etp-cap-bep-securite-atelier-signalisation-poste-q3",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "etp-cap-bep-securite-atelier-signalisation-poste",
+   "prompt": "En fin de travail, on :",
+   "choices": [
+    "laisse tout",
+    "nettoie et range",
+    "se contente de partir",
+    "éteint la lumière seulement"
+   ],
+   "answer": 1,
+   "explanation": "On laisse le poste propre."
+  },
+  {
+   "id": "etp-cap-bep-securite-atelier-signalisation-poste-q4",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "etp-cap-bep-securite-atelier-signalisation-poste",
+   "prompt": "L'ergonomie cherche à :",
+   "choices": [
+    "adapter le travail à la personne",
+    "aller plus vite à tout prix",
+    "supprimer les pauses",
+    "supprimer les outils"
+   ],
+   "answer": 0,
+   "explanation": "Elle réduit la fatigue et les blessures."
+  },
+  {
+   "id": "etp-cap-bep-securite-atelier-signalisation-poste-q5",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "etp-cap-bep-securite-atelier-signalisation-poste",
+   "prompt": "Un câble au sol dans une allée est un risque de :",
+   "choices": [
+    "chute",
+    "bruit",
+    "pollution lumineuse",
+    "aucun"
+   ],
+   "answer": 0,
+   "explanation": "On peut trébucher."
+  }
+ ]
+}

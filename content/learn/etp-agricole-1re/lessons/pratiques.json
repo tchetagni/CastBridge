@@ -1,0 +1,932 @@
+{
+ "chapter": "etp-agricole-1re-pratiques",
+ "lessons": [
+  {
+   "id": "etp-agricole-1re-techniques-protection",
+   "title": "Techniques culturales et protection des cultures",
+   "minutes": 45,
+   "programRef": "Programme de sciences et techniques agricoles des séries agricoles, classe de 1re — à vérifier sur le texte officiel",
+   "status": "draft",
+   "author": "CastBridge (brouillon IA)",
+   "source": "Rédaction originale ; à relire par un enseignant",
+   "objectives": [
+    "Décrire les étapes d'un itinéraire technique.",
+    "Comparer semis en lignes, à la volée et en poquets.",
+    "Expliquer l'intérêt de la rotation et de l'association.",
+    "Citer les principes généraux de la protection des cultures."
+   ],
+   "prerequisites": [
+    "etp-agricole-1re-plante"
+   ],
+   "exercises": [
+    "etp-agricole-1re-techniques-protection-01",
+    "etp-agricole-1re-techniques-protection-02",
+    "etp-agricole-1re-techniques-protection-03",
+    "etp-agricole-1re-techniques-protection-04",
+    "etp-agricole-1re-techniques-protection-05",
+    "etp-agricole-1re-techniques-protection-06"
+   ],
+   "selfCheck": [
+    "etp-agricole-1re-techniques-protection-q1",
+    "etp-agricole-1re-techniques-protection-q2",
+    "etp-agricole-1re-techniques-protection-q3",
+    "etp-agricole-1re-techniques-protection-q4",
+    "etp-agricole-1re-techniques-protection-q5"
+   ],
+   "reviewNotes": [
+    "Matière « svt » choisie faute de matière agricole dans le catalogue.",
+    "Aucun chiffre agronomique réel (rendement, dose, pH optimal) n'est donné comme règle : tous les chiffres sont fictifs, fournis par l'énoncé. À adapter au contexte local par un enseignant agricole.",
+    "Protection des cultures : principes généraux seulement, sans produit ni dose ; la lutte chimique est à confier à un technicien et à l'étiquette.",
+    "Associations et rotations données en exemple : à adapter aux pratiques locales."
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "methode",
+     "title": "Itinéraire technique",
+     "md": "1. **Préparation du sol** (défrichage, labour, hersage, planches).\n2. **Semis** ou plantation (choix de la variété, de la date, de l'écartement).\n3. **Entretien** (arrosage, sarclage, éclaircissage, buttage, apport d'engrais).\n4. **Protection** contre ravageurs et maladies.\n5. **Récolte** et conservation."
+    },
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Types de semis",
+     "md": "Semis **en lignes** : graines alignées, entretien facile. Semis **à la volée** : graines éparpillées, rapide mais peu régulier. Semis **en poquets** : quelques graines dans de petits trous espacés. Certaines cultures sont d'abord semées en **pépinière** puis **repiquées**."
+    },
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Rotation et association",
+     "md": "La **rotation** fait se succéder des cultures de familles différentes sur une même parcelle, ce qui limite maladies et ravageurs spécifiques et mieux utilise le sol. L'**association** cultive plusieurs espèces ensemble sur la même parcelle (par exemple une céréale et une légumineuse) : elle peut mieux couvrir le sol mais crée aussi de la concurrence."
+    },
+    {
+     "type": "key",
+     "style": "methode",
+     "title": "Protection : principes",
+     "md": "**Prévenir d'abord** : semences saines, variétés adaptées, rotation, parcelle propre, bonne date de semis. Ensuite **observer** régulièrement. Puis **lutte mécanique** (arrachage, pièges), **biologique** (auxiliaires) et, en dernier recours seulement, **lutte chimique** sur conseil d'un technicien, avec protections et respect de l'étiquette.",
+     "review": true
+    },
+    {
+     "type": "illustration",
+     "figure": {
+      "kind": "shapes",
+      "w": 400,
+      "h": 200,
+      "items": [
+       {
+        "t": "rect",
+        "x": 150,
+        "y": 10,
+        "w": 100,
+        "h": 40,
+        "fill": "lightgreen",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 200.0,
+        "y": 34.55,
+        "text": "Année 1 : A",
+        "size": 13,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 270,
+        "y": 80,
+        "w": 120,
+        "h": 40,
+        "fill": "lightyellow",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 330.0,
+        "y": 104.55,
+        "text": "Année 2 : B",
+        "size": 13,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 150,
+        "y": 150,
+        "w": 100,
+        "h": 40,
+        "fill": "lightorange",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 200.0,
+        "y": 174.55,
+        "text": "Année 3 : C",
+        "size": 13,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 10,
+        "y": 80,
+        "w": 120,
+        "h": 40,
+        "fill": "lightgreen",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 70.0,
+        "y": 104.55,
+        "text": "Retour à A",
+        "size": 13,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "line",
+        "x1": 250,
+        "y1": 30,
+        "x2": 300,
+        "y2": 80,
+        "color": "ink",
+        "width": 2,
+        "arrow": "end"
+       },
+       {
+        "t": "line",
+        "x1": 300,
+        "y1": 120,
+        "x2": 250,
+        "y2": 160,
+        "color": "ink",
+        "width": 2,
+        "arrow": "end"
+       },
+       {
+        "t": "line",
+        "x1": 150,
+        "y1": 170,
+        "x2": 90,
+        "y2": 120,
+        "color": "ink",
+        "width": 2,
+        "arrow": "end"
+       },
+       {
+        "t": "line",
+        "x1": 70,
+        "y1": 80,
+        "x2": 150,
+        "y2": 30,
+        "color": "ink",
+        "width": 2,
+        "arrow": "end"
+       }
+      ]
+     },
+     "caption": "Rotation sur trois ans.",
+     "alt": "Quatre cases en cycle : année 1 culture A, année 2 culture B, année 3 culture C, puis retour à A."
+    },
+    {
+     "type": "example",
+     "title": "Exemple 1 — rotation",
+     "statement": "Une parcelle fictive porte une céréale l'année 1. Propose une rotation sur trois ans.",
+     "steps": [
+      {
+       "md": "Année 2 : une légumineuse (plante d'une autre famille, qui enrichit le sol en azote)."
+      },
+      {
+       "md": "Année 3 : un tubercule ou un légume, puis retour à la céréale."
+      }
+     ],
+     "answer": "**Céréale, légumineuse, culture de famille différente.**"
+    },
+    {
+     "type": "example",
+     "title": "Exemple 2 — choisir une lutte",
+     "statement": "Des chenilles apparaissent sur quelques plants d'une petite parcelle. Que faire d'abord ?",
+     "steps": [
+      {
+       "md": "Observer l'ampleur et agir en mécanique : retirer à la main les chenilles et les feuilles atteintes."
+      },
+      {
+       "md": "Si l'attaque s'étend, demander conseil à un technicien avant toute autre intervention."
+      }
+     ],
+     "answer": "**Observer, intervenir mécaniquement, demander conseil.**",
+     "review": true
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Erreurs fréquentes",
+     "md": "- Semer trop dense : les plantes se concurrencent.\n- Cultiver chaque année la même espèce sur la même parcelle.\n- Traiter sans observer ni identifier le problème.\n- Utiliser un produit sans respecter l'étiquette ni se protéger."
+    },
+    {
+     "type": "more",
+     "items": [
+      "Dessine l'itinéraire technique d'une culture de ta région.",
+      "Observe sur une parcelle les plantes adventices et leur effet."
+     ]
+    },
+    {
+     "type": "exercise",
+     "ref": "etp-agricole-1re-techniques-protection-01"
+    }
+   ]
+  },
+  {
+   "id": "etp-agricole-1re-elevage",
+   "title": "Élevage : besoins, hygiène et prophylaxie",
+   "minutes": 35,
+   "programRef": "Programme de sciences et techniques agricoles des séries agricoles, classe de 1re — à vérifier sur le texte officiel",
+   "status": "draft",
+   "author": "CastBridge (brouillon IA)",
+   "source": "Rédaction originale ; à relire par un enseignant",
+   "objectives": [
+    "Citer les besoins alimentaires d'un animal d'élevage.",
+    "Appliquer des règles d'hygiène du bâtiment.",
+    "Définir la prophylaxie sanitaire et médicale.",
+    "Reconnaître les signes d'un animal en bonne santé."
+   ],
+   "prerequisites": [
+    "etp-agricole-1re-plante"
+   ],
+   "exercises": [
+    "etp-agricole-1re-elevage-01",
+    "etp-agricole-1re-elevage-02",
+    "etp-agricole-1re-elevage-03",
+    "etp-agricole-1re-elevage-04",
+    "etp-agricole-1re-elevage-05",
+    "etp-agricole-1re-elevage-06"
+   ],
+   "selfCheck": [
+    "etp-agricole-1re-elevage-q1",
+    "etp-agricole-1re-elevage-q2",
+    "etp-agricole-1re-elevage-q3",
+    "etp-agricole-1re-elevage-q4",
+    "etp-agricole-1re-elevage-q5"
+   ],
+   "reviewNotes": [
+    "Matière « svt » choisie faute de matière agricole dans le catalogue.",
+    "Aucun chiffre agronomique réel (rendement, dose, pH optimal) n'est donné comme règle : tous les chiffres sont fictifs, fournis par l'énoncé. À adapter au contexte local par un enseignant agricole.",
+    "Santé animale : contenu général ; calendrier de vaccination et traitements à définir avec un vétérinaire ou un agent d'élevage."
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "propriete",
+     "title": "Besoins alimentaires",
+     "md": "Un animal a besoin d'**eau propre** à volonté, d'**énergie** (céréales, tubercules), de **protéines** (tourteaux, légumineuses), de **minéraux**, de **vitamines** et, chez les ruminants, de **fibres** (fourrages). La ration doit être adaptée à l'espèce, à l'âge et à la production."
+    },
+    {
+     "type": "key",
+     "style": "methode",
+     "title": "Hygiène",
+     "md": "Bâtiment **aéré** mais protégé des courants d'air et de la pluie, **litière propre et sèche**, mangeoires et abreuvoirs nettoyés, déjections évacuées, nettoyage et **désinfection** périodiques, lutte contre rongeurs et insectes, vide sanitaire entre deux bandes si possible.",
+     "review": true
+    },
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Prophylaxie",
+     "md": "La **prophylaxie** est l'ensemble des mesures qui préviennent les maladies. La **prophylaxie sanitaire** repose sur l'hygiène, l'isolement des animaux malades et la quarantaine des nouveaux arrivants. La **prophylaxie médicale** repose sur la **vaccination** et le **déparasitage**, selon un programme défini avec un vétérinaire.",
+     "review": true
+    },
+    {
+     "type": "key",
+     "style": "retenir",
+     "title": "Animal en bonne santé",
+     "md": "Il est **vif**, mange et boit normalement, a le poil ou le plumage lisse, l'œil brillant, les déjections normales. Tout changement de comportement ou d'appétit est un signal d'alerte : isoler et demander conseil."
+    },
+    {
+     "type": "illustration",
+     "figure": {
+      "kind": "shapes",
+      "w": 400,
+      "h": 160,
+      "items": [
+       {
+        "t": "rect",
+        "x": 10,
+        "y": 30,
+        "w": 110,
+        "h": 50,
+        "fill": "lightgreen",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 65.0,
+        "y": 59.55,
+        "text": "Alimentation",
+        "size": 13,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 145,
+        "y": 30,
+        "w": 110,
+        "h": 50,
+        "fill": "lightblue",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 200.0,
+        "y": 59.9,
+        "text": "Hygiène",
+        "size": 14,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 280,
+        "y": 30,
+        "w": 110,
+        "h": 50,
+        "fill": "lightyellow",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 335.0,
+        "y": 59.55,
+        "text": "Prophylaxie",
+        "size": 13,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 80,
+        "y": 100,
+        "w": 240,
+        "h": 40,
+        "fill": "lightorange",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 200.0,
+        "y": 125.25,
+        "text": "Animaux en bonne santé",
+        "size": 15,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "line",
+        "x1": 65,
+        "y1": 80,
+        "x2": 140,
+        "y2": 100,
+        "color": "ink",
+        "width": 2,
+        "arrow": "end"
+       },
+       {
+        "t": "line",
+        "x1": 200,
+        "y1": 80,
+        "x2": 200,
+        "y2": 100,
+        "color": "ink",
+        "width": 2,
+        "arrow": "end"
+       },
+       {
+        "t": "line",
+        "x1": 335,
+        "y1": 80,
+        "x2": 260,
+        "y2": 100,
+        "color": "ink",
+        "width": 2,
+        "arrow": "end"
+       }
+      ]
+     },
+     "caption": "Trois piliers de la santé d'un élevage.",
+     "alt": "Trois cases, alimentation, hygiène et prophylaxie, pointent vers une case : animaux en bonne santé."
+    },
+    {
+     "type": "example",
+     "title": "Exemple 1 — ration",
+     "statement": "Un éleveur fictif ne donne à ses poules que du maïs. Quel défaut ?",
+     "steps": [
+      {
+       "md": "Le maïs apporte surtout de l'énergie."
+      },
+      {
+       "md": "Il manque des protéines et des minéraux : il faut compléter la ration."
+      }
+     ],
+     "answer": "**La ration est déséquilibrée ; ajouter protéines et minéraux.**"
+    },
+    {
+     "type": "example",
+     "title": "Exemple 2 — nouvel animal",
+     "statement": "Un éleveur achète un animal. Que fait-il avant de le mêler au troupeau ?",
+     "steps": [
+      {
+       "md": "Il le met en quarantaine pour l'observer à l'écart."
+      },
+      {
+       "md": "S'il reste en bonne santé, il pourra rejoindre le troupeau ; sinon, il appelle un vétérinaire."
+      }
+     ],
+     "answer": "**Quarantaine puis observation.**",
+     "review": true
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Erreurs fréquentes",
+     "md": "- Donner de l'eau sale ou en quantité insuffisante.\n- Négliger la litière humide.\n- Mélanger un animal malade avec les autres.\n- Traiter sans avis ni suivi d'un vétérinaire."
+    },
+    {
+     "type": "more",
+     "items": [
+      "Observe un élevage et note les signes de bonne santé.",
+      "Tiens un cahier d'élevage : date, événements, soins."
+     ]
+    },
+    {
+     "type": "exercise",
+     "ref": "etp-agricole-1re-elevage-01"
+    }
+   ]
+  }
+ ],
+ "exercises": [
+  {
+   "id": "etp-agricole-1re-techniques-protection-01",
+   "kind": "mcq",
+   "tier": "application",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "etp-agricole-1re-techniques-protection",
+   "prompt": "Le sarclage sert à :",
+   "explanation": "Il élimine les herbes concurrentes.",
+   "source": "Exercice original",
+   "choices": [
+    "arroser",
+    "enlever les mauvaises herbes",
+    "récolter",
+    "semer"
+   ],
+   "answer": 1
+  },
+  {
+   "id": "etp-agricole-1re-techniques-protection-02",
+   "kind": "truefalse",
+   "tier": "application",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "etp-agricole-1re-techniques-protection",
+   "prompt": "La rotation consiste à cultiver la même espèce chaque année sur la même parcelle.",
+   "explanation": "C'est l'inverse : on alterne.",
+   "source": "Exercice original",
+   "answer": false
+  },
+  {
+   "id": "etp-agricole-1re-techniques-protection-03",
+   "kind": "mcq",
+   "tier": "application",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "etp-agricole-1re-techniques-protection",
+   "prompt": "Le repiquage consiste à :",
+   "explanation": "On déplace de jeunes plants.",
+   "source": "Exercice original",
+   "choices": [
+    "transplanter de jeunes plants de la pépinière",
+    "récolter",
+    "labourer",
+    "pailler"
+   ],
+   "answer": 0
+  },
+  {
+   "id": "etp-agricole-1re-techniques-protection-04",
+   "kind": "matching",
+   "tier": "approfondissement",
+   "difficulty": 2,
+   "points": 2,
+   "lesson": "etp-agricole-1re-techniques-protection",
+   "prompt": "Associe technique et but.",
+   "explanation": "Chaque technique répond à un problème.",
+   "source": "Exercice original",
+   "pairs": [
+    [
+     "Labour",
+     "Ameublir le sol"
+    ],
+    [
+     "Paillage",
+     "Garder l'humidité et limiter les herbes"
+    ],
+    [
+     "Rotation",
+     "Limiter maladies et ravageurs"
+    ],
+    [
+     "Éclaircissage",
+     "Réduire la densité des plants"
+    ]
+   ]
+  },
+  {
+   "id": "etp-agricole-1re-techniques-protection-05",
+   "kind": "open",
+   "tier": "approfondissement",
+   "difficulty": 2,
+   "points": 3,
+   "lesson": "etp-agricole-1re-techniques-protection",
+   "prompt": "Cite quatre mesures préventives pour protéger une culture sans traitement.",
+   "explanation": "La prévention est la première étape.",
+   "source": "Exercice original",
+   "review": true,
+   "model": "Semences saines, variétés adaptées, rotation des cultures, parcelle propre, bonne date de semis, observation régulière.",
+   "rubric": [
+    "Quatre mesures",
+    "Mesures préventives",
+    "Pas de produit nommé"
+   ]
+  },
+  {
+   "id": "etp-agricole-1re-techniques-protection-06",
+   "kind": "problem",
+   "tier": "examen",
+   "difficulty": 3,
+   "lesson": "etp-agricole-1re-techniques-protection",
+   "prompt": "Un agriculteur fictif plante du maïs plusieurs années de suite et constate de plus en plus de maladies et un sol appauvri.",
+   "method": "Identifier la cause, proposer une pratique corrective.",
+   "source": "Exercice original",
+   "review": true,
+   "parts": [
+    {
+     "id": "etp-agricole-1re-techniques-protection-06-a",
+     "points": 1,
+     "prompt": "Quelle pratique corrige le mieux ce problème ?",
+     "explanation": "La rotation casse les cycles.",
+     "kind": "mcq",
+     "choices": [
+      "Augmenter indéfiniment la densité",
+      "Mettre en place une rotation",
+      "Arrêter d'observer",
+      "Labourer plus profond chaque année"
+     ],
+     "answer": 1
+    },
+    {
+     "id": "etp-agricole-1re-techniques-protection-06-b",
+     "points": 1,
+     "prompt": "Introduire une légumineuse dans la rotation peut aider à enrichir le sol.",
+     "explanation": "Les légumineuses sont réputées pour enrichir le sol en azote.",
+     "kind": "truefalse",
+     "answer": true
+    },
+    {
+     "id": "etp-agricole-1re-techniques-protection-06-c",
+     "points": 2,
+     "prompt": "Propose un plan sur trois ans, en justifiant.",
+     "explanation": "L'alternance limite l'accumulation de maladies.",
+     "kind": "open",
+     "model": "Année 1 maïs, année 2 légumineuse, année 3 une culture d'une autre famille : on alterne les familles pour limiter les maladies et mieux utiliser le sol.",
+     "rubric": [
+      "Trois cultures",
+      "Familles différentes",
+      "Justification"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "etp-agricole-1re-techniques-protection-q1",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "etp-agricole-1re-techniques-protection",
+   "prompt": "Le labour sert à :",
+   "choices": [
+    "ameublir le sol",
+    "récolter",
+    "arroser",
+    "stocker"
+   ],
+   "answer": 0,
+   "explanation": "Il ameublit la terre."
+  },
+  {
+   "id": "etp-agricole-1re-techniques-protection-q2",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "etp-agricole-1re-techniques-protection",
+   "prompt": "Un semis à la volée :",
+   "choices": [
+    "place les graines en lignes",
+    "éparpille les graines",
+    "se fait en pépinière",
+    "est interdit"
+   ],
+   "answer": 1,
+   "explanation": "On les lance sur la parcelle."
+  },
+  {
+   "id": "etp-agricole-1re-techniques-protection-q3",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "etp-agricole-1re-techniques-protection",
+   "prompt": "Le paillage :",
+   "choices": [
+    "conserve l'humidité",
+    "assèche le sol",
+    "enlève le sol",
+    "est un semis"
+   ],
+   "answer": 0,
+   "explanation": "Il protège le sol."
+  },
+  {
+   "id": "etp-agricole-1re-techniques-protection-q4",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "etp-agricole-1re-techniques-protection",
+   "prompt": "La lutte chimique est :",
+   "choices": [
+    "la première étape",
+    "le dernier recours, avec précautions",
+    "toujours nécessaire",
+    "interdite"
+   ],
+   "answer": 1,
+   "explanation": "On commence par la prévention."
+  },
+  {
+   "id": "etp-agricole-1re-techniques-protection-q5",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "etp-agricole-1re-techniques-protection",
+   "prompt": "Associer deux cultures peut :",
+   "choices": [
+    "supprimer toute concurrence",
+    "mieux couvrir le sol mais créer de la concurrence",
+    "empêcher la germination",
+    "supprimer l'eau"
+   ],
+   "answer": 1,
+   "explanation": "Avantages et limites."
+  },
+  {
+   "id": "etp-agricole-1re-elevage-01",
+   "kind": "mcq",
+   "tier": "application",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "etp-agricole-1re-elevage",
+   "prompt": "L'élément indispensable à tout animal est :",
+   "explanation": "L'eau propre est vitale.",
+   "source": "Exercice original",
+   "choices": [
+    "l'eau propre",
+    "le sucre",
+    "le sel seul",
+    "la musique"
+   ],
+   "answer": 0
+  },
+  {
+   "id": "etp-agricole-1re-elevage-02",
+   "kind": "truefalse",
+   "tier": "application",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "etp-agricole-1re-elevage",
+   "prompt": "Un animal malade doit être isolé des autres.",
+   "explanation": "L'isolement limite la contagion.",
+   "source": "Exercice original",
+   "review": true,
+   "answer": true
+  },
+  {
+   "id": "etp-agricole-1re-elevage-03",
+   "kind": "mcq",
+   "tier": "application",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "etp-agricole-1re-elevage",
+   "prompt": "La vaccination relève de la prophylaxie :",
+   "explanation": "Elle relève de la prophylaxie médicale.",
+   "source": "Exercice original",
+   "review": true,
+   "choices": [
+    "sanitaire",
+    "médicale",
+    "alimentaire",
+    "mécanique"
+   ],
+   "answer": 1
+  },
+  {
+   "id": "etp-agricole-1re-elevage-04",
+   "kind": "matching",
+   "tier": "approfondissement",
+   "difficulty": 2,
+   "points": 2,
+   "lesson": "etp-agricole-1re-elevage",
+   "prompt": "Associe besoin et source.",
+   "explanation": "Chaque besoin a sa source.",
+   "source": "Exercice original",
+   "pairs": [
+    [
+     "Énergie",
+     "Céréales"
+    ],
+    [
+     "Protéines",
+     "Tourteaux ou légumineuses"
+    ],
+    [
+     "Fibres",
+     "Fourrages pour ruminants"
+    ],
+    [
+     "Eau",
+     "Abreuvoir propre"
+    ]
+   ]
+  },
+  {
+   "id": "etp-agricole-1re-elevage-05",
+   "kind": "open",
+   "tier": "approfondissement",
+   "difficulty": 2,
+   "points": 3,
+   "lesson": "etp-agricole-1re-elevage",
+   "prompt": "Cite quatre règles d'hygiène pour un poulailler fictif.",
+   "explanation": "L'hygiène réduit le risque de maladies.",
+   "source": "Exercice original",
+   "review": true,
+   "model": "Litière propre et sèche, abreuvoirs et mangeoires nettoyés, bonne aération, nettoyage périodique et désinfection, contrôle des rongeurs.",
+   "rubric": [
+    "Quatre règles",
+    "Règles réalistes",
+    "Lien avec la santé"
+   ]
+  },
+  {
+   "id": "etp-agricole-1re-elevage-06",
+   "kind": "problem",
+   "tier": "examen",
+   "difficulty": 2,
+   "lesson": "etp-agricole-1re-elevage",
+   "prompt": "Dans un élevage fictif, plusieurs animaux toussent, la litière est humide, l'abreuvoir est sale.",
+   "method": "Observer, isoler, corriger, demander conseil.",
+   "source": "Exercice original",
+   "review": true,
+   "parts": [
+    {
+     "id": "etp-agricole-1re-elevage-06-a",
+     "points": 1,
+     "prompt": "Quelle action est prioritaire ?",
+     "explanation": "On isole et on corrige les causes.",
+     "kind": "mcq",
+     "choices": [
+      "Isoler les animaux qui toussent et corriger l'hygiène",
+      "Ignorer le problème",
+      "Ajouter plus d'animaux",
+      "Supprimer l'eau"
+     ],
+     "answer": 0
+    },
+    {
+     "id": "etp-agricole-1re-elevage-06-b",
+     "points": 1,
+     "prompt": "Un vétérinaire ou un agent d'élevage doit être consulté.",
+     "explanation": "Pour le diagnostic et le traitement.",
+     "kind": "truefalse",
+     "answer": true
+    },
+    {
+     "id": "etp-agricole-1re-elevage-06-c",
+     "points": 2,
+     "prompt": "Cite deux causes possibles de ces symptômes dans l'hygiène du bâtiment.",
+     "explanation": "Humidité et saleté favorisent les maladies.",
+     "kind": "open",
+     "model": "Humidité de la litière et eau sale favorisent le développement des germes ; l'air mal renouvelé aggrave les problèmes respiratoires.",
+     "rubric": [
+      "Litière humide",
+      "Eau sale ou air mal renouvelé"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "etp-agricole-1re-elevage-q1",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "etp-agricole-1re-elevage",
+   "prompt": "La prophylaxie vise à :",
+   "choices": [
+    "prévenir les maladies",
+    "guérir seulement",
+    "nourrir",
+    "vendre"
+   ],
+   "answer": 0,
+   "explanation": "Prévenir plutôt que guérir."
+  },
+  {
+   "id": "etp-agricole-1re-elevage-q2",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "etp-agricole-1re-elevage",
+   "prompt": "La quarantaine concerne :",
+   "choices": [
+    "les nouveaux animaux",
+    "les bâtiments",
+    "les aliments",
+    "les clients"
+   ],
+   "answer": 0,
+   "explanation": "On observe les nouveaux animaux à part."
+  },
+  {
+   "id": "etp-agricole-1re-elevage-q3",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "etp-agricole-1re-elevage",
+   "prompt": "Une litière propre et sèche :",
+   "choices": [
+    "réduit les maladies",
+    "n'a aucun effet",
+    "est inutile",
+    "est nocive"
+   ],
+   "answer": 0,
+   "explanation": "L'humidité favorise les germes."
+  },
+  {
+   "id": "etp-agricole-1re-elevage-q4",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "etp-agricole-1re-elevage",
+   "prompt": "Un ruminant a besoin de :",
+   "choices": [
+    "fibres (fourrages)",
+    "seulement de grains",
+    "seulement de sel",
+    "de rien"
+   ],
+   "answer": 0,
+   "explanation": "Les fourrages sont essentiels."
+  },
+  {
+   "id": "etp-agricole-1re-elevage-q5",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "etp-agricole-1re-elevage",
+   "prompt": "Un animal qui ne mange plus doit :",
+   "choices": [
+    "être observé et signalé",
+    "être ignoré",
+    "être surnourri",
+    "être vendu"
+   ],
+   "answer": 0,
+   "explanation": "C'est un signe d'alerte."
+  }
+ ]
+}

@@ -1,0 +1,948 @@
+{
+ "chapter": "etp-agricole-1re-milieu",
+ "lessons": [
+  {
+   "id": "etp-agricole-1re-sol",
+   "title": "Le sol : composition, texture, fertilité, pH",
+   "minutes": 40,
+   "programRef": "Programme de sciences et techniques agricoles des séries agricoles, classe de 1re — à vérifier sur le texte officiel",
+   "status": "draft",
+   "author": "CastBridge (brouillon IA)",
+   "source": "Rédaction originale ; à relire par un enseignant",
+   "objectives": [
+    "Décrire les constituants d'un sol.",
+    "Reconnaître les textures sableuse, limoneuse, argileuse et leurs propriétés.",
+    "Définir la fertilité et en citer les facteurs.",
+    "Interpréter la notion de pH (acide, neutre, basique)."
+   ],
+   "exercises": [
+    "etp-agricole-1re-sol-01",
+    "etp-agricole-1re-sol-02",
+    "etp-agricole-1re-sol-03",
+    "etp-agricole-1re-sol-04",
+    "etp-agricole-1re-sol-05",
+    "etp-agricole-1re-sol-06"
+   ],
+   "selfCheck": [
+    "etp-agricole-1re-sol-q1",
+    "etp-agricole-1re-sol-q2",
+    "etp-agricole-1re-sol-q3",
+    "etp-agricole-1re-sol-q4",
+    "etp-agricole-1re-sol-q5"
+   ],
+   "reviewNotes": [
+    "Matière « svt » choisie faute de matière agricole dans le catalogue.",
+    "Aucun chiffre agronomique réel (rendement, dose, pH optimal) n'est donné comme règle : tous les chiffres sont fictifs, fournis par l'énoncé. À adapter au contexte local par un enseignant agricole.",
+    "Valeurs de pH optimales volontairement non données : à compléter selon les cultures locales par un enseignant."
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Le sol",
+     "md": "Le **sol** est la couche superficielle de la terre où poussent les plantes. Il est formé de **particules minérales** (issues de la roche), de **matière organique** (débris, humus), d'**eau** et d'**air**, et héberge de nombreux êtres vivants."
+    },
+    {
+     "type": "key",
+     "style": "propriete",
+     "title": "Texture",
+     "md": "La **texture** dépend de la taille des particules minérales : **sable** (grosses), **limon** (moyennes), **argile** (très fines). Un sol sableux laisse l'eau passer vite et retient peu ; un sol argileux retient l'eau, devient collant et se draine mal ; un sol limoneux est intermédiaire. Un sol équilibré mélange les trois."
+    },
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Fertilité",
+     "md": "La **fertilité** est l'aptitude du sol à nourrir les plantes. Elle dépend de la **texture**, de la **matière organique**, des **éléments minéraux** disponibles, de l'**eau**, de l'**aération**, du **pH** et de l'activité des êtres vivants du sol."
+    },
+    {
+     "type": "key",
+     "style": "propriete",
+     "title": "Notion de pH",
+     "md": "Le **pH** mesure l'acidité : en dessous de 7 le milieu est **acide**, 7 est **neutre**, au-dessus de 7 il est **basique**. Chaque culture tolère un domaine de pH propre, à vérifier localement ; un pH très éloigné de la tolérance gêne l'absorption des éléments minéraux.",
+     "review": true
+    },
+    {
+     "type": "illustration",
+     "figure": {
+      "kind": "shapes",
+      "w": 400,
+      "h": 250,
+      "items": [
+       {
+        "t": "rect",
+        "x": 30,
+        "y": 15,
+        "w": 200,
+        "h": 40,
+        "fill": "lightgreen",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 130.0,
+        "y": 39.55,
+        "text": "Litière / matière organique",
+        "size": 13,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 30,
+        "y": 60,
+        "w": 200,
+        "h": 50,
+        "fill": "brown",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 130.0,
+        "y": 89.55,
+        "text": "Horizon de surface (humus)",
+        "size": 13,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 30,
+        "y": 115,
+        "w": 200,
+        "h": 50,
+        "fill": "lightorange",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 130.0,
+        "y": 144.9,
+        "text": "Sous-sol",
+        "size": 14,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 30,
+        "y": 170,
+        "w": 200,
+        "h": 50,
+        "fill": "lightgrey",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 130.0,
+        "y": 199.9,
+        "text": "Roche mère",
+        "size": 14,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 320,
+        "y": 80,
+        "text": "racines,",
+        "size": 14,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "text",
+        "x": 320,
+        "y": 100,
+        "text": "vers de terre",
+        "size": 14,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "line",
+        "x1": 240,
+        "y1": 85,
+        "x2": 275,
+        "y2": 85,
+        "color": "ink",
+        "width": 2,
+        "arrow": "start"
+       }
+      ]
+     },
+     "caption": "Coupe schématique d'un sol.",
+     "alt": "Quatre couches empilées : litière, horizon de surface riche en humus, sous-sol, roche mère. À droite, la mention racines et vers de terre pointe vers l'horizon de surface."
+    },
+    {
+     "type": "example",
+     "title": "Exemple 1 — identifier une texture",
+     "statement": "Un agriculteur mouille une poignée de terre : elle ne forme pas de boule, s'effrite, et l'eau passe très vite. Quelle texture ?",
+     "steps": [
+      {
+       "md": "Il n'y a ni collant ni liant : peu d'argile."
+      },
+      {
+       "md": "L'eau passe vite : sol dominé par le sable."
+      }
+     ],
+     "answer": "**Sol sableux : drainant mais peu fertile en eau et en éléments.**"
+    },
+    {
+     "type": "example",
+     "title": "Exemple 2 — améliorer la fertilité",
+     "statement": "Un sol argileux se tasse et reste gorgé d'eau. Comment l'améliorer ?",
+     "steps": [
+      {
+       "md": "Ameublir (travail du sol) pour aérer, éviter de travailler trop humide."
+      },
+      {
+       "md": "Apporter de la matière organique pour alléger et structurer."
+      }
+     ],
+     "answer": "**Ameublir et enrichir en matière organique.**"
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Erreurs fréquentes",
+     "md": "- Croire que sol et terre arable sont les mêmes pour tout : le sol a plusieurs couches.\n- Penser qu'un sol argileux est forcément fertile : il peut manquer d'air.\n- Confondre pH acide et pH bas dans le sens « mauvais » : tout dépend de la culture."
+    },
+    {
+     "type": "more",
+     "items": [
+      "Réalise le test du « boudin » avec de la terre humide pour estimer la texture.",
+      "Observe les vers de terre dans un sol sain."
+     ]
+    },
+    {
+     "type": "exercise",
+     "ref": "etp-agricole-1re-sol-01"
+    }
+   ]
+  },
+  {
+   "id": "etp-agricole-1re-plante",
+   "title": "La plante : germination, photosynthèse, nutrition minérale",
+   "minutes": 40,
+   "programRef": "Programme de sciences et techniques agricoles des séries agricoles, classe de 1re — à vérifier sur le texte officiel",
+   "status": "draft",
+   "author": "CastBridge (brouillon IA)",
+   "source": "Rédaction originale ; à relire par un enseignant",
+   "objectives": [
+    "Citer les conditions de germination.",
+    "Décrire la photosynthèse et son bilan.",
+    "Expliquer le rôle général des éléments minéraux.",
+    "Relier le fonctionnement de la plante aux pratiques agricoles."
+   ],
+   "prerequisites": [
+    "etp-agricole-1re-sol"
+   ],
+   "exercises": [
+    "etp-agricole-1re-plante-01",
+    "etp-agricole-1re-plante-02",
+    "etp-agricole-1re-plante-03",
+    "etp-agricole-1re-plante-04",
+    "etp-agricole-1re-plante-05",
+    "etp-agricole-1re-plante-06"
+   ],
+   "selfCheck": [
+    "etp-agricole-1re-plante-q1",
+    "etp-agricole-1re-plante-q2",
+    "etp-agricole-1re-plante-q3",
+    "etp-agricole-1re-plante-q4",
+    "etp-agricole-1re-plante-q5"
+   ],
+   "reviewNotes": [
+    "Matière « svt » choisie faute de matière agricole dans le catalogue.",
+    "Aucun chiffre agronomique réel (rendement, dose, pH optimal) n'est donné comme règle : tous les chiffres sont fictifs, fournis par l'énoncé. À adapter au contexte local par un enseignant agricole.",
+    "Rôles de N, P, K donnés en termes généraux : à faire relire par un enseignant de biologie végétale."
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Germination",
+     "md": "La **germination** est le début du développement d'une graine : elle absorbe de l'eau, la radicule sort, puis la tige. Elle demande **de l'eau**, **de l'air (oxygène)** et **une température convenable**. La lumière n'est nécessaire que pour certaines espèces."
+    },
+    {
+     "type": "key",
+     "style": "formule",
+     "title": "Photosynthèse",
+     "md": "Les parties vertes, grâce à la **lumière**, fabriquent des **sucres** à partir de **dioxyde de carbone** et d'**eau**, et libèrent de l'**oxygène**.",
+     "tex": "\\text{eau} + \\text{dioxyde de carbone} → \\text{sucres} + \\text{oxygène}"
+    },
+    {
+     "type": "key",
+     "style": "propriete",
+     "title": "Nutrition minérale",
+     "md": "La plante absorbe par ses racines de l'**eau** et des **sels minéraux** dissous. Les trois éléments majeurs sont l'**azote** (N), le **phosphore** (P) et le **potassium** (K) : l'azote favorise surtout la croissance des parties vertes, le phosphore le développement des racines et la floraison, le potassium la résistance et la qualité. Un manque se voit sur les feuilles et la croissance.",
+     "review": true
+    },
+    {
+     "type": "key",
+     "style": "retenir",
+     "title": "Autotrophe",
+     "md": "La plante est **autotrophe** : elle fabrique sa matière organique à partir de matière minérale grâce à la lumière. Les animaux, eux, doivent se nourrir de matière organique."
+    },
+    {
+     "type": "illustration",
+     "figure": {
+      "kind": "shapes",
+      "w": 400,
+      "h": 230,
+      "items": [
+       {
+        "t": "rect",
+        "x": 150,
+        "y": 90,
+        "w": 100,
+        "h": 50,
+        "fill": "lightgreen",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 200.0,
+        "y": 120.6,
+        "text": "Feuille",
+        "size": 16,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 10,
+        "y": 10,
+        "w": 130,
+        "h": 36,
+        "fill": "lightyellow",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 75.0,
+        "y": 32.9,
+        "text": "CO2 (air)",
+        "size": 14,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 10,
+        "y": 170,
+        "w": 130,
+        "h": 36,
+        "fill": "lightorange",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 75.0,
+        "y": 192.9,
+        "text": "Lumière",
+        "size": 14,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 260,
+        "y": 10,
+        "w": 130,
+        "h": 36,
+        "fill": "lightblue",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 325.0,
+        "y": 32.9,
+        "text": "Oxygène",
+        "size": 14,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 260,
+        "y": 170,
+        "w": 130,
+        "h": 36,
+        "fill": "lightgrey",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 325.0,
+        "y": 192.9,
+        "text": "Sucres",
+        "size": 14,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "line",
+        "x1": 75,
+        "y1": 46,
+        "x2": 150,
+        "y2": 90,
+        "color": "ink",
+        "width": 2,
+        "arrow": "end"
+       },
+       {
+        "t": "line",
+        "x1": 75,
+        "y1": 170,
+        "x2": 150,
+        "y2": 140,
+        "color": "ink",
+        "width": 2,
+        "arrow": "end"
+       },
+       {
+        "t": "line",
+        "x1": 250,
+        "y1": 90,
+        "x2": 325,
+        "y2": 46,
+        "color": "ink",
+        "width": 2,
+        "arrow": "end"
+       },
+       {
+        "t": "line",
+        "x1": 250,
+        "y1": 140,
+        "x2": 325,
+        "y2": 170,
+        "color": "ink",
+        "width": 2,
+        "arrow": "end"
+       }
+      ]
+     },
+     "caption": "Schéma de la photosynthèse.",
+     "alt": "Une feuille au centre : le CO2 de l'air et la lumière arrivent vers elle ; elle produit de l'oxygène et des sucres."
+    },
+    {
+     "type": "example",
+     "title": "Exemple 1 — germination",
+     "statement": "Une graine placée dans du sable sec ne germe pas ; dans du sable humide à bonne température elle germe. Que conclure ?",
+     "steps": [
+      {
+       "md": "La seule différence est l'eau : sans eau, pas de germination."
+      },
+      {
+       "md": "L'eau est donc une condition nécessaire, avec l'air et la chaleur."
+      }
+     ],
+     "answer": "**L'eau est nécessaire à la germination.**"
+    },
+    {
+     "type": "example",
+     "title": "Exemple 2 — carence",
+     "statement": "Les jeunes feuilles d'une culture fictive sont pâles et la croissance ralentit sur un sol pauvre. Quelle hypothèse ?",
+     "steps": [
+      {
+       "md": "Un manque d'éléments minéraux peut ralentir la croissance et pâlir les feuilles."
+      },
+      {
+       "md": "Hypothèse à vérifier : manque d'azote ; on observe d'autres signes et on demande l'avis d'un technicien."
+      }
+     ],
+     "answer": "**Carence possible en azote, à confirmer.**",
+     "review": true
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Erreurs fréquentes",
+     "md": "- Croire que la plante se nourrit « de terre » : elle fabrique ses sucres.\n- Penser que la plante respire seulement la nuit : elle respire en permanence.\n- Oublier que trop d'engrais peut nuire."
+    },
+    {
+     "type": "more",
+     "items": [
+      "Germe des haricots sur du coton humide : que se passe-t-il sans eau ?",
+      "Compare une plante à la lumière et une plante dans l'obscurité."
+     ]
+    },
+    {
+     "type": "exercise",
+     "ref": "etp-agricole-1re-plante-01"
+    }
+   ]
+  }
+ ],
+ "exercises": [
+  {
+   "id": "etp-agricole-1re-sol-01",
+   "kind": "mcq",
+   "tier": "application",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "etp-agricole-1re-sol",
+   "prompt": "Les plus fines particules du sol sont :",
+   "explanation": "L'argile est la plus fine.",
+   "source": "Exercice original",
+   "choices": [
+    "le sable",
+    "le limon",
+    "l'argile",
+    "le gravier"
+   ],
+   "answer": 2
+  },
+  {
+   "id": "etp-agricole-1re-sol-02",
+   "kind": "truefalse",
+   "tier": "application",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "etp-agricole-1re-sol",
+   "prompt": "Un sol sableux retient très bien l'eau.",
+   "explanation": "Il laisse l'eau s'écouler vite.",
+   "source": "Exercice original",
+   "answer": false
+  },
+  {
+   "id": "etp-agricole-1re-sol-03",
+   "kind": "mcq",
+   "tier": "application",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "etp-agricole-1re-sol",
+   "prompt": "Un pH de 7 correspond à un milieu :",
+   "explanation": "7 est la valeur neutre.",
+   "source": "Exercice original",
+   "choices": [
+    "acide",
+    "neutre",
+    "basique",
+    "salé"
+   ],
+   "answer": 1
+  },
+  {
+   "id": "etp-agricole-1re-sol-04",
+   "kind": "matching",
+   "tier": "approfondissement",
+   "difficulty": 2,
+   "points": 2,
+   "lesson": "etp-agricole-1re-sol",
+   "prompt": "Associe constituant et rôle.",
+   "explanation": "Chaque constituant contribue à la fertilité.",
+   "source": "Exercice original",
+   "pairs": [
+    [
+     "Matière organique",
+     "Nourrit et structure le sol"
+    ],
+    [
+     "Air",
+     "Permet aux racines de respirer"
+    ],
+    [
+     "Eau",
+     "Dissout et transporte les éléments"
+    ],
+    [
+     "Particules minérales",
+     "Forment le squelette du sol"
+    ]
+   ]
+  },
+  {
+   "id": "etp-agricole-1re-sol-05",
+   "kind": "open",
+   "tier": "approfondissement",
+   "difficulty": 2,
+   "points": 3,
+   "lesson": "etp-agricole-1re-sol",
+   "prompt": "Explique pourquoi un sol riche en matière organique est en général plus fertile.",
+   "explanation": "Elle agit sur plusieurs facteurs de fertilité.",
+   "source": "Exercice original",
+   "model": "La matière organique nourrit les êtres vivants du sol, libère des éléments minéraux, améliore la structure et la rétention d'eau.",
+   "rubric": [
+    "Éléments minéraux libérés",
+    "Structure du sol",
+    "Eau",
+    "Vie du sol"
+   ]
+  },
+  {
+   "id": "etp-agricole-1re-sol-06",
+   "kind": "problem",
+   "tier": "examen",
+   "difficulty": 2,
+   "lesson": "etp-agricole-1re-sol",
+   "prompt": "Deux parcelles fictives : A est sableuse et sèche, B est argileuse et gorgée d'eau.",
+   "method": "Identifier le défaut, puis la mesure correspondante.",
+   "source": "Exercice original",
+   "parts": [
+    {
+     "id": "etp-agricole-1re-sol-06-a",
+     "points": 1,
+     "prompt": "Le problème principal de A est :",
+     "explanation": "Le sable laisse passer l'eau.",
+     "kind": "mcq",
+     "choices": [
+      "Un drainage trop lent",
+      "Une faible rétention d'eau",
+      "Trop de matière organique",
+      "Un excès de limon"
+     ],
+     "answer": 1
+    },
+    {
+     "id": "etp-agricole-1re-sol-06-b",
+     "points": 1,
+     "prompt": "Le problème principal de B est :",
+     "explanation": "L'argile retient l'eau et se tasse.",
+     "kind": "mcq",
+     "choices": [
+      "Trop d'aération",
+      "Un mauvais drainage et un manque d'air",
+      "Trop de sable",
+      "Aucun"
+     ],
+     "answer": 1
+    },
+    {
+     "id": "etp-agricole-1re-sol-06-c",
+     "points": 2,
+     "prompt": "Propose une amélioration pour chaque parcelle.",
+     "explanation": "Chaque mesure cible le défaut.",
+     "kind": "open",
+     "model": "A : apporter de la matière organique pour retenir l'eau, pailler. B : ameublir, drainer, ajouter de la matière organique.",
+     "rubric": [
+      "Une mesure pour A",
+      "Une mesure pour B",
+      "Lien avec le problème"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "etp-agricole-1re-sol-q1",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "etp-agricole-1re-sol",
+   "prompt": "Le sol contient :",
+   "choices": [
+    "uniquement du sable",
+    "minéraux, matière organique, eau, air",
+    "uniquement de l'eau",
+    "uniquement de l'argile"
+   ],
+   "answer": 1,
+   "explanation": "Quatre constituants au moins."
+  },
+  {
+   "id": "etp-agricole-1re-sol-q2",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "etp-agricole-1re-sol",
+   "prompt": "Un sol équilibré mélange :",
+   "choices": [
+    "sable, limon, argile",
+    "sable seulement",
+    "argile seulement",
+    "eau et roche"
+   ],
+   "answer": 0,
+   "explanation": "Il est mixte."
+  },
+  {
+   "id": "etp-agricole-1re-sol-q3",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "etp-agricole-1re-sol",
+   "prompt": "L'humus est :",
+   "choices": [
+    "une roche",
+    "de la matière organique transformée",
+    "un engrais minéral",
+    "un gaz"
+   ],
+   "answer": 1,
+   "explanation": "C'est la matière organique décomposée."
+  },
+  {
+   "id": "etp-agricole-1re-sol-q4",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "etp-agricole-1re-sol",
+   "prompt": "Un pH inférieur à 7 est :",
+   "choices": [
+    "basique",
+    "neutre",
+    "acide",
+    "salin"
+   ],
+   "answer": 2,
+   "explanation": "Moins de 7 : acide."
+  },
+  {
+   "id": "etp-agricole-1re-sol-q5",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "etp-agricole-1re-sol",
+   "prompt": "La fertilité dépend :",
+   "choices": [
+    "d'un seul facteur",
+    "de plusieurs facteurs",
+    "du hasard",
+    "de la couleur"
+   ],
+   "answer": 1,
+   "explanation": "Plusieurs facteurs agissent ensemble."
+  },
+  {
+   "id": "etp-agricole-1re-plante-01",
+   "kind": "mcq",
+   "tier": "application",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "etp-agricole-1re-plante",
+   "prompt": "Une graine a besoin pour germer de :",
+   "explanation": "Eau, air et température convenable.",
+   "source": "Exercice original",
+   "choices": [
+    "eau, air, chaleur",
+    "lumière seulement",
+    "engrais seulement",
+    "sel"
+   ],
+   "answer": 0
+  },
+  {
+   "id": "etp-agricole-1re-plante-02",
+   "kind": "truefalse",
+   "tier": "application",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "etp-agricole-1re-plante",
+   "prompt": "La photosynthèse libère de l'oxygène.",
+   "explanation": "Oui, c'est un produit de la photosynthèse.",
+   "source": "Exercice original",
+   "answer": true
+  },
+  {
+   "id": "etp-agricole-1re-plante-03",
+   "kind": "mcq",
+   "tier": "application",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "etp-agricole-1re-plante",
+   "prompt": "Les plantes absorbent les sels minéraux par :",
+   "explanation": "Surtout par les racines.",
+   "source": "Exercice original",
+   "choices": [
+    "les feuilles",
+    "les racines",
+    "les fleurs",
+    "l'écorce uniquement"
+   ],
+   "answer": 1
+  },
+  {
+   "id": "etp-agricole-1re-plante-04",
+   "kind": "matching",
+   "tier": "approfondissement",
+   "difficulty": 2,
+   "points": 2,
+   "lesson": "etp-agricole-1re-plante",
+   "prompt": "Associe l'élément à son rôle général.",
+   "explanation": "Rôles généraux simplifiés.",
+   "source": "Exercice original",
+   "review": true,
+   "pairs": [
+    [
+     "Azote (N)",
+     "Croissance des parties vertes"
+    ],
+    [
+     "Phosphore (P)",
+     "Racines et floraison"
+    ],
+    [
+     "Potassium (K)",
+     "Résistance et qualité"
+    ],
+    [
+     "Eau",
+     "Transporte les éléments dissous"
+    ]
+   ]
+  },
+  {
+   "id": "etp-agricole-1re-plante-05",
+   "kind": "open",
+   "tier": "approfondissement",
+   "difficulty": 2,
+   "points": 3,
+   "lesson": "etp-agricole-1re-plante",
+   "prompt": "Pourquoi dit-on que la plante est autotrophe ?",
+   "explanation": "L'autotrophie est liée à la photosynthèse.",
+   "source": "Exercice original",
+   "model": "Elle fabrique elle-même sa matière organique à partir de matière minérale grâce à la lumière.",
+   "rubric": [
+    "Fabrication de sa matière",
+    "Matière minérale utilisée",
+    "Rôle de la lumière"
+   ]
+  },
+  {
+   "id": "etp-agricole-1re-plante-06",
+   "kind": "problem",
+   "tier": "examen",
+   "difficulty": 2,
+   "lesson": "etp-agricole-1re-plante",
+   "prompt": "On sème des graines de maïs dans quatre pots : A (eau, lumière), B (sans eau, lumière), C (eau, obscurité), D (eau, froid intense).",
+   "method": "Comparer en ne changeant qu'un facteur.",
+   "source": "Exercice original",
+   "parts": [
+    {
+     "id": "etp-agricole-1re-plante-06-a",
+     "points": 1,
+     "prompt": "Quel pot ne germe pas à cause du manque d'eau ?",
+     "explanation": "B n'a pas d'eau.",
+     "kind": "mcq",
+     "choices": [
+      "A",
+      "B",
+      "C",
+      "D"
+     ],
+     "answer": 1
+    },
+    {
+     "id": "etp-agricole-1re-plante-06-b",
+     "points": 1,
+     "prompt": "Le pot C (obscurité) peut germer.",
+     "explanation": "La lumière n'est pas toujours nécessaire à la germination.",
+     "kind": "truefalse",
+     "answer": true
+    },
+    {
+     "id": "etp-agricole-1re-plante-06-c",
+     "points": 2,
+     "prompt": "Que faire ensuite avec les plantules des pots qui ont germé ?",
+     "explanation": "Après la germination, les réserves s'épuisent : la plante doit fabriquer sa matière.",
+     "kind": "open",
+     "model": "Les mettre à la lumière pour qu'elles fassent la photosynthèse, les arroser, et apporter des éléments minéraux si le sol est pauvre.",
+     "rubric": [
+      "Lumière",
+      "Eau",
+      "Éléments minéraux"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "etp-agricole-1re-plante-q1",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "etp-agricole-1re-plante",
+   "prompt": "Le CO2 est utilisé par la plante pour :",
+   "choices": [
+    "respirer seulement",
+    "la photosynthèse",
+    "germer",
+    "absorber l'eau"
+   ],
+   "answer": 1,
+   "explanation": "Il est la source de carbone."
+  },
+  {
+   "id": "etp-agricole-1re-plante-q2",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "etp-agricole-1re-plante",
+   "prompt": "La photosynthèse a lieu surtout dans :",
+   "choices": [
+    "les racines",
+    "les parties vertes",
+    "les graines",
+    "le sol"
+   ],
+   "answer": 1,
+   "explanation": "Là où il y a de la chlorophylle."
+  },
+  {
+   "id": "etp-agricole-1re-plante-q3",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "etp-agricole-1re-plante",
+   "prompt": "Un élément majeur de la nutrition minérale est :",
+   "choices": [
+    "l'azote",
+    "le fer rouillé",
+    "le sable",
+    "le sucre"
+   ],
+   "answer": 0,
+   "explanation": "N, P, K."
+  },
+  {
+   "id": "etp-agricole-1re-plante-q4",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "etp-agricole-1re-plante",
+   "prompt": "L'eau absorbée par les racines est :",
+   "choices": [
+    "perdue",
+    "utile au transport et à la photosynthèse",
+    "toxique",
+    "inutile"
+   ],
+   "answer": 1,
+   "explanation": "Elle sert au transport et à la fabrication de sucres."
+  },
+  {
+   "id": "etp-agricole-1re-plante-q5",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "etp-agricole-1re-plante",
+   "prompt": "La radicule devient :",
+   "choices": [
+    "la feuille",
+    "la racine",
+    "la fleur",
+    "le fruit"
+   ],
+   "answer": 1,
+   "explanation": "La radicule donne la racine."
+  }
+ ]
+}

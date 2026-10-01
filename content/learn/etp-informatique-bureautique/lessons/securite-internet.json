@@ -1,0 +1,768 @@
+{
+ "chapter": "etp-informatique-bureautique-securite-internet",
+ "lessons": [
+  {
+   "id": "etp-informatique-bureautique-securite-base",
+   "title": "Sécurité de base : mots de passe, hameçonnage, sauvegarde",
+   "minutes": 40,
+   "programRef": "Programme d'informatique / bureautique des séries tertiaires, classe de 2nde — à vérifier sur le texte officiel",
+   "status": "draft",
+   "author": "CastBridge (brouillon IA)",
+   "source": "Rédaction originale ; à relire par un enseignant",
+   "objectives": [
+    "Choisir et protéger un mot de passe.",
+    "Repérer un message d'hameçonnage.",
+    "Organiser une sauvegarde.",
+    "Adopter les bons réflexes pour protéger ses données."
+   ],
+   "prerequisites": [
+    "etp-informatique-bureautique-composants"
+   ],
+   "exercises": [
+    "etp-informatique-bureautique-securite-base-01",
+    "etp-informatique-bureautique-securite-base-02",
+    "etp-informatique-bureautique-securite-base-03",
+    "etp-informatique-bureautique-securite-base-04",
+    "etp-informatique-bureautique-securite-base-05",
+    "etp-informatique-bureautique-securite-base-06"
+   ],
+   "selfCheck": [
+    "etp-informatique-bureautique-securite-base-q1",
+    "etp-informatique-bureautique-securite-base-q2",
+    "etp-informatique-bureautique-securite-base-q3",
+    "etp-informatique-bureautique-securite-base-q4",
+    "etp-informatique-bureautique-securite-base-q5"
+   ],
+   "reviewNotes": [
+    "Matière « sciences » choisie faute de matière informatique dans le catalogue.",
+    "Exercices de raisonnement sans capture d'écran ; les noms de menus varient selon le logiciel et la version : volontairement non cités.",
+    "Conseils généraux de cybersécurité : à faire relire par un enseignant d'informatique."
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "methode",
+     "title": "Un bon mot de passe",
+     "md": "Un bon mot de passe est **long**, mélange majuscules, minuscules, chiffres et symboles, **n'est pas un mot courant ni une date de naissance** et **n'est jamais réutilisé** pour plusieurs comptes. On ne le communique à personne. Une phrase de passe (plusieurs mots) est plus facile à retenir."
+    },
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Hameçonnage (phishing)",
+     "md": "L'**hameçonnage** est un message (courriel, SMS, appel) qui imite un organisme connu pour te faire donner tes mots de passe, tes codes ou ton argent. Signes : urgence, menace, fautes, lien bizarre, demande d'informations confidentielles, expéditeur inattendu."
+    },
+    {
+     "type": "key",
+     "style": "methode",
+     "title": "Que faire ?",
+     "md": "Ne clique pas sur le lien. Ne réponds pas avec des informations personnelles. Vérifie en contactant l'organisme par un moyen que tu connais déjà. Signale le message, supprime-le."
+    },
+    {
+     "type": "key",
+     "style": "retenir",
+     "title": "Sauvegarde",
+     "md": "Une **sauvegarde** est une copie de tes fichiers importants sur un **autre support** (clé, disque externe, service en ligne). Fais-la **régulièrement** et vérifie qu'on peut la relire. Garde aussi ton système et tes logiciels à jour, et verrouille ton écran."
+    },
+    {
+     "type": "illustration",
+     "figure": {
+      "kind": "bars",
+      "w": 400,
+      "h": 240,
+      "unit": "codes possibles",
+      "bars": [
+       {
+        "label": "4 chiffres",
+        "value": 10000,
+        "color": [
+         "red"
+        ]
+       },
+       {
+        "label": "6 chiffres",
+        "value": 1000000,
+        "color": [
+         "green"
+        ]
+       }
+      ]
+     },
+     "caption": "Nombre de codes possibles selon la longueur.",
+     "alt": "Deux barres : 10 000 codes possibles avec 4 chiffres, 1 000 000 avec 6 chiffres."
+    },
+    {
+     "type": "illustration",
+     "figure": {
+      "kind": "shapes",
+      "w": 400,
+      "h": 130,
+      "items": [
+       {
+        "t": "rect",
+        "x": 10,
+        "y": 40,
+        "w": 110,
+        "h": 44,
+        "fill": "lightblue",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 65.0,
+        "y": 66.55,
+        "text": "Mots de passe",
+        "size": 13,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 145,
+        "y": 40,
+        "w": 110,
+        "h": 44,
+        "fill": "lightgreen",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 200.0,
+        "y": 66.55,
+        "text": "Mises à jour",
+        "size": 13,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 280,
+        "y": 40,
+        "w": 110,
+        "h": 44,
+        "fill": "lightyellow",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 335.0,
+        "y": 66.55,
+        "text": "Sauvegarde",
+        "size": 13,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 200,
+        "y": 22,
+        "text": "Trois réflexes",
+        "size": 15,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       }
+      ]
+     },
+     "caption": "Trois réflexes de sécurité.",
+     "alt": "Trois cases : mots de passe, mises à jour, sauvegarde."
+    },
+    {
+     "type": "example",
+     "title": "Exemple 1 — nombre de codes",
+     "statement": "Un code à 4 chiffres (0 à 9 pour chacun) offre combien de combinaisons ? Et avec 6 chiffres ?",
+     "steps": [
+      {
+       "md": "Chaque chiffre a 10 possibilités : 4 chiffres donnent 10 × 10 × 10 × 10."
+      },
+      {
+       "md": "= 10 000 codes pour 4 chiffres, 1 000 000 pour 6."
+      }
+     ],
+     "answer": "**10 000 et 1 000 000 codes.**"
+    },
+    {
+     "type": "example",
+     "title": "Exemple 2 — message suspect",
+     "statement": "SMS : « Votre compte sera bloqué sous 24 h ! Cliquez ici et donnez votre code. » Que penser ?",
+     "steps": [
+      {
+       "md": "Il crée l'urgence et menace, demande un code confidentiel."
+      },
+      {
+       "md": "Une vraie organisation ne demande pas ton code par SMS : c'est probablement de l'hameçonnage."
+      }
+     ],
+     "answer": "**Ne pas cliquer, ne rien donner, vérifier autrement et supprimer.**"
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Erreurs fréquentes",
+     "md": "- Utiliser « 123456 » ou sa date de naissance.\n- Réutiliser le même mot de passe partout.\n- Cliquer sur un lien par curiosité.\n- Ne jamais sauvegarder, jusqu'à la panne."
+    },
+    {
+     "type": "more",
+     "items": [
+      "Active la double vérification quand un service le propose.",
+      "Chiffre les fichiers très sensibles ou garde-les sur un support protégé."
+     ]
+    },
+    {
+     "type": "exercise",
+     "ref": "etp-informatique-bureautique-securite-base-01"
+    }
+   ]
+  },
+  {
+   "id": "etp-informatique-bureautique-internet-courrier",
+   "title": "Internet et courrier électronique",
+   "minutes": 40,
+   "programRef": "Programme d'informatique / bureautique des séries tertiaires, classe de 2nde — à vérifier sur le texte officiel",
+   "status": "draft",
+   "author": "CastBridge (brouillon IA)",
+   "source": "Rédaction originale ; à relire par un enseignant",
+   "objectives": [
+    "Distinguer internet et web, navigateur et moteur de recherche.",
+    "Lire une adresse web.",
+    "Rédiger un courriel correct.",
+    "Évaluer la fiabilité d'une information."
+   ],
+   "prerequisites": [
+    "etp-informatique-bureautique-securite-base"
+   ],
+   "exercises": [
+    "etp-informatique-bureautique-internet-courrier-01",
+    "etp-informatique-bureautique-internet-courrier-02",
+    "etp-informatique-bureautique-internet-courrier-03",
+    "etp-informatique-bureautique-internet-courrier-04",
+    "etp-informatique-bureautique-internet-courrier-05",
+    "etp-informatique-bureautique-internet-courrier-06"
+   ],
+   "selfCheck": [
+    "etp-informatique-bureautique-internet-courrier-q1",
+    "etp-informatique-bureautique-internet-courrier-q2",
+    "etp-informatique-bureautique-internet-courrier-q3",
+    "etp-informatique-bureautique-internet-courrier-q4",
+    "etp-informatique-bureautique-internet-courrier-q5"
+   ],
+   "reviewNotes": [
+    "Matière « sciences » choisie faute de matière informatique dans le catalogue.",
+    "Exercices de raisonnement sans capture d'écran ; les noms de menus varient selon le logiciel et la version : volontairement non cités.",
+    "Adresses fictives (exemple.org) : aucun site réel n'est cité."
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Internet, web, navigateur",
+     "md": "**Internet** est le réseau mondial qui relie des machines. Le **web** est un service qui fonctionne sur internet (les pages). Un **navigateur** affiche les pages. Un **moteur de recherche** trouve des pages à partir de mots-clés."
+    },
+    {
+     "type": "key",
+     "style": "propriete",
+     "title": "Adresse web (URL)",
+     "md": "Exemple : https://www.exemple.org/cours/maths. **https** : protocole sécurisé ; **www.exemple.org** : nom du site ; **/cours/maths** : chemin de la page. Un cadenas indique que la connexion est chiffrée ; il ne garantit pas que le site est honnête."
+    },
+    {
+     "type": "key",
+     "style": "methode",
+     "title": "Rédiger un courriel",
+     "md": "Champs : **À** (destinataire principal), **Cc** (copie visible), **Cci** (copie cachée), **Objet** (clair et court), **corps** (salutation, message, politesse), **pièce jointe** (fichier, avec son nom). « Répondre à tous » envoie à tous les destinataires : à utiliser à bon escient."
+    },
+    {
+     "type": "key",
+     "style": "methode",
+     "title": "Vérifier une information",
+     "md": "Qui l'a écrite ? Quelle source ? Quelle date ? D'autres sources sérieuses disent-elles la même chose ? Méfie-toi des titres choc et des informations partagées sans source."
+    },
+    {
+     "type": "example",
+     "title": "Exemple 1 — décomposer une URL",
+     "statement": "Dans https://www.exemple.org/cours/maths, identifie le protocole, le nom du site et le chemin.",
+     "steps": [
+      {
+       "md": "Protocole : https (avant ://). Nom du site : www.exemple.org."
+      },
+      {
+       "md": "Chemin : /cours/maths, la page demandée."
+      }
+     ],
+     "answer": "**https · www.exemple.org · /cours/maths.**"
+    },
+    {
+     "type": "example",
+     "title": "Exemple 2 — Cc ou Cci",
+     "statement": "Tu écris à 30 parents d'élèves qui ne se connaissent pas. Où mets-tu leurs adresses ?",
+     "steps": [
+      {
+       "md": "En Cc, tous les destinataires verraient les adresses des autres."
+      },
+      {
+       "md": "En Cci, les adresses restent cachées : c'est le bon choix."
+      }
+     ],
+     "answer": "**En Cci.**"
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Erreurs fréquentes",
+     "md": "- Objet vide ou trop vague (« Bonjour »).\n- Oublier la pièce jointe annoncée.\n- Cliquer sur « Répondre à tous » sans réfléchir.\n- Croire qu'un site avec cadenas est forcément fiable."
+    },
+    {
+     "type": "more",
+     "items": [
+      "Teste un moteur de recherche avec des mots-clés précis et compare les résultats.",
+      "Avant de partager une information, cherche sa source."
+     ]
+    },
+    {
+     "type": "exercise",
+     "ref": "etp-informatique-bureautique-internet-courrier-01"
+    }
+   ]
+  }
+ ],
+ "exercises": [
+  {
+   "id": "etp-informatique-bureautique-securite-base-01",
+   "kind": "truefalse",
+   "tier": "application",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "etp-informatique-bureautique-securite-base",
+   "prompt": "Il est prudent d'utiliser le même mot de passe sur tous ses comptes.",
+   "explanation": "Si un compte est piraté, tous le sont.",
+   "source": "Exercice original",
+   "answer": false
+  },
+  {
+   "id": "etp-informatique-bureautique-securite-base-02",
+   "kind": "mcq",
+   "tier": "application",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "etp-informatique-bureautique-securite-base",
+   "prompt": "Un message urgent demande ton mot de passe. Tu :",
+   "explanation": "On vérifie par un canal connu.",
+   "source": "Exercice original",
+   "choices": [
+    "le donnes vite",
+    "ne réponds pas et vérifies autrement",
+    "transmets à tous tes contacts",
+    "cliques sur le lien"
+   ],
+   "answer": 1
+  },
+  {
+   "id": "etp-informatique-bureautique-securite-base-03",
+   "kind": "mcq",
+   "tier": "application",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "etp-informatique-bureautique-securite-base",
+   "prompt": "Une sauvegarde se fait sur :",
+   "explanation": "Un autre support protège contre la panne du premier.",
+   "source": "Exercice original",
+   "choices": [
+    "le même disque uniquement",
+    "un autre support",
+    "l'écran",
+    "la RAM"
+   ],
+   "answer": 1
+  },
+  {
+   "id": "etp-informatique-bureautique-securite-base-04",
+   "kind": "numeric",
+   "tier": "approfondissement",
+   "difficulty": 2,
+   "points": 2,
+   "lesson": "etp-informatique-bureautique-securite-base",
+   "prompt": "Combien de codes à 3 chiffres (0 à 9) existe-t-il ?",
+   "explanation": "10 × 10 × 10 = 1 000.",
+   "source": "Exercice original",
+   "answer": 1000,
+   "tolerance": 0,
+   "unit": "codes"
+  },
+  {
+   "id": "etp-informatique-bureautique-securite-base-05",
+   "kind": "matching",
+   "tier": "approfondissement",
+   "difficulty": 2,
+   "points": 2,
+   "lesson": "etp-informatique-bureautique-securite-base",
+   "prompt": "Associe le réflexe au risque.",
+   "explanation": "Chaque réflexe répond à un risque.",
+   "source": "Exercice original",
+   "pairs": [
+    [
+     "Mot de passe long et unique",
+     "Piratage de compte"
+    ],
+    [
+     "Sauvegarde régulière",
+     "Perte de fichiers"
+    ],
+    [
+     "Ne pas cliquer sur un lien suspect",
+     "Hameçonnage"
+    ],
+    [
+     "Mises à jour",
+     "Failles connues"
+    ]
+   ]
+  },
+  {
+   "id": "etp-informatique-bureautique-securite-base-06",
+   "kind": "problem",
+   "tier": "examen",
+   "difficulty": 2,
+   "lesson": "etp-informatique-bureautique-securite-base",
+   "prompt": "Un code de cadenas numérique a 5 chiffres (0 à 9 pour chacun).",
+   "method": "Un chiffre de plus multiplie par 10.",
+   "source": "Exercice original",
+   "parts": [
+    {
+     "id": "etp-informatique-bureautique-securite-base-06-a",
+     "points": 2,
+     "prompt": "Combien de combinaisons possibles ?",
+     "explanation": "10 × 10 × 10 × 10 × 10 = 100 000.",
+     "kind": "numeric",
+     "answer": 100000,
+     "tolerance": 0
+    },
+    {
+     "id": "etp-informatique-bureautique-securite-base-06-b",
+     "points": 1,
+     "prompt": "Passer de 4 à 5 chiffres multiplie par 10 le nombre de combinaisons.",
+     "explanation": "Un chiffre de plus : on multiplie par 10.",
+     "kind": "truefalse",
+     "answer": true
+    },
+    {
+     "id": "etp-informatique-bureautique-securite-base-06-c",
+     "points": 2,
+     "prompt": "Donne deux règles pour un mot de passe solide.",
+     "explanation": "Longueur, variété, unicité, secret.",
+     "kind": "open",
+     "model": "Long, avec différents types de caractères, unique pour chaque compte, jamais communiqué.",
+     "rubric": [
+      "Longueur ou variété",
+      "Unicité ou secret"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "etp-informatique-bureautique-securite-base-q1",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "etp-informatique-bureautique-securite-base",
+   "prompt": "Le meilleur mot de passe parmi ceux-ci :",
+   "choices": [
+    "123456",
+    "motdepasse",
+    "ma date de naissance",
+    "une phrase de passe longue et unique"
+   ],
+   "answer": 3,
+   "explanation": "Longueur et unicité."
+  },
+  {
+   "id": "etp-informatique-bureautique-securite-base-q2",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "etp-informatique-bureautique-securite-base",
+   "prompt": "L'hameçonnage cherche à :",
+   "choices": [
+    "t'informer",
+    "te faire donner des informations ou de l'argent",
+    "réparer ton ordinateur",
+    "sauvegarder"
+   ],
+   "answer": 1,
+   "explanation": "C'est une escroquerie."
+  },
+  {
+   "id": "etp-informatique-bureautique-securite-base-q3",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "etp-informatique-bureautique-securite-base",
+   "prompt": "Une vraie sauvegarde est :",
+   "choices": [
+    "sur un autre support",
+    "sur le même disque seulement",
+    "dans la RAM",
+    "inutile"
+   ],
+   "answer": 0,
+   "explanation": "On sépare les copies."
+  },
+  {
+   "id": "etp-informatique-bureautique-securite-base-q4",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "etp-informatique-bureautique-securite-base",
+   "prompt": "Après avoir cliqué sur un lien suspect et donné un mot de passe, on :",
+   "choices": [
+    "l'ignore",
+    "le change vite",
+    "ne fait rien",
+    "le redonne"
+   ],
+   "answer": 1,
+   "explanation": "On change le mot de passe sans attendre."
+  },
+  {
+   "id": "etp-informatique-bureautique-securite-base-q5",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "etp-informatique-bureautique-securite-base",
+   "prompt": "Verrouiller son écran évite :",
+   "choices": [
+    "qu'un autre l'utilise",
+    "la panne",
+    "les mises à jour",
+    "d'imprimer"
+   ],
+   "answer": 0,
+   "explanation": "Cela protège l'accès."
+  },
+  {
+   "id": "etp-informatique-bureautique-internet-courrier-01",
+   "kind": "mcq",
+   "tier": "application",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "etp-informatique-bureautique-internet-courrier",
+   "prompt": "Le navigateur sert à :",
+   "explanation": "Il affiche les pages web.",
+   "source": "Exercice original",
+   "choices": [
+    "envoyer des SMS",
+    "afficher des pages web",
+    "imprimer",
+    "stocker"
+   ],
+   "answer": 1
+  },
+  {
+   "id": "etp-informatique-bureautique-internet-courrier-02",
+   "kind": "truefalse",
+   "tier": "application",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "etp-informatique-bureautique-internet-courrier",
+   "prompt": "Le cadenas d'un site garantit que son contenu est vrai.",
+   "explanation": "Il indique seulement une connexion chiffrée.",
+   "source": "Exercice original",
+   "answer": false
+  },
+  {
+   "id": "etp-informatique-bureautique-internet-courrier-03",
+   "kind": "mcq",
+   "tier": "application",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "etp-informatique-bureautique-internet-courrier",
+   "prompt": "Dans un courriel, l'objet :",
+   "explanation": "Il annonce le sujet.",
+   "source": "Exercice original",
+   "choices": [
+    "résume le sujet",
+    "est inutile",
+    "est le destinataire",
+    "est la pièce jointe"
+   ],
+   "answer": 0
+  },
+  {
+   "id": "etp-informatique-bureautique-internet-courrier-04",
+   "kind": "matching",
+   "tier": "approfondissement",
+   "difficulty": 2,
+   "points": 2,
+   "lesson": "etp-informatique-bureautique-internet-courrier",
+   "prompt": "Associe le champ à sa fonction.",
+   "explanation": "Chaque champ a un rôle.",
+   "source": "Exercice original",
+   "pairs": [
+    [
+     "À",
+     "Destinataire principal"
+    ],
+    [
+     "Cc",
+     "Copie visible par tous"
+    ],
+    [
+     "Cci",
+     "Copie cachée"
+    ],
+    [
+     "Objet",
+     "Sujet du message"
+    ]
+   ]
+  },
+  {
+   "id": "etp-informatique-bureautique-internet-courrier-05",
+   "kind": "open",
+   "tier": "approfondissement",
+   "difficulty": 2,
+   "points": 3,
+   "lesson": "etp-informatique-bureautique-internet-courrier",
+   "prompt": "Rédige un courriel de 3 à 4 lignes pour demander à un enseignant un rendez-vous.",
+   "explanation": "Un courriel court, poli, précis.",
+   "source": "Exercice original",
+   "model": "Objet : demande de rendez-vous. Bonjour Madame, je souhaiterais vous rencontrer cette semaine au sujet de mon devoir. Seriez-vous disponible jeudi ? Cordialement, (nom).",
+   "rubric": [
+    "Objet clair",
+    "Salutation",
+    "Demande précise",
+    "Politesse"
+   ]
+  },
+  {
+   "id": "etp-informatique-bureautique-internet-courrier-06",
+   "kind": "problem",
+   "tier": "examen",
+   "difficulty": 2,
+   "lesson": "etp-informatique-bureautique-internet-courrier",
+   "prompt": "Tu reçois un courriel : « Gagnez 1 million ! Cliquez ici et donnez votre numéro de compte ».",
+   "method": "Repérer les signaux, ne pas agir.",
+   "source": "Exercice original",
+   "parts": [
+    {
+     "id": "etp-informatique-bureautique-internet-courrier-06-a",
+     "points": 1,
+     "prompt": "De quel type de message s'agit-il probablement ?",
+     "explanation": "Promesse irréaliste et demande de données.",
+     "kind": "mcq",
+     "choices": [
+      "Une information scolaire",
+      "Un message d'hameçonnage",
+      "Un courriel de ton chef",
+      "Un devoir"
+     ],
+     "answer": 1
+    },
+    {
+     "id": "etp-informatique-bureautique-internet-courrier-06-b",
+     "points": 1,
+     "prompt": "Il faut cliquer pour vérifier le lien.",
+     "explanation": "On ne clique pas.",
+     "kind": "truefalse",
+     "answer": false
+    },
+    {
+     "id": "etp-informatique-bureautique-internet-courrier-06-c",
+     "points": 2,
+     "prompt": "Que fais-tu ?",
+     "explanation": "Les bons réflexes protègent.",
+     "kind": "open",
+     "model": "Je ne clique pas, je ne réponds pas, je signale le message et je le supprime.",
+     "rubric": [
+      "Pas de clic",
+      "Pas de réponse",
+      "Signaler ou supprimer"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "etp-informatique-bureautique-internet-courrier-q1",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "etp-informatique-bureautique-internet-courrier",
+   "prompt": "Dans une URL, https signifie :",
+   "choices": [
+    "protocole sécurisé",
+    "nom du site",
+    "chemin",
+    "extension"
+   ],
+   "answer": 0,
+   "explanation": "https est le protocole."
+  },
+  {
+   "id": "etp-informatique-bureautique-internet-courrier-q2",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "etp-informatique-bureautique-internet-courrier",
+   "prompt": "Un moteur de recherche :",
+   "choices": [
+    "trouve des pages",
+    "envoie du courrier",
+    "stocke les fichiers",
+    "imprime"
+   ],
+   "answer": 0,
+   "explanation": "Il cherche des pages."
+  },
+  {
+   "id": "etp-informatique-bureautique-internet-courrier-q3",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "etp-informatique-bureautique-internet-courrier",
+   "prompt": "Pour cacher les adresses aux autres destinataires :",
+   "choices": [
+    "À",
+    "Cc",
+    "Cci",
+    "Objet"
+   ],
+   "answer": 2,
+   "explanation": "Cci = copie cachée."
+  },
+  {
+   "id": "etp-informatique-bureautique-internet-courrier-q4",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "etp-informatique-bureautique-internet-courrier",
+   "prompt": "Avant de partager une information :",
+   "choices": [
+    "on vérifie la source",
+    "on partage vite",
+    "on ignore la date",
+    "on supprime la source"
+   ],
+   "answer": 0,
+   "explanation": "Vérifier évite les rumeurs."
+  },
+  {
+   "id": "etp-informatique-bureautique-internet-courrier-q5",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "etp-informatique-bureautique-internet-courrier",
+   "prompt": "Internet est :",
+   "choices": [
+    "un logiciel",
+    "un réseau mondial",
+    "un câble",
+    "un moteur"
+   ],
+   "answer": 1,
+   "explanation": "C'est un réseau."
+  }
+ ]
+}

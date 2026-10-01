@@ -1,0 +1,819 @@
+{
+ "chapter": "etp-cap-bep-maths-pro-geo-gestion",
+ "lessons": [
+  {
+   "id": "etp-cap-bep-maths-pro-aires-volumes",
+   "title": "Aires et volumes des solides usuels",
+   "minutes": 40,
+   "programRef": "Programme de mathématiques de l'enseignement technique (CAP/BEP) — à vérifier sur le texte officiel",
+   "status": "draft",
+   "author": "CastBridge (brouillon IA)",
+   "source": "Rédaction originale ; à relire par un enseignant",
+   "objectives": [
+    "Calculer l'aire d'un rectangle, d'un triangle, d'un disque.",
+    "Calculer le volume d'un pavé, d'un cylindre.",
+    "Exprimer un volume en litres.",
+    "Résoudre un problème de surface à peindre ou carreler."
+   ],
+   "prerequisites": [
+    "etp-cap-bep-maths-pro-unites"
+   ],
+   "exercises": [
+    "etp-cap-bep-maths-pro-aires-volumes-01",
+    "etp-cap-bep-maths-pro-aires-volumes-02",
+    "etp-cap-bep-maths-pro-aires-volumes-03",
+    "etp-cap-bep-maths-pro-aires-volumes-04",
+    "etp-cap-bep-maths-pro-aires-volumes-05",
+    "etp-cap-bep-maths-pro-aires-volumes-06"
+   ],
+   "selfCheck": [
+    "etp-cap-bep-maths-pro-aires-volumes-q1",
+    "etp-cap-bep-maths-pro-aires-volumes-q2",
+    "etp-cap-bep-maths-pro-aires-volumes-q3",
+    "etp-cap-bep-maths-pro-aires-volumes-q4",
+    "etp-cap-bep-maths-pro-aires-volumes-q5"
+   ],
+   "reviewNotes": [
+    "Le catalogue n'a pas de niveau CAP/BEP : pack placé en 4e (à ajuster quand le catalogue sera étendu).",
+    "Formules classiques de géométrie ; relecture rapide des calculs avec π ≈ 3,14.",
+    "Contexte d'atelier fictif."
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "formule",
+     "title": "Aires usuelles",
+     "md": "Rectangle de longueur $L$ et de largeur $l$ :",
+     "tex": "A = L \\times l"
+    },
+    {
+     "type": "key",
+     "style": "formule",
+     "title": "Triangle et disque",
+     "md": "Triangle de base $b$ et de hauteur $h$ : $A = \\frac{b \\times h}{2}$. Disque de rayon $r$ : $A = \\pi \\times r^2$ avec $\\pi \\approx 3{,}14$.",
+     "tex": "A = \\frac{b \\times h}{2} \\,\\, A = \\pi \\times r^2"
+    },
+    {
+     "type": "key",
+     "style": "formule",
+     "title": "Volumes usuels",
+     "md": "Pavé droit : $V = L \\times l \\times h$. Cylindre de rayon $r$ et de hauteur $h$ : $V = \\pi \\times r^2 \\times h$. Les trois mesures doivent être dans la **même unité**.",
+     "tex": "V = L \\times l \\times h"
+    },
+    {
+     "type": "key",
+     "style": "methode",
+     "title": "Méthode",
+     "md": "1. Faire un schéma et noter les mesures.\n2. Convertir dans une même unité.\n3. Choisir la formule, calculer.\n4. Écrire l'unité du résultat (m², m³, L)."
+    },
+    {
+     "type": "illustration",
+     "figure": {
+      "kind": "shapes",
+      "w": 400,
+      "h": 200,
+      "items": [
+       {
+        "t": "rect",
+        "x": 30,
+        "y": 50,
+        "w": 160,
+        "h": 90,
+        "fill": "lightblue",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "poly",
+        "pts": [
+         30,
+         50,
+         60,
+         30,
+         220,
+         30,
+         190,
+         50
+        ],
+        "fill": "lightgreen",
+        "stroke": "ink",
+        "width": 2,
+        "closed": true
+       },
+       {
+        "t": "poly",
+        "pts": [
+         190,
+         50,
+         220,
+         30,
+         220,
+         120,
+         190,
+         140
+        ],
+        "fill": "lightyellow",
+        "stroke": "ink",
+        "width": 2,
+        "closed": true
+       },
+       {
+        "t": "text",
+        "x": 110,
+        "y": 165,
+        "text": "longueur L",
+        "size": 14,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "text",
+        "x": 240,
+        "y": 85,
+        "text": "h",
+        "size": 14,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "text",
+        "x": 125,
+        "y": 22,
+        "text": "largeur l",
+        "size": 14,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "circle",
+        "cx": 320,
+        "cy": 60,
+        "r": 35,
+        "fill": "lightorange",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "line",
+        "x1": 320,
+        "y1": 60,
+        "x2": 355,
+        "y2": 60,
+        "color": "red",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 338,
+        "y": 52,
+        "text": "r",
+        "size": 14,
+        "color": "red",
+        "anchor": "middle"
+       },
+       {
+        "t": "text",
+        "x": 320,
+        "y": 125,
+        "text": "disque",
+        "size": 14,
+        "color": "ink",
+        "anchor": "middle"
+       }
+      ]
+     },
+     "caption": "Un pavé droit et un disque.",
+     "alt": "À gauche un pavé droit avec sa longueur, sa largeur et sa hauteur annotées ; à droite un disque dont le rayon r est tracé en rouge."
+    },
+    {
+     "type": "example",
+     "title": "Exemple 1 — surface d'un mur",
+     "statement": "Un mur rectangulaire mesure 4,5 m de long et 2,8 m de haut. Quelle est son aire ?",
+     "steps": [
+      {
+       "md": "Rectangle : A = L × h."
+      },
+      {
+       "md": "A = 4,5 × 2,8 = 12,6 m²."
+      }
+     ],
+     "answer": "**12,6 m².**"
+    },
+    {
+     "type": "example",
+     "title": "Exemple 2 — volume d'un bac",
+     "statement": "Un bac en forme de pavé mesure 2 m, 1,5 m et 1 m. Quel est son volume en m³, puis en litres ?",
+     "steps": [
+      {
+       "md": "V = 2 × 1,5 × 1 = 3 m³."
+      },
+      {
+       "md": "1 m³ = 1 000 dm³ = 1 000 L, donc 3 m³ = 3 000 L."
+      }
+     ],
+     "answer": "**3 m³ soit 3 000 L.**"
+    },
+    {
+     "type": "example",
+     "title": "Exemple 3 — cylindre",
+     "statement": "Un fût cylindrique a un rayon de 0,5 m et une hauteur de 1,2 m. Volume (π ≈ 3,14) ?",
+     "steps": [
+      {
+       "md": "Base : π × r² = 3,14 × 0,25 = 0,785 m²."
+      },
+      {
+       "md": "Volume : 0,785 × 1,2 = 0,942 m³."
+      }
+     ],
+     "answer": "**≈ 0,942 m³, soit 942 L.**"
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Erreurs fréquentes",
+     "md": "- Confondre diamètre et rayon : le rayon est la moitié du diamètre.\n- Mélanger les unités (cm et m) dans une même formule.\n- Oublier le « ÷ 2 » du triangle ou le carré de r."
+    },
+    {
+     "type": "more",
+     "items": [
+      "Pour peindre un mur, soustraire l'aire des portes et fenêtres.",
+      "L'aire d'un trapèze se calcule en le découpant en rectangle et triangles."
+     ]
+    },
+    {
+     "type": "exercise",
+     "ref": "etp-cap-bep-maths-pro-aires-volumes-01"
+    }
+   ]
+  },
+  {
+   "id": "etp-cap-bep-maths-pro-devis-tableaux",
+   "title": "Devis, factures, tableaux et graphiques",
+   "minutes": 40,
+   "programRef": "Programme de mathématiques de l'enseignement technique (CAP/BEP) — à vérifier sur le texte officiel",
+   "status": "draft",
+   "author": "CastBridge (brouillon IA)",
+   "source": "Rédaction originale ; à relire par un enseignant",
+   "objectives": [
+    "Établir un devis simple et vérifier une facture.",
+    "Calculer HT, TVA (taux donné) et TTC.",
+    "Lire un tableau de données.",
+    "Lire et interpréter un diagramme en bâtons."
+   ],
+   "prerequisites": [
+    "etp-cap-bep-maths-pro-proportionnalite"
+   ],
+   "exercises": [
+    "etp-cap-bep-maths-pro-devis-tableaux-01",
+    "etp-cap-bep-maths-pro-devis-tableaux-02",
+    "etp-cap-bep-maths-pro-devis-tableaux-03",
+    "etp-cap-bep-maths-pro-devis-tableaux-04",
+    "etp-cap-bep-maths-pro-devis-tableaux-05",
+    "etp-cap-bep-maths-pro-devis-tableaux-06"
+   ],
+   "selfCheck": [
+    "etp-cap-bep-maths-pro-devis-tableaux-q1",
+    "etp-cap-bep-maths-pro-devis-tableaux-q2",
+    "etp-cap-bep-maths-pro-devis-tableaux-q3",
+    "etp-cap-bep-maths-pro-devis-tableaux-q4",
+    "etp-cap-bep-maths-pro-devis-tableaux-q5"
+   ],
+   "reviewNotes": [
+    "Le catalogue n'a pas de niveau CAP/BEP : pack placé en 4e (à ajuster quand le catalogue sera étendu).",
+    "Le taux de TVA est toujours donné par l'énoncé ; ne pas l'afficher comme règle.",
+    "Noms et prix fictifs."
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Devis et facture",
+     "md": "Un **devis** est une estimation chiffrée proposée au client avant le travail. Une **facture** est le document final demandant le paiement. Chaque ligne indique : désignation, quantité, prix unitaire, montant = quantité × prix unitaire."
+    },
+    {
+     "type": "key",
+     "style": "methode",
+     "title": "Calculer une facture",
+     "md": "1. Montant de chaque ligne = quantité × prix unitaire.\n2. Total **hors taxe (HT)** = somme des lignes.\n3. Remise éventuelle, puis **TVA** avec le taux fourni.\n4. Total **TTC** = HT + TVA."
+    },
+    {
+     "type": "key",
+     "style": "methode",
+     "title": "Lire un graphique",
+     "md": "Lire le titre, les unités des axes, puis la hauteur de chaque barre. Comparer en calculant des différences ou des rapports. Un diagramme en bâtons sert à comparer des quantités entre catégories."
+    },
+    {
+     "type": "example",
+     "title": "Exemple 1 — devis",
+     "statement": "Un plombier fictif propose : 3 robinets à 12 500 FCFA, 10 m de tuyau à 1 800 FCFA le mètre, 1 main-d'œuvre à 25 000 FCFA. Total hors taxe ?",
+     "steps": [
+      {
+       "md": "Lignes : 3 × 12 500 = 37 500 ; 10 × 1 800 = 18 000 ; main-d'œuvre : 25 000."
+      },
+      {
+       "md": "Somme : 37 500 + 18 000 + 25 000 = 80 500 FCFA."
+      }
+     ],
+     "answer": "**80 500 FCFA HT.**"
+    },
+    {
+     "type": "example",
+     "title": "Exemple 2 — TTC",
+     "statement": "Avec une TVA de 10 % donnée par l'énoncé fictif, quel est le TTC du devis précédent ?",
+     "steps": [
+      {
+       "md": "TVA : 80 500 × 10 ÷ 100 = 8 050 FCFA."
+      },
+      {
+       "md": "TTC : 80 500 + 8 050 = 88 550 FCFA."
+      }
+     ],
+     "answer": "**88 550 FCFA TTC.**"
+    },
+    {
+     "type": "illustration",
+     "figure": {
+      "kind": "bars",
+      "w": 400,
+      "h": 240,
+      "unit": "chantiers",
+      "bars": [
+       {
+        "label": "Janv.",
+        "value": 12,
+        "color": []
+       },
+       {
+        "label": "Fév.",
+        "value": 18,
+        "color": []
+       },
+       {
+        "label": "Mars",
+        "value": 15,
+        "color": []
+       },
+       {
+        "label": "Avr.",
+        "value": 24,
+        "color": []
+       }
+      ]
+     },
+     "caption": "Chantiers terminés par mois (données fictives).",
+     "alt": "Quatre barres : janvier 12, février 18, mars 15, avril 24 chantiers terminés."
+    },
+    {
+     "type": "example",
+     "title": "Exemple 3 — graphique",
+     "statement": "D'après le diagramme, de combien le nombre de chantiers a-t-il augmenté de janvier à avril ?",
+     "steps": [
+      {
+       "md": "Janvier : 12 ; avril : 24."
+      },
+      {
+       "md": "Augmentation : 24 − 12 = 12 chantiers, soit un doublement."
+      }
+     ],
+     "answer": "**+ 12 chantiers.**"
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Erreurs fréquentes",
+     "md": "- Oublier la quantité : montant = quantité × prix unitaire.\n- Additionner des lignes déjà TTC avec des lignes HT.\n- Lire une barre sans regarder l'échelle de l'axe."
+    },
+    {
+     "type": "more",
+     "items": [
+      "Compare un devis et une facture : quels écarts peuvent apparaître ?",
+      "Dans un tableur, une facture se calcule avec des formules."
+     ]
+    },
+    {
+     "type": "exercise",
+     "ref": "etp-cap-bep-maths-pro-devis-tableaux-01"
+    }
+   ]
+  }
+ ],
+ "exercises": [
+  {
+   "id": "etp-cap-bep-maths-pro-aires-volumes-01",
+   "kind": "numeric",
+   "tier": "application",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "etp-cap-bep-maths-pro-aires-volumes",
+   "prompt": "Aire d'un rectangle de 6 m sur 4 m.",
+   "explanation": "6 × 4 = 24 m².",
+   "source": "Exercice original",
+   "answer": 24,
+   "tolerance": 0,
+   "unit": "m²"
+  },
+  {
+   "id": "etp-cap-bep-maths-pro-aires-volumes-02",
+   "kind": "numeric",
+   "tier": "application",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "etp-cap-bep-maths-pro-aires-volumes",
+   "prompt": "Volume d'un pavé de 3 m, 2 m et 1 m.",
+   "explanation": "3 × 2 × 1 = 6 m³.",
+   "source": "Exercice original",
+   "answer": 6,
+   "tolerance": 0,
+   "unit": "m³"
+  },
+  {
+   "id": "etp-cap-bep-maths-pro-aires-volumes-03",
+   "kind": "mcq",
+   "tier": "application",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "etp-cap-bep-maths-pro-aires-volumes",
+   "prompt": "L'aire d'un triangle de base 10 cm et de hauteur 6 cm est :",
+   "explanation": "(10 × 6) ÷ 2 = 30 cm².",
+   "mistakes": [
+    "Oublier de diviser par 2."
+   ],
+   "source": "Exercice original",
+   "choices": [
+    "60 cm²",
+    "30 cm²",
+    "16 cm²",
+    "36 cm²"
+   ],
+   "answer": 1
+  },
+  {
+   "id": "etp-cap-bep-maths-pro-aires-volumes-04",
+   "kind": "numeric",
+   "tier": "approfondissement",
+   "difficulty": 2,
+   "points": 2,
+   "lesson": "etp-cap-bep-maths-pro-aires-volumes",
+   "prompt": "Aire d'un disque de rayon 10 cm (π ≈ 3,14).",
+   "explanation": "3,14 × 10 × 10 = 314 cm².",
+   "source": "Exercice original",
+   "answer": 314,
+   "tolerance": 0,
+   "unit": "cm²"
+  },
+  {
+   "id": "etp-cap-bep-maths-pro-aires-volumes-05",
+   "kind": "truefalse",
+   "tier": "approfondissement",
+   "difficulty": 2,
+   "points": 2,
+   "lesson": "etp-cap-bep-maths-pro-aires-volumes",
+   "prompt": "Un réservoir de 2 m³ contient 2 000 litres.",
+   "explanation": "1 m³ = 1 000 L, donc 2 m³ = 2 000 L.",
+   "source": "Exercice original",
+   "answer": true
+  },
+  {
+   "id": "etp-cap-bep-maths-pro-aires-volumes-06",
+   "kind": "problem",
+   "tier": "examen",
+   "difficulty": 3,
+   "lesson": "etp-cap-bep-maths-pro-aires-volumes",
+   "prompt": "On doit peindre un mur de 5 m de long et 2,5 m de haut, comportant une porte de 0,9 m sur 2 m. Une peinture fictive couvre 8 m² par litre.",
+   "method": "Surface totale moins ouvertures, puis division par le rendement donné.",
+   "mistakes": [
+    "Oublier de retrancher la porte."
+   ],
+   "source": "Exercice original",
+   "parts": [
+    {
+     "id": "etp-cap-bep-maths-pro-aires-volumes-06-a",
+     "points": 1,
+     "prompt": "Aire totale du mur (m²) ?",
+     "explanation": "5 × 2,5 = 12,5 m².",
+     "kind": "numeric",
+     "answer": 12.5,
+     "tolerance": 0,
+     "unit": "m²"
+    },
+    {
+     "id": "etp-cap-bep-maths-pro-aires-volumes-06-b",
+     "points": 1,
+     "prompt": "Aire de la porte (m²) ?",
+     "explanation": "0,9 × 2 = 1,8 m².",
+     "kind": "numeric",
+     "answer": 1.8,
+     "tolerance": 0.001,
+     "unit": "m²"
+    },
+    {
+     "id": "etp-cap-bep-maths-pro-aires-volumes-06-c",
+     "points": 1,
+     "prompt": "Aire à peindre (m²) ?",
+     "explanation": "12,5 − 1,8 = 10,7 m².",
+     "kind": "numeric",
+     "answer": 10.7,
+     "tolerance": 0.001,
+     "unit": "m²"
+    },
+    {
+     "id": "etp-cap-bep-maths-pro-aires-volumes-06-d",
+     "points": 2,
+     "prompt": "Combien de litres faut-il pour une couche, arrondi au dixième de litre ?",
+     "explanation": "10,7 ÷ 8 = 1,34 ≈ 1,3 L.",
+     "kind": "numeric",
+     "answer": 1.3,
+     "tolerance": 0.05,
+     "unit": "L"
+    }
+   ]
+  },
+  {
+   "id": "etp-cap-bep-maths-pro-aires-volumes-q1",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "etp-cap-bep-maths-pro-aires-volumes",
+   "prompt": "L'aire d'un carré de côté 7 m :",
+   "choices": [
+    "14 m²",
+    "28 m²",
+    "49 m²",
+    "49 m"
+   ],
+   "answer": 2,
+   "explanation": "7 × 7 = 49 m²."
+  },
+  {
+   "id": "etp-cap-bep-maths-pro-aires-volumes-q2",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "etp-cap-bep-maths-pro-aires-volumes",
+   "prompt": "Le rayon d'un disque de diamètre 20 cm est :",
+   "choices": [
+    "40 cm",
+    "10 cm",
+    "20 cm",
+    "5 cm"
+   ],
+   "answer": 1,
+   "explanation": "Le rayon est la moitié du diamètre."
+  },
+  {
+   "id": "etp-cap-bep-maths-pro-aires-volumes-q3",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "etp-cap-bep-maths-pro-aires-volumes",
+   "prompt": "1 dm³ est égal à :",
+   "choices": [
+    "1 mL",
+    "10 L",
+    "1 L",
+    "100 L"
+   ],
+   "answer": 2,
+   "explanation": "1 dm³ = 1 L."
+  },
+  {
+   "id": "etp-cap-bep-maths-pro-aires-volumes-q4",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "etp-cap-bep-maths-pro-aires-volumes",
+   "prompt": "Le volume d'un pavé de 2 m, 3 m, 4 m :",
+   "choices": [
+    "9 m³",
+    "24 m³",
+    "24 m²",
+    "12 m³"
+   ],
+   "answer": 1,
+   "explanation": "2 × 3 × 4 = 24 m³."
+  },
+  {
+   "id": "etp-cap-bep-maths-pro-aires-volumes-q5",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "etp-cap-bep-maths-pro-aires-volumes",
+   "prompt": "L'unité d'une aire peut être :",
+   "choices": [
+    "m",
+    "m²",
+    "m³",
+    "L"
+   ],
+   "answer": 1,
+   "explanation": "Une aire s'exprime en unités carrées."
+  },
+  {
+   "id": "etp-cap-bep-maths-pro-devis-tableaux-01",
+   "kind": "numeric",
+   "tier": "application",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "etp-cap-bep-maths-pro-devis-tableaux",
+   "prompt": "Ligne de facture : 6 articles à 2 500 FCFA. Montant ?",
+   "explanation": "6 × 2 500 = 15 000.",
+   "source": "Exercice original",
+   "answer": 15000,
+   "tolerance": 0,
+   "unit": "FCFA"
+  },
+  {
+   "id": "etp-cap-bep-maths-pro-devis-tableaux-02",
+   "kind": "numeric",
+   "tier": "application",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "etp-cap-bep-maths-pro-devis-tableaux",
+   "prompt": "Total HT 40 000 FCFA ; TVA supposée 20 % (fictive). Montant de la TVA ?",
+   "explanation": "40 000 × 20 ÷ 100 = 8 000.",
+   "source": "Exercice original",
+   "answer": 8000,
+   "tolerance": 0,
+   "unit": "FCFA"
+  },
+  {
+   "id": "etp-cap-bep-maths-pro-devis-tableaux-03",
+   "kind": "mcq",
+   "tier": "application",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "etp-cap-bep-maths-pro-devis-tableaux",
+   "prompt": "Un devis est :",
+   "explanation": "Le devis précède le travail.",
+   "source": "Exercice original",
+   "choices": [
+    "Un reçu après paiement",
+    "Une estimation avant le travail",
+    "Un impôt",
+    "Un bulletin de salaire"
+   ],
+   "answer": 1
+  },
+  {
+   "id": "etp-cap-bep-maths-pro-devis-tableaux-04",
+   "kind": "truefalse",
+   "tier": "approfondissement",
+   "difficulty": 2,
+   "points": 2,
+   "lesson": "etp-cap-bep-maths-pro-devis-tableaux",
+   "prompt": "TTC = HT + TVA.",
+   "explanation": "TTC signifie « toutes taxes comprises ».",
+   "source": "Exercice original",
+   "answer": true
+  },
+  {
+   "id": "etp-cap-bep-maths-pro-devis-tableaux-05",
+   "kind": "numeric",
+   "tier": "approfondissement",
+   "difficulty": 2,
+   "points": 2,
+   "lesson": "etp-cap-bep-maths-pro-devis-tableaux",
+   "prompt": "Un devis indique HT 60 000 FCFA, remise 10 % puis TVA supposée 10 %. Total TTC ?",
+   "explanation": "Après remise : 54 000 ; TVA 5 400 ; TTC 59 400 FCFA.",
+   "source": "Exercice original",
+   "answer": 59400,
+   "tolerance": 0,
+   "unit": "FCFA"
+  },
+  {
+   "id": "etp-cap-bep-maths-pro-devis-tableaux-06",
+   "kind": "problem",
+   "tier": "examen",
+   "difficulty": 3,
+   "lesson": "etp-cap-bep-maths-pro-devis-tableaux",
+   "prompt": "Facture d'un menuisier fictif : 4 planches à 3 500 FCFA, 2 charnières à 8 000 FCFA, main-d'œuvre 15 000 FCFA. TVA supposée à 20 % par l'énoncé.",
+   "method": "Ligne par ligne, puis HT, TVA, TTC.",
+   "mistakes": [
+    "Calculer la TVA sur chaque ligne et se tromper dans la somme."
+   ],
+   "source": "Exercice original",
+   "parts": [
+    {
+     "id": "etp-cap-bep-maths-pro-devis-tableaux-06-a",
+     "points": 1,
+     "prompt": "Montant des planches ?",
+     "explanation": "4 × 3 500 = 14 000.",
+     "kind": "numeric",
+     "answer": 14000,
+     "tolerance": 0,
+     "unit": "FCFA"
+    },
+    {
+     "id": "etp-cap-bep-maths-pro-devis-tableaux-06-b",
+     "points": 1,
+     "prompt": "Total HT ?",
+     "explanation": "14 000 + 16 000 + 15 000 = 45 000.",
+     "kind": "numeric",
+     "answer": 45000,
+     "tolerance": 0,
+     "unit": "FCFA"
+    },
+    {
+     "id": "etp-cap-bep-maths-pro-devis-tableaux-06-c",
+     "points": 1,
+     "prompt": "Montant de la TVA ?",
+     "explanation": "45 000 × 20 ÷ 100 = 9 000.",
+     "kind": "numeric",
+     "answer": 9000,
+     "tolerance": 0,
+     "unit": "FCFA"
+    },
+    {
+     "id": "etp-cap-bep-maths-pro-devis-tableaux-06-d",
+     "points": 1,
+     "prompt": "Total TTC ?",
+     "explanation": "45 000 + 9 000 = 54 000 FCFA.",
+     "kind": "numeric",
+     "answer": 54000,
+     "tolerance": 0,
+     "unit": "FCFA"
+    }
+   ]
+  },
+  {
+   "id": "etp-cap-bep-maths-pro-devis-tableaux-q1",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "etp-cap-bep-maths-pro-devis-tableaux",
+   "prompt": "Montant d'une ligne :",
+   "choices": [
+    "quantité + prix",
+    "quantité × prix unitaire",
+    "prix ÷ quantité",
+    "prix − quantité"
+   ],
+   "answer": 1,
+   "explanation": "Montant = quantité × prix unitaire."
+  },
+  {
+   "id": "etp-cap-bep-maths-pro-devis-tableaux-q2",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "etp-cap-bep-maths-pro-devis-tableaux",
+   "prompt": "HT signifie :",
+   "choices": [
+    "Hors taxe",
+    "Haut tarif",
+    "Hors total",
+    "Heure travaillée"
+   ],
+   "answer": 0,
+   "explanation": "Hors taxe."
+  },
+  {
+   "id": "etp-cap-bep-maths-pro-devis-tableaux-q3",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "etp-cap-bep-maths-pro-devis-tableaux",
+   "prompt": "Sur le graphique de la fiche, le mois avec le plus de chantiers :",
+   "choices": [
+    "Janvier",
+    "Février",
+    "Mars",
+    "Avril"
+   ],
+   "answer": 3,
+   "explanation": "Avril, avec 24 chantiers."
+  },
+  {
+   "id": "etp-cap-bep-maths-pro-devis-tableaux-q4",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "etp-cap-bep-maths-pro-devis-tableaux",
+   "prompt": "Total HT 10 000, TVA supposée 10 % : TTC =",
+   "choices": [
+    "10 100",
+    "11 000",
+    "9 000",
+    "20 000"
+   ],
+   "answer": 1,
+   "explanation": "TVA 1 000 ; TTC 11 000."
+  },
+  {
+   "id": "etp-cap-bep-maths-pro-devis-tableaux-q5",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "etp-cap-bep-maths-pro-devis-tableaux",
+   "prompt": "Pour comparer deux barres, on peut :",
+   "choices": [
+    "Calculer leur différence",
+    "Les additionner seulement",
+    "Les ignorer",
+    "Changer l'échelle"
+   ],
+   "answer": 0,
+   "explanation": "La différence mesure l'écart."
+  }
+ ]
+}

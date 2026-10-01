@@ -1,0 +1,444 @@
+{
+ "chapter": "etp-cap-bep-securite-atelier-secours",
+ "lessons": [
+  {
+   "id": "etp-cap-bep-securite-atelier-premiers-secours",
+   "title": "Premiers secours : principes généraux",
+   "minutes": 35,
+   "programRef": "Programme de sciences / prévention santé-environnement de l'enseignement technique (CAP/BEP) — à vérifier sur le texte officiel",
+   "status": "draft",
+   "author": "CastBridge (brouillon IA)",
+   "source": "Rédaction originale ; à relire par un enseignant",
+   "objectives": [
+    "Expliquer la démarche protéger, alerter, secourir.",
+    "Comprendre pourquoi on n'improvise pas un geste.",
+    "Savoir quand et comment alerter.",
+    "Connaître l'intérêt de la formation aux premiers secours."
+   ],
+   "prerequisites": [
+    "etp-cap-bep-securite-atelier-epi-risques"
+   ],
+   "exercises": [
+    "etp-cap-bep-securite-atelier-premiers-secours-01",
+    "etp-cap-bep-securite-atelier-premiers-secours-02",
+    "etp-cap-bep-securite-atelier-premiers-secours-03",
+    "etp-cap-bep-securite-atelier-premiers-secours-04",
+    "etp-cap-bep-securite-atelier-premiers-secours-05",
+    "etp-cap-bep-securite-atelier-premiers-secours-06"
+   ],
+   "selfCheck": [
+    "etp-cap-bep-securite-atelier-premiers-secours-q1",
+    "etp-cap-bep-securite-atelier-premiers-secours-q2",
+    "etp-cap-bep-securite-atelier-premiers-secours-q3",
+    "etp-cap-bep-securite-atelier-premiers-secours-q4",
+    "etp-cap-bep-securite-atelier-premiers-secours-q5"
+   ],
+   "reviewNotes": [
+    "Santé : contenu à faire relire par un secouriste ou formateur habilité avant utilisation.",
+    "Le catalogue n'a pas de niveau CAP/BEP : pack placé en 4e (à ajuster quand le catalogue sera étendu).",
+    "Aucun geste technique détaillé ni chiffre n'est donné volontairement ; les numéros d'urgence locaux sont à indiquer par l'établissement."
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Premiers secours",
+     "md": "Les **premiers secours** sont les gestes simples réalisés par un témoin, avant l'arrivée des secours professionnels, pour éviter que l'état de la victime s'aggrave. Ils ne remplacent jamais un médecin ni les services de secours.",
+     "review": true
+    },
+    {
+     "type": "key",
+     "style": "methode",
+     "title": "Protéger, alerter, secourir",
+     "md": "1. **Protéger** : écarter le danger (couper le courant, éloigner la machine) sans se mettre soi-même en danger, et protéger la victime.\n2. **Alerter** : appeler les secours (numéro d'urgence local) ou prévenir la personne désignée, en donnant le lieu, ce qui s'est passé, le nombre de victimes, leur état.\n3. **Secourir** : pratiquer les gestes appris en formation et rester auprès de la victime.",
+     "review": true
+    },
+    {
+     "type": "key",
+     "style": "retenir",
+     "title": "Rester prudent",
+     "md": "N'improvise pas un geste que tu ne connais pas. Ne déplace pas une personne blessée sans nécessité. Reste calme, rassure la victime, suis les instructions des secours. Les gestes précis s'apprennent dans une **formation reconnue** avec un formateur.",
+     "review": true
+    },
+    {
+     "type": "illustration",
+     "figure": {
+      "kind": "shapes",
+      "w": 400,
+      "h": 130,
+      "items": [
+       {
+        "t": "rect",
+        "x": 10,
+        "y": 40,
+        "w": 110,
+        "h": 44,
+        "fill": "lightgreen",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 65.0,
+        "y": 67.25,
+        "text": "Protéger",
+        "size": 15,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 145,
+        "y": 40,
+        "w": 110,
+        "h": 44,
+        "fill": "lightyellow",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 200.0,
+        "y": 67.25,
+        "text": "Alerter",
+        "size": 15,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 280,
+        "y": 40,
+        "w": 110,
+        "h": 44,
+        "fill": "lightorange",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 335.0,
+        "y": 67.25,
+        "text": "Secourir",
+        "size": 15,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "line",
+        "x1": 120,
+        "y1": 62,
+        "x2": 145,
+        "y2": 62,
+        "color": "ink",
+        "width": 2,
+        "arrow": "end"
+       },
+       {
+        "t": "line",
+        "x1": 255,
+        "y1": 62,
+        "x2": 280,
+        "y2": 62,
+        "color": "ink",
+        "width": 2,
+        "arrow": "end"
+       },
+       {
+        "t": "text",
+        "x": 200,
+        "y": 22,
+        "text": "Conduite à tenir générale",
+        "size": 15,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       }
+      ]
+     },
+     "caption": "Conduite générale face à un accident.",
+     "alt": "Trois cases reliées par des flèches : Protéger, Alerter, Secourir.",
+     "review": true
+    },
+    {
+     "type": "example",
+     "title": "Exemple 1 — ordre des actions",
+     "statement": "Un camarade reçoit une décharge électrique sur une rallonge abîmée. Dans quel ordre agir ?",
+     "steps": [
+      {
+       "md": "Protéger : couper le courant au disjoncteur ou débrancher sans toucher la victime ni le câble."
+      },
+      {
+       "md": "Alerter : prévenir le responsable et appeler les secours ; puis secourir selon la formation."
+      }
+     ],
+     "answer": "**D'abord protéger (sans se mettre en danger), puis alerter, puis secourir.**",
+     "review": true
+    },
+    {
+     "type": "example",
+     "title": "Exemple 2 — message d'alerte",
+     "statement": "Prépare le message d'alerte pour une chute dans un atelier fictif.",
+     "steps": [
+      {
+       "md": "Dire où : « Atelier de mécanique, quartier (nom), lycée (nom). »"
+      },
+      {
+       "md": "Dire quoi : « Un élève est tombé d'un escabeau, il ne se relève pas ; nous sommes deux à ses côtés. »"
+      }
+     ],
+     "answer": "**Le lieu, la nature de l'accident et l'état de la victime sont indiqués.**",
+     "review": true
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Erreurs fréquentes",
+     "md": "- Se précipiter sur la victime sans couper le danger.\n- Déplacer un blessé sans raison.\n- Quitter la victime pour chercher de l'aide sans prévenir quelqu'un.\n- Donner à boire ou un médicament sans avis."
+    },
+    {
+     "type": "more",
+     "items": [
+      "Renseigne-toi sur une formation aux premiers secours dans ta ville.",
+      "Repère où se trouve la trousse de secours de ton atelier."
+     ]
+    },
+    {
+     "type": "exercise",
+     "ref": "etp-cap-bep-securite-atelier-premiers-secours-01"
+    }
+   ]
+  }
+ ],
+ "exercises": [
+  {
+   "id": "etp-cap-bep-securite-atelier-premiers-secours-01",
+   "kind": "mcq",
+   "tier": "application",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "etp-cap-bep-securite-atelier-premiers-secours",
+   "prompt": "Quelle est la première étape de la conduite à tenir ?",
+   "explanation": "On protège d'abord pour éviter un sur-accident.",
+   "source": "Exercice original",
+   "review": true,
+   "choices": [
+    "Secourir",
+    "Protéger",
+    "Photographier",
+    "Partir"
+   ],
+   "answer": 1
+  },
+  {
+   "id": "etp-cap-bep-securite-atelier-premiers-secours-02",
+   "kind": "truefalse",
+   "tier": "application",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "etp-cap-bep-securite-atelier-premiers-secours",
+   "prompt": "Il faut toujours déplacer rapidement un blessé.",
+   "explanation": "Sauf danger immédiat, on évite de le déplacer.",
+   "source": "Exercice original",
+   "review": true,
+   "answer": false
+  },
+  {
+   "id": "etp-cap-bep-securite-atelier-premiers-secours-03",
+   "kind": "truefalse",
+   "tier": "application",
+   "difficulty": 1,
+   "points": 1,
+   "lesson": "etp-cap-bep-securite-atelier-premiers-secours",
+   "prompt": "Les premiers secours remplacent les secours professionnels.",
+   "explanation": "Ils agissent avant leur arrivée.",
+   "source": "Exercice original",
+   "review": true,
+   "answer": false
+  },
+  {
+   "id": "etp-cap-bep-securite-atelier-premiers-secours-04",
+   "kind": "mcq",
+   "tier": "approfondissement",
+   "difficulty": 2,
+   "points": 2,
+   "lesson": "etp-cap-bep-securite-atelier-premiers-secours",
+   "prompt": "Dans un message d'alerte, on donne :",
+   "explanation": "Ces informations permettent d'envoyer les secours.",
+   "source": "Exercice original",
+   "review": true,
+   "choices": [
+    "Le lieu et la nature de l'accident",
+    "Seulement son prénom",
+    "Son numéro de classe",
+    "Ses notes"
+   ],
+   "answer": 0
+  },
+  {
+   "id": "etp-cap-bep-securite-atelier-premiers-secours-05",
+   "kind": "open",
+   "tier": "approfondissement",
+   "difficulty": 2,
+   "points": 3,
+   "lesson": "etp-cap-bep-securite-atelier-premiers-secours",
+   "prompt": "Explique en quelques lignes pourquoi une formation aux premiers secours est utile.",
+   "explanation": "La formation évite l'improvisation.",
+   "source": "Exercice original",
+   "review": true,
+   "model": "Elle apprend les gestes justes, réduit la panique, permet d'alerter correctement et peut éviter une aggravation avant l'arrivée des secours.",
+   "rubric": [
+    "Gestes justes",
+    "Alerte correcte",
+    "Réduction de la panique",
+    "Complément et non remplacement"
+   ]
+  },
+  {
+   "id": "etp-cap-bep-securite-atelier-premiers-secours-06",
+   "kind": "problem",
+   "tier": "examen",
+   "difficulty": 2,
+   "lesson": "etp-cap-bep-securite-atelier-premiers-secours",
+   "prompt": "Un élève se coupe avec une tôle à l'atelier et saigne beaucoup ; vous êtes témoin.",
+   "method": "Protéger, alerter, secourir.",
+   "source": "Exercice original",
+   "review": true,
+   "reviewNote": "À faire relire par un secouriste.",
+   "parts": [
+    {
+     "id": "etp-cap-bep-securite-atelier-premiers-secours-06-a",
+     "points": 1,
+     "prompt": "Que faire en premier ?",
+     "explanation": "On commence par protéger la zone et la victime.",
+     "kind": "mcq",
+     "choices": [
+      "Protéger : écarter la tôle et les autres élèves du danger",
+      "Appeler un ami au téléphone pour discuter",
+      "Retourner travailler",
+      "Poser un chiffon sans réfléchir"
+     ],
+     "answer": 0,
+     "review": true
+    },
+    {
+     "id": "etp-cap-bep-securite-atelier-premiers-secours-06-b",
+     "points": 1,
+     "prompt": "Qui faut-il prévenir ?",
+     "explanation": "On alerte le responsable et les secours.",
+     "kind": "mcq",
+     "choices": [
+      "Le responsable de l'atelier et les secours",
+      "Personne",
+      "Un client",
+      "Le voisin"
+     ],
+     "answer": 0,
+     "review": true
+    },
+    {
+     "id": "etp-cap-bep-securite-atelier-premiers-secours-06-c",
+     "points": 2,
+     "prompt": "Rédige le message d'alerte en trois phrases.",
+     "explanation": "Un bon message est précis et bref.",
+     "kind": "open",
+     "model": "Atelier de mécanique, un élève s'est coupé avec une tôle et saigne beaucoup. Il est conscient. Nous restons auprès de lui.",
+     "rubric": [
+      "Lieu",
+      "Nature de l'accident",
+      "État de la victime"
+     ],
+     "review": true
+    }
+   ]
+  },
+  {
+   "id": "etp-cap-bep-securite-atelier-premiers-secours-q1",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "etp-cap-bep-securite-atelier-premiers-secours",
+   "prompt": "Les premiers secours sont réalisés :",
+   "choices": [
+    "avant l'arrivée des secours professionnels",
+    "à la place des secours",
+    "seulement par un médecin",
+    "jamais"
+   ],
+   "answer": 0,
+   "explanation": "Ils se font en attendant les secours.",
+   "review": true
+  },
+  {
+   "id": "etp-cap-bep-securite-atelier-premiers-secours-q2",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "etp-cap-bep-securite-atelier-premiers-secours",
+   "prompt": "Protéger signifie :",
+   "choices": [
+    "Écarter le danger sans se mettre en danger",
+    "Ignorer le danger",
+    "Courir",
+    "Crier"
+   ],
+   "answer": 0,
+   "explanation": "On sécurise la zone.",
+   "review": true
+  },
+  {
+   "id": "etp-cap-bep-securite-atelier-premiers-secours-q3",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "etp-cap-bep-securite-atelier-premiers-secours",
+   "prompt": "Dans un message d'alerte, on indique :",
+   "choices": [
+    "le lieu",
+    "son film préféré",
+    "la couleur de sa veste",
+    "rien"
+   ],
+   "answer": 0,
+   "explanation": "Le lieu est indispensable.",
+   "review": true
+  },
+  {
+   "id": "etp-cap-bep-securite-atelier-premiers-secours-q4",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "etp-cap-bep-securite-atelier-premiers-secours",
+   "prompt": "Face à un geste inconnu, on :",
+   "choices": [
+    "improvise",
+    "n'improvise pas",
+    "force",
+    "se moque"
+   ],
+   "answer": 1,
+   "explanation": "On ne tente pas ce qu'on ne sait pas faire.",
+   "review": true
+  },
+  {
+   "id": "etp-cap-bep-securite-atelier-premiers-secours-q5",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "etp-cap-bep-securite-atelier-premiers-secours",
+   "prompt": "La formation aux premiers secours :",
+   "choices": [
+    "est inutile",
+    "s'apprend avec un formateur",
+    "se fait sur internet seulement",
+    "est interdite"
+   ],
+   "answer": 1,
+   "explanation": "Les gestes s'apprennent avec un formateur.",
+   "review": true
+  }
+ ]
+}
