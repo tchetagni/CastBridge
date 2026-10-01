@@ -1,0 +1,624 @@
+{
+ "chapter": "6e-svt-demarche",
+ "lessons": [
+  {
+   "id": "6e-svt-demarche-scientifique",
+   "title": "La démarche scientifique : observer, expérimenter, conclure",
+   "minutes": 20,
+   "programRef": "6e — Démarche scientifique : observation, hypothèse, expérience, conclusion, schémas (à vérifier sur le texte officiel)",
+   "status": "draft",
+   "author": "CastBridge (brouillon IA, bêta)",
+   "source": "Rédaction originale d'après le programme MINESEC ; à relire par un enseignant",
+   "objectives": [
+    "Citer dans l'ordre les étapes de la démarche scientifique.",
+    "Distinguer une hypothèse d'une conclusion.",
+    "Reconnaître une expérience correctement conçue (témoin, une seule condition qui change)."
+   ],
+   "prerequisites": [],
+   "exercises": [
+    "6e-svt-demarche-scientifique-01",
+    "6e-svt-demarche-scientifique-02",
+    "6e-svt-demarche-scientifique-03",
+    "6e-svt-demarche-scientifique-04",
+    "6e-svt-demarche-scientifique-05",
+    "6e-svt-demarche-scientifique-06"
+   ],
+   "selfCheck": [
+    "6e-svt-demarche-scientifique-q1",
+    "6e-svt-demarche-scientifique-q2",
+    "6e-svt-demarche-scientifique-q3",
+    "6e-svt-demarche-scientifique-q4",
+    "6e-svt-demarche-scientifique-q5"
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "La démarche scientifique",
+     "md": "Pour comprendre un phénomène, un scientifique **observe**, se **pose une question**, propose une **hypothèse** (une réponse possible), la **teste par une expérience**, note les **résultats** puis tire une **conclusion**."
+    },
+    {
+     "type": "illustration",
+     "caption": "Les étapes de la démarche scientifique.",
+     "alt": "Cinq cases reliées par des flèches : observer, question, hypothèse, expérience, conclusion.",
+     "figure": {
+      "kind": "shapes",
+      "w": 160,
+      "h": 362,
+      "items": [
+       {
+        "t": "rect",
+        "x": 10,
+        "y": 10,
+        "w": 140,
+        "h": 46,
+        "fill": "lightgreen",
+        "stroke": "ink",
+        "width": 2,
+        "radius": 8
+       },
+       {
+        "t": "text",
+        "x": 80.0,
+        "y": 38.0,
+        "text": "Observer",
+        "size": 14,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "line",
+        "x1": 80.0,
+        "y1": 59,
+        "x2": 80.0,
+        "y2": 81,
+        "color": "ink",
+        "width": 3,
+        "arrow": "end"
+       },
+       {
+        "t": "rect",
+        "x": 10,
+        "y": 84,
+        "w": 140,
+        "h": 46,
+        "fill": "lightyellow",
+        "stroke": "ink",
+        "width": 2,
+        "radius": 8
+       },
+       {
+        "t": "text",
+        "x": 80.0,
+        "y": 112.0,
+        "text": "Question",
+        "size": 14,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "line",
+        "x1": 80.0,
+        "y1": 133,
+        "x2": 80.0,
+        "y2": 155,
+        "color": "ink",
+        "width": 3,
+        "arrow": "end"
+       },
+       {
+        "t": "rect",
+        "x": 10,
+        "y": 158,
+        "w": 140,
+        "h": 46,
+        "fill": "lightorange",
+        "stroke": "ink",
+        "width": 2,
+        "radius": 8
+       },
+       {
+        "t": "text",
+        "x": 80.0,
+        "y": 186.0,
+        "text": "Hypothèse",
+        "size": 14,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "line",
+        "x1": 80.0,
+        "y1": 207,
+        "x2": 80.0,
+        "y2": 229,
+        "color": "ink",
+        "width": 3,
+        "arrow": "end"
+       },
+       {
+        "t": "rect",
+        "x": 10,
+        "y": 232,
+        "w": 140,
+        "h": 46,
+        "fill": "lightblue",
+        "stroke": "ink",
+        "width": 2,
+        "radius": 8
+       },
+       {
+        "t": "text",
+        "x": 80.0,
+        "y": 260.0,
+        "text": "Expérience",
+        "size": 14,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "line",
+        "x1": 80.0,
+        "y1": 281,
+        "x2": 80.0,
+        "y2": 303,
+        "color": "ink",
+        "width": 3,
+        "arrow": "end"
+       },
+       {
+        "t": "rect",
+        "x": 10,
+        "y": 306,
+        "w": 140,
+        "h": 46,
+        "fill": "pink",
+        "stroke": "ink",
+        "width": 2,
+        "radius": 8
+       },
+       {
+        "t": "text",
+        "x": 80.0,
+        "y": 334.0,
+        "text": "Conclusion",
+        "size": 14,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       }
+      ]
+     }
+    },
+    {
+     "type": "key",
+     "style": "methode",
+     "title": "Concevoir une bonne expérience",
+     "md": "1. Choisir **un seul facteur** à étudier (l'eau, la lumière, la chaleur…).\n2. Préparer deux lots identiques : un lot **témoin** (sans changement) et un lot **test** (un seul facteur modifié).\n3. Garder toutes les autres conditions identiques.\n4. Noter les résultats, puis conclure en répondant à la question posée."
+    },
+    {
+     "type": "illustration",
+     "caption": "Deux pots identiques : un seul facteur change (l'eau).",
+     "alt": "Deux pots de terre, A arrosé et B non arrosé, placés dans les mêmes conditions de sol et de lumière.",
+     "figure": {
+      "kind": "shapes",
+      "w": 440,
+      "h": 200,
+      "items": [
+       {
+        "t": "rect",
+        "x": 40,
+        "y": 90,
+        "w": 100,
+        "h": 70,
+        "fill": "lightorange",
+        "stroke": "ink",
+        "width": 2,
+        "radius": 6
+       },
+       {
+        "t": "rect",
+        "x": 300,
+        "y": 90,
+        "w": 100,
+        "h": 70,
+        "fill": "lightorange",
+        "stroke": "ink",
+        "width": 2,
+        "radius": 6
+       },
+       {
+        "t": "line",
+        "x1": 90,
+        "y1": 90,
+        "x2": 90,
+        "y2": 50,
+        "color": "green",
+        "width": 4
+       },
+       {
+        "t": "line",
+        "x1": 90,
+        "y1": 70,
+        "x2": 70,
+        "y2": 55,
+        "color": "green",
+        "width": 3
+       },
+       {
+        "t": "line",
+        "x1": 90,
+        "y1": 70,
+        "x2": 110,
+        "y2": 55,
+        "color": "green",
+        "width": 3
+       },
+       {
+        "t": "line",
+        "x1": 350,
+        "y1": 90,
+        "x2": 350,
+        "y2": 105,
+        "color": "green",
+        "width": 2
+       },
+       {
+        "t": "line",
+        "x1": 95,
+        "y1": 175,
+        "x2": 95,
+        "y2": 180,
+        "color": "blue",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 90,
+        "y": 25,
+        "text": "Pot A : arrosé",
+        "size": 14,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 350,
+        "y": 25,
+        "text": "Pot B : non arrosé",
+        "size": 14,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 90,
+        "y": 185,
+        "text": "témoin",
+        "size": 14,
+        "color": "blue",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 350,
+        "y": 185,
+        "text": "test",
+        "size": 14,
+        "color": "red",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 220,
+        "y": 125,
+        "text": "même sol, même lumière",
+        "size": 14,
+        "color": "grey",
+        "anchor": "middle"
+       }
+      ]
+     }
+    },
+    {
+     "type": "example",
+     "title": "Exemple 1 : de la question à la conclusion",
+     "statement": "Boris remarque que des haricots semés au soleil poussent mieux que ceux semés sous un grand arbre. Formule la question et une hypothèse.",
+     "steps": [
+      {
+       "md": "Question : la lumière est-elle nécessaire à la croissance des haricots ?"
+      },
+      {
+       "md": "Hypothèse : sans lumière, les haricots poussent mal. C'est une réponse possible que l'on va tester, pas une certitude."
+      },
+      {
+       "md": "Expérience : deux pots identiques, l'un à la lumière (témoin), l'autre dans une boîte noire (test), arrosés de la même façon."
+      }
+     ],
+     "answer": "**Facteur étudié : la lumière ; un seul facteur change.**"
+    },
+    {
+     "type": "example",
+     "title": "Exemple 2 : tirer la conclusion",
+     "statement": "Après deux semaines, le pot à la lumière a de grandes feuilles vertes ; le pot dans la boîte noire a des tiges pâles et faibles. Conclus.",
+     "steps": [
+      {
+       "md": "On compare les deux résultats : seul le facteur lumière était différent."
+      },
+      {
+       "md": "On répond à la question posée, en s'appuyant sur les résultats observés."
+      }
+     ],
+     "answer": "**Conclusion : la lumière est nécessaire à la bonne croissance des haricots. L'hypothèse est confirmée.**"
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Erreurs fréquentes",
+     "md": "- Confondre **hypothèse** (avant l'expérience) et **conclusion** (après).\n- Changer **plusieurs** conditions à la fois : on ne sait plus laquelle agit.\n- Oublier le **témoin** : on ne peut plus comparer.\n- Conclure sans avoir regardé les résultats : on ne note que ce que l'on observe vraiment."
+    },
+    {
+     "type": "key",
+     "style": "retenir",
+     "title": "Le schéma d'observation",
+     "md": "Un bon schéma a un **titre**, est dessiné au **crayon** avec des traits nets, a des **légendes** écrites à l'horizontale, reliées à l'objet par des **traits à la règle**, et indique le **grossissement** si l'on a utilisé une loupe ou un microscope."
+    }
+   ],
+   "reviewNotes": [
+    "Le programme officiel peut regrouper ou nommer autrement les étapes (par exemple « problème posé », « investigation », « résultats »). À comparer avec le livre de la classe."
+   ]
+  }
+ ],
+ "exercises": [
+  {
+   "kind": "mcq",
+   "prompt": "Quelle étape vient juste après l'observation d'un phénomène ?",
+   "choices": [
+    "Poser une question",
+    "Tirer la conclusion",
+    "Réaliser l'expérience",
+    "Noter les résultats"
+   ],
+   "answer": 0,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "On observe, puis on se demande « pourquoi ? » avant de proposer une hypothèse.",
+   "id": "6e-svt-demarche-scientifique-01",
+   "tier": "application",
+   "lesson": "6e-svt-demarche-scientifique",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "truefalse",
+   "prompt": "Vrai ou faux : une hypothèse est une réponse possible à une question, qu'il faut ensuite tester.",
+   "answer": true,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "L'hypothèse est proposée avant l'expérience ; l'expérience la confirme ou la rejette.",
+   "id": "6e-svt-demarche-scientifique-02",
+   "tier": "application",
+   "lesson": "6e-svt-demarche-scientifique",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "matching",
+   "prompt": "Associe chaque étape à son rôle.",
+   "pairs": [
+    [
+     "Observation",
+     "Regarder attentivement et noter"
+    ],
+    [
+     "Hypothèse",
+     "Proposer une réponse à tester"
+    ],
+    [
+     "Expérience",
+     "Vérifier l'hypothèse par un essai"
+    ],
+    [
+     "Conclusion",
+     "Répondre à la question grâce aux résultats"
+    ]
+   ],
+   "points": 2,
+   "difficulty": 1,
+   "explanation": "Chaque étape a un rôle précis dans la démarche.",
+   "id": "6e-svt-demarche-scientifique-03",
+   "tier": "application",
+   "lesson": "6e-svt-demarche-scientifique",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Amina place un pot de maïs au soleil et un autre dans un placard noir. Elle arrose les deux de la même façon. Quel facteur étudie-t-elle ?",
+   "choices": [
+    "L'eau",
+    "La nature du sol",
+    "La taille du pot",
+    "La lumière"
+   ],
+   "answer": 3,
+   "points": 1,
+   "difficulty": 2,
+   "explanation": "Seule la lumière change entre les deux pots.",
+   "method": "Cherche la seule condition qui diffère entre les deux lots.",
+   "id": "6e-svt-demarche-scientifique-04",
+   "tier": "approfondissement",
+   "lesson": "6e-svt-demarche-scientifique",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Pourquoi prépare-t-on un lot témoin ?",
+   "choices": [
+    "Pour avoir plus de plantes à récolter",
+    "Pour changer plusieurs facteurs à la fois",
+    "Pour éviter de noter les résultats",
+    "Pour comparer avec le lot où l'on a modifié un facteur"
+   ],
+   "answer": 3,
+   "points": 1,
+   "difficulty": 2,
+   "explanation": "Sans témoin, on ne peut pas savoir si le changement observé vient du facteur étudié.",
+   "id": "6e-svt-demarche-scientifique-05",
+   "tier": "approfondissement",
+   "lesson": "6e-svt-demarche-scientifique",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "problem",
+   "prompt": "Mballa pense que des graines de maïs ont besoin d'eau pour germer. Il dispose de deux boîtes identiques contenant du coton et de dix graines chacune.",
+   "parts": [
+    {
+     "kind": "mcq",
+     "prompt": "Quelle est la bonne formulation de son hypothèse ?",
+     "choices": [
+      "Les graines ont germé car elles étaient belles.",
+      "Sans eau, les graines de maïs ne germent pas.",
+      "Le maïs est une plante à fleurs.",
+      "Toutes les plantes ont besoin de lumière."
+     ],
+     "answer": 1,
+     "points": 1,
+     "difficulty": 1,
+     "explanation": "Une hypothèse est une réponse possible à la question posée, que l'on peut tester.",
+     "id": "6e-svt-demarche-scientifique-06-a"
+    },
+    {
+     "kind": "open",
+     "prompt": "Décris l'expérience que Mballa peut faire (témoin, test, conditions identiques).",
+     "model": "Boîte A (témoin) : coton humide arrosé régulièrement. Boîte B (test) : coton sec, jamais arrosé. Les deux boîtes sont au même endroit, à la même température et reçoivent la même lumière. On compte les graines germées après quelques jours.",
+     "rubric": [
+      "Un lot témoin et un lot test",
+      "Un seul facteur change (l'eau)",
+      "Les autres conditions sont identiques",
+      "On observe et on compte les graines germées"
+     ],
+     "points": 3,
+     "difficulty": 2,
+     "explanation": "Voir le corrigé modèle et les critères de notation.",
+     "id": "6e-svt-demarche-scientifique-06-b"
+    },
+    {
+     "kind": "mcq",
+     "prompt": "Quelques jours plus tard, les graines de la boîte A ont germé et celles de la boîte B non. Quelle est la conclusion ?",
+     "choices": [
+      "La lumière est nécessaire à la germination",
+      "Les graines de la boîte B étaient mortes de toute façon",
+      "L'eau est nécessaire à la germination du maïs",
+      "Le coton fabrique l'eau"
+     ],
+     "answer": 2,
+     "points": 1,
+     "difficulty": 1,
+     "explanation": "Seule l'eau différait ; l'hypothèse est confirmée.",
+     "id": "6e-svt-demarche-scientifique-06-c"
+    }
+   ],
+   "difficulty": 2,
+   "id": "6e-svt-demarche-scientifique-06",
+   "tier": "examen",
+   "lesson": "6e-svt-demarche-scientifique",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Dans quel ordre se placent ces étapes ?",
+   "choices": [
+    "Conclusion, expérience, hypothèse, observation",
+    "Hypothèse, conclusion, observation, expérience",
+    "Observation, hypothèse, expérience, conclusion",
+    "Expérience, observation, conclusion, hypothèse"
+   ],
+   "answer": 2,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "On observe, on suppose, on teste, on conclut.",
+   "id": "6e-svt-demarche-scientifique-q1",
+   "tier": "autoeval",
+   "lesson": "6e-svt-demarche-scientifique",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Que doit contenir un schéma d'observation ?",
+   "choices": [
+    "Seulement des couleurs",
+    "Un titre et des légendes",
+    "Aucun texte",
+    "Le nom du dessinateur uniquement"
+   ],
+   "answer": 1,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Le titre et les légendes rendent le schéma lisible.",
+   "id": "6e-svt-demarche-scientifique-q2",
+   "tier": "autoeval",
+   "lesson": "6e-svt-demarche-scientifique",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Dans une expérience bien conçue, combien de facteurs changent entre le lot témoin et le lot test ?",
+   "choices": [
+    "Un seul",
+    "Deux",
+    "Tous",
+    "Aucun"
+   ],
+   "answer": 0,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Un seul facteur change, pour savoir ce qui agit.",
+   "id": "6e-svt-demarche-scientifique-q3",
+   "tier": "autoeval",
+   "lesson": "6e-svt-demarche-scientifique",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Une hypothèse est :",
+   "choices": [
+    "Un résultat certain",
+    "Un schéma",
+    "Une réponse possible à tester",
+    "Une mesure"
+   ],
+   "answer": 2,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "On la formule avant d'expérimenter.",
+   "id": "6e-svt-demarche-scientifique-q4",
+   "tier": "autoeval",
+   "lesson": "6e-svt-demarche-scientifique",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Que fait-on des résultats d'une expérience ?",
+   "choices": [
+    "On les cache",
+    "On les change pour qu'ils plaisent",
+    "On les oublie",
+    "On les note puis on les compare pour conclure"
+   ],
+   "answer": 3,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Les résultats sont la base de la conclusion.",
+   "id": "6e-svt-demarche-scientifique-q5",
+   "tier": "autoeval",
+   "lesson": "6e-svt-demarche-scientifique",
+   "source": "Exercice original, rédigé pour CastBridge"
+  }
+ ]
+}

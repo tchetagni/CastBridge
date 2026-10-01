@@ -1,0 +1,919 @@
+{
+ "chapter": "5e-svt-geologie",
+ "lessons": [
+  {
+   "id": "5e-svt-roches-erosion",
+   "title": "Les roches et l'érosion",
+   "minutes": 30,
+   "programRef": "5e — Les roches, l'érosion, la formation du sol (à vérifier sur le texte officiel)",
+   "status": "draft",
+   "author": "CastBridge (brouillon IA, bêta)",
+   "source": "Rédaction originale d'après le programme MINESEC ; à relire par un enseignant",
+   "objectives": [
+    "Distinguer roches magmatiques, sédimentaires et métamorphiques.",
+    "Décrire l'érosion, le transport et la sédimentation.",
+    "Expliquer comment une roche donne un sol."
+   ],
+   "prerequisites": [],
+   "exercises": [
+    "5e-svt-roches-erosion-01",
+    "5e-svt-roches-erosion-02",
+    "5e-svt-roches-erosion-03",
+    "5e-svt-roches-erosion-04",
+    "5e-svt-roches-erosion-05",
+    "5e-svt-roches-erosion-06"
+   ],
+   "selfCheck": [
+    "5e-svt-roches-erosion-q1",
+    "5e-svt-roches-erosion-q2",
+    "5e-svt-roches-erosion-q3",
+    "5e-svt-roches-erosion-q4",
+    "5e-svt-roches-erosion-q5"
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Les roches",
+     "md": "Une **roche** est un matériau naturel qui forme la croûte terrestre. On distingue trois familles : les roches **magmatiques** (formées par le refroidissement du magma : granite, basalte), les roches **sédimentaires** (formées par dépôt de sédiments en couches : grès, calcaire, argile) et les roches **métamorphiques** (transformées par la chaleur et la pression : marbre)."
+    },
+    {
+     "type": "illustration",
+     "caption": "Des couches de roches sédimentaires : les plus anciennes sont en bas.",
+     "alt": "Cinq couches superposées de sable, argile, calcaire, grès et argile, avec « plus récente » en haut et « plus ancienne » en bas.",
+     "figure": {
+      "kind": "shapes",
+      "w": 440,
+      "h": 260,
+      "items": [
+       {
+        "t": "rect",
+        "x": 60,
+        "y": 20,
+        "w": 220,
+        "h": 40,
+        "fill": "lightorange",
+        "stroke": "brown",
+        "width": 2
+       },
+       {
+        "t": "rect",
+        "x": 60,
+        "y": 60,
+        "w": 220,
+        "h": 40,
+        "fill": "lightyellow",
+        "stroke": "brown",
+        "width": 2
+       },
+       {
+        "t": "rect",
+        "x": 60,
+        "y": 100,
+        "w": 220,
+        "h": 40,
+        "fill": "lightgrey",
+        "stroke": "brown",
+        "width": 2
+       },
+       {
+        "t": "rect",
+        "x": 60,
+        "y": 140,
+        "w": 220,
+        "h": 40,
+        "fill": "lightblue",
+        "stroke": "brown",
+        "width": 2
+       },
+       {
+        "t": "rect",
+        "x": 60,
+        "y": 180,
+        "w": 220,
+        "h": 40,
+        "fill": "pink",
+        "stroke": "brown",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 300,
+        "y": 45,
+        "text": "plus récente",
+        "size": 14,
+        "color": "ink",
+        "anchor": "start",
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 300,
+        "y": 205,
+        "text": "plus ancienne",
+        "size": 14,
+        "color": "ink",
+        "anchor": "start",
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 170,
+        "y": 45,
+        "text": "sable",
+        "size": 14,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "text",
+        "x": 170,
+        "y": 85,
+        "text": "argile",
+        "size": 14,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "text",
+        "x": 170,
+        "y": 125,
+        "text": "calcaire",
+        "size": 14,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "text",
+        "x": 170,
+        "y": 165,
+        "text": "grès",
+        "size": 14,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "text",
+        "x": 170,
+        "y": 205,
+        "text": "argile",
+        "size": 14,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "text",
+        "x": 170,
+        "y": 245,
+        "text": "roche sédimentaire en couches",
+        "size": 14,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       }
+      ]
+     }
+    },
+    {
+     "type": "key",
+     "style": "retenir",
+     "title": "Érosion, transport, sédimentation",
+     "md": "Sous l'action de l'eau, du vent et des changements de température, les roches se fragmentent : c'est l'**altération**, puis l'**érosion** emporte les débris. Ils sont **transportés** (par les rivières surtout) et se **déposent** en couches : c'est la **sédimentation**. Avec le temps, ces dépôts se transforment en roches sédimentaires. L'altération de la roche mère, mélangée à l'humus, forme aussi le **sol**."
+    },
+    {
+     "type": "example",
+     "title": "Exemple 1 : classer des roches",
+     "statement": "Un morceau de basalte est noir, dense, formé de petits cristaux ; il provient d'une coulée de lave refroidie. Dans quelle famille le placer ?",
+     "steps": [
+      {
+       "md": "Le basalte vient du refroidissement d'un magma ou d'une lave."
+      },
+      {
+       "md": "Il appartient à la famille des roches magmatiques."
+      }
+     ],
+     "answer": "**Roche magmatique (volcanique).**"
+    },
+    {
+     "type": "example",
+     "title": "Exemple 2 : lire une falaise",
+     "statement": "Dans une falaise, Boris voit des couches horizontales superposées contenant des coquillages fossiles. Que peut-il dire ?",
+     "steps": [
+      {
+       "md": "Les couches se sont déposées successivement : roche sédimentaire."
+      },
+      {
+       "md": "Les couches du bas sont les plus anciennes, celles du haut les plus récentes."
+      }
+     ],
+     "answer": "**C'est une roche sédimentaire ; les couches basses sont les plus anciennes.**"
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Erreurs fréquentes",
+     "md": "- Penser que les roches ne changent jamais : elles s'usent lentement et se reforment.\n- Confondre **érosion** (usure et transport) et **sédimentation** (dépôt).\n- Croire qu'une roche est forcément très dure : l'argile est tendre, le grès est dur."
+    }
+   ],
+   "reviewNotes": [
+    "La classification en trois familles de roches peut être traitée à un autre niveau selon le programme officiel : à vérifier. Exemples : granite et basalte (magmatiques), grès et calcaire (sédimentaires), marbre (métamorphique) : classiques.",
+    "Aucun âge ni durée chiffrée n'est donné."
+   ]
+  },
+  {
+   "id": "5e-svt-volcans-seismes",
+   "title": "Volcans et séismes",
+   "minutes": 35,
+   "programRef": "5e — Volcans et séismes : manifestations de l'activité interne du globe (à vérifier sur le texte officiel)",
+   "status": "draft",
+   "author": "CastBridge (brouillon IA, bêta)",
+   "source": "Rédaction originale d'après le programme MINESEC ; à relire par un enseignant",
+   "objectives": [
+    "Décrire un volcan et une éruption.",
+    "Expliquer ce qu'est un séisme (foyer, épicentre).",
+    "Citer des comportements de prévention."
+   ],
+   "prerequisites": [
+    "5e-svt-roches-erosion"
+   ],
+   "exercises": [
+    "5e-svt-volcans-seismes-01",
+    "5e-svt-volcans-seismes-02",
+    "5e-svt-volcans-seismes-03",
+    "5e-svt-volcans-seismes-04",
+    "5e-svt-volcans-seismes-05",
+    "5e-svt-volcans-seismes-06"
+   ],
+   "selfCheck": [
+    "5e-svt-volcans-seismes-q1",
+    "5e-svt-volcans-seismes-q2",
+    "5e-svt-volcans-seismes-q3",
+    "5e-svt-volcans-seismes-q4",
+    "5e-svt-volcans-seismes-q5"
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Un volcan",
+     "md": "Un **volcan** est un relief formé par la sortie de **magma** (roche fondue venue de l'intérieur de la Terre). Le magma, stocké dans une **chambre magmatique**, remonte par la **cheminée** et sort par le **cratère** : c'est l'**éruption**. Dehors, le magma s'appelle **lave** ; l'éruption rejette aussi des gaz, des cendres et des blocs."
+    },
+    {
+     "type": "illustration",
+     "caption": "Coupe très simplifiée d'un volcan.",
+     "alt": "Une montagne avec une cheminée rouge reliant une chambre magmatique souterraine au cratère, d'où sortent des cendres et des gaz.",
+     "figure": {
+      "kind": "shapes",
+      "w": 500,
+      "h": 300,
+      "items": [
+       {
+        "t": "poly",
+        "pts": [
+         60,
+         235,
+         160,
+         105,
+         200,
+         105,
+         300,
+         235
+        ],
+        "fill": "brown",
+        "stroke": "brown",
+        "width": 2
+       },
+       {
+        "t": "rect",
+        "x": 0,
+        "y": 235,
+        "w": 500,
+        "h": 65,
+        "fill": "lightorange",
+        "stroke": "brown",
+        "width": 2
+       },
+       {
+        "t": "line",
+        "x1": 180,
+        "y1": 235,
+        "x2": 180,
+        "y2": 108,
+        "color": "red",
+        "width": 10
+       },
+       {
+        "t": "circle",
+        "cx": 180,
+        "cy": 262,
+        "r": 28,
+        "fill": "red",
+        "stroke": "red",
+        "width": 2
+       },
+       {
+        "t": "circle",
+        "cx": 180,
+        "cy": 84,
+        "r": 13,
+        "fill": "lightgrey",
+        "stroke": "grey",
+        "width": 2
+       },
+       {
+        "t": "circle",
+        "cx": 205,
+        "cy": 62,
+        "r": 17,
+        "fill": "lightgrey",
+        "stroke": "grey",
+        "width": 2
+       },
+       {
+        "t": "circle",
+        "cx": 160,
+        "cy": 58,
+        "r": 12,
+        "fill": "lightgrey",
+        "stroke": "grey",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 330,
+        "y": 95,
+        "text": "cratère",
+        "size": 14,
+        "color": "ink",
+        "anchor": "start"
+       },
+       {
+        "t": "line",
+        "x1": 325,
+        "y1": 91,
+        "x2": 202,
+        "y2": 105,
+        "color": "grey",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 330,
+        "y": 170,
+        "text": "cheminée",
+        "size": 14,
+        "color": "ink",
+        "anchor": "start"
+       },
+       {
+        "t": "line",
+        "x1": 325,
+        "y1": 166,
+        "x2": 190,
+        "y2": 170,
+        "color": "grey",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 330,
+        "y": 270,
+        "text": "chambre magmatique",
+        "size": 14,
+        "color": "ink",
+        "anchor": "start"
+       },
+       {
+        "t": "line",
+        "x1": 325,
+        "y1": 266,
+        "x2": 208,
+        "y2": 264,
+        "color": "grey",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 60,
+        "y": 30,
+        "text": "cendres et gaz",
+        "size": 14,
+        "color": "ink",
+        "anchor": "start"
+       }
+      ]
+     }
+    },
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Un séisme",
+     "md": "Un **séisme** (tremblement de terre) est une secousse du sol due à la rupture brutale de roches en profondeur. Le point de rupture est le **foyer** ; le point de la surface situé juste au-dessus est l'**épicentre**. La puissance d'un séisme se mesure par sa **magnitude** (échelle de Richter)."
+    },
+    {
+     "type": "key",
+     "style": "retenir",
+     "title": "Pourquoi des volcans et des séismes ?",
+     "md": "La couche rigide extérieure du globe est découpée en grandes **plaques** qui bougent très lentement. Aux endroits où elles se frottent, s'écartent ou se rapprochent, on trouve beaucoup de volcans et de séismes. On peut aussi avoir des volcans ailleurs, comme la ligne de volcans du Cameroun, dont le **Mont Cameroun**, volcan encore actif.",
+     "review": true
+    },
+    {
+     "type": "key",
+     "style": "attention",
+     "title": "Que faire en cas de séisme ?",
+     "md": "Garder son calme, s'éloigner des murs et des objets qui peuvent tomber, s'abriter sous une table solide, ne pas courir dans les escaliers. Dehors, rester loin des bâtiments, des poteaux et des arbres. Écouter les consignes des autorités.",
+     "review": true
+    },
+    {
+     "type": "example",
+     "title": "Exemple 1 : épicentre ou foyer ?",
+     "statement": "Un séisme se produit à 10 km sous le sol. Le point à la surface à la verticale du foyer est :",
+     "steps": [
+      {
+       "md": "Le foyer est le lieu de la rupture, sous terre."
+      },
+      {
+       "md": "Le point de surface juste au-dessus est l'épicentre ; c'est là que les dégâts sont souvent les plus forts."
+      }
+     ],
+     "answer": "**C'est l'épicentre.**"
+    },
+    {
+     "type": "example",
+     "title": "Exemple 2 : lave ou magma ?",
+     "statement": "Quelle est la différence entre magma et lave ?",
+     "steps": [
+      {
+       "md": "Le magma est sous terre, dans la chambre et la cheminée."
+      },
+      {
+       "md": "La lave est le magma qui est sorti du cratère."
+      }
+     ],
+     "answer": "**Magma : sous terre ; lave : en surface.**"
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Erreurs fréquentes",
+     "md": "- Penser que la lave et la cendre sont la même chose : la cendre est faite de fins débris projetés.\n- Confondre foyer (profondeur) et épicentre (surface).\n- Croire que tous les volcans sont éteints ou que tous sont toujours dangereux : certains sont actifs, d'autres éteints."
+    },
+    {
+     "type": "more",
+     "items": [
+      "Un dégagement de gaz carbonique d'origine volcanique, au lac Nyos en 1986, a causé la mort de nombreuses personnes : les gaz volcaniques peuvent être dangereux même sans éruption.",
+      "Les sols volcaniques sont souvent fertiles : c'est une raison pour laquelle des populations vivent près des volcans."
+     ]
+    }
+   ],
+   "reviewNotes": [
+    "Le Mont Cameroun est un volcan actif (haut d'environ 4 000 m) : fait classique, hauteur arrondie ; à confirmer. Mention de la catastrophe du lac Nyos (1986) à confirmer : « gaz carbonique d'origine volcanique », nombre de morts non précisé.",
+    "Consignes en cas de séisme : à faire relire par un spécialiste de la protection civile."
+   ]
+  }
+ ],
+ "exercises": [
+  {
+   "kind": "mcq",
+   "prompt": "Le granite est une roche :",
+   "choices": [
+    "Sédimentaire",
+    "Vivante",
+    "Liquide",
+    "Magmatique"
+   ],
+   "answer": 3,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Il se forme par refroidissement du magma.",
+   "id": "5e-svt-roches-erosion-01",
+   "tier": "application",
+   "lesson": "5e-svt-roches-erosion",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "truefalse",
+   "prompt": "Vrai ou faux : les roches sédimentaires se forment par dépôt de débris en couches.",
+   "answer": true,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "C'est la sédimentation.",
+   "id": "5e-svt-roches-erosion-02",
+   "tier": "application",
+   "lesson": "5e-svt-roches-erosion",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "matching",
+   "prompt": "Associe chaque roche à sa famille.",
+   "pairs": [
+    [
+     "Basalte",
+     "Magmatique"
+    ],
+    [
+     "Calcaire",
+     "Sédimentaire"
+    ],
+    [
+     "Marbre",
+     "Métamorphique"
+    ]
+   ],
+   "points": 2,
+   "difficulty": 1,
+   "explanation": "Chaque famille a son mode de formation.",
+   "id": "5e-svt-roches-erosion-03",
+   "tier": "application",
+   "lesson": "5e-svt-roches-erosion",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Quel agent d'érosion est le plus important dans la formation d'une vallée ?",
+   "choices": [
+    "Le sel",
+    "Les nuages",
+    "La Lune",
+    "L'eau courante"
+   ],
+   "answer": 3,
+   "points": 1,
+   "difficulty": 2,
+   "explanation": "Les rivières creusent et transportent les débris.",
+   "id": "5e-svt-roches-erosion-04",
+   "tier": "approfondissement",
+   "lesson": "5e-svt-roches-erosion",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Dans une série de couches non perturbées, la plus ancienne est :",
+   "choices": [
+    "En bas",
+    "En haut",
+    "Au milieu",
+    "On ne peut pas savoir"
+   ],
+   "answer": 0,
+   "points": 1,
+   "difficulty": 2,
+   "explanation": "Les dépôts nouveaux se déposent par-dessus.",
+   "id": "5e-svt-roches-erosion-05",
+   "tier": "approfondissement",
+   "lesson": "5e-svt-roches-erosion",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "problem",
+   "prompt": "Au bord d'une rivière, Nkeng observe un banc de sable, des galets arrondis et des berges abîmées après les crues.",
+   "parts": [
+    {
+     "kind": "open",
+     "prompt": "Explique pourquoi les galets sont arrondis.",
+     "model": "Ils sont roulés et frottés par l'eau, ce qui use leurs angles.",
+     "rubric": [
+      "Rôle de l'eau",
+      "Usure par frottement"
+     ],
+     "points": 2,
+     "difficulty": 2,
+     "explanation": "Voir le corrigé modèle et les critères de notation.",
+     "id": "5e-svt-roches-erosion-06-a"
+    },
+    {
+     "kind": "open",
+     "prompt": "Décris les trois phases : érosion, transport, sédimentation, dans cette situation.",
+     "model": "L'eau use les berges (érosion), emporte les débris (transport) et les dépose en banc de sable quand le courant ralentit (sédimentation).",
+     "rubric": [
+      "Trois phases décrites"
+     ],
+     "points": 3,
+     "difficulty": 2,
+     "explanation": "Voir le corrigé modèle et les critères de notation.",
+     "id": "5e-svt-roches-erosion-06-b"
+    }
+   ],
+   "difficulty": 2,
+   "id": "5e-svt-roches-erosion-06",
+   "tier": "examen",
+   "lesson": "5e-svt-roches-erosion",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Quelle roche est sédimentaire ?",
+   "choices": [
+    "Le grès",
+    "Le granite",
+    "Le basalte",
+    "Le magma"
+   ],
+   "answer": 0,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Il se forme par dépôt de sable.",
+   "id": "5e-svt-roches-erosion-q1",
+   "tier": "autoeval",
+   "lesson": "5e-svt-roches-erosion",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "L'érosion est :",
+   "choices": [
+    "La fabrication du magma",
+    "La naissance des volcans",
+    "La pluie",
+    "L'usure et l'enlèvement des roches"
+   ],
+   "answer": 3,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Elle déplace les débris.",
+   "id": "5e-svt-roches-erosion-q2",
+   "tier": "autoeval",
+   "lesson": "5e-svt-roches-erosion",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Le sol provient en grande partie :",
+   "choices": [
+    "De la lave uniquement",
+    "Du pétrole",
+    "De l'altération de la roche et de l'humus",
+    "Des nuages"
+   ],
+   "answer": 2,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "La roche mère se fragmente.",
+   "id": "5e-svt-roches-erosion-q3",
+   "tier": "autoeval",
+   "lesson": "5e-svt-roches-erosion",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Quel facteur modifie les roches ?",
+   "choices": [
+    "Le prénom",
+    "Le niveau d'école",
+    "Les changements de température",
+    "La couleur du papier"
+   ],
+   "answer": 2,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Dilatation et contraction fragmentent les roches.",
+   "id": "5e-svt-roches-erosion-q4",
+   "tier": "autoeval",
+   "lesson": "5e-svt-roches-erosion",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Une roche magmatique provient :",
+   "choices": [
+    "D'un dépôt de sable",
+    "D'une plante",
+    "Du refroidissement du magma",
+    "De l'eau de pluie"
+   ],
+   "answer": 2,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "C'est son origine.",
+   "id": "5e-svt-roches-erosion-q5",
+   "tier": "autoeval",
+   "lesson": "5e-svt-roches-erosion",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Comment s'appelle la roche fondue sous la surface ?",
+   "choices": [
+    "La cendre",
+    "Le sable",
+    "Le sel",
+    "Le magma"
+   ],
+   "answer": 3,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Une fois sortie, elle s'appelle lave.",
+   "id": "5e-svt-volcans-seismes-01",
+   "tier": "application",
+   "lesson": "5e-svt-volcans-seismes",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "truefalse",
+   "prompt": "Vrai ou faux : l'épicentre est le point de la surface à la verticale du foyer.",
+   "answer": true,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Le foyer est en profondeur.",
+   "id": "5e-svt-volcans-seismes-02",
+   "tier": "application",
+   "lesson": "5e-svt-volcans-seismes",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "matching",
+   "prompt": "Associe chaque terme à sa description.",
+   "pairs": [
+    [
+     "Cratère",
+     "Ouverture au sommet du volcan"
+    ],
+    [
+     "Cheminée",
+     "Conduit par où monte le magma"
+    ],
+    [
+     "Lave",
+     "Magma sorti à la surface"
+    ],
+    [
+     "Foyer",
+     "Lieu de la rupture lors d'un séisme"
+    ]
+   ],
+   "points": 2,
+   "difficulty": 1,
+   "explanation": "Vocabulaire des volcans et séismes.",
+   "id": "5e-svt-volcans-seismes-03",
+   "tier": "application",
+   "lesson": "5e-svt-volcans-seismes",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Que peut-on rejeter pendant une éruption ?",
+   "choices": [
+    "Seulement de l'eau pure",
+    "Seulement du vent",
+    "Lave, cendres et gaz",
+    "Seulement des plantes"
+   ],
+   "answer": 2,
+   "points": 1,
+   "difficulty": 2,
+   "explanation": "Les éruptions sont variées.",
+   "id": "5e-svt-volcans-seismes-04",
+   "tier": "approfondissement",
+   "lesson": "5e-svt-volcans-seismes",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Pendant un séisme, un bon réflexe à l'intérieur est :",
+   "choices": [
+    "S'abriter sous une table solide",
+    "Se coller aux fenêtres",
+    "Prendre l'ascenseur",
+    "Courir dans les escaliers"
+   ],
+   "answer": 0,
+   "points": 1,
+   "difficulty": 2,
+   "explanation": "On se protège des chutes d'objets.",
+   "review": true,
+   "reviewNote": "À valider par la protection civile.",
+   "id": "5e-svt-volcans-seismes-05",
+   "tier": "approfondissement",
+   "lesson": "5e-svt-volcans-seismes",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "problem",
+   "prompt": "Dans la région du Mont Cameroun, la terre est noire et riche ; Boris sait que ce volcan est considéré comme actif.",
+   "parts": [
+    {
+     "kind": "open",
+     "prompt": "Pourquoi certains cultivateurs aiment-ils les terres volcaniques ?",
+     "model": "Les roches volcaniques s'altèrent et libèrent des sels minéraux : le sol est souvent fertile.",
+     "rubric": [
+      "Lien roche volcanique - sol fertile"
+     ],
+     "points": 2,
+     "difficulty": 2,
+     "explanation": "Voir le corrigé modèle et les critères de notation.",
+     "id": "5e-svt-volcans-seismes-06-a"
+    },
+    {
+     "kind": "open",
+     "prompt": "Quel danger existe malgré tout près d'un volcan actif ? Que doivent faire les populations ?",
+     "model": "Il y a un risque d'éruption ou de gaz. Les populations doivent suivre les consignes des autorités et connaître les chemins d'évacuation.",
+     "rubric": [
+      "Un danger cité",
+      "Une mesure de prévention"
+     ],
+     "points": 2,
+     "difficulty": 2,
+     "explanation": "Voir le corrigé modèle et les critères de notation.",
+     "id": "5e-svt-volcans-seismes-06-b"
+    }
+   ],
+   "difficulty": 2,
+   "review": true,
+   "reviewNote": "À faire relire.",
+   "id": "5e-svt-volcans-seismes-06",
+   "tier": "examen",
+   "lesson": "5e-svt-volcans-seismes",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Le cratère d'un volcan est :",
+   "choices": [
+    "La base de la montagne",
+    "Une chambre souterraine",
+    "Un lac",
+    "L'ouverture par où sortent les produits de l'éruption"
+   ],
+   "answer": 3,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Au sommet du cône.",
+   "id": "5e-svt-volcans-seismes-q1",
+   "tier": "autoeval",
+   "lesson": "5e-svt-volcans-seismes",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "La chambre magmatique contient :",
+   "choices": [
+    "Du magma",
+    "De l'eau potable",
+    "Du sable sec",
+    "De la neige"
+   ],
+   "answer": 0,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Elle est sous le volcan.",
+   "id": "5e-svt-volcans-seismes-q2",
+   "tier": "autoeval",
+   "lesson": "5e-svt-volcans-seismes",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Un séisme est causé par :",
+   "choices": [
+    "Le vent fort",
+    "Un orage",
+    "La rupture brutale de roches en profondeur",
+    "La pluie"
+   ],
+   "answer": 2,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Les roches libèrent de l'énergie.",
+   "id": "5e-svt-volcans-seismes-q3",
+   "tier": "autoeval",
+   "lesson": "5e-svt-volcans-seismes",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "La magnitude d'un séisme mesure :",
+   "choices": [
+    "Sa durée en jours",
+    "Sa couleur",
+    "Sa puissance",
+    "Son prénom"
+   ],
+   "answer": 2,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Échelle de Richter.",
+   "id": "5e-svt-volcans-seismes-q4",
+   "tier": "autoeval",
+   "lesson": "5e-svt-volcans-seismes",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Quel volcan actif existe au Cameroun ?",
+   "choices": [
+    "Le mont Everest",
+    "Le mont Blanc",
+    "Le Mont Cameroun",
+    "Le Kilimandjaro"
+   ],
+   "answer": 2,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Fait classique ; autre massif volcanique de la région.",
+   "id": "5e-svt-volcans-seismes-q5",
+   "tier": "autoeval",
+   "lesson": "5e-svt-volcans-seismes",
+   "source": "Exercice original, rédigé pour CastBridge"
+  }
+ ]
+}

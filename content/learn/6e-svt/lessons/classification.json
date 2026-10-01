@@ -1,0 +1,613 @@
+{
+ "chapter": "6e-svt-classification",
+ "lessons": [
+  {
+   "id": "6e-svt-classer-animaux-plantes",
+   "title": "Classer les animaux et les plantes",
+   "minutes": 30,
+   "programRef": "6e — Classification simple des êtres vivants (à vérifier sur le texte officiel)",
+   "status": "draft",
+   "author": "CastBridge (brouillon IA, bêta)",
+   "source": "Rédaction originale d'après le programme MINESEC ; à relire par un enseignant",
+   "objectives": [
+    "Classer des êtres vivants selon des caractères communs.",
+    "Distinguer vertébrés et invertébrés et citer les grands groupes.",
+    "Distinguer plantes à fleurs et plantes sans fleurs."
+   ],
+   "prerequisites": [
+    "6e-svt-vivant-non-vivant"
+   ],
+   "exercises": [
+    "6e-svt-classer-animaux-plantes-01",
+    "6e-svt-classer-animaux-plantes-02",
+    "6e-svt-classer-animaux-plantes-03",
+    "6e-svt-classer-animaux-plantes-04",
+    "6e-svt-classer-animaux-plantes-05",
+    "6e-svt-classer-animaux-plantes-06"
+   ],
+   "selfCheck": [
+    "6e-svt-classer-animaux-plantes-q1",
+    "6e-svt-classer-animaux-plantes-q2",
+    "6e-svt-classer-animaux-plantes-q3",
+    "6e-svt-classer-animaux-plantes-q4",
+    "6e-svt-classer-animaux-plantes-q5"
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Classer",
+     "md": "**Classer**, c'est regrouper les êtres vivants qui ont des **caractères communs**. On sépare d'abord les **animaux** et les **plantes**. Parmi les animaux, ceux qui ont un squelette interne avec une colonne vertébrale sont des **vertébrés** ; les autres sont des **invertébrés**."
+    },
+    {
+     "type": "illustration",
+     "caption": "Une classification simple des êtres vivants.",
+     "alt": "Un arbre : êtres vivants se divisent en animaux (vertébrés, invertébrés) et plantes (à fleurs, sans fleurs), avec des exemples.",
+     "figure": {
+      "kind": "shapes",
+      "w": 560,
+      "h": 245,
+      "items": [
+       {
+        "t": "rect",
+        "x": 210,
+        "y": 10,
+        "w": 140,
+        "h": 36,
+        "fill": "lightyellow",
+        "stroke": "ink",
+        "width": 2,
+        "radius": 8
+       },
+       {
+        "t": "text",
+        "x": 280.0,
+        "y": 33.0,
+        "text": "Êtres vivants",
+        "size": 14,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 80,
+        "y": 80,
+        "w": 120,
+        "h": 36,
+        "fill": "lightorange",
+        "stroke": "ink",
+        "width": 2,
+        "radius": 8
+       },
+       {
+        "t": "text",
+        "x": 140.0,
+        "y": 103.0,
+        "text": "Animaux",
+        "size": 14,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 360,
+        "y": 80,
+        "w": 120,
+        "h": 36,
+        "fill": "lightgreen",
+        "stroke": "ink",
+        "width": 2,
+        "radius": 8
+       },
+       {
+        "t": "text",
+        "x": 420.0,
+        "y": 103.0,
+        "text": "Plantes",
+        "size": 14,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 10,
+        "y": 150,
+        "w": 120,
+        "h": 36,
+        "fill": "lightblue",
+        "stroke": "ink",
+        "width": 2,
+        "radius": 8
+       },
+       {
+        "t": "text",
+        "x": 70.0,
+        "y": 173.0,
+        "text": "vertébrés",
+        "size": 14,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 150,
+        "y": 150,
+        "w": 120,
+        "h": 36,
+        "fill": "lightblue",
+        "stroke": "ink",
+        "width": 2,
+        "radius": 8
+       },
+       {
+        "t": "text",
+        "x": 210.0,
+        "y": 173.0,
+        "text": "invertébrés",
+        "size": 14,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 290,
+        "y": 150,
+        "w": 120,
+        "h": 36,
+        "fill": "lightgreen",
+        "stroke": "ink",
+        "width": 2,
+        "radius": 8
+       },
+       {
+        "t": "text",
+        "x": 350.0,
+        "y": 173.0,
+        "text": "à fleurs",
+        "size": 14,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 430,
+        "y": 150,
+        "w": 120,
+        "h": 36,
+        "fill": "lightgreen",
+        "stroke": "ink",
+        "width": 2,
+        "radius": 8
+       },
+       {
+        "t": "text",
+        "x": 490.0,
+        "y": 173.0,
+        "text": "sans fleurs",
+        "size": 14,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "line",
+        "x1": 280,
+        "y1": 46,
+        "x2": 140,
+        "y2": 80,
+        "color": "ink",
+        "width": 2
+       },
+       {
+        "t": "line",
+        "x1": 280,
+        "y1": 46,
+        "x2": 420,
+        "y2": 80,
+        "color": "ink",
+        "width": 2
+       },
+       {
+        "t": "line",
+        "x1": 140,
+        "y1": 116,
+        "x2": 70,
+        "y2": 150,
+        "color": "ink",
+        "width": 2
+       },
+       {
+        "t": "line",
+        "x1": 140,
+        "y1": 116,
+        "x2": 210,
+        "y2": 150,
+        "color": "ink",
+        "width": 2
+       },
+       {
+        "t": "line",
+        "x1": 420,
+        "y1": 116,
+        "x2": 350,
+        "y2": 150,
+        "color": "ink",
+        "width": 2
+       },
+       {
+        "t": "line",
+        "x1": 420,
+        "y1": 116,
+        "x2": 490,
+        "y2": 150,
+        "color": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 70,
+        "y": 208,
+        "text": "chat, poule",
+        "size": 14,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "text",
+        "x": 210,
+        "y": 208,
+        "text": "criquet",
+        "size": 14,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "text",
+        "x": 210,
+        "y": 228,
+        "text": "escargot",
+        "size": 14,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "text",
+        "x": 350,
+        "y": 208,
+        "text": "manguier",
+        "size": 14,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "text",
+        "x": 350,
+        "y": 228,
+        "text": "maïs",
+        "size": 14,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "text",
+        "x": 490,
+        "y": 208,
+        "text": "fougère",
+        "size": 14,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "text",
+        "x": 490,
+        "y": 228,
+        "text": "mousse",
+        "size": 14,
+        "color": "ink",
+        "anchor": "middle"
+       }
+      ]
+     }
+    },
+    {
+     "type": "key",
+     "style": "retenir",
+     "title": "Les cinq groupes de vertébrés",
+     "md": "- **Mammifères** : poils, mamelles (ils allaitent leurs petits) — chat, vache, homme.\n- **Oiseaux** : plumes, bec, ailes, pondent des œufs — poule, perroquet.\n- **Reptiles** : peau à écailles, pondent des œufs — lézard, serpent, crocodile.\n- **Amphibiens** : peau nue et humide, jeunes aquatiques — grenouille.\n- **Poissons** : écailles, nageoires, branchies — carpe, capitaine."
+    },
+    {
+     "type": "key",
+     "style": "retenir",
+     "title": "Quelques groupes d'invertébrés",
+     "md": "- **Insectes** : six pattes, corps en trois parties (tête, thorax, abdomen), antennes — criquet, fourmi.\n- **Arachnides** : huit pattes, pas d'antennes — araignée.\n- **Crustacés** : carapace — crabe, crevette.\n- **Mollusques** : corps mou, souvent une coquille — escargot."
+    },
+    {
+     "type": "example",
+     "title": "Exemple 1 : classer un animal",
+     "statement": "Un animal a des poils, quatre pattes et allaite ses petits. Dans quel groupe le placer ?",
+     "steps": [
+      {
+       "md": "Les poils et les mamelles sont les caractères des mammifères."
+      },
+      {
+       "md": "Il a un squelette interne : c'est un vertébré."
+      }
+     ],
+     "answer": "**C'est un vertébré de la classe des mammifères.**"
+    },
+    {
+     "type": "example",
+     "title": "Exemple 2 : insecte ou arachnide ?",
+     "statement": "Boris compte huit pattes sur un petit animal, sans antennes. Est-ce un insecte ?",
+     "steps": [
+      {
+       "md": "Un insecte a six pattes et des antennes."
+      },
+      {
+       "md": "Huit pattes sans antennes : c'est un arachnide (par exemple une araignée)."
+      }
+     ],
+     "answer": "**Non, c'est un arachnide.**"
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Erreurs fréquentes",
+     "md": "- Classer la chauve-souris parmi les oiseaux : elle a des poils et allaite ses petits, c'est un **mammifère**.\n- Penser que l'araignée est un insecte : elle a huit pattes.\n- Classer selon le **milieu** (« ce qui nage ») et non selon les **caractères** : la baleine vit dans l'eau mais est un mammifère."
+    }
+   ],
+   "reviewNotes": [
+    "Le niveau de détail (classes de vertébrés, groupes d'invertébrés) doit être comparé au programme officiel ; la classification des champignons et des bactéries n'est pas traitée ici.",
+    "La chauve-souris (mammifère) est un exemple classique mais peut surprendre ; à confirmer selon le livre."
+   ]
+  }
+ ],
+ "exercises": [
+  {
+   "kind": "mcq",
+   "prompt": "Quel groupe d'animaux a des plumes ?",
+   "choices": [
+    "Les oiseaux",
+    "Les poissons",
+    "Les reptiles",
+    "Les mammifères"
+   ],
+   "answer": 0,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Les plumes caractérisent les oiseaux.",
+   "id": "6e-svt-classer-animaux-plantes-01",
+   "tier": "application",
+   "lesson": "6e-svt-classer-animaux-plantes",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "truefalse",
+   "prompt": "Vrai ou faux : un insecte possède six pattes.",
+   "answer": true,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Six pattes : c'est un caractère des insectes.",
+   "id": "6e-svt-classer-animaux-plantes-02",
+   "tier": "application",
+   "lesson": "6e-svt-classer-animaux-plantes",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "matching",
+   "prompt": "Associe chaque animal à son groupe.",
+   "pairs": [
+    [
+     "Chat",
+     "Mammifère"
+    ],
+    [
+     "Poule",
+     "Oiseau"
+    ],
+    [
+     "Lézard",
+     "Reptile"
+    ],
+    [
+     "Grenouille",
+     "Amphibien"
+    ],
+    [
+     "Carpe",
+     "Poisson"
+    ]
+   ],
+   "points": 2,
+   "difficulty": 1,
+   "explanation": "Poils et mamelles : mammifères ; plumes : oiseaux ; écailles et pattes : reptiles ; peau nue : amphibiens ; nageoires : poissons.",
+   "id": "6e-svt-classer-animaux-plantes-03",
+   "tier": "application",
+   "lesson": "6e-svt-classer-animaux-plantes",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Un animal a un squelette externe, six pattes et deux antennes. C'est :",
+   "choices": [
+    "Un mammifère",
+    "Un insecte",
+    "Un poisson",
+    "Un oiseau"
+   ],
+   "answer": 1,
+   "points": 1,
+   "difficulty": 2,
+   "explanation": "Corps en trois parties, six pattes, antennes : insecte.",
+   "id": "6e-svt-classer-animaux-plantes-04",
+   "tier": "approfondissement",
+   "lesson": "6e-svt-classer-animaux-plantes",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Pourquoi la baleine est-elle un mammifère ?",
+   "choices": [
+    "Elle vit dans l'eau",
+    "Elle allaite ses petits",
+    "Elle est très grosse",
+    "Elle a des nageoires"
+   ],
+   "answer": 1,
+   "points": 1,
+   "difficulty": 2,
+   "explanation": "Le critère est l'allaitement (mamelles), pas le milieu.",
+   "id": "6e-svt-classer-animaux-plantes-05",
+   "tier": "approfondissement",
+   "lesson": "6e-svt-classer-animaux-plantes",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "problem",
+   "prompt": "Mballa observe quatre animaux : une grenouille, un crabe, un perroquet, un serpent.",
+   "parts": [
+    {
+     "kind": "matching",
+     "prompt": "Associe chaque animal à son groupe.",
+     "pairs": [
+      [
+       "Grenouille",
+       "Amphibien"
+      ],
+      [
+       "Crabe",
+       "Crustacé (invertébré)"
+      ],
+      [
+       "Perroquet",
+       "Oiseau"
+      ],
+      [
+       "Serpent",
+       "Reptile"
+      ]
+     ],
+     "points": 2,
+     "difficulty": 1,
+     "explanation": "Chaque groupe a ses caractères propres.",
+     "id": "6e-svt-classer-animaux-plantes-06-a"
+    },
+    {
+     "kind": "open",
+     "prompt": "Lesquels sont des vertébrés ? Justifie.",
+     "model": "La grenouille, le perroquet et le serpent sont des vertébrés : ils ont une colonne vertébrale. Le crabe est un invertébré : il n'en a pas, mais une carapace.",
+     "rubric": [
+      "Trois vertébrés cités",
+      "Le crabe cité comme invertébré",
+      "Critère de la colonne vertébrale donné"
+     ],
+     "points": 2,
+     "difficulty": 2,
+     "explanation": "Voir le corrigé modèle et les critères de notation.",
+     "id": "6e-svt-classer-animaux-plantes-06-b"
+    }
+   ],
+   "difficulty": 2,
+   "id": "6e-svt-classer-animaux-plantes-06",
+   "tier": "examen",
+   "lesson": "6e-svt-classer-animaux-plantes",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Un vertébré possède :",
+   "choices": [
+    "Une carapace obligatoire",
+    "Six pattes",
+    "Une colonne vertébrale",
+    "Aucun squelette"
+   ],
+   "answer": 2,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Les vertébrés ont un squelette interne avec colonne vertébrale.",
+   "id": "6e-svt-classer-animaux-plantes-q1",
+   "tier": "autoeval",
+   "lesson": "6e-svt-classer-animaux-plantes",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Quel animal est un reptile ?",
+   "choices": [
+    "Le poulet",
+    "Le chat",
+    "Le crocodile",
+    "La carpe"
+   ],
+   "answer": 2,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Peau à écailles, ponte d'œufs : reptile.",
+   "id": "6e-svt-classer-animaux-plantes-q2",
+   "tier": "autoeval",
+   "lesson": "6e-svt-classer-animaux-plantes",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Les mammifères se reconnaissent à :",
+   "choices": [
+    "Leurs mamelles et leurs poils",
+    "Leurs plumes",
+    "Leurs branchies",
+    "Leurs six pattes"
+   ],
+   "answer": 0,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Ils allaitent leurs petits.",
+   "id": "6e-svt-classer-animaux-plantes-q3",
+   "tier": "autoeval",
+   "lesson": "6e-svt-classer-animaux-plantes",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Un exemple de plante sans fleurs est :",
+   "choices": [
+    "Le manguier",
+    "La fougère",
+    "Le maïs",
+    "Le haricot"
+   ],
+   "answer": 1,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Fougères et mousses ne forment pas de fleurs.",
+   "id": "6e-svt-classer-animaux-plantes-q4",
+   "tier": "autoeval",
+   "lesson": "6e-svt-classer-animaux-plantes",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Le criquet est :",
+   "choices": [
+    "Un arachnide",
+    "Un mollusque",
+    "Un insecte",
+    "Un poisson"
+   ],
+   "answer": 2,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Il a six pattes et le corps en trois parties.",
+   "id": "6e-svt-classer-animaux-plantes-q5",
+   "tier": "autoeval",
+   "lesson": "6e-svt-classer-animaux-plantes",
+   "source": "Exercice original, rédigé pour CastBridge"
+  }
+ ]
+}

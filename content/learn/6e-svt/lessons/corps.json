@@ -1,0 +1,509 @@
+{
+ "chapter": "6e-svt-corps",
+ "lessons": [
+  {
+   "id": "6e-svt-corps-humain",
+   "title": "Le corps humain et ses grandes fonctions",
+   "minutes": 30,
+   "programRef": "6e — Le corps humain : fonctions de nutrition, de relation, de reproduction (à vérifier sur le texte officiel)",
+   "status": "draft",
+   "author": "CastBridge (brouillon IA, bêta)",
+   "source": "Rédaction originale d'après le programme MINESEC ; à relire par un enseignant",
+   "objectives": [
+    "Dire comment le corps est organisé (cellules, organes, appareils).",
+    "Citer les grandes fonctions du corps humain.",
+    "Nommer les cinq sens et leurs organes."
+   ],
+   "prerequisites": [
+    "6e-svt-cellule",
+    "6e-svt-alimentation"
+   ],
+   "exercises": [
+    "6e-svt-corps-humain-01",
+    "6e-svt-corps-humain-02",
+    "6e-svt-corps-humain-03",
+    "6e-svt-corps-humain-04",
+    "6e-svt-corps-humain-05",
+    "6e-svt-corps-humain-06"
+   ],
+   "selfCheck": [
+    "6e-svt-corps-humain-q1",
+    "6e-svt-corps-humain-q2",
+    "6e-svt-corps-humain-q3",
+    "6e-svt-corps-humain-q4",
+    "6e-svt-corps-humain-q5"
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "L'organisation du corps",
+     "md": "Le corps humain est formé de **cellules**. Des cellules semblables forment un **tissu**, plusieurs tissus forment un **organe** (cœur, estomac, poumon), et plusieurs organes qui travaillent ensemble forment un **appareil** (appareil digestif, respiratoire…)."
+    },
+    {
+     "type": "illustration",
+     "caption": "Quelques organes du corps humain (schéma très simplifié).",
+     "alt": "Une silhouette avec le cerveau dans la tête, les poumons, le cœur, l'estomac et les intestins dans le tronc.",
+     "figure": {
+      "kind": "shapes",
+      "w": 420,
+      "h": 270,
+      "items": [
+       {
+        "t": "circle",
+        "cx": 110,
+        "cy": 40,
+        "r": 26,
+        "fill": "lightyellow",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "rect",
+        "x": 70,
+        "y": 68,
+        "w": 80,
+        "h": 110,
+        "fill": "lightyellow",
+        "stroke": "ink",
+        "width": 2,
+        "radius": 10
+       },
+       {
+        "t": "rect",
+        "x": 75,
+        "y": 178,
+        "w": 30,
+        "h": 70,
+        "fill": "lightyellow",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "rect",
+        "x": 115,
+        "y": 178,
+        "w": 30,
+        "h": 70,
+        "fill": "lightyellow",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "circle",
+        "cx": 95,
+        "cy": 100,
+        "r": 14,
+        "fill": "lightblue",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "circle",
+        "cx": 125,
+        "cy": 100,
+        "r": 14,
+        "fill": "lightblue",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "circle",
+        "cx": 116,
+        "cy": 112,
+        "r": 8,
+        "fill": "red",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "circle",
+        "cx": 100,
+        "cy": 140,
+        "r": 12,
+        "fill": "orange",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "rect",
+        "x": 95,
+        "y": 156,
+        "w": 40,
+        "h": 16,
+        "fill": "pink",
+        "stroke": "ink",
+        "width": 1,
+        "radius": 6
+       },
+       {
+        "t": "text",
+        "x": 200,
+        "y": 44,
+        "text": "cerveau",
+        "size": 14,
+        "color": "ink",
+        "anchor": "start"
+       },
+       {
+        "t": "line",
+        "x1": 196,
+        "y1": 40,
+        "x2": 138,
+        "y2": 40,
+        "color": "grey",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 200,
+        "y": 84,
+        "text": "poumons",
+        "size": 14,
+        "color": "ink",
+        "anchor": "start"
+       },
+       {
+        "t": "line",
+        "x1": 196,
+        "y1": 80,
+        "x2": 138,
+        "y2": 98,
+        "color": "grey",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 200,
+        "y": 120,
+        "text": "cœur",
+        "size": 14,
+        "color": "ink",
+        "anchor": "start"
+       },
+       {
+        "t": "line",
+        "x1": 196,
+        "y1": 116,
+        "x2": 126,
+        "y2": 114,
+        "color": "grey",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 200,
+        "y": 150,
+        "text": "estomac",
+        "size": 14,
+        "color": "ink",
+        "anchor": "start"
+       },
+       {
+        "t": "line",
+        "x1": 196,
+        "y1": 146,
+        "x2": 114,
+        "y2": 142,
+        "color": "grey",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 200,
+        "y": 182,
+        "text": "intestins",
+        "size": 14,
+        "color": "ink",
+        "anchor": "start"
+       },
+       {
+        "t": "line",
+        "x1": 196,
+        "y1": 178,
+        "x2": 136,
+        "y2": 166,
+        "color": "grey",
+        "width": 1
+       }
+      ]
+     }
+    },
+    {
+     "type": "key",
+     "style": "retenir",
+     "title": "Les grandes fonctions",
+     "md": "- **Nutrition** : digestion (transformer les aliments), respiration (apporter le dioxygène), circulation du sang (distribuer), excrétion (éliminer les déchets : urine, sueur).\n- **Relation** : sentir grâce aux **organes des sens**, commander grâce au **cerveau** et aux nerfs, se déplacer grâce aux **os** et aux **muscles**.\n- **Reproduction** : donner naissance à de nouveaux êtres."
+    },
+    {
+     "type": "key",
+     "style": "retenir",
+     "title": "Les cinq sens",
+     "md": "La **vue** (yeux), l'**ouïe** (oreilles), l'**odorat** (nez), le **goût** (langue) et le **toucher** (peau) nous renseignent sur notre milieu. Les messages sont envoyés au cerveau par les nerfs."
+    },
+    {
+     "type": "example",
+     "title": "Exemple 1 : à quelle fonction appartient l'organe ?",
+     "statement": "Classe : estomac, œil, poumon, muscle.",
+     "steps": [
+      {
+       "md": "Estomac : nutrition (digestion) ; poumon : nutrition (respiration)."
+      },
+      {
+       "md": "Œil : relation (vue) ; muscle : relation (mouvement)."
+      }
+     ],
+     "answer": "**Estomac, poumon : nutrition. Œil, muscle : relation.**"
+    },
+    {
+     "type": "example",
+     "title": "Exemple 2 : réaction à une piqûre",
+     "statement": "Boris touche une casserole brûlante et retire aussitôt la main. Quels éléments interviennent ?",
+     "steps": [
+      {
+       "md": "La peau (toucher) détecte la chaleur et envoie un message par les nerfs."
+      },
+      {
+       "md": "Le cerveau (ou la moelle) commande aux muscles de retirer la main."
+      }
+     ],
+     "answer": "**Peau, nerfs, centres nerveux, muscles : fonction de relation.**"
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Erreurs fréquentes",
+     "md": "- Confondre **organe** (estomac) et **appareil** (appareil digestif).\n- Croire que le cœur « fabrique » le sang : il le fait circuler.\n- Croire que la peau ne sert qu'à recouvrir : elle protège et c'est l'organe du toucher."
+    }
+   ],
+   "reviewNotes": [
+    "Schéma du corps très simplifié : positions approximatives. Le détail des fonctions est vu en 5e."
+   ]
+  }
+ ],
+ "exercises": [
+  {
+   "kind": "mcq",
+   "prompt": "Quel organe est l'organe de la vue ?",
+   "choices": [
+    "L'oreille",
+    "La langue",
+    "L'œil",
+    "Le nez"
+   ],
+   "answer": 2,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Les yeux permettent de voir.",
+   "id": "6e-svt-corps-humain-01",
+   "tier": "application",
+   "lesson": "6e-svt-corps-humain",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "truefalse",
+   "prompt": "Vrai ou faux : la digestion fait partie des fonctions de nutrition.",
+   "answer": true,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Elle transforme les aliments.",
+   "id": "6e-svt-corps-humain-02",
+   "tier": "application",
+   "lesson": "6e-svt-corps-humain",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "matching",
+   "prompt": "Associe chaque sens à son organe.",
+   "pairs": [
+    [
+     "Odorat",
+     "Nez"
+    ],
+    [
+     "Ouïe",
+     "Oreille"
+    ],
+    [
+     "Goût",
+     "Langue"
+    ],
+    [
+     "Toucher",
+     "Peau"
+    ]
+   ],
+   "points": 2,
+   "difficulty": 1,
+   "explanation": "Chaque sens a son organe.",
+   "id": "6e-svt-corps-humain-03",
+   "tier": "application",
+   "lesson": "6e-svt-corps-humain",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Quelle suite va de la plus petite à la plus grande unité ?",
+   "choices": [
+    "Appareil, organe, tissu, cellule",
+    "Organe, cellule, appareil, tissu",
+    "Cellule, tissu, organe, appareil",
+    "Tissu, appareil, cellule, organe"
+   ],
+   "answer": 2,
+   "points": 1,
+   "difficulty": 2,
+   "explanation": "La cellule est l'unité de base.",
+   "id": "6e-svt-corps-humain-04",
+   "tier": "approfondissement",
+   "lesson": "6e-svt-corps-humain",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Quel organe commande l'ensemble du corps ?",
+   "choices": [
+    "L'estomac",
+    "Le poumon",
+    "Le cerveau",
+    "Le foie"
+   ],
+   "answer": 2,
+   "points": 1,
+   "difficulty": 2,
+   "explanation": "Il reçoit les messages des nerfs et envoie des ordres.",
+   "id": "6e-svt-corps-humain-05",
+   "tier": "approfondissement",
+   "lesson": "6e-svt-corps-humain",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "problem",
+   "prompt": "Nkeng court pour attraper le bus : son cœur bat vite, il respire plus fort, il transpire.",
+   "parts": [
+    {
+     "kind": "open",
+     "prompt": "À quelles fonctions appartiennent la respiration, la sueur et le battement du cœur ?",
+     "model": "Respiration et battement du cœur (circulation) : nutrition. Sueur : excrétion (nutrition). Les muscles qui courent relèvent de la relation.",
+     "rubric": [
+      "Fonctions correctes"
+     ],
+     "points": 2,
+     "difficulty": 2,
+     "explanation": "Voir le corrigé modèle et les critères de notation.",
+     "id": "6e-svt-corps-humain-06-a"
+    },
+    {
+     "kind": "open",
+     "prompt": "Pourquoi le corps respire-t-il plus fort quand on court ?",
+     "model": "Les muscles ont besoin de plus de dioxygène pour fonctionner : on respire plus vite et le cœur bat plus vite pour l'amener.",
+     "rubric": [
+      "Besoin accru en dioxygène",
+      "Rôle du cœur ou du sang"
+     ],
+     "points": 2,
+     "difficulty": 2,
+     "explanation": "Voir le corrigé modèle et les critères de notation.",
+     "id": "6e-svt-corps-humain-06-b"
+    }
+   ],
+   "difficulty": 2,
+   "review": true,
+   "reviewNote": "À valider : niveau d'explication attendu en 6e.",
+   "id": "6e-svt-corps-humain-06",
+   "tier": "examen",
+   "lesson": "6e-svt-corps-humain",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Un organe est :",
+   "choices": [
+    "Une partie du corps avec une fonction précise",
+    "Un microbe",
+    "Un instrument",
+    "Un aliment"
+   ],
+   "answer": 0,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Le cœur, l'estomac, les poumons sont des organes.",
+   "id": "6e-svt-corps-humain-q1",
+   "tier": "autoeval",
+   "lesson": "6e-svt-corps-humain",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Quel organe permet le sens du toucher ?",
+   "choices": [
+    "Le foie",
+    "L'estomac",
+    "La peau",
+    "Le cœur"
+   ],
+   "answer": 2,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Elle contient des récepteurs sensibles.",
+   "id": "6e-svt-corps-humain-q2",
+   "tier": "autoeval",
+   "lesson": "6e-svt-corps-humain",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Le rôle des muscles et des os est surtout :",
+   "choices": [
+    "De permettre le mouvement et le soutien",
+    "De digérer",
+    "De respirer",
+    "D'entendre"
+   ],
+   "answer": 0,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Fonction de relation : se déplacer.",
+   "id": "6e-svt-corps-humain-q3",
+   "tier": "autoeval",
+   "lesson": "6e-svt-corps-humain",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Quel appareil apporte le dioxygène au corps ?",
+   "choices": [
+    "L'appareil digestif",
+    "Le squelette",
+    "L'appareil respiratoire",
+    "Le système nerveux"
+   ],
+   "answer": 2,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Les poumons assurent les échanges gazeux.",
+   "id": "6e-svt-corps-humain-q4",
+   "tier": "autoeval",
+   "lesson": "6e-svt-corps-humain",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Quel organe fait circuler le sang ?",
+   "choices": [
+    "L'estomac",
+    "Le poumon",
+    "Le cœur",
+    "L'œil"
+   ],
+   "answer": 2,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Le cœur est une pompe.",
+   "id": "6e-svt-corps-humain-q5",
+   "tier": "autoeval",
+   "lesson": "6e-svt-corps-humain",
+   "source": "Exercice original, rédigé pour CastBridge"
+  }
+ ]
+}

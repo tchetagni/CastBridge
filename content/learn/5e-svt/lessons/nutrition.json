@@ -1,0 +1,1036 @@
+{
+ "chapter": "5e-svt-nutrition",
+ "lessons": [
+  {
+   "id": "5e-svt-aliments-nutriments",
+   "title": "Aliments, nutriments et besoins",
+   "minutes": 30,
+   "programRef": "5e — Les aliments et les besoins nutritifs (à vérifier sur le texte officiel)",
+   "status": "draft",
+   "author": "CastBridge (brouillon IA, bêta)",
+   "source": "Rédaction originale d'après le programme MINESEC ; à relire par un enseignant",
+   "objectives": [
+    "Distinguer aliment et nutriment.",
+    "Citer les grandes catégories de nutriments et leur rôle.",
+    "Dire de quoi dépendent les besoins et ce qu'est une ration équilibrée."
+   ],
+   "prerequisites": [],
+   "exercises": [
+    "5e-svt-aliments-nutriments-01",
+    "5e-svt-aliments-nutriments-02",
+    "5e-svt-aliments-nutriments-03",
+    "5e-svt-aliments-nutriments-04",
+    "5e-svt-aliments-nutriments-05",
+    "5e-svt-aliments-nutriments-06"
+   ],
+   "selfCheck": [
+    "5e-svt-aliments-nutriments-q1",
+    "5e-svt-aliments-nutriments-q2",
+    "5e-svt-aliments-nutriments-q3",
+    "5e-svt-aliments-nutriments-q4",
+    "5e-svt-aliments-nutriments-q5"
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Aliment et nutriment",
+     "md": "Un **aliment** (plantain, poisson, huile…) est ce que l'on mange. Il est formé de **nutriments**, substances simples que le corps peut utiliser : **glucides**, **lipides**, **protides**, **vitamines**, **sels minéraux** et **eau**."
+    },
+    {
+     "type": "illustration",
+     "caption": "Les nutriments, leur rôle et des aliments qui en contiennent.",
+     "alt": "Six lignes : glucides, lipides, protides, vitamines, sels minéraux et eau, chacun avec son rôle et des exemples d'aliments.",
+     "figure": {
+      "kind": "shapes",
+      "w": 460,
+      "h": 290,
+      "items": [
+       {
+        "t": "rect",
+        "x": 10,
+        "y": 10,
+        "w": 120,
+        "h": 34,
+        "fill": "lightorange",
+        "stroke": "ink",
+        "width": 2,
+        "radius": 8
+       },
+       {
+        "t": "text",
+        "x": 70.0,
+        "y": 32.0,
+        "text": "Glucides",
+        "size": 14,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 145,
+        "y": 32,
+        "text": "énergie : manioc, riz, plantain",
+        "size": 14,
+        "color": "ink",
+        "anchor": "start"
+       },
+       {
+        "t": "rect",
+        "x": 10,
+        "y": 56,
+        "w": 120,
+        "h": 34,
+        "fill": "lightyellow",
+        "stroke": "ink",
+        "width": 2,
+        "radius": 8
+       },
+       {
+        "t": "text",
+        "x": 70.0,
+        "y": 78.0,
+        "text": "Lipides",
+        "size": 14,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 145,
+        "y": 78,
+        "text": "énergie, réserves : huile, arachide",
+        "size": 14,
+        "color": "ink",
+        "anchor": "start"
+       },
+       {
+        "t": "rect",
+        "x": 10,
+        "y": 102,
+        "w": 120,
+        "h": 34,
+        "fill": "pink",
+        "stroke": "ink",
+        "width": 2,
+        "radius": 8
+       },
+       {
+        "t": "text",
+        "x": 70.0,
+        "y": 124.0,
+        "text": "Protides",
+        "size": 14,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 145,
+        "y": 124,
+        "text": "construction : poisson, œufs, haricots",
+        "size": 14,
+        "color": "ink",
+        "anchor": "start"
+       },
+       {
+        "t": "rect",
+        "x": 10,
+        "y": 148,
+        "w": 120,
+        "h": 34,
+        "fill": "lightgreen",
+        "stroke": "ink",
+        "width": 2,
+        "radius": 8
+       },
+       {
+        "t": "text",
+        "x": 70.0,
+        "y": 170.0,
+        "text": "Vitamines",
+        "size": 14,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 145,
+        "y": 170,
+        "text": "protection : fruits et légumes",
+        "size": 14,
+        "color": "ink",
+        "anchor": "start"
+       },
+       {
+        "t": "rect",
+        "x": 10,
+        "y": 194,
+        "w": 120,
+        "h": 34,
+        "fill": "lightblue",
+        "stroke": "ink",
+        "width": 2,
+        "radius": 8
+       },
+       {
+        "t": "text",
+        "x": 70.0,
+        "y": 216.0,
+        "text": "Sels minéraux",
+        "size": 14,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 145,
+        "y": 216,
+        "text": "os, sang, muscles : lait, légumes",
+        "size": 14,
+        "color": "ink",
+        "anchor": "start"
+       },
+       {
+        "t": "rect",
+        "x": 10,
+        "y": 240,
+        "w": 120,
+        "h": 34,
+        "fill": "lightblue",
+        "stroke": "ink",
+        "width": 2,
+        "radius": 8
+       },
+       {
+        "t": "text",
+        "x": 70.0,
+        "y": 262.0,
+        "text": "Eau",
+        "size": 14,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 145,
+        "y": 262,
+        "text": "environ les deux tiers du corps",
+        "size": 14,
+        "color": "ink",
+        "anchor": "start"
+       }
+      ]
+     }
+    },
+    {
+     "type": "key",
+     "style": "retenir",
+     "title": "Les besoins et la ration équilibrée",
+     "md": "Les **besoins** varient avec l'**âge** (un enfant en croissance a besoin de protides), l'**activité** (un travailleur de force dépense plus d'énergie), et l'état de santé (par exemple une femme enceinte). Une **ration équilibrée** couvre tous les besoins avec des aliments variés, sans excès ni manque.",
+     "review": true
+    },
+    {
+     "type": "key",
+     "style": "methode",
+     "title": "Reconnaître l'amidon et les graisses",
+     "md": "- **Amidon** : quelques gouttes d'**eau iodée** deviennent **bleu-noir**.\n- **Lipides** : un aliment gras frotté sur du papier laisse une **tache translucide** qui ne s'efface pas."
+    },
+    {
+     "type": "example",
+     "title": "Exemple 1 : quel nutriment ?",
+     "statement": "On dépose de l'eau iodée sur une tranche de plantain cuit et sur un morceau de poisson. Seul le plantain devient bleu-noir. Que conclure ?",
+     "steps": [
+      {
+       "md": "L'eau iodée devient bleu-noir en présence d'amidon."
+      },
+      {
+       "md": "Le plantain contient de l'amidon (un glucide) ; le poisson n'en contient pas."
+      }
+     ],
+     "answer": "**Le plantain renferme de l'amidon.**"
+    },
+    {
+     "type": "example",
+     "title": "Exemple 2 : adapter la ration",
+     "statement": "Boris, 13 ans, fait beaucoup de sport. Quels aliments ne doivent pas manquer ?",
+     "steps": [
+      {
+       "md": "Il dépense beaucoup d'énergie : il lui faut des glucides (manioc, riz, plantain)."
+      },
+      {
+       "md": "Il grandit : il a besoin de protides (poisson, haricots) et de fruits et légumes pour les vitamines."
+      }
+     ],
+     "answer": "**Une ration variée, riche en énergie et en protides, avec des fruits et légumes.**"
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Erreurs fréquentes",
+     "md": "- Confondre **aliment** (plantain) et **nutriment** (amidon).\n- Croire qu'il existe un aliment « complet » qui suffit à tout.\n- Penser que les besoins sont les mêmes pour tout le monde.\n- Oublier l'eau, indispensable à la vie."
+    }
+   ],
+   "reviewNotes": [
+    "Catégories de nutriments : glucides, lipides, protides, eau, sels minéraux, vitamines ; à comparer avec le programme (les fibres ne sont pas détaillées).",
+    "Conseils nutritionnels : à faire relire par un agent de santé / nutritionniste. Aucun chiffre calorique donné volontairement."
+   ]
+  },
+  {
+   "id": "5e-svt-digestion",
+   "title": "La digestion et l'absorption",
+   "minutes": 30,
+   "programRef": "5e — La digestion et l'absorption (à vérifier sur le texte officiel)",
+   "status": "draft",
+   "author": "CastBridge (brouillon IA, bêta)",
+   "source": "Rédaction originale d'après le programme MINESEC ; à relire par un enseignant",
+   "objectives": [
+    "Nommer les organes du tube digestif dans l'ordre.",
+    "Expliquer la digestion mécanique et chimique (enzymes).",
+    "Expliquer l'absorption des nutriments dans l'intestin grêle."
+   ],
+   "prerequisites": [
+    "5e-svt-aliments-nutriments"
+   ],
+   "exercises": [
+    "5e-svt-digestion-01",
+    "5e-svt-digestion-02",
+    "5e-svt-digestion-03",
+    "5e-svt-digestion-04",
+    "5e-svt-digestion-05",
+    "5e-svt-digestion-06"
+   ],
+   "selfCheck": [
+    "5e-svt-digestion-q1",
+    "5e-svt-digestion-q2",
+    "5e-svt-digestion-q3",
+    "5e-svt-digestion-q4",
+    "5e-svt-digestion-q5"
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Digérer",
+     "md": "La **digestion** transforme les aliments en **nutriments** assez petits pour passer dans le sang. Elle est **mécanique** (mastication, brassage) et **chimique** : des substances appelées **enzymes** (par exemple dans la salive) découpent les aliments. Le passage des nutriments dans le sang est l'**absorption**."
+    },
+    {
+     "type": "illustration",
+     "caption": "Le tube digestif : l'ordre des organes et leur rôle.",
+     "alt": "Cinq cases du haut vers le bas : bouche, œsophage, estomac, intestin grêle, gros intestin, avec leur rôle.",
+     "figure": {
+      "kind": "shapes",
+      "w": 440,
+      "h": 330,
+      "items": [
+       {
+        "t": "rect",
+        "x": 10,
+        "y": 10,
+        "w": 140,
+        "h": 40,
+        "fill": "lightyellow",
+        "stroke": "ink",
+        "width": 2,
+        "radius": 8
+       },
+       {
+        "t": "text",
+        "x": 80.0,
+        "y": 35.0,
+        "text": "Bouche",
+        "size": 14,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 170,
+        "y": 35,
+        "text": "mastication, salive",
+        "size": 14,
+        "color": "ink",
+        "anchor": "start"
+       },
+       {
+        "t": "rect",
+        "x": 10,
+        "y": 72,
+        "w": 140,
+        "h": 40,
+        "fill": "lightorange",
+        "stroke": "ink",
+        "width": 2,
+        "radius": 8
+       },
+       {
+        "t": "text",
+        "x": 80.0,
+        "y": 97.0,
+        "text": "Œsophage",
+        "size": 14,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 170,
+        "y": 97,
+        "text": "conduit les aliments",
+        "size": 14,
+        "color": "ink",
+        "anchor": "start"
+       },
+       {
+        "t": "rect",
+        "x": 10,
+        "y": 134,
+        "w": 140,
+        "h": 40,
+        "fill": "pink",
+        "stroke": "ink",
+        "width": 2,
+        "radius": 8
+       },
+       {
+        "t": "text",
+        "x": 80.0,
+        "y": 159.0,
+        "text": "Estomac",
+        "size": 14,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 170,
+        "y": 159,
+        "text": "brassage, suc gastrique",
+        "size": 14,
+        "color": "ink",
+        "anchor": "start"
+       },
+       {
+        "t": "rect",
+        "x": 10,
+        "y": 196,
+        "w": 140,
+        "h": 40,
+        "fill": "lightgreen",
+        "stroke": "ink",
+        "width": 2,
+        "radius": 8
+       },
+       {
+        "t": "text",
+        "x": 80.0,
+        "y": 221.0,
+        "text": "Intestin grêle",
+        "size": 14,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 170,
+        "y": 221,
+        "text": "digestion et absorption",
+        "size": 14,
+        "color": "ink",
+        "anchor": "start"
+       },
+       {
+        "t": "rect",
+        "x": 10,
+        "y": 258,
+        "w": 140,
+        "h": 40,
+        "fill": "lightblue",
+        "stroke": "ink",
+        "width": 2,
+        "radius": 8
+       },
+       {
+        "t": "text",
+        "x": 80.0,
+        "y": 283.0,
+        "text": "Gros intestin",
+        "size": 14,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 170,
+        "y": 283,
+        "text": "absorbe l'eau",
+        "size": 14,
+        "color": "ink",
+        "anchor": "start"
+       },
+       {
+        "t": "line",
+        "x1": 80,
+        "y1": 53,
+        "x2": 80,
+        "y2": 69,
+        "color": "ink",
+        "width": 3,
+        "arrow": "end"
+       },
+       {
+        "t": "line",
+        "x1": 80,
+        "y1": 115,
+        "x2": 80,
+        "y2": 131,
+        "color": "ink",
+        "width": 3,
+        "arrow": "end"
+       },
+       {
+        "t": "line",
+        "x1": 80,
+        "y1": 177,
+        "x2": 80,
+        "y2": 193,
+        "color": "ink",
+        "width": 3,
+        "arrow": "end"
+       },
+       {
+        "t": "line",
+        "x1": 80,
+        "y1": 239,
+        "x2": 80,
+        "y2": 255,
+        "color": "ink",
+        "width": 3,
+        "arrow": "end"
+       }
+      ]
+     }
+    },
+    {
+     "type": "key",
+     "style": "retenir",
+     "title": "Où se fait quoi ?",
+     "md": "- **Bouche** : les dents broient, la salive commence à digérer l'amidon.\n- **Estomac** : les muscles brassent, le suc gastrique agit sur les protides.\n- **Intestin grêle** : la digestion s'achève (bile du foie, suc pancréatique) et les nutriments passent dans le **sang** à travers de nombreux replis (les villosités).\n- **Gros intestin** : l'eau est absorbée ; les déchets sont éliminés (anus)."
+    },
+    {
+     "type": "example",
+     "title": "Exemple 1 : l'expérience de la salive",
+     "statement": "Dans le tube A, on mélange de l'empois d'amidon et de la salive, à environ 37 °C. Dans le tube B, de l'empois d'amidon et de l'eau. Après un moment, l'eau iodée bleuit en B mais pas en A. Que montre cette expérience ?",
+     "steps": [
+      {
+       "md": "En B l'amidon est toujours là (bleu-noir) ; en A il a disparu."
+      },
+      {
+       "md": "La salive a transformé l'amidon en sucres plus simples : elle contient une enzyme qui digère l'amidon."
+      }
+     ],
+     "answer": "**La salive digère l'amidon (digestion chimique).**"
+    },
+    {
+     "type": "example",
+     "title": "Exemple 2 : le trajet d'un aliment",
+     "statement": "Retrace le trajet d'une bouchée de pain.",
+     "steps": [
+      {
+       "md": "Elle est broyée dans la bouche, avalée, passe dans l'œsophage puis dans l'estomac."
+      },
+      {
+       "md": "Digérée dans l'intestin grêle, ses nutriments passent dans le sang ; les restes vont dans le gros intestin."
+      }
+     ],
+     "answer": "**Bouche → œsophage → estomac → intestin grêle → gros intestin.**"
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Erreurs fréquentes",
+     "md": "- Croire que l'estomac est le seul organe de la digestion : l'absorption a surtout lieu dans l'**intestin grêle**.\n- Croire que les aliments « entrent dans le sang » directement : il faut d'abord les transformer en nutriments.\n- Confondre digestion (transformer) et absorption (faire passer dans le sang)."
+    }
+   ],
+   "reviewNotes": [
+    "Le nom des enzymes (amylase, pepsine…) est donné seulement à titre d'exemple ; à adapter au programme. Aucune durée ni longueur précise donnée."
+   ]
+  }
+ ],
+ "exercises": [
+  {
+   "kind": "mcq",
+   "prompt": "Quel nutriment sert surtout à construire et réparer le corps ?",
+   "choices": [
+    "Les glucides",
+    "L'eau",
+    "Les lipides uniquement",
+    "Les protides"
+   ],
+   "answer": 3,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Les protides forment muscles et tissus.",
+   "id": "5e-svt-aliments-nutriments-01",
+   "tier": "application",
+   "lesson": "5e-svt-aliments-nutriments",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "truefalse",
+   "prompt": "Vrai ou faux : l'eau iodée devient bleu-noir en présence d'amidon.",
+   "answer": true,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "C'est le test de l'amidon.",
+   "id": "5e-svt-aliments-nutriments-02",
+   "tier": "application",
+   "lesson": "5e-svt-aliments-nutriments",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "matching",
+   "prompt": "Associe chaque nutriment à un aliment qui en est riche.",
+   "pairs": [
+    [
+     "Glucides",
+     "Riz"
+    ],
+    [
+     "Lipides",
+     "Huile d'arachide"
+    ],
+    [
+     "Protides",
+     "Poisson"
+    ],
+    [
+     "Vitamines",
+     "Orange"
+    ]
+   ],
+   "points": 2,
+   "difficulty": 1,
+   "explanation": "Chaque aliment est riche dans un nutriment principal.",
+   "id": "5e-svt-aliments-nutriments-03",
+   "tier": "application",
+   "lesson": "5e-svt-aliments-nutriments",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Un aliment frotté sur du papier laisse une tache translucide. Il contient :",
+   "choices": [
+    "Des lipides",
+    "De l'amidon",
+    "Des sels minéraux",
+    "De la vitamine uniquement"
+   ],
+   "answer": 0,
+   "points": 1,
+   "difficulty": 2,
+   "explanation": "La graisse rend le papier translucide.",
+   "id": "5e-svt-aliments-nutriments-04",
+   "tier": "approfondissement",
+   "lesson": "5e-svt-aliments-nutriments",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Pourquoi un adolescent a-t-il des besoins en protides plus importants qu'un adulte sédentaire ?",
+   "choices": [
+    "Parce qu'il dort plus",
+    "Parce qu'il est en pleine croissance",
+    "Parce qu'il est plus petit",
+    "Parce qu'il ne mange pas assez"
+   ],
+   "answer": 1,
+   "points": 1,
+   "difficulty": 2,
+   "explanation": "La croissance demande de la matière pour construire le corps.",
+   "id": "5e-svt-aliments-nutriments-05",
+   "tier": "approfondissement",
+   "lesson": "5e-svt-aliments-nutriments",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "problem",
+   "prompt": "Amina note ce qu'elle a mangé : au petit déjeuner du pain et du café ; à midi du riz avec de la sauce tomate ; le soir du manioc avec du poisson.",
+   "parts": [
+    {
+     "kind": "open",
+     "prompt": "Cite trois nutriments présents dans ces repas et un aliment pour chacun.",
+     "model": "Glucides : riz, pain, manioc. Protides : poisson. Vitamines : tomate (sauce). Lipides : huile dans la sauce.",
+     "rubric": [
+      "Trois nutriments avec aliments"
+     ],
+     "points": 3,
+     "difficulty": 2,
+     "explanation": "Voir le corrigé modèle et les critères de notation.",
+     "id": "5e-svt-aliments-nutriments-06-a"
+    },
+    {
+     "kind": "open",
+     "prompt": "Quels aliments pourrait-elle ajouter pour mieux équilibrer sa journée ?",
+     "model": "Des fruits et légumes frais, des haricots ou des œufs, et de l'eau potable.",
+     "rubric": [
+      "Au moins deux ajouts pertinents"
+     ],
+     "points": 2,
+     "difficulty": 2,
+     "explanation": "Voir le corrigé modèle et les critères de notation.",
+     "id": "5e-svt-aliments-nutriments-06-b"
+    }
+   ],
+   "difficulty": 2,
+   "review": true,
+   "reviewNote": "Équilibre jugé à vérifier par un nutritionniste.",
+   "id": "5e-svt-aliments-nutriments-06",
+   "tier": "examen",
+   "lesson": "5e-svt-aliments-nutriments",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Un nutriment est :",
+   "choices": [
+    "Un repas complet",
+    "Une substance simple utilisée par le corps",
+    "Un microbe",
+    "Un instrument"
+   ],
+   "answer": 1,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "L'aliment est fait de nutriments.",
+   "id": "5e-svt-aliments-nutriments-q1",
+   "tier": "autoeval",
+   "lesson": "5e-svt-aliments-nutriments",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Quel nutriment est la principale source d'énergie du manioc ?",
+   "choices": [
+    "La vitamine A",
+    "Le fer",
+    "L'amidon (glucide)",
+    "L'eau"
+   ],
+   "answer": 2,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Le manioc est riche en amidon.",
+   "id": "5e-svt-aliments-nutriments-q2",
+   "tier": "autoeval",
+   "lesson": "5e-svt-aliments-nutriments",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "L'eau constitue environ :",
+   "choices": [
+    "Les deux tiers du corps",
+    "Un centième du corps",
+    "La moitié des os uniquement",
+    "Rien du tout"
+   ],
+   "answer": 0,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Valeur approchée : une grande part du corps.",
+   "id": "5e-svt-aliments-nutriments-q3",
+   "tier": "autoeval",
+   "lesson": "5e-svt-aliments-nutriments",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Une ration équilibrée est :",
+   "choices": [
+    "Variée et adaptée aux besoins",
+    "Toujours la même",
+    "Composée de sucre uniquement",
+    "Sans eau"
+   ],
+   "answer": 0,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "La variété couvre tous les besoins.",
+   "id": "5e-svt-aliments-nutriments-q4",
+   "tier": "autoeval",
+   "lesson": "5e-svt-aliments-nutriments",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Quel facteur fait varier les besoins nutritifs ?",
+   "choices": [
+    "La couleur des yeux",
+    "L'activité physique",
+    "Le prénom",
+    "La marque du vêtement"
+   ],
+   "answer": 1,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Plus on dépense d'énergie, plus il faut en apporter.",
+   "id": "5e-svt-aliments-nutriments-q5",
+   "tier": "autoeval",
+   "lesson": "5e-svt-aliments-nutriments",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Où a lieu l'essentiel de l'absorption des nutriments ?",
+   "choices": [
+    "Dans la bouche",
+    "Dans l'intestin grêle",
+    "Dans l'œsophage",
+    "Dans l'anus"
+   ],
+   "answer": 1,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Ses replis offrent une grande surface d'absorption.",
+   "id": "5e-svt-digestion-01",
+   "tier": "application",
+   "lesson": "5e-svt-digestion",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "truefalse",
+   "prompt": "Vrai ou faux : la salive commence la digestion de l'amidon.",
+   "answer": true,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Elle contient une enzyme qui agit sur l'amidon.",
+   "id": "5e-svt-digestion-02",
+   "tier": "application",
+   "lesson": "5e-svt-digestion",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "matching",
+   "prompt": "Associe chaque organe à son rôle.",
+   "pairs": [
+    [
+     "Bouche",
+     "Broyer et saliver"
+    ],
+    [
+     "Estomac",
+     "Brasser les aliments"
+    ],
+    [
+     "Intestin grêle",
+     "Absorber les nutriments"
+    ],
+    [
+     "Gros intestin",
+     "Absorber l'eau"
+    ]
+   ],
+   "points": 2,
+   "difficulty": 1,
+   "explanation": "Chaque organe joue un rôle précis.",
+   "id": "5e-svt-digestion-03",
+   "tier": "application",
+   "lesson": "5e-svt-digestion",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Une enzyme est :",
+   "choices": [
+    "Une substance qui découpe les aliments",
+    "Un microbe",
+    "Un organe",
+    "Un aliment"
+   ],
+   "answer": 0,
+   "points": 1,
+   "difficulty": 2,
+   "explanation": "Les enzymes digestives transforment les aliments.",
+   "id": "5e-svt-digestion-04",
+   "tier": "approfondissement",
+   "lesson": "5e-svt-digestion",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Pourquoi bien mastiquer facilite-t-il la digestion ?",
+   "choices": [
+    "Cela remplit l'estomac",
+    "Cela supprime la salive",
+    "Les aliments en petits morceaux sont plus facilement attaqués par les enzymes",
+    "Cela rend les aliments froids"
+   ],
+   "answer": 2,
+   "points": 1,
+   "difficulty": 2,
+   "explanation": "Plus la surface de contact est grande, plus les enzymes agissent.",
+   "id": "5e-svt-digestion-05",
+   "tier": "approfondissement",
+   "lesson": "5e-svt-digestion",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "problem",
+   "prompt": "Mballa effectue deux expériences à 37 °C : tube 1 (amidon + salive), tube 2 (amidon + salive bouillie puis refroidie). Il ajoute de l'eau iodée dans les deux tubes.",
+   "parts": [
+    {
+     "kind": "mcq",
+     "prompt": "Dans quel tube s'attend-on à voir une couleur bleu-noir ?",
+     "choices": [
+      "Le tube 2",
+      "Le tube 1",
+      "Aucun",
+      "Les deux de la même façon"
+     ],
+     "answer": 0,
+     "points": 1,
+     "difficulty": 1,
+     "explanation": "La salive bouillie a perdu son action : l'amidon reste.",
+     "id": "5e-svt-digestion-06-a"
+    },
+    {
+     "kind": "open",
+     "prompt": "Que montre la comparaison des deux tubes ?",
+     "model": "La salive fraîche digère l'amidon, pas la salive bouillie : l'enzyme est détruite par la chaleur.",
+     "rubric": [
+      "Comparaison correcte",
+      "Conclusion cohérente"
+     ],
+     "points": 2,
+     "difficulty": 2,
+     "explanation": "Voir le corrigé modèle et les critères de notation.",
+     "id": "5e-svt-digestion-06-b"
+    },
+    {
+     "kind": "mcq",
+     "prompt": "Dans quel organe se passe cette digestion en premier ?",
+     "choices": [
+      "La bouche",
+      "L'estomac",
+      "Le gros intestin",
+      "L'œsophage"
+     ],
+     "answer": 0,
+     "points": 1,
+     "difficulty": 1,
+     "explanation": "La salive est produite dans la bouche.",
+     "id": "5e-svt-digestion-06-c"
+    }
+   ],
+   "difficulty": 2,
+   "review": true,
+   "reviewNote": "Expérience classique ; vérifier avec le livre.",
+   "id": "5e-svt-digestion-06",
+   "tier": "examen",
+   "lesson": "5e-svt-digestion",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Quel est l'ordre correct du tube digestif ?",
+   "choices": [
+    "Bouche, estomac, œsophage, gros intestin, intestin grêle",
+    "Œsophage, bouche, intestin grêle, estomac, anus",
+    "Bouche, œsophage, estomac, intestin grêle, gros intestin",
+    "Estomac, bouche, œsophage, anus, intestin grêle"
+   ],
+   "answer": 2,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Ordre du trajet des aliments.",
+   "id": "5e-svt-digestion-q1",
+   "tier": "autoeval",
+   "lesson": "5e-svt-digestion",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Les nutriments passent dans :",
+   "choices": [
+    "L'air",
+    "L'urine uniquement",
+    "Les os",
+    "Le sang"
+   ],
+   "answer": 3,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Le sang les distribue à tous les organes.",
+   "id": "5e-svt-digestion-q2",
+   "tier": "autoeval",
+   "lesson": "5e-svt-digestion",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Le foie fabrique :",
+   "choices": [
+    "La salive",
+    "La bile",
+    "L'urine",
+    "La sueur"
+   ],
+   "answer": 1,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "La bile participe à la digestion des graisses.",
+   "id": "5e-svt-digestion-q3",
+   "tier": "autoeval",
+   "lesson": "5e-svt-digestion",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Dans le gros intestin, il se passe surtout :",
+   "choices": [
+    "La digestion de l'amidon",
+    "La respiration",
+    "La mastication",
+    "L'absorption de l'eau"
+   ],
+   "answer": 3,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Les restes se solidifient.",
+   "id": "5e-svt-digestion-q4",
+   "tier": "autoeval",
+   "lesson": "5e-svt-digestion",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "La digestion mécanique comprend :",
+   "choices": [
+    "La mastication et le brassage",
+    "L'action des enzymes",
+    "La respiration",
+    "La circulation du sang"
+   ],
+   "answer": 0,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Elle réduit les aliments en morceaux.",
+   "id": "5e-svt-digestion-q5",
+   "tier": "autoeval",
+   "lesson": "5e-svt-digestion",
+   "source": "Exercice original, rédigé pour CastBridge"
+  }
+ ]
+}
