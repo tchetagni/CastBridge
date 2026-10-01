@@ -159,7 +159,7 @@ def build_question(course, d, tpl, verif, source_text, region=None, category=Non
         "track": c["track"], "level": c["level"], "field": c["field"], "region": region,
         "category": d.cat or category, "difficulty": d.diff or difficulty, "question": d.text, "choices": choices,
         "answer": pos, "explanation": d.expl, "source": d.src or source_text, "status": STATUS_REVIEW, "verif": verif,
-        "lang": "fr", "tpl": tpl,
+        "lang": c.get("lang", "fr"), "tpl": tpl,
     }
 
 
