@@ -98,6 +98,8 @@ def cmd_build(args):
         for i in list(res["dropped"])[:10]:
             print("  ", i, res["errors"][i])
     version = args.version or (int(VERSION_FILE.read_text().strip()) if VERSION_FILE.is_file() else 1)
+    if args.courses:
+        return build_scope(args, good, res, cov, version)
     catalog = pack.build_packs(good, DIST, version)
     from qb import facts_engine
     (DIST / "sources.json").write_text(json.dumps(facts_engine.sources_report(good), ensure_ascii=False, indent=1) + "\n", encoding="utf-8")
@@ -120,6 +122,43 @@ def cmd_lots(args):
         print("ERREUR", e)
         return 2
     print("\n".join(lines))
+    return 0
+
+
+def build_scope(args, good, res, cov, version):
+    """`build --courses a,b` : réécrit SEULEMENT les packs de ces parcours (les packs des autres périmètres ne sont jamais touchés),
+    fusionne catalog.json, coverage.json, sources.json et rejected.json."""
+    wanted = [c.strip() for c in args.courses.split(",") if c.strip()]
+    if wanted == ["superieur"]:
+        from qb.gen.sup_register import SUPERIEUR
+        wanted = list(SUPERIEUR)
+    unknown = [c for c in wanted if c not in core.COURSES]
+    if unknown:
+        print("parcours inconnus :", unknown)
+        return 2
+    catalog = pack.build_scope_packs(good, DIST, version, wanted)
+    from qb import facts_engine
+    def merge(name, fn):
+        f = DIST / name
+        cur = json.loads(f.read_text(encoding="utf-8")) if f.is_file() else None
+        f.write_text(json.dumps(fn(cur), ensure_ascii=False, indent=1) + "\n", encoding="utf-8")
+    merge("coverage.json", lambda cur: {**(cur or {}), **{c: cov[c] for c in wanted}})
+    prefixes = tuple(core.COURSES[c]["prefix"] + "-" for c in wanted)
+    merge("rejected.json", lambda cur: {**{k: v for k, v in (cur or {}).items() if not k.startswith(prefixes)},
+                                        **{i: res["errors"][i] for i in sorted(res["dropped"]) if i.startswith(prefixes)}})
+    def src(cur):
+        new = {s["id"]: s for s in facts_engine.sources_report([q for q in good if (q["id"].startswith(prefixes))])}
+        old = {s["id"]: s for s in (cur or [])}
+        for i, s in new.items():
+            # fiche utilisée seulement par ce périmètre -> compte à jour ; fiche partagée -> on garde le plus grand compte
+            old[i] = s if i not in old or old[i]["questions"] <= s["questions"] else old[i]
+        return [old[i] for i in sorted(old) if old[i]["questions"] or i in new]
+    merge("sources.json", src)
+    mine = [p for p in catalog["packs"] if p["course"] in wanted]
+    total = sum(p["size"] for p in mine)
+    print("Packs (périmètre) : %d fichiers, %.2f Mo, version %s ; %d fichiers au catalogue" % (len(mine), total / 1e6, version, len(catalog["packs"])))
+    big = [p["file"] for p in mine if p["size"] > 3_000_000]
+    print("ATTENTION lot > 3 Mo :", big) if big else print("Tous les lots < 3 Mo (le plus gros : %d octets)" % max(p["size"] for p in mine))
     return 0
 
 
@@ -174,7 +213,7 @@ def cmd_approve(args):
 def main(argv=None):
     ap = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
     sub = ap.add_subparsers(dest="cmd", required=True)
-    b = sub.add_parser("build"); b.add_argument("--version", type=int); b.set_defaults(fn=cmd_build)
+    b = sub.add_parser("build"); b.add_argument("--version", type=int); b.add_argument("--courses", help="parcours à (ré)écrire seulement, ex. superieur ou l2-droit,l3-droit"); b.set_defaults(fn=cmd_build)
     l = sub.add_parser("lots"); l.add_argument("--out"); l.set_defaults(fn=cmd_lots)
     sub.add_parser("check").set_defaults(fn=cmd_check)
     sub.add_parser("report").set_defaults(fn=cmd_report)

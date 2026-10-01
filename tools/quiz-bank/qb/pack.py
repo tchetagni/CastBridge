@@ -84,3 +84,31 @@ def build_packs(questions, out_dir, version, part_size=PART_SIZE):
     catalog = {"format": 1, "version": version, "packs": entries}
     (out_dir / "catalog.json").write_text(json.dumps(catalog, ensure_ascii=False, indent=1) + "\n", encoding="utf-8")
     return catalog
+
+
+def build_scope_packs(questions, out_dir, version, courses, part_size=PART_SIZE):
+    """Comme build_packs mais limité à `courses` : les fichiers des autres parcours restent intacts. Les anciens fichiers de ces
+    parcours (toute version) sont retirés, leurs entrées du catalogue remplacées, celles des autres parcours conservées."""
+    out_dir.mkdir(parents=True, exist_ok=True)
+    cat_file = out_dir / "catalog.json"
+    old = json.loads(cat_file.read_text(encoding="utf-8")) if cat_file.is_file() else {"format": 1, "version": version, "packs": []}
+    entries = [e for e in old["packs"] if e["course"] not in courses]
+    for course in courses:
+        for f in out_dir.glob("quiz-%s-p*%s" % (course, PACK_SUFFIX)):
+            f.unlink()
+        c = COURSES[course]
+        qs = [q for q in questions if (q["track"], q["level"], q["field"]) == (c["track"], c["level"], c["field"])]
+        if not qs:
+            continue
+        parts = split_parts(qs, part_size)
+        for i, part in enumerate(parts, 1):
+            manifest, data = make_pack(course, i, len(parts), part, version)
+            name = pack_name(course, i, version)
+            (out_dir / name).write_bytes(data)
+            entries.append({"id": manifest["id"], "course": course, "track": c["track"], "level": c["level"], "field": c["field"],
+                            "part": i, "parts": len(parts), "version": version, "file": name, "size": len(data),
+                            "sha256": hashlib.sha256(data).hexdigest(), "questions": len(part),
+                            "byRegion": manifest["byRegion"], "byDifficulty": manifest["byDifficulty"]})
+    catalog = {"format": old.get("format", 1), "version": old.get("version", version), "packs": entries}
+    cat_file.write_text(json.dumps(catalog, ensure_ascii=False, indent=1) + "\n", encoding="utf-8")
+    return catalog
