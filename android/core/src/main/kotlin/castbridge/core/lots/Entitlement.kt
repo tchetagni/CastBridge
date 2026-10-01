@@ -103,6 +103,8 @@ data class Access(
     val subscribed: Set<String>,
     val subscriptions: List<SubStatus>,
     val message: String,
+    /** Single lots opened for a limited time by an owner command (no bundle needed); empty for ordinary tokens. */
+    val extraLots: Set<LotId> = emptySet(),
 ) {
     val granted: Set<String> get() = purchased + subscribed
     fun grants(bundleId: String) = bundleId in granted

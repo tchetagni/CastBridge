@@ -37,7 +37,7 @@ class BundleCatalog(val bundles: List<Bundle>) {
  * (docs/TRIAL-EDITION.md § Sécurité): a check in the app can be bypassed, content already delivered cannot be taken back.
  */
 object EditionPolicy {
-    fun allowedFull(access: Access, bundles: BundleCatalog): Set<LotId> = bundles.lotsOf(access.granted)
+    fun allowedFull(access: Access, bundles: BundleCatalog): Set<LotId> = bundles.lotsOf(access.granted) + access.extraLots
 
     fun isAllowed(m: LotMeta, access: Access, bundles: BundleCatalog): Boolean = m.edition == Edition.TRIAL || m.id in allowedFull(access, bundles)
 
