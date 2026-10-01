@@ -262,6 +262,7 @@ fun RemoteScreen(onClose: () -> Unit) {
     var wholeTv by rememberSaveable { mutableStateOf(prefs.wholeTv) }
     var volumeKeys by remember { mutableStateOf(prefs.volumeKeys) }
     var haptics by remember { mutableStateOf(prefs.haptics) }
+    var background by remember { mutableStateOf(prefs.background) }
 
     val status by RemoteController.status.collectAsState()
     val st by RemoteController.tvState.collectAsState()
@@ -295,6 +296,10 @@ fun RemoteScreen(onClose: () -> Unit) {
                     DropdownMenu(menu, { menu = false }) {
                         DropdownMenuItem(text = { Text("Boutons de volume du téléphone → TV") }, onClick = { volumeKeys = !volumeKeys; prefs.volumeKeys = volumeKeys },
                             trailingIcon = { Checkbox(volumeKeys, null) })
+                        DropdownMenuItem(text = { Text("Garder la télécommande en arrière-plan") }, onClick = {
+                            background = !background; prefs.background = background
+                            if (background) RemoteService.start(ctx) else RemoteService.stop(ctx)
+                        }, trailingIcon = { Checkbox(background, null) })
                         DropdownMenuItem(text = { Text("Vibrer à chaque touche") }, onClick = { haptics = !haptics; prefs.haptics = haptics },
                             trailingIcon = { Checkbox(haptics, null) })
                         DropdownMenuItem(text = { Text("Aide « toute la TV » sur la TV") }, onClick = { menu = false; RemoteController.setup() })
