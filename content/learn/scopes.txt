@@ -2,13 +2,27 @@
 # Les identifiants de packs (dossiers de content/learn/) restent la source de vérité ; ce tableau les rattache à un lot.
 # Format : scope | titre du lot | ids des packs (séparés par des espaces). Un pack est dans UN seul lot.
 # Un lot est autonome : les prérequis d'une fiche ne sortent pas du lot (vérifié par la construction).
-maternelle | Maternelle | maternelle-decouverte
-cm2 | CM2 – CEP | cep-francais cep-maths cep-sciences
-class6 | Class 6 – FSLC | fslc-english fslc-maths fslc-science
-3e | 3e – BEPC | bepc-english bepc-francais bepc-histoire-geo bepc-maths bepc-pct bepc-svt
-form5 | Form 5 – GCE O Level | gceol-biology gceol-english gceol-maths
-1ere | Première – Probatoire | probatoire-francais
-tle-cd | Terminale C/D – Bac | bac-maths bac-physique-chimie
-tle-commun | Terminale – Philosophie | bac-philosophie
-upper-sixth | Upper Sixth – GCE A Level | gceal-maths
-droit-l1 | Licence 1 – Droit | licence-droit
+maternelle | Maternelle | gs-decouverte gs-english gs-francais gs-maths maternelle-decouverte ms-francais ms-maths ps-decouverte ps-francais ps-maths
+cp | CP (SIL) | cp-english cp-francais cp-histoire-geo cp-maths cp-sciences sil-english sil-francais sil-histoire-geo sil-maths sil-sciences
+ce1 | CE1 | ce1-english ce1-francais ce1-histoire-geo ce1-maths ce1-sciences
+ce2 | CE2 | ce2-english ce2-francais ce2-histoire-geo ce2-maths ce2-sciences
+cm1 | CM1 | cm1-english cm1-francais cm1-histoire-geo cm1-maths cm1-sciences
+cm2 | CM2 – CEP | cep-english cep-francais cep-histoire-geo cep-maths cep-sciences cm2-english cm2-francais cm2-histoire-geo cm2-maths cm2-sciences
+6e | 6e | 6e-english 6e-francais 6e-histoire-geo 6e-informatique 6e-maths 6e-svt
+5e | 5e | 5e-english 5e-francais 5e-histoire-geo 5e-informatique 5e-maths 5e-pct 5e-svt vie-hygiene-sante
+4e | 4e | 4e-english 4e-francais 4e-histoire-geo 4e-informatique 4e-maths 4e-pct 4e-svt etp-cap-bep-maths-pro etp-cap-bep-securite-atelier vie-citoyennete
+3e | 3e – BEPC | 3e-informatique bepc-english bepc-francais bepc-histoire-geo bepc-maths bepc-pct bepc-svt etp-cap-bep-communication
+2nde | 2nde | 2nde-chimie-c 2nde-english 2nde-francais 2nde-histoire-geo-ecm 2nde-maths-a 2nde-maths-c 2nde-physique-c 2nde-svt etp-informatique-bureautique vie-code-route vie-education-financiere
+1ere | Première – Probatoire | 1re-chimie-cd 1re-economie 1re-english 1re-francais-litterature 1re-histoire-geo-ecm 1re-maths-a 1re-maths-cd 1re-maths-e-ti 1re-physique-cd 1re-svt-d etp-agricole-1re etp-compta-generale-1re etp-economie-generale-1re etp-electricite-1re etp-esf-1re etp-genie-civil-materiaux-1re etp-gestion-entreprise-1re etp-maths-commerciales-1re etp-maths-techniques-1re etp-mecanique-dessin-1re probatoire-francais
+tle-cd | Terminale – Bac (séries C, D, A, E, TI) | bac-chimie-cd-organique bac-maths bac-maths-a bac-maths-c-specifique bac-maths-cd-complements bac-maths-e-ti bac-physique-cd-complements bac-physique-chimie etp-maths-techniques-tle tle-economie tle-english tle-francais-a tle-histoire-geo-ecm tle-physique-e-ti tle-svt-d
+tle-commun | Terminale – Philosophie | bac-philosophie tle-philosophie
+class6 | Class 6 – FSLC | fslc-english fslc-maths fslc-science fslc-social-studies
+form1 | Form 1 | form1-computer
+form2 | Form 2 | form2-computer
+form3 | Form 3 | form3-computer
+form4 | Form 4 | form4-biology form4-computer form4-food-science
+form5 | Form 5 – GCE O Level | gceol-biology gceol-chemistry gceol-citizenship gceol-computer gceol-english gceol-food-science gceol-further-maths gceol-geography gceol-history gceol-literature gceol-maths gceol-physics
+lower-sixth | Lower Sixth | lower6-biology lower6-computer lower6-economics lower6-food-science lower6-further-maths lower6-geography lower6-history lower6-literature lower6-maths
+upper-sixth | Upper Sixth – GCE A Level | gceal-biology gceal-computer gceal-economics gceal-food-science gceal-further-maths gceal-geography gceal-history gceal-literature gceal-maths
+droit-l1 | Licence 1 | licence-droit sup-l1-algebre sup-l1-analyse sup-l1-comptabilite-generale sup-l1-informatique-algorithmique sup-l1-informatique-systemes sup-l1-introduction-droit sup-l1-macroeconomie sup-l1-methodologie-travail-universitaire sup-l1-microeconomie sup-l1-statistiques-descriptives
+droit-l2 | Licence 2 | sup-l1-droit-des-obligations sup-l2-comptabilite-generale sup-l2-droit-des-affaires-ohada sup-l2-macroeconomie sup-l2-mathematiques-financieres sup-l2-probabilites sup-l2-statistiques-inferentielles
