@@ -1,0 +1,429 @@
+{
+ "chapter": "gceal-computer-networks-security",
+ "lessons": [
+  {
+   "id": "gceal-computer-cryptography-security",
+   "title": "Encryption, authentication and secure communication",
+   "minutes": 35,
+   "programRef": "Cameroon GCE Board — Advanced Level Computer Science syllabus (Upper Sixth part) — to be checked against the official text",
+   "status": "draft",
+   "author": "CastBridge (AI draft)",
+   "source": "Original writing following the Cameroonian curriculum; to be reviewed by a teacher",
+   "objectives": [
+    "Explain symmetric and asymmetric encryption",
+    "Use a Caesar cipher",
+    "Describe digital signatures and hashing in outline",
+    "Describe HTTPS and how a firewall protects a network"
+   ],
+   "prerequisites": [],
+   "exercises": [
+    "gceal-computer-networks-security-e01",
+    "gceal-computer-networks-security-e02",
+    "gceal-computer-networks-security-e03",
+    "gceal-computer-networks-security-e04",
+    "gceal-computer-networks-security-e05",
+    "gceal-computer-networks-security-e06"
+   ],
+   "selfCheck": [
+    "gceal-computer-cryptography-security-q1",
+    "gceal-computer-cryptography-security-q2",
+    "gceal-computer-cryptography-security-q3",
+    "gceal-computer-cryptography-security-q4",
+    "gceal-computer-cryptography-security-q5"
+   ],
+   "reviewNotes": [
+    "Toy RSA numbers (n=33, e=3, d=7) are the standard classroom example (checked in Python); real keys are huge. TLS described in outline.",
+    "Syllabus references, scope and level of difficulty are to be checked against the official text; all facts, formulas and worked examples to be verified by a teacher before release."
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Encryption",
+     "md": "**Plaintext** is turned into **ciphertext** by an **algorithm** and a **key**. **Symmetric** encryption uses one shared secret key for both encrypting and decrypting: fast, but the key must be shared securely. **Asymmetric** (public-key) encryption uses a **key pair**: anyone may encrypt with the **public key**, but only the **private key** decrypts."
+    },
+    {
+     "type": "key",
+     "style": "methode",
+     "title": "Caesar cipher",
+     "md": "Shift every letter k places along the alphabet. With k = 3: A becomes D, B becomes E ... and X wraps around to A. Decrypt by shifting back k places. CAMEROON becomes FDPHURRQ. A Caesar cipher is **easy to break** (only 25 keys; letter-frequency analysis) and is used only to teach the idea."
+    },
+    {
+     "type": "illustration",
+     "figure": {
+      "kind": "shapes",
+      "w": 400,
+      "h": 176,
+      "items": [
+       {
+        "t": "text",
+        "x": 200.0,
+        "y": 24,
+        "text": "Public-key encryption",
+        "size": 15,
+        "anchor": "middle",
+        "color": "ink",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 40,
+        "y": 40,
+        "w": 320,
+        "h": 30,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "lightblue",
+        "radius": 6
+       },
+       {
+        "t": "text",
+        "x": 200.0,
+        "y": 60,
+        "text": "Sender encrypts with the receiver's PUBLIC key",
+        "size": 13,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "line",
+        "x1": 200.0,
+        "y1": 70,
+        "x2": 200.0,
+        "y2": 86,
+        "color": "ink",
+        "width": 2,
+        "arrow": "end"
+       },
+       {
+        "t": "rect",
+        "x": 40,
+        "y": 86,
+        "w": 320,
+        "h": 30,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "lightyellow",
+        "radius": 6
+       },
+       {
+        "t": "text",
+        "x": 200.0,
+        "y": 106,
+        "text": "Ciphertext travels over the network",
+        "size": 13,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "line",
+        "x1": 200.0,
+        "y1": 116,
+        "x2": 200.0,
+        "y2": 132,
+        "color": "ink",
+        "width": 2,
+        "arrow": "end"
+       },
+       {
+        "t": "rect",
+        "x": 40,
+        "y": 132,
+        "w": 320,
+        "h": 30,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "lightgreen",
+        "radius": 6
+       },
+       {
+        "t": "text",
+        "x": 200.0,
+        "y": 152,
+        "text": "Receiver decrypts with the PRIVATE key",
+        "size": 13,
+        "anchor": "middle",
+        "color": "ink"
+       }
+      ]
+     },
+     "caption": "Three steps: encrypt with the public key, send the ciphertext, decrypt with the private key.",
+     "alt": "Flow showing public-key encryption from sender to receiver."
+    },
+    {
+     "type": "key",
+     "style": "retenir",
+     "title": "Hashing and signatures",
+     "md": "A **hash function** turns data of any size into a fixed-size **hash (digest)**; the same input always gives the same output, a small change gives a very different output, and it cannot be reversed in practice. Uses: storing passwords (store the hash, not the password), checking a download is unchanged. A **digital signature** is made by encrypting a hash with the sender's private key; anyone can verify it with the public key, proving who sent it and that it was not changed."
+    },
+    {
+     "type": "key",
+     "style": "retenir",
+     "title": "HTTPS and firewalls",
+     "md": "**HTTPS** (HTTP over TLS) uses asymmetric encryption to agree a shared secret and then fast symmetric encryption for the session; **digital certificates** show that the public key belongs to the named site. A **firewall** filters packets by rules (addresses, ports, protocols) to block unwanted traffic."
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Common mistakes",
+     "md": "- Encryption does not hide that communication is happening; it protects the content.\n- A hash is not encryption: it cannot be 'decrypted'.\n- The private key must never be shared.\n- HTTPS protects data in transit, not against a malicious site."
+    },
+    {
+     "type": "example",
+     "title": "Example 1 - Caesar",
+     "statement": "Encrypt CAMEROON with a Caesar shift of 3.",
+     "steps": [
+      "C to F, A to D, M to P, E to H.",
+      "R to U, O to R, O to R, N to Q: FDPHURRQ."
+     ],
+     "answer": "FDPHURRQ"
+    },
+    {
+     "type": "example",
+     "title": "Example 2 - Toy public key (RSA idea)",
+     "statement": "Public key (n = 33, e = 3), private key d = 7 (a tiny example for learning only). Encrypt the message 4 and decrypt it.",
+     "steps": [
+      "Encrypt: 4^3 mod 33 = 64 mod 33 = 31.",
+      "Decrypt: 31^7 mod 33 = 4, the original message."
+     ],
+     "answer": "Cipher 31; decrypts back to 4"
+    }
+   ],
+   "chapter": "gceal-computer-networks-security"
+  }
+ ],
+ "exercises": [
+  {
+   "id": "gceal-computer-networks-security-e01",
+   "kind": "mcq",
+   "tier": "application",
+   "lesson": "gceal-computer-cryptography-security",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "In symmetric encryption",
+   "choices": [
+    "the same key encrypts and decrypts",
+    "two different keys are used",
+    "no key is used",
+    "only hashes are used"
+   ],
+   "answer": 0,
+   "explanation": "Shared key.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "gceal-computer-networks-security"
+  },
+  {
+   "id": "gceal-computer-networks-security-e02",
+   "kind": "numeric",
+   "tier": "application",
+   "lesson": "gceal-computer-cryptography-security",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Number the letters A=1, B=2, ... Z=26. With a Caesar shift of 3, the letter Y (25) becomes the letter at position",
+   "answer": 2,
+   "tolerance": 0,
+   "explanation": "25 + 3 = 28; subtract 26 to wrap around: 2, which is B.",
+   "difficulty": 1,
+   "points": 2,
+   "chapter": "gceal-computer-networks-security"
+  },
+  {
+   "id": "gceal-computer-networks-security-e03",
+   "kind": "truefalse",
+   "tier": "application",
+   "lesson": "gceal-computer-cryptography-security",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "A hash can be reversed to recover the original password easily.",
+   "answer": false,
+   "explanation": "Hash functions are one-way.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "gceal-computer-networks-security"
+  },
+  {
+   "id": "gceal-computer-networks-security-e04",
+   "kind": "mcq",
+   "tier": "approfondissement",
+   "lesson": "gceal-computer-cryptography-security",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Which key decrypts a message encrypted with someone's public key?",
+   "choices": [
+    "No key",
+    "Their private key",
+    "Any key",
+    "The same public key"
+   ],
+   "answer": 1,
+   "explanation": "Asymmetric.",
+   "difficulty": 2,
+   "points": 2,
+   "chapter": "gceal-computer-networks-security"
+  },
+  {
+   "id": "gceal-computer-networks-security-e05",
+   "kind": "open",
+   "tier": "approfondissement",
+   "lesson": "gceal-computer-cryptography-security",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Explain why websites store password hashes rather than passwords.",
+   "model": "If the database is stolen, attackers get only hashes, which cannot be reversed easily; when a user logs in, the entered password is hashed and compared with the stored hash.",
+   "rubric": "1 mark each of: hash not reversible, stolen data less useful, comparing hashes (3).",
+   "explanation": "If the database is stolen, attackers get only hashes, which cannot be reversed easily; when a user logs in, the entered password is hashed and compared with the stored hash.",
+   "difficulty": 2,
+   "points": 3,
+   "chapter": "gceal-computer-networks-security"
+  },
+  {
+   "id": "gceal-computer-networks-security-e06",
+   "kind": "problem",
+   "tier": "examen",
+   "lesson": "gceal-computer-cryptography-security",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "A school in Douala wants to protect its online exam platform.",
+   "difficulty": 2,
+   "parts": [
+    {
+     "kind": "mcq",
+     "points": 1,
+     "prompt": "Which protocol gives encrypted web connections?",
+     "choices": [
+      "HTTP",
+      "HTTPS",
+      "SMTP",
+      "FTP"
+     ],
+     "answer": 1,
+     "explanation": "HTTPS.",
+     "id": "gceal-computer-networks-security-e06-a"
+    },
+    {
+     "kind": "mcq",
+     "points": 1,
+     "prompt": "Which device filters unwanted incoming traffic?",
+     "choices": [
+      "A scanner",
+      "A firewall",
+      "A monitor",
+      "A printer"
+     ],
+     "answer": 1,
+     "explanation": "Firewall.",
+     "id": "gceal-computer-networks-security-e06-b"
+    },
+    {
+     "kind": "open",
+     "points": 2,
+     "prompt": "Explain one weakness of the Caesar cipher.",
+     "model": "There are only 25 possible shifts, and letter frequencies are unchanged so it is easily broken.",
+     "rubric": "1 mark each.",
+     "explanation": "There are only 25 possible shifts, and letter frequencies are unchanged so it is easily broken.",
+     "id": "gceal-computer-networks-security-e06-c"
+    }
+   ],
+   "chapter": "gceal-computer-networks-security"
+  },
+  {
+   "id": "gceal-computer-cryptography-security-q1",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "gceal-computer-cryptography-security",
+   "prompt": "A digital certificate",
+   "choices": [
+    "prints",
+    "links a public key to an identity",
+    "stores photos",
+    "encrypts the CPU"
+   ],
+   "answer": 1,
+   "explanation": "Certificate.",
+   "chapter": "gceal-computer-networks-security"
+  },
+  {
+   "id": "gceal-computer-cryptography-security-q2",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "gceal-computer-cryptography-security",
+   "prompt": "Asymmetric encryption uses",
+   "choices": [
+    "a public key and a private key",
+    "one shared key only",
+    "three keys",
+    "no keys"
+   ],
+   "answer": 0,
+   "explanation": "Pair.",
+   "chapter": "gceal-computer-networks-security"
+  },
+  {
+   "id": "gceal-computer-cryptography-security-q3",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "gceal-computer-cryptography-security",
+   "prompt": "A Caesar cipher with shift 3 turns B into",
+   "choices": [
+    "C",
+    "E",
+    "Y",
+    "A"
+   ],
+   "answer": 1,
+   "explanation": "B+3 = E.",
+   "chapter": "gceal-computer-networks-security"
+  },
+  {
+   "id": "gceal-computer-cryptography-security-q4",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "gceal-computer-cryptography-security",
+   "prompt": "A firewall decides using",
+   "choices": [
+    "rules about addresses and ports",
+    "file names only",
+    "screen size",
+    "RAM speed"
+   ],
+   "answer": 0,
+   "explanation": "Rules.",
+   "chapter": "gceal-computer-networks-security"
+  },
+  {
+   "id": "gceal-computer-cryptography-security-q5",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "gceal-computer-cryptography-security",
+   "prompt": "A hash of the same data is",
+   "choices": [
+    "always the same",
+    "random",
+    "different each time",
+    "empty"
+   ],
+   "answer": 0,
+   "explanation": "Deterministic.",
+   "chapter": "gceal-computer-networks-security"
+  },
+  {
+   "id": "gceal-computer-networks-security-m01",
+   "kind": "mcq",
+   "tier": "examen",
+   "lesson": "gceal-computer-cryptography-security",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "A hash of a password is stored because it",
+   "choices": [
+    "needs a firewall",
+    "can be decrypted with a key",
+    "cannot easily be reversed",
+    "is shorter than nothing"
+   ],
+   "answer": 2,
+   "explanation": "One-way.",
+   "difficulty": 3,
+   "points": 1,
+   "chapter": "gceal-computer-networks-security"
+  }
+ ]
+}

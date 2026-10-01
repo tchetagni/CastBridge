@@ -1,0 +1,1450 @@
+{
+ "chapter": "gceol-computer-numbers",
+ "lessons": [
+  {
+   "id": "gceol-computer-number-systems",
+   "title": "Binary, octal and hexadecimal",
+   "minutes": 25,
+   "programRef": "Cameroon GCE Board — Ordinary Level Computer Science / ICT syllabus — to be checked against the official text",
+   "status": "draft",
+   "author": "CastBridge (AI draft)",
+   "source": "Original writing following the Cameroonian curriculum; to be reviewed by a teacher",
+   "objectives": [
+    "Explain why computers use binary",
+    "Convert between binary and denary",
+    "Convert between binary and hexadecimal / octal",
+    "Use place values correctly"
+   ],
+   "prerequisites": [],
+   "exercises": [
+    "gceol-computer-numbers-e01",
+    "gceol-computer-numbers-e02",
+    "gceol-computer-numbers-e03",
+    "gceol-computer-numbers-e04",
+    "gceol-computer-numbers-e05",
+    "gceol-computer-numbers-e06"
+   ],
+   "selfCheck": [
+    "gceol-computer-number-systems-q1",
+    "gceol-computer-number-systems-q2",
+    "gceol-computer-number-systems-q3",
+    "gceol-computer-number-systems-q4",
+    "gceol-computer-number-systems-q5"
+   ],
+   "reviewNotes": [
+    "Octal is only in outline here; check whether the current syllabus requires octal.",
+    "Syllabus references, scope and level of difficulty are to be checked against the official text; all facts, formulas and worked examples to be verified by a teacher before release."
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Number bases",
+     "md": "Computers use **binary** (base 2, digits 0 and 1) because electronic circuits have two states: off and on. **Denary** is base 10. **Octal** is base 8 (digits 0-7). **Hexadecimal** is base 16: digits 0-9 and A-F, where A=10, B=11, C=12, D=13, E=14, F=15."
+    },
+    {
+     "type": "key",
+     "style": "methode",
+     "title": "Binary to denary",
+     "md": "Write the place values 128, 64, 32, 16, 8, 4, 2, 1 above the bits and add the values where the bit is 1. Example: 01001101 = 64 + 8 + 4 + 1 = 77."
+    },
+    {
+     "type": "illustration",
+     "figure": {
+      "kind": "shapes",
+      "w": 420,
+      "h": 150,
+      "items": [
+       {
+        "t": "text",
+        "x": 210.0,
+        "y": 24,
+        "text": "Place values: 01001101 = 77",
+        "size": 15,
+        "anchor": "middle",
+        "color": "ink",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 10.0,
+        "y": 70,
+        "w": 46.0,
+        "h": 36,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "lightgrey",
+        "radius": 4
+       },
+       {
+        "t": "text",
+        "x": 33.0,
+        "y": 94,
+        "text": "128",
+        "size": 14,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "text",
+        "x": 33.0,
+        "y": 128,
+        "text": "0",
+        "size": 11,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "rect",
+        "x": 60.0,
+        "y": 70,
+        "w": 46.0,
+        "h": 36,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "lightgreen",
+        "radius": 4
+       },
+       {
+        "t": "text",
+        "x": 83.0,
+        "y": 94,
+        "text": "64",
+        "size": 14,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "text",
+        "x": 83.0,
+        "y": 128,
+        "text": "1",
+        "size": 11,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "rect",
+        "x": 110.0,
+        "y": 70,
+        "w": 46.0,
+        "h": 36,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "lightgrey",
+        "radius": 4
+       },
+       {
+        "t": "text",
+        "x": 133.0,
+        "y": 94,
+        "text": "32",
+        "size": 14,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "text",
+        "x": 133.0,
+        "y": 128,
+        "text": "0",
+        "size": 11,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "rect",
+        "x": 160.0,
+        "y": 70,
+        "w": 46.0,
+        "h": 36,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "lightgrey",
+        "radius": 4
+       },
+       {
+        "t": "text",
+        "x": 183.0,
+        "y": 94,
+        "text": "16",
+        "size": 14,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "text",
+        "x": 183.0,
+        "y": 128,
+        "text": "0",
+        "size": 11,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "rect",
+        "x": 210.0,
+        "y": 70,
+        "w": 46.0,
+        "h": 36,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "lightgreen",
+        "radius": 4
+       },
+       {
+        "t": "text",
+        "x": 233.0,
+        "y": 94,
+        "text": "8",
+        "size": 14,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "text",
+        "x": 233.0,
+        "y": 128,
+        "text": "1",
+        "size": 11,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "rect",
+        "x": 260.0,
+        "y": 70,
+        "w": 46.0,
+        "h": 36,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "lightgreen",
+        "radius": 4
+       },
+       {
+        "t": "text",
+        "x": 283.0,
+        "y": 94,
+        "text": "4",
+        "size": 14,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "text",
+        "x": 283.0,
+        "y": 128,
+        "text": "1",
+        "size": 11,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "rect",
+        "x": 310.0,
+        "y": 70,
+        "w": 46.0,
+        "h": 36,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "lightgrey",
+        "radius": 4
+       },
+       {
+        "t": "text",
+        "x": 333.0,
+        "y": 94,
+        "text": "2",
+        "size": 14,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "text",
+        "x": 333.0,
+        "y": 128,
+        "text": "0",
+        "size": 11,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "rect",
+        "x": 360.0,
+        "y": 70,
+        "w": 46.0,
+        "h": 36,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "lightgreen",
+        "radius": 4
+       },
+       {
+        "t": "text",
+        "x": 383.0,
+        "y": 94,
+        "text": "1",
+        "size": 14,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "text",
+        "x": 383.0,
+        "y": 128,
+        "text": "1",
+        "size": 11,
+        "anchor": "middle",
+        "color": "ink"
+       }
+      ]
+     },
+     "caption": "Eight binary place values with the bits of 77 under them; the 1 bits are green.",
+     "alt": "Row of boxes 128, 64, 32, 16, 8, 4, 2, 1 with bits 0,1,0,0,1,1,0,1 beneath."
+    },
+    {
+     "type": "key",
+     "style": "methode",
+     "title": "Denary to binary and hex",
+     "md": "Denary to binary: repeatedly divide by 2 and read the remainders upwards, or subtract place values. Binary to hex: group bits in **fours** from the right; each group is one hex digit. Binary to octal: group in **threes**."
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Common mistakes",
+     "md": "- Read remainders from **bottom to top**.\n- Group bits from the **right**, padding the left with zeros.\n- Hex letters are digits: **D6** is 13x16 + 6 = 214, not 'D times 6'."
+    },
+    {
+     "type": "example",
+     "title": "Example 1 - Denary to binary",
+     "statement": "Convert 156 to binary (8 bits).",
+     "steps": [
+      "156 = 128 + 16 + 8 + 4 (128+16=144, +8=152, +4=156).",
+      "Place a 1 at 128, 16, 8 and 4, and 0 elsewhere: 1 0 0 1 1 1 0 0."
+     ],
+     "answer": "10011100"
+    },
+    {
+     "type": "example",
+     "title": "Example 2 - Binary to hex",
+     "statement": "Convert 11010110 to hexadecimal and to denary.",
+     "steps": [
+      "Split in fours: 1101 | 0110. 1101 = 13 = D; 0110 = 6.",
+      "So the hex number is D6. Denary: 13 x 16 + 6 = 208 + 6 = 214."
+     ],
+     "answer": "D6 hex = 214"
+    }
+   ],
+   "chapter": "gceol-computer-numbers"
+  },
+  {
+   "id": "gceol-computer-binary-arithmetic",
+   "title": "Binary arithmetic",
+   "minutes": 25,
+   "programRef": "Cameroon GCE Board — Ordinary Level Computer Science / ICT syllabus — to be checked against the official text",
+   "status": "draft",
+   "author": "CastBridge (AI draft)",
+   "source": "Original writing following the Cameroonian curriculum; to be reviewed by a teacher",
+   "objectives": [
+    "Add binary numbers using the carry rules",
+    "Subtract using two's complement (outline)",
+    "Multiply and divide by powers of 2 using shifts",
+    "Recognise overflow"
+   ],
+   "prerequisites": [],
+   "exercises": [
+    "gceol-computer-numbers-e07",
+    "gceol-computer-numbers-e08",
+    "gceol-computer-numbers-e09",
+    "gceol-computer-numbers-e10",
+    "gceol-computer-numbers-e11",
+    "gceol-computer-numbers-e12"
+   ],
+   "selfCheck": [
+    "gceol-computer-binary-arithmetic-q1",
+    "gceol-computer-binary-arithmetic-q2",
+    "gceol-computer-binary-arithmetic-q3",
+    "gceol-computer-binary-arithmetic-q4",
+    "gceol-computer-binary-arithmetic-q5"
+   ],
+   "reviewNotes": [
+    "Two's complement may go beyond O Level; check the syllabus. Hand-checked: 45-19=26.",
+    "Syllabus references, scope and level of difficulty are to be checked against the official text; all facts, formulas and worked examples to be verified by a teacher before release."
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Binary addition rules",
+     "md": "0+0=0; 0+1=1; 1+0=1; 1+1=10 (write 0, **carry 1**); 1+1+1=11 (write 1, carry 1). Add column by column from the right, like denary addition."
+    },
+    {
+     "type": "key",
+     "style": "methode",
+     "title": "Two's complement (8 bits)",
+     "md": "To represent a negative number: write the positive number in 8 bits, **flip every bit**, then **add 1**. To compute A - B, add A to the two's complement of B and ignore the carry out of the 8th bit."
+    },
+    {
+     "type": "illustration",
+     "figure": {
+      "kind": "shapes",
+      "w": 420,
+      "h": 200,
+      "items": [
+       {
+        "t": "text",
+        "x": 210,
+        "y": 24,
+        "text": "Adding 1011 + 0110",
+        "size": 15,
+        "anchor": "middle",
+        "color": "ink",
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 120,
+        "y": 52,
+        "text": "carry",
+        "size": 12,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "text",
+        "x": 215,
+        "y": 52,
+        "text": "1 1 1 0",
+        "size": 14,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "text",
+        "x": 120,
+        "y": 82,
+        "text": "A",
+        "size": 13,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "text",
+        "x": 215,
+        "y": 82,
+        "text": "0 1 0 1 1",
+        "size": 16,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "text",
+        "x": 120,
+        "y": 108,
+        "text": "B",
+        "size": 13,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "text",
+        "x": 215,
+        "y": 108,
+        "text": "0 0 1 1 0",
+        "size": 16,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "line",
+        "x1": 150,
+        "y1": 120,
+        "x2": 290,
+        "y2": 120,
+        "color": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 120,
+        "y": 146,
+        "text": "A+B",
+        "size": 13,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "text",
+        "x": 215,
+        "y": 146,
+        "text": "1 0 0 0 1",
+        "size": 16,
+        "anchor": "middle",
+        "color": "ink",
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 210,
+        "y": 180,
+        "text": "11 + 6 = 17",
+        "size": 13,
+        "anchor": "middle",
+        "color": "ink"
+       }
+      ]
+     },
+     "caption": "Column addition of 1011 and 0110 giving 10001 with carries shown.",
+     "alt": "Binary addition layout: 01011 plus 00110 equals 10001, with carries."
+    },
+    {
+     "type": "key",
+     "style": "retenir",
+     "title": "Shifts",
+     "md": "Shifting all bits **left** by one place multiplies by 2; shifting **right** by one divides by 2 (whole numbers). Overflow happens when a result needs more bits than are available (e.g. more than 255 in 8-bit unsigned numbers)."
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Common mistakes",
+     "md": "- Forgetting the carry in the next column.\n- In two's complement, flipping the bits but **forgetting to add 1**.\n- Counting the ninth bit of the sum as part of an 8-bit answer."
+    },
+    {
+     "type": "example",
+     "title": "Example 1 - Addition",
+     "statement": "Add 1011 and 0110.",
+     "steps": [
+      "Right to left: 1+0=1; 1+1=0 carry 1; 0+1+1=0 carry 1; 1+0+1=0 carry 1; the last carry gives 1.",
+      "Result 10001. Check: 11 + 6 = 17 and 10001 = 16 + 1 = 17."
+     ],
+     "answer": "10001"
+    },
+    {
+     "type": "example",
+     "title": "Example 2 - Subtraction",
+     "statement": "Calculate 45 - 19 using 8-bit two's complement.",
+     "steps": [
+      "45 = 00101101. 19 = 00010011; flip: 11101100; add 1: 11101101 (this is -19).",
+      "Add: 00101101 + 11101101 = 1 00011010. Ignore the ninth bit: 00011010 = 16+8+2 = 26."
+     ],
+     "answer": "26 (00011010)"
+    }
+   ],
+   "chapter": "gceol-computer-numbers"
+  },
+  {
+   "id": "gceol-computer-data-representation",
+   "title": "Representing characters, images and sound",
+   "minutes": 25,
+   "programRef": "Cameroon GCE Board — Ordinary Level Computer Science / ICT syllabus — to be checked against the official text",
+   "status": "draft",
+   "author": "CastBridge (AI draft)",
+   "source": "Original writing following the Cameroonian curriculum; to be reviewed by a teacher",
+   "objectives": [
+    "Explain how text is stored as codes (ASCII)",
+    "Describe how images are stored as pixels",
+    "Describe how sound is sampled",
+    "Calculate simple file sizes"
+   ],
+   "prerequisites": [],
+   "exercises": [
+    "gceol-computer-numbers-e13",
+    "gceol-computer-numbers-e14",
+    "gceol-computer-numbers-e15",
+    "gceol-computer-numbers-e16",
+    "gceol-computer-numbers-e17",
+    "gceol-computer-numbers-e18"
+   ],
+   "selfCheck": [
+    "gceol-computer-data-representation-q1",
+    "gceol-computer-data-representation-q2",
+    "gceol-computer-data-representation-q3",
+    "gceol-computer-data-representation-q4",
+    "gceol-computer-data-representation-q5"
+   ],
+   "reviewNotes": [
+    "File-size formulas are textbook-level; ignore headers and compression. ASCII standard is 7-bit; extended ASCII is 8-bit.",
+    "Syllabus references, scope and level of difficulty are to be checked against the official text; all facts, formulas and worked examples to be verified by a teacher before release."
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Characters",
+     "md": "Each character is stored as a number. **ASCII** uses 7 bits (128 codes): for example A = 65, B = 66, a = 97, 0 = 48. Capital and small letters have different codes. **Unicode** uses more bits and covers letters of many languages."
+    },
+    {
+     "type": "key",
+     "style": "retenir",
+     "title": "Images",
+     "md": "A **bitmap image** is a grid of **pixels**. **Resolution** is the number of pixels (e.g. 800 x 600). **Colour depth** is the number of bits per pixel (24 bits for full colour). Image size in bits = width x height x colour depth."
+    },
+    {
+     "type": "illustration",
+     "figure": {
+      "kind": "shapes",
+      "w": 420,
+      "h": 220,
+      "items": [
+       {
+        "t": "text",
+        "x": 210,
+        "y": 24,
+        "text": "Pixels in a bitmap image",
+        "size": 15,
+        "anchor": "middle",
+        "color": "ink",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 110,
+        "y": 50,
+        "w": 40,
+        "h": 40,
+        "stroke": "grey",
+        "width": 1,
+        "fill": "ink"
+       },
+       {
+        "t": "rect",
+        "x": 110,
+        "y": 90,
+        "w": 40,
+        "h": 40,
+        "stroke": "grey",
+        "width": 1,
+        "fill": "white"
+       },
+       {
+        "t": "rect",
+        "x": 110,
+        "y": 130,
+        "w": 40,
+        "h": 40,
+        "stroke": "grey",
+        "width": 1,
+        "fill": "ink"
+       },
+       {
+        "t": "rect",
+        "x": 150,
+        "y": 50,
+        "w": 40,
+        "h": 40,
+        "stroke": "grey",
+        "width": 1,
+        "fill": "white"
+       },
+       {
+        "t": "rect",
+        "x": 150,
+        "y": 90,
+        "w": 40,
+        "h": 40,
+        "stroke": "grey",
+        "width": 1,
+        "fill": "ink"
+       },
+       {
+        "t": "rect",
+        "x": 150,
+        "y": 130,
+        "w": 40,
+        "h": 40,
+        "stroke": "grey",
+        "width": 1,
+        "fill": "white"
+       },
+       {
+        "t": "rect",
+        "x": 190,
+        "y": 50,
+        "w": 40,
+        "h": 40,
+        "stroke": "grey",
+        "width": 1,
+        "fill": "ink"
+       },
+       {
+        "t": "rect",
+        "x": 190,
+        "y": 90,
+        "w": 40,
+        "h": 40,
+        "stroke": "grey",
+        "width": 1,
+        "fill": "white"
+       },
+       {
+        "t": "rect",
+        "x": 190,
+        "y": 130,
+        "w": 40,
+        "h": 40,
+        "stroke": "grey",
+        "width": 1,
+        "fill": "ink"
+       },
+       {
+        "t": "rect",
+        "x": 230,
+        "y": 50,
+        "w": 40,
+        "h": 40,
+        "stroke": "grey",
+        "width": 1,
+        "fill": "white"
+       },
+       {
+        "t": "rect",
+        "x": 230,
+        "y": 90,
+        "w": 40,
+        "h": 40,
+        "stroke": "grey",
+        "width": 1,
+        "fill": "ink"
+       },
+       {
+        "t": "rect",
+        "x": 230,
+        "y": 130,
+        "w": 40,
+        "h": 40,
+        "stroke": "grey",
+        "width": 1,
+        "fill": "white"
+       },
+       {
+        "t": "text",
+        "x": 210,
+        "y": 200,
+        "text": "4 x 3 = 12 pixels",
+        "size": 13,
+        "anchor": "middle",
+        "color": "ink"
+       }
+      ]
+     },
+     "caption": "A grid of 4 by 3 pixels, some black and some white.",
+     "alt": "A small grid of 12 pixels coloured black and white."
+    },
+    {
+     "type": "key",
+     "style": "retenir",
+     "title": "Sound",
+     "md": "Sound is **sampled**: the wave is measured many times per second (the **sample rate**, in Hz), each measurement stored with a number of bits (the **bit depth**). More samples and bits give better quality and bigger files."
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Common mistakes",
+     "md": "- Divide by **8** to change bits to bytes.\n- A higher resolution or sample rate improves quality **and** increases file size.\n- 'A' (65) and 'a' (97) are different codes."
+    },
+    {
+     "type": "example",
+     "title": "Example 1 - Image size",
+     "statement": "An image is 800 x 600 pixels with 24 bits per pixel. How many bytes does it need?",
+     "steps": [
+      "Pixels: 800 x 600 = 480000.",
+      "Bits: 480000 x 24 = 11520000; bytes: 11520000 / 8 = 1440000."
+     ],
+     "answer": "1 440 000 bytes (about 1.4 MB)"
+    },
+    {
+     "type": "example",
+     "title": "Example 2 - Sound size",
+     "statement": "Stereo sound (2 channels), 44100 samples per second, 16 bits per sample, lasts 10 seconds. File size in bytes?",
+     "steps": [
+      "Bits = 44100 x 16 x 2 x 10 = 14112000.",
+      "Bytes = 14112000 / 8 = 1764000."
+     ],
+     "answer": "1 764 000 bytes"
+    }
+   ],
+   "chapter": "gceol-computer-numbers"
+  }
+ ],
+ "exercises": [
+  {
+   "id": "gceol-computer-numbers-e01",
+   "kind": "numeric",
+   "tier": "application",
+   "lesson": "gceol-computer-number-systems",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Convert the binary number 1011 to denary.",
+   "answer": 11,
+   "tolerance": 0,
+   "explanation": "8 + 2 + 1 = 11.",
+   "difficulty": 1,
+   "points": 2,
+   "chapter": "gceol-computer-numbers"
+  },
+  {
+   "id": "gceol-computer-numbers-e02",
+   "kind": "mcq",
+   "tier": "application",
+   "lesson": "gceol-computer-number-systems",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "The hexadecimal digit F represents",
+   "choices": [
+    "14",
+    "15",
+    "16",
+    "10"
+   ],
+   "answer": 1,
+   "explanation": "A=10 ... F=15.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "gceol-computer-numbers"
+  },
+  {
+   "id": "gceol-computer-numbers-e03",
+   "kind": "numeric",
+   "tier": "application",
+   "lesson": "gceol-computer-number-systems",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Convert 2F (hex) to denary.",
+   "answer": 47,
+   "tolerance": 0,
+   "explanation": "2 x 16 + 15 = 47.",
+   "difficulty": 1,
+   "points": 2,
+   "chapter": "gceol-computer-numbers"
+  },
+  {
+   "id": "gceol-computer-numbers-e04",
+   "kind": "mcq",
+   "tier": "approfondissement",
+   "lesson": "gceol-computer-number-systems",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Binary 10100110 written in hexadecimal is",
+   "choices": [
+    "A6",
+    "B6",
+    "6A",
+    "A9"
+   ],
+   "answer": 0,
+   "explanation": "1010 = A, 0110 = 6, so A6.",
+   "difficulty": 2,
+   "points": 2,
+   "chapter": "gceol-computer-numbers"
+  },
+  {
+   "id": "gceol-computer-numbers-e05",
+   "kind": "numeric",
+   "tier": "approfondissement",
+   "lesson": "gceol-computer-number-systems",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Convert 77 to binary and give the number of 1 bits.",
+   "answer": 4,
+   "tolerance": 0,
+   "explanation": "77 = 1001101, which has four 1s.",
+   "difficulty": 2,
+   "points": 3,
+   "chapter": "gceol-computer-numbers"
+  },
+  {
+   "id": "gceol-computer-numbers-e06",
+   "kind": "problem",
+   "tier": "examen",
+   "lesson": "gceol-computer-number-systems",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Work with the number 214.",
+   "difficulty": 2,
+   "parts": [
+    {
+     "kind": "mcq",
+     "points": 1,
+     "prompt": "214 in binary (8 bits) is",
+     "choices": [
+      "11010110",
+      "11010011",
+      "10110110",
+      "11100110"
+     ],
+     "answer": 0,
+     "explanation": "128+64+16+4+2 = 214.",
+     "id": "gceol-computer-numbers-e06-a"
+    },
+    {
+     "kind": "mcq",
+     "points": 1,
+     "prompt": "214 in hexadecimal is",
+     "choices": [
+      "6D",
+      "D6",
+      "C6",
+      "D4"
+     ],
+     "answer": 1,
+     "explanation": "214 = 13 x 16 + 6.",
+     "id": "gceol-computer-numbers-e06-b"
+    },
+    {
+     "kind": "open",
+     "points": 2,
+     "prompt": "Give two reasons why computers use binary rather than denary.",
+     "model": "Circuits have two reliable states (on/off), which map to 1 and 0; binary is easy to build and less error-prone with electronic components.",
+     "rubric": "1 mark per valid reason.",
+     "explanation": "Circuits have two reliable states (on/off), which map to 1 and 0; binary is easy to build and less error-prone with electronic components.",
+     "id": "gceol-computer-numbers-e06-c"
+    }
+   ],
+   "chapter": "gceol-computer-numbers"
+  },
+  {
+   "id": "gceol-computer-number-systems-q1",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "gceol-computer-number-systems",
+   "prompt": "Binary uses the digits",
+   "choices": [
+    "0 to 9",
+    "0 and 1",
+    "0 to F",
+    "0 to 7"
+   ],
+   "answer": 1,
+   "explanation": "Base 2 has two digits.",
+   "chapter": "gceol-computer-numbers"
+  },
+  {
+   "id": "gceol-computer-number-systems-q2",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "gceol-computer-number-systems",
+   "prompt": "Binary 1111 equals",
+   "choices": [
+    "16",
+    "15",
+    "14",
+    "8"
+   ],
+   "answer": 1,
+   "explanation": "8+4+2+1.",
+   "chapter": "gceol-computer-numbers"
+  },
+  {
+   "id": "gceol-computer-number-systems-q3",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "gceol-computer-number-systems",
+   "prompt": "In 8-bit binary, the leftmost place value is",
+   "choices": [
+    "8",
+    "64",
+    "256",
+    "128"
+   ],
+   "answer": 3,
+   "explanation": "The places are 128 down to 1.",
+   "chapter": "gceol-computer-numbers"
+  },
+  {
+   "id": "gceol-computer-number-systems-q4",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "gceol-computer-number-systems",
+   "prompt": "Hexadecimal 'C' equals",
+   "choices": [
+    "11",
+    "12",
+    "13",
+    "10"
+   ],
+   "answer": 1,
+   "explanation": "A=10, B=11, C=12.",
+   "chapter": "gceol-computer-numbers"
+  },
+  {
+   "id": "gceol-computer-number-systems-q5",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "gceol-computer-number-systems",
+   "prompt": "To change binary to hexadecimal we group the bits in",
+   "choices": [
+    "eights",
+    "twos",
+    "threes",
+    "fours"
+   ],
+   "answer": 3,
+   "explanation": "One hex digit = four bits.",
+   "chapter": "gceol-computer-numbers"
+  },
+  {
+   "id": "gceol-computer-numbers-e07",
+   "kind": "numeric",
+   "tier": "application",
+   "lesson": "gceol-computer-binary-arithmetic",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Add binary 101 and 11 and give the answer in denary.",
+   "answer": 8,
+   "tolerance": 0,
+   "explanation": "5 + 3 = 8 (1000 in binary).",
+   "difficulty": 1,
+   "points": 2,
+   "chapter": "gceol-computer-numbers"
+  },
+  {
+   "id": "gceol-computer-numbers-e08",
+   "kind": "mcq",
+   "tier": "application",
+   "lesson": "gceol-computer-binary-arithmetic",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "1 + 1 in binary gives",
+   "choices": [
+    "0 with no carry",
+    "11",
+    "10 (write 0, carry 1)",
+    "2 written as the digit 2"
+   ],
+   "answer": 2,
+   "explanation": "Binary has no digit 2; 1+1 = 10.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "gceol-computer-numbers"
+  },
+  {
+   "id": "gceol-computer-numbers-e09",
+   "kind": "numeric",
+   "tier": "application",
+   "lesson": "gceol-computer-binary-arithmetic",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Shift 00001100 left by one place. What is the denary result?",
+   "answer": 24,
+   "tolerance": 0,
+   "explanation": "12 x 2 = 24 (00011000).",
+   "difficulty": 1,
+   "points": 2,
+   "chapter": "gceol-computer-numbers"
+  },
+  {
+   "id": "gceol-computer-numbers-e10",
+   "kind": "numeric",
+   "tier": "approfondissement",
+   "lesson": "gceol-computer-binary-arithmetic",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "The largest number that fits in 8 bits (unsigned) is",
+   "answer": 255,
+   "tolerance": 0,
+   "explanation": "11111111 = 128+64+32+16+8+4+2+1 = 255.",
+   "difficulty": 2,
+   "points": 3,
+   "chapter": "gceol-computer-numbers"
+  },
+  {
+   "id": "gceol-computer-numbers-e11",
+   "kind": "open",
+   "tier": "approfondissement",
+   "lesson": "gceol-computer-binary-arithmetic",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "What is overflow? Give an example with 8 bits.",
+   "model": "Overflow occurs when a result is too large for the available bits. Example: 200 + 100 = 300, which needs 9 bits, but an 8-bit unsigned store can only hold up to 255.",
+   "rubric": "1 mark definition, 1 mark correct example, 1 mark mention of the extra bit being lost.",
+   "explanation": "Overflow occurs when a result is too large for the available bits. Example: 200 + 100 = 300, which needs 9 bits, but an 8-bit unsigned store can only hold up to 255.",
+   "difficulty": 2,
+   "points": 3,
+   "chapter": "gceol-computer-numbers"
+  },
+  {
+   "id": "gceol-computer-numbers-e12",
+   "kind": "problem",
+   "tier": "examen",
+   "lesson": "gceol-computer-binary-arithmetic",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Binary arithmetic checks.",
+   "difficulty": 2,
+   "parts": [
+    {
+     "kind": "numeric",
+     "points": 1,
+     "prompt": "Add 01100100 (100) and 00010100 (20). Give the result in denary.",
+     "answer": 120,
+     "tolerance": 0,
+     "explanation": "100 + 20 = 120 = 01111000.",
+     "id": "gceol-computer-numbers-e12-a"
+    },
+    {
+     "kind": "mcq",
+     "points": 1,
+     "prompt": "The 8-bit two's complement of 00000101 (5) is",
+     "choices": [
+      "00000101",
+      "11111010",
+      "11111011",
+      "10000101"
+     ],
+     "answer": 2,
+     "explanation": "Flip: 11111010; add 1: 11111011.",
+     "id": "gceol-computer-numbers-e12-b"
+    },
+    {
+     "kind": "open",
+     "points": 2,
+     "prompt": "Explain how a left shift by 2 places changes a number.",
+     "model": "It multiplies the number by 4 (2 x 2), as long as no bits are lost off the left end.",
+     "rubric": "1 mark multiply by 4, 1 mark overflow condition.",
+     "explanation": "It multiplies the number by 4 (2 x 2), as long as no bits are lost off the left end.",
+     "id": "gceol-computer-numbers-e12-c"
+    }
+   ],
+   "chapter": "gceol-computer-numbers"
+  },
+  {
+   "id": "gceol-computer-binary-arithmetic-q1",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "gceol-computer-binary-arithmetic",
+   "prompt": "0 + 1 + 1 (no carry in) in binary equals",
+   "choices": [
+    "10",
+    "11",
+    "01 with carry",
+    "2"
+   ],
+   "answer": 0,
+   "explanation": "1+1 = 10.",
+   "chapter": "gceol-computer-numbers"
+  },
+  {
+   "id": "gceol-computer-binary-arithmetic-q2",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "gceol-computer-binary-arithmetic",
+   "prompt": "Shifting a binary number right by one place",
+   "choices": [
+    "adds 1",
+    "doubles it",
+    "negates it",
+    "halves it"
+   ],
+   "answer": 3,
+   "explanation": "Right shift divides by 2.",
+   "chapter": "gceol-computer-numbers"
+  },
+  {
+   "id": "gceol-computer-binary-arithmetic-q3",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "gceol-computer-binary-arithmetic",
+   "prompt": "Flipping all the bits of a number is the first step in",
+   "choices": [
+    "binary addition",
+    "ASCII coding",
+    "two's complement",
+    "hex conversion"
+   ],
+   "answer": 2,
+   "explanation": "Then add 1.",
+   "chapter": "gceol-computer-numbers"
+  },
+  {
+   "id": "gceol-computer-binary-arithmetic-q4",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "gceol-computer-binary-arithmetic",
+   "prompt": "An 8-bit unsigned store cannot hold",
+   "choices": [
+    "0",
+    "255",
+    "200",
+    "300"
+   ],
+   "answer": 3,
+   "explanation": "300 > 255.",
+   "chapter": "gceol-computer-numbers"
+  },
+  {
+   "id": "gceol-computer-binary-arithmetic-q5",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "gceol-computer-binary-arithmetic",
+   "prompt": "1011 + 0001 in binary equals",
+   "choices": [
+    "1100",
+    "1010",
+    "1101",
+    "1111"
+   ],
+   "answer": 0,
+   "explanation": "11 + 1 = 12 = 1100.",
+   "chapter": "gceol-computer-numbers"
+  },
+  {
+   "id": "gceol-computer-numbers-e13",
+   "kind": "mcq",
+   "tier": "application",
+   "lesson": "gceol-computer-data-representation",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "In ASCII the code for 'A' is",
+   "choices": [
+    "65",
+    "97",
+    "1",
+    "48"
+   ],
+   "answer": 0,
+   "explanation": "A = 65; a = 97.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "gceol-computer-numbers"
+  },
+  {
+   "id": "gceol-computer-numbers-e14",
+   "kind": "numeric",
+   "tier": "application",
+   "lesson": "gceol-computer-data-representation",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "How many bytes are needed for a 100 x 100 image with 8 bits per pixel?",
+   "answer": 10000,
+   "tolerance": 0,
+   "explanation": "100 x 100 x 8 / 8 = 10000 bytes.",
+   "difficulty": 1,
+   "points": 2,
+   "chapter": "gceol-computer-numbers"
+  },
+  {
+   "id": "gceol-computer-numbers-e15",
+   "kind": "truefalse",
+   "tier": "application",
+   "lesson": "gceol-computer-data-representation",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Increasing the sample rate usually makes a sound file larger.",
+   "answer": true,
+   "explanation": "More samples per second means more data.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "gceol-computer-numbers"
+  },
+  {
+   "id": "gceol-computer-numbers-e16",
+   "kind": "mcq",
+   "tier": "approfondissement",
+   "lesson": "gceol-computer-data-representation",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "What is a pixel?",
+   "choices": [
+    "A type of printer",
+    "A unit of sound",
+    "A storage device",
+    "The smallest dot of an image"
+   ],
+   "answer": 3,
+   "explanation": "Images are grids of pixels.",
+   "difficulty": 2,
+   "points": 2,
+   "chapter": "gceol-computer-numbers"
+  },
+  {
+   "id": "gceol-computer-numbers-e17",
+   "kind": "numeric",
+   "tier": "approfondissement",
+   "lesson": "gceol-computer-data-representation",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Using ASCII, the code for 'C' is 67 (A=65). What is the code for 'F'?",
+   "answer": 70,
+   "tolerance": 0,
+   "explanation": "F is 3 letters after C: 67 + 3 = 70.",
+   "difficulty": 2,
+   "points": 3,
+   "chapter": "gceol-computer-numbers"
+  },
+  {
+   "id": "gceol-computer-numbers-e18",
+   "kind": "problem",
+   "tier": "examen",
+   "lesson": "gceol-computer-data-representation",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "A student scans a photograph at 1000 x 500 pixels, 24-bit colour.",
+   "difficulty": 2,
+   "parts": [
+    {
+     "kind": "numeric",
+     "points": 1,
+     "prompt": "How many pixels does the image contain?",
+     "answer": 500000,
+     "tolerance": 0,
+     "explanation": "1000 x 500 = 500000.",
+     "id": "gceol-computer-numbers-e18-a"
+    },
+    {
+     "kind": "numeric",
+     "points": 1,
+     "prompt": "How many bytes (use 24 bits = 3 bytes per pixel)?",
+     "answer": 1500000,
+     "tolerance": 0,
+     "explanation": "500000 x 3 = 1500000 bytes.",
+     "id": "gceol-computer-numbers-e18-b"
+    },
+    {
+     "kind": "open",
+     "points": 2,
+     "prompt": "Suggest one way to reduce the file size and its effect on quality.",
+     "model": "Reduce the resolution or colour depth, or use compression; this lowers quality (less detail or fewer colours).",
+     "rubric": "1 mark method, 1 mark effect.",
+     "explanation": "Reduce the resolution or colour depth, or use compression; this lowers quality (less detail or fewer colours).",
+     "id": "gceol-computer-numbers-e18-c"
+    }
+   ],
+   "chapter": "gceol-computer-numbers"
+  },
+  {
+   "id": "gceol-computer-data-representation-q1",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "gceol-computer-data-representation",
+   "prompt": "ASCII uses how many bits per character (standard version)?",
+   "choices": [
+    "24",
+    "7",
+    "64",
+    "2"
+   ],
+   "answer": 1,
+   "explanation": "Standard ASCII has 128 codes (7 bits).",
+   "chapter": "gceol-computer-numbers"
+  },
+  {
+   "id": "gceol-computer-data-representation-q2",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "gceol-computer-data-representation",
+   "prompt": "Colour depth means",
+   "choices": [
+    "image width",
+    "number of colours on a monitor only",
+    "bits used per pixel",
+    "printer speed"
+   ],
+   "answer": 2,
+   "explanation": "More bits mean more colours.",
+   "chapter": "gceol-computer-numbers"
+  },
+  {
+   "id": "gceol-computer-data-representation-q3",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "gceol-computer-data-representation",
+   "prompt": "The sample rate is measured in",
+   "choices": [
+    "pixels",
+    "bytes",
+    "hertz (Hz)",
+    "volts"
+   ],
+   "answer": 2,
+   "explanation": "Samples per second.",
+   "chapter": "gceol-computer-numbers"
+  },
+  {
+   "id": "gceol-computer-data-representation-q4",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "gceol-computer-data-representation",
+   "prompt": "Bitmap images are made of",
+   "choices": [
+    "pixels",
+    "bytes only",
+    "waves",
+    "words"
+   ],
+   "answer": 0,
+   "explanation": "A pixel grid.",
+   "chapter": "gceol-computer-numbers"
+  },
+  {
+   "id": "gceol-computer-data-representation-q5",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "gceol-computer-data-representation",
+   "prompt": "To convert bits to bytes we",
+   "choices": [
+    "add 8",
+    "divide by 8",
+    "divide by 1024 only",
+    "multiply by 8"
+   ],
+   "answer": 1,
+   "explanation": "8 bits = 1 byte.",
+   "chapter": "gceol-computer-numbers"
+  },
+  {
+   "id": "gceol-computer-numbers-m01",
+   "kind": "numeric",
+   "tier": "examen",
+   "lesson": "gceol-computer-number-systems",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Convert the binary number 101101 to denary.",
+   "answer": 45,
+   "tolerance": 0,
+   "explanation": "32+8+4+1 = 45.",
+   "difficulty": 3,
+   "points": 1,
+   "chapter": "gceol-computer-numbers"
+  },
+  {
+   "id": "gceol-computer-numbers-m02",
+   "kind": "problem",
+   "tier": "examen",
+   "lesson": "gceol-computer-binary-arithmetic",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Binary and data.",
+   "difficulty": 2,
+   "parts": [
+    {
+     "kind": "numeric",
+     "points": 2,
+     "prompt": "Add 1010 and 0111 and give the answer in denary.",
+     "answer": 17,
+     "tolerance": 0,
+     "explanation": "10 + 7 = 17 (10001).",
+     "id": "gceol-computer-numbers-m02-a"
+    },
+    {
+     "kind": "numeric",
+     "points": 2,
+     "prompt": "An image is 100 x 50 pixels at 8 bits per pixel. How many bytes?",
+     "answer": 5000,
+     "tolerance": 0,
+     "explanation": "100 x 50 x 8 / 8 = 5000.",
+     "id": "gceol-computer-numbers-m02-b"
+    },
+    {
+     "kind": "mcq",
+     "points": 1,
+     "prompt": "ASCII code for 'a' is",
+     "choices": [
+      "65",
+      "1",
+      "48",
+      "97"
+     ],
+     "answer": 3,
+     "explanation": "a = 97.",
+     "id": "gceol-computer-numbers-m02-c"
+    }
+   ],
+   "chapter": "gceol-computer-numbers"
+  }
+ ]
+}

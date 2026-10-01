@@ -1,0 +1,1172 @@
+{
+ "chapter": "gceal-computer-low-level",
+ "lessons": [
+  {
+   "id": "gceal-computer-assembly-addressing",
+   "title": "Assembly language and addressing modes",
+   "minutes": 35,
+   "programRef": "Cameroon GCE Board — Advanced Level Computer Science syllabus (Upper Sixth part) — to be checked against the official text",
+   "status": "draft",
+   "author": "CastBridge (AI draft)",
+   "source": "Original writing following the Cameroonian curriculum; to be reviewed by a teacher",
+   "objectives": [
+    "Describe the structure of a machine instruction",
+    "Explain immediate, direct and indirect addressing",
+    "Trace a short assembly program",
+    "Compare assembly with high-level code"
+   ],
+   "prerequisites": [],
+   "exercises": [
+    "gceal-computer-low-level-e01",
+    "gceal-computer-low-level-e02",
+    "gceal-computer-low-level-e03",
+    "gceal-computer-low-level-e04",
+    "gceal-computer-low-level-e05",
+    "gceal-computer-low-level-e06"
+   ],
+   "selfCheck": [
+    "gceal-computer-assembly-addressing-q1",
+    "gceal-computer-assembly-addressing-q2",
+    "gceal-computer-assembly-addressing-q3",
+    "gceal-computer-assembly-addressing-q4",
+    "gceal-computer-assembly-addressing-q5"
+   ],
+   "reviewNotes": [
+    "The instruction set is an invented teaching set (clearly stated); the Board will use its own instruction set (e.g. a Little Man Computer style or a real CPU). Replace the mnemonics after checking the syllabus.",
+    "Syllabus references, scope and level of difficulty are to be checked against the official text; all facts, formulas and worked examples to be verified by a teacher before release."
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Instruction format",
+     "md": "A machine instruction has an **opcode** (the operation) and an **operand** (the data or the address of the data). The instruction set is the list of instructions a CPU understands. **Assembly language** uses mnemonics such as LDA (load) or ADD instead of binary opcodes; an **assembler** converts it to machine code, one assembly line to one machine instruction. The instruction set below is a **teaching set invented for this lesson**, not a real CPU."
+    },
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Addressing modes",
+     "md": "**Immediate**: the operand is the value itself (LDI 5 puts 5 in the accumulator). **Direct**: the operand is the memory address of the value (LDA 20 loads the contents of address 20). **Indirect**: the operand is the address of a memory location that **holds the address** of the data. Immediate is fastest; indirect allows pointer-like access."
+    },
+    {
+     "type": "illustration",
+     "figure": {
+      "kind": "shapes",
+      "w": 420,
+      "h": 198,
+      "items": [
+       {
+        "t": "text",
+        "x": 210.0,
+        "y": 24,
+        "text": "Trace: x=12, y=30",
+        "size": 15,
+        "anchor": "middle",
+        "color": "ink",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 10.0,
+        "y": 40,
+        "w": 133.33333333333334,
+        "h": 28,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "lightblue"
+       },
+       {
+        "t": "text",
+        "x": 76.66666666666667,
+        "y": 59,
+        "text": "Line",
+        "size": 13,
+        "anchor": "middle",
+        "color": "ink",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 143.33333333333334,
+        "y": 40,
+        "w": 133.33333333333334,
+        "h": 28,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "lightgreen"
+       },
+       {
+        "t": "text",
+        "x": 210.0,
+        "y": 59,
+        "text": "ACC",
+        "size": 13,
+        "anchor": "middle",
+        "color": "ink",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 276.6666666666667,
+        "y": 40,
+        "w": 133.33333333333334,
+        "h": 28,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "lightyellow"
+       },
+       {
+        "t": "text",
+        "x": 343.33333333333337,
+        "y": 59,
+        "text": "z",
+        "size": 13,
+        "anchor": "middle",
+        "color": "ink",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 10.0,
+        "y": 68,
+        "w": 133.33333333333334,
+        "h": 28,
+        "stroke": "grey",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 76.66666666666667,
+        "y": 87,
+        "text": "LDA x",
+        "size": 13,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "rect",
+        "x": 143.33333333333334,
+        "y": 68,
+        "w": 133.33333333333334,
+        "h": 28,
+        "stroke": "grey",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 210.0,
+        "y": 87,
+        "text": "12",
+        "size": 13,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "rect",
+        "x": 276.6666666666667,
+        "y": 68,
+        "w": 133.33333333333334,
+        "h": 28,
+        "stroke": "grey",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 343.33333333333337,
+        "y": 87,
+        "text": "0",
+        "size": 13,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "rect",
+        "x": 10.0,
+        "y": 96,
+        "w": 133.33333333333334,
+        "h": 28,
+        "stroke": "grey",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 76.66666666666667,
+        "y": 115,
+        "text": "ADD y",
+        "size": 13,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "rect",
+        "x": 143.33333333333334,
+        "y": 96,
+        "w": 133.33333333333334,
+        "h": 28,
+        "stroke": "grey",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 210.0,
+        "y": 115,
+        "text": "42",
+        "size": 13,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "rect",
+        "x": 276.6666666666667,
+        "y": 96,
+        "w": 133.33333333333334,
+        "h": 28,
+        "stroke": "grey",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 343.33333333333337,
+        "y": 115,
+        "text": "0",
+        "size": 13,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "rect",
+        "x": 10.0,
+        "y": 124,
+        "w": 133.33333333333334,
+        "h": 28,
+        "stroke": "grey",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 76.66666666666667,
+        "y": 143,
+        "text": "STA z",
+        "size": 13,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "rect",
+        "x": 143.33333333333334,
+        "y": 124,
+        "w": 133.33333333333334,
+        "h": 28,
+        "stroke": "grey",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 210.0,
+        "y": 143,
+        "text": "42",
+        "size": 13,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "rect",
+        "x": 276.6666666666667,
+        "y": 124,
+        "w": 133.33333333333334,
+        "h": 28,
+        "stroke": "grey",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 343.33333333333337,
+        "y": 143,
+        "text": "42",
+        "size": 13,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "rect",
+        "x": 10.0,
+        "y": 152,
+        "w": 133.33333333333334,
+        "h": 28,
+        "stroke": "grey",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 76.66666666666667,
+        "y": 171,
+        "text": "HLT",
+        "size": 13,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "rect",
+        "x": 143.33333333333334,
+        "y": 152,
+        "w": 133.33333333333334,
+        "h": 28,
+        "stroke": "grey",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 210.0,
+        "y": 171,
+        "text": "42",
+        "size": 13,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "rect",
+        "x": 276.6666666666667,
+        "y": 152,
+        "w": 133.33333333333334,
+        "h": 28,
+        "stroke": "grey",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 343.33333333333337,
+        "y": 171,
+        "text": "42",
+        "size": 13,
+        "anchor": "middle",
+        "color": "ink"
+       }
+      ]
+     },
+     "caption": "A trace table of a four-line program that adds x and y and stores the result in z.",
+     "alt": "Trace of LDA x, ADD y, STA z, HLT with accumulator values 12, 42, 42, 42."
+    },
+    {
+     "type": "key",
+     "style": "methode",
+     "title": "Teaching instruction set",
+     "md": "LDI n: ACC = n. LDA a: ACC = memory[a]. STA a: memory[a] = ACC. ADD a: ACC = ACC + memory[a]. SUB a: ACC = ACC - memory[a]. JMP k: PC = k. BRZ k: if ACC = 0 then PC = k. HLT: stop. Trace by writing the PC, instruction, ACC and memory after each line."
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Common mistakes",
+     "md": "- Confusing the operand value with an address (immediate vs direct).\n- Forgetting that the PC already points to the next instruction while the current one executes.\n- Assuming assembly is portable: each CPU family has its own instruction set."
+    },
+    {
+     "type": "example",
+     "title": "Example 1 - Trace",
+     "statement": "Memory: x = 12, y = 30. Program: LDA x; ADD y; STA z; HLT. What is stored in z?",
+     "steps": [
+      "LDA x gives ACC = 12. ADD y gives ACC = 12 + 30 = 42.",
+      "STA z writes 42 to z; HLT stops."
+     ],
+     "answer": "z = 42"
+    },
+    {
+     "type": "example",
+     "title": "Example 2 - Addressing modes",
+     "statement": "Memory address 20 holds 35 and address 35 holds 8. What does ACC contain after (a) LDI 20, (b) LDA 20, (c) an indirect load using address 20?",
+     "steps": [
+      "(a) Immediate: ACC = 20 itself. (b) Direct: ACC = memory[20] = 35.",
+      "(c) Indirect: memory[20] = 35 is an address; ACC = memory[35] = 8."
+     ],
+     "answer": "(a) 20, (b) 35, (c) 8"
+    }
+   ],
+   "chapter": "gceal-computer-low-level"
+  },
+  {
+   "id": "gceal-computer-floating-point",
+   "title": "Floating-point numbers",
+   "minutes": 35,
+   "programRef": "Cameroon GCE Board — Advanced Level Computer Science syllabus (Upper Sixth part) — to be checked against the official text",
+   "status": "draft",
+   "author": "CastBridge (AI draft)",
+   "source": "Original writing following the Cameroonian curriculum; to be reviewed by a teacher",
+   "objectives": [
+    "Explain mantissa and exponent",
+    "Convert a normalised floating-point number to denary",
+    "Convert a denary number to floating point",
+    "Explain precision, range and rounding errors"
+   ],
+   "prerequisites": [],
+   "exercises": [
+    "gceal-computer-low-level-e07",
+    "gceal-computer-low-level-e08",
+    "gceal-computer-low-level-e09",
+    "gceal-computer-low-level-e10",
+    "gceal-computer-low-level-e11",
+    "gceal-computer-low-level-e12"
+   ],
+   "selfCheck": [
+    "gceal-computer-floating-point-q1",
+    "gceal-computer-floating-point-q2",
+    "gceal-computer-floating-point-q3",
+    "gceal-computer-floating-point-q4",
+    "gceal-computer-floating-point-q5"
+   ],
+   "reviewNotes": [
+    "Floating-point format is an assumed teaching format (8-bit two's complement mantissa with point after first bit, 4-bit exponent). The Board may use a different size; all worked examples verified in Python.",
+    "Syllabus references, scope and level of difficulty are to be checked against the official text; all facts, formulas and worked examples to be verified by a teacher before release."
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Mantissa and exponent",
+     "md": "A **floating-point** number is stored as a **mantissa** (the significant digits) and an **exponent** (the power of 2), like scientific notation. Value = mantissa x 2^exponent. In this lesson: an 8-bit mantissa in two's complement with the binary point after the first bit (value from -1 to just under +1) and a 4-bit two's complement exponent. **Real formats (such as the IEEE standard) differ**; the Board will state its own format."
+    },
+    {
+     "type": "key",
+     "style": "methode",
+     "title": "Normalised form",
+     "md": "A positive mantissa is **normalised** when it starts 0.1 (between 0.5 and 1); a negative one starts 1.0. Normalising uses all the bits for precision: shift the mantissa left until it starts 01 or 10 and reduce the exponent by the same number of places."
+    },
+    {
+     "type": "illustration",
+     "figure": {
+      "kind": "shapes",
+      "w": 420,
+      "h": 170,
+      "items": [
+       {
+        "t": "text",
+        "x": 210,
+        "y": 22,
+        "text": "Mantissa 01101000, exponent 0011",
+        "size": 14,
+        "anchor": "middle",
+        "color": "ink",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 20,
+        "y": 50,
+        "w": 30,
+        "h": 34,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "lightblue"
+       },
+       {
+        "t": "text",
+        "x": 35,
+        "y": 73,
+        "text": "0",
+        "size": 14,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "rect",
+        "x": 50,
+        "y": 50,
+        "w": 30,
+        "h": 34,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "lightblue"
+       },
+       {
+        "t": "text",
+        "x": 65,
+        "y": 73,
+        "text": "1",
+        "size": 14,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "rect",
+        "x": 80,
+        "y": 50,
+        "w": 30,
+        "h": 34,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "lightblue"
+       },
+       {
+        "t": "text",
+        "x": 95,
+        "y": 73,
+        "text": "1",
+        "size": 14,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "rect",
+        "x": 110,
+        "y": 50,
+        "w": 30,
+        "h": 34,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "lightblue"
+       },
+       {
+        "t": "text",
+        "x": 125,
+        "y": 73,
+        "text": "0",
+        "size": 14,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "rect",
+        "x": 140,
+        "y": 50,
+        "w": 30,
+        "h": 34,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "lightblue"
+       },
+       {
+        "t": "text",
+        "x": 155,
+        "y": 73,
+        "text": "1",
+        "size": 14,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "rect",
+        "x": 170,
+        "y": 50,
+        "w": 30,
+        "h": 34,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "lightblue"
+       },
+       {
+        "t": "text",
+        "x": 185,
+        "y": 73,
+        "text": "0",
+        "size": 14,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "rect",
+        "x": 200,
+        "y": 50,
+        "w": 30,
+        "h": 34,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "lightblue"
+       },
+       {
+        "t": "text",
+        "x": 215,
+        "y": 73,
+        "text": "0",
+        "size": 14,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "rect",
+        "x": 230,
+        "y": 50,
+        "w": 30,
+        "h": 34,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "lightblue"
+       },
+       {
+        "t": "text",
+        "x": 245,
+        "y": 73,
+        "text": "0",
+        "size": 14,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "rect",
+        "x": 290,
+        "y": 50,
+        "w": 30,
+        "h": 34,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "lightorange"
+       },
+       {
+        "t": "text",
+        "x": 305,
+        "y": 73,
+        "text": "0",
+        "size": 14,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "rect",
+        "x": 320,
+        "y": 50,
+        "w": 30,
+        "h": 34,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "lightorange"
+       },
+       {
+        "t": "text",
+        "x": 335,
+        "y": 73,
+        "text": "0",
+        "size": 14,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "rect",
+        "x": 350,
+        "y": 50,
+        "w": 30,
+        "h": 34,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "lightorange"
+       },
+       {
+        "t": "text",
+        "x": 365,
+        "y": 73,
+        "text": "1",
+        "size": 14,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "rect",
+        "x": 380,
+        "y": 50,
+        "w": 30,
+        "h": 34,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "lightorange"
+       },
+       {
+        "t": "text",
+        "x": 395,
+        "y": 73,
+        "text": "1",
+        "size": 14,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "text",
+        "x": 135,
+        "y": 110,
+        "text": "mantissa",
+        "size": 13,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "text",
+        "x": 350,
+        "y": 110,
+        "text": "exponent",
+        "size": 13,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "text",
+        "x": 210,
+        "y": 150,
+        "text": "0.8125 x 2^3 = 6.5",
+        "size": 14,
+        "anchor": "middle",
+        "color": "ink"
+       }
+      ]
+     },
+     "caption": "Eight mantissa bits 01101000 in blue and four exponent bits 0011 in orange, giving 6.5.",
+     "alt": "Floating-point layout: mantissa 01101000 and exponent 0011 equal 6.5."
+    },
+    {
+     "type": "key",
+     "style": "methode",
+     "title": "Converting to denary",
+     "md": "Example: mantissa 0.1101000, exponent 0011. Mantissa = 0.5 + 0.25 + 0.0625 = 0.8125; exponent = 3, so the value = 0.8125 x 2^3 = 6.5. Moving the binary point 3 places right gives 110.1 = 6.5, the same."
+    },
+    {
+     "type": "key",
+     "style": "retenir",
+     "title": "Range and precision",
+     "md": "More **mantissa bits** give more **precision** (more accurate values); more **exponent bits** give a wider **range**. With a fixed total size, one is traded for the other. Some decimals (like 0.1) have no exact finite binary form, so they are stored with a small **rounding error**; comparing floats with = can fail."
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Common mistakes",
+     "md": "- Forgetting that the exponent is two's complement and can be negative.\n- Leaving a positive mantissa as 0.01... when it could be normalised.\n- Believing floating point stores every decimal exactly."
+    },
+    {
+     "type": "example",
+     "title": "Example 1 - To denary",
+     "statement": "Find the value of mantissa 01010100, exponent 0011.",
+     "steps": [
+      "Mantissa = 0.1010100 = 0.5 + 0.125 + 0.03125 = 0.65625.",
+      "Exponent 3: 0.65625 x 8 = 5.25."
+     ],
+     "answer": "5.25"
+    },
+    {
+     "type": "example",
+     "title": "Example 2 - To floating point",
+     "statement": "Represent -2.5 as normalised floating point (8-bit mantissa, 4-bit exponent).",
+     "steps": [
+      "2.5 = 10.1 in binary = 0.101 x 2^2. Negative mantissa: -0.625 = 1.0110000 (since -1 + 0.375 = -0.625).",
+      "Exponent 2 = 0010. Value: -0.625 x 4 = -2.5."
+     ],
+     "answer": "Mantissa 10110000, exponent 0010"
+    }
+   ],
+   "chapter": "gceal-computer-low-level"
+  }
+ ],
+ "exercises": [
+  {
+   "id": "gceal-computer-low-level-e01",
+   "kind": "mcq",
+   "tier": "application",
+   "lesson": "gceal-computer-assembly-addressing",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "In immediate addressing the operand is",
+   "choices": [
+    "the value to use",
+    "a register name only",
+    "a file name",
+    "an address of a pointer"
+   ],
+   "answer": 0,
+   "explanation": "Immediate means the value itself.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "gceal-computer-low-level"
+  },
+  {
+   "id": "gceal-computer-low-level-e02",
+   "kind": "mcq",
+   "tier": "application",
+   "lesson": "gceal-computer-assembly-addressing",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "An assembler translates",
+   "choices": [
+    "machine code into English",
+    "assembly language into machine code",
+    "Python into C",
+    "spreadsheets into databases"
+   ],
+   "answer": 1,
+   "explanation": "Assembler.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "gceal-computer-low-level"
+  },
+  {
+   "id": "gceal-computer-low-level-e03",
+   "kind": "truefalse",
+   "tier": "application",
+   "lesson": "gceal-computer-assembly-addressing",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Machine code for one CPU family runs unchanged on any other CPU.",
+   "answer": false,
+   "explanation": "Instruction sets differ.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "gceal-computer-low-level"
+  },
+  {
+   "id": "gceal-computer-low-level-e04",
+   "kind": "numeric",
+   "tier": "approfondissement",
+   "lesson": "gceal-computer-assembly-addressing",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Memory x = 7, y = 5. Program: LDA x; SUB y; STA z. What is z?",
+   "answer": 2,
+   "tolerance": 0,
+   "explanation": "7 - 5 = 2.",
+   "difficulty": 2,
+   "points": 3,
+   "chapter": "gceal-computer-low-level"
+  },
+  {
+   "id": "gceal-computer-low-level-e05",
+   "kind": "open",
+   "tier": "approfondissement",
+   "lesson": "gceal-computer-assembly-addressing",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "State two advantages and one disadvantage of assembly language compared with a high-level language.",
+   "model": "Advantages: fine control of hardware; compact and fast code. Disadvantage: hard to write and debug, not portable.",
+   "rubric": "1 mark per correct point (3).",
+   "explanation": "Advantages: fine control of hardware; compact and fast code. Disadvantage: hard to write and debug, not portable.",
+   "difficulty": 2,
+   "points": 3,
+   "chapter": "gceal-computer-low-level"
+  },
+  {
+   "id": "gceal-computer-low-level-e06",
+   "kind": "problem",
+   "tier": "examen",
+   "lesson": "gceal-computer-assembly-addressing",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Memory: address 10 holds 4, address 11 holds 9, address 12 holds 0. Program: LDA 10; ADD 11; ADD 10; STA 12; HLT.",
+   "difficulty": 2,
+   "parts": [
+    {
+     "kind": "numeric",
+     "points": 1,
+     "prompt": "ACC after ADD 11",
+     "answer": 13,
+     "tolerance": 0,
+     "explanation": "4 + 9 = 13.",
+     "id": "gceal-computer-low-level-e06-a"
+    },
+    {
+     "kind": "numeric",
+     "points": 1,
+     "prompt": "The value stored in address 12",
+     "answer": 17,
+     "tolerance": 0,
+     "explanation": "13 + 4 = 17.",
+     "id": "gceal-computer-low-level-e06-b"
+    },
+    {
+     "kind": "mcq",
+     "points": 1,
+     "prompt": "LDA 10 uses which addressing mode?",
+     "choices": [
+      "Relative",
+      "Indirect",
+      "Direct",
+      "Immediate"
+     ],
+     "answer": 2,
+     "explanation": "The operand is an address holding the value.",
+     "id": "gceal-computer-low-level-e06-c"
+    }
+   ],
+   "chapter": "gceal-computer-low-level"
+  },
+  {
+   "id": "gceal-computer-assembly-addressing-q1",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "gceal-computer-assembly-addressing",
+   "prompt": "An opcode specifies",
+   "choices": [
+    "the operation to perform",
+    "the file name",
+    "the screen colour",
+    "the network"
+   ],
+   "answer": 0,
+   "explanation": "Opcode.",
+   "chapter": "gceal-computer-low-level"
+  },
+  {
+   "id": "gceal-computer-assembly-addressing-q2",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "gceal-computer-assembly-addressing",
+   "prompt": "Indirect addressing means the operand is",
+   "choices": [
+    "the data itself",
+    "the address of a location holding the data's address",
+    "a register's colour",
+    "always zero"
+   ],
+   "answer": 1,
+   "explanation": "Indirect.",
+   "chapter": "gceal-computer-low-level"
+  },
+  {
+   "id": "gceal-computer-assembly-addressing-q3",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "gceal-computer-assembly-addressing",
+   "prompt": "HLT in the teaching set",
+   "choices": [
+    "adds",
+    "stops the program",
+    "loads",
+    "branches"
+   ],
+   "answer": 1,
+   "explanation": "Halt.",
+   "chapter": "gceal-computer-low-level"
+  },
+  {
+   "id": "gceal-computer-assembly-addressing-q4",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "gceal-computer-assembly-addressing",
+   "prompt": "BRZ k jumps when",
+   "choices": [
+    "never",
+    "always",
+    "ACC is one",
+    "ACC is zero"
+   ],
+   "answer": 3,
+   "explanation": "Branch if zero.",
+   "chapter": "gceal-computer-low-level"
+  },
+  {
+   "id": "gceal-computer-assembly-addressing-q5",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "gceal-computer-assembly-addressing",
+   "prompt": "The assembler produces",
+   "choices": [
+    "pseudocode",
+    "flowcharts",
+    "machine code",
+    "SQL"
+   ],
+   "answer": 2,
+   "explanation": "Output of assembler.",
+   "chapter": "gceal-computer-low-level"
+  },
+  {
+   "id": "gceal-computer-low-level-e07",
+   "kind": "numeric",
+   "tier": "application",
+   "lesson": "gceal-computer-floating-point",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Value of mantissa 01101000, exponent 0011",
+   "answer": 6.5,
+   "tolerance": 0.001,
+   "explanation": "0.8125 x 8 = 6.5.",
+   "difficulty": 1,
+   "points": 2,
+   "chapter": "gceal-computer-low-level"
+  },
+  {
+   "id": "gceal-computer-low-level-e08",
+   "kind": "mcq",
+   "tier": "application",
+   "lesson": "gceal-computer-floating-point",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "More bits in the exponent mainly increase the",
+   "choices": [
+    "precision only",
+    "colour depth",
+    "range of numbers",
+    "speed only"
+   ],
+   "answer": 2,
+   "explanation": "Range.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "gceal-computer-low-level"
+  },
+  {
+   "id": "gceal-computer-low-level-e09",
+   "kind": "truefalse",
+   "tier": "application",
+   "lesson": "gceal-computer-floating-point",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "A normalised positive mantissa starts with 0.1.",
+   "answer": true,
+   "explanation": "That is the definition for positive mantissa.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "gceal-computer-low-level"
+  },
+  {
+   "id": "gceal-computer-low-level-e10",
+   "kind": "numeric",
+   "tier": "approfondissement",
+   "lesson": "gceal-computer-floating-point",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Value of mantissa 01000000, exponent 1110 (the exponent 1110 is -2)",
+   "answer": 0.125,
+   "tolerance": 0.0001,
+   "explanation": "0.5 x 2^-2 = 0.125.",
+   "difficulty": 2,
+   "points": 3,
+   "chapter": "gceal-computer-low-level"
+  },
+  {
+   "id": "gceal-computer-low-level-e11",
+   "kind": "open",
+   "tier": "approfondissement",
+   "lesson": "gceal-computer-floating-point",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Explain why 0.1 cannot be stored exactly in binary floating point, and give one consequence.",
+   "model": "In binary 0.1 is a recurring fraction (0.000110011...), so only an approximation can be stored. Consequence: calculations such as 0.1 + 0.2 may not equal 0.3 exactly, so equality tests on floats are unreliable.",
+   "rubric": "1 mark recurring/approximation; 1 mark consequence; 1 mark example.",
+   "explanation": "In binary 0.1 is a recurring fraction (0.000110011...), so only an approximation can be stored. Consequence: calculations such as 0.1 + 0.2 may not equal 0.3 exactly, so equality tests on floats are unreliable.",
+   "difficulty": 2,
+   "points": 3,
+   "chapter": "gceal-computer-low-level"
+  },
+  {
+   "id": "gceal-computer-low-level-e12",
+   "kind": "problem",
+   "tier": "examen",
+   "lesson": "gceal-computer-floating-point",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Floating-point (8-bit mantissa, 4-bit exponent, as in the lesson).",
+   "difficulty": 2,
+   "parts": [
+    {
+     "kind": "numeric",
+     "points": 1,
+     "prompt": "Value of mantissa 10110000, exponent 0010",
+     "answer": -2.5,
+     "tolerance": 0.001,
+     "explanation": "-0.625 x 4 = -2.5.",
+     "id": "gceal-computer-low-level-e12-a"
+    },
+    {
+     "kind": "numeric",
+     "points": 1,
+     "prompt": "Largest positive value: mantissa 01111111, exponent 0111",
+     "answer": 127,
+     "tolerance": 0.001,
+     "explanation": "(127/128) x 128 = 127.",
+     "id": "gceal-computer-low-level-e12-b"
+    },
+    {
+     "kind": "open",
+     "points": 2,
+     "prompt": "State what would be gained and lost by using 6 mantissa bits and 6 exponent bits instead.",
+     "model": "Gain: wider range of numbers. Loss: lower precision.",
+     "rubric": "1 mark each.",
+     "explanation": "Gain: wider range of numbers. Loss: lower precision.",
+     "id": "gceal-computer-low-level-e12-c"
+    }
+   ],
+   "chapter": "gceal-computer-low-level"
+  },
+  {
+   "id": "gceal-computer-floating-point-q1",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "gceal-computer-floating-point",
+   "prompt": "The mantissa holds",
+   "choices": [
+    "the opcode",
+    "the significant digits",
+    "the address",
+    "the power of 2"
+   ],
+   "answer": 1,
+   "explanation": "Mantissa.",
+   "chapter": "gceal-computer-low-level"
+  },
+  {
+   "id": "gceal-computer-floating-point-q2",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "gceal-computer-floating-point",
+   "prompt": "A normalised negative mantissa starts",
+   "choices": [
+    "01",
+    "00",
+    "10",
+    "11"
+   ],
+   "answer": 2,
+   "explanation": "1.0...",
+   "chapter": "gceal-computer-low-level"
+  },
+  {
+   "id": "gceal-computer-floating-point-q3",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "gceal-computer-floating-point",
+   "prompt": "Rounding errors occur because",
+   "choices": [
+    "CPUs are slow",
+    "RAM is small",
+    "ROM is volatile",
+    "some decimals have no exact binary form"
+   ],
+   "answer": 3,
+   "explanation": "Binary fractions.",
+   "chapter": "gceal-computer-low-level"
+  },
+  {
+   "id": "gceal-computer-floating-point-q4",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "gceal-computer-floating-point",
+   "prompt": "More mantissa bits give more",
+   "choices": [
+    "colour",
+    "volume",
+    "precision",
+    "range only"
+   ],
+   "answer": 2,
+   "explanation": "Precision.",
+   "chapter": "gceal-computer-low-level"
+  },
+  {
+   "id": "gceal-computer-floating-point-q5",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "gceal-computer-floating-point",
+   "prompt": "Value = mantissa x",
+   "choices": [
+    "the exponent plus 2",
+    "2 raised to the exponent",
+    "10 raised to the exponent",
+    "the mantissa again"
+   ],
+   "answer": 1,
+   "explanation": "Binary floating point.",
+   "chapter": "gceal-computer-low-level"
+  },
+  {
+   "id": "gceal-computer-low-level-m01",
+   "kind": "numeric",
+   "tier": "examen",
+   "lesson": "gceal-computer-floating-point",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Value of floating-point mantissa 01101000 with exponent 0011 (8-bit mantissa, binary point after the first bit)",
+   "answer": 6.5,
+   "tolerance": 0.001,
+   "explanation": "0.8125 x 8 = 6.5.",
+   "difficulty": 3,
+   "points": 1,
+   "chapter": "gceal-computer-low-level"
+  }
+ ]
+}

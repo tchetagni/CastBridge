@@ -1,0 +1,706 @@
+{
+ "chapter": "gceal-computer-databases",
+ "lessons": [
+  {
+   "id": "gceal-computer-normalisation-joins",
+   "title": "Entity relationships, normalisation and SQL joins",
+   "minutes": 35,
+   "programRef": "Cameroon GCE Board — Advanced Level Computer Science syllabus (Upper Sixth part) — to be checked against the official text",
+   "status": "draft",
+   "author": "CastBridge (AI draft)",
+   "source": "Original writing following the Cameroonian curriculum; to be reviewed by a teacher",
+   "objectives": [
+    "Describe one-to-many and many-to-many relationships",
+    "Explain 1NF, 2NF and 3NF",
+    "Normalise a table by removing redundancy",
+    "Write SQL joins and grouped queries"
+   ],
+   "prerequisites": [],
+   "exercises": [
+    "gceal-computer-databases-e01",
+    "gceal-computer-databases-e02",
+    "gceal-computer-databases-e03",
+    "gceal-computer-databases-e04",
+    "gceal-computer-databases-e05",
+    "gceal-computer-databases-e06"
+   ],
+   "selfCheck": [
+    "gceal-computer-normalisation-joins-q1",
+    "gceal-computer-normalisation-joins-q2",
+    "gceal-computer-normalisation-joins-q3",
+    "gceal-computer-normalisation-joins-q4",
+    "gceal-computer-normalisation-joins-q5"
+   ],
+   "reviewNotes": [
+    "All SQL and totals checked in SQLite. Normal-form wording is the usual informal one; exam answers may require formal dependency language.",
+    "Syllabus references, scope and level of difficulty are to be checked against the official text; all facts, formulas and worked examples to be verified by a teacher before release."
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Relationships",
+     "md": "An **entity** is a thing about which data is stored (Customer, Product). Relationships: **one-to-one**, **one-to-many** (one customer places many orders) and **many-to-many** (orders and products), which is resolved with a **link table** holding two foreign keys. An **entity-relationship (E-R) diagram** shows entities and relationships."
+    },
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Normal forms",
+     "md": "**1NF**: every field holds one atomic value (no repeating groups or lists in a cell) and each record is unique. **2NF**: in 1NF, and every non-key field depends on the **whole** primary key (no partial dependency; relevant for composite keys). **3NF**: in 2NF, and no non-key field depends on **another non-key field** (no transitive dependency). Informally: 'the key, the whole key and nothing but the key'."
+    },
+    {
+     "type": "illustration",
+     "figure": {
+      "kind": "shapes",
+      "w": 420,
+      "h": 198,
+      "items": [
+       {
+        "t": "text",
+        "x": 210.0,
+        "y": 24,
+        "text": "Orders table (normalised)",
+        "size": 15,
+        "anchor": "middle",
+        "color": "ink",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 10.0,
+        "y": 40,
+        "w": 100.0,
+        "h": 28,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "lightblue"
+       },
+       {
+        "t": "text",
+        "x": 60.0,
+        "y": 59,
+        "text": "OID",
+        "size": 13,
+        "anchor": "middle",
+        "color": "ink",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 110.0,
+        "y": 40,
+        "w": 100.0,
+        "h": 28,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "lightgreen"
+       },
+       {
+        "t": "text",
+        "x": 160.0,
+        "y": 59,
+        "text": "CID",
+        "size": 13,
+        "anchor": "middle",
+        "color": "ink",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 210.0,
+        "y": 40,
+        "w": 100.0,
+        "h": 28,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "lightyellow"
+       },
+       {
+        "t": "text",
+        "x": 260.0,
+        "y": 59,
+        "text": "PID",
+        "size": 13,
+        "anchor": "middle",
+        "color": "ink",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 310.0,
+        "y": 40,
+        "w": 100.0,
+        "h": 28,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "lightorange"
+       },
+       {
+        "t": "text",
+        "x": 360.0,
+        "y": 59,
+        "text": "Qty",
+        "size": 13,
+        "anchor": "middle",
+        "color": "ink",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 10.0,
+        "y": 68,
+        "w": 100.0,
+        "h": 28,
+        "stroke": "grey",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 60.0,
+        "y": 87,
+        "text": "100",
+        "size": 13,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "rect",
+        "x": 110.0,
+        "y": 68,
+        "w": 100.0,
+        "h": 28,
+        "stroke": "grey",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 160.0,
+        "y": 87,
+        "text": "1",
+        "size": 13,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "rect",
+        "x": 210.0,
+        "y": 68,
+        "w": 100.0,
+        "h": 28,
+        "stroke": "grey",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 260.0,
+        "y": 87,
+        "text": "10",
+        "size": 13,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "rect",
+        "x": 310.0,
+        "y": 68,
+        "w": 100.0,
+        "h": 28,
+        "stroke": "grey",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 360.0,
+        "y": 87,
+        "text": "3",
+        "size": 13,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "rect",
+        "x": 10.0,
+        "y": 96,
+        "w": 100.0,
+        "h": 28,
+        "stroke": "grey",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 60.0,
+        "y": 115,
+        "text": "101",
+        "size": 13,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "rect",
+        "x": 110.0,
+        "y": 96,
+        "w": 100.0,
+        "h": 28,
+        "stroke": "grey",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 160.0,
+        "y": 115,
+        "text": "1",
+        "size": 13,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "rect",
+        "x": 210.0,
+        "y": 96,
+        "w": 100.0,
+        "h": 28,
+        "stroke": "grey",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 260.0,
+        "y": 115,
+        "text": "11",
+        "size": 13,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "rect",
+        "x": 310.0,
+        "y": 96,
+        "w": 100.0,
+        "h": 28,
+        "stroke": "grey",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 360.0,
+        "y": 115,
+        "text": "1",
+        "size": 13,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "rect",
+        "x": 10.0,
+        "y": 124,
+        "w": 100.0,
+        "h": 28,
+        "stroke": "grey",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 60.0,
+        "y": 143,
+        "text": "102",
+        "size": 13,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "rect",
+        "x": 110.0,
+        "y": 124,
+        "w": 100.0,
+        "h": 28,
+        "stroke": "grey",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 160.0,
+        "y": 143,
+        "text": "2",
+        "size": 13,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "rect",
+        "x": 210.0,
+        "y": 124,
+        "w": 100.0,
+        "h": 28,
+        "stroke": "grey",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 260.0,
+        "y": 143,
+        "text": "10",
+        "size": 13,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "rect",
+        "x": 310.0,
+        "y": 124,
+        "w": 100.0,
+        "h": 28,
+        "stroke": "grey",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 360.0,
+        "y": 143,
+        "text": "2",
+        "size": 13,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "rect",
+        "x": 10.0,
+        "y": 152,
+        "w": 100.0,
+        "h": 28,
+        "stroke": "grey",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 60.0,
+        "y": 171,
+        "text": "103",
+        "size": 13,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "rect",
+        "x": 110.0,
+        "y": 152,
+        "w": 100.0,
+        "h": 28,
+        "stroke": "grey",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 160.0,
+        "y": 171,
+        "text": "3",
+        "size": 13,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "rect",
+        "x": 210.0,
+        "y": 152,
+        "w": 100.0,
+        "h": 28,
+        "stroke": "grey",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 260.0,
+        "y": 171,
+        "text": "12",
+        "size": 13,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "rect",
+        "x": 310.0,
+        "y": 152,
+        "w": 100.0,
+        "h": 28,
+        "stroke": "grey",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 360.0,
+        "y": 171,
+        "text": "5",
+        "size": 13,
+        "anchor": "middle",
+        "color": "ink"
+       }
+      ]
+     },
+     "caption": "The Orders table with order, customer and product identifiers and quantity.",
+     "alt": "Orders table with four rows: OID, CID, PID and Qty."
+    },
+    {
+     "type": "key",
+     "style": "methode",
+     "title": "Normalising an example",
+     "md": "Unnormalised: Orders(OrderID, CustomerName, CustomerTown, ProductName, Price, Qty). Customer details depend on the customer, product details on the product. Split into Customer(CID, CName, Town), Product(PID, PName, Price) and Orders(OID, CID, PID, Qty) with foreign keys: no duplicated customer or product data and each fact is stored once."
+    },
+    {
+     "type": "key",
+     "style": "methode",
+     "title": "SQL joins",
+     "md": "SELECT CName, PName, Qty \\* Price FROM Orders JOIN Customer ON Orders.CID = Customer.CID JOIN Product ON Orders.PID = Product.PID; Add GROUP BY CName with SUM(...) for totals per customer. Aggregates ignore NULL."
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Common mistakes",
+     "md": "- Storing a calculated value (Qty x Price) that can be derived.\n- A join without the ON condition multiplies rows (every combination).\n- 'Repeating a customer name' is a sign that data is not normalised.\n- Using a name instead of an ID as a foreign key."
+    },
+    {
+     "type": "example",
+     "title": "Example 1 - Total per order",
+     "statement": "Product prices: 10 Rice 600, 11 Oil 1500, 12 Sugar 800. Order 100 is customer 1, product 10, quantity 3. Compute the line total.",
+     "steps": [
+      "Join Orders to Product on PID: product 10 is Rice at 600.",
+      "Line total = Qty x Price = 3 x 600 = 1800 FCFA."
+     ],
+     "answer": "1800 FCFA"
+    },
+    {
+     "type": "example",
+     "title": "Example 2 - Total per customer",
+     "statement": "Customer 1 (Ada) has orders 100 (Rice, 3) and 101 (Oil, 1). What does SUM(Qty\\*Price) GROUP BY CName give for Ada?",
+     "steps": [
+      "Order 100: 3 x 600 = 1800. Order 101: 1 x 1500 = 1500.",
+      "Total = 3300."
+     ],
+     "answer": "3300 FCFA"
+    }
+   ],
+   "chapter": "gceal-computer-databases"
+  }
+ ],
+ "exercises": [
+  {
+   "id": "gceal-computer-databases-e01",
+   "kind": "mcq",
+   "tier": "application",
+   "lesson": "gceal-computer-normalisation-joins",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Resolving a many-to-many relationship needs",
+   "choices": [
+    "no keys",
+    "a bigger table",
+    "a spreadsheet",
+    "a link table"
+   ],
+   "answer": 3,
+   "explanation": "Link table.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "gceal-computer-databases"
+  },
+  {
+   "id": "gceal-computer-databases-e02",
+   "kind": "mcq",
+   "tier": "application",
+   "lesson": "gceal-computer-normalisation-joins",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "1NF requires",
+   "choices": [
+    "only text",
+    "atomic values in each field",
+    "no relationships",
+    "no primary key"
+   ],
+   "answer": 1,
+   "explanation": "Atomic.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "gceal-computer-databases"
+  },
+  {
+   "id": "gceal-computer-databases-e03",
+   "kind": "truefalse",
+   "tier": "application",
+   "lesson": "gceal-computer-normalisation-joins",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "3NF removes dependencies between non-key fields.",
+   "answer": true,
+   "explanation": "Transitive dependencies.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "gceal-computer-databases"
+  },
+  {
+   "id": "gceal-computer-databases-e04",
+   "kind": "numeric",
+   "tier": "approfondissement",
+   "lesson": "gceal-computer-normalisation-joins",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Using the data: line total of Nina's order (customer 3, Sugar 800, quantity 5)",
+   "answer": 4000,
+   "tolerance": 0,
+   "explanation": "5 x 800 = 4000.",
+   "difficulty": 2,
+   "points": 3,
+   "chapter": "gceal-computer-databases"
+  },
+  {
+   "id": "gceal-computer-databases-e05",
+   "kind": "open",
+   "tier": "approfondissement",
+   "lesson": "gceal-computer-normalisation-joins",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "A table Student(ID, Name, ClassName, ClassTeacher) repeats the teacher for each student. Which normal form is broken and how do you fix it?",
+   "model": "3NF is broken because ClassTeacher depends on ClassName (a non-key field). Create a Class(ClassName, ClassTeacher) table and keep ClassName in Student as a foreign key.",
+   "rubric": "1 mark 3NF; 1 mark reason; 1 mark fix.",
+   "explanation": "3NF is broken because ClassTeacher depends on ClassName (a non-key field). Create a Class(ClassName, ClassTeacher) table and keep ClassName in Student as a foreign key.",
+   "difficulty": 2,
+   "points": 3,
+   "chapter": "gceal-computer-databases"
+  },
+  {
+   "id": "gceal-computer-databases-e06",
+   "kind": "problem",
+   "tier": "examen",
+   "lesson": "gceal-computer-normalisation-joins",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Customer(CID, CName, Town), Product(PID, PName, Price), Orders(OID, CID, PID, Qty) as in the lesson.",
+   "difficulty": 2,
+   "parts": [
+    {
+     "kind": "numeric",
+     "points": 1,
+     "prompt": "Total for customer Paul: SUM(Qty x Price)",
+     "answer": 1200,
+     "tolerance": 0,
+     "explanation": "Paul ordered Rice twice: 2 x 600 = 1200.",
+     "id": "gceal-computer-databases-e06-a"
+    },
+    {
+     "kind": "mcq",
+     "points": 1,
+     "prompt": "Which keys are foreign keys in Orders?",
+     "choices": [
+      "CID and PID",
+      "OID only",
+      "Qty",
+      "PName"
+     ],
+     "answer": 0,
+     "explanation": "They link to Customer and Product.",
+     "id": "gceal-computer-databases-e06-b"
+    },
+    {
+     "kind": "open",
+     "points": 2,
+     "prompt": "Why is Qty x Price not stored as a field?",
+     "model": "It can be calculated, so storing it duplicates data and may become inconsistent if the price changes.",
+     "rubric": "1 mark each reason.",
+     "explanation": "It can be calculated, so storing it duplicates data and may become inconsistent if the price changes.",
+     "id": "gceal-computer-databases-e06-c"
+    }
+   ],
+   "chapter": "gceal-computer-databases"
+  },
+  {
+   "id": "gceal-computer-normalisation-joins-q1",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "gceal-computer-normalisation-joins",
+   "prompt": "An entity is",
+   "choices": [
+    "a CPU register",
+    "a network cable",
+    "a loop",
+    "something data is stored about"
+   ],
+   "answer": 3,
+   "explanation": "Entity.",
+   "chapter": "gceal-computer-databases"
+  },
+  {
+   "id": "gceal-computer-normalisation-joins-q2",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "gceal-computer-normalisation-joins",
+   "prompt": "A composite key",
+   "choices": [
+    "is always a name",
+    "has no fields",
+    "uses more than one field",
+    "is a foreign table"
+   ],
+   "answer": 2,
+   "explanation": "Composite.",
+   "chapter": "gceal-computer-databases"
+  },
+  {
+   "id": "gceal-computer-normalisation-joins-q3",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "gceal-computer-normalisation-joins",
+   "prompt": "2NF removes",
+   "choices": [
+    "SQL",
+    "all tables",
+    "primary keys",
+    "partial dependencies on part of a composite key"
+   ],
+   "answer": 3,
+   "explanation": "Partial.",
+   "chapter": "gceal-computer-databases"
+  },
+  {
+   "id": "gceal-computer-normalisation-joins-q4",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "gceal-computer-normalisation-joins",
+   "prompt": "A join without ON gives",
+   "choices": [
+    "one row",
+    "no rows",
+    "every combination of rows",
+    "an error always"
+   ],
+   "answer": 2,
+   "explanation": "Cartesian product.",
+   "chapter": "gceal-computer-databases"
+  },
+  {
+   "id": "gceal-computer-normalisation-joins-q5",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "gceal-computer-normalisation-joins",
+   "prompt": "Redundant data can cause",
+   "choices": [
+    "update inconsistencies",
+    "smaller screens",
+    "faster CPUs",
+    "no problems"
+   ],
+   "answer": 0,
+   "explanation": "Anomalies.",
+   "chapter": "gceal-computer-databases"
+  },
+  {
+   "id": "gceal-computer-databases-m01",
+   "kind": "truefalse",
+   "tier": "examen",
+   "lesson": "gceal-computer-normalisation-joins",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "A table is in 3NF if no non-key field depends on another non-key field (and it is in 2NF).",
+   "answer": true,
+   "explanation": "That is the 3NF condition.",
+   "difficulty": 3,
+   "points": 1,
+   "chapter": "gceal-computer-databases"
+  }
+ ]
+}

@@ -1,0 +1,1148 @@
+{
+ "chapter": "lower6-computer-architecture",
+ "lessons": [
+  {
+   "id": "lower6-computer-cpu-fde",
+   "title": "The CPU and the fetch-decode-execute cycle",
+   "minutes": 30,
+   "programRef": "Cameroon GCE Board — Advanced Level Computer Science syllabus (Lower Sixth part) — to be checked against the official text",
+   "status": "draft",
+   "author": "CastBridge (AI draft)",
+   "source": "Original writing following the Cameroonian curriculum; to be reviewed by a teacher",
+   "objectives": [
+    "Name the components of the CPU and their roles",
+    "Describe the buses",
+    "Describe the fetch-decode-execute cycle step by step",
+    "Explain how clock speed, cores and cache affect performance"
+   ],
+   "prerequisites": [],
+   "exercises": [
+    "lower6-computer-architecture-e01",
+    "lower6-computer-architecture-e02",
+    "lower6-computer-architecture-e03",
+    "lower6-computer-architecture-e04",
+    "lower6-computer-architecture-e05",
+    "lower6-computer-architecture-e06"
+   ],
+   "selfCheck": [
+    "lower6-computer-cpu-fde-q1",
+    "lower6-computer-cpu-fde-q2",
+    "lower6-computer-cpu-fde-q3",
+    "lower6-computer-cpu-fde-q4",
+    "lower6-computer-cpu-fde-q5"
+   ],
+   "reviewNotes": [
+    "Simplified Von Neumann model with named registers; the syllabus may use slightly different names (e.g. IR instead of CIR). Check.",
+    "Syllabus references, scope and level of difficulty are to be checked against the official text; all facts, formulas and worked examples to be verified by a teacher before release."
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Inside the CPU",
+     "md": "The **ALU** (arithmetic logic unit) performs calculations and comparisons. The **control unit (CU)** decodes instructions and coordinates the other parts. **Registers** are very fast storage inside the CPU: the **program counter (PC)** holds the address of the next instruction; the **memory address register (MAR)** holds the address being accessed; the **memory data register (MDR)** holds data just read or to be written; the **current instruction register (CIR)** holds the instruction being decoded; the **accumulator (ACC)** holds results."
+    },
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Buses",
+     "md": "A **bus** is a set of wires carrying signals. The **address bus** carries memory addresses (one way, from the CPU). The **data bus** carries data and instructions (both ways). The **control bus** carries control signals such as read and write."
+    },
+    {
+     "type": "illustration",
+     "figure": {
+      "kind": "shapes",
+      "w": 420,
+      "h": 205,
+      "items": [
+       {
+        "t": "text",
+        "x": 210,
+        "y": 20,
+        "text": "Simplified CPU and memory",
+        "size": 15,
+        "anchor": "middle",
+        "color": "ink",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 20,
+        "y": 40,
+        "w": 270,
+        "h": 150,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "lightyellow"
+       },
+       {
+        "t": "text",
+        "x": 155,
+        "y": 56,
+        "text": "CPU",
+        "size": 13,
+        "anchor": "middle",
+        "color": "ink",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 35,
+        "y": 70,
+        "w": 60,
+        "h": 30,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "lightblue",
+        "radius": 4
+       },
+       {
+        "t": "text",
+        "x": 65,
+        "y": 90,
+        "text": "PC",
+        "size": 13,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "rect",
+        "x": 105,
+        "y": 70,
+        "w": 60,
+        "h": 30,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "lightblue",
+        "radius": 4
+       },
+       {
+        "t": "text",
+        "x": 135,
+        "y": 90,
+        "text": "MAR",
+        "size": 13,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "rect",
+        "x": 175,
+        "y": 70,
+        "w": 60,
+        "h": 30,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "lightblue",
+        "radius": 4
+       },
+       {
+        "t": "text",
+        "x": 205,
+        "y": 90,
+        "text": "MDR",
+        "size": 13,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "rect",
+        "x": 35,
+        "y": 110,
+        "w": 60,
+        "h": 30,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "lightblue",
+        "radius": 4
+       },
+       {
+        "t": "text",
+        "x": 65,
+        "y": 130,
+        "text": "CIR",
+        "size": 13,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "rect",
+        "x": 105,
+        "y": 110,
+        "w": 60,
+        "h": 30,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "lightblue",
+        "radius": 4
+       },
+       {
+        "t": "text",
+        "x": 135,
+        "y": 130,
+        "text": "ACC",
+        "size": 13,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "rect",
+        "x": 35,
+        "y": 150,
+        "w": 90,
+        "h": 30,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "lightgreen",
+        "radius": 4
+       },
+       {
+        "t": "text",
+        "x": 80,
+        "y": 170,
+        "text": "CU",
+        "size": 13,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "rect",
+        "x": 135,
+        "y": 150,
+        "w": 90,
+        "h": 30,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "lightgreen",
+        "radius": 4
+       },
+       {
+        "t": "text",
+        "x": 180,
+        "y": 170,
+        "text": "ALU",
+        "size": 13,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "rect",
+        "x": 330,
+        "y": 80,
+        "w": 80,
+        "h": 80,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "lightorange",
+        "radius": 6
+       },
+       {
+        "t": "text",
+        "x": 370,
+        "y": 125,
+        "text": "Memory",
+        "size": 13,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "line",
+        "x1": 290,
+        "y1": 95,
+        "x2": 330,
+        "y2": 95,
+        "color": "ink",
+        "width": 2,
+        "arrow": "both"
+       },
+       {
+        "t": "line",
+        "x1": 290,
+        "y1": 120,
+        "x2": 330,
+        "y2": 120,
+        "color": "ink",
+        "width": 2,
+        "arrow": "both"
+       },
+       {
+        "t": "text",
+        "x": 310,
+        "y": 70,
+        "text": "buses",
+        "size": 12,
+        "anchor": "middle",
+        "color": "ink"
+       }
+      ]
+     },
+     "caption": "The CPU with its registers PC, MAR, MDR, CIR and ACC, the control unit and ALU, joined by buses to memory.",
+     "alt": "Block diagram of a CPU containing registers, control unit and ALU connected to memory by buses."
+    },
+    {
+     "type": "key",
+     "style": "methode",
+     "title": "Fetch-decode-execute",
+     "md": "**Fetch**: the address in the PC is copied to the MAR; the instruction at that address travels to the MDR; it is copied to the CIR; the PC is incremented. **Decode**: the CU interprets the instruction in the CIR. **Execute**: the instruction is carried out (for example the ALU adds, or data is moved). Then the cycle repeats."
+    },
+    {
+     "type": "key",
+     "style": "retenir",
+     "title": "Performance",
+     "md": "Higher **clock speed** (GHz) means more cycles per second. More **cores** allow several instructions to be processed in parallel (when the software can use them). **Cache** is small, fast memory close to the CPU that holds frequently used data. Performance depends on all of these together, not on clock speed alone."
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Common mistakes",
+     "md": "- The PC holds an address, not the instruction itself.\n- The PC is incremented during the fetch stage, before execution.\n- Doubling cores does not always double speed.\n- Registers are in the CPU; RAM is outside it."
+    },
+    {
+     "type": "example",
+     "title": "Example 1 - One fetch",
+     "statement": "PC = 100 and memory address 100 contains the instruction ADD 5. Describe the fetch stage.",
+     "steps": [
+      "PC (100) is copied to MAR. The contents of address 100 (ADD 5) are read into MDR and then copied to CIR.",
+      "The PC is incremented to 101, ready for the next fetch."
+     ],
+     "answer": "CIR = ADD 5, PC = 101"
+    },
+    {
+     "type": "example",
+     "title": "Example 2 - Performance",
+     "statement": "Computer A: 2 GHz, 2 cores. Computer B: 3 GHz, 1 core. Which is certain to be faster for a program that uses only one core?",
+     "steps": [
+      "A program using one core cannot use the second core of A.",
+      "Then clock speed matters more: B at 3 GHz is likely faster (other factors such as cache and design also count)."
+     ],
+     "answer": "B is likely faster for a single-core program."
+    }
+   ],
+   "chapter": "lower6-computer-architecture"
+  },
+  {
+   "id": "lower6-computer-memory-storage",
+   "title": "Memory and storage",
+   "minutes": 25,
+   "programRef": "Cameroon GCE Board — Advanced Level Computer Science syllabus (Lower Sixth part) — to be checked against the official text",
+   "status": "draft",
+   "author": "CastBridge (AI draft)",
+   "source": "Original writing following the Cameroonian curriculum; to be reviewed by a teacher",
+   "objectives": [
+    "Compare RAM, ROM and cache",
+    "Compare magnetic, optical and solid-state storage",
+    "Explain virtual memory",
+    "Choose suitable storage for a task"
+   ],
+   "prerequisites": [],
+   "exercises": [
+    "lower6-computer-architecture-e07",
+    "lower6-computer-architecture-e08",
+    "lower6-computer-architecture-e09",
+    "lower6-computer-architecture-e10",
+    "lower6-computer-architecture-e11",
+    "lower6-computer-architecture-e12"
+   ],
+   "selfCheck": [
+    "lower6-computer-memory-storage-q1",
+    "lower6-computer-memory-storage-q2",
+    "lower6-computer-memory-storage-q3",
+    "lower6-computer-memory-storage-q4",
+    "lower6-computer-memory-storage-q5"
+   ],
+   "reviewNotes": [
+    "Cache levels (L1/L2/L3) deliberately omitted. Cost/speed statements are relative, not figures.",
+    "Syllabus references, scope and level of difficulty are to be checked against the official text; all facts, formulas and worked examples to be verified by a teacher before release."
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Primary memory",
+     "md": "**RAM** is read/write, **volatile** and holds the programs and data in use. **ROM** is read-only and **non-volatile**; it holds start-up instructions (the boot program). **Cache** is faster than RAM and sits between the CPU and RAM. The faster a memory is, the more expensive it is per byte and the smaller it tends to be."
+    },
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Secondary storage",
+     "md": "**Magnetic** (hard disk): large capacity, cheap, has moving parts. **Optical** (CD/DVD/Blu-ray): data read with a laser, used for distribution and archives. **Solid-state** (SSD, flash drive, memory card): no moving parts, fast, quiet, more robust, costlier per byte."
+    },
+    {
+     "type": "illustration",
+     "figure": {
+      "kind": "shapes",
+      "w": 420,
+      "h": 198,
+      "items": [
+       {
+        "t": "text",
+        "x": 210.0,
+        "y": 24,
+        "text": "Memory and storage: speed and size",
+        "size": 15,
+        "anchor": "middle",
+        "color": "ink",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 10.0,
+        "y": 40,
+        "w": 133.33333333333334,
+        "h": 28,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "lightblue"
+       },
+       {
+        "t": "text",
+        "x": 76.66666666666667,
+        "y": 59,
+        "text": "Type",
+        "size": 13,
+        "anchor": "middle",
+        "color": "ink",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 143.33333333333334,
+        "y": 40,
+        "w": 133.33333333333334,
+        "h": 28,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "lightgreen"
+       },
+       {
+        "t": "text",
+        "x": 210.0,
+        "y": 59,
+        "text": "Speed",
+        "size": 13,
+        "anchor": "middle",
+        "color": "ink",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 276.6666666666667,
+        "y": 40,
+        "w": 133.33333333333334,
+        "h": 28,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "lightyellow"
+       },
+       {
+        "t": "text",
+        "x": 343.33333333333337,
+        "y": 59,
+        "text": "Size",
+        "size": 13,
+        "anchor": "middle",
+        "color": "ink",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 10.0,
+        "y": 68,
+        "w": 133.33333333333334,
+        "h": 28,
+        "stroke": "grey",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 76.66666666666667,
+        "y": 87,
+        "text": "Registers",
+        "size": 13,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "rect",
+        "x": 143.33333333333334,
+        "y": 68,
+        "w": 133.33333333333334,
+        "h": 28,
+        "stroke": "grey",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 210.0,
+        "y": 87,
+        "text": "Fastest",
+        "size": 13,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "rect",
+        "x": 276.6666666666667,
+        "y": 68,
+        "w": 133.33333333333334,
+        "h": 28,
+        "stroke": "grey",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 343.33333333333337,
+        "y": 87,
+        "text": "Tiny",
+        "size": 13,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "rect",
+        "x": 10.0,
+        "y": 96,
+        "w": 133.33333333333334,
+        "h": 28,
+        "stroke": "grey",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 76.66666666666667,
+        "y": 115,
+        "text": "Cache",
+        "size": 13,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "rect",
+        "x": 143.33333333333334,
+        "y": 96,
+        "w": 133.33333333333334,
+        "h": 28,
+        "stroke": "grey",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 210.0,
+        "y": 115,
+        "text": "Very fast",
+        "size": 13,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "rect",
+        "x": 276.6666666666667,
+        "y": 96,
+        "w": 133.33333333333334,
+        "h": 28,
+        "stroke": "grey",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 343.33333333333337,
+        "y": 115,
+        "text": "Small",
+        "size": 13,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "rect",
+        "x": 10.0,
+        "y": 124,
+        "w": 133.33333333333334,
+        "h": 28,
+        "stroke": "grey",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 76.66666666666667,
+        "y": 143,
+        "text": "RAM",
+        "size": 13,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "rect",
+        "x": 143.33333333333334,
+        "y": 124,
+        "w": 133.33333333333334,
+        "h": 28,
+        "stroke": "grey",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 210.0,
+        "y": 143,
+        "text": "Fast",
+        "size": 13,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "rect",
+        "x": 276.6666666666667,
+        "y": 124,
+        "w": 133.33333333333334,
+        "h": 28,
+        "stroke": "grey",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 343.33333333333337,
+        "y": 143,
+        "text": "Medium",
+        "size": 13,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "rect",
+        "x": 10.0,
+        "y": 152,
+        "w": 133.33333333333334,
+        "h": 28,
+        "stroke": "grey",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 76.66666666666667,
+        "y": 171,
+        "text": "SSD / disk",
+        "size": 13,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "rect",
+        "x": 143.33333333333334,
+        "y": 152,
+        "w": 133.33333333333334,
+        "h": 28,
+        "stroke": "grey",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 210.0,
+        "y": 171,
+        "text": "Slower",
+        "size": 13,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "rect",
+        "x": 276.6666666666667,
+        "y": 152,
+        "w": 133.33333333333334,
+        "h": 28,
+        "stroke": "grey",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 343.33333333333337,
+        "y": 171,
+        "text": "Large",
+        "size": 13,
+        "anchor": "middle",
+        "color": "ink"
+       }
+      ]
+     },
+     "caption": "A table ranking registers, cache, RAM and disks by speed and size.",
+     "alt": "Table of the memory hierarchy: registers fastest and tiny, cache very fast and small, RAM fast and medium, disks slower and large."
+    },
+    {
+     "type": "key",
+     "style": "retenir",
+     "title": "Virtual memory",
+     "md": "When RAM is full, the operating system may move some data from RAM to a reserved area of the disk: **virtual memory**. This lets more programs run, but disk is much slower than RAM, so the computer slows down if it happens too much (**thrashing**)."
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Common mistakes",
+     "md": "- 'Memory' normally means RAM; 'storage' means disks.\n- ROM is not 'secondary storage'.\n- Virtual memory is not extra RAM chips.\n- Choose storage by capacity, speed, cost, portability and durability, not just one of them."
+    },
+    {
+     "type": "example",
+     "title": "Example 1",
+     "statement": "A school server in Bafoussam stores 5 years of reports and needs large capacity at low cost. Choose a storage type.",
+     "steps": [
+      "Large capacity at low cost points to magnetic hard disks.",
+      "An SSD would be faster but costs more per byte; the extra speed is not needed for archive reports."
+     ],
+     "answer": "Magnetic hard disk (with a backup)."
+    },
+    {
+     "type": "example",
+     "title": "Example 2",
+     "statement": "A computer with 4 GB of RAM becomes very slow when many programs are open and the disk light flashes. Explain.",
+     "steps": [
+      "RAM is full so the OS moves data to virtual memory on the disk.",
+      "Disk access is much slower than RAM, so the computer slows down."
+     ],
+     "answer": "Heavy use of virtual memory (thrashing)."
+    }
+   ],
+   "chapter": "lower6-computer-architecture"
+  }
+ ],
+ "exercises": [
+  {
+   "id": "lower6-computer-architecture-e01",
+   "kind": "mcq",
+   "tier": "application",
+   "lesson": "lower6-computer-cpu-fde",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Which register holds the address of the next instruction to be fetched?",
+   "choices": [
+    "CIR",
+    "MDR",
+    "Program counter",
+    "Accumulator"
+   ],
+   "answer": 2,
+   "explanation": "The PC points to the next instruction.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "lower6-computer-architecture"
+  },
+  {
+   "id": "lower6-computer-architecture-e02",
+   "kind": "mcq",
+   "tier": "application",
+   "lesson": "lower6-computer-cpu-fde",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "The address bus carries",
+   "choices": [
+    "pictures",
+    "only results",
+    "only power",
+    "memory addresses"
+   ],
+   "answer": 3,
+   "explanation": "Addresses travel from the CPU to memory.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "lower6-computer-architecture"
+  },
+  {
+   "id": "lower6-computer-architecture-e03",
+   "kind": "truefalse",
+   "tier": "application",
+   "lesson": "lower6-computer-cpu-fde",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "The control unit performs arithmetic.",
+   "answer": false,
+   "explanation": "Arithmetic is done by the ALU; the CU controls and decodes.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "lower6-computer-architecture"
+  },
+  {
+   "id": "lower6-computer-architecture-e04",
+   "kind": "matching",
+   "tier": "approfondissement",
+   "lesson": "lower6-computer-cpu-fde",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Match each register to its role.",
+   "pairs": [
+    [
+     "PC",
+     "Address of next instruction"
+    ],
+    [
+     "MAR",
+     "Address being accessed in memory"
+    ],
+    [
+     "MDR",
+     "Data read from or written to memory"
+    ],
+    [
+     "ACC",
+     "Stores results of the ALU"
+    ]
+   ],
+   "explanation": "These are the standard simplified-model roles.",
+   "difficulty": 2,
+   "points": 2,
+   "chapter": "lower6-computer-architecture"
+  },
+  {
+   "id": "lower6-computer-architecture-e05",
+   "kind": "open",
+   "tier": "approfondissement",
+   "lesson": "lower6-computer-cpu-fde",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Explain why the PC is incremented during the fetch stage.",
+   "model": "So that it already points to the next instruction when the current one has been fetched; after decoding and executing, the cycle can fetch the following instruction without waiting.",
+   "rubric": "1 mark: points to next instruction; 1 mark: done during fetch before execution; 1 mark: clear link to cycle.",
+   "explanation": "So that it already points to the next instruction when the current one has been fetched; after decoding and executing, the cycle can fetch the following instruction without waiting.",
+   "difficulty": 2,
+   "points": 3,
+   "chapter": "lower6-computer-architecture"
+  },
+  {
+   "id": "lower6-computer-architecture-e06",
+   "kind": "problem",
+   "tier": "examen",
+   "lesson": "lower6-computer-cpu-fde",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "A program has an instruction ADD 7 at address 200. The accumulator holds 5 and the PC holds 200.",
+   "difficulty": 2,
+   "parts": [
+    {
+     "kind": "mcq",
+     "points": 1,
+     "prompt": "After the fetch stage, the PC holds",
+     "choices": [
+      "12",
+      "200",
+      "201",
+      "7"
+     ],
+     "answer": 2,
+     "explanation": "PC incremented to 201.",
+     "id": "lower6-computer-architecture-e06-a"
+    },
+    {
+     "kind": "numeric",
+     "points": 1,
+     "prompt": "After execution of ADD 7 the ACC holds",
+     "answer": 12,
+     "tolerance": 0,
+     "explanation": "5 + 7 = 12.",
+     "id": "lower6-computer-architecture-e06-b"
+    },
+    {
+     "kind": "open",
+     "points": 2,
+     "prompt": "Name the part that carries out the addition and the part that decodes the instruction.",
+     "model": "ALU adds; the control unit decodes.",
+     "rubric": "1 mark each.",
+     "explanation": "ALU adds; the control unit decodes.",
+     "id": "lower6-computer-architecture-e06-c"
+    }
+   ],
+   "chapter": "lower6-computer-architecture"
+  },
+  {
+   "id": "lower6-computer-cpu-fde-q1",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "lower6-computer-cpu-fde",
+   "prompt": "The ALU performs",
+   "choices": [
+    "printing",
+    "fetching only",
+    "storage of files",
+    "arithmetic and logic operations"
+   ],
+   "answer": 3,
+   "explanation": "ALU.",
+   "chapter": "lower6-computer-architecture"
+  },
+  {
+   "id": "lower6-computer-cpu-fde-q2",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "lower6-computer-cpu-fde",
+   "prompt": "Cache memory is",
+   "choices": [
+    "a type of printer",
+    "part of ROM only",
+    "small fast memory near the CPU",
+    "large slow storage"
+   ],
+   "answer": 2,
+   "explanation": "Cache.",
+   "chapter": "lower6-computer-architecture"
+  },
+  {
+   "id": "lower6-computer-cpu-fde-q3",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "lower6-computer-cpu-fde",
+   "prompt": "The data bus is",
+   "choices": [
+    "used for sound only",
+    "used for power",
+    "bidirectional",
+    "one way from memory only"
+   ],
+   "answer": 2,
+   "explanation": "Data goes both ways.",
+   "chapter": "lower6-computer-architecture"
+  },
+  {
+   "id": "lower6-computer-cpu-fde-q4",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "lower6-computer-cpu-fde",
+   "prompt": "Clock speed is measured in",
+   "choices": [
+    "bytes",
+    "pixels",
+    "watts only",
+    "hertz (GHz)"
+   ],
+   "answer": 3,
+   "explanation": "Cycles per second.",
+   "chapter": "lower6-computer-architecture"
+  },
+  {
+   "id": "lower6-computer-cpu-fde-q5",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "lower6-computer-cpu-fde",
+   "prompt": "The step after fetch is",
+   "choices": [
+    "print",
+    "format",
+    "delete",
+    "decode"
+   ],
+   "answer": 3,
+   "explanation": "Fetch-decode-execute.",
+   "chapter": "lower6-computer-architecture"
+  },
+  {
+   "id": "lower6-computer-architecture-e07",
+   "kind": "mcq",
+   "tier": "application",
+   "lesson": "lower6-computer-memory-storage",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Which memory is non-volatile?",
+   "choices": [
+    "Cache",
+    "RAM",
+    "ROM",
+    "Registers"
+   ],
+   "answer": 2,
+   "explanation": "ROM keeps its contents without power.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "lower6-computer-architecture"
+  },
+  {
+   "id": "lower6-computer-architecture-e08",
+   "kind": "mcq",
+   "tier": "application",
+   "lesson": "lower6-computer-memory-storage",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "A storage type with no moving parts is",
+   "choices": [
+    "solid-state",
+    "tape",
+    "magnetic hard disk",
+    "optical disc"
+   ],
+   "answer": 0,
+   "explanation": "SSDs have no moving parts.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "lower6-computer-architecture"
+  },
+  {
+   "id": "lower6-computer-architecture-e09",
+   "kind": "truefalse",
+   "tier": "application",
+   "lesson": "lower6-computer-memory-storage",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Virtual memory is stored on the secondary storage.",
+   "answer": true,
+   "explanation": "A reserved area of the disk is used.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "lower6-computer-architecture"
+  },
+  {
+   "id": "lower6-computer-architecture-e10",
+   "kind": "mcq",
+   "tier": "approfondissement",
+   "lesson": "lower6-computer-memory-storage",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Why is cache faster to use than RAM for the CPU?",
+   "choices": [
+    "It is smaller and placed closer to the CPU",
+    "It is larger",
+    "It is optical",
+    "It is a disk"
+   ],
+   "answer": 0,
+   "explanation": "Proximity and design give speed.",
+   "difficulty": 2,
+   "points": 2,
+   "chapter": "lower6-computer-architecture"
+  },
+  {
+   "id": "lower6-computer-architecture-e11",
+   "kind": "open",
+   "tier": "approfondissement",
+   "lesson": "lower6-computer-memory-storage",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Compare magnetic and solid-state storage using three criteria.",
+   "model": "Magnetic: cheaper per byte, large capacity, moving parts so slower and more fragile. Solid-state: no moving parts, faster, silent, robust, more expensive per byte.",
+   "rubric": "1 mark per correct comparison criterion (3).",
+   "explanation": "Magnetic: cheaper per byte, large capacity, moving parts so slower and more fragile. Solid-state: no moving parts, faster, silent, robust, more expensive per byte.",
+   "difficulty": 2,
+   "points": 3,
+   "chapter": "lower6-computer-architecture"
+  },
+  {
+   "id": "lower6-computer-architecture-e12",
+   "kind": "problem",
+   "tier": "examen",
+   "lesson": "lower6-computer-memory-storage",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "A photographer in Limbe needs to carry 200 GB of photographs between towns.",
+   "difficulty": 2,
+   "parts": [
+    {
+     "kind": "mcq",
+     "points": 1,
+     "prompt": "Which medium is the most suitable?",
+     "choices": [
+      "Cache",
+      "A floppy disk",
+      "ROM",
+      "A solid-state external drive"
+     ],
+     "answer": 3,
+     "explanation": "Portable, robust, high capacity.",
+     "id": "lower6-computer-architecture-e12-a"
+    },
+    {
+     "kind": "mcq",
+     "points": 1,
+     "prompt": "Why is RAM not suitable for this purpose?",
+     "choices": [
+      "It is read-only",
+      "It is optical",
+      "It is volatile",
+      "It is too cheap"
+     ],
+     "answer": 2,
+     "explanation": "RAM loses data without power.",
+     "id": "lower6-computer-architecture-e12-b"
+    },
+    {
+     "kind": "open",
+     "points": 2,
+     "prompt": "Suggest one reason for also keeping a second copy.",
+     "model": "Drives can fail, be lost or stolen; a backup prevents loss.",
+     "rubric": "1 mark.",
+     "explanation": "Drives can fail, be lost or stolen; a backup prevents loss.",
+     "id": "lower6-computer-architecture-e12-c"
+    }
+   ],
+   "chapter": "lower6-computer-architecture"
+  },
+  {
+   "id": "lower6-computer-memory-storage-q1",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "lower6-computer-memory-storage",
+   "prompt": "RAM is",
+   "choices": [
+    "optical",
+    "volatile read/write memory",
+    "magnetic",
+    "read-only and permanent"
+   ],
+   "answer": 1,
+   "explanation": "RAM.",
+   "chapter": "lower6-computer-architecture"
+  },
+  {
+   "id": "lower6-computer-memory-storage-q2",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "lower6-computer-memory-storage",
+   "prompt": "The boot program is normally in",
+   "choices": [
+    "registers",
+    "ROM",
+    "RAM",
+    "cache"
+   ],
+   "answer": 1,
+   "explanation": "ROM.",
+   "chapter": "lower6-computer-architecture"
+  },
+  {
+   "id": "lower6-computer-memory-storage-q3",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "lower6-computer-memory-storage",
+   "prompt": "Optical discs are read using a",
+   "choices": [
+    "laser",
+    "keyboard",
+    "magnet",
+    "printer"
+   ],
+   "answer": 0,
+   "explanation": "Laser.",
+   "chapter": "lower6-computer-architecture"
+  },
+  {
+   "id": "lower6-computer-memory-storage-q4",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "lower6-computer-memory-storage",
+   "prompt": "Thrashing means",
+   "choices": [
+    "too much swapping between RAM and disk",
+    "data deleted",
+    "too many cores",
+    "a virus"
+   ],
+   "answer": 0,
+   "explanation": "Slows the system.",
+   "chapter": "lower6-computer-architecture"
+  },
+  {
+   "id": "lower6-computer-memory-storage-q5",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "lower6-computer-memory-storage",
+   "prompt": "Registers are",
+   "choices": [
+    "on the network",
+    "inside the CPU",
+    "optical",
+    "on the disk"
+   ],
+   "answer": 1,
+   "explanation": "CPU registers.",
+   "chapter": "lower6-computer-architecture"
+  }
+ ]
+}

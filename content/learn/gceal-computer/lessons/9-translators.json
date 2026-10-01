@@ -1,0 +1,464 @@
+{
+ "chapter": "gceal-computer-translators",
+ "lessons": [
+  {
+   "id": "gceal-computer-translators-compilers",
+   "title": "Compilers, interpreters and the stages of translation",
+   "minutes": 30,
+   "programRef": "Cameroon GCE Board — Advanced Level Computer Science syllabus (Upper Sixth part) — to be checked against the official text",
+   "status": "draft",
+   "author": "CastBridge (AI draft)",
+   "source": "Original writing following the Cameroonian curriculum; to be reviewed by a teacher",
+   "objectives": [
+    "Describe the stages of compilation",
+    "Compare compilers, interpreters, assemblers and linkers",
+    "Explain lexical, syntax and semantic errors",
+    "Read a simple BNF definition"
+   ],
+   "prerequisites": [],
+   "exercises": [
+    "gceal-computer-translators-e01",
+    "gceal-computer-translators-e02",
+    "gceal-computer-translators-e03",
+    "gceal-computer-translators-e04",
+    "gceal-computer-translators-e05",
+    "gceal-computer-translators-e06"
+   ],
+   "selfCheck": [
+    "gceal-computer-translators-compilers-q1",
+    "gceal-computer-translators-compilers-q2",
+    "gceal-computer-translators-compilers-q3",
+    "gceal-computer-translators-compilers-q4",
+    "gceal-computer-translators-compilers-q5"
+   ],
+   "reviewNotes": [
+    "BNF kept at outline level; syntax diagrams not drawn. Stage names may differ slightly.",
+    "Syllabus references, scope and level of difficulty are to be checked against the official text; all facts, formulas and worked examples to be verified by a teacher before release."
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Stages of compilation",
+     "md": "**Lexical analysis** splits the source code into **tokens** (keywords, identifiers, numbers, operators) and removes spaces and comments. **Syntax analysis** (parsing) checks the tokens against the grammar and builds a **syntax tree**. **Semantic analysis** checks meaning (for example, types). **Code generation** produces machine or intermediate code. **Optimisation** makes the code faster or smaller."
+    },
+    {
+     "type": "key",
+     "style": "retenir",
+     "title": "Translators and tools",
+     "md": "A **compiler** translates the whole source program to an executable (fast run, errors reported together). An **interpreter** translates and runs line by line (easy testing, slower run, source needed at run time). An **assembler** translates assembly. A **linker** combines object files and libraries into one executable; a **loader** places it in memory to run. Some languages compile to **bytecode** that a virtual machine interprets."
+    },
+    {
+     "type": "illustration",
+     "figure": {
+      "kind": "shapes",
+      "w": 400,
+      "h": 268,
+      "items": [
+       {
+        "t": "text",
+        "x": 200.0,
+        "y": 24,
+        "text": "Compilation stages",
+        "size": 15,
+        "anchor": "middle",
+        "color": "ink",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 40,
+        "y": 40,
+        "w": 320,
+        "h": 30,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "lightyellow",
+        "radius": 6
+       },
+       {
+        "t": "text",
+        "x": 200.0,
+        "y": 60,
+        "text": "Source code",
+        "size": 13,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "line",
+        "x1": 200.0,
+        "y1": 70,
+        "x2": 200.0,
+        "y2": 86,
+        "color": "ink",
+        "width": 2,
+        "arrow": "end"
+       },
+       {
+        "t": "rect",
+        "x": 40,
+        "y": 86,
+        "w": 320,
+        "h": 30,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "lightblue",
+        "radius": 6
+       },
+       {
+        "t": "text",
+        "x": 200.0,
+        "y": 106,
+        "text": "Lexical analysis (tokens)",
+        "size": 13,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "line",
+        "x1": 200.0,
+        "y1": 116,
+        "x2": 200.0,
+        "y2": 132,
+        "color": "ink",
+        "width": 2,
+        "arrow": "end"
+       },
+       {
+        "t": "rect",
+        "x": 40,
+        "y": 132,
+        "w": 320,
+        "h": 30,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "lightblue",
+        "radius": 6
+       },
+       {
+        "t": "text",
+        "x": 200.0,
+        "y": 152,
+        "text": "Syntax analysis (tree)",
+        "size": 13,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "line",
+        "x1": 200.0,
+        "y1": 162,
+        "x2": 200.0,
+        "y2": 178,
+        "color": "ink",
+        "width": 2,
+        "arrow": "end"
+       },
+       {
+        "t": "rect",
+        "x": 40,
+        "y": 178,
+        "w": 320,
+        "h": 30,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "lightgreen",
+        "radius": 6
+       },
+       {
+        "t": "text",
+        "x": 200.0,
+        "y": 198,
+        "text": "Code generation",
+        "size": 13,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "line",
+        "x1": 200.0,
+        "y1": 208,
+        "x2": 200.0,
+        "y2": 224,
+        "color": "ink",
+        "width": 2,
+        "arrow": "end"
+       },
+       {
+        "t": "rect",
+        "x": 40,
+        "y": 224,
+        "w": 320,
+        "h": 30,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "lightorange",
+        "radius": 6
+       },
+       {
+        "t": "text",
+        "x": 200.0,
+        "y": 244,
+        "text": "Executable",
+        "size": 13,
+        "anchor": "middle",
+        "color": "ink"
+       }
+      ]
+     },
+     "caption": "A flow from source code through lexical and syntax analysis and code generation to an executable.",
+     "alt": "Flow of compilation stages ending in an executable."
+    },
+    {
+     "type": "key",
+     "style": "methode",
+     "title": "Types of error",
+     "md": "**Syntax error**: breaks the grammar (a missing bracket); found at translation. **Logic error**: the program runs but gives wrong results (using + instead of -); found by testing. **Runtime error**: occurs while running (division by zero)."
+    },
+    {
+     "type": "key",
+     "style": "methode",
+     "title": "BNF",
+     "md": "**Backus-Naur Form** defines a language's syntax with rules: <digit> ::= 0 | 1 | 2 | ... | 9 and <number> ::= <digit> | <digit><number>. The symbol | means 'or'; ::= means 'is defined as'. A string is valid if it can be built from the rules. Example: 305 is a valid <number> (digit, then digit, then digit)."
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Common mistakes",
+     "md": "- The compiler finds syntax errors, not logic errors.\n- Compiled code runs without the compiler; interpreted code needs the interpreter.\n- BNF rules can be recursive; a rule that never ends in a base case is invalid."
+    },
+    {
+     "type": "example",
+     "title": "Example 1 - Tokens",
+     "statement": "Split the statement total = price \\* 3 into tokens.",
+     "steps": [
+      "Identifiers: total, price. Operators: = and \\*.",
+      "Number: 3. So there are 5 tokens: total, =, price, \\*, 3."
+     ],
+     "answer": "5 tokens"
+    },
+    {
+     "type": "example",
+     "title": "Example 2 - BNF",
+     "statement": "<digit> ::= 0|1|2|3|4|5|6|7|8|9 ; <number> ::= <digit> | <digit><number>. Is 4x7 valid?",
+     "steps": [
+      "Each character must be a digit.",
+      "x is not a digit so 4x7 cannot be built: invalid."
+     ],
+     "answer": "Invalid"
+    }
+   ],
+   "chapter": "gceal-computer-translators"
+  }
+ ],
+ "exercises": [
+  {
+   "id": "gceal-computer-translators-e01",
+   "kind": "mcq",
+   "tier": "application",
+   "lesson": "gceal-computer-translators-compilers",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "The first stage of compilation is",
+   "choices": [
+    "optimisation",
+    "execution",
+    "code generation",
+    "lexical analysis"
+   ],
+   "answer": 3,
+   "explanation": "Tokens first.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "gceal-computer-translators"
+  },
+  {
+   "id": "gceal-computer-translators-e02",
+   "kind": "mcq",
+   "tier": "application",
+   "lesson": "gceal-computer-translators-compilers",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Which error is found by testing, not by the translator?",
+   "choices": [
+    "Logic error",
+    "Missing bracket",
+    "Misspelt keyword",
+    "Syntax error"
+   ],
+   "answer": 0,
+   "explanation": "Logic errors.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "gceal-computer-translators"
+  },
+  {
+   "id": "gceal-computer-translators-e03",
+   "kind": "truefalse",
+   "tier": "application",
+   "lesson": "gceal-computer-translators-compilers",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "An interpreter translates and runs the program one statement at a time.",
+   "answer": true,
+   "explanation": "Yes.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "gceal-computer-translators"
+  },
+  {
+   "id": "gceal-computer-translators-e04",
+   "kind": "numeric",
+   "tier": "approfondissement",
+   "lesson": "gceal-computer-translators-compilers",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "How many tokens are in: x = y + 4 ?",
+   "answer": 5,
+   "tolerance": 0,
+   "explanation": "x, =, y, +, 4.",
+   "difficulty": 2,
+   "points": 3,
+   "chapter": "gceal-computer-translators"
+  },
+  {
+   "id": "gceal-computer-translators-e05",
+   "kind": "open",
+   "tier": "approfondissement",
+   "lesson": "gceal-computer-translators-compilers",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "State two advantages of a compiler over an interpreter.",
+   "model": "The program runs faster; the executable can be distributed without the source code or translator; errors are reported before running.",
+   "rubric": "1 mark each, 2.",
+   "explanation": "The program runs faster; the executable can be distributed without the source code or translator; errors are reported before running.",
+   "difficulty": 2,
+   "points": 3,
+   "chapter": "gceal-computer-translators"
+  },
+  {
+   "id": "gceal-computer-translators-e06",
+   "kind": "problem",
+   "tier": "examen",
+   "lesson": "gceal-computer-translators-compilers",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Using <digit> ::= 0|1|2|3|4|5|6|7|8|9 and <number> ::= <digit> | <digit><number>.",
+   "difficulty": 2,
+   "parts": [
+    {
+     "kind": "mcq",
+     "points": 1,
+     "prompt": "Which is a valid <number>?",
+     "choices": [
+      "20a6",
+      "-5",
+      "2026",
+      "1.5"
+     ],
+     "answer": 2,
+     "explanation": "Only digits are allowed.",
+     "id": "gceal-computer-translators-e06-a"
+    },
+    {
+     "kind": "truefalse",
+     "points": 1,
+     "prompt": "The rule for <number> is recursive.",
+     "answer": true,
+     "explanation": "<number> uses itself on the right-hand side.",
+     "id": "gceal-computer-translators-e06-b"
+    },
+    {
+     "kind": "open",
+     "points": 2,
+     "prompt": "Why must a recursive rule have a non-recursive alternative?",
+     "model": "Otherwise the definition never ends; the alternative (<digit>) is the base case.",
+     "rubric": "1 mark each.",
+     "explanation": "Otherwise the definition never ends; the alternative (<digit>) is the base case.",
+     "id": "gceal-computer-translators-e06-c"
+    }
+   ],
+   "chapter": "gceal-computer-translators"
+  },
+  {
+   "id": "gceal-computer-translators-compilers-q1",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "gceal-computer-translators-compilers",
+   "prompt": "A linker",
+   "choices": [
+    "combines object code and libraries",
+    "creates tokens",
+    "types text",
+    "prints source code"
+   ],
+   "answer": 0,
+   "explanation": "Linker.",
+   "chapter": "gceal-computer-translators"
+  },
+  {
+   "id": "gceal-computer-translators-compilers-q2",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "gceal-computer-translators-compilers",
+   "prompt": "A runtime error occurs",
+   "choices": [
+    "never",
+    "while the program is running",
+    "only in assembly",
+    "during lexical analysis"
+   ],
+   "answer": 1,
+   "explanation": "Runtime.",
+   "chapter": "gceal-computer-translators"
+  },
+  {
+   "id": "gceal-computer-translators-compilers-q3",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "gceal-computer-translators-compilers",
+   "prompt": "Bytecode is run by",
+   "choices": [
+    "the keyboard",
+    "a virtual machine",
+    "a cable",
+    "a monitor"
+   ],
+   "answer": 1,
+   "explanation": "VM.",
+   "chapter": "gceal-computer-translators"
+  },
+  {
+   "id": "gceal-computer-translators-compilers-q4",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "gceal-computer-translators-compilers",
+   "prompt": "A syntax tree is built during",
+   "choices": [
+    "syntax analysis",
+    "installation",
+    "lexical analysis",
+    "linking only"
+   ],
+   "answer": 0,
+   "explanation": "Parsing.",
+   "chapter": "gceal-computer-translators"
+  },
+  {
+   "id": "gceal-computer-translators-compilers-q5",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "gceal-computer-translators-compilers",
+   "prompt": "In BNF the symbol | means",
+   "choices": [
+    "end",
+    "or",
+    "and",
+    "not"
+   ],
+   "answer": 1,
+   "explanation": "Alternative.",
+   "chapter": "gceal-computer-translators"
+  }
+ ]
+}

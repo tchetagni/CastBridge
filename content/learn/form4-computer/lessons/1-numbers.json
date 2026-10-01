@@ -1,0 +1,1363 @@
+{
+ "chapter": "form4-computer-numbers",
+ "lessons": [
+  {
+   "id": "form4-computer-number-systems",
+   "title": "Binary, octal and hexadecimal",
+   "minutes": 25,
+   "programRef": "Cameroon secondary (general education) Computer Studies / ICT programme, Form 4 — to be checked against the official programme",
+   "status": "draft",
+   "author": "CastBridge (AI draft)",
+   "source": "Original writing following the Cameroonian curriculum; to be reviewed by a teacher",
+   "objectives": [
+    "Convert between denary and binary",
+    "Convert between binary and hexadecimal",
+    "Use octal in outline",
+    "Explain why hexadecimal is used"
+   ],
+   "prerequisites": [],
+   "exercises": [
+    "form4-computer-numbers-e01",
+    "form4-computer-numbers-e02",
+    "form4-computer-numbers-e03",
+    "form4-computer-numbers-e04",
+    "form4-computer-numbers-e05",
+    "form4-computer-numbers-e06"
+   ],
+   "selfCheck": [
+    "form4-computer-number-systems-q1",
+    "form4-computer-number-systems-q2",
+    "form4-computer-number-systems-q3",
+    "form4-computer-number-systems-q4",
+    "form4-computer-number-systems-q5"
+   ],
+   "reviewNotes": [
+    "Octal in outline; check the programme.",
+    "Syllabus references, scope and level of difficulty are to be checked against the official text; all facts, formulas and worked examples to be verified by a teacher before release."
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Bases",
+     "md": "**Binary** is base 2 (0, 1). **Octal** is base 8 (0 to 7). **Denary** is base 10. **Hexadecimal** (hex) is base 16: 0 to 9 and A to F (A = 10 ... F = 15). Computers use binary; hex and octal are shorter ways to write binary."
+    },
+    {
+     "type": "key",
+     "style": "methode",
+     "title": "Denary to binary",
+     "md": "Use place values 128, 64, 32, 16, 8, 4, 2, 1. Example: 100 = 64 + 32 + 4, so 100 = 01100100. Or divide by 2 repeatedly and read remainders from bottom to top."
+    },
+    {
+     "type": "illustration",
+     "figure": {
+      "kind": "shapes",
+      "w": 420,
+      "h": 170,
+      "items": [
+       {
+        "t": "text",
+        "x": 210.0,
+        "y": 24,
+        "text": "Hex digits and values",
+        "size": 15,
+        "anchor": "middle",
+        "color": "ink",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 10.0,
+        "y": 40,
+        "w": 133.33333333333334,
+        "h": 28,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "lightblue"
+       },
+       {
+        "t": "text",
+        "x": 76.66666666666667,
+        "y": 59,
+        "text": "Hex",
+        "size": 13,
+        "anchor": "middle",
+        "color": "ink",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 143.33333333333334,
+        "y": 40,
+        "w": 133.33333333333334,
+        "h": 28,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "lightgreen"
+       },
+       {
+        "t": "text",
+        "x": 210.0,
+        "y": 59,
+        "text": "Denary",
+        "size": 13,
+        "anchor": "middle",
+        "color": "ink",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 276.6666666666667,
+        "y": 40,
+        "w": 133.33333333333334,
+        "h": 28,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "lightyellow"
+       },
+       {
+        "t": "text",
+        "x": 343.33333333333337,
+        "y": 59,
+        "text": "Binary",
+        "size": 13,
+        "anchor": "middle",
+        "color": "ink",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 10.0,
+        "y": 68,
+        "w": 133.33333333333334,
+        "h": 28,
+        "stroke": "grey",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 76.66666666666667,
+        "y": 87,
+        "text": "9",
+        "size": 13,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "rect",
+        "x": 143.33333333333334,
+        "y": 68,
+        "w": 133.33333333333334,
+        "h": 28,
+        "stroke": "grey",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 210.0,
+        "y": 87,
+        "text": "9",
+        "size": 13,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "rect",
+        "x": 276.6666666666667,
+        "y": 68,
+        "w": 133.33333333333334,
+        "h": 28,
+        "stroke": "grey",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 343.33333333333337,
+        "y": 87,
+        "text": "1001",
+        "size": 13,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "rect",
+        "x": 10.0,
+        "y": 96,
+        "w": 133.33333333333334,
+        "h": 28,
+        "stroke": "grey",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 76.66666666666667,
+        "y": 115,
+        "text": "A",
+        "size": 13,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "rect",
+        "x": 143.33333333333334,
+        "y": 96,
+        "w": 133.33333333333334,
+        "h": 28,
+        "stroke": "grey",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 210.0,
+        "y": 115,
+        "text": "10",
+        "size": 13,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "rect",
+        "x": 276.6666666666667,
+        "y": 96,
+        "w": 133.33333333333334,
+        "h": 28,
+        "stroke": "grey",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 343.33333333333337,
+        "y": 115,
+        "text": "1010",
+        "size": 13,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "rect",
+        "x": 10.0,
+        "y": 124,
+        "w": 133.33333333333334,
+        "h": 28,
+        "stroke": "grey",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 76.66666666666667,
+        "y": 143,
+        "text": "F",
+        "size": 13,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "rect",
+        "x": 143.33333333333334,
+        "y": 124,
+        "w": 133.33333333333334,
+        "h": 28,
+        "stroke": "grey",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 210.0,
+        "y": 143,
+        "text": "15",
+        "size": 13,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "rect",
+        "x": 276.6666666666667,
+        "y": 124,
+        "w": 133.33333333333334,
+        "h": 28,
+        "stroke": "grey",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 343.33333333333337,
+        "y": 143,
+        "text": "1111",
+        "size": 13,
+        "anchor": "middle",
+        "color": "ink"
+       }
+      ]
+     },
+     "caption": "A table of three hex digits with their denary and binary values.",
+     "alt": "Table: hex 9 = 9 = 1001, A = 10 = 1010, F = 15 = 1111."
+    },
+    {
+     "type": "key",
+     "style": "methode",
+     "title": "Binary and hex",
+     "md": "Group the bits in **fours** from the right. 1010 0111 = A7 (1010 = A, 0111 = 7). Denary value of A7 = 10 x 16 + 7 = 167. For octal, group bits in threes."
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Mistakes",
+     "md": "- Group from the **right**.\n- Hex letters stand for 10-15.\n- Hex is used because it is shorter for humans, not because computers use it."
+    },
+    {
+     "type": "example",
+     "title": "Example 1",
+     "statement": "Convert 100 to binary.",
+     "steps": [
+      "100 = 64 + 32 + 4.",
+      "Bits 128..1 are 0 1 1 0 0 1 0 0."
+     ],
+     "answer": "01100100"
+    },
+    {
+     "type": "example",
+     "title": "Example 2",
+     "statement": "Convert 10100111 to hex and denary.",
+     "steps": [
+      "1010 0111 = A 7, so hex A7.",
+      "Denary: 10 x 16 + 7 = 167."
+     ],
+     "answer": "A7 = 167"
+    }
+   ],
+   "chapter": "form4-computer-numbers"
+  },
+  {
+   "id": "form4-computer-binary-arithmetic",
+   "title": "Binary addition and shifts",
+   "minutes": 20,
+   "programRef": "Cameroon secondary (general education) Computer Studies / ICT programme, Form 4 — to be checked against the official programme",
+   "status": "draft",
+   "author": "CastBridge (AI draft)",
+   "source": "Original writing following the Cameroonian curriculum; to be reviewed by a teacher",
+   "objectives": [
+    "Add binary numbers",
+    "Recognise overflow",
+    "Use shifts to multiply or divide by 2",
+    "Check with denary"
+   ],
+   "prerequisites": [],
+   "exercises": [
+    "form4-computer-numbers-e07",
+    "form4-computer-numbers-e08",
+    "form4-computer-numbers-e09",
+    "form4-computer-numbers-e10",
+    "form4-computer-numbers-e11",
+    "form4-computer-numbers-e12"
+   ],
+   "selfCheck": [
+    "form4-computer-binary-arithmetic-q1",
+    "form4-computer-binary-arithmetic-q2",
+    "form4-computer-binary-arithmetic-q3",
+    "form4-computer-binary-arithmetic-q4",
+    "form4-computer-binary-arithmetic-q5"
+   ],
+   "reviewNotes": [
+    "Checked in Python.",
+    "Syllabus references, scope and level of difficulty are to be checked against the official text; all facts, formulas and worked examples to be verified by a teacher before release."
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Addition rules",
+     "md": "0+0 = 0; 0+1 = 1; 1+1 = 10 (write 0, carry 1); 1+1+1 = 11 (write 1, carry 1). Add from the right, carrying to the next column."
+    },
+    {
+     "type": "key",
+     "style": "retenir",
+     "title": "Shifts",
+     "md": "A **left shift** by one place doubles a binary number; a **right shift** halves it (for whole numbers). Bits that go off the end are lost."
+    },
+    {
+     "type": "illustration",
+     "figure": {
+      "kind": "shapes",
+      "w": 420,
+      "h": 180,
+      "items": [
+       {
+        "t": "text",
+        "x": 210,
+        "y": 24,
+        "text": "Adding 101 + 011",
+        "size": 15,
+        "anchor": "middle",
+        "color": "ink",
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 120,
+        "y": 60,
+        "text": "A",
+        "size": 13,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "text",
+        "x": 215,
+        "y": 60,
+        "text": "1 0 1",
+        "size": 16,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "text",
+        "x": 120,
+        "y": 86,
+        "text": "B",
+        "size": 13,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "text",
+        "x": 215,
+        "y": 86,
+        "text": "0 1 1",
+        "size": 16,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "line",
+        "x1": 150,
+        "y1": 96,
+        "x2": 280,
+        "y2": 96,
+        "color": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 120,
+        "y": 124,
+        "text": "A+B",
+        "size": 13,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "text",
+        "x": 215,
+        "y": 124,
+        "text": "1 0 0 0",
+        "size": 16,
+        "anchor": "middle",
+        "color": "ink",
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 210,
+        "y": 160,
+        "text": "5 + 3 = 8",
+        "size": 13,
+        "anchor": "middle",
+        "color": "ink"
+       }
+      ]
+     },
+     "caption": "Column sum of 101 and 011 giving 1000.",
+     "alt": "Binary addition: 101 + 011 = 1000, that is 5 + 3 = 8."
+    },
+    {
+     "type": "key",
+     "style": "retenir",
+     "title": "Overflow",
+     "md": "If an answer needs more bits than a store can hold, **overflow** occurs. In 8 bits the largest unsigned number is 255 (11111111)."
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Mistakes",
+     "md": "- Forgetting a carry.\n- Not checking the answer by converting to denary.\n- Ignoring overflow in a fixed number of bits."
+    },
+    {
+     "type": "example",
+     "title": "Example 1",
+     "statement": "Add 101 and 011.",
+     "steps": [
+      "Right column: 1+1 = 10, write 0 carry 1. Middle: 0+1+1 = 10, write 0 carry 1.",
+      "Left: 1+0+1 = 10, write 0 carry 1, so the answer is 1000. Check: 5+3 = 8."
+     ],
+     "answer": "1000"
+    },
+    {
+     "type": "example",
+     "title": "Example 2",
+     "statement": "Shift 00000110 left by two places.",
+     "steps": [
+      "6 shifted left once is 12 (00001100).",
+      "Shifted twice: 24 (00011000)."
+     ],
+     "answer": "24"
+    }
+   ],
+   "chapter": "form4-computer-numbers"
+  },
+  {
+   "id": "form4-computer-data-representation",
+   "title": "Data representation",
+   "minutes": 20,
+   "programRef": "Cameroon secondary (general education) Computer Studies / ICT programme, Form 4 — to be checked against the official programme",
+   "status": "draft",
+   "author": "CastBridge (AI draft)",
+   "source": "Original writing following the Cameroonian curriculum; to be reviewed by a teacher",
+   "objectives": [
+    "Explain how characters are coded",
+    "Describe how images and sound are stored",
+    "Calculate file sizes",
+    "Use storage units correctly"
+   ],
+   "prerequisites": [],
+   "exercises": [
+    "form4-computer-numbers-e13",
+    "form4-computer-numbers-e14",
+    "form4-computer-numbers-e15",
+    "form4-computer-numbers-e16",
+    "form4-computer-numbers-e17",
+    "form4-computer-numbers-e18"
+   ],
+   "selfCheck": [
+    "form4-computer-data-representation-q1",
+    "form4-computer-data-representation-q2",
+    "form4-computer-data-representation-q3",
+    "form4-computer-data-representation-q4",
+    "form4-computer-data-representation-q5"
+   ],
+   "reviewNotes": [
+    "Sizes ignore compression and headers.",
+    "Syllabus references, scope and level of difficulty are to be checked against the official text; all facts, formulas and worked examples to be verified by a teacher before release."
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Characters",
+     "md": "Text is stored as codes. **ASCII** gives every character a number: A = 65, a = 97, 0 = 48. Standard ASCII has 128 codes (7 bits). **Unicode** has many more so it can store letters of many languages."
+    },
+    {
+     "type": "key",
+     "style": "retenir",
+     "title": "Images",
+     "md": "A **bitmap** image is a grid of **pixels**. **Resolution** = pixels across x pixels down. **Colour depth** = bits per pixel. File size (bits) = width x height x colour depth; divide by 8 for bytes."
+    },
+    {
+     "type": "illustration",
+     "figure": {
+      "kind": "shapes",
+      "w": 420,
+      "h": 190,
+      "items": [
+       {
+        "t": "text",
+        "x": 210,
+        "y": 22,
+        "text": "Pixels",
+        "size": 15,
+        "anchor": "middle",
+        "color": "ink",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 110,
+        "y": 40,
+        "w": 50,
+        "h": 40,
+        "stroke": "grey",
+        "width": 1,
+        "fill": "ink"
+       },
+       {
+        "t": "rect",
+        "x": 110,
+        "y": 80,
+        "w": 50,
+        "h": 40,
+        "stroke": "grey",
+        "width": 1,
+        "fill": "white"
+       },
+       {
+        "t": "rect",
+        "x": 110,
+        "y": 120,
+        "w": 50,
+        "h": 40,
+        "stroke": "grey",
+        "width": 1,
+        "fill": "ink"
+       },
+       {
+        "t": "rect",
+        "x": 160,
+        "y": 40,
+        "w": 50,
+        "h": 40,
+        "stroke": "grey",
+        "width": 1,
+        "fill": "white"
+       },
+       {
+        "t": "rect",
+        "x": 160,
+        "y": 80,
+        "w": 50,
+        "h": 40,
+        "stroke": "grey",
+        "width": 1,
+        "fill": "ink"
+       },
+       {
+        "t": "rect",
+        "x": 160,
+        "y": 120,
+        "w": 50,
+        "h": 40,
+        "stroke": "grey",
+        "width": 1,
+        "fill": "white"
+       },
+       {
+        "t": "rect",
+        "x": 210,
+        "y": 40,
+        "w": 50,
+        "h": 40,
+        "stroke": "grey",
+        "width": 1,
+        "fill": "ink"
+       },
+       {
+        "t": "rect",
+        "x": 210,
+        "y": 80,
+        "w": 50,
+        "h": 40,
+        "stroke": "grey",
+        "width": 1,
+        "fill": "white"
+       },
+       {
+        "t": "rect",
+        "x": 210,
+        "y": 120,
+        "w": 50,
+        "h": 40,
+        "stroke": "grey",
+        "width": 1,
+        "fill": "ink"
+       },
+       {
+        "t": "rect",
+        "x": 260,
+        "y": 40,
+        "w": 50,
+        "h": 40,
+        "stroke": "grey",
+        "width": 1,
+        "fill": "white"
+       },
+       {
+        "t": "rect",
+        "x": 260,
+        "y": 80,
+        "w": 50,
+        "h": 40,
+        "stroke": "grey",
+        "width": 1,
+        "fill": "ink"
+       },
+       {
+        "t": "rect",
+        "x": 260,
+        "y": 120,
+        "w": 50,
+        "h": 40,
+        "stroke": "grey",
+        "width": 1,
+        "fill": "white"
+       },
+       {
+        "t": "text",
+        "x": 210,
+        "y": 175,
+        "text": "4 x 3 = 12 pixels",
+        "size": 13,
+        "anchor": "middle",
+        "color": "ink"
+       }
+      ]
+     },
+     "caption": "A 4 by 3 grid of black and white pixels.",
+     "alt": "Grid of 12 black and white pixels."
+    },
+    {
+     "type": "key",
+     "style": "retenir",
+     "title": "Sound",
+     "md": "Sound is stored by **sampling**: measuring the wave many times per second (**sample rate**, Hz) using a number of bits (**bit depth**). File size (bits) = sample rate x bit depth x seconds x channels."
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Mistakes",
+     "md": "- Forgetting to divide by 8.\n- Confusing resolution (pixels) with size on paper.\n- Better quality means larger files unless compression is used."
+    },
+    {
+     "type": "example",
+     "title": "Example 1",
+     "statement": "How many bytes for a 200 x 100 image with 8 bits per pixel?",
+     "steps": [
+      "Pixels = 200 x 100 = 20000.",
+      "Bits = 20000 x 8 = 160000; bytes = 160000 / 8 = 20000."
+     ],
+     "answer": "20000 bytes"
+    },
+    {
+     "type": "example",
+     "title": "Example 2",
+     "statement": "What is the code for 'D' if A = 65?",
+     "steps": [
+      "A, B, C, D: D is three after A.",
+      "65 + 3 = 68."
+     ],
+     "answer": "68"
+    }
+   ],
+   "chapter": "form4-computer-numbers"
+  }
+ ],
+ "exercises": [
+  {
+   "id": "form4-computer-numbers-e01",
+   "kind": "numeric",
+   "tier": "application",
+   "lesson": "form4-computer-number-systems",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Convert 1100 to denary.",
+   "answer": 12,
+   "tolerance": 0,
+   "explanation": "8 + 4 = 12.",
+   "difficulty": 1,
+   "points": 2,
+   "chapter": "form4-computer-numbers"
+  },
+  {
+   "id": "form4-computer-numbers-e02",
+   "kind": "mcq",
+   "tier": "application",
+   "lesson": "form4-computer-number-systems",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "F in hexadecimal equals",
+   "choices": [
+    "14",
+    "16",
+    "10",
+    "15"
+   ],
+   "answer": 3,
+   "explanation": "F = 15.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "form4-computer-numbers"
+  },
+  {
+   "id": "form4-computer-numbers-e03",
+   "kind": "numeric",
+   "tier": "application",
+   "lesson": "form4-computer-number-systems",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Convert 3C hex to denary.",
+   "answer": 60,
+   "tolerance": 0,
+   "explanation": "3 x 16 + 12 = 60.",
+   "difficulty": 1,
+   "points": 2,
+   "chapter": "form4-computer-numbers"
+  },
+  {
+   "id": "form4-computer-numbers-e04",
+   "kind": "mcq",
+   "tier": "approfondissement",
+   "lesson": "form4-computer-number-systems",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Binary 11111111 in hex is",
+   "choices": [
+    "EE",
+    "FF",
+    "FE",
+    "F0"
+   ],
+   "answer": 1,
+   "explanation": "1111 1111.",
+   "difficulty": 2,
+   "points": 2,
+   "chapter": "form4-computer-numbers"
+  },
+  {
+   "id": "form4-computer-numbers-e05",
+   "kind": "numeric",
+   "tier": "approfondissement",
+   "lesson": "form4-computer-number-systems",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Convert 255 to denary from FF hex: 15 x 16 + 15 =",
+   "answer": 255,
+   "tolerance": 0,
+   "explanation": "240 + 15 = 255.",
+   "difficulty": 2,
+   "points": 3,
+   "chapter": "form4-computer-numbers"
+  },
+  {
+   "id": "form4-computer-numbers-e06",
+   "kind": "problem",
+   "tier": "examen",
+   "lesson": "form4-computer-number-systems",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Work with 45.",
+   "difficulty": 2,
+   "parts": [
+    {
+     "kind": "mcq",
+     "points": 1,
+     "prompt": "45 in binary (8 bits)",
+     "choices": [
+      "00110101",
+      "01001101",
+      "00101101",
+      "00101011"
+     ],
+     "answer": 2,
+     "explanation": "32+8+4+1.",
+     "id": "form4-computer-numbers-e06-a"
+    },
+    {
+     "kind": "mcq",
+     "points": 1,
+     "prompt": "45 in hex",
+     "choices": [
+      "2D",
+      "3D",
+      "D2",
+      "2B"
+     ],
+     "answer": 0,
+     "explanation": "45 = 2 x 16 + 13.",
+     "id": "form4-computer-numbers-e06-b"
+    },
+    {
+     "kind": "open",
+     "points": 2,
+     "prompt": "Why do programmers like hex?",
+     "model": "It is a short and readable way to write long binary numbers; each hex digit stands for four bits.",
+     "rubric": "1 mark each reason.",
+     "explanation": "It is a short and readable way to write long binary numbers; each hex digit stands for four bits.",
+     "id": "form4-computer-numbers-e06-c"
+    }
+   ],
+   "chapter": "form4-computer-numbers"
+  },
+  {
+   "id": "form4-computer-number-systems-q1",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "form4-computer-number-systems",
+   "prompt": "Hex digits go from",
+   "choices": [
+    "0 to 7",
+    "0 to 9",
+    "0 to F",
+    "1 to 10"
+   ],
+   "answer": 2,
+   "explanation": "Base 16.",
+   "chapter": "form4-computer-numbers"
+  },
+  {
+   "id": "form4-computer-number-systems-q2",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "form4-computer-number-systems",
+   "prompt": "Binary 0101 equals",
+   "choices": [
+    "5",
+    "7",
+    "3",
+    "10"
+   ],
+   "answer": 0,
+   "explanation": "4 + 1.",
+   "chapter": "form4-computer-numbers"
+  },
+  {
+   "id": "form4-computer-number-systems-q3",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "form4-computer-number-systems",
+   "prompt": "Octal uses digits",
+   "choices": [
+    "0 to 7",
+    "0 to F",
+    "0 to 9",
+    "0 and 1"
+   ],
+   "answer": 0,
+   "explanation": "Base 8.",
+   "chapter": "form4-computer-numbers"
+  },
+  {
+   "id": "form4-computer-number-systems-q4",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "form4-computer-number-systems",
+   "prompt": "One hex digit equals",
+   "choices": [
+    "eight bits",
+    "four bits",
+    "one bit",
+    "two bits"
+   ],
+   "answer": 1,
+   "explanation": "Nibble.",
+   "chapter": "form4-computer-numbers"
+  },
+  {
+   "id": "form4-computer-number-systems-q5",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "form4-computer-number-systems",
+   "prompt": "A in hex is",
+   "choices": [
+    "11",
+    "9",
+    "10",
+    "1"
+   ],
+   "answer": 2,
+   "explanation": "A = 10.",
+   "chapter": "form4-computer-numbers"
+  },
+  {
+   "id": "form4-computer-numbers-e07",
+   "kind": "numeric",
+   "tier": "application",
+   "lesson": "form4-computer-binary-arithmetic",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Add 11 and 1 in binary and give the denary value.",
+   "answer": 4,
+   "tolerance": 0,
+   "explanation": "3 + 1 = 4 (100).",
+   "difficulty": 1,
+   "points": 2,
+   "chapter": "form4-computer-numbers"
+  },
+  {
+   "id": "form4-computer-numbers-e08",
+   "kind": "mcq",
+   "tier": "application",
+   "lesson": "form4-computer-binary-arithmetic",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "1 + 1 in binary is",
+   "choices": [
+    "2",
+    "0",
+    "10",
+    "11"
+   ],
+   "answer": 2,
+   "explanation": "Write 0, carry 1.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "form4-computer-numbers"
+  },
+  {
+   "id": "form4-computer-numbers-e09",
+   "kind": "truefalse",
+   "tier": "application",
+   "lesson": "form4-computer-binary-arithmetic",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "A right shift halves a whole number.",
+   "answer": true,
+   "explanation": "Yes.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "form4-computer-numbers"
+  },
+  {
+   "id": "form4-computer-numbers-e10",
+   "kind": "numeric",
+   "tier": "approfondissement",
+   "lesson": "form4-computer-binary-arithmetic",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Largest 8-bit unsigned number",
+   "answer": 255,
+   "tolerance": 0,
+   "explanation": "11111111 = 255.",
+   "difficulty": 2,
+   "points": 3,
+   "chapter": "form4-computer-numbers"
+  },
+  {
+   "id": "form4-computer-numbers-e11",
+   "kind": "open",
+   "tier": "approfondissement",
+   "lesson": "form4-computer-binary-arithmetic",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "What is overflow?",
+   "model": "When a result is too large for the bits available, so part of it is lost.",
+   "rubric": "1 mark definition, 1 mark example such as 200+100 in 8 bits.",
+   "explanation": "When a result is too large for the bits available, so part of it is lost.",
+   "difficulty": 2,
+   "points": 3,
+   "chapter": "form4-computer-numbers"
+  },
+  {
+   "id": "form4-computer-numbers-e12",
+   "kind": "problem",
+   "tier": "examen",
+   "lesson": "form4-computer-binary-arithmetic",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Binary sums.",
+   "difficulty": 2,
+   "parts": [
+    {
+     "kind": "numeric",
+     "points": 1,
+     "prompt": "1001 + 0110 in denary",
+     "answer": 15,
+     "tolerance": 0,
+     "explanation": "9 + 6 = 15 (1111).",
+     "id": "form4-computer-numbers-e12-a"
+    },
+    {
+     "kind": "numeric",
+     "points": 1,
+     "prompt": "00010100 shifted left once (denary)",
+     "answer": 40,
+     "tolerance": 0,
+     "explanation": "20 x 2 = 40.",
+     "id": "form4-computer-numbers-e12-b"
+    },
+    {
+     "kind": "mcq",
+     "points": 1,
+     "prompt": "Which cannot be stored in 8 bits unsigned?",
+     "choices": [
+      "128",
+      "0",
+      "256",
+      "255"
+     ],
+     "answer": 2,
+     "explanation": "256 needs 9 bits.",
+     "id": "form4-computer-numbers-e12-c"
+    }
+   ],
+   "chapter": "form4-computer-numbers"
+  },
+  {
+   "id": "form4-computer-binary-arithmetic-q1",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "form4-computer-binary-arithmetic",
+   "prompt": "0 + 1 equals",
+   "choices": [
+    "1",
+    "2",
+    "0",
+    "10"
+   ],
+   "answer": 0,
+   "explanation": "Simple.",
+   "chapter": "form4-computer-numbers"
+  },
+  {
+   "id": "form4-computer-binary-arithmetic-q2",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "form4-computer-binary-arithmetic",
+   "prompt": "A left shift by one place",
+   "choices": [
+    "halves it",
+    "adds 1",
+    "does nothing",
+    "doubles the number"
+   ],
+   "answer": 3,
+   "explanation": "x 2.",
+   "chapter": "form4-computer-numbers"
+  },
+  {
+   "id": "form4-computer-binary-arithmetic-q3",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "form4-computer-binary-arithmetic",
+   "prompt": "Overflow happens when",
+   "choices": [
+    "a file is deleted",
+    "text is typed",
+    "the result needs more bits than available",
+    "the computer is switched off"
+   ],
+   "answer": 2,
+   "explanation": "Too big.",
+   "chapter": "form4-computer-numbers"
+  },
+  {
+   "id": "form4-computer-binary-arithmetic-q4",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "form4-computer-binary-arithmetic",
+   "prompt": "101 + 1 equals",
+   "choices": [
+    "100",
+    "110",
+    "111",
+    "1000"
+   ],
+   "answer": 1,
+   "explanation": "5 + 1 = 6.",
+   "chapter": "form4-computer-numbers"
+  },
+  {
+   "id": "form4-computer-binary-arithmetic-q5",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "form4-computer-binary-arithmetic",
+   "prompt": "The sum 1 + 1 + 1 gives",
+   "choices": [
+    "111",
+    "11",
+    "10",
+    "1"
+   ],
+   "answer": 1,
+   "explanation": "Write 1 carry 1.",
+   "chapter": "form4-computer-numbers"
+  },
+  {
+   "id": "form4-computer-numbers-e13",
+   "kind": "mcq",
+   "tier": "application",
+   "lesson": "form4-computer-data-representation",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "ASCII code for 'a' is",
+   "choices": [
+    "65",
+    "100",
+    "48",
+    "97"
+   ],
+   "answer": 3,
+   "explanation": "Lower case a = 97.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "form4-computer-numbers"
+  },
+  {
+   "id": "form4-computer-numbers-e14",
+   "kind": "numeric",
+   "tier": "application",
+   "lesson": "form4-computer-data-representation",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "An image of 10 x 10 pixels uses 1 bit per pixel. How many bits?",
+   "answer": 100,
+   "tolerance": 0,
+   "explanation": "10 x 10 x 1 = 100.",
+   "difficulty": 1,
+   "points": 2,
+   "chapter": "form4-computer-numbers"
+  },
+  {
+   "id": "form4-computer-numbers-e15",
+   "kind": "truefalse",
+   "tier": "application",
+   "lesson": "form4-computer-data-representation",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "A higher sample rate gives a bigger sound file.",
+   "answer": true,
+   "explanation": "More samples.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "form4-computer-numbers"
+  },
+  {
+   "id": "form4-computer-numbers-e16",
+   "kind": "numeric",
+   "tier": "approfondissement",
+   "lesson": "form4-computer-data-representation",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "How many bytes in 3000 bits?",
+   "answer": 375,
+   "tolerance": 0,
+   "explanation": "3000 / 8 = 375.",
+   "difficulty": 2,
+   "points": 3,
+   "chapter": "form4-computer-numbers"
+  },
+  {
+   "id": "form4-computer-numbers-e17",
+   "kind": "open",
+   "tier": "approfondissement",
+   "lesson": "form4-computer-data-representation",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "What is a pixel?",
+   "model": "A single dot of colour; the smallest element of a bitmap image.",
+   "rubric": "1 mark.",
+   "explanation": "A single dot of colour; the smallest element of a bitmap image.",
+   "difficulty": 2,
+   "points": 3,
+   "chapter": "form4-computer-numbers"
+  },
+  {
+   "id": "form4-computer-numbers-e18",
+   "kind": "problem",
+   "tier": "examen",
+   "lesson": "form4-computer-data-representation",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "An image 640 x 480 pixels, 8 bits per pixel.",
+   "difficulty": 2,
+   "parts": [
+    {
+     "kind": "numeric",
+     "points": 1,
+     "prompt": "Pixels",
+     "answer": 307200,
+     "tolerance": 0,
+     "explanation": "640 x 480 = 307200.",
+     "id": "form4-computer-numbers-e18-a"
+    },
+    {
+     "kind": "numeric",
+     "points": 1,
+     "prompt": "Bytes",
+     "answer": 307200,
+     "tolerance": 0,
+     "explanation": "8 bits per pixel = 1 byte per pixel.",
+     "id": "form4-computer-numbers-e18-b"
+    },
+    {
+     "kind": "mcq",
+     "points": 1,
+     "prompt": "Doubling colour depth to 16 bits (same size) will",
+     "choices": [
+      "halve the file size",
+      "remove colour",
+      "not change",
+      "double the file size"
+     ],
+     "answer": 3,
+     "explanation": "16 vs 8 bits.",
+     "id": "form4-computer-numbers-e18-c"
+    }
+   ],
+   "chapter": "form4-computer-numbers"
+  },
+  {
+   "id": "form4-computer-data-representation-q1",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "form4-computer-data-representation",
+   "prompt": "ASCII stores",
+   "choices": [
+    "pictures as words",
+    "sound as pixels",
+    "nothing",
+    "characters as numbers"
+   ],
+   "answer": 3,
+   "explanation": "Codes.",
+   "chapter": "form4-computer-numbers"
+  },
+  {
+   "id": "form4-computer-data-representation-q2",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "form4-computer-data-representation",
+   "prompt": "Colour depth is",
+   "choices": [
+    "pixels per inch",
+    "number of files",
+    "bits per pixel",
+    "screen size"
+   ],
+   "answer": 2,
+   "explanation": "Bits.",
+   "chapter": "form4-computer-numbers"
+  },
+  {
+   "id": "form4-computer-data-representation-q3",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "form4-computer-data-representation",
+   "prompt": "A sample is",
+   "choices": [
+    "a cable",
+    "one measurement of a sound wave",
+    "a folder",
+    "a picture"
+   ],
+   "answer": 1,
+   "explanation": "Sampling.",
+   "chapter": "form4-computer-numbers"
+  },
+  {
+   "id": "form4-computer-data-representation-q4",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "form4-computer-data-representation",
+   "prompt": "To change bits to bytes",
+   "choices": [
+    "divide by 8",
+    "subtract 8",
+    "multiply by 8",
+    "add 8"
+   ],
+   "answer": 0,
+   "explanation": "8 bits per byte.",
+   "chapter": "form4-computer-numbers"
+  },
+  {
+   "id": "form4-computer-data-representation-q5",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "form4-computer-data-representation",
+   "prompt": "Unicode can store",
+   "choices": [
+    "only numbers",
+    "many languages",
+    "only English",
+    "no letters"
+   ],
+   "answer": 1,
+   "explanation": "Wider than ASCII.",
+   "chapter": "form4-computer-numbers"
+  }
+ ]
+}

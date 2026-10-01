@@ -1,0 +1,965 @@
+{
+ "chapter": "form4-computer-society",
+ "lessons": [
+  {
+   "id": "form4-computer-security-ethics",
+   "title": "Security and ethics",
+   "minutes": 20,
+   "programRef": "Cameroon secondary (general education) Computer Studies / ICT programme, Form 4 — to be checked against the official programme",
+   "status": "draft",
+   "author": "CastBridge (AI draft)",
+   "source": "Original writing following the Cameroonian curriculum; to be reviewed by a teacher",
+   "objectives": [
+    "Describe viruses, phishing and hacking",
+    "Apply protection measures",
+    "Explain copyright and responsible use",
+    "Describe cyberbullying and what to do"
+   ],
+   "prerequisites": [],
+   "exercises": [
+    "form4-computer-society-e01",
+    "form4-computer-society-e02",
+    "form4-computer-society-e03",
+    "form4-computer-society-e04",
+    "form4-computer-society-e05",
+    "form4-computer-society-e06"
+   ],
+   "selfCheck": [
+    "form4-computer-security-ethics-q1",
+    "form4-computer-security-ethics-q2",
+    "form4-computer-security-ethics-q3",
+    "form4-computer-security-ethics-q4",
+    "form4-computer-security-ethics-q5"
+   ],
+   "reviewNotes": [
+    "Local law is not cited; add references to Cameroonian cyber-law after review.",
+    "Syllabus references, scope and level of difficulty are to be checked against the official text; all facts, formulas and worked examples to be verified by a teacher before release."
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Threats",
+     "md": "**Malware** (viruses, worms, spyware) is harmful software. **Phishing** is a trick message that tries to steal passwords or money. **Hacking** is unauthorised access. **Identity theft** is using someone else's details."
+    },
+    {
+     "type": "key",
+     "style": "methode",
+     "title": "Protection",
+     "md": "Strong, unique passwords; antivirus and a firewall; regular updates; backups in more than one place; care with attachments and links; logging out on shared computers; privacy settings on social media."
+    },
+    {
+     "type": "illustration",
+     "figure": {
+      "kind": "shapes",
+      "w": 420,
+      "h": 198,
+      "items": [
+       {
+        "t": "text",
+        "x": 210.0,
+        "y": 24,
+        "text": "Threat and defence",
+        "size": 15,
+        "anchor": "middle",
+        "color": "ink",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 10.0,
+        "y": 40,
+        "w": 200.0,
+        "h": 28,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "lightblue"
+       },
+       {
+        "t": "text",
+        "x": 110.0,
+        "y": 59,
+        "text": "Threat",
+        "size": 13,
+        "anchor": "middle",
+        "color": "ink",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 210.0,
+        "y": 40,
+        "w": 200.0,
+        "h": 28,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "lightgreen"
+       },
+       {
+        "t": "text",
+        "x": 310.0,
+        "y": 59,
+        "text": "Defence",
+        "size": 13,
+        "anchor": "middle",
+        "color": "ink",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 10.0,
+        "y": 68,
+        "w": 200.0,
+        "h": 28,
+        "stroke": "grey",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 110.0,
+        "y": 87,
+        "text": "Virus",
+        "size": 13,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "rect",
+        "x": 210.0,
+        "y": 68,
+        "w": 200.0,
+        "h": 28,
+        "stroke": "grey",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 310.0,
+        "y": 87,
+        "text": "Antivirus",
+        "size": 13,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "rect",
+        "x": 10.0,
+        "y": 96,
+        "w": 200.0,
+        "h": 28,
+        "stroke": "grey",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 110.0,
+        "y": 115,
+        "text": "Phishing",
+        "size": 13,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "rect",
+        "x": 210.0,
+        "y": 96,
+        "w": 200.0,
+        "h": 28,
+        "stroke": "grey",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 310.0,
+        "y": 115,
+        "text": "Do not click; check sender",
+        "size": 13,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "rect",
+        "x": 10.0,
+        "y": 124,
+        "w": 200.0,
+        "h": 28,
+        "stroke": "grey",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 110.0,
+        "y": 143,
+        "text": "Hacking",
+        "size": 13,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "rect",
+        "x": 210.0,
+        "y": 124,
+        "w": 200.0,
+        "h": 28,
+        "stroke": "grey",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 310.0,
+        "y": 143,
+        "text": "Strong password",
+        "size": 13,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "rect",
+        "x": 10.0,
+        "y": 152,
+        "w": 200.0,
+        "h": 28,
+        "stroke": "grey",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 110.0,
+        "y": 171,
+        "text": "Data loss",
+        "size": 13,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "rect",
+        "x": 210.0,
+        "y": 152,
+        "w": 200.0,
+        "h": 28,
+        "stroke": "grey",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 310.0,
+        "y": 171,
+        "text": "Backup",
+        "size": 13,
+        "anchor": "middle",
+        "color": "ink"
+       }
+      ]
+     },
+     "caption": "A table pairing four threats with defences.",
+     "alt": "Threat and defence table."
+    },
+    {
+     "type": "key",
+     "style": "retenir",
+     "title": "Ethics",
+     "md": "**Copyright** protects the work of creators: do not copy or share their work without permission. Respect others online. **Cyberbullying** (hurtful messages or pictures) can seriously harm people; keep evidence, do not reply and tell a trusted adult."
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Mistakes",
+     "md": "- Believing that antivirus alone is enough.\n- Sharing photos of others without permission.\n- Using the same password for all accounts."
+    },
+    {
+     "type": "example",
+     "title": "Example 1",
+     "statement": "An unknown number sends a message that you won a phone and must pay a fee. What do you do?",
+     "steps": [
+      "It asks for money to give a prize: a typical fraud.",
+      "Do not pay; do not click; tell an adult and block the sender."
+     ],
+     "answer": "Treat it as fraud."
+    },
+    {
+     "type": "example",
+     "title": "Example 2",
+     "statement": "Which password is stronger: Buea2010 or k9#Tz!vR4p? Why?",
+     "steps": [
+      "Buea2010 uses a town name and a year, easy to guess.",
+      "k9#Tz!vR4p is longer, mixed and not a real word."
+     ],
+     "answer": "k9#Tz!vR4p"
+    }
+   ],
+   "chapter": "form4-computer-society"
+  },
+  {
+   "id": "form4-computer-programming-more",
+   "title": "Programming: loops, lists and procedures",
+   "minutes": 25,
+   "programRef": "Cameroon secondary (general education) Computer Studies / ICT programme, Form 4 — to be checked against the official programme",
+   "status": "draft",
+   "author": "CastBridge (AI draft)",
+   "source": "Original writing following the Cameroonian curriculum; to be reviewed by a teacher",
+   "objectives": [
+    "Use FOR, WHILE and REPEAT loops",
+    "Store several values in a list (array)",
+    "Write and use a procedure/function",
+    "Test and debug a program"
+   ],
+   "prerequisites": [],
+   "exercises": [
+    "form4-computer-society-e07",
+    "form4-computer-society-e08",
+    "form4-computer-society-e09",
+    "form4-computer-society-e10",
+    "form4-computer-society-e11",
+    "form4-computer-society-e12"
+   ],
+   "selfCheck": [
+    "form4-computer-programming-more-q1",
+    "form4-computer-programming-more-q2",
+    "form4-computer-programming-more-q3",
+    "form4-computer-programming-more-q4",
+    "form4-computer-programming-more-q5"
+   ],
+   "reviewNotes": [
+    "Lists indexed from 1 in this pseudocode; real languages may start at 0 - state this to learners.",
+    "Syllabus references, scope and level of difficulty are to be checked against the official text; all facts, formulas and worked examples to be verified by a teacher before release."
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Loops",
+     "md": "**FOR** repeats a known number of times. **WHILE** repeats while a condition is true (it may not run at all). **REPEAT ... UNTIL** runs at least once. Be sure the condition can become false, otherwise the loop never ends."
+    },
+    {
+     "type": "key",
+     "style": "retenir",
+     "title": "Lists (arrays)",
+     "md": "A **list** (array) stores several values of the same type under one name, with an **index**: marks[1], marks[2], ... (this course starts at 1). A FOR loop is a good way to process every item: total = total + marks[i]."
+    },
+    {
+     "type": "illustration",
+     "figure": {
+      "kind": "shapes",
+      "w": 420,
+      "h": 150,
+      "items": [
+       {
+        "t": "text",
+        "x": 210.0,
+        "y": 24,
+        "text": "List: marks (indexes 1 to 5)",
+        "size": 15,
+        "anchor": "middle",
+        "color": "ink",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 75.0,
+        "y": 70,
+        "w": 50,
+        "h": 36,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "lightblue",
+        "radius": 4
+       },
+       {
+        "t": "text",
+        "x": 100.0,
+        "y": 94,
+        "text": "12",
+        "size": 14,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "text",
+        "x": 100.0,
+        "y": 128,
+        "text": "[1]",
+        "size": 11,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "rect",
+        "x": 129.0,
+        "y": 70,
+        "w": 50,
+        "h": 36,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "lightblue",
+        "radius": 4
+       },
+       {
+        "t": "text",
+        "x": 154.0,
+        "y": 94,
+        "text": "15",
+        "size": 14,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "text",
+        "x": 154.0,
+        "y": 128,
+        "text": "[2]",
+        "size": 11,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "rect",
+        "x": 183.0,
+        "y": 70,
+        "w": 50,
+        "h": 36,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "lightblue",
+        "radius": 4
+       },
+       {
+        "t": "text",
+        "x": 208.0,
+        "y": 94,
+        "text": "9",
+        "size": 14,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "text",
+        "x": 208.0,
+        "y": 128,
+        "text": "[3]",
+        "size": 11,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "rect",
+        "x": 237.0,
+        "y": 70,
+        "w": 50,
+        "h": 36,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "lightblue",
+        "radius": 4
+       },
+       {
+        "t": "text",
+        "x": 262.0,
+        "y": 94,
+        "text": "18",
+        "size": 14,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "text",
+        "x": 262.0,
+        "y": 128,
+        "text": "[4]",
+        "size": 11,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "rect",
+        "x": 291.0,
+        "y": 70,
+        "w": 50,
+        "h": 36,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "lightblue",
+        "radius": 4
+       },
+       {
+        "t": "text",
+        "x": 316.0,
+        "y": 94,
+        "text": "6",
+        "size": 14,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "text",
+        "x": 316.0,
+        "y": 128,
+        "text": "[5]",
+        "size": 11,
+        "anchor": "middle",
+        "color": "ink"
+       }
+      ]
+     },
+     "caption": "Five boxes holding the values 12, 15, 9, 18 and 6, with indexes 1 to 5 below.",
+     "alt": "A list of five marks with their indexes."
+    },
+    {
+     "type": "key",
+     "style": "retenir",
+     "title": "Procedures and functions",
+     "md": "A **procedure** is a named block of steps you can call many times. A **function** is a procedure that **returns** a value. They save repeating code and make programs easier to read and test."
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Mistakes",
+     "md": "- Off-by-one errors: a list of 5 items has indexes 1 to 5.\n- Forgetting to update the variable in a WHILE loop.\n- Testing only with one value: also try extreme and wrong values."
+    },
+    {
+     "type": "example",
+     "title": "Example 1",
+     "statement": "marks = [12, 15, 9, 18, 6]. Write pseudocode for the total and trace it.",
+     "steps": [
+      "total = 0; FOR i = 1 TO 5: total = total + marks[i]; OUTPUT total.",
+      "12 + 15 + 9 + 18 + 6 = 60."
+     ],
+     "answer": "60"
+    },
+    {
+     "type": "example",
+     "title": "Example 2",
+     "statement": "FUNCTION double(x) RETURN x \\* 2. What is double(7) + double(3)?",
+     "steps": [
+      "double(7) = 14 and double(3) = 6.",
+      "14 + 6 = 20."
+     ],
+     "answer": "20"
+    }
+   ],
+   "chapter": "form4-computer-society"
+  }
+ ],
+ "exercises": [
+  {
+   "id": "form4-computer-society-e01",
+   "kind": "mcq",
+   "tier": "application",
+   "lesson": "form4-computer-security-ethics",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Software that protects against viruses is",
+   "choices": [
+    "antivirus",
+    "compiler",
+    "browser",
+    "spreadsheet"
+   ],
+   "answer": 0,
+   "explanation": "Antivirus.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "form4-computer-society"
+  },
+  {
+   "id": "form4-computer-society-e02",
+   "kind": "truefalse",
+   "tier": "application",
+   "lesson": "form4-computer-security-ethics",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Copying a classmate's project and presenting it as yours is dishonest.",
+   "answer": true,
+   "explanation": "Copyright and honesty.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "form4-computer-society"
+  },
+  {
+   "id": "form4-computer-society-e03",
+   "kind": "mcq",
+   "tier": "application",
+   "lesson": "form4-computer-security-ethics",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "A message that tricks you into giving a password is",
+   "choices": [
+    "a backup",
+    "a spreadsheet",
+    "a firewall",
+    "phishing"
+   ],
+   "answer": 3,
+   "explanation": "Phishing.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "form4-computer-society"
+  },
+  {
+   "id": "form4-computer-society-e04",
+   "kind": "mcq",
+   "tier": "approfondissement",
+   "lesson": "form4-computer-security-ethics",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Best action if someone sends you hurtful messages online",
+   "choices": [
+    "Reply with insults",
+    "Delete your account at once without telling anyone",
+    "Keep the evidence and tell a trusted adult",
+    "Ignore it forever"
+   ],
+   "answer": 2,
+   "explanation": "Keep proof and get help.",
+   "difficulty": 2,
+   "points": 2,
+   "chapter": "form4-computer-society"
+  },
+  {
+   "id": "form4-computer-society-e05",
+   "kind": "open",
+   "tier": "approfondissement",
+   "lesson": "form4-computer-security-ethics",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "State three ways to keep personal data safe.",
+   "model": "Strong passwords; privacy settings; do not share private details with strangers; backup; antivirus.",
+   "rubric": "1 mark each, 3.",
+   "explanation": "Strong passwords; privacy settings; do not share private details with strangers; backup; antivirus.",
+   "difficulty": 2,
+   "points": 3,
+   "chapter": "form4-computer-society"
+  },
+  {
+   "id": "form4-computer-society-e06",
+   "kind": "problem",
+   "tier": "examen",
+   "lesson": "form4-computer-security-ethics",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Kofi's computer runs slowly and shows strange pop-ups.",
+   "difficulty": 2,
+   "parts": [
+    {
+     "kind": "mcq",
+     "points": 1,
+     "prompt": "Possible cause",
+     "choices": [
+      "a sunny day",
+      "a new keyboard",
+      "too many pencils",
+      "malware"
+     ],
+     "answer": 3,
+     "explanation": "Malware symptoms.",
+     "id": "form4-computer-society-e06-a"
+    },
+    {
+     "kind": "mcq",
+     "points": 1,
+     "prompt": "First action",
+     "choices": [
+      "Delete all files",
+      "Run antivirus and disconnect from the network",
+      "Share your password",
+      "Open the pop-ups"
+     ],
+     "answer": 1,
+     "explanation": "Contain and scan.",
+     "id": "form4-computer-society-e06-b"
+    },
+    {
+     "kind": "open",
+     "points": 2,
+     "prompt": "Suggest one way to prevent it in future.",
+     "model": "Keep software updated, avoid unknown attachments, use antivirus.",
+     "rubric": "1 mark.",
+     "explanation": "Keep software updated, avoid unknown attachments, use antivirus.",
+     "id": "form4-computer-society-e06-c"
+    }
+   ],
+   "chapter": "form4-computer-society"
+  },
+  {
+   "id": "form4-computer-security-ethics-q1",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "form4-computer-security-ethics",
+   "prompt": "Copyright protects",
+   "choices": [
+    "creators' work",
+    "cables",
+    "screens",
+    "computers"
+   ],
+   "answer": 0,
+   "explanation": "Copyright.",
+   "chapter": "form4-computer-society"
+  },
+  {
+   "id": "form4-computer-security-ethics-q2",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "form4-computer-security-ethics",
+   "prompt": "A strong password has",
+   "choices": [
+    "mixed characters and length",
+    "four letters",
+    "your name",
+    "only digits"
+   ],
+   "answer": 0,
+   "explanation": "Strong.",
+   "chapter": "form4-computer-society"
+  },
+  {
+   "id": "form4-computer-security-ethics-q3",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "form4-computer-security-ethics",
+   "prompt": "A firewall",
+   "choices": [
+    "stores songs",
+    "filters network traffic",
+    "types letters",
+    "prints pages"
+   ],
+   "answer": 1,
+   "explanation": "Firewall.",
+   "chapter": "form4-computer-society"
+  },
+  {
+   "id": "form4-computer-security-ethics-q4",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "form4-computer-security-ethics",
+   "prompt": "Cyberbullying should be",
+   "choices": [
+    "reported to a trusted adult",
+    "shared more",
+    "ignored always",
+    "answered with insults"
+   ],
+   "answer": 0,
+   "explanation": "Report.",
+   "chapter": "form4-computer-society"
+  },
+  {
+   "id": "form4-computer-security-ethics-q5",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "form4-computer-security-ethics",
+   "prompt": "A backup is",
+   "choices": [
+    "a monitor",
+    "a virus",
+    "a font",
+    "a copy of your data kept safe"
+   ],
+   "answer": 3,
+   "explanation": "Copy.",
+   "chapter": "form4-computer-society"
+  },
+  {
+   "id": "form4-computer-society-e07",
+   "kind": "numeric",
+   "tier": "application",
+   "lesson": "form4-computer-programming-more",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Using the list above, marks[3] is",
+   "answer": 9,
+   "tolerance": 0,
+   "explanation": "Third item.",
+   "difficulty": 1,
+   "points": 2,
+   "chapter": "form4-computer-society"
+  },
+  {
+   "id": "form4-computer-society-e08",
+   "kind": "mcq",
+   "tier": "application",
+   "lesson": "form4-computer-programming-more",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "A loop that tests the condition first and may run zero times is",
+   "choices": [
+    "FOR only",
+    "WHILE",
+    "REPEAT-UNTIL",
+    "None"
+   ],
+   "answer": 1,
+   "explanation": "WHILE.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "form4-computer-society"
+  },
+  {
+   "id": "form4-computer-society-e09",
+   "kind": "truefalse",
+   "tier": "application",
+   "lesson": "form4-computer-programming-more",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "A function returns a value.",
+   "answer": true,
+   "explanation": "Yes.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "form4-computer-society"
+  },
+  {
+   "id": "form4-computer-society-e10",
+   "kind": "numeric",
+   "tier": "approfondissement",
+   "lesson": "form4-computer-programming-more",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "The average of the list [12, 15, 9, 18, 6] is",
+   "answer": 12,
+   "tolerance": 0,
+   "explanation": "60 / 5 = 12.",
+   "difficulty": 2,
+   "points": 3,
+   "chapter": "form4-computer-society"
+  },
+  {
+   "id": "form4-computer-society-e11",
+   "kind": "open",
+   "tier": "approfondissement",
+   "lesson": "form4-computer-programming-more",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Why are procedures and functions useful?",
+   "model": "They avoid repeating code, make programs shorter and easier to read, and can be tested separately.",
+   "rubric": "1 mark each reason.",
+   "explanation": "They avoid repeating code, make programs shorter and easier to read, and can be tested separately.",
+   "difficulty": 2,
+   "points": 3,
+   "chapter": "form4-computer-society"
+  },
+  {
+   "id": "form4-computer-society-e12",
+   "kind": "problem",
+   "tier": "examen",
+   "lesson": "form4-computer-programming-more",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Program: count = 0; FOR i = 1 TO 5: IF marks[i] >= 10 THEN count = count + 1 ENDIF NEXT i. List: 12, 15, 9, 18, 6.",
+   "difficulty": 2,
+   "parts": [
+    {
+     "kind": "numeric",
+     "points": 1,
+     "prompt": "Value of count at the end",
+     "answer": 3,
+     "tolerance": 0,
+     "explanation": "12, 15 and 18 are at least 10.",
+     "id": "form4-computer-society-e12-a"
+    },
+    {
+     "kind": "numeric",
+     "points": 1,
+     "prompt": "Largest mark",
+     "answer": 18,
+     "tolerance": 0,
+     "explanation": "Maximum.",
+     "id": "form4-computer-society-e12-b"
+    },
+    {
+     "kind": "mcq",
+     "points": 1,
+     "prompt": "Which loop is best here?",
+     "choices": [
+      "None",
+      "REPEAT with no end",
+      "FOR",
+      "WHILE with no change"
+     ],
+     "answer": 2,
+     "explanation": "Known number of items.",
+     "id": "form4-computer-society-e12-c"
+    }
+   ],
+   "chapter": "form4-computer-society"
+  },
+  {
+   "id": "form4-computer-programming-more-q1",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "form4-computer-programming-more",
+   "prompt": "An array stores",
+   "choices": [
+    "one cable",
+    "one picture",
+    "one screen",
+    "several values under one name"
+   ],
+   "answer": 3,
+   "explanation": "Array.",
+   "chapter": "form4-computer-society"
+  },
+  {
+   "id": "form4-computer-programming-more-q2",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "form4-computer-programming-more",
+   "prompt": "The index shows",
+   "choices": [
+    "the colour",
+    "the file type",
+    "the position of an item",
+    "the price"
+   ],
+   "answer": 2,
+   "explanation": "Position.",
+   "chapter": "form4-computer-society"
+  },
+  {
+   "id": "form4-computer-programming-more-q3",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "form4-computer-programming-more",
+   "prompt": "A function",
+   "choices": [
+    "is a monitor",
+    "never ends",
+    "returns a value",
+    "is hardware"
+   ],
+   "answer": 2,
+   "explanation": "Return.",
+   "chapter": "form4-computer-society"
+  },
+  {
+   "id": "form4-computer-programming-more-q4",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "form4-computer-programming-more",
+   "prompt": "REPEAT-UNTIL runs",
+   "choices": [
+    "only if false first",
+    "never",
+    "exactly twice",
+    "at least once"
+   ],
+   "answer": 3,
+   "explanation": "Test at end.",
+   "chapter": "form4-computer-society"
+  },
+  {
+   "id": "form4-computer-programming-more-q5",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "form4-computer-programming-more",
+   "prompt": "Testing a program should use",
+   "choices": [
+    "normal and extreme values",
+    "random letters only",
+    "only one value",
+    "no values"
+   ],
+   "answer": 0,
+   "explanation": "Good tests.",
+   "chapter": "form4-computer-society"
+  }
+ ]
+}

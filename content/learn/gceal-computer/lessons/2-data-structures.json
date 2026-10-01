@@ -1,0 +1,1066 @@
+{
+ "chapter": "gceal-computer-data-structures",
+ "lessons": [
+  {
+   "id": "gceal-computer-linked-lists-trees",
+   "title": "Linked lists, trees and hash tables",
+   "minutes": 35,
+   "programRef": "Cameroon GCE Board — Advanced Level Computer Science syllabus (Upper Sixth part) — to be checked against the official text",
+   "status": "draft",
+   "author": "CastBridge (AI draft)",
+   "source": "Original writing following the Cameroonian curriculum; to be reviewed by a teacher",
+   "objectives": [
+    "Describe a linked list and its operations",
+    "Describe a binary search tree and its traversals",
+    "Insert into a BST",
+    "Describe a hash table and collisions in outline"
+   ],
+   "prerequisites": [],
+   "exercises": [
+    "gceal-computer-data-structures-e01",
+    "gceal-computer-data-structures-e02",
+    "gceal-computer-data-structures-e03",
+    "gceal-computer-data-structures-e04",
+    "gceal-computer-data-structures-e05",
+    "gceal-computer-data-structures-e06"
+   ],
+   "selfCheck": [
+    "gceal-computer-linked-lists-trees-q1",
+    "gceal-computer-linked-lists-trees-q2",
+    "gceal-computer-linked-lists-trees-q3",
+    "gceal-computer-linked-lists-trees-q4",
+    "gceal-computer-linked-lists-trees-q5"
+   ],
+   "reviewNotes": [
+    "Traversal and hash results computed in Python. Pointer representation (array of nodes) not drawn.",
+    "Syllabus references, scope and level of difficulty are to be checked against the official text; all facts, formulas and worked examples to be verified by a teacher before release."
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Linked list",
+     "md": "A **linked list** is a chain of **nodes**; each node holds data and a **pointer** (the index or address of the next node). The **head** pointer marks the start; the last node's pointer is null. Inserting or deleting in the middle only changes pointers (no shifting of items), but finding the k-th item requires following k pointers. Pseudocode here is Python-like (indentation = block)."
+    },
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Binary search tree (BST)",
+     "md": "A **tree** has a **root** and nodes with **children**; a **leaf** has none. In a **binary** tree each node has at most two children. In a **BST**, for every node all keys in the left subtree are smaller and all keys in the right subtree are larger. To insert: compare with the root and go left or right until an empty place is found."
+    },
+    {
+     "type": "illustration",
+     "figure": {
+      "kind": "shapes",
+      "w": 420,
+      "h": 190,
+      "items": [
+       {
+        "t": "text",
+        "x": 210,
+        "y": 16,
+        "text": "BST built from 50, 30, 70, 20, 40, 60, 80",
+        "size": 13,
+        "anchor": "middle",
+        "color": "ink",
+        "bold": true
+       },
+       {
+        "t": "circle",
+        "cx": 210,
+        "cy": 50,
+        "r": 17,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "lightyellow"
+       },
+       {
+        "t": "text",
+        "x": 210,
+        "y": 55,
+        "text": "50",
+        "size": 13,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "line",
+        "x1": 198,
+        "y1": 63,
+        "x2": 130,
+        "y2": 95,
+        "color": "ink",
+        "width": 2
+       },
+       {
+        "t": "line",
+        "x1": 222,
+        "y1": 63,
+        "x2": 290,
+        "y2": 95,
+        "color": "ink",
+        "width": 2
+       },
+       {
+        "t": "circle",
+        "cx": 120,
+        "cy": 105,
+        "r": 17,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "lightblue"
+       },
+       {
+        "t": "text",
+        "x": 120,
+        "y": 110,
+        "text": "30",
+        "size": 13,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "circle",
+        "cx": 300,
+        "cy": 105,
+        "r": 17,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "lightblue"
+       },
+       {
+        "t": "text",
+        "x": 300,
+        "y": 110,
+        "text": "70",
+        "size": 13,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "line",
+        "x1": 110,
+        "y1": 120,
+        "x2": 70,
+        "y2": 150,
+        "color": "ink",
+        "width": 2
+       },
+       {
+        "t": "line",
+        "x1": 130,
+        "y1": 120,
+        "x2": 170,
+        "y2": 150,
+        "color": "ink",
+        "width": 2
+       },
+       {
+        "t": "line",
+        "x1": 290,
+        "y1": 120,
+        "x2": 250,
+        "y2": 150,
+        "color": "ink",
+        "width": 2
+       },
+       {
+        "t": "line",
+        "x1": 310,
+        "y1": 120,
+        "x2": 350,
+        "y2": 150,
+        "color": "ink",
+        "width": 2
+       },
+       {
+        "t": "circle",
+        "cx": 60,
+        "cy": 160,
+        "r": 17,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "lightgreen"
+       },
+       {
+        "t": "text",
+        "x": 60,
+        "y": 165,
+        "text": "20",
+        "size": 13,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "circle",
+        "cx": 180,
+        "cy": 160,
+        "r": 17,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "lightgreen"
+       },
+       {
+        "t": "text",
+        "x": 180,
+        "y": 165,
+        "text": "40",
+        "size": 13,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "circle",
+        "cx": 240,
+        "cy": 160,
+        "r": 17,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "lightgreen"
+       },
+       {
+        "t": "text",
+        "x": 240,
+        "y": 165,
+        "text": "60",
+        "size": 13,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "circle",
+        "cx": 360,
+        "cy": 160,
+        "r": 17,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "lightgreen"
+       },
+       {
+        "t": "text",
+        "x": 360,
+        "y": 165,
+        "text": "80",
+        "size": 13,
+        "anchor": "middle",
+        "color": "ink"
+       }
+      ]
+     },
+     "caption": "A binary search tree with root 50, children 30 and 70, and leaves 20, 40, 60 and 80.",
+     "alt": "BST diagram: root 50; left child 30 with leaves 20 and 40; right child 70 with leaves 60 and 80."
+    },
+    {
+     "type": "key",
+     "style": "methode",
+     "title": "Traversals",
+     "md": "**In-order** (left, root, right) gives a BST's keys in ascending order. **Pre-order** (root, left, right) is used to copy a tree. **Post-order** (left, right, root) is used to delete a tree or evaluate an expression tree. The **height** is the number of levels."
+    },
+    {
+     "type": "key",
+     "style": "retenir",
+     "title": "Hash tables",
+     "md": "A **hash table** stores items at an index computed by a **hash function** from the key (e.g. key MOD table size). Lookup is very fast on average. A **collision** is when two keys give the same index; it is handled, for example, by **chaining** (a list at each slot) or by probing the next free slot."
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Common mistakes",
+     "md": "- Searching a BST that was built from sorted data is slow because it becomes a chain.\n- Inserting a node: update **both** pointers (new node's next and previous node's next).\n- In-order traversal sorts only a **binary search** tree.\n- A good hash function spreads keys evenly."
+    },
+    {
+     "type": "example",
+     "title": "Example 1 - Traversals",
+     "statement": "For the tree built by inserting 50, 30, 70, 20, 40, 60, 80, list the in-order and pre-order traversals.",
+     "steps": [
+      "In-order (left, root, right): 20, 30, 40, 50, 60, 70, 80 (sorted).",
+      "Pre-order (root, left, right): 50, 30, 20, 40, 70, 60, 80."
+     ],
+     "answer": "In-order 20 30 40 50 60 70 80; pre-order 50 30 20 40 70 60 80"
+    },
+    {
+     "type": "example",
+     "title": "Example 2 - Hash",
+     "statement": "Use hash = key MOD 7 to place keys 15, 22, 9 in a table of 7 slots (0-6). Show collisions.",
+     "steps": [
+      "15 MOD 7 = 1; 22 MOD 7 = 1; 9 MOD 7 = 2.",
+      "15 and 22 collide at slot 1: with chaining slot 1 holds the list 15, 22."
+     ],
+     "answer": "Slot 1: 15, 22; slot 2: 9"
+    }
+   ],
+   "chapter": "gceal-computer-data-structures"
+  },
+  {
+   "id": "gceal-computer-recursion-complexity",
+   "title": "Recursion and algorithm efficiency",
+   "minutes": 35,
+   "programRef": "Cameroon GCE Board — Advanced Level Computer Science syllabus (Upper Sixth part) — to be checked against the official text",
+   "status": "draft",
+   "author": "CastBridge (AI draft)",
+   "source": "Original writing following the Cameroonian curriculum; to be reviewed by a teacher",
+   "objectives": [
+    "Define recursion, base case and recursive case",
+    "Trace recursive functions using the call stack",
+    "Describe merge sort in outline",
+    "Compare algorithms using Big-O notation"
+   ],
+   "prerequisites": [],
+   "exercises": [
+    "gceal-computer-data-structures-e07",
+    "gceal-computer-data-structures-e08",
+    "gceal-computer-data-structures-e09",
+    "gceal-computer-data-structures-e10",
+    "gceal-computer-data-structures-e11",
+    "gceal-computer-data-structures-e12"
+   ],
+   "selfCheck": [
+    "gceal-computer-recursion-complexity-q1",
+    "gceal-computer-recursion-complexity-q2",
+    "gceal-computer-recursion-complexity-q3",
+    "gceal-computer-recursion-complexity-q4",
+    "gceal-computer-recursion-complexity-q5"
+   ],
+   "reviewNotes": [
+    "Verified values (hanoi 31, fib(6)=8, merge sort result). Big-O definitions at A-level outline.",
+    "Syllabus references, scope and level of difficulty are to be checked against the official text; all facts, formulas and worked examples to be verified by a teacher before release."
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Recursion",
+     "md": "A **recursive** subroutine calls itself on a **smaller** version of the problem. It needs a **base case** (stops the recursion) and a **recursive case**. Pseudocode here is Python-like (indentation = block). def fact(n): if n == 0: return 1 else: return n \\* fact(n - 1). Each call is stored as a **stack frame**; too many nested calls cause a **stack overflow**."
+    },
+    {
+     "type": "key",
+     "style": "methode",
+     "title": "Tracing",
+     "md": "Trace by writing each call until the base case, then **unwind**: fact(3) = 3 x fact(2) = 3 x 2 x fact(1) = 3 x 2 x 1 x fact(0) = 3 x 2 x 1 x 1 = 6. Recursion suits problems with self-similar structure: trees, divide-and-conquer, Towers of Hanoi. A loop is often faster and uses less memory."
+    },
+    {
+     "type": "illustration",
+     "figure": {
+      "kind": "shapes",
+      "w": 420,
+      "h": 198,
+      "items": [
+       {
+        "t": "text",
+        "x": 210.0,
+        "y": 24,
+        "text": "Growth for n = 1024",
+        "size": 15,
+        "anchor": "middle",
+        "color": "ink",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 10.0,
+        "y": 40,
+        "w": 200.0,
+        "h": 28,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "lightblue"
+       },
+       {
+        "t": "text",
+        "x": 110.0,
+        "y": 59,
+        "text": "Complexity",
+        "size": 13,
+        "anchor": "middle",
+        "color": "ink",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 210.0,
+        "y": 40,
+        "w": 200.0,
+        "h": 28,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "lightgreen"
+       },
+       {
+        "t": "text",
+        "x": 310.0,
+        "y": 59,
+        "text": "Steps (about)",
+        "size": 13,
+        "anchor": "middle",
+        "color": "ink",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 10.0,
+        "y": 68,
+        "w": 200.0,
+        "h": 28,
+        "stroke": "grey",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 110.0,
+        "y": 87,
+        "text": "O(log n)",
+        "size": 13,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "rect",
+        "x": 210.0,
+        "y": 68,
+        "w": 200.0,
+        "h": 28,
+        "stroke": "grey",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 310.0,
+        "y": 87,
+        "text": "10",
+        "size": 13,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "rect",
+        "x": 10.0,
+        "y": 96,
+        "w": 200.0,
+        "h": 28,
+        "stroke": "grey",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 110.0,
+        "y": 115,
+        "text": "O(n)",
+        "size": 13,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "rect",
+        "x": 210.0,
+        "y": 96,
+        "w": 200.0,
+        "h": 28,
+        "stroke": "grey",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 310.0,
+        "y": 115,
+        "text": "1 024",
+        "size": 13,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "rect",
+        "x": 10.0,
+        "y": 124,
+        "w": 200.0,
+        "h": 28,
+        "stroke": "grey",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 110.0,
+        "y": 143,
+        "text": "O(n log n)",
+        "size": 13,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "rect",
+        "x": 210.0,
+        "y": 124,
+        "w": 200.0,
+        "h": 28,
+        "stroke": "grey",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 310.0,
+        "y": 143,
+        "text": "10 240",
+        "size": 13,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "rect",
+        "x": 10.0,
+        "y": 152,
+        "w": 200.0,
+        "h": 28,
+        "stroke": "grey",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 110.0,
+        "y": 171,
+        "text": "O(n squared)",
+        "size": 13,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "rect",
+        "x": 210.0,
+        "y": 152,
+        "w": 200.0,
+        "h": 28,
+        "stroke": "grey",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 310.0,
+        "y": 171,
+        "text": "1 048 576",
+        "size": 13,
+        "anchor": "middle",
+        "color": "ink"
+       }
+      ]
+     },
+     "caption": "Table comparing about how many steps grow for n equal to 1024.",
+     "alt": "Table of growth: log n 10, n 1024, n log n 10240 and n squared 1048576."
+    },
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Big-O notation",
+     "md": "**Big-O** describes how running time (or memory) grows with input size n in the worst case, ignoring constants. **O(1)** constant; **O(log n)** logarithmic (binary search); **O(n)** linear (linear search); **O(n log n)** (merge sort); **O(n²)** quadratic (bubble sort, nested loops); **O(2ⁿ)** exponential (naive Fibonacci)."
+    },
+    {
+     "type": "key",
+     "style": "retenir",
+     "title": "Merge sort (outline)",
+     "md": "Divide the list into halves until each has one item, then **merge** sorted halves repeatedly. It always takes about n log n steps but needs extra memory. **Quick sort** picks a pivot and partitions the list; it is O(n log n) on average but O(n²) in the worst case."
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Common mistakes",
+     "md": "- Forgetting the base case gives infinite recursion.\n- The recursive call must move **towards** the base case.\n- Big-O ignores constants: 5n and n are both O(n).\n- O(n²) is not 'twice as slow': doubling n quadruples the time."
+    },
+    {
+     "type": "example",
+     "title": "Example 1 - Trace",
+     "statement": "def fact(n): if n == 0: return 1 else: return n \\* fact(n - 1). Trace fact(4).",
+     "steps": [
+      "fact(4) = 4 x fact(3) = 4 x 3 x fact(2) = 4 x 3 x 2 x fact(1) = 4 x 3 x 2 x 1 x fact(0).",
+      "fact(0) = 1, so the result is 4 x 3 x 2 x 1 x 1 = 24."
+     ],
+     "answer": "24"
+    },
+    {
+     "type": "example",
+     "title": "Example 2 - Towers of Hanoi",
+     "statement": "The minimum number of moves for n discs satisfies moves(n) = 2 x moves(n-1) + 1, moves(0) = 0. Find moves(5).",
+     "steps": [
+      "moves(1) = 1, moves(2) = 3, moves(3) = 7, moves(4) = 15.",
+      "moves(5) = 2 x 15 + 1 = 31 (this equals 2^5 - 1)."
+     ],
+     "answer": "31"
+    }
+   ],
+   "chapter": "gceal-computer-data-structures"
+  }
+ ],
+ "exercises": [
+  {
+   "id": "gceal-computer-data-structures-e01",
+   "kind": "mcq",
+   "tier": "application",
+   "lesson": "gceal-computer-linked-lists-trees",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "In-order traversal of a BST gives the keys",
+   "choices": [
+    "in descending order only",
+    "in ascending order",
+    "level by level",
+    "in random order"
+   ],
+   "answer": 1,
+   "explanation": "Left-root-right.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "gceal-computer-data-structures"
+  },
+  {
+   "id": "gceal-computer-data-structures-e02",
+   "kind": "numeric",
+   "tier": "application",
+   "lesson": "gceal-computer-linked-lists-trees",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "The height (number of levels) of the BST in the lesson is",
+   "answer": 3,
+   "tolerance": 0,
+   "explanation": "Levels: 50; 30 and 70; four leaves.",
+   "difficulty": 1,
+   "points": 2,
+   "chapter": "gceal-computer-data-structures"
+  },
+  {
+   "id": "gceal-computer-data-structures-e03",
+   "kind": "truefalse",
+   "tier": "application",
+   "lesson": "gceal-computer-linked-lists-trees",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Inserting into a linked list in the middle needs all later items to move.",
+   "answer": false,
+   "explanation": "Only pointers change.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "gceal-computer-data-structures"
+  },
+  {
+   "id": "gceal-computer-data-structures-e04",
+   "kind": "numeric",
+   "tier": "approfondissement",
+   "lesson": "gceal-computer-linked-lists-trees",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Insert 45 into the BST in the lesson. Its parent is the node with key",
+   "answer": 40,
+   "tolerance": 0,
+   "explanation": "45 < 50 so go left; 45 > 30 go right to 40; 45 > 40 so it becomes the right child of 40.",
+   "difficulty": 2,
+   "points": 3,
+   "chapter": "gceal-computer-data-structures"
+  },
+  {
+   "id": "gceal-computer-data-structures-e05",
+   "kind": "open",
+   "tier": "approfondissement",
+   "lesson": "gceal-computer-linked-lists-trees",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Compare an array and a linked list for inserting an item in the middle.",
+   "model": "In an array, later items must be shifted along, which is slow for large arrays; in a linked list only the pointers of the neighbouring nodes change. However, a linked list cannot jump directly to an item by index.",
+   "rubric": "1 mark each (3).",
+   "explanation": "In an array, later items must be shifted along, which is slow for large arrays; in a linked list only the pointers of the neighbouring nodes change. However, a linked list cannot jump directly to an item by index.",
+   "difficulty": 2,
+   "points": 3,
+   "chapter": "gceal-computer-data-structures"
+  },
+  {
+   "id": "gceal-computer-data-structures-e06",
+   "kind": "problem",
+   "tier": "examen",
+   "lesson": "gceal-computer-linked-lists-trees",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Keys 14, 3, 20, 8, 1 are inserted in this order into an empty BST.",
+   "difficulty": 2,
+   "parts": [
+    {
+     "kind": "mcq",
+     "points": 1,
+     "prompt": "The root is",
+     "choices": [
+      "14",
+      "20",
+      "3",
+      "1"
+     ],
+     "answer": 0,
+     "explanation": "First key inserted.",
+     "id": "gceal-computer-data-structures-e06-a"
+    },
+    {
+     "kind": "numeric",
+     "points": 1,
+     "prompt": "The in-order traversal's third key is",
+     "answer": 8,
+     "tolerance": 0,
+     "explanation": "In-order: 1, 3, 8, 14, 20.",
+     "id": "gceal-computer-data-structures-e06-b"
+    },
+    {
+     "kind": "mcq",
+     "points": 1,
+     "prompt": "Pre-order traversal is",
+     "choices": [
+      "1, 8, 3, 20, 14",
+      "14, 3, 1, 8, 20",
+      "1, 3, 8, 14, 20",
+      "14, 20, 3, 8, 1"
+     ],
+     "answer": 1,
+     "explanation": "Root, left subtree (3 with children 1 and 8), then right (20).",
+     "id": "gceal-computer-data-structures-e06-c"
+    }
+   ],
+   "chapter": "gceal-computer-data-structures"
+  },
+  {
+   "id": "gceal-computer-linked-lists-trees-q1",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "gceal-computer-linked-lists-trees",
+   "prompt": "A node in a linked list contains",
+   "choices": [
+    "only a pointer",
+    "data and a pointer",
+    "a CPU",
+    "only data"
+   ],
+   "answer": 1,
+   "explanation": "Node.",
+   "chapter": "gceal-computer-data-structures"
+  },
+  {
+   "id": "gceal-computer-linked-lists-trees-q2",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "gceal-computer-linked-lists-trees",
+   "prompt": "A collision in a hash table occurs when",
+   "choices": [
+    "two keys hash to the same index",
+    "a key is deleted",
+    "memory is full",
+    "a table is empty"
+   ],
+   "answer": 0,
+   "explanation": "Collision.",
+   "chapter": "gceal-computer-data-structures"
+  },
+  {
+   "id": "gceal-computer-linked-lists-trees-q3",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "gceal-computer-linked-lists-trees",
+   "prompt": "Post-order traversal visits the root",
+   "choices": [
+    "second",
+    "first",
+    "last",
+    "never"
+   ],
+   "answer": 2,
+   "explanation": "Left, right, root.",
+   "chapter": "gceal-computer-data-structures"
+  },
+  {
+   "id": "gceal-computer-linked-lists-trees-q4",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "gceal-computer-linked-lists-trees",
+   "prompt": "A leaf node has",
+   "choices": [
+    "three children",
+    "two children",
+    "no children",
+    "one parent only"
+   ],
+   "answer": 2,
+   "explanation": "Leaf.",
+   "chapter": "gceal-computer-data-structures"
+  },
+  {
+   "id": "gceal-computer-linked-lists-trees-q5",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "gceal-computer-linked-lists-trees",
+   "prompt": "The head pointer of a linked list",
+   "choices": [
+    "sorts the list",
+    "deletes nodes",
+    "points to the first node",
+    "holds the last value"
+   ],
+   "answer": 2,
+   "explanation": "Head.",
+   "chapter": "gceal-computer-data-structures"
+  },
+  {
+   "id": "gceal-computer-data-structures-e07",
+   "kind": "mcq",
+   "tier": "application",
+   "lesson": "gceal-computer-recursion-complexity",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "A base case is",
+   "choices": [
+    "a stack",
+    "a loop",
+    "the first call",
+    "the condition that stops the recursion"
+   ],
+   "answer": 3,
+   "explanation": "Base case.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "gceal-computer-data-structures"
+  },
+  {
+   "id": "gceal-computer-data-structures-e08",
+   "kind": "mcq",
+   "tier": "application",
+   "lesson": "gceal-computer-recursion-complexity",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Binary search has complexity",
+   "choices": [
+    "O(1) always",
+    "O(n squared)",
+    "O(n)",
+    "O(log n)"
+   ],
+   "answer": 3,
+   "explanation": "Halving each step.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "gceal-computer-data-structures"
+  },
+  {
+   "id": "gceal-computer-data-structures-e09",
+   "kind": "numeric",
+   "tier": "application",
+   "lesson": "gceal-computer-recursion-complexity",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "fact(5) equals",
+   "answer": 120,
+   "tolerance": 0,
+   "explanation": "5 x 4 x 3 x 2 x 1.",
+   "difficulty": 1,
+   "points": 2,
+   "chapter": "gceal-computer-data-structures"
+  },
+  {
+   "id": "gceal-computer-data-structures-e10",
+   "kind": "numeric",
+   "tier": "approfondissement",
+   "lesson": "gceal-computer-recursion-complexity",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Fibonacci: fib(0)=0, fib(1)=1, fib(n)=fib(n-1)+fib(n-2). Find fib(6).",
+   "answer": 8,
+   "tolerance": 0,
+   "explanation": "0,1,1,2,3,5,8.",
+   "difficulty": 2,
+   "points": 3,
+   "chapter": "gceal-computer-data-structures"
+  },
+  {
+   "id": "gceal-computer-data-structures-e11",
+   "kind": "open",
+   "tier": "approfondissement",
+   "lesson": "gceal-computer-recursion-complexity",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Explain why a recursive function without a base case fails.",
+   "model": "It calls itself forever, each call adds a stack frame, and eventually the stack is exhausted (stack overflow).",
+   "rubric": "1 mark infinite calls; 1 mark stack frames; 1 mark overflow.",
+   "explanation": "It calls itself forever, each call adds a stack frame, and eventually the stack is exhausted (stack overflow).",
+   "difficulty": 2,
+   "points": 3,
+   "chapter": "gceal-computer-data-structures"
+  },
+  {
+   "id": "gceal-computer-data-structures-e12",
+   "kind": "problem",
+   "tier": "examen",
+   "lesson": "gceal-computer-recursion-complexity",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Algorithm A takes about n squared steps; algorithm B takes about n log2 n steps. Take n = 1024 (log2 1024 = 10).",
+   "difficulty": 2,
+   "parts": [
+    {
+     "kind": "numeric",
+     "points": 1,
+     "prompt": "Steps for A",
+     "answer": 1048576,
+     "tolerance": 0,
+     "explanation": "1024 x 1024 = 1 048 576.",
+     "id": "gceal-computer-data-structures-e12-a"
+    },
+    {
+     "kind": "numeric",
+     "points": 1,
+     "prompt": "Steps for B",
+     "answer": 10240,
+     "tolerance": 0,
+     "explanation": "1024 x 10 = 10 240.",
+     "id": "gceal-computer-data-structures-e12-b"
+    },
+    {
+     "kind": "open",
+     "points": 2,
+     "prompt": "Which algorithm is better for large n, and why?",
+     "model": "B, because n log n grows much more slowly than n squared.",
+     "rubric": "1 mark each.",
+     "explanation": "B, because n log n grows much more slowly than n squared.",
+     "id": "gceal-computer-data-structures-e12-c"
+    }
+   ],
+   "chapter": "gceal-computer-data-structures"
+  },
+  {
+   "id": "gceal-computer-recursion-complexity-q1",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "gceal-computer-recursion-complexity",
+   "prompt": "O(n) means the time grows",
+   "choices": [
+    "not at all",
+    "with n squared",
+    "in proportion to n",
+    "exponentially"
+   ],
+   "answer": 2,
+   "explanation": "Linear.",
+   "chapter": "gceal-computer-data-structures"
+  },
+  {
+   "id": "gceal-computer-recursion-complexity-q2",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "gceal-computer-recursion-complexity",
+   "prompt": "Merge sort works by",
+   "choices": [
+    "dividing and merging",
+    "hashing",
+    "compiling",
+    "swapping neighbours"
+   ],
+   "answer": 0,
+   "explanation": "Divide and conquer.",
+   "chapter": "gceal-computer-data-structures"
+  },
+  {
+   "id": "gceal-computer-recursion-complexity-q3",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "gceal-computer-recursion-complexity",
+   "prompt": "Each recursive call is held in a",
+   "choices": [
+    "queue",
+    "stack frame",
+    "cache line",
+    "file"
+   ],
+   "answer": 1,
+   "explanation": "Call stack.",
+   "chapter": "gceal-computer-data-structures"
+  },
+  {
+   "id": "gceal-computer-recursion-complexity-q4",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "gceal-computer-recursion-complexity",
+   "prompt": "The worst case of quick sort is",
+   "choices": [
+    "O(n)",
+    "O(1)",
+    "O(log n)",
+    "O(n squared)"
+   ],
+   "answer": 3,
+   "explanation": "Bad pivots.",
+   "chapter": "gceal-computer-data-structures"
+  },
+  {
+   "id": "gceal-computer-recursion-complexity-q5",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "gceal-computer-recursion-complexity",
+   "prompt": "Naive recursive Fibonacci is roughly",
+   "choices": [
+    "exponential",
+    "linear",
+    "constant",
+    "logarithmic"
+   ],
+   "answer": 0,
+   "explanation": "Repeated work.",
+   "chapter": "gceal-computer-data-structures"
+  },
+  {
+   "id": "gceal-computer-data-structures-m01",
+   "kind": "mcq",
+   "tier": "examen",
+   "lesson": "gceal-computer-recursion-complexity",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "The complexity of binary search on n sorted items is",
+   "choices": [
+    "O(n squared)",
+    "O(log n)",
+    "O(n)",
+    "O(n log n)"
+   ],
+   "answer": 1,
+   "explanation": "Halving each time.",
+   "difficulty": 3,
+   "points": 1,
+   "chapter": "gceal-computer-data-structures"
+  },
+  {
+   "id": "gceal-computer-data-structures-m02",
+   "kind": "problem",
+   "tier": "examen",
+   "lesson": "gceal-computer-linked-lists-trees",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "A BST is built by inserting 50, 30, 70, 20, 40, 60, 80 in that order.",
+   "difficulty": 2,
+   "parts": [
+    {
+     "kind": "mcq",
+     "points": 2,
+     "prompt": "The in-order traversal is",
+     "choices": [
+      "50, 30, 20, 40, 70, 60, 80",
+      "20, 40, 30, 60, 80, 70, 50",
+      "20, 30, 40, 50, 60, 70, 80",
+      "80, 70, 60, 50, 40, 30, 20"
+     ],
+     "answer": 2,
+     "explanation": "In-order of a BST is sorted.",
+     "id": "gceal-computer-data-structures-m02-a"
+    },
+    {
+     "kind": "numeric",
+     "points": 1,
+     "prompt": "The height (number of levels) of the tree",
+     "answer": 3,
+     "tolerance": 0,
+     "explanation": "Three levels.",
+     "id": "gceal-computer-data-structures-m02-b"
+    },
+    {
+     "kind": "open",
+     "points": 2,
+     "prompt": "State the pre-order traversal.",
+     "model": "50, 30, 20, 40, 70, 60, 80",
+     "rubric": "2 marks for fully correct; 1 mark if the root and left subtree are right.",
+     "explanation": "50, 30, 20, 40, 70, 60, 80",
+     "id": "gceal-computer-data-structures-m02-c"
+    }
+   ],
+   "chapter": "gceal-computer-data-structures"
+  }
+ ]
+}

@@ -1,0 +1,428 @@
+{
+ "chapter": "gceal-computer-oop",
+ "lessons": [
+  {
+   "id": "gceal-computer-oop",
+   "title": "Object-oriented programming concepts",
+   "minutes": 35,
+   "programRef": "Cameroon GCE Board — Advanced Level Computer Science syllabus (Upper Sixth part) — to be checked against the official text",
+   "status": "draft",
+   "author": "CastBridge (AI draft)",
+   "source": "Original writing following the Cameroonian curriculum; to be reviewed by a teacher",
+   "objectives": [
+    "Define class, object, attribute and method",
+    "Explain encapsulation, inheritance and polymorphism",
+    "Read and trace OOP pseudocode",
+    "Compare OOP with procedural programming"
+   ],
+   "prerequisites": [],
+   "exercises": [
+    "gceal-computer-oop-e01",
+    "gceal-computer-oop-e02",
+    "gceal-computer-oop-e03",
+    "gceal-computer-oop-e04",
+    "gceal-computer-oop-e05",
+    "gceal-computer-oop-e06"
+   ],
+   "selfCheck": [
+    "gceal-computer-oop-q1",
+    "gceal-computer-oop-q2",
+    "gceal-computer-oop-q3",
+    "gceal-computer-oop-q4",
+    "gceal-computer-oop-q5"
+   ],
+   "reviewNotes": [
+    "Python-like pseudocode; examples run in Python to check results. The Board may require a specific language (e.g. Java/Python/Visual Basic) - adapt.",
+    "Syllabus references, scope and level of difficulty are to be checked against the official text; all facts, formulas and worked examples to be verified by a teacher before release."
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Classes and objects",
+     "md": "A **class** is a blueprint that defines **attributes** (data) and **methods** (operations). An **object** is one **instance** of a class, with its own attribute values. A **constructor** sets up a new object. Pseudocode here is Python-like (indentation = block)."
+    },
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Encapsulation",
+     "md": "**Encapsulation** bundles data and methods and **hides** the data: attributes are private and changed only through public methods, which can **validate** the changes. Example: a bank account balance can change only through deposit() and withdraw(), which reject invalid amounts."
+    },
+    {
+     "type": "illustration",
+     "figure": {
+      "kind": "shapes",
+      "w": 420,
+      "h": 190,
+      "items": [
+       {
+        "t": "text",
+        "x": 210,
+        "y": 18,
+        "text": "Class diagram",
+        "size": 15,
+        "anchor": "middle",
+        "color": "ink",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 120,
+        "y": 36,
+        "w": 180,
+        "h": 56,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "lightyellow",
+        "radius": 4
+       },
+       {
+        "t": "text",
+        "x": 210,
+        "y": 56,
+        "text": "Account",
+        "size": 14,
+        "anchor": "middle",
+        "color": "ink",
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 210,
+        "y": 76,
+        "text": "balance, deposit(), withdraw()",
+        "size": 11,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "line",
+        "x1": 210,
+        "y1": 92,
+        "x2": 210,
+        "y2": 122,
+        "color": "ink",
+        "width": 2,
+        "arrow": "end"
+       },
+       {
+        "t": "text",
+        "x": 260,
+        "y": 112,
+        "text": "inherits",
+        "size": 12,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "rect",
+        "x": 120,
+        "y": 122,
+        "w": 180,
+        "h": 56,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "lightgreen",
+        "radius": 4
+       },
+       {
+        "t": "text",
+        "x": 210,
+        "y": 142,
+        "text": "Savings",
+        "size": 14,
+        "anchor": "middle",
+        "color": "ink",
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 210,
+        "y": 162,
+        "text": "rate, add_interest()",
+        "size": 11,
+        "anchor": "middle",
+        "color": "ink"
+       }
+      ]
+     },
+     "caption": "A class Account with attributes and methods, and a class Savings inheriting from it.",
+     "alt": "Class diagram: Savings inherits from Account."
+    },
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Inheritance and polymorphism",
+     "md": "**Inheritance**: a **subclass** (child) takes the attributes and methods of a **superclass** (parent) and can add or **override** them; this promotes reuse. **Polymorphism**: the same method name behaves differently depending on the object's class (for example, area() for Circle and Square)."
+    },
+    {
+     "type": "key",
+     "style": "methode",
+     "title": "Pseudocode style",
+     "md": "class Account: def deposit(self, amount): if amount > 0: self.balance = self.balance + amount. A subclass: class Savings(Account): ... . Create objects: acc = Account('Ada', 10000). Call: acc.deposit(5000)."
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Common mistakes",
+     "md": "- A class is not an object; objects are created from classes.\n- Inheritance is an 'is-a' relationship (Savings is an Account); do not inherit when the relation is 'has-a'.\n- Private attributes should not be set directly from outside.\n- Overriding changes behaviour in the subclass only."
+    },
+    {
+     "type": "example",
+     "title": "Example 1 - Encapsulation",
+     "statement": "acc = Account('Ada', 10000); acc.deposit(5000); acc.withdraw(20000); acc.withdraw(3000). Balance? (withdraw refuses amounts above the balance).",
+     "steps": [
+      "After the deposit, balance = 15000. withdraw(20000) is refused (more than the balance).",
+      "withdraw(3000) succeeds: 15000 - 3000 = 12000."
+     ],
+     "answer": "12000"
+    },
+    {
+     "type": "example",
+     "title": "Example 2 - Inheritance",
+     "statement": "Savings(Account) has a rate. s = Savings('Paul', 20000, 5); add_interest() deposits balance x rate / 100. What is the balance after add_interest()?",
+     "steps": [
+      "Interest = 20000 x 5 / 100 = 1000.",
+      "Balance = 20000 + 1000 = 21000. Savings uses deposit() inherited from Account."
+     ],
+     "answer": "21000"
+    }
+   ],
+   "chapter": "gceal-computer-oop"
+  }
+ ],
+ "exercises": [
+  {
+   "id": "gceal-computer-oop-e01",
+   "kind": "mcq",
+   "tier": "application",
+   "lesson": "gceal-computer-oop",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "An object is",
+   "choices": [
+    "a compiler",
+    "a blueprint",
+    "an instance of a class",
+    "a file extension"
+   ],
+   "answer": 2,
+   "explanation": "Instance.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "gceal-computer-oop"
+  },
+  {
+   "id": "gceal-computer-oop-e02",
+   "kind": "mcq",
+   "tier": "application",
+   "lesson": "gceal-computer-oop",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Hiding data and giving access through methods is",
+   "choices": [
+    "encapsulation",
+    "polymorphism",
+    "recursion",
+    "hashing"
+   ],
+   "answer": 0,
+   "explanation": "Encapsulation.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "gceal-computer-oop"
+  },
+  {
+   "id": "gceal-computer-oop-e03",
+   "kind": "truefalse",
+   "tier": "application",
+   "lesson": "gceal-computer-oop",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "A subclass can add new methods.",
+   "answer": true,
+   "explanation": "Yes.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "gceal-computer-oop"
+  },
+  {
+   "id": "gceal-computer-oop-e04",
+   "kind": "mcq",
+   "tier": "approfondissement",
+   "lesson": "gceal-computer-oop",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "The same method name behaving differently for different classes is",
+   "choices": [
+    "polymorphism",
+    "iteration",
+    "normalisation",
+    "encapsulation"
+   ],
+   "answer": 0,
+   "explanation": "Polymorphism.",
+   "difficulty": 2,
+   "points": 2,
+   "chapter": "gceal-computer-oop"
+  },
+  {
+   "id": "gceal-computer-oop-e05",
+   "kind": "open",
+   "tier": "approfondissement",
+   "lesson": "gceal-computer-oop",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Give two benefits of encapsulation.",
+   "model": "Protects data from invalid changes because methods can validate input; hides implementation so it can change without breaking other code; easier maintenance.",
+   "rubric": "1 mark each, 2 marks + 1 for example.",
+   "explanation": "Protects data from invalid changes because methods can validate input; hides implementation so it can change without breaking other code; easier maintenance.",
+   "difficulty": 2,
+   "points": 3,
+   "chapter": "gceal-computer-oop"
+  },
+  {
+   "id": "gceal-computer-oop-e06",
+   "kind": "problem",
+   "tier": "examen",
+   "lesson": "gceal-computer-oop",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "class Shape: def area(self): return 0. class Square(Shape): def __init__(self, s): self.s = s. def area(self): return self.s \\* self.s. class Rect(Shape): def __init__(self, w, h): self.w = w. self.h = h. def area(self): return self.w \\* self.h.",
+   "difficulty": 2,
+   "parts": [
+    {
+     "kind": "numeric",
+     "points": 1,
+     "prompt": "area() of Square(7)",
+     "answer": 49,
+     "tolerance": 0,
+     "explanation": "7 x 7 = 49.",
+     "id": "gceal-computer-oop-e06-a"
+    },
+    {
+     "kind": "numeric",
+     "points": 1,
+     "prompt": "area() of Rect(6, 4)",
+     "answer": 24,
+     "tolerance": 0,
+     "explanation": "6 x 4 = 24.",
+     "id": "gceal-computer-oop-e06-b"
+    },
+    {
+     "kind": "mcq",
+     "points": 1,
+     "prompt": "Square and Rect both define area(); this is an example of",
+     "choices": [
+      "encapsulation only",
+      "polymorphism (overriding)",
+      "recursion",
+      "a compiler"
+     ],
+     "answer": 1,
+     "explanation": "Same method, different behaviour.",
+     "id": "gceal-computer-oop-e06-c"
+    }
+   ],
+   "chapter": "gceal-computer-oop"
+  },
+  {
+   "id": "gceal-computer-oop-q1",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "gceal-computer-oop",
+   "prompt": "A constructor",
+   "choices": [
+    "is a hash",
+    "deletes an object",
+    "prints a class",
+    "sets up a new object"
+   ],
+   "answer": 3,
+   "explanation": "Constructor.",
+   "chapter": "gceal-computer-oop"
+  },
+  {
+   "id": "gceal-computer-oop-q2",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "gceal-computer-oop",
+   "prompt": "Inheritance gives a subclass",
+   "choices": [
+    "nothing",
+    "a network",
+    "the screen",
+    "the attributes and methods of its superclass"
+   ],
+   "answer": 3,
+   "explanation": "Reuse.",
+   "chapter": "gceal-computer-oop"
+  },
+  {
+   "id": "gceal-computer-oop-q3",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "gceal-computer-oop",
+   "prompt": "An attribute is",
+   "choices": [
+    "a data item belonging to an object",
+    "a gate",
+    "a protocol",
+    "a loop"
+   ],
+   "answer": 0,
+   "explanation": "Attribute.",
+   "chapter": "gceal-computer-oop"
+  },
+  {
+   "id": "gceal-computer-oop-q4",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "gceal-computer-oop",
+   "prompt": "Private attributes are accessed through",
+   "choices": [
+    "direct assignment from anywhere",
+    "the cache",
+    "methods",
+    "the keyboard"
+   ],
+   "answer": 2,
+   "explanation": "Encapsulation.",
+   "chapter": "gceal-computer-oop"
+  },
+  {
+   "id": "gceal-computer-oop-q5",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "gceal-computer-oop",
+   "prompt": "Savings is an Account is an",
+   "choices": [
+    "hash",
+    "has-a relationship",
+    "queue",
+    "is-a relationship"
+   ],
+   "answer": 3,
+   "explanation": "Inheritance.",
+   "chapter": "gceal-computer-oop"
+  },
+  {
+   "id": "gceal-computer-oop-m01",
+   "kind": "mcq",
+   "tier": "examen",
+   "lesson": "gceal-computer-oop",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Hiding an object's data and giving access only through methods is",
+   "choices": [
+    "polymorphism",
+    "encapsulation",
+    "recursion",
+    "inheritance"
+   ],
+   "answer": 1,
+   "explanation": "Encapsulation.",
+   "difficulty": 3,
+   "points": 1,
+   "chapter": "gceal-computer-oop"
+  }
+ ]
+}

@@ -1,0 +1,1471 @@
+{
+ "chapter": "lower6-computer-networks-os",
+ "lessons": [
+  {
+   "id": "lower6-computer-networks-protocols",
+   "title": "Networks and protocols",
+   "minutes": 30,
+   "programRef": "Cameroon GCE Board — Advanced Level Computer Science syllabus (Lower Sixth part) — to be checked against the official text",
+   "status": "draft",
+   "author": "CastBridge (AI draft)",
+   "source": "Original writing following the Cameroonian curriculum; to be reviewed by a teacher",
+   "objectives": [
+    "Compare LAN/WAN and star, bus and mesh topologies",
+    "Explain packet switching",
+    "Describe the TCP/IP layers and common protocols",
+    "Explain IP addresses, DNS and URLs"
+   ],
+   "prerequisites": [],
+   "exercises": [
+    "lower6-computer-networks-os-e01",
+    "lower6-computer-networks-os-e02",
+    "lower6-computer-networks-os-e03",
+    "lower6-computer-networks-os-e04",
+    "lower6-computer-networks-os-e05",
+    "lower6-computer-networks-os-e06"
+   ],
+   "selfCheck": [
+    "lower6-computer-networks-protocols-q1",
+    "lower6-computer-networks-protocols-q2",
+    "lower6-computer-networks-protocols-q3",
+    "lower6-computer-networks-protocols-q4",
+    "lower6-computer-networks-protocols-q5"
+   ],
+   "reviewNotes": [
+    "Four-layer TCP/IP model used; some syllabi use the 7-layer OSI model - check. File-time calculation ignores overheads.",
+    "Syllabus references, scope and level of difficulty are to be checked against the official text; all facts, formulas and worked examples to be verified by a teacher before release."
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Network types",
+     "md": "A **LAN** covers one site; a **WAN** links sites over long distances (the Internet is a WAN). **Star**: each device to a central switch (easy to extend; the switch is a single point of failure). **Bus**: one shared cable (cheap; collisions, one break stops all). **Mesh**: many direct links (reliable, expensive). Wireless networks use **access points**."
+    },
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Packet switching",
+     "md": "Data is split into **packets**, each with a header (source and destination address, sequence number). Packets may travel by different routes through **routers** and are **reassembled** in order at the destination. Advantages: efficient use of links and resilience if a path fails."
+    },
+    {
+     "type": "illustration",
+     "figure": {
+      "kind": "shapes",
+      "w": 420,
+      "h": 198,
+      "items": [
+       {
+        "t": "text",
+        "x": 210.0,
+        "y": 24,
+        "text": "TCP/IP layers",
+        "size": 15,
+        "anchor": "middle",
+        "color": "ink",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 10.0,
+        "y": 40,
+        "w": 200.0,
+        "h": 28,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "lightblue"
+       },
+       {
+        "t": "text",
+        "x": 110.0,
+        "y": 59,
+        "text": "Layer",
+        "size": 13,
+        "anchor": "middle",
+        "color": "ink",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 210.0,
+        "y": 40,
+        "w": 200.0,
+        "h": 28,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "lightgreen"
+       },
+       {
+        "t": "text",
+        "x": 310.0,
+        "y": 59,
+        "text": "Example",
+        "size": 13,
+        "anchor": "middle",
+        "color": "ink",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 10.0,
+        "y": 68,
+        "w": 200.0,
+        "h": 28,
+        "stroke": "grey",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 110.0,
+        "y": 87,
+        "text": "Application",
+        "size": 13,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "rect",
+        "x": 210.0,
+        "y": 68,
+        "w": 200.0,
+        "h": 28,
+        "stroke": "grey",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 310.0,
+        "y": 87,
+        "text": "HTTP, SMTP, DNS",
+        "size": 13,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "rect",
+        "x": 10.0,
+        "y": 96,
+        "w": 200.0,
+        "h": 28,
+        "stroke": "grey",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 110.0,
+        "y": 115,
+        "text": "Transport",
+        "size": 13,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "rect",
+        "x": 210.0,
+        "y": 96,
+        "w": 200.0,
+        "h": 28,
+        "stroke": "grey",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 310.0,
+        "y": 115,
+        "text": "TCP, UDP",
+        "size": 13,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "rect",
+        "x": 10.0,
+        "y": 124,
+        "w": 200.0,
+        "h": 28,
+        "stroke": "grey",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 110.0,
+        "y": 143,
+        "text": "Internet",
+        "size": 13,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "rect",
+        "x": 210.0,
+        "y": 124,
+        "w": 200.0,
+        "h": 28,
+        "stroke": "grey",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 310.0,
+        "y": 143,
+        "text": "IP",
+        "size": 13,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "rect",
+        "x": 10.0,
+        "y": 152,
+        "w": 200.0,
+        "h": 28,
+        "stroke": "grey",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 110.0,
+        "y": 171,
+        "text": "Link",
+        "size": 13,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "rect",
+        "x": 210.0,
+        "y": 152,
+        "w": 200.0,
+        "h": 28,
+        "stroke": "grey",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 310.0,
+        "y": 171,
+        "text": "Ethernet, Wi-Fi",
+        "size": 13,
+        "anchor": "middle",
+        "color": "ink"
+       }
+      ]
+     },
+     "caption": "A table of the four TCP/IP layers with example protocols.",
+     "alt": "TCP/IP layers: application, transport, internet and link with example protocols."
+    },
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "TCP/IP and protocols",
+     "md": "A **protocol** is an agreed set of rules. The TCP/IP model has four layers: **Application** (HTTP/HTTPS for web, SMTP/POP3/IMAP for email, FTP for files, DNS), **Transport** (TCP: reliable, ordered delivery; UDP: faster, no guarantee), **Internet** (IP: addressing and routing) and **Link** (Ethernet, Wi-Fi). Each layer uses services of the one below."
+    },
+    {
+     "type": "key",
+     "style": "retenir",
+     "title": "Addresses",
+     "md": "An **IPv4 address** has 32 bits, written as four numbers 0-255 (e.g. 192.168.1.10): 2³² = 4 294 967 296 possible addresses. IPv6 uses 128 bits. **DNS** translates a domain name (example.com) into an IP address. A **URL** has a protocol, a domain and a path: https://example.com/page."
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Common mistakes",
+     "md": "- HTTP and HTTPS are not the same: HTTPS is encrypted.\n- Packets may arrive out of order; that is why they carry sequence numbers.\n- An IP address is not the same as a MAC address (hardware address).\n- Mbps is megabits, not megabytes, per second."
+    },
+    {
+     "type": "example",
+     "title": "Example 1 - IPv4 count",
+     "statement": "How many different IPv4 addresses are possible?",
+     "steps": [
+      "IPv4 uses 32 bits.",
+      "2^32 = 4 294 967 296."
+     ],
+     "answer": "4 294 967 296"
+    },
+    {
+     "type": "example",
+     "title": "Example 2 - Which protocol?",
+     "statement": "Choose the protocol: (a) sending an email, (b) loading a secure web page, (c) turning a domain name into an address.",
+     "steps": [
+      "(a) SMTP sends email. (b) HTTPS is the secure web protocol.",
+      "(c) DNS resolves names to IP addresses."
+     ],
+     "answer": "SMTP, HTTPS, DNS"
+    }
+   ],
+   "chapter": "lower6-computer-networks-os"
+  },
+  {
+   "id": "lower6-computer-operating-systems",
+   "title": "Operating systems",
+   "minutes": 25,
+   "programRef": "Cameroon GCE Board — Advanced Level Computer Science syllabus (Lower Sixth part) — to be checked against the official text",
+   "status": "draft",
+   "author": "CastBridge (AI draft)",
+   "source": "Original writing following the Cameroonian curriculum; to be reviewed by a teacher",
+   "objectives": [
+    "List the functions of an operating system",
+    "Explain multitasking and interrupts",
+    "Describe memory and file management",
+    "Compare types of operating system"
+   ],
+   "prerequisites": [],
+   "exercises": [
+    "lower6-computer-networks-os-e07",
+    "lower6-computer-networks-os-e08",
+    "lower6-computer-networks-os-e09",
+    "lower6-computer-networks-os-e10",
+    "lower6-computer-networks-os-e11",
+    "lower6-computer-networks-os-e12"
+   ],
+   "selfCheck": [
+    "lower6-computer-operating-systems-q1",
+    "lower6-computer-operating-systems-q2",
+    "lower6-computer-operating-systems-q3",
+    "lower6-computer-operating-systems-q4",
+    "lower6-computer-operating-systems-q5"
+   ],
+   "reviewNotes": [
+    "Scheduling algorithms are in the Upper Sixth pack. OS types list is a common textbook one.",
+    "Syllabus references, scope and level of difficulty are to be checked against the official text; all facts, formulas and worked examples to be verified by a teacher before release."
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Functions",
+     "md": "The **operating system (OS)** manages hardware and provides services to programs. Main functions: **process management** (scheduling the CPU), **memory management**, **file management**, **device management** (drivers, input/output), **security** (accounts, permissions) and the **user interface**."
+    },
+    {
+     "type": "key",
+     "style": "retenir",
+     "title": "Multitasking and interrupts",
+     "md": "In **multitasking** the CPU switches rapidly between processes so several seem to run at once. An **interrupt** is a signal (from hardware such as a keyboard, or software) that makes the CPU pause the current task, run an **interrupt service routine**, then resume. The OS uses interrupts to share the CPU and respond to events."
+    },
+    {
+     "type": "illustration",
+     "figure": {
+      "kind": "shapes",
+      "w": 400,
+      "h": 222,
+      "items": [
+       {
+        "t": "text",
+        "x": 200.0,
+        "y": 24,
+        "text": "Interrupt handling",
+        "size": 15,
+        "anchor": "middle",
+        "color": "ink",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 40,
+        "y": 40,
+        "w": 320,
+        "h": 30,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "lightblue",
+        "radius": 6
+       },
+       {
+        "t": "text",
+        "x": 200.0,
+        "y": 60,
+        "text": "CPU runs program A",
+        "size": 13,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "line",
+        "x1": 200.0,
+        "y1": 70,
+        "x2": 200.0,
+        "y2": 86,
+        "color": "ink",
+        "width": 2,
+        "arrow": "end"
+       },
+       {
+        "t": "rect",
+        "x": 40,
+        "y": 86,
+        "w": 320,
+        "h": 30,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "lightorange",
+        "radius": 6
+       },
+       {
+        "t": "text",
+        "x": 200.0,
+        "y": 106,
+        "text": "Interrupt signal arrives",
+        "size": 13,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "line",
+        "x1": 200.0,
+        "y1": 116,
+        "x2": 200.0,
+        "y2": 132,
+        "color": "ink",
+        "width": 2,
+        "arrow": "end"
+       },
+       {
+        "t": "rect",
+        "x": 40,
+        "y": 132,
+        "w": 320,
+        "h": 30,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "lightyellow",
+        "radius": 6
+       },
+       {
+        "t": "text",
+        "x": 200.0,
+        "y": 152,
+        "text": "Save state; run service routine",
+        "size": 13,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "line",
+        "x1": 200.0,
+        "y1": 162,
+        "x2": 200.0,
+        "y2": 178,
+        "color": "ink",
+        "width": 2,
+        "arrow": "end"
+       },
+       {
+        "t": "rect",
+        "x": 40,
+        "y": 178,
+        "w": 320,
+        "h": 30,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "lightgreen",
+        "radius": 6
+       },
+       {
+        "t": "text",
+        "x": 200.0,
+        "y": 198,
+        "text": "Restore state; resume program A",
+        "size": 13,
+        "anchor": "middle",
+        "color": "ink"
+       }
+      ]
+     },
+     "caption": "Four steps: running, interrupt, service routine, resume.",
+     "alt": "Flow of interrupt handling from running a program to resuming it."
+    },
+    {
+     "type": "key",
+     "style": "retenir",
+     "title": "Memory and files",
+     "md": "Memory management decides where programs and data are placed in RAM and keeps processes from overwriting each other; **virtual memory** extends RAM using disk. File management organises files in a directory tree, controls access and tracks free space."
+    },
+    {
+     "type": "key",
+     "style": "retenir",
+     "title": "Types of OS",
+     "md": "**Single-user**, **multi-user** (many accounts at once, e.g. a server), **real-time** (must respond within a guaranteed time, e.g. control systems), **embedded** (inside a device such as a phone or washing machine) and **network** operating systems."
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Common mistakes",
+     "md": "- The OS is not the same as the user interface.\n- An interrupt does not stop the program forever: the CPU resumes it.\n- Real-time does not mean 'fast'; it means 'guaranteed response time'."
+    },
+    {
+     "type": "example",
+     "title": "Example 1 - Which function?",
+     "statement": "Name the OS function: (a) giving each user a password-protected account, (b) allocating RAM to programs, (c) installing a driver for a printer.",
+     "steps": [
+      "(a) is security; (b) is memory management.",
+      "(c) is device management."
+     ],
+     "answer": "Security; memory management; device management"
+    },
+    {
+     "type": "example",
+     "title": "Example 2 - Choose the OS type",
+     "statement": "Which type of OS suits an engine-control system that must react within a set time?",
+     "steps": [
+      "The response time is guaranteed and critical.",
+      "That is a real-time operating system (often embedded)."
+     ],
+     "answer": "Real-time OS"
+    }
+   ],
+   "chapter": "lower6-computer-networks-os"
+  },
+  {
+   "id": "lower6-computer-ethics-law-security",
+   "title": "Ethics, law and security",
+   "minutes": 25,
+   "programRef": "Cameroon GCE Board — Advanced Level Computer Science syllabus (Lower Sixth part) — to be checked against the official text",
+   "status": "draft",
+   "author": "CastBridge (AI draft)",
+   "source": "Original writing following the Cameroonian curriculum; to be reviewed by a teacher",
+   "objectives": [
+    "Describe threats to data and countermeasures",
+    "Explain the principles of data protection",
+    "Describe copyright and licences",
+    "Discuss social, ethical and environmental impacts of computing"
+   ],
+   "prerequisites": [],
+   "exercises": [
+    "lower6-computer-networks-os-e13",
+    "lower6-computer-networks-os-e14",
+    "lower6-computer-networks-os-e15",
+    "lower6-computer-networks-os-e16",
+    "lower6-computer-networks-os-e17",
+    "lower6-computer-networks-os-e18"
+   ],
+   "selfCheck": [
+    "lower6-computer-ethics-law-security-q1",
+    "lower6-computer-ethics-law-security-q2",
+    "lower6-computer-ethics-law-security-q3",
+    "lower6-computer-ethics-law-security-q4",
+    "lower6-computer-ethics-law-security-q5"
+   ],
+   "reviewNotes": [
+    "Cameroonian legislation is not cited on purpose (exact law names, dates and numbers to be added by a teacher). Licence categories are textbook-level.",
+    "Syllabus references, scope and level of difficulty are to be checked against the official text; all facts, formulas and worked examples to be verified by a teacher before release."
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Threats and countermeasures",
+     "md": "**Malware** (viruses, worms, ransomware, spyware), **phishing**, **hacking**, **denial-of-service** attacks and **social engineering** threaten data. Countermeasures: **authentication** (passwords, biometrics, two-factor), **encryption**, **firewalls**, **anti-malware**, **access rights**, updates, **backups** and staff training."
+    },
+    {
+     "type": "key",
+     "style": "retenir",
+     "title": "Data protection",
+     "md": "Data about people should be collected for a stated purpose, kept accurate and up to date, kept only as long as needed, protected against loss and unauthorised access, and not passed on without a lawful reason. Many countries have laws on data protection and cybercrime; Cameroon has legislation on cybersecurity and electronic communications (the exact current laws are to be named by the teacher)."
+    },
+    {
+     "type": "illustration",
+     "figure": {
+      "kind": "shapes",
+      "w": 420,
+      "h": 198,
+      "items": [
+       {
+        "t": "text",
+        "x": 210.0,
+        "y": 24,
+        "text": "Threat and countermeasure",
+        "size": 15,
+        "anchor": "middle",
+        "color": "ink",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 10.0,
+        "y": 40,
+        "w": 200.0,
+        "h": 28,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "lightblue"
+       },
+       {
+        "t": "text",
+        "x": 110.0,
+        "y": 59,
+        "text": "Threat",
+        "size": 13,
+        "anchor": "middle",
+        "color": "ink",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 210.0,
+        "y": 40,
+        "w": 200.0,
+        "h": 28,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "lightgreen"
+       },
+       {
+        "t": "text",
+        "x": 310.0,
+        "y": 59,
+        "text": "Countermeasure",
+        "size": 13,
+        "anchor": "middle",
+        "color": "ink",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 10.0,
+        "y": 68,
+        "w": 200.0,
+        "h": 28,
+        "stroke": "grey",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 110.0,
+        "y": 87,
+        "text": "Malware",
+        "size": 13,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "rect",
+        "x": 210.0,
+        "y": 68,
+        "w": 200.0,
+        "h": 28,
+        "stroke": "grey",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 310.0,
+        "y": 87,
+        "text": "Anti-malware, updates",
+        "size": 13,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "rect",
+        "x": 10.0,
+        "y": 96,
+        "w": 200.0,
+        "h": 28,
+        "stroke": "grey",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 110.0,
+        "y": 115,
+        "text": "Phishing",
+        "size": 13,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "rect",
+        "x": 210.0,
+        "y": 96,
+        "w": 200.0,
+        "h": 28,
+        "stroke": "grey",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 310.0,
+        "y": 115,
+        "text": "Training, checks",
+        "size": 13,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "rect",
+        "x": 10.0,
+        "y": 124,
+        "w": 200.0,
+        "h": 28,
+        "stroke": "grey",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 110.0,
+        "y": 143,
+        "text": "Unauthorised access",
+        "size": 13,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "rect",
+        "x": 210.0,
+        "y": 124,
+        "w": 200.0,
+        "h": 28,
+        "stroke": "grey",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 310.0,
+        "y": 143,
+        "text": "Passwords, 2FA",
+        "size": 13,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "rect",
+        "x": 10.0,
+        "y": 152,
+        "w": 200.0,
+        "h": 28,
+        "stroke": "grey",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 110.0,
+        "y": 171,
+        "text": "Interception",
+        "size": 13,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "rect",
+        "x": 210.0,
+        "y": 152,
+        "w": 200.0,
+        "h": 28,
+        "stroke": "grey",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 310.0,
+        "y": 171,
+        "text": "Encryption",
+        "size": 13,
+        "anchor": "middle",
+        "color": "ink"
+       }
+      ]
+     },
+     "caption": "A table of four threats and the matching countermeasures.",
+     "alt": "Table of threats (malware, phishing, unauthorised access, interception) and their countermeasures."
+    },
+    {
+     "type": "key",
+     "style": "retenir",
+     "title": "Copyright and licences",
+     "md": "**Copyright** gives the creator the right to control copying and distribution of a work, including software. Licence types: **proprietary** (you may use but not copy or change), **open source** (source code may be studied, changed and shared under conditions), **shareware** (try then pay) and **freeware** (free to use, not always open)."
+    },
+    {
+     "type": "key",
+     "style": "retenir",
+     "title": "Wider impact",
+     "md": "Computing creates jobs, speeds communication and improves services (e-learning, mobile banking), but can cause job changes, unequal access (the **digital divide**), privacy loss, health issues and **e-waste**. Responsible practice includes safe disposal and recycling of old equipment and reducing energy use."
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Common mistakes",
+     "md": "- Open source is not the same as free of cost or free of licence terms.\n- Encryption protects data in transit or storage; it does not stop it being deleted.\n- 'It is on the Internet' does not mean 'free to copy'."
+    },
+    {
+     "type": "example",
+     "title": "Example 1 - Suggest controls",
+     "statement": "A clinic in Bafoussam stores patient records on a PC. List three controls.",
+     "steps": [
+      "Protect access: individual passwords and access rights.",
+      "Protect against loss: regular backups kept off-site; protect against malware: antivirus and updates."
+     ],
+     "answer": "Passwords/rights, backups, antivirus"
+    },
+    {
+     "type": "example",
+     "title": "Example 2 - Licence",
+     "statement": "A student wants to modify a program found online. What must he check first?",
+     "steps": [
+      "Check the licence: proprietary software usually forbids copying and changing.",
+      "If it is open source, follow the licence conditions when changing and sharing."
+     ],
+     "answer": "The software licence"
+    }
+   ],
+   "chapter": "lower6-computer-networks-os"
+  }
+ ],
+ "exercises": [
+  {
+   "id": "lower6-computer-networks-os-e01",
+   "kind": "mcq",
+   "tier": "application",
+   "lesson": "lower6-computer-networks-protocols",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Which protocol translates domain names into IP addresses?",
+   "choices": [
+    "DNS",
+    "SMTP",
+    "FTP",
+    "TCP"
+   ],
+   "answer": 0,
+   "explanation": "DNS.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "lower6-computer-networks-os"
+  },
+  {
+   "id": "lower6-computer-networks-os-e02",
+   "kind": "mcq",
+   "tier": "application",
+   "lesson": "lower6-computer-networks-protocols",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "In packet switching, data is divided into",
+   "choices": [
+    "folders",
+    "packets",
+    "pixels",
+    "cores"
+   ],
+   "answer": 1,
+   "explanation": "Packets.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "lower6-computer-networks-os"
+  },
+  {
+   "id": "lower6-computer-networks-os-e03",
+   "kind": "truefalse",
+   "tier": "application",
+   "lesson": "lower6-computer-networks-protocols",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "An IPv4 address has 32 bits.",
+   "answer": true,
+   "explanation": "Yes.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "lower6-computer-networks-os"
+  },
+  {
+   "id": "lower6-computer-networks-os-e04",
+   "kind": "matching",
+   "tier": "approfondissement",
+   "lesson": "lower6-computer-networks-protocols",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Match the protocol to its job.",
+   "pairs": [
+    [
+     "HTTPS",
+     "Secure web pages"
+    ],
+    [
+     "SMTP",
+     "Sending email"
+    ],
+    [
+     "FTP",
+     "Transferring files"
+    ],
+    [
+     "TCP",
+     "Reliable ordered delivery"
+    ]
+   ],
+   "explanation": "Standard roles.",
+   "difficulty": 2,
+   "points": 2,
+   "chapter": "lower6-computer-networks-os"
+  },
+  {
+   "id": "lower6-computer-networks-os-e05",
+   "kind": "open",
+   "tier": "approfondissement",
+   "lesson": "lower6-computer-networks-protocols",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Explain why packets carry a sequence number.",
+   "model": "Packets may take different routes and arrive out of order; the sequence numbers let the destination reassemble the data in the correct order and detect missing packets.",
+   "rubric": "1 mark each point (2) plus 1 for example.",
+   "explanation": "Packets may take different routes and arrive out of order; the sequence numbers let the destination reassemble the data in the correct order and detect missing packets.",
+   "difficulty": 2,
+   "points": 3,
+   "chapter": "lower6-computer-networks-os"
+  },
+  {
+   "id": "lower6-computer-networks-os-e06",
+   "kind": "problem",
+   "tier": "examen",
+   "lesson": "lower6-computer-networks-protocols",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "A school in Bamenda sends a 6 MB file over a link of 2 Mbps (use 1 byte = 8 bits, 1 MB = 1 000 000 bytes, ignore overheads).",
+   "difficulty": 2,
+   "parts": [
+    {
+     "kind": "numeric",
+     "points": 1,
+     "prompt": "File size in megabits",
+     "answer": 48,
+     "tolerance": 0,
+     "explanation": "6 x 8 = 48 megabits.",
+     "id": "lower6-computer-networks-os-e06-a"
+    },
+    {
+     "kind": "numeric",
+     "points": 1,
+     "prompt": "Time to send in seconds",
+     "answer": 24,
+     "tolerance": 0,
+     "explanation": "48 / 2 = 24 s.",
+     "unit": "s",
+     "id": "lower6-computer-networks-os-e06-b"
+    },
+    {
+     "kind": "open",
+     "points": 2,
+     "prompt": "Name one reason the real time may be longer.",
+     "model": "Packet headers, retransmitted packets, other users sharing the link, slower real speed than the stated maximum.",
+     "rubric": "1 mark.",
+     "explanation": "Packet headers, retransmitted packets, other users sharing the link, slower real speed than the stated maximum.",
+     "id": "lower6-computer-networks-os-e06-c"
+    }
+   ],
+   "chapter": "lower6-computer-networks-os"
+  },
+  {
+   "id": "lower6-computer-networks-protocols-q1",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "lower6-computer-networks-protocols",
+   "prompt": "TCP provides",
+   "choices": [
+    "file storage",
+    "power",
+    "reliable ordered delivery",
+    "screen output"
+   ],
+   "answer": 2,
+   "explanation": "TCP.",
+   "chapter": "lower6-computer-networks-os"
+  },
+  {
+   "id": "lower6-computer-networks-protocols-q2",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "lower6-computer-networks-protocols",
+   "prompt": "A router",
+   "choices": [
+    "stores files",
+    "prints pages",
+    "draws gates",
+    "forwards packets between networks"
+   ],
+   "answer": 3,
+   "explanation": "Router.",
+   "chapter": "lower6-computer-networks-os"
+  },
+  {
+   "id": "lower6-computer-networks-protocols-q3",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "lower6-computer-networks-protocols",
+   "prompt": "The URL https://example.com/page uses the protocol",
+   "choices": [
+    "DNS",
+    "UDP",
+    "HTTPS",
+    "IMAP"
+   ],
+   "answer": 2,
+   "explanation": "First part.",
+   "chapter": "lower6-computer-networks-os"
+  },
+  {
+   "id": "lower6-computer-networks-protocols-q4",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "lower6-computer-networks-protocols",
+   "prompt": "A mesh network is",
+   "choices": [
+    "never used",
+    "reliable but costly",
+    "cheap with one cable",
+    "wireless only"
+   ],
+   "answer": 1,
+   "explanation": "Many links.",
+   "chapter": "lower6-computer-networks-os"
+  },
+  {
+   "id": "lower6-computer-networks-protocols-q5",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "lower6-computer-networks-protocols",
+   "prompt": "IPv6 addresses have",
+   "choices": [
+    "8 bits",
+    "32 bits",
+    "128 bits",
+    "64 bytes"
+   ],
+   "answer": 2,
+   "explanation": "Longer addresses.",
+   "chapter": "lower6-computer-networks-os"
+  },
+  {
+   "id": "lower6-computer-networks-os-e07",
+   "kind": "mcq",
+   "tier": "application",
+   "lesson": "lower6-computer-operating-systems",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "The OS function of switching the CPU between programs is",
+   "choices": [
+    "hashing",
+    "printing",
+    "file naming",
+    "process scheduling"
+   ],
+   "answer": 3,
+   "explanation": "Scheduling.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "lower6-computer-networks-os"
+  },
+  {
+   "id": "lower6-computer-networks-os-e08",
+   "kind": "mcq",
+   "tier": "application",
+   "lesson": "lower6-computer-operating-systems",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "An interrupt is a signal that",
+   "choices": [
+    "formats a disk",
+    "deletes a file",
+    "makes the CPU pause and handle an event",
+    "shuts down the network"
+   ],
+   "answer": 2,
+   "explanation": "Interrupt.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "lower6-computer-networks-os"
+  },
+  {
+   "id": "lower6-computer-networks-os-e09",
+   "kind": "truefalse",
+   "tier": "application",
+   "lesson": "lower6-computer-operating-systems",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "A real-time OS guarantees a response within a time limit.",
+   "answer": true,
+   "explanation": "That is its definition.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "lower6-computer-networks-os"
+  },
+  {
+   "id": "lower6-computer-networks-os-e10",
+   "kind": "mcq",
+   "tier": "approfondissement",
+   "lesson": "lower6-computer-operating-systems",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "A server where many people log in at the same time uses a",
+   "choices": [
+    "embedded OS only",
+    "multi-user OS",
+    "no OS",
+    "single-user OS"
+   ],
+   "answer": 1,
+   "explanation": "Multi-user.",
+   "difficulty": 2,
+   "points": 2,
+   "chapter": "lower6-computer-networks-os"
+  },
+  {
+   "id": "lower6-computer-networks-os-e11",
+   "kind": "open",
+   "tier": "approfondissement",
+   "lesson": "lower6-computer-operating-systems",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Describe what happens when a key is pressed while a program is running.",
+   "model": "The keyboard sends an interrupt; the CPU saves its current state, runs the keyboard service routine to read the key, then restores the state and resumes the program.",
+   "rubric": "1 mark each of interrupt, service routine, resume (3).",
+   "explanation": "The keyboard sends an interrupt; the CPU saves its current state, runs the keyboard service routine to read the key, then restores the state and resumes the program.",
+   "difficulty": 2,
+   "points": 3,
+   "chapter": "lower6-computer-networks-os"
+  },
+  {
+   "id": "lower6-computer-networks-os-e12",
+   "kind": "problem",
+   "tier": "examen",
+   "lesson": "lower6-computer-operating-systems",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "A school server in Maroua runs a multi-user operating system.",
+   "difficulty": 2,
+   "parts": [
+    {
+     "kind": "mcq",
+     "points": 1,
+     "prompt": "Which function stops one user reading another user's private files?",
+     "choices": [
+      "Virtual memory",
+      "Scheduling only",
+      "Security and permissions",
+      "Device drivers"
+     ],
+     "answer": 2,
+     "explanation": "Access control.",
+     "id": "lower6-computer-networks-os-e12-a"
+    },
+    {
+     "kind": "mcq",
+     "points": 1,
+     "prompt": "Which function lets it print for many users in turn?",
+     "choices": [
+      "Device management with a queue",
+      "Backup",
+      "Compilation",
+      "Encryption only"
+     ],
+     "answer": 0,
+     "explanation": "Spooling queue.",
+     "id": "lower6-computer-networks-os-e12-b"
+    },
+    {
+     "kind": "open",
+     "points": 2,
+     "prompt": "Name two other functions of the OS.",
+     "model": "Memory management, process management, file management, user interface.",
+     "rubric": "1 mark each.",
+     "explanation": "Memory management, process management, file management, user interface.",
+     "id": "lower6-computer-networks-os-e12-c"
+    }
+   ],
+   "chapter": "lower6-computer-networks-os"
+  },
+  {
+   "id": "lower6-computer-operating-systems-q1",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "lower6-computer-operating-systems",
+   "prompt": "An embedded OS is found",
+   "choices": [
+    "only in servers",
+    "in printers' paper",
+    "in books",
+    "inside a device such as a phone"
+   ],
+   "answer": 3,
+   "explanation": "Embedded.",
+   "chapter": "lower6-computer-networks-os"
+  },
+  {
+   "id": "lower6-computer-operating-systems-q2",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "lower6-computer-operating-systems",
+   "prompt": "Virtual memory uses",
+   "choices": [
+    "extra CPU",
+    "part of the disk",
+    "ROM chips",
+    "cache lines"
+   ],
+   "answer": 1,
+   "explanation": "Disk.",
+   "chapter": "lower6-computer-networks-os"
+  },
+  {
+   "id": "lower6-computer-operating-systems-q3",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "lower6-computer-operating-systems",
+   "prompt": "Device drivers are",
+   "choices": [
+    "networks",
+    "programs that let the OS control hardware",
+    "viruses",
+    "pictures"
+   ],
+   "answer": 1,
+   "explanation": "Drivers.",
+   "chapter": "lower6-computer-networks-os"
+  },
+  {
+   "id": "lower6-computer-operating-systems-q4",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "lower6-computer-operating-systems",
+   "prompt": "Multitasking means",
+   "choices": [
+    "turning off",
+    "switching quickly between processes",
+    "using two screens",
+    "compiling"
+   ],
+   "answer": 1,
+   "explanation": "Switching.",
+   "chapter": "lower6-computer-networks-os"
+  },
+  {
+   "id": "lower6-computer-operating-systems-q5",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "lower6-computer-operating-systems",
+   "prompt": "The OS manages",
+   "choices": [
+    "hardware and software resources",
+    "only images",
+    "nothing",
+    "only spreadsheets"
+   ],
+   "answer": 0,
+   "explanation": "Resources.",
+   "chapter": "lower6-computer-networks-os"
+  },
+  {
+   "id": "lower6-computer-networks-os-e13",
+   "kind": "mcq",
+   "tier": "application",
+   "lesson": "lower6-computer-ethics-law-security",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Two-factor authentication means",
+   "choices": [
+    "two printers",
+    "using two different proofs of identity",
+    "two passwords of the same type",
+    "two screens"
+   ],
+   "answer": 1,
+   "explanation": "Different factors.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "lower6-computer-networks-os"
+  },
+  {
+   "id": "lower6-computer-networks-os-e14",
+   "kind": "mcq",
+   "tier": "application",
+   "lesson": "lower6-computer-ethics-law-security",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Encrypting data is meant to",
+   "choices": [
+    "shrink the screen",
+    "delete it",
+    "speed up the CPU",
+    "make it unreadable to unauthorised people"
+   ],
+   "answer": 3,
+   "explanation": "Confidentiality.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "lower6-computer-networks-os"
+  },
+  {
+   "id": "lower6-computer-networks-os-e15",
+   "kind": "truefalse",
+   "tier": "application",
+   "lesson": "lower6-computer-ethics-law-security",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Open-source software always has no licence conditions.",
+   "answer": false,
+   "explanation": "Open source is distributed under a licence with conditions.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "lower6-computer-networks-os"
+  },
+  {
+   "id": "lower6-computer-networks-os-e16",
+   "kind": "mcq",
+   "tier": "approfondissement",
+   "lesson": "lower6-computer-ethics-law-security",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "The digital divide is",
+   "choices": [
+    "a broken cable",
+    "a file extension",
+    "unequal access to ICT",
+    "a new CPU"
+   ],
+   "answer": 2,
+   "explanation": "Access gap.",
+   "difficulty": 2,
+   "points": 2,
+   "chapter": "lower6-computer-networks-os"
+  },
+  {
+   "id": "lower6-computer-networks-os-e17",
+   "kind": "open",
+   "tier": "approfondissement",
+   "lesson": "lower6-computer-ethics-law-security",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Discuss two environmental issues caused by computing and one way to reduce each.",
+   "model": "E-waste from old equipment - recycle and repair; energy use of data centres and devices - use energy-efficient devices and switch off when not needed.",
+   "rubric": "1 mark per issue, 1 per solution (up to 4).",
+   "explanation": "E-waste from old equipment - recycle and repair; energy use of data centres and devices - use energy-efficient devices and switch off when not needed.",
+   "difficulty": 2,
+   "points": 3,
+   "chapter": "lower6-computer-networks-os"
+  },
+  {
+   "id": "lower6-computer-networks-os-e18",
+   "kind": "problem",
+   "tier": "examen",
+   "lesson": "lower6-computer-ethics-law-security",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "A small business in Douala keeps customer names and phone numbers.",
+   "difficulty": 2,
+   "parts": [
+    {
+     "kind": "mcq",
+     "points": 1,
+     "prompt": "Which data-protection principle is breached if the data is sold without permission?",
+     "choices": [
+      "Not passing it on without a lawful reason",
+      "Using passwords",
+      "Making backups",
+      "Keeping data up to date"
+     ],
+     "answer": 0,
+     "explanation": "Unlawful disclosure.",
+     "id": "lower6-computer-networks-os-e18-a"
+    },
+    {
+     "kind": "mcq",
+     "points": 1,
+     "prompt": "Which control protects against disk failure?",
+     "choices": [
+      "Backups",
+      "Digital divide",
+      "Firewall",
+      "Encryption alone"
+     ],
+     "answer": 0,
+     "explanation": "Backups restore data.",
+     "id": "lower6-computer-networks-os-e18-b"
+    },
+    {
+     "kind": "open",
+     "points": 2,
+     "prompt": "Give two reasons for encrypting laptop disks.",
+     "model": "If the laptop is lost or stolen the data cannot be read; it protects customers' privacy and reduces the risk of legal problems.",
+     "rubric": "1 mark each.",
+     "explanation": "If the laptop is lost or stolen the data cannot be read; it protects customers' privacy and reduces the risk of legal problems.",
+     "id": "lower6-computer-networks-os-e18-c"
+    }
+   ],
+   "chapter": "lower6-computer-networks-os"
+  },
+  {
+   "id": "lower6-computer-ethics-law-security-q1",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "lower6-computer-ethics-law-security",
+   "prompt": "Ransomware",
+   "choices": [
+    "is a type of ROM",
+    "locks data until a payment is demanded",
+    "makes a fast CPU",
+    "is a protocol"
+   ],
+   "answer": 1,
+   "explanation": "Malware.",
+   "chapter": "lower6-computer-networks-os"
+  },
+  {
+   "id": "lower6-computer-ethics-law-security-q2",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "lower6-computer-ethics-law-security",
+   "prompt": "A firewall",
+   "choices": [
+    "writes poems",
+    "filters network traffic",
+    "prints reports",
+    "encrypts the CPU"
+   ],
+   "answer": 1,
+   "explanation": "Firewall.",
+   "chapter": "lower6-computer-networks-os"
+  },
+  {
+   "id": "lower6-computer-ethics-law-security-q3",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "lower6-computer-ethics-law-security",
+   "prompt": "Biometric authentication uses",
+   "choices": [
+    "ROM",
+    "body characteristics such as fingerprints",
+    "pictures of food",
+    "long cables"
+   ],
+   "answer": 1,
+   "explanation": "Biometrics.",
+   "chapter": "lower6-computer-networks-os"
+  },
+  {
+   "id": "lower6-computer-ethics-law-security-q4",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "lower6-computer-ethics-law-security",
+   "prompt": "Proprietary software",
+   "choices": [
+    "usually cannot be copied or changed freely",
+    "is always free",
+    "has no licence",
+    "is always open source"
+   ],
+   "answer": 0,
+   "explanation": "Proprietary.",
+   "chapter": "lower6-computer-networks-os"
+  },
+  {
+   "id": "lower6-computer-ethics-law-security-q5",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "lower6-computer-ethics-law-security",
+   "prompt": "E-waste is",
+   "choices": [
+    "a network cable",
+    "a spreadsheet function",
+    "a font",
+    "discarded electronic equipment"
+   ],
+   "answer": 3,
+   "explanation": "Waste.",
+   "chapter": "lower6-computer-networks-os"
+  }
+ ]
+}

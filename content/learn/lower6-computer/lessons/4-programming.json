@@ -1,0 +1,590 @@
+{
+ "chapter": "lower6-computer-programming",
+ "lessons": [
+  {
+   "id": "lower6-computer-paradigms-programming",
+   "title": "Programming paradigms, translators and constructs",
+   "minutes": 30,
+   "programRef": "Cameroon GCE Board — Advanced Level Computer Science syllabus (Lower Sixth part) — to be checked against the official text",
+   "status": "draft",
+   "author": "CastBridge (AI draft)",
+   "source": "Original writing following the Cameroonian curriculum; to be reviewed by a teacher",
+   "objectives": [
+    "Compare procedural, object-oriented, functional and declarative paradigms",
+    "Compare high- and low-level languages",
+    "Explain compilers, interpreters and assemblers",
+    "Trace programs using selection, iteration and subroutines"
+   ],
+   "prerequisites": [],
+   "exercises": [
+    "lower6-computer-programming-e01",
+    "lower6-computer-programming-e02",
+    "lower6-computer-programming-e03",
+    "lower6-computer-programming-e04",
+    "lower6-computer-programming-e05",
+    "lower6-computer-programming-e06"
+   ],
+   "selfCheck": [
+    "lower6-computer-paradigms-programming-q1",
+    "lower6-computer-paradigms-programming-q2",
+    "lower6-computer-paradigms-programming-q3",
+    "lower6-computer-paradigms-programming-q4",
+    "lower6-computer-paradigms-programming-q5"
+   ],
+   "reviewNotes": [
+    "Pseudocode is Python-like, not an exam-specific style; check the Board's pseudocode guide. Language examples are common ones, not a syllabus list.",
+    "Syllabus references, scope and level of difficulty are to be checked against the official text; all facts, formulas and worked examples to be verified by a teacher before release."
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Paradigms",
+     "md": "A **programming paradigm** is a style of programming. **Procedural**: a program is a sequence of steps grouped into procedures and functions (e.g. C, Pascal). **Object-oriented (OOP)**: data and the methods that act on it are combined in **objects** created from **classes** (e.g. Java, Python). **Functional**: programs are built from functions without changing state. **Declarative**: you state \\*what\\* result you want (e.g. SQL, Prolog). Many languages support several paradigms."
+    },
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Levels and translators",
+     "md": "**Low-level** languages (machine code, assembly) are close to the hardware: fast and compact but hard to write and not portable. **High-level** languages are closer to human language, easier and portable. An **assembler** translates assembly into machine code. A **compiler** translates the whole program before it runs (fast execution, one executable). An **interpreter** translates and runs one statement at a time (easy debugging, slower execution)."
+    },
+    {
+     "type": "illustration",
+     "figure": {
+      "kind": "shapes",
+      "w": 440,
+      "h": 198,
+      "items": [
+       {
+        "t": "text",
+        "x": 220.0,
+        "y": 24,
+        "text": "Paradigms and examples",
+        "size": 15,
+        "anchor": "middle",
+        "color": "ink",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 10.0,
+        "y": 40,
+        "w": 140.0,
+        "h": 28,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "lightblue"
+       },
+       {
+        "t": "text",
+        "x": 80.0,
+        "y": 59,
+        "text": "Paradigm",
+        "size": 12,
+        "anchor": "middle",
+        "color": "ink",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 150.0,
+        "y": 40,
+        "w": 140.0,
+        "h": 28,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "lightgreen"
+       },
+       {
+        "t": "text",
+        "x": 220.0,
+        "y": 59,
+        "text": "Idea",
+        "size": 12,
+        "anchor": "middle",
+        "color": "ink",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 290.0,
+        "y": 40,
+        "w": 140.0,
+        "h": 28,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "lightyellow"
+       },
+       {
+        "t": "text",
+        "x": 360.0,
+        "y": 59,
+        "text": "Example",
+        "size": 12,
+        "anchor": "middle",
+        "color": "ink",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 10.0,
+        "y": 68,
+        "w": 140.0,
+        "h": 28,
+        "stroke": "grey",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 80.0,
+        "y": 87,
+        "text": "Procedural",
+        "size": 12,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "rect",
+        "x": 150.0,
+        "y": 68,
+        "w": 140.0,
+        "h": 28,
+        "stroke": "grey",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 220.0,
+        "y": 87,
+        "text": "Steps",
+        "size": 12,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "rect",
+        "x": 290.0,
+        "y": 68,
+        "w": 140.0,
+        "h": 28,
+        "stroke": "grey",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 360.0,
+        "y": 87,
+        "text": "C, Pascal",
+        "size": 12,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "rect",
+        "x": 10.0,
+        "y": 96,
+        "w": 140.0,
+        "h": 28,
+        "stroke": "grey",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 80.0,
+        "y": 115,
+        "text": "OOP",
+        "size": 12,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "rect",
+        "x": 150.0,
+        "y": 96,
+        "w": 140.0,
+        "h": 28,
+        "stroke": "grey",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 220.0,
+        "y": 115,
+        "text": "Objects",
+        "size": 12,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "rect",
+        "x": 290.0,
+        "y": 96,
+        "w": 140.0,
+        "h": 28,
+        "stroke": "grey",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 360.0,
+        "y": 115,
+        "text": "Java",
+        "size": 12,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "rect",
+        "x": 10.0,
+        "y": 124,
+        "w": 140.0,
+        "h": 28,
+        "stroke": "grey",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 80.0,
+        "y": 143,
+        "text": "Functional",
+        "size": 12,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "rect",
+        "x": 150.0,
+        "y": 124,
+        "w": 140.0,
+        "h": 28,
+        "stroke": "grey",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 220.0,
+        "y": 143,
+        "text": "Functions",
+        "size": 12,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "rect",
+        "x": 290.0,
+        "y": 124,
+        "w": 140.0,
+        "h": 28,
+        "stroke": "grey",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 360.0,
+        "y": 143,
+        "text": "Haskell",
+        "size": 12,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "rect",
+        "x": 10.0,
+        "y": 152,
+        "w": 140.0,
+        "h": 28,
+        "stroke": "grey",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 80.0,
+        "y": 171,
+        "text": "Declarative",
+        "size": 12,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "rect",
+        "x": 150.0,
+        "y": 152,
+        "w": 140.0,
+        "h": 28,
+        "stroke": "grey",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 220.0,
+        "y": 171,
+        "text": "What",
+        "size": 12,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "rect",
+        "x": 290.0,
+        "y": 152,
+        "w": 140.0,
+        "h": 28,
+        "stroke": "grey",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 360.0,
+        "y": 171,
+        "text": "SQL",
+        "size": 12,
+        "anchor": "middle",
+        "color": "ink"
+       }
+      ]
+     },
+     "caption": "A table of four programming paradigms with the idea and an example language of each.",
+     "alt": "Table: procedural, object-oriented, functional and declarative paradigms, each with an example language."
+    },
+    {
+     "type": "key",
+     "style": "methode",
+     "title": "Constructs (Python-like pseudocode)",
+     "md": "Pseudocode in this pack is Python-like: indentation shows blocks, `for i in range(1, 6)` runs i = 1 to 5. Variables are assigned with =. Selection: if cond: ... elif ...: ... else: .... Iteration: for i in range(1, 6): ... and while cond: .... Subroutines: def name(params): ... return value. Operators: // integer division, % remainder (MOD), and, or, not."
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Common mistakes",
+     "md": "- Confusing = (assignment) with == (comparison).\n- Forgetting that range(1, 6) stops at 5.\n- A compiler does not run the program; it translates it.\n- Naming a language as 'only' one paradigm: Python supports procedural and OOP."
+    },
+    {
+     "type": "example",
+     "title": "Example 1 - Trace",
+     "statement": "Trace: total = 0; for i in range(1, 6): total = total + i \\* i; print(total).",
+     "steps": [
+      "i = 1,2,3,4,5 gives squares 1, 4, 9, 16, 25.",
+      "Sum: 1 + 4 + 9 + 16 + 25 = 55."
+     ],
+     "answer": "55"
+    },
+    {
+     "type": "example",
+     "title": "Example 2 - Subroutine",
+     "statement": "def factorial(n): result = 1; for i in range(1, n + 1): result = result \\* i; return result. What is factorial(5)?",
+     "steps": [
+      "The loop multiplies 1 x 2 x 3 x 4 x 5.",
+      "= 120."
+     ],
+     "answer": "120"
+    }
+   ],
+   "chapter": "lower6-computer-programming"
+  }
+ ],
+ "exercises": [
+  {
+   "id": "lower6-computer-programming-e01",
+   "kind": "mcq",
+   "tier": "application",
+   "lesson": "lower6-computer-paradigms-programming",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Which translator converts a whole program before it runs?",
+   "choices": [
+    "Compiler",
+    "Browser",
+    "Interpreter",
+    "Assembler only for Python"
+   ],
+   "answer": 0,
+   "explanation": "A compiler translates the whole program.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "lower6-computer-programming"
+  },
+  {
+   "id": "lower6-computer-programming-e02",
+   "kind": "mcq",
+   "tier": "application",
+   "lesson": "lower6-computer-paradigms-programming",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "SQL is mainly an example of which paradigm?",
+   "choices": [
+    "Declarative",
+    "Functional only",
+    "Machine code",
+    "Procedural"
+   ],
+   "answer": 0,
+   "explanation": "You state what you want.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "lower6-computer-programming"
+  },
+  {
+   "id": "lower6-computer-programming-e03",
+   "kind": "truefalse",
+   "tier": "application",
+   "lesson": "lower6-computer-paradigms-programming",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Assembly language is a high-level language.",
+   "answer": false,
+   "explanation": "Assembly is low-level.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "lower6-computer-programming"
+  },
+  {
+   "id": "lower6-computer-programming-e04",
+   "kind": "numeric",
+   "tier": "approfondissement",
+   "lesson": "lower6-computer-paradigms-programming",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Value printed: x = 7; y = x // 2; z = x % 2; print(y + z). (// is integer division)",
+   "answer": 4,
+   "tolerance": 0,
+   "explanation": "7 // 2 = 3 and 7 % 2 = 1, so 3 + 1 = 4.",
+   "difficulty": 2,
+   "points": 3,
+   "chapter": "lower6-computer-programming"
+  },
+  {
+   "id": "lower6-computer-programming-e05",
+   "kind": "open",
+   "tier": "approfondissement",
+   "lesson": "lower6-computer-paradigms-programming",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Give two advantages of high-level languages over low-level languages.",
+   "model": "They are easier to read and write; programs are portable between different computers; fewer errors and faster development.",
+   "rubric": "1 mark each, 2 marks.",
+   "explanation": "They are easier to read and write; programs are portable between different computers; fewer errors and faster development.",
+   "difficulty": 2,
+   "points": 3,
+   "chapter": "lower6-computer-programming"
+  },
+  {
+   "id": "lower6-computer-programming-e06",
+   "kind": "problem",
+   "tier": "examen",
+   "lesson": "lower6-computer-paradigms-programming",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "def f(n): count = 0; for i in range(1, n + 1): if i % 2 == 0: count = count + 1; return count",
+   "difficulty": 2,
+   "parts": [
+    {
+     "kind": "numeric",
+     "points": 1,
+     "prompt": "f(10)",
+     "answer": 5,
+     "tolerance": 0,
+     "explanation": "Even numbers 2, 4, 6, 8, 10.",
+     "id": "lower6-computer-programming-e06-a"
+    },
+    {
+     "kind": "numeric",
+     "points": 1,
+     "prompt": "f(7)",
+     "answer": 3,
+     "tolerance": 0,
+     "explanation": "Even numbers 2, 4, 6.",
+     "id": "lower6-computer-programming-e06-b"
+    },
+    {
+     "kind": "open",
+     "points": 2,
+     "prompt": "What does the function f compute, in words?",
+     "model": "It counts how many even numbers there are from 1 to n.",
+     "rubric": "1 mark each part.",
+     "explanation": "It counts how many even numbers there are from 1 to n.",
+     "id": "lower6-computer-programming-e06-c"
+    }
+   ],
+   "chapter": "lower6-computer-programming"
+  },
+  {
+   "id": "lower6-computer-paradigms-programming-q1",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "lower6-computer-paradigms-programming",
+   "prompt": "An interpreter",
+   "choices": [
+    "translates the whole program once and stops",
+    "draws gates",
+    "translates and runs statements one at a time",
+    "stores files"
+   ],
+   "answer": 2,
+   "explanation": "Interpreter.",
+   "chapter": "lower6-computer-programming"
+  },
+  {
+   "id": "lower6-computer-paradigms-programming-q2",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "lower6-computer-paradigms-programming",
+   "prompt": "OOP organises code into",
+   "choices": [
+    "only tables",
+    "only gates",
+    "only files",
+    "objects and classes"
+   ],
+   "answer": 3,
+   "explanation": "OOP.",
+   "chapter": "lower6-computer-programming"
+  },
+  {
+   "id": "lower6-computer-paradigms-programming-q3",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "lower6-computer-paradigms-programming",
+   "prompt": "In pseudocode, % usually gives the",
+   "choices": [
+    "remainder",
+    "quotient",
+    "percentage only",
+    "product"
+   ],
+   "answer": 0,
+   "explanation": "Modulo.",
+   "chapter": "lower6-computer-programming"
+  },
+  {
+   "id": "lower6-computer-paradigms-programming-q4",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "lower6-computer-paradigms-programming",
+   "prompt": "range(1, 4) generates",
+   "choices": [
+    "1, 2, 3, 4",
+    "0, 1, 2, 3",
+    "1, 2, 3",
+    "4"
+   ],
+   "answer": 2,
+   "explanation": "End excluded.",
+   "chapter": "lower6-computer-programming"
+  },
+  {
+   "id": "lower6-computer-paradigms-programming-q5",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "lower6-computer-paradigms-programming",
+   "prompt": "A function that calls itself is",
+   "choices": [
+    "recursive",
+    "volatile",
+    "compiled",
+    "static"
+   ],
+   "answer": 0,
+   "explanation": "Recursion.",
+   "chapter": "lower6-computer-programming"
+  }
+ ]
+}

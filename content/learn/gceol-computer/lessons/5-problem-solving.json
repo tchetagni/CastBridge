@@ -1,0 +1,935 @@
+{
+ "chapter": "gceol-computer-problem-solving",
+ "lessons": [
+  {
+   "id": "gceol-computer-algorithms-flowcharts",
+   "title": "Algorithms and flowcharts",
+   "minutes": 25,
+   "programRef": "Cameroon GCE Board — Ordinary Level Computer Science / ICT syllabus — to be checked against the official text",
+   "status": "draft",
+   "author": "CastBridge (AI draft)",
+   "source": "Original writing following the Cameroonian curriculum; to be reviewed by a teacher",
+   "objectives": [
+    "Define an algorithm",
+    "Recognise flowchart symbols",
+    "Trace an algorithm with a trace table",
+    "Write simple algorithms in pseudocode"
+   ],
+   "prerequisites": [],
+   "exercises": [
+    "gceol-computer-problem-solving-e01",
+    "gceol-computer-problem-solving-e02",
+    "gceol-computer-problem-solving-e03",
+    "gceol-computer-problem-solving-e04",
+    "gceol-computer-problem-solving-e05",
+    "gceol-computer-problem-solving-e06"
+   ],
+   "selfCheck": [
+    "gceol-computer-algorithms-flowcharts-q1",
+    "gceol-computer-algorithms-flowcharts-q2",
+    "gceol-computer-algorithms-flowcharts-q3",
+    "gceol-computer-algorithms-flowcharts-q4",
+    "gceol-computer-algorithms-flowcharts-q5"
+   ],
+   "reviewNotes": [
+    "Pseudocode keywords follow common textbook style (INPUT, OUTPUT, IF/THEN/ELSE, FOR, WHILE); the GCE Board may prefer a specific style - check.",
+    "Syllabus references, scope and level of difficulty are to be checked against the official text; all facts, formulas and worked examples to be verified by a teacher before release."
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Algorithm",
+     "md": "An **algorithm** is a finite, step-by-step set of instructions to solve a problem. Good algorithms are **clear**, **ordered**, and **finish** after a limited number of steps. They can be written in plain words, **pseudocode**, or as a **flowchart**."
+    },
+    {
+     "type": "key",
+     "style": "retenir",
+     "title": "Flowchart symbols",
+     "md": "**Oval**: start or end. **Rectangle**: process (a calculation or action). **Parallelogram**: input or output. **Diamond**: decision (yes/no question). **Arrows** show the order."
+    },
+    {
+     "type": "illustration",
+     "figure": {
+      "kind": "shapes",
+      "w": 420,
+      "h": 220,
+      "items": [
+       {
+        "t": "rect",
+        "x": 150,
+        "y": 10,
+        "w": 120,
+        "h": 30,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "lightgreen",
+        "radius": 15
+       },
+       {
+        "t": "text",
+        "x": 210,
+        "y": 30,
+        "text": "Start",
+        "size": 13,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "line",
+        "x1": 210,
+        "y1": 40,
+        "x2": 210,
+        "y2": 55,
+        "color": "ink",
+        "width": 2,
+        "arrow": "end"
+       },
+       {
+        "t": "poly",
+        "pts": [
+         130,
+         55,
+         290,
+         55,
+         270,
+         85,
+         110,
+         85
+        ],
+        "stroke": "ink",
+        "width": 2,
+        "closed": true,
+        "fill": "lightblue"
+       },
+       {
+        "t": "text",
+        "x": 200,
+        "y": 75,
+        "text": "Input mark",
+        "size": 13,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "line",
+        "x1": 210,
+        "y1": 85,
+        "x2": 210,
+        "y2": 100,
+        "color": "ink",
+        "width": 2,
+        "arrow": "end"
+       },
+       {
+        "t": "poly",
+        "pts": [
+         210,
+         100,
+         290,
+         130,
+         210,
+         160,
+         130,
+         130
+        ],
+        "stroke": "ink",
+        "width": 2,
+        "closed": true,
+        "fill": "lightyellow"
+       },
+       {
+        "t": "text",
+        "x": 210,
+        "y": 135,
+        "text": "mark >= 50?",
+        "size": 12,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "line",
+        "x1": 290,
+        "y1": 130,
+        "x2": 330,
+        "y2": 130,
+        "color": "ink",
+        "width": 2,
+        "arrow": "end"
+       },
+       {
+        "t": "text",
+        "x": 310,
+        "y": 122,
+        "text": "No",
+        "size": 12,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "line",
+        "x1": 210,
+        "y1": 160,
+        "x2": 210,
+        "y2": 178,
+        "color": "ink",
+        "width": 2,
+        "arrow": "end"
+       },
+       {
+        "t": "text",
+        "x": 224,
+        "y": 172,
+        "text": "Yes",
+        "size": 12,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "rect",
+        "x": 150,
+        "y": 178,
+        "w": 120,
+        "h": 30,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "lightorange",
+        "radius": 4
+       },
+       {
+        "t": "text",
+        "x": 210,
+        "y": 198,
+        "text": "Output Pass",
+        "size": 13,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "rect",
+        "x": 332,
+        "y": 115,
+        "w": 80,
+        "h": 30,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "lightorange",
+        "radius": 4
+       },
+       {
+        "t": "text",
+        "x": 372,
+        "y": 135,
+        "text": "Output Fail",
+        "size": 12,
+        "anchor": "middle",
+        "color": "ink"
+       }
+      ]
+     },
+     "caption": "A flowchart: start, input mark, decision mark at least 50, then output Pass or Fail.",
+     "alt": "Flowchart with start oval, input, a decision diamond and two outputs Pass and Fail."
+    },
+    {
+     "type": "key",
+     "style": "methode",
+     "title": "Tracing",
+     "md": "A **trace table** has one column per variable. Follow the algorithm line by line and write the new value each time a variable changes. It helps you find errors and see the final output."
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Common mistakes",
+     "md": "- A decision diamond needs **two** exits labelled Yes and No.\n- Do not mix input/output with process boxes.\n- An algorithm with no end (an infinite loop) is not valid."
+    },
+    {
+     "type": "example",
+     "title": "Example 1 - Pseudocode",
+     "statement": "Write an algorithm to read two numbers and output their average.",
+     "steps": [
+      "INPUT a, b",
+      "average = (a + b) / 2 then OUTPUT average. For a = 8 and b = 12 the output is 10."
+     ],
+     "answer": "INPUT a, b; average = (a+b)/2; OUTPUT average"
+    },
+    {
+     "type": "example",
+     "title": "Example 2 - Trace table",
+     "statement": "Trace: total = 0; FOR n = 1 TO 4: total = total + n; OUTPUT total. What is printed?",
+     "steps": [
+      "n=1: total=1; n=2: total=3; n=3: total=6; n=4: total=10.",
+      "After the loop ends the output is 10."
+     ],
+     "answer": "10"
+    }
+   ],
+   "chapter": "gceol-computer-problem-solving"
+  },
+  {
+   "id": "gceol-computer-programming",
+   "title": "Programming concepts: variables, selection and loops",
+   "minutes": 25,
+   "programRef": "Cameroon GCE Board — Ordinary Level Computer Science / ICT syllabus — to be checked against the official text",
+   "status": "draft",
+   "author": "CastBridge (AI draft)",
+   "source": "Original writing following the Cameroonian curriculum; to be reviewed by a teacher",
+   "objectives": [
+    "Define variable, constant and data type",
+    "Write selection with IF",
+    "Write loops with FOR and WHILE",
+    "Trace and debug simple pseudocode"
+   ],
+   "prerequisites": [],
+   "exercises": [
+    "gceol-computer-problem-solving-e07",
+    "gceol-computer-problem-solving-e08",
+    "gceol-computer-problem-solving-e09",
+    "gceol-computer-problem-solving-e10",
+    "gceol-computer-problem-solving-e11",
+    "gceol-computer-problem-solving-e12"
+   ],
+   "selfCheck": [
+    "gceol-computer-programming-q1",
+    "gceol-computer-programming-q2",
+    "gceol-computer-programming-q3",
+    "gceol-computer-programming-q4",
+    "gceol-computer-programming-q5"
+   ],
+   "reviewNotes": [
+    "MOD operator is common; check whether the exam uses MOD or %. Assignment symbol conventions vary.",
+    "Syllabus references, scope and level of difficulty are to be checked against the official text; all facts, formulas and worked examples to be verified by a teacher before release."
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Variables and types",
+     "md": "A **variable** is a named place in memory whose value can change; a **constant** does not change. Common **data types**: **integer** (whole numbers), **real** (decimals), **string** (text), **Boolean** (TRUE/FALSE). Assignment is written x = 5 (pseudocode may use an arrow)."
+    },
+    {
+     "type": "key",
+     "style": "retenir",
+     "title": "Selection",
+     "md": "**Selection** chooses between actions with a condition: IF mark >= 50 THEN OUTPUT \"Pass\" ELSE OUTPUT \"Fail\" ENDIF. Conditions use =, <>, <, >, <=, >= and can be combined with AND, OR, NOT."
+    },
+    {
+     "type": "illustration",
+     "figure": {
+      "kind": "shapes",
+      "w": 400,
+      "h": 222,
+      "items": [
+       {
+        "t": "text",
+        "x": 200.0,
+        "y": 24,
+        "text": "A WHILE loop",
+        "size": 15,
+        "anchor": "middle",
+        "color": "ink",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 40,
+        "y": 40,
+        "w": 320,
+        "h": 30,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "lightgreen",
+        "radius": 6
+       },
+       {
+        "t": "text",
+        "x": 200.0,
+        "y": 60,
+        "text": "total = 0, n = 1",
+        "size": 13,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "line",
+        "x1": 200.0,
+        "y1": 70,
+        "x2": 200.0,
+        "y2": 86,
+        "color": "ink",
+        "width": 2,
+        "arrow": "end"
+       },
+       {
+        "t": "rect",
+        "x": 40,
+        "y": 86,
+        "w": 320,
+        "h": 30,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "lightyellow",
+        "radius": 6
+       },
+       {
+        "t": "text",
+        "x": 200.0,
+        "y": 106,
+        "text": "n <= 3 ?",
+        "size": 13,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "line",
+        "x1": 200.0,
+        "y1": 116,
+        "x2": 200.0,
+        "y2": 132,
+        "color": "ink",
+        "width": 2,
+        "arrow": "end"
+       },
+       {
+        "t": "rect",
+        "x": 40,
+        "y": 132,
+        "w": 320,
+        "h": 30,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "lightblue",
+        "radius": 6
+       },
+       {
+        "t": "text",
+        "x": 200.0,
+        "y": 152,
+        "text": "total = total + n; n = n + 1",
+        "size": 13,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "line",
+        "x1": 200.0,
+        "y1": 162,
+        "x2": 200.0,
+        "y2": 178,
+        "color": "ink",
+        "width": 2,
+        "arrow": "end"
+       },
+       {
+        "t": "rect",
+        "x": 40,
+        "y": 178,
+        "w": 320,
+        "h": 30,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "lightorange",
+        "radius": 6
+       },
+       {
+        "t": "text",
+        "x": 200.0,
+        "y": 198,
+        "text": "OUTPUT total",
+        "size": 13,
+        "anchor": "middle",
+        "color": "ink"
+       }
+      ]
+     },
+     "caption": "A flow of four steps showing a loop that adds the numbers 1 to 3.",
+     "alt": "Vertical flow: set total and n, test n at most 3, add and increase, output total."
+    },
+    {
+     "type": "key",
+     "style": "retenir",
+     "title": "Iteration",
+     "md": "**FOR i = 1 TO 5 ... NEXT i** repeats a known number of times. **WHILE condition ... ENDWHILE** repeats while the condition is true and may run zero times. **REPEAT ... UNTIL** runs at least once."
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Common mistakes",
+     "md": "- A WHILE loop whose condition never becomes false runs forever.\n- Off-by-one errors: FOR 1 TO 5 runs 5 times, not 4.\n- Using = for comparison and assignment confusingly; this course writes assignment as x = value and comparison in IF as =."
+    },
+    {
+     "type": "example",
+     "title": "Example 1 - Selection",
+     "statement": "Write pseudocode that outputs Adult if age >= 18 otherwise Minor.",
+     "steps": [
+      "INPUT age",
+      "IF age >= 18 THEN OUTPUT \"Adult\" ELSE OUTPUT \"Minor\" ENDIF. For age 17 the output is Minor."
+     ],
+     "answer": "IF age >= 18 ..."
+    },
+    {
+     "type": "example",
+     "title": "Example 2 - Loop trace",
+     "statement": "Trace: total = 0; n = 1; WHILE n <= 3: total = total + n; n = n + 1; ENDWHILE; OUTPUT total.",
+     "steps": [
+      "n=1: total=1, n=2; n=2: total=3, n=3; n=3: total=6, n=4.",
+      "n=4 fails the test, loop stops, OUTPUT 6."
+     ],
+     "answer": "6"
+    }
+   ],
+   "chapter": "gceol-computer-problem-solving"
+  }
+ ],
+ "exercises": [
+  {
+   "id": "gceol-computer-problem-solving-e01",
+   "kind": "mcq",
+   "tier": "application",
+   "lesson": "gceol-computer-algorithms-flowcharts",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "In a flowchart, a decision is drawn as a",
+   "choices": [
+    "rectangle",
+    "parallelogram",
+    "diamond",
+    "oval"
+   ],
+   "answer": 2,
+   "explanation": "A diamond asks a question.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "gceol-computer-problem-solving"
+  },
+  {
+   "id": "gceol-computer-problem-solving-e02",
+   "kind": "truefalse",
+   "tier": "application",
+   "lesson": "gceol-computer-algorithms-flowcharts",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "An algorithm must end after a finite number of steps.",
+   "answer": true,
+   "explanation": "Otherwise it is not a valid algorithm.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "gceol-computer-problem-solving"
+  },
+  {
+   "id": "gceol-computer-problem-solving-e03",
+   "kind": "numeric",
+   "tier": "application",
+   "lesson": "gceol-computer-algorithms-flowcharts",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Trace: x = 5; x = x \\* 2; x = x - 3. What is x?",
+   "answer": 7,
+   "tolerance": 0,
+   "explanation": "5 x 2 = 10; 10 - 3 = 7.",
+   "difficulty": 1,
+   "points": 2,
+   "chapter": "gceol-computer-problem-solving"
+  },
+  {
+   "id": "gceol-computer-problem-solving-e04",
+   "kind": "mcq",
+   "tier": "approfondissement",
+   "lesson": "gceol-computer-algorithms-flowcharts",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "The symbol for INPUT or OUTPUT is the",
+   "choices": [
+    "parallelogram",
+    "oval",
+    "arrow",
+    "diamond"
+   ],
+   "answer": 0,
+   "explanation": "Parallelogram = input/output.",
+   "difficulty": 2,
+   "points": 2,
+   "chapter": "gceol-computer-problem-solving"
+  },
+  {
+   "id": "gceol-computer-problem-solving-e05",
+   "kind": "open",
+   "tier": "approfondissement",
+   "lesson": "gceol-computer-algorithms-flowcharts",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Write pseudocode to input a number and output whether it is positive, negative or zero.",
+   "model": "INPUT n; IF n > 0 THEN OUTPUT \"positive\" ELSE IF n < 0 THEN OUTPUT \"negative\" ELSE OUTPUT \"zero\" ENDIF.",
+   "rubric": "1 mark input, 1 mark correct tests, 1 mark outputs.",
+   "explanation": "INPUT n; IF n > 0 THEN OUTPUT \"positive\" ELSE IF n < 0 THEN OUTPUT \"negative\" ELSE OUTPUT \"zero\" ENDIF.",
+   "difficulty": 2,
+   "points": 3,
+   "chapter": "gceol-computer-problem-solving"
+  },
+  {
+   "id": "gceol-computer-problem-solving-e06",
+   "kind": "problem",
+   "tier": "examen",
+   "lesson": "gceol-computer-algorithms-flowcharts",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Algorithm: INPUT price, qty; total = price \\* qty; IF total > 5000 THEN total = total - 500; OUTPUT total.",
+   "difficulty": 2,
+   "parts": [
+    {
+     "kind": "numeric",
+     "points": 1,
+     "prompt": "Output when price = 1200 and qty = 5?",
+     "answer": 5500,
+     "tolerance": 0,
+     "explanation": "1200 x 5 = 6000 > 5000 so 6000 - 500 = 5500.",
+     "id": "gceol-computer-problem-solving-e06-a"
+    },
+    {
+     "kind": "numeric",
+     "points": 1,
+     "prompt": "Output when price = 800 and qty = 4?",
+     "answer": 3200,
+     "tolerance": 0,
+     "explanation": "800 x 4 = 3200, not > 5000, so no discount.",
+     "id": "gceol-computer-problem-solving-e06-b"
+    },
+    {
+     "kind": "open",
+     "points": 2,
+     "prompt": "State what the algorithm does in words.",
+     "model": "It calculates a total and takes 500 FCFA off when the total is greater than 5000.",
+     "rubric": "1 mark each part.",
+     "explanation": "It calculates a total and takes 500 FCFA off when the total is greater than 5000.",
+     "id": "gceol-computer-problem-solving-e06-c"
+    }
+   ],
+   "chapter": "gceol-computer-problem-solving"
+  },
+  {
+   "id": "gceol-computer-algorithms-flowcharts-q1",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "gceol-computer-algorithms-flowcharts",
+   "prompt": "An algorithm is",
+   "choices": [
+    "a step-by-step solution to a problem",
+    "a virus",
+    "a printer",
+    "a kind of computer"
+   ],
+   "answer": 0,
+   "explanation": "A procedure.",
+   "chapter": "gceol-computer-problem-solving"
+  },
+  {
+   "id": "gceol-computer-algorithms-flowcharts-q2",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "gceol-computer-algorithms-flowcharts",
+   "prompt": "A rectangle in a flowchart shows a",
+   "choices": [
+    "process",
+    "decision",
+    "end only",
+    "start"
+   ],
+   "answer": 0,
+   "explanation": "Calculation/action.",
+   "chapter": "gceol-computer-problem-solving"
+  },
+  {
+   "id": "gceol-computer-algorithms-flowcharts-q3",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "gceol-computer-algorithms-flowcharts",
+   "prompt": "A trace table is used to",
+   "choices": [
+    "draw pictures",
+    "follow variable values step by step",
+    "store files",
+    "send email"
+   ],
+   "answer": 1,
+   "explanation": "It checks algorithms.",
+   "chapter": "gceol-computer-problem-solving"
+  },
+  {
+   "id": "gceol-computer-algorithms-flowcharts-q4",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "gceol-computer-algorithms-flowcharts",
+   "prompt": "Pseudocode is",
+   "choices": [
+    "a real compiled program only",
+    "an informal way to write an algorithm",
+    "a network",
+    "a spreadsheet"
+   ],
+   "answer": 1,
+   "explanation": "Plain-language code.",
+   "chapter": "gceol-computer-problem-solving"
+  },
+  {
+   "id": "gceol-computer-algorithms-flowcharts-q5",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "gceol-computer-algorithms-flowcharts",
+   "prompt": "The oval shape marks",
+   "choices": [
+    "start or end",
+    "input",
+    "output",
+    "decision"
+   ],
+   "answer": 0,
+   "explanation": "Terminators.",
+   "chapter": "gceol-computer-problem-solving"
+  },
+  {
+   "id": "gceol-computer-problem-solving-e07",
+   "kind": "mcq",
+   "tier": "application",
+   "lesson": "gceol-computer-programming",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Which data type stores text?",
+   "choices": [
+    "Boolean",
+    "Real",
+    "String",
+    "Integer"
+   ],
+   "answer": 2,
+   "explanation": "Text is a string.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "gceol-computer-problem-solving"
+  },
+  {
+   "id": "gceol-computer-problem-solving-e08",
+   "kind": "numeric",
+   "tier": "application",
+   "lesson": "gceol-computer-programming",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "How many times does FOR i = 1 TO 6 repeat?",
+   "answer": 6,
+   "tolerance": 0,
+   "explanation": "i takes 1,2,3,4,5,6.",
+   "difficulty": 1,
+   "points": 2,
+   "chapter": "gceol-computer-problem-solving"
+  },
+  {
+   "id": "gceol-computer-problem-solving-e09",
+   "kind": "truefalse",
+   "tier": "application",
+   "lesson": "gceol-computer-programming",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "A variable's value can change while the program runs.",
+   "answer": true,
+   "explanation": "That is why it is called a variable.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "gceol-computer-problem-solving"
+  },
+  {
+   "id": "gceol-computer-problem-solving-e10",
+   "kind": "numeric",
+   "tier": "approfondissement",
+   "lesson": "gceol-computer-programming",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Trace: s = 0; FOR i = 1 TO 5: s = s + 2. What is s at the end?",
+   "answer": 10,
+   "tolerance": 0,
+   "explanation": "Five additions of 2.",
+   "difficulty": 2,
+   "points": 3,
+   "chapter": "gceol-computer-problem-solving"
+  },
+  {
+   "id": "gceol-computer-problem-solving-e11",
+   "kind": "open",
+   "tier": "approfondissement",
+   "lesson": "gceol-computer-programming",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "What is the difference between a FOR loop and a WHILE loop?",
+   "model": "FOR repeats a fixed, known number of times; WHILE repeats as long as a condition is true, so the number of repeats may not be known and may be zero.",
+   "rubric": "1 mark each description, 1 mark contrast.",
+   "explanation": "FOR repeats a fixed, known number of times; WHILE repeats as long as a condition is true, so the number of repeats may not be known and may be zero.",
+   "difficulty": 2,
+   "points": 3,
+   "chapter": "gceol-computer-problem-solving"
+  },
+  {
+   "id": "gceol-computer-problem-solving-e12",
+   "kind": "problem",
+   "tier": "examen",
+   "lesson": "gceol-computer-programming",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Program: count = 0; FOR n = 1 TO 10: IF n MOD 2 = 0 THEN count = count + 1 ENDIF NEXT n; OUTPUT count (MOD = remainder).",
+   "difficulty": 2,
+   "parts": [
+    {
+     "kind": "numeric",
+     "points": 1,
+     "prompt": "What is output?",
+     "answer": 5,
+     "tolerance": 0,
+     "explanation": "Even numbers 2,4,6,8,10 = 5.",
+     "id": "gceol-computer-problem-solving-e12-a"
+    },
+    {
+     "kind": "mcq",
+     "points": 1,
+     "prompt": "Which data type is count?",
+     "choices": [
+      "Integer",
+      "String",
+      "Boolean",
+      "Real"
+     ],
+     "answer": 0,
+     "explanation": "It holds whole numbers.",
+     "id": "gceol-computer-problem-solving-e12-b"
+    },
+    {
+     "kind": "open",
+     "points": 2,
+     "prompt": "Change the program so it counts numbers divisible by 5 in 1..20.",
+     "model": "Use FOR n = 1 TO 20 and IF n MOD 5 = 0; the count will be 4.",
+     "rubric": "1 mark each change, 1 mark answer.",
+     "explanation": "Use FOR n = 1 TO 20 and IF n MOD 5 = 0; the count will be 4.",
+     "id": "gceol-computer-problem-solving-e12-c"
+    }
+   ],
+   "chapter": "gceol-computer-problem-solving"
+  },
+  {
+   "id": "gceol-computer-programming-q1",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "gceol-computer-programming",
+   "prompt": "The Boolean data type stores",
+   "choices": [
+    "TRUE or FALSE",
+    "decimal numbers",
+    "images",
+    "text"
+   ],
+   "answer": 0,
+   "explanation": "Two values.",
+   "chapter": "gceol-computer-problem-solving"
+  },
+  {
+   "id": "gceol-computer-programming-q2",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "gceol-computer-programming",
+   "prompt": "Selection in a program uses",
+   "choices": [
+    "PRINT only",
+    "NEXT",
+    "IF",
+    "FOR"
+   ],
+   "answer": 2,
+   "explanation": "Conditions.",
+   "chapter": "gceol-computer-problem-solving"
+  },
+  {
+   "id": "gceol-computer-programming-q3",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "gceol-computer-programming",
+   "prompt": "Which loop may run zero times?",
+   "choices": [
+    "WHILE",
+    "Both always run once",
+    "None",
+    "REPEAT-UNTIL"
+   ],
+   "answer": 0,
+   "explanation": "WHILE tests first.",
+   "chapter": "gceol-computer-problem-solving"
+  },
+  {
+   "id": "gceol-computer-programming-q4",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "gceol-computer-programming",
+   "prompt": "7 MOD 2 equals",
+   "choices": [
+    "3",
+    "0",
+    "2",
+    "1"
+   ],
+   "answer": 3,
+   "explanation": "7 = 3x2 + 1.",
+   "chapter": "gceol-computer-problem-solving"
+  },
+  {
+   "id": "gceol-computer-programming-q5",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "gceol-computer-programming",
+   "prompt": "A constant",
+   "choices": [
+    "is always text",
+    "keeps the same value",
+    "is a loop",
+    "changes every line"
+   ],
+   "answer": 1,
+   "explanation": "Fixed value.",
+   "chapter": "gceol-computer-problem-solving"
+  },
+  {
+   "id": "gceol-computer-problem-solving-m01",
+   "kind": "problem",
+   "tier": "examen",
+   "lesson": "gceol-computer-algorithms-flowcharts",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Algorithm: total = 0; FOR n = 1 TO 5: total = total + n \\* 2; OUTPUT total.",
+   "difficulty": 2,
+   "parts": [
+    {
+     "kind": "numeric",
+     "points": 2,
+     "prompt": "What is output?",
+     "answer": 30,
+     "tolerance": 0,
+     "explanation": "2+4+6+8+10 = 30.",
+     "id": "gceol-computer-problem-solving-m01-a"
+    },
+    {
+     "kind": "mcq",
+     "points": 1,
+     "prompt": "Which flowchart symbol is used for the test in an IF statement?",
+     "choices": [
+      "Parallelogram",
+      "Rectangle",
+      "Diamond",
+      "Oval"
+     ],
+     "answer": 2,
+     "explanation": "Decision.",
+     "id": "gceol-computer-problem-solving-m01-b"
+    },
+    {
+     "kind": "open",
+     "points": 2,
+     "prompt": "Name the type of loop used.",
+     "model": "A FOR loop (count-controlled iteration).",
+     "rubric": "1 mark for FOR, 1 for count-controlled.",
+     "explanation": "A FOR loop (count-controlled iteration).",
+     "id": "gceol-computer-problem-solving-m01-c"
+    }
+   ],
+   "chapter": "gceol-computer-problem-solving"
+  }
+ ]
+}

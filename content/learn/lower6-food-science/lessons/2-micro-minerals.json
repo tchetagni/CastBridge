@@ -1,0 +1,991 @@
+{
+ "chapter": "lower6-food-science-micro-minerals",
+ "lessons": [
+  {
+   "id": "lower6-food-science-vitamins-minerals",
+   "title": "Vitamins and minerals: functions, deficiency and excess",
+   "minutes": 30,
+   "programRef": "Cameroon GCE Board — Advanced Level Food Science and Nutrition syllabus (Lower Sixth part) — to be checked against the official text",
+   "status": "draft",
+   "author": "CastBridge (AI draft)",
+   "source": "Original writing following the Cameroonian curriculum; to be reviewed by a teacher",
+   "objectives": [
+    "Describe functions of major vitamins and minerals",
+    "Describe deficiency diseases and risks of excess (in outline)",
+    "Explain bioavailability and factors affecting nutrient losses",
+    "Give Cameroonian food sources"
+   ],
+   "prerequisites": [],
+   "exercises": [
+    "lower6-food-science-micro-minerals-e01",
+    "lower6-food-science-micro-minerals-e02",
+    "lower6-food-science-micro-minerals-e03",
+    "lower6-food-science-micro-minerals-e04",
+    "lower6-food-science-micro-minerals-e05",
+    "lower6-food-science-micro-minerals-e06"
+   ],
+   "selfCheck": [
+    "lower6-food-science-vitamins-minerals-q1",
+    "lower6-food-science-vitamins-minerals-q2",
+    "lower6-food-science-vitamins-minerals-q3",
+    "lower6-food-science-vitamins-minerals-q4",
+    "lower6-food-science-vitamins-minerals-q5"
+   ],
+   "reviewNotes": [
+    "Nutrition, health and food-safety statements are textbook-level and conservative: a dietitian, food scientist or health worker must review them before release.",
+    "Pregnancy and supplementation statements are general only; clinical advice must come from a health worker.",
+    "Syllabus references, scope and level of difficulty are to be checked against the official text; all facts, formulas and worked examples to be verified by a teacher before release."
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Vitamins",
+     "md": "**Vitamin A** (retinol; **beta-carotene** from plants such as red palm oil, carrots and leaves is converted to it): vision, epithelial tissue, immunity; deficiency: night blindness and increased infections. **Vitamin D**: calcium absorption; deficiency: rickets (children), osteomalacia (adults). **Vitamin C**: collagen formation, iron absorption; deficiency: scurvy. **B vitamins**: release of energy (B1 thiamine: beriberi; B3 niacin: pellagra); **folate**: cell division and prevention of neural tube defects in pregnancy; **B12**: only in animal foods."
+    },
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Minerals",
+     "md": "**Calcium** and **phosphorus**: bone and teeth. **Iron**: haemoglobin; deficiency: anaemia (one of the most common deficiencies). **Iodine**: thyroid hormones; deficiency: goitre and impaired development. **Zinc**: growth and immunity. **Sodium and potassium**: fluid balance, nerves, muscles. **Fluoride**: teeth."
+    },
+    {
+     "type": "illustration",
+     "figure": {
+      "kind": "shapes",
+      "w": 460,
+      "h": 226,
+      "items": [
+       {
+        "t": "text",
+        "x": 230.0,
+        "y": 24,
+        "text": "Deficiency diseases",
+        "size": 15,
+        "anchor": "middle",
+        "color": "ink",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 10.0,
+        "y": 40,
+        "w": 146.66666666666666,
+        "h": 28,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "lightblue"
+       },
+       {
+        "t": "text",
+        "x": 83.33333333333333,
+        "y": 59,
+        "text": "Nutrient",
+        "size": 12,
+        "anchor": "middle",
+        "color": "ink",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 156.66666666666666,
+        "y": 40,
+        "w": 146.66666666666666,
+        "h": 28,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "lightgreen"
+       },
+       {
+        "t": "text",
+        "x": 230.0,
+        "y": 59,
+        "text": "Deficiency",
+        "size": 12,
+        "anchor": "middle",
+        "color": "ink",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 303.3333333333333,
+        "y": 40,
+        "w": 146.66666666666666,
+        "h": 28,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "lightyellow"
+       },
+       {
+        "t": "text",
+        "x": 376.66666666666663,
+        "y": 59,
+        "text": "Example food",
+        "size": 12,
+        "anchor": "middle",
+        "color": "ink",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 10.0,
+        "y": 68,
+        "w": 146.66666666666666,
+        "h": 28,
+        "stroke": "grey",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 83.33333333333333,
+        "y": 87,
+        "text": "Vitamin A",
+        "size": 12,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "rect",
+        "x": 156.66666666666666,
+        "y": 68,
+        "w": 146.66666666666666,
+        "h": 28,
+        "stroke": "grey",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 230.0,
+        "y": 87,
+        "text": "Night blindness",
+        "size": 12,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "rect",
+        "x": 303.3333333333333,
+        "y": 68,
+        "w": 146.66666666666666,
+        "h": 28,
+        "stroke": "grey",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 376.66666666666663,
+        "y": 87,
+        "text": "Red palm oil",
+        "size": 12,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "rect",
+        "x": 10.0,
+        "y": 96,
+        "w": 146.66666666666666,
+        "h": 28,
+        "stroke": "grey",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 83.33333333333333,
+        "y": 115,
+        "text": "Vitamin D",
+        "size": 12,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "rect",
+        "x": 156.66666666666666,
+        "y": 96,
+        "w": 146.66666666666666,
+        "h": 28,
+        "stroke": "grey",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 230.0,
+        "y": 115,
+        "text": "Rickets",
+        "size": 12,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "rect",
+        "x": 303.3333333333333,
+        "y": 96,
+        "w": 146.66666666666666,
+        "h": 28,
+        "stroke": "grey",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 376.66666666666663,
+        "y": 115,
+        "text": "Fish, sunlight",
+        "size": 12,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "rect",
+        "x": 10.0,
+        "y": 124,
+        "w": 146.66666666666666,
+        "h": 28,
+        "stroke": "grey",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 83.33333333333333,
+        "y": 143,
+        "text": "Vitamin C",
+        "size": 12,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "rect",
+        "x": 156.66666666666666,
+        "y": 124,
+        "w": 146.66666666666666,
+        "h": 28,
+        "stroke": "grey",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 230.0,
+        "y": 143,
+        "text": "Scurvy",
+        "size": 12,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "rect",
+        "x": 303.3333333333333,
+        "y": 124,
+        "w": 146.66666666666666,
+        "h": 28,
+        "stroke": "grey",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 376.66666666666663,
+        "y": 143,
+        "text": "Guava",
+        "size": 12,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "rect",
+        "x": 10.0,
+        "y": 152,
+        "w": 146.66666666666666,
+        "h": 28,
+        "stroke": "grey",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 83.33333333333333,
+        "y": 171,
+        "text": "Iron",
+        "size": 12,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "rect",
+        "x": 156.66666666666666,
+        "y": 152,
+        "w": 146.66666666666666,
+        "h": 28,
+        "stroke": "grey",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 230.0,
+        "y": 171,
+        "text": "Anaemia",
+        "size": 12,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "rect",
+        "x": 303.3333333333333,
+        "y": 152,
+        "w": 146.66666666666666,
+        "h": 28,
+        "stroke": "grey",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 376.66666666666663,
+        "y": 171,
+        "text": "Beans, meat",
+        "size": 12,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "rect",
+        "x": 10.0,
+        "y": 180,
+        "w": 146.66666666666666,
+        "h": 28,
+        "stroke": "grey",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 83.33333333333333,
+        "y": 199,
+        "text": "Iodine",
+        "size": 12,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "rect",
+        "x": 156.66666666666666,
+        "y": 180,
+        "w": 146.66666666666666,
+        "h": 28,
+        "stroke": "grey",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 230.0,
+        "y": 199,
+        "text": "Goitre",
+        "size": 12,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "rect",
+        "x": 303.3333333333333,
+        "y": 180,
+        "w": 146.66666666666666,
+        "h": 28,
+        "stroke": "grey",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 376.66666666666663,
+        "y": 199,
+        "text": "Fish, iodised salt",
+        "size": 12,
+        "anchor": "middle",
+        "color": "ink"
+       }
+      ]
+     },
+     "caption": "A table of five nutrients, the deficiency each causes and an example food.",
+     "alt": "Table of nutrient deficiencies and foods: vitamin A night blindness, vitamin D rickets, vitamin C scurvy, iron anaemia, iodine goitre."
+    },
+    {
+     "type": "key",
+     "style": "retenir",
+     "title": "Excess and bioavailability",
+     "md": "Fat-soluble vitamins (A, D) can be harmful in very large doses; very high salt intake is associated with raised blood pressure. **Bioavailability** is the proportion absorbed: iron from meat is better absorbed than from plants; vitamin C increases absorption of plant iron; phytates (in whole grains and legumes) and tannins (in tea) reduce mineral absorption."
+    },
+    {
+     "type": "key",
+     "style": "retenir",
+     "title": "Losses",
+     "md": "Vitamin C and B vitamins are lost by cutting, long cooking, much water, air and light. Fat-soluble vitamins are more stable but can oxidise. Steaming and quick cooking, using cooking liquid and storing food properly reduce losses."
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Common mistakes",
+     "md": "- 'More is better' is false for fat-soluble vitamins.\n- Vitamin B12 is not found in plants.\n- Diagnosis of deficiency requires a health worker.\n- Nutrition, health and food-safety statements are textbook-level and conservative: a dietitian, food scientist or health worker must review them before release."
+    },
+    {
+     "type": "example",
+     "title": "Example 1 - Meal advice",
+     "statement": "A child eats beans and green leaves with no fruit. How can iron absorption be improved at the meal?",
+     "steps": [
+      "Plant iron is less well absorbed.",
+      "Add a vitamin C source such as orange or guava at the same meal."
+     ],
+     "answer": "Add a vitamin C food"
+    },
+    {
+     "type": "example",
+     "title": "Example 2 - Cooking",
+     "statement": "Why is steaming better than boiling in a large pan of water for vitamin C?",
+     "steps": [
+      "Vitamin C dissolves in water and is destroyed by heat.",
+      "Steaming exposes the vegetable to less water, reducing the loss."
+     ],
+     "answer": "Less loss into water"
+    }
+   ],
+   "chapter": "lower6-food-science-micro-minerals"
+  },
+  {
+   "id": "lower6-food-science-energy-bmi",
+   "title": "Energy balance, BMR and BMI",
+   "minutes": 30,
+   "programRef": "Cameroon GCE Board — Advanced Level Food Science and Nutrition syllabus (Lower Sixth part) — to be checked against the official text",
+   "status": "draft",
+   "author": "CastBridge (AI draft)",
+   "source": "Original writing following the Cameroonian curriculum; to be reviewed by a teacher",
+   "objectives": [
+    "Define BMR and physical activity level",
+    "Estimate daily energy needs with a simple rule",
+    "Calculate and interpret BMI",
+    "Explain energy balance and weight change"
+   ],
+   "prerequisites": [],
+   "exercises": [
+    "lower6-food-science-micro-minerals-e07",
+    "lower6-food-science-micro-minerals-e08",
+    "lower6-food-science-micro-minerals-e09",
+    "lower6-food-science-micro-minerals-e10",
+    "lower6-food-science-micro-minerals-e11",
+    "lower6-food-science-micro-minerals-e12"
+   ],
+   "selfCheck": [
+    "lower6-food-science-energy-bmi-q1",
+    "lower6-food-science-energy-bmi-q2",
+    "lower6-food-science-energy-bmi-q3",
+    "lower6-food-science-energy-bmi-q4",
+    "lower6-food-science-energy-bmi-q5"
+   ],
+   "reviewNotes": [
+    "Nutrition, health and food-safety statements are textbook-level and conservative: a dietitian, food scientist or health worker must review them before release.",
+    "The 24 kcal/kg/day BMR rule and PAL values are rough teaching estimates; FAO/WHO prediction equations are more accurate. BMI categories are the WHO adult ones.",
+    "Syllabus references, scope and level of difficulty are to be checked against the official text; all facts, formulas and worked examples to be verified by a teacher before release."
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "BMR and activity",
+     "md": "**Basal metabolic rate (BMR)** is the energy used at complete rest to keep the body alive. A simple school estimate is about **1 kcal per kg of body mass per hour** (about 24 kcal per kg per day). Total daily energy = BMR x **physical activity level (PAL)**, e.g. about 1.4 for a mostly sitting life, about 1.7 for moderate activity and about 2.0 or more for heavy work. These figures are rough and flagged for review."
+    },
+    {
+     "type": "key",
+     "style": "methode",
+     "title": "BMI",
+     "md": "**Body mass index (BMI)** = mass (kg) / height (m) squared. Adult categories used by the WHO: below 18.5 underweight; 18.5 to 24.9 healthy range; 25 to 29.9 overweight; 30 and above obese. BMI is a screening tool: it ignores muscle, age and body fat distribution; children are assessed using growth charts, not these adult cut-offs."
+    },
+    {
+     "type": "illustration",
+     "figure": {
+      "kind": "bars",
+      "w": 420,
+      "h": 240,
+      "bars": [
+       {
+        "label": "Underweight below",
+        "value": 18.5,
+        "color": "blue"
+       },
+       {
+        "label": "Healthy up to",
+        "value": 24.9,
+        "color": "green"
+       },
+       {
+        "label": "Overweight up to",
+        "value": 29.9,
+        "color": "orange"
+       }
+      ],
+      "unit": "BMI"
+     },
+     "caption": "A bar chart of the BMI limits: 18.5, 24.9 and 29.9.",
+     "alt": "Bar chart of adult BMI limits used by the WHO: 18.5, 24.9 and 29.9."
+    },
+    {
+     "type": "key",
+     "style": "retenir",
+     "title": "Energy balance",
+     "md": "If energy intake equals expenditure, body mass is stable. A sustained excess is stored mostly as fat; a sustained deficit causes loss of body mass. Healthy change is gradual and based on diet and activity; severe dieting is unsafe, especially for adolescents."
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Common mistakes",
+     "md": "- BMI units: kg and metres squared (not cm).\n- Applying adult BMI categories to children.\n- Believing that BMR is zero when you are asleep or resting: BMR is the minimum needed.\n- Nutrition, health and food-safety statements are textbook-level and conservative: a dietitian, food scientist or health worker must review them before release."
+    },
+    {
+     "type": "example",
+     "title": "Example 1 - BMI",
+     "statement": "An adult has mass 70 kg and height 1.75 m. Find the BMI and category.",
+     "steps": [
+      "Height squared = 1.75 x 1.75 = 3.0625.",
+      "BMI = 70 / 3.0625 = 22.9, in the 18.5 to 24.9 healthy range."
+     ],
+     "answer": "22.9: healthy range"
+    },
+    {
+     "type": "example",
+     "title": "Example 2 - Energy estimate",
+     "statement": "A 70 kg man with a mostly sitting job (PAL 1.4). Estimate daily energy (BMR rule 24 kcal/kg/day) in kcal and kJ.",
+     "steps": [
+      "BMR = 70 x 24 = 1680 kcal. Total = 1680 x 1.4 = 2352 kcal.",
+      "In kJ: 2352 x 4.2 = 9878 kJ (about 9900 kJ)."
+     ],
+     "answer": "About 2350 kcal or 9900 kJ"
+    }
+   ],
+   "chapter": "lower6-food-science-micro-minerals"
+  }
+ ],
+ "exercises": [
+  {
+   "id": "lower6-food-science-micro-minerals-e01",
+   "kind": "mcq",
+   "tier": "application",
+   "lesson": "lower6-food-science-vitamins-minerals",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Beta-carotene is converted in the body to",
+   "choices": [
+    "iodine",
+    "vitamin C",
+    "vitamin A",
+    "iron"
+   ],
+   "answer": 2,
+   "explanation": "Provitamin A.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "lower6-food-science-micro-minerals"
+  },
+  {
+   "id": "lower6-food-science-micro-minerals-e02",
+   "kind": "mcq",
+   "tier": "application",
+   "lesson": "lower6-food-science-vitamins-minerals",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Which vitamin is found only in animal foods?",
+   "choices": [
+    "B12",
+    "A (as retinol only)",
+    "C",
+    "K"
+   ],
+   "answer": 0,
+   "explanation": "B12 (naturally).",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "lower6-food-science-micro-minerals"
+  },
+  {
+   "id": "lower6-food-science-micro-minerals-e03",
+   "kind": "truefalse",
+   "tier": "application",
+   "lesson": "lower6-food-science-vitamins-minerals",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Phytates in whole grains can reduce mineral absorption.",
+   "answer": true,
+   "explanation": "Yes.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "lower6-food-science-micro-minerals"
+  },
+  {
+   "id": "lower6-food-science-micro-minerals-e04",
+   "kind": "matching",
+   "tier": "approfondissement",
+   "lesson": "lower6-food-science-vitamins-minerals",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Match nutrient and deficiency.",
+   "pairs": [
+    [
+     "Iodine",
+     "Goitre"
+    ],
+    [
+     "Vitamin C",
+     "Scurvy"
+    ],
+    [
+     "Niacin (B3)",
+     "Pellagra"
+    ],
+    [
+     "Vitamin B1",
+     "Beriberi"
+    ]
+   ],
+   "explanation": "Standard links.",
+   "difficulty": 2,
+   "points": 2,
+   "chapter": "lower6-food-science-micro-minerals"
+  },
+  {
+   "id": "lower6-food-science-micro-minerals-e05",
+   "kind": "open",
+   "tier": "approfondissement",
+   "lesson": "lower6-food-science-vitamins-minerals",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Explain two factors that affect how much iron the body absorbs from a meal.",
+   "model": "Form of iron (meat iron is better absorbed than plant iron); vitamin C increases absorption; phytates and tannins reduce it.",
+   "rubric": "1 mark each factor (2) plus 1 for example.",
+   "explanation": "Form of iron (meat iron is better absorbed than plant iron); vitamin C increases absorption; phytates and tannins reduce it.",
+   "difficulty": 2,
+   "points": 3,
+   "chapter": "lower6-food-science-micro-minerals"
+  },
+  {
+   "id": "lower6-food-science-micro-minerals-e06",
+   "kind": "problem",
+   "tier": "examen",
+   "lesson": "lower6-food-science-vitamins-minerals",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "A health clinic educates mothers: giving red palm oil sauce, green leaves, beans and fruit to young children.",
+   "difficulty": 2,
+   "parts": [
+    {
+     "kind": "mcq",
+     "points": 1,
+     "prompt": "Red palm oil is useful mainly because it supplies",
+     "choices": [
+      "provitamin A (beta-carotene) and energy",
+      "only vitamin B12",
+      "iodine",
+      "only fibre"
+     ],
+     "answer": 0,
+     "explanation": "Carotenoids.",
+     "id": "lower6-food-science-micro-minerals-e06-a"
+    },
+    {
+     "kind": "mcq",
+     "points": 1,
+     "prompt": "A fruit with the meal helps",
+     "choices": [
+      "iron absorption from beans",
+      "nothing",
+      "protein",
+      "iodine"
+     ],
+     "answer": 0,
+     "explanation": "Vitamin C.",
+     "id": "lower6-food-science-micro-minerals-e06-b"
+    },
+    {
+     "kind": "open",
+     "points": 2,
+     "prompt": "Why is excess vitamin A supplementation avoided without advice?",
+     "model": "Very high doses can be toxic because fat-soluble vitamins are stored in the body.",
+     "rubric": "1 mark each.",
+     "explanation": "Very high doses can be toxic because fat-soluble vitamins are stored in the body.",
+     "id": "lower6-food-science-micro-minerals-e06-c"
+    }
+   ],
+   "chapter": "lower6-food-science-micro-minerals"
+  },
+  {
+   "id": "lower6-food-science-vitamins-minerals-q1",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "lower6-food-science-vitamins-minerals",
+   "prompt": "Folate is important in pregnancy for",
+   "choices": [
+    "vision only",
+    "bone density only",
+    "preventing neural tube defects",
+    "growing hair"
+   ],
+   "answer": 2,
+   "explanation": "General statement.",
+   "chapter": "lower6-food-science-micro-minerals"
+  },
+  {
+   "id": "lower6-food-science-vitamins-minerals-q2",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "lower6-food-science-vitamins-minerals",
+   "prompt": "Anaemia is commonly linked to",
+   "choices": [
+    "vitamin K",
+    "too much fibre",
+    "too much sugar",
+    "iron deficiency"
+   ],
+   "answer": 3,
+   "explanation": "Iron.",
+   "chapter": "lower6-food-science-micro-minerals"
+  },
+  {
+   "id": "lower6-food-science-vitamins-minerals-q3",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "lower6-food-science-vitamins-minerals",
+   "prompt": "Tannins in tea can",
+   "choices": [
+    "digest starch",
+    "reduce iron absorption",
+    "make vitamin C",
+    "increase iron absorption"
+   ],
+   "answer": 1,
+   "explanation": "Inhibitor.",
+   "chapter": "lower6-food-science-micro-minerals"
+  },
+  {
+   "id": "lower6-food-science-vitamins-minerals-q4",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "lower6-food-science-vitamins-minerals",
+   "prompt": "Rickets affects",
+   "choices": [
+    "teeth only",
+    "the eyes",
+    "the skin only",
+    "bones in children"
+   ],
+   "answer": 3,
+   "explanation": "Vitamin D.",
+   "chapter": "lower6-food-science-micro-minerals"
+  },
+  {
+   "id": "lower6-food-science-vitamins-minerals-q5",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "lower6-food-science-vitamins-minerals",
+   "prompt": "Cutting vegetables into tiny pieces before long boiling",
+   "choices": [
+    "increases vitamin content",
+    "has no effect",
+    "increases vitamin loss",
+    "adds vitamins"
+   ],
+   "answer": 2,
+   "explanation": "Surface area.",
+   "chapter": "lower6-food-science-micro-minerals"
+  },
+  {
+   "id": "lower6-food-science-micro-minerals-e07",
+   "kind": "numeric",
+   "tier": "application",
+   "lesson": "lower6-food-science-energy-bmi",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "BMI of a person of mass 60 kg and height 1.50 m (1 decimal place)",
+   "answer": 26.7,
+   "tolerance": 0.1,
+   "explanation": "60 / 2.25 = 26.7.",
+   "difficulty": 1,
+   "points": 2,
+   "chapter": "lower6-food-science-micro-minerals"
+  },
+  {
+   "id": "lower6-food-science-micro-minerals-e08",
+   "kind": "mcq",
+   "tier": "application",
+   "lesson": "lower6-food-science-energy-bmi",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "A BMI of 17 for an adult would be",
+   "choices": [
+    "obese",
+    "overweight",
+    "healthy range",
+    "underweight"
+   ],
+   "answer": 3,
+   "explanation": "Below 18.5.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "lower6-food-science-micro-minerals"
+  },
+  {
+   "id": "lower6-food-science-micro-minerals-e09",
+   "kind": "truefalse",
+   "tier": "application",
+   "lesson": "lower6-food-science-energy-bmi",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "BMI should be used alone to diagnose disease.",
+   "answer": false,
+   "explanation": "It is only a screening tool.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "lower6-food-science-micro-minerals"
+  },
+  {
+   "id": "lower6-food-science-micro-minerals-e10",
+   "kind": "numeric",
+   "tier": "approfondissement",
+   "lesson": "lower6-food-science-energy-bmi",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "BMR estimate (24 kcal/kg/day) for a 55 kg person (kcal)",
+   "answer": 1320,
+   "tolerance": 0,
+   "explanation": "55 x 24 = 1320.",
+   "difficulty": 2,
+   "points": 3,
+   "chapter": "lower6-food-science-micro-minerals"
+  },
+  {
+   "id": "lower6-food-science-micro-minerals-e11",
+   "kind": "open",
+   "tier": "approfondissement",
+   "lesson": "lower6-food-science-energy-bmi",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Explain two limitations of BMI.",
+   "model": "It does not distinguish muscle from fat so athletes can appear overweight; it does not show fat distribution; it needs different interpretation for children and older adults.",
+   "rubric": "1 mark each, plus 1 for example.",
+   "explanation": "It does not distinguish muscle from fat so athletes can appear overweight; it does not show fat distribution; it needs different interpretation for children and older adults.",
+   "difficulty": 2,
+   "points": 3,
+   "chapter": "lower6-food-science-micro-minerals"
+  },
+  {
+   "id": "lower6-food-science-micro-minerals-e12",
+   "kind": "problem",
+   "tier": "examen",
+   "lesson": "lower6-food-science-energy-bmi",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "An adult has mass 85 kg and height 1.60 m.",
+   "difficulty": 2,
+   "parts": [
+    {
+     "kind": "numeric",
+     "points": 1,
+     "prompt": "BMI (1 decimal place)",
+     "answer": 33.2,
+     "tolerance": 0.1,
+     "explanation": "85 / 2.56 = 33.2.",
+     "id": "lower6-food-science-micro-minerals-e12-a"
+    },
+    {
+     "kind": "mcq",
+     "points": 1,
+     "prompt": "Category",
+     "choices": [
+      "Underweight",
+      "Overweight only",
+      "Obese (BMI 30 or more)",
+      "Healthy"
+     ],
+     "answer": 2,
+     "explanation": "33.2 is at least 30.",
+     "id": "lower6-food-science-micro-minerals-e12-b"
+    },
+    {
+     "kind": "open",
+     "points": 2,
+     "prompt": "Suggest two safe lifestyle recommendations (general advice).",
+     "model": "Gradually increase physical activity and choose a balanced diet with less sugar and fat; seek advice from a health worker.",
+     "rubric": "1 mark each.",
+     "explanation": "Gradually increase physical activity and choose a balanced diet with less sugar and fat; seek advice from a health worker.",
+     "id": "lower6-food-science-micro-minerals-e12-c"
+    }
+   ],
+   "chapter": "lower6-food-science-micro-minerals"
+  },
+  {
+   "id": "lower6-food-science-energy-bmi-q1",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "lower6-food-science-energy-bmi",
+   "prompt": "BMR is energy used",
+   "choices": [
+    "only in the evening",
+    "never",
+    "at rest",
+    "during sport"
+   ],
+   "answer": 2,
+   "explanation": "Basal.",
+   "chapter": "lower6-food-science-micro-minerals"
+  },
+  {
+   "id": "lower6-food-science-energy-bmi-q2",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "lower6-food-science-energy-bmi",
+   "prompt": "PAL multiplies",
+   "choices": [
+    "BMR to estimate daily need",
+    "height",
+    "water",
+    "BMI"
+   ],
+   "answer": 0,
+   "explanation": "PAL.",
+   "chapter": "lower6-food-science-micro-minerals"
+  },
+  {
+   "id": "lower6-food-science-energy-bmi-q3",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "lower6-food-science-energy-bmi",
+   "prompt": "BMI = mass / ",
+   "choices": [
+    "age",
+    "height squared",
+    "height",
+    "mass"
+   ],
+   "answer": 1,
+   "explanation": "Formula.",
+   "chapter": "lower6-food-science-micro-minerals"
+  },
+  {
+   "id": "lower6-food-science-energy-bmi-q4",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "lower6-food-science-energy-bmi",
+   "prompt": "An adult BMI of 22 is",
+   "choices": [
+    "obese",
+    "dangerous",
+    "in the healthy range",
+    "underweight"
+   ],
+   "answer": 2,
+   "explanation": "18.5-24.9.",
+   "chapter": "lower6-food-science-micro-minerals"
+  },
+  {
+   "id": "lower6-food-science-energy-bmi-q5",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "lower6-food-science-energy-bmi",
+   "prompt": "A long-term energy surplus tends to",
+   "choices": [
+    "stop growth",
+    "remove vitamins",
+    "reduce body fat",
+    "increase body fat"
+   ],
+   "answer": 3,
+   "explanation": "Surplus.",
+   "chapter": "lower6-food-science-micro-minerals"
+  }
+ ]
+}

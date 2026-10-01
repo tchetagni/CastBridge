@@ -1,0 +1,1689 @@
+{
+ "chapter": "gceol-computer-software",
+ "lessons": [
+  {
+   "id": "gceol-computer-operating-systems",
+   "title": "Operating systems and files",
+   "minutes": 25,
+   "programRef": "Cameroon GCE Board — Ordinary Level Computer Science / ICT syllabus — to be checked against the official text",
+   "status": "draft",
+   "author": "CastBridge (AI draft)",
+   "source": "Original writing following the Cameroonian curriculum; to be reviewed by a teacher",
+   "objectives": [
+    "State the functions of an operating system",
+    "Compare user interfaces (GUI, command-line)",
+    "Use files, folders and file extensions",
+    "Explain basic maintenance"
+   ],
+   "prerequisites": [],
+   "exercises": [
+    "gceol-computer-software-e01",
+    "gceol-computer-software-e02",
+    "gceol-computer-software-e03",
+    "gceol-computer-software-e04",
+    "gceol-computer-software-e05",
+    "gceol-computer-software-e06"
+   ],
+   "selfCheck": [
+    "gceol-computer-operating-systems-q1",
+    "gceol-computer-operating-systems-q2",
+    "gceol-computer-operating-systems-q3",
+    "gceol-computer-operating-systems-q4",
+    "gceol-computer-operating-systems-q5"
+   ],
+   "reviewNotes": [
+    "Names of operating systems/programs are given as examples only.",
+    "Syllabus references, scope and level of difficulty are to be checked against the official text; all facts, formulas and worked examples to be verified by a teacher before release."
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "What an OS does",
+     "md": "An **operating system (OS)** manages the hardware and runs the other programs. Main functions: **memory management**, **file management**, **managing input/output devices**, **multitasking** (running several programs), **security** (user accounts and passwords) and providing a **user interface**."
+    },
+    {
+     "type": "key",
+     "style": "retenir",
+     "title": "User interfaces",
+     "md": "A **GUI** (graphical user interface) uses windows, icons, menus and a pointer; it is easy for beginners. A **command-line interface (CLI)** uses typed commands; it is fast for experts but harder to learn. Examples of OS: Windows, Linux, macOS, Android."
+    },
+    {
+     "type": "illustration",
+     "figure": {
+      "kind": "shapes",
+      "w": 420,
+      "h": 215,
+      "items": [
+       {
+        "t": "text",
+        "x": 210,
+        "y": 24,
+        "text": "A folder tree",
+        "size": 15,
+        "anchor": "middle",
+        "color": "ink",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 160,
+        "y": 40,
+        "w": 100,
+        "h": 30,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "lightblue",
+        "radius": 4
+       },
+       {
+        "t": "text",
+        "x": 210,
+        "y": 60,
+        "text": "Documents",
+        "size": 13,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "line",
+        "x1": 185,
+        "y1": 70,
+        "x2": 100,
+        "y2": 110,
+        "color": "ink",
+        "width": 2,
+        "arrow": "end"
+       },
+       {
+        "t": "line",
+        "x1": 235,
+        "y1": 70,
+        "x2": 320,
+        "y2": 110,
+        "color": "ink",
+        "width": 2,
+        "arrow": "end"
+       },
+       {
+        "t": "rect",
+        "x": 40,
+        "y": 110,
+        "w": 120,
+        "h": 30,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "lightgreen",
+        "radius": 4
+       },
+       {
+        "t": "text",
+        "x": 100,
+        "y": 130,
+        "text": "School",
+        "size": 13,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "rect",
+        "x": 260,
+        "y": 110,
+        "w": 120,
+        "h": 30,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "lightgreen",
+        "radius": 4
+       },
+       {
+        "t": "text",
+        "x": 320,
+        "y": 130,
+        "text": "Family",
+        "size": 13,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "line",
+        "x1": 100,
+        "y1": 140,
+        "x2": 100,
+        "y2": 170,
+        "color": "ink",
+        "width": 2,
+        "arrow": "end"
+       },
+       {
+        "t": "rect",
+        "x": 40,
+        "y": 170,
+        "w": 120,
+        "h": 30,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "lightyellow",
+        "radius": 4
+       },
+       {
+        "t": "text",
+        "x": 100,
+        "y": 190,
+        "text": "Maths.docx",
+        "size": 12,
+        "anchor": "middle",
+        "color": "ink"
+       }
+      ]
+     },
+     "caption": "A tree with the folder Documents containing School and Family; School holds the file Maths.docx.",
+     "alt": "Folder tree: Documents splits into School and Family; School contains Maths.docx."
+    },
+    {
+     "type": "key",
+     "style": "methode",
+     "title": "Files and folders",
+     "md": "A **file** holds data and has a name and an **extension** that shows its type (.docx document, .xlsx spreadsheet, .jpg image, .mp3 sound, .txt plain text). A **folder** (directory) groups files. A **path** like Documents/School/Maths.docx shows where a file is stored."
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Common mistakes",
+     "md": "- Deleting a file in a folder does not always delete it permanently (the recycle bin may keep it).\n- Changing a file extension does not change the file's real content.\n- Closing a window is not the same as shutting down the computer: always use shut down."
+    },
+    {
+     "type": "example",
+     "title": "Example 1 - Extensions",
+     "statement": "Name the type of file for budget.xlsx, song.mp3 and notes.txt.",
+     "steps": [
+      "budget.xlsx: the extension .xlsx is a spreadsheet.",
+      "song.mp3: sound; notes.txt: plain text."
+     ],
+     "answer": "Spreadsheet, sound, plain text."
+    },
+    {
+     "type": "example",
+     "title": "Example 2 - Path",
+     "statement": "A file Report.docx is in the folder Term1, inside the folder School, inside Documents. Write its path.",
+     "steps": [
+      "Start from the outer folder and go inward: Documents, then School, then Term1.",
+      "Add the file name at the end."
+     ],
+     "answer": "Documents/School/Term1/Report.docx"
+    }
+   ],
+   "chapter": "gceol-computer-software"
+  },
+  {
+   "id": "gceol-computer-spreadsheets",
+   "title": "Spreadsheets: formulas, references and charts",
+   "minutes": 25,
+   "programRef": "Cameroon GCE Board — Ordinary Level Computer Science / ICT syllabus — to be checked against the official text",
+   "status": "draft",
+   "author": "CastBridge (AI draft)",
+   "source": "Original writing following the Cameroonian curriculum; to be reviewed by a teacher",
+   "objectives": [
+    "Identify cells, rows and columns",
+    "Write formulas with +, -, \\*, / and functions",
+    "Distinguish relative and absolute references",
+    "Choose a suitable chart"
+   ],
+   "prerequisites": [],
+   "exercises": [
+    "gceol-computer-software-e07",
+    "gceol-computer-software-e08",
+    "gceol-computer-software-e09",
+    "gceol-computer-software-e10",
+    "gceol-computer-software-e11",
+    "gceol-computer-software-e12"
+   ],
+   "selfCheck": [
+    "gceol-computer-spreadsheets-q1",
+    "gceol-computer-spreadsheets-q2",
+    "gceol-computer-spreadsheets-q3",
+    "gceol-computer-spreadsheets-q4",
+    "gceol-computer-spreadsheets-q5"
+   ],
+   "reviewNotes": [
+    "Function names are the common English ones; some programs use ; instead of , in formulas.",
+    "Syllabus references, scope and level of difficulty are to be checked against the official text; all facts, formulas and worked examples to be verified by a teacher before release."
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Cells and formulas",
+     "md": "A spreadsheet is a grid of **columns** (A, B, C...) and **rows** (1, 2, 3...). A **cell** is named by its column and row, e.g. B3. A **formula** starts with = and calculates a value, e.g. =B2\\*C2. When a cell changes, formulas update automatically."
+    },
+    {
+     "type": "key",
+     "style": "retenir",
+     "title": "Common functions",
+     "md": "=SUM(B2:B6) adds the range B2 to B6. =AVERAGE(B2:B6) gives the mean. =MAX() and =MIN() give the largest and smallest. =COUNT() counts numbers. =IF(B2>=50,\"Pass\",\"Fail\") chooses between two results."
+    },
+    {
+     "type": "illustration",
+     "figure": {
+      "kind": "shapes",
+      "w": 420,
+      "h": 170,
+      "items": [
+       {
+        "t": "text",
+        "x": 210.0,
+        "y": 24,
+        "text": "Spreadsheet: item, qty, price, total",
+        "size": 15,
+        "anchor": "middle",
+        "color": "ink",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 10.0,
+        "y": 40,
+        "w": 100.0,
+        "h": 28,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "lightblue"
+       },
+       {
+        "t": "text",
+        "x": 60.0,
+        "y": 59,
+        "text": "A: Item",
+        "size": 13,
+        "anchor": "middle",
+        "color": "ink",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 110.0,
+        "y": 40,
+        "w": 100.0,
+        "h": 28,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "lightgreen"
+       },
+       {
+        "t": "text",
+        "x": 160.0,
+        "y": 59,
+        "text": "B: Qty",
+        "size": 13,
+        "anchor": "middle",
+        "color": "ink",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 210.0,
+        "y": 40,
+        "w": 100.0,
+        "h": 28,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "lightyellow"
+       },
+       {
+        "t": "text",
+        "x": 260.0,
+        "y": 59,
+        "text": "C: Price",
+        "size": 13,
+        "anchor": "middle",
+        "color": "ink",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 310.0,
+        "y": 40,
+        "w": 100.0,
+        "h": 28,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "lightorange"
+       },
+       {
+        "t": "text",
+        "x": 360.0,
+        "y": 59,
+        "text": "D: =B*C",
+        "size": 13,
+        "anchor": "middle",
+        "color": "ink",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 10.0,
+        "y": 68,
+        "w": 100.0,
+        "h": 28,
+        "stroke": "grey",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 60.0,
+        "y": 87,
+        "text": "Rice",
+        "size": 13,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "rect",
+        "x": 110.0,
+        "y": 68,
+        "w": 100.0,
+        "h": 28,
+        "stroke": "grey",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 160.0,
+        "y": 87,
+        "text": "3",
+        "size": 13,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "rect",
+        "x": 210.0,
+        "y": 68,
+        "w": 100.0,
+        "h": 28,
+        "stroke": "grey",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 260.0,
+        "y": 87,
+        "text": "600",
+        "size": 13,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "rect",
+        "x": 310.0,
+        "y": 68,
+        "w": 100.0,
+        "h": 28,
+        "stroke": "grey",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 360.0,
+        "y": 87,
+        "text": "1800",
+        "size": 13,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "rect",
+        "x": 10.0,
+        "y": 96,
+        "w": 100.0,
+        "h": 28,
+        "stroke": "grey",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 60.0,
+        "y": 115,
+        "text": "Oil",
+        "size": 13,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "rect",
+        "x": 110.0,
+        "y": 96,
+        "w": 100.0,
+        "h": 28,
+        "stroke": "grey",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 160.0,
+        "y": 115,
+        "text": "2",
+        "size": 13,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "rect",
+        "x": 210.0,
+        "y": 96,
+        "w": 100.0,
+        "h": 28,
+        "stroke": "grey",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 260.0,
+        "y": 115,
+        "text": "1500",
+        "size": 13,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "rect",
+        "x": 310.0,
+        "y": 96,
+        "w": 100.0,
+        "h": 28,
+        "stroke": "grey",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 360.0,
+        "y": 115,
+        "text": "3000",
+        "size": 13,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "rect",
+        "x": 10.0,
+        "y": 124,
+        "w": 100.0,
+        "h": 28,
+        "stroke": "grey",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 60.0,
+        "y": 143,
+        "text": "Total",
+        "size": 13,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "rect",
+        "x": 110.0,
+        "y": 124,
+        "w": 100.0,
+        "h": 28,
+        "stroke": "grey",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 160.0,
+        "y": 143,
+        "text": "-",
+        "size": 13,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "rect",
+        "x": 210.0,
+        "y": 124,
+        "w": 100.0,
+        "h": 28,
+        "stroke": "grey",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 260.0,
+        "y": 143,
+        "text": "-",
+        "size": 13,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "rect",
+        "x": 310.0,
+        "y": 124,
+        "w": 100.0,
+        "h": 28,
+        "stroke": "grey",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 360.0,
+        "y": 143,
+        "text": "4800",
+        "size": 13,
+        "anchor": "middle",
+        "color": "ink"
+       }
+      ]
+     },
+     "caption": "A table with items rice and oil, quantities, prices in FCFA and totals, 4800 in total.",
+     "alt": "Spreadsheet table with columns item, quantity, price and total; rice 3 x 600 = 1800, oil 2 x 1500 = 3000, total 4800."
+    },
+    {
+     "type": "key",
+     "style": "methode",
+     "title": "Relative and absolute references",
+     "md": "When a formula is copied, a **relative reference** (B2) changes with the new position. An **absolute reference** (\\$B\\$2) stays fixed. Use it for a single value used by many rows, such as a tax rate in cell \\$E\\$1."
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Common mistakes",
+     "md": "- Typing the result instead of a formula: it will not update.\n- Forgetting the = sign: the cell shows text.\n- Copying a formula that needs \\$ and getting wrong answers.\n- Choosing a pie chart for data that is not parts of a whole."
+    },
+    {
+     "type": "example",
+     "title": "Example 1 - Formulas",
+     "statement": "Rice: 3 bags at 600 FCFA each in B2 and C2. Write the formula for the total in D2, and a formula to total D2:D3.",
+     "steps": [
+      "D2 = B2\\*C2 = 3 x 600 = 1800.",
+      "If D3 is 3000, the grand total is =SUM(D2:D3) = 4800."
+     ],
+     "answer": "=B2\\*C2 ; =SUM(D2:D3)"
+    },
+    {
+     "type": "example",
+     "title": "Example 2 - Absolute reference",
+     "statement": "Prices are in C2:C4 and a discount rate of 10% is in E1. Write the formula for the discounted price in D2 that can be copied down.",
+     "steps": [
+      "Use the price C2 and the rate E1: =C2\\*(1-\\$E\\$1).",
+      "\\$E\\$1 is absolute so it stays on E1 when copied to D3 and D4; C2 becomes C3, C4."
+     ],
+     "answer": "=C2\\*(1-\\$E\\$1)"
+    }
+   ],
+   "chapter": "gceol-computer-software"
+  },
+  {
+   "id": "gceol-computer-wordprocessing-database",
+   "title": "Word processing and databases",
+   "minutes": 25,
+   "programRef": "Cameroon GCE Board — Ordinary Level Computer Science / ICT syllabus — to be checked against the official text",
+   "status": "draft",
+   "author": "CastBridge (AI draft)",
+   "source": "Original writing following the Cameroonian curriculum; to be reviewed by a teacher",
+   "objectives": [
+    "List word-processing features and formatting",
+    "Explain field, record, table and primary key",
+    "Describe simple database queries and sorting",
+    "Choose the right tool for a task"
+   ],
+   "prerequisites": [],
+   "exercises": [
+    "gceol-computer-software-e13",
+    "gceol-computer-software-e14",
+    "gceol-computer-software-e15",
+    "gceol-computer-software-e16",
+    "gceol-computer-software-e17",
+    "gceol-computer-software-e18"
+   ],
+   "selfCheck": [
+    "gceol-computer-wordprocessing-database-q1",
+    "gceol-computer-wordprocessing-database-q2",
+    "gceol-computer-wordprocessing-database-q3",
+    "gceol-computer-wordprocessing-database-q4",
+    "gceol-computer-wordprocessing-database-q5"
+   ],
+   "reviewNotes": [
+    "Mail merge and query syntax vary by software; keep generic.",
+    "Syllabus references, scope and level of difficulty are to be checked against the official text; all facts, formulas and worked examples to be verified by a teacher before release."
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Word processing",
+     "md": "A **word processor** creates and edits documents. Features: **formatting** (font, size, bold, alignment), **editing** (copy, cut, paste, find and replace), page layout (margins, columns, page numbers), tables, **spell check**, headers/footers and mail merge (sending the same letter to many people)."
+    },
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Database basics",
+     "md": "A **database** is an organised collection of data. A **table** has **fields** (columns, e.g. Name) and **records** (rows, one per person or item). A **primary key** is a field whose value is unique for each record (e.g. a student ID)."
+    },
+    {
+     "type": "illustration",
+     "figure": {
+      "kind": "shapes",
+      "w": 420,
+      "h": 170,
+      "items": [
+       {
+        "t": "text",
+        "x": 210.0,
+        "y": 24,
+        "text": "Student table",
+        "size": 15,
+        "anchor": "middle",
+        "color": "ink",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 10.0,
+        "y": 40,
+        "w": 100.0,
+        "h": 28,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "lightblue"
+       },
+       {
+        "t": "text",
+        "x": 60.0,
+        "y": 59,
+        "text": "ID",
+        "size": 13,
+        "anchor": "middle",
+        "color": "ink",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 110.0,
+        "y": 40,
+        "w": 100.0,
+        "h": 28,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "lightgreen"
+       },
+       {
+        "t": "text",
+        "x": 160.0,
+        "y": 59,
+        "text": "Name",
+        "size": 13,
+        "anchor": "middle",
+        "color": "ink",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 210.0,
+        "y": 40,
+        "w": 100.0,
+        "h": 28,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "lightyellow"
+       },
+       {
+        "t": "text",
+        "x": 260.0,
+        "y": 59,
+        "text": "Town",
+        "size": 13,
+        "anchor": "middle",
+        "color": "ink",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 310.0,
+        "y": 40,
+        "w": 100.0,
+        "h": 28,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "lightorange"
+       },
+       {
+        "t": "text",
+        "x": 360.0,
+        "y": 59,
+        "text": "Age",
+        "size": 13,
+        "anchor": "middle",
+        "color": "ink",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 10.0,
+        "y": 68,
+        "w": 100.0,
+        "h": 28,
+        "stroke": "grey",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 60.0,
+        "y": 87,
+        "text": "S01",
+        "size": 13,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "rect",
+        "x": 110.0,
+        "y": 68,
+        "w": 100.0,
+        "h": 28,
+        "stroke": "grey",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 160.0,
+        "y": 87,
+        "text": "Ada",
+        "size": 13,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "rect",
+        "x": 210.0,
+        "y": 68,
+        "w": 100.0,
+        "h": 28,
+        "stroke": "grey",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 260.0,
+        "y": 87,
+        "text": "Buea",
+        "size": 13,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "rect",
+        "x": 310.0,
+        "y": 68,
+        "w": 100.0,
+        "h": 28,
+        "stroke": "grey",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 360.0,
+        "y": 87,
+        "text": "15",
+        "size": 13,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "rect",
+        "x": 10.0,
+        "y": 96,
+        "w": 100.0,
+        "h": 28,
+        "stroke": "grey",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 60.0,
+        "y": 115,
+        "text": "S02",
+        "size": 13,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "rect",
+        "x": 110.0,
+        "y": 96,
+        "w": 100.0,
+        "h": 28,
+        "stroke": "grey",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 160.0,
+        "y": 115,
+        "text": "Paul",
+        "size": 13,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "rect",
+        "x": 210.0,
+        "y": 96,
+        "w": 100.0,
+        "h": 28,
+        "stroke": "grey",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 260.0,
+        "y": 115,
+        "text": "Limbe",
+        "size": 13,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "rect",
+        "x": 310.0,
+        "y": 96,
+        "w": 100.0,
+        "h": 28,
+        "stroke": "grey",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 360.0,
+        "y": 115,
+        "text": "16",
+        "size": 13,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "rect",
+        "x": 10.0,
+        "y": 124,
+        "w": 100.0,
+        "h": 28,
+        "stroke": "grey",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 60.0,
+        "y": 143,
+        "text": "S03",
+        "size": 13,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "rect",
+        "x": 110.0,
+        "y": 124,
+        "w": 100.0,
+        "h": 28,
+        "stroke": "grey",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 160.0,
+        "y": 143,
+        "text": "Nina",
+        "size": 13,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "rect",
+        "x": 210.0,
+        "y": 124,
+        "w": 100.0,
+        "h": 28,
+        "stroke": "grey",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 260.0,
+        "y": 143,
+        "text": "Buea",
+        "size": 13,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "rect",
+        "x": 310.0,
+        "y": 124,
+        "w": 100.0,
+        "h": 28,
+        "stroke": "grey",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 360.0,
+        "y": 143,
+        "text": "14",
+        "size": 13,
+        "anchor": "middle",
+        "color": "ink"
+       }
+      ]
+     },
+     "caption": "A table with fields ID, Name, Town and Age and three records.",
+     "alt": "Database table with four fields and three student records."
+    },
+    {
+     "type": "key",
+     "style": "methode",
+     "title": "Searching and sorting",
+     "md": "A **query** finds records that match a condition, e.g. Town = \"Buea\" AND Age > 15. **Sorting** puts records in order (alphabetical or numerical, ascending or descending). A **report** presents selected data neatly."
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Common mistakes",
+     "md": "- A name is not a good primary key: two people can share it.\n- Data types matter: store a phone number as text, an age as a number.\n- A query shows records; it does not delete them unless asked."
+    },
+    {
+     "type": "example",
+     "title": "Example 1 - Query",
+     "statement": "In the student table, which records satisfy Town = \"Buea\" AND Age >= 15?",
+     "steps": [
+      "Check Town = Buea: S01 (Ada) and S03 (Nina).",
+      "Now Age >= 15: Ada is 15 (yes), Nina is 14 (no)."
+     ],
+     "answer": "Only record S01 (Ada)."
+    },
+    {
+     "type": "example",
+     "title": "Example 2 - Fields and records",
+     "statement": "In that table, how many fields and records are there, and which is the primary key?",
+     "steps": [
+      "Fields are columns: ID, Name, Town, Age = 4. Records are rows = 3.",
+      "ID is unique for every student, so it is the primary key."
+     ],
+     "answer": "4 fields, 3 records, key = ID"
+    }
+   ],
+   "chapter": "gceol-computer-software"
+  }
+ ],
+ "exercises": [
+  {
+   "id": "gceol-computer-software-e01",
+   "kind": "mcq",
+   "tier": "application",
+   "lesson": "gceol-computer-operating-systems",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Which is a function of an operating system?",
+   "choices": [
+    "Printing on paper",
+    "Scanning photos",
+    "Making spreadsheets",
+    "File management"
+   ],
+   "answer": 3,
+   "explanation": "File management is an OS task; the others are application or hardware tasks.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "gceol-computer-software"
+  },
+  {
+   "id": "gceol-computer-software-e02",
+   "kind": "mcq",
+   "tier": "application",
+   "lesson": "gceol-computer-operating-systems",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Windows, Linux and Android are examples of",
+   "choices": [
+    "operating systems",
+    "browsers",
+    "word processors",
+    "storage devices"
+   ],
+   "answer": 0,
+   "explanation": "They are operating systems.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "gceol-computer-software"
+  },
+  {
+   "id": "gceol-computer-software-e03",
+   "kind": "truefalse",
+   "tier": "application",
+   "lesson": "gceol-computer-operating-systems",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "A GUI uses icons and windows.",
+   "answer": true,
+   "explanation": "That is the definition of a GUI.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "gceol-computer-software"
+  },
+  {
+   "id": "gceol-computer-software-e04",
+   "kind": "matching",
+   "tier": "approfondissement",
+   "lesson": "gceol-computer-operating-systems",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Match the extension to the file type.",
+   "pairs": [
+    [
+     ".jpg",
+     "Image"
+    ],
+    [
+     ".mp3",
+     "Sound"
+    ],
+    [
+     ".docx",
+     "Word-processed document"
+    ],
+    [
+     ".txt",
+     "Plain text"
+    ]
+   ],
+   "explanation": "Extensions show how the file is encoded.",
+   "difficulty": 2,
+   "points": 2,
+   "chapter": "gceol-computer-software"
+  },
+  {
+   "id": "gceol-computer-software-e05",
+   "kind": "open",
+   "tier": "approfondissement",
+   "lesson": "gceol-computer-operating-systems",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Give two advantages of a GUI over a command-line interface.",
+   "model": "A GUI is easier to learn and use because actions are shown as icons and menus; users do not need to remember commands, and multiple windows can be viewed at once.",
+   "rubric": "1 mark per correct advantage.",
+   "explanation": "A GUI is easier to learn and use because actions are shown as icons and menus; users do not need to remember commands, and multiple windows can be viewed at once.",
+   "difficulty": 2,
+   "points": 3,
+   "chapter": "gceol-computer-software"
+  },
+  {
+   "id": "gceol-computer-software-e06",
+   "kind": "problem",
+   "tier": "examen",
+   "lesson": "gceol-computer-operating-systems",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Maria saves her homework in a folder named Homework on a flash drive.",
+   "difficulty": 2,
+   "parts": [
+    {
+     "kind": "mcq",
+     "points": 1,
+     "prompt": "What do we call the name's last part after the dot (e.g. .docx)?",
+     "choices": [
+      "The file extension",
+      "The driver",
+      "The folder",
+      "The path"
+     ],
+     "answer": 0,
+     "explanation": "It shows the file type.",
+     "id": "gceol-computer-software-e06-a"
+    },
+    {
+     "kind": "truefalse",
+     "points": 1,
+     "prompt": "Moving a file to another folder changes its path.",
+     "answer": true,
+     "explanation": "The path includes the folder names.",
+     "id": "gceol-computer-software-e06-b"
+    },
+    {
+     "kind": "open",
+     "points": 2,
+     "prompt": "State two good habits for managing files.",
+     "model": "Use meaningful names, group files in folders, make backups, delete old files carefully.",
+     "rubric": "1 mark each.",
+     "explanation": "Use meaningful names, group files in folders, make backups, delete old files carefully.",
+     "id": "gceol-computer-software-e06-c"
+    }
+   ],
+   "chapter": "gceol-computer-software"
+  },
+  {
+   "id": "gceol-computer-operating-systems-q1",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "gceol-computer-operating-systems",
+   "prompt": "Running several programs at the same time is called",
+   "choices": [
+    "formatting",
+    "booting",
+    "scanning",
+    "multitasking"
+   ],
+   "answer": 3,
+   "explanation": "The OS shares the CPU.",
+   "chapter": "gceol-computer-software"
+  },
+  {
+   "id": "gceol-computer-operating-systems-q2",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "gceol-computer-operating-systems",
+   "prompt": "Which interface uses typed commands?",
+   "choices": [
+    "Voice only",
+    "Command-line",
+    "GUI",
+    "Touch only"
+   ],
+   "answer": 1,
+   "explanation": "CLI means typed commands.",
+   "chapter": "gceol-computer-software"
+  },
+  {
+   "id": "gceol-computer-operating-systems-q3",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "gceol-computer-operating-systems",
+   "prompt": "A folder is used to",
+   "choices": [
+    "erase RAM",
+    "print files",
+    "scan files",
+    "group files"
+   ],
+   "answer": 3,
+   "explanation": "It organises files.",
+   "chapter": "gceol-computer-software"
+  },
+  {
+   "id": "gceol-computer-operating-systems-q4",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "gceol-computer-operating-systems",
+   "prompt": "A password on a user account is part of the OS function of",
+   "choices": [
+    "drawing",
+    "printing",
+    "formatting text",
+    "security"
+   ],
+   "answer": 3,
+   "explanation": "OS controls access.",
+   "chapter": "gceol-computer-software"
+  },
+  {
+   "id": "gceol-computer-operating-systems-q5",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "gceol-computer-operating-systems",
+   "prompt": "The extension .xlsx usually shows a",
+   "choices": [
+    "image file",
+    "sound file",
+    "spreadsheet file",
+    "video file"
+   ],
+   "answer": 2,
+   "explanation": "Excel-style spreadsheet.",
+   "chapter": "gceol-computer-software"
+  },
+  {
+   "id": "gceol-computer-software-e07",
+   "kind": "mcq",
+   "tier": "application",
+   "lesson": "gceol-computer-spreadsheets",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "The cell in column C, row 5 is called",
+   "choices": [
+    "C-5 row",
+    "5C",
+    "C5",
+    "CC5"
+   ],
+   "answer": 2,
+   "explanation": "Column letter first, then row number.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "gceol-computer-software"
+  },
+  {
+   "id": "gceol-computer-software-e08",
+   "kind": "numeric",
+   "tier": "application",
+   "lesson": "gceol-computer-spreadsheets",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "What is =SUM(B2:B4) if B2=10, B3=20, B4=30?",
+   "answer": 60,
+   "tolerance": 0,
+   "explanation": "10 + 20 + 30 = 60.",
+   "difficulty": 1,
+   "points": 2,
+   "chapter": "gceol-computer-software"
+  },
+  {
+   "id": "gceol-computer-software-e09",
+   "kind": "truefalse",
+   "tier": "application",
+   "lesson": "gceol-computer-spreadsheets",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "A formula normally begins with the = sign.",
+   "answer": true,
+   "explanation": "Yes, otherwise the entry is text.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "gceol-computer-software"
+  },
+  {
+   "id": "gceol-computer-software-e10",
+   "kind": "mcq",
+   "tier": "approfondissement",
+   "lesson": "gceol-computer-spreadsheets",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Which chart best shows how a monthly budget is divided into parts of a whole?",
+   "choices": [
+    "Line chart of time",
+    "No chart suits",
+    "Pie chart",
+    "Scatter chart of two variables"
+   ],
+   "answer": 2,
+   "explanation": "A pie chart shows shares of a total.",
+   "difficulty": 2,
+   "points": 2,
+   "chapter": "gceol-computer-software"
+  },
+  {
+   "id": "gceol-computer-software-e11",
+   "kind": "numeric",
+   "tier": "approfondissement",
+   "lesson": "gceol-computer-spreadsheets",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "A1 = 50. B1 = A1\\*2 + 10. What is B1?",
+   "answer": 110,
+   "tolerance": 0,
+   "explanation": "50 x 2 = 100; + 10 = 110.",
+   "difficulty": 2,
+   "points": 3,
+   "chapter": "gceol-computer-software"
+  },
+  {
+   "id": "gceol-computer-software-e12",
+   "kind": "problem",
+   "tier": "examen",
+   "lesson": "gceol-computer-spreadsheets",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "A trader records sales of three days: Mon 12000, Tue 18000, Wed 15000 FCFA in B2:B4.",
+   "difficulty": 2,
+   "parts": [
+    {
+     "kind": "numeric",
+     "points": 1,
+     "prompt": "Value of =SUM(B2:B4)",
+     "answer": 45000,
+     "tolerance": 0,
+     "explanation": "12000 + 18000 + 15000.",
+     "id": "gceol-computer-software-e12-a"
+    },
+    {
+     "kind": "numeric",
+     "points": 1,
+     "prompt": "Value of =AVERAGE(B2:B4)",
+     "answer": 15000,
+     "tolerance": 0,
+     "explanation": "45000 / 3 = 15000.",
+     "id": "gceol-computer-software-e12-b"
+    },
+    {
+     "kind": "mcq",
+     "points": 1,
+     "prompt": "Which chart type shows how the sales change over days?",
+     "choices": [
+      "A table of text",
+      "A word cloud",
+      "A pie chart",
+      "A line chart"
+     ],
+     "answer": 3,
+     "explanation": "Line charts show trends over time.",
+     "id": "gceol-computer-software-e12-c"
+    }
+   ],
+   "chapter": "gceol-computer-software"
+  },
+  {
+   "id": "gceol-computer-spreadsheets-q1",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "gceol-computer-spreadsheets",
+   "prompt": "The formula to add cells A1 and A2 is",
+   "choices": [
+    "=A1A2",
+    "A1+A2",
+    "=A1+A2",
+    "SUM A1 A2"
+   ],
+   "answer": 2,
+   "explanation": "Start with =.",
+   "chapter": "gceol-computer-software"
+  },
+  {
+   "id": "gceol-computer-spreadsheets-q2",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "gceol-computer-spreadsheets",
+   "prompt": "An absolute reference is written with",
+   "choices": [
+    "\\$ signs",
+    "# signs",
+    "quotes",
+    "brackets"
+   ],
+   "answer": 0,
+   "explanation": "\\$A\\$1.",
+   "chapter": "gceol-computer-software"
+  },
+  {
+   "id": "gceol-computer-spreadsheets-q3",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "gceol-computer-spreadsheets",
+   "prompt": "=MAX(B2:B6) returns the",
+   "choices": [
+    "total",
+    "average",
+    "largest value in the range",
+    "number of cells"
+   ],
+   "answer": 2,
+   "explanation": "MAX = largest.",
+   "chapter": "gceol-computer-software"
+  },
+  {
+   "id": "gceol-computer-spreadsheets-q4",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "gceol-computer-spreadsheets",
+   "prompt": "When a formula with relative references is copied down one row",
+   "choices": [
+    "nothing changes",
+    "the row numbers change",
+    "it is deleted",
+    "it turns into text"
+   ],
+   "answer": 1,
+   "explanation": "Relative references move.",
+   "chapter": "gceol-computer-software"
+  },
+  {
+   "id": "gceol-computer-spreadsheets-q5",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "gceol-computer-spreadsheets",
+   "prompt": "A bar chart is best for",
+   "choices": [
+    "typing text",
+    "printing",
+    "showing a whole as slices only",
+    "comparing categories"
+   ],
+   "answer": 3,
+   "explanation": "Bars compare groups.",
+   "chapter": "gceol-computer-software"
+  },
+  {
+   "id": "gceol-computer-software-e13",
+   "kind": "mcq",
+   "tier": "application",
+   "lesson": "gceol-computer-wordprocessing-database",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "A row in a database table is a",
+   "choices": [
+    "report",
+    "record",
+    "query",
+    "field"
+   ],
+   "answer": 1,
+   "explanation": "Rows are records.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "gceol-computer-software"
+  },
+  {
+   "id": "gceol-computer-software-e14",
+   "kind": "mcq",
+   "tier": "application",
+   "lesson": "gceol-computer-wordprocessing-database",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "A word processing feature to send one letter to many people is",
+   "choices": [
+    "pie chart",
+    "mail merge",
+    "spell check",
+    "sort"
+   ],
+   "answer": 1,
+   "explanation": "Mail merge combines a letter with a list.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "gceol-computer-software"
+  },
+  {
+   "id": "gceol-computer-software-e15",
+   "kind": "truefalse",
+   "tier": "application",
+   "lesson": "gceol-computer-wordprocessing-database",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Two records should have the same primary key.",
+   "answer": false,
+   "explanation": "A primary key must be unique.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "gceol-computer-software"
+  },
+  {
+   "id": "gceol-computer-software-e16",
+   "kind": "mcq",
+   "tier": "approfondissement",
+   "lesson": "gceol-computer-wordprocessing-database",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Which field is the best primary key for a school database?",
+   "choices": [
+    "First name",
+    "Class",
+    "Town",
+    "Student ID number"
+   ],
+   "answer": 3,
+   "explanation": "It is unique.",
+   "difficulty": 2,
+   "points": 2,
+   "chapter": "gceol-computer-software"
+  },
+  {
+   "id": "gceol-computer-software-e17",
+   "kind": "open",
+   "tier": "approfondissement",
+   "lesson": "gceol-computer-wordprocessing-database",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Explain the difference between a field and a record.",
+   "model": "A field is one column holding one kind of data (e.g. Name). A record is one row containing all the fields about one person or item.",
+   "rubric": "1 mark each definition, 1 mark example.",
+   "explanation": "A field is one column holding one kind of data (e.g. Name). A record is one row containing all the fields about one person or item.",
+   "difficulty": 2,
+   "points": 3,
+   "chapter": "gceol-computer-software"
+  },
+  {
+   "id": "gceol-computer-software-e18",
+   "kind": "problem",
+   "tier": "examen",
+   "lesson": "gceol-computer-wordprocessing-database",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "A library database has fields BookID, Title, Author, Year.",
+   "difficulty": 2,
+   "parts": [
+    {
+     "kind": "mcq",
+     "points": 1,
+     "prompt": "Best primary key?",
+     "choices": [
+      "Title",
+      "BookID",
+      "Year",
+      "Author"
+     ],
+     "answer": 1,
+     "explanation": "Titles and authors can repeat.",
+     "id": "gceol-computer-software-e18-a"
+    },
+    {
+     "kind": "mcq",
+     "points": 1,
+     "prompt": "Which operation lists books in order of Year?",
+     "choices": [
+      "Querying by name only",
+      "Mail merge",
+      "Sorting",
+      "Spell check"
+     ],
+     "answer": 2,
+     "explanation": "Sorting orders records.",
+     "id": "gceol-computer-software-e18-b"
+    },
+    {
+     "kind": "open",
+     "points": 3,
+     "prompt": "Write a condition to find books by author \"Smith\" published after 2000.",
+     "model": "Author = \"Smith\" AND Year > 2000",
+     "rubric": "1 mark each condition, 1 mark AND.",
+     "explanation": "Author = \"Smith\" AND Year > 2000",
+     "id": "gceol-computer-software-e18-c"
+    }
+   ],
+   "chapter": "gceol-computer-software"
+  },
+  {
+   "id": "gceol-computer-wordprocessing-database-q1",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "gceol-computer-wordprocessing-database",
+   "prompt": "Making text bold is called",
+   "choices": [
+    "formatting",
+    "querying",
+    "sorting",
+    "booting"
+   ],
+   "answer": 0,
+   "explanation": "Formatting changes appearance.",
+   "chapter": "gceol-computer-software"
+  },
+  {
+   "id": "gceol-computer-wordprocessing-database-q2",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "gceol-computer-wordprocessing-database",
+   "prompt": "A column in a database table is a",
+   "choices": [
+    "field",
+    "record",
+    "report",
+    "key"
+   ],
+   "answer": 0,
+   "explanation": "Fields are columns.",
+   "chapter": "gceol-computer-software"
+  },
+  {
+   "id": "gceol-computer-wordprocessing-database-q3",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "gceol-computer-wordprocessing-database",
+   "prompt": "A query is used to",
+   "choices": [
+    "find records matching a condition",
+    "delete the table",
+    "print paper",
+    "change the font"
+   ],
+   "answer": 0,
+   "explanation": "It searches the data.",
+   "chapter": "gceol-computer-software"
+  },
+  {
+   "id": "gceol-computer-wordprocessing-database-q4",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "gceol-computer-wordprocessing-database",
+   "prompt": "Find and replace is an",
+   "choices": [
+    "input device",
+    "editing feature",
+    "storage device",
+    "network"
+   ],
+   "answer": 1,
+   "explanation": "Used to change words.",
+   "chapter": "gceol-computer-software"
+  },
+  {
+   "id": "gceol-computer-wordprocessing-database-q5",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "gceol-computer-wordprocessing-database",
+   "prompt": "A header appears",
+   "choices": [
+    "only on page 1 always",
+    "in RAM only",
+    "at the top of each page",
+    "inside a table cell only"
+   ],
+   "answer": 2,
+   "explanation": "Headers repeat on pages.",
+   "chapter": "gceol-computer-software"
+  },
+  {
+   "id": "gceol-computer-software-m01",
+   "kind": "mcq",
+   "tier": "examen",
+   "lesson": "gceol-computer-spreadsheets",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "What is the correct formula to add A1 and B1?",
+   "choices": [
+    "ADD A1 B1",
+    "A1+B1",
+    "=A1B1",
+    "=A1+B1"
+   ],
+   "answer": 3,
+   "explanation": "Formulas start with =.",
+   "difficulty": 3,
+   "points": 1,
+   "chapter": "gceol-computer-software"
+  }
+ ]
+}

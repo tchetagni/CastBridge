@@ -1,0 +1,994 @@
+{
+ "chapter": "gceol-computer-networks",
+ "lessons": [
+  {
+   "id": "gceol-computer-networks-internet",
+   "title": "Networks and the Internet",
+   "minutes": 25,
+   "programRef": "Cameroon GCE Board — Ordinary Level Computer Science / ICT syllabus — to be checked against the official text",
+   "status": "draft",
+   "author": "CastBridge (AI draft)",
+   "source": "Original writing following the Cameroonian curriculum; to be reviewed by a teacher",
+   "objectives": [
+    "Define LAN and WAN and name topologies",
+    "State the benefits of networks",
+    "Explain Internet, web, browser, URL and email",
+    "Calculate download time"
+   ],
+   "prerequisites": [],
+   "exercises": [
+    "gceol-computer-networks-e01",
+    "gceol-computer-networks-e02",
+    "gceol-computer-networks-e03",
+    "gceol-computer-networks-e04",
+    "gceol-computer-networks-e05",
+    "gceol-computer-networks-e06"
+   ],
+   "selfCheck": [
+    "gceol-computer-networks-internet-q1",
+    "gceol-computer-networks-internet-q2",
+    "gceol-computer-networks-internet-q3",
+    "gceol-computer-networks-internet-q4",
+    "gceol-computer-networks-internet-q5"
+   ],
+   "reviewNotes": [
+    "Wi-Fi/hub/switch distinctions are simplified. Download-time ignores overheads.",
+    "Syllabus references, scope and level of difficulty are to be checked against the official text; all facts, formulas and worked examples to be verified by a teacher before release."
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Networks",
+     "md": "A **network** is a group of computers connected to share data and resources. A **LAN** covers a small area (a school lab). A **WAN** covers a large area (towns, countries); the **Internet** is a worldwide network of networks. Parts: **router**, **switch**, network cable or **Wi-Fi**, **network interface card**."
+    },
+    {
+     "type": "key",
+     "style": "retenir",
+     "title": "Topologies",
+     "md": "**Star**: every computer connects to a central switch (easy to add/remove; if the centre fails everything stops). **Bus**: one shared cable. **Ring**: computers joined in a loop. The star is the most common in schools and offices."
+    },
+    {
+     "type": "illustration",
+     "figure": {
+      "kind": "shapes",
+      "w": 420,
+      "h": 205,
+      "items": [
+       {
+        "t": "text",
+        "x": 210,
+        "y": 22,
+        "text": "Star network",
+        "size": 15,
+        "anchor": "middle",
+        "color": "ink",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 170,
+        "y": 90,
+        "w": 80,
+        "h": 36,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "lightyellow",
+        "radius": 6
+       },
+       {
+        "t": "text",
+        "x": 210,
+        "y": 113,
+        "text": "Switch",
+        "size": 14,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "rect",
+        "x": 25,
+        "y": 44,
+        "w": 70,
+        "h": 32,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "lightblue",
+        "radius": 6
+       },
+       {
+        "t": "text",
+        "x": 60,
+        "y": 65,
+        "text": "PC 1",
+        "size": 13,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "line",
+        "x1": 95,
+        "y1": 60,
+        "x2": 170,
+        "y2": 108,
+        "color": "ink",
+        "width": 2
+       },
+       {
+        "t": "rect",
+        "x": 325,
+        "y": 44,
+        "w": 70,
+        "h": 32,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "lightblue",
+        "radius": 6
+       },
+       {
+        "t": "text",
+        "x": 360,
+        "y": 65,
+        "text": "PC 2",
+        "size": 13,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "line",
+        "x1": 325,
+        "y1": 60,
+        "x2": 250,
+        "y2": 108,
+        "color": "ink",
+        "width": 2
+       },
+       {
+        "t": "rect",
+        "x": 25,
+        "y": 154,
+        "w": 70,
+        "h": 32,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "lightblue",
+        "radius": 6
+       },
+       {
+        "t": "text",
+        "x": 60,
+        "y": 175,
+        "text": "PC 3",
+        "size": 13,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "line",
+        "x1": 95,
+        "y1": 170,
+        "x2": 170,
+        "y2": 108,
+        "color": "ink",
+        "width": 2
+       },
+       {
+        "t": "rect",
+        "x": 325,
+        "y": 154,
+        "w": 70,
+        "h": 32,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "lightblue",
+        "radius": 6
+       },
+       {
+        "t": "text",
+        "x": 360,
+        "y": 175,
+        "text": "Printer",
+        "size": 13,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "line",
+        "x1": 325,
+        "y1": 170,
+        "x2": 250,
+        "y2": 108,
+        "color": "ink",
+        "width": 2
+       }
+      ]
+     },
+     "caption": "Four devices each connected to a central switch.",
+     "alt": "Star topology: PC 1, PC 2, PC 3 and a printer all connected to a central switch."
+    },
+    {
+     "type": "key",
+     "style": "retenir",
+     "title": "Internet and web",
+     "md": "The **Internet** is the network; the **World Wide Web** is the collection of web pages on it. A **browser** shows pages. A **URL** is the address of a page. An **ISP** gives Internet access. **Email** sends messages using an address such as name@example.com."
+    },
+    {
+     "type": "key",
+     "style": "methode",
+     "title": "Download time",
+     "md": "Data rates are in **bits** per second (bps); files are in **bytes**. Time (s) = file size in bits / speed in bits per second. 1 byte = 8 bits."
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Common mistakes",
+     "md": "- The Internet is **not** the same as the Web.\n- Mbps (megabits per second) is not MB/s (megabytes per second): divide Mbps by 8 to get MB/s.\n- In a star network the failure of one cable affects only that computer."
+    },
+    {
+     "type": "example",
+     "title": "Example 1 - Download time",
+     "statement": "A 24 MB file is downloaded at 8 Mbps (megabits per second). How long does it take?",
+     "steps": [
+      "24 MB x 8 = 192 megabits.",
+      "Time = 192 / 8 = 24 seconds."
+     ],
+     "answer": "24 seconds"
+    },
+    {
+     "type": "example",
+     "title": "Example 2 - Choose a network",
+     "statement": "A school with two buildings in Bafoussam wants to link its labs. Name the network type for one lab and for the link to a bank across town.",
+     "steps": [
+      "One lab in one building is a small area: LAN.",
+      "A link over a larger distance between sites/organisations is a WAN."
+     ],
+     "answer": "LAN for the lab; WAN for the long link."
+    }
+   ],
+   "chapter": "gceol-computer-networks"
+  },
+  {
+   "id": "gceol-computer-security-ethics",
+   "title": "Computer security, email safety and ethics",
+   "minutes": 25,
+   "programRef": "Cameroon GCE Board — Ordinary Level Computer Science / ICT syllabus — to be checked against the official text",
+   "status": "draft",
+   "author": "CastBridge (AI draft)",
+   "source": "Original writing following the Cameroonian curriculum; to be reviewed by a teacher",
+   "objectives": [
+    "Describe threats such as viruses, phishing and hacking",
+    "Apply protection measures",
+    "Use email safely",
+    "Explain copyright and responsible use"
+   ],
+   "prerequisites": [],
+   "exercises": [
+    "gceol-computer-networks-e07",
+    "gceol-computer-networks-e08",
+    "gceol-computer-networks-e09",
+    "gceol-computer-networks-e10",
+    "gceol-computer-networks-e11",
+    "gceol-computer-networks-e12"
+   ],
+   "selfCheck": [
+    "gceol-computer-security-ethics-q1",
+    "gceol-computer-security-ethics-q2",
+    "gceol-computer-security-ethics-q3",
+    "gceol-computer-security-ethics-q4",
+    "gceol-computer-security-ethics-q5"
+   ],
+   "reviewNotes": [
+    "Legal statements are general; Cameroon's cybersecurity/cybercriminality law is not cited - add reference after review.",
+    "Syllabus references, scope and level of difficulty are to be checked against the official text; all facts, formulas and worked examples to be verified by a teacher before release."
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Threats",
+     "md": "**Malware** is harmful software: **viruses** attach to files and spread; **worms** spread by themselves; **spyware** secretly collects information. **Phishing** uses fake emails or messages to trick people into giving passwords or money. **Hacking** is unauthorised access to a system."
+    },
+    {
+     "type": "key",
+     "style": "methode",
+     "title": "Protection",
+     "md": "Use **strong passwords** (long, mixed letters, numbers and symbols, different for each account), keep software **updated**, install **antivirus**, use a **firewall**, **back up** files regularly, and do not open unknown attachments or links. Log out on shared computers."
+    },
+    {
+     "type": "illustration",
+     "figure": {
+      "kind": "shapes",
+      "w": 420,
+      "h": 198,
+      "items": [
+       {
+        "t": "text",
+        "x": 210.0,
+        "y": 24,
+        "text": "Threat and protection",
+        "size": 15,
+        "anchor": "middle",
+        "color": "ink",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 10.0,
+        "y": 40,
+        "w": 200.0,
+        "h": 28,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "lightblue"
+       },
+       {
+        "t": "text",
+        "x": 110.0,
+        "y": 59,
+        "text": "Threat",
+        "size": 13,
+        "anchor": "middle",
+        "color": "ink",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 210.0,
+        "y": 40,
+        "w": 200.0,
+        "h": 28,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "lightgreen"
+       },
+       {
+        "t": "text",
+        "x": 310.0,
+        "y": 59,
+        "text": "Protection",
+        "size": 13,
+        "anchor": "middle",
+        "color": "ink",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 10.0,
+        "y": 68,
+        "w": 200.0,
+        "h": 28,
+        "stroke": "grey",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 110.0,
+        "y": 87,
+        "text": "Virus",
+        "size": 13,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "rect",
+        "x": 210.0,
+        "y": 68,
+        "w": 200.0,
+        "h": 28,
+        "stroke": "grey",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 310.0,
+        "y": 87,
+        "text": "Antivirus",
+        "size": 13,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "rect",
+        "x": 10.0,
+        "y": 96,
+        "w": 200.0,
+        "h": 28,
+        "stroke": "grey",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 110.0,
+        "y": 115,
+        "text": "Hacking",
+        "size": 13,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "rect",
+        "x": 210.0,
+        "y": 96,
+        "w": 200.0,
+        "h": 28,
+        "stroke": "grey",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 310.0,
+        "y": 115,
+        "text": "Passwords, firewall",
+        "size": 13,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "rect",
+        "x": 10.0,
+        "y": 124,
+        "w": 200.0,
+        "h": 28,
+        "stroke": "grey",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 110.0,
+        "y": 143,
+        "text": "Phishing",
+        "size": 13,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "rect",
+        "x": 210.0,
+        "y": 124,
+        "w": 200.0,
+        "h": 28,
+        "stroke": "grey",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 310.0,
+        "y": 143,
+        "text": "Check sender",
+        "size": 13,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "rect",
+        "x": 10.0,
+        "y": 152,
+        "w": 200.0,
+        "h": 28,
+        "stroke": "grey",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 110.0,
+        "y": 171,
+        "text": "Data loss",
+        "size": 13,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "rect",
+        "x": 210.0,
+        "y": 152,
+        "w": 200.0,
+        "h": 28,
+        "stroke": "grey",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 310.0,
+        "y": 171,
+        "text": "Backups",
+        "size": 13,
+        "anchor": "middle",
+        "color": "ink"
+       }
+      ]
+     },
+     "caption": "A two-column table matching each threat to a protection measure.",
+     "alt": "Table: virus - antivirus; hacking - passwords and firewall; phishing - check the sender; data loss - backups."
+    },
+    {
+     "type": "key",
+     "style": "retenir",
+     "title": "Email safety and ethics",
+     "md": "Do not share passwords or personal details; check the sender before you click; do not forward chain messages. **Copyright** protects creators: you may not copy or sell others' work without permission. Be respectful online; **cyberbullying** is harmful."
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Common mistakes",
+     "md": "- Antivirus does not remove the need to be careful.\n- Using the same password everywhere is dangerous.\n- Being offered easy money by email is a typical sign of fraud.\n- A backup stored only on the same computer is not safe."
+    },
+    {
+     "type": "example",
+     "title": "Example 1 - Spot the phishing",
+     "statement": "An email says: Your account will close! Send your password to keep it. What should you do?",
+     "steps": [
+      "The message creates fear and asks for a password: signs of phishing.",
+      "Never reply; do not click links; delete it and report to the real service by its official contact."
+     ],
+     "answer": "Treat it as phishing and do not respond."
+    },
+    {
+     "type": "example",
+     "title": "Example 2 - Strong password",
+     "statement": "Which is stronger: buea123 or T7#mQ!2rv9? Explain.",
+     "steps": [
+      "buea123 is short and easy to guess (a town plus numbers).",
+      "T7#mQ!2rv9 is long with mixed upper and lower case, digits and symbols."
+     ],
+     "answer": "T7#mQ!2rv9 is stronger."
+    }
+   ],
+   "chapter": "gceol-computer-networks"
+  }
+ ],
+ "exercises": [
+  {
+   "id": "gceol-computer-networks-e01",
+   "kind": "mcq",
+   "tier": "application",
+   "lesson": "gceol-computer-networks-internet",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "A network covering one school computer room is a",
+   "choices": [
+    "LAN",
+    "ISP",
+    "Internet",
+    "WAN"
+   ],
+   "answer": 0,
+   "explanation": "Local Area Network.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "gceol-computer-networks"
+  },
+  {
+   "id": "gceol-computer-networks-e02",
+   "kind": "numeric",
+   "tier": "application",
+   "lesson": "gceol-computer-networks-internet",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "How many bits are in 5 bytes?",
+   "answer": 40,
+   "tolerance": 0,
+   "explanation": "5 x 8 = 40.",
+   "difficulty": 1,
+   "points": 2,
+   "chapter": "gceol-computer-networks"
+  },
+  {
+   "id": "gceol-computer-networks-e03",
+   "kind": "truefalse",
+   "tier": "application",
+   "lesson": "gceol-computer-networks-internet",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "The World Wide Web and the Internet mean exactly the same thing.",
+   "answer": false,
+   "explanation": "The web is a service on the Internet.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "gceol-computer-networks"
+  },
+  {
+   "id": "gceol-computer-networks-e04",
+   "kind": "numeric",
+   "tier": "approfondissement",
+   "lesson": "gceol-computer-networks-internet",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "How many seconds to download a 10 MB file at 20 Mbps? (1 byte = 8 bits)",
+   "answer": 4,
+   "tolerance": 0,
+   "explanation": "10 x 8 = 80 megabits; 80 / 20 = 4 s.",
+   "difficulty": 2,
+   "points": 3,
+   "chapter": "gceol-computer-networks"
+  },
+  {
+   "id": "gceol-computer-networks-e05",
+   "kind": "open",
+   "tier": "approfondissement",
+   "lesson": "gceol-computer-networks-internet",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Give two benefits and one drawback of networking computers in a school.",
+   "model": "Benefits: sharing printers and files, shared Internet connection, central backup. Drawback: if the network or server fails many users are affected; security risks such as viruses spread.",
+   "rubric": "1 mark per benefit, 1 for a drawback.",
+   "explanation": "Benefits: sharing printers and files, shared Internet connection, central backup. Drawback: if the network or server fails many users are affected; security risks such as viruses spread.",
+   "difficulty": 2,
+   "points": 3,
+   "chapter": "gceol-computer-networks"
+  },
+  {
+   "id": "gceol-computer-networks-e06",
+   "kind": "problem",
+   "tier": "examen",
+   "lesson": "gceol-computer-networks-internet",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "A cyber cafe in Limbe has 10 computers connected to a switch and one router to the Internet.",
+   "difficulty": 2,
+   "parts": [
+    {
+     "kind": "mcq",
+     "points": 1,
+     "prompt": "What topology is this?",
+     "choices": [
+      "Ring",
+      "Star",
+      "Bus",
+      "Mesh only"
+     ],
+     "answer": 1,
+     "explanation": "All computers connect to a central switch.",
+     "id": "gceol-computer-networks-e06-a"
+    },
+    {
+     "kind": "mcq",
+     "points": 1,
+     "prompt": "Which device connects the café to the Internet?",
+     "choices": [
+      "Speaker",
+      "Router",
+      "Mouse",
+      "Scanner"
+     ],
+     "answer": 1,
+     "explanation": "A router joins networks.",
+     "id": "gceol-computer-networks-e06-b"
+    },
+    {
+     "kind": "numeric",
+     "points": 1,
+     "prompt": "A video is 40 MB. At 16 Mbps, how many seconds to download? (use 8 bits = 1 byte)",
+     "answer": 20,
+     "tolerance": 0,
+     "explanation": "40 x 8 = 320 Mb; 320/16 = 20 s.",
+     "unit": "s",
+     "id": "gceol-computer-networks-e06-c"
+    }
+   ],
+   "chapter": "gceol-computer-networks"
+  },
+  {
+   "id": "gceol-computer-networks-internet-q1",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "gceol-computer-networks-internet",
+   "prompt": "A URL is",
+   "choices": [
+    "a printer",
+    "a router",
+    "the address of a web page",
+    "a type of virus"
+   ],
+   "answer": 2,
+   "explanation": "It locates a page.",
+   "chapter": "gceol-computer-networks"
+  },
+  {
+   "id": "gceol-computer-networks-internet-q2",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "gceol-computer-networks-internet",
+   "prompt": "The device that directs data between networks is the",
+   "choices": [
+    "monitor",
+    "keyboard",
+    "router",
+    "scanner"
+   ],
+   "answer": 2,
+   "explanation": "Routers forward data.",
+   "chapter": "gceol-computer-networks"
+  },
+  {
+   "id": "gceol-computer-networks-internet-q3",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "gceol-computer-networks-internet",
+   "prompt": "An ISP",
+   "choices": [
+    "sells spreadsheets",
+    "makes monitors",
+    "provides Internet access",
+    "repairs printers"
+   ],
+   "answer": 2,
+   "explanation": "Internet Service Provider.",
+   "chapter": "gceol-computer-networks"
+  },
+  {
+   "id": "gceol-computer-networks-internet-q4",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "gceol-computer-networks-internet",
+   "prompt": "In a star network, a central",
+   "choices": [
+    "switch connects all the computers",
+    "speaker sends email",
+    "monitor stores files",
+    "printer prints all pages"
+   ],
+   "answer": 0,
+   "explanation": "Switch or hub.",
+   "chapter": "gceol-computer-networks"
+  },
+  {
+   "id": "gceol-computer-networks-internet-q5",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "gceol-computer-networks-internet",
+   "prompt": "Speed 8 Mbps means",
+   "choices": [
+    "8 minutes",
+    "8 pixels",
+    "8 megabytes per second",
+    "8 megabits per second"
+   ],
+   "answer": 3,
+   "explanation": "Bits not bytes.",
+   "chapter": "gceol-computer-networks"
+  },
+  {
+   "id": "gceol-computer-networks-e07",
+   "kind": "mcq",
+   "tier": "application",
+   "lesson": "gceol-computer-security-ethics",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Fake emails that try to steal passwords are called",
+   "choices": [
+    "spooling",
+    "backup",
+    "phishing",
+    "formatting"
+   ],
+   "answer": 2,
+   "explanation": "Phishing tricks users.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "gceol-computer-networks"
+  },
+  {
+   "id": "gceol-computer-networks-e08",
+   "kind": "mcq",
+   "tier": "application",
+   "lesson": "gceol-computer-security-ethics",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Software that detects and removes viruses is",
+   "choices": [
+    "a router",
+    "a compiler",
+    "antivirus",
+    "a spreadsheet"
+   ],
+   "answer": 2,
+   "explanation": "Antivirus.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "gceol-computer-networks"
+  },
+  {
+   "id": "gceol-computer-networks-e09",
+   "kind": "truefalse",
+   "tier": "application",
+   "lesson": "gceol-computer-security-ethics",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Copying a student's project and selling it without permission is a copyright issue.",
+   "answer": true,
+   "explanation": "Copyright protects creators' work.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "gceol-computer-networks"
+  },
+  {
+   "id": "gceol-computer-networks-e10",
+   "kind": "mcq",
+   "tier": "approfondissement",
+   "lesson": "gceol-computer-security-ethics",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Which is the best protection against losing files in a fire or theft?",
+   "choices": [
+    "A second copy on the same disk",
+    "A longer password",
+    "A bigger screen",
+    "A backup kept in a different place"
+   ],
+   "answer": 3,
+   "explanation": "Offsite backup survives local damage.",
+   "difficulty": 2,
+   "points": 2,
+   "chapter": "gceol-computer-networks"
+  },
+  {
+   "id": "gceol-computer-networks-e11",
+   "kind": "open",
+   "tier": "approfondissement",
+   "lesson": "gceol-computer-security-ethics",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Give three rules for using email safely.",
+   "model": "Do not open unknown attachments; never share passwords; check the sender's address; do not click suspicious links; use a strong password.",
+   "rubric": "1 mark per rule, up to 3.",
+   "explanation": "Do not open unknown attachments; never share passwords; check the sender's address; do not click suspicious links; use a strong password.",
+   "difficulty": 2,
+   "points": 3,
+   "chapter": "gceol-computer-networks"
+  },
+  {
+   "id": "gceol-computer-networks-e12",
+   "kind": "problem",
+   "tier": "examen",
+   "lesson": "gceol-computer-security-ethics",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Joel receives an email promising a prize if he sends his bank details.",
+   "difficulty": 2,
+   "parts": [
+    {
+     "kind": "mcq",
+     "points": 1,
+     "prompt": "This is most likely",
+     "choices": [
+      "a phishing attempt",
+      "a spreadsheet",
+      "a backup",
+      "a software update"
+     ],
+     "answer": 0,
+     "explanation": "It asks for sensitive data to offer a prize.",
+     "id": "gceol-computer-networks-e12-a"
+    },
+    {
+     "kind": "truefalse",
+     "points": 1,
+     "prompt": "Joel should reply with his details to claim the prize.",
+     "answer": false,
+     "explanation": "Never send private details.",
+     "id": "gceol-computer-networks-e12-b"
+    },
+    {
+     "kind": "open",
+     "points": 2,
+     "prompt": "List two protection measures for his computer.",
+     "model": "Antivirus, firewall, regular updates, strong passwords, backups.",
+     "rubric": "1 mark each.",
+     "explanation": "Antivirus, firewall, regular updates, strong passwords, backups.",
+     "id": "gceol-computer-networks-e12-c"
+    }
+   ],
+   "chapter": "gceol-computer-networks"
+  },
+  {
+   "id": "gceol-computer-security-ethics-q1",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "gceol-computer-security-ethics",
+   "prompt": "A program that spreads by attaching to files is a",
+   "choices": [
+    "browser",
+    "virus",
+    "monitor",
+    "router"
+   ],
+   "answer": 1,
+   "explanation": "Malware.",
+   "chapter": "gceol-computer-networks"
+  },
+  {
+   "id": "gceol-computer-security-ethics-q2",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "gceol-computer-security-ethics",
+   "prompt": "A firewall",
+   "choices": [
+    "makes screens brighter",
+    "stores email",
+    "controls network traffic into and out of a computer",
+    "edits photos"
+   ],
+   "answer": 2,
+   "explanation": "It filters traffic.",
+   "chapter": "gceol-computer-networks"
+  },
+  {
+   "id": "gceol-computer-security-ethics-q3",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "gceol-computer-security-ethics",
+   "prompt": "Which is the strongest password?",
+   "choices": [
+    "R8!pz4Qk#2",
+    "password",
+    "12345",
+    "joel2010"
+   ],
+   "answer": 0,
+   "explanation": "Long and mixed.",
+   "chapter": "gceol-computer-networks"
+  },
+  {
+   "id": "gceol-computer-security-ethics-q4",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "gceol-computer-security-ethics",
+   "prompt": "Hacking means",
+   "choices": [
+    "typing quickly",
+    "unauthorised access to a computer system",
+    "printing a page",
+    "formatting a disk"
+   ],
+   "answer": 1,
+   "explanation": "It is illegal.",
+   "chapter": "gceol-computer-networks"
+  },
+  {
+   "id": "gceol-computer-security-ethics-q5",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "gceol-computer-security-ethics",
+   "prompt": "Copyright protects",
+   "choices": [
+    "keyboards",
+    "computer hardware cases",
+    "the rights of creators",
+    "only paper books"
+   ],
+   "answer": 2,
+   "explanation": "Creators own their work.",
+   "chapter": "gceol-computer-networks"
+  },
+  {
+   "id": "gceol-computer-networks-m01",
+   "kind": "truefalse",
+   "tier": "examen",
+   "lesson": "gceol-computer-security-ethics",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "It is safe to send your password to someone who emails you asking for it.",
+   "answer": false,
+   "explanation": "Never do this: it is phishing.",
+   "difficulty": 3,
+   "points": 1,
+   "chapter": "gceol-computer-networks"
+  },
+  {
+   "id": "gceol-computer-networks-m02",
+   "kind": "mcq",
+   "tier": "examen",
+   "lesson": "gceol-computer-networks-internet",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "A network that covers only one school building is a",
+   "choices": [
+    "ISP",
+    "WAN",
+    "LAN",
+    "URL"
+   ],
+   "answer": 2,
+   "explanation": "LAN.",
+   "difficulty": 3,
+   "points": 1,
+   "chapter": "gceol-computer-networks"
+  }
+ ]
+}

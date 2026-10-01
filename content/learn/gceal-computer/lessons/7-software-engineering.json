@@ -1,0 +1,483 @@
+{
+ "chapter": "gceal-computer-software-engineering",
+ "lessons": [
+  {
+   "id": "gceal-computer-sdlc-testing",
+   "title": "Software development life cycle and testing",
+   "minutes": 30,
+   "programRef": "Cameroon GCE Board — Advanced Level Computer Science syllabus (Upper Sixth part) — to be checked against the official text",
+   "status": "draft",
+   "author": "CastBridge (AI draft)",
+   "source": "Original writing following the Cameroonian curriculum; to be reviewed by a teacher",
+   "objectives": [
+    "Describe the stages of the life cycle",
+    "Compare waterfall, prototyping and agile approaches",
+    "Design a test plan with normal, boundary and erroneous data",
+    "Distinguish types of testing and maintenance"
+   ],
+   "prerequisites": [],
+   "exercises": [
+    "gceal-computer-software-engineering-e01",
+    "gceal-computer-software-engineering-e02",
+    "gceal-computer-software-engineering-e03",
+    "gceal-computer-software-engineering-e04",
+    "gceal-computer-software-engineering-e05",
+    "gceal-computer-software-engineering-e06"
+   ],
+   "selfCheck": [
+    "gceal-computer-sdlc-testing-q1",
+    "gceal-computer-sdlc-testing-q2",
+    "gceal-computer-sdlc-testing-q3",
+    "gceal-computer-sdlc-testing-q4",
+    "gceal-computer-sdlc-testing-q5"
+   ],
+   "reviewNotes": [
+    "SDLC stage names vary between textbooks; the Board's list of models should be checked.",
+    "Syllabus references, scope and level of difficulty are to be checked against the official text; all facts, formulas and worked examples to be verified by a teacher before release."
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Life cycle stages",
+     "md": "**Analysis** (find and record requirements, feasibility study), **design** (structure, data, interface, algorithms), **implementation** (coding), **testing**, **deployment** (installation, training), **maintenance** (corrective, adaptive, perfective). Documentation (user and technical) is produced along the way."
+    },
+    {
+     "type": "key",
+     "style": "retenir",
+     "title": "Development models",
+     "md": "**Waterfall**: stages in strict sequence; clear and well documented but inflexible if requirements change. **Prototyping**: build a quick working model, get user feedback and refine; good when requirements are unclear. **Agile**: short **iterations** (sprints), working software each time, close contact with the customer, accepts changing requirements; less documentation."
+    },
+    {
+     "type": "illustration",
+     "figure": {
+      "kind": "shapes",
+      "w": 400,
+      "h": 268,
+      "items": [
+       {
+        "t": "text",
+        "x": 200.0,
+        "y": 24,
+        "text": "Waterfall model",
+        "size": 15,
+        "anchor": "middle",
+        "color": "ink",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 40,
+        "y": 40,
+        "w": 320,
+        "h": 30,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "lightblue",
+        "radius": 6
+       },
+       {
+        "t": "text",
+        "x": 200.0,
+        "y": 60,
+        "text": "Analysis",
+        "size": 13,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "line",
+        "x1": 200.0,
+        "y1": 70,
+        "x2": 200.0,
+        "y2": 86,
+        "color": "ink",
+        "width": 2,
+        "arrow": "end"
+       },
+       {
+        "t": "rect",
+        "x": 40,
+        "y": 86,
+        "w": 320,
+        "h": 30,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "lightgreen",
+        "radius": 6
+       },
+       {
+        "t": "text",
+        "x": 200.0,
+        "y": 106,
+        "text": "Design",
+        "size": 13,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "line",
+        "x1": 200.0,
+        "y1": 116,
+        "x2": 200.0,
+        "y2": 132,
+        "color": "ink",
+        "width": 2,
+        "arrow": "end"
+       },
+       {
+        "t": "rect",
+        "x": 40,
+        "y": 132,
+        "w": 320,
+        "h": 30,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "lightyellow",
+        "radius": 6
+       },
+       {
+        "t": "text",
+        "x": 200.0,
+        "y": 152,
+        "text": "Implementation",
+        "size": 13,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "line",
+        "x1": 200.0,
+        "y1": 162,
+        "x2": 200.0,
+        "y2": 178,
+        "color": "ink",
+        "width": 2,
+        "arrow": "end"
+       },
+       {
+        "t": "rect",
+        "x": 40,
+        "y": 178,
+        "w": 320,
+        "h": 30,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "lightorange",
+        "radius": 6
+       },
+       {
+        "t": "text",
+        "x": 200.0,
+        "y": 198,
+        "text": "Testing",
+        "size": 13,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "line",
+        "x1": 200.0,
+        "y1": 208,
+        "x2": 200.0,
+        "y2": 224,
+        "color": "ink",
+        "width": 2,
+        "arrow": "end"
+       },
+       {
+        "t": "rect",
+        "x": 40,
+        "y": 224,
+        "w": 320,
+        "h": 30,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "lightblue",
+        "radius": 6
+       },
+       {
+        "t": "text",
+        "x": 200.0,
+        "y": 244,
+        "text": "Maintenance",
+        "size": 13,
+        "anchor": "middle",
+        "color": "ink"
+       }
+      ]
+     },
+     "caption": "Five stages from analysis to maintenance, each leading to the next.",
+     "alt": "Vertical flow of the waterfall stages: analysis, design, implementation, testing, maintenance."
+    },
+    {
+     "type": "key",
+     "style": "methode",
+     "title": "Testing",
+     "md": "A **test plan** lists the test, the input data, the expected result and the actual result. Use **normal** data (valid), **boundary** data (at the limits of the valid range) and **erroneous** data (invalid). Example: marks must be 0-100: normal 55, boundary 0 and 100 (and 101 or -1 just outside), erroneous 'abc'. Types: **unit**, **integration**, **system**, **acceptance** (by the user), **alpha/beta**; **black-box** (inputs and outputs only) and **white-box** (internal logic)."
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Common mistakes",
+     "md": "- Testing only normal data.\n- Writing the 'expected result' after seeing the program's output.\n- Choosing a model by habit: the right model depends on how clear and stable the requirements are.\n- Maintenance is part of the life cycle, not a sign of failure."
+    },
+    {
+     "type": "example",
+     "title": "Example 1 - Test data",
+     "statement": "A program accepts a mark from 0 to 100. Choose normal, boundary and erroneous test data.",
+     "steps": [
+      "Normal: 55. Boundary: 0 and 100 (and just outside: -1 and 101 should be rejected).",
+      "Erroneous: abc (text) or an empty entry; expected result: an error message."
+     ],
+     "answer": "55; 0, 100, -1, 101; abc"
+    },
+    {
+     "type": "example",
+     "title": "Example 2 - Choose a model",
+     "statement": "A clinic in Bamenda wants an appointment system but is not sure what it needs. Which approach is suitable?",
+     "steps": [
+      "Requirements are unclear and will change after users see something.",
+      "Prototyping or agile development with frequent feedback suits this."
+     ],
+     "answer": "Prototyping or agile"
+    }
+   ],
+   "chapter": "gceal-computer-software-engineering"
+  }
+ ],
+ "exercises": [
+  {
+   "id": "gceal-computer-software-engineering-e01",
+   "kind": "mcq",
+   "tier": "application",
+   "lesson": "gceal-computer-sdlc-testing",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Which stage comes immediately after implementation in the waterfall model?",
+   "choices": [
+    "Analysis",
+    "Testing",
+    "Design",
+    "Maintenance"
+   ],
+   "answer": 1,
+   "explanation": "Order.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "gceal-computer-software-engineering"
+  },
+  {
+   "id": "gceal-computer-software-engineering-e02",
+   "kind": "mcq",
+   "tier": "application",
+   "lesson": "gceal-computer-sdlc-testing",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Data at the edge of the valid range is called",
+   "choices": [
+    "erroneous data only",
+    "normal data",
+    "boundary data",
+    "random data"
+   ],
+   "answer": 2,
+   "explanation": "Boundary.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "gceal-computer-software-engineering"
+  },
+  {
+   "id": "gceal-computer-software-engineering-e03",
+   "kind": "truefalse",
+   "tier": "application",
+   "lesson": "gceal-computer-sdlc-testing",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Agile development works in short iterations.",
+   "answer": true,
+   "explanation": "Yes.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "gceal-computer-software-engineering"
+  },
+  {
+   "id": "gceal-computer-software-engineering-e04",
+   "kind": "mcq",
+   "tier": "approfondissement",
+   "lesson": "gceal-computer-sdlc-testing",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Testing done by the customer to confirm the system meets needs is",
+   "choices": [
+    "unit testing",
+    "white-box only",
+    "acceptance testing",
+    "alpha only"
+   ],
+   "answer": 2,
+   "explanation": "Acceptance.",
+   "difficulty": 2,
+   "points": 2,
+   "chapter": "gceal-computer-software-engineering"
+  },
+  {
+   "id": "gceal-computer-software-engineering-e05",
+   "kind": "open",
+   "tier": "approfondissement",
+   "lesson": "gceal-computer-sdlc-testing",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Give two advantages of agile over waterfall.",
+   "model": "Changing requirements can be handled; users see working software early; problems are found sooner.",
+   "rubric": "1 mark each (2) plus 1 for explanation.",
+   "explanation": "Changing requirements can be handled; users see working software early; problems are found sooner.",
+   "difficulty": 2,
+   "points": 3,
+   "chapter": "gceal-computer-software-engineering"
+  },
+  {
+   "id": "gceal-computer-software-engineering-e06",
+   "kind": "problem",
+   "tier": "examen",
+   "lesson": "gceal-computer-sdlc-testing",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "A program accepts an age from 11 to 19 inclusive.",
+   "difficulty": 2,
+   "parts": [
+    {
+     "kind": "mcq",
+     "points": 1,
+     "prompt": "Which is boundary data (valid)?",
+     "choices": [
+      "abc",
+      "30",
+      "11",
+      "15"
+     ],
+     "answer": 2,
+     "explanation": "11 is the lowest valid age.",
+     "id": "gceal-computer-software-engineering-e06-a"
+    },
+    {
+     "kind": "mcq",
+     "points": 1,
+     "prompt": "Which is erroneous data?",
+     "choices": [
+      "abc",
+      "12",
+      "19",
+      "11"
+     ],
+     "answer": 0,
+     "explanation": "Text where a number is expected.",
+     "id": "gceal-computer-software-engineering-e06-b"
+    },
+    {
+     "kind": "open",
+     "points": 2,
+     "prompt": "Give two other test values just outside the range, with the expected result.",
+     "model": "10 and 20; the program should reject them with a message.",
+     "rubric": "1 mark each plus expected result.",
+     "explanation": "10 and 20; the program should reject them with a message.",
+     "id": "gceal-computer-software-engineering-e06-c"
+    }
+   ],
+   "chapter": "gceal-computer-software-engineering"
+  },
+  {
+   "id": "gceal-computer-sdlc-testing-q1",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "gceal-computer-sdlc-testing",
+   "prompt": "Corrective maintenance",
+   "choices": [
+    "writes the first design",
+    "adds a new feature only",
+    "fixes faults found after release",
+    "changes hardware"
+   ],
+   "answer": 2,
+   "explanation": "Corrective.",
+   "chapter": "gceal-computer-software-engineering"
+  },
+  {
+   "id": "gceal-computer-sdlc-testing-q2",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "gceal-computer-sdlc-testing",
+   "prompt": "A prototype is",
+   "choices": [
+    "a hash",
+    "an early working model",
+    "a final product always",
+    "a virus"
+   ],
+   "answer": 1,
+   "explanation": "Prototype.",
+   "chapter": "gceal-computer-software-engineering"
+  },
+  {
+   "id": "gceal-computer-sdlc-testing-q3",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "gceal-computer-sdlc-testing",
+   "prompt": "Black-box testing considers",
+   "choices": [
+    "the keyboard",
+    "network cables",
+    "inputs and expected outputs only",
+    "the source code lines"
+   ],
+   "answer": 2,
+   "explanation": "Black box.",
+   "chapter": "gceal-computer-software-engineering"
+  },
+  {
+   "id": "gceal-computer-sdlc-testing-q4",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "gceal-computer-sdlc-testing",
+   "prompt": "The feasibility study is part of",
+   "choices": [
+    "design only",
+    "analysis",
+    "testing",
+    "maintenance"
+   ],
+   "answer": 1,
+   "explanation": "Early stage.",
+   "chapter": "gceal-computer-software-engineering"
+  },
+  {
+   "id": "gceal-computer-sdlc-testing-q5",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "gceal-computer-sdlc-testing",
+   "prompt": "A test plan includes",
+   "choices": [
+    "only the final marks",
+    "test data and expected results",
+    "only the colour scheme",
+    "nothing"
+   ],
+   "answer": 1,
+   "explanation": "Plan.",
+   "chapter": "gceal-computer-software-engineering"
+  },
+  {
+   "id": "gceal-computer-software-engineering-m01",
+   "kind": "open",
+   "tier": "examen",
+   "lesson": "gceal-computer-sdlc-testing",
+   "source": "Original exercise written for CastBridge, in the style of the curriculum",
+   "prompt": "Compare the waterfall and agile approaches for developing a school management system.",
+   "model": "Waterfall: fixed requirements, stages in order, well documented, difficult to change later. Agile: short iterations with working software and user feedback, handles changing requirements, less documentation. For a school, if requirements are unclear or likely to change, agile is more suitable; if fixed and well understood, waterfall can work.",
+   "rubric": "1 mark each for a correct point on waterfall, agile, a comparison, and a justified recommendation (4 marks).",
+   "explanation": "Waterfall: fixed requirements, stages in order, well documented, difficult to change later. Agile: short iterations with working software and user feedback, handles changing requirements, less documentation. For a school, if requirements are unclear or likely to change, agile is more suitable; if fixed and well understood, waterfall can work.",
+   "difficulty": 3,
+   "points": 4,
+   "chapter": "gceal-computer-software-engineering"
+  }
+ ]
+}
