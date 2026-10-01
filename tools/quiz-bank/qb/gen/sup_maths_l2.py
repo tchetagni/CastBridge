@@ -1600,6 +1600,11 @@ def rmat(rng, n, lo=-4, hi=5):
     return [[rng.randint(lo, hi) for _ in range(n)] for _ in range(n)]
 
 
+def sd(a, b):
+    """Safe division for distractors: a/b, or a + 1/3 when b is zero."""
+    return F(a, b) if b else F(a) + F(1, 3)
+
+
 def fnear(rng, v, n=6):
     """Generic nearby wrong numbers (Fractions)."""
     v = F(v)
@@ -2396,7 +2401,7 @@ def uniform_q(rng, d):
         c = rng.randint(a, b - 1)
         dd = rng.randint(c + 1, b)
         val = F(dd - c, b - a)
-        text, wr = head + f" Quelle est P({num(c)} ≤ X ≤ {dd}) ?", [F(dd - c), F(dd - c, b), F(c, b - a), F(b - dd, b - a) if b - dd != dd - c else val + F(1, 7), 1 - val if 1 - val != val else val + F(1, 5)]
+        text, wr = head + f" Quelle est P({num(c)} ≤ X ≤ {dd}) ?", [F(dd - c), sd(dd - c, b), F(c, b - a), F(b - dd, b - a) if b - dd != dd - c else val + F(1, 7), 1 - val if 1 - val != val else val + F(1, 5)]
         ex_ = "La probabilité est proportionnelle à la longueur : (d − c)/(b − a)."
     else:
         pct = rng.choice([F(1, 4), F(1, 2), F(3, 4), F(1, 10), F(9, 10), F(1, 5)])

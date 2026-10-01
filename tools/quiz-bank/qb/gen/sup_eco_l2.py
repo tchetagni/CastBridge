@@ -896,7 +896,7 @@ def ppa_absolue(rng, d):
     wr = ["Le FCFA est surévalué par rapport à la PPA" if sous else "Le FCFA est sous-évalué par rapport à la PPA", "Le FCFA est exactement à sa valeur d'équilibre selon la PPA",
           "On ne peut rien conclure sans connaître l'inflation", ]
     return D(f"Un même panier coûte {fr(pd)} FCFA localement et {fr(pf)} dollars aux États-Unis ; le cours observé est de {fr(int(mk))} FCFA pour 1 dollar. Quelle conclusion tire-t-on avec la PPA absolue ?", right, wr,
-             f"Cours PPA = {ff(e, 2)} ; le dollar vaut {'plus' if sous else 'moins'} de FCFA sur le marché ({fr(int(mk))}) : la monnaie locale est {'sous' if sous else 'sur'}évaluée.")
+             f"Cours PPA = {ff(e, 2)} ; le dollar vaut {'plus' if sous else 'moins'} de FCFA sur le marché ({fr(int(mk))}) : la monnaie locale est {'sous-évaluée' if sous else 'surévaluée'}.")
 
 
 @gen(C, "l2e-ppa-relative", cap=50, cat=INT, source=SRC)
@@ -1078,7 +1078,7 @@ def rente_va(rng, d):
         return None
     v = int(v)
     wr = [a * n, a * (1 - (1 + r) ** (-n)) / r * (1 + r) if not debut else a * (1 - (1 + r) ** (-n)) / r, a / (1 + r) ** n, a * ((1 + r) ** n - 1) / r, a * n / (1 + r) ** n]
-    return D(f"On reçoit {money(a)} à la {'début de chaque année' if debut else 'fin de chaque année'} pendant {n} ans ; le taux d'actualisation est de {i} %. Quelle est la valeur actuelle de cette rente (arrondie au franc) ?".replace("la début", "le début"), money(v),
+    return D(f"On reçoit {money(a)} {'au début de chaque année' if debut else 'à la fin de chaque année'} pendant {n} ans ; le taux d'actualisation est de {i} %. Quelle est la valeur actuelle de cette rente (arrondie au franc) ?", money(v),
              [money(round(float(w))) for w in wr if round(float(w)) != v], "Valeur actuelle = a × (1 − (1 + i)^−n) ÷ i" + (", multipliée par (1 + i) pour des versements en début de période." if debut else " pour des versements en fin de période."))
 
 
