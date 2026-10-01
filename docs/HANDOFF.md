@@ -4,7 +4,7 @@
 > Dernière mise à jour : 2026-10-01 (commit `2d6446f`+), branche `feat/ssh`. **Règle du propriétaire : ce document se met à jour en temps réel** (à chaque fusion, publication, lancement/fin d'agent, décision ou problème), commité et poussé aussitôt.
 
 ## Reprendre dans une session cloud (lire d'abord)
-- **Dépôt** : `git@github.com:tchetagni/CastBridge.git`. **Branche à utiliser : `feat/ssh`** (tout y est fusionné et poussé). **Ne pas partir de `main`** : elle est restée à l'état initial (186 commits de retard). Créer sa branche de travail depuis `origin/feat/ssh`.
+- **Dépôt** : `git@github.com:tchetagni/CastBridge.git`. **`main` et `feat/ssh` sont identiques depuis le 2026-10-01** (avance simple, rien écrasé) : une session cloud peut partir de `main` ; `feat/ssh` reste la branche d'intégration à tenir à jour (pousser aussi vers `main` après chaque fusion validée). Créer sa branche de travail depuis `origin/main`.
 - **Noms** : l'app du téléphone s'appelle **CastBridge**, celle de la TV **CastBridge-TV** (modules Gradle `:sender` / `:receiver`, applicationId inchangés).
 - **Construire / tester** : voir §5 (Gradle 8.14.3, SDK 35, pas de wrapper). Le dépôt ne contient ni `build/`, ni `local.properties`, ni secret : définir `ANDROID_HOME`. Dans le cloud, pas d'appareil physique ni de TV : tests JVM (`:core:test`, `:sshd:test`, `backend ./mvnw -q test`), compilation des APK et émulateurs seulement.
 - **Ce qui n'existe PAS dans le dépôt** (ne se reconstitue pas) : accès SSH au serveur et à la TV, clé de signature de production (`secrets/`), mots de passe/PIN, clé de debug du Mac (`~/.android/debug.keystore`, nécessaire pour que les mises à jour s'installent par-dessus l'existant). Un agent cloud ne peut donc **ni déployer, ni installer, ni signer** : il propose des branches.
@@ -13,6 +13,7 @@
 - **Tests instables connus** : `TvSshServerTest.unknownKeyIsRefusedAndAddressGetsLocked`, `TrustTest.onlyTrustedPhonesGetTokensAndRevocationKillsThem`, `ChessRelayTest.availabilityProbe` (port occupé) : relancer avant de conclure à une régression.
 
 ## 0. Journal en direct (le plus récent en haut)
+- 2026-10-01 : **GitHub `main` avancée au même commit que `feat/ssh`** (187 commits, avance simple) à la demande d'Esaie, pour les sessions cloud. Rien d'autre ne change.
 - 2026-10-01 : CastBridge-TV **0.13.0 (code 24)** publiée sur la clé (`Download/CastBridge-TV-0.13.0.apk`, 29,7 Mo, sha256 `ffe31c24…ad161` vérifié) — **à installer par Esaie** (la TV est en 0.12.1) ; CastBridge **1.2-beta (code 10)** installée en USB sur le S21+. Contient tout : charte, Jeux/Sudoku, Bluetooth plug and play, contrôle parental, quiz 300 parties + packs, assistant de bibliothèque (+ dossiers TV, corbeille), adresse serveur masquée. Rien de ceci n'est encore validé sur matériel réel.
 - 2026-10-01 : **`feat/agent-b-phone` fusionnée** (assistant guidé en 3 étapes, dossier du téléphone SAF, cache d'analyse, rangement automatique des envois OFF, suggestions proactives OFF ; docs en conflit résolues, § 16 de `docs/LIBRARY-AGENT.md`). **Toutes les branches d'agents sont fusionnées dans `feat/ssh`.** `:core:test` 808 verts, apps compilées. Prochaine étape : versions TV 0.13.0 (24) / téléphone 1.2-beta (10), publication, essai réel (rien du lot assistant/quiz/parental/dossiers n'a tourné sur le matériel d'Esaie).
 - 2026-10-01 : `feat/agent-b-phone` (assistant côté téléphone) prête, **fusionnée** : parcours guidé en 3 étapes, analyse en 2 phases + cache (le moteur ne prend que 0,45 s pour 5 000 fichiers : le goulot était les lectures), dossier téléphone (SAF) rendu testable en `core` + essayé sur émulateur (Movies, Download/Séries, carte SD virtuelle), rangement automatique des envois finalisé (collision TV, file d'envois corrigée), notification de suggestions OFF. Détails et limites : `docs/LIBRARY-AGENT.md` § 12. Jamais essayée sur le S21+ ni sur la vraie TV.
@@ -48,7 +49,7 @@
 | CastBridge (app téléphone) | 1.2-beta (code 10) | installée en USB sur le Samsung S21+ d'Esaie (utilisateur principal ; la copie « Dual App » n'est pas à jour) |
 | Serveur | **déployé : commit `992db18`** (ancien) | https://bridge.sti-cm.com (en ligne, sain). **Le code du dépôt a depuis reçu** : thème/favicon de `/admin`, packs de questions du quiz (`CASTBRIDGE_QUIZ_PACKS_DIR`), aide IA de l'assistant (`/api/v1/library/suggest`, sans clé), catalogue d'événements `games`/`sudoku` — **rien de cela n'est déployé** (décision d'Esaie) |
 
-Branche d'intégration : **`feat/ssh`** (poussée sur GitHub `origin` et sur le dépôt du serveur `bridge`, branche `main`). Toutes les fonctionnalités des agents y sont fusionnées. La `main` de **GitHub** est périmée (état initial).
+Branche d'intégration : **`feat/ssh`** (poussée sur GitHub `origin` et sur le dépôt du serveur `bridge`, branche `main`). Toutes les fonctionnalités des agents y sont fusionnées. La `main` de GitHub a été alignée sur `feat/ssh` le 2026-10-01.
 
 ## 3. Branches (une par fonctionnalité, fusionnées dans `feat/ssh`)
 `feat/tv-admin` (PIN, page web, USB, lecture pendant l'envoi) · `feat/tv-usb-storage` (volumes multiples) · `feat/tv-library-player` (bibliothèque, lecteur, service, UX) · `feat/tv-quiz` · `feat/tv-chess` · `feat/tv-downloads` (aria2) · `feat/phone-player` · `feat/phone-remote` · `feat/backend` · `feat/learn` (Apprendre).
@@ -56,7 +57,7 @@ Branche d'intégration : **`feat/ssh`** (poussée sur GitHub `origin` et sur le 
 
 **ATTENTION — `wip/external-ai-changes`** (non fusionnée, NON revue) : instantané de 220 fichiers trouvés non commités dans le dossier de travail, écrits par d'autres sessions d'IA (activation/licence, contrôle parental, sudoku, deux mises à jour automatiques concurrentes `AutoUpdater`/`PhoneAutoUpdater`, suivi de l'adresse Bluetooth, assets de la charte, icônes, thème). À auditer (sécurité, doublons avec `feat/connect`) avant toute intégration ; rien de cela n'a été demandé dans les sessions de référence.
 `feat/games-hub` (non fusionnée) : catégorie **Jeux** (tuile TV unique + écran « Jeux », onglet téléphone « Jeux »), Sudoku repris par fichiers de `wip/external-ai-changes` (seuls ces 4 fichiers) et amélioré : voir `docs/GAMES.md`. À valider sur la vraie TV : D-pad et lisibilité à 3 m.
-`main` (GitHub) est resté à l'état initial : les fusions vers `main` sont à décider.
+`main` (GitHub) = `feat/ssh` depuis le 2026-10-01.
 
 **Fusionnées le 2026-10-01** : `feat/parental` (contrôle parental : voir `docs/PARENTAL.md`, limites : ne contrôle que CastBridge-TV ; Quiz/Échecs non filtrés par âge) ; `feat/games-hub` (tuile/onglet Jeux, Sudoku) et `feat/bt-plug-and-play` (appairage Bluetooth, téléphones de confiance, jeton par téléphone ; voir `docs/BT-PLUG-AND-PLAY.md`) → CastBridge-TV 0.12.0 (code 22), CastBridge 1.1-beta (code 9), compilées, `:core:test` vert ; **non installées** ni testées sur matériel réel. Point à nettoyer : deux tuiles d'accueil portent l'id `bluetooth` (« Ajouter un téléphone » et « Bluetooth ») → statistiques d'usage confondues. Test connu instable : `TvSshServerTest.unknownKeyIsRefusedAndAddressGetsLocked` (MissingAttachedSessionException, course de timing MINA, passe en relance).
 
@@ -112,7 +113,7 @@ ssh ubuntu@bridge.sti-cm.com 'cd ~/castbridge/services/castbridge/backend && git
 4. IA serveur de l'assistant : activer ? (fournisseur, budget, texte de consentement à faire relire ; procédure § 15 de `docs/LIBRARY-AGENT.md`).
 5. Clé de signature de release + secrets GitHub (`release.yml`) ; migration = une réinstallation manuelle.
 6. Renommer les modules Gradle `:sender`/`:receiver` en `:castbridge`/`:castbridge-tv` (jamais les applicationId) : à faire seulement quand aucune branche d'agent n'est ouverte.
-7. Fusionner `feat/ssh` dans la `main` de GitHub (périmée) ?
+7. ~~Fusionner `feat/ssh` dans la `main` de GitHub~~ : fait le 2026-10-01 (avance simple).
 
 **À faire (technique)**
 - **Valider sur le matériel d'Esaie** tout le lot 0.13.0 / 1.2-beta (voir §9) ; premier enregistrement réel d'une TV auprès du serveur (`feat/connect` jamais testée en production).
