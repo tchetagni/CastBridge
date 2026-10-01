@@ -1,0 +1,1296 @@
+{
+ "chapter": "4e-francais-conjugaison",
+ "lessons": [
+  {
+   "id": "4e-francais-temps-recit",
+   "title": "Passé simple et imparfait : les temps du récit",
+   "minutes": 30,
+   "programRef": "4e — Conjugaison : valeurs du passé simple et de l'imparfait (à vérifier sur le texte officiel)",
+   "status": "draft",
+   "author": "CastBridge (brouillon IA, bêta)",
+   "source": "Rédaction originale d'après le programme MINESEC ; à relire par un enseignant",
+   "objectives": [
+    "Conjuguer le passé simple (3e personne) et l'imparfait.",
+    "Employer l'imparfait pour le décor et le passé simple pour les actions."
+   ],
+   "prerequisites": [],
+   "exercises": [
+    "4e-francais-temps-recit-01",
+    "4e-francais-temps-recit-02",
+    "4e-francais-temps-recit-03",
+    "4e-francais-temps-recit-04",
+    "4e-francais-temps-recit-05",
+    "4e-francais-temps-recit-06"
+   ],
+   "selfCheck": [
+    "4e-francais-temps-recit-q1",
+    "4e-francais-temps-recit-q2",
+    "4e-francais-temps-recit-q3",
+    "4e-francais-temps-recit-q4",
+    "4e-francais-temps-recit-q5"
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "retenir",
+     "title": "Valeurs des deux temps",
+     "md": "- **Passé simple** : actions **brèves, successives, de premier plan** qui font avancer le récit. *Il ouvrit la porte et sortit.*\n- **Imparfait** : **décor, description, habitudes, actions qui durent** (arrière-plan). *Il faisait nuit ; le vent soufflait.*"
+    },
+    {
+     "type": "illustration",
+     "caption": "Le décor à l'imparfait ; les actions successives au passé simple.",
+     "alt": "Trois cases : « Il pleuvait » à l'imparfait pour le décor, puis « Il sortit » et « Il rentra » au passé simple pour les actions.",
+     "figure": {
+      "kind": "shapes",
+      "w": 470,
+      "h": 124,
+      "items": [
+       {
+        "t": "rect",
+        "x": 10.0,
+        "y": 15,
+        "w": 131.33333333333334,
+        "h": 44,
+        "fill": "lightblue",
+        "stroke": "ink",
+        "width": 2,
+        "radius": 8
+       },
+       {
+        "t": "text",
+        "x": 75.66666666666667,
+        "y": 43,
+        "text": "Il pleuvait",
+        "size": 14,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "line",
+        "x1": 144.33333333333334,
+        "y1": 37,
+        "x2": 166.33333333333334,
+        "y2": 37,
+        "color": "ink",
+        "width": 2,
+        "arrow": "end"
+       },
+       {
+        "t": "text",
+        "x": 75.66666666666667,
+        "y": 80,
+        "text": "imparfait : décor",
+        "size": 14,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "rect",
+        "x": 169.33333333333334,
+        "y": 15,
+        "w": 131.33333333333334,
+        "h": 44,
+        "fill": "lightyellow",
+        "stroke": "ink",
+        "width": 2,
+        "radius": 8
+       },
+       {
+        "t": "text",
+        "x": 235.0,
+        "y": 43,
+        "text": "Il sortit",
+        "size": 14,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "line",
+        "x1": 303.6666666666667,
+        "y1": 37,
+        "x2": 325.6666666666667,
+        "y2": 37,
+        "color": "ink",
+        "width": 2,
+        "arrow": "end"
+       },
+       {
+        "t": "text",
+        "x": 235.0,
+        "y": 80,
+        "text": "passé simple",
+        "size": 14,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "rect",
+        "x": 328.6666666666667,
+        "y": 15,
+        "w": 131.33333333333334,
+        "h": 44,
+        "fill": "lightyellow",
+        "stroke": "ink",
+        "width": 2,
+        "radius": 8
+       },
+       {
+        "t": "text",
+        "x": 394.33333333333337,
+        "y": 43,
+        "text": "Il rentra",
+        "size": 14,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 394.33333333333337,
+        "y": 80,
+        "text": "passé simple",
+        "size": 14,
+        "color": "ink",
+        "anchor": "middle"
+       }
+      ]
+     }
+    },
+    {
+     "type": "key",
+     "style": "formule",
+     "title": "Formes à connaître (3e personne)",
+     "md": "- 1er groupe : il chant**a**, ils chant**èrent**.\n- 2e groupe et beaucoup de verbes du 3e : il fin**it**, ils fin**irent** ; il pri**t**, ils pri**rent**.\n- Verbes en -u : il fut, il eut, il put, il voulut, il lut, ils furent, ils eurent.\n- Irréguliers : il vint, il tint, il vit, il fit, il dit, il alla.\n- Imparfait : radical de nous + ais, ais, ait, ions, iez, aient (*nous chantons* → je chantais)."
+    },
+    {
+     "type": "example",
+     "title": "Exemple 1 : conjuguer",
+     "statement": "Écris au passé simple : « Elle (ouvrir) la fenêtre et (regarder) la rue. »",
+     "steps": [
+      {
+       "md": "« ouvrir » est irrégulier du 1er type : elle ouvrit."
+      },
+      {
+       "md": "« regarder » du 1er groupe : elle regarda."
+      }
+     ],
+     "answer": "**Elle ouvrit la fenêtre et regarda la rue.**"
+    },
+    {
+     "type": "example",
+     "title": "Exemple 2 : choisir le temps",
+     "statement": "Mets les verbes au bon temps : « Il (faire) nuit quand Mballa (arriver) au village. »",
+     "steps": [
+      {
+       "md": "« il faisait nuit » est un décor : imparfait."
+      },
+      {
+       "md": "« Mballa arriva » est une action ponctuelle : passé simple."
+      }
+     ],
+     "answer": "**Il faisait nuit quand Mballa arriva au village.**"
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Erreurs fréquentes",
+     "md": "- Écrire « il chanta » avec un accent ou « il chantât » : l'accent circonflexe appartient au subjonctif imparfait.\n- Confondre « il aima » (passé simple) et « il aimait » (imparfait).\n- Utiliser l'imparfait pour une action brève qui fait avancer l'histoire.\n- Écrire « ils chantèrent » sans le -nt final."
+    }
+   ],
+   "reviewNotes": [
+    "Seules les 3es personnes du passé simple sont systématiquement exigées ici ; vérifier le programme pour les 1res et 2es personnes.",
+    "Les formes irrégulières (venir, tenir, voir, faire, être, avoir) sont données pour la 3e personne."
+   ]
+  },
+  {
+   "id": "4e-francais-subjonctif-conditionnel",
+   "title": "Le subjonctif présent et le conditionnel présent",
+   "minutes": 30,
+   "programRef": "4e — Conjugaison : les modes subjonctif et conditionnel (à vérifier sur le texte officiel)",
+   "status": "draft",
+   "author": "CastBridge (brouillon IA, bêta)",
+   "source": "Rédaction originale d'après le programme MINESEC ; à relire par un enseignant",
+   "objectives": [
+    "Conjuguer le subjonctif présent et le conditionnel présent.",
+    "Reconnaître leurs emplois : souhait, ordre, but, hypothèse, politesse."
+   ],
+   "prerequisites": [
+    "4e-francais-circonstancielles"
+   ],
+   "exercises": [
+    "4e-francais-subjonctif-conditionnel-01",
+    "4e-francais-subjonctif-conditionnel-02",
+    "4e-francais-subjonctif-conditionnel-03",
+    "4e-francais-subjonctif-conditionnel-04",
+    "4e-francais-subjonctif-conditionnel-05",
+    "4e-francais-subjonctif-conditionnel-06"
+   ],
+   "selfCheck": [
+    "4e-francais-subjonctif-conditionnel-q1",
+    "4e-francais-subjonctif-conditionnel-q2",
+    "4e-francais-subjonctif-conditionnel-q3",
+    "4e-francais-subjonctif-conditionnel-q4",
+    "4e-francais-subjonctif-conditionnel-q5"
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Subjonctif et conditionnel",
+     "md": "Le **subjonctif** exprime un fait voulu, souhaité, craint ou envisagé ; il suit souvent « que » (*Il faut que tu viennes.*). Le **conditionnel** exprime une hypothèse, un souhait ou une politesse (*Je voudrais un verre d'eau.*)."
+    },
+    {
+     "type": "key",
+     "style": "formule",
+     "title": "Formes à retenir",
+     "md": "- Subjonctif présent : *que je chante, que tu chantes, qu'il chante, que nous chantions, que vous chantiez, qu'ils chantent.*\n- Irréguliers : être (que je sois), avoir (que j'aie), aller (que j'aille), faire (que je fasse), pouvoir (que je puisse), vouloir (que je veuille).\n- Conditionnel présent : **radical du futur + terminaisons de l'imparfait** : je chanterais, tu irais, il serait, nous aurions."
+    },
+    {
+     "type": "example",
+     "title": "Exemple 1 : subjonctif",
+     "statement": "Conjugue : « Il faut que tu (être) à l'heure. »",
+     "steps": [
+      {
+       "md": "« Il faut que » appelle le subjonctif."
+      },
+      {
+       "md": "Subjonctif présent de être : que tu sois."
+      }
+     ],
+     "answer": "**sois** : « Il faut que tu sois à l'heure. »"
+    },
+    {
+     "type": "example",
+     "title": "Exemple 2 : hypothèse",
+     "statement": "Complète : « Si j'(avoir) un vélo, j'(aller) plus vite à l'école. »",
+     "steps": [
+      {
+       "md": "La proposition en « si » est à l'imparfait : j'avais."
+      },
+      {
+       "md": "La principale est au conditionnel présent : j'irais."
+      }
+     ],
+     "answer": "**Si j'avais un vélo, j'irais plus vite à l'école.**"
+    },
+    {
+     "type": "key",
+     "style": "attention",
+     "title": "Subjonctif ou indicatif ?",
+     "md": "Subjonctif après : il faut que, je veux que, je souhaite que, je crains que, avant que, pour que, bien que. Indicatif après : je pense que, je sais que, il est certain que. Le futur (je chanterai) et le conditionnel (je chanterais) se prononcent parfois de la même façon à la 1re personne : le futur se termine par -rai, le conditionnel par -rais."
+    }
+   ],
+   "reviewNotes": [
+    "Le conditionnel passé et le subjonctif passé sont abordés en 3e dans ce projet ; vérifier la répartition officielle."
+   ]
+  },
+  {
+   "id": "4e-francais-participe-passe",
+   "title": "L'accord du participe passé",
+   "minutes": 30,
+   "programRef": "4e — Orthographe grammaticale : l'accord du participe passé (à vérifier sur le texte officiel)",
+   "status": "draft",
+   "author": "CastBridge (brouillon IA, bêta)",
+   "source": "Rédaction originale d'après le programme MINESEC ; à relire par un enseignant",
+   "objectives": [
+    "Accorder le participe passé employé seul, avec être et avec avoir.",
+    "Repérer le COD placé avant le verbe."
+   ],
+   "prerequisites": [],
+   "exercises": [
+    "4e-francais-participe-passe-01",
+    "4e-francais-participe-passe-02",
+    "4e-francais-participe-passe-03",
+    "4e-francais-participe-passe-04",
+    "4e-francais-participe-passe-05",
+    "4e-francais-participe-passe-06"
+   ],
+   "selfCheck": [
+    "4e-francais-participe-passe-q1",
+    "4e-francais-participe-passe-q2",
+    "4e-francais-participe-passe-q3",
+    "4e-francais-participe-passe-q4",
+    "4e-francais-participe-passe-q5"
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "retenir",
+     "title": "Les trois règles",
+     "md": "- **Employé seul** (comme un adjectif) : accord avec le nom. *Des fruits mûrs, une porte fermée.*\n- **Avec être** : accord avec le **sujet**. *Elles sont parties.*\n- **Avec avoir** : accord avec le **COD placé avant** le verbe ; sinon, invariable. *Les mangues que j'ai achetées. J'ai acheté des mangues.*"
+    },
+    {
+     "type": "key",
+     "style": "methode",
+     "title": "Participe avec avoir",
+     "md": "1. Cherche le COD : « quoi ? » ou « qui ? » après le verbe.\n2. Est-il **avant** le verbe ? (souvent un pronom : que, l', les, la…)\n3. Si oui, accorde en genre et en nombre avec ce COD. Sinon, ne change rien."
+    },
+    {
+     "type": "illustration",
+     "caption": "Les accords du participe passé en un coup d'œil.",
+     "alt": "Un tableau de quatre lignes qui résume l'accord du participe passé selon l'emploi.",
+     "figure": {
+      "kind": "shapes",
+      "w": 490,
+      "h": 190,
+      "items": [
+       {
+        "t": "rect",
+        "x": 10,
+        "y": 10,
+        "w": 90,
+        "h": 34,
+        "fill": "lightblue",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 55.0,
+        "y": 32.0,
+        "text": "Emploi",
+        "size": 14,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 100,
+        "y": 10,
+        "w": 150,
+        "h": 34,
+        "fill": "lightblue",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 175.0,
+        "y": 32.0,
+        "text": "Accord avec",
+        "size": 14,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 250,
+        "y": 10,
+        "w": 230,
+        "h": 34,
+        "fill": "lightblue",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 365.0,
+        "y": 32.0,
+        "text": "Exemple",
+        "size": 14,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 10,
+        "y": 44,
+        "w": 90,
+        "h": 34,
+        "fill": "lightyellow",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 55.0,
+        "y": 66.0,
+        "text": "seul",
+        "size": 14,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "rect",
+        "x": 100,
+        "y": 44,
+        "w": 150,
+        "h": 34,
+        "fill": "lightyellow",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 175.0,
+        "y": 66.0,
+        "text": "le nom",
+        "size": 14,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "rect",
+        "x": 250,
+        "y": 44,
+        "w": 230,
+        "h": 34,
+        "fill": "lightyellow",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 365.0,
+        "y": 66.0,
+        "text": "une porte fermée",
+        "size": 14,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "rect",
+        "x": 10,
+        "y": 78,
+        "w": 90,
+        "h": 34,
+        "fill": "lightyellow",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 55.0,
+        "y": 100.0,
+        "text": "être",
+        "size": 14,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "rect",
+        "x": 100,
+        "y": 78,
+        "w": 150,
+        "h": 34,
+        "fill": "lightyellow",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 175.0,
+        "y": 100.0,
+        "text": "le sujet",
+        "size": 14,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "rect",
+        "x": 250,
+        "y": 78,
+        "w": 230,
+        "h": 34,
+        "fill": "lightyellow",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 365.0,
+        "y": 100.0,
+        "text": "elles sont arrivées",
+        "size": 14,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "rect",
+        "x": 10,
+        "y": 112,
+        "w": 90,
+        "h": 34,
+        "fill": "lightyellow",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 55.0,
+        "y": 134.0,
+        "text": "avoir",
+        "size": 14,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "rect",
+        "x": 100,
+        "y": 112,
+        "w": 150,
+        "h": 34,
+        "fill": "lightyellow",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 175.0,
+        "y": 134.0,
+        "text": "COD avant",
+        "size": 14,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "rect",
+        "x": 250,
+        "y": 112,
+        "w": 230,
+        "h": 34,
+        "fill": "lightyellow",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 365.0,
+        "y": 134.0,
+        "text": "les fleurs qu'il a cueillies",
+        "size": 14,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "rect",
+        "x": 10,
+        "y": 146,
+        "w": 90,
+        "h": 34,
+        "fill": "lightyellow",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 55.0,
+        "y": 168.0,
+        "text": "avoir",
+        "size": 14,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "rect",
+        "x": 100,
+        "y": 146,
+        "w": 150,
+        "h": 34,
+        "fill": "lightyellow",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 175.0,
+        "y": 168.0,
+        "text": "COD après : rien",
+        "size": 14,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "rect",
+        "x": 250,
+        "y": 146,
+        "w": 230,
+        "h": 34,
+        "fill": "lightyellow",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 365.0,
+        "y": 168.0,
+        "text": "il a cueilli des fleurs",
+        "size": 14,
+        "color": "ink",
+        "anchor": "middle"
+       }
+      ]
+     }
+    },
+    {
+     "type": "example",
+     "title": "Exemple 1 : avec être",
+     "statement": "Écris correctement : « Les voyageuses sont (arriver) tard. »",
+     "steps": [
+      {
+       "md": "Auxiliaire être : accord avec le sujet « Les voyageuses »."
+      },
+      {
+       "md": "Sujet féminin pluriel : -ées."
+      }
+     ],
+     "answer": "**arrivées** : « Les voyageuses sont arrivées tard. »"
+    },
+    {
+     "type": "example",
+     "title": "Exemple 2 : avec avoir",
+     "statement": "Écris correctement : « Les mangues que Nkeng a (acheter) sont mûres. »",
+     "steps": [
+      {
+       "md": "Cherche le COD : Nkeng a acheté quoi ? « que », qui reprend « les mangues »."
+      },
+      {
+       "md": "Le COD est placé avant le verbe : accord au féminin pluriel."
+      }
+     ],
+     "answer": "**achetées** : « Les mangues que Nkeng a achetées sont mûres. »"
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Erreurs fréquentes",
+     "md": "- Accorder avec le sujet quand l'auxiliaire est **avoir** (« Elle a mangée » est faux).\n- Accorder avec un COD placé **après** (« Il a cueillies des fleurs » est faux).\n- Oublier l'accord du participe avec **être** (« Les élèves sont parti »).\n- Pronominaux : « Elle s'est lavée » (COD = se), mais « Elle s'est lavé les mains » (le COD « les mains » est après)."
+    }
+   ],
+   "reviewNotes": [
+    "Le cas des verbes pronominaux n'est donné que dans ses grandes lignes (s'est lavée / s'est lavé les mains) ; vérifier ce qui est exigé en 4e.",
+    "Les cas particuliers (participe suivi d'un infinitif, verbes impersonnels) sont volontairement omis."
+   ]
+  }
+ ],
+ "exercises": [
+  {
+   "kind": "mcq",
+   "prompt": "Quelle est la forme du passé simple de « marcher » à la 3e personne du singulier ?",
+   "choices": [
+    "il marchait",
+    "il marchera",
+    "il marcha",
+    "il marche"
+   ],
+   "answer": 2,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Premier groupe : radical + a.",
+   "id": "4e-francais-temps-recit-01",
+   "tier": "application",
+   "lesson": "4e-francais-temps-recit",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Quelle est la forme du passé simple de « finir » (ils) ?",
+   "choices": [
+    "ils finissaient",
+    "ils finirant",
+    "ils finirent",
+    "ils finissent"
+   ],
+   "answer": 2,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Deuxième groupe : -irent à la 3e personne du pluriel.",
+   "id": "4e-francais-temps-recit-02",
+   "tier": "application",
+   "lesson": "4e-francais-temps-recit",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "truefalse",
+   "prompt": "Vrai ou faux : l'imparfait sert à décrire le décor d'un récit.",
+   "answer": true,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "L'imparfait installe l'arrière-plan : lieu, temps, ambiance.",
+   "id": "4e-francais-temps-recit-03",
+   "tier": "application",
+   "lesson": "4e-francais-temps-recit",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Choisis les bons temps : « Le soir, il ... dans la cour quand soudain un cri ... . »",
+   "choices": [
+    "se promena / retentissait",
+    "se promenait / retentit",
+    "se promenait / retentissait",
+    "se promena / retentit"
+   ],
+   "answer": 1,
+   "points": 1,
+   "difficulty": 2,
+   "explanation": "La promenade qui dure est à l'imparfait ; le cri soudain au passé simple.",
+   "id": "4e-francais-temps-recit-04",
+   "tier": "approfondissement",
+   "lesson": "4e-francais-temps-recit",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Quelle forme est correcte ?",
+   "choices": [
+    "Il vint, il vit, il vainquit.",
+    "Il vena, il vit, il vainqua.",
+    "Il vint, il voit, il vainquit.",
+    "Il venait, il vit, il vaincra."
+   ],
+   "answer": 0,
+   "points": 1,
+   "difficulty": 2,
+   "explanation": "Venir → il vint ; voir → il vit ; vaincre → il vainquit (3e personne du passé simple).",
+   "id": "4e-francais-temps-recit-05",
+   "tier": "approfondissement",
+   "lesson": "4e-francais-temps-recit",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "open",
+   "prompt": "Récris ce début de récit au passé (passé simple et imparfait) : « Il fait nuit. Mballa marche vers le village. Il entend un bruit derrière lui. Il se retourne et voit un chien. Le chien remue la queue. »",
+   "model": "Il faisait nuit. Mballa marchait vers le village. Il entendit un bruit derrière lui. Il se retourna et vit un chien. Le chien remuait la queue.",
+   "rubric": [
+    "Imparfait pour « faisait », « marchait » et « remuait » (décor, durée) : 1,5 point.",
+    "Passé simple pour « entendit », « se retourna », « vit » (actions successives) : 1,5 point.",
+    "Orthographe des terminaisons : 1 point."
+   ],
+   "points": 4,
+   "difficulty": 2,
+   "explanation": "Voir le corrigé modèle et les critères de notation.",
+   "method": "Pour chaque verbe, demande-toi : est-ce un décor ou une action qui fait avancer l'histoire ?",
+   "id": "4e-francais-temps-recit-06",
+   "tier": "examen",
+   "lesson": "4e-francais-temps-recit",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Quel temps du récit exprime une action brève qui fait avancer l'histoire ?",
+   "choices": [
+    "l'imparfait",
+    "le présent de description",
+    "le futur",
+    "le passé simple"
+   ],
+   "answer": 3,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "C'est le temps des actions de premier plan.",
+   "id": "4e-francais-temps-recit-q1",
+   "tier": "autoeval",
+   "lesson": "4e-francais-temps-recit",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Quelle forme est un imparfait ?",
+   "choices": [
+    "nous chantâmes",
+    "nous chanterons",
+    "nous chantions",
+    "nous chantons"
+   ],
+   "answer": 2,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Imparfait : radical de nous chantons + ions.",
+   "id": "4e-francais-temps-recit-q2",
+   "tier": "autoeval",
+   "lesson": "4e-francais-temps-recit",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Quelle est la 3e personne du singulier du passé simple de « avoir » ?",
+   "choices": [
+    "il avait",
+    "il eut",
+    "il aura",
+    "il a eu"
+   ],
+   "answer": 1,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Avoir → il eut.",
+   "id": "4e-francais-temps-recit-q3",
+   "tier": "autoeval",
+   "lesson": "4e-francais-temps-recit",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Dans « Le ciel était noir ; l'orage éclata », « éclata » est :",
+   "choices": [
+    "à l'imparfait",
+    "au futur",
+    "au passé simple",
+    "au subjonctif"
+   ],
+   "answer": 2,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "C'est l'action soudaine : passé simple, 1er groupe.",
+   "id": "4e-francais-temps-recit-q4",
+   "tier": "autoeval",
+   "lesson": "4e-francais-temps-recit",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Quelle terminaison convient à « elles (parler) » au passé simple ?",
+   "choices": [
+    "parlaient",
+    "parlèrent",
+    "parlerons",
+    "parlent"
+   ],
+   "answer": 1,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Premier groupe, 3e personne du pluriel : -èrent.",
+   "id": "4e-francais-temps-recit-q5",
+   "tier": "autoeval",
+   "lesson": "4e-francais-temps-recit",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Choisis la forme correcte : « Il faut que nous ... demain. »",
+   "choices": [
+    "partons",
+    "partirons",
+    "partions",
+    "partirions"
+   ],
+   "answer": 2,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Après « il faut que », le subjonctif : que nous partions.",
+   "id": "4e-francais-subjonctif-conditionnel-01",
+   "tier": "application",
+   "lesson": "4e-francais-subjonctif-conditionnel",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Quel verbe est au conditionnel présent ?",
+   "choices": [
+    "il viendrait",
+    "il viendra",
+    "il vient",
+    "il vint"
+   ],
+   "answer": 0,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Radical du futur « viendr- » + terminaison de l'imparfait « -ait ».",
+   "id": "4e-francais-subjonctif-conditionnel-02",
+   "tier": "application",
+   "lesson": "4e-francais-subjonctif-conditionnel",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "truefalse",
+   "prompt": "Vrai ou faux : après « si », on place le verbe de la subordonnée au conditionnel.",
+   "answer": false,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Après « si » de condition, on emploie l'indicatif (présent ou imparfait), pas le conditionnel.",
+   "id": "4e-francais-subjonctif-conditionnel-03",
+   "tier": "application",
+   "lesson": "4e-francais-subjonctif-conditionnel",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Complète : « Je voudrais que tu ... avec moi. »",
+   "choices": [
+    "viens",
+    "viennes",
+    "viendras",
+    "viendrais"
+   ],
+   "answer": 1,
+   "points": 1,
+   "difficulty": 2,
+   "explanation": "« Je voudrais que » demande le subjonctif ; que tu viennes.",
+   "id": "4e-francais-subjonctif-conditionnel-04",
+   "tier": "approfondissement",
+   "lesson": "4e-francais-subjonctif-conditionnel",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "matching",
+   "prompt": "Associe chaque phrase à la valeur du verbe.",
+   "pairs": [
+    [
+     "Pourriez-vous m'aider ?",
+     "politesse"
+    ],
+    [
+     "Je voudrais un sac.",
+     "souhait poli"
+    ],
+    [
+     "Si j'avais des ailes, je volerais.",
+     "hypothèse irréelle"
+    ],
+    [
+     "Il faut que tu étudies.",
+     "obligation (subjonctif)"
+    ]
+   ],
+   "points": 2,
+   "difficulty": 2,
+   "explanation": "Le conditionnel adoucit une demande ou exprime une hypothèse ; le subjonctif suit « il faut que ».",
+   "id": "4e-francais-subjonctif-conditionnel-05",
+   "tier": "approfondissement",
+   "lesson": "4e-francais-subjonctif-conditionnel",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "open",
+   "prompt": "Écris trois phrases : une avec « Il faut que » (subjonctif), une avec « Si » + imparfait + conditionnel, et une demande polie au conditionnel.",
+   "model": "Il faut que tu fasses tes devoirs avant le dîner. Si j'avais plus de temps, je lirais davantage. Pourriez-vous me prêter votre crayon, s'il vous plaît ?",
+   "rubric": [
+    "Subjonctif correct après « il faut que » : 1 point.",
+    "Structure si + imparfait / conditionnel respectée : 1,5 point.",
+    "Demande polie au conditionnel : 1 point.",
+    "Orthographe : 0,5 point."
+   ],
+   "points": 4,
+   "difficulty": 2,
+   "explanation": "Voir le corrigé modèle et les critères de notation.",
+   "id": "4e-francais-subjonctif-conditionnel-06",
+   "tier": "examen",
+   "lesson": "4e-francais-subjonctif-conditionnel",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Quelle est la forme du subjonctif présent de « avoir » à la 1re personne du singulier ?",
+   "choices": [
+    "que j'ai",
+    "que j'avais",
+    "que j'aurais",
+    "que j'aie"
+   ],
+   "answer": 3,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Subjonctif présent de avoir : que j'aie, que tu aies, qu'il ait.",
+   "id": "4e-francais-subjonctif-conditionnel-q1",
+   "tier": "autoeval",
+   "lesson": "4e-francais-subjonctif-conditionnel",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Quelle phrase est correcte ?",
+   "choices": [
+    "Bien qu'il pleut, nous sortons.",
+    "Bien qu'il pleuve, nous sortons.",
+    "Bien qu'il pleuvra, nous sortons.",
+    "Bien qu'il pleuvrait, nous sortons."
+   ],
+   "answer": 1,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "« Bien que » est suivi du subjonctif.",
+   "id": "4e-francais-subjonctif-conditionnel-q2",
+   "tier": "autoeval",
+   "lesson": "4e-francais-subjonctif-conditionnel",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Le conditionnel présent de « aller » à la 1re personne est :",
+   "choices": [
+    "j'irais",
+    "j'allais",
+    "j'irai",
+    "j'aille"
+   ],
+   "answer": 0,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Radical du futur « ir- » + -ais.",
+   "id": "4e-francais-subjonctif-conditionnel-q3",
+   "tier": "autoeval",
+   "lesson": "4e-francais-subjonctif-conditionnel",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Dans « Je crois qu'il viendra », le verbe de la subordonnée est :",
+   "choices": [
+    "au subjonctif",
+    "à l'indicatif",
+    "au conditionnel",
+    "à l'impératif"
+   ],
+   "answer": 1,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "« Croire que » à la forme affirmative est suivi de l'indicatif.",
+   "id": "4e-francais-subjonctif-conditionnel-q4",
+   "tier": "autoeval",
+   "lesson": "4e-francais-subjonctif-conditionnel",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Le conditionnel peut servir à :",
+   "choices": [
+    "rendre une demande plus polie",
+    "donner un ordre brutal",
+    "raconter un fait certain passé",
+    "former le passé simple"
+   ],
+   "answer": 0,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Je voudrais… est plus poli que Je veux…",
+   "id": "4e-francais-subjonctif-conditionnel-q5",
+   "tier": "autoeval",
+   "lesson": "4e-francais-subjonctif-conditionnel",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Complète : « Mes amies sont ... hier. »",
+   "choices": [
+    "venues",
+    "venu",
+    "venus",
+    "venue"
+   ],
+   "answer": 0,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Auxiliaire être : accord avec « mes amies », féminin pluriel.",
+   "id": "4e-francais-participe-passe-01",
+   "tier": "application",
+   "lesson": "4e-francais-participe-passe",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Complète : « Elle a ... une lettre. »",
+   "choices": [
+    "écrite",
+    "écrits",
+    "écrites",
+    "écrit"
+   ],
+   "answer": 3,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Le COD « une lettre » est après le verbe : le participe reste invariable.",
+   "id": "4e-francais-participe-passe-02",
+   "tier": "application",
+   "lesson": "4e-francais-participe-passe",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "truefalse",
+   "prompt": "Vrai ou faux : « Les photos que j'ai prises » : « prises » s'accorde avec le COD « que » (les photos).",
+   "answer": true,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Le COD « que » est placé avant le verbe et représente « les photos » : féminin pluriel.",
+   "id": "4e-francais-participe-passe-03",
+   "tier": "application",
+   "lesson": "4e-francais-participe-passe",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Quelle phrase est correcte ?",
+   "choices": [
+    "Les lettres qu'Amina a reçu sont longues.",
+    "Les lettres qu'Amina a reçues sont longues.",
+    "Les lettres qu'Amina a reçue sont longues.",
+    "Les lettres qu'Amina a reçus sont longues."
+   ],
+   "answer": 1,
+   "points": 1,
+   "difficulty": 2,
+   "explanation": "COD « que » = les lettres, féminin pluriel, placé avant : reçues.",
+   "id": "4e-francais-participe-passe-04",
+   "tier": "approfondissement",
+   "lesson": "4e-francais-participe-passe",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Complète : « La maison que nous avons ... est grande. »",
+   "choices": [
+    "construite",
+    "construit",
+    "construits",
+    "construites"
+   ],
+   "answer": 0,
+   "points": 1,
+   "difficulty": 2,
+   "explanation": "Le COD « que » reprend « la maison » : féminin singulier.",
+   "id": "4e-francais-participe-passe-05",
+   "tier": "approfondissement",
+   "lesson": "4e-francais-participe-passe",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "problem",
+   "prompt": "Écris correctement les participes entre parenthèses.",
+   "parts": [
+    {
+     "kind": "mcq",
+     "prompt": "« Les élèves se sont (lever) tôt. »",
+     "choices": [
+      "levé",
+      "levée",
+      "levées",
+      "levés"
+     ],
+     "answer": 3,
+     "points": 1,
+     "difficulty": 1,
+     "explanation": "« se » est COD et représente les élèves (masculin pluriel) : levés.",
+     "id": "4e-francais-participe-passe-06-a"
+    },
+    {
+     "kind": "mcq",
+     "prompt": "« Boris a (lire) les livres que tu lui as (prêter). »",
+     "choices": [
+      "lus … prêtés",
+      "lu … prêté",
+      "lus … prêté",
+      "lu … prêtés"
+     ],
+     "answer": 3,
+     "points": 1,
+     "difficulty": 1,
+     "explanation": "« a lu les livres » : COD après, invariable ; « que tu lui as prêtés » : COD « que » = livres, avant.",
+     "id": "4e-francais-participe-passe-06-b"
+    },
+    {
+     "kind": "open",
+     "prompt": "Écris une phrase avec « que » + auxiliaire avoir où le participe est accordé au féminin pluriel.",
+     "model": "Les fleurs que Mballa a cueillies sont jolies. (« que » reprend « fleurs », féminin pluriel : cueillies.)",
+     "rubric": [
+      "Phrase correcte avec COD placé avant : 1 point.",
+      "Participe accordé au féminin pluriel : 1 point."
+     ],
+     "points": 2,
+     "difficulty": 2,
+     "explanation": "Voir le corrigé modèle et les critères de notation.",
+     "id": "4e-francais-participe-passe-06-c"
+    }
+   ],
+   "difficulty": 2,
+   "id": "4e-francais-participe-passe-06",
+   "tier": "examen",
+   "lesson": "4e-francais-participe-passe",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Avec l'auxiliaire avoir, le participe s'accorde avec :",
+   "choices": [
+    "le COD placé avant le verbe",
+    "toujours le sujet",
+    "toujours le COD placé après",
+    "jamais avec rien"
+   ],
+   "answer": 0,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "C'est la règle avec avoir.",
+   "id": "4e-francais-participe-passe-q1",
+   "tier": "autoeval",
+   "lesson": "4e-francais-participe-passe",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Quel participe passé est bien accordé ?",
+   "choices": [
+    "Elles sont sorti.",
+    "Elles sont sorties.",
+    "Elles ont sortie.",
+    "Elles sont sortis."
+   ],
+   "answer": 1,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Auxiliaire être : accord avec elles, féminin pluriel.",
+   "id": "4e-francais-participe-passe-q2",
+   "tier": "autoeval",
+   "lesson": "4e-francais-participe-passe",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Dans « Les pommes qu'il a mangées », quel est le COD ?",
+   "choices": [
+    "il",
+    "a mangées",
+    "que (les pommes)",
+    "les pommes (après le verbe)"
+   ],
+   "answer": 2,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "« Que » reprend « les pommes » et est placé avant le verbe.",
+   "id": "4e-francais-participe-passe-q3",
+   "tier": "autoeval",
+   "lesson": "4e-francais-participe-passe",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Complète : « Voici la clé que j'ai ... . »",
+   "choices": [
+    "perdue",
+    "perdu",
+    "perdus",
+    "perdues"
+   ],
+   "answer": 0,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "COD « que » = la clé, féminin singulier, avant le verbe.",
+   "id": "4e-francais-participe-passe-q4",
+   "tier": "autoeval",
+   "lesson": "4e-francais-participe-passe",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Dans « une porte fermée », « fermée » est :",
+   "choices": [
+    "un participe employé comme adjectif",
+    "un nom",
+    "un verbe conjugué",
+    "un adverbe"
+   ],
+   "answer": 0,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Il s'accorde avec le nom « porte ».",
+   "id": "4e-francais-participe-passe-q5",
+   "tier": "autoeval",
+   "lesson": "4e-francais-participe-passe",
+   "source": "Exercice original, rédigé pour CastBridge"
+  }
+ ]
+}

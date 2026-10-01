@@ -1,0 +1,932 @@
+{
+ "chapter": "bepc-francais-lecture",
+ "lessons": [
+  {
+   "id": "bepc-francais-argumentation",
+   "title": "Le texte argumentatif : thèse, arguments, exemples et réfutation",
+   "minutes": 35,
+   "programRef": "3e — Lecture : le texte argumentatif (à vérifier sur le texte officiel)",
+   "status": "draft",
+   "author": "CastBridge (brouillon IA, bêta)",
+   "source": "Rédaction originale d'après le programme MINESEC ; à relire par un enseignant",
+   "objectives": [
+    "Dégager la thèse, les arguments et les exemples d'un texte.",
+    "Distinguer thèse adverse, concession et réfutation.",
+    "Étudier le circuit d'une argumentation."
+   ],
+   "prerequisites": [
+    "bepc-francais-expression-ecrite"
+   ],
+   "exercises": [
+    "bepc-francais-argumentation-01",
+    "bepc-francais-argumentation-02",
+    "bepc-francais-argumentation-03",
+    "bepc-francais-argumentation-04",
+    "bepc-francais-argumentation-05",
+    "bepc-francais-argumentation-06"
+   ],
+   "selfCheck": [
+    "bepc-francais-argumentation-q1",
+    "bepc-francais-argumentation-q2",
+    "bepc-francais-argumentation-q3",
+    "bepc-francais-argumentation-q4",
+    "bepc-francais-argumentation-q5"
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "retenir",
+     "title": "Le vocabulaire de l'argumentation",
+     "md": "- **Thèse** : l'opinion défendue. **Thèse adverse** : l'opinion opposée, que l'on combat.\n- **Argument** : raison qui soutient la thèse. **Exemple** : cas précis qui illustre l'argument.\n- **Concession** : on reconnaît une part de vérité à l'adversaire (*Certes…*).\n- **Réfutation** : on montre que la thèse adverse est fausse ou faible (*Mais…*)."
+    },
+    {
+     "type": "illustration",
+     "caption": "Un circuit d'argumentation avec réfutation.",
+     "alt": "Quatre cases reliées par des flèches : thèse adverse, concession, réfutation, puis thèse défendue.",
+     "figure": {
+      "kind": "shapes",
+      "w": 500,
+      "h": 132,
+      "items": [
+       {
+        "t": "rect",
+        "x": 10.0,
+        "y": 15,
+        "w": 99.0,
+        "h": 44,
+        "fill": "lightorange",
+        "stroke": "ink",
+        "width": 2,
+        "radius": 8
+       },
+       {
+        "t": "text",
+        "x": 59.5,
+        "y": 43,
+        "text": "Thèse adverse",
+        "size": 14,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "line",
+        "x1": 112.0,
+        "y1": 37,
+        "x2": 134.0,
+        "y2": 37,
+        "color": "ink",
+        "width": 2,
+        "arrow": "end"
+       },
+       {
+        "t": "text",
+        "x": 59.5,
+        "y": 80,
+        "text": "l'autre avis",
+        "size": 14,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "rect",
+        "x": 137.0,
+        "y": 15,
+        "w": 99.0,
+        "h": 44,
+        "fill": "lightyellow",
+        "stroke": "ink",
+        "width": 2,
+        "radius": 8
+       },
+       {
+        "t": "text",
+        "x": 186.5,
+        "y": 43,
+        "text": "Concession",
+        "size": 14,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "line",
+        "x1": 239.0,
+        "y1": 37,
+        "x2": 261.0,
+        "y2": 37,
+        "color": "ink",
+        "width": 2,
+        "arrow": "end"
+       },
+       {
+        "t": "text",
+        "x": 186.5,
+        "y": 80,
+        "text": "Certes…",
+        "size": 14,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "rect",
+        "x": 264.0,
+        "y": 15,
+        "w": 99.0,
+        "h": 44,
+        "fill": "lightgreen",
+        "stroke": "ink",
+        "width": 2,
+        "radius": 8
+       },
+       {
+        "t": "text",
+        "x": 313.5,
+        "y": 43,
+        "text": "Réfutation",
+        "size": 14,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "line",
+        "x1": 366.0,
+        "y1": 37,
+        "x2": 388.0,
+        "y2": 37,
+        "color": "ink",
+        "width": 2,
+        "arrow": "end"
+       },
+       {
+        "t": "text",
+        "x": 313.5,
+        "y": 80,
+        "text": "Mais…",
+        "size": 14,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "rect",
+        "x": 391.0,
+        "y": 15,
+        "w": 99.0,
+        "h": 44,
+        "fill": "lightblue",
+        "stroke": "ink",
+        "width": 2,
+        "radius": 8
+       },
+       {
+        "t": "text",
+        "x": 440.5,
+        "y": 43,
+        "text": "Thèse",
+        "size": 14,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 440.5,
+        "y": 80,
+        "text": "mon avis",
+        "size": 14,
+        "color": "ink",
+        "anchor": "middle"
+       }
+      ]
+     }
+    },
+    {
+     "type": "key",
+     "style": "retenir",
+     "title": "Types d'arguments",
+     "md": "- **Argument d'expérience** : tiré de faits vécus ou observés.\n- **Argument d'autorité** : appuyé sur une personne compétente ou une loi.\n- **Argument logique** : raisonnement (cause, conséquence).\n- **Argument de valeur** : appel à une valeur (justice, solidarité, santé)."
+    },
+    {
+     "type": "text",
+     "md": "**Texte d'étude (original).** *Certains disent que le téléphone portable nuit à la réussite scolaire. Certes, un élève distrait par les messages perd le fil de la leçon. Mais l'outil n'est pas coupable : mal employé, il dérange ; bien employé, il aide. Un élève peut chercher le sens d'un mot, écouter une leçon enregistrée, échanger avec ses camarades pour réviser. Il faut donc apprendre à s'en servir plutôt que l'interdire.*"
+    },
+    {
+     "type": "example",
+     "title": "Exemple 1 : relever",
+     "statement": "Dans le texte d'étude, relève la thèse adverse, la concession et la thèse défendue.",
+     "steps": [
+      {
+       "md": "Thèse adverse : « le téléphone portable nuit à la réussite scolaire »."
+      },
+      {
+       "md": "Concession : « Certes, un élève distrait… » ; réfutation : « Mais l'outil n'est pas coupable »."
+      }
+     ],
+     "answer": "**Thèse défendue : il faut apprendre à s'en servir plutôt que l'interdire.**"
+    },
+    {
+     "type": "example",
+     "title": "Exemple 2 : type d'argument",
+     "statement": "Quel type d'argument est « Un élève peut chercher le sens d'un mot » ?",
+     "steps": [
+      {
+       "md": "Il s'appuie sur une pratique concrète de l'élève."
+      },
+      {
+       "md": "C'est un fait d'usage plutôt qu'une citation d'expert."
+      }
+     ],
+     "answer": "**Argument d'expérience (exemple concret).**"
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Erreurs fréquentes",
+     "md": "- Confondre thèse adverse (que l'on rejette) et thèse défendue.\n- Prendre une concession pour la thèse : elle précède toujours le « mais ».\n- Donner des arguments sans exemple.\n- Employer « je » de façon excessive dans un texte qui doit convaincre : appuie-toi sur des faits."
+    }
+   ],
+   "reviewNotes": [
+    "Approfondissement de l'argumentation déjà vue en initiation ; le vocabulaire (thèse adverse, réfutation, concession) est à comparer avec les manuels locaux."
+   ]
+  },
+  {
+   "id": "bepc-francais-comprehension-questions",
+   "title": "Compréhension de texte : les questions types et comment y répondre",
+   "minutes": 35,
+   "programRef": "3e — Lecture : compréhension de texte, questions de lecture (à vérifier sur le texte officiel)",
+   "status": "draft",
+   "author": "CastBridge (brouillon IA, bêta)",
+   "source": "Rédaction originale d'après le programme MINESEC ; à relire par un enseignant",
+   "objectives": [
+    "Reconnaître les types de questions (relever, justifier, reformuler, expliquer un mot, figure de style).",
+    "Rédiger des réponses complètes et justifiées."
+   ],
+   "prerequisites": [
+    "bepc-francais-expression-ecrite"
+   ],
+   "exercises": [
+    "bepc-francais-comprehension-questions-01",
+    "bepc-francais-comprehension-questions-02",
+    "bepc-francais-comprehension-questions-03",
+    "bepc-francais-comprehension-questions-04",
+    "bepc-francais-comprehension-questions-05",
+    "bepc-francais-comprehension-questions-06"
+   ],
+   "selfCheck": [
+    "bepc-francais-comprehension-questions-q1",
+    "bepc-francais-comprehension-questions-q2",
+    "bepc-francais-comprehension-questions-q3",
+    "bepc-francais-comprehension-questions-q4",
+    "bepc-francais-comprehension-questions-q5"
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "retenir",
+     "title": "Les types de questions",
+     "md": "- **Relever** : recopier un mot, un groupe de mots ou une phrase exacte du texte (entre guillemets).\n- **Justifier** : répondre, puis **citer** le passage qui le prouve.\n- **Reformuler / expliquer** : redire avec ses propres mots.\n- **Sens d'un mot en contexte** : donner un synonyme qui convient dans la phrase.\n- **Nature et fonction** : analyse grammaticale.\n- **Figure de style** : nommer, citer, expliquer l'effet.\n- **Titre, idée générale** : exprimer l'essentiel."
+    },
+    {
+     "type": "key",
+     "style": "methode",
+     "title": "Répondre à une question",
+     "md": "1. Lis deux fois le texte, puis lis la question et repère le **verbe de consigne** (relève, justifie, explique…).\n2. Repère dans le texte le passage concerné.\n3. Réponds par une **phrase complète** qui reprend les mots de la question.\n4. Cite entre guillemets, avec le numéro de ligne si on te le demande.\n5. Relis : la réponse est-elle exacte, complète, bien écrite ?"
+    },
+    {
+     "type": "text",
+     "md": "**Texte d'étude (original).** *Le vieux Mballa s'assit sous le manguier, le dos appuyé contre le tronc rugueux. Depuis l'aube, il avait réparé trois filets de pêche. Ses mains, durcies par les années, avaient gardé une agilité surprenante. Quand sa petite-fille lui apporta de l'eau, il sourit : ce fut comme si le soleil traversait les feuilles. « Merci, mon enfant, dit-il. Ce sont ces gestes tout simples qui rendent la journée douce. »*"
+    },
+    {
+     "type": "illustration",
+     "caption": "Les gestes à enchaîner pour chaque question.",
+     "alt": "Quatre cases reliées par des flèches : lire, repérer, répondre, citer.",
+     "figure": {
+      "kind": "shapes",
+      "w": 480,
+      "h": 127,
+      "items": [
+       {
+        "t": "rect",
+        "x": 10.0,
+        "y": 15,
+        "w": 94.0,
+        "h": 44,
+        "fill": "lightblue",
+        "stroke": "ink",
+        "width": 2,
+        "radius": 8
+       },
+       {
+        "t": "text",
+        "x": 57.0,
+        "y": 43,
+        "text": "Lire",
+        "size": 14,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "line",
+        "x1": 107.0,
+        "y1": 37,
+        "x2": 129.0,
+        "y2": 37,
+        "color": "ink",
+        "width": 2,
+        "arrow": "end"
+       },
+       {
+        "t": "text",
+        "x": 57.0,
+        "y": 80,
+        "text": "le texte",
+        "size": 14,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "rect",
+        "x": 132.0,
+        "y": 15,
+        "w": 94.0,
+        "h": 44,
+        "fill": "lightyellow",
+        "stroke": "ink",
+        "width": 2,
+        "radius": 8
+       },
+       {
+        "t": "text",
+        "x": 179.0,
+        "y": 43,
+        "text": "Repérer",
+        "size": 14,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "line",
+        "x1": 229.0,
+        "y1": 37,
+        "x2": 251.0,
+        "y2": 37,
+        "color": "ink",
+        "width": 2,
+        "arrow": "end"
+       },
+       {
+        "t": "text",
+        "x": 179.0,
+        "y": 80,
+        "text": "la consigne",
+        "size": 14,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "rect",
+        "x": 254.0,
+        "y": 15,
+        "w": 94.0,
+        "h": 44,
+        "fill": "lightgreen",
+        "stroke": "ink",
+        "width": 2,
+        "radius": 8
+       },
+       {
+        "t": "text",
+        "x": 301.0,
+        "y": 43,
+        "text": "Répondre",
+        "size": 14,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "line",
+        "x1": 351.0,
+        "y1": 37,
+        "x2": 373.0,
+        "y2": 37,
+        "color": "ink",
+        "width": 2,
+        "arrow": "end"
+       },
+       {
+        "t": "text",
+        "x": 301.0,
+        "y": 80,
+        "text": "en phrase",
+        "size": 14,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "rect",
+        "x": 376.0,
+        "y": 15,
+        "w": 94.0,
+        "h": 44,
+        "fill": "lightorange",
+        "stroke": "ink",
+        "width": 2,
+        "radius": 8
+       },
+       {
+        "t": "text",
+        "x": 423.0,
+        "y": 43,
+        "text": "Citer",
+        "size": 14,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 423.0,
+        "y": 80,
+        "text": "entre guillemets",
+        "size": 14,
+        "color": "ink",
+        "anchor": "middle"
+       }
+      ]
+     }
+    },
+    {
+     "type": "example",
+     "title": "Exemple 1 : justifier",
+     "statement": "Question : Le vieux Mballa est-il fatigué ? Justifie ta réponse par une phrase du texte.",
+     "steps": [
+      {
+       "md": "On répond avec les mots de la question : Mballa n'est pas épuisé malgré son âge."
+      },
+      {
+       "md": "On cite : « Ses mains, durcies par les années, avaient gardé une agilité surprenante. »"
+      }
+     ],
+     "answer": "**Non : Mballa a gardé de l'agilité malgré son âge : « avaient gardé une agilité surprenante ».**"
+    },
+    {
+     "type": "example",
+     "title": "Exemple 2 : figure de style",
+     "statement": "Question : Quelle figure dans « ce fut comme si le soleil traversait les feuilles » ? Quel effet ?",
+     "steps": [
+      {
+       "md": "Le mot « comme » introduit un rapprochement : c'est une comparaison."
+      },
+      {
+       "md": "Elle souligne que le sourire de Mballa est lumineux et chaleureux."
+      }
+     ],
+     "answer": "**Comparaison : son sourire éclaire le visage comme le soleil.**"
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Erreurs fréquentes",
+     "md": "- Répondre « oui » ou « non » sans phrase.\n- Citer sans guillemets ou recopier tout un paragraphe.\n- Ne pas répondre à la question posée (hors sujet).\n- Oublier de reformuler quand la consigne dit « avec tes mots »."
+    }
+   ],
+   "reviewNotes": [
+    "La forme exacte des questions du BEPC (nombre, barème) est à confirmer sur les textes officiels ; les questions ici sont typiques et originales."
+   ]
+  }
+ ],
+ "exercises": [
+  {
+   "kind": "mcq",
+   "prompt": "Que désigne la thèse adverse ?",
+   "choices": [
+    "l'exemple choisi",
+    "la conclusion du texte",
+    "l'opinion que l'on combat",
+    "la ponctuation"
+   ],
+   "answer": 2,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Elle s'oppose à la thèse défendue.",
+   "id": "bepc-francais-argumentation-01",
+   "tier": "application",
+   "lesson": "bepc-francais-argumentation",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Quel mot introduit souvent une concession ?",
+   "choices": [
+    "certes",
+    "donc",
+    "enfin",
+    "car"
+   ],
+   "answer": 0,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "« Certes » reconnaît la valeur d'un argument adverse.",
+   "id": "bepc-francais-argumentation-02",
+   "tier": "application",
+   "lesson": "bepc-francais-argumentation",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "truefalse",
+   "prompt": "Vrai ou faux : la réfutation montre les faiblesses de la thèse adverse.",
+   "answer": true,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Elle se construit souvent avec « mais », « pourtant »…",
+   "id": "bepc-francais-argumentation-03",
+   "tier": "application",
+   "lesson": "bepc-francais-argumentation",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "matching",
+   "prompt": "Associe chaque phrase à son rôle.",
+   "pairs": [
+    [
+     "Beaucoup pensent que le sport est inutile.",
+     "thèse adverse"
+    ],
+    [
+     "Certes, il fatigue.",
+     "concession"
+    ],
+    [
+     "Mais il protège la santé.",
+     "réfutation"
+    ],
+    [
+     "Le sport est donc utile à tous.",
+     "thèse défendue"
+    ]
+   ],
+   "points": 2,
+   "difficulty": 2,
+   "explanation": "On suit le circuit thèse adverse → concession → réfutation → thèse.",
+   "id": "bepc-francais-argumentation-04",
+   "tier": "approfondissement",
+   "lesson": "bepc-francais-argumentation",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "« Selon l'Organisation mondiale de la santé, il faut dormir suffisamment » est un argument :",
+   "choices": [
+    "d'expérience",
+    "de valeur",
+    "d'autorité",
+    "logique"
+   ],
+   "answer": 2,
+   "points": 1,
+   "difficulty": 2,
+   "explanation": "Il s'appuie sur une institution reconnue (à vérifier dans la source citée).",
+   "id": "bepc-francais-argumentation-05",
+   "tier": "approfondissement",
+   "lesson": "bepc-francais-argumentation",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "open",
+   "prompt": "Sujet : « Certains pensent que les élèves ne doivent pas travailler pendant les vacances. Qu'en penses-tu ? » Rédige un paragraphe argumenté (une quinzaine de lignes) avec : thèse adverse, concession, réfutation, thèse défendue, un exemple.",
+   "model": "Beaucoup pensent que les vacances doivent être un temps de repos complet. Certes, après une année de cours, le repos est nécessaire. Mais ne rien faire pendant deux mois fait oublier les leçons. Par exemple, un élève qui ne lit pas risque de perdre le goût de la lecture. Je pense donc qu'il est utile de garder une petite activité régulière : une heure de lecture, quelques exercices ou une aide à la maison. Ainsi, le repos et le travail se complètent.",
+   "rubric": [
+    "Thèse adverse et concession bien repérables : 1,5 point.",
+    "Réfutation + thèse claire : 1,5 point.",
+    "Exemple concret : 1 point.",
+    "Connecteurs et organisation : 1 point.",
+    "Langue : 1 point."
+   ],
+   "points": 6,
+   "difficulty": 3,
+   "explanation": "Voir le corrigé modèle et les critères de notation.",
+   "id": "bepc-francais-argumentation-06",
+   "tier": "examen",
+   "lesson": "bepc-francais-argumentation",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Quelle est la thèse d'un texte ?",
+   "choices": [
+    "un exemple isolé",
+    "l'opinion que l'auteur défend",
+    "un titre",
+    "une question sans réponse"
+   ],
+   "answer": 1,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Les arguments s'organisent autour d'elle.",
+   "id": "bepc-francais-argumentation-q1",
+   "tier": "autoeval",
+   "lesson": "bepc-francais-argumentation",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "« Mais » introduit généralement :",
+   "choices": [
+    "la réfutation",
+    "la concession",
+    "la thèse adverse",
+    "l'introduction"
+   ],
+   "answer": 0,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Après « Certes… », il oppose l'argument décisif.",
+   "id": "bepc-francais-argumentation-q2",
+   "tier": "autoeval",
+   "lesson": "bepc-francais-argumentation",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Quel argument s'appuie sur la raison et l'enchaînement cause-conséquence ?",
+   "choices": [
+    "l'argument de valeur",
+    "l'argument d'autorité",
+    "l'argument logique",
+    "l'argument d'expérience"
+   ],
+   "answer": 2,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Il s'agit d'un raisonnement.",
+   "id": "bepc-francais-argumentation-q3",
+   "tier": "autoeval",
+   "lesson": "bepc-francais-argumentation",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Un argument est généralement illustré par :",
+   "choices": [
+    "une rime",
+    "un dessin obligatoire",
+    "un exemple",
+    "une définition du dictionnaire"
+   ],
+   "answer": 2,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "L'exemple le rend concret.",
+   "id": "bepc-francais-argumentation-q4",
+   "tier": "autoeval",
+   "lesson": "bepc-francais-argumentation",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "La concession sert à :",
+   "choices": [
+    "changer de sujet",
+    "se contredire",
+    "montrer qu'on tient compte de l'avis adverse",
+    "terminer le texte"
+   ],
+   "answer": 2,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Elle rend l'argumentation plus crédible.",
+   "id": "bepc-francais-argumentation-q5",
+   "tier": "autoeval",
+   "lesson": "bepc-francais-argumentation",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Quel est le type de texte de l'extrait sur Mballa ?",
+   "choices": [
+    "argumentatif",
+    "injonctif (une recette)",
+    "narratif avec une description",
+    "un poème en vers"
+   ],
+   "answer": 2,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Il raconte une scène et décrit le personnage.",
+   "id": "bepc-francais-comprehension-questions-01",
+   "tier": "application",
+   "lesson": "bepc-francais-comprehension-questions",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Que signifie « agilité » dans « avaient gardé une agilité surprenante » ?",
+   "choices": [
+    "une grande force de caractère",
+    "une fatigue",
+    "une aisance dans le mouvement",
+    "un mensonge"
+   ],
+   "answer": 2,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Agilité : légèreté, adresse.",
+   "id": "bepc-francais-comprehension-questions-02",
+   "tier": "application",
+   "lesson": "bepc-francais-comprehension-questions",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "truefalse",
+   "prompt": "Vrai ou faux : quand on répond à une question, il faut commencer par une phrase complète.",
+   "answer": true,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "On reprend les termes de la question.",
+   "id": "bepc-francais-comprehension-questions-03",
+   "tier": "application",
+   "lesson": "bepc-francais-comprehension-questions",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Quelle réponse reformule bien « Ce sont ces gestes tout simples qui rendent la journée douce » ?",
+   "choices": [
+    "Il faut manger plus.",
+    "La journée est terminée.",
+    "Les petites attentions rendent la vie agréable.",
+    "Les gestes sont difficiles."
+   ],
+   "answer": 2,
+   "points": 1,
+   "difficulty": 2,
+   "explanation": "Reformuler, c'est redire avec d'autres mots le même sens.",
+   "id": "bepc-francais-comprehension-questions-04",
+   "tier": "approfondissement",
+   "lesson": "bepc-francais-comprehension-questions",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "La proposition « qui rendent la journée douce » est une subordonnée :",
+   "choices": [
+    "relative",
+    "circonstancielle de but",
+    "complétive",
+    "circonstancielle de temps"
+   ],
+   "answer": 0,
+   "points": 1,
+   "difficulty": 2,
+   "explanation": "Elle commence par le pronom relatif « qui » et complète « gestes ».",
+   "id": "bepc-francais-comprehension-questions-05",
+   "tier": "approfondissement",
+   "lesson": "bepc-francais-comprehension-questions",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "problem",
+   "prompt": "Texte : « Le vieux Mballa s'assit sous le manguier, le dos appuyé contre le tronc rugueux. Depuis l'aube, il avait réparé trois filets de pêche. Ses mains, durcies par les années, avaient gardé une agilité surprenante. Quand sa petite-fille lui apporta de l'eau, il sourit. « Merci, mon enfant, dit-il. Ce sont ces gestes tout simples qui rendent la journée douce. » »",
+   "parts": [
+    {
+     "kind": "open",
+     "prompt": "Relève deux détails qui montrent que Mballa est âgé mais encore actif.",
+     "model": "« Ses mains, durcies par les années » montre son âge ; « il avait réparé trois filets de pêche » montre qu'il travaille encore.",
+     "rubric": [
+      "Deux relevés exacts et entre guillemets : 1,5 point.",
+      "Lien avec la question : 0,5 point."
+     ],
+     "points": 2,
+     "difficulty": 2,
+     "explanation": "Voir le corrigé modèle et les critères de notation.",
+     "id": "bepc-francais-comprehension-questions-06-a"
+    },
+    {
+     "kind": "open",
+     "prompt": "Quel trait de caractère Mballa montre-t-il à la fin du texte ? Justifie.",
+     "model": "Mballa est reconnaissant et tendre : il remercie sa petite-fille en souriant (« Merci, mon enfant ») et valorise les petites attentions.",
+     "rubric": [
+      "Trait de caractère juste : 1 point.",
+      "Justification par le texte : 1 point."
+     ],
+     "points": 2,
+     "difficulty": 2,
+     "explanation": "Voir le corrigé modèle et les critères de notation.",
+     "id": "bepc-francais-comprehension-questions-06-b"
+    },
+    {
+     "kind": "open",
+     "prompt": "Propose un titre à ce passage et justifie-le en une phrase.",
+     "model": "Le manguier de Mballa : le passage décrit une scène paisible sous l'arbre.",
+     "rubric": [
+      "Titre cohérent : 1 point.",
+      "Justification : 1 point."
+     ],
+     "points": 2,
+     "difficulty": 2,
+     "explanation": "Voir le corrigé modèle et les critères de notation.",
+     "id": "bepc-francais-comprehension-questions-06-c"
+    }
+   ],
+   "difficulty": 2,
+   "id": "bepc-francais-comprehension-questions-06",
+   "tier": "examen",
+   "lesson": "bepc-francais-comprehension-questions",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Quand on te demande « Relève… », tu dois :",
+   "choices": [
+    "donner ton avis personnel",
+    "écrire un résumé",
+    "changer le temps des verbes",
+    "recopier exactement le passage"
+   ],
+   "answer": 3,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "On cite le texte entre guillemets.",
+   "id": "bepc-francais-comprehension-questions-q1",
+   "tier": "autoeval",
+   "lesson": "bepc-francais-comprehension-questions",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Reformuler une phrase, c'est :",
+   "choices": [
+    "la recopier",
+    "la supprimer",
+    "la traduire en anglais",
+    "la redire avec d'autres mots"
+   ],
+   "answer": 3,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Le sens reste le même.",
+   "id": "bepc-francais-comprehension-questions-q2",
+   "tier": "autoeval",
+   "lesson": "bepc-francais-comprehension-questions",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Pour justifier une réponse, on :",
+   "choices": [
+    "invente un exemple",
+    "cite un passage du texte",
+    "répond « je ne sais pas »",
+    "change la question"
+   ],
+   "answer": 1,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "La justification se fait par le texte.",
+   "id": "bepc-francais-comprehension-questions-q3",
+   "tier": "autoeval",
+   "lesson": "bepc-francais-comprehension-questions",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Quelle est la bonne forme de réponse à « Où se passe la scène ? »",
+   "choices": [
+    "Sous.",
+    "Oui.",
+    "La scène se passe sous un manguier.",
+    "Manguier"
+   ],
+   "answer": 2,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Une phrase complète qui reprend la question.",
+   "id": "bepc-francais-comprehension-questions-q4",
+   "tier": "autoeval",
+   "lesson": "bepc-francais-comprehension-questions",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Que faire avant de répondre aux questions ?",
+   "choices": [
+    "lire le texte attentivement deux fois",
+    "répondre sans lire",
+    "ne lire que le titre",
+    "recopier le texte"
+   ],
+   "answer": 0,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "La lecture attentive évite le hors-sujet.",
+   "id": "bepc-francais-comprehension-questions-q5",
+   "tier": "autoeval",
+   "lesson": "bepc-francais-comprehension-questions",
+   "source": "Exercice original, rédigé pour CastBridge"
+  }
+ ]
+}

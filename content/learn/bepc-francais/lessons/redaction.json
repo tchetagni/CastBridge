@@ -1,0 +1,468 @@
+{
+ "chapter": "bepc-francais-redaction",
+ "lessons": [
+  {
+   "id": "bepc-francais-redaction-sujets",
+   "title": "Rédaction : sujets d'imagination et sujets de réflexion",
+   "minutes": 40,
+   "programRef": "3e — Expression écrite : rédaction (sujet d'imagination, sujet de réflexion) (à vérifier sur le texte officiel)",
+   "status": "draft",
+   "author": "CastBridge (brouillon IA, bêta)",
+   "source": "Rédaction originale d'après le programme MINESEC ; à relire par un enseignant",
+   "objectives": [
+    "Analyser un sujet (type, consigne, contraintes).",
+    "Construire un plan adapté au type de sujet.",
+    "Rédiger et relire un texte d'une vingtaine de lignes."
+   ],
+   "prerequisites": [
+    "bepc-francais-expression-ecrite",
+    "bepc-francais-argumentation"
+   ],
+   "exercises": [
+    "bepc-francais-redaction-sujets-01",
+    "bepc-francais-redaction-sujets-02",
+    "bepc-francais-redaction-sujets-03",
+    "bepc-francais-redaction-sujets-04",
+    "bepc-francais-redaction-sujets-05",
+    "bepc-francais-redaction-sujets-06"
+   ],
+   "selfCheck": [
+    "bepc-francais-redaction-sujets-q1",
+    "bepc-francais-redaction-sujets-q2",
+    "bepc-francais-redaction-sujets-q3",
+    "bepc-francais-redaction-sujets-q4",
+    "bepc-francais-redaction-sujets-q5"
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Deux grands types de sujets",
+     "md": "Le **sujet d'imagination** demande de raconter, décrire ou faire parler : récit, portrait, lettre, suite d'un texte. Le **sujet de réflexion** demande de donner son avis et de le défendre : texte argumentatif, lettre argumentée, dialogue de débat."
+    },
+    {
+     "type": "key",
+     "style": "methode",
+     "title": "Analyser le sujet",
+     "md": "Souligne dans le sujet : **le type de texte** (raconte, décris, argumente…), **le destinataire**, **les contraintes** (longueur, nombre d'arguments, temps), et **le thème**. Puis fais un **brouillon** : idées, plan, mots utiles."
+    },
+    {
+     "type": "illustration",
+     "caption": "Un plan par type de sujet.",
+     "alt": "Un tableau : plans types pour un récit, un portrait et un texte de réflexion.",
+     "figure": {
+      "kind": "shapes",
+      "w": 510,
+      "h": 156,
+      "items": [
+       {
+        "t": "rect",
+        "x": 10,
+        "y": 10,
+        "w": 170,
+        "h": 34,
+        "fill": "lightblue",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 95.0,
+        "y": 32.0,
+        "text": "Sujet",
+        "size": 14,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 180,
+        "y": 10,
+        "w": 320,
+        "h": 34,
+        "fill": "lightblue",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 340.0,
+        "y": 32.0,
+        "text": "Plan type",
+        "size": 14,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 10,
+        "y": 44,
+        "w": 170,
+        "h": 34,
+        "fill": "lightyellow",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 95.0,
+        "y": 66.0,
+        "text": "imagination (récit)",
+        "size": 14,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "rect",
+        "x": 180,
+        "y": 44,
+        "w": 320,
+        "h": 34,
+        "fill": "lightyellow",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 340.0,
+        "y": 66.0,
+        "text": "situation initiale · problème · péripéties · fin",
+        "size": 14,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "rect",
+        "x": 10,
+        "y": 78,
+        "w": 170,
+        "h": 34,
+        "fill": "lightyellow",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 95.0,
+        "y": 100.0,
+        "text": "imagination (portrait)",
+        "size": 14,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "rect",
+        "x": 180,
+        "y": 78,
+        "w": 320,
+        "h": 34,
+        "fill": "lightyellow",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 340.0,
+        "y": 100.0,
+        "text": "apparence · gestes · caractère",
+        "size": 14,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "rect",
+        "x": 10,
+        "y": 112,
+        "w": 170,
+        "h": 34,
+        "fill": "lightyellow",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 95.0,
+        "y": 134.0,
+        "text": "réflexion",
+        "size": 14,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "rect",
+        "x": 180,
+        "y": 112,
+        "w": 320,
+        "h": 34,
+        "fill": "lightyellow",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 340.0,
+        "y": 134.0,
+        "text": "thèse · arguments + exemples · conclusion",
+        "size": 14,
+        "color": "ink",
+        "anchor": "middle"
+       }
+      ]
+     }
+    },
+    {
+     "type": "key",
+     "style": "retenir",
+     "title": "Plan d'un sujet de réflexion",
+     "md": "- **Introduction** : amener le thème, poser la question, annoncer sa position.\n- **Développement** : un paragraphe par argument (idée, explication, exemple), avec des connecteurs.\n- **Conclusion** : bilan en une phrase et ouverture.\nSujet d'imagination : suis le schéma narratif, mêle actions (passé simple), décor (imparfait) et dialogue s'il le faut."
+    },
+    {
+     "type": "example",
+     "title": "Exemple 1 : sujet d'imagination",
+     "statement": "Sujet : « Un matin, tu découvres sur le chemin de l'école un sac abandonné. Raconte ce qui se passe ensuite. » Établis le plan.",
+     "steps": [
+      {
+       "md": "Situation initiale : le chemin, l'heure, l'état d'esprit. Élément perturbateur : le sac."
+      },
+      {
+       "md": "Péripéties : ouvrir ? demander conseil à un camarade, puis au directeur. Fin : retrouver le propriétaire."
+      }
+     ],
+     "answer": "**Plan : décor, découverte, hésitation, décision, retrouvailles.**"
+    },
+    {
+     "type": "example",
+     "title": "Exemple 2 : sujet de réflexion",
+     "statement": "Sujet : « Faut-il interdire le téléphone à l'école ? Donne ton avis. » Établis le plan.",
+     "steps": [
+      {
+       "md": "Thèse : l'usage du téléphone doit être encadré, non interdit."
+      },
+      {
+       "md": "Argument 1 : outil de travail (exemple). Argument 2 : risques de distraction (concession). Conclusion : apprendre à bien l'utiliser."
+      }
+     ],
+     "answer": "**Plan : thèse, concession, 2 arguments avec exemples, conclusion.**"
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Erreurs fréquentes",
+     "md": "- Être hors sujet : ne pas respecter le type de texte demandé.\n- Oublier la concession dans un sujet de réflexion.\n- Faire un texte sans paragraphes.\n- Ne pas se relire : fautes d'accord, de ponctuation, oubli de mots."
+    }
+   ],
+   "reviewNotes": [
+    "Dissertation proprement dite non traitée : sa présence au programme de 3e est douteuse. Longueur attendue (20 lignes) donnée à titre indicatif. À confirmer."
+   ]
+  }
+ ],
+ "exercises": [
+  {
+   "kind": "mcq",
+   "prompt": "Quel type de texte demande le sujet « Raconte ta plus belle journée de vacances » ?",
+   "choices": [
+    "un récit",
+    "une argumentation",
+    "une lettre formelle",
+    "un résumé"
+   ],
+   "answer": 0,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Le verbe « raconte » indique le récit.",
+   "id": "bepc-francais-redaction-sujets-01",
+   "tier": "application",
+   "lesson": "bepc-francais-redaction-sujets",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Quel verbe de consigne indique un sujet de réflexion ?",
+   "choices": [
+    "Raconte",
+    "Décris",
+    "Discute",
+    "Imagine"
+   ],
+   "answer": 2,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "« Discute », « donne ton avis » : argumentation.",
+   "id": "bepc-francais-redaction-sujets-02",
+   "tier": "application",
+   "lesson": "bepc-francais-redaction-sujets",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "truefalse",
+   "prompt": "Vrai ou faux : on doit respecter la longueur demandée dans le sujet.",
+   "answer": true,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "La longueur fait partie des contraintes.",
+   "id": "bepc-francais-redaction-sujets-03",
+   "tier": "application",
+   "lesson": "bepc-francais-redaction-sujets",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "matching",
+   "prompt": "Associe chaque sujet à son plan.",
+   "pairs": [
+    [
+     "Portrait d'un grand-père",
+     "apparence, gestes, caractère"
+    ],
+    [
+     "Récit d'une panne en pleine nuit",
+     "situation, problème, péripéties, fin"
+    ],
+    [
+     "Faut-il apprendre une langue nationale ?",
+     "thèse, arguments, exemples, conclusion"
+    ],
+    [
+     "Lettre de remerciement",
+     "appel, corps, formule finale"
+    ]
+   ],
+   "points": 2,
+   "difficulty": 2,
+   "explanation": "Chaque type de texte a son organisation.",
+   "id": "bepc-francais-redaction-sujets-04",
+   "tier": "approfondissement",
+   "lesson": "bepc-francais-redaction-sujets",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Dans un sujet de réflexion, les exemples doivent être :",
+   "choices": [
+    "sans rapport avec le thème",
+    "invraisemblables",
+    "précis et liés à l'argument",
+    "recopiés du sujet"
+   ],
+   "answer": 2,
+   "points": 1,
+   "difficulty": 2,
+   "explanation": "L'exemple illustre l'argument.",
+   "id": "bepc-francais-redaction-sujets-05",
+   "tier": "approfondissement",
+   "lesson": "bepc-francais-redaction-sujets",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "open",
+   "prompt": "Sujet de réflexion : « Certains pensent qu'un jeune doit d'abord finir ses études avant de travailler. D'autres préfèrent apprendre un métier très tôt. Qu'en penses-tu ? » Rédige une vingtaine de lignes avec introduction, deux arguments illustrés, concession et conclusion.",
+   "model": "On dit souvent qu'il faut d'abord finir ses études avant de travailler. Pourtant, apprendre un métier très tôt a aussi des avantages. Je pense qu'il faut chercher un équilibre. D'abord, les études donnent des connaissances solides : un élève qui comprend les mathématiques saura mieux calculer ses gains. Ensuite, le travail enseigne la responsabilité : mon cousin, qui aide son oncle menuisier le samedi, sait déjà se lever tôt. Certes, travailler trop jeune fatigue et fait perdre des cours. Mais un petit métier pendant les vacances est une belle école. En somme, étudier et apprendre un métier ne s'opposent pas toujours : ils se complètent.",
+   "rubric": [
+    "Introduction avec thèse : 1 point.",
+    "Deux arguments avec exemples : 2 points.",
+    "Concession ou nuance : 1 point.",
+    "Conclusion : 0,5 point.",
+    "Connecteurs, paragraphes : 0,5 point.",
+    "Langue : 1 point."
+   ],
+   "points": 6,
+   "difficulty": 3,
+   "explanation": "Voir le corrigé modèle et les critères de notation.",
+   "id": "bepc-francais-redaction-sujets-06",
+   "tier": "examen",
+   "lesson": "bepc-francais-redaction-sujets",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Que faut-il faire avant d'écrire ?",
+   "choices": [
+    "commencer sans lire",
+    "analyser le sujet et faire un plan",
+    "recopier le sujet",
+    "écrire la conclusion seulement"
+   ],
+   "answer": 1,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Le brouillon organise les idées.",
+   "id": "bepc-francais-redaction-sujets-q1",
+   "tier": "autoeval",
+   "lesson": "bepc-francais-redaction-sujets",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Un sujet d'imagination demande surtout de :",
+   "choices": [
+    "résumer un texte",
+    "corriger des fautes",
+    "recopier un poème",
+    "raconter ou décrire"
+   ],
+   "answer": 3,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "On invente une histoire ou une description.",
+   "id": "bepc-francais-redaction-sujets-q2",
+   "tier": "autoeval",
+   "lesson": "bepc-francais-redaction-sujets",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Dans un sujet de réflexion, la conclusion :",
+   "choices": [
+    "présente un nouvel argument",
+    "raconte une histoire",
+    "fait le bilan de l'argumentation",
+    "répète le titre"
+   ],
+   "answer": 2,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Elle résume la thèse.",
+   "id": "bepc-francais-redaction-sujets-q3",
+   "tier": "autoeval",
+   "lesson": "bepc-francais-redaction-sujets",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Où range-t-on les exemples dans un plan argumenté ?",
+   "choices": [
+    "dans chaque paragraphe d'argument",
+    "dans le titre",
+    "seulement dans la conclusion",
+    "nulle part"
+   ],
+   "answer": 0,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Chaque argument est illustré.",
+   "id": "bepc-francais-redaction-sujets-q4",
+   "tier": "autoeval",
+   "lesson": "bepc-francais-redaction-sujets",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Pour relire sa rédaction, on vérifie surtout :",
+   "choices": [
+    "la couleur du stylo",
+    "le nombre de pages",
+    "les accords, la ponctuation et les temps",
+    "le nom du professeur"
+   ],
+   "answer": 2,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "La relecture corrige les fautes.",
+   "id": "bepc-francais-redaction-sujets-q5",
+   "tier": "autoeval",
+   "lesson": "bepc-francais-redaction-sujets",
+   "source": "Exercice original, rédigé pour CastBridge"
+  }
+ ]
+}

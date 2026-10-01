@@ -1,0 +1,1705 @@
+{
+ "chapter": "4e-francais-phrase",
+ "lessons": [
+  {
+   "id": "4e-francais-propositions",
+   "title": "Les propositions : juxtaposition, coordination, subordination",
+   "minutes": 25,
+   "programRef": "4e — Grammaire : la phrase simple et la phrase complexe (à vérifier sur le texte officiel)",
+   "status": "draft",
+   "author": "CastBridge (brouillon IA, bêta)",
+   "source": "Rédaction originale d'après le programme MINESEC ; à relire par un enseignant",
+   "objectives": [
+    "Compter les propositions d'une phrase à partir de ses verbes conjugués.",
+    "Distinguer proposition indépendante, principale et subordonnée.",
+    "Reconnaître la juxtaposition, la coordination et la subordination."
+   ],
+   "prerequisites": [],
+   "exercises": [
+    "4e-francais-propositions-01",
+    "4e-francais-propositions-02",
+    "4e-francais-propositions-03",
+    "4e-francais-propositions-04",
+    "4e-francais-propositions-05",
+    "4e-francais-propositions-06"
+   ],
+   "selfCheck": [
+    "4e-francais-propositions-q1",
+    "4e-francais-propositions-q2",
+    "4e-francais-propositions-q3",
+    "4e-francais-propositions-q4",
+    "4e-francais-propositions-q5"
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Proposition et phrase complexe",
+     "md": "Une **proposition** est un groupe de mots organisé autour d'**un verbe conjugué**. Une phrase simple n'a qu'une proposition. Une **phrase complexe** en a au moins deux : on compte donc les verbes conjugués."
+    },
+    {
+     "type": "key",
+     "style": "retenir",
+     "title": "Trois façons de relier les propositions",
+     "md": "- **Juxtaposition** : on les sépare par une virgule, un point-virgule ou deux-points. *Le vent se leva, la pluie tomba.*\n- **Coordination** : on les relie par une conjonction de coordination (mais, ou, et, donc, or, ni, car) ou un adverbe de liaison.\n- **Subordination** : une proposition dépend d'une autre et lui est reliée par un mot subordonnant (que, qui, quand, parce que, si…)."
+    },
+    {
+     "type": "illustration",
+     "caption": "Une subordonnée dépend d'une principale ; les indépendantes ne dépendent de rien.",
+     "alt": "Deux cases reliées par une flèche : la proposition principale, puis la subordonnée qui en dépend.",
+     "figure": {
+      "kind": "shapes",
+      "w": 420,
+      "h": 111,
+      "items": [
+       {
+        "t": "rect",
+        "x": 10.0,
+        "y": 15,
+        "w": 186.0,
+        "h": 44,
+        "fill": "lightblue",
+        "stroke": "ink",
+        "width": 2,
+        "radius": 8
+       },
+       {
+        "t": "text",
+        "x": 103.0,
+        "y": 43,
+        "text": "Principale",
+        "size": 14,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "line",
+        "x1": 199.0,
+        "y1": 37,
+        "x2": 221.0,
+        "y2": 37,
+        "color": "ink",
+        "width": 2,
+        "arrow": "end"
+       },
+       {
+        "t": "text",
+        "x": 103.0,
+        "y": 80,
+        "text": "elle commande",
+        "size": 14,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "rect",
+        "x": 224.0,
+        "y": 15,
+        "w": 186.0,
+        "h": 44,
+        "fill": "lightyellow",
+        "stroke": "ink",
+        "width": 2,
+        "radius": 8
+       },
+       {
+        "t": "text",
+        "x": 317.0,
+        "y": 43,
+        "text": "Subordonnée",
+        "size": 14,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 317.0,
+        "y": 80,
+        "text": "elle dépend",
+        "size": 14,
+        "color": "ink",
+        "anchor": "middle"
+       }
+      ]
+     }
+    },
+    {
+     "type": "key",
+     "style": "methode",
+     "title": "Analyser une phrase",
+     "md": "1. Souligne chaque verbe conjugué (un verbe = une proposition).\n2. Cherche les mots de liaison entre les verbes.\n3. Une proposition introduite par un mot subordonnant est une **subordonnée** ; celle dont elle dépend est la **principale**.\n4. Sinon, les propositions sont indépendantes (juxtaposées ou coordonnées)."
+    },
+    {
+     "type": "example",
+     "title": "Exemple 1 : propositions coordonnées",
+     "statement": "Analyse : « Amina range son cahier et Boris ferme la fenêtre. »",
+     "steps": [
+      {
+       "md": "Deux verbes conjugués : range, ferme. Donc deux propositions."
+      },
+      {
+       "md": "Elles sont reliées par « et », conjonction de coordination."
+      }
+     ],
+     "answer": "**Deux propositions indépendantes coordonnées.**"
+    },
+    {
+     "type": "example",
+     "title": "Exemple 2 : principale et subordonnée",
+     "statement": "Analyse : « Je pense que la pluie cessera bientôt. »",
+     "steps": [
+      {
+       "md": "Verbes conjugués : pense, cessera. Deux propositions."
+      },
+      {
+       "md": "« que la pluie cessera bientôt » est introduite par « que » et complète le verbe « pense » : elle dépend de « Je pense »."
+      }
+     ],
+     "answer": "**« Je pense » est la principale ; « que la pluie cessera bientôt » est la subordonnée.**"
+    },
+    {
+     "type": "example",
+     "title": "Exemple 3 : juxtaposition",
+     "statement": "Combien de propositions : « Le vent se leva, les feuilles tourbillonnèrent, le marché se vida. » ?",
+     "steps": [
+      {
+       "md": "Verbes conjugués : se leva, tourbillonnèrent, se vida."
+      },
+      {
+       "md": "Aucun mot de liaison : seulement des virgules."
+      }
+     ],
+     "answer": "**Trois propositions indépendantes juxtaposées.**"
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Erreurs fréquentes",
+     "md": "- Compter les infinitifs ou les participes comme des propositions : seul le verbe **conjugué** compte (« Elle aime chanter » : une proposition).\n- Croire qu'une virgule signale toujours une coordination : la virgule sert à juxtaposer.\n- Oublier que « car » est une conjonction de **coordination**, alors que « parce que » est de subordination."
+    }
+   ],
+   "reviewNotes": [
+    "Le vocabulaire (proposition indépendante/principale/subordonnée) suit la terminologie traditionnelle ; vérifier celle des manuels camerounais en usage.",
+    "Les périphrases verbales (il va partir) sont volontairement laissées de côté."
+   ]
+  },
+  {
+   "id": "4e-francais-relatives",
+   "title": "La proposition subordonnée relative et les pronoms relatifs",
+   "minutes": 25,
+   "programRef": "4e — Grammaire : la proposition subordonnée relative (à vérifier sur le texte officiel)",
+   "status": "draft",
+   "author": "CastBridge (brouillon IA, bêta)",
+   "source": "Rédaction originale d'après le programme MINESEC ; à relire par un enseignant",
+   "objectives": [
+    "Reconnaître une subordonnée relative et son antécédent.",
+    "Choisir le bon pronom relatif : qui, que, où, dont."
+   ],
+   "prerequisites": [
+    "4e-francais-propositions"
+   ],
+   "exercises": [
+    "4e-francais-relatives-01",
+    "4e-francais-relatives-02",
+    "4e-francais-relatives-03",
+    "4e-francais-relatives-04",
+    "4e-francais-relatives-05",
+    "4e-francais-relatives-06"
+   ],
+   "selfCheck": [
+    "4e-francais-relatives-q1",
+    "4e-francais-relatives-q2",
+    "4e-francais-relatives-q3",
+    "4e-francais-relatives-q4",
+    "4e-francais-relatives-q5"
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "La subordonnée relative",
+     "md": "La proposition **subordonnée relative** est introduite par un **pronom relatif** (qui, que, où, dont…). Elle complète un nom ou un pronom de la principale : l'**antécédent**. *Le livre **que** j'ai lu est passionnant.* (antécédent : livre)"
+    },
+    {
+     "type": "illustration",
+     "caption": "Choisir le pronom relatif selon la fonction qu'il remplit.",
+     "alt": "Un tableau de quatre pronoms relatifs avec leur fonction et un exemple chacun.",
+     "figure": {
+      "kind": "shapes",
+      "w": 470,
+      "h": 190,
+      "items": [
+       {
+        "t": "rect",
+        "x": 10,
+        "y": 10,
+        "w": 90,
+        "h": 34,
+        "fill": "lightblue",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 55.0,
+        "y": 32.0,
+        "text": "Pronom",
+        "size": 14,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 100,
+        "y": 10,
+        "w": 200,
+        "h": 34,
+        "fill": "lightblue",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 200.0,
+        "y": 32.0,
+        "text": "Fonction dans la relative",
+        "size": 14,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 300,
+        "y": 10,
+        "w": 160,
+        "h": 34,
+        "fill": "lightblue",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 380.0,
+        "y": 32.0,
+        "text": "Exemple",
+        "size": 14,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 10,
+        "y": 44,
+        "w": 90,
+        "h": 34,
+        "fill": "lightyellow",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 55.0,
+        "y": 66.0,
+        "text": "qui",
+        "size": 14,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "rect",
+        "x": 100,
+        "y": 44,
+        "w": 200,
+        "h": 34,
+        "fill": "lightyellow",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 200.0,
+        "y": 66.0,
+        "text": "sujet",
+        "size": 14,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "rect",
+        "x": 300,
+        "y": 44,
+        "w": 160,
+        "h": 34,
+        "fill": "lightyellow",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 380.0,
+        "y": 66.0,
+        "text": "l'élève qui rit",
+        "size": 14,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "rect",
+        "x": 10,
+        "y": 78,
+        "w": 90,
+        "h": 34,
+        "fill": "lightyellow",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 55.0,
+        "y": 100.0,
+        "text": "que",
+        "size": 14,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "rect",
+        "x": 100,
+        "y": 78,
+        "w": 200,
+        "h": 34,
+        "fill": "lightyellow",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 200.0,
+        "y": 100.0,
+        "text": "COD",
+        "size": 14,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "rect",
+        "x": 300,
+        "y": 78,
+        "w": 160,
+        "h": 34,
+        "fill": "lightyellow",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 380.0,
+        "y": 100.0,
+        "text": "le livre que je lis",
+        "size": 14,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "rect",
+        "x": 10,
+        "y": 112,
+        "w": 90,
+        "h": 34,
+        "fill": "lightyellow",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 55.0,
+        "y": 134.0,
+        "text": "où",
+        "size": 14,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "rect",
+        "x": 100,
+        "y": 112,
+        "w": 200,
+        "h": 34,
+        "fill": "lightyellow",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 200.0,
+        "y": 134.0,
+        "text": "lieu ou temps",
+        "size": 14,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "rect",
+        "x": 300,
+        "y": 112,
+        "w": 160,
+        "h": 34,
+        "fill": "lightyellow",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 380.0,
+        "y": 134.0,
+        "text": "la ville où j'habite",
+        "size": 14,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "rect",
+        "x": 10,
+        "y": 146,
+        "w": 90,
+        "h": 34,
+        "fill": "lightyellow",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 55.0,
+        "y": 168.0,
+        "text": "dont",
+        "size": 14,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "rect",
+        "x": 100,
+        "y": 146,
+        "w": 200,
+        "h": 34,
+        "fill": "lightyellow",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 200.0,
+        "y": 168.0,
+        "text": "complément avec de",
+        "size": 14,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "rect",
+        "x": 300,
+        "y": 146,
+        "w": 160,
+        "h": 34,
+        "fill": "lightyellow",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 380.0,
+        "y": 168.0,
+        "text": "le chef dont je parle",
+        "size": 14,
+        "color": "ink",
+        "anchor": "middle"
+       }
+      ]
+     }
+    },
+    {
+     "type": "key",
+     "style": "methode",
+     "title": "Trouver le bon pronom relatif",
+     "md": "Remplace le pronom par son antécédent et regarde la fonction :\n- **qui** : l'antécédent serait le sujet (*l'enfant chante* → l'enfant **qui** chante).\n- **que** : l'antécédent serait le COD (*je vois l'enfant* → l'enfant **que** je vois).\n- **dont** : on aurait « de + antécédent » (*je parle de l'enfant* → l'enfant **dont** je parle).\n- **où** : lieu ou moment."
+    },
+    {
+     "type": "example",
+     "title": "Exemple 1 : choisir le pronom",
+     "statement": "Complète : « Le marché ... se tient le samedi est animé. »",
+     "steps": [
+      {
+       "md": "Le verbe « se tient » a pour sujet « le marché » : le pronom est sujet."
+      },
+      {
+       "md": "Un pronom sujet s'écrit « qui »."
+      }
+     ],
+     "answer": "**qui** : « Le marché qui se tient le samedi est animé. »"
+    },
+    {
+     "type": "example",
+     "title": "Exemple 2 : accord du verbe",
+     "statement": "Accorde le verbe : « C'est moi qui (être) arrivé le premier. »",
+     "steps": [
+      {
+       "md": "Le verbe de la relative s'accorde avec l'antécédent du pronom « qui »."
+      },
+      {
+       "md": "L'antécédent est « moi » : première personne du singulier."
+      }
+     ],
+     "answer": "**suis** : « C'est moi qui suis arrivé le premier. »"
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Erreurs fréquentes",
+     "md": "- Écrire « le livre qui j'ai lu » : le pronom est COD, il faut **que**.\n- Écrire « la maison que je vis dedans » : on dit « la maison **où** je vis ».\n- Oublier l'accord du verbe avec l'antécédent (« les enfants qui jouent »).\n- Confondre « dont » (de + nom) et « où »."
+    }
+   ],
+   "reviewNotes": [
+    "« lequel / auquel » sont laissés à la classe de 3e ; vérifier le programme officiel."
+   ]
+  },
+  {
+   "id": "4e-francais-circonstancielles",
+   "title": "Les subordonnées circonstancielles : temps, cause, but, conséquence, condition",
+   "minutes": 30,
+   "programRef": "4e — Grammaire : subordonnées circonstancielles (à vérifier sur le texte officiel)",
+   "status": "draft",
+   "author": "CastBridge (brouillon IA, bêta)",
+   "source": "Rédaction originale d'après le programme MINESEC ; à relire par un enseignant",
+   "objectives": [
+    "Reconnaître une circonstancielle et le rapport qu'elle exprime.",
+    "Choisir la conjonction et le mode du verbe (indicatif ou subjonctif)."
+   ],
+   "prerequisites": [
+    "4e-francais-propositions"
+   ],
+   "exercises": [
+    "4e-francais-circonstancielles-01",
+    "4e-francais-circonstancielles-02",
+    "4e-francais-circonstancielles-03",
+    "4e-francais-circonstancielles-04",
+    "4e-francais-circonstancielles-05",
+    "4e-francais-circonstancielles-06"
+   ],
+   "selfCheck": [
+    "4e-francais-circonstancielles-q1",
+    "4e-francais-circonstancielles-q2",
+    "4e-francais-circonstancielles-q3",
+    "4e-francais-circonstancielles-q4",
+    "4e-francais-circonstancielles-q5"
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Subordonnée circonstancielle",
+     "md": "Une **subordonnée circonstancielle** donne une circonstance de l'action : quand, pourquoi, dans quel but… Elle est introduite par une **conjonction de subordination** et se déplace souvent dans la phrase (elle joue le rôle d'un complément circonstanciel)."
+    },
+    {
+     "type": "illustration",
+     "caption": "Les principaux rapports et leurs conjonctions.",
+     "alt": "Un tableau qui associe les rapports temps, cause, but, conséquence, condition à des conjonctions et au mode du verbe.",
+     "figure": {
+      "kind": "shapes",
+      "w": 490,
+      "h": 224,
+      "items": [
+       {
+        "t": "rect",
+        "x": 10,
+        "y": 10,
+        "w": 100,
+        "h": 34,
+        "fill": "lightblue",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 60.0,
+        "y": 32.0,
+        "text": "Rapport",
+        "size": 14,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 110,
+        "y": 10,
+        "w": 260,
+        "h": 34,
+        "fill": "lightblue",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 240.0,
+        "y": 32.0,
+        "text": "Conjonctions",
+        "size": 14,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 370,
+        "y": 10,
+        "w": 110,
+        "h": 34,
+        "fill": "lightblue",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 425.0,
+        "y": 32.0,
+        "text": "Mode",
+        "size": 14,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 10,
+        "y": 44,
+        "w": 100,
+        "h": 34,
+        "fill": "lightyellow",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 60.0,
+        "y": 66.0,
+        "text": "temps",
+        "size": 14,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "rect",
+        "x": 110,
+        "y": 44,
+        "w": 260,
+        "h": 34,
+        "fill": "lightyellow",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 240.0,
+        "y": 66.0,
+        "text": "quand, lorsque, pendant que, avant que",
+        "size": 14,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "rect",
+        "x": 370,
+        "y": 44,
+        "w": 110,
+        "h": 34,
+        "fill": "lightyellow",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 425.0,
+        "y": 66.0,
+        "text": "indicatif / subj.",
+        "size": 14,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "rect",
+        "x": 10,
+        "y": 78,
+        "w": 100,
+        "h": 34,
+        "fill": "lightyellow",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 60.0,
+        "y": 100.0,
+        "text": "cause",
+        "size": 14,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "rect",
+        "x": 110,
+        "y": 78,
+        "w": 260,
+        "h": 34,
+        "fill": "lightyellow",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 240.0,
+        "y": 100.0,
+        "text": "parce que, puisque, comme",
+        "size": 14,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "rect",
+        "x": 370,
+        "y": 78,
+        "w": 110,
+        "h": 34,
+        "fill": "lightyellow",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 425.0,
+        "y": 100.0,
+        "text": "indicatif",
+        "size": 14,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "rect",
+        "x": 10,
+        "y": 112,
+        "w": 100,
+        "h": 34,
+        "fill": "lightyellow",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 60.0,
+        "y": 134.0,
+        "text": "but",
+        "size": 14,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "rect",
+        "x": 110,
+        "y": 112,
+        "w": 260,
+        "h": 34,
+        "fill": "lightyellow",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 240.0,
+        "y": 134.0,
+        "text": "pour que, afin que",
+        "size": 14,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "rect",
+        "x": 370,
+        "y": 112,
+        "w": 110,
+        "h": 34,
+        "fill": "lightyellow",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 425.0,
+        "y": 134.0,
+        "text": "subjonctif",
+        "size": 14,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "rect",
+        "x": 10,
+        "y": 146,
+        "w": 100,
+        "h": 34,
+        "fill": "lightyellow",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 60.0,
+        "y": 168.0,
+        "text": "conséquence",
+        "size": 14,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "rect",
+        "x": 110,
+        "y": 146,
+        "w": 260,
+        "h": 34,
+        "fill": "lightyellow",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 240.0,
+        "y": 168.0,
+        "text": "si bien que, de sorte que",
+        "size": 14,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "rect",
+        "x": 370,
+        "y": 146,
+        "w": 110,
+        "h": 34,
+        "fill": "lightyellow",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 425.0,
+        "y": 168.0,
+        "text": "indicatif",
+        "size": 14,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "rect",
+        "x": 10,
+        "y": 180,
+        "w": 100,
+        "h": 34,
+        "fill": "lightyellow",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 60.0,
+        "y": 202.0,
+        "text": "condition",
+        "size": 14,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "rect",
+        "x": 110,
+        "y": 180,
+        "w": 260,
+        "h": 34,
+        "fill": "lightyellow",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 240.0,
+        "y": 202.0,
+        "text": "si, à condition que",
+        "size": 14,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "rect",
+        "x": 370,
+        "y": 180,
+        "w": 110,
+        "h": 34,
+        "fill": "lightyellow",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 425.0,
+        "y": 202.0,
+        "text": "indicatif / subj.",
+        "size": 14,
+        "color": "ink",
+        "anchor": "middle"
+       }
+      ]
+     }
+    },
+    {
+     "type": "key",
+     "style": "retenir",
+     "title": "Repères pour le mode",
+     "md": "- **Subjonctif** après : avant que, pour que, afin que, bien que, à condition que, jusqu'à ce que.\n- **Indicatif** après : parce que, puisque, quand, lorsque, après que, si bien que.\n- Après **si** de condition : jamais de conditionnel (*Si tu viens, je t'attends.*)."
+    },
+    {
+     "type": "example",
+     "title": "Exemple 1 : la cause",
+     "statement": "Quel rapport exprime « Boris est absent parce qu'il a la fièvre » ?",
+     "steps": [
+      {
+       "md": "Pose la question « pourquoi Boris est-il absent ? » : parce qu'il a la fièvre."
+      },
+      {
+       "md": "La conjonction « parce que » exprime la cause."
+      }
+     ],
+     "answer": "**Subordonnée circonstancielle de cause.**"
+    },
+    {
+     "type": "example",
+     "title": "Exemple 2 : le mode",
+     "statement": "Conjugue : « Je ferme la porte pour que le vent n'(entrer) pas. »",
+     "steps": [
+      {
+       "md": "« Pour que » exprime le but et se construit avec le subjonctif."
+      },
+      {
+       "md": "Subjonctif présent de entrer : que le vent entre."
+      }
+     ],
+     "answer": "**entre** : « pour que le vent n'entre pas »."
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Erreurs fréquentes",
+     "md": "- Employer l'indicatif après « bien que » ou « pour que ».\n- Mettre le conditionnel après « si » : on dit « si j'avais le temps, je viendrais », pas « si j'aurais ».\n- Confondre « parce que » (en deux mots) et « par ce que »."
+    }
+   ],
+   "reviewNotes": [
+    "La concession et l'opposition sont traitées en 3e dans le pack BEPC ; vérifier la répartition officielle.",
+    "Règle « après que + indicatif » donnée comme norme ; l'usage courant emploie souvent le subjonctif."
+   ]
+  }
+ ],
+ "exercises": [
+  {
+   "kind": "numeric",
+   "prompt": "Combien y a-t-il de propositions dans « Mballa chante pendant que sa sœur prépare le repas. » ?",
+   "answer": 2,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Deux verbes conjugués : chante et prépare, donc deux propositions.",
+   "id": "4e-francais-propositions-01",
+   "tier": "application",
+   "lesson": "4e-francais-propositions",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Laquelle de ces conjonctions est une conjonction de coordination ?",
+   "choices": [
+    "bien que",
+    "lorsque",
+    "afin que",
+    "donc"
+   ],
+   "answer": 3,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "« Donc » fait partie de la liste mais, ou, et, donc, or, ni, car. Les autres sont des conjonctions de subordination.",
+   "method": "Récite la liste : mais, ou, et, donc, or, ni, car.",
+   "id": "4e-francais-propositions-02",
+   "tier": "application",
+   "lesson": "4e-francais-propositions",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "truefalse",
+   "prompt": "Vrai ou faux : « Nkeng aime les mangues. » est une phrase simple.",
+   "answer": true,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Un seul verbe conjugué (aime) : une seule proposition, donc phrase simple.",
+   "id": "4e-francais-propositions-03",
+   "tier": "application",
+   "lesson": "4e-francais-propositions",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "matching",
+   "prompt": "Associe chaque phrase à sa description.",
+   "pairs": [
+    [
+     "Il pleut, nous restons à la maison.",
+     "deux propositions juxtaposées"
+    ],
+    [
+     "Il pleut donc nous restons à la maison.",
+     "deux propositions coordonnées"
+    ],
+    [
+     "Nous restons à la maison parce qu'il pleut.",
+     "une principale et une subordonnée"
+    ],
+    [
+     "Il pleut.",
+     "une phrase simple"
+    ]
+   ],
+   "points": 2,
+   "difficulty": 2,
+   "explanation": "La virgule seule juxtapose ; « donc » coordonne ; « parce que » subordonne ; une seule proposition donne une phrase simple.",
+   "id": "4e-francais-propositions-04",
+   "tier": "approfondissement",
+   "lesson": "4e-francais-propositions",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Dans « Quand le maître entra, les élèves se levèrent. », quelle est la proposition principale ?",
+   "choices": [
+    "Quand le maître entra",
+    "les élèves se levèrent",
+    "le maître entra, les élèves",
+    "Il n'y a pas de proposition principale"
+   ],
+   "answer": 1,
+   "points": 1,
+   "difficulty": 2,
+   "explanation": "« Quand le maître entra » est introduite par « quand » : c'est la subordonnée. Celle dont elle dépend, « les élèves se levèrent », est la principale.",
+   "id": "4e-francais-propositions-05",
+   "tier": "approfondissement",
+   "lesson": "4e-francais-propositions",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "problem",
+   "prompt": "Phrase étudiée : « Le vendeur annonce que les mangues sont mûres, mais les clients hésitent. »",
+   "parts": [
+    {
+     "kind": "numeric",
+     "prompt": "Combien de propositions contient cette phrase ?",
+     "answer": 3,
+     "points": 1,
+     "difficulty": 1,
+     "explanation": "Trois verbes conjugués : annonce, sont, hésitent.",
+     "id": "4e-francais-propositions-06-a"
+    },
+    {
+     "kind": "mcq",
+     "prompt": "Quelle est la nature de « que les mangues sont mûres » ?",
+     "choices": [
+      "une subordonnée dépendant de « Le vendeur annonce »",
+      "une indépendante juxtaposée",
+      "une indépendante coordonnée par « que »",
+      "une principale"
+     ],
+     "answer": 0,
+     "points": 1,
+     "difficulty": 1,
+     "explanation": "« que » est un subordonnant ; la proposition complète le verbe « annonce ».",
+     "id": "4e-francais-propositions-06-b"
+    },
+    {
+     "kind": "open",
+     "prompt": "Écris la phrase complexe obtenue en reliant « Il fait nuit » et « nous rentrons » par une conjonction de subordination. Précise quelle est la principale.",
+     "model": "Nous rentrons parce qu'il fait nuit. (« Nous rentrons » est la principale ; « parce qu'il fait nuit » est la subordonnée.) D'autres conjonctions sont possibles : puisque, quand…",
+     "rubric": [
+      "La phrase est correcte et complexe : 1 point.",
+      "La conjonction de subordination est bien choisie : 0,5 point.",
+      "La principale est correctement identifiée : 0,5 point."
+     ],
+     "points": 2,
+     "difficulty": 2,
+     "explanation": "Voir le corrigé modèle et les critères de notation.",
+     "id": "4e-francais-propositions-06-c"
+    }
+   ],
+   "difficulty": 2,
+   "id": "4e-francais-propositions-06",
+   "tier": "examen",
+   "lesson": "4e-francais-propositions",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Que faut-il compter pour savoir combien une phrase a de propositions ?",
+   "choices": [
+    "les virgules",
+    "les noms",
+    "les verbes conjugués",
+    "les infinitifs"
+   ],
+   "answer": 2,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Une proposition s'organise autour d'un verbe conjugué.",
+   "id": "4e-francais-propositions-q1",
+   "tier": "autoeval",
+   "lesson": "4e-francais-propositions",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Quelle phrase contient deux propositions juxtaposées ?",
+   "choices": [
+    "La nuit tombe et le village s'endort.",
+    "La nuit tombe parce que le village s'endort.",
+    "La nuit tombe, le village s'endort.",
+    "La nuit tombe sur le village."
+   ],
+   "answer": 2,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Seule la ponctuation relie les deux verbes dans la première phrase.",
+   "id": "4e-francais-propositions-q2",
+   "tier": "autoeval",
+   "lesson": "4e-francais-propositions",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Quel mot subordonne la deuxième proposition dans « Je sais que tu viendras » ?",
+   "choices": [
+    "je",
+    "sais",
+    "viendras",
+    "que"
+   ],
+   "answer": 3,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "« Que » est le mot subordonnant qui introduit « tu viendras ».",
+   "id": "4e-francais-propositions-q3",
+   "tier": "autoeval",
+   "lesson": "4e-francais-propositions",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "« Car » est :",
+   "choices": [
+    "une conjonction de subordination",
+    "un pronom relatif",
+    "une conjonction de coordination",
+    "un adverbe de lieu"
+   ],
+   "answer": 2,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Car appartient à la liste mais, ou, et, donc, or, ni, car.",
+   "id": "4e-francais-propositions-q4",
+   "tier": "autoeval",
+   "lesson": "4e-francais-propositions",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Dans « Elle ouvre la porte et entre. », combien de propositions ?",
+   "choices": [
+    "deux",
+    "une",
+    "trois",
+    "aucune"
+   ],
+   "answer": 0,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Deux verbes conjugués (ouvre, entre), reliés par « et ».",
+   "id": "4e-francais-propositions-q5",
+   "tier": "autoeval",
+   "lesson": "4e-francais-propositions",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Complète : « La fille ... chante est ma cousine. »",
+   "choices": [
+    "qui",
+    "que",
+    "dont",
+    "où"
+   ],
+   "answer": 0,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Le pronom est sujet de « chante » : on emploie « qui ».",
+   "id": "4e-francais-relatives-01",
+   "tier": "application",
+   "lesson": "4e-francais-relatives",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Complète : « Le cahier ... tu as acheté est neuf. »",
+   "choices": [
+    "qui",
+    "que",
+    "dont",
+    "où"
+   ],
+   "answer": 1,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Le pronom est COD de « as acheté » (tu as acheté le cahier) : « que ».",
+   "id": "4e-francais-relatives-02",
+   "tier": "application",
+   "lesson": "4e-francais-relatives",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "truefalse",
+   "prompt": "Vrai ou faux : dans « la case où il dort », « où » indique un lieu.",
+   "answer": true,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Le pronom « où » reprend l'antécédent « case », qui est un lieu.",
+   "id": "4e-francais-relatives-03",
+   "tier": "application",
+   "lesson": "4e-francais-relatives",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Complète : « Le village ... je te parle est près de Bafoussam. »",
+   "choices": [
+    "que",
+    "qui",
+    "où",
+    "dont"
+   ],
+   "answer": 3,
+   "points": 1,
+   "difficulty": 2,
+   "explanation": "On dit « parler de ce village » : le pronom remplace « de + village » : « dont ».",
+   "id": "4e-francais-relatives-04",
+   "tier": "approfondissement",
+   "lesson": "4e-francais-relatives",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Quel est l'antécédent du pronom relatif dans « J'ai rencontré le médecin qui soigne ma grand-mère. » ?",
+   "choices": [
+    "ma grand-mère",
+    "J'ai rencontré",
+    "le médecin",
+    "soigne"
+   ],
+   "answer": 2,
+   "points": 1,
+   "difficulty": 2,
+   "explanation": "Le pronom « qui » reprend le nom qui le précède : « le médecin ».",
+   "id": "4e-francais-relatives-05",
+   "tier": "approfondissement",
+   "lesson": "4e-francais-relatives",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "problem",
+   "prompt": "Phrase : « Les élèves qui ont lu le texte répondent aux questions que le professeur pose. »",
+   "parts": [
+    {
+     "kind": "mcq",
+     "prompt": "Quel est l'antécédent de « qui » ?",
+     "choices": [
+      "le texte",
+      "les questions",
+      "Les élèves",
+      "le professeur"
+     ],
+     "answer": 2,
+     "points": 1,
+     "difficulty": 1,
+     "explanation": "« qui » reprend « les élèves », sujet de « ont lu ».",
+     "id": "4e-francais-relatives-06-a"
+    },
+    {
+     "kind": "mcq",
+     "prompt": "Quelle est la fonction de « que » dans « que le professeur pose » ?",
+     "choices": [
+      "sujet de « pose »",
+      "complément circonstanciel",
+      "attribut",
+      "COD de « pose »"
+     ],
+     "answer": 3,
+     "points": 1,
+     "difficulty": 1,
+     "explanation": "Le professeur pose les questions : « que » remplace « les questions », COD.",
+     "id": "4e-francais-relatives-06-b"
+    },
+    {
+     "kind": "open",
+     "prompt": "Relie par un pronom relatif : « J'ai un ami. Cet ami habite à Douala. »",
+     "model": "J'ai un ami qui habite à Douala.",
+     "rubric": [
+      "Pronom relatif « qui » : 1 point.",
+      "Phrase correcte avec l'ordre des mots : 1 point."
+     ],
+     "points": 2,
+     "difficulty": 2,
+     "explanation": "Voir le corrigé modèle et les critères de notation.",
+     "id": "4e-francais-relatives-06-c"
+    }
+   ],
+   "difficulty": 2,
+   "id": "4e-francais-relatives-06",
+   "tier": "examen",
+   "lesson": "4e-francais-relatives",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Quel pronom relatif remplace un complément introduit par « de » ?",
+   "choices": [
+    "qui",
+    "dont",
+    "que",
+    "où"
+   ],
+   "answer": 1,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Dont = de + nom, par exemple « le film dont tu parles ».",
+   "id": "4e-francais-relatives-q1",
+   "tier": "autoeval",
+   "lesson": "4e-francais-relatives",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Dans « le fruit que Boris mange », « que » est :",
+   "choices": [
+    "sujet",
+    "attribut",
+    "COD",
+    "complément de lieu"
+   ],
+   "answer": 2,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Boris mange le fruit : « que » remplace le COD.",
+   "id": "4e-francais-relatives-q2",
+   "tier": "autoeval",
+   "lesson": "4e-francais-relatives",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Quelle phrase relative est bien construite ?",
+   "choices": [
+    "La route qui mène au village est longue.",
+    "La route que mène au village est longue.",
+    "La route dont mène au village est longue.",
+    "La route où mène au village est longue."
+   ],
+   "answer": 0,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "« qui » sujet de « mène ».",
+   "id": "4e-francais-relatives-q3",
+   "tier": "autoeval",
+   "lesson": "4e-francais-relatives",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Une subordonnée relative complète :",
+   "choices": [
+    "un verbe",
+    "un adverbe",
+    "un nom ou un pronom (l'antécédent)",
+    "une virgule"
+   ],
+   "answer": 2,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "La relative précise son antécédent.",
+   "id": "4e-francais-relatives-q4",
+   "tier": "autoeval",
+   "lesson": "4e-francais-relatives",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Quel pronom convient : « Le jour ... il est arrivé était un lundi » ?",
+   "choices": [
+    "qui",
+    "où",
+    "dont",
+    "lequel"
+   ],
+   "answer": 1,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "« Où » peut indiquer le temps : le jour où…",
+   "id": "4e-francais-relatives-q5",
+   "tier": "autoeval",
+   "lesson": "4e-francais-relatives",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Quel rapport exprime « afin que » ?",
+   "choices": [
+    "le but",
+    "la cause",
+    "le temps",
+    "la condition"
+   ],
+   "answer": 0,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Afin que indique l'objectif poursuivi.",
+   "id": "4e-francais-circonstancielles-01",
+   "tier": "application",
+   "lesson": "4e-francais-circonstancielles",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Choisis la forme correcte : « Bien que Nkeng (être) fatigué, il continue. »",
+   "choices": [
+    "est",
+    "sera",
+    "soit",
+    "était"
+   ],
+   "answer": 2,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "« Bien que » est suivi du subjonctif : que Nkeng soit.",
+   "id": "4e-francais-circonstancielles-02",
+   "tier": "application",
+   "lesson": "4e-francais-circonstancielles",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "truefalse",
+   "prompt": "Vrai ou faux : « parce que » introduit une circonstancielle de cause.",
+   "answer": true,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Parce que répond à la question pourquoi : c'est la cause.",
+   "id": "4e-francais-circonstancielles-03",
+   "tier": "application",
+   "lesson": "4e-francais-circonstancielles",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "matching",
+   "prompt": "Associe chaque conjonction à son rapport.",
+   "pairs": [
+    [
+     "lorsque",
+     "temps"
+    ],
+    [
+     "puisque",
+     "cause"
+    ],
+    [
+     "pour que",
+     "but"
+    ],
+    [
+     "si",
+     "condition"
+    ]
+   ],
+   "points": 2,
+   "difficulty": 2,
+   "explanation": "Chacune est la conjonction type du rapport indiqué.",
+   "id": "4e-francais-circonstancielles-04",
+   "tier": "approfondissement",
+   "lesson": "4e-francais-circonstancielles",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Quelle phrase est correcte ?",
+   "choices": [
+    "Si tu viendras demain, je te montrerai la ferme.",
+    "Si tu viens demain, je te montrerai la ferme.",
+    "Si tu viendrais demain, je te montrerai la ferme.",
+    "Si tu viennes demain, je te montrerai la ferme."
+   ],
+   "answer": 1,
+   "points": 1,
+   "difficulty": 2,
+   "explanation": "Après « si », on emploie l'indicatif présent pour un futur : « Si tu viens ».",
+   "id": "4e-francais-circonstancielles-05",
+   "tier": "approfondissement",
+   "lesson": "4e-francais-circonstancielles",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "problem",
+   "prompt": "Phrase : « Comme il pleuvait, Amina est restée à la maison afin que sa petite sœur ne prenne pas froid. »",
+   "parts": [
+    {
+     "kind": "numeric",
+     "prompt": "Combien de propositions contient cette phrase ?",
+     "answer": 3,
+     "points": 1,
+     "difficulty": 1,
+     "explanation": "Verbes conjugués : pleuvait, est restée, prenne.",
+     "id": "4e-francais-circonstancielles-06-a"
+    },
+    {
+     "kind": "mcq",
+     "prompt": "Quel rapport exprime « Comme il pleuvait » ?",
+     "choices": [
+      "le but",
+      "la cause",
+      "la condition",
+      "la conséquence"
+     ],
+     "answer": 1,
+     "points": 1,
+     "difficulty": 1,
+     "explanation": "« Comme » en tête de phrase peut exprimer la cause : il pleuvait, donc elle est restée.",
+     "id": "4e-francais-circonstancielles-06-b"
+    },
+    {
+     "kind": "mcq",
+     "prompt": "Pourquoi écrit-on « prenne » (subjonctif) ?",
+     "choices": [
+      "parce que le verbe est au passé",
+      "parce que « afin que » est suivi du subjonctif",
+      "parce que la phrase est négative",
+      "parce que « sa petite sœur » est féminin"
+     ],
+     "answer": 1,
+     "points": 1,
+     "difficulty": 1,
+     "explanation": "Les conjonctions de but demandent le subjonctif.",
+     "id": "4e-francais-circonstancielles-06-c"
+    }
+   ],
+   "difficulty": 2,
+   "id": "4e-francais-circonstancielles-06",
+   "tier": "examen",
+   "lesson": "4e-francais-circonstancielles",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "« Quand la cloche sonna, les élèves sortirent. » La subordonnée exprime :",
+   "choices": [
+    "le temps",
+    "la cause",
+    "le but",
+    "la condition"
+   ],
+   "answer": 0,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "« Quand » indique le moment de l'action principale.",
+   "id": "4e-francais-circonstancielles-q1",
+   "tier": "autoeval",
+   "lesson": "4e-francais-circonstancielles",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Quelle conjonction est suivie du subjonctif ?",
+   "choices": [
+    "parce que",
+    "puisque",
+    "si bien que",
+    "avant que"
+   ],
+   "answer": 3,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Avant que : « avant que tu partes ».",
+   "id": "4e-francais-circonstancielles-q2",
+   "tier": "autoeval",
+   "lesson": "4e-francais-circonstancielles",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "« Il a travaillé si bien qu'il a réussi. » La subordonnée exprime :",
+   "choices": [
+    "la cause",
+    "la conséquence",
+    "le but",
+    "le temps"
+   ],
+   "answer": 1,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Elle donne le résultat de l'action principale.",
+   "id": "4e-francais-circonstancielles-q3",
+   "tier": "autoeval",
+   "lesson": "4e-francais-circonstancielles",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Une subordonnée circonstancielle peut :",
+   "choices": [
+    "être déplacée en début de phrase",
+    "remplacer le verbe",
+    "se passer de principale",
+    "ne jamais porter de verbe"
+   ],
+   "answer": 0,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "« Quand il arrive, nous mangeons » = « Nous mangeons quand il arrive ».",
+   "id": "4e-francais-circonstancielles-q4",
+   "tier": "autoeval",
+   "lesson": "4e-francais-circonstancielles",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Complète : « Si j'avais un vélo, je ... à l'école plus vite. »",
+   "choices": [
+    "viendrai",
+    "viendrais-je",
+    "viendrais",
+    "viens"
+   ],
+   "answer": 2,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Si + imparfait dans la subordonnée, conditionnel présent dans la principale.",
+   "id": "4e-francais-circonstancielles-q5",
+   "tier": "autoeval",
+   "lesson": "4e-francais-circonstancielles",
+   "source": "Exercice original, rédigé pour CastBridge"
+  }
+ ]
+}

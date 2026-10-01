@@ -1,0 +1,1311 @@
+{
+ "chapter": "4e-francais-textes",
+ "lessons": [
+  {
+   "id": "4e-francais-texte-narratif",
+   "title": "Le texte narratif : schéma narratif et point de vue",
+   "minutes": 30,
+   "programRef": "4e — Lecture : le texte narratif (à vérifier sur le texte officiel)",
+   "status": "draft",
+   "author": "CastBridge (brouillon IA, bêta)",
+   "source": "Rédaction originale d'après le programme MINESEC ; à relire par un enseignant",
+   "objectives": [
+    "Dégager les cinq étapes du schéma narratif.",
+    "Identifier le narrateur et le point de vue.",
+    "Repérer les temps verbaux d'un récit."
+   ],
+   "prerequisites": [
+    "4e-francais-temps-recit"
+   ],
+   "exercises": [
+    "4e-francais-texte-narratif-01",
+    "4e-francais-texte-narratif-02",
+    "4e-francais-texte-narratif-03",
+    "4e-francais-texte-narratif-04",
+    "4e-francais-texte-narratif-05",
+    "4e-francais-texte-narratif-06"
+   ],
+   "selfCheck": [
+    "4e-francais-texte-narratif-q1",
+    "4e-francais-texte-narratif-q2",
+    "4e-francais-texte-narratif-q3",
+    "4e-francais-texte-narratif-q4",
+    "4e-francais-texte-narratif-q5"
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Le texte narratif",
+     "md": "Un **texte narratif** raconte une histoire : des personnages, des lieux, une succession d'événements dans le temps. Il s'appuie sur le **schéma narratif** et utilise surtout le passé simple et l'imparfait."
+    },
+    {
+     "type": "illustration",
+     "caption": "Les cinq étapes du schéma narratif.",
+     "alt": "Cinq cases reliées par des flèches : situation initiale, élément perturbateur, péripéties, dénouement, situation finale.",
+     "figure": {
+      "kind": "shapes",
+      "w": 500,
+      "h": 132,
+      "items": [
+       {
+        "t": "rect",
+        "x": 10.0,
+        "y": 15,
+        "w": 73.6,
+        "h": 44,
+        "fill": "lightblue",
+        "stroke": "ink",
+        "width": 2,
+        "radius": 8
+       },
+       {
+        "t": "text",
+        "x": 46.8,
+        "y": 43,
+        "text": "Situation initiale",
+        "size": 11,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "line",
+        "x1": 86.6,
+        "y1": 37,
+        "x2": 108.6,
+        "y2": 37,
+        "color": "ink",
+        "width": 2,
+        "arrow": "end"
+       },
+       {
+        "t": "rect",
+        "x": 111.6,
+        "y": 15,
+        "w": 73.6,
+        "h": 44,
+        "fill": "lightorange",
+        "stroke": "ink",
+        "width": 2,
+        "radius": 8
+       },
+       {
+        "t": "text",
+        "x": 148.39999999999998,
+        "y": 43,
+        "text": "Élément perturbateur",
+        "size": 11,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "line",
+        "x1": 188.2,
+        "y1": 37,
+        "x2": 210.2,
+        "y2": 37,
+        "color": "ink",
+        "width": 2,
+        "arrow": "end"
+       },
+       {
+        "t": "rect",
+        "x": 213.2,
+        "y": 15,
+        "w": 73.6,
+        "h": 44,
+        "fill": "lightyellow",
+        "stroke": "ink",
+        "width": 2,
+        "radius": 8
+       },
+       {
+        "t": "text",
+        "x": 250.0,
+        "y": 43,
+        "text": "Péripéties",
+        "size": 11,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "line",
+        "x1": 289.79999999999995,
+        "y1": 37,
+        "x2": 311.79999999999995,
+        "y2": 37,
+        "color": "ink",
+        "width": 2,
+        "arrow": "end"
+       },
+       {
+        "t": "rect",
+        "x": 314.79999999999995,
+        "y": 15,
+        "w": 73.6,
+        "h": 44,
+        "fill": "lightgreen",
+        "stroke": "ink",
+        "width": 2,
+        "radius": 8
+       },
+       {
+        "t": "text",
+        "x": 351.59999999999997,
+        "y": 43,
+        "text": "Dénouement",
+        "size": 11,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "line",
+        "x1": 391.4,
+        "y1": 37,
+        "x2": 413.4,
+        "y2": 37,
+        "color": "ink",
+        "width": 2,
+        "arrow": "end"
+       },
+       {
+        "t": "rect",
+        "x": 416.4,
+        "y": 15,
+        "w": 73.6,
+        "h": 44,
+        "fill": "lightblue",
+        "stroke": "ink",
+        "width": 2,
+        "radius": 8
+       },
+       {
+        "t": "text",
+        "x": 453.2,
+        "y": 43,
+        "text": "Situation finale",
+        "size": 11,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       }
+      ]
+     }
+    },
+    {
+     "type": "key",
+     "style": "retenir",
+     "title": "Narrateur et point de vue",
+     "md": "- **Narrateur personnage** : il dit « je » (récit à la 1re personne).\n- **Narrateur extérieur** : il dit « il », « elle » (3e personne).\n- **Point de vue interne** : on voit par les yeux d'un personnage ; **externe** : on ne voit que les actes ; **omniscient** : le narrateur sait tout, même les pensées."
+    },
+    {
+     "type": "text",
+     "md": "**Texte d'étude (original).** *Le soir tombait sur le village. Nkeng, qui revenait des champs, entendit des pleurs derrière la case du chef. Il s'approcha et découvrit un petit garçon perdu. Il le prit par la main, le conduisit jusque chez sa mère, et celle-ci le remercia longuement.*"
+    },
+    {
+     "type": "example",
+     "title": "Exemple 1 : schéma narratif",
+     "statement": "Retrouve les étapes dans le texte d'étude.",
+     "steps": [
+      {
+       "md": "Situation initiale : le soir tombait, Nkeng revient des champs."
+      },
+      {
+       "md": "Élément perturbateur : il entend des pleurs. Péripétie : il découvre l'enfant. Dénouement : il le ramène chez sa mère."
+      }
+     ],
+     "answer": "**Situation finale : la mère remercie Nkeng.**"
+    },
+    {
+     "type": "example",
+     "title": "Exemple 2 : narrateur",
+     "statement": "Qui raconte dans le texte d'étude ? Quel point de vue ?",
+     "steps": [
+      {
+       "md": "On lit « Nkeng », « il » : pas de « je »."
+      },
+      {
+       "md": "On suit surtout ce que Nkeng entend et voit."
+      }
+     ],
+     "answer": "**Narrateur extérieur à la 3e personne, point de vue plutôt interne (Nkeng).**"
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Erreurs fréquentes",
+     "md": "- Confondre l'auteur (la personne réelle) et le narrateur (la voix qui raconte).\n- Oublier l'élément perturbateur, qui lance l'histoire.\n- Dire que tous les verbes sont au passé simple : les descriptions sont à l'imparfait."
+    }
+   ],
+   "reviewNotes": [
+    "Le texte d'étude est une composition originale ; terminologie des points de vue (interne, externe, omniscient) à comparer avec les manuels locaux."
+   ]
+  },
+  {
+   "id": "4e-francais-texte-descriptif",
+   "title": "Le texte descriptif : décrire un lieu et un personnage",
+   "minutes": 30,
+   "programRef": "4e — Lecture et expression : le texte descriptif, le portrait (à vérifier sur le texte officiel)",
+   "status": "draft",
+   "author": "CastBridge (brouillon IA, bêta)",
+   "source": "Rédaction originale d'après le programme MINESEC ; à relire par un enseignant",
+   "objectives": [
+    "Repérer l'organisation d'une description.",
+    "Relever les procédés : adjectifs, comparaisons, perceptions.",
+    "Écrire une description ordonnée."
+   ],
+   "prerequisites": [
+    "4e-francais-figures-simples"
+   ],
+   "exercises": [
+    "4e-francais-texte-descriptif-01",
+    "4e-francais-texte-descriptif-02",
+    "4e-francais-texte-descriptif-03",
+    "4e-francais-texte-descriptif-04",
+    "4e-francais-texte-descriptif-05",
+    "4e-francais-texte-descriptif-06"
+   ],
+   "selfCheck": [
+    "4e-francais-texte-descriptif-q1",
+    "4e-francais-texte-descriptif-q2",
+    "4e-francais-texte-descriptif-q3",
+    "4e-francais-texte-descriptif-q4",
+    "4e-francais-texte-descriptif-q5"
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Décrire",
+     "md": "Un **texte descriptif** représente un lieu, un objet, un être : le lecteur doit « le voir ». Il utilise surtout l'**imparfait** ou le présent, des **adjectifs**, des **compléments de lieu** et des **comparaisons**. Un **portrait** décrit l'apparence et le caractère d'une personne."
+    },
+    {
+     "type": "text",
+     "md": "**Texte d'étude (original).** *Le marché du quartier s'étendait sous de grands arbres. À gauche, les vendeuses de tomates avaient dressé des pyramides rouges ; plus loin, des paniers de manioc dégageaient une odeur de terre fraîche. Au fond, un vieux tailleur cousait derrière sa machine, le dos courbé comme un arc.*"
+    },
+    {
+     "type": "illustration",
+     "caption": "Une description s'organise : ici, de la gauche vers le fond.",
+     "alt": "Un schéma du marché avec trois repères : tomates à gauche, manioc plus loin, tailleur au fond.",
+     "figure": {
+      "kind": "shapes",
+      "w": 460,
+      "h": 130,
+      "items": [
+       {
+        "t": "rect",
+        "x": 10,
+        "y": 10,
+        "w": 440,
+        "h": 110,
+        "fill": "lightyellow",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 70,
+        "y": 50,
+        "text": "à gauche",
+        "size": 14,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "text",
+        "x": 70,
+        "y": 80,
+        "text": "tomates",
+        "size": 16,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 230,
+        "y": 50,
+        "text": "plus loin",
+        "size": 14,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "text",
+        "x": 230,
+        "y": 80,
+        "text": "manioc",
+        "size": 16,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 390,
+        "y": 50,
+        "text": "au fond",
+        "size": 14,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "text",
+        "x": 390,
+        "y": 80,
+        "text": "tailleur",
+        "size": 16,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       }
+      ]
+     }
+    },
+    {
+     "type": "key",
+     "style": "methode",
+     "title": "Organiser une description",
+     "md": "1. Choisis un **point de vue** (où se place celui qui regarde ?).\n2. Avance dans un **ordre** : du proche au lointain, de gauche à droite, du général au détail.\n3. Utilise des **indicateurs spatiaux** (à gauche, au fond, derrière…).\n4. Fais appel aux **cinq sens** : vue, odorat, ouïe, goût, toucher.\n5. Ajoute des adjectifs précis et une ou deux images (comparaison, métaphore)."
+    },
+    {
+     "type": "example",
+     "title": "Exemple 1 : relever des procédés",
+     "statement": "Relève dans le texte d'étude une comparaison et un indicateur de lieu.",
+     "steps": [
+      {
+       "md": "Comparaison : « le dos courbé comme un arc » (outil : comme)."
+      },
+      {
+       "md": "Indicateur de lieu : « à gauche », « plus loin », « au fond »."
+      }
+     ],
+     "answer": "**Comparaison : « comme un arc » ; indicateurs : à gauche, plus loin, au fond.**"
+    },
+    {
+     "type": "example",
+     "title": "Exemple 2 : amorce de portrait",
+     "statement": "Écris un début de portrait en trois phrases.",
+     "steps": [
+      {
+       "md": "On donne l'apparence : taille, visage, vêtements."
+      },
+      {
+       "md": "On ajoute un trait de caractère montré par un geste."
+      }
+     ],
+     "answer": "**Ma tante Béa est grande et mince. Son visage rond est éclairé par de petits yeux malicieux. Elle rit si fort que tout le quartier l'entend.**"
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Erreurs fréquentes",
+     "md": "- Faire une liste désordonnée sans indicateurs de lieu.\n- Écrire « il y a » partout : emploie des verbes variés (s'étendait, se dressait, dégageait).\n- Oublier d'indiquer le point de vue.\n- Utiliser « beau », « joli », « grand » sans précision : cherche l'adjectif exact."
+    }
+   ],
+   "reviewNotes": [
+    "Texte d'étude original ; la distinction « description / portrait » suit l'usage courant des manuels, à vérifier."
+   ]
+  },
+  {
+   "id": "4e-francais-texte-argumentatif",
+   "title": "Le texte argumentatif : thèse, arguments, exemples",
+   "minutes": 30,
+   "programRef": "4e — Lecture et expression : le texte argumentatif, initiation (à vérifier sur le texte officiel)",
+   "status": "draft",
+   "author": "CastBridge (brouillon IA, bêta)",
+   "source": "Rédaction originale d'après le programme MINESEC ; à relire par un enseignant",
+   "objectives": [
+    "Repérer la thèse, les arguments et les exemples.",
+    "Utiliser les connecteurs logiques.",
+    "Distinguer argumenter et raconter."
+   ],
+   "prerequisites": [],
+   "exercises": [
+    "4e-francais-texte-argumentatif-01",
+    "4e-francais-texte-argumentatif-02",
+    "4e-francais-texte-argumentatif-03",
+    "4e-francais-texte-argumentatif-04",
+    "4e-francais-texte-argumentatif-05",
+    "4e-francais-texte-argumentatif-06"
+   ],
+   "selfCheck": [
+    "4e-francais-texte-argumentatif-q1",
+    "4e-francais-texte-argumentatif-q2",
+    "4e-francais-texte-argumentatif-q3",
+    "4e-francais-texte-argumentatif-q4",
+    "4e-francais-texte-argumentatif-q5"
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Argumenter",
+     "md": "Un **texte argumentatif** cherche à convaincre. Il défend une **thèse** (opinion) à l'aide d'**arguments** (raisons) illustrés par des **exemples**. Il utilise surtout le présent et des **connecteurs logiques**."
+    },
+    {
+     "type": "text",
+     "md": "**Texte d'étude (original).** *Je pense que chaque élève devrait lire vingt minutes par jour. D'abord, la lecture enrichit le vocabulaire : celui qui lit beaucoup trouve plus facilement ses mots. Ensuite, elle améliore l'orthographe, car on voit sans cesse les mots bien écrits. Par exemple, Amina, qui lit chaque soir, fait peu de fautes en dictée. En somme, lire est un excellent entraînement.*"
+    },
+    {
+     "type": "illustration",
+     "caption": "La construction d'un texte argumentatif.",
+     "alt": "Quatre cases reliées par des flèches : thèse, arguments, exemples, conclusion.",
+     "figure": {
+      "kind": "shapes",
+      "w": 480,
+      "h": 127,
+      "items": [
+       {
+        "t": "rect",
+        "x": 10.0,
+        "y": 15,
+        "w": 94.0,
+        "h": 44,
+        "fill": "lightorange",
+        "stroke": "ink",
+        "width": 2,
+        "radius": 8
+       },
+       {
+        "t": "text",
+        "x": 57.0,
+        "y": 43,
+        "text": "Thèse",
+        "size": 14,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "line",
+        "x1": 107.0,
+        "y1": 37,
+        "x2": 129.0,
+        "y2": 37,
+        "color": "ink",
+        "width": 2,
+        "arrow": "end"
+       },
+       {
+        "t": "text",
+        "x": 57.0,
+        "y": 80,
+        "text": "mon opinion",
+        "size": 14,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "rect",
+        "x": 132.0,
+        "y": 15,
+        "w": 94.0,
+        "h": 44,
+        "fill": "lightyellow",
+        "stroke": "ink",
+        "width": 2,
+        "radius": 8
+       },
+       {
+        "t": "text",
+        "x": 179.0,
+        "y": 43,
+        "text": "Arguments",
+        "size": 14,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "line",
+        "x1": 229.0,
+        "y1": 37,
+        "x2": 251.0,
+        "y2": 37,
+        "color": "ink",
+        "width": 2,
+        "arrow": "end"
+       },
+       {
+        "t": "text",
+        "x": 179.0,
+        "y": 80,
+        "text": "mes raisons",
+        "size": 14,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "rect",
+        "x": 254.0,
+        "y": 15,
+        "w": 94.0,
+        "h": 44,
+        "fill": "lightgreen",
+        "stroke": "ink",
+        "width": 2,
+        "radius": 8
+       },
+       {
+        "t": "text",
+        "x": 301.0,
+        "y": 43,
+        "text": "Exemples",
+        "size": 14,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "line",
+        "x1": 351.0,
+        "y1": 37,
+        "x2": 373.0,
+        "y2": 37,
+        "color": "ink",
+        "width": 2,
+        "arrow": "end"
+       },
+       {
+        "t": "text",
+        "x": 301.0,
+        "y": 80,
+        "text": "des preuves",
+        "size": 14,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "rect",
+        "x": 376.0,
+        "y": 15,
+        "w": 94.0,
+        "h": 44,
+        "fill": "lightblue",
+        "stroke": "ink",
+        "width": 2,
+        "radius": 8
+       },
+       {
+        "t": "text",
+        "x": 423.0,
+        "y": 43,
+        "text": "Conclusion",
+        "size": 14,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 423.0,
+        "y": 80,
+        "text": "je résume",
+        "size": 14,
+        "color": "ink",
+        "anchor": "middle"
+       }
+      ]
+     }
+    },
+    {
+     "type": "key",
+     "style": "retenir",
+     "title": "Connecteurs logiques",
+     "md": "- Ordre : **d'abord, ensuite, enfin**.\n- Addition : **de plus, en outre**.\n- Cause : **car, parce que, puisque**.\n- Conséquence : **donc, c'est pourquoi, ainsi**.\n- Opposition : **mais, cependant, pourtant**.\n- Exemple : **par exemple**. Conclusion : **en somme, en conclusion**."
+    },
+    {
+     "type": "example",
+     "title": "Exemple 1 : relever",
+     "statement": "Dans le texte d'étude, quelle est la thèse ? Cite un argument.",
+     "steps": [
+      {
+       "md": "La thèse est dans la première phrase : chaque élève devrait lire vingt minutes par jour."
+      },
+      {
+       "md": "Argument : la lecture enrichit le vocabulaire."
+      }
+     ],
+     "answer": "**Thèse : lire vingt minutes par jour. Argument : on enrichit son vocabulaire.**"
+    },
+    {
+     "type": "example",
+     "title": "Exemple 2 : argument ou exemple",
+     "statement": "Dans « Amina, qui lit chaque soir, fait peu de fautes en dictée », s'agit-il d'un argument ou d'un exemple ?",
+     "steps": [
+      {
+       "md": "Elle cite un cas précis et vérifiable : Amina."
+      },
+      {
+       "md": "Elle illustre l'argument sur l'orthographe."
+      }
+     ],
+     "answer": "**C'est un exemple.**"
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Erreurs fréquentes",
+     "md": "- Donner un avis sans raison (« C'est bien parce que c'est bien »).\n- Citer un exemple sans l'expliquer ni le relier à l'argument.\n- Écrire « car » en début de phrase après un point.\n- Mélanger récit et argumentation : on raisonne, on ne raconte pas toute une histoire."
+    }
+   ],
+   "reviewNotes": [
+    "Initiation seulement ; l'argumentation approfondie (thèse adverse, réfutation, contraction, discussion) est dans le pack BEPC Français. Vérifier si le texte argumentatif figure bien au programme de 4e."
+   ]
+  }
+ ],
+ "exercises": [
+  {
+   "kind": "mcq",
+   "prompt": "Quelle étape ouvre l'histoire en présentant le cadre et les personnages ?",
+   "choices": [
+    "le dénouement",
+    "la situation initiale",
+    "les péripéties",
+    "la situation finale"
+   ],
+   "answer": 1,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Elle donne le lieu, le moment, les personnages.",
+   "id": "4e-francais-texte-narratif-01",
+   "tier": "application",
+   "lesson": "4e-francais-texte-narratif",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Un récit qui emploie « je » a :",
+   "choices": [
+    "un narrateur extérieur",
+    "plusieurs auteurs",
+    "un narrateur personnage",
+    "un point de vue omniscient obligatoire"
+   ],
+   "answer": 2,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Le « je » désigne un narrateur qui est aussi personnage.",
+   "id": "4e-francais-texte-narratif-02",
+   "tier": "application",
+   "lesson": "4e-francais-texte-narratif",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "truefalse",
+   "prompt": "Vrai ou faux : l'élément perturbateur vient rompre l'équilibre de la situation initiale.",
+   "answer": true,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Il déclenche les péripéties.",
+   "id": "4e-francais-texte-narratif-03",
+   "tier": "application",
+   "lesson": "4e-francais-texte-narratif",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "matching",
+   "prompt": "Associe chaque phrase à l'étape du schéma narratif.",
+   "pairs": [
+    [
+     "Un matin calme, Amina allait au marché.",
+     "situation initiale"
+    ],
+    [
+     "Soudain, son panier disparut.",
+     "élément perturbateur"
+    ],
+    [
+     "Elle retrouva enfin son panier.",
+     "dénouement"
+    ],
+    [
+     "Depuis, elle ne le quitte plus des yeux.",
+     "situation finale"
+    ]
+   ],
+   "points": 2,
+   "difficulty": 2,
+   "explanation": "Chaque phrase joue un rôle précis dans l'histoire.",
+   "id": "4e-francais-texte-narratif-04",
+   "tier": "approfondissement",
+   "lesson": "4e-francais-texte-narratif",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Dans « Ils entrèrent ; il faisait sombre », quel verbe exprime le décor ?",
+   "choices": [
+    "entrèrent",
+    "ils",
+    "sombre",
+    "faisait"
+   ],
+   "answer": 3,
+   "points": 1,
+   "difficulty": 2,
+   "explanation": "L'imparfait « faisait » décrit l'ambiance ; « entrèrent » (passé simple) est l'action.",
+   "id": "4e-francais-texte-narratif-05",
+   "tier": "approfondissement",
+   "lesson": "4e-francais-texte-narratif",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "problem",
+   "prompt": "Texte : « Mballa gardait ses chèvres près de la rivière. Soudain, un cri retentit. Il courut vers le bruit et trouva un veau coincé entre deux rochers. Il l'aida à sortir, puis le ramena à son propriétaire. »",
+   "parts": [
+    {
+     "kind": "mcq",
+     "prompt": "Quel est l'élément perturbateur ?",
+     "choices": [
+      "le cri qui retentit",
+      "Mballa garde ses chèvres",
+      "le veau est ramené",
+      "la rivière"
+     ],
+     "answer": 0,
+     "points": 1,
+     "difficulty": 1,
+     "explanation": "Le cri rompt le calme de la situation initiale.",
+     "id": "4e-francais-texte-narratif-06-a"
+    },
+    {
+     "kind": "mcq",
+     "prompt": "Quel est le temps des verbes d'action (courut, trouva) ?",
+     "choices": [
+      "le passé simple",
+      "l'imparfait",
+      "le futur",
+      "le conditionnel"
+     ],
+     "answer": 0,
+     "points": 1,
+     "difficulty": 1,
+     "explanation": "Ce sont des actions successives.",
+     "id": "4e-francais-texte-narratif-06-b"
+    },
+    {
+     "kind": "open",
+     "prompt": "Écris la situation finale en deux phrases.",
+     "model": "Le propriétaire remercia Mballa. Le soir, le veau retrouva sa mère et Mballa rentra heureux au village.",
+     "rubric": [
+      "Cohérence avec l'histoire : 1 point.",
+      "Temps du récit corrects : 1 point."
+     ],
+     "points": 2,
+     "difficulty": 2,
+     "explanation": "Voir le corrigé modèle et les critères de notation.",
+     "id": "4e-francais-texte-narratif-06-c"
+    }
+   ],
+   "difficulty": 2,
+   "id": "4e-francais-texte-narratif-06",
+   "tier": "examen",
+   "lesson": "4e-francais-texte-narratif",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Combien d'étapes compte le schéma narratif présenté ici ?",
+   "choices": [
+    "cinq",
+    "trois",
+    "quatre",
+    "sept"
+   ],
+   "answer": 0,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Situation initiale, élément perturbateur, péripéties, dénouement, situation finale.",
+   "id": "4e-francais-texte-narratif-q1",
+   "tier": "autoeval",
+   "lesson": "4e-francais-texte-narratif",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Les péripéties sont :",
+   "choices": [
+    "la description du décor",
+    "la morale finale",
+    "les événements qui s'enchaînent après l'élément perturbateur",
+    "le titre du récit"
+   ],
+   "answer": 2,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Elles font avancer l'action.",
+   "id": "4e-francais-texte-narratif-q2",
+   "tier": "autoeval",
+   "lesson": "4e-francais-texte-narratif",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Dans un récit à la 3e personne, le narrateur est :",
+   "choices": [
+    "toujours le héros",
+    "toujours l'auteur réel",
+    "inexistant",
+    "extérieur à l'histoire"
+   ],
+   "answer": 3,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Il raconte sans dire « je ».",
+   "id": "4e-francais-texte-narratif-q3",
+   "tier": "autoeval",
+   "lesson": "4e-francais-texte-narratif",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Quel temps sert surtout à décrire l'arrière-plan d'un récit ?",
+   "choices": [
+    "l'imparfait",
+    "le passé simple",
+    "le futur",
+    "l'impératif"
+   ],
+   "answer": 0,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "L'imparfait décrit et exprime la durée.",
+   "id": "4e-francais-texte-narratif-q4",
+   "tier": "autoeval",
+   "lesson": "4e-francais-texte-narratif",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Le dénouement :",
+   "choices": [
+    "présente les personnages",
+    "lance le conflit",
+    "résout le problème posé",
+    "répète le début"
+   ],
+   "answer": 2,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Il apporte la solution ou la fin de l'action.",
+   "id": "4e-francais-texte-narratif-q5",
+   "tier": "autoeval",
+   "lesson": "4e-francais-texte-narratif",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Quel temps domine habituellement dans une description au passé ?",
+   "choices": [
+    "le passé simple",
+    "le futur antérieur",
+    "l'imparfait",
+    "l'impératif"
+   ],
+   "answer": 2,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "L'imparfait installe un décor sans faire avancer l'action.",
+   "id": "4e-francais-texte-descriptif-01",
+   "tier": "application",
+   "lesson": "4e-francais-texte-descriptif",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Quel groupe est un indicateur de lieu ?",
+   "choices": [
+    "hier soir",
+    "avec joie",
+    "au fond de la cour",
+    "parce que"
+   ],
+   "answer": 2,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "« Au fond de la cour » situe dans l'espace.",
+   "id": "4e-francais-texte-descriptif-02",
+   "tier": "application",
+   "lesson": "4e-francais-texte-descriptif",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "truefalse",
+   "prompt": "Vrai ou faux : décrire un lieu peut faire appel à l'odorat et à l'ouïe.",
+   "answer": true,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Une bonne description sollicite plusieurs sens.",
+   "id": "4e-francais-texte-descriptif-03",
+   "tier": "application",
+   "lesson": "4e-francais-texte-descriptif",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Quelle phrase contient une comparaison ?",
+   "choices": [
+    "Ses mains étaient rugueuses comme l'écorce.",
+    "Ses mains étaient rugueuses.",
+    "Il regarda ses mains.",
+    "Ses mains tremblaient."
+   ],
+   "answer": 0,
+   "points": 1,
+   "difficulty": 2,
+   "explanation": "L'outil « comme » relie les mains et l'écorce.",
+   "id": "4e-francais-texte-descriptif-04",
+   "tier": "approfondissement",
+   "lesson": "4e-francais-texte-descriptif",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "matching",
+   "prompt": "Associe chaque notation au sens qu'elle évoque.",
+   "pairs": [
+    [
+     "une odeur de pain chaud",
+     "l'odorat"
+    ],
+    [
+     "un grondement lointain",
+     "l'ouïe"
+    ],
+    [
+     "un sol brûlant sous les pieds",
+     "le toucher"
+    ],
+    [
+     "des éclats rouges sur le mur",
+     "la vue"
+    ]
+   ],
+   "points": 2,
+   "difficulty": 2,
+   "explanation": "Chaque détail s'adresse à un sens.",
+   "id": "4e-francais-texte-descriptif-05",
+   "tier": "approfondissement",
+   "lesson": "4e-francais-texte-descriptif",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "open",
+   "prompt": "Décris en une dizaine de lignes ta salle de classe (ou la cour de ton école) au début de la journée. Organise ta description (un ordre), utilise l'imparfait, au moins trois adjectifs précis et une comparaison.",
+   "model": "Notre salle de classe se trouvait au bout du couloir. Près de la porte, les bancs bleus étaient alignés comme des soldats. Au fond, le tableau noir, encore couvert de traces blanches, gardait le souvenir de la veille. À droite, de grandes fenêtres laissaient entrer une lumière dorée. Une odeur de craie flottait dans l'air tiède. Au premier rang, le banc de Nkeng était déjà occupé.",
+   "rubric": [
+    "Ordre clair (gauche/droite, proche/loin) et indicateurs de lieu : 1,5 point.",
+    "Imparfait maîtrisé : 1 point.",
+    "Adjectifs précis et une comparaison : 1,5 point.",
+    "Orthographe et ponctuation : 1 point."
+   ],
+   "points": 5,
+   "difficulty": 2,
+   "explanation": "Voir le corrigé modèle et les critères de notation.",
+   "method": "Fais d'abord un petit plan : entrée, milieu, fond.",
+   "id": "4e-francais-texte-descriptif-06",
+   "tier": "examen",
+   "lesson": "4e-francais-texte-descriptif",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "L'ordre « du proche au lointain » sert à :",
+   "choices": [
+    "conjuguer un verbe",
+    "organiser une description",
+    "rédiger une lettre",
+    "ponctuer un dialogue"
+   ],
+   "answer": 1,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Il guide le regard du lecteur.",
+   "id": "4e-francais-texte-descriptif-q1",
+   "tier": "autoeval",
+   "lesson": "4e-francais-texte-descriptif",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Un portrait décrit :",
+   "choices": [
+    "l'apparence et le caractère d'une personne",
+    "seulement un lieu",
+    "une suite d'événements",
+    "un raisonnement"
+   ],
+   "answer": 0,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Il associe physique et morale.",
+   "id": "4e-francais-texte-descriptif-q2",
+   "tier": "autoeval",
+   "lesson": "4e-francais-texte-descriptif",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Quel mot est le plus précis pour décrire un chemin ?",
+   "choices": [
+    "bon",
+    "beau",
+    "grand",
+    "sinueux"
+   ],
+   "answer": 3,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "« Sinueux » donne une information précise sur la forme.",
+   "id": "4e-francais-texte-descriptif-q3",
+   "tier": "autoeval",
+   "lesson": "4e-francais-texte-descriptif",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Quel verbe est le plus expressif que « il y avait » dans « Une case ... au bord du chemin » ?",
+   "choices": [
+    "était",
+    "se dressait",
+    "avait",
+    "faisait"
+   ],
+   "answer": 1,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Se dresser donne l'image d'une case debout.",
+   "id": "4e-francais-texte-descriptif-q4",
+   "tier": "autoeval",
+   "lesson": "4e-francais-texte-descriptif",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Dans une description, les sens utiles sont :",
+   "choices": [
+    "uniquement la vue",
+    "la vue, l'odorat, l'ouïe, le toucher, le goût",
+    "seulement l'ouïe",
+    "aucun"
+   ],
+   "answer": 1,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Plusieurs sens rendent la description vivante.",
+   "id": "4e-francais-texte-descriptif-q5",
+   "tier": "autoeval",
+   "lesson": "4e-francais-texte-descriptif",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Quelle est la fonction de « Je pense que » dans un texte argumentatif ?",
+   "choices": [
+    "présenter la thèse",
+    "présenter un exemple",
+    "conclure le texte",
+    "décrire un lieu"
+   ],
+   "answer": 0,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Cette formule introduit l'opinion défendue.",
+   "id": "4e-francais-texte-argumentatif-01",
+   "tier": "application",
+   "lesson": "4e-francais-texte-argumentatif",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Quel connecteur exprime la conséquence ?",
+   "choices": [
+    "donc",
+    "mais",
+    "par exemple",
+    "d'abord"
+   ],
+   "answer": 0,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "« Donc » introduit le résultat d'un raisonnement.",
+   "id": "4e-francais-texte-argumentatif-02",
+   "tier": "application",
+   "lesson": "4e-francais-texte-argumentatif",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "truefalse",
+   "prompt": "Vrai ou faux : un argument est une raison qui appuie la thèse.",
+   "answer": true,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "On défend une thèse en donnant des raisons.",
+   "id": "4e-francais-texte-argumentatif-03",
+   "tier": "application",
+   "lesson": "4e-francais-texte-argumentatif",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "matching",
+   "prompt": "Associe chaque connecteur à son rôle.",
+   "pairs": [
+    [
+     "d'abord",
+     "ordre"
+    ],
+    [
+     "car",
+     "cause"
+    ],
+    [
+     "mais",
+     "opposition"
+    ],
+    [
+     "en somme",
+     "conclusion"
+    ]
+   ],
+   "points": 2,
+   "difficulty": 2,
+   "explanation": "Le connecteur indique le lien logique entre deux idées.",
+   "id": "4e-francais-texte-argumentatif-04",
+   "tier": "approfondissement",
+   "lesson": "4e-francais-texte-argumentatif",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Quelle phrase est un argument (et non un exemple) ?",
+   "choices": [
+    "Hier, Boris a marqué un but pour son équipe.",
+    "Je m'appelle Boris.",
+    "Il y avait un match samedi.",
+    "Le sport développe l'esprit d'équipe."
+   ],
+   "answer": 3,
+   "points": 1,
+   "difficulty": 2,
+   "explanation": "La première énonce une raison générale ; les autres relatent des faits particuliers.",
+   "id": "4e-francais-texte-argumentatif-05",
+   "tier": "approfondissement",
+   "lesson": "4e-francais-texte-argumentatif",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "open",
+   "prompt": "Défends l'idée suivante en une quinzaine de lignes : « Les élèves devraient apprendre à cultiver un jardin à l'école. » Donne ta thèse, deux arguments avec un exemple chacun, une conclusion, et au moins trois connecteurs.",
+   "model": "Je pense que les élèves devraient apprendre à cultiver un jardin à l'école. D'abord, le jardinage apprend la patience : il faut attendre la récolte. Par exemple, ma classe a semé du maïs et chacun a surveillé son rang pendant des semaines. Ensuite, il apprend le travail en équipe, car tout le monde doit arroser et désherber. Ainsi, Mballa et Nkeng se partageaient les tâches. En somme, un jardin scolaire forme des élèves responsables.",
+   "rubric": [
+    "Thèse claire : 1 point.",
+    "Deux arguments distincts, chacun avec un exemple : 2 points.",
+    "Au moins trois connecteurs bien choisis : 1 point.",
+    "Conclusion : 0,5 point.",
+    "Langue : 0,5 point."
+   ],
+   "points": 5,
+   "difficulty": 2,
+   "explanation": "Voir le corrigé modèle et les critères de notation.",
+   "id": "4e-francais-texte-argumentatif-06",
+   "tier": "examen",
+   "lesson": "4e-francais-texte-argumentatif",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Un texte argumentatif a pour but de :",
+   "choices": [
+    "décrire un paysage",
+    "raconter une histoire",
+    "convaincre",
+    "donner une recette"
+   ],
+   "answer": 2,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Il défend une thèse.",
+   "id": "4e-francais-texte-argumentatif-q1",
+   "tier": "autoeval",
+   "lesson": "4e-francais-texte-argumentatif",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "« Par exemple » introduit :",
+   "choices": [
+    "la conclusion",
+    "une opposition",
+    "la thèse",
+    "un exemple"
+   ],
+   "answer": 3,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Il annonce une illustration de l'argument.",
+   "id": "4e-francais-texte-argumentatif-q2",
+   "tier": "autoeval",
+   "lesson": "4e-francais-texte-argumentatif",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Quel connecteur marque l'opposition ?",
+   "choices": [
+    "ensuite",
+    "ainsi",
+    "enfin",
+    "cependant"
+   ],
+   "answer": 3,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "« Cependant » oppose deux idées.",
+   "id": "4e-francais-texte-argumentatif-q3",
+   "tier": "autoeval",
+   "lesson": "4e-francais-texte-argumentatif",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "La thèse est :",
+   "choices": [
+    "l'opinion défendue par l'auteur",
+    "un exemple précis",
+    "une suite d'actions",
+    "une description"
+   ],
+   "answer": 0,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Les arguments la soutiennent.",
+   "id": "4e-francais-texte-argumentatif-q4",
+   "tier": "autoeval",
+   "lesson": "4e-francais-texte-argumentatif",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Quel temps domine dans un texte argumentatif ?",
+   "choices": [
+    "le passé simple",
+    "l'imparfait",
+    "le présent",
+    "le futur antérieur"
+   ],
+   "answer": 2,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "On exprime une opinion actuelle, avec des vérités générales.",
+   "id": "4e-francais-texte-argumentatif-q5",
+   "tier": "autoeval",
+   "lesson": "4e-francais-texte-argumentatif",
+   "source": "Exercice original, rédigé pour CastBridge"
+  }
+ ]
+}

@@ -1,0 +1,1554 @@
+{
+ "chapter": "bepc-francais-langue",
+ "lessons": [
+  {
+   "id": "bepc-francais-conjugaison-revision",
+   "title": "Conjugaison de révision : temps composés, conditionnel passé, subjonctif, impératif",
+   "minutes": 35,
+   "programRef": "3e — Conjugaison : révision des temps et des modes (à vérifier sur le texte officiel)",
+   "status": "draft",
+   "author": "CastBridge (brouillon IA, bêta)",
+   "source": "Rédaction originale d'après le programme MINESEC ; à relire par un enseignant",
+   "objectives": [
+    "Former le passé composé, le plus-que-parfait, le futur antérieur et le conditionnel passé.",
+    "Employer le subjonctif et l'impératif.",
+    "Respecter la concordance dans « si … »."
+   ],
+   "prerequisites": [],
+   "exercises": [
+    "bepc-francais-conjugaison-revision-01",
+    "bepc-francais-conjugaison-revision-02",
+    "bepc-francais-conjugaison-revision-03",
+    "bepc-francais-conjugaison-revision-04",
+    "bepc-francais-conjugaison-revision-05",
+    "bepc-francais-conjugaison-revision-06"
+   ],
+   "selfCheck": [
+    "bepc-francais-conjugaison-revision-q1",
+    "bepc-francais-conjugaison-revision-q2",
+    "bepc-francais-conjugaison-revision-q3",
+    "bepc-francais-conjugaison-revision-q4",
+    "bepc-francais-conjugaison-revision-q5"
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "formule",
+     "title": "Les temps composés",
+     "md": "Un temps composé = **auxiliaire** (avoir ou être) conjugué à un temps simple + **participe passé**.\n- Passé composé : *il a chanté, elle est partie* (présent + pp).\n- Plus-que-parfait : *il avait chanté* (imparfait + pp) : action antérieure à un passé.\n- Futur antérieur : *il aura chanté* (futur + pp) : action terminée avant une autre au futur.\n- Conditionnel passé : *il aurait chanté* (conditionnel + pp)."
+    },
+    {
+     "type": "illustration",
+     "caption": "Formation des temps composés.",
+     "alt": "Un tableau de quatre temps composés avec le temps de l'auxiliaire et un exemple avec le verbe partir.",
+     "figure": {
+      "kind": "shapes",
+      "w": 480,
+      "h": 190,
+      "items": [
+       {
+        "t": "rect",
+        "x": 10,
+        "y": 10,
+        "w": 150,
+        "h": 34,
+        "fill": "lightblue",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 85.0,
+        "y": 32.0,
+        "text": "Temps",
+        "size": 14,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 160,
+        "y": 10,
+        "w": 120,
+        "h": 34,
+        "fill": "lightblue",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 220.0,
+        "y": 32.0,
+        "text": "Auxiliaire +",
+        "size": 14,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 280,
+        "y": 10,
+        "w": 190,
+        "h": 34,
+        "fill": "lightblue",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 375.0,
+        "y": 32.0,
+        "text": "Exemple (partir)",
+        "size": 14,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 10,
+        "y": 44,
+        "w": 150,
+        "h": 34,
+        "fill": "lightyellow",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 85.0,
+        "y": 66.0,
+        "text": "passé composé",
+        "size": 14,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "rect",
+        "x": 160,
+        "y": 44,
+        "w": 120,
+        "h": 34,
+        "fill": "lightyellow",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 220.0,
+        "y": 66.0,
+        "text": "présent",
+        "size": 14,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "rect",
+        "x": 280,
+        "y": 44,
+        "w": 190,
+        "h": 34,
+        "fill": "lightyellow",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 375.0,
+        "y": 66.0,
+        "text": "elle est partie",
+        "size": 14,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "rect",
+        "x": 10,
+        "y": 78,
+        "w": 150,
+        "h": 34,
+        "fill": "lightyellow",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 85.0,
+        "y": 100.0,
+        "text": "plus-que-parfait",
+        "size": 14,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "rect",
+        "x": 160,
+        "y": 78,
+        "w": 120,
+        "h": 34,
+        "fill": "lightyellow",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 220.0,
+        "y": 100.0,
+        "text": "imparfait",
+        "size": 14,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "rect",
+        "x": 280,
+        "y": 78,
+        "w": 190,
+        "h": 34,
+        "fill": "lightyellow",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 375.0,
+        "y": 100.0,
+        "text": "elle était partie",
+        "size": 14,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "rect",
+        "x": 10,
+        "y": 112,
+        "w": 150,
+        "h": 34,
+        "fill": "lightyellow",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 85.0,
+        "y": 134.0,
+        "text": "futur antérieur",
+        "size": 14,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "rect",
+        "x": 160,
+        "y": 112,
+        "w": 120,
+        "h": 34,
+        "fill": "lightyellow",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 220.0,
+        "y": 134.0,
+        "text": "futur",
+        "size": 14,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "rect",
+        "x": 280,
+        "y": 112,
+        "w": 190,
+        "h": 34,
+        "fill": "lightyellow",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 375.0,
+        "y": 134.0,
+        "text": "elle sera partie",
+        "size": 14,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "rect",
+        "x": 10,
+        "y": 146,
+        "w": 150,
+        "h": 34,
+        "fill": "lightyellow",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 85.0,
+        "y": 168.0,
+        "text": "conditionnel passé",
+        "size": 14,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "rect",
+        "x": 160,
+        "y": 146,
+        "w": 120,
+        "h": 34,
+        "fill": "lightyellow",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 220.0,
+        "y": 168.0,
+        "text": "conditionnel",
+        "size": 14,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "rect",
+        "x": 280,
+        "y": 146,
+        "w": 190,
+        "h": 34,
+        "fill": "lightyellow",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 375.0,
+        "y": 168.0,
+        "text": "elle serait partie",
+        "size": 14,
+        "color": "ink",
+        "anchor": "middle"
+       }
+      ]
+     }
+    },
+    {
+     "type": "key",
+     "style": "retenir",
+     "title": "Subjonctif, impératif, concordance",
+     "md": "- **Subjonctif passé** : que + subjonctif présent de l'auxiliaire + pp (*bien qu'il soit parti*).\n- **Impératif** : sans sujet (*Écoute ! Écoutons ! Écoutez !*). Au 1er groupe et pour aller, la 2e personne du singulier n'a pas de s : *chante, va* (mais *vas-y*).\n- **Hypothèse** : si + présent → futur ; si + imparfait → conditionnel présent ; si + plus-que-parfait → conditionnel passé (*Si j'avais su, je serais venu.*)."
+    },
+    {
+     "type": "example",
+     "title": "Exemple 1 : plus-que-parfait",
+     "statement": "Complète : « Quand nous sommes arrivés, le car (partir) déjà. »",
+     "steps": [
+      {
+       "md": "L'action de partir est antérieure à celle d'arriver (passé composé)."
+      },
+      {
+       "md": "On emploie le plus-que-parfait : imparfait de être + participe passé accordé avec « le car » (masculin singulier)."
+      }
+     ],
+     "answer": "**était parti** : « le car était déjà parti »."
+    },
+    {
+     "type": "example",
+     "title": "Exemple 2 : hypothèse irréelle",
+     "statement": "Complète : « Si tu (venir) hier, tu (voir) le spectacle. »",
+     "steps": [
+      {
+       "md": "Hypothèse irréelle du passé : si + plus-que-parfait."
+      },
+      {
+       "md": "La principale prend le conditionnel passé."
+      }
+     ],
+     "answer": "**Si tu étais venu hier, tu aurais vu le spectacle.**"
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Erreurs fréquentes",
+     "md": "- Oublier de choisir le bon auxiliaire (*je suis allé*, *j'ai mangé*).\n- Écrire « si j'aurais su » : jamais de conditionnel après « si » d'hypothèse.\n- Mettre un « s » à « chante » (impératif 2e personne du singulier, 1er groupe).\n- Confondre futur (-rai) et conditionnel (-rais)."
+    }
+   ],
+   "reviewNotes": [
+    "Révision large ; vérifier la liste des temps exigés en 3e (subjonctif imparfait et plus-que-parfait non traités)."
+   ]
+  },
+  {
+   "id": "bepc-francais-orthographe-dictee",
+   "title": "Orthographe : homophones, accords et méthode de la dictée",
+   "minutes": 35,
+   "programRef": "3e — Orthographe : homophones grammaticaux, accords, dictée (à vérifier sur le texte officiel)",
+   "status": "draft",
+   "author": "CastBridge (brouillon IA, bêta)",
+   "source": "Rédaction originale d'après le programme MINESEC ; à relire par un enseignant",
+   "objectives": [
+    "Distinguer les homophones courants.",
+    "Appliquer les accords (sujet-verbe, adjectifs, participes).",
+    "Suivre une méthode pour réussir une dictée."
+   ],
+   "prerequisites": [],
+   "exercises": [
+    "bepc-francais-orthographe-dictee-01",
+    "bepc-francais-orthographe-dictee-02",
+    "bepc-francais-orthographe-dictee-03",
+    "bepc-francais-orthographe-dictee-04",
+    "bepc-francais-orthographe-dictee-05",
+    "bepc-francais-orthographe-dictee-06"
+   ],
+   "selfCheck": [
+    "bepc-francais-orthographe-dictee-q1",
+    "bepc-francais-orthographe-dictee-q2",
+    "bepc-francais-orthographe-dictee-q3",
+    "bepc-francais-orthographe-dictee-q4",
+    "bepc-francais-orthographe-dictee-q5"
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "retenir",
+     "title": "Homophones à maîtriser",
+     "md": "- **a / à** : a = avoir (il **a**), à = préposition. Test : « avait ».\n- **et / est** : est = être. Test : « était ».\n- **on / ont** : ont = avoir. Test : « avaient ».\n- **son / sont**, **ce / se**, **ces / ses / c'est / s'est**, **ou / où**, **la / l'a / là**, **leur / leurs**, **quel(le) / qu'elle**.\n- **Test général** : remplace par un autre temps ou un autre mot (on → il, ses → mes, ou → ou bien)."
+    },
+    {
+     "type": "key",
+     "style": "retenir",
+     "title": "Accords essentiels",
+     "md": "- Le verbe s'accorde avec le **sujet**, même éloigné : *Les élèves de la classe, qui avaient chaud, ouvrirent les fenêtres.*\n- L'adjectif s'accorde avec le nom. *des cases anciennes.* Les adjectifs de couleur composés restent invariables : *des yeux bleu clair.*\n- Participe passé : voir la fiche d'accord de 4e.\n- Pluriels : -al → -aux (*un cheval, des chevaux*), mais *des festivals, des bals* ; -ail → -ails (*des détails*) avec exceptions (*travaux, vitraux*)."
+    },
+    {
+     "type": "key",
+     "style": "methode",
+     "title": "Réussir une dictée",
+     "md": "1. Écoute le texte en entier.\n2. Pendant la dictée, écris lisiblement et relis chaque groupe.\n3. Repère le **sujet** de chaque verbe et accorde.\n4. Hésitation : applique les tests d'homophones.\n5. Relis deux fois à la fin : accords, ponctuation, majuscules, accents."
+    },
+    {
+     "type": "example",
+     "title": "Exemple 1 : homophones",
+     "statement": "Choisis : « Ils (ont / on) (a / à) manger. »",
+     "steps": [
+      {
+       "md": "« ont » = avoir (test : avaient) : « Ils ont »."
+      },
+      {
+       "md": "« à manger » : préposition (on ne peut pas dire avait)."
+      }
+     ],
+     "answer": "**Ils ont à manger.**"
+    },
+    {
+     "type": "example",
+     "title": "Exemple 2 : accords",
+     "statement": "Écris correctement : « Les mangues que Boris a (cueillir), (mûr), sentent bon. »",
+     "steps": [
+      {
+       "md": "COD « que » = mangues, placé avant : cueillies (fém. pluriel)."
+      },
+      {
+       "md": "L'adjectif « mûr » se rapporte à « mangues » : mûres."
+      }
+     ],
+     "answer": "**Les mangues que Boris a cueillies, mûres, sentent bon.**"
+    },
+    {
+     "type": "illustration",
+     "caption": "Le test « avait » : seul « a » verbe peut être remplacé.",
+     "alt": "Trois cases : il a (correct), il à (incorrect), à Douala (préposition).",
+     "figure": {
+      "kind": "shapes",
+      "w": 450,
+      "h": 119,
+      "items": [
+       {
+        "t": "rect",
+        "x": 10.0,
+        "y": 15,
+        "w": 124.66666666666667,
+        "h": 44,
+        "fill": "lightgreen",
+        "stroke": "ink",
+        "width": 2,
+        "radius": 8
+       },
+       {
+        "t": "text",
+        "x": 72.33333333333334,
+        "y": 43,
+        "text": "il a",
+        "size": 14,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "line",
+        "x1": 137.66666666666669,
+        "y1": 37,
+        "x2": 159.66666666666669,
+        "y2": 37,
+        "color": "ink",
+        "width": 2,
+        "arrow": "end"
+       },
+       {
+        "t": "text",
+        "x": 72.33333333333334,
+        "y": 80,
+        "text": "avait : OK",
+        "size": 14,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "rect",
+        "x": 162.66666666666669,
+        "y": 15,
+        "w": 124.66666666666667,
+        "h": 44,
+        "fill": "lightorange",
+        "stroke": "ink",
+        "width": 2,
+        "radius": 8
+       },
+       {
+        "t": "text",
+        "x": 225.00000000000003,
+        "y": 43,
+        "text": "il à",
+        "size": 14,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "line",
+        "x1": 290.33333333333337,
+        "y1": 37,
+        "x2": 312.33333333333337,
+        "y2": 37,
+        "color": "ink",
+        "width": 2,
+        "arrow": "end"
+       },
+       {
+        "t": "text",
+        "x": 225.00000000000003,
+        "y": 80,
+        "text": "impossible",
+        "size": 14,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "rect",
+        "x": 315.33333333333337,
+        "y": 15,
+        "w": 124.66666666666667,
+        "h": 44,
+        "fill": "lightgreen",
+        "stroke": "ink",
+        "width": 2,
+        "radius": 8
+       },
+       {
+        "t": "text",
+        "x": 377.6666666666667,
+        "y": 43,
+        "text": "à Douala",
+        "size": 14,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 377.6666666666667,
+        "y": 80,
+        "text": "préposition",
+        "size": 14,
+        "color": "ink",
+        "anchor": "middle"
+       }
+      ]
+     }
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Erreurs fréquentes",
+     "md": "- Écrire « il à » à la place de « il a ».\n- Oublier le « nt » des verbes de la 3e personne du pluriel (« ils chantent »).\n- Confondre « leur » (devant un verbe, invariable) et « leurs » (devant un nom pluriel).\n- Oublier les accents (été, à, où) ou la majuscule en début de phrase."
+    }
+   ],
+   "reviewNotes": [
+    "Le texte de dictée est original ; la forme exacte de la dictée au BEPC (durée, barème) est à vérifier."
+   ]
+  },
+  {
+   "id": "bepc-francais-vocabulaire-sens",
+   "title": "Vocabulaire : sens propre et figuré, polysémie, niveaux de langue, racines",
+   "minutes": 30,
+   "programRef": "3e — Vocabulaire : sens des mots, niveaux de langue, formation des mots (à vérifier sur le texte officiel)",
+   "status": "draft",
+   "author": "CastBridge (brouillon IA, bêta)",
+   "source": "Rédaction originale d'après le programme MINESEC ; à relire par un enseignant",
+   "objectives": [
+    "Distinguer sens propre et sens figuré, expliquer un mot dans son contexte.",
+    "Identifier les niveaux de langue.",
+    "Utiliser quelques racines grecques et latines."
+   ],
+   "prerequisites": [],
+   "exercises": [
+    "bepc-francais-vocabulaire-sens-01",
+    "bepc-francais-vocabulaire-sens-02",
+    "bepc-francais-vocabulaire-sens-03",
+    "bepc-francais-vocabulaire-sens-04",
+    "bepc-francais-vocabulaire-sens-05",
+    "bepc-francais-vocabulaire-sens-06"
+   ],
+   "selfCheck": [
+    "bepc-francais-vocabulaire-sens-q1",
+    "bepc-francais-vocabulaire-sens-q2",
+    "bepc-francais-vocabulaire-sens-q3",
+    "bepc-francais-vocabulaire-sens-q4",
+    "bepc-francais-vocabulaire-sens-q5"
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Sens propre, sens figuré, polysémie",
+     "md": "Le **sens propre** est le sens premier d'un mot (*une branche d'arbre*). Le **sens figuré** est un sens image (*une branche de la famille*). Un mot **polysémique** a plusieurs sens : on trouve le bon sens grâce au **contexte** (*pied de table, pied du lit, au pied de la colline*)."
+    },
+    {
+     "type": "key",
+     "style": "retenir",
+     "title": "Niveaux de langue",
+     "md": "- **Familier** : parler entre proches (*bouquin, boulot*).\n- **Courant** : usage général (*livre, travail*).\n- **Soutenu** : écrit soigné, discours (*ouvrage, labeur*).\nOn choisit le niveau selon le destinataire et la situation."
+    },
+    {
+     "type": "key",
+     "style": "retenir",
+     "title": "Racines grecques et latines",
+     "md": "- **télé-** (loin) : téléphone, télévision. **graph-** (écrire) : photographie. **-logie** (étude) : biologie, géologie. **phone** (voix, son) : micro-phone.\n- **aqua** (eau) : aquatique ; **terra** (terre) : terrestre ; **dictare** (dicter) : dictée.\n- Les **paronymes** se ressemblent mais n'ont pas le même sens : *éminent / imminent*, *conjecture / conjoncture*."
+    },
+    {
+     "type": "illustration",
+     "caption": "Un même objet, trois niveaux de langue.",
+     "alt": "Un tableau avec trois colonnes (familier, courant, soutenu) et trois lignes de mots.",
+     "figure": {
+      "kind": "shapes",
+      "w": 440,
+      "h": 156,
+      "items": [
+       {
+        "t": "rect",
+        "x": 10,
+        "y": 10,
+        "w": 140,
+        "h": 34,
+        "fill": "lightblue",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 80.0,
+        "y": 32.0,
+        "text": "Familier",
+        "size": 14,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 150,
+        "y": 10,
+        "w": 140,
+        "h": 34,
+        "fill": "lightblue",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 220.0,
+        "y": 32.0,
+        "text": "Courant",
+        "size": 14,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 290,
+        "y": 10,
+        "w": 140,
+        "h": 34,
+        "fill": "lightblue",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 360.0,
+        "y": 32.0,
+        "text": "Soutenu",
+        "size": 14,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 10,
+        "y": 44,
+        "w": 140,
+        "h": 34,
+        "fill": "lightyellow",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 80.0,
+        "y": 66.0,
+        "text": "bouquin",
+        "size": 14,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "rect",
+        "x": 150,
+        "y": 44,
+        "w": 140,
+        "h": 34,
+        "fill": "lightyellow",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 220.0,
+        "y": 66.0,
+        "text": "livre",
+        "size": 14,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "rect",
+        "x": 290,
+        "y": 44,
+        "w": 140,
+        "h": 34,
+        "fill": "lightyellow",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 360.0,
+        "y": 66.0,
+        "text": "ouvrage",
+        "size": 14,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "rect",
+        "x": 10,
+        "y": 78,
+        "w": 140,
+        "h": 34,
+        "fill": "lightyellow",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 80.0,
+        "y": 100.0,
+        "text": "boulot",
+        "size": 14,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "rect",
+        "x": 150,
+        "y": 78,
+        "w": 140,
+        "h": 34,
+        "fill": "lightyellow",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 220.0,
+        "y": 100.0,
+        "text": "travail",
+        "size": 14,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "rect",
+        "x": 290,
+        "y": 78,
+        "w": 140,
+        "h": 34,
+        "fill": "lightyellow",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 360.0,
+        "y": 100.0,
+        "text": "labeur",
+        "size": 14,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "rect",
+        "x": 10,
+        "y": 112,
+        "w": 140,
+        "h": 34,
+        "fill": "lightyellow",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 80.0,
+        "y": 134.0,
+        "text": "gosse",
+        "size": 14,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "rect",
+        "x": 150,
+        "y": 112,
+        "w": 140,
+        "h": 34,
+        "fill": "lightyellow",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 220.0,
+        "y": 134.0,
+        "text": "enfant",
+        "size": 14,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "rect",
+        "x": 290,
+        "y": 112,
+        "w": 140,
+        "h": 34,
+        "fill": "lightyellow",
+        "stroke": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 360.0,
+        "y": 134.0,
+        "text": "bambin",
+        "size": 14,
+        "color": "ink",
+        "anchor": "middle"
+       }
+      ]
+     }
+    },
+    {
+     "type": "example",
+     "title": "Exemple 1 : sens propre ou figuré",
+     "statement": "« Ce professeur a un cœur d'or. » Le mot « or » est-il employé au sens propre ?",
+     "steps": [
+      {
+       "md": "Un cœur ne peut pas être en or véritable : c'est une image."
+      },
+      {
+       "md": "L'expression signifie « grande bonté »."
+      }
+     ],
+     "answer": "**Non : sens figuré (très généreux).**"
+    },
+    {
+     "type": "example",
+     "title": "Exemple 2 : racines",
+     "statement": "Que signifie « télégraphe » d'après ses racines ?",
+     "steps": [
+      {
+       "md": "télé- = loin ; graph- = écrire."
+      },
+      {
+       "md": "Le télégraphe permet d'écrire à distance."
+      }
+     ],
+     "answer": "**Écrire à distance.**"
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Erreurs fréquentes",
+     "md": "- Choisir le sens qu'on connaît le mieux sans regarder le contexte.\n- Employer un mot familier à l'écrit dans une lettre formelle.\n- Confondre paronymes (*éminent* / *imminent*).\n- Croire qu'un synonyme peut toujours remplacer un mot : la nuance compte."
+    }
+   ],
+   "reviewNotes": [
+    "Les racines grecques et latines citées sont classiques (télé, graph-, logie, aqua) ; vérifier celles du programme.",
+    "Les mots du registre familier varient selon les régions ; vérifier les exemples avec un enseignant local."
+   ]
+  }
+ ],
+ "exercises": [
+  {
+   "kind": "mcq",
+   "prompt": "Quel est le plus-que-parfait de « finir » à la 3e personne du singulier ?",
+   "choices": [
+    "il avait fini",
+    "il a fini",
+    "il aura fini",
+    "il aurait fini"
+   ],
+   "answer": 0,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Imparfait de avoir + participe passé.",
+   "id": "bepc-francais-conjugaison-revision-01",
+   "tier": "application",
+   "lesson": "bepc-francais-conjugaison-revision",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Complète à l'impératif : « (Écouter, tu) bien la leçon. »",
+   "choices": [
+    "Écoute",
+    "Écoutes",
+    "Écoutez",
+    "Tu écoutes"
+   ],
+   "answer": 0,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Impératif de la 2e personne du singulier au 1er groupe : sans s.",
+   "id": "bepc-francais-conjugaison-revision-02",
+   "tier": "application",
+   "lesson": "bepc-francais-conjugaison-revision",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "truefalse",
+   "prompt": "Vrai ou faux : « Si j'aurais su, je serais venu » est correct.",
+   "answer": false,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Après « si » d'hypothèse, on ne met pas de conditionnel : « Si j'avais su ».",
+   "id": "bepc-francais-conjugaison-revision-03",
+   "tier": "application",
+   "lesson": "bepc-francais-conjugaison-revision",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Quel temps convient : « Quand tu (finir) ton travail, tu pourras sortir. »",
+   "choices": [
+    "finissais",
+    "avais fini",
+    "aurais fini",
+    "auras fini"
+   ],
+   "answer": 3,
+   "points": 1,
+   "difficulty": 2,
+   "explanation": "Le futur antérieur exprime une action terminée avant une autre action future.",
+   "id": "bepc-francais-conjugaison-revision-04",
+   "tier": "approfondissement",
+   "lesson": "bepc-francais-conjugaison-revision",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "matching",
+   "prompt": "Associe chaque verbe à son temps.",
+   "pairs": [
+    [
+     "nous avions chanté",
+     "plus-que-parfait"
+    ],
+    [
+     "ils auront mangé",
+     "futur antérieur"
+    ],
+    [
+     "elle serait venue",
+     "conditionnel passé"
+    ],
+    [
+     "qu'il soit parti",
+     "subjonctif passé"
+    ]
+   ],
+   "points": 2,
+   "difficulty": 2,
+   "explanation": "Observe l'auxiliaire et son temps.",
+   "id": "bepc-francais-conjugaison-revision-05",
+   "tier": "approfondissement",
+   "lesson": "bepc-francais-conjugaison-revision",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "open",
+   "prompt": "Récris au passé en respectant la concordance : « Mballa dit qu'il ira au marché dès qu'il aura fini ses devoirs, et que, s'il a de l'argent, il achètera un cahier. » (Commence par « Mballa disait que… »)",
+   "model": "Mballa disait qu'il irait au marché dès qu'il aurait fini ses devoirs, et que, s'il avait de l'argent, il achèterait un cahier.",
+   "rubric": [
+    "« irait » (futur → conditionnel présent) : 1 point.",
+    "« aurait fini » (futur antérieur → conditionnel passé) : 1 point.",
+    "« avait » et « achèterait » : 1 point.",
+    "Orthographe : 1 point."
+   ],
+   "points": 4,
+   "difficulty": 3,
+   "explanation": "Voir le corrigé modèle et les critères de notation.",
+   "id": "bepc-francais-conjugaison-revision-06",
+   "tier": "examen",
+   "lesson": "bepc-francais-conjugaison-revision",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Quel temps exprime une action terminée avant une autre action future ?",
+   "choices": [
+    "le plus-que-parfait",
+    "le futur antérieur",
+    "l'imparfait",
+    "le passé simple"
+   ],
+   "answer": 1,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Il se forme avec l'auxiliaire au futur + participe passé.",
+   "id": "bepc-francais-conjugaison-revision-q1",
+   "tier": "autoeval",
+   "lesson": "bepc-francais-conjugaison-revision",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Le conditionnel passé de « venir » à la 1re personne du singulier est :",
+   "choices": [
+    "je viendrais",
+    "je serais venu",
+    "je suis venu",
+    "je serai venu"
+   ],
+   "answer": 1,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Conditionnel présent de être + participe passé.",
+   "id": "bepc-francais-conjugaison-revision-q2",
+   "tier": "autoeval",
+   "lesson": "bepc-francais-conjugaison-revision",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Quelle hypothèse irréelle du passé est bien conjuguée ?",
+   "choices": [
+    "Si j'aurais su, je serais venu.",
+    "Si j'avais su, je viendrais hier.",
+    "Si je savais, j'étais venu.",
+    "Si j'avais su, je serais venu."
+   ],
+   "answer": 3,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Si + plus-que-parfait, conditionnel passé.",
+   "id": "bepc-francais-conjugaison-revision-q3",
+   "tier": "autoeval",
+   "lesson": "bepc-francais-conjugaison-revision",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "À l'impératif, « aller » à la 2e personne du singulier devant « y » s'écrit :",
+   "choices": [
+    "va-y",
+    "allez-y",
+    "vas-y",
+    "va y"
+   ],
+   "answer": 2,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "On rétablit le s pour la liaison : vas-y.",
+   "id": "bepc-francais-conjugaison-revision-q4",
+   "tier": "autoeval",
+   "lesson": "bepc-francais-conjugaison-revision",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Le subjonctif passé se forme avec :",
+   "choices": [
+    "l'auxiliaire au futur + participe passé",
+    "le participe présent",
+    "l'infinitif",
+    "l'auxiliaire au subjonctif présent + participe passé"
+   ],
+   "answer": 3,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Ex. : qu'il ait fini, qu'elle soit partie.",
+   "id": "bepc-francais-conjugaison-revision-q5",
+   "tier": "autoeval",
+   "lesson": "bepc-francais-conjugaison-revision",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Complète : « Il ... vu un oiseau ... la fenêtre. »",
+   "choices": [
+    "a … à",
+    "à … a",
+    "a … a",
+    "à … à"
+   ],
+   "answer": 0,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Il a vu (avait vu) ; à la fenêtre (préposition).",
+   "id": "bepc-francais-orthographe-dictee-01",
+   "tier": "application",
+   "lesson": "bepc-francais-orthographe-dictee",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Complète : « Ils ... partis et ... sont arrêtés devant la porte. »",
+   "choices": [
+    "son … ce",
+    "sont … se",
+    "sont … ce",
+    "son … se"
+   ],
+   "answer": 1,
+   "points": 1,
+   "difficulty": 2,
+   "explanation": "« Ils sont partis » (étaient partis) ; « se sont arrêtés » : forme pronominale « se ».",
+   "id": "bepc-francais-orthographe-dictee-02",
+   "tier": "application",
+   "lesson": "bepc-francais-orthographe-dictee",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "truefalse",
+   "prompt": "Vrai ou faux : « Nos voisins ont leurs enfants à la maison » est correct pour « ont » et « leurs ».",
+   "answer": true,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "« Ont » = avoir ; « leurs » devant le nom pluriel « enfants ».",
+   "id": "bepc-francais-orthographe-dictee-03",
+   "tier": "application",
+   "lesson": "bepc-francais-orthographe-dictee",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Choisis la phrase correctement orthographiée.",
+   "choices": [
+    "C'est ce qu'elle a dit à ses amis.",
+    "Sais ce qu'elle à dit a ses amis.",
+    "C'est ce qu'elle a dit à ces amis.",
+    "Ces ce qu'elle a dit à ses amis."
+   ],
+   "answer": 0,
+   "points": 1,
+   "difficulty": 2,
+   "explanation": "C'est = cela est ; a dit = avait dit ; à ses amis : préposition + déterminant possessif.",
+   "id": "bepc-francais-orthographe-dictee-04",
+   "tier": "approfondissement",
+   "lesson": "bepc-francais-orthographe-dictee",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Complète : « Les femmes revenues du marché ... leurs paniers pleins. »",
+   "choices": [
+    "portait",
+    "porté",
+    "portaient",
+    "portés"
+   ],
+   "answer": 2,
+   "points": 1,
+   "difficulty": 2,
+   "explanation": "Sujet pluriel « les femmes » : portaient.",
+   "id": "bepc-francais-orthographe-dictee-05",
+   "tier": "approfondissement",
+   "lesson": "bepc-francais-orthographe-dictee",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "open",
+   "prompt": "Dictée (le maître lit ce texte ; tu l'écris puis tu te corriges) : « Le soir, les enfants du village se rassemblèrent sous le grand arbre. Ils écoutaient les contes que leur grand-père racontait. Quand la lune fut haute, ils rentrèrent chez eux, les yeux pleins d'étoiles. » Réécris maintenant ce texte en remplaçant « les enfants » par « la petite fille » et en changeant ce qu'il faut.",
+   "model": "Le soir, la petite fille du village se rassembla sous le grand arbre. Elle écoutait les contes que son grand-père racontait. Quand la lune fut haute, elle rentra chez elle, les yeux pleins d'étoiles.",
+   "rubric": [
+    "Accord des verbes au singulier (se rassembla, écoutait, rentra) : 1,5 point.",
+    "Changement des déterminants (son, elle, chez elle) : 1,5 point.",
+    "Orthographe générale : 1 point."
+   ],
+   "points": 4,
+   "difficulty": 3,
+   "explanation": "Voir le corrigé modèle et les critères de notation.",
+   "method": "Souligne les mots à modifier avant de réécrire.",
+   "id": "bepc-francais-orthographe-dictee-06",
+   "tier": "examen",
+   "lesson": "bepc-francais-orthographe-dictee",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Quel test permet de distinguer « a » (verbe) de « à » ?",
+   "choices": [
+    "remplacer par « et »",
+    "remplacer par « avait »",
+    "mettre au pluriel",
+    "ajouter un adverbe"
+   ],
+   "answer": 1,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Si on peut dire « avait », c'est le verbe avoir.",
+   "id": "bepc-francais-orthographe-dictee-q1",
+   "tier": "autoeval",
+   "lesson": "bepc-francais-orthographe-dictee",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Quelle phrase a les bons homophones et accords ?",
+   "choices": [
+    "Ils on perdu leur clés.",
+    "Ils ont perdu leur clés.",
+    "Ils ont perdu leurs clés.",
+    "Ils on perdu leurs clés."
+   ],
+   "answer": 2,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "« Ont » = avoir ; « leurs » devant un nom pluriel.",
+   "id": "bepc-francais-orthographe-dictee-q2",
+   "tier": "autoeval",
+   "lesson": "bepc-francais-orthographe-dictee",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Quel mot désigne un lieu éloigné et s'écrit avec un accent ?",
+   "choices": [
+    "la",
+    "là",
+    "l'a",
+    "las"
+   ],
+   "answer": 1,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Là (avec accent) est un adverbe de lieu.",
+   "id": "bepc-francais-orthographe-dictee-q3",
+   "tier": "autoeval",
+   "lesson": "bepc-francais-orthographe-dictee",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Quelle est la bonne forme du pluriel de « un cheval » ?",
+   "choices": [
+    "des chevals",
+    "des chevaus",
+    "des chevaux-x",
+    "des chevaux"
+   ],
+   "answer": 3,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Les noms en -al font leur pluriel en -aux.",
+   "id": "bepc-francais-orthographe-dictee-q4",
+   "tier": "autoeval",
+   "lesson": "bepc-francais-orthographe-dictee",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "En fin de dictée, il faut :",
+   "choices": [
+    "se relire pour vérifier les accords",
+    "recopier lentement le texte",
+    "ne rien relire",
+    "changer le sens"
+   ],
+   "answer": 0,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "La relecture permet de corriger les accords et la ponctuation.",
+   "id": "bepc-francais-orthographe-dictee-q5",
+   "tier": "autoeval",
+   "lesson": "bepc-francais-orthographe-dictee",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Dans « Il a un cœur de pierre », le mot « pierre » est au sens :",
+   "choices": [
+    "figuré",
+    "propre",
+    "technique",
+    "familier"
+   ],
+   "answer": 0,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Il s'agit d'une image : insensible.",
+   "id": "bepc-francais-vocabulaire-sens-01",
+   "tier": "application",
+   "lesson": "bepc-francais-vocabulaire-sens",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Quel mot est de niveau familier ?",
+   "choices": [
+    "ouvrage",
+    "livre",
+    "bouquin",
+    "volume"
+   ],
+   "answer": 2,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "« Bouquin » est un mot familier pour « livre ».",
+   "id": "bepc-francais-vocabulaire-sens-02",
+   "tier": "application",
+   "lesson": "bepc-francais-vocabulaire-sens",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "truefalse",
+   "prompt": "Vrai ou faux : « graph- » signifie « écrire ».",
+   "answer": true,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Du grec : photographie, graphique, télégraphe.",
+   "id": "bepc-francais-vocabulaire-sens-03",
+   "tier": "application",
+   "lesson": "bepc-francais-vocabulaire-sens",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Dans « Le pied de la montagne est couvert de forêt », « pied » signifie :",
+   "choices": [
+    "la base",
+    "une partie du corps",
+    "une mesure de longueur",
+    "un meuble"
+   ],
+   "answer": 0,
+   "points": 1,
+   "difficulty": 2,
+   "explanation": "Le contexte indique la partie la plus basse de la montagne.",
+   "id": "bepc-francais-vocabulaire-sens-04",
+   "tier": "approfondissement",
+   "lesson": "bepc-francais-vocabulaire-sens",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "matching",
+   "prompt": "Associe chaque mot à sa signification.",
+   "pairs": [
+    [
+     "aquatique",
+     "qui vit dans l'eau"
+    ],
+    [
+     "terrestre",
+     "qui vit sur la terre"
+    ],
+    [
+     "biologie",
+     "étude de la vie"
+    ],
+    [
+     "téléphone",
+     "voix à distance"
+    ]
+   ],
+   "points": 2,
+   "difficulty": 2,
+   "explanation": "Chaque mot est formé de racines connues.",
+   "id": "bepc-francais-vocabulaire-sens-05",
+   "tier": "approfondissement",
+   "lesson": "bepc-francais-vocabulaire-sens",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "problem",
+   "prompt": "Phrases : (1) « Ce film m'a flanqué la trouille. » (2) « Ce film m'a fait peur. » (3) « Ce film m'a plongé dans l'effroi. »",
+   "parts": [
+    {
+     "kind": "matching",
+     "prompt": "Associe chaque phrase à son niveau de langue.",
+     "pairs": [
+      [
+       "(1)",
+       "familier"
+      ],
+      [
+       "(2)",
+       "courant"
+      ],
+      [
+       "(3)",
+       "soutenu"
+      ]
+     ],
+     "points": 2,
+     "difficulty": 1,
+     "explanation": "Le vocabulaire (trouille, peur, effroi) indique le niveau.",
+     "id": "bepc-francais-vocabulaire-sens-06-a"
+    },
+    {
+     "kind": "open",
+     "prompt": "Récris la phrase (1) pour l'insérer dans une lettre à ton directeur.",
+     "model": "Ce film m'a fait très peur. (ou : Ce film m'a effrayé.)",
+     "rubric": [
+      "Mot familier remplacé : 1 point.",
+      "Phrase correcte : 1 point."
+     ],
+     "points": 2,
+     "difficulty": 2,
+     "explanation": "Voir le corrigé modèle et les critères de notation.",
+     "id": "bepc-francais-vocabulaire-sens-06-b"
+    }
+   ],
+   "difficulty": 2,
+   "id": "bepc-francais-vocabulaire-sens-06",
+   "tier": "examen",
+   "lesson": "bepc-francais-vocabulaire-sens",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Le sens propre d'un mot est :",
+   "choices": [
+    "son sens premier, concret",
+    "son sens image",
+    "un synonyme",
+    "une famille de mots"
+   ],
+   "answer": 0,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Opposé au sens figuré.",
+   "id": "bepc-francais-vocabulaire-sens-q1",
+   "tier": "autoeval",
+   "lesson": "bepc-francais-vocabulaire-sens",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Un mot polysémique :",
+   "choices": [
+    "a plusieurs sens",
+    "n'a aucun sens",
+    "a toujours le même sens",
+    "ne se trouve qu'au pluriel"
+   ],
+   "answer": 0,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Le contexte précise le bon sens.",
+   "id": "bepc-francais-vocabulaire-sens-q2",
+   "tier": "autoeval",
+   "lesson": "bepc-francais-vocabulaire-sens",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Dans une lettre à un directeur, on emploie :",
+   "choices": [
+    "le niveau familier",
+    "l'argot",
+    "le niveau courant ou soutenu",
+    "le langage SMS"
+   ],
+   "answer": 2,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Le niveau de langue doit s'adapter au destinataire.",
+   "id": "bepc-francais-vocabulaire-sens-q3",
+   "tier": "autoeval",
+   "lesson": "bepc-francais-vocabulaire-sens",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Que signifie le préfixe « télé- » ?",
+   "choices": [
+    "loin",
+    "voix",
+    "eau",
+    "étude"
+   ],
+   "answer": 0,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Du grec : loin.",
+   "id": "bepc-francais-vocabulaire-sens-q4",
+   "tier": "autoeval",
+   "lesson": "bepc-francais-vocabulaire-sens",
+   "source": "Exercice original, rédigé pour CastBridge"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "« Éminent » et « imminent » sont :",
+   "choices": [
+    "des synonymes",
+    "des antonymes",
+    "des homophones parfaits",
+    "des paronymes"
+   ],
+   "answer": 3,
+   "points": 1,
+   "difficulty": 1,
+   "explanation": "Ils se ressemblent mais ont des sens différents.",
+   "id": "bepc-francais-vocabulaire-sens-q5",
+   "tier": "autoeval",
+   "lesson": "bepc-francais-vocabulaire-sens",
+   "source": "Exercice original, rédigé pour CastBridge"
+  }
+ ]
+}
