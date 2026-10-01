@@ -61,4 +61,8 @@ public interface QuestionRepository extends JpaRepository<Question, Long> {
 
     @Query("select q.reviewStatus, q.track, q.level, q.region, count(q) from Question q group by q.reviewStatus, q.track, q.level, q.region")
     List<Object[]> stats();
+
+    /** Published questions per course and region (the numbers behind « parties sans répétition »). */
+    @Query("select q.track, q.level, q.field, q.region, count(q) from Question q where q.reviewStatus = 'reviewed' group by q.track, q.level, q.field, q.region")
+    List<Object[]> coverageRows();
 }

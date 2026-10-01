@@ -34,10 +34,22 @@ public class AdminQuizController {
 
     private final QuizService service;
     private final ObjectMapper json;
+    private final QuizCoverage coverage;
 
-    public AdminQuizController(QuizService service, ObjectMapper json) {
+    public AdminQuizController(QuizService service, ObjectMapper json, QuizCoverage coverage) {
         this.service = service;
         this.json = json;
+        this.coverage = coverage;
+    }
+
+    /** « Banque suffisante pour N parties sans répétition » per course (published questions + question packs). */
+    @GetMapping("/coverage")
+    public Map<String, Object> coverage() {
+        Map<String, Object> out = new LinkedHashMap<>();
+        out.put("targetGames", QuizPackService.TARGET_GAMES);
+        out.put("perGame", QuizPackService.PER_GAME);
+        out.put("courses", coverage.rows());
+        return out;
     }
 
     @GetMapping("/questions")

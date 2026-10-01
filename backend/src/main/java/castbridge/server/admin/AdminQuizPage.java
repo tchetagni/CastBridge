@@ -2,6 +2,7 @@ package castbridge.server.admin;
 
 import castbridge.server.quiz.QuestionDto;
 import castbridge.server.quiz.QuizCatalog;
+import castbridge.server.quiz.QuizCoverage;
 import castbridge.server.quiz.QuizCsv;
 import castbridge.server.quiz.QuizService;
 import castbridge.server.web.ApiException;
@@ -31,10 +32,12 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 public class AdminQuizPage {
     private final QuizService quiz;
     private final ObjectMapper json;
+    private final QuizCoverage coverage;
 
-    public AdminQuizPage(QuizService quiz, ObjectMapper json) {
+    public AdminQuizPage(QuizService quiz, ObjectMapper json, QuizCoverage coverage) {
         this.quiz = quiz;
         this.json = json;
+        this.coverage = coverage;
     }
 
     @GetMapping("/admin/quiz")
@@ -51,6 +54,8 @@ public class AdminQuizPage {
         model.addAttribute("region", region);
         model.addAttribute("q", q);
         model.addAttribute("stats", quiz.stats());
+        model.addAttribute("coverage", coverage.rows());
+        model.addAttribute("targetGames", castbridge.server.quiz.QuizPackService.TARGET_GAMES);
         model.addAttribute("tracks", QuizCatalog.TRACKS);
         model.addAttribute("levels", QuizCatalog.LEVELS.keySet());
         model.addAttribute("fields", QuizCatalog.FIELDS);
