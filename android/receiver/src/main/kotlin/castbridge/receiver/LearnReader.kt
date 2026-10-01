@@ -33,12 +33,14 @@ class ReaderScreen(a: LearnActivity, val pack: Pack, val lesson: Lesson, private
     private var revealed = 0
     private var shownAt = System.currentTimeMillis()
     private var ex: ExerciseView? = null
+    /** The animated illustration of the current page, if any (docs/LEARN.md § Animations). */
+    private var anim: AnimBlock? = null
     private val en = deck.lang == "en"
     private fun t(fr: String, e: String) = if (en) e else fr
     override val name = "lesson"
 
     override fun build(): View {
-        ex = null
+        ex = null; anim = null
         val p = deck.pages[page]
         val body: View = when (p) {
             LessonDeck.Page.Intro -> intro()
@@ -46,7 +48,7 @@ class ReaderScreen(a: LearnActivity, val pack: Pack, val lesson: Lesson, private
             is LessonDeck.Page.Exercise -> exercise(p.exercise)
             LessonDeck.Page.End -> end()
         }
-        val hint = when {
+        val hint = anim?.hint() ?: when {
             p is LessonDeck.Page.Content && p.block is Block.Example && revealed < deck.reveals(page) -> t("OK : étape suivante (${revealed}/${deck.reveals(page)})   ·   ◀ ▶ pages", "OK: next step (${revealed}/${deck.reveals(page)})   ·   ◀ ▶ pages")
             p is LessonDeck.Page.Exercise -> t("Réponds avec les flèches et OK   ·   ◀ ▶ pages", "Answer with the arrows and OK   ·   ◀ ▶ pages")
             else -> t("◀ ▶ pages   ·   OK : suite", "◀ ▶ pages   ·   OK: next") + (if (a.ttsReady) t("   ·   MENU : lire à voix haute", "   ·   MENU: read aloud") else "")
@@ -93,7 +95,7 @@ class ReaderScreen(a: LearnActivity, val pack: Pack, val lesson: Lesson, private
             b.caption?.let { addView(a.st.text(a.st.md(it), 24f, LearnStyle.MUTED).apply { gravity = Gravity.CENTER }, lp(top = a.st.px(12))) }
         }
         is Block.Example -> example(b)
-        is Block.Illustration -> LinearLayout(a).apply {
+        is Block.Illustration -> b.animation?.let { an -> AnimBlock(a, b, an, en).also { anim = it }.view } ?: LinearLayout(a).apply {
             orientation = LinearLayout.VERTICAL
             addView(FigureView(a, Scene.build(b.figure)), LinearLayout.LayoutParams(-1, 0, 1f))
             b.caption?.let { addView(a.st.text(a.st.md(it), 23f, LearnStyle.MUTED, lines = 2).apply { gravity = Gravity.CENTER }, lp(top = a.st.px(8))) }
@@ -203,6 +205,7 @@ class ReaderScreen(a: LearnActivity, val pack: Pack, val lesson: Lesson, private
 
     override fun key(code: Int, e: KeyEvent): Boolean {
         ex?.let { if (it.key(code)) return true }
+        anim?.let { if (it.key(code)) return true }
         when (code) {
             KeyEvent.KEYCODE_DPAD_RIGHT, KeyEvent.KEYCODE_MEDIA_FAST_FORWARD, KeyEvent.KEYCODE_PAGE_DOWN, KeyEvent.KEYCODE_MEDIA_NEXT -> {
                 if (code == KeyEvent.KEYCODE_DPAD_RIGHT && canMove(View.FOCUS_RIGHT)) return false
@@ -239,9 +242,10 @@ class ReaderScreen(a: LearnActivity, val pack: Pack, val lesson: Lesson, private
         go(page + 1)
     }
 
-    override fun leave() { record(); a.stopSpeaking() }
+    override fun leave() { anim?.pause(); record(); a.stopSpeaking() }
 
     override fun remote(action: String, p: Map<String, String>): String? = when (action) {
+        "anim" -> if (anim?.control(p["value"].orEmpty()) == true) null else "pas d'animation sur cette page"
         "next" -> { go(page + 1); null }
         "prev" -> { go(page - 1); null }
         "ok" -> { ok(); null }

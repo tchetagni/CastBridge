@@ -45,8 +45,8 @@ class AnimPlayer(val anim: AnimatedFigure, reduced: Boolean = AnimSettings.reduc
     }
     fun pause() { playing = false }
     /** OK button: play / pause (auto mode); next step (step mode). */
-    fun toggle() { if (anim.stepMode || reduced) { if (playing) skipToTarget() else if (finished) replay() else next() } else if (playing) pause() else play() }
-    fun replay() { t = 0.0; target = null; playing = false; if (!anim.stepMode && !reduced) play() }
+    fun toggle() { if (reduced && !anim.stepMode && anim.stops.isEmpty()) return; if (anim.stepMode || reduced) { if (playing) skipToTarget() else if (finished) replay() else next() } else if (playing) pause() else play() }
+    fun replay() { t = if (reduced && !anim.stepMode) anim.duration else 0.0; target = null; playing = false; if (!anim.stepMode && !reduced) play() }
 
     /** Step mode: play to the next stop. Otherwise (auto mode with captions): jump to the next stop. */
     fun next() {
