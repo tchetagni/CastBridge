@@ -1,0 +1,312 @@
+{
+ "chapter": "cp-francais-lecture",
+ "lessons": [
+  {
+   "id": "cp-francais-comprendre",
+   "title": "Lire et comprendre un petit texte",
+   "minutes": 15,
+   "readAloud": true,
+   "programRef": "CP — Lecture : compréhension de petits textes (reconstitué, à vérifier sur le texte officiel)",
+   "status": "draft",
+   "author": "CastBridge (brouillon IA)",
+   "source": "Rédaction originale ; à faire relire par un enseignant",
+   "objectives": [
+    "Lire un texte de cinq phrases.",
+    "Retrouver une information dans le texte.",
+    "Répondre à une question par une phrase."
+   ],
+   "prerequisites": [
+    "cp-francais-sons",
+    "cp-francais-syllabes"
+   ],
+   "exercises": [
+    "cp-francais-comprendre-01",
+    "cp-francais-comprendre-02",
+    "cp-francais-comprendre-03",
+    "cp-francais-comprendre-04",
+    "cp-francais-comprendre-05",
+    "cp-francais-comprendre-06"
+   ],
+   "selfCheck": [
+    "cp-francais-comprendre-q1",
+    "cp-francais-comprendre-q2",
+    "cp-francais-comprendre-q3",
+    "cp-francais-comprendre-q4",
+    "cp-francais-comprendre-q5"
+   ],
+   "reviewNotes": [
+    "Texte original de cinq phrases ; vérifier le niveau de lecture visé en début d'année."
+   ],
+   "blocks": [
+    {
+     "type": "text",
+     "md": "Pour **comprendre** un texte, on le lit deux fois, puis on répond aux questions en cherchant dans le texte."
+    },
+    {
+     "type": "key",
+     "style": "methode",
+     "title": "Lire pour comprendre",
+     "md": "1. Je lis le texte doucement.\n2. Je me demande : qui ? quoi ? où ?\n3. Je lis la question.\n4. Je cherche la réponse dans le texte et je souligne le mot.\n5. Je réponds avec une phrase."
+    },
+    {
+     "type": "heading",
+     "text": "Le marché de Ngono"
+    },
+    {
+     "type": "text",
+     "md": "Ngono va au marché avec sa maman. Elle porte un grand panier. Maman achète des tomates, du manioc et trois bananes. Le vendeur donne une mangue à Ngono. Ngono dit merci et sourit."
+    },
+    {
+     "type": "audio",
+     "lang": "fr-FR",
+     "text": "Ngono va au marché avec sa maman. Elle porte un grand panier. Maman achète des tomates, du manioc et trois bananes. Le vendeur donne une mangue à Ngono. Ngono dit merci et sourit."
+    },
+    {
+     "type": "example",
+     "title": "Exemple 1 : qui ?",
+     "statement": "Avec qui Ngono va-t-elle au marché ?",
+     "steps": [
+      {
+       "md": "Je relis la première phrase : « Ngono va au marché avec sa maman. »"
+      },
+      {
+       "md": "Le mot qui répond est « maman »."
+      }
+     ],
+     "answer": "Ngono va au marché **avec sa maman**."
+    },
+    {
+     "type": "example",
+     "title": "Exemple 2 : combien ?",
+     "statement": "Combien de bananes maman achète-t-elle ?",
+     "steps": [
+      {
+       "md": "Je cherche le mot « bananes » dans le texte."
+      },
+      {
+       "md": "Juste avant, il y a « trois »."
+      }
+     ],
+     "answer": "Maman achète **trois** bananes."
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Attention",
+     "md": "Ne réponds pas avec ce que tu penses : réponds avec ce que dit le texte. Si le texte ne le dit pas, ce n'est pas écrit."
+    },
+    {
+     "type": "exercise",
+     "ref": "cp-francais-comprendre-01"
+    },
+    {
+     "type": "exercise",
+     "ref": "cp-francais-comprendre-02"
+    },
+    {
+     "type": "exercise",
+     "ref": "cp-francais-comprendre-03"
+    },
+    {
+     "type": "exercise",
+     "ref": "cp-francais-comprendre-04"
+    },
+    {
+     "type": "exercise",
+     "ref": "cp-francais-comprendre-05"
+    },
+    {
+     "type": "exercise",
+     "ref": "cp-francais-comprendre-06"
+    }
+   ]
+  }
+ ],
+ "exercises": [
+  {
+   "kind": "mcq",
+   "prompt": "Où va Ngono ?",
+   "choices": [
+    "à l'école",
+    "à la rivière",
+    "au champ",
+    "au marché"
+   ],
+   "answer": 3,
+   "explanation": "Première phrase : Ngono va au marché.",
+   "id": "cp-francais-comprendre-01",
+   "chapter": "cp-francais-lecture",
+   "tier": "application",
+   "difficulty": 1,
+   "lesson": "cp-francais-comprendre",
+   "points": 1
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Que porte Ngono ?",
+   "choices": [
+    "un seau",
+    "un sac de manioc",
+    "un grand panier",
+    "une mangue"
+   ],
+   "answer": 2,
+   "explanation": "« Elle porte un grand panier. »",
+   "id": "cp-francais-comprendre-02",
+   "chapter": "cp-francais-lecture",
+   "tier": "application",
+   "difficulty": 1,
+   "lesson": "cp-francais-comprendre",
+   "points": 1
+  },
+  {
+   "kind": "numeric",
+   "prompt": "Combien de bananes maman achète-t-elle ?",
+   "answer": 3,
+   "tolerance": 0,
+   "explanation": "Le texte dit : « trois bananes ».",
+   "id": "cp-francais-comprendre-03",
+   "chapter": "cp-francais-lecture",
+   "tier": "application",
+   "difficulty": 1,
+   "lesson": "cp-francais-comprendre",
+   "points": 1
+  },
+  {
+   "kind": "truefalse",
+   "prompt": "Vrai ou faux : le vendeur donne une orange à Ngono.",
+   "answer": false,
+   "explanation": "Le vendeur donne une mangue.",
+   "id": "cp-francais-comprendre-04",
+   "chapter": "cp-francais-lecture",
+   "tier": "approfondissement",
+   "difficulty": 2,
+   "lesson": "cp-francais-comprendre",
+   "points": 1
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Que dit Ngono au vendeur ?",
+   "choices": [
+    "bonjour",
+    "merci",
+    "au revoir",
+    "non"
+   ],
+   "answer": 1,
+   "explanation": "« Ngono dit merci et sourit. »",
+   "id": "cp-francais-comprendre-05",
+   "chapter": "cp-francais-lecture",
+   "tier": "approfondissement",
+   "difficulty": 2,
+   "lesson": "cp-francais-comprendre",
+   "points": 1
+  },
+  {
+   "kind": "open",
+   "prompt": "Pourquoi Ngono sourit-elle ? Réponds par une phrase.",
+   "model": "Ngono sourit parce que le vendeur lui donne une mangue.",
+   "rubric": [
+    "La réponse fait une phrase.",
+    "Elle parle de la mangue donnée par le vendeur."
+   ],
+   "explanation": "Le vendeur lui donne une mangue : elle est contente et sourit.",
+   "id": "cp-francais-comprendre-06",
+   "chapter": "cp-francais-lecture",
+   "tier": "examen",
+   "difficulty": 3,
+   "lesson": "cp-francais-comprendre",
+   "points": 1
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Qui accompagne Ngono ?",
+   "choices": [
+    "sa maman",
+    "son papa",
+    "sa sœur",
+    "le vendeur"
+   ],
+   "answer": 0,
+   "explanation": "Ngono va au marché avec sa maman.",
+   "id": "cp-francais-comprendre-q1",
+   "chapter": "cp-francais-lecture",
+   "tier": "autoeval",
+   "difficulty": 1,
+   "lesson": "cp-francais-comprendre",
+   "points": 1
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Qu'achète maman ?",
+   "choices": [
+    "des mangues et du riz",
+    "du poisson",
+    "des chaussures",
+    "des tomates, du manioc et des bananes"
+   ],
+   "answer": 3,
+   "explanation": "C'est écrit dans la troisième phrase.",
+   "id": "cp-francais-comprendre-q2",
+   "chapter": "cp-francais-lecture",
+   "tier": "autoeval",
+   "difficulty": 1,
+   "lesson": "cp-francais-comprendre",
+   "points": 1
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Qui donne une mangue ?",
+   "choices": [
+    "maman",
+    "Ngono",
+    "le vendeur",
+    "un voisin"
+   ],
+   "answer": 2,
+   "explanation": "Le vendeur donne une mangue.",
+   "id": "cp-francais-comprendre-q3",
+   "chapter": "cp-francais-lecture",
+   "tier": "autoeval",
+   "difficulty": 1,
+   "lesson": "cp-francais-comprendre",
+   "points": 1
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Pour répondre à une question, je…",
+   "choices": [
+    "devine",
+    "cherche dans le texte",
+    "copie le voisin",
+    "ne lis pas"
+   ],
+   "answer": 1,
+   "explanation": "La réponse est dans le texte.",
+   "id": "cp-francais-comprendre-q4",
+   "chapter": "cp-francais-lecture",
+   "tier": "autoeval",
+   "difficulty": 1,
+   "lesson": "cp-francais-comprendre",
+   "points": 1
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Combien y a-t-il de phrases dans le texte ?",
+   "choices": [
+    "5",
+    "3",
+    "4",
+    "6"
+   ],
+   "answer": 0,
+   "explanation": "On compte les points : 5 phrases.",
+   "id": "cp-francais-comprendre-q5",
+   "chapter": "cp-francais-lecture",
+   "tier": "autoeval",
+   "difficulty": 1,
+   "lesson": "cp-francais-comprendre",
+   "points": 1
+  }
+ ]
+}

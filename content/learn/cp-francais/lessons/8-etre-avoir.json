@@ -1,0 +1,558 @@
+{
+ "chapter": "cp-francais-conjugaison",
+ "lessons": [
+  {
+   "id": "cp-francais-etre-avoir",
+   "title": "Être et avoir au présent",
+   "minutes": 12,
+   "readAloud": true,
+   "programRef": "CP — Conjugaison : être et avoir au présent (reconstitué, à vérifier sur le texte officiel)",
+   "status": "draft",
+   "author": "CastBridge (brouillon IA)",
+   "source": "Rédaction originale ; à faire relire par un enseignant",
+   "objectives": [
+    "Conjuguer être au présent.",
+    "Conjuguer avoir au présent.",
+    "Choisir la bonne forme avec je, tu, il, nous, vous, ils."
+   ],
+   "prerequisites": [
+    "cp-francais-verbe"
+   ],
+   "exercises": [
+    "cp-francais-etre-avoir-01",
+    "cp-francais-etre-avoir-02",
+    "cp-francais-etre-avoir-03",
+    "cp-francais-etre-avoir-04",
+    "cp-francais-etre-avoir-05",
+    "cp-francais-etre-avoir-06"
+   ],
+   "selfCheck": [
+    "cp-francais-etre-avoir-q1",
+    "cp-francais-etre-avoir-q2",
+    "cp-francais-etre-avoir-q3",
+    "cp-francais-etre-avoir-q4",
+    "cp-francais-etre-avoir-q5"
+   ],
+   "reviewNotes": [
+    "Vérifier que la liste des pronoms (je…ils/elles) correspond à celle enseignée au CP."
+   ],
+   "blocks": [
+    {
+     "type": "text",
+     "md": "Les verbes **être** et **avoir** sont très utiles. On les entend tout le temps. Il faut bien les connaître."
+    },
+    {
+     "type": "illustration",
+     "figure": {
+      "kind": "shapes",
+      "w": 480,
+      "h": 258,
+      "items": [
+       {
+        "t": "rect",
+        "x": 10,
+        "y": 10,
+        "w": 230,
+        "h": 34,
+        "fill": "lightblue",
+        "stroke": "blue"
+       },
+       {
+        "t": "text",
+        "x": 125,
+        "y": 34,
+        "text": "être",
+        "size": 17,
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 240,
+        "y": 10,
+        "w": 230,
+        "h": 34,
+        "fill": "lightblue",
+        "stroke": "blue"
+       },
+       {
+        "t": "text",
+        "x": 355,
+        "y": 34,
+        "text": "avoir",
+        "size": 17,
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 10,
+        "y": 44,
+        "w": 230,
+        "h": 34,
+        "fill": "white",
+        "stroke": "grey"
+       },
+       {
+        "t": "text",
+        "x": 125,
+        "y": 68,
+        "text": "je suis",
+        "size": 17
+       },
+       {
+        "t": "rect",
+        "x": 240,
+        "y": 44,
+        "w": 230,
+        "h": 34,
+        "fill": "white",
+        "stroke": "grey"
+       },
+       {
+        "t": "text",
+        "x": 355,
+        "y": 68,
+        "text": "j'ai",
+        "size": 17
+       },
+       {
+        "t": "rect",
+        "x": 10,
+        "y": 78,
+        "w": 230,
+        "h": 34,
+        "fill": "white",
+        "stroke": "grey"
+       },
+       {
+        "t": "text",
+        "x": 125,
+        "y": 102,
+        "text": "tu es",
+        "size": 17
+       },
+       {
+        "t": "rect",
+        "x": 240,
+        "y": 78,
+        "w": 230,
+        "h": 34,
+        "fill": "white",
+        "stroke": "grey"
+       },
+       {
+        "t": "text",
+        "x": 355,
+        "y": 102,
+        "text": "tu as",
+        "size": 17
+       },
+       {
+        "t": "rect",
+        "x": 10,
+        "y": 112,
+        "w": 230,
+        "h": 34,
+        "fill": "white",
+        "stroke": "grey"
+       },
+       {
+        "t": "text",
+        "x": 125,
+        "y": 136,
+        "text": "il / elle est",
+        "size": 17
+       },
+       {
+        "t": "rect",
+        "x": 240,
+        "y": 112,
+        "w": 230,
+        "h": 34,
+        "fill": "white",
+        "stroke": "grey"
+       },
+       {
+        "t": "text",
+        "x": 355,
+        "y": 136,
+        "text": "il / elle a",
+        "size": 17
+       },
+       {
+        "t": "rect",
+        "x": 10,
+        "y": 146,
+        "w": 230,
+        "h": 34,
+        "fill": "white",
+        "stroke": "grey"
+       },
+       {
+        "t": "text",
+        "x": 125,
+        "y": 170,
+        "text": "nous sommes",
+        "size": 17
+       },
+       {
+        "t": "rect",
+        "x": 240,
+        "y": 146,
+        "w": 230,
+        "h": 34,
+        "fill": "white",
+        "stroke": "grey"
+       },
+       {
+        "t": "text",
+        "x": 355,
+        "y": 170,
+        "text": "nous avons",
+        "size": 17
+       },
+       {
+        "t": "rect",
+        "x": 10,
+        "y": 180,
+        "w": 230,
+        "h": 34,
+        "fill": "white",
+        "stroke": "grey"
+       },
+       {
+        "t": "text",
+        "x": 125,
+        "y": 204,
+        "text": "vous êtes",
+        "size": 17
+       },
+       {
+        "t": "rect",
+        "x": 240,
+        "y": 180,
+        "w": 230,
+        "h": 34,
+        "fill": "white",
+        "stroke": "grey"
+       },
+       {
+        "t": "text",
+        "x": 355,
+        "y": 204,
+        "text": "vous avez",
+        "size": 17
+       },
+       {
+        "t": "rect",
+        "x": 10,
+        "y": 214,
+        "w": 230,
+        "h": 34,
+        "fill": "white",
+        "stroke": "grey"
+       },
+       {
+        "t": "text",
+        "x": 125,
+        "y": 238,
+        "text": "ils / elles sont",
+        "size": 17
+       },
+       {
+        "t": "rect",
+        "x": 240,
+        "y": 214,
+        "w": 230,
+        "h": 34,
+        "fill": "white",
+        "stroke": "grey"
+       },
+       {
+        "t": "text",
+        "x": 355,
+        "y": 238,
+        "text": "ils / elles ont",
+        "size": 17
+       }
+      ]
+     },
+     "caption": "Être et avoir au présent.",
+     "alt": "Un tableau à deux colonnes : être (je suis, tu es, il est, nous sommes, vous êtes, ils sont) et avoir (j'ai, tu as, il a, nous avons, vous avez, ils ont)."
+    },
+    {
+     "type": "audio",
+     "lang": "fr-FR",
+     "text": "Je suis, tu es, il est, nous sommes, vous êtes, ils sont. J'ai, tu as, il a, nous avons, vous avez, ils ont."
+    },
+    {
+     "type": "key",
+     "style": "retenir",
+     "title": "À retenir",
+     "md": "- **être** dit comment on est ou où on est : Je suis content. Il est à Yaoundé.\n- **avoir** dit ce qu'on possède : J'ai un cahier. Elle a une mangue.\n\nAttention : « je » devient « j' » devant a : **j'ai**."
+    },
+    {
+     "type": "example",
+     "title": "Exemple 1 : avec être",
+     "statement": "Complète : Nous ___ à l'école.",
+     "steps": [
+      {
+       "md": "Le sujet est « nous »."
+      },
+      {
+       "md": "Avec nous, être fait **sommes**."
+      }
+     ],
+     "answer": "Nous **sommes** à l'école."
+    },
+    {
+     "type": "example",
+     "title": "Exemple 2 : avec avoir",
+     "statement": "Complète : Ils ___ des mangues.",
+     "steps": [
+      {
+       "md": "Le sujet est « ils »."
+      },
+      {
+       "md": "Avec ils, avoir fait **ont**."
+      }
+     ],
+     "answer": "Ils **ont** des mangues."
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Attention",
+     "md": "Ne confonds pas **est** (être) et **et** (pour lier). Ne confonds pas **a** (avoir) et **à** (devant un lieu). Tu les verras dans la fiche des mots-outils."
+    },
+    {
+     "type": "exercise",
+     "ref": "cp-francais-etre-avoir-01"
+    },
+    {
+     "type": "exercise",
+     "ref": "cp-francais-etre-avoir-02"
+    },
+    {
+     "type": "exercise",
+     "ref": "cp-francais-etre-avoir-03"
+    },
+    {
+     "type": "exercise",
+     "ref": "cp-francais-etre-avoir-04"
+    },
+    {
+     "type": "exercise",
+     "ref": "cp-francais-etre-avoir-05"
+    },
+    {
+     "type": "exercise",
+     "ref": "cp-francais-etre-avoir-06"
+    }
+   ]
+  }
+ ],
+ "exercises": [
+  {
+   "kind": "mcq",
+   "prompt": "Complète : Je ___ content.",
+   "choices": [
+    "suis",
+    "es",
+    "est",
+    "sont"
+   ],
+   "answer": 0,
+   "explanation": "Avec je : je suis.",
+   "id": "cp-francais-etre-avoir-01",
+   "chapter": "cp-francais-conjugaison",
+   "tier": "application",
+   "difficulty": 1,
+   "lesson": "cp-francais-etre-avoir",
+   "points": 1
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Complète : Tu ___ une mangue.",
+   "choices": [
+    "a",
+    "ai",
+    "ont",
+    "as"
+   ],
+   "answer": 3,
+   "explanation": "Avec tu : tu as.",
+   "id": "cp-francais-etre-avoir-02",
+   "chapter": "cp-francais-conjugaison",
+   "tier": "application",
+   "difficulty": 1,
+   "lesson": "cp-francais-etre-avoir",
+   "points": 1
+  },
+  {
+   "kind": "matching",
+   "prompt": "Relie chaque pronom à la forme du verbe être.",
+   "pairs": [
+    [
+     "je",
+     "suis"
+    ],
+    [
+     "tu",
+     "es"
+    ],
+    [
+     "nous",
+     "sommes"
+    ],
+    [
+     "ils",
+     "sont"
+    ]
+   ],
+   "explanation": "je suis, tu es, nous sommes, ils sont.",
+   "id": "cp-francais-etre-avoir-03",
+   "chapter": "cp-francais-conjugaison",
+   "tier": "application",
+   "difficulty": 1,
+   "lesson": "cp-francais-etre-avoir",
+   "points": 1
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Complète : Nous ___ un chien.",
+   "choices": [
+    "avez",
+    "ont",
+    "avons",
+    "a"
+   ],
+   "answer": 2,
+   "explanation": "Avec nous : nous avons.",
+   "id": "cp-francais-etre-avoir-04",
+   "chapter": "cp-francais-conjugaison",
+   "tier": "approfondissement",
+   "difficulty": 2,
+   "lesson": "cp-francais-etre-avoir",
+   "points": 1
+  },
+  {
+   "kind": "truefalse",
+   "prompt": "Vrai ou faux : on écrit « Ils est grands. »",
+   "answer": false,
+   "explanation": "Avec ils, le verbe être fait « sont » : Ils sont grands.",
+   "id": "cp-francais-etre-avoir-05",
+   "chapter": "cp-francais-conjugaison",
+   "tier": "approfondissement",
+   "difficulty": 2,
+   "lesson": "cp-francais-etre-avoir",
+   "points": 1
+  },
+  {
+   "kind": "open",
+   "prompt": "Écris une phrase avec « je suis » et une phrase avec « j'ai ».",
+   "model": "Je suis content. J'ai un cahier.",
+   "rubric": [
+    "Une phrase avec je suis.",
+    "Une phrase avec j'ai.",
+    "Majuscule et point."
+   ],
+   "explanation": "Exemples : « Je suis à l'école. J'ai un crayon. »",
+   "id": "cp-francais-etre-avoir-06",
+   "chapter": "cp-francais-conjugaison",
+   "tier": "examen",
+   "difficulty": 3,
+   "lesson": "cp-francais-etre-avoir",
+   "points": 1
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Complète : Elle ___ une robe.",
+   "choices": [
+    "as",
+    "a",
+    "ai",
+    "est"
+   ],
+   "answer": 1,
+   "explanation": "Avec elle : elle a.",
+   "id": "cp-francais-etre-avoir-q1",
+   "chapter": "cp-francais-conjugaison",
+   "tier": "autoeval",
+   "difficulty": 1,
+   "lesson": "cp-francais-etre-avoir",
+   "points": 1
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Complète : Vous ___ gentils.",
+   "choices": [
+    "êtes",
+    "est",
+    "sont",
+    "es"
+   ],
+   "answer": 0,
+   "explanation": "Avec vous : vous êtes.",
+   "id": "cp-francais-etre-avoir-q2",
+   "chapter": "cp-francais-conjugaison",
+   "tier": "autoeval",
+   "difficulty": 1,
+   "lesson": "cp-francais-etre-avoir",
+   "points": 1
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Complète : Les enfants ___ à la maison.",
+   "choices": [
+    "est",
+    "es",
+    "suis",
+    "sont"
+   ],
+   "answer": 3,
+   "explanation": "Les enfants = ils : ils sont.",
+   "id": "cp-francais-etre-avoir-q3",
+   "chapter": "cp-francais-conjugaison",
+   "tier": "autoeval",
+   "difficulty": 1,
+   "lesson": "cp-francais-etre-avoir",
+   "points": 1
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Complète : J'___ sept ans.",
+   "choices": [
+    "as",
+    "a",
+    "ai",
+    "ont"
+   ],
+   "answer": 2,
+   "explanation": "Avec je : j'ai.",
+   "id": "cp-francais-etre-avoir-q4",
+   "chapter": "cp-francais-conjugaison",
+   "tier": "autoeval",
+   "difficulty": 1,
+   "lesson": "cp-francais-etre-avoir",
+   "points": 1
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Complète : Ngono ___ petite.",
+   "choices": [
+    "es",
+    "est",
+    "suis",
+    "sont"
+   ],
+   "answer": 1,
+   "explanation": "Ngono = elle : elle est.",
+   "id": "cp-francais-etre-avoir-q5",
+   "chapter": "cp-francais-conjugaison",
+   "tier": "autoeval",
+   "difficulty": 1,
+   "lesson": "cp-francais-etre-avoir",
+   "points": 1
+  }
+ ]
+}

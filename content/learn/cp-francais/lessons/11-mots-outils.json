@@ -1,0 +1,565 @@
+{
+ "chapter": "cp-francais-orthographe",
+ "lessons": [
+  {
+   "id": "cp-francais-mots-outils",
+   "title": "Les petits mots : et / est, a / à",
+   "minutes": 12,
+   "readAloud": true,
+   "programRef": "CP — Orthographe : mots-outils (reconstitué, à vérifier sur le texte officiel)",
+   "status": "draft",
+   "author": "CastBridge (brouillon IA)",
+   "source": "Rédaction originale ; à faire relire par un enseignant",
+   "objectives": [
+    "Distinguer « et » et « est ».",
+    "Distinguer « a » et « à ».",
+    "Utiliser une astuce pour choisir."
+   ],
+   "prerequisites": [
+    "cp-francais-etre-avoir"
+   ],
+   "exercises": [
+    "cp-francais-mots-outils-01",
+    "cp-francais-mots-outils-02",
+    "cp-francais-mots-outils-03",
+    "cp-francais-mots-outils-04",
+    "cp-francais-mots-outils-05",
+    "cp-francais-mots-outils-06"
+   ],
+   "selfCheck": [
+    "cp-francais-mots-outils-q1",
+    "cp-francais-mots-outils-q2",
+    "cp-francais-mots-outils-q3",
+    "cp-francais-mots-outils-q4",
+    "cp-francais-mots-outils-q5"
+   ],
+   "reviewNotes": [
+    "Vérifier que « a / à » et « et / est » sont bien au programme du CP (et non du CE1).",
+    "Question « au marché » : à + le = au, simple mais à confirmer pour le CP."
+   ],
+   "blocks": [
+    {
+     "type": "text",
+     "md": "Certains petits mots se **disent pareil** mais ne s'écrivent **pas pareil**. Il faut les **tester**."
+    },
+    {
+     "type": "key",
+     "style": "retenir",
+     "title": "et ou est ?",
+     "md": "- **est** : le verbe être. On peut dire « était ». Le chat **est** noir. (Le chat était noir.)\n- **et** : sert à lier. On peut dire « et puis ». Paul **et** Marie jouent."
+    },
+    {
+     "type": "key",
+     "style": "retenir",
+     "title": "a ou à ?",
+     "md": "- **a** : le verbe avoir. On peut dire « avait ». Ngono **a** un cahier. (Ngono avait un cahier.)\n- **à** : sert à dire où ou à qui, avec un accent. Elle va **à** l'école."
+    },
+    {
+     "type": "illustration",
+     "figure": {
+      "kind": "shapes",
+      "w": 480,
+      "h": 210,
+      "items": [
+       {
+        "t": "rect",
+        "x": 10,
+        "y": 10,
+        "w": 153,
+        "h": 38,
+        "fill": "lightblue",
+        "stroke": "blue"
+       },
+       {
+        "t": "text",
+        "x": 87,
+        "y": 38,
+        "text": "mot",
+        "size": 17,
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 163,
+        "y": 10,
+        "w": 153,
+        "h": 38,
+        "fill": "lightblue",
+        "stroke": "blue"
+       },
+       {
+        "t": "text",
+        "x": 240,
+        "y": 38,
+        "text": "test",
+        "size": 17,
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 317,
+        "y": 10,
+        "w": 153,
+        "h": 38,
+        "fill": "lightblue",
+        "stroke": "blue"
+       },
+       {
+        "t": "text",
+        "x": 393,
+        "y": 38,
+        "text": "exemple",
+        "size": 17,
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 10,
+        "y": 48,
+        "w": 153,
+        "h": 38,
+        "fill": "white",
+        "stroke": "grey"
+       },
+       {
+        "t": "text",
+        "x": 87,
+        "y": 76,
+        "text": "est",
+        "size": 17
+       },
+       {
+        "t": "rect",
+        "x": 163,
+        "y": 48,
+        "w": 153,
+        "h": 38,
+        "fill": "white",
+        "stroke": "grey"
+       },
+       {
+        "t": "text",
+        "x": 240,
+        "y": 76,
+        "text": "était",
+        "size": 17
+       },
+       {
+        "t": "rect",
+        "x": 317,
+        "y": 48,
+        "w": 153,
+        "h": 38,
+        "fill": "white",
+        "stroke": "grey"
+       },
+       {
+        "t": "text",
+        "x": 393,
+        "y": 76,
+        "text": "Il est là.",
+        "size": 17
+       },
+       {
+        "t": "rect",
+        "x": 10,
+        "y": 86,
+        "w": 153,
+        "h": 38,
+        "fill": "white",
+        "stroke": "grey"
+       },
+       {
+        "t": "text",
+        "x": 87,
+        "y": 114,
+        "text": "et",
+        "size": 17
+       },
+       {
+        "t": "rect",
+        "x": 163,
+        "y": 86,
+        "w": 153,
+        "h": 38,
+        "fill": "white",
+        "stroke": "grey"
+       },
+       {
+        "t": "text",
+        "x": 240,
+        "y": 114,
+        "text": "et puis",
+        "size": 17
+       },
+       {
+        "t": "rect",
+        "x": 317,
+        "y": 86,
+        "w": 153,
+        "h": 38,
+        "fill": "white",
+        "stroke": "grey"
+       },
+       {
+        "t": "text",
+        "x": 393,
+        "y": 114,
+        "text": "Paul et Marie",
+        "size": 17
+       },
+       {
+        "t": "rect",
+        "x": 10,
+        "y": 124,
+        "w": 153,
+        "h": 38,
+        "fill": "white",
+        "stroke": "grey"
+       },
+       {
+        "t": "text",
+        "x": 87,
+        "y": 152,
+        "text": "a",
+        "size": 17
+       },
+       {
+        "t": "rect",
+        "x": 163,
+        "y": 124,
+        "w": 153,
+        "h": 38,
+        "fill": "white",
+        "stroke": "grey"
+       },
+       {
+        "t": "text",
+        "x": 240,
+        "y": 152,
+        "text": "avait",
+        "size": 17
+       },
+       {
+        "t": "rect",
+        "x": 317,
+        "y": 124,
+        "w": 153,
+        "h": 38,
+        "fill": "white",
+        "stroke": "grey"
+       },
+       {
+        "t": "text",
+        "x": 393,
+        "y": 152,
+        "text": "Elle a faim.",
+        "size": 17
+       },
+       {
+        "t": "rect",
+        "x": 10,
+        "y": 162,
+        "w": 153,
+        "h": 38,
+        "fill": "white",
+        "stroke": "grey"
+       },
+       {
+        "t": "text",
+        "x": 87,
+        "y": 190,
+        "text": "à",
+        "size": 17
+       },
+       {
+        "t": "rect",
+        "x": 163,
+        "y": 162,
+        "w": 153,
+        "h": 38,
+        "fill": "white",
+        "stroke": "grey"
+       },
+       {
+        "t": "text",
+        "x": 240,
+        "y": 190,
+        "text": "(pas de test)",
+        "size": 17
+       },
+       {
+        "t": "rect",
+        "x": 317,
+        "y": 162,
+        "w": 153,
+        "h": 38,
+        "fill": "white",
+        "stroke": "grey"
+       },
+       {
+        "t": "text",
+        "x": 393,
+        "y": 190,
+        "text": "Il va à Douala.",
+        "size": 17
+       }
+      ]
+     },
+     "caption": "Les quatre petits mots et leur test.",
+     "alt": "Un tableau à trois colonnes : est (test : était), et (test : et puis), a (test : avait), à (pas de test, accent grave)."
+    },
+    {
+     "type": "example",
+     "title": "Exemple 1 : est ou et ?",
+     "statement": "Complète : Le panier ___ lourd. Ngono ___ Paul jouent.",
+     "steps": [
+      {
+       "md": "« Le panier était lourd » est possible : **est**."
+      },
+      {
+       "md": "« Ngono et puis Paul jouent » est possible : **et**."
+      }
+     ],
+     "answer": "Le panier **est** lourd. Ngono **et** Paul jouent."
+    },
+    {
+     "type": "example",
+     "title": "Exemple 2 : a ou à ?",
+     "statement": "Complète : Ngono ___ un cahier. Elle va ___ l'école.",
+     "steps": [
+      {
+       "md": "« Ngono avait un cahier » : on écrit **a**."
+      },
+      {
+       "md": "« Elle va à l'école » : on ne peut pas dire avait, on écrit **à**."
+      }
+     ],
+     "answer": "Ngono **a** un cahier. Elle va **à** l'école."
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Attention",
+     "md": "L'accent grave se met seulement sur **à** (le lieu) et pas sur **a** (le verbe avoir). Pour **et**, il n'y a ni accent ni t."
+    },
+    {
+     "type": "exercise",
+     "ref": "cp-francais-mots-outils-01"
+    },
+    {
+     "type": "exercise",
+     "ref": "cp-francais-mots-outils-02"
+    },
+    {
+     "type": "exercise",
+     "ref": "cp-francais-mots-outils-03"
+    },
+    {
+     "type": "exercise",
+     "ref": "cp-francais-mots-outils-04"
+    },
+    {
+     "type": "exercise",
+     "ref": "cp-francais-mots-outils-05"
+    },
+    {
+     "type": "exercise",
+     "ref": "cp-francais-mots-outils-06"
+    }
+   ]
+  }
+ ],
+ "exercises": [
+  {
+   "kind": "mcq",
+   "prompt": "Complète : Le chat ___ noir.",
+   "choices": [
+    "est",
+    "et",
+    "es",
+    "ai"
+   ],
+   "answer": 0,
+   "explanation": "On peut dire « était » : est.",
+   "id": "cp-francais-mots-outils-01",
+   "chapter": "cp-francais-orthographe",
+   "tier": "application",
+   "difficulty": 1,
+   "lesson": "cp-francais-mots-outils",
+   "points": 1
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Complète : Paul ___ Marie jouent.",
+   "choices": [
+    "est",
+    "es",
+    "ait",
+    "et"
+   ],
+   "answer": 3,
+   "explanation": "On peut dire « et puis » : et.",
+   "id": "cp-francais-mots-outils-02",
+   "chapter": "cp-francais-orthographe",
+   "tier": "application",
+   "difficulty": 1,
+   "lesson": "cp-francais-mots-outils",
+   "points": 1
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Complète : Ngono ___ un cahier.",
+   "choices": [
+    "à",
+    "as",
+    "a",
+    "est"
+   ],
+   "answer": 2,
+   "explanation": "On peut dire « avait » : a.",
+   "id": "cp-francais-mots-outils-03",
+   "chapter": "cp-francais-orthographe",
+   "tier": "application",
+   "difficulty": 1,
+   "lesson": "cp-francais-mots-outils",
+   "points": 1
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Complète : Il va ___ Douala.",
+   "choices": [
+    "a",
+    "à",
+    "as",
+    "est"
+   ],
+   "answer": 1,
+   "explanation": "On ne peut pas dire avait : à.",
+   "id": "cp-francais-mots-outils-04",
+   "chapter": "cp-francais-orthographe",
+   "tier": "approfondissement",
+   "difficulty": 2,
+   "lesson": "cp-francais-mots-outils",
+   "points": 1
+  },
+  {
+   "kind": "truefalse",
+   "prompt": "Vrai ou faux : on écrit « Elle va a l'école. »",
+   "answer": false,
+   "explanation": "On écrit « Elle va à l'école. » avec un accent.",
+   "id": "cp-francais-mots-outils-05",
+   "chapter": "cp-francais-orthographe",
+   "tier": "approfondissement",
+   "difficulty": 2,
+   "lesson": "cp-francais-mots-outils",
+   "points": 1
+  },
+  {
+   "kind": "open",
+   "prompt": "Écris une phrase avec « est » et une phrase avec « et ».",
+   "model": "Le chat est noir. Paul et Marie jouent.",
+   "rubric": [
+    "Une phrase correcte avec est.",
+    "Une phrase correcte avec et."
+   ],
+   "explanation": "Exemples : « Maman est contente. » « Le riz et le poisson sont bons. »",
+   "id": "cp-francais-mots-outils-06",
+   "chapter": "cp-francais-orthographe",
+   "tier": "examen",
+   "difficulty": 3,
+   "lesson": "cp-francais-mots-outils",
+   "points": 1
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Pour « est », je peux dire…",
+   "choices": [
+    "était",
+    "avait",
+    "et puis",
+    "vers"
+   ],
+   "answer": 0,
+   "explanation": "Est = verbe être.",
+   "id": "cp-francais-mots-outils-q1",
+   "chapter": "cp-francais-orthographe",
+   "tier": "autoeval",
+   "difficulty": 1,
+   "lesson": "cp-francais-mots-outils",
+   "points": 1
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Pour « a » (verbe), je peux dire…",
+   "choices": [
+    "était",
+    "et puis",
+    "là",
+    "avait"
+   ],
+   "answer": 3,
+   "explanation": "A = verbe avoir.",
+   "id": "cp-francais-mots-outils-q2",
+   "chapter": "cp-francais-orthographe",
+   "tier": "autoeval",
+   "difficulty": 1,
+   "lesson": "cp-francais-mots-outils",
+   "points": 1
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Complète : Il ___ faim.",
+   "choices": [
+    "à",
+    "es",
+    "a",
+    "et"
+   ],
+   "answer": 2,
+   "explanation": "Il avait faim : a.",
+   "id": "cp-francais-mots-outils-q3",
+   "chapter": "cp-francais-orthographe",
+   "tier": "autoeval",
+   "difficulty": 1,
+   "lesson": "cp-francais-mots-outils",
+   "points": 1
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Complète : Ngono ___ Amina sont amies.",
+   "choices": [
+    "est",
+    "et",
+    "a",
+    "à"
+   ],
+   "answer": 1,
+   "explanation": "Ngono et puis Amina : et.",
+   "id": "cp-francais-mots-outils-q4",
+   "chapter": "cp-francais-orthographe",
+   "tier": "autoeval",
+   "difficulty": 1,
+   "lesson": "cp-francais-mots-outils",
+   "points": 1
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Complète : Elle va ___ marché.",
+   "choices": [
+    "au",
+    "aux",
+    "à le",
+    "a"
+   ],
+   "answer": 0,
+   "explanation": "À + le devient au : elle va au marché.",
+   "id": "cp-francais-mots-outils-q5",
+   "chapter": "cp-francais-orthographe",
+   "tier": "autoeval",
+   "difficulty": 1,
+   "lesson": "cp-francais-mots-outils",
+   "points": 1
+  }
+ ]
+}
