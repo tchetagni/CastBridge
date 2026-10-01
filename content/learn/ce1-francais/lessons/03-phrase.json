@@ -1,0 +1,482 @@
+{
+ "chapter": "ce1-francais-grammaire",
+ "lessons": [
+  {
+   "id": "ce1-francais-phrase",
+   "title": "La phrase et ses quatre types",
+   "minutes": 15,
+   "readAloud": true,
+   "programRef": "CE1 — Programme de français du cycle 2, MINEDUB (reconstitué, à vérifier sur le texte officiel) — grammaire : la phrase simple, types de phrases",
+   "status": "draft",
+   "author": "CastBridge (brouillon IA)",
+   "source": "Rédaction originale ; à faire relire par un enseignant",
+   "objectives": [
+    "Reconnaître une phrase (majuscule et point).",
+    "Distinguer la phrase qui dit, qui demande, qui s'exclame, qui ordonne.",
+    "Écrire la bonne ponctuation."
+   ],
+   "prerequisites": [],
+   "exercises": [
+    "ce1-francais-phrase-01",
+    "ce1-francais-phrase-02",
+    "ce1-francais-phrase-03",
+    "ce1-francais-phrase-04",
+    "ce1-francais-phrase-05",
+    "ce1-francais-phrase-06"
+   ],
+   "selfCheck": [
+    "ce1-francais-phrase-q1",
+    "ce1-francais-phrase-q2",
+    "ce1-francais-phrase-q3",
+    "ce1-francais-phrase-q4",
+    "ce1-francais-phrase-q5"
+   ],
+   "reviewNotes": [
+    "Vérifier que l'ordre (impérative) peut se terminer par un point ou un point d'exclamation au CE1."
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "La phrase",
+     "md": "Une **phrase** a du sens. Elle commence par une **majuscule** et finit par un **point** (. ? !).\n\nExemple : *Le chat dort sous le manguier.*"
+    },
+    {
+     "type": "key",
+     "style": "retenir",
+     "title": "Les quatre types de phrases",
+     "md": "- La phrase qui **dit** (déclarative) : *Ibrahim mange du manioc.*  → point .\n- La phrase qui **demande** (interrogative) : *Où vas-tu ?*  → point d'interrogation ?\n- La phrase qui **s'exclame** (exclamative) : *Quel beau ballon !*  → point d'exclamation !\n- La phrase qui **ordonne** (impérative) : *Range ton cahier.*  → point ou !"
+    },
+    {
+     "type": "illustration",
+     "caption": "Les quatre signes de fin de phrase.",
+     "alt": "Quatre cases : un point pour dire, un point d'interrogation pour demander, un point d'exclamation pour s'exclamer, un point ou un point d'exclamation pour ordonner.",
+     "figure": {
+      "kind": "shapes",
+      "w": 520,
+      "h": 140,
+      "items": [
+       {
+        "t": "rect",
+        "x": 10,
+        "y": 20,
+        "w": 115,
+        "h": 90,
+        "stroke": "ink",
+        "fill": "lightblue",
+        "radius": 8
+       },
+       {
+        "t": "text",
+        "x": 67,
+        "y": 60,
+        "text": ".",
+        "size": 40,
+        "color": "blue",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 67,
+        "y": 98,
+        "text": "dire",
+        "size": 16,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": false
+       },
+       {
+        "t": "rect",
+        "x": 135,
+        "y": 20,
+        "w": 115,
+        "h": 90,
+        "stroke": "ink",
+        "fill": "lightgreen",
+        "radius": 8
+       },
+       {
+        "t": "text",
+        "x": 192,
+        "y": 60,
+        "text": "?",
+        "size": 40,
+        "color": "green",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 192,
+        "y": 98,
+        "text": "demander",
+        "size": 16,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": false
+       },
+       {
+        "t": "rect",
+        "x": 260,
+        "y": 20,
+        "w": 115,
+        "h": 90,
+        "stroke": "ink",
+        "fill": "lightyellow",
+        "radius": 8
+       },
+       {
+        "t": "text",
+        "x": 317,
+        "y": 60,
+        "text": "!",
+        "size": 40,
+        "color": "orange",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 317,
+        "y": 98,
+        "text": "s'exclamer",
+        "size": 15,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": false
+       },
+       {
+        "t": "rect",
+        "x": 385,
+        "y": 20,
+        "w": 125,
+        "h": 90,
+        "stroke": "ink",
+        "fill": "lightorange",
+        "radius": 8
+       },
+       {
+        "t": "text",
+        "x": 447,
+        "y": 60,
+        "text": ". !",
+        "size": 36,
+        "color": "red",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 447,
+        "y": 98,
+        "text": "ordonner",
+        "size": 16,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": false
+       }
+      ]
+     }
+    },
+    {
+     "type": "example",
+     "title": "Exemple 1 : reconnaître le type",
+     "statement": "Quel est le type de la phrase : « Où est ton cahier ? »",
+     "steps": [
+      {
+       "md": "Elle pose une question."
+      },
+      {
+       "md": "Elle finit par un point d'interrogation."
+      }
+     ],
+     "answer": "**C'est une phrase qui demande (interrogative).**"
+    },
+    {
+     "type": "example",
+     "title": "Exemple 2 : ponctuer",
+     "statement": "Remets la majuscule et la ponctuation : « amina chante dans la cour »",
+     "steps": [
+      {
+       "md": "La phrase doit commencer par une majuscule : **A**mina."
+      },
+      {
+       "md": "Elle dit quelque chose : on met un point à la fin."
+      }
+     ],
+     "answer": "**Amina chante dans la cour.**"
+    },
+    {
+     "type": "exercise",
+     "ref": "ce1-francais-phrase-01"
+    },
+    {
+     "type": "key",
+     "style": "methode",
+     "title": "Méthode",
+     "md": "1. Je lis la phrase.\n2. Je me demande : elle **dit**, elle **demande**, elle **s'exclame** ou elle **ordonne** ?\n3. Je choisis le bon signe à la fin."
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Attention",
+     "md": "- Un groupe de mots sans verbe ou sans sens n'est pas toujours une phrase.\n- N'oublie jamais la **majuscule** au début."
+    }
+   ]
+  }
+ ],
+ "exercises": [
+  {
+   "kind": "mcq",
+   "difficulty": 1,
+   "points": 1,
+   "prompt": "Quel signe met-on à la fin : « Comment t'appelles-tu »",
+   "choices": [
+    "?",
+    ".",
+    "!",
+    ","
+   ],
+   "answer": 0,
+   "explanation": "C'est une question : on met un point d'interrogation.",
+   "id": "ce1-francais-phrase-01",
+   "chapter": "ce1-francais-grammaire",
+   "tier": "application",
+   "lesson": "ce1-francais-phrase",
+   "source": "Exercice original, niveau CE1"
+  },
+  {
+   "kind": "truefalse",
+   "difficulty": 1,
+   "points": 1,
+   "prompt": "Vrai ou faux : une phrase commence par une majuscule.",
+   "answer": true,
+   "explanation": "Oui, toute phrase commence par une majuscule.",
+   "id": "ce1-francais-phrase-02",
+   "chapter": "ce1-francais-grammaire",
+   "tier": "application",
+   "lesson": "ce1-francais-phrase",
+   "source": "Exercice original, niveau CE1"
+  },
+  {
+   "kind": "matching",
+   "difficulty": 1,
+   "points": 2,
+   "prompt": "Associe chaque phrase à son type.",
+   "pairs": [
+    [
+     "Fotso joue au ballon.",
+     "elle dit"
+    ],
+    [
+     "Où est Fotso ?",
+     "elle demande"
+    ],
+    [
+     "Viens ici !",
+     "elle ordonne"
+    ],
+    [
+     "Quel beau but !",
+     "elle s'exclame"
+    ]
+   ],
+   "explanation": "Dire : point. Demander : ?. Ordonner : ordre. S'exclamer : !.",
+   "id": "ce1-francais-phrase-03",
+   "chapter": "ce1-francais-grammaire",
+   "tier": "application",
+   "lesson": "ce1-francais-phrase",
+   "source": "Exercice original, niveau CE1"
+  },
+  {
+   "kind": "mcq",
+   "difficulty": 2,
+   "points": 1,
+   "prompt": "Quelle phrase est bien écrite ?",
+   "choices": [
+    "les enfants chantent !",
+    "Les enfants, chantent",
+    "Les enfants chantent.",
+    "Les enfants chantent"
+   ],
+   "answer": 2,
+   "explanation": "Il faut une **majuscule** au début et un **point** à la fin.",
+   "id": "ce1-francais-phrase-04",
+   "chapter": "ce1-francais-grammaire",
+   "tier": "approfondissement",
+   "lesson": "ce1-francais-phrase",
+   "source": "Exercice original, niveau CE1"
+  },
+  {
+   "kind": "open",
+   "difficulty": 2,
+   "points": 2,
+   "prompt": "Écris deux phrases : une qui dit et une qui demande. Parle de ton école.",
+   "model": "L'école est grande. Où est la cour ?",
+   "rubric": [
+    "La première phrase finit par un point.",
+    "La deuxième finit par ?",
+    "Les deux commencent par une majuscule."
+   ],
+   "explanation": "Une phrase qui dit finit par un point ; une phrase qui demande finit par un point d'interrogation.",
+   "id": "ce1-francais-phrase-05",
+   "chapter": "ce1-francais-grammaire",
+   "tier": "approfondissement",
+   "lesson": "ce1-francais-phrase",
+   "source": "Exercice original, niveau CE1"
+  },
+  {
+   "kind": "problem",
+   "difficulty": 2,
+   "prompt": "Observe ces phrases : A « Ferme la porte. » B « Quelle belle journée ! » C « Tu viens au marché ? »",
+   "parts": [
+    {
+     "kind": "mcq",
+     "difficulty": 1,
+     "points": 1,
+     "prompt": "Quelle phrase pose une question ?",
+     "choices": [
+      "B",
+      "C",
+      "A",
+      "les trois"
+     ],
+     "answer": 1,
+     "explanation": "La phrase C finit par ? et demande quelque chose.",
+     "id": "ce1-francais-phrase-06-a"
+    },
+    {
+     "kind": "mcq",
+     "difficulty": 1,
+     "points": 1,
+     "prompt": "Quelle phrase donne un ordre ?",
+     "choices": [
+      "B",
+      "A",
+      "C",
+      "A et B"
+     ],
+     "answer": 1,
+     "explanation": "« Ferme la porte. » : on ordonne de faire quelque chose.",
+     "id": "ce1-francais-phrase-06-b"
+    },
+    {
+     "kind": "mcq",
+     "difficulty": 1,
+     "points": 1,
+     "prompt": "Quel signe termine la phrase B ?",
+     "choices": [
+      "!",
+      ",",
+      "?",
+      "."
+     ],
+     "answer": 0,
+     "explanation": "B s'exclame : point d'exclamation.",
+     "id": "ce1-francais-phrase-06-c"
+    }
+   ],
+   "id": "ce1-francais-phrase-06",
+   "chapter": "ce1-francais-grammaire",
+   "tier": "examen",
+   "lesson": "ce1-francais-phrase",
+   "source": "Exercice original, niveau CE1"
+  },
+  {
+   "kind": "mcq",
+   "difficulty": 1,
+   "points": 1,
+   "prompt": "Une phrase commence par…",
+   "choices": [
+    "une virgule",
+    "un tiret",
+    "un point",
+    "une majuscule"
+   ],
+   "answer": 3,
+   "explanation": "Toujours une majuscule.",
+   "id": "ce1-francais-phrase-q1",
+   "chapter": "ce1-francais-grammaire",
+   "tier": "autoeval",
+   "lesson": "ce1-francais-phrase",
+   "source": "Exercice original, niveau CE1"
+  },
+  {
+   "kind": "mcq",
+   "difficulty": 1,
+   "points": 1,
+   "prompt": "Une phrase qui pose une question finit par…",
+   "choices": [
+    "?",
+    ".",
+    "!",
+    ";"
+   ],
+   "answer": 0,
+   "explanation": "Le point d'interrogation.",
+   "id": "ce1-francais-phrase-q2",
+   "chapter": "ce1-francais-grammaire",
+   "tier": "autoeval",
+   "lesson": "ce1-francais-phrase",
+   "source": "Exercice original, niveau CE1"
+  },
+  {
+   "kind": "mcq",
+   "difficulty": 1,
+   "points": 1,
+   "prompt": "« Quel beau dessin ! » est une phrase…",
+   "choices": [
+    "qui ordonne",
+    "qui n'a pas de sens",
+    "qui s'exclame",
+    "qui demande"
+   ],
+   "answer": 2,
+   "explanation": "Elle montre une émotion : phrase exclamative.",
+   "id": "ce1-francais-phrase-q3",
+   "chapter": "ce1-francais-grammaire",
+   "tier": "autoeval",
+   "lesson": "ce1-francais-phrase",
+   "source": "Exercice original, niveau CE1"
+  },
+  {
+   "kind": "mcq",
+   "difficulty": 1,
+   "points": 1,
+   "prompt": "« Range ta chambre. » est une phrase…",
+   "choices": [
+    "qui ordonne",
+    "qui dit seulement un fait",
+    "qui demande",
+    "qui s'exclame"
+   ],
+   "answer": 0,
+   "explanation": "On donne un ordre : phrase impérative.",
+   "id": "ce1-francais-phrase-q4",
+   "chapter": "ce1-francais-grammaire",
+   "tier": "autoeval",
+   "lesson": "ce1-francais-phrase",
+   "source": "Exercice original, niveau CE1"
+  },
+  {
+   "kind": "mcq",
+   "difficulty": 1,
+   "points": 1,
+   "prompt": "Quelle phrase dit quelque chose ?",
+   "choices": [
+    "Attrape le chat !",
+    "Où est le chat ?",
+    "Quel gros chat !",
+    "Le chat dort."
+   ],
+   "answer": 3,
+   "explanation": "Seule « Le chat dort. » donne une information.",
+   "id": "ce1-francais-phrase-q5",
+   "chapter": "ce1-francais-grammaire",
+   "tier": "autoeval",
+   "lesson": "ce1-francais-phrase",
+   "source": "Exercice original, niveau CE1"
+  }
+ ]
+}

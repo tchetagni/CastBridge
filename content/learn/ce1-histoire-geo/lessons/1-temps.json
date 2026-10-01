@@ -1,0 +1,566 @@
+{
+ "chapter": "ce1-histoire-geo-c1-temps",
+ "lessons": [
+  {
+   "id": "ce1-histoire-geo-temps",
+   "title": "Se repérer dans le temps",
+   "minutes": 15,
+   "readAloud": true,
+   "programRef": "CE1 — Histoire : se repérer dans le temps : jours, semaine, mois, année, hier-aujourd'hui-demain, frise (à vérifier sur le texte officiel)",
+   "status": "draft",
+   "author": "CastBridge (brouillon IA)",
+   "source": "Rédaction originale ; à faire relire par un enseignant",
+   "objectives": [
+    "Nommer les jours de la semaine et les mois de l'année.",
+    "Situer un événement : hier, aujourd'hui, demain.",
+    "Lire une frise du temps simple."
+   ],
+   "prerequisites": [],
+   "exercises": [
+    "ce1-histoire-geo-temps-01",
+    "ce1-histoire-geo-temps-02",
+    "ce1-histoire-geo-temps-03",
+    "ce1-histoire-geo-temps-04",
+    "ce1-histoire-geo-temps-05",
+    "ce1-histoire-geo-temps-06"
+   ],
+   "selfCheck": [
+    "ce1-histoire-geo-temps-q1",
+    "ce1-histoire-geo-temps-q2",
+    "ce1-histoire-geo-temps-q3",
+    "ce1-histoire-geo-temps-q4",
+    "ce1-histoire-geo-temps-q5"
+   ],
+   "reviewNotes": [
+    "Vérifier que le programme du CE1 prévoit les saisons du Cameroun ; elles varient selon le climat (nord, sud, etc.).",
+    "La frise de Ngono est fictive : dates inventées pour l'exemple, à signaler comme telles si nécessaire."
+   ],
+   "blocks": [
+    {
+     "type": "audio",
+     "lang": "fr-FR",
+     "text": "Le temps passe : il y a le matin, l'après-midi, le soir. Il y a hier, aujourd'hui et demain."
+    },
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "La semaine et l'année",
+     "md": "Une **semaine** a **7 jours** : lundi, mardi, mercredi, jeudi, vendredi, samedi, dimanche.\n\nUne **année** a **12 mois** : janvier, février, mars, avril, mai, juin, juillet, août, septembre, octobre, novembre, décembre."
+    },
+    {
+     "type": "illustration",
+     "caption": "Les sept jours de la semaine.",
+     "alt": "Sept cases alignées : lundi, mardi, mercredi, jeudi, vendredi en bleu, samedi et dimanche en orange pour le week-end.",
+     "figure": {
+      "kind": "shapes",
+      "w": 540,
+      "h": 140,
+      "items": [
+       {
+        "t": "rect",
+        "x": 8,
+        "y": 30,
+        "w": 68,
+        "h": 50,
+        "fill": "lightblue",
+        "stroke": "blue",
+        "radius": 8
+       },
+       {
+        "t": "text",
+        "x": 42,
+        "y": 61,
+        "text": "lundi",
+        "size": 13,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 82,
+        "y": 30,
+        "w": 68,
+        "h": 50,
+        "fill": "lightblue",
+        "stroke": "blue",
+        "radius": 8
+       },
+       {
+        "t": "text",
+        "x": 116,
+        "y": 61,
+        "text": "mardi",
+        "size": 13,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 156,
+        "y": 30,
+        "w": 68,
+        "h": 50,
+        "fill": "lightblue",
+        "stroke": "blue",
+        "radius": 8
+       },
+       {
+        "t": "text",
+        "x": 190,
+        "y": 61,
+        "text": "mercredi",
+        "size": 13,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 230,
+        "y": 30,
+        "w": 68,
+        "h": 50,
+        "fill": "lightblue",
+        "stroke": "blue",
+        "radius": 8
+       },
+       {
+        "t": "text",
+        "x": 264,
+        "y": 61,
+        "text": "jeudi",
+        "size": 13,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 304,
+        "y": 30,
+        "w": 68,
+        "h": 50,
+        "fill": "lightblue",
+        "stroke": "blue",
+        "radius": 8
+       },
+       {
+        "t": "text",
+        "x": 338,
+        "y": 61,
+        "text": "vendredi",
+        "size": 13,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 378,
+        "y": 30,
+        "w": 68,
+        "h": 50,
+        "fill": "lightorange",
+        "stroke": "orange",
+        "radius": 8
+       },
+       {
+        "t": "text",
+        "x": 412,
+        "y": 61,
+        "text": "samedi",
+        "size": 13,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 452,
+        "y": 30,
+        "w": 68,
+        "h": 50,
+        "fill": "lightorange",
+        "stroke": "orange",
+        "radius": 8
+       },
+       {
+        "t": "text",
+        "x": 486,
+        "y": 61,
+        "text": "dimanche",
+        "size": 13,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 190,
+        "y": 112,
+        "text": "jours d'école",
+        "size": 15,
+        "color": "blue",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 450,
+        "y": 112,
+        "text": "week-end",
+        "size": 15,
+        "color": "orange",
+        "anchor": "middle",
+        "bold": true
+       }
+      ]
+     }
+    },
+    {
+     "type": "key",
+     "style": "retenir",
+     "title": "Hier, aujourd'hui, demain",
+     "md": "- **Aujourd'hui**, c'est le jour où je suis.\n- **Hier**, c'est le jour d'avant.\n- **Demain**, c'est le jour d'après.\n\nSi aujourd'hui c'est mercredi, hier c'était mardi et demain ce sera jeudi."
+    },
+    {
+     "type": "example",
+     "title": "Exemple 1 : le jour d'après",
+     "statement": "Aujourd'hui, c'est vendredi. Quel jour sera-t-on demain ?",
+     "steps": [
+      {
+       "md": "Après vendredi, il y a samedi."
+      },
+      {
+       "md": "Demain, c'est le jour d'après."
+      }
+     ],
+     "answer": "**Demain, ce sera samedi.**"
+    },
+    {
+     "type": "example",
+     "title": "Exemple 2 : le jour d'avant",
+     "statement": "Aujourd'hui, c'est lundi. Quel jour était-ce hier ?",
+     "steps": [
+      {
+       "md": "Avant lundi, il y a dimanche."
+      },
+      {
+       "md": "Hier, c'est le jour d'avant."
+      }
+     ],
+     "answer": "**Hier, c'était dimanche.**"
+    },
+    {
+     "type": "key",
+     "style": "methode",
+     "title": "Lire une frise du temps",
+     "md": "Une **frise** est une ligne qui range les événements dans l'ordre.\n\n1. Je lis les années, de la plus ancienne à la plus récente.\n2. Plus un événement est à gauche, plus il est **ancien**.\n3. Plus il est à droite, plus il est **récent**."
+    },
+    {
+     "type": "illustration",
+     "caption": "La frise de la vie de Ngono.",
+     "alt": "Une frise avec quatre dates : 2018 naissance de Ngono, 2021 entrée à la maternelle, 2024 entrée au CP, 2026 entrée au CE1.",
+     "figure": {
+      "kind": "timeline",
+      "from": 2018,
+      "to": 2026,
+      "events": [
+       {
+        "year": 2018,
+        "label": "Naissance"
+       },
+       {
+        "year": 2021,
+        "label": "Maternelle"
+       },
+       {
+        "year": 2024,
+        "label": "CP"
+       },
+       {
+        "year": 2026,
+        "label": "CE1"
+       }
+      ],
+      "periods": [],
+      "w": 560,
+      "h": 190
+     }
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Attention",
+     "md": "- Le premier jour de la semaine est **lundi**, le dernier est **dimanche**.\n- Les jours ne changent pas de place : mardi vient toujours après lundi.\n- Il y a deux saisons dans beaucoup de régions du Cameroun : la saison des pluies et la saison sèche, mais elles ne sont pas les mêmes partout."
+    },
+    {
+     "type": "exercise",
+     "ref": "ce1-histoire-geo-temps-01"
+    },
+    {
+     "type": "exercise",
+     "ref": "ce1-histoire-geo-temps-02"
+    },
+    {
+     "type": "exercise",
+     "ref": "ce1-histoire-geo-temps-03"
+    },
+    {
+     "type": "more",
+     "items": [
+      "Un siècle, ce sont 100 ans. Une décennie, ce sont 10 ans.",
+      "On utilise un calendrier pour retrouver la date et les fêtes de l'année."
+     ]
+    }
+   ]
+  }
+ ],
+ "exercises": [
+  {
+   "id": "ce1-histoire-geo-temps-01",
+   "chapter": "ce1-histoire-geo-c1-temps",
+   "kind": "numeric",
+   "tier": "application",
+   "difficulty": 1,
+   "points": 1,
+   "prompt": "Combien de jours y a-t-il dans une semaine ?",
+   "answer": 7,
+   "tolerance": 0,
+   "explanation": "Il y a **7 jours** : du lundi au dimanche.",
+   "unit": "jours",
+   "method": "Je récite les jours de la semaine en les comptant.",
+   "lesson": "ce1-histoire-geo-temps",
+   "source": "Exercice original"
+  },
+  {
+   "id": "ce1-histoire-geo-temps-02",
+   "chapter": "ce1-histoire-geo-c1-temps",
+   "kind": "mcq",
+   "tier": "application",
+   "difficulty": 1,
+   "points": 1,
+   "prompt": "Aujourd'hui, c'est mercredi. Quel jour sera-t-on demain ?",
+   "choices": [
+    "mardi",
+    "lundi",
+    "jeudi",
+    "vendredi"
+   ],
+   "answer": 2,
+   "explanation": "Après mercredi vient **jeudi**.",
+   "lesson": "ce1-histoire-geo-temps",
+   "source": "Exercice original"
+  },
+  {
+   "id": "ce1-histoire-geo-temps-03",
+   "chapter": "ce1-histoire-geo-c1-temps",
+   "kind": "matching",
+   "tier": "application",
+   "difficulty": 1,
+   "points": 2,
+   "prompt": "Associe chaque mot à sa définition.",
+   "pairs": [
+    [
+     "hier",
+     "le jour d'avant"
+    ],
+    [
+     "aujourd'hui",
+     "le jour où je suis"
+    ],
+    [
+     "demain",
+     "le jour d'après"
+    ]
+   ],
+   "explanation": "Hier est avant, aujourd'hui est maintenant, demain est après.",
+   "lesson": "ce1-histoire-geo-temps",
+   "source": "Exercice original"
+  },
+  {
+   "id": "ce1-histoire-geo-temps-04",
+   "chapter": "ce1-histoire-geo-c1-temps",
+   "kind": "numeric",
+   "tier": "approfondissement",
+   "difficulty": 2,
+   "points": 1,
+   "prompt": "Combien y a-t-il de mois dans une année ?",
+   "answer": 12,
+   "tolerance": 0,
+   "explanation": "Une année a **12 mois**, de janvier à décembre.",
+   "unit": "mois",
+   "lesson": "ce1-histoire-geo-temps",
+   "source": "Exercice original"
+  },
+  {
+   "id": "ce1-histoire-geo-temps-05",
+   "chapter": "ce1-histoire-geo-c1-temps",
+   "kind": "open",
+   "tier": "approfondissement",
+   "difficulty": 2,
+   "points": 2,
+   "prompt": "Ngono est entrée au CP en 2024 et au CE1 en 2026. Écris une phrase pour dire quel événement est le plus ancien.",
+   "model": "Elle est entrée au CP en 2024, avant d'entrer au CE1 en 2026 : le CP est plus ancien.",
+   "rubric": [
+    "Compare deux dates.",
+    "Cite 2024 comme plus ancien que 2026."
+   ],
+   "explanation": "2024 vient avant 2026 : l'entrée au CP est l'événement le plus **ancien**.",
+   "lesson": "ce1-histoire-geo-temps",
+   "source": "Exercice original"
+  },
+  {
+   "id": "ce1-histoire-geo-temps-06",
+   "chapter": "ce1-histoire-geo-c1-temps",
+   "kind": "problem",
+   "tier": "examen",
+   "difficulty": 2,
+   "prompt": "Regarde la frise de Ngono (2018, 2021, 2024, 2026).",
+   "parts": [
+    {
+     "kind": "mcq",
+     "difficulty": 1,
+     "points": 1,
+     "prompt": "Quel événement est le plus ancien ?",
+     "choices": [
+      "la naissance",
+      "le CE1",
+      "le CP",
+      "la maternelle"
+     ],
+     "answer": 0,
+     "explanation": "2018 est la date la plus à gauche : la **naissance**.",
+     "id": "ce1-histoire-geo-temps-06-a"
+    },
+    {
+     "kind": "mcq",
+     "difficulty": 1,
+     "points": 1,
+     "prompt": "Quel événement est le plus récent ?",
+     "choices": [
+      "la naissance",
+      "l'entrée à la maternelle",
+      "l'entrée au CP",
+      "l'entrée au CE1"
+     ],
+     "answer": 3,
+     "explanation": "2026 est la date la plus à droite : l'**entrée au CE1**.",
+     "id": "ce1-histoire-geo-temps-06-b"
+    },
+    {
+     "kind": "numeric",
+     "difficulty": 1,
+     "points": 1,
+     "prompt": "Combien d'années y a-t-il entre l'entrée à la maternelle (2021) et l'entrée au CP (2024) ?",
+     "answer": 3,
+     "tolerance": 0,
+     "explanation": "2024 − 2021 = 3. Il y a **3 ans**.",
+     "unit": "ans",
+     "id": "ce1-histoire-geo-temps-06-c"
+    }
+   ],
+   "lesson": "ce1-histoire-geo-temps",
+   "points": 3,
+   "explanation": "Corrigé détaillé question par question ci-dessous.",
+   "source": "Exercice original"
+  },
+  {
+   "id": "ce1-histoire-geo-temps-q1",
+   "chapter": "ce1-histoire-geo-c1-temps",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "difficulty": 1,
+   "points": 1,
+   "prompt": "Quel est le premier jour de la semaine ?",
+   "choices": [
+    "dimanche",
+    "lundi",
+    "jeudi",
+    "samedi"
+   ],
+   "answer": 1,
+   "explanation": "La semaine commence le **lundi**.",
+   "lesson": "ce1-histoire-geo-temps",
+   "source": "Exercice original"
+  },
+  {
+   "id": "ce1-histoire-geo-temps-q2",
+   "chapter": "ce1-histoire-geo-c1-temps",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "difficulty": 1,
+   "points": 1,
+   "prompt": "Quel mois vient après mars ?",
+   "choices": [
+    "février",
+    "avril",
+    "mai",
+    "juin"
+   ],
+   "answer": 1,
+   "explanation": "Les mois : janvier, février, mars, **avril**.",
+   "lesson": "ce1-histoire-geo-temps",
+   "source": "Exercice original"
+  },
+  {
+   "id": "ce1-histoire-geo-temps-q3",
+   "chapter": "ce1-histoire-geo-c1-temps",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "difficulty": 1,
+   "points": 1,
+   "prompt": "Aujourd'hui, c'est mardi. Quel jour était-ce hier ?",
+   "choices": [
+    "mercredi",
+    "jeudi",
+    "vendredi",
+    "lundi"
+   ],
+   "answer": 3,
+   "explanation": "Avant mardi, il y a **lundi**.",
+   "lesson": "ce1-histoire-geo-temps",
+   "source": "Exercice original"
+  },
+  {
+   "id": "ce1-histoire-geo-temps-q4",
+   "chapter": "ce1-histoire-geo-c1-temps",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "difficulty": 1,
+   "points": 1,
+   "prompt": "Sur une frise, un événement très à gauche est…",
+   "choices": [
+    "ancien",
+    "très récent",
+    "demain",
+    "sans date"
+   ],
+   "answer": 0,
+   "explanation": "À gauche, l'événement est **ancien** : il s'est passé il y a longtemps.",
+   "lesson": "ce1-histoire-geo-temps",
+   "source": "Exercice original"
+  },
+  {
+   "id": "ce1-histoire-geo-temps-q5",
+   "chapter": "ce1-histoire-geo-c1-temps",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "difficulty": 1,
+   "points": 1,
+   "prompt": "Quels jours forment souvent le week-end ?",
+   "choices": [
+    "lundi et mardi",
+    "mercredi et jeudi",
+    "samedi et dimanche",
+    "vendredi et lundi"
+   ],
+   "answer": 2,
+   "explanation": "Le week-end : **samedi et dimanche**.",
+   "lesson": "ce1-histoire-geo-temps",
+   "source": "Exercice original"
+  }
+ ]
+}

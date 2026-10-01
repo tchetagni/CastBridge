@@ -1,0 +1,514 @@
+{
+ "chapter": "ce1-sciences-c4-plantes",
+ "lessons": [
+  {
+   "id": "ce1-sciences-plantes",
+   "title": "Les plantes et leur vie",
+   "minutes": 15,
+   "readAloud": true,
+   "programRef": "CE1 — Le monde vivant : les plantes, leurs parties, leurs besoins, la germination (à vérifier sur le texte officiel)",
+   "status": "draft",
+   "author": "CastBridge (brouillon IA)",
+   "source": "Rédaction originale ; à faire relire par un enseignant",
+   "objectives": [
+    "Nommer les parties d'une plante.",
+    "Citer ce dont une plante a besoin pour vivre.",
+    "Décrire la germination d'une graine."
+   ],
+   "prerequisites": [],
+   "exercises": [
+    "ce1-sciences-plantes-01",
+    "ce1-sciences-plantes-02",
+    "ce1-sciences-plantes-03",
+    "ce1-sciences-plantes-04",
+    "ce1-sciences-plantes-05",
+    "ce1-sciences-plantes-06"
+   ],
+   "selfCheck": [
+    "ce1-sciences-plantes-q1",
+    "ce1-sciences-plantes-q2",
+    "ce1-sciences-plantes-q3",
+    "ce1-sciences-plantes-q4",
+    "ce1-sciences-plantes-q5"
+   ],
+   "reviewNotes": [
+    "Vérifier l'affirmation « une graine n'a pas besoin de lumière pour germer » : elle dépend de l'espèce ; la reformuler si besoin.",
+    "Vérifier que la germination est abordée au CE1."
+   ],
+   "blocks": [
+    {
+     "type": "audio",
+     "lang": "fr-FR",
+     "text": "Les plantes sont des êtres vivants. Elles naissent, grandissent, et un jour elles meurent."
+    },
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Les parties d'une plante",
+     "md": "Une plante a plusieurs parties :\n\n- les **racines** dans le sol : elles tiennent la plante et boivent l'eau ;\n- la **tige** : elle porte les feuilles ;\n- les **feuilles**, le plus souvent vertes ;\n- les **fleurs**, qui donnent ensuite des **fruits** avec des **graines**."
+    },
+    {
+     "type": "illustration",
+     "caption": "Les parties d'une plante.",
+     "alt": "Une plante dessinée avec ses racines sous le sol marron, une tige verte, deux feuilles et une fleur jaune en haut. Chaque partie est nommée.",
+     "figure": {
+      "kind": "shapes",
+      "w": 400,
+      "h": 300,
+      "items": [
+       {
+        "t": "line",
+        "x1": 200,
+        "y1": 260,
+        "x2": 200,
+        "y2": 90,
+        "color": "green",
+        "width": 7
+       },
+       {
+        "t": "line",
+        "x1": 200,
+        "y1": 180,
+        "x2": 140,
+        "y2": 140,
+        "color": "green",
+        "width": 5
+       },
+       {
+        "t": "line",
+        "x1": 200,
+        "y1": 140,
+        "x2": 265,
+        "y2": 105,
+        "color": "green",
+        "width": 5
+       },
+       {
+        "t": "circle",
+        "cx": 135,
+        "cy": 135,
+        "r": 20,
+        "fill": "lightgreen",
+        "stroke": "green"
+       },
+       {
+        "t": "circle",
+        "cx": 272,
+        "cy": 100,
+        "r": 20,
+        "fill": "lightgreen",
+        "stroke": "green"
+       },
+       {
+        "t": "circle",
+        "cx": 200,
+        "cy": 70,
+        "r": 22,
+        "fill": "yellow",
+        "stroke": "orange"
+       },
+       {
+        "t": "line",
+        "x1": 200,
+        "y1": 260,
+        "x2": 150,
+        "y2": 290,
+        "color": "brown",
+        "width": 4
+       },
+       {
+        "t": "line",
+        "x1": 200,
+        "y1": 260,
+        "x2": 250,
+        "y2": 290,
+        "color": "brown",
+        "width": 4
+       },
+       {
+        "t": "line",
+        "x1": 200,
+        "y1": 260,
+        "x2": 200,
+        "y2": 295,
+        "color": "brown",
+        "width": 4
+       },
+       {
+        "t": "line",
+        "x1": 20,
+        "y1": 260,
+        "x2": 380,
+        "y2": 260,
+        "color": "brown",
+        "width": 3
+       },
+       {
+        "t": "text",
+        "x": 240,
+        "y": 72,
+        "text": "la fleur",
+        "size": 17,
+        "color": "orange",
+        "anchor": "start",
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 295,
+        "y": 110,
+        "text": "la feuille",
+        "size": 17,
+        "color": "green",
+        "anchor": "start",
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 20,
+        "y": 175,
+        "text": "la tige",
+        "size": 17,
+        "color": "green",
+        "anchor": "start",
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 260,
+        "y": 285,
+        "text": "les racines",
+        "size": 17,
+        "color": "brown",
+        "anchor": "start",
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 20,
+        "y": 250,
+        "text": "le sol",
+        "size": 15,
+        "color": "brown",
+        "anchor": "start"
+       }
+      ]
+     }
+    },
+    {
+     "type": "key",
+     "style": "retenir",
+     "title": "Ce dont la plante a besoin",
+     "md": "Pour vivre, une plante a besoin :\n\n- d'**eau** ;\n- de **lumière** (le soleil) ;\n- d'**air** ;\n- de bonne **terre** (le sol) et d'un peu de chaleur.\n\nSans eau ou sans lumière, la plante se fane."
+    },
+    {
+     "type": "example",
+     "title": "Exemple 1 : la plante sans eau",
+     "statement": "Tchoua oublie d'arroser son plant de tomate pendant deux semaines. Que se passe-t-il ?",
+     "steps": [
+      {
+       "md": "La plante n'a plus d'eau."
+      },
+      {
+       "md": "Ses feuilles deviennent jaunes et tombent ; elle peut mourir."
+      }
+     ],
+     "answer": "**La plante se fane faute d'eau.**"
+    },
+    {
+     "type": "example",
+     "title": "Exemple 2 : la germination",
+     "statement": "Ngono met un haricot sur du coton mouillé. Que va-t-elle voir ?",
+     "steps": [
+      {
+       "md": "Après quelques jours, la graine gonfle."
+      },
+      {
+       "md": "Une petite racine sort, puis une tige avec des feuilles : la graine a germé."
+      }
+     ],
+     "answer": "**La graine germe : une racine sort d'abord, puis la tige.**"
+    },
+    {
+     "type": "key",
+     "style": "methode",
+     "title": "Faire pousser un haricot",
+     "md": "1. Je mets un haricot sur du coton mouillé dans un pot.\n2. Je le garde au chaud, avec de la lumière.\n3. J'arrose un peu chaque jour.\n4. J'observe et je note ce que je vois chaque jour."
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Attention",
+     "md": "- Trop d'eau fait pourrir les racines : il faut arroser sans noyer.\n- Une graine n'a pas besoin de lumière pour germer, mais la jeune plante en a besoin pour grandir.\n- Les plantes sont vivantes : ne pas arracher les plantes sans raison."
+    },
+    {
+     "type": "exercise",
+     "ref": "ce1-sciences-plantes-01"
+    },
+    {
+     "type": "exercise",
+     "ref": "ce1-sciences-plantes-02"
+    },
+    {
+     "type": "exercise",
+     "ref": "ce1-sciences-plantes-03"
+    },
+    {
+     "type": "more",
+     "items": [
+      "Le cacao, le café, l'arachide et le plantain sont des plantes cultivées au Cameroun.",
+      "Les arbres donnent de l'ombre, du bois et des fruits ; ils nous aident à respirer un bon air."
+     ]
+    }
+   ]
+  }
+ ],
+ "exercises": [
+  {
+   "id": "ce1-sciences-plantes-01",
+   "chapter": "ce1-sciences-c4-plantes",
+   "kind": "mcq",
+   "tier": "application",
+   "difficulty": 1,
+   "points": 1,
+   "prompt": "Quelle partie de la plante est dans le sol ?",
+   "choices": [
+    "la fleur",
+    "les racines",
+    "les feuilles",
+    "le fruit"
+   ],
+   "answer": 1,
+   "explanation": "Les **racines** sont dans le sol : elles tiennent la plante et boivent l'eau.",
+   "lesson": "ce1-sciences-plantes",
+   "source": "Exercice original"
+  },
+  {
+   "id": "ce1-sciences-plantes-02",
+   "chapter": "ce1-sciences-c4-plantes",
+   "kind": "truefalse",
+   "tier": "application",
+   "difficulty": 1,
+   "points": 1,
+   "prompt": "Vrai ou faux : une plante a besoin d'eau pour vivre.",
+   "answer": true,
+   "explanation": "Vrai. Sans **eau**, la plante se fane.",
+   "lesson": "ce1-sciences-plantes",
+   "source": "Exercice original"
+  },
+  {
+   "id": "ce1-sciences-plantes-03",
+   "chapter": "ce1-sciences-c4-plantes",
+   "kind": "matching",
+   "tier": "application",
+   "difficulty": 1,
+   "points": 2,
+   "prompt": "Associe chaque partie de la plante à son rôle.",
+   "pairs": [
+    [
+     "les racines",
+     "boire l'eau du sol"
+    ],
+    [
+     "la tige",
+     "porter les feuilles"
+    ],
+    [
+     "la fleur",
+     "donner un fruit"
+    ],
+    [
+     "la graine",
+     "faire naître une nouvelle plante"
+    ]
+   ],
+   "explanation": "Les racines boivent l'eau, la tige porte les feuilles, la fleur devient un fruit, la graine donne une nouvelle plante.",
+   "lesson": "ce1-sciences-plantes",
+   "source": "Exercice original"
+  },
+  {
+   "id": "ce1-sciences-plantes-04",
+   "chapter": "ce1-sciences-c4-plantes",
+   "kind": "mcq",
+   "tier": "approfondissement",
+   "difficulty": 2,
+   "points": 1,
+   "prompt": "Que sort en premier d'une graine qui germe ?",
+   "choices": [
+    "une grande fleur",
+    "une petite racine",
+    "un fruit mûr",
+    "un gros tronc"
+   ],
+   "answer": 1,
+   "explanation": "En germant, la graine fait d'abord sortir une **racine**.",
+   "lesson": "ce1-sciences-plantes",
+   "source": "Exercice original"
+  },
+  {
+   "id": "ce1-sciences-plantes-05",
+   "chapter": "ce1-sciences-c4-plantes",
+   "kind": "open",
+   "tier": "approfondissement",
+   "difficulty": 2,
+   "points": 2,
+   "prompt": "Tchoua veut faire pousser un haricot. Écris deux choses dont la graine a besoin.",
+   "model": "Il lui faut de l'eau et de la chaleur ; ensuite de la lumière pour grandir.",
+   "rubric": [
+    "Eau citée.",
+    "Un autre besoin cité (chaleur, lumière, air, terre)."
+   ],
+   "explanation": "Une graine a besoin d'eau et de chaleur pour germer. La jeune plante a ensuite besoin de lumière.",
+   "lesson": "ce1-sciences-plantes",
+   "source": "Exercice original"
+  },
+  {
+   "id": "ce1-sciences-plantes-06",
+   "chapter": "ce1-sciences-c4-plantes",
+   "kind": "problem",
+   "tier": "examen",
+   "difficulty": 2,
+   "prompt": "Essomba met deux plants de tomate au soleil. Il arrose le premier chaque jour. Il n'arrose jamais le second.",
+   "parts": [
+    {
+     "kind": "mcq",
+     "difficulty": 1,
+     "points": 1,
+     "prompt": "Quel plant va bien pousser ?",
+     "choices": [
+      "celui qu'il n'arrose pas",
+      "les deux, sans eau",
+      "aucun des deux",
+      "celui qu'il arrose"
+     ],
+     "answer": 3,
+     "explanation": "La plante a besoin d'**eau** : celui qui est arrosé pousse bien.",
+     "id": "ce1-sciences-plantes-06-a"
+    },
+    {
+     "kind": "truefalse",
+     "difficulty": 1,
+     "points": 1,
+     "prompt": "Le second plant va se faner.",
+     "answer": true,
+     "explanation": "Vrai : sans eau, il se **fane**.",
+     "id": "ce1-sciences-plantes-06-b"
+    },
+    {
+     "kind": "mcq",
+     "difficulty": 1,
+     "points": 1,
+     "prompt": "De quoi les deux plants ont-ils besoin en plus de l'eau ?",
+     "choices": [
+      "de lumière",
+      "de télévision",
+      "de sel",
+      "de savon"
+     ],
+     "answer": 0,
+     "explanation": "Ils ont besoin de **lumière** (soleil) et d'air.",
+     "id": "ce1-sciences-plantes-06-c"
+    }
+   ],
+   "lesson": "ce1-sciences-plantes",
+   "points": 3,
+   "explanation": "Corrigé détaillé question par question ci-dessous.",
+   "source": "Exercice original"
+  },
+  {
+   "id": "ce1-sciences-plantes-q1",
+   "chapter": "ce1-sciences-c4-plantes",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "difficulty": 1,
+   "points": 1,
+   "prompt": "Quelle partie de la plante est souvent verte ?",
+   "choices": [
+    "la racine",
+    "le sol",
+    "la feuille",
+    "la graine du haricot sec"
+   ],
+   "answer": 2,
+   "explanation": "La **feuille** est le plus souvent verte.",
+   "lesson": "ce1-sciences-plantes",
+   "source": "Exercice original"
+  },
+  {
+   "id": "ce1-sciences-plantes-q2",
+   "chapter": "ce1-sciences-c4-plantes",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "difficulty": 1,
+   "points": 1,
+   "prompt": "Quelle partie porte les feuilles ?",
+   "choices": [
+    "la racine",
+    "la graine",
+    "la tige",
+    "le fruit"
+   ],
+   "answer": 2,
+   "explanation": "La **tige** porte les feuilles.",
+   "lesson": "ce1-sciences-plantes",
+   "source": "Exercice original"
+  },
+  {
+   "id": "ce1-sciences-plantes-q3",
+   "chapter": "ce1-sciences-c4-plantes",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "difficulty": 1,
+   "points": 1,
+   "prompt": "Qu'est-ce qu'une graine ?",
+   "choices": [
+    "ce qui peut donner une nouvelle plante",
+    "une feuille morte",
+    "un caillou",
+    "une racine"
+   ],
+   "answer": 0,
+   "explanation": "Une **graine** peut donner une nouvelle plante.",
+   "lesson": "ce1-sciences-plantes",
+   "source": "Exercice original"
+  },
+  {
+   "id": "ce1-sciences-plantes-q4",
+   "chapter": "ce1-sciences-c4-plantes",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "difficulty": 1,
+   "points": 1,
+   "prompt": "Que devient la fleur ensuite ?",
+   "choices": [
+    "une racine",
+    "un caillou",
+    "de l'eau",
+    "un fruit"
+   ],
+   "answer": 3,
+   "explanation": "Après la fleur vient le **fruit**, qui contient les graines.",
+   "lesson": "ce1-sciences-plantes",
+   "source": "Exercice original"
+  },
+  {
+   "id": "ce1-sciences-plantes-q5",
+   "chapter": "ce1-sciences-c4-plantes",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "difficulty": 1,
+   "points": 1,
+   "prompt": "Que fait une plante sans eau ?",
+   "choices": [
+    "elle grandit plus vite",
+    "elle se fane",
+    "elle chante",
+    "elle devient une pierre"
+   ],
+   "answer": 1,
+   "explanation": "Sans eau, la plante **se fane**.",
+   "lesson": "ce1-sciences-plantes",
+   "source": "Exercice original"
+  }
+ ]
+}

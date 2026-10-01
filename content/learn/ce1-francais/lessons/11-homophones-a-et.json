@@ -1,0 +1,495 @@
+{
+ "chapter": "ce1-francais-orthographe",
+ "lessons": [
+  {
+   "id": "ce1-francais-homophones-a-et",
+   "title": "Les homophones : a / à et et / est",
+   "minutes": 20,
+   "readAloud": true,
+   "programRef": "CE1 — Programme de français du cycle 2, MINEDUB (reconstitué, à vérifier sur le texte officiel) — orthographe grammaticale : homophones a/à, et/est",
+   "status": "draft",
+   "author": "CastBridge (brouillon IA)",
+   "source": "Rédaction originale ; à faire relire par un enseignant",
+   "objectives": [
+    "Écrire a ou à.",
+    "Écrire et ou est.",
+    "Utiliser l'astuce du remplacement (avait / était)."
+   ],
+   "prerequisites": [
+    "ce1-francais-present"
+   ],
+   "exercises": [
+    "ce1-francais-homophones-a-et-01",
+    "ce1-francais-homophones-a-et-02",
+    "ce1-francais-homophones-a-et-03",
+    "ce1-francais-homophones-a-et-04",
+    "ce1-francais-homophones-a-et-05",
+    "ce1-francais-homophones-a-et-06"
+   ],
+   "selfCheck": [
+    "ce1-francais-homophones-a-et-q1",
+    "ce1-francais-homophones-a-et-q2",
+    "ce1-francais-homophones-a-et-q3",
+    "ce1-francais-homophones-a-et-q4",
+    "ce1-francais-homophones-a-et-q5"
+   ],
+   "reviewNotes": [
+    "Vérifier les phrases d'exercices : rendues simples ; l'explication de la partie problème B."
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Des mots qui se prononcent pareil",
+     "md": "Des **homophones** se disent de la même façon mais s'écrivent différemment et n'ont pas le même sens."
+    },
+    {
+     "type": "key",
+     "style": "retenir",
+     "title": "a ou à ?",
+     "md": "- **a** (sans accent) est le verbe **avoir** : *Il **a** un livre.* On peut dire **avait** : *Il avait un livre.*\n- **à** (avec accent) est un petit mot de lieu ou de but : *Il va **à** l'école.* On ne peut pas dire *avait*."
+    },
+    {
+     "type": "key",
+     "style": "retenir",
+     "title": "et ou est ?",
+     "md": "- **est** est le verbe **être** : *Il **est** content.* On peut dire **était**.\n- **et** relie deux mots : *du pain **et** du beurre.* On peut dire **et puis**."
+    },
+    {
+     "type": "illustration",
+     "caption": "L'astuce du remplacement.",
+     "alt": "Quatre cases : a se remplace par avait, à ne se remplace pas, est se remplace par était, et se remplace par et puis.",
+     "figure": {
+      "kind": "shapes",
+      "w": 520,
+      "h": 150,
+      "items": [
+       {
+        "t": "rect",
+        "x": 10,
+        "y": 20,
+        "w": 115,
+        "h": 90,
+        "stroke": "ink",
+        "fill": "lightblue",
+        "radius": 8
+       },
+       {
+        "t": "text",
+        "x": 67,
+        "y": 50,
+        "text": "a",
+        "size": 28,
+        "color": "blue",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 67,
+        "y": 85,
+        "text": "→ avait",
+        "size": 16,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": false
+       },
+       {
+        "t": "rect",
+        "x": 135,
+        "y": 20,
+        "w": 115,
+        "h": 90,
+        "stroke": "ink",
+        "fill": "lightyellow",
+        "radius": 8
+       },
+       {
+        "t": "text",
+        "x": 192,
+        "y": 50,
+        "text": "à",
+        "size": 28,
+        "color": "orange",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 192,
+        "y": 85,
+        "text": "pas avait",
+        "size": 15,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": false
+       },
+       {
+        "t": "rect",
+        "x": 260,
+        "y": 20,
+        "w": 115,
+        "h": 90,
+        "stroke": "ink",
+        "fill": "lightgreen",
+        "radius": 8
+       },
+       {
+        "t": "text",
+        "x": 317,
+        "y": 50,
+        "text": "est",
+        "size": 28,
+        "color": "green",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 317,
+        "y": 85,
+        "text": "→ était",
+        "size": 16,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": false
+       },
+       {
+        "t": "rect",
+        "x": 385,
+        "y": 20,
+        "w": 125,
+        "h": 90,
+        "stroke": "ink",
+        "fill": "lightorange",
+        "radius": 8
+       },
+       {
+        "t": "text",
+        "x": 447,
+        "y": 50,
+        "text": "et",
+        "size": 28,
+        "color": "red",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 447,
+        "y": 85,
+        "text": "→ et puis",
+        "size": 15,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": false
+       }
+      ]
+     }
+    },
+    {
+     "type": "example",
+     "title": "Exemple 1 : a ou à ?",
+     "statement": "Complète : « Ngono ___ un ballon. Elle joue ___ la cour. »",
+     "steps": [
+      {
+       "md": "Je remplace par **avait** : « Ngono avait un ballon » : ça marche → **a**."
+      },
+      {
+       "md": "« Elle joue avait la cour » : ça ne marche pas → **à**."
+      }
+     ],
+     "answer": "**Ngono a un ballon. Elle joue à la cour.**"
+    },
+    {
+     "type": "example",
+     "title": "Exemple 2 : et ou est ?",
+     "statement": "Complète : « Le chat ___ noir ___ blanc. »",
+     "steps": [
+      {
+       "md": "Premier trou : je remplace par était : « Le chat était noir » : ça marche → **est**."
+      },
+      {
+       "md": "Deuxième trou : « noir et puis blanc » : ça marche → **et**."
+      }
+     ],
+     "answer": "**Le chat est noir et blanc.**"
+    },
+    {
+     "type": "exercise",
+     "ref": "ce1-francais-homophones-a-et-01"
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Attention",
+     "md": "- Je ne mets pas d'accent sur le **a** du verbe avoir.\n- Je mets un accent sur **à** (lieu, but).\n- On écrit **et** avec un t, **est** avec un s et un t (mais on n'entend pas la fin)."
+    }
+   ]
+  }
+ ],
+ "exercises": [
+  {
+   "kind": "mcq",
+   "difficulty": 1,
+   "points": 1,
+   "prompt": "Complète : « Il va ___ l'école. »",
+   "choices": [
+    "et",
+    "est",
+    "à",
+    "a"
+   ],
+   "answer": 2,
+   "explanation": "« Il va avait l'école » ne marche pas : on écrit à.",
+   "id": "ce1-francais-homophones-a-et-01",
+   "chapter": "ce1-francais-orthographe",
+   "tier": "application",
+   "lesson": "ce1-francais-homophones-a-et",
+   "source": "Exercice original, niveau CE1"
+  },
+  {
+   "kind": "mcq",
+   "difficulty": 1,
+   "points": 1,
+   "prompt": "Complète : « Paul ___ un cahier. »",
+   "choices": [
+    "et",
+    "a",
+    "à",
+    "est"
+   ],
+   "answer": 1,
+   "explanation": "« Paul avait un cahier » : on écrit a.",
+   "id": "ce1-francais-homophones-a-et-02",
+   "chapter": "ce1-francais-orthographe",
+   "tier": "application",
+   "lesson": "ce1-francais-homophones-a-et",
+   "source": "Exercice original, niveau CE1"
+  },
+  {
+   "kind": "matching",
+   "difficulty": 1,
+   "points": 2,
+   "prompt": "Associe chaque mot à son astuce.",
+   "pairs": [
+    [
+     "a",
+     "on peut dire avait"
+    ],
+    [
+     "est",
+     "on peut dire était"
+    ],
+    [
+     "et",
+     "on peut dire et puis"
+    ]
+   ],
+   "explanation": "Astuce du remplacement.",
+   "id": "ce1-francais-homophones-a-et-03",
+   "chapter": "ce1-francais-orthographe",
+   "tier": "application",
+   "lesson": "ce1-francais-homophones-a-et",
+   "source": "Exercice original, niveau CE1"
+  },
+  {
+   "kind": "mcq",
+   "difficulty": 2,
+   "points": 1,
+   "prompt": "Complète : « Mon frère ___ grand ___ fort. »",
+   "choices": [
+    "est ... et",
+    "a ... et",
+    "et ... est",
+    "est ... à"
+   ],
+   "answer": 0,
+   "explanation": "« est » (était) puis « et » (et puis).",
+   "id": "ce1-francais-homophones-a-et-04",
+   "chapter": "ce1-francais-orthographe",
+   "tier": "approfondissement",
+   "lesson": "ce1-francais-homophones-a-et",
+   "source": "Exercice original, niveau CE1"
+  },
+  {
+   "kind": "open",
+   "difficulty": 2,
+   "points": 3,
+   "prompt": "Recopie en choisissant bien : « Maman (a/à) acheté du pain (et/est) du lait (à/a) la boutique. »",
+   "model": "Maman a acheté du pain et du lait à la boutique.",
+   "rubric": [
+    "« a acheté » (avoir)",
+    "« pain et du lait » (et puis)",
+    "« à la boutique » (lieu)"
+   ],
+   "explanation": "On teste avec avait, était, et puis.",
+   "id": "ce1-francais-homophones-a-et-05",
+   "chapter": "ce1-francais-orthographe",
+   "tier": "approfondissement",
+   "lesson": "ce1-francais-homophones-a-et",
+   "source": "Exercice original, niveau CE1"
+  },
+  {
+   "kind": "problem",
+   "difficulty": 2,
+   "prompt": "Complète les phrases : A « Marie ___ un livre. » B « Ibrahim ___ à la maison. » C « Du riz ___ du poisson. »",
+   "parts": [
+    {
+     "kind": "mcq",
+     "difficulty": 1,
+     "points": 1,
+     "prompt": "Phrase A : « Marie ___ un livre. »",
+     "choices": [
+      "à",
+      "est",
+      "et",
+      "a"
+     ],
+     "answer": 3,
+     "explanation": "Marie avait un livre : on écrit a.",
+     "id": "ce1-francais-homophones-a-et-06-a"
+    },
+    {
+     "kind": "mcq",
+     "difficulty": 1,
+     "points": 1,
+     "prompt": "Phrase B : « Ibrahim ___ à la maison. »",
+     "choices": [
+      "a",
+      "à",
+      "est",
+      "et"
+     ],
+     "answer": 2,
+     "explanation": "Ibrahim était à la maison : est.",
+     "id": "ce1-francais-homophones-a-et-06-b"
+    },
+    {
+     "kind": "mcq",
+     "difficulty": 1,
+     "points": 1,
+     "prompt": "Phrase C : « Du riz ___ du poisson. »",
+     "choices": [
+      "a",
+      "est",
+      "à",
+      "et"
+     ],
+     "answer": 3,
+     "explanation": "du riz et puis du poisson : et.",
+     "id": "ce1-francais-homophones-a-et-06-c"
+    },
+    {
+     "kind": "truefalse",
+     "difficulty": 1,
+     "points": 1,
+     "prompt": "Vrai ou faux : « Il à un chat » est bien écrit.",
+     "answer": false,
+     "explanation": "On peut dire « il avait un chat » : on écrit « Il a un chat ».",
+     "id": "ce1-francais-homophones-a-et-06-d"
+    }
+   ],
+   "id": "ce1-francais-homophones-a-et-06",
+   "chapter": "ce1-francais-orthographe",
+   "tier": "examen",
+   "lesson": "ce1-francais-homophones-a-et",
+   "source": "Exercice original, niveau CE1"
+  },
+  {
+   "kind": "mcq",
+   "difficulty": 1,
+   "points": 1,
+   "prompt": "« Elle ___ mal à la tête. » (on peut dire avait)",
+   "choices": [
+    "à",
+    "a",
+    "et",
+    "est"
+   ],
+   "answer": 1,
+   "explanation": "avait → a.",
+   "id": "ce1-francais-homophones-a-et-q1",
+   "chapter": "ce1-francais-orthographe",
+   "tier": "autoeval",
+   "lesson": "ce1-francais-homophones-a-et",
+   "source": "Exercice original, niveau CE1"
+  },
+  {
+   "kind": "mcq",
+   "difficulty": 1,
+   "points": 1,
+   "prompt": "« Nous allons ___ Kribi. »",
+   "choices": [
+    "est",
+    "et",
+    "à",
+    "a"
+   ],
+   "answer": 2,
+   "explanation": "lieu : à.",
+   "id": "ce1-francais-homophones-a-et-q2",
+   "chapter": "ce1-francais-orthographe",
+   "tier": "autoeval",
+   "lesson": "ce1-francais-homophones-a-et",
+   "source": "Exercice original, niveau CE1"
+  },
+  {
+   "kind": "mcq",
+   "difficulty": 1,
+   "points": 1,
+   "prompt": "« La soupe ___ chaude. » (était)",
+   "choices": [
+    "a",
+    "et",
+    "à",
+    "est"
+   ],
+   "answer": 3,
+   "explanation": "était → est.",
+   "id": "ce1-francais-homophones-a-et-q3",
+   "chapter": "ce1-francais-orthographe",
+   "tier": "autoeval",
+   "lesson": "ce1-francais-homophones-a-et",
+   "source": "Exercice original, niveau CE1"
+  },
+  {
+   "kind": "mcq",
+   "difficulty": 1,
+   "points": 1,
+   "prompt": "« Du pain ___ du beurre. » (et puis)",
+   "choices": [
+    "est",
+    "a",
+    "et",
+    "à"
+   ],
+   "answer": 2,
+   "explanation": "et puis → et.",
+   "id": "ce1-francais-homophones-a-et-q4",
+   "chapter": "ce1-francais-orthographe",
+   "tier": "autoeval",
+   "lesson": "ce1-francais-homophones-a-et",
+   "source": "Exercice original, niveau CE1"
+  },
+  {
+   "kind": "mcq",
+   "difficulty": 1,
+   "points": 1,
+   "prompt": "Quelle phrase est juste ?",
+   "choices": [
+    "Il a faim et il et fatigué.",
+    "Il a faim est il et fatigué.",
+    "Il à faim et il est fatigué.",
+    "Il a faim et il est fatigué."
+   ],
+   "answer": 3,
+   "explanation": "a (avait), et (et puis), est (était).",
+   "id": "ce1-francais-homophones-a-et-q5",
+   "chapter": "ce1-francais-orthographe",
+   "tier": "autoeval",
+   "lesson": "ce1-francais-homophones-a-et",
+   "source": "Exercice original, niveau CE1"
+  }
+ ]
+}

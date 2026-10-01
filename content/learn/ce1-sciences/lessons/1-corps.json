@@ -1,0 +1,643 @@
+{
+ "chapter": "ce1-sciences-c1-corps",
+ "lessons": [
+  {
+   "id": "ce1-sciences-corps",
+   "title": "Mon corps et ma santé",
+   "minutes": 15,
+   "readAloud": true,
+   "programRef": "CE1 — Le corps humain : les parties du corps, les cinq sens, l'hygiène (à vérifier sur le texte officiel)",
+   "status": "draft",
+   "author": "CastBridge (brouillon IA)",
+   "source": "Rédaction originale ; à faire relire par un enseignant",
+   "objectives": [
+    "Nommer les grandes parties du corps.",
+    "Associer chaque sens à son organe.",
+    "Citer des gestes d'hygiène qui protègent la santé."
+   ],
+   "prerequisites": [],
+   "exercises": [
+    "ce1-sciences-corps-01",
+    "ce1-sciences-corps-02",
+    "ce1-sciences-corps-03",
+    "ce1-sciences-corps-04",
+    "ce1-sciences-corps-05",
+    "ce1-sciences-corps-06"
+   ],
+   "selfCheck": [
+    "ce1-sciences-corps-q1",
+    "ce1-sciences-corps-q2",
+    "ce1-sciences-corps-q3",
+    "ce1-sciences-corps-q4",
+    "ce1-sciences-corps-q5"
+   ],
+   "reviewNotes": [
+    "Vérifier que les notions (organes des sens, hygiène) correspondent bien au programme officiel du CE1.",
+    "Vérifier le vocabulaire « membres », « tronc » attendu par le programme."
+   ],
+   "blocks": [
+    {
+     "type": "audio",
+     "lang": "fr-FR",
+     "text": "Mon corps est fait de plusieurs parties. Observe bien le dessin."
+    },
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Les parties du corps",
+     "md": "Le corps a trois grandes parties :\n\n- la **tête** (avec le visage) ;\n- le **tronc** (le ventre et le dos) ;\n- les **membres** : deux bras et deux jambes.\n\nOn a des mains au bout des bras et des pieds au bout des jambes."
+    },
+    {
+     "type": "illustration",
+     "caption": "Les grandes parties du corps.",
+     "alt": "Un bonhomme dessiné avec la tête en haut, le tronc au milieu, deux bras sur les côtés et deux jambes en bas. Chaque partie porte son nom.",
+     "figure": {
+      "kind": "shapes",
+      "w": 400,
+      "h": 290,
+      "items": [
+       {
+        "t": "circle",
+        "cx": 200,
+        "cy": 50,
+        "r": 28,
+        "fill": "lightorange",
+        "stroke": "ink"
+       },
+       {
+        "t": "rect",
+        "x": 170,
+        "y": 82,
+        "w": 60,
+        "h": 100,
+        "fill": "lightblue",
+        "stroke": "blue",
+        "radius": 10
+       },
+       {
+        "t": "line",
+        "x1": 170,
+        "y1": 95,
+        "x2": 110,
+        "y2": 150,
+        "color": "ink",
+        "width": 6
+       },
+       {
+        "t": "line",
+        "x1": 230,
+        "y1": 95,
+        "x2": 290,
+        "y2": 150,
+        "color": "ink",
+        "width": 6
+       },
+       {
+        "t": "line",
+        "x1": 185,
+        "y1": 182,
+        "x2": 165,
+        "y2": 265,
+        "color": "ink",
+        "width": 6
+       },
+       {
+        "t": "line",
+        "x1": 215,
+        "y1": 182,
+        "x2": 235,
+        "y2": 265,
+        "color": "ink",
+        "width": 6
+       },
+       {
+        "t": "text",
+        "x": 275,
+        "y": 55,
+        "text": "la tête",
+        "size": 18,
+        "color": "red",
+        "anchor": "start",
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 20,
+        "y": 125,
+        "text": "le tronc",
+        "size": 18,
+        "color": "blue",
+        "anchor": "start",
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 300,
+        "y": 160,
+        "text": "le bras",
+        "size": 18,
+        "color": "green",
+        "anchor": "start",
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 250,
+        "y": 240,
+        "text": "la jambe",
+        "size": 18,
+        "color": "purple",
+        "anchor": "start",
+        "bold": true
+       }
+      ]
+     }
+    },
+    {
+     "type": "key",
+     "style": "retenir",
+     "title": "Les cinq sens",
+     "md": "Nous avons **cinq sens**. Chaque sens a son organe.\n\n- La **vue** : les yeux, pour voir.\n- L'**ouïe** : les oreilles, pour entendre.\n- L'**odorat** : le nez, pour sentir.\n- Le **goût** : la langue, pour goûter.\n- Le **toucher** : la peau, pour toucher."
+    },
+    {
+     "type": "illustration",
+     "caption": "Un sens, un organe.",
+     "alt": "Cinq cases colorées côte à côte : la vue avec les yeux, l'ouïe avec les oreilles, l'odorat avec le nez, le goût avec la langue, le toucher avec la peau.",
+     "figure": {
+      "kind": "shapes",
+      "w": 520,
+      "h": 170,
+      "items": [
+       {
+        "t": "rect",
+        "x": 10,
+        "y": 20,
+        "w": 94,
+        "h": 60,
+        "fill": "lightblue",
+        "stroke": "blue",
+        "radius": 8
+       },
+       {
+        "t": "rect",
+        "x": 114,
+        "y": 20,
+        "w": 94,
+        "h": 60,
+        "fill": "lightgreen",
+        "stroke": "green",
+        "radius": 8
+       },
+       {
+        "t": "rect",
+        "x": 218,
+        "y": 20,
+        "w": 94,
+        "h": 60,
+        "fill": "lightyellow",
+        "stroke": "orange",
+        "radius": 8
+       },
+       {
+        "t": "rect",
+        "x": 322,
+        "y": 20,
+        "w": 94,
+        "h": 60,
+        "fill": "lightorange",
+        "stroke": "red",
+        "radius": 8
+       },
+       {
+        "t": "rect",
+        "x": 426,
+        "y": 20,
+        "w": 84,
+        "h": 60,
+        "fill": "lightgrey",
+        "stroke": "grey",
+        "radius": 8
+       },
+       {
+        "t": "text",
+        "x": 57,
+        "y": 45,
+        "text": "la vue",
+        "size": 17,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 57,
+        "y": 68,
+        "text": "les yeux",
+        "size": 15,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "text",
+        "x": 161,
+        "y": 45,
+        "text": "l'ouïe",
+        "size": 17,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 161,
+        "y": 68,
+        "text": "les oreilles",
+        "size": 15,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "text",
+        "x": 265,
+        "y": 45,
+        "text": "l'odorat",
+        "size": 17,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 265,
+        "y": 68,
+        "text": "le nez",
+        "size": 15,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "text",
+        "x": 369,
+        "y": 45,
+        "text": "le goût",
+        "size": 17,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 369,
+        "y": 68,
+        "text": "la langue",
+        "size": 15,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "text",
+        "x": 468,
+        "y": 45,
+        "text": "le toucher",
+        "size": 16,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 468,
+        "y": 68,
+        "text": "la peau",
+        "size": 15,
+        "color": "ink",
+        "anchor": "middle"
+       },
+       {
+        "t": "text",
+        "x": 260,
+        "y": 125,
+        "text": "Les cinq sens nous font connaître le monde.",
+        "size": 17,
+        "color": "blue",
+        "anchor": "middle",
+        "bold": true
+       }
+      ]
+     }
+    },
+    {
+     "type": "example",
+     "title": "Exemple 1 : quel sens utilise Ngono ?",
+     "statement": "Ngono sent l'odeur d'une mangue mûre. Quel sens utilise-t-elle ?",
+     "steps": [
+      {
+       "md": "Elle utilise son nez."
+      },
+      {
+       "md": "Le nez est l'organe de l'odorat."
+      }
+     ],
+     "answer": "**L'odorat.**"
+    },
+    {
+     "type": "example",
+     "title": "Exemple 2 : un sens pour chaque action",
+     "statement": "Amina écoute le chant d'un oiseau puis caresse un chat. Quels sens utilise-t-elle ?",
+     "steps": [
+      {
+       "md": "Écouter : elle utilise ses oreilles, donc l'ouïe."
+      },
+      {
+       "md": "Caresser : elle utilise la peau de sa main, donc le toucher."
+      }
+     ],
+     "answer": "**L'ouïe, puis le toucher.**"
+    },
+    {
+     "type": "key",
+     "style": "methode",
+     "title": "Rester en bonne santé",
+     "md": "Pour garder un corps en bonne santé :\n\n- je me lave les mains avec du savon avant de manger et après les toilettes ;\n- je me lave tous les jours et je brosse mes dents ;\n- je dors assez la nuit ;\n- je bois de l'eau propre ;\n- je joue et je bouge chaque jour."
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Attention",
+     "md": "- La peau, c'est aussi un organe des sens : on sent le chaud, le froid et la douleur avec elle, pas seulement avec les mains.\n- Ne jamais goûter un produit inconnu ou un médicament seul.\n- Si je suis malade, j'en parle à un adulte."
+    },
+    {
+     "type": "exercise",
+     "ref": "ce1-sciences-corps-01"
+    },
+    {
+     "type": "exercise",
+     "ref": "ce1-sciences-corps-02"
+    },
+    {
+     "type": "exercise",
+     "ref": "ce1-sciences-corps-03"
+    },
+    {
+     "type": "more",
+     "items": [
+      "Quand on a mal, on peut aller au centre de santé : l'infirmier ou le médecin nous soigne.",
+      "Les vaccins nous protègent de certaines maladies ; le carnet de santé garde la trace de nos vaccins."
+     ]
+    }
+   ]
+  }
+ ],
+ "exercises": [
+  {
+   "id": "ce1-sciences-corps-01",
+   "chapter": "ce1-sciences-c1-corps",
+   "kind": "mcq",
+   "tier": "application",
+   "difficulty": 1,
+   "points": 1,
+   "prompt": "Avec quel organe sens-tu une odeur ?",
+   "choices": [
+    "les oreilles",
+    "les yeux",
+    "le nez",
+    "la langue"
+   ],
+   "answer": 2,
+   "explanation": "On sent les odeurs avec le **nez** : c'est l'organe de l'odorat.",
+   "lesson": "ce1-sciences-corps",
+   "source": "Exercice original"
+  },
+  {
+   "id": "ce1-sciences-corps-02",
+   "chapter": "ce1-sciences-c1-corps",
+   "kind": "truefalse",
+   "tier": "application",
+   "difficulty": 1,
+   "points": 1,
+   "prompt": "Vrai ou faux : on a deux jambes et deux bras.",
+   "answer": true,
+   "explanation": "C'est vrai. Les bras et les jambes sont les **membres** du corps : il y en a quatre.",
+   "lesson": "ce1-sciences-corps",
+   "source": "Exercice original"
+  },
+  {
+   "id": "ce1-sciences-corps-03",
+   "chapter": "ce1-sciences-c1-corps",
+   "kind": "matching",
+   "tier": "application",
+   "difficulty": 1,
+   "points": 2,
+   "prompt": "Associe chaque organe à son sens.",
+   "pairs": [
+    [
+     "les yeux",
+     "la vue"
+    ],
+    [
+     "les oreilles",
+     "l'ouïe"
+    ],
+    [
+     "la langue",
+     "le goût"
+    ],
+    [
+     "la peau",
+     "le toucher"
+    ]
+   ],
+   "explanation": "Les yeux servent à voir, les oreilles à entendre, la langue à goûter et la peau à toucher.",
+   "method": "Je pense à ce que fait chaque organe.",
+   "lesson": "ce1-sciences-corps",
+   "source": "Exercice original"
+  },
+  {
+   "id": "ce1-sciences-corps-04",
+   "chapter": "ce1-sciences-c1-corps",
+   "kind": "mcq",
+   "tier": "approfondissement",
+   "difficulty": 2,
+   "points": 1,
+   "prompt": "Mballa se lave les mains avec du savon. Quand est-ce le plus important ?",
+   "choices": [
+    "avant de manger",
+    "avant de dormir seulement",
+    "quand on a joué au ballon seulement",
+    "jamais, l'eau suffit"
+   ],
+   "answer": 0,
+   "explanation": "On se lave les mains avec du savon **avant de manger** (et après les toilettes) pour chasser les microbes.",
+   "mistakes": [
+    "Croire que l'eau seule suffit : le savon est nécessaire."
+   ],
+   "lesson": "ce1-sciences-corps",
+   "source": "Exercice original"
+  },
+  {
+   "id": "ce1-sciences-corps-05",
+   "chapter": "ce1-sciences-c1-corps",
+   "kind": "open",
+   "tier": "approfondissement",
+   "difficulty": 2,
+   "points": 3,
+   "prompt": "Cite trois gestes d'hygiène que tu fais chaque jour.",
+   "model": "Je me lave les mains avant de manger. Je me brosse les dents. Je me lave le corps tous les jours.",
+   "rubric": [
+    "Au moins trois gestes d'hygiène corrects.",
+    "Phrases simples."
+   ],
+   "explanation": "Se laver les mains, se brosser les dents, se laver, dormir assez, boire de l'eau propre : tous ces gestes protègent la santé.",
+   "lesson": "ce1-sciences-corps",
+   "source": "Exercice original"
+  },
+  {
+   "id": "ce1-sciences-corps-06",
+   "chapter": "ce1-sciences-c1-corps",
+   "kind": "problem",
+   "tier": "examen",
+   "difficulty": 1,
+   "prompt": "Fotso est au marché avec sa tante. Il voit des mangues, sent leur odeur, écoute les vendeurs et goûte un morceau.",
+   "parts": [
+    {
+     "kind": "mcq",
+     "difficulty": 1,
+     "points": 1,
+     "prompt": "Avec quoi Fotso voit-il les mangues ?",
+     "choices": [
+      "le nez",
+      "la peau",
+      "les oreilles",
+      "les yeux"
+     ],
+     "answer": 3,
+     "explanation": "On voit avec les **yeux** (la vue).",
+     "id": "ce1-sciences-corps-06-a"
+    },
+    {
+     "kind": "mcq",
+     "difficulty": 1,
+     "points": 1,
+     "prompt": "Quel sens utilise-t-il pour écouter les vendeurs ?",
+     "choices": [
+      "la vue",
+      "l'ouïe",
+      "l'odorat",
+      "le goût"
+     ],
+     "answer": 1,
+     "explanation": "Écouter, c'est utiliser l'**ouïe** avec les oreilles.",
+     "id": "ce1-sciences-corps-06-b"
+    },
+    {
+     "kind": "truefalse",
+     "difficulty": 1,
+     "points": 1,
+     "prompt": "Fotso goûte la mangue avec sa langue.",
+     "answer": true,
+     "explanation": "Vrai : la **langue** est l'organe du goût.",
+     "id": "ce1-sciences-corps-06-c"
+    }
+   ],
+   "lesson": "ce1-sciences-corps",
+   "points": 3,
+   "explanation": "Corrigé détaillé question par question ci-dessous.",
+   "source": "Exercice original"
+  },
+  {
+   "id": "ce1-sciences-corps-q1",
+   "chapter": "ce1-sciences-c1-corps",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "difficulty": 1,
+   "points": 1,
+   "prompt": "Combien y a-t-il de sens ?",
+   "choices": [
+    "3",
+    "5",
+    "4",
+    "6"
+   ],
+   "answer": 1,
+   "explanation": "Il y a **cinq** sens : vue, ouïe, odorat, goût, toucher.",
+   "lesson": "ce1-sciences-corps",
+   "source": "Exercice original"
+  },
+  {
+   "id": "ce1-sciences-corps-q2",
+   "chapter": "ce1-sciences-c1-corps",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "difficulty": 1,
+   "points": 1,
+   "prompt": "Quelle partie du corps est au milieu : entre la tête et les jambes ?",
+   "choices": [
+    "le bras",
+    "le pied",
+    "le visage",
+    "le tronc"
+   ],
+   "answer": 3,
+   "explanation": "Le **tronc** (ventre et dos) relie la tête aux jambes.",
+   "lesson": "ce1-sciences-corps",
+   "source": "Exercice original"
+  },
+  {
+   "id": "ce1-sciences-corps-q3",
+   "chapter": "ce1-sciences-c1-corps",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "difficulty": 1,
+   "points": 1,
+   "prompt": "Quel geste protège ma santé ?",
+   "choices": [
+    "me brosser les dents",
+    "boire l'eau sale d'une flaque",
+    "ne jamais dormir",
+    "manger sans me laver les mains"
+   ],
+   "answer": 0,
+   "explanation": "Se **brosser les dents** protège les dents. Les autres gestes sont mauvais pour la santé.",
+   "lesson": "ce1-sciences-corps",
+   "source": "Exercice original"
+  },
+  {
+   "id": "ce1-sciences-corps-q4",
+   "chapter": "ce1-sciences-c1-corps",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "difficulty": 1,
+   "points": 1,
+   "prompt": "Quel organe permet de sentir le chaud et le froid ?",
+   "choices": [
+    "les cheveux",
+    "les dents",
+    "la peau",
+    "la langue"
+   ],
+   "answer": 2,
+   "explanation": "La **peau** couvre tout le corps et sent le chaud, le froid, la douleur.",
+   "lesson": "ce1-sciences-corps",
+   "source": "Exercice original"
+  },
+  {
+   "id": "ce1-sciences-corps-q5",
+   "chapter": "ce1-sciences-c1-corps",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "difficulty": 1,
+   "points": 1,
+   "prompt": "Que fait-on avant de manger ?",
+   "choices": [
+    "on court",
+    "on touche les poubelles",
+    "on se lave les mains avec du savon",
+    "on se roule par terre"
+   ],
+   "answer": 2,
+   "explanation": "Avant de manger, on se **lave les mains avec du savon**.",
+   "lesson": "ce1-sciences-corps",
+   "source": "Exercice original"
+  }
+ ]
+}
