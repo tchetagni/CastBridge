@@ -50,9 +50,6 @@ class NetStateTracker(private val downAfter: Int = 2, private val minShowMs: Lon
         return state
     }
 
-    /** Gateway link dropped: leave the phone path now (still goes through the minimum display time). */
-    fun gatewayLost() { gwUp = false; gwFails = 0; gatewayAlsoAvailable = false }
-
     /** Delay before the next probe round: light (60 s) while Internet works, faster with a backoff while it does not. */
     fun nextDelayMs(): Long = if (state.working) STEADY_MS else FAST_STEPS_MS[minOf(maxOf(badRounds - 1, 0), FAST_STEPS_MS.size - 1)]
 

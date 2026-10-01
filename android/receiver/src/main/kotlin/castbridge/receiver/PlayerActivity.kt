@@ -106,6 +106,7 @@ class PlayerActivity : Activity(), TvService.Screen {
         if (settingsPanel == null) settingsPanel = SettingsPanel(this, findViewById(R.id.settings))
         panel = PlayerPanel(this, panelApi())
         if (!::bar.isInitialized) bar = ProgressOverlay(this, findViewById(android.R.id.content))
+        showNetStateBadge(s.netState)                        // Internet state already known when the screen (re)opens
         showSshBadge(s.statuses["4-ssh-n"])                  // connections already open when the screen (re)opens
         s.attach(this)                                       // may run a play request that arrived while the screen was closed
         requestRuntimePermissions()
@@ -170,7 +171,7 @@ class PlayerActivity : Activity(), TvService.Screen {
     override val shown: Boolean get() = resumed && !isFinishing
     override val activity: Activity get() = this
     override fun notice(msg: String) { flash(msg) }
-    override fun statusesChanged() { if (settingsPanel?.visible == true) showSettings(); showNetBadge(svc?.statuses?.get("6-gw")); showSshBadge(svc?.statuses?.get("4-ssh-n")) }
+    override fun statusesChanged() { if (settingsPanel?.visible == true) showSettings(); showNetBadge(svc?.statuses?.get("6-gw")); showNetStateBadge(svc?.netState); showSshBadge(svc?.statuses?.get("4-ssh-n")) }
     override fun thumbReady(name: String) { thumbs?.ready(name); libScreen?.onThumbReady(name); home?.onThumbReady(name) }
     override fun runPending(r: TvService.Pending) {
         runCatching {
@@ -712,6 +713,25 @@ class PlayerActivity : Activity(), TvService.Screen {
         if (text == null) { b.animate().alpha(0f).setDuration(300).withEndAction { b.visibility = View.GONE }; return }
         b.text = text
         if (b.visibility != View.VISIBLE) { b.animate().cancel(); b.alpha = 0f; b.visibility = View.VISIBLE; b.animate().alpha(1f).setDuration(300) }
+    }
+
+    /** Always-visible badge (also over a playing video and the home): by which path the TV really reaches Internet, or none. */
+    private fun showNetStateBadge(st: castbridge.core.net.NetState?) {
+        val b = findViewById<TextView>(R.id.netStateBadge) ?: return
+        if (st == null) return
+        val icon = when (st) {
+            castbridge.core.net.NetState.INTERNET_WIFI -> R.drawable.ic_cb_wifi
+            castbridge.core.net.NetState.INTERNET_ETHERNET -> R.drawable.ic_cb_ethernet
+            castbridge.core.net.NetState.INTERNET_VIA_PHONE -> R.drawable.ic_cb_passerelle_bluetooth
+            castbridge.core.net.NetState.NONE -> R.drawable.ic_cb_sans_internet
+            castbridge.core.net.NetState.CHECKING -> R.drawable.ic_cb_wifi
+        }
+        b.setBackgroundResource(if (st == castbridge.core.net.NetState.NONE) R.drawable.badge_warn_bg else R.drawable.badge_bg)
+        b.setCompoundDrawablesRelativeWithIntrinsicBounds(icon, 0, 0, 0)
+        if (b.text.toString() != st.label) b.text = st.label
+        b.contentDescription = st.label
+        b.alpha = if (st == castbridge.core.net.NetState.CHECKING) 0.7f else 1f
+        b.visibility = View.VISIBLE
     }
 
     /** Always-visible badge (also over a playing video) while the TV's Internet goes through the phone. */

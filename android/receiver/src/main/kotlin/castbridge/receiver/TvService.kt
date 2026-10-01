@@ -29,6 +29,9 @@ import android.os.Looper
 import android.os.PowerManager
 import android.provider.Settings
 import android.util.Log
+import castbridge.core.net.NetState
+import castbridge.core.net.NetStateTracker
+import castbridge.core.net.netJson
 import castbridge.core.tv.ApiExtension
 import castbridge.core.tv.then
 import castbridge.core.tv.ApiReply
@@ -190,6 +193,7 @@ class TvService : Service(), Device {
         rescanAsync(remeasure = true)
         main.postDelayed(transferTick, 5000)
         main.postDelayed(netTick, 3000)
+        watchNetwork()
     }
 
     /** Starts the HTTP server once (only this service does: no second server fighting for port 8765); retries if the port is taken. */
@@ -278,7 +282,7 @@ class TvService : Service(), Device {
     fun onPermissionsReady() {
         hookCapture()
         bt?.start()
-        gateway = gateway ?: BtGatewayHost(this, guard, ::btTrusted) { st -> setStatus("6-gw", st) }
+        gateway = gateway ?: BtGatewayHost(this, guard, ::btTrusted, ::gatewayStatus)
         gateway?.start()
         // Wi-Fi Direct is opt-in (MENU): creating a group can disturb the TV's own Wi-Fi connection.
         if (prefs.getBool("wd_enabled", false) && wd?.hasPermission() == true) wd?.start()
@@ -289,22 +293,75 @@ class TvService : Service(), Device {
     @Volatile var netDirectMs: Long? = null; private set
     @Volatile var netGatewayMs: Long? = null; private set
     @Volatile var netCheckedAt = 0L; private set
+    /** Debounced state for the TV badge (core NetStateTracker, fed by the same probes — no second loop). */
+    private val netTracker = NetStateTracker()
+    @Volatile var netState = NetState.CHECKING; private set
+    @Volatile var netGatewayAlso = false; private set
+    private val netBusy = java.util.concurrent.atomic.AtomicBoolean(false)
+    @Volatile private var netAgain = false
     private val netTick = object : Runnable {
         override fun run() {
-            bg.execute {
-                val wasDirect = netDirectMs != null; val wasGateway = netGatewayMs != null; val first = netCheckedAt == 0L
-                netDirectMs = TvNetDiag.probe(null)
-                netGatewayMs = gateway?.proxy()?.let { TvNetDiag.probe(it) }
-                netCheckedAt = System.currentTimeMillis()
-                setStatus("7-net", netSummary())
-                // connectivity_check: at start and when the state changes (not every minute)
-                if (first || wasDirect != (netDirectMs != null)) connectivityEvent(null, netDirectMs)
-                if (gateway?.connected == true && (first || wasGateway != (netGatewayMs != null))) connectivityEvent("bluetooth", netGatewayMs)
-                if (netDirectMs != null && !wasDirect && !first) TvConnect.post { flush() }      // network back: send what waits
-                libraryStatsDaily()
-            }
-            main.postDelayed(this, 60_000)
+            if (!netBusy.compareAndSet(false, true)) { netAgain = true; return }      // a round is running: it will run once more
+            main.removeCallbacks(this)
+            var delay = NetStateTracker.STEADY_MS
+            try {
+                bg.execute {
+                    try {
+                        val wasDirect = netDirectMs != null; val wasGateway = netGatewayMs != null; val first = netCheckedAt == 0L
+                        netDirectMs = TvNetDiag.probe(null)
+                        netGatewayMs = gateway?.proxy()?.let { TvNetDiag.probe(it) }
+                        netCheckedAt = System.currentTimeMillis()
+                        setStatus("7-net", netSummary())
+                        synchronized(netTracker) {
+                            netState = netTracker.update(TvNetDiag.linkKind(this@TvService), netDirectMs, gateway?.connected == true, netGatewayMs, android.os.SystemClock.elapsedRealtime())
+                            netGatewayAlso = netTracker.gatewayAlsoAvailable
+                            delay = netTracker.nextDelayMs()               // 60 s while Internet works, 10-30 s while it does not
+                        }
+                        main.post { screen?.statusesChanged() }
+                        // connectivity_check: at start and when the state changes (not every minute)
+                        if (first || wasDirect != (netDirectMs != null)) connectivityEvent(null, netDirectMs)
+                        if (gateway?.connected == true && (first || wasGateway != (netGatewayMs != null))) connectivityEvent("bluetooth", netGatewayMs)
+                        if (netDirectMs != null && !wasDirect && !first) TvConnect.post { flush() }      // network back: send what waits
+                        libraryStatsDaily()
+                    } finally {
+                        netBusy.set(false)
+                        main.postDelayed(this, if (netAgain) 1000L else delay)
+                        netAgain = false
+                    }
+                }
+            } catch (e: Exception) { netBusy.set(false); main.postDelayed(this, delay) }   // executor shut down
         }
+    }
+
+    private var netCallback: android.net.ConnectivityManager.NetworkCallback? = null
+    private var netGwUp = false
+
+    /** Network lost/available (and gateway connect/disconnect): probe again soon instead of waiting for the next tick. */
+    private fun netChanged() { main.removeCallbacks(netKick); main.postDelayed(netKick, 1500) }
+    private val netKick = Runnable { if (netCheckedAt > 0) netTick.run() }
+
+    private fun watchNetwork() {
+        if (netCallback != null) return
+        val cb = object : android.net.ConnectivityManager.NetworkCallback() {
+            override fun onAvailable(network: android.net.Network) = netChanged()
+            override fun onLost(network: android.net.Network) = netChanged()
+        }
+        runCatching {
+            getSystemService(android.net.ConnectivityManager::class.java)
+                .registerNetworkCallback(android.net.NetworkRequest.Builder().addCapability(android.net.NetworkCapabilities.NET_CAPABILITY_INTERNET).build(), cb)
+            netCallback = cb
+        }
+    }
+
+    private fun unwatchNetwork() {
+        netCallback?.let { cb -> runCatching { getSystemService(android.net.ConnectivityManager::class.java).unregisterNetworkCallback(cb) } }
+        netCallback = null
+    }
+
+    /** Gateway status callback: re-probe when a phone connects or disconnects. */
+    private fun gatewayStatus(st: String?) {
+        setStatus("6-gw", st)
+        if ((st != null) != netGwUp) { netGwUp = st != null; netChanged() }
     }
 
     /** « connectivity_check » event: [via] null = the TV's own link (Wi-Fi / Ethernet). */
@@ -570,6 +627,8 @@ class TvService : Service(), Device {
             val msg = onScreen { act -> (act as? PlayerActivity)?.openDevSettings() } ?: "Réglages ouverts sur la TV."
             ApiReply(200, """{"message":${ReceiverServer.q(msg)}}""")
         }
+        path == "/api/net" && method == "GET" -> ApiReply(200, synchronized(netTracker) {
+            netJson(netTracker, TvNetDiag.linkKind(this), netDirectMs, gateway?.connected == true, netGatewayMs, netCheckedAt) })
         path == "/api/gateway" && method == "GET" -> ApiReply(200, gateway?.json() ?: """{"listening":false,"connected":false}""")
         path == "/api/gateway/test" && method == "GET" -> gateway?.test() ?: ApiReply(409, """{"error":"passerelle non démarrée"}""")
         path == "/api/gateway/speed" && method == "GET" -> gateway?.speed(params["bytes"]?.toLongOrNull() ?: 2_000_000)
@@ -742,6 +801,7 @@ class TvService : Service(), Device {
 
     override fun onDestroy() {
         stopCore()
+        unwatchNetwork()
         main.removeCallbacksAndMessages(null)
         bg.shutdownNow()
         if (running === this) running = null

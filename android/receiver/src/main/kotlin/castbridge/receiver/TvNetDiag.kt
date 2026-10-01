@@ -36,6 +36,14 @@ object TvNetDiag {
         }
     }.getOrDefault("réseau")
 
+    /** The same, as a [castbridge.core.net.LinkKind] for the Internet state badge. */
+    fun linkKind(ctx: android.content.Context): castbridge.core.net.LinkKind = runCatching {
+        val cm = ctx.getSystemService(android.net.ConnectivityManager::class.java)
+        val caps = cm.getNetworkCapabilities(cm.activeNetwork) ?: return castbridge.core.net.LinkKind.NONE
+        castbridge.core.net.NetStateTracker.linkKind(caps.hasTransport(android.net.NetworkCapabilities.TRANSPORT_ETHERNET),
+            caps.hasTransport(android.net.NetworkCapabilities.TRANSPORT_WIFI), true)
+    }.getOrDefault(castbridge.core.net.LinkKind.OTHER)
+
     fun run(host: String, proxy: Proxy?, out: (String) -> Unit) {
         val via = proxy != null
         // DNS (through the gateway the phone resolves names itself: nothing to test here)
