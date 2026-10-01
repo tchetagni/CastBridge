@@ -53,6 +53,10 @@ Les noms produits sont **stables** (un second passage ne change rien : testé su
 **Dossiers** (téléphone seulement) : `Séries/<Série>/Saison 01`, `Films/<Titre> (année)`, `Musique`, `Clips`, `Famille`, `Cours/<Matière>`,
 `Documents`, `Applications`, `Archives`, `Captures`, `À trier` (labels anglais si le téléphone est en anglais).
 
+### Catalogue exhaustif des formes (branche `claude/naming-patterns`) : voir `docs/NAMING-PATTERNS.md`
+
+Le catalogue (famille, exemple, règle, source, reconnu avant / après), la méthode, les mesures, les tests ReDoS, le regroupement des titres et les limites sont dans **`docs/NAMING-PATTERNS.md`**. Ajouts au moteur : suffixes de sous-titres (`.eng.forced`, `.fr.sdh`, `.pt-BR`, 3 lettres), mots de saison / épisode en 12 langues + chiffres romains + dossiers parents, séries quotidiennes par date (`Parsed.date`, jour/mois ambigus jamais devinés), spéciaux (`S00E01`, `OVA`, `SP01`, dossier `Specials`), numérotation à 3-4 chiffres **avec preuve** (étiquette de source télé, sans année), parties `CD1` / `Part 2` (`Parsed.part`, nom `Titre (année) - part1`) et éditions (`Parsed.edition`, jamais des doublons), `@canal` / `t.me/` / `Forwarded`, CamelCase, `Titre - nn - Épisode` en dossier de la même série. Regroupement : `Text.groupKey` + `SeriesClassifier.plan` (un dossier par série quelle que soit l'écriture, `Titre (année)` si deux années coexistent) + table d'alias **facultative** `SeriesAliases` (`series-aliases.tsv`, jamais appliquée par défaut). Nouveaux jeux : **DEV-3** (réglage) et **GELÉ-3** (`naming/frozen-3.tsv`, SHA-256 vérifié, jamais utilisé pour régler) : GELÉ-3 **52,6 % → 99,3 %** (écrits à la main : 68,2 % → 98,7 %), GELÉ **2 073 → 2 074 / 2 087**, GELÉ-DUR **799 / 812 inchangé**. Garde-fous : `FalsePositiveTest`, `PathologicalNamesTest` (noms de 250 caractères, délai 2 s).
+
 ### Taux de bonnes propositions : corpus, jeux gelés, chiffres honnêtes
 
 Chaque cas attend le **nom**, le **dossier** et le **type**. Les attendus sont calculés **à partir des vraies métadonnées** (titre, saison, épisode…) par le générateur, jamais à partir du moteur.

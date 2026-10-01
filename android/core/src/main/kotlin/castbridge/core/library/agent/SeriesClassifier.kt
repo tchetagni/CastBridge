@@ -19,23 +19,45 @@ object SeriesClassifier {
 
     private fun folderOf(p: Parsed, title: String, fr: Boolean): String? {
         if (p.kind != Kind.SERIES || p.media != Media.VIDEO && p.media != Media.SUBTITLE) return null
-        if (p.episode == null || p.confidence < MIN_CONFIDENCE) return null
+        if (p.episode == null && p.date == null || p.confidence < MIN_CONFIDENCE) return null
         val t = clean(title).ifBlank { return null }
+        if (p.date != null) return "$t/${if (fr) "Saison" else "Season"} ${p.date.take(4)}"
         val s = p.season ?: return t
         return "$t/${if (fr) "Saison" else "Season"} ${"%02d".format(s)}"
     }
 
     /**
-     * What to do for a list of (name, current folder): only the files still at the root, grouped by title so that « Prison Break » is spelled the same in
-     * every file (the most frequent spelling wins). Returns nothing for a name already classified (never re-shuffles what the user organised).
+     * What to do for a list of (name, current folder): only the files still at the root, grouped by series so that « Prison Break », « Prison.Break »,
+     * « PrisonBreak » and « prison break (2005) » are ONE folder spelled like the most frequent spelling. Returns nothing for a name already classified
+     * (never re-shuffles what the user organised).
+     *
+     * Two series of the same name are never merged: when the library holds two different years (« The Flash (1990) », « The Flash (2014) », « Doctor Who »
+     * 1963 / 2005), or a year-less file whose season and episode already exist under a year, each year gets its own folder « Titre (année) ».
+     * With [aliases] (optional, [SeriesAliases.builtin]) a translated title found in the same library joins the original one.
      */
-    fun plan(files: List<Pair<String, String>>, fr: Boolean = true): List<Move> {
+    fun plan(files: List<Pair<String, String>>, fr: Boolean = true, aliases: SeriesAliases = SeriesAliases.NONE): List<Move> {
         val parsed = files.map { (n, f) -> Triple(n, f, NameParser.parse(n, f)) }
-        val bySeries = parsed.filter { it.third.kind == Kind.SERIES && it.third.title.isNotBlank() }.groupBy { it.third.titleKey }
-        val spelling = bySeries.mapValues { (_, v) -> v.groupingBy { it.third.title }.eachCount().maxByOrNull { it.value }!!.key }
+        val series = parsed.filter { it.third.kind == Kind.SERIES && it.third.title.isNotBlank() }
+        val byName = series.groupBy { aliases.groupKey(it.third.title) }
+        // a folder key per file: the series key, plus the year when the same title exists under several years
+        val keyOf = HashMap<String, String>()   // file name + folder -> folder key
+        val spellingOf = HashMap<String, String>()
+        for ((gk, members) in byName) {
+            val years = members.mapNotNull { it.third.year }.distinct()
+            val yearless = members.filter { it.third.year == null }
+            val overlap = years.size == 1 && yearless.any { y -> members.any { m -> m.third.year != null && m.third.season == y.third.season && m.third.episode == y.third.episode && y.third.episode != null } }
+            val split = years.size >= 2 || overlap
+            for (m in members) keyOf[m.first + "\u0000" + m.second] = if (split) gk + "#" + (m.third.year ?: "") else gk
+        }
+        val bySubgroup = series.groupBy { keyOf[it.first + "\u0000" + it.second]!! }
+        for ((k, v) in bySubgroup) spellingOf[k] = v.groupingBy { it.third.title }.eachCount().maxByOrNull { it.value }!!.key
         return parsed.mapNotNull { (n, f, p) ->
             if (f.isNotEmpty()) return@mapNotNull null
-            val folder = folderOf(p, spelling[p.titleKey] ?: p.title, fr) ?: return@mapNotNull null
+            val k = keyOf[n + "\u0000" + f]
+            val split = k != null && k.contains('#')
+            val base = k?.let { spellingOf[it] } ?: p.title
+            val title = if (split && p.year != null) "$base (${p.year})" else base
+            val folder = folderOf(p, title, fr) ?: return@mapNotNull null
             Move(n, folder)
         }
     }

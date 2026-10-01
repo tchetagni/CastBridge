@@ -36,15 +36,23 @@ data class Parsed(
     val hadJunk: Boolean = false,
     /** The text that remains after a light cleaning (used when nothing better is known). */
     val stem: String = "",
+    /** Multi-file movie: « CD2 », « Part 2 » after the year (the first and second halves of one film are not duplicates). */
+    val part: Int? = null,
+    /** Cut or format written in the name (« directors cut », « extended », « imax », « 3d »): two editions are not duplicates either. */
+    val edition: String? = null,
 ) {
     val titleKey: String get() = Text.key(title)
+
+    /** Same series whatever the spelling (spaces, dots, camelCase): used for the identity of an episode and for the series folders. */
+    val groupKey: String get() = Text.groupKey(title)
 
     /** What makes two files "the same thing" whatever their quality, or null if unknown. */
     val identity: String?
         get() = when {
             title.isBlank() -> null
-            kind == Kind.SERIES && season != null && episode != null -> "s:$titleKey:$season:$episode"
-            kind == Kind.MOVIE -> "m:$titleKey:${year ?: ""}"
+            kind == Kind.SERIES && season != null && episode != null -> "s:$groupKey:$season:$episode"
+            kind == Kind.SERIES && date != null -> "d:$groupKey:$date"
+            kind == Kind.MOVIE -> "m:$groupKey:${year ?: ""}" + (edition?.let { ":$it" } ?: "") + (part?.let { "#$it" } ?: "")
             (kind == Kind.MUSIC || kind == Kind.CLIP) && artist != null -> "a:${Text.key(artist)}:$titleKey"
             else -> null
         }
@@ -174,7 +182,7 @@ object NameParser {
         "telecharger", "telechargement", "downloadhub", "filmesonlinegratis", "pahe", "psarips", "psa", "tgx", "evo", "ntb", "mkvcinemas", "bolly4u",
     )
     private val SITE_ALT = SITES.joinToString("|") { Regex.escape(it) }
-    private val RX_SITE_PREFIX = ur("^\\s*(?:$SITE_ALT)(?:\\.[a-z]{2,4})?\\s*[-–|:_]+\\s*")
+    private val RX_SITE_PREFIX = ur("^\\s*(?:$SITE_ALT)(?:\\.[a-z]{2,4})?\\s*[-–|:_.]+\\s*")
     private val RX_SITE_SUFFIX = ur("\\s*[-–|:_]+\\s*(?:$SITE_ALT)(?:\\.[a-z]{2,4})?\\s*$")
     private val SITE_ALT_DISTINCT = SITES.filter { it.length >= 6 }.joinToString("|") { Regex.escape(it) }
     private val RX_SITE_BARE_SUFFIX = ur("\\s+(?:$SITE_ALT_DISTINCT)(?:\\.[a-z]{2,4})?\\s*$")
@@ -184,6 +192,10 @@ object NameParser {
     /** A bracket whose WHOLE content is an episode marker (S01-E08, S1E4, 1x04): kept, never dropped as a tag. */
     private val RX_BRACKETED_EPISODE = ur("s\\d{1,2}\\s*[-x–.]?\\s*e\\d{1,3}(?:\\s?[-–&]?\\s?e?\\d{1,3})*|\\d{1,2}x\\d{2,3}")
     private val RX_EMPTY_BRACKET = Regex("[\\[({]\\s*[\\])}]")
+    /** Messenger channels: « t.me/canal », « t.me_canal_ » (a slash turned into an underscore by a file system), « @canal »; and the « Forwarded » prefix. */
+    private val RX_TME = Regex("(?<![\\p{L}\\p{N}])(?:https?://)?t\\.me/[A-Za-z0-9_]+|^t\\.me[_ ][A-Za-z0-9]+[_ ]", RegexOption.IGNORE_CASE)
+    private val RX_HANDLE = Regex("(?<![\\p{L}\\p{N}_@.])@[A-Za-z0-9_]{3,32}(?![\\p{L}\\p{N}.@])")
+    private val RX_FORWARDED = Regex("^(?:forwarded|transf[ée]r[ée]|fwd)\\s*[:_-]*\\s+", RegexOption.IGNORE_CASE)
 
     private val JUNK_PHRASE = ur(
         "^(?:official\\s+(?:music\\s+)?(?:video|audio|lyric\\s+video|visualizer|clip)|clip\\s+officiel|vid[eé]o\\s+officielle|audio\\s+officiel(?:le)?|" +
@@ -209,6 +221,9 @@ object NameParser {
             s = s.substring(0, cs.range.first); copy = true
         }
         fun sub(rx: Regex) { val n = s.replace(rx, " "); if (n != s) { junk = true; s = n } }
+        run { val n = s.replace(RX_FORWARDED, ""); if (n != s) { junk = true; s = n } }
+        sub(RX_TME); sub(RX_HANDLE)
+        s = s.trim()
         sub(RX_WWW); sub(RX_SITE_BRACKET); sub(RX_DOMAIN)
         run { val n = s.replace(RX_SITE_PREFIX, ""); if (n != s) { junk = true; s = n } }
         run { val n = s.replace(RX_SITE_SUFFIX, ""); if (n != s) { junk = true; s = n } }
@@ -250,7 +265,7 @@ object NameParser {
     private val RX_KBPS = ur("^\\d{2,3}\\s*kbps$|^\\d{3}k$|^mp3-?\\d{3}$")
 
     private val RES_TAGS = setOf("4k", "8k", "uhd", "fhd", "qhd", "hd", "hq", "sd", "hdr", "hdr10", "hdr10+", "dv", "dolby", "vision", "sdr", "10bit", "8bit", "10bits", "hi10p", "hi10")
-    private val SOURCE_TAGS = setOf("bluray", "blu-ray", "bdrip", "brrip", "bdremux", "remux", "web-dl", "webdl", "webrip", "web", "hdtv", "pdtv", "dvdrip", "dvdscr", "dvd", "hdrip", "hdcam", "hdts", "cam", "camrip", "ts", "tc", "telesync", "r5", "vhsrip", "hddvd", "amzn", "nf", "dsnp", "hmax", "hulu", "atvp", "dl", "rip", "bd", "webhd", "hdlight", "light", "screener", "scr")
+    private val SOURCE_TAGS = setOf("bluray", "blu-ray", "bdrip", "brrip", "bdremux", "remux", "web-dl", "webdl", "webrip", "web", "hdtv", "pdtv", "dvdrip", "dvdscr", "dvd", "hdrip", "hdcam", "hdts", "cam", "camrip", "ts", "tc", "telesync", "r5", "vhsrip", "hddvd", "amzn", "nf", "dsnp", "hmax", "hulu", "atvp", "pcok", "pmtp", "stan", "crav", "sho", "dl", "rip", "bd", "webhd", "hdlight", "light", "screener", "scr")
     private val CODEC_TAGS = setOf("x264", "x265", "h264", "h265", "hevc", "avc", "xvid", "divx", "av1", "vp9", "aac", "ac3", "eac3", "dts", "dts-hd", "dtshd", "truehd", "atmos", "flac", "ddp", "dd", "opus", "lpcm", "mp3", "mkv", "mp4", "avi", "5.1", "7.1", "2.0")
     private val MISC_TAGS = setOf("proper", "repack", "internal", "extended", "unrated", "uncut", "imax", "complete", "integrale", "intégrale", "remastered", "remaster", "directors", "cut", "final", "sample", "nfo", "readnfo", "subs", "sub", "subbed", "hardsub", "hc", "dubbed", "dual", "dual-audio", "multisubs", "multisub", "retail", "fansub", "torrent", "download", "telecharger", "gratuit", "streaming", "hq", "lossless", "audio", "video", "vidéo")
     /** Words that only ever appear in release names: after a language word they prove it is a tag, not part of a title. */
@@ -331,37 +346,103 @@ object NameParser {
 
     // ------------------------------------------------------------------ series markers
 
-    private class Marker(val range: IntRange, val season: Int?, val episode: Int?, val episodeEnd: Int?, val rule: String)
+    private class Marker(val range: IntRange, val season: Int?, val episode: Int?, val episodeEnd: Int?, val rule: String, val date: String? = null)
 
-    private val RX_SXE = ur("\\bs(\\d{1,2})\\s*(?:[x–-]\\s*)?e(\\d{1,3})((?:\\s?(?:-|e|-e|&|et)\\s?e?\\d{1,3})*)\\b")
+    /** « season » and « episode » in the languages of the library (fr, en, es, pt, de, it, nl, sv, pl, tr, ru): the words only, the shapes are below. */
+    private const val SEASON_W = "saison|season|temporada|staffel|stagione|seizoen|säsong|sasong|sezon|сезон"
+    private const val EPISODE_W = "episode|épisode|episodio|episódio|capítulo|capitulo|cap|folge|aflevering|avsnitt|odcinek|bölüm|bolum|серия"
+    private const val NUM = "(\\d{1,2}|[ivx]{1,5})"   // a season number: digits, or a Roman numeral after a season word (« Saison II »)
+
+    private val ROMANS = mapOf("i" to 1, "ii" to 2, "iii" to 3, "iv" to 4, "v" to 5, "vi" to 6, "vii" to 7, "viii" to 8, "ix" to 9, "x" to 10,
+        "xi" to 11, "xii" to 12, "xiii" to 13, "xiv" to 14, "xv" to 15, "xvi" to 16, "xvii" to 17, "xviii" to 18, "xix" to 19, "xx" to 20)
+    /** « 7 » or « VII » to 7; null for anything else. */
+    private fun seasonNumber(t: String): Int? = t.toIntOrNull() ?: ROMANS[t.lowercase()]
+    private fun firstNumber(m: MatchResult, from: Int = 1): Int? = m.groupValues.drop(from).firstOrNull { it.isNotEmpty() }?.let { seasonNumber(it) }
+
+    private val RX_SXE = ur("\\bs(\\d{1,2})\\s*(?:[x–-]\\s*)?e(\\d{1,3})((?:\\s?(?:-|\\+|e|-e|\\+e|&|et)\\s?e?\\d{1,3})*)\\b")
     private val RX_LAST_NUM = Regex("(\\d{1,3})(?!.*\\d)")
-    private val RX_SAISON_EP = ur("\\b(?:saison|season)\\s*(\\d{1,2})\\s*[,-]?\\s*(?:episode|épisode|ep|e)\\s*\\.?\\s*(\\d{1,3})\\b")
+    private val RX_SAISON_EP = ur("\\b(?:$SEASON_W)\\s*$NUM\\s*[,-]?\\s*(?:$EPISODE_W|ep|e)\\s*\\.?\\s*(\\d{1,3})\\b")
+    /** « Temporada 2 Cap 5 » written « T02 Cap 05 », and the numbers-first shapes (« 2. Sezon 6. Bölüm », « 2 сезон 6 серия »). */
+    private val RX_T_CAP = ur("\\bt(\\d{1,2})\\s*(?:$EPISODE_W)\\s*\\.?\\s*(\\d{1,3})\\b")
+    private val RX_NUM_FIRST = ur("\\b(\\d{1,2})\\.?\\s*(?:$SEASON_W)\\s*[,-]?\\s*(\\d{1,3})\\.?\\s*(?:$EPISODE_W)\\b")
+    /** CJK, Korean, Arabic: no word boundaries in those scripts. Season then episode. */
+    private val RX_ASIAN_SE = Regex("第\\s*(\\d{1,2})\\s*[季期]\\s*第\\s*(\\d{1,4})\\s*[集話话]|시즌\\s*(\\d{1,2})\\s*(\\d{1,4})\\s*화|الموسم\\s*(\\d{1,2})\\s*الحلقة\\s*(\\d{1,4})")
     private val RX_NXM = ur("\\b(\\d{1,2})x(\\d{2,3})(?:\\s?[-–]\\s?(\\d{2,3}))?\\b")
-    /** "Saison 2 - 05": the season word, then a bare episode number after a dash. */
-    private val RX_SAISON_BARE = ur("\\b(?:saison|season)\\s*(\\d{1,2})\\s*[-–]\\s*(\\d{1,3})\\b")
-    private val RX_EP_ONLY = ur("\\b(?:episode|épisode|ep)\\s*\\.?\\s*(\\d{1,4})\\b|\\be(\\d{2,4})\\b")
-    private val RX_SAISON_ONLY = ur("\\b(?:saison|season)\\s*(\\d{1,2})\\b|\\bs(\\d{1,2})\\b(?!\\s?e\\d)")
+    /** « Saison 2 - 05 »: the season word, then a bare episode number after a dash. */
+    private val RX_SAISON_BARE = ur("\\b(?:$SEASON_W)\\s*$NUM\\s*[-–]\\s*(\\d{1,3})\\b")
+    private val RX_EP_ONLY = ur("\\b(?:$EPISODE_W|ep)\\s*\\.?\\s*(\\d{1,4})\\b|\\be(\\d{2,4})\\b|\\b(\\d{1,3})\\s*\\.?\\s*(?:bölüm|bolum|серия)\\b|第\\s*(\\d{1,4})\\s*[集話话]|(\\d{1,4})\\s*화|الحلقة\\s*(\\d{1,4})")
+    private val RX_SAISON_ONLY = ur("\\b(?:$SEASON_W)\\s*$NUM\\b|\\bs(\\d{1,2})\\b(?!\\s?e\\d)|\\b(\\d{1,2})\\.?\\s*(?:sezon|сезон)\\b|第\\s*(\\d{1,2})\\s*[季期]|시즌\\s*(\\d{1,2})|الموسم\\s*(\\d{1,2})")
     private val RX_ANIME = Regex("^(.+?)\\s+-\\s+(\\d{2,4})(?:v\\d)?(?=\\s|$)")
 
-    private fun findMarker(s: String, hasGroupPrefix: Boolean, yearAfter: (Int) -> Boolean): Marker? {
+    // ---- daily shows: « Show 2024.03.15 », « Show 15-03-2024 », « Show 20240315 » (a date is the identity of an episode; an ambiguous day / month is never guessed)
+    private val RX_DATE_Y = ur("\\b((?:19|20)\\d{2})[ -](\\d{2})[ -](\\d{2})\\b")
+    private val RX_DATE_DMY = ur("\\b(\\d{2})[ -](\\d{2})[ -]((?:19|20)\\d{2})\\b")
+    private val RX_DATE_COMPACT = ur("\\b((?:19|20)\\d{2})(\\d{2})(\\d{2})\\b")
+
+    private fun isoDate(y: Int, m: Int, d: Int): String? = runCatching { java.time.LocalDate.of(y, m, d).toString() }.getOrNull()
+
+    private fun dateMarker(s: String): Marker? {
+        RX_DATE_Y.find(s)?.let { m -> isoDate(m.groupValues[1].toInt(), m.groupValues[2].toInt(), m.groupValues[3].toInt())?.let { return Marker(m.range, null, null, null, "series.date", it) } }
+        RX_DATE_DMY.find(s)?.let { m ->
+            val a = m.groupValues[1].toInt(); val b = m.groupValues[2].toInt(); val y = m.groupValues[3].toInt()
+            val iso = when { a > 12 && b <= 12 -> isoDate(y, b, a); b > 12 && a <= 12 -> isoDate(y, a, b); else -> null }   // 03-04-2024 is never guessed
+            if (iso != null) return Marker(m.range, null, null, null, "series.date", iso)
+        }
+        RX_DATE_COMPACT.find(s)?.let { m -> isoDate(m.groupValues[1].toInt(), m.groupValues[2].toInt(), m.groupValues[3].toInt())?.let { return Marker(m.range, null, null, null, "series.date", it) } }
+        return null
+    }
+
+    // ---- specials: « OVA 2 », « SP01 », « Special 3 » (never « Special Edition »: a number must follow, and no year after)
+    private val RX_SPECIAL = ur("\\b(?:ova|oad|ona)\\s*(\\d{1,2})?\\b|\\bsp\\s?(\\d{1,2})\\b|\\bspecial\\s+0*(\\d{1,2})\\b")
+
+    // ---- « 101 », « 0108 »: season and episode in 3-4 digits. Only with proof of a series: a TV source tag, no year, no resolution-looking number
+    private val TV_SOURCES = setOf("hdtv", "pdtv", "dsr", "web", "webrip", "web-dl", "webdl", "dvdrip")
+    private val RESOLUTION_NUMBERS = setOf(240, 360, 480, 576, 720, 1080, 1440, 2160, 4320)
+    private fun numberedMarker(s: String, yearAnywhere: Boolean): Marker? {
+        if (yearAnywhere) return null
+        val toks = s.split(' ').filter { it.isNotEmpty() }
+        if (toks.size < 3 || toks.none { it.lowercase().let { l -> l in TV_SOURCES || l.substringBefore('-') in TV_SOURCES } } || toks.any { tagKind(it) == 1 && it.lowercase() in setOf("bluray", "blu-ray", "bdrip", "brrip", "remux", "bdremux", "cam", "hdcam", "ts", "telesync", "r5") }) return null
+        var from = 0
+        for ((i, t) in toks.withIndex()) {
+            val pos = s.indexOf(t, from); from = pos + t.length
+            if (i == 0 || t.length !in 3..4 || !t.all { it.isDigit() } || t.toInt() in RESOLUTION_NUMBERS) continue
+            val n = t.toInt()
+            val (sn, ep) = if (t.length == 3) (n / 100) to (n % 100) else (n / 100) to (n % 100)
+            val ok = if (t.length == 3) sn in 1..9 && ep in 1..30 else sn in 1..30 && sn !in 19..21 && ep in 1..30 && (sn >= 10 || t.startsWith("0"))
+            if (ok) return Marker(pos until pos + t.length, sn, ep, null, "series.sseee")
+        }
+        return null
+    }
+
+    private fun findMarker(s: String, hasGroupPrefix: Boolean, yearAfter: (Int) -> Boolean): Marker? =
+        findMarkerOrNull(s, hasGroupPrefix, yearAfter)
+
+    private fun findMarkerOrNull(s: String, hasGroupPrefix: Boolean, yearAfter: (Int) -> Boolean): Marker? {
         RX_SXE.find(s)?.let { m ->
             val last = RX_LAST_NUM.find(m.groupValues[3])?.groupValues?.get(1)?.toIntOrNull()
             return Marker(m.range, m.groupValues[1].toInt(), m.groupValues[2].toInt(), last, "series.sxxexx")
         }
-        RX_SAISON_EP.find(s)?.let { m -> return Marker(m.range, m.groupValues[1].toInt(), m.groupValues[2].toInt(), null, "series.saison-episode") }
-        RX_SAISON_BARE.find(s)?.let { m -> return Marker(m.range, m.groupValues[1].toInt(), m.groupValues[2].toInt(), null, "series.saison-number") }
+        RX_ASIAN_SE.find(s)?.let { m ->
+            val g = m.groupValues.drop(1).filter { it.isNotEmpty() }
+            return Marker(m.range, g[0].toInt(), g[1].toInt(), null, "series.saison-episode")
+        }
+        RX_SAISON_EP.find(s)?.let { m -> seasonNumber(m.groupValues[1])?.let { sn -> return Marker(m.range, sn, m.groupValues[2].toInt(), null, "series.saison-episode") } }
+        RX_NUM_FIRST.find(s)?.let { m -> return Marker(m.range, m.groupValues[1].toInt(), m.groupValues[2].toInt(), null, "series.saison-episode") }
+        RX_T_CAP.find(s)?.let { m -> return Marker(m.range, m.groupValues[1].toInt(), m.groupValues[2].toInt(), null, "series.saison-episode") }
+        RX_SAISON_BARE.find(s)?.let { m -> seasonNumber(m.groupValues[1])?.let { sn -> return Marker(m.range, sn, m.groupValues[2].toInt(), null, "series.saison-number") } }
         RX_NXM.find(s)?.let { m ->
             val sn = m.groupValues[1].toInt()
             if (sn in 1..40) return Marker(m.range, sn, m.groupValues[2].toInt(), m.groupValues[3].toIntOrNull(), "series.nxm")
         }
         RX_EP_ONLY.find(s)?.let { m ->
-            if (!yearAfter(m.range.last)) {
-                val ep = (m.groupValues[1].ifEmpty { m.groupValues[2] }).toInt()
+            val epNumber = firstNumber(m)!!
+            if (!yearAfter(m.range.last) && epNumber !in 1900..2100) {   // « Folge 2012 » is a year, not the 2012th episode
+                val ep = epNumber
                 val sm = RX_SAISON_ONLY.find(s)
-                val sn = sm?.let { (it.groupValues[1].ifEmpty { it.groupValues[2] }).toInt() }
+                val sn = sm?.let { firstNumber(it) }
                 val range = when {
                     sm != null && sm.range.first < m.range.first -> sm.range.first..m.range.last
-                    // "Episode 4 - Season 1", "Ep 7 Saison 8": the season written after the episode belongs to the marker
+                    // « Episode 4 - Season 1 », « Ep 7 Saison 8 »: the season written after the episode belongs to the marker
                     sm != null && sm.range.first > m.range.last && s.substring(m.range.last + 1, sm.range.first).all { it == ' ' || it == '-' || it == '–' || it == ',' } -> m.range.first..sm.range.last
                     else -> m.range
                 }
@@ -369,13 +450,25 @@ object NameParser {
             }
         }
         RX_SAISON_ONLY.find(s)?.let { m ->
-            return Marker(m.range, (m.groupValues[1].ifEmpty { m.groupValues[2] }).toInt(), null, null, "series.season-only")
+            return Marker(m.range, firstNumber(m), null, null, "series.season-only")
         }
+        RX_SPECIAL.find(s)?.let { m ->
+            if (m.range.first > 0 && !yearAfter(m.range.last)) {
+                val ep = m.groupValues.drop(1).firstOrNull { it.isNotEmpty() }?.toInt() ?: 1
+                return Marker(m.range, 0, ep, null, "series.special")
+            }
+        }
+        dateMarker(s)?.let { return it }
+        numberedMarker(s, yearAfter(-1))?.let { return it }
         if (hasGroupPrefix) RX_ANIME.find(s)?.takeUnless { m -> m.groupValues[2].length == 4 && m.groupValues[2].toInt() in 1900..2100 }?.let { m ->
             return Marker(m.groupValues[1].length..m.range.last, null, m.groupValues[2].toInt(), null, "series.anime")
         }
         return null
     }
+
+    /** « 04 », « E04 », « Ep.04 », « #04 », « [04] »: only a number, which the folder (« Show/Saison 2 ») turns into an episode. */
+    private val RX_TITLE_NUMBER = Regex("^(.+?)\\s+-\\s+0*(\\d{1,3})(?:\\s+-\\s+(.*))?$")
+    private val RX_BARE_EPISODE = Regex("^[#\\[(]?\\s*(?:ep?\\.?\\s*)?0*(\\d{1,3})\\s*[\\])]?$", RegexOption.IGNORE_CASE)
 
     // ------------------------------------------------------------------ course / clip / language hints
 
@@ -420,9 +513,10 @@ object NameParser {
      * [durationMs] (0 = unknown) only breaks ties (a 4-minute video with "Artist - Title" is a clip, not a film).
      */
     fun parse(fileName: String, folder: String = "", durationMs: Long = 0, currentYear: Int = java.time.LocalDate.now().year): Parsed {
-        val (stem0, ext) = splitExt(fileName)
+        val (stem00, ext) = splitExt(fileName)
         val media = mediaOf(ext)
-        personal(stem0, media, ext)?.let { return it.copy(stem = stem0) }
+        personal(stem00, media, ext)?.let { return it.copy(stem = stem00) }
+        val (stem0, subSuffix) = if (media == Media.SUBTITLE) SubtitleTags.peel(stem00) else stem00 to null
 
         val (stripped0, junk0, copy) = stripJunk(stem0)
         val stripped = if (media == Media.AUDIO && stripped0.contains('_') && !stripped0.contains(' ') && stripped0.count { it == '-' } == 1) stripped0.replace("-", " - ") else stripped0
@@ -438,7 +532,7 @@ object NameParser {
                 Parsed(media, kind, ext, title = t, confidence = 0.6, rule = "file." + kind.name.lowercase(), copy = copy, hadJunk = junk, stem = t, nameLang = nameLang(t))
             }
             Media.IMAGE, Media.DOC, Media.OTHER -> lightParse(stripped, media, ext, folder, junk, copy)
-            else -> mediaParse(stripped, media, ext, folder, durationMs, currentYear, hasGroupPrefix, clipHint, junk, copy, stem0, rawTags)
+            else -> mediaParse(stripped, media, ext, folder, durationMs, currentYear, hasGroupPrefix, clipHint, junk, copy, stem0, rawTags, subSuffix)
         }
     }
 
@@ -467,17 +561,31 @@ object NameParser {
         return if (RX_TRAILING_INITIALS.containsMatchIn(s.trimEnd()) && !t.endsWith(".")) "$t." else t
     }
     /** A bracket opened right before a marker, or closed right after it ("Title [1x04] Name"): not part of the title. */
+    private val RX_GLUED_MARKER = Regex("(?<=[a-z])(?=S\\d{1,2}E\\d{1,3}(?![\\p{L}\\p{N}]))")
+    private val RX_CAMEL_WORD = Regex("^[A-Z][\\p{Ll}\\p{N}']*(?:-?[A-Z][\\p{Ll}\\p{N}']*)+$")
+    private val RX_CAMEL_I = Regex("(?<=(?:^| )\\p{Lu})(?=\\p{Lu}\\p{Ll})")   // « How IMet » -> « How I Met »
+    private val RX_CAMEL_CUT = Regex("(?<=[\\p{Ll}\\p{N}])(?=\\p{Lu})")
+    /** « PrisonBreak » is « Prison Break »: one token made of capitalised words (at least two) in front of a series marker. */
+    private fun unglue(title: String): String {
+        val t = title.trim()
+        return if (!t.contains(' ') && RX_CAMEL_WORD.matches(t)) RX_CAMEL_CUT.replace(t, " ").replace(RX_CAMEL_I, " ") else title
+    }
     private fun dropOpenTail(s: String) = s.trimEnd().trimEnd('[', '(', '{', ' ', '-', '–')
     private fun dropCloseHead(s: String) = s.trimStart().trimStart(']', ')', '}', ' ')
 
     private fun mediaParse(stripped: String, media: Media, ext: String, folder: String, durationMs: Long, currentYear: Int,
-                           hasGroupPrefix: Boolean, clipHint: Boolean, junk0: Boolean, copy: Boolean, rawStem: String, rawTags: Pair<Int?, Audio?>): Parsed {
+                           hasGroupPrefix: Boolean, clipHint: Boolean, junk0: Boolean, copy: Boolean, rawStem: String, rawTags: Pair<Int?, Audio?>, subSuffix: String? = null): Parsed {
         var junk = junk0
         val text = normalizeSeparators(stripped).let { t -> if (!t.contains(' ') && t.count { it == '-' } >= 2) t.replace('-', ' ') else t }
+            .replace(RX_GLUED_MARKER, " ")   // « PrisonBreakS01E08 »
         val lang0 = nameLang(text)
         var lang = lang0
-        val subLangCode = if (media == Media.SUBTITLE) subtitleLang(text) else null
-        val (textNoLang, subLang) = if (subLangCode != null) text.replace(ur("\\s(?:" + Regex.escape(subLangCode.first) + ")$"), "") to subLangCode.second else text to null
+        val subLangCode = if (media == Media.SUBTITLE && subSuffix == null) subtitleLang(text) else null
+        val (textNoLang, subLang) = when {
+            subSuffix != null -> text to subSuffix
+            subLangCode != null -> text.replace(ur("\\s(?:" + Regex.escape(subLangCode.first) + ")$"), "") to subLangCode.second
+            else -> text to null
+        }
 
         // ---- gather tokens and tags (resolution, language version) over the whole text
         val allTokens = textNoLang.split(' ').filter { it.isNotEmpty() }
@@ -499,7 +607,7 @@ object NameParser {
         // ---- series
         val marker = findMarker(textNoLang, hasGroupPrefix || junk0) { end -> textNoLang.substring(end + 1).split(' ').any { isYear(it, currentYear) } }
         if (marker != null && media != Media.AUDIO) {
-            val before = dropOpenTail(textNoLang.substring(0, marker.range.first))
+            val before = unglue(dropOpenTail(textNoLang.substring(0, marker.range.first)))
             val after = dropCloseHead(if (marker.range.last + 1 <= textNoLang.length) textNoLang.substring(marker.range.last + 1) else "")
             lang = titleLang(before, lang0)
             var title = cutAtTags(tidy(before), currentYear)
@@ -523,21 +631,36 @@ object NameParser {
                 marker.rule == "series.episode-only" && season == null -> 0.7
                 marker.rule == "series.season-only" -> 0.75
                 marker.rule == "series.anime" -> 0.75
+                marker.rule == "series.special" -> 0.75
+                marker.rule == "series.date" -> 0.8
+                marker.rule == "series.sseee" -> 0.72
                 else -> 0.95
             }
             return Parsed(if (media == Media.SUBTITLE) Media.SUBTITLE else media, Kind.SERIES, ext, title = t, year = year, season = season, episode = marker.episode, episodeEnd = marker.episodeEnd,
                 episodeTitle = epTitle?.let { Text.titleCaseIfNeeded(it, lang) }, resolution = resolution, audio = audio, subLang = subLang, nameLang = lang, confidence = conf,
-                rule = marker.rule, copy = copy, hadJunk = junk, stem = Text.titleCaseIfNeeded(tidy(before), lang))
+                date = marker.date, rule = marker.rule, copy = copy, hadJunk = junk, stem = Text.titleCaseIfNeeded(tidy(before), lang))
         }
 
         // ---- "04.mkv" inside "Show/Saison 2": the folder says which show and which season, the file only its number
         if (marker == null && media != Media.AUDIO && folder.isNotBlank()) {
-            val bare = Regex("^(?:ep?\\.?\\s*)?0*(\\d{1,3})$", RegexOption.IGNORE_CASE).matchEntire(textNoLang.trim())
+            val bare = RX_BARE_EPISODE.matchEntire(textNoLang.trim())
             val ft = if (bare != null) seriesFromFolder(folder) else null
             if (bare != null && ft?.first != null && ft.second != null) {
                 val l = titleLang(ft.first!!, lang0)
                 return Parsed(media, Kind.SERIES, ext, title = ft.first!!, season = ft.second, episode = bare.groupValues[1].toInt(), nameLang = l, confidence = 0.8,
                     rule = "series.folder-number", copy = copy, hadJunk = junk, stem = ft.first!!)
+            }
+        }
+
+        // ---- "Prison Break - 04 - Cut Off.mkv" in "Prison Break/Saison 2": the folder confirms the show, so the bare number is an episode
+        if (marker == null && media != Media.AUDIO && folder.isNotBlank()) {
+            val ft = seriesFromFolder(folder)
+            val m = RX_TITLE_NUMBER.matchEntire(textNoLang.trim())
+            if (m != null && ft.first != null && ft.second != null && Text.key(m.groupValues[1]) == Text.key(ft.first!!)) {
+                val l = titleLang(ft.first!!, lang0)
+                return Parsed(media, Kind.SERIES, ext, title = ft.first!!, season = ft.second, episode = m.groupValues[2].toInt(),
+                    episodeTitle = episodeTitle(m.groupValues[3], currentYear)?.let { Text.titleCaseIfNeeded(it, l) }, subLang = subLang, nameLang = l, confidence = 0.85,
+                    rule = "series.folder-title-number", copy = copy, hadJunk = junk, stem = ft.first!!)
             }
         }
 
@@ -569,8 +692,9 @@ object NameParser {
 
         // ---- clip (music video): explicit words win over anything; otherwise "Artist - Title" of a short video
         val segs = splitSegments(tidy(tokens.subList(0, tagIdx).joinToString(" ")))
+        val numberedTail = segs.size >= 2 && segs.last().length <= 4 && segs.last().all { it.isDigit() }   // « One Piece - 1045 »: a number, not a song title
         val shortVideo = durationMs in 1..(11 * 60_000L)
-        if (clipHint || yearIdx == null && !hasStrongTags && segs.size >= 2 && (shortVideo || durationMs == 0L && segs.size == 2)) {
+        if (clipHint || yearIdx == null && !hasStrongTags && segs.size >= 2 && !numberedTail && (shortVideo || durationMs == 0L && segs.size == 2)) {
             return musicParse(textNoLang, ext, lang, clipHint, copy, junk, Kind.CLIP, folder).copy(media = media)
         }
 
@@ -581,17 +705,18 @@ object NameParser {
         }
 
         // ---- movie
+        val (partNo, edition) = movieExtras(tokens, titleEnd, yearIdx != null)
         if (yearIdx != null && cutText.isNotBlank()) {
             val y = tokens[yearIdx].toInt()
             val short = durationMs in 1..(30 * 60_000L)
             val conf = when { hasStrongTags -> 0.92; short -> 0.5; else -> 0.8 }
             return Parsed(media, Kind.MOVIE, ext, title = cutText, year = y, resolution = resolution, audio = audio, subLang = subLang, nameLang = lang, confidence = conf,
-                rule = "movie.year", copy = copy, hadJunk = junk, stem = cutText)
+                rule = "movie.year", copy = copy, hadJunk = junk, stem = cutText, part = partNo, edition = edition)
         }
         if (hasStrongTags && cutText.isNotBlank() && tokens.any { tagKind(it) == 1 && tokens.indexOf(it) > 0 }) {
             val short = durationMs in 1..(20 * 60_000L)
             return Parsed(media, Kind.MOVIE, ext, title = cutText, resolution = resolution, audio = audio, subLang = subLang, nameLang = lang, confidence = if (short) 0.45 else 0.7,
-                rule = "movie.tags", copy = copy, hadJunk = true, stem = cutText)
+                rule = "movie.tags", copy = copy, hadJunk = true, stem = cutText, part = partNo, edition = edition)
         }
 
         // ---- nothing tells what it is: keep the name, only cleaned of separators (never re-cased: we do not know what it is)
@@ -599,6 +724,33 @@ object NameParser {
         val plain = if (codeLike) rawStem else tidy(tokens.joinToString(" "))
         return Parsed(media, Kind.UNKNOWN, ext, title = plain, resolution = resolution, audio = audio, subLang = subLang, nameLang = lang, confidence = if (codeLike) 0.2 else 0.3,
             rule = "unknown.video", copy = copy, hadJunk = junk, stem = plain)
+    }
+
+    private val RX_PART_TOKEN = Regex("^(?:cd|disc|disk|part|pt|partie)(\\d)$", RegexOption.IGNORE_CASE)
+    private val PART_WORDS = setOf("part", "pt", "partie")
+    private val EDITIONS = listOf(
+        listOf("director's", "cut") to "directors-cut", listOf("directors", "cut") to "directors-cut", listOf("extended", "cut") to "extended", listOf("final", "cut") to "final-cut",
+        listOf("theatrical", "cut") to "theatrical", listOf("extended") to "extended", listOf("unrated") to "unrated", listOf("uncut") to "uncut", listOf("remastered") to "remastered",
+        listOf("imax") to "imax", listOf("3d") to "3d", listOf("theatrical") to "theatrical",
+    )
+
+    /**
+     * What follows the title of a movie: « CD2 » / « Part 2 » / « Pt.2 » (a part number, only after the year or as « CD<n> »: « Dune Part Two 2024 » and
+     * « Deathly Hallows Part 2 2011 » keep it in the title) and the edition (« Director's Cut », « Extended », « IMAX », « 3D »).
+     */
+    private fun movieExtras(tokens: List<String>, from: Int, hasYear: Boolean): Pair<Int?, String?> {
+        var part: Int? = null
+        var edition: String? = null
+        val low = tokens.map { it.lowercase() }
+        for (i in from until tokens.size) {
+            val t = low[i]
+            RX_PART_TOKEN.matchEntire(t)?.let { m -> if (part == null && (hasYear || t.startsWith("cd"))) part = m.groupValues[1].toInt() }
+            if (part == null && hasYear && t in PART_WORDS) tokens.getOrNull(i + 1)?.takeIf { it.length == 1 && it[0] in '1'..'9' }?.let { part = it.toInt() }
+            if (edition == null) for ((words, name) in EDITIONS) {
+                if (words.indices.all { j -> low.getOrNull(i + j) == words[j] }) { edition = name; break }
+            }
+        }
+        return part to edition
     }
 
     /** "MULTi SUBS" means several subtitle languages, not a multi-language audio track. */
@@ -649,14 +801,24 @@ object NameParser {
         return t
     }
 
+    private val RX_FOLDER_SEASON = ur("^(?:(?:$SEASON_W)\\s*0*$NUM|s\\s*0*(\\d{1,2}))$")
+    private val RX_FOLDER_SPECIALS = ur("^(?:specials?|sp[ée]ciaux|speciali|extras?|bonus)$")
+
+    /** The season a folder name stands for (« Saison 02 », « Temporada 2 », « S3 », « Saison II », « Specials » = 0), or null. */
+    private fun folderSeason(name: String): Int? {
+        val n = name.trim()
+        if (RX_FOLDER_SPECIALS.matches(n)) return 0
+        return RX_FOLDER_SEASON.matchEntire(n)?.let { m -> firstNumber(m) }
+    }
+
     /** "Prison Break/Saison 1" -> ("Prison Break", 1); "Saison 02" -> (null, 2). */
     private fun seriesFromFolder(folder: String): Pair<String?, Int?> {
         val parts = folder.split('/', '\\').filter { it.isNotBlank() }
         var season: Int? = null
         var title: String? = null
         for (p in parts.asReversed()) {
-            val sm = ur("^(?:saison|season|s)\\s*0*(\\d{1,2})$").find(p.trim())
-            if (sm != null && season == null) { season = sm.groupValues[1].toInt(); continue }
+            val sn = folderSeason(p)
+            if (sn != null && season == null) { season = sn; continue }
             if (title == null && p.trim().isNotEmpty() && !p.equals("Séries", true) && !p.equals("Series", true) && !p.equals("Downloads", true) && !p.equals("Download", true)) { title = Text.titleCaseIfNeeded(tidy(normalizeSeparators(stripJunk(p).first)), nameLang(p)) }
         }
         return title to season

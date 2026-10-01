@@ -11,6 +11,9 @@ object Text {
     fun key(s: String): String =
         Normalizer.normalize(s, Normalizer.Form.NFD).replace(DIACRITICS, "").lowercase().replace('œ', 'o').replace(NON_ALNUM, " ").trim()
 
+    /** Grouping key of a TITLE: the matching key without spaces, so that « Prison Break », « Prison.Break », « PrisonBreak » and « prison break » are one series. */
+    fun groupKey(s: String): String = key(s).replace(" ", "")
+
     fun nfc(s: String): String = Normalizer.normalize(s, Normalizer.Form.NFC)
 
     private val SMALL_FR = setOf("de", "du", "des", "la", "le", "les", "un", "une", "et", "à", "au", "aux", "en", "sur", "sous", "dans", "pour", "par", "ou", "d", "l", "sans", "chez", "vs", "by", "ft", "feat")
