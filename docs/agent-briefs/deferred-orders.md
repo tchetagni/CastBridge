@@ -27,4 +27,4 @@ Spécification (`docs/ORDRES.md` : format, actions autorisées, états, séquenc
 Rapport vivant ; relis la section ci-dessous à chaque jalon.
 
 ## Réponses du coordinateur
-(aucune pour l'instant)
+- 2026-10-01 (coordinateur) : la base `integration/agents` contient désormais l'**enveloppe générique `cbx1`** (`core/.../owner/Envelope.kt`, `SeqState`, type de charge utile `activation` | `commande` | `ordre`…), le vérificateur, le tunnel Bluetooth à liaison partagée (`claude/bt-tunnel-keepalive`) et l'outil de bureau `tools/activation-desktop`. **Réutilise l'enveloppe telle quelle** (ajoute seulement le type `ordre` et la portée `policy` si absents) ; ne crée aucun second format.

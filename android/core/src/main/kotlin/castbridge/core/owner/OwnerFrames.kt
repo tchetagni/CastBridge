@@ -21,7 +21,7 @@ object OwnerFrames {
     const val DEVICE_INFO_REQUEST = 5    // console -> TV, empty
     const val DEVICE_INFO = 6            // TV -> console, device code + fingerprint lines (the "device request")
     const val PAIR = 7                   // console -> TV, the 6-digit pairing code shown on the panel
-    const val ACTIVATION = 8             // console -> TV, ASCII "cba1.…" activation (offline phase)
+    const val ACTIVATION = 8             // console -> TV, ASCII "cbx1.…" activation (envelope, docs/ACTIVATION-FORMAT.md) (offline phase)
 
     class Frame(val type: Int, val payload: ByteArray) {
         val text: String get() = String(payload, Charsets.UTF_8)

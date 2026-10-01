@@ -71,7 +71,7 @@ class Desk(private val home: File, private val signer: Signer, private val scope
 
     /** An owner command for ONE TV; [challenge] is the one that TV just issued (valid 120 s, single use). */
     fun command(device: DeviceRequest, power: Power, challenge: String, days: Int = 0, action: String = "", bundles: List<String> = emptyList(), lots: List<LotId> = emptyList()): String =
-        issuer.issueCommand(power, device.factors, challenge, days, action, bundles, lots)
+        issuer.issueCommand(power, device.factors, challenge, clock(), days, action, bundles, lots)
 
     private fun log(a: Activation, d: DeviceRequest) {
         home.mkdirs()

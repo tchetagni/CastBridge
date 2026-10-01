@@ -106,7 +106,7 @@ object Vectors {
     private fun buildCommand(c: Map<String, Any?>, keys: Map<String, Key>, devices: Map<String, Dev>): String? {
         val k = keys.getValue(c.str("signer")!!); val r = c["request"] as Map<String, Any?>; val d = devices.getValue(r.str("device")!!)
         val power = Power.valueOf(r.str("power")!!.uppercase())
-        val token = ActivationIssuer(k.signer, k.scopes).issueCommand(power, d.fp, r.str("challenge")!!, (r["days"] as Number).toInt(), r.str("action") ?: "",
+        val token = ActivationIssuer(k.signer, k.scopes).issueCommand(power, d.fp, r.str("challenge")!!, (r["issuedAt"] as Number).toLong(), (r["days"] as Number).toInt(), r.str("action") ?: "",
             (r["bundles"] as List<String>), (r["lots"] as List<String>).map { s -> LotId(s.substringBefore(':'), s.substringAfter(':')) })
         return if (token != (c["expect"] as Map<String, Any?>).str("token")) "commande différente" else null
     }
@@ -117,7 +117,9 @@ object Vectors {
         val revoked = (c["revokedKeys"] as List<String>).map { keys.getValue(it).signer.keyId }.toSet()
         val seats = (c["revokedSeats"] as List<Map<String, Any?>>).associate { "${it["license"]}|${it["seat"]}" to it.long("at")!! }
         val subject = Subject.valueOf(c.str("expectSubject")!!.uppercase())
-        val r = ActivationVerifier(KeyRing(trusted, revoked), revocations = RevocationState(emptySet(), seats), expect = subject).verify(c.str("token")!!, devices.getValue(c.str("device")!!).fp, c.long("nowMs")!!)
+        // last sequence number already seen per signing key (the vector names the key by its alias): a LOWER number is refused (stale), the SAME one is the file reinstalled
+        val lastSeq = (c["lastSeq"] as? Map<String, Any?>).orEmpty().entries.associate { (alias, v) -> keys.getValue(alias).signer.keyId to (v as Number).toLong() }
+        val r = ActivationVerifier(KeyRing(trusted, revoked), revocations = RevocationState(emptySet(), seats), expect = subject, seqState = castbridge.core.owner.SeqState(lastSeq)).verify(c.str("token")!!, devices.getValue(c.str("device")!!).fp, c.long("nowMs")!!)
         val e = c["expect"] as Map<String, Any?>
         return when (r) {
             is ActivationResult.Accepted -> if (e.str("result") != "accepted") "accepté à tort" else if (e.str("license") != r.activation.license || e.str("seat") != r.activation.seat) "licence/poste différents" else null

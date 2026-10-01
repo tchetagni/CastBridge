@@ -40,7 +40,7 @@ class CliTest {
         assertTrue(File(dir, "home/desk.key.json").isFile)
         val i = cli("emettre", "--appareil", request.path, "--jours", "90", "--sortie", File(dir, "usb").path, "--qr"); assertEquals(0, i.code, i.err)
         val file = File(dir, "usb/activation"); assertTrue(file.isFile)
-        val token = file.readText(); assertTrue(token.startsWith("cba1.") && token.endsWith("\n") && token.trimEnd('\n').lines().size == 1)
+        val token = file.readText(); assertTrue(token.startsWith(castbridge.core.owner.Envelope.PREFIX + ".") && token.endsWith("\n") && token.trimEnd('\n').lines().size == 1)
         assertTrue(File(dir, "usb/activation.png").length() > 100)
         val v = cli("verifier", file.path, "--appareil", request.path, "--maintenant", now.toString()); assertEquals(0, v.code, v.out + v.err); assertTrue(v.out.startsWith("ACCEPTÉ"))
         // nothing secret anywhere: neither the code nor the seed in any file of the home folder
