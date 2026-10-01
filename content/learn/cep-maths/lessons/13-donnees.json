@@ -1,0 +1,376 @@
+{
+ "chapter": "cep-maths-donnees",
+ "lessons": [
+  {
+   "id": "cep-maths-donnees",
+   "title": "Lire un diagramme et calculer une moyenne",
+   "minutes": 15,
+   "readAloud": true,
+   "programRef": "CM2 — Organisation de données — reconstitué, à vérifier sur le texte officiel",
+   "status": "draft",
+   "author": "CastBridge (brouillon IA)",
+   "source": "Rédaction originale ; synthèse de révision orientée examen ; à faire relire par un enseignant",
+   "objectives": [
+    "Lire un tableau et un diagramme en bâtons.",
+    "Calculer le total et la moyenne d'une série de nombres.",
+    "Utiliser la moyenne pour répondre à un problème."
+   ],
+   "prerequisites": [],
+   "exercises": [
+    "cep-maths-donnees-01",
+    "cep-maths-donnees-02",
+    "cep-maths-donnees-03",
+    "cep-maths-donnees-04",
+    "cep-maths-donnees-05",
+    "cep-maths-donnees-06"
+   ],
+   "selfCheck": [
+    "cep-maths-donnees-q1",
+    "cep-maths-donnees-q2",
+    "cep-maths-donnees-q3",
+    "cep-maths-donnees-q4",
+    "cep-maths-donnees-q5"
+   ],
+   "reviewNotes": [
+    "La moyenne est-elle au programme du CM2 ? À confirmer (reconstitué).",
+    "Kribi : nom de ville réel, données fictives."
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Tableau et diagramme en bâtons",
+     "md": "Un **tableau** range des données en lignes et colonnes. Un **diagramme en bâtons** représente chaque valeur par un bâton : plus le bâton est haut, plus la valeur est grande.\n\nPour lire un diagramme : lis le titre, les étiquettes et l'unité, puis la hauteur de chaque bâton."
+    },
+    {
+     "type": "illustration",
+     "figure": {
+      "kind": "bars",
+      "bars": [
+       {
+        "label": "Lun",
+        "value": 3,
+        "color": "blue"
+       },
+       {
+        "label": "Mar",
+        "value": 5,
+        "color": "blue"
+       },
+       {
+        "label": "Mer",
+        "value": 2,
+        "color": "blue"
+       },
+       {
+        "label": "Jeu",
+        "value": 4,
+        "color": "blue"
+       },
+       {
+        "label": "Ven",
+        "value": 6,
+        "color": "blue"
+       }
+      ],
+      "w": 420,
+      "h": 240,
+      "unit": "élèves"
+     },
+     "caption": "Nombre d'élèves absents chaque jour d'une semaine (classe imaginaire).",
+     "alt": "Diagramme en bâtons : lundi 3 élèves, mardi 5, mercredi 2, jeudi 4 et vendredi 6."
+    },
+    {
+     "type": "key",
+     "style": "formule",
+     "title": "La moyenne",
+     "md": "**Moyenne = somme des valeurs ÷ nombre de valeurs.**\n\nElle indique la valeur qu'auraient toutes les données si elles étaient toutes égales."
+    },
+    {
+     "type": "example",
+     "title": "Exemple 1 : lire et calculer",
+     "statement": "Avec le diagramme ci-dessus, calcule le total des absences de la semaine et la moyenne par jour.",
+     "steps": [
+      {
+       "md": "Total : 3 + 5 + 2 + 4 + 6 = 20."
+      },
+      {
+       "md": "Il y a 5 jours : 20 ÷ 5 = 4."
+      }
+     ],
+     "answer": "**20 absences** en tout, soit en moyenne **4 par jour**."
+    },
+    {
+     "type": "example",
+     "title": "Exemple 2 : la moyenne de notes",
+     "statement": "Amina a eu 12, 15, 9 et 14 aux quatre contrôles. Quelle est sa moyenne ?",
+     "steps": [
+      {
+       "md": "Somme : 12 + 15 + 9 + 14 = 50."
+      },
+      {
+       "md": "Nombre de notes : 4. Moyenne : 50 ÷ 4 = 12,5."
+      }
+     ],
+     "answer": "Sa moyenne est **12,5 sur 20**."
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Erreurs fréquentes",
+     "md": "- Diviser la somme par un mauvais nombre de valeurs (oublier un jour, une note).\n- Croire que la moyenne est la valeur du milieu ou la plus fréquente.\n- Lire la hauteur du bâton sans regarder l'échelle de l'axe.\n- Oublier l'unité dans la réponse."
+    },
+    {
+     "type": "exercise",
+     "ref": "cep-maths-donnees-01"
+    },
+    {
+     "type": "exercise",
+     "ref": "cep-maths-donnees-02"
+    },
+    {
+     "type": "exercise",
+     "ref": "cep-maths-donnees-03"
+    },
+    {
+     "type": "exercise",
+     "ref": "cep-maths-donnees-04"
+    },
+    {
+     "type": "exercise",
+     "ref": "cep-maths-donnees-05"
+    },
+    {
+     "type": "exercise",
+     "ref": "cep-maths-donnees-06"
+    }
+   ]
+  }
+ ],
+ "exercises": [
+  {
+   "kind": "numeric",
+   "prompt": "Calcule la moyenne de 8, 10 et 12.",
+   "answer": 10,
+   "tolerance": 0,
+   "explanation": "(8 + 10 + 12) ÷ 3 = 30 ÷ 3 = 10.",
+   "id": "cep-maths-donnees-01",
+   "chapter": "cep-maths-donnees",
+   "tier": "application",
+   "difficulty": 1,
+   "lesson": "cep-maths-donnees",
+   "source": "Exercice original, style CEP",
+   "points": 1
+  },
+  {
+   "kind": "numeric",
+   "prompt": "Un vendeur a vendu 25 mangues, 40 ananas et 35 bananes. Combien de fruits en tout ?",
+   "answer": 100,
+   "tolerance": 0,
+   "explanation": "25 + 40 + 35 = 100.",
+   "id": "cep-maths-donnees-02",
+   "chapter": "cep-maths-donnees",
+   "tier": "application",
+   "difficulty": 1,
+   "lesson": "cep-maths-donnees",
+   "source": "Exercice original, style CEP",
+   "points": 1
+  },
+  {
+   "kind": "truefalse",
+   "prompt": "La moyenne de 4 et 10 est 7.",
+   "answer": true,
+   "explanation": "(4 + 10) ÷ 2 = 7.",
+   "id": "cep-maths-donnees-03",
+   "chapter": "cep-maths-donnees",
+   "tier": "application",
+   "difficulty": 1,
+   "lesson": "cep-maths-donnees",
+   "source": "Exercice original, style CEP",
+   "points": 1
+  },
+  {
+   "kind": "numeric",
+   "prompt": "Calcule la moyenne des notes 14, 9, 12, 13 et 17.",
+   "answer": 13,
+   "tolerance": 0,
+   "explanation": "14 + 9 + 12 + 13 + 17 = 65 ; 65 ÷ 5 = 13.",
+   "id": "cep-maths-donnees-04",
+   "chapter": "cep-maths-donnees",
+   "tier": "approfondissement",
+   "difficulty": 2,
+   "lesson": "cep-maths-donnees",
+   "source": "Exercice original, style CEP",
+   "points": 1
+  },
+  {
+   "kind": "mcq",
+   "prompt": "La moyenne de 5 nombres est 12. Quelle est leur somme ?",
+   "choices": [
+    "60",
+    "17",
+    "7",
+    "12"
+   ],
+   "answer": 0,
+   "explanation": "Somme = moyenne × nombre de valeurs = 12 × 5 = 60.",
+   "id": "cep-maths-donnees-05",
+   "chapter": "cep-maths-donnees",
+   "tier": "approfondissement",
+   "difficulty": 2,
+   "lesson": "cep-maths-donnees",
+   "source": "Exercice original, style CEP",
+   "points": 1
+  },
+  {
+   "kind": "problem",
+   "prompt": "Un commerçant de Kribi note le nombre de bidons d'huile vendus : lundi 12, mardi 18, mercredi 9, jeudi 15, vendredi 21.",
+   "parts": [
+    {
+     "kind": "numeric",
+     "prompt": "Combien de bidons a-t-il vendus dans la semaine ?",
+     "answer": 75,
+     "tolerance": 0,
+     "explanation": "12 + 18 + 9 + 15 + 21 = 75.",
+     "id": "cep-maths-donnees-06-a",
+     "points": 1
+    },
+    {
+     "kind": "numeric",
+     "prompt": "Quelle est la moyenne de ventes par jour ?",
+     "answer": 15,
+     "tolerance": 0,
+     "explanation": "75 ÷ 5 = 15.",
+     "id": "cep-maths-donnees-06-b",
+     "points": 1
+    },
+    {
+     "kind": "mcq",
+     "prompt": "Quel jour a-t-il le plus vendu ?",
+     "choices": [
+      "mardi",
+      "jeudi",
+      "lundi",
+      "vendredi"
+     ],
+     "answer": 3,
+     "explanation": "Vendredi : 21 bidons, le maximum.",
+     "id": "cep-maths-donnees-06-c",
+     "points": 1
+    },
+    {
+     "kind": "numeric",
+     "prompt": "Quel est l'écart entre le meilleur jour et le moins bon jour ?",
+     "answer": 12,
+     "tolerance": 0,
+     "explanation": "21 − 9 = 12 bidons.",
+     "id": "cep-maths-donnees-06-d",
+     "points": 1
+    }
+   ],
+   "explanation": "Voir le corrigé de chaque question.",
+   "method": "Total, puis total ÷ nombre de jours.",
+   "id": "cep-maths-donnees-06",
+   "chapter": "cep-maths-donnees",
+   "tier": "examen",
+   "difficulty": 3,
+   "lesson": "cep-maths-donnees",
+   "source": "Exercice original, style CEP"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Moyenne de 6, 8 et 10 ?",
+   "choices": [
+    "6",
+    "9",
+    "8",
+    "24"
+   ],
+   "answer": 2,
+   "explanation": "(6 + 8 + 10) ÷ 3 = 24 ÷ 3 = 8.",
+   "id": "cep-maths-donnees-q1",
+   "chapter": "cep-maths-donnees",
+   "tier": "autoeval",
+   "difficulty": 1,
+   "lesson": "cep-maths-donnees",
+   "source": "Exercice original, style CEP",
+   "points": 1
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Dans un diagramme en bâtons, la valeur est donnée par...",
+   "choices": [
+    "la largeur du bâton",
+    "la hauteur du bâton",
+    "la couleur du bâton",
+    "la position du bâton"
+   ],
+   "answer": 1,
+   "explanation": "Plus le bâton est haut, plus la valeur est grande.",
+   "id": "cep-maths-donnees-q2",
+   "chapter": "cep-maths-donnees",
+   "tier": "autoeval",
+   "difficulty": 1,
+   "lesson": "cep-maths-donnees",
+   "source": "Exercice original, style CEP",
+   "points": 1
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Pour calculer une moyenne, on...",
+   "choices": [
+    "additionne puis divise par le nombre de valeurs",
+    "additionne seulement",
+    "multiplie les valeurs",
+    "prend la plus grande valeur"
+   ],
+   "answer": 0,
+   "explanation": "Moyenne = somme ÷ nombre de valeurs.",
+   "id": "cep-maths-donnees-q3",
+   "chapter": "cep-maths-donnees",
+   "tier": "autoeval",
+   "difficulty": 1,
+   "lesson": "cep-maths-donnees",
+   "source": "Exercice original, style CEP",
+   "points": 1
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Quatre notes : 10, 10, 10, 10. La moyenne est...",
+   "choices": [
+    "40",
+    "4",
+    "0",
+    "10"
+   ],
+   "answer": 3,
+   "explanation": "(10 + 10 + 10 + 10) ÷ 4 = 10.",
+   "id": "cep-maths-donnees-q4",
+   "chapter": "cep-maths-donnees",
+   "tier": "autoeval",
+   "difficulty": 1,
+   "lesson": "cep-maths-donnees",
+   "source": "Exercice original, style CEP",
+   "points": 1
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Un tableau a trois lignes de 5, 7 et 8. Le total est...",
+   "choices": [
+    "15",
+    "12",
+    "20",
+    "21"
+   ],
+   "answer": 2,
+   "explanation": "5 + 7 + 8 = 20.",
+   "id": "cep-maths-donnees-q5",
+   "chapter": "cep-maths-donnees",
+   "tier": "autoeval",
+   "difficulty": 1,
+   "lesson": "cep-maths-donnees",
+   "source": "Exercice original, style CEP",
+   "points": 1
+  }
+ ]
+}

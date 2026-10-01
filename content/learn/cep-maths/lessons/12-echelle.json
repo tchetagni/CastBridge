@@ -1,0 +1,468 @@
+{
+ "chapter": "cep-maths-echelle",
+ "lessons": [
+  {
+   "id": "cep-maths-echelle",
+   "title": "Échelle, plans et cartes",
+   "minutes": 15,
+   "readAloud": true,
+   "programRef": "CM2 — Échelles et proportionnalité — reconstitué, à vérifier sur le texte officiel",
+   "status": "draft",
+   "author": "CastBridge (brouillon IA)",
+   "source": "Rédaction originale ; synthèse de révision orientée examen ; à faire relire par un enseignant",
+   "objectives": [
+    "Comprendre ce que signifie une échelle 1/50 000.",
+    "Calculer une distance réelle à partir d'une distance sur la carte.",
+    "Calculer une distance sur le plan à partir d'une distance réelle."
+   ],
+   "prerequisites": [],
+   "exercises": [
+    "cep-maths-echelle-01",
+    "cep-maths-echelle-02",
+    "cep-maths-echelle-03",
+    "cep-maths-echelle-04",
+    "cep-maths-echelle-05",
+    "cep-maths-echelle-06"
+   ],
+   "selfCheck": [
+    "cep-maths-echelle-q1",
+    "cep-maths-echelle-q2",
+    "cep-maths-echelle-q3",
+    "cep-maths-echelle-q4",
+    "cep-maths-echelle-q5"
+   ],
+   "reviewNotes": [
+    "Les villes A, B, C sont fictives : aucune distance réelle n'est affirmée.",
+    "La vitesse moyenne est dans la fiche « Problèmes » : vérifier la cohérence de la présentation."
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Qu'est-ce qu'une échelle ?",
+     "md": "L'**échelle** d'un plan ou d'une carte indique de combien les distances ont été réduites.\n\nÉchelle **1/50 000** : 1 cm sur la carte représente 50 000 cm dans la réalité, soit 500 m.\n\nPlus le nombre du bas est grand, plus la carte montre un grand territoire avec peu de détails."
+    },
+    {
+     "type": "illustration",
+     "figure": {
+      "kind": "shapes",
+      "w": 440,
+      "h": 170,
+      "items": [
+       {
+        "t": "rect",
+        "x": 15,
+        "y": 15,
+        "w": 410,
+        "h": 110,
+        "stroke": "green",
+        "fill": "lightgreen",
+        "radius": 8
+       },
+       {
+        "t": "circle",
+        "cx": 70,
+        "cy": 80,
+        "r": 7,
+        "stroke": "ink",
+        "fill": "red"
+       },
+       {
+        "t": "circle",
+        "cx": 230,
+        "cy": 80,
+        "r": 7,
+        "stroke": "ink",
+        "fill": "red"
+       },
+       {
+        "t": "line",
+        "x1": 77,
+        "y1": 80,
+        "x2": 223,
+        "y2": 80,
+        "color": "blue",
+        "width": 3
+       },
+       {
+        "t": "text",
+        "x": 70,
+        "y": 60,
+        "text": "A",
+        "size": 16,
+        "color": "red",
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 230,
+        "y": 60,
+        "text": "B",
+        "size": 16,
+        "color": "red",
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 150,
+        "y": 102,
+        "text": "4 cm sur la carte",
+        "size": 14,
+        "color": "blue",
+        "bold": true
+       },
+       {
+        "t": "line",
+        "x1": 300,
+        "y1": 150,
+        "x2": 380,
+        "y2": 150,
+        "color": "ink",
+        "width": 3
+       },
+       {
+        "t": "line",
+        "x1": 300,
+        "y1": 144,
+        "x2": 300,
+        "y2": 156,
+        "color": "ink",
+        "width": 2
+       },
+       {
+        "t": "line",
+        "x1": 380,
+        "y1": 144,
+        "x2": 380,
+        "y2": 156,
+        "color": "ink",
+        "width": 2
+       },
+       {
+        "t": "text",
+        "x": 340,
+        "y": 142,
+        "text": "1 km",
+        "size": 13,
+        "color": "ink",
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 180,
+        "y": 152,
+        "text": "échelle 1/50 000",
+        "size": 14,
+        "color": "ink",
+        "bold": true
+       }
+      ]
+     },
+     "caption": "Une carte imaginaire à l'échelle 1/50 000.",
+     "alt": "Un rectangle vert avec deux points A et B reliés par un segment bleu de 4 cm. En bas, une règle graduée indique 1 km et la mention échelle 1/50 000."
+    },
+    {
+     "type": "key",
+     "style": "methode",
+     "title": "Convertir une distance",
+     "md": "- **Carte → réalité** : multiplier par le nombre du bas, puis convertir (cm → m → km).\n- **Réalité → carte** : convertir en cm, puis diviser par le nombre du bas.\n\nLes deux distances doivent toujours être dans la **même unité** pendant le calcul."
+    },
+    {
+     "type": "example",
+     "title": "Exemple 1 : carte vers réalité",
+     "statement": "Sur une carte à l'échelle 1/50 000, deux villages sont séparés de 4 cm. Quelle est la distance réelle ?",
+     "steps": [
+      {
+       "md": "4 cm × 50 000 = 200 000 cm."
+      },
+      {
+       "md": "200 000 cm = 2 000 m (on divise par 100)."
+      },
+      {
+       "md": "2 000 m = 2 km (on divise par 1 000)."
+      }
+     ],
+     "answer": "Les villages sont distants de **2 km**."
+    },
+    {
+     "type": "example",
+     "title": "Exemple 2 : réalité vers plan",
+     "statement": "Un terrain mesure 60 m sur 40 m. Quelles sont ses dimensions sur un plan à l'échelle 1/1 000 ?",
+     "steps": [
+      {
+       "md": "60 m = 6 000 cm ; 6 000 ÷ 1 000 = 6 cm."
+      },
+      {
+       "md": "40 m = 4 000 cm ; 4 000 ÷ 1 000 = 4 cm."
+      }
+     ],
+     "answer": "Sur le plan, le terrain mesure **6 cm sur 4 cm**."
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Erreurs fréquentes",
+     "md": "- Oublier de convertir : 4 cm × 50 000 = 200 000 **cm**, pas 200 000 m.\n- Diviser au lieu de multiplier (ou l'inverse).\n- Confondre l'échelle 1/1 000 avec 1 000 cm = 100 m.\n- Mesurer au « jugé » sur une carte sans règle : mesure toujours en cm."
+    },
+    {
+     "type": "exercise",
+     "ref": "cep-maths-echelle-01"
+    },
+    {
+     "type": "exercise",
+     "ref": "cep-maths-echelle-02"
+    },
+    {
+     "type": "exercise",
+     "ref": "cep-maths-echelle-03"
+    },
+    {
+     "type": "exercise",
+     "ref": "cep-maths-echelle-04"
+    },
+    {
+     "type": "exercise",
+     "ref": "cep-maths-echelle-05"
+    },
+    {
+     "type": "exercise",
+     "ref": "cep-maths-echelle-06"
+    }
+   ]
+  }
+ ],
+ "exercises": [
+  {
+   "kind": "numeric",
+   "prompt": "Échelle 1/1 000 : un mur mesure 7 cm sur le plan. Quelle est sa longueur réelle en mètres ?",
+   "answer": 70,
+   "tolerance": 0,
+   "explanation": "7 × 1 000 = 7 000 cm = 70 m.",
+   "unit": "m",
+   "id": "cep-maths-echelle-01",
+   "chapter": "cep-maths-echelle",
+   "tier": "application",
+   "difficulty": 1,
+   "lesson": "cep-maths-echelle",
+   "source": "Exercice original, style CEP",
+   "points": 1
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Sur un plan à l'échelle 1/200, 1 cm représente...",
+   "choices": [
+    "20 m",
+    "200 m",
+    "20 cm",
+    "2 m"
+   ],
+   "answer": 3,
+   "explanation": "1 cm × 200 = 200 cm = 2 m.",
+   "id": "cep-maths-echelle-02",
+   "chapter": "cep-maths-echelle",
+   "tier": "application",
+   "difficulty": 1,
+   "lesson": "cep-maths-echelle",
+   "source": "Exercice original, style CEP",
+   "points": 1
+  },
+  {
+   "kind": "numeric",
+   "prompt": "Une distance réelle de 3 km est dessinée à l'échelle 1/100 000. Quelle est sa longueur sur la carte, en cm ?",
+   "answer": 3,
+   "tolerance": 0,
+   "explanation": "3 km = 300 000 cm ; 300 000 ÷ 100 000 = 3 cm.",
+   "unit": "cm",
+   "id": "cep-maths-echelle-03",
+   "chapter": "cep-maths-echelle",
+   "tier": "application",
+   "difficulty": 1,
+   "lesson": "cep-maths-echelle",
+   "source": "Exercice original, style CEP",
+   "points": 1
+  },
+  {
+   "kind": "numeric",
+   "prompt": "Une classe de 5 m sur 4 m est dessinée à l'échelle 1/50. Quelle est la longueur du grand côté sur le plan, en cm ?",
+   "answer": 10,
+   "tolerance": 0,
+   "explanation": "5 m = 500 cm ; 500 ÷ 50 = 10 cm.",
+   "unit": "cm",
+   "id": "cep-maths-echelle-04",
+   "chapter": "cep-maths-echelle",
+   "tier": "approfondissement",
+   "difficulty": 2,
+   "lesson": "cep-maths-echelle",
+   "source": "Exercice original, style CEP",
+   "points": 1
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Sur une carte au 1/200 000, deux villes sont à 6,5 cm. Quelle est la distance réelle ?",
+   "choices": [
+    "1,3 km",
+    "130 km",
+    "13 km",
+    "6,5 km"
+   ],
+   "answer": 2,
+   "explanation": "6,5 × 200 000 = 1 300 000 cm = 13 000 m = 13 km.",
+   "id": "cep-maths-echelle-05",
+   "chapter": "cep-maths-echelle",
+   "tier": "approfondissement",
+   "difficulty": 2,
+   "lesson": "cep-maths-echelle",
+   "source": "Exercice original, style CEP",
+   "points": 1
+  },
+  {
+   "kind": "problem",
+   "prompt": "Sur une carte à l'échelle 1/250 000, on étudie le trajet entre deux villes imaginaires A et B.",
+   "parts": [
+    {
+     "kind": "numeric",
+     "prompt": "Combien de kilomètres représente 1 cm sur la carte ?",
+     "answer": 2.5,
+     "tolerance": 0,
+     "explanation": "250 000 cm = 2 500 m = 2,5 km.",
+     "unit": "km",
+     "id": "cep-maths-echelle-06-a",
+     "points": 1
+    },
+    {
+     "kind": "numeric",
+     "prompt": "A et B sont à 8 cm sur la carte. Quelle est la distance réelle en km ?",
+     "answer": 20,
+     "tolerance": 0,
+     "explanation": "8 × 2,5 = 20 km.",
+     "unit": "km",
+     "id": "cep-maths-echelle-06-b",
+     "points": 1
+    },
+    {
+     "kind": "numeric",
+     "prompt": "Une troisième ville C est à 45 km de A. À quelle distance de A est-elle sur la carte, en cm ?",
+     "answer": 18,
+     "tolerance": 0,
+     "explanation": "45 ÷ 2,5 = 18 cm.",
+     "unit": "cm",
+     "id": "cep-maths-echelle-06-c",
+     "points": 1
+    },
+    {
+     "kind": "numeric",
+     "prompt": "Un cycliste parcourt les 20 km de A à B en 30 minutes (hypothèse). Quelle est sa vitesse moyenne en km/h ?",
+     "answer": 40,
+     "tolerance": 0,
+     "explanation": "30 min = 0,5 h ; 20 ÷ 0,5 = 40 km/h.",
+     "unit": "km/h",
+     "id": "cep-maths-echelle-06-d",
+     "points": 1
+    }
+   ],
+   "explanation": "Voir le corrigé de chaque question.",
+   "method": "Mêmes unités ; multiplier du plan vers la réalité, diviser dans l'autre sens.",
+   "id": "cep-maths-echelle-06",
+   "chapter": "cep-maths-echelle",
+   "tier": "examen",
+   "difficulty": 3,
+   "lesson": "cep-maths-echelle",
+   "source": "Exercice original, style CEP"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Échelle 1/10 000 : 1 cm représente...",
+   "choices": [
+    "10 m",
+    "100 m",
+    "1 000 m",
+    "10 000 m"
+   ],
+   "answer": 1,
+   "explanation": "10 000 cm = 100 m.",
+   "id": "cep-maths-echelle-q1",
+   "chapter": "cep-maths-echelle",
+   "tier": "autoeval",
+   "difficulty": 1,
+   "lesson": "cep-maths-echelle",
+   "source": "Exercice original, style CEP",
+   "points": 1
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Sur un plan, la distance est 5 cm et l'échelle 1/500. La distance réelle est...",
+   "choices": [
+    "25 m",
+    "250 m",
+    "2,5 m",
+    "2 500 m"
+   ],
+   "answer": 0,
+   "explanation": "5 × 500 = 2 500 cm = 25 m.",
+   "id": "cep-maths-echelle-q2",
+   "chapter": "cep-maths-echelle",
+   "tier": "autoeval",
+   "difficulty": 1,
+   "lesson": "cep-maths-echelle",
+   "source": "Exercice original, style CEP",
+   "points": 1
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Pour passer de la réalité au plan, on...",
+   "choices": [
+    "multiplie par le nombre du bas",
+    "ajoute le nombre du bas",
+    "soustrait le nombre du bas",
+    "divise par le nombre du bas"
+   ],
+   "answer": 3,
+   "explanation": "Le plan est une réduction : on divise.",
+   "id": "cep-maths-echelle-q3",
+   "chapter": "cep-maths-echelle",
+   "tier": "autoeval",
+   "difficulty": 1,
+   "lesson": "cep-maths-echelle",
+   "source": "Exercice original, style CEP",
+   "points": 1
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Quelle échelle donne la carte la plus détaillée ?",
+   "choices": [
+    "1/10 000",
+    "1/100 000",
+    "1/1 000",
+    "1/1 000 000"
+   ],
+   "answer": 2,
+   "explanation": "Plus le nombre du bas est petit, plus la réduction est faible et plus il y a de détails.",
+   "id": "cep-maths-echelle-q4",
+   "chapter": "cep-maths-echelle",
+   "tier": "autoeval",
+   "difficulty": 1,
+   "lesson": "cep-maths-echelle",
+   "source": "Exercice original, style CEP",
+   "points": 1
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Une route réelle de 12 km à l'échelle 1/100 000 mesure sur la carte...",
+   "choices": [
+    "1,2 cm",
+    "12 cm",
+    "120 cm",
+    "0,12 cm"
+   ],
+   "answer": 1,
+   "explanation": "12 km = 1 200 000 cm ; ÷ 100 000 = 12 cm.",
+   "id": "cep-maths-echelle-q5",
+   "chapter": "cep-maths-echelle",
+   "tier": "autoeval",
+   "difficulty": 1,
+   "lesson": "cep-maths-echelle",
+   "source": "Exercice original, style CEP",
+   "points": 1
+  }
+ ]
+}

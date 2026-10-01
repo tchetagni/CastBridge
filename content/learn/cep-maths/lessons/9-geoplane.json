@@ -1,0 +1,459 @@
+{
+ "chapter": "cep-maths-plan",
+ "lessons": [
+  {
+   "id": "cep-maths-geoplane",
+   "title": "Droites, angles, triangles et symétrie",
+   "minutes": 20,
+   "readAloud": true,
+   "programRef": "CM2 — Géométrie plane — reconstitué, à vérifier sur le texte officiel",
+   "status": "draft",
+   "author": "CastBridge (brouillon IA)",
+   "source": "Rédaction originale ; synthèse de révision orientée examen ; à faire relire par un enseignant",
+   "objectives": [
+    "Reconnaître des droites parallèles et perpendiculaires et des angles droit, aigu, obtus.",
+    "Reconnaître et nommer les triangles particuliers.",
+    "Calculer le troisième angle d'un triangle (somme = 180°).",
+    "Trouver les axes de symétrie d'une figure simple."
+   ],
+   "prerequisites": [],
+   "exercises": [
+    "cep-maths-geoplane-01",
+    "cep-maths-geoplane-02",
+    "cep-maths-geoplane-03",
+    "cep-maths-geoplane-04",
+    "cep-maths-geoplane-05",
+    "cep-maths-geoplane-06"
+   ],
+   "selfCheck": [
+    "cep-maths-geoplane-q1",
+    "cep-maths-geoplane-q2",
+    "cep-maths-geoplane-q3",
+    "cep-maths-geoplane-q4",
+    "cep-maths-geoplane-q5"
+   ],
+   "reviewNotes": [
+    "Vérifier que le périmètre et la symétrie sont bien au programme de CM2 ; vérifier que la construction (règle, équerre, rapporteur) est abordée en classe, hors fiche.",
+    "Dessin des triangles : proportions indicatives, pas à l'échelle."
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Droites et angles",
+     "md": "- Deux droites **perpendiculaires** se coupent en formant un angle droit (90°).\n- Deux droites **parallèles** ne se coupent jamais : elles gardent le même écartement.\n- Angle **aigu** : moins de 90°. Angle **droit** : 90°. Angle **obtus** : entre 90° et 180°. Angle **plat** : 180°."
+    },
+    {
+     "type": "key",
+     "style": "retenir",
+     "title": "Les triangles",
+     "md": "- Triangle **rectangle** : un angle droit.\n- Triangle **isocèle** : deux côtés égaux (et deux angles égaux).\n- Triangle **équilatéral** : trois côtés égaux (trois angles de 60°).\n\n**La somme des trois angles d'un triangle est toujours 180°.**"
+    },
+    {
+     "type": "illustration",
+     "figure": {
+      "kind": "shapes",
+      "w": 480,
+      "h": 150,
+      "items": [
+       {
+        "t": "poly",
+        "pts": [
+         20,
+         110,
+         20,
+         30,
+         110,
+         110
+        ],
+        "stroke": "blue",
+        "fill": "lightblue"
+       },
+       {
+        "t": "angle",
+        "x": 20,
+        "y": 110,
+        "from": 0,
+        "to": 90,
+        "r": 14,
+        "right": true
+       },
+       {
+        "t": "text",
+        "x": 65,
+        "y": 134,
+        "text": "rectangle",
+        "size": 14,
+        "color": "ink",
+        "bold": true
+       },
+       {
+        "t": "poly",
+        "pts": [
+         180,
+         110,
+         240,
+         30,
+         300,
+         110
+        ],
+        "stroke": "green",
+        "fill": "lightgreen"
+       },
+       {
+        "t": "text",
+        "x": 240,
+        "y": 134,
+        "text": "isocèle",
+        "size": 14,
+        "color": "ink",
+        "bold": true
+       },
+       {
+        "t": "poly",
+        "pts": [
+         360,
+         110,
+         440,
+         110,
+         400,
+         41
+        ],
+        "stroke": "orange",
+        "fill": "lightyellow"
+       },
+       {
+        "t": "text",
+        "x": 400,
+        "y": 134,
+        "text": "équilatéral",
+        "size": 14,
+        "color": "ink",
+        "bold": true
+       }
+      ]
+     },
+     "caption": "Trois triangles particuliers.",
+     "alt": "À gauche un triangle rectangle avec la marque d'angle droit, au milieu un triangle isocèle, à droite un triangle équilatéral."
+    },
+    {
+     "type": "example",
+     "title": "Exemple 1 : le troisième angle",
+     "statement": "Un triangle a deux angles de 50° et de 65°. Calcule le troisième.",
+     "steps": [
+      {
+       "md": "La somme des trois angles vaut 180°."
+      },
+      {
+       "md": "50° + 65° = 115°."
+      },
+      {
+       "md": "180° − 115° = 65°."
+      }
+     ],
+     "answer": "Le troisième angle mesure **65°** (le triangle est donc isocèle)."
+    },
+    {
+     "type": "key",
+     "style": "retenir",
+     "title": "Quadrilatères et symétrie",
+     "md": "- **Rectangle** : 4 angles droits, côtés opposés égaux. **Carré** : 4 angles droits et 4 côtés égaux. **Losange** : 4 côtés égaux.\n- Un **axe de symétrie** partage la figure en deux moitiés qui se superposent en pliant. Le carré a 4 axes, le rectangle 2, le triangle équilatéral 3."
+    },
+    {
+     "type": "example",
+     "title": "Exemple 2 : nature et périmètre",
+     "statement": "Un triangle a pour côtés 5 cm, 5 cm et 8 cm. Quelle est sa nature ? Calcule son périmètre.",
+     "steps": [
+      {
+       "md": "Deux côtés sont égaux (5 cm et 5 cm) : le triangle est **isocèle**."
+      },
+      {
+       "md": "Périmètre : 5 + 5 + 8 = 18 cm."
+      }
+     ],
+     "answer": "Triangle **isocèle** de périmètre **18 cm**."
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Erreurs fréquentes",
+     "md": "- Oublier que la somme des angles d'un triangle est 180° (et non 360°).\n- Dire que le carré n'est pas un rectangle : il a 4 angles droits, c'est un rectangle particulier.\n- Confondre « parallèles » (jamais de point commun) et « perpendiculaires » (angle droit).\n- Compter 2 axes seulement pour le carré : il en a 4 (2 médianes, 2 diagonales)."
+    },
+    {
+     "type": "exercise",
+     "ref": "cep-maths-geoplane-01"
+    },
+    {
+     "type": "exercise",
+     "ref": "cep-maths-geoplane-02"
+    },
+    {
+     "type": "exercise",
+     "ref": "cep-maths-geoplane-03"
+    },
+    {
+     "type": "exercise",
+     "ref": "cep-maths-geoplane-04"
+    },
+    {
+     "type": "exercise",
+     "ref": "cep-maths-geoplane-05"
+    },
+    {
+     "type": "exercise",
+     "ref": "cep-maths-geoplane-06"
+    }
+   ]
+  }
+ ],
+ "exercises": [
+  {
+   "kind": "numeric",
+   "prompt": "Un triangle a un angle droit et un angle de 35°. Combien mesure le troisième angle (en degrés) ?",
+   "answer": 55,
+   "tolerance": 0,
+   "explanation": "180 − (90 + 35) = 180 − 125 = 55°.",
+   "unit": "°",
+   "id": "cep-maths-geoplane-01",
+   "chapter": "cep-maths-plan",
+   "tier": "application",
+   "difficulty": 1,
+   "lesson": "cep-maths-geoplane",
+   "source": "Exercice original, style CEP",
+   "points": 1
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Un triangle a trois côtés de 6 cm. Quelle est sa nature ?",
+   "choices": [
+    "rectangle",
+    "équilatéral",
+    "isocèle sans être équilatéral",
+    "quelconque"
+   ],
+   "answer": 1,
+   "explanation": "Trois côtés égaux : triangle équilatéral (il est aussi isocèle).",
+   "id": "cep-maths-geoplane-02",
+   "chapter": "cep-maths-plan",
+   "tier": "application",
+   "difficulty": 1,
+   "lesson": "cep-maths-geoplane",
+   "source": "Exercice original, style CEP",
+   "points": 1
+  },
+  {
+   "kind": "matching",
+   "prompt": "Associe chaque figure à son nombre d'axes de symétrie.",
+   "pairs": [
+    [
+     "carré",
+     "4 axes"
+    ],
+    [
+     "rectangle (non carré)",
+     "2 axes"
+    ],
+    [
+     "triangle équilatéral",
+     "3 axes"
+    ],
+    [
+     "triangle isocèle (non équilatéral)",
+     "1 axe"
+    ]
+   ],
+   "explanation": "Carré : 4 ; rectangle : 2 ; équilatéral : 3 ; isocèle : 1 (la médiatrice de la base).",
+   "points": 2,
+   "id": "cep-maths-geoplane-03",
+   "chapter": "cep-maths-plan",
+   "tier": "application",
+   "difficulty": 1,
+   "lesson": "cep-maths-geoplane",
+   "source": "Exercice original, style CEP"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Un triangle a deux angles de 45° et 45°. Lequel est-il ?",
+   "choices": [
+    "rectangle isocèle",
+    "équilatéral",
+    "obtus",
+    "aucun triangle ne convient"
+   ],
+   "answer": 0,
+   "explanation": "Troisième angle : 180 − 90 = 90°. Il a un angle droit et deux angles égaux.",
+   "id": "cep-maths-geoplane-04",
+   "chapter": "cep-maths-plan",
+   "tier": "approfondissement",
+   "difficulty": 2,
+   "lesson": "cep-maths-geoplane",
+   "source": "Exercice original, style CEP",
+   "points": 1
+  },
+  {
+   "kind": "open",
+   "prompt": "Explique pourquoi un triangle ne peut pas avoir deux angles droits.",
+   "model": "Deux angles droits font déjà 90° + 90° = 180°. Il ne reste rien pour le troisième angle, alors que la somme des trois angles vaut 180°.",
+   "rubric": [
+    "Rappeler que la somme des angles est 180°.",
+    "Calculer 90 + 90 = 180.",
+    "Conclure qu'il ne reste plus d'angle pour le 3e."
+   ],
+   "explanation": "Les trois angles doivent faire 180° ; deux angles droits en utilisent déjà 180°.",
+   "points": 2,
+   "id": "cep-maths-geoplane-05",
+   "chapter": "cep-maths-plan",
+   "tier": "approfondissement",
+   "difficulty": 2,
+   "lesson": "cep-maths-geoplane",
+   "source": "Exercice original, style CEP"
+  },
+  {
+   "kind": "problem",
+   "prompt": "Le triangle ABC est isocèle en A. Son angle en A mesure 40°. Les côtés AB et AC mesurent 9 cm chacun et BC mesure 6 cm.",
+   "parts": [
+    {
+     "kind": "numeric",
+     "prompt": "Calcule la somme des deux angles égaux (B et C), en degrés.",
+     "answer": 140,
+     "tolerance": 0,
+     "explanation": "180 − 40 = 140°.",
+     "unit": "°",
+     "id": "cep-maths-geoplane-06-a",
+     "points": 1
+    },
+    {
+     "kind": "numeric",
+     "prompt": "Combien mesure l'angle B ?",
+     "answer": 70,
+     "tolerance": 0,
+     "explanation": "Les angles B et C sont égaux : 140 ÷ 2 = 70°.",
+     "unit": "°",
+     "id": "cep-maths-geoplane-06-b",
+     "points": 1
+    },
+    {
+     "kind": "numeric",
+     "prompt": "Calcule le périmètre du triangle.",
+     "answer": 24,
+     "tolerance": 0,
+     "explanation": "9 + 9 + 6 = 24 cm.",
+     "unit": "cm",
+     "id": "cep-maths-geoplane-06-c",
+     "points": 1
+    },
+    {
+     "kind": "truefalse",
+     "prompt": "Le triangle ABC est rectangle.",
+     "answer": false,
+     "explanation": "Ses angles sont 40°, 70° et 70° : aucun n'est droit.",
+     "id": "cep-maths-geoplane-06-d",
+     "points": 1
+    }
+   ],
+   "explanation": "Voir le corrigé de chaque question.",
+   "method": "Somme des angles = 180° ; dans un triangle isocèle, les angles de la base sont égaux.",
+   "id": "cep-maths-geoplane-06",
+   "chapter": "cep-maths-plan",
+   "tier": "examen",
+   "difficulty": 3,
+   "lesson": "cep-maths-geoplane",
+   "source": "Exercice original, style CEP"
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Quelle est la somme des angles d'un triangle ?",
+   "choices": [
+    "90°",
+    "360°",
+    "100°",
+    "180°"
+   ],
+   "answer": 3,
+   "explanation": "Dans tout triangle, la somme des angles vaut 180°.",
+   "id": "cep-maths-geoplane-q1",
+   "chapter": "cep-maths-plan",
+   "tier": "autoeval",
+   "difficulty": 1,
+   "lesson": "cep-maths-geoplane",
+   "source": "Exercice original, style CEP",
+   "points": 1
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Un angle de 120° est un angle...",
+   "choices": [
+    "aigu",
+    "droit",
+    "obtus",
+    "plat"
+   ],
+   "answer": 2,
+   "explanation": "Entre 90° et 180° : angle obtus.",
+   "id": "cep-maths-geoplane-q2",
+   "chapter": "cep-maths-plan",
+   "tier": "autoeval",
+   "difficulty": 1,
+   "lesson": "cep-maths-geoplane",
+   "source": "Exercice original, style CEP",
+   "points": 1
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Un losange a...",
+   "choices": [
+    "4 angles droits toujours",
+    "4 côtés égaux",
+    "2 côtés égaux seulement",
+    "3 axes de symétrie"
+   ],
+   "answer": 1,
+   "explanation": "Le losange est défini par ses 4 côtés égaux.",
+   "id": "cep-maths-geoplane-q3",
+   "chapter": "cep-maths-plan",
+   "tier": "autoeval",
+   "difficulty": 1,
+   "lesson": "cep-maths-geoplane",
+   "source": "Exercice original, style CEP",
+   "points": 1
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Deux droites qui ne se coupent jamais sont...",
+   "choices": [
+    "parallèles",
+    "perpendiculaires",
+    "obliques seulement",
+    "confondues obligatoirement"
+   ],
+   "answer": 0,
+   "explanation": "Des droites qui ne se coupent jamais sont parallèles.",
+   "id": "cep-maths-geoplane-q4",
+   "chapter": "cep-maths-plan",
+   "tier": "autoeval",
+   "difficulty": 1,
+   "lesson": "cep-maths-geoplane",
+   "source": "Exercice original, style CEP",
+   "points": 1
+  },
+  {
+   "kind": "mcq",
+   "prompt": "Combien d'axes de symétrie a un rectangle non carré ?",
+   "choices": [
+    "1",
+    "4",
+    "0",
+    "2"
+   ],
+   "answer": 3,
+   "explanation": "Un rectangle a 2 axes : l'un horizontal, l'autre vertical.",
+   "id": "cep-maths-geoplane-q5",
+   "chapter": "cep-maths-plan",
+   "tier": "autoeval",
+   "difficulty": 1,
+   "lesson": "cep-maths-geoplane",
+   "source": "Exercice original, style CEP",
+   "points": 1
+  }
+ ]
+}
