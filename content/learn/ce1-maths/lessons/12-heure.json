@@ -1,0 +1,779 @@
+{
+ "chapter": "ce1-maths-mesures",
+ "lessons": [
+  {
+   "id": "ce1-maths-heure",
+   "title": "Lire l'heure",
+   "minutes": 20,
+   "readAloud": true,
+   "programRef": "CE1 — Programme de mathématiques du cycle 2, MINEDUB (reconstitué, à vérifier sur le texte officiel) — grandeurs et mesures : lire l'heure (heures, demi-heures, quarts d'heure)",
+   "status": "draft",
+   "author": "CastBridge (brouillon IA)",
+   "source": "Rédaction originale ; à faire relire par un enseignant",
+   "objectives": [
+    "Lire l'heure sur une horloge à aiguilles.",
+    "Dire l'heure : heure pile, et demie, et quart, moins le quart.",
+    "Connaître 1 h = 60 min."
+   ],
+   "prerequisites": [],
+   "exercises": [
+    "ce1-maths-heure-01",
+    "ce1-maths-heure-02",
+    "ce1-maths-heure-03",
+    "ce1-maths-heure-04",
+    "ce1-maths-heure-05",
+    "ce1-maths-heure-06"
+   ],
+   "selfCheck": [
+    "ce1-maths-heure-q1",
+    "ce1-maths-heure-q2",
+    "ce1-maths-heure-q3",
+    "ce1-maths-heure-q4",
+    "ce1-maths-heure-q5"
+   ],
+   "reviewNotes": [
+    "Dire l'heure « moins le quart » au CE1 : vérifier la progression du programme ; horloge dessinée à contrôler visuellement (aiguilles)."
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "L'horloge",
+     "md": "Sur l'horloge, la **petite aiguille** (rouge) montre les **heures**. La **grande aiguille** (bleue) montre les **minutes**.\n\n**1 heure = 60 minutes**."
+    },
+    {
+     "type": "illustration",
+     "caption": "Il est 3 heures.",
+     "alt": "Une horloge à aiguilles : la petite aiguille rouge pointe sur 3 et la grande aiguille bleue sur 12.",
+     "figure": {
+      "kind": "shapes",
+      "w": 200,
+      "h": 200,
+      "items": [
+       {
+        "t": "circle",
+        "cx": 100.0,
+        "cy": 100.0,
+        "r": 88.0,
+        "stroke": "ink",
+        "width": 3,
+        "fill": "white"
+       },
+       {
+        "t": "line",
+        "x1": 100.0,
+        "y1": 22.0,
+        "x2": 100.0,
+        "y2": 12.0,
+        "color": "ink",
+        "width": 2,
+        "dash": false,
+        "arrow": "none"
+       },
+       {
+        "t": "line",
+        "x1": 139.0,
+        "y1": 32.5,
+        "x2": 144.0,
+        "y2": 23.8,
+        "color": "ink",
+        "width": 2,
+        "dash": false,
+        "arrow": "none"
+       },
+       {
+        "t": "line",
+        "x1": 167.5,
+        "y1": 61.0,
+        "x2": 176.2,
+        "y2": 56.0,
+        "color": "ink",
+        "width": 2,
+        "dash": false,
+        "arrow": "none"
+       },
+       {
+        "t": "line",
+        "x1": 178.0,
+        "y1": 100.0,
+        "x2": 188.0,
+        "y2": 100.0,
+        "color": "ink",
+        "width": 2,
+        "dash": false,
+        "arrow": "none"
+       },
+       {
+        "t": "line",
+        "x1": 167.5,
+        "y1": 139.0,
+        "x2": 176.2,
+        "y2": 144.0,
+        "color": "ink",
+        "width": 2,
+        "dash": false,
+        "arrow": "none"
+       },
+       {
+        "t": "line",
+        "x1": 139.0,
+        "y1": 167.5,
+        "x2": 144.0,
+        "y2": 176.2,
+        "color": "ink",
+        "width": 2,
+        "dash": false,
+        "arrow": "none"
+       },
+       {
+        "t": "line",
+        "x1": 100.0,
+        "y1": 178.0,
+        "x2": 100.0,
+        "y2": 188.0,
+        "color": "ink",
+        "width": 2,
+        "dash": false,
+        "arrow": "none"
+       },
+       {
+        "t": "line",
+        "x1": 61.0,
+        "y1": 167.5,
+        "x2": 56.0,
+        "y2": 176.2,
+        "color": "ink",
+        "width": 2,
+        "dash": false,
+        "arrow": "none"
+       },
+       {
+        "t": "line",
+        "x1": 32.5,
+        "y1": 139.0,
+        "x2": 23.8,
+        "y2": 144.0,
+        "color": "ink",
+        "width": 2,
+        "dash": false,
+        "arrow": "none"
+       },
+       {
+        "t": "line",
+        "x1": 22.0,
+        "y1": 100.0,
+        "x2": 12.0,
+        "y2": 100.0,
+        "color": "ink",
+        "width": 2,
+        "dash": false,
+        "arrow": "none"
+       },
+       {
+        "t": "line",
+        "x1": 32.5,
+        "y1": 61.0,
+        "x2": 23.8,
+        "y2": 56.0,
+        "color": "ink",
+        "width": 2,
+        "dash": false,
+        "arrow": "none"
+       },
+       {
+        "t": "line",
+        "x1": 61.0,
+        "y1": 32.5,
+        "x2": 56.0,
+        "y2": 23.8,
+        "color": "ink",
+        "width": 2,
+        "dash": false,
+        "arrow": "none"
+       },
+       {
+        "t": "text",
+        "x": 100.0,
+        "y": 45.0,
+        "text": "12",
+        "size": 18,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 162.0,
+        "y": 107.0,
+        "text": "3",
+        "size": 18,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 100.0,
+        "y": 169.0,
+        "text": "6",
+        "size": 18,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 38.0,
+        "y": 107.0,
+        "text": "9",
+        "size": 18,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "line",
+        "x1": 100.0,
+        "y1": 100.0,
+        "x2": 100.0,
+        "y2": 25.2,
+        "color": "blue",
+        "width": 3,
+        "dash": false,
+        "arrow": "none"
+       },
+       {
+        "t": "line",
+        "x1": 100.0,
+        "y1": 100.0,
+        "x2": 148.4,
+        "y2": 100.0,
+        "color": "red",
+        "width": 5,
+        "dash": false,
+        "arrow": "none"
+       },
+       {
+        "t": "circle",
+        "cx": 100.0,
+        "cy": 100.0,
+        "r": 5,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "ink"
+       }
+      ]
+     }
+    },
+    {
+     "type": "key",
+     "style": "retenir",
+     "title": "Heure pile, demie, quart",
+     "md": "- Grande aiguille sur **12** : heure pile (3 h).\n- Grande aiguille sur **6** : **et demie** (3 h 30).\n- Grande aiguille sur **3** : **et quart** (3 h 15).\n- Grande aiguille sur **9** : **moins le quart** (3 h 45, soit « quatre heures moins le quart »)."
+    },
+    {
+     "type": "illustration",
+     "caption": "Il est 8 heures et demie.",
+     "alt": "Une horloge à aiguilles : la petite aiguille rouge est entre 8 et 9 et la grande aiguille bleue pointe sur 6.",
+     "figure": {
+      "kind": "shapes",
+      "w": 200,
+      "h": 200,
+      "items": [
+       {
+        "t": "circle",
+        "cx": 100.0,
+        "cy": 100.0,
+        "r": 88.0,
+        "stroke": "ink",
+        "width": 3,
+        "fill": "white"
+       },
+       {
+        "t": "line",
+        "x1": 100.0,
+        "y1": 22.0,
+        "x2": 100.0,
+        "y2": 12.0,
+        "color": "ink",
+        "width": 2,
+        "dash": false,
+        "arrow": "none"
+       },
+       {
+        "t": "line",
+        "x1": 139.0,
+        "y1": 32.5,
+        "x2": 144.0,
+        "y2": 23.8,
+        "color": "ink",
+        "width": 2,
+        "dash": false,
+        "arrow": "none"
+       },
+       {
+        "t": "line",
+        "x1": 167.5,
+        "y1": 61.0,
+        "x2": 176.2,
+        "y2": 56.0,
+        "color": "ink",
+        "width": 2,
+        "dash": false,
+        "arrow": "none"
+       },
+       {
+        "t": "line",
+        "x1": 178.0,
+        "y1": 100.0,
+        "x2": 188.0,
+        "y2": 100.0,
+        "color": "ink",
+        "width": 2,
+        "dash": false,
+        "arrow": "none"
+       },
+       {
+        "t": "line",
+        "x1": 167.5,
+        "y1": 139.0,
+        "x2": 176.2,
+        "y2": 144.0,
+        "color": "ink",
+        "width": 2,
+        "dash": false,
+        "arrow": "none"
+       },
+       {
+        "t": "line",
+        "x1": 139.0,
+        "y1": 167.5,
+        "x2": 144.0,
+        "y2": 176.2,
+        "color": "ink",
+        "width": 2,
+        "dash": false,
+        "arrow": "none"
+       },
+       {
+        "t": "line",
+        "x1": 100.0,
+        "y1": 178.0,
+        "x2": 100.0,
+        "y2": 188.0,
+        "color": "ink",
+        "width": 2,
+        "dash": false,
+        "arrow": "none"
+       },
+       {
+        "t": "line",
+        "x1": 61.0,
+        "y1": 167.5,
+        "x2": 56.0,
+        "y2": 176.2,
+        "color": "ink",
+        "width": 2,
+        "dash": false,
+        "arrow": "none"
+       },
+       {
+        "t": "line",
+        "x1": 32.5,
+        "y1": 139.0,
+        "x2": 23.8,
+        "y2": 144.0,
+        "color": "ink",
+        "width": 2,
+        "dash": false,
+        "arrow": "none"
+       },
+       {
+        "t": "line",
+        "x1": 22.0,
+        "y1": 100.0,
+        "x2": 12.0,
+        "y2": 100.0,
+        "color": "ink",
+        "width": 2,
+        "dash": false,
+        "arrow": "none"
+       },
+       {
+        "t": "line",
+        "x1": 32.5,
+        "y1": 61.0,
+        "x2": 23.8,
+        "y2": 56.0,
+        "color": "ink",
+        "width": 2,
+        "dash": false,
+        "arrow": "none"
+       },
+       {
+        "t": "line",
+        "x1": 61.0,
+        "y1": 32.5,
+        "x2": 56.0,
+        "y2": 23.8,
+        "color": "ink",
+        "width": 2,
+        "dash": false,
+        "arrow": "none"
+       },
+       {
+        "t": "text",
+        "x": 100.0,
+        "y": 45.0,
+        "text": "12",
+        "size": 18,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 162.0,
+        "y": 107.0,
+        "text": "3",
+        "size": 18,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 100.0,
+        "y": 169.0,
+        "text": "6",
+        "size": 18,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 38.0,
+        "y": 107.0,
+        "text": "9",
+        "size": 18,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "line",
+        "x1": 100.0,
+        "y1": 100.0,
+        "x2": 100.0,
+        "y2": 174.8,
+        "color": "blue",
+        "width": 3,
+        "dash": false,
+        "arrow": "none"
+       },
+       {
+        "t": "line",
+        "x1": 100.0,
+        "y1": 100.0,
+        "x2": 53.2,
+        "y2": 112.5,
+        "color": "red",
+        "width": 5,
+        "dash": false,
+        "arrow": "none"
+       },
+       {
+        "t": "circle",
+        "cx": 100.0,
+        "cy": 100.0,
+        "r": 5,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "ink"
+       }
+      ]
+     }
+    },
+    {
+     "type": "example",
+     "title": "Exemple 1 : lire une horloge",
+     "statement": "La grande aiguille est sur 12, la petite sur 7. Quelle heure est-il ?",
+     "steps": [
+      {
+       "md": "Grande aiguille sur 12 : heure pile."
+      },
+      {
+       "md": "Petite aiguille sur 7 : sept heures."
+      }
+     ],
+     "answer": "**Il est 7 h.**"
+    },
+    {
+     "type": "example",
+     "title": "Exemple 2 : et demie",
+     "statement": "La grande aiguille est sur 6, la petite entre 2 et 3. Quelle heure ?",
+     "steps": [
+      {
+       "md": "Grande aiguille sur 6 : et demie."
+      },
+      {
+       "md": "La petite aiguille a passé le 2 : deux heures."
+      }
+     ],
+     "answer": "**Il est 2 h 30 (deux heures et demie).**"
+    },
+    {
+     "type": "exercise",
+     "ref": "ce1-maths-heure-01"
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Attention",
+     "md": "- Ne confonds pas les aiguilles : la **petite** donne les heures.\n- À « et demie », la petite aiguille est entre deux nombres.\n- Il y a **24 heures** dans une journée : le matin, l'après-midi, le soir, la nuit."
+    }
+   ]
+  }
+ ],
+ "exercises": [
+  {
+   "kind": "mcq",
+   "difficulty": 1,
+   "points": 1,
+   "prompt": "Grande aiguille sur 12 et petite sur 9 : quelle heure ?",
+   "choices": [
+    "3 h",
+    "9 h",
+    "9 h 30",
+    "12 h 09"
+   ],
+   "answer": 1,
+   "explanation": "Heure pile : 9 h.",
+   "id": "ce1-maths-heure-01",
+   "chapter": "ce1-maths-mesures",
+   "tier": "application",
+   "lesson": "ce1-maths-heure",
+   "source": "Exercice original, niveau CE1"
+  },
+  {
+   "kind": "truefalse",
+   "difficulty": 1,
+   "points": 1,
+   "prompt": "Vrai ou faux : 1 heure = 60 minutes.",
+   "answer": true,
+   "explanation": "Une heure contient 60 minutes.",
+   "id": "ce1-maths-heure-02",
+   "chapter": "ce1-maths-mesures",
+   "tier": "application",
+   "lesson": "ce1-maths-heure",
+   "source": "Exercice original, niveau CE1"
+  },
+  {
+   "kind": "matching",
+   "difficulty": 1,
+   "points": 2,
+   "prompt": "Associe chaque position de la grande aiguille à l'expression.",
+   "pairs": [
+    [
+     "sur 12",
+     "heure pile"
+    ],
+    [
+     "sur 6",
+     "et demie"
+    ],
+    [
+     "sur 3",
+     "et quart"
+    ],
+    [
+     "sur 9",
+     "moins le quart"
+    ]
+   ],
+   "explanation": "12 : pile ; 6 : et demie ; 3 : et quart ; 9 : moins le quart.",
+   "id": "ce1-maths-heure-03",
+   "chapter": "ce1-maths-mesures",
+   "tier": "application",
+   "lesson": "ce1-maths-heure",
+   "source": "Exercice original, niveau CE1"
+  },
+  {
+   "kind": "numeric",
+   "difficulty": 2,
+   "points": 1,
+   "prompt": "Combien de minutes font 2 heures ?",
+   "answer": 120,
+   "tolerance": 0,
+   "explanation": "2 × 60 = 120.",
+   "unit": "min",
+   "id": "ce1-maths-heure-04",
+   "chapter": "ce1-maths-mesures",
+   "tier": "approfondissement",
+   "lesson": "ce1-maths-heure",
+   "source": "Exercice original, niveau CE1"
+  },
+  {
+   "kind": "mcq",
+   "difficulty": 2,
+   "points": 1,
+   "prompt": "Il est 3 h 15. Comment le dit-on ?",
+   "choices": [
+    "trois heures moins le quart",
+    "trois heures et quart",
+    "trois heures et demie",
+    "quinze heures"
+   ],
+   "answer": 1,
+   "explanation": "15 minutes = un quart d'heure.",
+   "id": "ce1-maths-heure-05",
+   "chapter": "ce1-maths-mesures",
+   "tier": "approfondissement",
+   "lesson": "ce1-maths-heure",
+   "source": "Exercice original, niveau CE1"
+  },
+  {
+   "kind": "problem",
+   "difficulty": 2,
+   "prompt": "L'école de Mballa commence à 7 h 30 et finit à 12 h.",
+   "parts": [
+    {
+     "kind": "mcq",
+     "difficulty": 1,
+     "points": 1,
+     "prompt": "Que dit-on pour 7 h 30 ?",
+     "choices": [
+      "huit heures",
+      "sept heures moins le quart",
+      "sept heures et demie",
+      "sept heures et quart"
+     ],
+     "answer": 2,
+     "explanation": "30 minutes = une demi-heure.",
+     "id": "ce1-maths-heure-06-a"
+    },
+    {
+     "kind": "numeric",
+     "difficulty": 1,
+     "points": 2,
+     "prompt": "Mballa est en classe de 8 h à 12 h. Combien d'heures dure sa matinée ?",
+     "answer": 4,
+     "tolerance": 0,
+     "explanation": "De 8 h à 12 h : 4 heures (12 − 8 = 4).",
+     "unit": "h",
+     "id": "ce1-maths-heure-06-b"
+    },
+    {
+     "kind": "truefalse",
+     "difficulty": 1,
+     "points": 1,
+     "prompt": "Vrai ou faux : 12 h est midi.",
+     "answer": true,
+     "explanation": "Midi = 12 h.",
+     "id": "ce1-maths-heure-06-c"
+    }
+   ],
+   "id": "ce1-maths-heure-06",
+   "chapter": "ce1-maths-mesures",
+   "tier": "examen",
+   "lesson": "ce1-maths-heure",
+   "source": "Exercice original, niveau CE1"
+  },
+  {
+   "kind": "mcq",
+   "difficulty": 1,
+   "points": 1,
+   "prompt": "La petite aiguille indique…",
+   "choices": [
+    "les heures",
+    "les jours",
+    "les secondes",
+    "les minutes"
+   ],
+   "answer": 0,
+   "explanation": "Petite aiguille : heures.",
+   "id": "ce1-maths-heure-q1",
+   "chapter": "ce1-maths-mesures",
+   "tier": "autoeval",
+   "lesson": "ce1-maths-heure",
+   "source": "Exercice original, niveau CE1"
+  },
+  {
+   "kind": "mcq",
+   "difficulty": 1,
+   "points": 1,
+   "prompt": "La grande aiguille sur 6 veut dire…",
+   "choices": [
+    "et demie",
+    "et quart",
+    "moins le quart",
+    "pile"
+   ],
+   "answer": 0,
+   "explanation": "6 = 30 minutes.",
+   "id": "ce1-maths-heure-q2",
+   "chapter": "ce1-maths-mesures",
+   "tier": "autoeval",
+   "lesson": "ce1-maths-heure",
+   "source": "Exercice original, niveau CE1"
+  },
+  {
+   "kind": "mcq",
+   "difficulty": 1,
+   "points": 1,
+   "prompt": "Une demi-heure dure…",
+   "choices": [
+    "60 minutes",
+    "10 minutes",
+    "30 minutes",
+    "15 minutes"
+   ],
+   "answer": 2,
+   "explanation": "La moitié de 60.",
+   "id": "ce1-maths-heure-q3",
+   "chapter": "ce1-maths-mesures",
+   "tier": "autoeval",
+   "lesson": "ce1-maths-heure",
+   "source": "Exercice original, niveau CE1"
+  },
+  {
+   "kind": "mcq",
+   "difficulty": 1,
+   "points": 1,
+   "prompt": "Un quart d'heure dure…",
+   "choices": [
+    "30 minutes",
+    "15 minutes",
+    "5 minutes",
+    "45 minutes"
+   ],
+   "answer": 1,
+   "explanation": "60 ÷ 4 = 15.",
+   "id": "ce1-maths-heure-q4",
+   "chapter": "ce1-maths-mesures",
+   "tier": "autoeval",
+   "lesson": "ce1-maths-heure",
+   "source": "Exercice original, niveau CE1"
+  },
+  {
+   "kind": "mcq",
+   "difficulty": 1,
+   "points": 1,
+   "prompt": "Combien y a-t-il d'heures dans un jour ?",
+   "choices": [
+    "24",
+    "12",
+    "100",
+    "60"
+   ],
+   "answer": 0,
+   "explanation": "Un jour = 24 heures.",
+   "id": "ce1-maths-heure-q5",
+   "chapter": "ce1-maths-mesures",
+   "tier": "autoeval",
+   "lesson": "ce1-maths-heure",
+   "source": "Exercice original, niveau CE1"
+  }
+ ]
+}

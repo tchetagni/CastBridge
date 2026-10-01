@@ -1,0 +1,517 @@
+{
+ "chapter": "ce1-maths-nombres",
+ "lessons": [
+  {
+   "id": "ce1-maths-nombres-1000",
+   "title": "Les nombres jusqu'à 1000",
+   "minutes": 20,
+   "readAloud": true,
+   "programRef": "CE1 — Programme de mathématiques du cycle 2, MINEDUB (reconstitué, à vérifier sur le texte officiel) — nombres et calculs : numération jusqu'à 1000",
+   "status": "draft",
+   "author": "CastBridge (brouillon IA)",
+   "source": "Rédaction originale ; à faire relire par un enseignant",
+   "objectives": [
+    "Lire et écrire les nombres jusqu'à 999.",
+    "Décomposer un nombre en centaines, dizaines et unités.",
+    "Donner la valeur d'un chiffre selon sa place."
+   ],
+   "prerequisites": [],
+   "exercises": [
+    "ce1-maths-nombres-1000-01",
+    "ce1-maths-nombres-1000-02",
+    "ce1-maths-nombres-1000-03",
+    "ce1-maths-nombres-1000-04",
+    "ce1-maths-nombres-1000-05",
+    "ce1-maths-nombres-1000-06"
+   ],
+   "selfCheck": [
+    "ce1-maths-nombres-1000-q1",
+    "ce1-maths-nombres-1000-q2",
+    "ce1-maths-nombres-1000-q3",
+    "ce1-maths-nombres-1000-q4",
+    "ce1-maths-nombres-1000-q5"
+   ],
+   "reviewNotes": [
+    "Convention d'orthographe des nombres (traditionnelle : vingt et un, quatre-vingts) à confronter à la pratique des enseignants ; limite haute du programme CE1 (999 ou 1 000)."
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Unités, dizaines, centaines",
+     "md": "- **10 unités** font **1 dizaine**.\n- **10 dizaines** font **1 centaine** (100).\n- **10 centaines** font **1 millier** (1 000).\n\nLa place d'un chiffre donne sa valeur : dans **347**, le 3 vaut 300, le 4 vaut 40, le 7 vaut 7."
+    },
+    {
+     "type": "illustration",
+     "caption": "Le nombre 235 en centaines, dizaines et unités.",
+     "alt": "Deux grands carrés bleus pour les centaines, trois barres vertes pour les dizaines et cinq petits carrés orange pour les unités.",
+     "figure": {
+      "kind": "shapes",
+      "w": 480,
+      "h": 170,
+      "items": [
+       {
+        "t": "text",
+        "x": 70,
+        "y": 22,
+        "text": "centaines",
+        "size": 15,
+        "color": "blue",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 20,
+        "y": 40,
+        "w": 32,
+        "h": 32,
+        "stroke": "blue",
+        "fill": "lightblue"
+       },
+       {
+        "t": "rect",
+        "x": 56,
+        "y": 40,
+        "w": 32,
+        "h": 32,
+        "stroke": "blue",
+        "fill": "lightblue"
+       },
+       {
+        "t": "text",
+        "x": 250,
+        "y": 22,
+        "text": "dizaines",
+        "size": 15,
+        "color": "green",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 190,
+        "y": 40,
+        "w": 12,
+        "h": 60,
+        "stroke": "green",
+        "fill": "lightgreen"
+       },
+       {
+        "t": "rect",
+        "x": 206,
+        "y": 40,
+        "w": 12,
+        "h": 60,
+        "stroke": "green",
+        "fill": "lightgreen"
+       },
+       {
+        "t": "rect",
+        "x": 222,
+        "y": 40,
+        "w": 12,
+        "h": 60,
+        "stroke": "green",
+        "fill": "lightgreen"
+       },
+       {
+        "t": "text",
+        "x": 410,
+        "y": 22,
+        "text": "unités",
+        "size": 15,
+        "color": "orange",
+        "anchor": "middle",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 350,
+        "y": 40,
+        "w": 14,
+        "h": 14,
+        "stroke": "orange",
+        "fill": "lightorange"
+       },
+       {
+        "t": "rect",
+        "x": 370,
+        "y": 40,
+        "w": 14,
+        "h": 14,
+        "stroke": "orange",
+        "fill": "lightorange"
+       },
+       {
+        "t": "rect",
+        "x": 390,
+        "y": 40,
+        "w": 14,
+        "h": 14,
+        "stroke": "orange",
+        "fill": "lightorange"
+       },
+       {
+        "t": "rect",
+        "x": 410,
+        "y": 40,
+        "w": 14,
+        "h": 14,
+        "stroke": "orange",
+        "fill": "lightorange"
+       },
+       {
+        "t": "rect",
+        "x": 430,
+        "y": 40,
+        "w": 14,
+        "h": 14,
+        "stroke": "orange",
+        "fill": "lightorange"
+       },
+       {
+        "t": "text",
+        "x": 70,
+        "y": 150,
+        "text": "2 centaines",
+        "size": 15,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": false
+       },
+       {
+        "t": "text",
+        "x": 250,
+        "y": 150,
+        "text": "3 dizaines",
+        "size": 15,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": false
+       },
+       {
+        "t": "text",
+        "x": 410,
+        "y": 150,
+        "text": "5 unités",
+        "size": 15,
+        "color": "ink",
+        "anchor": "middle",
+        "bold": false
+       }
+      ]
+     }
+    },
+    {
+     "type": "key",
+     "style": "retenir",
+     "title": "Décomposer un nombre",
+     "md": "**347 = 300 + 40 + 7**\n\n= 3 centaines + 4 dizaines + 7 unités\n\nJe lis : **trois cent quarante-sept**."
+    },
+    {
+     "type": "example",
+     "title": "Exemple 1 : décomposer",
+     "statement": "Décompose 582.",
+     "steps": [
+      {
+       "md": "Le chiffre des centaines est 5 : 500."
+      },
+      {
+       "md": "Le chiffre des dizaines est 8 : 80."
+      },
+      {
+       "md": "Le chiffre des unités est 2 : 2."
+      }
+     ],
+     "answer": "**582 = 500 + 80 + 2**, c'est cinq cent quatre-vingt-deux."
+    },
+    {
+     "type": "example",
+     "title": "Exemple 2 : écrire en chiffres",
+     "statement": "Écris en chiffres : « quatre cent six ».",
+     "steps": [
+      {
+       "md": "« quatre cent » : 4 centaines."
+      },
+      {
+       "md": "Il n'y a pas de dizaines : j'écris 0."
+      },
+      {
+       "md": "« six » : 6 unités."
+      }
+     ],
+     "answer": "**406**"
+    },
+    {
+     "type": "exercise",
+     "ref": "ce1-maths-nombres-1000-01"
+    },
+    {
+     "type": "key",
+     "style": "methode",
+     "title": "Pour lire un grand nombre",
+     "md": "1. Je regarde les centaines, puis les dizaines, puis les unités.\n2. Je dis : centaines + dizaines et unités.\n\nPour **70 à 99**, on dit *soixante-dix*, *quatre-vingts*, *quatre-vingt-dix*."
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Attention",
+     "md": "- Le 0 est important : **406** n'est pas **46**.\n- On écrit *deux cents* (avec s) mais *deux cent un* (sans s) : ce n'est pas une erreur de calcul, c'est une règle d'orthographe."
+    },
+    {
+     "type": "more",
+     "items": [
+      "Pour 1 000, on dit « mille » : 10 centaines = 1 000."
+     ]
+    }
+   ]
+  }
+ ],
+ "exercises": [
+  {
+   "kind": "mcq",
+   "difficulty": 1,
+   "points": 1,
+   "prompt": "Dans 523, quel est le chiffre des dizaines ?",
+   "choices": [
+    "0",
+    "3",
+    "2",
+    "5"
+   ],
+   "answer": 2,
+   "explanation": "523 = 500 + 20 + 3 : les dizaines sont **2**.",
+   "id": "ce1-maths-nombres-1000-01",
+   "chapter": "ce1-maths-nombres",
+   "tier": "application",
+   "lesson": "ce1-maths-nombres-1000",
+   "source": "Exercice original, niveau CE1"
+  },
+  {
+   "kind": "numeric",
+   "difficulty": 1,
+   "points": 1,
+   "prompt": "Combien vaut 3 centaines + 4 dizaines + 7 unités ?",
+   "answer": 347,
+   "tolerance": 0,
+   "explanation": "300 + 40 + 7 = 347.",
+   "method": "Je place chaque chiffre à sa place.",
+   "id": "ce1-maths-nombres-1000-02",
+   "chapter": "ce1-maths-nombres",
+   "tier": "application",
+   "lesson": "ce1-maths-nombres-1000",
+   "source": "Exercice original, niveau CE1"
+  },
+  {
+   "kind": "matching",
+   "difficulty": 1,
+   "points": 2,
+   "prompt": "Associe chaque nombre à sa décomposition.",
+   "pairs": [
+    [
+     "285",
+     "200 + 80 + 5"
+    ],
+    [
+     "508",
+     "500 + 8"
+    ],
+    [
+     "850",
+     "800 + 50"
+    ],
+    [
+     "580",
+     "500 + 80"
+    ]
+   ],
+   "explanation": "On lit chiffre par chiffre : le 0 sert de place vide.",
+   "id": "ce1-maths-nombres-1000-03",
+   "chapter": "ce1-maths-nombres",
+   "tier": "application",
+   "lesson": "ce1-maths-nombres-1000",
+   "source": "Exercice original, niveau CE1"
+  },
+  {
+   "kind": "numeric",
+   "difficulty": 1,
+   "points": 1,
+   "prompt": "Écris en chiffres : sept cent dix.",
+   "answer": 710,
+   "tolerance": 0,
+   "explanation": "soixante-dix = 70 : sept cent dix = 710.",
+   "id": "ce1-maths-nombres-1000-04",
+   "chapter": "ce1-maths-nombres",
+   "tier": "approfondissement",
+   "lesson": "ce1-maths-nombres-1000",
+   "source": "Exercice original, niveau CE1"
+  },
+  {
+   "kind": "mcq",
+   "difficulty": 2,
+   "points": 1,
+   "prompt": "Quelle est la décomposition de 603 ?",
+   "choices": [
+    "630",
+    "600 + 30",
+    "60 + 3",
+    "600 + 3"
+   ],
+   "answer": 3,
+   "explanation": "603 = 6 centaines + 0 dizaine + 3 unités = 600 + 3.",
+   "id": "ce1-maths-nombres-1000-05",
+   "chapter": "ce1-maths-nombres",
+   "tier": "approfondissement",
+   "lesson": "ce1-maths-nombres-1000",
+   "source": "Exercice original, niveau CE1"
+  },
+  {
+   "kind": "problem",
+   "difficulty": 2,
+   "prompt": "Ngono vend des arachides. Elle a 4 sacs de 100 graines, 7 petits paquets de 10 graines et 6 graines seules.",
+   "parts": [
+    {
+     "kind": "numeric",
+     "difficulty": 1,
+     "points": 1,
+     "prompt": "Combien de graines Ngono a-t-elle en tout ?",
+     "answer": 476,
+     "tolerance": 0,
+     "explanation": "400 + 70 + 6 = 476.",
+     "id": "ce1-maths-nombres-1000-06-a"
+    },
+    {
+     "kind": "mcq",
+     "difficulty": 1,
+     "points": 1,
+     "prompt": "Quel est le chiffre des dizaines de ce nombre ?",
+     "choices": [
+      "4",
+      "7",
+      "6",
+      "0"
+     ],
+     "answer": 1,
+     "explanation": "476 : le chiffre des dizaines est 7.",
+     "id": "ce1-maths-nombres-1000-06-b"
+    },
+    {
+     "kind": "mcq",
+     "difficulty": 1,
+     "points": 1,
+     "prompt": "Comment lit-on 476 ?",
+     "choices": [
+      "quatre cent soixante-sept",
+      "quatre soixante-seize",
+      "quarante-sept cent six",
+      "quatre cent soixante-seize"
+     ],
+     "answer": 3,
+     "explanation": "On lit : 4 centaines, puis soixante-seize.",
+     "id": "ce1-maths-nombres-1000-06-c"
+    }
+   ],
+   "id": "ce1-maths-nombres-1000-06",
+   "chapter": "ce1-maths-nombres",
+   "tier": "examen",
+   "lesson": "ce1-maths-nombres-1000",
+   "source": "Exercice original, niveau CE1"
+  },
+  {
+   "kind": "mcq",
+   "difficulty": 1,
+   "points": 1,
+   "prompt": "10 dizaines font…",
+   "choices": [
+    "1 dizaine",
+    "10 unités",
+    "1 centaine",
+    "1 millier"
+   ],
+   "answer": 2,
+   "explanation": "10 dizaines = 100 = 1 centaine.",
+   "id": "ce1-maths-nombres-1000-q1",
+   "chapter": "ce1-maths-nombres",
+   "tier": "autoeval",
+   "lesson": "ce1-maths-nombres-1000",
+   "source": "Exercice original, niveau CE1"
+  },
+  {
+   "kind": "mcq",
+   "difficulty": 1,
+   "points": 1,
+   "prompt": "Dans 749, le chiffre 7 vaut…",
+   "choices": [
+    "7",
+    "700",
+    "7 000",
+    "70"
+   ],
+   "answer": 1,
+   "explanation": "Il est à la place des centaines : 700.",
+   "id": "ce1-maths-nombres-1000-q2",
+   "chapter": "ce1-maths-nombres",
+   "tier": "autoeval",
+   "lesson": "ce1-maths-nombres-1000",
+   "source": "Exercice original, niveau CE1"
+  },
+  {
+   "kind": "mcq",
+   "difficulty": 1,
+   "points": 1,
+   "prompt": "300 + 5 =",
+   "choices": [
+    "3 005",
+    "35",
+    "305",
+    "350"
+   ],
+   "answer": 2,
+   "explanation": "Pas de dizaine : 305.",
+   "id": "ce1-maths-nombres-1000-q3",
+   "chapter": "ce1-maths-nombres",
+   "tier": "autoeval",
+   "lesson": "ce1-maths-nombres-1000",
+   "source": "Exercice original, niveau CE1"
+  },
+  {
+   "kind": "mcq",
+   "difficulty": 1,
+   "points": 1,
+   "prompt": "Quel nombre s'écrit « deux cent quatre » ?",
+   "choices": [
+    "2 004",
+    "204",
+    "214",
+    "240"
+   ],
+   "answer": 1,
+   "explanation": "2 centaines, 0 dizaine, 4 unités : 204.",
+   "id": "ce1-maths-nombres-1000-q4",
+   "chapter": "ce1-maths-nombres",
+   "tier": "autoeval",
+   "lesson": "ce1-maths-nombres-1000",
+   "source": "Exercice original, niveau CE1"
+  },
+  {
+   "kind": "mcq",
+   "difficulty": 1,
+   "points": 1,
+   "prompt": "Combien d'unités dans 1 dizaine ?",
+   "choices": [
+    "100",
+    "10",
+    "5",
+    "1"
+   ],
+   "answer": 1,
+   "explanation": "1 dizaine = 10 unités.",
+   "id": "ce1-maths-nombres-1000-q5",
+   "chapter": "ce1-maths-nombres",
+   "tier": "autoeval",
+   "lesson": "ce1-maths-nombres-1000",
+   "source": "Exercice original, niveau CE1"
+  }
+ ]
+}

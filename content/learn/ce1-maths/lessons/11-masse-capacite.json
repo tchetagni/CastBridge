@@ -1,0 +1,344 @@
+{
+ "chapter": "ce1-maths-mesures",
+ "lessons": [
+  {
+   "id": "ce1-maths-masse-capacite",
+   "title": "Mesurer des masses et des capacités",
+   "minutes": 20,
+   "readAloud": true,
+   "programRef": "CE1 — Programme de mathématiques du cycle 2, MINEDUB (reconstitué, à vérifier sur le texte officiel) — grandeurs et mesures : masse (kg, g) et contenance (L)",
+   "status": "draft",
+   "author": "CastBridge (brouillon IA)",
+   "source": "Rédaction originale ; à faire relire par un enseignant",
+   "objectives": [
+    "Utiliser le kilogramme et le gramme.",
+    "Utiliser le litre.",
+    "Comparer des masses et des contenances."
+   ],
+   "prerequisites": [
+    "ce1-maths-longueurs"
+   ],
+   "exercises": [
+    "ce1-maths-masse-capacite-01",
+    "ce1-maths-masse-capacite-02",
+    "ce1-maths-masse-capacite-03",
+    "ce1-maths-masse-capacite-04",
+    "ce1-maths-masse-capacite-05",
+    "ce1-maths-masse-capacite-06"
+   ],
+   "selfCheck": [
+    "ce1-maths-masse-capacite-q1",
+    "ce1-maths-masse-capacite-q2",
+    "ce1-maths-masse-capacite-q3",
+    "ce1-maths-masse-capacite-q4",
+    "ce1-maths-masse-capacite-q5"
+   ],
+   "reviewNotes": [
+    "Repères de masses (paquet de sucre ≈ 1 kg) ; 50 cL non travaillé en exercices ; à valider par un enseignant."
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "La masse",
+     "md": "La **masse** (le « poids ») se mesure avec une **balance**.\n\n- Le **kilogramme** (kg) : pour un sac de riz, un enfant.\n- Le **gramme** (g) : pour une pièce, une plume.\n\n**1 kg = 1 000 g**."
+    },
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "La capacité",
+     "md": "La **capacité** dit combien un récipient peut **contenir** de liquide : bouteille, seau, bidon. On la mesure en **litres** (L).\n\nUn **demi-litre** : 1/2 L ou 50 cL."
+    },
+    {
+     "type": "illustration",
+     "caption": "Comparer des masses en kilogrammes.",
+     "alt": "Un diagramme à barres : le sac de riz pèse 5 kg, le régime de plantains 3 kg et le panier d'arachides 2 kg.",
+     "figure": {
+      "kind": "bars",
+      "unit": "kg",
+      "bars": [
+       {
+        "label": "riz",
+        "value": 5,
+        "color": "orange"
+       },
+       {
+        "label": "plantains",
+        "value": 3,
+        "color": "green"
+       },
+       {
+        "label": "arachides",
+        "value": 2,
+        "color": "blue"
+       }
+      ],
+      "w": 380,
+      "h": 220
+     }
+    },
+    {
+     "type": "example",
+     "title": "Exemple 1 : calculer une masse",
+     "statement": "Ngono achète 2 kg de riz et 3 kg de manioc. Quelle masse a-t-elle achetée ?",
+     "steps": [
+      {
+       "md": "Je fais l'addition des masses : 2 + 3."
+      },
+      {
+       "md": "Je garde l'unité : kg."
+      }
+     ],
+     "answer": "**5 kg**"
+    },
+    {
+     "type": "example",
+     "title": "Exemple 2 : litres",
+     "statement": "Un seau contient 10 L d'eau. On verse 4 L. Combien reste-t-il ?",
+     "steps": [
+      {
+       "md": "Je soustrais : 10 − 4."
+      },
+      {
+       "md": "Je garde l'unité : L."
+      }
+     ],
+     "answer": "**6 L**"
+    },
+    {
+     "type": "exercise",
+     "ref": "ce1-maths-masse-capacite-01"
+    },
+    {
+     "type": "key",
+     "style": "methode",
+     "title": "Méthode",
+     "md": "1. Je regarde l'unité (kg, g ou L).\n2. Je fais le calcul avec les nombres.\n3. J'écris l'unité dans la réponse."
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Attention",
+     "md": "- 1 kg = **1 000 g** (pas 100 g).\n- Un objet plus gros n'est pas toujours plus lourd : une plume est légère, un caillou est lourd."
+    }
+   ]
+  }
+ ],
+ "exercises": [
+  {
+   "kind": "numeric",
+   "difficulty": 1,
+   "points": 1,
+   "prompt": "Un sac de riz pèse 5 kg et un sac de maïs 3 kg. Quelle est la masse des deux sacs ? (kg)",
+   "answer": 8,
+   "tolerance": 0,
+   "explanation": "5 + 3 = 8.",
+   "unit": "kg",
+   "id": "ce1-maths-masse-capacite-01",
+   "chapter": "ce1-maths-mesures",
+   "tier": "application",
+   "lesson": "ce1-maths-masse-capacite",
+   "source": "Exercice original, niveau CE1"
+  },
+  {
+   "kind": "numeric",
+   "difficulty": 1,
+   "points": 1,
+   "prompt": "Un bidon contient 20 L. On en verse 5 L. Combien reste-t-il ? (L)",
+   "answer": 15,
+   "tolerance": 0,
+   "explanation": "20 − 5 = 15.",
+   "unit": "L",
+   "id": "ce1-maths-masse-capacite-02",
+   "chapter": "ce1-maths-mesures",
+   "tier": "application",
+   "lesson": "ce1-maths-masse-capacite",
+   "source": "Exercice original, niveau CE1"
+  },
+  {
+   "kind": "truefalse",
+   "difficulty": 1,
+   "points": 1,
+   "prompt": "Vrai ou faux : 1 kg = 1 000 g.",
+   "answer": true,
+   "explanation": "Un kilogramme vaut mille grammes.",
+   "id": "ce1-maths-masse-capacite-03",
+   "chapter": "ce1-maths-mesures",
+   "tier": "application",
+   "lesson": "ce1-maths-masse-capacite",
+   "source": "Exercice original, niveau CE1"
+  },
+  {
+   "kind": "numeric",
+   "difficulty": 2,
+   "points": 1,
+   "prompt": "Combien de grammes font 2 kg ?",
+   "answer": 2000,
+   "tolerance": 0,
+   "explanation": "2 × 1 000 = 2 000.",
+   "unit": "g",
+   "id": "ce1-maths-masse-capacite-04",
+   "chapter": "ce1-maths-mesures",
+   "tier": "approfondissement",
+   "lesson": "ce1-maths-masse-capacite",
+   "source": "Exercice original, niveau CE1"
+  },
+  {
+   "kind": "mcq",
+   "difficulty": 2,
+   "points": 1,
+   "prompt": "Quelle unité mesure la contenance d'une bouteille ?",
+   "choices": [
+    "le kilomètre",
+    "le litre",
+    "le mètre",
+    "le gramme"
+   ],
+   "answer": 1,
+   "explanation": "La contenance se mesure en litres.",
+   "id": "ce1-maths-masse-capacite-05",
+   "chapter": "ce1-maths-mesures",
+   "tier": "approfondissement",
+   "lesson": "ce1-maths-masse-capacite",
+   "source": "Exercice original, niveau CE1"
+  },
+  {
+   "kind": "problem",
+   "difficulty": 2,
+   "prompt": "Au marché de Limbé, une vendeuse a 12 kg de poisson. Elle en vend 7 kg le matin.",
+   "parts": [
+    {
+     "kind": "numeric",
+     "difficulty": 1,
+     "points": 2,
+     "prompt": "Combien de kg lui reste-t-il ?",
+     "answer": 5,
+     "tolerance": 0,
+     "explanation": "12 − 7 = 5.",
+     "unit": "kg",
+     "id": "ce1-maths-masse-capacite-06-a"
+    },
+    {
+     "kind": "numeric",
+     "difficulty": 1,
+     "points": 1,
+     "prompt": "Elle remplit ensuite 3 seaux de 4 L d'eau pour nettoyer. Combien de litres en tout ?",
+     "answer": 12,
+     "tolerance": 0,
+     "explanation": "3 × 4 = 12.",
+     "unit": "L",
+     "id": "ce1-maths-masse-capacite-06-b"
+    },
+    {
+     "kind": "truefalse",
+     "difficulty": 1,
+     "points": 1,
+     "prompt": "Vrai ou faux : 5 kg est moins que 1 000 g.",
+     "answer": false,
+     "explanation": "1 000 g = 1 kg ; 5 kg est plus.",
+     "id": "ce1-maths-masse-capacite-06-c"
+    }
+   ],
+   "id": "ce1-maths-masse-capacite-06",
+   "chapter": "ce1-maths-mesures",
+   "tier": "examen",
+   "lesson": "ce1-maths-masse-capacite",
+   "source": "Exercice original, niveau CE1"
+  },
+  {
+   "kind": "mcq",
+   "difficulty": 1,
+   "points": 1,
+   "prompt": "Quel instrument mesure une masse ?",
+   "choices": [
+    "une règle",
+    "un verre doseur",
+    "une balance",
+    "une horloge"
+   ],
+   "answer": 2,
+   "explanation": "Balance.",
+   "id": "ce1-maths-masse-capacite-q1",
+   "chapter": "ce1-maths-mesures",
+   "tier": "autoeval",
+   "lesson": "ce1-maths-masse-capacite",
+   "source": "Exercice original, niveau CE1"
+  },
+  {
+   "kind": "mcq",
+   "difficulty": 1,
+   "points": 1,
+   "prompt": "1 kg =",
+   "choices": [
+    "100 g",
+    "10 g",
+    "1 000 g",
+    "10 000 g"
+   ],
+   "answer": 2,
+   "explanation": "Mille grammes.",
+   "id": "ce1-maths-masse-capacite-q2",
+   "chapter": "ce1-maths-mesures",
+   "tier": "autoeval",
+   "lesson": "ce1-maths-masse-capacite",
+   "source": "Exercice original, niveau CE1"
+  },
+  {
+   "kind": "mcq",
+   "difficulty": 1,
+   "points": 1,
+   "prompt": "La contenance se mesure en…",
+   "choices": [
+    "kilogrammes",
+    "centimètres",
+    "heures",
+    "litres"
+   ],
+   "answer": 3,
+   "explanation": "Litres (L).",
+   "id": "ce1-maths-masse-capacite-q3",
+   "chapter": "ce1-maths-mesures",
+   "tier": "autoeval",
+   "lesson": "ce1-maths-masse-capacite",
+   "source": "Exercice original, niveau CE1"
+  },
+  {
+   "kind": "mcq",
+   "difficulty": 1,
+   "points": 1,
+   "prompt": "Quel objet pèse environ 1 kg ?",
+   "choices": [
+    "un paquet de sucre",
+    "une mouche",
+    "une feuille de papier",
+    "une plume"
+   ],
+   "answer": 0,
+   "explanation": "Un sachet de sucre pèse souvent 1 kg.",
+   "id": "ce1-maths-masse-capacite-q4",
+   "chapter": "ce1-maths-mesures",
+   "tier": "autoeval",
+   "lesson": "ce1-maths-masse-capacite",
+   "source": "Exercice original, niveau CE1"
+  },
+  {
+   "kind": "mcq",
+   "difficulty": 1,
+   "points": 1,
+   "prompt": "Quel objet contient plus qu'un litre ?",
+   "choices": [
+    "un dé à coudre",
+    "une cuillère",
+    "un petit verre",
+    "un seau"
+   ],
+   "answer": 3,
+   "explanation": "Un seau contient plusieurs litres.",
+   "id": "ce1-maths-masse-capacite-q5",
+   "chapter": "ce1-maths-mesures",
+   "tier": "autoeval",
+   "lesson": "ce1-maths-masse-capacite",
+   "source": "Exercice original, niveau CE1"
+  }
+ ]
+}

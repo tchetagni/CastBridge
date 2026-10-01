@@ -1,0 +1,538 @@
+{
+ "chapter": "ce1-maths-problemes",
+ "lessons": [
+  {
+   "id": "ce1-maths-probleme-mult-partage",
+   "title": "Résoudre un problème : multiplication et partage",
+   "minutes": 20,
+   "readAloud": true,
+   "programRef": "CE1 — Programme de mathématiques du cycle 2, MINEDUB (reconstitué, à vérifier sur le texte officiel) — résolution de problèmes : multiplication, partage, groupements",
+   "status": "draft",
+   "author": "CastBridge (brouillon IA)",
+   "source": "Rédaction originale ; à faire relire par un enseignant",
+   "objectives": [
+    "Reconnaître un problème de groupes égaux (multiplication).",
+    "Reconnaître un problème de partage.",
+    "Rédiger une réponse avec une phrase."
+   ],
+   "prerequisites": [
+    "ce1-maths-tables",
+    "ce1-maths-partage",
+    "ce1-maths-probleme-add-sous"
+   ],
+   "exercises": [
+    "ce1-maths-probleme-mult-partage-01",
+    "ce1-maths-probleme-mult-partage-02",
+    "ce1-maths-probleme-mult-partage-03",
+    "ce1-maths-probleme-mult-partage-04",
+    "ce1-maths-probleme-mult-partage-05",
+    "ce1-maths-probleme-mult-partage-06"
+   ],
+   "selfCheck": [
+    "ce1-maths-probleme-mult-partage-q1",
+    "ce1-maths-probleme-mult-partage-q2",
+    "ce1-maths-probleme-mult-partage-q3",
+    "ce1-maths-probleme-mult-partage-q4",
+    "ce1-maths-probleme-mult-partage-q5"
+   ],
+   "reviewNotes": [
+    "Problèmes originaux ; vérifier que la vérification d'un partage par la multiplication est adaptée au CE1."
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "retenir",
+     "title": "Quelle opération ?",
+     "md": "- **Plusieurs groupes égaux**, on cherche le total → **multiplication** (ex. 4 sacs de 6 mangues : 4 × 6).\n- **Partager** en parts égales, ou **faire des groupes** → on cherche avec la table ce qui multiplié donne le nombre (ex. 12 mangues pour 3 enfants : 3 × ? = 12)."
+    },
+    {
+     "type": "illustration",
+     "caption": "4 sacs de 6 mangues.",
+     "alt": "Quatre sacs qui contiennent chacun six ronds jaunes : le total est 24.",
+     "figure": {
+      "kind": "shapes",
+      "w": 260,
+      "h": 180,
+      "items": [
+       {
+        "t": "circle",
+        "cx": 30,
+        "cy": 30,
+        "r": 12,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "yellow"
+       },
+       {
+        "t": "circle",
+        "cx": 60,
+        "cy": 30,
+        "r": 12,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "yellow"
+       },
+       {
+        "t": "circle",
+        "cx": 90,
+        "cy": 30,
+        "r": 12,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "yellow"
+       },
+       {
+        "t": "circle",
+        "cx": 120,
+        "cy": 30,
+        "r": 12,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "yellow"
+       },
+       {
+        "t": "circle",
+        "cx": 150,
+        "cy": 30,
+        "r": 12,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "yellow"
+       },
+       {
+        "t": "circle",
+        "cx": 180,
+        "cy": 30,
+        "r": 12,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "yellow"
+       },
+       {
+        "t": "circle",
+        "cx": 30,
+        "cy": 60,
+        "r": 12,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "yellow"
+       },
+       {
+        "t": "circle",
+        "cx": 60,
+        "cy": 60,
+        "r": 12,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "yellow"
+       },
+       {
+        "t": "circle",
+        "cx": 90,
+        "cy": 60,
+        "r": 12,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "yellow"
+       },
+       {
+        "t": "circle",
+        "cx": 120,
+        "cy": 60,
+        "r": 12,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "yellow"
+       },
+       {
+        "t": "circle",
+        "cx": 150,
+        "cy": 60,
+        "r": 12,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "yellow"
+       },
+       {
+        "t": "circle",
+        "cx": 180,
+        "cy": 60,
+        "r": 12,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "yellow"
+       },
+       {
+        "t": "circle",
+        "cx": 30,
+        "cy": 90,
+        "r": 12,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "yellow"
+       },
+       {
+        "t": "circle",
+        "cx": 60,
+        "cy": 90,
+        "r": 12,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "yellow"
+       },
+       {
+        "t": "circle",
+        "cx": 90,
+        "cy": 90,
+        "r": 12,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "yellow"
+       },
+       {
+        "t": "circle",
+        "cx": 120,
+        "cy": 90,
+        "r": 12,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "yellow"
+       },
+       {
+        "t": "circle",
+        "cx": 150,
+        "cy": 90,
+        "r": 12,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "yellow"
+       },
+       {
+        "t": "circle",
+        "cx": 180,
+        "cy": 90,
+        "r": 12,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "yellow"
+       },
+       {
+        "t": "circle",
+        "cx": 30,
+        "cy": 120,
+        "r": 12,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "yellow"
+       },
+       {
+        "t": "circle",
+        "cx": 60,
+        "cy": 120,
+        "r": 12,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "yellow"
+       },
+       {
+        "t": "circle",
+        "cx": 90,
+        "cy": 120,
+        "r": 12,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "yellow"
+       },
+       {
+        "t": "circle",
+        "cx": 120,
+        "cy": 120,
+        "r": 12,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "yellow"
+       },
+       {
+        "t": "circle",
+        "cx": 150,
+        "cy": 120,
+        "r": 12,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "yellow"
+       },
+       {
+        "t": "circle",
+        "cx": 180,
+        "cy": 120,
+        "r": 12,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "yellow"
+       }
+      ]
+     }
+    },
+    {
+     "type": "example",
+     "title": "Exemple 1 : groupes égaux",
+     "statement": "Chaque panier contient 5 plantains. Il y a 6 paniers. Combien de plantains ?",
+     "steps": [
+      {
+       "md": "6 groupes de 5 : multiplication."
+      },
+      {
+       "md": "6 × 5 = 30."
+      }
+     ],
+     "answer": "**30 plantains**"
+    },
+    {
+     "type": "example",
+     "title": "Exemple 2 : partage",
+     "statement": "Maman partage 18 arachides entre 3 enfants. Combien chacun en a-t-il ?",
+     "steps": [
+      {
+       "md": "Je cherche : 3 fois combien font 18 ?"
+      },
+      {
+       "md": "3 × 6 = 18."
+      }
+     ],
+     "answer": "**Chaque enfant a 6 arachides.**"
+    },
+    {
+     "type": "exercise",
+     "ref": "ce1-maths-probleme-mult-partage-01"
+    },
+    {
+     "type": "key",
+     "style": "methode",
+     "title": "Méthode",
+     "md": "1. Je lis et je cherche la question.\n2. Je regarde : groupes égaux ? partage ?\n3. J'utilise ma table.\n4. J'écris la phrase-réponse."
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Attention",
+     "md": "- Dans un partage, les parts sont **égales**.\n- Vérifie avec une multiplication : 3 × 6 = 18."
+    },
+    {
+     "type": "more",
+     "items": [
+      "Si un problème a deux questions, la réponse à la première aide souvent à répondre à la deuxième."
+     ]
+    }
+   ]
+  }
+ ],
+ "exercises": [
+  {
+   "kind": "numeric",
+   "difficulty": 1,
+   "points": 1,
+   "prompt": "Un cahier coûte 200 FCFA. Combien coûtent 3 cahiers ? (FCFA)",
+   "answer": 600,
+   "tolerance": 0,
+   "explanation": "3 × 200 = 600.",
+   "unit": "FCFA",
+   "id": "ce1-maths-probleme-mult-partage-01",
+   "chapter": "ce1-maths-problemes",
+   "tier": "application",
+   "lesson": "ce1-maths-probleme-mult-partage",
+   "source": "Exercice original, niveau CE1"
+  },
+  {
+   "kind": "numeric",
+   "difficulty": 1,
+   "points": 1,
+   "prompt": "Il y a 4 rangées de 5 chaises. Combien de chaises ?",
+   "answer": 20,
+   "tolerance": 0,
+   "explanation": "4 × 5 = 20.",
+   "id": "ce1-maths-probleme-mult-partage-02",
+   "chapter": "ce1-maths-problemes",
+   "tier": "application",
+   "lesson": "ce1-maths-probleme-mult-partage",
+   "source": "Exercice original, niveau CE1"
+  },
+  {
+   "kind": "numeric",
+   "difficulty": 1,
+   "points": 1,
+   "prompt": "On partage 12 mangues entre 4 enfants. Combien chacun en a-t-il ?",
+   "answer": 3,
+   "tolerance": 0,
+   "explanation": "4 × 3 = 12.",
+   "id": "ce1-maths-probleme-mult-partage-03",
+   "chapter": "ce1-maths-problemes",
+   "tier": "application",
+   "lesson": "ce1-maths-probleme-mult-partage",
+   "source": "Exercice original, niveau CE1"
+  },
+  {
+   "kind": "numeric",
+   "difficulty": 2,
+   "points": 1,
+   "prompt": "Un car peut transporter 30 voyageurs. Il fait 3 voyages pleins. Combien de voyageurs transporte-t-il ?",
+   "answer": 90,
+   "tolerance": 0,
+   "explanation": "3 × 30 = 90.",
+   "id": "ce1-maths-probleme-mult-partage-04",
+   "chapter": "ce1-maths-problemes",
+   "tier": "approfondissement",
+   "lesson": "ce1-maths-probleme-mult-partage",
+   "source": "Exercice original, niveau CE1"
+  },
+  {
+   "kind": "numeric",
+   "difficulty": 2,
+   "points": 1,
+   "prompt": "On range 28 œufs dans des boîtes de 4. Combien de boîtes faut-il ?",
+   "answer": 7,
+   "tolerance": 0,
+   "explanation": "4 × 7 = 28.",
+   "id": "ce1-maths-probleme-mult-partage-05",
+   "chapter": "ce1-maths-problemes",
+   "tier": "approfondissement",
+   "lesson": "ce1-maths-probleme-mult-partage",
+   "source": "Exercice original, niveau CE1"
+  },
+  {
+   "kind": "problem",
+   "difficulty": 3,
+   "prompt": "Au marché de Kribi, un vendeur met 8 poissons dans chaque caisse. Il remplit 5 caisses. Il vend ensuite 15 poissons.",
+   "parts": [
+    {
+     "kind": "numeric",
+     "difficulty": 1,
+     "points": 2,
+     "prompt": "Combien de poissons a-t-il mis dans les caisses ?",
+     "answer": 40,
+     "tolerance": 0,
+     "explanation": "5 × 8 = 40.",
+     "id": "ce1-maths-probleme-mult-partage-06-a"
+    },
+    {
+     "kind": "numeric",
+     "difficulty": 1,
+     "points": 2,
+     "prompt": "Combien lui en reste-t-il après la vente ?",
+     "answer": 25,
+     "tolerance": 0,
+     "explanation": "40 − 15 = 25.",
+     "id": "ce1-maths-probleme-mult-partage-06-b"
+    },
+    {
+     "kind": "truefalse",
+     "difficulty": 1,
+     "points": 1,
+     "prompt": "Vrai ou faux : il peut remplir 3 caisses de plus avec ce qui reste (25 poissons, 8 par caisse).",
+     "answer": true,
+     "explanation": "3 × 8 = 24 ≤ 25 : 3 caisses de plus, avec 1 poisson en trop.",
+     "id": "ce1-maths-probleme-mult-partage-06-c"
+    }
+   ],
+   "id": "ce1-maths-probleme-mult-partage-06",
+   "chapter": "ce1-maths-problemes",
+   "tier": "examen",
+   "lesson": "ce1-maths-probleme-mult-partage",
+   "source": "Exercice original, niveau CE1"
+  },
+  {
+   "kind": "mcq",
+   "difficulty": 1,
+   "points": 1,
+   "prompt": "Pour 6 sacs de 3 kilos, on fait…",
+   "choices": [
+    "6 + 3",
+    "3 − 6",
+    "6 × 3",
+    "6 − 3"
+   ],
+   "answer": 2,
+   "explanation": "Groupes égaux : multiplication.",
+   "id": "ce1-maths-probleme-mult-partage-q1",
+   "chapter": "ce1-maths-problemes",
+   "tier": "autoeval",
+   "lesson": "ce1-maths-probleme-mult-partage",
+   "source": "Exercice original, niveau CE1"
+  },
+  {
+   "kind": "mcq",
+   "difficulty": 1,
+   "points": 1,
+   "prompt": "Partager 20 en 4 parts égales : chacun a…",
+   "choices": [
+    "6",
+    "80",
+    "4",
+    "5"
+   ],
+   "answer": 3,
+   "explanation": "4 × 5 = 20.",
+   "id": "ce1-maths-probleme-mult-partage-q2",
+   "chapter": "ce1-maths-problemes",
+   "tier": "autoeval",
+   "lesson": "ce1-maths-probleme-mult-partage",
+   "source": "Exercice original, niveau CE1"
+  },
+  {
+   "kind": "mcq",
+   "difficulty": 1,
+   "points": 1,
+   "prompt": "Quel mot annonce souvent un partage ?",
+   "choices": [
+    "partager",
+    "ajouter",
+    "enlever",
+    "additionner"
+   ],
+   "answer": 0,
+   "explanation": "Partage.",
+   "id": "ce1-maths-probleme-mult-partage-q3",
+   "chapter": "ce1-maths-problemes",
+   "tier": "autoeval",
+   "lesson": "ce1-maths-probleme-mult-partage",
+   "source": "Exercice original, niveau CE1"
+  },
+  {
+   "kind": "mcq",
+   "difficulty": 1,
+   "points": 1,
+   "prompt": "Si 3 × 6 = 18, partager 18 en 3 parts égales donne…",
+   "choices": [
+    "9",
+    "15",
+    "3",
+    "6"
+   ],
+   "answer": 3,
+   "explanation": "Chaque part vaut 6, car 3 × 6 = 18.",
+   "id": "ce1-maths-probleme-mult-partage-q4",
+   "chapter": "ce1-maths-problemes",
+   "tier": "autoeval",
+   "lesson": "ce1-maths-probleme-mult-partage",
+   "source": "Exercice original, niveau CE1"
+  },
+  {
+   "kind": "mcq",
+   "difficulty": 1,
+   "points": 1,
+   "prompt": "2 groupes de 7 donnent…",
+   "choices": [
+    "72",
+    "14",
+    "12",
+    "9"
+   ],
+   "answer": 1,
+   "explanation": "2 × 7 = 14.",
+   "id": "ce1-maths-probleme-mult-partage-q5",
+   "chapter": "ce1-maths-problemes",
+   "tier": "autoeval",
+   "lesson": "ce1-maths-probleme-mult-partage",
+   "source": "Exercice original, niveau CE1"
+  }
+ ]
+}
