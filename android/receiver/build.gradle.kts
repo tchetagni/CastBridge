@@ -1,8 +1,12 @@
+import java.util.Properties
 plugins {
     id("com.android.application")
     id("org.jetbrains.kotlin.android")
 }
 android {
+    val versions = Properties().apply { File(rootDir.parentFile, "version.properties").takeIf { it.isFile }?.reader()?.use { load(it) } }
+    fun ver(key: String) = versions.getProperty(key) ?: throw GradleException("version.properties : « $key » manquant")
+    val locked = (project.findProperty("requireActivation") as String?) == "true"
     namespace = "castbridge.receiver"
     compileSdk = 35
     defaultConfig {
@@ -10,8 +14,8 @@ android {
         minSdk = 26
         targetSdk = 35
         // -Pcastbridge.versionCode / -Pcastbridge.versionName: build a higher version to test the automatic updates
-        versionCode = (project.findProperty("castbridge.versionCode") as String?)?.toInt() ?: 27
-        versionName = (project.findProperty("castbridge.versionName") as String?) ?: "0.13.3"
+        versionCode = (project.findProperty("castbridge.versionCode") as String?)?.toInt() ?: (ver("tv.versionCode").toInt() + if (locked) 1 else 0)
+        versionName = (project.findProperty("castbridge.versionName") as String?) ?: (ver("tv.versionName") + if (locked) "-verrouillee" else "")
         // For a LOCAL test server only (docs/API-SERVER.md, « Tester en local »): -Pcastbridge.serverUrl=http://10.0.2.2:7090 and
         // -Pcastbridge.extraUpdateKey=<its public key>. Both empty by default: the apps built for Esaie talk to
         // https://bridge.sti-cm.com and trust the production key alone (UpdateKeys).

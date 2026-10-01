@@ -17,6 +17,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import castbridge.core.tv.TvClient
 import castbridge.owner.TvBluetooth
 
 /**
@@ -48,10 +49,29 @@ class ActivateTvActivity : ComponentActivity() {
         val ask = rememberLauncherForActivityResult(ActivityResultContracts.RequestMultiplePermissions()) { granted = TvBluetooth.permitted(this); if (granted) { refresh(); search() } }
         LaunchedEffect(granted) { if (granted) { refresh(); if (tvs.none { it.sure }) search() } }
 
+        // What the TV itself says about its activation (read through the link the phone already has with it): the phone must notice an activation done any way (Bluetooth, USB file, typed)
+        val link by TvLinkManager.state.collectAsState()
+        var tvState by remember { mutableStateOf<String?>(null) }
+        var tvStateOk by remember { mutableStateOf(false) }
+        LaunchedEffect(link, busy) {
+            val s = (link as? LinkUi.Connected)?.session
+            val base = s?.base
+            if (base == null) { tvState = if (s == null) (if (link is LinkUi.NoTv) "aucune TV n'est ajoutée dans CastBridge (onglet « CastBridge TV » > « Ajouter ma TV »), donc l'état d'activation ne peut pas être lu. L'activation de la TV, elle, n'en dépend pas." else "TV non jointe pour le moment : l'état d'activation n'est pas lisible.") else "TV jointe par Bluetooth seulement : l'état d'activation n'est pas lisible."; tvStateOk = false; return@LaunchedEffect }
+            while (true) {
+                val r = kotlinx.coroutines.withContext(kotlinx.coroutines.Dispatchers.IO) { runCatching { org.json.JSONObject(TvClient(base, s.credential).raw("GET", "/api/activation")) } }
+                r.onSuccess { j ->
+                    val locked = j.optBoolean("locked"); val required = j.optBoolean("required"); val label = j.optString("label")
+                    tvStateOk = !locked
+                    tvState = when { !required -> "Cette TV n'exige pas d'activation (version sans verrou)."; locked -> "TV verrouillée : en attente d'une clé d'activation."; else -> "TV déverrouillée : $label" }
+                }.onFailure { tvStateOk = false; tvState = "L'état d'activation de la TV est illisible (version de CastBridge-TV trop ancienne ?)." }
+                kotlinx.coroutines.delay(4_000)
+            }
+        }
         fun clean(t: String) = t.replace("\r", "").lineSequence().map { it.trim() }.firstOrNull { it.isNotEmpty() }.orEmpty()
         val shown = if (allPaired) TvBluetooth.pairedTvs(this).let { p -> (tvs + p).distinctBy { it.address } } else tvs.filter { it.sure || it.bonded }.let { l -> if (l.any { it.sure }) l.filter { it.sure } else l }
         Column(Modifier.fillMaxSize().verticalScroll(rememberScrollState()).padding(16.dp), verticalArrangement = Arrangement.spacedBy(12.dp)) {
             Text("Activer la TV", style = MaterialTheme.typography.headlineSmall)
+            tvState?.let { Text("État de la TV : $it", color = if (tvStateOk) MaterialTheme.colorScheme.primary else MaterialTheme.colorScheme.onSurface, style = MaterialTheme.typography.bodyMedium) }
             Text("1. Copiez la clé d'activation reçue (message, e-mail…), puis collez-la ici.", style = MaterialTheme.typography.bodyMedium)
             OutlinedTextField(key, { key = it; msg = null }, label = { Text("Clé d'activation") }, textStyle = androidx.compose.ui.text.TextStyle(fontFamily = FontFamily.Monospace, fontSize = 12.sp),
                 modifier = Modifier.fillMaxWidth().heightIn(min = 110.dp))
