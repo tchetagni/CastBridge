@@ -12,6 +12,8 @@ data class TrustedPhone(val address: String, val name: String, val addedAt: Long
 interface TrustPersistence {
     fun load(): String?
     fun save(text: String)
+    /** The previous good copy, when the store keeps one (see [FileTrustPersistence]); used when [load] returns damaged text. */
+    fun loadBackup(): String? = null
 }
 
 class MemoryTrustPersistence(var text: String? = null) : TrustPersistence {
@@ -38,6 +40,11 @@ class TrustRegistry(
     private val maxTokensPerPhone: Int = 4,
 ) {
     private class Tok(val address: String, val expiresAt: Long)
+
+    /** Random id of this installation: phones compare it to tell "the TV was reset or reinstalled" from "this phone was removed". Persisted with the registry. */
+    @Volatile var installId: String = newInstallId(random); private set
+    /** The stored registry was damaged at startup (checksum): true when the backup copy was used, false when nothing could be read. */
+    @Volatile var recoveredFromBackup: Boolean? = null; private set
 
     private val phones = LinkedHashMap<String, TrustedPhone>()
     private val tokens = HashMap<String, Tok>()          // sha256(token) -> owner
@@ -116,17 +123,22 @@ class TrustRegistry(
     private fun save() {
         purge()
         val sb = StringBuilder()
+        sb.append("I\t").append(installId).append('\n')
         phones.values.forEach { sb.append("P\t").append(it.address).append('\t').append(it.addedAt).append('\t').append(it.lastSeen).append('\t').append(enc(it.name)).append('\n') }
         tokens.forEach { (h, t) -> sb.append("T\t").append(t.address).append('\t').append(h).append('\t').append(t.expiresAt).append('\n') }
+        val sum = digest(sb.toString())
+        sb.append(CHECK).append('\t').append(sum).append('\n')   // a truncated or edited file is detected, not half-believed
         runCatching { persistence.save(sb.toString()) }
     }
 
     private fun load() {
-        val text = runCatching { persistence.load() }.getOrNull() ?: return
+        val first = runCatching { persistence.load() }.getOrNull() ?: return
+        val text = if (intact(first)) first else (runCatching { persistence.loadBackup() }.getOrNull()?.takeIf(::intact)?.also { recoveredFromBackup = true } ?: first.also { recoveredFromBackup = false })
         for (line in text.lineSequence()) {
             val f = line.split('\t')
             runCatching {
                 when (f[0]) {
+                    "I" -> if (INSTALL.matches(f[1])) installId = f[1]
                     "P" -> { val a = norm(f[1]); if (ADDRESS.matches(a)) phones[a] = TrustedPhone(a, PhoneName.sanitize(dec(f[4])), f[2].toLong(), f[3].toLong()) }
                     "T" -> if (HASH.matches(f[2])) tokens[f[2]] = Tok(norm(f[1]), f[3].toLong())
                 }
@@ -134,16 +146,27 @@ class TrustRegistry(
         }
         tokens.values.removeAll { !phones.containsKey(it.address) }
         purge()
+        if (recoveredFromBackup == false) { phones.clear(); tokens.clear() }   // damaged and no good copy: nothing is believed, the phones must be added again (new install id tells them)
     }
 
     companion object {
         const val TOKEN_PREFIX = "cbk_"
+        private const val CHECK = "C"
+        private val INSTALL = Regex("^[0-9a-f]{32}$")
+        fun newInstallId(random: SecureRandom = SecureRandom()) = ByteArray(16).also(random::nextBytes).joinToString("") { "%02x".format(it) }
+        private fun digest(body: String) = hash(body)
+        /** True for a legacy file (no checksum line) or one whose checksum matches; false when truncated or edited. */
+        internal fun intact(text: String): Boolean {
+            val i = text.lastIndexOf("\n$CHECK\t") + 1
+            if (i == 0) return !text.contains('\u0000')                 // legacy format; a file of zeros is what a power cut leaves
+            return text.substring(i).trim().removePrefix("$CHECK\t") == digest(text.substring(0, i))
+        }
         private val TOKEN_FORMAT = Regex("^cbk_[0-9a-f]{64}$")
         private val HASH = Regex("^[0-9a-f]{64}$")
         private val ADDRESS = Regex("^([0-9A-F]{2}:){5}[0-9A-F]{2}$")
         fun norm(address: String) = address.trim().uppercase()
         fun isAddress(a: String?) = a != null && ADDRESS.matches(norm(a))
-        private fun hash(s: String) = MessageDigest.getInstance("SHA-256").digest(s.toByteArray(Charsets.UTF_8)).joinToString("") { "%02x".format(it) }
+        internal fun hash(s: String) = MessageDigest.getInstance("SHA-256").digest(s.toByteArray(Charsets.UTF_8)).joinToString("") { "%02x".format(it) }
         private fun enc(s: String) = URLEncoder.encode(s, "UTF-8")
         private fun dec(s: String) = URLDecoder.decode(s, "UTF-8")
     }

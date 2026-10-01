@@ -53,6 +53,15 @@ object BtProtocol {
      */
     const val HELLO = "CBTH"
     const val HELLO_REQUEST_TRUST = 1
+    /**
+     * Additive (older phones never set it, older TVs ignore it): "after the flags comes `u8 length | install id` of the TV I remember". A TV that
+     * answers an error then adds ONE hint byte ([HINT_NONE]/[HINT_OTHER_INSTALL]/[HINT_SAME_INSTALL]) so the phone can tell "the TV was reset or
+     * reinstalled" from "this phone was removed from the TV"; only for a peer Android says is paired, and it only compares two random ids.
+     */
+    const val HELLO_HAS_INSTALL_ID = 2
+    const val HINT_NONE = 0
+    const val HINT_OTHER_INSTALL = 1
+    const val HINT_SAME_INSTALL = 2
     /** RFCOMM service UUID shared by the TV and the phone app. */
     const val SERVICE_UUID = "7c5e3b9a-4d2f-4c61-9b0e-cb0000000001"
     /** Second RFCOMM service: a plain byte tunnel to the TV's SSH server (see castbridge.core.ssh.SshTunnel). */
@@ -76,6 +85,7 @@ object BtProtocol {
     /** HELLO: another phone is waiting for the owner's answer, or too many refusals. */
     const val ERR_BUSY = 12
     private const val MAX_NAME = 400
+    private const val MAX_INSTALL_ID = 64
 
     /** Errors that retrying cannot fix. */
     fun isFatal(code: Int) = code in setOf(ERR_MAGIC, ERR_PIN, ERR_NAME, ERR_SPACE, ERR_LOCKED, ERR_SIZE, ERR_UNTRUSTED, ERR_DENIED, ERR_NOT_OPEN)
@@ -96,7 +106,7 @@ object BtProtocol {
         else -> "erreur TV ($code)"
     }
 
-    class Refused(val code: Int) : IOException(describe(code))
+    class Refused(val code: Int, val hint: Int = HINT_NONE) : IOException(describe(code))
 
     // ---------------------------------------------------------------- receiver (TV)
 
@@ -132,8 +142,13 @@ object BtProtocol {
         val m = String(magic, Charsets.US_ASCII)
         if (m == HELLO && hello != null) {
             val flags = din.readUnsignedByte()
+            val claimed = if (flags and HELLO_HAS_INSTALL_ID != 0) String(ByteArray(din.readUnsignedByte().coerceAtMost(MAX_INSTALL_ID)).also { din.readFully(it) }, Charsets.US_ASCII) else null
             return when (val r = hello(peer, flags and HELLO_REQUEST_TRUST != 0)) {
-                is HelloReply.Err -> fail(r.code)
+                is HelloReply.Err -> {
+                    dout.writeByte(r.code)
+                    if (claimed != null) dout.writeByte(r.hintFor?.invoke(claimed) ?: HINT_NONE)
+                    dout.flush(); r.code
+                }
                 is HelloReply.Ok -> {
                     val text = r.info.encode().toByteArray(Charsets.UTF_8)
                     dout.writeByte(OK); dout.writeShort(text.size); dout.write(text); dout.flush(); OK
@@ -226,14 +241,20 @@ object BtProtocol {
      * ERR_BUSY, or ERR_MAGIC from a TV that predates it) or [IOException]. With [requestTrust] the TV asks its owner; the call then
      * waits for the answer (up to a minute).
      */
-    fun hello(input: InputStream, output: OutputStream, requestTrust: Boolean): HelloInfo {
+    fun hello(input: InputStream, output: OutputStream, requestTrust: Boolean, installId: String? = null): HelloInfo {
         val din = DataInputStream(input)
         val dout = DataOutputStream(output)
+        val id = installId?.takeIf { it.isNotEmpty() && it.length <= MAX_INSTALL_ID && it.all { c -> c.code in 33..126 } }
         dout.write(HELLO.toByteArray(Charsets.US_ASCII))
-        dout.writeByte(if (requestTrust) HELLO_REQUEST_TRUST else 0)
+        dout.writeByte((if (requestTrust) HELLO_REQUEST_TRUST else 0) or (if (id != null) HELLO_HAS_INSTALL_ID else 0))
+        if (id != null) { dout.writeByte(id.length); dout.write(id.toByteArray(Charsets.US_ASCII)) }
         dout.flush()
         val st = din.readUnsignedByte()
-        if (st != OK) throw Refused(st)
+        if (st != OK) {
+            // an older TV closes right after the status byte: no hint then
+            val hint = if (id != null) try { din.read().takeIf { it in HINT_NONE..HINT_SAME_INSTALL } ?: HINT_NONE } catch (_: IOException) { HINT_NONE } else HINT_NONE
+            throw Refused(st, hint)
+        }
         val len = din.readUnsignedShort()
         return HelloInfo.decode(String(ByteArray(len).also { din.readFully(it) }, Charsets.UTF_8))
             ?: throw IOException("answer of the TV not understood")
@@ -385,19 +406,23 @@ object LinkPlanner {
 }
 
 /** What a TV's answer to a trusted phone's HELLO holds. [token] is that phone's credential for the Wi-Fi API ([ttlSec] seconds). */
-data class HelloInfo(val tvName: String, val version: String, val mdns: String?, val token: String, val ttlSec: Long, val link: LinkInfo) {
+data class HelloInfo(val tvName: String, val version: String, val mdns: String?, val token: String, val ttlSec: Long, val link: LinkInfo,
+    /** Random id of this installation of CastBridge-TV (changes when the TV forgets its phones); null = a TV that predates it. */
+    val installId: String? = null) {
     fun encode(): String = buildString {
         append("tv=").append(line(tvName)).append('\n')
         append("v=").append(line(version)).append('\n')
         if (mdns != null) append("mdns=").append(line(mdns)).append('\n')
         append("ttl=").append(ttlSec).append('\n')
         append("token=").append(token).append('\n')
+        if (installId != null) append("id=").append(installId).append('\n')
         append(link.encode())
     }
 
     companion object {
         private fun line(s: String) = s.replace(Regex("[\\r\\n\\t]"), " ").take(120)
         private val TOKEN = Regex("^cbk_[0-9a-f]{64}$")
+        private val INSTALL_ID = Regex("^[0-9a-f]{8,64}$")
 
         /** null when the token is missing or malformed (nothing is usable without it). */
         fun decode(s: String): HelloInfo? {
@@ -405,12 +430,14 @@ data class HelloInfo(val tvName: String, val version: String, val mdns: String?,
             val token = kv["token"]?.takeIf { TOKEN.matches(it) } ?: return null
             val name = if (kv["tv"].isNullOrBlank()) "TV" else castbridge.core.trust.PhoneName.sanitize(kv["tv"], 60)
             return HelloInfo(name, kv["v"].orEmpty().take(40), kv["mdns"]?.take(120), token,
-                kv["ttl"]?.toLongOrNull()?.coerceIn(60, 7 * 24 * 3600L) ?: 3600, LinkInfo.decode(s))
+                kv["ttl"]?.toLongOrNull()?.coerceIn(60, 7 * 24 * 3600L) ?: 3600, LinkInfo.decode(s),
+                kv["id"]?.takeIf { INSTALL_ID.matches(it) })
         }
     }
 }
 
 sealed class HelloReply {
     class Ok(val info: HelloInfo) : HelloReply()
-    class Err(val code: Int) : HelloReply()
+    /** [hintFor]: given the install id the phone remembers, [BtProtocol.HINT_OTHER_INSTALL] / [BtProtocol.HINT_SAME_INSTALL] (only set for a paired peer). */
+    class Err(val code: Int, val hintFor: ((String) -> Int)? = null) : HelloReply()
 }

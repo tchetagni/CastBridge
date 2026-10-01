@@ -24,11 +24,18 @@ class HelloHandler(
     private val link: () -> LinkInfo,
     /** A trusted phone just connected (for the « téléphone connecté » banner). */
     private val onConnected: (TrustedPhone) -> Unit = {},
+    /** Storm control: a phone (or all of them) asking far too often is told "busy, later" (ERR_BUSY, which the phone treats as transient). */
+    private val limiter: AttemptLimiter? = null,
 ) {
+    /** What an unknown phone is told: nothing but "no", plus (only when it is paired and gave the install id it remembers) whether the TV is another installation. */
+    private fun untrusted(paired: Boolean) = HelloReply.Err(BtProtocol.ERR_UNTRUSTED,
+        if (!paired) null else { claimed -> if (claimed == registry.installId) BtProtocol.HINT_SAME_INSTALL else BtProtocol.HINT_OTHER_INSTALL })
+
     fun handle(peer: String, peerName: String?, requestTrust: Boolean): HelloReply {
-        if (!TrustRegistry.isAddress(peer) || !isBonded(peer)) return HelloReply.Err(BtProtocol.ERR_UNTRUSTED)
+        if (!TrustRegistry.isAddress(peer) || !isBonded(peer)) return untrusted(false)
+        if (limiter != null && limiter.tryAcquire(TrustRegistry.norm(peer)) > 0) return HelloReply.Err(BtProtocol.ERR_BUSY)
         if (!registry.isTrusted(peer)) {
-            if (!requestTrust) return HelloReply.Err(BtProtocol.ERR_UNTRUSTED)
+            if (!requestTrust) return untrusted(true)
             when (pairing.ask(peer, peerName.orEmpty())) {
                 PairingSession.Decision.APPROVED -> {}
                 PairingSession.Decision.DENIED -> return HelloReply.Err(BtProtocol.ERR_DENIED)
@@ -37,8 +44,8 @@ class HelloHandler(
                 PairingSession.Decision.BUSY, PairingSession.Decision.BLOCKED -> return HelloReply.Err(BtProtocol.ERR_BUSY)
             }
         }
-        val t = registry.issueToken(peer) ?: return HelloReply.Err(BtProtocol.ERR_UNTRUSTED)   // revoked while we waited
+        val t = registry.issueToken(peer) ?: return untrusted(true)   // revoked while we waited
         registry.get(peer)?.let(onConnected)
-        return HelloReply.Ok(HelloInfo(tvName(), version, mdnsName(), t.token, registry.tokenTtlMs / 1000, link()))
+        return HelloReply.Ok(HelloInfo(tvName(), version, mdnsName(), t.token, registry.tokenTtlMs / 1000, link(), registry.installId))
     }
 }
