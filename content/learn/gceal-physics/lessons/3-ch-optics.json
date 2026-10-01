@@ -1,0 +1,1490 @@
+{
+ "chapter": "gceal-physics-ch-optics",
+ "lessons": [
+  {
+   "id": "gceal-physics-emwaves",
+   "title": "The electromagnetic spectrum and polarisation",
+   "minutes": 30,
+   "programRef": "GCE Advanced Level Physics — electromagnetic waves, optics (to be checked against the official syllabus)",
+   "status": "draft",
+   "author": "CastBridge (AI draft)",
+   "source": "Original writing following the Cameroonian curriculum; to be reviewed by a teacher",
+   "objectives": [
+    "Describe the electromagnetic spectrum, its common properties and the uses and hazards of each region",
+    "Use c = fλ and calculate times of travel of signals",
+    "Explain polarisation as evidence that light is transverse and use Malus's law I = I₀cos²θ"
+   ],
+   "prerequisites": [
+    "gceal-physics-ac"
+   ],
+   "exercises": [
+    "gceal-physics-ch-optics-e01",
+    "gceal-physics-ch-optics-e02",
+    "gceal-physics-ch-optics-e03",
+    "gceal-physics-ch-optics-e04",
+    "gceal-physics-ch-optics-e05",
+    "gceal-physics-ch-optics-e06"
+   ],
+   "selfCheck": [
+    "gceal-physics-emwaves-q1",
+    "gceal-physics-emwaves-q2",
+    "gceal-physics-emwaves-q3",
+    "gceal-physics-emwaves-q4",
+    "gceal-physics-emwaves-q5"
+   ],
+   "reviewNotes": [
+    "Approximate wavelength ranges for the bands are deliberately not given; the board may expect them.",
+    "Some syllabuses define microwaves/radio boundaries differently; 900 MHz for mobile networks is a typical figure (check local operators).",
+    "Syllabus references, scope and level of difficulty are to be checked against the official text; all facts, formulas and worked examples to be verified by a teacher before release."
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Electromagnetic waves",
+     "md": "Electromagnetic (e.m.) waves are oscillating, perpendicular electric and magnetic fields travelling together. They are **transverse**, need no medium, travel at **c = 3.00 × 10⁸ m/s** in vacuum, carry energy, and can be reflected, refracted, diffracted, polarised and can interfere.\n\nIn order of increasing frequency: **radio, microwaves, infrared, visible light, ultraviolet, X-rays, γ-rays**. Always c = fλ."
+    },
+    {
+     "type": "key",
+     "style": "retenir",
+     "title": "Uses and hazards",
+     "md": "- Radio: broadcasting (FM, mobile networks). Microwaves: mobile phones, radar, satellite links, cooking.\n- Infrared: remote controls, heaters, thermal imaging. Visible light: vision, optical fibres.\n- UV: sterilising water, security marks; overexposure damages skin and eyes. X-rays: medical imaging; ionising. γ-rays: cancer treatment, sterilisation; highly ionising.\n\nHigher-frequency radiation carries more energy per photon (E = hf), so is more hazardous."
+    },
+    {
+     "type": "illustration",
+     "figure": {
+      "kind": "shapes",
+      "w": 400,
+      "h": 190,
+      "items": [
+       {
+        "t": "rect",
+        "x": 12,
+        "y": 60,
+        "w": 52,
+        "h": 50,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "lightorange"
+       },
+       {
+        "t": "text",
+        "x": 38,
+        "y": 90,
+        "text": "radio",
+        "size": 12,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "rect",
+        "x": 67,
+        "y": 60,
+        "w": 52,
+        "h": 50,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "lightyellow"
+       },
+       {
+        "t": "text",
+        "x": 93,
+        "y": 90,
+        "text": "micro",
+        "size": 12,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "rect",
+        "x": 122,
+        "y": 60,
+        "w": 52,
+        "h": 50,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "pink"
+       },
+       {
+        "t": "text",
+        "x": 148,
+        "y": 90,
+        "text": "IR",
+        "size": 12,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "rect",
+        "x": 177,
+        "y": 60,
+        "w": 52,
+        "h": 50,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "lightgreen"
+       },
+       {
+        "t": "text",
+        "x": 203,
+        "y": 90,
+        "text": "light",
+        "size": 12,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "rect",
+        "x": 232,
+        "y": 60,
+        "w": 52,
+        "h": 50,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "lightblue"
+       },
+       {
+        "t": "text",
+        "x": 258,
+        "y": 90,
+        "text": "UV",
+        "size": 12,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "rect",
+        "x": 287,
+        "y": 60,
+        "w": 52,
+        "h": 50,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "lightgrey"
+       },
+       {
+        "t": "text",
+        "x": 313,
+        "y": 90,
+        "text": "X-ray",
+        "size": 12,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "rect",
+        "x": 342,
+        "y": 60,
+        "w": 52,
+        "h": 50,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "purple"
+       },
+       {
+        "t": "text",
+        "x": 368,
+        "y": 90,
+        "text": "γ",
+        "size": 12,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "line",
+        "x1": 30,
+        "y1": 140,
+        "x2": 370,
+        "y2": 140,
+        "color": "red",
+        "width": 2,
+        "arrow": "end"
+       },
+       {
+        "t": "text",
+        "x": 200,
+        "y": 165,
+        "text": "frequency and photon energy increase",
+        "size": 13,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "text",
+        "x": 200,
+        "y": 40,
+        "text": "all travel at c = 3.00 × 10⁸ m/s in vacuum",
+        "size": 13,
+        "anchor": "middle",
+        "color": "ink"
+       }
+      ]
+     },
+     "caption": "The electromagnetic spectrum from radio waves to γ-rays (not to scale).",
+     "alt": "Seven coloured boxes in order: radio, microwaves, infrared, light, ultraviolet, X-ray, gamma, with an arrow showing increasing frequency."
+    },
+    {
+     "type": "key",
+     "style": "formule",
+     "title": "Polarisation",
+     "md": "In **plane-polarised** light the electric field oscillates in one plane only. Only transverse waves can be polarised, so polarisation shows light is transverse. A polaroid transmits only one plane: unpolarised light passing through one polaroid has its intensity **halved**.\n\nFor plane-polarised light incident on a second polaroid (analyser) at angle θ: **I = I₀ cos²θ** (Malus's law).",
+     "tex": "I=I_0\\cos^{2}\\theta"
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Common mistakes",
+     "md": "- Saying sound can be polarised: sound is longitudinal.\n- Forgetting the factor ½ when unpolarised light meets the first polaroid.\n- Mixing up the order of the spectrum (gamma has the shortest wavelength).\n- Using wavelengths in nm or cm without converting to metres."
+    },
+    {
+     "type": "example",
+     "title": "Example 1 — Frequencies",
+     "statement": "Find (a) the frequency of red light of wavelength 656 nm, (b) the wavelength of a 900 MHz mobile signal, (c) the time light takes to reach us from the Sun (1.5 × 10¹¹ m).",
+     "steps": [
+      "(a) f = c/λ = 3.00 × 10⁸ ÷ 656 × 10⁻⁹ = 4.57 × 10¹⁴ Hz.",
+      "(b) λ = c/f = 3.00 × 10⁸ ÷ 9.0 × 10⁸ = 0.33 m.",
+      "(c) t = d/c = 1.5 × 10¹¹ ÷ 3.00 × 10⁸ = 500 s ≈ 8.3 min."
+     ],
+     "answer": "(a) 4.57 × 10¹⁴ Hz; (b) 0.33 m; (c) 500 s"
+    },
+    {
+     "type": "example",
+     "title": "Example 2 — Two polaroids",
+     "statement": "Unpolarised light of intensity I₀ passes through a polaroid, then through a second polaroid whose axis is at 60° to the first. Find the final intensity.",
+     "steps": [
+      "After the first polaroid: I₁ = I₀/2 (unpolarised light is halved).",
+      "After the second: I₂ = I₁ cos² 60° = (I₀/2) × (0.5)² = I₀/8."
+     ],
+     "answer": "I = I₀/8 = 0.125 I₀"
+    }
+   ],
+   "chapter": "gceal-physics-ch-optics"
+  },
+  {
+   "id": "gceal-physics-refraction",
+   "title": "Refraction, total internal reflection and lenses",
+   "minutes": 35,
+   "programRef": "GCE Advanced Level Physics — electromagnetic waves, optics (to be checked against the official syllabus)",
+   "status": "draft",
+   "author": "CastBridge (AI draft)",
+   "source": "Original writing following the Cameroonian curriculum; to be reviewed by a teacher",
+   "objectives": [
+    "Use Snell's law n₁ sin θ₁ = n₂ sin θ₂ and the critical angle sin C = 1/n",
+    "Explain total internal reflection and the optical fibre",
+    "Use the thin-lens equation 1/f = 1/u + 1/v with the 'real is positive' convention and magnification m = v/u"
+   ],
+   "prerequisites": [
+    "gceal-physics-emwaves"
+   ],
+   "exercises": [
+    "gceal-physics-ch-optics-e07",
+    "gceal-physics-ch-optics-e08",
+    "gceal-physics-ch-optics-e09",
+    "gceal-physics-ch-optics-e10",
+    "gceal-physics-ch-optics-e11",
+    "gceal-physics-ch-optics-e12"
+   ],
+   "selfCheck": [
+    "gceal-physics-refraction-q1",
+    "gceal-physics-refraction-q2",
+    "gceal-physics-refraction-q3",
+    "gceal-physics-refraction-q4",
+    "gceal-physics-refraction-q5"
+   ],
+   "reviewNotes": [
+    "n for water 1.33 and glass 1.50 are typical values.",
+    "Real-is-positive sign convention is used; boards sometimes use Cartesian sign conventions — check.",
+    "Optical instruments (microscope, telescope) are not covered.",
+    "Syllabus references, scope and level of difficulty are to be checked against the official text; all facts, formulas and worked examples to be verified by a teacher before release."
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Refractive index",
+     "md": "The **refractive index** of a medium n = c/v (speed of light in vacuum ÷ speed in the medium). **Snell's law**: n₁ sin θ₁ = n₂ sin θ₂, with angles measured from the **normal**. Light bends towards the normal on entering a denser medium (where it is slower and the wavelength is shorter; the frequency does not change).\n\nTypical values: water 1.33, glass about 1.5."
+    },
+    {
+     "type": "key",
+     "style": "formule",
+     "title": "Total internal reflection",
+     "md": "Light travelling from a denser medium to a less dense medium is totally reflected when the angle of incidence exceeds the **critical angle** C, where **sin C = 1/n** (for a boundary with air). Conditions: denser → less dense, and θ > C.\n\nUses: **optical fibres** (a core with a cladding of lower index), prisms in binoculars, reflectors. Fibres are used for telecommunications and endoscopes.",
+     "tex": "n=\\frac{\\sin\\theta_1}{\\sin\\theta_2}\\qquad \\sin C=\\frac{1}{n}"
+    },
+    {
+     "type": "illustration",
+     "figure": {
+      "kind": "shapes",
+      "w": 380,
+      "h": 230,
+      "items": [
+       {
+        "t": "rect",
+        "x": 40,
+        "y": 110,
+        "w": 300,
+        "h": 100,
+        "stroke": "blue",
+        "width": 1,
+        "fill": "lightblue"
+       },
+       {
+        "t": "text",
+        "x": 310,
+        "y": 200,
+        "text": "glass",
+        "size": 13,
+        "anchor": "middle",
+        "color": "blue"
+       },
+       {
+        "t": "text",
+        "x": 310,
+        "y": 20,
+        "text": "air",
+        "size": 13,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "line",
+        "x1": 190,
+        "y1": 20,
+        "x2": 190,
+        "y2": 210,
+        "color": "grey",
+        "width": 1,
+        "dash": true
+       },
+       {
+        "t": "text",
+        "x": 196,
+        "y": 26,
+        "text": "normal",
+        "size": 12,
+        "anchor": "start",
+        "color": "grey"
+       },
+       {
+        "t": "line",
+        "x1": 125.72123903134607,
+        "y1": 33.39555568810219,
+        "x2": 190,
+        "y2": 110,
+        "color": "red",
+        "width": 3,
+        "arrow": "end"
+       },
+       {
+        "t": "line",
+        "x1": 190,
+        "y1": 110,
+        "x2": 232.85250731243593,
+        "y2": 200.3529889767772,
+        "color": "red",
+        "width": 3,
+        "arrow": "end"
+       },
+       {
+        "t": "text",
+        "x": 130,
+        "y": 40,
+        "text": "θ₁ = 40°",
+        "size": 13,
+        "anchor": "end",
+        "color": "ink"
+       },
+       {
+        "t": "text",
+        "x": 250,
+        "y": 150,
+        "text": "θ₂ = 25.4°",
+        "size": 13,
+        "anchor": "start",
+        "color": "ink"
+       }
+      ]
+     },
+     "caption": "A ray entering glass at 40° bends towards the normal (θ₂ = 25.4°).",
+     "alt": "A ray in air hitting a glass block at 40 degrees from the dashed normal and bending to 25.4 degrees inside."
+    },
+    {
+     "type": "key",
+     "style": "formule",
+     "title": "Thin lenses",
+     "md": "For a thin lens: **1/f = 1/u + 1/v** (real-is-positive convention: u and v positive for real objects/images; v negative for a virtual image; f positive for a converging lens, negative for a diverging one). Magnification **m = v/u** = image height ÷ object height. Power P = 1/f in dioptres (f in metres).\n\nA converging lens gives a **real inverted** image if the object is beyond f and a **virtual magnified upright** image if it is within f (magnifying glass).",
+     "tex": "\\frac{1}{f}=\\frac{1}{u}+\\frac{1}{v}\\qquad m=\\frac{v}{u}"
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Common mistakes",
+     "md": "- Measuring angles from the surface instead of from the normal.\n- Trying to have total internal reflection going from air to glass: it only occurs from the denser to the less dense medium.\n- Sign errors in the lens formula: a negative v means a virtual image on the same side as the object.\n- Forgetting that frequency does not change on refraction (only speed and wavelength do)."
+    },
+    {
+     "type": "example",
+     "title": "Example 1 — Refraction in glass",
+     "statement": "Light in air strikes glass (n = 1.50) at 40° to the normal. Find the angle of refraction and the speed of light in the glass.",
+     "steps": [
+      "sin θ₂ = sin 40°/1.50 = 0.6428/1.50 = 0.4285, so θ₂ = 25.4°.",
+      "v = c/n = 3.00 × 10⁸/1.50 = 2.00 × 10⁸ m/s."
+     ],
+     "answer": "θ₂ = 25.4°; v = 2.00 × 10⁸ m/s"
+    },
+    {
+     "type": "example",
+     "title": "Example 2 — A converging lens",
+     "statement": "A converging lens has f = 10 cm. Find the image position and magnification for an object (a) 30 cm and (b) 5 cm from the lens.",
+     "steps": [
+      "(a) 1/v = 1/10 − 1/30 = 2/30, so v = 15 cm (real); m = 15/30 = 0.50 (diminished, inverted).",
+      "(b) 1/v = 1/10 − 1/5 = −1/10, so v = −10 cm (virtual, same side); m = −10/5 = −2 in this convention: magnified ×2 and upright."
+     ],
+     "answer": "(a) v = 15 cm, m = 0.5; (b) v = −10 cm, magnified × 2"
+    }
+   ],
+   "chapter": "gceal-physics-ch-optics"
+  },
+  {
+   "id": "gceal-physics-grating",
+   "title": "Diffraction gratings",
+   "minutes": 35,
+   "programRef": "GCE Advanced Level Physics — electromagnetic waves, optics (to be checked against the official syllabus)",
+   "status": "draft",
+   "author": "CastBridge (AI draft)",
+   "source": "Original writing following the Cameroonian curriculum; to be reviewed by a teacher",
+   "objectives": [
+    "State and use d sin θ = nλ for a diffraction grating and explain why the maxima are sharp",
+    "Determine wavelengths and the maximum number of orders, and describe the spectrum from white light",
+    "Compare the double-slit and the grating patterns and use the single-slit minimum a sin θ = λ"
+   ],
+   "prerequisites": [
+    "gceal-physics-refraction"
+   ],
+   "exercises": [
+    "gceal-physics-ch-optics-e13",
+    "gceal-physics-ch-optics-e14",
+    "gceal-physics-ch-optics-e15",
+    "gceal-physics-ch-optics-e16",
+    "gceal-physics-ch-optics-e17",
+    "gceal-physics-ch-optics-e18"
+   ],
+   "selfCheck": [
+    "gceal-physics-grating-q1",
+    "gceal-physics-grating-q2",
+    "gceal-physics-grating-q3",
+    "gceal-physics-grating-q4",
+    "gceal-physics-grating-q5"
+   ],
+   "reviewNotes": [
+    "The condition for the first minimum of a single slit is a sin θ = λ (small-angle form not used).",
+    "Normal incidence is assumed; oblique incidence is not covered.",
+    "Syllabus references, scope and level of difficulty are to be checked against the official text; all facts, formulas and worked examples to be verified by a teacher before release."
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "The grating equation",
+     "md": "A **diffraction grating** has a large number of equally spaced parallel slits (often 300–600 lines per mm). Monochromatic light of wavelength λ gives bright maxima at angles θ given by **d sin θ = nλ**, where d is the slit spacing (d = 1/N for N lines per metre) and n = 0, 1, 2… is the **order**.\n\nA large number of slits makes the maxima narrow and bright, so wavelengths can be measured accurately."
+    },
+    {
+     "type": "key",
+     "style": "methode",
+     "title": "Method",
+     "md": "1. Convert the line density to a spacing: d = 1/N (N in lines per metre; e.g. 300 lines/mm = 3.00 × 10⁵ m⁻¹, d = 3.33 × 10⁻⁶ m).\n2. For a given order: sin θ = nλ/d.\n3. The highest order occurs when sin θ ≤ 1: n_max is the largest integer ≤ d/λ.\n4. The central maximum (n = 0) of white light is white; the higher orders are spectra with violet nearest the centre and red furthest."
+    },
+    {
+     "type": "illustration",
+     "figure": {
+      "kind": "shapes",
+      "w": 400,
+      "h": 250,
+      "items": [
+       {
+        "t": "line",
+        "x1": 60,
+        "y1": 20,
+        "x2": 60,
+        "y2": 220,
+        "color": "ink",
+        "width": 4
+       },
+       {
+        "t": "text",
+        "x": 60,
+        "y": 238,
+        "text": "grating",
+        "size": 12,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "line",
+        "x1": 10,
+        "y1": 120,
+        "x2": 60,
+        "y2": 120,
+        "color": "red",
+        "width": 3,
+        "arrow": "end"
+       },
+       {
+        "t": "text",
+        "x": 35,
+        "y": 105,
+        "text": "beam",
+        "size": 12,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "line",
+        "x1": 60,
+        "y1": 120,
+        "x2": 320.0,
+        "y2": 120.0,
+        "color": "red",
+        "width": 2,
+        "arrow": "end"
+       },
+       {
+        "t": "text",
+        "x": 326.0,
+        "y": 124.0,
+        "text": "n = 0",
+        "size": 12,
+        "anchor": "start",
+        "color": "ink"
+       },
+       {
+        "t": "line",
+        "x1": 60,
+        "y1": 120,
+        "x2": 315.89085807200286,
+        "y2": 73.95796751690834,
+        "color": "red",
+        "width": 2,
+        "dash": true,
+        "arrow": "end"
+       },
+       {
+        "t": "text",
+        "x": 321.89085807200286,
+        "y": 77.95796751690834,
+        "text": "n = 1",
+        "size": 12,
+        "anchor": "start",
+        "color": "ink"
+       },
+       {
+        "t": "line",
+        "x1": 60,
+        "y1": 120,
+        "x2": 315.89085807200286,
+        "y2": 166.04203248309165,
+        "color": "red",
+        "width": 2,
+        "dash": true,
+        "arrow": "end"
+       },
+       {
+        "t": "text",
+        "x": 321.89085807200286,
+        "y": 170.04203248309165,
+        "text": "n = 1",
+        "size": 12,
+        "anchor": "start",
+        "color": "ink"
+       },
+       {
+        "t": "line",
+        "x1": 60,
+        "y1": 120,
+        "x2": 303.21544801576556,
+        "y2": 28.096540617393146,
+        "color": "red",
+        "width": 2,
+        "dash": true,
+        "arrow": "end"
+       },
+       {
+        "t": "text",
+        "x": 309.21544801576556,
+        "y": 32.096540617393146,
+        "text": "n = 2",
+        "size": 12,
+        "anchor": "start",
+        "color": "ink"
+       },
+       {
+        "t": "line",
+        "x1": 60,
+        "y1": 120,
+        "x2": 303.21544801576556,
+        "y2": 211.90345938260685,
+        "color": "red",
+        "width": 2,
+        "dash": true,
+        "arrow": "end"
+       },
+       {
+        "t": "text",
+        "x": 309.21544801576556,
+        "y": 215.90345938260685,
+        "text": "n = 2",
+        "size": 12,
+        "anchor": "start",
+        "color": "ink"
+       },
+       {
+        "t": "text",
+        "x": 200,
+        "y": 20,
+        "text": "d sin θ = nλ",
+        "size": 14,
+        "anchor": "middle",
+        "color": "ink",
+        "bold": true
+       }
+      ]
+     },
+     "caption": "Diffraction by a grating: beams at angles θ given by d sin θ = nλ.",
+     "alt": "A grating with a central beam and first and second order beams at angles above and below."
+    },
+    {
+     "type": "key",
+     "style": "retenir",
+     "title": "Single slit and comparisons",
+     "md": "A single slit of width a produces a wide central maximum with the first minimum at **a sin θ = λ**; a narrower slit gives a wider pattern. The double-slit fringes have an envelope given by the single-slit pattern.\n\nThe grating gives fewer, sharper and brighter maxima at larger angles than two slits of the same spacing."
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Common mistakes",
+     "md": "- Using the number of lines per mm directly as d: d is the reciprocal and must be in metres.\n- Forgetting that n = 0 is a maximum (not counted among the 'orders' on each side).\n- Counting the total number of maxima as 2n_max rather than 2n_max + 1.\n- Saying red light is deviated less than violet: red has the longer wavelength, so it is deviated **more**."
+    },
+    {
+     "type": "example",
+     "title": "Example 1 — Sodium light",
+     "statement": "A grating has 300 lines per mm. Sodium light of wavelength 589 nm falls normally on it. Find the angles of the first and second orders and the maximum number of orders.",
+     "steps": [
+      "d = 1.0 × 10⁻³/300 = 3.33 × 10⁻⁶ m.",
+      "n = 1: sin θ = 589 × 10⁻⁹/3.33 × 10⁻⁶ = 0.1767, so θ = 10.2°. n = 2: sin θ = 0.3534, so θ = 20.7°.",
+      "d/λ = 5.66, so n_max = 5 (sin θ ≤ 1); the total number of maxima is 2 × 5 + 1 = 11."
+     ],
+     "answer": "10.2°, 20.7°; 5 orders each side; 11 maxima in all"
+    },
+    {
+     "type": "example",
+     "title": "Example 2 — Two wavelengths",
+     "statement": "A grating with 500 lines per mm receives light containing 450 nm and 650 nm. Find the angular separation of the two first-order maxima.",
+     "steps": [
+      "d = 1.0 × 10⁻³/500 = 2.0 × 10⁻⁶ m.",
+      "450 nm: sin θ = 0.225, θ = 13.0°. 650 nm: sin θ = 0.325, θ = 19.0°.",
+      "Separation = 19.0° − 13.0° = 6.0°."
+     ],
+     "answer": "6.0° (the 650 nm light is deviated more)"
+    }
+   ],
+   "chapter": "gceal-physics-ch-optics"
+  }
+ ],
+ "exercises": [
+  {
+   "id": "gceal-physics-ch-optics-e01",
+   "kind": "numeric",
+   "tier": "application",
+   "lesson": "gceal-physics-emwaves",
+   "source": "Original exercise, GCE Advanced Level style (g = 9.8 m/s²)",
+   "prompt": "Find the wavelength (m) of a radio wave of frequency 100 MHz (c = 3.00 × 10⁸ m/s).",
+   "answer": 3.0,
+   "tolerance": 0.01,
+   "unit": "m",
+   "explanation": "λ = c/f = 3.00 × 10⁸ ÷ 1.00 × 10⁸ = 3.0 m.",
+   "difficulty": 1,
+   "points": 2,
+   "chapter": "gceal-physics-ch-optics"
+  },
+  {
+   "id": "gceal-physics-ch-optics-e02",
+   "kind": "numeric",
+   "tier": "application",
+   "lesson": "gceal-physics-emwaves",
+   "source": "Original exercise, GCE Advanced Level style (g = 9.8 m/s²)",
+   "prompt": "A signal is sent to a satellite 3.6 × 10⁷ m away. How long does it take to arrive (s)?",
+   "answer": 0.12,
+   "tolerance": 0.002,
+   "unit": "s",
+   "explanation": "t = d/c = 3.6 × 10⁷ ÷ 3.00 × 10⁸ = 0.12 s.",
+   "difficulty": 1,
+   "points": 2,
+   "chapter": "gceal-physics-ch-optics"
+  },
+  {
+   "id": "gceal-physics-ch-optics-e03",
+   "kind": "truefalse",
+   "tier": "application",
+   "lesson": "gceal-physics-emwaves",
+   "source": "Original exercise, GCE Advanced Level style (g = 9.8 m/s²)",
+   "prompt": "True or false: X-rays and radio waves travel at the same speed in vacuum.",
+   "answer": true,
+   "explanation": "All e.m. waves travel at c in vacuum.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "gceal-physics-ch-optics"
+  },
+  {
+   "id": "gceal-physics-ch-optics-e04",
+   "kind": "numeric",
+   "tier": "approfondissement",
+   "lesson": "gceal-physics-emwaves",
+   "source": "Original exercise, GCE Advanced Level style (g = 9.8 m/s²)",
+   "prompt": "Plane-polarised light of intensity 80 W m⁻² passes through an analyser at 30° to its plane. Find the transmitted intensity (W m⁻²).",
+   "answer": 60.00000000000001,
+   "tolerance": 0.1,
+   "unit": "W/m²",
+   "explanation": "I = I₀cos²30° = 80 × 0.75 = 60 W m⁻².",
+   "difficulty": 2,
+   "points": 3,
+   "chapter": "gceal-physics-ch-optics"
+  },
+  {
+   "id": "gceal-physics-ch-optics-e05",
+   "kind": "mcq",
+   "tier": "approfondissement",
+   "lesson": "gceal-physics-emwaves",
+   "source": "Original exercise, GCE Advanced Level style (g = 9.8 m/s²)",
+   "prompt": "Which radiation has the highest photon energy?",
+   "choices": [
+    "γ-rays",
+    "microwaves",
+    "X-rays",
+    "ultraviolet"
+   ],
+   "answer": 0,
+   "explanation": "Photon energy E = hf increases with frequency; gamma has the highest frequency.",
+   "difficulty": 2,
+   "points": 2,
+   "chapter": "gceal-physics-ch-optics"
+  },
+  {
+   "id": "gceal-physics-ch-optics-e06",
+   "kind": "problem",
+   "tier": "examen",
+   "lesson": "gceal-physics-emwaves",
+   "source": "Original exercise, GCE Advanced Level style (g = 9.8 m/s²)",
+   "prompt": "A cellular network operates at 900 MHz and a satellite TV link at 12 GHz (c = 3.00 × 10⁸ m/s).",
+   "difficulty": 2,
+   "parts": [
+    {
+     "kind": "numeric",
+     "points": 1,
+     "prompt": "Wavelength of the 900 MHz signal (m, 3 s.f.).",
+     "answer": 0.333,
+     "tolerance": 0.002,
+     "explanation": "λ = c/f = 3.00 × 10⁸ ÷ 9.00 × 10⁸ = 0.333 m.",
+     "unit": "m",
+     "id": "gceal-physics-ch-optics-e06-a"
+    },
+    {
+     "kind": "numeric",
+     "points": 1,
+     "prompt": "Wavelength of the 12 GHz signal (cm, 3 s.f.).",
+     "answer": 2.5,
+     "tolerance": 0.02,
+     "explanation": "λ = 3.00 × 10⁸ ÷ 1.2 × 10¹⁰ = 0.025 m = 2.50 cm.",
+     "unit": "cm",
+     "id": "gceal-physics-ch-optics-e06-b"
+    },
+    {
+     "kind": "mcq",
+     "points": 1,
+     "prompt": "Which part of the spectrum are these signals in?",
+     "choices": [
+      "infrared",
+      "visible light",
+      "X-rays",
+      "microwaves"
+     ],
+     "answer": 3,
+     "explanation": "Wavelengths from about 1 mm to 30 cm are microwaves.",
+     "id": "gceal-physics-ch-optics-e06-c"
+    },
+    {
+     "kind": "mcq",
+     "points": 1,
+     "prompt": "Which is true of both signals?",
+     "choices": [
+      "They are longitudinal",
+      "They need air to travel",
+      "They are transverse and travel at c in a vacuum",
+      "The 12 GHz signal is faster"
+     ],
+     "answer": 2,
+     "explanation": "All e.m. waves are transverse and travel at c in vacuum.",
+     "id": "gceal-physics-ch-optics-e06-d"
+    }
+   ],
+   "chapter": "gceal-physics-ch-optics"
+  },
+  {
+   "id": "gceal-physics-emwaves-q1",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "gceal-physics-emwaves",
+   "prompt": "Which of these cannot be polarised?",
+   "choices": [
+    "light",
+    "sound",
+    "radio waves",
+    "microwaves"
+   ],
+   "answer": 1,
+   "explanation": "Sound is longitudinal.",
+   "chapter": "gceal-physics-ch-optics"
+  },
+  {
+   "id": "gceal-physics-emwaves-q2",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "gceal-physics-emwaves",
+   "prompt": "Electromagnetic waves are",
+   "choices": [
+    "transverse",
+    "longitudinal",
+    "always visible",
+    "mechanical"
+   ],
+   "answer": 0,
+   "explanation": "E and B are perpendicular to the direction of travel.",
+   "chapter": "gceal-physics-ch-optics"
+  },
+  {
+   "id": "gceal-physics-emwaves-q3",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "gceal-physics-emwaves",
+   "prompt": "The wavelength of green light is about",
+   "choices": [
+    "550 nm",
+    "550 mm",
+    "5.5 nm",
+    "55 μm"
+   ],
+   "answer": 0,
+   "explanation": "Visible light is about 400–700 nm.",
+   "chapter": "gceal-physics-ch-optics"
+  },
+  {
+   "id": "gceal-physics-emwaves-q4",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "gceal-physics-emwaves",
+   "prompt": "Unpolarised light of intensity I₀ passes through a single ideal polaroid. The transmitted intensity is",
+   "choices": [
+    "I₀",
+    "0",
+    "I₀/4",
+    "I₀/2"
+   ],
+   "answer": 3,
+   "explanation": "Half the intensity is transmitted.",
+   "chapter": "gceal-physics-ch-optics"
+  },
+  {
+   "id": "gceal-physics-emwaves-q5",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "gceal-physics-emwaves",
+   "prompt": "Which radiation is used to sterilise surgical equipment?",
+   "choices": [
+    "gamma rays",
+    "microwaves",
+    "infrared only",
+    "radio waves"
+   ],
+   "answer": 0,
+   "explanation": "Highly ionising radiation kills microbes.",
+   "chapter": "gceal-physics-ch-optics"
+  },
+  {
+   "id": "gceal-physics-ch-optics-e07",
+   "kind": "numeric",
+   "tier": "application",
+   "lesson": "gceal-physics-refraction",
+   "source": "Original exercise, GCE Advanced Level style (g = 9.8 m/s²)",
+   "prompt": "Find the critical angle for glass of n = 1.50 (degrees, 3 s.f.).",
+   "answer": 41.8,
+   "tolerance": 0.1,
+   "unit": "°",
+   "explanation": "sin C = 1/1.50 = 0.667, so C = 41.8°.",
+   "difficulty": 1,
+   "points": 2,
+   "chapter": "gceal-physics-ch-optics"
+  },
+  {
+   "id": "gceal-physics-ch-optics-e08",
+   "kind": "numeric",
+   "tier": "application",
+   "lesson": "gceal-physics-refraction",
+   "source": "Original exercise, GCE Advanced Level style (g = 9.8 m/s²)",
+   "prompt": "Light travels in water (n = 1.33). Find its speed (10⁸ m/s, 3 s.f.).",
+   "answer": 2.26,
+   "tolerance": 0.01,
+   "unit": "× 10⁸ m/s",
+   "explanation": "v = c/n = 3.00 × 10⁸ ÷ 1.33 = 2.26 × 10⁸ m/s.",
+   "difficulty": 1,
+   "points": 2,
+   "chapter": "gceal-physics-ch-optics"
+  },
+  {
+   "id": "gceal-physics-ch-optics-e09",
+   "kind": "truefalse",
+   "tier": "application",
+   "lesson": "gceal-physics-refraction",
+   "source": "Original exercise, GCE Advanced Level style (g = 9.8 m/s²)",
+   "prompt": "True or false: the frequency of light changes when it passes from air into glass.",
+   "answer": false,
+   "explanation": "The frequency is fixed by the source; the speed and wavelength decrease.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "gceal-physics-ch-optics"
+  },
+  {
+   "id": "gceal-physics-ch-optics-e10",
+   "kind": "numeric",
+   "tier": "approfondissement",
+   "lesson": "gceal-physics-refraction",
+   "source": "Original exercise, GCE Advanced Level style (g = 9.8 m/s²)",
+   "prompt": "An object is 20 cm from a converging lens of focal length 15 cm. Find the image distance (cm).",
+   "answer": 60.000000000000014,
+   "tolerance": 0.1,
+   "unit": "cm",
+   "explanation": "1/v = 1/15 − 1/20 = 1/60, so v = 60 cm (real image).",
+   "difficulty": 2,
+   "points": 3,
+   "chapter": "gceal-physics-ch-optics"
+  },
+  {
+   "id": "gceal-physics-ch-optics-e11",
+   "kind": "numeric",
+   "tier": "approfondissement",
+   "lesson": "gceal-physics-refraction",
+   "source": "Original exercise, GCE Advanced Level style (g = 9.8 m/s²)",
+   "prompt": "A lens has focal length 25 cm. Find its power (dioptres).",
+   "answer": 4.0,
+   "tolerance": 0.01,
+   "unit": "D",
+   "explanation": "P = 1/f = 1/0.25 = 4.0 D.",
+   "difficulty": 2,
+   "points": 3,
+   "chapter": "gceal-physics-ch-optics"
+  },
+  {
+   "id": "gceal-physics-ch-optics-e12",
+   "kind": "problem",
+   "tier": "examen",
+   "lesson": "gceal-physics-refraction",
+   "source": "Original exercise, GCE Advanced Level style (g = 9.8 m/s²)",
+   "prompt": "A ray of light inside a glass block (n = 1.50) meets the glass–air boundary.",
+   "difficulty": 2,
+   "parts": [
+    {
+     "kind": "numeric",
+     "points": 1,
+     "prompt": "Critical angle (degrees, 3 s.f.).",
+     "answer": 41.8,
+     "tolerance": 0.1,
+     "explanation": "sin C = 1/1.50, C = 41.8°.",
+     "unit": "°",
+     "id": "gceal-physics-ch-optics-e12-a"
+    },
+    {
+     "kind": "mcq",
+     "points": 1,
+     "prompt": "The angle of incidence is 50°. The ray is",
+     "choices": [
+      "partly absorbed only",
+      "not reflected at all",
+      "totally internally reflected",
+      "refracted into the air"
+     ],
+     "answer": 2,
+     "explanation": "50° > 41.8°, so there is total internal reflection.",
+     "id": "gceal-physics-ch-optics-e12-b"
+    },
+    {
+     "kind": "numeric",
+     "points": 2,
+     "prompt": "For an angle of incidence of 30° inside the glass, find the angle of refraction in air (degrees, 3 s.f.).",
+     "answer": 48.6,
+     "tolerance": 0.1,
+     "explanation": "1.50 sin 30° = 1 × sin θ₂: sin θ₂ = 0.75, θ₂ = 48.6°.",
+     "unit": "°",
+     "id": "gceal-physics-ch-optics-e12-c"
+    }
+   ],
+   "figure": {
+    "kind": "shapes",
+    "w": 380,
+    "h": 230,
+    "items": [
+     {
+      "t": "rect",
+      "x": 40,
+      "y": 110,
+      "w": 300,
+      "h": 100,
+      "stroke": "blue",
+      "width": 1,
+      "fill": "lightblue"
+     },
+     {
+      "t": "text",
+      "x": 310,
+      "y": 200,
+      "text": "glass",
+      "size": 13,
+      "anchor": "middle",
+      "color": "blue"
+     },
+     {
+      "t": "text",
+      "x": 310,
+      "y": 20,
+      "text": "air",
+      "size": 13,
+      "anchor": "middle",
+      "color": "ink"
+     },
+     {
+      "t": "line",
+      "x1": 190,
+      "y1": 20,
+      "x2": 190,
+      "y2": 210,
+      "color": "grey",
+      "width": 1,
+      "dash": true
+     },
+     {
+      "t": "text",
+      "x": 196,
+      "y": 26,
+      "text": "normal",
+      "size": 12,
+      "anchor": "start",
+      "color": "grey"
+     },
+     {
+      "t": "line",
+      "x1": 125.72123903134607,
+      "y1": 33.39555568810219,
+      "x2": 190,
+      "y2": 110,
+      "color": "red",
+      "width": 3,
+      "arrow": "end"
+     },
+     {
+      "t": "line",
+      "x1": 190,
+      "y1": 110,
+      "x2": 232.85250731243593,
+      "y2": 200.3529889767772,
+      "color": "red",
+      "width": 3,
+      "arrow": "end"
+     },
+     {
+      "t": "text",
+      "x": 130,
+      "y": 40,
+      "text": "θ₁ = 40°",
+      "size": 13,
+      "anchor": "end",
+      "color": "ink"
+     },
+     {
+      "t": "text",
+      "x": 250,
+      "y": 150,
+      "text": "θ₂ = 25.4°",
+      "size": 13,
+      "anchor": "start",
+      "color": "ink"
+     }
+    ]
+   },
+   "chapter": "gceal-physics-ch-optics"
+  },
+  {
+   "id": "gceal-physics-refraction-q1",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "gceal-physics-refraction",
+   "prompt": "The refractive index of a material is",
+   "choices": [
+    "c divided by the speed of light in it",
+    "the frequency in it",
+    "the wavelength in it",
+    "the speed of light in it divided by c"
+   ],
+   "answer": 0,
+   "explanation": "n = c/v.",
+   "chapter": "gceal-physics-ch-optics"
+  },
+  {
+   "id": "gceal-physics-refraction-q2",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "gceal-physics-refraction",
+   "prompt": "Total internal reflection can occur when light goes from",
+   "choices": [
+    "glass to air at more than the critical angle",
+    "air to glass at any angle",
+    "air to water at 45°",
+    "glass to glass at 0°"
+   ],
+   "answer": 0,
+   "explanation": "Denser to less dense and θ > C.",
+   "chapter": "gceal-physics-ch-optics"
+  },
+  {
+   "id": "gceal-physics-refraction-q3",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "gceal-physics-refraction",
+   "prompt": "A converging lens forms a virtual, upright, magnified image when the object is",
+   "choices": [
+    "closer than the focal length",
+    "beyond 2f",
+    "at infinity",
+    "at 2f"
+   ],
+   "answer": 0,
+   "explanation": "Inside the focal length the rays still diverge after the lens.",
+   "chapter": "gceal-physics-ch-optics"
+  },
+  {
+   "id": "gceal-physics-refraction-q4",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "gceal-physics-refraction",
+   "prompt": "A lens of focal length 0.50 m has a power of",
+   "choices": [
+    "0.50 D",
+    "5.0 D",
+    "0.20 D",
+    "2.0 D"
+   ],
+   "answer": 3,
+   "explanation": "P = 1/f.",
+   "chapter": "gceal-physics-ch-optics"
+  },
+  {
+   "id": "gceal-physics-refraction-q5",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "gceal-physics-refraction",
+   "prompt": "Which does NOT change when light enters glass from air?",
+   "choices": [
+    "speed",
+    "wavelength",
+    "frequency",
+    "direction (in general)"
+   ],
+   "answer": 2,
+   "explanation": "The frequency is set by the source.",
+   "chapter": "gceal-physics-ch-optics"
+  },
+  {
+   "id": "gceal-physics-ch-optics-e13",
+   "kind": "numeric",
+   "tier": "application",
+   "lesson": "gceal-physics-grating",
+   "source": "Original exercise, GCE Advanced Level style (g = 9.8 m/s²)",
+   "prompt": "A grating has 400 lines per mm. Find the spacing d (μm).",
+   "answer": 2.5,
+   "tolerance": 0.005,
+   "unit": "μm",
+   "explanation": "d = 1/400 mm = 2.5 × 10⁻³ mm = 2.5 μm.",
+   "difficulty": 1,
+   "points": 2,
+   "chapter": "gceal-physics-ch-optics"
+  },
+  {
+   "id": "gceal-physics-ch-optics-e14",
+   "kind": "numeric",
+   "tier": "application",
+   "lesson": "gceal-physics-grating",
+   "source": "Original exercise, GCE Advanced Level style (g = 9.8 m/s²)",
+   "prompt": "Light of wavelength 500 nm passes through a grating of d = 2.0 μm. Find the angle of the first-order maximum (degrees, 3 s.f.).",
+   "answer": 14.5,
+   "tolerance": 0.1,
+   "unit": "°",
+   "explanation": "sin θ = λ/d = 0.25, θ = 14.5°.",
+   "difficulty": 1,
+   "points": 2,
+   "chapter": "gceal-physics-ch-optics"
+  },
+  {
+   "id": "gceal-physics-ch-optics-e15",
+   "kind": "truefalse",
+   "tier": "application",
+   "lesson": "gceal-physics-grating",
+   "source": "Original exercise, GCE Advanced Level style (g = 9.8 m/s²)",
+   "prompt": "True or false: in the spectrum of white light from a grating, red is deviated more than violet.",
+   "answer": true,
+   "explanation": "θ increases with λ in d sin θ = nλ, so red (long λ) is deviated most.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "gceal-physics-ch-optics"
+  },
+  {
+   "id": "gceal-physics-ch-optics-e16",
+   "kind": "numeric",
+   "tier": "approfondissement",
+   "lesson": "gceal-physics-grating",
+   "source": "Original exercise, GCE Advanced Level style (g = 9.8 m/s²)",
+   "prompt": "Using a grating with 600 lines per mm, a second-order maximum for light is seen at 47.0°. Find the wavelength (nm, 3 s.f.).",
+   "answer": 609.0,
+   "tolerance": 2,
+   "unit": "nm",
+   "explanation": "d = 1.667 × 10⁻⁶ m; λ = d sin θ/n = 1.667 × 10⁻⁶ × 0.7314 ÷ 2 = 6.09 × 10⁻⁷ m = 609 nm.",
+   "difficulty": 2,
+   "points": 3,
+   "chapter": "gceal-physics-ch-optics"
+  },
+  {
+   "id": "gceal-physics-ch-optics-e17",
+   "kind": "numeric",
+   "tier": "approfondissement",
+   "lesson": "gceal-physics-grating",
+   "source": "Original exercise, GCE Advanced Level style (g = 9.8 m/s²)",
+   "prompt": "What is the highest order visible with light of 589 nm and a grating of 300 lines per mm?",
+   "answer": 5,
+   "tolerance": 0,
+   "explanation": "d/λ = 3.33 × 10⁻⁶/5.89 × 10⁻⁷ = 5.66, so the highest order is 5.",
+   "difficulty": 2,
+   "points": 3,
+   "chapter": "gceal-physics-ch-optics"
+  },
+  {
+   "id": "gceal-physics-ch-optics-e18",
+   "kind": "problem",
+   "tier": "examen",
+   "lesson": "gceal-physics-grating",
+   "source": "Original exercise, GCE Advanced Level style (g = 9.8 m/s²)",
+   "prompt": "A grating with 500 lines per mm is used with a laser of wavelength 633 nm, incident normally. Screen distance 1.50 m.",
+   "difficulty": 2,
+   "parts": [
+    {
+     "kind": "numeric",
+     "points": 1,
+     "prompt": "Slit spacing d (μm).",
+     "answer": 2.0,
+     "tolerance": 0.005,
+     "explanation": "d = 1/500 mm = 2.0 μm.",
+     "unit": "μm",
+     "id": "gceal-physics-ch-optics-e18-a"
+    },
+    {
+     "kind": "numeric",
+     "points": 1,
+     "prompt": "Angle of the first-order beam (degrees, 3 s.f.).",
+     "answer": 18.5,
+     "tolerance": 0.1,
+     "explanation": "sin θ = 633 × 10⁻⁹/2.0 × 10⁻⁶ = 0.3165, θ = 18.5°.",
+     "unit": "°",
+     "id": "gceal-physics-ch-optics-e18-b"
+    },
+    {
+     "kind": "numeric",
+     "points": 1,
+     "prompt": "Highest order observed.",
+     "answer": 3,
+     "tolerance": 0,
+     "explanation": "d/λ = 2.0/0.633 = 3.16, so n_max = 3.",
+     "id": "gceal-physics-ch-optics-e18-c"
+    },
+    {
+     "kind": "numeric",
+     "points": 1,
+     "prompt": "Distance on the screen from the centre to the first-order spot (m, 2 s.f.).",
+     "answer": 0.5,
+     "tolerance": 0.02,
+     "explanation": "x = D tan θ = 1.50 × tan 18.45° = 0.50 m.",
+     "unit": "m",
+     "id": "gceal-physics-ch-optics-e18-d"
+    }
+   ],
+   "chapter": "gceal-physics-ch-optics"
+  },
+  {
+   "id": "gceal-physics-grating-q1",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "gceal-physics-grating",
+   "prompt": "The condition for a maximum from a diffraction grating is",
+   "choices": [
+    "λ sin θ = nd",
+    "d cos θ = nλ",
+    "d = nλ sin θ",
+    "d sin θ = nλ"
+   ],
+   "answer": 3,
+   "explanation": "Path difference between neighbouring slits is d sin θ.",
+   "chapter": "gceal-physics-ch-optics"
+  },
+  {
+   "id": "gceal-physics-grating-q2",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "gceal-physics-grating",
+   "prompt": "A grating with more lines per mm gives a larger angle for the same order because",
+   "choices": [
+    "λ is larger",
+    "d is smaller",
+    "the light is faster",
+    "the light is polarised"
+   ],
+   "answer": 1,
+   "explanation": "sin θ = nλ/d increases as d decreases.",
+   "chapter": "gceal-physics-ch-optics"
+  },
+  {
+   "id": "gceal-physics-grating-q3",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "gceal-physics-grating",
+   "prompt": "The central maximum (n = 0) of white light is",
+   "choices": [
+    "white",
+    "violet",
+    "dark",
+    "red"
+   ],
+   "answer": 0,
+   "explanation": "All wavelengths have zero path difference there.",
+   "chapter": "gceal-physics-ch-optics"
+  },
+  {
+   "id": "gceal-physics-grating-q4",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "gceal-physics-grating",
+   "prompt": "For which wavelength is the second-order maximum at the largest angle?",
+   "choices": [
+    "blue light",
+    "the same for all",
+    "red light",
+    "violet light"
+   ],
+   "answer": 2,
+   "explanation": "Larger λ means larger sin θ.",
+   "chapter": "gceal-physics-ch-optics"
+  },
+  {
+   "id": "gceal-physics-grating-q5",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "gceal-physics-grating",
+   "prompt": "A single slit of width a: the first minimum is at",
+   "choices": [
+    "a cos θ = λ",
+    "a = λ sin θ",
+    "a sin θ = λ/2",
+    "a sin θ = λ"
+   ],
+   "answer": 3,
+   "explanation": "Path difference of λ between waves from the top and the bottom edge of the slit.",
+   "chapter": "gceal-physics-ch-optics"
+  },
+  {
+   "id": "gceal-physics-ch-optics-m01",
+   "kind": "mcq",
+   "tier": "examen",
+   "lesson": "gceal-physics-refraction",
+   "source": "Original exercise, GCE Advanced Level style (g = 9.8 m/s²)",
+   "prompt": "The critical angle for a glass of refractive index 1.60 (glass to air) is",
+   "choices": [
+    "51.3°",
+    "60.0°",
+    "38.7°",
+    "32.0°"
+   ],
+   "answer": 2,
+   "explanation": "sin C = 1/1.60 = 0.625 gives C = 38.7°.",
+   "difficulty": 3,
+   "points": 2,
+   "chapter": "gceal-physics-ch-optics"
+  },
+  {
+   "id": "gceal-physics-ch-optics-m02",
+   "kind": "problem",
+   "tier": "examen",
+   "lesson": "gceal-physics-grating",
+   "source": "Original exercise, GCE Advanced Level style (g = 9.8 m/s²)",
+   "prompt": "Question 7 (4 marks). Sodium light (wavelength 589 nm) falls normally on a diffraction grating with 400 lines per mm.",
+   "difficulty": 2,
+   "parts": [
+    {
+     "kind": "numeric",
+     "points": 1,
+     "prompt": "Slit spacing d (μm).",
+     "answer": 2.5,
+     "tolerance": 0.005,
+     "explanation": "d = 1/400 mm = 2.5 μm.",
+     "unit": "μm",
+     "id": "gceal-physics-ch-optics-m02-a"
+    },
+    {
+     "kind": "numeric",
+     "points": 1,
+     "prompt": "Angle of the first-order maximum (degrees, 3 s.f.).",
+     "answer": 13.6,
+     "tolerance": 0.1,
+     "explanation": "sin θ = λ/d = 589 × 10⁻⁹/2.5 × 10⁻⁶ = 0.2356, θ = 13.6°.",
+     "unit": "°",
+     "id": "gceal-physics-ch-optics-m02-b"
+    },
+    {
+     "kind": "numeric",
+     "points": 1,
+     "prompt": "The greatest order of maximum that can be observed.",
+     "answer": 4,
+     "tolerance": 0,
+     "explanation": "d/λ = 2.5/0.589 = 4.24, so n_max = 4.",
+     "id": "gceal-physics-ch-optics-m02-c"
+    },
+    {
+     "kind": "numeric",
+     "points": 1,
+     "prompt": "Angle of the second-order maximum (degrees, 3 s.f.).",
+     "answer": 28.1,
+     "tolerance": 0.1,
+     "explanation": "sin θ = 2 × 0.2356 = 0.4712, θ = 28.1°.",
+     "unit": "°",
+     "id": "gceal-physics-ch-optics-m02-d"
+    }
+   ],
+   "chapter": "gceal-physics-ch-optics"
+  }
+ ]
+}

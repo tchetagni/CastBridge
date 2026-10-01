@@ -1,0 +1,1629 @@
+{
+ "chapter": "gceal-physics-ch-magnetic",
+ "lessons": [
+  {
+   "id": "gceal-physics-bfield",
+   "title": "Magnetic fields and forces on moving charges",
+   "minutes": 40,
+   "programRef": "GCE Advanced Level Physics — magnetic fields and electromagnetic induction (to be checked against the official syllabus)",
+   "status": "draft",
+   "author": "CastBridge (AI draft)",
+   "source": "Original writing following the Cameroonian curriculum; to be reviewed by a teacher",
+   "objectives": [
+    "Use F = BIl sin θ and F = Bqv sin θ with Fleming's left-hand rule",
+    "Analyse a charged particle moving in a uniform magnetic field (r = mv/qB) and describe the velocity selector and mass spectrometer",
+    "Calculate the magnetic field of a long wire and a solenoid and the force between parallel currents"
+   ],
+   "prerequisites": [
+    "gceal-physics-efield"
+   ],
+   "exercises": [
+    "gceal-physics-ch-magnetic-e01",
+    "gceal-physics-ch-magnetic-e02",
+    "gceal-physics-ch-magnetic-e03",
+    "gceal-physics-ch-magnetic-e04",
+    "gceal-physics-ch-magnetic-e05",
+    "gceal-physics-ch-magnetic-e06"
+   ],
+   "selfCheck": [
+    "gceal-physics-bfield-q1",
+    "gceal-physics-bfield-q2",
+    "gceal-physics-bfield-q3",
+    "gceal-physics-bfield-q4",
+    "gceal-physics-bfield-q5"
+   ],
+   "reviewNotes": [
+    "Constants used: e = 1.60 × 10⁻¹⁹ C; h = 6.63 × 10⁻³⁴ J s; c = 3.00 × 10⁸ m/s; mₑ = 9.11 × 10⁻³¹ kg; ε₀ = 8.85 × 10⁻¹² F/m; μ₀ = 4π × 10⁻⁷ H/m.",
+    "Hall effect and the cyclotron are not covered; check the syllabus.",
+    "Fleming's rules are described in words; the direction conventions should be checked against the board's preferred rule (left-hand/right-hand).",
+    "Syllabus references, scope and level of difficulty are to be checked against the official text; all facts, formulas and worked examples to be verified by a teacher before release."
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Magnetic flux density and forces",
+     "md": "The **magnetic flux density** B (tesla, T = N A⁻¹ m⁻¹) is defined by the force on a current-carrying conductor perpendicular to the field: **F = BIl** (in general F = BIl sin θ, θ = angle between the wire and B).\n\nOn a moving charge: **F = Bqv sin θ**, always perpendicular to both v and B (Fleming's left-hand rule for a positive charge: first finger field, second finger current/velocity, thumb force). The force does **no work**, so the speed is unchanged."
+    },
+    {
+     "type": "key",
+     "style": "formule",
+     "title": "Motion in a uniform field",
+     "md": "A charge entering a uniform field at right angles moves on a **circle**: Bqv = mv²/r gives **r = mv/(qB)**, with period **T = 2πm/(qB)** independent of the speed.\n\n**Velocity selector**: crossed fields E and B; particles with v = E/B pass undeflected. **Mass spectrometer**: ions accelerated through V (qV = ½mv²) move on a circle of radius r = (1/B)√(2mV/q), so r depends on the mass.",
+     "tex": "F=BIl\\sin\\theta\\qquad r=\\frac{mv}{qB}\\qquad T=\\frac{2\\pi m}{qB}"
+    },
+    {
+     "type": "illustration",
+     "figure": {
+      "kind": "shapes",
+      "w": 400,
+      "h": 250,
+      "items": [
+       {
+        "t": "text",
+        "x": 60,
+        "y": 40,
+        "text": "×",
+        "size": 14,
+        "anchor": "middle",
+        "color": "grey"
+       },
+       {
+        "t": "text",
+        "x": 60,
+        "y": 100,
+        "text": "×",
+        "size": 14,
+        "anchor": "middle",
+        "color": "grey"
+       },
+       {
+        "t": "text",
+        "x": 60,
+        "y": 160,
+        "text": "×",
+        "size": 14,
+        "anchor": "middle",
+        "color": "grey"
+       },
+       {
+        "t": "text",
+        "x": 60,
+        "y": 220,
+        "text": "×",
+        "size": 14,
+        "anchor": "middle",
+        "color": "grey"
+       },
+       {
+        "t": "text",
+        "x": 120,
+        "y": 40,
+        "text": "×",
+        "size": 14,
+        "anchor": "middle",
+        "color": "grey"
+       },
+       {
+        "t": "text",
+        "x": 120,
+        "y": 100,
+        "text": "×",
+        "size": 14,
+        "anchor": "middle",
+        "color": "grey"
+       },
+       {
+        "t": "text",
+        "x": 120,
+        "y": 160,
+        "text": "×",
+        "size": 14,
+        "anchor": "middle",
+        "color": "grey"
+       },
+       {
+        "t": "text",
+        "x": 120,
+        "y": 220,
+        "text": "×",
+        "size": 14,
+        "anchor": "middle",
+        "color": "grey"
+       },
+       {
+        "t": "text",
+        "x": 180,
+        "y": 40,
+        "text": "×",
+        "size": 14,
+        "anchor": "middle",
+        "color": "grey"
+       },
+       {
+        "t": "text",
+        "x": 180,
+        "y": 100,
+        "text": "×",
+        "size": 14,
+        "anchor": "middle",
+        "color": "grey"
+       },
+       {
+        "t": "text",
+        "x": 180,
+        "y": 160,
+        "text": "×",
+        "size": 14,
+        "anchor": "middle",
+        "color": "grey"
+       },
+       {
+        "t": "text",
+        "x": 180,
+        "y": 220,
+        "text": "×",
+        "size": 14,
+        "anchor": "middle",
+        "color": "grey"
+       },
+       {
+        "t": "text",
+        "x": 240,
+        "y": 40,
+        "text": "×",
+        "size": 14,
+        "anchor": "middle",
+        "color": "grey"
+       },
+       {
+        "t": "text",
+        "x": 240,
+        "y": 100,
+        "text": "×",
+        "size": 14,
+        "anchor": "middle",
+        "color": "grey"
+       },
+       {
+        "t": "text",
+        "x": 240,
+        "y": 160,
+        "text": "×",
+        "size": 14,
+        "anchor": "middle",
+        "color": "grey"
+       },
+       {
+        "t": "text",
+        "x": 240,
+        "y": 220,
+        "text": "×",
+        "size": 14,
+        "anchor": "middle",
+        "color": "grey"
+       },
+       {
+        "t": "text",
+        "x": 300,
+        "y": 40,
+        "text": "×",
+        "size": 14,
+        "anchor": "middle",
+        "color": "grey"
+       },
+       {
+        "t": "text",
+        "x": 300,
+        "y": 100,
+        "text": "×",
+        "size": 14,
+        "anchor": "middle",
+        "color": "grey"
+       },
+       {
+        "t": "text",
+        "x": 300,
+        "y": 160,
+        "text": "×",
+        "size": 14,
+        "anchor": "middle",
+        "color": "grey"
+       },
+       {
+        "t": "text",
+        "x": 300,
+        "y": 220,
+        "text": "×",
+        "size": 14,
+        "anchor": "middle",
+        "color": "grey"
+       },
+       {
+        "t": "circle",
+        "cx": 180,
+        "cy": 130,
+        "r": 55,
+        "stroke": "red",
+        "width": 3
+       },
+       {
+        "t": "circle",
+        "cx": 235,
+        "cy": 130,
+        "r": 7,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "orange"
+       },
+       {
+        "t": "line",
+        "x1": 235,
+        "y1": 130,
+        "x2": 235,
+        "y2": 70,
+        "color": "blue",
+        "width": 3,
+        "arrow": "end"
+       },
+       {
+        "t": "text",
+        "x": 250,
+        "y": 82,
+        "text": "v",
+        "size": 15,
+        "anchor": "start",
+        "color": "blue"
+       },
+       {
+        "t": "line",
+        "x1": 228,
+        "y1": 130,
+        "x2": 195,
+        "y2": 130,
+        "color": "green",
+        "width": 3,
+        "arrow": "end"
+       },
+       {
+        "t": "text",
+        "x": 206,
+        "y": 150,
+        "text": "F",
+        "size": 15,
+        "anchor": "middle",
+        "color": "green",
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 345,
+        "y": 130,
+        "text": "B into page",
+        "size": 12,
+        "anchor": "end",
+        "color": "ink"
+       }
+      ]
+     },
+     "caption": "A charged particle moving at right angles to a field into the page: the force is perpendicular to the velocity, so the path is a circle.",
+     "alt": "A grid of crosses showing a magnetic field into the page, a circular path with a velocity arrow along the tangent and a force arrow to the centre."
+    },
+    {
+     "type": "key",
+     "style": "formule",
+     "title": "Fields of currents",
+     "md": "Long straight wire: **B = μ₀I/(2πr)** (direction by the right-hand grip rule). Long solenoid with n turns per metre: **B = μ₀nI** inside, almost zero outside. μ₀ = 4π × 10⁻⁷ T m A⁻¹.\n\nTwo long parallel wires carrying I₁ and I₂ at distance d attract if the currents are in the same direction: **F/L = μ₀I₁I₂/(2πd)**. This defines the ampere (2 × 10⁻⁷ N m⁻¹ for 1 A in wires 1 m apart).",
+     "tex": "B=\\frac{\\mu_0 I}{2\\pi r}\\qquad B=\\mu_0 nI"
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Common mistakes",
+     "md": "- Using the wrong hand: the left-hand rule is for the force on a conductor (motor effect); the right-hand rule is used for the field of a current.\n- Forgetting that the force on a negative charge is opposite to the left-hand rule direction.\n- Using θ as the angle to the perpendicular: it is between the field and the wire or velocity.\n- Believing the magnetic force changes the speed: it only changes the direction."
+    },
+    {
+     "type": "example",
+     "title": "Example 1 — Wire in a field",
+     "statement": "A straight wire 0.25 m long carries 8.0 A at right angles to a field of 0.40 T. Find the force. Then find B at 5.0 cm from a long straight wire carrying 10 A.",
+     "steps": [
+      "F = BIl = 0.40 × 8.0 × 0.25 = 0.80 N.",
+      "B = μ₀I/(2πr) = 4π × 10⁻⁷ × 10 ÷ (2π × 0.050) = 4.0 × 10⁻⁵ T (comparable with the Earth's field)."
+     ],
+     "answer": "F = 0.80 N; B = 4.0 × 10⁻⁵ T"
+    },
+    {
+     "type": "example",
+     "title": "Example 2 — Electron in a field",
+     "statement": "An electron moves at 2.0 × 10⁷ m/s at right angles to a field of 1.0 mT. Find the radius and period of its circular path.",
+     "steps": [
+      "r = mv/(eB) = 9.11 × 10⁻³¹ × 2.0 × 10⁷ ÷ (1.60 × 10⁻¹⁹ × 1.0 × 10⁻³) = 0.114 m.",
+      "T = 2πm/(eB) = 2π × 9.11 × 10⁻³¹ ÷ (1.60 × 10⁻¹⁹ × 1.0 × 10⁻³) = 3.6 × 10⁻⁸ s."
+     ],
+     "answer": "r = 0.11 m; T = 3.6 × 10⁻⁸ s"
+    }
+   ],
+   "chapter": "gceal-physics-ch-magnetic"
+  },
+  {
+   "id": "gceal-physics-induction",
+   "title": "Electromagnetic induction",
+   "minutes": 35,
+   "programRef": "GCE Advanced Level Physics — magnetic fields and electromagnetic induction (to be checked against the official syllabus)",
+   "status": "draft",
+   "author": "CastBridge (AI draft)",
+   "source": "Original writing following the Cameroonian curriculum; to be reviewed by a teacher",
+   "objectives": [
+    "Define magnetic flux and flux linkage and state Faraday's and Lenz's laws",
+    "Calculate the emf induced in a moving conductor (ε = Blv), a changing field and a rotating coil",
+    "Explain eddy currents and the operation of a simple a.c. generator"
+   ],
+   "prerequisites": [
+    "gceal-physics-bfield"
+   ],
+   "exercises": [
+    "gceal-physics-ch-magnetic-e07",
+    "gceal-physics-ch-magnetic-e08",
+    "gceal-physics-ch-magnetic-e09",
+    "gceal-physics-ch-magnetic-e10",
+    "gceal-physics-ch-magnetic-e11",
+    "gceal-physics-ch-magnetic-e12"
+   ],
+   "selfCheck": [
+    "gceal-physics-induction-q1",
+    "gceal-physics-induction-q2",
+    "gceal-physics-induction-q3",
+    "gceal-physics-induction-q4",
+    "gceal-physics-induction-q5"
+   ],
+   "reviewNotes": [
+    "Self-inductance and energy stored in an inductor are not covered; check the syllabus.",
+    "Direction rules (Fleming's right-hand rule) are described through Lenz's law only.",
+    "Syllabus references, scope and level of difficulty are to be checked against the official text; all facts, formulas and worked examples to be verified by a teacher before release."
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Flux and the laws of induction",
+     "md": "**Magnetic flux** Φ = BA cos θ (weber, Wb = T m²) where θ is the angle between B and the normal to the area. **Flux linkage** = NΦ for a coil of N turns.\n\n**Faraday's law**: the induced emf equals the rate of change of flux linkage: **ε = −N ΔΦ/Δt**. **Lenz's law** (the minus sign): the induced current flows in a direction that opposes the change producing it (conservation of energy)."
+    },
+    {
+     "type": "key",
+     "style": "formule",
+     "title": "Useful results",
+     "md": "- Straight conductor of length l moving at speed v at right angles to B: **ε = Blv**.\n- Coil of N turns, area A, rotating at angular speed ω in field B: **ε = NBAω sin ωt**, so the peak emf is ε₀ = NBAω.\n- Eddy currents: induced currents in a bulk conductor that oppose the motion (used in induction cookers and electromagnetic braking, and reduced by laminating transformer cores).",
+     "tex": "\\varepsilon=-N\\frac{\\Delta\\Phi}{\\Delta t}\\qquad \\varepsilon=Blv\\qquad \\varepsilon_0=NBA\\omega"
+    },
+    {
+     "type": "illustration",
+     "figure": {
+      "kind": "shapes",
+      "w": 380,
+      "h": 240,
+      "items": [
+       {
+        "t": "line",
+        "x1": 40,
+        "y1": 60,
+        "x2": 320,
+        "y2": 60,
+        "color": "ink",
+        "width": 3
+       },
+       {
+        "t": "line",
+        "x1": 40,
+        "y1": 190,
+        "x2": 320,
+        "y2": 190,
+        "color": "ink",
+        "width": 3
+       },
+       {
+        "t": "line",
+        "x1": 40,
+        "y1": 60,
+        "x2": 40,
+        "y2": 190,
+        "color": "ink",
+        "width": 3
+       },
+       {
+        "t": "line",
+        "x1": 180,
+        "y1": 50,
+        "x2": 180,
+        "y2": 200,
+        "color": "red",
+        "width": 5
+       },
+       {
+        "t": "text",
+        "x": 190,
+        "y": 40,
+        "text": "rod, length l",
+        "size": 12,
+        "anchor": "start",
+        "color": "red"
+       },
+       {
+        "t": "line",
+        "x1": 185,
+        "y1": 125,
+        "x2": 255,
+        "y2": 125,
+        "color": "blue",
+        "width": 3,
+        "arrow": "end"
+       },
+       {
+        "t": "text",
+        "x": 255,
+        "y": 112,
+        "text": "v",
+        "size": 15,
+        "anchor": "start",
+        "color": "blue"
+       },
+       {
+        "t": "text",
+        "x": 60,
+        "y": 125,
+        "text": "emf = B l v",
+        "size": 14,
+        "anchor": "start",
+        "color": "ink",
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 100,
+        "y": 90,
+        "text": "×",
+        "size": 14,
+        "anchor": "middle",
+        "color": "grey"
+       },
+       {
+        "t": "text",
+        "x": 100,
+        "y": 160,
+        "text": "×",
+        "size": 14,
+        "anchor": "middle",
+        "color": "grey"
+       },
+       {
+        "t": "text",
+        "x": 140,
+        "y": 90,
+        "text": "×",
+        "size": 14,
+        "anchor": "middle",
+        "color": "grey"
+       },
+       {
+        "t": "text",
+        "x": 140,
+        "y": 160,
+        "text": "×",
+        "size": 14,
+        "anchor": "middle",
+        "color": "grey"
+       },
+       {
+        "t": "text",
+        "x": 230,
+        "y": 90,
+        "text": "×",
+        "size": 14,
+        "anchor": "middle",
+        "color": "grey"
+       },
+       {
+        "t": "text",
+        "x": 230,
+        "y": 160,
+        "text": "×",
+        "size": 14,
+        "anchor": "middle",
+        "color": "grey"
+       },
+       {
+        "t": "text",
+        "x": 280,
+        "y": 90,
+        "text": "×",
+        "size": 14,
+        "anchor": "middle",
+        "color": "grey"
+       },
+       {
+        "t": "text",
+        "x": 280,
+        "y": 160,
+        "text": "×",
+        "size": 14,
+        "anchor": "middle",
+        "color": "grey"
+       }
+      ]
+     },
+     "caption": "A rod sliding on rails in a field into the page: emf = Blv.",
+     "alt": "Two horizontal rails joined at the left, a vertical rod moving to the right, crosses showing a field into the page and the emf formula."
+    },
+    {
+     "type": "key",
+     "style": "retenir",
+     "title": "Direction and energy",
+     "md": "If a magnet is pushed towards a coil, the coil end nearest the magnet becomes the same pole as the approaching pole, repelling it: work must be done to push it, and that work becomes electrical energy. If Lenz's law were reversed, energy would be created from nothing.\n\nFor a moving rod: electrical power εI = mechanical power Fv."
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Common mistakes",
+     "md": "- Thinking an emf is induced by a steady flux: only a **change** of flux induces an emf.\n- Forgetting N, the number of turns, in Faraday's law.\n- Treating the minus sign as meaning a negative emf rather than 'opposing the change'.\n- Mixing flux (Wb) with flux density (T)."
+    },
+    {
+     "type": "example",
+     "title": "Example 1 — Moving rod",
+     "statement": "A rod 0.50 m long moves at 4.0 m/s at right angles to a field of 0.30 T on rails joined to a 2.0 Ω resistor. Find the emf, the current, the magnetic force on the rod and the power.",
+     "steps": [
+      "ε = Blv = 0.30 × 0.50 × 4.0 = 0.60 V; I = 0.60/2.0 = 0.30 A.",
+      "Force F = BIl = 0.30 × 0.30 × 0.50 = 0.045 N, opposing the motion.",
+      "Power = Fv = 0.045 × 4.0 = 0.18 W = εI ✓ (the energy comes from whoever pushes the rod)."
+     ],
+     "answer": "ε = 0.60 V, I = 0.30 A, F = 0.045 N, P = 0.18 W"
+    },
+    {
+     "type": "example",
+     "title": "Example 2 — Changing field",
+     "statement": "A coil of 200 turns and area 1.0 × 10⁻² m² has its axis along a field that falls from 0.50 T to zero in 0.020 s. Find the average emf.",
+     "steps": [
+      "Change of flux = ΔB × A = 0.50 × 1.0 × 10⁻² = 5.0 × 10⁻³ Wb.",
+      "ε = NΔΦ/Δt = 200 × 5.0 × 10⁻³ ÷ 0.020 = 50 V."
+     ],
+     "answer": "ε = 50 V"
+    }
+   ],
+   "chapter": "gceal-physics-ch-magnetic"
+  },
+  {
+   "id": "gceal-physics-ac",
+   "title": "Alternating current and transformers",
+   "minutes": 35,
+   "programRef": "GCE Advanced Level Physics — magnetic fields and electromagnetic induction (to be checked against the official syllabus)",
+   "status": "draft",
+   "author": "CastBridge (AI draft)",
+   "source": "Original writing following the Cameroonian curriculum; to be reviewed by a teacher",
+   "objectives": [
+    "Describe a sinusoidal alternating current and use peak, r.m.s. values, frequency and period",
+    "Use P = I_rms V_rms and the transformer equation V_s/V_p = N_s/N_p; explain high-voltage power transmission",
+    "Describe half-wave and full-wave rectification, and the reactance of a capacitor"
+   ],
+   "prerequisites": [
+    "gceal-physics-induction"
+   ],
+   "exercises": [
+    "gceal-physics-ch-magnetic-e13",
+    "gceal-physics-ch-magnetic-e14",
+    "gceal-physics-ch-magnetic-e15",
+    "gceal-physics-ch-magnetic-e16",
+    "gceal-physics-ch-magnetic-e17",
+    "gceal-physics-ch-magnetic-e18"
+   ],
+   "selfCheck": [
+    "gceal-physics-ac-q1",
+    "gceal-physics-ac-q2",
+    "gceal-physics-ac-q3",
+    "gceal-physics-ac-q4",
+    "gceal-physics-ac-q5"
+   ],
+   "reviewNotes": [
+    "Mains in Cameroon: 220 V (r.m.s.) and 50 Hz assumed; to be confirmed.",
+    "Reactance, impedance of RLC circuits and resonance are only touched (capacitor reactance); check the syllabus before extending.",
+    "Syllabus references, scope and level of difficulty are to be checked against the official text; all facts, formulas and worked examples to be verified by a teacher before release."
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Alternating current and r.m.s. values",
+     "md": "An alternating current varies sinusoidally: **I = I₀ sin ωt**, **V = V₀ sin ωt** with ω = 2πf. The **r.m.s.** (root mean square) value is the steady d.c. value that would dissipate the same power in a resistor:\n\n**I_rms = I₀/√2**, **V_rms = V₀/√2**. Mean power P = I_rms V_rms = ½I₀V₀ = I_rms²R."
+    },
+    {
+     "type": "key",
+     "style": "formule",
+     "title": "Transformers",
+     "md": "A transformer works by mutual induction in two coils on a soft-iron core and needs a.c. For an ideal transformer: **V_s/V_p = N_s/N_p** and (100 % efficient) V_pI_p = V_sI_s, so a step-up transformer gives a smaller current.\n\nReal transformers lose energy by resistance of the coils (heating), eddy currents, hysteresis and flux leakage; efficiency = P_out/P_in × 100 %.",
+     "tex": "\\frac{V_s}{V_p}=\\frac{N_s}{N_p}\\qquad P=I_{rms}V_{rms}"
+    },
+    {
+     "type": "illustration",
+     "figure": {
+      "kind": "plot",
+      "xmin": 0,
+      "xmax": 2,
+      "ymin": -1.3,
+      "ymax": 1.3,
+      "grid": 1,
+      "w": 400,
+      "h": 250,
+      "curves": [
+       {
+        "expr": "sin(2*pi*x)",
+        "color": "blue",
+        "label": "V"
+       }
+      ],
+      "points": [],
+      "segments": [
+       {
+        "x1": 0,
+        "y1": 0.707,
+        "x2": 2,
+        "y2": 0.707,
+        "color": "red",
+        "dash": true,
+        "label": "0.707 V₀ = V_rms"
+       }
+      ],
+      "xlabel": "t / T",
+      "ylabel": "V / V₀"
+     },
+     "caption": "A sinusoidal alternating voltage: the r.m.s. value is 0.707 of the peak.",
+     "alt": "A sine wave over two periods with a dashed horizontal line at 0.707 of the peak value."
+    },
+    {
+     "type": "key",
+     "style": "retenir",
+     "title": "Power transmission and rectification",
+     "md": "Electricity is transmitted at high voltage and low current to reduce the power lost in the cables (P_loss = I²R). A **diode** conducts in one direction only: **half-wave rectification** removes half the cycle; four diodes in a bridge give **full-wave rectification**; a smoothing capacitor reduces the ripple.\n\nThe **reactance** of a capacitor to a.c. is X_C = 1/(2πfC): it falls with frequency (blocks d.c.)."
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Common mistakes",
+     "md": "- Quoting mains as 220 V peak: 220 V is the r.m.s. value; the peak is about 311 V.\n- Using the peak value in P = V²/R: use r.m.s.\n- Believing a transformer works on d.c. (a steady current gives no changing flux).\n- Forgetting that a step-up transformer does not give more power: it steps down the current."
+    },
+    {
+     "type": "example",
+     "title": "Example 1 — Peak and r.m.s.",
+     "statement": "A mains supply is rated 220 V (r.m.s.), 50 Hz. Find the peak voltage, the period, and the mean power in a 44 Ω heater.",
+     "steps": [
+      "V₀ = √2 × V_rms = 1.414 × 220 = 311 V; T = 1/f = 0.020 s.",
+      "P = V_rms²/R = 220²/44 = 1100 W."
+     ],
+     "answer": "V₀ = 311 V; T = 20 ms; P = 1.1 kW"
+    },
+    {
+     "type": "example",
+     "title": "Example 2 — Transformer and transmission",
+     "statement": "(a) A transformer has 1100 turns on the primary (220 V). How many secondary turns give 12 V? (b) A 100 kW supply is sent along cables of total resistance 5.0 Ω at 10 kV, and at 1.0 kV. Find the power loss.",
+     "steps": [
+      "(a) N_s = N_p V_s/V_p = 1100 × 12/220 = 60 turns.",
+      "(b) At 10 kV: I = P/V = 100 000/10 000 = 10 A, loss = I²R = 100 × 5.0 = 500 W.",
+      "At 1.0 kV: I = 100 A, loss = 100² × 5.0 = 50 000 W (half the power!). High voltage wastes far less."
+     ],
+     "answer": "(a) 60 turns; (b) 500 W against 50 kW"
+    }
+   ],
+   "chapter": "gceal-physics-ch-magnetic"
+  }
+ ],
+ "exercises": [
+  {
+   "id": "gceal-physics-ch-magnetic-e01",
+   "kind": "numeric",
+   "tier": "application",
+   "lesson": "gceal-physics-bfield",
+   "source": "Original exercise, GCE Advanced Level style (g = 9.8 m/s²)",
+   "prompt": "A proton moves at 3.0 × 10⁶ m/s perpendicular to a field of 0.50 T. Find the force on it (10⁻¹³ N, 3 s.f.).",
+   "answer": 2.4,
+   "tolerance": 0.02,
+   "unit": "× 10⁻¹³ N",
+   "explanation": "F = Bqv = 0.50 × 1.60 × 10⁻¹⁹ × 3.0 × 10⁶ = 2.40 × 10⁻¹³ N.",
+   "difficulty": 1,
+   "points": 2,
+   "chapter": "gceal-physics-ch-magnetic"
+  },
+  {
+   "id": "gceal-physics-ch-magnetic-e02",
+   "kind": "numeric",
+   "tier": "application",
+   "lesson": "gceal-physics-bfield",
+   "source": "Original exercise, GCE Advanced Level style (g = 9.8 m/s²)",
+   "prompt": "A solenoid has 800 turns per metre and carries 1.5 A. Find B inside (mT, 3 s.f.).",
+   "answer": 1.51,
+   "tolerance": 0.01,
+   "unit": "mT",
+   "explanation": "B = μ₀nI = 4π × 10⁻⁷ × 800 × 1.5 = 1.51 × 10⁻³ T = 1.51 mT.",
+   "difficulty": 1,
+   "points": 2,
+   "chapter": "gceal-physics-ch-magnetic"
+  },
+  {
+   "id": "gceal-physics-ch-magnetic-e03",
+   "kind": "truefalse",
+   "tier": "application",
+   "lesson": "gceal-physics-bfield",
+   "source": "Original exercise, GCE Advanced Level style (g = 9.8 m/s²)",
+   "prompt": "True or false: a magnetic field can change the speed of a charged particle.",
+   "answer": false,
+   "explanation": "The force is perpendicular to the velocity, so it does no work: it changes only the direction.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "gceal-physics-ch-magnetic"
+  },
+  {
+   "id": "gceal-physics-ch-magnetic-e04",
+   "kind": "numeric",
+   "tier": "approfondissement",
+   "lesson": "gceal-physics-bfield",
+   "source": "Original exercise, GCE Advanced Level style (g = 9.8 m/s²)",
+   "prompt": "Find the force per metre between two long parallel wires 0.10 m apart carrying 20 A each in the same direction (10⁻³ N/m).",
+   "answer": 0.8000000000000002,
+   "tolerance": 0.01,
+   "unit": "× 10⁻³ N/m",
+   "explanation": "F/L = μ₀I₁I₂/(2πd) = 2 × 10⁻⁷ × 400/0.10 = 8.0 × 10⁻⁴ N/m, i.e. 0.80 in units of 10⁻³ N/m (attractive).",
+   "difficulty": 2,
+   "points": 3,
+   "chapter": "gceal-physics-ch-magnetic"
+  },
+  {
+   "id": "gceal-physics-ch-magnetic-e05",
+   "kind": "numeric",
+   "tier": "approfondissement",
+   "lesson": "gceal-physics-bfield",
+   "source": "Original exercise, GCE Advanced Level style (g = 9.8 m/s²)",
+   "prompt": "Find the speed of ions that pass undeflected through crossed fields E = 5.0 × 10⁴ V/m and B = 0.20 T (m/s).",
+   "answer": 250000.0,
+   "tolerance": 100,
+   "unit": "m/s",
+   "explanation": "v = E/B = 2.5 × 10⁵ m/s.",
+   "difficulty": 2,
+   "points": 3,
+   "chapter": "gceal-physics-ch-magnetic"
+  },
+  {
+   "id": "gceal-physics-ch-magnetic-e06",
+   "kind": "problem",
+   "tier": "examen",
+   "lesson": "gceal-physics-bfield",
+   "source": "Original exercise, GCE Advanced Level style (g = 9.8 m/s²)",
+   "prompt": "In a mass spectrometer, singly charged neon ions (q = e) of mass 20u and 22u (u = 1.66 × 10⁻²⁷ kg) are accelerated through 1000 V and enter a uniform field of 0.20 T perpendicular to their path.",
+   "difficulty": 2,
+   "parts": [
+    {
+     "kind": "numeric",
+     "points": 2,
+     "prompt": "Radius of the path of the 20u ions (cm, 3 s.f.).",
+     "answer": 10.2,
+     "tolerance": 0.1,
+     "explanation": "r = (1/B)√(2mV/q) = 5 × √(2 × 3.32 × 10⁻²⁶ × 1000 ÷ 1.60 × 10⁻¹⁹) = 0.102 m = 10.2 cm.",
+     "unit": "cm",
+     "id": "gceal-physics-ch-magnetic-e06-a"
+    },
+    {
+     "kind": "numeric",
+     "points": 1,
+     "prompt": "Radius of the path of the 22u ions (cm, 3 s.f.).",
+     "answer": 10.7,
+     "tolerance": 0.1,
+     "explanation": "r ∝ √m: r = 10.19 × √(22/20) = 10.7 cm.",
+     "unit": "cm",
+     "id": "gceal-physics-ch-magnetic-e06-b"
+    },
+    {
+     "kind": "numeric",
+     "points": 1,
+     "prompt": "Distance between the points where the two kinds of ion strike the detector after half a circle (mm, 2 s.f.).",
+     "answer": 9.9,
+     "tolerance": 0.6,
+     "explanation": "Separation = 2(r₂₂ − r₂₀) = 2 × 0.50 cm = about 10 mm.",
+     "unit": "mm",
+     "id": "gceal-physics-ch-magnetic-e06-c"
+    }
+   ],
+   "figure": {
+    "kind": "shapes",
+    "w": 400,
+    "h": 250,
+    "items": [
+     {
+      "t": "text",
+      "x": 60,
+      "y": 40,
+      "text": "×",
+      "size": 14,
+      "anchor": "middle",
+      "color": "grey"
+     },
+     {
+      "t": "text",
+      "x": 60,
+      "y": 100,
+      "text": "×",
+      "size": 14,
+      "anchor": "middle",
+      "color": "grey"
+     },
+     {
+      "t": "text",
+      "x": 60,
+      "y": 160,
+      "text": "×",
+      "size": 14,
+      "anchor": "middle",
+      "color": "grey"
+     },
+     {
+      "t": "text",
+      "x": 60,
+      "y": 220,
+      "text": "×",
+      "size": 14,
+      "anchor": "middle",
+      "color": "grey"
+     },
+     {
+      "t": "text",
+      "x": 120,
+      "y": 40,
+      "text": "×",
+      "size": 14,
+      "anchor": "middle",
+      "color": "grey"
+     },
+     {
+      "t": "text",
+      "x": 120,
+      "y": 100,
+      "text": "×",
+      "size": 14,
+      "anchor": "middle",
+      "color": "grey"
+     },
+     {
+      "t": "text",
+      "x": 120,
+      "y": 160,
+      "text": "×",
+      "size": 14,
+      "anchor": "middle",
+      "color": "grey"
+     },
+     {
+      "t": "text",
+      "x": 120,
+      "y": 220,
+      "text": "×",
+      "size": 14,
+      "anchor": "middle",
+      "color": "grey"
+     },
+     {
+      "t": "text",
+      "x": 180,
+      "y": 40,
+      "text": "×",
+      "size": 14,
+      "anchor": "middle",
+      "color": "grey"
+     },
+     {
+      "t": "text",
+      "x": 180,
+      "y": 100,
+      "text": "×",
+      "size": 14,
+      "anchor": "middle",
+      "color": "grey"
+     },
+     {
+      "t": "text",
+      "x": 180,
+      "y": 160,
+      "text": "×",
+      "size": 14,
+      "anchor": "middle",
+      "color": "grey"
+     },
+     {
+      "t": "text",
+      "x": 180,
+      "y": 220,
+      "text": "×",
+      "size": 14,
+      "anchor": "middle",
+      "color": "grey"
+     },
+     {
+      "t": "text",
+      "x": 240,
+      "y": 40,
+      "text": "×",
+      "size": 14,
+      "anchor": "middle",
+      "color": "grey"
+     },
+     {
+      "t": "text",
+      "x": 240,
+      "y": 100,
+      "text": "×",
+      "size": 14,
+      "anchor": "middle",
+      "color": "grey"
+     },
+     {
+      "t": "text",
+      "x": 240,
+      "y": 160,
+      "text": "×",
+      "size": 14,
+      "anchor": "middle",
+      "color": "grey"
+     },
+     {
+      "t": "text",
+      "x": 240,
+      "y": 220,
+      "text": "×",
+      "size": 14,
+      "anchor": "middle",
+      "color": "grey"
+     },
+     {
+      "t": "text",
+      "x": 300,
+      "y": 40,
+      "text": "×",
+      "size": 14,
+      "anchor": "middle",
+      "color": "grey"
+     },
+     {
+      "t": "text",
+      "x": 300,
+      "y": 100,
+      "text": "×",
+      "size": 14,
+      "anchor": "middle",
+      "color": "grey"
+     },
+     {
+      "t": "text",
+      "x": 300,
+      "y": 160,
+      "text": "×",
+      "size": 14,
+      "anchor": "middle",
+      "color": "grey"
+     },
+     {
+      "t": "text",
+      "x": 300,
+      "y": 220,
+      "text": "×",
+      "size": 14,
+      "anchor": "middle",
+      "color": "grey"
+     },
+     {
+      "t": "circle",
+      "cx": 180,
+      "cy": 130,
+      "r": 55,
+      "stroke": "red",
+      "width": 3
+     },
+     {
+      "t": "circle",
+      "cx": 235,
+      "cy": 130,
+      "r": 7,
+      "stroke": "ink",
+      "width": 2,
+      "fill": "orange"
+     },
+     {
+      "t": "line",
+      "x1": 235,
+      "y1": 130,
+      "x2": 235,
+      "y2": 70,
+      "color": "blue",
+      "width": 3,
+      "arrow": "end"
+     },
+     {
+      "t": "text",
+      "x": 250,
+      "y": 82,
+      "text": "v",
+      "size": 15,
+      "anchor": "start",
+      "color": "blue"
+     },
+     {
+      "t": "line",
+      "x1": 228,
+      "y1": 130,
+      "x2": 195,
+      "y2": 130,
+      "color": "green",
+      "width": 3,
+      "arrow": "end"
+     },
+     {
+      "t": "text",
+      "x": 206,
+      "y": 150,
+      "text": "F",
+      "size": 15,
+      "anchor": "middle",
+      "color": "green",
+      "bold": true
+     },
+     {
+      "t": "text",
+      "x": 345,
+      "y": 130,
+      "text": "B into page",
+      "size": 12,
+      "anchor": "end",
+      "color": "ink"
+     }
+    ]
+   },
+   "chapter": "gceal-physics-ch-magnetic"
+  },
+  {
+   "id": "gceal-physics-bfield-q1",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "gceal-physics-bfield",
+   "prompt": "The SI unit tesla is equivalent to",
+   "choices": [
+    "N A m",
+    "N A⁻¹ m⁻¹",
+    "J A⁻¹",
+    "N m A"
+   ],
+   "answer": 1,
+   "explanation": "B = F/(Il).",
+   "chapter": "gceal-physics-ch-magnetic"
+  },
+  {
+   "id": "gceal-physics-bfield-q2",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "gceal-physics-bfield",
+   "prompt": "A charged particle moves in a circle in a uniform magnetic field. If its speed doubles, the radius",
+   "choices": [
+    "stays the same",
+    "halves",
+    "doubles",
+    "quadruples"
+   ],
+   "answer": 2,
+   "explanation": "r = mv/qB ∝ v.",
+   "chapter": "gceal-physics-ch-magnetic"
+  },
+  {
+   "id": "gceal-physics-bfield-q3",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "gceal-physics-bfield",
+   "prompt": "Two parallel wires carry currents in opposite directions. They",
+   "choices": [
+    "rotate",
+    "repel each other",
+    "attract each other",
+    "exert no force"
+   ],
+   "answer": 1,
+   "explanation": "Opposite currents repel; same-direction currents attract.",
+   "chapter": "gceal-physics-ch-magnetic"
+  },
+  {
+   "id": "gceal-physics-bfield-q4",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "gceal-physics-bfield",
+   "prompt": "The magnetic force on a charged particle moving parallel to the field is",
+   "choices": [
+    "mv²/r",
+    "zero",
+    "qvB",
+    "maximum"
+   ],
+   "answer": 1,
+   "explanation": "sin 0° = 0.",
+   "chapter": "gceal-physics-ch-magnetic"
+  },
+  {
+   "id": "gceal-physics-bfield-q5",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "gceal-physics-bfield",
+   "prompt": "Inside a long solenoid the field is",
+   "choices": [
+    "uniform and proportional to the current",
+    "zero",
+    "greatest at the ends",
+    "independent of the current"
+   ],
+   "answer": 0,
+   "explanation": "B = μ₀nI.",
+   "chapter": "gceal-physics-ch-magnetic"
+  },
+  {
+   "id": "gceal-physics-ch-magnetic-e07",
+   "kind": "numeric",
+   "tier": "application",
+   "lesson": "gceal-physics-induction",
+   "source": "Original exercise, GCE Advanced Level style (g = 9.8 m/s²)",
+   "prompt": "A wire 0.20 m long moves at 3.0 m/s across a field of 0.50 T, perpendicular to it. Find the induced emf (V).",
+   "answer": 0.30000000000000004,
+   "tolerance": 0.005,
+   "unit": "V",
+   "explanation": "ε = Blv = 0.50 × 0.20 × 3.0 = 0.30 V.",
+   "difficulty": 1,
+   "points": 2,
+   "chapter": "gceal-physics-ch-magnetic"
+  },
+  {
+   "id": "gceal-physics-ch-magnetic-e08",
+   "kind": "numeric",
+   "tier": "application",
+   "lesson": "gceal-physics-induction",
+   "source": "Original exercise, GCE Advanced Level style (g = 9.8 m/s²)",
+   "prompt": "A coil of area 5.0 × 10⁻³ m² is perpendicular to a field of 0.20 T. Find the flux through it (mWb).",
+   "answer": 1.0,
+   "tolerance": 0.005,
+   "unit": "mWb",
+   "explanation": "Φ = BA = 0.20 × 5.0 × 10⁻³ = 1.0 × 10⁻³ Wb = 1.0 mWb.",
+   "difficulty": 1,
+   "points": 2,
+   "chapter": "gceal-physics-ch-magnetic"
+  },
+  {
+   "id": "gceal-physics-ch-magnetic-e09",
+   "kind": "truefalse",
+   "tier": "application",
+   "lesson": "gceal-physics-induction",
+   "source": "Original exercise, GCE Advanced Level style (g = 9.8 m/s²)",
+   "prompt": "True or false: a steady magnetic field through a stationary coil induces a constant emf.",
+   "answer": false,
+   "explanation": "Only a changing flux linkage induces an emf; a steady flux induces none.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "gceal-physics-ch-magnetic"
+  },
+  {
+   "id": "gceal-physics-ch-magnetic-e10",
+   "kind": "numeric",
+   "tier": "approfondissement",
+   "lesson": "gceal-physics-induction",
+   "source": "Original exercise, GCE Advanced Level style (g = 9.8 m/s²)",
+   "prompt": "The flux linking a 50-turn coil changes uniformly from 8.0 mWb to 2.0 mWb in 0.10 s. Find the average induced emf (V).",
+   "answer": 2.9999999999999996,
+   "tolerance": 0.02,
+   "unit": "V",
+   "explanation": "ε = NΔΦ/Δt = 50 × 6.0 × 10⁻³ ÷ 0.10 = 3.0 V.",
+   "difficulty": 2,
+   "points": 3,
+   "chapter": "gceal-physics-ch-magnetic"
+  },
+  {
+   "id": "gceal-physics-ch-magnetic-e11",
+   "kind": "mcq",
+   "tier": "approfondissement",
+   "lesson": "gceal-physics-induction",
+   "source": "Original exercise, GCE Advanced Level style (g = 9.8 m/s²)",
+   "prompt": "A magnet falls through a long copper tube much more slowly than through a plastic tube because",
+   "choices": [
+    "copper is magnetic",
+    "plastic is heavier",
+    "eddy currents in the copper oppose the motion",
+    "air resistance is greater in copper"
+   ],
+   "answer": 2,
+   "explanation": "Induced currents in the copper produce a force opposing the magnet's motion (Lenz's law).",
+   "difficulty": 2,
+   "points": 2,
+   "chapter": "gceal-physics-ch-magnetic"
+  },
+  {
+   "id": "gceal-physics-ch-magnetic-e12",
+   "kind": "problem",
+   "tier": "examen",
+   "lesson": "gceal-physics-induction",
+   "source": "Original exercise, GCE Advanced Level style (g = 9.8 m/s²)",
+   "prompt": "A simple generator has a coil of 100 turns, area 2.0 × 10⁻² m², rotating at 50 revolutions per second in a uniform field of 0.15 T.",
+   "difficulty": 2,
+   "parts": [
+    {
+     "kind": "numeric",
+     "points": 1,
+     "prompt": "Angular speed ω (rad/s, 3 s.f.).",
+     "answer": 314.0,
+     "tolerance": 0.5,
+     "explanation": "ω = 2π × 50 = 314 rad/s.",
+     "unit": "rad/s",
+     "id": "gceal-physics-ch-magnetic-e12-a"
+    },
+    {
+     "kind": "numeric",
+     "points": 2,
+     "prompt": "Peak emf (V, 3 s.f.).",
+     "answer": 94.2,
+     "tolerance": 0.2,
+     "explanation": "ε₀ = NBAω = 100 × 0.15 × 2.0 × 10⁻² × 314 = 94.2 V.",
+     "unit": "V",
+     "id": "gceal-physics-ch-magnetic-e12-b"
+    },
+    {
+     "kind": "numeric",
+     "points": 1,
+     "prompt": "Frequency of the output (Hz).",
+     "answer": 50,
+     "tolerance": 0,
+     "explanation": "The emf has the same frequency as the rotation: 50 Hz.",
+     "unit": "Hz",
+     "id": "gceal-physics-ch-magnetic-e12-c"
+    },
+    {
+     "kind": "mcq",
+     "points": 1,
+     "prompt": "If the coil rotated at twice the speed, the peak emf would",
+     "choices": [
+      "stay the same",
+      "quadruple",
+      "double (and so would the frequency)",
+      "halve"
+     ],
+     "answer": 2,
+     "explanation": "ε₀ ∝ ω.",
+     "id": "gceal-physics-ch-magnetic-e12-d"
+    }
+   ],
+   "chapter": "gceal-physics-ch-magnetic"
+  },
+  {
+   "id": "gceal-physics-induction-q1",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "gceal-physics-induction",
+   "prompt": "Lenz's law is a consequence of conservation of",
+   "choices": [
+    "mass",
+    "charge",
+    "energy",
+    "momentum"
+   ],
+   "answer": 2,
+   "explanation": "The induced current opposes the change, so work must be done.",
+   "chapter": "gceal-physics-ch-magnetic"
+  },
+  {
+   "id": "gceal-physics-induction-q2",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "gceal-physics-induction",
+   "prompt": "The SI unit of magnetic flux, the weber, is",
+   "choices": [
+    "N A⁻¹",
+    "T m⁻²",
+    "T",
+    "T m²"
+   ],
+   "answer": 3,
+   "explanation": "Φ = BA.",
+   "chapter": "gceal-physics-ch-magnetic"
+  },
+  {
+   "id": "gceal-physics-induction-q3",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "gceal-physics-induction",
+   "prompt": "A bar magnet is pushed into a coil faster. The induced emf",
+   "choices": [
+    "increases",
+    "decreases",
+    "is the same",
+    "reverses"
+   ],
+   "answer": 0,
+   "explanation": "Rate of change of flux is larger.",
+   "chapter": "gceal-physics-ch-magnetic"
+  },
+  {
+   "id": "gceal-physics-induction-q4",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "gceal-physics-induction",
+   "prompt": "Laminated cores in transformers reduce",
+   "choices": [
+    "eddy current losses",
+    "the frequency",
+    "the resistance of the wire",
+    "the voltage"
+   ],
+   "answer": 0,
+   "explanation": "Thin insulated sheets break up the paths for eddy currents.",
+   "chapter": "gceal-physics-ch-magnetic"
+  },
+  {
+   "id": "gceal-physics-induction-q5",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "gceal-physics-induction",
+   "prompt": "A rod moves parallel to the magnetic field lines. The induced emf is",
+   "choices": [
+    "zero",
+    "negative",
+    "Blv",
+    "maximum"
+   ],
+   "answer": 0,
+   "explanation": "No field lines are cut.",
+   "chapter": "gceal-physics-ch-magnetic"
+  },
+  {
+   "id": "gceal-physics-ch-magnetic-e13",
+   "kind": "numeric",
+   "tier": "application",
+   "lesson": "gceal-physics-ac",
+   "source": "Original exercise, GCE Advanced Level style (g = 9.8 m/s²)",
+   "prompt": "A sinusoidal voltage has peak value 170 V. Find the r.m.s. value (V, 3 s.f.).",
+   "answer": 120.0,
+   "tolerance": 0.5,
+   "unit": "V",
+   "explanation": "V_rms = 170/√2 = 120 V.",
+   "difficulty": 1,
+   "points": 2,
+   "chapter": "gceal-physics-ch-magnetic"
+  },
+  {
+   "id": "gceal-physics-ch-magnetic-e14",
+   "kind": "numeric",
+   "tier": "application",
+   "lesson": "gceal-physics-ac",
+   "source": "Original exercise, GCE Advanced Level style (g = 9.8 m/s²)",
+   "prompt": "A transformer has 500 primary turns and 50 secondary turns. The primary voltage is 220 V. Find the secondary voltage (V).",
+   "answer": 22,
+   "tolerance": 0.05,
+   "unit": "V",
+   "explanation": "V_s = 220 × 50/500 = 22 V.",
+   "difficulty": 1,
+   "points": 2,
+   "chapter": "gceal-physics-ch-magnetic"
+  },
+  {
+   "id": "gceal-physics-ch-magnetic-e15",
+   "kind": "truefalse",
+   "tier": "application",
+   "lesson": "gceal-physics-ac",
+   "source": "Original exercise, GCE Advanced Level style (g = 9.8 m/s²)",
+   "prompt": "True or false: a transformer will work with a steady direct current in the primary coil.",
+   "answer": false,
+   "explanation": "A steady current produces a constant flux in the core, so no emf is induced in the secondary.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "gceal-physics-ch-magnetic"
+  },
+  {
+   "id": "gceal-physics-ch-magnetic-e16",
+   "kind": "numeric",
+   "tier": "approfondissement",
+   "lesson": "gceal-physics-ac",
+   "source": "Original exercise, GCE Advanced Level style (g = 9.8 m/s²)",
+   "prompt": "A transformer of efficiency 95 % delivers 190 W to a load. Find the input power (W).",
+   "answer": 200.0,
+   "tolerance": 0.5,
+   "unit": "W",
+   "explanation": "P_in = P_out/efficiency = 190/0.95 = 200 W.",
+   "difficulty": 2,
+   "points": 3,
+   "chapter": "gceal-physics-ch-magnetic"
+  },
+  {
+   "id": "gceal-physics-ch-magnetic-e17",
+   "kind": "numeric",
+   "tier": "approfondissement",
+   "lesson": "gceal-physics-ac",
+   "source": "Original exercise, GCE Advanced Level style (g = 9.8 m/s²)",
+   "prompt": "Find the reactance of a 10 μF capacitor at 50 Hz (Ω, 3 s.f.).",
+   "answer": 318.0,
+   "tolerance": 1,
+   "unit": "Ω",
+   "explanation": "X_C = 1/(2πfC) = 1/(2π × 50 × 10 × 10⁻⁶) = 318 Ω.",
+   "difficulty": 2,
+   "points": 3,
+   "chapter": "gceal-physics-ch-magnetic"
+  },
+  {
+   "id": "gceal-physics-ch-magnetic-e18",
+   "kind": "problem",
+   "tier": "examen",
+   "lesson": "gceal-physics-ac",
+   "source": "Original exercise, GCE Advanced Level style (g = 9.8 m/s²)",
+   "prompt": "A school generator supplies 5.0 kW at 400 V (r.m.s.) to a distant workshop through cables of total resistance 2.0 Ω.",
+   "difficulty": 2,
+   "parts": [
+    {
+     "kind": "numeric",
+     "points": 1,
+     "prompt": "Current in the cables (A).",
+     "answer": 12.5,
+     "tolerance": 0.05,
+     "explanation": "I = P/V = 5000/400 = 12.5 A.",
+     "unit": "A",
+     "id": "gceal-physics-ch-magnetic-e18-a"
+    },
+    {
+     "kind": "numeric",
+     "points": 1,
+     "prompt": "Power lost in the cables (W).",
+     "answer": 312.5,
+     "tolerance": 0.5,
+     "explanation": "P_loss = I²R = 12.5² × 2.0 = 312.5 W.",
+     "unit": "W",
+     "id": "gceal-physics-ch-magnetic-e18-b"
+    },
+    {
+     "kind": "numeric",
+     "points": 2,
+     "prompt": "The voltage is stepped up to 4000 V by a transformer (and back down at the workshop). New power lost in the cables (W).",
+     "answer": 3.125,
+     "tolerance": 0.05,
+     "explanation": "I = 5000/4000 = 1.25 A; loss = 1.25² × 2.0 = 3.125 W, a hundred times smaller.",
+     "unit": "W",
+     "id": "gceal-physics-ch-magnetic-e18-c"
+    }
+   ],
+   "chapter": "gceal-physics-ch-magnetic"
+  },
+  {
+   "id": "gceal-physics-ac-q1",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "gceal-physics-ac",
+   "prompt": "The r.m.s. value of an alternating current of peak 5.0 A is",
+   "choices": [
+    "3.5 A",
+    "5.0 A",
+    "2.5 A",
+    "7.1 A"
+   ],
+   "answer": 0,
+   "explanation": "5.0/√2 = 3.54 A.",
+   "chapter": "gceal-physics-ch-magnetic"
+  },
+  {
+   "id": "gceal-physics-ac-q2",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "gceal-physics-ac",
+   "prompt": "A step-up transformer",
+   "choices": [
+    "increases the voltage and decreases the current",
+    "works with d.c.",
+    "increases both",
+    "increases the power"
+   ],
+   "answer": 0,
+   "explanation": "Power in = power out (ideal).",
+   "chapter": "gceal-physics-ch-magnetic"
+  },
+  {
+   "id": "gceal-physics-ac-q3",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "gceal-physics-ac",
+   "prompt": "Which device converts a.c. to d.c.?",
+   "choices": [
+    "diode (rectifier)",
+    "transformer",
+    "capacitor alone",
+    "resistor"
+   ],
+   "answer": 0,
+   "explanation": "Diodes conduct in one direction only.",
+   "chapter": "gceal-physics-ch-magnetic"
+  },
+  {
+   "id": "gceal-physics-ac-q4",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "gceal-physics-ac",
+   "prompt": "The frequency of mains supply in Cameroon is",
+   "choices": [
+    "25 Hz",
+    "60 Hz",
+    "50 Hz",
+    "100 Hz"
+   ],
+   "answer": 2,
+   "explanation": "50 Hz is the standard in Cameroon (to be confirmed by the teacher).",
+   "chapter": "gceal-physics-ch-magnetic"
+  },
+  {
+   "id": "gceal-physics-ac-q5",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "gceal-physics-ac",
+   "prompt": "Power transmission uses high voltage in order to",
+   "choices": [
+    "increase the frequency",
+    "increase the current",
+    "reduce the power needed",
+    "reduce I²R losses"
+   ],
+   "answer": 3,
+   "explanation": "Lower current means smaller heating losses.",
+   "chapter": "gceal-physics-ch-magnetic"
+  },
+  {
+   "id": "gceal-physics-ch-magnetic-m01",
+   "kind": "problem",
+   "tier": "examen",
+   "lesson": "gceal-physics-bfield",
+   "source": "Original exercise, GCE Advanced Level style (g = 9.8 m/s²)",
+   "prompt": "Question 5 (4 marks). A proton (m = 1.67 × 10⁻²⁷ kg) is accelerated from rest through 2.5 kV and then enters a uniform magnetic field of 0.10 T at right angles to the field.",
+   "difficulty": 2,
+   "parts": [
+    {
+     "kind": "numeric",
+     "points": 1,
+     "prompt": "Kinetic energy gained (10⁻¹⁶ J).",
+     "answer": 4.0,
+     "tolerance": 0.01,
+     "explanation": "KE = eV = 1.60 × 10⁻¹⁹ × 2500 = 4.0 × 10⁻¹⁶ J.",
+     "unit": "× 10⁻¹⁶ J",
+     "id": "gceal-physics-ch-magnetic-m01-a"
+    },
+    {
+     "kind": "numeric",
+     "points": 1,
+     "prompt": "Speed of the proton (10⁵ m/s, 3 s.f.).",
+     "answer": 6.92,
+     "tolerance": 0.05,
+     "explanation": "v = √(2KE/m) = √(8.0 × 10⁻¹⁶ ÷ 1.67 × 10⁻²⁷) = 6.92 × 10⁵ m/s.",
+     "unit": "× 10⁵ m/s",
+     "id": "gceal-physics-ch-magnetic-m01-b"
+    },
+    {
+     "kind": "numeric",
+     "points": 2,
+     "prompt": "Radius of its circular path in the field (cm, 3 s.f.).",
+     "answer": 7.22,
+     "tolerance": 0.1,
+     "explanation": "r = mv/(qB) = 1.67 × 10⁻²⁷ × 6.92 × 10⁵ ÷ (1.60 × 10⁻¹⁹ × 0.10) = 0.0722 m = 7.22 cm.",
+     "unit": "cm",
+     "id": "gceal-physics-ch-magnetic-m01-c"
+    }
+   ],
+   "chapter": "gceal-physics-ch-magnetic"
+  }
+ ]
+}

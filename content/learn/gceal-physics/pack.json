@@ -1,0 +1,84 @@
+{
+  "format": 1,
+  "id": "gceal-physics",
+  "version": 1,
+  "title": "Physics — GCE A Level",
+  "description": "Upper Sixth physics revision for the GCE Advanced Level: electric and magnetic fields, capacitors, induction, a.c., optics and waves, quantum physics, nuclear physics, thermodynamics, electronics and practical skills, with worked examples, graded exercises and a mock paper. Draft.",
+  "lang": "en",
+  "cursus": "secondary",
+  "level": "Upper Sixth",
+  "subject": "physics",
+  "exam": "GCE-AL",
+  "programRef": "Cameroon GCE Board — Advanced Level Physics syllabus (Upper Sixth part) — to be checked against the official texts",
+  "authors": [
+    "CastBridge — brouillon rédigé avec une IA, à relire par un enseignant"
+  ],
+  "status": "draft",
+  "updatedAt": "2026-10-01",
+  "chapters": [
+    {
+      "id": "gceal-physics-ch-electric",
+      "title": "Electric fields and capacitors",
+      "order": 1,
+      "programRef": "GCE Advanced Level Physics — electric fields and capacitors (to be checked against the official syllabus)"
+    },
+    {
+      "id": "gceal-physics-ch-magnetic",
+      "title": "Magnetic fields, induction and a.c.",
+      "order": 2,
+      "programRef": "GCE Advanced Level Physics — magnetic fields and electromagnetic induction (to be checked against the official syllabus)"
+    },
+    {
+      "id": "gceal-physics-ch-optics",
+      "title": "Electromagnetic waves and optics",
+      "order": 3,
+      "programRef": "GCE Advanced Level Physics — electromagnetic waves, optics (to be checked against the official syllabus)"
+    },
+    {
+      "id": "gceal-physics-ch-quantum",
+      "title": "Quantum physics",
+      "order": 4,
+      "programRef": "GCE Advanced Level Physics — quantum physics (to be checked against the official syllabus)"
+    },
+    {
+      "id": "gceal-physics-ch-nuclear",
+      "title": "Atomic and nuclear physics",
+      "order": 5,
+      "programRef": "GCE Advanced Level Physics — nuclear physics (to be checked against the official syllabus)"
+    },
+    {
+      "id": "gceal-physics-ch-thermo",
+      "title": "Thermodynamics, astronomy and electronics",
+      "order": 6,
+      "programRef": "GCE Advanced Level Physics — thermodynamics, cosmology, semiconductors (to be checked against the official syllabus)"
+    }
+  ],
+  "mockExams": [
+    {
+      "id": "gceal-physics-mock-1",
+      "title": "GCE A Level mock — Physics (paper 1)",
+      "minutes": 90,
+      "outOf": 20,
+      "instructions": "Answer all questions. Section A has four short multiple-choice questions (2 marks each); Section B has three structured questions (4 marks each). The paper is marked out of 20. Constants: e = 1.60 × 10⁻¹⁹ C, h = 6.63 × 10⁻³⁴ J s, c = 3.00 × 10⁸ m/s, ln 2 = 0.693. This is an original practice paper; its format is not that of the Cameroon GCE Board and should be checked against the official texts.",
+      "sections": [
+        {
+          "title": "Section A — Short questions (8 marks)",
+          "exercises": [
+            "gceal-physics-ch-electric-m01",
+            "gceal-physics-ch-quantum-m01",
+            "gceal-physics-ch-nuclear-m01",
+            "gceal-physics-ch-optics-m01"
+          ]
+        },
+        {
+          "title": "Section B — Structured questions (12 marks)",
+          "exercises": [
+            "gceal-physics-ch-magnetic-m01",
+            "gceal-physics-ch-nuclear-m02",
+            "gceal-physics-ch-optics-m02"
+          ]
+        }
+      ]
+    }
+  ]
+}

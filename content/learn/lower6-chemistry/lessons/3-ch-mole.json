@@ -1,0 +1,678 @@
+{
+ "chapter": "lower6-chemistry-ch-mole",
+ "lessons": [
+  {
+   "id": "lower6-chemistry-mole",
+   "title": "The mole, formulae and reacting masses",
+   "minutes": 35,
+   "programRef": "GCE Advanced Level Chemistry — the mole, stoichiometry and gases (to be checked against the official syllabus)",
+   "status": "draft",
+   "author": "CastBridge (AI draft)",
+   "source": "Original writing following the Cameroonian curriculum; to be reviewed by a teacher",
+   "objectives": [
+    "Define the mole and the Avogadro constant and interconvert mass, amount and number of particles",
+    "Calculate empirical and molecular formulae and percentage composition",
+    "Use balanced equations to find reacting masses, volumes of gas, limiting reagents and percentage yields"
+   ],
+   "prerequisites": [
+    "lower6-chemistry-atoms"
+   ],
+   "exercises": [
+    "lower6-chemistry-ch-mole-e01",
+    "lower6-chemistry-ch-mole-e02",
+    "lower6-chemistry-ch-mole-e03",
+    "lower6-chemistry-ch-mole-e04",
+    "lower6-chemistry-ch-mole-e05",
+    "lower6-chemistry-ch-mole-e06"
+   ],
+   "selfCheck": [
+    "lower6-chemistry-mole-q1",
+    "lower6-chemistry-mole-q2",
+    "lower6-chemistry-mole-q3",
+    "lower6-chemistry-mole-q4",
+    "lower6-chemistry-mole-q5"
+   ],
+   "reviewNotes": [
+    "Data used: Ar values rounded as in common school tables (H 1.0, C 12.0, N 14.0, O 16.0, Na 23.0, Mg 24.0, Al 27.0, S 32.0, Cl 35.5, K 39.0, Ca 40.0, Fe 56.0, Cu 63.5, Zn 65.0); molar volume of a gas 24.0 dm³ at room temperature and pressure (25 °C, 1 atm), 22.4 dm³ at stp; R = 8.31 J mol⁻¹ K⁻¹; N_A = 6.02 × 10²³ mol⁻¹.",
+    "Syllabus references, scope and level of difficulty are to be checked against the official text; all facts, formulas and worked examples to be verified by a teacher before release."
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "The mole",
+     "md": "One **mole** is the amount of substance containing as many particles as there are atoms in 12 g of carbon-12: **6.02 × 10²³** (Avogadro constant, N_A). The **molar mass** M (g mol⁻¹) is numerically equal to the relative formula mass.\n\n**n = m/M**, number of particles N = n × N_A, and for a solution **n = c × V** (c in mol dm⁻³, V in dm³; 1000 cm³ = 1 dm³). For a gas at rtp: n = V/24.0 dm³ (22.4 dm³ at stp)."
+    },
+    {
+     "type": "key",
+     "style": "methode",
+     "title": "Method for equation calculations",
+     "md": "1. Write the balanced equation.\n2. Convert the given quantity to **moles**.\n3. Use the mole ratio from the equation.\n4. Convert the moles of the wanted substance to mass, volume or concentration.\n\n**Limiting reagent**: compare moles with the coefficients; the one that runs out controls the yield. **Percentage yield** = (actual ÷ theoretical) × 100."
+    },
+    {
+     "type": "illustration",
+     "figure": {
+      "kind": "bars",
+      "w": 380,
+      "h": 240,
+      "bars": [
+       {
+        "label": "Mg",
+        "value": 0.25,
+        "color": "blue"
+       },
+       {
+        "label": "HCl needed",
+        "value": 0.5,
+        "color": "orange"
+       },
+       {
+        "label": "HCl given",
+        "value": 0.1,
+        "color": "red"
+       }
+      ],
+      "unit": "mol"
+     },
+     "caption": "Mg and HCl in Example: 0.25 mol Mg needs 0.50 mol HCl but only 0.10 mol is supplied: HCl is limiting.",
+     "alt": "A bar chart with three bars: 0.25 mole of magnesium, 0.50 mole of hydrochloric acid needed and 0.10 mole of acid given."
+    },
+    {
+     "type": "key",
+     "style": "methode",
+     "title": "Empirical formula",
+     "md": "1. Divide each mass (or percentage) by A_r to get moles of each element.\n2. Divide all by the smallest number.\n3. If the ratios are not whole numbers (1.5, 1.33…), multiply to obtain whole numbers.\n\nThe **molecular formula** is a whole-number multiple of the empirical formula: multiple = M(molecular) ÷ M(empirical)."
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Common mistakes",
+     "md": "- Using cm³ directly in n = cV (divide by 1000 first).\n- Forgetting the coefficients in the equation (2HCl per Mg).\n- Rounding ratios such as 1.5 to 1 or 2: multiply by 2 instead.\n- Using the mass of the excess reagent to calculate the yield.\n- Not using 24.0 dm³ for gases at room temperature and 22.4 dm³ at stp consistently."
+    },
+    {
+     "type": "example",
+     "title": "Example 1 — Volume of gas",
+     "statement": "Calculate the volume of carbon dioxide (at rtp) from 5.00 g of calcium carbonate with excess dilute hydrochloric acid. CaCO₃ + 2HCl → CaCl₂ + H₂O + CO₂.",
+     "steps": [
+      "M(CaCO₃) = 40.0 + 12.0 + 3 × 16.0 = 100.0 g mol⁻¹, so n = 5.00/100.0 = 0.0500 mol.",
+      "The ratio CaCO₃ : CO₂ is 1 : 1, so n(CO₂) = 0.0500 mol.",
+      "V = 0.0500 × 24.0 = 1.20 dm³."
+     ],
+     "answer": "1.20 dm³ of CO₂"
+    },
+    {
+     "type": "example",
+     "title": "Example 2 — Empirical formula",
+     "statement": "An oxide of iron contains 70.0 % Fe and 30.0 % O by mass. Find its empirical formula.",
+     "steps": [
+      "Moles per 100 g: Fe 70.0/56.0 = 1.25; O 30.0/16.0 = 1.875.",
+      "Divide by 1.25: Fe 1.00 : O 1.50.",
+      "Multiply by 2 for whole numbers: Fe 2 : O 3, so the empirical formula is Fe₂O₃."
+     ],
+     "answer": "Fe₂O₃"
+    }
+   ],
+   "chapter": "lower6-chemistry-ch-mole"
+  },
+  {
+   "id": "lower6-chemistry-gases",
+   "title": "Gases: gas laws and the ideal gas equation",
+   "minutes": 35,
+   "programRef": "GCE Advanced Level Chemistry — the mole, stoichiometry and gases (to be checked against the official syllabus)",
+   "status": "draft",
+   "author": "CastBridge (AI draft)",
+   "source": "Original writing following the Cameroonian curriculum; to be reviewed by a teacher",
+   "objectives": [
+    "State and use Boyle's, Charles' and the pressure laws and the combined gas law",
+    "Use pV = nRT to find amounts, volumes, pressures and molar masses",
+    "Use gas volumes in reactions (Avogadro) and Dalton's law of partial pressures"
+   ],
+   "prerequisites": [
+    "lower6-chemistry-mole"
+   ],
+   "exercises": [
+    "lower6-chemistry-ch-mole-e07",
+    "lower6-chemistry-ch-mole-e08",
+    "lower6-chemistry-ch-mole-e09",
+    "lower6-chemistry-ch-mole-e10",
+    "lower6-chemistry-ch-mole-e11",
+    "lower6-chemistry-ch-mole-e12"
+   ],
+   "selfCheck": [
+    "lower6-chemistry-gases-q1",
+    "lower6-chemistry-gases-q2",
+    "lower6-chemistry-gases-q3",
+    "lower6-chemistry-gases-q4",
+    "lower6-chemistry-gases-q5"
+   ],
+   "reviewNotes": [
+    "Data used: Ar values rounded as in common school tables (H 1.0, C 12.0, N 14.0, O 16.0, Na 23.0, Mg 24.0, Al 27.0, S 32.0, Cl 35.5, K 39.0, Ca 40.0, Fe 56.0, Cu 63.5, Zn 65.0); molar volume of a gas 24.0 dm³ at room temperature and pressure (25 °C, 1 atm), 22.4 dm³ at stp; R = 8.31 J mol⁻¹ K⁻¹; N_A = 6.02 × 10²³ mol⁻¹.",
+    "Molar volumes 24.0 dm³ (rtp) and 22.4 dm³ (stp) both used; the board may prefer one (check).",
+    "Kinetic theory of gases is treated in the physics pack.",
+    "Syllabus references, scope and level of difficulty are to be checked against the official text; all facts, formulas and worked examples to be verified by a teacher before release."
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "formule",
+     "title": "Gas laws and the ideal gas equation",
+     "md": "For a fixed mass of gas: **Boyle** (T constant) pV = constant; **Charles** (p constant) V/T = constant; **pressure law** (V constant) p/T = constant, with T in kelvin (T = θ + 273). Combined: p₁V₁/T₁ = p₂V₂/T₂.\n\n**pV = nRT** (SI units: p in Pa, V in m³, T in K, R = 8.31 J mol⁻¹ K⁻¹; 1 dm³ = 10⁻³ m³, 1 atm ≈ 1.01 × 10⁵ Pa).",
+     "tex": "pV=nRT\\qquad \\frac{p_1V_1}{T_1}=\\frac{p_2V_2}{T_2}"
+    },
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Avogadro and partial pressures",
+     "md": "**Avogadro's law**: equal volumes of gases at the same temperature and pressure contain equal numbers of molecules, so gas volumes in an equation are in the mole ratio (at the same T and p). Molar volume: 24.0 dm³ at rtp, 22.4 dm³ at stp.\n\n**Dalton's law**: the total pressure of a gas mixture is the sum of the **partial pressures**: p_A = (mole fraction of A) × p_total."
+    },
+    {
+     "type": "illustration",
+     "figure": {
+      "kind": "plot",
+      "xmin": -300,
+      "xmax": 100,
+      "ymin": 0,
+      "ymax": 1.5,
+      "grid": 100,
+      "w": 400,
+      "h": 240,
+      "curves": [
+       {
+        "expr": "(x+273)/273",
+        "color": "blue",
+        "label": "V"
+       }
+      ],
+      "points": [
+       {
+        "x": -273,
+        "y": 0,
+        "label": "−273 °C",
+        "color": "red"
+       }
+      ],
+      "segments": [],
+      "xlabel": "θ / °C",
+      "ylabel": "V (relative)"
+     },
+     "caption": "Charles' law: the volume of a gas at constant pressure extrapolates to zero at −273 °C.",
+     "alt": "A straight line of relative gas volume against temperature in degrees Celsius meeting the axis at minus 273."
+    },
+    {
+     "type": "key",
+     "style": "retenir",
+     "title": "Ideal and real gases",
+     "md": "An ideal gas has no intermolecular forces and molecules of negligible volume. Real gases behave nearly ideally at **high temperature and low pressure**; at high pressure and low temperature the molecules' volume and attractions cause deviations (gases liquefy). Gas density = M p/RT."
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Common mistakes",
+     "md": "- Using °C in a gas-law calculation: always use kelvin.\n- Mixing units: cm³ or dm³ with R = 8.31 needs m³ and Pa.\n- Using the molar volume 24.0 dm³ for stp conditions (22.4 dm³).\n- Using the mass fraction instead of the mole fraction in Dalton's law."
+    },
+    {
+     "type": "example",
+     "title": "Example 1 — Molar mass of a gas",
+     "statement": "A sample of gas of mass 0.320 g occupies 250 cm³ at 100 kPa and 27 °C. Find its molar mass.",
+     "steps": [
+      "T = 300 K, V = 2.50 × 10⁻⁴ m³, p = 1.00 × 10⁵ Pa.",
+      "n = pV/RT = 1.00 × 10⁵ × 2.50 × 10⁻⁴ ÷ (8.31 × 300) = 0.01003 mol.",
+      "M = m/n = 0.320/0.01003 = 31.9 g mol⁻¹: the gas is probably O₂ (32)."
+     ],
+     "answer": "M ≈ 32 g/mol (probably O₂)"
+    },
+    {
+     "type": "example",
+     "title": "Example 2 — Volumes of gases",
+     "statement": "10 cm³ of a gaseous hydrocarbon is burnt in 60 cm³ of oxygen (excess). After cooling, the volume is 45 cm³, and it falls to 25 cm³ after shaking with potassium hydroxide solution (which absorbs CO₂). Find the formula.",
+     "steps": [
+      "CO₂ formed = 45 − 25 = 20 cm³, so each molecule contains 2 C (20/10).",
+      "O₂ used = 60 − 25 = 35 cm³ = 10 (x + y/4) with x = 2: y/4 = 1.5, y = 6.",
+      "The formula is C₂H₆ (ethane); water is liquid at room temperature and takes no volume."
+     ],
+     "answer": "C₂H₆"
+    }
+   ],
+   "chapter": "lower6-chemistry-ch-mole"
+  }
+ ],
+ "exercises": [
+  {
+   "id": "lower6-chemistry-ch-mole-e01",
+   "kind": "numeric",
+   "tier": "application",
+   "lesson": "lower6-chemistry-mole",
+   "source": "Original exercise, GCE Advanced Level style",
+   "prompt": "How many moles are in 18.0 g of water (M = 18.0 g/mol)?",
+   "answer": 1.0,
+   "tolerance": 0.005,
+   "unit": "mol",
+   "explanation": "n = 18.0/18.0 = 1.00 mol.",
+   "difficulty": 1,
+   "points": 2,
+   "chapter": "lower6-chemistry-ch-mole"
+  },
+  {
+   "id": "lower6-chemistry-ch-mole-e02",
+   "kind": "numeric",
+   "tier": "application",
+   "lesson": "lower6-chemistry-mole",
+   "source": "Original exercise, GCE Advanced Level style",
+   "prompt": "Calculate the concentration (mol dm⁻³) of a solution containing 4.00 g of NaOH (M = 40.0) in 250 cm³.",
+   "answer": 0.4,
+   "tolerance": 0.002,
+   "unit": "mol/dm³",
+   "explanation": "n = 4.00/40.0 = 0.100 mol; c = 0.100/0.250 = 0.400 mol dm⁻³.",
+   "difficulty": 1,
+   "points": 2,
+   "chapter": "lower6-chemistry-ch-mole"
+  },
+  {
+   "id": "lower6-chemistry-ch-mole-e03",
+   "kind": "truefalse",
+   "tier": "application",
+   "lesson": "lower6-chemistry-mole",
+   "source": "Original exercise, GCE Advanced Level style",
+   "prompt": "True or false: 1 mole of oxygen gas molecules (O₂) contains 6.02 × 10²³ atoms.",
+   "answer": false,
+   "explanation": "It contains 6.02 × 10²³ molecules, i.e. 1.20 × 10²⁴ atoms.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "lower6-chemistry-ch-mole"
+  },
+  {
+   "id": "lower6-chemistry-ch-mole-e04",
+   "kind": "numeric",
+   "tier": "approfondissement",
+   "lesson": "lower6-chemistry-mole",
+   "source": "Original exercise, GCE Advanced Level style",
+   "prompt": "6.0 g of magnesium is added to 100 cm³ of 1.0 mol dm⁻³ HCl: Mg + 2HCl → MgCl₂ + H₂. Find the volume of hydrogen at rtp (dm³, 3 s.f.).",
+   "answer": 1.2,
+   "tolerance": 0.01,
+   "unit": "dm³",
+   "explanation": "Mg: 0.25 mol (excess). HCl: 0.100 mol is limiting; n(H₂) = 0.100/2 = 0.0500 mol; V = 1.20 dm³.",
+   "difficulty": 2,
+   "points": 3,
+   "chapter": "lower6-chemistry-ch-mole"
+  },
+  {
+   "id": "lower6-chemistry-ch-mole-e05",
+   "kind": "numeric",
+   "tier": "approfondissement",
+   "lesson": "lower6-chemistry-mole",
+   "source": "Original exercise, GCE Advanced Level style",
+   "prompt": "In an experiment 6.4 g of product is obtained when the theoretical yield is 8.0 g. Find the percentage yield.",
+   "answer": 80.0,
+   "tolerance": 0.1,
+   "unit": "%",
+   "explanation": "6.4/8.0 × 100 = 80 %.",
+   "difficulty": 2,
+   "points": 3,
+   "chapter": "lower6-chemistry-ch-mole"
+  },
+  {
+   "id": "lower6-chemistry-ch-mole-e06",
+   "kind": "problem",
+   "tier": "examen",
+   "lesson": "lower6-chemistry-mole",
+   "source": "Original exercise, GCE Advanced Level style",
+   "prompt": "Copper(II) carbonate decomposes on heating: CuCO₃ → CuO + CO₂. 12.35 g of CuCO₃ is heated (A_r: Cu 63.5, C 12.0, O 16.0; molar volume 24.0 dm³).",
+   "difficulty": 2,
+   "parts": [
+    {
+     "kind": "numeric",
+     "points": 1,
+     "prompt": "Moles of CuCO₃ (3 s.f.).",
+     "answer": 0.1,
+     "tolerance": 0.001,
+     "explanation": "M(CuCO₃) = 123.5; n = 12.35/123.5 = 0.100 mol.",
+     "unit": "mol",
+     "id": "lower6-chemistry-ch-mole-e06-a"
+    },
+    {
+     "kind": "numeric",
+     "points": 1,
+     "prompt": "Volume of CO₂ released at rtp (dm³, 3 s.f.).",
+     "answer": 2.4,
+     "tolerance": 0.01,
+     "explanation": "n(CO₂) = 0.100 mol; V = 0.100 × 24.0 = 2.40 dm³.",
+     "unit": "dm³",
+     "id": "lower6-chemistry-ch-mole-e06-b"
+    },
+    {
+     "kind": "numeric",
+     "points": 1,
+     "prompt": "Theoretical mass of CuO (g, 3 s.f.).",
+     "answer": 7.95,
+     "tolerance": 0.01,
+     "explanation": "0.100 × 79.5 = 7.95 g.",
+     "unit": "g",
+     "id": "lower6-chemistry-ch-mole-e06-c"
+    },
+    {
+     "kind": "numeric",
+     "points": 1,
+     "prompt": "Percentage yield if 7.00 g of CuO is obtained (%, 3 s.f.).",
+     "answer": 88.1,
+     "tolerance": 0.2,
+     "explanation": "7.00/7.95 × 100 = 88.1 %.",
+     "unit": "%",
+     "id": "lower6-chemistry-ch-mole-e06-d"
+    }
+   ],
+   "figure": {
+    "kind": "bars",
+    "w": 380,
+    "h": 240,
+    "bars": [
+     {
+      "label": "Mg",
+      "value": 0.25,
+      "color": "blue"
+     },
+     {
+      "label": "HCl needed",
+      "value": 0.5,
+      "color": "orange"
+     },
+     {
+      "label": "HCl given",
+      "value": 0.1,
+      "color": "red"
+     }
+    ],
+    "unit": "mol"
+   },
+   "chapter": "lower6-chemistry-ch-mole"
+  },
+  {
+   "id": "lower6-chemistry-mole-q1",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "lower6-chemistry-mole",
+   "prompt": "The number of molecules in 0.50 mol of CO₂ is",
+   "choices": [
+    "3.01 × 10²²",
+    "1.20 × 10²⁴",
+    "6.02 × 10²³",
+    "3.01 × 10²³"
+   ],
+   "answer": 3,
+   "explanation": "0.50 × 6.02 × 10²³.",
+   "chapter": "lower6-chemistry-ch-mole"
+  },
+  {
+   "id": "lower6-chemistry-mole-q2",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "lower6-chemistry-mole",
+   "prompt": "A compound contains C 40.0 %, H 6.7 %, O 53.3 %. Its empirical formula is",
+   "choices": [
+    "CHO",
+    "CH₄O",
+    "C₂H₄O",
+    "CH₂O"
+   ],
+   "answer": 3,
+   "explanation": "C 3.33, H 6.7, O 3.33: ratio 1 : 2 : 1.",
+   "chapter": "lower6-chemistry-ch-mole"
+  },
+  {
+   "id": "lower6-chemistry-mole-q3",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "lower6-chemistry-mole",
+   "prompt": "What volume does 0.25 mol of gas occupy at rtp (24.0 dm³/mol)?",
+   "choices": [
+    "6.0 dm³",
+    "60 dm³",
+    "96 dm³",
+    "0.25 dm³"
+   ],
+   "answer": 0,
+   "explanation": "0.25 × 24.0 = 6.0 dm³.",
+   "chapter": "lower6-chemistry-ch-mole"
+  },
+  {
+   "id": "lower6-chemistry-mole-q4",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "lower6-chemistry-mole",
+   "prompt": "In 2H₂ + O₂ → 2H₂O, the amount of O₂ needed for 0.40 mol of H₂ is",
+   "choices": [
+    "0.20 mol",
+    "0.10 mol",
+    "0.80 mol",
+    "0.40 mol"
+   ],
+   "answer": 0,
+   "explanation": "Mole ratio H₂ : O₂ = 2 : 1.",
+   "chapter": "lower6-chemistry-ch-mole"
+  },
+  {
+   "id": "lower6-chemistry-mole-q5",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "lower6-chemistry-mole",
+   "prompt": "The limiting reagent is the reactant that",
+   "choices": [
+    "is completely used up first",
+    "is a gas",
+    "has the largest M",
+    "is present in greatest mass"
+   ],
+   "answer": 0,
+   "explanation": "It limits the amount of product.",
+   "chapter": "lower6-chemistry-ch-mole"
+  },
+  {
+   "id": "lower6-chemistry-ch-mole-e07",
+   "kind": "numeric",
+   "tier": "application",
+   "lesson": "lower6-chemistry-gases",
+   "source": "Original exercise, GCE Advanced Level style",
+   "prompt": "A gas occupies 2.0 dm³ at 100 kPa. At constant temperature the pressure is raised to 250 kPa. Find the new volume (dm³).",
+   "answer": 0.8,
+   "tolerance": 0.005,
+   "unit": "dm³",
+   "explanation": "Boyle: V₂ = 2.0 × 100/250 = 0.80 dm³.",
+   "difficulty": 1,
+   "points": 2,
+   "chapter": "lower6-chemistry-ch-mole"
+  },
+  {
+   "id": "lower6-chemistry-ch-mole-e08",
+   "kind": "numeric",
+   "tier": "application",
+   "lesson": "lower6-chemistry-gases",
+   "source": "Original exercise, GCE Advanced Level style",
+   "prompt": "Find the amount of gas (mol) in a 5.0 dm³ container at 2.0 × 10⁵ Pa and 27 °C (3 s.f.; R = 8.31).",
+   "answer": 0.401,
+   "tolerance": 0.003,
+   "unit": "mol",
+   "explanation": "n = pV/RT = 2.0 × 10⁵ × 5.0 × 10⁻³ ÷ (8.31 × 300) = 0.401 mol.",
+   "difficulty": 1,
+   "points": 2,
+   "chapter": "lower6-chemistry-ch-mole"
+  },
+  {
+   "id": "lower6-chemistry-ch-mole-e09",
+   "kind": "truefalse",
+   "tier": "application",
+   "lesson": "lower6-chemistry-gases",
+   "source": "Original exercise, GCE Advanced Level style",
+   "prompt": "True or false: a gas is most likely to behave ideally at high pressure and low temperature.",
+   "answer": false,
+   "explanation": "It is most ideal at low pressure and high temperature, when molecular volume and forces are negligible.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "lower6-chemistry-ch-mole"
+  },
+  {
+   "id": "lower6-chemistry-ch-mole-e10",
+   "kind": "numeric",
+   "tier": "approfondissement",
+   "lesson": "lower6-chemistry-gases",
+   "source": "Original exercise, GCE Advanced Level style",
+   "prompt": "A mixture of 2.0 mol N₂ and 0.50 mol O₂ has a total pressure of 100 kPa. Find the partial pressure of N₂ (kPa).",
+   "answer": 80.0,
+   "tolerance": 0.1,
+   "unit": "kPa",
+   "explanation": "Mole fraction = 2.0/2.5 = 0.80, so p = 0.80 × 100 = 80 kPa.",
+   "difficulty": 2,
+   "points": 3,
+   "chapter": "lower6-chemistry-ch-mole"
+  },
+  {
+   "id": "lower6-chemistry-ch-mole-e11",
+   "kind": "numeric",
+   "tier": "approfondissement",
+   "lesson": "lower6-chemistry-gases",
+   "source": "Original exercise, GCE Advanced Level style",
+   "prompt": "A gas of volume 3.0 dm³ at 27 °C is heated at constant pressure to 127 °C. Find the new volume (dm³, 3 s.f.).",
+   "answer": 4.0,
+   "tolerance": 0.02,
+   "unit": "dm³",
+   "explanation": "Charles: V₂ = 3.0 × 400/300 = 4.00 dm³.",
+   "difficulty": 2,
+   "points": 3,
+   "chapter": "lower6-chemistry-ch-mole"
+  },
+  {
+   "id": "lower6-chemistry-ch-mole-e12",
+   "kind": "problem",
+   "tier": "examen",
+   "lesson": "lower6-chemistry-gases",
+   "source": "Original exercise, GCE Advanced Level style",
+   "prompt": "A cylinder of volume 10.0 dm³ contains an ideal gas at 3.0 × 10⁵ Pa and 27 °C (R = 8.31 J mol⁻¹ K⁻¹).",
+   "difficulty": 2,
+   "parts": [
+    {
+     "kind": "numeric",
+     "points": 1,
+     "prompt": "Amount of gas (mol, 3 s.f.).",
+     "answer": 1.2,
+     "tolerance": 0.01,
+     "explanation": "n = pV/RT = 3.0 × 10⁵ × 1.00 × 10⁻² ÷ (8.31 × 300) = 1.20 mol.",
+     "unit": "mol",
+     "id": "lower6-chemistry-ch-mole-e12-a"
+    },
+    {
+     "kind": "numeric",
+     "points": 2,
+     "prompt": "Pressure (10⁵ Pa, 3 s.f.) when the cylinder is heated to 127 °C (volume constant).",
+     "answer": 4.0,
+     "tolerance": 0.02,
+     "explanation": "p₂ = p₁T₂/T₁ = 3.0 × 10⁵ × 400/300 = 4.00 × 10⁵ Pa.",
+     "unit": "× 10⁵ Pa",
+     "id": "lower6-chemistry-ch-mole-e12-b"
+    },
+    {
+     "kind": "mcq",
+     "points": 1,
+     "prompt": "The pressure rises because",
+     "choices": [
+      "the gas becomes denser",
+      "the molecules move faster and hit the walls harder and more often",
+      "there are more molecules",
+      "the molecules become larger"
+     ],
+     "answer": 1,
+     "explanation": "Higher T means a higher mean kinetic energy.",
+     "id": "lower6-chemistry-ch-mole-e12-c"
+    }
+   ],
+   "chapter": "lower6-chemistry-ch-mole"
+  },
+  {
+   "id": "lower6-chemistry-gases-q1",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "lower6-chemistry-gases",
+   "prompt": "At the same temperature and pressure, 1 dm³ of H₂ and 1 dm³ of CO₂ contain",
+   "choices": [
+    "the same number of atoms",
+    "different numbers of molecules",
+    "the same mass",
+    "the same number of molecules"
+   ],
+   "answer": 3,
+   "explanation": "Avogadro's law.",
+   "chapter": "lower6-chemistry-ch-mole"
+  },
+  {
+   "id": "lower6-chemistry-gases-q2",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "lower6-chemistry-gases",
+   "prompt": "−273 °C is called",
+   "choices": [
+    "absolute zero (0 K)",
+    "zero pressure",
+    "boiling point of water",
+    "standard temperature"
+   ],
+   "answer": 0,
+   "explanation": "The temperature at which the ideal gas volume would be zero.",
+   "chapter": "lower6-chemistry-ch-mole"
+  },
+  {
+   "id": "lower6-chemistry-gases-q3",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "lower6-chemistry-gases",
+   "prompt": "Which units must be used for p, V in pV = nRT with R = 8.31?",
+   "choices": [
+    "Pa and dm³",
+    "Pa and m³",
+    "atm and dm³",
+    "kPa and cm³"
+   ],
+   "answer": 1,
+   "explanation": "SI units.",
+   "chapter": "lower6-chemistry-ch-mole"
+  },
+  {
+   "id": "lower6-chemistry-gases-q4",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "lower6-chemistry-gases",
+   "prompt": "The partial pressure of a gas in a mixture is",
+   "choices": [
+    "mole fraction × total pressure",
+    "mass fraction × total pressure",
+    "the same for every gas",
+    "total pressure ÷ number of gases"
+   ],
+   "answer": 0,
+   "explanation": "Dalton's law.",
+   "chapter": "lower6-chemistry-ch-mole"
+  },
+  {
+   "id": "lower6-chemistry-gases-q5",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "lower6-chemistry-gases",
+   "prompt": "100 cm³ of H₂ reacts with exactly what volume of O₂ (same T, p) in 2H₂ + O₂ → 2H₂O(g)?",
+   "choices": [
+    "200 cm³",
+    "50 cm³",
+    "25 cm³",
+    "100 cm³"
+   ],
+   "answer": 1,
+   "explanation": "Volume ratio 2 : 1.",
+   "chapter": "lower6-chemistry-ch-mole"
+  }
+ ]
+}

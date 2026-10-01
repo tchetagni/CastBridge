@@ -1,0 +1,761 @@
+{
+ "chapter": "lower6-physics-ch-thermal",
+ "lessons": [
+  {
+   "id": "lower6-physics-heat",
+   "title": "Specific heat capacity and latent heat",
+   "minutes": 30,
+   "programRef": "GCE Advanced Level Physics — thermal physics (to be checked against the official syllabus)",
+   "status": "draft",
+   "author": "CastBridge (AI draft)",
+   "source": "Original writing following the Cameroonian curriculum; to be reviewed by a teacher",
+   "objectives": [
+    "Define and use specific heat capacity (Q = mcΔθ) and specific latent heat (Q = mL)",
+    "Solve problems on heating, melting, boiling and mixing, including electrical heating",
+    "Interpret a heating curve and explain why temperature stays constant during a change of state"
+   ],
+   "prerequisites": [
+    "lower6-physics-energy"
+   ],
+   "exercises": [
+    "lower6-physics-ch-thermal-e01",
+    "lower6-physics-ch-thermal-e02",
+    "lower6-physics-ch-thermal-e03",
+    "lower6-physics-ch-thermal-e04",
+    "lower6-physics-ch-thermal-e05",
+    "lower6-physics-ch-thermal-e06"
+   ],
+   "selfCheck": [
+    "lower6-physics-heat-q1",
+    "lower6-physics-heat-q2",
+    "lower6-physics-heat-q3",
+    "lower6-physics-heat-q4",
+    "lower6-physics-heat-q5"
+   ],
+   "reviewNotes": [
+    "c = 4200 J kg⁻¹ K⁻¹, L_f = 3.34 × 10⁵ J kg⁻¹, L_v = 2.26 × 10⁶ J kg⁻¹ are textbook values; the board's data sheet may round differently (e.g. 4180, 3.3 × 10⁵).",
+    "Syllabus references, scope and level of difficulty are to be checked against the official text; all facts, formulas and worked examples to be verified by a teacher before release."
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Heat capacities and latent heats",
+     "md": "The **specific heat capacity** c of a substance is the energy needed to raise the temperature of 1 kg by 1 K: **Q = mcΔθ** (J kg⁻¹ K⁻¹). For water c ≈ 4200 J kg⁻¹ K⁻¹. The **heat capacity** of a body is C = mc (J K⁻¹).\n\nThe **specific latent heat** L is the energy needed to change the state of 1 kg without a change of temperature: **Q = mL**. For ice L_f ≈ 3.34 × 10⁵ J kg⁻¹ (fusion) and for water L_v ≈ 2.26 × 10⁶ J kg⁻¹ (vaporisation)."
+    },
+    {
+     "type": "key",
+     "style": "methode",
+     "title": "Method",
+     "md": "1. Split the process into stages: heating a solid, melting, heating the liquid, boiling, heating the vapour.\n2. Use mcΔθ for the stages with a temperature change and mL for the changes of state.\n3. Add the energies. For mixing: heat lost by the hot body = heat gained by the cold body (no losses).\n4. For electrical heating: Pt = mcΔθ (+ losses). Efficiency = useful energy ÷ energy supplied."
+    },
+    {
+     "type": "illustration",
+     "figure": {
+      "kind": "shapes",
+      "w": 400,
+      "h": 250,
+      "items": [
+       {
+        "t": "line",
+        "x1": 60,
+        "y1": 220,
+        "x2": 60,
+        "y2": 20,
+        "color": "ink",
+        "width": 2,
+        "arrow": "end"
+       },
+       {
+        "t": "line",
+        "x1": 60,
+        "y1": 220,
+        "x2": 370,
+        "y2": 220,
+        "color": "ink",
+        "width": 2,
+        "arrow": "end"
+       },
+       {
+        "t": "text",
+        "x": 66,
+        "y": 16,
+        "text": "temperature",
+        "size": 12,
+        "anchor": "start",
+        "color": "ink"
+       },
+       {
+        "t": "text",
+        "x": 370,
+        "y": 240,
+        "text": "energy supplied",
+        "size": 12,
+        "anchor": "end",
+        "color": "ink"
+       },
+       {
+        "t": "text",
+        "x": 52,
+        "y": 164,
+        "text": "0 °C",
+        "size": 12,
+        "anchor": "end",
+        "color": "ink"
+       },
+       {
+        "t": "text",
+        "x": 52,
+        "y": 64,
+        "text": "100 °C",
+        "size": 12,
+        "anchor": "end",
+        "color": "ink"
+       },
+       {
+        "t": "poly",
+        "pts": [
+         70,
+         195,
+         105,
+         160,
+         165,
+         160,
+         245,
+         64,
+         315,
+         64,
+         345,
+         40
+        ],
+        "stroke": "red",
+        "width": 3,
+        "closed": false
+       },
+       {
+        "t": "text",
+        "x": 76,
+        "y": 180,
+        "text": "ice",
+        "size": 12,
+        "anchor": "start",
+        "color": "ink"
+       },
+       {
+        "t": "text",
+        "x": 135,
+        "y": 180,
+        "text": "melting",
+        "size": 12,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "text",
+        "x": 185,
+        "y": 108,
+        "text": "water",
+        "size": 12,
+        "anchor": "end",
+        "color": "ink"
+       },
+       {
+        "t": "text",
+        "x": 280,
+        "y": 84,
+        "text": "boiling",
+        "size": 12,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "text",
+        "x": 345,
+        "y": 62,
+        "text": "steam",
+        "size": 12,
+        "anchor": "start",
+        "color": "ink"
+       }
+      ]
+     },
+     "caption": "Heating curve of ice to steam (schematic, not to scale).",
+     "alt": "Temperature against energy supplied: ice warming, a flat melting stage at 0 degrees, water warming, a flat boiling stage at 100 degrees, then steam warming."
+    },
+    {
+     "type": "key",
+     "style": "retenir",
+     "title": "Why the temperature is constant at a change of state",
+     "md": "During melting or boiling the energy supplied increases the **potential energy** of the molecules (their separation) and not their mean kinetic energy, so the temperature does not rise. Latent heat of vaporisation is much larger than that of fusion because the molecules must be separated completely."
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Common mistakes",
+     "md": "- Forgetting the latent heat stage (heating ice at 0 °C to water at 20 °C also needs the energy to melt it).\n- Using Δθ in kelvin and in °C inconsistently: a **change** of 1 K = a change of 1 °C, but absolute temperatures differ by 273.\n- Mixing J and kJ, or g and kg (c is per kilogram).\n- In mixing problems, forgetting that the final temperature lies between the two initial ones."
+    },
+    {
+     "type": "example",
+     "title": "Example 1 — Electric kettle",
+     "statement": "A 3.0 kW kettle heats 2.0 kg of water from 25 °C to 100 °C (c = 4200 J kg⁻¹ K⁻¹). Find the energy and the time, assuming no losses.",
+     "steps": [
+      "Q = mcΔθ = 2.0 × 4200 × 75 = 6.3 × 10⁵ J.",
+      "t = Q/P = 6.3 × 10⁵ ÷ 3000 = 210 s (3.5 minutes)."
+     ],
+     "answer": "6.3 × 10⁵ J, 210 s"
+    },
+    {
+     "type": "example",
+     "title": "Example 2 — Ice to warm water",
+     "statement": "How much energy is needed to change 0.20 kg of ice at 0 °C into water at 20 °C? (L_f = 3.34 × 10⁵ J kg⁻¹)",
+     "steps": [
+      "Melting: Q₁ = mL = 0.20 × 3.34 × 10⁵ = 6.68 × 10⁴ J.",
+      "Warming the water: Q₂ = 0.20 × 4200 × 20 = 1.68 × 10⁴ J.",
+      "Total = 6.68 × 10⁴ + 1.68 × 10⁴ = 8.36 × 10⁴ J."
+     ],
+     "answer": "8.36 × 10⁴ J"
+    }
+   ],
+   "chapter": "lower6-physics-ch-thermal"
+  },
+  {
+   "id": "lower6-physics-gases",
+   "title": "Ideal gases and kinetic theory",
+   "minutes": 35,
+   "programRef": "GCE Advanced Level Physics — thermal physics (to be checked against the official syllabus)",
+   "status": "draft",
+   "author": "CastBridge (AI draft)",
+   "source": "Original writing following the Cameroonian curriculum; to be reviewed by a teacher",
+   "objectives": [
+    "State the gas laws and use pV = nRT and pV = NkT with temperatures in kelvin",
+    "State the assumptions of the kinetic theory and use p = ⅓ρ⟨c²⟩ to relate pressure to molecular motion",
+    "Relate mean molecular kinetic energy to absolute temperature: ½m⟨c²⟩ = (3/2)kT"
+   ],
+   "prerequisites": [
+    "lower6-physics-heat",
+    "lower6-physics-momentum"
+   ],
+   "exercises": [
+    "lower6-physics-ch-thermal-e07",
+    "lower6-physics-ch-thermal-e08",
+    "lower6-physics-ch-thermal-e09",
+    "lower6-physics-ch-thermal-e10",
+    "lower6-physics-ch-thermal-e11",
+    "lower6-physics-ch-thermal-e12"
+   ],
+   "selfCheck": [
+    "lower6-physics-gases-q1",
+    "lower6-physics-gases-q2",
+    "lower6-physics-gases-q3",
+    "lower6-physics-gases-q4",
+    "lower6-physics-gases-q5"
+   ],
+   "reviewNotes": [
+    "R = 8.31 J mol⁻¹ K⁻¹, k = 1.38 × 10⁻²³ J K⁻¹, N_A = 6.02 × 10²³ mol⁻¹ and T = θ + 273 are used.",
+    "The derivation of p = ⅓ρ⟨c²⟩ is stated, not derived; check whether the board expects the derivation.",
+    "Real gases and Van der Waals are not included.",
+    "Syllabus references, scope and level of difficulty are to be checked against the official text; all facts, formulas and worked examples to be verified by a teacher before release."
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "The ideal gas",
+     "md": "An **ideal gas** obeys **pV = nRT** exactly (n in mol, T in K, R = 8.31 J mol⁻¹ K⁻¹); in terms of the number of molecules N: **pV = NkT** (k = 1.38 × 10⁻²³ J K⁻¹ = R/N_A, N_A = 6.02 × 10²³ mol⁻¹).\n\nSpecial cases: Boyle (T constant) pV = constant; pressure law (V constant) p/T = constant; Charles (p constant) V/T = constant. **T (K) = θ (°C) + 273**."
+    },
+    {
+     "type": "key",
+     "style": "formule",
+     "title": "Kinetic theory of gases",
+     "md": "Assumptions: many identical molecules in random motion; negligible volume compared with the container; no intermolecular forces except during (elastic) collisions; collision time negligible.\n\nResult: **pV = ⅓Nm⟨c²⟩**, i.e. p = ⅓ρ⟨c²⟩. Comparing with pV = NkT: **½m⟨c²⟩ = (3/2)kT**. The r.m.s. speed is c_rms = √⟨c²⟩ = √(3RT/M) (M = molar mass in kg mol⁻¹).",
+     "tex": "pV=nRT\\qquad pV=\\frac{1}{3}Nm\\langle c^{2}\\rangle\\qquad \\frac{1}{2}m\\langle c^{2}\\rangle=\\frac{3}{2}kT"
+    },
+    {
+     "type": "illustration",
+     "figure": {
+      "kind": "plot",
+      "xmin": 1,
+      "xmax": 8,
+      "ymin": 0,
+      "ymax": 25,
+      "grid": 2,
+      "w": 380,
+      "h": 250,
+      "curves": [
+       {
+        "expr": "24/x",
+        "color": "red",
+        "label": "higher T"
+       },
+       {
+        "expr": "12/x",
+        "color": "blue",
+        "label": "lower T"
+       }
+      ],
+      "points": [],
+      "segments": [],
+      "xlabel": "V",
+      "ylabel": "p"
+     },
+     "caption": "Isotherms of an ideal gas: pV = constant at each temperature.",
+     "alt": "Two hyperbola-shaped curves of pressure against volume, the upper one for a higher temperature."
+    },
+    {
+     "type": "key",
+     "style": "retenir",
+     "title": "Internal energy",
+     "md": "For an ideal gas the internal energy is the total kinetic energy of the molecules (no potential energy): for a monatomic gas **U = (3/2)nRT**. It depends only on temperature. A real gas behaves ideally at low pressure and high temperature."
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Common mistakes",
+     "md": "- Using °C instead of kelvin in gas-law calculations (always add 273).\n- Using g mol⁻¹ instead of kg mol⁻¹ for M in c_rms.\n- Using volume in dm³ or cm³ with R in SI: convert to m³ (1 dm³ = 10⁻³ m³).\n- Writing ⟨c²⟩ as (⟨c⟩)²: the mean of the squares is larger."
+    },
+    {
+     "type": "example",
+     "title": "Example 1 — Amount of gas",
+     "statement": "A cylinder of volume 25 dm³ holds an ideal gas at 2.0 × 10⁵ Pa and 27 °C. Find the number of moles and molecules.",
+     "steps": [
+      "T = 27 + 273 = 300 K and V = 25 × 10⁻³ m³.",
+      "n = pV/RT = 2.0 × 10⁵ × 25 × 10⁻³ ÷ (8.31 × 300) = 2.01 mol.",
+      "N = nN_A = 2.01 × 6.02 × 10²³ = 1.21 × 10²⁴ molecules."
+     ],
+     "answer": "n = 2.0 mol, N = 1.2 × 10²⁴ molecules"
+    },
+    {
+     "type": "example",
+     "title": "Example 2 — Speed of molecules",
+     "statement": "Find the r.m.s. speed of nitrogen molecules (M = 0.028 kg mol⁻¹) at 300 K and the mean kinetic energy of a molecule.",
+     "steps": [
+      "c_rms = √(3RT/M) = √(3 × 8.31 × 300 ÷ 0.028) = √(2.67 × 10⁵) = 517 m/s.",
+      "Mean kinetic energy = (3/2)kT = 1.5 × 1.38 × 10⁻²³ × 300 = 6.21 × 10⁻²¹ J."
+     ],
+     "answer": "517 m/s; 6.2 × 10⁻²¹ J"
+    }
+   ],
+   "chapter": "lower6-physics-ch-thermal"
+  }
+ ],
+ "exercises": [
+  {
+   "id": "lower6-physics-ch-thermal-e01",
+   "kind": "numeric",
+   "tier": "application",
+   "lesson": "lower6-physics-heat",
+   "source": "Original exercise, GCE Advanced Level style (g = 9.8 m/s²)",
+   "prompt": "How much energy is needed to heat 0.50 kg of water by 40 K (J)?",
+   "answer": 84000.0,
+   "tolerance": 10,
+   "unit": "J",
+   "explanation": "Q = mcΔθ = 0.50 × 4200 × 40 = 84 000 J.",
+   "difficulty": 1,
+   "points": 2,
+   "chapter": "lower6-physics-ch-thermal"
+  },
+  {
+   "id": "lower6-physics-ch-thermal-e02",
+   "kind": "numeric",
+   "tier": "application",
+   "lesson": "lower6-physics-heat",
+   "source": "Original exercise, GCE Advanced Level style (g = 9.8 m/s²)",
+   "prompt": "How much energy melts 0.30 kg of ice at 0 °C (J; L_f = 3.34 × 10⁵ J kg⁻¹)?",
+   "answer": 100000.0,
+   "tolerance": 500,
+   "unit": "J",
+   "explanation": "Q = mL = 0.30 × 3.34 × 10⁵ = 1.00 × 10⁵ J.",
+   "difficulty": 1,
+   "points": 2,
+   "chapter": "lower6-physics-ch-thermal"
+  },
+  {
+   "id": "lower6-physics-ch-thermal-e03",
+   "kind": "truefalse",
+   "tier": "application",
+   "lesson": "lower6-physics-heat",
+   "source": "Original exercise, GCE Advanced Level style (g = 9.8 m/s²)",
+   "prompt": "True or false: the temperature of boiling water rises while it is boiling if more heat is supplied.",
+   "answer": false,
+   "explanation": "The energy goes into separating molecules (latent heat), so the temperature stays constant at the boiling point.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "lower6-physics-ch-thermal"
+  },
+  {
+   "id": "lower6-physics-ch-thermal-e04",
+   "kind": "numeric",
+   "tier": "approfondissement",
+   "lesson": "lower6-physics-heat",
+   "source": "Original exercise, GCE Advanced Level style (g = 9.8 m/s²)",
+   "prompt": "0.30 kg of water at 80 °C is mixed with 0.50 kg of water at 20 °C in an insulated container. Find the final temperature (°C).",
+   "answer": 42.5,
+   "tolerance": 0.1,
+   "unit": "°C",
+   "explanation": "0.30c(80 − θ) = 0.50c(θ − 20), so 24 − 0.3θ = 0.5θ − 10 and θ = 34/0.8 = 42.5 °C.",
+   "difficulty": 2,
+   "points": 3,
+   "chapter": "lower6-physics-ch-thermal"
+  },
+  {
+   "id": "lower6-physics-ch-thermal-e05",
+   "kind": "numeric",
+   "tier": "approfondissement",
+   "lesson": "lower6-physics-heat",
+   "source": "Original exercise, GCE Advanced Level style (g = 9.8 m/s²)",
+   "prompt": "A 60 W heater warms a 0.50 kg block of metal by 12 K in 100 s with no losses. Find c of the metal (J kg⁻¹ K⁻¹).",
+   "answer": 1000.0,
+   "tolerance": 5,
+   "unit": "J/(kg K)",
+   "explanation": "c = Pt/(mΔθ) = 6000/(0.50 × 12) = 1000 J kg⁻¹ K⁻¹.",
+   "difficulty": 2,
+   "points": 3,
+   "chapter": "lower6-physics-ch-thermal"
+  },
+  {
+   "id": "lower6-physics-ch-thermal-e06",
+   "kind": "problem",
+   "tier": "examen",
+   "lesson": "lower6-physics-heat",
+   "source": "Original exercise, GCE Advanced Level style (g = 9.8 m/s²)",
+   "prompt": "A 1.5 kW electric kettle contains 1.0 kg of water at 20 °C (c = 4200 J kg⁻¹ K⁻¹, L_v = 2.26 × 10⁶ J kg⁻¹).",
+   "difficulty": 2,
+   "parts": [
+    {
+     "kind": "numeric",
+     "points": 1,
+     "prompt": "Energy to bring the water to 100 °C (kJ).",
+     "answer": 336.0,
+     "tolerance": 1,
+     "explanation": "Q = 1.0 × 4200 × 80 = 336 000 J = 336 kJ.",
+     "unit": "kJ",
+     "id": "lower6-physics-ch-thermal-e06-a"
+    },
+    {
+     "kind": "numeric",
+     "points": 2,
+     "prompt": "Time to reach 100 °C if 20 % of the energy is lost (s).",
+     "answer": 280.0,
+     "tolerance": 1,
+     "explanation": "Useful power = 0.80 × 1500 = 1200 W; t = 336 000/1200 = 280 s.",
+     "unit": "s",
+     "id": "lower6-physics-ch-thermal-e06-b"
+    },
+    {
+     "kind": "numeric",
+     "points": 1,
+     "prompt": "Extra energy to boil away 0.10 kg of water at 100 °C (kJ).",
+     "answer": 226.0,
+     "tolerance": 1,
+     "explanation": "Q = mL = 0.10 × 2.26 × 10⁶ = 2.26 × 10⁵ J = 226 kJ.",
+     "unit": "kJ",
+     "id": "lower6-physics-ch-thermal-e06-c"
+    },
+    {
+     "kind": "mcq",
+     "points": 1,
+     "prompt": "The extra energy in the last part increases",
+     "choices": [
+      "the mass of water",
+      "the mean kinetic energy of the molecules",
+      "the potential energy of the water molecules",
+      "the temperature of the water"
+     ],
+     "answer": 2,
+     "explanation": "At constant temperature only the potential energy of the molecules changes.",
+     "id": "lower6-physics-ch-thermal-e06-d"
+    }
+   ],
+   "chapter": "lower6-physics-ch-thermal"
+  },
+  {
+   "id": "lower6-physics-heat-q1",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "lower6-physics-heat",
+   "prompt": "The SI unit of specific heat capacity is",
+   "choices": [
+    "J K⁻¹",
+    "J kg⁻¹ K⁻¹",
+    "J kg K",
+    "J kg⁻¹"
+   ],
+   "answer": 1,
+   "explanation": "c = Q/(mΔθ).",
+   "chapter": "lower6-physics-ch-thermal"
+  },
+  {
+   "id": "lower6-physics-heat-q2",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "lower6-physics-heat",
+   "prompt": "Which has the larger latent heat for water?",
+   "choices": [
+    "cannot be compared",
+    "vaporisation",
+    "they are equal",
+    "fusion"
+   ],
+   "answer": 1,
+   "explanation": "2.26 × 10⁶ J kg⁻¹ is about seven times 3.34 × 10⁵ J kg⁻¹.",
+   "chapter": "lower6-physics-ch-thermal"
+  },
+  {
+   "id": "lower6-physics-heat-q3",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "lower6-physics-heat",
+   "prompt": "Water of mass m and c = 4200 gains 8400 J. Its temperature rise is 2 K when m is",
+   "choices": [
+    "4.2 kg",
+    "1.0 kg",
+    "0.5 kg",
+    "2.0 kg"
+   ],
+   "answer": 1,
+   "explanation": "Δθ = 8400/(1.0 × 4200) = 2 K.",
+   "chapter": "lower6-physics-ch-thermal"
+  },
+  {
+   "id": "lower6-physics-heat-q4",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "lower6-physics-heat",
+   "prompt": "A cold drink at 0 °C in a warm room warms up. The heat flows",
+   "choices": [
+    "from the drink to the room",
+    "only by radiation",
+    "from the room to the drink",
+    "in neither direction"
+   ],
+   "answer": 2,
+   "explanation": "Heat flows from the hotter to the colder body.",
+   "chapter": "lower6-physics-ch-thermal"
+  },
+  {
+   "id": "lower6-physics-heat-q5",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "lower6-physics-heat",
+   "prompt": "During melting, the energy supplied is used to",
+   "choices": [
+    "increase the potential energy of molecules",
+    "increase the kinetic energy of molecules",
+    "reduce the mass",
+    "raise the temperature"
+   ],
+   "answer": 0,
+   "explanation": "Bonds are loosened: potential energy rises, temperature is constant.",
+   "chapter": "lower6-physics-ch-thermal"
+  },
+  {
+   "id": "lower6-physics-ch-thermal-e07",
+   "kind": "numeric",
+   "tier": "application",
+   "lesson": "lower6-physics-gases",
+   "source": "Original exercise, GCE Advanced Level style (g = 9.8 m/s²)",
+   "prompt": "A gas at 27 °C has pressure 1.0 × 10⁵ Pa. At constant volume it is heated to 127 °C. Find the new pressure (10⁵ Pa, 3 s.f.).",
+   "answer": 1.33,
+   "tolerance": 0.01,
+   "unit": "× 10⁵ Pa",
+   "explanation": "p₂ = p₁T₂/T₁ = 1.0 × 10⁵ × 400/300 = 1.33 × 10⁵ Pa.",
+   "difficulty": 1,
+   "points": 2,
+   "chapter": "lower6-physics-ch-thermal"
+  },
+  {
+   "id": "lower6-physics-ch-thermal-e08",
+   "kind": "numeric",
+   "tier": "application",
+   "lesson": "lower6-physics-gases",
+   "source": "Original exercise, GCE Advanced Level style (g = 9.8 m/s²)",
+   "prompt": "Convert 27 °C to kelvin (K).",
+   "answer": 300,
+   "tolerance": 0,
+   "unit": "K",
+   "explanation": "T = 27 + 273 = 300 K.",
+   "difficulty": 1,
+   "points": 2,
+   "chapter": "lower6-physics-ch-thermal"
+  },
+  {
+   "id": "lower6-physics-ch-thermal-e09",
+   "kind": "truefalse",
+   "tier": "application",
+   "lesson": "lower6-physics-gases",
+   "source": "Original exercise, GCE Advanced Level style (g = 9.8 m/s²)",
+   "prompt": "True or false: at the same temperature, hydrogen and oxygen molecules have the same mean kinetic energy.",
+   "answer": true,
+   "explanation": "Mean KE = (3/2)kT depends only on temperature; the lighter hydrogen molecules simply move faster.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "lower6-physics-ch-thermal"
+  },
+  {
+   "id": "lower6-physics-ch-thermal-e10",
+   "kind": "numeric",
+   "tier": "approfondissement",
+   "lesson": "lower6-physics-gases",
+   "source": "Original exercise, GCE Advanced Level style (g = 9.8 m/s²)",
+   "prompt": "A gas of volume 4.0 dm³ at 1.0 × 10⁵ Pa is compressed isothermally to 1.0 dm³. Find the final pressure (10⁵ Pa).",
+   "answer": 4.0,
+   "tolerance": 0.01,
+   "unit": "× 10⁵ Pa",
+   "explanation": "Boyle: p₂ = p₁V₁/V₂ = 1.0 × 10⁵ × 4.0/1.0 = 4.0 × 10⁵ Pa.",
+   "difficulty": 2,
+   "points": 3,
+   "chapter": "lower6-physics-ch-thermal"
+  },
+  {
+   "id": "lower6-physics-ch-thermal-e11",
+   "kind": "numeric",
+   "tier": "approfondissement",
+   "lesson": "lower6-physics-gases",
+   "source": "Original exercise, GCE Advanced Level style (g = 9.8 m/s²)",
+   "prompt": "Find the total internal energy of 2.0 mol of a monatomic ideal gas at 300 K (J, 3 s.f.).",
+   "answer": 7480.0,
+   "tolerance": 10,
+   "unit": "J",
+   "explanation": "U = (3/2)nRT = 1.5 × 2.0 × 8.31 × 300 = 7480 J.",
+   "difficulty": 2,
+   "points": 3,
+   "chapter": "lower6-physics-ch-thermal"
+  },
+  {
+   "id": "lower6-physics-ch-thermal-e12",
+   "kind": "problem",
+   "tier": "examen",
+   "lesson": "lower6-physics-gases",
+   "source": "Original exercise, GCE Advanced Level style (g = 9.8 m/s²)",
+   "prompt": "A car tyre contains air at an absolute pressure of 2.2 × 10⁵ Pa at 27 °C. After a long journey the air in the tyre is at 57 °C. Assume the volume is constant.",
+   "difficulty": 2,
+   "parts": [
+    {
+     "kind": "numeric",
+     "points": 1,
+     "prompt": "Absolute temperature at the start (K).",
+     "answer": 300,
+     "tolerance": 0,
+     "explanation": "27 + 273 = 300 K.",
+     "unit": "K",
+     "id": "lower6-physics-ch-thermal-e12-a"
+    },
+    {
+     "kind": "numeric",
+     "points": 2,
+     "prompt": "Final pressure (10⁵ Pa, 3 s.f.).",
+     "answer": 2.42,
+     "tolerance": 0.01,
+     "explanation": "p₂ = 2.2 × 10⁵ × 330/300 = 2.42 × 10⁵ Pa.",
+     "unit": "× 10⁵ Pa",
+     "id": "lower6-physics-ch-thermal-e12-b"
+    },
+    {
+     "kind": "mcq",
+     "points": 1,
+     "prompt": "The pressure increases because",
+     "choices": [
+      "the molecules get bigger",
+      "the volume of the tyre decreases",
+      "there are more molecules",
+      "the molecules move faster and hit the walls harder and more often"
+     ],
+     "answer": 3,
+     "explanation": "Higher T means a larger mean speed, so a larger momentum change per collision and more collisions.",
+     "id": "lower6-physics-ch-thermal-e12-c"
+    }
+   ],
+   "chapter": "lower6-physics-ch-thermal"
+  },
+  {
+   "id": "lower6-physics-gases-q1",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "lower6-physics-gases",
+   "prompt": "Which temperature is the same as 0 °C?",
+   "choices": [
+    "0 K",
+    "373 K",
+    "273 K",
+    "100 K"
+   ],
+   "answer": 2,
+   "explanation": "T = θ + 273.",
+   "chapter": "lower6-physics-ch-thermal"
+  },
+  {
+   "id": "lower6-physics-gases-q2",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "lower6-physics-gases",
+   "prompt": "The kinetic theory assumes that molecules",
+   "choices": [
+    "attract strongly",
+    "have large volume",
+    "exert no forces on each other except in collisions",
+    "never collide"
+   ],
+   "answer": 2,
+   "explanation": "This is the ideal-gas assumption.",
+   "chapter": "lower6-physics-ch-thermal"
+  },
+  {
+   "id": "lower6-physics-gases-q3",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "lower6-physics-gases",
+   "prompt": "The mean kinetic energy of a gas molecule is proportional to",
+   "choices": [
+    "the molar mass",
+    "the pressure",
+    "the absolute temperature",
+    "the volume"
+   ],
+   "answer": 2,
+   "explanation": "½m⟨c²⟩ = (3/2)kT.",
+   "chapter": "lower6-physics-ch-thermal"
+  },
+  {
+   "id": "lower6-physics-gases-q4",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "lower6-physics-gases",
+   "prompt": "The temperature of a gas is doubled from 300 K to 600 K. The r.m.s. speed is multiplied by",
+   "choices": [
+    "2",
+    "1/2",
+    "√2",
+    "4"
+   ],
+   "answer": 2,
+   "explanation": "c_rms ∝ √T.",
+   "chapter": "lower6-physics-ch-thermal"
+  },
+  {
+   "id": "lower6-physics-gases-q5",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "lower6-physics-gases",
+   "prompt": "The product pV for a fixed mass of ideal gas at constant temperature is",
+   "choices": [
+    "proportional to T²",
+    "constant",
+    "zero",
+    "inversely proportional to p"
+   ],
+   "answer": 1,
+   "explanation": "Boyle's law.",
+   "chapter": "lower6-physics-ch-thermal"
+  }
+ ]
+}

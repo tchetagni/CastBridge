@@ -1,0 +1,72 @@
+{
+  "format": 1,
+  "id": "gceal-chemistry",
+  "version": 1,
+  "title": "Chemistry — GCE A Level",
+  "description": "Upper Sixth chemistry revision for the GCE Advanced Level: electrode potentials, equilibria, energetics, Groups 2 and 7, period 3, transition metals, carbonyls, carboxylic acids, aromatic chemistry, amines and polymers, spectroscopy, industrial and environmental chemistry and practical skills, with a mock paper. Draft.",
+  "lang": "en",
+  "cursus": "secondary",
+  "level": "Upper Sixth",
+  "subject": "chemistry",
+  "exam": "GCE-AL",
+  "programRef": "Cameroon GCE Board — Advanced Level Chemistry syllabus (Upper Sixth part) — to be checked against the official texts",
+  "authors": [
+    "CastBridge — brouillon rédigé avec une IA, à relire par un enseignant"
+  ],
+  "status": "draft",
+  "updatedAt": "2026-10-01",
+  "chapters": [
+    {
+      "id": "gceal-chemistry-ch-physical",
+      "title": "Electrode potentials, equilibria and energetics",
+      "order": 1,
+      "programRef": "GCE Advanced Level Chemistry — physical chemistry (to be checked against the official syllabus)"
+    },
+    {
+      "id": "gceal-chemistry-ch-inorganic",
+      "title": "Inorganic chemistry: groups, period 3 and transition metals",
+      "order": 2,
+      "programRef": "GCE Advanced Level Chemistry — inorganic chemistry (to be checked against the official syllabus)"
+    },
+    {
+      "id": "gceal-chemistry-ch-organic",
+      "title": "Organic chemistry: carbonyls, acids, arenes, amines and polymers",
+      "order": 3,
+      "programRef": "GCE Advanced Level Chemistry — organic chemistry (to be checked against the official syllabus)"
+    },
+    {
+      "id": "gceal-chemistry-ch-analysis",
+      "title": "Analysis, industry and practical skills",
+      "order": 4,
+      "programRef": "GCE Advanced Level Chemistry — analytical techniques, industrial chemistry, practical work (to be checked against the official syllabus)"
+    }
+  ],
+  "mockExams": [
+    {
+      "id": "gceal-chemistry-mock-1",
+      "title": "GCE A Level mock — Chemistry (paper 1)",
+      "minutes": 90,
+      "outOf": 20,
+      "instructions": "Answer all questions. Section A has four short multiple-choice questions (2 marks each); Section B has three structured questions (4 marks each). The paper is marked out of 20. Data: F = 96 500 C mol⁻¹, K_w = 1.0 × 10⁻¹⁴, A_r: H 1, C 12, O 16. This is an original practice paper; its format is not that of the Cameroon GCE Board and should be checked against the official texts.",
+      "sections": [
+        {
+          "title": "Section A — Short questions (8 marks)",
+          "exercises": [
+            "gceal-chemistry-ch-physical-m01",
+            "gceal-chemistry-ch-physical-m02",
+            "gceal-chemistry-ch-physical-m03",
+            "gceal-chemistry-ch-organic-m01"
+          ]
+        },
+        {
+          "title": "Section B — Structured questions (12 marks)",
+          "exercises": [
+            "gceal-chemistry-ch-physical-m04",
+            "gceal-chemistry-ch-analysis-m01",
+            "gceal-chemistry-ch-analysis-m02"
+          ]
+        }
+      ]
+    }
+  ]
+}

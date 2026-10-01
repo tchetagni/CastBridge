@@ -1,0 +1,798 @@
+{
+ "chapter": "gceal-physics-ch-nuclear",
+ "lessons": [
+  {
+   "id": "gceal-physics-radioactivity",
+   "title": "Radioactivity and the decay law",
+   "minutes": 35,
+   "programRef": "GCE Advanced Level Physics — nuclear physics (to be checked against the official syllabus)",
+   "status": "draft",
+   "author": "CastBridge (AI draft)",
+   "source": "Original writing following the Cameroonian curriculum; to be reviewed by a teacher",
+   "objectives": [
+    "Describe the nature, ionising power and penetration of α, β and γ radiation and write balanced nuclear equations",
+    "Use the decay law A = λN, N = N₀e^(−λt) and t½ = ln 2/λ",
+    "Apply half-life ideas to radiocarbon dating, medical tracers and safety"
+   ],
+   "prerequisites": [
+    "gceal-physics-duality"
+   ],
+   "exercises": [
+    "gceal-physics-ch-nuclear-e01",
+    "gceal-physics-ch-nuclear-e02",
+    "gceal-physics-ch-nuclear-e03",
+    "gceal-physics-ch-nuclear-e04",
+    "gceal-physics-ch-nuclear-e05",
+    "gceal-physics-ch-nuclear-e06"
+   ],
+   "selfCheck": [
+    "gceal-physics-radioactivity-q1",
+    "gceal-physics-radioactivity-q2",
+    "gceal-physics-radioactivity-q3",
+    "gceal-physics-radioactivity-q4",
+    "gceal-physics-radioactivity-q5"
+   ],
+   "reviewNotes": [
+    "Half-life of carbon-14: 5730 years (often rounded to 5700 or 5600 in textbooks) — check the board's value.",
+    "β⁺ decay, electron capture and the neutrino are only mentioned; check the syllabus.",
+    "Syllabus references, scope and level of difficulty are to be checked against the official text; all facts, formulas and worked examples to be verified by a teacher before release."
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Nuclear radiation",
+     "md": "A nuclide ᴬ_Z X has Z protons and A − Z neutrons. Unstable nuclei decay **randomly** (the decay of any one nucleus cannot be predicted) and **spontaneously** (unaffected by temperature or chemistry).\n\n**α**: helium nucleus ⁴₂He, strongly ionising, stopped by paper. **β⁻**: fast electron (from n → p + e⁻ + antineutrino), stopped by a few mm of aluminium. **γ**: photon, weakly ionising, reduced by thick lead. In equations the **total A and Z are conserved**."
+    },
+    {
+     "type": "key",
+     "style": "formule",
+     "title": "The decay law",
+     "md": "The **activity** A = −dN/dt = **λN**, where λ is the **decay constant** (s⁻¹); the unit of activity is the becquerel (Bq = 1 s⁻¹). Solving: **N = N₀e^(−λt)** and A = A₀e^(−λt).\n\nThe **half-life** t½ is the time for N (or A) to halve: **t½ = ln 2/λ = 0.693/λ**. After n half-lives the fraction left is (½)ⁿ.",
+     "tex": "A=\\lambda N\\qquad N=N_0e^{-\\lambda t}\\qquad t_{1/2}=\\frac{\\ln 2}{\\lambda}"
+    },
+    {
+     "type": "illustration",
+     "figure": {
+      "kind": "plot",
+      "xmin": 0,
+      "xmax": 20,
+      "ymin": 0,
+      "ymax": 100,
+      "grid": 5,
+      "w": 380,
+      "h": 250,
+      "curves": [
+       {
+        "expr": "100*exp(-0.6931*x/5)",
+        "color": "blue",
+        "label": "N"
+       }
+      ],
+      "points": [
+       {
+        "x": 5,
+        "y": 50,
+        "label": "T½",
+        "color": "red"
+       },
+       {
+        "x": 10,
+        "y": 25,
+        "label": null,
+        "color": "red"
+       },
+       {
+        "x": 15,
+        "y": 12.5,
+        "label": null,
+        "color": "red"
+       }
+      ],
+      "segments": [],
+      "xlabel": "t / days",
+      "ylabel": "% of N₀"
+     },
+     "caption": "Radioactive decay: the number of nuclei halves every half-life (here 5 days).",
+     "alt": "A decaying exponential curve from 100 per cent with red points at 50 per cent after 5 days, 25 per cent after 10 days and 12.5 per cent after 15 days."
+    },
+    {
+     "type": "key",
+     "style": "retenir",
+     "title": "Applications and safety",
+     "md": "**Radiocarbon dating**: living things take in carbon-14 from the atmosphere at a steady proportion; after death it decays (half-life about 5730 years) so the remaining activity gives the age. **Tracers** with short half-lives are used in medicine. **Safety**: keep exposure short, distance large and use shielding; handle sources with tongs; stored in lead-lined containers. A Geiger counter's count rate must be corrected for **background radiation**."
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Common mistakes",
+     "md": "- Using the half-life in years with λ in s⁻¹ without converting.\n- Saying that after two half-lives all the nuclei have decayed (¼ remain).\n- Forgetting to subtract the background count rate.\n- Thinking radioactivity can be switched off or changed by heating: it cannot."
+    },
+    {
+     "type": "example",
+     "title": "Example 1 — Using half-life",
+     "statement": "A source has half-life 8.0 days and an initial activity of 6.4 × 10⁵ Bq. Find the decay constant, the activity after 24 days, and the initial number of radioactive nuclei.",
+     "steps": [
+      "λ = ln 2/t½ = 0.693 ÷ (8.0 × 86 400 s) = 1.00 × 10⁻⁶ s⁻¹.",
+      "24 days = 3 half-lives, so A = 6.4 × 10⁵ × (½)³ = 8.0 × 10⁴ Bq.",
+      "N₀ = A₀/λ = 6.4 × 10⁵ ÷ 1.00 × 10⁻⁶ = 6.4 × 10¹¹ nuclei."
+     ],
+     "answer": "λ = 1.0 × 10⁻⁶ s⁻¹; A = 8.0 × 10⁴ Bq; N₀ = 6.4 × 10¹¹"
+    },
+    {
+     "type": "example",
+     "title": "Example 2 — Carbon dating",
+     "statement": "A wooden object has 60 % of the carbon-14 activity per gram of living wood. Estimate its age (half-life 5730 years).",
+     "steps": [
+      "λ = 0.693/5730 = 1.21 × 10⁻⁴ yr⁻¹.",
+      "A/A₀ = e^(−λt) = 0.60, so t = −ln(0.60)/λ = 0.511 ÷ 1.21 × 10⁻⁴ = 4.2 × 10³ years."
+     ],
+     "answer": "About 4200 years"
+    }
+   ],
+   "chapter": "gceal-physics-ch-nuclear"
+  },
+  {
+   "id": "gceal-physics-binding",
+   "title": "Mass defect, binding energy, fission and fusion",
+   "minutes": 35,
+   "programRef": "GCE Advanced Level Physics — nuclear physics (to be checked against the official syllabus)",
+   "status": "draft",
+   "author": "CastBridge (AI draft)",
+   "source": "Original writing following the Cameroonian curriculum; to be reviewed by a teacher",
+   "objectives": [
+    "Define mass defect and binding energy and use E = Δmc² with 1 u = 931.5 MeV",
+    "Describe the binding energy per nucleon curve and explain why fission and fusion release energy",
+    "Calculate energy released in nuclear reactions and decays"
+   ],
+   "prerequisites": [
+    "gceal-physics-radioactivity"
+   ],
+   "exercises": [
+    "gceal-physics-ch-nuclear-e07",
+    "gceal-physics-ch-nuclear-e08",
+    "gceal-physics-ch-nuclear-e09",
+    "gceal-physics-ch-nuclear-e10",
+    "gceal-physics-ch-nuclear-e11",
+    "gceal-physics-ch-nuclear-e12"
+   ],
+   "selfCheck": [
+    "gceal-physics-binding-q1",
+    "gceal-physics-binding-q2",
+    "gceal-physics-binding-q3",
+    "gceal-physics-binding-q4",
+    "gceal-physics-binding-q5"
+   ],
+   "reviewNotes": [
+    "Nuclear and atomic masses are textbook values given to six decimal places; check them against the board's data sheet.",
+    "Binding energy values per nucleon in the bar chart are standard rounded values (²H 1.11, ⁴He 7.07, ¹²C 7.68, ⁵⁶Fe 8.79, ²³⁵U 7.59 MeV).",
+    "Syllabus references, scope and level of difficulty are to be checked against the official text; all facts, formulas and worked examples to be verified by a teacher before release."
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Mass defect and binding energy",
+     "md": "The mass of a nucleus is **less** than the total mass of its separate nucleons. This **mass defect** is Δm = Zm_p + (A − Z)m_n − m_nucleus. The **binding energy** is the energy needed to separate the nucleus completely into nucleons: **E = Δmc²**.\n\nUseful: 1 u = 1.66 × 10⁻²⁷ kg and **1 u ≡ 931.5 MeV** (using E = mc²)."
+    },
+    {
+     "type": "key",
+     "style": "formule",
+     "title": "Binding energy per nucleon",
+     "md": "The **binding energy per nucleon** (E_b/A) measures nuclear stability. It rises steeply for light nuclei, has a broad maximum (about 8.8 MeV) near iron-56, and falls slowly for heavy nuclei.\n\n**Fission** of a heavy nucleus (e.g. U-235 splitting after absorbing a neutron into two medium nuclei and 2–3 neutrons) and **fusion** of light nuclei (e.g. deuterium + tritium → helium-4 + neutron) both move to higher E_b/A, so energy is released.",
+     "tex": "E=\\Delta m\\,c^{2}\\qquad 1\\,\\text{u}\\equiv 931.5\\ \\text{MeV}"
+    },
+    {
+     "type": "illustration",
+     "figure": {
+      "kind": "bars",
+      "w": 400,
+      "h": 250,
+      "bars": [
+       {
+        "label": "²H",
+        "value": 1.11,
+        "color": "orange"
+       },
+       {
+        "label": "⁴He",
+        "value": 7.07,
+        "color": "orange"
+       },
+       {
+        "label": "¹²C",
+        "value": 7.68,
+        "color": "blue"
+       },
+       {
+        "label": "⁵⁶Fe",
+        "value": 8.79,
+        "color": "green"
+       },
+       {
+        "label": "²³⁵U",
+        "value": 7.59,
+        "color": "blue"
+       }
+      ],
+      "unit": "MeV per nucleon"
+     },
+     "caption": "Binding energy per nucleon for selected nuclei: the maximum is near iron-56.",
+     "alt": "A bar chart of binding energy per nucleon for hydrogen-2, helium-4, carbon-12, iron-56 and uranium-235, with iron the tallest."
+    },
+    {
+     "type": "key",
+     "style": "retenir",
+     "title": "Reactions and reactors",
+     "md": "In a reaction, energy released Q = (total mass before − total mass after) × 931.5 MeV/u. A **chain reaction** occurs when the neutrons released cause further fission; in a reactor a **moderator** slows neutrons, **control rods** absorb them and a coolant removes heat. Fusion needs very high temperatures and pressures to overcome electrostatic repulsion (as in stars). One U-235 fission gives about 200 MeV."
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Common mistakes",
+     "md": "- Using the mass of the neutral atom with nuclear masses without care (the electron masses cancel only if you use atomic masses consistently).\n- Forgetting to convert u to MeV (× 931.5) or MeV to joules (× 1.60 × 10⁻¹³ J).\n- Confusing the binding energy with the energy released: binding energy is **needed** to break up the nucleus.\n- Saying the products have less mass because mass is 'destroyed': it is converted to energy."
+    },
+    {
+     "type": "example",
+     "title": "Example 1 — Helium-4",
+     "statement": "Find the binding energy and binding energy per nucleon of ⁴He. (m_p = 1.007276 u, m_n = 1.008665 u, nuclear mass of ⁴He = 4.001506 u.)",
+     "steps": [
+      "Δm = 2(1.007276 + 1.008665) − 4.001506 = 4.031882 − 4.001506 = 0.030376 u.",
+      "E = 0.030376 × 931.5 = 28.3 MeV.",
+      "Per nucleon: 28.3/4 = 7.07 MeV."
+     ],
+     "answer": "28.3 MeV in total; 7.07 MeV per nucleon"
+    },
+    {
+     "type": "example",
+     "title": "Example 2 — Fusion",
+     "statement": "Find the energy released in ²H + ³H → ⁴He + n (atomic masses: ²H 2.014102 u, ³H 3.016049 u, ⁴He 4.002603 u, n 1.008665 u).",
+     "steps": [
+      "Mass before = 2.014102 + 3.016049 = 5.030151 u.",
+      "Mass after = 4.002603 + 1.008665 = 5.011268 u.",
+      "Δm = 0.018883 u, so Q = 0.018883 × 931.5 = 17.6 MeV."
+     ],
+     "answer": "Q = 17.6 MeV"
+    }
+   ],
+   "chapter": "gceal-physics-ch-nuclear"
+  }
+ ],
+ "exercises": [
+  {
+   "id": "gceal-physics-ch-nuclear-e01",
+   "kind": "numeric",
+   "tier": "application",
+   "lesson": "gceal-physics-radioactivity",
+   "source": "Original exercise, GCE Advanced Level style (g = 9.8 m/s²)",
+   "prompt": "The half-life of a nuclide is 6.0 h. What fraction remains after 24 h (give a decimal)?",
+   "answer": 0.0625,
+   "tolerance": 0.0005,
+   "explanation": "24 h = 4 half-lives, so (½)⁴ = 1/16 = 0.0625.",
+   "difficulty": 1,
+   "points": 2,
+   "chapter": "gceal-physics-ch-nuclear"
+  },
+  {
+   "id": "gceal-physics-ch-nuclear-e02",
+   "kind": "numeric",
+   "tier": "application",
+   "lesson": "gceal-physics-radioactivity",
+   "source": "Original exercise, GCE Advanced Level style (g = 9.8 m/s²)",
+   "prompt": "A source of decay constant 2.0 × 10⁻³ s⁻¹ contains 5.0 × 10⁶ nuclei. Find its activity (Bq).",
+   "answer": 10000.0,
+   "tolerance": 1,
+   "unit": "Bq",
+   "explanation": "A = λN = 2.0 × 10⁻³ × 5.0 × 10⁶ = 1.0 × 10⁴ Bq.",
+   "difficulty": 1,
+   "points": 2,
+   "chapter": "gceal-physics-ch-nuclear"
+  },
+  {
+   "id": "gceal-physics-ch-nuclear-e03",
+   "kind": "truefalse",
+   "tier": "application",
+   "lesson": "gceal-physics-radioactivity",
+   "source": "Original exercise, GCE Advanced Level style (g = 9.8 m/s²)",
+   "prompt": "True or false: heating a radioactive sample increases its rate of decay.",
+   "answer": false,
+   "explanation": "Decay is spontaneous and independent of temperature and chemical state.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "gceal-physics-ch-nuclear"
+  },
+  {
+   "id": "gceal-physics-ch-nuclear-e04",
+   "kind": "numeric",
+   "tier": "approfondissement",
+   "lesson": "gceal-physics-radioactivity",
+   "source": "Original exercise, GCE Advanced Level style (g = 9.8 m/s²)",
+   "prompt": "Radium-226 has a decay constant of 1.4 × 10⁻¹¹ s⁻¹. Find its half-life in years (3 s.f., 1 year = 3.15 × 10⁷ s).",
+   "answer": 1570.0,
+   "tolerance": 5,
+   "unit": "years",
+   "explanation": "t½ = 0.693 ÷ 1.4 × 10⁻¹¹ = 4.95 × 10¹⁰ s = 1.57 × 10³ years.",
+   "difficulty": 2,
+   "points": 3,
+   "chapter": "gceal-physics-ch-nuclear"
+  },
+  {
+   "id": "gceal-physics-ch-nuclear-e05",
+   "kind": "numeric",
+   "tier": "approfondissement",
+   "lesson": "gceal-physics-radioactivity",
+   "source": "Original exercise, GCE Advanced Level style (g = 9.8 m/s²)",
+   "prompt": "A Geiger counter reads 340 counts per minute near a source. The background is 20 counts per minute. Find the corrected count rate (counts per minute).",
+   "answer": 320,
+   "tolerance": 0,
+   "unit": "counts/min",
+   "explanation": "340 − 20 = 320 counts per minute.",
+   "difficulty": 2,
+   "points": 3,
+   "chapter": "gceal-physics-ch-nuclear"
+  },
+  {
+   "id": "gceal-physics-ch-nuclear-e06",
+   "kind": "problem",
+   "tier": "examen",
+   "lesson": "gceal-physics-radioactivity",
+   "source": "Original exercise, GCE Advanced Level style (g = 9.8 m/s²)",
+   "prompt": "A radioisotope used as a tracer has a half-life of 6.0 hours. A sample has an initial activity of 3.2 × 10⁶ Bq.",
+   "difficulty": 2,
+   "parts": [
+    {
+     "kind": "numeric",
+     "points": 1,
+     "prompt": "Decay constant (10⁻⁵ s⁻¹, 3 s.f.).",
+     "answer": 3.21,
+     "tolerance": 0.02,
+     "explanation": "λ = ln 2/(6.0 × 3600) = 3.21 × 10⁻⁵ s⁻¹.",
+     "unit": "× 10⁻⁵ s⁻¹",
+     "id": "gceal-physics-ch-nuclear-e06-a"
+    },
+    {
+     "kind": "numeric",
+     "points": 1,
+     "prompt": "Activity after 24 hours (10⁵ Bq).",
+     "answer": 2.0,
+     "tolerance": 0.01,
+     "explanation": "24 h = 4 half-lives: 3.2 × 10⁶/16 = 2.0 × 10⁵ Bq.",
+     "unit": "× 10⁵ Bq",
+     "id": "gceal-physics-ch-nuclear-e06-b"
+    },
+    {
+     "kind": "numeric",
+     "points": 2,
+     "prompt": "Initial number of undecayed nuclei (10¹⁰, 3 s.f.).",
+     "answer": 9.97,
+     "tolerance": 0.05,
+     "explanation": "N₀ = A₀/λ = 3.2 × 10⁶ ÷ 3.21 × 10⁻⁵ = 9.97 × 10¹⁰.",
+     "unit": "× 10¹⁰",
+     "id": "gceal-physics-ch-nuclear-e06-c"
+    },
+    {
+     "kind": "mcq",
+     "points": 1,
+     "prompt": "Why is a short half-life useful for a medical tracer?",
+     "choices": [
+      "the isotope is cheaper",
+      "it emits no radiation",
+      "the radiation dose to the patient soon becomes small",
+      "it can be recycled"
+     ],
+     "answer": 2,
+     "explanation": "A short half-life limits exposure time.",
+     "id": "gceal-physics-ch-nuclear-e06-d"
+    }
+   ],
+   "chapter": "gceal-physics-ch-nuclear"
+  },
+  {
+   "id": "gceal-physics-radioactivity-q1",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "gceal-physics-radioactivity",
+   "prompt": "Which radiation is the most strongly ionising?",
+   "choices": [
+    "beta",
+    "all equally",
+    "alpha",
+    "gamma"
+   ],
+   "answer": 2,
+   "explanation": "α particles are heavy and doubly charged.",
+   "chapter": "gceal-physics-ch-nuclear"
+  },
+  {
+   "id": "gceal-physics-radioactivity-q2",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "gceal-physics-radioactivity",
+   "prompt": "In β⁻ decay the proton number of the daughter nucleus",
+   "choices": [
+    "stays the same",
+    "decreases by 2",
+    "increases by 1",
+    "decreases by 1"
+   ],
+   "answer": 2,
+   "explanation": "A neutron changes into a proton.",
+   "chapter": "gceal-physics-ch-nuclear"
+  },
+  {
+   "id": "gceal-physics-radioactivity-q3",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "gceal-physics-radioactivity",
+   "prompt": "The unit becquerel is the same as",
+   "choices": [
+    "s",
+    "J s⁻¹",
+    "C s⁻¹",
+    "s⁻¹"
+   ],
+   "answer": 3,
+   "explanation": "1 Bq = one decay per second.",
+   "chapter": "gceal-physics-ch-nuclear"
+  },
+  {
+   "id": "gceal-physics-radioactivity-q4",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "gceal-physics-radioactivity",
+   "prompt": "The half-life of a source is 10 min. The activity falls to 1/8 of its initial value after",
+   "choices": [
+    "15 min",
+    "60 min",
+    "30 min",
+    "80 min"
+   ],
+   "answer": 2,
+   "explanation": "Three half-lives.",
+   "chapter": "gceal-physics-ch-nuclear"
+  },
+  {
+   "id": "gceal-physics-radioactivity-q5",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "gceal-physics-radioactivity",
+   "prompt": "Decay of an individual nucleus is",
+   "choices": [
+    "random",
+    "predictable",
+    "dependent on pressure",
+    "dependent on temperature"
+   ],
+   "answer": 0,
+   "explanation": "Only probabilities can be given.",
+   "chapter": "gceal-physics-ch-nuclear"
+  },
+  {
+   "id": "gceal-physics-ch-nuclear-e07",
+   "kind": "numeric",
+   "tier": "application",
+   "lesson": "gceal-physics-binding",
+   "source": "Original exercise, GCE Advanced Level style (g = 9.8 m/s²)",
+   "prompt": "A mass defect of 0.0300 u corresponds to what energy (MeV, 3 s.f.)?",
+   "answer": 27.9,
+   "tolerance": 0.1,
+   "unit": "MeV",
+   "explanation": "E = 0.0300 × 931.5 = 27.9 MeV.",
+   "difficulty": 1,
+   "points": 2,
+   "chapter": "gceal-physics-ch-nuclear"
+  },
+  {
+   "id": "gceal-physics-ch-nuclear-e08",
+   "kind": "numeric",
+   "tier": "application",
+   "lesson": "gceal-physics-binding",
+   "source": "Original exercise, GCE Advanced Level style (g = 9.8 m/s²)",
+   "prompt": "A nucleus has binding energy 120 MeV and 16 nucleons. Find the binding energy per nucleon (MeV).",
+   "answer": 7.5,
+   "tolerance": 0.01,
+   "unit": "MeV",
+   "explanation": "120/16 = 7.5 MeV.",
+   "difficulty": 1,
+   "points": 2,
+   "chapter": "gceal-physics-ch-nuclear"
+  },
+  {
+   "id": "gceal-physics-ch-nuclear-e09",
+   "kind": "truefalse",
+   "tier": "application",
+   "lesson": "gceal-physics-binding",
+   "source": "Original exercise, GCE Advanced Level style (g = 9.8 m/s²)",
+   "prompt": "True or false: fusion of two light nuclei releases energy because the product has a higher binding energy per nucleon.",
+   "answer": true,
+   "explanation": "Moving towards the peak of the curve releases energy.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "gceal-physics-ch-nuclear"
+  },
+  {
+   "id": "gceal-physics-ch-nuclear-e10",
+   "kind": "numeric",
+   "tier": "approfondissement",
+   "lesson": "gceal-physics-binding",
+   "source": "Original exercise, GCE Advanced Level style (g = 9.8 m/s²)",
+   "prompt": "Radium-226 (226.025410 u) decays by α emission to radon-222 (222.017578 u); α mass = 4.002603 u. Find the energy released (MeV, 3 s.f.).",
+   "answer": 4.87,
+   "tolerance": 0.03,
+   "unit": "MeV",
+   "explanation": "Δm = 226.025410 − (222.017578 + 4.002603) = 0.005229 u; Q = 0.005229 × 931.5 = 4.87 MeV.",
+   "difficulty": 2,
+   "points": 3,
+   "chapter": "gceal-physics-ch-nuclear"
+  },
+  {
+   "id": "gceal-physics-ch-nuclear-e11",
+   "kind": "numeric",
+   "tier": "approfondissement",
+   "lesson": "gceal-physics-binding",
+   "source": "Original exercise, GCE Advanced Level style (g = 9.8 m/s²)",
+   "prompt": "About 200 MeV is released per fission of U-235. Find the energy from 1.00 kg (10¹³ J, 2 s.f.; N_A = 6.02 × 10²³).",
+   "answer": 8.2,
+   "tolerance": 0.2,
+   "unit": "× 10¹³ J",
+   "explanation": "N = (1000/235) × 6.02 × 10²³ = 2.56 × 10²⁴ nuclei; E = 2.56 × 10²⁴ × 200 × 1.60 × 10⁻¹³ = 8.2 × 10¹³ J.",
+   "difficulty": 2,
+   "points": 3,
+   "chapter": "gceal-physics-ch-nuclear"
+  },
+  {
+   "id": "gceal-physics-ch-nuclear-e12",
+   "kind": "problem",
+   "tier": "examen",
+   "lesson": "gceal-physics-binding",
+   "source": "Original exercise, GCE Advanced Level style (g = 9.8 m/s²)",
+   "prompt": "Use 1 u = 931.5 MeV. A helium-4 nucleus (nuclear mass 4.001506 u) is made of 2 protons (1.007276 u each) and 2 neutrons (1.008665 u each).",
+   "difficulty": 2,
+   "parts": [
+    {
+     "kind": "numeric",
+     "points": 2,
+     "prompt": "Mass defect (in units of 10⁻² u, 3 s.f.).",
+     "answer": 3.04,
+     "tolerance": 0.01,
+     "explanation": "Δm = 4.031882 − 4.001506 = 0.03038 u = 3.04 × 10⁻² u.",
+     "unit": "× 10⁻² u",
+     "id": "gceal-physics-ch-nuclear-e12-a"
+    },
+    {
+     "kind": "numeric",
+     "points": 1,
+     "prompt": "Binding energy (MeV, 3 s.f.).",
+     "answer": 28.3,
+     "tolerance": 0.1,
+     "explanation": "E = 0.030376 × 931.5 = 28.3 MeV.",
+     "unit": "MeV",
+     "id": "gceal-physics-ch-nuclear-e12-b"
+    },
+    {
+     "kind": "numeric",
+     "points": 1,
+     "prompt": "Binding energy per nucleon (MeV, 3 s.f.).",
+     "answer": 7.07,
+     "tolerance": 0.05,
+     "explanation": "28.3/4 = 7.07 MeV per nucleon.",
+     "unit": "MeV",
+     "id": "gceal-physics-ch-nuclear-e12-c"
+    },
+    {
+     "kind": "mcq",
+     "points": 1,
+     "prompt": "Which nucleus is more stable according to the curve?",
+     "choices": [
+      "hydrogen-2 (1.1 MeV per nucleon)",
+      "iron-56 (8.8 MeV per nucleon)",
+      "helium-4 (7.07 MeV per nucleon)",
+      "all equally stable"
+     ],
+     "answer": 1,
+     "explanation": "Higher binding energy per nucleon means greater stability.",
+     "id": "gceal-physics-ch-nuclear-e12-d"
+    }
+   ],
+   "figure": {
+    "kind": "bars",
+    "w": 400,
+    "h": 250,
+    "bars": [
+     {
+      "label": "²H",
+      "value": 1.11,
+      "color": "orange"
+     },
+     {
+      "label": "⁴He",
+      "value": 7.07,
+      "color": "orange"
+     },
+     {
+      "label": "¹²C",
+      "value": 7.68,
+      "color": "blue"
+     },
+     {
+      "label": "⁵⁶Fe",
+      "value": 8.79,
+      "color": "green"
+     },
+     {
+      "label": "²³⁵U",
+      "value": 7.59,
+      "color": "blue"
+     }
+    ],
+    "unit": "MeV per nucleon"
+   },
+   "chapter": "gceal-physics-ch-nuclear"
+  },
+  {
+   "id": "gceal-physics-binding-q1",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "gceal-physics-binding",
+   "prompt": "1 atomic mass unit is equivalent to about",
+   "choices": [
+    "1.66 MeV",
+    "9315 MeV",
+    "93.15 MeV",
+    "931.5 MeV"
+   ],
+   "answer": 3,
+   "explanation": "E = (1.66 × 10⁻²⁷ × 9.00 × 10¹⁶) J = 1.49 × 10⁻¹⁰ J = 931.5 MeV.",
+   "chapter": "gceal-physics-ch-nuclear"
+  },
+  {
+   "id": "gceal-physics-binding-q2",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "gceal-physics-binding",
+   "prompt": "The most stable nuclei have",
+   "choices": [
+    "the highest mass",
+    "the lowest number of protons",
+    "the highest binding energy per nucleon",
+    "the lowest binding energy"
+   ],
+   "answer": 2,
+   "explanation": "Stability increases with E_b/A.",
+   "chapter": "gceal-physics-ch-nuclear"
+  },
+  {
+   "id": "gceal-physics-binding-q3",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "gceal-physics-binding",
+   "prompt": "In nuclear fission, the neutrons released can cause",
+   "choices": [
+    "fusion",
+    "no further reaction",
+    "alpha decay only",
+    "a chain reaction"
+   ],
+   "answer": 3,
+   "explanation": "Each fission releases neutrons that induce further fissions.",
+   "chapter": "gceal-physics-ch-nuclear"
+  },
+  {
+   "id": "gceal-physics-binding-q4",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "gceal-physics-binding",
+   "prompt": "Control rods in a reactor are made of a material that",
+   "choices": [
+    "moderates neutrons",
+    "absorbs neutrons",
+    "cools the core",
+    "produces neutrons"
+   ],
+   "answer": 1,
+   "explanation": "They control the rate of the chain reaction.",
+   "chapter": "gceal-physics-ch-nuclear"
+  },
+  {
+   "id": "gceal-physics-binding-q5",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "gceal-physics-binding",
+   "prompt": "In a nuclear reaction the total mass of the products is",
+   "choices": [
+    "less than the mass of the reactants when energy is released",
+    "always equal",
+    "always greater",
+    "meaningless"
+   ],
+   "answer": 0,
+   "explanation": "The mass difference appears as released energy.",
+   "chapter": "gceal-physics-ch-nuclear"
+  },
+  {
+   "id": "gceal-physics-ch-nuclear-m01",
+   "kind": "mcq",
+   "tier": "examen",
+   "lesson": "gceal-physics-radioactivity",
+   "source": "Original exercise, GCE Advanced Level style (g = 9.8 m/s²)",
+   "prompt": "The activity of a source falls from 800 Bq to 100 Bq in 30 minutes. Its half-life is",
+   "choices": [
+    "15 minutes",
+    "7.5 minutes",
+    "10 minutes",
+    "30 minutes"
+   ],
+   "answer": 2,
+   "explanation": "800 → 400 → 200 → 100 is three half-lives, so t½ = 30/3 = 10 min.",
+   "difficulty": 3,
+   "points": 2,
+   "chapter": "gceal-physics-ch-nuclear"
+  },
+  {
+   "id": "gceal-physics-ch-nuclear-m02",
+   "kind": "problem",
+   "tier": "examen",
+   "lesson": "gceal-physics-radioactivity",
+   "source": "Original exercise, GCE Advanced Level style (g = 9.8 m/s²)",
+   "prompt": "Question 6 (4 marks). A radioactive tracer has half-life 12 hours and an initial activity of 4.8 × 10⁵ Bq.",
+   "difficulty": 2,
+   "parts": [
+    {
+     "kind": "numeric",
+     "points": 1,
+     "prompt": "Decay constant (10⁻⁵ s⁻¹, 3 s.f.).",
+     "answer": 1.6,
+     "tolerance": 0.01,
+     "explanation": "λ = ln 2/(12 × 3600) = 1.60 × 10⁻⁵ s⁻¹.",
+     "unit": "× 10⁻⁵ s⁻¹",
+     "id": "gceal-physics-ch-nuclear-m02-a"
+    },
+    {
+     "kind": "numeric",
+     "points": 1,
+     "prompt": "Activity after 36 hours (10⁴ Bq).",
+     "answer": 6.0,
+     "tolerance": 0.01,
+     "explanation": "36 h = 3 half-lives: 4.8 × 10⁵/8 = 6.0 × 10⁴ Bq.",
+     "unit": "× 10⁴ Bq",
+     "id": "gceal-physics-ch-nuclear-m02-b"
+    },
+    {
+     "kind": "numeric",
+     "points": 1,
+     "prompt": "Initial number of radioactive nuclei (10¹⁰, 3 s.f.).",
+     "answer": 2.99,
+     "tolerance": 0.03,
+     "explanation": "N₀ = A₀/λ = 4.8 × 10⁵ ÷ 1.604 × 10⁻⁵ = 2.99 × 10¹⁰.",
+     "unit": "× 10¹⁰",
+     "id": "gceal-physics-ch-nuclear-m02-c"
+    },
+    {
+     "kind": "mcq",
+     "points": 1,
+     "prompt": "Which radiation from the tracer is best detected outside the body?",
+     "choices": [
+      "gamma rays",
+      "alpha particles",
+      "beta particles stopped in the skin only",
+      "radio waves"
+     ],
+     "answer": 0,
+     "explanation": "γ-rays penetrate tissue; α and β are absorbed.",
+     "id": "gceal-physics-ch-nuclear-m02-d"
+    }
+   ],
+   "chapter": "gceal-physics-ch-nuclear"
+  }
+ ]
+}

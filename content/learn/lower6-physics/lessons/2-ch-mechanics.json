@@ -1,0 +1,3078 @@
+{
+ "chapter": "lower6-physics-ch-mechanics",
+ "lessons": [
+  {
+   "id": "lower6-physics-vectors",
+   "title": "Scalars, vectors and resolving forces",
+   "minutes": 25,
+   "programRef": "GCE Advanced Level Physics — mechanics (to be checked against the official syllabus)",
+   "status": "draft",
+   "author": "CastBridge (AI draft)",
+   "source": "Original writing following the Cameroonian curriculum; to be reviewed by a teacher",
+   "objectives": [
+    "Distinguish scalar and vector quantities and add vectors by the triangle or parallelogram rule",
+    "Resolve a vector into perpendicular components and recombine components into a resultant",
+    "Solve simple problems on resultant forces and relative velocity"
+   ],
+   "prerequisites": [],
+   "exercises": [
+    "lower6-physics-ch-mechanics-e01",
+    "lower6-physics-ch-mechanics-e02",
+    "lower6-physics-ch-mechanics-e03",
+    "lower6-physics-ch-mechanics-e04",
+    "lower6-physics-ch-mechanics-e05",
+    "lower6-physics-ch-mechanics-e06"
+   ],
+   "selfCheck": [
+    "lower6-physics-vectors-q1",
+    "lower6-physics-vectors-q2",
+    "lower6-physics-vectors-q3",
+    "lower6-physics-vectors-q4",
+    "lower6-physics-vectors-q5"
+   ],
+   "reviewNotes": [
+    "Vector product/scalar product are not included; check whether the syllabus asks for them at this stage.",
+    "Syllabus references, scope and level of difficulty are to be checked against the official text; all facts, formulas and worked examples to be verified by a teacher before release."
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Scalars and vectors",
+     "md": "A **scalar** has magnitude only (mass, time, distance, speed, energy, temperature). A **vector** has magnitude and direction (displacement, velocity, acceleration, force, momentum).\n\nVectors add by the **triangle rule** (head to tail) or the **parallelogram rule**. The result is the **resultant**. Two vectors at 90° give a resultant of size √(a² + b²)."
+    },
+    {
+     "type": "key",
+     "style": "formule",
+     "title": "Resolving a vector",
+     "md": "A vector F at angle θ to the x-axis has components **F_x = F cos θ** along x and **F_y = F sin θ** along y. Conversely F = √(F_x² + F_y²) and tan θ = F_y/F_x.\n\nTo add several vectors: resolve each into x and y components, add the components in each direction separately, then recombine.",
+     "tex": "F_x=F\\cos\\theta\\qquad F_y=F\\sin\\theta\\qquad F=\\sqrt{F_x^{2}+F_y^{2}}"
+    },
+    {
+     "type": "illustration",
+     "figure": {
+      "kind": "shapes",
+      "w": 380,
+      "h": 240,
+      "items": [
+       {
+        "t": "line",
+        "x1": 40,
+        "y1": 200,
+        "x2": 330,
+        "y2": 200,
+        "color": "ink",
+        "width": 2,
+        "arrow": "end"
+       },
+       {
+        "t": "line",
+        "x1": 40,
+        "y1": 200,
+        "x2": 40,
+        "y2": 30,
+        "color": "ink",
+        "width": 2,
+        "arrow": "end"
+       },
+       {
+        "t": "text",
+        "x": 335,
+        "y": 218,
+        "text": "x",
+        "size": 13,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "text",
+        "x": 28,
+        "y": 34,
+        "text": "y",
+        "size": 13,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "line",
+        "x1": 40,
+        "y1": 200,
+        "x2": 240,
+        "y2": 85,
+        "color": "red",
+        "width": 3,
+        "arrow": "end"
+       },
+       {
+        "t": "line",
+        "x1": 240,
+        "y1": 200,
+        "x2": 240,
+        "y2": 85,
+        "color": "blue",
+        "width": 2,
+        "dash": true
+       },
+       {
+        "t": "line",
+        "x1": 40,
+        "y1": 85,
+        "x2": 240,
+        "y2": 85,
+        "color": "blue",
+        "width": 2,
+        "dash": true
+       },
+       {
+        "t": "angle",
+        "x": 40,
+        "y": 200,
+        "from": 0,
+        "to": 30,
+        "r": 36,
+        "right": false,
+        "color": "red",
+        "label": "θ"
+       },
+       {
+        "t": "text",
+        "x": 135,
+        "y": 125,
+        "text": "F",
+        "size": 15,
+        "anchor": "middle",
+        "color": "red",
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 140,
+        "y": 222,
+        "text": "F cos θ",
+        "size": 13,
+        "anchor": "middle",
+        "color": "blue"
+       },
+       {
+        "t": "text",
+        "x": 300,
+        "y": 150,
+        "text": "F sin θ",
+        "size": 13,
+        "anchor": "middle",
+        "color": "blue"
+       }
+      ]
+     },
+     "caption": "Resolving a force F into components along the axes.",
+     "alt": "A force vector at angle theta to the horizontal with dashed horizontal and vertical components labelled F cos theta and F sin theta."
+    },
+    {
+     "type": "key",
+     "style": "methode",
+     "title": "Method for a resultant",
+     "md": "1. Draw a clear sketch and choose axes (often along and perpendicular to the motion or slope).\n2. Resolve each vector into components.\n3. Add the x components and the y components separately (take care with signs).\n4. Find the magnitude with Pythagoras and the direction with tan θ."
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Common mistakes",
+     "md": "- Using cos for the component opposite the angle: the component **adjacent** to the angle uses cos, the opposite one uses sin.\n- Adding magnitudes instead of vectors (3 N + 4 N is not always 7 N).\n- A calculator in radian mode when the angle is in degrees.\n- Forgetting to give a direction with the answer."
+    },
+    {
+     "type": "example",
+     "title": "Example 1 — Resolving a force",
+     "statement": "A 50 N force acts at 30° above the horizontal. Find its horizontal and vertical components.",
+     "steps": [
+      "Horizontal: F cos 30° = 50 × 0.866 = 43.3 N.",
+      "Vertical: F sin 30° = 50 × 0.500 = 25.0 N.",
+      "Check: √(43.3² + 25.0²) = 50.0 N."
+     ],
+     "answer": "43.3 N horizontally and 25.0 N vertically"
+    },
+    {
+     "type": "example",
+     "title": "Example 2 — Resultant of two forces",
+     "statement": "Two ropes pull a stuck vehicle: 30 N due east and 40 N due north. Find the resultant.",
+     "steps": [
+      "The forces are at right angles: R = √(30² + 40²) = √2500 = 50 N.",
+      "Direction: tan θ = 40/30, so θ = 53.1° north of east."
+     ],
+     "answer": "50 N at 53° north of east"
+    }
+   ],
+   "chapter": "lower6-physics-ch-mechanics"
+  },
+  {
+   "id": "lower6-physics-kinematics",
+   "title": "Motion in a straight line",
+   "minutes": 30,
+   "programRef": "GCE Advanced Level Physics — mechanics (to be checked against the official syllabus)",
+   "status": "draft",
+   "author": "CastBridge (AI draft)",
+   "source": "Original writing following the Cameroonian curriculum; to be reviewed by a teacher",
+   "objectives": [
+    "Define displacement, velocity and acceleration and use the equations of uniformly accelerated motion",
+    "Interpret displacement–time and velocity–time graphs (gradient and area)",
+    "Analyse free fall under gravity (g = 9.8 m s⁻²)"
+   ],
+   "prerequisites": [
+    "lower6-physics-vectors"
+   ],
+   "exercises": [
+    "lower6-physics-ch-mechanics-e07",
+    "lower6-physics-ch-mechanics-e08",
+    "lower6-physics-ch-mechanics-e09",
+    "lower6-physics-ch-mechanics-e10",
+    "lower6-physics-ch-mechanics-e11",
+    "lower6-physics-ch-mechanics-e12"
+   ],
+   "selfCheck": [
+    "lower6-physics-kinematics-q1",
+    "lower6-physics-kinematics-q2",
+    "lower6-physics-kinematics-q3",
+    "lower6-physics-kinematics-q4",
+    "lower6-physics-kinematics-q5"
+   ],
+   "reviewNotes": [
+    "g = 9.8 m s⁻² is used; some Cameroonian schools use 10 m s⁻² — check the board's preference.",
+    "Syllabus references, scope and level of difficulty are to be checked against the official text; all facts, formulas and worked examples to be verified by a teacher before release."
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Quantities and graphs",
+     "md": "**Velocity** = rate of change of displacement; **acceleration** = rate of change of velocity (a vector, unit m s⁻²).\n\nOn a displacement–time graph the **gradient** is velocity. On a velocity–time graph the **gradient** is acceleration and the **area** under the graph is displacement."
+    },
+    {
+     "type": "key",
+     "style": "formule",
+     "title": "Equations for constant acceleration (suvat)",
+     "md": "With u = initial velocity, v = final velocity, a = acceleration, t = time, s = displacement:\n\n- v = u + at\n- s = ½(u + v)t\n- s = ut + ½at²\n- v² = u² + 2as\n\nThey apply **only when a is constant**. Choose a positive direction and keep signs consistent.",
+     "tex": "v=u+at\\qquad s=ut+\\frac{1}{2}at^{2}\\qquad v^{2}=u^{2}+2as"
+    },
+    {
+     "type": "illustration",
+     "figure": {
+      "kind": "plot",
+      "xmin": 0,
+      "xmax": 14,
+      "ymin": 0,
+      "ymax": 14,
+      "grid": 2,
+      "w": 380,
+      "h": 240,
+      "curves": [],
+      "points": [],
+      "segments": [
+       {
+        "x1": 0,
+        "y1": 0,
+        "x2": 4,
+        "y2": 12,
+        "color": "blue",
+        "dash": false
+       },
+       {
+        "x1": 4,
+        "y1": 12,
+        "x2": 10,
+        "y2": 12,
+        "color": "blue",
+        "dash": false
+       },
+       {
+        "x1": 10,
+        "y1": 12,
+        "x2": 14,
+        "y2": 0,
+        "color": "blue",
+        "dash": false
+       }
+      ],
+      "xlabel": "t / s",
+      "ylabel": "v / m s⁻¹"
+     },
+     "caption": "Velocity–time graph of a minibus: the gradient gives acceleration and the area gives distance.",
+     "alt": "A trapezium-shaped velocity time graph rising to 12 metres per second at 4 seconds, flat until 10 seconds, then falling to zero at 14 seconds."
+    },
+    {
+     "type": "key",
+     "style": "retenir",
+     "title": "Free fall",
+     "md": "Near the Earth's surface, with air resistance neglected, all objects fall with the same acceleration g = 9.8 m s⁻² downward. For an object thrown up, take up as positive so a = −9.8 m s⁻².\n\nAt the highest point v = 0 (but a is still −9.8 m s⁻²). Time up = time down, if it returns to its starting height."
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Common mistakes",
+     "md": "- Using the suvat equations when the acceleration is not constant (use graphs instead).\n- Mixing signs: a ball thrown up and then falling has a negative acceleration throughout.\n- Confusing distance and displacement, or speed and velocity.\n- Reading the area under a v–t graph below the axis as positive: it is negative displacement."
+    },
+    {
+     "type": "example",
+     "title": "Example 1 — Accelerating car",
+     "statement": "A taxi leaves a stop in Douala and reaches 20 m/s in 8.0 s with constant acceleration. Find the acceleration and the distance covered.",
+     "steps": [
+      "a = (v − u)/t = (20 − 0)/8.0 = 2.5 m s⁻².",
+      "s = ½(u + v)t = ½ × (0 + 20) × 8.0 = 80 m.",
+      "Check with v² = u² + 2as: 400 = 2 × 2.5 × 80 ✓."
+     ],
+     "answer": "a = 2.5 m s⁻², s = 80 m"
+    },
+    {
+     "type": "example",
+     "title": "Example 2 — A stone thrown upward",
+     "statement": "A stone is thrown vertically upward at 19.6 m/s. Find the maximum height and the time to reach it (g = 9.8 m s⁻²).",
+     "steps": [
+      "Take up as positive: u = 19.6, a = −9.8, and v = 0 at the top.",
+      "v² = u² + 2as gives 0 = 19.6² − 2 × 9.8 × s, so s = 384.16 ÷ 19.6 = 19.6 m.",
+      "v = u + at gives 0 = 19.6 − 9.8t, so t = 2.0 s."
+     ],
+     "answer": "H = 19.6 m, time to top = 2.0 s"
+    }
+   ],
+   "chapter": "lower6-physics-ch-mechanics"
+  },
+  {
+   "id": "lower6-physics-projectiles",
+   "title": "Projectile motion",
+   "minutes": 30,
+   "programRef": "GCE Advanced Level Physics — mechanics (to be checked against the official syllabus)",
+   "status": "draft",
+   "author": "CastBridge (AI draft)",
+   "source": "Original writing following the Cameroonian curriculum; to be reviewed by a teacher",
+   "objectives": [
+    "Treat horizontal and vertical motions independently for a projectile",
+    "Calculate time of flight, range and maximum height for a launch at an angle",
+    "Solve problems on horizontal launch from a height"
+   ],
+   "prerequisites": [
+    "lower6-physics-kinematics"
+   ],
+   "exercises": [
+    "lower6-physics-ch-mechanics-e13",
+    "lower6-physics-ch-mechanics-e14",
+    "lower6-physics-ch-mechanics-e15",
+    "lower6-physics-ch-mechanics-e16",
+    "lower6-physics-ch-mechanics-e17",
+    "lower6-physics-ch-mechanics-e18"
+   ],
+   "selfCheck": [
+    "lower6-physics-projectiles-q1",
+    "lower6-physics-projectiles-q2",
+    "lower6-physics-projectiles-q3",
+    "lower6-physics-projectiles-q4",
+    "lower6-physics-projectiles-q5"
+   ],
+   "reviewNotes": [
+    "Range and height formulas rely on level ground; air resistance is ignored.",
+    "Syllabus references, scope and level of difficulty are to be checked against the official text; all facts, formulas and worked examples to be verified by a teacher before release."
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Independence of motion",
+     "md": "A **projectile** moves under gravity only (air resistance neglected). Its horizontal and vertical motions are **independent**:\n\n- horizontal: constant velocity, a = 0, so x = u_x t\n- vertical: constant acceleration g downward.\n\nThe path is a **parabola**."
+    },
+    {
+     "type": "key",
+     "style": "formule",
+     "title": "Launch at speed u, angle θ above the horizontal",
+     "md": "Components: u_x = u cos θ, u_y = u sin θ.\n\n- Time of flight (level ground): T = 2u sin θ / g\n- Maximum height: H = u² sin² θ / 2g\n- Range: R = u² sin 2θ / g (maximum at θ = 45°)\n\nThe range formula holds only if landing at the launch height.",
+     "tex": "T=\\frac{2u\\sin\\theta}{g}\\quad H=\\frac{u^{2}\\sin^{2}\\theta}{2g}\\quad R=\\frac{u^{2}\\sin 2\\theta}{g}"
+    },
+    {
+     "type": "illustration",
+     "figure": {
+      "kind": "plot",
+      "xmin": 0,
+      "xmax": 36,
+      "ymin": 0,
+      "ymax": 6,
+      "grid": 6,
+      "w": 400,
+      "h": 240,
+      "curves": [
+       {
+        "expr": "0.5774*x - 0.01633*x^2",
+        "color": "blue"
+       }
+      ],
+      "points": [
+       {
+        "x": 17.67398783233548,
+        "y": 5.102040816326529,
+        "label": "top",
+        "color": "red"
+       }
+      ],
+      "segments": [],
+      "xlabel": "x / m",
+      "ylabel": "y / m"
+     },
+     "caption": "Path of a ball launched at 20 m/s at 30°: height y against horizontal distance x.",
+     "alt": "A parabolic curve starting at the origin, rising to about 5 metres at 17 metres and returning to the ground at 35 metres."
+    },
+    {
+     "type": "key",
+     "style": "methode",
+     "title": "Method",
+     "md": "1. Resolve the initial velocity into horizontal and vertical components.\n2. Use the vertical motion (suvat with a = −g) to find the time.\n3. Use the horizontal motion x = u_x t with that time.\n4. For the final velocity, combine v_x and v_y with Pythagoras."
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Common mistakes",
+     "md": "- Using the range formula when the projectile lands at a different height.\n- Applying gravity to the horizontal motion.\n- Taking the velocity at the top as zero: only the vertical component is zero there.\n- Using the total speed in the suvat equations instead of one component."
+    },
+    {
+     "type": "example",
+     "title": "Example 1 — Ball kicked at an angle",
+     "statement": "A footballer in Bamenda kicks a ball at 20 m/s at 30° above the ground. Find the time of flight, the range and the maximum height (g = 9.8 m s⁻²).",
+     "steps": [
+      "u_x = 20 cos 30° = 17.32 m/s; u_y = 20 sin 30° = 10 m/s.",
+      "T = 2u_y/g = 20/9.8 = 2.04 s. Range = u_x T = 17.32 × 2.04 = 35.3 m.",
+      "H = u_y²/2g = 100/19.6 = 5.10 m."
+     ],
+     "answer": "T = 2.04 s, R = 35.3 m, H = 5.10 m"
+    },
+    {
+     "type": "example",
+     "title": "Example 2 — Horizontal launch",
+     "statement": "A stone is thrown horizontally at 15 m/s from the top of a 45 m cliff. How long does it take to land, how far from the base, and what is its speed on landing?",
+     "steps": [
+      "Vertical: 45 = ½ × 9.8 × t², so t = √(90/9.8) = 3.03 s.",
+      "Horizontal distance = 15 × 3.03 = 45.4 m.",
+      "v_y = gt = 29.7 m/s; speed = √(15² + 29.7²) = 33.3 m/s."
+     ],
+     "answer": "t = 3.03 s, x = 45.4 m, speed = 33.3 m/s"
+    }
+   ],
+   "chapter": "lower6-physics-ch-mechanics"
+  },
+  {
+   "id": "lower6-physics-newton",
+   "title": "Newton's laws, friction and free-body diagrams",
+   "minutes": 35,
+   "programRef": "GCE Advanced Level Physics — mechanics (to be checked against the official syllabus)",
+   "status": "draft",
+   "author": "CastBridge (AI draft)",
+   "source": "Original writing following the Cameroonian curriculum; to be reviewed by a teacher",
+   "objectives": [
+    "State Newton's three laws and use F = ma for a body and for connected bodies",
+    "Draw free-body diagrams and resolve forces along and perpendicular to a slope",
+    "Use friction f ≤ μN and explain terminal velocity"
+   ],
+   "prerequisites": [
+    "lower6-physics-kinematics",
+    "lower6-physics-vectors"
+   ],
+   "exercises": [
+    "lower6-physics-ch-mechanics-e19",
+    "lower6-physics-ch-mechanics-e20",
+    "lower6-physics-ch-mechanics-e21",
+    "lower6-physics-ch-mechanics-e22",
+    "lower6-physics-ch-mechanics-e23",
+    "lower6-physics-ch-mechanics-e24"
+   ],
+   "selfCheck": [
+    "lower6-physics-newton-q1",
+    "lower6-physics-newton-q2",
+    "lower6-physics-newton-q3",
+    "lower6-physics-newton-q4",
+    "lower6-physics-newton-q5"
+   ],
+   "reviewNotes": [
+    "Static versus kinetic friction: the lesson uses a single μ; check whether the syllabus distinguishes them.",
+    "Some boards phrase the second law as F = dp/dt; both forms are given.",
+    "Syllabus references, scope and level of difficulty are to be checked against the official text; all facts, formulas and worked examples to be verified by a teacher before release."
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Newton's laws",
+     "md": "1st law: a body stays at rest or moves at constant velocity unless a **resultant force** acts on it.\n\n2nd law: the resultant force is the rate of change of momentum; for constant mass **F = ma** (F in newtons, a in m s⁻²). 1 N is the force giving 1 kg an acceleration of 1 m s⁻².\n\n3rd law: if A exerts a force on B, B exerts an equal and opposite force on A. The two forces act on **different bodies** and are of the same kind."
+    },
+    {
+     "type": "key",
+     "style": "methode",
+     "title": "Method for dynamics problems",
+     "md": "1. Isolate one body and draw a **free-body diagram**: weight mg, normal reaction N, tension, friction, applied forces.\n2. Choose axes (along and perpendicular to the motion).\n3. Along the motion: resultant force = ma. Perpendicular to it: forces balance.\n4. For connected bodies write an equation for each body, then solve together."
+    },
+    {
+     "type": "illustration",
+     "figure": {
+      "kind": "shapes",
+      "w": 400,
+      "h": 250,
+      "items": [
+       {
+        "t": "poly",
+        "pts": [
+         50,
+         210,
+         310,
+         210,
+         310,
+         60
+        ],
+        "stroke": "ink",
+        "width": 2,
+        "closed": true,
+        "fill": "lightgrey"
+       },
+       {
+        "t": "poly",
+        "pts": [
+         160.85125168440814,
+         146.0,
+         198.95636945092346,
+         124.0,
+         185.95636945092346,
+         101.48333950160459,
+         147.85125168440814,
+         123.48333950160459
+        ],
+        "stroke": "ink",
+        "width": 2,
+        "closed": true,
+        "fill": "lightorange"
+       },
+       {
+        "t": "line",
+        "x1": 173.4038105676658,
+        "y1": 123.7416697508023,
+        "x2": 173.4038105676658,
+        "y2": 193.74166975080232,
+        "color": "red",
+        "width": 3,
+        "arrow": "end"
+       },
+       {
+        "t": "text",
+        "x": 165.4038105676658,
+        "y": 207.74166975080232,
+        "text": "weight mg",
+        "size": 13,
+        "anchor": "end",
+        "color": "red"
+       },
+       {
+        "t": "line",
+        "x1": 173.4038105676658,
+        "y1": 123.7416697508023,
+        "x2": 142.4038105676658,
+        "y2": 70.0480947161671,
+        "color": "blue",
+        "width": 3,
+        "arrow": "end"
+       },
+       {
+        "t": "text",
+        "x": 136.4038105676658,
+        "y": 66.0480947161671,
+        "text": "N",
+        "size": 14,
+        "anchor": "end",
+        "color": "blue"
+       },
+       {
+        "t": "line",
+        "x1": 173.4038105676658,
+        "y1": 123.7416697508023,
+        "x2": 125.77241335952166,
+        "y2": 151.2416697508023,
+        "color": "green",
+        "width": 3,
+        "arrow": "end"
+       },
+       {
+        "t": "text",
+        "x": 117.77241335952166,
+        "y": 165.2416697508023,
+        "text": "friction f",
+        "size": 13,
+        "anchor": "end",
+        "color": "green"
+       },
+       {
+        "t": "angle",
+        "x": 50,
+        "y": 210,
+        "from": 0,
+        "to": 30,
+        "r": 40,
+        "right": false,
+        "color": "red",
+        "label": "θ"
+       }
+      ]
+     },
+     "caption": "Forces on a box on a slope (free-body diagram).",
+     "alt": "A box on an inclined plane with arrows for weight vertically down, normal reaction perpendicular to the plane and friction up the slope."
+    },
+    {
+     "type": "key",
+     "style": "formule",
+     "title": "Friction and slopes",
+     "md": "Friction opposes the relative motion; the maximum (limiting) value is **f = μN** where μ is the coefficient of friction and N the normal reaction.\n\nOn a slope of angle θ: weight component down the slope = mg sin θ; perpendicular to the slope = mg cos θ, so N = mg cos θ.",
+     "tex": "F=ma\\qquad f_{\\max}=\\mu N\\qquad N=mg\\cos\\theta"
+    },
+    {
+     "type": "key",
+     "style": "retenir",
+     "title": "Terminal velocity",
+     "md": "A falling object in air meets a drag force that grows with speed. The resultant force and acceleration fall until the drag equals the weight; then a = 0 and the speed is constant: the **terminal velocity**."
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Common mistakes",
+     "md": "- Calling weight and the normal reaction an action–reaction pair: they act on the same body. The reaction to the weight is the gravitational pull of the body on the Earth.\n- Writing N = mg on a slope: it is mg cos θ.\n- Forgetting friction acts up the slope when the body slides down.\n- Using a mass in newtons or a weight in kilograms."
+    },
+    {
+     "type": "example",
+     "title": "Example 1 — Block with friction",
+     "statement": "A 5.0 kg crate is pulled along a rough floor by a horizontal force of 30 N. Friction is 10 N. Find its acceleration.",
+     "steps": [
+      "Resultant force along the floor = 30 − 10 = 20 N.",
+      "a = F/m = 20/5.0 = 4.0 m s⁻²."
+     ],
+     "answer": "a = 4.0 m s⁻² in the direction of the pull"
+    },
+    {
+     "type": "example",
+     "title": "Example 2 — Sliding down a slope",
+     "statement": "A 10 kg box slides down a 30° slope with μ = 0.20. Find its acceleration (g = 9.8 m s⁻²).",
+     "steps": [
+      "Perpendicular to the slope: N = mg cos 30° = 10 × 9.8 × 0.866 = 84.9 N.",
+      "Friction f = μN = 0.20 × 84.9 = 17.0 N up the slope. Down-slope component of weight = mg sin 30° = 49.0 N.",
+      "Resultant = 49.0 − 17.0 = 32.0 N, so a = 32.0/10 = 3.20 m s⁻²."
+     ],
+     "answer": "a = 3.2 m s⁻² down the slope"
+    }
+   ],
+   "chapter": "lower6-physics-ch-mechanics"
+  },
+  {
+   "id": "lower6-physics-momentum",
+   "title": "Momentum, impulse and collisions",
+   "minutes": 30,
+   "programRef": "GCE Advanced Level Physics — mechanics (to be checked against the official syllabus)",
+   "status": "draft",
+   "author": "CastBridge (AI draft)",
+   "source": "Original writing following the Cameroonian curriculum; to be reviewed by a teacher",
+   "objectives": [
+    "Define momentum and impulse and apply the conservation of linear momentum",
+    "Distinguish elastic and inelastic collisions using kinetic energy",
+    "Use impulse = force × time = change of momentum, including F–t graphs"
+   ],
+   "prerequisites": [
+    "lower6-physics-newton"
+   ],
+   "exercises": [
+    "lower6-physics-ch-mechanics-e25",
+    "lower6-physics-ch-mechanics-e26",
+    "lower6-physics-ch-mechanics-e27",
+    "lower6-physics-ch-mechanics-e28",
+    "lower6-physics-ch-mechanics-e29",
+    "lower6-physics-ch-mechanics-e30"
+   ],
+   "selfCheck": [
+    "lower6-physics-momentum-q1",
+    "lower6-physics-momentum-q2",
+    "lower6-physics-momentum-q3",
+    "lower6-physics-momentum-q4",
+    "lower6-physics-momentum-q5"
+   ],
+   "reviewNotes": [
+    "Collisions in two dimensions are not covered; check the syllabus.",
+    "Elastic head-on collision speeds (general formula) are not derived here.",
+    "Syllabus references, scope and level of difficulty are to be checked against the official text; all facts, formulas and worked examples to be verified by a teacher before release."
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Momentum and impulse",
+     "md": "**Linear momentum** p = mv (a vector, unit kg m s⁻¹ or N s). **Impulse** = force × time of contact = FΔt = Δp, the change of momentum. On a force–time graph the **area** under the curve is the impulse.\n\nNewton's second law in its general form: F = Δp/Δt."
+    },
+    {
+     "type": "key",
+     "style": "formule",
+     "title": "Conservation of momentum",
+     "md": "In a closed system (no external resultant force) **total momentum before = total momentum after**: m₁u₁ + m₂u₂ = m₁v₁ + m₂v₂.\n\nMomentum is a vector: choose a positive direction and give velocities signs. It is conserved in **all** collisions and explosions.",
+     "tex": "m_1u_1+m_2u_2=m_1v_1+m_2v_2"
+    },
+    {
+     "type": "illustration",
+     "figure": {
+      "kind": "shapes",
+      "w": 400,
+      "h": 140,
+      "items": [
+       {
+        "t": "text",
+        "x": 100,
+        "y": 20,
+        "text": "before",
+        "size": 14,
+        "anchor": "middle",
+        "color": "ink",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 40,
+        "y": 50,
+        "w": 50,
+        "h": 30,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "lightblue"
+       },
+       {
+        "t": "text",
+        "x": 65,
+        "y": 70,
+        "text": "2 kg",
+        "size": 13,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "line",
+        "x1": 40,
+        "y1": 100,
+        "x2": 90,
+        "y2": 100,
+        "color": "red",
+        "width": 3,
+        "arrow": "end"
+       },
+       {
+        "t": "text",
+        "x": 65,
+        "y": 120,
+        "text": "3 m/s",
+        "size": 12,
+        "anchor": "middle",
+        "color": "red"
+       },
+       {
+        "t": "rect",
+        "x": 150,
+        "y": 50,
+        "w": 36,
+        "h": 30,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "lightorange"
+       },
+       {
+        "t": "text",
+        "x": 168,
+        "y": 70,
+        "text": "1 kg",
+        "size": 13,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "text",
+        "x": 168,
+        "y": 100,
+        "text": "at rest",
+        "size": 12,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "text",
+        "x": 300,
+        "y": 20,
+        "text": "after",
+        "size": 14,
+        "anchor": "middle",
+        "color": "ink",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 250,
+        "y": 50,
+        "w": 86,
+        "h": 30,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "lightgreen"
+       },
+       {
+        "t": "text",
+        "x": 293,
+        "y": 70,
+        "text": "3 kg together",
+        "size": 12,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "line",
+        "x1": 250,
+        "y1": 100,
+        "x2": 336,
+        "y2": 100,
+        "color": "red",
+        "width": 3,
+        "arrow": "end"
+       },
+       {
+        "t": "text",
+        "x": 293,
+        "y": 120,
+        "text": "2 m/s",
+        "size": 12,
+        "anchor": "middle",
+        "color": "red"
+       }
+      ]
+     },
+     "caption": "Two trolleys before and after a perfectly inelastic collision.",
+     "alt": "A 2 kilogram trolley moving at 3 metres per second and a stationary 1 kilogram trolley before the collision, then a 3 kilogram combined body at 2 metres per second after."
+    },
+    {
+     "type": "key",
+     "style": "retenir",
+     "title": "Elastic and inelastic collisions",
+     "md": "In an **elastic** collision total kinetic energy is also conserved (the relative speed of approach equals the relative speed of separation). In an **inelastic** collision some kinetic energy is changed to heat, sound or deformation; if the bodies stick together the loss is the greatest ('perfectly inelastic').\n\nTotal energy is always conserved."
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Common mistakes",
+     "md": "- Forgetting that momentum is a vector: a ball bouncing back from a wall has a change of momentum m(v + u), not m(v − u).\n- Saying kinetic energy is conserved in every collision: only in elastic ones.\n- Mixing units (grams with kg).\n- Using the wrong sign for a body moving in the negative direction."
+    },
+    {
+     "type": "example",
+     "title": "Example 1 — Trolleys that stick",
+     "statement": "A 2.0 kg trolley moving at 3.0 m/s hits a stationary 1.0 kg trolley and they stick together. Find their common speed and the kinetic energy lost.",
+     "steps": [
+      "Momentum before = 2.0 × 3.0 = 6.0 kg m/s. After: (2.0 + 1.0)v = 6.0, so v = 2.0 m/s.",
+      "KE before = ½ × 2.0 × 3.0² = 9.0 J; KE after = ½ × 3.0 × 2.0² = 6.0 J.",
+      "Energy lost = 9.0 − 6.0 = 3.0 J (to heat and sound)."
+     ],
+     "answer": "v = 2.0 m/s; 3.0 J of kinetic energy is lost"
+    },
+    {
+     "type": "example",
+     "title": "Example 2 — Ball and wall",
+     "statement": "A 0.15 kg ball hits a wall at 20 m/s and rebounds at 15 m/s. The contact lasts 0.010 s. Find the impulse and the average force.",
+     "steps": [
+      "Take the rebound direction as positive: change of momentum = 0.15 × 15 − 0.15 × (−20) = 2.25 + 3.00 = 5.25 N s.",
+      "F = impulse/time = 5.25 ÷ 0.010 = 525 N, directed away from the wall."
+     ],
+     "answer": "Impulse 5.25 N s; average force 525 N"
+    }
+   ],
+   "chapter": "lower6-physics-ch-mechanics"
+  },
+  {
+   "id": "lower6-physics-energy",
+   "title": "Work, energy and power",
+   "minutes": 30,
+   "programRef": "GCE Advanced Level Physics — mechanics (to be checked against the official syllabus)",
+   "status": "draft",
+   "author": "CastBridge (AI draft)",
+   "source": "Original writing following the Cameroonian curriculum; to be reviewed by a teacher",
+   "objectives": [
+    "Calculate work done by a constant force, including at an angle to the displacement",
+    "Use kinetic energy ½mv² and gravitational potential energy mgh with conservation of energy",
+    "Calculate power and efficiency, including P = Fv"
+   ],
+   "prerequisites": [
+    "lower6-physics-newton"
+   ],
+   "exercises": [
+    "lower6-physics-ch-mechanics-e31",
+    "lower6-physics-ch-mechanics-e32",
+    "lower6-physics-ch-mechanics-e33",
+    "lower6-physics-ch-mechanics-e34",
+    "lower6-physics-ch-mechanics-e35",
+    "lower6-physics-ch-mechanics-e36"
+   ],
+   "selfCheck": [
+    "lower6-physics-energy-q1",
+    "lower6-physics-energy-q2",
+    "lower6-physics-energy-q3",
+    "lower6-physics-energy-q4",
+    "lower6-physics-energy-q5"
+   ],
+   "reviewNotes": [
+    "Bars figure uses m = 2.0 kg and h = 10 m: mgh = 2.0 × 9.8 × 10 = 196 J.",
+    "Syllabus references, scope and level of difficulty are to be checked against the official text; all facts, formulas and worked examples to be verified by a teacher before release."
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Work, energy and power",
+     "md": "**Work** done by a force = force × displacement in the direction of the force: **W = Fs cos θ** (joule). **Energy** is the capacity to do work. **Power** is the rate of doing work, P = W/t (watt, 1 W = 1 J s⁻¹).\n\nWork done by the resultant force equals the change in kinetic energy (the **work–energy theorem**)."
+    },
+    {
+     "type": "key",
+     "style": "formule",
+     "title": "Key formulae",
+     "md": "- Kinetic energy: E_k = ½mv²\n- Gravitational potential energy (near the surface): ΔE_p = mgΔh\n- Power: P = W/t = Fv (for a force along the velocity)\n- Efficiency = useful output ÷ total input (× 100 %)\n\nWhen only gravity does work (no friction), E_k + E_p stays constant.",
+     "tex": "W=Fs\\cos\\theta\\quad E_k=\\frac{1}{2}mv^{2}\\quad P=\\frac{W}{t}=Fv"
+    },
+    {
+     "type": "illustration",
+     "figure": {
+      "kind": "bars",
+      "w": 400,
+      "h": 240,
+      "bars": [
+       {
+        "label": "PE top",
+        "value": 196,
+        "color": "orange"
+       },
+       {
+        "label": "KE halfway",
+        "value": 98,
+        "color": "blue"
+       },
+       {
+        "label": "PE halfway",
+        "value": 98,
+        "color": "orange"
+       },
+       {
+        "label": "KE bottom",
+        "value": 196,
+        "color": "blue"
+       }
+      ],
+      "unit": "J"
+     },
+     "caption": "A 2.0 kg object falling 10 m: energy at the top, halfway and at the bottom (g = 9.8 m s⁻²).",
+     "alt": "A bar chart showing 196 joules of potential energy at the top, 98 joules each of kinetic and potential energy halfway, and 196 joules of kinetic energy at the bottom."
+    },
+    {
+     "type": "key",
+     "style": "retenir",
+     "title": "Conservation of energy",
+     "md": "Energy is never created or destroyed; it changes form. Friction and air resistance convert mechanical energy to thermal energy, which is not 'lost' but no longer useful.\n\nFor a body falling through height h from rest with no friction: mgh = ½mv², so v = √(2gh)."
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Common mistakes",
+     "md": "- A force perpendicular to the motion (for example the normal reaction, or the tension on a circular path) does **no work**.\n- Forgetting the cos θ when the force is at an angle.\n- Mixing kW h with J: 1 kW h = 3.6 × 10⁶ J.\n- Saying power is energy (it is energy per second)."
+    },
+    {
+     "type": "example",
+     "title": "Example 1 — A pump",
+     "statement": "A pump raises 120 kg of water each minute through 15 m. Its efficiency is 60 %. Find the useful power and the power input (g = 9.8 m s⁻²).",
+     "steps": [
+      "Useful energy per minute = mgh = 120 × 9.8 × 15 = 17 640 J.",
+      "Useful power = 17 640 ÷ 60 s = 294 W.",
+      "Input power = 294 ÷ 0.60 = 490 W."
+     ],
+     "answer": "Useful power 294 W; input 490 W"
+    },
+    {
+     "type": "example",
+     "title": "Example 2 — Roller coaster",
+     "statement": "A car starts from rest at the top of a frictionless track 20 m above the bottom. Find its speed at the bottom (g = 9.8).",
+     "steps": [
+      "Loss of potential energy = gain of kinetic energy: mgh = ½mv².",
+      "The mass cancels: v = √(2gh) = √(2 × 9.8 × 20) = √392 = 19.8 m/s."
+     ],
+     "answer": "v = 19.8 m/s (about 71 km/h)"
+    }
+   ],
+   "chapter": "lower6-physics-ch-mechanics"
+  },
+  {
+   "id": "lower6-physics-circular",
+   "title": "Uniform circular motion",
+   "minutes": 30,
+   "programRef": "GCE Advanced Level Physics — mechanics (to be checked against the official syllabus)",
+   "status": "draft",
+   "author": "CastBridge (AI draft)",
+   "source": "Original writing following the Cameroonian curriculum; to be reviewed by a teacher",
+   "objectives": [
+    "Use angular displacement in radians, angular velocity ω, period T and frequency f",
+    "Explain why a body moving in a circle at constant speed accelerates, and use a = v²/r and F = mv²/r",
+    "Identify the force providing the centripetal force in simple situations"
+   ],
+   "prerequisites": [
+    "lower6-physics-newton",
+    "lower6-physics-energy"
+   ],
+   "exercises": [
+    "lower6-physics-ch-mechanics-e37",
+    "lower6-physics-ch-mechanics-e38",
+    "lower6-physics-ch-mechanics-e39",
+    "lower6-physics-ch-mechanics-e40",
+    "lower6-physics-ch-mechanics-e41",
+    "lower6-physics-ch-mechanics-e42"
+   ],
+   "selfCheck": [
+    "lower6-physics-circular-q1",
+    "lower6-physics-circular-q2",
+    "lower6-physics-circular-q3",
+    "lower6-physics-circular-q4",
+    "lower6-physics-circular-q5"
+   ],
+   "reviewNotes": [
+    "Banked tracks and conical pendulum are not included; check the syllabus.",
+    "Use of 'centrifugal force' in the board's mark scheme should be checked.",
+    "Syllabus references, scope and level of difficulty are to be checked against the official text; all facts, formulas and worked examples to be verified by a teacher before release."
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Angular quantities",
+     "md": "An angle in **radians** = arc length ÷ radius (2π rad = 360°). **Angular velocity** ω = Δθ/Δt (rad s⁻¹). Period T = time for one revolution; frequency f = 1/T.\n\n**ω = 2π/T = 2πf** and the linear speed on a circle of radius r is **v = ωr**."
+    },
+    {
+     "type": "key",
+     "style": "formule",
+     "title": "Centripetal acceleration and force",
+     "md": "A body moving at constant speed in a circle has a velocity that keeps changing direction, so it **accelerates**. The acceleration points to the **centre**: a = v²/r = ω²r.\n\nThe resultant force towards the centre (centripetal force) is **F = mv²/r = mω²r**. It is not a new force: it is provided by tension, friction, gravity, a normal reaction…",
+     "tex": "a=\\frac{v^{2}}{r}=\\omega^{2}r\\qquad F=\\frac{mv^{2}}{r}=m\\omega^{2}r"
+    },
+    {
+     "type": "illustration",
+     "figure": {
+      "kind": "shapes",
+      "w": 380,
+      "h": 250,
+      "items": [
+       {
+        "t": "circle",
+        "cx": 190,
+        "cy": 130,
+        "r": 85,
+        "stroke": "grey",
+        "width": 2
+       },
+       {
+        "t": "circle",
+        "cx": 190,
+        "cy": 130,
+        "r": 3.5,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "ink"
+       },
+       {
+        "t": "line",
+        "x1": 190,
+        "y1": 130,
+        "x2": 275,
+        "y2": 130,
+        "color": "grey",
+        "width": 2,
+        "dash": true
+       },
+       {
+        "t": "text",
+        "x": 232,
+        "y": 122,
+        "text": "r",
+        "size": 14,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "circle",
+        "cx": 275,
+        "cy": 130,
+        "r": 8,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "orange"
+       },
+       {
+        "t": "line",
+        "x1": 275,
+        "y1": 130,
+        "x2": 275,
+        "y2": 60,
+        "color": "blue",
+        "width": 3,
+        "arrow": "end"
+       },
+       {
+        "t": "text",
+        "x": 290,
+        "y": 80,
+        "text": "v",
+        "size": 15,
+        "anchor": "start",
+        "color": "blue"
+       },
+       {
+        "t": "line",
+        "x1": 267,
+        "y1": 130,
+        "x2": 205,
+        "y2": 130,
+        "color": "red",
+        "width": 3,
+        "arrow": "end"
+       },
+       {
+        "t": "text",
+        "x": 236,
+        "y": 150,
+        "text": "F, a",
+        "size": 14,
+        "anchor": "middle",
+        "color": "red",
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 190,
+        "y": 232,
+        "text": "force and acceleration point to the centre",
+        "size": 13,
+        "anchor": "middle",
+        "color": "ink"
+       }
+      ]
+     },
+     "caption": "Uniform circular motion: the velocity is tangential; the resultant force and acceleration point to the centre.",
+     "alt": "A circle with a body on it, an arrow along the tangent for velocity and an arrow towards the centre for force and acceleration."
+    },
+    {
+     "type": "key",
+     "style": "methode",
+     "title": "Method",
+     "md": "1. Draw the free-body diagram of the body and identify the forces pointing to the centre.\n2. The resultant towards the centre equals mv²/r.\n3. Convert rpm to rad s⁻¹: multiply by 2π/60.\n4. Remember: if the centripetal force vanishes the body moves off along the **tangent**, not outward."
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Common mistakes",
+     "md": "- 'Centrifugal force' is not a real force acting on the body; do not add it to the free-body diagram.\n- Using degrees in v = ωr: ω must be in rad s⁻¹.\n- Saying the acceleration is zero because the speed is constant.\n- Forgetting that the centripetal force does no work (it is perpendicular to the motion)."
+    },
+    {
+     "type": "example",
+     "title": "Example 1 — Car on a bend",
+     "statement": "A 1200 kg car takes a flat circular bend of radius 50 m at 15 m/s. Find the centripetal force and the least coefficient of friction needed (g = 9.8).",
+     "steps": [
+      "F = mv²/r = 1200 × 15²/50 = 5400 N, provided by friction between tyres and road.",
+      "Friction limit: μmg ≥ mv²/r, so μ ≥ v²/(rg) = 225/(50 × 9.8) = 0.46."
+     ],
+     "answer": "F = 5400 N, μ ≥ 0.46"
+    },
+    {
+     "type": "example",
+     "title": "Example 2 — A spinning rotor",
+     "statement": "A rotor turns at 3000 revolutions per minute. Find ω, the speed of a point 0.10 m from the axis, and its acceleration.",
+     "steps": [
+      "ω = 3000 × 2π/60 = 314 rad s⁻¹.",
+      "v = ωr = 314 × 0.10 = 31.4 m/s.",
+      "a = ω²r = (314.2)² × 0.10 = 9.87 × 10³ m s⁻² (about 1000 g)."
+     ],
+     "answer": "ω = 314 rad/s, v = 31.4 m/s, a = 9.9 × 10³ m/s²"
+    }
+   ],
+   "chapter": "lower6-physics-ch-mechanics"
+  },
+  {
+   "id": "lower6-physics-gravitation",
+   "title": "Gravitational fields and orbits",
+   "minutes": 35,
+   "programRef": "GCE Advanced Level Physics — mechanics (to be checked against the official syllabus)",
+   "status": "draft",
+   "author": "CastBridge (AI draft)",
+   "source": "Original writing following the Cameroonian curriculum; to be reviewed by a teacher",
+   "objectives": [
+    "State Newton's law of gravitation and define gravitational field strength",
+    "Derive and use orbital speed and period for circular orbits, including the geostationary orbit",
+    "Use gravitational potential and calculate escape speed"
+   ],
+   "prerequisites": [
+    "lower6-physics-circular"
+   ],
+   "exercises": [
+    "lower6-physics-ch-mechanics-e43",
+    "lower6-physics-ch-mechanics-e44",
+    "lower6-physics-ch-mechanics-e45",
+    "lower6-physics-ch-mechanics-e46",
+    "lower6-physics-ch-mechanics-e47",
+    "lower6-physics-ch-mechanics-e48"
+   ],
+   "selfCheck": [
+    "lower6-physics-gravitation-q1",
+    "lower6-physics-gravitation-q2",
+    "lower6-physics-gravitation-q3",
+    "lower6-physics-gravitation-q4",
+    "lower6-physics-gravitation-q5"
+   ],
+   "reviewNotes": [
+    "Constants used: G = 6.67 × 10⁻¹¹, M_E = 6.0 × 10²⁴ kg, R_E = 6.4 × 10⁶ m. The geostationary period is taken as 24 h (the exact sidereal day is 23 h 56 min).",
+    "Gravitational potential may be placed in Upper Sixth by some schools; check the syllabus.",
+    "Syllabus references, scope and level of difficulty are to be checked against the official text; all facts, formulas and worked examples to be verified by a teacher before release."
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Law and field",
+     "md": "**Newton's law**: two point masses attract with a force **F = GMm/r²** along the line joining them (G = 6.67 × 10⁻¹¹ N m² kg⁻²).\n\n**Gravitational field strength** g = force per unit mass = GM/r², directed towards the mass M. At the Earth's surface it is about 9.8 N kg⁻¹ (= m s⁻²). Outside a spherical body, the mass acts as if concentrated at its centre."
+    },
+    {
+     "type": "key",
+     "style": "formule",
+     "title": "Circular orbits",
+     "md": "For a satellite in a circular orbit of radius r the gravitational force provides the centripetal force: GMm/r² = mv²/r. So **v = √(GM/r)** and **T = 2πr/v**, giving **T² = (4π²/GM) r³** (Kepler's third law).\n\nThe mass of the satellite cancels: every satellite at the same radius has the same speed.",
+     "tex": "v=\\sqrt{\\frac{GM}{r}}\\qquad \\frac{T^{2}}{r^{3}}=\\frac{4\\pi^{2}}{GM}"
+    },
+    {
+     "type": "illustration",
+     "figure": {
+      "kind": "shapes",
+      "w": 400,
+      "h": 250,
+      "items": [
+       {
+        "t": "circle",
+        "cx": 170,
+        "cy": 125,
+        "r": 38,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "lightblue"
+       },
+       {
+        "t": "text",
+        "x": 170,
+        "y": 130,
+        "text": "Earth",
+        "size": 14,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "circle",
+        "cx": 170,
+        "cy": 125,
+        "r": 100,
+        "stroke": "grey",
+        "width": 1
+       },
+       {
+        "t": "circle",
+        "cx": 270,
+        "cy": 125,
+        "r": 8,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "orange"
+       },
+       {
+        "t": "text",
+        "x": 285,
+        "y": 108,
+        "text": "satellite",
+        "size": 13,
+        "anchor": "start",
+        "color": "ink"
+       },
+       {
+        "t": "line",
+        "x1": 170,
+        "y1": 125,
+        "x2": 270,
+        "y2": 125,
+        "color": "grey",
+        "width": 1,
+        "dash": true
+       },
+       {
+        "t": "line",
+        "x1": 262,
+        "y1": 125,
+        "x2": 215,
+        "y2": 125,
+        "color": "red",
+        "width": 3,
+        "arrow": "end"
+       },
+       {
+        "t": "text",
+        "x": 230,
+        "y": 148,
+        "text": "F",
+        "size": 15,
+        "anchor": "middle",
+        "color": "red",
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 222,
+        "y": 108,
+        "text": "r",
+        "size": 14,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "text",
+        "x": 190,
+        "y": 238,
+        "text": "F = GMm / r²",
+        "size": 14,
+        "anchor": "middle",
+        "color": "ink",
+        "bold": true
+       }
+      ]
+     },
+     "caption": "A satellite in a circular orbit: gravity provides the centripetal force.",
+     "alt": "The Earth at the centre, a circular orbit, a satellite and an arrow towards the Earth's centre labelled F."
+    },
+    {
+     "type": "key",
+     "style": "retenir",
+     "title": "Potential and escape speed",
+     "md": "**Gravitational potential** V = −GM/r (J kg⁻¹): work done per unit mass to bring a mass from infinity (V = 0 at infinity); it is negative. A mass m has potential energy −GMm/r.\n\nTo escape from the surface the kinetic energy must be at least GMm/R: **v_esc = √(2GM/R)** ≈ 11 km s⁻¹ for the Earth. A **geostationary** satellite has T = 24 h, orbits above the equator, and stays above one point."
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Common mistakes",
+     "md": "- Using the height above the surface as r: r is measured from the **centre** (r = R + h).\n- Thinking astronauts are 'beyond gravity': in orbit they are in free fall, so they feel weightless.\n- Forgetting that g varies as 1/r² (doubling r divides g by 4).\n- Mixing km and m in GM/r."
+    },
+    {
+     "type": "example",
+     "title": "Example 1 — g above the Earth",
+     "statement": "Using G = 6.67 × 10⁻¹¹, M_E = 6.0 × 10²⁴ kg and R_E = 6.4 × 10⁶ m, find g at the surface and at a height of one Earth radius above it.",
+     "steps": [
+      "Surface: g = GM/R² = 6.67 × 10⁻¹¹ × 6.0 × 10²⁴ ÷ (6.4 × 10⁶)² = 9.77 m s⁻².",
+      "At a height R above the surface, r = 2R, so g is divided by 2² = 4: 9.77/4 = 2.44 m s⁻²."
+     ],
+     "answer": "9.77 m s⁻² at the surface, 2.44 m s⁻² at height R"
+    },
+    {
+     "type": "example",
+     "title": "Example 2 — A low satellite",
+     "statement": "A satellite orbits 400 km above the Earth (same data). Find its speed and period.",
+     "steps": [
+      "r = 6.4 × 10⁶ + 0.4 × 10⁶ = 6.8 × 10⁶ m.",
+      "v = √(GM/r) = √(4.002 × 10¹⁴ ÷ 6.8 × 10⁶) = 7.67 × 10³ m/s.",
+      "T = 2πr/v = 2π × 6.8 × 10⁶ ÷ 7672 = 5570 s ≈ 93 minutes."
+     ],
+     "answer": "v ≈ 7.7 km/s; T ≈ 93 min"
+    }
+   ],
+   "chapter": "lower6-physics-ch-mechanics"
+  }
+ ],
+ "exercises": [
+  {
+   "id": "lower6-physics-ch-mechanics-e01",
+   "kind": "mcq",
+   "tier": "application",
+   "lesson": "lower6-physics-vectors",
+   "source": "Original exercise, GCE Advanced Level style (g = 9.8 m/s²)",
+   "prompt": "Which of these is a vector?",
+   "choices": [
+    "energy",
+    "displacement",
+    "mass",
+    "speed"
+   ],
+   "answer": 1,
+   "explanation": "Displacement has direction. Speed, energy and mass are scalars.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "lower6-physics-ch-mechanics"
+  },
+  {
+   "id": "lower6-physics-ch-mechanics-e02",
+   "kind": "numeric",
+   "tier": "application",
+   "lesson": "lower6-physics-vectors",
+   "source": "Original exercise, GCE Advanced Level style (g = 9.8 m/s²)",
+   "prompt": "A force of 80 N acts at 60° above the horizontal. What is its horizontal component?",
+   "answer": 40.0,
+   "tolerance": 0.1,
+   "unit": "N",
+   "explanation": "F cos 60° = 80 × 0.5 = 40 N.",
+   "difficulty": 1,
+   "points": 2,
+   "chapter": "lower6-physics-ch-mechanics"
+  },
+  {
+   "id": "lower6-physics-ch-mechanics-e03",
+   "kind": "truefalse",
+   "tier": "application",
+   "lesson": "lower6-physics-vectors",
+   "source": "Original exercise, GCE Advanced Level style (g = 9.8 m/s²)",
+   "prompt": "True or false: the resultant of two forces always equals the sum of their magnitudes.",
+   "answer": false,
+   "explanation": "It equals the sum only when the forces act in the same direction; otherwise it is smaller.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "lower6-physics-ch-mechanics"
+  },
+  {
+   "id": "lower6-physics-ch-mechanics-e04",
+   "kind": "numeric",
+   "tier": "approfondissement",
+   "lesson": "lower6-physics-vectors",
+   "source": "Original exercise, GCE Advanced Level style (g = 9.8 m/s²)",
+   "prompt": "A boat's velocity is 6 m/s east and a current adds 8 m/s north. Find the magnitude of the resultant velocity.",
+   "answer": 10.0,
+   "tolerance": 0.01,
+   "unit": "m/s",
+   "explanation": "√(6² + 8²) = 10 m/s.",
+   "difficulty": 2,
+   "points": 3,
+   "chapter": "lower6-physics-ch-mechanics"
+  },
+  {
+   "id": "lower6-physics-ch-mechanics-e05",
+   "kind": "mcq",
+   "tier": "approfondissement",
+   "lesson": "lower6-physics-vectors",
+   "source": "Original exercise, GCE Advanced Level style (g = 9.8 m/s²)",
+   "prompt": "Two forces of 10 N act on a point with an angle of 120° between them. The magnitude of the resultant is",
+   "choices": [
+    "20 N",
+    "10 N",
+    "17 N",
+    "0 N"
+   ],
+   "answer": 1,
+   "explanation": "R² = 10² + 10² + 2(10)(10)cos 120° = 200 − 100 = 100, so R = 10 N (the triangle is equilateral).",
+   "difficulty": 2,
+   "points": 2,
+   "chapter": "lower6-physics-ch-mechanics"
+  },
+  {
+   "id": "lower6-physics-ch-mechanics-e06",
+   "kind": "problem",
+   "tier": "examen",
+   "lesson": "lower6-physics-vectors",
+   "source": "Original exercise, GCE Advanced Level style (g = 9.8 m/s²)",
+   "prompt": "A boatman at the bank of River Sanaga steers his boat at 4 m/s (relative to the water) straight across the river. The current is 3 m/s downstream and the river is 200 m wide.",
+   "difficulty": 2,
+   "parts": [
+    {
+     "kind": "numeric",
+     "points": 1,
+     "prompt": "Find the speed of the boat relative to the bank (m/s).",
+     "answer": 5.0,
+     "tolerance": 0.01,
+     "explanation": "√(4² + 3²) = 5 m/s.",
+     "unit": "m/s",
+     "id": "lower6-physics-ch-mechanics-e06-a"
+    },
+    {
+     "kind": "numeric",
+     "points": 1,
+     "prompt": "How long does the crossing take (s)?",
+     "answer": 50.0,
+     "tolerance": 0.01,
+     "explanation": "The cross-river motion is independent: t = 200 ÷ 4 = 50 s.",
+     "unit": "s",
+     "id": "lower6-physics-ch-mechanics-e06-b"
+    },
+    {
+     "kind": "numeric",
+     "points": 1,
+     "prompt": "How far downstream is the boat carried (m)?",
+     "answer": 150.0,
+     "tolerance": 0.01,
+     "explanation": "Drift = 3 m/s × 50 s = 150 m.",
+     "unit": "m",
+     "id": "lower6-physics-ch-mechanics-e06-c"
+    }
+   ],
+   "chapter": "lower6-physics-ch-mechanics"
+  },
+  {
+   "id": "lower6-physics-vectors-q1",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "lower6-physics-vectors",
+   "prompt": "Which pair can NEVER give a resultant of 5 N?",
+   "choices": [
+    "3 N and 4 N",
+    "3 N and 1 N",
+    "4 N and 4 N",
+    "3 N and 2 N"
+   ],
+   "answer": 1,
+   "explanation": "The resultant of 3 N and 1 N lies between 2 N and 4 N; 3 N and 2 N can give 5 N when parallel.",
+   "chapter": "lower6-physics-ch-mechanics"
+  },
+  {
+   "id": "lower6-physics-vectors-q2",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "lower6-physics-vectors",
+   "prompt": "A 20 N force acts at 30° to the x-axis. Its y-component is",
+   "choices": [
+    "20 N",
+    "34.6 N",
+    "10 N",
+    "17.3 N"
+   ],
+   "answer": 2,
+   "explanation": "20 sin 30° = 10 N.",
+   "chapter": "lower6-physics-ch-mechanics"
+  },
+  {
+   "id": "lower6-physics-vectors-q3",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "lower6-physics-vectors",
+   "prompt": "Vectors are added 'head to tail' in the",
+   "choices": [
+    "inverse-square rule",
+    "triangle rule",
+    "scalar rule",
+    "Hooke rule"
+   ],
+   "answer": 1,
+   "explanation": "Placing the tail of the second at the head of the first gives the resultant from the first tail to the second head.",
+   "chapter": "lower6-physics-ch-mechanics"
+  },
+  {
+   "id": "lower6-physics-vectors-q4",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "lower6-physics-vectors",
+   "prompt": "A 5 N force along +x and a 12 N force along +y have a resultant of",
+   "choices": [
+    "60 N",
+    "7 N",
+    "13 N",
+    "17 N"
+   ],
+   "answer": 2,
+   "explanation": "√(25 + 144) = 13 N.",
+   "chapter": "lower6-physics-ch-mechanics"
+  },
+  {
+   "id": "lower6-physics-vectors-q5",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "lower6-physics-vectors",
+   "prompt": "Which is a scalar quantity?",
+   "choices": [
+    "kinetic energy",
+    "momentum",
+    "velocity",
+    "force"
+   ],
+   "answer": 0,
+   "explanation": "Energy has no direction.",
+   "chapter": "lower6-physics-ch-mechanics"
+  },
+  {
+   "id": "lower6-physics-ch-mechanics-e07",
+   "kind": "numeric",
+   "tier": "application",
+   "lesson": "lower6-physics-kinematics",
+   "source": "Original exercise, GCE Advanced Level style (g = 9.8 m/s²)",
+   "prompt": "A car decelerates uniformly from 30 m/s to rest in 6.0 s. What is the magnitude of its acceleration?",
+   "answer": 5.0,
+   "tolerance": 0.01,
+   "unit": "m/s²",
+   "explanation": "a = (0 − 30)/6.0 = −5.0 m s⁻²; magnitude 5.0 m s⁻².",
+   "difficulty": 1,
+   "points": 2,
+   "chapter": "lower6-physics-ch-mechanics"
+  },
+  {
+   "id": "lower6-physics-ch-mechanics-e08",
+   "kind": "numeric",
+   "tier": "application",
+   "lesson": "lower6-physics-kinematics",
+   "source": "Original exercise, GCE Advanced Level style (g = 9.8 m/s²)",
+   "prompt": "An object falls from rest for 3.0 s (g = 9.8 m s⁻², no air resistance). How far does it fall?",
+   "answer": 44.1,
+   "tolerance": 0.1,
+   "unit": "m",
+   "explanation": "s = ½gt² = 0.5 × 9.8 × 9.0 = 44.1 m.",
+   "difficulty": 1,
+   "points": 2,
+   "chapter": "lower6-physics-ch-mechanics"
+  },
+  {
+   "id": "lower6-physics-ch-mechanics-e09",
+   "kind": "mcq",
+   "tier": "application",
+   "lesson": "lower6-physics-kinematics",
+   "source": "Original exercise, GCE Advanced Level style (g = 9.8 m/s²)",
+   "prompt": "On a velocity–time graph, the area under the line represents",
+   "choices": [
+    "speed",
+    "acceleration",
+    "force",
+    "displacement"
+   ],
+   "answer": 3,
+   "explanation": "The area is v × t summed, which is displacement.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "lower6-physics-ch-mechanics"
+  },
+  {
+   "id": "lower6-physics-ch-mechanics-e10",
+   "kind": "numeric",
+   "tier": "approfondissement",
+   "lesson": "lower6-physics-kinematics",
+   "source": "Original exercise, GCE Advanced Level style (g = 9.8 m/s²)",
+   "prompt": "A bus slows from 25 m/s to 10 m/s over a distance of 175 m with constant deceleration. Find the magnitude of the deceleration.",
+   "answer": 1.5,
+   "tolerance": 0.01,
+   "unit": "m/s²",
+   "explanation": "a = (v² − u²)/2s = (100 − 625)/350 = −1.5 m s⁻²; magnitude 1.5.",
+   "difficulty": 2,
+   "points": 3,
+   "chapter": "lower6-physics-ch-mechanics"
+  },
+  {
+   "id": "lower6-physics-ch-mechanics-e11",
+   "kind": "mcq",
+   "tier": "approfondissement",
+   "lesson": "lower6-physics-kinematics",
+   "source": "Original exercise, GCE Advanced Level style (g = 9.8 m/s²)",
+   "prompt": "A ball is thrown up and returns to the thrower's hand. At the highest point its velocity and acceleration are",
+   "choices": [
+    "v = 9.8 m/s and a = 0",
+    "v = 0 and a = 9.8 m/s² downward",
+    "v = 0 and a = 0",
+    "v = 0 and a = 9.8 m/s² upward"
+   ],
+   "answer": 1,
+   "explanation": "Gravity acts all the time; only the velocity is momentarily zero.",
+   "difficulty": 2,
+   "points": 2,
+   "chapter": "lower6-physics-ch-mechanics"
+  },
+  {
+   "id": "lower6-physics-ch-mechanics-e12",
+   "kind": "problem",
+   "tier": "examen",
+   "lesson": "lower6-physics-kinematics",
+   "source": "Original exercise, GCE Advanced Level style (g = 9.8 m/s²)",
+   "prompt": "Figure: the velocity–time graph of a minibus between two bus stops: it accelerates uniformly for 4 s to 12 m/s, moves at constant speed for 6 s, then decelerates uniformly to rest in 4 s.",
+   "difficulty": 2,
+   "parts": [
+    {
+     "kind": "numeric",
+     "points": 1,
+     "prompt": "Find the acceleration during the first 4 s (m s⁻²).",
+     "answer": 3.0,
+     "tolerance": 0.01,
+     "explanation": "Gradient = 12/4 = 3.0 m s⁻².",
+     "unit": "m/s²",
+     "id": "lower6-physics-ch-mechanics-e12-a"
+    },
+    {
+     "kind": "numeric",
+     "points": 2,
+     "prompt": "Find the total distance between the stops (m).",
+     "answer": 120.0,
+     "tolerance": 0.5,
+     "explanation": "Area = ½·4·12 + 6·12 + ½·4·12 = 24 + 72 + 24 = 120 m.",
+     "unit": "m",
+     "id": "lower6-physics-ch-mechanics-e12-b"
+    },
+    {
+     "kind": "numeric",
+     "points": 1,
+     "prompt": "Find the average speed for the whole 14 s (m/s, 2 s.f.).",
+     "answer": 8.6,
+     "tolerance": 0.05,
+     "explanation": "Average speed = 120 ÷ 14 = 8.6 m/s.",
+     "unit": "m/s",
+     "id": "lower6-physics-ch-mechanics-e12-c"
+    }
+   ],
+   "figure": {
+    "kind": "plot",
+    "xmin": 0,
+    "xmax": 14,
+    "ymin": 0,
+    "ymax": 14,
+    "grid": 2,
+    "w": 380,
+    "h": 240,
+    "curves": [],
+    "points": [],
+    "segments": [
+     {
+      "x1": 0,
+      "y1": 0,
+      "x2": 4,
+      "y2": 12,
+      "color": "blue",
+      "dash": false
+     },
+     {
+      "x1": 4,
+      "y1": 12,
+      "x2": 10,
+      "y2": 12,
+      "color": "blue",
+      "dash": false
+     },
+     {
+      "x1": 10,
+      "y1": 12,
+      "x2": 14,
+      "y2": 0,
+      "color": "blue",
+      "dash": false
+     }
+    ],
+    "xlabel": "t / s",
+    "ylabel": "v / m s⁻¹"
+   },
+   "chapter": "lower6-physics-ch-mechanics"
+  },
+  {
+   "id": "lower6-physics-kinematics-q1",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "lower6-physics-kinematics",
+   "prompt": "A displacement–time graph is a straight line sloping upward. The object has",
+   "choices": [
+    "zero velocity",
+    "increasing velocity",
+    "constant acceleration",
+    "constant positive velocity"
+   ],
+   "answer": 3,
+   "explanation": "A constant gradient means a constant velocity.",
+   "chapter": "lower6-physics-ch-mechanics"
+  },
+  {
+   "id": "lower6-physics-kinematics-q2",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "lower6-physics-kinematics",
+   "prompt": "A car starts from rest with a = 2.0 m s⁻². After 5.0 s its speed is",
+   "choices": [
+    "5.0 m/s",
+    "2.5 m/s",
+    "10 m/s",
+    "25 m/s"
+   ],
+   "answer": 2,
+   "explanation": "v = at = 2.0 × 5.0 = 10 m/s.",
+   "chapter": "lower6-physics-ch-mechanics"
+  },
+  {
+   "id": "lower6-physics-kinematics-q3",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "lower6-physics-kinematics",
+   "prompt": "An object is dropped from rest. Distance fallen in the first 2.0 s (g = 9.8) is",
+   "choices": [
+    "4.9 m",
+    "39.2 m",
+    "19.6 m",
+    "9.8 m"
+   ],
+   "answer": 2,
+   "explanation": "s = ½ × 9.8 × 4 = 19.6 m.",
+   "chapter": "lower6-physics-ch-mechanics"
+  },
+  {
+   "id": "lower6-physics-kinematics-q4",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "lower6-physics-kinematics",
+   "prompt": "The equation s = ut + ½at² applies when",
+   "choices": [
+    "the object is falling only",
+    "there is no friction only",
+    "the velocity is constant only",
+    "the acceleration is constant"
+   ],
+   "answer": 3,
+   "explanation": "The suvat equations require uniform acceleration.",
+   "chapter": "lower6-physics-ch-mechanics"
+  },
+  {
+   "id": "lower6-physics-kinematics-q5",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "lower6-physics-kinematics",
+   "prompt": "The gradient of a velocity–time graph gives",
+   "choices": [
+    "displacement",
+    "acceleration",
+    "distance",
+    "force"
+   ],
+   "answer": 1,
+   "explanation": "Acceleration = change in velocity ÷ time.",
+   "chapter": "lower6-physics-ch-mechanics"
+  },
+  {
+   "id": "lower6-physics-ch-mechanics-e13",
+   "kind": "numeric",
+   "tier": "application",
+   "lesson": "lower6-physics-projectiles",
+   "source": "Original exercise, GCE Advanced Level style (g = 9.8 m/s²)",
+   "prompt": "A ball is thrown horizontally from a table 0.80 m high. How long does it take to hit the floor (g = 9.8)? Give seconds to 2 d.p.",
+   "answer": 0.404,
+   "tolerance": 0.01,
+   "unit": "s",
+   "explanation": "t = √(2h/g) = √(1.6/9.8) = 0.40 s.",
+   "difficulty": 1,
+   "points": 2,
+   "chapter": "lower6-physics-ch-mechanics"
+  },
+  {
+   "id": "lower6-physics-ch-mechanics-e14",
+   "kind": "numeric",
+   "tier": "application",
+   "lesson": "lower6-physics-projectiles",
+   "source": "Original exercise, GCE Advanced Level style (g = 9.8 m/s²)",
+   "prompt": "A projectile is launched at 40 m/s at 30° (level ground). Its time of flight is: (g = 9.8, answer in s to 3 s.f.)",
+   "answer": 4.08,
+   "tolerance": 0.02,
+   "unit": "s",
+   "explanation": "T = 2u sin θ/g = 2 × 40 × 0.5/9.8 = 4.08 s.",
+   "difficulty": 1,
+   "points": 2,
+   "chapter": "lower6-physics-ch-mechanics"
+  },
+  {
+   "id": "lower6-physics-ch-mechanics-e15",
+   "kind": "mcq",
+   "tier": "application",
+   "lesson": "lower6-physics-projectiles",
+   "source": "Original exercise, GCE Advanced Level style (g = 9.8 m/s²)",
+   "prompt": "At which launch angle is the range greatest (same speed, level ground, no air resistance)?",
+   "choices": [
+    "90°",
+    "45°",
+    "30°",
+    "60°"
+   ],
+   "answer": 1,
+   "explanation": "R ∝ sin 2θ, which is maximum when 2θ = 90°.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "lower6-physics-ch-mechanics"
+  },
+  {
+   "id": "lower6-physics-ch-mechanics-e16",
+   "kind": "numeric",
+   "tier": "approfondissement",
+   "lesson": "lower6-physics-projectiles",
+   "source": "Original exercise, GCE Advanced Level style (g = 9.8 m/s²)",
+   "prompt": "The range of a projectile launched at 25 m/s at 45° on level ground (g = 9.8) is: (m, 3 s.f.)",
+   "answer": 63.8,
+   "tolerance": 0.2,
+   "unit": "m",
+   "explanation": "R = u² sin 90°/g = 625/9.8 = 63.8 m.",
+   "difficulty": 2,
+   "points": 3,
+   "chapter": "lower6-physics-ch-mechanics"
+  },
+  {
+   "id": "lower6-physics-ch-mechanics-e17",
+   "kind": "mcq",
+   "tier": "approfondissement",
+   "lesson": "lower6-physics-projectiles",
+   "source": "Original exercise, GCE Advanced Level style (g = 9.8 m/s²)",
+   "prompt": "Two stones are released at the same moment from the same height: one is dropped, the other thrown horizontally. Which statement is correct?",
+   "choices": [
+    "They land together only if the thrown one is slow",
+    "The thrown stone lands later",
+    "The dropped stone lands later",
+    "They hit the ground at the same time"
+   ],
+   "answer": 3,
+   "explanation": "Vertical motion is independent of horizontal velocity.",
+   "difficulty": 2,
+   "points": 2,
+   "chapter": "lower6-physics-ch-mechanics"
+  },
+  {
+   "id": "lower6-physics-ch-mechanics-e18",
+   "kind": "problem",
+   "tier": "examen",
+   "lesson": "lower6-physics-projectiles",
+   "source": "Original exercise, GCE Advanced Level style (g = 9.8 m/s²)",
+   "prompt": "A tennis ball is hit horizontally at 30 m/s from a height of 2.0 m above level ground (g = 9.8 m/s²; ignore air resistance).",
+   "difficulty": 2,
+   "parts": [
+    {
+     "kind": "numeric",
+     "points": 1,
+     "prompt": "Time to hit the ground (s, 2 d.p.).",
+     "answer": 0.639,
+     "tolerance": 0.01,
+     "explanation": "t = √(2 × 2.0/9.8) = 0.639 s.",
+     "unit": "s",
+     "id": "lower6-physics-ch-mechanics-e18-a"
+    },
+    {
+     "kind": "numeric",
+     "points": 1,
+     "prompt": "Horizontal distance travelled before landing (m, 3 s.f.).",
+     "answer": 19.2,
+     "tolerance": 0.2,
+     "explanation": "x = 30 × 0.639 = 19.2 m.",
+     "unit": "m",
+     "id": "lower6-physics-ch-mechanics-e18-b"
+    },
+    {
+     "kind": "numeric",
+     "points": 1,
+     "prompt": "Vertical component of the velocity just before landing (m/s, 3 s.f.).",
+     "answer": 6.26,
+     "tolerance": 0.05,
+     "explanation": "v_y = gt = 9.8 × 0.639 = 6.26 m/s.",
+     "unit": "m/s",
+     "id": "lower6-physics-ch-mechanics-e18-c"
+    },
+    {
+     "kind": "mcq",
+     "points": 1,
+     "prompt": "The ball would land at the same time if hit horizontally at 15 m/s because",
+     "choices": [
+      "gravity is smaller",
+      "the vertical motion does not depend on the horizontal speed",
+      "the speed is smaller",
+      "the range is unchanged"
+     ],
+     "answer": 1,
+     "explanation": "Time depends only on the fall height; horizontal speed changes only the range.",
+     "id": "lower6-physics-ch-mechanics-e18-d"
+    }
+   ],
+   "chapter": "lower6-physics-ch-mechanics"
+  },
+  {
+   "id": "lower6-physics-projectiles-q1",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "lower6-physics-projectiles",
+   "prompt": "At the highest point of a projectile's path (no air resistance), the acceleration is",
+   "choices": [
+    "9.8 m/s² downward",
+    "equal to u cos θ",
+    "zero",
+    "9.8 m/s² upward"
+   ],
+   "answer": 0,
+   "explanation": "Gravity acts throughout.",
+   "chapter": "lower6-physics-ch-mechanics"
+  },
+  {
+   "id": "lower6-physics-projectiles-q2",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "lower6-physics-projectiles",
+   "prompt": "The horizontal velocity of a projectile (no air resistance)",
+   "choices": [
+    "is zero at the top",
+    "increases",
+    "decreases",
+    "stays constant"
+   ],
+   "answer": 3,
+   "explanation": "No horizontal force acts.",
+   "chapter": "lower6-physics-ch-mechanics"
+  },
+  {
+   "id": "lower6-physics-projectiles-q3",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "lower6-physics-projectiles",
+   "prompt": "A ball is thrown horizontally at 10 m/s from a 20 m cliff. Time to land: (g = 9.8)",
+   "choices": [
+    "1.0 s",
+    "2.9 s",
+    "4.0 s",
+    "2.0 s"
+   ],
+   "answer": 3,
+   "explanation": "t = √(2 × 20/9.8) = 2.02 s ≈ 2.0 s.",
+   "chapter": "lower6-physics-ch-mechanics"
+  },
+  {
+   "id": "lower6-physics-projectiles-q4",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "lower6-physics-projectiles",
+   "prompt": "A ball thrown with u_y = 14.7 m/s upward is in the air for (level ground, g = 9.8)",
+   "choices": [
+    "6.0 s",
+    "2.0 s",
+    "1.5 s",
+    "3.0 s"
+   ],
+   "answer": 3,
+   "explanation": "T = 2u_y/g = 29.4/9.8 = 3.0 s.",
+   "chapter": "lower6-physics-ch-mechanics"
+  },
+  {
+   "id": "lower6-physics-projectiles-q5",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "lower6-physics-projectiles",
+   "prompt": "The path of a projectile in a uniform field without air resistance is",
+   "choices": [
+    "a circle",
+    "a straight line",
+    "an ellipse of small size only",
+    "a parabola"
+   ],
+   "answer": 3,
+   "explanation": "x is linear in t and y is quadratic in t, giving a parabola.",
+   "chapter": "lower6-physics-ch-mechanics"
+  },
+  {
+   "id": "lower6-physics-ch-mechanics-e19",
+   "kind": "numeric",
+   "tier": "application",
+   "lesson": "lower6-physics-newton",
+   "source": "Original exercise, GCE Advanced Level style (g = 9.8 m/s²)",
+   "prompt": "A resultant force of 12 N acts on a 3.0 kg trolley. Find the acceleration (m s⁻²).",
+   "answer": 4.0,
+   "tolerance": 0.01,
+   "unit": "m/s²",
+   "explanation": "a = F/m = 12/3.0 = 4.0 m s⁻².",
+   "difficulty": 1,
+   "points": 2,
+   "chapter": "lower6-physics-ch-mechanics"
+  },
+  {
+   "id": "lower6-physics-ch-mechanics-e20",
+   "kind": "numeric",
+   "tier": "application",
+   "lesson": "lower6-physics-newton",
+   "source": "Original exercise, GCE Advanced Level style (g = 9.8 m/s²)",
+   "prompt": "What is the weight of a 60 kg person (g = 9.8 m s⁻²)?",
+   "answer": 588,
+   "tolerance": 0.5,
+   "unit": "N",
+   "explanation": "W = mg = 60 × 9.8 = 588 N.",
+   "difficulty": 1,
+   "points": 2,
+   "chapter": "lower6-physics-ch-mechanics"
+  },
+  {
+   "id": "lower6-physics-ch-mechanics-e21",
+   "kind": "truefalse",
+   "tier": "application",
+   "lesson": "lower6-physics-newton",
+   "source": "Original exercise, GCE Advanced Level style (g = 9.8 m/s²)",
+   "prompt": "True or false: when you stand on the floor, your weight and the floor's normal reaction form an action–reaction pair (Newton's third law).",
+   "answer": false,
+   "explanation": "They act on the same body (you). The third-law pair of the weight is the gravitational force you exert on the Earth.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "lower6-physics-ch-mechanics"
+  },
+  {
+   "id": "lower6-physics-ch-mechanics-e22",
+   "kind": "numeric",
+   "tier": "approfondissement",
+   "lesson": "lower6-physics-newton",
+   "source": "Original exercise, GCE Advanced Level style (g = 9.8 m/s²)",
+   "prompt": "A 60 kg student stands in a lift that accelerates upward at 1.5 m s⁻². What force does the floor exert on the student (N)?",
+   "answer": 678.0,
+   "tolerance": 1,
+   "unit": "N",
+   "explanation": "R − mg = ma, so R = m(g + a) = 60 × 11.3 = 678 N.",
+   "difficulty": 2,
+   "points": 3,
+   "chapter": "lower6-physics-ch-mechanics"
+  },
+  {
+   "id": "lower6-physics-ch-mechanics-e23",
+   "kind": "numeric",
+   "tier": "approfondissement",
+   "lesson": "lower6-physics-newton",
+   "source": "Original exercise, GCE Advanced Level style (g = 9.8 m/s²)",
+   "prompt": "A 10 kg box on a 30° slope (μ = 0.20) is held still by static friction. What is the maximum friction (limiting) available (N, 3 s.f.)?",
+   "answer": 17.0,
+   "tolerance": 0.1,
+   "unit": "N",
+   "explanation": "N = mg cos 30° = 84.9 N; f_max = 0.20 × 84.9 = 17.0 N.",
+   "difficulty": 2,
+   "points": 3,
+   "chapter": "lower6-physics-ch-mechanics"
+  },
+  {
+   "id": "lower6-physics-ch-mechanics-e24",
+   "kind": "problem",
+   "tier": "examen",
+   "lesson": "lower6-physics-newton",
+   "source": "Original exercise, GCE Advanced Level style (g = 9.8 m/s²)",
+   "prompt": "Two blocks are joined by a light string over a smooth pulley: A of mass 3.0 kg hangs on one side and B of mass 2.0 kg on the other (g = 9.8 m s⁻²).",
+   "difficulty": 2,
+   "parts": [
+    {
+     "kind": "numeric",
+     "points": 2,
+     "prompt": "Find the acceleration (m s⁻²).",
+     "answer": 1.9600000000000002,
+     "tolerance": 0.01,
+     "explanation": "Resultant driving force = (3.0 − 2.0)g = 9.8 N; total mass = 5.0 kg; a = 1.96 m s⁻².",
+     "unit": "m/s²",
+     "id": "lower6-physics-ch-mechanics-e24-a"
+    },
+    {
+     "kind": "numeric",
+     "points": 2,
+     "prompt": "Find the tension in the string (N, 3 s.f.).",
+     "answer": 23.5,
+     "tolerance": 0.1,
+     "explanation": "For A: mg − T = ma, so T = 3.0 × (9.8 − 1.96) = 23.5 N.",
+     "unit": "N",
+     "id": "lower6-physics-ch-mechanics-e24-b"
+    },
+    {
+     "kind": "truefalse",
+     "points": 1,
+     "prompt": "The tension is equal to the weight of block B plus its mass times acceleration.",
+     "answer": true,
+     "explanation": "For B: T − mg = ma, so T = 2.0 × (9.8 + 1.96) = 23.5 N, matching A.",
+     "id": "lower6-physics-ch-mechanics-e24-c"
+    }
+   ],
+   "chapter": "lower6-physics-ch-mechanics"
+  },
+  {
+   "id": "lower6-physics-newton-q1",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "lower6-physics-newton",
+   "prompt": "A skydiver reaches terminal velocity when",
+   "choices": [
+    "air resistance equals weight",
+    "weight is zero",
+    "the speed is zero",
+    "air resistance is zero"
+   ],
+   "answer": 0,
+   "explanation": "The resultant force is zero, so a = 0 and the speed is constant.",
+   "chapter": "lower6-physics-ch-mechanics"
+  },
+  {
+   "id": "lower6-physics-newton-q2",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "lower6-physics-newton",
+   "prompt": "A 2.0 kg trolley is pulled by 10 N against friction of 4.0 N. Its acceleration is",
+   "choices": [
+    "3.0 m/s²",
+    "7.0 m/s²",
+    "5.0 m/s²",
+    "2.0 m/s²"
+   ],
+   "answer": 0,
+   "explanation": "(10 − 4)/2.0 = 3.0 m s⁻².",
+   "chapter": "lower6-physics-ch-mechanics"
+  },
+  {
+   "id": "lower6-physics-newton-q3",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "lower6-physics-newton",
+   "prompt": "Newton's first law says that a body with no resultant force",
+   "choices": [
+    "slows down gradually",
+    "falls",
+    "keeps moving at constant velocity",
+    "must be at rest"
+   ],
+   "answer": 2,
+   "explanation": "No resultant force means no change in velocity.",
+   "chapter": "lower6-physics-ch-mechanics"
+  },
+  {
+   "id": "lower6-physics-newton-q4",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "lower6-physics-newton",
+   "prompt": "The SI unit newton equals",
+   "choices": [
+    "kg m s⁻²",
+    "kg s⁻²",
+    "kg m s⁻¹",
+    "kg m² s⁻²"
+   ],
+   "answer": 0,
+   "explanation": "F = ma.",
+   "chapter": "lower6-physics-ch-mechanics"
+  },
+  {
+   "id": "lower6-physics-newton-q5",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "lower6-physics-newton",
+   "prompt": "On a slope of angle θ, the normal reaction on a mass m is",
+   "choices": [
+    "mg",
+    "mg tan θ",
+    "mg cos θ",
+    "mg sin θ"
+   ],
+   "answer": 2,
+   "explanation": "The weight component perpendicular to the slope is mg cos θ.",
+   "chapter": "lower6-physics-ch-mechanics"
+  },
+  {
+   "id": "lower6-physics-ch-mechanics-e25",
+   "kind": "numeric",
+   "tier": "application",
+   "lesson": "lower6-physics-momentum",
+   "source": "Original exercise, GCE Advanced Level style (g = 9.8 m/s²)",
+   "prompt": "Calculate the momentum of a 1200 kg car moving at 15 m/s (kg m/s).",
+   "answer": 18000,
+   "tolerance": 1,
+   "unit": "kg m/s",
+   "explanation": "p = mv = 1200 × 15 = 18 000 kg m/s.",
+   "difficulty": 1,
+   "points": 2,
+   "chapter": "lower6-physics-ch-mechanics"
+  },
+  {
+   "id": "lower6-physics-ch-mechanics-e26",
+   "kind": "numeric",
+   "tier": "application",
+   "lesson": "lower6-physics-momentum",
+   "source": "Original exercise, GCE Advanced Level style (g = 9.8 m/s²)",
+   "prompt": "A 0.50 kg ball is struck by a force of 40 N for 0.020 s. What is the change of momentum (N s)?",
+   "answer": 0.8,
+   "tolerance": 0.005,
+   "unit": "N s",
+   "explanation": "Impulse = FΔt = 40 × 0.020 = 0.80 N s.",
+   "difficulty": 1,
+   "points": 2,
+   "chapter": "lower6-physics-ch-mechanics"
+  },
+  {
+   "id": "lower6-physics-ch-mechanics-e27",
+   "kind": "truefalse",
+   "tier": "application",
+   "lesson": "lower6-physics-momentum",
+   "source": "Original exercise, GCE Advanced Level style (g = 9.8 m/s²)",
+   "prompt": "True or false: kinetic energy is conserved in all collisions.",
+   "answer": false,
+   "explanation": "Only in elastic collisions. Momentum is conserved in all collisions when no external force acts.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "lower6-physics-ch-mechanics"
+  },
+  {
+   "id": "lower6-physics-ch-mechanics-e28",
+   "kind": "numeric",
+   "tier": "approfondissement",
+   "lesson": "lower6-physics-momentum",
+   "source": "Original exercise, GCE Advanced Level style (g = 9.8 m/s²)",
+   "prompt": "A rifle of mass 4.0 kg fires a 0.020 kg bullet at 400 m/s. What is the recoil speed of the rifle (m/s)?",
+   "answer": 2.0,
+   "tolerance": 0.01,
+   "unit": "m/s",
+   "explanation": "Total momentum is zero: 4.0 v = 0.020 × 400, so v = 2.0 m/s opposite to the bullet.",
+   "difficulty": 2,
+   "points": 3,
+   "chapter": "lower6-physics-ch-mechanics"
+  },
+  {
+   "id": "lower6-physics-ch-mechanics-e29",
+   "kind": "mcq",
+   "tier": "approfondissement",
+   "lesson": "lower6-physics-momentum",
+   "source": "Original exercise, GCE Advanced Level style (g = 9.8 m/s²)",
+   "prompt": "A 1.0 kg mass moving at 4.0 m/s collides elastically head-on with a stationary 1.0 kg mass. Afterwards:",
+   "choices": [
+    "the first stops and the second moves at 4.0 m/s",
+    "both move at 2.0 m/s",
+    "both move at 4.0 m/s",
+    "the first rebounds at 4.0 m/s"
+   ],
+   "answer": 0,
+   "explanation": "Equal masses exchange velocities in a head-on elastic collision: momentum and kinetic energy are both conserved.",
+   "difficulty": 2,
+   "points": 2,
+   "chapter": "lower6-physics-ch-mechanics"
+  },
+  {
+   "id": "lower6-physics-ch-mechanics-e30",
+   "kind": "problem",
+   "tier": "examen",
+   "lesson": "lower6-physics-momentum",
+   "source": "Original exercise, GCE Advanced Level style (g = 9.8 m/s²)",
+   "prompt": "A 1500 kg minibus travelling at 10 m/s hits the back of a stationary 1000 kg car. They move together after the impact.",
+   "difficulty": 2,
+   "parts": [
+    {
+     "kind": "numeric",
+     "points": 1,
+     "prompt": "Find the speed immediately after the collision (m/s).",
+     "answer": 6.0,
+     "tolerance": 0.01,
+     "explanation": "1500 × 10 = (1500 + 1000)v, so v = 6.0 m/s.",
+     "unit": "m/s",
+     "id": "lower6-physics-ch-mechanics-e30-a"
+    },
+    {
+     "kind": "numeric",
+     "points": 2,
+     "prompt": "Find the kinetic energy lost (J).",
+     "answer": 30000.0,
+     "tolerance": 10,
+     "explanation": "KE before = ½ × 1500 × 100 = 75 000 J; after = ½ × 2500 × 36 = 45 000 J; loss = 30 000 J.",
+     "unit": "J",
+     "id": "lower6-physics-ch-mechanics-e30-b"
+    },
+    {
+     "kind": "mcq",
+     "points": 1,
+     "prompt": "This collision is best described as",
+     "choices": [
+      "one where momentum is lost",
+      "explosive",
+      "elastic",
+      "perfectly inelastic"
+     ],
+     "answer": 3,
+     "explanation": "The bodies stick together and kinetic energy is lost; momentum is conserved.",
+     "id": "lower6-physics-ch-mechanics-e30-c"
+    }
+   ],
+   "chapter": "lower6-physics-ch-mechanics"
+  },
+  {
+   "id": "lower6-physics-momentum-q1",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "lower6-physics-momentum",
+   "prompt": "The unit of impulse is equivalent to",
+   "choices": [
+    "kg m s⁻¹",
+    "kg m s⁻²",
+    "kg m² s⁻²",
+    "kg s⁻¹"
+   ],
+   "answer": 0,
+   "explanation": "Impulse = change of momentum = N s = kg m s⁻¹.",
+   "chapter": "lower6-physics-ch-mechanics"
+  },
+  {
+   "id": "lower6-physics-momentum-q2",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "lower6-physics-momentum",
+   "prompt": "The area under a force–time graph gives",
+   "choices": [
+    "power",
+    "acceleration",
+    "impulse",
+    "work done"
+   ],
+   "answer": 2,
+   "explanation": "Area = F × t = impulse.",
+   "chapter": "lower6-physics-ch-mechanics"
+  },
+  {
+   "id": "lower6-physics-momentum-q3",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "lower6-physics-momentum",
+   "prompt": "In an explosion of a body initially at rest, the total momentum afterwards is",
+   "choices": [
+    "different for each piece",
+    "equal to the kinetic energy lost",
+    "equal to the total kinetic energy",
+    "zero"
+   ],
+   "answer": 3,
+   "explanation": "It is conserved and was zero before.",
+   "chapter": "lower6-physics-ch-mechanics"
+  },
+  {
+   "id": "lower6-physics-momentum-q4",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "lower6-physics-momentum",
+   "prompt": "A ball of mass 0.2 kg moving at 10 m/s stops in 0.05 s. The average force is",
+   "choices": [
+    "100 N",
+    "40 N",
+    "2 N",
+    "0.4 N"
+   ],
+   "answer": 1,
+   "explanation": "F = Δp/t = 2.0/0.05 = 40 N.",
+   "chapter": "lower6-physics-ch-mechanics"
+  },
+  {
+   "id": "lower6-physics-momentum-q5",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "lower6-physics-momentum",
+   "prompt": "A 3 kg trolley at 2 m/s hits and joins a 1 kg trolley at rest. The common speed is",
+   "choices": [
+    "2 m/s",
+    "1 m/s",
+    "1.5 m/s",
+    "0.67 m/s"
+   ],
+   "answer": 2,
+   "explanation": "6 = 4v, so v = 1.5 m/s.",
+   "chapter": "lower6-physics-ch-mechanics"
+  },
+  {
+   "id": "lower6-physics-ch-mechanics-e31",
+   "kind": "numeric",
+   "tier": "application",
+   "lesson": "lower6-physics-energy",
+   "source": "Original exercise, GCE Advanced Level style (g = 9.8 m/s²)",
+   "prompt": "A force of 50 N pulls a trolley 10 m along the ground at 60° above the horizontal. How much work does it do (J)?",
+   "answer": 250.0,
+   "tolerance": 0.5,
+   "unit": "J",
+   "explanation": "W = Fs cos θ = 50 × 10 × 0.5 = 250 J.",
+   "difficulty": 1,
+   "points": 2,
+   "chapter": "lower6-physics-ch-mechanics"
+  },
+  {
+   "id": "lower6-physics-ch-mechanics-e32",
+   "kind": "numeric",
+   "tier": "application",
+   "lesson": "lower6-physics-energy",
+   "source": "Original exercise, GCE Advanced Level style (g = 9.8 m/s²)",
+   "prompt": "Calculate the kinetic energy of a 1200 kg car moving at 15 m/s (J).",
+   "answer": 135000.0,
+   "tolerance": 10,
+   "unit": "J",
+   "explanation": "E_k = ½mv² = 0.5 × 1200 × 225 = 135 000 J.",
+   "difficulty": 1,
+   "points": 2,
+   "chapter": "lower6-physics-ch-mechanics"
+  },
+  {
+   "id": "lower6-physics-ch-mechanics-e33",
+   "kind": "truefalse",
+   "tier": "application",
+   "lesson": "lower6-physics-energy",
+   "source": "Original exercise, GCE Advanced Level style (g = 9.8 m/s²)",
+   "prompt": "True or false: the normal reaction does work on a box sliding along a horizontal floor.",
+   "answer": false,
+   "explanation": "The force is perpendicular to the displacement (cos 90° = 0), so no work is done.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "lower6-physics-ch-mechanics"
+  },
+  {
+   "id": "lower6-physics-ch-mechanics-e34",
+   "kind": "numeric",
+   "tier": "approfondissement",
+   "lesson": "lower6-physics-energy",
+   "source": "Original exercise, GCE Advanced Level style (g = 9.8 m/s²)",
+   "prompt": "A car engine delivers 40 kW at a constant speed of 20 m/s. Find the total resistive force (N).",
+   "answer": 2000.0,
+   "tolerance": 1,
+   "unit": "N",
+   "explanation": "At constant speed the driving force equals the resistance: F = P/v = 40 000/20 = 2000 N.",
+   "difficulty": 2,
+   "points": 3,
+   "chapter": "lower6-physics-ch-mechanics"
+  },
+  {
+   "id": "lower6-physics-ch-mechanics-e35",
+   "kind": "numeric",
+   "tier": "approfondissement",
+   "lesson": "lower6-physics-energy",
+   "source": "Original exercise, GCE Advanced Level style (g = 9.8 m/s²)",
+   "prompt": "A 2.0 kg ball is thrown up at 15 m/s. Find the maximum height by energy conservation (m, 3 s.f.; g = 9.8).",
+   "answer": 11.5,
+   "tolerance": 0.1,
+   "unit": "m",
+   "explanation": "½mv² = mgh, so h = v²/2g = 225/19.6 = 11.5 m.",
+   "difficulty": 2,
+   "points": 3,
+   "chapter": "lower6-physics-ch-mechanics"
+  },
+  {
+   "id": "lower6-physics-ch-mechanics-e36",
+   "kind": "problem",
+   "tier": "examen",
+   "lesson": "lower6-physics-energy",
+   "source": "Original exercise, GCE Advanced Level style (g = 9.8 m/s²)",
+   "prompt": "A 1500 kg car accelerates uniformly from 10 m/s to 20 m/s over a distance of 50 m on a straight road.",
+   "difficulty": 2,
+   "parts": [
+    {
+     "kind": "numeric",
+     "points": 1,
+     "prompt": "Find the increase in kinetic energy (J).",
+     "answer": 225000.0,
+     "tolerance": 10,
+     "explanation": "ΔE_k = ½ × 1500 × (20² − 10²) = 225 000 J.",
+     "unit": "J",
+     "id": "lower6-physics-ch-mechanics-e36-a"
+    },
+    {
+     "kind": "numeric",
+     "points": 1,
+     "prompt": "Find the average resultant force (N) using work = force × distance.",
+     "answer": 4500.0,
+     "tolerance": 1,
+     "explanation": "F = ΔE_k/s = 225 000/50 = 4500 N.",
+     "unit": "N",
+     "id": "lower6-physics-ch-mechanics-e36-b"
+    },
+    {
+     "kind": "numeric",
+     "points": 2,
+     "prompt": "Find the average power developed by the resultant force (W). The average speed is 15 m/s.",
+     "answer": 67500.0,
+     "tolerance": 100,
+     "explanation": "t = 50/15 = 3.33 s; P = 225 000/3.33 = 67 500 W (or F × v_avg = 4500 × 15).",
+     "unit": "W",
+     "id": "lower6-physics-ch-mechanics-e36-c"
+    }
+   ],
+   "chapter": "lower6-physics-ch-mechanics"
+  },
+  {
+   "id": "lower6-physics-energy-q1",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "lower6-physics-energy",
+   "prompt": "A hiker of mass 60 kg climbs 1000 m up Mount Cameroon's slopes. The gain in potential energy (g = 9.8) is",
+   "choices": [
+    "6000 kJ",
+    "59 kJ",
+    "58.8 J",
+    "588 kJ"
+   ],
+   "answer": 3,
+   "explanation": "mgh = 60 × 9.8 × 1000 = 588 000 J = 588 kJ.",
+   "chapter": "lower6-physics-ch-mechanics"
+  },
+  {
+   "id": "lower6-physics-energy-q2",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "lower6-physics-energy",
+   "prompt": "A 5 kW motor runs for 2.0 hours. The energy it uses is",
+   "choices": [
+    "10 kW",
+    "2.5 kW h",
+    "10 kW h",
+    "7 kW h"
+   ],
+   "answer": 2,
+   "explanation": "Energy = power × time = 5 × 2.0 = 10 kW h.",
+   "chapter": "lower6-physics-ch-mechanics"
+  },
+  {
+   "id": "lower6-physics-energy-q3",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "lower6-physics-energy",
+   "prompt": "A body's speed doubles. Its kinetic energy is multiplied by",
+   "choices": [
+    "4",
+    "1/2",
+    "8",
+    "2"
+   ],
+   "answer": 0,
+   "explanation": "E_k ∝ v², so doubling v gives 4 times the energy.",
+   "chapter": "lower6-physics-ch-mechanics"
+  },
+  {
+   "id": "lower6-physics-energy-q4",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "lower6-physics-energy",
+   "prompt": "The efficiency of a machine is 40 %. For an input of 500 J the useful output is",
+   "choices": [
+    "20 J",
+    "460 J",
+    "1250 J",
+    "200 J"
+   ],
+   "answer": 3,
+   "explanation": "0.40 × 500 = 200 J.",
+   "chapter": "lower6-physics-ch-mechanics"
+  },
+  {
+   "id": "lower6-physics-energy-q5",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "lower6-physics-energy",
+   "prompt": "The unit watt is the same as",
+   "choices": [
+    "N s",
+    "kg m s⁻²",
+    "J s⁻¹",
+    "J s"
+   ],
+   "answer": 2,
+   "explanation": "Power = energy ÷ time.",
+   "chapter": "lower6-physics-ch-mechanics"
+  },
+  {
+   "id": "lower6-physics-ch-mechanics-e37",
+   "kind": "numeric",
+   "tier": "application",
+   "lesson": "lower6-physics-circular",
+   "source": "Original exercise, GCE Advanced Level style (g = 9.8 m/s²)",
+   "prompt": "A wheel turns at 120 revolutions per minute. Find ω in rad s⁻¹ (3 s.f.).",
+   "answer": 12.6,
+   "tolerance": 0.05,
+   "unit": "rad/s",
+   "explanation": "ω = 120 × 2π/60 = 12.6 rad s⁻¹.",
+   "difficulty": 1,
+   "points": 2,
+   "chapter": "lower6-physics-ch-mechanics"
+  },
+  {
+   "id": "lower6-physics-ch-mechanics-e38",
+   "kind": "numeric",
+   "tier": "application",
+   "lesson": "lower6-physics-circular",
+   "source": "Original exercise, GCE Advanced Level style (g = 9.8 m/s²)",
+   "prompt": "A point on a roundabout of radius 3.0 m moves at 6.0 m/s. Find its centripetal acceleration (m s⁻²).",
+   "answer": 12.0,
+   "tolerance": 0.05,
+   "unit": "m/s²",
+   "explanation": "a = v²/r = 36/3.0 = 12 m s⁻².",
+   "difficulty": 1,
+   "points": 2,
+   "chapter": "lower6-physics-ch-mechanics"
+  },
+  {
+   "id": "lower6-physics-ch-mechanics-e39",
+   "kind": "truefalse",
+   "tier": "application",
+   "lesson": "lower6-physics-circular",
+   "source": "Original exercise, GCE Advanced Level style (g = 9.8 m/s²)",
+   "prompt": "True or false: a body moving in a circle at constant speed has zero acceleration.",
+   "answer": false,
+   "explanation": "Its velocity changes direction, so it accelerates towards the centre (a = v²/r).",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "lower6-physics-ch-mechanics"
+  },
+  {
+   "id": "lower6-physics-ch-mechanics-e40",
+   "kind": "numeric",
+   "tier": "approfondissement",
+   "lesson": "lower6-physics-circular",
+   "source": "Original exercise, GCE Advanced Level style (g = 9.8 m/s²)",
+   "prompt": "A 0.50 kg ball on a string moves in a horizontal circle of radius 1.0 m at 4.0 m/s (ignore gravity's effect on the string angle). Find the tension (N).",
+   "answer": 8.0,
+   "tolerance": 0.05,
+   "unit": "N",
+   "explanation": "T = mv²/r = 0.50 × 16/1.0 = 8.0 N.",
+   "difficulty": 2,
+   "points": 3,
+   "chapter": "lower6-physics-ch-mechanics"
+  },
+  {
+   "id": "lower6-physics-ch-mechanics-e41",
+   "kind": "numeric",
+   "tier": "approfondissement",
+   "lesson": "lower6-physics-circular",
+   "source": "Original exercise, GCE Advanced Level style (g = 9.8 m/s²)",
+   "prompt": "A bucket of water is swung in a vertical circle of radius 0.80 m. Find the minimum speed at the top for the water to stay in (m/s, 2 s.f.; g = 9.8).",
+   "answer": 2.8,
+   "tolerance": 0.05,
+   "unit": "m/s",
+   "explanation": "At the top, mg = mv²/r (N = 0), so v = √(gr) = √(7.84) = 2.8 m/s.",
+   "difficulty": 2,
+   "points": 3,
+   "chapter": "lower6-physics-ch-mechanics"
+  },
+  {
+   "id": "lower6-physics-ch-mechanics-e42",
+   "kind": "problem",
+   "tier": "examen",
+   "lesson": "lower6-physics-circular",
+   "source": "Original exercise, GCE Advanced Level style (g = 9.8 m/s²)",
+   "prompt": "A 0.20 kg stone on a 0.80 m string is whirled in a horizontal circle at 2.0 revolutions per second (neglect the weight of the stone's effect on the angle of the string).",
+   "difficulty": 2,
+   "parts": [
+    {
+     "kind": "numeric",
+     "points": 1,
+     "prompt": "Angular velocity (rad s⁻¹, 3 s.f.).",
+     "answer": 12.6,
+     "tolerance": 0.05,
+     "explanation": "ω = 2π × 2.0 = 12.6 rad s⁻¹.",
+     "unit": "rad/s",
+     "id": "lower6-physics-ch-mechanics-e42-a"
+    },
+    {
+     "kind": "numeric",
+     "points": 1,
+     "prompt": "Speed of the stone (m/s, 3 s.f.).",
+     "answer": 10.1,
+     "tolerance": 0.05,
+     "explanation": "v = ωr = 12.57 × 0.80 = 10.1 m/s.",
+     "unit": "m/s",
+     "id": "lower6-physics-ch-mechanics-e42-b"
+    },
+    {
+     "kind": "numeric",
+     "points": 2,
+     "prompt": "Tension in the string (N, 3 s.f.).",
+     "answer": 25.3,
+     "tolerance": 0.2,
+     "explanation": "T = mω²r = 0.20 × 12.57² × 0.80 = 25.3 N.",
+     "unit": "N",
+     "id": "lower6-physics-ch-mechanics-e42-c"
+    }
+   ],
+   "chapter": "lower6-physics-ch-mechanics"
+  },
+  {
+   "id": "lower6-physics-circular-q1",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "lower6-physics-circular",
+   "prompt": "The direction of the acceleration of a body in uniform circular motion is",
+   "choices": [
+    "away from the centre",
+    "along the tangent",
+    "opposite to the velocity",
+    "towards the centre"
+   ],
+   "answer": 3,
+   "explanation": "a = v²/r points to the centre.",
+   "chapter": "lower6-physics-ch-mechanics"
+  },
+  {
+   "id": "lower6-physics-circular-q2",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "lower6-physics-circular",
+   "prompt": "The period of a motor turning at 50 revolutions per second is",
+   "choices": [
+    "0.020 s",
+    "50 s",
+    "314 s",
+    "0.50 s"
+   ],
+   "answer": 0,
+   "explanation": "T = 1/f = 1/50 = 0.020 s.",
+   "chapter": "lower6-physics-ch-mechanics"
+  },
+  {
+   "id": "lower6-physics-circular-q3",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "lower6-physics-circular",
+   "prompt": "If the speed of a body in a circle doubles at the same radius, the centripetal force is multiplied by",
+   "choices": [
+    "1/2",
+    "8",
+    "2",
+    "4"
+   ],
+   "answer": 3,
+   "explanation": "F ∝ v², so 2² = 4.",
+   "chapter": "lower6-physics-ch-mechanics"
+  },
+  {
+   "id": "lower6-physics-circular-q4",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "lower6-physics-circular",
+   "prompt": "The centripetal force on the Moon orbiting the Earth is provided by",
+   "choices": [
+    "friction",
+    "gravity",
+    "tension",
+    "air pressure"
+   ],
+   "answer": 1,
+   "explanation": "The gravitational attraction of the Earth acts towards the centre.",
+   "chapter": "lower6-physics-ch-mechanics"
+  },
+  {
+   "id": "lower6-physics-circular-q5",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "lower6-physics-circular",
+   "prompt": "A stone whirled on a string is released. It then moves",
+   "choices": [
+    "along the tangent",
+    "in a smaller circle",
+    "away along the radius",
+    "towards the centre"
+   ],
+   "answer": 0,
+   "explanation": "With no force, it moves in a straight line in the direction of its velocity at release.",
+   "chapter": "lower6-physics-ch-mechanics"
+  },
+  {
+   "id": "lower6-physics-ch-mechanics-e43",
+   "kind": "numeric",
+   "tier": "application",
+   "lesson": "lower6-physics-gravitation",
+   "source": "Original exercise, GCE Advanced Level style (g = 9.8 m/s²)",
+   "prompt": "Two 1000 kg cars are 2.0 m apart. Find the gravitational force between them (N; G = 6.67 × 10⁻¹¹), in units of 10⁻⁵ N to 3 s.f.",
+   "answer": 1.67,
+   "tolerance": 0.02,
+   "unit": "× 10⁻⁵ N",
+   "explanation": "F = GMm/r² = 6.67 × 10⁻¹¹ × 10⁶/4 = 1.67 × 10⁻⁵ N, so 1.67 in these units (a tiny force).",
+   "difficulty": 1,
+   "points": 2,
+   "chapter": "lower6-physics-ch-mechanics"
+  },
+  {
+   "id": "lower6-physics-ch-mechanics-e44",
+   "kind": "mcq",
+   "tier": "application",
+   "lesson": "lower6-physics-gravitation",
+   "source": "Original exercise, GCE Advanced Level style (g = 9.8 m/s²)",
+   "prompt": "The gravitational field strength at a distance 3R from the centre of a planet (R = radius) is what fraction of its surface value?",
+   "choices": [
+    "1/6",
+    "1/9",
+    "1/27",
+    "1/3"
+   ],
+   "answer": 1,
+   "explanation": "g ∝ 1/r², so (1/3)² = 1/9.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "lower6-physics-ch-mechanics"
+  },
+  {
+   "id": "lower6-physics-ch-mechanics-e45",
+   "kind": "truefalse",
+   "tier": "application",
+   "lesson": "lower6-physics-gravitation",
+   "source": "Original exercise, GCE Advanced Level style (g = 9.8 m/s²)",
+   "prompt": "True or false: astronauts in orbit feel weightless because gravity is zero there.",
+   "answer": false,
+   "explanation": "At 400 km gravity is still about 90 % of its surface value; they are in free fall around the Earth.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "lower6-physics-ch-mechanics"
+  },
+  {
+   "id": "lower6-physics-ch-mechanics-e46",
+   "kind": "numeric",
+   "tier": "approfondissement",
+   "lesson": "lower6-physics-gravitation",
+   "source": "Original exercise, GCE Advanced Level style (g = 9.8 m/s²)",
+   "prompt": "Use T² = 4π²r³/GM to find the radius of a circular orbit (in 10⁷ m, 3 s.f.) for a satellite of period 24 h (geostationary). G = 6.67 × 10⁻¹¹, M = 6.0 × 10²⁴ kg.",
+   "answer": 4.23,
+   "tolerance": 0.03,
+   "unit": "× 10⁷ m",
+   "explanation": "r = (GMT²/4π²)^(1/3) = 4.23 × 10⁷ m.",
+   "difficulty": 2,
+   "points": 3,
+   "chapter": "lower6-physics-ch-mechanics"
+  },
+  {
+   "id": "lower6-physics-ch-mechanics-e47",
+   "kind": "numeric",
+   "tier": "approfondissement",
+   "lesson": "lower6-physics-gravitation",
+   "source": "Original exercise, GCE Advanced Level style (g = 9.8 m/s²)",
+   "prompt": "Escape speed from the Earth's surface (km s⁻¹, 3 s.f.; G, M, R as in the lesson).",
+   "answer": 11.2,
+   "tolerance": 0.1,
+   "unit": "km/s",
+   "explanation": "v = √(2GM/R) = √(2 × 4.002 × 10¹⁴ ÷ 6.4 × 10⁶) = 11.2 km/s.",
+   "difficulty": 2,
+   "points": 3,
+   "chapter": "lower6-physics-ch-mechanics"
+  },
+  {
+   "id": "lower6-physics-ch-mechanics-e48",
+   "kind": "problem",
+   "tier": "examen",
+   "lesson": "lower6-physics-gravitation",
+   "source": "Original exercise, GCE Advanced Level style (g = 9.8 m/s²)",
+   "prompt": "A communications satellite is placed in a geostationary orbit (period 24 h). Use G = 6.67 × 10⁻¹¹ N m² kg⁻², M_E = 6.0 × 10²⁴ kg and R_E = 6.4 × 10⁶ m.",
+   "difficulty": 2,
+   "parts": [
+    {
+     "kind": "numeric",
+     "points": 2,
+     "prompt": "Orbital radius from the Earth's centre (10⁷ m, 3 s.f.).",
+     "answer": 4.23,
+     "tolerance": 0.03,
+     "explanation": "r³ = GMT²/4π² gives r = 4.23 × 10⁷ m.",
+     "unit": "× 10⁷ m",
+     "id": "lower6-physics-ch-mechanics-e48-a"
+    },
+    {
+     "kind": "numeric",
+     "points": 1,
+     "prompt": "Height above the Earth's surface (10⁷ m, 3 s.f.).",
+     "answer": 3.59,
+     "tolerance": 0.03,
+     "explanation": "h = r − R = 4.23 × 10⁷ − 0.64 × 10⁷ = 3.59 × 10⁷ m (about 36 000 km).",
+     "unit": "× 10⁷ m",
+     "id": "lower6-physics-ch-mechanics-e48-b"
+    },
+    {
+     "kind": "numeric",
+     "points": 1,
+     "prompt": "Orbital speed (m/s, 3 s.f.).",
+     "answer": 3080.0,
+     "tolerance": 40,
+     "explanation": "v = 2πr/T = 2π × 4.23 × 10⁷ ÷ 86 400 = 3.08 × 10³ m/s.",
+     "unit": "m/s",
+     "id": "lower6-physics-ch-mechanics-e48-c"
+    }
+   ],
+   "chapter": "lower6-physics-ch-mechanics"
+  },
+  {
+   "id": "lower6-physics-gravitation-q1",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "lower6-physics-gravitation",
+   "prompt": "The SI unit of gravitational field strength is equivalent to",
+   "choices": [
+    "kg m⁻¹",
+    "N m",
+    "N kg",
+    "N kg⁻¹"
+   ],
+   "answer": 3,
+   "explanation": "g = F/m, so N per kg (= m s⁻²).",
+   "chapter": "lower6-physics-ch-mechanics"
+  },
+  {
+   "id": "lower6-physics-gravitation-q2",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "lower6-physics-gravitation",
+   "prompt": "If the radius of a circular orbit increases, the orbital speed",
+   "choices": [
+    "increases",
+    "stays the same",
+    "becomes zero",
+    "decreases"
+   ],
+   "answer": 3,
+   "explanation": "v = √(GM/r) decreases as r increases.",
+   "chapter": "lower6-physics-ch-mechanics"
+  },
+  {
+   "id": "lower6-physics-gravitation-q3",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "lower6-physics-gravitation",
+   "prompt": "A satellite's period is T at radius r. At radius 4r its period is",
+   "choices": [
+    "2T",
+    "8T",
+    "4T",
+    "16T"
+   ],
+   "answer": 1,
+   "explanation": "T² ∝ r³, so T ∝ r^{3/2} = 4^{3/2} = 8.",
+   "chapter": "lower6-physics-ch-mechanics"
+  },
+  {
+   "id": "lower6-physics-gravitation-q4",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "lower6-physics-gravitation",
+   "prompt": "The gravitational potential at infinity is taken as",
+   "choices": [
+    "positive",
+    "zero",
+    "maximum negative",
+    "g"
+   ],
+   "answer": 1,
+   "explanation": "Potentials near a mass are negative relative to zero at infinity.",
+   "chapter": "lower6-physics-ch-mechanics"
+  },
+  {
+   "id": "lower6-physics-gravitation-q5",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "lower6-physics-gravitation",
+   "prompt": "A geostationary satellite has a period of",
+   "choices": [
+    "24 hours",
+    "12 hours",
+    "1 year",
+    "90 minutes"
+   ],
+   "answer": 0,
+   "explanation": "It matches the Earth's rotation.",
+   "chapter": "lower6-physics-ch-mechanics"
+  }
+ ]
+}

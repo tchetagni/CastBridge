@@ -1,0 +1,1976 @@
+{
+ "chapter": "gceal-chemistry-ch-inorganic",
+ "lessons": [
+  {
+   "id": "gceal-chemistry-group2",
+   "title": "Group 2: the alkaline earth metals",
+   "minutes": 35,
+   "programRef": "GCE Advanced Level Chemistry — inorganic chemistry (to be checked against the official syllabus)",
+   "status": "draft",
+   "author": "CastBridge (AI draft)",
+   "source": "Original writing following the Cameroonian curriculum; to be reviewed by a teacher",
+   "objectives": [
+    "Describe and explain trends in reactivity, hydroxide and sulfate solubility and thermal stability of Group 2 compounds",
+    "Write equations for reactions with oxygen, water, acids and for the thermal decomposition of carbonates and nitrates",
+    "Describe flame tests, tests for sulfate and uses of calcium and magnesium compounds"
+   ],
+   "prerequisites": [
+    "gceal-chemistry-kpksp"
+   ],
+   "exercises": [
+    "gceal-chemistry-ch-inorganic-e01",
+    "gceal-chemistry-ch-inorganic-e02",
+    "gceal-chemistry-ch-inorganic-e03",
+    "gceal-chemistry-ch-inorganic-e04",
+    "gceal-chemistry-ch-inorganic-e05",
+    "gceal-chemistry-ch-inorganic-e06"
+   ],
+   "selfCheck": [
+    "gceal-chemistry-group2-q1",
+    "gceal-chemistry-group2-q2",
+    "gceal-chemistry-group2-q3",
+    "gceal-chemistry-group2-q4",
+    "gceal-chemistry-group2-q5"
+   ],
+   "reviewNotes": [
+    "Data used: Ar H 1.0, C 12.0, N 14.0, O 16.0, Na 23.0, Mg 24.0, Al 27.0, S 32.0, Cl 35.5, K 39.0, Ca 40.0, Fe 56.0, Cu 63.5, Zn 65.0, Ag 108.0, Ba 137.0; R = 8.31 J mol⁻¹ K⁻¹; F = 96 500 C mol⁻¹; molar volume 24.0 dm³ at room temperature and pressure; K_w = 1.0 × 10⁻¹⁴ at 25 °C.",
+    "K_sp(Ca(OH)₂) = 5.5 × 10⁻⁶ is a typical textbook value. Use of lime in Cameroonian agriculture is stated generally; verify local practice.",
+    "Ionisation energies are standard values (Be 900, Mg 738, Ca 590, Sr 549, Ba 503 kJ mol⁻¹).",
+    "Syllabus references, scope and level of difficulty are to be checked against the official text; all facts, formulas and worked examples to be verified by a teacher before release."
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Reactions of Group 2 metals",
+     "md": "The atoms have two outer s electrons and form M²⁺ ions. Reactivity **increases down the group** because the first and second ionisation energies fall (larger atoms, more shielding, outer electrons further from the nucleus).\n\n- With oxygen: 2M + O₂ → 2MO (Mg burns with a bright white flame).\n- With water: Mg reacts very slowly with cold water but quickly with steam (MgO + H₂); Ca, Sr and Ba react with cold water giving M(OH)₂ + H₂, increasingly vigorously.\n- With dilute acids: M + 2H⁺ → M²⁺ + H₂."
+    },
+    {
+     "type": "key",
+     "style": "retenir",
+     "title": "Trends in compounds",
+     "md": "- **Hydroxides**: solubility **increases** down the group (Mg(OH)₂ is almost insoluble, Ba(OH)₂ is soluble); limewater is Ca(OH)₂(aq).\n- **Sulfates**: solubility **decreases** down the group (BaSO₄ is insoluble: used as the test for sulfate and as a 'barium meal').\n- **Thermal stability** of carbonates and nitrates **increases** down the group: the smaller, more highly polarising M²⁺ distorts the anion and weakens it. MCO₃ → MO + CO₂; 2M(NO₃)₂ → 2MO + 4NO₂ + O₂."
+    },
+    {
+     "type": "illustration",
+     "figure": {
+      "kind": "bars",
+      "w": 400,
+      "h": 240,
+      "bars": [
+       {
+        "label": "Be",
+        "value": 900,
+        "color": "orange"
+       },
+       {
+        "label": "Mg",
+        "value": 738,
+        "color": "orange"
+       },
+       {
+        "label": "Ca",
+        "value": 590,
+        "color": "orange"
+       },
+       {
+        "label": "Sr",
+        "value": 549,
+        "color": "orange"
+       },
+       {
+        "label": "Ba",
+        "value": 503,
+        "color": "orange"
+       }
+      ],
+      "unit": "first ionisation energy / kJ mol⁻¹"
+     },
+     "caption": "First ionisation energy of the Group 2 elements: it falls down the group, so reactivity rises.",
+     "alt": "A bar chart of the first ionisation energy for beryllium, magnesium, calcium, strontium and barium, decreasing from left to right."
+    },
+    {
+     "type": "key",
+     "style": "methode",
+     "title": "Tests and uses",
+     "md": "**Flame tests**: Ca brick-red, Sr crimson, Ba apple-green (Mg gives none). **Sulfate test**: acidify with dilute HCl (removes carbonate), add BaCl₂(aq): white precipitate of BaSO₄.\n\nUses: **quicklime** CaO and **slaked lime** Ca(OH)₂ to neutralise acidic soil and in cement and mortar; limestone CaCO₃ in building and blast furnaces; **Mg(OH)₂** ('milk of magnesia') as an antacid; Mg alloys."
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Common mistakes",
+     "md": "- Explaining thermal stability by the size of the cation without mentioning polarisation of the anion.\n- Saying that Mg(OH)₂ is soluble because it is a hydroxide of a metal: solubility rises down the group.\n- Forgetting to acidify before adding barium chloride (carbonate would also precipitate).\n- Writing the wrong formula for the nitrate: Ca(NO₃)₂ gives 4NO₂ for every 2 formula units."
+    },
+    {
+     "type": "example",
+     "title": "Example 1 — Limewater",
+     "statement": "K_sp for Ca(OH)₂ is 5.5 × 10⁻⁶ mol³ dm⁻⁹. Find the solubility and the pH of saturated limewater.",
+     "steps": [
+      "K_sp = 4s³ so s = (5.5 × 10⁻⁶/4)^(1/3) = 1.11 × 10⁻² mol dm⁻³.",
+      "[OH⁻] = 2s = 2.22 × 10⁻² mol dm⁻³; pOH = 1.65.",
+      "pH = 14 − 1.65 = 12.35, so limewater is strongly alkaline."
+     ],
+     "answer": "s = 1.1 × 10⁻² mol dm⁻³; pH ≈ 12.4"
+    },
+    {
+     "type": "example",
+     "title": "Example 2 — Quicklime",
+     "statement": "Limestone (90 % CaCO₃) is heated: CaCO₃ → CaO + CO₂. Find the mass of CaO from 50.0 kg of limestone (A_r: Ca 40, C 12, O 16).",
+     "steps": [
+      "Mass of CaCO₃ = 0.90 × 50.0 = 45.0 kg = 45 000 g, so n = 45 000/100 = 450 mol.",
+      "n(CaO) = 450 mol; M(CaO) = 56 g mol⁻¹.",
+      "Mass = 450 × 56 = 25 200 g = 25.2 kg."
+     ],
+     "answer": "25.2 kg of CaO"
+    }
+   ],
+   "chapter": "gceal-chemistry-ch-inorganic"
+  },
+  {
+   "id": "gceal-chemistry-group7",
+   "title": "Group 7: the halogens",
+   "minutes": 40,
+   "programRef": "GCE Advanced Level Chemistry — inorganic chemistry (to be checked against the official syllabus)",
+   "status": "draft",
+   "author": "CastBridge (AI draft)",
+   "source": "Original writing following the Cameroonian curriculum; to be reviewed by a teacher",
+   "objectives": [
+    "Describe the trends in physical properties and oxidising power of the halogens and their displacement reactions",
+    "Describe reactions of halide ions with silver nitrate and concentrated sulfuric acid, and disproportionation of chlorine",
+    "Do calculations on halogen reactions, including the iodine–thiosulfate titration"
+   ],
+   "prerequisites": [
+    "gceal-chemistry-electrode"
+   ],
+   "exercises": [
+    "gceal-chemistry-ch-inorganic-e07",
+    "gceal-chemistry-ch-inorganic-e08",
+    "gceal-chemistry-ch-inorganic-e09",
+    "gceal-chemistry-ch-inorganic-e10",
+    "gceal-chemistry-ch-inorganic-e11",
+    "gceal-chemistry-ch-inorganic-e12"
+   ],
+   "selfCheck": [
+    "gceal-chemistry-group7-q1",
+    "gceal-chemistry-group7-q2",
+    "gceal-chemistry-group7-q3",
+    "gceal-chemistry-group7-q4",
+    "gceal-chemistry-group7-q5"
+   ],
+   "reviewNotes": [
+    "Data used: Ar H 1.0, C 12.0, N 14.0, O 16.0, Na 23.0, Mg 24.0, Al 27.0, S 32.0, Cl 35.5, K 39.0, Ca 40.0, Fe 56.0, Cu 63.5, Zn 65.0, Ag 108.0, Ba 137.0; R = 8.31 J mol⁻¹ K⁻¹; F = 96 500 C mol⁻¹; molar volume 24.0 dm³ at room temperature and pressure; K_w = 1.0 × 10⁻¹⁴ at 25 °C.",
+    "Colours and observations are standard textbook descriptions; to be checked by a teacher. Fluorine chemistry (hazards) is not developed.",
+    "Syllabus references, scope and level of difficulty are to be checked against the official text; all facts, formulas and worked examples to be verified by a teacher before release."
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Trends in the halogens",
+     "md": "At room temperature: fluorine is a pale yellow gas, chlorine a pale green gas, bromine a red-brown liquid, iodine a grey-black solid (purple vapour). Melting and boiling points **increase** down the group (stronger London forces with more electrons).\n\nThe halogens are **oxidising agents**; the oxidising power **decreases** down the group (E°: F₂ +2.87, Cl₂ +1.36, Br₂ +1.07, I₂ +0.54 V) because the atom gains an electron less readily as it gets larger."
+    },
+    {
+     "type": "key",
+     "style": "retenir",
+     "title": "Displacement and halide ions",
+     "md": "A more reactive halogen displaces a less reactive one from its halide: Cl₂ + 2Br⁻ → 2Cl⁻ + Br₂ (orange solution); Cl₂ + 2I⁻ → 2Cl⁻ + I₂ (brown; purple in hexane); Br₂ + 2I⁻ → 2Br⁻ + I₂.\n\n**Halide reducing power increases down the group**: with concentrated H₂SO₄, NaCl gives only HCl (steamy fumes); NaBr gives HBr and also Br₂ and SO₂; NaI gives HI, I₂ and also S and H₂S. **AgNO₃(aq)**: AgCl white (dissolves in dilute NH₃), AgBr cream (in concentrated NH₃), AgI yellow (insoluble)."
+    },
+    {
+     "type": "illustration",
+     "figure": {
+      "kind": "bars",
+      "w": 380,
+      "h": 240,
+      "bars": [
+       {
+        "label": "F₂",
+        "value": 2.87,
+        "color": "yellow"
+       },
+       {
+        "label": "Cl₂",
+        "value": 1.36,
+        "color": "green"
+       },
+       {
+        "label": "Br₂",
+        "value": 1.07,
+        "color": "orange"
+       },
+       {
+        "label": "I₂",
+        "value": 0.54,
+        "color": "purple"
+       }
+      ],
+      "unit": "E° / V"
+     },
+     "caption": "Standard electrode potentials of the halogens: the oxidising power decreases down the group.",
+     "alt": "A bar chart of E° for fluorine, chlorine, bromine and iodine, decreasing from 2.87 to 0.54 volts."
+    },
+    {
+     "type": "key",
+     "style": "methode",
+     "title": "Chlorine and disproportionation",
+     "md": "Chlorine in water: Cl₂ + H₂O ⇌ HCl + HClO (chlorine is both oxidised and reduced): HClO disinfects water. Cold dilute NaOH: Cl₂ + 2NaOH → NaCl + NaClO + H₂O (bleach, Cl: +1). Hot concentrated NaOH gives chlorate(V): 3Cl₂ + 6NaOH → 5NaCl + NaClO₃ + 3H₂O.\n\n**Iodine–thiosulfate titration**: I₂ + 2S₂O₃²⁻ → 2I⁻ + S₄O₆²⁻ (starch indicator, blue-black → colourless). Used to find the oxidising agent that liberates iodine from excess KI."
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Common mistakes",
+     "md": "- Saying that iodine is the strongest oxidising agent because it is the largest: it is the weakest.\n- Forgetting that silver halide tests need dilute nitric acid first.\n- Writing the products of H₂SO₄ + NaBr or NaI as only HBr and HI (these are further oxidised).\n- Mixing up 'oxidised' and 'reduced' in disproportionation: the same element does both."
+    },
+    {
+     "type": "example",
+     "title": "Example 1 — Bleach analysis",
+     "statement": "25.0 cm³ of diluted bleach liberates iodine from excess acidified KI: ClO⁻ + 2I⁻ + 2H⁺ → Cl⁻ + I₂ + H₂O. The iodine needs 20.00 cm³ of 0.100 mol dm⁻³ Na₂S₂O₃. Find [ClO⁻] in the diluted bleach.",
+     "steps": [
+      "n(S₂O₃²⁻) = 0.100 × 20.00/1000 = 2.00 × 10⁻³ mol; ratio I₂ : S₂O₃²⁻ = 1 : 2, so n(I₂) = 1.00 × 10⁻³ mol.",
+      "Ratio ClO⁻ : I₂ = 1 : 1, so n(ClO⁻) = 1.00 × 10⁻³ mol in 25.0 cm³.",
+      "[ClO⁻] = 1.00 × 10⁻³/0.0250 = 0.0400 mol dm⁻³."
+     ],
+     "answer": "[ClO⁻] = 0.0400 mol dm⁻³"
+    },
+    {
+     "type": "example",
+     "title": "Example 2 — Reactions of halide ions",
+     "statement": "Predict the observations when chlorine water is added to potassium iodide solution and the product is shaken with hexane.",
+     "steps": [
+      "Cl₂ is a stronger oxidising agent than I₂ (E° 1.36 V against 0.54 V), so it oxidises I⁻: Cl₂ + 2I⁻ → 2Cl⁻ + I₂.",
+      "The aqueous layer turns brown (I₂ in water).",
+      "On shaking with hexane, iodine dissolves in the upper hexane layer, which turns purple."
+     ],
+     "answer": "Brown solution; purple hexane layer"
+    }
+   ],
+   "chapter": "gceal-chemistry-ch-inorganic"
+  },
+  {
+   "id": "gceal-chemistry-period3",
+   "title": "Period 3: oxides and chlorides",
+   "minutes": 40,
+   "programRef": "GCE Advanced Level Chemistry — inorganic chemistry (to be checked against the official syllabus)",
+   "status": "draft",
+   "author": "CastBridge (AI draft)",
+   "source": "Original writing following the Cameroonian curriculum; to be reviewed by a teacher",
+   "objectives": [
+    "Describe the structure, bonding and acid–base character of the oxides of period 3",
+    "Describe the reactions of the chlorides of period 3 with water and explain the differences using bonding",
+    "Write equations for the reactions of the oxides with water, acids and alkalis"
+   ],
+   "prerequisites": [
+    "gceal-chemistry-group2"
+   ],
+   "exercises": [
+    "gceal-chemistry-ch-inorganic-e13",
+    "gceal-chemistry-ch-inorganic-e14",
+    "gceal-chemistry-ch-inorganic-e15",
+    "gceal-chemistry-ch-inorganic-e16",
+    "gceal-chemistry-ch-inorganic-e17",
+    "gceal-chemistry-ch-inorganic-e18"
+   ],
+   "selfCheck": [
+    "gceal-chemistry-period3-q1",
+    "gceal-chemistry-period3-q2",
+    "gceal-chemistry-period3-q3",
+    "gceal-chemistry-period3-q4",
+    "gceal-chemistry-period3-q5"
+   ],
+   "reviewNotes": [
+    "Data used: Ar H 1.0, C 12.0, N 14.0, O 16.0, Na 23.0, Mg 24.0, Al 27.0, S 32.0, Cl 35.5, K 39.0, Ca 40.0, Fe 56.0, Cu 63.5, Zn 65.0, Ag 108.0, Ba 137.0; R = 8.31 J mol⁻¹ K⁻¹; F = 96 500 C mol⁻¹; molar volume 24.0 dm³ at room temperature and pressure; K_w = 1.0 × 10⁻¹⁴ at 25 °C.",
+    "Approximate pH values of the solutions are textbook values (SO₂ about 3; P₄O₁₀ about 0–1); not given as exact data.",
+    "Syllabus references, scope and level of difficulty are to be checked against the official text; all facts, formulas and worked examples to be verified by a teacher before release."
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Oxides",
+     "md": "Across period 3 the oxides change from ionic and basic to covalent and acidic:\n\n- **Na₂O** (ionic, basic): Na₂O + H₂O → 2NaOH (pH about 14). **MgO** (ionic, basic): slightly soluble; MgO + 2HCl → MgCl₂ + H₂O.\n- **Al₂O₃** (ionic with covalent character, **amphoteric**): reacts with both acid and alkali.\n- **SiO₂** (giant covalent, acidic): insoluble; reacts with hot concentrated NaOH.\n- **P₄O₁₀, SO₂/SO₃** (simple molecular, acidic): P₄O₁₀ + 6H₂O → 4H₃PO₄; SO₃ + H₂O → H₂SO₄."
+    },
+    {
+     "type": "key",
+     "style": "retenir",
+     "title": "Amphoteric aluminium oxide and chlorides",
+     "md": "Al₂O₃ + 6HCl → 2AlCl₃ + 3H₂O and Al₂O₃ + 2NaOH + 3H₂O → 2Na[Al(OH)₄] (sodium tetrahydroxoaluminate).\n\n**Chlorides**: NaCl and MgCl₂ are ionic and dissolve in water to give neutral or slightly acidic solutions; **AlCl₃** and the covalent chlorides **SiCl₄**, **PCl₃/PCl₅** are hydrolysed by water, giving HCl (steamy fumes) and an acidic solution: SiCl₄ + 2H₂O → SiO₂ + 4HCl; PCl₅ + 4H₂O → H₃PO₄ + 5HCl."
+    },
+    {
+     "type": "illustration",
+     "figure": {
+      "kind": "shapes",
+      "w": 400,
+      "h": 215,
+      "items": [
+       {
+        "t": "rect",
+        "x": 10,
+        "y": 60,
+        "w": 62,
+        "h": 40,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "lightblue"
+       },
+       {
+        "t": "text",
+        "x": 41,
+        "y": 85,
+        "text": "Na₂O",
+        "size": 13,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "rect",
+        "x": 76,
+        "y": 60,
+        "w": 62,
+        "h": 40,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "lightblue"
+       },
+       {
+        "t": "text",
+        "x": 107,
+        "y": 85,
+        "text": "MgO",
+        "size": 13,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "rect",
+        "x": 142,
+        "y": 60,
+        "w": 62,
+        "h": 40,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "lightgreen"
+       },
+       {
+        "t": "text",
+        "x": 173,
+        "y": 85,
+        "text": "Al₂O₃",
+        "size": 13,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "rect",
+        "x": 208,
+        "y": 60,
+        "w": 62,
+        "h": 40,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "lightyellow"
+       },
+       {
+        "t": "text",
+        "x": 239,
+        "y": 85,
+        "text": "SiO₂",
+        "size": 13,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "rect",
+        "x": 274,
+        "y": 60,
+        "w": 62,
+        "h": 40,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "lightorange"
+       },
+       {
+        "t": "text",
+        "x": 305,
+        "y": 85,
+        "text": "P₄O₁₀",
+        "size": 13,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "rect",
+        "x": 340,
+        "y": 60,
+        "w": 62,
+        "h": 40,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "lightorange"
+       },
+       {
+        "t": "text",
+        "x": 371,
+        "y": 85,
+        "text": "SO₃",
+        "size": 13,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "text",
+        "x": 77,
+        "y": 125,
+        "text": "basic",
+        "size": 13,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "text",
+        "x": 210,
+        "y": 125,
+        "text": "amphoteric",
+        "size": 13,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "text",
+        "x": 280,
+        "y": 150,
+        "text": "acidic",
+        "size": 13,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "line",
+        "x1": 20,
+        "y1": 170,
+        "x2": 380,
+        "y2": 170,
+        "color": "red",
+        "width": 2,
+        "arrow": "end"
+       },
+       {
+        "t": "text",
+        "x": 200,
+        "y": 195,
+        "text": "increasing acidity of the oxide",
+        "size": 13,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "text",
+        "x": 200,
+        "y": 35,
+        "text": "Period 3 oxides",
+        "size": 14,
+        "anchor": "middle",
+        "color": "ink",
+        "bold": true
+       }
+      ]
+     },
+     "caption": "Period 3 oxides change from basic (ionic) through amphoteric to acidic (covalent).",
+     "alt": "Six boxes labelled Na₂O, MgO, Al₂O₃, SiO₂, P₄O₁₀ and SO₃, coloured from basic through amphoteric to acidic, with an arrow showing increasing acidity."
+    },
+    {
+     "type": "key",
+     "style": "methode",
+     "title": "Explaining the trend",
+     "md": "The difference in electronegativity between the element and oxygen (or chlorine) falls across the period: **large** (Na, Mg): ionic bonding, oxide ion O²⁻ reacts with water or H⁺ (basic); **small** (Si, P, S, Cl): covalent, the oxide reacts with water to give acid (non-metal oxides are acidic).\n\nThe melting points reflect the structure: ionic or giant covalent (high) and simple molecular (low)."
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Common mistakes",
+     "md": "- Saying that SiO₂ reacts readily with water: it is insoluble.\n- Writing Al₂O₃ as 'acidic' or 'basic' only: it is amphoteric.\n- Predicting that MgCl₂ is hydrolysed like AlCl₃: only partly (slightly acidic solution).\n- Forgetting that SO₂ forms sulfurous acid H₂SO₃ (pH about 3) while SO₃ gives sulfuric acid."
+    },
+    {
+     "type": "example",
+     "title": "Example 1 — pH of a basic oxide",
+     "statement": "What mass of Na₂O must dissolve in water to make 1.0 dm³ of solution of pH 13 (A_r: Na 23, O 16)?",
+     "steps": [
+      "pH 13 means pOH 1, so [OH⁻] = 0.10 mol dm⁻³.",
+      "Na₂O + H₂O → 2NaOH: each mole of Na₂O gives 2 mol OH⁻, so n(Na₂O) = 0.050 mol.",
+      "Mass = 0.050 × 62.0 = 3.1 g."
+     ],
+     "answer": "3.1 g of Na₂O"
+    },
+    {
+     "type": "example",
+     "title": "Example 2 — Amphoteric behaviour",
+     "statement": "Show that aluminium oxide is amphoteric by writing two equations, and explain why it is not typical of metal oxides.",
+     "steps": [
+      "With acid: Al₂O₃ + 6H⁺ → 2Al³⁺ + 3H₂O (acts as a base).",
+      "With alkali: Al₂O₃ + 2OH⁻ + 3H₂O → 2[Al(OH)₄]⁻ (acts as an acid).",
+      "The small, highly charged Al³⁺ polarises O²⁻ strongly, giving a bond with significant covalent character."
+     ],
+     "answer": "Reacts with both acids and alkalis"
+    }
+   ],
+   "chapter": "gceal-chemistry-ch-inorganic"
+  },
+  {
+   "id": "gceal-chemistry-transition",
+   "title": "Transition metals and complex ions",
+   "minutes": 45,
+   "programRef": "GCE Advanced Level Chemistry — inorganic chemistry (to be checked against the official syllabus)",
+   "status": "draft",
+   "author": "CastBridge (AI draft)",
+   "source": "Original writing following the Cameroonian curriculum; to be reviewed by a teacher",
+   "objectives": [
+    "Define a transition element and explain variable oxidation states, coloured ions and catalytic activity",
+    "Describe ligands, coordination number, shapes of complexes and ligand-exchange reactions",
+    "Describe reactions of aqueous ions with NaOH and NH₃ and do calculations on redox titrations"
+   ],
+   "prerequisites": [
+    "gceal-chemistry-electrode"
+   ],
+   "exercises": [
+    "gceal-chemistry-ch-inorganic-e19",
+    "gceal-chemistry-ch-inorganic-e20",
+    "gceal-chemistry-ch-inorganic-e21",
+    "gceal-chemistry-ch-inorganic-e22",
+    "gceal-chemistry-ch-inorganic-e23",
+    "gceal-chemistry-ch-inorganic-e24"
+   ],
+   "selfCheck": [
+    "gceal-chemistry-transition-q1",
+    "gceal-chemistry-transition-q2",
+    "gceal-chemistry-transition-q3",
+    "gceal-chemistry-transition-q4",
+    "gceal-chemistry-transition-q5"
+   ],
+   "reviewNotes": [
+    "Data used: Ar H 1.0, C 12.0, N 14.0, O 16.0, Na 23.0, Mg 24.0, Al 27.0, S 32.0, Cl 35.5, K 39.0, Ca 40.0, Fe 56.0, Cu 63.5, Zn 65.0, Ag 108.0, Ba 137.0; R = 8.31 J mol⁻¹ K⁻¹; F = 96 500 C mol⁻¹; molar volume 24.0 dm³ at room temperature and pressure; K_w = 1.0 × 10⁻¹⁴ at 25 °C.",
+    "Precipitate colours are standard textbook descriptions; check against the board's list. Stability constants, ligand-field theory and spin-only magnetism are not covered.",
+    "Syllabus references, scope and level of difficulty are to be checked against the official text; all facts, formulas and worked examples to be verified by a teacher before release."
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Transition elements",
+     "md": "A **transition element** forms at least one ion with a **partially filled d subshell** (Sc³⁺ and Zn²⁺ do not count). Features: variable oxidation states (the 4s and 3d electrons have similar energies), coloured compounds, complex ions, catalytic activity, paramagnetism.\n\nConfigurations: Fe [Ar] 3d⁶ 4s²; Cu [Ar] 3d¹⁰ 4s¹; Cr [Ar] 3d⁵ 4s¹. Ions lose 4s electrons first: Fe³⁺ [Ar] 3d⁵, Cu²⁺ [Ar] 3d⁹, Zn²⁺ [Ar] 3d¹⁰ (colourless)."
+    },
+    {
+     "type": "key",
+     "style": "retenir",
+     "title": "Complexes and colour",
+     "md": "A **complex ion** has a central metal ion bonded to **ligands** by dative covalent bonds (ligands have lone pairs: H₂O, NH₃, Cl⁻, CN⁻, OH⁻; EDTA⁴⁻ is polydentate). The **coordination number** is the number of dative bonds: 6 (octahedral, e.g. [Cu(H₂O)₆]²⁺, [Fe(CN)₆]³⁻), 4 (tetrahedral [CuCl₄]²⁻, square planar), 2 (linear [Ag(NH₃)₂]⁺).\n\nColour: the ligands split the d orbitals; electrons absorb visible light to move between d orbitals and the **complementary colour** is seen. The colour changes with the ligand, oxidation state and coordination number."
+    },
+    {
+     "type": "illustration",
+     "figure": {
+      "kind": "shapes",
+      "w": 440,
+      "h": 250,
+      "items": [
+       {
+        "t": "circle",
+        "cx": 150,
+        "cy": 125,
+        "r": 16,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "lightblue"
+       },
+       {
+        "t": "text",
+        "x": 150,
+        "y": 130,
+        "text": "Cu",
+        "size": 14,
+        "anchor": "middle",
+        "color": "ink",
+        "bold": true
+       },
+       {
+        "t": "line",
+        "x1": 150,
+        "y1": 125,
+        "x2": 150.0,
+        "y2": 62.599999999999994,
+        "color": "ink",
+        "width": 2
+       },
+       {
+        "t": "circle",
+        "cx": 150,
+        "cy": 45,
+        "r": 13,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "lightyellow"
+       },
+       {
+        "t": "text",
+        "x": 150,
+        "y": 49,
+        "text": "H₂O",
+        "size": 10,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "line",
+        "x1": 150,
+        "y1": 125,
+        "x2": 150.0,
+        "y2": 187.4,
+        "color": "ink",
+        "width": 2
+       },
+       {
+        "t": "circle",
+        "cx": 150,
+        "cy": 205,
+        "r": 13,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "lightyellow"
+       },
+       {
+        "t": "text",
+        "x": 150,
+        "y": 209,
+        "text": "H₂O",
+        "size": 10,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "line",
+        "x1": 150,
+        "y1": 125,
+        "x2": 87.6,
+        "y2": 125.0,
+        "color": "ink",
+        "width": 2
+       },
+       {
+        "t": "circle",
+        "cx": 70,
+        "cy": 125,
+        "r": 13,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "lightyellow"
+       },
+       {
+        "t": "text",
+        "x": 70,
+        "y": 129,
+        "text": "H₂O",
+        "size": 10,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "line",
+        "x1": 150,
+        "y1": 125,
+        "x2": 212.4,
+        "y2": 125.0,
+        "color": "ink",
+        "width": 2
+       },
+       {
+        "t": "circle",
+        "cx": 230,
+        "cy": 125,
+        "r": 13,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "lightyellow"
+       },
+       {
+        "t": "text",
+        "x": 230,
+        "y": 129,
+        "text": "H₂O",
+        "size": 10,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "line",
+        "x1": 150,
+        "y1": 125,
+        "x2": 109.44,
+        "y2": 84.44,
+        "color": "ink",
+        "width": 2
+       },
+       {
+        "t": "circle",
+        "cx": 98,
+        "cy": 73,
+        "r": 13,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "lightyellow"
+       },
+       {
+        "t": "text",
+        "x": 98,
+        "y": 77,
+        "text": "H₂O",
+        "size": 10,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "line",
+        "x1": 150,
+        "y1": 125,
+        "x2": 190.56,
+        "y2": 165.56,
+        "color": "ink",
+        "width": 2
+       },
+       {
+        "t": "circle",
+        "cx": 202,
+        "cy": 177,
+        "r": 13,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "lightyellow"
+       },
+       {
+        "t": "text",
+        "x": 202,
+        "y": 181,
+        "text": "H₂O",
+        "size": 10,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "text",
+        "x": 320,
+        "y": 100,
+        "text": "[Cu(H₂O)₆]²⁺",
+        "size": 14,
+        "anchor": "middle",
+        "color": "ink",
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 320,
+        "y": 124,
+        "text": "octahedral",
+        "size": 12,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "text",
+        "x": 320,
+        "y": 144,
+        "text": "coordination number 6",
+        "size": 12,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "text",
+        "x": 320,
+        "y": 164,
+        "text": "pale blue",
+        "size": 12,
+        "anchor": "middle",
+        "color": "ink"
+       }
+      ]
+     },
+     "caption": "[Cu(H₂O)₆]²⁺: an octahedral complex with six water ligands around a copper(II) ion.",
+     "alt": "A copper ion at the centre with six water molecules around it in an octahedral arrangement."
+    },
+    {
+     "type": "key",
+     "style": "methode",
+     "title": "Reactions of aqueous ions",
+     "md": "With NaOH(aq): Cu²⁺ → blue precipitate Cu(OH)₂; Fe²⁺ → green precipitate (turns brown in air); Fe³⁺ → red-brown Fe(OH)₃; Cr³⁺ → green Cr(OH)₃ which dissolves in excess to give a green solution (amphoteric); Mn²⁺ → pale precipitate that darkens.\n\nWith NH₃(aq): the same precipitates form, but Cu(OH)₂ dissolves in excess to give a **deep blue** solution of [Cu(NH₃)₄(H₂O)₂]²⁺ (ligand exchange). Catalysis: Fe in the Haber process, V₂O₅ in the Contact process, Ni in hydrogenation."
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Common mistakes",
+     "md": "- Counting Zn or Sc as transition metals: their common ions have empty or full d subshells.\n- Removing 3d electrons before 4s when forming ions.\n- Forgetting the overall charge of a complex: it is the sum of the metal charge and the ligand charges.\n- Saying that colour arises from the metal alone: the ligand matters."
+    },
+    {
+     "type": "example",
+     "title": "Example 1 — Charge and configuration",
+     "statement": "Find the oxidation number of iron in [Fe(CN)₆]³⁻ and the number of d electrons in Cu²⁺ and Fe³⁺.",
+     "steps": [
+      "Six CN⁻ ligands contribute −6; overall charge is −3, so Fe = −3 + 6 = +3.",
+      "Cu²⁺: [Ar] 3d⁹ (9 d electrons); Fe³⁺: [Ar] 3d⁵ (5 d electrons).",
+      "Zn²⁺ would be 3d¹⁰ and colourless because its d subshell is full."
+     ],
+     "answer": "Fe is +3; Cu²⁺ has 9 d electrons, Fe³⁺ has 5"
+    },
+    {
+     "type": "example",
+     "title": "Example 2 — Dichromate titration",
+     "statement": "25.0 cm³ of iron(II) sulfate solution needs 24.0 cm³ of 0.0100 mol dm⁻³ K₂Cr₂O₇ in acid: Cr₂O₇²⁻ + 14H⁺ + 6Fe²⁺ → 2Cr³⁺ + 7H₂O + 6Fe³⁺. Find [Fe²⁺].",
+     "steps": [
+      "n(Cr₂O₇²⁻) = 0.0100 × 24.0/1000 = 2.40 × 10⁻⁴ mol.",
+      "n(Fe²⁺) = 6 × 2.40 × 10⁻⁴ = 1.44 × 10⁻³ mol.",
+      "[Fe²⁺] = 1.44 × 10⁻³/0.0250 = 0.0576 mol dm⁻³ (the orange dichromate turns green)."
+     ],
+     "answer": "[Fe²⁺] = 0.0576 mol dm⁻³"
+    }
+   ],
+   "chapter": "gceal-chemistry-ch-inorganic"
+  }
+ ],
+ "exercises": [
+  {
+   "id": "gceal-chemistry-ch-inorganic-e01",
+   "kind": "mcq",
+   "tier": "application",
+   "lesson": "gceal-chemistry-group2",
+   "source": "Original exercise, GCE Advanced Level style",
+   "prompt": "Which Group 2 metal reacts most vigorously with cold water?",
+   "choices": [
+    "barium",
+    "calcium",
+    "magnesium",
+    "beryllium"
+   ],
+   "answer": 0,
+   "explanation": "Reactivity increases down the group.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "gceal-chemistry-ch-inorganic"
+  },
+  {
+   "id": "gceal-chemistry-ch-inorganic-e02",
+   "kind": "numeric",
+   "tier": "application",
+   "lesson": "gceal-chemistry-group2",
+   "source": "Original exercise, GCE Advanced Level style",
+   "prompt": "A solution containing 0.0250 mol of sulfate ions is treated with excess BaCl₂. What mass of BaSO₄ forms? (M = 233 g/mol, g, 3 s.f.)",
+   "answer": 5.83,
+   "tolerance": 0.02,
+   "unit": "g",
+   "explanation": "n(BaSO₄) = n(SO₄²⁻) = 0.0250 mol; m = 0.0250 × 233 = 5.83 g.",
+   "difficulty": 1,
+   "points": 2,
+   "chapter": "gceal-chemistry-ch-inorganic"
+  },
+  {
+   "id": "gceal-chemistry-ch-inorganic-e03",
+   "kind": "truefalse",
+   "tier": "application",
+   "lesson": "gceal-chemistry-group2",
+   "source": "Original exercise, GCE Advanced Level style",
+   "prompt": "True or false: the thermal stability of the Group 2 carbonates increases down the group.",
+   "answer": true,
+   "explanation": "The larger cations polarise the carbonate ion less, so more heat is needed to decompose them.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "gceal-chemistry-ch-inorganic"
+  },
+  {
+   "id": "gceal-chemistry-ch-inorganic-e04",
+   "kind": "mcq",
+   "tier": "approfondissement",
+   "lesson": "gceal-chemistry-group2",
+   "source": "Original exercise, GCE Advanced Level style",
+   "prompt": "Which pair correctly describes solubility down Group 2?",
+   "choices": [
+    "hydroxides decrease, sulfates increase",
+    "both decrease",
+    "both increase",
+    "hydroxides increase, sulfates decrease"
+   ],
+   "answer": 3,
+   "explanation": "Mg(OH)₂ is least soluble and BaSO₄ is least soluble.",
+   "difficulty": 2,
+   "points": 2,
+   "chapter": "gceal-chemistry-ch-inorganic"
+  },
+  {
+   "id": "gceal-chemistry-ch-inorganic-e05",
+   "kind": "numeric",
+   "tier": "approfondissement",
+   "lesson": "gceal-chemistry-group2",
+   "source": "Original exercise, GCE Advanced Level style",
+   "prompt": "What mass of CaO (g) is formed by decomposing 20.0 g of pure CaCO₃? (A_r: Ca 40, C 12, O 16; 3 s.f.)",
+   "answer": 11.2,
+   "tolerance": 0.05,
+   "unit": "g",
+   "explanation": "n = 20.0/100 = 0.200 mol; m(CaO) = 0.200 × 56 = 11.2 g.",
+   "difficulty": 2,
+   "points": 3,
+   "chapter": "gceal-chemistry-ch-inorganic"
+  },
+  {
+   "id": "gceal-chemistry-ch-inorganic-e06",
+   "kind": "problem",
+   "tier": "examen",
+   "lesson": "gceal-chemistry-group2",
+   "source": "Original exercise, GCE Advanced Level style",
+   "prompt": "A white solid X was heated and gave a colourless gas that turned limewater milky and a white residue Y. Y reacted with water giving an alkaline solution; X gave a brick-red flame.",
+   "difficulty": 2,
+   "parts": [
+    {
+     "kind": "mcq",
+     "points": 1,
+     "prompt": "X is",
+     "choices": [
+      "calcium carbonate",
+      "barium carbonate",
+      "magnesium nitrate",
+      "calcium sulfate"
+     ],
+     "answer": 0,
+     "explanation": "A brick-red flame shows Ca; CO₂ with limewater shows carbonate.",
+     "id": "gceal-chemistry-ch-inorganic-e06-a"
+    },
+    {
+     "kind": "mcq",
+     "points": 1,
+     "prompt": "Y is",
+     "choices": [
+      "calcium oxide",
+      "calcium hydroxide",
+      "calcium chloride",
+      "calcium metal"
+     ],
+     "answer": 0,
+     "explanation": "CaCO₃ → CaO + CO₂.",
+     "id": "gceal-chemistry-ch-inorganic-e06-b"
+    },
+    {
+     "kind": "numeric",
+     "points": 1,
+     "prompt": "Volume of CO₂ (dm³, 3 s.f.) from 5.00 g of X at room temperature and pressure (24.0 dm³/mol).",
+     "answer": 1.2,
+     "tolerance": 0.02,
+     "explanation": "n = 0.0500 mol; V = 0.0500 × 24.0 = 1.20 dm³.",
+     "unit": "dm³",
+     "id": "gceal-chemistry-ch-inorganic-e06-c"
+    },
+    {
+     "kind": "open",
+     "points": 2,
+     "prompt": "Write the equation for the reaction of Y with water and name the product.",
+     "model": "CaO + H₂O → Ca(OH)₂; calcium hydroxide (slaked lime).",
+     "rubric": "1 mark: correct equation; 1 mark: name of the product.",
+     "explanation": "CaO + H₂O → Ca(OH)₂; calcium hydroxide (slaked lime).",
+     "id": "gceal-chemistry-ch-inorganic-e06-d"
+    }
+   ],
+   "chapter": "gceal-chemistry-ch-inorganic"
+  },
+  {
+   "id": "gceal-chemistry-group2-q1",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "gceal-chemistry-group2",
+   "prompt": "The flame colour of barium compounds is",
+   "choices": [
+    "apple-green",
+    "brick-red",
+    "yellow",
+    "crimson"
+   ],
+   "answer": 0,
+   "explanation": "Ba²⁺ gives a green flame.",
+   "chapter": "gceal-chemistry-ch-inorganic"
+  },
+  {
+   "id": "gceal-chemistry-group2-q2",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "gceal-chemistry-group2",
+   "prompt": "The first ionisation energy down Group 2",
+   "choices": [
+    "stays the same",
+    "increases",
+    "decreases",
+    "is zero"
+   ],
+   "answer": 2,
+   "explanation": "The outer electrons are further away and more shielded.",
+   "chapter": "gceal-chemistry-ch-inorganic"
+  },
+  {
+   "id": "gceal-chemistry-group2-q3",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "gceal-chemistry-group2",
+   "prompt": "Which is used to neutralise acid soil?",
+   "choices": [
+    "Mg metal",
+    "NaCl",
+    "slaked lime Ca(OH)₂",
+    "BaSO₄"
+   ],
+   "answer": 2,
+   "explanation": "It is a cheap alkali.",
+   "chapter": "gceal-chemistry-ch-inorganic"
+  },
+  {
+   "id": "gceal-chemistry-group2-q4",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "gceal-chemistry-group2",
+   "prompt": "In the test for sulfate ions, acid is added first to",
+   "choices": [
+    "dissolve barium sulfate",
+    "remove carbonate ions",
+    "produce hydrogen",
+    "make the solution neutral"
+   ],
+   "answer": 1,
+   "explanation": "BaCO₃ would also precipitate in neutral solution.",
+   "chapter": "gceal-chemistry-ch-inorganic"
+  },
+  {
+   "id": "gceal-chemistry-group2-q5",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "gceal-chemistry-group2",
+   "prompt": "The most thermally stable carbonate is",
+   "choices": [
+    "BeCO₃",
+    "BaCO₃",
+    "CaCO₃",
+    "MgCO₃"
+   ],
+   "answer": 1,
+   "explanation": "Stability increases down the group.",
+   "chapter": "gceal-chemistry-ch-inorganic"
+  },
+  {
+   "id": "gceal-chemistry-ch-inorganic-e07",
+   "kind": "mcq",
+   "tier": "application",
+   "lesson": "gceal-chemistry-group7",
+   "source": "Original exercise, GCE Advanced Level style",
+   "prompt": "Which halogen is a liquid at room temperature?",
+   "choices": [
+    "iodine",
+    "chlorine",
+    "bromine",
+    "fluorine"
+   ],
+   "answer": 2,
+   "explanation": "Bromine is a red-brown liquid.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "gceal-chemistry-ch-inorganic"
+  },
+  {
+   "id": "gceal-chemistry-ch-inorganic-e08",
+   "kind": "numeric",
+   "tier": "application",
+   "lesson": "gceal-chemistry-group7",
+   "source": "Original exercise, GCE Advanced Level style",
+   "prompt": "How many moles of I₂ react with 0.0040 mol of thiosulfate (I₂ + 2S₂O₃²⁻ → 2I⁻ + S₄O₆²⁻)?",
+   "answer": 0.002,
+   "tolerance": 0.0001,
+   "unit": "mol",
+   "explanation": "Mole ratio 1 : 2: 0.0040/2 = 0.0020 mol.",
+   "difficulty": 1,
+   "points": 2,
+   "chapter": "gceal-chemistry-ch-inorganic"
+  },
+  {
+   "id": "gceal-chemistry-ch-inorganic-e09",
+   "kind": "truefalse",
+   "tier": "application",
+   "lesson": "gceal-chemistry-group7",
+   "source": "Original exercise, GCE Advanced Level style",
+   "prompt": "True or false: bromine can displace chloride ions from solution.",
+   "answer": false,
+   "explanation": "Br₂ is a weaker oxidising agent than Cl₂, so no reaction occurs.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "gceal-chemistry-ch-inorganic"
+  },
+  {
+   "id": "gceal-chemistry-ch-inorganic-e10",
+   "kind": "mcq",
+   "tier": "approfondissement",
+   "lesson": "gceal-chemistry-group7",
+   "source": "Original exercise, GCE Advanced Level style",
+   "prompt": "When concentrated sulfuric acid is added to solid sodium iodide, the products include",
+   "choices": [
+    "chlorine",
+    "iodine and hydrogen sulfide",
+    "only sulfur dioxide",
+    "only hydrogen iodide"
+   ],
+   "answer": 1,
+   "explanation": "HI is a strong reducing agent and reduces H₂SO₄ to S and H₂S.",
+   "difficulty": 2,
+   "points": 2,
+   "chapter": "gceal-chemistry-ch-inorganic"
+  },
+  {
+   "id": "gceal-chemistry-ch-inorganic-e11",
+   "kind": "numeric",
+   "tier": "approfondissement",
+   "lesson": "gceal-chemistry-group7",
+   "source": "Original exercise, GCE Advanced Level style",
+   "prompt": "A bleach sample requires 12.50 cm³ of 0.100 mol dm⁻³ thiosulfate for the iodine from 25.0 cm³ (as in Example 1). Find [ClO⁻] (mol dm⁻³, 3 s.f.).",
+   "answer": 0.025,
+   "tolerance": 0.0003,
+   "unit": "mol/dm³",
+   "explanation": "n(S₂O₃²⁻) = 1.25 × 10⁻³; n(I₂) = 6.25 × 10⁻⁴ = n(ClO⁻); c = 6.25 × 10⁻⁴/0.0250 = 0.0250 mol dm⁻³.",
+   "difficulty": 2,
+   "points": 3,
+   "chapter": "gceal-chemistry-ch-inorganic"
+  },
+  {
+   "id": "gceal-chemistry-ch-inorganic-e12",
+   "kind": "problem",
+   "tier": "examen",
+   "lesson": "gceal-chemistry-group7",
+   "source": "Original exercise, GCE Advanced Level style",
+   "prompt": "Chlorine is bubbled into cold dilute sodium hydroxide solution.",
+   "difficulty": 2,
+   "parts": [
+    {
+     "kind": "mcq",
+     "points": 1,
+     "prompt": "The ionic equation is",
+     "choices": [
+      "Cl₂ + 2OH⁻ → Cl⁻ + ClO⁻ + H₂O",
+      "Cl₂ + 2OH⁻ → 2Cl⁻ + O₂ + H₂",
+      "Cl₂ + 2OH⁻ → 2ClO⁻ + H₂",
+      "Cl₂ + OH⁻ → ClO₃⁻ + Cl⁻"
+     ],
+     "answer": 0,
+     "explanation": "Cold dilute alkali gives chloride and chlorate(I).",
+     "id": "gceal-chemistry-ch-inorganic-e12-a"
+    },
+    {
+     "kind": "numeric",
+     "points": 1,
+     "prompt": "Oxidation number of chlorine in ClO⁻.",
+     "answer": 1,
+     "tolerance": 0,
+     "explanation": "O is −2 and the ion is −1, so Cl = +1.",
+     "id": "gceal-chemistry-ch-inorganic-e12-b"
+    },
+    {
+     "kind": "truefalse",
+     "points": 1,
+     "prompt": "This is a disproportionation reaction.",
+     "answer": true,
+     "explanation": "Chlorine goes from 0 to −1 (reduced) and to +1 (oxidised).",
+     "id": "gceal-chemistry-ch-inorganic-e12-c"
+    },
+    {
+     "kind": "open",
+     "points": 2,
+     "prompt": "Give one use of the solution produced.",
+     "model": "It is bleach and disinfectant (sodium chlorate(I)), used to kill bacteria in water or to whiten fabrics.",
+     "rubric": "1 mark for bleach/disinfectant; 1 mark for the property (oxidising agent, kills microbes).",
+     "explanation": "It is bleach and disinfectant (sodium chlorate(I)), used to kill bacteria in water or to whiten fabrics.",
+     "id": "gceal-chemistry-ch-inorganic-e12-d"
+    }
+   ],
+   "figure": {
+    "kind": "bars",
+    "w": 380,
+    "h": 240,
+    "bars": [
+     {
+      "label": "F₂",
+      "value": 2.87,
+      "color": "yellow"
+     },
+     {
+      "label": "Cl₂",
+      "value": 1.36,
+      "color": "green"
+     },
+     {
+      "label": "Br₂",
+      "value": 1.07,
+      "color": "orange"
+     },
+     {
+      "label": "I₂",
+      "value": 0.54,
+      "color": "purple"
+     }
+    ],
+    "unit": "E° / V"
+   },
+   "chapter": "gceal-chemistry-ch-inorganic"
+  },
+  {
+   "id": "gceal-chemistry-group7-q1",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "gceal-chemistry-group7",
+   "prompt": "The halogen with the highest boiling point is",
+   "choices": [
+    "iodine",
+    "fluorine",
+    "bromine",
+    "chlorine"
+   ],
+   "answer": 0,
+   "explanation": "The largest molecule has the strongest London forces.",
+   "chapter": "gceal-chemistry-ch-inorganic"
+  },
+  {
+   "id": "gceal-chemistry-group7-q2",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "gceal-chemistry-group7",
+   "prompt": "A cream precipitate with silver nitrate indicates",
+   "choices": [
+    "iodide ions",
+    "chloride ions",
+    "bromide ions",
+    "sulfate ions"
+   ],
+   "answer": 2,
+   "explanation": "AgBr is cream.",
+   "chapter": "gceal-chemistry-ch-inorganic"
+  },
+  {
+   "id": "gceal-chemistry-group7-q3",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "gceal-chemistry-group7",
+   "prompt": "The oxidising power of the halogens",
+   "choices": [
+    "is zero",
+    "stays the same",
+    "decreases down the group",
+    "increases down the group"
+   ],
+   "answer": 2,
+   "explanation": "E° falls from F₂ to I₂.",
+   "chapter": "gceal-chemistry-ch-inorganic"
+  },
+  {
+   "id": "gceal-chemistry-group7-q4",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "gceal-chemistry-group7",
+   "prompt": "The indicator used in the iodine–thiosulfate titration is",
+   "choices": [
+    "starch",
+    "methyl orange",
+    "none",
+    "phenolphthalein"
+   ],
+   "answer": 0,
+   "explanation": "It gives a blue-black colour with iodine.",
+   "chapter": "gceal-chemistry-ch-inorganic"
+  },
+  {
+   "id": "gceal-chemistry-group7-q5",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "gceal-chemistry-group7",
+   "prompt": "In Cl₂ + H₂O ⇌ HCl + HClO, chlorine",
+   "choices": [
+    "is neither",
+    "is both oxidised and reduced",
+    "is only reduced",
+    "is only oxidised"
+   ],
+   "answer": 1,
+   "explanation": "Disproportionation: 0 → −1 and +1.",
+   "chapter": "gceal-chemistry-ch-inorganic"
+  },
+  {
+   "id": "gceal-chemistry-ch-inorganic-e13",
+   "kind": "mcq",
+   "tier": "application",
+   "lesson": "gceal-chemistry-period3",
+   "source": "Original exercise, GCE Advanced Level style",
+   "prompt": "Which oxide is amphoteric?",
+   "choices": [
+    "Al₂O₃",
+    "SO₃",
+    "Na₂O",
+    "SiO₂"
+   ],
+   "answer": 0,
+   "explanation": "It reacts with acids and alkalis.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "gceal-chemistry-ch-inorganic"
+  },
+  {
+   "id": "gceal-chemistry-ch-inorganic-e14",
+   "kind": "numeric",
+   "tier": "application",
+   "lesson": "gceal-chemistry-period3",
+   "source": "Original exercise, GCE Advanced Level style",
+   "prompt": "What is the pH of an aqueous solution of 0.010 mol dm⁻³ NaOH formed from Na₂O (3 s.f.)?",
+   "answer": 12.0,
+   "tolerance": 0.02,
+   "explanation": "[OH⁻] = 0.010, pOH = 2, pH = 12.0.",
+   "difficulty": 1,
+   "points": 2,
+   "chapter": "gceal-chemistry-ch-inorganic"
+  },
+  {
+   "id": "gceal-chemistry-ch-inorganic-e15",
+   "kind": "truefalse",
+   "tier": "application",
+   "lesson": "gceal-chemistry-period3",
+   "source": "Original exercise, GCE Advanced Level style",
+   "prompt": "True or false: P₄O₁₀ reacts with water to give an acidic solution.",
+   "answer": true,
+   "explanation": "P₄O₁₀ + 6H₂O → 4H₃PO₄.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "gceal-chemistry-ch-inorganic"
+  },
+  {
+   "id": "gceal-chemistry-ch-inorganic-e16",
+   "kind": "mcq",
+   "tier": "approfondissement",
+   "lesson": "gceal-chemistry-period3",
+   "source": "Original exercise, GCE Advanced Level style",
+   "prompt": "When SiCl₄ is added to water, the products are",
+   "choices": [
+    "SiH₄",
+    "Si and Cl₂",
+    "SiO₂ and HCl",
+    "no reaction"
+   ],
+   "answer": 2,
+   "explanation": "SiCl₄ + 2H₂O → SiO₂ + 4HCl (steamy fumes).",
+   "difficulty": 2,
+   "points": 2,
+   "chapter": "gceal-chemistry-ch-inorganic"
+  },
+  {
+   "id": "gceal-chemistry-ch-inorganic-e17",
+   "kind": "numeric",
+   "tier": "approfondissement",
+   "lesson": "gceal-chemistry-period3",
+   "source": "Original exercise, GCE Advanced Level style",
+   "prompt": "What mass of P₄O₁₀ (M = 284) is needed to make 0.40 mol of phosphoric acid (g, 3 s.f.)?",
+   "answer": 28.4,
+   "tolerance": 0.1,
+   "unit": "g",
+   "explanation": "P₄O₁₀ + 6H₂O → 4H₃PO₄: n(P₄O₁₀) = 0.40/4 = 0.100 mol; m = 28.4 g.",
+   "difficulty": 2,
+   "points": 3,
+   "chapter": "gceal-chemistry-ch-inorganic"
+  },
+  {
+   "id": "gceal-chemistry-ch-inorganic-e18",
+   "kind": "problem",
+   "tier": "examen",
+   "lesson": "gceal-chemistry-period3",
+   "source": "Original exercise, GCE Advanced Level style",
+   "prompt": "Oxides of period 3 elements: Na₂O, MgO, Al₂O₃, SiO₂, P₄O₁₀, SO₃.",
+   "difficulty": 2,
+   "parts": [
+    {
+     "kind": "mcq",
+     "points": 1,
+     "prompt": "Which has a giant covalent structure?",
+     "choices": [
+      "SiO₂",
+      "P₄O₁₀",
+      "Na₂O",
+      "SO₃"
+     ],
+     "answer": 0,
+     "explanation": "Silicon dioxide is a giant covalent network.",
+     "id": "gceal-chemistry-ch-inorganic-e18-a"
+    },
+    {
+     "kind": "mcq",
+     "points": 1,
+     "prompt": "Which of the following gives the lowest pH when added to water?",
+     "choices": [
+      "MgO",
+      "SiO₂",
+      "SO₃",
+      "Na₂O"
+     ],
+     "answer": 2,
+     "explanation": "SO₃ forms sulfuric acid; SiO₂ is insoluble and Na₂O and MgO give alkaline solutions.",
+     "id": "gceal-chemistry-ch-inorganic-e18-b"
+    },
+    {
+     "kind": "truefalse",
+     "points": 1,
+     "prompt": "MgO reacts with dilute hydrochloric acid.",
+     "answer": true,
+     "explanation": "It is a basic oxide: MgO + 2HCl → MgCl₂ + H₂O.",
+     "id": "gceal-chemistry-ch-inorganic-e18-c"
+    },
+    {
+     "kind": "open",
+     "points": 2,
+     "prompt": "Explain why Na₂O is basic but SO₃ is acidic.",
+     "model": "Na₂O is ionic and contains O²⁻ ions which accept protons from water to form OH⁻; SO₃ is a covalent molecular oxide of a non-metal which reacts with water to give H₂SO₄ (releasing H⁺).",
+     "rubric": "1 mark: Na₂O ionic, O²⁻ gives OH⁻; 1 mark: SO₃ covalent, forms an acid with water.",
+     "explanation": "Na₂O is ionic and contains O²⁻ ions which accept protons from water to form OH⁻; SO₃ is a covalent molecular oxide of a non-metal which reacts with water to give H₂SO₄ (releasing H⁺).",
+     "id": "gceal-chemistry-ch-inorganic-e18-d"
+    }
+   ],
+   "chapter": "gceal-chemistry-ch-inorganic"
+  },
+  {
+   "id": "gceal-chemistry-period3-q1",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "gceal-chemistry-period3",
+   "prompt": "Which is the most acidic oxide?",
+   "choices": [
+    "Na₂O",
+    "MgO",
+    "Al₂O₃",
+    "SO₃"
+   ],
+   "answer": 3,
+   "explanation": "It forms sulfuric acid.",
+   "chapter": "gceal-chemistry-ch-inorganic"
+  },
+  {
+   "id": "gceal-chemistry-period3-q2",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "gceal-chemistry-period3",
+   "prompt": "The oxide of silicon is",
+   "choices": [
+    "very soluble",
+    "insoluble in water",
+    "a gas",
+    "basic"
+   ],
+   "answer": 1,
+   "explanation": "Giant covalent network.",
+   "chapter": "gceal-chemistry-ch-inorganic"
+  },
+  {
+   "id": "gceal-chemistry-period3-q3",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "gceal-chemistry-period3",
+   "prompt": "Na₂O contains",
+   "choices": [
+    "hydrogen bonds",
+    "metallic bonds",
+    "ionic bonds",
+    "covalent bonds only"
+   ],
+   "answer": 2,
+   "explanation": "Na⁺ and O²⁻.",
+   "chapter": "gceal-chemistry-ch-inorganic"
+  },
+  {
+   "id": "gceal-chemistry-period3-q4",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "gceal-chemistry-period3",
+   "prompt": "Aluminium chloride in water",
+   "choices": [
+    "gives hydrogen",
+    "is hydrolysed to give an acidic solution",
+    "is neutral",
+    "does not dissolve"
+   ],
+   "answer": 1,
+   "explanation": "Al³⁺ polarises water ligands.",
+   "chapter": "gceal-chemistry-ch-inorganic"
+  },
+  {
+   "id": "gceal-chemistry-period3-q5",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "gceal-chemistry-period3",
+   "prompt": "The pH of solution formed by SO₂ in water is about",
+   "choices": [
+    "7",
+    "11",
+    "3",
+    "14"
+   ],
+   "answer": 2,
+   "explanation": "H₂SO₃ is a weak acid.",
+   "chapter": "gceal-chemistry-ch-inorganic"
+  },
+  {
+   "id": "gceal-chemistry-ch-inorganic-e19",
+   "kind": "mcq",
+   "tier": "application",
+   "lesson": "gceal-chemistry-transition",
+   "source": "Original exercise, GCE Advanced Level style",
+   "prompt": "The electron configuration of Cu²⁺ is",
+   "choices": [
+    "[Ar] 3d⁹",
+    "[Ar] 3d¹⁰ 4s¹",
+    "[Ar] 3d⁷ 4s²",
+    "[Ar] 3d⁸ 4s¹"
+   ],
+   "answer": 0,
+   "explanation": "Cu loses its 4s electron and one 3d electron.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "gceal-chemistry-ch-inorganic"
+  },
+  {
+   "id": "gceal-chemistry-ch-inorganic-e20",
+   "kind": "numeric",
+   "tier": "application",
+   "lesson": "gceal-chemistry-transition",
+   "source": "Original exercise, GCE Advanced Level style",
+   "prompt": "Find the coordination number of the complex [Co(NH₃)₆]³⁺.",
+   "answer": 6,
+   "tolerance": 0,
+   "explanation": "Six NH₃ ligands each form one dative bond.",
+   "difficulty": 1,
+   "points": 2,
+   "chapter": "gceal-chemistry-ch-inorganic"
+  },
+  {
+   "id": "gceal-chemistry-ch-inorganic-e21",
+   "kind": "truefalse",
+   "tier": "application",
+   "lesson": "gceal-chemistry-transition",
+   "source": "Original exercise, GCE Advanced Level style",
+   "prompt": "True or false: Zn²⁺ compounds are coloured.",
+   "answer": false,
+   "explanation": "Zn²⁺ has a full 3d¹⁰ subshell: no d–d transitions, so compounds are colourless.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "gceal-chemistry-ch-inorganic"
+  },
+  {
+   "id": "gceal-chemistry-ch-inorganic-e22",
+   "kind": "mcq",
+   "tier": "approfondissement",
+   "lesson": "gceal-chemistry-transition",
+   "source": "Original exercise, GCE Advanced Level style",
+   "prompt": "Addition of excess NH₃(aq) to Cu²⁺(aq) gives",
+   "choices": [
+    "a deep blue solution",
+    "a brown precipitate",
+    "a green precipitate",
+    "no change"
+   ],
+   "answer": 0,
+   "explanation": "[Cu(NH₃)₄(H₂O)₂]²⁺ forms by ligand exchange.",
+   "difficulty": 2,
+   "points": 2,
+   "chapter": "gceal-chemistry-ch-inorganic"
+  },
+  {
+   "id": "gceal-chemistry-ch-inorganic-e23",
+   "kind": "numeric",
+   "tier": "approfondissement",
+   "lesson": "gceal-chemistry-transition",
+   "source": "Original exercise, GCE Advanced Level style",
+   "prompt": "25.0 cm³ of Fe²⁺ solution needs 18.5 cm³ of 0.0200 mol dm⁻³ KMnO₄ (1 MnO₄⁻ : 5 Fe²⁺). Find [Fe²⁺] (mol dm⁻³, 3 s.f.).",
+   "answer": 0.074,
+   "tolerance": 0.0005,
+   "unit": "mol/dm³",
+   "explanation": "n(MnO₄⁻) = 3.70 × 10⁻⁴; n(Fe²⁺) = 1.85 × 10⁻³ mol; c = 0.0740 mol dm⁻³.",
+   "difficulty": 2,
+   "points": 3,
+   "chapter": "gceal-chemistry-ch-inorganic"
+  },
+  {
+   "id": "gceal-chemistry-ch-inorganic-e24",
+   "kind": "problem",
+   "tier": "examen",
+   "lesson": "gceal-chemistry-transition",
+   "source": "Original exercise, GCE Advanced Level style",
+   "prompt": "A blue solution of copper(II) sulfate gives a pale blue precipitate with a few drops of aqueous ammonia, which dissolves in excess ammonia to give a deep blue solution.",
+   "difficulty": 2,
+   "parts": [
+    {
+     "kind": "mcq",
+     "points": 1,
+     "prompt": "The pale blue precipitate is",
+     "choices": [
+      "Cu(NH₃)₄²⁺",
+      "Cu(OH)₂",
+      "CuO",
+      "CuCO₃"
+     ],
+     "answer": 1,
+     "explanation": "NH₃ acts as a base: Cu²⁺ + 2OH⁻ → Cu(OH)₂.",
+     "id": "gceal-chemistry-ch-inorganic-e24-a"
+    },
+    {
+     "kind": "mcq",
+     "points": 1,
+     "prompt": "The deep blue ion is",
+     "choices": [
+      "[CuCl₄]²⁻",
+      "Cu₂O",
+      "[Cu(H₂O)₆]²⁺",
+      "[Cu(NH₃)₄(H₂O)₂]²⁺"
+     ],
+     "answer": 3,
+     "explanation": "NH₃ replaces four water ligands.",
+     "id": "gceal-chemistry-ch-inorganic-e24-b"
+    },
+    {
+     "kind": "numeric",
+     "points": 1,
+     "prompt": "Number of dative bonds in the deep blue complex.",
+     "answer": 6,
+     "tolerance": 0,
+     "explanation": "Four NH₃ and two H₂O ligands: coordination number 6.",
+     "id": "gceal-chemistry-ch-inorganic-e24-c"
+    },
+    {
+     "kind": "open",
+     "points": 2,
+     "prompt": "Explain why the colour of the solution changes when ammonia replaces water as the ligand.",
+     "model": "Different ligands split the d orbitals by a different amount (ligand field), so the energy gap and thus the wavelength of light absorbed changes, giving a different colour.",
+     "rubric": "1 mark: ligands change d orbital splitting; 1 mark: different light absorbed / different colour.",
+     "explanation": "Different ligands split the d orbitals by a different amount (ligand field), so the energy gap and thus the wavelength of light absorbed changes, giving a different colour.",
+     "id": "gceal-chemistry-ch-inorganic-e24-d"
+    }
+   ],
+   "figure": {
+    "kind": "shapes",
+    "w": 440,
+    "h": 250,
+    "items": [
+     {
+      "t": "circle",
+      "cx": 150,
+      "cy": 125,
+      "r": 16,
+      "stroke": "ink",
+      "width": 2,
+      "fill": "lightblue"
+     },
+     {
+      "t": "text",
+      "x": 150,
+      "y": 130,
+      "text": "Cu",
+      "size": 14,
+      "anchor": "middle",
+      "color": "ink",
+      "bold": true
+     },
+     {
+      "t": "line",
+      "x1": 150,
+      "y1": 125,
+      "x2": 150.0,
+      "y2": 62.599999999999994,
+      "color": "ink",
+      "width": 2
+     },
+     {
+      "t": "circle",
+      "cx": 150,
+      "cy": 45,
+      "r": 13,
+      "stroke": "ink",
+      "width": 2,
+      "fill": "lightyellow"
+     },
+     {
+      "t": "text",
+      "x": 150,
+      "y": 49,
+      "text": "H₂O",
+      "size": 10,
+      "anchor": "middle",
+      "color": "ink"
+     },
+     {
+      "t": "line",
+      "x1": 150,
+      "y1": 125,
+      "x2": 150.0,
+      "y2": 187.4,
+      "color": "ink",
+      "width": 2
+     },
+     {
+      "t": "circle",
+      "cx": 150,
+      "cy": 205,
+      "r": 13,
+      "stroke": "ink",
+      "width": 2,
+      "fill": "lightyellow"
+     },
+     {
+      "t": "text",
+      "x": 150,
+      "y": 209,
+      "text": "H₂O",
+      "size": 10,
+      "anchor": "middle",
+      "color": "ink"
+     },
+     {
+      "t": "line",
+      "x1": 150,
+      "y1": 125,
+      "x2": 87.6,
+      "y2": 125.0,
+      "color": "ink",
+      "width": 2
+     },
+     {
+      "t": "circle",
+      "cx": 70,
+      "cy": 125,
+      "r": 13,
+      "stroke": "ink",
+      "width": 2,
+      "fill": "lightyellow"
+     },
+     {
+      "t": "text",
+      "x": 70,
+      "y": 129,
+      "text": "H₂O",
+      "size": 10,
+      "anchor": "middle",
+      "color": "ink"
+     },
+     {
+      "t": "line",
+      "x1": 150,
+      "y1": 125,
+      "x2": 212.4,
+      "y2": 125.0,
+      "color": "ink",
+      "width": 2
+     },
+     {
+      "t": "circle",
+      "cx": 230,
+      "cy": 125,
+      "r": 13,
+      "stroke": "ink",
+      "width": 2,
+      "fill": "lightyellow"
+     },
+     {
+      "t": "text",
+      "x": 230,
+      "y": 129,
+      "text": "H₂O",
+      "size": 10,
+      "anchor": "middle",
+      "color": "ink"
+     },
+     {
+      "t": "line",
+      "x1": 150,
+      "y1": 125,
+      "x2": 109.44,
+      "y2": 84.44,
+      "color": "ink",
+      "width": 2
+     },
+     {
+      "t": "circle",
+      "cx": 98,
+      "cy": 73,
+      "r": 13,
+      "stroke": "ink",
+      "width": 2,
+      "fill": "lightyellow"
+     },
+     {
+      "t": "text",
+      "x": 98,
+      "y": 77,
+      "text": "H₂O",
+      "size": 10,
+      "anchor": "middle",
+      "color": "ink"
+     },
+     {
+      "t": "line",
+      "x1": 150,
+      "y1": 125,
+      "x2": 190.56,
+      "y2": 165.56,
+      "color": "ink",
+      "width": 2
+     },
+     {
+      "t": "circle",
+      "cx": 202,
+      "cy": 177,
+      "r": 13,
+      "stroke": "ink",
+      "width": 2,
+      "fill": "lightyellow"
+     },
+     {
+      "t": "text",
+      "x": 202,
+      "y": 181,
+      "text": "H₂O",
+      "size": 10,
+      "anchor": "middle",
+      "color": "ink"
+     },
+     {
+      "t": "text",
+      "x": 320,
+      "y": 100,
+      "text": "[Cu(H₂O)₆]²⁺",
+      "size": 14,
+      "anchor": "middle",
+      "color": "ink",
+      "bold": true
+     },
+     {
+      "t": "text",
+      "x": 320,
+      "y": 124,
+      "text": "octahedral",
+      "size": 12,
+      "anchor": "middle",
+      "color": "ink"
+     },
+     {
+      "t": "text",
+      "x": 320,
+      "y": 144,
+      "text": "coordination number 6",
+      "size": 12,
+      "anchor": "middle",
+      "color": "ink"
+     },
+     {
+      "t": "text",
+      "x": 320,
+      "y": 164,
+      "text": "pale blue",
+      "size": 12,
+      "anchor": "middle",
+      "color": "ink"
+     }
+    ]
+   },
+   "chapter": "gceal-chemistry-ch-inorganic"
+  },
+  {
+   "id": "gceal-chemistry-transition-q1",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "gceal-chemistry-transition",
+   "prompt": "Which is NOT a feature of transition metals?",
+   "choices": [
+    "catalytic activity",
+    "complex formation",
+    "all their ions are colourless",
+    "variable oxidation states"
+   ],
+   "answer": 2,
+   "explanation": "Most of their ions are coloured.",
+   "chapter": "gceal-chemistry-ch-inorganic"
+  },
+  {
+   "id": "gceal-chemistry-transition-q2",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "gceal-chemistry-transition",
+   "prompt": "A ligand is a species that",
+   "choices": [
+    "is always positive",
+    "accepts electrons from a metal",
+    "donates a lone pair to a metal ion",
+    "is a transition metal"
+   ],
+   "answer": 2,
+   "explanation": "It forms a dative bond.",
+   "chapter": "gceal-chemistry-ch-inorganic"
+  },
+  {
+   "id": "gceal-chemistry-transition-q3",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "gceal-chemistry-transition",
+   "prompt": "The shape of a complex with coordination number 6 is usually",
+   "choices": [
+    "tetrahedral",
+    "trigonal planar",
+    "linear",
+    "octahedral"
+   ],
+   "answer": 3,
+   "explanation": "Six ligands around a central ion.",
+   "chapter": "gceal-chemistry-ch-inorganic"
+  },
+  {
+   "id": "gceal-chemistry-transition-q4",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "gceal-chemistry-transition",
+   "prompt": "Iron is used as a catalyst in the",
+   "choices": [
+    "Contact process",
+    "Solvay process",
+    "lime kiln",
+    "Haber process"
+   ],
+   "answer": 3,
+   "explanation": "N₂ + 3H₂ ⇌ 2NH₃ with an iron catalyst.",
+   "chapter": "gceal-chemistry-ch-inorganic"
+  },
+  {
+   "id": "gceal-chemistry-transition-q5",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "gceal-chemistry-transition",
+   "prompt": "The precipitate formed when NaOH is added to Fe³⁺(aq) is",
+   "choices": [
+    "red-brown",
+    "white",
+    "blue",
+    "green"
+   ],
+   "answer": 0,
+   "explanation": "Fe(OH)₃.",
+   "chapter": "gceal-chemistry-ch-inorganic"
+  }
+ ]
+}
