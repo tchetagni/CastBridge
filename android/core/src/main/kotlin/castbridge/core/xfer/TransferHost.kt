@@ -84,6 +84,8 @@ class TransferHost(
     }
 
     fun active(): Int = sessions.size
+    /** Bytes of [s] already on the TV (whole blocks; at most one block too many when the short last block is among them). */
+    fun receivedBytes(s: Session): Long = minOf(s.assembler.map.count().toLong() * s.manifest.blockSize, s.manifest.size)
     fun inflightIds(): Set<String> = sessions.keys.toSet()
 
     // ---- JSON (hand-written like the rest of the API) ----

@@ -210,6 +210,7 @@ class PlayerActivity : Activity(), TvService.Screen {
     override val activity: Activity get() = this
     override fun notice(msg: String) { flash(msg) }
     override fun statusesChanged() { if (settingsPanel?.visible == true) showSettings(); refreshStatusBar() }
+    override fun transfersChanged() { home?.takeIf { it.visible }?.refreshStatus() }
     override fun iconsChanged() { refreshStatusBar() }
     override fun thumbReady(name: String) { thumbs?.ready(name); libScreen?.onThumbReady(name); home?.onThumbReady(name) }
     override fun runPending(r: TvService.Pending) {
@@ -435,8 +436,9 @@ class PlayerActivity : Activity(), TvService.Screen {
         override fun items() = ParentalHub.filterItems(server?.libraryItems().orEmpty())
         override fun status(): Triple<String, String, String?> {
             val s = server
-            val rec = s?.receiving()?.firstOrNull()?.let { (n, got, total) -> "Réception de ${castbridge.core.tv.LibraryLogic.title(n)} : ${got * 100 / total.coerceAtLeast(1)} %" }
-                ?: statuses["1-bt"]?.takeIf { "réception" in it }?.substringAfter(": ")?.let { "Réception par Bluetooth : $it" }
+            // ONE source for every path (Wi-Fi, Wi-Fi multivoie, Bluetooth): the multivoie copy writes no .part until its end, so the listing alone missed it
+            val rec = s?.progress?.shown()?.let { l -> l.firstOrNull()?.let { it.screenLine() + if (l.size > 1) "  (+${l.size - 1} autre${if (l.size > 2) "s" else ""})" else "" } }
+                ?: s?.receiving()?.firstOrNull()?.let { (n, got, total) -> "⬇ Réception de ${castbridge.core.tv.LibraryLogic.title(n)} : ${got * 100 / total.coerceAtLeast(1)} %" }
             return Triple(if (s == null) "Démarrage…" else "Prêt à recevoir", ParentalHub.shownPin(pin), rec)
         }
         override fun open(i: castbridge.core.tv.LibraryItem, row: List<castbridge.core.tv.LibraryItem>, index: Int) { libScreen?.open(i, row, index) }

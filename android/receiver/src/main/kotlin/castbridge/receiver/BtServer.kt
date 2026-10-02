@@ -34,6 +34,8 @@ class BtServer(
     private val trusted: ((String) -> Boolean)? = null,
     /** Reports of the parental control for a designated phone (CBTP, docs/PARENTAL.md): the peer is the socket's paired device. */
     private val parental: castbridge.core.parental.ReportSyncHost? = null,
+    /** The single reception progress of the TV (ReceiverServer.progress): a file received here appears on the screen and in the notification like a Wi-Fi one. */
+    private val progress: () -> castbridge.core.xfer.TransferProgress? = { null },
     private val status: (String?) -> Unit,
 ) {
     @Volatile private var server: BluetoothServerSocket? = null
@@ -108,10 +110,12 @@ class BtServer(
         }.apply { isDaemon = true; start() }
         var lastPct = -1
         var wasHello = false
+        val sink = progress()?.let { it.Sink(peer, runCatching { sock.remoteDevice.name }.getOrNull()) }
         active.incrementAndGet()
         try {
             val r = BtProtocol.serve(dir, sock.inputStream, sock.outputStream, guard, peer, onProgress = { name, done, total ->
                 last.set(System.currentTimeMillis())
+                sink?.progress(name, done, total)
                 val pct = (done * 100 / total).toInt()
                 if (pct != lastPct) { lastPct = pct; status("Bluetooth : réception de $name $pct %") }
             }, negotiate = negotiate, remote = { i, o -> status("Bluetooth : télécommande du téléphone connectée"); RemoteHub.serveBt(i, o) { last.set(System.currentTimeMillis()) } },
@@ -120,10 +124,12 @@ class BtServer(
                     h(p, name, req).also { last.set(System.currentTimeMillis()) } } },
                 trusted = trusted, parental = parental,
                 acceptFile = { n -> !ActivationCenter.trial() || castbridge.core.owner.TrialPolicy.btFileAllowed(n) })
+            sink?.end(r == BtProtocol.OK, BtProtocol.describe(r))
             LotsHub.adopt(ctx, dir)     // a lot (+ its signed proof) delivered as files by the phone: verified and installed (docs/LOTS.md)
             if (!wasHello) status(if (r == BtProtocol.ERR_TRIAL) castbridge.core.owner.TrialPolicy.BT_MESSAGE else "Bluetooth : prêt" + if (r != BtProtocol.OK) " (refusé : ${BtProtocol.describe(r)})" else " (fichier reçu)")
         } catch (e: Exception) {
             Log.w(TAG, "transfer interrupted: ${e.javaClass.simpleName}")   // never log request contents
+            sink?.broken()
             status("Bluetooth : transfert interrompu, reprise possible")
         } finally {
             active.decrementAndGet()
