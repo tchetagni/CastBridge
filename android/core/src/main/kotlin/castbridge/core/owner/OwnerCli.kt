@@ -178,16 +178,20 @@ Le code de déverrouillage est demandé au clavier (jamais en argument) ; en scr
     }
 
     private fun inspect(o: Opts, io: Io): Int {
-        val (code, k, fp) = parseRequest(File(o.need("--request")))
-        io.out("Code d'appareil : $code · k=$k sur n=${fp.n} · identité ${if (fp.byKind.keys.any { it.strong }) "solide" else "FAIBLE (aucun facteur soudé)"}")
+        val r = readRequest(File(o.need("--request"))); val code = r.code; val k = r.k; val fp = r.fp
+        io.out("Code d'appareil : $code · k=$k sur n=${fp.n} · identité ${if (fp.byKind.keys.any { it.strong }) "solide" else "FAIBLE (aucun facteur soudé)"} · clé d'installation : ${if (r.installPub != null) "présente" else "absente"}")
         fp.byKind.forEach { (kind, h) -> io.out("  ${kind.name.padEnd(14)} $h") }
         return 0
     }
 
-    private fun parseRequest(f: File): Triple<String, Int, Fingerprints> {
+    private fun parseRequest(f: File): Triple<String, Int, Fingerprints> = readRequest(f).let { Triple(it.code, it.k, it.fp) }
+
+    /** The device request, v1 or v2 (a v2 one also carries the installation's public key, `install=x25519|…`). */
+    private fun readRequest(f: File): OwnerFrames.DeviceInfo {
         if (!f.isFile) throw Fail("Demande introuvable : ${f.path}")
-        @Suppress("DEPRECATION") val r = OwnerFrames.parseDeviceInfoLegacy(f.readText().trim().replace("\r", "")) ?: throw Fail("Demande d'appareil illisible (attendu : code=…, k=…, factor=TYPE|empreinte)")
-        if (DeviceCode.of(r.third) != r.first) throw Fail("Le code d'appareil ne correspond pas aux empreintes de la demande (fichier altéré ?)")
+        val text = f.readText().trim().replace("\r", "")
+        val r = OwnerFrames.parseDeviceInfo(text) ?: throw Fail(if (text.lines().any { it.trim().startsWith("install=") }) "Demande d'appareil illisible (clé d'installation)" else "Demande d'appareil illisible (attendu : code=…, k=…, factor=TYPE|empreinte)")
+        if (DeviceCode.of(r.fp) != r.code) throw Fail("Le code d'appareil ne correspond pas aux empreintes de la demande (fichier altéré ?)")
         return r
     }
 

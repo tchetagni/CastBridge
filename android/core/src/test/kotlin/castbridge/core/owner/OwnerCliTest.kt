@@ -119,4 +119,23 @@ class OwnerCliTest {
         assertTrue(io.out.first().contains("k=2 sur n=3") && io.out.any { it.contains("FLASH") })
         assertNotEquals(0, OwnerCli.run(listOf("nimportequoi"), Rec()) { now })
     }
+
+    private val installPub = castbridge.core.lots.InstallKey.fromSeed(ByteArray(32) { (it + 5).toByte() }).pub      // test seed, never a real key
+    private fun requestV2(d: File, fp: Fingerprints): File = File(d, "demande-v2.txt").also { it.writeText(OwnerFrames.deviceInfo(DeviceCode.of(fp), fp, installPub).replace("\n", "\r\n\r\n")) }
+
+    @Test fun aV2RequestIsReadByInspectAndActivationAndTheInstallKeyIsReported() {
+        val d = dir(); val v = File(d, "c.txt"); OwnerCli.run(listOf("init", "--vault", v.path), Rec()) { now }
+        val fp = device(); val v2 = requestV2(d, fp)
+        val io = Rec(); assertEquals(0, OwnerCli.run(listOf("inspect", "--request", v2.path), io) { now })
+        assertTrue(io.out.first().contains("clé d'installation : présente"), io.out.first())
+        val old = Rec(); OwnerCli.run(listOf("inspect", "--request", request(d, fp).path), old) { now }; assertTrue(old.out.first().contains("clé d'installation : absente"))
+        val act = Rec(); assertEquals(0, OwnerCli.run(listOf("activation", "--vault", v.path, "--request", v2.path, "--kind", "trial", "--journal", File(d, "j").path), act) { now }, act.err.toString())
+    }
+
+    @Test fun aMalformedInstallLineIsRefusedNotTreatedAsAV1Request() {
+        val d = dir(); val req = requestV2(d, device())
+        req.writeText(req.readText().replace("install=x25519|", "install=x25519|a"))
+        val io = Rec(); assertEquals(2, OwnerCli.run(listOf("inspect", "--request", req.path), io) { now })
+        assertTrue(io.err.single().contains("clé d'installation"), io.err.toString())
+    }
 }

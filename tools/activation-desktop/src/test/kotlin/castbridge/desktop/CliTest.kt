@@ -26,7 +26,7 @@ class CliTest {
     private val dir = Files.createTempDirectory("activation-desktop").toFile().also { it.deleteOnExit() }
     private val raw = RawFactors("FLASHSERIAL-A1", "cid-a1", "AA:BB:CC:00:11:01", "10:20:30:40:50:01", "/sys/devices/platform/soc/ffe03000.sd/mmc_host/mmc1/net/wlan0", "SYSA0001", "11:22:33:44:55:01")
     private val fp = DeviceIdentity.fingerprints(raw)
-    private val request = File(dir, "demande.txt").also { it.writeText(OwnerFrames.deviceInfo(DeviceCode.of(fp), fp)) }
+    private val request = File(dir, "demande.txt").also { it.writeText(OwnerFrames.deviceInfo(DeviceCode.of(fp), fp, castbridge.core.lots.InstallKey.fromSeed(ByteArray(32) { 7 }).pub)) }
 
     private fun cli(vararg args: String, passphrase: String = pass): Run {
         val o = ByteArrayOutputStream(); val e = ByteArrayOutputStream()

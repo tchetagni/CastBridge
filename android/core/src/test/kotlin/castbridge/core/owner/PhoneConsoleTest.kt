@@ -24,6 +24,7 @@ class PhoneConsoleTest {
 
     private fun fp(n: Int) = DeviceIdentity.fingerprints(RawFactors("FLASH-$n", "cid-$n", "AA:BB:CC:00:00:%02x".format(n), "10:20:30:40:50:%02x".format(n), "/sys/devices/platform/soc/x/mmc_host/net/wlan0", "SYS$n", "11:22:33:44:55:%02x".format(n)))
     private fun info(n: Int) = fp(n).let { OwnerFrames.deviceInfo(DeviceCode.of(it), it) }
+    private fun infoV2(n: Int) = fp(n).let { OwnerFrames.deviceInfo(DeviceCode.of(it), it, castbridge.core.lots.InstallKey.fromSeed(ByteArray(32) { b -> (b + n).toByte() }).pub) }      // test seeds
     private fun unlocked() = (console.unlock("mon code propriétaire".toCharArray()) as PhoneUnlock.Unlocked).session
 
     @Test fun trialIsIssuedWithEveryEncodingAndVerifiesOnTheTv() {
@@ -83,5 +84,19 @@ class PhoneConsoleTest {
         assertEquals(3, r.size)
         assertFailsWith<IssueException> { RightsSyntax.parseBox("achat sansbouquet", t) }
         assertFailsWith<IssueException> { RightsSyntax.parseBox("n'importe quoi", t) }
+    }
+
+    private fun trialWindow(r: PhoneIssue) = castbridge.core.owner.Activation.decode(r.token)!!.rights.filterIsInstance<Right.Rental>().single().box
+
+    @Test fun theTrialWindowIsBoxedForTheInstallationAndAnOldTvNeedsTheV1Option() {
+        val s = unlocked()
+        assertTrue(trialWindow(s.issue(infoV2(1), IssueSpec(ActivationKind.TRIAL, trialLots = true, rentalMaster = ByteArray(32) { 1 }))).startsWith("v2:"))
+        val e = assertFailsWith<IssueException> { s.issue(info(1), IssueSpec(ActivationKind.TRIAL, trialLots = true, rentalMaster = ByteArray(32) { 1 })) }
+        assertTrue(e.message!!.contains("clé d'installation"), e.message)
+        val late = assertFailsWith<IssueException> { s.issue(info(1), IssueSpec(ActivationKind.TRIAL, trialLots = true, rentalMaster = ByteArray(32) { 1 }, boxV1 = true)) }      // the test clock is after the v1 sunset
+        assertTrue(late.message!!.contains("enveloppe v1") || late.message!!.contains("clé d'installation"), late.message)
+        t = castbridge.core.lots.RentalKeys.V1_BOX_SUNSET_MS - 10_000_000L
+        assertFalse(trialWindow(s.issue(info(1), IssueSpec(ActivationKind.TRIAL, trialLots = true, rentalMaster = ByteArray(32) { 1 }, boxV1 = true))).startsWith("v2:"))
+        assertTrue(trialWindow(s.issue(infoV2(2), IssueSpec(ActivationKind.TRIAL, trialLots = true, rentalMaster = ByteArray(32) { 1 }, boxV1 = true))).startsWith("v2:"), "a TV with a key always gets v2")
     }
 }

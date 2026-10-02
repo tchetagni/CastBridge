@@ -123,6 +123,7 @@ open class ConsoleActivity : ComponentActivity() {
         var field by remember { mutableStateOf(androidx.compose.ui.text.input.TextFieldValue("")) }
         if (field.text != input) field = androidx.compose.ui.text.input.TextFieldValue(input, androidx.compose.ui.text.TextRange(input.length))      // set from outside (Bluetooth read)
         var form by remember { mutableStateOf(ProductionForm()) }
+        var boxV1 by remember { mutableStateOf(false) }      // « Enveloppe v1 (TV ancienne) » : seulement avant le coucher v1
         var token by remember { mutableStateOf<String?>(null) }; var fileContent by remember { mutableStateOf<String?>(null) }
         var error by remember { mutableStateOf<String?>(null) }; var info by remember { mutableStateOf<String?>(null) }
         val save = rememberLauncherForActivityResult(ActivityResultContracts.CreateDocument("text/plain")) { uri ->
@@ -176,6 +177,10 @@ open class ConsoleActivity : ComponentActivity() {
                 Text(if (form.superUnlimited) "SUPER_UNLIMITED : lit et débloque tout, locations permanentes, sans durée" else "SUPER_UNLIMITED (privilège à part)", modifier = Modifier.weight(1f))
                 Switch(form.superUnlimited, { form = form.copy(superUnlimited = it); token = null })
             }
+            if (!production && RentalKeys.isV1Accepted(System.currentTimeMillis())) Row(Modifier.fillMaxWidth(), verticalAlignment = androidx.compose.ui.Alignment.CenterVertically, horizontalArrangement = Arrangement.SpaceBetween) {
+                Text("Enveloppe v1 (TV ancienne) : seulement pour une CastBridge-TV qui ne fournit pas sa clé d'installation", modifier = Modifier.weight(1f))
+                Switch(boxV1, { boxV1 = it; token = null })
+            }
             if (production) Text("Une clé de production donne accès à toutes les fonctions. La licence est générée automatiquement ; les locations de lots sont gérées par le serveur.", style = MaterialTheme.typography.bodySmall)
             Button({
                 error = null; info = null; token = null; fileContent = null
@@ -183,19 +188,24 @@ open class ConsoleActivity : ComponentActivity() {
                                         val issuer = ActivationIssuer(signer); val now = System.currentTimeMillis(); val day = 24L * 3600 * 1000; val start = now / day * day
                     val full = OwnerFrames.parseDeviceInfo(input.trim().replace("\r", ""))
                     if (full != null) {
-                        if (DeviceCode.of(full.third) != full.first) throw IssueException("Le code d'appareil ne correspond pas aux empreintes de la demande (texte altéré ?)")
+                        if (DeviceCode.of(full.fp) != full.code) throw IssueException("Le code d'appareil ne correspond pas aux empreintes de la demande (texte altéré ?)")
                         val plan = form.build(now)
                         val rights = ArrayList<Right>(plan.rights)
                         val kind = if (production) ActivationKind.PRODUCTION else ActivationKind.TRIAL
                         val lic = if (production) LicenseIds.generate() else Activation.TRIAL_LICENSE
                         plan.usageDays?.let { rights += Right.Usage(now, now + it * day) }
                         // a TRIAL key also carries its one-time 12 h window of rented lots (the TV grants it once for the life of the application); it is never shown as a rental
-                        if (!production) rights += RentalIssuing.right(RentalSpec(RentalLines.TRIAL_PRODUCT, listOf(Right.ALL_BUNDLE), RentalLines.TRIAL_DAYS, RentalLines.TRIAL_USAGE_MINUTES),
-                            now, Activation.TRIAL_LICENSE, SeatIds.of(Activation.TRIAL_LICENSE, full.third), full.third, RentalKeys.masterFrom(signer))
-                        val issued = issuer.issue(ActivationIssuer.Request(kind, full.first, full.third, issuedAt = now, rights = rights, license = lic))
+                        // the box is v2 (for the TV's installation key) unless the owner forces v1 for an old TV (refused without the switch, and after the v1 sunset)
+                        val v1 = !production && boxV1 && full.installPub == null
+                        if (!production) {
+                            if (full.installPub == null && !boxV1) throw IssueException("Cette TV n'a pas fourni sa clé d'installation (CastBridge-TV trop ancien) : mettez-la à jour, ou activez « Enveloppe v1 (TV ancienne) »")
+                            rights += RentalIssuing.right(RentalSpec(RentalLines.TRIAL_PRODUCT, listOf(Right.ALL_BUNDLE), RentalLines.TRIAL_DAYS, RentalLines.TRIAL_USAGE_MINUTES),
+                                now, Activation.TRIAL_LICENSE, SeatIds.of(Activation.TRIAL_LICENSE, full.fp), full.fp, RentalKeys.masterFrom(signer), full.installPub, null, boxV1)
+                        }
+                        val issued = issuer.issue(ActivationIssuer.Request(kind, full.code, full.fp, issuedAt = now, rights = rights, license = lic))
                         token = issued.token; fileContent = issued.fileContent
                         if (production) info = "Licence $lic (générée)"
-                        store.journal(if (form.superUnlimited && production) "super" else "activation", full.first, kind.name, lic, ActivationPolicy.CODE_VALIDITY_HOURS)
+                        store.journal(if (form.superUnlimited && production) "super" else "activation", full.code, kind.name + (if (production) "" else if (v1) "+v1" else "+v2"), lic, ActivationPolicy.CODE_VALIDITY_HOURS)
                     } else {
                         val code = DeviceCode.parse(input.trim()) ?: throw IssueException("Code d'appareil mal formé (16 caractères, contrôle compris) et demande complète illisible")
                         val kind = if (production) ActivationKind.PRODUCTION else ActivationKind.TRIAL
