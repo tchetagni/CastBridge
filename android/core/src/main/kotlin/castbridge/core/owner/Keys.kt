@@ -31,10 +31,16 @@ enum class KeyScope {
     /** Sign deferred orders (management policies, docs/agent-briefs/deferred-orders.md). The server key has it; no key gets it implicitly from another scope. */
     POLICY,
     /** SUPER_UNLIMITED: sign the `super` right (reads and unlocks everything, rentals included, for good). The super administrator's key only (phone superadmin, desk): never the server. Every code can still be installed during [ActivationPolicy.CODE_VALIDITY_HOURS] hours, this scope included. */
-    SUPER_UNLIMITED;
+    SUPER_UNLIMITED,
+    /**
+     * Sign a [Delegation] (`type=delegation`): authorise a field agent's key to issue bounded keys. Owner phone console and desktop tool only, NEVER the server.
+     * Never part of [ALL] nor of [upTo]: a key gets it only by an explicit decision of the owner.
+     */
+    DELEGATE;
 
     companion object {
-        val ALL: Set<KeyScope> = values().toSet()
+        /** Every scope except [DELEGATE] (explicit only): keeps the key lists and the vectors of the tools that predate delegation unchanged. */
+        val ALL: Set<KeyScope> = values().toSet() - DELEGATE
         /** Scopes of a key that may command up to [power] and issue activations (the old "maximum power" model). */
         fun upTo(power: Power): Set<KeyScope> = buildSet {
             add(COMMAND_SUPPORT)
@@ -46,7 +52,9 @@ enum class KeyScope {
 }
 
 /** A public key the TV accepts, with its scopes. Several at once (rotation, spare key kept offline). */
-data class TrustedKey(val keyId: String, val publicKeyBase64: String, val scopes: Set<KeyScope> = KeyScope.ALL) {
+data class TrustedKey(val keyId: String, val publicKeyBase64: String, val scopes: Set<KeyScope> = KeyScope.ALL,
+                      /** Instants (ms) at which this key may sign events; null = no bound. Set for delegated agent keys (`notBefore..expiresAt`): [LicenseBook.replay] rejects an event outside it. */
+                      val validity: LongRange? = null) {
     fun allows(scope: KeyScope) = scope in scopes
     fun allows(power: Power) = KeyScope.of(power) in scopes
 
@@ -61,6 +69,8 @@ class KeyRing(keys: List<TrustedKey>, val revoked: Set<String> = emptySet()) {
     fun find(keyId: String): TrustedKey? = byId[keyId]
     fun isRevoked(keyId: String) = keyId in revoked
     fun withRevoked(ids: Set<String>) = KeyRing(byId.values.toList(), revoked + ids)
+    /** This ring plus the agent keys of verified delegations. A delegated key never overrides a key of the ring (a compiled key keeps its own scopes); on a duplicate `kid` the first wins. */
+    fun withDelegated(keys: List<TrustedKey>) = KeyRing(byId.values.toList() + keys.filter { it.keyId !in byId }.distinctBy { it.keyId }, revoked)
 
     companion object {
         /** keyId = first 8 bytes (16 hex chars) of SHA-256 of the raw public key: stable, short, no secret. */

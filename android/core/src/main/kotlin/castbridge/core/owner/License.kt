@@ -117,6 +117,7 @@ object LicenseBook {
                 !key.verify(e.text, e.signature) -> { rejected += e.id to Rejection.BAD_SIGNATURE; continue }
                 scope == null -> { rejected += e.id to Rejection.MALFORMED; continue }
                 !key.allows(scope) && !reactivateOnly -> { rejected += e.id to Rejection.KEY_NOT_ALLOWED; continue }
+                key.validity?.let { e.at !in it } == true -> { rejected += e.id to Rejection.KEY_NOT_ALLOWED; continue }      // delegated key: only inside its mandate window
             }
             val f = e.fields
             when (e.type) {
