@@ -1,105 +1,52 @@
 package castbridge.core.lots
 
-import castbridge.core.crypto.PlainWrapper
-import castbridge.core.lots.InstallKeyPolicy.RetryState
-import castbridge.core.lots.InstallKeyPolicy.Step
+import castbridge.core.lots.InstallKeyPolicy.KeyState
 import castbridge.core.lots.InstallKeyPolicy.UnwrapFailure
+import castbridge.core.lots.InstallKeyPolicy.Verdict
 import castbridge.core.tv.ApiExtension
 import castbridge.core.tv.ApiReply
-import java.io.File
 import kotlin.test.*
 
 class InstallKeyPolicyTest {
-    @Test fun aliasIsGeneratedOnlyWhenTheLookupSaysItIsAbsent() {
-        assertEquals(Step.USE, InstallKeyPolicy.forLookup(true))
-        assertEquals(Step.GENERATE, InstallKeyPolicy.forLookup(false))
-        assertEquals(Step.FAIL, InstallKeyPolicy.forLookup(null))
-    }
-    @Test fun onlyAPermanentlyInvalidatedKeyIsRecreated() {
-        assertEquals(Step.RECREATE, InstallKeyPolicy.forEncryptFailure(true))
-        assertEquals(Step.FAIL, InstallKeyPolicy.forEncryptFailure(false))
-    }
-
-    @Test fun onlyABadTagAMissingAliasOrAnInvalidatedKeyIsALoss() {
-        val table = mapOf(UnwrapFailure.BAD_TAG to true, UnwrapFailure.MISSING_ALIAS to true, UnwrapFailure.INVALIDATED to true, UnwrapFailure.OTHER to false)
-        assertEquals(UnwrapFailure.values().toSet(), table.keys)
-        table.forEach { (f, loss) -> assertEquals(loss, InstallKeyPolicy.unwrapIsLoss(f), "$f") }
-    }
-
-    @Test fun aStoredKeyIsReadWithItsOwnEnvelopeAndOnlyPlainMigrates() {
-        // stored, chosen for a new key -> reader, migrate?
+    @Test fun classificationTableIncludingTheMissingAliasDoubleConfirmation() {
         val table = listOf(
-            Triple("plain", "keystore", "plain" to true),          // audit w4-03 (2): a plain key is read as plain, then moved into the Keystore
-            Triple("plain", "plain", "plain" to false),
-            Triple("keystore", "keystore", "keystore" to false),
-            Triple("keystore", "plain", "keystore" to false),      // the probe failed: still read through the Keystore, never through plain, never rewritten as plain
-            Triple("memory", "memory", "memory" to false),
-            Triple("plain", "memory", "plain" to true),
+            Triple(UnwrapFailure.BAD_TAG, false, Verdict.LOST), Triple(UnwrapFailure.BAD_TAG, true, Verdict.LOST),
+            Triple(UnwrapFailure.INVALIDATED, false, Verdict.LOST), Triple(UnwrapFailure.INVALIDATED, true, Verdict.LOST),
+            Triple(UnwrapFailure.MISSING_ALIAS, false, Verdict.TRANSIENT), Triple(UnwrapFailure.MISSING_ALIAS, true, Verdict.LOST),     // audit (1): one `false` is not a loss
+            Triple(UnwrapFailure.OTHER, false, Verdict.TRANSIENT), Triple(UnwrapFailure.OTHER, true, Verdict.TRANSIENT),
         )
-        for ((stored, chosen, expected) in table) {
-            assertEquals(expected.first, InstallKeyPolicy.readWith(stored), "$stored/$chosen")
-            assertEquals(expected.second, InstallKeyPolicy.migrateTo(stored, chosen), "$stored/$chosen")
-        }
+        assertEquals(UnwrapFailure.values().toSet(), table.map { it.first }.toSet())
+        for ((f, confirmed, verdict) in table) assertEquals(verdict, InstallKeyPolicy.classify(f, confirmed), "$f/$confirmed")
     }
 
-    @Test fun backoffIsOneMinuteThenOneHour() {
-        val table = listOf(0 to 0L, 1 to 60_000L, 2 to 60_000L, 3 to 60_000L, 4 to 3_600_000L, 10 to 3_600_000L, 1000 to 3_600_000L)
-        table.forEach { (n, d) -> assertEquals(d, InstallKeyPolicy.delayAfter(n), "after $n failures") }
-        // now, lastFailureAt, failures -> may attempt
-        val attempts = listOf(
-            Triple(5L, null, 0) to true,
-            Triple(59_999L, 0L, 1) to false, Triple(60_000L, 0L, 1) to true,
-            Triple(3_599_999L, 0L, 4) to false, Triple(3_600_000L, 0L, 4) to true,
-            Triple(100L, 1_000L, 4) to true,                        // a monotonic clock that went back (cannot happen, but never blocks forever)
-        )
-        attempts.forEach { (a, ok) -> assertEquals(ok, InstallKeyPolicy.mayAttempt(a.first, a.second, a.third), "$a") }
+    @Test fun aMissingAliasIsConfirmedOnlyWhenAFreshlyReloadedKeystoreAgreesTwice() {
+        val bools = listOf(true, false, null)
+        for (a in bools) for (b in bools) for (c in bools)
+            assertEquals(a == false && b == false && c == false, InstallKeyPolicy.aliasConfirmedAbsent(a, b, c), "$a/$b/$c")
+        assertFalse(InstallKeyPolicy.aliasConfirmedAbsent(false, false, true), "the reloaded store returns a key: the alias exists")
     }
 
-    @Test fun regenerationNeedsManyFailuresOverSeveralStarts() {
-        val table = listOf(RetryState(0, 0) to false, RetryState(7, 3) to false, RetryState(8, 2) to false, RetryState(100, 1) to false, RetryState(8, 3) to true, RetryState(20, 5) to true)
-        table.forEach { (s, r) -> assertEquals(r, InstallKeyPolicy.mustRegenerate(s), "$s") }
-        assertEquals(RetryState(1, 1), InstallKeyPolicy.afterFailure(RetryState(), true))
-        assertEquals(RetryState(2, 1), InstallKeyPolicy.afterFailure(RetryState(1, 1), false))
+    @Test fun protectionLabelsOfTheFourStates() {
+        assertEquals(listOf("pending", "keystore", "unavailable", "unreadable"), KeyState.values().map { it.protection })
     }
 
-    @Test fun protectionStatusForTheActivationApi() {
-        assertEquals("keystore", InstallKeyPolicy.protection("keystore", 3))
-        assertEquals("plain", InstallKeyPolicy.protection("plain", 0))
-        assertEquals("unavailable", InstallKeyPolicy.protection(null, 1))
-        assertEquals("pending", InstallKeyPolicy.protection(null, 0))
+    @Test fun backoffScheduleWithAnInjectedClock() {
+        var t = 1_000L; val g = InstallKeyGate { t }
+        assertTrue(g.mayAttempt()); assertEquals(0, g.failures)
+        assertTrue(g.failed(), "first failure of the process: logged"); assertFalse(g.mayAttempt())
+        t += InstallKeyPolicy.SHORT_DELAY_MS - 1; assertFalse(g.mayAttempt(), "59.999 s: still waiting")
+        t += 1; assertTrue(g.mayAttempt(), "1 min: another attempt")
+        assertFalse(g.failed(), "no second log line"); t += 60_000; assertTrue(g.mayAttempt())
+        assertFalse(g.failed()); t += 60_000; assertTrue(g.mayAttempt())                                   // 3 failures, 1 min each
+        assertFalse(g.failed()); t += InstallKeyPolicy.SHORT_DELAY_MS; assertFalse(g.mayAttempt(), "from the 4th failure: 1 h")
+        t += InstallKeyPolicy.LONG_DELAY_MS - InstallKeyPolicy.SHORT_DELAY_MS - 1; assertFalse(g.mayAttempt())
+        t += 1; assertTrue(g.mayAttempt())
+        t -= 10_000_000; g.failed(); t -= 1; assertTrue(g.mayAttempt(), "a clock that went back never blocks forever")
+        g.succeeded(); assertEquals(0, g.failures); assertTrue(g.mayAttempt())
+        assertEquals(listOf(0L, 60_000L, 60_000L, 60_000L, 3_600_000L, 3_600_000L), (0..5).map { InstallKeyPolicy.delayAfter(it) })
     }
 
-    @Test fun gateSpacesTheAttemptsWithAnInjectedClockAndCountsStartsInAFile() {
-        val dir = Kit.tmp(); var t = 1_000L
-        val g1 = InstallKeyGate(dir, { t })
-        assertTrue(g1.mayAttempt())
-        assertTrue(g1.failed(true), "first failure of the process: log it")
-        assertFalse(g1.mayAttempt()); t += 59_999; assertFalse(g1.mayAttempt()); t += 1; assertTrue(g1.mayAttempt())
-        assertFalse(g1.failed(true), "logged once")
-        repeat(2) { t += 60_000; assertTrue(g1.mayAttempt()); g1.failed(true) }
-        assertEquals(4, g1.failuresThisProcess)
-        t += 60_000; assertFalse(g1.mayAttempt(), "after 4 failures: 1 h"); t += 3_540_000; assertTrue(g1.mayAttempt())
-        assertEquals(RetryState(4, 1), g1.load())
-        g1.failed(false)                                                 // a failure that is not the key's: backoff, but not counted toward regeneration
-        assertEquals(RetryState(4, 1), g1.load())
-        // two more process starts (new gates on the same folder), 2 failures each
-        repeat(2) { val g = InstallKeyGate(dir, { t }); assertTrue(g.mayAttempt(), "a new process tries at once"); g.failed(true); t += 60_000; g.failed(true) }
-        assertEquals(RetryState(8, 3), InstallKeyGate(dir, { t }).load())
-        assertTrue(InstallKeyGate(dir, { t }).mustRegenerate())
-        val g4 = InstallKeyGate(dir, { t }); g4.succeeded()
-        assertEquals(RetryState(), g4.load()); assertFalse(g4.mustRegenerate()); assertFalse(File(dir, "install.key.retry").exists())
-    }
-
-    @Test fun storedWrapReadsTheLabelOfTheKeyFile() {
-        val dir = Kit.tmp()
-        assertNull(InstallKeyStore.storedWrap(dir))
-        InstallKeyStore(dir, PlainWrapper()).loadOrCreate()
-        assertEquals("plain", InstallKeyStore.storedWrap(dir))
-        File(dir, "install.key").writeText("wrap=keystore")                      // no header: not a key file
-        assertNotEquals("keystore", InstallKeyStore.storedWrap(dir))
-    }
-
-    @Test fun lazyKeyedApiBuildsNothingAtSetupAndAnswers503WhenTheKeyIsUnavailable() {
+    @Test fun lazyKeyedApiBuildsNothingAtSetupAndAnswers503WhenBuildFails() {
         var builds = 0; var fail = true
         val inner = object : ApiExtension {
             override fun handle(path: String, method: String, params: Map<String, String>) = if (method == "GET") ApiReply(200, "{}") else null

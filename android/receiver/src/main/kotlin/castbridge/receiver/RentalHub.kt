@@ -18,145 +18,157 @@ import java.io.File
  * account activated by the super administrator code (SUPER_UNLIMITED), where rentals are permanent. The TV stays offline: nothing here reaches the Internet.
  */
 object RentalHub {
-    private class Parts(val vault: RentalVault, val ledger: RentalLedger, val sweeper: RentalSweeper, val keys: InstallKeyStore)
+    /** The safe, the ledger and the sweeper: built WITHOUT the installation key (the Keystore can fail for good, the sweep and the 12 h meter must keep running). */
+    private class Parts(val vault: RentalVault, val ledger: RentalLedger, val sweeper: RentalSweeper)
     @Volatile private var parts: Parts? = null
+    @Volatile private var keys: InstallKeyStore? = null
     private val warming = java.util.concurrent.atomic.AtomicBoolean(false)
-    private val noteTaken = java.util.concurrent.atomic.AtomicBoolean(false)
+    private val replayNeeded = java.util.concurrent.atomic.AtomicBoolean(false)
+    private val unreadableLogged = java.util.concurrent.atomic.AtomicBoolean(false)
     private val lock = java.util.concurrent.locks.ReentrantLock()
-    @Volatile private var gate: InstallKeyGate? = null
+    private val gate = InstallKeyGate(android.os.SystemClock::elapsedRealtime)
     private const val TAG = "RentalHub"
+    private val READY = InstallKeyPolicy.KeyState.READY
+    private val UNREADABLE = InstallKeyPolicy.KeyState.UNREADABLE
 
     private fun dir(ctx: Context) = File(ctx.applicationContext.filesDir, "rental")
 
-    /** The retry gate (backoff 1 min then 1 h, counters across process starts in `install.key.retry`): see [InstallKeyGate] / [InstallKeyPolicy]. */
-    private fun gate(ctx: Context): InstallKeyGate = gate ?: synchronized(this) { gate ?: InstallKeyGate(dir(ctx), android.os.SystemClock::elapsedRealtime).also { gate = it } }
+    private fun parts(ctx: Context): Parts = parts ?: synchronized(this) { parts ?: build(ctx.applicationContext).also { parts = it } }
 
-    /**
-     * The safe, the ledger and the installation key. Never waits more than [waitMs] for another thread that is preparing them, and never retries the Keystore before the backoff of
-     * [InstallKeyGate] allows it: it throws instead (callers answer 503 / an empty list). A Keystore failure never reaches `TvService.onCreate` (nothing there calls this).
-     */
-    private fun ensure(ctx: Context, waitMs: Long = 2_000): Parts {
-        parts?.let { return it }
-        val g = gate(ctx)
-        if (!g.mayAttempt()) throw InstallKeyUnavailableException(InstallKeyPolicy.UNAVAILABLE_MESSAGE)
-        if (!lock.tryLock(waitMs, java.util.concurrent.TimeUnit.MILLISECONDS)) throw InstallKeyUnavailableException("clé d'installation en préparation")
-        try {
-            parts?.let { return it }
-            if (!g.mayAttempt()) throw InstallKeyUnavailableException(InstallKeyPolicy.UNAVAILABLE_MESSAGE)
-            return try { build(ctx.applicationContext, g).also { parts = it; g.succeeded() } } catch (e: Exception) {
-                // logged ONCE per process (no flooding: the gate spaces the attempts 1 min, then 1 h)
-                if (g.failed(countsTowardRegeneration = e is InstallKeyUnavailableException)) Log.w(TAG, "clé d'installation indisponible : nouvel essai dans ${InstallKeyPolicy.delayAfter(1) / 1000} s puis toutes les heures", e)
-                throw e
-            }
-        } finally { lock.unlock() }
-    }
-
-    private fun build(app: Context, g: InstallKeyGate): Parts {
+    private fun build(app: Context): Parts {
         val dir = dir(app)
         val vault = RentalVault(dir)
-        // The installation key (X25519): a NEW key goes under the Android Keystore when its probe works, else (stated) in the clear; a STORED key is always read with the envelope its file
-        // names (KeystoreWrapper.install() for `keystore`, never the plain fallback) and a plain key moves into the Keystore as soon as it works (InstallKeyStore, InstallKeyPolicy).
-        val probeLogged = java.util.concurrent.atomic.AtomicBoolean(false)
-        val wrapper = KeystoreWrapper.orPlain { m, t -> if (g.failuresThisProcess == 0 && probeLogged.compareAndSet(false, true)) Log.w(TAG, m, t) }
-        val keys = InstallKeyStore(dir, wrapper, readers = { label ->
-            when (label) { "keystore" -> KeystoreWrapper.install(); InstallKeyPolicy.PLAIN -> castbridge.core.crypto.PlainWrapper(); else -> null }
-        })
-        try { keys.loadOrCreate() } catch (e: InstallKeyUnavailableException) {
-            // the Keystore has failed over several process starts: give the key up (stated « illisible : demandez la réémission »), the old file is kept aside and retried at every start
-            if (!g.mustRegenerate()) throw e
-            Log.e(TAG, "coffre de clés indisponible depuis plusieurs démarrages : clé d'installation régénérée", e)
-            keys.regenerateAssumingLost()
-        }
-        keys.loadNote?.let { Log.w(TAG, it) }
         val ledger = RentalLedger(dir, TvClock(mono = android.os.SystemClock::elapsedRealtime), RentalConfig(), System::currentTimeMillis)
         ledger.loadNote?.let { Log.e(TAG, it) }
         val rented = TvRentedLots(LotsHub.store(app))
         // Lots a lasting right covers (a lot bought during its rental is kept at expiry). The TV has NO bundle catalogue: OwnedLots resolves only what needs none (owner grants, `tout`), see its doc.
         val owned = { OwnedLots.of(ActivationCenter.allActivations(), ActivationCenter.now(), rented.heldLots()) }
         val sweeper = RentalSweeper(ledger, vault, rented, { ActivationCenter.allActivations() }, owned, System::currentTimeMillis, {}, { k, e -> Log.e(TAG, "balayage de la location $k en échec (nouvel essai au prochain balayage)", e) })
-        return Parts(vault, ledger, sweeper, keys)
+        return Parts(vault, ledger, sweeper)
     }
 
+    /** The installation key's store (nothing touches the Keystore until it is used): a stored key is read by `KeystoreWrapper.install()` (never creates), a new one is made by `creator()`. */
+    private fun keyStore(ctx: Context): InstallKeyStore = keys ?: synchronized(this) {
+        keys ?: InstallKeyStore(dir(ctx), KeystoreWrapper.creator(), readers = { label -> if (label == "keystore") KeystoreWrapper.install() else null }).also { keys = it }
+    }
+
+    private fun mayTry(ks: InstallKeyStore) = ks.state == READY || ks.state == UNREADABLE || gate.mayAttempt()      // READY: cached, UNREADABLE: throws at once, no attempt
+
     /**
-     * Prepares the safe and the installation key (Keystore) on a background thread, so no caller on the main thread ever waits for it. Safe to call often: one thread at a time
-     * ([warming]), and none while the backoff of the gate forbids a new attempt.
+     * The installation key. Never waits more than [waitMs] for another thread, never retries before the backoff of [InstallKeyGate] (1 min, then 1 h, forever) and never retries an
+     * UNREADABLE key (until [resetInstallKey]): it throws instead ([InstallKeyUnavailableException] / [InstallKeyUnreadableException]); callers answer 503 / keep going without it.
+     * Nothing here is called by `TvService.onCreate`.
      */
+    private fun key(ctx: Context, waitMs: Long = 2_000): InstallKey {
+        val ks = keyStore(ctx)
+        if (ks.state == READY) return ks.loadOrCreate()
+        if (!mayTry(ks)) throw InstallKeyUnavailableException(InstallKeyPolicy.UNAVAILABLE_MESSAGE)
+        if (!lock.tryLock(waitMs, java.util.concurrent.TimeUnit.MILLISECONDS)) throw InstallKeyUnavailableException("clé d'installation en préparation")
+        try {
+            if (!mayTry(ks)) throw InstallKeyUnavailableException(InstallKeyPolicy.UNAVAILABLE_MESSAGE)
+            val k = try { ks.loadOrCreate() } catch (e: InstallKeyUnavailableException) {
+                if (gate.failed()) Log.w(TAG, "clé d'installation indisponible : nouvel essai dans ${InstallKeyPolicy.delayAfter(1) / 1000} s puis toutes les heures", e)    // once per process
+                throw e
+            } catch (e: InstallKeyUnreadableException) {
+                if (unreadableLogged.compareAndSet(false, true)) Log.e(TAG, "clé d'installation illisible : réinitialisation par le propriétaire nécessaire", e)
+                throw e
+            }
+            gate.succeeded(); ks.loadNote?.let { Log.w(TAG, it) }
+            replayIfNeeded(ctx, k)
+            return k
+        } finally { lock.unlock() }
+    }
+
+    /** Activations accepted while the key was not ready are installed (their v2 boxes opened) as soon as it is: the ledger skips what is already in place. */
+    private fun replayIfNeeded(ctx: Context, k: InstallKey) {
+        if (!replayNeeded.compareAndSet(true, false)) return
+        val p = parts(ctx); val all = ActivationCenter.allActivations()
+        for (a in all) runCatching { p.ledger.installKeyed(a, all, ActivationCenter.fingerprints(), p.vault, k) }.onFailure { Log.w(TAG, "réinstallation différée d'une activation en échec", it) }
+        Log.w(TAG, "activations enregistrées pendant l'indisponibilité du coffre : locations installées")
+    }
+
+    /** Prepares the key (Keystore) on a background thread, so no caller on the main thread ever waits for it. One thread at a time, none while the backoff forbids a new attempt or the key is unreadable. */
     fun warm(ctx: Context) {
-        if (parts != null) return
-        val app = ctx.applicationContext
-        if (!gate(app).mayAttempt() || !warming.compareAndSet(false, true)) return
-        Thread { try { runCatching { ensure(app, waitMs = 30_000) } } finally { warming.set(false) } }.apply { isDaemon = true; name = "rental-warm" }.start()
+        val app = ctx.applicationContext; val ks = keyStore(app)
+        if (ks.state == READY || ks.state == UNREADABLE || !gate.mayAttempt() || !warming.compareAndSet(false, true)) return
+        Thread { try { runCatching { key(app, waitMs = 30_000) } } finally { warming.set(false) } }.apply { isDaemon = true; name = "rental-warm" }.start()
     }
 
     private fun onMainThread() = android.os.Looper.myLooper() == android.os.Looper.getMainLooper()
 
     /** The installation's public key if it is ready, without ever blocking the main thread (null there while it is being prepared, the warm-up is started). For the device request. */
     fun installPubOrNull(ctx: Context): ByteArray? {
-        parts?.let { p -> return runCatching { p.keys.loadOrCreate().pub }.getOrNull() }
+        val ks = keyStore(ctx)
+        if (ks.state == READY) return runCatching { ks.loadOrCreate().pub }.getOrNull()
         if (onMainThread()) { warm(ctx); return null }
-        return runCatching { ensure(ctx).keys.loadOrCreate().pub }.getOrNull()
+        return runCatching { key(ctx).pub }.getOrNull()
     }
 
-    /** `installKeyProtection` of `GET /api/activation`: `keystore` / `plain` once ready, `unavailable` after a failed attempt, `pending` while being prepared. Never blocks. */
-    fun protectionStatus(ctx: Context): String {
-        val p = parts
-        if (p == null) warm(ctx)
-        return InstallKeyPolicy.protection(p?.keys?.protection, gate(ctx).failuresThisProcess)
-    }
+    /** `installKeyProtection` of `GET /api/activation`: `keystore` / `pending` / `unavailable` / `unreadable`. Never blocks (starts the warm-up when useful). */
+    fun protectionStatus(ctx: Context): String { warm(ctx); return keyStore(ctx).state.protection }
 
     /** The installation id once the key is ready, "" otherwise. Never blocks. */
-    fun installIdOrEmpty(): String = parts?.let { p -> runCatching { p.keys.loadOrCreate().installId }.getOrNull() }.orEmpty()
-
-    /** This installation's key pair (works locked or trial: nothing here needs the core to be started). A key lost for good gives a new one; a key that cannot be read FOR NOW (Keystore) throws, may block up to 2 s: never on the main thread. */
-    fun installKey(ctx: Context): InstallKey = ensure(ctx).keys.loadOrCreate()
+    fun installIdOrEmpty(ctx: Context): String = keyStore(ctx).takeIf { it.state == READY }?.let { runCatching { it.loadOrCreate().installId }.getOrNull() }.orEmpty()
 
     /** The rental safe, for the sealed lots of the other hubs. */
-    fun vault(ctx: Context): RentalVault = ensure(ctx).vault
+    fun vault(ctx: Context): RentalVault = parts(ctx).vault
 
     /**
-     * An activation was accepted: the keys of its usable rentals go into the safe (a swept or ended contract is never reopened). The installation key IS passed to the ledger, which
-     * enforces the v1 box sunset from then on ([installKeyed]). Returns the French notes worth showing (a box for another installation, a refused v1 box, a regenerated key).
+     * An activation was accepted (and stored): the keys of its usable rentals go into the safe (a swept or ended contract is never reopened), the installation key IS passed to the ledger, which
+     * enforces the v1 box sunset ([installKeyed]). While the key is not ready the activation stays stored, [replayIfNeeded] installs it as soon as the key is, and the note says so.
+     * Returns the French notes worth showing (a box for another installation, a refused v1 box, the key's state).
      */
     fun onActivation(ctx: Context, a: Activation): List<String> {
-        val p = ensure(ctx)
-        val result = p.ledger.installKeyed(a, ActivationCenter.allActivations(), ActivationCenter.fingerprints(), p.vault, p.keys.loadOrCreate())
-        // the key's load note is cached for the whole process: said once, not at every activation
-        val keyNote = p.keys.loadNote?.takeIf { "illisible" in it && noteTaken.compareAndSet(false, true) }?.let { "$it : demandez la réémission des locations" }
-        val notes = RentalNotes.of(result) + listOfNotNull(keyNote)
+        val p = parts(ctx)
+        val k = try { key(ctx) } catch (e: InstallKeyUnreadableException) { replayNeeded.set(true); return listOf(InstallKeyPolicy.UNREADABLE_MESSAGE) }
+            catch (e: InstallKeyUnavailableException) { replayNeeded.set(true); warm(ctx); return listOf("coffre de clés indisponible : l'activation est enregistrée, ses locations seront installées dès que le coffre répondra") }
+        val notes = RentalNotes.of(p.ledger.installKeyed(a, ActivationCenter.allActivations(), ActivationCenter.fingerprints(), p.vault, k))
         notes.forEach { Log.w(TAG, it) }
         return notes
     }
 
-    /** The state of every rental, for the access computation and the screens. */
-    fun statuses(ctx: Context): List<RentalStatus> = runCatching {
-        // never block the main thread on the first generation of the Keystore key: nothing yet, and the background warm-up is started
-        if (parts == null && onMainThread()) { warm(ctx); return@runCatching emptyList<RentalStatus>() }
-        ensure(ctx).ledger.status(ActivationCenter.allActivations())
-    }.getOrDefault(emptyList())
+    /**
+     * EXPLICIT owner reset of the installation key (route POST /api/activation/install-key/reset, behind the TV's authentication): the files are renamed `.reset-<ms>`, never deleted, a fresh
+     * key is made and the activations stored meanwhile are installed again. Returns the note « clé d'installation réinitialisée : réémettez les locations ». Throws when the Keystore is unavailable.
+     */
+    fun resetInstallKey(ctx: Context): String {
+        val ks = keyStore(ctx)
+        if (!lock.tryLock(30, java.util.concurrent.TimeUnit.SECONDS)) throw InstallKeyUnavailableException("clé d'installation en préparation")
+        try {
+            val note = ks.reset(); Log.w(TAG, note)
+            gate.succeeded(); unreadableLogged.set(false); replayNeeded.set(true); replayIfNeeded(ctx, ks.loadOrCreate())
+            return note
+        } finally { lock.unlock() }
+    }
 
-    /** The deletion at the end of a rental: the French notices to show, if any. Safe to call often (idempotent). */
+    /** The state of every rental, for the access computation and the screens (works whatever the state of the installation key). */
+    fun statuses(ctx: Context): List<RentalStatus> = runCatching { parts(ctx).ledger.status(ActivationCenter.allActivations()) }.getOrDefault(emptyList())
+
     /**
      * One minute of USE: called every minute while « Apprendre » is open. The minute is counted on a rental that has a usage ceiling (the trial key's 12 h window) and holds a lot, so the
      * window runs out by reading, not by the calendar. Past the ceiling the next sweep deletes the lots. Returns the statuses after counting.
      */
     fun meterOneMinute(ctx: Context): List<RentalStatus> = runCatching {
-        val p = ensure(ctx); val acts = ActivationCenter.allActivations()
+        val p = parts(ctx); val acts = ActivationCenter.allActivations()
         val lot = p.ledger.status(acts).filter { it.contract.maxUsageMinutes > 0 && it.usable }
             .firstNotNullOfOrNull { s -> p.ledger.rentedLots(s.key).firstNotNullOfOrNull { castbridge.core.lots.LotNames.parseKey(it) } } ?: return@runCatching emptyList()
         p.ledger.recordUsage(lot, 1, acts).also { if (it.any { s -> s.state == castbridge.core.lots.RentalState.EXPIRED }) sweep(ctx, SweepTrigger.LEARN_SCREEN, lessonActive = true) }
     }.getOrDefault(emptyList())
 
-    fun sweep(ctx: Context, trigger: SweepTrigger, lessonActive: Boolean = false): List<String> =
-        runCatching { ensure(ctx).sweeper.sweep(trigger, lessonActive).notices }.getOrDefault(emptyList())
+    /** The deletion at the end of a rental: the French notices to show, if any. Safe to call often (idempotent); also gives a pending key another chance (backoff permitting). */
+    fun sweep(ctx: Context, trigger: SweepTrigger, lessonActive: Boolean = false): List<String> {
+        if (replayNeeded.get()) warm(ctx)
+        return runCatching { parts(ctx).sweeper.sweep(trigger, lessonActive).notices }.getOrDefault(emptyList())
+    }
 
     /**
      * Routes: GET /api/rental, POST /api/rental/install, POST /api/rental/sweep, POST /api/activation/install (PIN only: the body is an activation, rentals included). Built LAZILY: nothing
-     * here touches the Keystore when the server is set up (`TvService.onCreate`); a rental route whose key cannot be read answers 503 « coffre de clés indisponible » ([LazyKeyedApi]).
+     * here touches the Keystore (the rental routes do not need the installation key); a route whose parts cannot be built answers 503 « coffre de clés indisponible » ([LazyKeyedApi]).
      */
     fun api(ctx: Context): ApiExtension {
         val app = ctx.applicationContext
         return LazyKeyedApi(setOf("/api/rental", "/api/rental/install", "/api/rental/sweep"), setOf("/api/rental/install")) {
-            val p = ensure(app)
+            val p = parts(app)
             RentalApi(LotsHub.store(app), p.ledger, p.vault, { ActivationCenter.allActivations() }, p.sweeper)
         }.then(ActivationInstallApi(app))
     }

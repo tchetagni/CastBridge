@@ -839,7 +839,12 @@ class TvService : Service(), Device {
             g.diagnose(host) { l -> lines += l; act?.let { a -> main.post { a.appendDiag(l) } } }
             ApiReply(200, "{\"host\":${ReceiverServer.q(host)},\"lines\":[" + lines.joinToString(",") { ReceiverServer.q(it) } + "]}")
         } ?: ApiReply(409, """{"error":"passerelle non démarrée"}""")
-        path == "/api/activation" && method == "GET" -> { ActivationCenter.init(this); ApiReply(200, "{\"required\":${BuildConfig.REQUIRE_ACTIVATION},\"locked\":${ActivationCenter.locked()},\"label\":${ReceiverServer.q(ActivationCenter.label())},\"code\":${ReceiverServer.q(ActivationCenter.requestText().lineSequence().first().removePrefix("code="))},\"ownerChannel\":${ownerBt != null}${ActivationCenter.statusFields()},\"installKeyProtection\":${ReceiverServer.q(RentalHub.protectionStatus(this))},\"installId\":${ReceiverServer.q(RentalHub.installIdOrEmpty())},\"remoteAssist\":${ReceiverServer.q(TunnelHub.statusLine(this))}}") }
+        path == "/api/activation" && method == "GET" -> { ActivationCenter.init(this); ApiReply(200, "{\"required\":${BuildConfig.REQUIRE_ACTIVATION},\"locked\":${ActivationCenter.locked()},\"label\":${ReceiverServer.q(ActivationCenter.label())},\"code\":${ReceiverServer.q(ActivationCenter.requestText().lineSequence().first().removePrefix("code="))},\"ownerChannel\":${ownerBt != null}${ActivationCenter.statusFields()},\"installKeyProtection\":${ReceiverServer.q(RentalHub.protectionStatus(this))},\"installId\":${ReceiverServer.q(RentalHub.installIdOrEmpty(this))},\"remoteAssist\":${ReceiverServer.q(TunnelHub.statusLine(this))}}") }
+        // EXPLICIT owner reset of the installation key (PIN only: TvAuth keeps every /api/activation/install* path for the PIN; closed in the trial). The old files are renamed, never deleted.
+        path == "/api/activation/install-key/reset" && method == "POST" ->
+            if (params["confirm"] != "RESET") ApiReply(400, """{"error":"confirm=RESET requis : la réinitialisation rend les locations existantes inutilisables"}""")
+            else try { ApiReply(200, """{"reset":true,"note":${ReceiverServer.q(RentalHub.resetInstallKey(this))}}""") }
+            catch (e: castbridge.core.lots.InstallKeyUnavailableException) { ApiReply(503, """{"error":${ReceiverServer.q(castbridge.core.lots.InstallKeyPolicy.UNAVAILABLE_MESSAGE)}}""") }
         path == "/api/bluetooth" && method == "GET" -> bt?.let { ApiReply(200, it.stateJson(statuses["1-bt"])) }
         path == "/api/bluetooth/discoverable" && method == "POST" -> {
             if (bt?.hasPermission() == true) bt?.start()

@@ -34,8 +34,8 @@ object TrialPolicy {
         "/api/server", "/api/server/me", "/api/server/url", "/api/server/contact")
     private val PREFIXES = listOf("/api/activation", "/api/rental", "/api/lots", "/api/learn", "/api/sudoku", "/api/player", "/api/remote", "/api/bluetooth/tunnel", "/api/gateway",
         "/api/parental", "/api/content/reports")
-    /** Under an allowed prefix but still closed: the subtitle of a stored file, and « Apprendre » pack installs/imports (an import reads a pack from the TV's storage; the trial gets its lots through /api/lots). */
-    private val DENIED_UNDER_ALLOWED = setOf("/api/player/subfile", "/api/learn/packs/import", "/api/learn/packs/install")
+    /** Under an allowed prefix but still closed: the subtitle of a stored file, the owner's reset of the installation key, and « Apprendre » pack installs/imports (an import reads a pack from the TV's storage; the trial gets its lots through /api/lots). */
+    private val DENIED_UNDER_ALLOWED = setOf("/api/player/subfile", "/api/learn/packs/import", "/api/learn/packs/install", "/api/activation/install-key/reset")
 
     fun routeAllowed(path: String): Boolean {
         if (path.contains("..") || path.contains("//") || path.contains('\\') || path.contains('%')) return false

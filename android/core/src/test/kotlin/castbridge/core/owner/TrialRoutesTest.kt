@@ -46,7 +46,7 @@ class TrialRoutesTest {
         "/api/storage/check", "/api/storage/move/cancel", "/api/storage/open-settings", "/api/storage/rescan", "/api/trash/empty", "/api/trash/purge", "/api/trash/restore",
         "/api/transfer/begin", "/api/transfer/chunk", "/api/transfer/state", "/api/transfer/finish", "/api/transfer/abort",
         "/api/server/check-update", "/api/server/quiz-sync", "/api/chess", "/api/chess/open", "/quiz", "/quiz/api/join", "/chess", "/chess/api/state", "/stream/film.mp4", "/stream/",
-        "/api/player/subfile", "/api/learn/packs/import", "/api/learn/packs/install", "/api/new-future-route", "/api/hello/../ssh", "/api//ssh", "/api/%73sh", "/admin", "/api")
+        "/api/activation/install-key/reset", "/api/player/subfile", "/api/learn/packs/import", "/api/learn/packs/install", "/api/new-future-route", "/api/hello/../ssh", "/api//ssh", "/api/%73sh", "/admin", "/api")
 
     @Test fun routeTable() {
         for (r in allowed) assertTrue(TrialPolicy.routeAllowed(r), "allowed: $r")
