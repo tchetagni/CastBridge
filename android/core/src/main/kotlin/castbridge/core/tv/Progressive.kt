@@ -28,7 +28,10 @@ object Meta {
  *   `<name>.part` is renamed to `<name>`, reading carries on without a stale descriptor.
  * - A byte that has not arrived yet makes [read] **block** (polling every [pollMs]) until it does; after
  *   [waitMs] without progress it throws [IOException], which cuts the HTTP connection cleanly (the
- *   player reconnects with a Range request and waits again).
+ *   player reconnects with a Range request and waits again). While [stillComing] says the copy is alive,
+ *   the wait goes on (polite buffering instead of a cut), never more than [maxWaitMs] in all.
+ * - It never reads past [available]: the bytes present from the start without a hole (the file length for
+ *   an append-only `.part`; a block-written file must give its contiguous prefix instead).
  * - Nothing is buffered in memory beyond the caller's array.
  */
 class GrowingStream(
@@ -42,9 +45,16 @@ class GrowingStream(
     private val clock: () -> Long = System::currentTimeMillis,
     /** False once the volume holding the file is gone (drive pulled): the read then fails at once instead of waiting. */
     private val alive: () -> Boolean = { true },
+    private val available: (File) -> Long = { it.length() },
+    private val stillComing: () -> Boolean = { false },
+    private val maxWaitMs: Long = waitMs,
+    /** True once the HTTP client has hung up (checked while waiting for bytes, about once a second). */
+    private val clientGone: () -> Boolean = { false },
+    /** Longest wait once the copy is no longer coming ([stillComing] false): the player is told sooner than [waitMs] that nothing more will arrive. */
+    private val deadWaitMs: Long = waitMs,
 ) : InputStream() {
     private var pos = start
-    private var closed = false
+    @Volatile private var closed = false
 
     override fun read(): Int {
         val b = ByteArray(1)
@@ -56,7 +66,9 @@ class GrowingStream(
         if (len == 0) return 0
         if (pos > end) return -1
         val want = minOf(len.toLong(), BLOCK.toLong(), end - pos + 1).toInt()
-        var deadline = clock() + waitMs
+        val waitStart = clock()
+        var lastHope = waitStart
+        var lastProbe = waitStart
         var missingSince = -1L
         while (true) {
             if (closed) throw IOException("closed")
@@ -70,7 +82,7 @@ class GrowingStream(
                 sleep(20); continue
             }
             missingSince = -1
-            val avail = src.length()
+            val avail = minOf(src.length(), available(src))
             if (avail > pos) {
                 try {
                     RandomAccessFile(src, "r").use { f ->
@@ -80,14 +92,20 @@ class GrowingStream(
                     }
                 } catch (e: java.io.FileNotFoundException) { continue }   // renamed just now: look again by name
             }
-            if (clock() >= deadline) throw IOException("timeout waiting for upload at byte $pos")
+            val t = clock()
+            val coming = runCatching(stillComing).getOrDefault(false)
+            if (coming) lastHope = t
+            // the copy is dead (nothing written for a while): the player is told after [deadWaitMs], not after the long patience owed to a live copy
+            if (t - lastHope >= (if (coming) waitMs else deadWaitMs) || t - waitStart >= maxOf(waitMs, maxWaitMs)) throw IOException("timeout waiting for upload at byte $pos")
+            // the player hung up (seek, stop): nobody will read these bytes, free the thread now
+            if (t - lastProbe >= PROBE_MS) { lastProbe = t; if (runCatching(clientGone).getOrDefault(false)) throw IOException("client gone") }
             sleep(pollMs)
         }
     }
 
     override fun close() { closed = true }
 
-    companion object { const val BLOCK = 64 * 1024 }
+    companion object { const val BLOCK = 64 * 1024; const val PROBE_MS = 1000L }
 }
 
 /** Thresholds and limits for progressive playback (pure functions). */

@@ -57,6 +57,8 @@ class BlockMap(val blocks: Int) {
     @Synchronized fun count() = bits.cardinality()
     @Synchronized fun complete() = bits.cardinality() == blocks
     @Synchronized fun missing(): List<Int> = (0 until blocks).filter { !bits.get(it) }
+    /** Blocks done from block 0 without a hole: what a reader of the growing file may read. */
+    @Synchronized fun leading(): Int = bits.nextClearBit(0).coerceAtMost(blocks)
 
     @Synchronized fun toHex(): String {
         val bytes = ByteArray((blocks + 7) / 8)

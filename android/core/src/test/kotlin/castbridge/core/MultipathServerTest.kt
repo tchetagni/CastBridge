@@ -185,7 +185,7 @@ class MultipathServerTest {
         assertEquals(400, raw("POST", "/api/transfer/begin?name=a.bin&size=10&blockSize=100"))
         assertEquals(400, raw("POST", "/api/transfer/begin?name=..%2Fa.bin&size=10&blockSize=1048576"))
         assertEquals(404, raw("GET", "/api/transfer/state?id=nope"))
-        assertEquals(404, raw("POST", "/api/transfer/finish?id=nope&root=x"))
+        assertEquals(503, raw("POST", "/api/transfer/finish?id=nope&root=x"))     // not 404 (the phone would take it for a refusal): 503 makes it resume by begin
         val b = api.begin(Manifest("f.bin", 2 * MiB, MiB.toInt()), null)
         assertTrue(api.finish(b.id, "0".repeat(64)) is TransferApi.Finish.Missing)
         val c = URL(r.base + "/api/transfer/chunk?id=${b.id}&idx=0").openConnection() as HttpURLConnection

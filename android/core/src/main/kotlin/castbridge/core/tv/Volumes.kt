@@ -250,8 +250,12 @@ open class FileStore(override val volume: StorageVolume, private val free: () ->
     override fun finalSize(name: String): Long? = f(name).takeIf { it.isFile }?.length()
     override fun partSize(name: String): Long = p(name).takeIf { it.isFile }?.length() ?: 0
     override fun openPart(name: String): OutputStream = FileOutputStream(File(dir, diskName(name) + Storage.PART), true)
-    override fun syncPart(name: String): Boolean =
-        runCatching { RandomAccessFile(File(dir, diskName(name) + Storage.PART), "rw").use { it.fd.sync() }; true }.getOrDefault(false)
+    /** fsync of the partial copy if it still exists: opened read-only, so a late call (the part was renamed meanwhile) never creates an empty `.part`. */
+    override fun syncPart(name: String): Boolean {
+        val f = File(dir, diskName(name) + Storage.PART)
+        if (!f.isFile) return false
+        return runCatching { RandomAccessFile(f, "r").use { it.fd.sync() }; true }.getOrDefault(false)
+    }
     override fun commit(name: String) {
         val part = File(dir, diskName(name) + Storage.PART)
         RandomAccessFile(part, "rw").use { it.fd.sync() }   // on every kind of volume: the data must be on the medium before the rename (and, for a move, before the source goes)

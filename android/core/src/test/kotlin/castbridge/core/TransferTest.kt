@@ -101,8 +101,9 @@ class OneGigRuleServerTest {
 
 class DownloadTest {
     private val dir = kotlin.io.path.createTempDirectory("dl").toFile()
-    private val port = ServerSocket(0).use { it.localPort }
-    private val server = ReceiverServer(VolumeRegistry.single(File(dir, "tv")), FakePlayer(), port, pin = "123456").apply { start(5000, false) }
+    // port 0: the server binds a free port itself (no close-then-reuse race: the fragile ServerSocket(0).use{}.localPort pattern is gone)
+    private val server = ReceiverServer(VolumeRegistry.single(File(dir, "tv")), FakePlayer(), 0, pin = "123456").apply { start(5000, false) }
+    private val port = server.listeningPort
     private val base = "http://127.0.0.1:$port"
     private val data = Random(7).nextBytes(2_500_000)
     private val out = File(dir, "phone.bin")
@@ -131,7 +132,8 @@ class DownloadTest {
     @Test fun downloadResumesWithRangeAfterACut() {
         File(dir, "tv/film.mp4").writeBytes(data)
         val states = ArrayList<ResumableDownload.State>()
-        val d = ResumableDownload("film.mp4", { base }, "123456", { if (out.exists()) out.length() else 0 }, sink(failAfter = 1_000_000), sleep = { })
+        // a real (short) pause between two attempts: with `sleep = { }` the 60 attempts were burnt in a few ms under the load of the whole suite
+        val d = ResumableDownload("film.mp4", { base }, "123456", { if (out.exists()) out.length() else 0 }, sink(failAfter = 1_000_000), sleep = { Thread.sleep(20) })
         val res = d.run { states += it }
         assertEquals(ResumableDownload.State.Done(data.size.toLong()), res)
         assertContentEquals(data, out.readBytes())

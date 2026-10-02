@@ -7,7 +7,8 @@ import java.util.concurrent.ConcurrentHashMap
 
 /** Where the TV puts a new transfer: a real folder of a volume. null from the allocator = refused (see [Allocation.Refused]). */
 sealed class Allocation {
-    class At(val dir: File, val diskName: String, val volumeId: String) : Allocation()
+    /** [preallocate]: size the data file at once (free on ext4/f2fs; on FAT/exFAT the kernel would write zeros over the whole size first, see [PartAssembler.preallocates]). */
+    class At(val dir: File, val diskName: String, val volumeId: String, val preallocate: Boolean = true) : Allocation()
     class Refused(val http: Int, val message: String) : Allocation()
 }
 
@@ -22,7 +23,13 @@ class TransferHost(
     private val now: () -> Long = System::currentTimeMillis,
 ) {
     class Session(val manifest: Manifest, val assembler: PartAssembler, val diskName: String, val volumeId: String, val dir: File) {
-        @Volatile var finishing = false
+        private val fin = java.util.concurrent.atomic.AtomicBoolean(false)
+        /** A `finish` is verifying right now (a second one is answered « verifying » at once instead of waiting for the lock). */
+        var finishing: Boolean
+            get() = fin.get()
+            set(v) = fin.set(v)
+        /** True for the one caller that may verify now; the others must not wait. */
+        fun tryBeginFinish(): Boolean = fin.compareAndSet(false, true)
     }
     private val sessions = ConcurrentHashMap<String, Session>()
     val stats = WriteStats()
@@ -52,14 +59,34 @@ class TransferHost(
         if (a is Allocation.Refused) return Begin.Refused(a.http, a.message)
         a as Allocation.At
         return try {
-            val asm = PartAssembler.open(a.dir, m, stats, now)
+            val asm = PartAssembler.open(a.dir, m, stats, now, preallocate = a.preallocate, persistEveryMs = { persistEveryMs() })
             val s = Session(m, asm, a.diskName, a.volumeId, a.dir)
             val prev = sessions.putIfAbsent(m.id, s)
             if (prev != null) { asm.close(); Begin.Ok(prev, true) } else Begin.Ok(s, asm.map.count() > 0)
         } catch (e: IOException) { Begin.Refused(507, e.message ?: "disk error") }
     }
 
+    /** Concurrent chunk requests the TV accepts right now ([PlaybackGovernor]: fewer while a video plays); clamped to 1..[maxStreams]. */
+    @Volatile var streamLimit: () -> Int = { maxStreams }
+    fun allowedStreams(): Int = runCatching(streamLimit).getOrDefault(maxStreams).coerceIn(1, maxStreams)
+    /** Interval between two saves of a block map ([PlaybackGovernor]: spaced out while a video plays). */
+    @Volatile var persistEveryMs: () -> Long = { 1000L }
+
     fun session(id: String): Session? = sessions[id]
+
+    /**
+     * Head first: on a volume where the data file is NOT preallocated, a block far beyond the contiguous prefix would make the kernel zero-fill the gap
+     * synchronously (the phone's 20 s watchdog trips, the copy stalls): it is refused (429 busy, the phone retries) until the prefix catches up.
+     * Always true when the file was sized at once (ext4/f2fs: sparse, free) and for a block behind the prefix (a resend).
+     */
+    fun admitAhead(s: Session, idx: Int): Boolean {
+        if (s.assembler.preallocated || s.assembler.discard) return true
+        val m = s.manifest
+        val contiguous = minOf(s.assembler.map.leading().toLong() * m.blockSize, m.size)
+        return PlaybackPriority.admitAhead(m.offset(idx), contiguous, PlaybackPriority.headWindow(m.blockSize, maxStreams))
+    }
+    /** A `finish` of [name] is reading the file back right now, whatever session object (block size) started it. */
+    fun finishingName(name: String): Boolean = sessions.values.any { it.finishing && it.manifest.name == name }
     fun hasName(name: String): Boolean = sessions.values.any { it.manifest.name == name }
 
     /** True if one more block of [blockBytes] may be taken now (back-pressure). */
@@ -101,7 +128,7 @@ class TransferHost(
         val m = s.manifest; val a = s.assembler
         return "{\"id\":\"${m.id}\",\"name\":${q(m.name)},\"size\":${m.size},\"blockSize\":${m.blockSize},\"blocks\":${m.blocks}," +
             "\"done\":${a.map.count()},\"map\":\"${a.map.toHex()}\",\"volume\":${q(s.volumeId)}," +
-            "\"writeBps\":${stats.bytesPerSec()},\"queued\":${stats.queued()},\"maxStreams\":$maxStreams,\"ready\":${a.map.complete()}" + (note(s)?.let { ",\"note\":${q(it)}" } ?: "") +
+            "\"contiguous\":${minOf(a.map.leading().toLong() * m.blockSize, m.size)},\"writeBps\":${stats.bytesPerSec()},\"queued\":${stats.queued()},\"maxStreams\":${allowedStreams()},\"ordered\":${!a.preallocated},\"ready\":${a.map.complete()}" + (note(s)?.let { ",\"note\":${q(it)}" } ?: "") +
             (if (withHashes) ",\"hashes\":\"${a.hashesJoined()}\"" else "") + "}"
     }
 

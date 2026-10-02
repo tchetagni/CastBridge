@@ -198,7 +198,7 @@ class PlayerActivity : Activity(), TvService.Screen {
         // The screen is gone: give libVLC back (the service keeps serving). Back in front = the library.
         if (mp != null && !isChangingConfigurations) {
             playbackEnd(abandoned = true)
-            current = null; snapshot = PlayerState(); releasePlayer(); reopen = null
+            current = null; snapshot = PlayerState(); releasePlayer(); reopen = null; policyChanged()
             if (::extras.isInitialized) extras.forget()
             main.post { if (home != null) showHome() }
         }
@@ -261,8 +261,14 @@ class PlayerActivity : Activity(), TvService.Screen {
     }
 
     private fun update(state: String) {
+        val was = snapshot.state
         snapshot = snapshot.copy(state = state, name = current?.name ?: snapshot.name)
+        if (active(was) != active(state)) policyChanged()
     }
+
+    private fun active(state: String) = state == "playing" || state == "buffering"
+    /** « La lecture d'abord » (castbridge.core.xfer.PlaybackPriority): the server re-reads the player's state at once, on its own thread. */
+    private fun policyChanged() { runCatching { server?.playbackChanged() } }
 
     /** The player, created on demand; re-created when the subtitle engine must be switched on or off ([spu]). */
     private fun ensurePlayer(spu: Boolean = false): MediaPlayer {
@@ -359,7 +365,7 @@ class PlayerActivity : Activity(), TvService.Screen {
         super.onTrimMemory(level)
         // Not playing (paused/ended/idle) and the system wants memory back: give the whole player back.
         if (level >= TRIM_MEMORY_UI_HIDDEN && snapshot.state != "playing" && mp != null) {
-            current = null; snapshot = PlayerState(); releasePlayer()
+            current = null; snapshot = PlayerState(); releasePlayer(); policyChanged()
         }
     }
 
@@ -868,6 +874,8 @@ class PlayerActivity : Activity(), TvService.Screen {
         val p = ensurePlayer(extras.wantsSpu())
         streamingName = null
         val m = Media(libVlc!!, file.absolutePath)
+        // a copy writes to the disk this file is read from: more read-ahead rides out its write bursts (400 ms at rest, see PlaybackPriority)
+        m.addOption(":file-caching=${castbridge.core.xfer.PlaybackPriority.fileCachingMs(receiving = (server?.activeTransfers() ?: 0) > 0)}")
         configure(m, posMs)
         p.media = m
         m.release()
@@ -875,7 +883,7 @@ class PlayerActivity : Activity(), TvService.Screen {
         closeSafFd()
         hideScreens()
         enterScreen("player")
-        snapshot = PlayerState("playing", file.name, posMs, 0)
+        snapshot = PlayerState("playing", file.name, posMs, 0); policyChanged()
         flash("▶ ${file.name}")
     }
 
@@ -900,7 +908,7 @@ class PlayerActivity : Activity(), TvService.Screen {
         runCatching { old?.close() }
         hideScreens()
         enterScreen("player")
-        snapshot = PlayerState("playing", name, posMs, 0)
+        snapshot = PlayerState("playing", name, posMs, 0); policyChanged()
         flash("▶ $name")
     }
 
@@ -916,7 +924,8 @@ class PlayerActivity : Activity(), TvService.Screen {
         val p = ensurePlayer(extras.wantsSpu())
         streamingName = name
         val m = Media(libVlc!!, Uri.parse(url))
-        m.addOption(":network-caching=1200")   // enough to ride out upload hiccups, still modest in RAM
+        // a file still arriving: 3 s of cache rides out a write burst or a Wi-Fi dip; a plain link keeps 1.2 s (RAM)
+        m.addOption(":network-caching=${castbridge.core.xfer.PlaybackPriority.networkCachingMs(growing = total > 0)}")
         m.addOption(":http-reconnect")         // the server cuts the link after 30 s without data: reconnect and wait again
         configure(m, posMs)
         p.media = m
@@ -925,7 +934,7 @@ class PlayerActivity : Activity(), TvService.Screen {
         closeSafFd()
         hideScreens()
         enterScreen("player")
-        snapshot = PlayerState("playing", name, posMs, 0)
+        snapshot = PlayerState("playing", name, posMs, 0); policyChanged()
         flash(if (total > 0) "▶ $name (lecture pendant l'envoi)" else "▶ $name")   // total 0: a link played from the phone
     }
 

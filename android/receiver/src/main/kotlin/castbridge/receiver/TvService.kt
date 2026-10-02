@@ -269,7 +269,9 @@ class TvService : Service(), Device {
             contentFlags = castbridge.core.library.agent.EngineContentFlags(ParentalHub.engine), folders = folderIndex,
             // « Rangement à la réception » (docs/STORAGE.md): received files go to real category folders under a clean name; setting "file_on_receive", on by default
             filingLang = { if (prefs.getBool("file_on_receive", true)) "fr" else null },
-            sourceName = { a -> trust.get(a)?.name })
+            sourceName = { a -> trust.get(a)?.name },
+            // « la lecture d'abord »: a copy's threads go to the background while a video plays (docs/agent-reports/fluid-playback-during-copy.md)
+            receivePriority = ReceivePriority)
         try {
             s.start(15_000, false); server = s
         } catch (e: Exception) {

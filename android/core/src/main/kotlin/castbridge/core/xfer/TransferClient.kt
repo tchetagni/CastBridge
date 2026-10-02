@@ -8,10 +8,12 @@ import java.net.URL
 /** The small calls of the protocol (begin, state, finish). Chunks travel on the lanes. */
 interface TransferApi {
     class Caps(val version: Int, val maxStreams: Int)
-    class Begin(val done: Boolean, val id: String, val map: BlockMap, val hashes: List<String>, val writeBps: Long, val maxStreams: Int, val volume: String, val note: String? = null)
+    class Begin(val done: Boolean, val id: String, val map: BlockMap, val hashes: List<String>, val writeBps: Long, val maxStreams: Int, val volume: String, val note: String? = null, val ordered: Boolean = false)
     sealed class Finish { object Done : Finish(); class Missing(val map: BlockMap) : Finish(); class Corrupt(val map: BlockMap) : Finish(); class Refused(val message: String) : Finish() }
     /** A refusal that no retry fixes (no room, name refused, bad credential...); [message] is for the user. */
     class Refused(val http: Int, override val message: String) : IOException(message)
+    /** The TV is reading the file back (503 `verifying`): not a failure, ask again after [retryMs] (by `begin`, which answers at once meanwhile). */
+    class Verifying(val retryMs: Long) : IOException("la TV vérifie encore le fichier")
 
     /** null = this TV does not know the protocol: send the old way. */
     fun caps(): Caps?
@@ -44,6 +46,7 @@ class HttpTransferApi(private val baseOf: () -> String?, private val credential:
 
     override fun begin(m: Manifest, target: String?, discard: Boolean): TransferApi.Begin {
         val (code, body) = call("POST", "/api/transfer/begin?name=${TvClient.enc(m.name)}&size=${m.size}&blockSize=${m.blockSize}" + (target?.let { "&target=${TvClient.enc(it)}" } ?: "") + if (discard) "&discard=1" else "")
+        if (code == 503 && "verifying" in body) throw TransferApi.Verifying(TvClient.num(body, "retryMs") ?: 2000)
         if (code in 500..599 && code != 507) throw IOException("TV : $code ${body.take(80)}")
         if (code != 200) throw TransferApi.Refused(code, TvClient.str(body, "message") ?: TvClient.str(body, "error") ?: "refusé par la TV ($code)")
         return parse(m, body)!!
@@ -60,6 +63,8 @@ class HttpTransferApi(private val baseOf: () -> String?, private val credential:
         val (code, body) = call("POST", "/api/transfer/finish?id=$id&root=$root")
         return when {
             code == 200 -> TransferApi.Finish.Done
+            // the TV is still verifying (a first call is reading the file back) or lost the session: neither is a refusal, the phone resumes by begin
+            code == 503 || code == 404 -> { if ("verifying" in body) throw TransferApi.Verifying(TvClient.num(body, "retryMs") ?: 2000) else throw IOException("TV : transfert à reprendre ($code)") }
             code == 409 -> TransferApi.Finish.Missing(parseState(body)?.map ?: BlockMap(0))
             code == 422 -> TransferApi.Finish.Corrupt(parseState(body)?.map ?: BlockMap(0))
             code in 400..499 -> TransferApi.Finish.Refused(TvClient.str(body, "message") ?: TvClient.str(body, "error") ?: "refusé ($code)")
@@ -77,7 +82,7 @@ class HttpTransferApi(private val baseOf: () -> String?, private val credential:
         val blocks = TvClient.num(body, "blocks")?.toInt() ?: return null
         val map = BlockMap.fromHex(blocks, TvClient.str(body, "map") ?: "")
         val hashes = (TvClient.str(body, "hashes") ?: "").let { if (it.isEmpty()) emptyList() else it.split(',') }
-        return TransferApi.Begin(false, TvClient.str(body, "id") ?: "", map, hashes, TvClient.num(body, "writeBps") ?: 0, (TvClient.num(body, "maxStreams") ?: 4).toInt(), TvClient.str(body, "volume") ?: "", TvClient.str(body, "note"))
+        return TransferApi.Begin(false, TvClient.str(body, "id") ?: "", map, hashes, TvClient.num(body, "writeBps") ?: 0, (TvClient.num(body, "maxStreams") ?: 4).toInt(), TvClient.str(body, "volume") ?: "", TvClient.str(body, "note"), body.contains("\"ordered\":true"))
     }
 }
 
@@ -125,13 +130,13 @@ class TransferClient(
             attempts++
             val b = try { api.begin(m, target, discard) }
                 catch (e: TransferApi.Refused) { return if (e.http == 501) Result.Unsupported else Result.Failed(e.message ?: "refusé") }
-                catch (e: IOException) { onWaiting(castbridge.core.trust.LinkText.failure(e)); sleep(retryDelayMs); continue }
+                catch (e: IOException) { onWaiting(castbridge.core.trust.LinkText.failure(e)); sleep(retryWait(e)); continue }
             if (b.done) { onProgress(m.size, m.size); return Result.Done }
             val hashes = HashBook(m, source)
             val full = try { api.state(b.id, withHashes = true) } catch (e: IOException) { null } ?: b
             full.hashes.forEachIndexed { i, h -> if (i < m.blocks && full.map.has(i)) hashes.preload(i, h) }
             val ls = lanes(b.id, minOf(caps.maxStreams, b.maxStreams))
-            val sched = Scheduler(m, full.map, ls, { c -> SendContext(m, source, hashes, c, compress) }, object : Scheduler.Listener() {
+            val sched = Scheduler(m, full.map, ls, { c -> SendContext(m, source, hashes, c, compress) }, slowFromHead = full.ordered || b.ordered, listener = object : Scheduler.Listener() {
                 override fun progress(doneBytes: Long, total: Long) { onProgress(doneBytes, total) }
                 override fun waiting(reason: String) { onWaiting(reason) }
                 override fun laneEvent(lane: String, what: String) { onEvent("$lane : $what") }
@@ -147,7 +152,7 @@ class TransferClient(
                 is Scheduler.Result.Failed -> return Result.Failed(r.reason)
                 Scheduler.Result.SessionLost -> { onEvent("la TV a perdu le transfert : reprise"); if (attempts > 6) return Result.Failed("la TV ne garde pas le transfert"); continue }
                 Scheduler.Result.Done -> {
-                    val fin = try { api.finish(b.id, Manifest.root(hashes.all())) } catch (e: IOException) { onWaiting(castbridge.core.trust.LinkText.failure(e)); sleep(retryDelayMs); continue }
+                    val fin = try { api.finish(b.id, Manifest.root(hashes.all())) } catch (e: IOException) { onWaiting(castbridge.core.trust.LinkText.failure(e)); sleep(retryWait(e)); continue }
                     when (fin) {
                         TransferApi.Finish.Done -> { onProgress(m.size, m.size); return Result.Done }
                         is TransferApi.Finish.Refused -> return Result.Failed(fin.message)
@@ -158,6 +163,9 @@ class TransferClient(
         }
         return Result.Cancelled
     }
+
+    /** A 503 `verifying` says when to come back (the TV is reading the file back): wait that long, never hammer. */
+    private fun retryWait(e: IOException): Long = (e as? TransferApi.Verifying)?.retryMs?.coerceIn(200, 30_000) ?: retryDelayMs
 
     private fun waitThen(again: () -> Result): Result { onWaiting("TV injoignable"); if (cancelled()) return Result.Cancelled; sleep(retryDelayMs); return again() }
 }
