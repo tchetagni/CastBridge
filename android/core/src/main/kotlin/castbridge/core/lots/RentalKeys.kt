@@ -88,6 +88,7 @@ object RentalKeys {
     fun isV1Accepted(issuedAt: Long) = issuedAt < V1_BOX_SUNSET_MS
 
     private const val V2 = "v2:"
+    private fun hasV2Part(box: String) = box.split(';').any { it.startsWith(V2) }
     private fun b64(b: ByteArray) = Base64.getUrlEncoder().withoutPadding().encodeToString(b)
     private fun boxAadV2(productId: String, period: Long, installPub: ByteArray) = "castbridge-rentalbox-v2|$productId|$period|${hex(installPub)}".toByteArray()
     private fun kekV2(shared: ByteArray, installPub: ByteArray, ephPub: ByteArray, productId: String, period: Long) =
@@ -110,10 +111,11 @@ object RentalKeys {
     /**
      * Opens a box of either generation. A v2 box needs [install]; its failure to open means another installation (the AAD binds the public key) or an altered box. A v1 box is opened with
      * the factors, and refused with [BoxResult.V1Expired] when [issuedAt] (the activation's, null = not checked) is at or after [V1_BOX_SUNSET_MS]. A box is v1 OR v2, never both:
-     * a `v2:` box with another part beside it is [BoxResult.Unreadable].
+     * a box mixing a v1 part and a `v2:` part, in either order, is [BoxResult.Unreadable].
      */
     fun openBox(box: String, current: Fingerprints, productId: String, period: Long, install: InstallKey? = null, issuedAt: Long? = null): BoxResult {
         if (!box.startsWith(V2)) {
+            if (hasV2Part(box)) return BoxResult.Unreadable            // v1 part first, v2 part after: refused too
             if (issuedAt != null && !isV1Accepted(issuedAt)) return BoxResult.V1Expired
             return openV1(box, current, productId, period)?.let { BoxResult.Key(it) } ?: BoxResult.Unreadable
         }
@@ -132,7 +134,7 @@ object RentalKeys {
 
     /** v1 only (kept for the old callers): the rental key if at least k of the CURRENT factors match one wrap; null otherwise (other device, altered box). */
     @Deprecated("v1 seulement : utiliser openBox(box, current, productId, period, install, issuedAt) qui lit aussi la v2")
-    fun openBox(box: String, current: Fingerprints, productId: String, period: Long): ByteArray? = if (box.startsWith(V2)) null else openV1(box, current, productId, period)
+    fun openBox(box: String, current: Fingerprints, productId: String, period: Long): ByteArray? = if (hasV2Part(box)) null else openV1(box, current, productId, period)
 
     private fun openV1(box: String, current: Fingerprints, productId: String, period: Long): ByteArray? {
         for (part in box.split(';').filter { it.isNotEmpty() }) {

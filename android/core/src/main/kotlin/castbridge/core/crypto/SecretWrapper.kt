@@ -20,7 +20,7 @@ interface SecretWrapper {
     val label: String
 }
 
-/** No protection: identity. The file stays private to the app (0600); the state is visible through [label] = `plain`. */
+/** No protection: identity. Nothing here restricts the file's permissions: privacy relies on the caller's folder (the app's private directory on Android); the state is visible through [label] = `plain`. */
 class PlainWrapper : SecretWrapper {
     override fun wrap(plain: ByteArray) = plain.copyOf()
     override fun unwrap(blob: ByteArray): ByteArray? = blob.copyOf()

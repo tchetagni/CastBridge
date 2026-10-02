@@ -47,6 +47,6 @@ class X25519Test {
         val priv = ByteArray(32) { (it + 1).toByte() }
         assertNull(X25519.sharedSecret(priv, ByteArray(32)), "u = 0")
         assertNull(X25519.sharedSecret(priv, ByteArray(32).also { it[0] = 1 }), "u = 1 (order 4)")
-        assertNull(X25519.sharedSecret(priv, unhex("e0eb7a7c3b41b8ae1656e3faf19fc46ada098deb9c32b1fd866205165f49b800")), "order 8 point from the RFC list")
+        assertNull(X25519.sharedSecret(priv, unhex("e0eb7a7c3b41b8ae1656e3faf19fc46ada098deb9c32b1fd866205165f49b800")), "order 8 point from the libsodium small-order list (not the RFC 7748 list)")
     }
 }

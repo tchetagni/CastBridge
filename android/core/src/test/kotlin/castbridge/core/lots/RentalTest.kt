@@ -328,6 +328,9 @@ class RentalBoxV2Test {
     @Test fun malformedAndMixedBoxesAreUnreadableAndASmallOrderKeyIsRefused() {
         val rig = RentalRig(); val box = v2(rig).box; val v1 = RentalKeys.makeBox(rig.fp, DeviceIdentity.kFor(rig.fp.n), rig.key(), "loc-cm2", T0)
         assertEquals(BoxResult.Unreadable, RentalKeys.openBox("$box;$v1", rig.fp, "loc-cm2", T0, ik), "a box is v1 or v2, never both")
+        assertEquals(BoxResult.Unreadable, RentalKeys.openBox("$v1;$box", rig.fp, "loc-cm2", T0, ik), "v1 part first, v2 part after: refused too")
+        assertEquals(BoxResult.Unreadable, RentalKeys.openBox("$v1;$box", rig.fp, "loc-cm2", T0, ik, 0L), "same with the sunset check")
+        @Suppress("DEPRECATION") assertNull(RentalKeys.openBox("$v1;$box", rig.fp, "loc-cm2", T0))
         assertEquals(BoxResult.Unreadable, RentalKeys.openBox("v2:abc", rig.fp, "loc-cm2", T0, ik))
         assertEquals(BoxResult.Unreadable, RentalKeys.openBox("v2:" + box.substringAfter("v2:").substringBefore(':').dropLast(3) + ":" + box.substringAfterLast(':'), rig.fp, "loc-cm2", T0, ik))
         assertFailsWith<IllegalArgumentException> { RentalKeys.makeBoxV2(ByteArray(32), rig.key(), "loc-cm2", T0, eph) }

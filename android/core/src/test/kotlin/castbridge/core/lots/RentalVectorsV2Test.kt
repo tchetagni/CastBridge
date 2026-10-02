@@ -82,6 +82,7 @@ class RentalVectorsV2Test {
             "ephSeedA" to hex(ephSeed("reissue-a")), "ephSeedB" to hex(ephSeed("reissue-b"))), "expect" to J("boxA" to rA, "boxB" to rB, "keyFingerprint" to fpr))
         val v1 = RentalKeys.makeBox(env.devices.getValue("tvA"), DeviceIdentity.kFor(env.devices.getValue("tvA").n), rentalKey("tvA", lic, "loc-cm2", t0), "loc-cm2", t0)
         cases += J("id" to "box-v2-mixed-with-v1-refused", "type" to "box-v2-mixed", "request" to r1, "expect" to J("box" to boxOf(r1) + ";" + v1))
+        cases += J("id" to "box-v1-then-v2-mixed-refused", "type" to "box-v2-mixed", "request" to r1, "expect" to J("order" to "v1-first", "box" to v1 + ";" + boxOf(r1)))
         cases += J("id" to "box-v1-sunset", "type" to "box-v1-sunset", "request" to J("device" to "tvA", "license" to lic, "product" to "loc-cm2", "period" to t0), "expect" to J("box" to v1, "sunsetMs" to RentalKeys.V1_BOX_SUNSET_MS))
         // ---- device requests ----
         val dA = env.devices.getValue("tvA"); val code = DeviceCode.of(dA); val pubA = ik.getValue("tvA-install-1").pub

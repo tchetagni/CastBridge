@@ -108,8 +108,9 @@ object RentalVectorsV2 {
         val r = c["request"] as Map<String, Any?>; val key = keyOf(x, r); val dev = x.env.devices.getValue(r.str("device")!!); val ik = x.installs.getValue(r.str("install")!!)
         val product = r.str("product")!!; val period = r.long("period")!!
         val v2 = RentalKeys.makeBoxV2(ik.pub, key, product, period, unhex(r.str("ephSeed")!!)); val v1 = RentalKeys.makeBox(dev, DeviceIdentity.kFor(dev.n), key, product, period)
-        val box = "$v2;$v1"
-        if (box != (c["expect"] as Map<String, Any?>).str("box")) return "enveloppe mixte différente"
+        val exp = c["expect"] as Map<String, Any?>
+        val box = if (exp.str("order") == "v1-first") "$v1;$v2" else "$v2;$v1"
+        if (box != exp.str("box")) return "enveloppe mixte différente"
         return if (RentalKeys.openBox(box, dev, product, period, ik) != BoxResult.Unreadable) "une boîte mixte v1/v2 doit être illisible" else null
     }
 

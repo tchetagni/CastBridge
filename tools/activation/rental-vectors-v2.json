@@ -220,6 +220,23 @@
       }
     },
     {
+      "id": "box-v1-then-v2-mixed-refused",
+      "type": "box-v2-mixed",
+      "request": {
+        "device": "tvA",
+        "install": "tvA-install-1",
+        "other": null,
+        "license": "lic-loc-1",
+        "product": "loc-cm2",
+        "period": 1800000000000,
+        "ephSeed": "5a56f8c274e878ae0783ded80ba0234064e16ddb1dbfd708b57aad4a0268f141"
+      },
+      "expect": {
+        "order": "v1-first",
+        "box": "BLUETOOTH+ETHERNET+FLASH+SYSTEM_SERIAL:8Fo9biO61iYdfxhbQmgrE-xwjE4S1B2wSOek11OIxC0cjB4GZJzZuDANdO5yyyM-JOWKzWUirxsKEc-N;BLUETOOTH+ETHERNET+FLASH+WIFI:wpZ04CfZ86K0lvJKOv6CreBqWWRiLQQtMqeiqfPEO5L9hiVEgEzRo_ksaKUvXLxsIdTdeDZoXTSWe83U;BLUETOOTH+ETHERNET+SYSTEM_SERIAL+WIFI:NeRVcUXfp6NR2H-qoG8KjkjOMtSPLxq7rJEAXbYk9ojtVzLdI6cDl17d1uBtYW-hDFNuCk1nBbSydvWF;BLUETOOTH+FLASH+SYSTEM_SERIAL+WIFI:TtBB89SX22dg26N5wpuTErHUDPIHQPkI6w33lxDWrC8n_ULKCDt74FcxJ2kP6_elZ69ZENEOCIdisxti;ETHERNET+FLASH+SYSTEM_SERIAL+WIFI:xCVnSQpqWmXyPKDhxnKBmNgxe8rG9bB3WPMzJM7Uzt792fyBJsPUHXEHpWB3oJuXURNIjWv9IDrjLLAS;v2:saa72foBDAqkHftYKlybUzkT-pjNmTsh7jPaKokOa0c:r1iPrNKv3f7I330jdsSDesUlC90iwcAv66HmdP_mPWPsiGUDbjFh92o35g0hHWt4MBkDq2oCL0hegExO"
+      }
+    },
+    {
       "id": "box-v1-sunset",
       "type": "box-v1-sunset",
       "request": {

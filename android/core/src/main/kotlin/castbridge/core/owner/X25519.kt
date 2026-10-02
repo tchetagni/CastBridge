@@ -53,7 +53,7 @@ object X25519 {
             z2 = e.multiply(aa.add(A24.multiply(e)).mod(P)).mod(P)
         }
         if (swap) { x2 = x3; z2 = z3 }
-        return encodeLe(x2.multiply(z2.modPow(P.subtract(BigInteger.TWO), P)).mod(P))
+        return encodeLe(x2.multiply(z2.modPow(P.subtract(BigInteger.valueOf(2)), P)).mod(P))
     }
 
     /** The public key of a 32-byte private key (any 32 bytes: the clamp is applied on use). */

@@ -2,6 +2,7 @@ package castbridge.core.lots
 
 import castbridge.core.crypto.MemoryWrapper
 import castbridge.core.crypto.PlainWrapper
+import castbridge.core.crypto.SecretWrapper
 import castbridge.core.owner.X25519
 import java.io.File
 import java.security.SecureRandom
@@ -74,5 +75,37 @@ class InstallKeyTest {
         assertContentEquals(ByteArray(32) { 5 }, w.unwrap(blob)); assertNotEquals(blob.toList(), w.wrap(ByteArray(32) { 5 }).toList(), "fresh iv each time")
         assertNull(w.unwrap(blob.also { it[20] = (it[20] + 1).toByte() })); assertNull(w.unwrap(ByteArray(5)))
         assertFailsWith<IllegalArgumentException> { MemoryWrapper(ByteArray(16)) }
+    }
+
+    /** A wrapper that fails (null) for its first [failures] unwrap calls, then works: a model of a Keystore that is briefly unavailable. */
+    private class Flaky(private val inner: SecretWrapper, var failures: Int) : SecretWrapper {
+        override fun wrap(plain: ByteArray) = inner.wrap(plain)
+        override fun unwrap(blob: ByteArray): ByteArray? = if (failures > 0) { failures--; null } else inner.unwrap(blob)
+        override val label get() = inner.label
+    }
+
+    @Test fun aTransientUnwrapFailureGivesTheOriginalKeyBackAndNoNewKey() {
+        val dir = Kit.tmp(); val first = InstallKeyStore(dir, MemoryWrapper(wrapKey), seeded(10)).loadOrCreate()
+        val s = InstallKeyStore(dir, Flaky(MemoryWrapper(wrapKey), 1), seeded(80)); val k = s.loadOrCreate()
+        assertContentEquals(first.pub, k.pub); assertContentEquals(first.priv, k.priv); assertNull(s.loadNote)
+        assertTrue(dir.list()!!.none { ".unreadable-" in it })
+    }
+
+    @Test fun aLongerWrapperFailureNeverDestroysTheOriginalFile() {
+        val dir = Kit.tmp(); val first = InstallKeyStore(dir, MemoryWrapper(wrapKey), seeded(10)).loadOrCreate()
+        val original = File(dir, "install.key").readText()
+        val s = InstallKeyStore(dir, Flaky(MemoryWrapper(wrapKey), 100), seeded(80), now = { 4242L }); val k = s.loadOrCreate()
+        assertFalse(first.pub.contentEquals(k.pub)); assertNotNull(s.loadNote)
+        assertEquals(original, File(dir, "install.key.unreadable-4242").readText(), "the unreadable file was kept aside, not overwritten")
+        File(dir, "install.key").delete(); File(dir, "install.key.bak").delete(); File(dir, "install.key.unreadable-4242").renameTo(File(dir, "install.key"))
+        assertContentEquals(first.pub, InstallKeyStore(dir, MemoryWrapper(wrapKey), seeded(1)).loadOrCreate().pub, "the original key is still readable once put back")
+    }
+
+    @Test fun aMainFileThatReadsButDoesNotDecryptFallsBackToTheBackup() {
+        val dir = Kit.tmp(); val first = InstallKeyStore(dir, MemoryWrapper(wrapKey), seeded(10)).loadOrCreate()
+        val f = File(dir, "install.key"); File(dir, "install.key.bak").writeText(f.readText())
+        val lines = f.readText().lines().toMutableList(); lines[3] = "priv=" + "ab".repeat(60); f.writeText(lines.joinToString("\n"))
+        val s = InstallKeyStore(dir, MemoryWrapper(wrapKey), seeded(2)); val k = s.loadOrCreate()
+        assertContentEquals(first.pub, k.pub); assertEquals("clé d'installation relue depuis la copie de sécurité", s.loadNote)
     }
 }

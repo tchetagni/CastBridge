@@ -32,8 +32,9 @@ class InstallKey(val priv: ByteArray, val pub: ByteArray) {
  * priv=<hex of the wrapped blob>
  * createdAt=<ms>
  * ```
- * [loadOrCreate] never throws: a missing, truncated, foreign-wrapped or inconsistent file gives a NEW key and a [loadNote] for the journal (the rentals boxed for the old key then need a
- * reissue, docs § 3). If the new key cannot be written it is still returned (it works until the next restart) and the note says so.
+ * [loadOrCreate] never throws: a missing, truncated, foreign-wrapped or inconsistent file (and its `.bak`) gives a NEW key and a [loadNote] for the journal (the rentals boxed for the old key
+ * then need a reissue, docs § 3). The unreadable files are NEVER overwritten: they are renamed `install.key.unreadable-<ms>` (and `.bak.unreadable-<ms>`) first, so a transient failure of
+ * the wrapper (Keystore unavailable) loses nothing: the next start reads the original key again. If the new key cannot be written it is still returned (it works until the next restart) and the note says so.
  */
 class InstallKeyStore(private val dir: File, private val wrapper: SecretWrapper, private val random: SecureRandom = SecureRandom(), private val now: () -> Long = System::currentTimeMillis) {
     private val file = File(dir, FILE)
@@ -49,15 +50,21 @@ class InstallKeyStore(private val dir: File, private val wrapper: SecretWrapper,
     @Synchronized fun loadOrCreate(): InstallKey {
         cached?.let { return it }
         loadNote = null
-        val read = runCatching { SafeFile.read(file) { parse(it) != null } }.getOrNull()
-        val loaded = read?.let { r ->
-            parse(r.text)?.let { p -> runCatching { wrapper.unwrap(p.blob) }.getOrNull()?.takeIf { it.size == 32 }?.let { InstallKey.fromSeed(it) }?.takeIf { k -> k.pub.contentEquals(p.pub) } }
+        // main file first, then the .bak: a main file that reads but does not decrypt (or does not match its public key) falls back to the .bak
+        for ((f, fromBackup) in listOf(file to false, SafeFile.bak(file) to true)) {
+            val text = runCatching { f.readText() }.getOrNull() ?: continue
+            val p = parse(text) ?: continue
+            val k = (0 until 2).firstNotNullOfOrNull { runCatching { wrapper.unwrap(p.blob) }.getOrNull() }      // one retry: the Keystore can fail once, transiently
+                ?.takeIf { it.size == 32 }?.let { InstallKey.fromSeed(it) }?.takeIf { k -> k.pub.contentEquals(p.pub) } ?: continue
+            if (fromBackup) loadNote = "clé d'installation relue depuis la copie de sécurité"
+            cached = k; return k
         }
-        if (loaded != null) {
-            if (read.fromBackup) loadNote = "clé d'installation relue depuis la copie de sécurité"
-            cached = loaded; return loaded
+        // Never overwrite an unreadable key: a transient failure of the wrapper (Keystore unavailable) must not destroy a good key. Keep the files aside first.
+        val existed = runCatching { file.exists() || SafeFile.bak(file).exists() }.getOrDefault(false)
+        if (existed) {
+            val stamp = now()
+            for (f in listOf(file, SafeFile.bak(file))) if (runCatching { f.exists() }.getOrDefault(false)) runCatching { f.renameTo(File(dir, f.name + ".unreadable-$stamp")) }
         }
-        val existed = runCatching { file.exists() }.getOrDefault(false)
         val fresh = InstallKey.generate(random)
         val saved = runCatching { SafeFile.write(file, render(fresh)) { parse(it) != null } }.isSuccess
         loadNote = (if (existed) "clé d'installation illisible : nouvelle clé générée (les locations en cours devront être réémises)" else "nouvelle clé d'installation générée") +
