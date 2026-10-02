@@ -224,12 +224,15 @@ async function refresh() {
 }
 
 // ---- Edition banner: GET /api/activation every 30 s ----
+let ikFails = 0;
 async function loadEdition() {
   const ed = $("ed"); let a;
   try { a = await api("GET", "/api/activation"); } catch (e) { return; }
   const ikp = a && a.installKeyProtection;
-  $("ik").textContent = ikp ? "Clé d'installation : " + ({ keystore: "protégée par le coffre Android", pending: "en préparation", unavailable: "coffre de clés indisponible (nouvel essai automatique)", unreadable: "illisible (réinitialisation nécessaire)" }[ikp] || "inconnue") : "";
-  $("ikReset").style.display = ikp ? "block" : "none";
+  ikFails = (ikp === "pending" || ikp === "unavailable") ? ikFails + 1 : 0;       // consecutive 30 s readings without a ready key
+  const stuck = ikFails >= 5 ? "coffre indisponible : locations impossibles sur cette TV (les achats ne sont pas concernés)" : "";
+  $("ik").textContent = ikp ? "Clé d'installation : " + ({ keystore: "protégée par le coffre Android", pending: stuck || "en préparation", unavailable: stuck || "coffre de clés indisponible (nouvel essai automatique)", unreadable: "illisible (réinitialisation nécessaire)" }[ikp] || "inconnue") : "";
+  $("ikReset").style.display = ikp === "unreadable" ? "block" : "none";          // the reset is offered ONLY for an unreadable key (the TV refuses it otherwise: 409)
   $("ra").textContent = (a && a.remoteAssist) || "";                  // « Assistance à distance : connectée / hors ligne / en attente d'acceptation des conditions »
   if (!a || !a.edition) { ed.style.display = "none"; return; }
   ed.className = a.ended ? "end" : a.trial ? "trial" : "prod";

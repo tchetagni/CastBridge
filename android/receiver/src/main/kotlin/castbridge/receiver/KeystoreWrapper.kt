@@ -30,9 +30,7 @@ class KeystoreWrapper private constructor(private val alias: String, private val
 
     /** Absent only if `containsAlias` is false, AND a freshly reloaded KeyStore says false again and returns no key (a lookup that throws is not a confirmation: it is rethrown by the caller). */
     private fun confirmedAbsent(ks: KeyStore): Boolean {
-        if (ks.containsAlias(alias)) return false
-        val fresh = store()
-        return InstallKeyPolicy.aliasConfirmedAbsent(false, fresh.containsAlias(alias), fresh.getKey(alias, null) != null)
+        return InstallKeyPolicy.confirmAbsent(ks.containsAlias(alias)) { val fresh = store(); fresh.containsAlias(alias) to (fresh.getKey(alias, null) != null) }    // ~1.5 s pause between the two checks
     }
 
     private fun existing(ks: KeyStore): SecretKey = ks.getKey(alias, null) as? SecretKey ?: throw IllegalStateException("clé du coffre Android momentanément illisible")

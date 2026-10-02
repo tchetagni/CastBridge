@@ -139,3 +139,19 @@ Politique du propriétaire : la durée d'une location est **celle du bouquet** (
   2. **Comment la boutique du téléphone demande-t-elle une location ?** Authentification de la demande (TV appairée, licence, paiement), canal vers la TV (phone -> Bluetooth), idempotence d'un renouvellement (`period`), refus d'un lot libre (CC BY-SA, jamais louable).
   3. **Le plafond de 60 jours** : durée maximale d'une location servie par le serveur, à confirmer (le format admet 1 à 366 jours ; le catalogue fixe `rentalDays`, 30 jours par défaut) et son interaction avec le plafond d'usage et les locations simultanées.
   4. Où la licence et le poste sont-ils vérifiés (le serveur connaît le registre ; une licence générée par la console du téléphone n'y entre qu'à l'import du registre).
+
+## 16. Cycle de vie de la clé d'installation de la TV (locations v2, 2026-10-02)
+
+Fichiers : `files/rental/install.key` (+ `.bak`), enveloppés par le Keystore Android (`wrap=keystore`) ; jamais de clé en clair en production. Une clé existante n'est JAMAIS écrasée, déplacée ni régénérée automatiquement. Code : `InstallKey.kt`, `InstallKeyPolicy.kt`, `KeystoreWrapper.kt`, `RentalHub.kt`.
+
+| État (`installKeyProtection` de `GET /api/activation`) | Sens | Que faire |
+|---|---|---|
+| `pending` | pas encore tentée dans ce processus (ou première création en cours) | rien |
+| `unavailable` | le Keystore répond une erreur passagère ; réessai par le seul délai (1 min x3 puis 1 h) | rien : la clé est conservée telle quelle ; l'admin affiche « locations impossibles sur cette TV (les achats ne sont pas concernés) » après 5 relevés (2 min 30) sans clé |
+| `unreadable` | enveloppe qui rend null (mauvais tag, clé invalidée, alias absent confirmé deux fois avec 1,5 s d'écart) ou fichier abîmé sans copie lisible ; collant | réinitialisation par le propriétaire |
+| `keystore` | clé prête | rien |
+
+- Coffre de locations, registre et balayeur n'ont pas besoin de la clé : seuls `onActivation` et la demande d'appareil l'utilisent. Une activation acceptée clé non prête reste enregistrée ; `installKeyed` est REJOUÉ sur toutes les activations dès que la clé est prête, **une fois par processus** (le drapeau commence à vrai : un redémarrage avant le retour du Keystore ne perd rien). Le rejeu est idempotent (`clé déjà en place`, contrat terminé jamais rouvert ; test `replayingTheSameActivationTwiceInstallsOnceAndChangesNothing`).
+- Réinitialisation : `POST /api/activation/install-key/reset?confirm=RESET` (PIN ; refusée en essai). **Garde** `InstallKeyPolicy.resetAllowed(état, fichierPrésent)` : acceptée seulement en `unreadable`, ou en `pending` SANS fichier de clé ; sinon **409 « réinitialisation refusée : la clé n'est pas illisible »** (en `unavailable` la clé est peut-être récupérable : un `creator().wrap` pourrait régénérer l'alias réel). Toute autre erreur : 503 (Keystore indisponible) ou 500 en français sans texte Java ; l'ordre des fichiers reste sûr. Le bouton de l'admin n'apparaît qu'en `unreadable`.
+- Après une réinitialisation, **les locations v2 déjà émises pour l'ancienne clé doivent être réémises** (note « clé d'installation réinitialisée : réémettez les locations »).
+- Les anciens fichiers sont gardés : `install.key.reset-<ms>` et `install.key.bak.reset-<ms>` (suffixe `-1`, `-2` à la même milliseconde), jamais supprimés ; la clé neuve est d'abord écrite sous `install.key.reset-new` et relue.

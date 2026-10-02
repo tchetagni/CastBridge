@@ -23,7 +23,8 @@ object RentalHub {
     @Volatile private var parts: Parts? = null
     @Volatile private var keys: InstallKeyStore? = null
     private val warming = java.util.concurrent.atomic.AtomicBoolean(false)
-    private val replayNeeded = java.util.concurrent.atomic.AtomicBoolean(false)
+    /** TRUE at every process start: an activation accepted while the key was unavailable, then a restart, must still be installed once the key is ready (the ledger skips what is in place). */
+    private val replayNeeded = java.util.concurrent.atomic.AtomicBoolean(true)
     private val unreadableLogged = java.util.concurrent.atomic.AtomicBoolean(false)
     private val lock = java.util.concurrent.locks.ReentrantLock()
     private val gate = InstallKeyGate(android.os.SystemClock::elapsedRealtime)
@@ -84,7 +85,7 @@ object RentalHub {
         if (!replayNeeded.compareAndSet(true, false)) return
         val p = parts(ctx); val all = ActivationCenter.allActivations()
         for (a in all) runCatching { p.ledger.installKeyed(a, all, ActivationCenter.fingerprints(), p.vault, k) }.onFailure { Log.w(TAG, "réinstallation différée d'une activation en échec", it) }
-        Log.w(TAG, "activations enregistrées pendant l'indisponibilité du coffre : locations installées")
+        Log.w(TAG, "activations enregistrées : locations réinstallées une fois la clé prête (déjà en place : ignorées)")
     }
 
     /** Prepares the key (Keystore) on a background thread, so no caller on the main thread ever waits for it. One thread at a time, none while the backoff forbids a new attempt or the key is unreadable. */
@@ -129,12 +130,13 @@ object RentalHub {
 
     /**
      * EXPLICIT owner reset of the installation key (route POST /api/activation/install-key/reset, behind the TV's authentication): the files are renamed `.reset-<ms>`, never deleted, a fresh
-     * key is made and the activations stored meanwhile are installed again. Returns the note « clé d'installation réinitialisée : réémettez les locations ». Throws when the Keystore is unavailable.
+     * key is made and the activations stored meanwhile are installed again. Returns the note « clé d'installation réinitialisée : réémettez les locations ». Refused ([InstallKeyResetRefusedException]) unless the key is unreadable ([InstallKeyPolicy.resetAllowed]); throws when the Keystore is unavailable.
      */
     fun resetInstallKey(ctx: Context): String {
         val ks = keyStore(ctx)
         if (!lock.tryLock(30, java.util.concurrent.TimeUnit.SECONDS)) throw InstallKeyUnavailableException("clé d'installation en préparation")
         try {
+            if (!InstallKeyPolicy.resetAllowed(ks.state, ks.state == InstallKeyPolicy.KeyState.PENDING && !ks.isAbsent())) throw InstallKeyResetRefusedException(InstallKeyPolicy.RESET_REFUSED)
             val note = ks.reset(); Log.w(TAG, note)
             gate.succeeded(); unreadableLogged.set(false); replayNeeded.set(true); replayIfNeeded(ctx, ks.loadOrCreate())
             return note

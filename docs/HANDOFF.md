@@ -14,6 +14,10 @@
 
 ## 0. Journal en direct (le plus récent en haut)
 
+### 2026-10-02 (dernière retouche) : clé d'installation de la TV, cycle de vie et garde de réinitialisation (branche `claude/fix-installkey-last`, non poussée, non validé sur TV)
+- États `pending` / `unavailable` / `unreadable` / `keystore` (`installKeyProtection`), détail et tableau dans `docs/RENTAL-LOTS.md` § 16. Une clé existante n'est jamais écrasée ; `installKeyed` est rejoué une fois par processus dès que la clé est prête (drapeau initialisé à vrai).
+- `POST /api/activation/install-key/reset?confirm=RESET` (PIN) : refusée en 409 sauf clé `unreadable` (ou `pending` sans fichier) ; le bouton de l'admin n'apparaît qu'en `unreadable`. Après réinitialisation, **réémettre les locations** ; les fichiers `.reset-<ms>` sont conservés, jamais supprimés. Double confirmation de l'alias absent espacée de 1,5 s. Rapport : `docs/agent-reports/fix-installkey-last.md`.
+
 ### 2026-10-02 : lots Langues, serveur + téléphone + TV connectée (branche `claude/langues-lots-pipelines`, non poussée, non validé sur TV)
 - Le serveur accepte la fonction `langues` ; `tools/langues/publish_lots.py` publie les 46 lots libres (simulation par défaut, `--apply` avec `CASTBRIDGE_ADMIN_TOKEN`) ; le téléphone les liste et les envoie à la TV ; la TV avec Internet a le bouton « Mettre à jour les lots Langues » (jamais en tâche de fond). **Rien n'est publié en production** : le propriétaire lance l'étape 2 de `docs/LANGUES.md` § 15. Détails : `docs/agent-reports/langues-lots-pipelines.md`.
 

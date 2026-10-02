@@ -1,0 +1,10 @@
+# fix-installkey-last : retouches après l'audit Opus final de la clé d'installation (branche claude/fix-installkey-last)
+
+1. (majeur) Rejeu perdu au redémarrage : `RentalHub.replayNeeded` initialisé à vrai ; `installKeyed` est rejoué une fois par processus dès que la clé est prête. Idempotence prouvée : test `RentalKeyedInstallTest.replayingTheSameActivationTwiceInstallsOnceAndChangesNothing` (rejeu x3 + nouveau registre : « clé déjà en place », statuts et fichiers de clé/registre identiques, seule la rotation `.bak` du registre peut différer).
+2. (majeur) Réinitialisation trop permissive : `InstallKeyPolicy.resetAllowed(état, fichierPrésent)` (unreadable oui ; pending seulement sans fichier ; unavailable/keystore non), appliquée dans `RentalHub.resetInstallKey` sous verrou (`InstallKeyResetRefusedException`) ; `TvService` répond 409 « réinitialisation refusée : la clé n'est pas illisible ». `admin.html` : bouton affiché seulement en `unreadable`. Test de table (8 cas).
+3. (mineur) `InstallKeyPolicy.confirmAbsent` : pause de 1,5 s (`CONFIRM_PAUSE_MS`, `sleeper` injectable) entre les deux contrôles de l'alias absent, utilisée par `KeystoreWrapper.confirmedAbsent` ; test sans dormir (ordre pause puis second contrôle, pas de pause si alias présent, exception propagée).
+4. (mineur) `TvService` : `catch (Exception)` après les cas 409 et 503 : 500 « réinitialisation impossible : erreur interne… » sans texte Java (détail dans logcat) ; ordre des fichiers inchangé.
+5. (mineur) `admin.html` : après 5 relevés (30 s) consécutifs en `pending`/`unavailable`, « coffre indisponible : locations impossibles sur cette TV (les achats ne sont pas concernés) ».
+6. Docs : `docs/RENTAL-LOTS.md` § 16 et `docs/HANDOFF.md` (états, route et garde, réémission des locations, fichiers `.reset-<ms>`).
+
+Risques : en `pending` au démarrage avec un fichier illisible, la réinitialisation est refusée tant qu'une tentative n'a pas classé la clé (l'admin lance la préparation à chaque lecture de l'état) ; la pause de 1,5 s s'ajoute au chemin d'un alias absent (lecture, thread d'arrière-plan). Non vérifié sur TV réelle (Keystore GaiaOS).

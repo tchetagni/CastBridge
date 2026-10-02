@@ -26,6 +26,29 @@ class InstallKeyPolicyTest {
         assertFalse(InstallKeyPolicy.aliasConfirmedAbsent(false, false, true), "the reloaded store returns a key: the alias exists")
     }
 
+    @Test fun resetIsAllowedOnlyForAnUnreadableKeyOrAPendingOneWithoutFile() {
+        val table = mapOf(
+            Pair(KeyState.UNREADABLE, true) to true, Pair(KeyState.UNREADABLE, false) to true,
+            Pair(KeyState.PENDING, false) to true, Pair(KeyState.PENDING, true) to false,
+            Pair(KeyState.UNAVAILABLE, true) to false, Pair(KeyState.UNAVAILABLE, false) to false,
+            Pair(KeyState.READY, true) to false, Pair(KeyState.READY, false) to false)
+        assertEquals(KeyState.values().size * 2, table.size)
+        table.forEach { (k, expected) -> assertEquals(expected, InstallKeyPolicy.resetAllowed(k.first, k.second), k.toString()) }
+    }
+
+    @Test fun theMissingAliasDoubleConfirmationWaitsBetweenTheTwoChecksWithoutSleeping() {
+        val log = mutableListOf<String>()
+        val sleeper = { ms: Long -> log += "sleep$ms" }
+        assertTrue(InstallKeyPolicy.confirmAbsent(false, sleeper) { log += "reload"; false to false })
+        assertEquals(listOf("sleep${InstallKeyPolicy.CONFIRM_PAUSE_MS}", "reload"), log, "the pause comes BEFORE the second check")
+        assertTrue(InstallKeyPolicy.CONFIRM_PAUSE_MS in 1_000L..2_000L)
+        log.clear(); assertFalse(InstallKeyPolicy.confirmAbsent(true, sleeper) { log += "reload"; false to false }); assertEquals(emptyList(), log, "alias present: no pause, no second check")
+        assertFalse(InstallKeyPolicy.confirmAbsent(false, sleeper) { true to false }, "reloaded store has the alias")
+        assertFalse(InstallKeyPolicy.confirmAbsent(false, sleeper) { false to true }, "reloaded store returns a key")
+        assertFalse(InstallKeyPolicy.confirmAbsent(false, sleeper) { null to false }, "lookup that threw: not confirmed")
+        assertFailsWith<IllegalStateException> { InstallKeyPolicy.confirmAbsent(false, sleeper) { throw IllegalStateException("x") } }
+    }
+
     @Test fun protectionLabelsOfTheFourStates() {
         assertEquals(listOf("pending", "keystore", "unavailable", "unreadable"), KeyState.values().map { it.protection })
     }
