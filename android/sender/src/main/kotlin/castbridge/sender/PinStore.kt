@@ -8,6 +8,7 @@ import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.input.PasswordVisualTransformation
+import castbridge.core.trust.PinKeys
 import castbridge.core.trust.TvAuth
 import castbridge.core.tv.Pin
 
@@ -19,10 +20,19 @@ import castbridge.core.tv.Pin
 class PinStore(ctx: Context) {
     private val sp = ctx.applicationContext.getSharedPreferences("castbridge_pins", Context.MODE_PRIVATE)
     init { TvLinkManager.init(ctx) }
-    fun get(key: String?): String = TvLinkManager.credentialFor(key) ?: key?.let { sp.getString(it, null) }.orEmpty()
-    /** The typed PIN only (never the token). */
-    fun pinOnly(key: String?): String = key?.let { sp.getString(it, null) }.orEmpty()
-    fun put(key: String, pin: String) = sp.edit().putString(key, pin).apply()
+    /** Token of the saved TV [key] designates (any screen form, [PinKeys.resolve]); else the typed PIN stored under any key of that TV; else "". */
+    fun get(key: String?): String = PinKeys.credential(TvLinkManager.credentialFor(key), key, key?.let { TvLinkManager.savedFor(it) }) { sp.getString(it, null) }
+    /** The typed PIN only (never the token): found under [key] or under any other key of the same TV (tolerant read, old keys included). */
+    fun pinOnly(key: String?): String = PinKeys.credential(null, key, key?.let { TvLinkManager.savedFor(it) }) { sp.getString(it, null) }
+    /**
+     * Writes [pin] under [key]; a TV with a token gets nothing under its IP keys (its token suffices), a PIN-only TV gets every key of the TV ([PinKeys.writeKeys]).
+     * Still no erase on PIN_WRONG (w13-08).
+     */
+    fun put(key: String, pin: String) {
+        val tv = TvLinkManager.savedFor(key)
+        val keys = PinKeys.writeKeys(key, tv, hasToken = tv != null && TvLinkManager.credentialFor(key) != null)
+        sp.edit().apply { keys.forEach { putString(it, pin) } }.apply()
+    }
 }
 
 /** PIN entry for the selected TV; the value is remembered per TV as soon as it is well formed. A trusted phone does not need one. */
