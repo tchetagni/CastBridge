@@ -39,7 +39,8 @@ class LangLotBuildTest {
         assertNull(reg.families().of(LotId("langues", "zh-a1-salut-fr")), "unknown family fails closed")
         assertFailsWith<IllegalArgumentException> { LangLotRegistry.parse("""{"free":["langues:a"],"reserved":["langues:a"]}""") }
         val built = LangLotBuilder.build(content, reg, "2026-10-02", update = false)
-        assertEquals(embeddedPacks.size, built.lots.count { it.family == "free" })
+        val freeScopes = built.lots.filter { it.family == "free" }.map { it.meta.id.scope }.toSet()
+        assertTrue(embeddedPacks.all { it in freeScopes }, "tous les packs embarqués doivent être libres (embarqué ⊆ libre)")
         for (lot in built.lots) {
             assertEquals("free", lot.family)
             assertTrue(reg.familyOf(lot.meta.id.scope) == "free", "${lot.meta.id.scope} should be free")

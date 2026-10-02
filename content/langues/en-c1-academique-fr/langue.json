@@ -1,0 +1,322 @@
+{
+ "format": 1,
+ "type": "langue",
+ "id": "en-c1-academique-fr",
+ "version": 1,
+ "target": "en",
+ "level": "c1",
+ "theme": "academique",
+ "source": "fr",
+ "title": "Anglais C1 — Lecture et écoute académiques",
+ "state": "review",
+ "units": [
+  {
+   "id": "en-c1-academique-fr-u1",
+   "title": "Comprendre un texte universitaire",
+   "minutes": 25,
+   "skills": [
+    "co",
+    "ce",
+    "po",
+    "pe"
+   ],
+   "prerequisites": [],
+   "vocab": [
+    {
+     "id": "en-c1-academique-fr-v1",
+     "term": "hypothesis",
+     "gloss": "hypothèse",
+     "pos": "n",
+     "audio": "m:en-hypothesis"
+    },
+    {
+     "id": "en-c1-academique-fr-v2",
+     "term": "evidence",
+     "gloss": "preuve",
+     "pos": "n",
+     "audio": "m:en-evidence"
+    },
+    {
+     "id": "en-c1-academique-fr-v3",
+     "term": "analysis",
+     "gloss": "analyse",
+     "pos": "n",
+     "audio": "m:en-analysis"
+    },
+    {
+     "id": "en-c1-academique-fr-v4",
+     "term": "significant",
+     "gloss": "significatif",
+     "pos": "adj",
+     "audio": "m:en-significant"
+    },
+    {
+     "id": "en-c1-academique-fr-v5",
+     "term": "methodology",
+     "gloss": "méthodologie",
+     "pos": "n",
+     "audio": "m:en-methodology"
+    },
+    {
+     "id": "en-c1-academique-fr-v6",
+     "term": "conclusion",
+     "gloss": "conclusion",
+     "pos": "n",
+     "audio": "m:en-conclusion"
+    },
+    {
+     "id": "en-c1-academique-fr-v7",
+     "term": "whereas",
+     "gloss": "tandis que",
+     "pos": "conj",
+     "audio": "m:en-whereas"
+    },
+    {
+     "id": "en-c1-academique-fr-v8",
+     "term": "nevertheless",
+     "gloss": "néanmoins",
+     "pos": "adv",
+     "audio": "m:en-nevertheless"
+    },
+    {
+     "id": "en-c1-academique-fr-v9",
+     "term": "furthermore",
+     "gloss": "en outre",
+     "pos": "adv",
+     "audio": "m:en-furthermore"
+    },
+    {
+     "id": "en-c1-academique-fr-v10",
+     "term": "to investigate",
+     "gloss": "étudier, enquêter sur",
+     "pos": "v",
+     "audio": "m:en-toinvestigate"
+    },
+    {
+     "id": "en-c1-academique-fr-v11",
+     "term": "relevant",
+     "gloss": "pertinent",
+     "pos": "adj",
+     "audio": "m:en-relevant"
+    },
+    {
+     "id": "en-c1-academique-fr-v12",
+     "term": "criterion",
+     "gloss": "critère",
+     "pos": "n",
+     "audio": "m:en-criterion"
+    }
+   ],
+   "dialogues": [
+    {
+     "id": "en-c1-academique-fr-d1",
+     "title": "Séminaire",
+     "lines": [
+      {
+       "who": "A",
+       "text": "What is the main hypothesis of this paper?",
+       "tr": "Quelle est l'hypothèse principale de cet article ?"
+      },
+      {
+       "who": "B",
+       "text": "It argues that the evidence is not significant.",
+       "tr": "Il soutient que la preuve n'est pas significative."
+      },
+      {
+       "who": "A",
+       "text": "Nevertheless, the methodology is relevant.",
+       "tr": "Néanmoins, la méthodologie est pertinente."
+      },
+      {
+       "who": "B",
+       "text": "Furthermore, the analysis supports the conclusion.",
+       "tr": "En outre, l'analyse appuie la conclusion."
+      }
+     ],
+     "audio": "m:en-c1-academique-d1"
+    }
+   ],
+   "grammar": [
+    {
+     "id": "en-c1-academique-fr-g1",
+     "title": "La nominalisation académique",
+     "md": "L'écrit universitaire transforme les verbes en noms : *to analyse* → *analysis*, *to conclude* → *conclusion*. Cela rend le style plus formel et dense.",
+     "examples": [
+      {
+       "text": "The analysis of the data.",
+       "tr": "L'analyse des données."
+      }
+     ]
+    },
+    {
+     "id": "en-c1-academique-fr-g2",
+     "title": "La voix passive",
+     "md": "La **voix passive** est fréquente en contexte scientifique : *The experiment was conducted* (l'expérience a été menée).",
+     "examples": [
+      {
+       "text": "The results were analysed.",
+       "tr": "Les résultats ont été analysés."
+      }
+     ]
+    }
+   ],
+   "exercises": [
+    {
+     "id": "en-c1-academique-fr-x1",
+     "kind": "mcq",
+     "prompt": "Que signifie « hypothesis » ? (Use of English)",
+     "choices": [
+      "hypothèse",
+      "preuve",
+      "analyse"
+     ],
+     "correct": 0
+    },
+    {
+     "id": "en-c1-academique-fr-x2",
+     "kind": "match",
+     "prompt": "Associe chaque mot à sa traduction française.",
+     "pairs": [
+      {
+       "a": "hypothesis",
+       "b": "hypothèse"
+      },
+      {
+       "a": "evidence",
+       "b": "preuve"
+      },
+      {
+       "a": "analysis",
+       "b": "analyse"
+      },
+      {
+       "a": "significant",
+       "b": "significatif"
+      },
+      {
+       "a": "methodology",
+       "b": "méthodologie"
+      }
+     ]
+    },
+    {
+     "id": "en-c1-academique-fr-x3",
+     "kind": "cloze",
+     "prompt": "Complète : The ____ supports the hypothesis. (preuve)",
+     "answers": [
+      "evidence"
+     ]
+    },
+    {
+     "id": "en-c1-academique-fr-x4",
+     "kind": "order",
+     "prompt": "Remets les mots dans l'ordre (Structures).",
+     "words": [
+      "The",
+      "results",
+      "were",
+      "analysed",
+      "carefully"
+     ],
+     "answers": [
+      "The results were analysed carefully."
+     ]
+    },
+    {
+     "id": "en-c1-academique-fr-x5",
+     "kind": "truefalse",
+     "prompt": "« However » exprime une opposition.",
+     "correct": 0
+    },
+    {
+     "id": "en-c1-academique-fr-x6",
+     "kind": "dictation",
+     "prompt": "Écoute et écris la phrase (Listening).",
+     "audio": "m:en-c1-academique-d1",
+     "answers": [
+      "What is the main hypothesis of this paper?"
+     ]
+    },
+    {
+     "id": "en-c1-academique-fr-x7",
+     "kind": "translate",
+     "prompt": "Traduis en français : hypothesis.",
+     "answers": [
+      "hypothèse"
+     ]
+    },
+    {
+     "id": "en-c1-academique-fr-x8",
+     "kind": "write",
+     "prompt": "Rédige un court paragraphe argumenté sur un sujet de ton choix (Writing).",
+     "model": "Moreover, it is widely accepted that education benefits society."
+    },
+    {
+     "id": "en-c1-academique-fr-x9",
+     "kind": "speak",
+     "prompt": "Donne ton opinion sur un sujet d'actualité en anglais, puis compare (Speaking).",
+     "model": "From my perspective, this is a compelling argument.",
+     "audio": "m:en-hypothesis"
+    }
+   ],
+   "stories": [
+    {
+     "id": "en-c1-academique-fr-s1",
+     "title": "Résumé d'un article",
+     "paragraphs": [
+      {
+       "who": "",
+       "text": "The study investigated whether sleep affects memory. The methodology compared two groups of students.",
+       "tr": "L'étude a cherché à savoir si le sommeil affecte la mémoire. La méthodologie a comparé deux groupes d'étudiants."
+      },
+      {
+       "who": "",
+       "text": "The evidence showed a significant difference, whereas the second group performed better. Nevertheless, further research is needed.",
+       "tr": "Les preuves ont montré une différence significative, tandis que le second groupe a mieux réussi. Néanmoins, des recherches supplémentaires sont nécessaires."
+      },
+      {
+       "who": "",
+       "text": "The conclusion is relevant to educators, furthermore it opens new questions.",
+       "tr": "La conclusion est pertinente pour les enseignants ; en outre, elle ouvre de nouvelles questions."
+      }
+     ]
+    }
+   ],
+   "cards": [
+    {
+     "id": "en-c1-academique-fr-c1",
+     "vocab": "en-c1-academique-fr-v1"
+    },
+    {
+     "id": "en-c1-academique-fr-c2",
+     "vocab": "en-c1-academique-fr-v2"
+    },
+    {
+     "id": "en-c1-academique-fr-c3",
+     "vocab": "en-c1-academique-fr-v3"
+    },
+    {
+     "id": "en-c1-academique-fr-c4",
+     "vocab": "en-c1-academique-fr-v4"
+    },
+    {
+     "id": "en-c1-academique-fr-c5",
+     "vocab": "en-c1-academique-fr-v5"
+    },
+    {
+     "id": "en-c1-academique-fr-c6",
+     "vocab": "en-c1-academique-fr-v6"
+    },
+    {
+     "id": "en-c1-academique-fr-c7",
+     "vocab": "en-c1-academique-fr-v7"
+    },
+    {
+     "id": "en-c1-academique-fr-c8",
+     "vocab": "en-c1-academique-fr-v8"
+    }
+   ],
+   "animations": []
+  }
+ ]
+}

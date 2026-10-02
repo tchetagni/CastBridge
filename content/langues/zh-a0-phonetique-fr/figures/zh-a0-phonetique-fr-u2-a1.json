@@ -1,0 +1,313 @@
+{
+ "type": "illustration",
+ "caption": "La carte des sons",
+ "alt": "Un axe de l'avant vers l'arrière de la bouche avec trois groupes : z/c/s à l'avant, j/q/x au milieu, zh/ch/sh recourbés à l'arrière.",
+ "figure": {
+  "kind": "shapes",
+  "w": 480,
+  "h": 200,
+  "items": [
+   {
+    "t": "line",
+    "x1": 30,
+    "y1": 120,
+    "x2": 450,
+    "y2": 120,
+    "color": "ink",
+    "arrow": "end"
+   },
+   {
+    "t": "text",
+    "x": 30,
+    "y": 140,
+    "text": "avant",
+    "size": 14,
+    "color": "grey"
+   },
+   {
+    "t": "text",
+    "x": 450,
+    "y": 140,
+    "text": "arrière",
+    "size": 14,
+    "color": "grey",
+    "anchor": "end"
+   },
+   {
+    "t": "circle",
+    "cx": 110,
+    "cy": 120,
+    "r": 7,
+    "fill": "blue",
+    "stroke": "none"
+   },
+   {
+    "t": "text",
+    "x": 110,
+    "y": 95,
+    "text": "z · c · s",
+    "color": "blue",
+    "bold": true
+   },
+   {
+    "t": "text",
+    "x": 110,
+    "y": 165,
+    "text": "plat, à l'avant",
+    "size": 12,
+    "color": "grey"
+   },
+   {
+    "t": "circle",
+    "cx": 240,
+    "cy": 120,
+    "r": 7,
+    "fill": "green",
+    "stroke": "none"
+   },
+   {
+    "t": "text",
+    "x": 240,
+    "y": 95,
+    "text": "j · q · x",
+    "color": "green",
+    "bold": true
+   },
+   {
+    "t": "text",
+    "x": 240,
+    "y": 165,
+    "text": "milieu, palais",
+    "size": 12,
+    "color": "grey"
+   },
+   {
+    "t": "circle",
+    "cx": 390,
+    "cy": 120,
+    "r": 7,
+    "fill": "red",
+    "stroke": "none"
+   },
+   {
+    "t": "text",
+    "x": 390,
+    "y": 95,
+    "text": "zh · ch · sh",
+    "color": "red",
+    "bold": true
+   },
+   {
+    "t": "text",
+    "x": 390,
+    "y": 165,
+    "text": "langue recourbée",
+    "size": 12,
+    "color": "grey"
+   }
+  ]
+ },
+ "animation": {
+  "mode": "steps",
+  "items": [
+   {
+    "t": "line",
+    "x1": 30,
+    "y1": 120,
+    "x2": 450,
+    "y2": 120,
+    "color": "ink",
+    "arrow": "end",
+    "id": "a"
+   },
+   {
+    "t": "text",
+    "x": 30,
+    "y": 140,
+    "text": "avant",
+    "size": 14,
+    "color": "grey",
+    "id": "b"
+   },
+   {
+    "t": "text",
+    "x": 450,
+    "y": 140,
+    "text": "arrière",
+    "size": 14,
+    "color": "grey",
+    "anchor": "end",
+    "id": "c"
+   },
+   {
+    "t": "circle",
+    "cx": 110,
+    "cy": 120,
+    "r": 7,
+    "fill": "blue",
+    "stroke": "none",
+    "id": "d110",
+    "alpha": 0
+   },
+   {
+    "t": "text",
+    "x": 110,
+    "y": 95,
+    "text": "z · c · s",
+    "color": "blue",
+    "bold": true,
+    "id": "l110",
+    "alpha": 0
+   },
+   {
+    "t": "text",
+    "x": 110,
+    "y": 165,
+    "text": "plat, à l'avant",
+    "size": 12,
+    "color": "grey",
+    "id": "s110",
+    "alpha": 0
+   },
+   {
+    "t": "circle",
+    "cx": 240,
+    "cy": 120,
+    "r": 7,
+    "fill": "green",
+    "stroke": "none",
+    "id": "d240",
+    "alpha": 0
+   },
+   {
+    "t": "text",
+    "x": 240,
+    "y": 95,
+    "text": "j · q · x",
+    "color": "green",
+    "bold": true,
+    "id": "l240",
+    "alpha": 0
+   },
+   {
+    "t": "text",
+    "x": 240,
+    "y": 165,
+    "text": "milieu, palais",
+    "size": 12,
+    "color": "grey",
+    "id": "s240",
+    "alpha": 0
+   },
+   {
+    "t": "circle",
+    "cx": 390,
+    "cy": 120,
+    "r": 7,
+    "fill": "red",
+    "stroke": "none",
+    "id": "d390",
+    "alpha": 0
+   },
+   {
+    "t": "text",
+    "x": 390,
+    "y": 95,
+    "text": "zh · ch · sh",
+    "color": "red",
+    "bold": true,
+    "id": "l390",
+    "alpha": 0
+   },
+   {
+    "t": "text",
+    "x": 390,
+    "y": 165,
+    "text": "langue recourbée",
+    "size": 12,
+    "color": "grey",
+    "id": "s390",
+    "alpha": 0
+   }
+  ],
+  "do": [
+   {
+    "at": 0,
+    "d": 0.3,
+    "op": "fade",
+    "on": "d110",
+    "a": 1
+   },
+   {
+    "at": 0,
+    "d": 0.3,
+    "op": "fade",
+    "on": "l110",
+    "a": 1
+   },
+   {
+    "at": 0,
+    "d": 0.3,
+    "op": "fade",
+    "on": "s110",
+    "a": 1
+   },
+   {
+    "at": 0.3,
+    "d": 0.3,
+    "op": "fade",
+    "on": "d240",
+    "a": 1
+   },
+   {
+    "at": 0.3,
+    "d": 0.3,
+    "op": "fade",
+    "on": "l240",
+    "a": 1
+   },
+   {
+    "at": 0.3,
+    "d": 0.3,
+    "op": "fade",
+    "on": "s240",
+    "a": 1
+   },
+   {
+    "at": 0.6,
+    "d": 0.3,
+    "op": "fade",
+    "on": "d390",
+    "a": 1
+   },
+   {
+    "at": 0.6,
+    "d": 0.3,
+    "op": "fade",
+    "on": "l390",
+    "a": 1
+   },
+   {
+    "at": 0.6,
+    "d": 0.3,
+    "op": "fade",
+    "on": "s390",
+    "a": 1
+   }
+  ],
+  "steps": [
+   {
+    "at": 0.3,
+    "say": "Le groupe z · c · s."
+   },
+   {
+    "at": 0.6,
+    "say": "Le groupe j · q · x."
+   },
+   {
+    "at": 0.9,
+    "say": "Le groupe zh · ch · sh."
+   }
+  ]
+ }
+}

@@ -1,0 +1,258 @@
+{
+ "format": 1,
+ "type": "langue",
+ "id": "de-a0-nombres-en",
+ "version": 1,
+ "target": "de",
+ "level": "a0",
+ "theme": "nombres",
+ "source": "en",
+ "title": "German A0 — Numbers",
+ "state": "review",
+ "units": [
+  {
+   "id": "de-a0-nombres-en-u1",
+   "title": "Counting from 0 to 10",
+   "minutes": 10,
+   "skills": [
+    "co",
+    "ce",
+    "po"
+   ],
+   "prerequisites": [],
+   "vocab": [
+    {
+     "id": "de-a0-nombres-en-v1",
+     "term": "null",
+     "gloss": "zero",
+     "pos": "num",
+     "audio": "m:de-null"
+    },
+    {
+     "id": "de-a0-nombres-en-v2",
+     "term": "eins",
+     "gloss": "one",
+     "pos": "num",
+     "audio": "m:de-eins"
+    },
+    {
+     "id": "de-a0-nombres-en-v3",
+     "term": "zwei",
+     "gloss": "two",
+     "pos": "num",
+     "audio": "m:de-zwei"
+    },
+    {
+     "id": "de-a0-nombres-en-v4",
+     "term": "drei",
+     "gloss": "three",
+     "pos": "num",
+     "audio": "m:de-drei"
+    },
+    {
+     "id": "de-a0-nombres-en-v5",
+     "term": "vier",
+     "gloss": "four",
+     "pos": "num",
+     "audio": "m:de-vier"
+    },
+    {
+     "id": "de-a0-nombres-en-v6",
+     "term": "fünf",
+     "gloss": "five",
+     "pos": "num",
+     "audio": "m:de-fnf"
+    },
+    {
+     "id": "de-a0-nombres-en-v7",
+     "term": "sechs",
+     "gloss": "six",
+     "pos": "num",
+     "audio": "m:de-sechs"
+    },
+    {
+     "id": "de-a0-nombres-en-v8",
+     "term": "sieben",
+     "gloss": "seven",
+     "pos": "num",
+     "audio": "m:de-sieben"
+    },
+    {
+     "id": "de-a0-nombres-en-v9",
+     "term": "acht",
+     "gloss": "eight",
+     "pos": "num",
+     "audio": "m:de-acht"
+    },
+    {
+     "id": "de-a0-nombres-en-v10",
+     "term": "neun",
+     "gloss": "nine",
+     "pos": "num",
+     "audio": "m:de-neun"
+    },
+    {
+     "id": "de-a0-nombres-en-v11",
+     "term": "zehn",
+     "gloss": "ten",
+     "pos": "num",
+     "audio": "m:de-zehn"
+    }
+   ],
+   "dialogues": [
+    {
+     "id": "de-a0-nombres-en-d1",
+     "title": "Counting",
+     "lines": [
+      {
+       "who": "A",
+       "text": "Eins, zwei, drei.",
+       "tr": "One, two, three."
+      },
+      {
+       "who": "B",
+       "text": "Vier, fünf, sechs.",
+       "tr": "Four, five, six."
+      },
+      {
+       "who": "A",
+       "text": "Sieben, acht, neun, zehn.",
+       "tr": "Seven, eight, nine, ten."
+      }
+     ],
+     "audio": "m:de-nombres-d1"
+    }
+   ],
+   "grammar": [
+    {
+     "id": "de-a0-nombres-en-g1",
+     "title": "Counting in German",
+     "md": "From **eins** (1) to **zehn** (10), each number is one word. The 's' in *sechs* sounds like 'z'.",
+     "examples": [
+      {
+       "text": "eins, zwei, drei",
+       "tr": "one, two, three"
+      }
+     ]
+    }
+   ],
+   "exercises": [
+    {
+     "id": "de-a0-nombres-en-x1",
+     "kind": "mcq",
+     "prompt": "What does null mean?",
+     "choices": [
+      "zero",
+      "one",
+      "two"
+     ],
+     "correct": 0
+    },
+    {
+     "id": "de-a0-nombres-en-x2",
+     "kind": "match",
+     "prompt": "Match each word to its meaning.",
+     "pairs": [
+      {
+       "a": "null",
+       "b": "zero"
+      },
+      {
+       "a": "eins",
+       "b": "one"
+      },
+      {
+       "a": "zwei",
+       "b": "two"
+      },
+      {
+       "a": "drei",
+       "b": "three"
+      },
+      {
+       "a": "vier",
+       "b": "four"
+      }
+     ]
+    },
+    {
+     "id": "de-a0-nombres-en-x3",
+     "kind": "dictation",
+     "prompt": "Listen and write the word.",
+     "audio": "m:de-null",
+     "answers": [
+      "null"
+     ]
+    },
+    {
+     "id": "de-a0-nombres-en-x4",
+     "kind": "speak",
+     "prompt": "Say 'one' in German, then compare.",
+     "model": "eins",
+     "audio": "m:de-eins"
+    },
+    {
+     "id": "de-a0-nombres-en-x5",
+     "kind": "truefalse",
+     "prompt": "'zehn' means 'ten'.",
+     "correct": 0
+    },
+    {
+     "id": "de-a0-nombres-en-x6",
+     "kind": "translate",
+     "prompt": "Translate: two.",
+     "answers": [
+      "zwei"
+     ]
+    },
+    {
+     "id": "de-a0-nombres-en-x7",
+     "kind": "write",
+     "prompt": "Write 'three'.",
+     "model": "drei"
+    },
+    {
+     "id": "de-a0-nombres-en-x8",
+     "kind": "mcq",
+     "prompt": "What does vier mean?",
+     "choices": [
+      "three",
+      "four",
+      "zero"
+     ],
+     "correct": 1
+    }
+   ],
+   "stories": [],
+   "cards": [
+    {
+     "id": "de-a0-nombres-en-c1",
+     "vocab": "de-a0-nombres-en-v1"
+    },
+    {
+     "id": "de-a0-nombres-en-c2",
+     "vocab": "de-a0-nombres-en-v2"
+    },
+    {
+     "id": "de-a0-nombres-en-c3",
+     "vocab": "de-a0-nombres-en-v3"
+    },
+    {
+     "id": "de-a0-nombres-en-c4",
+     "vocab": "de-a0-nombres-en-v4"
+    },
+    {
+     "id": "de-a0-nombres-en-c5",
+     "vocab": "de-a0-nombres-en-v5"
+    }
+   ],
+   "animations": [
+    {
+     "id": "de-a0-nombres-en-u1-a1",
+     "kind": "gesture",
+     "label": "Counting from 1 to 5"
+    }
+   ]
+  }
+ ]
+}

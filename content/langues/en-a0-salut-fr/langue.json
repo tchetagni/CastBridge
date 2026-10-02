@@ -1,0 +1,261 @@
+{
+ "format": 1,
+ "type": "langue",
+ "id": "en-a0-salut-fr",
+ "version": 2,
+ "target": "en",
+ "level": "a0",
+ "theme": "salut",
+ "source": "fr",
+ "title": "Anglais A0 — Se saluer",
+ "state": "review",
+ "units": [
+  {
+   "id": "en-a0-salut-fr-u1",
+   "title": "Bonjour, merci, au revoir",
+   "minutes": 10,
+   "skills": [
+    "co",
+    "ce",
+    "po"
+   ],
+   "prerequisites": [],
+   "vocab": [
+    {
+     "id": "en-a0-salut-fr-v1",
+     "term": "Hello",
+     "gloss": "bonjour",
+     "pos": "interj",
+     "audio": "m:en-hello"
+    },
+    {
+     "id": "en-a0-salut-fr-v2",
+     "term": "Hi",
+     "gloss": "salut",
+     "pos": "interj",
+     "audio": "m:en-hi"
+    },
+    {
+     "id": "en-a0-salut-fr-v3",
+     "term": "Good morning",
+     "gloss": "bonjour (le matin)",
+     "pos": "interj",
+     "audio": "m:en-goodmorning"
+    },
+    {
+     "id": "en-a0-salut-fr-v4",
+     "term": "Goodbye",
+     "gloss": "au revoir",
+     "pos": "interj",
+     "audio": "m:en-goodbye"
+    },
+    {
+     "id": "en-a0-salut-fr-v5",
+     "term": "Thank you",
+     "gloss": "merci",
+     "pos": "interj",
+     "audio": "m:en-thankyou"
+    },
+    {
+     "id": "en-a0-salut-fr-v6",
+     "term": "Please",
+     "gloss": "s'il te plaît",
+     "pos": "interj",
+     "audio": "m:en-please"
+    },
+    {
+     "id": "en-a0-salut-fr-v7",
+     "term": "Sorry",
+     "gloss": "pardon",
+     "pos": "interj",
+     "audio": "m:en-sorry"
+    },
+    {
+     "id": "en-a0-salut-fr-v8",
+     "term": "Yes",
+     "gloss": "oui",
+     "pos": "interj",
+     "audio": "m:en-yes"
+    },
+    {
+     "id": "en-a0-salut-fr-v9",
+     "term": "No",
+     "gloss": "non",
+     "pos": "interj",
+     "audio": "m:en-no"
+    },
+    {
+     "id": "en-a0-salut-fr-v10",
+     "term": "How are you?",
+     "gloss": "comment vas-tu ?",
+     "pos": "phrase",
+     "audio": "m:en-howareyou"
+    }
+   ],
+   "dialogues": [
+    {
+     "id": "en-a0-salut-fr-d1",
+     "title": "Une rencontre",
+     "lines": [
+      {
+       "who": "A",
+       "text": "Hello!",
+       "tr": "Bonjour !"
+      },
+      {
+       "who": "B",
+       "text": "Hi!",
+       "tr": "Salut !"
+      },
+      {
+       "who": "A",
+       "text": "How are you?",
+       "tr": "Comment vas-tu ?"
+      },
+      {
+       "who": "B",
+       "text": "I'm fine, thank you.",
+       "tr": "Je vais bien, merci."
+      },
+      {
+       "who": "A",
+       "text": "Goodbye!",
+       "tr": "Au revoir !"
+      },
+      {
+       "who": "B",
+       "text": "Goodbye!",
+       "tr": "Au revoir !"
+      }
+     ],
+     "audio": "m:en-salut-d1",
+     "video": "m:en-salut-salut"
+    }
+   ],
+   "grammar": [
+    {
+     "id": "en-a0-salut-fr-g1",
+     "title": "L'ordre des mots",
+     "md": "L'anglais suit l'ordre **sujet – verbe – complément** : *I am fine* (je suis bien). La question inverse le sujet : *How are you?*",
+     "examples": [
+      {
+       "text": "I am fine",
+       "tr": "je vais bien"
+      }
+     ]
+    }
+   ],
+   "exercises": [
+    {
+     "id": "en-a0-salut-fr-x1",
+     "kind": "mcq",
+     "prompt": "Que veut dire Hello ?",
+     "choices": [
+      "bonjour",
+      "salut",
+      "bonjour (le matin)"
+     ],
+     "correct": 0
+    },
+    {
+     "id": "en-a0-salut-fr-x2",
+     "kind": "match",
+     "prompt": "Associe chaque mot à son sens.",
+     "pairs": [
+      {
+       "a": "Hello",
+       "b": "bonjour"
+      },
+      {
+       "a": "Hi",
+       "b": "salut"
+      },
+      {
+       "a": "Good morning",
+       "b": "bonjour (le matin)"
+      },
+      {
+       "a": "Goodbye",
+       "b": "au revoir"
+      },
+      {
+       "a": "Thank you",
+       "b": "merci"
+      }
+     ]
+    },
+    {
+     "id": "en-a0-salut-fr-x3",
+     "kind": "dictation",
+     "prompt": "Écoute et écris le mot.",
+     "audio": "m:en-hello",
+     "answers": [
+      "Hello"
+     ]
+    },
+    {
+     "id": "en-a0-salut-fr-x4",
+     "kind": "speak",
+     "prompt": "Dis « salut » en Anglais, puis compare.",
+     "model": "Hi",
+     "audio": "m:en-hi"
+    },
+    {
+     "id": "en-a0-salut-fr-x5",
+     "kind": "truefalse",
+     "prompt": "« Thank you » veut dire « merci ».",
+     "correct": 0
+    },
+    {
+     "id": "en-a0-salut-fr-x6",
+     "kind": "translate",
+     "prompt": "Traduis : bonjour (le matin).",
+     "answers": [
+      "Good morning"
+     ]
+    },
+    {
+     "id": "en-a0-salut-fr-x7",
+     "kind": "write",
+     "prompt": "Écris « au revoir ».",
+     "model": "Goodbye"
+    },
+    {
+     "id": "en-a0-salut-fr-x8",
+     "kind": "mcq",
+     "prompt": "Que veut dire Thank you ?",
+     "choices": [
+      "au revoir",
+      "merci",
+      "bonjour"
+     ],
+     "correct": 1
+    }
+   ],
+   "stories": [],
+   "cards": [
+    {
+     "id": "en-a0-salut-fr-c1",
+     "vocab": "en-a0-salut-fr-v1"
+    },
+    {
+     "id": "en-a0-salut-fr-c2",
+     "vocab": "en-a0-salut-fr-v2"
+    },
+    {
+     "id": "en-a0-salut-fr-c3",
+     "vocab": "en-a0-salut-fr-v3"
+    },
+    {
+     "id": "en-a0-salut-fr-c4",
+     "vocab": "en-a0-salut-fr-v4"
+    },
+    {
+     "id": "en-a0-salut-fr-c5",
+     "vocab": "en-a0-salut-fr-v5"
+    }
+   ],
+   "animations": []
+  }
+ ]
+}

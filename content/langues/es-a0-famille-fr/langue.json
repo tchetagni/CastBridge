@@ -1,0 +1,240 @@
+{
+ "format": 1,
+ "type": "langue",
+ "id": "es-a0-famille-fr",
+ "version": 1,
+ "target": "es",
+ "level": "a0",
+ "theme": "famille",
+ "source": "fr",
+ "title": "Espagnol A0 — Ma famille",
+ "state": "review",
+ "units": [
+  {
+   "id": "es-a0-famille-fr-u1",
+   "title": "Papa, maman, et moi",
+   "minutes": 10,
+   "skills": [
+    "co",
+    "ce",
+    "po"
+   ],
+   "prerequisites": [],
+   "vocab": [
+    {
+     "id": "es-a0-famille-fr-v1",
+     "term": "familia",
+     "gloss": "famille",
+     "pos": "n",
+     "audio": "m:es-familia"
+    },
+    {
+     "id": "es-a0-famille-fr-v2",
+     "term": "padre",
+     "gloss": "père",
+     "pos": "n",
+     "audio": "m:es-padre"
+    },
+    {
+     "id": "es-a0-famille-fr-v3",
+     "term": "madre",
+     "gloss": "mère",
+     "pos": "n",
+     "audio": "m:es-madre"
+    },
+    {
+     "id": "es-a0-famille-fr-v4",
+     "term": "hermano",
+     "gloss": "frère",
+     "pos": "n",
+     "audio": "m:es-hermano"
+    },
+    {
+     "id": "es-a0-famille-fr-v5",
+     "term": "hermana",
+     "gloss": "sœur",
+     "pos": "n",
+     "audio": "m:es-hermana"
+    },
+    {
+     "id": "es-a0-famille-fr-v6",
+     "term": "abuelo",
+     "gloss": "grand-père",
+     "pos": "n",
+     "audio": "m:es-abuelo"
+    },
+    {
+     "id": "es-a0-famille-fr-v7",
+     "term": "abuela",
+     "gloss": "grand-mère",
+     "pos": "n",
+     "audio": "m:es-abuela"
+    },
+    {
+     "id": "es-a0-famille-fr-v8",
+     "term": "yo",
+     "gloss": "je, moi",
+     "pos": "pron",
+     "audio": "m:es-yo"
+    }
+   ],
+   "dialogues": [
+    {
+     "id": "es-a0-famille-fr-d1",
+     "title": "Ma famille",
+     "lines": [
+      {
+       "who": "A",
+       "text": "Este es mi padre.",
+       "tr": "C'est mon père."
+      },
+      {
+       "who": "B",
+       "text": "¡Hola!",
+       "tr": "Bonjour !"
+      },
+      {
+       "who": "A",
+       "text": "Esta es mi madre.",
+       "tr": "C'est ma mère."
+      },
+      {
+       "who": "B",
+       "text": "¡Bonita familia!",
+       "tr": "Chouette famille !"
+      }
+     ],
+     "audio": "m:es-famille-d1"
+    }
+   ],
+   "grammar": [
+    {
+     "id": "es-a0-famille-fr-g1",
+     "title": "mi = mon / ma / mes",
+     "md": "**Mi** ne change pas : *mi padre*, *mi madre*. Le genre apparaît dans *este / esta*.",
+     "examples": [
+      {
+       "text": "mi padre",
+       "tr": "mon père"
+      },
+      {
+       "text": "mi madre",
+       "tr": "ma mère"
+      }
+     ]
+    }
+   ],
+   "exercises": [
+    {
+     "id": "es-a0-famille-fr-x1",
+     "kind": "mcq",
+     "prompt": "Que veut dire familia ?",
+     "choices": [
+      "famille",
+      "père",
+      "mère"
+     ],
+     "correct": 0
+    },
+    {
+     "id": "es-a0-famille-fr-x2",
+     "kind": "match",
+     "prompt": "Associe chaque mot à son sens.",
+     "pairs": [
+      {
+       "a": "familia",
+       "b": "famille"
+      },
+      {
+       "a": "padre",
+       "b": "père"
+      },
+      {
+       "a": "madre",
+       "b": "mère"
+      },
+      {
+       "a": "hermano",
+       "b": "frère"
+      },
+      {
+       "a": "hermana",
+       "b": "sœur"
+      }
+     ]
+    },
+    {
+     "id": "es-a0-famille-fr-x3",
+     "kind": "dictation",
+     "prompt": "Écoute et écris le mot.",
+     "audio": "m:es-familia",
+     "answers": [
+      "familia"
+     ]
+    },
+    {
+     "id": "es-a0-famille-fr-x4",
+     "kind": "speak",
+     "prompt": "Dis « père » en Espagnol, puis compare.",
+     "model": "padre",
+     "audio": "m:es-padre"
+    },
+    {
+     "id": "es-a0-famille-fr-x5",
+     "kind": "truefalse",
+     "prompt": "« mi padre » veut dire « mon père ».",
+     "correct": 0
+    },
+    {
+     "id": "es-a0-famille-fr-x6",
+     "kind": "translate",
+     "prompt": "Traduis : mère.",
+     "answers": [
+      "madre"
+     ]
+    },
+    {
+     "id": "es-a0-famille-fr-x7",
+     "kind": "write",
+     "prompt": "Écris « frère ».",
+     "model": "hermano"
+    },
+    {
+     "id": "es-a0-famille-fr-x8",
+     "kind": "mcq",
+     "prompt": "Que veut dire hermana ?",
+     "choices": [
+      "frère",
+      "sœur",
+      "famille"
+     ],
+     "correct": 1
+    }
+   ],
+   "stories": [],
+   "cards": [
+    {
+     "id": "es-a0-famille-fr-c1",
+     "vocab": "es-a0-famille-fr-v1"
+    },
+    {
+     "id": "es-a0-famille-fr-c2",
+     "vocab": "es-a0-famille-fr-v2"
+    },
+    {
+     "id": "es-a0-famille-fr-c3",
+     "vocab": "es-a0-famille-fr-v3"
+    },
+    {
+     "id": "es-a0-famille-fr-c4",
+     "vocab": "es-a0-famille-fr-v4"
+    },
+    {
+     "id": "es-a0-famille-fr-c5",
+     "vocab": "es-a0-famille-fr-v5"
+    }
+   ],
+   "animations": []
+  }
+ ]
+}

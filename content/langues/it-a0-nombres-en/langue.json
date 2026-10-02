@@ -1,0 +1,258 @@
+{
+ "format": 1,
+ "type": "langue",
+ "id": "it-a0-nombres-en",
+ "version": 1,
+ "target": "it",
+ "level": "a0",
+ "theme": "nombres",
+ "source": "en",
+ "title": "Italian A0 — Numbers",
+ "state": "review",
+ "units": [
+  {
+   "id": "it-a0-nombres-en-u1",
+   "title": "Counting from 0 to 10",
+   "minutes": 10,
+   "skills": [
+    "co",
+    "ce",
+    "po"
+   ],
+   "prerequisites": [],
+   "vocab": [
+    {
+     "id": "it-a0-nombres-en-v1",
+     "term": "zero",
+     "gloss": "zero",
+     "pos": "num",
+     "audio": "m:it-zero"
+    },
+    {
+     "id": "it-a0-nombres-en-v2",
+     "term": "uno",
+     "gloss": "one",
+     "pos": "num",
+     "audio": "m:it-uno"
+    },
+    {
+     "id": "it-a0-nombres-en-v3",
+     "term": "due",
+     "gloss": "two",
+     "pos": "num",
+     "audio": "m:it-due"
+    },
+    {
+     "id": "it-a0-nombres-en-v4",
+     "term": "tre",
+     "gloss": "three",
+     "pos": "num",
+     "audio": "m:it-tre"
+    },
+    {
+     "id": "it-a0-nombres-en-v5",
+     "term": "quattro",
+     "gloss": "four",
+     "pos": "num",
+     "audio": "m:it-quattro"
+    },
+    {
+     "id": "it-a0-nombres-en-v6",
+     "term": "cinque",
+     "gloss": "five",
+     "pos": "num",
+     "audio": "m:it-cinque"
+    },
+    {
+     "id": "it-a0-nombres-en-v7",
+     "term": "sei",
+     "gloss": "six",
+     "pos": "num",
+     "audio": "m:it-sei"
+    },
+    {
+     "id": "it-a0-nombres-en-v8",
+     "term": "sette",
+     "gloss": "seven",
+     "pos": "num",
+     "audio": "m:it-sette"
+    },
+    {
+     "id": "it-a0-nombres-en-v9",
+     "term": "otto",
+     "gloss": "eight",
+     "pos": "num",
+     "audio": "m:it-otto"
+    },
+    {
+     "id": "it-a0-nombres-en-v10",
+     "term": "nove",
+     "gloss": "nine",
+     "pos": "num",
+     "audio": "m:it-nove"
+    },
+    {
+     "id": "it-a0-nombres-en-v11",
+     "term": "dieci",
+     "gloss": "ten",
+     "pos": "num",
+     "audio": "m:it-dieci"
+    }
+   ],
+   "dialogues": [
+    {
+     "id": "it-a0-nombres-en-d1",
+     "title": "Counting",
+     "lines": [
+      {
+       "who": "A",
+       "text": "Uno, due, tre.",
+       "tr": "One, two, three."
+      },
+      {
+       "who": "B",
+       "text": "Quattro, cinque, sei.",
+       "tr": "Four, five, six."
+      },
+      {
+       "who": "A",
+       "text": "Sette, otto, nove, dieci.",
+       "tr": "Seven, eight, nine, ten."
+      }
+     ],
+     "audio": "m:it-nombres-d1"
+    }
+   ],
+   "grammar": [
+    {
+     "id": "it-a0-nombres-en-g1",
+     "title": "Counting in Italian",
+     "md": "From **uno** (1) to **dieci** (10). *cinque* uses 'qu', *sette* and *otto* double the consonant.",
+     "examples": [
+      {
+       "text": "uno, due, tre",
+       "tr": "one, two, three"
+      }
+     ]
+    }
+   ],
+   "exercises": [
+    {
+     "id": "it-a0-nombres-en-x1",
+     "kind": "mcq",
+     "prompt": "What does zero mean?",
+     "choices": [
+      "zero",
+      "one",
+      "two"
+     ],
+     "correct": 0
+    },
+    {
+     "id": "it-a0-nombres-en-x2",
+     "kind": "match",
+     "prompt": "Match each word to its meaning.",
+     "pairs": [
+      {
+       "a": "zero",
+       "b": "zero"
+      },
+      {
+       "a": "uno",
+       "b": "one"
+      },
+      {
+       "a": "due",
+       "b": "two"
+      },
+      {
+       "a": "tre",
+       "b": "three"
+      },
+      {
+       "a": "quattro",
+       "b": "four"
+      }
+     ]
+    },
+    {
+     "id": "it-a0-nombres-en-x3",
+     "kind": "dictation",
+     "prompt": "Listen and write the word.",
+     "audio": "m:it-zero",
+     "answers": [
+      "zero"
+     ]
+    },
+    {
+     "id": "it-a0-nombres-en-x4",
+     "kind": "speak",
+     "prompt": "Say 'one' in Italian, then compare.",
+     "model": "uno",
+     "audio": "m:it-uno"
+    },
+    {
+     "id": "it-a0-nombres-en-x5",
+     "kind": "truefalse",
+     "prompt": "'dieci' means 'ten'.",
+     "correct": 0
+    },
+    {
+     "id": "it-a0-nombres-en-x6",
+     "kind": "translate",
+     "prompt": "Translate: two.",
+     "answers": [
+      "due"
+     ]
+    },
+    {
+     "id": "it-a0-nombres-en-x7",
+     "kind": "write",
+     "prompt": "Write 'three'.",
+     "model": "tre"
+    },
+    {
+     "id": "it-a0-nombres-en-x8",
+     "kind": "mcq",
+     "prompt": "What does quattro mean?",
+     "choices": [
+      "three",
+      "four",
+      "zero"
+     ],
+     "correct": 1
+    }
+   ],
+   "stories": [],
+   "cards": [
+    {
+     "id": "it-a0-nombres-en-c1",
+     "vocab": "it-a0-nombres-en-v1"
+    },
+    {
+     "id": "it-a0-nombres-en-c2",
+     "vocab": "it-a0-nombres-en-v2"
+    },
+    {
+     "id": "it-a0-nombres-en-c3",
+     "vocab": "it-a0-nombres-en-v3"
+    },
+    {
+     "id": "it-a0-nombres-en-c4",
+     "vocab": "it-a0-nombres-en-v4"
+    },
+    {
+     "id": "it-a0-nombres-en-c5",
+     "vocab": "it-a0-nombres-en-v5"
+    }
+   ],
+   "animations": [
+    {
+     "id": "it-a0-nombres-en-u1-a1",
+     "kind": "gesture",
+     "label": "Counting from 1 to 5"
+    }
+   ]
+  }
+ ]
+}

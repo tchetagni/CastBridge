@@ -1,0 +1,256 @@
+{
+ "format": 1,
+ "type": "langue",
+ "id": "fr-a0-salut-en",
+ "version": 2,
+ "target": "fr",
+ "level": "a0",
+ "theme": "salut",
+ "source": "en",
+ "title": "French A0 — Greetings",
+ "state": "review",
+ "units": [
+  {
+   "id": "fr-a0-salut-en-u1",
+   "title": "Hello, thank you, goodbye",
+   "minutes": 10,
+   "skills": [
+    "co",
+    "ce",
+    "po"
+   ],
+   "prerequisites": [],
+   "vocab": [
+    {
+     "id": "fr-a0-salut-en-v1",
+     "term": "Bonjour",
+     "gloss": "hello",
+     "pos": "interj",
+     "audio": "m:fr-bonjour"
+    },
+    {
+     "id": "fr-a0-salut-en-v2",
+     "term": "Salut",
+     "gloss": "hi",
+     "pos": "interj",
+     "audio": "m:fr-salut"
+    },
+    {
+     "id": "fr-a0-salut-en-v3",
+     "term": "Bonne journée",
+     "gloss": "have a good day",
+     "pos": "interj",
+     "audio": "m:fr-bonnejourne"
+    },
+    {
+     "id": "fr-a0-salut-en-v4",
+     "term": "Au revoir",
+     "gloss": "goodbye",
+     "pos": "interj",
+     "audio": "m:fr-aurevoir"
+    },
+    {
+     "id": "fr-a0-salut-en-v5",
+     "term": "Merci",
+     "gloss": "thank you",
+     "pos": "interj",
+     "audio": "m:fr-merci"
+    },
+    {
+     "id": "fr-a0-salut-en-v6",
+     "term": "S'il te plaît",
+     "gloss": "please",
+     "pos": "interj",
+     "audio": "m:fr-silteplat"
+    },
+    {
+     "id": "fr-a0-salut-en-v7",
+     "term": "Pardon",
+     "gloss": "sorry",
+     "pos": "interj",
+     "audio": "m:fr-pardon"
+    },
+    {
+     "id": "fr-a0-salut-en-v8",
+     "term": "Oui",
+     "gloss": "yes",
+     "pos": "interj",
+     "audio": "m:fr-oui"
+    },
+    {
+     "id": "fr-a0-salut-en-v9",
+     "term": "Non",
+     "gloss": "no",
+     "pos": "interj",
+     "audio": "m:fr-non"
+    },
+    {
+     "id": "fr-a0-salut-en-v10",
+     "term": "Comment ça va ?",
+     "gloss": "how are you?",
+     "pos": "phrase",
+     "audio": "m:fr-commentava"
+    }
+   ],
+   "dialogues": [
+    {
+     "id": "fr-a0-salut-en-d1",
+     "title": "A meeting",
+     "lines": [
+      {
+       "who": "A",
+       "text": "Bonjour !",
+       "tr": "Hello!"
+      },
+      {
+       "who": "B",
+       "text": "Salut !",
+       "tr": "Hi!"
+      },
+      {
+       "who": "A",
+       "text": "Comment ça va ?",
+       "tr": "How are you?"
+      },
+      {
+       "who": "B",
+       "text": "Ça va bien, merci.",
+       "tr": "I'm fine, thanks."
+      },
+      {
+       "who": "A",
+       "text": "Au revoir !",
+       "tr": "Goodbye!"
+      }
+     ],
+     "audio": "m:fr-salut-d1",
+     "video": "m:fr-salut-salut"
+    }
+   ],
+   "grammar": [
+    {
+     "id": "fr-a0-salut-en-g1",
+     "title": "tu and vous",
+     "md": "**Tu** is informal, **vous** is polite or plural. Liaison links words: *vous‿allez*.",
+     "examples": [
+      {
+       "text": "Comment ça va ?",
+       "tr": "how are you?"
+      }
+     ]
+    }
+   ],
+   "exercises": [
+    {
+     "id": "fr-a0-salut-en-x1",
+     "kind": "mcq",
+     "prompt": "What does Bonjour mean?",
+     "choices": [
+      "hello",
+      "hi",
+      "have a good day"
+     ],
+     "correct": 0
+    },
+    {
+     "id": "fr-a0-salut-en-x2",
+     "kind": "match",
+     "prompt": "Match each word to its meaning.",
+     "pairs": [
+      {
+       "a": "Bonjour",
+       "b": "hello"
+      },
+      {
+       "a": "Salut",
+       "b": "hi"
+      },
+      {
+       "a": "Bonne journée",
+       "b": "have a good day"
+      },
+      {
+       "a": "Au revoir",
+       "b": "goodbye"
+      },
+      {
+       "a": "Merci",
+       "b": "thank you"
+      }
+     ]
+    },
+    {
+     "id": "fr-a0-salut-en-x3",
+     "kind": "dictation",
+     "prompt": "Listen and write the word.",
+     "audio": "m:fr-bonjour",
+     "answers": [
+      "Bonjour"
+     ]
+    },
+    {
+     "id": "fr-a0-salut-en-x4",
+     "kind": "speak",
+     "prompt": "Say 'hi' in French, then compare.",
+     "model": "Salut",
+     "audio": "m:fr-salut"
+    },
+    {
+     "id": "fr-a0-salut-en-x5",
+     "kind": "truefalse",
+     "prompt": "'Merci' means 'thank you'.",
+     "correct": 0
+    },
+    {
+     "id": "fr-a0-salut-en-x6",
+     "kind": "translate",
+     "prompt": "Translate: have a good day.",
+     "answers": [
+      "Bonne journée"
+     ]
+    },
+    {
+     "id": "fr-a0-salut-en-x7",
+     "kind": "write",
+     "prompt": "Write 'goodbye'.",
+     "model": "Au revoir"
+    },
+    {
+     "id": "fr-a0-salut-en-x8",
+     "kind": "mcq",
+     "prompt": "What does Merci mean?",
+     "choices": [
+      "goodbye",
+      "thank you",
+      "hello"
+     ],
+     "correct": 1
+    }
+   ],
+   "stories": [],
+   "cards": [
+    {
+     "id": "fr-a0-salut-en-c1",
+     "vocab": "fr-a0-salut-en-v1"
+    },
+    {
+     "id": "fr-a0-salut-en-c2",
+     "vocab": "fr-a0-salut-en-v2"
+    },
+    {
+     "id": "fr-a0-salut-en-c3",
+     "vocab": "fr-a0-salut-en-v3"
+    },
+    {
+     "id": "fr-a0-salut-en-c4",
+     "vocab": "fr-a0-salut-en-v4"
+    },
+    {
+     "id": "fr-a0-salut-en-c5",
+     "vocab": "fr-a0-salut-en-v5"
+    }
+   ],
+   "animations": []
+  }
+ ]
+}

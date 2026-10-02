@@ -1,0 +1,240 @@
+{
+ "format": 1,
+ "type": "langue",
+ "id": "de-a0-famille-fr",
+ "version": 1,
+ "target": "de",
+ "level": "a0",
+ "theme": "famille",
+ "source": "fr",
+ "title": "Allemand A0 — Ma famille",
+ "state": "review",
+ "units": [
+  {
+   "id": "de-a0-famille-fr-u1",
+   "title": "Papa, maman, et moi",
+   "minutes": 10,
+   "skills": [
+    "co",
+    "ce",
+    "po"
+   ],
+   "prerequisites": [],
+   "vocab": [
+    {
+     "id": "de-a0-famille-fr-v1",
+     "term": "Familie",
+     "gloss": "famille",
+     "pos": "n",
+     "audio": "m:de-familie"
+    },
+    {
+     "id": "de-a0-famille-fr-v2",
+     "term": "Vater",
+     "gloss": "père",
+     "pos": "n",
+     "audio": "m:de-vater"
+    },
+    {
+     "id": "de-a0-famille-fr-v3",
+     "term": "Mutter",
+     "gloss": "mère",
+     "pos": "n",
+     "audio": "m:de-mutter"
+    },
+    {
+     "id": "de-a0-famille-fr-v4",
+     "term": "Bruder",
+     "gloss": "frère",
+     "pos": "n",
+     "audio": "m:de-bruder"
+    },
+    {
+     "id": "de-a0-famille-fr-v5",
+     "term": "Schwester",
+     "gloss": "sœur",
+     "pos": "n",
+     "audio": "m:de-schwester"
+    },
+    {
+     "id": "de-a0-famille-fr-v6",
+     "term": "Großvater",
+     "gloss": "grand-père",
+     "pos": "n",
+     "audio": "m:de-grovater"
+    },
+    {
+     "id": "de-a0-famille-fr-v7",
+     "term": "Großmutter",
+     "gloss": "grand-mère",
+     "pos": "n",
+     "audio": "m:de-gromutter"
+    },
+    {
+     "id": "de-a0-famille-fr-v8",
+     "term": "ich",
+     "gloss": "je, moi",
+     "pos": "pron",
+     "audio": "m:de-ich"
+    }
+   ],
+   "dialogues": [
+    {
+     "id": "de-a0-famille-fr-d1",
+     "title": "Ma famille",
+     "lines": [
+      {
+       "who": "A",
+       "text": "Das ist mein Vater.",
+       "tr": "C'est mon père."
+      },
+      {
+       "who": "B",
+       "text": "Hallo!",
+       "tr": "Bonjour !"
+      },
+      {
+       "who": "A",
+       "text": "Das ist meine Mutter.",
+       "tr": "C'est ma mère."
+      },
+      {
+       "who": "B",
+       "text": "Schöne Familie!",
+       "tr": "Chouette famille !"
+      }
+     ],
+     "audio": "m:de-famille-d1"
+    }
+   ],
+   "grammar": [
+    {
+     "id": "de-a0-famille-fr-g1",
+     "title": "mein / meine = mon / ma",
+     "md": "**Mein** varie : *mein Vater* (masculin), *meine Mutter* (féminin).",
+     "examples": [
+      {
+       "text": "mein Vater",
+       "tr": "mon père"
+      },
+      {
+       "text": "meine Mutter",
+       "tr": "ma mère"
+      }
+     ]
+    }
+   ],
+   "exercises": [
+    {
+     "id": "de-a0-famille-fr-x1",
+     "kind": "mcq",
+     "prompt": "Que veut dire Familie ?",
+     "choices": [
+      "famille",
+      "père",
+      "mère"
+     ],
+     "correct": 0
+    },
+    {
+     "id": "de-a0-famille-fr-x2",
+     "kind": "match",
+     "prompt": "Associe chaque mot à son sens.",
+     "pairs": [
+      {
+       "a": "Familie",
+       "b": "famille"
+      },
+      {
+       "a": "Vater",
+       "b": "père"
+      },
+      {
+       "a": "Mutter",
+       "b": "mère"
+      },
+      {
+       "a": "Bruder",
+       "b": "frère"
+      },
+      {
+       "a": "Schwester",
+       "b": "sœur"
+      }
+     ]
+    },
+    {
+     "id": "de-a0-famille-fr-x3",
+     "kind": "dictation",
+     "prompt": "Écoute et écris le mot.",
+     "audio": "m:de-familie",
+     "answers": [
+      "Familie"
+     ]
+    },
+    {
+     "id": "de-a0-famille-fr-x4",
+     "kind": "speak",
+     "prompt": "Dis « père » en Allemand, puis compare.",
+     "model": "Vater",
+     "audio": "m:de-vater"
+    },
+    {
+     "id": "de-a0-famille-fr-x5",
+     "kind": "truefalse",
+     "prompt": "« mein Vater » veut dire « mon père ».",
+     "correct": 0
+    },
+    {
+     "id": "de-a0-famille-fr-x6",
+     "kind": "translate",
+     "prompt": "Traduis : mère.",
+     "answers": [
+      "Mutter"
+     ]
+    },
+    {
+     "id": "de-a0-famille-fr-x7",
+     "kind": "write",
+     "prompt": "Écris « frère ».",
+     "model": "Bruder"
+    },
+    {
+     "id": "de-a0-famille-fr-x8",
+     "kind": "mcq",
+     "prompt": "Que veut dire Schwester ?",
+     "choices": [
+      "frère",
+      "sœur",
+      "famille"
+     ],
+     "correct": 1
+    }
+   ],
+   "stories": [],
+   "cards": [
+    {
+     "id": "de-a0-famille-fr-c1",
+     "vocab": "de-a0-famille-fr-v1"
+    },
+    {
+     "id": "de-a0-famille-fr-c2",
+     "vocab": "de-a0-famille-fr-v2"
+    },
+    {
+     "id": "de-a0-famille-fr-c3",
+     "vocab": "de-a0-famille-fr-v3"
+    },
+    {
+     "id": "de-a0-famille-fr-c4",
+     "vocab": "de-a0-famille-fr-v4"
+    },
+    {
+     "id": "de-a0-famille-fr-c5",
+     "vocab": "de-a0-famille-fr-v5"
+    }
+   ],
+   "animations": []
+  }
+ ]
+}

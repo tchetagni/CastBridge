@@ -1,0 +1,258 @@
+{
+ "format": 1,
+ "type": "langue",
+ "id": "de-a0-nombres-fr",
+ "version": 1,
+ "target": "de",
+ "level": "a0",
+ "theme": "nombres",
+ "source": "fr",
+ "title": "Allemand A0 — Les nombres",
+ "state": "review",
+ "units": [
+  {
+   "id": "de-a0-nombres-fr-u1",
+   "title": "Compter de 0 à 10",
+   "minutes": 10,
+   "skills": [
+    "co",
+    "ce",
+    "po"
+   ],
+   "prerequisites": [],
+   "vocab": [
+    {
+     "id": "de-a0-nombres-fr-v1",
+     "term": "null",
+     "gloss": "zéro",
+     "pos": "num",
+     "audio": "m:de-null"
+    },
+    {
+     "id": "de-a0-nombres-fr-v2",
+     "term": "eins",
+     "gloss": "un",
+     "pos": "num",
+     "audio": "m:de-eins"
+    },
+    {
+     "id": "de-a0-nombres-fr-v3",
+     "term": "zwei",
+     "gloss": "deux",
+     "pos": "num",
+     "audio": "m:de-zwei"
+    },
+    {
+     "id": "de-a0-nombres-fr-v4",
+     "term": "drei",
+     "gloss": "trois",
+     "pos": "num",
+     "audio": "m:de-drei"
+    },
+    {
+     "id": "de-a0-nombres-fr-v5",
+     "term": "vier",
+     "gloss": "quatre",
+     "pos": "num",
+     "audio": "m:de-vier"
+    },
+    {
+     "id": "de-a0-nombres-fr-v6",
+     "term": "fünf",
+     "gloss": "cinq",
+     "pos": "num",
+     "audio": "m:de-fnf"
+    },
+    {
+     "id": "de-a0-nombres-fr-v7",
+     "term": "sechs",
+     "gloss": "six",
+     "pos": "num",
+     "audio": "m:de-sechs"
+    },
+    {
+     "id": "de-a0-nombres-fr-v8",
+     "term": "sieben",
+     "gloss": "sept",
+     "pos": "num",
+     "audio": "m:de-sieben"
+    },
+    {
+     "id": "de-a0-nombres-fr-v9",
+     "term": "acht",
+     "gloss": "huit",
+     "pos": "num",
+     "audio": "m:de-acht"
+    },
+    {
+     "id": "de-a0-nombres-fr-v10",
+     "term": "neun",
+     "gloss": "neuf",
+     "pos": "num",
+     "audio": "m:de-neun"
+    },
+    {
+     "id": "de-a0-nombres-fr-v11",
+     "term": "zehn",
+     "gloss": "dix",
+     "pos": "num",
+     "audio": "m:de-zehn"
+    }
+   ],
+   "dialogues": [
+    {
+     "id": "de-a0-nombres-fr-d1",
+     "title": "Compter",
+     "lines": [
+      {
+       "who": "A",
+       "text": "Eins, zwei, drei.",
+       "tr": "Un, deux, trois."
+      },
+      {
+       "who": "B",
+       "text": "Vier, fünf, sechs.",
+       "tr": "Quatre, cinq, six."
+      },
+      {
+       "who": "A",
+       "text": "Sieben, acht, neun, zehn.",
+       "tr": "Sept, huit, neuf, dix."
+      }
+     ],
+     "audio": "m:de-nombres-d1"
+    }
+   ],
+   "grammar": [
+    {
+     "id": "de-a0-nombres-fr-g1",
+     "title": "Compter en allemand",
+     "md": "De **eins** (1) à **zehn** (10), chaque nombre est un mot. Le « s » de *sechs* se prononce comme un « z ».",
+     "examples": [
+      {
+       "text": "eins, zwei, drei",
+       "tr": "un, deux, trois"
+      }
+     ]
+    }
+   ],
+   "exercises": [
+    {
+     "id": "de-a0-nombres-fr-x1",
+     "kind": "mcq",
+     "prompt": "Que veut dire null ?",
+     "choices": [
+      "zéro",
+      "un",
+      "deux"
+     ],
+     "correct": 0
+    },
+    {
+     "id": "de-a0-nombres-fr-x2",
+     "kind": "match",
+     "prompt": "Associe chaque mot à son sens.",
+     "pairs": [
+      {
+       "a": "null",
+       "b": "zéro"
+      },
+      {
+       "a": "eins",
+       "b": "un"
+      },
+      {
+       "a": "zwei",
+       "b": "deux"
+      },
+      {
+       "a": "drei",
+       "b": "trois"
+      },
+      {
+       "a": "vier",
+       "b": "quatre"
+      }
+     ]
+    },
+    {
+     "id": "de-a0-nombres-fr-x3",
+     "kind": "dictation",
+     "prompt": "Écoute et écris le mot.",
+     "audio": "m:de-null",
+     "answers": [
+      "null"
+     ]
+    },
+    {
+     "id": "de-a0-nombres-fr-x4",
+     "kind": "speak",
+     "prompt": "Dis « un » en Allemand, puis compare.",
+     "model": "eins",
+     "audio": "m:de-eins"
+    },
+    {
+     "id": "de-a0-nombres-fr-x5",
+     "kind": "truefalse",
+     "prompt": "« zehn » veut dire « dix ».",
+     "correct": 0
+    },
+    {
+     "id": "de-a0-nombres-fr-x6",
+     "kind": "translate",
+     "prompt": "Traduis : deux.",
+     "answers": [
+      "zwei"
+     ]
+    },
+    {
+     "id": "de-a0-nombres-fr-x7",
+     "kind": "write",
+     "prompt": "Écris « trois ».",
+     "model": "drei"
+    },
+    {
+     "id": "de-a0-nombres-fr-x8",
+     "kind": "mcq",
+     "prompt": "Que veut dire vier ?",
+     "choices": [
+      "trois",
+      "quatre",
+      "zéro"
+     ],
+     "correct": 1
+    }
+   ],
+   "stories": [],
+   "cards": [
+    {
+     "id": "de-a0-nombres-fr-c1",
+     "vocab": "de-a0-nombres-fr-v1"
+    },
+    {
+     "id": "de-a0-nombres-fr-c2",
+     "vocab": "de-a0-nombres-fr-v2"
+    },
+    {
+     "id": "de-a0-nombres-fr-c3",
+     "vocab": "de-a0-nombres-fr-v3"
+    },
+    {
+     "id": "de-a0-nombres-fr-c4",
+     "vocab": "de-a0-nombres-fr-v4"
+    },
+    {
+     "id": "de-a0-nombres-fr-c5",
+     "vocab": "de-a0-nombres-fr-v5"
+    }
+   ],
+   "animations": [
+    {
+     "id": "de-a0-nombres-fr-u1-a1",
+     "kind": "gesture",
+     "label": "Compter de 1 à 5"
+    }
+   ]
+  }
+ ]
+}

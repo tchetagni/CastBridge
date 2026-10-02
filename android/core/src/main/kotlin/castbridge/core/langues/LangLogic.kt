@@ -75,6 +75,33 @@ object Placement {
     }
 }
 
+/** What a device offers for the « Langues » screen (docs/LANGUES.md § 6.5). A smart TV may have no microphone and no keyboard. */
+data class LangCaps(val mic: Boolean = true, val keyboard: Boolean = true) {
+    companion object {
+        val PHONE = LangCaps(mic = true, keyboard = true)
+        val TV = LangCaps(mic = true, keyboard = false)
+        val TV_NO_MIC = LangCaps(mic = false, keyboard = false)
+    }
+}
+
+/** Adapts an exercise to what a device can do. Pure, no I/O.
+ *  Listening (`co`) never needs a microphone: only `speak` records the learner, so only it is blocked without one.
+ *  Typed exercises need a keyboard; on a TV the dictation is presented as multiple choice instead (chosen by the screen). */
+object LangAdapt {
+    fun needsMic(kind: LangExerciseKind) = kind == LangExerciseKind.SPEAK
+
+    private val typed = setOf(LangExerciseKind.DICTATION, LangExerciseKind.WRITE, LangExerciseKind.TRANSLATE, LangExerciseKind.ORDER, LangExerciseKind.CLOZE)
+    fun needsTyping(kind: LangExerciseKind) = kind in typed
+
+    /** `true` when [caps] cannot run [x] as-is and the screen must degrade it (hide the record button, or switch to multiple choice). */
+    fun blocked(x: LangExercise, caps: LangCaps): Boolean = (needsMic(x.kind) && !caps.mic) || (needsTyping(x.kind) && !caps.keyboard)
+
+    /** The listening form of a `speak` exercise on a mic-less TV: the recording step is dropped — the learner
+     *  listens to the model audio, repeats aloud and self-assesses against the model (docs/LANGUES.md § 2.2). */
+    fun listenAndRepeat(x: LangExercise): LangExercise =
+        if (x.kind == LangExerciseKind.SPEAK) x.copy(prompt = "Écoute, répète à voix haute, puis compare avec le modèle.") else x
+}
+
 /** LangSkill graph of one language (`graph/langue-<code>.json`): nodes with prerequisites; must be acyclic, prerequisites never above the node's level. */
 data class LangSkillNode(val id: String, val level: LangLevel, val skill: LangSkill?, val title: String, val requires: List<String>, val unit: String?)
 data class LangSkillGraph(val lang: Lang, val nodes: List<LangSkillNode>) {

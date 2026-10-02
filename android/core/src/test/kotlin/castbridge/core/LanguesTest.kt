@@ -34,7 +34,9 @@ class LanguesTest {
         assertEquals(emptyList(), LangValidator.validate(p))
         assertEquals(LangLots.Parts(Lang.ZH, LangLevel.A0, "salut", Lang.FR), p.parts)
         assertEquals(9, p.units.single().exercises.size)
-        assertTrue(p.media.values.all { it.synthetic })
+        assertTrue(p.media.values.all { it.synthetic || it.kind == "video" })
+        assertTrue(p.media.values.any { it.kind == "video" })
+        assertTrue(p.media.values.filter { it.kind == "audio" }.all { it.synthetic })
     }
     @Test fun allLanguagePacksParseAndValidate() {
         val dirs = (content.listFiles { f -> f.isDirectory && File(f, "langue.json").exists() } ?: emptyArray()).sortedBy { it.name }
@@ -219,5 +221,32 @@ class LanguesTest {
         assertContains(LangValidator.validate(p.copy(media = p.media + (m.id to m.copy(voiceLicense = null)))).joinToString(), "licence de la voix")
         assertContains(LangValidator.validate(p.copy(media = p.media + (m.id to m.copy(voiceLicense = "CPML")))).joinToString(), "licence de la voix")
         assertEquals(2048, LangBudget.PHONE_LANG_DEFAULT_MB)
+    }
+
+    // ---- device adaptation (mic-less smart TVs) ----
+    @Test fun listeningNeverNeedsAMicrophone() {
+        assertTrue(LangAdapt.needsMic(LangExerciseKind.SPEAK))
+        assertFalse(LangAdapt.needsMic(LangExerciseKind.DICTATION)); assertFalse(LangAdapt.needsMic(LangExerciseKind.MCQ)); assertFalse(LangAdapt.needsMic(LangExerciseKind.MATCH))
+        assertTrue(LangAdapt.needsTyping(LangExerciseKind.DICTATION)); assertTrue(LangAdapt.needsTyping(LangExerciseKind.WRITE))
+        assertFalse(LangAdapt.needsTyping(LangExerciseKind.MCQ)); assertFalse(LangAdapt.needsTyping(LangExerciseKind.MATCH)); assertFalse(LangAdapt.needsTyping(LangExerciseKind.TRUEFALSE))
+        assertFalse(LangAdapt.needsTyping(LangExerciseKind.SPEAK))
+    }
+    @Test fun micLessTvBlocksOnlySpeakingAndKeepsListening() {
+        fun ex(kind: LangExerciseKind) = LangExercise("x", kind, "p", "m:a", listOf("a"), listOf("a"), 0, emptyList(), listOf("a"), "m", LangSkill.LISTENING)
+        assertTrue(LangAdapt.blocked(ex(LangExerciseKind.SPEAK), LangCaps.TV_NO_MIC))
+        assertFalse(LangAdapt.blocked(ex(LangExerciseKind.SPEAK), LangCaps.TV))
+        assertFalse(LangAdapt.blocked(ex(LangExerciseKind.SPEAK), LangCaps.PHONE))
+        assertTrue(LangAdapt.blocked(ex(LangExerciseKind.DICTATION), LangCaps.TV_NO_MIC))    // dictation needs typing → MCQ fallback on the screen
+        assertTrue(LangAdapt.blocked(ex(LangExerciseKind.WRITE), LangCaps.TV_NO_MIC))
+        assertFalse(LangAdapt.blocked(ex(LangExerciseKind.MCQ), LangCaps.TV_NO_MIC))         // listening exercises run as-is
+        assertFalse(LangAdapt.blocked(ex(LangExerciseKind.MATCH), LangCaps.TV_NO_MIC))
+    }
+    @Test fun speakDegradesToListenAndRepeatWithoutAMic() {
+        val s = LangExercise("x", LangExerciseKind.SPEAK, "Dis merci", "m:a", emptyList(), emptyList(), null, emptyList(), emptyList(), "xièxie", LangSkill.SPEAKING)
+        val d = LangAdapt.listenAndRepeat(s)
+        assertEquals(LangExerciseKind.SPEAK, d.kind); assertEquals("xièxie", d.model)   // the model is still the target to repeat
+        assertNotEquals(s.prompt, d.prompt)
+        val q = LangExercise("y", LangExerciseKind.MCQ, "p", null, listOf("a"), listOf("a"), 0, emptyList(), emptyList(), null, LangSkill.READING)
+        assertEquals(q, LangAdapt.listenAndRepeat(q))   // non-speak exercises are untouched
     }
 }

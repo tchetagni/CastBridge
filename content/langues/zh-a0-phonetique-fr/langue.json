@@ -1,0 +1,473 @@
+{
+ "format": 1,
+ "type": "langue",
+ "id": "zh-a0-phonetique-fr",
+ "version": 1,
+ "target": "zh",
+ "level": "a0",
+ "theme": "phonetique",
+ "source": "fr",
+ "title": "Chinois A0 — Prononciation (tons et sons)",
+ "state": "review",
+ "units": [
+  {
+   "id": "zh-a0-phonetique-fr-u1",
+   "title": "Les quatre tons",
+   "minutes": 12,
+   "skills": [
+    "co",
+    "po"
+   ],
+   "prerequisites": [],
+   "vocab": [
+    {
+     "id": "zh-a0-phonetique-fr-u1-v1",
+     "term": "妈",
+     "reading": "mā",
+     "gloss": "maman (1er ton)",
+     "pos": "n",
+     "audio": "m:zh-ma1"
+    },
+    {
+     "id": "zh-a0-phonetique-fr-u1-v2",
+     "term": "麻",
+     "reading": "má",
+     "gloss": "chanvre (2e ton)",
+     "pos": "n",
+     "audio": "m:zh-ma2"
+    },
+    {
+     "id": "zh-a0-phonetique-fr-u1-v3",
+     "term": "马",
+     "reading": "mǎ",
+     "gloss": "cheval (3e ton)",
+     "pos": "n",
+     "audio": "m:zh-ma3"
+    },
+    {
+     "id": "zh-a0-phonetique-fr-u1-v4",
+     "term": "骂",
+     "reading": "mà",
+     "gloss": "gronder (4e ton)",
+     "pos": "v",
+     "audio": "m:zh-ma4"
+    },
+    {
+     "id": "zh-a0-phonetique-fr-u1-v5",
+     "term": "吗",
+     "reading": "ma",
+     "gloss": "particule (ton neutre)",
+     "pos": "part",
+     "audio": "m:zh-ma0"
+    }
+   ],
+   "dialogues": [
+    {
+     "id": "zh-a0-phonetique-fr-u1-d1",
+     "title": "Écouter les tons",
+     "lines": [
+      {
+       "who": "A",
+       "text": "妈。",
+       "reading": "mā.",
+       "tr": "Maman (1er ton)."
+      },
+      {
+       "who": "A",
+       "text": "麻。",
+       "reading": "má.",
+       "tr": "Chanvre (2e ton)."
+      },
+      {
+       "who": "A",
+       "text": "马。",
+       "reading": "mǎ.",
+       "tr": "Cheval (3e ton)."
+      },
+      {
+       "who": "A",
+       "text": "骂。",
+       "reading": "mà.",
+       "tr": "Gronder (4e ton)."
+      }
+     ],
+     "audio": "m:zh-ma1234"
+    }
+   ],
+   "grammar": [
+    {
+     "id": "zh-a0-phonetique-fr-u1-g1",
+     "title": "Le ton change le sens",
+     "md": "Le chinois est une langue à **tons** : la même syllabe **ma** change de sens selon la hauteur. Quatre tons + un ton neutre :\n- **1er** mā : haut et plat (55)\n- **2e** má : monte (35)\n- **3e** mǎ : descend puis remonte (214)\n- **4e** mà : descend (51)\n- **neutre** ma : court, sans contour.",
+     "examples": [
+      {
+       "text": "妈 mā",
+       "tr": "maman"
+      },
+      {
+       "text": "马 mǎ",
+       "tr": "cheval"
+      }
+     ]
+    }
+   ],
+   "exercises": [
+    {
+     "id": "zh-a0-phonetique-fr-u1-x1",
+     "kind": "mcq",
+     "prompt": "« 马 (mǎ) » veut dire ?",
+     "choices": [
+      "maman",
+      "cheval",
+      "gronder"
+     ],
+     "correct": 1
+    },
+    {
+     "id": "zh-a0-phonetique-fr-u1-x2",
+     "kind": "match",
+     "prompt": "Associe chaque caractère à son sens.",
+     "pairs": [
+      {
+       "a": "妈",
+       "b": "maman"
+      },
+      {
+       "a": "马",
+       "b": "cheval"
+      },
+      {
+       "a": "骂",
+       "b": "gronder"
+      },
+      {
+       "a": "麻",
+       "b": "chanvre"
+      }
+     ]
+    },
+    {
+     "id": "zh-a0-phonetique-fr-u1-x3",
+     "kind": "dictation",
+     "prompt": "Écoute : quel caractère entends-tu ?",
+     "audio": "m:zh-ma3",
+     "answers": [
+      "马"
+     ]
+    },
+    {
+     "id": "zh-a0-phonetique-fr-u1-x4",
+     "kind": "speak",
+     "prompt": "Dis « mā » (1er ton, haut et plat), puis compare.",
+     "audio": "m:zh-ma1",
+     "model": "mā — ton 1 (55, haut plat)"
+    },
+    {
+     "id": "zh-a0-phonetique-fr-u1-x5",
+     "kind": "truefalse",
+     "prompt": "Le 3e ton descend puis remonte.",
+     "correct": 0
+    },
+    {
+     "id": "zh-a0-phonetique-fr-u1-x6",
+     "kind": "mcq",
+     "prompt": "Quel mot porte le 4e ton (descendant) ?",
+     "choices": [
+      "妈",
+      "麻",
+      "骂"
+     ],
+     "correct": 2
+    },
+    {
+     "id": "zh-a0-phonetique-fr-u1-x7",
+     "kind": "translate",
+     "prompt": "Traduis : cheval.",
+     "answers": [
+      "马"
+     ]
+    },
+    {
+     "id": "zh-a0-phonetique-fr-u1-x8",
+     "kind": "write",
+     "prompt": "Écris « maman » en caractères.",
+     "model": "妈"
+    }
+   ],
+   "stories": [],
+   "cards": [
+    {
+     "id": "zh-a0-phonetique-fr-u1-c1",
+     "vocab": "zh-a0-phonetique-fr-u1-v1"
+    },
+    {
+     "id": "zh-a0-phonetique-fr-u1-c2",
+     "vocab": "zh-a0-phonetique-fr-u1-v3"
+    },
+    {
+     "id": "zh-a0-phonetique-fr-u1-c3",
+     "vocab": "zh-a0-phonetique-fr-u1-v4"
+    }
+   ],
+   "animations": [
+    {
+     "id": "zh-a0-phonetique-fr-u1-a1",
+     "kind": "articulation",
+     "label": "Les courbes des quatre tons"
+    }
+   ]
+  },
+  {
+   "id": "zh-a0-phonetique-fr-u2",
+   "title": "Les sons difficiles",
+   "minutes": 12,
+   "skills": [
+    "co",
+    "po"
+   ],
+   "prerequisites": [
+    "zh-a0-phonetique-fr-u1"
+   ],
+   "vocab": [
+    {
+     "id": "zh-a0-phonetique-fr-u2-v1",
+     "term": "知",
+     "reading": "zhī",
+     "gloss": "savoir (son zh)",
+     "pos": "v",
+     "audio": "m:zh-zhi"
+    },
+    {
+     "id": "zh-a0-phonetique-fr-u2-v2",
+     "term": "吃",
+     "reading": "chī",
+     "gloss": "manger (son ch)",
+     "pos": "v",
+     "audio": "m:zh-chi"
+    },
+    {
+     "id": "zh-a0-phonetique-fr-u2-v3",
+     "term": "是",
+     "reading": "shì",
+     "gloss": "être (son sh)",
+     "pos": "v",
+     "audio": "m:zh-shi"
+    },
+    {
+     "id": "zh-a0-phonetique-fr-u2-v4",
+     "term": "西",
+     "reading": "xī",
+     "gloss": "ouest (son x)",
+     "pos": "n",
+     "audio": "m:zh-xi"
+    },
+    {
+     "id": "zh-a0-phonetique-fr-u2-v5",
+     "term": "七",
+     "reading": "qī",
+     "gloss": "sept (son q)",
+     "pos": "num",
+     "audio": "m:zh-qi"
+    },
+    {
+     "id": "zh-a0-phonetique-fr-u2-v6",
+     "term": "鱼",
+     "reading": "yú",
+     "gloss": "poisson (voyelle ü)",
+     "pos": "n",
+     "audio": "m:zh-yu"
+    },
+    {
+     "id": "zh-a0-phonetique-fr-u2-v7",
+     "term": "绿",
+     "reading": "lǜ",
+     "gloss": "vert (voyelle ü)",
+     "pos": "adj",
+     "audio": "m:zh-lv"
+    },
+    {
+     "id": "zh-a0-phonetique-fr-u2-v8",
+     "term": "日",
+     "reading": "rì",
+     "gloss": "jour, soleil (son r)",
+     "pos": "n",
+     "audio": "m:zh-ri"
+    }
+   ],
+   "dialogues": [
+    {
+     "id": "zh-a0-phonetique-fr-u2-d1",
+     "title": "Écouter les sons",
+     "lines": [
+      {
+       "who": "A",
+       "text": "知。",
+       "reading": "zhī.",
+       "tr": "Savoir (zh)."
+      },
+      {
+       "who": "A",
+       "text": "吃。",
+       "reading": "chī.",
+       "tr": "Manger (ch)."
+      },
+      {
+       "who": "A",
+       "text": "是。",
+       "reading": "shì.",
+       "tr": "Être (sh)."
+      },
+      {
+       "who": "A",
+       "text": "鱼。",
+       "reading": "yú.",
+       "tr": "Poisson (ü)."
+      }
+     ],
+     "audio": "m:zh-sounds4"
+    }
+   ],
+   "grammar": [
+    {
+     "id": "zh-a0-phonetique-fr-u2-g1",
+     "title": "zh / ch / sh : la langue se recourbe",
+     "md": "Pour **zh**, **ch**, **sh**, on **recourbe la langue** vers l'arrière (rétroflexes). **ch** ajoute un souffle (aspiré), **sh** non.",
+     "examples": [
+      {
+       "text": "知 zhī",
+       "tr": "savoir"
+      },
+      {
+       "text": "吃 chī",
+       "tr": "manger"
+      }
+     ]
+    },
+    {
+     "id": "zh-a0-phonetique-fr-u2-g2",
+     "title": "x, q et la voyelle ü",
+     "md": "**x** et **q** se disent langue plate, proche du palais. La voyelle **ü** (comme dans **鱼** yú, **绿** lǜ) arrondit les lèvres : on l'écrit **u** après y, j, q, x.",
+     "examples": [
+      {
+       "text": "鱼 yú",
+       "tr": "poisson"
+      },
+      {
+       "text": "绿 lǜ",
+       "tr": "vert"
+      }
+     ]
+    }
+   ],
+   "exercises": [
+    {
+     "id": "zh-a0-phonetique-fr-u2-x1",
+     "kind": "mcq",
+     "prompt": "Quel caractère contient le son « ch » ?",
+     "choices": [
+      "知",
+      "吃",
+      "西"
+     ],
+     "correct": 1
+    },
+    {
+     "id": "zh-a0-phonetique-fr-u2-x2",
+     "kind": "match",
+     "prompt": "Associe le son au caractère.",
+     "pairs": [
+      {
+       "a": "知",
+       "b": "zh"
+      },
+      {
+       "a": "吃",
+       "b": "ch"
+      },
+      {
+       "a": "是",
+       "b": "sh"
+      },
+      {
+       "a": "西",
+       "b": "x"
+      },
+      {
+       "a": "七",
+       "b": "q"
+      }
+     ]
+    },
+    {
+     "id": "zh-a0-phonetique-fr-u2-x3",
+     "kind": "dictation",
+     "prompt": "Écoute : quel caractère entends-tu ?",
+     "audio": "m:zh-chi",
+     "answers": [
+      "吃"
+     ]
+    },
+    {
+     "id": "zh-a0-phonetique-fr-u2-x4",
+     "kind": "speak",
+     "prompt": "Dis « chī » (rétroflexe aspiré).",
+     "audio": "m:zh-chi",
+     "model": "chī (rétroflexe + souffle)"
+    },
+    {
+     "id": "zh-a0-phonetique-fr-u2-x5",
+     "kind": "truefalse",
+     "prompt": "« 是 (shì) » a un son rétroflexe (langue recourbée).",
+     "correct": 0
+    },
+    {
+     "id": "zh-a0-phonetique-fr-u2-x6",
+     "kind": "translate",
+     "prompt": "Traduis : poisson.",
+     "answers": [
+      "鱼"
+     ]
+    },
+    {
+     "id": "zh-a0-phonetique-fr-u2-x7",
+     "kind": "mcq",
+     "prompt": "Quel son est aspiré (souffle) ?",
+     "choices": [
+      "zh",
+      "ch",
+      "sh"
+     ],
+     "correct": 1
+    },
+    {
+     "id": "zh-a0-phonetique-fr-u2-x8",
+     "kind": "write",
+     "prompt": "Écris « manger » en caractères.",
+     "model": "吃"
+    }
+   ],
+   "stories": [],
+   "cards": [
+    {
+     "id": "zh-a0-phonetique-fr-u2-c1",
+     "vocab": "zh-a0-phonetique-fr-u2-v1"
+    },
+    {
+     "id": "zh-a0-phonetique-fr-u2-c2",
+     "vocab": "zh-a0-phonetique-fr-u2-v2"
+    },
+    {
+     "id": "zh-a0-phonetique-fr-u2-c3",
+     "vocab": "zh-a0-phonetique-fr-u2-v3"
+    }
+   ],
+   "animations": [
+    {
+     "id": "zh-a0-phonetique-fr-u2-a1",
+     "kind": "articulation",
+     "label": "La carte des sons (avant / arrière)"
+    }
+   ]
+  }
+ ]
+}

@@ -1,0 +1,261 @@
+{
+ "format": 1,
+ "type": "langue",
+ "id": "de-a0-salut-fr",
+ "version": 2,
+ "target": "de",
+ "level": "a0",
+ "theme": "salut",
+ "source": "fr",
+ "title": "Allemand A0 — Se saluer",
+ "state": "review",
+ "units": [
+  {
+   "id": "de-a0-salut-fr-u1",
+   "title": "Bonjour, merci, au revoir",
+   "minutes": 10,
+   "skills": [
+    "co",
+    "ce",
+    "po"
+   ],
+   "prerequisites": [],
+   "vocab": [
+    {
+     "id": "de-a0-salut-fr-v1",
+     "term": "Hallo",
+     "gloss": "bonjour",
+     "pos": "interj",
+     "audio": "m:de-hallo"
+    },
+    {
+     "id": "de-a0-salut-fr-v2",
+     "term": "Guten Morgen",
+     "gloss": "bonjour (le matin)",
+     "pos": "interj",
+     "audio": "m:de-gutenmorgen"
+    },
+    {
+     "id": "de-a0-salut-fr-v3",
+     "term": "Danke",
+     "gloss": "merci",
+     "pos": "interj",
+     "audio": "m:de-danke"
+    },
+    {
+     "id": "de-a0-salut-fr-v4",
+     "term": "Bitte",
+     "gloss": "s'il te plaît / de rien",
+     "pos": "interj",
+     "audio": "m:de-bitte"
+    },
+    {
+     "id": "de-a0-salut-fr-v5",
+     "term": "Auf Wiedersehen",
+     "gloss": "au revoir",
+     "pos": "interj",
+     "audio": "m:de-aufwiedersehen"
+    },
+    {
+     "id": "de-a0-salut-fr-v6",
+     "term": "Tschüss",
+     "gloss": "salut (au revoir)",
+     "pos": "interj",
+     "audio": "m:de-tschss"
+    },
+    {
+     "id": "de-a0-salut-fr-v7",
+     "term": "Ja",
+     "gloss": "oui",
+     "pos": "interj",
+     "audio": "m:de-ja"
+    },
+    {
+     "id": "de-a0-salut-fr-v8",
+     "term": "Nein",
+     "gloss": "non",
+     "pos": "interj",
+     "audio": "m:de-nein"
+    },
+    {
+     "id": "de-a0-salut-fr-v9",
+     "term": "Entschuldigung",
+     "gloss": "pardon",
+     "pos": "interj",
+     "audio": "m:de-entschuldigung"
+    },
+    {
+     "id": "de-a0-salut-fr-v10",
+     "term": "Wie geht es dir?",
+     "gloss": "comment vas-tu ?",
+     "pos": "phrase",
+     "audio": "m:de-wiegehtesdir"
+    }
+   ],
+   "dialogues": [
+    {
+     "id": "de-a0-salut-fr-d1",
+     "title": "Une rencontre",
+     "lines": [
+      {
+       "who": "A",
+       "text": "Hallo!",
+       "tr": "Bonjour !"
+      },
+      {
+       "who": "B",
+       "text": "Guten Morgen!",
+       "tr": "Bonjour !"
+      },
+      {
+       "who": "A",
+       "text": "Wie geht es dir?",
+       "tr": "Comment vas-tu ?"
+      },
+      {
+       "who": "B",
+       "text": "Gut, danke.",
+       "tr": "Bien, merci."
+      },
+      {
+       "who": "A",
+       "text": "Auf Wiedersehen!",
+       "tr": "Au revoir !"
+      },
+      {
+       "who": "B",
+       "text": "Tschüss!",
+       "tr": "Salut !"
+      }
+     ],
+     "audio": "m:de-salut-d1",
+     "video": "m:de-salut-salut"
+    }
+   ],
+   "grammar": [
+    {
+     "id": "de-a0-salut-fr-g1",
+     "title": "Les noms prennent une majuscule",
+     "md": "En allemand, **tous les noms** prennent une majuscule : *Morgen*, *Wiedersehen*.",
+     "examples": [
+      {
+       "text": "Guten Morgen",
+       "tr": "bonjour"
+      }
+     ]
+    }
+   ],
+   "exercises": [
+    {
+     "id": "de-a0-salut-fr-x1",
+     "kind": "mcq",
+     "prompt": "Que veut dire Hallo ?",
+     "choices": [
+      "bonjour",
+      "bonjour (le matin)",
+      "merci"
+     ],
+     "correct": 0
+    },
+    {
+     "id": "de-a0-salut-fr-x2",
+     "kind": "match",
+     "prompt": "Associe chaque mot à son sens.",
+     "pairs": [
+      {
+       "a": "Hallo",
+       "b": "bonjour"
+      },
+      {
+       "a": "Guten Morgen",
+       "b": "bonjour (le matin)"
+      },
+      {
+       "a": "Danke",
+       "b": "merci"
+      },
+      {
+       "a": "Bitte",
+       "b": "s'il te plaît / de rien"
+      },
+      {
+       "a": "Auf Wiedersehen",
+       "b": "au revoir"
+      }
+     ]
+    },
+    {
+     "id": "de-a0-salut-fr-x3",
+     "kind": "dictation",
+     "prompt": "Écoute et écris le mot.",
+     "audio": "m:de-hallo",
+     "answers": [
+      "Hallo"
+     ]
+    },
+    {
+     "id": "de-a0-salut-fr-x4",
+     "kind": "speak",
+     "prompt": "Dis « bonjour (le matin) » en Allemand, puis compare.",
+     "model": "Guten Morgen",
+     "audio": "m:de-gutenmorgen"
+    },
+    {
+     "id": "de-a0-salut-fr-x5",
+     "kind": "truefalse",
+     "prompt": "« Danke » veut dire « merci ».",
+     "correct": 0
+    },
+    {
+     "id": "de-a0-salut-fr-x6",
+     "kind": "translate",
+     "prompt": "Traduis : merci.",
+     "answers": [
+      "Danke"
+     ]
+    },
+    {
+     "id": "de-a0-salut-fr-x7",
+     "kind": "write",
+     "prompt": "Écris « s'il te plaît / de rien ».",
+     "model": "Bitte"
+    },
+    {
+     "id": "de-a0-salut-fr-x8",
+     "kind": "mcq",
+     "prompt": "Que veut dire Auf Wiedersehen ?",
+     "choices": [
+      "s'il te plaît / de rien",
+      "au revoir",
+      "bonjour"
+     ],
+     "correct": 1
+    }
+   ],
+   "stories": [],
+   "cards": [
+    {
+     "id": "de-a0-salut-fr-c1",
+     "vocab": "de-a0-salut-fr-v1"
+    },
+    {
+     "id": "de-a0-salut-fr-c2",
+     "vocab": "de-a0-salut-fr-v2"
+    },
+    {
+     "id": "de-a0-salut-fr-c3",
+     "vocab": "de-a0-salut-fr-v3"
+    },
+    {
+     "id": "de-a0-salut-fr-c4",
+     "vocab": "de-a0-salut-fr-v4"
+    },
+    {
+     "id": "de-a0-salut-fr-c5",
+     "vocab": "de-a0-salut-fr-v5"
+    }
+   ],
+   "animations": []
+  }
+ ]
+}

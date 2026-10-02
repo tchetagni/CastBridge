@@ -1,0 +1,249 @@
+{
+ "format": 1,
+ "type": "langue",
+ "id": "es-a0-salut-fr",
+ "version": 2,
+ "target": "es",
+ "level": "a0",
+ "theme": "salut",
+ "source": "fr",
+ "title": "Espagnol A0 — Se saluer",
+ "state": "review",
+ "units": [
+  {
+   "id": "es-a0-salut-fr-u1",
+   "title": "Bonjour, merci, au revoir",
+   "minutes": 10,
+   "skills": [
+    "co",
+    "ce",
+    "po"
+   ],
+   "prerequisites": [],
+   "vocab": [
+    {
+     "id": "es-a0-salut-fr-v1",
+     "term": "Hola",
+     "gloss": "bonjour / salut",
+     "pos": "interj",
+     "audio": "m:es-hola"
+    },
+    {
+     "id": "es-a0-salut-fr-v2",
+     "term": "Buenos días",
+     "gloss": "bonjour (le matin)",
+     "pos": "interj",
+     "audio": "m:es-buenosdas"
+    },
+    {
+     "id": "es-a0-salut-fr-v3",
+     "term": "Gracias",
+     "gloss": "merci",
+     "pos": "interj",
+     "audio": "m:es-gracias"
+    },
+    {
+     "id": "es-a0-salut-fr-v4",
+     "term": "Por favor",
+     "gloss": "s'il te plaît",
+     "pos": "interj",
+     "audio": "m:es-porfavor"
+    },
+    {
+     "id": "es-a0-salut-fr-v5",
+     "term": "Adiós",
+     "gloss": "au revoir",
+     "pos": "interj",
+     "audio": "m:es-adis"
+    },
+    {
+     "id": "es-a0-salut-fr-v6",
+     "term": "Sí",
+     "gloss": "oui",
+     "pos": "interj",
+     "audio": "m:es-s"
+    },
+    {
+     "id": "es-a0-salut-fr-v7",
+     "term": "No",
+     "gloss": "non",
+     "pos": "interj",
+     "audio": "m:es-no"
+    },
+    {
+     "id": "es-a0-salut-fr-v8",
+     "term": "Perdón",
+     "gloss": "pardon",
+     "pos": "interj",
+     "audio": "m:es-perdn"
+    },
+    {
+     "id": "es-a0-salut-fr-v9",
+     "term": "¿Cómo estás?",
+     "gloss": "comment vas-tu ?",
+     "pos": "phrase",
+     "audio": "m:es-cmoests"
+    }
+   ],
+   "dialogues": [
+    {
+     "id": "es-a0-salut-fr-d1",
+     "title": "Une rencontre",
+     "lines": [
+      {
+       "who": "A",
+       "text": "¡Hola!",
+       "tr": "Bonjour !"
+      },
+      {
+       "who": "B",
+       "text": "¡Buenos días!",
+       "tr": "Bonjour !"
+      },
+      {
+       "who": "A",
+       "text": "¿Cómo estás?",
+       "tr": "Comment vas-tu ?"
+      },
+      {
+       "who": "B",
+       "text": "Bien, gracias.",
+       "tr": "Bien, merci."
+      },
+      {
+       "who": "A",
+       "text": "¡Adiós!",
+       "tr": "Au revoir !"
+      }
+     ],
+     "audio": "m:es-salut-d1",
+     "video": "m:es-salut-salut"
+    }
+   ],
+   "grammar": [
+    {
+     "id": "es-a0-salut-fr-g1",
+     "title": "¿ et ¡ : la ponctuation inversée",
+     "md": "L'espagnol ouvre les questions par **¿** et les exclamations par **¡** : *¿Cómo estás?*, *¡Hola!*.",
+     "examples": [
+      {
+       "text": "¿Cómo estás?",
+       "tr": "comment vas-tu ?"
+      }
+     ]
+    }
+   ],
+   "exercises": [
+    {
+     "id": "es-a0-salut-fr-x1",
+     "kind": "mcq",
+     "prompt": "Que veut dire Hola ?",
+     "choices": [
+      "bonjour / salut",
+      "bonjour (le matin)",
+      "merci"
+     ],
+     "correct": 0
+    },
+    {
+     "id": "es-a0-salut-fr-x2",
+     "kind": "match",
+     "prompt": "Associe chaque mot à son sens.",
+     "pairs": [
+      {
+       "a": "Hola",
+       "b": "bonjour / salut"
+      },
+      {
+       "a": "Buenos días",
+       "b": "bonjour (le matin)"
+      },
+      {
+       "a": "Gracias",
+       "b": "merci"
+      },
+      {
+       "a": "Por favor",
+       "b": "s'il te plaît"
+      },
+      {
+       "a": "Adiós",
+       "b": "au revoir"
+      }
+     ]
+    },
+    {
+     "id": "es-a0-salut-fr-x3",
+     "kind": "dictation",
+     "prompt": "Écoute et écris le mot.",
+     "audio": "m:es-hola",
+     "answers": [
+      "Hola"
+     ]
+    },
+    {
+     "id": "es-a0-salut-fr-x4",
+     "kind": "speak",
+     "prompt": "Dis « bonjour (le matin) » en Espagnol, puis compare.",
+     "model": "Buenos días",
+     "audio": "m:es-buenosdas"
+    },
+    {
+     "id": "es-a0-salut-fr-x5",
+     "kind": "truefalse",
+     "prompt": "« Gracias » veut dire « merci ».",
+     "correct": 0
+    },
+    {
+     "id": "es-a0-salut-fr-x6",
+     "kind": "translate",
+     "prompt": "Traduis : merci.",
+     "answers": [
+      "Gracias"
+     ]
+    },
+    {
+     "id": "es-a0-salut-fr-x7",
+     "kind": "write",
+     "prompt": "Écris « s'il te plaît ».",
+     "model": "Por favor"
+    },
+    {
+     "id": "es-a0-salut-fr-x8",
+     "kind": "mcq",
+     "prompt": "Que veut dire Adiós ?",
+     "choices": [
+      "s'il te plaît",
+      "au revoir",
+      "bonjour / salut"
+     ],
+     "correct": 1
+    }
+   ],
+   "stories": [],
+   "cards": [
+    {
+     "id": "es-a0-salut-fr-c1",
+     "vocab": "es-a0-salut-fr-v1"
+    },
+    {
+     "id": "es-a0-salut-fr-c2",
+     "vocab": "es-a0-salut-fr-v2"
+    },
+    {
+     "id": "es-a0-salut-fr-c3",
+     "vocab": "es-a0-salut-fr-v3"
+    },
+    {
+     "id": "es-a0-salut-fr-c4",
+     "vocab": "es-a0-salut-fr-v4"
+    },
+    {
+     "id": "es-a0-salut-fr-c5",
+     "vocab": "es-a0-salut-fr-v5"
+    }
+   ],
+   "animations": []
+  }
+ ]
+}

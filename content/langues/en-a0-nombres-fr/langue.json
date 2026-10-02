@@ -1,0 +1,258 @@
+{
+ "format": 1,
+ "type": "langue",
+ "id": "en-a0-nombres-fr",
+ "version": 1,
+ "target": "en",
+ "level": "a0",
+ "theme": "nombres",
+ "source": "fr",
+ "title": "Anglais A0 — Les nombres",
+ "state": "review",
+ "units": [
+  {
+   "id": "en-a0-nombres-fr-u1",
+   "title": "Compter de 0 à 10",
+   "minutes": 10,
+   "skills": [
+    "co",
+    "ce",
+    "po"
+   ],
+   "prerequisites": [],
+   "vocab": [
+    {
+     "id": "en-a0-nombres-fr-v1",
+     "term": "zero",
+     "gloss": "zéro",
+     "pos": "num",
+     "audio": "m:en-zero"
+    },
+    {
+     "id": "en-a0-nombres-fr-v2",
+     "term": "one",
+     "gloss": "un",
+     "pos": "num",
+     "audio": "m:en-one"
+    },
+    {
+     "id": "en-a0-nombres-fr-v3",
+     "term": "two",
+     "gloss": "deux",
+     "pos": "num",
+     "audio": "m:en-two"
+    },
+    {
+     "id": "en-a0-nombres-fr-v4",
+     "term": "three",
+     "gloss": "trois",
+     "pos": "num",
+     "audio": "m:en-three"
+    },
+    {
+     "id": "en-a0-nombres-fr-v5",
+     "term": "four",
+     "gloss": "quatre",
+     "pos": "num",
+     "audio": "m:en-four"
+    },
+    {
+     "id": "en-a0-nombres-fr-v6",
+     "term": "five",
+     "gloss": "cinq",
+     "pos": "num",
+     "audio": "m:en-five"
+    },
+    {
+     "id": "en-a0-nombres-fr-v7",
+     "term": "six",
+     "gloss": "six",
+     "pos": "num",
+     "audio": "m:en-six"
+    },
+    {
+     "id": "en-a0-nombres-fr-v8",
+     "term": "seven",
+     "gloss": "sept",
+     "pos": "num",
+     "audio": "m:en-seven"
+    },
+    {
+     "id": "en-a0-nombres-fr-v9",
+     "term": "eight",
+     "gloss": "huit",
+     "pos": "num",
+     "audio": "m:en-eight"
+    },
+    {
+     "id": "en-a0-nombres-fr-v10",
+     "term": "nine",
+     "gloss": "neuf",
+     "pos": "num",
+     "audio": "m:en-nine"
+    },
+    {
+     "id": "en-a0-nombres-fr-v11",
+     "term": "ten",
+     "gloss": "dix",
+     "pos": "num",
+     "audio": "m:en-ten"
+    }
+   ],
+   "dialogues": [
+    {
+     "id": "en-a0-nombres-fr-d1",
+     "title": "Compter",
+     "lines": [
+      {
+       "who": "A",
+       "text": "One, two, three.",
+       "tr": "Un, deux, trois."
+      },
+      {
+       "who": "B",
+       "text": "Four, five, six.",
+       "tr": "Quatre, cinq, six."
+      },
+      {
+       "who": "A",
+       "text": "Seven, eight, nine, ten.",
+       "tr": "Sept, huit, neuf, dix."
+      }
+     ],
+     "audio": "m:en-nombres-d1"
+    }
+   ],
+   "grammar": [
+    {
+     "id": "en-a0-nombres-fr-g1",
+     "title": "L'âge avec « years old »",
+     "md": "Pour dire son âge : **I am ten years old** (j'ai dix ans).",
+     "examples": [
+      {
+       "text": "I am ten",
+       "tr": "j'ai dix ans"
+      }
+     ]
+    }
+   ],
+   "exercises": [
+    {
+     "id": "en-a0-nombres-fr-x1",
+     "kind": "mcq",
+     "prompt": "Que veut dire zero ?",
+     "choices": [
+      "zéro",
+      "un",
+      "deux"
+     ],
+     "correct": 0
+    },
+    {
+     "id": "en-a0-nombres-fr-x2",
+     "kind": "match",
+     "prompt": "Associe chaque mot à son sens.",
+     "pairs": [
+      {
+       "a": "zero",
+       "b": "zéro"
+      },
+      {
+       "a": "one",
+       "b": "un"
+      },
+      {
+       "a": "two",
+       "b": "deux"
+      },
+      {
+       "a": "three",
+       "b": "trois"
+      },
+      {
+       "a": "four",
+       "b": "quatre"
+      }
+     ]
+    },
+    {
+     "id": "en-a0-nombres-fr-x3",
+     "kind": "dictation",
+     "prompt": "Écoute et écris le mot.",
+     "audio": "m:en-zero",
+     "answers": [
+      "zero"
+     ]
+    },
+    {
+     "id": "en-a0-nombres-fr-x4",
+     "kind": "speak",
+     "prompt": "Dis « un » en Anglais, puis compare.",
+     "model": "one",
+     "audio": "m:en-one"
+    },
+    {
+     "id": "en-a0-nombres-fr-x5",
+     "kind": "truefalse",
+     "prompt": "« ten » veut dire « dix ».",
+     "correct": 0
+    },
+    {
+     "id": "en-a0-nombres-fr-x6",
+     "kind": "translate",
+     "prompt": "Traduis : deux.",
+     "answers": [
+      "two"
+     ]
+    },
+    {
+     "id": "en-a0-nombres-fr-x7",
+     "kind": "write",
+     "prompt": "Écris « trois ».",
+     "model": "three"
+    },
+    {
+     "id": "en-a0-nombres-fr-x8",
+     "kind": "mcq",
+     "prompt": "Que veut dire four ?",
+     "choices": [
+      "trois",
+      "quatre",
+      "zéro"
+     ],
+     "correct": 1
+    }
+   ],
+   "stories": [],
+   "cards": [
+    {
+     "id": "en-a0-nombres-fr-c1",
+     "vocab": "en-a0-nombres-fr-v1"
+    },
+    {
+     "id": "en-a0-nombres-fr-c2",
+     "vocab": "en-a0-nombres-fr-v2"
+    },
+    {
+     "id": "en-a0-nombres-fr-c3",
+     "vocab": "en-a0-nombres-fr-v3"
+    },
+    {
+     "id": "en-a0-nombres-fr-c4",
+     "vocab": "en-a0-nombres-fr-v4"
+    },
+    {
+     "id": "en-a0-nombres-fr-c5",
+     "vocab": "en-a0-nombres-fr-v5"
+    }
+   ],
+   "animations": [
+    {
+     "id": "en-a0-nombres-fr-u1-a1",
+     "kind": "gesture",
+     "label": "Compter de 1 à 5"
+    }
+   ]
+  }
+ ]
+}

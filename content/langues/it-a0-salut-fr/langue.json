@@ -1,0 +1,249 @@
+{
+ "format": 1,
+ "type": "langue",
+ "id": "it-a0-salut-fr",
+ "version": 2,
+ "target": "it",
+ "level": "a0",
+ "theme": "salut",
+ "source": "fr",
+ "title": "Italien A0 — Se saluer",
+ "state": "review",
+ "units": [
+  {
+   "id": "it-a0-salut-fr-u1",
+   "title": "Bonjour, merci, au revoir",
+   "minutes": 10,
+   "skills": [
+    "co",
+    "ce",
+    "po"
+   ],
+   "prerequisites": [],
+   "vocab": [
+    {
+     "id": "it-a0-salut-fr-v1",
+     "term": "Ciao",
+     "gloss": "salut / bonjour",
+     "pos": "interj",
+     "audio": "m:it-ciao"
+    },
+    {
+     "id": "it-a0-salut-fr-v2",
+     "term": "Buongiorno",
+     "gloss": "bonjour (le matin)",
+     "pos": "interj",
+     "audio": "m:it-buongiorno"
+    },
+    {
+     "id": "it-a0-salut-fr-v3",
+     "term": "Grazie",
+     "gloss": "merci",
+     "pos": "interj",
+     "audio": "m:it-grazie"
+    },
+    {
+     "id": "it-a0-salut-fr-v4",
+     "term": "Per favore",
+     "gloss": "s'il te plaît",
+     "pos": "interj",
+     "audio": "m:it-perfavore"
+    },
+    {
+     "id": "it-a0-salut-fr-v5",
+     "term": "Arrivederci",
+     "gloss": "au revoir",
+     "pos": "interj",
+     "audio": "m:it-arrivederci"
+    },
+    {
+     "id": "it-a0-salut-fr-v6",
+     "term": "Sì",
+     "gloss": "oui",
+     "pos": "interj",
+     "audio": "m:it-s"
+    },
+    {
+     "id": "it-a0-salut-fr-v7",
+     "term": "No",
+     "gloss": "non",
+     "pos": "interj",
+     "audio": "m:it-no"
+    },
+    {
+     "id": "it-a0-salut-fr-v8",
+     "term": "Scusa",
+     "gloss": "pardon",
+     "pos": "interj",
+     "audio": "m:it-scusa"
+    },
+    {
+     "id": "it-a0-salut-fr-v9",
+     "term": "Come stai?",
+     "gloss": "comment vas-tu ?",
+     "pos": "phrase",
+     "audio": "m:it-comestai"
+    }
+   ],
+   "dialogues": [
+    {
+     "id": "it-a0-salut-fr-d1",
+     "title": "Une rencontre",
+     "lines": [
+      {
+       "who": "A",
+       "text": "Ciao!",
+       "tr": "Salut !"
+      },
+      {
+       "who": "B",
+       "text": "Buongiorno!",
+       "tr": "Bonjour !"
+      },
+      {
+       "who": "A",
+       "text": "Come stai?",
+       "tr": "Comment vas-tu ?"
+      },
+      {
+       "who": "B",
+       "text": "Bene, grazie.",
+       "tr": "Bien, merci."
+      },
+      {
+       "who": "A",
+       "text": "Arrivederci!",
+       "tr": "Au revoir !"
+      }
+     ],
+     "audio": "m:it-salut-d1",
+     "video": "m:it-salut-salut"
+    }
+   ],
+   "grammar": [
+    {
+     "id": "it-a0-salut-fr-g1",
+     "title": "Les consonnes doubles comptent",
+     "md": "Une consonne double se prononce plus longue : *bella* (belle) ≠ *bela*. Le « c » de *ciao* se dit « tch ».",
+     "examples": [
+      {
+       "text": "Ciao",
+       "tr": "salut"
+      }
+     ]
+    }
+   ],
+   "exercises": [
+    {
+     "id": "it-a0-salut-fr-x1",
+     "kind": "mcq",
+     "prompt": "Que veut dire Ciao ?",
+     "choices": [
+      "salut / bonjour",
+      "bonjour (le matin)",
+      "merci"
+     ],
+     "correct": 0
+    },
+    {
+     "id": "it-a0-salut-fr-x2",
+     "kind": "match",
+     "prompt": "Associe chaque mot à son sens.",
+     "pairs": [
+      {
+       "a": "Ciao",
+       "b": "salut / bonjour"
+      },
+      {
+       "a": "Buongiorno",
+       "b": "bonjour (le matin)"
+      },
+      {
+       "a": "Grazie",
+       "b": "merci"
+      },
+      {
+       "a": "Per favore",
+       "b": "s'il te plaît"
+      },
+      {
+       "a": "Arrivederci",
+       "b": "au revoir"
+      }
+     ]
+    },
+    {
+     "id": "it-a0-salut-fr-x3",
+     "kind": "dictation",
+     "prompt": "Écoute et écris le mot.",
+     "audio": "m:it-ciao",
+     "answers": [
+      "Ciao"
+     ]
+    },
+    {
+     "id": "it-a0-salut-fr-x4",
+     "kind": "speak",
+     "prompt": "Dis « bonjour (le matin) » en Italien, puis compare.",
+     "model": "Buongiorno",
+     "audio": "m:it-buongiorno"
+    },
+    {
+     "id": "it-a0-salut-fr-x5",
+     "kind": "truefalse",
+     "prompt": "« Grazie » veut dire « merci ».",
+     "correct": 0
+    },
+    {
+     "id": "it-a0-salut-fr-x6",
+     "kind": "translate",
+     "prompt": "Traduis : merci.",
+     "answers": [
+      "Grazie"
+     ]
+    },
+    {
+     "id": "it-a0-salut-fr-x7",
+     "kind": "write",
+     "prompt": "Écris « s'il te plaît ».",
+     "model": "Per favore"
+    },
+    {
+     "id": "it-a0-salut-fr-x8",
+     "kind": "mcq",
+     "prompt": "Que veut dire Arrivederci ?",
+     "choices": [
+      "s'il te plaît",
+      "au revoir",
+      "salut / bonjour"
+     ],
+     "correct": 1
+    }
+   ],
+   "stories": [],
+   "cards": [
+    {
+     "id": "it-a0-salut-fr-c1",
+     "vocab": "it-a0-salut-fr-v1"
+    },
+    {
+     "id": "it-a0-salut-fr-c2",
+     "vocab": "it-a0-salut-fr-v2"
+    },
+    {
+     "id": "it-a0-salut-fr-c3",
+     "vocab": "it-a0-salut-fr-v3"
+    },
+    {
+     "id": "it-a0-salut-fr-c4",
+     "vocab": "it-a0-salut-fr-v4"
+    },
+    {
+     "id": "it-a0-salut-fr-c5",
+     "vocab": "it-a0-salut-fr-v5"
+    }
+   ],
+   "animations": []
+  }
+ ]
+}
