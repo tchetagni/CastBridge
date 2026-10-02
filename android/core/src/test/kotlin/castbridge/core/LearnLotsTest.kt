@@ -47,8 +47,9 @@ class LearnLotsTest {
 
     @Test fun scopeGuessAgreesWithTheTable() {
         val table = LearnScopes.parseTable(File(content, "scopes.txt").readText())
+        val known = LearnTool.allLessonIds(content)             // computed once: it scans every pack (it took 88 s when asked again for each pack)
         for (d in LearnTool.packDirs(content)) {
-            val m = PackBuilder.build(PackBuilder.sources(d), knownLessons = LearnTool.allLessonIds(content)).manifest
+            val m = PackBuilder.build(PackBuilder.sources(d), knownLessons = known).manifest
             assertEquals(table.scopeOf(d.name), LearnScopes.guess(m), "${d.name}: the level rule gives the scope of the table")
         }
     }

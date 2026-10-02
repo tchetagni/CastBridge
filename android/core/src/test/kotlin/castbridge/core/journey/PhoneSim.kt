@@ -15,6 +15,7 @@ import castbridge.core.trust.PairFlow
 import castbridge.core.trust.PairStep
 import castbridge.core.trust.PairingSession
 import castbridge.core.trust.PhoneLink
+import castbridge.core.trust.PinKeys
 import castbridge.core.trust.PinCheck
 import castbridge.core.trust.SavedTv
 import castbridge.core.trust.SavedTvs
@@ -44,10 +45,18 @@ import java.util.concurrent.locks.LockSupport
 import kotlin.concurrent.thread
 
 /**
- * Ce que la barre de notification aurait montré : même texte que `S/UploadService.kt` (`"$text · $pct %"`). La notification finale est une
- * AJOUTE du harnais (le service réel n'en publie pas à la fin d'un envoi réseau) : voir le rapport w14-01.
+ * Ce que la barre de notification aurait montré : même texte que `S/UploadService.kt` (`"$text · $pct %"`) pour les notifications EN COURS.
+ *
+ * [syntheticFinal] : la notification FINALE (« Terminé », « Envoi interrompu : … ») est une INVENTION du harnais : le service réel n'en publie pas à
+ * la fin d'un envoi réseau (voir le rapport w14-01). Elle ne prouve RIEN de l'application : sa LECTURE est interdite à la compilation
+ * (`DeprecationLevel.ERROR`) et son texte porte « [harnais, non réel] ». Aucune assertion sur une notification finale tant que `XferTexts` n'est pas
+ * branché au service réel ; l'état de fin se lit dans [UploadRun.finalState] et [UploadRun.blockerText].
  */
-data class Notice(val title: String, val text: String, val progress: Int?, val final: Boolean)
+data class Notice(
+    val title: String, val text: String, val progress: Int?,
+    @property:Deprecated("SYNTHÉTIQUE : notification finale inventée par le harnais, aucune assertion dessus avant XferTexts", level = DeprecationLevel.ERROR)
+    val syntheticFinal: Boolean,
+)
 
 /** Un envoi lancé par [PhoneSim.send] : ce qui est parti, ce qui a été « notifié », comment il s'est terminé. */
 class UploadRun internal constructor(val file: File) {
@@ -69,8 +78,13 @@ class UploadRun internal constructor(val file: File) {
     internal fun sample(sent: Long, total: Long) = synchronized(lock) { sampleList += sent to total }
     internal fun notify(n: Notice) = synchronized(lock) { noticeList += n }
 
-    /** Attend la fin de l'envoi au plus [maxMs] millisecondes RÉELLES (le temps simulé n'avance que par les attentes de reprise de l'envoi). */
-    fun await(maxMs: Long) { worker.join(maxMs) }
+    /** Attend la fin de l'envoi au plus [maxMs] millisecondes RÉELLES, [maxMs] ≤ [MAX_AWAIT_MS] (le temps simulé n'avance pas pendant l'attente, sauf `waitsAdvanceClock`). */
+    fun await(maxMs: Long) {
+        require(maxMs in 1..MAX_AWAIT_MS) { "attente bornée à $MAX_AWAIT_MS ms réelles (reçu $maxMs) : un envoi qui dépasse est un blocage à nommer, pas à attendre" }
+        worker.join(maxMs)
+    }
+
+    companion object { const val MAX_AWAIT_MS = 3_000L }
 }
 
 /** Les codes mémorisés par le téléphone, sans Android : une table clé → code (même rôle que `S/PinStore.kt`). */
@@ -81,8 +95,8 @@ class PinStore {
     fun clear() = map.clear()
     val all: Map<String, String> get() = map.toMap()
 
-    /** Les clés sous lesquelles l'application range le code d'une TV : nom, nom mDNS, `ip:port`, `ip`, `bt:<adresse>`. */
-    fun keysOf(tv: TvSim): List<String> = listOf(tv.name, "CastBridge TV ${tv.name}", "127.0.0.1:${tv.port}", "127.0.0.1", "bt:${tv.bt.tvAddress}")
+    /** Les clés sous lesquelles l'application range le code d'une TV, par le `PinKeys` de production : nom, nom mDNS, `bt:<adresse>`, `hôte:port` (le port COURANT). */
+    fun keysOf(tv: TvSim): List<String> = PinKeys.keysOf(tv.name, "CastBridge TV ${tv.name}", tv.bt.tvAddress, "127.0.0.1", tv.port)
 }
 
 /**
@@ -91,8 +105,11 @@ class PinStore {
  * `check` = `GET /api/info` avec le jeton, 401 « bad token » = refusé, toute autre réponse = bon, erreur d'E/S = injoignable.
  */
 internal class JourneyEnv(private val fake: FakeEnv, private val tv: TvSim) : LinkEnv by fake {
-    /** La TV est-elle physiquement joignable par Wi-Fi (réseau du téléphone, TV allumée, application ouverte, Wi-Fi de la TV) ? */
-    private fun reachable() = fake.network && tv.bt.apiAnswers()
+    /**
+     * Le téléphone a-t-il un réseau ? RIEN d'autre : la TV éteinte ou son application fermée ne court-circuite jamais la réponse, c'est la VRAIE
+     * connexion (refusée par `ReceiverServer` arrêtée) qui produit `UNREACHABLE` / `false`.
+     */
+    private fun reachable() = fake.network
 
     override fun probe(base: String): Boolean {
         fake.probes++
@@ -232,17 +249,30 @@ class PhoneSim(val clock: JourneyClock, val tv: TvSim, seed: Long = 1) : AutoClo
     }
 
     private fun pinRequest(credential: String): PinCheck {
-        if (!env.network || !tv.bt.apiAnswers() || tv.port < 0) return PinCheck.UNREACHABLE
+        if (!env.network) return PinCheck.UNREACHABLE
+        val base = tv.lastBase ?: return PinCheck.UNREACHABLE            // jamais démarrée (verrouillée) : aucune adresse à joindre
         return try {
-            TvClient(tv.base, credential).info(); PinCheck.OK
+            TvClient(base, credential).info(); PinCheck.OK
         } catch (e: TvClient.HttpError) {
             if (e.code == 401) (if ("locked" in e.message.orEmpty()) PinCheck.LOCKED else PinCheck.REJECTED) else PinCheck.UNREACHABLE
         } catch (e: IOException) { PinCheck.UNREACHABLE }
     }
 
-    /** Ce que l'application présente à la TV : le jeton de confiance d'abord, le code sinon, `""` (inutilisable, `Missing`) sinon. */
-    fun credentialNow(): String =
-        driver.credential(tvAddress) ?: pins.keysOf(tv).firstNotNullOfOrNull { pins.get(it).takeIf { c -> c.isNotEmpty() } } ?: ""
+    /** La clé d'écran par défaut d'une TV : son nom mDNS (`SavedTv.mdns` après un HELLO). */
+    val defaultKey: String get() = "CastBridge TV ${tv.name}"
+
+    /** `S/TvLink.kt:197-208` `savedFor`, À L'IDENTIQUE (égalité stricte : nom mDNS, nom, `bt:<adresse>`, `ip:port`). Une clé d'écran qui n'y correspond pas ne trouve PAS la TV. */
+    fun savedFor(key: String?): SavedTv? = if (key == null) null
+        else saved.list().firstOrNull { t -> key == t.mdns || key == t.name || key == "bt:${t.address}" || t.lastIps.any { "$it:${t.port}" == key } }
+
+    /** `TvLinkManager.credentialFor` : le jeton vivant de la TV que [key] désigne, ou null (jamais un jeton refusé ou expiré). */
+    fun credentialFor(key: String?): String? = savedFor(key)?.let { driver.credential(it.address) }
+
+    /** `PinStore.get(key)` (`S/PinStore.kt`) : le jeton d'abord, sinon le code saisi sous CETTE clé, sinon `""` (inutilisable, `Missing`). */
+    fun pinStoreGet(key: String?): String = credentialFor(key) ?: pins.get(key)
+
+    /** Ce que l'écran présente à la TV maintenant, pour la clé [key] (par défaut [defaultKey]). Un ENVOI ne l'utilise PAS : il fige son code au lancement. */
+    fun credentialNow(key: String? = defaultKey): String = pinStoreGet(key)
 
     // ------------------------------------------------------------------------------------------------------ « Ouvrir avec »
 
@@ -266,19 +296,41 @@ class PhoneSim(val clock: JourneyClock, val tv: TvSim, seed: Long = 1) : AutoClo
 
     // ------------------------------------------------------------------------------------------------------ envoi
 
-    /** Attente d'une reprise : le temps SIMULÉ avance de [ms] ; quelques millisecondes réelles seulement, pour ne pas tourner à vide. */
-    private fun sleep(ms: Long) { clock.advance(ms); LockSupport.parkNanos(5_000_000L) }
+    /**
+     * Les attentes de reprise d'un envoi font-elles AVANCER l'horloge simulée ? Non par défaut : un envoi bloqué ne fait plus filer le temps (expiration
+     * de jeton, délais de grâce) dans le dos du test. Un test qui veut qu'un jeton expire PENDANT une attente l'active explicitement.
+     */
+    @Volatile var waitsAdvanceClock: Boolean = false
 
-    private fun resolve(): String? = if (env.network && tv.bt.apiAnswers() && tv.port > 0) tv.base else null
+    /** Attente d'une reprise : ~5 ms réelles ; le temps simulé n'avance que si [waitsAdvanceClock]. */
+    private fun sleep(ms: Long) { if (waitsAdvanceClock) clock.advance(ms); LockSupport.parkNanos(5_000_000L) }
+
+    /**
+     * Où envoyer. Sans réseau : nulle part. Liaison Bluetooth SEULE (la session n'a pas d'adresse Wi-Fi) : nulle part, il n'y a pas de voie de données
+     * Bluetooth dans le harnais (P-13, J-14). Sinon la DERNIÈRE adresse connue de la TV, même si son serveur est arrêté : c'est la vraie connexion qui est refusée.
+     */
+    private fun resolve(): String? {
+        if (!env.network) return null
+        val s = lastStep?.session
+        if (s != null && s.base == null) return null
+        return tv.lastBase
+    }
 
     /**
      * Envoie [file] comme l'application : multivoie d'abord si [fast] (repli sur l'envoi classique si la TV ne le connaît pas), l'envoi classique
      * sinon. [move] : une fois fini, l'original n'est retiré que si la TV annonce le fichier COMPLET de la même taille.
      * Le fil de l'envoi tourne seul : [UploadRun.await] pour l'attendre.
+     *
+     * CODE FIGÉ AU LANCEMENT, comme `UploadService` (`job.pin`, S/UploadService.kt:124) : à [tvKey] (la clé d'écran du travail, `job.tvName`), le code
+     * est celui que `PinStore.get(clé)` donne MAINTENANT ([pinStoreGet]). Pendant l'envoi : si ce code figé est un jeton, il est rafraîchi par
+     * `credentialFor(tvKey)` (égalité stricte de `savedFor` : une clé qui ne désigne pas la TV garde le jeton figé, jamais un jeton neuf) ; si c'est un
+     * code PIN (ou rien), il reste figé : un jeton qui apparaît ensuite n'est PAS repris.
      */
-    fun send(file: File, fast: Boolean = true, move: Boolean = false): UploadRun {
+    fun send(file: File, fast: Boolean = true, move: Boolean = false, tvKey: String = defaultKey): UploadRun {
         val run = UploadRun(file)
         runs += run
+        val frozen = pinStoreGet(tvKey)
+        val credential: () -> String = { if (TvAuth.isToken(frozen)) (credentialFor(tvKey) ?: frozen) else frozen }
         val total = file.length()
         val name = file.name
         var lastSent = 0L
@@ -286,14 +338,14 @@ class PhoneSim(val clock: JourneyClock, val tv: TvSim, seed: Long = 1) : AutoClo
         // À BRANCHER w14-05 : les textes viendront de XferTexts ; en attendant, ceux de S/UploadService.kt:272.
         fun uploading(sent: Long, t: Long) { lastSent = sent; run.sample(sent, t); run.notify(Notice("CastBridge", "Envoi vers la TV · ${pct(sent)} %", pct(sent), false)) }
         fun waiting(why: String) { run.blockerText = why; run.notify(Notice("CastBridge", "En attente du réseau ($why) · ${pct(lastSent)} %", pct(lastSent), false)) }
-        fun done() { run.finalState = "done"; run.blockerText = null; run.notify(Notice("CastBridge", "Terminé", 100, true)) }
+        fun done() { run.finalState = "done"; run.blockerText = null; run.notify(Notice("CastBridge", "[harnais, non réel] Terminé", 100, true)) }
         fun failed(why: String, cancelled: Boolean) {
             run.finalState = if (cancelled) "cancelled" else "failed"; run.blockerText = why
-            run.notify(Notice("CastBridge", if (cancelled) "Envoi annulé" else "Envoi interrompu : $why", null, true))
+            run.notify(Notice("CastBridge", "[harnais, non réel] " + (if (cancelled) "Envoi annulé" else "Envoi interrompu : $why"), null, true))
         }
         fun classic() {
             val up = ResumableUpload(name, total, { resolve() }, { off -> FileInputStream(file).also { it.channel.position(off) } },
-                cancelled = { run.cancelled }, sleep = ::sleep, credential = { credentialNow() })
+                cancelled = { run.cancelled }, sleep = ::sleep, pin = frozen.ifEmpty { null }, credential = credential)
             when (val r = up.run { s ->
                 when (s) {
                     is ResumableUpload.State.Uploading -> uploading(s.sent, s.total)
@@ -314,8 +366,8 @@ class PhoneSim(val clock: JourneyClock, val tv: TvSim, seed: Long = 1) : AutoClo
                             val u = URI(resolve() ?: throw IOException("TV introuvable"))
                             HttpConn.tcp(u.host, u.port)()
                         }
-                        TransferClient(HttpTransferApi({ resolve() }, { credentialNow() }), FileBlockSource(ch, total), name,
-                            lanes = { id, max -> listOf(WifiLane("wifi", resolve()?.removePrefix("http://") ?: "tv", id, connect, { credentialNow() }, maxStreams = max, fixedK = 4)) },
+                        TransferClient(HttpTransferApi({ resolve() }, credential), FileBlockSource(ch, total), name,
+                            lanes = { id, max -> listOf(WifiLane("wifi", resolve()?.removePrefix("http://") ?: "tv", id, connect, credential, maxStreams = max, fixedK = 4)) },
                             cancelled = { run.cancelled }, onProgress = { s, t -> uploading(s, t) }, onWaiting = { why -> waiting(why) },
                             sleep = ::sleep).run()
                     }
@@ -329,7 +381,7 @@ class PhoneSim(val clock: JourneyClock, val tv: TvSim, seed: Long = 1) : AutoClo
             } catch (e: Throwable) { failed(e.message ?: e.javaClass.simpleName, false) }
             if (move && run.finalState == "done") {
                 // jamais de suppression « sur parole » : la TV doit annoncer le fichier complet, de la même taille
-                val p = runCatching { TvClient(tv.base, credentialNow().takeIf { it.isNotEmpty() }).part(name) }.getOrNull()
+                val p = runCatching { TvClient(resolve() ?: tv.base, credential().takeIf { it.isNotEmpty() }).part(name) }.getOrNull()
                 if (p != null && p.done && p.length == total && file.delete()) run.moved = true
             }
         }
