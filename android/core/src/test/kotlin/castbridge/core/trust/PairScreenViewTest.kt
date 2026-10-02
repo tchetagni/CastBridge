@@ -33,4 +33,19 @@ class PairScreenViewTest {
         assertNull(PairScreenView.emptyListText(1, emptyList()))
         assertEquals("Aucune TV ajoutée.", PairScreenView.emptyListText(0, emptyList()))
     }
+
+    @Test fun pinTvKnownNeverSaysNoTvAdded() {
+        for (saved in 0..2) assertNull(PairScreenView.emptyListText(saved, emptyList(), "CastBridge TV Salon"))
+        assertEquals("Aucune TV ajoutée.", PairScreenView.emptyListText(0, emptyList(), null))
+        val v = PairScreenView.decide(0, null, null, emptyList(), "CastBridge TV Salon")
+        assertTrue(v.state is LinkState.Connecting); assertTrue(v.title.contains("Salon"))
+        assertTrue(PairScreenView.decide(0, null, null, emptyList(), null).state is LinkState.NoTv)
+    }
+
+    @Test fun reassociateCarriesTheAddress() {
+        assertEquals(PairScreenView.ActionRequest(LinkAction.REASSOCIATE, "AA:BB"), PairScreenView.request(LinkAction.REASSOCIATE, "AA:BB"))
+        assertEquals(PairScreenView.ActionRequest(LinkAction.ADD_TV, null), PairScreenView.request(LinkAction.REASSOCIATE, null))
+        assertEquals(PairScreenView.ActionRequest(LinkAction.ADD_TV, null), PairScreenView.request(LinkAction.REASSOCIATE, " "))
+        assertEquals(PairScreenView.ActionRequest(LinkAction.RETRY, null), PairScreenView.request(LinkAction.RETRY, "AA:BB"))
+    }
 }
