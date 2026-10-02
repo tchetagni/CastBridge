@@ -1551,7 +1551,8 @@
           "do": "checkMark",
           "present": true,
           "matchesFile": true,
-          "chain": 1
+          "chain": 1,
+          "grantSeq": 1
         }
       ],
       "reportSince": 0,
@@ -2179,6 +2180,249 @@
           "name": "wallet.txt.broken-1",
           "exists": true,
           "startsWith": "castbridge-token-wallet-v1"
+        }
+      ]
+    },
+    {
+      "id": "wallet-same-voucher-replayed-after-broken-is-refused",
+      "type": "wallet",
+      "steps": [
+        {
+          "do": "credit",
+          "token": "cbx1.Y2FzdGJyaWRnZS1lbnZlbG9wZS12MQp0eXBlPXRva2VucwpraWQ9M2FjNzhlNDAxNzkxODgyNwpzZXE9MQpub25jZT0wMDAwMDAwMDAwMDAwMDAxCmlzc3VlZEF0PTE4MDAwMDAwMDAwMDAKbm90QmVmb3JlPTE4MDAwMDAwMDAwMDAKZXhwaXJlc0F0PTE4MDAxNzI4MDAwMDAKdGFyZ2V0PWRldmljZQprPTQKZmFjdG9yPUZMQVNIfDlkYzc5NDhjNDg3NDQ4MGViMzcyZDFhY2UzNTA3ZDNkCmZhY3Rvcj1FVEhFUk5FVHw0MDRlMzU3MmM5OWM0YjRhZTM2MzRhMjQzZGU5NDBiNgpmYWN0b3I9V0lGSXxjZWVjYzhiMzMyODZlYTIyY2JlNzdiY2MwYmUzMDMxNwpmYWN0b3I9U1lTVEVNX1NFUklBTHxlMGUyYzBhZTU4ODNlNWQ1OTU2YTY2OTljZDVlOGU4NQpmYWN0b3I9QkxVRVRPT1RIfGJiYzMyOWUyYTFlMzhmYjljMWNiZTA2MzI2NTBiNGZhCi0tCmxpY2Vuc2U9bGljLXc1CmdyYW50PTEKYW1vdW50PTIwCmluc3RhbGw9ZDNlMjQ1ODc3OWE1MTdhMjc5YzJkNWE5ZTEwNTcxZTVjZDRlNTZkNDk0NGE2M2YzMWI2OWMyMDE2N2UyNjkyYgpleHBpcnk9MApmcmVzaD0x.oY3LtEWTWfA5dpUmrKvBKyfLvq6Y5O47vB8XGDFOrfLk6uB6E+wtfm2wYsaTFkZ4uwkZbMoLIQX6dTu444x5DQ==",
+          "device": "tvA",
+          "install": "tvA-install-1",
+          "ring": ["server"],
+          "now": 1800086400000,
+          "expect": "REOPENED"
+        },
+        {
+          "do": "spend",
+          "item": "second-chance",
+          "cost": 5,
+          "at": 1800000001000,
+          "op": "quiz:g:a:1",
+          "expect": "OK",
+          "balance": 15
+        },
+        {
+          "do": "tamper",
+          "kind": "flipMac",
+          "line": 4
+        },
+        {
+          "do": "restart",
+          "key": "main"
+        },
+        {
+          "do": "check",
+          "state": "UNREADABLE",
+          "cause": "broken",
+          "balance": 0
+        },
+        {
+          "do": "credit",
+          "token": "cbx1.Y2FzdGJyaWRnZS1lbnZlbG9wZS12MQp0eXBlPXRva2VucwpraWQ9M2FjNzhlNDAxNzkxODgyNwpzZXE9MQpub25jZT0wMDAwMDAwMDAwMDAwMDAxCmlzc3VlZEF0PTE4MDAwMDAwMDAwMDAKbm90QmVmb3JlPTE4MDAwMDAwMDAwMDAKZXhwaXJlc0F0PTE4MDAxNzI4MDAwMDAKdGFyZ2V0PWRldmljZQprPTQKZmFjdG9yPUZMQVNIfDlkYzc5NDhjNDg3NDQ4MGViMzcyZDFhY2UzNTA3ZDNkCmZhY3Rvcj1FVEhFUk5FVHw0MDRlMzU3MmM5OWM0YjRhZTM2MzRhMjQzZGU5NDBiNgpmYWN0b3I9V0lGSXxjZWVjYzhiMzMyODZlYTIyY2JlNzdiY2MwYmUzMDMxNwpmYWN0b3I9U1lTVEVNX1NFUklBTHxlMGUyYzBhZTU4ODNlNWQ1OTU2YTY2OTljZDVlOGU4NQpmYWN0b3I9QkxVRVRPT1RIfGJiYzMyOWUyYTFlMzhmYjljMWNiZTA2MzI2NTBiNGZhCi0tCmxpY2Vuc2U9bGljLXc1CmdyYW50PTEKYW1vdW50PTIwCmluc3RhbGw9ZDNlMjQ1ODc3OWE1MTdhMjc5YzJkNWE5ZTEwNTcxZTVjZDRlNTZkNDk0NGE2M2YzMWI2OWMyMDE2N2UyNjkyYgpleHBpcnk9MApmcmVzaD0x.oY3LtEWTWfA5dpUmrKvBKyfLvq6Y5O47vB8XGDFOrfLk6uB6E+wtfm2wYsaTFkZ4uwkZbMoLIQX6dTu444x5DQ==",
+          "device": "tvA",
+          "install": "tvA-install-1",
+          "ring": ["server"],
+          "now": 1800086400000,
+          "expect": "STALE"
+        },
+        {
+          "do": "check",
+          "state": "UNREADABLE",
+          "cause": "broken",
+          "balance": 0
+        },
+        {
+          "do": "expectFile",
+          "name": "wallet.txt.broken-1",
+          "exists": false
+        },
+        {
+          "do": "checkMark",
+          "present": true,
+          "matchesFile": false,
+          "chain": 1,
+          "grantSeq": 1
+        },
+        {
+          "do": "credit",
+          "token": "cbx1.Y2FzdGJyaWRnZS1lbnZlbG9wZS12MQp0eXBlPXRva2VucwpraWQ9M2FjNzhlNDAxNzkxODgyNwpzZXE9Mgpub25jZT0wMDAwMDAwMDAwMDAwMDAyCmlzc3VlZEF0PTE4MDAwMDAwMDAwMDAKbm90QmVmb3JlPTE4MDAwMDAwMDAwMDAKZXhwaXJlc0F0PTE4MDAxNzI4MDAwMDAKdGFyZ2V0PWRldmljZQprPTQKZmFjdG9yPUZMQVNIfDlkYzc5NDhjNDg3NDQ4MGViMzcyZDFhY2UzNTA3ZDNkCmZhY3Rvcj1FVEhFUk5FVHw0MDRlMzU3MmM5OWM0YjRhZTM2MzRhMjQzZGU5NDBiNgpmYWN0b3I9V0lGSXxjZWVjYzhiMzMyODZlYTIyY2JlNzdiY2MwYmUzMDMxNwpmYWN0b3I9U1lTVEVNX1NFUklBTHxlMGUyYzBhZTU4ODNlNWQ1OTU2YTY2OTljZDVlOGU4NQpmYWN0b3I9QkxVRVRPT1RIfGJiYzMyOWUyYTFlMzhmYjljMWNiZTA2MzI2NTBiNGZhCi0tCmxpY2Vuc2U9bGljLXc1CmdyYW50PTIKYW1vdW50PTMwCmluc3RhbGw9ZDNlMjQ1ODc3OWE1MTdhMjc5YzJkNWE5ZTEwNTcxZTVjZDRlNTZkNDk0NGE2M2YzMWI2OWMyMDE2N2UyNjkyYgpleHBpcnk9MApmcmVzaD0x.4bp7zspeyvlwlEM9XSBmlkJfFexl9ud0ZEziFZC8QAoSNLRVvnP2FQs7Q4Yan+qZwOlBYmy/UO8b7lAV+qxxBg==",
+          "device": "tvA",
+          "install": "tvA-install-1",
+          "ring": ["server"],
+          "now": 1800086400000,
+          "expect": "REOPENED"
+        },
+        {
+          "do": "check",
+          "state": "OK",
+          "cause": "none",
+          "balance": 30
+        },
+        {
+          "do": "checkMark",
+          "present": true,
+          "matchesFile": true,
+          "chain": 2,
+          "grantSeq": 2
+        }
+      ]
+    },
+    {
+      "id": "wallet-same-voucher-replayed-after-lost-is-refused",
+      "type": "wallet",
+      "steps": [
+        {
+          "do": "credit",
+          "token": "cbx1.Y2FzdGJyaWRnZS1lbnZlbG9wZS12MQp0eXBlPXRva2VucwpraWQ9M2FjNzhlNDAxNzkxODgyNwpzZXE9MQpub25jZT0wMDAwMDAwMDAwMDAwMDAxCmlzc3VlZEF0PTE4MDAwMDAwMDAwMDAKbm90QmVmb3JlPTE4MDAwMDAwMDAwMDAKZXhwaXJlc0F0PTE4MDAxNzI4MDAwMDAKdGFyZ2V0PWRldmljZQprPTQKZmFjdG9yPUZMQVNIfDlkYzc5NDhjNDg3NDQ4MGViMzcyZDFhY2UzNTA3ZDNkCmZhY3Rvcj1FVEhFUk5FVHw0MDRlMzU3MmM5OWM0YjRhZTM2MzRhMjQzZGU5NDBiNgpmYWN0b3I9V0lGSXxjZWVjYzhiMzMyODZlYTIyY2JlNzdiY2MwYmUzMDMxNwpmYWN0b3I9U1lTVEVNX1NFUklBTHxlMGUyYzBhZTU4ODNlNWQ1OTU2YTY2OTljZDVlOGU4NQpmYWN0b3I9QkxVRVRPT1RIfGJiYzMyOWUyYTFlMzhmYjljMWNiZTA2MzI2NTBiNGZhCi0tCmxpY2Vuc2U9bGljLXc1CmdyYW50PTEKYW1vdW50PTIwCmluc3RhbGw9ZDNlMjQ1ODc3OWE1MTdhMjc5YzJkNWE5ZTEwNTcxZTVjZDRlNTZkNDk0NGE2M2YzMWI2OWMyMDE2N2UyNjkyYgpleHBpcnk9MApmcmVzaD0x.oY3LtEWTWfA5dpUmrKvBKyfLvq6Y5O47vB8XGDFOrfLk6uB6E+wtfm2wYsaTFkZ4uwkZbMoLIQX6dTu444x5DQ==",
+          "device": "tvA",
+          "install": "tvA-install-1",
+          "ring": ["server"],
+          "now": 1800086400000,
+          "expect": "REOPENED"
+        },
+        {
+          "do": "spend",
+          "item": "second-chance",
+          "cost": 5,
+          "at": 1800000001000,
+          "op": "quiz:g:a:1",
+          "expect": "OK",
+          "balance": 15
+        },
+        {
+          "do": "deleteFile"
+        },
+        {
+          "do": "restart",
+          "key": "main"
+        },
+        {
+          "do": "check",
+          "state": "UNREADABLE",
+          "cause": "lost",
+          "balance": 0
+        },
+        {
+          "do": "credit",
+          "token": "cbx1.Y2FzdGJyaWRnZS1lbnZlbG9wZS12MQp0eXBlPXRva2VucwpraWQ9M2FjNzhlNDAxNzkxODgyNwpzZXE9MQpub25jZT0wMDAwMDAwMDAwMDAwMDAxCmlzc3VlZEF0PTE4MDAwMDAwMDAwMDAKbm90QmVmb3JlPTE4MDAwMDAwMDAwMDAKZXhwaXJlc0F0PTE4MDAxNzI4MDAwMDAKdGFyZ2V0PWRldmljZQprPTQKZmFjdG9yPUZMQVNIfDlkYzc5NDhjNDg3NDQ4MGViMzcyZDFhY2UzNTA3ZDNkCmZhY3Rvcj1FVEhFUk5FVHw0MDRlMzU3MmM5OWM0YjRhZTM2MzRhMjQzZGU5NDBiNgpmYWN0b3I9V0lGSXxjZWVjYzhiMzMyODZlYTIyY2JlNzdiY2MwYmUzMDMxNwpmYWN0b3I9U1lTVEVNX1NFUklBTHxlMGUyYzBhZTU4ODNlNWQ1OTU2YTY2OTljZDVlOGU4NQpmYWN0b3I9QkxVRVRPT1RIfGJiYzMyOWUyYTFlMzhmYjljMWNiZTA2MzI2NTBiNGZhCi0tCmxpY2Vuc2U9bGljLXc1CmdyYW50PTEKYW1vdW50PTIwCmluc3RhbGw9ZDNlMjQ1ODc3OWE1MTdhMjc5YzJkNWE5ZTEwNTcxZTVjZDRlNTZkNDk0NGE2M2YzMWI2OWMyMDE2N2UyNjkyYgpleHBpcnk9MApmcmVzaD0x.oY3LtEWTWfA5dpUmrKvBKyfLvq6Y5O47vB8XGDFOrfLk6uB6E+wtfm2wYsaTFkZ4uwkZbMoLIQX6dTu444x5DQ==",
+          "device": "tvA",
+          "install": "tvA-install-1",
+          "ring": ["server"],
+          "now": 1800086400000,
+          "expect": "STALE"
+        },
+        {
+          "do": "check",
+          "state": "UNREADABLE",
+          "cause": "lost",
+          "balance": 0
+        },
+        {
+          "do": "expectFile",
+          "name": "wallet.txt",
+          "exists": false
+        },
+        {
+          "do": "credit",
+          "token": "cbx1.Y2FzdGJyaWRnZS1lbnZlbG9wZS12MQp0eXBlPXRva2VucwpraWQ9M2FjNzhlNDAxNzkxODgyNwpzZXE9Mgpub25jZT0wMDAwMDAwMDAwMDAwMDAyCmlzc3VlZEF0PTE4MDAwMDAwMDAwMDAKbm90QmVmb3JlPTE4MDAwMDAwMDAwMDAKZXhwaXJlc0F0PTE4MDAxNzI4MDAwMDAKdGFyZ2V0PWRldmljZQprPTQKZmFjdG9yPUZMQVNIfDlkYzc5NDhjNDg3NDQ4MGViMzcyZDFhY2UzNTA3ZDNkCmZhY3Rvcj1FVEhFUk5FVHw0MDRlMzU3MmM5OWM0YjRhZTM2MzRhMjQzZGU5NDBiNgpmYWN0b3I9V0lGSXxjZWVjYzhiMzMyODZlYTIyY2JlNzdiY2MwYmUzMDMxNwpmYWN0b3I9U1lTVEVNX1NFUklBTHxlMGUyYzBhZTU4ODNlNWQ1OTU2YTY2OTljZDVlOGU4NQpmYWN0b3I9QkxVRVRPT1RIfGJiYzMyOWUyYTFlMzhmYjljMWNiZTA2MzI2NTBiNGZhCi0tCmxpY2Vuc2U9bGljLXc1CmdyYW50PTIKYW1vdW50PTMwCmluc3RhbGw9ZDNlMjQ1ODc3OWE1MTdhMjc5YzJkNWE5ZTEwNTcxZTVjZDRlNTZkNDk0NGE2M2YzMWI2OWMyMDE2N2UyNjkyYgpleHBpcnk9MApmcmVzaD0x.4bp7zspeyvlwlEM9XSBmlkJfFexl9ud0ZEziFZC8QAoSNLRVvnP2FQs7Q4Yan+qZwOlBYmy/UO8b7lAV+qxxBg==",
+          "device": "tvA",
+          "install": "tvA-install-1",
+          "ring": ["server"],
+          "now": 1800086400000,
+          "expect": "REOPENED"
+        },
+        {
+          "do": "check",
+          "state": "OK",
+          "balance": 30,
+          "spentTotal": 0
+        }
+      ]
+    },
+    {
+      "id": "wallet-older-grant-seq-is-refused",
+      "type": "wallet",
+      "steps": [
+        {
+          "do": "credit",
+          "token": "cbx1.Y2FzdGJyaWRnZS1lbnZlbG9wZS12MQp0eXBlPXRva2VucwpraWQ9M2FjNzhlNDAxNzkxODgyNwpzZXE9NQpub25jZT0wMDAwMDAwMDAwMDAwMDA1Cmlzc3VlZEF0PTE4MDAwMDAwMDAwMDAKbm90QmVmb3JlPTE4MDAwMDAwMDAwMDAKZXhwaXJlc0F0PTE4MDAxNzI4MDAwMDAKdGFyZ2V0PWRldmljZQprPTQKZmFjdG9yPUZMQVNIfDlkYzc5NDhjNDg3NDQ4MGViMzcyZDFhY2UzNTA3ZDNkCmZhY3Rvcj1FVEhFUk5FVHw0MDRlMzU3MmM5OWM0YjRhZTM2MzRhMjQzZGU5NDBiNgpmYWN0b3I9V0lGSXxjZWVjYzhiMzMyODZlYTIyY2JlNzdiY2MwYmUzMDMxNwpmYWN0b3I9U1lTVEVNX1NFUklBTHxlMGUyYzBhZTU4ODNlNWQ1OTU2YTY2OTljZDVlOGU4NQpmYWN0b3I9QkxVRVRPT1RIfGJiYzMyOWUyYTFlMzhmYjljMWNiZTA2MzI2NTBiNGZhCi0tCmxpY2Vuc2U9bGljLXc1CmdyYW50PTUKYW1vdW50PTIwCmluc3RhbGw9ZDNlMjQ1ODc3OWE1MTdhMjc5YzJkNWE5ZTEwNTcxZTVjZDRlNTZkNDk0NGE2M2YzMWI2OWMyMDE2N2UyNjkyYgpleHBpcnk9MApmcmVzaD0x.ve7blnZCKJ0ir15YrkekdkBxL6TmGZ5D+nfhZ1HVCcAZUT96tB9cB2ssqX1Dul/ngZnZGIzuBxbIERvdG1F1Bg==",
+          "device": "tvA",
+          "install": "tvA-install-1",
+          "ring": ["server"],
+          "now": 1800086400000,
+          "expect": "REOPENED"
+        },
+        {
+          "do": "tamper",
+          "kind": "flipMac",
+          "line": 3
+        },
+        {
+          "do": "restart",
+          "key": "main"
+        },
+        {
+          "do": "check",
+          "state": "UNREADABLE",
+          "cause": "broken",
+          "balance": 0
+        },
+        {
+          "do": "credit",
+          "token": "cbx1.Y2FzdGJyaWRnZS1lbnZlbG9wZS12MQp0eXBlPXRva2VucwpraWQ9M2FjNzhlNDAxNzkxODgyNwpzZXE9Mwpub25jZT0wMDAwMDAwMDAwMDAwMDAzCmlzc3VlZEF0PTE4MDAwMDAwMDAwMDAKbm90QmVmb3JlPTE4MDAwMDAwMDAwMDAKZXhwaXJlc0F0PTE4MDAxNzI4MDAwMDAKdGFyZ2V0PWRldmljZQprPTQKZmFjdG9yPUZMQVNIfDlkYzc5NDhjNDg3NDQ4MGViMzcyZDFhY2UzNTA3ZDNkCmZhY3Rvcj1FVEhFUk5FVHw0MDRlMzU3MmM5OWM0YjRhZTM2MzRhMjQzZGU5NDBiNgpmYWN0b3I9V0lGSXxjZWVjYzhiMzMyODZlYTIyY2JlNzdiY2MwYmUzMDMxNwpmYWN0b3I9U1lTVEVNX1NFUklBTHxlMGUyYzBhZTU4ODNlNWQ1OTU2YTY2OTljZDVlOGU4NQpmYWN0b3I9QkxVRVRPT1RIfGJiYzMyOWUyYTFlMzhmYjljMWNiZTA2MzI2NTBiNGZhCi0tCmxpY2Vuc2U9bGljLXc1CmdyYW50PTMKYW1vdW50PTIwCmluc3RhbGw9ZDNlMjQ1ODc3OWE1MTdhMjc5YzJkNWE5ZTEwNTcxZTVjZDRlNTZkNDk0NGE2M2YzMWI2OWMyMDE2N2UyNjkyYgpleHBpcnk9MApmcmVzaD0x.uKs0LOS4Z7GwcF1e+1+83cPcg60XPMyN0/38GGLOIup5MsiW3s3MNSArGP36WT0HG+LBrZUEcN5cB8atg+7xAA==",
+          "device": "tvA",
+          "install": "tvA-install-1",
+          "ring": ["server"],
+          "now": 1800086400000,
+          "expect": "STALE"
+        },
+        {
+          "do": "credit",
+          "token": "cbx1.Y2FzdGJyaWRnZS1lbnZlbG9wZS12MQp0eXBlPXRva2VucwpraWQ9M2FjNzhlNDAxNzkxODgyNwpzZXE9NQpub25jZT0wMDAwMDAwMDAwMDAwMDA1Cmlzc3VlZEF0PTE4MDAwMDAwMDAwMDAKbm90QmVmb3JlPTE4MDAwMDAwMDAwMDAKZXhwaXJlc0F0PTE4MDAxNzI4MDAwMDAKdGFyZ2V0PWRldmljZQprPTQKZmFjdG9yPUZMQVNIfDlkYzc5NDhjNDg3NDQ4MGViMzcyZDFhY2UzNTA3ZDNkCmZhY3Rvcj1FVEhFUk5FVHw0MDRlMzU3MmM5OWM0YjRhZTM2MzRhMjQzZGU5NDBiNgpmYWN0b3I9V0lGSXxjZWVjYzhiMzMyODZlYTIyY2JlNzdiY2MwYmUzMDMxNwpmYWN0b3I9U1lTVEVNX1NFUklBTHxlMGUyYzBhZTU4ODNlNWQ1OTU2YTY2OTljZDVlOGU4NQpmYWN0b3I9QkxVRVRPT1RIfGJiYzMyOWUyYTFlMzhmYjljMWNiZTA2MzI2NTBiNGZhCi0tCmxpY2Vuc2U9bGljLXc1CmdyYW50PTUKYW1vdW50PTIwCmluc3RhbGw9ZDNlMjQ1ODc3OWE1MTdhMjc5YzJkNWE5ZTEwNTcxZTVjZDRlNTZkNDk0NGE2M2YzMWI2OWMyMDE2N2UyNjkyYgpleHBpcnk9MApmcmVzaD0x.ve7blnZCKJ0ir15YrkekdkBxL6TmGZ5D+nfhZ1HVCcAZUT96tB9cB2ssqX1Dul/ngZnZGIzuBxbIERvdG1F1Bg==",
+          "device": "tvA",
+          "install": "tvA-install-1",
+          "ring": ["server"],
+          "now": 1800086400000,
+          "expect": "STALE"
+        },
+        {
+          "do": "check",
+          "state": "UNREADABLE",
+          "cause": "broken",
+          "balance": 0
+        },
+        {
+          "do": "checkMark",
+          "present": true,
+          "matchesFile": false,
+          "chain": 1,
+          "grantSeq": 5
+        },
+        {
+          "do": "credit",
+          "token": "cbx1.Y2FzdGJyaWRnZS1lbnZlbG9wZS12MQp0eXBlPXRva2VucwpraWQ9M2FjNzhlNDAxNzkxODgyNwpzZXE9Ngpub25jZT0wMDAwMDAwMDAwMDAwMDA2Cmlzc3VlZEF0PTE4MDAwMDAwMDAwMDAKbm90QmVmb3JlPTE4MDAwMDAwMDAwMDAKZXhwaXJlc0F0PTE4MDAxNzI4MDAwMDAKdGFyZ2V0PWRldmljZQprPTQKZmFjdG9yPUZMQVNIfDlkYzc5NDhjNDg3NDQ4MGViMzcyZDFhY2UzNTA3ZDNkCmZhY3Rvcj1FVEhFUk5FVHw0MDRlMzU3MmM5OWM0YjRhZTM2MzRhMjQzZGU5NDBiNgpmYWN0b3I9V0lGSXxjZWVjYzhiMzMyODZlYTIyY2JlNzdiY2MwYmUzMDMxNwpmYWN0b3I9U1lTVEVNX1NFUklBTHxlMGUyYzBhZTU4ODNlNWQ1OTU2YTY2OTljZDVlOGU4NQpmYWN0b3I9QkxVRVRPT1RIfGJiYzMyOWUyYTFlMzhmYjljMWNiZTA2MzI2NTBiNGZhCi0tCmxpY2Vuc2U9bGljLXc1CmdyYW50PTYKYW1vdW50PTMwCmluc3RhbGw9ZDNlMjQ1ODc3OWE1MTdhMjc5YzJkNWE5ZTEwNTcxZTVjZDRlNTZkNDk0NGE2M2YzMWI2OWMyMDE2N2UyNjkyYgpleHBpcnk9MApmcmVzaD0x.xW/gVj+JEZnHU1ovAL0e+KCPjY20BCF3UukmAWbdkbVAIFBTgU+FAaZ9ZIA1MCxRepRptP3gpz9OUzb6smeeCQ==",
+          "device": "tvA",
+          "install": "tvA-install-1",
+          "ring": ["server"],
+          "now": 1800086400000,
+          "expect": "REOPENED"
+        },
+        {
+          "do": "check",
+          "state": "OK",
+          "balance": 30,
+          "spentTotal": 0
+        },
+        {
+          "do": "checkMark",
+          "present": true,
+          "matchesFile": true,
+          "chain": 2,
+          "grantSeq": 6
         }
       ]
     },

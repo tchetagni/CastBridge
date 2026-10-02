@@ -110,7 +110,7 @@ class TokensVectorsTest {
         fun open(grant: Long, amount: Long = 20) = credit(grant, "REOPENED", amount, fresh = true)
         fun checkC(state: String, cause: String, balance: Long) = J("do" to "check", "state" to state, "cause" to cause, "balance" to balance)
         fun file(name: String, exists: Boolean, startsWith: String? = null) = J("do" to "expectFile", "name" to name, "exists" to exists, "startsWith" to startsWith)
-        fun mark(present: Boolean, matchesFile: Boolean? = null, chain: Long? = null) = J("do" to "checkMark", "present" to present, "matchesFile" to matchesFile, "chain" to chain)
+        fun mark(present: Boolean, matchesFile: Boolean? = null, chain: Long? = null, grantSeq: Long? = null) = J("do" to "checkMark", "present" to present, "matchesFile" to matchesFile, "chain" to chain, "grantSeq" to grantSeq)
         fun step(d: String, vararg p: Pair<String, Any?>) = J("do" to d, *p)
         val head = "castbridge-token-wallet-v1"
         fun spend(item: String, cost: Long, op: String, expect: String, balance: Long? = null, at: Long = t0 + 1000) = J("do" to "spend", "item" to item, "cost" to cost, "at" to at, "op" to op, "expect" to expect, "balance" to balance)
@@ -166,7 +166,7 @@ class TokensVectorsTest {
         wallet("wallet-empty-file-is-unreadable", listOf(open(1), tamper("empty", 0), restart(), check("UNREADABLE", 0), credit(2, "NEEDS_FRESH"), spend("second-chance", 5, "quiz:g:a:1", "UNREADABLE")))
 
         // --- addendum W5 porte-jetons : bon d'ouverture, marque d'existence, reprise (D-W5-J1, J2, J5) ---
-        wallet("wallet-opening-voucher-reopens-an-empty-wallet", listOf(checkC("EMPTY", "none", 0), open(1), check("OK", 20, 0), mark(true, true, 1)), capture = true)
+        wallet("wallet-opening-voucher-reopens-an-empty-wallet", listOf(checkC("EMPTY", "none", 0), open(1), check("OK", 20, 0), mark(true, true, 1, 1)), capture = true)
         wallet("wallet-ordinary-voucher-on-empty-needs-fresh", listOf(credit(1, "NEEDS_FRESH"), check("EMPTY", 0), file("wallet.txt", false), mark(false)))
         wallet("wallet-opening-voucher-on-a-healthy-wallet-is-refused", listOf(open(1), spend("second-chance", 5, "quiz:g:a:1", "OK", 15), step("snapshot"), credit(2, "FRESH_REFUSED", 50, fresh = true), step("expectUnchanged"),
             check("OK", 15, 5), file("wallet.txt.broken-1", false), mark(true, true, 1)))
@@ -185,6 +185,13 @@ class TokensVectorsTest {
             file("wallet.txt.bak.broken-1", true, "old-bak-2"), file("wallet.txt.bak.broken-4", true, "old-bak-5")))
         wallet("wallet-failed-reopen-puts-the-old-file-back", listOf(open(1), tamper("flipMac", 3), restart(), step("snapshot"), step("failWrites"), credit(2, "WRITE_FAILED", 30, fresh = true), step("expectUnchanged"),
             checkC("UNREADABLE", "broken", 0), file("wallet.txt.broken-1", false), file("wallet.txt.broken-new", false), mark(true, false, 1), step("allowWrites"), open(2, 30), checkC("OK", "none", 30), file("wallet.txt.broken-1", true, head)))
+        // W5 core3: the opening voucher already used (or an older one) never reopens locally, whatever the cause (broken or lost): the offline loop « spend, break, replay the voucher » is closed
+        wallet("wallet-same-voucher-replayed-after-broken-is-refused", listOf(open(1), spend("second-chance", 5, "quiz:g:a:1", "OK", 15), tamper("flipMac", 4), restart(), checkC("UNREADABLE", "broken", 0),
+            credit(1, "STALE", fresh = true), checkC("UNREADABLE", "broken", 0), file("wallet.txt.broken-1", false), mark(true, false, 1, 1), open(2, 30), checkC("OK", "none", 30), mark(true, true, 2, 2)))
+        wallet("wallet-same-voucher-replayed-after-lost-is-refused", listOf(open(1), spend("second-chance", 5, "quiz:g:a:1", "OK", 15), step("deleteFile"), restart(), checkC("UNREADABLE", "lost", 0),
+            credit(1, "STALE", fresh = true), checkC("UNREADABLE", "lost", 0), file("wallet.txt", false), open(2, 30), check("OK", 30, 0)))
+        wallet("wallet-older-grant-seq-is-refused", listOf(open(5), tamper("flipMac", 3), restart(), checkC("UNREADABLE", "broken", 0), credit(3, "STALE", fresh = true), credit(5, "STALE", fresh = true),
+            checkC("UNREADABLE", "broken", 0), mark(true, false, 1, 5), open(6, 30), check("OK", 30, 0), mark(true, true, 2, 6)))
         wallet("wallet-sync-apply-opens-first-then-ordinary-by-number", listOf(
             J("do" to "apply", "tokens" to listOf(token(req(3, 30)), token(req(2, 10)), token(req(1, 20, fresh = true))), "device" to "tvA", "install" to "tvA-install-1", "ring" to listOf("server"), "now" to t0 + day,
                 "expect" to J("reopened" to true, "credited" to 2, "rejected" to 0)), check("OK", 60, 0),
