@@ -19,12 +19,13 @@ class UxTest {
         assertTrue(r.notices.none { it.contains(".part") || it.contains("usb-1234") || it.contains("409") }, "no jargon: ${r.notices}")
     }
 
-    @Test fun aCopyInProgressIsShownEvenWhenTheSameNameAlreadyExistsComplete() {
-        // e.g. a series episode sent again, or a move target: the TV screen must still show the progress of what arrives
+    @Test fun aSameNamedCompleteFileOfAnotherSizeIsNeverReceivedOverNorShownAsProgress() {
+        // w15-05 (D-W15-05a): it used to be received next to / over the old file; now the TV refuses (409 NAME_TAKEN) and shows no progress for it
         File(r.usbDir, "ep.mkv").writeBytes(ByteArray(10))
-        val status = r.put("ep.mkv", 0, 100, ByteArray(40)).first
-        val shown = r.server.receiving()
-        assertEquals(listOf(Triple("ep.mkv", 40L, 100L)), shown, "progress hidden (upload status $status)")
+        val (status, body) = r.put("ep.mkv", 0, 100, ByteArray(40))
+        assertEquals(409, status, body); assertTrue(body.contains("NAME_TAKEN"), body)
+        assertEquals(emptyList(), r.server.receiving())
+        assertEquals(10, File(r.usbDir, "ep.mkv").length())
     }
 
     @Test fun phoneParsesTheRealInfoAnswer() {

@@ -170,10 +170,12 @@ class MultiVolumeServerTest {
         assertTrue(r.tv.storage().contains("en double"), "warning mentions duplicates")
         assertEquals(200, r.call("POST", "/api/delete?name=d.mp4&volume=internal").first)
         assertTrue(File(r.usbDir, "d.mp4").isFile && !File(r.internalDir, "d.mp4").exists())
-        // a new upload of the same name replaces the old copy wherever it is
+        // w15-05 (D-W15-05a): a new upload of the same name but another size no longer replaces the old file silently: the TV answers 409 NAME_TAKEN
         File(r.internalDir, "r.mp4").writeBytes(ByteArray(5))
-        r.up("r.mp4", data)
-        assertTrue(File(r.usbDir, "r.mp4").isFile && !File(r.internalDir, "r.mp4").exists())
+        val (code, body) = r.put("r.mp4", 0, data.size.toLong(), data)
+        assertEquals(409, code, body); assertTrue(body.contains("NAME_TAKEN"), body)
+        assertEquals(5, File(r.internalDir, "r.mp4").length(), "the file already there is untouched")
+        assertFalse(File(r.usbDir, "r.mp4").exists() || File(r.usbDir, "r.mp4.part").exists(), "nothing was written")
     }
 
     @Test fun fat32NamesAreMappedAndFoundByBothNames() {
@@ -520,6 +522,39 @@ class MoverUnitTest {
         Mover.run(j, FileStore(va), FileStore(vb), { v -> n++; !(v.id == "b" && n > 6) })
         assertEquals("failed", j.state); assertTrue(j.error!!.contains("volume removed"))
         assertTrue(File(a, "f.mp4").isFile); assertTrue(File(b, "f.mp4.part").exists(), "resumable")
+    }
+
+    @Test fun resumedPartWithCorruptMiddleIsNeverCommitted() {
+        val big = Random(11).nextBytes(3_000_000)
+        File(a, "f.mp4").writeBytes(big)
+        // a partial copy of exactly the right size and sidecar, but one megabyte in the middle is altered (a block lost by the medium)
+        val bad = big.copyOf(); for (i in 1_000_000 until 2_000_000) bad[i] = (bad[i] + 1).toByte()
+        File(b, "f.mp4.part").writeBytes(bad); File(b, "f.mp4.meta").writeText(big.size.toString())
+        val j = MoveJob("f.mp4", va, vb, "f.mp4", big.size.toLong())
+        Mover.run(j, FileStore(va), FileStore(vb), { true })
+        if (j.state == "done") {
+            assertContentEquals(big, File(b, "f.mp4").readBytes(), "a copy that differs from the source is never accepted")
+            assertFalse(File(a, "f.mp4").exists(), "source removed only once the copy is proven identical")
+        } else {
+            assertContentEquals(big, File(a, "f.mp4").readBytes(), "source kept")
+        }
+        assertEquals("done", j.state, j.error)
+        assertContentEquals(big, File(b, "f.mp4").readBytes())
+    }
+
+    @Test fun aCorruptionOutsideTheCheckedWindowStillKeepsTheSource() {
+        // corruption deep in a resumed partial copy (outside the tail window and outside the 1 MB edges): the full proof refuses
+        val big = Random(12).nextBytes(4_000_000)
+        File(a, "f.mp4").writeBytes(big)
+        val bad = big.copyOf(); for (i in 2_000_000 until 2_000_100) bad[i] = (bad[i] + 1).toByte()
+        File(b, "f.mp4.part").writeBytes(bad.copyOf(3_900_000)); File(b, "f.mp4.meta").writeText(big.size.toString())
+        val j = MoveJob("f.mp4", va, vb, "f.mp4", big.size.toLong())
+        Mover.run(j, FileStore(va), FileStore(vb), { true }, tailWindow = 1 shl 20)
+        assertContentEquals(big, File(a, "f.mp4").takeIf { it.exists() }?.readBytes() ?: File(b, "f.mp4").readBytes(), "either the source is kept or the copy is identical")
+        if (!File(a, "f.mp4").exists()) assertContentEquals(big, File(b, "f.mp4").readBytes())
+        assertEquals("failed", j.state, "the unproven copy is refused")
+        assertTrue(File(a, "f.mp4").isFile, "source kept")
+        assertFalse(File(b, "f.mp4").exists(), "the corrupt copy is removed")
     }
 
     @Test fun aStalePartialFromADifferentSourceRestartsFromZero() {

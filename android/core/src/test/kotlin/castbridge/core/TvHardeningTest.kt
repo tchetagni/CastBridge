@@ -99,7 +99,7 @@ class MoverFaultTest {
         // room is back: the copy resumes from 1 MB, not from zero
         dst.failWriteAfter = Long.MAX_VALUE
         var firstOffset = -1L
-        src.onOpen = { if (firstOffset < 0) firstOffset = it }
+        src.onOpen = { if (it > 0 && firstOffset < 0) firstOffset = it }          // w15-05: the resumed copy is first compared with the source (read from 0), then the copy goes on at the offset
         val j2 = run()
         assertEquals("done", j2.state, j2.error)
         assertEquals(1_000_000L, firstOffset, "resumed where it stopped")
