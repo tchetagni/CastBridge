@@ -1,0 +1,293 @@
+{
+ "format": 1,
+ "type": "langue",
+ "id": "ja-a0-famille-en",
+ "version": 1,
+ "target": "ja",
+ "level": "a0",
+ "theme": "famille",
+ "source": "en",
+ "title": "Japanese A0 — My family",
+ "state": "review",
+ "units": [
+  {
+   "id": "ja-a0-famille-en-u1",
+   "title": "Dad, mom, and me",
+   "minutes": 10,
+   "skills": [
+    "co",
+    "ce",
+    "po"
+   ],
+   "prerequisites": [],
+   "vocab": [
+    {
+     "id": "ja-a0-famille-en-v1",
+     "term": "家族",
+     "reading": "かぞく",
+     "gloss": "family",
+     "pos": "n",
+     "audio": "m:ja-kazoku"
+    },
+    {
+     "id": "ja-a0-famille-en-v2",
+     "term": "お父さん",
+     "reading": "おとうさん",
+     "gloss": "dad",
+     "pos": "n",
+     "audio": "m:ja-otousan"
+    },
+    {
+     "id": "ja-a0-famille-en-v3",
+     "term": "お母さん",
+     "reading": "おかあさん",
+     "gloss": "mom",
+     "pos": "n",
+     "audio": "m:ja-okaasan"
+    },
+    {
+     "id": "ja-a0-famille-en-v4",
+     "term": "お兄さん",
+     "reading": "おにいさん",
+     "gloss": "older brother",
+     "pos": "n",
+     "audio": "m:ja-oniisan"
+    },
+    {
+     "id": "ja-a0-famille-en-v5",
+     "term": "お姉さん",
+     "reading": "おねえさん",
+     "gloss": "older sister",
+     "pos": "n",
+     "audio": "m:ja-oneesan"
+    },
+    {
+     "id": "ja-a0-famille-en-v6",
+     "term": "弟",
+     "reading": "おとうと",
+     "gloss": "younger brother",
+     "pos": "n",
+     "audio": "m:ja-otouto"
+    },
+    {
+     "id": "ja-a0-famille-en-v7",
+     "term": "妹",
+     "reading": "いもうと",
+     "gloss": "younger sister",
+     "pos": "n",
+     "audio": "m:ja-imouto"
+    },
+    {
+     "id": "ja-a0-famille-en-v8",
+     "term": "私",
+     "reading": "わたし",
+     "gloss": "I, me",
+     "pos": "pron",
+     "audio": "m:ja-watashi"
+    }
+   ],
+   "dialogues": [
+    {
+     "id": "ja-a0-famille-en-d1",
+     "title": "My family",
+     "lines": [
+      {
+       "who": "A",
+       "text": "これは私のお父さんです。",
+       "reading": "これはわたしのおとうさんです。",
+       "tr": "This is my dad."
+      },
+      {
+       "who": "B",
+       "text": "こんにちは。",
+       "reading": "こんにちは。",
+       "tr": "Hello!"
+      },
+      {
+       "who": "A",
+       "text": "これは私のお母さんです。",
+       "reading": "これはわたしのおかあさんです。",
+       "tr": "This is my mom."
+      },
+      {
+       "who": "B",
+       "text": "弟さんは？",
+       "reading": "おとうとさんは？",
+       "tr": "What about your little brother?"
+      },
+      {
+       "who": "A",
+       "text": "弟は小さいです。",
+       "reading": "おとうとはちいさいです。",
+       "tr": "My little brother is small."
+      },
+      {
+       "who": "B",
+       "text": "いい家族です。",
+       "reading": "いいかぞくです。",
+       "tr": "Nice family!"
+      }
+     ],
+     "audio": "m:ja-famille-d1"
+    }
+   ],
+   "grammar": [
+    {
+     "id": "ja-a0-famille-en-g1",
+     "title": "Possession with の (no)",
+     "md": "Mark possession with **の** (no): **私の** (watashi no) = 'my'.",
+     "examples": [
+      {
+       "text": "私のお父さん",
+       "tr": "my dad"
+      }
+     ]
+    },
+    {
+     "id": "ja-a0-famille-en-g2",
+     "title": "« これは…です » = this is…",
+     "md": "**これは…です** (kore wa… desu) means 'this is…': **これは私のお父さんです** (this is my dad).",
+     "examples": [
+      {
+       "text": "これは私のお母さんです",
+       "tr": "This is my mom"
+      }
+     ]
+    }
+   ],
+   "exercises": [
+    {
+     "id": "ja-a0-famille-en-x1",
+     "kind": "mcq",
+     "prompt": "What does お母さん mean?",
+     "choices": [
+      "dad",
+      "mom",
+      "brother"
+     ],
+     "correct": 1
+    },
+    {
+     "id": "ja-a0-famille-en-x2",
+     "kind": "match",
+     "prompt": "Match each person.",
+     "pairs": [
+      {
+       "a": "お父さん",
+       "b": "dad"
+      },
+      {
+       "a": "お母さん",
+       "b": "mom"
+      },
+      {
+       "a": "お兄さん",
+       "b": "older brother"
+      },
+      {
+       "a": "お姉さん",
+       "b": "older sister"
+      },
+      {
+       "a": "弟",
+       "b": "younger brother"
+      }
+     ]
+    },
+    {
+     "id": "ja-a0-famille-en-x3",
+     "kind": "truefalse",
+     "prompt": "'私の' means 'my'.",
+     "correct": 0
+    },
+    {
+     "id": "ja-a0-famille-en-x4",
+     "kind": "translate",
+     "prompt": "Translate: mom.",
+     "answers": [
+      "お母さん"
+     ]
+    },
+    {
+     "id": "ja-a0-famille-en-x5",
+     "kind": "dictation",
+     "prompt": "Listen and write in hiragana.",
+     "audio": "m:ja-okaasan",
+     "answers": [
+      "お母さん"
+     ]
+    },
+    {
+     "id": "ja-a0-famille-en-x6",
+     "kind": "order",
+     "prompt": "Put the words in the right order.",
+     "answers": [
+      "これは私のお父さんです"
+     ],
+     "words": [
+      "これ",
+      "は",
+      "私",
+      "の",
+      "お父さん",
+      "です"
+     ]
+    },
+    {
+     "id": "ja-a0-famille-en-x7",
+     "kind": "speak",
+     "prompt": "Introduce your mother in Japanese.",
+     "audio": "m:ja-okaasan",
+     "model": "これは私のお母さんです (kore wa watashi no okaasan desu)"
+    }
+   ],
+   "stories": [],
+   "cards": [
+    {
+     "id": "ja-a0-famille-en-c1",
+     "vocab": "ja-a0-famille-en-v1"
+    },
+    {
+     "id": "ja-a0-famille-en-c2",
+     "vocab": "ja-a0-famille-en-v2"
+    },
+    {
+     "id": "ja-a0-famille-en-c3",
+     "vocab": "ja-a0-famille-en-v3"
+    },
+    {
+     "id": "ja-a0-famille-en-c4",
+     "vocab": "ja-a0-famille-en-v4"
+    },
+    {
+     "id": "ja-a0-famille-en-c5",
+     "vocab": "ja-a0-famille-en-v5"
+    },
+    {
+     "id": "ja-a0-famille-en-c6",
+     "vocab": "ja-a0-famille-en-v6"
+    },
+    {
+     "id": "ja-a0-famille-en-c7",
+     "vocab": "ja-a0-famille-en-v7"
+    },
+    {
+     "id": "ja-a0-famille-en-c8",
+     "vocab": "ja-a0-famille-en-v8"
+    }
+   ],
+   "animations": [
+    {
+     "id": "ja-a0-famille-en-a1",
+     "kind": "strokes",
+     "label": "Stroke order of あ"
+    },
+    {
+     "id": "ja-a0-famille-en-a2",
+     "kind": "strokes",
+     "label": "Stroke order of り"
+    }
+   ]
+  }
+ ]
+}

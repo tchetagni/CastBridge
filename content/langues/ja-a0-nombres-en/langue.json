@@ -1,0 +1,341 @@
+{
+ "format": 1,
+ "type": "langue",
+ "id": "ja-a0-nombres-en",
+ "version": 1,
+ "target": "ja",
+ "level": "a0",
+ "theme": "nombres",
+ "source": "en",
+ "title": "Japanese A0 — Numbers",
+ "state": "review",
+ "units": [
+  {
+   "id": "ja-a0-nombres-en-u1",
+   "title": "Counting from 0 to 10",
+   "minutes": 10,
+   "skills": [
+    "co",
+    "ce"
+   ],
+   "prerequisites": [],
+   "vocab": [
+    {
+     "id": "ja-a0-nombres-en-v1",
+     "term": "れい",
+     "reading": "れい",
+     "gloss": "zero",
+     "pos": "num",
+     "audio": "m:ja-rei"
+    },
+    {
+     "id": "ja-a0-nombres-en-v2",
+     "term": "いち",
+     "reading": "いち",
+     "gloss": "one",
+     "pos": "num",
+     "audio": "m:ja-ichi"
+    },
+    {
+     "id": "ja-a0-nombres-en-v3",
+     "term": "に",
+     "reading": "に",
+     "gloss": "two",
+     "pos": "num",
+     "audio": "m:ja-ni"
+    },
+    {
+     "id": "ja-a0-nombres-en-v4",
+     "term": "さん",
+     "reading": "さん",
+     "gloss": "three",
+     "pos": "num",
+     "audio": "m:ja-san"
+    },
+    {
+     "id": "ja-a0-nombres-en-v5",
+     "term": "よん",
+     "reading": "よん",
+     "gloss": "four",
+     "pos": "num",
+     "audio": "m:ja-yon"
+    },
+    {
+     "id": "ja-a0-nombres-en-v6",
+     "term": "ご",
+     "reading": "ご",
+     "gloss": "five",
+     "pos": "num",
+     "audio": "m:ja-go"
+    },
+    {
+     "id": "ja-a0-nombres-en-v7",
+     "term": "ろく",
+     "reading": "ろく",
+     "gloss": "six",
+     "pos": "num",
+     "audio": "m:ja-roku"
+    },
+    {
+     "id": "ja-a0-nombres-en-v8",
+     "term": "なな",
+     "reading": "なな",
+     "gloss": "seven",
+     "pos": "num",
+     "audio": "m:ja-nana"
+    },
+    {
+     "id": "ja-a0-nombres-en-v9",
+     "term": "はち",
+     "reading": "はち",
+     "gloss": "eight",
+     "pos": "num",
+     "audio": "m:ja-hachi"
+    },
+    {
+     "id": "ja-a0-nombres-en-v10",
+     "term": "きゅう",
+     "reading": "きゅう",
+     "gloss": "nine",
+     "pos": "num",
+     "audio": "m:ja-kyuu"
+    },
+    {
+     "id": "ja-a0-nombres-en-v11",
+     "term": "じゅう",
+     "reading": "じゅう",
+     "gloss": "ten",
+     "pos": "num",
+     "audio": "m:ja-juu"
+    }
+   ],
+   "dialogues": [
+    {
+     "id": "ja-a0-nombres-en-d1",
+     "title": "Counting",
+     "lines": [
+      {
+       "who": "A",
+       "text": "いち、に、さん。",
+       "reading": "いち、に、さん。",
+       "tr": "One, two, three."
+      },
+      {
+       "who": "B",
+       "text": "よん、ご、ろく。",
+       "reading": "よん、ご、ろく。",
+       "tr": "Four, five, six."
+      },
+      {
+       "who": "A",
+       "text": "なな、はち、きゅう、じゅう。",
+       "reading": "なな、はち、きゅう、じゅう。",
+       "tr": "Seven, eight, nine, ten."
+      },
+      {
+       "who": "B",
+       "text": "何さいですか。",
+       "reading": "なんさいですか。",
+       "tr": "How old are you?"
+      },
+      {
+       "who": "A",
+       "text": "十さいです。",
+       "reading": "じゅっさいです。",
+       "tr": "I'm ten."
+      },
+      {
+       "who": "B",
+       "text": "ありがとう。",
+       "reading": "ありがとう。",
+       "tr": "Thank you!"
+      }
+     ],
+     "audio": "m:ja-nombres-d1"
+    }
+   ],
+   "grammar": [
+    {
+     "id": "ja-a0-nombres-en-g1",
+     "title": "Counting in Japanese",
+     "md": "From **いち** (1) to **じゅう** (10), each number is one word. 4 is **よん** (or し), 7 is **なな** (or しち).",
+     "examples": [
+      {
+       "text": "いち、に、さん",
+       "tr": "one, two, three"
+      }
+     ]
+    },
+    {
+     "id": "ja-a0-nombres-en-g2",
+     "title": "Age with さい (sai)",
+     "md": "To say your age, add **さい** (sai) after the number: **十さい** (ten years old).",
+     "examples": [
+      {
+       "text": "十さいです",
+       "tr": "I am ten"
+      }
+     ]
+    }
+   ],
+   "exercises": [
+    {
+     "id": "ja-a0-nombres-en-x1",
+     "kind": "dictation",
+     "prompt": "Listen and write the number in hiragana.",
+     "audio": "m:ja-san",
+     "answers": [
+      "さん"
+     ]
+    },
+    {
+     "id": "ja-a0-nombres-en-x2",
+     "kind": "mcq",
+     "prompt": "What does ご mean?",
+     "choices": [
+      "three",
+      "five",
+      "seven"
+     ],
+     "correct": 1
+    },
+    {
+     "id": "ja-a0-nombres-en-x3",
+     "kind": "match",
+     "prompt": "Match each number to its value.",
+     "pairs": [
+      {
+       "a": "いち",
+       "b": "one"
+      },
+      {
+       "a": "に",
+       "b": "two"
+      },
+      {
+       "a": "さん",
+       "b": "three"
+      },
+      {
+       "a": "よん",
+       "b": "four"
+      },
+      {
+       "a": "ご",
+       "b": "five"
+      }
+     ]
+    },
+    {
+     "id": "ja-a0-nombres-en-x4",
+     "kind": "order",
+     "prompt": "Put the words in the right order.",
+     "answers": [
+      "十さいです"
+     ],
+     "words": [
+      "十",
+      "さい",
+      "です"
+     ]
+    },
+    {
+     "id": "ja-a0-nombres-en-x5",
+     "kind": "truefalse",
+     "prompt": "'じゅう' means 'ten'.",
+     "correct": 0
+    },
+    {
+     "id": "ja-a0-nombres-en-x6",
+     "kind": "translate",
+     "prompt": "Translate: eight.",
+     "answers": [
+      "はち"
+     ]
+    },
+    {
+     "id": "ja-a0-nombres-en-x7",
+     "kind": "mcq",
+     "prompt": "How much is に + さん?",
+     "choices": [
+      "よん",
+      "ご",
+      "ろく"
+     ],
+     "correct": 1
+    },
+    {
+     "id": "ja-a0-nombres-en-x8",
+     "kind": "speak",
+     "prompt": "Count from 1 to 5 in Japanese.",
+     "audio": "m:ja-nombres-count15",
+     "model": "ichi, ni, san, yon, go"
+    }
+   ],
+   "stories": [],
+   "cards": [
+    {
+     "id": "ja-a0-nombres-en-c1",
+     "vocab": "ja-a0-nombres-en-v1"
+    },
+    {
+     "id": "ja-a0-nombres-en-c2",
+     "vocab": "ja-a0-nombres-en-v2"
+    },
+    {
+     "id": "ja-a0-nombres-en-c3",
+     "vocab": "ja-a0-nombres-en-v3"
+    },
+    {
+     "id": "ja-a0-nombres-en-c4",
+     "vocab": "ja-a0-nombres-en-v4"
+    },
+    {
+     "id": "ja-a0-nombres-en-c5",
+     "vocab": "ja-a0-nombres-en-v5"
+    },
+    {
+     "id": "ja-a0-nombres-en-c6",
+     "vocab": "ja-a0-nombres-en-v6"
+    },
+    {
+     "id": "ja-a0-nombres-en-c7",
+     "vocab": "ja-a0-nombres-en-v7"
+    },
+    {
+     "id": "ja-a0-nombres-en-c8",
+     "vocab": "ja-a0-nombres-en-v8"
+    },
+    {
+     "id": "ja-a0-nombres-en-c9",
+     "vocab": "ja-a0-nombres-en-v9"
+    },
+    {
+     "id": "ja-a0-nombres-en-c10",
+     "vocab": "ja-a0-nombres-en-v10"
+    },
+    {
+     "id": "ja-a0-nombres-en-c11",
+     "vocab": "ja-a0-nombres-en-v11"
+    }
+   ],
+   "animations": [
+    {
+     "id": "ja-a0-nombres-en-a1",
+     "kind": "strokes",
+     "label": "Stroke order of い"
+    },
+    {
+     "id": "ja-a0-nombres-en-a2",
+     "kind": "strokes",
+     "label": "Stroke order of ち"
+    },
+    {
+     "id": "ja-a0-nombres-en-a3",
+     "kind": "gesture",
+     "label": "Counting 1 to 5 on one hand"
+    }
+   ]
+  }
+ ]
+}

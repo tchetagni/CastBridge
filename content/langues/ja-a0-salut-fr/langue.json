@@ -1,0 +1,324 @@
+{
+ "format": 1,
+ "type": "langue",
+ "id": "ja-a0-salut-fr",
+ "version": 1,
+ "target": "ja",
+ "level": "a0",
+ "theme": "salut",
+ "source": "fr",
+ "title": "Japonais A0 — Se saluer",
+ "state": "review",
+ "units": [
+  {
+   "id": "ja-a0-salut-fr-u1",
+   "title": "Bonjour, merci, au revoir",
+   "minutes": 10,
+   "skills": [
+    "co",
+    "ce",
+    "po"
+   ],
+   "prerequisites": [],
+   "vocab": [
+    {
+     "id": "ja-a0-salut-fr-v1",
+     "term": "こんにちは",
+     "reading": "こんにちは",
+     "gloss": "bonjour",
+     "pos": "interj",
+     "audio": "m:ja-konnichiwa"
+    },
+    {
+     "id": "ja-a0-salut-fr-v2",
+     "term": "ありがとう",
+     "reading": "ありがとう",
+     "gloss": "merci",
+     "pos": "interj",
+     "audio": "m:ja-arigatou"
+    },
+    {
+     "id": "ja-a0-salut-fr-v3",
+     "term": "さようなら",
+     "reading": "さようなら",
+     "gloss": "au revoir",
+     "pos": "interj",
+     "audio": "m:ja-sayounara"
+    },
+    {
+     "id": "ja-a0-salut-fr-v4",
+     "term": "お願いします",
+     "reading": "おねがいします",
+     "gloss": "s'il te plaît",
+     "pos": "interj",
+     "audio": "m:ja-onegaishimasu"
+    },
+    {
+     "id": "ja-a0-salut-fr-v5",
+     "term": "はい",
+     "reading": "はい",
+     "gloss": "oui",
+     "pos": "interj",
+     "audio": "m:ja-hai"
+    },
+    {
+     "id": "ja-a0-salut-fr-v6",
+     "term": "いいえ",
+     "reading": "いいえ",
+     "gloss": "non",
+     "pos": "interj",
+     "audio": "m:ja-iie"
+    },
+    {
+     "id": "ja-a0-salut-fr-v7",
+     "term": "すみません",
+     "reading": "すみません",
+     "gloss": "excuse-moi, pardon",
+     "pos": "interj",
+     "audio": "m:ja-sumimasen"
+    },
+    {
+     "id": "ja-a0-salut-fr-v8",
+     "term": "おはよう",
+     "reading": "おはよう",
+     "gloss": "bonjour (le matin)",
+     "pos": "interj",
+     "audio": "m:ja-ohayou"
+    },
+    {
+     "id": "ja-a0-salut-fr-v9",
+     "term": "お元気ですか",
+     "reading": "おげんきですか",
+     "gloss": "comment vas-tu ?",
+     "pos": "phrase",
+     "audio": "m:ja-ogenkidesuka"
+    },
+    {
+     "id": "ja-a0-salut-fr-v10",
+     "term": "元気です",
+     "reading": "げんきです",
+     "gloss": "je vais bien",
+     "pos": "phrase",
+     "audio": "m:ja-genkidesu"
+    }
+   ],
+   "dialogues": [
+    {
+     "id": "ja-a0-salut-fr-d1",
+     "title": "Une rencontre",
+     "lines": [
+      {
+       "who": "A",
+       "text": "こんにちは。",
+       "reading": "こんにちは。",
+       "tr": "Bonjour !"
+      },
+      {
+       "who": "B",
+       "text": "こんにちは。",
+       "reading": "こんにちは。",
+       "tr": "Bonjour !"
+      },
+      {
+       "who": "A",
+       "text": "お元気ですか。",
+       "reading": "おげんきですか。",
+       "tr": "Comment vas-tu ?"
+      },
+      {
+       "who": "B",
+       "text": "はい、元気です。ありがとう。",
+       "reading": "はい、げんきです。ありがとう。",
+       "tr": "Je vais bien, merci."
+      },
+      {
+       "who": "A",
+       "text": "いいえ。",
+       "reading": "いいえ。",
+       "tr": "De rien."
+      },
+      {
+       "who": "B",
+       "text": "さようなら。",
+       "reading": "さようなら。",
+       "tr": "Au revoir !"
+      },
+      {
+       "who": "A",
+       "text": "さようなら。",
+       "reading": "さようなら。",
+       "tr": "Au revoir !"
+      }
+     ],
+     "audio": "m:ja-salut-d1"
+    }
+   ],
+   "grammar": [
+    {
+     "id": "ja-a0-salut-fr-g1",
+     "title": "La politesse : です (desu)",
+     "md": "Le japonais est très poli. On termine souvent par **です** (desu) : **元気です** (je vais bien). Les salutations sont des formules fixes : **こんにちは** (bonjour).",
+     "examples": [
+      {
+       "text": "元気です",
+       "tr": "je vais bien"
+      }
+     ]
+    },
+    {
+     "id": "ja-a0-salut-fr-g2",
+     "title": "La question avec か (ka)",
+     "md": "On ajoute **か** (ka) en fin de phrase pour poser une question : **お元気ですか** (comment vas-tu ?).",
+     "examples": [
+      {
+       "text": "お元気ですか",
+       "tr": "Comment vas-tu ?"
+      }
+     ]
+    }
+   ],
+   "exercises": [
+    {
+     "id": "ja-a0-salut-fr-x1",
+     "kind": "dictation",
+     "prompt": "Écoute et écris en hiragana.",
+     "audio": "m:ja-arigatou",
+     "answers": [
+      "ありがとう"
+     ]
+    },
+    {
+     "id": "ja-a0-salut-fr-x2",
+     "kind": "mcq",
+     "prompt": "Que veut dire さようなら ?",
+     "choices": [
+      "bonjour",
+      "merci",
+      "au revoir"
+     ],
+     "correct": 2
+    },
+    {
+     "id": "ja-a0-salut-fr-x3",
+     "kind": "match",
+     "prompt": "Associe chaque mot à son sens.",
+     "pairs": [
+      {
+       "a": "こんにちは",
+       "b": "bonjour"
+      },
+      {
+       "a": "ありがとう",
+       "b": "merci"
+      },
+      {
+       "a": "さようなら",
+       "b": "au revoir"
+      },
+      {
+       "a": "はい",
+       "b": "oui"
+      },
+      {
+       "a": "いいえ",
+       "b": "non"
+      }
+     ]
+    },
+    {
+     "id": "ja-a0-salut-fr-x4",
+     "kind": "speak",
+     "prompt": "Dis « merci » en japonais.",
+     "audio": "m:ja-arigatou",
+     "model": "arigatou (ありがとう)"
+    },
+    {
+     "id": "ja-a0-salut-fr-x5",
+     "kind": "order",
+     "prompt": "Remets les mots dans l'ordre.",
+     "answers": [
+      "はい、元気です"
+     ],
+     "words": [
+      "はい",
+      "元気",
+      "です"
+     ]
+    },
+    {
+     "id": "ja-a0-salut-fr-x6",
+     "kind": "truefalse",
+     "prompt": "« ありがとう » veut dire « merci ».",
+     "correct": 0
+    },
+    {
+     "id": "ja-a0-salut-fr-x7",
+     "kind": "cloze",
+     "prompt": "Complète : お元気です__ ? (particule de question).",
+     "answers": [
+      "か"
+     ]
+    },
+    {
+     "id": "ja-a0-salut-fr-x8",
+     "kind": "translate",
+     "prompt": "Traduis : merci.",
+     "answers": [
+      "ありがとう"
+     ]
+    },
+    {
+     "id": "ja-a0-salut-fr-x9",
+     "kind": "write",
+     "prompt": "Écris « bonjour » en hiragana.",
+     "model": "こんにちは"
+    }
+   ],
+   "stories": [],
+   "cards": [
+    {
+     "id": "ja-a0-salut-fr-c1",
+     "vocab": "ja-a0-salut-fr-v1"
+    },
+    {
+     "id": "ja-a0-salut-fr-c2",
+     "vocab": "ja-a0-salut-fr-v2"
+    },
+    {
+     "id": "ja-a0-salut-fr-c3",
+     "vocab": "ja-a0-salut-fr-v3"
+    },
+    {
+     "id": "ja-a0-salut-fr-c4",
+     "vocab": "ja-a0-salut-fr-v5"
+    },
+    {
+     "id": "ja-a0-salut-fr-c5",
+     "vocab": "ja-a0-salut-fr-v6"
+    }
+   ],
+   "animations": [
+    {
+     "id": "ja-a0-salut-fr-a1",
+     "kind": "strokes",
+     "label": "Ordre des traits de こ"
+    },
+    {
+     "id": "ja-a0-salut-fr-a2",
+     "kind": "strokes",
+     "label": "Ordre des traits de ん"
+    },
+    {
+     "id": "ja-a0-salut-fr-a3",
+     "kind": "strokes",
+     "label": "Ordre des traits de に"
+    },
+    {
+     "id": "ja-a0-salut-fr-a4",
+     "kind": "gesture",
+     "label": "Se saluer en s'inclinant (ojigi)"
+    }
+   ]
+  }
+ ]
+}

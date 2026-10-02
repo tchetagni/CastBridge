@@ -1,0 +1,293 @@
+{
+ "format": 1,
+ "type": "langue",
+ "id": "ja-a0-famille-fr",
+ "version": 1,
+ "target": "ja",
+ "level": "a0",
+ "theme": "famille",
+ "source": "fr",
+ "title": "Japonais A0 — Ma famille",
+ "state": "review",
+ "units": [
+  {
+   "id": "ja-a0-famille-fr-u1",
+   "title": "Papa, maman, et moi",
+   "minutes": 10,
+   "skills": [
+    "co",
+    "ce",
+    "po"
+   ],
+   "prerequisites": [],
+   "vocab": [
+    {
+     "id": "ja-a0-famille-fr-v1",
+     "term": "家族",
+     "reading": "かぞく",
+     "gloss": "famille",
+     "pos": "n",
+     "audio": "m:ja-kazoku"
+    },
+    {
+     "id": "ja-a0-famille-fr-v2",
+     "term": "お父さん",
+     "reading": "おとうさん",
+     "gloss": "papa",
+     "pos": "n",
+     "audio": "m:ja-otousan"
+    },
+    {
+     "id": "ja-a0-famille-fr-v3",
+     "term": "お母さん",
+     "reading": "おかあさん",
+     "gloss": "maman",
+     "pos": "n",
+     "audio": "m:ja-okaasan"
+    },
+    {
+     "id": "ja-a0-famille-fr-v4",
+     "term": "お兄さん",
+     "reading": "おにいさん",
+     "gloss": "grand frère",
+     "pos": "n",
+     "audio": "m:ja-oniisan"
+    },
+    {
+     "id": "ja-a0-famille-fr-v5",
+     "term": "お姉さん",
+     "reading": "おねえさん",
+     "gloss": "grande sœur",
+     "pos": "n",
+     "audio": "m:ja-oneesan"
+    },
+    {
+     "id": "ja-a0-famille-fr-v6",
+     "term": "弟",
+     "reading": "おとうと",
+     "gloss": "petit frère",
+     "pos": "n",
+     "audio": "m:ja-otouto"
+    },
+    {
+     "id": "ja-a0-famille-fr-v7",
+     "term": "妹",
+     "reading": "いもうと",
+     "gloss": "petite sœur",
+     "pos": "n",
+     "audio": "m:ja-imouto"
+    },
+    {
+     "id": "ja-a0-famille-fr-v8",
+     "term": "私",
+     "reading": "わたし",
+     "gloss": "je, moi",
+     "pos": "pron",
+     "audio": "m:ja-watashi"
+    }
+   ],
+   "dialogues": [
+    {
+     "id": "ja-a0-famille-fr-d1",
+     "title": "Ma famille",
+     "lines": [
+      {
+       "who": "A",
+       "text": "これは私のお父さんです。",
+       "reading": "これはわたしのおとうさんです。",
+       "tr": "C'est mon papa."
+      },
+      {
+       "who": "B",
+       "text": "こんにちは。",
+       "reading": "こんにちは。",
+       "tr": "Bonjour !"
+      },
+      {
+       "who": "A",
+       "text": "これは私のお母さんです。",
+       "reading": "これはわたしのおかあさんです。",
+       "tr": "C'est ma maman."
+      },
+      {
+       "who": "B",
+       "text": "弟さんは？",
+       "reading": "おとうとさんは？",
+       "tr": "Et ton petit frère ?"
+      },
+      {
+       "who": "A",
+       "text": "弟は小さいです。",
+       "reading": "おとうとはちいさいです。",
+       "tr": "Mon petit frère est tout petit."
+      },
+      {
+       "who": "B",
+       "text": "いい家族です。",
+       "reading": "いいかぞくです。",
+       "tr": "C'est une chouette famille !"
+      }
+     ],
+     "audio": "m:ja-famille-d1"
+    }
+   ],
+   "grammar": [
+    {
+     "id": "ja-a0-famille-fr-g1",
+     "title": "La possession avec の (no)",
+     "md": "On marque la possession avec **の** (no) : **私の** (watashi no) = « mon / ma / mes ».",
+     "examples": [
+      {
+       "text": "私のお父さん",
+       "tr": "mon papa"
+      }
+     ]
+    },
+    {
+     "id": "ja-a0-famille-fr-g2",
+     "title": "« これは…です » = c'est…",
+     "md": "**これは…です** (kore wa… desu) signifie « c'est… » : **これは私のお父さんです** (c'est mon papa).",
+     "examples": [
+      {
+       "text": "これは私のお母さんです",
+       "tr": "C'est ma maman"
+      }
+     ]
+    }
+   ],
+   "exercises": [
+    {
+     "id": "ja-a0-famille-fr-x1",
+     "kind": "mcq",
+     "prompt": "Que veut dire お母さん ?",
+     "choices": [
+      "papa",
+      "maman",
+      "frère"
+     ],
+     "correct": 1
+    },
+    {
+     "id": "ja-a0-famille-fr-x2",
+     "kind": "match",
+     "prompt": "Associe chaque personne.",
+     "pairs": [
+      {
+       "a": "お父さん",
+       "b": "papa"
+      },
+      {
+       "a": "お母さん",
+       "b": "maman"
+      },
+      {
+       "a": "お兄さん",
+       "b": "grand frère"
+      },
+      {
+       "a": "お姉さん",
+       "b": "grande sœur"
+      },
+      {
+       "a": "弟",
+       "b": "petit frère"
+      }
+     ]
+    },
+    {
+     "id": "ja-a0-famille-fr-x3",
+     "kind": "truefalse",
+     "prompt": "« 私の » veut dire « mon ».",
+     "correct": 0
+    },
+    {
+     "id": "ja-a0-famille-fr-x4",
+     "kind": "translate",
+     "prompt": "Traduis : maman.",
+     "answers": [
+      "お母さん"
+     ]
+    },
+    {
+     "id": "ja-a0-famille-fr-x5",
+     "kind": "dictation",
+     "prompt": "Écoute et écris en hiragana.",
+     "audio": "m:ja-okaasan",
+     "answers": [
+      "お母さん"
+     ]
+    },
+    {
+     "id": "ja-a0-famille-fr-x6",
+     "kind": "order",
+     "prompt": "Remets les mots dans l'ordre.",
+     "answers": [
+      "これは私のお父さんです"
+     ],
+     "words": [
+      "これ",
+      "は",
+      "私",
+      "の",
+      "お父さん",
+      "です"
+     ]
+    },
+    {
+     "id": "ja-a0-famille-fr-x7",
+     "kind": "speak",
+     "prompt": "Présente ta mère en japonais.",
+     "audio": "m:ja-okaasan",
+     "model": "これは私のお母さんです (kore wa watashi no okaasan desu)"
+    }
+   ],
+   "stories": [],
+   "cards": [
+    {
+     "id": "ja-a0-famille-fr-c1",
+     "vocab": "ja-a0-famille-fr-v1"
+    },
+    {
+     "id": "ja-a0-famille-fr-c2",
+     "vocab": "ja-a0-famille-fr-v2"
+    },
+    {
+     "id": "ja-a0-famille-fr-c3",
+     "vocab": "ja-a0-famille-fr-v3"
+    },
+    {
+     "id": "ja-a0-famille-fr-c4",
+     "vocab": "ja-a0-famille-fr-v4"
+    },
+    {
+     "id": "ja-a0-famille-fr-c5",
+     "vocab": "ja-a0-famille-fr-v5"
+    },
+    {
+     "id": "ja-a0-famille-fr-c6",
+     "vocab": "ja-a0-famille-fr-v6"
+    },
+    {
+     "id": "ja-a0-famille-fr-c7",
+     "vocab": "ja-a0-famille-fr-v7"
+    },
+    {
+     "id": "ja-a0-famille-fr-c8",
+     "vocab": "ja-a0-famille-fr-v8"
+    }
+   ],
+   "animations": [
+    {
+     "id": "ja-a0-famille-fr-a1",
+     "kind": "strokes",
+     "label": "Ordre des traits de あ"
+    },
+    {
+     "id": "ja-a0-famille-fr-a2",
+     "kind": "strokes",
+     "label": "Ordre des traits de り"
+    }
+   ]
+  }
+ ]
+}

@@ -1,0 +1,214 @@
+{
+ "type": "illustration",
+ "caption": "Ordre des traits de 再",
+ "alt": "Caractère 再 tracé trait par trait dans l'ordre (ordre indicatif, à faire valider par un natif).",
+ "figure": {
+  "kind": "shapes",
+  "w": 360,
+  "h": 260,
+  "items": [
+   {
+    "t": "rect",
+    "x": 130,
+    "y": 20,
+    "w": 120,
+    "h": 120,
+    "stroke": "lightgrey"
+   },
+   {
+    "t": "text",
+    "x": 190,
+    "y": 190,
+    "text": "再",
+    "size": 30,
+    "bold": true
+   },
+   {
+    "t": "text",
+    "x": 190,
+    "y": 225,
+    "text": "zài",
+    "color": "grey"
+   },
+   {
+    "t": "path",
+    "d": "M30 28 L90 28",
+    "width": 3
+   },
+   {
+    "t": "path",
+    "d": "M52 20 L48 80",
+    "width": 3
+   },
+   {
+    "t": "path",
+    "d": "M64 28 L90 62",
+    "width": 3
+   },
+   {
+    "t": "path",
+    "d": "M64 62 L90 66",
+    "width": 3
+   },
+   {
+    "t": "path",
+    "d": "M30 78 L90 78",
+    "width": 3
+   },
+   {
+    "t": "path",
+    "d": "M52 70 L48 96",
+    "width": 3
+   }
+  ]
+ },
+ "animation": {
+  "mode": "steps",
+  "items": [
+   {
+    "t": "rect",
+    "x": 130,
+    "y": 20,
+    "w": 120,
+    "h": 120,
+    "stroke": "lightgrey",
+    "id": "a"
+   },
+   {
+    "t": "text",
+    "x": 190,
+    "y": 190,
+    "text": "再",
+    "size": 30,
+    "bold": true,
+    "id": "b"
+   },
+   {
+    "t": "text",
+    "x": 190,
+    "y": 225,
+    "text": "zài",
+    "color": "grey",
+    "id": "c"
+   },
+   {
+    "t": "path",
+    "d": "M30 28 L90 28",
+    "width": 3,
+    "id": "d",
+    "draw": 0
+   },
+   {
+    "t": "path",
+    "d": "M52 20 L48 80",
+    "width": 3,
+    "id": "e",
+    "draw": 0
+   },
+   {
+    "t": "path",
+    "d": "M64 28 L90 62",
+    "width": 3,
+    "id": "f",
+    "draw": 0
+   },
+   {
+    "t": "path",
+    "d": "M64 62 L90 66",
+    "width": 3,
+    "id": "g",
+    "draw": 0
+   },
+   {
+    "t": "path",
+    "d": "M30 78 L90 78",
+    "width": 3,
+    "id": "h",
+    "draw": 0
+   },
+   {
+    "t": "path",
+    "d": "M52 70 L48 96",
+    "width": 3,
+    "id": "i",
+    "draw": 0
+   }
+  ],
+  "do": [
+   {
+    "at": 0,
+    "d": 0.7,
+    "op": "draw",
+    "on": "d",
+    "ease": "linear",
+    "p": 1
+   },
+   {
+    "at": 0.7,
+    "d": 0.7,
+    "op": "draw",
+    "on": "e",
+    "ease": "linear",
+    "p": 1
+   },
+   {
+    "at": 1.4,
+    "d": 0.7,
+    "op": "draw",
+    "on": "f",
+    "ease": "linear",
+    "p": 1
+   },
+   {
+    "at": 2.1,
+    "d": 0.7,
+    "op": "draw",
+    "on": "g",
+    "ease": "linear",
+    "p": 1
+   },
+   {
+    "at": 2.8,
+    "d": 0.7,
+    "op": "draw",
+    "on": "h",
+    "ease": "linear",
+    "p": 1
+   },
+   {
+    "at": 3.5,
+    "d": 0.7,
+    "op": "draw",
+    "on": "i",
+    "ease": "linear",
+    "p": 1
+   }
+  ],
+  "steps": [
+   {
+    "at": 0.7,
+    "say": "Trait 1."
+   },
+   {
+    "at": 1.4,
+    "say": "Trait 2."
+   },
+   {
+    "at": 2.1,
+    "say": "Trait 3."
+   },
+   {
+    "at": 2.8,
+    "say": "Trait 4."
+   },
+   {
+    "at": 3.5,
+    "say": "Trait 5."
+   },
+   {
+    "at": 4.2,
+    "say": "Trait 6."
+   }
+  ]
+ }
+}

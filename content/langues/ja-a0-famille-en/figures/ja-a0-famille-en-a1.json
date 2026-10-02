@@ -1,0 +1,142 @@
+{
+ "type": "illustration",
+ "caption": "Stroke order of あ",
+ "alt": "The character あ drawn stroke by stroke in order (indicative order, to be checked by a native speaker).",
+ "figure": {
+  "kind": "shapes",
+  "w": 360,
+  "h": 260,
+  "items": [
+   {
+    "t": "rect",
+    "x": 130,
+    "y": 20,
+    "w": 120,
+    "h": 120,
+    "stroke": "lightgrey"
+   },
+   {
+    "t": "text",
+    "x": 190,
+    "y": 190,
+    "text": "あ",
+    "size": 30,
+    "bold": true
+   },
+   {
+    "t": "text",
+    "x": 190,
+    "y": 225,
+    "text": "a",
+    "color": "grey"
+   },
+   {
+    "t": "path",
+    "d": "M28 48 L84 48",
+    "width": 3
+   },
+   {
+    "t": "path",
+    "d": "M56 34 L56 92 C40 92 38 62 56 62",
+    "width": 3
+   },
+   {
+    "t": "path",
+    "d": "M56 78 C68 86 76 94 56 94",
+    "width": 3
+   }
+  ]
+ },
+ "animation": {
+  "mode": "steps",
+  "items": [
+   {
+    "t": "rect",
+    "x": 130,
+    "y": 20,
+    "w": 120,
+    "h": 120,
+    "stroke": "lightgrey",
+    "id": "a"
+   },
+   {
+    "t": "text",
+    "x": 190,
+    "y": 190,
+    "text": "あ",
+    "size": 30,
+    "bold": true,
+    "id": "b"
+   },
+   {
+    "t": "text",
+    "x": 190,
+    "y": 225,
+    "text": "a",
+    "color": "grey",
+    "id": "c"
+   },
+   {
+    "t": "path",
+    "d": "M28 48 L84 48",
+    "width": 3,
+    "id": "d",
+    "draw": 0
+   },
+   {
+    "t": "path",
+    "d": "M56 34 L56 92 C40 92 38 62 56 62",
+    "width": 3,
+    "id": "e",
+    "draw": 0
+   },
+   {
+    "t": "path",
+    "d": "M56 78 C68 86 76 94 56 94",
+    "width": 3,
+    "id": "f",
+    "draw": 0
+   }
+  ],
+  "do": [
+   {
+    "at": 0,
+    "d": 0.7,
+    "op": "draw",
+    "on": "d",
+    "ease": "linear",
+    "p": 1
+   },
+   {
+    "at": 0.7,
+    "d": 0.7,
+    "op": "draw",
+    "on": "e",
+    "ease": "linear",
+    "p": 1
+   },
+   {
+    "at": 1.4,
+    "d": 0.7,
+    "op": "draw",
+    "on": "f",
+    "ease": "linear",
+    "p": 1
+   }
+  ],
+  "steps": [
+   {
+    "at": 0.7,
+    "say": "Stroke 1."
+   },
+   {
+    "at": 1.4,
+    "say": "Stroke 2."
+   },
+   {
+    "at": 2.1,
+    "say": "Stroke 3."
+   }
+  ]
+ }
+}

@@ -1,0 +1,118 @@
+{
+ "type": "illustration",
+ "caption": "Ordre des traits de い",
+ "alt": "Caractère い tracé trait par trait dans l'ordre (ordre indicatif, à faire valider par un natif).",
+ "figure": {
+  "kind": "shapes",
+  "w": 360,
+  "h": 260,
+  "items": [
+   {
+    "t": "rect",
+    "x": 130,
+    "y": 20,
+    "w": 120,
+    "h": 120,
+    "stroke": "lightgrey"
+   },
+   {
+    "t": "text",
+    "x": 190,
+    "y": 190,
+    "text": "い",
+    "size": 30,
+    "bold": true
+   },
+   {
+    "t": "text",
+    "x": 190,
+    "y": 225,
+    "text": "i",
+    "color": "grey"
+   },
+   {
+    "t": "path",
+    "d": "M40 24 L40 78",
+    "width": 3
+   },
+   {
+    "t": "path",
+    "d": "M66 24 L66 70 C66 86 50 86 50 72",
+    "width": 3
+   }
+  ]
+ },
+ "animation": {
+  "mode": "steps",
+  "items": [
+   {
+    "t": "rect",
+    "x": 130,
+    "y": 20,
+    "w": 120,
+    "h": 120,
+    "stroke": "lightgrey",
+    "id": "a"
+   },
+   {
+    "t": "text",
+    "x": 190,
+    "y": 190,
+    "text": "い",
+    "size": 30,
+    "bold": true,
+    "id": "b"
+   },
+   {
+    "t": "text",
+    "x": 190,
+    "y": 225,
+    "text": "i",
+    "color": "grey",
+    "id": "c"
+   },
+   {
+    "t": "path",
+    "d": "M40 24 L40 78",
+    "width": 3,
+    "id": "d",
+    "draw": 0
+   },
+   {
+    "t": "path",
+    "d": "M66 24 L66 70 C66 86 50 86 50 72",
+    "width": 3,
+    "id": "e",
+    "draw": 0
+   }
+  ],
+  "do": [
+   {
+    "at": 0,
+    "d": 0.7,
+    "op": "draw",
+    "on": "d",
+    "ease": "linear",
+    "p": 1
+   },
+   {
+    "at": 0.7,
+    "d": 0.7,
+    "op": "draw",
+    "on": "e",
+    "ease": "linear",
+    "p": 1
+   }
+  ],
+  "steps": [
+   {
+    "at": 0.7,
+    "say": "Trait 1."
+   },
+   {
+    "at": 1.4,
+    "say": "Trait 2."
+   }
+  ]
+ }
+}

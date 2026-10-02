@@ -1,0 +1,336 @@
+{
+ "format": 1,
+ "type": "langue",
+ "id": "zh-a0-nombres-fr",
+ "version": 1,
+ "target": "zh",
+ "level": "a0",
+ "theme": "nombres",
+ "source": "fr",
+ "title": "Chinois A0 — Les nombres",
+ "state": "review",
+ "units": [
+  {
+   "id": "zh-a0-nombres-fr-u1",
+   "title": "Compter de 0 à 10",
+   "minutes": 10,
+   "skills": [
+    "co",
+    "ce"
+   ],
+   "prerequisites": [],
+   "vocab": [
+    {
+     "id": "zh-a0-nombres-fr-v1",
+     "term": "零",
+     "reading": "líng",
+     "gloss": "zéro",
+     "pos": "num",
+     "audio": "m:zh-ling"
+    },
+    {
+     "id": "zh-a0-nombres-fr-v2",
+     "term": "一",
+     "reading": "yī",
+     "gloss": "un",
+     "pos": "num",
+     "audio": "m:zh-yi"
+    },
+    {
+     "id": "zh-a0-nombres-fr-v3",
+     "term": "二",
+     "reading": "èr",
+     "gloss": "deux",
+     "pos": "num",
+     "audio": "m:zh-er"
+    },
+    {
+     "id": "zh-a0-nombres-fr-v4",
+     "term": "三",
+     "reading": "sān",
+     "gloss": "trois",
+     "pos": "num",
+     "audio": "m:zh-san"
+    },
+    {
+     "id": "zh-a0-nombres-fr-v5",
+     "term": "四",
+     "reading": "sì",
+     "gloss": "quatre",
+     "pos": "num",
+     "audio": "m:zh-si"
+    },
+    {
+     "id": "zh-a0-nombres-fr-v6",
+     "term": "五",
+     "reading": "wǔ",
+     "gloss": "cinq",
+     "pos": "num",
+     "audio": "m:zh-wu"
+    },
+    {
+     "id": "zh-a0-nombres-fr-v7",
+     "term": "六",
+     "reading": "liù",
+     "gloss": "six",
+     "pos": "num",
+     "audio": "m:zh-liu"
+    },
+    {
+     "id": "zh-a0-nombres-fr-v8",
+     "term": "七",
+     "reading": "qī",
+     "gloss": "sept",
+     "pos": "num",
+     "audio": "m:zh-qi"
+    },
+    {
+     "id": "zh-a0-nombres-fr-v9",
+     "term": "八",
+     "reading": "bā",
+     "gloss": "huit",
+     "pos": "num",
+     "audio": "m:zh-ba"
+    },
+    {
+     "id": "zh-a0-nombres-fr-v10",
+     "term": "九",
+     "reading": "jiǔ",
+     "gloss": "neuf",
+     "pos": "num",
+     "audio": "m:zh-jiu"
+    },
+    {
+     "id": "zh-a0-nombres-fr-v11",
+     "term": "十",
+     "reading": "shí",
+     "gloss": "dix",
+     "pos": "num",
+     "audio": "m:zh-shiten"
+    }
+   ],
+   "dialogues": [
+    {
+     "id": "zh-a0-nombres-fr-d1",
+     "title": "Compter",
+     "lines": [
+      {
+       "who": "A",
+       "text": "一、二、三。",
+       "reading": "yī, èr, sān.",
+       "tr": "Un, deux, trois."
+      },
+      {
+       "who": "B",
+       "text": "四、五、六。",
+       "reading": "sì, wǔ, liù.",
+       "tr": "Quatre, cinq, six."
+      },
+      {
+       "who": "A",
+       "text": "七、八、九、十。",
+       "reading": "qī, bā, jiǔ, shí.",
+       "tr": "Sept, huit, neuf, dix."
+      },
+      {
+       "who": "B",
+       "text": "你几岁？",
+       "reading": "nǐ jǐ suì?",
+       "tr": "Quel âge as-tu ?"
+      },
+      {
+       "who": "A",
+       "text": "我十岁。",
+       "reading": "wǒ shí suì.",
+       "tr": "J'ai dix ans."
+      },
+      {
+       "who": "B",
+       "text": "谢谢！",
+       "reading": "xièxie!",
+       "tr": "Merci !"
+      }
+     ],
+     "audio": "m:zh-nombres-d1"
+    }
+   ],
+   "grammar": [
+    {
+     "id": "zh-a0-nombres-fr-g1",
+     "title": "Compter sur les doigts",
+     "md": "De **一** (1) à **十** (10), chaque chiffre s'écrit d'un seul caractère. En Chine, on compte souvent sur une seule main avec des gestes précis de la main.",
+     "examples": [
+      {
+       "text": "一二三",
+       "tr": "un, deux, trois"
+      }
+     ]
+    },
+    {
+     "id": "zh-a0-nombres-fr-g2",
+     "title": "L'âge avec 岁 (suì)",
+     "md": "Pour dire son âge, on ajoute **岁** (suì) après le nombre : **我十岁** (j'ai dix ans, littéralement « moi dix ans »).",
+     "examples": [
+      {
+       "text": "我十岁",
+       "tr": "J'ai dix ans"
+      }
+     ]
+    }
+   ],
+   "exercises": [
+    {
+     "id": "zh-a0-nombres-fr-x1",
+     "kind": "dictation",
+     "prompt": "Écoute et écris le chiffre en caractères.",
+     "audio": "m:zh-san",
+     "answers": [
+      "三"
+     ]
+    },
+    {
+     "id": "zh-a0-nombres-fr-x2",
+     "kind": "mcq",
+     "prompt": "Que veut dire 五 ?",
+     "choices": [
+      "trois",
+      "cinq",
+      "sept"
+     ],
+     "correct": 1
+    },
+    {
+     "id": "zh-a0-nombres-fr-x3",
+     "kind": "match",
+     "prompt": "Associe chaque chiffre à sa valeur.",
+     "pairs": [
+      {
+       "a": "一",
+       "b": "un"
+      },
+      {
+       "a": "二",
+       "b": "deux"
+      },
+      {
+       "a": "三",
+       "b": "trois"
+      },
+      {
+       "a": "四",
+       "b": "quatre"
+      },
+      {
+       "a": "五",
+       "b": "cinq"
+      }
+     ]
+    },
+    {
+     "id": "zh-a0-nombres-fr-x4",
+     "kind": "order",
+     "prompt": "Remets les mots dans l'ordre.",
+     "answers": [
+      "我十岁"
+     ],
+     "words": [
+      "我",
+      "十",
+      "岁"
+     ]
+    },
+    {
+     "id": "zh-a0-nombres-fr-x5",
+     "kind": "truefalse",
+     "prompt": "« 十 » veut dire « dix ».",
+     "correct": 0
+    },
+    {
+     "id": "zh-a0-nombres-fr-x6",
+     "kind": "translate",
+     "prompt": "Traduis : huit.",
+     "answers": [
+      "八"
+     ]
+    },
+    {
+     "id": "zh-a0-nombres-fr-x7",
+     "kind": "mcq",
+     "prompt": "Combien font 二 + 三 ?",
+     "choices": [
+      "四",
+      "五",
+      "六"
+     ],
+     "correct": 1
+    },
+    {
+     "id": "zh-a0-nombres-fr-x8",
+     "kind": "speak",
+     "prompt": "Compte de 1 à 5 en chinois.",
+     "audio": "m:zh-nombres-count15",
+     "model": "yī, èr, sān, sì, wǔ"
+    }
+   ],
+   "stories": [],
+   "cards": [
+    {
+     "id": "zh-a0-nombres-fr-c1",
+     "vocab": "zh-a0-nombres-fr-v1"
+    },
+    {
+     "id": "zh-a0-nombres-fr-c2",
+     "vocab": "zh-a0-nombres-fr-v2"
+    },
+    {
+     "id": "zh-a0-nombres-fr-c3",
+     "vocab": "zh-a0-nombres-fr-v3"
+    },
+    {
+     "id": "zh-a0-nombres-fr-c4",
+     "vocab": "zh-a0-nombres-fr-v4"
+    },
+    {
+     "id": "zh-a0-nombres-fr-c5",
+     "vocab": "zh-a0-nombres-fr-v5"
+    },
+    {
+     "id": "zh-a0-nombres-fr-c6",
+     "vocab": "zh-a0-nombres-fr-v6"
+    },
+    {
+     "id": "zh-a0-nombres-fr-c7",
+     "vocab": "zh-a0-nombres-fr-v7"
+    },
+    {
+     "id": "zh-a0-nombres-fr-c8",
+     "vocab": "zh-a0-nombres-fr-v8"
+    },
+    {
+     "id": "zh-a0-nombres-fr-c9",
+     "vocab": "zh-a0-nombres-fr-v9"
+    },
+    {
+     "id": "zh-a0-nombres-fr-c10",
+     "vocab": "zh-a0-nombres-fr-v10"
+    },
+    {
+     "id": "zh-a0-nombres-fr-c11",
+     "vocab": "zh-a0-nombres-fr-v11"
+    }
+   ],
+   "animations": [
+    {
+     "id": "zh-a0-nombres-fr-a1",
+     "kind": "strokes",
+     "label": "Ordre des traits de 一, 二, 三"
+    },
+    {
+     "id": "zh-a0-nombres-fr-a2",
+     "kind": "gesture",
+     "label": "Compter de 1 à 5 avec les doigts"
+    }
+   ]
+  }
+ ]
+}

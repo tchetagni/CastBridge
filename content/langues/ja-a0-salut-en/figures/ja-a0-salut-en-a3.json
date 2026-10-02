@@ -1,0 +1,142 @@
+{
+ "type": "illustration",
+ "caption": "Stroke order of に",
+ "alt": "The character に drawn stroke by stroke in order (indicative order, to be checked by a native speaker).",
+ "figure": {
+  "kind": "shapes",
+  "w": 360,
+  "h": 260,
+  "items": [
+   {
+    "t": "rect",
+    "x": 130,
+    "y": 20,
+    "w": 120,
+    "h": 120,
+    "stroke": "lightgrey"
+   },
+   {
+    "t": "text",
+    "x": 190,
+    "y": 190,
+    "text": "に",
+    "size": 30,
+    "bold": true
+   },
+   {
+    "t": "text",
+    "x": 190,
+    "y": 225,
+    "text": "ni",
+    "color": "grey"
+   },
+   {
+    "t": "path",
+    "d": "M32 26 L46 52",
+    "width": 3
+   },
+   {
+    "t": "path",
+    "d": "M46 52 L86 52",
+    "width": 3
+   },
+   {
+    "t": "path",
+    "d": "M28 84 L82 84",
+    "width": 3
+   }
+  ]
+ },
+ "animation": {
+  "mode": "steps",
+  "items": [
+   {
+    "t": "rect",
+    "x": 130,
+    "y": 20,
+    "w": 120,
+    "h": 120,
+    "stroke": "lightgrey",
+    "id": "a"
+   },
+   {
+    "t": "text",
+    "x": 190,
+    "y": 190,
+    "text": "に",
+    "size": 30,
+    "bold": true,
+    "id": "b"
+   },
+   {
+    "t": "text",
+    "x": 190,
+    "y": 225,
+    "text": "ni",
+    "color": "grey",
+    "id": "c"
+   },
+   {
+    "t": "path",
+    "d": "M32 26 L46 52",
+    "width": 3,
+    "id": "d",
+    "draw": 0
+   },
+   {
+    "t": "path",
+    "d": "M46 52 L86 52",
+    "width": 3,
+    "id": "e",
+    "draw": 0
+   },
+   {
+    "t": "path",
+    "d": "M28 84 L82 84",
+    "width": 3,
+    "id": "f",
+    "draw": 0
+   }
+  ],
+  "do": [
+   {
+    "at": 0,
+    "d": 0.7,
+    "op": "draw",
+    "on": "d",
+    "ease": "linear",
+    "p": 1
+   },
+   {
+    "at": 0.7,
+    "d": 0.7,
+    "op": "draw",
+    "on": "e",
+    "ease": "linear",
+    "p": 1
+   },
+   {
+    "at": 1.4,
+    "d": 0.7,
+    "op": "draw",
+    "on": "f",
+    "ease": "linear",
+    "p": 1
+   }
+  ],
+  "steps": [
+   {
+    "at": 0.7,
+    "say": "Stroke 1."
+   },
+   {
+    "at": 1.4,
+    "say": "Stroke 2."
+   },
+   {
+    "at": 2.1,
+    "say": "Stroke 3."
+   }
+  ]
+ }
+}

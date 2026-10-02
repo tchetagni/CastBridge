@@ -1,0 +1,295 @@
+{
+ "format": 1,
+ "type": "langue",
+ "id": "zh-a0-famille-fr",
+ "version": 1,
+ "target": "zh",
+ "level": "a0",
+ "theme": "famille",
+ "source": "fr",
+ "title": "Chinois A0 — Ma famille",
+ "state": "review",
+ "units": [
+  {
+   "id": "zh-a0-famille-fr-u1",
+   "title": "Papa, maman, et moi",
+   "minutes": 10,
+   "skills": [
+    "co",
+    "ce",
+    "po"
+   ],
+   "prerequisites": [],
+   "vocab": [
+    {
+     "id": "zh-a0-famille-fr-v1",
+     "term": "家",
+     "reading": "jiā",
+     "gloss": "famille, maison",
+     "pos": "n",
+     "audio": "m:zh-jia"
+    },
+    {
+     "id": "zh-a0-famille-fr-v2",
+     "term": "爸爸",
+     "reading": "bàba",
+     "gloss": "papa",
+     "pos": "n",
+     "audio": "m:zh-baba"
+    },
+    {
+     "id": "zh-a0-famille-fr-v3",
+     "term": "妈妈",
+     "reading": "māma",
+     "gloss": "maman",
+     "pos": "n",
+     "audio": "m:zh-mama"
+    },
+    {
+     "id": "zh-a0-famille-fr-v4",
+     "term": "哥哥",
+     "reading": "gēge",
+     "gloss": "grand frère",
+     "pos": "n",
+     "audio": "m:zh-gege"
+    },
+    {
+     "id": "zh-a0-famille-fr-v5",
+     "term": "姐姐",
+     "reading": "jiějie",
+     "gloss": "grande sœur",
+     "pos": "n",
+     "audio": "m:zh-jiejie"
+    },
+    {
+     "id": "zh-a0-famille-fr-v6",
+     "term": "弟弟",
+     "reading": "dìdi",
+     "gloss": "petit frère",
+     "pos": "n",
+     "audio": "m:zh-didi"
+    },
+    {
+     "id": "zh-a0-famille-fr-v7",
+     "term": "妹妹",
+     "reading": "mèimei",
+     "gloss": "petite sœur",
+     "pos": "n",
+     "audio": "m:zh-meimei"
+    },
+    {
+     "id": "zh-a0-famille-fr-v8",
+     "term": "我",
+     "reading": "wǒ",
+     "gloss": "je, moi",
+     "pos": "pron",
+     "audio": "m:zh-wo"
+    }
+   ],
+   "dialogues": [
+    {
+     "id": "zh-a0-famille-fr-d1",
+     "title": "Ma famille",
+     "lines": [
+      {
+       "who": "A",
+       "text": "这是我爸爸。",
+       "reading": "zhè shì wǒ bàba.",
+       "tr": "C'est mon papa."
+      },
+      {
+       "who": "B",
+       "text": "你好！",
+       "reading": "nǐ hǎo!",
+       "tr": "Bonjour !"
+      },
+      {
+       "who": "A",
+       "text": "这是我妈妈。",
+       "reading": "zhè shì wǒ māma.",
+       "tr": "C'est ma maman."
+      },
+      {
+       "who": "B",
+       "text": "你弟弟呢？",
+       "reading": "nǐ dìdi ne?",
+       "tr": "Et ton petit frère ?"
+      },
+      {
+       "who": "A",
+       "text": "我弟弟很小。",
+       "reading": "wǒ dìdi hěn xiǎo.",
+       "tr": "Mon petit frère est tout petit."
+      },
+      {
+       "who": "B",
+       "text": "家很好！",
+       "reading": "jiā hěn hǎo!",
+       "tr": "Ta famille est chouette !"
+      }
+     ],
+     "audio": "m:zh-famille-d1"
+    }
+   ],
+   "grammar": [
+    {
+     "id": "zh-a0-famille-fr-g1",
+     "title": "« 我 + nom » = mon / mes",
+     "md": "Le chinois n'a pas de mot pour « mon ». On place simplement **我** (je) devant le nom : **我爸爸** (mon papa), **我妈妈** (ma maman).",
+     "examples": [
+      {
+       "text": "我爸爸",
+       "tr": "mon papa"
+      },
+      {
+       "text": "我妈妈",
+       "tr": "ma maman"
+      }
+     ]
+    },
+    {
+     "id": "zh-a0-famille-fr-g2",
+     "title": "« 这是… » = c'est…",
+     "md": "**这是** (zhè shì) signifie « c'est » : **这是我爸爸** (c'est mon papa).",
+     "examples": [
+      {
+       "text": "这是我爸爸",
+       "tr": "C'est mon papa"
+      }
+     ]
+    }
+   ],
+   "exercises": [
+    {
+     "id": "zh-a0-famille-fr-x1",
+     "kind": "mcq",
+     "prompt": "Que veut dire 妈妈 ?",
+     "choices": [
+      "papa",
+      "maman",
+      "frère"
+     ],
+     "correct": 1
+    },
+    {
+     "id": "zh-a0-famille-fr-x2",
+     "kind": "match",
+     "prompt": "Associe chaque personne.",
+     "pairs": [
+      {
+       "a": "爸爸",
+       "b": "papa"
+      },
+      {
+       "a": "妈妈",
+       "b": "maman"
+      },
+      {
+       "a": "哥哥",
+       "b": "grand frère"
+      },
+      {
+       "a": "姐姐",
+       "b": "grande sœur"
+      },
+      {
+       "a": "弟弟",
+       "b": "petit frère"
+      }
+     ]
+    },
+    {
+     "id": "zh-a0-famille-fr-x3",
+     "kind": "truefalse",
+     "prompt": "« 我爸爸 » veut dire « mon papa ».",
+     "correct": 0
+    },
+    {
+     "id": "zh-a0-famille-fr-x4",
+     "kind": "translate",
+     "prompt": "Traduis : maman.",
+     "answers": [
+      "妈妈"
+     ]
+    },
+    {
+     "id": "zh-a0-famille-fr-x5",
+     "kind": "dictation",
+     "prompt": "Écoute et écris en caractères.",
+     "audio": "m:zh-mama",
+     "answers": [
+      "妈妈"
+     ]
+    },
+    {
+     "id": "zh-a0-famille-fr-x6",
+     "kind": "order",
+     "prompt": "Remets les mots dans l'ordre.",
+     "answers": [
+      "这是我爸爸"
+     ],
+     "words": [
+      "这",
+      "是",
+      "我",
+      "爸爸"
+     ]
+    },
+    {
+     "id": "zh-a0-famille-fr-x7",
+     "kind": "speak",
+     "prompt": "Présente ta mère en chinois.",
+     "audio": "m:zh-mama",
+     "model": "这是我妈妈 (zhè shì wǒ māma)"
+    }
+   ],
+   "stories": [],
+   "cards": [
+    {
+     "id": "zh-a0-famille-fr-c1",
+     "vocab": "zh-a0-famille-fr-v1"
+    },
+    {
+     "id": "zh-a0-famille-fr-c2",
+     "vocab": "zh-a0-famille-fr-v2"
+    },
+    {
+     "id": "zh-a0-famille-fr-c3",
+     "vocab": "zh-a0-famille-fr-v3"
+    },
+    {
+     "id": "zh-a0-famille-fr-c4",
+     "vocab": "zh-a0-famille-fr-v4"
+    },
+    {
+     "id": "zh-a0-famille-fr-c5",
+     "vocab": "zh-a0-famille-fr-v5"
+    },
+    {
+     "id": "zh-a0-famille-fr-c6",
+     "vocab": "zh-a0-famille-fr-v6"
+    },
+    {
+     "id": "zh-a0-famille-fr-c7",
+     "vocab": "zh-a0-famille-fr-v7"
+    },
+    {
+     "id": "zh-a0-famille-fr-c8",
+     "vocab": "zh-a0-famille-fr-v8"
+    }
+   ],
+   "animations": [
+    {
+     "id": "zh-a0-famille-fr-a1",
+     "kind": "strokes",
+     "label": "Ordre des traits de 人 (dans 家人)"
+    },
+    {
+     "id": "zh-a0-famille-fr-a2",
+     "kind": "strokes",
+     "label": "Ordre des traits de 口"
+    }
+   ]
+  }
+ ]
+}
