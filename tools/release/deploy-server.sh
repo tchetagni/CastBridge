@@ -129,7 +129,8 @@ if ! git --git-dir="$BARE" archive --format=tar "$SHA" backend | tar -x -C "$REL
     rm -rf "$REL"; die "extraction impossible : rien n'a été modifié en service"
 fi
 install -m 600 "$SRC/.env" "$REL/.env"
-cp -a "$SRC/secrets" "$REL/secrets"
+# les secrets appartiennent à l'utilisateur du conteneur (uid 10001, droits 0400) : sudo cp -a garde propriétaire et droits ; ubuntu ne peut pas les lire
+sudo -n cp -a "$SRC/secrets" "$REL/secrets" || die "copie de secrets/ impossible (sudo sans mot de passe requis) : abandon, rien n'a été modifié en service"
 [ -f "$SRC/docker-compose.override.yml" ] && cp -a "$SRC/docker-compose.override.yml" "$REL/docker-compose.override.yml"
 [ -e "$SRC/geoip" ] && ln -sfn "$(readlink -f "$SRC/geoip")" "$REL/geoip"
 if [ "$INITIAL" = 1 ]; then
