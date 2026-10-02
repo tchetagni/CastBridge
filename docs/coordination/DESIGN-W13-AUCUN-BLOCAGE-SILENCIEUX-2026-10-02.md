@@ -1,0 +1,284 @@
+# Conception W13 — « Aucun blocage silencieux » : tout transfert bloqué est nommé, réparé si possible, expliqué sinon
+
+> Document de conception (Fable, architecte, 2026-10-02). **Aucun code n'est modifié par ce document** ; l'exécution se fait par les cahiers `docs/agent-briefs/sonnet-w13-NN-*.md` (index : `SONNET-WAVE13-INDEX.md`), sur ordre explicite du coordinateur. Branche de référence : `integration/agents`. Tous les fichiers et lignes cités ont été vérifiés par lecture le 2026-10-02. Préfixes : `C/` = `android/core/src/main/kotlin/castbridge/core/`, `CT/` = `android/core/src/test/kotlin/castbridge/core/`, `R/` = `android/receiver/src/main/kotlin/castbridge/receiver/`, `S/` = `android/sender/src/main/kotlin/castbridge/sender/`.
+>
+> **Incident de terrain (propriétaire, 2026-10-02)** : une copie de fichier de CastBridge (téléphone) vers CastBridge-TV ne progressait pas. L'app téléphone affichait la TV **en vert (connectée)** ; en réalité le **code PIN de la TV** devait être ressaisi ; une fois ressaisi, la copie est partie. Rien à l'écran ne disait que le PIN était en cause : le propriétaire l'a trouvé par analyse. **But** : toute situation semblable (liaison qui paraît saine, opération bloquée ou figée) est traitée automatiquement quand c'est possible et, au minimum, **expliquée** à l'utilisateur avec la cause exacte et **l'unique action** qui la corrige.
+
+## 0. En dix lignes
+
+1. **Cause racine** : la puce verte et le transfert **ne testent pas la même chose avec le même secret**. La puce est verte sur un `/api/info` authentifié par le **jeton** (liaison Bluetooth, `C/trust/LinkDriver.kt:174-181`) ou sur le dernier `/api/info` réussi avec le PIN (`S/TvHome.kt:125-137`) ; le transfert, lui, prend son secret dans `PinStore.get(clé)` (`S/PinStore.kt:22`) dont la **clé par nom** peut ne pas retrouver la TV de confiance (`S/TvLink.kt:197-198`) : il part alors avec **l'ancien PIN mémorisé** (ou aucun), la TV répond 401, et cette réponse se perd en route (§ 1.3).
+2. **Perte de l'information** : six endroits avalent ou dénaturent l'échec (§ 1.3) : notification qui disparaît sur `Failed` (`S/UploadService.kt:255-265`), message « Le code de la TV a changé » jamais rendu (`S/TvHome.kt:132` vs `:347`), 401/403 du transfert rapide réduits à « autorisation refusée par la TV » (`C/xfer/TransferClient.kt:40`), 403 d'essai qui **boucle pour toujours** en « En pause : HTTP 403… reprise automatique » (`C/tv/TvClient.kt:259,284-289`), PIN absent compté comme PIN faux par la TV (`C/tv/Security.kt:44-46`), et une TV qui ne dit **rien** à l'écran quand un téléphone frappe sans le bon code (seuls les refus Bluetooth parlent : `C/trust/PhonePresence.kt:58-67`).
+3. **Catalogue** : **39 situations** « vert mais bloqué / figé en silence / faux état » (§ 2 ; dont la classe « faux état initial au démarrage à froid » signalée par le coordinateur : `OpenWithActivity` dit « Aucune TV ajoutée » alors qu'une TV est liée, `S/TvLink.kt:104`), chacune avec symptôme, cause, signal présent dans le code, remède automatique, et **un message français = cause + une action**.
+4. **Mécanisme** (§ 3) : une taxonomie typée **`Blocker`** (code, gravité, cause, remède, auto-réparable) partagée par le cœur et les deux apps, produite en **un seul endroit** (`BlockerMap`, couche `TvClient`/transfert) pour chaque échec HTTP/Bluetooth/E-S : plus aucun chemin ne peut finir sans `Blocker`.
+5. **Chien de garde** des transferts : « aucun octet depuis N s » (N adaptatif au débit) ⇒ **pré-vol** (hello, info authentifié, `storage/check` d'un octet, état essai/parental) ⇒ nom du `Blocker` ⇒ affichage, notification, journal.
+6. **Puce à trois vérités** : *joignable* / *autorisée* / *prête à recevoir* ; **jamais verte** sans une sonde **authentifiée avec le secret que le prochain transfert utilisera**, réussie depuis moins de X s.
+7. **Auto-remèdes** : nouveau HELLO sur jeton refusé (existant, réutilisé), re-résolution d'IP par HELLO/mDNS, reprise au réveil, nouvel essai à délai croissant **seulement** pour les `Blocker` transitoires, jamais pour un PIN.
+8. **PIN** : saisie **dans la carte du transfert** (« Saisir le code de la TV », avec où le lire sur l'écran de la TV), enregistrée sous **toutes** les clés de la TV, lien profond `castbridge://repair` depuis la notification ; côté TV, bandeau discret « un téléphone attend le code » (limité en fréquence, sans adresse, sans dire si le code est proche).
+9. **Tests** : table **≥ 38 cas** sur faux transport qui échoue si un statut HTTP ou une exception finit sans `Blocker` ; test « lint » qui énumère tous les statuts que `ReceiverServer` peut émettre (et `tools/routes/routes.txt`) et exige qu'ils soient tous mappés ; liste de reproduction terrain (`adb`/`curl`).
+10. **Livraison** : sous-vague **W13** (12 cahiers, ≈ 15 agent·jours, ≈ 15 $ d'exécution estimés), **exécutable avant W7** (qui n'est pas lancée) ; **première tranche** = PIN + chien de garde + puce à trois niveaux (6 cahiers, ≈ 8 j) ; 7 décisions avec recommandation, 1 BLOQUÉ (confirmer la chaîne exacte de l'incident avec le logcat du téléphone).
+
+## 1. Analyse de cause racine (code vérifié)
+
+### 1.1 Ce que « vert » veut dire aujourd'hui, écran par écran
+
+| Écran | Point vert | Ce qu'il teste réellement | Ce qu'il ne teste pas |
+|---|---|---|---|
+| `TvHome`, ligne « plug and play » (une TV enregistrée par Bluetooth) | `TvLinkStatus` : `Tone.GOOD` ⇒ point `GOOD` (`S/TvPairScreen.kt:64-70, 52`) ; `GOOD` = état `Connected`/`Degraded` de `LinkMachine` (`C/trust/LinkMachine.kt:237-238`) | garde-vivant : `env.check(base, jeton)` = `GET /api/info` **avec le jeton**, 1,5 s, deux essais (`C/trust/LinkDriver.kt:174-181`, `S/LinkAndroid.kt:85-93`), toutes les 15 s au premier plan, 5 min en fond (`LinkMachine.kt:87`) ; hystérésis : le vert **reste** 40 s après une perte (`:83, :151-152`) puis passe « reconnexion » (jaune) | le **PIN** (sans objet pour un jeton), **l'essai** (`/api/info` est **ouvert** en essai : `C/owner/TrialPolicy.kt:30`), le **stockage**, le **parental**, la **route `/upload`** elle-même ; et surtout **le secret que le transfert va présenter** (§ 1.2) |
+| `TvHome`, ligne « code » (aucune TV Bluetooth) | point = `reachable` (`S/TvHome.kt:174`), texte « Connectée » (`:178`) | dernier `TvClient(tv.base, pin).info()` réussi, toutes les 2 s (`:125-137`) : authentifié par le **PIN** | après un 401 la boucle **s'arrête** (`:132 break`) : `reachable` garde sa dernière valeur ; l'écran bascule sur l'assistant « Trouvons votre TV » (`wizard = true`) |
+| `TvScreen` (« Avancé », IP manuelle) | pas de point ; `reachable` **vrai par défaut** (`S/TvScreen.kt:61`) | `/api/info` avec le PIN chaque seconde jusqu'au premier 401 (`:107-119`) ; sur 401 `reachable = true` (`:115`) et un petit texte rouge « PIN incorrect » sous le champ (`:178`) | rien d'autre ; la ligne « TV injoignable » est masquée (`:236`) |
+| `TvHub` (envoi Bluetooth) | — | aucune sonde avant l'envoi ; PIN = `pins.get("bt:<adresse>")` (`S/TvHub.kt:96`) | tout |
+
+**Conclusion** : « vert » = *une* sonde authentifiée a réussi récemment, avec *un* secret ; ce n'est **ni** « prête à recevoir » **ni** « le transfert qui va partir est autorisé ».
+
+### 1.2 Le transfert ne présente pas le secret de la puce
+
+- Les écrans prennent le secret par **`PinStore.get(clé)`** : d'abord `TvLinkManager.credentialFor(clé)` (jeton), sinon le PIN mémorisé sous cette clé, sinon `""` (`S/PinStore.kt:22`). `credentialFor` ne trouve la TV de confiance que si la clé vaut `t.mdns`, `t.name`, `"bt:<adresse>"` ou `"<ip>:<port>"` (`S/TvLink.kt:191-198`). Cas qui **ratent** : TV dont le HELLO ne donne pas de nom mDNS (`SavedTv.mdns == null`, `C/trust/PhoneLink.kt:77`) alors que l'écran la connaît par son nom mDNS ; IP manuelle saisie **sans port** (`S/TvScreen.kt:77` : clé `"192.168.0.117"` ≠ `"192.168.0.117:8765"`) ; TV renommée. Le transfert part alors avec **l'ancien PIN** (`S/TvHome.kt:87,154`, `S/player/CastSession.kt:159`, `S/DlnaHandoff.kt:50,63`, `S/TvTransferScreen.kt:94`) pendant que la puce reste verte sur le jeton.
+- Un PIN **absent** (`""` ⇒ `null`, `S/UploadService.kt:356`) n'envoie **aucun** en-tête (`C/trust/Credentials.kt:26-28`) ; la TV le compte comme un **PIN faux** (`C/tv/ReceiverServer.kt:535-541` ⇒ `PinGuard.check(ip, null)` ⇒ `failures++`, `C/tv/Security.kt:44-46`) : cinq essais = TV **verrouillée 60 s**, y compris pour le bon code saisi juste après (`:42`).
+- Le PIN de la TV **change** à chaque réinstallation (`R/TvPrefs.kt:11-15`, préférences privées) : l'ancien PIN mémorisé par le téléphone devient faux sans que rien ne le signale (déjà noté : `DESIGN-W7` § 2 ligne 6).
+- La chaîne « TV de confiance + file d'attente » est saine (`S/TransferQueue.kt:92` passe `session.credential`), mais seulement quand `LinkUi.Connected` (attente 60 s, sinon « TV non connectée : l'envoi n'a pas pu démarrer », `:82-83`).
+
+### 1.3 Où l'information se perd (six fuites)
+
+| # | Fuite | Code | Effet vu par l'utilisateur |
+|---|---|---|---|
+| F1 | La notification de l'envoi ne traite que `Uploading`/`Waiting` ; `Failed` ⇒ `return` puis `stopSelf()` : la notification **disparaît** sans un mot | `S/UploadService.kt:255-265, 295-298` | « ça ne progresse pas » puis plus rien |
+| F2 | Sur 401 avec PIN, `TvHome` pose `msg = « Le code de la TV a changé … »` **et** `wizard = true` ; l'assistant remplace tout l'écran (`return` à `:111`) et `msg` n'est rendu qu'à `:347`, jamais atteint ; l'état `Failed` de l'envoi (`:221`) non plus | `S/TvHome.kt:130-132, 106-111, 221, 347` | écran « Trouvons votre TV » sans explication |
+| F3 | Transfert rapide (actif par défaut, `S/FastTransfer.kt:8`) : `caps()` 401/403 ⇒ `Refused(code, str(body,"message") ?: "autorisation refusée par la TV")` ; or le corps 401 est `{"error":"bad pin"}` et le 403 d'essai `{"error":…,"trial":true}` (**sans** `message`) ⇒ texte générique, **ni « PIN » ni « essai »** | `C/xfer/TransferClient.kt:38-43, 122` ; `C/tv/ReceiverServer.kt:349, 538` | « autorisation refusée par la TV » en petit texte rouge |
+| F4 | Envoi classique : pré-vol `checkStorage` ⇒ **403/404 = `checked = true`** (traité comme « TV ancienne ») ; puis `part()` 403 ⇒ `HttpError` hors de la liste fatale `507/413/400/401` ⇒ **`Waiting` + nouvel essai toutes les 5 s, sans fin** avec le corps brut en texte | `C/tv/TvClient.kt:256-259, 282-289` | « En pause : HTTP 403: {"error":"Version d'essai…"} — reprise automatique » |
+| F5 | Lanes du transfert rapide : 401/403 ⇒ « autorisation refusée par la TV (401) » fatal ; 429 ⇒ `Busy` silencieux ; 5xx ⇒ mise à l'écart puis `waiting(reason)` avec le corps brut | `C/xfer/Lanes.kt:42-49`, `C/xfer/Scheduler.kt:142-153` | texte technique, pas d'action |
+| F6 | Côté TV, un 401/403 HTTP est **muet** : aucun `notice`, aucun compteur ; seuls les refus Bluetooth du propriétaire ont un texte (`TvRefusals`) | `C/tv/ReceiverServer.kt:522-542`, `C/trust/PhonePresence.kt:58-67`, `R/TvService.kt:608` | la TV affiche « Prêt à recevoir · code 77•••• » (`R/HomeScreen.kt:124-126`) pendant que le téléphone échoue |
+
+### 1.4 Chaîne la plus probable de l'incident
+
+1. Puce verte : liaison Bluetooth de confiance, jeton valide, `/api/info` OK (§ 1.1 ligne 1) — ou dernier `info()` avec PIN réussi avant la réinstallation de la TV (ligne 2).
+2. Envoi lancé par un écran qui résout le secret par **nom** (`CastSession`, `DlnaHandoff`, `TvScreen` en IP manuelle, ou `TvHome` sans session au moment du choix du fichier : `S/TvHome.kt:150-156`) ⇒ `PinStore.get` ne retrouve pas la TV de confiance ⇒ **ancien PIN** (TV réinstallée ⇒ nouveau PIN, `R/TvPrefs.kt:11-15`).
+3. TV : 401 `bad pin` (`ReceiverServer.kt:538`) ; chaque sonde `/api/info` de l'écran avec ce PIN **compte** vers le verrou 60 s.
+4. Téléphone : F3 (« autorisation refusée par la TV ») ou F1/F2 (rien, ou l'assistant sans explication) ; aucune notification ; la puce reste verte (jeton).
+5. Le propriétaire ressaisit le code dans l'assistant ⇒ `pins.put(nom, code)` (`S/TvHome.kt:108`) ⇒ l'envoi suivant présente le bon PIN ⇒ copie.
+
+**Non vérifiable sans le logcat du téléphone** (version de l'app, écran utilisé, transfert rapide actif ou non) : voir § 7. La conception couvre **toutes** les variantes (§ 2), donc le correctif ne dépend pas de la variante exacte.
+
+### 1.5 Ce qui existe déjà et que W13 réutilise (ne pas refaire)
+
+`ResilientCall.classify` (`C/trust/ResilientCall.kt:93-116`, quatre familles, testé) ; `CredentialGate` (jamais deux fois le même secret refusé, `C/trust/Credentials.kt:45-51`) ; `LinkText.http/failure` (`C/trust/LinkText.kt:111-135`) ; `TvClient.isBadToken` (`:162-163`) ; `StorageCheck` (pré-vol stockage avec `status` 507/503 dans un corps 200, `ReceiverServer.kt:1182-1218`) ; chien de garde **par connexion** de `HttpConn` (20 s sans progrès ⇒ fermeture, `C/xfer/HttpConn.kt:82-93`) ; `Redact.scrub` (`C/trust/Diagnostics.kt:45-53`) ; `Diagnostics` (11 étapes Bluetooth) ; `PhonePresence`/`TvRefusals` ; `LinkMachine` (hystérésis, `Retry.Never`) ; `TrialPolicy` (liste blanche `:30-36`) ; `ActivationCenter.locked/trial/clockSuspended` (`R/ActivationCenter.kt:93-99`).
+
+## 2. Catalogue des situations « vert mais bloqué / figé en silence »
+
+Colonnes : **Signal** = ce que le code peut observer aujourd'hui (ou après W13) ; **Auto** = remède automatique ; **Gravité** : `WAIT` (on attend et on réessaie, l'utilisateur est informé), `ACTION` (une action de l'utilisateur), `FATAL` (rien à réessayer), `INFO`. Les messages sont la **source unique** de `BlockerTexts` (cahier w13-02) : cause puis une action, nom de la TV injecté, jamais d'adresse, de jeton ni de code.
+
+| Code `Blocker` | Symptôme | Cause réelle | Signal (code) | Auto | Gravité | Message (cause · action) |
+|---|---|---|---|---|---|---|
+| `PIN_WRONG` | copie à 0 %, puce verte | PIN mémorisé périmé (TV réinstallée : `R/TvPrefs.kt:11-15`) ou mémorisé sous une autre clé (§ 1.2) | HTTP 401 `{"error":"bad pin"}` avec en-tête `X-CB-Pin` présent (`ReceiverServer.kt:538`) ; Bluetooth `ERR_PIN` (`BtProtocol.kt:155`) | **non** (jamais de nouvel essai avec un PIN : verrou) ; si un jeton existe pour cette TV, le transfert **bascule sur le jeton** une fois | ACTION | « Le code de <TV> a changé ou n'est pas le bon. · Saisissez le code affiché en haut de l'écran de la TV (« code 77•••• », touche OK pour le voir en entier). » |
+| `PIN_MISSING` | idem | aucun code mémorisé pour cette clé de TV (`PinStore.get` ⇒ `""`) | localement : `TvCredential.Missing` (`Credentials.kt:23`) **avant** tout envoi ; après W13 : 401 `{"error":"pin missing","code":"PIN_MISSING"}` non compté | non | ACTION | « <TV> demande son code et le téléphone ne l'a pas. · Saisissez le code affiché sur la TV. » |
+| `PIN_LOCKED` | « Code incorrect » même avec le bon code | 5 PIN faux (ou absents, aujourd'hui) en 60 s ⇒ verrou par IP (`Security.kt:42-46`) | 401 `{"error":"locked","retryAfter":N}` ; `ERR_LOCKED` | attendre `retryAfter` puis **un** essai | WAIT | « <TV> est verrouillée N s après trop d'essais de code. · Attendez, l'envoi reprend tout seul avec le bon code. » |
+| `TOKEN_EXPIRED` | copie figée après ~12 h de liaison | jeton 12 h expiré (`TrustRegistry.kt:39,114`) ; le renouvellement à mi-vie a été manqué (téléphone en fond) | 401 `{"error":"bad token"}` ; `TvClient.isBadToken` | **oui** : `reportTokenRejected` ⇒ HELLO Bluetooth ⇒ nouveau jeton (`LinkDriver.kt:100-105`) ; le transfert attend ≤ 60 s puis reprend (existant `TvClient.kt:240-243`, **avec texte**) | WAIT | « L'autorisation de ce téléphone sur <TV> a expiré : renouvellement en cours. · Rien à faire ; si rien ne change en 1 min, touchez Réparer. » |
+| `TOKEN_REVOKED` | idem, mais le HELLO répond « inconnu » | téléphone retiré sur la TV (« Retirer », `R/PairActivity.kt`) ; `HINT_SAME_INSTALL` | 401 bad token puis `ERR_UNTRUSTED` + `HINT_SAME_INSTALL` (`HelloHandler.kt:33-34`) ⇒ `LinkState.TvForgotMe` | non | ACTION | « Ce téléphone a été retiré de la liste des téléphones de <TV>. · Sur la TV : « Ajouter un téléphone », puis Réassocier ici. » |
+| `TV_REINSTALLED` | puce verte quelques secondes puis rouge ; copie à 0 % | registre de confiance perdu, nouveau `installId` (`TrustRegistry.kt:45,149`) et **nouveau PIN** | `ERR_UNTRUSTED` + `HINT_OTHER_INSTALL` ; `installId` différent (`Diagnostics.kt:143-146`) | non (W7 : ré-adoption en un « Autoriser ») | ACTION | « <TV> a été réinstallée ou réinitialisée : elle ne reconnaît plus ce téléphone. · Réassociez-la (un seul « Autoriser » à la télécommande). » |
+| `PIN_REQUIRED_ROUTE` | une action échoue, les autres marchent | route réservée au PIN (`TvAuth.tokenMayCall`, `TrustRegistry.kt:202-203`) appelée avec un jeton | 403 `{"error":"pin required","message":…}` (`ReceiverServer.kt:530`) | non | ACTION | « Cette action (installation, SSH) demande le code de <TV>, un téléphone de confiance ne suffit pas. · Saisissez le code de la TV. » |
+| `TV_CLOCK_SUSPENDED` | la TV refuse l'activation / les lots ; copies OK ou non selon l'édition | horloge TV sautée > 45 j ⇒ activation suspendue (`ActivationCenter.kt:99`, w1-05) | `GET /api/activation` ⇒ `suspended` ; 403 des routes fermées | non | ACTION | « L'heure de <TV> a sauté : son activation est suspendue. · Sur la TV, confirmez l'heure (« l'heure est juste »). » |
+| `PHONE_CLOCK_SKEW` | le téléphone croit le jeton expiré / renouvelle sans cesse | l'expiration est calculée avec l'horloge du **téléphone** (`LinkDriver.kt:30-31, 96-97`) ; saut d'horloge | `StoredCredential.expiresAt` vs `now` incohérent (expiration < émission, ou > 13 h) | **oui** : nouveau HELLO | INFO | « L'heure du téléphone a changé : l'autorisation est renouvelée. » |
+| `TV_LOCKED_NO_KEY` | « TV introuvable » alors qu'elle est allumée et que le Bluetooth propriétaire répond | TV verrouillée (aucune clé) : **le serveur HTTP n'est pas démarré** (`R/TvService.kt:196`) | TCP refusé sur 8765 + HELLO Bluetooth propriétaire OK ; état `Locked` (`ActivationCenter.kt:93`) | non | ACTION | « <TV> n'a pas de clé d'activation : elle ne reçoit rien. · Activez-la (« Activer la TV »). » |
+| `KEY_ENDED_DEGRADED` | copie refusée, lecture OK | clé terminée ⇒ mode réduit (W4) : routes de copie fermées | 403 avec `message` du `DegradedPolicy` ; `GET /api/activation` | non | ACTION | « La clé de <TV> est terminée (mode réduit) : les copies sont fermées, vos vidéos restent lisibles. · Renouvelez la clé. » |
+| `TRIAL_CLOSED` | **boucle sans fin** « En pause : HTTP 403… » (F4) ou « autorisation refusée » (F3) | édition d'essai : `/upload`, `/api/transfer/*`, `/api/storage/check` fermés (`TrialPolicy.kt:30-36`), 403 `trial:true` (`ReceiverServer.kt:349`) ; Bluetooth `ERR_TRIAL` | 403 avec `"trial":true` ; `ERR_TRIAL` | non ; **jamais** de nouvel essai | FATAL | « <TV> est en version d'essai : elle ne reçoit pas de fichiers. · Passez en production depuis l'écran « Passer en production » de la TV. » |
+| `PARENTAL_CHILD_ACTIVE` | rangement / certaines actions refusées | profil enfant actif sur la TV | 403 `{"error":"child active"}` (`ReceiverServer.kt:848`) ; `childActive` dans `/api/library` (`:961`) | non | ACTION | « <TV> est en mode enfant : cette action est refusée. · Le code parental se saisit sur la TV (tuile Contrôle parental). » |
+| `PARENTAL_LOCKED_FILE` | « Fichier envoyé, mais lancement impossible » | lecture d'un fichier protégé : `NeedsForeground(« …code parental… »)` ⇒ 409 (`R/ParentalHub.kt:244`, `ReceiverServer.kt:332-334`) | 409 `needsForeground` + message | non | INFO | « Le fichier est sur <TV> ; sa lecture demande le code parental **sur la TV**. · Lancez-le depuis la TV. » |
+| `STORAGE_FULL` | « Plus de place » tard, ou pré-vol refusé | règle « 1 Go libre après » (`TransferRule`), 507 | `StorageCheck.ok=false, status=507` (corps 200, `:1196,1206`) ; 507 `/upload`, `begin` (`:582,717`) | non | ACTION | « <TV> n'a pas assez de place : il manque <N> sur <volume>. · Supprimez des vidéos sur la TV ou choisissez une autre destination. » |
+| `STORAGE_READONLY` | copie figée puis 503 | clé USB en lecture seule / mal montée | 503 `{"error":"volume read-only"}` (`:790`) | non | ACTION | « La clé « <volume> » de <TV> est en lecture seule. · Rebranchez-la ou choisissez le stockage interne. » |
+| `USB_REMOVED` | copie figée puis « Clé USB retirée » (texte existant) | clé retirée pendant l'envoi | 503 `volume removed` (`:552,704,723`) ; `StorageCheck.status=503` (`:1200`) | **oui** : attente puis reprise au retour (existant `TvClient.kt:286-288`) | WAIT | « La clé « <volume> » qui reçoit l'envoi a été retirée de <TV>. · Remettez-la : l'envoi reprend tout seul. » |
+| `FILE_TOO_BIG_FS` | refus immédiat | > 4 Gio sur FAT32 (`Volumes.kt`), 413 | `StorageCheck.status=413` ; 413 `/upload`, `begin` (`:556,792`) | non | FATAL | « Ce fichier (<taille>) dépasse la limite de la clé FAT32 de <TV> (4 Go). · Formatez la clé en exFAT ou envoyez sur le stockage interne. » |
+| `TV_ASLEEP` | puce verte 40 s puis « reconnexion », rien ne part | TV en veille : Wi-Fi et Bluetooth coupés | `AbsentKind.NO_ANSWER` + sonde `/api/hello` KO ; dernière vue < 10 min | **oui** : reprise au réveil (boucle de liaison) | WAIT | « <TV> ne répond plus (veille ou éteinte). · Allumez-la : l'envoi reprend tout seul. » |
+| `TV_OTHER_IP` | « TV introuvable » Wi-Fi, Bluetooth OK | DHCP a changé l'adresse ; `lastIps` périmées (`SavedTv`) | HELLO Bluetooth rapporte des IP différentes de `lastIps` ; mDNS | **oui** : HELLO ⇒ nouvelles IP ⇒ `resolve()` (`UploadService.kt:102-104`, `watchNetwork :247-253`) | INFO | « <TV> a changé d'adresse sur le réseau : adresse retrouvée. » |
+| `OTHER_WIFI` | Wi-Fi KO, Bluetooth OK (liaison « réduite ») | téléphone et TV sur deux réseaux (SSID lus localement) | `wifiExpected` + route Bluetooth ⇒ `LinkState.Degraded` (`LinkMachine.kt:134`) ; sous-réseaux différents | **partiel** : masse par Bluetooth (lent) ou Wi-Fi Direct | ACTION | « Le téléphone et <TV> ne sont pas sur le même Wi-Fi : l'envoi passe par Bluetooth, beaucoup plus lent. · Connectez le téléphone au Wi-Fi de la TV. » |
+| `CLIENT_ISOLATION` | même Wi-Fi, IP valides, `/api/hello` KO, Bluetooth OK | isolation des clients sur la box (W7 § 4.3) | HELLO OK + même /24 + 3 sondes LAN KO en 20 s | **oui** (W7) : Wi-Fi Direct ; W13 : Bluetooth + message | ACTION | « La box sépare les appareils du Wi-Fi (isolation des clients). · Désactivez l'isolation dans la box, ou utilisez Wi-Fi Direct. » |
+| `VPN_OR_CAPTIVE` | sonde LAN KO alors que tout semble normal | VPN actif (`TRANSPORT_VPN`) ou réseau non validé (portail captif) | `NetworkCapabilities` ; `/api/hello` KO | non | ACTION | « Un VPN (ou un portail Wi-Fi) empêche de joindre <TV>. · Désactivez le VPN le temps de l'envoi. » |
+| `BT_ONLY_NO_IP` | envoi très lent | la TV n'a aucune IP (pas de Wi-Fi) : Bluetooth seul | `HelloInfo.link.ips` vide | non | INFO | « <TV> n'a pas de réseau : envoi par Bluetooth (≈ <ETA>). · Branchez la TV au Wi-Fi pour aller plus vite. » |
+| `PORT_CLOSED` | « Connexion impossible » immédiate | serveur HTTP arrêté : TV verrouillée (`TvService.kt:196`), `stopCore` (`:983-996`), app tuée | `ConnectException` sur 8765 alors que l'IP répond (ping/mDNS) | **oui** : réveil par HELLO Bluetooth (la TV relance `TvService`) | WAIT | « CastBridge-TV ne répond pas sur <TV> (application fermée ou TV verrouillée). · Ouvrez CastBridge-TV sur la TV. » |
+| `TV_APP_KILLED` | Bluetooth : service absent | OEM a tué l'app TV (GaiaOS) | `AbsentKind.SERVICE_ABSENT` (`LinkText.kt:26,35`) ; SDP sans CBT1 | **oui** : `BootReceiver`/job TV (W7) ; sinon message | ACTION | « La TV répond mais CastBridge-TV n'est pas ouverte. · Ouvrez-la sur la TV. » |
+| `TV_BUSY_429` | débit nul par vagues | trop de transferts (`maxSessions`, 429 `too many transfers`) ou contre-pression (`mayAccept`, 429 `busy retryMs`) (`TransferHost.kt:42,50,66-74`, `ReceiverServer.kt:728-729`) | 429 + `retryMs` | **oui** : respecter `retryMs` (existant `Lanes.kt:44`) ; > 60 s ⇒ texte | WAIT | « <TV> est occupée (autre transfert ou disque saturé). · L'envoi continue dès qu'elle est libre. » |
+| `TV_PLAYING_PRIORITY` | copie lente pendant une lecture | la TV lit une vidéo : disque et CPU partagés ; `note` « disque lent » | `TvInfo.state == "playing"` + `writeBps` bas (`TransferHost.note`) | non | INFO | « <TV> lit une vidéo : la copie est ralentie, pas bloquée (≈ <ETA>). » |
+| `SLOW_NOT_STALLED` | « ça n'avance pas » mais les octets passent | débit faible (disque, Wi-Fi) : **pas** un blocage | progrès > 0 dans la fenêtre N | non | INFO | « L'envoi avance lentement (<débit>) : <cause : disque de la TV / Wi-Fi>. · Rien à faire ; Wi-Fi 5 GHz ou clé plus rapide = plus vite. » |
+| `DUPLICATE_SKIPPED` | « rien ne se passe » : la file passe au suivant | même nom + taille déjà complets (`TvDedupe`, `TvInfo.kt:11-13`, `TransferQueue.kt:88-89`) ; `/api/transfer/begin` ⇒ `done:true` | `AlreadyThere` | — | INFO | « « <fichier> » est déjà sur <TV> (même taille) : non recopié. · Renommez-le pour l'envoyer quand même. » |
+| `NAME_REFUSED` | refus immédiat | nom invalide (`safeName`, 400 `bad name`) ; `ERR_NAME` | 400 `bad name` (`:566,679`) | non | FATAL | « <TV> refuse ce nom de fichier. · Renommez-le (sans caractères spéciaux) puis renvoyez-le. » |
+| `UPLOAD_CONFLICT` | figé à un pourcentage | un autre envoi du même nom est en cours, ou le fichier est en déplacement (409 `moving` / `upload in progress` / décalage) (`:574,578,703`) | 409 + corps `partJson`/`moving` | **oui** : reprise au bon décalage (existant `Conflict`) ; `moving` ⇒ attendre | WAIT | « <TV> déplace ou reçoit déjà « <fichier> ». · L'envoi reprend quand elle a fini. » |
+| `SESSION_LOST` | transfert rapide qui repart de zéro / échoue après 6 fois | TV redémarrée pendant le transfert : `404 unknown transfer` (`:721,747`) | `Outcome.SessionLost` (`Lanes.kt:45`), `attempts > 6` (`TransferClient.kt:148`) | **oui** : nouveau `begin` (reprise par carte de blocs) | WAIT | « <TV> a redémarré pendant l'envoi : reprise là où elle en était. » |
+| `CORRUPT_REPEATED` | échec après vérification finale | bloc refusé 4 fois (422), ou `finish` 422 répété (`Scheduler.kt:134-138`, `TransferClient.kt:154`) | 422 | non | FATAL | « <TV> reçoit des données altérées sur ce lien (Wi-Fi perturbé ou clé défaillante). · Rapprochez-vous de la box ou changez de clé, puis renvoyez. » |
+| `PHONE_BG_KILLED` | notification disparue, file « Envoi interrompu » | Android a tué le service en fond (tueur OEM, batterie) ; `State.Idle` après démarrage (`TransferQueue.kt:130,137`) | état `Idle` sans `Done`/`Failed` ; `startForeground` refusé (`UploadService.kt:84-87`) | **oui** : reprise au prochain premier plan (le `.part` est conservé sur la TV) | ACTION | « Le téléphone a coupé l'envoi en arrière-plan. · Autorisez CastBridge à tourner en arrière-plan (réglage batterie), puis touchez Reprendre. » |
+| `BATTERY_SAVER` | envoi figé écran éteint, reprend écran allumé | économiseur de batterie / Doze : réseau coupé en fond | `PowerManager.isPowerSaveMode`, progrès seulement écran allumé | non | ACTION | « L'économiseur de batterie du téléphone coupe le réseau pendant l'envoi. · Désactivez-le ou gardez l'écran allumé le temps de l'envoi. » |
+| `WIFI_SLEEPING` | débit qui s'effondre écran éteint malgré `WifiLock` | politique Wi-Fi OEM (veille) ; `WifiLock` ignoré | débit ÷ 10 quand `SCREEN_OFF` | non | ACTION | « Le Wi-Fi du téléphone ralentit écran éteint. · Gardez l'écran allumé pendant l'envoi ou désactivez la veille Wi-Fi. » |
+| `TV_TOO_OLD` | fonction absente, transfert rapide refusé | TV ancienne : 404 sur la route, `caps == null`, `ERR_MAGIC` | 404 (`LinkText.http`), `caps()` null ⇒ `Unsupported` (`TransferClient.kt:122`) | **oui** : envoi classique (existant) | INFO | « <TV> a une version ancienne de CastBridge-TV : envoi en mode simple. · Mettez la TV à jour pour le transfert rapide. » |
+| `PHONE_TOO_OLD` | la TV répond avec un champ inconnu / refuse un en-tête | téléphone ancien, TV neuve | `hello.v` > version connue | non | INFO | « CastBridge est plus ancien que <TV>. · Mettez l'app du téléphone à jour. » |
+| `SOURCE_UNREADABLE` | échec immédiat « Fichier illisible » / « source ended early » | permission `content://` perdue, fichier supprimé ou modifié pendant l'envoi | `openFileDescriptor` null, `statSize ≤ 0`, lecture courte (`UploadService.kt:100-101`, `TvClient.kt:121`) | non | FATAL | « Le fichier n'est plus lisible sur le téléphone (déplacé, supprimé ou modifié). · Choisissez-le à nouveau. » |
+| `LOT_REJECTED` | lot « envoyé » mais absent de la TV | lot refusé par le manifeste TV (déchiffrement, édition, signature) | `DeliveryQueue.reconcile` : `rejected` ; `/api/lots` | non | ACTION | « <TV> a refusé le lot « <lot> » : <raison TV>. · Vérifiez l'édition de la TV ou renouvelez le lot. » |
+| `HOST_GUARD` | 403 immédiat depuis un nom DNS | en-tête `Host` non local (`HostGuard`, `ReceiverServer.kt:342`) | 403 `Hôte non autorisé` | non | FATAL | « <TV> n'accepte que son adresse IP locale, pas un nom. · Utilisez l'adresse IP de la TV. » |
+| `NEEDS_FOREGROUND` | « Fichier envoyé, mais lancement impossible » (texte existant) | la TV ne peut pas ouvrir son écran depuis le fond (GaiaOS) | 409 `needsForeground` (`:332-334`) | non | INFO | « Le fichier est sur <TV> ; pour la lecture, ouvrez CastBridge-TV sur la TV. » |
+| `QUEUE_NO_LINK` | « TV non connectée : l'envoi n'a pas pu démarrer » après 60 s | la file exige `LinkUi.Connected` (`TransferQueue.kt:112-118`) alors qu'une route PIN existe | état de liaison ≠ Connected ; PIN utilisable | **oui** : repli sur `UploadService` + PIN si `PinStore` en a un | WAIT | « La liaison avec <TV> n'est pas établie. · Touchez Réparer (ou saisissez le code de la TV). » |
+| `UNKNOWN_HTTP` / `UNKNOWN_IO` | n'importe quoi d'autre | statut ou exception non catalogués | tout statut ≥ 400 hors table, toute exception | nouvel essai ×3 puis texte | WAIT | « <TV> a répondu de façon inattendue (code <N>). · Mettez à jour CastBridge et CastBridge-TV, puis réessayez. Code support : <CB-…>. » |
+| **Classe « faux état initial au démarrage à froid »** — `COLD_START_FALSE_STATE` | « Ouvrir avec CastBridge » depuis Telegram (`OpenWithActivity`) affiche « Aucune TV ajoutée : ouvrez CastBridge pour ajouter votre TV » et grise « Copier vers la TV » alors qu'une TV est enregistrée **et** connectée (terrain, propriétaire, 2026-10-02) | `TvLinkManager._state` est **initialisé à `LinkUi.NoTv`** (`S/TvLink.kt:104`) et le premier HELLO prend plusieurs secondes à froid ; `publish()` mappe aussi `LinkState.NoTv` sur `NoTv` (`:244-245`) : l'écran lit un état **inventé**, pas un état **inconnu** | `TvLinkManager.saved.list()` non vide **et** aucun `Step` publié depuis le démarrage du processus | **oui** (correctif ciblé **déjà confié à un exécutant, hors W13** : état initial « vérification » quand une TV est sauvegardée ; « Copier » reste actif pendant la reconnexion) ; W13 : `LinkHealth` démarre à `UNKNOWN` (jamais `NoTv` avec une TV sauvegardée) | INFO | « Vérification de la liaison avec <TV>… » (puce **grise**, actions non grisées : un envoi lancé attend la liaison ≤ 60 s puis se nomme `QUEUE_NO_LINK`) |
+
+Règle générale de cette classe (vaut pour toute puce ou tout mur) : **un état non observé est `UNKNOWN`, jamais une valeur par défaut** ; `NoTv` ne se déduit que de `saved.list().isEmpty()`, `Connected`/`Absent` que d'une sonde datée. Test figé (w13-03 `LinkHealthTest`, w13-09 test de source) : TV sauvegardée + aucun pas publié ⇒ `LinkHealth(UNKNOWN, UNKNOWN, UNKNOWN)` et `chip().tone == NEUTRAL`, jamais `NoTv` ; « Copier vers la TV » et « Envoyer » ne sont **jamais** grisés sur `UNKNOWN`.
+
+Total : **47 codes** (39 situations distinctes + 8 variantes). Le test du catalogue (§ 4) exige **un cas par code** ; `UNKNOWN_*` ne doit être atteint par **aucun** statut que `ReceiverServer` émet (test lint).
+
+## 3. Mécanisme général
+
+### 3.1 (a) Taxonomie typée `Blocker` (cœur, pur, `C/link/`)
+
+```kotlin
+package castbridge.core.link
+enum class Severity { INFO, WAIT, ACTION, FATAL }
+enum class Fix { NONE, HELLO_AGAIN, REDISCOVER_IP, WAIT_WAKE, RETRY_AFTER, ASK_PIN, REPAIR_PAIRING, OPEN_TV_APP, FREE_SPACE, REINSERT_USB,
+                 CHECK_TV_CLOCK, UPDATE_TV, UPDATE_PHONE, PARENTAL_ON_TV, PRODUCTION_KEY, ACTIVATE_TV, RENEW_KEY, WIFI_SETTINGS, DISABLE_VPN,
+                 BATTERY_SETTINGS, KEEP_SCREEN_ON, RENAME_FILE, REPICK_FILE, OTHER_VOLUME, FORMAT_EXFAT, USE_IP, RETRY }
+enum class BlockerCode(val wire: String, val severity: Severity, val fix: Fix, val autoFix: Boolean) { PIN_WRONG("pin-wrong", ACTION, ASK_PIN, false), /* … § 2 … */ UNKNOWN_HTTP("unknown-http", WAIT, RETRY, true), UNKNOWN_IO("unknown-io", WAIT, RETRY, true) }
+/** Where the failure happened and with what: enough for the text and the remedy, never a secret. */
+data class BlockerCtx(val tv: String, val credential: CredKind /* PIN, TOKEN, NONE */, val route: RouteKind /* LAN, DIRECT, BT, TUNNEL */, val phase: Phase /* PREFLIGHT, BEGIN, CHUNK, FINISH, PLAY, PROBE */, val http: Int? = null, val btCode: Int? = null, val retryAfterMs: Long? = null, val volume: String? = null, val missingBytes: Long? = null, val tvMessage: String? = null)
+data class Blocker(val code: BlockerCode, val ctx: BlockerCtx, val at: Long) { val severity get() = code.severity; val fix get() = code.fix; val autoFix get() = code.autoFix }
+object BlockerMap {
+    fun ofHttp(status: Int, body: String, ctx: BlockerCtx): Blocker          // every status >= 400 (and 200 bodies of /api/storage/check with ok:false)
+    fun ofThrowable(t: Throwable, ctx: BlockerCtx): Blocker                   // HttpError, Conflict, TvCredential.Missing, BtProtocol.Refused, BtUnavailable, IOException…
+    fun ofBt(code: Int, hint: Int, ctx: BlockerCtx): Blocker
+    fun ofCheck(c: TvClient.StorageCheck, ctx: BlockerCtx): Blocker?          // null = ok
+    fun ofTransferRefused(http: Int, message: String, ctx: BlockerCtx): Blocker
+    val KNOWN_HTTP: Set<Int>                                                   // every status the TV can emit (lint test)
+}
+```
+
+Règles : (1) **un seul producteur** : `BlockerMap` ; `LinkText.http`, `ResilientCall.classify`, `Lanes.outcome`, `TransferClient`, `ResumableUpload/Download` l'appellent (w13-04) ; (2) un `Blocker` est **immuable et sans secret** (`ctx.tvMessage` passe par `Redact.scrub`) ; (3) **ordre des indices** pour un 401 : corps `locked` ⇒ `PIN_LOCKED` ; `bad token` ⇒ `TOKEN_EXPIRED` ; en-tête PIN envoyé ⇒ `PIN_WRONG` ; aucun secret envoyé ⇒ `PIN_MISSING` ; (4) un 403 : `"trial":true` ⇒ `TRIAL_CLOSED` ; `pin required` ⇒ `PIN_REQUIRED_ROUTE` ; `child active` ⇒ `PARENTAL_CHILD_ACTIVE` ; `Hôte non autorisé` ⇒ `HOST_GUARD` ; message `DegradedPolicy` ⇒ `KEY_ENDED_DEGRADED` ; sinon `UNKNOWN_HTTP` ; (5) après W13 la TV ajoute un champ **`"code":"<wire>"`** dans ses corps 401/403/409/413/429/503/507 (w13-05) : `BlockerMap` l'utilise **d'abord**, le corps texte reste le repli pour les TV anciennes ; (6) `ResilientCall.Kind` devient dérivé : `TRANSIENT ⇔ WAIT`, `CREDENTIAL ⇔ ACTION+ASK_PIN/REPAIR_PAIRING`, `TOKEN ⇔ TOKEN_EXPIRED`, `PERMANENT ⇔ FATAL` (test de non-régression de `ResilientCallTest`).
+
+### 3.2 (b) Chien de garde des transferts (`TransferWatchdog` + `Preflight`)
+
+- **Observation** : `onBytes(n)` depuis `ResumableUpload.onState`/`Scheduler.progress`/`ResumableBtUpload` ; débit EWMA ; `N = clamp(8 × (1 Mio / débit), 12 s, 90 s)` ; avant le premier octet : 15 s (LAN/WD), 45 s (Bluetooth), 30 s (tunnel) ; `HttpConn` garde son propre seuil 20 s par connexion (inchangé).
+- **Déclenchement** : `tick()` toutes les 2 s ⇒ si `now - lastProgress > N` ⇒ `PREFLIGHT` (une fois par fenêtre), puis `ESCALATE` à `3N` (notification + bandeau même en fond), puis `GIVE_UP` à 10 min pour un `Blocker` `ACTION`/`FATAL` (l'envoi passe `Failed(blocker)` ; un `WAIT` continue, texte visible).
+- **Pré-vol** (`Preflight.run(tv, credential, probe)`, pur sur `PreflightEnv`) dans cet ordre, **arrêt au premier `Blocker`** : (1) réseau du téléphone (`netUp`, VPN, économiseur) ; (2) `GET /api/hello` 1,2 s ×2 (`PORT_CLOSED`/`TV_ASLEEP`/`TV_OTHER_IP` si le HELLO Bluetooth donne d'autres IP) ; (3) `GET /api/info` **avec exactement le secret du transfert** (`PIN_*`, `TOKEN_*`, `PIN_REQUIRED_ROUTE`) ; (4) `GET /api/storage/check?name=<fichier>&size=<taille>` (`TRIAL_CLOSED` 403, `STORAGE_FULL`, `USB_REMOVED`, `FILE_TOO_BIG_FS`, `STORAGE_READONLY`) ; (5) `GET /api/library` en-tête `childActive` (`PARENTAL_CHILD_ACTIVE`) et `info.player.state` (`TV_PLAYING_PRIORITY`) ; (6) `GET /api/transfer/state?id=` si une session existe (`SESSION_LOST`, 429 ⇒ `TV_BUSY_429`) ; (7) rien trouvé ⇒ `SLOW_NOT_STALLED` si débit > 0 dans les 3N, sinon `UNKNOWN_IO` avec code support. Coût : ≤ 5 petites requêtes par fenêtre ; **jamais** de nouvel envoi de PIN par le pré-vol si le `Blocker` courant est déjà `PIN_*` (règle verrou).
+- **Sortie** : `BlockerState` (`StateFlow<Blocker?>`) par transfert, lu par la carte, la notification, la file et le journal ; `UploadService.State.Failed(job, reason)` gagne un champ `blocker: Blocker?` (additif).
+
+### 3.3 (c) La puce : trois vérités (`LinkHealth`)
+
+```kotlin
+enum class Level { YES, NO, UNKNOWN }
+data class LinkHealth(val reachable: Level, val authorized: Level, val ready: Level, val blocker: Blocker?, val credentialKind: CredKind, val checkedAt: Long) {
+    fun chip(now: Long, maxAgeMs: Long): Chip   // GOOD only if reachable==YES && authorized==YES && ready!=NO && now-checkedAt<=maxAgeMs
+}
+```
+- **Joignable** = `/api/hello` 200 (ou HELLO Bluetooth OK) ; **Autorisée** = `/api/info` 200 **avec le secret que `PinStore.get(clé)` renverrait pour cette TV sur cet écran** (le même code de résolution, w13-09) ; **Prête** = `storage/check` d'un octet OK (pas 403 essai, pas 503/507), pas de `childActive`, pas de 429.
+- **État initial** : `LinkHealth.initial(hasSavedTv)` = `UNKNOWN × 3` si une TV est sauvegardée (puce grise « Vérification de la liaison avec <TV>… », **aucun bouton grisé**), `NoTv` seulement si `saved.list()` est vide (classe « faux état initial », § 2) ; `TvLinkManager.health` est publié **avant** le premier `driver.step()`.
+- **Fraîcheur** : X = 20 s au premier plan, 5 min en fond ; au-delà ⇒ `UNKNOWN` ⇒ puce **grise** « Vérification… », jamais verte par mémoire. L'hystérésis de `LinkMachine` reste pour le **texte** ; la **couleur** vient de `LinkHealth` : vert = 3 OUI frais ; ambre = joignable mais pas autorisée/prête (**avec le `Blocker`** et son action) ; rouge = injoignable ; gris = inconnu.
+- Textes de puce (w13-02) : `● <TV> · prête (Wi-Fi)` / `● <TV> · code à saisir` / `● <TV> · essai : copies fermées` / `◐ <TV> · vérification…` / `○ <TV> · hors de portée`.
+- `TvLinkManager` expose `health: StateFlow<LinkHealth>` (façade conservée pour W7 w7-16/w7-20).
+
+### 3.4 (d) Auto-remèdes (table `Fix` → action, exécutée par `BlockerRemedy` côté téléphone)
+
+| `Fix` | Fait | Garde-fou |
+|---|---|---|
+| `HELLO_AGAIN` | `TvLinkManager.tokenRejected(jeton)` ⇒ HELLO ⇒ nouveau jeton ; le transfert reprend dès `credential()` change (existant) | `CredentialGate` : jamais le même jeton deux fois ; limiteur 12 HELLO/min |
+| `REDISCOVER_IP` | `TvDiscovery.restart()` + HELLO Bluetooth (IP du moment) ⇒ `resolve()` | 1 fois par fenêtre N |
+| `WAIT_WAKE` | attendre `SCREEN_ON`/`ACL_CONNECTED`/`NETWORK` (déclencheurs existants `TvLink.kt:264-289`) | texte visible, ETA inconnue dite « dès que la TV répond » |
+| `RETRY_AFTER` | respecter `retryAfter`/`retryMs` ; délais 0,5→5 s (existant) | **uniquement** `Severity.WAIT` ; jamais `ACTION`/`FATAL` |
+| `ASK_PIN` | ouvre la saisie § 3.5 ; **aucun** envoi tant que l'utilisateur n'a pas saisi | une seule tentative par saisie |
+| `REPAIR_PAIRING` | bouton « Réassocier » (existant `requestReassociate`) | action utilisateur |
+| les autres | bouton unique (réglage Wi-Fi, batterie, choix de volume, renommer, re-choisir le fichier) | — |
+
+Repli de secret : si le transfert a échoué `PIN_WRONG` avec un PIN et que `TvLinkManager.credentialForBase(base)` (`S/TvLink.kt:200-206`) donne un **jeton** pour cette IP, le transfert **repart une fois avec le jeton** avant de demander le PIN (corrige la clé par nom ratée, § 1.2).
+
+### 3.5 (e) Le PIN, spécifiquement
+
+- **Téléphone** : quand `Blocker.fix == ASK_PIN`, la **carte du transfert** (TvHome, TvScreen, CastSheet, DlnaHandoff, file) affiche en place « <message> » + champ 6 chiffres + bouton « Envoyer avec ce code » + ligne d'aide : « Le code est en haut de l'écran d'accueil de la TV (« code 77•••• » : touche OK pour l'afficher en entier), ou MENU › Connexion & réglages. En mode enfant, il est masqué : saisissez d'abord le code parental sur la TV. » Le code saisi est **vérifié par un seul `GET /api/info`** puis enregistré par `PinStore.putAll(tv, code)` sous **toutes** les clés connues de cette TV (nom, mDNS, `bt:<adresse>`, `<ip>:8765`, IP manuelle sans port) — ce qui ferme la cause § 1.2 pour de bon ; stockage : préférences privées existantes (`castbridge_pins`, exclues des sauvegardes), **pas de nouvelle dépendance** (D-W13-4).
+- **Lien profond** : la notification « Envoi bloqué : code de la TV à saisir » ouvre `castbridge://repair?b=pin-wrong&tv=<nom>` ⇒ `MainActivity` ⇒ onglet CastBridge TV ⇒ carte avec le champ. Le lien **ne porte jamais** le code.
+- **TV** (w13-05, w13-06) : `ReceiverServer` signale à `TvService` chaque 401/403 avec `(cléPair, genre)` ; `PinNeededPolicy` (pur) autorise un bandeau **au plus 1 fois / 60 s par pair et 3 fois / 10 min au total** : « Un téléphone essaie d'envoyer un fichier sans le bon code. Le code est : 77•••• (OK pour l'afficher). » ; genre jeton : « Un téléphone de confiance renouvelle son autorisation : rien à faire. » ; en mode enfant : « Un téléphone attend le code de la TV : déverrouillez le mode enfant pour l'afficher. » Le bandeau ne contient **ni adresse, ni nom** (HTTP ne le connaît pas), ne dit **jamais** si le code était proche ; la puce d'accueil gagne « · un téléphone attend le code » pendant 60 s (`R/HomeScreen.kt:124-126`). La TV **ne compte plus** un PIN **absent** comme un essai (D-W13-2) : le verrou ne ralentit que les vrais essais, et un téléphone sans code ne verrouille plus le vrai propriétaire.
+- **Ne jamais confondre** : le **PIN d'association** (`TvPrefs.pin`, 6 chiffres, « code » de l'accueil, demandé par HTTP/Bluetooth aux appareils non de confiance) et le **code parental** (`ParentalEngine`, saisi **sur la TV**, masque le PIN d'accueil quand le mode enfant est actif : `R/ParentalHub.kt:283`). Les messages W13 disent toujours « code de la TV » pour le premier et « code parental » pour le second ; `PARENTAL_*` n'ouvre **jamais** le champ PIN du téléphone.
+
+### 3.6 (f) UX, journal, code support
+
+- **Téléphone** : (1) **bandeau** dans la carte du transfert : icône selon gravité, phrase, **un** bouton (`Fix`) ; (2) **notification** du service (`UploadService`, `BtUploadService`, file) : `Failed`/`ESCALATE` ⇒ notification **persistante silencieuse** « Envoi bloqué : <cause courte> » avec action « Réparer » (lien profond) et « Annuler » ; (3) bouton **« Réparer »** (puce ambre/rouge) ⇒ feuille « Réparer la connexion » qui rejoue le pré-vol et affiche le dernier `Blocker` + action + « Copier le code support » ; (4) la file montre `Échec : <phrase>` + bouton (existant `TvHome.kt:235-241`, texte remplacé).
+- **TV (D-pad)** : page « Connexion & réglages » › « Derniers blocages » : 10 dernières entrées `{heure, code, genre de pair (PIN/jeton), http}` avec la phrase côté TV (« un téléphone a présenté un mauvais code », « essai : envoi refusé »), focus initial sur « Fermer », ≥ 24 sp ; le **même code support** y est affiché pour comparer avec le téléphone.
+- **Journal** : `BlockerLog` (`C/link/BlockerLog.kt`), anneau de **200** entrées `{t, code, http, phase, route, credKind, tvHash4, ms}` persisté (≤ 16 Kio, `SafeFile` si w1-02 présent, sinon écriture atomique simple), **sans** IP complète, nom de TV haché (4 hex), ni corps de réponse ; `export()` passe par `Redact.scrub`. **Contrat W7** : `LinkJournal` (w7-08) l'absorbe (`JKind.BLOCKER`) ; en attendant, `BlockerLog` suffit.
+- **Code support** : `CB-<3 lettres du code>-<MMJJ>-<4 hex>` (ex. `CB-PIN-1002-7F3A`) ; `4 hex` = `SHA-256(code | http | tvHash4 | minute)[0:2]` : non réversible, sans secret, suffisant pour retrouver la ligne du journal exporté ; affiché dans le bandeau (petit), la feuille Réparer, la TV ; copiable.
+
+### 3.7 Sécurité et vie privée (invariants, testés)
+
+1. Aucun `Blocker`, texte, journal ou code support ne contient un PIN, un jeton, une IP complète, une adresse MAC, un SSID (`Redact.scrub` + test de source).
+2. La TV ne révèle **rien de plus** qu'aujourd'hui : 401 reste 401 ; `"code"` ajouté ne distingue que « secret absent » / « secret présent et refusé » / « verrouillé » / « jeton », ce que le client sait déjà.
+3. **Aucune aide au forçage** : pas de nouvel essai automatique avec un PIN (déjà `ResilientCall`, `CredentialGate`) ; le pré-vol n'envoie **jamais** un PIN déjà refusé ; verrou 5 essais/60 s conservé pour les PIN **présents** ; le bandeau TV est limité (1/60 s/pair, 3/10 min) et ne qualifie jamais la tentative.
+4. Le lien profond ne porte aucun secret ; la saisie du PIN n'est jamais pré-remplie.
+5. Les compteurs TV de 401/403 ne sont pas exposés par HTTP sans secret (page D-pad seulement ; `GET /api/link/blockers` derrière PIN ou jeton, w13-05).
+
+## 4. Tests
+
+### 4.1 JVM (cœur, hors ligne)
+
+| Test | Contenu | Échoue si |
+|---|---|---|
+| `CT/link/BlockerMapTest` (w13-01) | table `status × corps × ctx → code` (≥ 46 lignes, un par code) ; exceptions (`Missing`, `Conflict`, `Refused` BT ×13 codes, `SocketTimeout`, `Connect`, `UnknownHost`, `InterruptedIO`, `SecurityException`) | un code du § 2 n'a pas de ligne ; une ligne donne `UNKNOWN_*` alors que le statut est dans `KNOWN_HTTP` |
+| `CT/link/BlockerTextsTest` (w13-02) | chaque `BlockerCode` a un titre, une phrase cause, une action ; aucun texte ne contient 6 chiffres, `cbk_`, une IP ; `Fix` ↔ libellé de bouton | manque ou fuite |
+| `CT/link/TransferWatchdogTest`, `PreflightTest`, `LinkHealthTest`, `SupportCodeTest`, `PinNeededPolicyTest` (w13-03, w13-05) | N adaptatif (débit 150 Ko/s ⇒ 56 s ; 5 Mo/s ⇒ 12 s plancher) ; `PREFLIGHT` puis `ESCALATE` à 3N ; pré-vol s'arrête au premier `Blocker` ; puce jamais `GOOD` sans `authorized==YES` frais ; **démarrage à froid** : TV sauvegardée + aucun pas publié ⇒ `UNKNOWN × 3`, tone `NEUTRAL`, jamais `NoTv` ; code support stable et sans secret ; bandeau TV limité | la puce est `GOOD` sur mémoire, ou `NoTv` avec une TV sauvegardée |
+| `CT/link/BlockerCatalogueTest` (w13-10) | **table ≥ 38 cas** sur un **faux serveur scripté** (NanoHTTPD du cœur, comme `OneGigRuleServerTest` `CT/TransferTest.kt:28`) : pour chaque cas, le script de réponses (statut, corps, coupure, lenteur) et le **`Blocker` attendu** en sortie de `ResumableUpload`, `TransferClient` (avec `WifiLane`) et `ResumableDownload` ; un cas = ≤ 3 s (`sleep` injecté) | un chemin se termine en `Failed(reason)` **sans** `blocker`, ou boucle > 3 essais sur un `ACTION`/`FATAL`, ou renvoie un PIN refusé |
+| `CT/link/RouteStatusLintTest` (w13-10) | lit `C/tv/ReceiverServer.kt` + `C/parental/ParentalApi.kt` + `C/xfer/TransferHost.kt` (source), extrait `Response.Status.X`, `status(NNN)`, `ApiReply(NNN`, et `tools/routes/routes.txt` ; exige : chaque statut ∈ `BlockerMap.KNOWN_HTTP` ; chaque route de transfert (`/upload/`, `/api/transfer/*`, `/api/part`, `/api/storage/check`, `/api/info`, `/api/hello`) a au moins un cas du catalogue | un statut nouveau apparaît sans mappage |
+| `CT/link/NoSilentFailureSourceTest` (w13-10) | source : dans `C/tv/TvClient.kt`, `C/xfer/*.kt`, `C/trust/ResilientCall.kt`, tout `catch (… HttpError|IOException)` est suivi, dans le même bloc, de `BlockerMap.` ; aucune chaîne française nouvelle hors `BlockerTexts`/`LinkText` | un `catch` muet |
+
+### 4.2 Terrain (liste de reproduction, w13-11 : `docs/BLOCAGES.md` § 5)
+
+Préalables : TV `TV=http://<ip>:8765`, PIN affiché sur la TV `PIN=…` (jamais dans un fichier), téléphone en ADB, relais Mac → téléphone → TV (mémoire « Relais téléphone → TV »).
+
+| Situation | Reproduire | Attendu (téléphone / TV) |
+|---|---|---|
+| PIN faux | `curl -s -o /dev/null -w '%{http_code}\n' -H 'X-CB-Pin: 000000' $TV/api/info` ⇒ `401` ; sur le téléphone : envoyer après avoir mis un faux code dans le champ « Avancé » | carte : « Le code de <TV> a changé… · Saisissez… » + champ ; notification « Envoi bloqué : code de la TV à saisir » ; TV : bandeau « Un téléphone essaie… » ≤ 1/min |
+| PIN absent | `curl … $TV/api/info` sans en-tête ×6 puis **avec** le bon PIN | avant W13 : 6ᵉ = `locked` ; après : jamais verrouillé par des requêtes sans secret |
+| Verrou | 5 × PIN faux puis bon PIN | « verrouillée N s… » puis reprise seule à N s |
+| Jeton expiré | `adb shell date` +13 h sur le téléphone (ou `TrustRegistry` test) ; ou sur la TV « Oublier tous les téléphones » puis envoyer | HELLO ⇒ reprise ; ou `TOKEN_REVOKED` ⇒ « retiré… Réassocier » |
+| TV réinstallée | `adb -s <tv> uninstall castbridge.receiver && adb install …` | « réinstallée… Réassociez » ; aucun envoi avec l'ancien PIN |
+| Essai | TV avec clé d'essai ; `curl -X PUT -H "X-CB-Pin: $PIN" "$TV/upload/x.bin?offset=0&total=1" --data-binary @/dev/null` ⇒ `403 {"trial":true}` | « en version d'essai… Passez en production » ; **aucune** boucle « En pause : HTTP 403 » |
+| Plein | `curl -H "X-CB-Pin: $PIN" "$TV/api/storage/check?name=big.mkv&size=900000000000"` | « il manque <N>… » avant le premier octet |
+| Clé retirée | débrancher la clé pendant l'envoi | « retirée… Remettez-la » ; reprise au retour |
+| FAT32 > 4 Gio | clé FAT32 + fichier 5 Gio | « dépasse la limite… exFAT » |
+| TV en veille | éteindre la TV pendant l'envoi | 40 s : « ne répond plus… Allumez-la » ; reprise au réveil |
+| Autre IP | sur la box, changer l'IP réservée ; `adb -s <tv> shell svc wifi disable && svc wifi enable` | « a changé d'adresse : retrouvée » ≤ 20 s |
+| Serveur arrêté | `adb -s <tv> shell am force-stop castbridge.receiver` | « CastBridge-TV ne répond pas… Ouvrez-la » |
+| Occupée | 3 `curl -X POST "$TV/api/transfer/begin?name=a$i&size=10&blockSize=1048576"` puis envoyer | « occupée… continue » |
+| Mode enfant | activer un profil enfant sur la TV ; « Classer » | « mode enfant… code parental sur la TV » ; **pas** de champ PIN |
+| Tueur de batterie | `adb shell am set-inactive castbridge.sender true` + `cmd deviceidle force-idle` | notification persistante « Envoi bloqué : arrière-plan » + bouton réglage |
+| Lenteur | `tc`/box limitée ou clé USB lente | « avance lentement (…) : disque de la TV » (INFO, pas de blocage) |
+| Doublon | renvoyer le même fichier | « déjà sur <TV> : non recopié » |
+| Code support | provoquer un cas, « Copier le code support » ; sur la TV : Connexion & réglages › Derniers blocages | mêmes `CB-…` des deux côtés ; export du journal sans IP/jeton/code (`grep -E '[0-9]{6}|cbk_|192\.168' export.txt` vide) |
+
+## 5. Articulation, tranches, effort, risques
+
+### 5.1 Avec W7, W6, W8
+
+- **W13 est une sous-vague autonome**, exécutable **avant W7** (W7 n'a aucun cahier lancé : aucun rapport `w7-*` dans `docs/agent-reports/`). Elle réutilise l'existant § 1.5 et **ne crée pas** `LinkManager`, `LinkJournal`, `SelfTest`. Elle amende W7 (sans éditer ses cahiers ; l'index W13 le liste) : **w7-08** (`LinkJournal` absorbe `BlockerLog` ; `SelfTest.Verdict` porte un `Blocker` ; `LinkTexts` n'invente pas de second texte pour un code `Blocker`), **w7-19** (`RepairScreen` reçoit le `Blocker` courant et rejoue `Preflight` : plus de second diagnostic), **w7-20** (`LinkChip` lit `LinkHealth` : la couleur vient des trois niveaux, le texte de `LinkText`/`BlockerTexts`), **w7-21** (`XferCard`, `UploadService`, `TransferQueue` : W13 les modifie d'abord ; w7-21 se rebase et garde `BlockerState`), **w7-15** (`/api/link/journal` expose aussi `BlockerLogTv`), **w7-14/w7-12** (`HomeScreen`, `PlayerActivity`, `TvService` : conserver les crochets `PinNeeded`), **w7-16** (façade `TvLinkManager.health` conservée), **w7-10** (`TransferLedger` porte `blocker` par transfert).
+- **W6 `SendGuard`** (§ 3.7-3.8 de `DESIGN-W6`) : les refus **avant envoi** (M-TV-TRIAL, M-TV-ENDED, M-PROOF-EXPIRED…) restent dans `PhoneGateTexts` ; W13 couvre les refus **pendant** l'envoi et fournit l'adaptateur `Blocker.ofGateRefusal(id)` (contrat : `TRIAL_CLOSED ⇔ M-TV-TRIAL/M-TV-REFUSED`, `KEY_ENDED_DEGRADED ⇔ M-TV-ENDED`, `TV_LOCKED_NO_KEY ⇔ M-TV-LOCKED`, `TV_CLOCK_SUSPENDED ⇔ M-TV-SUSPENDED`, `PARENTAL_CHILD_ACTIVE ⇔ M-PARENTAL-BLOCKED`) pour qu'un seul bandeau existe quand w6-17 arrive. Règles d'essai inchangées (`TrialPolicy`).
+- **W8 (abandonnée)** : `BulkTransfer.Result.Refused` ⇔ `Blocker` `FATAL/ACTION` ; `CHUNK_ACK` statut 6 `refused/trial` ⇔ `TRIAL_CLOSED` ; rien à faire tant que W8 n'est pas relancée.
+
+### 5.2 Tranches
+
+| Tranche | Cahiers | Livre | Effort |
+|---|---|---|---|
+| **S1 — à livrer d'abord** | w13-01 (Blocker + map), w13-02 (textes), w13-03 (chien de garde, pré-vol, `LinkHealth`), w13-04 (couche transfert : plus d'échec muet), w13-05 (TV : corps `code`, PIN absent non compté, signal 401/403), w13-07 (téléphone : services d'envoi branchés, notification, lien profond), w13-08 (saisie PIN dans la carte, `PinStore.putAll`), w13-09 (puce 3 niveaux), w13-10 (tests catalogue + lint) | le cas PIN de l'incident, la boucle 403 d'essai, toute panne nommée, puce honnête | ≈ 10,5 j |
+| **S2** | w13-06 (bandeau TV + page D-pad), w13-11 (docs + liste terrain), w13-12 (CI + contrôles de source) | côté TV, documentation, garde-fous CI | ≈ 3,5 j |
+
+Modèles : 9 `sonnet` (w13-01/03/04/05/06/07/08/09/10), 3 `haiku` (w13-02/11/12) ; **audit Opus** obligatoire sur w13-01, w13-04, w13-05, w13-08 (authentification, PIN, verrou). Jauges et coûts : `SONNET-WAVE13-INDEX.md` (≈ 15 $ d'exécution + ≈ 3 $ d'audit, estimés, non vérifiés).
+
+### 5.3 Risques
+
+| Risque | Mitigation |
+|---|---|
+| Faux positifs du chien de garde (disque lent, Bluetooth) | pré-vol avant tout texte ; `SLOW_NOT_STALLED` est `INFO` ; seuils injectables et mesurés (B2 de W7) |
+| Pré-vol qui aggrave un verrou PIN | règle : jamais de PIN déjà refusé ; `info` d'abord avec le **jeton** s'il existe ; PIN absent non compté (TV) |
+| Puce « grise » plus souvent (vérité) perçue comme régression | texte « vérification… » ≤ 2 s au premier plan (sondes 1,2-1,5 s) ; vert dès la 1ʳᵉ sonde |
+| Régression des écrans qui lisent `UploadService.State` | champs **additifs** (`blocker` nullable) ; `TransferQueue.watch` inchangé ; tests de source |
+| Bandeau TV jugé intrusif ou révélateur | limité, sans identité, désactivable (D-W13-3), même texte pour absent/faux |
+| Coût de 3-5 requêtes par fenêtre sur TV 32 bits | fenêtre ≥ 12 s, requêtes légères (`info` est déjà sondé toutes les 2 s par `TvHome`) |
+| Divergence W7 (deux puces, deux journaux) | contrats nommés § 5.1 ; `BlockerLog` conçu pour être absorbé ; `health` sur la façade |
+
+## 6. Décisions
+
+**Prises (renversables)** : **D-W13-1** la saisie du PIN se fait **dans la carte du transfert** (plus de bascule vers l'assistant sans explication) ; **D-W13-2** la TV **ne compte plus** une requête sans secret dans le verrou (elle reste 401) ; **D-W13-3** bandeau TV « un téléphone attend le code » **activé par défaut**, limité, sans identité, désactivable dans Connexion & réglages ; **D-W13-4** le PIN reste dans les préférences privées existantes (pas de `security-crypto`, pas de dépendance) ; **D-W13-5** code support affiché des deux côtés ; **D-W13-6** W13 **avant** W7, tranche S1 d'abord ; **D-W13-7** le PIN saisi est enregistré sous **toutes** les clés de la TV et l'ancien PIN de cette TV est **effacé** sur un `PIN_WRONG` confirmé.
+
+**BLOQUÉ (fait propriétaire)** : **B-W13-1** confirmer la chaîne exacte de l'incident (écran utilisé, « Transfert rapide » coché ou non, version de l'app, `adb logcat -s UploadService:I TvLink:I`) : cela choisit le **premier** cas terrain à rejouer, pas la conception.
+
+## 7. Ce que cette conception n'a pas pu vérifier
+
+- Le logcat et la version de l'app téléphone/TV au moment de l'incident (chaîne § 1.4 = la plus probable, pas prouvée).
+- Le comportement réel de GaiaOS sur `startForeground` refusé, la veille Wi-Fi écran éteint, et la fréquence des changements d'IP (constantes injectables).
+- Que `/api/library` renvoie `childActive` dans tous les builds TV du parc (présent dans la source actuelle `ReceiverServer.kt:961` ; repli : `PARENTAL_*` seulement sur 403/409).
+- Aucun cahier W4/W5/W6/W7 n'est fusionné : `DegradedPolicy`, `TvProof`, `LinkJournal` sont des **contrats**, pas du code ; W13 ne les attend pas.
+- Les jauges de jetons et coûts de l'index sont estimées.
