@@ -120,7 +120,10 @@ open class ConsoleActivity : ComponentActivity() {
     }
 
     @Composable private fun Issue(signer: Ed25519Signer) {
-        var input by remember { mutableStateOf("") }; var production by remember { mutableStateOf(false) }
+        var input by remember { mutableStateOf("") }
+        var field by remember { mutableStateOf(androidx.compose.ui.text.input.TextFieldValue("")) }
+        if (field.text != input) field = androidx.compose.ui.text.input.TextFieldValue(input, androidx.compose.ui.text.TextRange(input.length))      // set from outside (Bluetooth read)
+        var production by remember { mutableStateOf(false) }
         var superUnlimited by remember { mutableStateOf(false) }; var license by remember { mutableStateOf("") }
         var purchase by remember { mutableStateOf("") }; var subscription by remember { mutableStateOf("") }
         var rental by remember { mutableStateOf("") }
@@ -155,7 +158,10 @@ open class ConsoleActivity : ComponentActivity() {
                 }
                 btMsg?.let { Text(it, style = MaterialTheme.typography.bodySmall) }
             } }
-            OutlinedTextField(androidx.compose.ui.text.input.TextFieldValue(input, androidx.compose.ui.text.TextRange(input.length)), { input = castbridge.core.owner.DeviceCode.typing(it.text); token = null; error = null }, label = { Text("Code d'appareil (XXXX-XXXX-XXXX-XXXX) ou demande d'appareil complète") },
+            OutlinedTextField(field, { v ->
+                // the cursor stays where the user put it; only when a dash had to be added or the text changed shape does it go to the end
+                val t = castbridge.core.owner.DeviceCode.typing(v.text)
+                field = if (t == v.text) v else androidx.compose.ui.text.input.TextFieldValue(t, androidx.compose.ui.text.TextRange(t.length)); input = t; token = null; error = null }, label = { Text("Code d'appareil (XXXX-XXXX-XXXX-XXXX) ou demande d'appareil complète") },
                 modifier = Modifier.fillMaxWidth().heightIn(min = 90.dp))
             Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
                 FilterChip(!production, { production = false }, { Text("Essai") }); FilterChip(production, { production = true }, { Text("Production") })

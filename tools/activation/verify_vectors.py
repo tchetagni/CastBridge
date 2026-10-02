@@ -233,7 +233,7 @@ def parse_envelope(token):
 
 def right_line_ok(line):
     f = line.split("|")
-    return (f[0] == "purchase" and len(f) == 4) or (f[0] == "subscription" and len(f) == 7) or (f[0] == "openall" and len(f) == 4) or (f[0] == "super" and len(f) == 3)
+    return (f[0] == "purchase" and len(f) == 4) or (f[0] == "subscription" and len(f) == 7) or (f[0] == "openall" and len(f) == 4) or (f[0] == "super" and len(f) == 3) or (f[0] == "usage" and len(f) == 4 and f[1] == "duree")
 
 
 def activation_view(e):
@@ -298,7 +298,7 @@ def verify_activation(c, keys, devices):
         return ("rejected", "KEY_NOT_ALLOWED")
     if any(is_super(r) for r in a["rights"]) and "SUPER_UNLIMITED" not in scopes:
         return ("rejected", "KEY_NOT_ALLOWED")
-    if a["kind"] == "trial" and a["rights"]:
+    if a["kind"] == "trial" and any(not r.startswith("usage|") for r in a["rights"]):
         return ("rejected", "BAD_RIGHTS")
     if any(int(o[3]) - int(o[2]) > MAX_OPEN_ALL or int(o[3]) <= int(o[2]) for o in opens):
         return ("rejected", "BAD_RIGHTS")

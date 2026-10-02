@@ -86,7 +86,7 @@ class ActivationIssuer(private val signer: Signer, private val scopes: Set<KeySc
         need(r.issuedAt > 0 && r.notBefore > 0, "Date invalide")
         need(if (r.kind == ActivationKind.TRIAL) KeyScope.ISSUE_TRIAL in scopes else (KeyScope.ISSUE_PRODUCTION in scopes || KeyScope.REACTIVATE in scopes), "Cette clé n'a pas le droit de délivrer ce type d'activation")
         if (r.kind == ActivationKind.TRIAL) {
-            need(r.rights.isEmpty(), "Une clé d'essai ne porte aucun droit")
+            need(r.rights.all { it is Right.Usage }, "Une clé d'essai ne porte aucun droit (seulement une durée d'usage)")
             need(r.license == Activation.TRIAL_LICENSE, "Une clé d'essai porte la licence « trial »")
         } else {
             need(Activation.ID.matches(r.license) && r.license != Activation.TRIAL_LICENSE, "Identifiant de licence invalide")
@@ -106,10 +106,12 @@ class ActivationIssuer(private val signer: Signer, private val scopes: Set<KeySc
     }
 
     private fun checkRight(r: Right) {
+        if (r is Right.Usage) { need(r.endsAt > r.startsAt && r.endsAt - r.startsAt <= ActivationPolicy.PRODUCTION_MAX_DAYS * DAY, "Durée d'usage hors bornes (1 à ${ActivationPolicy.PRODUCTION_MAX_DAYS} jours)"); return }
         need(Activation.ID.matches(r.productId), "Identifiant de produit invalide : ${r.productId}")
         need(r.bundleIds.isNotEmpty() && r.bundleIds.all { Activation.ID.matches(it) }, "Bouquet invalide dans le droit ${r.productId}")
         when (r) {
             is Right.Unknown -> throw IssueException("Droit inconnu : à ne pas émettre")
+            is Right.Usage -> {}                                  // checked above
             is Right.Rental -> { need(r.bundleIds.isNotEmpty(), "Location sans bouquet"); RentalLines.bounds(r)?.let { throw IssueException("Location : $it") } }
             is Right.Purchase -> need(r.grantedAt > 0, "Date d'achat invalide")
             is Right.Super -> {

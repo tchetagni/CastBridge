@@ -50,7 +50,7 @@ class OwnerStore(ctx: Context) {
     }
 
     fun publicLine(): String? = if (!hasVault()) null else vaultFile.readLines().drop(1).associate { it.substringBefore('=') to it.substringAfter('=') }
-        .let { "kid=${it["kid"]} pub=${it["pub"]} scopes=ISSUE_TRIAL,ISSUE_PRODUCTION,COMMAND_SUPPORT,COMMAND_UNLOCK,COMMAND_OPEN_ALL,TRANSFER" }
+        .let { "kid=${it["kid"]} pub=${it["pub"]} scopes=ISSUE_TRIAL,ISSUE_PRODUCTION,COMMAND_SUPPORT,COMMAND_UNLOCK,COMMAND_OPEN_ALL,TRANSFER,REVOKE,REGISTRY,REACTIVATE,SUPER_UNLIMITED" }   // every right of the owner key but POLICY (the server's)
 
     /** What was issued (date, action, device code, kind, licence) : never the key, never a code, never the token. Hash-chained. */
     fun journal(what: String, device: String, kind: String, license: String, days: Int) {

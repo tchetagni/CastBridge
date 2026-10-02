@@ -32,8 +32,8 @@ public final class Ed25519ActivationSigner implements ActivationSigner {
         if (r.notBefore() > r.issuedAt()) throw ApiException.badRequest("Le début de la fenêtre ne peut pas dépasser la date d'émission");
         if (!WireActivation.ID.matcher(r.license()).matches()) throw ApiException.badRequest("Identifiant de licence invalide pour l'activation");
         if (r.kind() == IssueKind.TRIAL) {
-            if (!r.rights().isEmpty() || !r.license().equals(WireActivation.TRIAL_LICENSE)) throw ApiException.badRequest("Une clé d'essai ne porte aucun droit et sa licence est « trial »");
-        } else if (r.rights().isEmpty()) {
+            if (!r.rights().stream().allMatch(WireActivation::isUsage) || !r.license().equals(WireActivation.TRIAL_LICENSE)) throw ApiException.badRequest("Une clé d'essai ne porte aucun droit et sa licence est « trial »");
+        } else if (r.rights().stream().allMatch(WireActivation::isUsage)) {
             throw ApiException.badRequest("Une activation de production porte au moins un droit");
         }
         for (String line : r.rights()) {

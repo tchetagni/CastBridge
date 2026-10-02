@@ -132,7 +132,7 @@ public final class EnvelopeVerifier {
         for (String r : a.rights()) if (r.startsWith("openall|")) openAll.add(r.split("\\|", -1));
         if (!openAll.isEmpty() && !key.allows(SignerScope.COMMAND_OPEN_ALL)) return Result.no(Reason.KEY_NOT_ALLOWED);
         if (a.rights().stream().anyMatch(WireActivation::isSuper) && !key.allows(SignerScope.SUPER_UNLIMITED)) return Result.no(Reason.KEY_NOT_ALLOWED);
-        if (trial && !a.rights().isEmpty()) return Result.no(Reason.BAD_RIGHTS);
+        if (trial && !a.rights().stream().allMatch(WireActivation::isUsage)) return Result.no(Reason.BAD_RIGHTS);
         for (String[] r : openAll) {
             long d = Long.parseLong(r[3]) - Long.parseLong(r[2]);
             if (d > WireActivation.MAX_OPEN_ALL_MS || d <= 0) return Result.no(Reason.BAD_RIGHTS);

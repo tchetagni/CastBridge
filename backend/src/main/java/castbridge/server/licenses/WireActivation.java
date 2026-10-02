@@ -20,6 +20,11 @@ public final class WireActivation {
     public static final long HOUR_MS = 3_600_000L;
     public static final int MAX_WINDOW_HOURS = 48;
     /** The `super` right (SUPER_UNLIMITED): reads and unlocks everything, rentals included, for good; only a key holding SUPER_UNLIMITED may sign it (never the server's). */
+    /** The usage ceiling line (`usage|duree|from|to`): the only « right » a trial key may carry; it grants nothing by itself. */
+    public static boolean isUsage(String rightLine) {
+        return rightLine.startsWith("usage|");
+    }
+
     public static boolean isSuper(String rightLine) {
         return rightLine.startsWith("super|");
     }
@@ -78,6 +83,12 @@ public final class WireActivation {
                 }
                 case "openall" -> {
                     if (f.length != 4 || !ID.matcher(f[1]).matches()) return false;
+                    Long.parseLong(f[2]);
+                    Long.parseLong(f[3]);
+                    return true;
+                }
+                case "usage" -> {     // usage ceiling: usage|duree|<from ms>|<to ms>
+                    if (f.length != 4 || !f[1].equals("duree")) return false;
                     Long.parseLong(f[2]);
                     Long.parseLong(f[3]);
                     return true;

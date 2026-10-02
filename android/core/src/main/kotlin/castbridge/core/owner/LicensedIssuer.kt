@@ -23,6 +23,8 @@ class IssueSpec(
     val rentals: List<RentalSpec> = emptyList(), val rentalMaster: ByteArray? = null,
     /** Optional policy check (free lots refused): returns a French reason or null. */
     val rentalCheck: ((RentalSpec) -> String?)? = null,
+    /** Usage ceiling in days (see [Right.Usage]): trial 1..[ActivationPolicy.TRIAL_MAX_DAYS] (null = [ActivationPolicy.TRIAL_DEFAULT_DAYS]), production 1..[ActivationPolicy.PRODUCTION_MAX_DAYS] (null = none). */
+    val usageDays: Int? = null,
 )
 
 /**
@@ -121,7 +123,13 @@ class LicensedIssuer(
                 RentalIssuing.right(r, issuedAt, spec.license, theSeat, device.factors, master)
             }
         }
-        val issued = issuer.issue(ActivationIssuer.Request(spec.kind, device.code, device.factors, issuedAt, spec.subject, rights, spec.license, seat,
+        val days = when (spec.kind) {
+            ActivationKind.TRIAL -> (spec.usageDays ?: ActivationPolicy.TRIAL_DEFAULT_DAYS).also { if (it !in 1..ActivationPolicy.TRIAL_MAX_DAYS) throw IssueException("Durée d'un essai : 1 à ${ActivationPolicy.TRIAL_MAX_DAYS} jours") }
+            ActivationKind.PRODUCTION -> spec.usageDays?.also { if (it !in 1..ActivationPolicy.PRODUCTION_MAX_DAYS) throw IssueException("Durée d'usage d'une production : 1 à ${ActivationPolicy.PRODUCTION_MAX_DAYS} jours") }
+        }
+        if (days != null && rights.any { it is Right.Super }) throw IssueException("SUPER_UNLIMITED est permanent : pas de durée d'usage")
+        val withUsage = if (days == null) rights else rights + Right.Usage(issuedAt, issuedAt + days * 24L * 3600 * 1000)
+        val issued = issuer.issue(ActivationIssuer.Request(spec.kind, device.code, device.factors, issuedAt, spec.subject, withUsage, spec.license, seat,
             spec.notBefore ?: issuedAt, spec.windowHours, spec.nonce, null))
         save(LicenseBook.merge(current, listOf(LicenseEvent.issue(signer, issued.activation))))
         return Delivered(issued, issued.activation.seat, reused, left)

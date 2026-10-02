@@ -53,6 +53,16 @@ sealed class Right {
         override val bundleIds: List<String> get() = listOf(ALL_BUNDLE)
     }
 
+    /**
+     * USAGE CEILING of an activation (`usage|duree|<from ms>|<to ms>`): the activation, a trial or a production one, stops counting at [endsAt] (every right it carries, the rentals aside, which have
+     * their own clock). Set by the owner at issue time (a trial always has one); an activation without it has no ceiling, as before. Grants nothing by itself.
+     */
+    data class Usage(val startsAt: Long, val endsAt: Long) : Right() {
+        override val productId: String get() = ID
+        override val bundleIds: List<String> get() = emptyList()
+        companion object { const val ID = "duree" }
+    }
+
     /** A right line of a kind this build does not know (a newer format): kept VERBATIM so the signed canonical text rebuilds exactly, and it grants nothing, never "everything". */
     data class Unknown(val raw: String) : Right() {
         override val productId: String get() = "unknown"
@@ -93,6 +103,7 @@ data class Entitlement(val deviceId: String, val issuedAt: Long, val keyId: Stri
             is Right.OpenAll -> "openall|${r.productId}|${r.startsAt}|${r.endsAt}"
             is Right.Rental -> RentalLines.line(r)
             is Right.Super -> "super|${r.productId}|${r.grantedAt}"
+            is Right.Usage -> "usage|${r.productId}|${r.startsAt}|${r.endsAt}"
             is Right.Unknown -> r.raw
         }
 

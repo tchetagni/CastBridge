@@ -54,6 +54,7 @@ data class Activation(
             is Right.OpenAll -> "openall|${r.productId}|${r.startsAt}|${r.endsAt}"
             is Right.Rental -> RentalLines.line(r)
             is Right.Super -> "super|${r.productId}|${r.grantedAt}"
+            is Right.Usage -> "usage|${r.productId}|${r.startsAt}|${r.endsAt}"
             is Right.Unknown -> r.raw
         }
 
@@ -65,6 +66,7 @@ data class Activation(
                 "subscription" -> { require(f.size == 7 && ID.matches(f[1])); Right.Subscription(f[1], ids(f[2]), f[3].toLong(), f[4].toLong(), f[5].toLong(), f[6] == "1") }
                 "openall" -> { require(f.size == 4 && ID.matches(f[1])); Right.OpenAll(f[1], f[2].toLong(), f[3].toLong()) }
                 "super" -> { require(f.size == 3 && ID.matches(f[1])); Right.Super(f[1], f[2].toLong()) }
+                "usage" -> { require(f.size == 4 && f[1] == Right.Usage.ID); Right.Usage(f[2].toLong(), f[3].toLong()) }
                 RentalLines.KIND -> RentalLines.parse(f)
                 else -> RentalLines.unknown(line)
             }
@@ -117,6 +119,12 @@ object ActivationPolicy {
     const val CODE_VALIDITY_HOURS = 48
     const val HOUR_MS = 3_600_000L
     const val CODE_VALIDITY_MS = CODE_VALIDITY_HOURS * HOUR_MS
+
+    /** Usage ceiling the owner sets per activation (days): a trial always has one (default 30), a production one optionally (none = no ceiling). */
+    const val TRIAL_DEFAULT_DAYS = 30
+    const val TRIAL_MAX_DAYS = 365
+    const val PRODUCTION_MAX_DAYS = 3660
+    const val USAGE_SKEW_MS = 24L * 3600 * 1000
 }
 
 class ActivationVerifier(private val keys: KeyRing, private val maxWindowMs: Long = ActivationPolicy.CODE_VALIDITY_MS, private val skewMs: Long = 24L * 3600 * 1000,
@@ -136,7 +144,7 @@ class ActivationVerifier(private val keys: KeyRing, private val maxWindowMs: Lon
         if (!allowed) return no(Rejection.KEY_NOT_ALLOWED, "Cette clé n'a pas le droit de délivrer ce type d'activation")
         if (a.rights.any { it is Right.OpenAll } && !key.allows(KeyScope.COMMAND_OPEN_ALL)) return no(Rejection.KEY_NOT_ALLOWED, "Cette clé ne peut pas délivrer « tout ouvert »")
         if (a.rights.any { it is Right.Super } && !key.allows(KeyScope.SUPER_UNLIMITED)) return no(Rejection.KEY_NOT_ALLOWED, "Cette clé n'est pas celle du super administrateur")
-        if (a.kind == ActivationKind.TRIAL && a.rights.isNotEmpty()) return no(Rejection.BAD_RIGHTS, "Une clé d'essai ne porte aucun droit")
+        if (a.kind == ActivationKind.TRIAL && a.rights.any { it !is Right.Usage }) return no(Rejection.BAD_RIGHTS, "Une clé d'essai ne porte aucun droit (seulement une durée d'usage)")
         if (a.rights.filterIsInstance<Right.OpenAll>().any { it.endsAt - it.startsAt > MAX_OPEN_ALL_MS || it.endsAt <= it.startsAt }) return no(Rejection.BAD_RIGHTS, "« Tout ouvert » : 30 jours au plus")
         a.rights.filterIsInstance<Right.Rental>().firstNotNullOfOrNull { RentalLines.bounds(it) }?.let { return no(Rejection.BAD_RIGHTS, "Location : $it") }
         if (a.subject != expect) return no(Rejection.WRONG_SUBJECT, "Cette activation est celle d'un autre type d'appareil")
@@ -168,6 +176,13 @@ object TvGate {
      */
     fun evaluate(activations: List<Activation>, grants: List<OwnerGrant>, nowMs: Long, rentals: List<RentalStatus> = emptyList()): TvAccess {
         val live = grants.filter { it.untilMs > nowMs && it.power != Power.SUPPORT }
+        // an activation whose usage ceiling has passed (or has not begun) counts for nothing: a trial then locks again, a production key must be renewed
+        val counting = activations.filter { a -> a.rights.filterIsInstance<Right.Usage>().none { nowMs >= it.endsAt || nowMs < it.startsAt - ActivationPolicy.USAGE_SKEW_MS } }
+        if (activations.isNotEmpty() && counting.isEmpty() && live.isEmpty()) return TvAccess(false, Access.TRIAL_ONLY.copy(message = "Activation terminée : demandez une nouvelle clé"), null, "Activation terminée")
+        return evaluateCounting(counting, live, nowMs, rentals)
+    }
+
+    private fun evaluateCounting(activations: List<Activation>, live: List<OwnerGrant>, nowMs: Long, rentals: List<RentalStatus>): TvAccess {
         if (activations.isEmpty() && live.isEmpty()) return TvAccess(false, Access.TRIAL_ONLY.copy(message = "Aucune clé installée : aucun contenu ouvert"), null, "Aucune clé installée")
         val rights = activations.flatMap { it.rights }
         val purchased = rights.filterIsInstance<Right.Purchase>().flatMap { it.bundleIds }.toSortedSet()
