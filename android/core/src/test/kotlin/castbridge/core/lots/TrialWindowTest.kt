@@ -13,9 +13,11 @@ class TrialWindowTest {
     private val issuer = ActivationIssuer(Ed25519Signer(ByteArray(32) { (it + 5).toByte() }))
     private val master = ByteArray(32) { (it * 3 + 1).toByte() }
     private val seat = SeatIds.of(Activation.TRIAL_LICENSE, fp)
+    private val ik = InstallKey.fromSeed(ByteArray(32) { (it + 11).toByte() })        // the window is boxed for this installation (v2)
+    private val eph = ByteArray(32) { (it * 3 + 5).toByte() }
 
     private fun trialKey(at: Long): Activation {
-        val window = RentalIssuing.right(RentalSpec(RentalLines.TRIAL_PRODUCT, listOf(Right.ALL_BUNDLE), RentalLines.TRIAL_DAYS, RentalLines.TRIAL_USAGE_MINUTES), at, Activation.TRIAL_LICENSE, seat, fp, master)
+        val window = RentalIssuing.right(RentalSpec(RentalLines.TRIAL_PRODUCT, listOf(Right.ALL_BUNDLE), RentalLines.TRIAL_DAYS, RentalLines.TRIAL_USAGE_MINUTES), at, Activation.TRIAL_LICENSE, seat, fp, master, ik.pub, eph)
         return Activation.decode(issuer.issue(ActivationIssuer.Request(ActivationKind.TRIAL, DeviceCode.of(fp), fp, at, rights = listOf(Right.Usage(at, at + 30 * DAY), window), license = Activation.TRIAL_LICENSE, seat = seat)).token)!!
     }
 
@@ -31,7 +33,7 @@ class TrialWindowTest {
     }
 
     @Test fun theWindowRunsOutByUseAndTheKeyIsGone() {
-        val tv = Tv(); val a = trialKey(T); tv.ledger.install(a, listOf(a), fp, tv.vault)
+        val tv = Tv(); val a = trialKey(T); tv.ledger.install(a, listOf(a), fp, tv.vault, ik)
         val key = RentalEngine.contractKey(RentalLines.TRIAL_PRODUCT, T)
         assertTrue(tv.vault.hasKey(key))
         val lot = LotId("learn", "cm2"); val meta = Kit.meta("learn", "cm2", 1, Kit.bytes(1, 100))
@@ -42,20 +44,20 @@ class TrialWindowTest {
     }
 
     @Test fun theWindowIsGrantedOnceForTheLifeOfTheApplication() {
-        val tv = Tv(); val first = trialKey(T); tv.ledger.install(first, listOf(first), fp, tv.vault)
+        val tv = Tv(); val first = trialKey(T); tv.ledger.install(first, listOf(first), fp, tv.vault, ik)
         // the first window ran its course
         tv.ledger.markEnding(tv.ledger.status(listOf(first)).map { it.copy(state = RentalState.EXPIRED, reason = ExpiryReason.USAGE) })
         tv.wall = T + 5 * DAY
         val second = trialKey(T + 5 * DAY)                                               // a NEW trial key, a new period
-        val out = tv.ledger.install(second, listOf(first, second), fp, tv.vault)
+        val out = tv.ledger.install(second, listOf(first, second), fp, tv.vault, ik)
         assertEquals("essai déjà utilisé sur cette TV", out.values.single())
         assertFalse(tv.vault.hasKey(RentalEngine.contractKey(RentalLines.TRIAL_PRODUCT, T + 5 * DAY)), "no key: no lot can be opened")
     }
 
     @Test fun anotherRentalProductIsNotAllowedOnATrialKeyAndTheWindowBoundsAreEnforced() {
-        val other = RentalIssuing.right(RentalSpec("loc-cm2", listOf("cm2"), 2), T, Activation.TRIAL_LICENSE, seat, fp, master)
+        val other = RentalIssuing.right(RentalSpec("loc-cm2", listOf("cm2"), 2), T, Activation.TRIAL_LICENSE, seat, fp, master, ik.pub, eph)
         assertFailsWith<IssueException> { issuer.issue(ActivationIssuer.Request(ActivationKind.TRIAL, DeviceCode.of(fp), fp, T, rights = listOf(other), license = Activation.TRIAL_LICENSE, seat = seat)) }
-        val long = RentalIssuing.right(RentalSpec(RentalLines.TRIAL_PRODUCT, listOf(Right.ALL_BUNDLE), 3, 2000), T, Activation.TRIAL_LICENSE, seat, fp, master)
+        val long = RentalIssuing.right(RentalSpec(RentalLines.TRIAL_PRODUCT, listOf(Right.ALL_BUNDLE), 3, 2000), T, Activation.TRIAL_LICENSE, seat, fp, master, ik.pub, eph)
         assertNotNull(RentalLines.bounds(long))
     }
 }

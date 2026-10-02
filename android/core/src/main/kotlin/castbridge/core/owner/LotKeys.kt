@@ -55,7 +55,11 @@ object LotKeys {
         return Hkdf.expand(Hkdf.extract("castbridge-kek-v1".toByteArray(), ikm), "kek".toByteArray(), 32)
     }
 
-    /** The data key of one TV, wrapped once per subset of [k] factors. Built by whoever knows the TV's fingerprints (server, or the console in the offline phase). */
+    /**
+     * The data key of one TV, wrapped once per subset of [k] factors. Built by whoever knows the TV's fingerprints (server, or the console in the offline phase).
+     * Deprecated: the fingerprints are public, so this box opens without the TV (docs/coordination/DESIGN-W4-ENVELOPPE-LOCATIONS.md § 1); used by no code path of the applications.
+     */
+    @Deprecated("empreintes publiques : voir DESIGN-W4-ENVELOPPE-LOCATIONS § 1 ; non utilisé par l'application")
     class DeviceKeyBox(val k: Int, val wraps: List<Pair<Set<FactorKind>, ByteArray>>) {
         companion object {
             fun create(fp: Fingerprints, k: Int, dataKey: ByteArray, rnd: SecureRandom = random): DeviceKeyBox {

@@ -46,13 +46,49 @@ object OwnerFrames {
     }.getOrNull()
 
     /** The text of the "device request" the TV gives for activation: its code and the full fingerprint set (the console needs them to build an activation and the lot keys). */
-    fun deviceInfo(code: String, fp: Fingerprints): String =
-        (listOf("code=$code", "k=${DeviceIdentity.kFor(fp.n)}") + fp.byKind.map { "factor=${it.key.name}|${it.value}" }).joinToString("\n")
+    fun deviceInfo(code: String, fp: Fingerprints, installPub: ByteArray? = null): String =
+        (listOf("code=$code", "k=${DeviceIdentity.kFor(fp.n)}") + fp.byKind.map { "factor=${it.key.name}|${it.value}" } +
+            listOfNotNull(installPub?.also { require(it.size == 32) { "clé d'installation de 32 octets attendue" } }?.let { "install=x25519|" + it.joinToString("") { b -> "%02x".format(b) } })).joinToString("\n")
 
-    fun parseDeviceInfo(text: String): Triple<String, Int, Fingerprints>? = runCatching {
-        val lines = text.split('\n')
-        val code = DeviceCode.parse(lines[0].removePrefix("code=")) ?: return null
+    /**
+     * The device request: [code], [k], the factors [fp], the installation's public key [installPub] (null for a request from an old TV) and the `key=value` lines this version does not
+     * know ([unknown], kept verbatim, ignored: a newer TV may add lines). The first three components keep the shape of the old `Triple` for destructuring.
+     */
+    data class DeviceInfo(val code: String, val k: Int, val fp: Fingerprints, val installPub: ByteArray? = null, val unknown: List<String> = emptyList()) {
+        /** Old `Triple` accessors, so callers written before the installation key still compile; new code uses the names. */
+        val first: String get() = code
+        val second: Int get() = k
+        val third: Fingerprints get() = fp
+    }
+
+    /**
+     * Reads a device request. Null if the code or k is missing or unreadable, a `factor=` or `install=x25519|` line is malformed, or a line has no `=`. Blank lines and CRLF are
+     * tolerated, unknown `key=value` lines are ignored (listed in [DeviceInfo.unknown]), an `install=` with another algorithm is unknown too.
+     */
+    fun parseDeviceInfo(text: String): DeviceInfo? = runCatching {
+        val lines = text.replace("\r", "").split('\n').map { it.trim() }.filter { it.isNotEmpty() }
+        if (lines.size < 2) return null
+        val code = DeviceCode.parse(lines[0].removePrefix("code=").takeIf { lines[0].startsWith("code=") } ?: return null) ?: return null
+        if (!lines[1].startsWith("k=")) return null
         val k = lines[1].removePrefix("k=").toInt()
-        Triple(code, k, Fingerprints(lines.drop(2).associate { l -> l.removePrefix("factor=").split('|').let { FactorKind.valueOf(it[0]) to it[1] } }))
+        val factors = LinkedHashMap<FactorKind, String>(); var installPub: ByteArray? = null; val unknown = ArrayList<String>()
+        for (l in lines.drop(2)) {
+            val eq = l.indexOf('='); if (eq <= 0) return null
+            val key = l.substring(0, eq); val value = l.substring(eq + 1)
+            when {
+                key == "factor" -> value.split('|').let { if (it.size != 2 || it[1].isEmpty()) return null; factors[FactorKind.valueOf(it[0])] = it[1] }
+                key == "install" && value.startsWith("x25519|") -> {
+                    val h = value.removePrefix("x25519|")
+                    if (installPub != null || h.length != 64 || !h.all { it in '0'..'9' || it in 'a'..'f' }) return null
+                    installPub = h.chunked(2).map { it.toInt(16).toByte() }.toByteArray()
+                }
+                else -> unknown += l
+            }
+        }
+        DeviceInfo(code, k, Fingerprints(factors), installPub, unknown)
     }.getOrNull()
+
+    /** The old shape (code, k, fingerprints): tolerates an `install=` line, refuses any other unknown line as before. */
+    @Deprecated("utiliser parseDeviceInfo (DeviceInfo)")
+    fun parseDeviceInfoLegacy(text: String): Triple<String, Int, Fingerprints>? = parseDeviceInfo(text)?.takeIf { it.unknown.isEmpty() }?.let { Triple(it.code, it.k, it.fp) }
 }

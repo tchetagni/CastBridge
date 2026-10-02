@@ -2,15 +2,18 @@ package castbridge.core.owner
 
 import castbridge.core.lots.Right
 
-/** What a TV tells the owner (the « demande d'appareil », frame DEVICE_INFO): its code, k and the fingerprints of its factors. */
-class DeviceRequest(val code: String, val k: Int, val factors: Fingerprints) {
+/**
+ * What a TV tells the owner (the « demande d'appareil », frame DEVICE_INFO): its code, k, the fingerprints of its factors and, from a TV that has one, the public key of its
+ * installation ([installPub], X25519: the rental keys are boxed for it). Null = a request from an old TV.
+ */
+class DeviceRequest(val code: String, val k: Int, val factors: Fingerprints, val installPub: ByteArray? = null) {
     companion object {
         /** From the TV's text (`code=…` / `k=…` / `factor=TYPE|hash` lines). Tolerates CRLF and blank lines. */
         fun parse(text: String): DeviceRequest {
             val clean = text.replace("\r", "").lines().map { it.trim() }.filter { it.isNotEmpty() }.joinToString("\n")
-            val (code, k, fp) = OwnerFrames.parseDeviceInfo(clean) ?: throw IssueException("Demande d'appareil illisible : attendu « code=… », « k=… » puis des lignes « factor=TYPE|empreinte »")
-            if (code != DeviceCode.of(fp)) throw IssueException("Le code d'appareil ne correspond pas aux empreintes : demande corrompue ou modifiée")
-            return DeviceRequest(code, k, fp)
+            val info = OwnerFrames.parseDeviceInfo(clean) ?: throw IssueException("Demande d'appareil illisible : attendu « code=… », « k=… » puis des lignes « factor=TYPE|empreinte » (et « install=x25519|… » pour une CastBridge-TV récente)")
+            if (info.code != DeviceCode.of(info.fp)) throw IssueException("Le code d'appareil ne correspond pas aux empreintes : demande corrompue ou modifiée")
+            return DeviceRequest(info.code, info.k, info.fp, info.installPub)
         }
     }
 }
@@ -27,6 +30,8 @@ class IssueSpec(
     val usageDays: Int? = null,
     /** A TRIAL key carries the one-time 12 h window of rented lots ([RentalLines.TRIAL_PRODUCT]); needs [rentalMaster]. The owner's tools turn it on for every trial key. */
     val trialLots: Boolean = false,
+    /** Wrap the rental keys in the weak v1 box (old TV without an installation key): honoured only before [castbridge.core.lots.RentalKeys.V1_BOX_SUNSET_MS]. Default: v2 only. */
+    val boxV1: Boolean = false,
 )
 
 /**
@@ -37,13 +42,23 @@ data class RentalSpec(val productId: String, val bundleIds: List<String>, val da
 
 /** The ONE place a [RentalSpec] becomes a signed-ready [Right.Rental] (desk tool, owner phone console and server port all go through it). */
 object RentalIssuing {
-    /** [period] null = a new rental starting at [issuedAt]; the key is derived from [master], the licence, the seat, the product and the period, then boxed for the device. */
-    fun right(r: RentalSpec, issuedAt: Long, license: String, seat: String, device: Fingerprints, master: ByteArray): Right.Rental {
+    /**
+     * [period] null = a new rental starting at [issuedAt]; the key is derived from [master], the licence, the seat, the product and the period, then boxed. With [installPub] the box is v2
+     * (only that installation opens it; [ephSeed] = 32 random bytes, a fresh `SecureRandom` one when null; a vector fixes it). Without [installPub]: v1 only if [allowV1] and [issuedAt]
+     * is before the v1 sunset, otherwise an [IssueException] asks for a CastBridge-TV update.
+     */
+    fun right(r: RentalSpec, issuedAt: Long, license: String, seat: String, device: Fingerprints, master: ByteArray, installPub: ByteArray? = null, ephSeed: ByteArray? = null, allowV1: Boolean = false): Right.Rental {
         val period = r.period ?: issuedAt
         if (period > issuedAt) throw IssueException("Location : la période à prolonger ne peut pas être dans le futur")
         val key = castbridge.core.lots.RentalKeys.rentalKey(master, license, seat, r.productId, period)
-        return Right.Rental(r.productId, r.bundleIds.sorted(), issuedAt, period, r.days, r.graceDays * DAY_MS, r.maxUsageMinutes, r.maxConcurrent,
-            castbridge.core.lots.RentalKeys.makeBox(device, DeviceIdentity.kFor(device.n), key, r.productId, period))
+        val box = when {
+            installPub != null -> try {
+                castbridge.core.lots.RentalKeys.makeBoxV2(installPub, key, r.productId, period, ephSeed ?: ByteArray(32).also { java.security.SecureRandom().nextBytes(it) })
+            } catch (e: IllegalArgumentException) { throw IssueException("Clé d'installation invalide : la demande de la TV est corrompue ou modifiée") }
+            allowV1 && castbridge.core.lots.RentalKeys.isV1Accepted(issuedAt) -> castbridge.core.lots.RentalKeys.makeBox(device, DeviceIdentity.kFor(device.n), key, r.productId, period)
+            else -> throw IssueException("Cette TV n'a pas fourni sa clé d'installation : mettez CastBridge-TV à jour, ou forcez l'enveloppe v1 (TV ancienne)")
+        }
+        return Right.Rental(r.productId, r.bundleIds.sorted(), issuedAt, period, r.days, r.graceDays * DAY_MS, r.maxUsageMinutes, r.maxConcurrent, box)
     }
 }
 
@@ -109,7 +124,7 @@ class LicensedIssuer(
             // production without a typed licence: a NEW licence (1 seat) with a generated id, then the usual flow
             val id = generateSequence { LicenseIds.generate() }.first { id -> LicenseBook.replay(events(), ring()).licenses.keys.none { it == id } }
             createLicense(id, 1, at = issuedAt - 1)      // 1 ms earlier: the registry replays by date, the licence must come before its first seat
-            return issue(device, IssueSpec(spec.kind, spec.subject, spec.rights, id, spec.windowHours, spec.notBefore, spec.issuedAt, spec.seat, spec.nonce, spec.rentals, spec.rentalMaster, spec.rentalCheck, spec.usageDays, spec.trialLots))
+            return issue(device, IssueSpec(spec.kind, spec.subject, spec.rights, id, spec.windowHours, spec.notBefore, spec.issuedAt, spec.seat, spec.nonce, spec.rentals, spec.rentalMaster, spec.rentalCheck, spec.usageDays, spec.trialLots, spec.boxV1))
         }
         var seat = spec.seat; var reused = false; var left: Int? = null
         val current = events()
@@ -131,7 +146,7 @@ class LicensedIssuer(
             val theSeat = seat ?: SeatIds.of(spec.license, device.factors)
             spec.rights + rentals.map { r ->
                 spec.rentalCheck?.invoke(r)?.let { throw IssueException(it) }
-                RentalIssuing.right(r, issuedAt, spec.license, theSeat, device.factors, master)
+                RentalIssuing.right(r, issuedAt, spec.license, theSeat, device.factors, master, device.installPub, null, spec.boxV1)
             }
         }
         val days = when (spec.kind) {

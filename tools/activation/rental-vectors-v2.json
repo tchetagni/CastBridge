@@ -1,0 +1,436 @@
+{
+  "format": "castbridge-rental-vectors-v2",
+  "warning": "CLÉS, APPAREILS, INSTALLATIONS ET SECRET DE TEST dérivés de textes publics : ne protègent rien. Voir docs/coordination/DESIGN-W4-ENVELOPPE-LOCATIONS.md § 5 et § 6.",
+  "master": "80831ae0b94302f30b4af422a5cb3779df4017f83820d8dd9ee609bafa90ea64",
+  "keys": [
+    {
+      "name": "desk",
+      "seed": "282562d9a2f66647a16e498fad69a8ee6ecdf4877988c39aa2cb3684c1fc84e5",
+      "scopes": ["COMMAND_OPEN_ALL", "COMMAND_SUPPORT", "COMMAND_UNLOCK", "ISSUE_PRODUCTION", "ISSUE_TRIAL", "POLICY", "REACTIVATE", "REGISTRY", "REVOKE", "SUPER_UNLIMITED", "TRANSFER"]
+    },
+    {
+      "name": "server",
+      "seed": "ced7caf1bbc488963ca2a19872cffd226fa544dd77a025d6b02f1faa1e957fdb",
+      "scopes": ["ISSUE_PRODUCTION", "REACTIVATE", "REGISTRY"]
+    },
+    {
+      "name": "noprod",
+      "seed": "1e9edc07e23a5f68c0d5393760c9b2b926a1f8ac5d53c45183ffad7ae36312a9",
+      "scopes": ["COMMAND_SUPPORT"]
+    }
+  ],
+  "devices": [
+    {
+      "name": "tvA",
+      "raw": {
+        "flashSerial": "FLASHSERIAL-R1",
+        "flashCid": "cid-r1",
+        "ethernetMac": "AA:BB:CC:00:22:01",
+        "wifiMac": "10:20:30:40:60:01",
+        "wifiSysfsPath": "/sys/devices/platform/soc/ffe03000.sd/mmc_host/mmc1/mmc1:0001/net/wlan0",
+        "systemSerial": "SYSR0001",
+        "bluetoothAddress": "11:22:33:44:66:01"
+      }
+    },
+    {
+      "name": "tvB",
+      "raw": {
+        "flashSerial": "FLASHSERIAL-R2",
+        "flashCid": "cid-r2",
+        "ethernetMac": "AA:BB:CC:00:22:02",
+        "wifiMac": "10:20:30:40:60:02",
+        "wifiSysfsPath": "/sys/devices/platform/soc/ffe03000.sd/mmc_host/mmc1/mmc1:0001/net/wlan0",
+        "systemSerial": "SYSR0002",
+        "bluetoothAddress": "11:22:33:44:66:02"
+      }
+    }
+  ],
+  "installs": [
+    {
+      "name": "tvA-install-1",
+      "seed": "bf3b44eca07766f1857ef673625517cf65d0ef17eb189d0d84ce4c7d55cd6081"
+    },
+    {
+      "name": "tvA-install-2",
+      "seed": "72c2efc1eb502b583e5f733aa3b2fcb0bef4f58d69ae5066465f4f05bdfcf57a"
+    },
+    {
+      "name": "tvB-install-1",
+      "seed": "0c979ecd3e9fe24f183c8ace30c728b3e4d5e0681e9909abca11d9fedda63fea"
+    }
+  ],
+  "cases": [
+    {
+      "id": "x25519-rfc7748-5-2-first",
+      "type": "x25519",
+      "scalar": "a546e36bf0527c9d3b16154b82465edd62144c0ac1fc5a18506a2244ba449ac4",
+      "u": "e6db6867583030db3594c1a424b15f7c726624ec26b3353b10a903a6d0ab1c4c",
+      "expect": {
+        "out": "c3da55379de9c6908e94ea4df28d084f32eccf03491c71f754b4075577a28552"
+      }
+    },
+    {
+      "id": "x25519-rfc7748-5-2-second",
+      "type": "x25519",
+      "scalar": "4b66e9d4d1b4673c5ad22691957d6af5c11b6421e0ea01d42ca4169e7918ba0d",
+      "u": "e5210f12786811d3f4b7959d0538ae2c31dbe7106fc03c3efc4cd549c715a493",
+      "expect": {
+        "out": "95cbde9476e8907d7aade45cb4b873f88b595a68799fa152e6f8f7647aac7957"
+      }
+    },
+    {
+      "id": "x25519-rfc7748-6-1-alice-public",
+      "type": "x25519",
+      "scalar": "77076d0a7318a57d3c16c17251b26645df4c2f87ebc0992ab177fba51db92c2a",
+      "u": "0900000000000000000000000000000000000000000000000000000000000000",
+      "expect": {
+        "out": "8520f0098930a754748b7ddcb43ef75a0dbf3a0d26381af4eba4a98eaa9b4e6a"
+      }
+    },
+    {
+      "id": "x25519-rfc7748-6-1-bob-public",
+      "type": "x25519",
+      "scalar": "5dab087e624a8a4b79e17f8b83800ee66f3bb1292618b6fd1c2f8b27ff88e0eb",
+      "u": "0900000000000000000000000000000000000000000000000000000000000000",
+      "expect": {
+        "out": "de9edb7d7b7dc1b4d35b61c2ece435373f8343c85b78674dadfc7e146f882b4f"
+      }
+    },
+    {
+      "id": "x25519-rfc7748-6-1-shared-alice",
+      "type": "x25519-shared",
+      "priv": "77076d0a7318a57d3c16c17251b26645df4c2f87ebc0992ab177fba51db92c2a",
+      "pub": "de9edb7d7b7dc1b4d35b61c2ece435373f8343c85b78674dadfc7e146f882b4f",
+      "expect": {
+        "shared": "4a5d9d5ba4ce2de1728e3bf480350f25e07e21c947d19e3376f09b3c1e161742"
+      }
+    },
+    {
+      "id": "x25519-rfc7748-6-1-shared-bob",
+      "type": "x25519-shared",
+      "priv": "5dab087e624a8a4b79e17f8b83800ee66f3bb1292618b6fd1c2f8b27ff88e0eb",
+      "pub": "8520f0098930a754748b7ddcb43ef75a0dbf3a0d26381af4eba4a98eaa9b4e6a",
+      "expect": {
+        "shared": "4a5d9d5ba4ce2de1728e3bf480350f25e07e21c947d19e3376f09b3c1e161742"
+      }
+    },
+    {
+      "id": "x25519-small-order-zero-refused",
+      "type": "x25519-shared",
+      "priv": "77076d0a7318a57d3c16c17251b26645df4c2f87ebc0992ab177fba51db92c2a",
+      "pub": "0000000000000000000000000000000000000000000000000000000000000000",
+      "expect": {
+        "refused": true
+      }
+    },
+    {
+      "id": "x25519-small-order-eight-refused",
+      "type": "x25519-shared",
+      "priv": "77076d0a7318a57d3c16c17251b26645df4c2f87ebc0992ab177fba51db92c2a",
+      "pub": "e0eb7a7c3b41b8ae1656e3faf19fc46ada098deb9c32b1fd866205165f49b800",
+      "expect": {
+        "refused": true
+      }
+    },
+    {
+      "id": "install-key-tvA-install-1",
+      "type": "install-key",
+      "install": "tvA-install-1",
+      "expect": {
+        "pub": "d3e2458779a517a279c2d5a9e10571e5cd4e56d4944a63f31b69c20167e2692b",
+        "installId": "4eb3d71317167cd8"
+      }
+    },
+    {
+      "id": "install-key-tvA-install-2",
+      "type": "install-key",
+      "install": "tvA-install-2",
+      "expect": {
+        "pub": "ce6b0e191e1c7156aa49883bb5eb8baf330cc61615279ec6a36d2801575efa6e",
+        "installId": "783fef8928a3e473"
+      }
+    },
+    {
+      "id": "box-v2",
+      "type": "box-v2",
+      "request": {
+        "device": "tvA",
+        "install": "tvA-install-1",
+        "other": null,
+        "license": "lic-loc-1",
+        "product": "loc-cm2",
+        "period": 1800000000000,
+        "ephSeed": "5a56f8c274e878ae0783ded80ba0234064e16ddb1dbfd708b57aad4a0268f141"
+      },
+      "expect": {
+        "box": "v2:saa72foBDAqkHftYKlybUzkT-pjNmTsh7jPaKokOa0c:r1iPrNKv3f7I330jdsSDesUlC90iwcAv66HmdP_mPWPsiGUDbjFh92o35g0hHWt4MBkDq2oCL0hegExO",
+        "keyFingerprint": "10c06299fdfc0038"
+      }
+    },
+    {
+      "id": "box-v2-other-install",
+      "type": "box-v2",
+      "request": {
+        "device": "tvA",
+        "install": "tvA-install-1",
+        "other": "tvA-install-2",
+        "license": "lic-loc-1",
+        "product": "loc-cm2",
+        "period": 1800000000000,
+        "ephSeed": "5a56f8c274e878ae0783ded80ba0234064e16ddb1dbfd708b57aad4a0268f141"
+      },
+      "expect": {
+        "box": "v2:saa72foBDAqkHftYKlybUzkT-pjNmTsh7jPaKokOa0c:r1iPrNKv3f7I330jdsSDesUlC90iwcAv66HmdP_mPWPsiGUDbjFh92o35g0hHWt4MBkDq2oCL0hegExO",
+        "keyFingerprint": "10c06299fdfc0038"
+      }
+    },
+    {
+      "id": "box-v2-reissue",
+      "type": "box-v2-reissue",
+      "request": {
+        "device": "tvA",
+        "installA": "tvA-install-1",
+        "installB": "tvA-install-2",
+        "license": "lic-loc-1",
+        "product": "loc-cm2",
+        "period": 1800000000000,
+        "ephSeedA": "b144719c476ca83492d518af3b8ec8991ce180650d9864c4166fe71c6d2edab7",
+        "ephSeedB": "a8127348cee6d06b58d9b4416132823df424bf24771a7f2670fe85c8e4fc6d49"
+      },
+      "expect": {
+        "boxA": "v2:LzimYPK6aY9SdwAfmrB5FBJDZN0wULD2xp6QVnvh82Q:nqatEUGUORhnbblAPg0QCpSjqtRyc3XNpQy8cjbGA4oTjaVpFAHKdo8_UYdSQedlbQcbSWGFuXgTKAWE",
+        "boxB": "v2:Y_Ib5K6-JsyseXJ7oIsBkAVL5bsP_fDsAWJjlPsZnEo:YC4ah6urmGyDbfz5RDWErYGhQPkI_XBfQt0PEm44eIXIbOJIm6plHk7HGILjkhxxO305K4PrVvtSL6SW",
+        "keyFingerprint": "10c06299fdfc0038"
+      }
+    },
+    {
+      "id": "box-v2-mixed-with-v1-refused",
+      "type": "box-v2-mixed",
+      "request": {
+        "device": "tvA",
+        "install": "tvA-install-1",
+        "other": null,
+        "license": "lic-loc-1",
+        "product": "loc-cm2",
+        "period": 1800000000000,
+        "ephSeed": "5a56f8c274e878ae0783ded80ba0234064e16ddb1dbfd708b57aad4a0268f141"
+      },
+      "expect": {
+        "box": "v2:saa72foBDAqkHftYKlybUzkT-pjNmTsh7jPaKokOa0c:r1iPrNKv3f7I330jdsSDesUlC90iwcAv66HmdP_mPWPsiGUDbjFh92o35g0hHWt4MBkDq2oCL0hegExO;BLUETOOTH+ETHERNET+FLASH+SYSTEM_SERIAL:8Fo9biO61iYdfxhbQmgrE-xwjE4S1B2wSOek11OIxC0cjB4GZJzZuDANdO5yyyM-JOWKzWUirxsKEc-N;BLUETOOTH+ETHERNET+FLASH+WIFI:wpZ04CfZ86K0lvJKOv6CreBqWWRiLQQtMqeiqfPEO5L9hiVEgEzRo_ksaKUvXLxsIdTdeDZoXTSWe83U;BLUETOOTH+ETHERNET+SYSTEM_SERIAL+WIFI:NeRVcUXfp6NR2H-qoG8KjkjOMtSPLxq7rJEAXbYk9ojtVzLdI6cDl17d1uBtYW-hDFNuCk1nBbSydvWF;BLUETOOTH+FLASH+SYSTEM_SERIAL+WIFI:TtBB89SX22dg26N5wpuTErHUDPIHQPkI6w33lxDWrC8n_ULKCDt74FcxJ2kP6_elZ69ZENEOCIdisxti;ETHERNET+FLASH+SYSTEM_SERIAL+WIFI:xCVnSQpqWmXyPKDhxnKBmNgxe8rG9bB3WPMzJM7Uzt792fyBJsPUHXEHpWB3oJuXURNIjWv9IDrjLLAS"
+      }
+    },
+    {
+      "id": "box-v1-sunset",
+      "type": "box-v1-sunset",
+      "request": {
+        "device": "tvA",
+        "license": "lic-loc-1",
+        "product": "loc-cm2",
+        "period": 1800000000000
+      },
+      "expect": {
+        "box": "BLUETOOTH+ETHERNET+FLASH+SYSTEM_SERIAL:8Fo9biO61iYdfxhbQmgrE-xwjE4S1B2wSOek11OIxC0cjB4GZJzZuDANdO5yyyM-JOWKzWUirxsKEc-N;BLUETOOTH+ETHERNET+FLASH+WIFI:wpZ04CfZ86K0lvJKOv6CreBqWWRiLQQtMqeiqfPEO5L9hiVEgEzRo_ksaKUvXLxsIdTdeDZoXTSWe83U;BLUETOOTH+ETHERNET+SYSTEM_SERIAL+WIFI:NeRVcUXfp6NR2H-qoG8KjkjOMtSPLxq7rJEAXbYk9ojtVzLdI6cDl17d1uBtYW-hDFNuCk1nBbSydvWF;BLUETOOTH+FLASH+SYSTEM_SERIAL+WIFI:TtBB89SX22dg26N5wpuTErHUDPIHQPkI6w33lxDWrC8n_ULKCDt74FcxJ2kP6_elZ69ZENEOCIdisxti;ETHERNET+FLASH+SYSTEM_SERIAL+WIFI:xCVnSQpqWmXyPKDhxnKBmNgxe8rG9bB3WPMzJM7Uzt792fyBJsPUHXEHpWB3oJuXURNIjWv9IDrjLLAS",
+        "sunsetMs": 1798761600000
+      }
+    },
+    {
+      "id": "request-v2",
+      "type": "request-v2",
+      "text": "code=ZVC7-1J34-ZBZ3-824H\nk=4\nfactor=FLASH|9dc7948c4874480eb372d1ace3507d3d\nfactor=ETHERNET|404e3572c99c4b4ae3634a243de940b6\nfactor=WIFI|ceecc8b33286ea22cbe77bcc0be30317\nfactor=SYSTEM_SERIAL|e0e2c0ae5883e5d5956a6699cd5e8e85\nfactor=BLUETOOTH|bbc329e2a1e38fb9c1cbe0632650b4fa\ninstall=x25519|d3e2458779a517a279c2d5a9e10571e5cd4e56d4944a63f31b69c20167e2692b",
+      "expect": {
+        "code": "ZVC7-1J34-ZBZ3-824H",
+        "k": 4,
+        "installPub": "d3e2458779a517a279c2d5a9e10571e5cd4e56d4944a63f31b69c20167e2692b",
+        "factors": ["FLASH|9dc7948c4874480eb372d1ace3507d3d", "ETHERNET|404e3572c99c4b4ae3634a243de940b6", "WIFI|ceecc8b33286ea22cbe77bcc0be30317", "SYSTEM_SERIAL|e0e2c0ae5883e5d5956a6699cd5e8e85", "BLUETOOTH|bbc329e2a1e38fb9c1cbe0632650b4fa"],
+        "unknown": []
+      }
+    },
+    {
+      "id": "request-v1-old-tv-no-install",
+      "type": "request-v2",
+      "text": "code=ZVC7-1J34-ZBZ3-824H\nk=4\nfactor=FLASH|9dc7948c4874480eb372d1ace3507d3d\nfactor=ETHERNET|404e3572c99c4b4ae3634a243de940b6\nfactor=WIFI|ceecc8b33286ea22cbe77bcc0be30317\nfactor=SYSTEM_SERIAL|e0e2c0ae5883e5d5956a6699cd5e8e85\nfactor=BLUETOOTH|bbc329e2a1e38fb9c1cbe0632650b4fa",
+      "expect": {
+        "code": "ZVC7-1J34-ZBZ3-824H",
+        "k": 4,
+        "installPub": null,
+        "factors": ["FLASH|9dc7948c4874480eb372d1ace3507d3d", "ETHERNET|404e3572c99c4b4ae3634a243de940b6", "WIFI|ceecc8b33286ea22cbe77bcc0be30317", "SYSTEM_SERIAL|e0e2c0ae5883e5d5956a6699cd5e8e85", "BLUETOOTH|bbc329e2a1e38fb9c1cbe0632650b4fa"],
+        "unknown": []
+      }
+    },
+    {
+      "id": "request-v2-unknown-line-ignored",
+      "type": "request-v2",
+      "text": "code=ZVC7-1J34-ZBZ3-824H\nk=4\nfactor=FLASH|9dc7948c4874480eb372d1ace3507d3d\nfactor=ETHERNET|404e3572c99c4b4ae3634a243de940b6\nfactor=WIFI|ceecc8b33286ea22cbe77bcc0be30317\nfactor=SYSTEM_SERIAL|e0e2c0ae5883e5d5956a6699cd5e8e85\nfactor=BLUETOOTH|bbc329e2a1e38fb9c1cbe0632650b4fa\ninstall=x25519|d3e2458779a517a279c2d5a9e10571e5cd4e56d4944a63f31b69c20167e2692b\nfuture=1",
+      "expect": {
+        "code": "ZVC7-1J34-ZBZ3-824H",
+        "k": 4,
+        "installPub": "d3e2458779a517a279c2d5a9e10571e5cd4e56d4944a63f31b69c20167e2692b",
+        "factors": ["FLASH|9dc7948c4874480eb372d1ace3507d3d", "ETHERNET|404e3572c99c4b4ae3634a243de940b6", "WIFI|ceecc8b33286ea22cbe77bcc0be30317", "SYSTEM_SERIAL|e0e2c0ae5883e5d5956a6699cd5e8e85", "BLUETOOTH|bbc329e2a1e38fb9c1cbe0632650b4fa"],
+        "unknown": ["future=1"]
+      }
+    },
+    {
+      "id": "request-v2-bad-install-refused",
+      "type": "request-v2",
+      "text": "code=ZVC7-1J34-ZBZ3-824H\nk=4\nfactor=FLASH|9dc7948c4874480eb372d1ace3507d3d\nfactor=ETHERNET|404e3572c99c4b4ae3634a243de940b6\nfactor=WIFI|ceecc8b33286ea22cbe77bcc0be30317\nfactor=SYSTEM_SERIAL|e0e2c0ae5883e5d5956a6699cd5e8e85\nfactor=BLUETOOTH|bbc329e2a1e38fb9c1cbe0632650b4fa\ninstall=x25519|1234",
+      "expect": {
+        "unreadable": true
+      }
+    },
+    {
+      "id": "build-activation-v2",
+      "type": "build-activation-v2",
+      "signer": "desk",
+      "request": {
+        "device": "tvA",
+        "install": "tvA-install-1",
+        "license": "lic-loc-1",
+        "issuedAt": 1800000000000,
+        "windowHours": 48,
+        "nonce": "00112233445566778899aabbccddeeff",
+        "ephSeed": "28d004400df3c8faf331c527b7868cc31c9a6edce39c12194d811c3e83fee2aa",
+        "rentals": [
+          {
+            "product": "loc-cm2",
+            "bundles": ["classe-cm2"],
+            "startsAt": 1800000000000,
+            "period": 1800000000000,
+            "days": 30,
+            "graceMs": 0,
+            "usage": 0,
+            "concurrent": 0
+          }
+        ]
+      },
+      "expect": {
+        "token": "cbx1.Y2FzdGJyaWRnZS1lbnZlbG9wZS12MQp0eXBlPWFjdGl2YXRpb24Ka2lkPWU3YTM3Mzc0ODA1Y2VlMzIKc2VxPTE4MDAwMDAwMDAwMDAKbm9uY2U9MDAxMTIyMzM0NDU1NjY3Nzg4OTlhYWJiY2NkZGVlZmYKaXNzdWVkQXQ9MTgwMDAwMDAwMDAwMApub3RCZWZvcmU9MTgwMDAwMDAwMDAwMApleHBpcmVzQXQ9MTgwMDE3MjgwMDAwMAp0YXJnZXQ9ZGV2aWNlCms9NApmYWN0b3I9RkxBU0h8OWRjNzk0OGM0ODc0NDgwZWIzNzJkMWFjZTM1MDdkM2QKZmFjdG9yPUVUSEVSTkVUfDQwNGUzNTcyYzk5YzRiNGFlMzYzNGEyNDNkZTk0MGI2CmZhY3Rvcj1XSUZJfGNlZWNjOGIzMzI4NmVhMjJjYmU3N2JjYzBiZTMwMzE3CmZhY3Rvcj1TWVNURU1fU0VSSUFMfGUwZTJjMGFlNTg4M2U1ZDU5NTZhNjY5OWNkNWU4ZTg1CmZhY3Rvcj1CTFVFVE9PVEh8YmJjMzI5ZTJhMWUzOGZiOWMxY2JlMDYzMjY1MGI0ZmEKLS0Ka2luZD1wcm9kdWN0aW9uCnN1YmplY3Q9dHYKbGljZW5zZT1saWMtbG9jLTEKc2VhdD05MzA4OTAyNzQxODQ1MzA1CnJpZ2h0PXJlbnRhbHxsb2MtY20yfGNsYXNzZS1jbTJ8MTgwMDAwMDAwMDAwMHwxODAwMDAwMDAwMDAwfDMwfDB8MHwwfHYyOkN6Y2ktMjVWQ25LOUJfd3ZlRDlyUi1wSV80ZFNxUURfMFg0Q3VHLUZBbTg6MFo4bjNSV01XMzhPVWVRTWRpbG96emxySUZRaXZqamF3NmFSRzlrVHBVbVZfWm9uZjJmSUhMX2hBV3RZVFdRejA1TnBZd2xuZlpiVE5WSnM./RIeF9nMMdnG7b7rJvOTvbUG+Sqdqhwst/6p/mlIH1qMgwbGWn44+b8wi9A2HYi64d0XJnmsxEZI7KdJ22m6AA=="
+      }
+    },
+    {
+      "id": "build-activation-v2-two-rentals",
+      "type": "build-activation-v2",
+      "signer": "desk",
+      "request": {
+        "device": "tvA",
+        "install": "tvA-install-1",
+        "license": "lic-loc-1",
+        "issuedAt": 1800000000000,
+        "windowHours": 48,
+        "nonce": "00112233445566778899aabbccddeeff",
+        "ephSeed": "c5921a22cc069cbff4a4370f9644726cccc462d8e361bc37bb3858343aa6d012",
+        "rentals": [
+          {
+            "product": "loc-a",
+            "bundles": ["classe-cm2"],
+            "startsAt": 1800000000000,
+            "period": 1800000000000,
+            "days": 30,
+            "graceMs": 0,
+            "usage": 0,
+            "concurrent": 0
+          },
+          {
+            "product": "loc-b",
+            "bundles": ["quiz-cm2"],
+            "startsAt": 1800000000000,
+            "period": 1800000000000,
+            "days": 90,
+            "graceMs": 0,
+            "usage": 0,
+            "concurrent": 0
+          }
+        ]
+      },
+      "expect": {
+        "token": "cbx1.Y2FzdGJyaWRnZS1lbnZlbG9wZS12MQp0eXBlPWFjdGl2YXRpb24Ka2lkPWU3YTM3Mzc0ODA1Y2VlMzIKc2VxPTE4MDAwMDAwMDAwMDAKbm9uY2U9MDAxMTIyMzM0NDU1NjY3Nzg4OTlhYWJiY2NkZGVlZmYKaXNzdWVkQXQ9MTgwMDAwMDAwMDAwMApub3RCZWZvcmU9MTgwMDAwMDAwMDAwMApleHBpcmVzQXQ9MTgwMDE3MjgwMDAwMAp0YXJnZXQ9ZGV2aWNlCms9NApmYWN0b3I9RkxBU0h8OWRjNzk0OGM0ODc0NDgwZWIzNzJkMWFjZTM1MDdkM2QKZmFjdG9yPUVUSEVSTkVUfDQwNGUzNTcyYzk5YzRiNGFlMzYzNGEyNDNkZTk0MGI2CmZhY3Rvcj1XSUZJfGNlZWNjOGIzMzI4NmVhMjJjYmU3N2JjYzBiZTMwMzE3CmZhY3Rvcj1TWVNURU1fU0VSSUFMfGUwZTJjMGFlNTg4M2U1ZDU5NTZhNjY5OWNkNWU4ZTg1CmZhY3Rvcj1CTFVFVE9PVEh8YmJjMzI5ZTJhMWUzOGZiOWMxY2JlMDYzMjY1MGI0ZmEKLS0Ka2luZD1wcm9kdWN0aW9uCnN1YmplY3Q9dHYKbGljZW5zZT1saWMtbG9jLTEKc2VhdD05MzA4OTAyNzQxODQ1MzA1CnJpZ2h0PXJlbnRhbHxsb2MtYXxjbGFzc2UtY20yfDE4MDAwMDAwMDAwMDB8MTgwMDAwMDAwMDAwMHwzMHwwfDB8MHx2MjpTcXpTV3hSMEZwbGNDNHVmQklGX2dLanJScmJvS01kbXlvZVNybVM0RFJjOmpJVWxLX0NtQUtQdTFwR1hEcEhPQm1Kd0hVdjJHYThRLTRoYmVqdmtqRWRBZ2hmV2I0cUJ1UTNBY0NzOTBvT3M1TXJDN1d6RURsY3lTcVFJCnJpZ2h0PXJlbnRhbHxsb2MtYnxxdWl6LWNtMnwxODAwMDAwMDAwMDAwfDE4MDAwMDAwMDAwMDB8OTB8MHwwfDB8djI6U3F6U1d4UjBGcGxjQzR1ZkJJRl9nS2pyUnJib0tNZG15b2VTcm1TNERSYzpoUHdiUEVwbTBSNGZoRmg4QU5SZUt3emd6U09ONUdoNVFPaVozYWhXNkg2dDZNV0h0X05ScWg1YmVOcEZQTUxnRjBWNFFFMExwWGRTeExkOQ.e6zTvFHRt3ncx4jhibjJoXcP7Qpdc0QDtToFYoE5k47U7//5j93CJxpCEricX16T6PgskjsfbZ9Zi1lkTlNXCw=="
+      }
+    },
+    {
+      "id": "build-activation-v2-renewal-keeps-period",
+      "type": "build-activation-v2",
+      "signer": "desk",
+      "request": {
+        "device": "tvA",
+        "install": "tvA-install-2",
+        "license": "lic-loc-1",
+        "issuedAt": 1800000000000,
+        "windowHours": 48,
+        "nonce": "00112233445566778899aabbccddeeff",
+        "ephSeed": "a9b2082770f20df8cd9245cb2ee858493226d377fdcb77a268a1e74d4ffb8428",
+        "rentals": [
+          {
+            "product": "loc-cm2",
+            "bundles": ["classe-cm2"],
+            "startsAt": 1801728000000,
+            "period": 1800000000000,
+            "days": 30,
+            "graceMs": 0,
+            "usage": 0,
+            "concurrent": 0
+          }
+        ]
+      },
+      "expect": {
+        "token": "cbx1.Y2FzdGJyaWRnZS1lbnZlbG9wZS12MQp0eXBlPWFjdGl2YXRpb24Ka2lkPWU3YTM3Mzc0ODA1Y2VlMzIKc2VxPTE4MDAwMDAwMDAwMDAKbm9uY2U9MDAxMTIyMzM0NDU1NjY3Nzg4OTlhYWJiY2NkZGVlZmYKaXNzdWVkQXQ9MTgwMDAwMDAwMDAwMApub3RCZWZvcmU9MTgwMDAwMDAwMDAwMApleHBpcmVzQXQ9MTgwMDE3MjgwMDAwMAp0YXJnZXQ9ZGV2aWNlCms9NApmYWN0b3I9RkxBU0h8OWRjNzk0OGM0ODc0NDgwZWIzNzJkMWFjZTM1MDdkM2QKZmFjdG9yPUVUSEVSTkVUfDQwNGUzNTcyYzk5YzRiNGFlMzYzNGEyNDNkZTk0MGI2CmZhY3Rvcj1XSUZJfGNlZWNjOGIzMzI4NmVhMjJjYmU3N2JjYzBiZTMwMzE3CmZhY3Rvcj1TWVNURU1fU0VSSUFMfGUwZTJjMGFlNTg4M2U1ZDU5NTZhNjY5OWNkNWU4ZTg1CmZhY3Rvcj1CTFVFVE9PVEh8YmJjMzI5ZTJhMWUzOGZiOWMxY2JlMDYzMjY1MGI0ZmEKLS0Ka2luZD1wcm9kdWN0aW9uCnN1YmplY3Q9dHYKbGljZW5zZT1saWMtbG9jLTEKc2VhdD05MzA4OTAyNzQxODQ1MzA1CnJpZ2h0PXJlbnRhbHxsb2MtY20yfGNsYXNzZS1jbTJ8MTgwMDAwMDAwMDAwMHwxODAwMDAwMDAwMDAwfDMwfDB8MHwwfHYyOkF0dzZJWDlUQk1WQlNya2U0SWdCYnNXNDlPTndyc2tLZWk3aER5TEdFQVE6bkRHWG9HUGcxS05tRERueVN1MGpiUkZhT0o3NkJIRkRTUndVVTZVX054UFNjY1lyT1VjUnk4ODFoeU5ycFdlMGlVUms1TGxXamw5c05CRzU.aZ1br36ruP6lu+7sN61agXPJKMoxMiubPluGdNRcBvyLUWRNbTBlXihnhLH6mS7xWPHer2AHdCcjp7Yc61ylCg=="
+      }
+    },
+    {
+      "id": "build-refuse-without-install-key",
+      "type": "build-activation-v2",
+      "signer": "desk",
+      "request": {
+        "device": "tvA",
+        "install": null,
+        "license": "lic-loc-1",
+        "issuedAt": 1800000000000,
+        "windowHours": 48,
+        "nonce": "00112233445566778899aabbccddeeff",
+        "ephSeed": "28d004400df3c8faf331c527b7868cc31c9a6edce39c12194d811c3e83fee2aa",
+        "rentals": [
+          {
+            "product": "loc-cm2",
+            "bundles": ["classe-cm2"],
+            "startsAt": 1800000000000,
+            "period": 1800000000000,
+            "days": 30,
+            "graceMs": 0,
+            "usage": 0,
+            "concurrent": 0
+          }
+        ]
+      },
+      "expect": {
+        "refused": true
+      }
+    },
+    {
+      "id": "build-refuse-key-without-production-scope",
+      "type": "build-activation-v2",
+      "signer": "noprod",
+      "request": {
+        "device": "tvA",
+        "install": "tvA-install-1",
+        "license": "lic-loc-1",
+        "issuedAt": 1800000000000,
+        "windowHours": 48,
+        "nonce": "00112233445566778899aabbccddeeff",
+        "ephSeed": "28d004400df3c8faf331c527b7868cc31c9a6edce39c12194d811c3e83fee2aa",
+        "rentals": [
+          {
+            "product": "loc-cm2",
+            "bundles": ["classe-cm2"],
+            "startsAt": 1800000000000,
+            "period": 1800000000000,
+            "days": 30,
+            "graceMs": 0,
+            "usage": 0,
+            "concurrent": 0
+          }
+        ]
+      },
+      "expect": {
+        "refused": true
+      }
+    }
+  ]
+}

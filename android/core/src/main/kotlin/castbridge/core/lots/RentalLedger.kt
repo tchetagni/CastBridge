@@ -86,7 +86,7 @@ class RentalLedger(private val dir: File, val clock: TvClock = TvClock(), val co
      * Installs the keys of the rentals of [activation] that are usable now: opens the box with the device's factors and puts the key in [vault]. A tombstoned contract is never reopened.
      * Returns, per contract, what happened (for the screen and the tests).
      */
-    fun install(activation: Activation, all: List<Activation>, device: Fingerprints, vault: RentalVault): Map<String, String> = synchronized(lock) {
+    fun install(activation: Activation, all: List<Activation>, device: Fingerprints, vault: RentalVault, install: InstallKey? = null): Map<String, String> = synchronized(lock) {
         observe(activation.issuedAt)
         val out = LinkedHashMap<String, String>()
         val statuses = status(all).associateBy { it.key }
@@ -104,8 +104,14 @@ class RentalLedger(private val dir: File, val clock: TvClock = TvClock(), val co
                 st == null || !st.usable -> if (st?.state == RentalState.EXPIRED) "terminée" else st?.state?.name?.lowercase() ?: "inconnue"
                 vault.hasKey(c.key) -> "clé déjà en place"
                 else -> {
-                    val key = RentalKeys.openBox(c.box, device, c.productId, c.period)
-                    if (key == null) "clé illisible (autre appareil ou enveloppe altérée)" else if (vault.putKey(c.key, key)) "clé installée" else "écriture impossible"
+                    // the v1 sunset is enforced from the moment the caller supplies an installation key (production path); a caller without one keeps reading v1 as before
+                    when (val res = RentalKeys.openBox(c.box, device, c.productId, c.period, install, if (install != null) activation.issuedAt else null)) {
+                        is BoxResult.Key -> if (vault.putKey(c.key, res.bytes)) "clé installée" else "écriture impossible"
+                        BoxResult.OtherInstall -> "clé enveloppée pour une autre installation de cette TV : demandez une réémission"
+                        BoxResult.V1Expired -> "enveloppe v1 périmée : refaire la clé avec un outil à jour"
+                        BoxResult.NeedsInstallKey -> "clé d'installation absente"
+                        BoxResult.Unreadable -> "clé illisible (autre appareil ou enveloppe altérée)"
+                    }
                 }
             }
         }

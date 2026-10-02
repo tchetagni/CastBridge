@@ -186,7 +186,7 @@ Le code de déverrouillage est demandé au clavier (jamais en argument) ; en scr
 
     private fun parseRequest(f: File): Triple<String, Int, Fingerprints> {
         if (!f.isFile) throw Fail("Demande introuvable : ${f.path}")
-        val r = OwnerFrames.parseDeviceInfo(f.readText().trim().replace("\r", "")) ?: throw Fail("Demande d'appareil illisible (attendu : code=…, k=…, factor=TYPE|empreinte)")
+        @Suppress("DEPRECATION") val r = OwnerFrames.parseDeviceInfoLegacy(f.readText().trim().replace("\r", "")) ?: throw Fail("Demande d'appareil illisible (attendu : code=…, k=…, factor=TYPE|empreinte)")
         if (DeviceCode.of(r.third) != r.first) throw Fail("Le code d'appareil ne correspond pas aux empreintes de la demande (fichier altéré ?)")
         return r
     }
