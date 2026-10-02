@@ -18,9 +18,13 @@ import kotlin.test.*
 class TvSshServerTest {
     private val dir = kotlin.io.path.createTempDirectory("ssh").toFile()
     private val root = File(dir, "files").apply { mkdirs() }
-    private val port = ServerSocket(0).use { it.localPort }
-    private val server = TvSshServer(File(dir, "data"), root, port = port, shell = "/bin/sh", failures = FailureTracker(3, 60_000))
-    private val client = SshClient.setUpDefaultClient().apply { start() }
+    private val clock = java.util.concurrent.atomic.AtomicLong(1_000_000L)
+    private val server = TvSshServer(File(dir, "data"), root, port = 0, shell = "/bin/sh", failures = FailureTracker(3, 60_000, { clock.get() }))
+    private val port get() = server.boundPort
+    private val client = SshClient.setUpDefaultClient().apply {
+        keyIdentityProvider = org.apache.sshd.common.keyprovider.KeyIdentityProvider.EMPTY_KEYS_PROVIDER   // never the workstation's ~/.ssh keys
+        start()
+    }
 
     private fun ecKey(): KeyPair = KeyPairGenerator.getInstance("EC").apply { initialize(256) }.generateKeyPair()
     private fun edKey(): KeyPair = net.i2p.crypto.eddsa.KeyPairGenerator().generateKeyPair()
@@ -59,11 +63,20 @@ class TvSshServerTest {
     @Test fun unknownKeyIsRefusedAndAddressGetsLocked() {
         authorize(edKey()); server.start()
         repeat(3) {
-            session(edKey()).use { s -> assertFails { s.auth().verify(5, TimeUnit.SECONDS) } }
+            session(edKey()).use { s ->
+                val e = assertFailsWith<org.apache.sshd.common.SshException> { s.auth().verify(30, TimeUnit.SECONDS) }
+                assertTrue(e.message.orEmpty().contains("No more authentication methods"), "refused by the server (publickey), not a timeout: ${e.message}")
+            }
         }
-        // locked now: even the real key cannot get in for a minute
+        // the server has recorded the 3 failures: wait for it, then even the real key cannot get in
+        val deadline = System.currentTimeMillis() + 10_000
+        while (!server.isLocked("127.0.0.1") && System.currentTimeMillis() < deadline) Thread.sleep(50)
+        assertTrue(server.isLocked("127.0.0.1"), "address locked after 3 failures")
         val good = edKey(); authorize(good)
-        assertFails { session(good).use { s -> s.auth().verify(5, TimeUnit.SECONDS) } }
+        val refused = runCatching { session(good).use { s -> s.auth().verify(30, TimeUnit.SECONDS).isSuccess } }
+        assertNotEquals(true, refused.getOrNull(), "locked: the good key is refused")
+        clock.addAndGet(61_000)
+        assertFalse(server.isLocked("127.0.0.1"), "the lock ends after a minute")
     }
 
     @Test fun passwordAuthenticationIsNotOffered() {

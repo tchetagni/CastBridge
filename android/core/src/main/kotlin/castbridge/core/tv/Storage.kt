@@ -139,12 +139,12 @@ object Storage {
 
     fun markPlayed(dir: File, name: String) {
         val set = playedNames(dir)
-        if (name !in set) runCatching { File(dir, PLAYED).writeText((set + name).joinToString("\n") + "\n") }
+        if (name !in set) runCatching { AtomicFile.write(File(dir, PLAYED), ((set + name).joinToString("\n") + "\n").toByteArray(Charsets.UTF_8)) }
     }
 
     fun forget(dir: File, name: String) {
         val set = playedNames(dir)
-        if (name in set) runCatching { File(dir, PLAYED).writeText((set - name).joinToString("\n") + "\n") }
+        if (name in set) runCatching { AtomicFile.write(File(dir, PLAYED), ((set - name).joinToString("\n") + "\n").toByteArray(Charsets.UTF_8)) }
     }
 
     /**

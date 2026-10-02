@@ -168,8 +168,11 @@ class ActivationVerifier(private val keys: KeyRing, private val maxWindowMs: Lon
 
 /** What a TV may open, computed from what it holds. No key installed = nothing at all (not even the trial). */
 data class TvAccess(val keyInstalled: Boolean, val access: Access, val openAllUntil: Long?, val label: String, /** SUPER_UNLIMITED installed: everything, rentals included, for good. */ val superUnlimited: Boolean = false,
-                    /** Only a TRIAL key counts (no production key, no owner grant): the edition is restricted by [TrialPolicy]. */ val trial: Boolean = false) {
+                    /** Only a TRIAL key counts (no production key, no owner grant): the edition is restricted by [TrialPolicy]. */ val trial: Boolean = false,
+                    /** The wall clock jumped far ahead ([castbridge.core.lots.ClockDoubt.AHEAD]): the usage ceilings are NOT advanced by that jump; the screens ask « Vérifiez l'heure de la TV ». */ val suspended: Boolean = false) {
     val opensContent get() = keyInstalled
+
+    companion object { const val CHECK_CLOCK_LABEL = "Vérifiez l'heure de la TV" }
 }
 
 object TvGate {
@@ -177,21 +180,40 @@ object TvGate {
      * [activations]: the verified ones installed on the TV; [grants]: owner commands still in force ([OwnerGrant]); [nowMs]: [TvClock.now].
      * Rights add up (trial floor + purchases + valid subscription + owner grants); an expired grant simply stops counting: the TV falls back
      * to its acquired rights, nothing is deleted.
+     *
+     * Usage ceilings have TWO independent limits, the first reached wins: the DATE (`usage.endsAt`, judged on the clock time) and the RUNNING TIME since the install
+     * (`usage.endsAt - usage.startsAt` of cumulative [TvClock.uptimeNow] after the activation was installed, [uptimeAtInstall]); the second is deaf to the wall clock.
      */
     fun evaluate(activations: List<Activation>, grants: List<OwnerGrant>, nowMs: Long, rentals: List<RentalStatus> = emptyList(),
-                 /** The clock judgement ([castbridge.core.lots.RentalEngine.judge]): BEHIND = the wall clock was wound back. */ clockDoubt: ClockDoubt? = null,
-                 /** [TvClock.monotonicNow]: the high-water mark advanced with the monotonic time; used for the usage ceilings when the clock is in doubt BEHIND. */ monotonicNowMs: Long? = null): TvAccess {
+                 /** The clock judgement ([castbridge.core.lots.RentalEngine.judge]): BEHIND = the wall clock was wound back; AHEAD = it jumped more than 45 days ahead. */ clockDoubt: ClockDoubt? = null,
+                 /** [TvClock.monotonicNow]: the high-water mark advanced with the monotonic time; used for the usage ceilings when the clock is in doubt. */ monotonicNowMs: Long? = null,
+                 /** [TvClock.uptimeNow]: cumulative running time of the TV; null = the running-time ceiling is not judged (old callers). */ uptimeNowMs: Long? = null,
+                 /** The [TvClock.uptimeNow] reading when the activation was installed (0 when unknown: counted from the start of the clock). */ uptimeAtInstall: (Activation) -> Long = { 0L }): TvAccess {
         val live = grants.filter { it.untilMs > nowMs && it.power != Power.SUPPORT }
         // Usage ceilings are never frozen by a clock rolled back: when BEHIND they use the monotonic-advanced time (a TV time that can only go forward during a boot).
-        // AHEAD jumps stay capped by TvClock.MAX_JUMP_MS (the caller passes TvClock.now). RESIDUAL HOLE: a reboot while the wall clock is rolled back loses the monotonic base (see TvClock).
-        val ceilingNow = if (clockDoubt == ClockDoubt.BEHIND && monotonicNowMs != null) maxOf(nowMs, monotonicNowMs) else nowMs
+        // AHEAD (jump of more than 45 days): the jump is NOT believed, the ceilings use the monotonic-advanced time as well (a wrong battery clock cannot burn a trial) and the access is flagged [TvAccess.suspended].
+        val ceilingNow = when {
+            clockDoubt == ClockDoubt.BEHIND && monotonicNowMs != null -> maxOf(nowMs, monotonicNowMs)
+            clockDoubt == ClockDoubt.AHEAD && monotonicNowMs != null -> minOf(nowMs, monotonicNowMs)
+            else -> nowMs
+        }
         // an activation whose usage ceiling has passed (or has not begun) counts for nothing: a trial then locks again, a production key must be renewed
         val counting = activations.filter { a ->
             a.rights.filterIsInstance<Right.Usage>().none { ceilingNow >= it.endsAt || ceilingNow < it.startsAt - ActivationPolicy.USAGE_SKEW_MS } &&
-                implicitUsageEnd(a).let { it == null || ceilingNow < it }
+                implicitUsageEnd(a).let { it == null || ceilingNow < it } && !uptimeCeilingReached(a, uptimeNowMs, uptimeAtInstall(a))
         }
         if (activations.isNotEmpty() && counting.isEmpty() && live.isEmpty()) return TvAccess(false, Access.TRIAL_ONLY.copy(message = "Activation terminée : demandez une nouvelle clé"), null, "Activation terminée")
-        return evaluateCounting(counting, live, nowMs, rentals)
+        val result = evaluateCounting(counting, live, nowMs, rentals)
+        return if (clockDoubt == ClockDoubt.AHEAD && result.keyInstalled) result.copy(suspended = true, label = TvAccess.CHECK_CLOCK_LABEL) else result
+    }
+
+    /** Running-time ceiling: the usage length (explicit `usage` right, else the implicit 30 days of a compact trial key) has been consumed in cumulative uptime since the install. */
+    private fun uptimeCeilingReached(a: Activation, uptimeNowMs: Long?, uptimeAtInstallMs: Long): Boolean {
+        if (uptimeNowMs == null) return false
+        val ran = maxOf(0L, uptimeNowMs - uptimeAtInstallMs)
+        val usage = a.rights.filterIsInstance<Right.Usage>()
+        val allowed = if (usage.isNotEmpty()) usage.minOf { it.endsAt - it.startsAt } else if (implicitUsageEnd(a) != null) ActivationPolicy.TRIAL_DEFAULT_DAYS * 24L * 3600 * 1000 else return false
+        return ran >= allowed
     }
 
     /**

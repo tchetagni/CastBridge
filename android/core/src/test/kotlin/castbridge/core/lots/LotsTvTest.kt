@@ -222,3 +222,45 @@ class TvLotStoreTest {
         } finally { server.stop(0) }
     }
 }
+
+/** w1-02: durable index / queue writes (fsync + .bak) and tolerant reads. */
+class LotsDurabilityTest {
+    private val dirs = ArrayList<File>()
+    private fun dir() = Kit.tmp().also { dirs += it }
+    @AfterTest fun tearDown() { dirs.forEach { it.deleteRecursively() } }
+    private val a = LotId("learn", "a"); private val b = LotId("learn", "b")
+    private fun open(d: File, warn: (String) -> Unit = {}) = TvLotStore(d, emptyMap(), listOf(Kit.pub), 10, { 0L }, 1000, { 5000L }, warn)
+
+    @Test fun tvIndexIsKeptAcrossReopenAndWithoutTemporaryFile() {
+        val d = dir(); open(d).setPriority(listOf(a, b))
+        assertEquals(listOf(a, b), open(d).manifest().priority)
+        assertFalse(File(d, "lots.json.tmp").exists())
+    }
+
+    @Test fun tvIndexTruncatedOrEmptyFallsBackToTheBackupAndWarns() {
+        val d = dir(); val s = open(d); s.setPriority(listOf(a)); s.setPriority(listOf(a, b))     // .bak = the previous good index
+        for (damage in listOf("", "{\"priority\":[", "garbage")) {
+            File(d, "lots.json").writeText(damage)
+            val warnings = ArrayList<String>()
+            assertEquals(listOf(a), open(d) { warnings += it }.manifest().priority, "damage=<$damage>")
+            assertEquals(1, warnings.size); assertTrue("secours" in warnings[0])
+        }
+    }
+
+    @Test fun deliveryQueueFileIsDurableAndFallsBackToItsBackup() {
+        val f = File(dir(), "q/queue.json"); val st = FileQueueStore(f)
+        st.save("""{"deliveries":[],"seen":[],"n":1}"""); st.save("""{"deliveries":[],"seen":[],"n":2}""")
+        assertTrue(st.load()!!.contains("\"n\":2")); assertFalse(File(f.path + ".tmp").exists())
+        f.writeText("")                                    // power cut: empty main file
+        assertTrue(st.load()!!.contains("\"n\":1"), "the last good copy is read")
+        f.writeText("{trunc"); assertTrue(st.load()!!.contains("\"n\":1"))
+        assertNull(FileQueueStore(File(dir(), "none.json")).load())
+    }
+
+    @Test fun playedListIsRewrittenAtomically() {
+        val d = dir(); castbridge.core.tv.Storage.markPlayed(d, "a.mp4"); castbridge.core.tv.Storage.markPlayed(d, "b.mp4")
+        assertEquals(setOf("a.mp4", "b.mp4"), castbridge.core.tv.Storage.playedNames(d))
+        castbridge.core.tv.Storage.forget(d, "a.mp4")
+        assertEquals(setOf("b.mp4"), castbridge.core.tv.Storage.playedNames(d)); assertFalse(File(d, ".played.tmp").exists())
+    }
+}

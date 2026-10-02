@@ -1,6 +1,7 @@
 package castbridge.core.lots
 
 import castbridge.core.net.JsonLite
+import castbridge.core.owner.SafeFile
 import castbridge.core.net.JsonLite.long
 import castbridge.core.net.JsonLite.str
 import java.io.File
@@ -42,11 +43,10 @@ interface QueueStore {
 }
 
 class FileQueueStore(private val file: File) : QueueStore {
-    override fun load() = runCatching { file.readText() }.getOrNull()
+    private fun valid(text: String) = runCatching { JsonLite.obj(text) }.isSuccess
+    override fun load() = SafeFile.read(file, ::valid)?.text
     override fun save(json: String) {
-        file.parentFile?.mkdirs()
-        val tmp = File(file.path + ".tmp"); tmp.writeText(json)
-        if (!tmp.renameTo(file)) { file.delete(); if (!tmp.renameTo(file)) throw IOException("file d'attente non écrite") }
+        try { SafeFile.write(file, json, ::valid) } catch (e: IOException) { throw IOException("file d'attente non écrite", e) }
     }
 }
 

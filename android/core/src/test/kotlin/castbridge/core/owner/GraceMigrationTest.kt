@@ -39,4 +39,28 @@ class GraceMigrationTest {
         val keyed = noKey.copy(keyInstalled = true)
         assertIs<GateState.Activated>(FeatureGate.state(req, keyed, START + 99 * DAY, FleetMigration.of(START + DAY, START)))
     }
+
+    // ---- w1-05 ----
+    @Test fun reinstallWithoutClockFileIsLockedEvenIfTheInstallTimeIsPreLock() {
+        // uninstall, date wound back, reinstall: firstInstallTime looks pre-lock but clock.txt did not exist at start
+        val m = FleetMigration.of(START - 400 * DAY, START, clockFileExistedAtStart = false)
+        assertFalse(m.existingInstall); assertNull(m.graceUntil(req))
+        assertIs<GateState.Locked>(FeatureGate.state(req, noKey, START + 5 * DAY, m))
+        // the genuine pre-lock install, which left its clock.txt, keeps the grace
+        assertIs<GateState.Grace>(FeatureGate.state(req, noKey, START + 5 * DAY, FleetMigration.of(START - 400 * DAY, START, clockFileExistedAtStart = true)))
+        assertIs<GateState.Grace>(state(START - 400 * DAY, START + 5 * DAY), "default: clock file present")
+    }
+
+    @Test fun graceAppliesTheTrialRestrictions() {
+        val g = assertIs<GateState.Grace>(state(START - 400 * DAY, START + 5 * DAY))
+        assertTrue(g.trialRestricted, "the grace is not « everything open »")
+        assertFalse(TrialPolicy.gameAllowed("chess")); assertTrue(TrialPolicy.gameAllowed("sudoku"))
+        assertTrue(FeatureGate.canUse(Feature.PLAYER, g), "the TV stays usable (streaming)")
+    }
+
+    @Test fun graceDaysZeroRemovesTheGraceOfPreLockInstallsToo() {
+        val zero = ActivationRequirement(true, graceDays = 0)           // lock.graceDays=0 (owner decision D1, once the fleet is activated)
+        assertNull(FleetMigration.of(START - 400 * DAY, START).graceUntil(zero))
+        assertIs<GateState.Locked>(FeatureGate.state(zero, noKey, START + DAY, FleetMigration.of(START - 400 * DAY, START)))
+    }
 }

@@ -1,8 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!-- Android 11 and older: the trusted phones (names, Bluetooth addresses, token hashes) are never copied to a cloud backup or another TV. -->
+<!-- Android 11 et avant (en plus de allowBackup=false) : ni les téléphones de confiance, ni les activations, locations, lots, horloge, essai, clés SSH, politique ou état du tunnel d'assistance ne partent dans une sauvegarde. -->
 <full-backup-content>
     <exclude domain="file" path="trusted_phones.txt" />
     <exclude domain="file" path="trusted_phones.txt.tmp" />
-    <exclude domain="sharedpref" path="castbridge_parental_reports.xml" />
     <exclude domain="file" path="trusted_phones.txt.bak" />
+    <exclude domain="sharedpref" path="castbridge_parental_reports.xml" />
+    <exclude domain="file" path="activations.txt" />
+    <exclude domain="file" path="activations.txt.bak" />
+    <exclude domain="file" path="clock.txt" />
+    <exclude domain="file" path="grace_prompt.txt" />
+    <exclude domain="file" path="rental/" />
+    <exclude domain="file" path="lots/" />
+    <exclude domain="file" path="learn/" />
+    <exclude domain="file" path="ssh/" />
+    <exclude domain="file" path="policy/" />
+    <exclude domain="file" path="tunnel/" />
+    <exclude domain="sharedpref" path="castbridge_tv.xml" />
 </full-backup-content>

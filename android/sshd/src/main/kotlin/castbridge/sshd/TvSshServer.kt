@@ -82,6 +82,12 @@ class TvSshServer(
 
     val running: Boolean @Synchronized get() = sshd?.isStarted == true
 
+    /** The port actually listening (differs from [port] when that is 0), or [port] while stopped. */
+    val boundPort: Int @Synchronized get() = sshd?.port?.takeIf { it > 0 } ?: port
+
+    /** True when failed logins have locked this client address (the key used by [failures], i.e. the IP for ordinary clients). */
+    fun isLocked(addr: String): Boolean = failures.isLocked(addr)
+
     @Synchronized fun keys(): List<SshKey> = if (keysFile.isFile) AuthorizedKeys.parse(keysFile.readText()) else emptyList()
 
     /** Adds a key given as one authorized_keys line. Throws [AuthorizedKeys.Invalid]. */
@@ -159,6 +165,7 @@ class TvSshServer(
         })
         s.start()
         sshd = s
+        val actual = s.port
         stopping.set(false)
         if (idleStop) watchdog = Thread({
             while (!stopping.get()) {
@@ -166,7 +173,7 @@ class TvSshServer(
                 if (policy.shouldStop()) { log("ssh: idle timeout, stopping"); stop(); return@Thread }
             }
         }, "ssh-watchdog").apply { isDaemon = true; start() }
-        log("ssh: listening on $port")
+        log("ssh: listening on ${if (actual > 0) actual else port}")
     }
 
     @Synchronized fun stop() {

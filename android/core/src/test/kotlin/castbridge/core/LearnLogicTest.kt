@@ -370,4 +370,18 @@ class LearnLogicTest {
         assertEquals(422, api.handleBody("/api/learn/packs/install", "POST", emptyMap(), "zip?".toByteArray())!!.status)
         assertEquals(405, api.handle("/api/learn/dashboard", "POST", emptyMap())!!.status)
     }
+
+    @Test fun progressFileIsDurableAndFallsBackToItsBackup() {
+        val f = File(Files.createTempDirectory("learn").toFile(), "progress.json")
+        val pr = LearnProgress(LearnState(), ZoneOffset.UTC)
+        val p1 = pr.addProfile("Ada", 1, null, 1000).first!!
+        LearnStore.save(f, pr.state)
+        pr.addProfile("Bob", 2, null, 2000)
+        LearnStore.save(f, pr.state)                              // main = 2 profiles, .bak = 1 profile
+        assertEquals(2, LearnStore.load(f).profiles.size); assertFalse(File(f.path + ".tmp").exists())
+        for (damage in listOf("", "{\"profiles\":[", "{broken")) {
+            f.writeText(damage)
+            assertEquals(listOf(p1.id), LearnStore.load(f).profiles.map { it.id }, "damage=<$damage>: the previous good copy is read")
+        }
+    }
 }

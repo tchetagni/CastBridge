@@ -6,10 +6,11 @@ plugins {
 // Console propriétaire partagée (docs/OWNER-CONSOLE.md) : utilisée par l'application « CastBridge Propriétaire » (:owner) et, derrière l'entrée cachée
 // protégée par mot de passe, par l'application du téléphone (:sender). Aucune permission réseau.
 //
-// Le haché bcrypt du mot de passe superadmin est lu À LA COMPILATION dans ~/.castbridge-signing/superadmin.bcrypt (hors dépôt, droits 600) :
-// absent => l'entrée cachée n'existe pas dans ce build. -Pcastbridge.noSuperAdmin=true force un build sans entrée (APK à diffuser sans elle).
+// Le haché bcrypt du mot de passe superadmin n'est compilé QUE sur demande explicite (-Pcastbridge.superAdmin=true, build propriétaire) : il est alors lu
+// dans ~/.castbridge-signing/superadmin.bcrypt (hors dépôt, droits 600) ; absent => l'entrée cachée n'existe pas dans ce build.
+// Par défaut (aucune propriété) : pas de haché, donc pas d'entrée super-admin. -Pcastbridge.noSuperAdmin=true reste accepté (sans effet).
 val superAdminHash: String = run {
-    if ((project.findProperty("castbridge.noSuperAdmin") as String?) == "true") return@run ""
+    if ((project.findProperty("castbridge.superAdmin") as String?) != "true") return@run ""
     val f = File(System.getProperty("user.home"), ".castbridge-signing/superadmin.bcrypt")
     val h = if (f.isFile) f.readText().trim() else ""
     if (Regex("^\\$2[abxy]\\$\\d{2}\\$[./A-Za-z0-9]{53}$").matches(h)) h else ""

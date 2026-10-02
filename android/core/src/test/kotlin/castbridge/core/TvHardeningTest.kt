@@ -340,3 +340,48 @@ class TwoVolumeRig(profile: TvProfile) {
     }
     fun close() { server.stop(); root.deleteRecursively() }
 }
+
+/** API hardening: PIN in the header only, no DNS-rebinding (Host check), lock-out after repeated failures. */
+class ApiHardeningTest {
+    private val dir = kotlin.io.path.createTempDirectory("hard").toFile()
+    private val port = java.net.ServerSocket(0).use { it.localPort }
+    private val server = ReceiverServer(dir, FakePlayer(), port, profile = TvProfile(minFreeBytes = 0, minFreeAfterTransfer = 0), pin = "123456")
+        .apply { start(5000, false) }
+
+    @AfterTest fun close() { server.stop(); dir.deleteRecursively() }
+
+    /** Raw HTTP/1.1 request (HttpURLConnection does not let a client choose the Host header). Returns status line code + body. */
+    private fun raw(path: String, host: String?, pin: String? = null): Pair<Int, String> =
+        java.net.Socket("127.0.0.1", port).use { sock ->
+            sock.soTimeout = 5000
+            val req = "GET $path HTTP/1.1\r\n" + (host?.let { "Host: $it\r\n" } ?: "") + (pin?.let { "X-CB-Pin: $it\r\n" } ?: "") + "Connection: close\r\n\r\n"
+            sock.getOutputStream().write(req.toByteArray()); sock.getOutputStream().flush()
+            val text = sock.getInputStream().readBytes().decodeToString()
+            text.substringBefore("\r\n").split(" ")[1].toInt() to text.substringAfter("\r\n\r\n", "")
+        }
+
+    @Test fun pinInUrlIsRefused() = assertEquals(401, raw("/api/info?pin=123456", "127.0.0.1:$port").first)
+    @Test fun pinInHeaderIsAccepted() = assertEquals(200, raw("/api/info", "127.0.0.1:$port", "123456").first)
+
+    @Test fun foreignHostIsRefused() {
+        val (c, b) = raw("/api/info", "evil.example", "123456")
+        assertEquals(403, c); assertTrue("Hôte non autorisé" in b, b)
+        assertEquals(403, raw("/api/hello", "evil.example:$port").first, "even the public routes")
+    }
+
+    @Test fun privateHostPasses() {
+        assertEquals(200, raw("/api/info", "192.168.1.20:8765", "123456").first)
+        assertEquals(200, raw("/api/info", "127.0.0.1:18765", "123456").first)
+    }
+
+    @Test fun missingHostPasses() = assertEquals(200, raw("/api/info", null, "123456").first)
+
+    @Test fun repeatedBadPinsLockEvenTheRightOne() {
+        val h = "127.0.0.1:$port"
+        repeat(4) { assertEquals(401, raw("/api/info", h, "000000").first) }
+        val (c, b) = raw("/api/info", h, "000000")           // the 5th failure starts the lock
+        assertEquals(401, c); assertTrue("\"locked\"" in b && "retryAfter" in b, b)
+        val (c2, b2) = raw("/api/info", h, "123456")         // right PIN refused while locked
+        assertEquals(401, c2); assertTrue("\"locked\"" in b2 && "retryAfter" in b2, b2)
+    }
+}

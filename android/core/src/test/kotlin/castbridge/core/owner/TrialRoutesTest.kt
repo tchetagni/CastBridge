@@ -19,19 +19,62 @@ class TrialRoutesTest {
         "/api/player/tracks", "/api/player/next", "/api/player/repeat", "/api/remote/key", "/api/remote/state",
         "/api/activation", "/api/activation/install", "/api/activation/request", "/api/rental", "/api/rental/install", "/api/lots", "/api/lots/upload", "/api/lots/install",
         "/api/learn", "/api/learn/open", "/api/sudoku", "/api/sudoku/open", "/api/games", "/api/games/open", "/api/bluetooth", "/api/bluetooth/tunnel", "/api/bluetooth/tunnel/enable",
-        "/api/connections", "/api/server/me")
+        "/api/connections", "/api/server/me",
+        "/api/restart", "/api/net", "/api/background", "/api/autostart", "/api/overlay-permission", "/api/bluetooth/discoverable", "/api/bluetooth/tunnel/disable",
+        "/api/gateway", "/api/gateway/test", "/api/gateway/speed", "/api/gateway/diag", "/api/content/reports", "/api/content/reports/ack",
+        "/api/lots/part", "/api/lots/priority", "/api/lots/remove", "/api/rental/sweep", "/api/player/prev",
+        "/api/player/audio", "/api/player/subtitle", "/api/player/subdelay", "/api/player/audiodelay", "/api/player/subsize", "/api/player/rate", "/api/player/aspect",
+        "/api/player/chapter", "/api/player/title", "/api/player/hw", "/api/player/eq",
+        "/api/learn/cmd", "/api/learn/dashboard", "/api/learn/events", "/api/learn/packs", "/api/learn/packs/remove", "/api/sudoku/cmd",
+        "/api/server", "/api/server/url", "/api/server/contact",
+        "/api/remote/text", "/api/remote/pointer", "/api/remote/global", "/api/remote/ping", "/api/remote/system/setup",
+        "/api/parental", "/api/parental/supervision", "/api/parental/disable", "/api/parental/reset", "/api/parental/lock", "/api/parental/pin/create", "/api/parental/pin/change",
+        "/api/parental/unlock", "/api/parental/config/get", "/api/parental/config/set", "/api/parental/report", "/api/parental/history/clear", "/api/parental/apps/list",
+        "/api/parental/apps/rules/set", "/api/parental/reports/config/get", "/api/parental/reports/config/set", "/api/parental/reports/recipients/add",
+        "/api/parental/reports/recipients/remove", "/api/parental/reports/now")
     private val denied = listOf(
         "/api/play", "/api/playlist", "/api/library", "/api/library/watched", "/api/thumb", "/api/part", "/api/reset", "/api/delete", "/api/rename", "/api/folders", "/api/folders/set",
         "/api/storage", "/api/storage/move", "/api/storage/target", "/api/storage/saf/pick", "/api/transfer/start", "/api/transfer/caps", "/api/upload", "/upload/film.mp4",
         "/api/trash", "/api/trash/put", "/api/downloads", "/api/downloads/add", "/api/downloads/upload", "/api/dl", "/api/usb", "/api/usb/import", "/api/ssh", "/api/ssh/enable",
         "/api/ssh/key", "/api/apk", "/api/apk/install", "/api/update", "/api/update/install", "/api/server/install", "/api/server/erase", "/api/screenshot", "/api/devsettings",
-        "/api/quiz", "/api/quiz/open", "/api/chess", "/api/chess/open", "/quiz", "/quiz/api/join", "/chess", "/chess/api/state", "/stream/film.mp4", "/stream/",
-        "/api/player/subfile", "/api/new-future-route", "/api/hello/../ssh", "/api//ssh", "/api/%73sh", "/admin", "/api")
+        "/api/quiz", "/api/quiz/open", "/api/quiz/packs", "/api/quiz/packs/push", "/api/quiz/packs/remove", "/api/quiz/packs/status",
+        "/api/chess/config", "/chess/api/act", "/chess/api/events", "/chess/api/hello", "/chess/api/join", "/chess/api/leave", "/quiz/api/act", "/quiz/api/events",
+        "/quiz/api/hello", "/quiz/api/join", "/quiz/api/leave", "/quiz/api/state", "/upload/",
+        "/api/downloads/about", "/api/downloads/accept", "/api/downloads/clear", "/api/downloads/files", "/api/downloads/options", "/api/downloads/pause", "/api/downloads/pauseall",
+        "/api/downloads/peers", "/api/downloads/priority", "/api/downloads/remove", "/api/downloads/resume", "/api/downloads/resumeall", "/api/downloads/select", "/api/downloads/settings",
+        "/api/folders/rename", "/api/library/watched", "/api/playlist", "/api/ssh/disable", "/api/ssh/key/remove",
+        "/api/storage/check", "/api/storage/move/cancel", "/api/storage/open-settings", "/api/storage/rescan", "/api/trash/empty", "/api/trash/purge", "/api/trash/restore",
+        "/api/transfer/begin", "/api/transfer/chunk", "/api/transfer/state", "/api/transfer/finish", "/api/transfer/abort",
+        "/api/server/check-update", "/api/server/quiz-sync", "/api/chess", "/api/chess/open", "/quiz", "/quiz/api/join", "/chess", "/chess/api/state", "/stream/film.mp4", "/stream/",
+        "/api/player/subfile", "/api/learn/packs/import", "/api/learn/packs/install", "/api/new-future-route", "/api/hello/../ssh", "/api//ssh", "/api/%73sh", "/admin", "/api")
 
     @Test fun routeTable() {
         for (r in allowed) assertTrue(TrialPolicy.routeAllowed(r), "allowed: $r")
         for (r in denied) assertFalse(TrialPolicy.routeAllowed(r), "denied: $r")
         assertTrue(allowed.size + denied.size >= 40)
+    }
+
+    /** `tools/routes/routes.txt` (generated from the code by tools/routes/list_routes.py) lists every route the TV serves: each one must be classified above. */
+    private fun repoFile(rel: String): java.io.File {
+        var d: java.io.File? = java.io.File("").absoluteFile
+        while (d != null && !java.io.File(d, rel).exists()) d = d.parentFile
+        return java.io.File(d ?: error("repo root not found"), rel)
+    }
+    private val servedRoutes: List<String> by lazy {
+        repoFile("tools/routes/routes.txt").readLines().map { it.trim() }.filter { it.isNotEmpty() && !it.startsWith("#") }
+    }
+
+    @Test fun everyServedRouteIsClassified() {
+        val classified = (allowed + denied).toSet()
+        val missing = servedRoutes.filter { it !in classified }
+        assertTrue(missing.isEmpty(), "routes servies non classées (ouvertes ou fermées en essai) : $missing")
+        assertTrue(servedRoutes.size >= 150, "routes.txt incomplet : ${servedRoutes.size}")
+        assertEquals(servedRoutes.size, servedRoutes.toSet().size)
+    }
+
+    @Test fun learnPackInstallsAreClosedInTrial() {
+        assertFalse(TrialPolicy.routeAllowed("/api/learn/packs/import")); assertFalse(TrialPolicy.routeAllowed("/api/learn/packs/install"))
+        assertTrue(TrialPolicy.routeAllowed("/api/learn/packs")); assertTrue(TrialPolicy.routeAllowed("/api/learn/open"))
     }
 
     @Test fun prefixesNeedAPathBoundary() {

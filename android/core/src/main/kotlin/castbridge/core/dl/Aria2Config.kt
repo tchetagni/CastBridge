@@ -45,7 +45,7 @@ object Aria2Config {
      */
     fun args(
         confFile: File, session: File, defaultDir: File, port: Int, parentPid: Long, settings: DlSettings,
-        caBundle: File?, dnsServers: List<String>, dhtFile: File,
+        caBundle: File?, dnsServers: List<String>, @Suppress("UNUSED_PARAMETER") dhtFile: File,   // dhtFile: kept for callers, no longer used (DHT is off)
     ): List<String> = buildList {
         add("--conf-path=${confFile.absolutePath}")
         add("--enable-rpc=true")
@@ -72,16 +72,12 @@ object Aria2Config {
         add("--min-tls-version=TLSv1.2")
         add("--seed-ratio=${if (settings.seeding) SEED_RATIO_ON else "0.0"}")
         add("--seed-time=${if (settings.seeding) SEED_TIME_ON_MIN else 0}")   // 0 = stop sharing as soon as it is complete
-        add("--bt-detach-seed-only=true")
-        add("--bt-max-peers=30")                       // default 55: fewer sockets and buffers on a 1 GB TV
-        add("--bt-save-metadata=true")                 // a magnet's metadata is kept: no second lookup after a restart
-        add("--pause-metadata=true")                   // stop after the metadata: the TV checks the space before the real download
+        // No BitTorrent, no peers, no listening port (audit SE-7/LE-6): HTTP(S)/FTP only. The TV is never reachable by Internet peers.
+        add("--enable-dht=false")
+        add("--enable-dht6=false")
         add("--bt-enable-lpd=false")
-        add("--enable-dht=true")
-        add("--enable-dht6=false")                     // IPv6 DHT rarely works behind a home box and costs another socket and table
-        add("--dht-file-path=${dhtFile.absolutePath}")
-        add("--listen-port=6881-6889")
-        add("--dht-listen-port=6881-6889")
+        add("--enable-peer-exchange=false")
+        add("--follow-torrent=false")                  // a .torrent or magnet is never followed; no bt-* tuning option is passed
         add("--max-overall-download-limit=${settings.downLimit}")
         add("--max-overall-upload-limit=${settings.upLimit}")
         add("--max-tries=10")

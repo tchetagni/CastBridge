@@ -39,7 +39,7 @@ class ReceiverServer(
     profile: TvProfile = TvProfile(),
     /** Called when settings change through the API, so the app can persist them. */
     private val onSettings: (TvProfile) -> Unit = {},
-    /** 6-digit PIN required (header X-CB-Pin or ?pin=) on every route but GET / and GET /api/hello. null = open (tests). */
+    /** 6-digit PIN required (header X-CB-Pin only) on every route but GET / and GET /api/hello. null = open (tests). */
     pin: String? = null,
     private val guard: PinGuard? = pin?.let { PinGuard(it) },
     private val device: Device? = null,
@@ -75,6 +75,10 @@ class ReceiverServer(
      * PIN failures are counted against "bt:<address>" instead of one shared "127.0.0.1" (one device never locks the others, nor Wi-Fi).
      */
     private val peers: castbridge.core.ssh.PeerRegistry? = null,
+    /** Anti DNS-rebinding: refuse (403) a `Host` header that is not a private / local IP or localhost. Off only for tests. */
+    private val hostCheck: Boolean = true,
+    /** Temporary compatibility for old clients that send the PIN as `?pin=`. Off by default: the PIN travels in the X-CB-Pin header only. */
+    private val legacyPinQuery: Boolean = false,
 ) : NanoHTTPD(port) {
 
     override fun createClientHandler(finalAccept: java.net.Socket, inputStream: java.io.InputStream): NanoHTTPD.ClientHandler =
@@ -266,6 +270,7 @@ class ReceiverServer(
     private fun route(s: IHTTPSession): Response {
         val p = s.parameters.mapValues { it.value.firstOrNull().orEmpty() }
         val path = s.uri
+        if (hostCheck && !HostGuard.allowed(s.headers["host"])) return json(Response.Status.FORBIDDEN, """{"error":"Hôte non autorisé"}""").also { it.addHeader("Connection", "close") }
         if (s.method == Method.GET && path == "/") return page()
         if (s.method == Method.GET && path == "/api/hello")
             return ok("""{"app":"castbridge-tv","v":${q(VERSION)},"pinRequired":${guard != null}}""")
@@ -456,7 +461,7 @@ class ReceiverServer(
             // expired or revoked: the phone asks the TV again over Bluetooth (no PIN is tried, so no lockout is counted)
             return json(Response.Status.UNAUTHORIZED, """{"error":"bad token"}""").also { it.addHeader("Connection", "close") }
         }
-        val given = s.headers["x-cb-pin"] ?: p["pin"]
+        val given = s.headers["x-cb-pin"] ?: (if (legacyPinQuery) p["pin"] else null)
         return when (g.check(ip, given)) {
             PinGuard.Result.OK -> null
             PinGuard.Result.BAD -> json(Response.Status.UNAUTHORIZED, """{"error":"bad pin"}""")

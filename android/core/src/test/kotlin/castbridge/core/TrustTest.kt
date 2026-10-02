@@ -20,7 +20,8 @@ class TrustTest {
     private val TV = "11:22:33:44:55:66"
     private var clock = 1_000_000L
     private val mem = MemoryTrustPersistence()
-    private fun registry(ttl: Long = 12 * 3600_000L, p: TrustPersistence = mem) = TrustRegistry(p, { clock }, tokenTtlMs = ttl)
+    private val rng = java.security.SecureRandom.getInstance("SHA1PRNG").apply { setSeed(20260101L) }
+    private fun registry(ttl: Long = 12 * 3600_000L, p: TrustPersistence = mem) = TrustRegistry(p, { clock }, random = rng, tokenTtlMs = ttl)
 
     // ------------------------------------------------------------------ registry and tokens
 
@@ -31,7 +32,10 @@ class TrustTest {
         val t = r.issueToken(PHONE)!!
         assertTrue(Regex("^cbk_[0-9a-f]{64}$").matches(t.token))
         assertEquals(PHONE, r.verifyToken(t.token))
-        assertNull(r.verifyToken(t.token.dropLast(1) + (if (t.token.last() == '0') "1" else "0")), "altered token")   // really different from the original (1 token in 16 ends with 0)
+        val mid = t.token.length / 2
+        val altered = t.token.substring(0, mid) + (if (t.token[mid] == '0') '1' else '0') + t.token.substring(mid + 1)
+        assertNotEquals(t.token, altered)
+        assertNull(r.verifyToken(altered), "altered token")
         assertNull(r.verifyToken("123456"), "the PIN is not a token")
         assertNull(r.verifyToken(null))
         assertTrue(r.revoke(PHONE))

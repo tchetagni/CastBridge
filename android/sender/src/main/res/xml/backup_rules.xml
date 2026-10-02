@@ -1,8 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!-- Android 11 and older: the TV tokens of the plug-and-play link (castbridge_trust) never go to a cloud backup or another phone:
-     a token only makes sense on the phone that was approved on the TV. -->
+<!-- Android 11 et avant (en plus de allowBackup=false) : jetons TV, coffre de signature propriétaire, compteur de déverrouillage, commandes et lots ne partent jamais dans une sauvegarde ni vers un autre téléphone. -->
 <full-backup-content>
     <exclude domain="sharedpref" path="castbridge_trust.xml" />
     <exclude domain="sharedpref" path="castbridge_parental_inbox.xml" />
     <exclude domain="sharedpref" path="castbridge_parental_ledger.xml" />
+    <exclude domain="file" path="owner-vault.txt" />
+    <exclude domain="file" path="owner-journal.tsv" />
+    <exclude domain="file" path="owner-bundles.json" />
+    <exclude domain="sharedpref" path="owner_guard.xml" />
+    <exclude domain="file" path="orders/" />
+    <exclude domain="file" path="lots/" />
 </full-backup-content>

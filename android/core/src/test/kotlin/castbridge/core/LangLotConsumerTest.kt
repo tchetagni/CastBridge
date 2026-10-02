@@ -12,13 +12,18 @@ import kotlin.test.*
 /** The TV's « Langues » lot consumer (pure part): atomic install, refusals, versions, catalog. */
 class LangLotConsumerTest {
     private val content = File(System.getProperty("learn.content") ?: "../../content/learn").parentFile.resolve("langues/zh-a0-salut-fr")
+    private val realVersion by lazy {
+        val json = content.resolve("langue.json").readText()
+        val versionRegex = """"version":\s*(\d+)""".toRegex()
+        versionRegex.find(json)?.groupValues?.get(1)?.toInt() ?: 1
+    }
     private fun tmp(): File = kotlin.io.path.createTempDirectory("langlots").toFile().also { it.deleteOnExit() }
 
     private fun zip(entries: Map<String, String>): File = File(tmp(), "lot.zip").also { f ->
         ZipOutputStream(f.outputStream()).use { o -> for ((n, t) in entries) { o.putNextEntry(ZipEntry(n)); o.write(t.toByteArray()); o.closeEntry() } }
     }
     private fun real() = mapOf("langue.json" to content.resolve("langue.json").readText(), "media.json" to content.resolve("media.json").readText())
-    private fun meta(f: File, scope: String = "zh-a0-salut-fr", version: Int = 1, bytes: Long = f.length(), sha: String = LotHash.sha256Hex(f)) =
+    private fun meta(f: File, scope: String = "zh-a0-salut-fr", version: Int = realVersion, bytes: Long = f.length(), sha: String = LotHash.sha256Hex(f)) =
         LotMeta(LotId("langues", scope), version, bytes, sha, "Chinois A0")
 
     @Test fun installsAValidLotAndListsIt() {
@@ -39,7 +44,7 @@ class LangLotConsumerTest {
         assertFalse(c.install(meta(f, scope = "cm2"), f)); assertContains(c.lastError!!, "nom invalide")
         assertFalse(c.install(meta(f, bytes = f.length() + 1), f)); assertContains(c.lastError!!, "taille")
         assertFalse(c.install(meta(f, sha = "0".repeat(64)), f)); assertContains(c.lastError!!, "sha256")
-        val other = zip(real().mapValues { (k, v) -> if (k == "langue.json") v.replace("\"version\": 1", "\"version\": 2") else v })
+        val other = zip(real().mapValues { (k, v) -> if (k == "langue.json") v.replace("\"version\": $realVersion", "\"version\": ${realVersion - 1}") else v })
         assertFalse(c.install(meta(other), other)); assertContains(c.lastError!!, "version")
         val noJson = zip(mapOf("media.json" to "{}")); assertFalse(c.install(meta(noJson), noJson))
         val wrongScope = zip(real()); assertFalse(c.install(meta(wrongScope, scope = "zh-a1-salut-fr"), wrongScope)); assertContains(c.lastError!!, "ne correspond pas")
@@ -50,12 +55,12 @@ class LangLotConsumerTest {
 
     @Test fun versionsAreImmutableAndNeverDowngrade() {
         val c = LangLotConsumer(tmp())
-        val v2src = real().mapValues { (k, v) -> if (k == "langue.json") v.replace("\"version\": 1", "\"version\": 2") else v }
-        val f1 = zip(real()); val f2 = zip(v2src)
-        assertTrue(c.install(meta(f1), f1)); assertTrue(c.install(meta(f1), f1), "same version, same content: idempotent")
-        assertTrue(c.install(meta(f2, version = 2), f2)); assertEquals(2, c.installed().single().version)
-        assertFalse(c.install(meta(f1), f1)); assertContains(c.lastError!!, "plus récente")
-        assertEquals(2, c.installed().single().version, "the newer version stays")
+        val v3src = real().mapValues { (k, v) -> if (k == "langue.json") v.replace("\"version\": $realVersion", "\"version\": ${realVersion + 1}") else v }
+        val fCurrent = zip(real()); val fNewer = zip(v3src)
+        assertTrue(c.install(meta(fCurrent), fCurrent)); assertTrue(c.install(meta(fCurrent), fCurrent), "same version, same content: idempotent")
+        assertTrue(c.install(meta(fNewer, version = realVersion + 1), fNewer)); assertEquals(realVersion + 1, c.installed().single().version)
+        assertFalse(c.install(meta(fCurrent), fCurrent)); assertContains(c.lastError!!, "plus récente")
+        assertEquals(realVersion + 1, c.installed().single().version, "the newer version stays")
     }
 
     @Test fun appVersionTooOldIsRefused() {

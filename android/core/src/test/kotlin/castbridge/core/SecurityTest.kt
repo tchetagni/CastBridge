@@ -55,15 +55,28 @@ class SecurityTest {
             assertEquals(200, http("$b/api/hello"))
             assertEquals(401, http("$b/api/info"))
             assertEquals(200, http("$b/api/info", pin = "246810"))
-            assertEquals(200, http("$b/api/info?pin=246810"))
+            assertEquals(401, http("$b/api/info?pin=246810"), "the PIN is no longer accepted in the URL")
             // Client: wrong PIN -> 401, upload treats it as fatal (no endless retry)
             assertEquals(401, assertFailsWith<TvClient.HttpError> { TvClient(b, "111111").info() }.code)
-            assertEquals(200, http("$b/api/info?pin=246810"), "still allowed after one failure")
+            assertEquals(200, http("$b/api/info", pin = "246810"), "still allowed after one failure")
             val r = ResumableUpload("v.mp4", 3, { b }, { ByteArrayInputStream(ByteArray(3)) }, sleep = {}, pin = "222222").run {}
             assertTrue(r is ResumableUpload.State.Failed, "$r")
             val ok = ResumableUpload("v.mp4", 3, { b }, { ByteArrayInputStream(ByteArray(3)) }, sleep = {}, pin = "246810").run {}
             assertEquals(ResumableUpload.State.Done, ok)
             assertTrue(File(dir, "v.mp4").isFile)
         } finally { s.stop(); dir.deleteRecursively() }
+    }
+}
+
+class HostGuardTest {
+    @Test fun acceptsLocalAndPrivateAddresses() {
+        for (h in listOf(null, "", "localhost", "localhost:8765", "127.0.0.1:18765", "[::1]:8765", "::1", "10.0.0.5", "172.16.0.1:8765",
+            "172.31.255.1", "192.168.1.20:8765", "169.254.3.4", "[fe80::1]:8765", "[fd12:3456::1]", "fc00::1"))
+            assertTrue(HostGuard.allowed(h), "$h")
+    }
+    @Test fun refusesNamesAndPublicAddresses() {
+        for (h in listOf("evil.example", "evil.example:8765", "192.168.1.20.evil.example", "8.8.8.8", "172.32.0.1", "172.15.0.1", "192.169.1.1",
+            "300.1.1.1", "[2001:db8::1]:8765", "192.168.1.20:abc", "192.168.1.20:", "[::1", "localhost.evil.com", "127.0.0.1@evil.com"))
+            assertFalse(HostGuard.allowed(h), "$h")
     }
 }

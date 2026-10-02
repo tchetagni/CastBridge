@@ -670,3 +670,29 @@ class RentalRobustnessTest {
         assertTrue(OwnedLots.of(listOf(rental), T0 + DAY, held, cat).isEmpty(), "a rental never counts as owned")
     }
 }
+
+/** w1-02: the rental safe writes with fsync + rename (AtomicFile): a reader never sees an empty or half key, nothing is lost. */
+class RentalVaultDurabilityTest {
+    private val dirs = ArrayList<File>()
+    private fun vault() = RentalVault(File(Kit.tmp().also { dirs += it }, "rental"))
+    @AfterTest fun tearDown() { dirs.forEach { it.deleteRecursively() } }
+
+    @Test fun keyAndLotSurviveAReopenAndLeaveNoTemporaryFile() {
+        val v = vault(); val key = ByteArray(32) { (it + 1).toByte() }
+        assertTrue(v.putKey("loc-cm2@1", key)); assertContentEquals(key, RentalVault(v.dir).getKey("loc-cm2@1"))
+        val lot = LotId("learn", "a"); val sealed = ByteArray(500) { it.toByte() }
+        assertTrue(v.putLot(lot, 1, sealed)); assertContentEquals(sealed, v.lotFile(lot, 1)!!.readBytes())
+        assertTrue(v.dir.walkTopDown().none { it.name.endsWith(".tmp") })
+    }
+
+    @Test fun putKeyOverAnExistingKeyIsNeverVisiblyEmptyOrPartial() {
+        val v = vault(); val a = ByteArray(32) { 1 }; val b = ByteArray(32) { 2 }
+        assertTrue(v.putKey("loc-cm2@1", a))
+        val stop = java.util.concurrent.atomic.AtomicBoolean(false); val bad = java.util.concurrent.atomic.AtomicReference<String?>(null)
+        val reader = Thread { while (!stop.get()) { val k = v.getKey("loc-cm2@1"); if (k == null || !(k.contentEquals(a) || k.contentEquals(b))) { bad.set("vu: ${k?.size}"); break } } }
+        reader.start()
+        repeat(300) { assertTrue(v.putKey("loc-cm2@1", if (it % 2 == 0) b else a)) }
+        stop.set(true); reader.join(5000)
+        assertNull(bad.get(), "the visible key was the old one or the new one, never empty or partial")
+    }
+}

@@ -3,6 +3,7 @@ package castbridge.core.lots
 import castbridge.core.net.JsonLite
 import castbridge.core.net.JsonLite.long
 import castbridge.core.net.JsonLite.str
+import castbridge.core.owner.SafeFile
 import java.io.File
 import java.io.IOException
 
@@ -67,6 +68,8 @@ class TvLotStore(
     private val starterBytes: () -> Long = { 0L },
     val maxBytes: Long = LotBudget.TV_MAX_BYTES,
     private val now: () -> Long = System::currentTimeMillis,
+    /** Called (French text) when the index was unreadable and the `.bak` copy was used instead. */
+    private val onWarning: (String) -> Unit = {},
 ) {
     sealed class Result {
         data class Ok(val evicted: List<LotId>) : Result()
@@ -235,7 +238,9 @@ class TvLotStore(
     }
 
     private fun load() {
-        val m = runCatching { JsonLite.obj(indexFile.readText()) }.getOrNull() ?: return
+        val r = SafeFile.read(indexFile, ::validIndex) ?: return
+        if (r.fromBackup) onWarning("Index des lots illisible : copie de secours (lots.json.bak) relue.")
+        val m = runCatching { JsonLite.obj(r.text) }.getOrNull() ?: return
         (m["installedAt"] as? Map<*, *>)?.forEach { (k, v) -> LotNames.parseKey(k.toString())?.let { id -> (v as? Number)?.let { installedAt[id] = it.toLong() } } }
         priority = (m["priority"] as? List<*>)?.mapNotNull { (it as? String)?.let(LotNames::parseKey) } ?: emptyList()
         (m["rejected"] as? List<*>)?.forEach { e ->
@@ -248,7 +253,8 @@ class TvLotStore(
         dir.mkdirs()
         val json = JsonLite.write(linkedMapOf("installedAt" to installedAt.mapKeys { LotNames.key(it.key) }, "priority" to priority.map(LotNames::key),
             "rejected" to rejected.map { linkedMapOf("feature" to it.id.feature, "scope" to it.id.scope, "version" to it.version, "reason" to it.reason, "at" to it.at) }))
-        val tmp = File(dir, "lots.json.tmp"); tmp.writeText(json)
-        if (!tmp.renameTo(indexFile)) { indexFile.delete(); tmp.renameTo(indexFile) }
+        try { SafeFile.write(indexFile, json, ::validIndex) } catch (_: IOException) { /* kept in memory; the next change retries */ }
     }
+
+    private fun validIndex(text: String) = runCatching { JsonLite.obj(text) }.isSuccess
 }

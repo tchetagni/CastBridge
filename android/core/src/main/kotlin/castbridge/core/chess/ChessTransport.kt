@@ -48,11 +48,11 @@ interface ChessTransport {
 /** Tiny blocking HTTP/JSON helper (HttpURLConnection: the same on Android and on the JVM of the tests). */
 internal object HttpJson {
     fun call(method: String, url: String, body: String? = null, headers: Map<String, String> = emptyMap(),
-             readTimeoutMs: Int = 10_000): Pair<Int, String> {
+             readTimeoutMs: Int = 10_000, connectTimeoutMs: Int = 5_000): Pair<Int, String> {
         val c = URL(url).openConnection() as HttpURLConnection
         try {
             c.requestMethod = method
-            c.connectTimeout = 5_000; c.readTimeout = readTimeoutMs
+            c.connectTimeout = connectTimeoutMs; c.readTimeout = readTimeoutMs
             c.setRequestProperty("Accept", "application/json")
             headers.forEach { (k, v) -> c.setRequestProperty(k, v) }
             if (body != null) {
@@ -119,6 +119,8 @@ class LanChessClient(private val base: String) : ChessTransport {
 class ChessRelayClient(
     private val base: String = DEFAULT_URL,
     val enabled: Boolean = false,
+    /** Connect timeout of the availability probe (tests lower it so they never wait for the 5 s default). */
+    private val probeConnectTimeoutMs: Int = 5_000,
 ) : ChessTransport {
     override val label = "Internet"
     private fun u(path: String) = base.trimEnd('/') + API + path
@@ -127,7 +129,7 @@ class ChessRelayClient(
 
     /** Does the server answer the chess protocol? (false when disabled, offline, or routes missing). */
     fun available(): Boolean = enabled && runCatching {
-        val (c, t) = HttpJson.call("GET", u("/hello"), readTimeoutMs = 4_000)
+        val (c, t) = HttpJson.call("GET", u("/hello"), readTimeoutMs = 4_000, connectTimeoutMs = probeConnectTimeoutMs)
         c == 200 && (Json.obj(t)["protocol"] as? Number)?.toInt() == ChessRoom.PROTOCOL
     }.getOrDefault(false)
 

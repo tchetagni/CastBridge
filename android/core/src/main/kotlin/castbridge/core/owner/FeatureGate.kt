@@ -33,13 +33,19 @@ data class ActivationRequirement(val required: Boolean = false, val graceDays: I
  * ([existing] = the package's first-install time, which survives « clear data » and an over-install, is earlier than [graceStartMs]), and it ends at
  * [graceStartMs] + graceDays whatever the user does (over-install, clear data). A fresh install, or an uninstall followed by an install, has a first-install
  * time after [graceStartMs]: locked at once. Both times are injected so the rule is testable.
+ * The receiver also refuses the grace when `clock.txt` was absent at start while the first-install time predates the lock (a reinstall with the date wound back): see [FleetMigration.of].
+ * `graceDays` comes from `lock.graceDays` of version.properties (0 = no grace at all).
  */
 data class FleetMigration(val existingInstall: Boolean, val graceStartMs: Long) {
     fun graceUntil(req: ActivationRequirement): Long? = if (existingInstall && req.graceDays > 0) graceStartMs + req.graceDays * 24L * 3600 * 1000 else null
 
     companion object {
-        /** [firstInstallTimeMs] = PackageInfo.firstInstallTime; [lockGraceStartMs] = the build constant LOCK_GRACE_START_MS. */
-        fun of(firstInstallTimeMs: Long, lockGraceStartMs: Long) = FleetMigration(firstInstallTimeMs < lockGraceStartMs, lockGraceStartMs)
+        /**
+         * [firstInstallTimeMs] = PackageInfo.firstInstallTime; [lockGraceStartMs] = the build constant LOCK_GRACE_START_MS; [clockFileExistedAtStart] = `clock.txt` (or its `.bak`) existed
+         * BEFORE this start created it: a genuine pre-lock install has run before and left it, while an uninstall + date wound back + reinstall shows a pre-lock install time WITHOUT it.
+         */
+        fun of(firstInstallTimeMs: Long, lockGraceStartMs: Long, clockFileExistedAtStart: Boolean = true) =
+            FleetMigration(firstInstallTimeMs < lockGraceStartMs && clockFileExistedAtStart, lockGraceStartMs)
     }
 }
 
@@ -49,8 +55,11 @@ sealed class GateState {
     object NotRequired : GateState() { override val label = "Activation non exigée" }
     /** A key is installed: every feature is reachable (the edition decides the CONTENT, see EditionPolicy). */
     data class Activated(val access: TvAccess) : GateState() { override val label get() = access.label }
-    /** An existing install inside its grace period: everything works, the activation is offered at launch. */
-    data class Grace(val untilMs: Long) : GateState() { override val label = "Période de grâce : activation à fournir" }
+    /**
+     * An existing install inside its grace period: the activation is offered at launch. The grace applies the restrictions of the trial edition ([trialRestricted], [TrialPolicy]):
+     * it is a courtesy to keep the TV usable, not an « everything open » window.
+     */
+    data class Grace(val untilMs: Long, val trialRestricted: Boolean = true) : GateState() { override val label = "Période de grâce : activation à fournir" }
     /** No key: only the activation surface. Data already on the device stays untouched on disk. */
     object Locked : GateState() { override val label = "Usage soumis à autorisation" }
 }

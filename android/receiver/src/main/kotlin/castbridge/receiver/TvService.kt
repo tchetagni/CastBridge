@@ -422,6 +422,10 @@ class TvService : Service(), Device {
     @Volatile var netDirectMs: Long? = null; private set
     @Volatile var netGatewayMs: Long? = null; private set
     @Volatile var netCheckedAt = 0L; private set
+    /** True when the last round really measured (204 probe); false = state taken from the system callbacks only (no outgoing traffic): [netDirectMs] 0 then means « the system says validated ». */
+    @Volatile var netMeasured = false; private set
+    /** A manual test (Tests Internet screen) asked for one real probe round. */
+    @Volatile private var netManual = false
     /** Debounced state for the TV badge (core NetStateTracker, fed by the same probes — no second loop). */
     private val netTracker = NetStateTracker()
     @Volatile var netState = NetState.CHECKING; private set
@@ -437,21 +441,35 @@ class TvService : Service(), Device {
                 bg.execute {
                     try {
                         val wasDirect = netDirectMs != null; val wasGateway = netGatewayMs != null; val first = netCheckedAt == 0L
-                        netDirectMs = TvNetDiag.probe(null)
-                        netGatewayMs = gateway?.proxy()?.let { TvNetDiag.probe(it) }
+                        // The probe (a request to a third party) is never periodic by default: only on a manual test, when the user turned « netProbe » on,
+                        // or when the remote-assistance tunnel is enabled (terms accepted) and needs to know whether Internet is reachable.
+                        val manual = netManual; netManual = false
+                        val probe = manual || prefs.netProbe || runCatching { TunnelHub.termsAccepted(this@TvService) }.getOrDefault(false)
+                        val link = TvNetDiag.linkKind(this@TvService)
+                        if (probe) {
+                            netDirectMs = TvNetDiag.probe(null)
+                            netGatewayMs = gateway?.proxy()?.let { TvNetDiag.probe(it) }
+                        } else {
+                            // No traffic: the system's own validation (NET_CAPABILITY_VALIDATED) and the gateway state.
+                            netDirectMs = if (systemValidated()) 0L else null
+                            netGatewayMs = if (gateway?.connected == true) 0L else null
+                        }
+                        netMeasured = probe
                         netCheckedAt = System.currentTimeMillis()
                         setStatus("7-net", netSummary())
                         synchronized(netTracker) {
-                            netState = netTracker.update(TvNetDiag.linkKind(this@TvService), netDirectMs, gateway?.connected == true, netGatewayMs, android.os.SystemClock.elapsedRealtime())
+                            // Without a probe, a link that the system did not validate is « not verified » (CHECKING), never a red « Pas d'Internet »: only « no link at all » is NONE.
+                            if (probe || netDirectMs != null || netGatewayMs != null || link == castbridge.core.net.LinkKind.NONE)
+                                netState = netTracker.update(link, netDirectMs, gateway?.connected == true, netGatewayMs, android.os.SystemClock.elapsedRealtime())
                             netGatewayAlso = netTracker.gatewayAlsoAvailable
-                            delay = netTracker.nextDelayMs()               // 60 s while Internet works, 10-30 s while it does not
+                            delay = if (probe) netTracker.nextDelayMs() else NetStateTracker.STEADY_MS   // 60 s while Internet works, 10-30 s while it does not (probing only)
                         }
                         icons.setInternet(netState)
                         main.post { screen?.statusesChanged() }; iconsChanged()
                         TunnelHub.poke()                                   // the path to the Internet (own network / phone gateway / none) may have changed
                         // connectivity_check: at start and when the state changes (not every minute)
-                        if (first || wasDirect != (netDirectMs != null)) connectivityEvent(null, netDirectMs)
-                        if (gateway?.connected == true && (first || wasGateway != (netGatewayMs != null))) connectivityEvent("bluetooth", netGatewayMs)
+                        if (first || wasDirect != (netDirectMs != null)) connectivityEvent(null, netDirectMs?.takeIf { it > 0 }, netDirectMs != null)
+                        if (gateway?.connected == true && (first || wasGateway != (netGatewayMs != null))) connectivityEvent("bluetooth", netGatewayMs?.takeIf { it > 0 }, netGatewayMs != null)
                         if (netDirectMs != null && !wasDirect && !first) TvConnect.post { flush() }      // network back: send what waits
                         libraryStatsDaily()
                     } finally {
@@ -496,14 +514,14 @@ class TvService : Service(), Device {
     }
 
     /** « connectivity_check » event: [via] null = the TV's own link (Wi-Fi / Ethernet). */
-    fun connectivityEvent(via: String?, latencyMs: Long?) {
+    fun connectivityEvent(via: String?, latencyMs: Long?, ok: Boolean = latencyMs != null) {
         val link = TvNetDiag.localLink(this)
         val v = via ?: when {
             "Ethernet" in link -> "ethernet"
             link == "Wi-Fi" -> "wifi"
-            else -> if (latencyMs == null) "none" else "wifi"
+            else -> if (!ok) "none" else "wifi"
         }
-        TvConnect.track("connectivity_check", mapOf("via" to v, "ok" to (latencyMs != null), "latency_ms" to latencyMs))
+        TvConnect.track("connectivity_check", mapOf("via" to v, "ok" to ok, "latency_ms" to latencyMs))
     }
 
     /** « library_stats » once a day (number of files and bytes, never their names). */
@@ -523,12 +541,26 @@ class TvService : Service(), Device {
             .filter { f -> Regex("castbridge-tv-(\\d+)\\.apk").find(f.name)?.groupValues?.get(1)?.toIntOrNull()?.let { it <= installed } == true }
             .forEach { it.delete() }
     }
-    fun checkNetNow() { main.removeCallbacks(netTick); main.post(netTick) }
+    /** Manual action (Tests Internet screen): one real probe round, now. */
+    fun checkNetNow() { netManual = true; main.removeCallbacks(netTick); main.post(netTick) }
+
+    /** What the system itself says (its own validation, no traffic from CastBridge-TV): the active network has Internet validated. */
+    private fun systemValidated(): Boolean = runCatching {
+        val cm = getSystemService(android.net.ConnectivityManager::class.java)
+        cm.getNetworkCapabilities(cm.activeNetwork)?.hasCapability(android.net.NetworkCapabilities.NET_CAPABILITY_VALIDATED) == true
+    }.getOrDefault(false)
 
     /** « ✓ Wi-Fi 40 ms · ✓ Passerelle S21+ » */
     fun netSummary(): String {
-        val d = netDirectMs?.let { "✓ ${TvNetDiag.localLink(this)} $it ms" } ?: "✗ ${TvNetDiag.localLink(this)} sans Internet"
-        val g = if (gateway?.connected == true) (netGatewayMs?.let { " · ✓ passerelle $it ms" } ?: " · ✗ passerelle sans Internet") else ""
+        val link = TvNetDiag.localLink(this)
+        val d = when {
+            netDirectMs != null && netMeasured -> "✓ $link ${netDirectMs} ms"
+            netDirectMs != null -> "✓ $link connecté"
+            netMeasured -> "✗ $link sans Internet"
+            link == "aucun réseau" -> "✗ aucun réseau"
+            else -> "$link connecté · Internet non vérifié"
+        }
+        val g = if (gateway?.connected == true) (if (netMeasured) (netGatewayMs?.let { " · ✓ passerelle $it ms" } ?: " · ✗ passerelle sans Internet") else " · passerelle connectée") else ""
         return d + g
     }
 

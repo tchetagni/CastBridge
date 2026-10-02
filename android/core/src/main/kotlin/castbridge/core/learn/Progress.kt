@@ -1,5 +1,6 @@
 package castbridge.core.learn
 
+import castbridge.core.owner.SafeFile
 import castbridge.core.quiz.Json
 import java.io.File
 import java.io.IOException
@@ -242,13 +243,13 @@ class LearnProgress(val state: LearnState = LearnState(), private val zone: Zone
 
 /** JSON persistence of [LearnState] (one file, written atomically; a damaged file = a fresh start, never a crash). */
 object LearnStore {
-    fun load(f: File): LearnState = runCatching { if (f.isFile) parse(f.readText(Charsets.UTF_8)) else null }.getOrNull() ?: LearnState()
+    private fun valid(text: String) = runCatching { parse(text) }.isSuccess
+
+    /** The main file, else its `.bak` (last good copy) when the main one is missing, truncated or damaged, else a fresh start. */
+    fun load(f: File): LearnState = SafeFile.read(f, ::valid)?.let { runCatching { parse(it.text) }.getOrNull() } ?: LearnState()
 
     fun save(f: File, s: LearnState) {
-        f.parentFile?.mkdirs()
-        val tmp = File(f.path + ".tmp")
-        tmp.writeText(write(s), Charsets.UTF_8)
-        if (!tmp.renameTo(f)) { f.delete(); if (!tmp.renameTo(f)) throw IOException("rename failed") }
+        SafeFile.write(f, write(s), ::valid)
     }
 
     fun write(s: LearnState): String = Json.write(linkedMapOf(

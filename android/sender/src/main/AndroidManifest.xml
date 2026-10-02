@@ -47,6 +47,7 @@
         android:icon="@mipmap/ic_launcher"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:usesCleartextTraffic="true"
+        android:allowBackup="false"
         android:fullBackupContent="@xml/backup_rules"
         android:dataExtractionRules="@xml/data_extraction_rules"
         android:theme="@style/Theme.CastBridge">
@@ -103,6 +104,12 @@
         <!-- Parental control (docs/PARENTAL.md): the parent's own screen -->
         <activity android:name=".ParentalActivity" android:exported="false" android:label="Contrôle parental"
             android:theme="@style/Theme.CastBridge" android:windowSoftInputMode="adjustResize" />
+        <!-- « Contenus libres (CC BY-SA) » : the phone downloads or builds the free-contents archive (no activation needed) -->
+        <activity android:name=".FreeContentActivity" android:exported="false" android:label="Contenus libres"
+            android:theme="@style/Theme.CastBridge" />
+        <provider android:name="androidx.core.content.FileProvider" android:authorities="${applicationId}.freeshare" android:exported="false" android:grantUriPermissions="true">
+            <meta-data android:name="android.support.FILE_PROVIDER_PATHS" android:resource="@xml/free_share_paths" />
+        </provider>
         <!-- Sharing of the PDF / CSV of the Parental tab through the share sheet (not exported: only the app hands out URIs, one file, read only) -->
         <provider android:name="androidx.core.content.FileProvider" android:authorities="${applicationId}.parentalshare" android:exported="false" android:grantUriPermissions="true">
             <meta-data android:name="android.support.FILE_PROVIDER_PATHS" android:resource="@xml/parental_share_paths" />

@@ -28,6 +28,7 @@ class FakeRelay(port: Int, private val clock: () -> Long) : NanoHTTPD("127.0.0.1
         if (s.method == Method.POST) s.parseBody(files)
         val body = files["postData"]?.let { runCatching { Json.obj(it) }.getOrNull() } ?: emptyMap()
         val token = s.headers["authorization"]?.removePrefix("Bearer ")
+        if (!s.uri.startsWith(ChessRelayClient.API)) return json(404, mapOf("error" to "not found"))
         val path = s.uri.removePrefix(ChessRelayClient.API)
         if (path == "/hello") return json(200, mapOf("ok" to true, "protocol" to ChessRoom.PROTOCOL))
         if (path == "/games" && s.method == Method.POST) {
@@ -96,10 +97,10 @@ class FakeRelay(port: Int, private val clock: () -> Long) : NanoHTTPD("127.0.0.1
 
 class ChessRelayTest {
     private var now = 0L
-    private val port = ServerSocket(0).use { it.localPort }
-    private val relay = FakeRelay(port, { now }).apply { start(5000, false) }
+    private val relay = FakeRelay(0, { now }).apply { start(5000, false) }   // port 0 + listeningPort: no TOCTOU
+    private val port = relay.listeningPort
     private val base = "http://127.0.0.1:$port"
-    private val tv = ChessRelayClient(base, enabled = true)
+    private val tv = ChessRelayClient(base, enabled = true, probeConnectTimeoutMs = 1_000)
     private val phone = ChessRelayClient(base, enabled = true)
 
     @AfterTest fun tearDown() { relay.stop() }
@@ -116,7 +117,7 @@ class ChessRelayTest {
 
     @Test fun availabilityProbe() {
         assertTrue(tv.available())
-        assertFalse(ChessRelayClient("$base/absent", enabled = true).available(), "routes not there yet")
+        assertFalse(ChessRelayClient("$base/absent", enabled = true, probeConnectTimeoutMs = 1_000).available(), "routes not there yet")
     }
 
     @Test fun codesAreSixUnambiguousCharacters() {

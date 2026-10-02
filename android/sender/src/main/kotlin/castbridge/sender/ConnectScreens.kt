@@ -125,6 +125,8 @@ fun SettingsScreen(onClose: () -> Unit) {
                     Title("Données hors ligne")
                     Text("Leçons et questions gardées sur le téléphone, envoyées à la TV sans qu'elle ait besoin d'Internet.", style = MaterialTheme.typography.bodySmall, color = MaterialTheme.colorScheme.onSurfaceVariant)
                     LotsEntry()
+                    Text("Contenus libres sous licence CC BY-SA, en un fichier ZIP, sans activation.", style = MaterialTheme.typography.bodySmall, color = MaterialTheme.colorScheme.onSurfaceVariant)
+                    FreeContentEntry()
                     HorizontalDivider()
                     ConnectionSection(v)
                     HorizontalDivider()

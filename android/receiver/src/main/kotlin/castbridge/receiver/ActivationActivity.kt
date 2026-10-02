@@ -114,11 +114,29 @@ class ActivationActivity : Activity() {
         col.addView(Button(this).apply { text = "Chercher la clé sur la clé USB"; textSize = 20f; setOnClickListener { if (!termsOk()) { status.setTextColor(0xFFFF8A80.toInt()); status.text = TunnelTerms.MUST_ACCEPT; termsBox.requestFocus(); return@setOnClickListener }; Thread { val r = ActivationCenter.scanFiles(); h.post { if (r != null) show(r, "la clé USB") else status.text = "Aucun fichier « activation » trouvé sur la clé USB." } }.start() } })
         col.addView(tv("Plus simple : sur le téléphone, ouvrez CastBridge > « Activer la TV », collez la clé : le téléphone trouve cette TV par Bluetooth et l'envoie.", 18f, 0xFFB8C0D6.toInt()))
         col.addView(Button(this).apply { text = "Rendre la TV visible pour le téléphone (Bluetooth)"; textSize = 20f; setOnClickListener { makeVisible() } })
+        // Free contents (CC BY-SA): a ZIP written by the TV itself, usable without an activation key, offline (no HTTP route, no PIN)
+        col.addView(tv("Archive ZIP des contenus sous licence CC BY-SA, utilisable sans clé d'activation", 16f, 0xFFB8C0D6.toInt()))
+        freeButton = Button(this).apply { text = "Télécharger tous les contenus libres"; textSize = 20f; isFocusable = true; setOnClickListener { exportFree() } }
+        col.addView(freeButton)
+        freeStatus = tv("", 16f, 0xFFB8C0D6.toInt()); col.addView(freeStatus)
         if (state is GateState.Grace) col.addView(Button(this).apply { text = "Continuer sans activer pour l'instant"; textSize = 20f; setOnClickListener { goOn() } })
         setContentView(ScrollView(this).apply { setBackgroundColor(0xFF0A0F1E.toInt()); addView(col) })
     }
 
     companion object { const val EXTRA_UPGRADE = "upgrade" }
+    private lateinit var freeButton: Button
+    private lateinit var freeStatus: TextView
+    private fun exportFree() {
+        if (FreeContentExport.busy()) { freeStatus.text = "Export déjà en cours…"; return }
+        freeButton.isEnabled = false; freeStatus.setTextColor(0xFFB8C0D6.toInt()); freeStatus.text = "Préparation de l'archive…"
+        FreeContentExport.start(this, { r -> h.post(r) }, { pct -> freeStatus.text = "Écriture de l'archive : $pct %" }, { o ->
+            freeButton.isEnabled = true
+            when (o) {
+                is FreeContentExport.Outcome.Success -> { freeStatus.setTextColor(0xFF6FE0A0.toInt()); freeStatus.text = o.message }
+                is FreeContentExport.Outcome.Failure -> { freeStatus.setTextColor(0xFFFF8A80.toInt()); freeStatus.text = o.message }
+            }
+        })
+    }
     private lateinit var btLine: TextView
     private lateinit var validate: Button
     private lateinit var termsBox: CheckBox

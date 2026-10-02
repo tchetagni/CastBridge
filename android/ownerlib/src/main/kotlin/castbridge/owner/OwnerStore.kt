@@ -11,7 +11,7 @@ import java.security.SecureRandom
 
 /**
  * The phone's own signing key (one key per tool: this key is NOT the desk tool's key) sealed by the owner's code, the unlock-attempt counter and the journal.
- * The code is never stored: only the vault's check value (one slow key derivation per guess). Private files of the app, excluded from every backup.
+ * The code is never stored: only the vault's check value (one slow key derivation per guess). Private files of the app: allowBackup=false and explicit exclusions (sender res/xml/backup_rules.xml and data_extraction_rules.xml) keep them out of every backup and device transfer.
  */
 class OwnerStore(ctx: Context) {
     private val dir = ctx.filesDir

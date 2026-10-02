@@ -1,5 +1,6 @@
 package castbridge.core.lots
 
+import castbridge.core.tv.AtomicFile
 import java.io.File
 import java.io.RandomAccessFile
 import java.security.SecureRandom
@@ -35,9 +36,7 @@ class RentalVault(val dir: File, private val random: SecureRandom = SecureRandom
     fun putKey(contractKey: String, key: ByteArray): Boolean {
         val f = keyFile(contractKey) ?: return false
         f.parentFile.mkdirs()
-        val tmp = File(f.parentFile, f.name + ".tmp"); tmp.writeBytes(key)
-        if (!tmp.renameTo(f)) { f.delete(); if (!tmp.renameTo(f)) return false }
-        return true
+        return try { AtomicFile.write(f, key); true } catch (_: java.io.IOException) { false }
     }
 
     fun getKey(contractKey: String): ByteArray? = keyFile(contractKey)?.takeIf { it.isFile }?.readBytes()?.takeIf { it.size == 32 }
@@ -66,9 +65,7 @@ class RentalVault(val dir: File, private val random: SecureRandom = SecureRandom
     fun lotFile(lot: LotId, version: Int): File? = lotDir(lot)?.let { File(it, "v$version.lot") }
     fun putLot(lot: LotId, version: Int, sealed: ByteArray): Boolean {
         val f = lotFile(lot, version) ?: return false
-        f.parentFile.mkdirs(); val tmp = File(f.parentFile, f.name + ".tmp"); tmp.writeBytes(sealed)
-        if (!tmp.renameTo(f)) { f.delete(); return tmp.renameTo(f) }
-        return true
+        return try { AtomicFile.write(f, sealed); true } catch (_: java.io.IOException) { false }
     }
 
     /** Decrypts a rented lot file with the contract's key: null when the key is gone, the file is missing, or it was altered or moved to another lot or version. */

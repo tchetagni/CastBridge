@@ -31,7 +31,9 @@ android {
         val trustedKeys = trustedLines.joinToString("\\n")
         if (requireActivation && trustedKeys.isEmpty()) throw GradleException("requireActivation=true mais aucune clé publique de confiance : créez ~/.castbridge-signing/activation-trusted-keys.txt (lignes « kid=… pub=… scopes=… » données par « Clé publique » de la console ou « cle » de l'outil de bureau). Sans elle, personne ne pourrait activer la TV.")
         buildConfigField("boolean", "REQUIRE_ACTIVATION", requireActivation.toString())
-        buildConfigField("int", "ACTIVATION_GRACE_DAYS", ((project.findProperty("castbridge.graceDays") as String?) ?: "30"))
+        // D1 (owner decision): once the fleet is activated, set « lock.graceDays=0 » in version.properties (or pass -Pcastbridge.graceDays=0): NO install gets a grace any more (a pre-lock install
+        // loses its remaining grace and is locked at once). Kept at 30 for now: do NOT change the default here, change version.properties (docs/TRIAL-EDITION.md § 16).
+        buildConfigField("int", "ACTIVATION_GRACE_DAYS", ((project.findProperty("castbridge.graceDays") as String?) ?: ver("lock.graceDays")))
         // ABSOLUTE start of the grace (version.properties « lock.graceStartMs »): only an install whose firstInstallTime is EARLIER gets the grace, which ends at start + graceDays and never restarts.
         buildConfigField("long", "LOCK_GRACE_START_MS", "${(project.findProperty("castbridge.lockGraceStartMs") as String?) ?: ver("lock.graceStartMs")}L")
         buildConfigField("String", "TRUSTED_KEYS", "\"$trustedKeys\"")

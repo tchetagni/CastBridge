@@ -130,7 +130,8 @@ class UpdateInstaller(
         val groups = apks.groupBy { it.pkg }
         for ((pkg, list) in groups) if (pkg == ctx.packageName) {
             val a = list.first()
-            if (a.code < installedCode() && !force) return err(409, "Version plus ancienne (${a.code} < ${installedCode()}) : refusée")
+            val canForce = force && BuildConfig.DEBUG   // release : jamais de rétrogradation
+            if (a.code < installedCode() && !canForce) return err(409, "Version plus ancienne : refusée (rétrogradation impossible sur une TV distribuée)")
             if (!sameSigner(a.info)) return err(400, "Signature différente : l'APK doit être signé avec la même clé que l'app installée")
         }
         if (!canInstall()) {

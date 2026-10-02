@@ -257,7 +257,8 @@ private class TvFacts(private val ctx: Context) : DeviceFacts {
     override val sdkInt = Build.VERSION.SDK_INT
     override val manufacturer: String? = Build.MANUFACTURER
     override val model: String? = Build.MODEL
-    override val deviceName: String? = runCatching { Settings.Global.getString(ctx.contentResolver, Settings.Global.DEVICE_NAME) }.getOrNull()
+    // free text typed by the user (often a first name): never sent (docs/TELEMETRY.md § 1); the server ignores it anyway
+    override val deviceName: String? = null
     override val buildDisplay: String? = Build.DISPLAY
     override val fingerprint: String? = Build.FINGERPRINT
     override val hasLeanback = pm.hasSystemFeature(PackageManager.FEATURE_LEANBACK)

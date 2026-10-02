@@ -31,6 +31,11 @@ class TvPrefs(ctx: Context) {
         putBool("heavy_on_usb", p.heavyOnUsb); putString("heavy_drive", p.heavyDriveId)
     }
 
+    /** Periodic Internet probe (a 204 request to a third party): off by default, the TV stays quiet; the manual test and the features that need Internet still probe. */
+    var netProbe: Boolean
+        get() = getBool("net_probe", false)
+        set(v) = putBool("net_probe", v)
+
     fun getString(key: String, def: String? = null): String? = sp.getString(key, def)
     fun putString(key: String, v: String?) = sp.edit().putString(key, v).apply()
     fun getLong(key: String, def: Long) = sp.getLong(key, def)

@@ -216,6 +216,11 @@ class OptionsWhitelistTest {
         assertTrue("--file-allocation=none" in args); assertTrue("--seed-time=0" in args); assertTrue(args.none { it.startsWith("--async-dns") })
         assertTrue(args.none { it.contains("secret") })
         assertTrue(args.none { it.startsWith("--on-") })
+        // offline profile: no DHT, no listening port, no BitTorrent tuning
+        assertTrue("--enable-dht=false" in args); assertTrue("--enable-dht6=false" in args); assertTrue("--enable-peer-exchange=false" in args)
+        assertTrue("--bt-enable-lpd=false" in args); assertTrue("--follow-torrent=false" in args)
+        assertTrue(args.none { it == "--enable-dht=true" }); assertTrue(args.none { it.startsWith("--listen-port") || it.startsWith("--dht-listen-port") || it.startsWith("--dht-file-path") })
+        assertTrue(args.none { it.startsWith("--bt-") && it != "--bt-enable-lpd=false" })
         assertEquals("rpc-secret=zz\n", Aria2Config.conf("zz"))
         assertTrue("--seed-time=${Aria2Config.SEED_TIME_ON_MIN}" in Aria2Config.args(File("c"), File("s"), File("d"), 1, 1, DlSettings(seeding = true), null, listOf("1.1.1.1"), File("h")))
     }

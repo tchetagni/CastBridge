@@ -51,3 +51,51 @@ class PinGuard(
     fun retryAfterSeconds(ip: String): Long =
         ((entries[ip]?.lockedUntil ?: 0) - now()).coerceAtLeast(0).let { (it + 999) / 1000 }
 }
+
+/**
+ * Anti DNS-rebinding: the TV API answers only requests whose `Host` header is a private / local IP literal or `localhost`
+ * (with or without a port). A web page reaching the TV through a DNS name it controls sends that name as Host: refused.
+ * An absent or empty Host (HTTP/1.0 clients) is allowed.
+ */
+object HostGuard {
+    fun allowed(host: String?): Boolean {
+        val raw = host?.trim().orEmpty()
+        if (raw.isEmpty()) return true
+        val h: String
+        if (raw.startsWith("[")) {
+            val end = raw.indexOf(']'); if (end < 0) return false
+            val rest = raw.substring(end + 1)
+            if (rest.isNotEmpty() && !(rest.startsWith(":") && rest.drop(1).all { it.isDigit() } && rest.length > 1)) return false
+            h = raw.substring(1, end)
+        } else if (raw.count { it == ':' } > 1) {
+            h = raw   // bare IPv6 literal, no port
+        } else {
+            val i = raw.indexOf(':')
+            if (i >= 0) {
+                val port = raw.substring(i + 1)
+                if (port.isEmpty() || !port.all { it.isDigit() }) return false
+                h = raw.substring(0, i)
+            } else h = raw
+        }
+        val name = h.lowercase()
+        if (name == "localhost") return true
+        return if (':' in name) ipv6Local(name) else ipv4Local(name)
+    }
+
+    private fun ipv4Local(h: String): Boolean {
+        val parts = h.split('.')
+        if (parts.size != 4) return false
+        val o = parts.map { p -> if (p.isEmpty() || p.length > 3 || !p.all { it.isDigit() }) return false else p.toInt() }
+        if (o.any { it > 255 }) return false
+        return o[0] == 10 || o[0] == 127 || (o[0] == 172 && o[1] in 16..31) || (o[0] == 192 && o[1] == 168) || (o[0] == 169 && o[1] == 254)
+    }
+
+    private fun ipv6Local(h: String): Boolean {
+        if (!h.all { it in '0'..'9' || it in 'a'..'f' || it == ':' || it == '.' }) return false
+        if (h == "::1" || h == "0:0:0:0:0:0:0:1") return true
+        val first = h.substringBefore(':')
+        if (first.isEmpty() || first.length > 4) return false
+        val v = first.toIntOrNull(16) ?: return false
+        return (v and 0xFFC0) == 0xFE80 || (v and 0xFE00) == 0xFC00   // fe80::/10 link-local, fc00::/7 ULA
+    }
+}

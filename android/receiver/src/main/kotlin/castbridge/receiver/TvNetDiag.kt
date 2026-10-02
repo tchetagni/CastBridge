@@ -15,7 +15,10 @@ import java.net.URL
 object TvNetDiag {
     private fun ms(t0: Long) = (System.nanoTime() - t0) / 1_000_000
 
-    /** One quick HTTP check (204 expected) on a path; returns the time in ms, or null if Internet does not answer. */
+    /**
+     * NEVER PERIODIC (offline profile, audit SE-7): this request leaves for a third party (connectivitycheck.gstatic.com). It runs only on a manual
+     * action (Tests Internet screen), when the « netProbe » setting is on, or when a feature that needs Internet asks (remote-assistance tunnel).
+     * One quick HTTP check (204 expected) on a path; returns the time in ms, or null if Internet does not answer. */
     fun probe(proxy: Proxy?): Long? = runCatching {
         val t0 = System.nanoTime()
         (URL("http://connectivitycheck.gstatic.com/generate_204").openConnection(proxy ?: Proxy.NO_PROXY) as HttpURLConnection).run {

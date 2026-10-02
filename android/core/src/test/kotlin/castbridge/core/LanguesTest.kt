@@ -33,8 +33,17 @@ class LanguesTest {
         val p = samplePack()
         assertEquals(emptyList(), LangValidator.validate(p))
         assertEquals(LangLots.Parts(Lang.ZH, LangLevel.A0, "salut", Lang.FR), p.parts)
-        assertEquals(4, p.units.single().exercises.size)
+        assertEquals(9, p.units.single().exercises.size)
         assertTrue(p.media.values.all { it.synthetic })
+    }
+    @Test fun allLanguagePacksParseAndValidate() {
+        val dirs = (content.listFiles { f -> f.isDirectory && File(f, "langue.json").exists() } ?: emptyArray()).sortedBy { it.name }
+        assertTrue(dirs.isNotEmpty(), "aucun pack de langue trouvé sous content/langues")
+        for (d in dirs) {
+            val files = mapOf("langue.json" to File(d, "langue.json").readText(), "media.json" to File(d, "media.json").readText())
+            val p = LangPackJson.parse(files)
+            assertEquals(emptyList(), LangValidator.validate(p), d.name)
+        }
     }
     @Test fun validatorCatchesMissingReadingLicenceAndMedia() {
         val p = samplePack()
