@@ -4,6 +4,7 @@ package castbridge.core.parental.tab
  * TV side: turns the usage meter's ticks (what is in front, for how long) into sessions of the [TvJournal]: « Vidéo X, 42 min », « Quiz, 15 min ».
  * First-hand measure, so MESURÉ. A session closes when the activity or its title changes, when nothing runs any more, or after [maxMs] (so that a
  * TV switched off in the middle loses at most that much); sessions under [minMs] are ignored (a screen glimpsed). Pure: the TV glue feeds it.
+ * Every [EventType] is accepted, [EventType.SUDOKU] included (a game is timed like a video).
  */
 class SessionTracker(private val journal: TvJournal, private val now: () -> Long = System::currentTimeMillis, val minMs: Long = 30_000, val maxMs: Long = 30 * 60_000L) {
     private var type: EventType? = null
