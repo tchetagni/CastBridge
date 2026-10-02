@@ -26,6 +26,7 @@ import castbridge.core.trust.PairFlow
 import castbridge.core.trust.PairStep
 import castbridge.core.trust.Trigger
 import castbridge.core.trust.LinkSession
+import castbridge.core.trust.LinkStart
 import castbridge.core.trust.PhoneLink
 import castbridge.core.trust.SavedTv
 import castbridge.core.trust.SavedTvs
@@ -120,6 +121,7 @@ object TvLinkManager {
             tunnelBase = { BtSshGatewayService.apiBase(saved.default()?.address) }),     // route of last resort: the TV's API through the Bluetooth gateway
             linkEnv, saved, PrefsLinkStore(creds),
             canJoinWifiDirect = { Build.VERSION.SDK_INT >= 29 })
+        if (_state.value is LinkUi.NoTv) publish(null)       // the first HELLO takes seconds: until then « Vérification… » for a saved TV, not the initial NoTv
         if (saved.list().isNotEmpty()) LinkJobService.schedulePeriodic(app)
     }
 
@@ -237,12 +239,15 @@ object TvLinkManager {
 
     // ---- the loop ----
 
-    private fun publish(step: LinkDriver.Step) {
+    /** [step] null = nothing observed yet (cold process): never « Aucune TV » while a TV is saved ([LinkStart]). */
+    private fun publish(step: LinkDriver.Step?) {
+        val list = saved.list()
         val tv = saved.default()
-        val s = step.session
-        val v = step.view
+        val s = step?.session
+        val v = LinkStart.view(list.size, tv?.name, step?.view)
         _state.value = when {
-            tv == null || v.state is LinkState.NoTv -> LinkUi.NoTv
+            v == null -> LinkUi.NoTv
+            tv == null -> LinkUi.Status(v, list.first())
             s != null && s.tv.address == tv.address && (v.state.isGood || v.state is LinkState.Reconnecting) -> LinkUi.Connected(s, v)
             else -> LinkUi.Status(v, tv)
         }

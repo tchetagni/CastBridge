@@ -285,6 +285,16 @@ class LinkDriverTest {
         assertTrue(s2.view.state.isGood, s2.view.state.key)
     }
 
+    /** fix-notv-cold-start: a « no TV » model persisted while the registry was empty must not hide (and freeze) a TV saved since. */
+    @Test fun persistedNoTvModelDoesNotHideASavedTv() {
+        tv.reg.trust(tv.phone, "Galaxy")
+        phone.store.saveModel(LinkMachine.Model(shown = LinkState.NoTv, since = 0, tvName = "TV").encode())
+        val driver2 = LinkDriver(phone.link, phone.env, phone.saved, phone.store, phone.machine, { 0.5 })
+        val s = driver2.step(Trigger.APP_OPENED)
+        assertFalse(s.view.state is LinkState.NoTv, s.view.state.key)
+        assertTrue(s.view.state.isGood, "the first step reaches the TV: ${s.view.state.key}")
+    }
+
     @Test fun backgroundPhoneIsBatteryFriendly() {
         connect(); phone.env.fg = false
         val s = phone.step()

@@ -241,8 +241,9 @@ class LinkDriver(
 
     // ---------------------------------------------------------------------------------------------------- result
 
+    /** A « no TV » model persisted while the registry was empty never hides a TV saved since (it would also stop the retries: [Retry.Never]). */
     private fun restore(tv: SavedTv?, now: Long): LinkMachine.Model =
-        LinkMachine.Model.decode(store.loadModel(), now) ?: machine.initial(tv != null, tv?.name ?: "TV")
+        LinkMachine.Model.decode(store.loadModel(), now)?.takeUnless { tv != null && it.shown is LinkState.NoTv } ?: machine.initial(tv != null, tv?.name ?: "TV")
 
     private fun done(before: LinkMachine.Model, after: LinkMachine.Model, now: Long, trigger: Trigger): Step = finish(after, now, machine.nextAttempt(after, env.foreground(), random).let { (it as? Retry.After)?.ms })
 

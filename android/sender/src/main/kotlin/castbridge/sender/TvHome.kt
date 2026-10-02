@@ -62,9 +62,19 @@ fun TvHub() {
 }
 
 /** The TV the home talks to (chosen once in the first-connection assistant). */
-private class HomeTv(ctx: Context) {
+internal class HomeTv(ctx: Context) {
     private val sp = ctx.applicationContext.getSharedPreferences("castbridge_home", Context.MODE_PRIVATE)
     var name: String? get() = sp.getString("tv", null); set(v) { sp.edit().putString("tv", v).apply() }
+}
+
+/**
+ * « Ouvrir avec CastBridge » asks the main screen to open on the CastBridge TV tab, on « Ajouter ma TV » or on the code entry
+ * (the existing assistant « Trouvons votre TV »). One-shot: consumed by [MainActivity] (tab) and [TvHome] (screen).
+ */
+object TvHomeRequest {
+    const val EXTRA = "castbridge.open"
+    const val TV = "tv"; const val ADD_TV = "add_tv"; const val ENTER_PIN = "enter_pin"
+    val pending = kotlinx.coroutines.flow.MutableStateFlow<String?>(null)
 }
 
 private fun eta(left: Long, bps: Long): String {
@@ -95,6 +105,15 @@ fun TvHome(onAdvanced: () -> Unit) {
     val tv = tvs.firstOrNull { it.name == tvName }
     val client = session?.base?.let { TvClient(it, session.credential) }
         ?: tv?.takeIf { TvAuth.isUsable(pin) || TvLinkManager.saved.list().isEmpty() }?.let { TvClient(it.base, pin) }
+    // sent by « Ouvrir avec CastBridge »: « Ajouter ma TV » or the code entry of the assistant
+    val request by TvHomeRequest.pending.collectAsState()
+    LaunchedEffect(request) {
+        when (request) {
+            TvHomeRequest.ADD_TV -> { adding = true; TvHomeRequest.pending.value = null }
+            TvHomeRequest.ENTER_PIN -> { wizard = true; TvHomeRequest.pending.value = null }
+            TvHomeRequest.TV -> TvHomeRequest.pending.value = null
+        }
+    }
 
     if (adding) {
         AddTvFlow(onClose = { adding = false }, onAdded = { t ->

@@ -23,6 +23,23 @@ import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
+import androidx.lifecycle.lifecycleScope
+import castbridge.core.trust.PinCheck
+import castbridge.core.trust.SendAction
+import castbridge.core.trust.SendChoice
+import castbridge.core.trust.SendChoices
+import castbridge.core.trust.SendFacts
+import castbridge.core.trust.SendRoute
+import castbridge.core.trust.TvAuth
+import castbridge.core.tv.TvClient
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.first
+import kotlinx.coroutines.isActive
+import kotlinx.coroutines.withTimeoutOrNull
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 
 /**
  * « Ouvrir avec CastBridge » on a video, audio or image: instead of always starting the player, ask what to do.
@@ -37,29 +54,37 @@ class OpenWithActivity : ComponentActivity() {
         TvLinkManager.start(this)
         val (name, size) = describe(this, uri)
         val canPlay = true
+        // The TV of the code (PIN) path, as the home screen knows it: a phone may use its TV this way without any trusted (Bluetooth) TV saved.
+        val pins = PinStore(this)
+        val pinTv = HomeTv(this).name
+        val pinCheck = MutableStateFlow(PinCheck.UNKNOWN)
+        if (pinTv != null && TvLinkManager.saved.list().isEmpty() && TvAuth.isUsable(pins.get(pinTv))) checkPinTv(pinTv, pins.get(pinTv), pinCheck)
         setContent {
             CastTheme {
                 val link by TvLinkManager.state.collectAsState()
+                val check by pinCheck.collectAsState()
                 val session = (link as? LinkUi.Connected)?.session
-                val viaBluetoothOnly = session != null && session.base == null
+                val choice = SendChoices.decide(SendFacts(
+                    savedCount = TvLinkManager.saved.list().size, defaultName = TvLinkManager.saved.default()?.name,
+                    stepView = when (val l = link) { is LinkUi.Connected -> l.view; is LinkUi.Status -> l.view; else -> null },
+                    session = session != null, sessionName = session?.tv?.name, btOnly = session != null && session.base == null,
+                    pinTvName = pinTv, pinStored = pinTv != null && TvAuth.isUsable(pins.get(pinTv)), pinCheck = check))
                 AlertDialog(
                     onDismissRequest = ::finish,
                     title = { Text(name.substringBeforeLast('.').replace('_', ' ').replace('.', ' '), maxLines = 2) },
                     text = {
                         Column(verticalArrangement = Arrangement.spacedBy(6.dp)) {
                             if (size > 0) Text(formatSize(size), style = MaterialTheme.typography.bodyMedium)
-                            Text(when {
-                                session != null -> "TV : ${session.tv.name}" + if (viaBluetoothOnly) " (par Bluetooth : plus lent)" else ""
-                                link is LinkUi.NoTv -> "Aucune TV ajoutée : ouvrez CastBridge pour ajouter votre TV."
-                                else -> "Connexion à la TV…"
-                            }, style = MaterialTheme.typography.bodyMedium)
+                            Text(choice.status, style = MaterialTheme.typography.bodyMedium)
                             Text("La copie se fait en arrière-plan, sans lire le fichier. Suivez-la dans la notification.", style = MaterialTheme.typography.bodySmall)
+                            choice.note?.let { Text(it, style = MaterialTheme.typography.bodySmall) }
                             androidx.compose.foundation.layout.Spacer(Modifier.height(8.dp))
-                            Button({ send(uri, name, move = false) }, Modifier.fillMaxWidth(), enabled = session != null) { Text("Copier vers la TV") }
-                            OutlinedButton({ send(uri, name, move = true) }, Modifier.fillMaxWidth(), enabled = session != null && !viaBluetoothOnly) {
+                            if (choice.action != SendAction.NONE)
+                                Button({ openApp(choice.action) }, Modifier.fillMaxWidth()) { Text(choice.action.label) }
+                            Button({ send(uri, name, move = false, choice, pinTv, pins) }, Modifier.fillMaxWidth(), enabled = choice.copyEnabled) { Text("Copier vers la TV") }
+                            OutlinedButton({ send(uri, name, move = true, choice, pinTv, pins) }, Modifier.fillMaxWidth(), enabled = choice.moveEnabled) {
                                 Text("Déplacer vers la TV")
                             }
-                            if (viaBluetoothOnly) Text("Le déplacement n'est pas disponible par Bluetooth.", style = MaterialTheme.typography.bodySmall)
                         }
                     },
                     confirmButton = { if (canPlay) TextButton({ forwardToPlayer(); finish() }) { Text("Lire ici") } },
@@ -69,16 +94,64 @@ class OpenWithActivity : ComponentActivity() {
         }
     }
 
-    private fun send(uri: Uri, name: String, move: Boolean) {
+    /**
+     * The same check as the home screen's green dot ([TvHome]: `/api/info` with the code), made ONCE per address found: a refusal is never
+     * repeated (five wrong codes lock the TV for a minute). Not found within a few seconds = UNREACHABLE (the upload itself keeps looking).
+     */
+    private fun checkPinTv(tvName: String, credential: String, out: MutableStateFlow<PinCheck>) {
+        val discovery = TvDiscovery(this)
+        discovery.start()
+        lifecycleScope.launch {
+            try {
+                var tried: String? = null
+                var waited = 0
+                while (isActive) {
+                    // (tvs is shared WhileSubscribed: read it by subscribing, never through .value)
+                    val tv = withTimeoutOrNull(1000) { discovery.tvs.first { l -> l.any { it.name == tvName && it.base != tried } } }?.firstOrNull { it.name == tvName }
+                    if (tv != null) {
+                        tried = tv.base
+                        val r = withContext(Dispatchers.IO) { runCatching { TvClient(tv.base, credential).info() } }
+                        val e = r.exceptionOrNull() as? TvClient.HttpError
+                        out.value = when {
+                            r.isSuccess -> PinCheck.OK
+                            e?.code == 401 && "locked" in e.message.orEmpty() -> PinCheck.LOCKED
+                            e?.code == 401 && "bad token" in e.message.orEmpty() -> { TvLinkManager.poke(); PinCheck.UNREACHABLE }
+                            e?.code == 401 -> PinCheck.REJECTED
+                            else -> PinCheck.UNREACHABLE
+                        }
+                        if (out.value != PinCheck.UNREACHABLE) break
+                        delay(2000)
+                    } else if (++waited == 8 && out.value == PinCheck.UNKNOWN) out.value = PinCheck.UNREACHABLE
+                }
+            } finally { discovery.stop() }
+        }
+    }
+
+    /** Opens CastBridge on the CastBridge TV tab, on « Ajouter ma TV » or on the code entry (existing assistant). */
+    private fun openApp(action: SendAction) {
+        val what = when (action) { SendAction.ADD_TV -> TvHomeRequest.ADD_TV; SendAction.ENTER_PIN -> TvHomeRequest.ENTER_PIN; else -> TvHomeRequest.TV }
+        startActivity(Intent(this, MainActivity::class.java).putExtra(TvHomeRequest.EXTRA, what)
+            .addFlags(Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_SINGLE_TOP))
+        finish()
+    }
+
+    private fun send(uri: Uri, name: String, move: Boolean, choice: SendChoice, pinTv: String?, pins: PinStore) {
         // Keep read access beyond this window when the provider allows it (a move deletes the original once the TV holds it).
         runCatching { contentResolver.takePersistableUriPermission(uri, Intent.FLAG_GRANT_READ_URI_PERMISSION or Intent.FLAG_GRANT_WRITE_URI_PERMISSION) }
             .onFailure { runCatching { contentResolver.takePersistableUriPermission(uri, Intent.FLAG_GRANT_READ_URI_PERMISSION) } }
         val size = describe(this, uri).second
-        runCatching { TransferQueue.enqueue(this, uri, name, size, move) }
-            .onSuccess { where ->
-                Toast.makeText(this, (if (move) "Déplacement" else "Copie") + " vers la TV en arrière-plan (" + where + ") : voir la notification.", Toast.LENGTH_LONG).show()
-                finish()
-            }.onFailure { Toast.makeText(this, "Impossible de mettre l'envoi en file : ${it.message}", Toast.LENGTH_LONG).show() }
+        val what = if (move) "Déplacement" else "Copie"
+        when (choice.route) {
+            // the trusted link: the queue waits (≤ 1 min) for the link being (re)established
+            SendRoute.QUEUE -> runCatching { TransferQueue.enqueue(this, uri, name, size, move) }
+                .onSuccess { where -> Toast.makeText(this, "$what vers la TV en arrière-plan ($where) : voir la notification.", Toast.LENGTH_LONG).show(); finish() }
+                .onFailure { Toast.makeText(this, "Impossible de mettre l'envoi en file : ${it.message}", Toast.LENGTH_LONG).show() }
+            // the code path: the same upload as the home screen for one file (finds the TV by its name, waits for it), nothing played on the TV
+            SendRoute.PIN_UPLOAD -> runCatching { UploadService.start(this, uri, name, pinTv!!, null, pins.get(pinTv), autoPlay = false, move = move) }
+                .onSuccess { Toast.makeText(this, "$what vers la TV en arrière-plan : voir la notification.", Toast.LENGTH_LONG).show(); finish() }
+                .onFailure { Toast.makeText(this, "Impossible de démarrer l'envoi : ${it.message}", Toast.LENGTH_LONG).show() }
+            SendRoute.NONE -> Unit
+        }
     }
 
     /** Hands the very same intent to the player (grants included). */

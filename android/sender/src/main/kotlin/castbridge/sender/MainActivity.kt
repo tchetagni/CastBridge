@@ -45,6 +45,7 @@ class MainActivity : ComponentActivity() {
 
     /** « Mise à jour prête — Installer » notification: install now (Android asks for confirmation). */
     private fun installFrom(i: Intent?) {
+        i?.getStringExtra(TvHomeRequest.EXTRA)?.let { TvHomeRequest.pending.value = it; i.removeExtra(TvHomeRequest.EXTRA) }   // « Ouvrir avec CastBridge »
         if (i?.getBooleanExtra(PhoneUpdater.EXTRA_INSTALL, false) != true) return
         i.removeExtra(PhoneUpdater.EXTRA_INSTALL)
         PhoneConnect.feature("updates", "notification")
@@ -90,6 +91,8 @@ class MainActivity : ComponentActivity() {
             if (i != tab) listOf("cast", null, "games", "player", "learn", null)[i]?.let { PhoneConnect.feature(it, "tile") }
             tab = i
         }
+        val tvRequest by TvHomeRequest.pending.collectAsState()
+        LaunchedEffect(tvRequest) { if (tvRequest != null) { settings = false; tab = 1 } }     // the CastBridge TV tab, where TvHome consumes the request
         Scaffold(
             containerColor = MaterialTheme.colorScheme.background,
             topBar = {
