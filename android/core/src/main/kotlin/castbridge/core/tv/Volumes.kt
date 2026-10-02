@@ -199,6 +199,11 @@ interface VolumeStore {
     fun openPart(name: String): OutputStream
     /** Turns the partial upload into the final file (replacing an older one) and makes sure it reached the medium. */
     fun commit(name: String)
+    /**
+     * Forces the bytes of the partial upload [name] onto the medium (fsync) and returns true only when that is certain. A store that cannot
+     * guarantee it answers false (the default): the Mover then refuses to delete its source.
+     */
+    fun syncPart(name: String): Boolean = false
     fun open(name: String, from: Long = 0): InputStream
     fun deleteFinal(name: String): Boolean
     fun deletePart(name: String)
@@ -245,9 +250,11 @@ open class FileStore(override val volume: StorageVolume, private val free: () ->
     override fun finalSize(name: String): Long? = f(name).takeIf { it.isFile }?.length()
     override fun partSize(name: String): Long = p(name).takeIf { it.isFile }?.length() ?: 0
     override fun openPart(name: String): OutputStream = FileOutputStream(File(dir, diskName(name) + Storage.PART), true)
+    override fun syncPart(name: String): Boolean =
+        runCatching { RandomAccessFile(File(dir, diskName(name) + Storage.PART), "rw").use { it.fd.sync() }; true }.getOrDefault(false)
     override fun commit(name: String) {
         val part = File(dir, diskName(name) + Storage.PART)
-        if (volume.kind != VolumeKind.INTERNAL) RandomAccessFile(part, "rw").use { it.fd.sync() }   // a removable drive may be pulled right after
+        RandomAccessFile(part, "rw").use { it.fd.sync() }   // on every kind of volume: the data must be on the medium before the rename (and, for a move, before the source goes)
         val fin = File(dir, diskName(name))
         if (fin.exists()) fin.delete()
         if (!part.renameTo(fin)) throw IOException("rename failed")

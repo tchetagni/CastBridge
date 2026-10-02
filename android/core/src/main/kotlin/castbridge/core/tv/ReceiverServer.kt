@@ -212,6 +212,18 @@ class ReceiverServer(
         st.partSize(n).takeIf { it > 0 }?.let { Hit(v, st, n, it) }
     }.maxByOrNull { it.size }
 
+    /** A partial copy of [name] is being written now, or was written less than [PART_BUSY_MS] ago (its modification time on a real folder). */
+    private fun partBusy(name: String): Boolean {
+        if (progress.isRunning("put:" + name.lowercase())) return true
+        val now = System.currentTimeMillis()
+        return volumes.volumes().any { v ->
+            val fs = volumes.store(v) as? FileStore ?: return@any false
+            val n = v.storedName(name)
+            val f = File(fs.dir, fs.diskName(n) + Storage.PART)
+            f.isFile && now - f.lastModified() < PART_BUSY_MS
+        }
+    }
+
     private fun isPlaying(name: String): Boolean {
         val ps = player.state()
         val n = ps.name ?: return false
@@ -465,11 +477,18 @@ class ReceiverServer(
                 }
             }
             path == "/api/reset" -> named(p) { name ->
-                volumes.volumes().forEach { v ->
-                    val st = volumes.store(v); val n = v.storedName(name)
-                    st.deletePart(n); (st as? FileStore)?.let { Meta.delete(it.dir, n) }; volumes.forgetPart(v, n)
+                // Never under a live upload of that name (another phone, or this one on another connection): a partial copy that is being written, or that was
+                // written a moment ago, is not ours to drop (two phones sending the same name would erase each other for ever).
+                if (partBusy(name)) return@named json(Response.Status.CONFLICT, """{"error":"busy","code":"BUSY","name":${q(name)}}""")
+                synchronized(FileLocks.of(LOCK_ROOT, name)) {
+                    if (partBusy(name)) return@named json(Response.Status.CONFLICT, """{"error":"busy","code":"BUSY","name":${q(name)}}""")
+                    volumes.volumes().forEach { v ->
+                        val st = volumes.store(v); val n = v.storedName(name)
+                        st.deletePart(n); (st as? FileStore)?.let { Meta.delete(it.dir, n) }; volumes.forgetPart(v, n)
+                    }
+                    volumes.forgetMissing(name); meters.remove(name); invalidate()
                 }
-                volumes.forgetMissing(name); meters.remove(name); invalidate(); ok(partJson(name))
+                ok(partJson(name))
             }
             path == "/api/delete" -> named(p) { name ->
                 if (moving(name)) return@named json(Response.Status.CONFLICT, """{"error":"moving"}""")
@@ -587,9 +606,11 @@ class ReceiverServer(
         if (!StoragePolicy.isValidTarget(target, volumes.volumes() + volumes.missingVolumes())) return bad("bad target")
         findFinalOrOrigin(name, total)?.let { if (it.size == total) return ok(sizeChecked(partJson(name, total))) }
         // A finished file of that very name but another size is another file: never "done", never replaced silently (the phone says so to the user).
-        if (findFinal(name)?.let { it.size != total } == true && findPart(name) == null) return nameTaken(name, total)
+        if (findFinal(name)?.let { it.size != total } == true) return nameTaken(name, total)
         synchronized(FileLocks.of(LOCK_ROOT, name)) {
             if (moving(name)) return json(Response.Status.CONFLICT, """{"error":"moving"}""")
+            // Same test again under the lock (a final may have appeared since): a partial copy never goes on next to a finished homonym of another size.
+            if (finals(name).any { it.size != total }) return nameTaken(name, total)
             var owner = findPart(name)
             if (owner == null) volumes.missingOwner(name)?.let { return removed() }
             val cur = owner?.size ?: 0L
@@ -667,11 +688,14 @@ class ReceiverServer(
                         flush()
                     }
                     if (st.partSize(o.name) == total) {
+                        // Last look before the commit (which replaces a final of the same name): a finished homonym of another size is another file. Decision: the
+                        // partial copy is KEPT and the phone gets 409 NAME_TAKEN (nothing is overwritten, nothing is deleted, no duplicate name is invented).
+                        if (finals(name).any { it.size != total }) { progress.interrupted(pid); return nameTaken(name, total) }
                         try { st.commit(o.name) } catch (e: IOException) { throw DiskError(e) }
                         fileStore?.let { Storage.forget(it.dir, o.name); Meta.delete(it.dir, o.name) }
                         meters.remove(name); volumes.forgetPart(v, o.name)
                         // The upload replaced any older file of that name: no silent duplicate on another volume.
-                        finals(name).filter { it.v.id != v.id && !isPlaying(name) }.forEach {
+                        finals(name).filter { it.v.id != v.id && it.size == total && !isPlaying(name) }.forEach {
                             it.st.deleteFinal(it.name); (it.st as? FileStore)?.let { f -> Storage.forget(f.dir, it.name) }
                         }
                         // committed: the copy IS received, whatever filing then does (an IOException there must not turn it into « reprise en attente »)
@@ -811,10 +835,11 @@ class ReceiverServer(
                     is castbridge.core.xfer.PartAssembler.Finish.DiskFail -> { progress.fail("x:" + sess.manifest.id, diskReason(v, DiskError(r.cause))); diskFailure(v, DiskError(r.cause)) }
                     is castbridge.core.xfer.PartAssembler.Finish.Done -> {
                         val st = volumes.store(v); val fileStore = st as? FileStore
+                        if (finals(name).any { it.size != sess.manifest.size }) return nameTaken(name, sess.manifest.size)      // never replace a homonym of another size (the parts stay)
                         try { st.commit(sess.diskName) } catch (e: IOException) { progress.fail("x:" + sess.manifest.id, diskReason(v, DiskError(e))); return diskFailure(v, DiskError(e)) }
                         fileStore?.let { Storage.forget(it.dir, sess.diskName); Meta.delete(it.dir, sess.diskName) }
                         transfers.remove(sess.manifest.id)
-                        finals(name).filter { it.v.id != v.id && !isPlaying(name) }.forEach {
+                        finals(name).filter { it.v.id != v.id && it.size == sess.manifest.size && !isPlaying(name) }.forEach {
                             it.st.deleteFinal(it.name); (it.st as? FileStore)?.let { f -> Storage.forget(f.dir, it.name) }
                         }
                         val filed = try { fileReceived(v, st, sess.diskName, name, sess.manifest.size) } catch (e: IOException) { null }
@@ -956,6 +981,8 @@ class ReceiverServer(
         if (part == null && findFinal(name) != null) return """{"name":${q(name)},"length":0,"done":false,"volume":null,"code":"NAME_TAKEN"}"""
         val meta = part?.let { h -> (h.st as? FileStore)?.let { Meta.read(it.dir, h.name) } }
         if (part != null && meta != null && meta != size) return partOtherJson(name, part.size)
+        // A partial copy of a real folder without its Meta (sidecar lost): nobody can say which content it is, so it is never resumed for a known size.
+        if (part != null && meta == null && part.st is FileStore) return partOtherJson(name, part.size)
         return partJson(name)
     }
 
@@ -1466,6 +1493,8 @@ class ReceiverServer(
         const val PORT = 8765
         const val VERSION = "0.7"
         const val MAX_EXT_BODY = 4 shl 20
+        /** A partial copy written less than this long ago (or being written) is busy: /api/reset refuses to drop it. */
+        const val PART_BUSY_MS = 60_000L
         private val ADMIN_HTML: String by lazy {
             ReceiverServer::class.java.getResourceAsStream("/castbridge/admin.html")?.use { String(it.readBytes(), Charsets.UTF_8) }
                 ?: "<!doctype html><meta charset=utf-8><title>CastBridge TV</title><h1>CastBridge TV</h1><p>Page d'administration indisponible.</p>"
