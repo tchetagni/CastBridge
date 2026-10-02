@@ -8,7 +8,6 @@ import java.io.File
 import java.io.IOException
 import java.io.InputStream
 import java.net.HttpURLConnection
-import java.net.ServerSocket
 import java.net.URL
 import castbridge.core.xfer.*
 import java.nio.channels.FileChannel
@@ -33,18 +32,18 @@ class FilingServerTest {
             (if (usbPresent) listOf(StorageVolume("usb-1", "Clé USB", usbDir, VolumeKind.REMOVABLE, Fs.EXFAT, 0, 0, true)) else emptyList())
     }
     private val registry = VolumeRegistry(provider).also { it.refresh() }
-    private val port = ServerSocket(0).use { it.localPort }
-    private val base = "http://127.0.0.1:$port"
     private val player = FakePlayer()
     private val flags = object : ContentFlags {
         override fun childActive() = childActive
         override fun protectedNames(items: List<LibraryItem>) = items.map { it.name }.filter { it in protectedNames }.toSet()
     }
-    private val server = ReceiverServer(registry, player, port, profile = TvProfile(minFreeBytes = 0, minFreeAfterTransfer = 0, target = "internal"), onNotice = { notices += it },
+    private val server = ReceiverServer(registry, player, 0, profile = TvProfile(minFreeBytes = 0, minFreeAfterTransfer = 0, target = "internal"), onNotice = { notices += it },
         routeGuard = { path -> if (trial && TrialPolicy.routeBlocked(path)) TrialPolicy.MESSAGE else null },
         contentFlags = flags, folders = folders, filingLang = { lang },
         extension = ApiExtension { path, m, p -> TrashApi(registry, folders = folders, changed = { }).handle(path, m, p) },
-        hostCheck = false).apply { start(5000, false) }
+        hostCheck = false).apply { start(5000, false) }      // port 0: the server binds a free port itself (no close-then-reuse race)
+    private val port = server.listeningPort
+    private val base = "http://127.0.0.1:$port"
     private val tv = TvClient(base)
     private val data = Random(7).nextBytes(400_000)
 
@@ -53,6 +52,8 @@ class FilingServerTest {
     private fun call(method: String, path: String): Pair<Int, String> {
         val c = URL(base + path).openConnection() as HttpURLConnection
         c.requestMethod = method
+        c.setRequestProperty("Connection", "close")        // a refused request must not leave a pooled connection the next call would reuse
+        c.connectTimeout = 5000; c.readTimeout = 10_000
         if (method == "POST") { c.doOutput = true; c.setFixedLengthStreamingMode(0); c.outputStream.close() }
         val code = c.responseCode
         return code to ((if (code < 400) c.inputStream else c.errorStream)?.readBytes()?.decodeToString() ?: "")
@@ -60,6 +61,7 @@ class FilingServerTest {
     private fun put(name: String, offset: Long, total: Long, bytes: ByteArray): Pair<Int, String> {
         val c = URL("$base/upload/${TvClient.enc(name)}?offset=$offset&total=$total").openConnection() as HttpURLConnection
         c.requestMethod = "PUT"; c.doOutput = true; c.setFixedLengthStreamingMode(bytes.size)
+        c.setRequestProperty("Connection", "close"); c.connectTimeout = 5000; c.readTimeout = 10_000
         c.outputStream.use { it.write(bytes) }
         val code = c.responseCode
         return code to (if (code < 400) c.inputStream else c.errorStream).readBytes().decodeToString()
@@ -261,7 +263,7 @@ class FilingServerTest {
         // a TV restarted with a lost index (new store instance): files are re-adopted from the category folders, the clean name still answers
         server.stop()
         val s2 = ReceiverServer(VolumeRegistry(StaticVolumes { listOf(StorageVolume("internal", "Mémoire interne", internalDir, VolumeKind.INTERNAL, Fs.UNKNOWN, 0, 0, false)) }.let { it }).also { it.refresh() },
-            player, ServerSocket(0).use { it.localPort }.also { }, profile = TvProfile(minFreeBytes = 0, minFreeAfterTransfer = 0), filingLang = { "fr" }, hostCheck = false)
+            player, 0, profile = TvProfile(minFreeBytes = 0, minFreeAfterTransfer = 0), filingLang = { "fr" }, hostCheck = false)
         s2.start(5000, false)
         try {
             val port2 = s2.listeningPort

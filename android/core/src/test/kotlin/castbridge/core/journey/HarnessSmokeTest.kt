@@ -183,16 +183,16 @@ class HarnessSmokeTest {
 
     /**
      * R-01 tel que vu chez le propriétaire : téléphone de confiance, la TV change de code, l'écran d'envoi passe une clé (« X (Bluetooth) ») que
-     * `savedFor` ne reconnaît pas ; `PinStore.get(clé)` rate le jeton et rend l'ANCIEN code ; le code est figé au lancement ⇒ 401 à chaque reprise. Le
-     * comportement ATTENDU (après w15-02 : `PinKeys` tolérant) est que la copie arrive avec le jeton. ROUGE aujourd'hui (vérifié : l'envoi reste bloqué).
+     * `savedFor` (strict, avant w15-02) ne reconnaissait pas ; `PinStore.get(clé)` ratait le jeton et rendait l'ANCIEN code ; le code est figé au lancement
+     * ⇒ 401 à chaque reprise. Depuis w15-02, `PinKeys.resolve` (utilisé par le harnais comme par la production) retrouve la TV par le nom sans « (Bluetooth) » :
+     * la copie arrive avec le jeton. VERT (première moitié de R-01 corrigée ; seconde moitié : w15-03).
      */
-    @Ignore("REGRESSION R-01: red until w15-02 PinKeys tolerant resolution")
     @Test fun r01UnmatchedScreenKeyStillCopiesWithTheTrustedToken() = withJourney {
         val unmatched = "SMART_TV (Bluetooth)"
         lateinit var run: UploadRun
         given("un téléphone de confiance qui garde un ancien code sous la clé d'écran") {
             phone.pairWithTv()
-            assertNull(phone.savedFor(unmatched), "la clé d'écran ne correspond à aucune TV du carnet (égalité stricte de savedFor)")
+            assertNotNull(phone.savedFor(unmatched), "la clé d'écran « X (Bluetooth) » désigne la TV du carnet (PinKeys.resolve retire la décoration)")
             phone.pins.put(unmatched, "999999")
         }
         whenever("le code de la TV change puis la liaison reprend") { tv.rotatePin(); phone.run(3) }
@@ -240,13 +240,15 @@ class HarnessSmokeTest {
 
     @Test fun theCodeOfASendIsFrozenAtLaunch() = withJourney {
         given("un téléphone de confiance") { phone.pairWithTv() }
-        then("une clé qui désigne la TV (nom mDNS, nom, bt:, hôte:port) retrouve le jeton ; une autre non (égalité stricte de savedFor)") {
+        then("une clé qui désigne la TV (nom mDNS, nom, bt:) retrouve le jeton ; une clé qui n'en désigne aucune non (PinKeys.resolve)") {
             val s = phone.saved.list().single()
-            listOf(phone.defaultKey, s.name, "bt:${s.address}", "127.0.0.1:${s.port}").forEach { k ->
+            listOf(phone.defaultKey, s.name, "bt:${s.address}").forEach { k ->
                 assertTrue(TvAuth.isToken(phone.pinStoreGet(k)), "clé $k")
             }
-            assertEquals("", phone.pinStoreGet("SMART_TV (Bluetooth)"))
+            assertTrue(TvAuth.isToken(phone.pinStoreGet("SMART_TV (Bluetooth)")), "la décoration « (Bluetooth) » est tolérée (PinKeys.resolve)")
+            assertEquals("", phone.pinStoreGet("autre TV inconnue"))
             assertEquals("", phone.pinStoreGet("127.0.0.1"), "une IP sans port ne désigne pas la TV")
+            assertEquals("", phone.pinStoreGet("127.0.0.1:${s.port}"), "une adresse de bouclage ne désigne la TV que par la passerelle Bluetooth (PinKeys.resolve), jamais un jeton pour 127.0.0.1")
         }
         lateinit var run: UploadRun
         whenever("un envoi part avec une clé sans code ni TV, puis le bon code est mémorisé sous cette clé") {

@@ -261,9 +261,8 @@ class PhoneSim(val clock: JourneyClock, val tv: TvSim, seed: Long = 1) : AutoClo
     /** La clé d'écran par défaut d'une TV : son nom mDNS (`SavedTv.mdns` après un HELLO). */
     val defaultKey: String get() = "CastBridge TV ${tv.name}"
 
-    /** `S/TvLink.kt:197-208` `savedFor`, À L'IDENTIQUE (égalité stricte : nom mDNS, nom, `bt:<adresse>`, `ip:port`). Une clé d'écran qui n'y correspond pas ne trouve PAS la TV. */
-    fun savedFor(key: String?): SavedTv? = if (key == null) null
-        else saved.list().firstOrNull { t -> key == t.mdns || key == t.name || key == "bt:${t.address}" || t.lastIps.any { "$it:${t.port}" == key } }
+    /** `S/TvLink.kt` `savedFor` : la RÉSOLUTION DE PRODUCTION ([PinKeys.resolve], w15-02) : toute forme de clé qui désigne la TV (nom, « (Bluetooth) », mDNS, `bt:`, IP, `ip:port`, URL) la retrouve ; une clé qui n'en désigne aucune (ou plusieurs) ne trouve rien. */
+    fun savedFor(key: String?): SavedTv? = if (key == null) null else PinKeys.resolve(key, saved.list(), saved.default())
 
     /** `TvLinkManager.credentialFor` : le jeton vivant de la TV que [key] désigne, ou null (jamais un jeton refusé ou expiré). */
     fun credentialFor(key: String?): String? = savedFor(key)?.let { driver.credential(it.address) }
@@ -323,7 +322,7 @@ class PhoneSim(val clock: JourneyClock, val tv: TvSim, seed: Long = 1) : AutoClo
      *
      * CODE FIGÉ AU LANCEMENT, comme `UploadService` (`job.pin`, S/UploadService.kt:124) : à [tvKey] (la clé d'écran du travail, `job.tvName`), le code
      * est celui que `PinStore.get(clé)` donne MAINTENANT ([pinStoreGet]). Pendant l'envoi : si ce code figé est un jeton, il est rafraîchi par
-     * `credentialFor(tvKey)` (égalité stricte de `savedFor` : une clé qui ne désigne pas la TV garde le jeton figé, jamais un jeton neuf) ; si c'est un
+     * `credentialFor(tvKey)` (`savedFor` = `PinKeys.resolve` : une clé qui ne désigne aucune TV garde le jeton figé, jamais un jeton neuf) ; si c'est un
      * code PIN (ou rien), il reste figé : un jeton qui apparaît ensuite n'est PAS repris.
      */
     fun send(file: File, fast: Boolean = true, move: Boolean = false, tvKey: String = defaultKey): UploadRun {
