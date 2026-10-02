@@ -11,6 +11,8 @@ import java.nio.file.Files
 import kotlin.test.Test
 import kotlin.test.assertEquals
 import kotlin.test.assertFalse
+import kotlin.test.assertNotNull
+import kotlin.test.assertNull
 import kotlin.test.assertTrue
 
 class CliTest {
@@ -100,5 +102,67 @@ class CliTest {
         val r = cli("emettre", "--appareil", bad.path); assertEquals(1, r.code); assertTrue(r.err.startsWith("Refusé"), r.err)
         val old = cli("emettre", "--appareil", request.path, "--jours", "400"); assertEquals(2, old.code); assertTrue("48 h" in old.err, old.err)    // the old option is refused loudly, never ignored
         assertEquals(2, cli("inconnue").code)
+    }
+
+    // ---- usage ceiling and trial window of rented lots ----
+    private fun setup() { assertEquals(0, cli("cle-creer").code); assertEquals(0, cli("licence", "lic-u", "--postes", "5").code) }
+    private fun issue(name: String, vararg extra: String): Run = cli("emettre", "--appareil", request.path, "--sortie", File(dir, name).path, *(if ("--production" in extra) arrayOf("--licence", "lic-u", "--achat", "p-cm2=classe-cm2") else emptyArray()), *extra)
+    private fun act(name: String) = castbridge.core.owner.Activation.decode(File(dir, "$name/activation").readText().trim())!!
+    private fun usage(name: String) = act(name).rights.filterIsInstance<castbridge.core.lots.Right.Usage>().firstOrNull()
+    private fun windows(name: String) = act(name).rights.filterIsInstance<castbridge.core.lots.Right.Rental>().filter { it.productId == "essai" }
+    private val dayMs = 24L * 3600 * 1000
+
+    @Test fun trialByDefaultHas30DaysOfUsageAndTheTrialLotWindow() {
+        setup()
+        val r = issue("t1"); assertEquals(0, r.code, r.err)
+        val u = usage("t1")!!; assertEquals(30 * dayMs, u.endsAt - u.startsAt)
+        val w = windows("t1").single()
+        assertEquals(listOf("tout"), w.bundleIds); assertEquals(3, w.durationDays); assertEquals(720, w.maxUsageMinutes)
+        assertTrue(r.out.contains("Fenêtre de lots d'essai (usage unique) : 720 min d'usage, dans les 3 jours"), r.out)
+        assertFalse(r.out.contains("Location essai"), r.out)
+    }
+
+    @Test fun trialWithoutTrialLotsHasNoWindow() {
+        setup()
+        val r = issue("t2", "--sans-lots-essai"); assertEquals(0, r.code, r.err)
+        assertTrue(windows("t2").isEmpty()); assertFalse(r.out.contains("Fenêtre de lots"), r.out)
+        assertNotNull(usage("t2"))
+    }
+
+    @Test fun trialUsageDaysAreHonouredAndBounded() {
+        setup()
+        assertEquals(0, issue("t3", "--usage-jours", "7").code)
+        val u = usage("t3")!!; assertEquals(7 * dayMs, u.endsAt - u.startsAt)
+        val r = issue("t4", "--usage-jours", "illimitee"); assertEquals(2, r.code); assertTrue(r.err.contains("Un essai a toujours une durée"), r.err)
+        assertFalse(File(dir, "t4/activation").exists())
+        assertEquals(1, issue("t5", "--usage-jours", "366").code)
+        assertEquals(2, issue("t6", "--usage-jours", "abc").code)
+    }
+
+    @Test fun productionUsageIsUnlimitedByDefaultOrBounded() {
+        setup()
+        assertEquals(0, issue("p1", "--production").code); assertNull(usage("p1")); assertTrue(windows("p1").isEmpty())
+        assertEquals(0, issue("p2", "--production", "--usage-jours", "62").code)
+        val u = usage("p2")!!; assertEquals(62 * dayMs, u.endsAt - u.startsAt)
+        assertEquals(0, issue("p3", "--production", "--usage-jours", "illimitee").code); assertNull(usage("p3"))
+        val r = issue("p4", "--production", "--usage-jours", "4000"); assertEquals(1, r.code); assertTrue(r.err.contains("Refusé"), r.err)
+        assertFalse(File(dir, "p4/activation").exists())
+    }
+
+    @Test fun superIsPermanentAndRefusesAUsageCeiling() {
+        setup()
+        val r = issue("s1", "--production", "--super", "--usage-jours", "30"); assertEquals(1, r.code); assertTrue(r.err.contains("SUPER_UNLIMITED est permanent"), r.err)
+        assertFalse(File(dir, "s1/activation").exists())
+    }
+
+    @Test fun rentalLongerThanTheCatalogueIsRefusedAndWithinIsAccepted() {
+        setup()
+        val cat = File(dir, "manifest-rd.json").also { it.writeText("""{"bundles":[{"id":"classe-cm2","type":"classe","rentalDays":14,"lots":["learn:cm2","quiz:cm2"]}]}""") }
+        val free = File(dir, "libres-rd.txt").also { it.writeText("langues:fr-a0\n") }
+        val common = arrayOf("--production", "--catalogue", cat.path, "--lots-libres", free.path)
+        val bad = issue("r1", *common, "--location", "x=classe-cm2:30"); assertEquals(1, bad.code); assertTrue(bad.err.contains("fixée par le catalogue du serveur"), bad.err)
+        assertFalse(File(dir, "r1/activation").exists())
+        val ok = issue("r2", *common, "--location", "x=classe-cm2:14"); assertEquals(0, ok.code, ok.err)
+        assertTrue(ok.out.contains("Location x (classe-cm2) : 14 jour(s)"), ok.out)
     }
 }

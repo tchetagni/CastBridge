@@ -126,7 +126,7 @@ class WireFormatVectorsTest {
                 assertThat(refused).as(id + " refus inattendu : " + e.getMessage()).isTrue();
             }
         }
-        assertThat(n).isEqualTo(10);
+        assertThat(n).isEqualTo(13);
     }
 
     @Test

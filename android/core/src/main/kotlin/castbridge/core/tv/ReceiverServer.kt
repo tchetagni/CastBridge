@@ -57,6 +57,8 @@ class ReceiverServer(
     private val readoptJson: () -> String? = { null },
     /** Routes served without the PIN (the quiz at /quiz, with its own room code); asked before the PIN check. */
     private val publicRoutes: PublicRoutes? = null,
+    /** Asked first for every route: a French reason refuses it with 403 (the trial edition closes copy and move), null lets it through. */
+    private val routeGuard: ((String) -> String?)? = null,
     /**
      * Per-phone tokens of the trusted phones (castbridge.core.trust): header X-CB-Token (or ?token=) accepted instead of the PIN,
      * except on the routes [castbridge.core.trust.TvAuth.tokenMayCall] keeps for the PIN. Returns the phone's address, or null.
@@ -267,6 +269,7 @@ class ReceiverServer(
         if (s.method == Method.GET && path == "/") return page()
         if (s.method == Method.GET && path == "/api/hello")
             return ok("""{"app":"castbridge-tv","v":${q(VERSION)},"pinRequired":${guard != null}}""")
+        routeGuard?.invoke(path)?.let { return json(Response.Status.FORBIDDEN, """{"error":${q(it)},"trial":true}""") }
         publicRoutes?.serve(s)?.let { return it }
         val isStream = (s.method == Method.GET || s.method == Method.HEAD) && path.startsWith("/stream/")
         val loopbackStream = isStream && p["t"] == streamToken && s.remoteIpAddress.let { it == "127.0.0.1" || it == "::1" || it == "0:0:0:0:0:0:0:1" }

@@ -59,10 +59,51 @@ public class ActivationService {
      * @param productIds    optional; "*" = "tout ouvert", refused
      * @param windowHours   installation window in hours (1 to 48), default castbridge.licenses.window-hours (48)
      */
-    public record IssueRequest(String licenseId, String subject, String deviceRequest, String kind, List<String> productIds, Integer windowHours) {}
+    public record IssueRequest(String licenseId, String subject, String deviceRequest, String kind, List<String> productIds, Integer windowHours, String usageDays) {
+        public IssueRequest(String licenseId, String subject, String deviceRequest, String kind, List<String> productIds, Integer windowHours) {
+            this(licenseId, subject, deviceRequest, kind, productIds, windowHours, null);
+        }
+    }
+
+    /** Key duration bounds (docs/ACTIVATION-FORMAT.md § usage ceiling, docs/TRIAL-EDITION.md § 15): trial 1..365 days (default 30, never unlimited); production illimitée or 1..3660. */
+    public static final int TRIAL_DEFAULT_DAYS = 30, TRIAL_MAX_DAYS = 365, PRODUCTION_MAX_DAYS = 3660;
+
+    /** The parsed key duration: {@code days} null = illimitée (production only, no `usage` right). */
+    public record KeyDuration(Integer days) {
+        public boolean unlimited() { return days == null; }
+    }
+
+    /**
+     * @param raw blank/null = default (trial 30 days, production illimitée); "illimitee"/"illimitée"/"unlimited" = illimitée (production only); else an integer number of days.
+     */
+    public static KeyDuration parseDuration(boolean trial, String raw) {
+        String t = raw == null ? "" : raw.trim().toLowerCase(Locale.ROOT);
+        if (t.isEmpty()) return new KeyDuration(trial ? TRIAL_DEFAULT_DAYS : null);
+        if (t.equals("illimitee") || t.equals("illimitée") || t.equals("unlimited")) {
+            if (trial) throw ApiException.badRequest("Une clé d'essai n'est jamais illimitée : durée de 1 à " + TRIAL_MAX_DAYS + " jours");
+            return new KeyDuration(null);
+        }
+        int d;
+        try {
+            d = Integer.parseInt(t);
+        } catch (NumberFormatException e) {
+            throw ApiException.badRequest("Durée de la clé : un nombre de jours" + (trial ? "" : " ou « illimitée »") + " est attendu");
+        }
+        int max = trial ? TRIAL_MAX_DAYS : PRODUCTION_MAX_DAYS;
+        if (d < 1 || d > max) throw ApiException.badRequest((trial ? "Durée de la clé d'essai" : "Durée de la clé de production") + " : de 1 à " + max + " jours" + (trial ? " (jamais illimitée)" : " ou illimitée"));
+        return new KeyDuration(d);
+    }
+
+    /** The `usage|duree|from|to` right line. */
+    public static String usageLine(long fromMs, int days) { return "usage|duree|" + fromMs + "|" + (fromMs + days * DAY); }
 
     public record Activation(String text, String kid, String nonce, String fingerprint, String kind, String subject, Instant issuedAt, Instant notAfter, String licenseId,
-                             String seatId, String deviceCode, boolean reused, boolean newSeat, String format) {}
+                             String seatId, String deviceCode, boolean reused, boolean newSeat, String format, Integer usageDays, Instant usageEnd) {
+        /** Human summary of the key (edition, duration, end date): no secret. */
+        public String properties() {
+            return "édition " + (kind.equals("TRIAL") ? "essai" : "production") + " · durée " + (usageDays == null ? "illimitée" : usageDays + " jours") + (usageEnd == null ? "" : " · fin le " + usageEnd.toString().substring(0, 10));
+        }
+    }
 
     public String format() { return "cbx1 (docs/ACTIVATION-FORMAT.md)"; }
 
@@ -71,8 +112,11 @@ public class ActivationService {
 
     /** Re-issue for the seat of a device that already holds one (support role allowed): never consumes a seat. */
     @Transactional(isolation = Isolation.READ_COMMITTED)
-    public Activation reissue(Actor actor, String licenseId, String subject, String deviceRequest, String channel) {
-        return issue(actor, new IssueRequest(licenseId, subject, deviceRequest, null, null, null), channel, true);
+    public Activation reissue(Actor actor, String licenseId, String subject, String deviceRequest, String channel) { return reissue(actor, licenseId, subject, deviceRequest, channel, null); }
+
+    @Transactional(isolation = Isolation.READ_COMMITTED)
+    public Activation reissue(Actor actor, String licenseId, String subject, String deviceRequest, String channel, String usageDays) {
+        return issue(actor, new IssueRequest(licenseId, subject, deviceRequest, null, null, null, usageDays), channel, true);
     }
 
     /** Re-issue from the hardware stored on the seat itself (nothing to paste): the page button and the activation file download. */
@@ -86,7 +130,7 @@ public class ActivationService {
         LicenseService.SeatRow s = rows.get(0);
         if (s.anonymized() || s.factorsText() == null || s.factorsText().isBlank()) throw ApiException.conflict("Ce poste a été anonymisé : l'appareil doit refaire une demande");
         var device = new DeviceIdentity.Request(DeviceIdentity.parseStored(s.factorsText()), s.deviceCode(), s.k());
-        return doIssue(actor, lic, s.subject(), device, null, null, null, channel, true);
+        return doIssue(actor, lic, s.subject(), device, null, null, null, null, channel, true);
     }
 
     private Activation issue(Actor actor, IssueRequest req, String channel, boolean reissueOnly) {
@@ -95,11 +139,11 @@ public class ActivationService {
         String subject = req.subject() == null || req.subject().isBlank() ? "tv" : req.subject().trim().toLowerCase(Locale.ROOT);
         if (!subject.equals("tv") && !subject.equals("phone")) throw ApiException.badRequest("Type d'appareil : tv ou phone");
         var device = DeviceIdentity.parseRequest(req.deviceRequest());
-        return doIssue(actor, licenseId, subject, device, req.kind(), req.productIds(), req.windowHours(), channel, reissueOnly);
+        return doIssue(actor, licenseId, subject, device, req.kind(), req.productIds(), req.windowHours(), req.usageDays(), channel, reissueOnly);
     }
 
-    private Activation doIssue(Actor actor, String licenseId, String subject, DeviceIdentity.Request device, String askedKind, List<String> productIds, Integer windowHours, String channel,
-                               boolean reissueOnly) {
+    private Activation doIssue(Actor actor, String licenseId, String subject, DeviceIdentity.Request device, String askedKind, List<String> productIds, Integer windowHours, String usageDays,
+                               String channel, boolean reissueOnly) {
         IssueKind asked = parseKind(askedKind);
         // 1. scope first: a forbidden request writes nothing (not even a seat)
         if (asked != null && asked != IssueKind.TRIAL && asked != IssueKind.PRODUCTION || (productIds != null && productIds.contains("*"))) {
@@ -123,12 +167,13 @@ public class ActivationService {
         boolean trial = l.kind().equals("TRIAL");
         IssueKind kind = trial ? IssueKind.TRIAL : IssueKind.PRODUCTION;
         if (asked != null && asked != kind) throw ApiException.badRequest(trial ? "Une licence d'essai ne délivre que des clés d'essai" : "Une licence payante ne délivre que des activations de production");
-        List<String> rights = trial ? List.of() : rightsOf(l, nowI, productIds);
+        KeyDuration duration = parseDuration(trial, usageDays);
+        List<String> baseRights = trial ? List.of() : rightsOf(l, nowI, productIds);
         int window = windowHours == null ? props.windowHours() : Validate.range(windowHours, "Fenêtre d'installation (heures)", 1, WireActivation.MAX_WINDOW_HOURS);
 
         // the seat the activation is for (the id of a new seat is deterministic)
         String seatId = existing != null ? existing.seatId() : WireActivation.defaultSeat(l.wireId(), device.factors());
-        String idem = Hashing.sha256Hex(String.join("|", "v2", l.wireId(), seatId, kind.name(), subject, String.join(";", rights), device.setHashHex(), Integer.toString(device.k()), Integer.toString(window)));
+        String idem = Hashing.sha256Hex(String.join("|", "v2", l.wireId(), seatId, kind.name(), subject, String.join(";", baseRights), "d=" + (duration.days() == null ? "inf" : duration.days()), device.setHashHex(), Integer.toString(device.k()), Integer.toString(window)));
 
         // 2. idempotence: the same request, while the previous activation can still be installed, returns the same activation
         record Prior(Instant issuedAt, Instant notBefore, Instant notAfter, String nonce, String fingerprint) {}
@@ -138,13 +183,14 @@ public class ActivationService {
         if (existing != null && !prior.isEmpty() && prior.get(0).notAfter().isAfter(nowI.plusMillis(WireActivation.HOUR_MS))) {
             Prior p = prior.get(0);
             int w = (int) ((p.notAfter().toEpochMilli() - p.notBefore().toEpochMilli()) / WireActivation.HOUR_MS);
+            List<String> rights = withUsage(baseRights, duration, p.issuedAt().toEpochMilli());
             SignedActivation s = signer.sign(new ActivationRequest(kind, subject, l.wireId(), seatId, device, rights, p.issuedAt().toEpochMilli(), p.notBefore().toEpochMilli(), w, p.nonce()));
             if (!s.fingerprint().equals(p.fingerprint())) {
                 throw new ApiException(HttpStatus.INTERNAL_SERVER_ERROR, "La réémission ne correspond pas à l'activation d'origine (clé changée) : contactez le propriétaire");
             }
             licenses.allocateSeat(l, subject, device, nowI);
-            audit.record(actor, "ACTIVATION_REISSUE", "LICENSE", licenseId, null, Map.of("seat", seatId, "fp", s.fingerprint().substring(0, 12), "channel", channel));
-            return new Activation(s.text(), s.kid(), s.nonce(), s.fingerprint(), kind.name(), subject, p.issuedAt(), p.notAfter(), licenseId, seatId, device.code(), true, false, format());
+            audit.record(actor, "ACTIVATION_REISSUE", "LICENSE", licenseId, null, Map.of("seat", seatId, "fp", s.fingerprint().substring(0, 12), "channel", channel, "edition", editionOf(kind), "duration", durationText(duration), "end", endText(duration, p.issuedAt())));
+            return new Activation(s.text(), s.kid(), s.nonce(), s.fingerprint(), kind.name(), subject, p.issuedAt(), p.notAfter(), licenseId, seatId, device.code(), true, false, format(), duration.days(), usageEnd(duration, p.issuedAt()));
         }
 
         // 3. new activation: seat first (under the lock), then signature; a failure rolls everything back
@@ -158,6 +204,7 @@ public class ActivationService {
         Timestamp lastIssued = jdbc.queryForObject("SELECT MAX(issued_at) FROM lic_issuance WHERE kid = ?", Timestamp.class, signer.kid());
         if (lastIssued != null && lastIssued.toInstant().isAfter(issuedAt)) issuedAt = lastIssued.toInstant();
         String nonce = HexOf(Hashing.sha256(("nonce|" + idem + "|" + issuedAt.toEpochMilli()).getBytes(StandardCharsets.UTF_8)), 16);
+        List<String> rights = withUsage(baseRights, duration, issuedAt.toEpochMilli());
         SignedActivation s = signer.sign(new ActivationRequest(kind, subject, l.wireId(), seatId, device, rights, issuedAt.toEpochMilli(), issuedAt.toEpochMilli(), window, nonce));
         jdbc.update("INSERT INTO lic_issuance (license_pk, seat_pk, seat_id, device_code, kind, subject, kid, nonce, issued_at, not_before, not_after, issuer, channel, token_fingerprint, source, idem_key)"
                         + " VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,'SERVER',?)", l.id(), seat.seat().id(), seatId, device.code(), kind.name(), subject, s.kid(), s.nonce(), Timestamp.from(issuedAt),
@@ -165,10 +212,24 @@ public class ActivationService {
         if (!trial) registry.ensureLicense(l.licenseId(), l.seatsAllowed(), l.transferCap(), l.createdAt());
         registry.emitIssue(s, subject, kind.name().toLowerCase(Locale.ROOT), l.wireId(), device.k(), device.factors(), issuedAt.toEpochMilli());
         audit.record(actor, "ACTIVATION_ISSUE", "LICENSE", licenseId, null,
-                Map.of("seat", seatId, "kind", kind.name(), "outcome", seat.outcome().name(), "kid", s.kid(), "fp", s.fingerprint().substring(0, 12), "channel", channel));
+                Map.of("seat", seatId, "kind", kind.name(), "outcome", seat.outcome().name(), "kid", s.kid(), "fp", s.fingerprint().substring(0, 12), "channel", channel,
+                        "edition", editionOf(kind), "duration", durationText(duration), "end", endText(duration, issuedAt)));
         return new Activation(s.text(), s.kid(), s.nonce(), s.fingerprint(), kind.name(), subject, issuedAt, Instant.ofEpochMilli(s.notAfter()), licenseId, seatId, device.code(), false,
-                seat.outcome() != LicenseService.SeatOutcome.REUSED, format());
+                seat.outcome() != LicenseService.SeatOutcome.REUSED, format(), duration.days(), usageEnd(duration, issuedAt));
     }
+
+    /** The rights plus the usage ceiling line (none for « illimitée »). The server never adds `super` nor the trial rental window (owner tools only). */
+    private static List<String> withUsage(List<String> base, KeyDuration d, long issuedAtMs) {
+        if (d.unlimited()) return base;
+        List<String> out = new ArrayList<>(base);
+        out.add(usageLine(issuedAtMs, d.days()));
+        return out;
+    }
+
+    private static String editionOf(IssueKind k) { return k == IssueKind.TRIAL ? "essai" : "production"; }
+    private static String durationText(KeyDuration d) { return d.unlimited() ? "illimitée" : d.days() + " jours"; }
+    private static Instant usageEnd(KeyDuration d, Instant issuedAt) { return d.unlimited() ? null : Instant.ofEpochMilli(issuedAt.toEpochMilli() + d.days() * DAY); }
+    private static String endText(KeyDuration d, Instant issuedAt) { return d.unlimited() ? "aucune" : usageEnd(d, issuedAt).toString().substring(0, 10); }
 
     private static String HexOf(byte[] b, int n) { return java.util.HexFormat.of().formatHex(b, 0, n); }
 

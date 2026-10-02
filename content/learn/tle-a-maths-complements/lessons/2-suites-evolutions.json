@@ -1,0 +1,903 @@
+{
+ "chapter": "tle-a-maths-complements-suites-evolutions",
+ "lessons": [
+  {
+   "id": "tle-a-maths-complements-suites",
+   "title": "Suites arithmétiques et géométriques",
+   "minutes": 30,
+   "programRef": "Tle A — Mathématiques de la série A : dénombrement, probabilités, suites, évolutions, statistiques, fonctions, second degré (programme officiel du MINESEC à vérifier)",
+   "status": "draft",
+   "author": "CastBridge (AI draft)",
+   "source": "Original writing following the Cameroonian curriculum; to be reviewed by a teacher",
+   "objectives": [
+    "Reconnaître une suite arithmétique ou géométrique.",
+    "Calculer un terme et une somme.",
+    "Modéliser une épargne ou une augmentation."
+   ],
+   "prerequisites": [],
+   "exercises": [
+    "tle-a-maths-complements-suites-evolutions-e01",
+    "tle-a-maths-complements-suites-evolutions-e02",
+    "tle-a-maths-complements-suites-evolutions-e03",
+    "tle-a-maths-complements-suites-evolutions-e04",
+    "tle-a-maths-complements-suites-evolutions-e05",
+    "tle-a-maths-complements-suites-evolutions-e06"
+   ],
+   "selfCheck": [
+    "tle-a-maths-complements-suites-q1",
+    "tle-a-maths-complements-suites-q2",
+    "tle-a-maths-complements-suites-q3",
+    "tle-a-maths-complements-suites-q4",
+    "tle-a-maths-complements-suites-q5"
+   ],
+   "reviewNotes": [
+    "Contenu et niveau exacts du programme de mathématiques de Tle A à vérifier sur le texte officiel ; tous les calculs ont été recalculés par programme.",
+    "Syllabus references, scope and level of difficulty are to be checked against the official text; all facts, formulas and worked examples to be verified by a teacher before release."
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "formule",
+     "title": "Suite arithmétique",
+     "md": "On passe d'un terme au suivant en **ajoutant la raison** $r$ : $u_{n+1} = u_n + r$.\n\n**Terme général** : $u_n = u_0 + n\\,r$.\n\n**Somme** des $n+1$ premiers termes : $S = (n+1) \\times \\frac{u_0 + u_n}{2}$."
+    },
+    {
+     "type": "key",
+     "style": "formule",
+     "title": "Suite géométrique",
+     "md": "On passe d'un terme au suivant en **multipliant par la raison** $q$ : $u_{n+1} = q \\times u_n$.\n\n**Terme général** : $u_n = u_0 \\times q^n$.\n\n**Somme** des $n+1$ premiers termes ($q \\neq 1$) : $S = u_0 \\times \\frac{1 - q^{n+1}}{1 - q}$."
+    },
+    {
+     "type": "illustration",
+     "figure": {
+      "kind": "plot",
+      "xmin": 0,
+      "xmax": 6,
+      "ymin": 0,
+      "ymax": 30,
+      "grid": 1,
+      "w": 400,
+      "h": 240,
+      "curves": [
+       {
+        "expr": "5+3*x",
+        "color": "blue",
+        "label": "arithm."
+       }
+      ],
+      "points": [
+       {
+        "x": 0,
+        "y": 5,
+        "label": "u0",
+        "color": "red"
+       },
+       {
+        "x": 2,
+        "y": 11,
+        "label": "u2",
+        "color": "red"
+       },
+       {
+        "x": 4,
+        "y": 17,
+        "label": "u4",
+        "color": "red"
+       }
+      ],
+      "segments": [],
+      "xlabel": "n",
+      "ylabel": "u"
+     },
+     "caption": "Une suite arithmétique : points alignés sur une droite.",
+     "alt": "Un repère : trois points alignés sur la droite 5 plus 3 fois n, qui représentent des termes d'une suite arithmétique de raison 3."
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Erreurs fréquentes",
+     "md": "- Écrire $u_n = u_0 \\times n$ pour une suite arithmétique.\n- Confondre **raison additive** $r$ et **raison multiplicative** $q$.\n- **Augmenter de 10 %** : la raison est $q = 1{,}1$, pas $0{,}1$.\n- Se tromper dans le **nombre de termes** : de $u_0$ à $u_n$, il y en a $n+1$.\n- Oublier de vérifier que $q \\neq 1$ dans la formule de somme."
+    },
+    {
+     "type": "example",
+     "title": "Exemple 1 : arithmétique",
+     "statement": "Une suite arithmétique a $u_0 = 5$ et $r = 3$. Calculez $u_{10}$ et la somme $u_0 + \\dots + u_{10}$.",
+     "steps": [
+      {
+       "md": "$u_{10} = 5 + 10 \\times 3 = 35$.",
+       "tex": "u_{10} = 5 + 10 \\times 3 = 35"
+      },
+      {
+       "md": "11 termes : $S = 11 \\times \\frac{5 + 35}{2} = 11 \\times 20 = 220$.",
+       "tex": "S = 11 \\times \\frac{5+35}{2} = 220"
+      }
+     ],
+     "answer": "u10 = 35 et S = 220"
+    },
+    {
+     "type": "example",
+     "title": "Exemple 2 : géométrique",
+     "statement": "Un loyer de 200 000 FCFA augmente de 10 % chaque année. Quel est le loyer après 3 ans ? (en milliers de FCFA : $u_0 = 200$)",
+     "steps": [
+      {
+       "md": "Raison $q = 1{,}1$ : $u_3 = 200 \\times 1{,}1^3$.",
+       "tex": "u_3 = 200 \\times 1{,}331"
+      },
+      "Calcul : $200 \\times 1{,}331 = 266{,}2$."
+     ],
+     "answer": "266,2 milliers de FCFA, soit 266 200 FCFA"
+    }
+   ],
+   "chapter": "tle-a-maths-complements-suites-evolutions"
+  },
+  {
+   "id": "tle-a-maths-complements-pourcentages",
+   "title": "Pourcentages, indices et évolutions successives",
+   "minutes": 25,
+   "programRef": "Tle A — Mathématiques de la série A : dénombrement, probabilités, suites, évolutions, statistiques, fonctions, second degré (programme officiel du MINESEC à vérifier)",
+   "status": "draft",
+   "author": "CastBridge (AI draft)",
+   "source": "Original writing following the Cameroonian curriculum; to be reviewed by a teacher",
+   "objectives": [
+    "Calculer un taux d'évolution et un coefficient multiplicateur.",
+    "Composer des évolutions successives.",
+    "Utiliser les indices base 100."
+   ],
+   "prerequisites": [],
+   "exercises": [
+    "tle-a-maths-complements-suites-evolutions-e07",
+    "tle-a-maths-complements-suites-evolutions-e08",
+    "tle-a-maths-complements-suites-evolutions-e09",
+    "tle-a-maths-complements-suites-evolutions-e10",
+    "tle-a-maths-complements-suites-evolutions-e11",
+    "tle-a-maths-complements-suites-evolutions-e12"
+   ],
+   "selfCheck": [
+    "tle-a-maths-complements-pourcentages-q1",
+    "tle-a-maths-complements-pourcentages-q2",
+    "tle-a-maths-complements-pourcentages-q3",
+    "tle-a-maths-complements-pourcentages-q4",
+    "tle-a-maths-complements-pourcentages-q5"
+   ],
+   "reviewNotes": [
+    "Contenu et niveau exacts du programme de mathématiques de Tle A à vérifier sur le texte officiel ; tous les calculs ont été recalculés par programme.",
+    "Syllabus references, scope and level of difficulty are to be checked against the official text; all facts, formulas and worked examples to be verified by a teacher before release."
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "formule",
+     "title": "Taux et coefficient",
+     "md": "Une quantité passe de $V_i$ à $V_f$ : **taux d'évolution** $t = \\frac{V_f - V_i}{V_i}$. **Coefficient multiplicateur** : $CM = 1 + t = \\frac{V_f}{V_i}$.\n\nHausse de $15\\,\\%$ : $CM = 1{,}15$. Baisse de $20\\,\\%$ : $CM = 0{,}80$."
+    },
+    {
+     "type": "key",
+     "style": "retenir",
+     "title": "Évolutions successives",
+     "md": "Les coefficients **se multiplient** : $CM_{global} = CM_1 \\times CM_2$. Les taux **ne s'additionnent pas**.\n\n**Évolution réciproque** : pour revenir au point de départ, on applique $\\frac{1}{CM}$. Après $+25\\,\\%$ ($CM = 1{,}25$), il faut baisser de $20\\,\\%$ car $\\frac{1}{1{,}25} = 0{,}8$."
+    },
+    {
+     "type": "illustration",
+     "figure": {
+      "kind": "bars",
+      "w": 360,
+      "h": 220,
+      "bars": [
+       {
+        "label": "Départ",
+        "value": 100,
+        "color": "blue"
+       },
+       {
+        "label": "+20 %",
+        "value": 120,
+        "color": "green"
+       },
+       {
+        "label": "-20 %",
+        "value": 96,
+        "color": "orange"
+       }
+      ]
+     },
+     "caption": "Une hausse de 20 % puis une baisse de 20 % ne ramènent pas à 100.",
+     "alt": "Un diagramme en barres : 100, puis 120 après une hausse de 20 pour cent, puis 96 après une baisse de 20 pour cent."
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Erreurs fréquentes",
+     "md": "- **Additionner** les taux : +20 % puis -20 % ne fait pas 0.\n- Calculer le taux **par rapport à la valeur finale**.\n- Confondre **points de pourcentage** et **pourcentage**.\n- Oublier que $CM$ pour une baisse est $1 - t$.\n- Arrondir **trop tôt**."
+    },
+    {
+     "type": "example",
+     "title": "Exemple 1 : hausse",
+     "statement": "Un sac de riz coûte 8 000 FCFA ; son prix augmente de 15 %. Nouveau prix ?",
+     "steps": [
+      {
+       "md": "$CM = 1{,}15$.",
+       "tex": "CM = 1 + 0{,}15 = 1{,}15"
+      },
+      "Prix : $8\\,000 \\times 1{,}15 = 9\\,200$."
+     ],
+     "answer": "9 200 FCFA"
+    },
+    {
+     "type": "example",
+     "title": "Exemple 2 : hausse puis baisse",
+     "statement": "Un prix subit +20 % puis -20 %. Quel est le taux global ?",
+     "steps": [
+      {
+       "md": "$CM_{global} = 1{,}20 \\times 0{,}80 = 0{,}96$.",
+       "tex": "CM = 1{,}2 \\times 0{,}8 = 0{,}96"
+      },
+      "$t = 0{,}96 - 1 = -0{,}04$."
+     ],
+     "answer": "Baisse globale de 4 %"
+    }
+   ],
+   "chapter": "tle-a-maths-complements-suites-evolutions"
+  },
+  {
+   "id": "tle-a-maths-complements-stats-deux-variables",
+   "title": "Statistiques à deux variables : ajustement affine",
+   "minutes": 30,
+   "programRef": "Tle A — Mathématiques de la série A : dénombrement, probabilités, suites, évolutions, statistiques, fonctions, second degré (programme officiel du MINESEC à vérifier)",
+   "status": "draft",
+   "author": "CastBridge (AI draft)",
+   "source": "Original writing following the Cameroonian curriculum; to be reviewed by a teacher",
+   "objectives": [
+    "Calculer le point moyen.",
+    "Déterminer la droite de régression.",
+    "Faire une prévision et interpréter."
+   ],
+   "prerequisites": [],
+   "exercises": [
+    "tle-a-maths-complements-suites-evolutions-e13",
+    "tle-a-maths-complements-suites-evolutions-e14",
+    "tle-a-maths-complements-suites-evolutions-e15",
+    "tle-a-maths-complements-suites-evolutions-e16",
+    "tle-a-maths-complements-suites-evolutions-e17",
+    "tle-a-maths-complements-suites-evolutions-e18"
+   ],
+   "selfCheck": [
+    "tle-a-maths-complements-stats-deux-variables-q1",
+    "tle-a-maths-complements-stats-deux-variables-q2",
+    "tle-a-maths-complements-stats-deux-variables-q3",
+    "tle-a-maths-complements-stats-deux-variables-q4",
+    "tle-a-maths-complements-stats-deux-variables-q5"
+   ],
+   "reviewNotes": [
+    "Contenu et niveau exacts du programme de mathématiques de Tle A à vérifier sur le texte officiel ; tous les calculs ont été recalculés par programme.",
+    "Méthode des moindres carrés ou de Mayer : à confirmer avec le programme officiel ; ici, moindres carrés.",
+    "Syllabus references, scope and level of difficulty are to be checked against the official text; all facts, formulas and worked examples to be verified by a teacher before release."
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Nuage de points et point moyen",
+     "md": "On étudie deux caractères $x$ et $y$ sur les mêmes individus. Le **nuage de points** représente les couples $(x_i ; y_i)$. Le **point moyen** est $G(\\bar{x} ; \\bar{y})$ où $\\bar{x}$ et $\\bar{y}$ sont les moyennes."
+    },
+    {
+     "type": "key",
+     "style": "formule",
+     "title": "Droite de régression de y en x",
+     "md": "Droite d'**ajustement affine** (moindres carrés) : $y = ax + b$ avec $a = \\frac{\\text{cov}(x,y)}{V(x)}$ et $b = \\bar{y} - a\\,\\bar{x}$.\n\nElle passe par le point moyen $G$. Le **coefficient de corrélation** $r$ mesure la qualité de l'ajustement : proche de $1$ ou de $-1$, la liaison est **forte**."
+    },
+    {
+     "type": "illustration",
+     "figure": {
+      "kind": "plot",
+      "xmin": 0,
+      "xmax": 7,
+      "ymin": 0,
+      "ymax": 30,
+      "grid": 1,
+      "w": 400,
+      "h": 250,
+      "curves": [
+       {
+        "expr": "3.2*x+6.4",
+        "color": "blue",
+        "label": "droite"
+       }
+      ],
+      "points": [
+       {
+        "x": 1,
+        "y": 10,
+        "label": null,
+        "color": "red"
+       },
+       {
+        "x": 2,
+        "y": 13,
+        "label": null,
+        "color": "red"
+       },
+       {
+        "x": 3,
+        "y": 15,
+        "label": null,
+        "color": "red"
+       },
+       {
+        "x": 4,
+        "y": 19,
+        "label": null,
+        "color": "red"
+       },
+       {
+        "x": 5,
+        "y": 23,
+        "label": null,
+        "color": "red"
+       }
+      ],
+      "segments": [],
+      "xlabel": "année",
+      "ylabel": "ventes"
+     },
+     "caption": "Les points sont proches de la droite d'ajustement.",
+     "alt": "Un nuage de cinq points qui montent régulièrement, avec la droite d'ajustement qui passe très près."
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Erreurs fréquentes",
+     "md": "- Prévoir **loin** des données : l'ajustement n'est fiable que près des valeurs observées.\n- Dire que **corrélation = causalité**.\n- Oublier que la droite passe par $G$.\n- Mélanger la droite de $y$ en $x$ et celle de $x$ en $y$.\n- Arrondir **trop tôt** les coefficients."
+    },
+    {
+     "type": "example",
+     "title": "Exemple 1 : ajustement",
+     "statement": "Ventes (en milliers) d'une boutique : années $x = 1,2,3,4,5$ et $y = 10, 13, 15, 19, 23$. Donnez le point moyen et la droite.",
+     "steps": [
+      {
+       "md": "$\\bar{x} = 3$, $\\bar{y} = 16$ : $G(3 ; 16)$.",
+       "tex": "\\bar{x}=3 \\quad \\bar{y}=16"
+      },
+      {
+       "md": "Calcul : $a = 3{,}2$ et $b = 16 - 3{,}2 \\times 3 = 6{,}4$.",
+       "tex": "y = 3{,}2\\,x + 6{,}4"
+      }
+     ],
+     "answer": "G(3 ; 16) et y = 3,2 x + 6,4"
+    },
+    {
+     "type": "example",
+     "title": "Exemple 2 : prévision",
+     "statement": "Avec la droite précédente, estimez les ventes de la 6e année.",
+     "steps": [
+      {
+       "md": "On remplace $x$ par 6.",
+       "tex": "y = 3{,}2 \\times 6 + 6{,}4"
+      },
+      "Calcul : $19{,}2 + 6{,}4 = 25{,}6$."
+     ],
+     "answer": "Environ 25,6 milliers"
+    }
+   ],
+   "chapter": "tle-a-maths-complements-suites-evolutions"
+  }
+ ],
+ "exercises": [
+  {
+   "id": "tle-a-maths-complements-suites-evolutions-e01",
+   "kind": "numeric",
+   "tier": "application",
+   "lesson": "tle-a-maths-complements-suites",
+   "source": "Exercice original écrit pour CastBridge, dans le style du programme de Terminale A",
+   "prompt": "Suite arithmétique : $u_0 = 2$, $r = 5$. Calculez $u_8$.",
+   "answer": 42,
+   "tolerance": 0,
+   "explanation": "2 + 8×5 = 42.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "tle-a-maths-complements-suites-evolutions"
+  },
+  {
+   "id": "tle-a-maths-complements-suites-evolutions-e02",
+   "kind": "numeric",
+   "tier": "application",
+   "lesson": "tle-a-maths-complements-suites",
+   "source": "Exercice original écrit pour CastBridge, dans le style du programme de Terminale A",
+   "prompt": "Suite géométrique : $u_0 = 3$, $q = 2$. Calculez $u_5$.",
+   "answer": 96,
+   "tolerance": 0,
+   "explanation": "3×2^5 = 96.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "tle-a-maths-complements-suites-evolutions"
+  },
+  {
+   "id": "tle-a-maths-complements-suites-evolutions-e03",
+   "kind": "numeric",
+   "tier": "application",
+   "lesson": "tle-a-maths-complements-suites",
+   "source": "Exercice original écrit pour CastBridge, dans le style du programme de Terminale A",
+   "prompt": "Suite arithmétique : $u_0 = 1$, $r = 2$. Calculez la somme des 10 premiers termes ($u_0$ à $u_9$).",
+   "answer": 100,
+   "tolerance": 0,
+   "explanation": "u9 = 19 ; S = 10×(1+19)/2 = 100.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "tle-a-maths-complements-suites-evolutions"
+  },
+  {
+   "id": "tle-a-maths-complements-suites-evolutions-e04",
+   "kind": "numeric",
+   "tier": "approfondissement",
+   "lesson": "tle-a-maths-complements-suites",
+   "source": "Exercice original écrit pour CastBridge, dans le style du programme de Terminale A",
+   "prompt": "Un capital de 50 000 FCFA augmente de 10 % par an. Capital après 2 ans (en FCFA) ?",
+   "answer": 60500,
+   "tolerance": 0,
+   "explanation": "50 000×1,1² = 60 500.",
+   "difficulty": 2,
+   "points": 1,
+   "chapter": "tle-a-maths-complements-suites-evolutions"
+  },
+  {
+   "id": "tle-a-maths-complements-suites-evolutions-e05",
+   "kind": "numeric",
+   "tier": "approfondissement",
+   "lesson": "tle-a-maths-complements-suites",
+   "source": "Exercice original écrit pour CastBridge, dans le style du programme de Terminale A",
+   "prompt": "Suite géométrique : $u_0 = 1$, $q = 3$. Somme de $u_0$ à $u_4$.",
+   "answer": 121,
+   "tolerance": 0,
+   "explanation": "(1-3^5)/(1-3) = (1-243)/(-2) = 121.",
+   "difficulty": 2,
+   "points": 1,
+   "chapter": "tle-a-maths-complements-suites-evolutions"
+  },
+  {
+   "id": "tle-a-maths-complements-suites-evolutions-e06",
+   "kind": "open",
+   "tier": "examen",
+   "lesson": "tle-a-maths-complements-suites",
+   "source": "Exercice original écrit pour CastBridge, dans le style du programme de Terminale A",
+   "prompt": "Une épargnante verse 5 000 FCFA le premier mois, puis 500 FCFA de plus chaque mois. Combien a-t-elle versé en tout au bout de 12 mois ?",
+   "model": "Suite arithmétique de premier terme 5 000 et raison 500. Douzième terme : 5 000 + 11×500 = 10 500. Somme : 12×(5 000 + 10 500)/2 = 12×7 750 = 93 000 FCFA.",
+   "rubric": [
+    "1 point : reconnaître l'arithmétique",
+    "1 point : dernier terme 10 500",
+    "2 points : somme 93 000"
+   ],
+   "explanation": "Suite arithmétique de premier terme 5 000 et raison 500. Douzième terme : 5 000 + 11×500 = 10 500. Somme : 12×(5 000 + 10 500)/2 = 12×7 750 = 93 000 FCFA.",
+   "difficulty": 3,
+   "points": 3,
+   "chapter": "tle-a-maths-complements-suites-evolutions"
+  },
+  {
+   "id": "tle-a-maths-complements-suites-q1",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "tle-a-maths-complements-suites",
+   "prompt": "Raison d'une suite arithmétique :",
+   "choices": [
+    "se soustrait seulement",
+    "se divise",
+    "se multiplie",
+    "se retranche ou s'ajoute"
+   ],
+   "answer": 3,
+   "explanation": "u(n+1) = u(n) + r.",
+   "chapter": "tle-a-maths-complements-suites-evolutions"
+  },
+  {
+   "id": "tle-a-maths-complements-suites-q2",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "tle-a-maths-complements-suites",
+   "prompt": "Augmenter de 10 % donne la raison :",
+   "choices": [
+    "0,9",
+    "1,1",
+    "0,1",
+    "10"
+   ],
+   "answer": 1,
+   "explanation": "Coefficient multiplicateur.",
+   "chapter": "tle-a-maths-complements-suites-evolutions"
+  },
+  {
+   "id": "tle-a-maths-complements-suites-q3",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "tle-a-maths-complements-suites",
+   "prompt": "De u0 à u9, il y a :",
+   "choices": [
+    "11 termes",
+    "10 termes",
+    "9 termes",
+    "8 termes"
+   ],
+   "answer": 1,
+   "explanation": "n+1.",
+   "chapter": "tle-a-maths-complements-suites-evolutions"
+  },
+  {
+   "id": "tle-a-maths-complements-suites-q4",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "tle-a-maths-complements-suites",
+   "prompt": "u_n = u_0 q^n décrit :",
+   "choices": [
+    "une parabole",
+    "une constante",
+    "une suite géométrique",
+    "une suite arithmétique"
+   ],
+   "answer": 2,
+   "explanation": "Puissance de q.",
+   "chapter": "tle-a-maths-complements-suites-evolutions"
+  },
+  {
+   "id": "tle-a-maths-complements-suites-q5",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "tle-a-maths-complements-suites",
+   "prompt": "Dans une suite arithmétique, les points sont :",
+   "choices": [
+    "sur un cercle",
+    "alignés",
+    "au hasard",
+    "sur une parabole"
+   ],
+   "answer": 1,
+   "explanation": "Fonction affine.",
+   "chapter": "tle-a-maths-complements-suites-evolutions"
+  },
+  {
+   "id": "tle-a-maths-complements-suites-evolutions-e07",
+   "kind": "numeric",
+   "tier": "application",
+   "lesson": "tle-a-maths-complements-pourcentages",
+   "source": "Exercice original écrit pour CastBridge, dans le style du programme de Terminale A",
+   "prompt": "Un article à 12 500 FCFA augmente de 8 %. Nouveau prix (FCFA) ?",
+   "answer": 13500,
+   "tolerance": 0,
+   "explanation": "12 500×1,08 = 13 500.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "tle-a-maths-complements-suites-evolutions"
+  },
+  {
+   "id": "tle-a-maths-complements-suites-evolutions-e08",
+   "kind": "numeric",
+   "tier": "application",
+   "lesson": "tle-a-maths-complements-pourcentages",
+   "source": "Exercice original écrit pour CastBridge, dans le style du programme de Terminale A",
+   "prompt": "Un article à 20 000 FCFA baisse de 25 %. Nouveau prix (FCFA) ?",
+   "answer": 15000,
+   "tolerance": 0,
+   "explanation": "20 000×0,75 = 15 000.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "tle-a-maths-complements-suites-evolutions"
+  },
+  {
+   "id": "tle-a-maths-complements-suites-evolutions-e09",
+   "kind": "numeric",
+   "tier": "application",
+   "lesson": "tle-a-maths-complements-pourcentages",
+   "source": "Exercice original écrit pour CastBridge, dans le style du programme de Terminale A",
+   "prompt": "Deux hausses successives de 10 %. Taux global en % ?",
+   "answer": 21,
+   "tolerance": 0,
+   "explanation": "1,1×1,1 = 1,21 : +21 %.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "tle-a-maths-complements-suites-evolutions"
+  },
+  {
+   "id": "tle-a-maths-complements-suites-evolutions-e10",
+   "kind": "numeric",
+   "tier": "approfondissement",
+   "lesson": "tle-a-maths-complements-pourcentages",
+   "source": "Exercice original écrit pour CastBridge, dans le style du programme de Terminale A",
+   "prompt": "Une valeur passe de 40 à 50. Taux d'évolution en % ?",
+   "answer": 25,
+   "tolerance": 0,
+   "explanation": "(50-40)/40 = 0,25.",
+   "difficulty": 2,
+   "points": 1,
+   "chapter": "tle-a-maths-complements-suites-evolutions"
+  },
+  {
+   "id": "tle-a-maths-complements-suites-evolutions-e11",
+   "kind": "numeric",
+   "tier": "approfondissement",
+   "lesson": "tle-a-maths-complements-pourcentages",
+   "source": "Exercice original écrit pour CastBridge, dans le style du programme de Terminale A",
+   "prompt": "Après une hausse de 25 %, quelle baisse (en %) ramène à la valeur de départ ?",
+   "answer": 20,
+   "tolerance": 0,
+   "explanation": "1/1,25 = 0,8 : -20 %.",
+   "difficulty": 2,
+   "points": 1,
+   "chapter": "tle-a-maths-complements-suites-evolutions"
+  },
+  {
+   "id": "tle-a-maths-complements-suites-evolutions-e12",
+   "kind": "open",
+   "tier": "examen",
+   "lesson": "tle-a-maths-complements-pourcentages",
+   "source": "Exercice original écrit pour CastBridge, dans le style du programme de Terminale A",
+   "prompt": "Le prix du litre d'essence passe de 650 à 715 FCFA. Calculez le taux de hausse, puis la baisse nécessaire pour revenir à 650 (arrondir au dixième).",
+   "model": "Taux : (715-650)/650 = 0,10 = +10 %. Pour revenir : 650/715 = 0,909, soit une baisse d'environ 9,1 %.",
+   "rubric": [
+    "1 point : taux +10 %",
+    "1 point : CM réciproque",
+    "2 points : 9,1 %"
+   ],
+   "explanation": "Taux : (715-650)/650 = 0,10 = +10 %. Pour revenir : 650/715 = 0,909, soit une baisse d'environ 9,1 %.",
+   "difficulty": 3,
+   "points": 3,
+   "chapter": "tle-a-maths-complements-suites-evolutions"
+  },
+  {
+   "id": "tle-a-maths-complements-pourcentages-q1",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "tle-a-maths-complements-pourcentages",
+   "prompt": "Hausse de 15 % : coefficient :",
+   "choices": [
+    "15",
+    "0,15",
+    "0,85",
+    "1,15"
+   ],
+   "answer": 3,
+   "explanation": "1 + t.",
+   "chapter": "tle-a-maths-complements-suites-evolutions"
+  },
+  {
+   "id": "tle-a-maths-complements-pourcentages-q2",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "tle-a-maths-complements-pourcentages",
+   "prompt": "Évolutions successives :",
+   "choices": [
+    "on soustrait",
+    "les coefficients se multiplient",
+    "les taux s'additionnent",
+    "on divise"
+   ],
+   "answer": 1,
+   "explanation": "CM global.",
+   "chapter": "tle-a-maths-complements-suites-evolutions"
+  },
+  {
+   "id": "tle-a-maths-complements-pourcentages-q3",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "tle-a-maths-complements-pourcentages",
+   "prompt": "+20 % puis -20 % donne :",
+   "choices": [
+    "une baisse de 4 %",
+    "une baisse de 20 %",
+    "une hausse de 4 %",
+    "aucune variation"
+   ],
+   "answer": 0,
+   "explanation": "0,96.",
+   "chapter": "tle-a-maths-complements-suites-evolutions"
+  },
+  {
+   "id": "tle-a-maths-complements-pourcentages-q4",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "tle-a-maths-complements-pourcentages",
+   "prompt": "Taux d'évolution :",
+   "choices": [
+    "finale + initiale",
+    "(finale - initiale) / initiale",
+    "finale × initiale",
+    "(finale - initiale) / finale"
+   ],
+   "answer": 1,
+   "explanation": "Base = valeur de départ.",
+   "chapter": "tle-a-maths-complements-suites-evolutions"
+  },
+  {
+   "id": "tle-a-maths-complements-pourcentages-q5",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "tle-a-maths-complements-pourcentages",
+   "prompt": "Indice base 100 :",
+   "choices": [
+    "total = 100",
+    "valeur de départ = 100",
+    "valeur d'arrivée = 100",
+    "taux = 100"
+   ],
+   "answer": 1,
+   "explanation": "Référence.",
+   "chapter": "tle-a-maths-complements-suites-evolutions"
+  },
+  {
+   "id": "tle-a-maths-complements-suites-evolutions-e13",
+   "kind": "numeric",
+   "tier": "application",
+   "lesson": "tle-a-maths-complements-stats-deux-variables",
+   "source": "Exercice original écrit pour CastBridge, dans le style du programme de Terminale A",
+   "prompt": "Moyenne de y : 10, 13, 15, 19, 23.",
+   "answer": 16,
+   "tolerance": 0,
+   "explanation": "80/5 = 16.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "tle-a-maths-complements-suites-evolutions"
+  },
+  {
+   "id": "tle-a-maths-complements-suites-evolutions-e14",
+   "kind": "numeric",
+   "tier": "application",
+   "lesson": "tle-a-maths-complements-stats-deux-variables",
+   "source": "Exercice original écrit pour CastBridge, dans le style du programme de Terminale A",
+   "prompt": "Droite $y = 3{,}2x + 6{,}4$. Prévision pour $x = 7$ ?",
+   "answer": 28.8,
+   "tolerance": 0.05,
+   "explanation": "22,4+6,4 = 28,8.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "tle-a-maths-complements-suites-evolutions"
+  },
+  {
+   "id": "tle-a-maths-complements-suites-evolutions-e15",
+   "kind": "numeric",
+   "tier": "application",
+   "lesson": "tle-a-maths-complements-stats-deux-variables",
+   "source": "Exercice original écrit pour CastBridge, dans le style du programme de Terminale A",
+   "prompt": "Une droite d'ajustement est $y = 2x + 5$. Pour $x = 10$, $y$ vaut :",
+   "answer": 25,
+   "tolerance": 0,
+   "explanation": "2×10 + 5 = 25.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "tle-a-maths-complements-suites-evolutions"
+  },
+  {
+   "id": "tle-a-maths-complements-suites-evolutions-e16",
+   "kind": "truefalse",
+   "tier": "approfondissement",
+   "lesson": "tle-a-maths-complements-stats-deux-variables",
+   "source": "Exercice original écrit pour CastBridge, dans le style du programme de Terminale A",
+   "prompt": "La droite d'ajustement passe toujours par le point moyen.",
+   "answer": true,
+   "explanation": "Propriété de la droite des moindres carrés.",
+   "difficulty": 2,
+   "points": 1,
+   "chapter": "tle-a-maths-complements-suites-evolutions"
+  },
+  {
+   "id": "tle-a-maths-complements-suites-evolutions-e17",
+   "kind": "numeric",
+   "tier": "approfondissement",
+   "lesson": "tle-a-maths-complements-stats-deux-variables",
+   "source": "Exercice original écrit pour CastBridge, dans le style du programme de Terminale A",
+   "prompt": "Le point moyen a pour abscisse 3 et la droite est $y = 3{,}2x + 6{,}4$. Son ordonnée vaut :",
+   "answer": 16,
+   "tolerance": 0.01,
+   "explanation": "3,2×3 + 6,4 = 16.",
+   "difficulty": 2,
+   "points": 1,
+   "chapter": "tle-a-maths-complements-suites-evolutions"
+  },
+  {
+   "id": "tle-a-maths-complements-suites-evolutions-e18",
+   "kind": "open",
+   "tier": "examen",
+   "lesson": "tle-a-maths-complements-stats-deux-variables",
+   "source": "Exercice original écrit pour CastBridge, dans le style du programme de Terminale A",
+   "prompt": "Un coefficient de corrélation vaut 0,99. Que peut-on dire ? Peut-on en conclure que x cause y ?",
+   "model": "Une corrélation proche de 1 indique une liaison linéaire croissante très forte : l'ajustement affine est de bonne qualité. Mais une corrélation n'établit pas une causalité : deux phénomènes peuvent évoluer ensemble à cause d'un troisième facteur.",
+   "rubric": [
+    "2 points : liaison forte",
+    "2 points : corrélation ≠ causalité"
+   ],
+   "explanation": "Une corrélation proche de 1 indique une liaison linéaire croissante très forte : l'ajustement affine est de bonne qualité. Mais une corrélation n'établit pas une causalité : deux phénomènes peuvent évoluer ensemble à cause d'un troisième facteur.",
+   "difficulty": 3,
+   "points": 3,
+   "chapter": "tle-a-maths-complements-suites-evolutions"
+  },
+  {
+   "id": "tle-a-maths-complements-stats-deux-variables-q1",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "tle-a-maths-complements-stats-deux-variables",
+   "prompt": "Le point moyen est :",
+   "choices": [
+    "(max x ; max y)",
+    "(somme ; somme)",
+    "(moyenne de x ; moyenne de y)",
+    "(0 ; 0)"
+   ],
+   "answer": 2,
+   "explanation": "G.",
+   "chapter": "tle-a-maths-complements-suites-evolutions"
+  },
+  {
+   "id": "tle-a-maths-complements-stats-deux-variables-q2",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "tle-a-maths-complements-stats-deux-variables",
+   "prompt": "Un r proche de 1 signifie :",
+   "choices": [
+    "une erreur",
+    "une moyenne nulle",
+    "une liaison forte",
+    "aucune liaison"
+   ],
+   "answer": 2,
+   "explanation": "Qualité de l'ajustement.",
+   "chapter": "tle-a-maths-complements-suites-evolutions"
+  },
+  {
+   "id": "tle-a-maths-complements-stats-deux-variables-q3",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "tle-a-maths-complements-stats-deux-variables",
+   "prompt": "La droite d'ajustement passe par :",
+   "choices": [
+    "le premier point",
+    "l'origine toujours",
+    "le point moyen",
+    "le dernier point"
+   ],
+   "answer": 2,
+   "explanation": "Propriété.",
+   "chapter": "tle-a-maths-complements-suites-evolutions"
+  },
+  {
+   "id": "tle-a-maths-complements-stats-deux-variables-q4",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "tle-a-maths-complements-stats-deux-variables",
+   "prompt": "Prévoir très loin des données est :",
+   "choices": [
+    "obligatoire",
+    "risqué",
+    "toujours exact",
+    "interdit par la loi"
+   ],
+   "answer": 1,
+   "explanation": "Extrapolation.",
+   "chapter": "tle-a-maths-complements-suites-evolutions"
+  },
+  {
+   "id": "tle-a-maths-complements-stats-deux-variables-q5",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "tle-a-maths-complements-stats-deux-variables",
+   "prompt": "Corrélation et causalité :",
+   "choices": [
+    "s'annulent",
+    "sont identiques",
+    "ne sont pas équivalentes",
+    "se multiplient"
+   ],
+   "answer": 2,
+   "explanation": "Attention.",
+   "chapter": "tle-a-maths-complements-suites-evolutions"
+  }
+ ]
+}

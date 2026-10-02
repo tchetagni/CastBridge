@@ -31,6 +31,7 @@ object LearnScopes {
     /** Scope of a pack that no table lists (a loose pack on a USB drive): by level, philosophy being common to all Terminale series. */
     fun guess(m: PackManifest): String? = when {
         m.level == "Tle" && m.subject == "philosophie" -> "tle-commun"
+        m.id.startsWith("tle-a-") -> "tle-a"      // the Terminale A packs share the level « Tle » with the C/D ones: their id says which lot they belong to
         else -> ofLevel(m.level)
     }
 

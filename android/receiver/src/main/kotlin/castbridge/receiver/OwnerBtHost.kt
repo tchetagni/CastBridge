@@ -33,7 +33,7 @@ class OwnerBtHost(private val ctx: Context, private val status: (String?) -> Uni
         acceptedText = "Clé reçue et valide : sur la TV, appuyez sur « Valider la clé »",
     )
 
-    private fun showActivationScreen() { runCatching { ctx.startActivity(android.content.Intent(ctx, ActivationActivity::class.java).addFlags(android.content.Intent.FLAG_ACTIVITY_NEW_TASK)) } }
+    private fun showActivationScreen() { runCatching { ctx.startActivity(android.content.Intent(ctx, ActivationActivity::class.java).addFlags(android.content.Intent.FLAG_ACTIVITY_NEW_TASK).putExtra(ActivationActivity.EXTRA_UPGRADE, ActivationCenter.trial())) } }
 
     @Synchronized fun start() {
         if (running) return

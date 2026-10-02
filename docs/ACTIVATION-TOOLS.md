@@ -19,9 +19,9 @@ Prérequis : Java 17 ou plus. Lancer `java -jar castbridge-activation-desktop.ja
 2. **Sauvegarde, tout de suite** : copiez `~/.castbridge-activation/desk.key.json` sur une clé USB **hors ligne**, rangée dans un lieu sûr ; notez le **code à part** (autre lieu). Sans le fichier **ou** sans le code, la clé est perdue (voir § 5 : clé de secours).
 3. **Obtenir la demande d'appareil de la TV** : sur la TV (écran d'activation de CastBridge-TV, ou par le téléphone propriétaire en Bluetooth), copiez le texte `code=… / k=… / factor=TYPE|empreinte` (c'est la « demande d'appareil », sans aucun secret). Le **code d'appareil** seul (`XXXX-XXXX-XXXX-XXXX`) ne suffit pas, sauf pour la clé saisissable (§ 4).
 4. **Essai** : fenêtre, onglet « Émettre », collez la demande, type « Essai », durée (jours), saisissez votre code, « Générer ». En ligne de commande :
-   `emettre --appareil demande.txt --jours 90 --sortie ./usb --qr`
+   `emettre --appareil demande.txt --usage-jours 90 --sortie ./usb --qr` (durée de la clé : voir § 8)
 5. **Production** : créez d'abord la licence (`licence lic-0001 --postes 2`, ou onglet « Licences »), puis
-   `emettre --appareil demande.txt --production --licence lic-0001 --achat p-classe-cm2=classe-cm2 --jours 60 --sortie ./usb`
+   `emettre --appareil demande.txt --production --licence lic-0001 --achat p-classe-cm2=classe-cm2 --usage-jours 60 --sortie ./usb`
    Droits : `--achat produit=bouquet1,bouquet2` · `--abonnement produit=bouquets:jours[:tolérance[:auto]]` · `--tout-ouvert produit:jours` (30 jours au plus, clé avec la portée « tout ouvert » ; **pas** la clé serveur).
 6. **Livrer** (une seule voie suffit) : copiez le fichier **`activation`** dans `Download/CastBridge/` de la **clé USB de la TV** (lu au démarrage et à l'insertion) ; ou lisez le **code QR** avec le téléphone propriétaire ; ou envoyez le jeton par le téléphone propriétaire en Bluetooth ; ou copiez le texte du jeton.
 7. **Vérifier** : `verifier activation --appareil demande.txt` (ou « ACCEPTÉ » à l'écran de la TV). `autotest` rejoue les vecteurs communs : il doit dire « tous identiques ».
@@ -57,3 +57,20 @@ Tout ce que fait un outil est un **événement signé** ; le registre est l'ense
 - Écran Android « Générer un jeton » de la console propriétaire (gabarit `owner`, autre identifiant d'application) au-dessus de `PhoneConsole` : lecture du code (saisie, QR, ou trame DEVICE_INFO reçue en Bluetooth), envoi de la trame ACTIVATION, coffre du téléphone ; **à compiler et essayer sur le téléphone**.
 - Serveur : `license-admin` (hors de ce chantier).
 - Transfert et révocation de poste en ligne de commande/fenêtre (événements `transfer` et `revoke` existent dans la bibliothèque `LicenseEvent`, pas encore exposés par l'outil).
+
+## 8. Durée de la clé, lots d'essai, locations (2026-10-02)
+**Durée de la clé** (droit `usage` : la TV se verrouille à la fin et demande un nouveau code valide) :
+| Édition | Règle |
+|---|---|
+| Essai | toujours une durée : **30 jours par défaut**, 1 à 365 ; « illimitée » refusée |
+| Production | **illimitée** (défaut : la TV ne se reverrouille jamais) ou 1 à **3660** jours |
+| SUPER_UNLIMITED | permanent : aucune durée acceptée |
+
+- **Fenêtre graphique** (onglet « Émettre ») : champs **« Essai : durée de la clé (jours) »** (30 au départ), **« Production : durée de la clé (jours ou illimitée) »** (« illimitée » au départ) et **« Locations de lots »** (une par ligne). Seul le champ de l'édition choisie est lu ; une saisie invalide est refusée avec un message.
+- **Ligne de commande** : `emettre … --usage-jours N` ou `--usage-jours illimitee` (refusé pour un essai).
+- **Lots d'essai** : toute clé d'**essai** porte automatiquement la **fenêtre unique de 12 h** des lots locatifs (accordée une seule fois par la TV ; ce n'est pas une location et elle n'est jamais montrée comme telle). L'émission l'indique : « Fenêtre de lots d'essai (usage unique) ». `--sans-lots-essai` l'omet (essai sans lots). La fenêtre graphique l'ajoute toujours aux essais.
+- **Locations** : `--location produit=b1,b2:JOURS[:MINUTES[:TOLERANCE[:SIMULTANEES]]]` (production). Avec `--catalogue TRIAL-MANIFEST.json --lots-libres FICHIER`, l'outil refuse un lot libre (CC BY-SA, jamais louable) **et** une location **plus longue que `rentalDays`** du bouquet dans le catalogue du serveur (la limite la plus serrée des bouquets l'emporte ; message « la durée de location est fixée par le catalogue du serveur : N jour(s) au plus »). Sans `--catalogue`, un avertissement signale que rien n'est vérifié.
+- **Fin de clé** : la TV se verrouille (« ACTIVATION TERMINÉE ») et demande un nouveau code valide ; les achats restent.
+- **Édition d'essai** : streaming, Sudoku et lots d'essai seulement (bibliothèque, réception de fichiers, USB, téléchargements, copie, déplacement et suppression fermés). Un **insigne permanent** sur chaque écran de CastBridge-TV donne l'édition et la validité de la clé.
+- **Clé publique de confiance** : `cle` (ou « Clé publique » de la console) affiche `kid=… pub=… scopes=…`, avec **toutes** les portées de l'outil (REVOKE, REGISTRY, REACTIVATE, SUPER_UNLIMITED ; jamais POLICY pour le téléphone). La TV ne fait confiance qu'aux lignes présentes dans `~/.castbridge-signing/activation-trusted-keys.txt` **à la compilation** ; ajouter ou changer une clé exige donc de recompiler CastBridge-TV (ou une commande signée par une clé déjà valide, § 5).
+- **Console du téléphone** : même champ « Durée de la clé » et même règle ; le champ du code d'appareil insère les tirets tout seul (OWNER-CONSOLE.md, dernière section).

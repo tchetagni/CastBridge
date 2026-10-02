@@ -1,0 +1,1418 @@
+{
+ "chapter": "droit-l3-societes-ohada-formes",
+ "lessons": [
+  {
+   "id": "droit-l3-societes-ohada-sarl",
+   "title": "La société à responsabilité limitée (SARL)",
+   "minutes": 40,
+   "programRef": "Droit des sociétés commerciales OHADA (Licence 3) — à vérifier sur la maquette de l'établissement",
+   "status": "draft",
+   "author": "CastBridge (brouillon IA)",
+   "source": "Rédaction originale ; à relire par un enseignant de droit",
+   "objectives": [
+    "Décrire la responsabilité des associés et le régime des parts.",
+    "Présenter le rôle du gérant et des décisions collectives.",
+    "Appliquer la règle d'agrément à une cession."
+   ],
+   "prerequisites": [],
+   "exercises": [
+    "droit-l3-societes-ohada-formes-e01",
+    "droit-l3-societes-ohada-formes-e02",
+    "droit-l3-societes-ohada-formes-e03",
+    "droit-l3-societes-ohada-formes-e04",
+    "droit-l3-societes-ohada-formes-e05",
+    "droit-l3-societes-ohada-formes-e06"
+   ],
+   "selfCheck": [
+    "droit-l3-societes-ohada-sarl-q1",
+    "droit-l3-societes-ohada-sarl-q2",
+    "droit-l3-societes-ohada-sarl-q3",
+    "droit-l3-societes-ohada-sarl-q4",
+    "droit-l3-societes-ohada-sarl-q5"
+   ],
+   "reviewNotes": [
+    "Vérifier le capital minimum (s'il existe), les majorités, le régime d'agrément et la publicité de la cession dans l'Acte uniforme révisé ; aucun chiffre n'est donné ici.",
+    "Contenu pédagogique en termes généraux, rédigé avec une IA, à relire par un enseignant ou un juriste : vérifier les textes en vigueur (Actes uniformes OHADA, codes et lois camerounais) avant tout usage ; ce n'est pas une consultation juridique."
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "SARL",
+     "md": "La **SARL** est une société dont les associés ne supportent les pertes qu'à concurrence de leurs **apports**. Le capital est divisé en **parts sociales**, non négociables comme des valeurs mobilières. Elle peut être constituée par une ou plusieurs personnes."
+    },
+    {
+     "type": "key",
+     "style": "propriete",
+     "title": "Gérance et décisions",
+     "md": "La SARL est dirigée par un ou plusieurs **gérants**, personnes physiques, qui engagent la société dans la limite de l'objet social. Les décisions importantes (comptes, modifications des statuts) sont prises par les **associés** réunis en assemblée ou par consultation écrite, avec des **majorités** fixées par les textes."
+    },
+    {
+     "type": "illustration",
+     "figure": {
+      "kind": "shapes",
+      "w": 388,
+      "h": 212,
+      "items": [
+       {
+        "t": "rect",
+        "x": 10,
+        "y": 8,
+        "w": 142,
+        "h": 36,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "lightgrey"
+       },
+       {
+        "t": "text",
+        "x": 81.0,
+        "y": 31,
+        "text": "Point",
+        "size": 12,
+        "anchor": "middle",
+        "color": "ink",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 152,
+        "y": 8,
+        "w": 226,
+        "h": 36,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "lightgrey"
+       },
+       {
+        "t": "text",
+        "x": 265.0,
+        "y": 31,
+        "text": "SARL",
+        "size": 12,
+        "anchor": "middle",
+        "color": "ink",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 10,
+        "y": 48,
+        "w": 142,
+        "h": 36,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "lightyellow"
+       },
+       {
+        "t": "text",
+        "x": 81.0,
+        "y": 71,
+        "text": "Responsabilité",
+        "size": 12,
+        "anchor": "middle",
+        "color": "ink",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 152,
+        "y": 48,
+        "w": 226,
+        "h": 36,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "lightblue"
+       },
+       {
+        "t": "text",
+        "x": 265.0,
+        "y": 71,
+        "text": "limitée aux apports",
+        "size": 12,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "rect",
+        "x": 10,
+        "y": 88,
+        "w": 142,
+        "h": 36,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "lightyellow"
+       },
+       {
+        "t": "text",
+        "x": 81.0,
+        "y": 111,
+        "text": "Titres",
+        "size": 12,
+        "anchor": "middle",
+        "color": "ink",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 152,
+        "y": 88,
+        "w": 226,
+        "h": 36,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "lightblue"
+       },
+       {
+        "t": "text",
+        "x": 265.0,
+        "y": 111,
+        "text": "parts sociales non négociables",
+        "size": 12,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "rect",
+        "x": 10,
+        "y": 128,
+        "w": 142,
+        "h": 36,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "lightyellow"
+       },
+       {
+        "t": "text",
+        "x": 81.0,
+        "y": 151,
+        "text": "Dirigeant",
+        "size": 12,
+        "anchor": "middle",
+        "color": "ink",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 152,
+        "y": 128,
+        "w": 226,
+        "h": 36,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "lightblue"
+       },
+       {
+        "t": "text",
+        "x": 265.0,
+        "y": 151,
+        "text": "gérant, personne physique",
+        "size": 12,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "rect",
+        "x": 10,
+        "y": 168,
+        "w": 142,
+        "h": 36,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "lightyellow"
+       },
+       {
+        "t": "text",
+        "x": 81.0,
+        "y": 191,
+        "text": "Cession à un tiers",
+        "size": 12,
+        "anchor": "middle",
+        "color": "ink",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 152,
+        "y": 168,
+        "w": 226,
+        "h": 36,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "lightblue"
+       },
+       {
+        "t": "text",
+        "x": 265.0,
+        "y": 191,
+        "text": "agrément des associés",
+        "size": 12,
+        "anchor": "middle",
+        "color": "ink"
+       }
+      ]
+     },
+     "caption": "Les traits essentiels de la SARL.",
+     "alt": "Tableau récapitulatif de la SARL : responsabilité, titres, dirigeant, cession."
+    },
+    {
+     "type": "example",
+     "title": "Exemple 1 — Responsabilité",
+     "statement": "La SARL « Cacao-Mbam » de Bafoussam a des dettes de 8 000 000 FCFA ; son actif est de 3 000 000 FCFA. Les associés ont chacun libéré leur apport. Peut-on saisir leurs biens personnels ?",
+     "steps": [
+      "La responsabilité est limitée aux apports.",
+      "Les apports étant libérés, les créanciers ne peuvent saisir que le patrimoine de la société."
+     ],
+     "answer": "Non, sauf faute de gestion ou cautionnement personnel."
+    },
+    {
+     "type": "example",
+     "title": "Exemple 2 — Agrément",
+     "statement": "Mme Nkoulou veut céder ses parts à un ami extérieur à la SARL. Que doit-elle respecter ?",
+     "steps": [
+      "La cession à un tiers est subordonnée à l'agrément des associés selon les majorités légales ou statutaires.",
+      "Elle doit s'accomplir par écrit et être publiée."
+     ],
+     "answer": "Obtenir l'agrément, puis formaliser par écrit."
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Cession de parts",
+     "md": "Les parts ne circulent pas librement : la cession à un **tiers** est en principe soumise à l'**agrément** des associés. Entre associés ou dans la famille, les statuts peuvent alléger la règle. Une cession doit être **écrite** et rendue **opposable** par la publicité."
+    }
+   ],
+   "chapter": "droit-l3-societes-ohada-formes"
+  },
+  {
+   "id": "droit-l3-societes-ohada-societe-anonyme",
+   "title": "La société anonyme (SA) : organes et fonctionnement",
+   "minutes": 45,
+   "programRef": "Droit des sociétés commerciales OHADA (Licence 3) — à vérifier sur la maquette de l'établissement",
+   "status": "draft",
+   "author": "CastBridge (brouillon IA)",
+   "source": "Rédaction originale ; à relire par un enseignant de droit",
+   "objectives": [
+    "Décrire les deux modes de direction de la SA.",
+    "Distinguer assemblées ordinaires et extraordinaires.",
+    "Expliquer la procédure des conventions réglementées."
+   ],
+   "prerequisites": [],
+   "exercises": [
+    "droit-l3-societes-ohada-formes-e07",
+    "droit-l3-societes-ohada-formes-e08",
+    "droit-l3-societes-ohada-formes-e09",
+    "droit-l3-societes-ohada-formes-e10",
+    "droit-l3-societes-ohada-formes-e11",
+    "droit-l3-societes-ohada-formes-e12"
+   ],
+   "selfCheck": [
+    "droit-l3-societes-ohada-societe-anonyme-q1",
+    "droit-l3-societes-ohada-societe-anonyme-q2",
+    "droit-l3-societes-ohada-societe-anonyme-q3",
+    "droit-l3-societes-ohada-societe-anonyme-q4",
+    "droit-l3-societes-ohada-societe-anonyme-q5"
+   ],
+   "reviewNotes": [
+    "Vérifier le capital minimum, les seuils, le régime des conventions et des assemblées dans l'Acte uniforme révisé ; aucun chiffre n'est donné ici.",
+    "Contenu pédagogique en termes généraux, rédigé avec une IA, à relire par un enseignant ou un juriste : vérifier les textes en vigueur (Actes uniformes OHADA, codes et lois camerounais) avant tout usage ; ce n'est pas une consultation juridique."
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "SA",
+     "md": "La **société anonyme** est une société de **capitaux** : les actionnaires ne répondent des dettes qu'à hauteur de leurs apports ; le capital est divisé en **actions** négociables. Un capital minimum et l'intervention d'un **commissaire aux comptes** distinguent la SA des formes plus souples."
+    },
+    {
+     "type": "key",
+     "style": "propriete",
+     "title": "Direction",
+     "md": "Deux modes : **administrateur général** (structure légère) ou **conseil d'administration** avec un **président** (PCA) et un **directeur général** (DG). Le conseil fixe les orientations et contrôle ; le DG dirige au quotidien. Les dirigeants sont révocables selon les règles prévues."
+    },
+    {
+     "type": "illustration",
+     "figure": {
+      "kind": "shapes",
+      "w": 380,
+      "h": 194,
+      "items": [
+       {
+        "t": "rect",
+        "x": 10,
+        "y": 8,
+        "w": 360,
+        "h": 34,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "lightyellow"
+       },
+       {
+        "t": "text",
+        "x": 190.0,
+        "y": 30,
+        "text": "Actionnaires en assemblée (AGO / AGE)",
+        "size": 12,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "line",
+        "x1": 190.0,
+        "y1": 42,
+        "x2": 190.0,
+        "y2": 56,
+        "color": "ink",
+        "width": 2,
+        "arrow": "end"
+       },
+       {
+        "t": "rect",
+        "x": 10,
+        "y": 56,
+        "w": 360,
+        "h": 34,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "lightblue"
+       },
+       {
+        "t": "text",
+        "x": 190.0,
+        "y": 78,
+        "text": "Conseil d'administration, président (PCA)",
+        "size": 12,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "line",
+        "x1": 190.0,
+        "y1": 90,
+        "x2": 190.0,
+        "y2": 104,
+        "color": "ink",
+        "width": 2,
+        "arrow": "end"
+       },
+       {
+        "t": "rect",
+        "x": 10,
+        "y": 104,
+        "w": 360,
+        "h": 34,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "lightyellow"
+       },
+       {
+        "t": "text",
+        "x": 190.0,
+        "y": 126,
+        "text": "Directeur général",
+        "size": 12,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "line",
+        "x1": 190.0,
+        "y1": 138,
+        "x2": 190.0,
+        "y2": 152,
+        "color": "ink",
+        "width": 2,
+        "arrow": "end"
+       },
+       {
+        "t": "rect",
+        "x": 10,
+        "y": 152,
+        "w": 360,
+        "h": 34,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "lightblue"
+       },
+       {
+        "t": "text",
+        "x": 190.0,
+        "y": 174,
+        "text": "Contrôle : commissaire aux comptes",
+        "size": 12,
+        "anchor": "middle",
+        "color": "ink"
+       }
+      ]
+     },
+     "caption": "Organes de la SA à conseil d'administration.",
+     "alt": "Schéma des organes de la SA, de l'assemblée au commissaire aux comptes."
+    },
+    {
+     "type": "example",
+     "title": "Exemple 1 — Quel organe décide ?",
+     "statement": "Une SA de Douala veut approuver ses comptes annuels, puis, séparément, changer son objet social. Quelle assemblée pour chaque décision ?",
+     "steps": [
+      "Les comptes relèvent de l'assemblée générale ordinaire.",
+      "La modification des statuts relève de l'assemblée générale extraordinaire."
+     ],
+     "answer": "AGO pour les comptes ; AGE pour l'objet social."
+    },
+    {
+     "type": "example",
+     "title": "Exemple 2 — Convention réglementée",
+     "statement": "Le directeur général veut louer à la SA un immeuble qui lui appartient. Quelle procédure suivre ?",
+     "steps": [
+      "C'est un contrat entre la société et son dirigeant : autorisation préalable du conseil.",
+      "Le commissaire aux comptes est informé et l'assemblée statue ensuite."
+     ],
+     "answer": "Procédure des conventions réglementées."
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Conventions réglementées",
+     "md": "Un contrat entre la société et l'un de ses dirigeants ou actionnaires importants doit suivre une **procédure** : autorisation préalable, information du commissaire aux comptes, approbation en assemblée. Sans cela, les dirigeants engagent leur responsabilité. Ne pas confondre avec les opérations courantes conclues à des conditions normales."
+    }
+   ],
+   "chapter": "droit-l3-societes-ohada-formes"
+  },
+  {
+   "id": "droit-l3-societes-ohada-sas-et-societes-de-personnes",
+   "title": "SAS, SNC, SCS et GIE",
+   "minutes": 35,
+   "programRef": "Droit des sociétés commerciales OHADA (Licence 3) — à vérifier sur la maquette de l'établissement",
+   "status": "draft",
+   "author": "CastBridge (brouillon IA)",
+   "source": "Rédaction originale ; à relire par un enseignant de droit",
+   "objectives": [
+    "Présenter la liberté statutaire dans la SAS.",
+    "Comparer les sociétés de personnes à la SA et à la SARL.",
+    "Situer le GIE."
+   ],
+   "prerequisites": [],
+   "exercises": [
+    "droit-l3-societes-ohada-formes-e13",
+    "droit-l3-societes-ohada-formes-e14",
+    "droit-l3-societes-ohada-formes-e15",
+    "droit-l3-societes-ohada-formes-e16",
+    "droit-l3-societes-ohada-formes-e17",
+    "droit-l3-societes-ohada-formes-e18"
+   ],
+   "selfCheck": [
+    "droit-l3-societes-ohada-sas-et-societes-de-personnes-q1",
+    "droit-l3-societes-ohada-sas-et-societes-de-personnes-q2",
+    "droit-l3-societes-ohada-sas-et-societes-de-personnes-q3",
+    "droit-l3-societes-ohada-sas-et-societes-de-personnes-q4",
+    "droit-l3-societes-ohada-sas-et-societes-de-personnes-q5"
+   ],
+   "reviewNotes": [
+    "Vérifier dans l'Acte uniforme révisé le régime exact du GIE, les exclusions de la SAS et les conditions de poursuite des associés de SNC.",
+    "Contenu pédagogique en termes généraux, rédigé avec une IA, à relire par un enseignant ou un juriste : vérifier les textes en vigueur (Actes uniformes OHADA, codes et lois camerounais) avant tout usage ; ce n'est pas une consultation juridique."
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "SAS",
+     "md": "La **société par actions simplifiée** laisse aux associés une grande **liberté statutaire** : organisation de la direction, des décisions, de la cession des actions. Un **président** la représente. Elle ne peut en principe pas faire appel public à l'épargne."
+    },
+    {
+     "type": "key",
+     "style": "propriete",
+     "title": "Sociétés de personnes",
+     "md": "- **SNC** : associés commerçants, responsables **indéfiniment et solidairement** ; cession des parts en principe soumise à l'accord de tous.\n- **SCS** : **commandités** (responsabilité illimitée) et **commanditaires** (responsabilité limitée à l'apport).\n- **GIE** : groupement pour faciliter l'activité de ses membres, **sans but lucratif en soi**."
+    },
+    {
+     "type": "illustration",
+     "figure": {
+      "kind": "shapes",
+      "w": 297,
+      "h": 212,
+      "items": [
+       {
+        "t": "rect",
+        "x": 10,
+        "y": 8,
+        "w": 51,
+        "h": 36,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "lightgrey"
+       },
+       {
+        "t": "text",
+        "x": 35.5,
+        "y": 31,
+        "text": "Forme",
+        "size": 12,
+        "anchor": "middle",
+        "color": "ink",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 61,
+        "y": 8,
+        "w": 226,
+        "h": 36,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "lightgrey"
+       },
+       {
+        "t": "text",
+        "x": 174.0,
+        "y": 31,
+        "text": "Traits",
+        "size": 12,
+        "anchor": "middle",
+        "color": "ink",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 10,
+        "y": 48,
+        "w": 51,
+        "h": 36,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "lightyellow"
+       },
+       {
+        "t": "text",
+        "x": 35.5,
+        "y": 71,
+        "text": "SAS",
+        "size": 12,
+        "anchor": "middle",
+        "color": "ink",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 61,
+        "y": 48,
+        "w": 226,
+        "h": 36,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "lightblue"
+       },
+       {
+        "t": "text",
+        "x": 174.0,
+        "y": 71,
+        "text": "liberté statutaire, président",
+        "size": 12,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "rect",
+        "x": 10,
+        "y": 88,
+        "w": 51,
+        "h": 36,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "lightyellow"
+       },
+       {
+        "t": "text",
+        "x": 35.5,
+        "y": 111,
+        "text": "SNC",
+        "size": 12,
+        "anchor": "middle",
+        "color": "ink",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 61,
+        "y": 88,
+        "w": 226,
+        "h": 36,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "lightblue"
+       },
+       {
+        "t": "text",
+        "x": 174.0,
+        "y": 111,
+        "text": "associés commerçants, illimité",
+        "size": 12,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "rect",
+        "x": 10,
+        "y": 128,
+        "w": 51,
+        "h": 36,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "lightyellow"
+       },
+       {
+        "t": "text",
+        "x": 35.5,
+        "y": 151,
+        "text": "SCS",
+        "size": 12,
+        "anchor": "middle",
+        "color": "ink",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 61,
+        "y": 128,
+        "w": 226,
+        "h": 36,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "lightblue"
+       },
+       {
+        "t": "text",
+        "x": 174.0,
+        "y": 151,
+        "text": "commandités et commanditaires",
+        "size": 12,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "rect",
+        "x": 10,
+        "y": 168,
+        "w": 51,
+        "h": 36,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "lightyellow"
+       },
+       {
+        "t": "text",
+        "x": 35.5,
+        "y": 191,
+        "text": "GIE",
+        "size": 12,
+        "anchor": "middle",
+        "color": "ink",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 61,
+        "y": 168,
+        "w": 226,
+        "h": 36,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "lightblue"
+       },
+       {
+        "t": "text",
+        "x": 174.0,
+        "y": 191,
+        "text": "groupement de moyens",
+        "size": 12,
+        "anchor": "middle",
+        "color": "ink"
+       }
+      ]
+     },
+     "caption": "Quatre formes à retenir.",
+     "alt": "Tableau comparant SAS, SNC, SCS et GIE."
+    },
+    {
+     "type": "example",
+     "title": "Exemple 1 — Choisir une forme",
+     "statement": "Trois associés de Douala veulent une structure très souple, avec un président qui les représente et des règles de vote choisies librement. Quelle forme ?",
+     "steps": [
+      "La liberté statutaire est la marque de la SAS.",
+      "Un président est son représentant légal obligatoire."
+     ],
+     "answer": "La SAS."
+    },
+    {
+     "type": "example",
+     "title": "Exemple 2 — Responsabilité en SNC",
+     "statement": "La SNC « Bois-Est » de Bertoua ne peut payer 4 000 000 FCFA. Un créancier peut-il saisir directement un associé ?",
+     "steps": [
+      "Il doit d'abord mettre en demeure la société.",
+      "Si la société ne paie pas, l'associé répond indéfiniment et solidairement."
+     ],
+     "answer": "Oui, après mise en demeure infructueuse de la société."
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Illimité ne veut pas dire immédiat",
+     "md": "Dans la SNC, les créanciers doivent d'abord s'adresser à la société ; ils ne poursuivent les associés qu'après mise en demeure restée infructueuse. L'associé commanditaire qui s'immisce dans la gestion peut perdre sa protection."
+    }
+   ],
+   "chapter": "droit-l3-societes-ohada-formes"
+  }
+ ],
+ "exercises": [
+  {
+   "id": "droit-l3-societes-ohada-formes-e01",
+   "kind": "mcq",
+   "tier": "application",
+   "lesson": "droit-l3-societes-ohada-sarl",
+   "source": "Exercice original écrit pour CastBridge, niveau Licence 3 de droit",
+   "prompt": "Dans une SARL, les associés répondent des dettes :",
+   "choices": [
+    "À hauteur de leurs apports",
+    "Jamais",
+    "Sans limite",
+    "Solidairement avec le gérant"
+   ],
+   "answer": 0,
+   "explanation": "Responsabilité limitée.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "droit-l3-societes-ohada-formes"
+  },
+  {
+   "id": "droit-l3-societes-ohada-formes-e02",
+   "kind": "truefalse",
+   "tier": "application",
+   "lesson": "droit-l3-societes-ohada-sarl",
+   "source": "Exercice original écrit pour CastBridge, niveau Licence 3 de droit",
+   "prompt": "Les parts sociales d'une SARL sont des valeurs mobilières négociables en bourse.",
+   "answer": false,
+   "explanation": "Elles ne sont pas négociables librement.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "droit-l3-societes-ohada-formes"
+  },
+  {
+   "id": "droit-l3-societes-ohada-formes-e03",
+   "kind": "mcq",
+   "tier": "application",
+   "lesson": "droit-l3-societes-ohada-sarl",
+   "source": "Exercice original écrit pour CastBridge, niveau Licence 3 de droit",
+   "prompt": "Le gérant d'une SARL est :",
+   "choices": [
+    "Toujours une société",
+    "Une personne physique",
+    "Un juge",
+    "Un commissaire aux comptes"
+   ],
+   "answer": 1,
+   "explanation": "Le gérant est une personne physique.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "droit-l3-societes-ohada-formes"
+  },
+  {
+   "id": "droit-l3-societes-ohada-formes-e04",
+   "kind": "open",
+   "tier": "approfondissement",
+   "lesson": "droit-l3-societes-ohada-sarl",
+   "source": "Exercice original écrit pour CastBridge, niveau Licence 3 de droit",
+   "prompt": "Pourquoi la cession de parts à un tiers est-elle encadrée ?",
+   "model": "La SARL est fondée sur les relations entre associés ; l'agrément permet de choisir qui entre dans la société et d'éviter l'arrivée d'un inconnu.",
+   "rubric": [
+    "Intuitu personae (1)",
+    "Agrément (1)",
+    "Choix des associés (1)"
+   ],
+   "explanation": "La SARL est fondée sur les relations entre associés ; l'agrément permet de choisir qui entre dans la société et d'éviter l'arrivée d'un inconnu.",
+   "difficulty": 2,
+   "points": 3,
+   "chapter": "droit-l3-societes-ohada-formes"
+  },
+  {
+   "id": "droit-l3-societes-ohada-formes-e05",
+   "kind": "truefalse",
+   "tier": "approfondissement",
+   "lesson": "droit-l3-societes-ohada-sarl",
+   "source": "Exercice original écrit pour CastBridge, niveau Licence 3 de droit",
+   "prompt": "Le gérant engage la société sans limite, même au-delà de l'objet social.",
+   "answer": false,
+   "explanation": "Il agit dans la limite de l'objet social, sous réserve des règles protégeant les tiers.",
+   "difficulty": 2,
+   "points": 2,
+   "chapter": "droit-l3-societes-ohada-formes"
+  },
+  {
+   "id": "droit-l3-societes-ohada-formes-e06",
+   "kind": "problem",
+   "tier": "examen",
+   "lesson": "droit-l3-societes-ohada-sarl",
+   "source": "Exercice original écrit pour CastBridge, niveau Licence 3 de droit",
+   "prompt": "M. Mbarga, gérant d'une SARL de Douala, signe un gros marché au nom de la société sans consulter les associés, alors que les statuts l'exigent.",
+   "difficulty": 3,
+   "parts": [
+    {
+     "kind": "mcq",
+     "points": 1,
+     "prompt": "Vis-à-vis des tiers de bonne foi :",
+     "choices": [
+      "Seul M. Mbarga est engagé dans tous les cas",
+      "Le marché est nul",
+      "La société est en principe engagée",
+      "Rien ne s'applique"
+     ],
+     "answer": 2,
+     "explanation": "Les limitations statutaires sont en principe inopposables aux tiers de bonne foi.",
+     "id": "droit-l3-societes-ohada-formes-e06-a"
+    },
+    {
+     "kind": "truefalse",
+     "points": 1,
+     "prompt": "Les associés peuvent rechercher la responsabilité du gérant.",
+     "answer": true,
+     "explanation": "Faute de gestion ou violation des statuts.",
+     "id": "droit-l3-societes-ohada-formes-e06-b"
+    },
+    {
+     "kind": "open",
+     "points": 2,
+     "prompt": "Quel est l'enjeu pratique ?",
+     "model": "Distinguer la validité de l'acte à l'égard des tiers (protégés) de la responsabilité interne du gérant envers la société.",
+     "rubric": [
+      "Protection des tiers",
+      "Responsabilité interne du gérant"
+     ],
+     "explanation": "Distinguer la validité de l'acte à l'égard des tiers (protégés) de la responsabilité interne du gérant envers la société.",
+     "id": "droit-l3-societes-ohada-formes-e06-c"
+    }
+   ],
+   "chapter": "droit-l3-societes-ohada-formes"
+  },
+  {
+   "id": "droit-l3-societes-ohada-sarl-q1",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "droit-l3-societes-ohada-sarl",
+   "prompt": "La SARL est :",
+   "choices": [
+    "Une association",
+    "Une société à risque limité pour les associés",
+    "Une société sans capital",
+    "Une administration"
+   ],
+   "answer": 1,
+   "explanation": "Responsabilité limitée.",
+   "chapter": "droit-l3-societes-ohada-formes"
+  },
+  {
+   "id": "droit-l3-societes-ohada-sarl-q2",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "droit-l3-societes-ohada-sarl",
+   "prompt": "Les parts sociales sont :",
+   "choices": [
+    "Gratuites",
+    "Au porteur",
+    "Non librement négociables",
+    "Cotées en bourse"
+   ],
+   "answer": 2,
+   "explanation": "Cession encadrée.",
+   "chapter": "droit-l3-societes-ohada-formes"
+  },
+  {
+   "id": "droit-l3-societes-ohada-sarl-q3",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "droit-l3-societes-ohada-sarl",
+   "prompt": "Qui dirige une SARL ?",
+   "choices": [
+    "Un ou plusieurs gérants",
+    "Un préfet",
+    "Un huissier",
+    "Le greffier"
+   ],
+   "answer": 0,
+   "explanation": "Gérants désignés par les statuts ou les associés.",
+   "chapter": "droit-l3-societes-ohada-formes"
+  },
+  {
+   "id": "droit-l3-societes-ohada-sarl-q4",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "droit-l3-societes-ohada-sarl",
+   "prompt": "La cession à un tiers suppose :",
+   "choices": [
+    "Aucune formalité",
+    "L'agrément des associés",
+    "L'accord du greffe seulement",
+    "Un vote du maire"
+   ],
+   "answer": 1,
+   "explanation": "Règle d'agrément.",
+   "chapter": "droit-l3-societes-ohada-formes"
+  },
+  {
+   "id": "droit-l3-societes-ohada-sarl-q5",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "droit-l3-societes-ohada-sarl",
+   "prompt": "Une SARL peut avoir :",
+   "choices": [
+    "Exactement 100 associés",
+    "Aucun associé",
+    "Uniquement des étrangers",
+    "Un ou plusieurs associés"
+   ],
+   "answer": 3,
+   "explanation": "Unipersonnelle ou pluripersonnelle.",
+   "chapter": "droit-l3-societes-ohada-formes"
+  },
+  {
+   "id": "droit-l3-societes-ohada-formes-e07",
+   "kind": "mcq",
+   "tier": "application",
+   "lesson": "droit-l3-societes-ohada-societe-anonyme",
+   "source": "Exercice original écrit pour CastBridge, niveau Licence 3 de droit",
+   "prompt": "Les comptes annuels sont approuvés par :",
+   "choices": [
+    "L'assemblée générale ordinaire",
+    "Le greffe",
+    "Le préfet",
+    "Le juge de paix"
+   ],
+   "answer": 0,
+   "explanation": "Compétence de l'AGO.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "droit-l3-societes-ohada-formes"
+  },
+  {
+   "id": "droit-l3-societes-ohada-formes-e08",
+   "kind": "truefalse",
+   "tier": "application",
+   "lesson": "droit-l3-societes-ohada-societe-anonyme",
+   "source": "Exercice original écrit pour CastBridge, niveau Licence 3 de droit",
+   "prompt": "La modification des statuts relève de l'AGE.",
+   "answer": true,
+   "explanation": "Décision extraordinaire.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "droit-l3-societes-ohada-formes"
+  },
+  {
+   "id": "droit-l3-societes-ohada-formes-e09",
+   "kind": "matching",
+   "tier": "application",
+   "lesson": "droit-l3-societes-ohada-societe-anonyme",
+   "source": "Exercice original écrit pour CastBridge, niveau Licence 3 de droit",
+   "prompt": "Associez organe et fonction.",
+   "pairs": [
+    [
+     "PCA",
+     "Préside le conseil"
+    ],
+    [
+     "DG",
+     "Dirige la société au quotidien"
+    ],
+    [
+     "Commissaire aux comptes",
+     "Contrôle les comptes"
+    ]
+   ],
+   "explanation": "Rôles distincts.",
+   "difficulty": 1,
+   "points": 2,
+   "chapter": "droit-l3-societes-ohada-formes"
+  },
+  {
+   "id": "droit-l3-societes-ohada-formes-e10",
+   "kind": "open",
+   "tier": "approfondissement",
+   "lesson": "droit-l3-societes-ohada-societe-anonyme",
+   "source": "Exercice original écrit pour CastBridge, niveau Licence 3 de droit",
+   "prompt": "Pourquoi réglementer les conventions entre la société et ses dirigeants ?",
+   "model": "Pour éviter les conflits d'intérêts et protéger la société et les actionnaires : la procédure assure transparence, contrôle et approbation.",
+   "rubric": [
+    "Conflit d'intérêts (1)",
+    "Protection (1)",
+    "Procédure (1)"
+   ],
+   "explanation": "Pour éviter les conflits d'intérêts et protéger la société et les actionnaires : la procédure assure transparence, contrôle et approbation.",
+   "difficulty": 2,
+   "points": 3,
+   "chapter": "droit-l3-societes-ohada-formes"
+  },
+  {
+   "id": "droit-l3-societes-ohada-formes-e11",
+   "kind": "mcq",
+   "tier": "approfondissement",
+   "lesson": "droit-l3-societes-ohada-societe-anonyme",
+   "source": "Exercice original écrit pour CastBridge, niveau Licence 3 de droit",
+   "prompt": "L'administrateur général s'utilise :",
+   "choices": [
+    "Pour remplacer l'assemblée",
+    "Comme alternative légère au conseil",
+    "Pour liquider la société",
+    "Seulement hors OHADA"
+   ],
+   "answer": 1,
+   "explanation": "Mode de direction simplifié.",
+   "difficulty": 2,
+   "points": 2,
+   "chapter": "droit-l3-societes-ohada-formes"
+  },
+  {
+   "id": "droit-l3-societes-ohada-formes-e12",
+   "kind": "problem",
+   "tier": "examen",
+   "lesson": "droit-l3-societes-ohada-societe-anonyme",
+   "source": "Exercice original écrit pour CastBridge, niveau Licence 3 de droit",
+   "prompt": "Dans une SA de Yaoundé, le PCA fait voter un prêt de la société à son frère, sans informer le commissaire aux comptes.",
+   "difficulty": 3,
+   "parts": [
+    {
+     "kind": "truefalse",
+     "points": 1,
+     "prompt": "Cette opération peut être une convention réglementée.",
+     "answer": true,
+     "explanation": "Lien entre dirigeant et bénéficiaire.",
+     "id": "droit-l3-societes-ohada-formes-e12-a"
+    },
+    {
+     "kind": "mcq",
+     "points": 1,
+     "prompt": "Quelle faute possible ?",
+     "choices": [
+      "Retard d'immatriculation",
+      "Non-respect de la procédure d'autorisation et d'information",
+      "Excès de publicité",
+      "Aucune"
+     ],
+     "answer": 1,
+     "explanation": "Défaut de procédure.",
+     "id": "droit-l3-societes-ohada-formes-e12-b"
+    },
+    {
+     "kind": "open",
+     "points": 2,
+     "prompt": "Quelle conséquence pour le PCA ?",
+     "model": "Sa responsabilité peut être engagée ; la convention peut avoir des effets préjudiciables dont il doit répondre.",
+     "rubric": [
+      "Responsabilité",
+      "Conséquence possible sur la convention"
+     ],
+     "explanation": "Sa responsabilité peut être engagée ; la convention peut avoir des effets préjudiciables dont il doit répondre.",
+     "id": "droit-l3-societes-ohada-formes-e12-c"
+    }
+   ],
+   "chapter": "droit-l3-societes-ohada-formes"
+  },
+  {
+   "id": "droit-l3-societes-ohada-societe-anonyme-q1",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "droit-l3-societes-ohada-societe-anonyme",
+   "prompt": "Les actions de SA sont :",
+   "choices": [
+    "Interdites",
+    "Personnelles",
+    "Négociables",
+    "Gratuites"
+   ],
+   "answer": 2,
+   "explanation": "Titres négociables.",
+   "chapter": "droit-l3-societes-ohada-formes"
+  },
+  {
+   "id": "droit-l3-societes-ohada-societe-anonyme-q2",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "droit-l3-societes-ohada-societe-anonyme",
+   "prompt": "Le DG :",
+   "choices": [
+    "Contrôle les comptes",
+    "Immatricule la société",
+    "Dirige la société",
+    "Préside l'assemblée toujours"
+   ],
+   "answer": 2,
+   "explanation": "Direction opérationnelle.",
+   "chapter": "droit-l3-societes-ohada-formes"
+  },
+  {
+   "id": "droit-l3-societes-ohada-societe-anonyme-q3",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "droit-l3-societes-ohada-societe-anonyme",
+   "prompt": "Le commissaire aux comptes :",
+   "choices": [
+    "Juge",
+    "Vend les actions",
+    "Contrôle",
+    "Dirige"
+   ],
+   "answer": 2,
+   "explanation": "Mission de contrôle.",
+   "chapter": "droit-l3-societes-ohada-formes"
+  },
+  {
+   "id": "droit-l3-societes-ohada-societe-anonyme-q4",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "droit-l3-societes-ohada-societe-anonyme",
+   "prompt": "AGO signifie :",
+   "choices": [
+    "Assemblée générale ordinaire",
+    "Autorité de gestion",
+    "Acte général ouvert",
+    "Association générale officielle"
+   ],
+   "answer": 0,
+   "explanation": "Assemblée des actionnaires.",
+   "chapter": "droit-l3-societes-ohada-formes"
+  },
+  {
+   "id": "droit-l3-societes-ohada-societe-anonyme-q5",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "droit-l3-societes-ohada-societe-anonyme",
+   "prompt": "Une SA est :",
+   "choices": [
+    "Un syndicat",
+    "Une société de personnes",
+    "Une association",
+    "Une société de capitaux"
+   ],
+   "answer": 3,
+   "explanation": "Capitaux avant personnes.",
+   "chapter": "droit-l3-societes-ohada-formes"
+  },
+  {
+   "id": "droit-l3-societes-ohada-formes-e13",
+   "kind": "mcq",
+   "tier": "application",
+   "lesson": "droit-l3-societes-ohada-sas-et-societes-de-personnes",
+   "source": "Exercice original écrit pour CastBridge, niveau Licence 3 de droit",
+   "prompt": "La SAS se caractérise par :",
+   "choices": [
+    "Un seul associé exigé",
+    "L'interdiction d'avoir un président",
+    "Sa liberté statutaire",
+    "L'agrément du maire"
+   ],
+   "answer": 2,
+   "explanation": "Statuts très libres.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "droit-l3-societes-ohada-formes"
+  },
+  {
+   "id": "droit-l3-societes-ohada-formes-e14",
+   "kind": "truefalse",
+   "tier": "application",
+   "lesson": "droit-l3-societes-ohada-sas-et-societes-de-personnes",
+   "source": "Exercice original écrit pour CastBridge, niveau Licence 3 de droit",
+   "prompt": "Les associés d'une SNC sont des commerçants.",
+   "answer": true,
+   "explanation": "Ils ont la qualité de commerçant.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "droit-l3-societes-ohada-formes"
+  },
+  {
+   "id": "droit-l3-societes-ohada-formes-e15",
+   "kind": "mcq",
+   "tier": "application",
+   "lesson": "droit-l3-societes-ohada-sas-et-societes-de-personnes",
+   "source": "Exercice original écrit pour CastBridge, niveau Licence 3 de droit",
+   "prompt": "Le commanditaire d'une SCS :",
+   "choices": [
+    "Est toujours illimité",
+    "Est le gérant",
+    "Répond dans la limite de son apport",
+    "Ne verse aucun apport"
+   ],
+   "answer": 2,
+   "explanation": "Responsabilité limitée.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "droit-l3-societes-ohada-formes"
+  },
+  {
+   "id": "droit-l3-societes-ohada-formes-e16",
+   "kind": "open",
+   "tier": "approfondissement",
+   "lesson": "droit-l3-societes-ohada-sas-et-societes-de-personnes",
+   "source": "Exercice original écrit pour CastBridge, niveau Licence 3 de droit",
+   "prompt": "Comparez le commandité et le commanditaire.",
+   "model": "Le commandité gère et répond indéfiniment ; le commanditaire apporte des fonds sans gérer et répond dans la limite de son apport.",
+   "rubric": [
+    "Commandité illimité (1)",
+    "Commanditaire limité (1)",
+    "Gestion (1)"
+   ],
+   "explanation": "Le commandité gère et répond indéfiniment ; le commanditaire apporte des fonds sans gérer et répond dans la limite de son apport.",
+   "difficulty": 2,
+   "points": 3,
+   "chapter": "droit-l3-societes-ohada-formes"
+  },
+  {
+   "id": "droit-l3-societes-ohada-formes-e17",
+   "kind": "truefalse",
+   "tier": "approfondissement",
+   "lesson": "droit-l3-societes-ohada-sas-et-societes-de-personnes",
+   "source": "Exercice original écrit pour CastBridge, niveau Licence 3 de droit",
+   "prompt": "La SAS peut faire librement appel public à l'épargne.",
+   "answer": false,
+   "explanation": "En principe non.",
+   "difficulty": 2,
+   "points": 2,
+   "chapter": "droit-l3-societes-ohada-formes"
+  },
+  {
+   "id": "droit-l3-societes-ohada-formes-e18",
+   "kind": "problem",
+   "tier": "examen",
+   "lesson": "droit-l3-societes-ohada-sas-et-societes-de-personnes",
+   "source": "Exercice original écrit pour CastBridge, niveau Licence 3 de droit",
+   "prompt": "Deux frères et une cousine de Garoua hésitent entre SNC et SARL pour exploiter une quincaillerie.",
+   "difficulty": 3,
+   "parts": [
+    {
+     "kind": "mcq",
+     "points": 1,
+     "prompt": "En SNC, leur responsabilité serait :",
+     "choices": [
+      "Limitée aux apports",
+      "Nulle",
+      "Indéfinie et solidaire",
+      "Réservée au gérant"
+     ],
+     "answer": 2,
+     "explanation": "Marque de la SNC.",
+     "id": "droit-l3-societes-ohada-formes-e18-a"
+    },
+    {
+     "kind": "truefalse",
+     "points": 1,
+     "prompt": "La SARL protège mieux leurs biens personnels.",
+     "answer": true,
+     "explanation": "Responsabilité limitée aux apports.",
+     "id": "droit-l3-societes-ohada-formes-e18-b"
+    },
+    {
+     "kind": "open",
+     "points": 2,
+     "prompt": "Quel conseil donneriez-vous ?",
+     "model": "Si le risque d'endettement est réel, préférer la SARL : leur patrimoine personnel est protégé, sauf cautionnement.",
+     "rubric": [
+      "Comparaison de responsabilité",
+      "Protection du patrimoine"
+     ],
+     "explanation": "Si le risque d'endettement est réel, préférer la SARL : leur patrimoine personnel est protégé, sauf cautionnement.",
+     "id": "droit-l3-societes-ohada-formes-e18-c"
+    }
+   ],
+   "chapter": "droit-l3-societes-ohada-formes"
+  },
+  {
+   "id": "droit-l3-societes-ohada-sas-et-societes-de-personnes-q1",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "droit-l3-societes-ohada-sas-et-societes-de-personnes",
+   "prompt": "Qui représente la SAS ?",
+   "choices": [
+    "Le greffier",
+    "Son président",
+    "Le maire",
+    "L'huissier"
+   ],
+   "answer": 1,
+   "explanation": "Le président est obligatoire.",
+   "chapter": "droit-l3-societes-ohada-formes"
+  },
+  {
+   "id": "droit-l3-societes-ohada-sas-et-societes-de-personnes-q2",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "droit-l3-societes-ohada-sas-et-societes-de-personnes",
+   "prompt": "Dans une SNC, la responsabilité est :",
+   "choices": [
+    "Indéfinie et solidaire",
+    "Nulle",
+    "Limitée",
+    "Facultative"
+   ],
+   "answer": 0,
+   "explanation": "Régime de la SNC.",
+   "chapter": "droit-l3-societes-ohada-formes"
+  },
+  {
+   "id": "droit-l3-societes-ohada-sas-et-societes-de-personnes-q3",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "droit-l3-societes-ohada-sas-et-societes-de-personnes",
+   "prompt": "Le GIE :",
+   "choices": [
+    "Est une banque",
+    "Est une SA cotée",
+    "Est un syndicat",
+    "Facilite l'activité de ses membres"
+   ],
+   "answer": 3,
+   "explanation": "Groupement de moyens.",
+   "chapter": "droit-l3-societes-ohada-formes"
+  },
+  {
+   "id": "droit-l3-societes-ohada-sas-et-societes-de-personnes-q4",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "droit-l3-societes-ohada-sas-et-societes-de-personnes",
+   "prompt": "Un commandité :",
+   "choices": [
+    "A une responsabilité illimitée",
+    "Est exonéré",
+    "Est toujours commanditaire",
+    "N'apporte rien"
+   ],
+   "answer": 0,
+   "explanation": "Responsabilité illimitée.",
+   "chapter": "droit-l3-societes-ohada-formes"
+  },
+  {
+   "id": "droit-l3-societes-ohada-sas-et-societes-de-personnes-q5",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "droit-l3-societes-ohada-sas-et-societes-de-personnes",
+   "prompt": "La SAS repose sur :",
+   "choices": [
+    "Un préfet",
+    "Les statuts",
+    "Une loi unique rigide",
+    "Un tribunal"
+   ],
+   "answer": 1,
+   "explanation": "La liberté contractuelle domine.",
+   "chapter": "droit-l3-societes-ohada-formes"
+  }
+ ]
+}

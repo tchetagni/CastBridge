@@ -49,6 +49,43 @@ tasks.register<JavaExec>("buildLearnLots") {
     args(listOf("lots", learnContent.absolutePath, layout.buildDirectory.dir("learn-lots").get().asFile.absolutePath) + (if (project.hasProperty("update")) listOf("--update") else emptyList()))
 }
 
+// ---- « Langues » (docs/LANGUES.md § 14): text lots of content/langues + the free starter bundled in the TV APK ----
+val languesContent: File = rootProject.projectDir.parentFile.resolve("content/langues")
+val languesEmbedded = layout.buildDirectory.dir("generated/langues-embedded")
+
+// Copies the packs listed in content/langues/embedded.txt (langue.json + media.json) and writes catalog.json (ids + versions)
+val embedLanguesPacks by tasks.registering {
+    group = "castbridge"
+    description = "Copies the embedded « Langues » packs (content/langues/embedded.txt) into the core resources"
+    inputs.dir(languesContent).optional()
+    outputs.dir(languesEmbedded)
+    doLast {
+        val root = languesEmbedded.get().asFile.resolve("castbridge/langues/embedded")
+        languesEmbedded.get().asFile.deleteRecursively(); root.mkdirs()
+        val list = languesContent.resolve("embedded.txt").takeIf { it.isFile }?.readLines().orEmpty().map { it.trim() }.filter { it.isNotEmpty() && !it.startsWith("#") }
+        val items = list.map { id ->
+            val dir = languesContent.resolve(id)
+            require(dir.resolve("langue.json").isFile) { "embedded.txt : pack « $id » introuvable dans content/langues" }
+            for (n in listOf("langue.json", "media.json")) dir.resolve(n).takeIf { it.isFile }?.copyTo(root.resolve("$id/$n"), overwrite = true)
+            val v = Regex("\"version\"\\s*:\\s*(\\d+)").find(dir.resolve("langue.json").readText())?.groupValues?.get(1) ?: "1"
+            "{\"id\":\"$id\",\"version\":$v}"
+        }
+        root.resolve("catalog.json").writeText("{\"format\":1,\"packs\":[${items.joinToString(",")}]}\n")
+    }
+}
+sourceSets.main { resources.srcDir(languesEmbedded) }
+tasks.processResources { dependsOn(embedLanguesPacks) }
+
+// Builds the `langues` text lots + lots-catalog.json (UNSIGNED) into build/langues-lots. -Pupdate bumps changed lots and rewrites content/langues/lots.json
+tasks.register<JavaExec>("buildLangLots") {
+    group = "castbridge"
+    description = "Builds every « Langues » text lot + lots-catalog.json (unsigned) into build/langues-lots"
+    dependsOn(tasks.named("compileKotlin"))
+    classpath = learnToolClasspath
+    mainClass.set("castbridge.core.langues.LangLotBuilder")
+    args(listOf(languesContent.absolutePath, layout.buildDirectory.dir("langues-lots").get().asFile.absolutePath) + (if (project.hasProperty("update")) listOf("--update") else emptyList()))
+}
+
 // Transfer bench (docs/TRANSFER.md): gradle :core:transferBench -Pargs="--tv http://IP:8765 --pin 123456" (or tools/transfer-bench/run.sh)
 tasks.register<JavaExec>("transferBench") {
     group = "castbridge"

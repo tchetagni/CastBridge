@@ -39,6 +39,17 @@ object RentalHub {
     fun statuses(ctx: Context): List<RentalStatus> = runCatching { ensure(ctx).ledger.status(ActivationCenter.allActivations()) }.getOrDefault(emptyList())
 
     /** The deletion at the end of a rental: the French notices to show, if any. Safe to call often (idempotent). */
+    /**
+     * One minute of USE: called every minute while « Apprendre » is open. The minute is counted on a rental that has a usage ceiling (the trial key's 12 h window) and holds a lot, so the
+     * window runs out by reading, not by the calendar. Past the ceiling the next sweep deletes the lots. Returns the statuses after counting.
+     */
+    fun meterOneMinute(ctx: Context): List<RentalStatus> = runCatching {
+        val p = ensure(ctx); val acts = ActivationCenter.allActivations()
+        val lot = p.ledger.status(acts).filter { it.contract.maxUsageMinutes > 0 && it.usable }
+            .firstNotNullOfOrNull { s -> p.ledger.rentedLots(s.key).firstNotNullOfOrNull { castbridge.core.lots.LotNames.parseKey(it) } } ?: return@runCatching emptyList()
+        p.ledger.recordUsage(lot, 1, acts).also { if (it.any { s -> s.state == castbridge.core.lots.RentalState.EXPIRED }) sweep(ctx, SweepTrigger.LEARN_SCREEN, lessonActive = true) }
+    }.getOrDefault(emptyList())
+
     fun sweep(ctx: Context, trigger: SweepTrigger, lessonActive: Boolean = false): List<String> =
         runCatching { ensure(ctx).sweeper.sweep(trigger, lessonActive).notices }.getOrDefault(emptyList())
 

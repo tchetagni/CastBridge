@@ -54,9 +54,13 @@ class ActivationVectorsTest {
     private val sub = Right.Subscription("abo-tout", listOf("tout"), t0 - day, t0 + 90 * day, 7 * day, true)
     private val openAll = Right.OpenAll("ouvert", t0, t0 + 10 * day)
 
+    private val usage = Right.Usage(t0 - hour, t0 + 30 * day)
+    private fun trialWindow(days: Int = 3, maxUsage: Int = 720) = Right.Rental("essai", listOf("tout"), t0 - hour, t0 - hour, days, 0L, maxUsage, 0, "AAAA_box-0")
+    private val otherRental = Right.Rental("loc-a", listOf("classe-cm2"), t0 - hour, t0 - hour, 30, 0L, 0, 0, "AAAA_box-0")
+
     private fun req(d: String, kind: ActivationKind = ActivationKind.PRODUCTION, rights: List<Right> = listOf(purchase), license: String = "lic-0001", subject: Subject = Subject.TV,
-                    nonce: String = "00112233445566778899aabbccddeeff", issuedAt: Long = t0, notBefore: Long = t0 - hour, window: Int = 48, seat: String? = null) =
-        ActivationIssuer.Request(kind, dev(d).code, dev(d).fp, issuedAt, subject, if (kind == ActivationKind.TRIAL) emptyList() else rights,
+                    nonce: String = "00112233445566778899aabbccddeeff", issuedAt: Long = t0, notBefore: Long = t0 - hour, window: Int = 48, seat: String? = null, trialRights: List<Right> = emptyList()) =
+        ActivationIssuer.Request(kind, dev(d).code, dev(d).fp, issuedAt, subject, if (kind == ActivationKind.TRIAL) trialRights else rights,
             if (kind == ActivationKind.TRIAL) Activation.TRIAL_LICENSE else license, seat, notBefore, window, nonce)
 
     private fun reqJson(r: ActivationIssuer.Request, dev: String) = J("kind" to r.kind.name.lowercase(), "device" to dev, "issuedAt" to r.issuedAt, "subject" to r.subject.name.lowercase(),
@@ -109,6 +113,10 @@ class ActivationVectorsTest {
         val prodTok = issuer("desk").issue(req("tvA", rights = listOf(purchase, sub))).token
         val openTok = issuer("desk").issue(req("tvA", rights = listOf(openAll))).token
         cases += activationCase("act-trial", "clé d'essai pour la TV (aucun droit, licence trial)", trialTok, "tvA")
+        cases += activationCase("act-trial-usage-window", "clé d'essai : plafond d'usage + fenêtre de lots réservée (produit essai, 3 jours, 720 min)", issuer("desk").issue(req("tvA", ActivationKind.TRIAL, trialRights = listOf(usage, trialWindow()))).token, "tvA")
+        cases += activationCase("act-trial-usage-only", "clé d'essai : plafond d'usage seul", issuer("desk").issue(req("tvA", ActivationKind.TRIAL, trialRights = listOf(usage))).token, "tvA")
+        cases += activationCase("act-production-usage", "production : achat + plafond d'usage", issuer("desk").issue(req("tvA", rights = listOf(purchase, usage))).token, "tvA")
+        cases += activationCase("act-production-rental", "production : achat + location de 30 jours", issuer("desk").issue(req("tvA", rights = listOf(purchase, otherRental))).token, "tvA")
         cases += activationCase("act-production", "production : achat + abonnement", prodTok, "tvA")
         cases += activationCase("act-open-all", "« tout ouvert » de 10 jours porté par la clé bureau", openTok, "tvA")
         cases += activationCase("act-swapped-module", "même activation, module Wi-Fi remplacé : k=4 sur n=5, acceptée", prodTok, "tvA-swapped-wifi")
@@ -126,6 +134,11 @@ class ActivationVectorsTest {
         cases += activationCase("act-bad-scope-open-all", "la clé serveur ne peut pas délivrer « tout ouvert »", raw("server", "tvA", rights = listOf(openAll)), "tvA")
         cases += activationCase("act-bad-open-all-too-long", "« tout ouvert » de 40 jours refusé par la TV", raw("desk", "tvA", rights = listOf(Right.OpenAll("ouvert", t0, t0 + 40 * day))), "tvA")
         cases += activationCase("act-bad-trial-with-rights", "une clé d'essai ne porte aucun droit", raw("desk", "tvA", kind = ActivationKind.TRIAL, rights = listOf(purchase), license = "trial"), "tvA")
+        cases += activationCase("act-bad-trial-other-rental", "une clé d'essai ne porte pas une autre location que le produit essai", raw("desk", "tvA", kind = ActivationKind.TRIAL, rights = listOf(usage, otherRental), license = "trial"), "tvA")
+        cases += activationCase("act-bad-trial-purchase-usage", "une clé d'essai avec un plafond d'usage ne porte toujours pas d'achat", raw("desk", "tvA", kind = ActivationKind.TRIAL, rights = listOf(usage, purchase), license = "trial"), "tvA")
+        cases += activationCase("act-bad-trial-window-days", "fenêtre d'essai de 4 jours (> 3)", raw("desk", "tvA", kind = ActivationKind.TRIAL, rights = listOf(trialWindow(days = 4)), license = "trial"), "tvA")
+        cases += activationCase("act-bad-trial-window-usage", "fenêtre d'essai de 721 minutes (> 720)", raw("desk", "tvA", kind = ActivationKind.TRIAL, rights = listOf(trialWindow(maxUsage = 721)), license = "trial"), "tvA")
+        cases += activationCase("act-bad-rental-days", "location de 400 jours (> 366)", raw("desk", "tvA", rights = listOf(otherRental.copy(durationDays = 400))), "tvA")
         cases += activationCase("act-bad-wrong-device", "activation d'une autre TV (aucun facteur ne correspond)", prodTok, "tvB-no-ethernet-usb-wifi")
         cases += activationCase("act-bad-wrong-subject", "activation de téléphone présentée à une TV", issuer("desk").issue(req("tvA", subject = Subject.PHONE)).token, "tvA")
         cases += activationCase("act-bad-window-too-long", "fenêtre d'installation de 49 h (> 48 h)", raw("desk", "tvA", from = t0, to = t0 + 49 * hour), "tvA")
@@ -199,6 +212,9 @@ class ActivationVectorsTest {
         cases += J("type" to "build-compact", "id" to "build-compact-trial", "description" to "construire la clé saisissable", "signer" to "desk", "request" to J("kind" to "trial", "deviceCode" to code, "notBeforeHour" to hour0, "windowHours" to 48, "setId" to 0), "expect" to J("text" to compactOk))
         cases += J("type" to "build-command", "id" to "build-command-open-all", "description" to "construire la commande « tout ouvert »", "signer" to "desk", "request" to J("power" to "open_all", "device" to "tvA", "challenge" to ch1, "issuedAt" to t0, "days" to 7, "action" to "", "bundles" to emptyList<String>(), "lots" to emptyList<String>()), "expect" to J("token" to openCmd))
         fun refuse(id: String, why: String, k: String, r: ActivationIssuer.Request, d: String) = J("type" to "build-activation", "id" to id, "description" to why, "signer" to k, "request" to reqJson(r, d), "expect" to J("refused" to true))
+        cases += build("build-trial-usage-window", "construire la clé d'essai avec plafond d'usage et fenêtre de lots", "desk", req("tvA", ActivationKind.TRIAL, trialRights = listOf(usage, trialWindow())), "tvA")
+        cases += refuse("build-refuse-trial-purchase", "essai avec un achat", "desk", req("tvA", ActivationKind.TRIAL, trialRights = listOf(purchase)), "tvA")
+        cases += refuse("build-refuse-trial-other-rental", "essai avec une autre location", "desk", req("tvA", ActivationKind.TRIAL, trialRights = listOf(otherRental)), "tvA")
         cases += refuse("build-refuse-window", "fenêtre hors bornes (49 h)", "desk", req("tvA", window = 49), "tvA")
         cases += refuse("build-refuse-super-server", "la clé serveur ne peut pas émettre SUPER_UNLIMITED", "server", req("tvA", rights = listOf(superRight)), "tvA")
         cases += refuse("build-refuse-zero-window", "durée nulle", "desk", req("tvA", window = 0), "tvA")

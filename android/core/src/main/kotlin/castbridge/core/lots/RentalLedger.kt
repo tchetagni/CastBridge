@@ -71,6 +71,11 @@ class RentalLedger(private val dir: File, val clock: TvClock = TvClock(), val co
         val statuses = status(all).associateBy { it.key }
         for (c in RentalEngine.contracts(all)) {
             if (activation.rights.none { it is Right.Rental && it.productId == c.productId && it.period == c.period }) continue
+            // the trial window is granted ONCE for the life of the application: any later trial key (new period) finds it already used, whatever happened to the first one
+            if (c.productId == RentalLines.TRIAL_PRODUCT && recs.keys.any { it != c.key && it.startsWith(RentalLines.TRIAL_PRODUCT + "@") }) {
+                recs.getOrPut(c.key) { Rec(phase = RentalPhase.DONE, reason = ExpiryReason.USAGE) }
+                out[c.key] = "essai déjà utilisé sur cette TV"; continue
+            }
             val r = recs.getOrPut(c.key) { Rec() }
             val st = statuses[c.key]
             out[c.key] = when {

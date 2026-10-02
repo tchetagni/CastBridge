@@ -1,0 +1,56 @@
+package castbridge.core.owner
+
+import castbridge.core.lots.RentalLines
+import castbridge.core.lots.RentalState
+import castbridge.core.lots.RentalStatus
+import castbridge.core.lots.Right
+import java.time.Instant
+import java.time.ZoneId
+import java.time.format.DateTimeFormatter
+
+/** What the TV shows at all times on every screen: the edition (essai / production / super illimité) and the properties of the activation key. [lines] are short French sentences. */
+data class Badge(val title: String, val lines: List<String>, val ended: Boolean = false) {
+    val text: String get() = (listOf(title) + lines).joinToString("  ·  ")
+}
+
+object KeyBadge {
+    private val DAY = 24L * 3600 * 1000
+    private fun date(ms: Long, zone: ZoneId) = DateTimeFormatter.ofPattern("dd/MM/yyyy").withZone(zone).format(Instant.ofEpochMilli(ms))
+
+    private fun left(ms: Long): String { val d = ms / DAY; val h = ms / 3_600_000L; return when { d >= 2 -> "$d j"; h >= 1 -> "$h h"; else -> "${maxOf(1L, ms / 60_000L)} min" } }
+    private fun minutes(m: Long) = if (m >= 60) "${m / 60} h" + (if (m % 60 != 0L) " ${m % 60} min" else "") else "$m min"
+
+    /** [activations]: every verified activation installed; [rentals]: their rental statuses (the trial window is one of them). */
+    fun of(activations: List<Activation>, nowMs: Long, rentals: List<RentalStatus> = emptyList(), zone: ZoneId = ZoneId.systemDefault()): Badge {
+        if (activations.isEmpty()) return Badge("SANS CLÉ", listOf("Entrez un code d'activation"), ended = true)
+        val counting = activations.filter { a -> a.rights.filterIsInstance<Right.Usage>().none { nowMs >= it.endsAt } }
+        if (counting.isEmpty()) return Badge("ACTIVATION TERMINÉE", listOf("Entrez un nouveau code valide"), ended = true)
+        val rights = counting.flatMap { it.rights }
+        val production = counting.filter { it.kind == ActivationKind.PRODUCTION }
+        val lines = ArrayList<String>()
+        // the key's duration: the latest end among the counting activations, or unlimited when one has no ceiling
+        val ends = (production.ifEmpty { counting }).map { a -> a.rights.filterIsInstance<Right.Usage>().maxOfOrNull { it.endsAt } }
+        lines += if (ends.any { it == null }) "Clé illimitée" else ends.filterNotNull().maxOrNull()!!.let { "Clé valable jusqu'au ${date(it, zone)} (${left(it - nowMs)})" }
+        return when {
+            rights.any { it is Right.Super } -> Badge("SUPER ILLIMITÉ", listOf("Tous les droits", "Clé permanente"))
+            production.isNotEmpty() -> {
+                val bundles = rights.filterIsInstance<Right.Purchase>().flatMap { it.bundleIds }.distinct()
+                if (bundles.isNotEmpty()) lines += "${bundles.size} bouquet(s) acheté(s)"
+                rights.filterIsInstance<Right.Subscription>().maxOfOrNull { it.endsAt }?.let { lines += "Abonnement jusqu'au ${date(it, zone)}" }
+                rights.filterIsInstance<Right.OpenAll>().maxOfOrNull { it.endsAt }?.takeIf { it > nowMs }?.let { lines += "Tout ouvert jusqu'au ${date(it, zone)}" }
+                rentals.filter { it.usable && it.contract.productId != RentalLines.TRIAL_PRODUCT }.minOfOrNull { it.remainingMs ?: Long.MAX_VALUE }?.takeIf { it != Long.MAX_VALUE }?.let { lines += "Location : ${left(it)} restant(s)" }
+                Badge("PRODUCTION", lines)
+            }
+            else -> {
+                val w = rentals.firstOrNull { it.contract.productId == RentalLines.TRIAL_PRODUCT }
+                lines += when {
+                    w == null -> "Lots locatifs : 12 h d'essai, une seule fois"
+                    w.state == RentalState.EXPIRED -> "Lots locatifs : fenêtre d'essai terminée"
+                    else -> "Lots locatifs : ${minutes(w.remainingUsageMinutes ?: RentalLines.TRIAL_USAGE_MINUTES.toLong())} d'essai restantes"
+                }
+                lines += "Streaming, Sudoku et lots d'essai seulement · « Passer en production » pour tout débloquer"
+                Badge("ESSAI", lines)
+            }
+        }
+    }
+}

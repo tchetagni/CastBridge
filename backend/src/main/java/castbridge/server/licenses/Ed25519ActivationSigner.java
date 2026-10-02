@@ -32,13 +32,20 @@ public final class Ed25519ActivationSigner implements ActivationSigner {
         if (r.notBefore() > r.issuedAt()) throw ApiException.badRequest("Le début de la fenêtre ne peut pas dépasser la date d'émission");
         if (!WireActivation.ID.matcher(r.license()).matches()) throw ApiException.badRequest("Identifiant de licence invalide pour l'activation");
         if (r.kind() == IssueKind.TRIAL) {
-            if (!r.rights().stream().allMatch(WireActivation::isUsage) || !r.license().equals(WireActivation.TRIAL_LICENSE)) throw ApiException.badRequest("Une clé d'essai ne porte aucun droit et sa licence est « trial »");
+            if (!r.rights().stream().allMatch(WireActivation::isTrialRight) || !r.license().equals(WireActivation.TRIAL_LICENSE)) throw ApiException.badRequest("Une clé d'essai ne porte que sa durée d'usage et sa fenêtre de lots, et sa licence est « trial »");
         } else if (r.rights().stream().allMatch(WireActivation::isUsage)) {
             throw ApiException.badRequest("Une activation de production porte au moins un droit");
         }
+        if (r.rights().stream().filter(WireActivation::isUsage).count() > 1) throw ApiException.badRequest("Une activation porte au plus un plafond d'usage");
         for (String line : r.rights()) {
             if (!WireActivation.rightLineOk(line)) throw ApiException.badRequest("Droit mal formé : « " + AuditLog.clip(line, 60) + " »");
+            if (WireActivation.isRental(line) && WireActivation.rentalBounds(line) != null) throw ApiException.badRequest("Location hors bornes : « " + AuditLog.clip(line, 60) + " »");
             String[] f = line.split("\\|");
+            if (f[0].equals("usage")) {
+                long span = Long.parseLong(f[3]) - Long.parseLong(f[2]);
+                long maxDays = r.kind() == IssueKind.TRIAL ? 365 : 3660;
+                if (span < WireActivation.DAY_MS || span > maxDays * WireActivation.DAY_MS) throw ApiException.badRequest("Plafond d'usage : de 1 à " + maxDays + " jours");
+            }
             if (f[0].equals("openall")) {
                 long d = Long.parseLong(f[3]) - Long.parseLong(f[2]);
                 if (d <= 0 || d > WireActivation.MAX_OPEN_ALL_MS) throw ApiException.badRequest("« Tout ouvert » : 30 jours au plus");

@@ -39,6 +39,9 @@ object StarterBudget {
             val n = StarterBudget::class.java.getResourceAsStream("/castbridge/quiz/$r")?.use { it.readBytes().size.toLong() } ?: continue
             items["quiz/$r"] = n; quiz += n
         }
+        // « Langues » free starter (castbridge/langues/embedded/): a few KB, but it counts like the rest
+        val lang = castbridge.core.langues.EmbeddedLangSource().bytes()
+        if (lang > 0) { items["langues/embedded"] = lang; learn += lang }
         return Report(learn, quiz, items)
     }
 

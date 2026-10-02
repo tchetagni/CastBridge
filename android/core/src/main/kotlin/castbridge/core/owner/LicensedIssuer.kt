@@ -25,6 +25,8 @@ class IssueSpec(
     val rentalCheck: ((RentalSpec) -> String?)? = null,
     /** Usage ceiling in days (see [Right.Usage]): trial 1..[ActivationPolicy.TRIAL_MAX_DAYS] (null = [ActivationPolicy.TRIAL_DEFAULT_DAYS]), production 1..[ActivationPolicy.PRODUCTION_MAX_DAYS] (null = none). */
     val usageDays: Int? = null,
+    /** A TRIAL key carries the one-time 12 h window of rented lots ([RentalLines.TRIAL_PRODUCT]); needs [rentalMaster]. The owner's tools turn it on for every trial key. */
+    val trialLots: Boolean = false,
 )
 
 /**
@@ -114,11 +116,14 @@ class LicensedIssuer(
                 is Plan.Refused -> throw IssueException(p.message)
             }
         }
-        val rights = if (spec.rentals.isEmpty()) spec.rights else {
-            if (spec.kind != ActivationKind.PRODUCTION) throw IssueException("Une location demande une activation de production")
+        val trialWindow = if (spec.kind == ActivationKind.TRIAL && spec.trialLots) listOf(RentalSpec(castbridge.core.lots.RentalLines.TRIAL_PRODUCT, listOf(castbridge.core.lots.Right.ALL_BUNDLE),
+            castbridge.core.lots.RentalLines.TRIAL_DAYS, castbridge.core.lots.RentalLines.TRIAL_USAGE_MINUTES)) else emptyList()
+        val rentals = spec.rentals + trialWindow
+        val rights = if (rentals.isEmpty()) spec.rights else {
+            if (spec.kind != ActivationKind.PRODUCTION && spec.rentals.isNotEmpty()) throw IssueException("Une location demande une activation de production")
             val master = spec.rentalMaster ?: throw IssueException("Location : secret de location absent")
             val theSeat = seat ?: SeatIds.of(spec.license, device.factors)
-            spec.rights + spec.rentals.map { r ->
+            spec.rights + rentals.map { r ->
                 spec.rentalCheck?.invoke(r)?.let { throw IssueException(it) }
                 RentalIssuing.right(r, issuedAt, spec.license, theSeat, device.factors, master)
             }

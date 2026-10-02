@@ -2,6 +2,7 @@ package castbridge.core.langues
 
 import castbridge.core.lots.LotId
 import castbridge.core.lots.LotMeta
+import castbridge.core.lots.Need
 import castbridge.core.quiz.Json
 import castbridge.core.quiz.Json.int
 import castbridge.core.quiz.Json.long
@@ -106,6 +107,20 @@ object LangPlanner {
         val sel = ArrayList<LotMeta>(); val skip = ArrayList<Pair<LotMeta, String>>(); var used = 0L
         for ((m, _) in mine) if (used + m.bytes <= budget) { sel += m; used += m.bytes } else skip += m to "ne tient pas : il manque ${(used + m.bytes - budget + 1023) / 1024} Ko"
         return Plan(sel, skip, used)
+    }
+
+    /** First priority of a language need: after every class need of [castbridge.core.lots.LotPlanner.needsOf] (which stays below 100 for ten profiles), so a learner's classes are never pushed out of the TV by languages. */
+    const val NEED_BASE = 100
+
+    /**
+     * The language TEXT lots the TV should hold for [learner], among [available] (what the server announces plus what the phone holds): same target and start language,
+     * closest level first ([rank]), as [castbridge.core.lots.Need]s ready for [castbridge.core.lots.LotPlanner.plan]. Media lots (`langues-media`) are never needed: the TV has no consumer for them yet.
+     * Pure and deterministic; a null learner (no profile chosen) needs nothing.
+     */
+    fun needs(learner: LearnerLang?, available: Collection<LotMeta>): List<Need> {
+        if (learner == null) return emptyList()
+        return available.asSequence().filter { it.id.feature == LangLots.FEATURE }.mapNotNull { m -> rank(learner, m.id)?.let { m.id to it } }
+            .distinct().sortedWith(compareBy({ it.second }, { it.first.scope })).map { (id, r) -> Need(id, NEED_BASE + minOf(r, 9)) }.toList()
     }
 
     /** A media lot is playable on the TV only when a text lot of the same (target, level, theme) is installed there too: the text lot says which media it references. */

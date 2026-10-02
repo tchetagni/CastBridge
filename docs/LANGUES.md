@@ -425,6 +425,8 @@ Questions restantes (non bloquantes) :
 |---|---|
 | `docs/LANGUES.md` | ce document |
 | `content/langues/budget.json` | poids du budget (source unique) |
+| `content/langues/lots.json` | registre des lots : familles (`free` / `reserved`) et versions (§ 14) |
+| `content/langues/embedded.txt` | packs embarqués dans CastBridge-TV (§ 14) |
 | `content/langues/zh-a0-salut-fr/` | pack d'exemple (une unité, textes uniquement ; audio décrit dans `media.json` mais non produit) |
 | `content/graph/langue-<code>.json` | 7 graphes générés |
 | `tools/langues/gen-graph.py` | générateur des graphes |
@@ -442,3 +444,19 @@ Questions restantes (non bloquantes) :
    - **Point à faire valider par un juriste** avant toute vente ou production en masse : l'articulation entre une licence de contenu libre, un logiciel soumis à autorisation et des lots payants (le coordinateur ne donne pas d'avis juridique).
 3. **Voix : les deux.** Phase actuelle (petit budget) : **synthèse libre, clairement marquée comme synthétique**. **Enregistrements humains** prévus pour le contenu payant dès que le budget le permet. Les modèles neuronaux libres (Kokoro, MeloTTS, Piper) restent à **tester hors du cloud** (leurs modèles y sont injoignables) ; sans cela seule la voix `espeak-ng` (robotique) est disponible.
 
+## 14. Lots `langues` construits, famille libre, démarrage embarqué (2026-10-02)
+
+**Construire les lots texte** : `cd android && gradle --offline :core:buildLangLots` (ajouter `-Pupdate` pour incrémenter la version d'un lot dont le contenu a changé et réécrire `content/langues/lots.json`). Sortie dans `android/core/build/langues-lots/` (non versionné) :
+
+- `castbridge-lot-langues-<scope>-v<N>.lot` : zip déterministe avec `langue.json` + `media.json` **à la racine** (c'est ce que lit `LangLotConsumer`) ; le lot est validé (`LangValidator`) et refusé au-dessus de 3 Mo avant d'être écrit. `"version"` dans `langue.json` doit être égal à la version du lot (contrôlée par le consommateur) : la relever en même temps que le lot.
+- `lots-catalog.json` : même forme que celui des lots Apprendre (`feature`, `scope`, `version`, `bytes`, `sha256`, `title`, `minAppVersion`, `file`, `date`) plus `family`, `units`, `exercises`. **NON SIGNÉ** (`"signature":"UNSIGNED"`) : la signature appartient à la chaîne de publication, avec la vraie clé, hors dépôt.
+
+**Registre** `content/langues/lots.json` :
+
+```json
+{"format":1,"free":["langues:zh-a0-salut-fr"],"reserved":[],"lots":{"zh-a0-salut-fr":{"version":1,"hash":"…","date":"2026-10-02"}}}
+```
+
+`free` = contenu dérivé de sources CC BY-SA : jamais chiffré, jamais loué ; `reserved` = contenu original ou de domaine public (chiffrable par TV, louable). Un lot est dans **une seule** liste (jamais mélangé) ; absent des deux, sa famille est inconnue et la construction échoue (et `LotFamilies.explicit` refuse la location). `LangLotRegistry.families()` donne l'objet `LotFamilies` correspondant.
+
+**Démarrage embarqué** : `content/langues/embedded.txt` liste les packs copiés dans les ressources de l'APK (`castbridge/langues/embedded/<id>/{langue.json,media.json}` + `catalog.json`, tâche `:core:embedLanguesPacks`, branchée sur `processResources`). Libres uniquement, budget 1 Mo (testé), compté dans `StarterBudget`. `EmbeddedLangSource` les lit ; `LanguesHub.packs()` fusionne démarrage et lots installés : à nom égal, le lot installé gagne si sa version est au moins celle du démarrage. Le message « Aucune langue installée » n'apparaît donc que si aucun pack n'est embarqué. Tests : `LangLotBuildTest`.

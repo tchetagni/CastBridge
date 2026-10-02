@@ -97,6 +97,9 @@
         <!-- « Activer la TV » : paste the activation key, send it to the paired TV by Bluetooth (open to everyone; the key is signed) -->
         <activity android:name=".ActivateTvActivity" android:exported="false" android:label="Activer la TV"
             android:theme="@style/Theme.CastBridge" android:windowSoftInputMode="adjustResize" />
+        <!-- « Locations sur la TV » : the phone carries the rented (sealed) lots to CastBridge-TV -->
+        <activity android:name=".RentalDeliveryActivity" android:exported="false" android:label="Locations sur la TV"
+            android:theme="@style/Theme.CastBridge" />
         <!-- Parental control (docs/PARENTAL.md): the parent's own screen -->
         <activity android:name=".ParentalActivity" android:exported="false" android:label="Contrôle parental"
             android:theme="@style/Theme.CastBridge" android:windowSoftInputMode="adjustResize" />

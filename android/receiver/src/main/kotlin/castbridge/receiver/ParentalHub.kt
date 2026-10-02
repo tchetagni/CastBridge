@@ -268,7 +268,10 @@ object ParentalHub {
     fun kidHomeActive(): Boolean = engineOrNull?.activeProfile()?.kidMode == true
 
     /** Home tiles: in kid mode only Apprendre, allowed games, the library, help and the parental door. */
-    fun filterHome(tools: List<HomeTool>): List<HomeTool> {
+    private val TRIAL_CLOSED_LABELS = setOf("Bibliothèque", "Recevoir du téléphone", "Clé USB", "Téléchargements", "Langues")      // the tiles of castbridge.core.owner.TrialPolicy.CLOSED_TILES
+
+    fun filterHome(all: List<HomeTool>): List<HomeTool> {
+        val tools = if (ActivationCenter.trial()) all.filter { it.label !in TRIAL_CLOSED_LABELS } else all
         if (engineOrNull == null) return tools
         val p = engine.activeProfile() ?: return tools
         if (!p.kidMode) return tools.filter { t -> categoryOfLabel(t.label)?.let { !castbridge.core.parental.ParentalRules.categoryBlocked(p, it) } ?: true }

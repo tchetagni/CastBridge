@@ -43,11 +43,18 @@ dt{color:var(--mut)}dd{margin:0;word-break:break-all}
 .card .a{display:flex;gap:4px;flex-wrap:wrap;padding:4px 8px 8px}
 .card .a button{padding:2px 6px;font-size:12px}
 h3{font-size:13px;color:var(--acc);margin:10px 0 0}
+#ed{border-radius:8px;padding:10px 14px;margin:8px 0;border:1px solid var(--line);border-left:6px solid var(--mut);background:var(--card)}
+#ed.trial{border-left-color:#e6b422;background:#2a2410}
+#ed.prod{border-left-color:var(--ok);background:#10281a}
+#ed.end{border-left-color:var(--bad);background:#2d1416}
+#ed b{font-size:16px}
+#ed ul{margin:4px 0 0;padding-left:18px;font-size:13px}
 </style>
 </head>
 <body>
 <main>
 <h1>CastBridge TV</h1>
+<div id="ed" style="display:none" aria-live="polite"></div>
 
 <section id="login">
   <h2>Code PIN</h2>
@@ -212,8 +219,27 @@ async function refresh() {
     msg("TV injoignable : " + e.message);
   }
 }
+
+// ---- Edition banner: GET /api/activation every 30 s ----
+async function loadEdition() {
+  const ed = $("ed"); let a;
+  try { a = await api("GET", "/api/activation"); } catch (e) { return; }
+  if (!a || !a.edition) { ed.style.display = "none"; return; }
+  ed.className = a.ended ? "end" : a.trial ? "trial" : "prod";
+  ed.textContent = "";
+  const t = document.createElement("b"); t.textContent = "Édition : " + a.edition; ed.appendChild(t);
+  const ul = document.createElement("ul");
+  const add = x => { const li = document.createElement("li"); li.textContent = x; ul.appendChild(li); };
+  (a.lines || []).forEach(add);
+  if (a.usageEndsAt) add("Fin d'usage : " + new Date(a.usageEndsAt).toLocaleString("fr-FR"));
+  if (a.trialWindow && a.trialWindow.state === "active") add("Fenêtre d'essai : " + a.trialWindow.minutesLeft + " min restantes");
+  if (a.trialWindow && a.trialWindow.state === "ended") add("Fenêtre d'essai terminée");
+  if (a.restrictions) add(a.restrictions);
+  ed.appendChild(ul); ed.style.display = "block";
+}
+let edTimer = null;
 let libTick = 0;
-function start() { stop(); refresh(); loadStorage(); loadLibrary(); loadBackground(); timer = setInterval(() => { refresh(); loadStorage(); if (++libTick % 3 === 0) { loadLibrary(); loadBackground(); } }, 2000); }
+function start() { stop(); loadEdition(); clearInterval(edTimer); edTimer = setInterval(loadEdition, 30000); refresh(); loadStorage(); loadLibrary(); loadBackground(); timer = setInterval(() => { refresh(); loadStorage(); if (++libTick % 3 === 0) { loadLibrary(); loadBackground(); } }, 2000); }
 
 // ---- Library (same sections as the TV and the phone: see LibrarySections) ----
 const thumbs = new Map();                 // key -> object URL (bounded: the page may stay open for hours)
@@ -281,7 +307,7 @@ function card(f) {
   c.append(pic, t, a);
   return c;
 }
-function stop() { if (timer) clearInterval(timer); timer = null; }
+function stop() { if (timer) clearInterval(timer); timer = null; clearInterval(edTimer); }
 
 function render(i) {
   const p = i.player || {};

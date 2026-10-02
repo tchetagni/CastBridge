@@ -503,6 +503,90 @@
     },
     {
       "type": "activation",
+      "id": "act-trial-usage-window",
+      "description": "clé d'essai : plafond d'usage + fenêtre de lots réservée (produit essai, 3 jours, 720 min)",
+      "token": "cbx1.Y2FzdGJyaWRnZS1lbnZlbG9wZS12MQp0eXBlPWFjdGl2YXRpb24Ka2lkPWIyZTViNDE4NjBkMWQ4YmUKc2VxPTE4MDAwMDAwMDAwMDAKbm9uY2U9MDAxMTIyMzM0NDU1NjY3Nzg4OTlhYWJiY2NkZGVlZmYKaXNzdWVkQXQ9MTgwMDAwMDAwMDAwMApub3RCZWZvcmU9MTc5OTk5NjQwMDAwMApleHBpcmVzQXQ9MTgwMDE2OTIwMDAwMAp0YXJnZXQ9ZGV2aWNlCms9NApmYWN0b3I9RkxBU0h8YzQ4Y2FjZDgxYjk2NjNkMGJhOTdjMjIxY2JkMTdmNGYKZmFjdG9yPUVUSEVSTkVUfGY5MWVmZDg5ZTAwMjVjMjI2MmRhMTJjZmJlZDQzNjMyCmZhY3Rvcj1XSUZJfGVhOGI1NTJlMjI0MGJiZGQ4Yzg4YzQyMzEzYzRkZWFiCmZhY3Rvcj1TWVNURU1fU0VSSUFMfDc3NGJlYWNiZjM1MWIwZDIwNWY5MTY2NjY5ZTRkM2M3CmZhY3Rvcj1CTFVFVE9PVEh8ZDM2NWVhNjdlMDA1ODVlZGFmOGJlZjRkNzM3ODg1MGQKLS0Ka2luZD10cmlhbApzdWJqZWN0PXR2CmxpY2Vuc2U9dHJpYWwKc2VhdD0zODliNTgzYWI2YmVhODU2CnJpZ2h0PXJlbnRhbHxlc3NhaXx0b3V0fDE3OTk5OTY0MDAwMDB8MTc5OTk5NjQwMDAwMHwzfDB8NzIwfDB8QUFBQV9ib3gtMApyaWdodD11c2FnZXxkdXJlZXwxNzk5OTk2NDAwMDAwfDE4MDI1OTIwMDAwMDA.rDVNAbZ44ilzBDZ3N1sIS+emLA+xGDt7ZKCQuBSPL66pdhbo2Y/rq3yxlN101eLhkivSSwjvE9tz78stm9PXBQ==",
+      "device": "tvA",
+      "nowMs": 1800000000000,
+      "trustedKeys": ["desk", "phone", "server", "support"],
+      "revokedKeys": [],
+      "revokedSeats": [],
+      "expectSubject": "tv",
+      "lastSeq": {},
+      "expect": {
+        "result": "accepted",
+        "kind": "trial",
+        "subject": "tv",
+        "license": "trial",
+        "seat": "389b583ab6bea856",
+        "weakIdentity": false
+      }
+    },
+    {
+      "type": "activation",
+      "id": "act-trial-usage-only",
+      "description": "clé d'essai : plafond d'usage seul",
+      "token": "cbx1.Y2FzdGJyaWRnZS1lbnZlbG9wZS12MQp0eXBlPWFjdGl2YXRpb24Ka2lkPWIyZTViNDE4NjBkMWQ4YmUKc2VxPTE4MDAwMDAwMDAwMDAKbm9uY2U9MDAxMTIyMzM0NDU1NjY3Nzg4OTlhYWJiY2NkZGVlZmYKaXNzdWVkQXQ9MTgwMDAwMDAwMDAwMApub3RCZWZvcmU9MTc5OTk5NjQwMDAwMApleHBpcmVzQXQ9MTgwMDE2OTIwMDAwMAp0YXJnZXQ9ZGV2aWNlCms9NApmYWN0b3I9RkxBU0h8YzQ4Y2FjZDgxYjk2NjNkMGJhOTdjMjIxY2JkMTdmNGYKZmFjdG9yPUVUSEVSTkVUfGY5MWVmZDg5ZTAwMjVjMjI2MmRhMTJjZmJlZDQzNjMyCmZhY3Rvcj1XSUZJfGVhOGI1NTJlMjI0MGJiZGQ4Yzg4YzQyMzEzYzRkZWFiCmZhY3Rvcj1TWVNURU1fU0VSSUFMfDc3NGJlYWNiZjM1MWIwZDIwNWY5MTY2NjY5ZTRkM2M3CmZhY3Rvcj1CTFVFVE9PVEh8ZDM2NWVhNjdlMDA1ODVlZGFmOGJlZjRkNzM3ODg1MGQKLS0Ka2luZD10cmlhbApzdWJqZWN0PXR2CmxpY2Vuc2U9dHJpYWwKc2VhdD0zODliNTgzYWI2YmVhODU2CnJpZ2h0PXVzYWdlfGR1cmVlfDE3OTk5OTY0MDAwMDB8MTgwMjU5MjAwMDAwMA.ddKLhwEGWaSDTc6ordBGuOS+lykcgyWcxaBxGdJd/3Er1t4QV7orxPRgc0iEA2V2jvTqHLVo+mtEuXBqC/n9AQ==",
+      "device": "tvA",
+      "nowMs": 1800000000000,
+      "trustedKeys": ["desk", "phone", "server", "support"],
+      "revokedKeys": [],
+      "revokedSeats": [],
+      "expectSubject": "tv",
+      "lastSeq": {},
+      "expect": {
+        "result": "accepted",
+        "kind": "trial",
+        "subject": "tv",
+        "license": "trial",
+        "seat": "389b583ab6bea856",
+        "weakIdentity": false
+      }
+    },
+    {
+      "type": "activation",
+      "id": "act-production-usage",
+      "description": "production : achat + plafond d'usage",
+      "token": "cbx1.Y2FzdGJyaWRnZS1lbnZlbG9wZS12MQp0eXBlPWFjdGl2YXRpb24Ka2lkPWIyZTViNDE4NjBkMWQ4YmUKc2VxPTE4MDAwMDAwMDAwMDAKbm9uY2U9MDAxMTIyMzM0NDU1NjY3Nzg4OTlhYWJiY2NkZGVlZmYKaXNzdWVkQXQ9MTgwMDAwMDAwMDAwMApub3RCZWZvcmU9MTc5OTk5NjQwMDAwMApleHBpcmVzQXQ9MTgwMDE2OTIwMDAwMAp0YXJnZXQ9ZGV2aWNlCms9NApmYWN0b3I9RkxBU0h8YzQ4Y2FjZDgxYjk2NjNkMGJhOTdjMjIxY2JkMTdmNGYKZmFjdG9yPUVUSEVSTkVUfGY5MWVmZDg5ZTAwMjVjMjI2MmRhMTJjZmJlZDQzNjMyCmZhY3Rvcj1XSUZJfGVhOGI1NTJlMjI0MGJiZGQ4Yzg4YzQyMzEzYzRkZWFiCmZhY3Rvcj1TWVNURU1fU0VSSUFMfDc3NGJlYWNiZjM1MWIwZDIwNWY5MTY2NjY5ZTRkM2M3CmZhY3Rvcj1CTFVFVE9PVEh8ZDM2NWVhNjdlMDA1ODVlZGFmOGJlZjRkNzM3ODg1MGQKLS0Ka2luZD1wcm9kdWN0aW9uCnN1YmplY3Q9dHYKbGljZW5zZT1saWMtMDAwMQpzZWF0PWYzNjc1N2MyMjZkZDJlZTQKcmlnaHQ9cHVyY2hhc2V8cC1jbGFzc2UtY20yfGNsYXNzZS1jbTJ8MTc5OTEzNjAwMDAwMApyaWdodD11c2FnZXxkdXJlZXwxNzk5OTk2NDAwMDAwfDE4MDI1OTIwMDAwMDA.ky2DvveHuezekmbTZYQLnuhnvKgM+jf7s4pgXHxJMpixhu6Tv06o4y0fKdoDInewaLUVfWET64Pg578joDDsCw==",
+      "device": "tvA",
+      "nowMs": 1800000000000,
+      "trustedKeys": ["desk", "phone", "server", "support"],
+      "revokedKeys": [],
+      "revokedSeats": [],
+      "expectSubject": "tv",
+      "lastSeq": {},
+      "expect": {
+        "result": "accepted",
+        "kind": "production",
+        "subject": "tv",
+        "license": "lic-0001",
+        "seat": "f36757c226dd2ee4",
+        "weakIdentity": false
+      }
+    },
+    {
+      "type": "activation",
+      "id": "act-production-rental",
+      "description": "production : achat + location de 30 jours",
+      "token": "cbx1.Y2FzdGJyaWRnZS1lbnZlbG9wZS12MQp0eXBlPWFjdGl2YXRpb24Ka2lkPWIyZTViNDE4NjBkMWQ4YmUKc2VxPTE4MDAwMDAwMDAwMDAKbm9uY2U9MDAxMTIyMzM0NDU1NjY3Nzg4OTlhYWJiY2NkZGVlZmYKaXNzdWVkQXQ9MTgwMDAwMDAwMDAwMApub3RCZWZvcmU9MTc5OTk5NjQwMDAwMApleHBpcmVzQXQ9MTgwMDE2OTIwMDAwMAp0YXJnZXQ9ZGV2aWNlCms9NApmYWN0b3I9RkxBU0h8YzQ4Y2FjZDgxYjk2NjNkMGJhOTdjMjIxY2JkMTdmNGYKZmFjdG9yPUVUSEVSTkVUfGY5MWVmZDg5ZTAwMjVjMjI2MmRhMTJjZmJlZDQzNjMyCmZhY3Rvcj1XSUZJfGVhOGI1NTJlMjI0MGJiZGQ4Yzg4YzQyMzEzYzRkZWFiCmZhY3Rvcj1TWVNURU1fU0VSSUFMfDc3NGJlYWNiZjM1MWIwZDIwNWY5MTY2NjY5ZTRkM2M3CmZhY3Rvcj1CTFVFVE9PVEh8ZDM2NWVhNjdlMDA1ODVlZGFmOGJlZjRkNzM3ODg1MGQKLS0Ka2luZD1wcm9kdWN0aW9uCnN1YmplY3Q9dHYKbGljZW5zZT1saWMtMDAwMQpzZWF0PWYzNjc1N2MyMjZkZDJlZTQKcmlnaHQ9cHVyY2hhc2V8cC1jbGFzc2UtY20yfGNsYXNzZS1jbTJ8MTc5OTEzNjAwMDAwMApyaWdodD1yZW50YWx8bG9jLWF8Y2xhc3NlLWNtMnwxNzk5OTk2NDAwMDAwfDE3OTk5OTY0MDAwMDB8MzB8MHwwfDB8QUFBQV9ib3gtMA.NJBaLNIUfB/lo6XVHYmkdtILWwicg2gx/jpmsIjrPRqmKsr1Y8x+hE90fz5+FHN7EBiECaso/bKwBqlHUMAsDw==",
+      "device": "tvA",
+      "nowMs": 1800000000000,
+      "trustedKeys": ["desk", "phone", "server", "support"],
+      "revokedKeys": [],
+      "revokedSeats": [],
+      "expectSubject": "tv",
+      "lastSeq": {},
+      "expect": {
+        "result": "accepted",
+        "kind": "production",
+        "subject": "tv",
+        "license": "lic-0001",
+        "seat": "f36757c226dd2ee4",
+        "weakIdentity": false
+      }
+    },
+    {
+      "type": "activation",
       "id": "act-production",
       "description": "production : achat + abonnement",
       "token": "cbx1.Y2FzdGJyaWRnZS1lbnZlbG9wZS12MQp0eXBlPWFjdGl2YXRpb24Ka2lkPWIyZTViNDE4NjBkMWQ4YmUKc2VxPTE4MDAwMDAwMDAwMDAKbm9uY2U9MDAxMTIyMzM0NDU1NjY3Nzg4OTlhYWJiY2NkZGVlZmYKaXNzdWVkQXQ9MTgwMDAwMDAwMDAwMApub3RCZWZvcmU9MTc5OTk5NjQwMDAwMApleHBpcmVzQXQ9MTgwMDE2OTIwMDAwMAp0YXJnZXQ9ZGV2aWNlCms9NApmYWN0b3I9RkxBU0h8YzQ4Y2FjZDgxYjk2NjNkMGJhOTdjMjIxY2JkMTdmNGYKZmFjdG9yPUVUSEVSTkVUfGY5MWVmZDg5ZTAwMjVjMjI2MmRhMTJjZmJlZDQzNjMyCmZhY3Rvcj1XSUZJfGVhOGI1NTJlMjI0MGJiZGQ4Yzg4YzQyMzEzYzRkZWFiCmZhY3Rvcj1TWVNURU1fU0VSSUFMfDc3NGJlYWNiZjM1MWIwZDIwNWY5MTY2NjY5ZTRkM2M3CmZhY3Rvcj1CTFVFVE9PVEh8ZDM2NWVhNjdlMDA1ODVlZGFmOGJlZjRkNzM3ODg1MGQKLS0Ka2luZD1wcm9kdWN0aW9uCnN1YmplY3Q9dHYKbGljZW5zZT1saWMtMDAwMQpzZWF0PWYzNjc1N2MyMjZkZDJlZTQKcmlnaHQ9cHVyY2hhc2V8cC1jbGFzc2UtY20yfGNsYXNzZS1jbTJ8MTc5OTEzNjAwMDAwMApyaWdodD1zdWJzY3JpcHRpb258YWJvLXRvdXR8dG91dHwxNzk5OTEzNjAwMDAwfDE4MDc3NzYwMDAwMDB8NjA0ODAwMDAwfDE.fa4kleRkqcal9cFHSbo9ufndxKcwlyA1g0VRJ5cfO98D567bok7i3dUFKp+EVs/n2zLjsAn/3hzs7SJJpRHzAA==",
@@ -782,6 +866,96 @@
       "id": "act-bad-trial-with-rights",
       "description": "une clé d'essai ne porte aucun droit",
       "token": "cbx1.Y2FzdGJyaWRnZS1lbnZlbG9wZS12MQp0eXBlPWFjdGl2YXRpb24Ka2lkPWIyZTViNDE4NjBkMWQ4YmUKc2VxPTE4MDAwMDAwMDAwMDAKbm9uY2U9MDAxMTIyMzM0NDU1NjY3Nzg4OTlhYWJiY2NkZGVlZmYKaXNzdWVkQXQ9MTgwMDAwMDAwMDAwMApub3RCZWZvcmU9MTc5OTk5NjQwMDAwMApleHBpcmVzQXQ9MTgwMDE2OTIwMDAwMAp0YXJnZXQ9ZGV2aWNlCms9NApmYWN0b3I9RkxBU0h8YzQ4Y2FjZDgxYjk2NjNkMGJhOTdjMjIxY2JkMTdmNGYKZmFjdG9yPUVUSEVSTkVUfGY5MWVmZDg5ZTAwMjVjMjI2MmRhMTJjZmJlZDQzNjMyCmZhY3Rvcj1XSUZJfGVhOGI1NTJlMjI0MGJiZGQ4Yzg4YzQyMzEzYzRkZWFiCmZhY3Rvcj1TWVNURU1fU0VSSUFMfDc3NGJlYWNiZjM1MWIwZDIwNWY5MTY2NjY5ZTRkM2M3CmZhY3Rvcj1CTFVFVE9PVEh8ZDM2NWVhNjdlMDA1ODVlZGFmOGJlZjRkNzM3ODg1MGQKLS0Ka2luZD10cmlhbApzdWJqZWN0PXR2CmxpY2Vuc2U9dHJpYWwKc2VhdD0zODliNTgzYWI2YmVhODU2CnJpZ2h0PXB1cmNoYXNlfHAtY2xhc3NlLWNtMnxjbGFzc2UtY20yfDE3OTkxMzYwMDAwMDA.TxP5E0RG+S2yf8CB+2YzMhFTcVaVFA+7EkFFlNz3J8aoxkSE7I6MLCawHxjGKnVzkrbVMIRh2BnfQGol/ttTDA==",
+      "device": "tvA",
+      "nowMs": 1800000000000,
+      "trustedKeys": ["desk", "phone", "server", "support"],
+      "revokedKeys": [],
+      "revokedSeats": [],
+      "expectSubject": "tv",
+      "lastSeq": {},
+      "expect": {
+        "result": "rejected",
+        "reason": "BAD_RIGHTS",
+        "suspect": false
+      }
+    },
+    {
+      "type": "activation",
+      "id": "act-bad-trial-other-rental",
+      "description": "une clé d'essai ne porte pas une autre location que le produit essai",
+      "token": "cbx1.Y2FzdGJyaWRnZS1lbnZlbG9wZS12MQp0eXBlPWFjdGl2YXRpb24Ka2lkPWIyZTViNDE4NjBkMWQ4YmUKc2VxPTE4MDAwMDAwMDAwMDAKbm9uY2U9MDAxMTIyMzM0NDU1NjY3Nzg4OTlhYWJiY2NkZGVlZmYKaXNzdWVkQXQ9MTgwMDAwMDAwMDAwMApub3RCZWZvcmU9MTc5OTk5NjQwMDAwMApleHBpcmVzQXQ9MTgwMDE2OTIwMDAwMAp0YXJnZXQ9ZGV2aWNlCms9NApmYWN0b3I9RkxBU0h8YzQ4Y2FjZDgxYjk2NjNkMGJhOTdjMjIxY2JkMTdmNGYKZmFjdG9yPUVUSEVSTkVUfGY5MWVmZDg5ZTAwMjVjMjI2MmRhMTJjZmJlZDQzNjMyCmZhY3Rvcj1XSUZJfGVhOGI1NTJlMjI0MGJiZGQ4Yzg4YzQyMzEzYzRkZWFiCmZhY3Rvcj1TWVNURU1fU0VSSUFMfDc3NGJlYWNiZjM1MWIwZDIwNWY5MTY2NjY5ZTRkM2M3CmZhY3Rvcj1CTFVFVE9PVEh8ZDM2NWVhNjdlMDA1ODVlZGFmOGJlZjRkNzM3ODg1MGQKLS0Ka2luZD10cmlhbApzdWJqZWN0PXR2CmxpY2Vuc2U9dHJpYWwKc2VhdD0zODliNTgzYWI2YmVhODU2CnJpZ2h0PXJlbnRhbHxsb2MtYXxjbGFzc2UtY20yfDE3OTk5OTY0MDAwMDB8MTc5OTk5NjQwMDAwMHwzMHwwfDB8MHxBQUFBX2JveC0wCnJpZ2h0PXVzYWdlfGR1cmVlfDE3OTk5OTY0MDAwMDB8MTgwMjU5MjAwMDAwMA.IwprAO7kzA8QzbMHmZaDICxRxYw/1HmQojG5wzyvl7PKwsGG9BvTlZlQXT5VM0TBojW1lY3tnY5HuZKOWY4kDw==",
+      "device": "tvA",
+      "nowMs": 1800000000000,
+      "trustedKeys": ["desk", "phone", "server", "support"],
+      "revokedKeys": [],
+      "revokedSeats": [],
+      "expectSubject": "tv",
+      "lastSeq": {},
+      "expect": {
+        "result": "rejected",
+        "reason": "BAD_RIGHTS",
+        "suspect": false
+      }
+    },
+    {
+      "type": "activation",
+      "id": "act-bad-trial-purchase-usage",
+      "description": "une clé d'essai avec un plafond d'usage ne porte toujours pas d'achat",
+      "token": "cbx1.Y2FzdGJyaWRnZS1lbnZlbG9wZS12MQp0eXBlPWFjdGl2YXRpb24Ka2lkPWIyZTViNDE4NjBkMWQ4YmUKc2VxPTE4MDAwMDAwMDAwMDAKbm9uY2U9MDAxMTIyMzM0NDU1NjY3Nzg4OTlhYWJiY2NkZGVlZmYKaXNzdWVkQXQ9MTgwMDAwMDAwMDAwMApub3RCZWZvcmU9MTc5OTk5NjQwMDAwMApleHBpcmVzQXQ9MTgwMDE2OTIwMDAwMAp0YXJnZXQ9ZGV2aWNlCms9NApmYWN0b3I9RkxBU0h8YzQ4Y2FjZDgxYjk2NjNkMGJhOTdjMjIxY2JkMTdmNGYKZmFjdG9yPUVUSEVSTkVUfGY5MWVmZDg5ZTAwMjVjMjI2MmRhMTJjZmJlZDQzNjMyCmZhY3Rvcj1XSUZJfGVhOGI1NTJlMjI0MGJiZGQ4Yzg4YzQyMzEzYzRkZWFiCmZhY3Rvcj1TWVNURU1fU0VSSUFMfDc3NGJlYWNiZjM1MWIwZDIwNWY5MTY2NjY5ZTRkM2M3CmZhY3Rvcj1CTFVFVE9PVEh8ZDM2NWVhNjdlMDA1ODVlZGFmOGJlZjRkNzM3ODg1MGQKLS0Ka2luZD10cmlhbApzdWJqZWN0PXR2CmxpY2Vuc2U9dHJpYWwKc2VhdD0zODliNTgzYWI2YmVhODU2CnJpZ2h0PXB1cmNoYXNlfHAtY2xhc3NlLWNtMnxjbGFzc2UtY20yfDE3OTkxMzYwMDAwMDAKcmlnaHQ9dXNhZ2V8ZHVyZWV8MTc5OTk5NjQwMDAwMHwxODAyNTkyMDAwMDAw.9LX6gLwEubj2oUgTIk5m8i2vamNIM+rYYdl59LkbBr6wupdfd/lLe3bsvCe8Gc2NM7N1cf1EiTS2XfMxflk0Bw==",
+      "device": "tvA",
+      "nowMs": 1800000000000,
+      "trustedKeys": ["desk", "phone", "server", "support"],
+      "revokedKeys": [],
+      "revokedSeats": [],
+      "expectSubject": "tv",
+      "lastSeq": {},
+      "expect": {
+        "result": "rejected",
+        "reason": "BAD_RIGHTS",
+        "suspect": false
+      }
+    },
+    {
+      "type": "activation",
+      "id": "act-bad-trial-window-days",
+      "description": "fenêtre d'essai de 4 jours (> 3)",
+      "token": "cbx1.Y2FzdGJyaWRnZS1lbnZlbG9wZS12MQp0eXBlPWFjdGl2YXRpb24Ka2lkPWIyZTViNDE4NjBkMWQ4YmUKc2VxPTE4MDAwMDAwMDAwMDAKbm9uY2U9MDAxMTIyMzM0NDU1NjY3Nzg4OTlhYWJiY2NkZGVlZmYKaXNzdWVkQXQ9MTgwMDAwMDAwMDAwMApub3RCZWZvcmU9MTc5OTk5NjQwMDAwMApleHBpcmVzQXQ9MTgwMDE2OTIwMDAwMAp0YXJnZXQ9ZGV2aWNlCms9NApmYWN0b3I9RkxBU0h8YzQ4Y2FjZDgxYjk2NjNkMGJhOTdjMjIxY2JkMTdmNGYKZmFjdG9yPUVUSEVSTkVUfGY5MWVmZDg5ZTAwMjVjMjI2MmRhMTJjZmJlZDQzNjMyCmZhY3Rvcj1XSUZJfGVhOGI1NTJlMjI0MGJiZGQ4Yzg4YzQyMzEzYzRkZWFiCmZhY3Rvcj1TWVNURU1fU0VSSUFMfDc3NGJlYWNiZjM1MWIwZDIwNWY5MTY2NjY5ZTRkM2M3CmZhY3Rvcj1CTFVFVE9PVEh8ZDM2NWVhNjdlMDA1ODVlZGFmOGJlZjRkNzM3ODg1MGQKLS0Ka2luZD10cmlhbApzdWJqZWN0PXR2CmxpY2Vuc2U9dHJpYWwKc2VhdD0zODliNTgzYWI2YmVhODU2CnJpZ2h0PXJlbnRhbHxlc3NhaXx0b3V0fDE3OTk5OTY0MDAwMDB8MTc5OTk5NjQwMDAwMHw0fDB8NzIwfDB8QUFBQV9ib3gtMA.abeLX0+n57SzK/yoYTSoBMby2MK5vVl7JjTYP3tI6WRzxpltX7WdxEPYznhxTetBHbk+JKA/fS5v31Cy4BrVAA==",
+      "device": "tvA",
+      "nowMs": 1800000000000,
+      "trustedKeys": ["desk", "phone", "server", "support"],
+      "revokedKeys": [],
+      "revokedSeats": [],
+      "expectSubject": "tv",
+      "lastSeq": {},
+      "expect": {
+        "result": "rejected",
+        "reason": "BAD_RIGHTS",
+        "suspect": false
+      }
+    },
+    {
+      "type": "activation",
+      "id": "act-bad-trial-window-usage",
+      "description": "fenêtre d'essai de 721 minutes (> 720)",
+      "token": "cbx1.Y2FzdGJyaWRnZS1lbnZlbG9wZS12MQp0eXBlPWFjdGl2YXRpb24Ka2lkPWIyZTViNDE4NjBkMWQ4YmUKc2VxPTE4MDAwMDAwMDAwMDAKbm9uY2U9MDAxMTIyMzM0NDU1NjY3Nzg4OTlhYWJiY2NkZGVlZmYKaXNzdWVkQXQ9MTgwMDAwMDAwMDAwMApub3RCZWZvcmU9MTc5OTk5NjQwMDAwMApleHBpcmVzQXQ9MTgwMDE2OTIwMDAwMAp0YXJnZXQ9ZGV2aWNlCms9NApmYWN0b3I9RkxBU0h8YzQ4Y2FjZDgxYjk2NjNkMGJhOTdjMjIxY2JkMTdmNGYKZmFjdG9yPUVUSEVSTkVUfGY5MWVmZDg5ZTAwMjVjMjI2MmRhMTJjZmJlZDQzNjMyCmZhY3Rvcj1XSUZJfGVhOGI1NTJlMjI0MGJiZGQ4Yzg4YzQyMzEzYzRkZWFiCmZhY3Rvcj1TWVNURU1fU0VSSUFMfDc3NGJlYWNiZjM1MWIwZDIwNWY5MTY2NjY5ZTRkM2M3CmZhY3Rvcj1CTFVFVE9PVEh8ZDM2NWVhNjdlMDA1ODVlZGFmOGJlZjRkNzM3ODg1MGQKLS0Ka2luZD10cmlhbApzdWJqZWN0PXR2CmxpY2Vuc2U9dHJpYWwKc2VhdD0zODliNTgzYWI2YmVhODU2CnJpZ2h0PXJlbnRhbHxlc3NhaXx0b3V0fDE3OTk5OTY0MDAwMDB8MTc5OTk5NjQwMDAwMHwzfDB8NzIxfDB8QUFBQV9ib3gtMA.hTsQ6MXrfngh6GNJD0zFrim+L9lpK3l56BU2hP9mI8qMoi3mx09BZghM2JMs+OEc/1BrvguVIOJ8eQPpfbNkBw==",
+      "device": "tvA",
+      "nowMs": 1800000000000,
+      "trustedKeys": ["desk", "phone", "server", "support"],
+      "revokedKeys": [],
+      "revokedSeats": [],
+      "expectSubject": "tv",
+      "lastSeq": {},
+      "expect": {
+        "result": "rejected",
+        "reason": "BAD_RIGHTS",
+        "suspect": false
+      }
+    },
+    {
+      "type": "activation",
+      "id": "act-bad-rental-days",
+      "description": "location de 400 jours (> 366)",
+      "token": "cbx1.Y2FzdGJyaWRnZS1lbnZlbG9wZS12MQp0eXBlPWFjdGl2YXRpb24Ka2lkPWIyZTViNDE4NjBkMWQ4YmUKc2VxPTE4MDAwMDAwMDAwMDAKbm9uY2U9MDAxMTIyMzM0NDU1NjY3Nzg4OTlhYWJiY2NkZGVlZmYKaXNzdWVkQXQ9MTgwMDAwMDAwMDAwMApub3RCZWZvcmU9MTc5OTk5NjQwMDAwMApleHBpcmVzQXQ9MTgwMDE2OTIwMDAwMAp0YXJnZXQ9ZGV2aWNlCms9NApmYWN0b3I9RkxBU0h8YzQ4Y2FjZDgxYjk2NjNkMGJhOTdjMjIxY2JkMTdmNGYKZmFjdG9yPUVUSEVSTkVUfGY5MWVmZDg5ZTAwMjVjMjI2MmRhMTJjZmJlZDQzNjMyCmZhY3Rvcj1XSUZJfGVhOGI1NTJlMjI0MGJiZGQ4Yzg4YzQyMzEzYzRkZWFiCmZhY3Rvcj1TWVNURU1fU0VSSUFMfDc3NGJlYWNiZjM1MWIwZDIwNWY5MTY2NjY5ZTRkM2M3CmZhY3Rvcj1CTFVFVE9PVEh8ZDM2NWVhNjdlMDA1ODVlZGFmOGJlZjRkNzM3ODg1MGQKLS0Ka2luZD1wcm9kdWN0aW9uCnN1YmplY3Q9dHYKbGljZW5zZT1saWMtMDAwMQpzZWF0PWYzNjc1N2MyMjZkZDJlZTQKcmlnaHQ9cmVudGFsfGxvYy1hfGNsYXNzZS1jbTJ8MTc5OTk5NjQwMDAwMHwxNzk5OTk2NDAwMDAwfDQwMHwwfDB8MHxBQUFBX2JveC0w.S17QGZec0sXClb3HyQ1A/52VLTJ1WQb32sKcd5Q3vatTEhwm3U/+LrKSNAzYiQcNAqpFj5W6VZPwlXaePvIOBA==",
       "device": "tvA",
       "nowMs": 1800000000000,
       "trustedKeys": ["desk", "phone", "server", "support"],
@@ -1493,6 +1667,69 @@
       },
       "expect": {
         "token": "cbx1.Y2FzdGJyaWRnZS1lbnZlbG9wZS12MQp0eXBlPWNvbW1hbmQKa2lkPWIyZTViNDE4NjBkMWQ4YmUKc2VxPTE4MDAwMDAwMDAwMDAKbm9uY2U9MDEyMzQ1Njc4OWFiY2RlZjAxMjM0NTY3ODlhYmNkZWYKaXNzdWVkQXQ9MTgwMDAwMDAwMDAwMApub3RCZWZvcmU9MTgwMDAwMDAwMDAwMApleHBpcmVzQXQ9MTgwMDA4NjQwMDAwMAp0YXJnZXQ9ZGV2aWNlCms9NApmYWN0b3I9RkxBU0h8YzQ4Y2FjZDgxYjk2NjNkMGJhOTdjMjIxY2JkMTdmNGYKZmFjdG9yPUVUSEVSTkVUfGY5MWVmZDg5ZTAwMjVjMjI2MmRhMTJjZmJlZDQzNjMyCmZhY3Rvcj1XSUZJfGVhOGI1NTJlMjI0MGJiZGQ4Yzg4YzQyMzEzYzRkZWFiCmZhY3Rvcj1TWVNURU1fU0VSSUFMfDc3NGJlYWNiZjM1MWIwZDIwNWY5MTY2NjY5ZTRkM2M3CmZhY3Rvcj1CTFVFVE9PVEh8ZDM2NWVhNjdlMDA1ODVlZGFmOGJlZjRkNzM3ODg1MGQKLS0KcG93ZXI9b3Blbl9hbGwKYWN0aW9uPQpidW5kbGVzPQpsb3RzPQpkYXlzPTc.vSivOMhGL8krezZKsijIGc9va01WQGGuvAFrELbmVROKnT5UfjpTXz9geRrFs6s+S1xRn8jT/DwM6kWsqSbaAQ=="
+      }
+    },
+    {
+      "type": "build-activation",
+      "id": "build-trial-usage-window",
+      "description": "construire la clé d'essai avec plafond d'usage et fenêtre de lots",
+      "signer": "desk",
+      "request": {
+        "kind": "trial",
+        "device": "tvA",
+        "issuedAt": 1800000000000,
+        "subject": "tv",
+        "rights": ["usage|duree|1799996400000|1802592000000", "rental|essai|tout|1799996400000|1799996400000|3|0|720|0|AAAA_box-0"],
+        "license": "trial",
+        "seat": null,
+        "notBefore": 1799996400000,
+        "windowHours": 48,
+        "nonce": "00112233445566778899aabbccddeeff"
+      },
+      "expect": {
+        "token": "cbx1.Y2FzdGJyaWRnZS1lbnZlbG9wZS12MQp0eXBlPWFjdGl2YXRpb24Ka2lkPWIyZTViNDE4NjBkMWQ4YmUKc2VxPTE4MDAwMDAwMDAwMDAKbm9uY2U9MDAxMTIyMzM0NDU1NjY3Nzg4OTlhYWJiY2NkZGVlZmYKaXNzdWVkQXQ9MTgwMDAwMDAwMDAwMApub3RCZWZvcmU9MTc5OTk5NjQwMDAwMApleHBpcmVzQXQ9MTgwMDE2OTIwMDAwMAp0YXJnZXQ9ZGV2aWNlCms9NApmYWN0b3I9RkxBU0h8YzQ4Y2FjZDgxYjk2NjNkMGJhOTdjMjIxY2JkMTdmNGYKZmFjdG9yPUVUSEVSTkVUfGY5MWVmZDg5ZTAwMjVjMjI2MmRhMTJjZmJlZDQzNjMyCmZhY3Rvcj1XSUZJfGVhOGI1NTJlMjI0MGJiZGQ4Yzg4YzQyMzEzYzRkZWFiCmZhY3Rvcj1TWVNURU1fU0VSSUFMfDc3NGJlYWNiZjM1MWIwZDIwNWY5MTY2NjY5ZTRkM2M3CmZhY3Rvcj1CTFVFVE9PVEh8ZDM2NWVhNjdlMDA1ODVlZGFmOGJlZjRkNzM3ODg1MGQKLS0Ka2luZD10cmlhbApzdWJqZWN0PXR2CmxpY2Vuc2U9dHJpYWwKc2VhdD0zODliNTgzYWI2YmVhODU2CnJpZ2h0PXJlbnRhbHxlc3NhaXx0b3V0fDE3OTk5OTY0MDAwMDB8MTc5OTk5NjQwMDAwMHwzfDB8NzIwfDB8QUFBQV9ib3gtMApyaWdodD11c2FnZXxkdXJlZXwxNzk5OTk2NDAwMDAwfDE4MDI1OTIwMDAwMDA.rDVNAbZ44ilzBDZ3N1sIS+emLA+xGDt7ZKCQuBSPL66pdhbo2Y/rq3yxlN101eLhkivSSwjvE9tz78stm9PXBQ=="
+      }
+    },
+    {
+      "type": "build-activation",
+      "id": "build-refuse-trial-purchase",
+      "description": "essai avec un achat",
+      "signer": "desk",
+      "request": {
+        "kind": "trial",
+        "device": "tvA",
+        "issuedAt": 1800000000000,
+        "subject": "tv",
+        "rights": ["purchase|p-classe-cm2|classe-cm2|1799136000000"],
+        "license": "trial",
+        "seat": null,
+        "notBefore": 1799996400000,
+        "windowHours": 48,
+        "nonce": "00112233445566778899aabbccddeeff"
+      },
+      "expect": {
+        "refused": true
+      }
+    },
+    {
+      "type": "build-activation",
+      "id": "build-refuse-trial-other-rental",
+      "description": "essai avec une autre location",
+      "signer": "desk",
+      "request": {
+        "kind": "trial",
+        "device": "tvA",
+        "issuedAt": 1800000000000,
+        "subject": "tv",
+        "rights": ["rental|loc-a|classe-cm2|1799996400000|1799996400000|30|0|0|0|AAAA_box-0"],
+        "license": "trial",
+        "seat": null,
+        "notBefore": 1799996400000,
+        "windowHours": 48,
+        "nonce": "00112233445566778899aabbccddeeff"
+      },
+      "expect": {
+        "refused": true
       }
     },
     {

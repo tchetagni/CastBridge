@@ -503,15 +503,23 @@ class PlayerActivity : Activity(), TvService.Screen {
         val net = st["6-gw"]
         val wdOn = prefs.getBool("wd_enabled", false)
         val sshOn = ssh?.running == true
-        return ParentalHub.filterHome(listOf(
+        val upgrade = if (ActivationCenter.trial()) listOf(
+            tile(castbridge.core.owner.TrialPolicy.UPGRADE_TILE, R.drawable.ic_cb_cle_usb, castbridge.core.owner.TrialPolicy.UPGRADE_LABEL, "Version d'essai : demandez la clé de production avec le code de cette TV.", "Essai", true) {
+                startActivity(Intent(this, ActivationActivity::class.java).putExtra(ActivationActivity.EXTRA_UPGRADE, true))
+            }) else emptyList()
+        return ParentalHub.filterHome(upgrade + listOf(
             tile("library", R.drawable.ic_cb_bibliotheque, "Bibliothèque", "Toutes vos vidéos et vos fichiers, en grille.", "${ParentalHub.filterItems(server?.libraryItems().orEmpty()).size} fichier(s)", false) { showLibrary() },
             tile("bluetooth", R.drawable.ic_cb_bluetooth, "Ajouter un téléphone", "Le téléphone trouve et pilote la TV par Bluetooth, sans code à saisir : une seule validation ici.",
                 (svc?.trust?.list()?.size ?: 0).let { if (it == 0) "Aucun" else "$it de confiance" }, (svc?.trust?.list()?.size ?: 0) > 0) { PairActivity.open(this) },
             tile("learn", R.drawable.ic_cb_apprendre, "Apprendre", "Leçons de la maternelle à la licence, exercices corrigés, préparer le CEP, le BEPC, le GCE, le Bac.", "Élèves", true) {
                 startActivity(Intent(this, LearnActivity::class.java))
             },
+            tile("langues", R.drawable.ic_cb_apprendre, "Langues", "Chinois, anglais, allemand, français, italien, espagnol, japonais : leçons et exercices reçus du téléphone.",
+                LanguesHub.status(this), LanguesHub.hasContent(this)) {
+                startActivity(Intent(this, LanguesActivity::class.java))
+            },
             // Quiz, Échecs and Sudoku live in the « Jeux » hub (docs/GAMES.md); their public URLs (/quiz, /chess) are unchanged.
-            tile("games", R.drawable.ic_t_games, "Jeux", "Quiz des Millions, Échecs et Sudoku, en solo ou avec les téléphones.", "${Games.all.size} jeux", true) {
+            tile("games", R.drawable.ic_t_games, "Jeux", "Quiz des Millions, Échecs et Sudoku, en solo ou avec les téléphones.", Games.visible().size.let { n -> if (n > 1) "$n jeux" else "$n jeu" }, true) {
                 startActivity(Intent(this, GamesActivity::class.java))
             },
             tile("downloads", R.drawable.ic_cb_telechargements, "Téléchargements", "Télécharger sur la TV (liens, magnet, torrent) : les fichiers rejoignent la bibliothèque.", "aria2", false) {

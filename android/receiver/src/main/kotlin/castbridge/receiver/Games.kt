@@ -39,6 +39,9 @@ class GameDef(
 )
 
 object Games {
+    /** What the current key opens: every game, or the Sudoku only in the trial. */
+    fun visible(): List<GameDef> = if (ActivationCenter.trial()) all.filter { castbridge.core.owner.TrialPolicy.gameAllowed(it.id) } else all
+
     val all: List<GameDef> = listOf(
         GameDef("quiz", R.drawable.ic_cb_quiz, "Quiz des Millions", "Solo · Multijoueur",
             "Culture générale et niveaux scolaires, en solo ou avec les téléphones.", GamesColors.QUIZ,
@@ -91,7 +94,7 @@ object GamesHub {
         else -> null
     }
 
-    private fun json(ctx: Context): String = "{\"games\":[" + Games.all.joinToString(",") { g ->
+    private fun json(ctx: Context): String = "{\"games\":[" + Games.visible().joinToString(",") { g ->
         "{\"id\":${ReceiverServer.q(g.id)},\"name\":${ReceiverServer.q(g.name)},\"status\":${ReceiverServer.q(g.status(ctx))}}"
     } + "]}"
 }
@@ -124,10 +127,10 @@ class GamesActivity : Activity() {
 
         val gap = dx.px(40)
         val avail = dx.width - 2 * dx.px(96)
-        val n = Games.all.size
+        val n = Games.visible().size
         val cardW = if (n <= 3) (avail - gap * (n - 1)) / n else (avail - gap * 2) / 3
         val row = LinearLayout(this).apply { orientation = LinearLayout.HORIZONTAL; clipChildren = false; clipToPadding = false; setPadding(dx.px(16), dx.px(24), dx.px(16), dx.px(24)) }
-        Games.all.forEachIndexed { i, g ->
+        Games.visible().forEachIndexed { i, g ->
             row.addView(card(g, cardW), LinearLayout.LayoutParams(cardW, dx.px(600)).apply { if (i > 0) leftMargin = gap })
         }
         col.addView(HorizontalScrollView(this).apply {
@@ -179,7 +182,7 @@ class GamesActivity : Activity() {
     override fun onResume() {
         super.onResume()
         GamesHub.foreground = this
-        Games.all.forEach { g -> statusViews[g.id]?.text = "●  " + runCatching { g.status(this) }.getOrDefault("") }
+        Games.visible().forEach { g -> statusViews[g.id]?.text = "●  " + runCatching { g.status(this) }.getOrDefault("") }
     }
 
     override fun onPause() { if (GamesHub.foreground === this) GamesHub.foreground = null; super.onPause() }

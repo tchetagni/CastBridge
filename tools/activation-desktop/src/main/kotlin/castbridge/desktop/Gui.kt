@@ -98,6 +98,8 @@ object Gui {
             val license = JTextField("trial")
             val permanent = JCheckBox("SUPER_UNLIMITED : lit et débloque tout, locations permanentes (clé super administrateur seulement) ; le code reste valable 48 h pour l'installer")
             val rights = JTextArea(4, 50).apply { toolTipText = "Une ligne par droit : achat produit=bouquet1,bouquet2 | abonnement produit=bouquets:jours[:tolérance[:auto]] | tout-ouvert produit:jours" }
+            val trialDays = JTextField("${castbridge.core.owner.ActivationPolicy.TRIAL_DEFAULT_DAYS}").apply { toolTipText = "Essai : durée de la clé en jours (1 à ${castbridge.core.owner.ActivationPolicy.TRIAL_MAX_DAYS}). L'essai ouvre aussi, une seule fois, 12 h de lots locatifs." }
+            val prodDays = JTextField("illimitée").apply { toolTipText = "Production : « illimitée » (la TV ne se reverrouille jamais) ou un nombre de jours (1 à ${castbridge.core.owner.ActivationPolicy.PRODUCTION_MAX_DAYS})." }
             val rentals = JTextArea(3, 50).apply { toolTipText = "Une ligne par location de lots : produit=bouquet1,bouquet2:JOURS[:MINUTES_D_USAGE_MAX] (un lot libre n'est jamais loué ; la durée court à partir de l'émission)" }
             val pass = JPasswordField()
             val load = JButton("Ouvrir une demande…").apply { addActionListener { chooseFile(false)?.let { request.text = it.readText() } } }
@@ -111,9 +113,12 @@ object Gui {
                         val d = unlocked(p) ?: return@addActionListener
                         val now = System.currentTimeMillis()
                         val k = if (kind.selectedIndex == 0) ActivationKind.TRIAL else ActivationKind.PRODUCTION
+                        val usage: Int? = (if (k == ActivationKind.TRIAL) trialDays.text else prodDays.text).trim().lowercase().let { t ->
+                            if (t.startsWith("illimit")) { if (k == ActivationKind.TRIAL) throw IssueException("Un essai a toujours une durée (1 à ${castbridge.core.owner.ActivationPolicy.TRIAL_MAX_DAYS} jours)"); null }
+                            else t.toIntOrNull() ?: throw IssueException("Durée d'usage : un nombre de jours${if (k == ActivationKind.PRODUCTION) " ou « illimitée »" else ""}") }
                         val rentalSpecs = rentals.text.lines().filter { it.isNotBlank() }.map { RightsSyntax.rental(it.trim(), null) }
                         if (rentalSpecs.isNotEmpty() && k != ActivationKind.PRODUCTION) throw IssueException("Une location exige une activation de production (licence et poste)")
-                        val spec = IssueSpec(k, if (subject.selectedIndex == 0) Subject.TV else Subject.PHONE, RightsSyntax.parseBox(rights.text, now) + (if (permanent.isSelected && k == ActivationKind.PRODUCTION) listOf(Right.Super("super-illimite", now)) else emptyList()), license.text.trim().ifEmpty { Activation.TRIAL_LICENSE }, rentals = rentalSpecs, rentalMaster = if (rentalSpecs.isEmpty()) null else d.rentalMaster())
+                        val spec = IssueSpec(k, if (subject.selectedIndex == 0) Subject.TV else Subject.PHONE, RightsSyntax.parseBox(rights.text, now) + (if (permanent.isSelected && k == ActivationKind.PRODUCTION) listOf(Right.Super("super-illimite", now)) else emptyList()), license.text.trim().ifEmpty { Activation.TRIAL_LICENSE }, rentals = rentalSpecs, rentalMaster = if (rentalSpecs.isEmpty() && k != ActivationKind.TRIAL) null else d.rentalMaster(), usageDays = usage, trialLots = k == ActivationKind.TRIAL)
                         val r = d.issue(device, spec)
                         last = r; token.text = r.issued.token
                         qr.icon = ImageIcon(Qr.image(r.issued.token, 4))
@@ -130,7 +135,7 @@ object Gui {
             }
             val savePng = JButton("Enregistrer le code QR…").apply { addActionListener { last?.let { r -> chooseFile(true, "activation.png")?.let { f -> Qr.png(r.issued.token, f); info("Code QR enregistré : ${f.path}") } } } }
             val form = JPanel(); gb(form, listOf("Demande d'appareil (collée depuis la TV)" to JScrollPane(request), "" to load, "Type" to kind, "Pour" to subject, "Licence" to license,
-                "Privilège" to permanent, "Droits (un par ligne)" to JScrollPane(rights), "Locations de lots (une par ligne)" to JScrollPane(rentals), "Code de déverrouillage" to pass, "" to go))
+                "Privilège" to permanent, "Droits (un par ligne)" to JScrollPane(rights), "Essai : durée de la clé (jours)" to trialDays, "Production : durée de la clé (jours ou illimitée)" to prodDays, "Locations de lots (une par ligne)" to JScrollPane(rentals), "Code de déverrouillage" to pass, "" to go))
             val out = JPanel(BorderLayout()).apply {
                 add(JScrollPane(token), BorderLayout.NORTH); add(qr, BorderLayout.CENTER)
                 add(JPanel(FlowLayout(FlowLayout.LEFT)).apply { add(copy); add(save); add(savePng) }, BorderLayout.SOUTH)

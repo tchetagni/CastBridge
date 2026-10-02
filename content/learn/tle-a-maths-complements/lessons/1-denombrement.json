@@ -1,0 +1,846 @@
+{
+ "chapter": "tle-a-maths-complements-denombrement",
+ "lessons": [
+  {
+   "id": "tle-a-maths-complements-denombrement",
+   "title": "Dénombrement : arrangements et combinaisons",
+   "minutes": 30,
+   "programRef": "Tle A — Mathématiques de la série A : dénombrement, probabilités, suites, évolutions, statistiques, fonctions, second degré (programme officiel du MINESEC à vérifier)",
+   "status": "draft",
+   "author": "CastBridge (AI draft)",
+   "source": "Original writing following the Cameroonian curriculum; to be reviewed by a teacher",
+   "objectives": [
+    "Utiliser le principe multiplicatif.",
+    "Calculer factorielles, arrangements et combinaisons.",
+    "Choisir entre ordre important ou non."
+   ],
+   "prerequisites": [],
+   "exercises": [
+    "tle-a-maths-complements-denombrement-e01",
+    "tle-a-maths-complements-denombrement-e02",
+    "tle-a-maths-complements-denombrement-e03",
+    "tle-a-maths-complements-denombrement-e04",
+    "tle-a-maths-complements-denombrement-e05",
+    "tle-a-maths-complements-denombrement-e06"
+   ],
+   "selfCheck": [
+    "tle-a-maths-complements-denombrement-q1",
+    "tle-a-maths-complements-denombrement-q2",
+    "tle-a-maths-complements-denombrement-q3",
+    "tle-a-maths-complements-denombrement-q4",
+    "tle-a-maths-complements-denombrement-q5"
+   ],
+   "reviewNotes": [
+    "Contenu et niveau exacts du programme de mathématiques de Tle A à vérifier sur le texte officiel ; tous les calculs ont été recalculés par programme.",
+    "Syllabus references, scope and level of difficulty are to be checked against the official text; all facts, formulas and worked examples to be verified by a teacher before release."
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Factorielle et principe multiplicatif",
+     "md": "**Principe multiplicatif** : si une première étape offre $m$ choix et une seconde $n$ choix, il y a $m \\times n$ possibilités.\n\n**Factorielle** : $n! = n \\times (n-1) \\times \\dots \\times 2 \\times 1$, avec $0! = 1$. Par exemple $5! = 120$. Il y a $n!$ façons de **ranger** $n$ objets distincts."
+    },
+    {
+     "type": "key",
+     "style": "formule",
+     "title": "Arrangements et combinaisons",
+     "md": "**Arrangement** (l'**ordre compte**) : $A_n^p = \\frac{n!}{(n-p)!}$.\n\n**Combinaison** (l'**ordre ne compte pas**) : $C_n^p = \\frac{n!}{p!\\,(n-p)!}$.\n\nOn a toujours $C_n^p = C_n^{n-p}$ et $A_n^p = p! \\times C_n^p$."
+    },
+    {
+     "type": "illustration",
+     "figure": {
+      "kind": "shapes",
+      "w": 420,
+      "h": 198,
+      "items": [
+       {
+        "t": "text",
+        "x": 210.0,
+        "y": 24,
+        "text": "Ordre ou non ?",
+        "size": 15,
+        "anchor": "middle",
+        "color": "ink",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 10.0,
+        "y": 40,
+        "w": 200.0,
+        "h": 28,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "lightblue"
+       },
+       {
+        "t": "text",
+        "x": 110.0,
+        "y": 59,
+        "text": "Situation",
+        "size": 13,
+        "anchor": "middle",
+        "color": "ink",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 210.0,
+        "y": 40,
+        "w": 200.0,
+        "h": 28,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "lightgreen"
+       },
+       {
+        "t": "text",
+        "x": 310.0,
+        "y": 59,
+        "text": "Outil",
+        "size": 13,
+        "anchor": "middle",
+        "color": "ink",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 10.0,
+        "y": 68,
+        "w": 200.0,
+        "h": 28,
+        "stroke": "grey",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 110.0,
+        "y": 87,
+        "text": "podium 1er-2e-3e",
+        "size": 13,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "rect",
+        "x": 210.0,
+        "y": 68,
+        "w": 200.0,
+        "h": 28,
+        "stroke": "grey",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 310.0,
+        "y": 87,
+        "text": "arrangement",
+        "size": 13,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "rect",
+        "x": 10.0,
+        "y": 96,
+        "w": 200.0,
+        "h": 28,
+        "stroke": "grey",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 110.0,
+        "y": 115,
+        "text": "comité de 3 élèves",
+        "size": 13,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "rect",
+        "x": 210.0,
+        "y": 96,
+        "w": 200.0,
+        "h": 28,
+        "stroke": "grey",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 310.0,
+        "y": 115,
+        "text": "combinaison",
+        "size": 13,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "rect",
+        "x": 10.0,
+        "y": 124,
+        "w": 200.0,
+        "h": 28,
+        "stroke": "grey",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 110.0,
+        "y": 143,
+        "text": "ranger 5 livres",
+        "size": 13,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "rect",
+        "x": 210.0,
+        "y": 124,
+        "w": 200.0,
+        "h": 28,
+        "stroke": "grey",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 310.0,
+        "y": 143,
+        "text": "factorielle",
+        "size": 13,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "rect",
+        "x": 10.0,
+        "y": 152,
+        "w": 200.0,
+        "h": 28,
+        "stroke": "grey",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 110.0,
+        "y": 171,
+        "text": "code à 4 chiffres",
+        "size": 13,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "rect",
+        "x": 210.0,
+        "y": 152,
+        "w": 200.0,
+        "h": 28,
+        "stroke": "grey",
+        "width": 1
+       },
+       {
+        "t": "text",
+        "x": 310.0,
+        "y": 171,
+        "text": "produit",
+        "size": 13,
+        "anchor": "middle",
+        "color": "ink"
+       }
+      ]
+     },
+     "caption": "On se demande d'abord si l'ordre compte.",
+     "alt": "Un tableau : podium arrangement, comité combinaison, ranger des livres factorielle, code à quatre chiffres produit."
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Erreurs fréquentes",
+     "md": "- Prendre une **combinaison** quand l'**ordre compte** (et inversement).\n- Oublier que $0! = 1$.\n- Calculer $n!$ **en entier** au lieu de simplifier : $\\frac{8!}{6!} = 8 \\times 7$.\n- Confondre « avec répétition » (produit) et « sans répétition » (arrangement).\n- **Additionner** au lieu de multiplier des étapes successives."
+    },
+    {
+     "type": "example",
+     "title": "Exemple 1 : arrangement",
+     "statement": "Dans un club de 5 candidats, on élit un président, un secrétaire et un trésorier (personnes différentes). Combien de bureaux possibles ?",
+     "steps": [
+      {
+       "md": "L'ordre compte (rôles différents) : arrangement de 3 parmi 5.",
+       "tex": "A_5^3 = 5 \\times 4 \\times 3"
+      },
+      "Calcul : $5 \\times 4 \\times 3 = 60$."
+     ],
+     "answer": "60 bureaux possibles"
+    },
+    {
+     "type": "example",
+     "title": "Exemple 2 : combinaison",
+     "statement": "On choisit 3 élèves parmi 8 pour former une délégation (sans rôle). Combien de délégations ?",
+     "steps": [
+      {
+       "md": "L'ordre ne compte pas : combinaison.",
+       "tex": "C_8^3 = \\frac{8 \\times 7 \\times 6}{3 \\times 2 \\times 1}"
+      },
+      "Calcul : $\\frac{336}{6} = 56$."
+     ],
+     "answer": "56 délégations possibles"
+    }
+   ],
+   "chapter": "tle-a-maths-complements-denombrement"
+  },
+  {
+   "id": "tle-a-maths-complements-probabilites",
+   "title": "Probabilités : tirages et probabilité conditionnelle",
+   "minutes": 30,
+   "programRef": "Tle A — Mathématiques de la série A : dénombrement, probabilités, suites, évolutions, statistiques, fonctions, second degré (programme officiel du MINESEC à vérifier)",
+   "status": "draft",
+   "author": "CastBridge (AI draft)",
+   "source": "Original writing following the Cameroonian curriculum; to be reviewed by a teacher",
+   "objectives": [
+    "Calculer une probabilité par dénombrement.",
+    "Utiliser $P(A|B) = P(A\\cap B)/P(B)$.",
+    "Reconnaître des événements indépendants."
+   ],
+   "prerequisites": [],
+   "exercises": [
+    "tle-a-maths-complements-denombrement-e07",
+    "tle-a-maths-complements-denombrement-e08",
+    "tle-a-maths-complements-denombrement-e09",
+    "tle-a-maths-complements-denombrement-e10",
+    "tle-a-maths-complements-denombrement-e11",
+    "tle-a-maths-complements-denombrement-e12"
+   ],
+   "selfCheck": [
+    "tle-a-maths-complements-probabilites-q1",
+    "tle-a-maths-complements-probabilites-q2",
+    "tle-a-maths-complements-probabilites-q3",
+    "tle-a-maths-complements-probabilites-q4",
+    "tle-a-maths-complements-probabilites-q5"
+   ],
+   "reviewNotes": [
+    "Contenu et niveau exacts du programme de mathématiques de Tle A à vérifier sur le texte officiel ; tous les calculs ont été recalculés par programme.",
+    "Notion de probabilité conditionnelle et d'indépendance en Tle A : à vérifier.",
+    "Syllabus references, scope and level of difficulty are to be checked against the official text; all facts, formulas and worked examples to be verified by a teacher before release."
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "formule",
+     "title": "Probabilité d'un événement",
+     "md": "Quand tous les cas sont équiprobables : $P(A) = \\frac{\\text{nombre de cas favorables}}{\\text{nombre de cas possibles}}$. On a $0 \\leq P(A) \\leq 1$ et $P(\\overline{A}) = 1 - P(A)$.\n\nPour un tirage **simultané** de $p$ objets parmi $n$, le nombre de cas possibles est $C_n^p$."
+    },
+    {
+     "type": "key",
+     "style": "formule",
+     "title": "Probabilité conditionnelle",
+     "md": "$P(A|B)$ est la probabilité de $A$ **sachant que** $B$ est réalisé : $P(A|B) = \\frac{P(A \\cap B)}{P(B)}$.\n\n**Indépendance** : $A$ et $B$ sont indépendants si $P(A \\cap B) = P(A) \\times P(B)$."
+    },
+    {
+     "type": "illustration",
+     "figure": {
+      "kind": "shapes",
+      "w": 360,
+      "h": 190,
+      "items": [
+       {
+        "t": "text",
+        "x": 180.0,
+        "y": 22,
+        "text": "Arbre de probabilités",
+        "size": 15,
+        "anchor": "middle",
+        "color": "ink",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 100.0,
+        "y": 36,
+        "w": 160,
+        "h": 32,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "lightgrey",
+        "radius": 6
+       },
+       {
+        "t": "text",
+        "x": 180.0,
+        "y": 57,
+        "text": "Départ",
+        "size": 13,
+        "anchor": "middle",
+        "color": "ink",
+        "bold": true
+       },
+       {
+        "t": "line",
+        "x1": 180.0,
+        "y1": 68,
+        "x2": 92.5,
+        "y2": 100,
+        "color": "ink",
+        "width": 2,
+        "arrow": "end"
+       },
+       {
+        "t": "rect",
+        "x": 10.0,
+        "y": 100,
+        "w": 165.0,
+        "h": 70,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "lightblue",
+        "radius": 6
+       },
+       {
+        "t": "text",
+        "x": 92.5,
+        "y": 124,
+        "text": "Pluie",
+        "size": 13,
+        "anchor": "middle",
+        "color": "ink",
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 92.5,
+        "y": 148,
+        "text": "p = 0,3",
+        "size": 12,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "line",
+        "x1": 180.0,
+        "y1": 68,
+        "x2": 267.5,
+        "y2": 100,
+        "color": "ink",
+        "width": 2,
+        "arrow": "end"
+       },
+       {
+        "t": "rect",
+        "x": 185.0,
+        "y": 100,
+        "w": 165.0,
+        "h": 70,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "lightgreen",
+        "radius": 6
+       },
+       {
+        "t": "text",
+        "x": 267.5,
+        "y": 124,
+        "text": "Soleil",
+        "size": 13,
+        "anchor": "middle",
+        "color": "ink",
+        "bold": true
+       },
+       {
+        "t": "text",
+        "x": 267.5,
+        "y": 148,
+        "text": "p = 0,7",
+        "size": 12,
+        "anchor": "middle",
+        "color": "ink"
+       }
+      ]
+     },
+     "caption": "Chaque branche porte une probabilité ; les branches d'un même nœud totalisent 1.",
+     "alt": "Un arbre : du départ, deux branches, pluie avec probabilité 0,3 et soleil avec 0,7."
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Erreurs fréquentes",
+     "md": "- Compter les cas **sans tenir compte** de l'ordre (ou l'inverse).\n- Confondre $P(A|B)$ et $P(B|A)$.\n- Additionner des probabilités de branches **successives** (il faut multiplier).\n- Oublier de vérifier que la **somme** des probabilités vaut 1.\n- Affirmer l'**indépendance** sans la calculer."
+    },
+    {
+     "type": "example",
+     "title": "Exemple 1 : tirage simultané",
+     "statement": "Une urne contient 5 boules rouges, 3 vertes et 2 jaunes. On tire 2 boules simultanément. Probabilité d'obtenir 2 rouges ?",
+     "steps": [
+      {
+       "md": "Cas possibles : $C_{10}^2 = 45$ ; cas favorables : $C_5^2 = 10$.",
+       "tex": "P = \\frac{10}{45} = \\frac{2}{9}"
+      },
+      "Valeur approchée : $\\frac{2}{9} \\approx 0{,}222$."
+     ],
+     "answer": "2/9, soit environ 0,22"
+    },
+    {
+     "type": "example",
+     "title": "Exemple 2 : conditionnelle",
+     "statement": "Dans une classe de 40 élèves, 21 sont inscrits au club de lecture, dont 15 filles. On choisit au hasard un élève du club. Probabilité que ce soit une fille ?",
+     "steps": [
+      {
+       "md": "On se restreint au club : 21 élèves, dont 15 filles.",
+       "tex": "P(F|C) = \\frac{15}{21} = \\frac{5}{7}"
+      },
+      "Valeur approchée : $0{,}714$."
+     ],
+     "answer": "5/7, soit environ 0,71"
+    }
+   ],
+   "chapter": "tle-a-maths-complements-denombrement"
+  }
+ ],
+ "exercises": [
+  {
+   "id": "tle-a-maths-complements-denombrement-e01",
+   "kind": "numeric",
+   "tier": "application",
+   "lesson": "tle-a-maths-complements-denombrement",
+   "source": "Exercice original écrit pour CastBridge, dans le style du programme de Terminale A",
+   "prompt": "Calculez $6!$.",
+   "answer": 720,
+   "tolerance": 0,
+   "explanation": "6×5×4×3×2×1 = 720.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "tle-a-maths-complements-denombrement"
+  },
+  {
+   "id": "tle-a-maths-complements-denombrement-e02",
+   "kind": "numeric",
+   "tier": "application",
+   "lesson": "tle-a-maths-complements-denombrement",
+   "source": "Exercice original écrit pour CastBridge, dans le style du programme de Terminale A",
+   "prompt": "Calculez $A_6^2$.",
+   "answer": 30,
+   "tolerance": 0,
+   "explanation": "6×5 = 30.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "tle-a-maths-complements-denombrement"
+  },
+  {
+   "id": "tle-a-maths-complements-denombrement-e03",
+   "kind": "numeric",
+   "tier": "application",
+   "lesson": "tle-a-maths-complements-denombrement",
+   "source": "Exercice original écrit pour CastBridge, dans le style du programme de Terminale A",
+   "prompt": "Calculez $C_7^2$.",
+   "answer": 21,
+   "tolerance": 0,
+   "explanation": "7×6/2 = 21.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "tle-a-maths-complements-denombrement"
+  },
+  {
+   "id": "tle-a-maths-complements-denombrement-e04",
+   "kind": "numeric",
+   "tier": "approfondissement",
+   "lesson": "tle-a-maths-complements-denombrement",
+   "source": "Exercice original écrit pour CastBridge, dans le style du programme de Terminale A",
+   "prompt": "Combien de codes de 3 chiffres tous différents peut-on former avec les chiffres 0 à 9 ?",
+   "answer": 720,
+   "tolerance": 0,
+   "explanation": "10×9×8 = 720 (arrangement de 3 parmi 10).",
+   "difficulty": 2,
+   "points": 1,
+   "chapter": "tle-a-maths-complements-denombrement"
+  },
+  {
+   "id": "tle-a-maths-complements-denombrement-e05",
+   "kind": "numeric",
+   "tier": "approfondissement",
+   "lesson": "tle-a-maths-complements-denombrement",
+   "source": "Exercice original écrit pour CastBridge, dans le style du programme de Terminale A",
+   "prompt": "On choisit 2 garçons parmi 5 et 1 fille parmi 4 pour un groupe. Combien de groupes ?",
+   "answer": 40,
+   "tolerance": 0,
+   "explanation": "C(5,2)=10 ; 10×4 = 40 (on multiplie les choix indépendants).",
+   "difficulty": 2,
+   "points": 1,
+   "chapter": "tle-a-maths-complements-denombrement"
+  },
+  {
+   "id": "tle-a-maths-complements-denombrement-e06",
+   "kind": "open",
+   "tier": "examen",
+   "lesson": "tle-a-maths-complements-denombrement",
+   "source": "Exercice original écrit pour CastBridge, dans le style du programme de Terminale A",
+   "prompt": "Combien d'anagrammes (mots, même sans sens) peut-on former avec les lettres de BAC ? Justifiez.",
+   "model": "Les trois lettres sont distinctes : 3! = 3×2×1 = 6 anagrammes : BAC, BCA, ABC, ACB, CAB, CBA.",
+   "rubric": [
+    "1 point : reconnaître une factorielle",
+    "1 point : calcul 3! = 6",
+    "1 point : liste ou justification"
+   ],
+   "explanation": "Les trois lettres sont distinctes : 3! = 3×2×1 = 6 anagrammes : BAC, BCA, ABC, ACB, CAB, CBA.",
+   "difficulty": 3,
+   "points": 3,
+   "chapter": "tle-a-maths-complements-denombrement"
+  },
+  {
+   "id": "tle-a-maths-complements-denombrement-q1",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "tle-a-maths-complements-denombrement",
+   "prompt": "0! vaut :",
+   "choices": [
+    "10",
+    "1",
+    "0",
+    "indéfini"
+   ],
+   "answer": 1,
+   "explanation": "Convention.",
+   "chapter": "tle-a-maths-complements-denombrement"
+  },
+  {
+   "id": "tle-a-maths-complements-denombrement-q2",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "tle-a-maths-complements-denombrement",
+   "prompt": "Un podium relève de :",
+   "choices": [
+    "la somme",
+    "la combinaison seulement",
+    "la moyenne",
+    "l'arrangement"
+   ],
+   "answer": 3,
+   "explanation": "L'ordre compte.",
+   "chapter": "tle-a-maths-complements-denombrement"
+  },
+  {
+   "id": "tle-a-maths-complements-denombrement-q3",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "tle-a-maths-complements-denombrement",
+   "prompt": "C(n,p) est :",
+   "choices": [
+    "une somme",
+    "un choix sans ordre",
+    "un choix avec ordre",
+    "une moyenne"
+   ],
+   "answer": 1,
+   "explanation": "Combinaison.",
+   "chapter": "tle-a-maths-complements-denombrement"
+  },
+  {
+   "id": "tle-a-maths-complements-denombrement-q4",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "tle-a-maths-complements-denombrement",
+   "prompt": "Combien vaut la factorielle 5! ?",
+   "choices": [
+    "60",
+    "120",
+    "25",
+    "720"
+   ],
+   "answer": 1,
+   "explanation": "5×4×3×2×1.",
+   "chapter": "tle-a-maths-complements-denombrement"
+  },
+  {
+   "id": "tle-a-maths-complements-denombrement-q5",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "tle-a-maths-complements-denombrement",
+   "prompt": "Choix successifs indépendants :",
+   "choices": [
+    "on multiplie",
+    "on additionne",
+    "on retranche",
+    "on divise"
+   ],
+   "answer": 0,
+   "explanation": "Principe multiplicatif.",
+   "chapter": "tle-a-maths-complements-denombrement"
+  },
+  {
+   "id": "tle-a-maths-complements-denombrement-e07",
+   "kind": "numeric",
+   "tier": "application",
+   "lesson": "tle-a-maths-complements-probabilites",
+   "source": "Exercice original écrit pour CastBridge, dans le style du programme de Terminale A",
+   "prompt": "Un dé équilibré est lancé. Probabilité d'obtenir un nombre pair ? (en décimal)",
+   "answer": 0.5,
+   "tolerance": 0.001,
+   "explanation": "3 cas favorables sur 6.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "tle-a-maths-complements-denombrement"
+  },
+  {
+   "id": "tle-a-maths-complements-denombrement-e08",
+   "kind": "numeric",
+   "tier": "application",
+   "lesson": "tle-a-maths-complements-probabilites",
+   "source": "Exercice original écrit pour CastBridge, dans le style du programme de Terminale A",
+   "prompt": "On tire 1 boule dans l'urne (5 rouges, 3 vertes, 2 jaunes). Probabilité qu'elle ne soit pas rouge ?",
+   "answer": 0.5,
+   "tolerance": 0.001,
+   "explanation": "1 - 5/10 = 0,5.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "tle-a-maths-complements-denombrement"
+  },
+  {
+   "id": "tle-a-maths-complements-denombrement-e09",
+   "kind": "numeric",
+   "tier": "application",
+   "lesson": "tle-a-maths-complements-probabilites",
+   "source": "Exercice original écrit pour CastBridge, dans le style du programme de Terminale A",
+   "prompt": "On tire simultanément 2 boules dans la même urne. Probabilité d'obtenir 2 vertes ? (arrondir à 0,01)",
+   "answer": 0.07,
+   "tolerance": 0.005,
+   "explanation": "C(3,2)/C(10,2) = 3/45 = 1/15 ≈ 0,07.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "tle-a-maths-complements-denombrement"
+  },
+  {
+   "id": "tle-a-maths-complements-denombrement-e10",
+   "kind": "numeric",
+   "tier": "approfondissement",
+   "lesson": "tle-a-maths-complements-probabilites",
+   "source": "Exercice original écrit pour CastBridge, dans le style du programme de Terminale A",
+   "prompt": "P(A) = 0,4 ; P(B) = 0,5 ; A et B indépendants. Calculez P(A∩B).",
+   "answer": 0.2,
+   "tolerance": 0.001,
+   "explanation": "Indépendance : 0,4×0,5 = 0,2.",
+   "difficulty": 2,
+   "points": 1,
+   "chapter": "tle-a-maths-complements-denombrement"
+  },
+  {
+   "id": "tle-a-maths-complements-denombrement-e11",
+   "kind": "numeric",
+   "tier": "approfondissement",
+   "lesson": "tle-a-maths-complements-probabilites",
+   "source": "Exercice original écrit pour CastBridge, dans le style du programme de Terminale A",
+   "prompt": "P(A∩B) = 0,12 et P(B) = 0,3. Calculez P(A|B).",
+   "answer": 0.4,
+   "tolerance": 0.001,
+   "explanation": "0,12/0,3 = 0,4.",
+   "difficulty": 2,
+   "points": 1,
+   "chapter": "tle-a-maths-complements-denombrement"
+  },
+  {
+   "id": "tle-a-maths-complements-denombrement-e12",
+   "kind": "open",
+   "tier": "examen",
+   "lesson": "tle-a-maths-complements-probabilites",
+   "source": "Exercice original écrit pour CastBridge, dans le style du programme de Terminale A",
+   "prompt": "Une élève a 0,8 de chances de réussir un test oral et 0,6 de réussir un test écrit, tests indépendants. Calculez la probabilité de réussir les deux, et la probabilité d'en réussir au moins un.",
+   "model": "Les deux : 0,8×0,6 = 0,48. Au moins un : 1 - P(échouer aux deux) = 1 - (0,2×0,4) = 1 - 0,08 = 0,92.",
+   "rubric": [
+    "1 point : indépendance",
+    "1 point : 0,48",
+    "1 point : événement contraire",
+    "1 point : 0,92"
+   ],
+   "explanation": "Les deux : 0,8×0,6 = 0,48. Au moins un : 1 - P(échouer aux deux) = 1 - (0,2×0,4) = 1 - 0,08 = 0,92.",
+   "difficulty": 3,
+   "points": 3,
+   "chapter": "tle-a-maths-complements-denombrement"
+  },
+  {
+   "id": "tle-a-maths-complements-probabilites-q1",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "tle-a-maths-complements-probabilites",
+   "prompt": "P(non A) vaut :",
+   "choices": [
+    "P(A) - 1",
+    "1 - P(A)",
+    "P(A)",
+    "0"
+   ],
+   "answer": 1,
+   "explanation": "Événement contraire.",
+   "chapter": "tle-a-maths-complements-denombrement"
+  },
+  {
+   "id": "tle-a-maths-complements-probabilites-q2",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "tle-a-maths-complements-probabilites",
+   "prompt": "P(A|B) se calcule avec :",
+   "choices": [
+    "P(B) - P(A)",
+    "P(A) × P(B)",
+    "P(A) + P(B)",
+    "P(A∩B) / P(B)"
+   ],
+   "answer": 3,
+   "explanation": "Définition.",
+   "chapter": "tle-a-maths-complements-denombrement"
+  },
+  {
+   "id": "tle-a-maths-complements-probabilites-q3",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "tle-a-maths-complements-probabilites",
+   "prompt": "Pour deux événements indépendants :",
+   "choices": [
+    "P(A∩B) = P(A)+P(B)",
+    "P(A∩B) = 0",
+    "P(A∩B) = 1",
+    "P(A∩B) = P(A)×P(B)"
+   ],
+   "answer": 3,
+   "explanation": "Produit.",
+   "chapter": "tle-a-maths-complements-denombrement"
+  },
+  {
+   "id": "tle-a-maths-complements-probabilites-q4",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "tle-a-maths-complements-probabilites",
+   "prompt": "La probabilité d'un événement est toujours :",
+   "choices": [
+    "égale à 10",
+    "négative",
+    "supérieure à 1",
+    "comprise entre 0 et 1"
+   ],
+   "answer": 3,
+   "explanation": "Valeur normalisée.",
+   "chapter": "tle-a-maths-complements-denombrement"
+  },
+  {
+   "id": "tle-a-maths-complements-probabilites-q5",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "tle-a-maths-complements-probabilites",
+   "prompt": "Tirage simultané de 2 parmi 10 :",
+   "choices": [
+    "20 cas",
+    "10 cas",
+    "45 cas possibles",
+    "90 cas"
+   ],
+   "answer": 2,
+   "explanation": "C(10,2) = 45.",
+   "chapter": "tle-a-maths-complements-denombrement"
+  }
+ ]
+}

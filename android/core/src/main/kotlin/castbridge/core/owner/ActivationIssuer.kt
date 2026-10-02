@@ -86,7 +86,7 @@ class ActivationIssuer(private val signer: Signer, private val scopes: Set<KeySc
         need(r.issuedAt > 0 && r.notBefore > 0, "Date invalide")
         need(if (r.kind == ActivationKind.TRIAL) KeyScope.ISSUE_TRIAL in scopes else (KeyScope.ISSUE_PRODUCTION in scopes || KeyScope.REACTIVATE in scopes), "Cette clé n'a pas le droit de délivrer ce type d'activation")
         if (r.kind == ActivationKind.TRIAL) {
-            need(r.rights.all { it is Right.Usage }, "Une clé d'essai ne porte aucun droit (seulement une durée d'usage)")
+            need(r.rights.all { Activation.trialRight(it) }, "Une clé d'essai ne porte aucun droit (seulement une durée d'usage et sa fenêtre de lots)")
             need(r.license == Activation.TRIAL_LICENSE, "Une clé d'essai porte la licence « trial »")
         } else {
             need(Activation.ID.matches(r.license) && r.license != Activation.TRIAL_LICENSE, "Identifiant de licence invalide")

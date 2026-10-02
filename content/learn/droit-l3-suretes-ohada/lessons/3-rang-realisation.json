@@ -1,0 +1,909 @@
+{
+ "chapter": "droit-l3-suretes-ohada-rang-realisation",
+ "lessons": [
+  {
+   "id": "droit-l3-suretes-ohada-privileges-rang",
+   "title": "Privilèges et ordre de paiement des créanciers",
+   "minutes": 35,
+   "programRef": "Droit des sûretés OHADA (Licence 3) — à vérifier sur la maquette de l'établissement",
+   "status": "draft",
+   "author": "CastBridge (brouillon IA)",
+   "source": "Rédaction originale ; à relire par un enseignant de droit",
+   "objectives": [
+    "Définir le privilège.",
+    "Distinguer privilèges généraux et spéciaux.",
+    "Classer les créanciers dans un cas simple de distribution."
+   ],
+   "prerequisites": [],
+   "exercises": [
+    "droit-l3-suretes-ohada-rang-realisation-e01",
+    "droit-l3-suretes-ohada-rang-realisation-e02",
+    "droit-l3-suretes-ohada-rang-realisation-e03",
+    "droit-l3-suretes-ohada-rang-realisation-e04",
+    "droit-l3-suretes-ohada-rang-realisation-e05",
+    "droit-l3-suretes-ohada-rang-realisation-e06"
+   ],
+   "selfCheck": [
+    "droit-l3-suretes-ohada-privileges-rang-q1",
+    "droit-l3-suretes-ohada-privileges-rang-q2",
+    "droit-l3-suretes-ohada-privileges-rang-q3",
+    "droit-l3-suretes-ohada-privileges-rang-q4",
+    "droit-l3-suretes-ohada-privileges-rang-q5"
+   ],
+   "reviewNotes": [
+    "Vérifier dans l'Acte uniforme portant organisation des sûretés et dans l'Acte uniforme sur les procédures collectives l'ordre exact des privilèges ; aucun rang chiffré n'est donné ici.",
+    "Contenu pédagogique en termes généraux, rédigé avec une IA, à relire par un enseignant ou un juriste : vérifier les textes en vigueur (Actes uniformes OHADA, codes et lois camerounais) avant tout usage ; ce n'est pas une consultation juridique."
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Privilège",
+     "md": "Le **privilège** est un droit que la loi accorde à certains créanciers, en raison de la **qualité** de leur créance, d'être payés avant d'autres. Il ne naît pas du contrat mais de la **loi**. Il peut être **général** (sur l'ensemble du patrimoine) ou **spécial** (sur un bien déterminé)."
+    },
+    {
+     "type": "key",
+     "style": "propriete",
+     "title": "Exemples",
+     "md": "Parmi les créances souvent privilégiées figurent les **frais de justice**, les **salaires**, les créances du **Trésor** et de la **sécurité sociale**, les créances de **conservation** d'un bien. L'**ordre** entre privilèges et sûretés conventionnelles est fixé par les textes."
+    },
+    {
+     "type": "illustration",
+     "figure": {
+      "kind": "shapes",
+      "w": 367,
+      "h": 212,
+      "items": [
+       {
+        "t": "rect",
+        "x": 10,
+        "y": 8,
+        "w": 149,
+        "h": 36,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "lightgrey"
+       },
+       {
+        "t": "text",
+        "x": 84.5,
+        "y": 31,
+        "text": "Créancier",
+        "size": 12,
+        "anchor": "middle",
+        "color": "ink",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 159,
+        "y": 8,
+        "w": 198,
+        "h": 36,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "lightgrey"
+       },
+       {
+        "t": "text",
+        "x": 258.0,
+        "y": 31,
+        "text": "Position",
+        "size": 12,
+        "anchor": "middle",
+        "color": "ink",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 10,
+        "y": 48,
+        "w": 149,
+        "h": 36,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "lightyellow"
+       },
+       {
+        "t": "text",
+        "x": 84.5,
+        "y": 71,
+        "text": "Frais de justice",
+        "size": 12,
+        "anchor": "middle",
+        "color": "ink",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 159,
+        "y": 48,
+        "w": 198,
+        "h": 36,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "lightblue"
+       },
+       {
+        "t": "text",
+        "x": 258.0,
+        "y": 71,
+        "text": "privilège",
+        "size": 12,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "rect",
+        "x": 10,
+        "y": 88,
+        "w": 149,
+        "h": 36,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "lightyellow"
+       },
+       {
+        "t": "text",
+        "x": 84.5,
+        "y": 111,
+        "text": "Salaires",
+        "size": 12,
+        "anchor": "middle",
+        "color": "ink",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 159,
+        "y": 88,
+        "w": 198,
+        "h": 36,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "lightblue"
+       },
+       {
+        "t": "text",
+        "x": 258.0,
+        "y": 111,
+        "text": "privilège protégé",
+        "size": 12,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "rect",
+        "x": 10,
+        "y": 128,
+        "w": 149,
+        "h": 36,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "lightyellow"
+       },
+       {
+        "t": "text",
+        "x": 84.5,
+        "y": 151,
+        "text": "Titulaire de sûreté",
+        "size": 12,
+        "anchor": "middle",
+        "color": "ink",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 159,
+        "y": 128,
+        "w": 198,
+        "h": 36,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "lightblue"
+       },
+       {
+        "t": "text",
+        "x": 258.0,
+        "y": 151,
+        "text": "préférence conventionnelle",
+        "size": 12,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "rect",
+        "x": 10,
+        "y": 168,
+        "w": 149,
+        "h": 36,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "lightyellow"
+       },
+       {
+        "t": "text",
+        "x": 84.5,
+        "y": 191,
+        "text": "Chirographaire",
+        "size": 12,
+        "anchor": "middle",
+        "color": "ink",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 159,
+        "y": 168,
+        "w": 198,
+        "h": 36,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "lightblue"
+       },
+       {
+        "t": "text",
+        "x": 258.0,
+        "y": 191,
+        "text": "payé en dernier",
+        "size": 12,
+        "anchor": "middle",
+        "color": "ink"
+       }
+      ]
+     },
+     "caption": "Esquisse d'un ordre de paiement.",
+     "alt": "Tableau classant créanciers privilégiés, garantis et chirographaires."
+    },
+    {
+     "type": "example",
+     "title": "Exemple 1 — Distribution",
+     "statement": "Après la vente d'un fonds de commerce de Douala (3 000 000 FCFA), se présentent : des salariés (créance privilégiée) et un fournisseur chirographaire. Qui est payé d'abord ?",
+     "steps": [
+      "Les salaires bénéficient d'un privilège.",
+      "Le fournisseur chirographaire est payé sur le solde."
+     ],
+     "answer": "Les salariés d'abord."
+    },
+    {
+     "type": "example",
+     "title": "Exemple 2 — Origine du privilège",
+     "statement": "Un créancier prétend avoir un privilège parce que son contrat le prévoit. Qu'en penser ?",
+     "steps": [
+      "Un privilège ne peut naître que de la loi.",
+      "Le contrat peut donner une sûreté, pas un privilège."
+     ],
+     "answer": "Impossible : le privilège vient de la loi."
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Privilège et préférence",
+     "md": "Tout privilège donne un droit de **préférence**, mais toute préférence ne vient pas d'un privilège : une hypothèque ou un gage sont des sûretés **conventionnelles**. En cas de **procédure collective**, l'ordre est ajusté par les textes ; les salaires bénéficient d'une protection renforcée."
+    }
+   ],
+   "chapter": "droit-l3-suretes-ohada-rang-realisation"
+  },
+  {
+   "id": "droit-l3-suretes-ohada-realisation-suretes",
+   "title": "Réalisation des sûretés et sort en procédure collective",
+   "minutes": 35,
+   "programRef": "Droit des sûretés OHADA (Licence 3) — à vérifier sur la maquette de l'établissement",
+   "status": "draft",
+   "author": "CastBridge (brouillon IA)",
+   "source": "Rédaction originale ; à relire par un enseignant de droit",
+   "objectives": [
+    "Décrire les voies de réalisation d'une sûreté réelle.",
+    "Expliquer l'effet d'une procédure collective sur les sûretés.",
+    "Mesurer l'importance de la publicité et du rang."
+   ],
+   "prerequisites": [],
+   "exercises": [
+    "droit-l3-suretes-ohada-rang-realisation-e07",
+    "droit-l3-suretes-ohada-rang-realisation-e08",
+    "droit-l3-suretes-ohada-rang-realisation-e09",
+    "droit-l3-suretes-ohada-rang-realisation-e10",
+    "droit-l3-suretes-ohada-rang-realisation-e11",
+    "droit-l3-suretes-ohada-rang-realisation-e12"
+   ],
+   "selfCheck": [
+    "droit-l3-suretes-ohada-realisation-suretes-q1",
+    "droit-l3-suretes-ohada-realisation-suretes-q2",
+    "droit-l3-suretes-ohada-realisation-suretes-q3",
+    "droit-l3-suretes-ohada-realisation-suretes-q4",
+    "droit-l3-suretes-ohada-realisation-suretes-q5"
+   ],
+   "reviewNotes": [
+    "Vérifier dans les Actes uniformes (sûretés, procédures collectives, voies d'exécution) les voies de réalisation, le pacte commissoire et les délais de déclaration ; aucun article ni délai cité.",
+    "Contenu pédagogique en termes généraux, rédigé avec une IA, à relire par un enseignant ou un juriste : vérifier les textes en vigueur (Actes uniformes OHADA, codes et lois camerounais) avant tout usage ; ce n'est pas une consultation juridique."
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Réalisation",
+     "md": "**Réaliser** une sûreté, c'est en tirer paiement : **vente forcée** du bien, **attribution judiciaire** au créancier, ou autres modes prévus par la loi. Le créancier est payé **par préférence** sur le prix, selon son rang, après les créances qui le précèdent."
+    },
+    {
+     "type": "key",
+     "style": "propriete",
+     "title": "Procédure collective",
+     "md": "Quand le débiteur est en **procédure collective** (redressement, liquidation), les poursuites individuelles sont **suspendues** ; les créanciers déclarent leurs créances et sont traités selon l'**ordre légal**. Une sûreté **non publiée** risque d'être inefficace face à la masse."
+    },
+    {
+     "type": "illustration",
+     "figure": {
+      "kind": "shapes",
+      "w": 380,
+      "h": 194,
+      "items": [
+       {
+        "t": "rect",
+        "x": 10,
+        "y": 8,
+        "w": 360,
+        "h": 34,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "lightyellow"
+       },
+       {
+        "t": "text",
+        "x": 190.0,
+        "y": 30,
+        "text": "Défaut de paiement du débiteur",
+        "size": 12,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "line",
+        "x1": 190.0,
+        "y1": 42,
+        "x2": 190.0,
+        "y2": 56,
+        "color": "ink",
+        "width": 2,
+        "arrow": "end"
+       },
+       {
+        "t": "rect",
+        "x": 10,
+        "y": 56,
+        "w": 360,
+        "h": 34,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "lightblue"
+       },
+       {
+        "t": "text",
+        "x": 190.0,
+        "y": 78,
+        "text": "Mise en œuvre de la sûreté",
+        "size": 12,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "line",
+        "x1": 190.0,
+        "y1": 90,
+        "x2": 190.0,
+        "y2": 104,
+        "color": "ink",
+        "width": 2,
+        "arrow": "end"
+       },
+       {
+        "t": "rect",
+        "x": 10,
+        "y": 104,
+        "w": 360,
+        "h": 34,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "lightyellow"
+       },
+       {
+        "t": "text",
+        "x": 190.0,
+        "y": 126,
+        "text": "Vente forcée ou attribution",
+        "size": 12,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "line",
+        "x1": 190.0,
+        "y1": 138,
+        "x2": 190.0,
+        "y2": 152,
+        "color": "ink",
+        "width": 2,
+        "arrow": "end"
+       },
+       {
+        "t": "rect",
+        "x": 10,
+        "y": 152,
+        "w": 360,
+        "h": 34,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "lightblue"
+       },
+       {
+        "t": "text",
+        "x": 190.0,
+        "y": 174,
+        "text": "Paiement par rang de préférence",
+        "size": 12,
+        "anchor": "middle",
+        "color": "ink"
+       }
+      ]
+     },
+     "caption": "Réalisation d'une sûreté réelle.",
+     "alt": "Schéma en quatre étapes de la réalisation d'une sûreté."
+    },
+    {
+     "type": "example",
+     "title": "Exemple 1 — Vente forcée",
+     "statement": "Une banque de Yaoundé, créancière hypothécaire impayée, fait vendre l'immeuble de son débiteur. Le prix est de 25 000 000 FCFA ; sa créance est de 18 000 000 FCFA. Que devient le surplus ?",
+     "steps": [
+      "Elle est payée sur le prix à hauteur de sa créance.",
+      "Le surplus, soit 7 000 000 FCFA, revient aux autres ayants droit ou au débiteur."
+     ],
+     "answer": "7 000 000 FCFA restent disponibles."
+    },
+    {
+     "type": "example",
+     "title": "Exemple 2 — Procédure collective",
+     "statement": "Après l'ouverture d'une procédure collective visant son débiteur, un créancier gagiste veut saisir directement le bien gagé. Peut-il le faire ?",
+     "steps": [
+      "Les poursuites individuelles sont suspendues.",
+      "Il doit déclarer sa créance et suivre la procédure."
+     ],
+     "answer": "Non, il déclare sa créance."
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Attention aux délais",
+     "md": "Le créancier doit **déclarer sa créance** dans le délai prévu, sous peine de perdre le droit d'être payé dans la procédure. Il ne peut pas se payer lui-même librement : il passe par la **vente organisée** ou par une attribution décidée dans les formes légales."
+    }
+   ],
+   "chapter": "droit-l3-suretes-ohada-rang-realisation"
+  }
+ ],
+ "exercises": [
+  {
+   "id": "droit-l3-suretes-ohada-rang-realisation-e01",
+   "kind": "mcq",
+   "tier": "application",
+   "lesson": "droit-l3-suretes-ohada-privileges-rang",
+   "source": "Exercice original écrit pour CastBridge, niveau Licence 3 de droit",
+   "prompt": "Un privilège naît :",
+   "choices": [
+    "Du hasard",
+    "D'un simple accord verbal",
+    "De la loi",
+    "D'une publicité"
+   ],
+   "answer": 2,
+   "explanation": "Source légale.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "droit-l3-suretes-ohada-rang-realisation"
+  },
+  {
+   "id": "droit-l3-suretes-ohada-rang-realisation-e02",
+   "kind": "truefalse",
+   "tier": "application",
+   "lesson": "droit-l3-suretes-ohada-privileges-rang",
+   "source": "Exercice original écrit pour CastBridge, niveau Licence 3 de droit",
+   "prompt": "Un créancier chirographaire passe avant un créancier privilégié.",
+   "answer": false,
+   "explanation": "Il est payé après.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "droit-l3-suretes-ohada-rang-realisation"
+  },
+  {
+   "id": "droit-l3-suretes-ohada-rang-realisation-e03",
+   "kind": "mcq",
+   "tier": "application",
+   "lesson": "droit-l3-suretes-ohada-privileges-rang",
+   "source": "Exercice original écrit pour CastBridge, niveau Licence 3 de droit",
+   "prompt": "Un privilège spécial porte sur :",
+   "choices": [
+    "Un bien déterminé",
+    "Tout l'univers",
+    "Un contrat",
+    "Aucun bien"
+   ],
+   "answer": 0,
+   "explanation": "Spécial.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "droit-l3-suretes-ohada-rang-realisation"
+  },
+  {
+   "id": "droit-l3-suretes-ohada-rang-realisation-e04",
+   "kind": "open",
+   "tier": "approfondissement",
+   "lesson": "droit-l3-suretes-ohada-privileges-rang",
+   "source": "Exercice original écrit pour CastBridge, niveau Licence 3 de droit",
+   "prompt": "Différenciez privilège et hypothèque.",
+   "model": "Le privilège est accordé par la loi à raison de la nature de la créance ; l'hypothèque est une sûreté conventionnelle ou judiciaire sur un immeuble, inscrite pour être opposable.",
+   "rubric": [
+    "Source : loi (1)",
+    "Hypothèque : sûreté (1)",
+    "Immeuble (1)"
+   ],
+   "explanation": "Le privilège est accordé par la loi à raison de la nature de la créance ; l'hypothèque est une sûreté conventionnelle ou judiciaire sur un immeuble, inscrite pour être opposable.",
+   "difficulty": 2,
+   "points": 3,
+   "chapter": "droit-l3-suretes-ohada-rang-realisation"
+  },
+  {
+   "id": "droit-l3-suretes-ohada-rang-realisation-e05",
+   "kind": "truefalse",
+   "tier": "approfondissement",
+   "lesson": "droit-l3-suretes-ohada-privileges-rang",
+   "source": "Exercice original écrit pour CastBridge, niveau Licence 3 de droit",
+   "prompt": "Les salaires sont souvent protégés par un privilège.",
+   "answer": true,
+   "explanation": "Protection sociale.",
+   "difficulty": 2,
+   "points": 2,
+   "chapter": "droit-l3-suretes-ohada-rang-realisation"
+  },
+  {
+   "id": "droit-l3-suretes-ohada-rang-realisation-e06",
+   "kind": "problem",
+   "tier": "examen",
+   "lesson": "droit-l3-suretes-ohada-privileges-rang",
+   "source": "Exercice original écrit pour CastBridge, niveau Licence 3 de droit",
+   "prompt": "Une société de Douala est liquidée. Se présentent : le liquidateur (frais de justice), les salariés, une banque hypothécaire et un fournisseur chirographaire.",
+   "difficulty": 3,
+   "parts": [
+    {
+     "kind": "mcq",
+     "points": 1,
+     "prompt": "Le fournisseur chirographaire est :",
+     "choices": [
+      "Payé avant les salariés",
+      "Payé en premier",
+      "Exclu de la procédure",
+      "Payé après les autres sur le solde"
+     ],
+     "answer": 3,
+     "explanation": "Ordre de paiement.",
+     "id": "droit-l3-suretes-ohada-rang-realisation-e06-a"
+    },
+    {
+     "kind": "truefalse",
+     "points": 1,
+     "prompt": "Les frais de justice sont généralement payés avant les autres créanciers.",
+     "answer": true,
+     "explanation": "Privilège des frais de justice.",
+     "id": "droit-l3-suretes-ohada-rang-realisation-e06-b"
+    },
+    {
+     "kind": "open",
+     "points": 2,
+     "prompt": "Pourquoi la loi privilégie-t-elle les salaires ?",
+     "model": "Ils assurent la subsistance du travailleur, créancier vulnérable ; la protection est une exigence sociale.",
+     "rubric": [
+      "Subsistance (1)",
+      "Vulnérabilité (1)"
+     ],
+     "explanation": "Ils assurent la subsistance du travailleur, créancier vulnérable ; la protection est une exigence sociale.",
+     "id": "droit-l3-suretes-ohada-rang-realisation-e06-c"
+    }
+   ],
+   "chapter": "droit-l3-suretes-ohada-rang-realisation"
+  },
+  {
+   "id": "droit-l3-suretes-ohada-privileges-rang-q1",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "droit-l3-suretes-ohada-privileges-rang",
+   "prompt": "Un créancier privilégié est :",
+   "choices": [
+    "Un associé",
+    "Un témoin",
+    "Un juge",
+    "Payé par préférence en vertu de la loi"
+   ],
+   "answer": 3,
+   "explanation": "Préférence légale.",
+   "chapter": "droit-l3-suretes-ohada-rang-realisation"
+  },
+  {
+   "id": "droit-l3-suretes-ohada-privileges-rang-q2",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "droit-l3-suretes-ohada-privileges-rang",
+   "prompt": "Un privilège général porte sur :",
+   "choices": [
+    "Rien",
+    "Un seul immeuble",
+    "Un seul meuble",
+    "L'ensemble du patrimoine"
+   ],
+   "answer": 3,
+   "explanation": "Général.",
+   "chapter": "droit-l3-suretes-ohada-rang-realisation"
+  },
+  {
+   "id": "droit-l3-suretes-ohada-privileges-rang-q3",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "droit-l3-suretes-ohada-privileges-rang",
+   "prompt": "Une sûreté conventionnelle naît :",
+   "choices": [
+    "D'un contrat",
+    "D'un jugement étranger",
+    "De la loi seule",
+    "Du hasard"
+   ],
+   "answer": 0,
+   "explanation": "Source conventionnelle.",
+   "chapter": "droit-l3-suretes-ohada-rang-realisation"
+  },
+  {
+   "id": "droit-l3-suretes-ohada-privileges-rang-q4",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "droit-l3-suretes-ohada-privileges-rang",
+   "prompt": "Le dernier payé est en principe :",
+   "choices": [
+    "Le Trésor",
+    "Les frais de justice",
+    "Le chirographaire",
+    "Le salarié"
+   ],
+   "answer": 2,
+   "explanation": "Sans garantie ni privilège.",
+   "chapter": "droit-l3-suretes-ohada-rang-realisation"
+  },
+  {
+   "id": "droit-l3-suretes-ohada-privileges-rang-q5",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "droit-l3-suretes-ohada-privileges-rang",
+   "prompt": "L'ordre de paiement est fixé par :",
+   "choices": [
+    "Le notaire seul",
+    "Le débiteur",
+    "Les textes",
+    "Le hasard"
+   ],
+   "answer": 2,
+   "explanation": "Règles légales.",
+   "chapter": "droit-l3-suretes-ohada-rang-realisation"
+  },
+  {
+   "id": "droit-l3-suretes-ohada-rang-realisation-e07",
+   "kind": "mcq",
+   "tier": "application",
+   "lesson": "droit-l3-suretes-ohada-realisation-suretes",
+   "source": "Exercice original écrit pour CastBridge, niveau Licence 3 de droit",
+   "prompt": "Réaliser une sûreté, c'est :",
+   "choices": [
+    "La créer",
+    "La publier",
+    "En tirer paiement",
+    "L'oublier"
+   ],
+   "answer": 2,
+   "explanation": "Obtenir paiement.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "droit-l3-suretes-ohada-rang-realisation"
+  },
+  {
+   "id": "droit-l3-suretes-ohada-rang-realisation-e08",
+   "kind": "truefalse",
+   "tier": "application",
+   "lesson": "droit-l3-suretes-ohada-realisation-suretes",
+   "source": "Exercice original écrit pour CastBridge, niveau Licence 3 de droit",
+   "prompt": "En procédure collective, les poursuites individuelles sont en principe suspendues.",
+   "answer": true,
+   "explanation": "Règle protectrice de la masse.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "droit-l3-suretes-ohada-rang-realisation"
+  },
+  {
+   "id": "droit-l3-suretes-ohada-rang-realisation-e09",
+   "kind": "mcq",
+   "tier": "application",
+   "lesson": "droit-l3-suretes-ohada-realisation-suretes",
+   "source": "Exercice original écrit pour CastBridge, niveau Licence 3 de droit",
+   "prompt": "Le créancier doit :",
+   "choices": [
+    "Attendre dix ans",
+    "Ignorer la procédure",
+    "Déclarer sa créance dans le délai",
+    "Saisir seul le bien"
+   ],
+   "answer": 2,
+   "explanation": "Délai de déclaration.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "droit-l3-suretes-ohada-rang-realisation"
+  },
+  {
+   "id": "droit-l3-suretes-ohada-rang-realisation-e10",
+   "kind": "open",
+   "tier": "approfondissement",
+   "lesson": "droit-l3-suretes-ohada-realisation-suretes",
+   "source": "Exercice original écrit pour CastBridge, niveau Licence 3 de droit",
+   "prompt": "Pourquoi l'inscription est-elle essentielle en cas de procédure collective ?",
+   "model": "Les tiers et la masse ne connaissent la sûreté que par la publicité ; sans inscription, le créancier risque d'être traité comme chirographaire.",
+   "rubric": [
+    "Opposabilité (1)",
+    "Risque d'être chirographaire (1)",
+    "Masse (1)"
+   ],
+   "explanation": "Les tiers et la masse ne connaissent la sûreté que par la publicité ; sans inscription, le créancier risque d'être traité comme chirographaire.",
+   "difficulty": 2,
+   "points": 3,
+   "chapter": "droit-l3-suretes-ohada-rang-realisation"
+  },
+  {
+   "id": "droit-l3-suretes-ohada-rang-realisation-e11",
+   "kind": "truefalse",
+   "tier": "approfondissement",
+   "lesson": "droit-l3-suretes-ohada-realisation-suretes",
+   "source": "Exercice original écrit pour CastBridge, niveau Licence 3 de droit",
+   "prompt": "Le créancier peut s'attribuer librement le bien gagé sans formalité.",
+   "answer": false,
+   "explanation": "Il doit suivre les voies légales.",
+   "difficulty": 2,
+   "points": 2,
+   "chapter": "droit-l3-suretes-ohada-rang-realisation"
+  },
+  {
+   "id": "droit-l3-suretes-ohada-rang-realisation-e12",
+   "kind": "problem",
+   "tier": "examen",
+   "lesson": "droit-l3-suretes-ohada-realisation-suretes",
+   "source": "Exercice original écrit pour CastBridge, niveau Licence 3 de droit",
+   "prompt": "Une PME de Limbé est mise en redressement judiciaire. Une banque détient un gage sans dépossession, non inscrit, sur le camion de la PME.",
+   "difficulty": 3,
+   "parts": [
+    {
+     "kind": "mcq",
+     "points": 1,
+     "prompt": "Face à la masse, la banque risque :",
+     "choices": [
+      "De ne pas pouvoir opposer sa sûreté",
+      "D'échapper à toute règle",
+      "D'être propriétaire du camion",
+      "D'être payée en premier assurément"
+     ],
+     "answer": 0,
+     "explanation": "Défaut de publicité.",
+     "id": "droit-l3-suretes-ohada-rang-realisation-e12-a"
+    },
+    {
+     "kind": "truefalse",
+     "points": 1,
+     "prompt": "La banque doit déclarer sa créance.",
+     "answer": true,
+     "explanation": "Procédure collective.",
+     "id": "droit-l3-suretes-ohada-rang-realisation-e12-b"
+    },
+    {
+     "kind": "open",
+     "points": 2,
+     "prompt": "Quel conseil pour l'avenir ?",
+     "model": "Inscrire toujours le gage au RCCM dès la conclusion du contrat et conserver la preuve de la déclaration de créance.",
+     "rubric": [
+      "Inscription immédiate",
+      "Déclaration de créance"
+     ],
+     "explanation": "Inscrire toujours le gage au RCCM dès la conclusion du contrat et conserver la preuve de la déclaration de créance.",
+     "id": "droit-l3-suretes-ohada-rang-realisation-e12-c"
+    }
+   ],
+   "chapter": "droit-l3-suretes-ohada-rang-realisation"
+  },
+  {
+   "id": "droit-l3-suretes-ohada-realisation-suretes-q1",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "droit-l3-suretes-ohada-realisation-suretes",
+   "prompt": "La vente forcée :",
+   "choices": [
+    "Est interdite",
+    "Permet de payer le créancier sur le prix",
+    "Supprime la dette",
+    "Annule le gage"
+   ],
+   "answer": 1,
+   "explanation": "Réalisation.",
+   "chapter": "droit-l3-suretes-ohada-rang-realisation"
+  },
+  {
+   "id": "droit-l3-suretes-ohada-realisation-suretes-q2",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "droit-l3-suretes-ohada-realisation-suretes",
+   "prompt": "L'ordre de paiement tient compte :",
+   "choices": [
+    "Du rang",
+    "De la couleur du bien",
+    "De la ville",
+    "De l'âge du débiteur"
+   ],
+   "answer": 0,
+   "explanation": "Rang des créanciers.",
+   "chapter": "droit-l3-suretes-ohada-rang-realisation"
+  },
+  {
+   "id": "droit-l3-suretes-ohada-realisation-suretes-q3",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "droit-l3-suretes-ohada-realisation-suretes",
+   "prompt": "La déclaration de créance est :",
+   "choices": [
+    "Interdite",
+    "Gratuite pour l'État",
+    "Un acte à faire dans le délai",
+    "Facultative toujours"
+   ],
+   "answer": 2,
+   "explanation": "Délai à respecter.",
+   "chapter": "droit-l3-suretes-ohada-rang-realisation"
+  },
+  {
+   "id": "droit-l3-suretes-ohada-realisation-suretes-q4",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "droit-l3-suretes-ohada-realisation-suretes",
+   "prompt": "Une sûreté non publiée est :",
+   "choices": [
+    "Obligatoire",
+    "Supérieure",
+    "Fragile face aux tiers",
+    "Parfaite"
+   ],
+   "answer": 2,
+   "explanation": "Opposabilité.",
+   "chapter": "droit-l3-suretes-ohada-rang-realisation"
+  },
+  {
+   "id": "droit-l3-suretes-ohada-realisation-suretes-q5",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "droit-l3-suretes-ohada-realisation-suretes",
+   "prompt": "L'attribution judiciaire :",
+   "choices": [
+    "Supprime le créancier",
+    "Est un impôt",
+    "Annule la sûreté",
+    "Donne le bien au créancier par décision"
+   ],
+   "answer": 3,
+   "explanation": "Voie de réalisation.",
+   "chapter": "droit-l3-suretes-ohada-rang-realisation"
+  }
+ ]
+}

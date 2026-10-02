@@ -1,0 +1,2344 @@
+{
+ "chapter": "droit-l3-procedure-civile-execution-proc-instance",
+ "lessons": [
+  {
+   "id": "droit-l3-procedure-civile-execution-organisation-judiciaire",
+   "title": "L'organisation judiciaire et ses juridictions",
+   "minutes": 35,
+   "programRef": "Procédure civile et voies d'exécution (Licence 3) — à vérifier sur la maquette de l'établissement",
+   "status": "draft",
+   "author": "CastBridge (brouillon IA)",
+   "source": "Rédaction originale ; à relire par un enseignant de droit",
+   "objectives": [
+    "Décrire la hiérarchie des juridictions civiles du Cameroun.",
+    "Situer la Cour commune de justice et d'arbitrage (CCJA).",
+    "Distinguer ordre judiciaire et ordre administratif."
+   ],
+   "prerequisites": [],
+   "exercises": [
+    "droit-l3-procedure-civile-execution-proc-instance-e01",
+    "droit-l3-procedure-civile-execution-proc-instance-e02",
+    "droit-l3-procedure-civile-execution-proc-instance-e03",
+    "droit-l3-procedure-civile-execution-proc-instance-e04",
+    "droit-l3-procedure-civile-execution-proc-instance-e05",
+    "droit-l3-procedure-civile-execution-proc-instance-e06"
+   ],
+   "selfCheck": [
+    "droit-l3-procedure-civile-execution-organisation-judiciaire-q1",
+    "droit-l3-procedure-civile-execution-organisation-judiciaire-q2",
+    "droit-l3-procedure-civile-execution-organisation-judiciaire-q3",
+    "droit-l3-procedure-civile-execution-organisation-judiciaire-q4",
+    "droit-l3-procedure-civile-execution-organisation-judiciaire-q5"
+   ],
+   "reviewNotes": [
+    "Vérifier l'organisation judiciaire en vigueur au Cameroun (lois d'organisation judiciaire et de la Cour suprême) ; la répartition entre TPI et TGI est évoquée en termes généraux.",
+    "Contenu pédagogique en termes généraux, rédigé avec une IA, à relire par un enseignant ou un juriste : vérifier les textes en vigueur (Actes uniformes OHADA, codes et lois camerounais) avant tout usage ; ce n'est pas une consultation juridique."
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Ordre judiciaire",
+     "md": "Les litiges civils, commerciaux et pénaux relèvent de l'**ordre judiciaire** : tribunaux de **première instance** et de **grande instance**, **cours d'appel**, puis **Cour suprême**. Les litiges avec l'administration relèvent surtout de la juridiction **administrative**."
+    },
+    {
+     "type": "key",
+     "style": "propriete",
+     "title": "Double degré et cassation",
+     "md": "Le **double degré de juridiction** permet de faire rejuger l'affaire par la cour d'appel. La **Cour suprême** ne juge pas les faits : elle contrôle la bonne application du droit (**cassation**). Dans l'espace OHADA, la **CCJA** assure l'interprétation et l'application uniformes des Actes uniformes, en cassation."
+    },
+    {
+     "type": "illustration",
+     "figure": {
+      "kind": "shapes",
+      "w": 380,
+      "h": 194,
+      "items": [
+       {
+        "t": "rect",
+        "x": 10,
+        "y": 8,
+        "w": 360,
+        "h": 34,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "lightyellow"
+       },
+       {
+        "t": "text",
+        "x": 190.0,
+        "y": 30,
+        "text": "Tribunal de première instance / grande instance",
+        "size": 12,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "line",
+        "x1": 190.0,
+        "y1": 42,
+        "x2": 190.0,
+        "y2": 56,
+        "color": "ink",
+        "width": 2,
+        "arrow": "end"
+       },
+       {
+        "t": "rect",
+        "x": 10,
+        "y": 56,
+        "w": 360,
+        "h": 34,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "lightblue"
+       },
+       {
+        "t": "text",
+        "x": 190.0,
+        "y": 78,
+        "text": "Cour d'appel",
+        "size": 12,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "line",
+        "x1": 190.0,
+        "y1": 90,
+        "x2": 190.0,
+        "y2": 104,
+        "color": "ink",
+        "width": 2,
+        "arrow": "end"
+       },
+       {
+        "t": "rect",
+        "x": 10,
+        "y": 104,
+        "w": 360,
+        "h": 34,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "lightyellow"
+       },
+       {
+        "t": "text",
+        "x": 190.0,
+        "y": 126,
+        "text": "Cour suprême (droit national)",
+        "size": 12,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "line",
+        "x1": 190.0,
+        "y1": 138,
+        "x2": 190.0,
+        "y2": 152,
+        "color": "ink",
+        "width": 2,
+        "arrow": "end"
+       },
+       {
+        "t": "rect",
+        "x": 10,
+        "y": 152,
+        "w": 360,
+        "h": 34,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "lightblue"
+       },
+       {
+        "t": "text",
+        "x": 190.0,
+        "y": 174,
+        "text": "CCJA (Actes uniformes)",
+        "size": 12,
+        "anchor": "middle",
+        "color": "ink"
+       }
+      ]
+     },
+     "caption": "Hiérarchie simplifiée.",
+     "alt": "Schéma simplifié de la hiérarchie : première instance, appel, cassation nationale et CCJA."
+    },
+    {
+     "type": "example",
+     "title": "Exemple 1 — Hiérarchie",
+     "statement": "Un jugement de première instance à Douala déplaît à l'une des parties. À quelle juridiction peut-elle faire appel ?",
+     "steps": [
+      "L'appel est le recours ordinaire contre un jugement de premier degré.",
+      "Il est porté devant la cour d'appel compétente."
+     ],
+     "answer": "La cour d'appel."
+    },
+    {
+     "type": "example",
+     "title": "Exemple 2 — Quel juge de cassation ?",
+     "statement": "Un litige sur l'application d'un Acte uniforme OHADA est jugé en appel à Yaoundé. Où se pourvoir en cassation ?",
+     "steps": [
+      "La matière relève des Actes uniformes.",
+      "Le pourvoi se fait devant la CCJA."
+     ],
+     "answer": "La CCJA."
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Bijuridisme",
+     "md": "Le Cameroun connaît deux traditions : le droit **civiliste** (francophone) et la **common law** (régions anglophones). Les règles de procédure et la terminologie peuvent différer ; l'enseignement ici est général. Ne pas confondre la **CCJA** avec la Cour suprême nationale : elle ne juge que le contentieux des Actes uniformes."
+    }
+   ],
+   "chapter": "droit-l3-procedure-civile-execution-proc-instance"
+  },
+  {
+   "id": "droit-l3-procedure-civile-execution-action-en-justice",
+   "title": "L'action en justice et ses conditions",
+   "minutes": 35,
+   "programRef": "Procédure civile et voies d'exécution (Licence 3) — à vérifier sur la maquette de l'établissement",
+   "status": "draft",
+   "author": "CastBridge (brouillon IA)",
+   "source": "Rédaction originale ; à relire par un enseignant de droit",
+   "objectives": [
+    "Définir l'action en justice.",
+    "Citer les conditions de recevabilité.",
+    "Distinguer action et demande, fond et recevabilité."
+   ],
+   "prerequisites": [],
+   "exercises": [
+    "droit-l3-procedure-civile-execution-proc-instance-e07",
+    "droit-l3-procedure-civile-execution-proc-instance-e08",
+    "droit-l3-procedure-civile-execution-proc-instance-e09",
+    "droit-l3-procedure-civile-execution-proc-instance-e10",
+    "droit-l3-procedure-civile-execution-proc-instance-e11",
+    "droit-l3-procedure-civile-execution-proc-instance-e12"
+   ],
+   "selfCheck": [
+    "droit-l3-procedure-civile-execution-action-en-justice-q1",
+    "droit-l3-procedure-civile-execution-action-en-justice-q2",
+    "droit-l3-procedure-civile-execution-action-en-justice-q3",
+    "droit-l3-procedure-civile-execution-action-en-justice-q4",
+    "droit-l3-procedure-civile-execution-action-en-justice-q5"
+   ],
+   "reviewNotes": [
+    "Vérifier dans les textes camerounais de procédure civile les conditions précises et les délais de prescription ; non cités ici.",
+    "Contenu pédagogique en termes généraux, rédigé avec une IA, à relire par un enseignant ou un juriste : vérifier les textes en vigueur (Actes uniformes OHADA, codes et lois camerounais) avant tout usage ; ce n'est pas une consultation juridique."
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Action",
+     "md": "L'**action** est le droit, pour l'auteur d'une prétention, d'être entendu par un juge sur le **fond** de sa demande. Elle appartient à celui qui a **qualité** et **intérêt** pour agir. Elle est distincte du **droit substantiel** qu'on veut faire valoir."
+    },
+    {
+     "type": "key",
+     "style": "propriete",
+     "title": "Conditions",
+     "md": "Pour être **recevable**, une action suppose : un **intérêt** né et actuel, une **qualité** (titulaire du droit ou représentant), une **capacité** (ou représentation), l'absence de **fin de non-recevoir** (prescription, chose jugée…). Le juge examine d'abord la **recevabilité**, puis le **bien-fondé**."
+    },
+    {
+     "type": "illustration",
+     "figure": {
+      "kind": "shapes",
+      "w": 430,
+      "h": 212,
+      "items": [
+       {
+        "t": "rect",
+        "x": 10,
+        "y": 8,
+        "w": 156,
+        "h": 36,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "lightgrey"
+       },
+       {
+        "t": "text",
+        "x": 88.0,
+        "y": 31,
+        "text": "Condition",
+        "size": 12,
+        "anchor": "middle",
+        "color": "ink",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 166,
+        "y": 8,
+        "w": 254,
+        "h": 36,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "lightgrey"
+       },
+       {
+        "t": "text",
+        "x": 293.0,
+        "y": 31,
+        "text": "Sens",
+        "size": 12,
+        "anchor": "middle",
+        "color": "ink",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 10,
+        "y": 48,
+        "w": 156,
+        "h": 36,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "lightyellow"
+       },
+       {
+        "t": "text",
+        "x": 88.0,
+        "y": 71,
+        "text": "Intérêt",
+        "size": 12,
+        "anchor": "middle",
+        "color": "ink",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 166,
+        "y": 48,
+        "w": 254,
+        "h": 36,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "lightblue"
+       },
+       {
+        "t": "text",
+        "x": 293.0,
+        "y": 71,
+        "text": "avantage né et actuel",
+        "size": 12,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "rect",
+        "x": 10,
+        "y": 88,
+        "w": 156,
+        "h": 36,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "lightyellow"
+       },
+       {
+        "t": "text",
+        "x": 88.0,
+        "y": 111,
+        "text": "Qualité",
+        "size": 12,
+        "anchor": "middle",
+        "color": "ink",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 166,
+        "y": 88,
+        "w": 254,
+        "h": 36,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "lightblue"
+       },
+       {
+        "t": "text",
+        "x": 293.0,
+        "y": 111,
+        "text": "titulaire du droit ou représentant",
+        "size": 12,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "rect",
+        "x": 10,
+        "y": 128,
+        "w": 156,
+        "h": 36,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "lightyellow"
+       },
+       {
+        "t": "text",
+        "x": 88.0,
+        "y": 151,
+        "text": "Capacité",
+        "size": 12,
+        "anchor": "middle",
+        "color": "ink",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 166,
+        "y": 128,
+        "w": 254,
+        "h": 36,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "lightblue"
+       },
+       {
+        "t": "text",
+        "x": 293.0,
+        "y": 151,
+        "text": "aptitude à agir en justice",
+        "size": 12,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "rect",
+        "x": 10,
+        "y": 168,
+        "w": 156,
+        "h": 36,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "lightyellow"
+       },
+       {
+        "t": "text",
+        "x": 88.0,
+        "y": 191,
+        "text": "Fins de non-recevoir",
+        "size": 12,
+        "anchor": "middle",
+        "color": "ink",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 166,
+        "y": 168,
+        "w": 254,
+        "h": 36,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "lightblue"
+       },
+       {
+        "t": "text",
+        "x": 293.0,
+        "y": 191,
+        "text": "prescription, chose jugée",
+        "size": 12,
+        "anchor": "middle",
+        "color": "ink"
+       }
+      ]
+     },
+     "caption": "Conditions de recevabilité.",
+     "alt": "Tableau des conditions de recevabilité de l'action."
+    },
+    {
+     "type": "example",
+     "title": "Exemple 1 — Intérêt pour agir",
+     "statement": "M. Atangana demande en justice l'annulation d'un contrat conclu entre deux autres personnes, sans en subir aucune conséquence. Peut-il agir ?",
+     "steps": [
+      "L'action suppose un intérêt personnel et actuel.",
+      "Il n'en a pas : l'action est irrecevable."
+     ],
+     "answer": "Non, défaut d'intérêt."
+    },
+    {
+     "type": "example",
+     "title": "Exemple 2 — Chose jugée",
+     "statement": "Une partie assigne de nouveau son adversaire pour la même dette, déjà jugée définitivement. Que décide le juge ?",
+     "steps": [
+      "Le même litige a déjà été tranché.",
+      "La demande se heurte à l'autorité de la chose jugée : irrecevable."
+     ],
+     "answer": "Irrecevable."
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Recevabilité n'est pas bien-fondé",
+     "md": "Une demande **irrecevable** n'est pas examinée au fond ; une demande **mal fondée** est examinée mais rejetée. Le **défaut de qualité** et la **prescription** sont des fins de non-recevoir : on ne discute pas le droit lui-même."
+    }
+   ],
+   "chapter": "droit-l3-procedure-civile-execution-proc-instance"
+  },
+  {
+   "id": "droit-l3-procedure-civile-execution-competence",
+   "title": "La compétence des juridictions",
+   "minutes": 35,
+   "programRef": "Procédure civile et voies d'exécution (Licence 3) — à vérifier sur la maquette de l'établissement",
+   "status": "draft",
+   "author": "CastBridge (brouillon IA)",
+   "source": "Rédaction originale ; à relire par un enseignant de droit",
+   "objectives": [
+    "Distinguer compétence d'attribution et compétence territoriale.",
+    "Appliquer la règle du domicile du défendeur.",
+    "Identifier une exception d'incompétence."
+   ],
+   "prerequisites": [],
+   "exercises": [
+    "droit-l3-procedure-civile-execution-proc-instance-e13",
+    "droit-l3-procedure-civile-execution-proc-instance-e14",
+    "droit-l3-procedure-civile-execution-proc-instance-e15",
+    "droit-l3-procedure-civile-execution-proc-instance-e16",
+    "droit-l3-procedure-civile-execution-proc-instance-e17",
+    "droit-l3-procedure-civile-execution-proc-instance-e18"
+   ],
+   "selfCheck": [
+    "droit-l3-procedure-civile-execution-competence-q1",
+    "droit-l3-procedure-civile-execution-competence-q2",
+    "droit-l3-procedure-civile-execution-competence-q3",
+    "droit-l3-procedure-civile-execution-competence-q4",
+    "droit-l3-procedure-civile-execution-competence-q5"
+   ],
+   "reviewNotes": [
+    "Vérifier dans les textes camerounais la répartition de compétence entre juridictions et les règles territoriales spéciales.",
+    "Contenu pédagogique en termes généraux, rédigé avec une IA, à relire par un enseignant ou un juriste : vérifier les textes en vigueur (Actes uniformes OHADA, codes et lois camerounais) avant tout usage ; ce n'est pas une consultation juridique."
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Compétence",
+     "md": "La **compétence** détermine quel juge peut connaître d'un litige. **Compétence d'attribution** (ou matérielle) : en raison de la **nature** de l'affaire ou de son **importance**. **Compétence territoriale** : en raison du **lieu**."
+    },
+    {
+     "type": "key",
+     "style": "propriete",
+     "title": "Règles de principe",
+     "md": "En règle générale, le tribunal compétent territorialement est celui du **domicile du défendeur**. Des règles spéciales existent : lieu de **situation de l'immeuble**, lieu d'exécution du contrat, clause attributive de juridiction pour les commerçants dans certaines limites."
+    },
+    {
+     "type": "illustration",
+     "figure": {
+      "kind": "shapes",
+      "w": 346,
+      "h": 212,
+      "items": [
+       {
+        "t": "rect",
+        "x": 10,
+        "y": 8,
+        "w": 100,
+        "h": 36,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "lightgrey"
+       },
+       {
+        "t": "text",
+        "x": 60.0,
+        "y": 31,
+        "text": "Compétence",
+        "size": 12,
+        "anchor": "middle",
+        "color": "ink",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 110,
+        "y": 8,
+        "w": 226,
+        "h": 36,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "lightgrey"
+       },
+       {
+        "t": "text",
+        "x": 223.0,
+        "y": 31,
+        "text": "Critère",
+        "size": 12,
+        "anchor": "middle",
+        "color": "ink",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 10,
+        "y": 48,
+        "w": 100,
+        "h": 36,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "lightyellow"
+       },
+       {
+        "t": "text",
+        "x": 60.0,
+        "y": 71,
+        "text": "Attribution",
+        "size": 12,
+        "anchor": "middle",
+        "color": "ink",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 110,
+        "y": 48,
+        "w": 226,
+        "h": 36,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "lightblue"
+       },
+       {
+        "t": "text",
+        "x": 223.0,
+        "y": 71,
+        "text": "nature ou importance du litige",
+        "size": 12,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "rect",
+        "x": 10,
+        "y": 88,
+        "w": 100,
+        "h": 36,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "lightyellow"
+       },
+       {
+        "t": "text",
+        "x": 60.0,
+        "y": 111,
+        "text": "Territoriale",
+        "size": 12,
+        "anchor": "middle",
+        "color": "ink",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 110,
+        "y": 88,
+        "w": 226,
+        "h": 36,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "lightblue"
+       },
+       {
+        "t": "text",
+        "x": 223.0,
+        "y": 111,
+        "text": "lieu : domicile du défendeur",
+        "size": 12,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "rect",
+        "x": 10,
+        "y": 128,
+        "w": 100,
+        "h": 36,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "lightyellow"
+       },
+       {
+        "t": "text",
+        "x": 60.0,
+        "y": 151,
+        "text": "Immeuble",
+        "size": 12,
+        "anchor": "middle",
+        "color": "ink",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 110,
+        "y": 128,
+        "w": 226,
+        "h": 36,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "lightblue"
+       },
+       {
+        "t": "text",
+        "x": 223.0,
+        "y": 151,
+        "text": "lieu de situation",
+        "size": 12,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "rect",
+        "x": 10,
+        "y": 168,
+        "w": 100,
+        "h": 36,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "lightyellow"
+       },
+       {
+        "t": "text",
+        "x": 60.0,
+        "y": 191,
+        "text": "Exception",
+        "size": 12,
+        "anchor": "middle",
+        "color": "ink",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 110,
+        "y": 168,
+        "w": 226,
+        "h": 36,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "lightblue"
+       },
+       {
+        "t": "text",
+        "x": 223.0,
+        "y": 191,
+        "text": "à soulever avant le fond",
+        "size": 12,
+        "anchor": "middle",
+        "color": "ink"
+       }
+      ]
+     },
+     "caption": "Deux niveaux de compétence.",
+     "alt": "Tableau des compétences d'attribution et territoriale."
+    },
+    {
+     "type": "example",
+     "title": "Exemple 1 — Compétence territoriale",
+     "statement": "Mme Fouda, domiciliée à Ebolowa, doit de l'argent à M. Eyenga, domicilié à Kribi. M. Eyenga veut l'assigner. Quel tribunal en principe ?",
+     "steps": [
+      "Règle de principe : tribunal du domicile du défendeur.",
+      "Le défendeur est Mme Fouda, domiciliée à Ebolowa."
+     ],
+     "answer": "Le tribunal d'Ebolowa."
+    },
+    {
+     "type": "example",
+     "title": "Exemple 2 — Immeuble",
+     "statement": "Un litige concerne un terrain situé à Bertoua. Quel critère de compétence territoriale s'applique souvent ?",
+     "steps": [
+      "Pour les actions relatives à un immeuble, on retient souvent le lieu de situation.",
+      "Le tribunal de Bertoua est donc compétent."
+     ],
+     "answer": "Le tribunal du lieu de l'immeuble."
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Soulever à temps",
+     "md": "L'**exception d'incompétence** doit être soulevée **avant** toute défense au fond, sous peine d'être écartée, sauf incompétence d'ordre public qui peut être relevée d'office. Un jugement rendu par un juge incompétent peut être **annulé** sur recours."
+    }
+   ],
+   "chapter": "droit-l3-procedure-civile-execution-proc-instance"
+  },
+  {
+   "id": "droit-l3-procedure-civile-execution-instance-jugement",
+   "title": "Le déroulement de l'instance et le jugement",
+   "minutes": 40,
+   "programRef": "Procédure civile et voies d'exécution (Licence 3) — à vérifier sur la maquette de l'établissement",
+   "status": "draft",
+   "author": "CastBridge (brouillon IA)",
+   "source": "Rédaction originale ; à relire par un enseignant de droit",
+   "objectives": [
+    "Décrire les étapes d'une instance civile.",
+    "Distinguer jugement contradictoire et par défaut.",
+    "Expliquer le rôle des principes directeurs du procès."
+   ],
+   "prerequisites": [],
+   "exercises": [
+    "droit-l3-procedure-civile-execution-proc-instance-e19",
+    "droit-l3-procedure-civile-execution-proc-instance-e20",
+    "droit-l3-procedure-civile-execution-proc-instance-e21",
+    "droit-l3-procedure-civile-execution-proc-instance-e22",
+    "droit-l3-procedure-civile-execution-proc-instance-e23",
+    "droit-l3-procedure-civile-execution-proc-instance-e24"
+   ],
+   "selfCheck": [
+    "droit-l3-procedure-civile-execution-instance-jugement-q1",
+    "droit-l3-procedure-civile-execution-instance-jugement-q2",
+    "droit-l3-procedure-civile-execution-instance-jugement-q3",
+    "droit-l3-procedure-civile-execution-instance-jugement-q4",
+    "droit-l3-procedure-civile-execution-instance-jugement-q5"
+   ],
+   "reviewNotes": [
+    "Vérifier dans les textes camerounais de procédure civile les formes de l'assignation, les délais et la distinction entre jugement contradictoire, réputé contradictoire et par défaut.",
+    "Contenu pédagogique en termes généraux, rédigé avec une IA, à relire par un enseignant ou un juriste : vérifier les textes en vigueur (Actes uniformes OHADA, codes et lois camerounais) avant tout usage ; ce n'est pas une consultation juridique."
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Instance",
+     "md": "L'**instance** commence par la saisine du juge (en général une **assignation** délivrée par huissier) ; viennent la mise en état, les **débats**, la **clôture** et le **jugement**. Le jugement doit être **motivé** et prononcé publiquement."
+    },
+    {
+     "type": "key",
+     "style": "propriete",
+     "title": "Principes directeurs",
+     "md": "- **Contradictoire** : chacun peut discuter les arguments et pièces de l'autre.\n- **Dispositif** : les parties fixent l'objet du litige.\n- **Droits de la défense** : chacun doit pouvoir se défendre.\nUn jugement peut être **contradictoire**, **réputé contradictoire** ou **par défaut** selon la comparution."
+    },
+    {
+     "type": "illustration",
+     "figure": {
+      "kind": "shapes",
+      "w": 380,
+      "h": 194,
+      "items": [
+       {
+        "t": "rect",
+        "x": 10,
+        "y": 8,
+        "w": 360,
+        "h": 34,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "lightyellow"
+       },
+       {
+        "t": "text",
+        "x": 190.0,
+        "y": 30,
+        "text": "Assignation (huissier)",
+        "size": 12,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "line",
+        "x1": 190.0,
+        "y1": 42,
+        "x2": 190.0,
+        "y2": 56,
+        "color": "ink",
+        "width": 2,
+        "arrow": "end"
+       },
+       {
+        "t": "rect",
+        "x": 10,
+        "y": 56,
+        "w": 360,
+        "h": 34,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "lightblue"
+       },
+       {
+        "t": "text",
+        "x": 190.0,
+        "y": 78,
+        "text": "Mise en état : pièces et conclusions",
+        "size": 12,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "line",
+        "x1": 190.0,
+        "y1": 90,
+        "x2": 190.0,
+        "y2": 104,
+        "color": "ink",
+        "width": 2,
+        "arrow": "end"
+       },
+       {
+        "t": "rect",
+        "x": 10,
+        "y": 104,
+        "w": 360,
+        "h": 34,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "lightyellow"
+       },
+       {
+        "t": "text",
+        "x": 190.0,
+        "y": 126,
+        "text": "Audience : débats contradictoires",
+        "size": 12,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "line",
+        "x1": 190.0,
+        "y1": 138,
+        "x2": 190.0,
+        "y2": 152,
+        "color": "ink",
+        "width": 2,
+        "arrow": "end"
+       },
+       {
+        "t": "rect",
+        "x": 10,
+        "y": 152,
+        "w": 360,
+        "h": 34,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "lightblue"
+       },
+       {
+        "t": "text",
+        "x": 190.0,
+        "y": 174,
+        "text": "Jugement motivé",
+        "size": 12,
+        "anchor": "middle",
+        "color": "ink"
+       }
+      ]
+     },
+     "caption": "Les étapes d'une instance.",
+     "alt": "Schéma des étapes d'une instance civile."
+    },
+    {
+     "type": "example",
+     "title": "Exemple 1 — Étapes",
+     "statement": "Mme Kouam veut obtenir le paiement d'une facture impayée. Dans quel ordre se déroule son procès ?",
+     "steps": [
+      "Assignation du débiteur, échange des pièces et conclusions.",
+      "Audience de plaidoiries, délibéré puis jugement."
+     ],
+     "answer": "Assignation, mise en état, audience, jugement."
+    },
+    {
+     "type": "example",
+     "title": "Exemple 2 — Défaut de comparution",
+     "statement": "Le défendeur, régulièrement assigné, ne vient pas à l'audience. Le juge accorde-t-il automatiquement la demande ?",
+     "steps": [
+      "Le juge vérifie la régularité de la citation.",
+      "Il examine la demande : il peut l'accueillir ou la rejeter."
+     ],
+     "answer": "Non, il vérifie le bien-fondé."
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Le défaut",
+     "md": "Le **jugement par défaut** est rendu quand le défendeur régulièrement cité ne comparaît pas. Le juge doit tout de même vérifier le bien-fondé de la demande. Le défendeur peut ensuite former **opposition** dans les délais. Une **assignation irrégulière** peut entraîner nullité."
+    }
+   ],
+   "chapter": "droit-l3-procedure-civile-execution-proc-instance"
+  },
+  {
+   "id": "droit-l3-procedure-civile-execution-voies-de-recours",
+   "title": "Les voies de recours",
+   "minutes": 40,
+   "programRef": "Procédure civile et voies d'exécution (Licence 3) — à vérifier sur la maquette de l'établissement",
+   "status": "draft",
+   "author": "CastBridge (brouillon IA)",
+   "source": "Rédaction originale ; à relire par un enseignant de droit",
+   "objectives": [
+    "Distinguer voies ordinaires et extraordinaires.",
+    "Présenter appel, opposition, tierce opposition, pourvoi et révision.",
+    "Appliquer l'effet suspensif et dévolutif."
+   ],
+   "prerequisites": [],
+   "exercises": [
+    "droit-l3-procedure-civile-execution-proc-instance-e25",
+    "droit-l3-procedure-civile-execution-proc-instance-e26",
+    "droit-l3-procedure-civile-execution-proc-instance-e27",
+    "droit-l3-procedure-civile-execution-proc-instance-e28",
+    "droit-l3-procedure-civile-execution-proc-instance-e29",
+    "droit-l3-procedure-civile-execution-proc-instance-e30"
+   ],
+   "selfCheck": [
+    "droit-l3-procedure-civile-execution-voies-de-recours-q1",
+    "droit-l3-procedure-civile-execution-voies-de-recours-q2",
+    "droit-l3-procedure-civile-execution-voies-de-recours-q3",
+    "droit-l3-procedure-civile-execution-voies-de-recours-q4",
+    "droit-l3-procedure-civile-execution-voies-de-recours-q5"
+   ],
+   "reviewNotes": [
+    "Vérifier dans les textes camerounais les délais de recours et les cas de révision ; aucun délai n'est cité.",
+    "Contenu pédagogique en termes généraux, rédigé avec une IA, à relire par un enseignant ou un juriste : vérifier les textes en vigueur (Actes uniformes OHADA, codes et lois camerounais) avant tout usage ; ce n'est pas une consultation juridique."
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Voies de recours",
+     "md": "Les **voies ordinaires** (appel, opposition) sont ouvertes en principe contre tout jugement dans un **délai** ; elles ont en général un effet **suspensif**. Les **voies extraordinaires** (pourvoi en cassation, tierce opposition, révision) sont limitées à des cas précis."
+    },
+    {
+     "type": "key",
+     "style": "propriete",
+     "title": "Effets",
+     "md": "- **Effet suspensif** : l'exécution du jugement est suspendue pendant le délai et l'exercice du recours (sauf exécution provisoire).\n- **Effet dévolutif** : l'appel remet l'affaire en état devant la cour, dans la limite des chefs critiqués.\n- **Tierce opposition** : ouverte à un tiers lésé par un jugement auquel il n'était pas partie."
+    },
+    {
+     "type": "illustration",
+     "figure": {
+      "kind": "shapes",
+      "w": 402,
+      "h": 252,
+      "items": [
+       {
+        "t": "rect",
+        "x": 10,
+        "y": 8,
+        "w": 135,
+        "h": 36,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "lightgrey"
+       },
+       {
+        "t": "text",
+        "x": 77.5,
+        "y": 31,
+        "text": "Recours",
+        "size": 12,
+        "anchor": "middle",
+        "color": "ink",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 145,
+        "y": 8,
+        "w": 247,
+        "h": 36,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "lightgrey"
+       },
+       {
+        "t": "text",
+        "x": 268.5,
+        "y": 31,
+        "text": "Nature",
+        "size": 12,
+        "anchor": "middle",
+        "color": "ink",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 10,
+        "y": 48,
+        "w": 135,
+        "h": 36,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "lightyellow"
+       },
+       {
+        "t": "text",
+        "x": 77.5,
+        "y": 71,
+        "text": "Appel",
+        "size": 12,
+        "anchor": "middle",
+        "color": "ink",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 145,
+        "y": 48,
+        "w": 247,
+        "h": 36,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "lightblue"
+       },
+       {
+        "t": "text",
+        "x": 268.5,
+        "y": 71,
+        "text": "ordinaire, suspensif et dévolutif",
+        "size": 12,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "rect",
+        "x": 10,
+        "y": 88,
+        "w": 135,
+        "h": 36,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "lightyellow"
+       },
+       {
+        "t": "text",
+        "x": 77.5,
+        "y": 111,
+        "text": "Opposition",
+        "size": 12,
+        "anchor": "middle",
+        "color": "ink",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 145,
+        "y": 88,
+        "w": 247,
+        "h": 36,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "lightblue"
+       },
+       {
+        "t": "text",
+        "x": 268.5,
+        "y": 111,
+        "text": "ordinaire, contre le défaut",
+        "size": 12,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "rect",
+        "x": 10,
+        "y": 128,
+        "w": 135,
+        "h": 36,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "lightyellow"
+       },
+       {
+        "t": "text",
+        "x": 77.5,
+        "y": 151,
+        "text": "Tierce opposition",
+        "size": 12,
+        "anchor": "middle",
+        "color": "ink",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 145,
+        "y": 128,
+        "w": 247,
+        "h": 36,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "lightblue"
+       },
+       {
+        "t": "text",
+        "x": 268.5,
+        "y": 151,
+        "text": "extraordinaire, tiers lésé",
+        "size": 12,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "rect",
+        "x": 10,
+        "y": 168,
+        "w": 135,
+        "h": 36,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "lightyellow"
+       },
+       {
+        "t": "text",
+        "x": 77.5,
+        "y": 191,
+        "text": "Pourvoi",
+        "size": 12,
+        "anchor": "middle",
+        "color": "ink",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 145,
+        "y": 168,
+        "w": 247,
+        "h": 36,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "lightblue"
+       },
+       {
+        "t": "text",
+        "x": 268.5,
+        "y": 191,
+        "text": "extraordinaire, contrôle du droit",
+        "size": 12,
+        "anchor": "middle",
+        "color": "ink"
+       },
+       {
+        "t": "rect",
+        "x": 10,
+        "y": 208,
+        "w": 135,
+        "h": 36,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "lightyellow"
+       },
+       {
+        "t": "text",
+        "x": 77.5,
+        "y": 231,
+        "text": "Révision",
+        "size": 12,
+        "anchor": "middle",
+        "color": "ink",
+        "bold": true
+       },
+       {
+        "t": "rect",
+        "x": 145,
+        "y": 208,
+        "w": 247,
+        "h": 36,
+        "stroke": "ink",
+        "width": 2,
+        "fill": "lightblue"
+       },
+       {
+        "t": "text",
+        "x": 268.5,
+        "y": 231,
+        "text": "extraordinaire, fait nouveau",
+        "size": 12,
+        "anchor": "middle",
+        "color": "ink"
+       }
+      ]
+     },
+     "caption": "Voies de recours en bref.",
+     "alt": "Tableau des voies de recours ordinaires et extraordinaires."
+    },
+    {
+     "type": "example",
+     "title": "Exemple 1 — Choix du recours",
+     "statement": "Une partie a perdu en premier ressort et conteste les faits retenus. Quel recours ?",
+     "steps": [
+      "Les faits sont rejugés en appel.",
+      "L'appel est la voie ordinaire."
+     ],
+     "answer": "L'appel."
+    },
+    {
+     "type": "example",
+     "title": "Exemple 2 — Un tiers lésé",
+     "statement": "Un jugement ordonne la vente d'un terrain appartenant à M. Zang, qui n'a pas été partie au procès. Quel recours ?",
+     "steps": [
+      "Il n'était pas partie : l'appel ne lui est pas ouvert comme tel.",
+      "La tierce opposition vise ce cas."
+     ],
+     "answer": "La tierce opposition."
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Délais",
+     "md": "Un recours formé **hors délai** est **irrecevable**. L'**exécution provisoire** permet d'exécuter malgré l'appel ; le juge peut l'ordonner dans certains cas. Le pourvoi en **cassation** ne rejuge pas les faits et n'est pas un troisième degré."
+    }
+   ],
+   "chapter": "droit-l3-procedure-civile-execution-proc-instance"
+  }
+ ],
+ "exercises": [
+  {
+   "id": "droit-l3-procedure-civile-execution-proc-instance-e01",
+   "kind": "mcq",
+   "tier": "application",
+   "lesson": "droit-l3-procedure-civile-execution-organisation-judiciaire",
+   "source": "Exercice original écrit pour CastBridge, niveau Licence 3 de droit",
+   "prompt": "Le double degré de juridiction signifie :",
+   "choices": [
+    "Que l'on paie deux fois",
+    "Qu'une affaire peut être rejugée en appel",
+    "Qu'on peut changer de pays",
+    "Qu'il y a deux juges à l'audience"
+   ],
+   "answer": 1,
+   "explanation": "Possibilité d'un second examen.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "droit-l3-procedure-civile-execution-proc-instance"
+  },
+  {
+   "id": "droit-l3-procedure-civile-execution-proc-instance-e02",
+   "kind": "truefalse",
+   "tier": "application",
+   "lesson": "droit-l3-procedure-civile-execution-organisation-judiciaire",
+   "source": "Exercice original écrit pour CastBridge, niveau Licence 3 de droit",
+   "prompt": "La Cour suprême rejuge les faits comme une cour d'appel.",
+   "answer": false,
+   "explanation": "Elle contrôle le droit.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "droit-l3-procedure-civile-execution-proc-instance"
+  },
+  {
+   "id": "droit-l3-procedure-civile-execution-proc-instance-e03",
+   "kind": "mcq",
+   "tier": "application",
+   "lesson": "droit-l3-procedure-civile-execution-organisation-judiciaire",
+   "source": "Exercice original écrit pour CastBridge, niveau Licence 3 de droit",
+   "prompt": "La CCJA est compétente pour :",
+   "choices": [
+    "Le droit pénal",
+    "L'état civil",
+    "L'interprétation des Actes uniformes OHADA",
+    "Les divorces"
+   ],
+   "answer": 2,
+   "explanation": "Mission d'uniformisation.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "droit-l3-procedure-civile-execution-proc-instance"
+  },
+  {
+   "id": "droit-l3-procedure-civile-execution-proc-instance-e04",
+   "kind": "open",
+   "tier": "approfondissement",
+   "lesson": "droit-l3-procedure-civile-execution-organisation-judiciaire",
+   "source": "Exercice original écrit pour CastBridge, niveau Licence 3 de droit",
+   "prompt": "Expliquez la différence entre appel et cassation.",
+   "model": "L'appel permet un nouvel examen des faits et du droit par la cour d'appel ; la cassation contrôle seulement la conformité de la décision au droit, sans rejuger les faits.",
+   "rubric": [
+    "Appel : faits et droit (1)",
+    "Cassation : droit (1)",
+    "Pas de rejugement des faits (1)"
+   ],
+   "explanation": "L'appel permet un nouvel examen des faits et du droit par la cour d'appel ; la cassation contrôle seulement la conformité de la décision au droit, sans rejuger les faits.",
+   "difficulty": 2,
+   "points": 3,
+   "chapter": "droit-l3-procedure-civile-execution-proc-instance"
+  },
+  {
+   "id": "droit-l3-procedure-civile-execution-proc-instance-e05",
+   "kind": "truefalse",
+   "tier": "approfondissement",
+   "lesson": "droit-l3-procedure-civile-execution-organisation-judiciaire",
+   "source": "Exercice original écrit pour CastBridge, niveau Licence 3 de droit",
+   "prompt": "Le bijuridisme camerounais signifie que le droit applicable est identique partout.",
+   "answer": false,
+   "explanation": "Deux traditions juridiques coexistent.",
+   "difficulty": 2,
+   "points": 2,
+   "chapter": "droit-l3-procedure-civile-execution-proc-instance"
+  },
+  {
+   "id": "droit-l3-procedure-civile-execution-proc-instance-e06",
+   "kind": "problem",
+   "tier": "examen",
+   "lesson": "droit-l3-procedure-civile-execution-organisation-judiciaire",
+   "source": "Exercice original écrit pour CastBridge, niveau Licence 3 de droit",
+   "prompt": "Une PME de Douala perd un procès commercial en appel sur l'application d'un Acte uniforme.",
+   "difficulty": 3,
+   "parts": [
+    {
+     "kind": "mcq",
+     "points": 1,
+     "prompt": "Le recours possible est :",
+     "choices": [
+      "Une nouvelle assignation en première instance",
+      "Un pourvoi devant la CCJA",
+      "Aucun recours",
+      "Un appel devant le maire"
+     ],
+     "answer": 1,
+     "explanation": "Cassation en matière d'Actes uniformes.",
+     "id": "droit-l3-procedure-civile-execution-proc-instance-e06-a"
+    },
+    {
+     "kind": "truefalse",
+     "points": 1,
+     "prompt": "La CCJA examinera à nouveau toutes les preuves.",
+     "answer": false,
+     "explanation": "Elle ne rejuge pas les faits comme un juge d'appel.",
+     "id": "droit-l3-procedure-civile-execution-proc-instance-e06-b"
+    },
+    {
+     "kind": "open",
+     "points": 2,
+     "prompt": "Pourquoi une juridiction commune ?",
+     "model": "Pour assurer une interprétation uniforme des Actes uniformes dans tous les États parties, ce qui sécurise les affaires.",
+     "rubric": [
+      "Uniformité (1)",
+      "Sécurité juridique (1)"
+     ],
+     "explanation": "Pour assurer une interprétation uniforme des Actes uniformes dans tous les États parties, ce qui sécurise les affaires.",
+     "id": "droit-l3-procedure-civile-execution-proc-instance-e06-c"
+    }
+   ],
+   "chapter": "droit-l3-procedure-civile-execution-proc-instance"
+  },
+  {
+   "id": "droit-l3-procedure-civile-execution-organisation-judiciaire-q1",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "droit-l3-procedure-civile-execution-organisation-judiciaire",
+   "prompt": "La cour d'appel statue :",
+   "choices": [
+    "Sur l'appel des jugements",
+    "Sur les marchés publics seulement",
+    "Sur les élections",
+    "Sur les mariages"
+   ],
+   "answer": 0,
+   "explanation": "Second degré.",
+   "chapter": "droit-l3-procedure-civile-execution-proc-instance"
+  },
+  {
+   "id": "droit-l3-procedure-civile-execution-organisation-judiciaire-q2",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "droit-l3-procedure-civile-execution-organisation-judiciaire",
+   "prompt": "La Cour suprême juge :",
+   "choices": [
+    "Le budget",
+    "Les mœurs",
+    "Le droit (cassation)",
+    "Les faits seulement"
+   ],
+   "answer": 2,
+   "explanation": "Contrôle juridique.",
+   "chapter": "droit-l3-procedure-civile-execution-proc-instance"
+  },
+  {
+   "id": "droit-l3-procedure-civile-execution-organisation-judiciaire-q3",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "droit-l3-procedure-civile-execution-organisation-judiciaire",
+   "prompt": "La CCJA est :",
+   "choices": [
+    "Un tribunal de commune",
+    "Un tribunal de police",
+    "Camerounaise seulement",
+    "Commune aux États OHADA"
+   ],
+   "answer": 3,
+   "explanation": "Juridiction commune.",
+   "chapter": "droit-l3-procedure-civile-execution-proc-instance"
+  },
+  {
+   "id": "droit-l3-procedure-civile-execution-organisation-judiciaire-q4",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "droit-l3-procedure-civile-execution-organisation-judiciaire",
+   "prompt": "Le premier degré :",
+   "choices": [
+    "N'existe pas",
+    "Est la CCJA",
+    "Est le tribunal saisi en premier",
+    "Est la Cour suprême"
+   ],
+   "answer": 2,
+   "explanation": "Première instance.",
+   "chapter": "droit-l3-procedure-civile-execution-proc-instance"
+  },
+  {
+   "id": "droit-l3-procedure-civile-execution-organisation-judiciaire-q5",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "droit-l3-procedure-civile-execution-organisation-judiciaire",
+   "prompt": "L'ordre administratif traite :",
+   "choices": [
+    "Les divorces",
+    "Les successions",
+    "Les ventes entre particuliers",
+    "Les litiges avec l'administration"
+   ],
+   "answer": 3,
+   "explanation": "Contentieux administratif.",
+   "chapter": "droit-l3-procedure-civile-execution-proc-instance"
+  },
+  {
+   "id": "droit-l3-procedure-civile-execution-proc-instance-e07",
+   "kind": "mcq",
+   "tier": "application",
+   "lesson": "droit-l3-procedure-civile-execution-action-en-justice",
+   "source": "Exercice original écrit pour CastBridge, niveau Licence 3 de droit",
+   "prompt": "L'intérêt pour agir doit être :",
+   "choices": [
+    "Né et actuel",
+    "Hypothétique",
+    "Collectif seulement",
+    "Étranger au litige"
+   ],
+   "answer": 0,
+   "explanation": "Condition classique.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "droit-l3-procedure-civile-execution-proc-instance"
+  },
+  {
+   "id": "droit-l3-procedure-civile-execution-proc-instance-e08",
+   "kind": "truefalse",
+   "tier": "application",
+   "lesson": "droit-l3-procedure-civile-execution-action-en-justice",
+   "source": "Exercice original écrit pour CastBridge, niveau Licence 3 de droit",
+   "prompt": "Le défaut de qualité rend l'action irrecevable.",
+   "answer": true,
+   "explanation": "Fin de non-recevoir.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "droit-l3-procedure-civile-execution-proc-instance"
+  },
+  {
+   "id": "droit-l3-procedure-civile-execution-proc-instance-e09",
+   "kind": "mcq",
+   "tier": "application",
+   "lesson": "droit-l3-procedure-civile-execution-action-en-justice",
+   "source": "Exercice original écrit pour CastBridge, niveau Licence 3 de droit",
+   "prompt": "Une fin de non-recevoir est :",
+   "choices": [
+    "Une saisie",
+    "Un jugement sur le fond",
+    "Un moyen qui empêche d'examiner le fond",
+    "Un contrat"
+   ],
+   "answer": 2,
+   "explanation": "Irrecevabilité.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "droit-l3-procedure-civile-execution-proc-instance"
+  },
+  {
+   "id": "droit-l3-procedure-civile-execution-proc-instance-e10",
+   "kind": "open",
+   "tier": "approfondissement",
+   "lesson": "droit-l3-procedure-civile-execution-action-en-justice",
+   "source": "Exercice original écrit pour CastBridge, niveau Licence 3 de droit",
+   "prompt": "Distinguez irrecevabilité et rejet au fond.",
+   "model": "L'irrecevabilité écarte la demande sans l'examiner (qualité, intérêt, prescription) ; le rejet au fond intervient après examen du droit, quand la demande n'est pas justifiée.",
+   "rubric": [
+    "Irrecevabilité sans examen (1)",
+    "Rejet au fond après examen (1)"
+   ],
+   "explanation": "L'irrecevabilité écarte la demande sans l'examiner (qualité, intérêt, prescription) ; le rejet au fond intervient après examen du droit, quand la demande n'est pas justifiée.",
+   "difficulty": 2,
+   "points": 3,
+   "chapter": "droit-l3-procedure-civile-execution-proc-instance"
+  },
+  {
+   "id": "droit-l3-procedure-civile-execution-proc-instance-e11",
+   "kind": "truefalse",
+   "tier": "approfondissement",
+   "lesson": "droit-l3-procedure-civile-execution-action-en-justice",
+   "source": "Exercice original écrit pour CastBridge, niveau Licence 3 de droit",
+   "prompt": "Un mineur peut toujours agir seul en justice.",
+   "answer": false,
+   "explanation": "Il doit être représenté.",
+   "difficulty": 2,
+   "points": 2,
+   "chapter": "droit-l3-procedure-civile-execution-proc-instance"
+  },
+  {
+   "id": "droit-l3-procedure-civile-execution-proc-instance-e12",
+   "kind": "problem",
+   "tier": "examen",
+   "lesson": "droit-l3-procedure-civile-execution-action-en-justice",
+   "source": "Exercice original écrit pour CastBridge, niveau Licence 3 de droit",
+   "prompt": "Une association de quartier de Bafoussam assigne un entrepreneur pour un préjudice subi uniquement par un riverain.",
+   "difficulty": 3,
+   "parts": [
+    {
+     "kind": "mcq",
+     "points": 1,
+     "prompt": "Le défaut probable est :",
+     "choices": [
+      "Un défaut de couleur",
+      "Un défaut de TVA",
+      "Un défaut de timbre",
+      "Un défaut de qualité ou d'intérêt"
+     ],
+     "answer": 3,
+     "explanation": "Elle n'est pas titulaire du droit.",
+     "id": "droit-l3-procedure-civile-execution-proc-instance-e12-a"
+    },
+    {
+     "kind": "truefalse",
+     "points": 1,
+     "prompt": "Le juge examine d'abord la recevabilité.",
+     "answer": true,
+     "explanation": "Ordre de l'examen.",
+     "id": "droit-l3-procedure-civile-execution-proc-instance-e12-b"
+    },
+    {
+     "kind": "open",
+     "points": 2,
+     "prompt": "Que peut faire le riverain ?",
+     "model": "Agir lui-même ou donner mandat à un représentant qualifié.",
+     "rubric": [
+      "Agir en personne",
+      "Mandat"
+     ],
+     "explanation": "Agir lui-même ou donner mandat à un représentant qualifié.",
+     "id": "droit-l3-procedure-civile-execution-proc-instance-e12-c"
+    }
+   ],
+   "chapter": "droit-l3-procedure-civile-execution-proc-instance"
+  },
+  {
+   "id": "droit-l3-procedure-civile-execution-action-en-justice-q1",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "droit-l3-procedure-civile-execution-action-en-justice",
+   "prompt": "Qualité pour agir :",
+   "choices": [
+    "Être riche",
+    "Être majeur seulement",
+    "Être titulaire du droit ou représentant",
+    "Être avocat"
+   ],
+   "answer": 2,
+   "explanation": "Définition.",
+   "chapter": "droit-l3-procedure-civile-execution-proc-instance"
+  },
+  {
+   "id": "droit-l3-procedure-civile-execution-action-en-justice-q2",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "droit-l3-procedure-civile-execution-action-en-justice",
+   "prompt": "Capacité d'agir :",
+   "choices": [
+    "Aptitude à exercer ses droits en justice",
+    "Prix du timbre",
+    "Couleur du juge",
+    "Taille du tribunal"
+   ],
+   "answer": 0,
+   "explanation": "Notion de capacité.",
+   "chapter": "droit-l3-procedure-civile-execution-proc-instance"
+  },
+  {
+   "id": "droit-l3-procedure-civile-execution-action-en-justice-q3",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "droit-l3-procedure-civile-execution-action-en-justice",
+   "prompt": "La chose jugée empêche :",
+   "choices": [
+    "D'assigner un tiers",
+    "De payer",
+    "De faire appel",
+    "De rejuger le même litige"
+   ],
+   "answer": 3,
+   "explanation": "Autorité de la chose jugée.",
+   "chapter": "droit-l3-procedure-civile-execution-proc-instance"
+  },
+  {
+   "id": "droit-l3-procedure-civile-execution-action-en-justice-q4",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "droit-l3-procedure-civile-execution-action-en-justice",
+   "prompt": "Une demande mal fondée est :",
+   "choices": [
+    "Annulée par le greffe",
+    "Irrecevable d'office",
+    "Examinée puis rejetée",
+    "Prescrite"
+   ],
+   "answer": 2,
+   "explanation": "Rejet au fond.",
+   "chapter": "droit-l3-procedure-civile-execution-proc-instance"
+  },
+  {
+   "id": "droit-l3-procedure-civile-execution-action-en-justice-q5",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "droit-l3-procedure-civile-execution-action-en-justice",
+   "prompt": "La prescription est :",
+   "choices": [
+    "Un jugement",
+    "Une saisie",
+    "Un moyen de preuve",
+    "Une fin de non-recevoir"
+   ],
+   "answer": 3,
+   "explanation": "Extinction par l'écoulement du temps.",
+   "chapter": "droit-l3-procedure-civile-execution-proc-instance"
+  },
+  {
+   "id": "droit-l3-procedure-civile-execution-proc-instance-e13",
+   "kind": "mcq",
+   "tier": "application",
+   "lesson": "droit-l3-procedure-civile-execution-competence",
+   "source": "Exercice original écrit pour CastBridge, niveau Licence 3 de droit",
+   "prompt": "En principe, le tribunal territorialement compétent est celui :",
+   "choices": [
+    "De la capitale",
+    "Du domicile du défendeur",
+    "Du greffier",
+    "Du demandeur"
+   ],
+   "answer": 1,
+   "explanation": "Règle de principe.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "droit-l3-procedure-civile-execution-proc-instance"
+  },
+  {
+   "id": "droit-l3-procedure-civile-execution-proc-instance-e14",
+   "kind": "truefalse",
+   "tier": "application",
+   "lesson": "droit-l3-procedure-civile-execution-competence",
+   "source": "Exercice original écrit pour CastBridge, niveau Licence 3 de droit",
+   "prompt": "La compétence d'attribution dépend du lieu seulement.",
+   "answer": false,
+   "explanation": "Elle dépend de la matière et de l'importance.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "droit-l3-procedure-civile-execution-proc-instance"
+  },
+  {
+   "id": "droit-l3-procedure-civile-execution-proc-instance-e15",
+   "kind": "mcq",
+   "tier": "application",
+   "lesson": "droit-l3-procedure-civile-execution-competence",
+   "source": "Exercice original écrit pour CastBridge, niveau Licence 3 de droit",
+   "prompt": "L'exception d'incompétence se soulève :",
+   "choices": [
+    "Avant toute défense au fond",
+    "Après le jugement",
+    "Jamais",
+    "Seulement à la Cour suprême"
+   ],
+   "answer": 0,
+   "explanation": "Moment clé.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "droit-l3-procedure-civile-execution-proc-instance"
+  },
+  {
+   "id": "droit-l3-procedure-civile-execution-proc-instance-e16",
+   "kind": "open",
+   "tier": "approfondissement",
+   "lesson": "droit-l3-procedure-civile-execution-competence",
+   "source": "Exercice original écrit pour CastBridge, niveau Licence 3 de droit",
+   "prompt": "Pourquoi retient-on le domicile du défendeur ?",
+   "model": "Pour protéger celui qu'on attaque : il ne doit pas être contraint de se défendre loin de chez lui ; c'est au demandeur de se déplacer.",
+   "rubric": [
+    "Protection du défendeur (1)",
+    "Équilibre de la procédure (1)"
+   ],
+   "explanation": "Pour protéger celui qu'on attaque : il ne doit pas être contraint de se défendre loin de chez lui ; c'est au demandeur de se déplacer.",
+   "difficulty": 2,
+   "points": 3,
+   "chapter": "droit-l3-procedure-civile-execution-proc-instance"
+  },
+  {
+   "id": "droit-l3-procedure-civile-execution-proc-instance-e17",
+   "kind": "truefalse",
+   "tier": "approfondissement",
+   "lesson": "droit-l3-procedure-civile-execution-competence",
+   "source": "Exercice original écrit pour CastBridge, niveau Licence 3 de droit",
+   "prompt": "Une clause attributive de juridiction est toujours illimitée.",
+   "answer": false,
+   "explanation": "Elle est encadrée.",
+   "difficulty": 2,
+   "points": 2,
+   "chapter": "droit-l3-procedure-civile-execution-proc-instance"
+  },
+  {
+   "id": "droit-l3-procedure-civile-execution-proc-instance-e18",
+   "kind": "problem",
+   "tier": "examen",
+   "lesson": "droit-l3-procedure-civile-execution-competence",
+   "source": "Exercice original écrit pour CastBridge, niveau Licence 3 de droit",
+   "prompt": "Une société de Douala assigne un client de Garoua devant le tribunal de Douala, en l'absence de toute clause.",
+   "difficulty": 3,
+   "parts": [
+    {
+     "kind": "mcq",
+     "points": 1,
+     "prompt": "Le client peut :",
+     "choices": [
+      "Payer deux fois",
+      "Ignorer l'assignation",
+      "Soulever l'incompétence du tribunal de Douala",
+      "Saisir le maire"
+     ],
+     "answer": 2,
+     "explanation": "Domicile du défendeur.",
+     "id": "droit-l3-procedure-civile-execution-proc-instance-e18-a"
+    },
+    {
+     "kind": "truefalse",
+     "points": 1,
+     "prompt": "Il doit soulever l'incompétence avant de discuter le fond.",
+     "answer": true,
+     "explanation": "Sinon l'exception est écartée.",
+     "id": "droit-l3-procedure-civile-execution-proc-instance-e18-b"
+    },
+    {
+     "kind": "open",
+     "points": 2,
+     "prompt": "Quel tribunal devrait être saisi ?",
+     "model": "En principe, celui du domicile du défendeur, à Garoua, sauf règle spéciale ou clause valable.",
+     "rubric": [
+      "Garoua",
+      "Règle de principe"
+     ],
+     "explanation": "En principe, celui du domicile du défendeur, à Garoua, sauf règle spéciale ou clause valable.",
+     "id": "droit-l3-procedure-civile-execution-proc-instance-e18-c"
+    }
+   ],
+   "chapter": "droit-l3-procedure-civile-execution-proc-instance"
+  },
+  {
+   "id": "droit-l3-procedure-civile-execution-competence-q1",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "droit-l3-procedure-civile-execution-competence",
+   "prompt": "La compétence matérielle dépend :",
+   "choices": [
+    "De la nature de l'affaire",
+    "De la ville du greffe",
+    "De la couleur du dossier",
+    "Du prix du timbre"
+   ],
+   "answer": 0,
+   "explanation": "Attribution.",
+   "chapter": "droit-l3-procedure-civile-execution-proc-instance"
+  },
+  {
+   "id": "droit-l3-procedure-civile-execution-competence-q2",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "droit-l3-procedure-civile-execution-competence",
+   "prompt": "Domicile du défendeur :",
+   "choices": [
+    "Règle exceptionnelle uniquement",
+    "Règle pénale",
+    "Règle de principe",
+    "Règle interdite"
+   ],
+   "answer": 2,
+   "explanation": "Compétence territoriale.",
+   "chapter": "droit-l3-procedure-civile-execution-proc-instance"
+  },
+  {
+   "id": "droit-l3-procedure-civile-execution-competence-q3",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "droit-l3-procedure-civile-execution-competence",
+   "prompt": "L'incompétence d'ordre public :",
+   "choices": [
+    "Peut être relevée d'office",
+    "Est toujours interdite",
+    "N'existe pas",
+    "Est soulevée par le préfet"
+   ],
+   "answer": 0,
+   "explanation": "Ordre public.",
+   "chapter": "droit-l3-procedure-civile-execution-proc-instance"
+  },
+  {
+   "id": "droit-l3-procedure-civile-execution-competence-q4",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "droit-l3-procedure-civile-execution-competence",
+   "prompt": "Une clause attributive de juridiction :",
+   "choices": [
+    "Supprime l'instance",
+    "Est une saisie",
+    "Désigne un tribunal par contrat",
+    "Désigne un huissier"
+   ],
+   "answer": 2,
+   "explanation": "Convention.",
+   "chapter": "droit-l3-procedure-civile-execution-proc-instance"
+  },
+  {
+   "id": "droit-l3-procedure-civile-execution-competence-q5",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "droit-l3-procedure-civile-execution-competence",
+   "prompt": "Immeuble litigieux :",
+   "choices": [
+    "Tribunal du lieu de situation souvent compétent",
+    "Aucun tribunal",
+    "Tribunal de la capitale",
+    "Tribunal du demandeur toujours"
+   ],
+   "answer": 0,
+   "explanation": "Règle spéciale.",
+   "chapter": "droit-l3-procedure-civile-execution-proc-instance"
+  },
+  {
+   "id": "droit-l3-procedure-civile-execution-proc-instance-e19",
+   "kind": "mcq",
+   "tier": "application",
+   "lesson": "droit-l3-procedure-civile-execution-instance-jugement",
+   "source": "Exercice original écrit pour CastBridge, niveau Licence 3 de droit",
+   "prompt": "L'instance commence généralement par :",
+   "choices": [
+    "Une assignation",
+    "Un appel",
+    "Un jugement",
+    "Une saisie"
+   ],
+   "answer": 0,
+   "explanation": "Saisine du juge.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "droit-l3-procedure-civile-execution-proc-instance"
+  },
+  {
+   "id": "droit-l3-procedure-civile-execution-proc-instance-e20",
+   "kind": "truefalse",
+   "tier": "application",
+   "lesson": "droit-l3-procedure-civile-execution-instance-jugement",
+   "source": "Exercice original écrit pour CastBridge, niveau Licence 3 de droit",
+   "prompt": "Le principe du contradictoire interdit de discuter les pièces adverses.",
+   "answer": false,
+   "explanation": "Il permet de les discuter.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "droit-l3-procedure-civile-execution-proc-instance"
+  },
+  {
+   "id": "droit-l3-procedure-civile-execution-proc-instance-e21",
+   "kind": "mcq",
+   "tier": "application",
+   "lesson": "droit-l3-procedure-civile-execution-instance-jugement",
+   "source": "Exercice original écrit pour CastBridge, niveau Licence 3 de droit",
+   "prompt": "Un jugement par défaut est rendu quand :",
+   "choices": [
+    "L'huissier se trompe",
+    "Le défendeur régulièrement cité ne comparaît pas",
+    "Le demandeur gagne",
+    "Le juge est absent"
+   ],
+   "answer": 1,
+   "explanation": "Défaut du défendeur.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "droit-l3-procedure-civile-execution-proc-instance"
+  },
+  {
+   "id": "droit-l3-procedure-civile-execution-proc-instance-e22",
+   "kind": "open",
+   "tier": "approfondissement",
+   "lesson": "droit-l3-procedure-civile-execution-instance-jugement",
+   "source": "Exercice original écrit pour CastBridge, niveau Licence 3 de droit",
+   "prompt": "Pourquoi le juge doit-il motiver son jugement ?",
+   "model": "Pour expliquer sa décision, permettre aux parties de la comprendre et d'exercer un recours éclairé, et garantir l'absence d'arbitraire.",
+   "rubric": [
+    "Explication (1)",
+    "Recours éclairé (1)",
+    "Contre l'arbitraire (1)"
+   ],
+   "explanation": "Pour expliquer sa décision, permettre aux parties de la comprendre et d'exercer un recours éclairé, et garantir l'absence d'arbitraire.",
+   "difficulty": 2,
+   "points": 3,
+   "chapter": "droit-l3-procedure-civile-execution-proc-instance"
+  },
+  {
+   "id": "droit-l3-procedure-civile-execution-proc-instance-e23",
+   "kind": "truefalse",
+   "tier": "approfondissement",
+   "lesson": "droit-l3-procedure-civile-execution-instance-jugement",
+   "source": "Exercice original écrit pour CastBridge, niveau Licence 3 de droit",
+   "prompt": "Une assignation irrégulière peut être sanctionnée.",
+   "answer": true,
+   "explanation": "Nullité possible.",
+   "difficulty": 2,
+   "points": 2,
+   "chapter": "droit-l3-procedure-civile-execution-proc-instance"
+  },
+  {
+   "id": "droit-l3-procedure-civile-execution-proc-instance-e24",
+   "kind": "problem",
+   "tier": "examen",
+   "lesson": "droit-l3-procedure-civile-execution-instance-jugement",
+   "source": "Exercice original écrit pour CastBridge, niveau Licence 3 de droit",
+   "prompt": "M. Nana assigne un locataire de Douala qui ne vient pas à l'audience.",
+   "difficulty": 3,
+   "parts": [
+    {
+     "kind": "mcq",
+     "points": 1,
+     "prompt": "Le jugement sera probablement :",
+     "choices": [
+      "Annulé d'office",
+      "Cassé",
+      "Par défaut, si l'assignation était régulière",
+      "Contradictoire"
+     ],
+     "answer": 2,
+     "explanation": "Défaut.",
+     "id": "droit-l3-procedure-civile-execution-proc-instance-e24-a"
+    },
+    {
+     "kind": "truefalse",
+     "points": 1,
+     "prompt": "Le locataire peut former opposition dans les délais.",
+     "answer": true,
+     "explanation": "Recours contre le jugement par défaut.",
+     "id": "droit-l3-procedure-civile-execution-proc-instance-e24-b"
+    },
+    {
+     "kind": "open",
+     "points": 2,
+     "prompt": "Quelle vérification préalable pour le juge ?",
+     "model": "Que l'assignation a été régulièrement délivrée et que la demande paraît fondée.",
+     "rubric": [
+      "Régularité de la citation",
+      "Bien-fondé"
+     ],
+     "explanation": "Que l'assignation a été régulièrement délivrée et que la demande paraît fondée.",
+     "id": "droit-l3-procedure-civile-execution-proc-instance-e24-c"
+    }
+   ],
+   "chapter": "droit-l3-procedure-civile-execution-proc-instance"
+  },
+  {
+   "id": "droit-l3-procedure-civile-execution-instance-jugement-q1",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "droit-l3-procedure-civile-execution-instance-jugement",
+   "prompt": "Qui délivre l'assignation ?",
+   "choices": [
+    "L'huissier de justice",
+    "Le maire",
+    "Le notaire",
+    "Le greffier"
+   ],
+   "answer": 0,
+   "explanation": "Acte d'huissier.",
+   "chapter": "droit-l3-procedure-civile-execution-proc-instance"
+  },
+  {
+   "id": "droit-l3-procedure-civile-execution-instance-jugement-q2",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "droit-l3-procedure-civile-execution-instance-jugement",
+   "prompt": "Le principe du contradictoire :",
+   "choices": [
+    "Remplace le juge",
+    "Supprime l'audience",
+    "Permet de discuter les pièces",
+    "Interdit les pièces"
+   ],
+   "answer": 2,
+   "explanation": "Droits de la défense.",
+   "chapter": "droit-l3-procedure-civile-execution-proc-instance"
+  },
+  {
+   "id": "droit-l3-procedure-civile-execution-instance-jugement-q3",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "droit-l3-procedure-civile-execution-instance-jugement",
+   "prompt": "Un jugement doit être :",
+   "choices": [
+    "Motivé",
+    "Secret",
+    "Anonyme",
+    "Verbal"
+   ],
+   "answer": 0,
+   "explanation": "Motivation obligatoire.",
+   "chapter": "droit-l3-procedure-civile-execution-proc-instance"
+  },
+  {
+   "id": "droit-l3-procedure-civile-execution-instance-jugement-q4",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "droit-l3-procedure-civile-execution-instance-jugement",
+   "prompt": "L'opposition est ouverte contre :",
+   "choices": [
+    "L'assignation",
+    "Une saisie",
+    "Tout arrêt de cassation",
+    "Le jugement par défaut"
+   ],
+   "answer": 3,
+   "explanation": "Recours.",
+   "chapter": "droit-l3-procedure-civile-execution-proc-instance"
+  },
+  {
+   "id": "droit-l3-procedure-civile-execution-instance-jugement-q5",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "droit-l3-procedure-civile-execution-instance-jugement",
+   "prompt": "La mise en état prépare :",
+   "choices": [
+    "La cassation",
+    "L'appel",
+    "L'audience",
+    "La saisie"
+   ],
+   "answer": 2,
+   "explanation": "Échange de pièces.",
+   "chapter": "droit-l3-procedure-civile-execution-proc-instance"
+  },
+  {
+   "id": "droit-l3-procedure-civile-execution-proc-instance-e25",
+   "kind": "mcq",
+   "tier": "application",
+   "lesson": "droit-l3-procedure-civile-execution-voies-de-recours",
+   "source": "Exercice original écrit pour CastBridge, niveau Licence 3 de droit",
+   "prompt": "L'appel est une voie :",
+   "choices": [
+    "Ordinaire",
+    "Pénale uniquement",
+    "Administrative",
+    "Extraordinaire"
+   ],
+   "answer": 0,
+   "explanation": "Voie ordinaire.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "droit-l3-procedure-civile-execution-proc-instance"
+  },
+  {
+   "id": "droit-l3-procedure-civile-execution-proc-instance-e26",
+   "kind": "truefalse",
+   "tier": "application",
+   "lesson": "droit-l3-procedure-civile-execution-voies-de-recours",
+   "source": "Exercice original écrit pour CastBridge, niveau Licence 3 de droit",
+   "prompt": "La tierce opposition appartient à un tiers lésé.",
+   "answer": true,
+   "explanation": "Cas typique.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "droit-l3-procedure-civile-execution-proc-instance"
+  },
+  {
+   "id": "droit-l3-procedure-civile-execution-proc-instance-e27",
+   "kind": "mcq",
+   "tier": "application",
+   "lesson": "droit-l3-procedure-civile-execution-voies-de-recours",
+   "source": "Exercice original écrit pour CastBridge, niveau Licence 3 de droit",
+   "prompt": "Un recours hors délai est :",
+   "choices": [
+    "Irrecevable",
+    "Prioritaire",
+    "Toujours accueilli",
+    "Gratuit"
+   ],
+   "answer": 0,
+   "explanation": "Délai impératif.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "droit-l3-procedure-civile-execution-proc-instance"
+  },
+  {
+   "id": "droit-l3-procedure-civile-execution-proc-instance-e28",
+   "kind": "open",
+   "tier": "approfondissement",
+   "lesson": "droit-l3-procedure-civile-execution-voies-de-recours",
+   "source": "Exercice original écrit pour CastBridge, niveau Licence 3 de droit",
+   "prompt": "Expliquez l'effet dévolutif de l'appel.",
+   "model": "L'appel transporte devant la cour la connaissance de l'affaire, dans la limite des chefs de décision critiqués : la cour rejuge en fait et en droit.",
+   "rubric": [
+    "Transfert de l'affaire (1)",
+    "Limites des chefs critiqués (1)",
+    "Fait et droit (1)"
+   ],
+   "explanation": "L'appel transporte devant la cour la connaissance de l'affaire, dans la limite des chefs de décision critiqués : la cour rejuge en fait et en droit.",
+   "difficulty": 2,
+   "points": 3,
+   "chapter": "droit-l3-procedure-civile-execution-proc-instance"
+  },
+  {
+   "id": "droit-l3-procedure-civile-execution-proc-instance-e29",
+   "kind": "truefalse",
+   "tier": "approfondissement",
+   "lesson": "droit-l3-procedure-civile-execution-voies-de-recours",
+   "source": "Exercice original écrit pour CastBridge, niveau Licence 3 de droit",
+   "prompt": "Le pourvoi en cassation est un troisième degré de juridiction.",
+   "answer": false,
+   "explanation": "Il contrôle seulement le droit.",
+   "difficulty": 2,
+   "points": 2,
+   "chapter": "droit-l3-procedure-civile-execution-proc-instance"
+  },
+  {
+   "id": "droit-l3-procedure-civile-execution-proc-instance-e30",
+   "kind": "problem",
+   "tier": "examen",
+   "lesson": "droit-l3-procedure-civile-execution-voies-de-recours",
+   "source": "Exercice original écrit pour CastBridge, niveau Licence 3 de droit",
+   "prompt": "Le tribunal de Douala a rendu un jugement dont M. Kamdem veut faire appel. Il tarde et agit après l'expiration du délai.",
+   "difficulty": 3,
+   "parts": [
+    {
+     "kind": "mcq",
+     "points": 1,
+     "prompt": "Son appel sera :",
+     "choices": [
+      "Cassé",
+      "Reporté",
+      "Toujours reçu",
+      "Irrecevable"
+     ],
+     "answer": 3,
+     "explanation": "Délai dépassé.",
+     "id": "droit-l3-procedure-civile-execution-proc-instance-e30-a"
+    },
+    {
+     "kind": "truefalse",
+     "points": 1,
+     "prompt": "Le jugement devient définitif lorsque les voies ordinaires sont épuisées.",
+     "answer": true,
+     "explanation": "Autorité de chose jugée.",
+     "id": "droit-l3-procedure-civile-execution-proc-instance-e30-b"
+    },
+    {
+     "kind": "open",
+     "points": 2,
+     "prompt": "Quel conseil donner ?",
+     "model": "Faire appel sans délai dès la signification, en consultant un avocat pour respecter les formes.",
+     "rubric": [
+      "Rapidité",
+      "Respect des formes"
+     ],
+     "explanation": "Faire appel sans délai dès la signification, en consultant un avocat pour respecter les formes.",
+     "id": "droit-l3-procedure-civile-execution-proc-instance-e30-c"
+    }
+   ],
+   "chapter": "droit-l3-procedure-civile-execution-proc-instance"
+  },
+  {
+   "id": "droit-l3-procedure-civile-execution-voies-de-recours-q1",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "droit-l3-procedure-civile-execution-voies-de-recours",
+   "prompt": "L'opposition vise :",
+   "choices": [
+    "La saisie",
+    "Le jugement par défaut",
+    "L'assignation",
+    "Le contrat"
+   ],
+   "answer": 1,
+   "explanation": "Recours du défaillant.",
+   "chapter": "droit-l3-procedure-civile-execution-proc-instance"
+  },
+  {
+   "id": "droit-l3-procedure-civile-execution-voies-de-recours-q2",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "droit-l3-procedure-civile-execution-voies-de-recours",
+   "prompt": "La révision est possible :",
+   "choices": [
+    "Dans des cas limités",
+    "Jamais",
+    "Sans conditions",
+    "Toujours"
+   ],
+   "answer": 0,
+   "explanation": "Voie extraordinaire.",
+   "chapter": "droit-l3-procedure-civile-execution-proc-instance"
+  },
+  {
+   "id": "droit-l3-procedure-civile-execution-voies-de-recours-q3",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "droit-l3-procedure-civile-execution-voies-de-recours",
+   "prompt": "Effet suspensif :",
+   "choices": [
+    "Supprime la dette",
+    "Suspend l'exécution",
+    "Accélère le procès",
+    "Annule la décision"
+   ],
+   "answer": 1,
+   "explanation": "Principe.",
+   "chapter": "droit-l3-procedure-civile-execution-proc-instance"
+  },
+  {
+   "id": "droit-l3-procedure-civile-execution-voies-de-recours-q4",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "droit-l3-procedure-civile-execution-voies-de-recours",
+   "prompt": "L'exécution provisoire :",
+   "choices": [
+    "Concerne seulement la Cour suprême",
+    "Supprime l'appel",
+    "Interdit tout recours",
+    "Permet d'exécuter malgré l'appel"
+   ],
+   "answer": 3,
+   "explanation": "Mesure du juge.",
+   "chapter": "droit-l3-procedure-civile-execution-proc-instance"
+  },
+  {
+   "id": "droit-l3-procedure-civile-execution-voies-de-recours-q5",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "droit-l3-procedure-civile-execution-voies-de-recours",
+   "prompt": "La cassation contrôle :",
+   "choices": [
+    "L'application du droit",
+    "Les faits seulement",
+    "La couleur de l'huissier",
+    "Les émotions"
+   ],
+   "answer": 0,
+   "explanation": "Pas un troisième degré.",
+   "chapter": "droit-l3-procedure-civile-execution-proc-instance"
+  }
+ ]
+}

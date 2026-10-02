@@ -264,4 +264,23 @@ class LicenseWebTest extends LicenseTestBase {
         // the support account sees the page but cannot decide
         assertThat(call(SUPPORT_USER, HttpMethod.POST, "/admin/licenses/registry/conflicts/" + conflict.id(), "decision", "reject", "reason", "essai")).isEqualTo(403);
     }
+
+    @Test
+    void issuePageOffersTheDurationShowsThePropertiesAndTheTrialWindowNote() throws Exception {
+        String form = mvc.perform(get("/admin/licenses/issue").with(as(BOSS))).andExpect(status().isOk()).andReturn().getResponse().getContentAsString();
+        assertThat(form).contains("name=\"usageDays\"")
+                .contains("La fenêtre de lots d'essai est ajoutée par les outils du propriétaire (bureau ou téléphone), pas par le serveur.");
+        var l = license(1);
+        String ok = mvc.perform(post("/admin/licenses/issue").with(csrf()).with(as(BOSS)).param("licenseId", l.licenseId()).param("deviceRequest", dev().text()).param("usageDays", "62"))
+                .andExpect(status().isOk()).andReturn().getResponse().getContentAsString();
+        assertThat(ok).contains("Propriétés de la clé").contains("production").contains("62 jours").contains("fin le");
+        var l2 = license(1);
+        String unl = mvc.perform(post("/admin/licenses/issue").with(csrf()).with(as(BOSS)).param("licenseId", l2.licenseId()).param("deviceRequest", dev().text()))
+                .andExpect(status().isOk()).andReturn().getResponse().getContentAsString();
+        assertThat(unl).contains("illimitée").doesNotContain("fin le");
+        var l3 = license(1);
+        String bad = mvc.perform(post("/admin/licenses/issue").with(csrf()).with(as(BOSS)).param("licenseId", l3.licenseId()).param("deviceRequest", dev().text()).param("usageDays", "4000"))
+                .andExpect(status().isOk()).andReturn().getResponse().getContentAsString();
+        assertThat(bad).contains("1 à 3660").doesNotContain("cbx1.");
+    }
 }

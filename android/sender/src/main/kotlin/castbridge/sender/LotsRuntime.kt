@@ -12,6 +12,11 @@ import android.content.SharedPreferences
 import android.net.ConnectivityManager
 import android.net.NetworkCapabilities
 import android.util.Log
+import castbridge.core.langues.Lang
+import castbridge.core.langues.LangLevel
+import castbridge.core.langues.LangLots
+import castbridge.core.langues.LangPlanner
+import castbridge.core.langues.LearnerLang
 import castbridge.core.lots.*
 import castbridge.core.net.HttpLite
 import castbridge.core.trust.TvAuth
@@ -69,11 +74,33 @@ object LotsRuntime {
     val catalog: LotManifest? get() = sp.getString("catalog", null)?.let { runCatching { LotManifest.parse(it) }.getOrNull() }
     val firstSyncDone: Boolean get() = sp.getBoolean("first_sync", false)
 
-    fun needs(): List<Need> = LotPlanner.needsOf(listOf(ProfileNeed(selectedScopes.sorted(), active = true)))
-    fun protect(id: LotId) = id.scope in selectedScopes
+    /**
+     * The learner profile of the « Langues » category (docs/LANGUES.md): target language, start language, level. Kept on the phone only
+     * (SharedPreferences); null while no target language is chosen, so nothing about languages is downloaded or sent to the TV.
+     */
+    var langTarget: Lang? get() = Lang.of(sp.getString("lang_target", null)); private set(v) { sp.edit().putString("lang_target", v?.code).apply() }
+    var langSource: Lang get() = Lang.of(sp.getString("lang_source", null))?.takeIf { it in Lang.sources } ?: Lang.FR; private set(v) { sp.edit().putString("lang_source", v.code).apply() }
+    var langLevel: LangLevel get() = LangLevel.of(sp.getString("lang_level", null)) ?: LangLevel.A0; private set(v) { sp.edit().putString("lang_level", v.key).apply() }
+    val learner: LearnerLang? get() = langTarget?.takeIf { it != langSource }?.let { LearnerLang(it, langSource, langLevel) }
+
+    /** Saves the profile (the target must differ from the start language, otherwise it is cleared) and refreshes the TV queue at once. */
+    fun setLearner(target: Lang?, source: Lang, level: LangLevel) {
+        langSource = source; langLevel = level; langTarget = target?.takeIf { it != source }
+        PhoneConnect.changed(); enqueueDefaultTv()
+    }
+
+    /** Language text lots known to the phone (announced by the last catalog, or already held): the planner picks the learner's among them. */
+    private fun languageLots(): List<LotMeta> = if (learner == null) emptyList() else (catalog?.lots.orEmpty() + store.catalog()).filter { it.id.feature == LangLots.FEATURE }
+
+    /** Classes first, then the learner's language text lots (`langues`; `langues-media` is not delivered to the TV yet). */
+    fun needs(): List<Need> = LotPlanner.needsOf(listOf(ProfileNeed(selectedScopes.sorted(), active = true))) + LangPlanner.needs(learner, languageLots())
+    fun protect(id: LotId) = id.scope in selectedScopes || (id.feature == LangLots.FEATURE && learner?.let { LangPlanner.rank(it, id) } != null)
+
+    /** The classes of the catalog (Apprendre and Quiz lots only: language lots are chosen with the profile, not as classes). */
+    fun classScopes(): List<String> = catalog?.lots?.filter { it.id.feature == "learn" || it.id.feature == "quiz" }?.map { it.id.scope }?.distinct()?.sorted().orEmpty()
 
     /** Total size of the lots of [scopes] announced by the last catalog (the wizard's estimate). */
-    fun estimate(scopes: Set<String>): Long = catalog?.lots?.filter { it.id.scope in scopes }?.sumOf { it.bytes } ?: 0L
+    fun estimate(scopes: Set<String>): Long = catalog?.lots?.filter { (it.id.feature == "learn" || it.id.feature == "quiz") && it.id.scope in scopes }?.sumOf { it.bytes } ?: 0L
 
     // ---- phone <-> server ----
 

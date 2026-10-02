@@ -12,6 +12,8 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.window.Dialog
 import androidx.compose.ui.window.DialogProperties
+import castbridge.core.langues.Lang
+import castbridge.core.langues.LangLevel
 import castbridge.core.lots.*
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -52,7 +54,7 @@ fun LotsScreen(onClose: () -> Unit) {
                     val used = store.usedBytes()
                     Text("Sur le téléphone : ${LotStore.mo(used)} sur ${LotStore.mo(store.maxBytes)}", style = MaterialTheme.typography.titleMedium)
                     LinearProgressIndicator(progress = { (used.toFloat() / store.maxBytes).coerceIn(0f, 1f) }, Modifier.fillMaxWidth())
-                    listOf("learn" to "Apprendre", "quiz" to "Quiz").forEach { (f, label) ->
+                    listOf("learn" to "Apprendre", "quiz" to "Quiz", "langues" to "Langues").forEach { (f, label) ->
                         Text("$label : ${LotStore.mo(store.usedBytes(f))}", style = MaterialTheme.typography.bodyMedium)
                     }
                     Text(
@@ -80,6 +82,8 @@ fun LotsScreen(onClose: () -> Unit) {
                     }
                     HorizontalDivider()
                     Wizard(busy) { message = it }
+                    HorizontalDivider()
+                    LanguagesSection(busy) { message = it }
                     HorizontalDivider()
 
                     // ---- lots ----
@@ -131,8 +135,7 @@ fun LotsScreen(onClose: () -> Unit) {
 private fun Wizard(busy: Boolean, onMessage: (String?) -> Unit) {
     val scope = rememberCoroutineScope()
     var picked by remember { mutableStateOf(LotsRuntime.selectedScopes) }
-    val cat = LotsRuntime.catalog
-    val scopes = cat?.lots?.map { it.id.scope }?.distinct()?.sorted().orEmpty()
+    val scopes = LotsRuntime.classScopes()
     Text(if (LotsRuntime.firstSyncDone) "Classes et niveaux gardés" else "Premier téléchargement : choisissez vos classes", style = MaterialTheme.typography.titleMedium)
     if (scopes.isEmpty()) {
         Text("La liste des classes n'est pas encore connue : connectez le téléphone à Internet puis actualisez.", style = MaterialTheme.typography.bodyMedium)
@@ -151,5 +154,42 @@ private fun Wizard(busy: Boolean, onMessage: (String?) -> Unit) {
             LotsRuntime.selectedScopes = picked
             scope.launch { onMessage(withContext(Dispatchers.IO) { LotsRuntime.syncNow(userAsked = true) }) }
         }) { Text("Télécharger") }
+    }
+}
+
+/**
+ * « Langues » (docs/LANGUES.md): the learner profile (language to learn, language you start from, level). The phone downloads the matching
+ * text lots and sends them to the TV like Apprendre and Quiz. Audio lots (`langues-media`) are not delivered to the TV yet.
+ */
+@Composable
+private fun LanguagesSection(busy: Boolean, onMessage: (String?) -> Unit) {
+    val scope = rememberCoroutineScope()
+    var target by remember { mutableStateOf(LotsRuntime.langTarget) }
+    var source by remember { mutableStateOf(LotsRuntime.langSource) }
+    var level by remember { mutableStateOf(LotsRuntime.langLevel) }
+    fun save() { LotsRuntime.setLearner(target, source, level); target = LotsRuntime.langTarget }
+    Text("Langues", style = MaterialTheme.typography.titleMedium)
+    Text("Choisissez la langue à apprendre, celle dont vous partez et votre niveau : le téléphone télécharge les leçons correspondantes et les envoie à la TV.",
+        style = MaterialTheme.typography.bodySmall, color = MaterialTheme.colorScheme.onSurfaceVariant)
+    PickerRow("Langue à apprendre", target?.fr ?: "Aucune", listOf<Lang?>(null) + Lang.entries.filter { it != source }, { it?.fr ?: "Aucune" }) { target = it; save() }
+    PickerRow("Langue de départ", source.fr, Lang.sources, { it.fr }) { source = it; save() }
+    PickerRow("Niveau", "${level.name.let { if (level == LangLevel.NATIF) "Natif" else it }} (${level.cefr})", LangLevel.entries, { if (it == LangLevel.NATIF) "Natif (${it.cefr})" else "${it.name} (${it.cefr})" }) { level = it; save() }
+    Button(enabled = !busy && LotsRuntime.learner != null, onClick = {
+        scope.launch { onMessage(withContext(Dispatchers.IO) { LotsRuntime.refreshCatalog(); LotsRuntime.syncNow(userAsked = true) }) }
+    }) { Text("Télécharger mes leçons de langue") }
+    Text("L'audio des leçons (lots média) n'est pas encore envoyé à la TV : seuls les textes le sont pour l'instant.", style = MaterialTheme.typography.bodySmall, color = MaterialTheme.colorScheme.onSurfaceVariant)
+}
+
+@Composable
+private fun <T> PickerRow(label: String, current: String, options: List<T>, text: (T) -> String, onPick: (T) -> Unit) {
+    var open by remember { mutableStateOf(false) }
+    Row(verticalAlignment = Alignment.CenterVertically) {
+        Text(label, Modifier.weight(1f), style = MaterialTheme.typography.bodyMedium)
+        Box {
+            OutlinedButton(onClick = { open = true }) { Text(current) }
+            DropdownMenu(expanded = open, onDismissRequest = { open = false }) {
+                options.forEach { o -> DropdownMenuItem(text = { Text(text(o)) }, onClick = { open = false; onPick(o) }) }
+            }
+        }
     }
 }

@@ -117,7 +117,7 @@ class LicenseLifecycleTest extends LicenseTestBase {
         var t = issue(trial.licenseId(), dev());
         assertThat(decode(t).kind()).isEqualTo("trial");
         assertThat(decode(t).license()).isEqualTo("trial");
-        assertThat(decode(t).rights()).isEmpty();
+        assertThat(decode(t).rights()).hasSize(1).allMatch(r -> r.startsWith("usage|duree|"));
         assertThatThrownBy(() -> issue(trial.licenseId(), dev())).hasMessageContaining("Plus de poste");
     }
 

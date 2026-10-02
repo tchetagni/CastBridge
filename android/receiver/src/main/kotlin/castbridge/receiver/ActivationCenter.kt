@@ -80,7 +80,15 @@ object ActivationCenter {
 
     fun state(): GateState { if (!ready) init(app); return FeatureGate.state(requirement, access(), now(), migration) }
     fun locked(): Boolean = state() is GateState.Locked
+
+    /** A TRIAL key only (with the activation requirement on): copy / move, downloads, the library and every game but the Sudoku are closed ([castbridge.core.owner.TrialPolicy]). */
+    fun trial(): Boolean = BuildConfig.REQUIRE_ACTIVATION && ready && access().trial
+
+    /** The edition and the key's properties, shown on every screen of the TV. */
+    fun badge(): castbridge.core.owner.Badge = castbridge.core.owner.KeyBadge.of(allActivations(), now(), if (ready) RentalHub.statuses(app) else emptyList())
     fun label(): String = access().label
+    /** Extra JSON fields of GET /api/activation: edition, badge, trial window... (see [castbridge.core.owner.KeyStatusJson]). */
+    fun statusFields(): String = castbridge.core.owner.KeyStatusJson.fields(allActivations(), now(), if (ready) RentalHub.statuses(app) else emptyList(), trial())
     fun graceUntil(): Long? = migration.graceUntil(requirement)
 
     /** In the grace period the activation screen is offered once a day (never again the same day). */

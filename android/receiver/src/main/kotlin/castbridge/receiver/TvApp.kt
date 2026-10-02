@@ -15,5 +15,6 @@ class TvApp : Application() {
         registerActivityLifecycleCallbacks(TvConnect.lifecycle)
         ParentalHub.init(this)                                          // parental control: local only (docs/PARENTAL.md)
         registerActivityLifecycleCallbacks(ParentalHub.lifecycle)
+        registerActivityLifecycleCallbacks(KeyBadgeOverlay)               // edition and key properties on every screen
     }
 }

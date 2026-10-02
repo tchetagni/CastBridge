@@ -26,6 +26,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import castbridge.core.lots.Right
 import castbridge.core.lots.RentalKeys
+import castbridge.core.lots.RentalLines
 import castbridge.core.owner.*
 import java.time.LocalDate
 import java.time.ZoneOffset
@@ -124,6 +125,7 @@ open class ConsoleActivity : ComponentActivity() {
         var field by remember { mutableStateOf(androidx.compose.ui.text.input.TextFieldValue("")) }
         if (field.text != input) field = androidx.compose.ui.text.input.TextFieldValue(input, androidx.compose.ui.text.TextRange(input.length))      // set from outside (Bluetooth read)
         var production by remember { mutableStateOf(false) }
+        var keyDays by remember { mutableStateOf("") }      // duration of the key: empty = trial 30 days / production unlimited
         var superUnlimited by remember { mutableStateOf(false) }; var license by remember { mutableStateOf("") }
         var purchase by remember { mutableStateOf("") }; var subscription by remember { mutableStateOf("") }
         var rental by remember { mutableStateOf("") }
@@ -163,6 +165,8 @@ open class ConsoleActivity : ComponentActivity() {
                 val t = castbridge.core.owner.DeviceCode.typing(v.text)
                 field = if (t == v.text) v else androidx.compose.ui.text.input.TextFieldValue(t, androidx.compose.ui.text.TextRange(t.length)); input = t; token = null; error = null }, label = { Text("Code d'appareil (XXXX-XXXX-XXXX-XXXX) ou demande d'appareil complète") },
                 modifier = Modifier.fillMaxWidth().heightIn(min = 90.dp))
+            OutlinedTextField(keyDays, { keyDays = it.filter { c -> c.isDigit() || c.isLetter() }.take(10) }, singleLine = true, modifier = Modifier.fillMaxWidth(),
+                label = { Text(if (production) "Durée de la clé : vide ou « illimitée » = jamais reverrouillée, ou un nombre de jours" else "Durée de la clé d'essai en jours (vide = ${ActivationPolicy.TRIAL_DEFAULT_DAYS})") })
             Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
                 FilterChip(!production, { production = false }, { Text("Essai") }); FilterChip(production, { production = true }, { Text("Production") })
             }
@@ -202,6 +206,18 @@ open class ConsoleActivity : ComponentActivity() {
                         }
                         val kind = if (production) ActivationKind.PRODUCTION else ActivationKind.TRIAL
                         val lic = if (production) license.trim() else Activation.TRIAL_LICENSE
+                        val unlimited = keyDays.isBlank() && production || keyDays.lowercase().startsWith("illimit")
+                        val days: Int? = if (unlimited) null else (keyDays.ifBlank { null }?.toIntOrNull() ?: if (keyDays.isBlank()) ActivationPolicy.TRIAL_DEFAULT_DAYS else throw IssueException("Durée de la clé : un nombre de jours${if (production) " ou « illimitée »" else ""}"))
+                        if (!production && days == null) throw IssueException("Un essai a toujours une durée (1 à ${ActivationPolicy.TRIAL_MAX_DAYS} jours)")
+                        if (superUnlimited && production && days != null) throw IssueException("SUPER_UNLIMITED est permanent : laissez la durée vide ou « illimitée »")
+                        if (days != null) {
+                            val max = if (production) ActivationPolicy.PRODUCTION_MAX_DAYS else ActivationPolicy.TRIAL_MAX_DAYS
+                            if (days !in 1..max) throw IssueException("Durée de la clé : 1 à $max jours")
+                            rights += Right.Usage(now, now + days * day)
+                        }
+                        // a TRIAL key also carries its one-time 12 h window of rented lots (the TV grants it once for the life of the application); it is never shown as a rental
+                        if (!production) rights += RentalIssuing.right(RentalSpec(RentalLines.TRIAL_PRODUCT, listOf(Right.ALL_BUNDLE), RentalLines.TRIAL_DAYS, RentalLines.TRIAL_USAGE_MINUTES),
+                            now, Activation.TRIAL_LICENSE, SeatIds.of(Activation.TRIAL_LICENSE, full.third), full.third, RentalKeys.masterFrom(signer))
                         val issued = issuer.issue(ActivationIssuer.Request(kind, full.first, full.third, issuedAt = now, rights = rights, license = lic))
                         token = issued.token; fileContent = issued.fileContent
                         store.journal(if (superUnlimited && production) "super" else "activation", full.first, kind.name, lic, ActivationPolicy.CODE_VALIDITY_HOURS)

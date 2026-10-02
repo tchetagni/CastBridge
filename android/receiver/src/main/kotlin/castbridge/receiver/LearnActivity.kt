@@ -85,8 +85,10 @@ class LearnActivity : Activity() {
         push(if (profile != null) LearnHomeScreen(this) else ProfilesScreen(this))
     }
 
-    override fun onResume() { super.onResume(); LearnHub.screen = this }
-    override fun onPause() { super.onPause(); if (LearnHub.screen === this) LearnHub.screen = null; LearnHub.save() }
+    private val meter = Handler(Looper.getMainLooper())
+    private val meterTick = object : Runnable { override fun run() { Thread { RentalHub.meterOneMinute(applicationContext) }.start(); meter.postDelayed(this, 60_000L) } }
+    override fun onResume() { super.onResume(); LearnHub.screen = this; meter.postDelayed(meterTick, 60_000L) }
+    override fun onPause() { super.onPause(); meter.removeCallbacks(meterTick); if (LearnHub.screen === this) LearnHub.screen = null; LearnHub.save() }
     override fun onDestroy() { stack.lastOrNull()?.leave(); runCatching { tts?.shutdown() }; super.onDestroy() }
 
     fun top(): Screen? = stack.lastOrNull()

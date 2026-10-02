@@ -25,6 +25,36 @@ public final class WireActivation {
         return rightLine.startsWith("usage|");
     }
 
+    /** The reserved product of the trial window (RentalLines.TRIAL_PRODUCT): the only rental a trial key may carry. */
+    public static final String TRIAL_PRODUCT = "essai";
+    public static final int TRIAL_DAYS = 3;
+    public static final int TRIAL_USAGE_MINUTES = 12 * 60;
+    private static final Pattern BOX = Pattern.compile("^[A-Za-z0-9_;:+-]{0,4096}$");
+
+    public static boolean isRental(String rightLine) {
+        return rightLine.startsWith("rental|");
+    }
+
+    /** What a TRIAL key may carry: usage ceilings and the reserved trial rental (never a purchase, a subscription or another rental). */
+    public static boolean isTrialRight(String rightLine) {
+        return isUsage(rightLine) || (isRental(rightLine) && rightLine.split("\\|", -1)[1].equals(TRIAL_PRODUCT));
+    }
+
+    /** Why a (well-formed) rental line is out of bounds, or null (mirror of RentalLines.bounds). */
+    public static String rentalBounds(String line) {
+        String[] f = line.split("\\|", -1);
+        long startsAt = Long.parseLong(f[3]), period = Long.parseLong(f[4]), grace = Long.parseLong(f[6]);
+        int days = Integer.parseInt(f[5]), maxUsage = Integer.parseInt(f[7]), maxConcurrent = Integer.parseInt(f[8]);
+        if (f[1].equals(TRIAL_PRODUCT) && (days < 1 || days > TRIAL_DAYS || maxUsage < 1 || maxUsage > TRIAL_USAGE_MINUTES || grace != 0)) return "trial window";
+        if (days < 1 || days > 366) return "days";
+        if (grace < 0 || grace > 30 * DAY_MS) return "grace";
+        if (maxUsage < 0 || maxUsage > 366 * 24 * 60) return "max usage";
+        if (maxConcurrent < 0 || maxConcurrent > 20) return "max concurrent";
+        if (startsAt <= 0 || period <= 0 || period > startsAt) return "dates";
+        if (f[2].isEmpty()) return "no bundle";
+        return null;
+    }
+
     public static boolean isSuper(String rightLine) {
         return rightLine.startsWith("super|");
     }
@@ -91,6 +121,17 @@ public final class WireActivation {
                     if (f.length != 4 || !f[1].equals("duree")) return false;
                     Long.parseLong(f[2]);
                     Long.parseLong(f[3]);
+                    return true;
+                }
+                case "rental" -> {    // rental|product|bundles|startsAt|period|days|graceMs|maxUsage|maxConcurrent|box
+                    if (f.length != 10 || !ID.matcher(f[1]).matches() || !BOX.matcher(f[9]).matches()) return false;
+                    if (!f[2].isEmpty()) for (String b : f[2].split(",", -1)) if (!ID.matcher(b).matches()) return false;
+                    Long.parseLong(f[3]);
+                    Long.parseLong(f[4]);
+                    Integer.parseInt(f[5]);
+                    Long.parseLong(f[6]);
+                    Integer.parseInt(f[7]);
+                    Integer.parseInt(f[8]);
                     return true;
                 }
                 case "super" -> {     // SUPER_UNLIMITED: super|<produit>|<date ms> (only the super administrator's key signs it)

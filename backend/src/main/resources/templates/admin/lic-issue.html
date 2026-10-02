@@ -19,6 +19,11 @@
                 <label>Appareil <select name="subject"><option value="tv" th:selected="${subject != 'phone'}">TV</option><option value="phone" th:selected="${subject == 'phone'}">Téléphone</option></select></label>
                 <label>Fenêtre d'installation (heures, 48 au plus) <input type="number" name="windowHours" min="1" max="48" th:placeholder="${defaultWindow}"></label>
             </div>
+            <div class="row">
+                <label>Durée de la clé (jours) <input type="text" name="usageDays" th:value="${usageDays}" maxlength="12" placeholder="essai : 30 par défaut (1 à 365) · production : illimitée par défaut, ou 1 à 3660"></label>
+            </div>
+            <p><small>Essai : de 1 à 365 jours, 30 par défaut, jamais illimité. Production : « illimitée » (laissez vide ou écrivez « illimitée » : la TV ne se verrouille plus) ou de 1 à 3660 jours. À la fin, la TV se verrouille et demande un nouveau code.
+                La sorte (essai ou production) est celle de la licence. La fenêtre de lots d'essai est ajoutée par les outils du propriétaire (bureau ou téléphone), pas par le serveur.</small></p>
             <label>Demande d'appareil <textarea name="deviceRequest" class="act" rows="8" required maxlength="2000" th:text="${deviceRequest}" placeholder="code=XXXX-XXXX-XXXX-XXXX&#10;k=4&#10;factor=FLASH|…"></textarea></label>
             <label class="check"><input type="checkbox" name="reissue"> Réémission : le poste existe déjà (ne consomme pas de poste)</label>
             <button type="submit">Émettre</button>
@@ -27,6 +32,7 @@
     <section class="card" th:if="${act != null}">
         <h2 th:text="${act.reused} ? 'Activation (réémise à l\'identique)' : 'Activation émise'"></h2>
         <p>Sorte <b th:text="${act.kind}"></b> · poste <b class="mono" th:text="${act.seatId}"></b> <span th:if="${act.newSeat}">(nouveau)</span> · installable jusqu'au <b th:text="${@fmt.date(act.notAfter)}"></b> · empreinte <span class="mono" th:text="${#strings.substring(act.fingerprint, 0, 12)}"></span></p>
+        <p id="act-props">Propriétés de la clé : édition <b th:text="${act.kind == 'TRIAL'} ? 'essai' : 'production'"></b> · durée <b th:text="${act.usageDays == null} ? 'illimitée' : ${act.usageDays} + ' jours'"></b><span th:if="${act.usageEnd != null}"> · fin le <b th:text="${@fmt.date(act.usageEnd)}"></b></span></p>
         <textarea id="act-text" class="act" readonly rows="6" th:text="${act.text}"></textarea>
         <p>
             <button type="button" data-copy="act-text">Copier</button>

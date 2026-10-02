@@ -169,6 +169,24 @@ class LanguesTest {
         assertEquals(1, p.skipped.size); assertEquals("zh-c1-presse-fr", p.skipped[0].first.id.scope)
         assertEquals(LangPlanner.textForTv(l, cat.reversed(), 2_500_000), p)   // deterministic
     }
+    @Test fun languageNeedsFeedTheTvPlannerLikeLearnAndQuiz() {
+        val l = LearnerLang(Lang.ZH, Lang.FR, LangLevel.A1)
+        val cat = listOf(lot("langues", "zh-a2-voyage-fr", 800_000), lot("langues", "zh-a1-salut-fr", 900_000), lot("langues", "zh-a1-salut-en", 100_000), lot("langues", "ja-a1-salut-fr", 100_000),
+            lot("langues-media", "zh-a1-salut", 80_000_000), lot("learn", "cm2", 1_000_000))
+        val needs = LangPlanner.needs(l, cat)
+        assertEquals(listOf("zh-a1-salut-fr", "zh-a2-voyage-fr"), needs.map { it.id.scope })          // own target and start language only, no media, no learn
+        assertTrue(needs.all { it.id.feature == "langues" && it.priority >= LangPlanner.NEED_BASE })
+        assertEquals(needs, LangPlanner.needs(l, cat.reversed() + cat))                                 // deterministic, duplicates collapse
+        assertEquals(emptyList(), LangPlanner.needs(null, cat))
+        // classes come first on a small TV: 10 Mo budget, starter 7 Mo: the class lots first, then the languages while they fit
+        val classes = castbridge.core.lots.LotPlanner.needsOf(listOf(castbridge.core.lots.ProfileNeed(listOf("cm2"), active = true)))
+        val phone = cat + lot("quiz", "cm2", 600_000)
+        val plan = castbridge.core.lots.LotPlanner.plan(classes + needs, phone, emptyList(), 7_000_000, 10_000_000)
+        assertEquals(listOf("quiz:cm2", "learn:cm2", "langues:zh-a1-salut-fr"), plan.wanted.map { it.id.feature + ":" + it.id.scope })
+        assertTrue(plan.wanted.indexOfFirst { it.id.feature == "learn" } < plan.wanted.indexOfFirst { it.id.feature == "langues" })
+        assertTrue(plan.skipped.any { it.meta.id.scope == "zh-a2-voyage-fr" })                          // does not fit: reported like any other lot
+        assertTrue(plan.wanted.none { it.id.feature == "langues-media" })
+    }
     @Test fun mediaIsPlayableOnlyWithItsTextTwin() {
         val t = LotId("langues", "zh-a1-salut-fr"); val m1 = LotId("langues-media", "zh-a1-salut"); val m2 = LotId("langues-media", "zh-a2-voyage")
         assertEquals(setOf(m1), LangPlanner.playableMedia(setOf(t), setOf(m1, m2)))

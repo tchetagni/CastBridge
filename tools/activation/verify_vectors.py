@@ -10,6 +10,7 @@ import base64
 import hashlib
 import json
 import os
+import re
 import sys
 
 from cryptography.exceptions import InvalidSignature
@@ -231,8 +232,42 @@ def parse_envelope(token):
         return None
 
 
+ID_RE = re.compile(r"^[a-z0-9][a-z0-9-]{0,63}$")
+BOX_RE = re.compile(r"^[A-Za-z0-9_;:+-]{0,4096}$")
+TRIAL_PRODUCT = "essai"
+
+
+def rental_ok(f):
+    try:
+        if len(f) != 10 or not ID_RE.match(f[1]) or not BOX_RE.match(f[9]):
+            return False
+        if f[2] and not all(ID_RE.match(b) for b in f[2].split(",")):
+            return False
+        for i in (3, 4, 5, 6, 7, 8):
+            int(f[i])
+        return True
+    except ValueError:
+        return False
+
+
+def rental_bounds_ok(line):
+    """Mirror of RentalLines.bounds: True when the (well-formed) rental line is within bounds."""
+    f = line.split("|")
+    starts, period, days, grace, usage, conc = int(f[3]), int(f[4]), int(f[5]), int(f[6]), int(f[7]), int(f[8])
+    if f[1] == TRIAL_PRODUCT and (not 1 <= days <= 3 or not 1 <= usage <= 720 or grace != 0):
+        return False
+    return (1 <= days <= 366 and 0 <= grace <= 30 * DAY and 0 <= usage <= 366 * 24 * 60 and 0 <= conc <= 20
+            and starts > 0 and 0 < period <= starts and f[2] != "")
+
+
+def trial_right_ok(line):
+    return line.startswith("usage|") or (line.startswith("rental|") and line.split("|")[1] == TRIAL_PRODUCT)
+
+
 def right_line_ok(line):
     f = line.split("|")
+    if f[0] == "rental":
+        return rental_ok(f)
     return (f[0] == "purchase" and len(f) == 4) or (f[0] == "subscription" and len(f) == 7) or (f[0] == "openall" and len(f) == 4) or (f[0] == "super" and len(f) == 3) or (f[0] == "usage" and len(f) == 4 and f[1] == "duree")
 
 
@@ -298,7 +333,9 @@ def verify_activation(c, keys, devices):
         return ("rejected", "KEY_NOT_ALLOWED")
     if any(is_super(r) for r in a["rights"]) and "SUPER_UNLIMITED" not in scopes:
         return ("rejected", "KEY_NOT_ALLOWED")
-    if a["kind"] == "trial" and any(not r.startswith("usage|") for r in a["rights"]):
+    if a["kind"] == "trial" and any(not trial_right_ok(r) for r in a["rights"]):
+        return ("rejected", "BAD_RIGHTS")
+    if any(r.startswith("rental|") and not rental_bounds_ok(r) for r in a["rights"]):
         return ("rejected", "BAD_RIGHTS")
     if any(int(o[3]) - int(o[2]) > MAX_OPEN_ALL or int(o[3]) <= int(o[2]) for o in opens):
         return ("rejected", "BAD_RIGHTS")
@@ -345,13 +382,15 @@ def issue_activation(c, keys, devices):
     if any(is_super(line) for line in r["rights"]) and "SUPER_UNLIMITED" not in scopes:
         return None
     if r["kind"] == "trial":
-        if "ISSUE_TRIAL" not in scopes or r["rights"] or r["license"] != "trial":
+        if "ISSUE_TRIAL" not in scopes or not all(trial_right_ok(x) for x in r["rights"]) or r["license"] != "trial":
             return None
     else:
         if not ({"ISSUE_PRODUCTION", "REACTIVATE"} & scopes) or not r["rights"]:
             return None
     for line in r["rights"]:
         f = line.split("|")
+        if f[0] == "rental" and not (rental_ok(f) and rental_bounds_ok(line)):
+            return None
         if f[0] == "openall" and ("COMMAND_OPEN_ALL" not in scopes or int(f[3]) - int(f[2]) > MAX_OPEN_ALL or int(f[3]) <= int(f[2])):
             return None
     fp = dev["fingerprints"]

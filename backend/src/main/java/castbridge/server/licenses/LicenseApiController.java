@@ -133,11 +133,11 @@ public class LicenseApiController {
      * @param deviceRequest the device's "demande d'appareil" (code=…, k=…, factor=TYPE|hash…): the code alone does not allow to build an activation
      * @param subject       tv (default) or phone
      */
-    public record IssueBody(String subject, String deviceRequest, String kind, List<String> productIds, Integer windowHours) {}
+    public record IssueBody(String subject, String deviceRequest, String kind, List<String> productIds, Integer windowHours, String usageDays) {}
 
     @PostMapping("/{licenseId}/activations")
     public ActivationService.Activation issue(@PathVariable String licenseId, @RequestBody IssueBody b) {
-        return activations.issue(actor(), new ActivationService.IssueRequest(licenseId, b.subject(), b.deviceRequest(), b.kind(), b.productIds(), b.windowHours()), "server-api");
+        return activations.issue(actor(), new ActivationService.IssueRequest(licenseId, b.subject(), b.deviceRequest(), b.kind(), b.productIds(), b.windowHours(), b.usageDays()), "server-api");
     }
 
     /** Re-issue: by seat id (the hardware is already on the seat) or from a pasted device request. */

@@ -21,6 +21,7 @@ import castbridge.core.owner.Channel
 import castbridge.core.owner.FeatureGate
 import castbridge.core.owner.GateState
 import castbridge.core.owner.LockedTexts
+import castbridge.core.owner.TrialPolicy
 import java.text.DateFormat
 import java.util.Date
 
@@ -33,6 +34,8 @@ class ActivationActivity : Activity() {
     private lateinit var status: TextView
     private lateinit var input: EditText
     private var done = false
+    /** Upgrade mode (trial -> production): nothing is locked, BACK returns to the home, the trial keeps working until a valid production key is accepted. */
+    private var upgrade = false
     private val poll = object : Runnable {
         override fun run() {
             if (done) return
@@ -53,6 +56,7 @@ class ActivationActivity : Activity() {
         ActivationCenter.init(this)
         TvService.start(this)                       // the service (and the owner Bluetooth channel) must run while this screen is up: a locked TV starts nothing else
         window.addFlags(android.view.WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON)
+        upgrade = intent.getBooleanExtra(EXTRA_UPGRADE, false) && ActivationCenter.trial()
         val state = ActivationCenter.state()
         fun tv(text: String, sp: Float, color: Int = Color.WHITE, bold: Boolean = false, mono: Boolean = false) = TextView(this).apply {
             this.text = text; textSize = sp; setTextColor(color); setPadding(0, 10, 0, 10)
@@ -62,12 +66,22 @@ class ActivationActivity : Activity() {
         col.addView(tv("CastBridge TV", 34f, 0xFFF5B027.toInt(), bold = true))
         col.addView(tv("Version ${BuildConfig.VERSION_NAME} (code ${BuildConfig.VERSION_CODE})", 20f, 0xFFF5B027.toInt(), bold = true))
         btLine = tv("Bluetooth d'activation : …", 16f, 0xFF7B849C.toInt()); col.addView(btLine)
-        col.addView(tv(LockedTexts.NOTICE_TITLE, 22f, 0xFFB8C0D6.toInt(), bold = true))
-        col.addView(tv(LockedTexts.NOTICE, 18f, 0xFFB8C0D6.toInt()))
+        if (upgrade) {
+            col.addView(tv(TrialPolicy.UPGRADE_TITLE, 30f, 0xFF6FE0A0.toInt(), bold = true))
+            col.addView(tv("Cette TV est en version d'essai.", 22f, 0xFFF5B027.toInt(), bold = true))
+            col.addView(tv(TrialPolicy.MESSAGE, 18f, 0xFFB8C0D6.toInt()))
+            col.addView(tv(ActivationCenter.badge().lines.firstOrNull().orEmpty(), 18f, 0xFFB8C0D6.toInt()))
+            col.addView(tv(TrialPolicy.UPGRADE_EXPLAIN, 18f, 0xFFB8C0D6.toInt()))
+            col.addView(Button(this).apply { text = "Retour à l'accueil (garder l'essai)"; textSize = 20f; setOnClickListener { goOn() } })
+        } else {
+            col.addView(tv(LockedTexts.NOTICE_TITLE, 22f, 0xFFB8C0D6.toInt(), bold = true))
+            col.addView(tv(LockedTexts.NOTICE, 18f, 0xFFB8C0D6.toInt()))
+        }
         if (state is GateState.Grace) col.addView(tv(LockedTexts.GRACE + "\nJusqu'au " + DateFormat.getDateInstance(DateFormat.LONG).format(Date(state.untilMs)) + ".", 18f, 0xFFF5B027.toInt()))
         col.addView(tv(LockedTexts.REQUEST, 22f, bold = true))
         col.addView(tv("Code d'appareil", 18f, 0xFFB8C0D6.toInt()))
         col.addView(tv(ActivationCenter.deviceCode, 54f, 0xFFF5B027.toInt(), bold = true, mono = true))
+        if (upgrade) { col.addView(tv("Demande d'appareil complète (à donner à CastBridge) :", 16f, 0xFFB8C0D6.toInt())); col.addView(tv(ActivationCenter.requestText(), 13f, 0xFF7B849C.toInt(), mono = true)) }
         col.addView(tv(LockedTexts.WAYS, 18f, 0xFFB8C0D6.toInt()))
         col.addView(tv("Recevoir la clé : copiez le fichier « activation » reçu dans le dossier Download/CastBridge d'une clé USB branchée sur la TV (lu automatiquement), ou saisissez la clé ci-dessous.", 18f))
         val where = tv("", 15f, 0xFF7B849C.toInt())
@@ -89,6 +103,7 @@ class ActivationActivity : Activity() {
         setContentView(ScrollView(this).apply { setBackgroundColor(0xFF0A0F1E.toInt()); addView(col) })
     }
 
+    companion object { const val EXTRA_UPGRADE = "upgrade" }
     private lateinit var btLine: TextView
     private lateinit var validate: Button
     private var askedVisible = false
@@ -109,7 +124,7 @@ class ActivationActivity : Activity() {
         when (r) {
             is ActivationResult.Accepted -> {
                 done = true
-                status.setTextColor(0xFF6FE0A0.toInt()); status.text = "Activée (${ActivationCenter.label()}). Ouverture…"
+                status.setTextColor(0xFF6FE0A0.toInt()); status.text = if (upgrade && !ActivationCenter.trial()) "${TrialPolicy.FULL_VERSION} : clé de production acceptée (${ActivationCenter.label()}). Ouverture…" else if (upgrade) "Clé acceptée, mais ce n'est pas une clé de production : l'essai continue (${ActivationCenter.label()}). Ouverture…" else "Activée (${ActivationCenter.label()}). Ouverture…"
                 h.postDelayed({ goOn() }, 1_200)
             }
             is ActivationResult.Rejected -> { status.setTextColor(0xFFFF8A80.toInt()); status.text = "Clé refusée par $from : ${r.message}" + if (r.suspect) "\nElle est valide mais pas pour cette TV : vérifiez le code d'appareil donné." else "" }

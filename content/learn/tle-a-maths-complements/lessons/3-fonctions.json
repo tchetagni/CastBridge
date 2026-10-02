@@ -1,0 +1,1064 @@
+{
+ "chapter": "tle-a-maths-complements-fonctions",
+ "lessons": [
+  {
+   "id": "tle-a-maths-complements-derivation",
+   "title": "Dérivation et variations d'une fonction",
+   "minutes": 30,
+   "programRef": "Tle A — Mathématiques de la série A : dénombrement, probabilités, suites, évolutions, statistiques, fonctions, second degré (programme officiel du MINESEC à vérifier)",
+   "status": "draft",
+   "author": "CastBridge (AI draft)",
+   "source": "Original writing following the Cameroonian curriculum; to be reviewed by a teacher",
+   "objectives": [
+    "Dériver sommes, produits et quotients simples.",
+    "Dresser un tableau de variations.",
+    "Déterminer l'équation d'une tangente."
+   ],
+   "prerequisites": [],
+   "exercises": [
+    "tle-a-maths-complements-fonctions-e01",
+    "tle-a-maths-complements-fonctions-e02",
+    "tle-a-maths-complements-fonctions-e03",
+    "tle-a-maths-complements-fonctions-e04",
+    "tle-a-maths-complements-fonctions-e05",
+    "tle-a-maths-complements-fonctions-e06"
+   ],
+   "selfCheck": [
+    "tle-a-maths-complements-derivation-q1",
+    "tle-a-maths-complements-derivation-q2",
+    "tle-a-maths-complements-derivation-q3",
+    "tle-a-maths-complements-derivation-q4",
+    "tle-a-maths-complements-derivation-q5"
+   ],
+   "reviewNotes": [
+    "Contenu et niveau exacts du programme de mathématiques de Tle A à vérifier sur le texte officiel ; tous les calculs ont été recalculés par programme.",
+    "Niveau de la dérivation en Tle A (polynômes, quotients) : à vérifier.",
+    "Syllabus references, scope and level of difficulty are to be checked against the official text; all facts, formulas and worked examples to be verified by a teacher before release."
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "formule",
+     "title": "Règles de dérivation",
+     "md": "$(x^n)' = n\\,x^{n-1}$ ; $(u+v)' = u' + v'$ ; $(k\\,u)' = k\\,u'$.\n\n$(u\\,v)' = u'v + u\\,v'$ ; $\\left(\\frac{u}{v}\\right)' = \\frac{u'v - u\\,v'}{v^2}$.\n\nExemples : $(x^3 - 3x^2 + 2)' = 3x^2 - 6x$."
+    },
+    {
+     "type": "key",
+     "style": "methode",
+     "title": "Étudier les variations",
+     "md": "1. **Calculer** $f'(x)$ et la **factoriser**.\n2. **Étudier son signe** : $f'(x) > 0$ → $f$ croît ; $f'(x) < 0$ → $f$ décroît.\n3. **Dresser le tableau** de variations avec les valeurs aux points où $f'$ s'annule.\n4. **Tangente** en $a$ : $y = f'(a)\\,(x - a) + f(a)$."
+    },
+    {
+     "type": "illustration",
+     "figure": {
+      "kind": "plot",
+      "xmin": -1,
+      "xmax": 3.5,
+      "ymin": -3,
+      "ymax": 4,
+      "grid": 1,
+      "w": 400,
+      "h": 260,
+      "curves": [
+       {
+        "expr": "x^3-3*x^2+2",
+        "color": "blue",
+        "label": "f"
+       }
+      ],
+      "points": [
+       {
+        "x": 0,
+        "y": 2,
+        "label": "max",
+        "color": "red"
+       },
+       {
+        "x": 2,
+        "y": -2,
+        "label": "min",
+        "color": "red"
+       }
+      ],
+      "segments": [],
+      "xlabel": "x",
+      "ylabel": "y"
+     },
+     "caption": "f(x) = x³ − 3x² + 2 : un maximum en 0, un minimum en 2.",
+     "alt": "Courbe de f de x au cube moins trois x au carré plus deux, avec un maximum au point (0 ; 2) et un minimum au point (2 ; moins 2)."
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Erreurs fréquentes",
+     "md": "- **Oublier de factoriser** $f'$ avant l'étude du signe.\n- Confondre **zéro de $f'$** et **zéro de $f$**.\n- Dériver $(uv)'$ comme $u'v'$.\n- Dans un quotient, **se tromper** de signe au numérateur.\n- Oublier $f(a)$ dans l'équation de la tangente."
+    },
+    {
+     "type": "example",
+     "title": "Exemple 1 : variations",
+     "statement": "Étudiez les variations de $f(x) = x^3 - 3x^2 + 2$.",
+     "steps": [
+      {
+       "md": "$f'(x) = 3x^2 - 6x = 3x(x-2)$.",
+       "tex": "f'(x)=3x(x-2)"
+      },
+      "$f' > 0$ si $x < 0$ ou $x > 2$ ; $f' < 0$ sur $]0 ; 2[$. Donc $f$ croît sur $]-\\infty ; 0]$, décroît sur $[0 ; 2]$, croît sur $[2 ; +\\infty[$ ; $f(0) = 2$ et $f(2) = -2$."
+     ],
+     "answer": "Maximum local f(0) = 2, minimum local f(2) = -2"
+    },
+    {
+     "type": "example",
+     "title": "Exemple 2 : tangente",
+     "statement": "Équation de la tangente à la courbe de $f$ au point d'abscisse 1.",
+     "steps": [
+      {
+       "md": "$f(1) = 1 - 3 + 2 = 0$ et $f'(1) = 3 - 6 = -3$.",
+       "tex": "f(1)=0 \\quad f'(1)=-3"
+      },
+      {
+       "md": "$y = -3(x - 1) + 0$, soit $y = -3x + 3$.",
+       "tex": "y=-3x+3"
+      }
+     ],
+     "answer": "y = −3x + 3"
+    }
+   ],
+   "chapter": "tle-a-maths-complements-fonctions"
+  },
+  {
+   "id": "tle-a-maths-complements-limites-asymptotes",
+   "title": "Limites et asymptotes d'une fonction rationnelle",
+   "minutes": 30,
+   "programRef": "Tle A — Mathématiques de la série A : dénombrement, probabilités, suites, évolutions, statistiques, fonctions, second degré (programme officiel du MINESEC à vérifier)",
+   "status": "draft",
+   "author": "CastBridge (AI draft)",
+   "source": "Original writing following the Cameroonian curriculum; to be reviewed by a teacher",
+   "objectives": [
+    "Calculer des limites en $\\pm\\infty$ et en un point.",
+    "Déterminer asymptotes horizontales et verticales.",
+    "Décrire le comportement d'une courbe."
+   ],
+   "prerequisites": [],
+   "exercises": [
+    "tle-a-maths-complements-fonctions-e07",
+    "tle-a-maths-complements-fonctions-e08",
+    "tle-a-maths-complements-fonctions-e09",
+    "tle-a-maths-complements-fonctions-e10",
+    "tle-a-maths-complements-fonctions-e11",
+    "tle-a-maths-complements-fonctions-e12"
+   ],
+   "selfCheck": [
+    "tle-a-maths-complements-limites-asymptotes-q1",
+    "tle-a-maths-complements-limites-asymptotes-q2",
+    "tle-a-maths-complements-limites-asymptotes-q3",
+    "tle-a-maths-complements-limites-asymptotes-q4",
+    "tle-a-maths-complements-limites-asymptotes-q5"
+   ],
+   "reviewNotes": [
+    "Contenu et niveau exacts du programme de mathématiques de Tle A à vérifier sur le texte officiel ; tous les calculs ont été recalculés par programme.",
+    "Niveau des limites en Tle A à vérifier.",
+    "Syllabus references, scope and level of difficulty are to be checked against the official text; all facts, formulas and worked examples to be verified by a teacher before release."
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "retenir",
+     "title": "Limites à l'infini",
+     "md": "Pour un **polynôme**, la limite en $\\pm\\infty$ est celle de son **terme de plus haut degré** : $\\lim_{x \\to +\\infty} (3x^3 - x) = +\\infty$.\n\nPour une **fraction rationnelle**, on garde les termes de plus haut degré du numérateur et du dénominateur : $\\lim_{x \\to +\\infty} \\frac{2x+1}{x-1} = \\lim \\frac{2x}{x} = 2$."
+    },
+    {
+     "type": "key",
+     "style": "definition",
+     "title": "Asymptotes",
+     "md": "- Si $\\lim_{x \\to \\pm\\infty} f(x) = L$ : la droite $y = L$ est **asymptote horizontale**.\n- Si $\\lim_{x \\to a} f(x) = \\pm\\infty$ : la droite $x = a$ est **asymptote verticale**.\n- Pour $f(x) = ax + b + \\frac{c}{x}$, la droite $y = ax + b$ est **asymptote oblique**."
+    },
+    {
+     "type": "illustration",
+     "figure": {
+      "kind": "plot",
+      "xmin": -3,
+      "xmax": 6,
+      "ymin": -6,
+      "ymax": 8,
+      "grid": 1,
+      "w": 400,
+      "h": 260,
+      "curves": [
+       {
+        "expr": "(2*x+1)/(x-1)",
+        "color": "blue",
+        "label": "g"
+       }
+      ],
+      "points": [],
+      "segments": [
+       {
+        "x1": 1,
+        "y1": -6,
+        "x2": 1,
+        "y2": 8,
+        "color": "red",
+        "dash": true,
+        "label": "x = 1"
+       },
+       {
+        "x1": -3,
+        "y1": 2,
+        "x2": 6,
+        "y2": 2,
+        "color": "green",
+        "dash": true,
+        "label": "y = 2"
+       }
+      ],
+      "xlabel": "x",
+      "ylabel": "y"
+     },
+     "caption": "Les asymptotes de g(x) = (2x+1)/(x−1).",
+     "alt": "Courbe de g avec une asymptote verticale d'équation x égale 1 et une asymptote horizontale d'équation y égale 2."
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Erreurs fréquentes",
+     "md": "- Écrire $\\frac{\\infty}{\\infty} = 1$ : c'est une **forme indéterminée**.\n- Oublier d'étudier le **signe** du dénominateur près de la valeur interdite.\n- Dire qu'une asymptote est **traversée jamais** : une courbe peut couper une asymptote horizontale.\n- Confondre **valeur interdite** et **asymptote** : il faut vérifier la limite.\n- Négliger la limite **à gauche** et **à droite**."
+    },
+    {
+     "type": "example",
+     "title": "Exemple 1 : asymptote horizontale",
+     "statement": "Étudiez la limite de $g(x) = \\frac{2x+1}{x-1}$ en $+\\infty$.",
+     "steps": [
+      {
+       "md": "On garde les termes dominants : $\\frac{2x}{x} = 2$.",
+       "tex": "\\lim_{x\\to+\\infty} g(x)=2"
+      },
+      "Donc la droite $y = 2$ est asymptote horizontale."
+     ],
+     "answer": "y = 2 est asymptote horizontale"
+    },
+    {
+     "type": "example",
+     "title": "Exemple 2 : asymptote verticale",
+     "statement": "Étudiez $g(x)$ quand $x \\to 1$ avec $x > 1$.",
+     "steps": [
+      {
+       "md": "Numérateur : $2 \\times 1 + 1 = 3 > 0$ ; dénominateur $x - 1 \\to 0^+$.",
+       "tex": "\\frac{3}{0^+}"
+      },
+      "Donc $g(x) \\to +\\infty$ : la droite $x = 1$ est asymptote verticale."
+     ],
+     "answer": "x = 1 est asymptote verticale ; limite +∞ à droite"
+    }
+   ],
+   "chapter": "tle-a-maths-complements-fonctions"
+  },
+  {
+   "id": "tle-a-maths-complements-second-degre",
+   "title": "Équations et inéquations du second degré",
+   "minutes": 30,
+   "programRef": "Tle A — Mathématiques de la série A : dénombrement, probabilités, suites, évolutions, statistiques, fonctions, second degré (programme officiel du MINESEC à vérifier)",
+   "status": "draft",
+   "author": "CastBridge (AI draft)",
+   "source": "Original writing following the Cameroonian curriculum; to be reviewed by a teacher",
+   "objectives": [
+    "Résoudre $ax^2 + bx + c = 0$.",
+    "Étudier le signe d'un trinôme.",
+    "Résoudre un problème qui se ramène au second degré."
+   ],
+   "prerequisites": [],
+   "exercises": [
+    "tle-a-maths-complements-fonctions-e13",
+    "tle-a-maths-complements-fonctions-e14",
+    "tle-a-maths-complements-fonctions-e15",
+    "tle-a-maths-complements-fonctions-e16",
+    "tle-a-maths-complements-fonctions-e17",
+    "tle-a-maths-complements-fonctions-e18"
+   ],
+   "selfCheck": [
+    "tle-a-maths-complements-second-degre-q1",
+    "tle-a-maths-complements-second-degre-q2",
+    "tle-a-maths-complements-second-degre-q3",
+    "tle-a-maths-complements-second-degre-q4",
+    "tle-a-maths-complements-second-degre-q5"
+   ],
+   "reviewNotes": [
+    "Contenu et niveau exacts du programme de mathématiques de Tle A à vérifier sur le texte officiel ; tous les calculs ont été recalculés par programme.",
+    "Syllabus references, scope and level of difficulty are to be checked against the official text; all facts, formulas and worked examples to be verified by a teacher before release."
+   ],
+   "blocks": [
+    {
+     "type": "key",
+     "style": "formule",
+     "title": "Discriminant et solutions",
+     "md": "Pour $ax^2 + bx + c = 0$ avec $a \\neq 0$ : $\\Delta = b^2 - 4ac$.\n- Si $\\Delta > 0$ : deux solutions $x_{1,2} = \\frac{-b \\pm \\sqrt{\\Delta}}{2a}$.\n- Si $\\Delta = 0$ : une solution $x_0 = \\frac{-b}{2a}$.\n- Si $\\Delta < 0$ : **aucune** solution réelle.\n**Somme** des racines : $-\\frac{b}{a}$ ; **produit** : $\\frac{c}{a}$."
+    },
+    {
+     "type": "key",
+     "style": "retenir",
+     "title": "Signe du trinôme",
+     "md": "Le trinôme $ax^2 + bx + c$ est du **signe de $a$** à l'extérieur des racines et du **signe contraire** entre les racines (si $\\Delta > 0$).\n\nPour $\\Delta \\leq 0$, il est du signe de $a$ partout (et nul en $x_0$ si $\\Delta = 0$)."
+    },
+    {
+     "type": "illustration",
+     "figure": {
+      "kind": "plot",
+      "xmin": -1,
+      "xmax": 6,
+      "ymin": -2,
+      "ymax": 4,
+      "grid": 1,
+      "w": 400,
+      "h": 250,
+      "curves": [
+       {
+        "expr": "x^2-5*x+6",
+        "color": "blue",
+        "label": "f"
+       }
+      ],
+      "points": [
+       {
+        "x": 2,
+        "y": 0,
+        "label": "2",
+        "color": "red"
+       },
+       {
+        "x": 3,
+        "y": 0,
+        "label": "3",
+        "color": "red"
+       }
+      ],
+      "segments": [],
+      "xlabel": "x",
+      "ylabel": "y"
+     },
+     "caption": "La parabole de x² − 5x + 6 coupe l'axe en 2 et en 3.",
+     "alt": "Parabole tournée vers le haut qui coupe l'axe des abscisses aux points 2 et 3."
+    },
+    {
+     "type": "key",
+     "style": "pieges",
+     "title": "Erreurs fréquentes",
+     "md": "- Se tromper de signe dans $-b$ : si $b = -5$, alors $-b = 5$.\n- Oublier la **racine carrée** de $\\Delta$.\n- Écrire $\\sqrt{b^2 - 4ac}$ sans calculer **d'abord** $\\Delta$.\n- Inverser le **sens de l'inégalité** dans l'étude du signe.\n- Oublier de **vérifier** les solutions dans le problème (longueur positive, etc.)."
+    },
+    {
+     "type": "example",
+     "title": "Exemple 1 : résoudre",
+     "statement": "Résolvez $x^2 - 5x + 6 = 0$ puis $x^2 - 5x + 6 < 0$.",
+     "steps": [
+      {
+       "md": "$\\Delta = 25 - 24 = 1$ ; $x = \\frac{5 \\pm 1}{2}$, soit $2$ et $3$.",
+       "tex": "x_1=2 \\quad x_2=3"
+      },
+      "$a = 1 > 0$ : le trinôme est **négatif entre les racines** : $S = ]2 ; 3[$."
+     ],
+     "answer": "Racines 2 et 3 ; inéquation : ]2 ; 3["
+    },
+    {
+     "type": "example",
+     "title": "Exemple 2 : problème",
+     "statement": "Un rectangle a un périmètre de 30 m et une aire de 54 m². Quelles sont ses dimensions ?",
+     "steps": [
+      {
+       "md": "Soit $x$ la longueur : largeur $15 - x$, aire $x(15 - x) = 54$, soit $x^2 - 15x + 54 = 0$.",
+       "tex": "x^2-15x+54=0"
+      },
+      "$\\Delta = 225 - 216 = 9$ ; $x = \\frac{15 \\pm 3}{2}$, soit $9$ ou $6$."
+     ],
+     "answer": "Dimensions 9 m et 6 m"
+    }
+   ],
+   "chapter": "tle-a-maths-complements-fonctions"
+  }
+ ],
+ "exercises": [
+  {
+   "id": "tle-a-maths-complements-fonctions-e01",
+   "kind": "numeric",
+   "tier": "application",
+   "lesson": "tle-a-maths-complements-derivation",
+   "source": "Exercice original écrit pour CastBridge, dans le style du programme de Terminale A",
+   "prompt": "Calculez $f'(2)$ pour $f(x) = x^2 - 5x$.",
+   "answer": -1,
+   "tolerance": 0,
+   "explanation": "f'(x)=2x-5, f'(2)=-1.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "tle-a-maths-complements-fonctions"
+  },
+  {
+   "id": "tle-a-maths-complements-fonctions-e02",
+   "kind": "numeric",
+   "tier": "application",
+   "lesson": "tle-a-maths-complements-derivation",
+   "source": "Exercice original écrit pour CastBridge, dans le style du programme de Terminale A",
+   "prompt": "Pour $f(x) = x^3 - 3x^2 + 2$, calculez $f(3)$.",
+   "answer": 2,
+   "tolerance": 0,
+   "explanation": "27-27+2 = 2.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "tle-a-maths-complements-fonctions"
+  },
+  {
+   "id": "tle-a-maths-complements-fonctions-e03",
+   "kind": "mcq",
+   "tier": "application",
+   "lesson": "tle-a-maths-complements-derivation",
+   "source": "Exercice original écrit pour CastBridge, dans le style du programme de Terminale A",
+   "prompt": "La dérivée de $3x^4$ est :",
+   "choices": [
+    "12x^3",
+    "4x^3",
+    "3x^3",
+    "12x^4"
+   ],
+   "answer": 0,
+   "explanation": "(x^n)' = n x^(n-1) ; 3×4 = 12.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "tle-a-maths-complements-fonctions"
+  },
+  {
+   "id": "tle-a-maths-complements-fonctions-e04",
+   "kind": "mcq",
+   "tier": "approfondissement",
+   "lesson": "tle-a-maths-complements-derivation",
+   "source": "Exercice original écrit pour CastBridge, dans le style du programme de Terminale A",
+   "prompt": "Si f'(x) < 0 sur un intervalle alors f est :",
+   "choices": [
+    "constante",
+    "croissante",
+    "nulle",
+    "décroissante"
+   ],
+   "answer": 3,
+   "explanation": "Signe de f'.",
+   "difficulty": 2,
+   "points": 1,
+   "chapter": "tle-a-maths-complements-fonctions"
+  },
+  {
+   "id": "tle-a-maths-complements-fonctions-e05",
+   "kind": "numeric",
+   "tier": "approfondissement",
+   "lesson": "tle-a-maths-complements-derivation",
+   "source": "Exercice original écrit pour CastBridge, dans le style du programme de Terminale A",
+   "prompt": "Pour $g(x) = \\frac{2x+1}{x-1}$, calculez $g'(3)$ (on trouve $g'(x) = \\frac{-3}{(x-1)^2}$).",
+   "answer": -0.75,
+   "tolerance": 0.001,
+   "explanation": "-3/(2²) = -3/4 = -0,75.",
+   "difficulty": 2,
+   "points": 1,
+   "chapter": "tle-a-maths-complements-fonctions"
+  },
+  {
+   "id": "tle-a-maths-complements-fonctions-e06",
+   "kind": "open",
+   "tier": "examen",
+   "lesson": "tle-a-maths-complements-derivation",
+   "source": "Exercice original écrit pour CastBridge, dans le style du programme de Terminale A",
+   "prompt": "Étudiez les variations de $h(x) = x^2 - 4x + 3$ et donnez son minimum.",
+   "model": "h'(x) = 2x - 4 = 2(x-2). h' < 0 si x < 2, h' > 0 si x > 2 : h décroît puis croît. Minimum en x = 2 : h(2) = 4 - 8 + 3 = -1.",
+   "rubric": [
+    "1 point : dérivée",
+    "1 point : signe",
+    "1 point : tableau",
+    "1 point : minimum -1"
+   ],
+   "explanation": "h'(x) = 2x - 4 = 2(x-2). h' < 0 si x < 2, h' > 0 si x > 2 : h décroît puis croît. Minimum en x = 2 : h(2) = 4 - 8 + 3 = -1.",
+   "difficulty": 3,
+   "points": 3,
+   "chapter": "tle-a-maths-complements-fonctions"
+  },
+  {
+   "id": "tle-a-maths-complements-derivation-q1",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "tle-a-maths-complements-derivation",
+   "prompt": "(x²)' vaut :",
+   "choices": [
+    "2x",
+    "2",
+    "x²",
+    "x"
+   ],
+   "answer": 0,
+   "explanation": "n x^(n-1).",
+   "chapter": "tle-a-maths-complements-fonctions"
+  },
+  {
+   "id": "tle-a-maths-complements-derivation-q2",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "tle-a-maths-complements-derivation",
+   "prompt": "f' > 0 signifie :",
+   "choices": [
+    "f décroissante",
+    "f constante",
+    "f nulle",
+    "f croissante"
+   ],
+   "answer": 3,
+   "explanation": "Lien signe-variation.",
+   "chapter": "tle-a-maths-complements-fonctions"
+  },
+  {
+   "id": "tle-a-maths-complements-derivation-q3",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "tle-a-maths-complements-derivation",
+   "prompt": "Tangente en a :",
+   "choices": [
+    "y = f(a)(x-a)",
+    "y = f'(x)",
+    "y = a x",
+    "y = f'(a)(x-a) + f(a)"
+   ],
+   "answer": 3,
+   "explanation": "Formule.",
+   "chapter": "tle-a-maths-complements-fonctions"
+  },
+  {
+   "id": "tle-a-maths-complements-derivation-q4",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "tle-a-maths-complements-derivation",
+   "prompt": "(uv)' vaut :",
+   "choices": [
+    "u'v + uv'",
+    "uv",
+    "u + v",
+    "u'v'"
+   ],
+   "answer": 0,
+   "explanation": "Règle du produit.",
+   "chapter": "tle-a-maths-complements-fonctions"
+  },
+  {
+   "id": "tle-a-maths-complements-derivation-q5",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "tle-a-maths-complements-derivation",
+   "prompt": "f'(a) = 0 donne :",
+   "choices": [
+    "un zéro de f",
+    "une asymptote",
+    "une tangente horizontale",
+    "un point d'inflexion forcé"
+   ],
+   "answer": 2,
+   "explanation": "Candidat à un extremum.",
+   "chapter": "tle-a-maths-complements-fonctions"
+  },
+  {
+   "id": "tle-a-maths-complements-fonctions-e07",
+   "kind": "mcq",
+   "tier": "application",
+   "lesson": "tle-a-maths-complements-limites-asymptotes",
+   "source": "Exercice original écrit pour CastBridge, dans le style du programme de Terminale A",
+   "prompt": "$\\lim_{x \\to +\\infty} (x^2 - 5x)$ vaut :",
+   "choices": [
+    "0",
+    "-5",
+    "-∞",
+    "+∞"
+   ],
+   "answer": 3,
+   "explanation": "Terme dominant x².",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "tle-a-maths-complements-fonctions"
+  },
+  {
+   "id": "tle-a-maths-complements-fonctions-e08",
+   "kind": "mcq",
+   "tier": "application",
+   "lesson": "tle-a-maths-complements-limites-asymptotes",
+   "source": "Exercice original écrit pour CastBridge, dans le style du programme de Terminale A",
+   "prompt": "$\\lim_{x \\to +\\infty} \\frac{3x+2}{x+1}$ vaut :",
+   "choices": [
+    "+∞",
+    "2",
+    "3",
+    "0"
+   ],
+   "answer": 2,
+   "explanation": "3x/x = 3.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "tle-a-maths-complements-fonctions"
+  },
+  {
+   "id": "tle-a-maths-complements-fonctions-e09",
+   "kind": "truefalse",
+   "tier": "application",
+   "lesson": "tle-a-maths-complements-limites-asymptotes",
+   "source": "Exercice original écrit pour CastBridge, dans le style du programme de Terminale A",
+   "prompt": "Une asymptote horizontale ne peut jamais être coupée par la courbe.",
+   "answer": false,
+   "explanation": "Elle peut être coupée, la limite concerne l'infini.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "tle-a-maths-complements-fonctions"
+  },
+  {
+   "id": "tle-a-maths-complements-fonctions-e10",
+   "kind": "mcq",
+   "tier": "approfondissement",
+   "lesson": "tle-a-maths-complements-limites-asymptotes",
+   "source": "Exercice original écrit pour CastBridge, dans le style du programme de Terminale A",
+   "prompt": "$\\frac{3}{x-2}$ quand $x \\to 2$ avec $x < 2$ tend vers :",
+   "choices": [
+    "3",
+    "-∞",
+    "0",
+    "+∞"
+   ],
+   "answer": 1,
+   "explanation": "Dénominateur négatif proche de 0.",
+   "difficulty": 2,
+   "points": 1,
+   "chapter": "tle-a-maths-complements-fonctions"
+  },
+  {
+   "id": "tle-a-maths-complements-fonctions-e11",
+   "kind": "numeric",
+   "tier": "approfondissement",
+   "lesson": "tle-a-maths-complements-limites-asymptotes",
+   "source": "Exercice original écrit pour CastBridge, dans le style du programme de Terminale A",
+   "prompt": "$f(x) = \\frac{5x-1}{x+2}$ : quelle est la limite en $+\\infty$ ?",
+   "answer": 5,
+   "tolerance": 0,
+   "explanation": "5x/x = 5.",
+   "difficulty": 2,
+   "points": 1,
+   "chapter": "tle-a-maths-complements-fonctions"
+  },
+  {
+   "id": "tle-a-maths-complements-fonctions-e12",
+   "kind": "open",
+   "tier": "examen",
+   "lesson": "tle-a-maths-complements-limites-asymptotes",
+   "source": "Exercice original écrit pour CastBridge, dans le style du programme de Terminale A",
+   "prompt": "Pour $h(x) = \\frac{x^2+1}{x}$, montrez que $y = x$ est asymptote oblique.",
+   "model": "On écrit h(x) = x + 1/x. Quand x tend vers ±∞, 1/x tend vers 0, donc h(x) - x tend vers 0 : la droite y = x est asymptote oblique.",
+   "rubric": [
+    "1 point : décomposition",
+    "1 point : limite 1/x → 0",
+    "2 points : conclusion"
+   ],
+   "explanation": "On écrit h(x) = x + 1/x. Quand x tend vers ±∞, 1/x tend vers 0, donc h(x) - x tend vers 0 : la droite y = x est asymptote oblique.",
+   "difficulty": 3,
+   "points": 3,
+   "chapter": "tle-a-maths-complements-fonctions"
+  },
+  {
+   "id": "tle-a-maths-complements-limites-asymptotes-q1",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "tle-a-maths-complements-limites-asymptotes",
+   "prompt": "Limite d'un polynôme en +∞ :",
+   "choices": [
+    "celle de son terme de plus haut degré",
+    "toujours 1",
+    "toujours le terme constant",
+    "toujours 0"
+   ],
+   "answer": 0,
+   "explanation": "Règle.",
+   "chapter": "tle-a-maths-complements-fonctions"
+  },
+  {
+   "id": "tle-a-maths-complements-limites-asymptotes-q2",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "tle-a-maths-complements-limites-asymptotes",
+   "prompt": "Si lim f = ℓ en l'infini :",
+   "choices": [
+    "x = ℓ est asymptote",
+    "f est constante",
+    "y = ℓ est asymptote horizontale",
+    "f = 0"
+   ],
+   "answer": 2,
+   "explanation": "Définition.",
+   "chapter": "tle-a-maths-complements-fonctions"
+  },
+  {
+   "id": "tle-a-maths-complements-limites-asymptotes-q3",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "tle-a-maths-complements-limites-asymptotes",
+   "prompt": "Si lim f = +∞ en a :",
+   "choices": [
+    "x = a est asymptote verticale",
+    "f est nulle",
+    "a est un zéro",
+    "y = a est asymptote"
+   ],
+   "answer": 0,
+   "explanation": "Définition.",
+   "chapter": "tle-a-maths-complements-fonctions"
+  },
+  {
+   "id": "tle-a-maths-complements-limites-asymptotes-q4",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "tle-a-maths-complements-limites-asymptotes",
+   "prompt": "∞/∞ est :",
+   "choices": [
+    "une forme indéterminée",
+    "égal à 0",
+    "égal à 1",
+    "égal à ∞"
+   ],
+   "answer": 0,
+   "explanation": "Il faut transformer.",
+   "chapter": "tle-a-maths-complements-fonctions"
+  },
+  {
+   "id": "tle-a-maths-complements-limites-asymptotes-q5",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "tle-a-maths-complements-limites-asymptotes",
+   "prompt": "1/x en +∞ tend vers :",
+   "choices": [
+    "-∞",
+    "1",
+    "+∞",
+    "0"
+   ],
+   "answer": 3,
+   "explanation": "Limite usuelle.",
+   "chapter": "tle-a-maths-complements-fonctions"
+  },
+  {
+   "id": "tle-a-maths-complements-fonctions-e13",
+   "kind": "numeric",
+   "tier": "application",
+   "lesson": "tle-a-maths-complements-second-degre",
+   "source": "Exercice original écrit pour CastBridge, dans le style du programme de Terminale A",
+   "prompt": "Calculez le discriminant de $x^2 - 5x + 6$.",
+   "answer": 1,
+   "tolerance": 0,
+   "explanation": "25 - 24 = 1.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "tle-a-maths-complements-fonctions"
+  },
+  {
+   "id": "tle-a-maths-complements-fonctions-e14",
+   "kind": "numeric",
+   "tier": "application",
+   "lesson": "tle-a-maths-complements-second-degre",
+   "source": "Exercice original écrit pour CastBridge, dans le style du programme de Terminale A",
+   "prompt": "Calculez le discriminant de $2x^2 + x - 3$.",
+   "answer": 25,
+   "tolerance": 0,
+   "explanation": "1 - 4×2×(-3) = 1 + 24 = 25.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "tle-a-maths-complements-fonctions"
+  },
+  {
+   "id": "tle-a-maths-complements-fonctions-e15",
+   "kind": "numeric",
+   "tier": "application",
+   "lesson": "tle-a-maths-complements-second-degre",
+   "source": "Exercice original écrit pour CastBridge, dans le style du programme de Terminale A",
+   "prompt": "La plus grande racine de $2x^2 + x - 3$ ?",
+   "answer": 1,
+   "tolerance": 0,
+   "explanation": "(-1 ± 5)/4 : 1 et -3/2.",
+   "difficulty": 1,
+   "points": 1,
+   "chapter": "tle-a-maths-complements-fonctions"
+  },
+  {
+   "id": "tle-a-maths-complements-fonctions-e16",
+   "kind": "mcq",
+   "tier": "approfondissement",
+   "lesson": "tle-a-maths-complements-second-degre",
+   "source": "Exercice original écrit pour CastBridge, dans le style du programme de Terminale A",
+   "prompt": "$x^2 + x + 1 = 0$ a :",
+   "choices": [
+    "aucune solution réelle",
+    "une infinité",
+    "une solution",
+    "deux solutions"
+   ],
+   "answer": 0,
+   "explanation": "Δ = 1 - 4 = -3 < 0.",
+   "difficulty": 2,
+   "points": 1,
+   "chapter": "tle-a-maths-complements-fonctions"
+  },
+  {
+   "id": "tle-a-maths-complements-fonctions-e17",
+   "kind": "numeric",
+   "tier": "approfondissement",
+   "lesson": "tle-a-maths-complements-second-degre",
+   "source": "Exercice original écrit pour CastBridge, dans le style du programme de Terminale A",
+   "prompt": "Somme des racines de $x^2 - 7x + 10$ ?",
+   "answer": 7,
+   "tolerance": 0,
+   "explanation": "-b/a = 7 (racines 2 et 5).",
+   "difficulty": 2,
+   "points": 1,
+   "chapter": "tle-a-maths-complements-fonctions"
+  },
+  {
+   "id": "tle-a-maths-complements-fonctions-e18",
+   "kind": "open",
+   "tier": "examen",
+   "lesson": "tle-a-maths-complements-second-degre",
+   "source": "Exercice original écrit pour CastBridge, dans le style du programme de Terminale A",
+   "prompt": "Résolvez $x^2 - 4x - 5 \\leq 0$.",
+   "model": "Δ = 16 + 20 = 36 ; racines (4 ± 6)/2 = 5 et -1. a = 1 > 0 : le trinôme est négatif entre les racines. Donc S = [-1 ; 5].",
+   "rubric": [
+    "1 point : Δ",
+    "1 point : racines",
+    "1 point : signe",
+    "1 point : ensemble solution"
+   ],
+   "explanation": "Δ = 16 + 20 = 36 ; racines (4 ± 6)/2 = 5 et -1. a = 1 > 0 : le trinôme est négatif entre les racines. Donc S = [-1 ; 5].",
+   "difficulty": 3,
+   "points": 3,
+   "chapter": "tle-a-maths-complements-fonctions"
+  },
+  {
+   "id": "tle-a-maths-complements-second-degre-q1",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "tle-a-maths-complements-second-degre",
+   "prompt": "Si Δ < 0 :",
+   "choices": [
+    "toujours 0",
+    "deux solutions",
+    "une solution",
+    "pas de solution réelle"
+   ],
+   "answer": 3,
+   "explanation": "Aucune racine.",
+   "chapter": "tle-a-maths-complements-fonctions"
+  },
+  {
+   "id": "tle-a-maths-complements-second-degre-q2",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "tle-a-maths-complements-second-degre",
+   "prompt": "Δ vaut :",
+   "choices": [
+    "b - 4ac",
+    "b² - 4ac",
+    "b² + 4ac",
+    "2b - a"
+   ],
+   "answer": 1,
+   "explanation": "Formule.",
+   "chapter": "tle-a-maths-complements-fonctions"
+  },
+  {
+   "id": "tle-a-maths-complements-second-degre-q3",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "tle-a-maths-complements-second-degre",
+   "prompt": "Entre les racines, le trinôme a :",
+   "choices": [
+    "toujours 0",
+    "le signe contraire de a",
+    "toujours un signe positif",
+    "le signe de a"
+   ],
+   "answer": 1,
+   "explanation": "Règle.",
+   "chapter": "tle-a-maths-complements-fonctions"
+  },
+  {
+   "id": "tle-a-maths-complements-second-degre-q4",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "tle-a-maths-complements-second-degre",
+   "prompt": "Somme des racines :",
+   "choices": [
+    "-c/a",
+    "-b/a",
+    "c/a",
+    "b/a"
+   ],
+   "answer": 1,
+   "explanation": "Relations de Viète.",
+   "chapter": "tle-a-maths-complements-fonctions"
+  },
+  {
+   "id": "tle-a-maths-complements-second-degre-q5",
+   "kind": "mcq",
+   "tier": "autoeval",
+   "points": 1,
+   "lesson": "tle-a-maths-complements-second-degre",
+   "prompt": "Si Δ = 0 :",
+   "choices": [
+    "une solution double",
+    "une infinité",
+    "deux solutions",
+    "aucune"
+   ],
+   "answer": 0,
+   "explanation": "x0 = -b/2a.",
+   "chapter": "tle-a-maths-complements-fonctions"
+  },
+  {
+   "id": "tle-a-maths-complements-fonctions-m01",
+   "kind": "problem",
+   "tier": "examen",
+   "lesson": "tle-a-maths-complements-second-degre",
+   "source": "Exercice original écrit pour CastBridge, dans le style du programme de Terminale A",
+   "prompt": "Une urne contient 4 boules blanches et 6 noires. On tire simultanément 2 boules.",
+   "difficulty": 2,
+   "parts": [
+    {
+     "kind": "numeric",
+     "points": 1,
+     "prompt": "Combien de tirages possibles ?",
+     "answer": 45,
+     "tolerance": 0,
+     "explanation": "C(10,2) = 45.",
+     "id": "tle-a-maths-complements-fonctions-m01-a"
+    },
+    {
+     "kind": "numeric",
+     "points": 1,
+     "prompt": "Combien de tirages de 2 boules blanches ?",
+     "answer": 6,
+     "tolerance": 0,
+     "explanation": "C(4,2) = 6.",
+     "id": "tle-a-maths-complements-fonctions-m01-b"
+    },
+    {
+     "kind": "numeric",
+     "points": 2,
+     "prompt": "Probabilité de 2 blanches (arrondir à 0,01).",
+     "answer": 0.13,
+     "tolerance": 0.005,
+     "explanation": "6/45 = 2/15 ≈ 0,13.",
+     "id": "tle-a-maths-complements-fonctions-m01-c"
+    },
+    {
+     "kind": "numeric",
+     "points": 2,
+     "prompt": "Probabilité d'avoir une boule de chaque couleur (arrondir à 0,01).",
+     "answer": 0.53,
+     "tolerance": 0.005,
+     "explanation": "4×6/45 = 24/45 ≈ 0,53.",
+     "id": "tle-a-maths-complements-fonctions-m01-d"
+    }
+   ],
+   "chapter": "tle-a-maths-complements-fonctions"
+  },
+  {
+   "id": "tle-a-maths-complements-fonctions-m02",
+   "kind": "problem",
+   "tier": "examen",
+   "lesson": "tle-a-maths-complements-second-degre",
+   "source": "Exercice original écrit pour CastBridge, dans le style du programme de Terminale A",
+   "prompt": "Un commerçant gagne 100 000 FCFA le premier mois et son gain augmente de 10 % chaque mois.",
+   "difficulty": 2,
+   "parts": [
+    {
+     "kind": "numeric",
+     "points": 1,
+     "prompt": "Gain du 2e mois (FCFA).",
+     "answer": 110000,
+     "tolerance": 0,
+     "explanation": "100 000×1,1.",
+     "id": "tle-a-maths-complements-fonctions-m02-a"
+    },
+    {
+     "kind": "numeric",
+     "points": 2,
+     "prompt": "Gain du 4e mois (FCFA).",
+     "answer": 133100,
+     "tolerance": 0,
+     "explanation": "100 000×1,1³ = 133 100.",
+     "id": "tle-a-maths-complements-fonctions-m02-b"
+    },
+    {
+     "kind": "numeric",
+     "points": 3,
+     "prompt": "Gain total des 4 premiers mois (FCFA).",
+     "answer": 464100,
+     "tolerance": 0,
+     "explanation": "100 000×(1,1⁴-1)/0,1 = 464 100.",
+     "id": "tle-a-maths-complements-fonctions-m02-c"
+    }
+   ],
+   "chapter": "tle-a-maths-complements-fonctions"
+  },
+  {
+   "id": "tle-a-maths-complements-fonctions-m03",
+   "kind": "problem",
+   "tier": "examen",
+   "lesson": "tle-a-maths-complements-second-degre",
+   "source": "Exercice original écrit pour CastBridge, dans le style du programme de Terminale A",
+   "prompt": "Soit $f(x) = x^3 - 3x^2 + 2$.",
+   "difficulty": 2,
+   "parts": [
+    {
+     "kind": "open",
+     "points": 2,
+     "prompt": "Calculez f'(x) et factorisez.",
+     "model": "f'(x) = 3x² - 6x = 3x(x - 2).",
+     "rubric": [
+      "1 point : dérivée",
+      "1 point : factorisation"
+     ],
+     "explanation": "f'(x) = 3x² - 6x = 3x(x - 2).",
+     "id": "tle-a-maths-complements-fonctions-m03-a"
+    },
+    {
+     "kind": "open",
+     "points": 3,
+     "prompt": "Dressez le tableau de variations.",
+     "model": "f' > 0 sur ]-∞ ; 0[ et ]2 ; +∞[ ; f' < 0 sur ]0 ; 2[. f croît puis décroît puis croît, avec f(0) = 2 et f(2) = -2.",
+     "rubric": [
+      "1 point : signe de f'",
+      "1 point : flèches",
+      "1 point : valeurs"
+     ],
+     "explanation": "f' > 0 sur ]-∞ ; 0[ et ]2 ; +∞[ ; f' < 0 sur ]0 ; 2[. f croît puis décroît puis croît, avec f(0) = 2 et f(2) = -2.",
+     "id": "tle-a-maths-complements-fonctions-m03-b"
+    },
+    {
+     "kind": "open",
+     "points": 3,
+     "prompt": "Déterminez l'équation de la tangente en 1.",
+     "model": "f(1) = 0, f'(1) = -3 : y = -3x + 3.",
+     "rubric": [
+      "1 point : f(1) et f'(1)",
+      "2 points : équation"
+     ],
+     "explanation": "f(1) = 0, f'(1) = -3 : y = -3x + 3.",
+     "id": "tle-a-maths-complements-fonctions-m03-c"
+    }
+   ],
+   "chapter": "tle-a-maths-complements-fonctions"
+  }
+ ]
+}

@@ -37,6 +37,8 @@ data class Activation(
         const val TYPE = "activation"
         const val FILE_NAME = "activation"
         const val TRIAL_LICENSE = "trial"
+        /** What a TRIAL key may carry: its usage ceiling and its one-time window of rented lots (reserved product [RentalLines.TRIAL_PRODUCT]); never a purchase, a subscription or any other rental. */
+        fun trialRight(r: Right) = r is Right.Usage || (r is Right.Rental && r.productId == RentalLines.TRIAL_PRODUCT)
         val HEX = Envelope.HEX
         val ID = Envelope.ID
 
@@ -144,7 +146,7 @@ class ActivationVerifier(private val keys: KeyRing, private val maxWindowMs: Lon
         if (!allowed) return no(Rejection.KEY_NOT_ALLOWED, "Cette clé n'a pas le droit de délivrer ce type d'activation")
         if (a.rights.any { it is Right.OpenAll } && !key.allows(KeyScope.COMMAND_OPEN_ALL)) return no(Rejection.KEY_NOT_ALLOWED, "Cette clé ne peut pas délivrer « tout ouvert »")
         if (a.rights.any { it is Right.Super } && !key.allows(KeyScope.SUPER_UNLIMITED)) return no(Rejection.KEY_NOT_ALLOWED, "Cette clé n'est pas celle du super administrateur")
-        if (a.kind == ActivationKind.TRIAL && a.rights.any { it !is Right.Usage }) return no(Rejection.BAD_RIGHTS, "Une clé d'essai ne porte aucun droit (seulement une durée d'usage)")
+        if (a.kind == ActivationKind.TRIAL && a.rights.any { !Activation.trialRight(it) }) return no(Rejection.BAD_RIGHTS, "Une clé d'essai ne porte aucun droit (seulement une durée d'usage et sa fenêtre de lots)")
         if (a.rights.filterIsInstance<Right.OpenAll>().any { it.endsAt - it.startsAt > MAX_OPEN_ALL_MS || it.endsAt <= it.startsAt }) return no(Rejection.BAD_RIGHTS, "« Tout ouvert » : 30 jours au plus")
         a.rights.filterIsInstance<Right.Rental>().firstNotNullOfOrNull { RentalLines.bounds(it) }?.let { return no(Rejection.BAD_RIGHTS, "Location : $it") }
         if (a.subject != expect) return no(Rejection.WRONG_SUBJECT, "Cette activation est celle d'un autre type d'appareil")
@@ -164,7 +166,8 @@ class ActivationVerifier(private val keys: KeyRing, private val maxWindowMs: Lon
 }
 
 /** What a TV may open, computed from what it holds. No key installed = nothing at all (not even the trial). */
-data class TvAccess(val keyInstalled: Boolean, val access: Access, val openAllUntil: Long?, val label: String, /** SUPER_UNLIMITED installed: everything, rentals included, for good. */ val superUnlimited: Boolean = false) {
+data class TvAccess(val keyInstalled: Boolean, val access: Access, val openAllUntil: Long?, val label: String, /** SUPER_UNLIMITED installed: everything, rentals included, for good. */ val superUnlimited: Boolean = false,
+                    /** Only a TRIAL key counts (no production key, no owner grant): the edition is restricted by [TrialPolicy]. */ val trial: Boolean = false) {
     val opensContent get() = keyInstalled
 }
 
@@ -206,7 +209,8 @@ object TvGate {
         // rentals are evaluated by the RentalLedger (clock rules, usage ceiling); with none given (an old caller) a rental line grants NOTHING
         val access = RentalPolicy.mergeAccess(Access(Verdict.OK, purchased, bundles, subs, "", extraLots), rentals)
         val rentedLabel = if (access.rented.isNotEmpty() && access.purchased.isEmpty() && bundles.isEmpty() && openAll == null) "Location en cours" else label
-        return TvAccess(true, access, openAll, rentedLabel, superUnlimited)
+        val trialOnly = activations.isNotEmpty() && activations.all { it.kind == ActivationKind.TRIAL } && live.isEmpty() && !superUnlimited
+        return TvAccess(true, access, openAll, rentedLabel, superUnlimited, trialOnly)
     }
 }
 

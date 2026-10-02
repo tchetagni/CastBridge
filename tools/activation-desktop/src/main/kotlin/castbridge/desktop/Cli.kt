@@ -52,7 +52,7 @@ class Cli(private val env: Env) {
         fun get(k: String) = opts[k]?.last()
         fun all(k: String) = opts[k] ?: emptyList()
         fun need(k: String) = get(k) ?: throw UsageException("Option obligatoire : --$k")
-        companion object { val FLAGS = setOf("qr", "production", "essai", "sans-confirmation", "json", "super") }
+        companion object { val FLAGS = setOf("qr", "production", "essai", "sans-confirmation", "json", "super", "sans-lots-essai") }
     }
 
     private fun home(a: Args) = File(a.get("dossier") ?: env.getenv("CASTBRIDGE_ACTIVATION_HOME") ?: (System.getProperty("user.home") + "/.castbridge-activation"))
@@ -164,6 +164,13 @@ class Cli(private val env: Env) {
         a.all("achat").map { RightsSyntax.purchase(it, now) } + a.all("abonnement").map { RightsSyntax.subscription(it, now) } +
             a.all("tout-ouvert").map { RightsSyntax.openAll(it, now) } + a.all("droit").map { Activation.parseRight(it) }
 
+    /** `--usage-jours N` or `--usage-jours illimitee`: how long the activation key works (a trial: 1 to 365, default 30; a production key: unlimited = never locks again, or 1 to 3660 days). */
+    private fun usageDays(a: Args, kind: ActivationKind): Int? {
+        val v = a.get("usage-jours") ?: return null
+        if (v.lowercase() in setOf("illimitee", "illimitée", "illimite")) { if (kind == ActivationKind.TRIAL) throw UsageException("Un essai a toujours une durée (1 à 365 jours)"); return null }
+        return v.toIntOrNull() ?: throw UsageException("--usage-jours attend un nombre de jours ou « illimitee »")
+    }
+
     private fun issue(a: Args): Int {
         val device = DeviceRequest.parse(readSource(a.need("appareil")))
         val d = desk(a)
@@ -174,8 +181,9 @@ class Cli(private val env: Env) {
         if (a.get("periode") != null && period == null) throw UsageException("--periode attend le début (ms) de la location à prolonger")
         val rentals = a.all("location").map { RightsSyntax.rental(it, period) }
         val check = if (rentals.isEmpty()) null else rentalCheck(a)
+        val trialLots = kind == ActivationKind.TRIAL && !a.flags.contains("sans-lots-essai")      // every trial key carries its one-time 12 h window of rented lots
         val spec = IssueSpec(kind, if (a.get("sujet") == "phone") Subject.PHONE else Subject.TV, rights(a, now) + permanent(a, kind, now), a.get("licence") ?: Activation.TRIAL_LICENSE,
-            rentals = rentals, rentalMaster = if (rentals.isEmpty()) null else d.rentalMaster(), rentalCheck = check)
+            rentals = rentals, rentalMaster = if (rentals.isEmpty() && !trialLots) null else d.rentalMaster(), rentalCheck = check, usageDays = usageDays(a, kind), trialLots = trialLots)
         val r = d.issue(device, spec)
         val dir = File(a.get("sortie") ?: "."); dir.mkdirs()
         val fileOut = File(dir, r.issued.fileName); fileOut.writeText(r.issued.fileContent)
@@ -185,6 +193,7 @@ class Cli(private val env: Env) {
         env.out.println("Fichier pour la clé USB de la TV : ${fileOut.path}  (à copier dans Download/CastBridge/)")
         env.out.println("Jeton :"); env.out.println(r.issued.token)
         r.issued.activation.rights.filterIsInstance<Right.Rental>().forEach { l ->
+            if (l.productId == castbridge.core.lots.RentalLines.TRIAL_PRODUCT) { env.out.println("Fenêtre de lots d'essai (usage unique) : ${l.maxUsageMinutes} min d'usage, dans les ${l.durationDays} jours"); return@forEach }
             env.out.println("Location ${l.productId} (${l.bundleIds.joinToString(",")}) : ${l.durationDays} jour(s) à partir du ${date(l.startsAt)}, fin le ${date(l.endsAt)}" +
                 (if (l.maxUsageMinutes > 0) ", usage maximal ${l.maxUsageMinutes} min" else "") + (if (l.graceMs > 0) ", tolérance ${l.graceMs / Desk.DAY_MS} j" else "") + " ; période ${l.period}")
         }
@@ -208,8 +217,12 @@ class Cli(private val env: Env) {
         val all = catalog.bundles.flatMap { it.lots }.toSet()
         val families = castbridge.core.lots.LotFamilies.explicit(free, all - free)
         return { spec ->
-            val metas = catalog.lotsOf(spec.bundleIds).map { castbridge.core.lots.LotMeta(it, 1, 0, "0".repeat(64), castbridge.core.lots.LotNames.key(it)) }
-            castbridge.core.lots.RentalPolicy.refusals(spec.bundleIds, catalog, metas, families).firstOrNull()
+            // the duration of a rental is fixed by the server's catalogue (rentalDays per bundle): the tightest bundle limit wins
+            val limit = spec.bundleIds.mapNotNull { catalog.find(it)?.rentalDays?.takeIf { d -> d > 0 } }.minOrNull()
+            if (limit != null && spec.days > limit) "la durée de location est fixée par le catalogue du serveur : $limit jour(s) au plus pour ${spec.bundleIds.joinToString(",")}" else {
+                val metas = catalog.lotsOf(spec.bundleIds).map { castbridge.core.lots.LotMeta(it, 1, 0, "0".repeat(64), castbridge.core.lots.LotNames.key(it)) }
+                castbridge.core.lots.RentalPolicy.refusals(spec.bundleIds, catalog, metas, families).firstOrNull()
+            }
         }
     }
 
