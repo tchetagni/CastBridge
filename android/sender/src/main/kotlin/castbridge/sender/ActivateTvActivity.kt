@@ -17,6 +17,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import castbridge.core.owner.ActivationScreenState
 import castbridge.core.tv.TvClient
 import castbridge.owner.TvBluetooth
 
@@ -51,19 +52,22 @@ class ActivateTvActivity : ComponentActivity() {
 
         // What the TV itself says about its activation (read through the link the phone already has with it): the phone must notice an activation done any way (Bluetooth, USB file, typed)
         val link by TvLinkManager.state.collectAsState()
-        var tvState by remember { mutableStateOf<String?>(null) }
-        var tvStateOk by remember { mutableStateOf(false) }
+        var tvView by remember { mutableStateOf<ActivationScreenState.View?>(null) }
+        var lanBase by remember { mutableStateOf<Pair<String, String?>?>(null) }
         LaunchedEffect(link, busy) {
             val s = (link as? LinkUi.Connected)?.session
             val base = s?.base
-            if (base == null) { tvState = if (s == null) (if (link is LinkUi.NoTv) "aucune TV n'est ajoutée dans CastBridge (onglet « CastBridge TV » > « Ajouter ma TV »), donc l'état d'activation ne peut pas être lu. L'activation de la TV, elle, n'en dépend pas." else "TV non jointe pour le moment : l'état d'activation n'est pas lisible.") else "TV jointe par Bluetooth seulement : l'état d'activation n'est pas lisible."; tvStateOk = false; return@LaunchedEffect }
+            if (base == null) {
+                val why = if (s == null) (if (link is LinkUi.NoTv) "Aucune TV n'est ajoutée dans CastBridge (onglet « CastBridge TV » > « Ajouter ma TV »), donc l'état d'activation ne peut pas être lu. L'envoi d'une clé, lui, n'en dépend pas." else "TV non jointe pour le moment : l'état d'activation n'est pas lisible.") else "TV jointe par Bluetooth seulement : l'état d'activation n'est pas lisible."
+                tvView = ActivationScreenState.view(null, why, System.currentTimeMillis()); lanBase = null; return@LaunchedEffect
+            }
+            lanBase = base to s.credential
             while (true) {
                 val r = kotlinx.coroutines.withContext(kotlinx.coroutines.Dispatchers.IO) { runCatching { org.json.JSONObject(TvClient(base, s.credential).raw("GET", "/api/activation")) } }
                 r.onSuccess { j ->
-                    val locked = j.optBoolean("locked"); val required = j.optBoolean("required"); val label = j.optString("label")
-                    tvStateOk = !locked
-                    tvState = when { !required -> "Cette TV n'exige pas d'activation (version sans verrou)."; locked -> "TV verrouillée : en attente d'une clé d'activation."; else -> "TV déverrouillée : $label" }
-                }.onFailure { tvStateOk = false; tvState = "L'état d'activation de la TV est illisible (version de CastBridge-TV trop ancienne ?)." }
+                    val info = ActivationScreenState.Info(j.optBoolean("required"), j.optBoolean("locked"), j.optBoolean("trial"), j.optString("label"), if (j.isNull("usageEndsAt")) null else j.optLong("usageEndsAt"))
+                    tvView = ActivationScreenState.view(info, null, System.currentTimeMillis())
+                }.onFailure { tvView = ActivationScreenState.view(null, "L'état d'activation de la TV est illisible (version de CastBridge-TV trop ancienne ?).", System.currentTimeMillis()) }
                 kotlinx.coroutines.delay(4_000)
             }
         }
@@ -71,8 +75,11 @@ class ActivateTvActivity : ComponentActivity() {
         val shown = if (allPaired) TvBluetooth.pairedTvs(this).let { p -> (tvs + p).distinctBy { it.address } } else tvs.filter { it.sure || it.bonded }.let { l -> if (l.any { it.sure }) l.filter { it.sure } else l }
         Column(Modifier.fillMaxSize().verticalScroll(rememberScrollState()).padding(16.dp), verticalArrangement = Arrangement.spacedBy(12.dp)) {
             Text("Activer la TV", style = MaterialTheme.typography.headlineSmall)
-            tvState?.let { Text("État de la TV : $it", color = if (tvStateOk) MaterialTheme.colorScheme.primary else MaterialTheme.colorScheme.onSurface, style = MaterialTheme.typography.bodyMedium) }
-            Text("1. Copiez la clé d'activation reçue (message, e-mail…), puis collez-la ici.", style = MaterialTheme.typography.bodyMedium)
+            tvView?.let { v ->
+                Text(v.headline, color = if (v.good) MaterialTheme.colorScheme.primary else MaterialTheme.colorScheme.onSurface, style = MaterialTheme.typography.titleMedium)
+                v.detail?.let { Text(it, style = MaterialTheme.typography.bodyMedium) }
+            }
+            Text("1. Copiez la clé d'activation (ou de production) reçue (message, e-mail…), puis collez-la ici.", style = MaterialTheme.typography.bodyMedium)
             OutlinedTextField(key, { key = it; msg = null }, label = { Text("Clé d'activation") }, textStyle = androidx.compose.ui.text.TextStyle(fontFamily = FontFamily.Monospace, fontSize = 12.sp),
                 modifier = Modifier.fillMaxWidth().heightIn(min = 110.dp))
             Button({
@@ -102,13 +109,31 @@ class ActivateTvActivity : ComponentActivity() {
                     val a = runCatching { TvBluetooth.with(this@ActivateTvActivity, tv) { c -> c.sendActivation(k) } }
                     runOnUiThread {
                         busy = false
-                        a.onSuccess { r -> ok = r.ok; msg = if (r.ok) "Clé envoyée : ${r.message}" else "Refusée par la TV : ${r.message}"; if (r.ok) refresh() }
+                        a.onSuccess { r -> val o = ActivationScreenState.sendOutcome(r.ok, r.message); ok = o.ok; msg = o.text; if (r.ok) refresh() }
                          .onFailure { ok = false; msg = it.message ?: "Échec de l'envoi" }
                     }
                 }.start()
             }, enabled = chosen != null && clean(key).length >= 20 && !busy, modifier = Modifier.fillMaxWidth()) { Text(if (busy) "En cours…" else "3. Envoyer à la TV") }
             msg?.let { Text(it, color = if (ok) MaterialTheme.colorScheme.primary else if (busy) MaterialTheme.colorScheme.onSurface else MaterialTheme.colorScheme.error) }
-            Text("Pour recevoir une clé : ouvrez la TV, elle affiche son code d'appareil ; envoyez-le au propriétaire de CastBridge.", style = MaterialTheme.typography.bodySmall)
+            Text("Pour recevoir une clé (ou passer de l'essai à la production) : touchez « Demander la clé de production » et envoyez la demande au propriétaire de CastBridge.", style = MaterialTheme.typography.bodySmall)
+            OutlinedButton({
+                busy = true; ok = false; msg = "Lecture de la demande de la TV…"
+                val lan = lanBase; val tv = chosen
+                Thread {
+                    val req = runCatching {
+                        if (lan != null) org.json.JSONObject(TvClient(lan.first, lan.second).raw("GET", "/api/activation/request")).getString("request")
+                        else if (tv != null) TvBluetooth.with(this@ActivateTvActivity, tv) { c -> c.deviceInfo() } ?: error("La TV n'a pas répondu")
+                        else error("Aucune TV trouvée : allumez la TV et ouvrez CastBridge-TV.")
+                    }
+                    runOnUiThread {
+                        busy = false
+                        req.onSuccess { t -> msg = "Demande prête : choisissez comment l'envoyer."; ok = true
+                            val i = Intent(Intent.ACTION_SEND).setType("text/plain").putExtra(Intent.EXTRA_SUBJECT, "Demande de passage en production").putExtra(Intent.EXTRA_TEXT, ActivationScreenState.requestShare(t))
+                            startActivity(Intent.createChooser(i, "Envoyer la demande"))
+                        }.onFailure { msg = it.message ?: "Impossible de lire la demande de la TV" }
+                    }
+                }.start()
+            }, enabled = !busy && (lanBase != null || chosen != null), modifier = Modifier.fillMaxWidth()) { Text("Demander la clé de production") }
         }
     }
 

@@ -1,0 +1,5 @@
+{
+  "_comment": "DURÉES DE LOCATION FIXÉES PAR LE SERVEUR, en jours (1 à 366), EXACTES : une location dure exactement la durée de son bouquet, ni plus ni moins (une location par bouquet, produit « loc-<bouquet> »). Décision du propriétaire : « default » = 30 jours pour tout bouquet absent de « bundles ». « bundles » permet de fixer une durée propre à un bouquet (identifiant du bouquet : durée). Lu par tools/trial-edition, qui écrit « rentalDays » dans chaque bouquet de TRIAL-MANIFEST.json (relancer « select » après toute modification).",
+  "default": 30,
+  "bundles": {}
+}

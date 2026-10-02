@@ -420,6 +420,60 @@ droit objectif/subjectif, personnalité juridique). Les faits douteux sont en `r
 âge de la majorité…) ; aucun texte de manuel n'est repris. **Manques par classe** : voir § 9 ; encore sans contenu : SIL/CP-CM1, 6e-4e, 2nde, Form 1-4,
 Class 1-5, Lower Sixth, Terminale A, L2-L3 (et économie), le français/anglais de plusieurs examens, programme spécifique C du Bac.
 
+## 4c. Contenu de base : toutes les classes et toutes les matières, sans aucun lot
+
+**Règle du propriétaire** : « le mode classe devrait être couvert pour toutes les classes et matières, dit contenu de base ». Sur une
+CastBridge-TV neuve, **sans aucun lot reçu**, chacune des 32 classes de `content/learn/scopes.txt` (y compris Nursery, Terminale A, Licence 3)
+propose, pour chacune de ses matières, quelques fiches de base, dans le mode classe comme dans « Contenus ». Les leçons complètes arrivent
+ensuite par lot depuis le téléphone (§ 4b).
+
+**Mécanisme** (`core/.../learn/BaseContent.kt`, tâche gradle `:core:embedLearnPacks`, commande `LearnTool embed`) :
+- **Un pack de base par pack complet**, construit **à la compilation** à partir de `content/learn/<pack>/` : rien n'est copié à la main et
+  les sources ne sont pas modifiées. On garde les **2 premières fiches par ordre de chapitre** (`BaseContent.LESSONS_PER_PACK`), avec leurs
+  blocs inchangés (textes, exemples résolus, figures), leurs exercices notés et leurs 5 questions d'auto-évaluation ; pas d'épreuve blanche ;
+  les prérequis qui sortent du pack de base sont retirés (le pack de base est autonome, vérifié sans aucun autre pack connu).
+- Identifiant `base-<id du pack complet>` (ex. `base-cp-maths`), titre « … (contenu de base) », mêmes version, niveau, matière et examen que
+  le pack source, **mêmes identifiants de fiches et d'exercices** : la progression d'un élève sur une fiche de base reste valable sur la fiche
+  complète. Le drapeau est le préfixe d'identifiant (`BaseContent.isBase`) ; `pack.json` garde aussi `"baseOf"`.
+- **Granularité** : un pack de base par *pack* (cours), pas par couple (classe, matière) : « sciences », « droit » ou « maths » regroupent
+  plusieurs cours distincts (Droit L3 : 6 cours, 1re maths : 5 séries). L'identifiant n'est donc pas `base-<classe>-<matière>` mais
+  `base-<pack>` ; la classe est celle de `scopes.txt` (catalogue `catalog.json` de l'APK).
+- **Pas de doublon avec le socle complet** : aucun pack de base n'est ajouté pour un couple (classe, matière) déjà couvert en entier par un
+  des 6 packs de `content/learn/embedded.txt` (maths de CM2, Class 6, 3e, Form 5, Tle C/D ; découverte de la maternelle). Ces 6 packs restent.
+  Conséquence : 9 cours frères de ces couples n'ont pas de pack de base (gs-decouverte, ps-decouverte, cm2-maths, gceol-further-maths,
+  bac-maths-a, bac-maths-c-specifique, bac-maths-cd-complements, bac-maths-e-ti, etp-maths-techniques-tle) ; la matière reste couverte par le pack complet.
+
+**Remplacement par un lot** (`LearnLibrary`) : un pack de base **disparaît de `packs()`** dès que (1) son pack complet est disponible
+(lot installé, pack sur une clé USB) ou (2) un lot de sa classe est installé. Aucune fiche n'apparaît donc deux fois. L'identifiant d'un pack
+de base remplacé **se résout vers le pack complet** (`LearnLibrary.ref/pack`) : les « Révisions » et « Reprendre » enregistrés sur une fiche de
+base continuent de fonctionner. Si le lot est supprimé (fin d'une location), le contenu de base revient. Limite : les étoiles gagnées sur une
+fiche de base sont rattachées à `base-…` et ne comptent pas dans le total du pack complet (la fiche reste marquée « vue »).
+
+**Interface** :
+- TV, « Contenus » > « Mes classes sur cette TV » : toutes les classes ; celles sans lot affichent « Contenu de base — leçons complètes à
+  recevoir du téléphone » (en doré), celles avec lot « classe complète vN · taille · date des données ». La liste « Packs disponibles » ne
+  détaille pas les packs de base (244 lignes).
+- TV, mode classe (tuile « Mode classe » > Tout le programme > niveau > matière) et accueil élève : les tuiles des packs de base disent « Contenu de
+  base · 2 fiches · N exercices », portent le nom du cours, et l'écran du pack rappelle que la suite arrive par lot. Pilotage depuis le téléphone
+  (`/api/learn/cmd` `lesson`) : si le téléphone désigne une fiche d'un pack complet que la TV n'a pas, la TV ouvre la même fiche dans son pack de
+  base ; sinon elle répond « cette fiche n'est pas dans le contenu de base de la TV : envoyez la classe complète depuis le téléphone ».
+- Téléphone (même socle : `:core` est partagé) : « Contenu de base inclus dans l'app — leçons complètes à télécharger » ; `/api/learn/packs`
+  ajoute `"base": true|false`.
+
+**Tailles** (mesurées au build, `LearnTool embed`) : 244 packs de base, 488 fiches, **5 754 169 octets décompressés, 1 659 882 octets en zip** ;
+socle complet inchangé 305 269 octets ; **total embarqué 1 965 151 octets** (limite 5 Mo : 39 %). `:core:checkStarterBudget` :
+Apprendre 1,9 Mo + Quiz 135 Ko = 2,0 Mo sur les 10 Mo de la TV (20 %) ; **il reste 8,0 Mo pour les lots** (avant : 9,6 Mo ; un lot pèse au plus 3 Mo).
+Avec 3 fiches par pack, le zip aurait pesé ~2,4 Mo (non retenu : on garde plus de place aux lots). Effet sur l'APK : environ **+1,7 Mo**
+pour la TV et pour le téléphone (zips déjà compressés, non mesuré sur un APK construit).
+
+**Essai** : « Apprendre » n'est pas dans `TrialPolicy.CLOSED_TILES` et `/api/learn` n'est pas bloqué : le contenu de base est donc visible dans
+l'édition d'essai (en plus des lots d'essai). Décision du propriétaire : fermer ou non Apprendre en essai ; rien n'a été changé.
+
+**Tests** : `BaseContentTest` (32 classes × 174 couples classe-matière couverts ; un pack de base par pack hors couples déjà complets ; tailles ;
+validation de chaque fiche de base sans autre pack, mêmes blocs que la source ; identifiants uniques ; dérivation reproductible, sources intactes ;
+un lot remplace le contenu de base sans doublon, un pack de clé USB ne remplace que son pack de base ; le mode classe ouvre une fiche de base de
+chaque classe et matière).
+
 ## 5. Serveur bridge.sti-cm.com — routes à prévoir
 
 La TV fonctionne sans serveur. Le serveur hébergera, éditera et fera relire le contenu :
@@ -494,7 +548,7 @@ ouvrir une fiche précise), **Parents** (tableau de bord, contenus de la TV).
   (`Tex`, `TexLayout`), `Figure`, `Scene` (+ `SvgPath`), `Expr`, `Packs` (manifest, `PackReader`, `PackBuilder`,
   `PackSignatures`), `LessonSource` (`EmbeddedLessonSource`, `DirectoryLessonSource`, `LearnLibrary`, `PackInstaller`,
   `RemoteLessonApi`), lots (`LearnScopes`, `LearnLots`, `LearnLotConsumer`, `LearnMerge`, `LearnReview`, `lots/LotApi`), `Marking` (`Answer`, `Mark`, `Shuffle`, `LessonDeck`, `MockExamSession`), `Progress`
-  (`LearnProgress`, `LearnStore`), `LearnApi`, `LearnQuiz`, `LearnTool` (CLI check/build/embed).
+  (`LearnProgress`, `LearnStore`), `LearnApi`, `LearnQuiz`, `LearnTool` (CLI check/build/embed), `BaseContent` (contenu de base, § 4c).
 - `:receiver` : `LearnActivity` (profils, accueil, examens, programme, packs, récompenses, contenus), `LearnReader`
   (lecteur, séries, épreuve blanche, correction), `LearnExercise`, `LearnViews` (`LearnStyle`, `FigureView`,
   `FormulaView`), `LearnHub` (sources, progression, API) ; accroches : tuile de l'accueil, entrée du manifest,

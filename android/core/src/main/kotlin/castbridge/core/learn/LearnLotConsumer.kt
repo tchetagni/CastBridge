@@ -154,7 +154,10 @@ class LearnLotSource(private val consumer: LearnLotConsumer) : LessonSource {
  * comes from the framework's catalog (see [LearnClassStatus]).
  */
 class LearnLotCatalog(private val consumer: LearnLotConsumer, private val starter: LessonSource? = null) {
-    data class ClassInfo(val scope: String, val title: String, val meta: LotMeta?, val date: String?, val fromStarter: Boolean, val packs: Int, val lessons: Int)
+    data class ClassInfo(val scope: String, val title: String, val meta: LotMeta?, val date: String?, val fromStarter: Boolean, val packs: Int, val lessons: Int) {
+        /** No complete lot installed: the class only has the content of the app (base packs, see [BaseContent]). */
+        val baseOnly get() = meta == null
+    }
     data class LessonEntry(val pack: String, val id: String, val title: String, val hash: String)
 
     fun classes(): List<ClassInfo> {

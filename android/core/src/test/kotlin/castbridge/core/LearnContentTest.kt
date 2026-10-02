@@ -135,7 +135,7 @@ class LearnContentTest {
         val src = EmbeddedLessonSource()
         val refs = src.list()
         assertTrue(refs.isNotEmpty(), "embedded packs present in the resources")
-        assertEquals(LearnTool.embeddedIds(content), refs.map { it.id }.toSet())
+        assertEquals(LearnTool.embeddedIds(content), refs.map { it.id }.filterNot { BaseContent.isBase(it) }.toSet(), "the full embedded packs are those of embedded.txt (+ the base packs, see BaseContentTest)")
         var total = 0L
         for (r in refs) { total += r.bytes().use { it.readBytes().size.toLong() }; src.open(r) }
         assertTrue(total < 5L shl 20, "embedded content $total bytes > 5 MB budget")

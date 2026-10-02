@@ -8,7 +8,8 @@ import kotlin.system.exitProcess
  *
  *   check <content dir> [pack id…]          validate the sources, print errors, warnings and the coverage table
  *   build <content dir> <out dir>           build every pack zip (+ catalog.json) into <out dir>
- *   embed <content dir> <out dir>           build only the packs listed in <content dir>/embedded.txt, as app resources
+ *   embed <content dir> <out dir>           build the packs listed in <content dir>/embedded.txt (full) + the base packs (BaseContent: the first
+ *                                           fiches of every other pack), as app resources
  *   lots <content dir> <out dir> [--update] [--date=YYYY-MM-DD]
  *                                           build the lots (one zip per class, docs/LEARN.md § Lots) + lots-catalog.json; fails if a
  *                                           lot exceeds 3 MB or if its content changed without --update (which bumps its version)
@@ -24,7 +25,7 @@ object LearnTool {
         val code = when (args[0]) {
             "check" -> check(content, args.drop(2).toSet())
             "build" -> build(content, File(args.getOrElse(2) { "build/learn-packs" }), null)
-            "embed" -> build(content, File(args[2]), embeddedIds(content))
+            "embed" -> embed(content, File(args[2]))
             "lots" -> lots(content, File(args[2]), args.drop(3))
             "review" -> { File(args[2]).writeText(LearnReview.report(content), Charsets.UTF_8); println("rapport de relecture : ${args[2]}"); 0 }
             else -> { System.err.println("commande inconnue ${args[0]}"); 2 }
@@ -82,6 +83,34 @@ object LearnTool {
         }
         // index of the folder: what the app (embedded) or the server (catalog) lists without opening the zips
         File(out, "catalog.json").writeText(LearnCatalogFile.write(built.map { LearnCatalogFile.Entry(it, it.fileName, scope = table?.scopeOf(it.id)) }))
+        return 0
+    }
+
+    /** The app resources: the full embedded packs, then one base pack per other pack (see [BaseContent]); catalog.json lists them all with their lot. */
+    fun embed(content: File, out: File): Int {
+        out.mkdirs()
+        val full = embeddedIds(content)
+        val table = File(content, "scopes.txt").takeIf { it.isFile }?.let { LearnScopes.parseTable(it.readText()) }
+        val known = allLessonIds(content)
+        val entries = ArrayList<LearnCatalogFile.Entry>()
+        var bytes = 0L
+        for (d in packDirs(content)) {
+            if (d.name !in full) continue
+            val b = try { PackBuilder.build(PackBuilder.sources(d), knownLessons = known) } catch (e: Exception) { System.err.println("✗ ${d.name}: ${e.message}"); return 1 }
+            File(out, b.manifest.fileName).writeBytes(b.bytes); bytes += b.bytes.size
+            entries += LearnCatalogFile.Entry(b.manifest, b.manifest.fileName, scope = table?.scopeOf(d.name))
+            println("✓ ${b.manifest.fileName}  ${b.bytes.size} octets (${b.manifest.size} décompressés), ${b.manifest.lessons} fiches, ${b.manifest.exercises} exercices")
+        }
+        var baseBytes = 0L; var baseRaw = 0L; var baseLessons = 0; var baseCount = 0
+        val plans = try { BaseContent.plan(content) } catch (e: Exception) { System.err.println("✗ contenu de base : ${e.message}"); return 1 }
+        for (pl in plans) {
+            val b = try { PackBuilder.build(pl.files) } catch (e: Exception) { System.err.println("✗ ${pl.dir.name} (contenu de base): ${e.message}"); return 1 }
+            File(out, b.manifest.fileName).writeBytes(b.bytes)
+            baseBytes += b.bytes.size; baseRaw += b.manifest.size; baseLessons += b.manifest.lessons; baseCount++
+            entries += LearnCatalogFile.Entry(b.manifest, b.manifest.fileName, scope = pl.scope)
+        }
+        File(out, "catalog.json").writeText(LearnCatalogFile.write(entries.sortedBy { it.manifest.id }))
+        println("contenu de base : $baseCount packs, $baseLessons fiches, $baseRaw octets décompressés, $baseBytes octets en zip ; packs complets embarqués : $bytes octets")
         return 0
     }
 

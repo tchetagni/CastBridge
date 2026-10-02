@@ -572,13 +572,54 @@ def bundles(inv, aliases=None):
     return out
 
 
-def build_manifest(inv, sel, cfg, files):
+RENTAL_DAYS_MIN, RENTAL_DAYS_MAX = 1, 366
+DEFAULT_RENTAL_FILE = os.path.join(HERE, "..", "..", "content", "bundles-rental.json")
+
+
+def load_rental(path=None):
+    """Durées de location FIXÉES PAR LE SERVEUR (content/bundles-rental.json) : {"default": jours, "bundles": {id: jours}}."""
+    p = path or DEFAULT_RENTAL_FILE
+    if not os.path.isfile(p):
+        raise Fail("fichier des durées de location introuvable : %s (créez-le : {\"default\": 30, \"bundles\": {}} ; c'est le propriétaire qui fixe les durées)" % p)
+    try:
+        r = load(p)
+    except ValueError as e:
+        raise Fail("fichier des durées de location illisible (%s) : %s" % (p, e))
+    if not isinstance(r, dict) or not isinstance(r.get("bundles", {}), dict):
+        raise Fail("fichier des durées de location : un objet {\"default\": jours, \"bundles\": {...}} est attendu (%s)" % p)
+    return r
+
+
+def rental_days(rental, bund):
+    """Durée de location exacte de chaque bouquet (par bouquet, sinon « default ») ; échoue si l'une n'est pas un entier de 1 à 366."""
+    def ok(v):
+        return isinstance(v, int) and not isinstance(v, bool) and RENTAL_DAYS_MIN <= v <= RENTAL_DAYS_MAX
+    per = rental.get("bundles", {})
+    ids = {b["id"] for b in bund}
+    for k in sorted(per):
+        if k not in ids:
+            raise Fail("durées de location : le bouquet « %s » n'existe pas dans le catalogue (faute de frappe ?)" % k)
+    out = {}
+    for b in bund:
+        v = per.get(b["id"], rental.get("default"))
+        if v is None:
+            raise Fail("durées de location : aucune durée pour le bouquet « %s » (ni durée propre, ni « default »)" % b["id"])
+        if not ok(v):
+            raise Fail("durées de location : la durée du bouquet « %s » doit être un nombre entier de jours de %d à %d (reçu : %r)" % (b["id"], RENTAL_DAYS_MIN, RENTAL_DAYS_MAX, v))
+        out[b["id"]] = v
+    return out
+
+
+def build_manifest(inv, sel, cfg, files, rental=None):
     lots, total = [], 0
     by_lot = {}
     for i in inv.items.values():
         if i.uid in sel.chosen:
             by_lot.setdefault(i.lot, []).append(i)
     bund = bundles(inv, cfg.get("bundleQuizAliases"))
+    days = rental_days(load_rental() if rental is None else rental, bund)
+    for x in bund:
+        x["rentalDays"] = days[x["id"]]       # la durée d'une location est fixée par le serveur, exacte : les outils du propriétaire n'en acceptent pas d'autre
     for lot in sorted(by_lot):
         f = files[lot]
         b = sum(fsize(v) for v in f.values())
@@ -683,6 +724,7 @@ def main(argv=None):
     ap.add_argument("--out")
     ap.add_argument("--manifest")
     ap.add_argument("--only")
+    ap.add_argument("--rental", help="durées de location par bouquet (défaut : <repo>/content/bundles-rental.json)")
     ap.add_argument("--previous")
     ap.add_argument("--draft", action="store_true", help="écrit <out>.draft.json même si une règle échoue (diagnostic ; exit 1 quand même)")
     a = ap.parse_args(argv)
@@ -694,7 +736,7 @@ def main(argv=None):
     try:
         inv, sel, files = run_select(a.repo, cfg, only, prev)
         v = violations(inv, sel, cfg, files)
-        man = build_manifest(inv, sel, cfg, files)
+        man = build_manifest(inv, sel, cfg, files, load_rental(a.rental or os.path.join(a.repo, "content", "bundles-rental.json")))
     except Fail as e:
         print("ÉCHEC : %s" % e, file=sys.stderr)
         return 1

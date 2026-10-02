@@ -38,12 +38,14 @@
 ## 2. La sélection automatique (`tools/trial-edition`)
 
 ```
-python3 tools/trial-edition/trial_edition.py select [--only learn,quiz,langues] [--previous FICHIER] [--draft]   # écrit content/TRIAL-MANIFEST.json (jamais s'il est invalide)
+python3 tools/trial-edition/trial_edition.py select [--only learn,quiz,langues] [--previous FICHIER] [--rental FICHIER] [--draft]   # écrit content/TRIAL-MANIFEST.json (jamais s'il est invalide)
 python3 tools/trial-edition/trial_edition.py check                                                         # le manifeste est-il à jour ? (CI : échoue s'il est périmé)
 python3 tools/trial-edition/trial_edition.py build --out DIR                                               # fabrique les lots d'essai (zip) pour la publication
-python3 -m unittest discover -s tools/trial-edition                                                        # 17 tests, contenu synthétique
+python3 -m unittest discover -s tools/trial-edition                                                        # 21 tests, contenu synthétique
 ```
 Python 3.8+, bibliothèque standard. Réglages dans `tools/trial-edition/config.json` (aucune valeur n'est un prix).
+
+**Durées de location** : chaque bouquet de `TRIAL-MANIFEST.json` porte `rentalDays`, lu dans `content/bundles-rental.json` (`{"default": 30, "bundles": {"<bouquet>": jours}}` ; `--rental` pour un autre fichier ; défaut du propriétaire : 30 jours, durée propre possible par bouquet). Chaque bouquet doit obtenir un entier de 1 à 366 (propre, sinon `default`), sinon l'outil échoue avec un message en français ; un bouquet inconnu dans le fichier (faute de frappe) échoue aussi. Changer une durée rend le manifeste périmé (`check` échoue : relancer `select`). La durée d'une location est **exacte** et fixée par le serveur : voir [RENTAL-LOTS.md](RENTAL-LOTS.md) § 14.
 
 ### 2.1 Entrées (le « registre » et la « couverture »)
 - **Apprendre** : `content/learn/scopes.txt` (classe → packs), `pack.json` (matière), leçons et exercices (`lessons/*.json`).

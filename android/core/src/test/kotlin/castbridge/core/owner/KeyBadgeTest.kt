@@ -58,6 +58,10 @@ class TrialPolicyTest {
         assertFalse(TvGate.evaluate(listOf(act(ActivationKind.TRIAL, Right.Usage(T, T + DAY)), act(ActivationKind.PRODUCTION, Right.Purchase("p", listOf("b"), T))), emptyList(), T).trial, "a production key lifts it")
     }
 
+    @Test fun activationAndRentalRoutesStayOpenInTrial() {
+        for (r in listOf("/api/activation", "/api/activation/install", "/api/activation/request", "/api/rental", "/api/lots/upload", "/api/rental/install")) assertFalse(TrialPolicy.routeBlocked(r), r)
+    }
+
     @Test fun streamingAndSudokuStayCopyAndMoveGoAway() {
         assertTrue(TrialPolicy.gameAllowed("sudoku")); assertFalse(TrialPolicy.gameAllowed("chess")); assertFalse(TrialPolicy.gameAllowed("quiz"))
         assertTrue(TrialPolicy.tileAllowed("remote")); for (t in listOf("library", "receive", "usb", "downloads", "langues")) assertFalse(TrialPolicy.tileAllowed(t), t); for (t in listOf("learn", "games", "bluetooth")) assertTrue(TrialPolicy.tileAllowed(t), t)

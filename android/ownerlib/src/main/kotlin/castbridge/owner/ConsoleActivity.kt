@@ -27,6 +27,8 @@ import androidx.compose.ui.unit.sp
 import castbridge.core.lots.Right
 import castbridge.core.lots.RentalKeys
 import castbridge.core.lots.RentalLines
+import castbridge.core.lots.RentalDurations
+import castbridge.core.lots.BundleCatalog
 import castbridge.core.owner.*
 import java.time.LocalDate
 import java.time.ZoneOffset
@@ -124,12 +126,15 @@ open class ConsoleActivity : ComponentActivity() {
         var input by remember { mutableStateOf("") }
         var field by remember { mutableStateOf(androidx.compose.ui.text.input.TextFieldValue("")) }
         if (field.text != input) field = androidx.compose.ui.text.input.TextFieldValue(input, androidx.compose.ui.text.TextRange(input.length))      // set from outside (Bluetooth read)
-        var production by remember { mutableStateOf(false) }
-        var keyDays by remember { mutableStateOf("") }      // duration of the key: empty = trial 30 days / production unlimited
-        var superUnlimited by remember { mutableStateOf(false) }; var license by remember { mutableStateOf("") }
-        var purchase by remember { mutableStateOf("") }; var subscription by remember { mutableStateOf("") }
-        var rental by remember { mutableStateOf("") }
-        var openProduct by remember { mutableStateOf("") }; var openDays by remember { mutableStateOf("30") }
+        var form by remember { mutableStateOf(ProductionForm()) }
+        var catalogInfo by remember { mutableStateOf(store.catalog()) }
+        var catalogMsg by remember { mutableStateOf<String?>(null) }
+        val importCatalog = rememberLauncherForActivityResult(ActivityResultContracts.OpenDocument()) { uri ->
+            if (uri != null) runCatching { store.saveCatalog(contentResolver.openInputStream(uri)!!.use { it.readBytes().toString(Charsets.UTF_8) }) }
+                .onSuccess { n -> catalogInfo = store.catalog(); form = form.copy(catalog = catalogInfo?.first, purchaseBundles = emptySet(), subscriptionBundles = emptySet(), rentalBundles = emptySet()); catalogMsg = "Catalogue importé : $n bouquets." }
+                .onFailure { catalogMsg = it.message ?: "Import impossible" }
+        }
+        if (form.catalog == null && catalogInfo != null) form = form.copy(catalog = catalogInfo!!.first)
         var token by remember { mutableStateOf<String?>(null) }; var fileContent by remember { mutableStateOf<String?>(null) }
         var error by remember { mutableStateOf<String?>(null) }; var info by remember { mutableStateOf<String?>(null) }
         val save = rememberLauncherForActivityResult(ActivityResultContracts.CreateDocument("text/plain")) { uri ->
@@ -165,24 +170,45 @@ open class ConsoleActivity : ComponentActivity() {
                 val t = castbridge.core.owner.DeviceCode.typing(v.text)
                 field = if (t == v.text) v else androidx.compose.ui.text.input.TextFieldValue(t, androidx.compose.ui.text.TextRange(t.length)); input = t; token = null; error = null }, label = { Text("Code d'appareil (XXXX-XXXX-XXXX-XXXX) ou demande d'appareil complète") },
                 modifier = Modifier.fillMaxWidth().heightIn(min = 90.dp))
-            OutlinedTextField(keyDays, { keyDays = it.filter { c -> c.isDigit() || c.isLetter() }.take(10) }, singleLine = true, modifier = Modifier.fillMaxWidth(),
-                label = { Text(if (production) "Durée de la clé : vide ou « illimitée » = jamais reverrouillée, ou un nombre de jours" else "Durée de la clé d'essai en jours (vide = ${ActivationPolicy.TRIAL_DEFAULT_DAYS})") })
+            val production = form.production
             Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
-                FilterChip(!production, { production = false }, { Text("Essai") }); FilterChip(production, { production = true }, { Text("Production") })
+                FilterChip(!production, { form = ProductionForm.withProduction(form, false); token = null }, { Text("Essai") }); FilterChip(production, { form = ProductionForm.withProduction(form, true); token = null }, { Text("Production") })
+            }
+            if (!(production && form.superUnlimited)) {
+                Text(if (production) "Durée de la clé" else "Durée de la clé d'essai (toujours bornée)", style = MaterialTheme.typography.titleSmall)
+                @OptIn(ExperimentalLayoutApi::class) FlowRow(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
+                    ProductionForm.options(production).forEach { o -> FilterChip(form.durationChoice == o, { form = form.copy(durationChoice = o); token = null }, { Text(ProductionForm.label(o)) }) }
+                }
+                if (form.durationChoice == ProductionForm.OTHER) OutlinedTextField(form.otherDays, { form = form.copy(otherDays = it.filter(Char::isDigit).take(4)); token = null }, singleLine = true,
+                    label = { Text("Nombre de jours (1 à ${if (production) ActivationPolicy.PRODUCTION_MAX_DAYS else ActivationPolicy.TRIAL_MAX_DAYS})") }, keyboardOptions = androidx.compose.foundation.text.KeyboardOptions(keyboardType = KeyboardType.Number), modifier = Modifier.fillMaxWidth())
+                if (production && form.durationChoice == null) Text("Illimitée : la TV ne se reverrouille jamais.", style = MaterialTheme.typography.bodySmall)
             }
             Text("Le code est valable ${ActivationPolicy.CODE_VALIDITY_HOURS} h pour l'installer (pour tous les codes).", style = MaterialTheme.typography.bodySmall)
             if (production) Row(Modifier.fillMaxWidth(), verticalAlignment = androidx.compose.ui.Alignment.CenterVertically, horizontalArrangement = Arrangement.SpaceBetween) {
-                Text(if (superUnlimited) "SUPER_UNLIMITED : lit et débloque tout, locations permanentes" else "Droits selon la saisie ci-dessous")
-                Switch(superUnlimited, { superUnlimited = it; token = null })
+                Text(if (form.superUnlimited) "SUPER_UNLIMITED : lit et débloque tout, locations permanentes, sans durée" else "Droits selon les choix ci-dessous")
+                Switch(form.superUnlimited, { form = form.copy(superUnlimited = it); token = null })
             }
             if (production) {
-                OutlinedTextField(license, { license = it }, label = { Text("Identifiant de licence") }, singleLine = true, modifier = Modifier.fillMaxWidth())
-                OutlinedTextField(purchase, { purchase = it }, label = { Text("Achat à la carte : PRODUIT:BOUQUET,BOUQUET") }, modifier = Modifier.fillMaxWidth())
-                OutlinedTextField(subscription, { subscription = it }, label = { Text("Abonnement : PRODUIT:BOUQUET:AAAA-MM-JJ") }, modifier = Modifier.fillMaxWidth())
-                OutlinedTextField(rental, { rental = it }, label = { Text("Location : PRODUIT=BOUQUET,BOUQUET:JOURS[:MINUTES_D_USAGE_MAX] (un lot libre n'est jamais loué)") }, modifier = Modifier.fillMaxWidth())
+                OutlinedTextField(form.license, { form = form.copy(license = it) }, label = { Text("Identifiant de licence") }, singleLine = true, modifier = Modifier.fillMaxWidth())
+                Card(Modifier.fillMaxWidth()) { Column(Modifier.padding(12.dp), verticalArrangement = Arrangement.spacedBy(4.dp)) {
+                    val ci = catalogInfo
+                    Text(if (ci == null) "Aucun catalogue de bouquets." else "Catalogue du ${java.text.SimpleDateFormat("dd/MM/yyyy").format(java.util.Date(ci.second))} : ${ci.first.bundles.size} bouquets", style = MaterialTheme.typography.titleSmall)
+                    OutlinedButton({ importCatalog.launch(arrayOf("application/json", "text/plain", "*/*")) }) { Text("Importer le catalogue…") }
+                    catalogMsg?.let { Text(it, style = MaterialTheme.typography.bodySmall) }
+                } }
+                val cat = form.catalog
+                if (cat == null) Text(ProductionForm.NO_CATALOG + " (achats, abonnements et locations). « Tout ouvert » et SUPER_UNLIMITED restent possibles.", style = MaterialTheme.typography.bodyMedium)
+                else {
+                    OutlinedTextField(form.product, { form = form.copy(product = it.trim()) }, label = { Text("Produit des achats et de l'abonnement") }, singleLine = true, modifier = Modifier.fillMaxWidth())
+                    BundlePicker("Achats (permanents)", cat, false, form.purchaseBundles) { form = form.copy(purchaseBundles = it); token = null }
+                    BundlePicker("Abonnement", cat, false, form.subscriptionBundles) { form = form.copy(subscriptionBundles = it); token = null }
+                    if (form.subscriptionBundles.isNotEmpty()) OutlinedTextField(form.subscriptionEnd, { form = form.copy(subscriptionEnd = it.filter { c -> c.isDigit() || c == '-' }.take(10)); token = null },
+                        label = { Text("Fin de l'abonnement (AAAA-MM-JJ)") }, singleLine = true, modifier = Modifier.fillMaxWidth())
+                    BundlePicker("Locations (durée fixée par le serveur)", cat, true, form.rentalBundles) { form = form.copy(rentalBundles = it); token = null }
+                }
                 Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
-                    OutlinedTextField(openProduct, { openProduct = it }, label = { Text("« Tout ouvert » : produit") }, singleLine = true, modifier = Modifier.weight(1f))
-                    OutlinedTextField(openDays, { openDays = it.filter(Char::isDigit).take(2) }, label = { Text("Jours (≤ 30)") }, singleLine = true, modifier = Modifier.width(110.dp))
+                    OutlinedTextField(form.openProduct, { form = form.copy(openProduct = it) }, label = { Text("« Tout ouvert » : produit") }, singleLine = true, modifier = Modifier.weight(1f))
+                    OutlinedTextField(form.openDays, { form = form.copy(openDays = it.filter(Char::isDigit).take(2)) }, label = { Text("Jours (≤ 30)") }, singleLine = true, modifier = Modifier.width(110.dp))
                 }
             }
             Button({
@@ -192,40 +218,28 @@ open class ConsoleActivity : ComponentActivity() {
                     val full = OwnerFrames.parseDeviceInfo(input.trim().replace("\r", ""))
                     if (full != null) {
                         if (DeviceCode.of(full.third) != full.first) throw IssueException("Le code d'appareil ne correspond pas aux empreintes de la demande (texte altéré ?)")
-                        val rights = ArrayList<Right>()
+                        val plan = form.build(now)
+                        val rights = ArrayList<Right>(plan.rights)
                         if (production) {
-                            purchase.lines().filter { it.isNotBlank() }.forEach { l -> l.split(':', limit = 2).also { if (it.size < 2) throw IssueException("Achat : PRODUIT:BOUQUET") }.let { rights += Right.Purchase(it[0].trim(), it[1].split(',').map(String::trim).filter(String::isNotEmpty), now) } }
-                            subscription.lines().filter { it.isNotBlank() }.forEach { l -> l.split(':').also { if (it.size != 3) throw IssueException("Abonnement : PRODUIT:BOUQUET:AAAA-MM-JJ") }.let {
-                                val end = runCatching { LocalDate.parse(it[2].trim()).atStartOfDay(ZoneOffset.UTC).toInstant().toEpochMilli() }.getOrNull() ?: throw IssueException("Date d'abonnement invalide")
-                                rights += Right.Subscription(it[0].trim(), it[1].split(',').map(String::trim).filter(String::isNotEmpty), start, end, 7 * day, false) } }
-                            if (superUnlimited) rights += Right.Super("super-illimite", now)      // reads and unlocks everything for good: needs the SUPER_UNLIMITED scope on this key (the TV refuses it otherwise)
-                            rental.lines().filter { it.isNotBlank() }.forEach { l ->
-                                rights += RentalIssuing.right(RightsSyntax.rental(l.trim()), now, license.trim(), SeatIds.of(license.trim(), full.third), full.third, RentalKeys.masterFrom(signer))
+                            plan.rentals.forEach { spec ->
+                                form.catalog?.let { c -> RentalDurations.check(spec, c)?.let { throw IssueException(it) } }
+                                rights += RentalIssuing.right(spec, now, form.license.trim(), SeatIds.of(form.license.trim(), full.third), full.third, RentalKeys.masterFrom(signer))
                             }
-                            if (openProduct.isNotBlank()) rights += Right.OpenAll(openProduct.trim(), start, start + (openDays.toIntOrNull() ?: throw IssueException("« Tout ouvert » : nombre de jours")) * day)
                         }
                         val kind = if (production) ActivationKind.PRODUCTION else ActivationKind.TRIAL
-                        val lic = if (production) license.trim() else Activation.TRIAL_LICENSE
-                        val unlimited = keyDays.isBlank() && production || keyDays.lowercase().startsWith("illimit")
-                        val days: Int? = if (unlimited) null else (keyDays.ifBlank { null }?.toIntOrNull() ?: if (keyDays.isBlank()) ActivationPolicy.TRIAL_DEFAULT_DAYS else throw IssueException("Durée de la clé : un nombre de jours${if (production) " ou « illimitée »" else ""}"))
-                        if (!production && days == null) throw IssueException("Un essai a toujours une durée (1 à ${ActivationPolicy.TRIAL_MAX_DAYS} jours)")
-                        if (superUnlimited && production && days != null) throw IssueException("SUPER_UNLIMITED est permanent : laissez la durée vide ou « illimitée »")
-                        if (days != null) {
-                            val max = if (production) ActivationPolicy.PRODUCTION_MAX_DAYS else ActivationPolicy.TRIAL_MAX_DAYS
-                            if (days !in 1..max) throw IssueException("Durée de la clé : 1 à $max jours")
-                            rights += Right.Usage(now, now + days * day)
-                        }
+                        val lic = if (production) form.license.trim() else Activation.TRIAL_LICENSE
+                        plan.usageDays?.let { rights += Right.Usage(now, now + it * day) }
                         // a TRIAL key also carries its one-time 12 h window of rented lots (the TV grants it once for the life of the application); it is never shown as a rental
                         if (!production) rights += RentalIssuing.right(RentalSpec(RentalLines.TRIAL_PRODUCT, listOf(Right.ALL_BUNDLE), RentalLines.TRIAL_DAYS, RentalLines.TRIAL_USAGE_MINUTES),
                             now, Activation.TRIAL_LICENSE, SeatIds.of(Activation.TRIAL_LICENSE, full.third), full.third, RentalKeys.masterFrom(signer))
                         val issued = issuer.issue(ActivationIssuer.Request(kind, full.first, full.third, issuedAt = now, rights = rights, license = lic))
                         token = issued.token; fileContent = issued.fileContent
-                        store.journal(if (superUnlimited && production) "super" else "activation", full.first, kind.name, lic, ActivationPolicy.CODE_VALIDITY_HOURS)
+                        store.journal(if (form.superUnlimited && production) "super" else "activation", full.first, kind.name, lic, ActivationPolicy.CODE_VALIDITY_HOURS)
                     } else {
                         val code = DeviceCode.parse(input.trim()) ?: throw IssueException("Code d'appareil mal formé (16 caractères, contrôle compris) et demande complète illisible")
                         val kind = if (production) ActivationKind.PRODUCTION else ActivationKind.TRIAL
                         val hourIdx = ((now - 1767225600000L) / ActivationPolicy.HOUR_MS).toInt()
-                        if (superUnlimited && production) throw IssueException("SUPER_UNLIMITED exige la demande d'appareil complète (fichier ou Bluetooth) : une clé à saisir ne porte aucun droit")
+                        if (form.superUnlimited && production) throw IssueException("SUPER_UNLIMITED exige la demande d'appareil complète (fichier ou Bluetooth) : une clé à saisir ne porte aucun droit")
                         token = issuer.issueCompact(kind, code, hourIdx)
                         store.journal("compact", code, kind.name, "-", ActivationPolicy.CODE_VALIDITY_HOURS)
                         info = "Clé compacte (à saisir) : liée à ce code d'appareil, sans droits ni clés de lots. Pour une activation complète, collez la demande d'appareil exportée par la TV."
@@ -246,6 +260,22 @@ open class ConsoleActivity : ComponentActivity() {
                 } }
             }
         }
+    }
+
+    @Composable private fun BundlePicker(title: String, cat: BundleCatalog, forRental: Boolean, selected: Set<String>, onChange: (Set<String>) -> Unit) {
+        var open by remember { mutableStateOf(false) }
+        Card(Modifier.fillMaxWidth()) { Column(Modifier.padding(12.dp), verticalArrangement = Arrangement.spacedBy(2.dp)) {
+            Row(Modifier.fillMaxWidth(), verticalAlignment = androidx.compose.ui.Alignment.CenterVertically) {
+                Text("$title : ${selected.size} choisi(s)", style = MaterialTheme.typography.titleSmall, modifier = Modifier.weight(1f))
+                TextButton({ open = !open }) { Text(if (open) "Replier" else "Choisir") }
+            }
+            if (open) cat.bundles.sortedBy { it.id }.forEach { b ->
+                                Row(verticalAlignment = androidx.compose.ui.Alignment.CenterVertically) {
+                    Checkbox(b.id in selected, { on -> onChange(if (on) selected + b.id else selected - b.id) })
+                    Text(ProductionForm.bundleLine(b, forRental), style = MaterialTheme.typography.bodySmall)
+                }
+            }
+        } }
     }
 
     @Composable private fun PublicKey() {

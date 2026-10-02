@@ -5,6 +5,8 @@ import castbridge.core.owner.Delivered
 import castbridge.core.owner.DeviceRequest
 import castbridge.core.owner.IssueSpec
 import castbridge.core.owner.RightsSyntax
+import castbridge.core.lots.BundleCatalog
+import castbridge.core.lots.RentalDurations
 import castbridge.core.lots.Right
 import castbridge.core.owner.ActivationKind
 import castbridge.core.owner.DeviceCode
@@ -97,10 +99,25 @@ object Gui {
             val subject = JComboBox(arrayOf("TV", "Téléphone"))
             val license = JTextField("trial")
             val permanent = JCheckBox("SUPER_UNLIMITED : lit et débloque tout, locations permanentes (clé super administrateur seulement) ; le code reste valable 48 h pour l'installer")
-            val rights = JTextArea(4, 50).apply { toolTipText = "Une ligne par droit : achat produit=bouquet1,bouquet2 | abonnement produit=bouquets:jours[:tolérance[:auto]] | tout-ouvert produit:jours" }
-            val trialDays = JTextField("${castbridge.core.owner.ActivationPolicy.TRIAL_DEFAULT_DAYS}").apply { toolTipText = "Essai : durée de la clé en jours (1 à ${castbridge.core.owner.ActivationPolicy.TRIAL_MAX_DAYS}). L'essai ouvre aussi, une seule fois, 12 h de lots locatifs." }
-            val prodDays = JTextField("illimitée").apply { toolTipText = "Production : « illimitée » (la TV ne se reverrouille jamais) ou un nombre de jours (1 à ${castbridge.core.owner.ActivationPolicy.PRODUCTION_MAX_DAYS})." }
-            val rentals = JTextArea(3, 50).apply { toolTipText = "Une ligne par location de lots : produit=bouquet1,bouquet2:JOURS[:MINUTES_D_USAGE_MAX] (un lot libre n'est jamais loué ; la durée court à partir de l'émission)" }
+            val rights = JTextArea(3, 50).apply { toolTipText = "Avancé, une ligne par droit : tout-ouvert produit:jours | droit LIGNE | location produit=bouquet:JOURS (durée EXACTE du catalogue chargé ; refusée sans catalogue)" }
+            val trialDays = JTextField("${castbridge.core.owner.ActivationPolicy.TRIAL_DEFAULT_DAYS}").apply { toolTipText = "Essai : durée de la clé en jours (1 à ${castbridge.core.owner.ActivationPolicy.TRIAL_MAX_DAYS}, jamais illimitée). L'essai ouvre aussi, une seule fois, 12 h de lots locatifs." }
+            val prodDays = JComboBox(KeyDuration.CHOICES.toTypedArray()).apply { toolTipText = "Production : « ${KeyDuration.UNLIMITED} » (la TV ne se reverrouille jamais), un nombre de jours usuel, ou « ${KeyDuration.OTHER} »." }
+            val otherDays = JTextField("90", 6).apply { isEnabled = false; toolTipText = "Nombre de jours (1 à ${castbridge.core.owner.ActivationPolicy.PRODUCTION_MAX_DAYS})" }
+            prodDays.addActionListener { otherDays.isEnabled = prodDays.selectedItem == KeyDuration.OTHER && prodDays.isEnabled }
+            permanent.addActionListener { if (permanent.isSelected) prodDays.selectedItem = KeyDuration.UNLIMITED; prodDays.isEnabled = !permanent.isSelected; otherDays.isEnabled = false }
+            val prodRow = JPanel(FlowLayout(FlowLayout.LEFT, 0, 0)).apply { add(prodDays); add(JLabel("  ")); add(otherDays) }
+            var catalog: BundleCatalog? = null
+            val checklist = Checklist()
+            val catLabel = JLabel("Aucun catalogue chargé : les achats, abonnements et locations par bouquet sont indisponibles.")
+            val loadCat = JButton("Catalogue…").apply {
+                addActionListener {
+                    val f = chooseFile(false) ?: return@addActionListener
+                    try { catalog = BundleCatalog.parse(f.readText()).also { checklist.fill(it) }; catLabel.text = "Catalogue : ${f.name} (${catalog!!.bundles.size} bouquets)" }
+                    catch (e: Exception) { catalog = null; checklist.fill(null); catLabel.text = "Catalogue illisible."; error("Catalogue illisible (TRIAL-MANIFEST.json ou fichier contenant le tableau « bundles ») : ${e.message}") }
+                }
+            }
+            val catRow = JPanel(BorderLayout(8, 0)).apply { add(loadCat, BorderLayout.WEST); add(catLabel, BorderLayout.CENTER) }
+            val catScroll = JScrollPane(checklist.panel).apply { preferredSize = Dimension(600, 190) }
             val pass = JPasswordField()
             val load = JButton("Ouvrir une demande…").apply { addActionListener { chooseFile(false)?.let { request.text = it.readText() } } }
             kind.addActionListener { license.isEnabled = kind.selectedIndex == 1; if (kind.selectedIndex == 0) license.text = "trial" else if (license.text == "trial") license.text = "" }
@@ -113,12 +130,11 @@ object Gui {
                         val d = unlocked(p) ?: return@addActionListener
                         val now = System.currentTimeMillis()
                         val k = if (kind.selectedIndex == 0) ActivationKind.TRIAL else ActivationKind.PRODUCTION
-                        val usage: Int? = (if (k == ActivationKind.TRIAL) trialDays.text else prodDays.text).trim().lowercase().let { t ->
-                            if (t.startsWith("illimit")) { if (k == ActivationKind.TRIAL) throw IssueException("Un essai a toujours une durée (1 à ${castbridge.core.owner.ActivationPolicy.TRIAL_MAX_DAYS} jours)"); null }
-                            else t.toIntOrNull() ?: throw IssueException("Durée d'usage : un nombre de jours${if (k == ActivationKind.PRODUCTION) " ou « illimitée »" else ""}") }
-                        val rentalSpecs = rentals.text.lines().filter { it.isNotBlank() }.map { RightsSyntax.rental(it.trim(), null) }
-                        if (rentalSpecs.isNotEmpty() && k != ActivationKind.PRODUCTION) throw IssueException("Une location exige une activation de production (licence et poste)")
-                        val spec = IssueSpec(k, if (subject.selectedIndex == 0) Subject.TV else Subject.PHONE, RightsSyntax.parseBox(rights.text, now) + (if (permanent.isSelected && k == ActivationKind.PRODUCTION) listOf(Right.Super("super-illimite", now)) else emptyList()), license.text.trim().ifEmpty { Activation.TRIAL_LICENSE }, rentals = rentalSpecs, rentalMaster = if (rentalSpecs.isEmpty() && k != ActivationKind.TRIAL) null else d.rentalMaster(), usageDays = usage, trialLots = k == ActivationKind.TRIAL)
+                        val usage: Int? = if (k == ActivationKind.TRIAL) KeyDuration.trial(trialDays.text) else KeyDuration.production(prodDays.selectedItem as String, otherDays.text, permanent.isSelected)
+                        val plan = if (k == ActivationKind.TRIAL) RightsPlan(emptyList(), emptyList()).also { if (rights.text.isNotBlank() || checklist.any()) throw IssueException("Un essai ne porte aucun droit : choisissez « Production » pour des achats, abonnements ou locations") }
+                            else checklist.let { c -> GuiRights.plan(c.purchases(), c.subscriptions(), c.rentals(), rights.text, catalog, now) }
+                        val rentalSpecs = plan.rentals
+                        val spec = IssueSpec(k, if (subject.selectedIndex == 0) Subject.TV else Subject.PHONE, plan.rights + (if (permanent.isSelected && k == ActivationKind.PRODUCTION) listOf(Right.Super("super-illimite", now)) else emptyList()), license.text.trim().ifEmpty { Activation.TRIAL_LICENSE }, rentals = rentalSpecs, rentalMaster = if (rentalSpecs.isEmpty() && k != ActivationKind.TRIAL) null else d.rentalMaster(), usageDays = usage, trialLots = k == ActivationKind.TRIAL)
                         val r = d.issue(device, spec)
                         last = r; token.text = r.issued.token
                         qr.icon = ImageIcon(Qr.image(r.issued.token, 4))
@@ -135,12 +151,40 @@ object Gui {
             }
             val savePng = JButton("Enregistrer le code QR…").apply { addActionListener { last?.let { r -> chooseFile(true, "activation.png")?.let { f -> Qr.png(r.issued.token, f); info("Code QR enregistré : ${f.path}") } } } }
             val form = JPanel(); gb(form, listOf("Demande d'appareil (collée depuis la TV)" to JScrollPane(request), "" to load, "Type" to kind, "Pour" to subject, "Licence" to license,
-                "Privilège" to permanent, "Droits (un par ligne)" to JScrollPane(rights), "Essai : durée de la clé (jours)" to trialDays, "Production : durée de la clé (jours ou illimitée)" to prodDays, "Locations de lots (une par ligne)" to JScrollPane(rentals), "Code de déverrouillage" to pass, "" to go))
+                "Privilège" to permanent, "Essai : durée de la clé (jours)" to trialDays, "Production : durée de la clé" to prodRow, "Catalogue du serveur" to catRow, "Achats / abonnements / locations" to catScroll, "Avancé : autres droits (une ligne par droit)" to JScrollPane(rights), "Code de déverrouillage" to pass, "" to go))
             val out = JPanel(BorderLayout()).apply {
                 add(JScrollPane(token), BorderLayout.NORTH); add(qr, BorderLayout.CENTER)
                 add(JPanel(FlowLayout(FlowLayout.LEFT)).apply { add(copy); add(save); add(savePng) }, BorderLayout.SOUTH)
             }
             return JPanel(BorderLayout()).apply { add(form, BorderLayout.NORTH); add(out, BorderLayout.CENTER) }
+        }
+
+        /** Checklist of the catalogue's bundles: purchase, subscription (end date) and rental (duration fixed by the server, read-only: the catalogue's rentalDays, else the default of 30 days; disabled only when out of bounds). */
+        class Checklist {
+            val panel = JPanel(GridBagLayout())
+            private class Row(val id: String, val buy: JCheckBox, val sub: JCheckBox, val end: JTextField, val rent: JCheckBox)
+            private var rows = emptyList<Row>()
+            init { fill(null) }
+            fun fill(c: BundleCatalog?) {
+                panel.removeAll()
+                fun cell(comp: java.awt.Component, x: Int, y: Int, w: Double = 0.0) = panel.add(comp, GridBagConstraints().apply { gridx = x; gridy = y; weightx = w; anchor = GridBagConstraints.WEST; insets = Insets(1, 4, 1, 4) })
+                listOf("Bouquet", "Achat", "Abonnement jusqu'au (AAAA-MM-JJ)", "", "Location").forEachIndexed { i, t -> cell(JLabel(t), i, 0, if (i == 0) 1.0 else 0.0) }
+                val fresh = ArrayList<Row>()
+                c?.bundles?.sortedBy { it.id }?.forEachIndexed { n, b ->
+                    val y = n + 1
+                    val days = RentalDurations.daysOf(c, b.id)
+                    val buy = JCheckBox(); val sub = JCheckBox(); val end = JTextField(10).apply { isEnabled = false }
+                    sub.addActionListener { end.isEnabled = sub.isSelected }
+                    val rent = JCheckBox(days.getOrNull()?.let { "fixé par le serveur : $it jours" + (if (b.rentalDays <= 0) " (défaut)" else "") } ?: "durée hors bornes : non louable").apply { isEnabled = days.isSuccess }
+                    cell(JLabel(b.title.ifBlank { b.id } + "  [${b.id}]"), 0, y, 1.0); cell(buy, 1, y); cell(sub, 2, y); cell(end, 3, y); cell(rent, 4, y)
+                    fresh += Row(b.id, buy, sub, end, rent)
+                }
+                rows = fresh; panel.revalidate(); panel.repaint()
+            }
+            fun purchases() = rows.filter { it.buy.isSelected }.map { it.id }
+            fun subscriptions() = rows.filter { it.sub.isSelected }.associate { it.id to it.end.text }
+            fun rentals() = rows.filter { it.rent.isSelected }.map { it.id }
+            fun any() = rows.any { it.buy.isSelected || it.sub.isSelected || it.rent.isSelected }
         }
 
         fun chooseFile(save: Boolean, name: String? = null): File? {

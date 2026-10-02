@@ -88,7 +88,7 @@ class LearnApi(private val host: Host) : ApiExtension {
         return Json.write(linkedMapOf(
             "packs" to lib.all().map { r -> linkedMapOf("id" to r.id, "version" to r.version, "title" to r.manifest.title, "exam" to r.manifest.exam,
                 "level" to r.manifest.level, "subject" to r.manifest.subject, "size" to r.manifest.size, "where" to r.origin,
-                "file" to r.file?.name, "removable" to (r.file != null), "lessons" to r.manifest.lessons, "exercises" to r.manifest.exercises) },
+                "file" to r.file?.name, "removable" to (r.file != null), "lessons" to r.manifest.lessons, "exercises" to r.manifest.exercises, "base" to BaseContent.isBase(r.id)) },
             "refused" to lib.problems.map { (k, v) -> linkedMapOf("pack" to k, "reason" to v) },
         ))
     }

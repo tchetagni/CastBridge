@@ -38,7 +38,7 @@ class RentalCliTest {
 
     @Test fun locationIsIssuedVerifiedAndItsBoxOpensOnThatTvOnly() {
         setup()
-        val r = cli("emettre", "--appareil", request.path, "--production", "--licence", "lic-loc", "--location", "loc-cm2=classe-cm2,quiz-cm2:30:600", "--sortie", File(dir, "usb").path)
+        val r = cli("emettre", "--appareil", request.path, "--production", "--licence", "lic-loc", "--location", "loc-cm2=classe-cm2,quiz-cm2:30:600", "--sans-controle-catalogue", "--sortie", File(dir, "usb").path)
         assertEquals(0, r.code, r.err); assertTrue(r.out.contains("Location loc-cm2") && r.out.contains("usage maximal 600 min"), r.out)
         val a = Activation.decode(File(dir, "usb/activation").readText().trim())!!
         val l = a.rights.filterIsInstance<Right.Rental>().single()
@@ -50,9 +50,9 @@ class RentalCliTest {
 
     @Test fun renewalKeepsThePeriodAndTheKey() {
         setup()
-        assertEquals(0, cli("emettre", "--appareil", request.path, "--production", "--licence", "lic-loc", "--location", "loc-cm2=classe-cm2:30", "--sortie", File(dir, "a").path).code)
+        assertEquals(0, cli("emettre", "--appareil", request.path, "--production", "--licence", "lic-loc", "--location", "loc-cm2=classe-cm2:30", "--sans-controle-catalogue", "--sortie", File(dir, "a").path).code)
         val first = Activation.decode(File(dir, "a/activation").readText().trim())!!.rights.filterIsInstance<Right.Rental>().single()
-        val r = cli("emettre", "--appareil", request.path, "--production", "--licence", "lic-loc", "--location", "loc-cm2=classe-cm2:30", "--periode", first.period.toString(), "--sortie", File(dir, "b").path)
+        val r = cli("emettre", "--appareil", request.path, "--production", "--licence", "lic-loc", "--location", "loc-cm2=classe-cm2:30", "--sans-controle-catalogue", "--periode", first.period.toString(), "--sortie", File(dir, "b").path)
         assertEquals(0, r.code, r.err)
         val renewal = Activation.decode(File(dir, "b/activation").readText().trim())!!.rights.filterIsInstance<Right.Rental>().single()
         assertEquals(first.period, renewal.period); assertTrue(renewal.startsAt > first.startsAt)
@@ -61,14 +61,52 @@ class RentalCliTest {
 
     @Test fun aFreeLotIsNeverRentedAndOutOfBoundsAreRefused() {
         setup()
-        val cat = File(dir, "manifest.json").also { it.writeText("""{"bundles":[{"id":"classe-cm2","type":"classe","lots":["learn:cm2","quiz:cm2"]},{"id":"langue-fr","type":"langue","lots":["langues:fr-a0"]}]}""") }
+        val cat = File(dir, "manifest.json").also { it.writeText("""{"bundles":[{"id":"classe-cm2","type":"classe","rentalDays":30,"lots":["learn:cm2","quiz:cm2"]},{"id":"langue-fr","type":"langue","rentalDays":30,"lots":["langues:fr-a0"]}]}""") }
         val free = File(dir, "libres.txt").also { it.writeText("# lots libres CC BY-SA\nlangues:fr-a0\n") }
         val bad = cli("emettre", "--appareil", request.path, "--production", "--licence", "lic-loc", "--location", "x=langue-fr:30", "--catalogue", cat.path, "--lots-libres", free.path, "--sortie", File(dir, "c").path)
         assertEquals(1, bad.code); assertTrue(bad.err.contains("libre"), bad.err); assertTrue(!File(dir, "c/activation").exists())
         val ok = cli("emettre", "--appareil", request.path, "--production", "--licence", "lic-loc", "--location", "x=classe-cm2:30", "--catalogue", cat.path, "--lots-libres", free.path, "--sortie", File(dir, "d").path)
         assertEquals(0, ok.code, ok.err)
-        assertEquals(1, cli("emettre", "--appareil", request.path, "--production", "--licence", "lic-loc", "--location", "x=classe-cm2:367", "--sortie", File(dir, "e").path).code)
-        assertEquals(1, cli("emettre", "--appareil", request.path, "--licence", "lic-loc", "--location", "x=classe-cm2:30", "--sortie", File(dir, "f").path).code, "no rental in a trial activation")
+        assertEquals(1, cli("emettre", "--appareil", request.path, "--production", "--licence", "lic-loc", "--location", "x=classe-cm2:367", "--sans-controle-catalogue", "--sortie", File(dir, "e").path).code)
+        assertEquals(1, cli("emettre", "--appareil", request.path, "--licence", "lic-loc", "--location", "x=classe-cm2:30", "--sans-controle-catalogue", "--sortie", File(dir, "f").path).code, "no rental in a trial activation")
+    }
+
+    private fun durCat() = File(dir, "durees.json").also { it.writeText("""{"bundles":[{"id":"classe-cm2","type":"classe","rentalDays":30,"lots":["learn:cm2","quiz:cm2"]},{"id":"quiz-cm2","type":"quiz","rentalDays":60,"lots":["quiz:cm2"]},{"id":"sans-duree","type":"classe","lots":["learn:x"]}]}""") }
+    private fun durFree() = File(dir, "libres-d.txt").also { it.writeText("# aucun\nlangues:fr-a0\n") }
+    private fun rent(name: String, vararg extra: String) = cli("emettre", "--appareil", request.path, "--production", "--licence", "lic-loc", "--sortie", File(dir, name).path, *extra)
+    private fun withCat(vararg extra: String) = arrayOf("--catalogue", durCat().path, "--lots-libres", durFree().path, *extra)
+
+    @Test fun rentalDurationIsExactlyTheServers() {
+        setup()
+        val shorter = rent("g1", *withCat("--location", "x=classe-cm2:29")); assertEquals(1, shorter.code); assertTrue(shorter.err.contains("fixée par le catalogue du serveur") && shorter.err.contains("30"), shorter.err)
+        val longer = rent("g2", *withCat("--location", "x=classe-cm2:31")); assertEquals(1, longer.code); assertTrue(longer.err.contains("fixée par le serveur"), longer.err)
+        assertTrue(!File(dir, "g1/activation").exists() && !File(dir, "g2/activation").exists())
+        assertEquals(0, rent("g3", *withCat("--location", "x=classe-cm2:30")).code)
+    }
+
+    @Test fun locationBouquetBuildsOneExactRentalPerBundle() {
+        setup()
+        val r = rent("b1", *withCat("--location-bouquet", "classe-cm2,quiz-cm2")); assertEquals(0, r.code, r.err)
+        val rs = Activation.decode(File(dir, "b1/activation").readText().trim())!!.rights.filterIsInstance<Right.Rental>().sortedBy { it.productId }
+        assertEquals(listOf("loc-classe-cm2", "loc-quiz-cm2"), rs.map { it.productId }); assertEquals(listOf(30, 60), rs.map { it.durationDays })
+    }
+
+    @Test fun aBundleWithoutServerDurationGetsTheDefault30DaysExactAndUnknownIsRefused() {
+        setup()
+        val r = rent("n1", *withCat("--location-bouquet", "sans-duree")); assertEquals(0, r.code, r.err)
+        assertEquals(30, Activation.decode(File(dir, "n1/activation").readText().trim())!!.rights.filterIsInstance<Right.Rental>().single().durationDays)
+        val other = rent("n2", *withCat("--location", "x=sans-duree:45")); assertEquals(1, other.code); assertTrue(other.err.contains("fixée par le serveur à 30"), other.err)
+        assertEquals(0, rent("n4", *withCat("--location", "x=sans-duree:30")).code)
+        assertEquals(1, rent("n3", *withCat("--location-bouquet", "inconnu")).code)
+        assertTrue(!File(dir, "n2/activation").exists())
+    }
+
+    @Test fun noCatalogueMeansNoRentalUnlessExplicitlyWaived() {
+        setup()
+        val a = rent("c1", "--location", "x=classe-cm2:30"); assertEquals(1, a.code); assertTrue(a.err.contains("chargez le catalogue du serveur"), a.err)
+        val b = rent("c2", "--location-bouquet", "classe-cm2"); assertEquals(1, b.code); assertTrue(b.err.contains("catalogue"), b.err)
+        assertTrue(!File(dir, "c1/activation").exists() && !File(dir, "c2/activation").exists())
+        val ok = rent("c3", "--location", "x=classe-cm2:30", "--sans-controle-catalogue"); assertEquals(0, ok.code, ok.err); assertTrue(ok.out.contains("NON vérifiées"), ok.out)
     }
 
     @Test fun commonRentalVectorsGiveTheSameBytes() {

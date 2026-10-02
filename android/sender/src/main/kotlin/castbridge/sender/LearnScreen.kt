@@ -162,7 +162,7 @@ private fun MyClasses(lots: LearnLotConsumer, scope: String?, onScope: (String?)
             Text(
                 when {
                     c.downloaded -> "v${c.installedVersion} · ${LearnFormat.size(c.installedBytes ?: 0)} · ${LearnFormat.dataDate(c.dataDate)}" + if (c.updateAvailable) " · mise à jour disponible" else ""
-                    starter.containsKey(c.scope) -> "Aperçu inclus dans l'app"
+                    starter.containsKey(c.scope) -> "Contenu de base inclus dans l'app — leçons complètes à télécharger"
                     else -> "Pas encore sur ce téléphone"
                 }, style = MaterialTheme.typography.bodySmall, color = MaterialTheme.colorScheme.onSurfaceVariant)
             if (action != null) {

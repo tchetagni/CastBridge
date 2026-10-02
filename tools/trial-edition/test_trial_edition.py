@@ -20,6 +20,7 @@ def w(path, obj):
 
 
 def make_repo(root, lessons=8, exercises=24, quiz=60, with_langues=True, quiz_scopes=("cp", "culture-cm")):
+    w(os.path.join(root, "content", "bundles-rental.json"), {"default": 30, "bundles": {}})
     scopes = ["cp | CP | cp-maths cp-francais", "tle-cd | Terminale | bac-maths"]
     os.makedirs(os.path.join(root, "content", "learn"), exist_ok=True)
     with open(os.path.join(root, "content", "learn", "scopes.txt"), "w") as f:
@@ -251,6 +252,49 @@ class DeterminismAndStabilityTest(Base):
                 if b["id"] in lot["bundles"]:
                     self.assertIn(full, b["lots"])
             self.assertTrue(lot["scope"].endswith("-trial"))
+
+
+class RentalDaysTest(Base):
+    def man(self, rental):
+        inv, sel, files, v = self.run_sel()
+        return te.build_manifest(inv, sel, self.cfg, files, rental)
+
+    def test_every_bundle_carries_its_exact_rental_days(self):
+        make_repo(self.tmp)
+        man = self.man({"default": 30, "bundles": {"tout": 90, "classe-cp": 14}})
+        days = {b["id"]: b["rentalDays"] for b in man["bundles"]}
+        self.assertEqual(90, days["tout"]); self.assertEqual(14, days["classe-cp"])
+        self.assertEqual({30}, {d for k, d in days.items() if k not in ("tout", "classe-cp")})
+
+    def test_bad_durations_fail_in_french(self):
+        make_repo(self.tmp)
+        for bad in (0, 367, "30", 1.5, True, -1):
+            with self.assertRaises(te.Fail, msg=repr(bad)) as c:
+                self.man({"default": 30, "bundles": {"tout": bad}})
+            self.assertIn("durées de location", str(c.exception))
+        with self.assertRaises(te.Fail):
+            self.man({"bundles": {}})                                   # ni « default » ni durée propre : aucune durée à émettre
+        with self.assertRaises(te.Fail) as c:
+            self.man({"default": 30, "bundles": {"inconnu": 5}})        # faute de frappe
+        self.assertIn("inconnu", str(c.exception))
+
+    def test_cli_reads_the_repo_file_and_refuses_without_it(self):
+        make_repo(self.tmp)
+        cfgp = os.path.join(self.tmp, "cfg.json"); w(cfgp, self.cfg)
+        out = os.path.join(self.tmp, "m.json")
+        base = ["--repo", self.tmp, "--out", out, "--config", cfgp]
+        w(os.path.join(self.tmp, "content", "bundles-rental.json"), {"default": 45, "bundles": {}})
+        self.assertEqual(0, te.main(["select"] + base))
+        self.assertTrue(all(b["rentalDays"] == 45 for b in json.load(open(out))["bundles"]))
+        w(os.path.join(self.tmp, "content", "bundles-rental.json"), {"default": 60, "bundles": {}})
+        self.assertEqual(1, te.main(["check"] + base))                  # changer une durée rend le manifeste périmé
+        os.remove(os.path.join(self.tmp, "content", "bundles-rental.json"))
+        os.remove(out)
+        self.assertEqual(1, te.main(["select"] + base)); self.assertFalse(os.path.exists(out))
+
+    def test_the_real_repo_file_is_valid(self):
+        r = te.load_rental()
+        self.assertIn(r["default"], range(1, 367))
 
 
 if __name__ == "__main__":

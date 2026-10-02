@@ -98,11 +98,27 @@ class LearnLibrary(private val sources: List<LessonSource>, private val keep: In
     /** Every pack reference found, all versions and places (the « Contenus » screen). */
     fun all(): List<PackRef> = sources.flatMap { s -> runCatching { s.list() }.getOrDefault(emptyList()).onEach { it.source = s } }
 
-    /** The best reference per pack id: highest version, then the first source (installed before embedded). */
-    fun packs(): List<PackRef> = all().filter { synchronized(this) { bad[it.toString()] == null } }.groupBy { it.id }.values
+    /**
+     * The best reference per pack id: highest version, then the first source (installed before embedded). A base pack ([BaseContent])
+     * is left out once its full pack is there, or once a lot of its class is installed: the complete lessons replace the base ones,
+     * a lesson is never listed twice.
+     */
+    fun packs(): List<PackRef> = visible(best())
+
+    private fun best(): List<PackRef> = all().filter { synchronized(this) { bad[it.toString()] == null } }.groupBy { it.id }.values
         .map { refs -> refs.maxWith(compareBy<PackRef> { it.version }.thenByDescending { r -> refs.indexOf(r) }) }
 
-    fun ref(id: String): PackRef? = packs().firstOrNull { it.id == id }
+    private fun visible(best: List<PackRef>): List<PackRef> {
+        val ids = best.map { it.id }.toSet()
+        val lotScopes = best.filter { it.source is LearnLotSource && !BaseContent.isBase(it.id) }.mapNotNull { it.scope }.toSet()
+        return best.filterNot { r -> BaseContent.fullIdOf(r.id)?.let { it in ids || r.scope in lotScopes } == true }
+    }
+
+    /** A pack by id; the id of a base pack that its full pack replaced gives the full pack (same lesson and exercise ids: the progress carries over). */
+    fun ref(id: String): PackRef? {
+        val best = best(); val shown = visible(best)
+        return shown.firstOrNull { it.id == id } ?: BaseContent.fullIdOf(id)?.let { full -> shown.firstOrNull { it.id == full } }
+    }
 
     @Synchronized fun pack(id: String): Pack? = verified(id)?.pack
 

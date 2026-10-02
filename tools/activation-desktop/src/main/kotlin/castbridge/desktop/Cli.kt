@@ -52,7 +52,7 @@ class Cli(private val env: Env) {
         fun get(k: String) = opts[k]?.last()
         fun all(k: String) = opts[k] ?: emptyList()
         fun need(k: String) = get(k) ?: throw UsageException("Option obligatoire : --$k")
-        companion object { val FLAGS = setOf("qr", "production", "essai", "sans-confirmation", "json", "super", "sans-lots-essai") }
+        companion object { val FLAGS = setOf("qr", "production", "essai", "sans-confirmation", "json", "super", "sans-lots-essai", "sans-controle-catalogue") }
     }
 
     private fun home(a: Args) = File(a.get("dossier") ?: env.getenv("CASTBRIDGE_ACTIVATION_HOME") ?: (System.getProperty("user.home") + "/.castbridge-activation"))
@@ -179,7 +179,14 @@ class Cli(private val env: Env) {
         a.get("jours")?.let { throw UsageException("--jours n'existe plus : une clé s'installe dans les 48 h suivant sa création (--super : SUPER_UNLIMITED, clés super administrateur seulement)") }
         val period = a.get("periode")?.toLongOrNull()
         if (a.get("periode") != null && period == null) throw UsageException("--periode attend le début (ms) de la location à prolonger")
-        val rentals = a.all("location").map { RightsSyntax.rental(it, period) }
+        val explicit = a.all("location").map { RightsSyntax.rental(it, period) }
+        if (explicit.isNotEmpty() && a.get("catalogue") == null && !a.flags.contains("sans-controle-catalogue"))
+            throw IssueException("Location : la durée est fixée par le serveur ; chargez le catalogue du serveur (--catalogue TRIAL-MANIFEST.json --lots-libres FICHIER), ou --sans-controle-catalogue (déconseillé : aucune durée vérifiée)")
+        val bouquets = a.all("location-bouquet").flatMap { it.split(',') }.map { it.trim() }.filter { it.isNotEmpty() }
+        val rentals = explicit + if (bouquets.isEmpty()) emptyList() else {
+            val catPath = a.get("catalogue") ?: throw IssueException("--location-bouquet : chargez le catalogue du serveur (--catalogue TRIAL-MANIFEST.json --lots-libres FICHIER) ; la durée vient du catalogue, jamais de la ligne de commande")
+            castbridge.core.lots.RentalDurations.specsFor(castbridge.core.lots.BundleCatalog.parse(readSource(catPath)), bouquets).map { it.copy(period = period) }
+        }
         val check = if (rentals.isEmpty()) null else rentalCheck(a)
         val trialLots = kind == ActivationKind.TRIAL && !a.flags.contains("sans-lots-essai")      // every trial key carries its one-time 12 h window of rented lots
         val spec = IssueSpec(kind, if (a.get("sujet") == "phone") Subject.PHONE else Subject.TV, rights(a, now) + permanent(a, kind, now), a.get("licence") ?: Activation.TRIAL_LICENSE,
@@ -197,7 +204,7 @@ class Cli(private val env: Env) {
             env.out.println("Location ${l.productId} (${l.bundleIds.joinToString(",")}) : ${l.durationDays} jour(s) à partir du ${date(l.startsAt)}, fin le ${date(l.endsAt)}" +
                 (if (l.maxUsageMinutes > 0) ", usage maximal ${l.maxUsageMinutes} min" else "") + (if (l.graceMs > 0) ", tolérance ${l.graceMs / Desk.DAY_MS} j" else "") + " ; période ${l.period}")
         }
-        if (a.all("location").isNotEmpty() && a.get("catalogue") == null) env.out.println("ATTENTION : lots libres (CC BY-SA) NON vérifiés (--catalogue et --lots-libres absents) : un lot libre ne doit jamais être loué.")
+        if (rentals.isNotEmpty() && a.get("catalogue") == null) env.out.println("ATTENTION : durées de location NON vérifiées (--sans-controle-catalogue) et lots libres (CC BY-SA) NON vérifiés (--catalogue et --lots-libres absents) : un lot libre ne doit jamais être loué.")
         if (a.flags.contains("qr")) { val png = File(dir, "activation.png"); Qr.png(r.issued.token, png); env.out.println("Code QR : ${png.path}") }
         return 0
     }
@@ -218,8 +225,8 @@ class Cli(private val env: Env) {
         val families = castbridge.core.lots.LotFamilies.explicit(free, all - free)
         return { spec ->
             // the duration of a rental is fixed by the server's catalogue (rentalDays per bundle): the tightest bundle limit wins
-            val limit = spec.bundleIds.mapNotNull { catalog.find(it)?.rentalDays?.takeIf { d -> d > 0 } }.minOrNull()
-            if (limit != null && spec.days > limit) "la durée de location est fixée par le catalogue du serveur : $limit jour(s) au plus pour ${spec.bundleIds.joinToString(",")}" else {
+            val dur = castbridge.core.lots.RentalDurations.check(spec, catalog)      // exact: « la durée est fixée par le serveur »
+            if (dur != null) "durée fixée par le catalogue du serveur : $dur" else {
                 val metas = catalog.lotsOf(spec.bundleIds).map { castbridge.core.lots.LotMeta(it, 1, 0, "0".repeat(64), castbridge.core.lots.LotNames.key(it)) }
                 castbridge.core.lots.RentalPolicy.refusals(spec.bundleIds, catalog, metas, families).firstOrNull()
             }
@@ -319,9 +326,11 @@ Commandes (français ; alias anglais : keygen key trust device license issue com
   licence ID --postes N [--transferts N]    crée une licence (un achat)
   emettre --appareil F [--production] [--licence ID] [--super] [--sujet tv|phone]   (clé à installer dans les 48 h ; --super : SUPER_UNLIMITED, lit et débloque tout, locations permanentes, clé super administrateur seulement)
           [--achat produit=b1,b2] [--abonnement produit=b1:jours[:tolérance[:auto]]] [--tout-ouvert produit:jours] [--droit ligne]
-          [--location produit=b1,b2:JOURS[:MINUTES_D_USAGE_MAX[:TOLERANCE_JOURS[:SIMULTANEES]]]]   (répétable ; 1 à 366 jours ; production seulement)
+          [--location produit=b1,b2:JOURS[:MINUTES_D_USAGE_MAX[:TOLERANCE_JOURS[:SIMULTANEES]]]]   (répétable ; 1 à 366 jours ; production seulement ; avec --catalogue la durée doit être EXACTEMENT celle du serveur)
+          [--location-bouquet b1,b2]   une location par bouquet (produit loc-<bouquet>), durée EXACTE du catalogue (rentalDays) ; exige --catalogue ; sans durée à saisir
+          [--sans-controle-catalogue]  autorise --location sans catalogue (déconseillé : la durée n'est pas vérifiée ; --location sans --catalogue est sinon refusé)
           [--periode MS]  prolonge la location commencée à cet instant (même clé, pas de doublon) au lieu d'en commencer une nouvelle
-          [--catalogue TRIAL-MANIFEST.json --lots-libres FICHIER]   refuse la location d'un lot libre (CC BY-SA)
+          [--catalogue TRIAL-MANIFEST.json --lots-libres FICHIER]   durée exacte du serveur ; refuse la location d'un lot libre (CC BY-SA)
           [--sortie DOSSIER] [--qr]       jeton, fichier « activation » (clé USB de la TV) et code QR
   lot-chiffrer --activation F --produit P --lot FICHIER.lot [--sortie DOSSIER]   chiffre un lot pour la TV d'une location émise
   cle-saisissable --code XXXX-XXXX-XXXX-XXXX [--production --ensemble N]   dernier recours : 165 caractères à taper

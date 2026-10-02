@@ -17,6 +17,7 @@ class OwnerStore(ctx: Context) {
     private val dir = ctx.filesDir
     private val vaultFile = File(dir, "owner-vault.txt")
     private val journalFile = File(dir, "owner-journal.tsv")
+    private val catalogFile = File(dir, "owner-bundles.json")
     private val prefs = ctx.getSharedPreferences("owner_guard", Context.MODE_PRIVATE)
     private val kdf = Pbkdf2Kdf(ITERATIONS)
     val guard = UnlockGuard({ System.currentTimeMillis() }, UnlockGuard.State(prefs.getInt("failures", 0), prefs.getLong("until", 0L)))
@@ -62,6 +63,17 @@ class OwnerStore(ctx: Context) {
     }
 
     fun journalLines(): List<List<String>> = if (!journalFile.isFile) emptyList() else journalFile.readLines().map { it.split('\t') }.reversed()
+
+    /** The server's bundle catalogue (public, no secret; not in the vault). Validated before it is kept; returns the bundle count, or throws (French message) and keeps the previous one. */
+    fun saveCatalog(json: String): Int {
+        val c = try { castbridge.core.lots.BundleCatalog.parse(json) } catch (e: Exception) { throw IllegalArgumentException("Catalogue illisible : ${e.message}") }
+        if (c.bundles.isEmpty()) throw IllegalArgumentException("Catalogue vide")
+        catalogFile.writeText(json)
+        return c.bundles.size
+    }
+    /** The imported catalogue and its date (epoch ms), or null. */
+    fun catalog(): Pair<castbridge.core.lots.BundleCatalog, Long>? =
+        if (!catalogFile.isFile) null else runCatching { castbridge.core.lots.BundleCatalog.parse(catalogFile.readText()) to catalogFile.lastModified() }.getOrNull()
 
     private fun hex(b: ByteArray) = b.joinToString("") { "%02x".format(it) }
     private fun unhex(s: String?): ByteArray = s!!.chunked(2).map { it.toInt(16).toByte() }.toByteArray()

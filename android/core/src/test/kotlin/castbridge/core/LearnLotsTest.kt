@@ -272,10 +272,10 @@ class LearnLotsTest {
         val src = EmbeddedLessonSource(); val refs = src.list()
         val table = LearnScopes.parseTable(File(content, "scopes.txt").readText())
         var total = 0L
-        for (r in refs) { total += r.bytes().use { it.readBytes().size }; assertNotNull(table.scopeOf(r.id), "${r.id} belongs to a lot"); assertEquals(table.scopeOf(r.id), r.scope) }
+        for (r in refs) { total += r.bytes().use { it.readBytes().size }; val own = BaseContent.fullIdOf(r.id) ?: r.id; assertNotNull(table.scopeOf(own), "${r.id} belongs to a lot"); assertEquals(table.scopeOf(own), r.scope) }
         assertTrue(total <= 3L shl 20, "Apprendre starter $total bytes > 3 MB")
         assertTrue(total + (2L shl 20) <= 5L shl 20, "leaves room for the Quiz starter (≈ 2 MB) under 5 MB in all")
-        assertEquals(setOf("maternelle", "cm2", "class6", "3e", "form5", "tle-cd"), refs.mapNotNull { it.scope }.toSet(), "one demonstration pack per cycle")
+        assertEquals(table.lots.keys, refs.mapNotNull { it.scope }.toSet(), "every class of scopes.txt has at least its base content (BaseContent)")
         assertTrue(LotBudget.TV_MAX_BYTES - total >= 5L shl 20, "at least 5 MB remain for pushed lots (${LotBudget.TV_MAX_BYTES - total})")
         println("Apprendre starter on the TV: $total bytes of ${LotBudget.TV_MAX_BYTES}")
     }

@@ -20,6 +20,7 @@ import android.widget.LinearLayout
 import android.widget.ScrollView
 import android.widget.TextView
 import android.widget.Toast
+import castbridge.core.learn.BaseContent
 import castbridge.core.learn.ExerciseTier
 import castbridge.core.learn.LearnCatalog
 import castbridge.core.learn.LearnProgress
@@ -189,13 +190,23 @@ class LearnActivity : Activity() {
     fun remote(action: String, p: Map<String, String>): String? = when (action) {
         "back" -> { onBackPressed(); null }
         "teacher" -> { setTeacher(p["value"] != "off"); null }
-        "lesson" -> {
-            val pack = p["pack"]?.let { LearnHub.library().pack(it) } ?: return "pack introuvable"
-            val l = p["lesson"]?.let { pack.lesson(it) } ?: pack.lessons.firstOrNull() ?: return "fiche introuvable"
-            val r = ReaderScreen(this, pack, l, p["page"]?.toIntOrNull() ?: 0)
-            if (top() is ReaderScreen) replace(r) else push(r); null   // the teacher jumps from fiche to fiche: BACK still leads to the menu
-        }
+        "lesson" -> openLesson(p)
         else -> top().let { if (it == null) "aucun écran" else it.remote(action, p) }
+    }
+
+    /** Teacher / phone command « lesson »: the fiche is shown big; BACK still leads to the menu. */
+    private fun openLesson(p: Map<String, String>): String? {
+        val lib = LearnHub.library(); val id = p["pack"]
+        val want = p["lesson"]
+        val full = id?.let { lib.pack(it) }
+        // the phone may hold the complete pack while this TV only has its base content (same lesson ids)
+        val base = if (full == null && id != null) lib.pack(BaseContent.idFor(id)) else null
+        if (base != null && (want == null || base.lesson(want) == null)) return "cette fiche n'est pas dans le contenu de base de la TV : envoyez la classe complète depuis le téléphone"
+        val pack = full ?: base ?: return "pack introuvable"
+        val l = p["lesson"]?.let { pack.lesson(it) } ?: pack.lessons.firstOrNull() ?: return "fiche introuvable"
+        val r = ReaderScreen(this, pack, l, p["page"]?.toIntOrNull() ?: 0)
+        if (top() is ReaderScreen) replace(r) else push(r)
+        return null   // the teacher jumps from fiche to fiche: BACK still leads to the menu
     }
 
     fun stateJson(): String = Json.write(linkedMapOf("screen" to top()?.name, "profile" to profile?.let { linkedMapOf("id" to it.id, "name" to it.name) },
@@ -205,6 +216,10 @@ class LearnActivity : Activity() {
 
     fun packs(): List<PackRef> = LearnHub.library().packs()
     fun openPack(ref: PackRef): Pack? = LearnHub.library().pack(ref.id) ?: run { toast("Pack « ${ref.manifest.title} » illisible : ${LearnHub.library().problems.values.lastOrNull() ?: "?"}"); null }
+    /** Tile title of a pack: its subject, or (base content: several packs share a subject) the course name. */
+    fun packLabel(r: PackRef): String = if (BaseContent.isBase(r.id)) BaseContent.title(r.manifest) else LearnCatalog.subject(r.manifest.subject)?.label(r.manifest.lang) ?: r.manifest.title
+    /** Tile subtitle of a pack; base packs say so (the complete lessons arrive by lot from the phone). */
+    fun packInfo(r: PackRef, extra: String = ""): String = (if (BaseContent.isBase(r.id)) "Contenu de base · " else "") + "${r.manifest.lessons} fiches · ${r.manifest.exercises} exercices" + extra
     fun subjectColor(key: String) = LearnCatalog.subject(key)?.color ?: LearnStyle.ACCENT
     fun starsOf(pack: Pack): Int = profile?.let { p -> LearnHub.progress().state.of(p.id).lessons.values.filter { it.pack == pack.id }.sumOf { it.stars } } ?: 0
 }
@@ -344,7 +359,7 @@ class LearnHomeScreen(a: LearnActivity) : LearnActivity.Screen(a) {
         tiles += a.st.tile("Mes récompenses", "${sp.lessons.values.sumOf { it.stars }} ★ · ${sp.badges.size} badge(s) · série ${sp.streak} j", LearnStyle.GOLD, "★") { a.push(RewardsScreen(a)) }
         val lvl = p.level?.let { LearnCatalog.level(it) }
         val mine = a.packs().filter { it.manifest.level == p.level }
-        val subjTiles = mine.map { r -> a.st.tile(LearnCatalog.subject(r.manifest.subject)?.label(r.manifest.lang) ?: r.manifest.title, "${r.manifest.lessons} fiches · ${r.manifest.exercises} exercices", a.subjectColor(r.manifest.subject)) {
+        val subjTiles = mine.map { r -> a.st.tile(a.packLabel(r), a.packInfo(r), a.subjectColor(r.manifest.subject)) {
             a.openPack(r)?.let { a.push(PackScreen(a, it)) } } }
         val col = LinearLayout(a).apply { orientation = LinearLayout.VERTICAL }
         col.addView(a.st.grid(tiles, 4, 18, 200))
@@ -397,8 +412,8 @@ class ExamScreen(a: LearnActivity, private val exam: String) : LearnActivity.Scr
         val tiles = ArrayList<View>()
         tiles += a.st.tile("Date de mon examen", p?.examDate?.let { "le $it" + (days?.let { d -> if (d >= 0) " · J-$d" else "" } ?: "") } ?: "compte à rebours (facultatif)", LearnStyle.GOLD,
             days?.takeIf { it >= 0 }?.let { "J-$it" } ?: "▦") { a.push(ExamDateScreen(a, exam)) }
-        for (r in packs) tiles += a.st.tile(LearnCatalog.subject(r.manifest.subject)?.label(r.manifest.lang) ?: r.manifest.title,
-            "${r.manifest.lessons} fiches · ${r.manifest.exercises} exercices" + (if (r.manifest.mockExams > 0) " · épreuve blanche" else "") + (if (r.manifest.exam != exam) " · ${LearnCatalog.exam(r.manifest.exam)?.label}" else ""),
+        for (r in packs) tiles += a.st.tile(a.packLabel(r),
+            a.packInfo(r, (if (r.manifest.mockExams > 0) " · épreuve blanche" else "") + (if (r.manifest.exam != exam) " · ${LearnCatalog.exam(r.manifest.exam)?.label}" else "")),
             a.subjectColor(r.manifest.subject)) { a.openPack(r)?.let { a.push(PackScreen(a, it)) } }
         val missing = EXAM_SUBJECTS[exam].orEmpty().filter { s -> packs.none { it.manifest.subject == s } }
         for (s in missing) tiles += a.st.tile(LearnCatalog.subject(s)?.label(e.lang) ?: s, "Pas encore sur la TV : à envoyer depuis le téléphone", TvStyle.OUTLINE, "⇩") {
@@ -499,7 +514,7 @@ class PackScreen(a: LearnActivity, private val pack: Pack) : LearnActivity.Scree
             col.addView(a.st.grid(ls.map { ficheTile(it) }, 3, 18, 170))
         }
         val status = if (pack.status == ReviewStatus.VALIDATED) "Contenu certifié" else "Brouillon à relire par un enseignant"
-        return a.frame(pack.title, "${pack.level} · ${status} · ${a.starsOf(pack)} ★", ScrollView(a).apply { clipChildren = true; addView(col) }, if (en) "OK: open" else "OK : ouvrir")
+        return a.frame(pack.title, "${pack.level} · ${if (BaseContent.isBase(pack.id)) "Contenu de base : les premières fiches, la suite arrive par lot depuis le téléphone" else status} · ${a.starsOf(pack)} ★", ScrollView(a).apply { clipChildren = true; addView(col) }, if (en) "OK: open" else "OK : ouvrir")
     }
 }
 
@@ -518,7 +533,7 @@ class BrowseScreen(a: LearnActivity, private val cursus: String? = null, private
                 a.st.tile(l.label, if (n > 0) "$n matière(s)" else "à venir", if (n > 0) LearnStyle.ACCENT else TvStyle.OUTLINE) { a.push(BrowseScreen(a, cursus, l.key)) }
             }
             else -> packs.filter { it.manifest.level == level }.map { r ->
-                a.st.tile(LearnCatalog.subject(r.manifest.subject)?.label(r.manifest.lang) ?: r.manifest.title, "${r.manifest.lessons} fiches · ${r.manifest.exercises} exercices", a.subjectColor(r.manifest.subject)) {
+                a.st.tile(a.packLabel(r), a.packInfo(r), a.subjectColor(r.manifest.subject)) {
                     a.openPack(r)?.let { a.push(PackScreen(a, it)) }
                 }
             }.ifEmpty { listOf(a.st.tile("Rien d'installé ici", "Voir « Contenus »", TvStyle.OUTLINE) { a.push(ContentsScreen(a)) }) }
@@ -561,7 +576,7 @@ class ContentsScreen(a: LearnActivity, private val note: String? = null) : Learn
         // « Mes classes » : the lots held by this TV and how fresh their data is (the starter packs of the APK are listed below)
         col.addView(a.st.text("Mes classes sur cette TV", 24f, Color.WHITE, true), col.lp(bottom = a.st.px(6)))
         val classes = LearnLotCatalog(LearnHub.lots(), EmbeddedLessonSource()).classes()
-        for (c in classes) col.addView(a.st.text("${c.title} · ${c.lessons} fiches · " + (c.meta?.let { "v${it.version} · ${LearnFormat.size(it.bytes)} · ${LearnFormat.dataDate(c.date)}" } ?: "contenu de démarrage de l'app"), 19f, LearnStyle.MUTED), col.lp(bottom = a.st.px(4)))
+        for (c in classes) col.addView(a.st.text("${c.title} · ${c.lessons} fiches · " + (c.meta?.let { "classe complète v${it.version} · ${LearnFormat.size(it.bytes)} · ${LearnFormat.dataDate(c.date)}" } ?: BaseContent.CLASS_LABEL), 19f, if (c.baseOnly) LearnStyle.GOLD else LearnStyle.MUTED), col.lp(bottom = a.st.px(4)))
         val received = LearnHub.libraryPackFiles()
         val acts = ArrayList<View>()
         acts += a.st.button("Rechercher à nouveau", "clé USB, mémoire de la TV") { lib.forget(); a.rebuild() }
@@ -580,7 +595,8 @@ class ContentsScreen(a: LearnActivity, private val note: String? = null) : Learn
         col.addView(a.st.grid(acts, 3, 14))
         col.addView(a.st.text("Packs disponibles", 24f, Color.WHITE, true), col.lp(top = a.st.px(12)))
         val best = lib.packs().map { it.toString() }.toSet()
-        for (r in lib.all().sortedWith(compareBy({ it.manifest.level }, { it.manifest.subject }))) {
+        // the base packs (one per course of every class) are summed up by « Mes classes » above: listing them here would be hundreds of lines
+        for (r in lib.all().filter { !BaseContent.isBase(it.id) }.sortedWith(compareBy({ it.manifest.level }, { it.manifest.subject }))) {
             val used = r.toString() in best
             val line = "${r.manifest.title}  ·  v${r.version}  ·  ${TransferRule.size(r.manifest.size, up = true)}  ·  ${r.origin}" + if (!used) "  ·  (autre version utilisée)" else ""
             col.addView(a.st.button(line, "${r.manifest.lessons} fiches · ${r.manifest.exercises} exercices" + if (r.file != null) " · OK : supprimer" else " · embarqué dans l'app", size = 21f) {

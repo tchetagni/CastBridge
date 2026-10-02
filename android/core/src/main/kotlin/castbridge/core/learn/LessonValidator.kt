@@ -42,10 +42,12 @@ class LessonValidator(private val knownLessons: Set<String> = emptySet()) {
         dup(allExIds).forEach { e += "exercice $it en double" }
         val lessonIds = p.lessons.map { it.id }.toSet()
         var illustrations = 0
+        // a base pack (BaseContent) keeps the ids of the full pack it is derived from and may hold fewer than 2 figures
+        val idRoot = BaseContent.fullIdOf(p.id) ?: p.id
 
         for (l in p.lessons) {
             val w = "leçon ${l.id}"
-            if (!l.id.startsWith(p.id + "-")) e += "$w: l'id doit commencer par « ${p.id}- »"
+            if (!l.id.startsWith(idRoot + "-")) e += "$w: l'id doit commencer par « $idRoot- »"
             if (l.chapter !in chapterIds) e += "$w: chapitre ${l.chapter} inconnu"
             if (l.blocks.isEmpty()) e += "$w: aucun bloc"
             if (l.minutes !in 1..240) e += "$w: durée ${l.minutes} min hors 1..240"
@@ -89,11 +91,11 @@ class LessonValidator(private val knownLessons: Set<String> = emptySet()) {
             }
             if (p.exam != null) ficheRules(p, l, w, e, warn)
         }
-        if (p.lessons.isNotEmpty() && illustrations < 2) e += "pack: au moins 2 illustrations (il y en a $illustrations)"
+        if (p.lessons.isNotEmpty() && illustrations < 2 && BaseContent.fullIdOf(p.id) == null) e += "pack: au moins 2 illustrations (il y en a $illustrations)"
 
         for (x in p.exercises) {
             exercise(x, "exercice ${x.id}", e, warn, false)
-            if (!x.id.startsWith(p.id + "-")) e += "exercice ${x.id}: l'id doit commencer par « ${p.id}- »"
+            if (!x.id.startsWith(idRoot + "-")) e += "exercice ${x.id}: l'id doit commencer par « $idRoot- »"
             if (x.chapter !in chapterIds) e += "exercice ${x.id}: chapitre ${x.chapter} inconnu"
             x.lesson?.let { if (it !in lessonIds) e += "exercice ${x.id}: fiche de renvoi $it introuvable" }
         }
