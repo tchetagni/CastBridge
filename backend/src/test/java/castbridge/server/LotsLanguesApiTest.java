@@ -25,7 +25,7 @@ class LotsLanguesApiTest extends ApiTestBase {
             try (ZipOutputStream z = new ZipOutputStream(out)) {
                 String[] p = id.split("-");
                 z.putNextEntry(new ZipEntry("langue.json"));
-                z.write(("{\"format\":1,\"type\":\"langue\",\"id\":\"" + id + "\",\"version\":" + version + ",\"target\":\"" + p[0] + "\",\"level\":\"" + p[1]
+                z.write(("{\"license\":\"CC-BY-SA-4.0\",\"format\":1,\"type\":\"langue\",\"id\":\"" + id + "\",\"version\":" + version + ",\"target\":\"" + p[0] + "\",\"level\":\"" + p[1]
                         + "\",\"source\":\"" + p[3] + "\",\"title\":\"t\",\"units\":[{\"id\":\"u1\"}]}").getBytes(StandardCharsets.UTF_8));
                 z.closeEntry();
                 z.putNextEntry(new ZipEntry("media.json")); z.write("{\"media\":[]}".getBytes()); z.closeEntry();

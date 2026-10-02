@@ -28,14 +28,24 @@ object LangLotBuilder {
     /** The pack folders of [content]: every sub-folder holding a langue.json. */
     fun packDirs(content: File): List<File> = content.listFiles { f -> f.isDirectory && File(f, "langue.json").isFile }.orEmpty().sortedBy { it.name }
 
-    /** Deterministic zip of one pack folder (same bytes on every machine for the same content). */
-    fun zip(dir: File): ByteArray {
+    /** Licence field written into the langue.json of a FREE lot (the server's LangLotValidator refuses a langues lot without it: « free only » is checked, not just promised). */
+    const val LICENSE_TAG = "CC-BY-SA-4.0"
+
+    /** [json] with `"license": "CC-BY-SA-4.0"` as first member of the root object (textual, so the rest of the file stays byte for byte as authored). */
+    fun withLicense(json: String): String {
+        val i = json.indexOf('{')
+        require(i >= 0) { "langue.json illisible" }
+        return json.substring(0, i + 1) + "\"license\": \"$LICENSE_TAG\"," + json.substring(i + 1)
+    }
+
+    /** Deterministic zip of one pack folder (same bytes on every machine for the same content). [free] = write the licence field into langue.json. */
+    fun zip(dir: File, free: Boolean = false): ByteArray {
         val out = ByteArrayOutputStream()
         ZipOutputStream(out).use { z ->
             z.setLevel(9)
             for (name in listOf("langue.json", "media.json")) {
                 val f = File(dir, name); if (!f.isFile) continue
-                val b = f.readBytes()
+                val b = if (free && name == "langue.json") withLicense(f.readText(Charsets.UTF_8)).toByteArray(Charsets.UTF_8) else f.readBytes()
                 val e = ZipEntry(name); e.time = FIXED_TIME
                 z.putNextEntry(e); z.write(b); z.closeEntry()
             }
@@ -70,7 +80,7 @@ object LangLotBuilder {
                 // the pack file carries its own version (checked by the consumer): it must be raised together with the lot
                 throw Failure("$scope : langue.json est en version ${pack.version} mais le lot sera en version ${e.version} : aligner \"version\" dans langue.json")
             }
-            val bytes = zip(dir)
+            val bytes = zip(dir, free = family == "free")
             if (bytes.size > MAX_TEXT_LOT_BYTES) throw Failure("$scope : lot texte de ${bytes.size} octets (plafond 3 Mo)")
             val meta = LotMeta(LotId(LangLots.FEATURE, scope), e.version, bytes.size.toLong(), LotHash.sha256Hex(bytes), pack.title, minAppVersion)
             built += Built(meta, bytes, "castbridge-lot-${LangLots.FEATURE}-$scope-v${e.version}.lot", e.date, family, pack.units.size, pack.units.sumOf { it.exercises.size })

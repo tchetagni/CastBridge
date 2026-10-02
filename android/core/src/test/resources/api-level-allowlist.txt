@@ -1,0 +1,3 @@
+# Exceptions du garde ApiLevelGuardTest : un appel JDK normalement interdit sous Android 9 (API 28 / minSdk 26) mais légitime ici.
+# Format : chemin/relatif/à/android|RÈGLE|justification (obligatoire, >= 10 caractères). Une entrée qui ne correspond plus à rien fait échouer le test.
+# Exemple : core/src/main/kotlin/castbridge/core/owner/OwnerCli.kt|FILES_STRING|outil de bureau seulement, jamais chargé sur Android

@@ -150,19 +150,19 @@ class TvLotStore(
         Chunk.Received(cur + bytes.size)
     }
 
-    /** Verifies and installs the fully received [name]; [proofJson] = the signed catalog that vouches for it. */
-    fun installReceived(name: String, proofJson: String): Result = synchronized(lock) {
+    /** Verifies and installs the fully received [name]; [proofJson] = the signed catalog that vouches for it. With [evict] false NOTHING else is ever removed to make room (a lot that does not fit is refused). */
+    fun installReceived(name: String, proofJson: String, evict: Boolean = true): Result = synchronized(lock) {
         val (id, version) = LotNames.parseFileName(name) ?: return Result.Refused("nom de lot invalide")
         val part = partFile(name)
         if (!part.isFile) return Result.Refused("lot non reçu")
         val cat = try { LotManifest.parse(proofJson) } catch (e: IllegalArgumentException) { return reject(id, version, part, "catalogue illisible") }
         if (!cat.signedByAny(publicKeys)) return reject(id, version, part, "catalogue non signé par le serveur CastBridge : lot refusé")
         val meta = cat.lots.firstOrNull { it.id == id && it.version == version } ?: return reject(id, version, part, "le catalogue signé ne contient pas ce lot")
-        install(meta, part)
+        install(meta, part, evict)
     }
 
     /** Verifies and installs [file] (consumed) as [meta]. [meta] must already be vouched for by a verified signed catalog. */
-    private fun install(meta: LotMeta, file: File): Result {
+    private fun install(meta: LotMeta, file: File, mayEvict: Boolean = true): Result {
         val id = meta.id
         fun no(why: String): Result = reject(id, meta.version, file, why)
         val consumer = consumers[id.feature] ?: return no("cette TV ne gère pas les données « ${id.feature} »")
@@ -180,6 +180,7 @@ class TvLotStore(
         val net = meta.bytes - (have?.bytes ?: 0L) - (twin?.bytes ?: 0L)
         val evict = ArrayList<LotId>()
         if (net > free) {
+            if (!mayEvict) return no("Pas assez de place sur la TV pour « ${meta.title} » (${LotStore.mo(meta.bytes)}) : rien n'a été supprimé")
             var f = free
             for (v in evictionOrder(except = id).filter { it != twin?.id }) { evict += v; f += held().first { it.id == v }.bytes; if (net <= f) break }
             if (net > f) return no("Pas assez de place sur la TV : « ${meta.title} » (${LotStore.mo(meta.bytes)}) dépasse les ${LotStore.mo(maxBytes)} prévus " +

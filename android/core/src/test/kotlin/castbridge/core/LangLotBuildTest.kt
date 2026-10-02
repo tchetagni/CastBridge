@@ -17,6 +17,19 @@ class LangLotBuildTest {
             .sorted()
     }
 
+    @Test fun aFreeLotCarriesTheCcBySaLicenceFieldTheServerRequires() {
+        val r = LangLotBuilder.build(content, registry, "2026-10-02", update = false)
+        val b = r.lots.first { it.family == "free" }
+        val json = java.util.zip.ZipInputStream(b.bytes.inputStream()).let { z -> generateSequence { z.nextEntry }.first { it.name == "langue.json" }.let { String(z.readBytes()) } }
+        assertEquals("CC-BY-SA-4.0", castbridge.core.quiz.Json.obj(json)["license"])
+        assertEquals("CC-BY-SA-4.0", LangLotBuilder.LICENSE_TAG)
+        // the tagged lot still passes the TV's own checks
+        val dir = createTempDir(); val f = File(dir, b.file).also { it.writeBytes(b.bytes) }
+        assertTrue(LangLotConsumer.verifyContent(b.meta, f) is LangLotConsumer.Companion.Verified.Ok)
+        // the untagged pack folder does not carry it
+        assertFalse(String(LangLotBuilder.zip(content.resolve(b.meta.id.scope)).let { z -> java.util.zip.ZipInputStream(z.inputStream()).let { s -> s.nextEntry; s.readBytes() } }).contains("\"license\": \"CC-BY-SA-4.0\","))
+    }
+
     @Test fun builtLotParsesWithTheConsumerAndIsDeterministic() {
         // update = true with the registry's own entry: the content hash is recomputed, the version is kept when the content did not change
         val r = LangLotBuilder.build(content, registry, "2026-10-02", update = false)

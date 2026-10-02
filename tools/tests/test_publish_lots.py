@@ -143,6 +143,14 @@ class PublishLotsTest(unittest.TestCase):
         with self.assertRaises(P.Fail):
             self.run_(args(make_dir(self.lots), True, server="http://bridge.example.com"))
 
+    def test_plain_http_only_to_a_real_loopback_host(self):
+        for bad in ("http://localhost.example.com", "http://127.0.0.1.evil.com", "http://localhost@evil.com", "http://evil.com/localhost",
+                    "http://localhost:8080@evil.com", "ftp://localhost", "http://0.0.0.0"):
+            with self.assertRaises(P.Fail, msg=bad):
+                P.Admin(bad, "t")
+        for good in ("http://localhost:8080", "http://127.0.0.1:8080/x", "http://[::1]:8080", "https://bridge.sti-cm.com"):
+            P.Admin(good, "t")
+
     def test_no_redirect_handler_and_multipart_shape(self):
         self.assertIsNone(P.NoRedirect().redirect_request(None, None, 302, "", {}, "http://evil"))
         body, ctype = P.multipart({"a": "é"}, "file", "x.lot", b"\x00\x01")
