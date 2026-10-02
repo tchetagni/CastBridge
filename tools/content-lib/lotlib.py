@@ -16,6 +16,7 @@ TOTAL_WARN = int(2.5 * (1 << 30))
 
 # pack `level` (as written in pack.json / quiz catalogs) -> lot scope
 LEVEL_SCOPE = {"ms": "mat", "ps": "mat", "gs": "mat", "cm2": "cm2", "cm1": "cm1", "ce2": "ce2", "ce1": "ce1", "cp": "cp", "sil": "sil",
+               "nursery 1": "nursery", "nursery 2": "nursery",
                "class 6": "class6", "class 5": "class5", "class 4": "class4", "class 3": "class3", "class 2": "class2", "class 1": "class1",
                "3e": "3e", "4e": "4e", "5e": "5e", "6e": "6e", "2nde": "2nde", "1re": "1ere", "1ere": "1ere", "tle": "tle",
                "form 1": "form1", "form 2": "form2", "form 3": "form3", "form 4": "form4", "form 5": "form5",

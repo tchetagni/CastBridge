@@ -218,6 +218,25 @@ class LotsTest(Base):
         self.assertEqual(rel["treeSha256"], json.load(open(tree2 + "/CONTENT-RELEASE.json"))["treeSha256"])
 
 
+class NewScopesLevelTest(unittest.TestCase):
+    """Levels of the nursery, Terminale A and Licence 3 packs map to a known graph scope."""
+
+    def test_nursery_levels(self):
+        for lvl in ("Nursery 1", "Nursery 2"):
+            self.assertEqual("nursery", L.learn_scope({"level": lvl}))
+
+    def test_tle_a_and_droit_l3_levels_resolve(self):
+        self.assertEqual("tle", L.learn_scope({"id": "tle-a-english", "level": "Tle"}))
+        self.assertIsNotNone(L.learn_scope({"id": "droit-l3-societes-ohada", "level": "L3"}))
+
+    def test_every_real_learn_pack_has_a_scope(self):
+        lp = os.path.join(L.CONTENT, "learn")
+        for d in sorted(os.listdir(lp)):
+            pj = os.path.join(lp, d, "pack.json")
+            if os.path.isfile(pj):
+                self.assertIsNotNone(L.learn_scope(L.read_json(pj)), d)
+
+
 class RepoContentTest(unittest.TestCase):
     """The real repository content."""
 
