@@ -1,0 +1,258 @@
+{
+ "format": 1,
+ "type": "langue",
+ "id": "es-a0-nombres-fr",
+ "version": 1,
+ "target": "es",
+ "level": "a0",
+ "theme": "nombres",
+ "source": "fr",
+ "title": "Espagnol A0 — Les nombres",
+ "state": "review",
+ "units": [
+  {
+   "id": "es-a0-nombres-fr-u1",
+   "title": "Compter de 0 à 10",
+   "minutes": 10,
+   "skills": [
+    "co",
+    "ce",
+    "po"
+   ],
+   "prerequisites": [],
+   "vocab": [
+    {
+     "id": "es-a0-nombres-fr-v1",
+     "term": "cero",
+     "gloss": "zéro",
+     "pos": "num",
+     "audio": "m:es-cero"
+    },
+    {
+     "id": "es-a0-nombres-fr-v2",
+     "term": "uno",
+     "gloss": "un",
+     "pos": "num",
+     "audio": "m:es-uno"
+    },
+    {
+     "id": "es-a0-nombres-fr-v3",
+     "term": "dos",
+     "gloss": "deux",
+     "pos": "num",
+     "audio": "m:es-dos"
+    },
+    {
+     "id": "es-a0-nombres-fr-v4",
+     "term": "tres",
+     "gloss": "trois",
+     "pos": "num",
+     "audio": "m:es-tres"
+    },
+    {
+     "id": "es-a0-nombres-fr-v5",
+     "term": "cuatro",
+     "gloss": "quatre",
+     "pos": "num",
+     "audio": "m:es-cuatro"
+    },
+    {
+     "id": "es-a0-nombres-fr-v6",
+     "term": "cinco",
+     "gloss": "cinq",
+     "pos": "num",
+     "audio": "m:es-cinco"
+    },
+    {
+     "id": "es-a0-nombres-fr-v7",
+     "term": "seis",
+     "gloss": "six",
+     "pos": "num",
+     "audio": "m:es-seis"
+    },
+    {
+     "id": "es-a0-nombres-fr-v8",
+     "term": "siete",
+     "gloss": "sept",
+     "pos": "num",
+     "audio": "m:es-siete"
+    },
+    {
+     "id": "es-a0-nombres-fr-v9",
+     "term": "ocho",
+     "gloss": "huit",
+     "pos": "num",
+     "audio": "m:es-ocho"
+    },
+    {
+     "id": "es-a0-nombres-fr-v10",
+     "term": "nueve",
+     "gloss": "neuf",
+     "pos": "num",
+     "audio": "m:es-nueve"
+    },
+    {
+     "id": "es-a0-nombres-fr-v11",
+     "term": "diez",
+     "gloss": "dix",
+     "pos": "num",
+     "audio": "m:es-diez"
+    }
+   ],
+   "dialogues": [
+    {
+     "id": "es-a0-nombres-fr-d1",
+     "title": "Compter",
+     "lines": [
+      {
+       "who": "A",
+       "text": "Uno, dos, tres.",
+       "tr": "Un, deux, trois."
+      },
+      {
+       "who": "B",
+       "text": "Cuatro, cinco, seis.",
+       "tr": "Quatre, cinq, six."
+      },
+      {
+       "who": "A",
+       "text": "Siete, ocho, nueve, diez.",
+       "tr": "Sept, huit, neuf, dix."
+      }
+     ],
+     "audio": "m:es-nombres-d1"
+    }
+   ],
+   "grammar": [
+    {
+     "id": "es-a0-nombres-fr-g1",
+     "title": "Compter en espagnol",
+     "md": "De **uno** (1) à **diez** (10). Le « c » de *cinco* se dit comme un « k » anglais.",
+     "examples": [
+      {
+       "text": "uno, dos, tres",
+       "tr": "un, deux, trois"
+      }
+     ]
+    }
+   ],
+   "exercises": [
+    {
+     "id": "es-a0-nombres-fr-x1",
+     "kind": "mcq",
+     "prompt": "Que veut dire cero ?",
+     "choices": [
+      "zéro",
+      "un",
+      "deux"
+     ],
+     "correct": 0
+    },
+    {
+     "id": "es-a0-nombres-fr-x2",
+     "kind": "match",
+     "prompt": "Associe chaque mot à son sens.",
+     "pairs": [
+      {
+       "a": "cero",
+       "b": "zéro"
+      },
+      {
+       "a": "uno",
+       "b": "un"
+      },
+      {
+       "a": "dos",
+       "b": "deux"
+      },
+      {
+       "a": "tres",
+       "b": "trois"
+      },
+      {
+       "a": "cuatro",
+       "b": "quatre"
+      }
+     ]
+    },
+    {
+     "id": "es-a0-nombres-fr-x3",
+     "kind": "dictation",
+     "prompt": "Écoute et écris le mot.",
+     "audio": "m:es-cero",
+     "answers": [
+      "cero"
+     ]
+    },
+    {
+     "id": "es-a0-nombres-fr-x4",
+     "kind": "speak",
+     "prompt": "Dis « un » en Espagnol, puis compare.",
+     "model": "uno",
+     "audio": "m:es-uno"
+    },
+    {
+     "id": "es-a0-nombres-fr-x5",
+     "kind": "truefalse",
+     "prompt": "« diez » veut dire « dix ».",
+     "correct": 0
+    },
+    {
+     "id": "es-a0-nombres-fr-x6",
+     "kind": "translate",
+     "prompt": "Traduis : deux.",
+     "answers": [
+      "dos"
+     ]
+    },
+    {
+     "id": "es-a0-nombres-fr-x7",
+     "kind": "write",
+     "prompt": "Écris « trois ».",
+     "model": "tres"
+    },
+    {
+     "id": "es-a0-nombres-fr-x8",
+     "kind": "mcq",
+     "prompt": "Que veut dire cuatro ?",
+     "choices": [
+      "trois",
+      "quatre",
+      "zéro"
+     ],
+     "correct": 1
+    }
+   ],
+   "stories": [],
+   "cards": [
+    {
+     "id": "es-a0-nombres-fr-c1",
+     "vocab": "es-a0-nombres-fr-v1"
+    },
+    {
+     "id": "es-a0-nombres-fr-c2",
+     "vocab": "es-a0-nombres-fr-v2"
+    },
+    {
+     "id": "es-a0-nombres-fr-c3",
+     "vocab": "es-a0-nombres-fr-v3"
+    },
+    {
+     "id": "es-a0-nombres-fr-c4",
+     "vocab": "es-a0-nombres-fr-v4"
+    },
+    {
+     "id": "es-a0-nombres-fr-c5",
+     "vocab": "es-a0-nombres-fr-v5"
+    }
+   ],
+   "animations": [
+    {
+     "id": "es-a0-nombres-fr-u1-a1",
+     "kind": "gesture",
+     "label": "Compter de 1 à 5"
+    }
+   ]
+  }
+ ]
+}

@@ -1,0 +1,313 @@
+{
+ "type": "illustration",
+ "caption": "The sound map",
+ "alt": "An axis from the front to the back of the mouth with three groups: z/c/s at the front, j/q/x in the middle, zh/ch/sh curled at the back.",
+ "figure": {
+  "kind": "shapes",
+  "w": 480,
+  "h": 200,
+  "items": [
+   {
+    "t": "line",
+    "x1": 30,
+    "y1": 120,
+    "x2": 450,
+    "y2": 120,
+    "color": "ink",
+    "arrow": "end"
+   },
+   {
+    "t": "text",
+    "x": 30,
+    "y": 140,
+    "text": "front",
+    "size": 14,
+    "color": "grey"
+   },
+   {
+    "t": "text",
+    "x": 450,
+    "y": 140,
+    "text": "back",
+    "size": 14,
+    "color": "grey",
+    "anchor": "end"
+   },
+   {
+    "t": "circle",
+    "cx": 110,
+    "cy": 120,
+    "r": 7,
+    "fill": "blue",
+    "stroke": "none"
+   },
+   {
+    "t": "text",
+    "x": 110,
+    "y": 95,
+    "text": "z · c · s",
+    "color": "blue",
+    "bold": true
+   },
+   {
+    "t": "text",
+    "x": 110,
+    "y": 165,
+    "text": "flat, front",
+    "size": 12,
+    "color": "grey"
+   },
+   {
+    "t": "circle",
+    "cx": 240,
+    "cy": 120,
+    "r": 7,
+    "fill": "green",
+    "stroke": "none"
+   },
+   {
+    "t": "text",
+    "x": 240,
+    "y": 95,
+    "text": "j · q · x",
+    "color": "green",
+    "bold": true
+   },
+   {
+    "t": "text",
+    "x": 240,
+    "y": 165,
+    "text": "middle, palate",
+    "size": 12,
+    "color": "grey"
+   },
+   {
+    "t": "circle",
+    "cx": 390,
+    "cy": 120,
+    "r": 7,
+    "fill": "red",
+    "stroke": "none"
+   },
+   {
+    "t": "text",
+    "x": 390,
+    "y": 95,
+    "text": "zh · ch · sh",
+    "color": "red",
+    "bold": true
+   },
+   {
+    "t": "text",
+    "x": 390,
+    "y": 165,
+    "text": "curled tongue",
+    "size": 12,
+    "color": "grey"
+   }
+  ]
+ },
+ "animation": {
+  "mode": "steps",
+  "items": [
+   {
+    "t": "line",
+    "x1": 30,
+    "y1": 120,
+    "x2": 450,
+    "y2": 120,
+    "color": "ink",
+    "arrow": "end",
+    "id": "a"
+   },
+   {
+    "t": "text",
+    "x": 30,
+    "y": 140,
+    "text": "front",
+    "size": 14,
+    "color": "grey",
+    "id": "b"
+   },
+   {
+    "t": "text",
+    "x": 450,
+    "y": 140,
+    "text": "back",
+    "size": 14,
+    "color": "grey",
+    "anchor": "end",
+    "id": "c"
+   },
+   {
+    "t": "circle",
+    "cx": 110,
+    "cy": 120,
+    "r": 7,
+    "fill": "blue",
+    "stroke": "none",
+    "id": "d110",
+    "alpha": 0
+   },
+   {
+    "t": "text",
+    "x": 110,
+    "y": 95,
+    "text": "z · c · s",
+    "color": "blue",
+    "bold": true,
+    "id": "l110",
+    "alpha": 0
+   },
+   {
+    "t": "text",
+    "x": 110,
+    "y": 165,
+    "text": "flat, front",
+    "size": 12,
+    "color": "grey",
+    "id": "s110",
+    "alpha": 0
+   },
+   {
+    "t": "circle",
+    "cx": 240,
+    "cy": 120,
+    "r": 7,
+    "fill": "green",
+    "stroke": "none",
+    "id": "d240",
+    "alpha": 0
+   },
+   {
+    "t": "text",
+    "x": 240,
+    "y": 95,
+    "text": "j · q · x",
+    "color": "green",
+    "bold": true,
+    "id": "l240",
+    "alpha": 0
+   },
+   {
+    "t": "text",
+    "x": 240,
+    "y": 165,
+    "text": "middle, palate",
+    "size": 12,
+    "color": "grey",
+    "id": "s240",
+    "alpha": 0
+   },
+   {
+    "t": "circle",
+    "cx": 390,
+    "cy": 120,
+    "r": 7,
+    "fill": "red",
+    "stroke": "none",
+    "id": "d390",
+    "alpha": 0
+   },
+   {
+    "t": "text",
+    "x": 390,
+    "y": 95,
+    "text": "zh · ch · sh",
+    "color": "red",
+    "bold": true,
+    "id": "l390",
+    "alpha": 0
+   },
+   {
+    "t": "text",
+    "x": 390,
+    "y": 165,
+    "text": "curled tongue",
+    "size": 12,
+    "color": "grey",
+    "id": "s390",
+    "alpha": 0
+   }
+  ],
+  "do": [
+   {
+    "at": 0,
+    "d": 0.3,
+    "op": "fade",
+    "on": "d110",
+    "a": 1
+   },
+   {
+    "at": 0,
+    "d": 0.3,
+    "op": "fade",
+    "on": "l110",
+    "a": 1
+   },
+   {
+    "at": 0,
+    "d": 0.3,
+    "op": "fade",
+    "on": "s110",
+    "a": 1
+   },
+   {
+    "at": 0.3,
+    "d": 0.3,
+    "op": "fade",
+    "on": "d240",
+    "a": 1
+   },
+   {
+    "at": 0.3,
+    "d": 0.3,
+    "op": "fade",
+    "on": "l240",
+    "a": 1
+   },
+   {
+    "at": 0.3,
+    "d": 0.3,
+    "op": "fade",
+    "on": "s240",
+    "a": 1
+   },
+   {
+    "at": 0.6,
+    "d": 0.3,
+    "op": "fade",
+    "on": "d390",
+    "a": 1
+   },
+   {
+    "at": 0.6,
+    "d": 0.3,
+    "op": "fade",
+    "on": "l390",
+    "a": 1
+   },
+   {
+    "at": 0.6,
+    "d": 0.3,
+    "op": "fade",
+    "on": "s390",
+    "a": 1
+   }
+  ],
+  "steps": [
+   {
+    "at": 0.3,
+    "say": "The z · c · s group."
+   },
+   {
+    "at": 0.6,
+    "say": "The j · q · x group."
+   },
+   {
+    "at": 0.9,
+    "say": "The zh · ch · sh group."
+   }
+  ]
+ }
+}

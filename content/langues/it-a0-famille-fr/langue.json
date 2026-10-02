@@ -1,0 +1,240 @@
+{
+ "format": 1,
+ "type": "langue",
+ "id": "it-a0-famille-fr",
+ "version": 1,
+ "target": "it",
+ "level": "a0",
+ "theme": "famille",
+ "source": "fr",
+ "title": "Italien A0 — Ma famille",
+ "state": "review",
+ "units": [
+  {
+   "id": "it-a0-famille-fr-u1",
+   "title": "Papa, maman, et moi",
+   "minutes": 10,
+   "skills": [
+    "co",
+    "ce",
+    "po"
+   ],
+   "prerequisites": [],
+   "vocab": [
+    {
+     "id": "it-a0-famille-fr-v1",
+     "term": "famiglia",
+     "gloss": "famille",
+     "pos": "n",
+     "audio": "m:it-famiglia"
+    },
+    {
+     "id": "it-a0-famille-fr-v2",
+     "term": "padre",
+     "gloss": "père",
+     "pos": "n",
+     "audio": "m:it-padre"
+    },
+    {
+     "id": "it-a0-famille-fr-v3",
+     "term": "madre",
+     "gloss": "mère",
+     "pos": "n",
+     "audio": "m:it-madre"
+    },
+    {
+     "id": "it-a0-famille-fr-v4",
+     "term": "fratello",
+     "gloss": "frère",
+     "pos": "n",
+     "audio": "m:it-fratello"
+    },
+    {
+     "id": "it-a0-famille-fr-v5",
+     "term": "sorella",
+     "gloss": "sœur",
+     "pos": "n",
+     "audio": "m:it-sorella"
+    },
+    {
+     "id": "it-a0-famille-fr-v6",
+     "term": "nonno",
+     "gloss": "grand-père",
+     "pos": "n",
+     "audio": "m:it-nonno"
+    },
+    {
+     "id": "it-a0-famille-fr-v7",
+     "term": "nonna",
+     "gloss": "grand-mère",
+     "pos": "n",
+     "audio": "m:it-nonna"
+    },
+    {
+     "id": "it-a0-famille-fr-v8",
+     "term": "io",
+     "gloss": "je, moi",
+     "pos": "pron",
+     "audio": "m:it-io"
+    }
+   ],
+   "dialogues": [
+    {
+     "id": "it-a0-famille-fr-d1",
+     "title": "Ma famille",
+     "lines": [
+      {
+       "who": "A",
+       "text": "Questo è mio padre.",
+       "tr": "C'est mon père."
+      },
+      {
+       "who": "B",
+       "text": "Ciao!",
+       "tr": "Salut !"
+      },
+      {
+       "who": "A",
+       "text": "Questa è mia madre.",
+       "tr": "C'est ma mère."
+      },
+      {
+       "who": "B",
+       "text": "Che bella famiglia!",
+       "tr": "Quelle belle famille !"
+      }
+     ],
+     "audio": "m:it-famille-d1"
+    }
+   ],
+   "grammar": [
+    {
+     "id": "it-a0-famille-fr-g1",
+     "title": "mio / mia = mon / ma",
+     "md": "**Mio** varie : *mio padre* (masculin), *mia madre* (féminin).",
+     "examples": [
+      {
+       "text": "mio padre",
+       "tr": "mon père"
+      },
+      {
+       "text": "mia madre",
+       "tr": "ma mère"
+      }
+     ]
+    }
+   ],
+   "exercises": [
+    {
+     "id": "it-a0-famille-fr-x1",
+     "kind": "mcq",
+     "prompt": "Que veut dire famiglia ?",
+     "choices": [
+      "famille",
+      "père",
+      "mère"
+     ],
+     "correct": 0
+    },
+    {
+     "id": "it-a0-famille-fr-x2",
+     "kind": "match",
+     "prompt": "Associe chaque mot à son sens.",
+     "pairs": [
+      {
+       "a": "famiglia",
+       "b": "famille"
+      },
+      {
+       "a": "padre",
+       "b": "père"
+      },
+      {
+       "a": "madre",
+       "b": "mère"
+      },
+      {
+       "a": "fratello",
+       "b": "frère"
+      },
+      {
+       "a": "sorella",
+       "b": "sœur"
+      }
+     ]
+    },
+    {
+     "id": "it-a0-famille-fr-x3",
+     "kind": "dictation",
+     "prompt": "Écoute et écris le mot.",
+     "audio": "m:it-famiglia",
+     "answers": [
+      "famiglia"
+     ]
+    },
+    {
+     "id": "it-a0-famille-fr-x4",
+     "kind": "speak",
+     "prompt": "Dis « père » en Italien, puis compare.",
+     "model": "padre",
+     "audio": "m:it-padre"
+    },
+    {
+     "id": "it-a0-famille-fr-x5",
+     "kind": "truefalse",
+     "prompt": "« mio padre » veut dire « mon père ».",
+     "correct": 0
+    },
+    {
+     "id": "it-a0-famille-fr-x6",
+     "kind": "translate",
+     "prompt": "Traduis : mère.",
+     "answers": [
+      "madre"
+     ]
+    },
+    {
+     "id": "it-a0-famille-fr-x7",
+     "kind": "write",
+     "prompt": "Écris « frère ».",
+     "model": "fratello"
+    },
+    {
+     "id": "it-a0-famille-fr-x8",
+     "kind": "mcq",
+     "prompt": "Que veut dire sorella ?",
+     "choices": [
+      "frère",
+      "sœur",
+      "famille"
+     ],
+     "correct": 1
+    }
+   ],
+   "stories": [],
+   "cards": [
+    {
+     "id": "it-a0-famille-fr-c1",
+     "vocab": "it-a0-famille-fr-v1"
+    },
+    {
+     "id": "it-a0-famille-fr-c2",
+     "vocab": "it-a0-famille-fr-v2"
+    },
+    {
+     "id": "it-a0-famille-fr-c3",
+     "vocab": "it-a0-famille-fr-v3"
+    },
+    {
+     "id": "it-a0-famille-fr-c4",
+     "vocab": "it-a0-famille-fr-v4"
+    },
+    {
+     "id": "it-a0-famille-fr-c5",
+     "vocab": "it-a0-famille-fr-v5"
+    }
+   ],
+   "animations": []
+  }
+ ]
+}

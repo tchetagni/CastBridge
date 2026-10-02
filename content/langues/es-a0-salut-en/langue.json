@@ -1,0 +1,249 @@
+{
+ "format": 1,
+ "type": "langue",
+ "id": "es-a0-salut-en",
+ "version": 2,
+ "target": "es",
+ "level": "a0",
+ "theme": "salut",
+ "source": "en",
+ "title": "Spanish A0 — Greetings",
+ "state": "review",
+ "units": [
+  {
+   "id": "es-a0-salut-en-u1",
+   "title": "Hello, thank you, goodbye",
+   "minutes": 10,
+   "skills": [
+    "co",
+    "ce",
+    "po"
+   ],
+   "prerequisites": [],
+   "vocab": [
+    {
+     "id": "es-a0-salut-en-v1",
+     "term": "Hola",
+     "gloss": "hello / hi",
+     "pos": "interj",
+     "audio": "m:es-hola"
+    },
+    {
+     "id": "es-a0-salut-en-v2",
+     "term": "Buenos días",
+     "gloss": "good morning",
+     "pos": "interj",
+     "audio": "m:es-buenosdas"
+    },
+    {
+     "id": "es-a0-salut-en-v3",
+     "term": "Gracias",
+     "gloss": "thank you",
+     "pos": "interj",
+     "audio": "m:es-gracias"
+    },
+    {
+     "id": "es-a0-salut-en-v4",
+     "term": "Por favor",
+     "gloss": "please",
+     "pos": "interj",
+     "audio": "m:es-porfavor"
+    },
+    {
+     "id": "es-a0-salut-en-v5",
+     "term": "Adiós",
+     "gloss": "goodbye",
+     "pos": "interj",
+     "audio": "m:es-adis"
+    },
+    {
+     "id": "es-a0-salut-en-v6",
+     "term": "Sí",
+     "gloss": "yes",
+     "pos": "interj",
+     "audio": "m:es-s"
+    },
+    {
+     "id": "es-a0-salut-en-v7",
+     "term": "No",
+     "gloss": "no",
+     "pos": "interj",
+     "audio": "m:es-no"
+    },
+    {
+     "id": "es-a0-salut-en-v8",
+     "term": "Perdón",
+     "gloss": "sorry",
+     "pos": "interj",
+     "audio": "m:es-perdn"
+    },
+    {
+     "id": "es-a0-salut-en-v9",
+     "term": "¿Cómo estás?",
+     "gloss": "how are you?",
+     "pos": "phrase",
+     "audio": "m:es-cmoests"
+    }
+   ],
+   "dialogues": [
+    {
+     "id": "es-a0-salut-en-d1",
+     "title": "A meeting",
+     "lines": [
+      {
+       "who": "A",
+       "text": "¡Hola!",
+       "tr": "Hello!"
+      },
+      {
+       "who": "B",
+       "text": "¡Buenos días!",
+       "tr": "Good morning!"
+      },
+      {
+       "who": "A",
+       "text": "¿Cómo estás?",
+       "tr": "How are you?"
+      },
+      {
+       "who": "B",
+       "text": "Bien, gracias.",
+       "tr": "Fine, thanks."
+      },
+      {
+       "who": "A",
+       "text": "¡Adiós!",
+       "tr": "Goodbye!"
+      }
+     ],
+     "audio": "m:es-salut-d1",
+     "video": "m:es-salut-salut"
+    }
+   ],
+   "grammar": [
+    {
+     "id": "es-a0-salut-en-g1",
+     "title": "¿ and ¡ : inverted punctuation",
+     "md": "Spanish opens questions with **¿** and exclamations with **¡**: *¿Cómo estás?*, *¡Hola!*.",
+     "examples": [
+      {
+       "text": "¿Cómo estás?",
+       "tr": "how are you?"
+      }
+     ]
+    }
+   ],
+   "exercises": [
+    {
+     "id": "es-a0-salut-en-x1",
+     "kind": "mcq",
+     "prompt": "What does Hola mean?",
+     "choices": [
+      "hello / hi",
+      "good morning",
+      "thank you"
+     ],
+     "correct": 0
+    },
+    {
+     "id": "es-a0-salut-en-x2",
+     "kind": "match",
+     "prompt": "Match each word to its meaning.",
+     "pairs": [
+      {
+       "a": "Hola",
+       "b": "hello / hi"
+      },
+      {
+       "a": "Buenos días",
+       "b": "good morning"
+      },
+      {
+       "a": "Gracias",
+       "b": "thank you"
+      },
+      {
+       "a": "Por favor",
+       "b": "please"
+      },
+      {
+       "a": "Adiós",
+       "b": "goodbye"
+      }
+     ]
+    },
+    {
+     "id": "es-a0-salut-en-x3",
+     "kind": "dictation",
+     "prompt": "Listen and write the word.",
+     "audio": "m:es-hola",
+     "answers": [
+      "Hola"
+     ]
+    },
+    {
+     "id": "es-a0-salut-en-x4",
+     "kind": "speak",
+     "prompt": "Say 'good morning' in Spanish, then compare.",
+     "model": "Buenos días",
+     "audio": "m:es-buenosdas"
+    },
+    {
+     "id": "es-a0-salut-en-x5",
+     "kind": "truefalse",
+     "prompt": "'Gracias' means 'thank you'.",
+     "correct": 0
+    },
+    {
+     "id": "es-a0-salut-en-x6",
+     "kind": "translate",
+     "prompt": "Translate: thank you.",
+     "answers": [
+      "Gracias"
+     ]
+    },
+    {
+     "id": "es-a0-salut-en-x7",
+     "kind": "write",
+     "prompt": "Write 'please'.",
+     "model": "Por favor"
+    },
+    {
+     "id": "es-a0-salut-en-x8",
+     "kind": "mcq",
+     "prompt": "What does Adiós mean?",
+     "choices": [
+      "please",
+      "goodbye",
+      "hello / hi"
+     ],
+     "correct": 1
+    }
+   ],
+   "stories": [],
+   "cards": [
+    {
+     "id": "es-a0-salut-en-c1",
+     "vocab": "es-a0-salut-en-v1"
+    },
+    {
+     "id": "es-a0-salut-en-c2",
+     "vocab": "es-a0-salut-en-v2"
+    },
+    {
+     "id": "es-a0-salut-en-c3",
+     "vocab": "es-a0-salut-en-v3"
+    },
+    {
+     "id": "es-a0-salut-en-c4",
+     "vocab": "es-a0-salut-en-v4"
+    },
+    {
+     "id": "es-a0-salut-en-c5",
+     "vocab": "es-a0-salut-en-v5"
+    }
+   ],
+   "animations": []
+  }
+ ]
+}

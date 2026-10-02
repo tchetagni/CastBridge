@@ -1,0 +1,473 @@
+{
+ "format": 1,
+ "type": "langue",
+ "id": "zh-a0-phonetique-en",
+ "version": 1,
+ "target": "zh",
+ "level": "a0",
+ "theme": "phonetique",
+ "source": "en",
+ "title": "Chinese A0 — Pronunciation (tones and sounds)",
+ "state": "review",
+ "units": [
+  {
+   "id": "zh-a0-phonetique-en-u1",
+   "title": "The four tones",
+   "minutes": 12,
+   "skills": [
+    "co",
+    "po"
+   ],
+   "prerequisites": [],
+   "vocab": [
+    {
+     "id": "zh-a0-phonetique-en-u1-v1",
+     "term": "妈",
+     "reading": "mā",
+     "gloss": "mom (1st tone)",
+     "pos": "n",
+     "audio": "m:zh-ma1"
+    },
+    {
+     "id": "zh-a0-phonetique-en-u1-v2",
+     "term": "麻",
+     "reading": "má",
+     "gloss": "hemp (2nd tone)",
+     "pos": "n",
+     "audio": "m:zh-ma2"
+    },
+    {
+     "id": "zh-a0-phonetique-en-u1-v3",
+     "term": "马",
+     "reading": "mǎ",
+     "gloss": "horse (3rd tone)",
+     "pos": "n",
+     "audio": "m:zh-ma3"
+    },
+    {
+     "id": "zh-a0-phonetique-en-u1-v4",
+     "term": "骂",
+     "reading": "mà",
+     "gloss": "to scold (4th tone)",
+     "pos": "v",
+     "audio": "m:zh-ma4"
+    },
+    {
+     "id": "zh-a0-phonetique-en-u1-v5",
+     "term": "吗",
+     "reading": "ma",
+     "gloss": "question particle (neutral tone)",
+     "pos": "part",
+     "audio": "m:zh-ma0"
+    }
+   ],
+   "dialogues": [
+    {
+     "id": "zh-a0-phonetique-en-u1-d1",
+     "title": "Listening to the tones",
+     "lines": [
+      {
+       "who": "A",
+       "text": "妈。",
+       "reading": "mā.",
+       "tr": "Mom (1st tone)."
+      },
+      {
+       "who": "A",
+       "text": "麻。",
+       "reading": "má.",
+       "tr": "Hemp (2nd tone)."
+      },
+      {
+       "who": "A",
+       "text": "马。",
+       "reading": "mǎ.",
+       "tr": "Horse (3rd tone)."
+      },
+      {
+       "who": "A",
+       "text": "骂。",
+       "reading": "mà.",
+       "tr": "To scold (4th tone)."
+      }
+     ],
+     "audio": "m:zh-ma1234"
+    }
+   ],
+   "grammar": [
+    {
+     "id": "zh-a0-phonetique-en-u1-g1",
+     "title": "Tone changes the meaning",
+     "md": "Chinese is a **tonal** language: the same syllable **ma** changes meaning with pitch. Four tones plus a neutral one:\n- **1st** mā: high and flat (55)\n- **2nd** má: rising (35)\n- **3rd** mǎ: dips then rises (214)\n- **4th** mà: falling (51)\n- **neutral** ma: short, no contour.",
+     "examples": [
+      {
+       "text": "妈 mā",
+       "tr": "mom"
+      },
+      {
+       "text": "马 mǎ",
+       "tr": "horse"
+      }
+     ]
+    }
+   ],
+   "exercises": [
+    {
+     "id": "zh-a0-phonetique-en-u1-x1",
+     "kind": "mcq",
+     "prompt": "'马 (mǎ)' means?",
+     "choices": [
+      "mom",
+      "horse",
+      "to scold"
+     ],
+     "correct": 1
+    },
+    {
+     "id": "zh-a0-phonetique-en-u1-x2",
+     "kind": "match",
+     "prompt": "Match each character to its meaning.",
+     "pairs": [
+      {
+       "a": "妈",
+       "b": "mom"
+      },
+      {
+       "a": "马",
+       "b": "horse"
+      },
+      {
+       "a": "骂",
+       "b": "to scold"
+      },
+      {
+       "a": "麻",
+       "b": "hemp"
+      }
+     ]
+    },
+    {
+     "id": "zh-a0-phonetique-en-u1-x3",
+     "kind": "dictation",
+     "prompt": "Listen: which character do you hear?",
+     "audio": "m:zh-ma3",
+     "answers": [
+      "马"
+     ]
+    },
+    {
+     "id": "zh-a0-phonetique-en-u1-x4",
+     "kind": "speak",
+     "prompt": "Say 'mā' (1st tone, high and flat), then compare.",
+     "audio": "m:zh-ma1",
+     "model": "mā — ton 1 (55, haut plat)"
+    },
+    {
+     "id": "zh-a0-phonetique-en-u1-x5",
+     "kind": "truefalse",
+     "prompt": "The 3rd tone goes down then up.",
+     "correct": 0
+    },
+    {
+     "id": "zh-a0-phonetique-en-u1-x6",
+     "kind": "mcq",
+     "prompt": "Which word has the 4th tone (falling)?",
+     "choices": [
+      "妈",
+      "麻",
+      "骂"
+     ],
+     "correct": 2
+    },
+    {
+     "id": "zh-a0-phonetique-en-u1-x7",
+     "kind": "translate",
+     "prompt": "Translate: horse.",
+     "answers": [
+      "马"
+     ]
+    },
+    {
+     "id": "zh-a0-phonetique-en-u1-x8",
+     "kind": "write",
+     "prompt": "Write 'mom' in characters.",
+     "model": "妈"
+    }
+   ],
+   "stories": [],
+   "cards": [
+    {
+     "id": "zh-a0-phonetique-en-u1-c1",
+     "vocab": "zh-a0-phonetique-en-u1-v1"
+    },
+    {
+     "id": "zh-a0-phonetique-en-u1-c2",
+     "vocab": "zh-a0-phonetique-en-u1-v3"
+    },
+    {
+     "id": "zh-a0-phonetique-en-u1-c3",
+     "vocab": "zh-a0-phonetique-en-u1-v4"
+    }
+   ],
+   "animations": [
+    {
+     "id": "zh-a0-phonetique-en-u1-a1",
+     "kind": "articulation",
+     "label": "The four tone contours"
+    }
+   ]
+  },
+  {
+   "id": "zh-a0-phonetique-en-u2",
+   "title": "Difficult sounds",
+   "minutes": 12,
+   "skills": [
+    "co",
+    "po"
+   ],
+   "prerequisites": [
+    "zh-a0-phonetique-en-u1"
+   ],
+   "vocab": [
+    {
+     "id": "zh-a0-phonetique-en-u2-v1",
+     "term": "知",
+     "reading": "zhī",
+     "gloss": "to know (zh sound)",
+     "pos": "v",
+     "audio": "m:zh-zhi"
+    },
+    {
+     "id": "zh-a0-phonetique-en-u2-v2",
+     "term": "吃",
+     "reading": "chī",
+     "gloss": "to eat (ch sound)",
+     "pos": "v",
+     "audio": "m:zh-chi"
+    },
+    {
+     "id": "zh-a0-phonetique-en-u2-v3",
+     "term": "是",
+     "reading": "shì",
+     "gloss": "to be (sh sound)",
+     "pos": "v",
+     "audio": "m:zh-shi"
+    },
+    {
+     "id": "zh-a0-phonetique-en-u2-v4",
+     "term": "西",
+     "reading": "xī",
+     "gloss": "west (x sound)",
+     "pos": "n",
+     "audio": "m:zh-xi"
+    },
+    {
+     "id": "zh-a0-phonetique-en-u2-v5",
+     "term": "七",
+     "reading": "qī",
+     "gloss": "seven (q sound)",
+     "pos": "num",
+     "audio": "m:zh-qi"
+    },
+    {
+     "id": "zh-a0-phonetique-en-u2-v6",
+     "term": "鱼",
+     "reading": "yú",
+     "gloss": "fish (ü vowel)",
+     "pos": "n",
+     "audio": "m:zh-yu"
+    },
+    {
+     "id": "zh-a0-phonetique-en-u2-v7",
+     "term": "绿",
+     "reading": "lǜ",
+     "gloss": "green (ü vowel)",
+     "pos": "adj",
+     "audio": "m:zh-lv"
+    },
+    {
+     "id": "zh-a0-phonetique-en-u2-v8",
+     "term": "日",
+     "reading": "rì",
+     "gloss": "sun, day (r sound)",
+     "pos": "n",
+     "audio": "m:zh-ri"
+    }
+   ],
+   "dialogues": [
+    {
+     "id": "zh-a0-phonetique-en-u2-d1",
+     "title": "Listening to the sounds",
+     "lines": [
+      {
+       "who": "A",
+       "text": "知。",
+       "reading": "zhī.",
+       "tr": "To know (zh)."
+      },
+      {
+       "who": "A",
+       "text": "吃。",
+       "reading": "chī.",
+       "tr": "To eat (ch)."
+      },
+      {
+       "who": "A",
+       "text": "是。",
+       "reading": "shì.",
+       "tr": "To be (sh)."
+      },
+      {
+       "who": "A",
+       "text": "鱼。",
+       "reading": "yú.",
+       "tr": "Fish (ü)."
+      }
+     ],
+     "audio": "m:zh-sounds4"
+    }
+   ],
+   "grammar": [
+    {
+     "id": "zh-a0-phonetique-en-u2-g1",
+     "title": "zh / ch / sh: curl the tongue",
+     "md": "For **zh**, **ch**, **sh**, **curl the tongue** back (retroflex). **ch** adds a puff of air (aspirated), **sh** does not.",
+     "examples": [
+      {
+       "text": "知 zhī",
+       "tr": "to know"
+      },
+      {
+       "text": "吃 chī",
+       "tr": "to eat"
+      }
+     ]
+    },
+    {
+     "id": "zh-a0-phonetique-en-u2-g2",
+     "title": "x, q and the ü vowel",
+     "md": "**x** and **q** are said with a flat tongue near the palate. The **ü** vowel (as in **鱼** yú, **绿** lǜ) rounds the lips; it is written **u** after y, j, q, x.",
+     "examples": [
+      {
+       "text": "鱼 yú",
+       "tr": "fish"
+      },
+      {
+       "text": "绿 lǜ",
+       "tr": "green"
+      }
+     ]
+    }
+   ],
+   "exercises": [
+    {
+     "id": "zh-a0-phonetique-en-u2-x1",
+     "kind": "mcq",
+     "prompt": "Which character contains the 'ch' sound?",
+     "choices": [
+      "知",
+      "吃",
+      "西"
+     ],
+     "correct": 1
+    },
+    {
+     "id": "zh-a0-phonetique-en-u2-x2",
+     "kind": "match",
+     "prompt": "Match the sound to the character.",
+     "pairs": [
+      {
+       "a": "知",
+       "b": "zh"
+      },
+      {
+       "a": "吃",
+       "b": "ch"
+      },
+      {
+       "a": "是",
+       "b": "sh"
+      },
+      {
+       "a": "西",
+       "b": "x"
+      },
+      {
+       "a": "七",
+       "b": "q"
+      }
+     ]
+    },
+    {
+     "id": "zh-a0-phonetique-en-u2-x3",
+     "kind": "dictation",
+     "prompt": "Listen: which character do you hear?",
+     "audio": "m:zh-chi",
+     "answers": [
+      "吃"
+     ]
+    },
+    {
+     "id": "zh-a0-phonetique-en-u2-x4",
+     "kind": "speak",
+     "prompt": "Say 'chī' (aspirated retroflex).",
+     "audio": "m:zh-chi",
+     "model": "chī (rétroflexe + souffle)"
+    },
+    {
+     "id": "zh-a0-phonetique-en-u2-x5",
+     "kind": "truefalse",
+     "prompt": "'是 (shì)' has a retroflex sound (curled tongue).",
+     "correct": 0
+    },
+    {
+     "id": "zh-a0-phonetique-en-u2-x6",
+     "kind": "translate",
+     "prompt": "Translate: fish.",
+     "answers": [
+      "鱼"
+     ]
+    },
+    {
+     "id": "zh-a0-phonetique-en-u2-x7",
+     "kind": "mcq",
+     "prompt": "Which sound is aspirated (breath)?",
+     "choices": [
+      "zh",
+      "ch",
+      "sh"
+     ],
+     "correct": 1
+    },
+    {
+     "id": "zh-a0-phonetique-en-u2-x8",
+     "kind": "write",
+     "prompt": "Write 'to eat' in characters.",
+     "model": "吃"
+    }
+   ],
+   "stories": [],
+   "cards": [
+    {
+     "id": "zh-a0-phonetique-en-u2-c1",
+     "vocab": "zh-a0-phonetique-en-u2-v1"
+    },
+    {
+     "id": "zh-a0-phonetique-en-u2-c2",
+     "vocab": "zh-a0-phonetique-en-u2-v2"
+    },
+    {
+     "id": "zh-a0-phonetique-en-u2-c3",
+     "vocab": "zh-a0-phonetique-en-u2-v3"
+    }
+   ],
+   "animations": [
+    {
+     "id": "zh-a0-phonetique-en-u2-a1",
+     "kind": "articulation",
+     "label": "The sound map (front / back)"
+    }
+   ]
+  }
+ ]
+}

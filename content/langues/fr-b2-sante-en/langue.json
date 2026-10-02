@@ -1,0 +1,337 @@
+{
+ "format": 1,
+ "type": "langue",
+ "id": "fr-b2-sante-en",
+ "version": 1,
+ "target": "fr",
+ "level": "b2",
+ "theme": "sante",
+ "source": "en",
+ "title": "Français (Québec) B2 — La santé et les services",
+ "state": "review",
+ "units": [
+  {
+   "id": "fr-b2-sante-en-u1",
+   "title": "Prendre rendez-vous",
+   "minutes": 25,
+   "skills": [
+    "co",
+    "ce",
+    "po",
+    "pe"
+   ],
+   "prerequisites": [],
+   "vocab": [
+    {
+     "id": "fr-b2-sante-en-v1",
+     "term": "rendez-vous",
+     "gloss": "appointment",
+     "pos": "n",
+     "audio": "m:fr-rendezvous"
+    },
+    {
+     "id": "fr-b2-sante-en-v2",
+     "term": "clinique",
+     "gloss": "clinic",
+     "pos": "n",
+     "audio": "m:fr-clinique"
+    },
+    {
+     "id": "fr-b2-sante-en-v3",
+     "term": "urgence",
+     "gloss": "emergency",
+     "pos": "n",
+     "audio": "m:fr-urgence"
+    },
+    {
+     "id": "fr-b2-sante-en-v4",
+     "term": "assurance maladie",
+     "gloss": "health insurance",
+     "pos": "n",
+     "audio": "m:fr-assurancemaladie"
+    },
+    {
+     "id": "fr-b2-sante-en-v5",
+     "term": "carte d'assurance maladie",
+     "gloss": "health insurance card",
+     "pos": "n",
+     "audio": "m:fr-cartedassurancemaladie"
+    },
+    {
+     "id": "fr-b2-sante-en-v6",
+     "term": "pharmacie",
+     "gloss": "pharmacy",
+     "pos": "n",
+     "audio": "m:fr-pharmacie"
+    },
+    {
+     "id": "fr-b2-sante-en-v7",
+     "term": "médecin",
+     "gloss": "doctor",
+     "pos": "n",
+     "audio": "m:fr-mdecin"
+    },
+    {
+     "id": "fr-b2-sante-en-v8",
+     "term": "infirmier",
+     "gloss": "nurse",
+     "pos": "n",
+     "audio": "m:fr-infirmier"
+    },
+    {
+     "id": "fr-b2-sante-en-v9",
+     "term": "ordonnance",
+     "gloss": "prescription",
+     "pos": "n",
+     "audio": "m:fr-ordonnance"
+    },
+    {
+     "id": "fr-b2-sante-en-v10",
+     "term": "symptôme",
+     "gloss": "symptom",
+     "pos": "n",
+     "audio": "m:fr-symptme"
+    },
+    {
+     "id": "fr-b2-sante-en-v11",
+     "term": "dossier",
+     "gloss": "file / record",
+     "pos": "n",
+     "audio": "m:fr-dossier"
+    },
+    {
+     "id": "fr-b2-sante-en-v12",
+     "term": "consultation",
+     "gloss": "consultation",
+     "pos": "n",
+     "audio": "m:fr-consultation"
+    }
+   ],
+   "dialogues": [
+    {
+     "id": "fr-b2-sante-en-d1",
+     "title": "À la clinique",
+     "lines": [
+      {
+       "who": "A",
+       "text": "Bonjour, je voudrais prendre un rendez-vous avec un médecin.",
+       "tr": "Hello, I'd like to make an appointment with a doctor."
+      },
+      {
+       "who": "B",
+       "text": "Bonjour ! Avez-vous votre carte d'assurance maladie ?",
+       "tr": "Hello! Do you have your health insurance card?"
+      },
+      {
+       "who": "A",
+       "text": "Oui, la voici. Quels sont mes symptômes à décrire ?",
+       "tr": "Yes, here it is. What symptoms should I describe?"
+      },
+      {
+       "who": "B",
+       "text": "Décrivez simplement ce qui ne va pas : fièvre, douleur, fatigue.",
+       "tr": "Just describe what's wrong: fever, pain, fatigue."
+      },
+      {
+       "who": "A",
+       "text": "J'ai de la fièvre depuis deux jours et mal à la gorge.",
+       "tr": "I've had a fever for two days and a sore throat."
+      },
+      {
+       "who": "B",
+       "text": "Le médecin vous verra demain à dix heures. Apportez votre dossier.",
+       "tr": "The doctor will see you tomorrow at ten. Bring your file."
+      }
+     ],
+     "audio": "m:fr-b2-sante-d1"
+    }
+   ],
+   "grammar": [
+    {
+     "id": "fr-b2-sante-en-g1",
+     "title": "Prendre rendez-vous : les formules",
+     "md": "**Je voudrais prendre un rendez-vous**, **Est-ce que le médecin est disponible ?**, **J'ai un symptôme à signaler**. La politesse et le conditionnel sont attendus.",
+     "examples": [
+      {
+       "text": "Je voudrais un rendez-vous, s'il vous plaît.",
+       "tr": "I would like an appointment, please."
+      }
+     ]
+    },
+    {
+     "id": "fr-b2-sante-en-g2",
+     "title": "Le système de santé au Québec",
+     "md": "L'**assurance maladie** est gérée par la Régie de l'assurance maladie du Québec (RAMQ) ; la **carte d'assurance maladie** (la « carte soleil ») est obligatoire. Les **CLSC** offrent des soins courants, les **cliniques** reçoivent sans rendez-vous.",
+     "examples": [
+      {
+       "text": "Présentez votre carte d'assurance maladie.",
+       "tr": "Show your health insurance card."
+      }
+     ]
+    }
+   ],
+   "exercises": [
+    {
+     "id": "fr-b2-sante-en-x1",
+     "kind": "mcq",
+     "prompt": "What does « dépanneur » mean? (Compréhension / lexique)",
+     "choices": [
+      "convenience store",
+      "parking lot",
+      "bakery"
+     ],
+     "correct": 0
+    },
+    {
+     "id": "fr-b2-sante-en-x2",
+     "kind": "match",
+     "prompt": "Match each Québécois word to its English meaning.",
+     "pairs": [
+      {
+       "a": "rendez-vous",
+       "b": "appointment"
+      },
+      {
+       "a": "clinique",
+       "b": "clinic"
+      },
+      {
+       "a": "urgence",
+       "b": "emergency"
+      },
+      {
+       "a": "assurance maladie",
+       "b": "health insurance"
+      },
+      {
+       "a": "carte d'assurance maladie",
+       "b": "health insurance card"
+      }
+     ]
+    },
+    {
+     "id": "fr-b2-sante-en-x3",
+     "kind": "cloze",
+     "prompt": "Complète : J'ai besoin d'une ____ pour mes médicaments.",
+     "answers": [
+      "ordonnance"
+     ]
+    },
+    {
+     "id": "fr-b2-sante-en-x4",
+     "kind": "order",
+     "prompt": "Put the words in the correct order (Structures).",
+     "words": [
+      "Je",
+      "voudrais",
+      "prendre",
+      "un",
+      "rendez-vous"
+     ],
+     "answers": [
+      "Je voudrais prendre un rendez-vous."
+     ]
+    },
+    {
+     "id": "fr-b2-sante-en-x5",
+     "kind": "truefalse",
+     "prompt": "In Quebec, the midday meal is called « le dîner ».",
+     "correct": 0
+    },
+    {
+     "id": "fr-b2-sante-en-x6",
+     "kind": "dictation",
+     "prompt": "Listen and write the sentence (Compréhension orale).",
+     "audio": "m:fr-b2-sante-d1",
+     "answers": [
+      "Bonjour, je voudrais prendre un rendez-vous avec un médecin."
+     ]
+    },
+    {
+     "id": "fr-b2-sante-en-x7",
+     "kind": "translate",
+     "prompt": "Translate into English: rendez-vous.",
+     "answers": [
+      "appointment"
+     ]
+    },
+    {
+     "id": "fr-b2-sante-en-x8",
+     "kind": "write",
+     "prompt": "Write two or three sentences about your own daily routine (Expression écrite).",
+     "model": "Je me lève, je déjeune, puis je prends l'autobus."
+    },
+    {
+     "id": "fr-b2-sante-en-x9",
+     "kind": "speak",
+     "prompt": "Describe your last appointment in French, then compare (Expression orale).",
+     "model": "Je voudrais prendre un rendez-vous, s'il vous plaît.",
+     "audio": "m:fr-rendezvous"
+    }
+   ],
+   "stories": [
+    {
+     "id": "fr-b2-sante-en-s1",
+     "title": "Une visite à la clinique",
+     "paragraphs": [
+      {
+       "who": "",
+       "text": "Nadia ne se sent pas bien depuis deux jours. Elle appelle la clinique du quartier.",
+       "tr": "Nadia hasn't felt well for two days. She calls the local clinic."
+      },
+      {
+       "who": "",
+       "text": "La réceptionniste lui demande sa carte d'assurance maladie et lui donne un rendez-vous le lendemain.",
+       "tr": "The receptionist asks for her health insurance card and gives her an appointment for the next day."
+      },
+      {
+       "who": "",
+       "text": "Le médecin l'examine, note ses symptômes dans son dossier et lui remet une ordonnance.",
+       "tr": "The doctor examines her, records her symptoms in her file and gives her a prescription."
+      },
+      {
+       "who": "",
+       "text": "Elle va ensuite à la pharmacie pour acheter ses médicaments.",
+       "tr": "She then goes to the pharmacy to buy her medication."
+      }
+     ]
+    }
+   ],
+   "cards": [
+    {
+     "id": "fr-b2-sante-en-c1",
+     "vocab": "fr-b2-sante-en-v1"
+    },
+    {
+     "id": "fr-b2-sante-en-c2",
+     "vocab": "fr-b2-sante-en-v2"
+    },
+    {
+     "id": "fr-b2-sante-en-c3",
+     "vocab": "fr-b2-sante-en-v3"
+    },
+    {
+     "id": "fr-b2-sante-en-c4",
+     "vocab": "fr-b2-sante-en-v4"
+    },
+    {
+     "id": "fr-b2-sante-en-c5",
+     "vocab": "fr-b2-sante-en-v5"
+    },
+    {
+     "id": "fr-b2-sante-en-c6",
+     "vocab": "fr-b2-sante-en-v6"
+    },
+    {
+     "id": "fr-b2-sante-en-c7",
+     "vocab": "fr-b2-sante-en-v7"
+    },
+    {
+     "id": "fr-b2-sante-en-c8",
+     "vocab": "fr-b2-sante-en-v8"
+    }
+   ],
+   "animations": []
+  }
+ ]
+}

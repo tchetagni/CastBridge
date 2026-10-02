@@ -37,7 +37,10 @@ class LicenseEvent(val keyId: String, val text: String, val signature: String) {
             return LicenseEvent(s.keyId, text, Base64.getEncoder().encodeToString(s.sign(text.toByteArray(Charsets.UTF_8))))
         }
 
-        /** A purchase creates a licence with [seats] seats. Needs ISSUE_PRODUCTION. */
+        /**
+         * A purchase creates a licence with [seats] seats. Needs ISSUE_PRODUCTION. NOTE: when the signer is a delegated field agent, the seat count is declared by the agent and the replay
+         * does not bound it: the only limit is the server-side quota of the mandate (`maxSales`), which the server checks when it receives the ledger and the events.
+         */
         fun license(s: Signer, at: Long, license: String, seats: Int, maxTransfersPerYear: Int = LicenseBook.DEFAULT_TRANSFERS_PER_YEAR) =
             sign(s, base("license", s.keyId, at, "license" to license, "seats" to seats, "maxTransfersPerYear" to maxTransfersPerYear))
 
@@ -117,6 +120,7 @@ object LicenseBook {
                 !key.verify(e.text, e.signature) -> { rejected += e.id to Rejection.BAD_SIGNATURE; continue }
                 scope == null -> { rejected += e.id to Rejection.MALFORMED; continue }
                 !key.allows(scope) && !reactivateOnly -> { rejected += e.id to Rejection.KEY_NOT_ALLOWED; continue }
+                !key.validAt(e.at) -> { rejected += e.id to Rejection.KEY_NOT_ALLOWED; continue }      // delegated key: only inside its mandate window
             }
             val f = e.fields
             when (e.type) {

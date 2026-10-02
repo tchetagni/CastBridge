@@ -1,0 +1,742 @@
+{
+  "format": "castbridge-agent-vectors-v1",
+  "warning": "CLÉS DE TEST UNIQUEMENT : ces graines sont dérivées de textes publics et ne valent rien ; les montants sont fictifs ; ne jamais les utiliser ailleurs que dans les tests",
+  "nowMs": 1800090000000,
+  "keys": [
+    {
+      "name": "desk",
+      "seed": "81c053a3abe5f280a6f0e9f499ad973d6809efd85dab1ff1ec538a263d6aab61",
+      "publicKey": "cDpSEwttrWQrJ+SvfTmvQEhkwwnCQYlpymjT4qIs9bI=",
+      "kid": "b2e5b41860d1d8be",
+      "scopes": ["COMMAND_OPEN_ALL", "COMMAND_SUPPORT", "COMMAND_UNLOCK", "DELEGATE", "ISSUE_PRODUCTION", "ISSUE_TRIAL", "POLICY", "REACTIVATE", "REGISTRY", "REVOKE", "SUPER_UNLIMITED", "TRANSFER"]
+    },
+    {
+      "name": "phone",
+      "seed": "042d00035f87ec3c05b60144e17470e576c27ff0b65395e5d54248dc5d415aad",
+      "publicKey": "oi6Kn0N+IQS+3UGsnwQoJokisUgBFhS0oBiD++pBboY=",
+      "kid": "edec55f2f651c508",
+      "scopes": ["COMMAND_OPEN_ALL", "COMMAND_SUPPORT", "COMMAND_UNLOCK", "ISSUE_PRODUCTION", "ISSUE_TRIAL", "POLICY", "REACTIVATE", "REVOKE", "SUPER_UNLIMITED", "TRANSFER"]
+    },
+    {
+      "name": "server",
+      "seed": "ba644f4d626ec4d740001dda44c15a137227798345349498f5a7318958ebc5ad",
+      "publicKey": "NkwlTOU+5giijtjEeVIUX8OpzDb0s1OGSMIRxZcy4u4=",
+      "kid": "ce202dfdbe57b99a",
+      "scopes": ["ISSUE_PRODUCTION", "ISSUE_TRIAL", "POLICY", "REACTIVATE", "REGISTRY", "REVOKE"]
+    },
+    {
+      "name": "rogue",
+      "seed": "a77b7a4fbe7182020cdcdb5c53edd36dde88808c6f16816e33dd455df5ebe16c",
+      "publicKey": "A6uTO2WcNrl5dJcB2pgRqXV/dt3GMF5gBGDF7+N1nho=",
+      "kid": "df9e7c0d8cc2809d",
+      "scopes": ["COMMAND_OPEN_ALL", "COMMAND_SUPPORT", "COMMAND_UNLOCK", "ISSUE_PRODUCTION", "ISSUE_TRIAL", "POLICY", "REACTIVATE", "REGISTRY", "REVOKE", "SUPER_UNLIMITED", "TRANSFER"]
+    },
+    {
+      "name": "agent",
+      "seed": "1fb343176f22ea1ec9c90a7c317aa1207558e8b56def97411b37627c122d0719",
+      "publicKey": "wgeSEwoCZ510y6uqcpUKTGExDF0iai6bFIVkEKjoZrE=",
+      "kid": "8a6e44fcd9a9bb73",
+      "scopes": ["ISSUE_PRODUCTION", "ISSUE_TRIAL"]
+    },
+    {
+      "name": "agent2",
+      "seed": "8b7b978d055a551f0ef815cd1585bf307da29aa58ddb85aa676ce5052163811a",
+      "publicKey": "ZZzoLKmVtaNx+qmYcOlzwxkkkpxv6k2QyFuSil0EX6c=",
+      "kid": "aa3e6c2f7cb08a5b",
+      "scopes": ["ISSUE_PRODUCTION", "ISSUE_TRIAL"]
+    }
+  ],
+  "devices": [
+    {
+      "name": "tvA",
+      "code": "ZX8P-S2TH-N5PG-V9V7",
+      "fingerprints": {
+        "FLASH": "c48cacd81b9663d0ba97c221cbd17f4f",
+        "ETHERNET": "f91efd89e0025c2262da12cfbed43632",
+        "WIFI": "ea8b552e2240bbdd8c88c42313c4deab",
+        "SYSTEM_SERIAL": "774beacbf351b0d205f9166669e4d3c7",
+        "BLUETOOTH": "d365ea67e00585edaf8bef4d7378850d"
+      }
+    },
+    {
+      "name": "tvN1",
+      "code": "Z5MM-152E-TM7N-P3XP",
+      "fingerprints": {
+        "FLASH": "10d123edb545f91fabebe21e2016c1ed",
+        "ETHERNET": "83b03b3f4ba4617a09264faa6fc31d78",
+        "WIFI": "44e6abc95cd4a3682b49152f4b621c4f",
+        "SYSTEM_SERIAL": "c44a4a0841d7abd8dd38f29fc2d205f6",
+        "BLUETOOTH": "af004d08653b0d081bbf216f082f78f5"
+      }
+    }
+  ],
+  "cases": [
+    {
+      "id": "build-delegation-minimal",
+      "type": "build-delegation",
+      "description": "mandat minimal : lignes obligatoires seulement, maxRentalDays=0, ni maître ni clé X25519 de l'agent",
+      "signer": "desk",
+      "input": {
+        "at": 1800000000000,
+        "seq": 1800000000000,
+        "nonce": "a1a1a1a1a1a1a1a1",
+        "agent": "agent",
+        "name": "douala-akwa-01",
+        "maxKeyDays": 365,
+        "maxSales": 200,
+        "bundles": ["tout"],
+        "validityDays": 90
+      },
+      "expect": {
+        "token": "cbx1.Y2FzdGJyaWRnZS1lbnZlbG9wZS12MQp0eXBlPWRlbGVnYXRpb24Ka2lkPWIyZTViNDE4NjBkMWQ4YmUKc2VxPTE4MDAwMDAwMDAwMDAKbm9uY2U9YTFhMWExYTFhMWExYTFhMQppc3N1ZWRBdD0xODAwMDAwMDAwMDAwCm5vdEJlZm9yZT0xODAwMDAwMDAwMDAwCmV4cGlyZXNBdD0xODA3Nzc2MDAwMDAwCnRhcmdldD1hbnkKLS0KYWdlbnQ9OGE2ZTQ0ZmNkOWE5YmI3MwpwdWI9d2dlU0V3b0NaNTEweTZ1cWNwVUtUR0V4REYwaWFpNmJGSVZrRUtqb1pyRT0KbmFtZT1kb3VhbGEtYWt3YS0wMQpzY29wZXM9SVNTVUVfUFJPRFVDVElPTixJU1NVRV9UUklBTAptYXhLZXlEYXlzPTM2NQptYXhSZW50YWxEYXlzPTAKbWF4U2FsZXM9MjAwCmJ1bmRsZXM9dG91dA.IfZUNH4FVdf0yeWLP3Tfc6zOalP1AeD3LT7ArGhGBvLjIWtU680tDguwbg6JXWi0UeBqdao7aHXeAQRV+BKBAA=="
+      }
+    },
+    {
+      "id": "build-delegation-w5-fields",
+      "type": "build-delegation",
+      "description": "champs W5 : confirmOrders, sellVouchers, maxConfirmXafPerDay ; bouquets triés",
+      "signer": "desk",
+      "input": {
+        "at": 1800000000000,
+        "seq": 7,
+        "nonce": "d4d4d4d4d4d4d4d4",
+        "agent": "agent2",
+        "name": "bonamoussadi-02",
+        "maxKeyDays": 90,
+        "maxSales": 50,
+        "bundles": ["maths", "classe-cm2"],
+        "validityDays": 30,
+        "confirmOrders": true,
+        "sellVouchers": true,
+        "maxConfirmXafPerDay": 50000
+      },
+      "expect": {
+        "token": "cbx1.Y2FzdGJyaWRnZS1lbnZlbG9wZS12MQp0eXBlPWRlbGVnYXRpb24Ka2lkPWIyZTViNDE4NjBkMWQ4YmUKc2VxPTcKbm9uY2U9ZDRkNGQ0ZDRkNGQ0ZDRkNAppc3N1ZWRBdD0xODAwMDAwMDAwMDAwCm5vdEJlZm9yZT0xODAwMDAwMDAwMDAwCmV4cGlyZXNBdD0xODAyNTkyMDAwMDAwCnRhcmdldD1hbnkKLS0KYWdlbnQ9YWEzZTZjMmY3Y2IwOGE1YgpwdWI9Wlp6b0xLbVZ0YU54K3FtWWNPbHp3eGtra3B4djZrMlF5RnVTaWwwRVg2Yz0KbmFtZT1ib25hbW91c3NhZGktMDIKc2NvcGVzPUlTU1VFX1BST0RVQ1RJT04sSVNTVUVfVFJJQUwKbWF4S2V5RGF5cz05MAptYXhSZW50YWxEYXlzPTAKbWF4U2FsZXM9NTAKYnVuZGxlcz1jbGFzc2UtY20yLG1hdGhzCmNvbmZpcm1PcmRlcnM9MQpzZWxsVm91Y2hlcnM9MQptYXhDb25maXJtWGFmUGVyRGF5PTUwMDAw.M8ZJ/+4u63uJMu6+UcQ8zMRoFhVuvN1L30KX01Wq3eH5HiBV865Fkr1DBTWjIs0Tmlnl4iGzqh/zSPmOT9pTBQ=="
+      }
+    },
+    {
+      "id": "delegation-accepted",
+      "type": "delegation",
+      "description": "mandat valide, clé du propriétaire avec DELEGATE",
+      "token": "cbx1.Y2FzdGJyaWRnZS1lbnZlbG9wZS12MQp0eXBlPWRlbGVnYXRpb24Ka2lkPWIyZTViNDE4NjBkMWQ4YmUKc2VxPTE4MDAwMDAwMDAwMDAKbm9uY2U9YTFhMWExYTFhMWExYTFhMQppc3N1ZWRBdD0xODAwMDAwMDAwMDAwCm5vdEJlZm9yZT0xODAwMDAwMDAwMDAwCmV4cGlyZXNBdD0xODA3Nzc2MDAwMDAwCnRhcmdldD1hbnkKLS0KYWdlbnQ9OGE2ZTQ0ZmNkOWE5YmI3MwpwdWI9d2dlU0V3b0NaNTEweTZ1cWNwVUtUR0V4REYwaWFpNmJGSVZrRUtqb1pyRT0KbmFtZT1kb3VhbGEtYWt3YS0wMQpzY29wZXM9SVNTVUVfUFJPRFVDVElPTixJU1NVRV9UUklBTAptYXhLZXlEYXlzPTM2NQptYXhSZW50YWxEYXlzPTAKbWF4U2FsZXM9MjAwCmJ1bmRsZXM9dG91dA.IfZUNH4FVdf0yeWLP3Tfc6zOalP1AeD3LT7ArGhGBvLjIWtU680tDguwbg6JXWi0UeBqdao7aHXeAQRV+BKBAA==",
+      "ring": ["desk", "phone", "server"],
+      "revokedKeys": [],
+      "lastSeq": {},
+      "now": 1800090000000,
+      "expect": {
+        "result": "accepted",
+        "name": "douala-akwa-01",
+        "agent": "agent"
+      }
+    },
+    {
+      "id": "delegation-accepted-w5",
+      "type": "delegation",
+      "description": "mandat avec champs W5",
+      "token": "cbx1.Y2FzdGJyaWRnZS1lbnZlbG9wZS12MQp0eXBlPWRlbGVnYXRpb24Ka2lkPWIyZTViNDE4NjBkMWQ4YmUKc2VxPTE4MDAwMDAwMDAwMDAKbm9uY2U9YTFhMWExYTFhMWExYTFhMQppc3N1ZWRBdD0xODAwMDAwMDAwMDAwCm5vdEJlZm9yZT0xODAwMDAwMDAwMDAwCmV4cGlyZXNBdD0xODA3Nzc2MDAwMDAwCnRhcmdldD1hbnkKLS0KYWdlbnQ9OGE2ZTQ0ZmNkOWE5YmI3MwpwdWI9d2dlU0V3b0NaNTEweTZ1cWNwVUtUR0V4REYwaWFpNmJGSVZrRUtqb1pyRT0KbmFtZT1kb3VhbGEtYWt3YS0wMQpzY29wZXM9SVNTVUVfUFJPRFVDVElPTixJU1NVRV9UUklBTAptYXhLZXlEYXlzPTM2NQptYXhSZW50YWxEYXlzPTAKbWF4U2FsZXM9MjAwCmJ1bmRsZXM9dG91dApjb25maXJtT3JkZXJzPTEKc2VsbFZvdWNoZXJzPTEKbWF4Q29uZmlybVhhZlBlckRheT0yMDAwMA.zY3T1r7rA714Dj3FIq4K4fuI5w2cjjcb7OOk9b9vQT8Kfq3D8F+KTIAYxeM1jcneuE+YQsX6uM2U2sk1M4jFDA==",
+      "ring": ["desk", "phone", "server"],
+      "revokedKeys": [],
+      "lastSeq": {},
+      "now": 1800090000000,
+      "expect": {
+        "result": "accepted",
+        "name": "douala-akwa-01",
+        "agent": "agent"
+      }
+    },
+    {
+      "id": "delegation-expired",
+      "type": "delegation",
+      "description": "mandat périmé (91 jours plus tard)",
+      "token": "cbx1.Y2FzdGJyaWRnZS1lbnZlbG9wZS12MQp0eXBlPWRlbGVnYXRpb24Ka2lkPWIyZTViNDE4NjBkMWQ4YmUKc2VxPTE4MDAwMDAwMDAwMDAKbm9uY2U9YTFhMWExYTFhMWExYTFhMQppc3N1ZWRBdD0xODAwMDAwMDAwMDAwCm5vdEJlZm9yZT0xODAwMDAwMDAwMDAwCmV4cGlyZXNBdD0xODA3Nzc2MDAwMDAwCnRhcmdldD1hbnkKLS0KYWdlbnQ9OGE2ZTQ0ZmNkOWE5YmI3MwpwdWI9d2dlU0V3b0NaNTEweTZ1cWNwVUtUR0V4REYwaWFpNmJGSVZrRUtqb1pyRT0KbmFtZT1kb3VhbGEtYWt3YS0wMQpzY29wZXM9SVNTVUVfUFJPRFVDVElPTixJU1NVRV9UUklBTAptYXhLZXlEYXlzPTM2NQptYXhSZW50YWxEYXlzPTAKbWF4U2FsZXM9MjAwCmJ1bmRsZXM9dG91dA.IfZUNH4FVdf0yeWLP3Tfc6zOalP1AeD3LT7ArGhGBvLjIWtU680tDguwbg6JXWi0UeBqdao7aHXeAQRV+BKBAA==",
+      "ring": ["desk", "phone", "server"],
+      "revokedKeys": [],
+      "lastSeq": {},
+      "now": 1807862400000,
+      "expect": {
+        "result": "WINDOW_CLOSED"
+      }
+    },
+    {
+      "id": "delegation-not-yet-valid",
+      "type": "delegation",
+      "description": "mandat qui ne commence que dans 5 jours",
+      "token": "cbx1.Y2FzdGJyaWRnZS1lbnZlbG9wZS12MQp0eXBlPWRlbGVnYXRpb24Ka2lkPWIyZTViNDE4NjBkMWQ4YmUKc2VxPTE4MDAwMDAwMDAwMDAKbm9uY2U9YTFhMWExYTFhMWExYTFhMQppc3N1ZWRBdD0xODAwMDAwMDAwMDAwCm5vdEJlZm9yZT0xODAwNDMyMDAwMDAwCmV4cGlyZXNBdD0xODA0MzIwMDAwMDAwCnRhcmdldD1hbnkKLS0KYWdlbnQ9OGE2ZTQ0ZmNkOWE5YmI3MwpwdWI9d2dlU0V3b0NaNTEweTZ1cWNwVUtUR0V4REYwaWFpNmJGSVZrRUtqb1pyRT0KbmFtZT1kb3VhbGEtYWt3YS0wMQpzY29wZXM9SVNTVUVfUFJPRFVDVElPTixJU1NVRV9UUklBTAptYXhLZXlEYXlzPTM2NQptYXhSZW50YWxEYXlzPTAKbWF4U2FsZXM9MjAwCmJ1bmRsZXM9dG91dA.rftV7K0eMY0KM1IznvRey4gApdqTD536JpeC5YTgKgtuHbz+moZXzfmIRqNzlHXJZ0i2lXKGX9v+SFRK06zoDA==",
+      "ring": ["desk", "phone", "server"],
+      "revokedKeys": [],
+      "lastSeq": {},
+      "now": 1800000000000,
+      "expect": {
+        "result": "NOT_YET_VALID"
+      }
+    },
+    {
+      "id": "delegation-scope-outside-subset",
+      "type": "delegation",
+      "description": "portée TRANSFER dans le mandat",
+      "token": "cbx1.Y2FzdGJyaWRnZS1lbnZlbG9wZS12MQp0eXBlPWRlbGVnYXRpb24Ka2lkPWIyZTViNDE4NjBkMWQ4YmUKc2VxPTE4MDAwMDAwMDAwMDAKbm9uY2U9YTFhMWExYTFhMWExYTFhMQppc3N1ZWRBdD0xODAwMDAwMDAwMDAwCm5vdEJlZm9yZT0xODAwMDAwMDAwMDAwCmV4cGlyZXNBdD0xODA3Nzc2MDAwMDAwCnRhcmdldD1hbnkKLS0KYWdlbnQ9OGE2ZTQ0ZmNkOWE5YmI3MwpwdWI9d2dlU0V3b0NaNTEweTZ1cWNwVUtUR0V4REYwaWFpNmJGSVZrRUtqb1pyRT0KbmFtZT1kb3VhbGEtYWt3YS0wMQpzY29wZXM9SVNTVUVfUFJPRFVDVElPTixUUkFOU0ZFUgptYXhLZXlEYXlzPTM2NQptYXhSZW50YWxEYXlzPTAKbWF4U2FsZXM9MjAwCmJ1bmRsZXM9dG91dA.7B8dasJ3tBAG7xXAaZt3XJ2PG1d1vcM+Thm2p/QhPjAzcemw7nYFGpo2U6OFUSZ4bBn14qheUA8FNVs9OIGgDQ==",
+      "ring": ["desk", "phone", "server"],
+      "revokedKeys": [],
+      "lastSeq": {},
+      "now": 1800090000000,
+      "expect": {
+        "result": "KEY_NOT_ALLOWED"
+      }
+    },
+    {
+      "id": "delegation-owner-key-without-delegate",
+      "type": "delegation",
+      "description": "signé par une clé du propriétaire sans la portée DELEGATE",
+      "token": "cbx1.Y2FzdGJyaWRnZS1lbnZlbG9wZS12MQp0eXBlPWRlbGVnYXRpb24Ka2lkPWVkZWM1NWYyZjY1MWM1MDgKc2VxPTE4MDAwMDAwMDAwMDAKbm9uY2U9YTFhMWExYTFhMWExYTFhMQppc3N1ZWRBdD0xODAwMDAwMDAwMDAwCm5vdEJlZm9yZT0xODAwMDAwMDAwMDAwCmV4cGlyZXNBdD0xODA3Nzc2MDAwMDAwCnRhcmdldD1hbnkKLS0KYWdlbnQ9OGE2ZTQ0ZmNkOWE5YmI3MwpwdWI9d2dlU0V3b0NaNTEweTZ1cWNwVUtUR0V4REYwaWFpNmJGSVZrRUtqb1pyRT0KbmFtZT1kb3VhbGEtYWt3YS0wMQpzY29wZXM9SVNTVUVfUFJPRFVDVElPTixJU1NVRV9UUklBTAptYXhLZXlEYXlzPTM2NQptYXhSZW50YWxEYXlzPTAKbWF4U2FsZXM9MjAwCmJ1bmRsZXM9dG91dA.zbQjbyqo/1P0uD77o/nidS5c0MWHBZVC2L+N6UKQ6BW/pd2ISJINMZ/IajEBlIRrQDCxUISc+W7uTwhudlLJBA==",
+      "ring": ["desk", "phone", "server"],
+      "revokedKeys": [],
+      "lastSeq": {},
+      "now": 1800090000000,
+      "expect": {
+        "result": "KEY_NOT_ALLOWED"
+      }
+    },
+    {
+      "id": "delegation-agent-revoked",
+      "type": "delegation",
+      "description": "l'agent est révoqué",
+      "token": "cbx1.Y2FzdGJyaWRnZS1lbnZlbG9wZS12MQp0eXBlPWRlbGVnYXRpb24Ka2lkPWIyZTViNDE4NjBkMWQ4YmUKc2VxPTE4MDAwMDAwMDAwMDAKbm9uY2U9YTFhMWExYTFhMWExYTFhMQppc3N1ZWRBdD0xODAwMDAwMDAwMDAwCm5vdEJlZm9yZT0xODAwMDAwMDAwMDAwCmV4cGlyZXNBdD0xODA3Nzc2MDAwMDAwCnRhcmdldD1hbnkKLS0KYWdlbnQ9OGE2ZTQ0ZmNkOWE5YmI3MwpwdWI9d2dlU0V3b0NaNTEweTZ1cWNwVUtUR0V4REYwaWFpNmJGSVZrRUtqb1pyRT0KbmFtZT1kb3VhbGEtYWt3YS0wMQpzY29wZXM9SVNTVUVfUFJPRFVDVElPTixJU1NVRV9UUklBTAptYXhLZXlEYXlzPTM2NQptYXhSZW50YWxEYXlzPTAKbWF4U2FsZXM9MjAwCmJ1bmRsZXM9dG91dA.IfZUNH4FVdf0yeWLP3Tfc6zOalP1AeD3LT7ArGhGBvLjIWtU680tDguwbg6JXWi0UeBqdao7aHXeAQRV+BKBAA==",
+      "ring": ["desk", "phone", "server"],
+      "revokedKeys": ["agent"],
+      "lastSeq": {},
+      "now": 1800090000000,
+      "expect": {
+        "result": "REVOKED_KEY"
+      }
+    },
+    {
+      "id": "delegation-unknown-owner-key",
+      "type": "delegation",
+      "description": "clé signataire inconnue de la TV",
+      "token": "cbx1.Y2FzdGJyaWRnZS1lbnZlbG9wZS12MQp0eXBlPWRlbGVnYXRpb24Ka2lkPWRmOWU3YzBkOGNjMjgwOWQKc2VxPTE4MDAwMDAwMDAwMDAKbm9uY2U9YTFhMWExYTFhMWExYTFhMQppc3N1ZWRBdD0xODAwMDAwMDAwMDAwCm5vdEJlZm9yZT0xODAwMDAwMDAwMDAwCmV4cGlyZXNBdD0xODA3Nzc2MDAwMDAwCnRhcmdldD1hbnkKLS0KYWdlbnQ9OGE2ZTQ0ZmNkOWE5YmI3MwpwdWI9d2dlU0V3b0NaNTEweTZ1cWNwVUtUR0V4REYwaWFpNmJGSVZrRUtqb1pyRT0KbmFtZT1kb3VhbGEtYWt3YS0wMQpzY29wZXM9SVNTVUVfUFJPRFVDVElPTixJU1NVRV9UUklBTAptYXhLZXlEYXlzPTM2NQptYXhSZW50YWxEYXlzPTAKbWF4U2FsZXM9MjAwCmJ1bmRsZXM9dG91dA.5xF5+qXZ8Y3fH7r9QFChDA8LwC/c4v+G9feBu6RmPgs2Th7uoFGRs71NkK8eUvEZl+z0zGlpTPO8HQ+mat93Cg==",
+      "ring": ["desk", "phone", "server"],
+      "revokedKeys": [],
+      "lastSeq": {},
+      "now": 1800090000000,
+      "expect": {
+        "result": "UNKNOWN_KEY"
+      }
+    },
+    {
+      "id": "delegation-stale-sequence",
+      "type": "delegation",
+      "description": "seq plus ancienne que celle déjà acceptée",
+      "token": "cbx1.Y2FzdGJyaWRnZS1lbnZlbG9wZS12MQp0eXBlPWRlbGVnYXRpb24Ka2lkPWIyZTViNDE4NjBkMWQ4YmUKc2VxPTE4MDAwMDAwMDAwMDAKbm9uY2U9YTFhMWExYTFhMWExYTFhMQppc3N1ZWRBdD0xODAwMDAwMDAwMDAwCm5vdEJlZm9yZT0xODAwMDAwMDAwMDAwCmV4cGlyZXNBdD0xODA3Nzc2MDAwMDAwCnRhcmdldD1hbnkKLS0KYWdlbnQ9OGE2ZTQ0ZmNkOWE5YmI3MwpwdWI9d2dlU0V3b0NaNTEweTZ1cWNwVUtUR0V4REYwaWFpNmJGSVZrRUtqb1pyRT0KbmFtZT1kb3VhbGEtYWt3YS0wMQpzY29wZXM9SVNTVUVfUFJPRFVDVElPTixJU1NVRV9UUklBTAptYXhLZXlEYXlzPTM2NQptYXhSZW50YWxEYXlzPTAKbWF4U2FsZXM9MjAwCmJ1bmRsZXM9dG91dA.IfZUNH4FVdf0yeWLP3Tfc6zOalP1AeD3LT7ArGhGBvLjIWtU680tDguwbg6JXWi0UeBqdao7aHXeAQRV+BKBAA==",
+      "ring": ["desk", "phone", "server"],
+      "revokedKeys": [],
+      "lastSeq": {
+        "desk/agent": 1800000000010
+      },
+      "now": 1800090000000,
+      "expect": {
+        "result": "STALE_SEQUENCE"
+      }
+    },
+    {
+      "id": "delegation-rental-days-refused",
+      "type": "delegation",
+      "description": "maxRentalDays=30 : les locations sont gérées en ligne (W5)",
+      "token": "cbx1.Y2FzdGJyaWRnZS1lbnZlbG9wZS12MQp0eXBlPWRlbGVnYXRpb24Ka2lkPWIyZTViNDE4NjBkMWQ4YmUKc2VxPTE4MDAwMDAwMDAwMDAKbm9uY2U9YTFhMWExYTFhMWExYTFhMQppc3N1ZWRBdD0xODAwMDAwMDAwMDAwCm5vdEJlZm9yZT0xODAwMDAwMDAwMDAwCmV4cGlyZXNBdD0xODA3Nzc2MDAwMDAwCnRhcmdldD1hbnkKLS0KYWdlbnQ9OGE2ZTQ0ZmNkOWE5YmI3MwpwdWI9d2dlU0V3b0NaNTEweTZ1cWNwVUtUR0V4REYwaWFpNmJGSVZrRUtqb1pyRT0KbmFtZT1kb3VhbGEtYWt3YS0wMQpzY29wZXM9SVNTVUVfUFJPRFVDVElPTixJU1NVRV9UUklBTAptYXhLZXlEYXlzPTM2NQptYXhSZW50YWxEYXlzPTMwCm1heFNhbGVzPTIwMApidW5kbGVzPXRvdXQ.Md1jJrKCiPSSExc96FlPM0LfZutKDWrz9aa0cKdPq+JaMjTT+l0UfcSidLdgbj5fod8qUBt10XUjm0Osds9kCw==",
+      "ring": ["desk", "phone", "server"],
+      "revokedKeys": [],
+      "lastSeq": {},
+      "now": 1800090000000,
+      "expect": {
+        "result": "BAD_DELEGATION"
+      }
+    },
+    {
+      "id": "delegation-bad-signature",
+      "type": "delegation",
+      "description": "signature altérée",
+      "token": "cbx1.Y2FzdGJyaWRnZS1lbnZlbG9wZS12MQp0eXBlPWRlbGVnYXRpb24Ka2lkPWIyZTViNDE4NjBkMWQ4YmUKc2VxPTE4MDAwMDAwMDAwMDAKbm9uY2U9YTFhMWExYTFhMWExYTFhMQppc3N1ZWRBdD0xODAwMDAwMDAwMDAwCm5vdEJlZm9yZT0xODAwMDAwMDAwMDAwCmV4cGlyZXNBdD0xODA3Nzc2MDAwMDAwCnRhcmdldD1hbnkKLS0KYWdlbnQ9OGE2ZTQ0ZmNkOWE5YmI3MwpwdWI9d2dlU0V3b0NaNTEweTZ1cWNwVUtUR0V4REYwaWFpNmJGSVZrRUtqb1pyRT0KbmFtZT1kb3VhbGEtYWt3YS0wMQpzY29wZXM9SVNTVUVfUFJPRFVDVElPTixJU1NVRV9UUklBTAptYXhLZXlEYXlzPTM2NQptYXhSZW50YWxEYXlzPTAKbWF4U2FsZXM9MjAwCmJ1bmRsZXM9dG91dA.==AABKB+VRQAeXHa7oadqBeU0iWXJ6gbwugDt086UtWIjLvBGhGrA7TL3DeA1PlaOz6cfT3PLWey0fdVF4HNUZfI",
+      "ring": ["desk", "phone", "server"],
+      "revokedKeys": [],
+      "lastSeq": {},
+      "now": 1800090000000,
+      "expect": {
+        "result": "BAD_SIGNATURE"
+      }
+    },
+    {
+      "id": "ticket-production-accepted",
+      "type": "ticketed",
+      "description": "clé de production 90 jours",
+      "line": "cbx1.Y2FzdGJyaWRnZS1lbnZlbG9wZS12MQp0eXBlPWRlbGVnYXRpb24Ka2lkPWIyZTViNDE4NjBkMWQ4YmUKc2VxPTE4MDAwMDAwMDAwMDAKbm9uY2U9YTFhMWExYTFhMWExYTFhMQppc3N1ZWRBdD0xODAwMDAwMDAwMDAwCm5vdEJlZm9yZT0xODAwMDAwMDAwMDAwCmV4cGlyZXNBdD0xODA3Nzc2MDAwMDAwCnRhcmdldD1hbnkKLS0KYWdlbnQ9OGE2ZTQ0ZmNkOWE5YmI3MwpwdWI9d2dlU0V3b0NaNTEweTZ1cWNwVUtUR0V4REYwaWFpNmJGSVZrRUtqb1pyRT0KbmFtZT1kb3VhbGEtYWt3YS0wMQpzY29wZXM9SVNTVUVfUFJPRFVDVElPTixJU1NVRV9UUklBTAptYXhLZXlEYXlzPTM2NQptYXhSZW50YWxEYXlzPTAKbWF4U2FsZXM9MjAwCmJ1bmRsZXM9dG91dA.IfZUNH4FVdf0yeWLP3Tfc6zOalP1AeD3LT7ArGhGBvLjIWtU680tDguwbg6JXWi0UeBqdao7aHXeAQRV+BKBAA==|cbx1.Y2FzdGJyaWRnZS1lbnZlbG9wZS12MQp0eXBlPWFjdGl2YXRpb24Ka2lkPThhNmU0NGZjZDlhOWJiNzMKc2VxPTE4MDAwODY0MDAwMDAKbm9uY2U9YjJiMmIyYjJiMmIyYjJiMgppc3N1ZWRBdD0xODAwMDg2NDAwMDAwCm5vdEJlZm9yZT0xODAwMDg2NDAwMDAwCmV4cGlyZXNBdD0xODAwMjU5MjAwMDAwCnRhcmdldD1kZXZpY2UKaz00CmZhY3Rvcj1GTEFTSHxjNDhjYWNkODFiOTY2M2QwYmE5N2MyMjFjYmQxN2Y0ZgpmYWN0b3I9RVRIRVJORVR8ZjkxZWZkODllMDAyNWMyMjYyZGExMmNmYmVkNDM2MzIKZmFjdG9yPVdJRkl8ZWE4YjU1MmUyMjQwYmJkZDhjODhjNDIzMTNjNGRlYWIKZmFjdG9yPVNZU1RFTV9TRVJJQUx8Nzc0YmVhY2JmMzUxYjBkMjA1ZjkxNjY2NjllNGQzYzcKZmFjdG9yPUJMVUVUT09USHxkMzY1ZWE2N2UwMDU4NWVkYWY4YmVmNGQ3Mzc4ODUwZAotLQpraW5kPXByb2R1Y3Rpb24Kc3ViamVjdD10dgpsaWNlbnNlPWxpYy0wMDAxCnNlYXQ9ZjM2NzU3YzIyNmRkMmVlNApyaWdodD11c2FnZXxkdXJlZXwxODAwMDg2NDAwMDAwfDE4MDc4NjI0MDAwMDA.P1Xd8+TVpbgh8xp0OlD3TxTeB9unbA/JYjJYHjqeUxv5o1dyldwQ3irK0eNfLARKvgufTDE855rH9o4AEWKLBg==",
+      "ring": ["desk", "phone", "server"],
+      "revokedKeys": [],
+      "device": "tvA",
+      "now": 1800090000000,
+      "verifier": "delegated",
+      "expect": {
+        "result": "accepted"
+      }
+    },
+    {
+      "id": "ticket-trial-accepted",
+      "type": "ticketed",
+      "description": "clé d'essai 30 jours",
+      "line": "cbx1.Y2FzdGJyaWRnZS1lbnZlbG9wZS12MQp0eXBlPWRlbGVnYXRpb24Ka2lkPWIyZTViNDE4NjBkMWQ4YmUKc2VxPTE4MDAwMDAwMDAwMDAKbm9uY2U9YTFhMWExYTFhMWExYTFhMQppc3N1ZWRBdD0xODAwMDAwMDAwMDAwCm5vdEJlZm9yZT0xODAwMDAwMDAwMDAwCmV4cGlyZXNBdD0xODA3Nzc2MDAwMDAwCnRhcmdldD1hbnkKLS0KYWdlbnQ9OGE2ZTQ0ZmNkOWE5YmI3MwpwdWI9d2dlU0V3b0NaNTEweTZ1cWNwVUtUR0V4REYwaWFpNmJGSVZrRUtqb1pyRT0KbmFtZT1kb3VhbGEtYWt3YS0wMQpzY29wZXM9SVNTVUVfUFJPRFVDVElPTixJU1NVRV9UUklBTAptYXhLZXlEYXlzPTM2NQptYXhSZW50YWxEYXlzPTAKbWF4U2FsZXM9MjAwCmJ1bmRsZXM9dG91dA.IfZUNH4FVdf0yeWLP3Tfc6zOalP1AeD3LT7ArGhGBvLjIWtU680tDguwbg6JXWi0UeBqdao7aHXeAQRV+BKBAA==|cbx1.Y2FzdGJyaWRnZS1lbnZlbG9wZS12MQp0eXBlPWFjdGl2YXRpb24Ka2lkPThhNmU0NGZjZDlhOWJiNzMKc2VxPTE4MDAwODY0MDAwMDAKbm9uY2U9YjJiMmIyYjJiMmIyYjJiMgppc3N1ZWRBdD0xODAwMDg2NDAwMDAwCm5vdEJlZm9yZT0xODAwMDg2NDAwMDAwCmV4cGlyZXNBdD0xODAwMjU5MjAwMDAwCnRhcmdldD1kZXZpY2UKaz00CmZhY3Rvcj1GTEFTSHxjNDhjYWNkODFiOTY2M2QwYmE5N2MyMjFjYmQxN2Y0ZgpmYWN0b3I9RVRIRVJORVR8ZjkxZWZkODllMDAyNWMyMjYyZGExMmNmYmVkNDM2MzIKZmFjdG9yPVdJRkl8ZWE4YjU1MmUyMjQwYmJkZDhjODhjNDIzMTNjNGRlYWIKZmFjdG9yPVNZU1RFTV9TRVJJQUx8Nzc0YmVhY2JmMzUxYjBkMjA1ZjkxNjY2NjllNGQzYzcKZmFjdG9yPUJMVUVUT09USHxkMzY1ZWE2N2UwMDU4NWVkYWY4YmVmNGQ3Mzc4ODUwZAotLQpraW5kPXRyaWFsCnN1YmplY3Q9dHYKbGljZW5zZT10cmlhbApzZWF0PTM4OWI1ODNhYjZiZWE4NTYKcmlnaHQ9dXNhZ2V8ZHVyZWV8MTgwMDA4NjQwMDAwMHwxODAyNjc4NDAwMDAw.OyKRb5XhCu6mMbUEmVv1FDMa6BcUjMgO9OE/qC98u4aEKwMpoPwNdY+8XNTxcbP129qFBUtwZNDo6olt/9wVDw==",
+      "ring": ["desk", "phone", "server"],
+      "revokedKeys": [],
+      "device": "tvA",
+      "now": 1800090000000,
+      "verifier": "delegated",
+      "expect": {
+        "result": "accepted"
+      }
+    },
+    {
+      "id": "ticket-unlimited-refused",
+      "type": "ticketed",
+      "description": "production sans durée = illimitée",
+      "line": "cbx1.Y2FzdGJyaWRnZS1lbnZlbG9wZS12MQp0eXBlPWRlbGVnYXRpb24Ka2lkPWIyZTViNDE4NjBkMWQ4YmUKc2VxPTE4MDAwMDAwMDAwMDAKbm9uY2U9YTFhMWExYTFhMWExYTFhMQppc3N1ZWRBdD0xODAwMDAwMDAwMDAwCm5vdEJlZm9yZT0xODAwMDAwMDAwMDAwCmV4cGlyZXNBdD0xODA3Nzc2MDAwMDAwCnRhcmdldD1hbnkKLS0KYWdlbnQ9OGE2ZTQ0ZmNkOWE5YmI3MwpwdWI9d2dlU0V3b0NaNTEweTZ1cWNwVUtUR0V4REYwaWFpNmJGSVZrRUtqb1pyRT0KbmFtZT1kb3VhbGEtYWt3YS0wMQpzY29wZXM9SVNTVUVfUFJPRFVDVElPTixJU1NVRV9UUklBTAptYXhLZXlEYXlzPTM2NQptYXhSZW50YWxEYXlzPTAKbWF4U2FsZXM9MjAwCmJ1bmRsZXM9dG91dA.IfZUNH4FVdf0yeWLP3Tfc6zOalP1AeD3LT7ArGhGBvLjIWtU680tDguwbg6JXWi0UeBqdao7aHXeAQRV+BKBAA==|cbx1.Y2FzdGJyaWRnZS1lbnZlbG9wZS12MQp0eXBlPWFjdGl2YXRpb24Ka2lkPThhNmU0NGZjZDlhOWJiNzMKc2VxPTE4MDAwODY0MDAwMDAKbm9uY2U9YjJiMmIyYjJiMmIyYjJiMgppc3N1ZWRBdD0xODAwMDg2NDAwMDAwCm5vdEJlZm9yZT0xODAwMDg2NDAwMDAwCmV4cGlyZXNBdD0xODAwMjU5MjAwMDAwCnRhcmdldD1kZXZpY2UKaz00CmZhY3Rvcj1GTEFTSHxjNDhjYWNkODFiOTY2M2QwYmE5N2MyMjFjYmQxN2Y0ZgpmYWN0b3I9RVRIRVJORVR8ZjkxZWZkODllMDAyNWMyMjYyZGExMmNmYmVkNDM2MzIKZmFjdG9yPVdJRkl8ZWE4YjU1MmUyMjQwYmJkZDhjODhjNDIzMTNjNGRlYWIKZmFjdG9yPVNZU1RFTV9TRVJJQUx8Nzc0YmVhY2JmMzUxYjBkMjA1ZjkxNjY2NjllNGQzYzcKZmFjdG9yPUJMVUVUT09USHxkMzY1ZWE2N2UwMDU4NWVkYWY4YmVmNGQ3Mzc4ODUwZAotLQpraW5kPXByb2R1Y3Rpb24Kc3ViamVjdD10dgpsaWNlbnNlPWxpYy0wMDAxCnNlYXQ9ZjM2NzU3YzIyNmRkMmVlNA.8vWRrv3/GVTS2L2zwexJy7PpjVgPFJBjLdWQ/UjrxBIPELVlWiBMC/CLtESA2F+75rqXzSv0X8AXyuu6SbPsDA==",
+      "ring": ["desk", "phone", "server"],
+      "revokedKeys": [],
+      "device": "tvA",
+      "now": 1800090000000,
+      "verifier": "delegated",
+      "expect": {
+        "result": "KEY_NOT_ALLOWED"
+      }
+    },
+    {
+      "id": "ticket-too-long-refused",
+      "type": "ticketed",
+      "description": "366 jours > maxKeyDays=365",
+      "line": "cbx1.Y2FzdGJyaWRnZS1lbnZlbG9wZS12MQp0eXBlPWRlbGVnYXRpb24Ka2lkPWIyZTViNDE4NjBkMWQ4YmUKc2VxPTE4MDAwMDAwMDAwMDAKbm9uY2U9YTFhMWExYTFhMWExYTFhMQppc3N1ZWRBdD0xODAwMDAwMDAwMDAwCm5vdEJlZm9yZT0xODAwMDAwMDAwMDAwCmV4cGlyZXNBdD0xODA3Nzc2MDAwMDAwCnRhcmdldD1hbnkKLS0KYWdlbnQ9OGE2ZTQ0ZmNkOWE5YmI3MwpwdWI9d2dlU0V3b0NaNTEweTZ1cWNwVUtUR0V4REYwaWFpNmJGSVZrRUtqb1pyRT0KbmFtZT1kb3VhbGEtYWt3YS0wMQpzY29wZXM9SVNTVUVfUFJPRFVDVElPTixJU1NVRV9UUklBTAptYXhLZXlEYXlzPTM2NQptYXhSZW50YWxEYXlzPTAKbWF4U2FsZXM9MjAwCmJ1bmRsZXM9dG91dA.IfZUNH4FVdf0yeWLP3Tfc6zOalP1AeD3LT7ArGhGBvLjIWtU680tDguwbg6JXWi0UeBqdao7aHXeAQRV+BKBAA==|cbx1.Y2FzdGJyaWRnZS1lbnZlbG9wZS12MQp0eXBlPWFjdGl2YXRpb24Ka2lkPThhNmU0NGZjZDlhOWJiNzMKc2VxPTE4MDAwODY0MDAwMDAKbm9uY2U9YjJiMmIyYjJiMmIyYjJiMgppc3N1ZWRBdD0xODAwMDg2NDAwMDAwCm5vdEJlZm9yZT0xODAwMDg2NDAwMDAwCmV4cGlyZXNBdD0xODAwMjU5MjAwMDAwCnRhcmdldD1kZXZpY2UKaz00CmZhY3Rvcj1GTEFTSHxjNDhjYWNkODFiOTY2M2QwYmE5N2MyMjFjYmQxN2Y0ZgpmYWN0b3I9RVRIRVJORVR8ZjkxZWZkODllMDAyNWMyMjYyZGExMmNmYmVkNDM2MzIKZmFjdG9yPVdJRkl8ZWE4YjU1MmUyMjQwYmJkZDhjODhjNDIzMTNjNGRlYWIKZmFjdG9yPVNZU1RFTV9TRVJJQUx8Nzc0YmVhY2JmMzUxYjBkMjA1ZjkxNjY2NjllNGQzYzcKZmFjdG9yPUJMVUVUT09USHxkMzY1ZWE2N2UwMDU4NWVkYWY4YmVmNGQ3Mzc4ODUwZAotLQpraW5kPXByb2R1Y3Rpb24Kc3ViamVjdD10dgpsaWNlbnNlPWxpYy0wMDAxCnNlYXQ9ZjM2NzU3YzIyNmRkMmVlNApyaWdodD11c2FnZXxkdXJlZXwxODAwMDg2NDAwMDAwfDE4MzE3MDg4MDAwMDA.gUPA56qo4XNjOHF32PPpnmCtwdukLySG/psI/LMGuYgFAHtgMeT885TcPvTsT7muuOLvRl0y2c8DO03EHddyDQ==",
+      "ring": ["desk", "phone", "server"],
+      "revokedKeys": [],
+      "device": "tvA",
+      "now": 1800090000000,
+      "verifier": "delegated",
+      "expect": {
+        "result": "KEY_NOT_ALLOWED"
+      }
+    },
+    {
+      "id": "ticket-rental-refused",
+      "type": "ticketed",
+      "description": "toute location est refusée à un agent (W5)",
+      "line": "cbx1.Y2FzdGJyaWRnZS1lbnZlbG9wZS12MQp0eXBlPWRlbGVnYXRpb24Ka2lkPWIyZTViNDE4NjBkMWQ4YmUKc2VxPTE4MDAwMDAwMDAwMDAKbm9uY2U9YTFhMWExYTFhMWExYTFhMQppc3N1ZWRBdD0xODAwMDAwMDAwMDAwCm5vdEJlZm9yZT0xODAwMDAwMDAwMDAwCmV4cGlyZXNBdD0xODA3Nzc2MDAwMDAwCnRhcmdldD1hbnkKLS0KYWdlbnQ9OGE2ZTQ0ZmNkOWE5YmI3MwpwdWI9d2dlU0V3b0NaNTEweTZ1cWNwVUtUR0V4REYwaWFpNmJGSVZrRUtqb1pyRT0KbmFtZT1kb3VhbGEtYWt3YS0wMQpzY29wZXM9SVNTVUVfUFJPRFVDVElPTixJU1NVRV9UUklBTAptYXhLZXlEYXlzPTM2NQptYXhSZW50YWxEYXlzPTAKbWF4U2FsZXM9MjAwCmJ1bmRsZXM9dG91dA.IfZUNH4FVdf0yeWLP3Tfc6zOalP1AeD3LT7ArGhGBvLjIWtU680tDguwbg6JXWi0UeBqdao7aHXeAQRV+BKBAA==|cbx1.Y2FzdGJyaWRnZS1lbnZlbG9wZS12MQp0eXBlPWFjdGl2YXRpb24Ka2lkPThhNmU0NGZjZDlhOWJiNzMKc2VxPTE4MDAwODY0MDAwMDAKbm9uY2U9YjJiMmIyYjJiMmIyYjJiMgppc3N1ZWRBdD0xODAwMDg2NDAwMDAwCm5vdEJlZm9yZT0xODAwMDg2NDAwMDAwCmV4cGlyZXNBdD0xODAwMjU5MjAwMDAwCnRhcmdldD1kZXZpY2UKaz00CmZhY3Rvcj1GTEFTSHxjNDhjYWNkODFiOTY2M2QwYmE5N2MyMjFjYmQxN2Y0ZgpmYWN0b3I9RVRIRVJORVR8ZjkxZWZkODllMDAyNWMyMjYyZGExMmNmYmVkNDM2MzIKZmFjdG9yPVdJRkl8ZWE4YjU1MmUyMjQwYmJkZDhjODhjNDIzMTNjNGRlYWIKZmFjdG9yPVNZU1RFTV9TRVJJQUx8Nzc0YmVhY2JmMzUxYjBkMjA1ZjkxNjY2NjllNGQzYzcKZmFjdG9yPUJMVUVUT09USHxkMzY1ZWE2N2UwMDU4NWVkYWY4YmVmNGQ3Mzc4ODUwZAotLQpraW5kPXByb2R1Y3Rpb24Kc3ViamVjdD10dgpsaWNlbnNlPWxpYy0wMDAxCnNlYXQ9ZjM2NzU3YzIyNmRkMmVlNApyaWdodD1yZW50YWx8bG9jLWNsYXNzZS1jbTJ8Y2xhc3NlLWNtMnwxODAwMDAwMDAwMDAwfDE4MDAwMDAwMDAwMDB8OTB8MHwwfDB8QUFBQV9ib3gtMApyaWdodD11c2FnZXxkdXJlZXwxODAwMDg2NDAwMDAwfDE4MDI2Nzg0MDAwMDA.ZAQE6ojzlkhkbaDwt+2/hRB50sGec3WNQ3ClqWLGsuf2oErUQmHwKoejFYTuMo7Vy+qjjhJzIz2uHGAHxdGRDA==",
+      "ring": ["desk", "phone", "server"],
+      "revokedKeys": [],
+      "device": "tvA",
+      "now": 1800090000000,
+      "verifier": "delegated",
+      "expect": {
+        "result": "KEY_NOT_ALLOWED"
+      }
+    },
+    {
+      "id": "ticket-purchase-refused",
+      "type": "ticketed",
+      "description": "achat définitif refusé",
+      "line": "cbx1.Y2FzdGJyaWRnZS1lbnZlbG9wZS12MQp0eXBlPWRlbGVnYXRpb24Ka2lkPWIyZTViNDE4NjBkMWQ4YmUKc2VxPTE4MDAwMDAwMDAwMDAKbm9uY2U9YTFhMWExYTFhMWExYTFhMQppc3N1ZWRBdD0xODAwMDAwMDAwMDAwCm5vdEJlZm9yZT0xODAwMDAwMDAwMDAwCmV4cGlyZXNBdD0xODA3Nzc2MDAwMDAwCnRhcmdldD1hbnkKLS0KYWdlbnQ9OGE2ZTQ0ZmNkOWE5YmI3MwpwdWI9d2dlU0V3b0NaNTEweTZ1cWNwVUtUR0V4REYwaWFpNmJGSVZrRUtqb1pyRT0KbmFtZT1kb3VhbGEtYWt3YS0wMQpzY29wZXM9SVNTVUVfUFJPRFVDVElPTixJU1NVRV9UUklBTAptYXhLZXlEYXlzPTM2NQptYXhSZW50YWxEYXlzPTAKbWF4U2FsZXM9MjAwCmJ1bmRsZXM9dG91dA.IfZUNH4FVdf0yeWLP3Tfc6zOalP1AeD3LT7ArGhGBvLjIWtU680tDguwbg6JXWi0UeBqdao7aHXeAQRV+BKBAA==|cbx1.Y2FzdGJyaWRnZS1lbnZlbG9wZS12MQp0eXBlPWFjdGl2YXRpb24Ka2lkPThhNmU0NGZjZDlhOWJiNzMKc2VxPTE4MDAwODY0MDAwMDAKbm9uY2U9YjJiMmIyYjJiMmIyYjJiMgppc3N1ZWRBdD0xODAwMDg2NDAwMDAwCm5vdEJlZm9yZT0xODAwMDg2NDAwMDAwCmV4cGlyZXNBdD0xODAwMjU5MjAwMDAwCnRhcmdldD1kZXZpY2UKaz00CmZhY3Rvcj1GTEFTSHxjNDhjYWNkODFiOTY2M2QwYmE5N2MyMjFjYmQxN2Y0ZgpmYWN0b3I9RVRIRVJORVR8ZjkxZWZkODllMDAyNWMyMjYyZGExMmNmYmVkNDM2MzIKZmFjdG9yPVdJRkl8ZWE4YjU1MmUyMjQwYmJkZDhjODhjNDIzMTNjNGRlYWIKZmFjdG9yPVNZU1RFTV9TRVJJQUx8Nzc0YmVhY2JmMzUxYjBkMjA1ZjkxNjY2NjllNGQzYzcKZmFjdG9yPUJMVUVUT09USHxkMzY1ZWE2N2UwMDU4NWVkYWY4YmVmNGQ3Mzc4ODUwZAotLQpraW5kPXByb2R1Y3Rpb24Kc3ViamVjdD10dgpsaWNlbnNlPWxpYy0wMDAxCnNlYXQ9ZjM2NzU3YzIyNmRkMmVlNApyaWdodD1wdXJjaGFzZXxwLWNsYXNzZS1jbTJ8Y2xhc3NlLWNtMnwxODAwMDAwMDAwMDAwCnJpZ2h0PXVzYWdlfGR1cmVlfDE4MDAwODY0MDAwMDB8MTgwMjY3ODQwMDAwMA.xrmhpv7IGwTdyMAoYZTUxMTEaITYNl0g/x4X0T1Y6ZlFmKaQYVZuQfxPrHok/fawWlvo4GJj4/m0Vwsdkvm9CQ==",
+      "ring": ["desk", "phone", "server"],
+      "revokedKeys": [],
+      "device": "tvA",
+      "now": 1800090000000,
+      "verifier": "delegated",
+      "expect": {
+        "result": "KEY_NOT_ALLOWED"
+      }
+    },
+    {
+      "id": "ticket-super-refused",
+      "type": "ticketed",
+      "description": "droit super refusé",
+      "line": "cbx1.Y2FzdGJyaWRnZS1lbnZlbG9wZS12MQp0eXBlPWRlbGVnYXRpb24Ka2lkPWIyZTViNDE4NjBkMWQ4YmUKc2VxPTE4MDAwMDAwMDAwMDAKbm9uY2U9YTFhMWExYTFhMWExYTFhMQppc3N1ZWRBdD0xODAwMDAwMDAwMDAwCm5vdEJlZm9yZT0xODAwMDAwMDAwMDAwCmV4cGlyZXNBdD0xODA3Nzc2MDAwMDAwCnRhcmdldD1hbnkKLS0KYWdlbnQ9OGE2ZTQ0ZmNkOWE5YmI3MwpwdWI9d2dlU0V3b0NaNTEweTZ1cWNwVUtUR0V4REYwaWFpNmJGSVZrRUtqb1pyRT0KbmFtZT1kb3VhbGEtYWt3YS0wMQpzY29wZXM9SVNTVUVfUFJPRFVDVElPTixJU1NVRV9UUklBTAptYXhLZXlEYXlzPTM2NQptYXhSZW50YWxEYXlzPTAKbWF4U2FsZXM9MjAwCmJ1bmRsZXM9dG91dA.IfZUNH4FVdf0yeWLP3Tfc6zOalP1AeD3LT7ArGhGBvLjIWtU680tDguwbg6JXWi0UeBqdao7aHXeAQRV+BKBAA==|cbx1.Y2FzdGJyaWRnZS1lbnZlbG9wZS12MQp0eXBlPWFjdGl2YXRpb24Ka2lkPThhNmU0NGZjZDlhOWJiNzMKc2VxPTE4MDAwODY0MDAwMDAKbm9uY2U9YjJiMmIyYjJiMmIyYjJiMgppc3N1ZWRBdD0xODAwMDg2NDAwMDAwCm5vdEJlZm9yZT0xODAwMDg2NDAwMDAwCmV4cGlyZXNBdD0xODAwMjU5MjAwMDAwCnRhcmdldD1kZXZpY2UKaz00CmZhY3Rvcj1GTEFTSHxjNDhjYWNkODFiOTY2M2QwYmE5N2MyMjFjYmQxN2Y0ZgpmYWN0b3I9RVRIRVJORVR8ZjkxZWZkODllMDAyNWMyMjYyZGExMmNmYmVkNDM2MzIKZmFjdG9yPVdJRkl8ZWE4YjU1MmUyMjQwYmJkZDhjODhjNDIzMTNjNGRlYWIKZmFjdG9yPVNZU1RFTV9TRVJJQUx8Nzc0YmVhY2JmMzUxYjBkMjA1ZjkxNjY2NjllNGQzYzcKZmFjdG9yPUJMVUVUT09USHxkMzY1ZWE2N2UwMDU4NWVkYWY4YmVmNGQ3Mzc4ODUwZAotLQpraW5kPXByb2R1Y3Rpb24Kc3ViamVjdD10dgpsaWNlbnNlPWxpYy0wMDAxCnNlYXQ9ZjM2NzU3YzIyNmRkMmVlNApyaWdodD1zdXBlcnxzdXBlcnwxODAwMDAwMDAwMDAwCnJpZ2h0PXVzYWdlfGR1cmVlfDE4MDAwODY0MDAwMDB8MTgwMjY3ODQwMDAwMA.wlG6p5ycBxQrdNTJkTwCu6YHP9yWbVSFfs6zzv4eYe+n+OgK21Bvo+DW7WLjYTPrycJ0TSc6qpgSDNLwmyU5Bg==",
+      "ring": ["desk", "phone", "server"],
+      "revokedKeys": [],
+      "device": "tvA",
+      "now": 1800090000000,
+      "verifier": "delegated",
+      "expect": {
+        "result": "KEY_NOT_ALLOWED"
+      }
+    },
+    {
+      "id": "ticket-openall-refused",
+      "type": "ticketed",
+      "description": "« tout ouvert » refusé",
+      "line": "cbx1.Y2FzdGJyaWRnZS1lbnZlbG9wZS12MQp0eXBlPWRlbGVnYXRpb24Ka2lkPWIyZTViNDE4NjBkMWQ4YmUKc2VxPTE4MDAwMDAwMDAwMDAKbm9uY2U9YTFhMWExYTFhMWExYTFhMQppc3N1ZWRBdD0xODAwMDAwMDAwMDAwCm5vdEJlZm9yZT0xODAwMDAwMDAwMDAwCmV4cGlyZXNBdD0xODA3Nzc2MDAwMDAwCnRhcmdldD1hbnkKLS0KYWdlbnQ9OGE2ZTQ0ZmNkOWE5YmI3MwpwdWI9d2dlU0V3b0NaNTEweTZ1cWNwVUtUR0V4REYwaWFpNmJGSVZrRUtqb1pyRT0KbmFtZT1kb3VhbGEtYWt3YS0wMQpzY29wZXM9SVNTVUVfUFJPRFVDVElPTixJU1NVRV9UUklBTAptYXhLZXlEYXlzPTM2NQptYXhSZW50YWxEYXlzPTAKbWF4U2FsZXM9MjAwCmJ1bmRsZXM9dG91dA.IfZUNH4FVdf0yeWLP3Tfc6zOalP1AeD3LT7ArGhGBvLjIWtU680tDguwbg6JXWi0UeBqdao7aHXeAQRV+BKBAA==|cbx1.Y2FzdGJyaWRnZS1lbnZlbG9wZS12MQp0eXBlPWFjdGl2YXRpb24Ka2lkPThhNmU0NGZjZDlhOWJiNzMKc2VxPTE4MDAwODY0MDAwMDAKbm9uY2U9YjJiMmIyYjJiMmIyYjJiMgppc3N1ZWRBdD0xODAwMDg2NDAwMDAwCm5vdEJlZm9yZT0xODAwMDg2NDAwMDAwCmV4cGlyZXNBdD0xODAwMjU5MjAwMDAwCnRhcmdldD1kZXZpY2UKaz00CmZhY3Rvcj1GTEFTSHxjNDhjYWNkODFiOTY2M2QwYmE5N2MyMjFjYmQxN2Y0ZgpmYWN0b3I9RVRIRVJORVR8ZjkxZWZkODllMDAyNWMyMjYyZGExMmNmYmVkNDM2MzIKZmFjdG9yPVdJRkl8ZWE4YjU1MmUyMjQwYmJkZDhjODhjNDIzMTNjNGRlYWIKZmFjdG9yPVNZU1RFTV9TRVJJQUx8Nzc0YmVhY2JmMzUxYjBkMjA1ZjkxNjY2NjllNGQzYzcKZmFjdG9yPUJMVUVUT09USHxkMzY1ZWE2N2UwMDU4NWVkYWY4YmVmNGQ3Mzc4ODUwZAotLQpraW5kPXByb2R1Y3Rpb24Kc3ViamVjdD10dgpsaWNlbnNlPWxpYy0wMDAxCnNlYXQ9ZjM2NzU3YzIyNmRkMmVlNApyaWdodD1vcGVuYWxsfG91dmVydHwxODAwMDAwMDAwMDAwfDE4MDA4NjQwMDAwMDAKcmlnaHQ9dXNhZ2V8ZHVyZWV8MTgwMDA4NjQwMDAwMHwxODAyNjc4NDAwMDAw.QT/+05CwmJcFi2yPCKFXvExPyuE89GJOGvv6aZPHQq/U67XPd1Vi68etMPAwCssUjuczldbAmYPmV7eCskoqAw==",
+      "ring": ["desk", "phone", "server"],
+      "revokedKeys": [],
+      "device": "tvA",
+      "now": 1800090000000,
+      "verifier": "delegated",
+      "expect": {
+        "result": "KEY_NOT_ALLOWED"
+      }
+    },
+    {
+      "id": "ticket-old-tv-malformed",
+      "type": "ticketed",
+      "description": "une TV ancienne (ActivationVerifier seul) ne lit pas la ligne : MALFORMED",
+      "line": "cbx1.Y2FzdGJyaWRnZS1lbnZlbG9wZS12MQp0eXBlPWRlbGVnYXRpb24Ka2lkPWIyZTViNDE4NjBkMWQ4YmUKc2VxPTE4MDAwMDAwMDAwMDAKbm9uY2U9YTFhMWExYTFhMWExYTFhMQppc3N1ZWRBdD0xODAwMDAwMDAwMDAwCm5vdEJlZm9yZT0xODAwMDAwMDAwMDAwCmV4cGlyZXNBdD0xODA3Nzc2MDAwMDAwCnRhcmdldD1hbnkKLS0KYWdlbnQ9OGE2ZTQ0ZmNkOWE5YmI3MwpwdWI9d2dlU0V3b0NaNTEweTZ1cWNwVUtUR0V4REYwaWFpNmJGSVZrRUtqb1pyRT0KbmFtZT1kb3VhbGEtYWt3YS0wMQpzY29wZXM9SVNTVUVfUFJPRFVDVElPTixJU1NVRV9UUklBTAptYXhLZXlEYXlzPTM2NQptYXhSZW50YWxEYXlzPTAKbWF4U2FsZXM9MjAwCmJ1bmRsZXM9dG91dA.IfZUNH4FVdf0yeWLP3Tfc6zOalP1AeD3LT7ArGhGBvLjIWtU680tDguwbg6JXWi0UeBqdao7aHXeAQRV+BKBAA==|cbx1.Y2FzdGJyaWRnZS1lbnZlbG9wZS12MQp0eXBlPWFjdGl2YXRpb24Ka2lkPThhNmU0NGZjZDlhOWJiNzMKc2VxPTE4MDAwODY0MDAwMDAKbm9uY2U9YjJiMmIyYjJiMmIyYjJiMgppc3N1ZWRBdD0xODAwMDg2NDAwMDAwCm5vdEJlZm9yZT0xODAwMDg2NDAwMDAwCmV4cGlyZXNBdD0xODAwMjU5MjAwMDAwCnRhcmdldD1kZXZpY2UKaz00CmZhY3Rvcj1GTEFTSHxjNDhjYWNkODFiOTY2M2QwYmE5N2MyMjFjYmQxN2Y0ZgpmYWN0b3I9RVRIRVJORVR8ZjkxZWZkODllMDAyNWMyMjYyZGExMmNmYmVkNDM2MzIKZmFjdG9yPVdJRkl8ZWE4YjU1MmUyMjQwYmJkZDhjODhjNDIzMTNjNGRlYWIKZmFjdG9yPVNZU1RFTV9TRVJJQUx8Nzc0YmVhY2JmMzUxYjBkMjA1ZjkxNjY2NjllNGQzYzcKZmFjdG9yPUJMVUVUT09USHxkMzY1ZWE2N2UwMDU4NWVkYWY4YmVmNGQ3Mzc4ODUwZAotLQpraW5kPXByb2R1Y3Rpb24Kc3ViamVjdD10dgpsaWNlbnNlPWxpYy0wMDAxCnNlYXQ9ZjM2NzU3YzIyNmRkMmVlNApyaWdodD11c2FnZXxkdXJlZXwxODAwMDg2NDAwMDAwfDE4MDc4NjI0MDAwMDA.P1Xd8+TVpbgh8xp0OlD3TxTeB9unbA/JYjJYHjqeUxv5o1dyldwQ3irK0eNfLARKvgufTDE855rH9o4AEWKLBg==",
+      "ring": ["desk", "phone", "server"],
+      "revokedKeys": [],
+      "device": "tvA",
+      "now": 1800090000000,
+      "verifier": "plain",
+      "expect": {
+        "result": "MALFORMED"
+      }
+    },
+    {
+      "id": "ticket-agent-revoked",
+      "type": "ticketed",
+      "description": "agent révoqué : aucune nouvelle activation",
+      "line": "cbx1.Y2FzdGJyaWRnZS1lbnZlbG9wZS12MQp0eXBlPWRlbGVnYXRpb24Ka2lkPWIyZTViNDE4NjBkMWQ4YmUKc2VxPTE4MDAwMDAwMDAwMDAKbm9uY2U9YTFhMWExYTFhMWExYTFhMQppc3N1ZWRBdD0xODAwMDAwMDAwMDAwCm5vdEJlZm9yZT0xODAwMDAwMDAwMDAwCmV4cGlyZXNBdD0xODA3Nzc2MDAwMDAwCnRhcmdldD1hbnkKLS0KYWdlbnQ9OGE2ZTQ0ZmNkOWE5YmI3MwpwdWI9d2dlU0V3b0NaNTEweTZ1cWNwVUtUR0V4REYwaWFpNmJGSVZrRUtqb1pyRT0KbmFtZT1kb3VhbGEtYWt3YS0wMQpzY29wZXM9SVNTVUVfUFJPRFVDVElPTixJU1NVRV9UUklBTAptYXhLZXlEYXlzPTM2NQptYXhSZW50YWxEYXlzPTAKbWF4U2FsZXM9MjAwCmJ1bmRsZXM9dG91dA.IfZUNH4FVdf0yeWLP3Tfc6zOalP1AeD3LT7ArGhGBvLjIWtU680tDguwbg6JXWi0UeBqdao7aHXeAQRV+BKBAA==|cbx1.Y2FzdGJyaWRnZS1lbnZlbG9wZS12MQp0eXBlPWFjdGl2YXRpb24Ka2lkPThhNmU0NGZjZDlhOWJiNzMKc2VxPTE4MDAwODY0MDAwMDAKbm9uY2U9YjJiMmIyYjJiMmIyYjJiMgppc3N1ZWRBdD0xODAwMDg2NDAwMDAwCm5vdEJlZm9yZT0xODAwMDg2NDAwMDAwCmV4cGlyZXNBdD0xODAwMjU5MjAwMDAwCnRhcmdldD1kZXZpY2UKaz00CmZhY3Rvcj1GTEFTSHxjNDhjYWNkODFiOTY2M2QwYmE5N2MyMjFjYmQxN2Y0ZgpmYWN0b3I9RVRIRVJORVR8ZjkxZWZkODllMDAyNWMyMjYyZGExMmNmYmVkNDM2MzIKZmFjdG9yPVdJRkl8ZWE4YjU1MmUyMjQwYmJkZDhjODhjNDIzMTNjNGRlYWIKZmFjdG9yPVNZU1RFTV9TRVJJQUx8Nzc0YmVhY2JmMzUxYjBkMjA1ZjkxNjY2NjllNGQzYzcKZmFjdG9yPUJMVUVUT09USHxkMzY1ZWE2N2UwMDU4NWVkYWY4YmVmNGQ3Mzc4ODUwZAotLQpraW5kPXByb2R1Y3Rpb24Kc3ViamVjdD10dgpsaWNlbnNlPWxpYy0wMDAxCnNlYXQ9ZjM2NzU3YzIyNmRkMmVlNApyaWdodD11c2FnZXxkdXJlZXwxODAwMDg2NDAwMDAwfDE4MDc4NjI0MDAwMDA.P1Xd8+TVpbgh8xp0OlD3TxTeB9unbA/JYjJYHjqeUxv5o1dyldwQ3irK0eNfLARKvgufTDE855rH9o4AEWKLBg==",
+      "ring": ["desk", "phone", "server"],
+      "revokedKeys": ["agent"],
+      "device": "tvA",
+      "now": 1800090000000,
+      "verifier": "delegated",
+      "expect": {
+        "result": "REVOKED_KEY"
+      }
+    },
+    {
+      "id": "ticket-usage-overflow-refused",
+      "type": "ticketed",
+      "description": "usage|duree|0|9223372036854775807 : le calcul de durée ne doit pas déborder",
+      "line": "cbx1.Y2FzdGJyaWRnZS1lbnZlbG9wZS12MQp0eXBlPWRlbGVnYXRpb24Ka2lkPWIyZTViNDE4NjBkMWQ4YmUKc2VxPTE4MDAwMDAwMDAwMDAKbm9uY2U9YTFhMWExYTFhMWExYTFhMQppc3N1ZWRBdD0xODAwMDAwMDAwMDAwCm5vdEJlZm9yZT0xODAwMDAwMDAwMDAwCmV4cGlyZXNBdD0xODA3Nzc2MDAwMDAwCnRhcmdldD1hbnkKLS0KYWdlbnQ9OGE2ZTQ0ZmNkOWE5YmI3MwpwdWI9d2dlU0V3b0NaNTEweTZ1cWNwVUtUR0V4REYwaWFpNmJGSVZrRUtqb1pyRT0KbmFtZT1kb3VhbGEtYWt3YS0wMQpzY29wZXM9SVNTVUVfUFJPRFVDVElPTixJU1NVRV9UUklBTAptYXhLZXlEYXlzPTM2NQptYXhSZW50YWxEYXlzPTAKbWF4U2FsZXM9MjAwCmJ1bmRsZXM9dG91dA.IfZUNH4FVdf0yeWLP3Tfc6zOalP1AeD3LT7ArGhGBvLjIWtU680tDguwbg6JXWi0UeBqdao7aHXeAQRV+BKBAA==|cbx1.Y2FzdGJyaWRnZS1lbnZlbG9wZS12MQp0eXBlPWFjdGl2YXRpb24Ka2lkPThhNmU0NGZjZDlhOWJiNzMKc2VxPTE4MDAwODY0MDAwMDAKbm9uY2U9YjJiMmIyYjJiMmIyYjJiMgppc3N1ZWRBdD0xODAwMDg2NDAwMDAwCm5vdEJlZm9yZT0xODAwMDg2NDAwMDAwCmV4cGlyZXNBdD0xODAwMjU5MjAwMDAwCnRhcmdldD1kZXZpY2UKaz00CmZhY3Rvcj1GTEFTSHxjNDhjYWNkODFiOTY2M2QwYmE5N2MyMjFjYmQxN2Y0ZgpmYWN0b3I9RVRIRVJORVR8ZjkxZWZkODllMDAyNWMyMjYyZGExMmNmYmVkNDM2MzIKZmFjdG9yPVdJRkl8ZWE4YjU1MmUyMjQwYmJkZDhjODhjNDIzMTNjNGRlYWIKZmFjdG9yPVNZU1RFTV9TRVJJQUx8Nzc0YmVhY2JmMzUxYjBkMjA1ZjkxNjY2NjllNGQzYzcKZmFjdG9yPUJMVUVUT09USHxkMzY1ZWE2N2UwMDU4NWVkYWY4YmVmNGQ3Mzc4ODUwZAotLQpraW5kPXByb2R1Y3Rpb24Kc3ViamVjdD10dgpsaWNlbnNlPWxpYy0wMDAxCnNlYXQ9ZjM2NzU3YzIyNmRkMmVlNApyaWdodD11c2FnZXxkdXJlZXwwfDkyMjMzNzIwMzY4NTQ3NzU4MDc.Em8tR+6rJxzqpepq8OUcVZI5FHo8mi++FVYYAQfn0pBU7EoHSCD/F+PkDYTuX4pzG8h0rOFUWfUx51YgFnGbAw==",
+      "ring": ["desk", "phone", "server"],
+      "revokedKeys": [],
+      "device": "tvA",
+      "now": 1800090000000,
+      "verifier": "delegated",
+      "expect": {
+        "result": "KEY_NOT_ALLOWED"
+      }
+    },
+    {
+      "id": "ticket-usage-overflow-negative-start-refused",
+      "type": "ticketed",
+      "description": "début négatif et fin énorme : durée qui déborderait",
+      "line": "cbx1.Y2FzdGJyaWRnZS1lbnZlbG9wZS12MQp0eXBlPWRlbGVnYXRpb24Ka2lkPWIyZTViNDE4NjBkMWQ4YmUKc2VxPTE4MDAwMDAwMDAwMDAKbm9uY2U9YTFhMWExYTFhMWExYTFhMQppc3N1ZWRBdD0xODAwMDAwMDAwMDAwCm5vdEJlZm9yZT0xODAwMDAwMDAwMDAwCmV4cGlyZXNBdD0xODA3Nzc2MDAwMDAwCnRhcmdldD1hbnkKLS0KYWdlbnQ9OGE2ZTQ0ZmNkOWE5YmI3MwpwdWI9d2dlU0V3b0NaNTEweTZ1cWNwVUtUR0V4REYwaWFpNmJGSVZrRUtqb1pyRT0KbmFtZT1kb3VhbGEtYWt3YS0wMQpzY29wZXM9SVNTVUVfUFJPRFVDVElPTixJU1NVRV9UUklBTAptYXhLZXlEYXlzPTM2NQptYXhSZW50YWxEYXlzPTAKbWF4U2FsZXM9MjAwCmJ1bmRsZXM9dG91dA.IfZUNH4FVdf0yeWLP3Tfc6zOalP1AeD3LT7ArGhGBvLjIWtU680tDguwbg6JXWi0UeBqdao7aHXeAQRV+BKBAA==|cbx1.Y2FzdGJyaWRnZS1lbnZlbG9wZS12MQp0eXBlPWFjdGl2YXRpb24Ka2lkPThhNmU0NGZjZDlhOWJiNzMKc2VxPTE4MDAwODY0MDAwMDAKbm9uY2U9YjJiMmIyYjJiMmIyYjJiMgppc3N1ZWRBdD0xODAwMDg2NDAwMDAwCm5vdEJlZm9yZT0xODAwMDg2NDAwMDAwCmV4cGlyZXNBdD0xODAwMjU5MjAwMDAwCnRhcmdldD1kZXZpY2UKaz00CmZhY3Rvcj1GTEFTSHxjNDhjYWNkODFiOTY2M2QwYmE5N2MyMjFjYmQxN2Y0ZgpmYWN0b3I9RVRIRVJORVR8ZjkxZWZkODllMDAyNWMyMjYyZGExMmNmYmVkNDM2MzIKZmFjdG9yPVdJRkl8ZWE4YjU1MmUyMjQwYmJkZDhjODhjNDIzMTNjNGRlYWIKZmFjdG9yPVNZU1RFTV9TRVJJQUx8Nzc0YmVhY2JmMzUxYjBkMjA1ZjkxNjY2NjllNGQzYzcKZmFjdG9yPUJMVUVUT09USHxkMzY1ZWE2N2UwMDU4NWVkYWY4YmVmNGQ3Mzc4ODUwZAotLQpraW5kPXByb2R1Y3Rpb24Kc3ViamVjdD10dgpsaWNlbnNlPWxpYy0wMDAxCnNlYXQ9ZjM2NzU3YzIyNmRkMmVlNApyaWdodD11c2FnZXxkdXJlZXwtOTAwMDAwMDAwMDAwMDAwMDAwMHw5MDAwMDAwMDAwMDAwMDAwMDAw.W8cXxPPfTXoyOdUkDHdtMpkrPXlno0+SjBuRp2DbXx0ZoMNJru2IuIGQH/Ic75PLKddZqwFbZWFsea7vf9PUAg==",
+      "ring": ["desk", "phone", "server"],
+      "revokedKeys": [],
+      "device": "tvA",
+      "now": 1800090000000,
+      "verifier": "delegated",
+      "expect": {
+        "result": "KEY_NOT_ALLOWED"
+      }
+    },
+    {
+      "id": "ticket-usage-end-before-start-refused",
+      "type": "ticketed",
+      "description": "fin avant le début",
+      "line": "cbx1.Y2FzdGJyaWRnZS1lbnZlbG9wZS12MQp0eXBlPWRlbGVnYXRpb24Ka2lkPWIyZTViNDE4NjBkMWQ4YmUKc2VxPTE4MDAwMDAwMDAwMDAKbm9uY2U9YTFhMWExYTFhMWExYTFhMQppc3N1ZWRBdD0xODAwMDAwMDAwMDAwCm5vdEJlZm9yZT0xODAwMDAwMDAwMDAwCmV4cGlyZXNBdD0xODA3Nzc2MDAwMDAwCnRhcmdldD1hbnkKLS0KYWdlbnQ9OGE2ZTQ0ZmNkOWE5YmI3MwpwdWI9d2dlU0V3b0NaNTEweTZ1cWNwVUtUR0V4REYwaWFpNmJGSVZrRUtqb1pyRT0KbmFtZT1kb3VhbGEtYWt3YS0wMQpzY29wZXM9SVNTVUVfUFJPRFVDVElPTixJU1NVRV9UUklBTAptYXhLZXlEYXlzPTM2NQptYXhSZW50YWxEYXlzPTAKbWF4U2FsZXM9MjAwCmJ1bmRsZXM9dG91dA.IfZUNH4FVdf0yeWLP3Tfc6zOalP1AeD3LT7ArGhGBvLjIWtU680tDguwbg6JXWi0UeBqdao7aHXeAQRV+BKBAA==|cbx1.Y2FzdGJyaWRnZS1lbnZlbG9wZS12MQp0eXBlPWFjdGl2YXRpb24Ka2lkPThhNmU0NGZjZDlhOWJiNzMKc2VxPTE4MDAwODY0MDAwMDAKbm9uY2U9YjJiMmIyYjJiMmIyYjJiMgppc3N1ZWRBdD0xODAwMDg2NDAwMDAwCm5vdEJlZm9yZT0xODAwMDg2NDAwMDAwCmV4cGlyZXNBdD0xODAwMjU5MjAwMDAwCnRhcmdldD1kZXZpY2UKaz00CmZhY3Rvcj1GTEFTSHxjNDhjYWNkODFiOTY2M2QwYmE5N2MyMjFjYmQxN2Y0ZgpmYWN0b3I9RVRIRVJORVR8ZjkxZWZkODllMDAyNWMyMjYyZGExMmNmYmVkNDM2MzIKZmFjdG9yPVdJRkl8ZWE4YjU1MmUyMjQwYmJkZDhjODhjNDIzMTNjNGRlYWIKZmFjdG9yPVNZU1RFTV9TRVJJQUx8Nzc0YmVhY2JmMzUxYjBkMjA1ZjkxNjY2NjllNGQzYzcKZmFjdG9yPUJMVUVUT09USHxkMzY1ZWE2N2UwMDU4NWVkYWY4YmVmNGQ3Mzc4ODUwZAotLQpraW5kPXByb2R1Y3Rpb24Kc3ViamVjdD10dgpsaWNlbnNlPWxpYy0wMDAxCnNlYXQ9ZjM2NzU3YzIyNmRkMmVlNApyaWdodD11c2FnZXxkdXJlZXwxODAyNjc4NDAwMDAwfDE4MDAwODY0MDAwMDA.zYR76XbDizf3JBql2jv/dNN44+wbAy+Q29mMF5xMe/cswE2+oI4mExCo1zQaG315gZy5N0QGLvSKbvuFCVCJAg==",
+      "ring": ["desk", "phone", "server"],
+      "revokedKeys": [],
+      "device": "tvA",
+      "now": 1800090000000,
+      "verifier": "delegated",
+      "expect": {
+        "result": "KEY_NOT_ALLOWED"
+      }
+    },
+    {
+      "id": "ticket-issued-before-mandate-refused",
+      "type": "ticketed",
+      "description": "activation datée avant le début du mandat",
+      "line": "cbx1.Y2FzdGJyaWRnZS1lbnZlbG9wZS12MQp0eXBlPWRlbGVnYXRpb24Ka2lkPWIyZTViNDE4NjBkMWQ4YmUKc2VxPTE4MDAwMDAwMDAwMDAKbm9uY2U9YTFhMWExYTFhMWExYTFhMQppc3N1ZWRBdD0xODAwMDAwMDAwMDAwCm5vdEJlZm9yZT0xODAwMDAwMDAwMDAwCmV4cGlyZXNBdD0xODA3Nzc2MDAwMDAwCnRhcmdldD1hbnkKLS0KYWdlbnQ9OGE2ZTQ0ZmNkOWE5YmI3MwpwdWI9d2dlU0V3b0NaNTEweTZ1cWNwVUtUR0V4REYwaWFpNmJGSVZrRUtqb1pyRT0KbmFtZT1kb3VhbGEtYWt3YS0wMQpzY29wZXM9SVNTVUVfUFJPRFVDVElPTixJU1NVRV9UUklBTAptYXhLZXlEYXlzPTM2NQptYXhSZW50YWxEYXlzPTAKbWF4U2FsZXM9MjAwCmJ1bmRsZXM9dG91dA.IfZUNH4FVdf0yeWLP3Tfc6zOalP1AeD3LT7ArGhGBvLjIWtU680tDguwbg6JXWi0UeBqdao7aHXeAQRV+BKBAA==|cbx1.Y2FzdGJyaWRnZS1lbnZlbG9wZS12MQp0eXBlPWFjdGl2YXRpb24Ka2lkPThhNmU0NGZjZDlhOWJiNzMKc2VxPTE4MDAwODY0MDAwMDAKbm9uY2U9YjJiMmIyYjJiMmIyYjJiMgppc3N1ZWRBdD0xNzk5ODI3MjAwMDAwCm5vdEJlZm9yZT0xODAwMDg2NDAwMDAwCmV4cGlyZXNBdD0xODAwMjU5MjAwMDAwCnRhcmdldD1kZXZpY2UKaz00CmZhY3Rvcj1GTEFTSHxjNDhjYWNkODFiOTY2M2QwYmE5N2MyMjFjYmQxN2Y0ZgpmYWN0b3I9RVRIRVJORVR8ZjkxZWZkODllMDAyNWMyMjYyZGExMmNmYmVkNDM2MzIKZmFjdG9yPVdJRkl8ZWE4YjU1MmUyMjQwYmJkZDhjODhjNDIzMTNjNGRlYWIKZmFjdG9yPVNZU1RFTV9TRVJJQUx8Nzc0YmVhY2JmMzUxYjBkMjA1ZjkxNjY2NjllNGQzYzcKZmFjdG9yPUJMVUVUT09USHxkMzY1ZWE2N2UwMDU4NWVkYWY4YmVmNGQ3Mzc4ODUwZAotLQpraW5kPXByb2R1Y3Rpb24Kc3ViamVjdD10dgpsaWNlbnNlPWxpYy0wMDAxCnNlYXQ9ZjM2NzU3YzIyNmRkMmVlNApyaWdodD11c2FnZXxkdXJlZXwxODAwMDg2NDAwMDAwfDE4MDI1OTIwMDAwMDA.McVnJICSrOY/+LUvh/d7GwAfaNTP1m2aSyrNRtIZmXt5qwuSIsvkqeDG9f4mGwqGuoZknuQijdphLI/fxvUQBg==",
+      "ring": ["desk", "phone", "server"],
+      "revokedKeys": [],
+      "device": "tvA",
+      "now": 1800090000000,
+      "verifier": "delegated",
+      "expect": {
+        "result": "KEY_NOT_ALLOWED"
+      }
+    },
+    {
+      "id": "ticket-wrong-device",
+      "type": "ticketed",
+      "description": "activation d'une autre TV",
+      "line": "cbx1.Y2FzdGJyaWRnZS1lbnZlbG9wZS12MQp0eXBlPWRlbGVnYXRpb24Ka2lkPWIyZTViNDE4NjBkMWQ4YmUKc2VxPTE4MDAwMDAwMDAwMDAKbm9uY2U9YTFhMWExYTFhMWExYTFhMQppc3N1ZWRBdD0xODAwMDAwMDAwMDAwCm5vdEJlZm9yZT0xODAwMDAwMDAwMDAwCmV4cGlyZXNBdD0xODA3Nzc2MDAwMDAwCnRhcmdldD1hbnkKLS0KYWdlbnQ9OGE2ZTQ0ZmNkOWE5YmI3MwpwdWI9d2dlU0V3b0NaNTEweTZ1cWNwVUtUR0V4REYwaWFpNmJGSVZrRUtqb1pyRT0KbmFtZT1kb3VhbGEtYWt3YS0wMQpzY29wZXM9SVNTVUVfUFJPRFVDVElPTixJU1NVRV9UUklBTAptYXhLZXlEYXlzPTM2NQptYXhSZW50YWxEYXlzPTAKbWF4U2FsZXM9MjAwCmJ1bmRsZXM9dG91dA.IfZUNH4FVdf0yeWLP3Tfc6zOalP1AeD3LT7ArGhGBvLjIWtU680tDguwbg6JXWi0UeBqdao7aHXeAQRV+BKBAA==|cbx1.Y2FzdGJyaWRnZS1lbnZlbG9wZS12MQp0eXBlPWFjdGl2YXRpb24Ka2lkPThhNmU0NGZjZDlhOWJiNzMKc2VxPTE4MDAwODY0MDAwMDAKbm9uY2U9YjJiMmIyYjJiMmIyYjJiMgppc3N1ZWRBdD0xODAwMDg2NDAwMDAwCm5vdEJlZm9yZT0xODAwMDg2NDAwMDAwCmV4cGlyZXNBdD0xODAwMjU5MjAwMDAwCnRhcmdldD1kZXZpY2UKaz00CmZhY3Rvcj1GTEFTSHxjNDhjYWNkODFiOTY2M2QwYmE5N2MyMjFjYmQxN2Y0ZgpmYWN0b3I9RVRIRVJORVR8ZjkxZWZkODllMDAyNWMyMjYyZGExMmNmYmVkNDM2MzIKZmFjdG9yPVdJRkl8ZWE4YjU1MmUyMjQwYmJkZDhjODhjNDIzMTNjNGRlYWIKZmFjdG9yPVNZU1RFTV9TRVJJQUx8Nzc0YmVhY2JmMzUxYjBkMjA1ZjkxNjY2NjllNGQzYzcKZmFjdG9yPUJMVUVUT09USHxkMzY1ZWE2N2UwMDU4NWVkYWY4YmVmNGQ3Mzc4ODUwZAotLQpraW5kPXByb2R1Y3Rpb24Kc3ViamVjdD10dgpsaWNlbnNlPWxpYy0wMDAxCnNlYXQ9ZjM2NzU3YzIyNmRkMmVlNApyaWdodD11c2FnZXxkdXJlZXwxODAwMDg2NDAwMDAwfDE4MDc4NjI0MDAwMDA.P1Xd8+TVpbgh8xp0OlD3TxTeB9unbA/JYjJYHjqeUxv5o1dyldwQ3irK0eNfLARKvgufTDE855rH9o4AEWKLBg==",
+      "ring": ["desk", "phone", "server"],
+      "revokedKeys": [],
+      "device": "tvN1",
+      "now": 1800090000000,
+      "verifier": "delegated",
+      "expect": {
+        "result": "WRONG_DEVICE"
+      }
+    },
+    {
+      "id": "price-grid-signed-ok",
+      "type": "price-grid",
+      "description": "grille signée : montants d'essai fictifs",
+      "json": "{\"format\":\"castbridge-price-grid-v1\",\"generatedAt\":\"2026-10-02T09:00:00Z\",\"currency\":\"XAF\",\"prices\":[{\"item\":\"cle-essai\",\"days\":30,\"price\":0},{\"item\":\"cle-production\",\"days\":30,\"price\":1000},{\"item\":\"cle-production\",\"days\":365,\"price\":9000},{\"item\":\"cle-production\",\"days\":90,\"price\":2500}],\"keyId\":\"b2e5b41860d1d8be\",\"signature\":\"3Zlkm5hQaQNtGJtM+cyxddI9AjLihztXxrbVba1GxWd8s9/Av9c2jei2aSdCfQ6lt8Khsa/iuPf2LXuMINz1DA==\"}",
+      "publicKeys": ["desk"],
+      "notOlderThan": null,
+      "expect": {
+        "result": "ok",
+        "count": 4,
+        "priceOf": [
+          {
+            "item": "cle-production",
+            "days": 90,
+            "price": 2500
+          },
+          {
+            "item": "cle-production",
+            "days": 91,
+            "price": null
+          }
+        ]
+      }
+    },
+    {
+      "id": "price-grid-modified",
+      "type": "price-grid",
+      "description": "un prix modifié après signature",
+      "json": "{\"format\":\"castbridge-price-grid-v1\",\"generatedAt\":\"2026-10-02T09:00:00Z\",\"currency\":\"XAF\",\"prices\":[{\"item\":\"cle-essai\",\"days\":30,\"price\":0},{\"item\":\"cle-production\",\"days\":30,\"price\":1000},{\"item\":\"cle-production\",\"days\":365,\"price\":9000},{\"item\":\"cle-production\",\"days\":90,\"price\":1}],\"keyId\":\"b2e5b41860d1d8be\",\"signature\":\"3Zlkm5hQaQNtGJtM+cyxddI9AjLihztXxrbVba1GxWd8s9/Av9c2jei2aSdCfQ6lt8Khsa/iuPf2LXuMINz1DA==\"}",
+      "publicKeys": ["desk"],
+      "notOlderThan": null,
+      "expect": {
+        "result": "refused"
+      }
+    },
+    {
+      "id": "price-grid-older",
+      "type": "price-grid",
+      "description": "grille plus ancienne que celle déjà gardée",
+      "json": "{\"format\":\"castbridge-price-grid-v1\",\"generatedAt\":\"2026-10-02T09:00:00Z\",\"currency\":\"XAF\",\"prices\":[{\"item\":\"cle-essai\",\"days\":30,\"price\":0},{\"item\":\"cle-production\",\"days\":30,\"price\":1000},{\"item\":\"cle-production\",\"days\":365,\"price\":9000},{\"item\":\"cle-production\",\"days\":90,\"price\":2500}],\"keyId\":\"b2e5b41860d1d8be\",\"signature\":\"3Zlkm5hQaQNtGJtM+cyxddI9AjLihztXxrbVba1GxWd8s9/Av9c2jei2aSdCfQ6lt8Khsa/iuPf2LXuMINz1DA==\"}",
+      "publicKeys": ["desk"],
+      "notOlderThan": "2026-11-01T00:00:00Z",
+      "expect": {
+        "result": "refused"
+      }
+    },
+    {
+      "id": "price-grid-unsigned",
+      "type": "price-grid",
+      "description": "grille non signée",
+      "json": "{\"format\":\"castbridge-price-grid-v1\",\"generatedAt\":\"2026-10-02T09:00:00Z\",\"currency\":\"XAF\",\"prices\":[{\"item\":\"cle-essai\",\"days\":30,\"price\":0},{\"item\":\"cle-production\",\"days\":30,\"price\":1000},{\"item\":\"cle-production\",\"days\":365,\"price\":9000},{\"item\":\"cle-production\",\"days\":90,\"price\":2500}],\"keyId\":\"b2e5b41860d1d8be\",\"signature\":\"UNSIGNED\"}",
+      "publicKeys": ["desk"],
+      "notOlderThan": null,
+      "expect": {
+        "result": "refused"
+      }
+    },
+    {
+      "id": "ledger-chain-ok",
+      "type": "ledger",
+      "description": "chaîne de 4 ventes, solde dû = 4 × 2500 − 5000 versés",
+      "entries": ["castbridge-sale-v1\nseq=1\nat=1800000001000\nkind=SALE\nagent=8a6e44fcd9a9bb73\ndevice=ZX8P-S2TH-N5PG-V9V7\nlicense=lic-0001\nseat=0123456789abcdef\nitem=cle-production|90\nprice=2500\ncash=2500\ngrid=2026-10-02T09:00:00Z\nreceipt=R-B3JY-P0A8\nfp=abababababababababababababababababababababababababababababababab\nprev=0\nhash=20c4621e71845fb0\nsig=F89gMYM3eHuRyEw6FbwDQZqiFT31wJ7J1EALnm9YwD/u8lQJXXjrI8sDXWl3h72rS+f6+m7jAEF4e4PHUG6sDw==", "castbridge-sale-v1\nseq=2\nat=1800000002000\nkind=SALE\nagent=8a6e44fcd9a9bb73\ndevice=ZX8P-S2TH-N5PG-V9V7\nlicense=lic-0001\nseat=0123456789abcdef\nitem=cle-production|90\nprice=2500\ncash=2500\ngrid=2026-10-02T09:00:00Z\nreceipt=R-RSW2-BZJZ\nfp=abababababababababababababababababababababababababababababababab\nprev=20c4621e71845fb0\nhash=2ab50011435e198a\nsig=Bm4rpmHwiVrgivUJWo9R9wenzEuMzZAC9HC+1hS0yB172xma5Nd9nEbwbu5PzUJpHGqzGisGIHQSOhwfKaThBQ==", "castbridge-sale-v1\nseq=3\nat=1800000003000\nkind=SALE\nagent=8a6e44fcd9a9bb73\ndevice=ZX8P-S2TH-N5PG-V9V7\nlicense=lic-0001\nseat=0123456789abcdef\nitem=cle-production|90\nprice=2500\ncash=2500\ngrid=2026-10-02T09:00:00Z\nreceipt=R-XR4Z-H4ZA\nfp=abababababababababababababababababababababababababababababababab\nprev=2ab50011435e198a\nhash=9f2141aacd336811\nsig=tjA+61uHoEVjjYEQXpUuDgMXPki6AmIGBckOj7Icm4ofw04NM6e3hCFppzi+L5TJ9U84HhCFm7ir+HpfG8N8Bw==", "castbridge-sale-v1\nseq=4\nat=1800000004000\nkind=SALE\nagent=8a6e44fcd9a9bb73\ndevice=ZX8P-S2TH-N5PG-V9V7\nlicense=lic-0001\nseat=0123456789abcdef\nitem=cle-production|90\nprice=2500\ncash=2500\ngrid=2026-10-02T09:00:00Z\nreceipt=R-E5P8-YAGF\nfp=abababababababababababababababababababababababababababababababab\nprev=9f2141aacd336811\nhash=ed530a1fb34cef1f\nsig=ezNgZACh971y12wqEKKfvUb19jOnHhB4SaGI7JmVEeZB+1FDNFHndQJm66MsZEESESgxBLk7HZiuuKzWKH2rDw=="],
+      "pub": "agent",
+      "expect": {
+        "result": "ok",
+        "seq": null,
+        "balance": 5000,
+        "remitted": 5000
+      }
+    },
+    {
+      "id": "ledger-gap",
+      "type": "ledger",
+      "description": "l'entrée 2 manque",
+      "entries": ["castbridge-sale-v1\nseq=1\nat=1800000001000\nkind=SALE\nagent=8a6e44fcd9a9bb73\ndevice=ZX8P-S2TH-N5PG-V9V7\nlicense=lic-0001\nseat=0123456789abcdef\nitem=cle-production|90\nprice=2500\ncash=2500\ngrid=2026-10-02T09:00:00Z\nreceipt=R-B3JY-P0A8\nfp=abababababababababababababababababababababababababababababababab\nprev=0\nhash=20c4621e71845fb0\nsig=F89gMYM3eHuRyEw6FbwDQZqiFT31wJ7J1EALnm9YwD/u8lQJXXjrI8sDXWl3h72rS+f6+m7jAEF4e4PHUG6sDw==", "castbridge-sale-v1\nseq=3\nat=1800000003000\nkind=SALE\nagent=8a6e44fcd9a9bb73\ndevice=ZX8P-S2TH-N5PG-V9V7\nlicense=lic-0001\nseat=0123456789abcdef\nitem=cle-production|90\nprice=2500\ncash=2500\ngrid=2026-10-02T09:00:00Z\nreceipt=R-XR4Z-H4ZA\nfp=abababababababababababababababababababababababababababababababab\nprev=2ab50011435e198a\nhash=9f2141aacd336811\nsig=tjA+61uHoEVjjYEQXpUuDgMXPki6AmIGBckOj7Icm4ofw04NM6e3hCFppzi+L5TJ9U84HhCFm7ir+HpfG8N8Bw==", "castbridge-sale-v1\nseq=4\nat=1800000004000\nkind=SALE\nagent=8a6e44fcd9a9bb73\ndevice=ZX8P-S2TH-N5PG-V9V7\nlicense=lic-0001\nseat=0123456789abcdef\nitem=cle-production|90\nprice=2500\ncash=2500\ngrid=2026-10-02T09:00:00Z\nreceipt=R-E5P8-YAGF\nfp=abababababababababababababababababababababababababababababababab\nprev=9f2141aacd336811\nhash=ed530a1fb34cef1f\nsig=ezNgZACh971y12wqEKKfvUb19jOnHhB4SaGI7JmVEeZB+1FDNFHndQJm66MsZEESESgxBLk7HZiuuKzWKH2rDw=="],
+      "pub": "agent",
+      "expect": {
+        "result": "gap",
+        "seq": 2
+      }
+    },
+    {
+      "id": "ledger-diverged-prev",
+      "type": "ledger",
+      "description": "l'entrée 3 ne suit pas l'entrée 2 (prev faux, bien signée)",
+      "entries": ["castbridge-sale-v1\nseq=1\nat=1800000001000\nkind=SALE\nagent=8a6e44fcd9a9bb73\ndevice=ZX8P-S2TH-N5PG-V9V7\nlicense=lic-0001\nseat=0123456789abcdef\nitem=cle-production|90\nprice=2500\ncash=2500\ngrid=2026-10-02T09:00:00Z\nreceipt=R-B3JY-P0A8\nfp=abababababababababababababababababababababababababababababababab\nprev=0\nhash=20c4621e71845fb0\nsig=F89gMYM3eHuRyEw6FbwDQZqiFT31wJ7J1EALnm9YwD/u8lQJXXjrI8sDXWl3h72rS+f6+m7jAEF4e4PHUG6sDw==", "castbridge-sale-v1\nseq=2\nat=1800000002000\nkind=SALE\nagent=8a6e44fcd9a9bb73\ndevice=ZX8P-S2TH-N5PG-V9V7\nlicense=lic-0001\nseat=0123456789abcdef\nitem=cle-production|90\nprice=2500\ncash=2500\ngrid=2026-10-02T09:00:00Z\nreceipt=R-RSW2-BZJZ\nfp=abababababababababababababababababababababababababababababababab\nprev=20c4621e71845fb0\nhash=2ab50011435e198a\nsig=Bm4rpmHwiVrgivUJWo9R9wenzEuMzZAC9HC+1hS0yB172xma5Nd9nEbwbu5PzUJpHGqzGisGIHQSOhwfKaThBQ==", "castbridge-sale-v1\nseq=3\nat=1800000003000\nkind=SALE\nagent=8a6e44fcd9a9bb73\ndevice=ZX8P-S2TH-N5PG-V9V7\nlicense=lic-0001\nseat=0123456789abcdef\nitem=cle-production|90\nprice=2500\ncash=2500\ngrid=2026-10-02T09:00:00Z\nreceipt=R-XR4Z-H4ZA\nfp=abababababababababababababababababababababababababababababababab\nprev=00000000deadbeef\nhash=4e319453e9e617cb\nsig=P/6gjMnzE339yio2flzNb3gO0LJmDN1K/fs4CC3KDx5G+wcC7LmxBlw2nIi4cWGFw6zJO7tzVLhDCW7ne5xKAw==", "castbridge-sale-v1\nseq=4\nat=1800000004000\nkind=SALE\nagent=8a6e44fcd9a9bb73\ndevice=ZX8P-S2TH-N5PG-V9V7\nlicense=lic-0001\nseat=0123456789abcdef\nitem=cle-production|90\nprice=2500\ncash=2500\ngrid=2026-10-02T09:00:00Z\nreceipt=R-E5P8-YAGF\nfp=abababababababababababababababababababababababababababababababab\nprev=9f2141aacd336811\nhash=ed530a1fb34cef1f\nsig=ezNgZACh971y12wqEKKfvUb19jOnHhB4SaGI7JmVEeZB+1FDNFHndQJm66MsZEESESgxBLk7HZiuuKzWKH2rDw=="],
+      "pub": "agent",
+      "expect": {
+        "result": "diverged",
+        "seq": 3
+      }
+    },
+    {
+      "id": "ledger-diverged-altered",
+      "type": "ledger",
+      "description": "contenu modifié sans recalcul du hash",
+      "entries": ["castbridge-sale-v1\nseq=1\nat=1800000001000\nkind=SALE\nagent=8a6e44fcd9a9bb73\ndevice=ZX8P-S2TH-N5PG-V9V7\nlicense=lic-0001\nseat=0123456789abcdef\nitem=cle-production|90\nprice=2500\ncash=2500\ngrid=2026-10-02T09:00:00Z\nreceipt=R-B3JY-P0A8\nfp=abababababababababababababababababababababababababababababababab\nprev=0\nhash=20c4621e71845fb0\nsig=F89gMYM3eHuRyEw6FbwDQZqiFT31wJ7J1EALnm9YwD/u8lQJXXjrI8sDXWl3h72rS+f6+m7jAEF4e4PHUG6sDw==", "castbridge-sale-v1\nseq=2\nat=1800000002000\nkind=SALE\nagent=8a6e44fcd9a9bb73\ndevice=ZX8P-S2TH-N5PG-V9V7\nlicense=lic-0001\nseat=0123456789abcdef\nitem=cle-production|90\nprice=2500\ncash=1\ngrid=2026-10-02T09:00:00Z\nreceipt=R-RSW2-BZJZ\nfp=abababababababababababababababababababababababababababababababab\nprev=20c4621e71845fb0\nhash=2ab50011435e198a\nsig=Bm4rpmHwiVrgivUJWo9R9wenzEuMzZAC9HC+1hS0yB172xma5Nd9nEbwbu5PzUJpHGqzGisGIHQSOhwfKaThBQ==", "castbridge-sale-v1\nseq=3\nat=1800000003000\nkind=SALE\nagent=8a6e44fcd9a9bb73\ndevice=ZX8P-S2TH-N5PG-V9V7\nlicense=lic-0001\nseat=0123456789abcdef\nitem=cle-production|90\nprice=2500\ncash=2500\ngrid=2026-10-02T09:00:00Z\nreceipt=R-XR4Z-H4ZA\nfp=abababababababababababababababababababababababababababababababab\nprev=2ab50011435e198a\nhash=9f2141aacd336811\nsig=tjA+61uHoEVjjYEQXpUuDgMXPki6AmIGBckOj7Icm4ofw04NM6e3hCFppzi+L5TJ9U84HhCFm7ir+HpfG8N8Bw=="],
+      "pub": "agent",
+      "expect": {
+        "result": "diverged",
+        "seq": 2
+      }
+    },
+    {
+      "id": "ledger-bad-signature",
+      "type": "ledger",
+      "description": "hash recalculé mais signature de l'ancien texte",
+      "entries": ["castbridge-sale-v1\nseq=1\nat=1800000001000\nkind=SALE\nagent=8a6e44fcd9a9bb73\ndevice=ZX8P-S2TH-N5PG-V9V7\nlicense=lic-0001\nseat=0123456789abcdef\nitem=cle-production|90\nprice=2500\ncash=2500\ngrid=2026-10-02T09:00:00Z\nreceipt=R-B3JY-P0A8\nfp=abababababababababababababababababababababababababababababababab\nprev=0\nhash=20c4621e71845fb0\nsig=F89gMYM3eHuRyEw6FbwDQZqiFT31wJ7J1EALnm9YwD/u8lQJXXjrI8sDXWl3h72rS+f6+m7jAEF4e4PHUG6sDw==", "castbridge-sale-v1\nseq=2\nat=1800000002000\nkind=SALE\nagent=8a6e44fcd9a9bb73\ndevice=ZX8P-S2TH-N5PG-V9V7\nlicense=lic-0001\nseat=0123456789abcdef\nitem=cle-production|90\nprice=2500\ncash=1\ngrid=2026-10-02T09:00:00Z\nreceipt=R-RSW2-BZJZ\nfp=abababababababababababababababababababababababababababababababab\nprev=20c4621e71845fb0\nhash=2ab85499eb2016b8\nsig=Bm4rpmHwiVrgivUJWo9R9wenzEuMzZAC9HC+1hS0yB172xma5Nd9nEbwbu5PzUJpHGqzGisGIHQSOhwfKaThBQ==", "castbridge-sale-v1\nseq=3\nat=1800000003000\nkind=SALE\nagent=8a6e44fcd9a9bb73\ndevice=ZX8P-S2TH-N5PG-V9V7\nlicense=lic-0001\nseat=0123456789abcdef\nitem=cle-production|90\nprice=2500\ncash=2500\ngrid=2026-10-02T09:00:00Z\nreceipt=R-XR4Z-H4ZA\nfp=abababababababababababababababababababababababababababababababab\nprev=2ab50011435e198a\nhash=9f2141aacd336811\nsig=tjA+61uHoEVjjYEQXpUuDgMXPki6AmIGBckOj7Icm4ofw04NM6e3hCFppzi+L5TJ9U84HhCFm7ir+HpfG8N8Bw=="],
+      "pub": "agent",
+      "expect": {
+        "result": "bad-signature",
+        "seq": 2
+      }
+    },
+    {
+      "id": "receipt-code-1",
+      "type": "receipt",
+      "description": "code du reçu de la vente 1 ; saisie tolérante (minuscules, O/0, I/1), forme invalide",
+      "agent": "8a6e44fcd9a9bb73",
+      "seq": 1,
+      "device": "ZX8P-S2TH-N5PG-V9V7",
+      "at": 1800000001000,
+      "typed": [
+        {
+          "input": "r-b3jy-p0a8",
+          "expect": "R-B3JY-P0A8"
+        },
+        {
+          "input": "R-B3JY-POA8",
+          "expect": "R-B3JY-P0A8"
+        },
+        {
+          "input": "R-ABCD-EFG!",
+          "expect": null
+        }
+      ],
+      "expect": {
+        "code": "R-B3JY-P0A8"
+      }
+    },
+    {
+      "id": "receipt-code-7",
+      "type": "receipt",
+      "description": "code de la vente 7 ; un caractère faux est refusé par le contrôle",
+      "agent": "8a6e44fcd9a9bb73",
+      "seq": 7,
+      "device": "ZX8P-S2TH-N5PG-V9V7",
+      "at": 1800000000000,
+      "typed": [
+        {
+          "input": "r-4bkc-zjms",
+          "expect": "R-4BKC-ZJMS"
+        },
+        {
+          "input": "R-4BKC-ZJMS",
+          "expect": "R-4BKC-ZJMS"
+        },
+        {
+          "input": "R-ABCD-EFG!",
+          "expect": null
+        },
+        {
+          "input": "R-4BZC-ZJMS",
+          "expect": null
+        }
+      ],
+      "expect": {
+        "code": "R-4BKC-ZJMS"
+      }
+    },
+    {
+      "id": "registry-delegated-two-mandates",
+      "type": "registry-delegated",
+      "description": "deux mandats successifs du même agent : chacun rejoue ses événements, l'intervalle entre les deux est refusé",
+      "ring": ["desk", "phone", "server"],
+      "delegations": ["cbx1.Y2FzdGJyaWRnZS1lbnZlbG9wZS12MQp0eXBlPWRlbGVnYXRpb24Ka2lkPWIyZTViNDE4NjBkMWQ4YmUKc2VxPTE3ODI3MjAwMDAwMDAKbm9uY2U9YTFhMWExYTFhMWExYTFhMQppc3N1ZWRBdD0xNzgyNzIwMDAwMDAwCm5vdEJlZm9yZT0xNzgyNzIwMDAwMDAwCmV4cGlyZXNBdD0xNzkwNDk2MDAwMDAwCnRhcmdldD1hbnkKLS0KYWdlbnQ9OGE2ZTQ0ZmNkOWE5YmI3MwpwdWI9d2dlU0V3b0NaNTEweTZ1cWNwVUtUR0V4REYwaWFpNmJGSVZrRUtqb1pyRT0KbmFtZT1kb3VhbGEtYWt3YS0wMQpzY29wZXM9SVNTVUVfUFJPRFVDVElPTixJU1NVRV9UUklBTAptYXhLZXlEYXlzPTM2NQptYXhSZW50YWxEYXlzPTAKbWF4U2FsZXM9MjAwCmJ1bmRsZXM9dG91dA.b9E2AtpfnMK2WD620AJsiPelhMA1xEmTa88dRhyJoWA3rZMAFiSjGdoyil1ibi4zfL8OZnyjN+KZIdQmDuVdBw==", "cbx1.Y2FzdGJyaWRnZS1lbnZlbG9wZS12MQp0eXBlPWRlbGVnYXRpb24Ka2lkPWIyZTViNDE4NjBkMWQ4YmUKc2VxPTE4MDAwMDAwMDAwMDAKbm9uY2U9YTJhMmEyYTJhMmEyYTJhMgppc3N1ZWRBdD0xODAwMDAwMDAwMDAwCm5vdEJlZm9yZT0xODAwMDAwMDAwMDAwCmV4cGlyZXNBdD0xODA3Nzc2MDAwMDAwCnRhcmdldD1hbnkKLS0KYWdlbnQ9OGE2ZTQ0ZmNkOWE5YmI3MwpwdWI9d2dlU0V3b0NaNTEweTZ1cWNwVUtUR0V4REYwaWFpNmJGSVZrRUtqb1pyRT0KbmFtZT1kb3VhbGEtYWt3YS0wMQpzY29wZXM9SVNTVUVfUFJPRFVDVElPTixJU1NVRV9UUklBTAptYXhLZXlEYXlzPTM2NQptYXhSZW50YWxEYXlzPTAKbWF4U2FsZXM9MjAwCmJ1bmRsZXM9dG91dA.QQ8WM+uzvv6lwy/WVSo8rpr5kDcRZASSBGJB6yW4lNOUCs7lHEDsKer9YisBJ9lc1TtTVeMFwWc4TjPH6PkNAQ=="],
+      "events": [
+        {
+          "id": "c64be9fbceb19be9",
+          "kid": "8a6e44fcd9a9bb73",
+          "text": "castbridge-licence-event-v1\ntype=license\nkid=8a6e44fcd9a9bb73\nat=1787040000000\nlicense=lic-old\nseats=1\nmaxTransfersPerYear=2",
+          "signature": "2ux5lz7lAFOfe63L4/zagvOyyebDTu7i6MSO7G5zf0XZRaNaAm7PBmJQBc71mgn8EhkfRJomHKb8x7JyyH7jAA=="
+        },
+        {
+          "id": "f1de788c81171b30",
+          "kid": "8a6e44fcd9a9bb73",
+          "text": "castbridge-licence-event-v1\ntype=license\nkid=8a6e44fcd9a9bb73\nat=1800086400000\nlicense=lic-new\nseats=1\nmaxTransfersPerYear=2",
+          "signature": "vjzJNNrQDyphmTl6n/sJoA4jYyVrSQPnh9kgge+nWge+uYMIzPJK5q4/6vP2crFu2htPCpc7Ao9upsUbKT1LBw=="
+        },
+        {
+          "id": "ddd3fa6e2bd92107",
+          "kid": "8a6e44fcd9a9bb73",
+          "text": "castbridge-licence-event-v1\ntype=license\nkid=8a6e44fcd9a9bb73\nat=1795680000000\nlicense=lic-gap\nseats=1\nmaxTransfersPerYear=2",
+          "signature": "1ynUj1N5BAWZwJQU8+tnFRy/T2RvqOyip0g0RUB9SlEn141TZDaBrbsaDVhyKJA9+ov1dOswRS91GTBOQVVNDg=="
+        }
+      ],
+      "expect": {
+        "licenses": ["lic-new", "lic-old"],
+        "rejected": [
+          {
+            "index": 2,
+            "reason": "KEY_NOT_ALLOWED"
+          }
+        ]
+      }
+    },
+    {
+      "id": "registry-delegated-in-window",
+      "type": "registry-delegated",
+      "description": "événements license+issue signés par l'agent, dans la fenêtre du mandat : rejoués",
+      "ring": ["desk", "phone", "server"],
+      "delegations": ["cbx1.Y2FzdGJyaWRnZS1lbnZlbG9wZS12MQp0eXBlPWRlbGVnYXRpb24Ka2lkPWIyZTViNDE4NjBkMWQ4YmUKc2VxPTE4MDAwMDAwMDAwMDAKbm9uY2U9YTFhMWExYTFhMWExYTFhMQppc3N1ZWRBdD0xODAwMDAwMDAwMDAwCm5vdEJlZm9yZT0xODAwMDAwMDAwMDAwCmV4cGlyZXNBdD0xODA3Nzc2MDAwMDAwCnRhcmdldD1hbnkKLS0KYWdlbnQ9OGE2ZTQ0ZmNkOWE5YmI3MwpwdWI9d2dlU0V3b0NaNTEweTZ1cWNwVUtUR0V4REYwaWFpNmJGSVZrRUtqb1pyRT0KbmFtZT1kb3VhbGEtYWt3YS0wMQpzY29wZXM9SVNTVUVfUFJPRFVDVElPTixJU1NVRV9UUklBTAptYXhLZXlEYXlzPTM2NQptYXhSZW50YWxEYXlzPTAKbWF4U2FsZXM9MjAwCmJ1bmRsZXM9dG91dA.IfZUNH4FVdf0yeWLP3Tfc6zOalP1AeD3LT7ArGhGBvLjIWtU680tDguwbg6JXWi0UeBqdao7aHXeAQRV+BKBAA=="],
+      "events": [
+        {
+          "id": "0631260463bd874f",
+          "kid": "8a6e44fcd9a9bb73",
+          "text": "castbridge-licence-event-v1\ntype=license\nkid=8a6e44fcd9a9bb73\nat=1800086399999\nlicense=lic-0001\nseats=1\nmaxTransfersPerYear=2",
+          "signature": "vI7DIzr0nNFwQZtBWD20nM+fjALhEDSqXa8k4Q5NmxKZjlfCL/wAZUKf/RoxQml7wXAJt58PmYd1F2/DPX1OBQ=="
+        },
+        {
+          "id": "560b78845b01725f",
+          "kid": "8a6e44fcd9a9bb73",
+          "text": "castbridge-licence-event-v1\ntype=issue\nkid=8a6e44fcd9a9bb73\nat=1800086400000\nlicense=lic-0001\nseat=f36757c226dd2ee4\nsubject=tv\nkind=production\nnonce=c3c3c3c3c3c3c3c3\nseq=1800086400000\nnotAfter=1800259200000\nk=4\nfactor=FLASH|c48cacd81b9663d0ba97c221cbd17f4f\nfactor=ETHERNET|f91efd89e0025c2262da12cfbed43632\nfactor=WIFI|ea8b552e2240bbdd8c88c42313c4deab\nfactor=SYSTEM_SERIAL|774beacbf351b0d205f9166669e4d3c7\nfactor=BLUETOOTH|d365ea67e00585edaf8bef4d7378850d",
+          "signature": "eN8yAeKOKmPm1z5k2QdWX+VkvTq2Fdp5IaQTgXFCskzUlP3q8v3uLPd1/IDUCyARE8Lt1nDwM3jUG5TznzuGBA=="
+        }
+      ],
+      "expect": {
+        "licenses": ["lic-0001"],
+        "rejected": []
+      }
+    },
+    {
+      "id": "registry-delegated-out-of-window",
+      "type": "registry-delegated",
+      "description": "mêmes événements 91 jours après le début (mandat de 90 jours) : KEY_NOT_ALLOWED",
+      "ring": ["desk", "phone", "server"],
+      "delegations": ["cbx1.Y2FzdGJyaWRnZS1lbnZlbG9wZS12MQp0eXBlPWRlbGVnYXRpb24Ka2lkPWIyZTViNDE4NjBkMWQ4YmUKc2VxPTE4MDAwMDAwMDAwMDAKbm9uY2U9YTFhMWExYTFhMWExYTFhMQppc3N1ZWRBdD0xODAwMDAwMDAwMDAwCm5vdEJlZm9yZT0xODAwMDAwMDAwMDAwCmV4cGlyZXNBdD0xODA3Nzc2MDAwMDAwCnRhcmdldD1hbnkKLS0KYWdlbnQ9OGE2ZTQ0ZmNkOWE5YmI3MwpwdWI9d2dlU0V3b0NaNTEweTZ1cWNwVUtUR0V4REYwaWFpNmJGSVZrRUtqb1pyRT0KbmFtZT1kb3VhbGEtYWt3YS0wMQpzY29wZXM9SVNTVUVfUFJPRFVDVElPTixJU1NVRV9UUklBTAptYXhLZXlEYXlzPTM2NQptYXhSZW50YWxEYXlzPTAKbWF4U2FsZXM9MjAwCmJ1bmRsZXM9dG91dA.IfZUNH4FVdf0yeWLP3Tfc6zOalP1AeD3LT7ArGhGBvLjIWtU680tDguwbg6JXWi0UeBqdao7aHXeAQRV+BKBAA=="],
+      "events": [
+        {
+          "id": "0b0e164f100fb2af",
+          "kid": "8a6e44fcd9a9bb73",
+          "text": "castbridge-licence-event-v1\ntype=license\nkid=8a6e44fcd9a9bb73\nat=1807862399999\nlicense=lic-0001\nseats=1\nmaxTransfersPerYear=2",
+          "signature": "4S/Qn5VdvdI0Zg0UsoRxMIR2KqpK3APP/sm8RE9GMyUbXgwUq3UTd90EnHjlxa+iMLfSgN3PTWrwLjsIsoMmBA=="
+        },
+        {
+          "id": "7d5691fb34a25c70",
+          "kid": "8a6e44fcd9a9bb73",
+          "text": "castbridge-licence-event-v1\ntype=issue\nkid=8a6e44fcd9a9bb73\nat=1807862400000\nlicense=lic-0001\nseat=f36757c226dd2ee4\nsubject=tv\nkind=production\nnonce=c3c3c3c3c3c3c3c3\nseq=1807862400000\nnotAfter=1808035200000\nk=4\nfactor=FLASH|c48cacd81b9663d0ba97c221cbd17f4f\nfactor=ETHERNET|f91efd89e0025c2262da12cfbed43632\nfactor=WIFI|ea8b552e2240bbdd8c88c42313c4deab\nfactor=SYSTEM_SERIAL|774beacbf351b0d205f9166669e4d3c7\nfactor=BLUETOOTH|d365ea67e00585edaf8bef4d7378850d",
+          "signature": "vKH8xQPz/uQpREx+BoZVJsON9M4LAbLCTaXZQ9excBBagIyRraNS81iRZiRR2D1sPMnvb1g4zt/6HZhuS8CLAw=="
+        }
+      ],
+      "expect": {
+        "licenses": [],
+        "rejected": [
+          {
+            "index": 0,
+            "reason": "KEY_NOT_ALLOWED"
+          },
+          {
+            "index": 1,
+            "reason": "KEY_NOT_ALLOWED"
+          }
+        ]
+      }
+    }
+  ]
+}

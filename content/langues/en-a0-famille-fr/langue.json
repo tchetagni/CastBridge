@@ -1,0 +1,236 @@
+{
+ "format": 1,
+ "type": "langue",
+ "id": "en-a0-famille-fr",
+ "version": 1,
+ "target": "en",
+ "level": "a0",
+ "theme": "famille",
+ "source": "fr",
+ "title": "Anglais A0 — Ma famille",
+ "state": "review",
+ "units": [
+  {
+   "id": "en-a0-famille-fr-u1",
+   "title": "Papa, maman, et moi",
+   "minutes": 10,
+   "skills": [
+    "co",
+    "ce",
+    "po"
+   ],
+   "prerequisites": [],
+   "vocab": [
+    {
+     "id": "en-a0-famille-fr-v1",
+     "term": "family",
+     "gloss": "famille",
+     "pos": "n",
+     "audio": "m:en-family"
+    },
+    {
+     "id": "en-a0-famille-fr-v2",
+     "term": "father",
+     "gloss": "père",
+     "pos": "n",
+     "audio": "m:en-father"
+    },
+    {
+     "id": "en-a0-famille-fr-v3",
+     "term": "mother",
+     "gloss": "mère",
+     "pos": "n",
+     "audio": "m:en-mother"
+    },
+    {
+     "id": "en-a0-famille-fr-v4",
+     "term": "brother",
+     "gloss": "frère",
+     "pos": "n",
+     "audio": "m:en-brother"
+    },
+    {
+     "id": "en-a0-famille-fr-v5",
+     "term": "sister",
+     "gloss": "sœur",
+     "pos": "n",
+     "audio": "m:en-sister"
+    },
+    {
+     "id": "en-a0-famille-fr-v6",
+     "term": "grandfather",
+     "gloss": "grand-père",
+     "pos": "n",
+     "audio": "m:en-grandfather"
+    },
+    {
+     "id": "en-a0-famille-fr-v7",
+     "term": "grandmother",
+     "gloss": "grand-mère",
+     "pos": "n",
+     "audio": "m:en-grandmother"
+    },
+    {
+     "id": "en-a0-famille-fr-v8",
+     "term": "I",
+     "gloss": "je, moi",
+     "pos": "pron",
+     "audio": "m:en-i"
+    }
+   ],
+   "dialogues": [
+    {
+     "id": "en-a0-famille-fr-d1",
+     "title": "Ma famille",
+     "lines": [
+      {
+       "who": "A",
+       "text": "This is my father.",
+       "tr": "C'est mon père."
+      },
+      {
+       "who": "B",
+       "text": "Hello!",
+       "tr": "Bonjour !"
+      },
+      {
+       "who": "A",
+       "text": "This is my mother.",
+       "tr": "C'est ma mère."
+      },
+      {
+       "who": "B",
+       "text": "Nice family!",
+       "tr": "Chouette famille !"
+      }
+     ],
+     "audio": "m:en-famille-d1"
+    }
+   ],
+   "grammar": [
+    {
+     "id": "en-a0-famille-fr-g1",
+     "title": "« my » = mon / ma / mes",
+     "md": "**My** ne change pas : *my father* (mon père), *my mother* (ma mère).",
+     "examples": [
+      {
+       "text": "my father",
+       "tr": "mon père"
+      }
+     ]
+    }
+   ],
+   "exercises": [
+    {
+     "id": "en-a0-famille-fr-x1",
+     "kind": "mcq",
+     "prompt": "Que veut dire family ?",
+     "choices": [
+      "famille",
+      "père",
+      "mère"
+     ],
+     "correct": 0
+    },
+    {
+     "id": "en-a0-famille-fr-x2",
+     "kind": "match",
+     "prompt": "Associe chaque mot à son sens.",
+     "pairs": [
+      {
+       "a": "family",
+       "b": "famille"
+      },
+      {
+       "a": "father",
+       "b": "père"
+      },
+      {
+       "a": "mother",
+       "b": "mère"
+      },
+      {
+       "a": "brother",
+       "b": "frère"
+      },
+      {
+       "a": "sister",
+       "b": "sœur"
+      }
+     ]
+    },
+    {
+     "id": "en-a0-famille-fr-x3",
+     "kind": "dictation",
+     "prompt": "Écoute et écris le mot.",
+     "audio": "m:en-family",
+     "answers": [
+      "family"
+     ]
+    },
+    {
+     "id": "en-a0-famille-fr-x4",
+     "kind": "speak",
+     "prompt": "Dis « père » en Anglais, puis compare.",
+     "model": "father",
+     "audio": "m:en-father"
+    },
+    {
+     "id": "en-a0-famille-fr-x5",
+     "kind": "truefalse",
+     "prompt": "« my father » veut dire « mon père ».",
+     "correct": 0
+    },
+    {
+     "id": "en-a0-famille-fr-x6",
+     "kind": "translate",
+     "prompt": "Traduis : mère.",
+     "answers": [
+      "mother"
+     ]
+    },
+    {
+     "id": "en-a0-famille-fr-x7",
+     "kind": "write",
+     "prompt": "Écris « frère ».",
+     "model": "brother"
+    },
+    {
+     "id": "en-a0-famille-fr-x8",
+     "kind": "mcq",
+     "prompt": "Que veut dire sister ?",
+     "choices": [
+      "frère",
+      "sœur",
+      "famille"
+     ],
+     "correct": 1
+    }
+   ],
+   "stories": [],
+   "cards": [
+    {
+     "id": "en-a0-famille-fr-c1",
+     "vocab": "en-a0-famille-fr-v1"
+    },
+    {
+     "id": "en-a0-famille-fr-c2",
+     "vocab": "en-a0-famille-fr-v2"
+    },
+    {
+     "id": "en-a0-famille-fr-c3",
+     "vocab": "en-a0-famille-fr-v3"
+    },
+    {
+     "id": "en-a0-famille-fr-c4",
+     "vocab": "en-a0-famille-fr-v4"
+    },
+    {
+     "id": "en-a0-famille-fr-c5",
+     "vocab": "en-a0-famille-fr-v5"
+    }
+   ],
+   "animations": []
+  }
+ ]
+}

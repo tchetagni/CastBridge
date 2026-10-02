@@ -1,0 +1,258 @@
+{
+ "format": 1,
+ "type": "langue",
+ "id": "fr-a0-nombres-en",
+ "version": 1,
+ "target": "fr",
+ "level": "a0",
+ "theme": "nombres",
+ "source": "en",
+ "title": "French A0 — Numbers",
+ "state": "review",
+ "units": [
+  {
+   "id": "fr-a0-nombres-en-u1",
+   "title": "Counting from 0 to 10",
+   "minutes": 10,
+   "skills": [
+    "co",
+    "ce",
+    "po"
+   ],
+   "prerequisites": [],
+   "vocab": [
+    {
+     "id": "fr-a0-nombres-en-v1",
+     "term": "zéro",
+     "gloss": "zero",
+     "pos": "num",
+     "audio": "m:fr-zro"
+    },
+    {
+     "id": "fr-a0-nombres-en-v2",
+     "term": "un",
+     "gloss": "one",
+     "pos": "num",
+     "audio": "m:fr-un"
+    },
+    {
+     "id": "fr-a0-nombres-en-v3",
+     "term": "deux",
+     "gloss": "two",
+     "pos": "num",
+     "audio": "m:fr-deux"
+    },
+    {
+     "id": "fr-a0-nombres-en-v4",
+     "term": "trois",
+     "gloss": "three",
+     "pos": "num",
+     "audio": "m:fr-trois"
+    },
+    {
+     "id": "fr-a0-nombres-en-v5",
+     "term": "quatre",
+     "gloss": "four",
+     "pos": "num",
+     "audio": "m:fr-quatre"
+    },
+    {
+     "id": "fr-a0-nombres-en-v6",
+     "term": "cinq",
+     "gloss": "five",
+     "pos": "num",
+     "audio": "m:fr-cinq"
+    },
+    {
+     "id": "fr-a0-nombres-en-v7",
+     "term": "six",
+     "gloss": "six",
+     "pos": "num",
+     "audio": "m:fr-six"
+    },
+    {
+     "id": "fr-a0-nombres-en-v8",
+     "term": "sept",
+     "gloss": "seven",
+     "pos": "num",
+     "audio": "m:fr-sept"
+    },
+    {
+     "id": "fr-a0-nombres-en-v9",
+     "term": "huit",
+     "gloss": "eight",
+     "pos": "num",
+     "audio": "m:fr-huit"
+    },
+    {
+     "id": "fr-a0-nombres-en-v10",
+     "term": "neuf",
+     "gloss": "nine",
+     "pos": "num",
+     "audio": "m:fr-neuf"
+    },
+    {
+     "id": "fr-a0-nombres-en-v11",
+     "term": "dix",
+     "gloss": "ten",
+     "pos": "num",
+     "audio": "m:fr-dix"
+    }
+   ],
+   "dialogues": [
+    {
+     "id": "fr-a0-nombres-en-d1",
+     "title": "Counting",
+     "lines": [
+      {
+       "who": "A",
+       "text": "Un, deux, trois.",
+       "tr": "One, two, three."
+      },
+      {
+       "who": "B",
+       "text": "Quatre, cinq, six.",
+       "tr": "Four, five, six."
+      },
+      {
+       "who": "A",
+       "text": "Sept, huit, neuf, dix.",
+       "tr": "Seven, eight, nine, ten."
+      }
+     ],
+     "audio": "m:fr-nombres-d1"
+    }
+   ],
+   "grammar": [
+    {
+     "id": "fr-a0-nombres-en-g1",
+     "title": "Counting in French",
+     "md": "From **un** (1) to **dix** (10). The 'x' in *six* and *dix* sounds like 's'.",
+     "examples": [
+      {
+       "text": "un, deux, trois",
+       "tr": "one, two, three"
+      }
+     ]
+    }
+   ],
+   "exercises": [
+    {
+     "id": "fr-a0-nombres-en-x1",
+     "kind": "mcq",
+     "prompt": "What does zéro mean?",
+     "choices": [
+      "zero",
+      "one",
+      "two"
+     ],
+     "correct": 0
+    },
+    {
+     "id": "fr-a0-nombres-en-x2",
+     "kind": "match",
+     "prompt": "Match each word to its meaning.",
+     "pairs": [
+      {
+       "a": "zéro",
+       "b": "zero"
+      },
+      {
+       "a": "un",
+       "b": "one"
+      },
+      {
+       "a": "deux",
+       "b": "two"
+      },
+      {
+       "a": "trois",
+       "b": "three"
+      },
+      {
+       "a": "quatre",
+       "b": "four"
+      }
+     ]
+    },
+    {
+     "id": "fr-a0-nombres-en-x3",
+     "kind": "dictation",
+     "prompt": "Listen and write the word.",
+     "audio": "m:fr-zro",
+     "answers": [
+      "zéro"
+     ]
+    },
+    {
+     "id": "fr-a0-nombres-en-x4",
+     "kind": "speak",
+     "prompt": "Say 'one' in French, then compare.",
+     "model": "un",
+     "audio": "m:fr-un"
+    },
+    {
+     "id": "fr-a0-nombres-en-x5",
+     "kind": "truefalse",
+     "prompt": "'dix' means 'ten'.",
+     "correct": 0
+    },
+    {
+     "id": "fr-a0-nombres-en-x6",
+     "kind": "translate",
+     "prompt": "Translate: two.",
+     "answers": [
+      "deux"
+     ]
+    },
+    {
+     "id": "fr-a0-nombres-en-x7",
+     "kind": "write",
+     "prompt": "Write 'three'.",
+     "model": "trois"
+    },
+    {
+     "id": "fr-a0-nombres-en-x8",
+     "kind": "mcq",
+     "prompt": "What does quatre mean?",
+     "choices": [
+      "three",
+      "four",
+      "zero"
+     ],
+     "correct": 1
+    }
+   ],
+   "stories": [],
+   "cards": [
+    {
+     "id": "fr-a0-nombres-en-c1",
+     "vocab": "fr-a0-nombres-en-v1"
+    },
+    {
+     "id": "fr-a0-nombres-en-c2",
+     "vocab": "fr-a0-nombres-en-v2"
+    },
+    {
+     "id": "fr-a0-nombres-en-c3",
+     "vocab": "fr-a0-nombres-en-v3"
+    },
+    {
+     "id": "fr-a0-nombres-en-c4",
+     "vocab": "fr-a0-nombres-en-v4"
+    },
+    {
+     "id": "fr-a0-nombres-en-c5",
+     "vocab": "fr-a0-nombres-en-v5"
+    }
+   ],
+   "animations": [
+    {
+     "id": "fr-a0-nombres-en-u1-a1",
+     "kind": "gesture",
+     "label": "Counting from 1 to 5"
+    }
+   ]
+  }
+ ]
+}

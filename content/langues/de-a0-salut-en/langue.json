@@ -1,0 +1,261 @@
+{
+ "format": 1,
+ "type": "langue",
+ "id": "de-a0-salut-en",
+ "version": 2,
+ "target": "de",
+ "level": "a0",
+ "theme": "salut",
+ "source": "en",
+ "title": "German A0 — Greetings",
+ "state": "review",
+ "units": [
+  {
+   "id": "de-a0-salut-en-u1",
+   "title": "Hello, thank you, goodbye",
+   "minutes": 10,
+   "skills": [
+    "co",
+    "ce",
+    "po"
+   ],
+   "prerequisites": [],
+   "vocab": [
+    {
+     "id": "de-a0-salut-en-v1",
+     "term": "Hallo",
+     "gloss": "hello",
+     "pos": "interj",
+     "audio": "m:de-hallo"
+    },
+    {
+     "id": "de-a0-salut-en-v2",
+     "term": "Guten Morgen",
+     "gloss": "good morning",
+     "pos": "interj",
+     "audio": "m:de-gutenmorgen"
+    },
+    {
+     "id": "de-a0-salut-en-v3",
+     "term": "Danke",
+     "gloss": "thank you",
+     "pos": "interj",
+     "audio": "m:de-danke"
+    },
+    {
+     "id": "de-a0-salut-en-v4",
+     "term": "Bitte",
+     "gloss": "please / you're welcome",
+     "pos": "interj",
+     "audio": "m:de-bitte"
+    },
+    {
+     "id": "de-a0-salut-en-v5",
+     "term": "Auf Wiedersehen",
+     "gloss": "goodbye",
+     "pos": "interj",
+     "audio": "m:de-aufwiedersehen"
+    },
+    {
+     "id": "de-a0-salut-en-v6",
+     "term": "Tschüss",
+     "gloss": "bye",
+     "pos": "interj",
+     "audio": "m:de-tschss"
+    },
+    {
+     "id": "de-a0-salut-en-v7",
+     "term": "Ja",
+     "gloss": "yes",
+     "pos": "interj",
+     "audio": "m:de-ja"
+    },
+    {
+     "id": "de-a0-salut-en-v8",
+     "term": "Nein",
+     "gloss": "no",
+     "pos": "interj",
+     "audio": "m:de-nein"
+    },
+    {
+     "id": "de-a0-salut-en-v9",
+     "term": "Entschuldigung",
+     "gloss": "sorry",
+     "pos": "interj",
+     "audio": "m:de-entschuldigung"
+    },
+    {
+     "id": "de-a0-salut-en-v10",
+     "term": "Wie geht es dir?",
+     "gloss": "how are you?",
+     "pos": "phrase",
+     "audio": "m:de-wiegehtesdir"
+    }
+   ],
+   "dialogues": [
+    {
+     "id": "de-a0-salut-en-d1",
+     "title": "A meeting",
+     "lines": [
+      {
+       "who": "A",
+       "text": "Hallo!",
+       "tr": "Hello!"
+      },
+      {
+       "who": "B",
+       "text": "Guten Morgen!",
+       "tr": "Good morning!"
+      },
+      {
+       "who": "A",
+       "text": "Wie geht es dir?",
+       "tr": "How are you?"
+      },
+      {
+       "who": "B",
+       "text": "Gut, danke.",
+       "tr": "Fine, thanks."
+      },
+      {
+       "who": "A",
+       "text": "Auf Wiedersehen!",
+       "tr": "Goodbye!"
+      },
+      {
+       "who": "B",
+       "text": "Tschüss!",
+       "tr": "Bye!"
+      }
+     ],
+     "audio": "m:de-salut-d1",
+     "video": "m:de-salut-salut"
+    }
+   ],
+   "grammar": [
+    {
+     "id": "de-a0-salut-en-g1",
+     "title": "Nouns are capitalized",
+     "md": "In German, **all nouns** are capitalized: *Morgen*, *Wiedersehen*.",
+     "examples": [
+      {
+       "text": "Guten Morgen",
+       "tr": "good morning"
+      }
+     ]
+    }
+   ],
+   "exercises": [
+    {
+     "id": "de-a0-salut-en-x1",
+     "kind": "mcq",
+     "prompt": "What does Hallo mean?",
+     "choices": [
+      "hello",
+      "good morning",
+      "thank you"
+     ],
+     "correct": 0
+    },
+    {
+     "id": "de-a0-salut-en-x2",
+     "kind": "match",
+     "prompt": "Match each word to its meaning.",
+     "pairs": [
+      {
+       "a": "Hallo",
+       "b": "hello"
+      },
+      {
+       "a": "Guten Morgen",
+       "b": "good morning"
+      },
+      {
+       "a": "Danke",
+       "b": "thank you"
+      },
+      {
+       "a": "Bitte",
+       "b": "please / you're welcome"
+      },
+      {
+       "a": "Auf Wiedersehen",
+       "b": "goodbye"
+      }
+     ]
+    },
+    {
+     "id": "de-a0-salut-en-x3",
+     "kind": "dictation",
+     "prompt": "Listen and write the word.",
+     "audio": "m:de-hallo",
+     "answers": [
+      "Hallo"
+     ]
+    },
+    {
+     "id": "de-a0-salut-en-x4",
+     "kind": "speak",
+     "prompt": "Say 'good morning' in German, then compare.",
+     "model": "Guten Morgen",
+     "audio": "m:de-gutenmorgen"
+    },
+    {
+     "id": "de-a0-salut-en-x5",
+     "kind": "truefalse",
+     "prompt": "'Danke' means 'thank you'.",
+     "correct": 0
+    },
+    {
+     "id": "de-a0-salut-en-x6",
+     "kind": "translate",
+     "prompt": "Translate: thank you.",
+     "answers": [
+      "Danke"
+     ]
+    },
+    {
+     "id": "de-a0-salut-en-x7",
+     "kind": "write",
+     "prompt": "Write 'please / you're welcome'.",
+     "model": "Bitte"
+    },
+    {
+     "id": "de-a0-salut-en-x8",
+     "kind": "mcq",
+     "prompt": "What does Auf Wiedersehen mean?",
+     "choices": [
+      "please / you're welcome",
+      "goodbye",
+      "hello"
+     ],
+     "correct": 1
+    }
+   ],
+   "stories": [],
+   "cards": [
+    {
+     "id": "de-a0-salut-en-c1",
+     "vocab": "de-a0-salut-en-v1"
+    },
+    {
+     "id": "de-a0-salut-en-c2",
+     "vocab": "de-a0-salut-en-v2"
+    },
+    {
+     "id": "de-a0-salut-en-c3",
+     "vocab": "de-a0-salut-en-v3"
+    },
+    {
+     "id": "de-a0-salut-en-c4",
+     "vocab": "de-a0-salut-en-v4"
+    },
+    {
+     "id": "de-a0-salut-en-c5",
+     "vocab": "de-a0-salut-en-v5"
+    }
+   ],
+   "animations": []
+  }
+ ]
+}
