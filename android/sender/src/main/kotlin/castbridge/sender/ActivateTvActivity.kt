@@ -120,6 +120,9 @@ class ActivateTvActivity : ComponentActivity() {
                 Text(v.headline, color = if (v.good) MaterialTheme.colorScheme.primary else MaterialTheme.colorScheme.onSurface, style = MaterialTheme.typography.titleMedium)
                 v.detail?.let { Text(it, style = MaterialTheme.typography.bodyMedium) }
             }
+            Text(castbridge.core.tunnel.TunnelTerms.TITLE + " (" + castbridge.core.tunnel.TunnelTerms.VERSION + ")", style = MaterialTheme.typography.titleSmall)
+            Text(castbridge.core.tunnel.TunnelTerms.PHONE_NOTE, style = MaterialTheme.typography.bodySmall)
+            Text(castbridge.core.tunnel.TunnelTerms.TEXT, style = MaterialTheme.typography.bodySmall)
             Text("1. Copiez la clé d'activation (ou de production) reçue (message, e-mail…), puis collez-la ici.", style = MaterialTheme.typography.bodyMedium)
             OutlinedTextField(key, { key = it; msg = null }, label = { Text("Clé d'activation") }, textStyle = androidx.compose.ui.text.TextStyle(fontFamily = FontFamily.Monospace, fontSize = 12.sp),
                 modifier = Modifier.fillMaxWidth().heightIn(min = 110.dp))

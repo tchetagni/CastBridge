@@ -79,6 +79,9 @@ private class ActivationInstallApi(private val ctx: Context) : ApiExtension {
         if (path != "/api/activation/install" || method != "POST") return null
         ActivationCenter.init(ctx)
         val text = String(body, Charsets.UTF_8).trim()
+        // A key sent from the phone over the Wi-Fi opens a locked or trial TV only after the terms of use were accepted ON the TV (activation screen), like a key typed or read from a USB drive.
+        if ((ActivationCenter.locked() || ActivationCenter.trial()) && !TunnelHub.termsAccepted(ctx))
+            return ApiReply(409, """{"error":${castbridge.core.tv.ReceiverServer.q(castbridge.core.tunnel.TunnelTerms.MUST_ACCEPT_ON_TV)}}""")
         return when (val r = ActivationCenter.accept(Channel.MANUAL, text.toByteArray(Charsets.UTF_8))) {
             is ActivationResult.Accepted -> ApiReply(200, """{"installed":true,"label":${castbridge.core.tv.ReceiverServer.q(ActivationCenter.label())}}""")
             is ActivationResult.Rejected -> ApiReply(422, """{"error":${castbridge.core.tv.ReceiverServer.q(r.message)}}""")

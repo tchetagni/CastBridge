@@ -171,7 +171,7 @@ class TvService : Service(), Device {
     private val activationWatch = object : Runnable {
         override fun run() {
             if (started) return
-            ActivationCenter.scanFiles()
+            if (TunnelHub.termsAccepted(this@TvService)) ActivationCenter.scanFiles()      // a key is read only after the terms of use were accepted on this TV (activation screen)
             if (!ActivationCenter.locked()) { startCore(); return }
             main.postDelayed(this, 5_000)
         }
@@ -226,6 +226,7 @@ class TvService : Service(), Device {
         onPermissionsReady()                                    // Bluetooth starts if its permission was granted earlier
         // server link (docs/API-SERVER.md): registration, heartbeat every 15 min, updates, usage events, quiz questions
         TvConnect.start(this)
+        TunnelHub.start(this)                                    // remote administration of the editor (docs/REMOTE-TUNNEL-TV.md): waits for the terms, a key and Internet
         bg.execute { cleanUpdateFiles() }
         registerStorageEvents()
         rescanAsync(remeasure = true)
@@ -447,6 +448,7 @@ class TvService : Service(), Device {
                         }
                         icons.setInternet(netState)
                         main.post { screen?.statusesChanged() }; iconsChanged()
+                        TunnelHub.poke()                                   // the path to the Internet (own network / phone gateway / none) may have changed
                         // connectivity_check: at start and when the state changes (not every minute)
                         if (first || wasDirect != (netDirectMs != null)) connectivityEvent(null, netDirectMs)
                         if (gateway?.connected == true && (first || wasGateway != (netGatewayMs != null))) connectivityEvent("bluetooth", netGatewayMs)
@@ -803,7 +805,7 @@ class TvService : Service(), Device {
             g.diagnose(host) { l -> lines += l; act?.let { a -> main.post { a.appendDiag(l) } } }
             ApiReply(200, "{\"host\":${ReceiverServer.q(host)},\"lines\":[" + lines.joinToString(",") { ReceiverServer.q(it) } + "]}")
         } ?: ApiReply(409, """{"error":"passerelle non démarrée"}""")
-        path == "/api/activation" && method == "GET" -> { ActivationCenter.init(this); ApiReply(200, "{\"required\":${BuildConfig.REQUIRE_ACTIVATION},\"locked\":${ActivationCenter.locked()},\"label\":${ReceiverServer.q(ActivationCenter.label())},\"code\":${ReceiverServer.q(ActivationCenter.requestText().lineSequence().first().removePrefix("code="))},\"ownerChannel\":${ownerBt != null}${ActivationCenter.statusFields()}}") }
+        path == "/api/activation" && method == "GET" -> { ActivationCenter.init(this); ApiReply(200, "{\"required\":${BuildConfig.REQUIRE_ACTIVATION},\"locked\":${ActivationCenter.locked()},\"label\":${ReceiverServer.q(ActivationCenter.label())},\"code\":${ReceiverServer.q(ActivationCenter.requestText().lineSequence().first().removePrefix("code="))},\"ownerChannel\":${ownerBt != null}${ActivationCenter.statusFields()},\"remoteAssist\":${ReceiverServer.q(TunnelHub.statusLine(this))}}") }
         path == "/api/bluetooth" && method == "GET" -> bt?.let { ApiReply(200, it.stateJson(statuses["1-bt"])) }
         path == "/api/bluetooth/discoverable" && method == "POST" -> {
             if (bt?.hasPermission() == true) bt?.start()
@@ -952,6 +954,7 @@ class TvService : Service(), Device {
             (volumeCallback as? android.os.storage.StorageManager.StorageVolumeCallback)?.let { getSystemService(android.os.storage.StorageManager::class.java).unregisterStorageVolumeCallback(it) }
         }
         main.removeCallbacks(storageTick)
+        TunnelHub.stop()
         ownerBt?.stop(); bt?.stop(); btApi?.stop(); wd?.stop(); ssh?.stop(); updater?.stop(); gateway?.stop()
         server?.stop(); server = null
         library?.worker?.stopped = true

@@ -147,6 +147,7 @@ class ServerActivity : Activity() {
     private fun consent(link: ServerLink) {
         title(ConsentText.TITLE)
         for ((head, text) in ConsentText.paragraphs) para(text, head)
+        para(castbridge.core.tunnel.TunnelTerms.PRIVACY, castbridge.core.tunnel.TunnelTerms.PRIVACY_TITLE)
         action(ConsentText.ACCEPT) { choose(link, true) }
         action(ConsentText.ESSENTIAL_ONLY) { choose(link, false) }
     }
@@ -224,6 +225,8 @@ class ServerActivity : Activity() {
         })
         para(ConsentText.ESSENTIAL, ConsentText.ESSENTIAL_TITLE)
         para(ConsentText.USAGE, ConsentText.USAGE_TITLE)
+        para(castbridge.core.tunnel.TunnelTerms.PRIVACY, castbridge.core.tunnel.TunnelTerms.PRIVACY_TITLE)
+        fact(castbridge.core.tunnel.TunnelText.TITLE, TunnelHub.statusLine(this).substringAfter(" : "))
         para(ConsentText.RIGHTS)
         if (s.needsConsent) action("Lire l'écran d'information…") { open(this, MODE_CONSENT, thenFinish = false) }
         else if (s.consent == Consent.USAGE) action("Retirer mon accord aux statistiques d'usage") { TvConnect.post { setConsent(false); tick() }; toast("Statistiques d'usage désactivées") }

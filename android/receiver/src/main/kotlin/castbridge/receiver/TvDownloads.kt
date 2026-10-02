@@ -101,6 +101,8 @@ class TvDownloads private constructor(private val app: Context, @Volatile privat
 
     /** aria2 runs only while there are downloads (plus 3 idle minutes): its DHT and buffers cost RAM on a 1 GB TV. */
     private fun engineOnDemand() {
+        // the trial edition has no downloads at all (owner's rule): aria2 never starts, and is stopped if it was running when the trial began (queued downloads stay on disk, untouched)
+        if (ActivationCenter.trial()) { if (supervisor.state != Aria2Supervisor.State.STOPPED) supervisor.stop(); idleSince = 0; return }
         val now = android.os.SystemClock.elapsedRealtime()
         if (manager.hasWork()) {
             idleSince = 0

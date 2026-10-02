@@ -12,6 +12,7 @@ import android.view.Gravity
 import android.view.KeyEvent
 import android.view.View
 import android.widget.Button
+import android.widget.CheckBox
 import android.widget.EditText
 import android.widget.LinearLayout
 import android.widget.ScrollView
@@ -22,6 +23,7 @@ import castbridge.core.owner.FeatureGate
 import castbridge.core.owner.GateState
 import castbridge.core.owner.LockedTexts
 import castbridge.core.owner.TrialPolicy
+import castbridge.core.tunnel.TunnelTerms
 import java.text.DateFormat
 import java.util.Date
 
@@ -46,8 +48,9 @@ class ActivationActivity : Activity() {
                     validate.requestFocus()
                 }
             }
-            val r = Thread { val res = ActivationCenter.scanFiles(); h.post { if (res != null) show(res, "la clé USB") } }
-            r.start(); h.postDelayed(this, 2_000)
+            // a key is read from the USB drive only once the terms of use are accepted on this TV
+            if (TunnelHub.termsAccepted(this@ActivationActivity)) { val r = Thread { val res = ActivationCenter.scanFiles(); h.post { if (res != null) show(res, "la clé USB") } }; r.start() }
+            h.postDelayed(this, 2_000)
         }
     }
 
@@ -78,6 +81,18 @@ class ActivationActivity : Activity() {
             col.addView(tv(LockedTexts.NOTICE, 18f, 0xFFB8C0D6.toInt()))
         }
         if (state is GateState.Grace) col.addView(tv(LockedTexts.GRACE + "\nJusqu'au " + DateFormat.getDateInstance(DateFormat.LONG).format(Date(state.untilMs)) + ".", 18f, 0xFFF5B027.toInt()))
+        // Terms of use (docs/CONDITIONS-ASSISTANCE-A-DISTANCE.md): accepted here, on this TV, before any key is taken (locked AND upgrade modes). Text: TunnelTerms (à valider par le propriétaire).
+        col.addView(tv(TunnelTerms.TITLE + " (" + TunnelTerms.VERSION + ")", 22f, 0xFFF5B027.toInt(), bold = true))
+        col.addView(tv(TunnelTerms.TEXT, 15f, 0xFFB8C0D6.toInt()))
+        termsBox = CheckBox(this).apply {
+            text = TunnelTerms.CHECKBOX; textSize = 20f; setTextColor(Color.WHITE)
+            isChecked = TunnelHub.termsAccepted(this@ActivationActivity)
+            setOnCheckedChangeListener { _, on ->
+                if (on) { if (!TunnelHub.acceptTerms(this@ActivationActivity)) { isChecked = false; status.setTextColor(0xFFFF8A80.toInt()); status.text = "Impossible d'enregistrer l'acceptation : réessayez." } }
+                else TunnelHub.withdrawTerms(this@ActivationActivity)
+            }
+        }
+        col.addView(termsBox)
         col.addView(tv(LockedTexts.REQUEST, 22f, bold = true))
         col.addView(tv("Code d'appareil", 18f, 0xFFB8C0D6.toInt()))
         col.addView(tv(ActivationCenter.deviceCode, 54f, 0xFFF5B027.toInt(), bold = true, mono = true))
@@ -96,7 +111,7 @@ class ActivationActivity : Activity() {
         col.addView(input, LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT))
         validate = Button(this).apply { text = "Valider la clé"; textSize = 20f; setOnClickListener { enter() } }
         col.addView(validate)
-        col.addView(Button(this).apply { text = "Chercher la clé sur la clé USB"; textSize = 20f; setOnClickListener { Thread { val r = ActivationCenter.scanFiles(); h.post { if (r != null) show(r, "la clé USB") else status.text = "Aucun fichier « activation » trouvé sur la clé USB." } }.start() } })
+        col.addView(Button(this).apply { text = "Chercher la clé sur la clé USB"; textSize = 20f; setOnClickListener { if (!termsOk()) { status.setTextColor(0xFFFF8A80.toInt()); status.text = TunnelTerms.MUST_ACCEPT; termsBox.requestFocus(); return@setOnClickListener }; Thread { val r = ActivationCenter.scanFiles(); h.post { if (r != null) show(r, "la clé USB") else status.text = "Aucun fichier « activation » trouvé sur la clé USB." } }.start() } })
         col.addView(tv("Plus simple : sur le téléphone, ouvrez CastBridge > « Activer la TV », collez la clé : le téléphone trouve cette TV par Bluetooth et l'envoie.", 18f, 0xFFB8C0D6.toInt()))
         col.addView(Button(this).apply { text = "Rendre la TV visible pour le téléphone (Bluetooth)"; textSize = 20f; setOnClickListener { makeVisible() } })
         if (state is GateState.Grace) col.addView(Button(this).apply { text = "Continuer sans activer pour l'instant"; textSize = 20f; setOnClickListener { goOn() } })
@@ -106,6 +121,8 @@ class ActivationActivity : Activity() {
     companion object { const val EXTRA_UPGRADE = "upgrade" }
     private lateinit var btLine: TextView
     private lateinit var validate: Button
+    private lateinit var termsBox: CheckBox
+    private fun termsOk(): Boolean = termsBox.isChecked && TunnelHub.termsAccepted(this)
     private var askedVisible = false
     /** Makes the TV discoverable for 5 minutes (the system asks for a confirmation on the TV), so the owner's phone can find it and pair by itself. */
     private fun makeVisible() {
@@ -116,6 +133,7 @@ class ActivationActivity : Activity() {
 
     private fun enter() {
         val text = input.text.toString().trim()
+        if (!termsOk()) { status.setTextColor(0xFFFF8A80.toInt()); status.text = TunnelTerms.MUST_ACCEPT; termsBox.requestFocus(); return }
         if (text.isEmpty()) { status.text = "Saisissez d'abord la clé."; return }
         Thread { val r = ActivationCenter.accept(Channel.MANUAL, text.toByteArray(Charsets.UTF_8)); h.post { show(r, "la saisie") } }.start()
     }

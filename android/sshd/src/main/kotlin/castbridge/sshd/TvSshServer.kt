@@ -53,6 +53,19 @@ class TvSshServer(
     val peers: PeerRegistry = PeerRegistry(),
     /** In-process commands (`ssh host 'cbdev …'`): given the command line, writes its output and returns the exit code, or null when the line is not one of them (the shell runs it). */
     private val builtin: ((String, java.io.OutputStream) -> Int?)? = null,
+    /**
+     * Listen on this address only (null = every interface). The editor's tunnel instance (docs/REMOTE-TUNNEL-TV.md) binds 127.0.0.1: the only way in is the reverse tunnel.
+     */
+    private val bindHost: String? = null,
+    /**
+     * Replaces the authorized_keys file: given the base64 blob of the key a client presents, returns the identifier of the matching key (an expert) or null (refused). Keys only, never a password.
+     * Used by the tunnel instance, whose keys are the owner-signed experts list; it has no key file and [addKey] is not used with it.
+     */
+    private val keyAuthority: ((String) -> String?)? = null,
+    /** Told the identifier returned by [keyAuthority] at each successful login (the tunnel's local journal). */
+    private val onLogin: ((String) -> Unit)? = null,
+    /** False = no idle stop (the tunnel instance lives exactly as long as the tunnel does). */
+    private val idleStop: Boolean = true,
 ) {
     private var sshd: SshServer? = null
     private val stopping = AtomicBoolean(false)
@@ -108,13 +121,15 @@ class TvSshServer(
             listOf(BuiltinDHFactories.ecdhp256, BuiltinDHFactories.ecdhp384, BuiltinDHFactories.ecdhp521,
                 BuiltinDHFactories.dhgex256, BuiltinDHFactories.dhg14_256), ServerBuilder.DH2KEX)).build()
         s.port = port
+        if (bindHost != null) s.host = bindHost
         s.keyPairProvider = hostKeyProvider() as KeyPairProvider
         s.userAuthFactories = listOf<UserAuthFactory>(UserAuthPublicKeyFactory.INSTANCE)   // no passwords, ever
         s.publickeyAuthenticator = org.apache.sshd.server.auth.pubkey.PublickeyAuthenticator { user, key, session ->
             val who = peers.clientKey(session.remoteAddress as? InetSocketAddress)
             val presented = PublicKeyEntry.toString(key).substringAfter(' ').trim()
-            val ok = !failures.isLocked(who) && keys().any { it.base64 == presented }
-            if (ok) { failures.recordSuccess(who); log("ssh: login ${user}@$who") } else { failures.recordFailure(who); log("ssh: refused $who") }
+            val id = if (failures.isLocked(who)) null else if (keyAuthority != null) keyAuthority.invoke(presented) else keys().firstOrNull { it.base64 == presented }?.base64
+            val ok = id != null
+            if (ok) { failures.recordSuccess(who); log("ssh: login ${user}@$who"); if (keyAuthority != null) session.setAttribute(LOGIN_ID, id!!) } else { failures.recordFailure(who); log("ssh: refused $who") }
             ok
         }
         s.forwardingFilter = RejectAllForwardingFilter.INSTANCE
@@ -138,14 +153,14 @@ class TvSshServer(
                 }
             }
             override fun sessionEvent(session: Session, event: SessionListener.Event) {
-                if (event == SessionListener.Event.Authenticated) policy.onSessionOpened()
+                if (event == SessionListener.Event.Authenticated) { policy.onSessionOpened(); session.getAttribute(LOGIN_ID)?.let { id -> runCatching { onLogin?.invoke(id) } } }
             }
             override fun sessionClosed(session: Session) { if (session.isAuthenticated) policy.onSessionClosed() }
         })
         s.start()
         sshd = s
         stopping.set(false)
-        watchdog = Thread({
+        if (idleStop) watchdog = Thread({
             while (!stopping.get()) {
                 try { Thread.sleep(5_000) } catch (e: InterruptedException) { return@Thread }
                 if (policy.shouldStop()) { log("ssh: idle timeout, stopping"); stop(); return@Thread }
@@ -164,6 +179,7 @@ class TvSshServer(
 
     companion object {
         const val DEFAULT_PORT = 2222
+        private val LOGIN_ID = org.apache.sshd.common.AttributeRepository.AttributeKey<String>()
         init { SecurityUtils.isEDDSACurveSupported() }   // touch security registration early
     }
 }

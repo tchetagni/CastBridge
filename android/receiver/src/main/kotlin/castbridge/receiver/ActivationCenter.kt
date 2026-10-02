@@ -21,6 +21,8 @@ object ActivationCenter {
     private val everyActivation = ArrayList<Activation>()
     fun allActivations(): List<Activation> = synchronized(everyActivation) { everyActivation.toList() }
     fun fingerprints(): Fingerprints = fp
+    /** The public keys this build trusts (activation, orders, owner-signed lists such as the experts of the remote assistance). */
+    fun trustedKeys(): List<TrustedKey> = trusted
     private fun remember(a: Activation) { synchronized(everyActivation) { if (everyActivation.none { it.signature == a.signature }) everyActivation += a } }
     // monotonic time of the TV (counts through sleep, never goes back during a boot): a wall clock wound back cannot freeze the usage ceilings (audit finding: clock rollback)
     private val clock = TvClock(mono = android.os.SystemClock::elapsedRealtime)

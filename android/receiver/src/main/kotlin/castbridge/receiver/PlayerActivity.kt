@@ -143,6 +143,8 @@ class PlayerActivity : Activity(), TvService.Screen {
     private fun serverScreens() {
         val link = TvConnect.link ?: return
         if (link.state.needsConsent) { if (!consentShown) { consentShown = true; ServerActivity.open(this, ServerActivity.MODE_CONSENT) }; return }
+        if (current == null && !TunnelHub.askedThisRun && !ActivationCenter.locked() && !TunnelHub.termsAccepted(this) &&
+            castbridge.core.tunnel.TunnelEnroll.pickActivation(ActivationCenter.allActivations(), ActivationCenter.now()) != null) { TunnelHub.askedThisRun = true; showTermsDialog() }
         val u = link.update
         if (u.mandatory && u.manifest != null && u.phase != castbridge.core.connect.ServerLink.Phase.UP_TO_DATE && current == null && !mandatoryShown) {
             mandatoryShown = true
@@ -151,6 +153,37 @@ class PlayerActivity : Activity(), TvService.Screen {
     }
     private var consentShown = false
     private var mandatoryShown = false
+
+    /**
+     * The terms of use of this version (docs/CONDITIONS-ASSISTANCE-A-DISTANCE.md), asked ONCE per start on the home of a TV activated before they existed, and from « À propos > Assistance à distance ».
+     * Until they are accepted the TV works as before but the remote-assistance tunnel does not start.
+     */
+    private fun showTermsDialog() {
+        val tv = TextView(this).apply { text = castbridge.core.tunnel.TunnelTerms.TEXT; textSize = TvStyle.Type.CAPTION; setTextColor(TvStyle.TEXT); setPadding(32, 24, 32, 24) }
+        val sv = android.widget.ScrollView(this).apply { addView(tv); setBackgroundColor(TvStyle.BG_ELEVATED) }
+        AlertDialog.Builder(this).setTitle(castbridge.core.tunnel.TunnelTerms.TITLE + " (" + castbridge.core.tunnel.TunnelTerms.VERSION + ")").setView(sv)
+            .setPositiveButton(castbridge.core.tunnel.TunnelTerms.ACCEPT_BUTTON) { _, _ ->
+                flash(if (TunnelHub.acceptTerms(this)) "Conditions acceptées." else "Impossible d'enregistrer l'acceptation : réessayez depuis le menu.")
+            }
+            .setNegativeButton(castbridge.core.tunnel.TunnelTerms.LATER_BUTTON, null).show()
+    }
+
+    /** « À propos > Assistance à distance »: the state line, the detail and the local journal of connections and of the experts that logged in. */
+    fun showAssistance() {
+        val lines = TunnelHub.journalLines(this, 40)
+        val text = buildString {
+            append(TunnelHub.statusLine(this@PlayerActivity)); TunnelHub.detail(this@PlayerActivity)?.let { append('\n').append(it) }
+            append("\n\n").append(castbridge.core.tunnel.TunnelTerms.VERSION).append(" : ").append(if (TunnelHub.termsAccepted(this@PlayerActivity)) "acceptées" else "non acceptées")
+            append("\n\nJournal local (connexions, déconnexions, experts connectés) :\n")
+            append(if (lines.isEmpty()) castbridge.core.tunnel.TunnelText.EMPTY_JOURNAL else lines.asReversed().joinToString("\n"))
+        }
+        val tv = TextView(this).apply { typeface = android.graphics.Typeface.MONOSPACE; textSize = TvStyle.Type.CAPTION; setTextColor(TvStyle.TEXT); setPadding(32, 24, 32, 24); this.text = text }
+        val b = AlertDialog.Builder(this).setTitle("À propos : " + castbridge.core.tunnel.TunnelText.TITLE)
+            .setView(android.widget.ScrollView(this).apply { addView(tv); setBackgroundColor(TvStyle.BG_ELEVATED) })
+            .setPositiveButton("Fermer", null)
+            .setNeutralButton("Lire les conditions…") { _, _ -> showTermsDialog() }
+        b.show()
+    }
 
     override fun onPause() {
         super.onPause()
@@ -589,6 +622,8 @@ class PlayerActivity : Activity(), TvService.Screen {
             add("Démarrage avec la TV" to if (prefs.getBool("autostart", true)) "oui" else "non")
             add("Lecture lancée depuis le téléphone" to if (s.overlayAllowed()) "s'ouvre toute seule" else "demande d'ouvrir l'app (autorisation « afficher par-dessus » non accordée)")
             statuses.toSortedMap().forEach { (k, v) -> add((labels[k] ?: k) to v.substringAfter(" : ", v)) }
+            // « Assistance à distance : connectée / hors ligne / en attente d'acceptation des conditions » (silent in daily use, readable here; journal under the menu « À propos »)
+            add(castbridge.core.tunnel.TunnelText.TITLE to (TunnelHub.statusLine(this@PlayerActivity).substringAfter(" : ") + (TunnelHub.detail(this@PlayerActivity)?.let { "\n$it" } ?: "")))
             TvConnect.link?.state?.let { st ->
                 add("Identifiant de la TV (serveur CastBridge)" to (st.shortId ?: "pas encore enregistrée"))
                 add("Serveur CastBridge" to (if (st.lastContactOk) "connecté" else st.lastContactMessage ?: "pas encore contacté") +
@@ -699,6 +734,7 @@ class PlayerActivity : Activity(), TvService.Screen {
         items += "Mises à jour (serveur CastBridge)…" to { TvConnect.feature("updates", "menu"); ServerActivity.open(this, ServerActivity.MODE_UPDATES) }
         items += "Confidentialité : mes données, statistiques d'usage…" to { ServerActivity.open(this, ServerActivity.MODE_PRIVACY) }
         items += "Connexion au serveur (identifiant de la TV)…" to { ServerActivity.open(this, ServerActivity.MODE_CONNECTION) }
+        items += "À propos : Assistance à distance (état et journal)…" to { showAssistance() }
         items += "Options développeur (débogage USB / Wi-Fi)" to { flash(openDevSettings()) }
         items += "Tester le relais Bluetooth (volume + puis −)" to {
             showDiag("Relais du service du fabricant")
