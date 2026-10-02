@@ -14,6 +14,7 @@ class XferTextsTest {
         Row("Wi-Fi nommé", XferState.Uploading("a.mp4", 1, 2, "wifi"), "Envoi de a.mp4 (Wi-Fi) · 50 %", 50, false, true),
         Row("téléchargement", XferState.Uploading("b.mp4", 3, 4, "téléchargement"), "Téléchargement de b.mp4 · 75 %", 75, false, true),
         Row("attente réseau", XferState.Waiting("a.mp4", "pas de Wi-Fi"), "En attente du réseau (pas de Wi-Fi)", null, false, true),
+        Row("attente réseau, 40 %", XferState.Waiting("a.mp4", "pas de Wi-Fi", 2, 5), "En attente du réseau (pas de Wi-Fi) · 40 %", 40, false, true),
         Row("terminé", XferState.Done("a.mp4"), "a.mp4 : envoi terminé", 100, true, false),
         Row("échec", XferState.Failed("a.mp4", "PIN incorrect"), "a.mp4 : échec de l'envoi (PIN incorrect)", null, true, false),
         Row("échec sans raison", XferState.Failed("a.mp4", ""), "a.mp4 : échec de l'envoi (raison inconnue)", null, true, false),
@@ -29,10 +30,20 @@ class XferTextsTest {
         }
     }
 
+    @Test fun queueNotice() {
+        val running = XferTexts.notification(XferState.Queue(null))
+        assertEquals("CastBridge : envois vers la TV", running.title); assertEquals("Envoi en cours", running.text)
+        assertNull(running.progress); assertTrue(running.ongoing); assertFalse(running.final)
+        val pct = XferTexts.notification(XferState.Queue(null, 1, 4))
+        assertEquals("Envoi en cours · 25 %", pct.text); assertEquals(25, pct.progress)
+        val waits = XferTexts.notification(XferState.Queue("En attente du Wi-Fi", 0, 0))
+        assertEquals("En attente du Wi-Fi", waits.text); assertNull(waits.progress)
+    }
+
     @Test fun everyStateHasText() {
-        val all = listOf(XferState.Uploading("x", 1, 2, null), XferState.Waiting("x", "r"), XferState.Done("x"), XferState.Failed("x", "r"), XferState.Cancelled("x"))
+        val all = listOf(XferState.Uploading("x", 1, 2, null), XferState.Waiting("x", "r"), XferState.Queue(null), XferState.Done("x"), XferState.Failed("x", "r"), XferState.Cancelled("x"))
         for (s in all) assertTrue(XferTexts.notification(s).text.isNotBlank())
         for (s in all.filter { it is XferState.Failed || it is XferState.Cancelled || it is XferState.Done }) assertTrue(XferTexts.notification(s).final)
-        for (s in all.filter { it is XferState.Uploading || it is XferState.Waiting }) assertFalse(XferTexts.notification(s).final)
+        for (s in all.filter { it is XferState.Uploading || it is XferState.Waiting || it is XferState.Queue }) assertFalse(XferTexts.notification(s).final)
     }
 }
