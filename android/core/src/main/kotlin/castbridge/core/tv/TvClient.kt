@@ -26,6 +26,10 @@ class TvClient(val base: String, val pin: String? = null) {
     fun library(): String = call("GET", "/api/library")
     /** Puts a stored file in a virtual folder ("" = the root, "Titre/Saison 01" creates both levels). Moves no byte (docs/LIBRARY-AGENT.md). */
     fun setFolder(name: String, folder: String): String = call("POST", "/api/folders/set?name=${enc(name)}&folder=${enc(folder)}")
+    /** « Ranger ma bibliothèque »: what the TV would file, per folder (dry run, nothing moves). 404 on a TV older than this route. */
+    fun organizePlan(): String = call("GET", "/api/library/organize")
+    /** Files the flat files of the TV into their category folders (recomputed on the TV, renames only, nothing deleted). [max] files per call; the answer says how many remain. */
+    fun organizeApply(max: Int = 500): String = call("POST", "/api/library/organize/apply?max=$max")
     /** Marks a stored file as watched (resume position cleared) or not watched. */
     fun setWatched(name: String, watched: Boolean): String = call("POST", "/api/library/watched?name=${enc(name)}&watched=${if (watched) 1 else 0}")
     /** JPEG thumbnail, or null while the TV is still making it (retry in a moment) or if it cannot make one. */

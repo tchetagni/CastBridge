@@ -185,7 +185,8 @@ object WriteProbe {
 // Volume store: what the server needs from a volume (java.io.File for real folders, ContentResolver for SAF)
 // ---------------------------------------------------------------------------------------------------------------
 
-data class StoreEntry(val name: String, val size: Long, val part: Boolean)
+/** [folder] = the real sub-folder of a filed file ("" = the folder of the volume); [origin] = the name the phone sent it under, when the file was renamed on reception. */
+data class StoreEntry(val name: String, val size: Long, val part: Boolean, val folder: String = "", val origin: String? = null)
 
 interface VolumeStore {
     val volume: StorageVolume
@@ -222,7 +223,21 @@ open class FileStore(override val volume: StorageVolume, private val free: () ->
         l.firstOrNull { it.equals(name + Storage.PART, ignoreCase = true) }?.let { return it.dropLast(Storage.PART.length) }
         return name
     }
-    private fun f(name: String) = File(dir, diskName(name))
+    /** Real sub-folders of the received files (docs/STORAGE.md, « Rangement à la réception »): which folder holds each file, and under which name the phone sent it. */
+    val filing: FiledIndex by lazy { FiledIndex(dir) }
+
+    /**
+     * The file called [name]: flat in the volume folder, or filed in a category folder (the name is the key, unique on the TV). A name that is not
+     * there is the flat path (where a new file would go).
+     */
+    fun fileOf(name: String): File {
+        val flat = File(dir, diskName(name))
+        if (flat.isFile) return flat
+        filing.locate(name)?.let { return File(dir, it) }
+        return flat
+    }
+
+    private fun f(name: String) = fileOf(name)
     private fun p(name: String) = File(dir, diskName(name) + Storage.PART)
 
     override fun freeBytes() = free()
@@ -237,26 +252,61 @@ open class FileStore(override val volume: StorageVolume, private val free: () ->
         if (fin.exists()) fin.delete()
         if (!part.renameTo(fin)) throw IOException("rename failed")
     }
+
+    /**
+     * Files the finished flat file [name] into [folder] ("Films", "Séries/Titre/Saison 01") under the clean name [finalName]: one atomic rename on
+     * the same volume, never over an existing file. The index entry is written first (see [FiledIndex]). False = nothing changed, the file stays flat and valid.
+     */
+    fun fileInto(name: String, folder: String, finalName: String, origin: String?): Boolean = synchronized(filing) {
+        val src = File(dir, diskName(name))
+        if (!src.isFile) return@synchronized false
+        val rel = if (folder.isEmpty()) finalName else "$folder/$finalName"
+        val target = UsbPaths.resolve(dir, rel) ?: return@synchronized false
+        if (target.exists()) return@synchronized false
+        if (filing.locate(finalName) != null) return@synchronized false
+        target.parentFile?.let { if (!it.isDirectory && !it.mkdirs()) return@synchronized false }
+        filing.put(finalName, rel, origin)
+        if (!src.renameTo(target)) { filing.forget(finalName); return@synchronized false }
+        if (volume.kind != VolumeKind.INTERNAL) runCatching { java.io.FileInputStream(target).use { it.fd.sync() } }
+        true
+    }
+
     override fun open(name: String, from: Long): InputStream = java.io.FileInputStream(f(name)).also { if (from > 0) it.channel.position(from) }
-    override fun deleteFinal(name: String) = f(name).delete()
+    override fun deleteFinal(name: String): Boolean = f(name).delete().also { if (it && filing.isFiled(name)) filing.forget(name) }
     override fun deletePart(name: String) { p(name).delete() }
     /**
      * Renames in place and never replaces anything (a POSIX rename silently overwrites an existing target: two renames to the same
      * name would lose a file). On a case-insensitive volume a change of case only ("film.mkv" -> "Film.mkv") is the same entry: allowed.
-     * On a removable drive the renamed entry is synced to the medium before returning (a drive is often pulled right after).
+     * A filed file stays in its folder. On a removable drive the renamed entry is synced to the medium before returning (a drive is often pulled right after).
      */
-    override fun rename(from: String, to: String): Boolean {
+    override fun rename(from: String, to: String): Boolean = synchronized(filing) {
         val src = f(from)
-        val dst = File(dir, to)
-        if (!src.isFile) return false
-        if (dst.exists() && !(volume.fs.caseInsensitive && src.name.equals(to, ignoreCase = true) && src.name != to)) return false
-        if (!src.renameTo(dst)) return false
+        val dst = File(src.parentFile ?: dir, to)
+        if (!src.isFile) return@synchronized false
+        val caseOnly = volume.fs.caseInsensitive && src.name.equals(to, ignoreCase = true) && src.name != to
+        if (dst.exists() && !caseOnly) return@synchronized false
+        if (!from.equals(to, ignoreCase = true) && filing.isFiled(to)) return@synchronized false          // one name space across the folders
+        val oldRel = filing.locate(from).takeIf { src.parentFile?.canonicalFile != dir.canonicalFile }
+        val newRel = oldRel?.let { r -> r.substringBeforeLast('/', "").let { d -> if (d.isEmpty()) to else "$d/$to" } }
+        if (oldRel != null && newRel != null) filing.renamed(from, to, newRel)
+        if (!src.renameTo(dst)) { if (oldRel != null) filing.renamed(to, from, oldRel); return@synchronized false }
         if (volume.kind != VolumeKind.INTERNAL) runCatching { java.io.FileInputStream(dst).use { it.fd.sync() } }
-        return true
+        true
     }
-    override fun list(): List<StoreEntry> = dir.listFiles().orEmpty()
-        .filter { it.isFile && !it.name.startsWith(".") && !it.name.endsWith(Meta.SUFFIX) }
-        .map { if (it.name.endsWith(Storage.PART)) StoreEntry(it.name.removeSuffix(Storage.PART), it.length(), true) else StoreEntry(it.name, it.length(), false) }
+    override fun list(): List<StoreEntry> {
+        val flat = dir.listFiles().orEmpty()
+            .filter { it.isFile && !it.name.startsWith(".") && !it.name.endsWith(Meta.SUFFIX) }
+            .map { if (it.name.endsWith(Storage.PART)) StoreEntry(it.name.removeSuffix(Storage.PART), it.length(), true) else StoreEntry(it.name, it.length(), false) }
+        val entries = filing.entries()
+        if (entries.isEmpty()) return flat
+        val origins = filing.origins()
+        val names = flat.mapTo(HashSet()) { it.name.lowercase() }
+        val filed = entries.mapNotNull { (k, r) ->
+            if (k.lowercase() in names) return@mapNotNull null
+            File(dir, r).takeIf { it.isFile }?.let { StoreEntry(k, it.length(), false, r.substringBeforeLast('/', ""), origins[k.lowercase()]) }
+        }
+        return flat + filed
+    }
 }
 
 // ---------------------------------------------------------------------------------------------------------------

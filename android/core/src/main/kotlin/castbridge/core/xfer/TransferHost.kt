@@ -26,7 +26,8 @@ class TransferHost(
     }
     private val sessions = ConcurrentHashMap<String, Session>()
     val stats = WriteStats()
-    @Volatile var finalSizeOf: (String) -> Long? = { null }
+    /** Size of the finished file the phone means by (name, size of the manifest): the TV may have filed and renamed it, so it is asked with the size too. */
+    @Volatile var finalSizeOf: (String, Long) -> Long? = { _, _ -> null }
 
     sealed class Begin {
         class Ok(val s: Session, val resumed: Boolean) : Begin()
@@ -45,7 +46,7 @@ class TransferHost(
 
     fun begin(m: Manifest, allocate: (Manifest) -> Allocation): Begin {
         sessions[m.id]?.let { if (!it.assembler.manifest.equals(m)) discard(m.id) else return Begin.Ok(it, true) }
-        if (finalSizeOf(m.name) == m.size) return Begin.AlreadyThere
+        if (finalSizeOf(m.name, m.size) == m.size) return Begin.AlreadyThere
         if (sessions.size >= maxSessions) return Begin.Refused(429, "too many transfers in progress")
         val a = allocate(m)
         if (a is Allocation.Refused) return Begin.Refused(a.http, a.message)

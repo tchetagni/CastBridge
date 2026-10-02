@@ -465,3 +465,14 @@ Les captures de l'ancienne version (`docs/library-agent/`, § 11) montrent l'anc
 - Tâche de fond limitée à la vie du processus (§ 16.2). Pas de reprise d'un rangement interrompu après un redémarrage de l'application (le journal permet `recover()`, non branché à un écran).
 - Écrans en français uniquement (le moteur de noms gère l'anglais ; les écrans ne sont pas traduits).
 - Le parcours du sélecteur Android (« Utiliser ce dossier », autorisation) est celui d'Android 15 ; sur le Samsung il peut différer.
+
+## 17. Rangement réel à la réception (« Ranger ma bibliothèque » côté TV)
+
+Ce chapitre complète le § 13 (dossiers VIRTUELS sur la TV). Les deux coexistent : l'assistant du téléphone range toujours par étiquettes (aucun octet déplacé, réversible) ; la TV range en plus VRAIMENT les fichiers, à la réception et à la demande (détail, garanties et tableau des règles : `docs/STORAGE.md` § 10).
+
+- **Mêmes règles des deux côtés** : `Filing` (`core/tv/Filing.kt`) s'appuie sur `NameParser` et `Namer` (mêmes noms, mêmes dossiers `Séries/<Titre>/Saison NN`), avec un garde-fou plus strict que l'assistant : en dessous de 0,7 de confiance (0,8 pour un film) le nom n'est pas fait confiance, le fichier va dans `À trier` et GARDE son nom. Les dossiers virtuels du téléphone sont alignés sur les vrais dossiers dès le rangement (`FolderIndex.set`), donc l'écran du téléphone n'a rien de plus à comprendre : `folder` de `/api/library` est le dossier réel.
+- **Contrôle parental** : à la réception un nouveau fichier n'est pas encore classé (donc protégé tant qu'un parent ne l'a pas classé). À la demande, un fichier protégé n'est jamais planifié ni déplacé ni nommé (seul le nombre apparaît dans le plan) ; tout est refusé quand un profil enfant est actif. Comme pour l'assistant, un fichier non protégé renommé perd les règles attachées à son ancien NOM (celles d'un fichier précis le rendent « protégé », donc intouchable).
+- **Plan puis application** : `GET /api/library/organize` (essai à blanc), `POST /api/library/organize/apply` (recalcule, ne renomme que sur le même volume, jamais par-dessus, rien n'est supprimé : la « Corbeille CastBridge » n'a donc pas à intervenir). Téléphone : Bibliothèque de la TV > icône « Ranger les fichiers de la TV dans des dossiers » (`OrganizeOnTvDialog`) ; l'icône étoile reste l'assistant.
+- **Anciens téléphones et anciennes données** : l'API reste compatible (champs ajoutés seulement) ; un fichier ancien resté à plat est valide et rangé à la demande ; l'ancien nom d'un fichier rangé reste reconnu pour la reprise et le « déjà sur la TV ».
+- **Reste à faire** : bouton sur l'écran de la TV et réglage visible ; annulation du rangement ; `Mover` qui range à l'arrivée ; ranger aussi les fichiers diffusés pendant l'envoi une fois la lecture finie ; langue de la TV au lieu de « fr » fixe ; validation sur la vraie TV (GaiaOS) avec la vraie clé.
+

@@ -11,6 +11,12 @@ Trois produits livrés ont chacun leur numéro : **CastBridge-TV** (`tv-<version
 
 Travail du 2026-10-02 présent dans l'arbre de travail de `integration/agents` (82 fichiers modifiés et environ 100 non suivis au moment de la rédaction), **non commité** : il n'appartient à aucune version numérotée. `version.properties` annonce encore TV 0.14.17-beta / téléphone 1.2.29-beta : un APK construit depuis cet arbre porterait ces numéros avec un contenu différent du commit `faf8636`. **Commiter puis incrémenter avant tout nouveau build distribué.**
 
+### Rangement réel par catégorie et par fichier (`integration/agents`, non validé sur TV)
+- Les fichiers reçus par la CastBridge-TV sont rangés à la réception dans de vrais dossiers (`Films`, `Séries/<Titre>/Saison NN`, `Musique`, `Photos`, `Captures`, `Documents`, `Archives`, `Cours`, `Famille`, `À trier`) sous un nom propre, sur la mémoire interne et sur la clé (`Download/CastBridge/Bibliotheque/…`) : `Filing`/`FiledIndex` (`core/tv`), `FileStore.fileInto`. Jamais d'écrasement (numéro ajouté), chemins sûrs, FAT32 respecté, installateurs et paquets laissés à plat, reprise et « même nom, même taille » inchangés (le nom d'origine reste reconnu), API compatible (champs `folder`, `finalName`, `origin` ajoutés).
+- Action « Ranger ma bibliothèque » : plan (`GET /api/library/organize`) puis application (`POST /api/library/organize/apply`) pour les fichiers déjà reçus à plat ; refusée avec un profil enfant, jamais sur un fichier protégé ; entrée dans la Bibliothèque de la TV du téléphone.
+- Le quota et l'éviction comptent aussi les fichiers rangés ; `routeGuard` ferme la connexion après un refus d'envoi (corps non lu).
+- Tests : `FilingTest` (15), `FilingServerTest` (17). Voir `docs/STORAGE.md` § 10 et `docs/LIBRARY-AGENT.md` § 17.
+
 ### Activation, essai, production
 - Fenêtre d'activation, droit de plafond d'usage, essai toujours borné, règles clé d'essai / clé de production : durcissements dans `core/owner` (`Activation`, `Keys`, `FeatureGate`, `TrialPolicy`), console Propriétaire (`ownerlib`), outil de bureau et miroirs Java/Python (vecteurs de test étendus dans `tools/activation/verify_vectors.py`).
 - `version.properties` : nouvelle clé `lock.graceDays` (30 par défaut, 0 après activation du parc : décision D1 du propriétaire, `docs/TRIAL-EDITION.md` § 16).

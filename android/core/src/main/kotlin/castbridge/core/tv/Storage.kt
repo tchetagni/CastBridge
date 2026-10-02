@@ -88,11 +88,20 @@ object Storage {
     const val PART = ".part"
     private const val PLAYED = ".played"
 
-    fun files(dir: File): List<File> = dir.listFiles().orEmpty()
-        .filter { it.isFile && !it.name.endsWith(PART) && !it.name.endsWith(Meta.SUFFIX) && !it.name.startsWith(".") }
+    /** Every visible file under [dir], including the category folders of filed files (only the category folders of [Filing.ROOTS] are entered; hidden entries, the bin, the downloads and symbolic links never are). */
+    private fun walk(dir: File, depth: Int = 0): List<File> = dir.listFiles().orEmpty().flatMap { f ->
+        when {
+            f.name.startsWith(".") -> emptyList()
+            f.isFile -> listOf(f)
+            f.isDirectory && depth < 5 && (depth > 0 || f.name in Filing.ROOTS) && !UsbPaths.isSymlink(f) -> walk(f, depth + 1)
+            else -> emptyList()
+        }
+    }
+
+    fun files(dir: File): List<File> = walk(dir).filter { !it.name.endsWith(PART) && !it.name.endsWith(Meta.SUFFIX) }
 
     /** Bytes used by finished files and partial uploads. */
-    fun used(dir: File): Long = dir.listFiles().orEmpty().filter { it.isFile && !it.name.startsWith(".") }.sumOf { it.length() }
+    fun used(dir: File): Long = walk(dir).sumOf { it.length() }
 
     /**
      * Effective quota of one volume. Internal: explicit, else min(fraction of what we and the free space add up to, cap).

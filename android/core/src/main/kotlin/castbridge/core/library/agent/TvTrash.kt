@@ -103,7 +103,7 @@ class TrashApi(
             val dir = dirOf(v) ?: return err(501, "this volume cannot hold a bin")
             val bin = File(dir, BIN)
             if (!bin.isDirectory && !bin.mkdirs()) return err(500, "cannot create the bin")
-            val src = File(dir, (volumes.store(v) as FileStore).diskName(stored))
+            val src = (volumes.store(v) as FileStore).fileOf(stored)
             val id = now().toString() + "-" + java.util.UUID.randomUUID().toString().take(4)
             val target = File(bin, "${id}__$stored")
             if (target.name.toByteArray(Charsets.UTF_8).size > 250) return err(400, "name too long for the bin")
@@ -112,6 +112,7 @@ class TrashApi(
             library?.deleted(stored, size)
             folders?.stash(id, stored)
             Storage.forget(dir, stored)
+            (volumes.store(v) as? FileStore)?.filing?.forget(stored)
             changed()
             return ApiReply(200, """{"id":${q(id)},"name":${q(stored)},"volume":${q(v.id)},"size":$size}""")
         }

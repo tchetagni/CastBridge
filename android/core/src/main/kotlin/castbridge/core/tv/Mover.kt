@@ -58,7 +58,7 @@ object MoveMarker {
 object Mover {
     const val EDGE = 1 shl 20
 
-    private fun stampOf(st: VolumeStore, name: String): Long = (st as? FileStore)?.let { File(it.dir, it.diskName(name)).lastModified() } ?: 0L
+    private fun stampOf(st: VolumeStore, name: String): Long = (st as? FileStore)?.fileOf(name)?.lastModified() ?: 0L
 
     private fun edge(st: VolumeStore, name: String, from: Long, len: Int): ByteArray = st.open(name, from).use { readUpTo(it, len) }
 

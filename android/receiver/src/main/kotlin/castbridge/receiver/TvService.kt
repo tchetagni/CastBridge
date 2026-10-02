@@ -258,7 +258,9 @@ class TvService : Service(), Device {
             routeGuard = { path -> if (ActivationCenter.trial() && castbridge.core.owner.TrialPolicy.routeBlocked(path)) castbridge.core.owner.TrialPolicy.MESSAGE else null },
             tokenAuth = { t -> trust.verifyToken(t)?.also { a -> phoneSeen(a); presence.seen(a) } }, peers = btApi?.peers,
             // the phone's library assistant never touches what the parental control protects (docs/LIBRARY-AGENT.md)
-            contentFlags = castbridge.core.library.agent.EngineContentFlags(ParentalHub.engine), folders = folderIndex)
+            contentFlags = castbridge.core.library.agent.EngineContentFlags(ParentalHub.engine), folders = folderIndex,
+            // « Rangement à la réception » (docs/STORAGE.md): received files go to real category folders under a clean name; setting "file_on_receive", on by default
+            filingLang = { if (prefs.getBool("file_on_receive", true)) "fr" else null })
         try {
             s.start(15_000, false); server = s
         } catch (e: Exception) {

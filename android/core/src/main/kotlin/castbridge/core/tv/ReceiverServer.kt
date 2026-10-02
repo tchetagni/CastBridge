@@ -79,6 +79,11 @@ class ReceiverServer(
     private val hostCheck: Boolean = true,
     /** Temporary compatibility for old clients that send the PIN as `?pin=`. Off by default: the PIN travels in the X-CB-Pin header only. */
     private val legacyPinQuery: Boolean = false,
+    /**
+     * Real filing at reception (docs/STORAGE.md « Rangement à la réception »): the language of the folders ("fr"/"en") while the setting is on, null = off
+     * (files stay flat exactly as before). Asked at every reception, so the setting applies at once.
+     */
+    private val filingLang: () -> String? = { null },
 ) : NanoHTTPD(port) {
 
     override fun createClientHandler(finalAccept: java.net.Socket, inputStream: java.io.InputStream): NanoHTTPD.ClientHandler =
@@ -101,7 +106,7 @@ class ReceiverServer(
     private val uploading = java.util.concurrent.atomic.AtomicInteger()
     /** Multi-connection transfers (/api/transfer/..., see docs/TRANSFER.md); old phones never call it. */
     private val transfers = castbridge.core.xfer.TransferHost(maxStreams = maxOf(2, cfg.maxHttpThreads - 2)).also { h ->
-        h.finalSizeOf = { n -> findFinal(n)?.size }
+        h.finalSizeOf = { n, sz -> findFinalOrOrigin(n, sz)?.size }
     }
     private val chunking = java.util.concurrent.atomic.AtomicInteger()
 
@@ -119,7 +124,7 @@ class ReceiverServer(
     // ---- locating files across volumes ----
 
     private class Hit(val v: StorageVolume, val st: VolumeStore, val name: String, val size: Long) {
-        val file: File? get() = (st as? FileStore)?.let { File(it.dir, it.diskName(name)) }
+        val file: File? get() = (st as? FileStore)?.fileOf(name)
     }
 
     private fun finals(name: String): List<Hit> = volumes.volumes().mapNotNull { v ->
@@ -127,6 +132,67 @@ class ReceiverServer(
         st.finalSize(n)?.let { Hit(v, st, n, it) }
     }
     private fun findFinal(name: String): Hit? = finals(name).firstOrNull()
+
+    /**
+     * The finished file a phone means by [name] after the TV filed it under a clean name: the file of that very name, else the file the index of
+     * original names says it became, else (index lost) the file this name would be filed as today. With [size], the last two count only for a file of exactly
+     * that size (a different file with a similar name is a different file). Only the resume / "already there" paths use this: every other route is strict.
+     */
+    private fun findFinalOrOrigin(name: String, size: Long? = null): Hit? {
+        findFinal(name)?.let { return it }
+        val stores = volumes.volumes().mapNotNull { v -> (volumes.store(v) as? FileStore)?.let { v to it } }
+        for ((v, fs) in stores) {
+            val k = fs.filing.keyOfOrigin(name) ?: continue
+            val sz = fs.finalSize(k) ?: continue
+            if (size == null || sz == size) return Hit(v, fs, k, sz)
+        }
+        val lang = filingLang()
+        if (size != null && lang != null) {
+            val r = Filing.classify(name, null, size, lang = lang)
+            for ((v, fs) in stores) for (n in Filing.candidates(r, if (v.kind == VolumeKind.INTERNAL) Fs.EXT4 else v.fs)) {
+                if (!fs.filing.isFiled(n)) continue
+                val sz = fs.finalSize(n) ?: continue
+                if (sz == size) return Hit(v, fs, n, sz)
+            }
+        }
+        return null
+    }
+
+    private fun effectiveFs(v: StorageVolume): Fs = when { v.kind == VolumeKind.INTERNAL -> Fs.EXT4; v.fs == Fs.UNKNOWN -> Fs.EXFAT; else -> v.fs }
+
+    /** A name is taken when ANY volume holds a file or a partial copy of it, in any folder: the library has one name space. */
+    private fun nameTaken(n: String): Boolean = volumes.volumes().any { v ->
+        val st = volumes.store(v); val sn = v.storedName(n)
+        st.finalSize(sn) != null || st.partSize(sn) > 0
+    }
+
+    /**
+     * Files the file just committed as [diskName] (the phone sent it as [original]) into its category folder under a clean name (docs/STORAGE.md).
+     * Returns the placement, or null when the file stays flat: setting off, not a real folder (SAF), kept flat on purpose (installers, packs), being read
+     * right now, too big for the file system, any failure. Never fails the upload: a flat file is always valid.
+     */
+    private fun fileReceived(v: StorageVolume, st: VolumeStore, diskName: String, original: String, size: Long): Filing.Placement? {
+        val lang = filingLang() ?: return null
+        val fs = st as? FileStore ?: return null
+        return try {
+            // No NameSpace.lock here: the caller holds the lock of this name (the one /api/rename takes AFTER NameSpace.lock): taking it now could deadlock.
+            // The final name is checked again, atomically, by FileStore.fileInto (never over an existing file).
+            if (streamUse.busy(diskName) || isPlaying(diskName)) return null          // a reader holds the flat name: filed later by « Ranger ma bibliothèque »
+            val r = Filing.classify(original, null, size, lang = lang)
+            if (r.keepFlat) return null
+            val pl = Filing.place(r, effectiveFs(v), size, self = diskName, taken = ::nameTaken) ?: return null
+            if (!fs.fileInto(diskName, pl.folder, pl.name, original)) return null
+            folders?.set(pl.name, pl.folder)
+            invalidate()
+            pl
+        } catch (e: Exception) { null }
+    }
+
+    private fun filedJson(v: StorageVolume, name: String): String {
+        val fs = volumes.store(v) as? FileStore ?: return ""
+        val rel = fs.filing.locate(name) ?: return ""
+        return ",\"folder\":${q(rel.substringBeforeLast('/', ""))},\"finalName\":${q(name)}"
+    }
     /** The largest partial copy of [name] (there should be one; if a returned drive brings a second, the listing says so). */
     private fun findPart(name: String): Hit? = volumes.volumes().mapNotNull { v ->
         val st = volumes.store(v); val n = v.storedName(name)
@@ -162,7 +228,7 @@ class ReceiverServer(
     }
 
     init {
-        volumes.volumes().forEach { cleanOrphans(it); recoverMove(it) }
+        volumes.volumes().forEach { cleanOrphans(it); recoverMove(it); resyncFiling(it) }
         volumes.addListener { ev ->
             invalidate()
             if (!ev.present) {
@@ -171,7 +237,7 @@ class ReceiverServer(
                     onNotice("${ev.volume.label} retiré : lecture arrêtée")
                 } else onNotice("${ev.volume.label} retirée : les envois en cours reprendront à son retour")
             } else {
-                cleanOrphans(ev.volume); recoverMove(ev.volume)
+                cleanOrphans(ev.volume); recoverMove(ev.volume); resyncFiling(ev.volume)
                 val free = runCatching { volumes.free(ev.volume) }.getOrDefault(-1)
                 onNotice("${ev.volume.label} branchée" + (if (free >= 0) " : ${StorageLine.size(free)} libres" else ""))
             }
@@ -185,6 +251,9 @@ class ReceiverServer(
         val st = volumes.store(v)
         runCatching { Mover.recover(st) { id -> volumes[id]?.let { volumes.store(it) } } }.getOrNull()?.let { onNotice(it) }
     }
+
+    /** Files left by a cut between a rename and its index entry (or written by another app) are listed again: the files are the truth. */
+    private fun resyncFiling(v: StorageVolume) { runCatching { (volumes.store(v) as? FileStore)?.filing?.resync() } }
 
     /** Abandoned partial uploads must not eat scarce space; a drive that was away keeps them 7 times longer. */
     private fun cleanOrphans(v: StorageVolume) {
@@ -211,7 +280,7 @@ class ReceiverServer(
         val hit = findFinal(name) ?: return false
         playingVolume = hit.v.id
         val f = hit.file
-        if (f != null) { Storage.markPlayed(f.parentFile, f.name); player.play(f, pos) } else player.playSaf(hit.name, hit.size, pos)
+        if (f != null) { Storage.markPlayed((hit.st as? FileStore)?.dir ?: f.parentFile, f.name); player.play(f, pos) } else player.playSaf(hit.name, hit.size, pos)
         return true
     }
 
@@ -277,7 +346,7 @@ class ReceiverServer(
         val isStream = (s.method == Method.GET || s.method == Method.HEAD) && path.startsWith("/stream/")
         val loopbackStream = isStream && p["t"] == streamToken && s.remoteIpAddress.let { it == "127.0.0.1" || it == "::1" || it == "0:0:0:0:0:0:0:1" }
         // The guard (trial allowlist) sees every route; only the TV's own player (loopback + run token) is let through on /stream/.
-        if (!loopbackStream) routeGuard?.invoke(path)?.let { return json(Response.Status.FORBIDDEN, """{"error":${q(it)},"trial":true}""") }
+        if (!loopbackStream) routeGuard?.invoke(path)?.let { return json(Response.Status.FORBIDDEN, """{"error":${q(it)},"trial":true}""").also { r -> if (s.method != Method.GET) r.addHeader("Connection", "close") } }   // an unread upload body must not corrupt the next request
         publicRoutes?.serve(s)?.let { return it }
         if (!loopbackStream) denied(s, p)?.let { return it }
         if (isStream) return stream(s, path.removePrefix("/stream/"))
@@ -298,11 +367,13 @@ class ReceiverServer(
             path == "/api/storage" -> storage(s.method, p)
             path == "/api/storage/check" -> if (s.method == Method.GET) check(p) else json(Response.Status.METHOD_NOT_ALLOWED, """{"error":"use GET"}""")
             path == "/api/part" -> named(p) { name ->
-                if (findFinal(name) == null && findPart(name) == null) volumes.missingOwner(name)?.let { return@named removed() }
+                if (findFinalOrOrigin(name) == null && findPart(name) == null) volumes.missingOwner(name)?.let { return@named removed() }
                 ok(partJson(name))
             }
             path == "/api/sysinfo" -> sysinfo()
             path == "/api/library" && s.method == Method.GET -> ok(libraryJson())
+            path == "/api/library/organize" -> if (s.method == Method.GET) ok(organizeJson(organizePlan(), null)) else json(Response.Status.METHOD_NOT_ALLOWED, """{"error":"use GET"}""")
+            path == "/api/library/organize/apply" -> if (s.method == Method.POST) organizeApply(p["max"]?.toIntOrNull()) else json(Response.Status.METHOD_NOT_ALLOWED, """{"error":"use POST"}""")
             path == "/api/player/tracks" && s.method == Method.GET -> ok(tracksJson())
             path == "/api/thumb" && s.method == Method.GET -> named(p) { thumb(it, p["volume"]) }
             ext != null && ext.bytes != null -> newFixedLengthResponse(status(ext.status), ext.mime, java.io.ByteArrayInputStream(ext.bytes), ext.bytes.size.toLong())
@@ -410,7 +481,7 @@ class ReceiverServer(
                 if (hit != null) {
                     playingVolume = hit.v.id
                     val f = hit.file
-                    if (f != null) { Storage.markPlayed(f.parentFile, f.name); player.play(f, pos) }
+                    if (f != null) { Storage.markPlayed((hit.st as? FileStore)?.dir ?: f.parentFile, f.name); player.play(f, pos) }
                     else player.playSaf(hit.name, hit.size, pos)
                     ok(info())
                 } else playIncomplete(name, pos)
@@ -498,7 +569,7 @@ class ReceiverServer(
         val len = s.headers["content-length"]?.toLongOrNull() ?: return bad("content-length required")
         val target = p["target"]?.takeIf { it.isNotEmpty() } ?: cfg.target
         if (!StoragePolicy.isValidTarget(target, volumes.volumes() + volumes.missingVolumes())) return bad("bad target")
-        findFinal(name)?.let { if (it.size == total) return ok(partJson(name)) }
+        findFinalOrOrigin(name, total)?.let { if (it.size == total) return ok(partJson(name, total)) }
         synchronized(FileLocks.of(LOCK_ROOT, name)) {
             if (moving(name)) return json(Response.Status.CONFLICT, """{"error":"moving"}""")
             var owner = findPart(name)
@@ -574,11 +645,12 @@ class ReceiverServer(
                         try { st.commit(o.name) } catch (e: IOException) { throw DiskError(e) }
                         fileStore?.let { Storage.forget(it.dir, o.name); Meta.delete(it.dir, o.name) }
                         meters.remove(name); volumes.forgetPart(v, o.name)
-                        onNotice(when (MediaType.of(name)) { MediaType.VIDEO -> "Vidéo reçue"; MediaType.AUDIO -> "Musique reçue"; MediaType.OTHER -> "Fichier reçu" } + " ✓  ${LibraryLogic.title(name)}")
                         // The upload replaced any older file of that name: no silent duplicate on another volume.
                         finals(name).filter { it.v.id != v.id && !isPlaying(name) }.forEach {
                             it.st.deleteFinal(it.name); (it.st as? FileStore)?.let { f -> Storage.forget(f.dir, it.name) }
                         }
+                        val filed = fileReceived(v, st, o.name, name, total)
+                        onNotice(receivedNotice(name, filed))
                     }
                 } catch (e: DiskError) {
                     return diskFailure(v, e)
@@ -695,12 +767,13 @@ class ReceiverServer(
                         try { st.commit(sess.diskName) } catch (e: IOException) { return diskFailure(v, DiskError(e)) }
                         fileStore?.let { Storage.forget(it.dir, sess.diskName); Meta.delete(it.dir, sess.diskName) }
                         transfers.remove(sess.manifest.id)
-                        onNotice(when (MediaType.of(name)) { MediaType.VIDEO -> "Vidéo reçue"; MediaType.AUDIO -> "Musique reçue"; MediaType.OTHER -> "Fichier reçu" } + " ✓  ${LibraryLogic.title(name)}")
                         finals(name).filter { it.v.id != v.id && !isPlaying(name) }.forEach {
                             it.st.deleteFinal(it.name); (it.st as? FileStore)?.let { f -> Storage.forget(f.dir, it.name) }
                         }
+                        val filed = fileReceived(v, st, sess.diskName, name, sess.manifest.size)
+                        onNotice(receivedNotice(name, filed))
                         invalidate()
-                        ok("""{"done":true,"name":${q(name)},"volume":${q(v.id)}}""")
+                        ok("""{"done":true,"name":${q(name)},"volume":${q(v.id)}${if (filed != null) ",\"folder\":${q(filed.folder)},\"finalName\":${q(filed.name)}" else ""}}""")
                     }
                 }
             }
@@ -722,19 +795,100 @@ class ReceiverServer(
         }
     }
 
-    private fun partJson(name: String): String {
-        findFinal(name)?.let { return """{"name":${q(name)},"length":${it.size},"done":true,"volume":${q(it.v.id)}}""" }
+    private fun receivedNotice(name: String, filed: Filing.Placement?): String =
+        when (MediaType.of(name)) { MediaType.VIDEO -> "Vidéo reçue"; MediaType.AUDIO -> "Musique reçue"; MediaType.OTHER -> "Fichier reçu" } +
+            " ✓  ${LibraryLogic.title(filed?.name ?: name)}" + (filed?.folder?.takeIf { it.isNotEmpty() }?.let { " → $it" } ?: "")
+
+    // ---- « Ranger ma bibliothèque »: the one-off filing of the files that are still flat (docs/STORAGE.md) ----
+
+    private val organizing = java.util.concurrent.atomic.AtomicBoolean(false)
+
+    private class OrgPlan(val plan: Filing.Plan, val childActive: Boolean, val protectedCount: Int, val unsupported: Int)
+
+    /**
+     * Dry run: what each flat finished file would become. Nothing moves. A file the parental control protects is neither planned nor named (only counted),
+     * a file in use is listed as skipped, a SAF volume (no real folders) is counted apart. Files already filed are not looked at again (idempotent).
+     */
+    private fun organizePlan(): OrgPlan {
+        val lang = filingLang() ?: "fr"
+        val flags = contentFlags
+        val prot = flags?.protectedNames(libraryItems()).orEmpty()
+        val files = ArrayList<Filing.PlanFile>()
+        var protectedCount = 0; var unsupported = 0
+        for (e in listing().entries) {
+            if (!e.complete || e.folder.isNotEmpty()) continue
+            val fs = volumes.store(e.v) as? FileStore
+            if (fs == null) { unsupported++; continue }
+            if (fs.filing.isFiled(e.name)) continue
+            if (e.name in prot) { protectedCount++; continue }
+            val busy = busyReason(e.name)
+            files += Filing.PlanFile(e.v.id, e.name, e.size, effectiveFs(e.v), busy?.let { "occupé ($it)" })
+        }
+        return OrgPlan(Filing.plan(files, lang, taken = ::nameTaken), flags?.childActive() == true, protectedCount, unsupported)
+    }
+
+    private fun organizeJson(op: OrgPlan, result: String?): String {
+        val moves = op.plan.moves
+        val head = "{\"canApply\":${!op.childActive},\"childActive\":${op.childActive},\"count\":${moves.size},\"summary\":${q(Filing.summary(op.plan))}," +
+            "\"protected\":${op.protectedCount},\"unsupported\":${op.unsupported},"
+        val by = op.plan.byCategory.entries.joinToString(",", "{", "}") { "${q(it.key)}:${it.value}" }
+        val mv = moves.take(300).joinToString(",", "[", "]") {
+            "{\"volume\":${q(it.volumeId)},\"from\":${q(it.from)},\"folder\":${q(it.folder)},\"to\":${q(it.to)},\"category\":${q(it.category.name.lowercase())},\"note\":${q(it.note)}}"
+        }
+        val sk = op.plan.skipped.take(100).joinToString(",", "[", "]") { "{\"name\":${q(it.first)},\"reason\":${q(it.second)}}" }
+        return head + "\"byFolder\":$by,\"moves\":$mv,\"truncated\":${moves.size > 300},\"skipped\":$sk,\"skippedCount\":${op.plan.skipped.size}" + (result?.let { ",\"result\":$it" } ?: "") + "}"
+    }
+
+    /**
+     * Applies the plan, recomputed now (nothing the phone sends decides what moves). Only renames, on the same volume, never over a file, nothing is
+     * deleted (so the bin is not needed); at most [max] files per call (default 500), the answer says how many remain. Refused while a child profile is active.
+     */
+    private fun organizeApply(max: Int?): Response {
+        val op = organizePlan()
+        if (op.childActive) return json(Response.Status.FORBIDDEN, """{"error":"child active","message":"Un profil enfant est actif : le rangement est refusé."}""")
+        if (!organizing.compareAndSet(false, true)) return json(Response.Status.CONFLICT, """{"error":"already running"}""")
+        try {
+            val limit = (max ?: 500).coerceIn(1, 2000)
+            var moved = 0; var failed = 0
+            val done = ArrayList<String>()
+            for (m in op.plan.moves.take(limit)) {
+                val v = volumes[m.volumeId]; val fs = v?.let { volumes.store(it) as? FileStore }
+                if (v == null || fs == null) { failed++; continue }
+                synchronized(FileLocks.of(LOCK_ROOT, m.from)) {
+                    val size = fs.finalSize(m.from)
+                    if (size == null || busyReason(m.from) != null) { failed++; return@synchronized }
+                    // names may have been taken since the plan was made: place again from the same destination, never over anything
+                    val pl = Filing.place(Filing.Result(m.category, m.folder, m.to, m.rule), effectiveFs(v), size, self = m.from, taken = ::nameTaken)
+                    if (pl == null || !fs.fileInto(m.from, pl.folder, pl.name, if (pl.name.equals(m.from, ignoreCase = true)) null else m.from)) { failed++; return@synchronized }
+                    folders?.set(pl.name, pl.folder)
+                    if (pl.name != m.from) {
+                        library?.renamed(m.from, pl.name, size)
+                        if (m.from in Storage.playedNames(fs.dir)) { Storage.forget(fs.dir, m.from); Storage.markPlayed(fs.dir, pl.name) }
+                    }
+                    moved++
+                    if (done.size < 100) done += pl.rel
+                }
+            }
+            invalidate()
+            if (moved > 0) onNotice("Bibliothèque rangée : $moved fichier${if (moved > 1) "s" else ""}")
+            val remaining = (op.plan.moves.size - limit).coerceAtLeast(0)
+            return ok("""{"moved":$moved,"failed":$failed,"remaining":$remaining,"files":${strs(done)}}""")
+        } finally { organizing.set(false) }
+    }
+
+    private fun partJson(name: String, size: Long? = null): String {
+        findFinalOrOrigin(name, size)?.let { return """{"name":${q(name)},"length":${it.size},"done":true,"volume":${q(it.v.id)}${filedJson(it.v, it.name)}}""" }
         val part = findPart(name)
         return """{"name":${q(name)},"length":${part?.size ?: 0},"done":false,"volume":${part?.let { q(it.v.id) } ?: "null"}}"""
     }
 
     // /api/info is polled every second by phones and the web page: list the folders at most once per infoCacheMs.
-    private class Entry(val v: StorageVolume, val name: String, val size: Long, val received: Long, val complete: Boolean, val dup: Boolean)
+    private class Entry(val v: StorageVolume, val name: String, val size: Long, val received: Long, val complete: Boolean, val dup: Boolean, val folder: String = "", val origin: String? = null)
     private class Listing(val at: Long, val entries: List<Entry>, val used: Map<String, Long>, val partials: List<Triple<String, Long, Long>> = emptyList()) {
         val filesJson: String by lazy {
             entries.joinToString(",", "[", "]") { e ->
                 "{\"name\":${q(e.name)},\"size\":${e.size},\"received\":${e.received},\"complete\":${e.complete}," +
-                    "\"volume\":${q(e.v.id)},\"duplicate\":${e.dup}}"
+                    "\"volume\":${q(e.v.id)},\"duplicate\":${e.dup}" + (if (e.folder.isNotEmpty()) ",\"folder\":${q(e.folder)}" else "") + (e.origin?.let { ",\"origin\":${q(it)}" } ?: "") + "}"
             }
         }
     }
@@ -755,7 +909,7 @@ class ReceiverServer(
         val listed = vols.map { it to runCatching { volumes.store(it).list() }.getOrDefault(emptyList()) }
         for ((v, l) in listed) {
             used[v.id] = l.sumOf { it.size }
-            for (e in l) if (!e.part) { raw += Entry(v, e.name, e.size, e.size, true, false); finalKeys += e.name.lowercase() }
+            for (e in l) if (!e.part) { raw += Entry(v, e.name, e.size, e.size, true, false, e.folder, e.origin); finalKeys += e.name.lowercase() }
         }
         // what is arriving right now, for the TV screen: EVERY partial copy with a known size, even when the same name already exists complete (an episode sent again,
         // a move target): the library listing hides those (it would show the name twice), the progress line must not
@@ -766,7 +920,7 @@ class ReceiverServer(
             if (e.name.lowercase() !in finalKeys) raw += Entry(v, e.name, total, e.size, false, false)
         }
         val count = raw.groupingBy { it.name.lowercase() to it.complete }.eachCount()
-        val entries = raw.map { Entry(it.v, it.name, it.size, it.received, it.complete, (count[it.name.lowercase() to it.complete] ?: 1) > 1) }
+        val entries = raw.map { Entry(it.v, it.name, it.size, it.received, it.complete, (count[it.name.lowercase() to it.complete] ?: 1) > 1, it.folder, it.origin) }
             .sortedWith(compareBy({ it.name }, { it.v.id }))
         return Listing(now, entries, used, arriving).also { listing = it }
     }
@@ -792,10 +946,10 @@ class ReceiverServer(
         val lib = library
         val ps = player.state()
         val files = l.entries.filter { it.complete }.map { e ->
-            val f = (volumes.store(e.v) as? FileStore)?.let { File(it.dir, it.diskName(e.name)) }
+            val f = (volumes.store(e.v) as? FileStore)?.fileOf(e.name)
             val m = lib?.meta(e.name, e.size, f) ?: FileMeta()
             LibraryItem(e.name, e.size, f?.lastModified() ?: 0L, e.v.id, e.v.label, e.v.kind, m, e.dup,
-                ps.state != "idle" && ps.name == e.name, folders?.folderOf(e.name) ?: "")
+                ps.state != "idle" && ps.name == e.name, folders?.folderOf(e.name).orEmpty().ifEmpty { e.folder })
         }
         return LibraryLogic.sortNewestFirst(files, { it.mtime }, { it.name })
     }
@@ -1144,7 +1298,7 @@ class ReceiverServer(
         val head = s.method == Method.HEAD
         fun body(from: Long, to: Long): InputStream {
             val fs = src.st as? FileStore
-            val raw = if (fs != null) GrowingStream(fs.dir, fs.diskName(src.name), from, to, alive = { volumes.alive(src.v) })
+            val raw = if (fs != null) fs.fileOf(src.name).let { loc -> GrowingStream(loc.parentFile ?: fs.dir, loc.name, from, to, alive = { volumes.alive(src.v) }) }
                 else BoundedStream(src.st.open(src.name, from), to - from + 1)
             return streamUse.track(src.name, raw)       // a reader pins the file: no rename / move / bin under it
         }

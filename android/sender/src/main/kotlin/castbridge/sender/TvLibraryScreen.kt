@@ -102,6 +102,7 @@ fun TvLibraryDialog(client: TvClient, onDismiss: () -> Unit, onDownload: ((TvLib
     var deleteFor by remember { mutableStateOf<TvLibItem?>(null) }
     var reload by remember { mutableIntStateOf(0) }
     var showAssistant by remember { mutableStateOf(false) }       // « Ranger ma bibliothèque » (castbridge.sender.agent)
+    var showOrganize by remember { mutableStateOf(false) }        // rangement réel dans des dossiers, fait par CastBridge-TV (docs/STORAGE.md)
     val scope = rememberCoroutineScope()
 
     LaunchedEffect(client, reload) {
@@ -127,6 +128,7 @@ fun TvLibraryDialog(client: TvClient, onDismiss: () -> Unit, onDownload: ((TvLib
                     navigationIcon = { IconButton(onDismiss) { Icon(Icons.Filled.ArrowBack, "Retour") } },
                     actions = {
                         IconButton({ showAssistant = true }) { Icon(Icons.Filled.AutoAwesome, "Ranger ma bibliothèque (Assistant)") }
+                        IconButton({ showOrganize = true }) { Icon(Icons.Filled.CreateNewFolder, "Ranger les fichiers de la TV dans des dossiers") }
                         IconButton({ reload++ }) { Icon(Icons.Filled.Refresh, "Actualiser") }
                     },
                     colors = TopAppBarDefaults.topAppBarColors(containerColor = MaterialTheme.colorScheme.surface))
@@ -150,6 +152,7 @@ fun TvLibraryDialog(client: TvClient, onDismiss: () -> Unit, onDownload: ((TvLib
             }
         }
         if (showAssistant) castbridge.sender.agent.LibraryAssistantDialog(client) { showAssistant = false; reload++ }
+        if (showOrganize) OrganizeOnTvDialog(client) { showOrganize = false; reload++ }
         resumeFor?.let { i ->
             AlertDialog(onDismissRequest = { resumeFor = null }, title = { Text(i.title) },
                 confirmButton = { TextButton({ resumeFor = null; play(i, i.resumeMs) }) { Text("Reprendre à ${LibraryLogic.clock(i.resumeMs)}") } },
@@ -239,4 +242,71 @@ fun TvTools(client: TvClient) {
     if (library) TvLibraryDialog(client, onDismiss = { library = false },
         onDownload = { i -> DownloadService.start(ctx, client.base, client.pin, i.name, i.size); library = false; transfer = true })
     if (transfer) TvTransferDialog(client, onDismiss = { transfer = false })
+}
+
+
+/**
+ * « Ranger ma bibliothèque » (rangement réel): shows what CastBridge-TV would file where (dry run), and files only after the user says yes.
+ * Renames files into category folders on the same drive; nothing is deleted; what the parental control protects is never touched.
+ */
+@Composable
+private fun OrganizeOnTvDialog(client: TvClient, onClose: () -> Unit) {
+    var plan by remember { mutableStateOf<JSONObject?>(null) }
+    var error by remember { mutableStateOf<String?>(null) }
+    var busy by remember { mutableStateOf(false) }
+    var result by remember { mutableStateOf<String?>(null) }
+    val scope = rememberCoroutineScope()
+    fun why(e: Throwable) = if ((e as? TvClient.HttpError)?.code == 404) "Cette TV est trop ancienne : mettez CastBridge-TV à jour."
+        else (e as? TvClient.HttpError)?.message?.substringAfter(": ")?.let { TvClient.str(it, "message") ?: TvClient.str(it, "error") } ?: e.message ?: "erreur"
+    LaunchedEffect(client) {
+        withContext(Dispatchers.IO) { runCatching { JSONObject(client.organizePlan()) } }.onSuccess { plan = it }.onFailure { error = why(it) }
+    }
+    val p = plan
+    val count = p?.optInt("count") ?: 0
+    AlertDialog(onDismissRequest = { if (!busy) onClose() }, title = { Text("Ranger dans des dossiers") },
+        text = {
+            Column(verticalArrangement = Arrangement.spacedBy(6.dp)) {
+                when {
+                    result != null -> Text(result!!)
+                    error != null -> Text(error!!, color = MaterialTheme.colorScheme.error)
+                    p == null -> LinearProgressIndicator(Modifier.fillMaxWidth())
+                    else -> {
+                        Text(p.optString("summary"))
+                        val moves = p.optJSONArray("moves")
+                        for (k in 0 until minOf(6, moves?.length() ?: 0)) moves!!.getJSONObject(k).let { m ->
+                            Text("${m.optString("from")}  ->  ${m.optString("folder")}/${m.optString("to")}", style = MaterialTheme.typography.bodySmall, maxLines = 2, overflow = TextOverflow.Ellipsis)
+                        }
+                        if (count > 6) Text("… et ${count - 6} autres", style = MaterialTheme.typography.bodySmall)
+                        if (p.optInt("protected") > 0) Text("${p.optInt("protected")} fichier(s) protégé(s) par le contrôle parental : non touchés.", style = MaterialTheme.typography.bodySmall)
+                        if (p.optInt("skippedCount") > 0) Text("${p.optInt("skippedCount")} fichier(s) laissés en place (en cours d'utilisation, installateurs, trop gros pour la clé…).", style = MaterialTheme.typography.bodySmall)
+                        if (!p.optBoolean("canApply", true)) Text("Un profil enfant est actif sur la TV : le rangement est refusé.", color = MaterialTheme.colorScheme.error)
+                        Text("Les fichiers sont seulement déplacés sur la même clé ou mémoire, rien n'est supprimé.", style = MaterialTheme.typography.bodySmall)
+                    }
+                }
+                if (busy) LinearProgressIndicator(Modifier.fillMaxWidth())
+            }
+        },
+        confirmButton = {
+            if (result == null && p != null && count > 0 && p.optBoolean("canApply", true))
+                TextButton(enabled = !busy, onClick = {
+                    busy = true
+                    scope.launch {
+                        var moved = 0; var failed = 0
+                        val r = withContext(Dispatchers.IO) {
+                            runCatching {
+                                var left = count
+                                while (left > 0) {
+                                    val a = JSONObject(client.organizeApply(500))
+                                    moved += a.optInt("moved"); failed += a.optInt("failed"); left = a.optInt("remaining")
+                                    if (a.optInt("moved") == 0) break
+                                }
+                            }
+                        }
+                        busy = false
+                        result = r.exceptionOrNull()?.let { "Rangement interrompu : ${why(it)} ($moved fichier(s) rangé(s))." }
+                            ?: "$moved fichier(s) rangé(s)" + if (failed > 0) ", $failed laissé(s) en place." else "."
+                    }
+                }) { Text("Ranger") }
+        },
+        dismissButton = { TextButton(enabled = !busy, onClick = onClose) { Text(if (result != null) "Fermer" else "Annuler") } })
 }
