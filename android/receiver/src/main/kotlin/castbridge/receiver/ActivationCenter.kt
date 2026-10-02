@@ -57,6 +57,7 @@ object ActivationCenter {
         loadStored(); reload(); flushIfUnsaved()
         ready = true
         startClockTimer()
+        RentalHub.warm(app)          // the Keystore key is made off the main thread, before the first screen asks for the rentals
     }
 
     // ---- hardware identity (the factors of docs/ACTIVATION-FORMAT.md § 1; each one only if readable and meaningful) ----
@@ -79,7 +80,10 @@ object ActivationCenter {
     }
 
     /** The « demande d'appareil » (code + full fingerprint set): what the owner's tools need for a complete activation. */
-    fun requestText(): String = OwnerFrames.deviceInfo(deviceCode, fp)
+    fun requestText(): String = OwnerFrames.deviceInfo(deviceCode, fp, RentalHub.installPubOrNull(app))      // never blocks the main thread on the Keystore
+
+    /** What the last accepted activation said about its rentals (« enveloppée pour une autre installation… »), for the activation screen; empty when all went well. */
+    @Volatile var lastRentalNotes: List<String> = emptyList(); private set
 
     // ---- state ----
     private fun wall() = System.currentTimeMillis()
@@ -137,7 +141,7 @@ object ActivationCenter {
             val text = String(payload, Charsets.UTF_8).removePrefix("﻿").lineSequence().map { it.trim() }.firstOrNull { it.isNotEmpty() }.orEmpty()
             persist(text, t, clock.uptimeNow())
             flushIfUnsaved()
-            runCatching { RentalHub.onActivation(app, r.activation) }          // the keys of its rentals go into the rental safe
+            lastRentalNotes = runCatching { RentalHub.onActivation(app, r.activation) }.getOrElse { listOf("coffre de clés indisponible : les locations de cette activation n'ont pas pu être ouvertes, réinstallez-la plus tard") }          // the keys of its rentals go into the rental safe
         }
         return r
     }

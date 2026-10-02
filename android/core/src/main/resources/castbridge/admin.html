@@ -56,6 +56,8 @@ h3{font-size:13px;color:var(--acc);margin:10px 0 0}
 <h1>CastBridge TV</h1>
 <div id="ed" style="display:none" aria-live="polite"></div>
 <div id="ra" class="mut" style="margin:0 0 8px"></div>
+<div id="ik" class="mut" style="margin:0 0 8px"></div>
+<div id="ikReset" style="display:none;margin:0 0 8px"><button class="del" id="bIkReset">Réinitialiser la clé d'installation</button></div>
 
 <section id="login">
   <h2>Code PIN</h2>
@@ -225,7 +227,10 @@ async function refresh() {
 async function loadEdition() {
   const ed = $("ed"); let a;
   try { a = await api("GET", "/api/activation"); } catch (e) { return; }
-  $("ra").textContent = (a && a.remoteAssist) || "";                    // « Assistance à distance : connectée / hors ligne / en attente d'acceptation des conditions »
+  const ikp = a && a.installKeyProtection;
+  $("ik").textContent = ikp ? "Clé d'installation : " + ({ keystore: "protégée par le coffre Android", pending: "en préparation", unavailable: "coffre de clés indisponible (nouvel essai automatique)", unreadable: "illisible (réinitialisation nécessaire)" }[ikp] || "inconnue") : "";
+  $("ikReset").style.display = ikp ? "block" : "none";
+  $("ra").textContent = (a && a.remoteAssist) || "";                  // « Assistance à distance : connectée / hors ligne / en attente d'acceptation des conditions »
   if (!a || !a.edition) { ed.style.display = "none"; return; }
   ed.className = a.ended ? "end" : a.trial ? "trial" : "prod";
   ed.textContent = "";
@@ -422,6 +427,10 @@ $("bPick").onclick = async () => { try { const j = await post("/api/storage/saf/
 $("bSettings").onclick = async () => { try { const j = await post("/api/storage/open-settings"); msg(j.opened ? "Réglages ouverts sur l'écran de la TV." : (j.message || "")); } catch (e) { msg(e.message); } };
 $("vol").oninput = () => { volTouched = Date.now(); $("volv").textContent = $("vol").value + " %"; };
 $("vol").onchange = () => act(post("/api/volume?pct=" + $("vol").value));
+$("bIkReset").onclick = async () => {
+  if (!confirm("Réinitialiser la clé d'installation de la TV ?\n\nLes locations déjà installées deviendront inutilisables : il faudra les réémettre. Les anciens fichiers sont conservés (renommés), jamais supprimés.")) return;
+  try { const r = await post("/api/activation/install-key/reset?confirm=RESET"); refresh(); msg(r.note || "clé d'installation réinitialisée : réémettez les locations"); } catch (e) { msg(e.message); }
+};
 $("bRestart").onclick = () => { if (confirm("Redémarrer l'application CastBridge TV ?")) act(post("/api/restart")); };
 
 // ---- Chunked, resumable upload ----

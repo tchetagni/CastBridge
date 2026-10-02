@@ -249,7 +249,7 @@ class TvService : Service(), Device {
                 .then(castbridge.core.tv.FoldersApi(folderIndex) { server?.libraryItems()?.map { it.name }?.toSet().orEmpty() })
                 .then(QuizHub.packApi(this))   // question packs pushed by the phone (docs/QUIZ.md)
                 .then(LotsHub.api(this))        // lots (Apprendre / Quiz data, 10 Mo cap) pushed by the phone, never downloaded by the TV
-                .then(RentalHub.api(this))      // rented lots (sealed, opened with the rental key), the rentals' state, the sweep, activation install (docs/LOTS.md)
+                .then(RentalHub.api(this))      // LAZY (never touches the Keystore here: a Keystore failure answers 503, it cannot bring onCreate down): rented lots (sealed, opened with the rental key), the rentals' state, the sweep, activation install (docs/LOTS.md)
                 .then(castbridge.core.content.ContentFeedbackApi { TvConnect.feedback }),   // reports handed to the phone (docs/CONTENT-VALIDATION.md)
             profile = prefs.profile(), onSettings = { prefs.saveProfile(it); updateStorageStatus() },
             onNotice = { n -> notice(n); setStatus("5-notice", n) },
@@ -839,7 +839,12 @@ class TvService : Service(), Device {
             g.diagnose(host) { l -> lines += l; act?.let { a -> main.post { a.appendDiag(l) } } }
             ApiReply(200, "{\"host\":${ReceiverServer.q(host)},\"lines\":[" + lines.joinToString(",") { ReceiverServer.q(it) } + "]}")
         } ?: ApiReply(409, """{"error":"passerelle non démarrée"}""")
-        path == "/api/activation" && method == "GET" -> { ActivationCenter.init(this); ApiReply(200, "{\"required\":${BuildConfig.REQUIRE_ACTIVATION},\"locked\":${ActivationCenter.locked()},\"label\":${ReceiverServer.q(ActivationCenter.label())},\"code\":${ReceiverServer.q(ActivationCenter.requestText().lineSequence().first().removePrefix("code="))},\"ownerChannel\":${ownerBt != null}${ActivationCenter.statusFields()},\"remoteAssist\":${ReceiverServer.q(TunnelHub.statusLine(this))}}") }
+        path == "/api/activation" && method == "GET" -> { ActivationCenter.init(this); ApiReply(200, "{\"required\":${BuildConfig.REQUIRE_ACTIVATION},\"locked\":${ActivationCenter.locked()},\"label\":${ReceiverServer.q(ActivationCenter.label())},\"code\":${ReceiverServer.q(ActivationCenter.requestText().lineSequence().first().removePrefix("code="))},\"ownerChannel\":${ownerBt != null}${ActivationCenter.statusFields()},\"installKeyProtection\":${ReceiverServer.q(RentalHub.protectionStatus(this))},\"installId\":${ReceiverServer.q(RentalHub.installIdOrEmpty(this))},\"remoteAssist\":${ReceiverServer.q(TunnelHub.statusLine(this))}}") }
+        // EXPLICIT owner reset of the installation key (PIN only: TvAuth keeps every /api/activation/install* path for the PIN; closed in the trial). The old files are renamed, never deleted.
+        path == "/api/activation/install-key/reset" && method == "POST" ->
+            if (params["confirm"] != "RESET") ApiReply(400, """{"error":"confirm=RESET requis : la réinitialisation rend les locations existantes inutilisables"}""")
+            else try { ApiReply(200, """{"reset":true,"note":${ReceiverServer.q(RentalHub.resetInstallKey(this))}}""") }
+            catch (e: castbridge.core.lots.InstallKeyUnavailableException) { ApiReply(503, """{"error":${ReceiverServer.q(castbridge.core.lots.InstallKeyPolicy.UNAVAILABLE_MESSAGE)}}""") }
         path == "/api/bluetooth" && method == "GET" -> bt?.let { ApiReply(200, it.stateJson(statuses["1-bt"])) }
         path == "/api/bluetooth/discoverable" && method == "POST" -> {
             if (bt?.hasPermission() == true) bt?.start()

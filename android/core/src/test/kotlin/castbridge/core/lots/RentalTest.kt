@@ -417,6 +417,25 @@ class RentalSweepTest {
         return key
     }
 
+    /** Audit w4-03 (5): the vault, ledger and sweeper take NO installation key: a Keystore that fails for good changes nothing for the sweep, the statuses and the 12 h usage meter. */
+    @Test fun sweepStatusesAndMeterRunWhileTheInstallationKeyIsUnreadable() {
+        val failing = object : castbridge.core.crypto.SecretWrapper {
+            override fun wrap(plain: ByteArray): ByteArray = throw IllegalStateException("coffre indisponible")
+            override fun unwrap(blob: ByteArray): ByteArray? = throw IllegalStateException("coffre indisponible")
+            override val label = "keystore"
+        }
+        val keys = InstallKeyStore(Kit.tmp(), failing)
+        assertFailsWith<InstallKeyUnavailableException> { keys.loadOrCreate() }
+        val rig = RentalRig(); val lots = FakeLots(); val key = setup(rig, lots, days = 30, usage = 600)
+        assertEquals(RentalState.ACTIVE, rig.status().single().state)
+        assertEquals(1, rig.ledger.recordUsage(CM2, 1, rig.installed).size, "the meter counts the minute")
+        rig.wall = T0 + 31 * DAY
+        assertEquals(RentalState.EXPIRED, rig.status().single().state)
+        rig.sweeper(lots).sweep(SweepTrigger.PERIODIC)
+        assertEquals(setOf(CM2, CM2Q), lots.removed.toSet()); assertFalse(rig.vault.hasKey(key))
+        assertFailsWith<InstallKeyUnavailableException> { keys.loadOrCreate() }
+    }
+
     @Test fun keyIsDestroyedBeforeTheFilesAndEverythingIsRemoved() {
         val rig = RentalRig(); val lots = FakeLots(); val key = setup(rig, lots)
         rig.wall = T0 + 10 * DAY
