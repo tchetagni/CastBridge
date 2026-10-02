@@ -178,6 +178,7 @@ class TvService : Service(), Device {
     }
     private var ownerBt: OwnerBtHost? = null
     fun ownerStatus(): String = ownerBt?.state ?: "service non démarré"
+    private val rentalTick = object : Runnable { override fun run() { Thread { RentalHub.sweep(this@TvService, castbridge.core.lots.SweepTrigger.PERIODIC).forEach { notice(it) } }.start(); main.postDelayed(this, 15 * 60_000L) } }
     fun startOwnerChannel() { if (ownerBt == null) ownerBt = OwnerBtHost(this); runCatching { ownerBt?.start() } }
 
     private fun watchForActivation() {
@@ -211,6 +212,7 @@ class TvService : Service(), Device {
         startServer()
         register()
         LotsHub.startup(this, videosDir)
+        Thread { RentalHub.sweep(this, castbridge.core.lots.SweepTrigger.APP_START).forEach { notice(it) }; main.postDelayed(rentalTick, 15 * 60_000L) }.start()   // the autonomous deletion of ended rentals
         bt = BtServer(this, videosDir, guard, negotiate = ::linkInfo, hello = ::btHello, trusted = ::btTrusted, parental = ParentalHub.syncHost) { setStatus("1-bt", it) }
         wd = WifiDirectGroup(this, prefs) { setStatus("2-wd", it); syncIconsAsync() }
         usb = UsbImporter(this, videosDir) { setStatus("3-usb", it) }
@@ -245,7 +247,8 @@ class TvService : Service(), Device {
                     busy = { name -> server?.busyReason(name) }, folders = folderIndex, changed = { server?.changed() }))
                 .then(castbridge.core.tv.FoldersApi(folderIndex) { server?.libraryItems()?.map { it.name }?.toSet().orEmpty() })
                 .then(QuizHub.packApi(this))   // question packs pushed by the phone (docs/QUIZ.md)
-                .then(LotsHub.api(this))        // lots (Apprendre / Quiz data, 10 Mo cap) pushed by the phone, never downloaded by the TV (docs/LOTS.md)
+                .then(LotsHub.api(this))        // lots (Apprendre / Quiz data, 10 Mo cap) pushed by the phone, never downloaded by the TV
+                .then(RentalHub.api(this))      // rented lots (sealed, opened with the rental key), the rentals' state, the sweep, activation install (docs/LOTS.md)
                 .then(castbridge.core.content.ContentFeedbackApi { TvConnect.feedback }),   // reports handed to the phone (docs/CONTENT-VALIDATION.md)
             profile = prefs.profile(), onSettings = { prefs.saveProfile(it); updateStorageStatus() },
             onNotice = { n -> notice(n); setStatus("5-notice", n) },

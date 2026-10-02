@@ -84,6 +84,7 @@ class Cli(private val env: Env) {
         "licence", "license" -> license(a)
         "emettre", "issue" -> issue(a)
         "cle-saisissable", "compact" -> compact(a)
+        "lot-chiffrer", "seal-lot" -> sealLot(a)
         "commande", "command" -> command(a)
         "verifier", "verify" -> verify(a)
         "journal" -> journal(a)
@@ -212,6 +213,24 @@ class Cli(private val env: Env) {
         }
     }
 
+    /**
+     * `lot-chiffrer --activation FICHIER --produit P --lot castbridge-lot-…-vN.lot [--sortie DOSSIER]`: seals a lot for the TV of an issued rental activation: the file written next to
+     * [--sortie] has the same name and opens ONLY on that TV with that rental's key (docs/RENTAL-LOTS.md § 3). Free lots are refused by the catalogue check at issuing time.
+     */
+    private fun sealLot(a: Args): Int {
+        val act = castbridge.core.owner.Activation.decode(readSource(a.need("activation")).lineSequence().map { it.trim() }.firstOrNull { it.isNotEmpty() } ?: "")
+            ?: throw UsageException("Activation illisible")
+        val product = a.need("produit")
+        val rental = act.rights.filterIsInstance<Right.Rental>().firstOrNull { it.productId == product } ?: throw UsageException("Cette activation ne porte pas la location « $product »")
+        val lot = File(a.need("lot")); val (id, version) = castbridge.core.lots.LotNames.parseFileName(lot.name) ?: throw UsageException("Nom de lot invalide : ${lot.name}")
+        val d = desk(a)
+        val key = castbridge.core.lots.RentalKeys.rentalKey(d.rentalMaster(), act.license, act.seat, rental.productId, rental.period)
+        val dir = File(a.get("sortie") ?: "."); dir.mkdirs()
+        File(dir, lot.name).writeBytes(castbridge.core.lots.RentalKeys.seal(key, id, version, lot.readBytes()))
+        env.out.println("Lot chiffré pour cette TV : ${File(dir, lot.name).path} ; contrat ${castbridge.core.lots.RentalEngine.contractKey(rental.productId, rental.period)}")
+        return 0
+    }
+
     private fun compact(a: Args): Int {
         a.get("jours")?.let { throw UsageException("--jours n'existe plus : une clé s'installe dans les 48 h suivant sa création (--illimitee : réservé aux clés superadmin)") }
         val code = DeviceCode.parse(a.need("code")) ?: throw UsageException("Code d'appareil mal formé")
@@ -291,6 +310,7 @@ Commandes (français ; alias anglais : keygen key trust device license issue com
           [--periode MS]  prolonge la location commencée à cet instant (même clé, pas de doublon) au lieu d'en commencer une nouvelle
           [--catalogue TRIAL-MANIFEST.json --lots-libres FICHIER]   refuse la location d'un lot libre (CC BY-SA)
           [--sortie DOSSIER] [--qr]       jeton, fichier « activation » (clé USB de la TV) et code QR
+  lot-chiffrer --activation F --produit P --lot FICHIER.lot [--sortie DOSSIER]   chiffre un lot pour la TV d'une location émise
   cle-saisissable --code XXXX-XXXX-XXXX-XXXX [--production --ensemble N]   dernier recours : 165 caractères à taper
   commande --appareil F --pouvoir support|unlock|open_all --defi HEX [--jours N] [--action A] [--bouquets a,b] [--lots fn:scope,…]
   verifier JETON --appareil F [--maintenant MS]   vérifie un jeton avec l'anneau de ce bureau

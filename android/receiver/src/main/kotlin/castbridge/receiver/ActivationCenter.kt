@@ -16,6 +16,11 @@ object ActivationCenter {
     private lateinit var app: Context
     @Volatile private var ready = false
     private val installed = InstalledActivations()
+    /** EVERY accepted activation, deduplicated by its text only (never by seat): rentals, their renewals and the `super` right must coexist, which the "newest per seat" view of [installed] would not allow. */
+    private val everyActivation = ArrayList<Activation>()
+    fun allActivations(): List<Activation> = synchronized(everyActivation) { everyActivation.toList() }
+    fun fingerprints(): Fingerprints = fp
+    private fun remember(a: Activation) { synchronized(everyActivation) { if (everyActivation.none { it.signature == a.signature }) everyActivation += a } }
     private val clock = TvClock()
     private lateinit var fp: Fingerprints
     lateinit var deviceCode: String; private set
@@ -64,7 +69,7 @@ object ActivationCenter {
     // ---- state ----
     private fun wall() = System.currentTimeMillis()
     private fun now(): Long = clock.now(wall())
-    private fun access(): TvAccess = TvGate.evaluate(installed.all(), emptyList(), now())
+    private fun access(): TvAccess = TvGate.evaluate(installed.all(), emptyList(), now(), if (ready) RentalHub.statuses(app) else emptyList())
     private val migration: FleetMigration get() = FleetMigration(existingInstall, firstRunAt)
 
     fun state(): GateState { if (!ready) init(app); return FeatureGate.state(requirement, access(), now(), migration) }
@@ -96,10 +101,11 @@ object ActivationCenter {
         val r = receiver().receive(channel, payload, now())
         if (r is ActivationResult.Accepted) {
             pending = null
-            installed.install(r.activation)
+            installed.install(r.activation); remember(r.activation)
             clock.observe(wall(), r.activation.issuedAt); saveClock()
             val text = String(payload, Charsets.UTF_8).removePrefix("﻿").lineSequence().map { it.trim() }.firstOrNull { it.isNotEmpty() }.orEmpty()
             persist(text, t)
+            runCatching { RentalHub.onActivation(app, r.activation) }          // the keys of its rentals go into the rental safe
         }
         return r
     }
@@ -139,14 +145,24 @@ object ActivationCenter {
     }
 
     // ---- persistence (private files; the activation is verified AS OF the day it was installed: its install window is not a validity limit) ----
-    private fun stored() = File(app.filesDir, "activation.txt")
-    private fun persist(text: String, installedAt: Long) { runCatching { stored().writeText("$installedAt\n$text\n") } }
+    private fun stored() = File(app.filesDir, "activations.txt")          // one line per activation: « installedAt<TAB>text » (the old single-activation file is still read)
+    private fun entries(): List<Pair<Long, String>> {
+        val f = stored()
+        if (f.isFile) return runCatching { f.readLines() }.getOrDefault(emptyList()).mapNotNull { l -> l.split('\t', limit = 2).takeIf { it.size == 2 }?.let { p -> p[0].toLongOrNull()?.let { it to p[1] } } }
+        val legacy = runCatching { File(app.filesDir, "activation.txt").readLines() }.getOrNull() ?: return emptyList()
+        val at = legacy.getOrNull(0)?.toLongOrNull() ?: return emptyList(); val text = legacy.getOrNull(1) ?: return emptyList()
+        return listOf(at to text)
+    }
+    private fun persist(text: String, installedAt: Long) {
+        val old = entries(); if (old.any { it.second == text }) return
+        runCatching { stored().writeText((old + (installedAt to text)).joinToString("") { "${it.first}\t${it.second}\n" }) }
+    }
 
     private fun reload() {
-        val lines = runCatching { stored().readLines() }.getOrNull() ?: return
-        val at = lines.getOrNull(0)?.toLongOrNull() ?: return; val text = lines.getOrNull(1) ?: return
-        val r = receiver().receive(Channel.MANUAL, text.toByteArray(Charsets.UTF_8), at)
-        if (r is ActivationResult.Accepted) { installed.install(r.activation); clock.observe(wall(), r.activation.issuedAt) }
+        for ((at, text) in entries()) {
+            val r = receiver().receive(Channel.MANUAL, text.toByteArray(Charsets.UTF_8), at)       // verified AS OF the day it was installed
+            if (r is ActivationResult.Accepted) { installed.install(r.activation); remember(r.activation); clock.observe(wall(), r.activation.issuedAt) }
+        }
     }
 
     private fun loadClock() { read(File(app.filesDir, "clock.txt").path)?.split(' ')?.let { if (it.size == 2) { clock.lastSeen = it[0].toLongOrNull() ?: 0; clock.floor = it[1].toLongOrNull() ?: 0 } }; clock.observe(wall()); saveClock() }

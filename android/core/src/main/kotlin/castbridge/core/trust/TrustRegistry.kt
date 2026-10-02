@@ -200,5 +200,5 @@ object TvAuth {
 
     /** Routes a token never opens (the PIN, i.e. the owner, is needed): persistent access or software installation. */
     fun tokenMayCall(path: String): Boolean =
-        !(path.startsWith("/api/ssh") || path.startsWith("/api/apk/install") || path.startsWith("/api/update/install"))
+        !(path.startsWith("/api/ssh") || path.startsWith("/api/apk/install") || path.startsWith("/api/update/install") || path.startsWith("/api/activation/install"))
 }
