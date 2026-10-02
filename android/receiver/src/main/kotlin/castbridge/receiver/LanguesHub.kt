@@ -4,7 +4,11 @@ import android.content.Context
 import castbridge.core.langues.EmbeddedLangSource
 import castbridge.core.langues.LangLotConsumer
 import castbridge.core.langues.LangPack
+import castbridge.core.connect.ServerUrl
 import castbridge.core.lots.LotConsumer
+import castbridge.core.lots.SecureHttpLotRemote
+import castbridge.core.lots.TvLotFetcher
+import castbridge.core.update.UpdateKeys
 import castbridge.core.lots.LotId
 import castbridge.core.lots.LotMeta
 import java.io.File
@@ -32,6 +36,28 @@ object LanguesHub {
             override fun install(meta: LotMeta, data: File): Boolean = d.install(meta, data).also { if (it) refresh() }
             override fun remove(id: LotId) { d.remove(id); refresh() }
         }
+    }
+
+    /**
+     * Does the system say this TV has working Internet (its own validation, no traffic from CastBridge-TV)? Same check as the Internet badge of TvService.
+     * The « Mettre à jour les lots Langues » button is shown only then.
+     */
+    fun hasInternet(ctx: Context): Boolean = runCatching {
+        val cm = ctx.getSystemService(android.net.ConnectivityManager::class.java)
+        cm.getNetworkCapabilities(cm.activeNetwork)?.let {
+            it.hasCapability(android.net.NetworkCapabilities.NET_CAPABILITY_INTERNET) && it.hasCapability(android.net.NetworkCapabilities.NET_CAPABILITY_VALIDATED)
+        } == true
+    }.getOrDefault(false)
+
+    /**
+     * The server -> TV downloader, built ONLY when the user presses the button (nothing is scheduled, nothing listens). HTTPS only, no redirect,
+     * the server's production key (plus the optional test key of a local build); installs through the same [LotsHub] store as a phone upload.
+     * @throws IllegalArgumentException if the configured server address is not HTTPS (a test build pointing at plain http: use the phone)
+     */
+    fun fetcher(ctx: Context): TvLotFetcher {
+        val server = ServerUrl.normalize(castbridge.receiver.TvConnect.link?.state?.baseUrl ?: BuildConfig.DEFAULT_SERVER.ifBlank { null }) ?: ServerUrl.DEFAULT
+        val keys = (UpdateKeys.PUBLIC_KEYS + BuildConfig.EXTRA_UPDATE_KEY).filter { it.isNotBlank() }
+        return TvLotFetcher(SecureHttpLotRemote(server), LotsHub.store(ctx), keys, LotsHub.appVersion(ctx), { hasInternet(ctx) })
     }
 
     /** The free starter bundled in the APK (zh-a0): usable on a fresh TV without any lot. */

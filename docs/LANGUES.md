@@ -460,3 +460,15 @@ Questions restantes (non bloquantes) :
 `free` = contenu dérivé de sources CC BY-SA : jamais chiffré, jamais loué ; `reserved` = contenu original ou de domaine public (chiffrable par TV, louable). Un lot est dans **une seule** liste (jamais mélangé) ; absent des deux, sa famille est inconnue et la construction échoue (et `LotFamilies.explicit` refuse la location). `LangLotRegistry.families()` donne l'objet `LotFamilies` correspondant.
 
 **Démarrage embarqué** : `content/langues/embedded.txt` liste les packs copiés dans les ressources de l'APK (`castbridge/langues/embedded/<id>/{langue.json,media.json}` + `catalog.json`, tâche `:core:embedLanguesPacks`, branchée sur `processResources`). Libres uniquement, budget 1 Mo (testé), compté dans `StarterBudget`. `EmbeddedLangSource` les lit ; `LanguesHub.packs()` fusionne démarrage et lots installés : à nom égal, le lot installé gagne si sa version est au moins celle du démarrage. Le message « Aucune langue installée » n'apparaît donc que si aucun pack n'est embarqué. Tests : `LangLotBuildTest`.
+
+## 15. Publier les lots Langues sur le serveur (2026-10-02)
+
+Le serveur accepte la fonction `langues` (`LotService.FEATURES`, `LangLotValidator` : zip avec `langue.json` + `media.json` seulement, ≤ 3 Mo, `id` et `version` de `langue.json` égaux au scope et à la version déclarés ; les lots média `langues-media` ne sont pas acceptés). Aucune migration (colonne `feature` VARCHAR(16)). Le catalogue signé par le serveur (clé de production, déjà dans les apps) est filtrable par `?feature=langues`.
+
+**Étapes du propriétaire** (rien n'est publié tant qu'on n'a pas fait `--apply`) :
+
+1. Construire et contrôler, sans rien envoyer : `python3 tools/langues/publish_lots.py` (lance `gradle --offline :core:buildLangLots` via `tools/agents/gradle-lock.sh`, vérifie taille ≤ 3 Mo, SHA-256 et famille **libre**, affiche le résumé ; un lot « réservé » est refusé). `--lots-dir android/core/build/langues-lots` saute la construction.
+2. Publier : `export CASTBRIDGE_ADMIN_TOKEN=…` (jeton d'administration, lu dans l'environnement, jamais en argument ni affiché) puis `python3 tools/langues/publish_lots.py --apply` : envoi multipart `POST /api/v1/admin/lots` (non publié, SHA-256 attendu) puis `POST /api/v1/admin/lots/{id}/publish`. Idempotent : un lot déjà publié avec la même empreinte est sauté ; même version avec une autre empreinte = erreur (relever la version avec `-Pupdate`). HTTPS obligatoire.
+3. Vérifier : `curl -s 'https://bridge.sti-cm.com/api/v1/lots/catalog?feature=langues'` doit lister les 46 lots (signature présente), `curl -sI https://bridge.sti-cm.com/api/v1/lots/langues/zh-a0-salut-fr/2` répond 200 avec un `ETag`.
+
+Alternative par SSH (sans jeton web) : voir `docs/DEPLOIEMENT-PREMIERE-EXPERIENCE.md` (accès et déploiement du serveur) ; ne rien lancer contre la production sans cette lecture. Côté apps : § 12 de `docs/LOTS.md`.

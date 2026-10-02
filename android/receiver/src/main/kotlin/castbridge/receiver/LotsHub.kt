@@ -9,8 +9,9 @@ import java.io.File
 
 /**
  * « Lots » on the TV (docs/LOTS.md): the Apprendre / Quiz data the phone pushes to this TV, under a STRICT cap of 10 Mo
- * (the starter data bundled in the APK counts in it). The TV is assumed OFFLINE: it NEVER downloads a lot from the Internet and
- * never contacts the server for lots; everything arrives from the phone (PIN / trusted-phone routes /api/lots/…, or Bluetooth
+ * (the starter data bundled in the APK counts in it). The TV is assumed OFFLINE: it never contacts the server for lots by itself. The ONE exception
+ * is the « Mettre à jour les lots Langues » button of the Langues screen (the Langues screen, only when the user presses it and the TV has
+ * Internet, free Langues lots only, same verification as a phone upload); everything else arrives from the phone (PIN / trusted-phone routes /api/lots/…, or Bluetooth
  * files adopted from the reception folder), is verified (server-signed catalog, size, SHA-256) and installed by the feature's
  * [LotConsumer]. Until a feature registers its consumer ([register]), the starter data keeps working unchanged and pushed lots
  * are refused with a clear reason.
@@ -24,12 +25,17 @@ object LotsHub {
 
     @Synchronized fun store(ctx: Context): TvLotStore = storeRef ?: run {
         val app = ctx.applicationContext
-        val pi = runCatching { app.packageManager.getPackageInfo(app.packageName, 0) }.getOrNull()
-        @Suppress("DEPRECATION") val code = pi?.let { if (Build.VERSION.SDK_INT >= 28) it.longVersionCode.toInt() else it.versionCode } ?: 0
+        val code = appVersion(app)
         val consumers = listOf("learn", "quiz", "langues").associateWith { f -> registered.firstOrNull { it.feature == f } ?: when (f) { "learn" -> LearnHub.lotsConsumer(app); "langues" -> LanguesHub.lotsConsumer(app); else -> StarterOnlyConsumer(f) } } +
             registered.associateBy { it.feature }
         TvLotStore(File(app.filesDir, "lots"), consumers, (UpdateKeys.PUBLIC_KEYS + BuildConfig.EXTRA_UPDATE_KEY).filter { it.isNotBlank() }, code,
             starterBytes = { StarterBudget.bytes }).also { storeRef = it }
+    }
+
+    /** The versionCode of this app (what a lot's minAppVersion is compared with). */
+    fun appVersion(ctx: Context): Int {
+        val pi = runCatching { ctx.packageManager.getPackageInfo(ctx.packageName, 0) }.getOrNull()
+        @Suppress("DEPRECATION") return pi?.let { if (Build.VERSION.SDK_INT >= 28) it.longVersionCode.toInt() else it.versionCode } ?: 0
     }
 
     /** PIN routes /api/lots/… (the existing authentication applies: nothing here is public). */

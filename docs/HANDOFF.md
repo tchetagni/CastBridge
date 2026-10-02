@@ -14,6 +14,9 @@
 
 ## 0. Journal en direct (le plus récent en haut)
 
+### 2026-10-02 : lots Langues, serveur + téléphone + TV connectée (branche `claude/langues-lots-pipelines`, non poussée, non validé sur TV)
+- Le serveur accepte la fonction `langues` ; `tools/langues/publish_lots.py` publie les 46 lots libres (simulation par défaut, `--apply` avec `CASTBRIDGE_ADMIN_TOKEN`) ; le téléphone les liste et les envoie à la TV ; la TV avec Internet a le bouton « Mettre à jour les lots Langues » (jamais en tâche de fond). **Rien n'est publié en production** : le propriétaire lance l'étape 2 de `docs/LANGUES.md` § 15. Détails : `docs/agent-reports/langues-lots-pipelines.md`.
+
 ### 2026-10-02 (fin de journée) : rangement réel par catégorie à la réception + « Ranger ma bibliothèque » côté TV, non validé sur TV
 - **Demande du propriétaire** : « le rangement de données ne se fait pas encore par catégorie et fichier ». **Fait** (`integration/agents`, un commit) : à la fin de chaque envoi la TV range le fichier dans un vrai dossier de catégorie sous un nom propre (interne et clé `Bibliotheque/`), via `Filing` + `FiledIndex` (`core/tv`) ; plan puis application pour l'existant (`/api/library/organize[/apply]`) ; icône dossier dans la Bibliothèque de la TV du téléphone. Règles, garanties, tableau : `docs/STORAGE.md` § 10 ; lien avec l'assistant : `docs/LIBRARY-AGENT.md` § 17.
 - **À savoir pour reprendre** : l'identité d'un fichier reste son NOM unique (clé plate) ; l'emplacement réel est dans `<dossier volume>/.filing` (`clé -> chemin`, `nom d'origine -> clé`), reconstruit depuis les dossiers si perdu. Le fichier partiel reste à plat (reprise inchangée). Installateurs et paquets (`.apk`, `.learn.zip`, `.lot.zip`, `.quiz.zip`) restent à plat à la réception (leurs routes les cherchent par nom plat). Réglage `file_on_receive` (oui par défaut), sans écran de réglage. Pas de wrapper Gradle dans le dépôt : `gradle` du PATH.

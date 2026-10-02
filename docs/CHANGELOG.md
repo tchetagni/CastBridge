@@ -27,6 +27,12 @@ Travail du 2026-10-02 présent dans l'arbre de travail de `integration/agents` (
 - Conception de la boutique (téléphone + TV), des locations gérées en ligne par le serveur, des jetons virtuels du Quiz et du paiement en espèces : `docs/coordination/DESIGN-W5-BOUTIQUE-LOCATIONS-JETONS.md` et cahiers `sonnet-w4-*` / `sonnet-w5-*` (**en conception, rien de construit**).
 - Conceptions : enveloppe de location, mode dégradé en fin de clé, vente sur le terrain (`DESIGN-W4-*`).
 
+### Lots Langues : serveur et tuyaux de téléchargement (branche `claude/langues-lots-pipelines`, non validé sur TV)
+- Serveur : fonction `langues` acceptée de bout en bout (`LangLotValidator`, catalogue signé filtrable, messages « learn », « quiz » ou « langues »), Apprendre et Quiz inchangés, sans migration.
+- `tools/langues/publish_lots.py` : construit et publie les 46 lots libres (simulation par défaut, `--apply`, jeton dans `CASTBRIDGE_ADMIN_TOKEN`, idempotent).
+- Téléphone : liste des leçons du serveur, téléchargement lot par lot, contrôle du contenu avant rangement (`LotSync` `check`), envoi à la TV par la route existante.
+- TV : bouton « Mettre à jour les lots Langues » (`TvLotFetcher`, `SecureHttpLotRemote`), seulement sur demande et avec Internet. Voir `docs/LOTS.md` § 12, `docs/LANGUES.md` § 15.
+
 ### Langues
 - Lots de langues a0 (japonais, chinois : `famille`, `nombres`, `salut`, versions fr et en), `zh-a0-salut-fr` enrichi, `content/langues/embedded.txt` et `lots.json`.
 - 66 fichiers audio du propriétaire dans `content/langues-media/` : **non suivis, à ne jamais committer dans le dépôt de code** (contenu lourd : dépôt privé `castbridge-content`).
