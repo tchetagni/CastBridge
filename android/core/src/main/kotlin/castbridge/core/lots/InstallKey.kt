@@ -30,6 +30,9 @@ class InstallKey(val priv: ByteArray, val pub: ByteArray) {
 class InstallKeyUnavailableException(message: String, cause: Throwable? = null) : IllegalStateException(message, cause)
 
 /** The key file exists but is lost for good (wrong tag, invalidated or confirmed-absent Keystore key, damaged file). Stays so until an explicit [InstallKeyStore.reset]. */
+/** The explicit reset was refused because the key is not unreadable ([InstallKeyPolicy.resetAllowed]): HTTP 409. */
+class InstallKeyResetRefusedException(message: String) : IllegalStateException(message)
+
 class InstallKeyUnreadableException(message: String) : IllegalStateException(message)
 
 /**

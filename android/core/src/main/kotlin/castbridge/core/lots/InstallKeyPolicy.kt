@@ -26,6 +26,30 @@ object InstallKeyPolicy {
     /** A missing alias is believed only when `containsAlias` said false, then a freshly reloaded KeyStore says false again AND returns no key (null = the lookup threw: not confirmed). */
     fun aliasConfirmedAbsent(containsFirst: Boolean?, containsReloaded: Boolean?, keyReloaded: Boolean?): Boolean = containsFirst == false && containsReloaded == false && keyReloaded == false
 
+    /** Pause between the two checks of the missing-alias double confirmation (a Keystore daemon restarting answers « absent » for a moment). */
+    const val CONFIRM_PAUSE_MS = 1_500L
+
+    /**
+     * The double confirmation with its pause: false at once if [containsFirst]; otherwise waits [CONFIRM_PAUSE_MS] through [sleeper] (injectable: tests do not sleep), then
+     * [reload] (a freshly reloaded KeyStore: containsAlias, key returned) decides through [aliasConfirmedAbsent]. An exception of [reload] is not a confirmation: it propagates.
+     */
+    fun confirmAbsent(containsFirst: Boolean, sleeper: (Long) -> Unit = { Thread.sleep(it) }, reload: () -> Pair<Boolean?, Boolean?>): Boolean {
+        if (containsFirst) return false
+        sleeper(CONFIRM_PAUSE_MS)
+        val (contains, key) = reload()
+        return aliasConfirmedAbsent(false, contains, key)
+    }
+
+    /**
+     * May the owner reset be accepted? Only when the key is really unreadable ([KeyState.UNREADABLE]), or still PENDING with NO key file (nothing to lose). Never in `keystore` (it works),
+     * never in `unavailable` (the key may well be recoverable: a reset could replace the real Keystore alias) and never in `pending` while a key file exists.
+     */
+    fun resetAllowed(state: KeyState, fileExists: Boolean): Boolean = when (state) {
+        KeyState.UNREADABLE -> true
+        KeyState.PENDING -> !fileExists
+        KeyState.READY, KeyState.UNAVAILABLE -> false
+    }
+
     /** The state of the key as the admin page shows it (`installKeyProtection`). */
     enum class KeyState(val protection: String) { PENDING("pending"), READY("keystore"), UNAVAILABLE("unavailable"), UNREADABLE("unreadable") }
 
@@ -44,6 +68,8 @@ object InstallKeyPolicy {
     /** The French answer of a route that needs the installation key while it cannot be read (HTTP 503). */
     const val UNAVAILABLE_MESSAGE = "coffre de clés indisponible : nouvel essai automatique, réessayez plus tard"
     const val UNREADABLE_MESSAGE = "clé d'installation illisible : réinitialisez-la depuis l'administration (les locations devront être réémises)"
+    const val RESET_REFUSED = "réinitialisation refusée : la clé n'est pas illisible"
+    const val RESET_FAILED = "réinitialisation impossible : erreur interne, la clé d'installation et ses anciens fichiers sont conservés"
     const val RESET_NOTE = "clé d'installation réinitialisée : réémettez les locations"
 }
 

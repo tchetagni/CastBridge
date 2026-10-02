@@ -844,7 +844,9 @@ class TvService : Service(), Device {
         path == "/api/activation/install-key/reset" && method == "POST" ->
             if (params["confirm"] != "RESET") ApiReply(400, """{"error":"confirm=RESET requis : la réinitialisation rend les locations existantes inutilisables"}""")
             else try { ApiReply(200, """{"reset":true,"note":${ReceiverServer.q(RentalHub.resetInstallKey(this))}}""") }
+            catch (e: castbridge.core.lots.InstallKeyResetRefusedException) { ApiReply(409, """{"error":${ReceiverServer.q(castbridge.core.lots.InstallKeyPolicy.RESET_REFUSED)}}""") }
             catch (e: castbridge.core.lots.InstallKeyUnavailableException) { ApiReply(503, """{"error":${ReceiverServer.q(castbridge.core.lots.InstallKeyPolicy.UNAVAILABLE_MESSAGE)}}""") }
+            catch (e: Exception) { android.util.Log.e("TvService", "réinitialisation de la clé d'installation en échec", e); ApiReply(500, """{"error":${ReceiverServer.q(castbridge.core.lots.InstallKeyPolicy.RESET_FAILED)}}""") }
         path == "/api/bluetooth" && method == "GET" -> bt?.let { ApiReply(200, it.stateJson(statuses["1-bt"])) }
         path == "/api/bluetooth/discoverable" && method == "POST" -> {
             if (bt?.hasPermission() == true) bt?.start()

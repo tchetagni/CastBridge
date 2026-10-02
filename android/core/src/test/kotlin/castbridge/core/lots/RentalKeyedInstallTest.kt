@@ -54,6 +54,21 @@ class RentalKeyedInstallTest {
         assertFalse(vault2.hasKey(contract)); assertEquals(1, RentalNotes.of(other).size)
     }
 
+    @Test fun replayingTheSameActivationTwiceInstallsOnceAndChangesNothing() {
+        val a = activation(RentalKeys.makeBoxV2(ik.pub, key(), "loc-cm2", t0, ephemeral))
+        val d = dir(); val vault = RentalVault(File(d, "rental")); val l = ledger(d)
+        assertEquals("clé installée", l.installKeyed(a, listOf(a), fp, vault, ik).getValue(contract))
+        val rentalDir = File(d, "rental")
+        fun snapshot() = rentalDir.walkTopDown().filter { it.isFile && !it.name.endsWith(".bak") }.associate { it.relativeTo(rentalDir).path to it.readBytes().toList() }
+        val statusBefore = l.status(listOf(a)).toString(); val filesBefore = snapshot()
+        repeat(2) { assertEquals("clé déjà en place", l.installKeyed(a, listOf(a), fp, vault, ik).getValue(contract)) }
+        assertEquals(emptyList(), RentalNotes.of(l.installKeyed(a, listOf(a), fp, vault, ik)))
+        assertEquals(statusBefore, l.status(listOf(a)).toString(), "no state change"); assertEquals(filesBefore, snapshot(), "no state or key file changed (only the .bak rotation may differ)")
+        // a fresh ledger on the same folder (a restart replays everything again): same answer
+        assertEquals("clé déjà en place", ledger(d).installKeyed(a, listOf(a), fp, vault, ik).getValue(contract))
+        assertEquals(filesBefore, snapshot())
+    }
+
     @Test fun routineResultsProduceNoNote() {
         assertEquals(emptyList(), RentalNotes.of(mapOf("a@1" to "clé installée", "b@2" to "clé déjà en place", "c@3" to "terminée")))
     }
