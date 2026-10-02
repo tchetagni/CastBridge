@@ -50,12 +50,18 @@ object ActivationCenter {
         Runtime.getRuntime().exec(arrayOf("getprop", name)).inputStream.bufferedReader().use { it.readText().trim() }
     }.getOrNull()?.takeIf { it.isNotEmpty() }
 
-    private fun rawFactors() = RawFactors(
-        flashSerial = read("/sys/block/mmcblk0/device/serial"), flashCid = read("/sys/block/mmcblk0/device/cid"),
-        ethernetMac = read("/sys/class/net/eth0/address"),
-        wifiMac = read("/sys/class/net/wlan0/address"), wifiSysfsPath = runCatching { File("/sys/class/net/wlan0/device").canonicalPath }.getOrNull(),
-        systemSerial = getprop("ro.serialno"), bluetoothAddress = null,
-    )
+    private fun rawFactors(): RawFactors {
+        val base = RawFactors(
+            flashSerial = read("/sys/block/mmcblk0/device/serial"), flashCid = read("/sys/block/mmcblk0/device/cid"),
+            ethernetMac = read("/sys/class/net/eth0/address"),
+            wifiMac = read("/sys/class/net/wlan0/address"), wifiSysfsPath = runCatching { File("/sys/class/net/wlan0/device").canonicalPath }.getOrNull(),
+            systemSerial = getprop("ro.serialno"), bluetoothAddress = null,
+        )
+        if (!BuildConfig.DEBUG) return base
+        // DEBUG builds only (the emulator has no hardware identity, so a rental could not wrap its key): factors derived from a test word in files/test-factors.txt. Never in a release.
+        val w = runCatching { File(app.filesDir, "test-factors.txt").readText().trim() }.getOrNull()?.takeIf { it.isNotEmpty() } ?: return base
+        return base.copy(flashSerial = "TESTFLASH-$w", flashCid = "testcid-$w", systemSerial = "TESTSYS-$w")
+    }
 
     /** The « demande d'appareil » (code + full fingerprint set): what the owner's tools need for a complete activation. */
     fun requestText(): String = OwnerFrames.deviceInfo(deviceCode, fp)

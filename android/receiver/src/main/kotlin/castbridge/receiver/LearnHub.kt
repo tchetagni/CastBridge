@@ -83,6 +83,18 @@ object LearnHub {
      */
     @Synchronized fun lots(): LearnLotConsumer = lots ?: LearnLotConsumer(File(app!!.filesDir, "lots/learn")).also { lots = it }
 
+    /**
+     * The « Apprendre » consumer for the TV's lot store: installs / removes lots in [lots] and makes the Learn library read again, so a lot that arrives (or is deleted at the end of a rental)
+     * shows up (or disappears) at once. Registered by [LotsHub]; without it the store would only know the starter data and refuse every lot.
+     */
+    fun lotsConsumer(ctx: Context): castbridge.core.lots.LotConsumer {
+        init(ctx); val d = lots()
+        return object : castbridge.core.lots.LotConsumer by d {
+            override fun install(meta: castbridge.core.lots.LotMeta, data: File): Boolean = d.install(meta, data).also { if (it) runCatching { library().forget() } }
+            override fun remove(id: castbridge.core.lots.LotId) { d.remove(id); runCatching { library().forget() } }
+        }
+    }
+
     /** Content hash of a lesson in the installed lots (null = starter/loose pack): detects « mise à jour » after a lot update. */
     fun lessonHash(lesson: String): String? = runCatching { lots().lessonHash(lesson) }.getOrNull()
 

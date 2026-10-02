@@ -26,7 +26,7 @@ object LotsHub {
         val app = ctx.applicationContext
         val pi = runCatching { app.packageManager.getPackageInfo(app.packageName, 0) }.getOrNull()
         @Suppress("DEPRECATION") val code = pi?.let { if (Build.VERSION.SDK_INT >= 28) it.longVersionCode.toInt() else it.versionCode } ?: 0
-        val consumers = listOf("learn", "quiz").associateWith { f -> registered.firstOrNull { it.feature == f } ?: StarterOnlyConsumer(f) } +
+        val consumers = listOf("learn", "quiz").associateWith { f -> registered.firstOrNull { it.feature == f } ?: if (f == "learn") LearnHub.lotsConsumer(app) else StarterOnlyConsumer(f) } +
             registered.associateBy { it.feature }
         TvLotStore(File(app.filesDir, "lots"), consumers, (UpdateKeys.PUBLIC_KEYS + BuildConfig.EXTRA_UPDATE_KEY).filter { it.isNotBlank() }, code,
             starterBytes = { StarterBudget.bytes }).also { storeRef = it }

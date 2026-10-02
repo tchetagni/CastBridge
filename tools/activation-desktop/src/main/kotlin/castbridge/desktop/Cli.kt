@@ -52,7 +52,7 @@ class Cli(private val env: Env) {
         fun get(k: String) = opts[k]?.last()
         fun all(k: String) = opts[k] ?: emptyList()
         fun need(k: String) = get(k) ?: throw UsageException("Option obligatoire : --$k")
-        companion object { val FLAGS = setOf("qr", "production", "essai", "sans-confirmation", "json") }
+        companion object { val FLAGS = setOf("qr", "production", "essai", "sans-confirmation", "json", "super") }
     }
 
     private fun home(a: Args) = File(a.get("dossier") ?: env.getenv("CASTBRIDGE_ACTIVATION_HOME") ?: (System.getProperty("user.home") + "/.castbridge-activation"))
@@ -73,7 +73,7 @@ class Cli(private val env: Env) {
         catch (e: UsageException) { env.err.println("Erreur : ${e.message}\n(« aide » liste les commandes)"); 2 }
         catch (e: WrongCode) { 3 }
         catch (e: IssueException) { env.err.println("Refusé : ${e.message}"); 1 }
-        catch (e: IllegalArgumentException) { env.err.println("Refusé : ${e.message}"); 1 }
+        catch (e: IllegalArgumentException) { env.err.println("Refusé : ${e.message}"); if (env.getenv("CASTBRIDGE_DEBUG") != null) e.printStackTrace(env.err); 1 }
     }
 
     private fun dispatch(cmd: String, a: Args): Int = when (cmd) {
