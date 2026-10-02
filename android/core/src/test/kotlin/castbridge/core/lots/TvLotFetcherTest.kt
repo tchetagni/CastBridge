@@ -164,6 +164,39 @@ class TvLotFetcherTest {
         assertTrue(e.consumer.installed().isEmpty())
     }
 
+    @Test fun aLotPushedByThePhoneMeanwhileNeverCausesAnEviction() {
+        val d = real("zh-a0-salut-fr"); val e = Env(max = d.size + 100L)
+        val remote = FakeRemote(lots("zh-a0-salut-fr"))
+        remote.onOpen = {
+            // the phone fills the TV between the space check and the install
+            val l = Kit.bytes(8, 200); val lm = Kit.meta("learn", "cm2", 1, l)
+            e.store.partFile(LotNames.fileName(lm)).also { it.parentFile.mkdirs(); it.writeBytes(l) }
+            assertTrue(e.store.installReceived(LotNames.fileName(lm), Kit.sign(listOf(lm)).toJson()) is TvLotStore.Result.Ok, "phone push")
+            remote.onOpen = null
+        }
+        val rep = fetcher(e, remote).run()
+        assertEquals(TvLotFetcher.Status.REFUSED, rep.results.single().status); assertContains(rep.results.single().message, "rien n'a été supprimé")
+        assertEquals(listOf(LotId("learn", "cm2")), e.learn.installed().map { it.id })      // the phone's lot was NOT evicted
+        assertTrue(e.consumer.installed().isEmpty())
+    }
+
+    @Test fun aTlsCertificateFailureIsAPlainFrenchMessageOnTheCatalogAndOnADownload() {
+        val chain = javax.net.ssl.SSLHandshakeException("Chain validation failed").apply { initCause(java.security.cert.CertificateNotYetValidException("NotBefore: 1970")) }
+        val e = Env(); val remote = FakeRemote(lots("zh-a0-salut-fr"))
+        remote.failWith = chain
+        val rep = fetcher(e, remote).run()
+        assertEquals(TvLotFetcher.Blocked.CERTIFICATE_REFUSED, rep.blocked)
+        assertEquals("Certificat du serveur refusé : vérifiez la date et l'heure de la TV", rep.message()); assertFalse(rep.message().contains("Chain"))
+        // the cause chain is searched (an IOException wrapping the real error), a plain network error stays « serveur injoignable »
+        remote.failWith = IOException("wrap", java.security.cert.CertificateExpiredException("expired"))
+        assertEquals(TvLotFetcher.Blocked.CERTIFICATE_REFUSED, fetcher(e, remote).run().blocked)
+        remote.failWith = IOException("hors ligne"); assertEquals(TvLotFetcher.Blocked.SERVER_UNREACHABLE, fetcher(e, remote).run().blocked)
+        // failing only at the download: no retry (3 attempts would change nothing), same message
+        val r2 = FakeRemote(lots("zh-a0-salut-fr")); var opens = 0; r2.onOpen = { opens++; r2.failWith = chain }
+        val rep2 = fetcher(e, r2).run()
+        assertEquals(TvLotFetcher.Status.FAILED, rep2.results.single().status); assertEquals(TvLotFetcher.CERT_MESSAGE, rep2.results.single().message); assertEquals(1, opens)
+    }
+
     @Test fun anAppTooOldIsToldAndTheLotIsNotDownloaded() {
         val e = Env(); val d = real("zh-a0-salut-fr")
         val remote = FakeRemote(listOf(Published(meta("zh-a0-salut-fr", d).copy(minAppVersion = 99), d)))

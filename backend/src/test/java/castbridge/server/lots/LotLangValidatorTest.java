@@ -28,6 +28,17 @@ class LotLangValidatorTest {
         return f;
     }
 
+    /** What LangLotBuilder.withLicense does for a free lot. */
+    private static String tagged(String json) { int i = json.indexOf('{'); return json.substring(0, i + 1) + "\"license\": \"CC-BY-SA-4.0\"," + json.substring(i + 1); }
+
+    @Test
+    void refusesALotWithoutTheCcBySaLicenceField() throws Exception {
+        String base = "{\"format\":1,\"type\":\"langue\",\"id\":\"de-a0-x-en\",\"version\":1,\"units\":[{}]}";
+        assertTrue(!v.validate(zip("langue.json", base), 100, "de-a0-x-en", 1).isEmpty());
+        assertTrue(!v.validate(zip("langue.json", base.replace("{\"format", "{\"license\":\"CC-BY-NC-4.0\",\"format")), 100, "de-a0-x-en", 1).isEmpty());
+        assertEquals(List.of(), v.validate(zip("langue.json", tagged(base)), 100, "de-a0-x-en", 1));
+    }
+
     @Test
     void everyCommittedPackPassesAsALot() throws Exception {
         Path root = Path.of("..", "content", "langues");
@@ -35,7 +46,7 @@ class LotLangValidatorTest {
         int n = 0;
         try (Stream<Path> dirs = Files.list(root)) {
             for (Path d : (Iterable<Path>) dirs.filter(p -> Files.isRegularFile(p.resolve("langue.json"))).sorted()::iterator) {
-                String main = Files.readString(d.resolve("langue.json"));
+                String main = tagged(Files.readString(d.resolve("langue.json")));
                 int version = new ObjectMapper().readTree(main).path("version").asInt(1);
                 Path media = d.resolve("media.json");
                 Path lot = Files.isRegularFile(media) ? zip("langue.json", main, "media.json", Files.readString(media)) : zip("langue.json", main);
@@ -49,7 +60,7 @@ class LotLangValidatorTest {
 
     @Test
     void refusesWhatTheTvWouldRefuse() throws Exception {
-        String ok = "{\"format\":1,\"type\":\"langue\",\"id\":\"de-a0-x-en\",\"version\":1,\"units\":[{}]}";
+        String ok = "{\"license\":\"CC-BY-SA-4.0\",\"format\":1,\"type\":\"langue\",\"id\":\"de-a0-x-en\",\"version\":1,\"units\":[{}]}";
         assertEquals(List.of(), v.validate(zip("langue.json", ok), 100, "de-a0-x-en", 1));
         assertTrue(!v.validate(zip("langue.json", ok), 100, "de-a0-y-en", 1).isEmpty());                                   // id != scope
         assertTrue(!v.validate(zip("langue.json", ok), 100, "de-a0-x-en", 2).isEmpty());                                   // version

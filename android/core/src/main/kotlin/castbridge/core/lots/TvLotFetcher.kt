@@ -3,12 +3,15 @@ package castbridge.core.lots
 import castbridge.core.langues.LangLotConsumer
 import castbridge.core.langues.LangLots
 import castbridge.core.net.HttpLite
+import castbridge.core.util.BoundedRead
 import java.io.File
 import java.io.FileOutputStream
 import java.io.IOException
 import java.net.HttpURLConnection
 import java.net.Proxy
 import java.net.URL
+import java.security.cert.CertificateException
+import javax.net.ssl.SSLException
 
 /**
  * [LotRemote] for a TV that has Internet itself (docs/LOTS.md « La TV connectée télécharge ses lots Langues »), hardened more than [HttpLotRemote]:
@@ -48,8 +51,7 @@ class SecureHttpLotRemote(
             val code = c.responseCode
             refuseRedirect(code)
             if (code != 200) throw IOException("HTTP $code")
-            val bytes = c.inputStream.use { it.readNBytes(MAX_CATALOG + 1) }
-            if (bytes.size > MAX_CATALOG) throw IOException("catalogue trop gros")
+            val bytes = try { c.inputStream.use { BoundedRead.readAll(it, MAX_CATALOG) } } catch (e: BoundedRead.TooLarge) { throw IOException("catalogue trop gros") }
             return String(bytes, Charsets.UTF_8)
         } finally { c.disconnect() }
     }
@@ -105,7 +107,7 @@ class TvLotFetcher(
     private val lotDeadlineMs: Long = 180_000,
     private val maxLots: Int = 100,
 ) {
-    enum class Blocked { NO_INTERNET, NO_KEY, SERVER_UNREACHABLE, CATALOG_UNREADABLE, SIGNATURE_INVALID }
+    enum class Blocked { NO_INTERNET, NO_KEY, SERVER_UNREACHABLE, CERTIFICATE_REFUSED, CATALOG_UNREADABLE, SIGNATURE_INVALID }
     enum class Status { INSTALLED, UPDATED, SKIPPED_FULL, SKIPPED_APP_TOO_OLD, REFUSED, FAILED, CANCELLED }
 
     data class Result(val id: LotId, val status: Status, val message: String = "", val bytes: Long = 0)
@@ -120,6 +122,7 @@ class TvLotFetcher(
             Blocked.NO_INTERNET -> "Cette TV n'a pas accès à Internet : branchez-la au réseau, ou envoyez les leçons depuis le téléphone."
             Blocked.NO_KEY -> "Mise à jour impossible : aucune clé de vérification dans cette application."
             Blocked.SERVER_UNREACHABLE -> "Le serveur CastBridge ne répond pas ($detail) : réessayez plus tard."
+            Blocked.CERTIFICATE_REFUSED -> CERT_MESSAGE
             Blocked.CATALOG_UNREADABLE -> "Le catalogue reçu du serveur est illisible : réessayez plus tard."
             Blocked.SIGNATURE_INVALID -> "Le catalogue reçu n'est pas signé par CastBridge : mise à jour refusée par sécurité."
             null -> {
@@ -159,7 +162,9 @@ class TvLotFetcher(
     private fun runInternal(progress: (Progress) -> Unit, cancelled: () -> Boolean): Report {
         if (!online()) return Report(Blocked.NO_INTERNET)
         if (publicKeys.isEmpty()) return Report(Blocked.NO_KEY)
-        val json = try { remote.catalogJson(channel, LangLots.FEATURE) } catch (e: IOException) { return Report(Blocked.SERVER_UNREACHABLE, e.message ?: e.javaClass.simpleName) }
+        val json = try { remote.catalogJson(channel, LangLots.FEATURE) } catch (e: IOException) {
+            return if (isCertificateProblem(e)) Report(Blocked.CERTIFICATE_REFUSED, CERT_MESSAGE) else Report(Blocked.SERVER_UNREACHABLE, e.message ?: e.javaClass.simpleName)
+        }
         val cat = try { LotManifest.parse(json) } catch (e: IllegalArgumentException) { return Report(Blocked.CATALOG_UNREADABLE) }
         // the signature first: nothing else of the catalog is trusted before it is verified
         if (!cat.signedByAny(publicKeys)) return Report(Blocked.SIGNATURE_INVALID)
@@ -195,13 +200,14 @@ class TvLotFetcher(
             try {
                 fetch(m, part, start, progress)
                 if (!LotHash.sha256Hex(part).equals(m.sha256, ignoreCase = true)) { part.delete(); throw IOException("empreinte SHA-256 différente : fichier abîmé pendant le transfert") }
-                return when (val r = store.installReceived(name, proof)) {
+                return when (val r = store.installReceived(name, proof, evict = false)) {
                     is TvLotStore.Result.Ok -> Result(m.id, if (have != null) Status.UPDATED else Status.INSTALLED, bytes = m.bytes)
                     is TvLotStore.Result.Refused -> Result(m.id, Status.REFUSED, r.reason)
                 }
             } catch (e: LotRemote.Gone) {
                 part.delete(); return Result(m.id, Status.FAILED, "« ${m.title} » n'est plus proposé par le serveur")
             } catch (e: IOException) {
+                if (isCertificateProblem(e)) return Result(m.id, Status.FAILED, CERT_MESSAGE)   // retrying cannot help: the clock or the root certificates of the TV are wrong
                 last = e.message ?: e.javaClass.simpleName
                 if (now() - start > lotDeadlineMs) break
                 if (attempt < maxAttempts) sleep(minOf(30_000L, 1_000L shl (attempt - 1)))
@@ -240,5 +246,19 @@ class TvLotFetcher(
         if (part.length() != m.bytes) throw IOException("téléchargement coupé à ${part.length()} / ${m.bytes} octets")
     }
 
-    companion object { const val MAX_ENTRIES = 5000 }
+    companion object {
+        const val MAX_ENTRIES = 5000
+        const val CERT_MESSAGE = "Certificat du serveur refusé : vérifiez la date et l'heure de la TV"
+
+        /** TLS failure caused by the certificate (wrong TV clock: not yet valid / expired; missing root CA; untrusted chain), looking through the whole cause chain. */
+        fun isCertificateProblem(e: Throwable): Boolean {
+            var t: Throwable? = e; var depth = 0
+            while (t != null && depth++ < 10) {
+                if (t is CertificateException) return true
+                if (t is SSLException && (t.javaClass.simpleName == "SSLHandshakeException" || t.javaClass.simpleName == "SSLPeerUnverifiedException")) return true
+                t = t.cause?.takeIf { it !== t }
+            }
+            return false
+        }
+    }
 }

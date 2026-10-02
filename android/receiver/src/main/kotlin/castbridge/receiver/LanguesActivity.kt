@@ -46,6 +46,8 @@ class LanguesActivity : Activity() {
 
     override fun onResume() { super.onResume(); LanguesHub.screen = this }
     override fun onPause() { if (LanguesHub.screen === this) LanguesHub.screen = null; stopAudio(); super.onPause() }
+    /** The screen is no longer visible (Home, another app): the download stops (a lot already installed stays; the next press resumes). */
+    override fun onStop() { if (updating) cancelUpdate = true; super.onStop() }
 
     /** A lot arrived or was removed: back to the first screen, with fresh data. */
     fun reload() {
@@ -53,7 +55,8 @@ class LanguesActivity : Activity() {
         stack.clear(); go { home() }
     }
     @Volatile private var updating = false
-    @Volatile private var cancelUpdate = false
+    private val cancelFlag = java.util.concurrent.atomic.AtomicBoolean(false)
+    private var cancelUpdate: Boolean get() = cancelFlag.get(); set(v) = cancelFlag.set(v)
     private var reloadLater = false
 
     private fun go(screen: () -> Unit) { val r = Runnable { screen() }; stack.add(r); r.run() }
@@ -105,7 +108,7 @@ class LanguesActivity : Activity() {
     private fun update() {
         clear("Mise à jour des lots Langues", "Téléchargement depuis le serveur CastBridge, parce que vous l'avez demandé. Rien d'autre n'est envoyé.")
         if (castbridge.receiver.ActivationCenter.trial()) { label(castbridge.core.owner.TrialPolicy.MESSAGE, 34, GamesColors.ERROR, top = 40); button("Retour") { onBackPressed() }; focusFirst(); return }
-        val fetcher = try { LanguesHub.fetcher(this) } catch (e: IllegalArgumentException) {
+        val fetcher = try { LanguesHub.fetcher(applicationContext) } catch (e: IllegalArgumentException) {
             label("L'adresse du serveur n'est pas sécurisée (HTTPS obligatoire) : utilisez le téléphone pour envoyer les leçons.", 34, GamesColors.ERROR, top = 40)
             button("Retour") { onBackPressed() }; focusFirst(); return
         }
@@ -113,25 +116,39 @@ class LanguesActivity : Activity() {
         val cancel = button("Annuler") { cancelUpdate = true; status.text = "Interruption…" }
         focusFirst()
         updating = true; cancelUpdate = false; reloadLater = false
-        Thread {
+        // the worker never holds the Activity (it may be destroyed meanwhile): weak references only, and the fetcher was built on the application context
+        UpdateTask(java.lang.ref.WeakReference(this), java.lang.ref.WeakReference(status), java.lang.ref.WeakReference(cancel), fetcher, cancelFlag).start()
+    }
+
+    private class UpdateTask(
+        private val act: java.lang.ref.WeakReference<LanguesActivity>,
+        private val status: java.lang.ref.WeakReference<android.widget.TextView>,
+        private val cancel: java.lang.ref.WeakReference<android.view.View>,
+        private val fetcher: castbridge.core.lots.TvLotFetcher,
+        private val flag: java.util.concurrent.atomic.AtomicBoolean,
+    ) : Thread() {
+        override fun run() {
             val report = runCatching { fetcher.run(progress = { p ->
                 val pct = if (p.total > 0) p.done * 100 / p.total else 0
-                runOnUiThread { if (updating) status.text = "Lot ${p.index} sur ${p.count} : ${p.id.scope}   ($pct %)" }
-            }, cancelled = { cancelUpdate }) }.getOrNull()
-            runOnUiThread {
-                updating = false
-                if (isFinishing || isDestroyed) return@runOnUiThread
-                if (body.indexOfChild(status) < 0) { if (reloadLater) reload(); return@runOnUiThread }   // the user went back meanwhile: only refresh the list
-                body.removeView(cancel)
-                val ok = report?.ok == true
-                status.text = report?.message() ?: "La mise à jour a échoué : réessayez plus tard."
-                status.setTextColor(if (ok) GamesColors.SUCCESS else GamesColors.ERROR)
-                report?.results?.filter { it.status == castbridge.core.lots.TvLotFetcher.Status.INSTALLED || it.status == castbridge.core.lots.TvLotFetcher.Status.UPDATED }
-                    ?.take(12)?.forEach { label("✓ ${it.id.scope}", 28, GamesColors.TEXT_MEDIUM, top = 4) }
-                button("Retour aux langues", primary = true) { onBackPressed() }
-                focusFirst()
-            }
-        }.start()
+                act.get()?.runOnUiThread { if (act.get()?.updating == true) status.get()?.text = "Lot ${p.index} sur ${p.count} : ${p.id.scope}   ($pct %)" }
+            }, cancelled = { flag.get() }) }.getOrNull()
+            val a = act.get() ?: return
+            a.runOnUiThread { a.finishUpdate(report, status.get(), cancel.get()) }
+        }
+    }
+
+    private fun finishUpdate(report: castbridge.core.lots.TvLotFetcher.Report?, status: android.widget.TextView?, cancel: android.view.View?) {
+        updating = false
+        if (status == null || isFinishing || isDestroyed) return
+        if (body.indexOfChild(status) < 0) { if (reloadLater) reload(); return }   // the user went back meanwhile: only refresh the list
+        if (cancel != null) body.removeView(cancel)
+        val ok = report?.ok == true
+        status.text = report?.message() ?: "La mise à jour a échoué : réessayez plus tard."
+        status.setTextColor(if (ok) GamesColors.SUCCESS else GamesColors.ERROR)
+        report?.results?.filter { it.status == castbridge.core.lots.TvLotFetcher.Status.INSTALLED || it.status == castbridge.core.lots.TvLotFetcher.Status.UPDATED }
+            ?.take(12)?.forEach { label("✓ ${it.id.scope}", 28, GamesColors.TEXT_MEDIUM, top = 4) }
+        button("Retour aux langues", primary = true) { onBackPressed() }
+        focusFirst()
     }
 
     private fun levels(l: Lang) {

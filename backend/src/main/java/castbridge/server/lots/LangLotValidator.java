@@ -24,6 +24,8 @@ public class LangLotValidator implements LotValidator {
     public static final String FEATURE = "langues";
     /** castbridge.core.langues.LangLotConsumer.MAX_TEXT_LOT_BYTES (inside the 10 Mo TV cap of {@link LotService#MAX_LOT_BYTES}). */
     public static final long MAX_BYTES = 3L << 20;
+    /** castbridge.core.langues.LangLotBuilder.LICENSE_TAG. */
+    public static final String LICENSE_TAG = "CC-BY-SA-4.0";
     static final long MAX_ENTRY = 8L << 20;
     /** {target}-{level}-{theme}-{source}: castbridge.core.langues.LangLots. */
     static final Pattern SCOPE = Pattern.compile("([a-z]{2})-([a-z0-9]{2,5})-([a-z0-9]{1,16})-([a-z]{2})");
@@ -60,6 +62,8 @@ public class LangLotValidator implements LotValidator {
             if (root == null || !root.isObject()) { problems.add("langue.json illisible"); return problems; }
             if (!"langue".equals(root.path("type").asText(null))) problems.add("langue.json : \"type\" doit valoir \"langue\"");
             if (root.has("format") && root.path("format").asInt(-1) != 1) problems.add("langue.json : format " + root.path("format").asText() + " non géré (1 attendu)");
+            // « free only »: the builder writes this field into the langue.json of a free (CC BY-SA) lot only; a lot without it is a reserved or hand-made one and never gets published here
+            if (!LICENSE_TAG.equals(root.path("license").asText(null))) problems.add("langue.json : \"license\" doit valoir \"" + LICENSE_TAG + "\" (seuls les lots libres CC BY-SA sont publiés ; champ écrit par :core:buildLangLots)");
             if (!root.path("units").isArray() || root.path("units").isEmpty()) problems.add("langue.json : aucune unité");
             if (scope != null && !scope.equals(root.path("id").asText(null))) problems.add("langue.json : id « " + root.path("id").asText("") + " » différent du scope déclaré « " + scope + " »");
             if (version > 0 && root.path("version").asInt(1) != version) problems.add("langue.json : version " + root.path("version").asInt(1) + " différente de la version déclarée " + version);

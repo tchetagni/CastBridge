@@ -12,7 +12,7 @@ Idempotent : un lot déjà publié avec la même empreinte est sauté ; déjà e
 empreinte différente -> erreur (une version ne change jamais : relancer la construction avec -Pupdate pour passer à la suivante).
 Seuls les lots de famille « free » (CC BY-SA, jamais scellés ni loués) sont publiés ; un lot « reserved » est refusé.
 """
-import argparse, hashlib, json, os, subprocess, sys, urllib.error, urllib.request, uuid
+import argparse, hashlib, json, os, subprocess, sys, urllib.error, urllib.parse, urllib.request, uuid
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 REPO = os.path.normpath(os.path.join(HERE, "..", ".."))
@@ -104,7 +104,13 @@ def default_transport(method, url, headers, body):
 
 class Admin:
     def __init__(self, server, token, transport=default_transport):
-        if not server.startswith("https://") and not (server.startswith("http://127.0.0.1") or server.startswith("http://localhost")):
+        try:
+            u = urllib.parse.urlparse(server)
+            host, user = u.hostname, u.username
+        except ValueError:
+            raise Fail("adresse du serveur invalide")
+        loopback = u.scheme == "http" and host in ("localhost", "127.0.0.1", "::1")
+        if user is not None or not host or not (u.scheme == "https" or loopback):
             raise Fail("le serveur doit être en HTTPS (le jeton d'administration ne circule jamais en clair)")
         self.base, self.token, self.transport = server.rstrip("/"), token, transport
 

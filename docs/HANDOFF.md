@@ -14,6 +14,9 @@
 
 ## 0. Journal en direct (le plus récent en haut)
 
+### 2026-10-02 : correctifs d'audit des pipelines Langues + garde « niveau d'API Android » (branche `claude/fix-langues-pipelines-api`, non poussée)
+- Corrigés : message français pour un certificat TLS refusé (heure fausse de la TV) ; `readNBytes` (API 33) remplacé par `BoundedRead` (`core/util`) dans `TvLotFetcher`, `LangLotConsumer` (déjà dans main : pouvait casser le chemin téléphone → TV) et `remote/smart/Net.kt` ; lot libre = champ `license` écrit par le constructeur et exigé par `LangLotValidator` ; `installReceived(evict=false)` pour le téléchargement serveur → TV ; téléchargement annulé à l'arrêt de l'écran, sans référence à l'Activity ; `publish_lots.py` ne tolère le HTTP clair que vers localhost / 127.0.0.1 / ::1. **Quota du téléphone : 100 Mo dans le code, 500 Mo décidé (à faire).** Nouveau garde `ApiLevelGuardTest` (`:core:test`) : toute API JDK absente d'Android 9 échoue avec fichier:ligne et remplacement. Détails : `docs/agent-reports/fix-langues-pipelines-api.md`.
+
 ### 2026-10-02 : lots Langues, serveur + téléphone + TV connectée (branche `claude/langues-lots-pipelines`, non poussée, non validé sur TV)
 - Le serveur accepte la fonction `langues` ; `tools/langues/publish_lots.py` publie les 46 lots libres (simulation par défaut, `--apply` avec `CASTBRIDGE_ADMIN_TOKEN`) ; le téléphone les liste et les envoie à la TV ; la TV avec Internet a le bouton « Mettre à jour les lots Langues » (jamais en tâche de fond). **Rien n'est publié en production** : le propriétaire lance l'étape 2 de `docs/LANGUES.md` § 15. Détails : `docs/agent-reports/langues-lots-pipelines.md`.
 

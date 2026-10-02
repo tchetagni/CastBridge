@@ -91,7 +91,7 @@ object Http {
             if (body != null) { c.doOutput = true; c.outputStream.use { it.write(body.toByteArray(Charsets.UTF_8)) } }
             val st = c.responseCode
             val stream = if (st >= 400) c.errorStream else c.inputStream
-            val text = stream?.use { s -> String(s.readNBytes(MAX_BODY), Charsets.UTF_8) } ?: ""
+            val text = stream?.use { s -> String(castbridge.core.util.BoundedRead.readUpTo(s, MAX_BODY), Charsets.UTF_8) } ?: ""
             return Result(st, text, c.headerFields.filterKeys { it != null }.mapKeys { it.key.lowercase() }.mapValues { it.value.joinToString(",") })
         } finally { c.disconnect() }
     }

@@ -39,14 +39,21 @@ class FakeRemote(var published: List<Published> = emptyList(), var signWith: (Li
     /** Cuts the next download after this many bytes (of the data it was about to send), once. */
     var cutAfter: Int? = null
     var gone = false
+    /** Thrown by the next catalog / download request, whatever it is (a TLS failure for instance). */
+    var failWith: IOException? = null
+    /** Runs when a download starts (a phone pushing a lot in the meantime, for instance). */
+    var onOpen: (() -> Unit)? = null
 
     override fun catalogJson(channel: String): String {
         catalogCalls++
+        failWith?.let { throw it }
         if (down) throw IOException("hors ligne")
         return signWith(published.map { it.meta }).toJson()
     }
 
     override fun open(m: LotMeta, offset: Long): LotRemote.Stream {
+        onOpen?.invoke()
+        failWith?.let { throw it }
         if (down) throw IOException("hors ligne")
         if (gone) throw LotRemote.Gone("retiré")
         val p = published.first { it.meta.id == m.id && it.meta.version == m.version }

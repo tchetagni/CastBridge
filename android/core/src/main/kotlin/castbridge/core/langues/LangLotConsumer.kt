@@ -5,6 +5,7 @@ import castbridge.core.lots.LotHash
 import castbridge.core.lots.LotId
 import castbridge.core.lots.LotMeta
 import castbridge.core.quiz.Json
+import castbridge.core.util.BoundedRead
 import java.io.File
 import java.io.IOException
 import java.util.zip.ZipFile
@@ -123,8 +124,7 @@ class LangLotConsumer(
                 for (name in listOf("langue.json", "media.json")) {
                     val e = z.getEntry(name) ?: continue
                     if (e.size > MAX_ENTRY) throw LangPackJson.ParseError("$name trop gros")
-                    val bytes = z.getInputStream(e).use { it.readNBytes(MAX_ENTRY.toInt() + 1) }
-                    if (bytes.size > MAX_ENTRY) throw LangPackJson.ParseError("$name trop gros")
+                    val bytes = try { z.getInputStream(e).use { BoundedRead.readAll(it, MAX_ENTRY.toInt()) } } catch (x: BoundedRead.TooLarge) { throw LangPackJson.ParseError("$name trop gros") }
                     files[name] = String(bytes, Charsets.UTF_8)
                 }
             }
