@@ -56,6 +56,7 @@ h3{font-size:13px;color:var(--acc);margin:10px 0 0}
 <h1>CastBridge TV</h1>
 <div id="ed" style="display:none" aria-live="polite"></div>
 <div id="ra" class="mut" style="margin:0 0 8px"></div>
+<div id="ik" class="mut" style="margin:0 0 8px"></div>
 
 <section id="login">
   <h2>Code PIN</h2>
@@ -225,7 +226,8 @@ async function refresh() {
 async function loadEdition() {
   const ed = $("ed"); let a;
   try { a = await api("GET", "/api/activation"); } catch (e) { return; }
-  $("ra").textContent = (a && a.remoteAssist) || "";                    // « Assistance à distance : connectée / hors ligne / en attente d'acceptation des conditions »
+  $("ik").textContent = a && a.installKeyProtection ? "Clé d'installation : " + (a.installKeyProtection === "keystore" ? "protégée par le coffre Android" : "non protégée") : "";
+  $("ra").textContent = (a && a.remoteAssist) || "";                  // « Assistance à distance : connectée / hors ligne / en attente d'acceptation des conditions »
   if (!a || !a.edition) { ed.style.display = "none"; return; }
   ed.className = a.ended ? "end" : a.trial ? "trial" : "prod";
   ed.textContent = "";

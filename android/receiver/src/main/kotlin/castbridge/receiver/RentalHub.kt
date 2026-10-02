@@ -18,7 +18,7 @@ import java.io.File
  * account activated by the super administrator code (SUPER_UNLIMITED), where rentals are permanent. The TV stays offline: nothing here reaches the Internet.
  */
 object RentalHub {
-    private class Parts(val vault: RentalVault, val ledger: RentalLedger, val sweeper: RentalSweeper)
+    private class Parts(val vault: RentalVault, val ledger: RentalLedger, val sweeper: RentalSweeper, val keys: InstallKeyStore)
     @Volatile private var parts: Parts? = null
     private const val TAG = "RentalHub"
 
@@ -26,19 +26,38 @@ object RentalHub {
         val app = ctx.applicationContext
         val dir = File(app.filesDir, "rental")
         val vault = RentalVault(dir)
+        // The installation key (X25519, wrapped by the Android Keystore or, stated, in the clear): made here, not in `ActivationCenter.init`, and without the core started (works on the locked screen).
+        val keys = InstallKeyStore(dir, KeystoreWrapper.orPlain())
+        keys.loadOrCreate()
+        keys.loadNote?.let { Log.w(TAG, it) }
         val ledger = RentalLedger(dir, TvClock(mono = android.os.SystemClock::elapsedRealtime), RentalConfig(), System::currentTimeMillis)
         ledger.loadNote?.let { Log.e(TAG, it) }
         val rented = TvRentedLots(LotsHub.store(app))
         // Lots a lasting right covers (a lot bought during its rental is kept at expiry). The TV has NO bundle catalogue: OwnedLots resolves only what needs none (owner grants, `tout`), see its doc.
         val owned = { OwnedLots.of(ActivationCenter.allActivations(), ActivationCenter.now(), rented.heldLots()) }
         val sweeper = RentalSweeper(ledger, vault, rented, { ActivationCenter.allActivations() }, owned, System::currentTimeMillis, {}, { k, e -> Log.e(TAG, "balayage de la location $k en échec (nouvel essai au prochain balayage)", e) })
-        Parts(vault, ledger, sweeper).also { parts = it }
+        Parts(vault, ledger, sweeper, keys).also { parts = it }
     }
 
-    /** An activation was accepted: the keys of its usable rentals go into the safe (a swept or ended contract is never reopened). */
-    fun onActivation(ctx: Context, a: Activation) {
+    /** This installation's key pair (works locked or trial: nothing here needs the core to be started). Never throws for a missing or unreadable file: a new key is made. */
+    fun installKey(ctx: Context): InstallKey = ensure(ctx).keys.loadOrCreate()
+
+    /** `keystore` (wrapped by the Android Keystore) or `plain` (stated fallback): for `GET /api/activation` and the admin page. */
+    fun installProtection(ctx: Context): String = ensure(ctx).keys.protection
+
+    /** The rental safe, for the sealed lots of the other hubs. */
+    fun vault(ctx: Context): RentalVault = ensure(ctx).vault
+
+    /**
+     * An activation was accepted: the keys of its usable rentals go into the safe (a swept or ended contract is never reopened). The installation key IS passed to the ledger, which
+     * enforces the v1 box sunset from then on ([installKeyed]). Returns the French notes worth showing (a box for another installation, a refused v1 box, a regenerated key).
+     */
+    fun onActivation(ctx: Context, a: Activation): List<String> {
         val p = ensure(ctx)
-        p.ledger.install(a, ActivationCenter.allActivations(), ActivationCenter.fingerprints(), p.vault)
+        val result = p.ledger.installKeyed(a, ActivationCenter.allActivations(), ActivationCenter.fingerprints(), p.vault, p.keys.loadOrCreate())
+        val notes = RentalNotes.of(result) + listOfNotNull(p.keys.loadNote?.takeIf { "illisible" in it }?.let { "$it : demandez la réémission des locations" })
+        notes.forEach { Log.w(TAG, it) }
+        return notes
     }
 
     /** The state of every rental, for the access computation and the screens. */
