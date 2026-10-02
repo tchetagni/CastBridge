@@ -24,12 +24,13 @@ class ByteRelay(
     val bytesAtoB = AtomicLong()
     val bytesBtoA = AtomicLong()
     private val closed = AtomicBoolean(false)
-    private val threads = ArrayList<Thread>(2)
+    private val threads = ArrayList<Thread>(2)    // guarded by itself (start() adds, close() reads)
     @Volatile var lastActivity = System.currentTimeMillis(); private set
 
     fun start(): ByteRelay {
-        threads += pump(aIn, bOut, bytesAtoB, "$name-a2b")
-        threads += pump(bIn, aOut, bytesBtoA, "$name-b2a")
+        val a = pump(aIn, bOut, bytesAtoB, "$name-a2b"); val b = pump(bIn, aOut, bytesBtoA, "$name-b2a")
+        synchronized(threads) { threads += a; threads += b }
+        if (closed.get()) close()      // closed before both pumps were registered: still interrupt them
         return this
     }
 
@@ -51,12 +52,31 @@ class ByteRelay(
     fun close() {
         if (!closed.compareAndSet(false, true)) return
         runCatching { closeA() }; runCatching { closeB() }
+        // A pump blocked in read() on a link whose close does not unblock it (a pipe, a half-dead socket) would live forever: interrupt it.
+        val me = Thread.currentThread()
+        synchronized(threads) { threads.toList() }.forEach { if (it !== me) it.interrupt() }
     }
 
     val isClosed get() = closed.get()
 
-    /** Waits for both directions to finish. */
-    fun join(timeoutMs: Long = 0) { threads.forEach { it.join(timeoutMs) } }
+    /**
+     * Waits for both directions to finish. [timeoutMs] <= 0 waits without limit (a live link: its end is decided by the idle watchdog or the peers).
+     * With a limit, the TOTAL wait is bounded: once it elapses the relay is closed (both links, both pump threads interrupted) and given
+     * [GRACE_MS] to end, so a caller can never block forever. Returns true when both pumps have ended.
+     */
+    fun join(timeoutMs: Long = 0): Boolean {
+        val all = synchronized(threads) { threads.toList() }
+        if (timeoutMs <= 0) { all.forEach { it.join() }; return true }
+        val deadline = System.nanoTime() + timeoutMs * 1_000_000
+        for (t in all) { val left = (deadline - System.nanoTime()) / 1_000_000; if (left > 0) t.join(left) }
+        if (all.any { it.isAlive }) {
+            close()
+            all.forEach { it.join(GRACE_MS) }
+        }
+        return all.none { it.isAlive }
+    }
+
+    companion object { const val GRACE_MS = 1000L }
 }
 
 /**

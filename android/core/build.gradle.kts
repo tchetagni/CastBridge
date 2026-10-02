@@ -163,6 +163,10 @@ tasks.test {
         override fun afterTest(test: TestDescriptor, result: TestResult) { pending.getAndSet(null)?.cancel(false) }
     })
     environment("LC_ALL", "C.UTF-8")
+    // No JDK keep-alive pool in tests: every test starts its own server on a port the OS picks (port 0), and a later server can get a port an earlier one had;
+    // the pooled idle connection to the dead server then fails the first request of the new one (« Unexpected end of file », « Connection reset »: 1 in
+    // ~1500 servers measured, w15-07). The keep-alive behaviour of the server is covered with raw sockets (RemoteHttpTest, HttpRemoteTransport).
+    systemProperty("http.keepAlive", "false")
     // « Apprendre »: the tests validate every pack source of the repository (docs/LEARN.md)
     systemProperty("learn.content", learnContent.absolutePath)
     // Skill graph + scopes (content/graph): the tests validate them

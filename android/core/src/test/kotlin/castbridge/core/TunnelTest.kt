@@ -84,10 +84,35 @@ class ByteRelayTest {
     }
 
     @Test fun noServerMeansRefused() {
-        val free = ServerSocket(0).use { it.localPort }
-        var closed = false
-        val (i, _) = pipe(); val (_, o) = pipe()
-        assertFalse(SshTunnel(PeerRegistry(), free).serve("AA", "x", i, o, { closed = true }))
-        assertTrue(closed)
+        // A closed port can be taken by another test's server between close() and connect(): then the tunnel (rightly) connects and relays, and
+        // serve() only returns when the link ends. Never wait for that: serve runs in a thread, a stranger's port is retried with a new port,
+        // and every attempt is cut after 10 s by closing the link (the old version blocked the whole Gradle run for 52 minutes).
+        var lastOutcome: Boolean? = null
+        repeat(5) { attempt ->
+            if (lastOutcome == false) return@repeat
+            val free = ServerSocket(0).use { it.localPort }
+            var closed = false
+            val (i, toTunnel) = pipe(); val (_, o) = pipe()
+            val done = CountDownLatch(1)
+            var result = true
+            val t = thread(isDaemon = true) { result = SshTunnel(PeerRegistry(), free).serve("AA", "x", i, o, { closed = true; runCatching { toTunnel.close() } }); done.countDown() }
+            if (!done.await(10, TimeUnit.SECONDS)) { runCatching { toTunnel.close() }; assertTrue(done.await(5, TimeUnit.SECONDS), "serve() must end once its link is closed") }
+            t.join(2000)
+            lastOutcome = result
+            if (!result) assertTrue(closed, "a refused link is closed (attempt $attempt)")
+        }
+        assertEquals(false, lastOutcome, "5 closed ports in a row were all taken by strangers")
+    }
+
+    @Test fun joinIsBoundedAndShutsBothPumpsDownEvenWhenCloseDoesNotUnblockReads() {
+        val (aIn, toA) = pipe(); val (_, aOut) = pipe(); val (bIn, toB) = pipe(); val (_, bOut) = pipe()
+        // closeA/closeB deliberately do NOT close the pipes: only the interruption can end the pumps
+        val r = ByteRelay(aIn, aOut, bIn, bOut, {}, {}, bufferBytes = 1024).start()
+        val t0 = System.nanoTime()
+        r.join(300)                                           // returns after ~0.3 s (+ grace), never forever
+        assertTrue(r.isClosed)
+        assertTrue((System.nanoTime() - t0) / 1_000_000 < 5000, "bounded")
+        assertTrue(r.join(1000), "both pump threads are gone after the bounded join")
+        toA.close(); toB.close()
     }
 }

@@ -7,7 +7,6 @@ import java.io.IOException
 import java.io.InputStream
 import java.io.OutputStream
 import java.net.HttpURLConnection
-import java.net.ServerSocket
 import java.net.URL
 import kotlin.random.Random
 import kotlin.test.*
@@ -31,10 +30,10 @@ class Rig(pin: String? = null, profile: TvProfile = TvProfile(minFreeBytes = 0, 
             (if (usbPresent) listOf(StorageVolume("usb-1234", "Clé USB", usbDir, VolumeKind.REMOVABLE, usbFs, 0, 0, true, usbWritable, usbBps)) else emptyList())
     }
     val registry = VolumeRegistry(provider) { v -> capacity[v.id]?.let { it - used(v.dir) } ?: v.dir.usableSpace }.also { it.refresh() }
-    val port = ServerSocket(0).use { it.localPort }
+    val server = ReceiverServer(registry, player, 0, profile = profile, pin = pin, guard = pin?.let { PinGuard(it, maxFailures = 1000) }, onNotice = { notices += it }, settingsOpener = settingsOpener, progress = progress)
+        .apply { start(5000, false) }     // port 0: the server binds a free port itself (no close-then-reuse race)
+    val port = server.listeningPort
     val base = "http://127.0.0.1:$port"
-    val server = ReceiverServer(registry, player, port, profile = profile, pin = pin, guard = pin?.let { PinGuard(it, maxFailures = 1000) }, onNotice = { notices += it }, settingsOpener = settingsOpener, progress = progress)
-        .apply { start(5000, false) }
     val tv = TvClient(base, pin)
 
     fun used(d: File) = d.walkTopDown().filter { it.isFile }.sumOf { it.length() }
@@ -116,8 +115,8 @@ class MultiVolumeServerTest {
 
     @Test fun targetIsPersistedThroughTheSettingsCallback() {
         var saved: TvProfile? = null
-        val port = ServerSocket(0).use { it.localPort }
-        val s = ReceiverServer(r.registry, FakePlayer(), port, profile = TvProfile(minFreeBytes = 0, minFreeAfterTransfer = 0), onSettings = { saved = it }).apply { start(5000, false) }
+        val s = ReceiverServer(r.registry, FakePlayer(), 0, profile = TvProfile(minFreeBytes = 0, minFreeAfterTransfer = 0), onSettings = { saved = it }).apply { start(5000, false) }
+        val port = s.listeningPort
         try {
             TvClient("http://127.0.0.1:$port").setTarget("internal")
             assertEquals("internal", saved?.target)
@@ -261,8 +260,7 @@ class MultiVolumeServerTest {
         fun w(dir: File, n: String, ageMs: Long) = File(dir, n).apply { writeText("x"); setLastModified(System.currentTimeMillis() - ageMs) }
         w(r.internalDir, "old.mp4.part", 2 * day); w(r.usbDir, "away3d.mp4.part", 3 * day); w(r.usbDir, "away9d.mp4.part", 9 * day)
         w(r.usbDir, "away9d.mp4.meta", 9 * day)
-        val p2 = ServerSocket(0).use { it.localPort }
-        val s2 = ReceiverServer(r.registry, FakePlayer(), p2, profile = TvProfile(minFreeBytes = 0, minFreeAfterTransfer = 0)).apply { start(5000, false) }
+        val s2 = ReceiverServer(r.registry, FakePlayer(), 0, profile = TvProfile(minFreeBytes = 0, minFreeAfterTransfer = 0)).apply { start(5000, false) }
         try {
             assertFalse(File(r.internalDir, "old.mp4.part").exists())
             assertTrue(File(r.usbDir, "away3d.mp4.part").exists(), "a drive that was away keeps partial uploads for a week")
@@ -370,8 +368,8 @@ class HotRemovalTest {
             }
         }
         val reg = VolumeRegistry(failing).also { it.refresh() }
-        val port = ServerSocket(0).use { it.localPort }
-        val s = ReceiverServer(reg, FakePlayer(), port, profile = TvProfile(minFreeBytes = 0, minFreeAfterTransfer = 0)).apply { start(5000, false) }
+        val s = ReceiverServer(reg, FakePlayer(), 0, profile = TvProfile(minFreeBytes = 0, minFreeAfterTransfer = 0)).apply { start(5000, false) }
+        val port = s.listeningPort
         try {
             val c = URL("http://127.0.0.1:$port/upload/x.mp4?offset=0&total=100").openConnection() as HttpURLConnection
             c.requestMethod = "PUT"; c.doOutput = true; c.setFixedLengthStreamingMode(100); c.outputStream.use { it.write(ByteArray(100)) }
