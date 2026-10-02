@@ -21,7 +21,8 @@ enum class EventType(val code: String, val label: String, val group: Group) {
     VIDEO("video", "Vidéo", Group.VIDEOS), GAME("game", "Jeu", Group.GAMES), LEARN("learn", "Apprendre", Group.LEARN), QUIZ("quiz", "Quiz", Group.QUIZ),
     DOWNLOAD("download", "Téléchargement", Group.DOWNLOADS), APP("app", "Application", Group.APPS), BLOCK("block", "Blocage", Group.BLOCKS),
     ALERT("alert", "Alerte", Group.ALERTS), REMOTE("remote", "Télécommande", Group.OTHER), SESSION("session", "Session", Group.OTHER),
-    QUOTA("quota", "Temps / horaires", Group.BLOCKS), UNLOCK("unlock", "Tentative de déverrouillage", Group.BLOCKS);
+    QUOTA("quota", "Temps / horaires", Group.BLOCKS), UNLOCK("unlock", "Tentative de déverrouillage", Group.BLOCKS),
+    SUDOKU("sudoku", "Sudoku", Group.GAMES), SCREEN("screen", "Écran de la TV", Group.OTHER), CONNECTION("connection", "Connexion à la TV", Group.OTHER);
 
     /** The filter chips of the timeline. */
     enum class Group(val label: String) { VIDEOS("Vidéos"), GAMES("Jeux"), LEARN("Apprendre"), QUIZ("Quiz"), DOWNLOADS("Téléchargements"), APPS("Applications"), BLOCKS("Blocages"), ALERTS("Alertes"), OTHER("Autres") }

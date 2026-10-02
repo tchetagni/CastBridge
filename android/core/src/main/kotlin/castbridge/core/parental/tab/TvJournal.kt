@@ -9,7 +9,7 @@ import castbridge.core.parental.KvStore
  * unlock attempts, sessions). It is MEASURED because the TV records it first-hand. Bounded (count and age), local, one KvStore key.
  * The daily report carries the last hours of it in the additive field "events" ([forReport]); the phone deduplicates by id.
  */
-class TvJournal(private val store: KvStore, private val now: () -> Long = System::currentTimeMillis, val max: Int = 400, val maxAgeMs: Long = 8 * 86_400_000L) {
+class TvJournal(private val store: KvStore, private val now: () -> Long = System::currentTimeMillis, val max: Int = 800, val maxAgeMs: Long = 14 * 86_400_000L) {
     /** Records one event. [durMin] null = not timed. Titles are cut; nothing secret (PIN, token, address) may be passed here. */
     @Synchronized fun record(type: EventType, profileId: String?, title: String, durMin: Int? = null, score: String? = null, detail: String? = null, ts: Long = now()): String {
         val seq = (store.get("jseq")?.toLongOrNull() ?: 0L) + 1
