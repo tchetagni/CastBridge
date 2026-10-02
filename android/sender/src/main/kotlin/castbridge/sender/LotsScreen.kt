@@ -78,7 +78,7 @@ fun LotsScreen(onClose: () -> Unit) {
                     }
                     Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
                         Button(enabled = !busy, onClick = { scope.launch { message = withContext(Dispatchers.IO) { LotsRuntime.syncNow(userAsked = true) } } }) { Text("Tout mettre à jour") }
-                        OutlinedButton(enabled = !busy, onClick = { scope.launch { message = withContext(Dispatchers.IO) { LotsRuntime.deliverNow(userAsked = true) ?: "Rien à envoyer à la TV" } } }) { Text("Envoyer à la TV") }
+                        OutlinedButton(enabled = !busy, onClick = { scope.launch { message = withContext(Dispatchers.IO) { LotsRuntime.deliverNow(userAsked = true) ?: "Rien à envoyer à la TV : tout est déjà sur la TV." } } }) { Text("Envoyer à la TV") }
                     }
                     HorizontalDivider()
                     Wizard(busy) { message = it }
@@ -104,6 +104,8 @@ fun LotsScreen(onClose: () -> Unit) {
                                     TextButton(enabled = !busy, onClick = { scope.launch { message = withContext(Dispatchers.IO) { LotsRuntime.syncNow(only = id, userAsked = true) } } }) {
                                         Text(if (held == null) "Télécharger" else "Mettre à jour")
                                     }
+                                    val send = LotsToDeliver.sendButton(st.stage, held != null)
+                                    if (send.visible) TextButton(enabled = send.enabled && !busy, onClick = { scope.launch { message = withContext(Dispatchers.IO) { LotsRuntime.deliverLot(id, userAsked = true) } } }) { Text(send.label) }
                                     if (st.stage == LotStage.REFUSED) TextButton(onClick = { LotsRuntime.retry(id) }) { Text("Réessayer") }
                                 }
                             }
@@ -187,7 +189,10 @@ private fun LanguagesSection(busy: Boolean, onMessage: (String?) -> Unit) {
                 Text(m.title.ifBlank { m.id.scope }, style = MaterialTheme.typography.bodyMedium)
                 Text("${m.id.scope} · ${LotStore.mo(m.bytes)}", style = MaterialTheme.typography.bodySmall, color = MaterialTheme.colorScheme.onSurfaceVariant)
             }
-            OutlinedButton(enabled = !busy, onClick = { scope.launch { onMessage(withContext(Dispatchers.IO) { LotsRuntime.downloadLanguage(m.id) }) } }) { Text("Télécharger") }
+            Column(horizontalAlignment = Alignment.End) {
+                OutlinedButton(enabled = !busy, onClick = { scope.launch { onMessage(withContext(Dispatchers.IO) { LotsRuntime.downloadLanguage(m.id) }) } }) { Text("Télécharger") }
+                Button(enabled = !busy, onClick = { scope.launch { onMessage(withContext(Dispatchers.IO) { LotsRuntime.downloadAndSendLanguage(m.id) }) } }) { Text("Télécharger et envoyer") }
+            }
         }
     }
     Text("L'audio des leçons (lots média) n'est pas encore envoyé à la TV : seuls les textes le sont pour l'instant.", style = MaterialTheme.typography.bodySmall, color = MaterialTheme.colorScheme.onSurfaceVariant)

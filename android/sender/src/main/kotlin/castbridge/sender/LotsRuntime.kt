@@ -46,6 +46,8 @@ object LotsRuntime {
     lateinit var appContext: Context; private set
     lateinit var store: LotStore; private set
     lateinit var queue: DeliveryQueue; private set
+    /** Lots downloaded by hand (one by one): delivered to the TV like the profile's, whatever the profile says. */
+    lateinit var pins: PinnedLots; private set
 
     /** What the screen shows while something runs: (lot, bytes done, total), null when idle. */
     @Volatile var progress: Triple<LotId, Long, Long>? = null; private set
@@ -62,6 +64,10 @@ object LotsRuntime {
         sp = app.getSharedPreferences("castbridge_lots", Context.MODE_PRIVATE)
         store = LotStore(File(app.filesDir, "lots"))
         queue = DeliveryQueue(FileQueueStore(File(app.filesDir, "lots/delivery-queue.json")))
+        pins = PinnedLots(FileQueueStore(File(app.filesDir, "lots/pinned.json")))
+        // earlier builds kept the hand-picked Langues in the preferences: move them to the file-backed store
+        sp.getStringSet("lang_picked", emptySet()).orEmpty().forEach { pins.add(LotId(LangLots.FEATURE, it)) }
+        if (sp.contains("lang_picked")) sp.edit().remove("lang_picked").apply()
         TvLinkManager.init(app)
     }
 
@@ -93,9 +99,6 @@ object LotsRuntime {
     /** Language text lots known to the phone (announced by the last catalog, or already held): the planner picks the learner's among them. */
     private fun languageLots(): List<LotMeta> = if (learner == null) emptyList() else (catalog?.lots.orEmpty() + store.catalog()).filter { it.id.feature == LangLots.FEATURE }
 
-    /** Langues text lots the user picked one by one in the list of the server's lessons (besides the profile's): kept on the phone and sent to the TV like the profile's. */
-    var pickedLangues: Set<String> get() = sp.getStringSet("lang_picked", emptySet()).orEmpty(); private set(v) { sp.edit().putStringSet("lang_picked", v.toSet()).apply() }
-
     /** The Langues text lots the last verified catalog announces and the phone does not hold yet (or only in an older version), for the « disponibles sur le serveur » list. */
     fun availableLanguageLots(): List<LotMeta> {
         val held = store.list().associateBy { it.meta.id }
@@ -106,7 +109,7 @@ object LotsRuntime {
     /** Downloads one Langues lot chosen in the list (verified like every lot), keeps it, and queues it for the TV. */
     fun downloadLanguage(id: LotId): String {
         if (id.feature != LangLots.FEATURE) return "Ce n'est pas une leçon de langue."
-        pickedLangues = pickedLangues + id.scope
+        pins.add(id)
         return syncNow(only = id, userAsked = true)
     }
 
@@ -114,14 +117,10 @@ object LotsRuntime {
     private fun contentCheck(m: LotMeta, f: File): String? =
         if (m.id.feature == LangLots.FEATURE) (LangLotConsumer.verifyContent(m, f) as? LangLotConsumer.Companion.Verified.Bad)?.reason else null
 
-    /** Classes first, then the learner's language text lots (`langues`; `langues-media` is not delivered to the TV yet). */
-    fun needs(): List<Need> {
-        val profile = LangPlanner.needs(learner, languageLots())
-        val have = profile.map { it.id }.toSet()
-        val picked = pickedLangues.sorted().map { Need(LotId(LangLots.FEATURE, it), LangPlanner.NEED_BASE + 10) }.filter { it.id !in have }
-        return LotPlanner.needsOf(listOf(ProfileNeed(selectedScopes.sorted(), active = true))) + profile + picked
-    }
-    fun protect(id: LotId) = id.scope in selectedScopes || (id.feature == LangLots.FEATURE && (id.scope in pickedLangues || learner?.let { LangPlanner.rank(it, id) } != null))
+    /** Classes first, then the learner's language text lots (`langues`; `langues-media` is not delivered to the TV yet), then the lots downloaded by hand. */
+    fun needs(): List<Need> =
+        LotsToDeliver.needs(LotPlanner.needsOf(listOf(ProfileNeed(selectedScopes.sorted(), active = true))) + LangPlanner.needs(learner, languageLots()), pins.list())
+    fun protect(id: LotId) = id.scope in selectedScopes || pins.contains(id) || (id.feature == LangLots.FEATURE && learner?.let { LangPlanner.rank(it, id) } != null)
 
     /** The classes of the catalog (Apprendre and Quiz lots only: language lots are chosen with the profile, not as classes). */
     fun classScopes(): List<String> = catalog?.lots?.filter { it.id.feature == "learn" || it.id.feature == "quiz" }?.map { it.id.scope }?.distinct()?.sorted().orEmpty()
@@ -221,19 +220,43 @@ object LotsRuntime {
     }
 
     /** Drains the queue of the default TV once; safe to call from anywhere (jobs, receivers, the screen); never blocks the UI thread's caller for long if run on a worker. */
-    fun deliverNow(userAsked: Boolean = false): String? {
+    fun deliverNow(userAsked: Boolean = false): String? = deliver(null, userAsked)
+
+    /**
+     * « Envoyer à la TV » on ONE lot (card of « Vos données », or right after « Télécharger et envoyer »): the lot is pinned (so the global
+     * button and the next contact keep sending it if the TV is away) and delivered through the very same path as the global button.
+     */
+    fun deliverLot(id: LotId, userAsked: Boolean = true): String? {
+        val held = store.get(id) ?: return "Ce lot n'est pas encore téléchargé sur le téléphone : téléchargez-le d'abord."
+        pins.add(id)
+        return deliver(id, userAsked) ?: "« ${held.meta.title.ifBlank { id.scope }} » est déjà sur la TV."
+    }
+
+    /** « Télécharger et envoyer » on a lesson of the server's list: download it (it stays pinned), then deliver it; the TV being away only postpones the sending. */
+    fun downloadAndSendLanguage(id: LotId): String {
+        val dl = downloadLanguage(id)
+        if (store.get(id) == null) return dl
+        return deliverLot(id, userAsked = true) ?: dl
+    }
+
+    private fun deliver(only: LotId?, userAsked: Boolean): String? {
         val id = tvId() ?: return "Aucune TV enregistrée"
         if (!userAsked && !queue.hasWork(id)) return null
         if (transferToTvRunning()) return "Un envoi de fichier vers la TV est en cours : les données suivront."
-        if (!delivering.compareAndSet(false, true)) return null
+        if (!delivering.compareAndSet(false, true)) return if (only != null) "Un envoi à la TV est déjà en cours." else null
         running = "delivery"; PhoneConnect.changed()
         try {
             val t = transport() ?: run { enqueueDefaultTv(); return "La TV n'est pas à portée : les données seront envoyées dès qu'elle sera allumée à côté du téléphone." }
-            val rep = delivery().deliver(id, t, cancelled = { transferToTvRunning() })
+            val rep = delivery().deliver(id, t, cancelled = { transferToTvRunning() }, only = only)
+            val name = only?.let { o -> store.get(o)?.meta?.title?.ifBlank { null } ?: o.scope }
+            val refused = if (only == null) rep.refused.firstOrNull() else rep.refused.firstOrNull { it.first == only }
+            val skipped = if (only == null) rep.skipped.firstOrNull() else rep.skipped.firstOrNull { it.meta.id == only }
             return when {
                 !rep.reachable -> "La TV n'est pas à portée : ${rep.pending} envoi(s) en attente."
-                rep.refused.isNotEmpty() -> "La TV a refusé : ${rep.refused.first().second}"
-                rep.sent.isNotEmpty() -> "${rep.sent.size} donnée(s) envoyée(s) à la TV"
+                refused != null -> "La TV a refusé${if (only != null) " « $name »" else ""} : ${refused.second}"
+                only != null && only in rep.sent -> "« $name » envoyé à la TV"
+                only == null && rep.sent.isNotEmpty() -> "${rep.sent.size} donnée(s) envoyée(s) à la TV"
+                skipped != null -> LotStatusText.skipped(skipped)
                 else -> null
             }
         } catch (e: Exception) {
@@ -259,7 +282,7 @@ object LotsRuntime {
     /** The user accepts to drop [id] from the TV's plan to make room for a skipped lot: it is no longer wanted for the TV. */
     fun dropFromTv(id: LotId) {
         val tv = tvId() ?: return
-        queue.cancel(tv, id)
+        queue.cancel(tv, id); pins.remove(id)
         Thread { runCatching { (transport() as? HttpLotTransport)?.remove(id) } }.start()
         PhoneConnect.changed()
     }
