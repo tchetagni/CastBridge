@@ -57,7 +57,8 @@ class PinKeysTest {
     private val chambre = SavedTv("AA:BB:CC:DD:EE:02", "Chambre", mdns = null, lastIps = listOf("192.168.0.9"), port = 9000)
     private val btOnly = SavedTv("AA:BB:CC:DD:EE:03", "Cave", mdns = null, lastIps = emptyList())
     private val all = listOf(salon, chambre, btOnly)
-    private fun resolve(key: String, saved: List<SavedTv> = all, default: SavedTv? = salon, tunnel: Int? = 18765) = PinKeys.resolve(key, saved, default, 8765, tunnel)
+    private fun resolve(key: String, saved: List<SavedTv> = all, default: SavedTv? = salon, tunnel: Int? = 18765, tunnelTv: String? = salon.address) =
+        PinKeys.resolve(key, saved, default, 8765, tunnel, tunnelTv)
 
     private data class Res(val label: String, val key: String, val expect: SavedTv?)
     @Test fun resolveTable() {
@@ -76,7 +77,7 @@ class PinKeysTest {
             Res("BT seul par nom", "Cave", btOnly),
             Res("BT seul « (Bluetooth) »", "Cave (Bluetooth)", btOnly),
             Res("port non standard", "192.168.0.9:9000", chambre),
-            Res("tunnel 127.0.0.1:18765 = TV par défaut", "127.0.0.1:18765", salon),
+            Res("tunnel 127.0.0.1:18765 = TV de la passerelle", "127.0.0.1:18765", salon),
             Res("tunnel en URL", "http://127.0.0.1:18765", salon),
             Res("clé vide", "", null),
             Res("clé blanche", "   ", null),
@@ -86,9 +87,23 @@ class PinKeysTest {
         for (r in rows) assertEquals(r.expect?.address, resolve(r.key)?.address, r.label)
     }
 
-    @Test fun tunnelNeedsAKnownPortAndADefault() {
+    @Test fun tunnelToNonDefaultTv() {
+        assertEquals(chambre.address, resolve("127.0.0.1:18765", all, default = salon, tunnelTv = chambre.address)?.address, "passerelle vers Chambre, défaut Salon")
+        assertEquals(chambre.address, resolve("http://127.0.0.1:18765", all, default = null, tunnelTv = chambre.address.lowercase())?.address, "sans défaut, adresse en minuscules")
+        assertEquals(btOnly.address, resolve("localhost:18765", all, default = salon, tunnelTv = btOnly.address)?.address)
+        assertEquals(salon.address, resolve("127.0.0.1:18765", listOf(salon, chambre), salon, tunnelTv = salon.address)?.address, "deux TV, passerelle vers le défaut")
+    }
+
+    @Test fun tunnelToAPairedButNotSavedTvIsNull() {
+        assertNull(resolve("127.0.0.1:18765", all, default = salon, tunnelTv = "AA:BB:CC:DD:EE:99"), "ne jamais prendre le jeton du défaut")
+        assertNull(resolve("127.0.0.1:18765", emptyList(), default = null))
+    }
+
+    @Test fun tunnelNeedsAPortAndARunningGateway() {
         assertNull(resolve("127.0.0.1:18765", tunnel = null), "port du tunnel inconnu : rien")
-        assertNull(resolve("127.0.0.1:18765", default = null), "pas de TV par défaut : rien")
+        assertNull(resolve("127.0.0.1:18765", tunnelTv = null), "passerelle arrêtée : pas de jeton pour la boucle locale")
+        assertNull(resolve("127.0.0.1:18765", default = null, tunnelTv = null), "ni passerelle ni défaut")
+        assertNull(resolve("localhost:9999"), "localhost, autre port")
         assertNull(resolve("127.0.0.1:9999"), "autre port local : pas le tunnel")
     }
 
@@ -121,10 +136,52 @@ class PinKeysTest {
         assertEquals(v6.address, resolve("fe80::1", listOf(v6), null)?.address)
     }
 
+    // ---- W15-02-fix
+    @Test fun staleSharedIpIsNull() {
+        val a = SavedTv("AA:BB:CC:DD:EE:31", "A", lastIps = listOf("10.0.0.7")); val b = SavedTv("AA:BB:CC:DD:EE:32", "B", lastIps = listOf("10.0.0.7"))
+        assertNull(resolve("10.0.0.7:8765", listOf(a, b), a), "IP périmée partagée : jamais le défaut")
+        assertEquals(a.address, resolve("A", listOf(a, b), a)?.address, "le nom reste fiable")
+    }
+    @Test fun wifiDirectAddressIsNeverMatched() {
+        val a = SavedTv("AA:BB:CC:DD:EE:31", "A", lastIps = listOf("192.168.49.1"))
+        assertNull(resolve("192.168.49.1:8765", listOf(a), a))
+        assertEquals(a.address, resolve("A", listOf(a), a)?.address)
+    }
+
+    @Test fun ipv6ZoneAndLocalHostname() {
+        val v6 = SavedTv("AA:BB:CC:DD:EE:21", "V6", lastIps = listOf("fe80::1%wlan0", "tv-salon.local"), port = 8765)
+        assertEquals(v6.address, resolve("fe80::1%wlan0", listOf(v6), null)?.address)
+        assertEquals(v6.address, resolve("[fe80::1%wlan0]:8765", listOf(v6), null)?.address)
+        assertEquals(v6.address, resolve("tv-salon.local", listOf(v6), null)?.address)
+        assertEquals(v6.address, resolve("http://TV-Salon.local:8765/x", listOf(v6), null)?.address)
+        assertEquals(listOf("[fe80::1%wlan0]:8765", "tv-salon.local:8765"), PinKeys.keysOf(null, null, null, v6.lastIps, 8765))
+        assertNull(resolve("tv-autre.local", listOf(v6), null))
+    }
+
+    @Test fun writeKeysDecision() {
+        assertEquals(listOf("Salon"), PinKeys.writeKeys("Salon", null, false), "TV inconnue : la clé seule")
+        assertEquals(listOf("Salon"), PinKeys.writeKeys("Salon", salon, hasToken = true), "TV à jeton : pas de clé IP")
+        assertTrue(PinKeys.writeKeys("192.168.0.5:8765", salon, hasToken = true).isEmpty(), "clé IP d'une TV à jeton : rien")
+        assertEquals(PinKeys.keysOf(btOnly).toSet(), PinKeys.writeKeys("Cave", btOnly, hasToken = false).toSet())
+        assertTrue(PinKeys.writeKeys("Salon", salon, hasToken = false).containsAll(listOf("192.168.0.5:8765", "bt:AA:BB:CC:DD:EE:01")))
+    }
+
+    @Test fun credentialReadOrderTokenThenPinUnderAnyKeyThenEmpty() {
+        val store = mapOf("192.168.0.5" to "1111", "Chambre" to "2222")           // legacy bare-host entry for Salon
+        val read = { k: String -> store[k] }
+        assertEquals("cbt_x", PinKeys.credential("cbt_x", "Salon", salon, read), "jeton d'abord")
+        assertEquals("2222", PinKeys.credential(null, "Chambre", chambre, read), "clé directe")
+        assertEquals("1111", PinKeys.credential(null, "Salon", salon, read), "PIN sous une autre clé (IP nue) de la même TV")
+        assertEquals("", PinKeys.credential(null, "Cave", btOnly, read))
+        assertEquals("", PinKeys.credential(null, "Inconnue", null, read))
+        assertEquals("", PinKeys.credential(null, null, salon, read))
+        assertEquals("1111", PinKeys.credential("  ", "Salon", salon, read), "jeton blanc ignoré")
+    }
+
     @Test fun noSavedTvMeansNull() { assertNull(resolve("Salon", emptyList(), null)) }
 
     @Test fun keysOfTvHoldsEveryScreenForm() {
-        val k = PinKeys.keysOf(salon, 8765, null)
+        val k = PinKeys.keysOf(salon, 8765)
         for (form in listOf("Salon", "Salon (Bluetooth)", "CastBridge TV Salon", "bt:AA:BB:CC:DD:EE:01", "192.168.0.5:8765", "192.168.0.5", "http://192.168.0.5:8765"))
             assertTrue(form in k, "manque $form dans $k")
         assertEquals(k.distinct(), k); assertTrue(k.none { it.isBlank() })

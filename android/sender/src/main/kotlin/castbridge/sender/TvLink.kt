@@ -197,11 +197,11 @@ object TvLinkManager {
         return driver.credential(tv.address)
     }
 
-    /** The saved TV a screen key designates (any form: name, "(Bluetooth)", mDNS, bt:, ip, ip:port, URL, tunnel loopback), see [PinKeys.resolve]. */
+    /** The saved TV a screen key designates (any form: name, "(Bluetooth)", mDNS, bt:, ip, ip:port, URL; the tunnel loopback only while the gateway runs, = the TV it is connected to), see [PinKeys.resolve]. */
     fun savedFor(key: String?): SavedTv? = if (key == null || !::saved.isInitialized) null
-        else PinKeys.resolve(key, saved.list(), saved.default(), tunnelPort = BtSshGatewayService.API_PORT)
+        else PinKeys.resolve(key, saved.list(), saved.default(), tunnelPort = BtSshGatewayService.API_PORT, tunnelTv = BtSshGatewayService.apiTunnelTv())
 
-    /** The live token for the TV answering at this base URL ("http://host:port", also the Bluetooth tunnel "http://127.0.0.1:18765" = default TV), or null. */
+    /** The live token for the TV answering at this base URL ("http://host:port", also the Bluetooth tunnel "http://127.0.0.1:18765" = the gateway's TV, only while it runs), or null. */
     fun credentialForBase(base: String): String? = savedFor(base)?.let { driver.credential(it.address) }
 
     fun savedForHost(host: String): SavedTv? = savedFor(host)

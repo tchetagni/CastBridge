@@ -21,17 +21,16 @@ class PinStore(ctx: Context) {
     private val sp = ctx.applicationContext.getSharedPreferences("castbridge_pins", Context.MODE_PRIVATE)
     init { TvLinkManager.init(ctx) }
     /** Token of the saved TV [key] designates (any screen form, [PinKeys.resolve]); else the typed PIN stored under any key of that TV; else "". */
-    fun get(key: String?): String = TvLinkManager.credentialFor(key) ?: pinOnly(key)
-    /** The typed PIN only (never the token): found under [key] or under any other key of the same TV (tolerant read). */
-    fun pinOnly(key: String?): String {
-        if (key == null) return ""
-        sp.getString(key, null)?.takeIf { it.isNotBlank() }?.let { return it }
-        val tv = TvLinkManager.savedFor(key) ?: return ""
-        return PinKeys.lookupKeys(tv).firstNotNullOfOrNull { k -> sp.getString(k, null)?.takeIf { it.isNotBlank() } }.orEmpty()
-    }
-    /** Writes [pin] under [key] and, when the TV is known, under every key of that TV (the next screen finds it whatever key it uses). */
+    fun get(key: String?): String = PinKeys.credential(TvLinkManager.credentialFor(key), key, key?.let { TvLinkManager.savedFor(it) }) { sp.getString(it, null) }
+    /** The typed PIN only (never the token): found under [key] or under any other key of the same TV (tolerant read, old keys included). */
+    fun pinOnly(key: String?): String = PinKeys.credential(null, key, key?.let { TvLinkManager.savedFor(it) }) { sp.getString(it, null) }
+    /**
+     * Writes [pin] under [key]; a TV with a token gets nothing under its IP keys (its token suffices), a PIN-only TV gets every key of the TV ([PinKeys.writeKeys]).
+     * Still no erase on PIN_WRONG (w13-08).
+     */
     fun put(key: String, pin: String) {
-        val keys = (listOf(key) + (TvLinkManager.savedFor(key)?.let { PinKeys.keysOf(it) } ?: emptyList())).distinct()
+        val tv = TvLinkManager.savedFor(key)
+        val keys = PinKeys.writeKeys(key, tv, hasToken = tv != null && TvLinkManager.credentialFor(key) != null)
         sp.edit().apply { keys.forEach { putString(it, pin) } }.apply()
     }
 }

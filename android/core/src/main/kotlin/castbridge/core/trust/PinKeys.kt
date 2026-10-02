@@ -32,8 +32,8 @@ object PinKeys {
         return (keysOf(name, mdns, btAddress, hosts, port) + raw.map { it.trim() }).filter { it.isNotBlank() }.distinct()
     }
 
-    /** Every key an app screen may use for [tv] (name, "name (Bluetooth)", mDNS name, `bt:<address>`, each IP bare, `ip:port` and `http://ip:port`); never blank, distinct. The tunnel loopback is NOT here: it designates "the default TV", not this one ([resolve]). */
-    fun keysOf(tv: SavedTv, apiPort: Int = DEFAULT_PORT, tunnelPort: Int? = null): List<String> {
+    /** Every key an app screen may use for [tv] (name, "name (Bluetooth)", mDNS name, `bt:<address>`, each IP bare, `ip:port` and `http://ip:port`); never blank, distinct. The tunnel loopback is NOT here: it designates the TV the gateway is connected to, not this one ([resolve]). */
+    fun keysOf(tv: SavedTv, apiPort: Int = DEFAULT_PORT): List<String> {
         val ports = listOf(tv.port, apiPort).distinct()
         val hosts = tv.lastIps.map { it.trim() }.filter { it.isNotBlank() }
         val names = listOfNotNull(tv.name.trim().takeIf { it.isNotBlank() }, tv.mdns?.trim()?.takeIf { it.isNotBlank() })
@@ -45,13 +45,18 @@ object PinKeys {
     fun lookupKeys(tv: SavedTv, apiPort: Int = DEFAULT_PORT): List<String> =
         (keysOf(tv, apiPort) + lookupKeys(tv.name, tv.mdns, tv.address, tv.lastIps, tv.port)).distinct()
 
+    /** Wi-Fi Direct group owner address: the same on EVERY TV (`WifiDirect.kt`), so it identifies none. */
+    const val WIFI_DIRECT_IP = "192.168.49.1"
+
     /**
      * The saved TV a screen [key] designates, or null (unknown, blank, or ambiguous with no usable [default]). Tolerant to case, " (Bluetooth)", NSD " (2)",
-     * a host without port, a full URL, IPv6 brackets, and the Bluetooth tunnel (`127.0.0.1:[tunnelPort]` = [default] TV). Order: the unique forms first
-     * (`bt:` address, IP), then names; a name shared by several TVs resolves to [default] only if it is one of them, else null: a token is never offered to a TV
-     * picked at random.
+     * a host without port, a full URL, IPv6 brackets (and zone `%wlan0`), and the Bluetooth tunnel: `127.0.0.1:[tunnelPort]` designates [tunnelTv] (the ADDRESS
+     * of the TV the running gateway is connected to) and nobody else; with no running gateway ([tunnelTv] or [tunnelPort] null), or a gateway TV that is not saved,
+     * a loopback key resolves to null (no token for loopback). Order: the unique forms first (`bt:` address, IP: an IP listed by several TVs, stale DHCP, or the
+     * Wi-Fi Direct address, resolve to null), then names; a name shared by several TVs resolves to [default] only if it is one of them, else null: a token is
+     * never offered to a TV picked at random.
      */
-    fun resolve(key: String, saved: List<SavedTv>, default: SavedTv?, apiPort: Int = DEFAULT_PORT, tunnelPort: Int? = null): SavedTv? {
+    fun resolve(key: String, saved: List<SavedTv>, default: SavedTv?, apiPort: Int = DEFAULT_PORT, tunnelPort: Int? = null, tunnelTv: String? = null): SavedTv? {
         val raw = key.trim()
         if (raw.isBlank() || saved.isEmpty()) return null
         if (raw.startsWith("bt:", ignoreCase = true)) {
@@ -60,12 +65,14 @@ object PinKeys {
         }
         val (host, port) = hostAndPort(raw)
         if (host != null && (host == "127.0.0.1" || host.equals("localhost", true))) {
-            return if (tunnelPort != null && port == tunnelPort) default?.takeIf { d -> saved.any { it.address == d.address } } else null
+            if (tunnelPort == null || tunnelTv == null || port != tunnelPort) return null
+            val a = TrustRegistry.norm(tunnelTv)
+            return saved.firstOrNull { TrustRegistry.norm(it.address) == a }
         }
-        if (host != null) {
+        if (host != null && host != WIFI_DIRECT_IP) {
             val byIp = saved.filter { tv -> tv.lastIps.any { it.trim().equals(host, true) } && (port == null || port == tv.port || port == apiPort) }
             if (byIp.size == 1) return byIp.first()
-            if (byIp.size > 1) return pick(byIp, default)
+            if (byIp.size > 1) return null
         }
         val exact = saved.filter { tv -> sameName(raw, tv.name) || (tv.mdns != null && sameName(raw, tv.mdns)) }
         if (exact.isNotEmpty()) return pick(exact, default)
@@ -105,6 +112,23 @@ object PinKeys {
             colons == 1 -> s.substringBefore(':') to (s.substringAfter(':').toIntOrNull() ?: return null to null)
             else -> s to null                                   // bare IPv6
         }
+    }
+
+    /** Keys under which to WRITE a typed PIN entered on screen [key]: a TV that already has a token ([hasToken]) needs no PIN, so nothing goes under its IP keys
+     * (a stale DHCP address would hand this PIN to another TV): only [key] itself when it is not one of the TV's IPs; a PIN-only TV gets [key] + [keysOf]. Unknown TV: [key]. */
+    fun writeKeys(key: String, tv: SavedTv?, hasToken: Boolean, apiPort: Int = DEFAULT_PORT): List<String> = when {
+        tv == null -> listOf(key)
+        hasToken -> listOf(key).filterNot { k -> hostAndPort(k).first?.let { h -> tv.lastIps.any { it.trim().equals(h, true) } } == true }
+        else -> (listOf(key) + keysOf(tv, apiPort)).distinct()
+    }
+
+    /** What `PinStore.get` returns: the live [token] if any, else the PIN found under [key] or under any key of [tv] (read order of [lookupKeys], legacy spellings included), else "". */
+    fun credential(token: String?, key: String?, tv: SavedTv?, read: (String) -> String?): String {
+        if (!token.isNullOrBlank()) return token
+        if (key == null) return ""
+        read(key)?.takeIf { it.isNotBlank() }?.let { return it }
+        if (tv == null) return ""
+        return lookupKeys(tv).firstNotNullOfOrNull { k -> read(k)?.takeIf { it.isNotBlank() } }.orEmpty()
     }
 
     /** A bare IPv4 address means the default port ("192.168.0.5" gives "192.168.0.5:8765"); every other key is kept as typed (trimmed). */

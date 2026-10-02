@@ -72,6 +72,7 @@ class BtSshGatewayService : Service() {
             if (Build.VERSION.SDK_INT >= 29) startForeground(NOTIF, n, ServiceInfo.FOREGROUND_SERVICE_TYPE_CONNECTED_DEVICE) else startForeground(NOTIF, n)
         } catch (e: Exception) { note("Service refusé par le système : ${e.message}"); if (tvAddress == null) stopSelf(); return START_NOT_STICKY }
         tvAddress = addr
+        activeAddress = addr
         _state.update { it.copy(running = true, tv = name) }
         if (wantSsh && ssh == null) ssh = open("ssh", false, addr, BtProtocol.SSH_SERVICE_UUID, if (lan) "0.0.0.0" else "127.0.0.1", PORT) { s -> _state.update { it.copy(ssh = s) } }
         if (wantApi && api == null) api = open("api", true, addr, BtProtocol.API_SERVICE_UUID, "127.0.0.1", API_PORT) { s -> _state.update { it.copy(api = s) } }
@@ -131,7 +132,7 @@ class BtSshGatewayService : Service() {
     }
 
     override fun onDestroy() {
-        ssh?.stop(); api?.stop(); ssh = null; api = null; tvAddress = null
+        ssh?.stop(); api?.stop(); ssh = null; api = null; tvAddress = null; activeAddress = null
         timers.shutdownNow()
         _state.update { it.copy(running = false, ssh = TunnelGateway.State(), api = TunnelGateway.State()) }
         super.onDestroy()
@@ -159,6 +160,11 @@ class BtSshGatewayService : Service() {
             if (_state.value.api.running && address != null && address.equals(lastAddress, true)) "http://127.0.0.1:$API_PORT" else null
 
         @Volatile private var lastAddress: String? = null
+        /** The TV the running service is really connected to (set by the service itself, unlike [lastAddress] which a refused start also changes). */
+        @Volatile private var activeAddress: String? = null
+
+        /** Address of the TV the API tunnel (127.0.0.1:[API_PORT]) reaches right now, or null when that tunnel does not run. */
+        fun apiTunnelTv(): String? = if (_state.value.api.running) activeAddress else null
 
         fun start(ctx: Context, address: String, name: String, exposeLan: Boolean, ssh: Boolean = true, api: Boolean = true) {
             lastAddress = address
