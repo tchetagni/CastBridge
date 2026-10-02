@@ -52,6 +52,95 @@ class PinKeysTest {
 
     @Test fun normalizeIsIdempotent() { for (k in listOf("1.2.3.4", "1.2.3.4:1", "Salon", "bt:X")) assertEquals(PinKeys.normalize(k), PinKeys.normalize(PinKeys.normalize(k))) }
 
+    // ---- W15-02 : résolution d'une clé d'écran vers la TV enregistrée (R-01 : jeton retrouvé, PIN jamais redemandé à un téléphone de confiance)
+    private val salon = SavedTv("AA:BB:CC:DD:EE:01", "Salon", mdns = "CastBridge TV Salon", lastIps = listOf("192.168.0.5"), port = 8765)
+    private val chambre = SavedTv("AA:BB:CC:DD:EE:02", "Chambre", mdns = null, lastIps = listOf("192.168.0.9"), port = 9000)
+    private val btOnly = SavedTv("AA:BB:CC:DD:EE:03", "Cave", mdns = null, lastIps = emptyList())
+    private val all = listOf(salon, chambre, btOnly)
+    private fun resolve(key: String, saved: List<SavedTv> = all, default: SavedTv? = salon, tunnel: Int? = 18765) = PinKeys.resolve(key, saved, default, 8765, tunnel)
+
+    private data class Res(val label: String, val key: String, val expect: SavedTv?)
+    @Test fun resolveTable() {
+        val rows = listOf(
+            Res("TvHome : nom affiché", "Salon", salon),
+            Res("nom insensible à la casse", "salon", salon),
+            Res("TvScreen : IP sans port", "192.168.0.5", salon),
+            Res("TvScreen : ip:port", "192.168.0.5:8765", salon),
+            Res("WifiDirect.BASE_URL / URL complète", "http://192.168.0.5:8765", salon),
+            Res("URL avec chemin", "http://192.168.0.5:8765/api/info", salon),
+            Res("TvDiscovery : « (Bluetooth) »", "Salon (Bluetooth)", salon),
+            Res("NSD : suffixe (2)", "CastBridge TV Salon (2)", salon),
+            Res("nom mDNS", "CastBridge TV Salon", salon),
+            Res("bt: majuscules", "bt:AA:BB:CC:DD:EE:03", btOnly),
+            Res("bt: minuscules", "bt:aa:bb:cc:dd:ee:03", btOnly),
+            Res("BT seul par nom", "Cave", btOnly),
+            Res("BT seul « (Bluetooth) »", "Cave (Bluetooth)", btOnly),
+            Res("port non standard", "192.168.0.9:9000", chambre),
+            Res("tunnel 127.0.0.1:18765 = TV par défaut", "127.0.0.1:18765", salon),
+            Res("tunnel en URL", "http://127.0.0.1:18765", salon),
+            Res("clé vide", "", null),
+            Res("clé blanche", "   ", null),
+            Res("clé inconnue", "Garage", null),
+            Res("IP inconnue", "10.9.9.9:8765", null),
+        )
+        for (r in rows) assertEquals(r.expect?.address, resolve(r.key)?.address, r.label)
+    }
+
+    @Test fun tunnelNeedsAKnownPortAndADefault() {
+        assertNull(resolve("127.0.0.1:18765", tunnel = null), "port du tunnel inconnu : rien")
+        assertNull(resolve("127.0.0.1:18765", default = null), "pas de TV par défaut : rien")
+        assertNull(resolve("127.0.0.1:9999"), "autre port local : pas le tunnel")
+    }
+
+    @Test fun realNameContainingBluetoothWinsOverStripping() {
+        val odd = SavedTv("AA:BB:CC:DD:EE:04", "Salon (Bluetooth)", lastIps = emptyList())
+        assertEquals(odd.address, resolve("Salon (Bluetooth)", listOf(salon, odd))?.address)
+        assertEquals(salon.address, resolve("Salon", listOf(salon, odd))?.address)
+    }
+
+    @Test fun homonymsAreToldApartByTheirAddress() {
+        val a = SavedTv("AA:BB:CC:DD:EE:11", "TV", lastIps = listOf("10.0.0.1"))
+        val b = SavedTv("AA:BB:CC:DD:EE:12", "TV", lastIps = listOf("10.0.0.2"))
+        assertEquals(b.address, resolve("10.0.0.2:8765", listOf(a, b), a)?.address)
+        assertEquals(b.address, resolve("bt:AA:BB:CC:DD:EE:12", listOf(a, b), a)?.address)
+        assertEquals(a.address, resolve("10.0.0.1", listOf(a, b), b)?.address)
+    }
+
+    @Test fun ambiguousHomonymKeyGoesToTheDefaultOrNothing() {
+        val a = SavedTv("AA:BB:CC:DD:EE:11", "TV"); val b = SavedTv("AA:BB:CC:DD:EE:12", "TV")
+        assertEquals(b.address, resolve("TV", listOf(a, b), b)?.address)
+        assertEquals(b.address, resolve("TV (Bluetooth)", listOf(a, b), b)?.address)
+        assertNull(resolve("TV", listOf(a, b), null), "jamais le jeton d'une TV au hasard")
+        assertNull(resolve("TV", listOf(a, b), salon), "le défaut doit être l'un des candidats")
+    }
+
+    @Test fun ipv6() {
+        val v6 = SavedTv("AA:BB:CC:DD:EE:21", "V6", lastIps = listOf("fe80::1"), port = 8765)
+        assertEquals(v6.address, resolve("[fe80::1]:8765", listOf(v6), null)?.address)
+        assertEquals(v6.address, resolve("http://[fe80::1]:8765/x", listOf(v6), null)?.address)
+        assertEquals(v6.address, resolve("fe80::1", listOf(v6), null)?.address)
+    }
+
+    @Test fun noSavedTvMeansNull() { assertNull(resolve("Salon", emptyList(), null)) }
+
+    @Test fun keysOfTvHoldsEveryScreenForm() {
+        val k = PinKeys.keysOf(salon, 8765, null)
+        for (form in listOf("Salon", "Salon (Bluetooth)", "CastBridge TV Salon", "bt:AA:BB:CC:DD:EE:01", "192.168.0.5:8765", "192.168.0.5", "http://192.168.0.5:8765"))
+            assertTrue(form in k, "manque $form dans $k")
+        assertEquals(k.distinct(), k); assertTrue(k.none { it.isBlank() })
+        assertTrue(PinKeys.keysOf(btOnly).containsAll(listOf("Cave", "Cave (Bluetooth)", "bt:AA:BB:CC:DD:EE:03")))
+        assertTrue("192.168.0.9:9000" in PinKeys.keysOf(chambre))
+    }
+
+    @Test fun everyKeyOfATvResolvesBackToIt() {
+        for (tv in all) for (k in PinKeys.keysOf(tv)) assertEquals(tv.address, resolve(k, all, null)?.address, "clé « $k » de ${tv.name}")
+    }
+
+    @Test fun lookupKeysOfTvIncludeLegacyBareHost() {
+        val k = PinKeys.lookupKeys(salon)
+        assertTrue("192.168.0.5" in k && "192.168.0.5:8765" in k && "Salon" in k)
+    }
+
     // ---- PinFallback (R-01, second half)
     @Test fun tokenIsUsedWhenLive() {
         val c = PinFallback.choose("cbt_x", "1234", trustedTv = true, tokenRefused = false)

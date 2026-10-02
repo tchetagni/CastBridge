@@ -19,6 +19,7 @@ import android.util.Log
 import castbridge.core.trust.BtTransport
 import castbridge.core.trust.BtUnavailable
 import castbridge.core.trust.Candidates
+import castbridge.core.trust.PinKeys
 import castbridge.core.trust.LinkDriver
 import castbridge.core.trust.LinkState
 import castbridge.core.trust.LinkView
@@ -196,16 +197,14 @@ object TvLinkManager {
         return driver.credential(tv.address)
     }
 
+    /** The saved TV a screen key designates (any form: name, "(Bluetooth)", mDNS, bt:, ip, ip:port, URL, tunnel loopback), see [PinKeys.resolve]. */
     fun savedFor(key: String?): SavedTv? = if (key == null || !::saved.isInitialized) null
-        else saved.list().firstOrNull { t -> key == t.mdns || key == t.name || key == "bt:${t.address}" || t.lastIps.any { "$it:${t.port}" == key } }
+        else PinKeys.resolve(key, saved.list(), saved.default(), tunnelPort = BtSshGatewayService.API_PORT)
 
-    /** The live token for the TV answering at this base URL ("http://host:port"), or null. */
-    fun credentialForBase(base: String): String? {
-        val host = runCatching { java.net.URI(base).host }.getOrNull() ?: return null
-        return savedForHost(host)?.let { driver.credential(it.address) }
-    }
+    /** The live token for the TV answering at this base URL ("http://host:port", also the Bluetooth tunnel "http://127.0.0.1:18765" = default TV), or null. */
+    fun credentialForBase(base: String): String? = savedFor(base)?.let { driver.credential(it.address) }
 
-    fun savedForHost(host: String): SavedTv? = if (!::saved.isInitialized) null else saved.list().firstOrNull { t -> t.lastIps.contains(host) }
+    fun savedForHost(host: String): SavedTv? = savedFor(host)
 
     /** A call to the TV's API was answered "bad token": the token is dropped for good and a new HELLO follows. */
     fun tokenRejected(token: String) { if (::driver.isInitialized) { driver.reportTokenRejected(token); wake.trySend(Trigger.USER) } }

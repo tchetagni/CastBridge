@@ -8,6 +8,7 @@ import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.input.PasswordVisualTransformation
+import castbridge.core.trust.PinKeys
 import castbridge.core.trust.TvAuth
 import castbridge.core.tv.Pin
 
@@ -19,10 +20,20 @@ import castbridge.core.tv.Pin
 class PinStore(ctx: Context) {
     private val sp = ctx.applicationContext.getSharedPreferences("castbridge_pins", Context.MODE_PRIVATE)
     init { TvLinkManager.init(ctx) }
-    fun get(key: String?): String = TvLinkManager.credentialFor(key) ?: key?.let { sp.getString(it, null) }.orEmpty()
-    /** The typed PIN only (never the token). */
-    fun pinOnly(key: String?): String = key?.let { sp.getString(it, null) }.orEmpty()
-    fun put(key: String, pin: String) = sp.edit().putString(key, pin).apply()
+    /** Token of the saved TV [key] designates (any screen form, [PinKeys.resolve]); else the typed PIN stored under any key of that TV; else "". */
+    fun get(key: String?): String = TvLinkManager.credentialFor(key) ?: pinOnly(key)
+    /** The typed PIN only (never the token): found under [key] or under any other key of the same TV (tolerant read). */
+    fun pinOnly(key: String?): String {
+        if (key == null) return ""
+        sp.getString(key, null)?.takeIf { it.isNotBlank() }?.let { return it }
+        val tv = TvLinkManager.savedFor(key) ?: return ""
+        return PinKeys.lookupKeys(tv).firstNotNullOfOrNull { k -> sp.getString(k, null)?.takeIf { it.isNotBlank() } }.orEmpty()
+    }
+    /** Writes [pin] under [key] and, when the TV is known, under every key of that TV (the next screen finds it whatever key it uses). */
+    fun put(key: String, pin: String) {
+        val keys = (listOf(key) + (TvLinkManager.savedFor(key)?.let { PinKeys.keysOf(it) } ?: emptyList())).distinct()
+        sp.edit().apply { keys.forEach { putString(it, pin) } }.apply()
+    }
 }
 
 /** PIN entry for the selected TV; the value is remembered per TV as soon as it is well formed. A trusted phone does not need one. */
