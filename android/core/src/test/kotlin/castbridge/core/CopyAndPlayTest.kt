@@ -1,5 +1,6 @@
 package castbridge.core
 
+import castbridge.core.phone.CastAction
 import castbridge.core.phone.MediaKind
 import castbridge.core.trust.*
 import castbridge.core.trust.CopyAndPlay.Decision
@@ -43,20 +44,20 @@ class CopyAndPlayTest {
         for (r in rows) {
             val d = CopyAndPlay.decide(r.f)
             when (r.want) {
-                Want.ENABLED -> { assertIs<Decision.Enabled>(d, r.label); assertTrue(d.copies, r.label); assertEquals(CopyAndPlay.LABEL, d.label, r.label); assertNull(d.reason, r.label) }
-                Want.DEGRADED -> { assertIs<Decision.Degraded>(d, r.label); assertFalse(d.copies, r.label); assertEquals(CopyAndPlay.LABEL_PLAY_ONLY, d.label, r.label); assertNotNull(d.reason, r.label) }
-                Want.DISABLED -> { assertIs<Decision.Disabled>(d, r.label); assertFalse(d.copies, r.label); assertFalse(d.reason.isNullOrBlank(), r.label) }
+                Want.ENABLED -> { assertIs<Decision.Enabled>(d, r.label); assertEquals(CastAction.COPY, d.action, r.label); assertEquals("Copier sur la TV et lire", d.label, r.label); assertNull(d.reason, r.label) }
+                Want.DEGRADED -> { assertIs<Decision.Degraded>(d, r.label); assertEquals(CastAction.LIVE, d.action, r.label); assertEquals(CopyAndPlay.LABEL, d.label, r.label); assertNotNull(d.reason, r.label) }
+                Want.DISABLED -> { assertIs<Decision.Disabled>(d, r.label); assertEquals(CastAction.COPY, d.action, r.label); assertFalse(d.reason.isNullOrBlank(), r.label) }
             }
             r.says?.let { assertTrue(it in d.reason.orEmpty(), "${r.label}: « ${d.reason} » devrait contenir « $it »") }
             d.reason?.let { assertEquals(1, it.lines().size, "${r.label}: une seule ligne") }
         }
     }
 
-    @Test fun aCopyIsPromisedOnlyByEnabledAndNeverInTheTrial() {
+    @Test fun theCopyActionIsNeverUsedForATrialTv() {
         for (e in Edition.values()) for (l in Link.values()) for (ip in listOf(true, false)) for (k in MediaKind.values()) {
             val d = CopyAndPlay.decide(f(l, ip, e, k))
-            assertEquals(d is Decision.Enabled, d.copies, "$l/$ip/$e/$k")
-            if (e == Edition.TRIAL) assertFalse(d.copies, "$l/$ip/$e/$k")
+            if (d is Decision.Degraded) assertEquals(CastAction.LIVE, d.action, "$l/$ip/$e/$k") else assertEquals(CastAction.COPY, d.action, "$l/$ip/$e/$k")
+            if (e == Edition.TRIAL) assertNotEquals(CastAction.COPY, d.action.takeIf { d !is Decision.Disabled }, "$l/$ip/$e/$k")
         }
     }
 
