@@ -155,7 +155,7 @@ open class ConsoleActivity : ComponentActivity() {
                 }
                 btMsg?.let { Text(it, style = MaterialTheme.typography.bodySmall) }
             } }
-            OutlinedTextField(input, { input = it; token = null; error = null }, label = { Text("Code d'appareil (XXXX-XXXX-XXXX-XXXX) ou demande d'appareil complète") },
+            OutlinedTextField(input, { input = castbridge.core.owner.DeviceCode.typing(it); token = null; error = null }, label = { Text("Code d'appareil (XXXX-XXXX-XXXX-XXXX) ou demande d'appareil complète") },
                 modifier = Modifier.fillMaxWidth().heightIn(min = 90.dp))
             Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
                 FilterChip(!production, { production = false }, { Text("Essai") }); FilterChip(production, { production = true }, { Text("Production") })

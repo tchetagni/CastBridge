@@ -133,6 +133,17 @@ object DeviceCode {
 
     private fun format(s: String) = s.chunked(4).joinToString("-")
 
+    /**
+     * Live formatting while a code is TYPED: dashes every 4 characters, upper case, spaces and typed dashes ignored, at most 16 characters. Text that is not a bare code is returned as it is
+     * (a pasted device request has « = » or several lines, and an owner may type anything else): so the field accepts both the code and the full request.
+     */
+    fun typing(text: String): String {
+        if (text.any { it == '=' || it == '\n' || it == '\r' }) return text
+        val raw = text.filter { it != '-' && !it.isWhitespace() }
+        if (raw.isEmpty() || !raw.all { it.isLetterOrDigit() && it.code < 128 }) return text
+        return format(raw.uppercase().take(16))
+    }
+
     /** Normalised "XXXX-XXXX-XXXX-XXXX" or null (wrong length, bad char, bad check). Accepts lower case, spaces and the O/0, I/1 confusions. */
     fun parse(text: String): String? {
         val s = text.filter { it != '-' && !it.isWhitespace() }.map { c -> val v = Base32C.value(c); if (v < 0) return null else Base32C.ALPHABET[v] }.joinToString("")
