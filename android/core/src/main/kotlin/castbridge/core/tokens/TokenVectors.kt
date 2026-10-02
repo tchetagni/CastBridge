@@ -33,10 +33,10 @@ object TokenVectors {
         return Env(keys, devices, installs)
     }
 
-    /** Les paramètres d'un bon dans le fichier ([req] : signer, device, install, license, grant, amount, expiry, seq, nonce, issuedAt, notBefore, expiresAt) ; null si l'émission est refusée. */
+    /** Les paramètres d'un bon dans le fichier ([req] : signer, device, install, license, grant, amount, expiry, fresh (facultatif), seq, nonce, issuedAt, notBefore, expiresAt) ; null si l'émission est refusée. */
     fun buildToken(e: Env, req: Map<String, Any?>): String? = try {
         val dev = e.devices.getValue(req.str("device")!!)
-        val grant = TokenGrant(req.str("license")!!, req.long("grant")!!, req.long("amount")!!, e.installs.getValue(req.str("install")!!).pub, req.long("expiry") ?: 0L)
+        val grant = TokenGrant(req.str("license")!!, req.long("grant")!!, req.long("amount")!!, e.installs.getValue(req.str("install")!!).pub, req.long("expiry") ?: 0L, req["fresh"] == true)
         TokenGrant.issue(e.keys.getValue(req.str("signer")!!).first, req.long("seq")!!, req.str("nonce")!!, req.long("issuedAt")!!, req.long("notBefore")!!, req.long("expiresAt")!!, Envelope.Target.Device(DeviceIdentity.kFor(dev.n), dev.byKind), grant)
     } catch (x: IllegalArgumentException) { null }
 
@@ -54,6 +54,7 @@ object TokenVectors {
                     "tokens" -> verify(c, e)
                     "wallet-key" -> if (hex(WalletKey.derive(e.installs.getValue(c.str("install")!!).priv)) == (c["expect"] as Map<String, Any?>).str("key")) null else "clé de porte-jetons différente"
                     "wallet" -> wallet(c, e, walletInstall)
+                    "server" -> null       // rejoué par le miroir serveur (w5-08), sans objet pour le cœur
                     "policy" -> policy(c)
                     "french-numbers" -> if (FrenchNumbers.words(c.long("n")!!) == (c["expect"] as Map<String, Any?>).str("words")) null else "texte différent"
                     else -> "type de vecteur inconnu"
@@ -130,15 +131,20 @@ object TokenVectors {
             val file = File(dir, "wallet.txt")
             val keys = mapOf("main" to WalletKey.derive(e.installs.getValue(walletInstall).priv), "other" to WalletKey.derive(ByteArray(32) { 7 }))
             var key = "main"
-            fun open() = TokenWallet(file, WalletKeyProvider { keys.getValue(key) }, c.long("compactAbove")?.toInt() ?: TokenWallet.COMPACT_ABOVE, c.long("keepRecent")?.toInt() ?: TokenWallet.KEEP_RECENT, c.long("keepWindowMs") ?: TokenWallet.KEEP_WINDOW_MS)
+            val markFile = File(dir, "wallet.mark"); val installId = e.installs.getValue(walletInstall).installId
+            val provider = WalletKeyProvider { keys.getValue(key) }
+            val marks = FileWalletMark(markFile, provider) { installId }
+            fun firstGrantFp(): String? = runCatching { file.readText().lines().firstNotNullOfOrNull { l -> if (l.startsWith("grant=")) l.split('|')[2] else if (l.startsWith("granted=")) l.split('|')[2] else null } }.getOrNull()
+            fun open() = TokenWallet(file, provider, marks, c.long("compactAbove")?.toInt() ?: TokenWallet.COMPACT_ABOVE, c.long("keepRecent")?.toInt() ?: TokenWallet.KEEP_RECENT, c.long("keepWindowMs") ?: TokenWallet.KEEP_WINDOW_MS)
             var w = open()
+            var snapshot: String? = null; var copy: String? = null
             for ((i, s) in (c["steps"] as List<Map<String, Any?>>).withIndex()) {
                 val at = "étape $i (${s.str("do")})"
                 when (s.str("do")) {
                     "credit" -> {
                         val token = s.str("token")!!
                         val acc = TokenGrant.verify(token, e.ring(s["ring"] as List<String>, emptyList()), RevocationState(), e.devices.getValue(s.str("device")!!), e.installs.getValue(s.str("install")!!).pub, w.lastGrant(), s.long("now")!!)
-                        val got = when (acc) { is TokenGrantResult.Rejected -> acc.reason.name; is TokenGrantResult.Accepted -> w.credit(acc.grant, acc.fingerprint).name }
+                        val got = when (acc) { is TokenGrantResult.Rejected -> acc.reason.name; is TokenGrantResult.Accepted -> w.credit(acc.grant, acc.fingerprint, s.long("now")!!).name }
                         if (got != s.str("expect")) return "$at : attendu ${s.str("expect")}, obtenu $got"
                     }
                     "spend" -> {
@@ -149,7 +155,39 @@ object TokenVectors {
                     "ack" -> if (w.ack(s.long("seq")!!) != (s["expect"] as Boolean)) return "$at : accusé inattendu"
                     "tamper" -> tamper(file, s.str("kind")!!, s.long("line")!!.toInt())
                     "restart" -> { key = s.str("key") ?: "main"; w = open() }
+                    "apply" -> {
+                        val ex = s["expect"] as Map<String, Any?>
+                        val ring = e.ring(s["ring"] as List<String>, emptyList()); val dev = e.devices.getValue(s.str("device")!!); val pub = e.installs.getValue(s.str("install")!!).pub
+                        val a = TokenSync.apply(TokenSync.Reply(0, s["tokens"] as List<String>, 0, true, null), w, { t -> (TokenGrant.verify(t, ring, RevocationState(), dev, pub, w.lastGrant(), s.long("now")!!) as? TokenGrantResult.Accepted)?.grant }, s.long("now")!!)
+                        if (a.reopened != ex["reopened"] || a.credited.toLong() != ex.long("credited") || a.rejected.toLong() != (ex.long("rejected") ?: 0L)) return "$at : reopened=${a.reopened} credited=${a.credited} rejected=${a.rejected}"
+                    }
+                    "deleteFile" -> { file.delete(); SafeFile.bak(file).delete() }
+                    "markDelete" -> markFile.delete()
+                    "markWrite" -> { val k = keys.getValue(key); markFile.parentFile.mkdirs(); val body = listOf(FileWalletMark.MAGIC, "install=${s.str("installId")}", "opened=${s.str("fp")}|${s.long("chain")}|${s.long("at") ?: 0L}")
+                        markFile.writeText((body + "mac=${TokenWallet.mac(k, body.joinToString("\n"))}").joinToString("\n") + "\n") }
+                    "markFlipMac" -> markFile.writeText(markFile.readText().trimEnd('\n').let { it.dropLast(1) + (if (it.last() == '0') '1' else '0') } + "\n")
+                    "checkMark" -> {
+                        val m = marks.read(); if ((m != null) != (s["present"] as Boolean)) return "$at : marque ${if (m != null) "présente" else "absente"}"
+                        if (m != null) {
+                            if (s["matchesFile"] == true && m.openedFp != firstGrantFp()) return "$at : la marque ne correspond pas au fichier"
+                            s.long("chain")?.let { if (m.chain.toLong() != it) return "$at : chaîne ${m.chain} au lieu de $it" }
+                            s.str("openedFp")?.let { if (m.openedFp != it) return "$at : opened ${m.openedFp}" }
+                        }
+                    }
+                    "copySave" -> copy = file.readText()
+                    "copyRestore" -> file.writeText(copy!!)
+                    "snapshot" -> snapshot = file.readText()
+                    "expectUnchanged" -> if (!file.isFile || file.readText() != snapshot) return "$at : le fichier a changé"
+                    "plantBroken" -> for (n in (s["indices"] as List<Number>)) { File(dir, "wallet.txt.broken-$n").writeText("old-$n\n"); File(dir, "wallet.txt.bak.broken-$n").writeText("old-bak-$n\n") }
+                    "failWrites" -> File(dir, "wallet.txt.tmp").mkdirs()
+                    "allowWrites" -> File(dir, "wallet.txt.tmp").deleteRecursively()
+                    "expectFile" -> {
+                        val f = File(dir, s.str("name")!!); val want = s["exists"] as Boolean
+                        if (f.exists() != want) return "$at : ${f.name} ${if (f.exists()) "existe" else "absent"}"
+                        s.str("startsWith")?.let { if (!f.readText().startsWith(it)) return "$at : ${f.name} ne commence pas par $it" }
+                    }
                     "check" -> {
+                        s.str("cause")?.let { if (w.cause().wire != it) return "$at : cause ${w.cause().wire} au lieu de $it" }
                         if (w.state().name != s.str("state")) return "$at : état ${w.state()} au lieu de ${s.str("state")}"
                         if (w.balance() != s.long("balance")) return "$at : solde ${w.balance()} au lieu de ${s.long("balance")}"
                         s["spentTotal"]?.let { if (w.summary().spentTotal != (it as Number).toLong()) return "$at : total dépensé ${w.summary().spentTotal}" }

@@ -11,13 +11,13 @@ class TokenSyncPolicyTest {
 
     @Test fun applyingAReplyCreditsInOrderAndIsIdempotent() {
         val w = k.wallet()
-        val reply = TokenSync.Reply(0, listOf(k.token(2, 30), k.token(1, 20)), 80, true, "Bienvenue")
+        val reply = TokenSync.Reply(0, listOf(k.token(2, 30), k.token(1, 20, fresh = true)), 80, true, "Bienvenue")
         val a = TokenSync.apply(reply, w, verifier(w))
-        assertEquals(2, a.credited); assertEquals(0, a.rejected); assertEquals(50, w.balance()); assertEquals(2, w.lastGrant()); assertEquals("Bienvenue", a.message)
+        assertTrue(a.reopened, "the opening voucher goes first"); assertEquals(1, a.credited); assertEquals(0, a.rejected); assertEquals(50, w.balance()); assertEquals(2, w.lastGrant()); assertEquals("Bienvenue", a.message)
         val b = TokenSync.apply(reply, w, verifier(w))
         assertEquals(0, b.credited); assertEquals(2, b.rejected); assertEquals(50, w.balance())       // already credited: the verifier refuses them (STALE), nothing is added
         val c = TokenSync.apply(reply, w) { t -> TokenGrant.parseBody(Envelope.decode(t)!!.body) }       // even a verifier that lets them through cannot credit twice
-        assertEquals(0, c.credited); assertEquals(2, c.skipped); assertEquals(50, w.balance())
+        assertEquals(0, c.credited); assertEquals(1, c.skipped); assertEquals(1, c.rejected, "a replayed opening voucher is FRESH_REFUSED"); assertFalse(c.reopened); assertEquals(50, w.balance())
     }
 
     @Test fun anUnverifiableGrantIsRejectedAndTheAckIsApplied() {
@@ -72,9 +72,14 @@ class TokenSyncPolicyTest {
     @Test fun grantBodyIsCanonicalAndIssueRefusesLongWindows() {
         val g = TokenGrant("lic-1", 3, 20, k.install.pub, 0)
         assertEquals(g, TokenGrant.parseBody(g.body()))
+        assertEquals(6, g.body().size); assertEquals("fresh=0", g.body().last()); assertEquals("fresh=1", TokenGrant(g.license, 3, 20, k.install.pub, 0, true).body().last())
+        assertTrue(TokenGrant.parseBody(TokenGrant(g.license, 3, 20, k.install.pub, 0, true).body())!!.fresh)
+        assertNull(TokenGrant.parseBody(g.body().dropLast(1)), "the old 5-line body is refused"); assertNull(TokenGrant.parseBody(g.body().dropLast(1) + "fresh=2")); assertNull(TokenGrant.parseBody(g.body().dropLast(1) + "fresh=01"))
         assertNull(TokenGrant.parseBody(g.body().reversed())); assertNull(TokenGrant.parseBody(g.body().map { it.replace("grant=3", "grant=03") })); assertNull(TokenGrant.parseBody(g.body().drop(1)))
         val t = Envelope.Target.Device(DeviceIdentity_k(), k.dev.byKind)
-        assertFailsWith<IllegalArgumentException> { TokenGrant.issue(k.server, 1, "00000000000000aa", k.t0, k.t0, k.t0 + 31L * 86_400_000, t, g) }
+        assertFailsWith<IllegalArgumentException> { TokenGrant.issue(k.server, 1, "00000000000000aa", k.t0, k.t0, k.t0 + 72L * 3_600_000 + 1, t, g) }
+        assertFailsWith<IllegalArgumentException> { TokenGrant.issue(k.server, 1, "00000000000000aa", k.t0, k.t0, k.t0 + 48L * 3_600_000 + 1, t, TokenGrant("lic-1", 3, 20, k.install.pub, 0, true)) }
+        TokenGrant.issue(k.server, 1, "00000000000000aa", k.t0, k.t0, k.t0 + 72L * 3_600_000, t, g); TokenGrant.issue(k.server, 1, "00000000000000aa", k.t0, k.t0, k.t0 + 48L * 3_600_000, t, TokenGrant("lic-1", 3, 20, k.install.pub, 0, true))
         assertFailsWith<IllegalArgumentException> { TokenGrant.issue(k.server, 1, "zz", k.t0, k.t0, k.t0 + 1000, t, g) }
         assertEquals(k.install.installId, g.installId)
     }

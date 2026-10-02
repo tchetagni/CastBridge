@@ -31,18 +31,20 @@ object TokenSync {
         }
     }
 
-    /** Ce que [apply] a fait : [credited] bons crédités, [skipped] déjà crédités (rejeu), [rejected] refusés (vérification ou licence/installation), [acked] l'accusé pris en compte. */
-    class Applied(val credited: Int, val skipped: Int, val rejected: Int, val acked: Boolean, val offlineAllowed: Boolean, val balanceServer: Long, val message: String?)
+    /** Ce que [apply] a fait : [credited] bons crédités, [skipped] déjà crédités (rejeu), [rejected] refusés (vérification, licence/installation, bon d'ouverture refusé ou attendu), [acked] l'accusé pris en compte, [reopened] le porte-jetons a été rouvert par un bon d'ouverture (non compté dans [credited]). */
+    class Applied(val credited: Int, val skipped: Int, val rejected: Int, val acked: Boolean, val offlineAllowed: Boolean, val balanceServer: Long, val message: String?, val reopened: Boolean = false)
 
     /**
-     * Rejoue [reply] sur [wallet]. [verifyGrant] vérifie un jeton (avec `TokenGrant.verify`, le dernier bon crédité et l'horloge de la TV) et rend le bon accepté, ou null. Les bons sont crédités par
-     * numéro croissant ; idempotent : rejouer la même réponse ne crédite rien de plus.
+     * Rejoue [reply] sur [wallet]. [verifyGrant] vérifie un jeton (avec `TokenGrant.verify`, le dernier bon crédité et l'horloge de la TV) et rend le bon accepté, ou null. Le bon d'ouverture (`fresh=1`) passe d'abord, puis les bons ordinaires par
+     * numéro croissant ; [nowMs] date la marque d'existence ; idempotent : rejouer la même réponse ne crédite rien de plus.
      */
-    fun apply(reply: Reply, wallet: TokenWallet, verifyGrant: (String) -> TokenGrant?): Applied {
-        var credited = 0; var skipped = 0; var rejected = 0
-        val verified = reply.grants.mapNotNull { t -> verifyGrant(t)?.let { it to TokenGrant.fingerprint(t) } ?: run { rejected++; null } }.sortedBy { it.first.grant }
-        for ((g, fp) in verified) when (wallet.credit(g, fp)) { CreditResult.OK -> credited++; CreditResult.STALE -> skipped++; else -> rejected++ }
+    fun apply(reply: Reply, wallet: TokenWallet, verifyGrant: (String) -> TokenGrant?): Applied = apply(reply, wallet, verifyGrant, System.currentTimeMillis())
+
+    fun apply(reply: Reply, wallet: TokenWallet, verifyGrant: (String) -> TokenGrant?, nowMs: Long): Applied {
+        var credited = 0; var skipped = 0; var rejected = 0; var reopened = false
+        val verified = reply.grants.mapNotNull { t -> verifyGrant(t)?.let { it to TokenGrant.fingerprint(t) } ?: run { rejected++; null } }.sortedWith(compareBy({ !it.first.fresh }, { it.first.grant }))
+        for ((g, fp) in verified) when (wallet.credit(g, fp, nowMs)) { CreditResult.OK -> credited++; CreditResult.REOPENED -> reopened = true; CreditResult.STALE -> skipped++; else -> rejected++ }
         val acked = wallet.ack(reply.ackedSeq)
-        return Applied(credited, skipped, rejected, acked, reply.offlineAllowed, reply.balanceServer, reply.message)
+        return Applied(credited, skipped, rejected, acked, reply.offlineAllowed, reply.balanceServer, reply.message, reopened)
     }
 }

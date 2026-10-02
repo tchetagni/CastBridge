@@ -22,11 +22,14 @@ class TokenKit {
     val key = WalletKey.derive(install.priv)
     val dir: File = Files.createTempDirectory("wallet-test").toFile()
     val file = File(dir, "wallet.txt")
-    fun wallet(provider: WalletKeyProvider = FixedWalletKey(key), compactAbove: Int = 500, keepRecent: Int = TokenWallet.KEEP_RECENT, keepWindowMs: Long = TokenWallet.KEEP_WINDOW_MS) = TokenWallet(file, provider, compactAbove, keepRecent, keepWindowMs)
+    val markFile = File(dir, "wallet.mark")
+    fun fileMark(provider: WalletKeyProvider = FixedWalletKey(key)) = FileWalletMark(markFile, provider) { install.installId }
+    fun wallet(provider: WalletKeyProvider = FixedWalletKey(key), compactAbove: Int = 500, keepRecent: Int = TokenWallet.KEEP_RECENT, keepWindowMs: Long = TokenWallet.KEEP_WINDOW_MS, mark: WalletMark = fileMark(provider)) = TokenWallet(file, provider, mark, compactAbove, keepRecent, keepWindowMs)
 
-    fun token(grant: Long, amount: Long = 20, license: String = "lic-1") = TokenGrant.issue(server, grant, "%016x".format(grant), t0, t0, t0 + 86_400_000L, Envelope.Target.Device(DeviceIdentity.kFor(dev.n), dev.byKind), TokenGrant(license, grant, amount, install.pub, 0))
+    fun token(grant: Long, amount: Long = 20, license: String = "lic-1", fresh: Boolean = false) = TokenGrant.issue(server, grant, "%016x".format(grant), t0, t0, t0 + 86_400_000L, Envelope.Target.Device(DeviceIdentity.kFor(dev.n), dev.byKind), TokenGrant(license, grant, amount, install.pub, 0, fresh))
     fun verify(token: String, lastGrant: Long = 0) = TokenGrant.verify(token, ring, RevocationState(), dev, install.pub, lastGrant, t0 + 1000)
-    fun credit(w: TokenWallet, grant: Long, amount: Long = 20): CreditResult { val t = token(grant, amount); return w.credit((verify(t, w.lastGrant()) as TokenGrantResult.Accepted).grant, TokenGrant.fingerprint(t)) }
+    /** Crédite le bon [grant] ; par défaut le bon n° 1 est le bon d'ouverture (`fresh=1`), les suivants des bons ordinaires. */
+    fun credit(w: TokenWallet, grant: Long, amount: Long = 20, fresh: Boolean = grant == 1L): CreditResult { val t = token(grant, amount, fresh = fresh); return w.credit((verify(t, w.lastGrant()) as TokenGrantResult.Accepted).grant, TokenGrant.fingerprint(t), t0) }
     fun close() { dir.deleteRecursively() }
 }
 
@@ -37,7 +40,7 @@ class TokenWalletTest {
     @Test fun creditThenSpendKeepsBalanceAcrossRestarts() {
         val w = k.wallet()
         assertEquals(WalletState.EMPTY, w.state()); assertEquals(0, w.balance())
-        assertEquals(CreditResult.OK, k.credit(w, 1, 20))
+        assertEquals(CreditResult.REOPENED, k.credit(w, 1, 20))
         val r = w.spend("second-chance", 5, 10, "quiz:g:second-chance:1") as SpendResult.Ok
         assertEquals(1, r.seq); assertEquals(15, r.balance); assertFalse(r.replayed)
         val again = k.wallet(); assertEquals(15, again.balance()); assertEquals(1, again.lastGrant())
@@ -60,7 +63,7 @@ class TokenWalletTest {
         go.countDown(); pool.shutdown(); assertTrue(pool.awaitTermination(30, java.util.concurrent.TimeUnit.SECONDS))
         assertEquals(10, ok.get()); assertEquals(14, insufficient.get()); assertEquals(0, w.balance()); assertEquals(0, k.wallet().balance())
 
-        val w2 = TokenWallet(File(k.dir, "w2.txt"), FixedWalletKey(k.key)); val t = k.token(1, 30); w2.credit((k.verify(t) as TokenGrantResult.Accepted).grant, TokenGrant.fingerprint(t))
+        val w2 = TokenWallet(File(k.dir, "w2.txt"), FixedWalletKey(k.key), InMemoryWalletMark()); val t = k.token(1, 30, fresh = true); w2.credit((k.verify(t) as TokenGrantResult.Accepted).grant, TokenGrant.fingerprint(t))
         val pool2 = Executors.newFixedThreadPool(8); val go2 = CountDownLatch(1); val fresh = AtomicInteger()
         repeat(8) { pool2.execute { go2.await(); (w2.spend("second-chance", 5, 1, "same-op") as? SpendResult.Ok)?.let { if (!it.replayed) fresh.incrementAndGet() } } }
         go2.countDown(); pool2.shutdown(); assertTrue(pool2.awaitTermination(30, java.util.concurrent.TimeUnit.SECONDS))
@@ -105,9 +108,9 @@ class TokenWalletTest {
         val before = k.file.readText()
         val other = k.wallet(FixedWalletKey(WalletKey.derive(ByteArray(32) { 9 })))
         assertEquals(WalletState.UNREADABLE, other.state()); assertEquals(0, other.balance())
-        assertEquals("Porte-jetons illisible : reconnectez le téléphone pour le resynchroniser", other.message())
+        assertEquals("Porte-jetons illisible. Vos jetons sont en sécurité au serveur : reconnectez le téléphone, ou la TV à Internet, pour le rétablir.", other.message())
         assertTrue(other.spend("second-chance", 5, 1, "op-1") is SpendResult.Unreadable)
-        assertEquals(CreditResult.UNREADABLE, other.credit(TokenGrant("lic-1", 2, 5, k.install.pub, 0), "0123456789abcdef"))
+        assertEquals(CreditResult.NEEDS_FRESH, other.credit(TokenGrant("lic-1", 2, 5, k.install.pub, 0), "0123456789abcdef"))
         assertEquals(before, k.file.readText())
         k.file.writeText("")                       // wiped file: not a fresh wallet (it would allow replaying old vouchers)
         assertEquals(WalletState.UNREADABLE, k.wallet().state())
@@ -116,15 +119,18 @@ class TokenWalletTest {
 
     @Test fun aGrantIsCreditedOnlyOnceAndOnlyForTheSameLicenceAndInstallation() {
         val w = k.wallet()
-        val t = k.token(1, 20); val g = (k.verify(t) as TokenGrantResult.Accepted).grant
-        assertEquals(CreditResult.OK, w.credit(g, TokenGrant.fingerprint(t)))
-        assertEquals(CreditResult.STALE, w.credit(g, TokenGrant.fingerprint(t)))
-        assertEquals(20, w.balance())
+        val t = k.token(1, 20, fresh = true); val g = (k.verify(t) as TokenGrantResult.Accepted).grant
+        assertEquals(CreditResult.REOPENED, w.credit(g, TokenGrant.fingerprint(t)))
+        val t2 = k.token(2, 5); val g2 = (k.verify(t2, 1) as TokenGrantResult.Accepted).grant
+        assertEquals(CreditResult.OK, w.credit(g2, TokenGrant.fingerprint(t2)))
+        assertEquals(CreditResult.STALE, w.credit(g2, TokenGrant.fingerprint(t2)))
+        assertEquals(CreditResult.FRESH_REFUSED, w.credit(g, TokenGrant.fingerprint(t)), "an opening voucher on a healthy wallet is refused, even a replayed one")
+        assertEquals(25, w.balance())
         assertEquals(CreditResult.WRONG_LICENSE, w.credit(TokenGrant("lic-2", 2, 5, k.install.pub, 0), "0123456789abcdef"))
         assertEquals(CreditResult.WRONG_INSTALL, w.credit(TokenGrant("lic-1", 2, 5, InstallKey.fromSeed(ByteArray(32) { 6 }).pub, 0), "0123456789abcdef"))
         assertEquals(CreditResult.BAD_GRANT, w.credit(TokenGrant("lic-1", 2, 0, k.install.pub, 0), "0123456789abcdef"))
         assertEquals(CreditResult.BAD_GRANT, w.credit(TokenGrant("lic-1", 2, 10_001, k.install.pub, 0), "0123456789abcdef"))
-        assertEquals(20, w.balance())
+        assertEquals(25, w.balance())
     }
 
     @Test fun reportListsOnlyNewSpendsAndIsAuthenticated() {
@@ -227,7 +233,7 @@ class TokenWalletTest {
     }
 
     @Test fun theFactoryGivesOneInstancePerPathAndSharesTheLock() {
-        val a = TokenWallet.of(k.file, FixedWalletKey(k.key)); val b = TokenWallet.of(File(k.dir, "./wallet.txt"), FixedWalletKey(k.key))
+        val a = TokenWallet.of(k.file, FixedWalletKey(k.key), k.fileMark()); val b = TokenWallet.of(File(k.dir, "./wallet.txt"), FixedWalletKey(k.key), k.fileMark())
         assertSame(a, b)
         k.credit(a, 1, 10); assertEquals(10, b.balance())
         assertTrue(File(k.dir, "wallet.lock").isFile, "the lock file next to the wallet")

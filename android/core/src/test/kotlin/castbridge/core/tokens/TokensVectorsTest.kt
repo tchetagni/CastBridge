@@ -39,9 +39,10 @@ class TokensVectorsTest {
 
     private val env get() = TokenVectors.env(skeleton())
 
+    private val hour = 3600L * 1000
     private fun req(grant: Long, amount: Long = 20, signer: String = "server", device: String = "tvA", install: String = "tvA-install-1", license: String = "lic-w5", expiry: Long = 0,
-                    notBefore: Long = t0, expiresAt: Long = t0 + 7 * day) =
-        J("signer" to signer, "device" to device, "install" to install, "license" to license, "grant" to grant, "amount" to amount, "expiry" to expiry, "seq" to grant,
+                    notBefore: Long = t0, expiresAt: Long = t0 + 2 * day, fresh: Boolean = false) =
+        J("signer" to signer, "device" to device, "install" to install, "license" to license, "grant" to grant, "amount" to amount, "expiry" to expiry, "fresh" to (if (fresh) true else null), "seq" to grant,
             "nonce" to "%016x".format(grant), "issuedAt" to t0, "notBefore" to notBefore, "expiresAt" to expiresAt)
 
     private fun token(r: Map<String, Any?>) = TokenVectors.buildToken(env, r)!!
@@ -62,7 +63,11 @@ class TokensVectorsTest {
         }
         build("build-tokens-welcome-20", req(1))
         build("build-tokens-60-with-expiry", req(2, 60, expiry = t0 + 90 * day))
-        build("build-tokens-refuse-window-over-30-days", req(3, expiresAt = t0 + 31 * day), refused = true)
+        build("build-tokens-opening-voucher-20", req(10, fresh = true))
+        build("build-tokens-ordinary-window-72-hours-exact", req(8, expiresAt = t0 + 72 * hour))
+        build("build-tokens-opening-window-48-hours-exact", req(9, fresh = true, expiresAt = t0 + 48 * hour))
+        build("build-tokens-refuse-window-over-72-hours", req(3, expiresAt = t0 + 72 * hour + 1), refused = true)
+        build("build-tokens-refuse-opening-window-over-48-hours", req(11, fresh = true, expiresAt = t0 + 48 * hour + 1), refused = true)
         build("build-tokens-refuse-amount-zero", req(4, 0), refused = true)
 
         fun verify(id: String, token: String, want: String, device: String = "tvA", install: String = "tvA-install-1", ring: List<String> = listOf("server"), revoked: List<String> = emptyList(), now: Long = t0 + day, lastGrant: Long = 0) {
@@ -76,7 +81,7 @@ class TokensVectorsTest {
         verify("tokens-old-grant-is-stale", t1, "STALE_SEQUENCE", lastGrant = 1)
         verify("tokens-key-without-production-scope", token(req(5, signer = "noprod")), "KEY_NOT_ALLOWED", ring = listOf("server", "noprod"))
         verify("tokens-window-closed", t1, "WINDOW_CLOSED", now = t0 + 8 * day)
-        verify("tokens-not-yet-valid", token(req(6, notBefore = t0 + 10 * day, expiresAt = t0 + 12 * day)), "NOT_YET_VALID", now = t0)
+        verify("tokens-not-yet-valid", token(req(6, notBefore = t0 + 2 * day, expiresAt = t0 + 3 * day)), "NOT_YET_VALID", now = t0)
         verify("tokens-unknown-key", t1, "UNKNOWN_KEY", ring = emptyList())
         verify("tokens-revoked-key", t1, "REVOKED_KEY", revoked = listOf("server"))
         val parts = t1.split('.')
@@ -85,15 +90,29 @@ class TokensVectorsTest {
         verify("tokens-not-a-token-type", Orders.issue(e.keys.getValue("server").first, 1, "00000000000000bb", t0, t0, t0 + day, Envelope.Target.Any, "noop"), "UNKNOWN_TYPE")
         verify("tokens-amount-over-limit", rawToken(TokenGrant("lic-w5", 9, 10_001, e.installs.getValue("tvA-install-1").pub, 0).body()), "BAD_GRANT")
         val okBody = TokenGrant("lic-w5", 9, 20, e.installs.getValue("tvA-install-1").pub, 0).body()
-        verify("tokens-signed-window-over-30-days-is-bad-grant", rawToken(okBody, expiresAt = t0 + 31 * day), "BAD_GRANT")
+        verify("tokens-signed-window-over-72-hours-is-bad-grant", rawToken(okBody, expiresAt = t0 + 72 * hour + 1), "BAD_GRANT")
+        verify("tokens-signed-window-72-hours-exact-is-accepted", rawToken(okBody, expiresAt = t0 + 72 * hour), "ACCEPTED")
+        val openBody = TokenGrant("lic-w5", 9, 20, e.installs.getValue("tvA-install-1").pub, 0, true).body()
+        verify("tokens-opening-voucher-accepted", token(req(12, fresh = true)), "ACCEPTED")
+        verify("tokens-signed-opening-window-over-48-hours-is-bad-grant", rawToken(openBody, expiresAt = t0 + 48 * hour + 1), "BAD_GRANT")
+        verify("tokens-signed-opening-window-48-hours-exact-is-accepted", rawToken(openBody, expiresAt = t0 + 48 * hour), "ACCEPTED")
+        verify("tokens-old-five-line-body-is-bad-grant", rawToken(okBody.dropLast(1)), "BAD_GRANT")
+        verify("tokens-fresh-flag-must-be-0-or-1", rawToken(okBody.dropLast(1) + "fresh=2"), "BAD_GRANT")
         verify("tokens-signed-for-any-device-is-wrong-target", rawToken(okBody, anyTarget = true), "WRONG_TARGET")
         verify("tokens-grant-expiry-passed", token(req(7, expiry = t0 + day / 2)), "WINDOW_CLOSED", now = t0 + day)
         verify("tokens-non-canonical-body", rawToken(TokenGrant("lic-w5", 9, 20, e.installs.getValue("tvA-install-1").pub, 0).body().map { it.replace("amount=20", "amount=020") }), "BAD_GRANT")
 
         cases += J("id" to "wallet-key-derivation", "type" to "wallet-key", "install" to "tvA-install-1", "expect" to J("key" to hex(WalletKey.derive(e.installs.getValue("tvA-install-1").priv))))
 
-        fun credit(grant: Long, expect: String, amount: Long = 20, license: String = "lic-w5", install: String = "tvA-install-1", now: Long = t0 + day) =
-            J("do" to "credit", "token" to token(req(grant, amount, license = license, install = install)), "device" to "tvA", "install" to install, "ring" to listOf("server"), "now" to now, "expect" to expect)
+        fun credit(grant: Long, expect: String, amount: Long = 20, license: String = "lic-w5", install: String = "tvA-install-1", now: Long = t0 + day, fresh: Boolean = false) =
+            J("do" to "credit", "token" to token(req(grant, amount, license = license, install = install, fresh = fresh)), "device" to "tvA", "install" to install, "ring" to listOf("server"), "now" to now, "expect" to expect)
+        /** Un bon d'ouverture (`fresh=1`) sur un porte-jetons vide ou illisible : rouvre la chaîne. */
+        fun open(grant: Long, amount: Long = 20) = credit(grant, "REOPENED", amount, fresh = true)
+        fun checkC(state: String, cause: String, balance: Long) = J("do" to "check", "state" to state, "cause" to cause, "balance" to balance)
+        fun file(name: String, exists: Boolean, startsWith: String? = null) = J("do" to "expectFile", "name" to name, "exists" to exists, "startsWith" to startsWith)
+        fun mark(present: Boolean, matchesFile: Boolean? = null, chain: Long? = null) = J("do" to "checkMark", "present" to present, "matchesFile" to matchesFile, "chain" to chain)
+        fun step(d: String, vararg p: Pair<String, Any?>) = J("do" to d, *p)
+        val head = "castbridge-token-wallet-v1"
         fun spend(item: String, cost: Long, op: String, expect: String, balance: Long? = null, at: Long = t0 + 1000) = J("do" to "spend", "item" to item, "cost" to cost, "at" to at, "op" to op, "expect" to expect, "balance" to balance)
         fun check(state: String, balance: Long, spentTotal: Long? = null, clockNote: String? = null) = J("do" to "check", "state" to state, "balance" to balance, "spentTotal" to spentTotal, "clockNote" to clockNote)
         fun tamper(kind: String, line: Int) = J("do" to "tamper", "kind" to kind, "line" to line)
@@ -107,7 +126,7 @@ class TokensVectorsTest {
             cases += if (capture) c + J("reportSince" to reportSince, "expectLines" to lines, "expectReport" to report) else c
         }
         wallet("wallet-credit-spend-replay-conflict", listOf(
-            credit(1, "OK"), check("OK", 20, 0),
+            open(1), check("OK", 20, 0),
             spend("second-chance", 5, "quiz:g1:second-chance:1", "OK", 15),
             spend("second-chance", 5, "quiz:g1:second-chance:1", "REPLAY", 15),
             spend("extra-joker", 2, "quiz:g1:extra-joker:1", "OK", 13),
@@ -117,34 +136,67 @@ class TokensVectorsTest {
             credit(1, "STALE_SEQUENCE"), check("OK", 13, 7), restart(), check("OK", 13, 7),
             spend("swap-question", 3, "quiz:g1:swap-question:1", "OK", 10),
         ), capture = true, reportSince = 1)
-        wallet("wallet-never-negative", listOf(credit(1, "OK", 5), spend("second-chance", 3, "quiz:g:a:1", "OK", 2), spend("second-chance", 3, "quiz:g:a:2", "INSUFFICIENT", 2), spend("extra-joker", 2, "quiz:g:b:1", "OK", 0), spend("extra-joker", 1, "quiz:g:b:2", "INSUFFICIENT", 0)))
-        wallet("wallet-two-grants-increasing-only", listOf(credit(1, "OK", 10), credit(3, "OK", 30), credit(2, "STALE_SEQUENCE", 99), check("OK", 40)))
-        wallet("wallet-other-license-refused", listOf(credit(1, "OK"), credit(2, "WRONG_LICENSE", license = "lic-autre"), check("OK", 20)))
-        wallet("wallet-altered-mac", listOf(credit(1, "OK"), spend("second-chance", 5, "quiz:g:a:1", "OK", 15), tamper("flipMac", 4), restart(), check("UNREADABLE", 0), spend("extra-joker", 2, "quiz:g:b:1", "UNREADABLE")))
-        wallet("wallet-altered-grant-line", listOf(credit(1, "OK"), tamper("flipMac", 3), restart(), check("UNREADABLE", 0), credit(2, "UNREADABLE")))
-        wallet("wallet-head-line-removed", listOf(credit(1, "OK"), tamper("dropLine", 1), restart(), check("UNREADABLE", 0)))
-        wallet("wallet-middle-spend-removed", listOf(credit(1, "OK"), spend("second-chance", 5, "quiz:g:a:1", "OK"), spend("extra-joker", 2, "quiz:g:b:1", "OK"), spend("swap-question", 3, "quiz:g:c:1", "OK"), tamper("dropLine", 5), restart(), check("UNREADABLE", 0)))
-        wallet("wallet-lines-swapped", listOf(credit(1, "OK"), spend("second-chance", 5, "quiz:g:a:1", "OK"), spend("extra-joker", 2, "quiz:g:b:1", "OK"), tamper("swapLines", 4), restart(), check("UNREADABLE", 0)))
-        wallet("wallet-copied-to-another-installation", listOf(credit(1, "OK"), restart("other"), check("UNREADABLE", 0), spend("second-chance", 5, "quiz:g:a:1", "UNREADABLE")))
-        wallet("wallet-tail-truncation-not-detectable-locally", listOf(credit(1, "OK"), spend("second-chance", 5, "quiz:g:a:1", "OK", 15), tamper("truncateTail", 1), restart(), check("OK", 20, 0)))
-        wallet("wallet-clock-set-back-is-noted", listOf(credit(1, "OK"), spend("second-chance", 5, "quiz:g:a:1", "OK", at = 9_000), spend("extra-joker", 2, "quiz:g:b:1", "OK", at = 1_000), check("OK", 13, 7, "Horloge reculée constatée entre deux dépenses")))
+        wallet("wallet-never-negative", listOf(open(1, 5), spend("second-chance", 3, "quiz:g:a:1", "OK", 2), spend("second-chance", 3, "quiz:g:a:2", "INSUFFICIENT", 2), spend("extra-joker", 2, "quiz:g:b:1", "OK", 0), spend("extra-joker", 1, "quiz:g:b:2", "INSUFFICIENT", 0)))
+        wallet("wallet-two-grants-increasing-only", listOf(open(1, 10), credit(3, "OK", 30), credit(2, "STALE_SEQUENCE", 99), check("OK", 40)))
+        wallet("wallet-other-license-refused", listOf(open(1), credit(2, "WRONG_LICENSE", license = "lic-autre"), check("OK", 20)))
+        wallet("wallet-altered-mac", listOf(open(1), spend("second-chance", 5, "quiz:g:a:1", "OK", 15), tamper("flipMac", 4), restart(), check("UNREADABLE", 0), spend("extra-joker", 2, "quiz:g:b:1", "UNREADABLE")))
+        wallet("wallet-altered-grant-line", listOf(open(1), tamper("flipMac", 3), restart(), check("UNREADABLE", 0), credit(2, "NEEDS_FRESH")))
+        wallet("wallet-head-line-removed", listOf(open(1), tamper("dropLine", 1), restart(), check("UNREADABLE", 0)))
+        wallet("wallet-middle-spend-removed", listOf(open(1), spend("second-chance", 5, "quiz:g:a:1", "OK"), spend("extra-joker", 2, "quiz:g:b:1", "OK"), spend("swap-question", 3, "quiz:g:c:1", "OK"), tamper("dropLine", 5), restart(), check("UNREADABLE", 0)))
+        wallet("wallet-lines-swapped", listOf(open(1), spend("second-chance", 5, "quiz:g:a:1", "OK"), spend("extra-joker", 2, "quiz:g:b:1", "OK"), tamper("swapLines", 4), restart(), check("UNREADABLE", 0)))
+        wallet("wallet-copied-to-another-installation", listOf(open(1), restart("other"), check("UNREADABLE", 0), spend("second-chance", 5, "quiz:g:a:1", "UNREADABLE")))
+        wallet("wallet-tail-truncation-not-detectable-locally", listOf(open(1), spend("second-chance", 5, "quiz:g:a:1", "OK", 15), tamper("truncateTail", 1), restart(), check("OK", 20, 0)))
+        wallet("wallet-clock-set-back-is-noted", listOf(open(1), spend("second-chance", 5, "quiz:g:a:1", "OK", at = 9_000), spend("extra-joker", 2, "quiz:g:b:1", "OK", at = 1_000), check("OK", 13, 7, "Horloge reculée constatée entre deux dépenses")))
         wallet("wallet-compaction-keeps-balance-and-sequence", listOf(
-            credit(1, "OK", 100), spend("second-chance", 5, "quiz:g:a:1", "OK"), spend("extra-joker", 2, "quiz:g:b:1", "OK"), spend("extra-joker", 2, "quiz:g:b:2", "OK"), spend("swap-question", 3, "quiz:g:c:1", "OK"), spend("second-chance", 5, "quiz:h:a:1", "OK"),
+            open(1, 100), spend("second-chance", 5, "quiz:g:a:1", "OK"), spend("extra-joker", 2, "quiz:g:b:1", "OK"), spend("extra-joker", 2, "quiz:g:b:2", "OK"), spend("swap-question", 3, "quiz:g:c:1", "OK"), spend("second-chance", 5, "quiz:h:a:1", "OK"),
             J("do" to "ack", "seq" to 99, "expect" to false), J("do" to "ack", "seq" to 3, "expect" to true),
             check("OK", 83, 17), restart(), check("OK", 83, 17), spend("swap-question", 3, "quiz:h:c:1", "OK", 80), check("OK", 80, 20)), compactAbove = 6, keepRecent = 1, keepWindowMs = 0, capture = true, reportSince = 3)
         // the last acked spends stay (keepRecent 2, spends 1 s apart, window 0): a retried operation after compaction is still a REPLAY, not a new debit
         wallet("wallet-replay-after-compaction", listOf(
-            credit(1, "OK", 100), spend("second-chance", 5, "quiz:g:a:1", "OK", at = t0 + 1000), spend("extra-joker", 2, "quiz:g:b:1", "OK", at = t0 + 2000), spend("extra-joker", 2, "quiz:g:b:2", "OK", at = t0 + 3000),
+            open(1, 100), spend("second-chance", 5, "quiz:g:a:1", "OK", at = t0 + 1000), spend("extra-joker", 2, "quiz:g:b:1", "OK", at = t0 + 2000), spend("extra-joker", 2, "quiz:g:b:2", "OK", at = t0 + 3000),
             spend("swap-question", 3, "quiz:g:c:1", "OK", at = t0 + 4000), spend("second-chance", 5, "quiz:h:a:1", "OK", at = t0 + 5000),
             J("do" to "ack", "seq" to 3, "expect" to true), check("OK", 83, 17), restart(),
             spend("swap-question", 3, "quiz:g:c:1", "REPLAY", 83), spend("second-chance", 5, "quiz:h:a:1", "REPLAY", 83), check("OK", 83, 17),
             spend("swap-question", 3, "quiz:h:c:1", "OK", 80, at = t0 + 6000)), compactAbove = 6, keepRecent = 2, keepWindowMs = 0, capture = true)
         // grant lines are folded into granted=<last>|<sum>: the file does not grow with the number of vouchers, the numbering still refuses an old voucher
         wallet("wallet-compaction-folds-grants", listOf(
-            credit(1, "OK", 10), credit(2, "OK", 20), credit(3, "OK", 30), spend("second-chance", 5, "quiz:g:a:1", "OK", at = t0 + 1000), spend("extra-joker", 2, "quiz:g:b:1", "OK", at = t0 + 2000),
+            open(1, 10), credit(2, "OK", 20), credit(3, "OK", 30), spend("second-chance", 5, "quiz:g:a:1", "OK", at = t0 + 1000), spend("extra-joker", 2, "quiz:g:b:1", "OK", at = t0 + 2000),
             J("do" to "ack", "seq" to 1, "expect" to true), check("OK", 53, 7), restart(), check("OK", 53, 7),
             credit(3, "STALE_SEQUENCE"), credit(4, "OK", 40), check("OK", 93, 7), restart(), check("OK", 93, 7)), compactAbove = 4, keepRecent = 1, keepWindowMs = 0, capture = true)
-        wallet("wallet-empty-file-is-unreadable", listOf(credit(1, "OK"), tamper("empty", 0), restart(), check("UNREADABLE", 0), credit(2, "UNREADABLE"), spend("second-chance", 5, "quiz:g:a:1", "UNREADABLE")))
+        wallet("wallet-empty-file-is-unreadable", listOf(open(1), tamper("empty", 0), restart(), check("UNREADABLE", 0), credit(2, "NEEDS_FRESH"), spend("second-chance", 5, "quiz:g:a:1", "UNREADABLE")))
+
+        // --- addendum W5 porte-jetons : bon d'ouverture, marque d'existence, reprise (D-W5-J1, J2, J5) ---
+        wallet("wallet-opening-voucher-reopens-an-empty-wallet", listOf(checkC("EMPTY", "none", 0), open(1), check("OK", 20, 0), mark(true, true, 1)), capture = true)
+        wallet("wallet-ordinary-voucher-on-empty-needs-fresh", listOf(credit(1, "NEEDS_FRESH"), check("EMPTY", 0), file("wallet.txt", false), mark(false)))
+        wallet("wallet-opening-voucher-on-a-healthy-wallet-is-refused", listOf(open(1), spend("second-chance", 5, "quiz:g:a:1", "OK", 15), step("snapshot"), credit(2, "FRESH_REFUSED", 50, fresh = true), step("expectUnchanged"),
+            check("OK", 15, 5), file("wallet.txt.broken-1", false), mark(true, true, 1)))
+        wallet("wallet-erased-file-is-lost-then-reopened", listOf(open(1), spend("second-chance", 5, "quiz:g:a:1", "OK", 15), step("deleteFile"), restart(), checkC("UNREADABLE", "lost", 0),
+            spend("extra-joker", 2, "quiz:g:b:1", "UNREADABLE"), credit(2, "NEEDS_FRESH", 30), open(3, 30), checkC("OK", "none", 30), check("OK", 30, 0), file("wallet.txt.broken-1", false), mark(true, true, 2),
+            restart(), check("OK", 30, 0)), capture = true)
+        wallet("wallet-broken-file-is-moved-aside-on-reopen", listOf(open(1), spend("second-chance", 5, "quiz:g:a:1", "OK", 15), tamper("flipMac", 4), restart(), checkC("UNREADABLE", "broken", 0),
+            open(2, 30), check("OK", 30, 0), file("wallet.txt.broken-1", true, head), file("wallet.txt.bak.broken-1", true, head), file("wallet.txt.broken-new", false), mark(true, true, 2)))
+        wallet("wallet-restored-earlier-chain-is-foreign", listOf(open(1), step("copySave"), step("deleteFile"), restart(), checkC("UNREADABLE", "lost", 0), open(3, 40), step("copyRestore"), restart(),
+            checkC("UNREADABLE", "foreign_chain", 0), spend("second-chance", 5, "quiz:g:a:1", "UNREADABLE"), credit(4, "NEEDS_FRESH", 10), open(5, 15), checkC("OK", "none", 15), file("wallet.txt.broken-1", true, head)))
+        wallet("wallet-forged-mark-mac-is-ignored-and-recreated", listOf(open(1), step("markFlipMac"), restart(), checkC("OK", "none", 20), mark(true, true, 1)))
+        wallet("wallet-missing-mark-with-a-valid-file-is-recreated", listOf(open(1), step("markDelete"), restart(), checkC("OK", "none", 20), mark(true, true, 1)))
+        wallet("wallet-mark-of-another-installation-is-ignored", listOf(step("markWrite", "installId" to "00000000000000ee", "fp" to "0123456789abcdef", "chain" to 1, "at" to 0), mark(false), checkC("EMPTY", "none", 0), credit(1, "NEEDS_FRESH")))
+        wallet("wallet-keeps-five-broken-files-and-erases-the-oldest", listOf(step("plantBroken", "indices" to listOf(1, 2, 3, 4, 5)), open(1), tamper("flipMac", 3), restart(), checkC("UNREADABLE", "broken", 0), open(2, 30),
+            check("OK", 30, 0), file("wallet.txt.broken-1", true, "old-2"), file("wallet.txt.broken-4", true, "old-5"), file("wallet.txt.broken-5", true, head), file("wallet.txt.broken-6", false),
+            file("wallet.txt.bak.broken-1", true, "old-bak-2"), file("wallet.txt.bak.broken-4", true, "old-bak-5")))
+        wallet("wallet-failed-reopen-puts-the-old-file-back", listOf(open(1), tamper("flipMac", 3), restart(), step("snapshot"), step("failWrites"), credit(2, "WRITE_FAILED", 30, fresh = true), step("expectUnchanged"),
+            checkC("UNREADABLE", "broken", 0), file("wallet.txt.broken-1", false), file("wallet.txt.broken-new", false), mark(true, false, 1), step("allowWrites"), open(2, 30), checkC("OK", "none", 30), file("wallet.txt.broken-1", true, head)))
+        wallet("wallet-sync-apply-opens-first-then-ordinary-by-number", listOf(
+            J("do" to "apply", "tokens" to listOf(token(req(3, 30)), token(req(2, 10)), token(req(1, 20, fresh = true))), "device" to "tvA", "install" to "tvA-install-1", "ring" to listOf("server"), "now" to t0 + day,
+                "expect" to J("reopened" to true, "credited" to 2, "rejected" to 0)), check("OK", 60, 0),
+            J("do" to "apply", "tokens" to listOf(token(req(3, 30)), token(req(1, 20, fresh = true))), "device" to "tvA", "install" to "tvA-install-1", "ring" to listOf("server"), "now" to t0 + day,
+                "expect" to J("reopened" to false, "credited" to 0, "rejected" to 2)), check("OK", 60, 0)))
+        // server-side vectors (rejoués par w5-08, sans objet pour le cœur : le type « server » est ignoré par TokenVectors)
+        cases += J("id" to "server-report-below-chain-grant-seq-is-chain-replay", "type" to "server", "scope" to "w5-08", "chainGrantSeq" to 5, "report" to J("lastGrant" to 3, "lastSpendSeq" to 2),
+            "expect" to J("anomaly" to "TOKEN_CHAIN_REPLAY", "spendsRecorded" to false, "offlineAllowed" to false))
+        cases += J("id" to "server-first-report-after-recovery-is-not-a-replay", "type" to "server", "scope" to "w5-08", "chainGrantSeq" to 5, "lastSeqSeen" to 0, "report" to J("lastGrant" to 5, "lastSpendSeq" to 1),
+            "expect" to J("anomaly" to null, "spendsRecorded" to true, "offlineAllowed" to true))
+        cases += J("id" to "server-wallet-absent-after-delivery-is-wallet-lost", "type" to "server", "scope" to "w5-08", "deliveredGrants" to 1, "walletState" to "absent", "walletCause" to "lost",
+            "expect" to J("anomaly" to "TOKEN_WALLET_LOST"))
 
         fun policy(id: String, settings: Map<String, Any?>?, balance: Long, vararg x: Triple<String, Map<String, Any?>, Unit>) {
             cases += J("id" to id, "type" to "policy", "settings" to settings, "balance" to balance, "expect" to linkedMapOf<String, Any?>().also { m -> x.forEach { m[it.first] = it.second } })
