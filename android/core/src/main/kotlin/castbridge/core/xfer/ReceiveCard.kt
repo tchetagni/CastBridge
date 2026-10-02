@@ -1,39 +1,40 @@
 package castbridge.core.xfer
 
-/** One reception in progress on the TV home. [via] = "Wi-Fi" | "Bluetooth"; [state] = "en cours" | "terminé". */
-data class ReceiveCard(val name: String, val received: Long, val total: Long, val via: String, val state: String)
+/**
+ * One reception on the TV home. [name] is the readable title (LibraryLogic.title), [via] = "Wi-Fi" | "Wi-Fi multivoie" | "Bluetooth";
+ * [state] = "en cours" | "terminé" | "échec" | "interrompu"; [line] = the chip line of this one ([TransferProgress.Item.screenLine]).
+ */
+data class ReceiveCard(val name: String, val received: Long, val total: Long, val via: String, val state: String, val line: String)
 
-/** The TV home's reception cards from `TransferHost.stateJson` objects (a JSON array) and the `1-bt` status line, plus the one-line headline. */
+/**
+ * The TV home chip as PURE functions (R-04). Source: [TransferProgress.shown] (Wi-Fi, Wi-Fi multivoie and Bluetooth all feed it: the
+ * Bluetooth `1-bt` status string is no longer a source) plus the old `.part` listing as a fallback for what progress does not know.
+ */
 object ReceiveCards {
     const val READY = "Prêt à recevoir"
-    private val OBJ = Regex("""\{"id":""")
-    private val NAME = Regex(""""name":"((?:[^"\\]|\\.)*)"""")
-    private val BT = Regex("""réception de (.+) (\d{1,3}) %""")
-    private fun num(o: String, k: String) = Regex(""""$k":(\d+)""").find(o)?.groupValues?.get(1)?.toLongOrNull()
-    private fun unq(s: String) = s.replace("\\\"", "\"").replace("\\\\", "\\").replace("\\n", "\n")
+    const val STARTING = "Démarrage…"
 
-    fun of(transfersJson: String, btStatusLine: String?): List<ReceiveCard> {
-        val cards = ArrayList<ReceiveCard>()
-        val starts = OBJ.findAll(transfersJson).map { it.range.first }.toList()
-        starts.forEachIndexed { i, st ->
-            val o = transfersJson.substring(st, starts.getOrNull(i + 1) ?: transfersJson.length)
-            val name = NAME.find(o)?.groupValues?.get(1)?.let(::unq) ?: return@forEachIndexed
-            val size = num(o, "size") ?: 0; val blocks = num(o, "blocks") ?: 0; val done = num(o, "done") ?: 0
-            val got = if (blocks > 0) (size * done.coerceAtMost(blocks) / blocks) else 0
-            cards += ReceiveCard(name, got, size, "Wi-Fi", if (o.contains("\"ready\":true") || (blocks > 0 && done >= blocks)) "terminé" else "en cours")
+    /** [items] = `TransferProgress.shown()`; [partials] = `ReceiverServer.receiving()` (name, got, total), used only for names not in [items]. */
+    fun of(items: List<TransferProgress.Item>, partials: List<Triple<String, Long, Long>> = emptyList(), serverUp: Boolean = true): List<ReceiveCard> {
+        val cards = items.map {
+            ReceiveCard(it.title, it.received, it.total, it.transport.label, when (it.phase) {
+                TransferProgress.Phase.RUNNING -> "en cours"; TransferProgress.Phase.DONE -> "terminé"
+                TransferProgress.Phase.FAILED -> "échec"; TransferProgress.Phase.ABORTED -> "interrompu"
+            }, it.screenLine())
+        }.toMutableList()
+        val known = items.map { it.name.lowercase() }.toSet()
+        for ((n, got, total) in partials) {
+            if (n.lowercase() in known) continue
+            val t = castbridge.core.tv.LibraryLogic.title(n)
+            cards += ReceiveCard(t, got, total, "Wi-Fi", "en cours", "⬇ Réception de $t : ${got * 100 / total.coerceAtLeast(1)} %")
         }
-        // REGRESSION R-04 : comportement actuel (BtServer.kt:113-127) : la ligne 1-bt est une chaîne écrasée ; seule « réception de X n % » donne une carte
-        btStatusLine?.let { BT.find(it) }?.let { m -> cards += ReceiveCard(m.groupValues[1], m.groupValues[2].toLong().coerceIn(0, 100), 100, "Bluetooth", "en cours") }
         return cards
     }
 
-    /** « Prêt à recevoir » only when nothing is being received. */
-    fun headline(cards: List<ReceiveCard>): String = when {
-        cards.isEmpty() -> READY
-        cards.size > 1 -> "Réception de ${cards.size} fichiers"
-        else -> cards[0].let { c ->
-            val pct = if (c.total > 0) (c.received * 100 / c.total).toInt() else 0
-            if (c.via == "Bluetooth") "Réception par Bluetooth : ${c.name} $pct %" else "Réception de ${c.name} : $pct %"
-        }
-    }
+    /** The status word of the chip: « Démarrage… » until the receiving service is up, « Prêt à recevoir » after (also while receiving: the line says the rest). */
+    fun ready(serverUp: Boolean): String = if (serverUp) READY else STARTING
+
+    /** The reception line under the status word; null = nothing is being received. A second copy adds « (+1 autre) ». */
+    fun headline(cards: List<ReceiveCard>): String? =
+        cards.firstOrNull()?.let { it.line + (cards.size - 1).let { o -> if (o > 0) "  (+$o autre${if (o > 1) "s" else ""})" else "" } }
 }

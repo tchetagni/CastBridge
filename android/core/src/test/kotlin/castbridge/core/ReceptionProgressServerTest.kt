@@ -65,4 +65,42 @@ class ReceptionProgressServerTest {
         assertTrue(r.server.progress.active().isEmpty())
         assertContentEquals(data, File(r.internalDir, "clip.mp4").readBytes())
     }
+
+    private fun chunk(r: Rig, id: String, idx: Int, data: ByteArray): Int {
+        val c = java.net.URL("${r.base}/api/transfer/chunk?id=$id&idx=$idx").openConnection() as java.net.HttpURLConnection
+        c.requestMethod = "PUT"; c.doOutput = true; c.setFixedLengthStreamingMode(data.size)
+        c.setRequestProperty("X-CB-Sha256", Hash.hex(Hash.sha256(data)))
+        c.outputStream.use { it.write(data) }
+        return c.responseCode.also { runCatching { (if (it < 400) c.inputStream else c.errorStream)?.readBytes() } }
+    }
+
+    /** After the 90 s silence the copy is closed ABORTED; the phone then sends chunks only (no new begin): it must show again, same id. */
+    @Test fun chunksAfterTheSilenceSweepMakeTheCopyVisibleAgain() {
+        var t = 0L
+        val progress = TransferProgress(now = { t })
+        val r = Rig(progress = progress).also { it.unplug(); rigs += it }
+        val bs = Manifest.SLICE; val size = 2L * bs
+        val name = "film.mkv"
+        assertEquals(200, r.call("POST", "/api/transfer/begin?name=$name&size=$size&blockSize=$bs").first)
+        val id = Manifest(name, size, bs).id
+        val data = Random(7).nextBytes(bs)
+        assertEquals(200, chunk(r, id, 0, data))
+        val seq = progress.active().single().seq
+        t += 91_000
+        assertTrue(progress.active().isEmpty(), "silent for 90 s: closed")
+        assertEquals(Phase.ABORTED, progress.shown().single().phase)
+        assertEquals(200, chunk(r, id, 1, data))
+        val back = progress.active().single()
+        assertEquals(seq, back.seq, "same notification id"); assertEquals(Phase.RUNNING, back.phase)
+        assertEquals(size, back.received); assertEquals(Transport.WIFI_MULTI, back.transport)
+    }
+
+    /** A clean end of the stream before the last byte (no IOException) does not leave the copy RUNNING until the sweep. */
+    @Test fun aShortUploadIsMarkedWaitingAtOnce() {
+        val r = rig()
+        val data = Random(8).nextBytes(100_000)
+        assertEquals(200, r.put("short.mp4", 0, 300_000, data).first)
+        val it = r.server.progress.active().single()
+        assertEquals("connexion coupée, reprise en attente", it.message)
+    }
 }
