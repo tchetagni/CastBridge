@@ -45,7 +45,7 @@ class QuizGame(
     /** Paid conveniences (seconde chance, joker en plus, changer de question): [NoBoosts] = free game as before. */
     val boosts: QuizBoosts = NoBoosts,
     /** Id of this game for the debit of a boost. */
-    val gameId: String = "",
+    val gameId: String = java.util.UUID.randomUUID().toString(),
     /** Gives a replacement question of the same difficulty for [Boost.SWAP_QUESTION] (null = none left); without it the boost is unavailable. */
     val swapProvider: ((Question) -> Question?)? = null,
 ) {
@@ -261,7 +261,7 @@ class QuizGame(
         lastBoostRefusal = null
         if (!canBoost(b)) { lastBoostRefusal = "Cette option n'est pas disponible maintenant."; return false }
         val replacement = if (b == Boost.SWAP_QUESTION || (b == Boost.SECOND_CHANCE && pendingEnd == End.WRONG)) swapProvider?.invoke(question) ?: run { lastBoostRefusal = "Plus de question de remplacement."; return false } else null
-        if (!boosts.charge(b, gameId)) { lastBoostRefusal = "Jetons insuffisants."; return false }
+        if (!boosts.charge(b, gameId, (boostCounts[b] ?: 0) + 1)) { lastBoostRefusal = "Jetons insuffisants."; return false }
         boostCounts[b] = (boostCounts[b] ?: 0) + 1
         when (b) {
             Boost.SECOND_CHANCE -> { pendingEnd = null; replacement?.let { pool[index] = it }; enterQuestion(index, now) }  // wrong: new question (the right one was shown); time-out: same one

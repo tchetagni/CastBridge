@@ -208,7 +208,7 @@ class QuizRoom(
             inGame = qs.map { it.id }.toMutableSet()
             val swap = { q: Question -> swapQuestion(q) }
             game = QuizGame(qs, timers = if (practice) QuizGame.NO_TIMERS else gameTimers, seed = seed, practice = practice, markChannel = bank.channel,
-                boosts = if (practice) NoBoosts else boosts, gameId = "$code-${gameNo + 1}", swapProvider = swap).also { it.start(t) }
+                boosts = if (practice) NoBoosts else boosts, gameId = java.util.UUID.randomUUID().toString(), swapProvider = swap).also { it.start(t) }
             duel = null
             if (candidate != null && players[candidate]?.left != false) candidate = null
         } else {

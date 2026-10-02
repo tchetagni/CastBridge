@@ -37,7 +37,7 @@ class TokenSyncPolicyTest {
         assertNull(TokenSync.Reply.parse("""{"grants":[]}"""))
         assertNull(TokenSync.Reply.parse("pas du json"))
         assertNull(TokenSync.Reply.parse("""{"ackedSeq":1,"grants":[${(1..51).joinToString(",") { "\"x\"" }}]}"""))
-        assertTrue(TokenSync.Reply.parse("""{"ackedSeq":0}""")!!.offlineAllowed)
+        assertFalse(TokenSync.Reply.parse("""{"ackedSeq":0}""")!!.offlineAllowed, "absent = closed by default"); assertTrue(TokenSync.Reply.parse("""{"ackedSeq":0,"offlineAllowed":true}""")!!.offlineAllowed)
     }
 
     @Test fun kidAllowance() {

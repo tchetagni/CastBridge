@@ -13,7 +13,7 @@ object TokenSync {
     const val MAX_GRANTS = 50
     const val MAX_TOKEN_CHARS = 4096
 
-    /** Réponse du serveur. [offlineAllowed] faux : le serveur n'envoie plus de bons hors ligne à cette installation (rejeu détecté) ; [message] est un texte français facultatif. */
+    /** Réponse du serveur. [offlineAllowed] absent = faux (fermé par défaut) ; faux : le serveur n'envoie plus de bons hors ligne à cette installation (rejeu détecté) ; [message] est un texte français facultatif. */
     class Reply(val ackedSeq: Long, val grants: List<String>, val balanceServer: Long, val offlineAllowed: Boolean, val message: String?) {
         fun toJson(): String = JsonLite.write(linkedMapOf("format" to REPLY_FORMAT, "ackedSeq" to ackedSeq, "grants" to grants, "balanceServer" to balanceServer, "offlineAllowed" to offlineAllowed, "message" to message))
 
@@ -26,7 +26,7 @@ object TokenSync {
                 require(grants.size <= MAX_GRANTS && grants.all { it.length in 1..MAX_TOKEN_CHARS })
                 val acked = o.long("ackedSeq")!!; val bal = o.long("balanceServer") ?: 0L
                 require(acked >= 0 && bal >= 0)
-                Reply(acked, grants, bal, o["offlineAllowed"] as? Boolean ?: true, o.str("message")?.take(300))
+                Reply(acked, grants, bal, o["offlineAllowed"] as? Boolean ?: false, o.str("message")?.take(300))
             }.getOrNull()
         }
     }

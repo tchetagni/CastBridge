@@ -22,7 +22,7 @@ class TokenKit {
     val key = WalletKey.derive(install.priv)
     val dir: File = Files.createTempDirectory("wallet-test").toFile()
     val file = File(dir, "wallet.txt")
-    fun wallet(provider: WalletKeyProvider = FixedWalletKey(key), compactAbove: Int = 500) = TokenWallet(file, provider, compactAbove)
+    fun wallet(provider: WalletKeyProvider = FixedWalletKey(key), compactAbove: Int = 500, keepRecent: Int = TokenWallet.KEEP_RECENT, keepWindowMs: Long = TokenWallet.KEEP_WINDOW_MS) = TokenWallet(file, provider, compactAbove, keepRecent, keepWindowMs)
 
     fun token(grant: Long, amount: Long = 20, license: String = "lic-1") = TokenGrant.issue(server, grant, "%016x".format(grant), t0, t0, t0 + 86_400_000L, Envelope.Target.Device(DeviceIdentity.kFor(dev.n), dev.byKind), TokenGrant(license, grant, amount, install.pub, 0))
     fun verify(token: String, lastGrant: Long = 0) = TokenGrant.verify(token, ring, RevocationState(), dev, install.pub, lastGrant, t0 + 1000)
@@ -139,13 +139,13 @@ class TokenWalletTest {
     }
 
     @Test fun ackIgnoresAnAckBeyondTheLocalSequenceAndCompactsWhenLong() {
-        val w = k.wallet(compactAbove = 6); k.credit(w, 1, 100)
+        val w = k.wallet(compactAbove = 6, keepRecent = 1, keepWindowMs = 0); k.credit(w, 1, 100)
         repeat(5) { w.spend("swap-question", 3, it.toLong(), "op-$it") }
         assertFalse(w.ack(6)); assertFalse(w.ack(-1))
         assertEquals(9, k.file.readText().trimEnd().lines().size)
         assertTrue(w.ack(4))
         val lines = k.file.readText().trimEnd().lines()
-        assertTrue(lines.any { it.startsWith("acked=4|12|") }); assertEquals(1, lines.count { it.startsWith("spend=") })
+        assertTrue(lines.any { it.startsWith("acked=4|12|") }); assertEquals(1, lines.count { it.startsWith("spend=") }); assertTrue(lines.any { it.startsWith("granted=1|100|") })
         assertEquals(85, w.balance()); assertEquals(15, w.summary().spentTotal); assertEquals(5, w.summary().lastSpendSeq)
         assertEquals(6, (k.wallet().spend("swap-question", 3, 9, "op-new") as SpendResult.Ok).seq)
     }
@@ -164,30 +164,103 @@ class TokenWalletTest {
         assertFalse(all.contains("import android")); assertFalse(all.contains("VirtualWallet")); assertFalse(all.contains("Pot."))
     }
 
-    /** QuizBoosts.charge over this wallet, as w5-17 will plug it: one purchase = one operation key = at most one debit. */
+    /** QuizBoosts.charge over this wallet, as w5-17 will plug it: (gameId, item, purchaseNo) = one operation key = at most one debit, a retry is a replay. */
     private class WalletBoosts(val w: TokenWallet, val p: TokenPolicy, val now: () -> Long) : QuizBoosts {
         private fun item(b: Boost) = TokenItem.valueOf(b.name)
         override fun available(b: Boost) = w.state() == WalletState.OK
         override fun cost(b: Boost) = p.cost(item(b))
         override fun balance() = w.balance()
-        override fun charge(b: Boost, gameId: String): Boolean {
-            val it = item(b); val n = w.spendCount(TokenPolicy.opPrefix(gameId, it)) + 1
-            if (n > p.maxPerGame(it) || n > b.maxPerGame) return false
-            return w.spend(it.wire, p.cost(it), now(), TokenPolicy.opKey(gameId, it, n)) is SpendResult.Ok
+        override fun charge(b: Boost, gameId: String, purchaseNo: Int): Boolean {
+            val it = item(b)
+            if (!UUID_RE.matches(gameId) || purchaseNo < 1 || purchaseNo > p.maxPerGame(it) || purchaseNo > b.maxPerGame) return false
+            return w.spend(it.wire, p.cost(it), now(), TokenPolicy.opKey(gameId, it, purchaseNo)) is SpendResult.Ok
         }
+        companion object { val UUID_RE = Regex("^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$") }
     }
 
-    @Test fun theQuizBoostsContractCanBeServedByTheWalletWithoutDoubleDebit() {
+    private fun uuid() = java.util.UUID.randomUUID().toString()
+
+    @Test fun theQuizBoostsContractIsServedByTheWalletAndARetryNeverDebitsTwice() {
         val w = k.wallet(); k.credit(w, 1, 20); val p = TokenPolicy()
-        val boosts = WalletBoosts(w, p) { 5 }
-        assertTrue(boosts.charge(Boost.SECOND_CHANCE, "g1")); assertEquals(15, boosts.balance())
-        assertFalse(boosts.charge(Boost.SECOND_CHANCE, "g1"), "une seule seconde chance par partie"); assertEquals(15, boosts.balance())
-        assertTrue(boosts.charge(Boost.EXTRA_JOKER, "g1")); assertTrue(boosts.charge(Boost.EXTRA_JOKER, "g1")); assertFalse(boosts.charge(Boost.EXTRA_JOKER, "g1")); assertEquals(11, boosts.balance())
-        // a retry of purchase #1 of g1 (same operation key) is a replay, never a second debit
-        val op = TokenPolicy.opKey("g1", TokenItem.SECOND_CHANCE, 1)
-        val replay = w.spend(TokenItem.SECOND_CHANCE.wire, p.cost(TokenItem.SECOND_CHANCE), 6, op) as SpendResult.Ok
-        assertTrue(replay.replayed); assertEquals(11, w.balance())
-        assertTrue(boosts.charge(Boost.SECOND_CHANCE, "g2")); assertEquals(6, boosts.balance())       // a new game: a new purchase
-        assertFalse(WalletBoosts(w, TokenPolicy(TokenSettings(secondChance = 50)), { 5 }).charge(Boost.SECOND_CHANCE, "g3"), "solde insuffisant : rien n'est pris"); assertEquals(6, w.balance())
+        val boosts = WalletBoosts(w, p) { 5 }; val g1 = uuid()
+        assertTrue(boosts.charge(Boost.SECOND_CHANCE, g1, 1)); assertEquals(15, boosts.balance())
+        assertTrue(boosts.charge(Boost.SECOND_CHANCE, g1, 1), "retry of the SAME purchase: same Ok"); assertEquals(15, boosts.balance(), "no second debit")
+        assertFalse(boosts.charge(Boost.SECOND_CHANCE, g1, 2), "one second chance per game"); assertEquals(15, boosts.balance())
+        assertTrue(boosts.charge(Boost.EXTRA_JOKER, g1, 1)); assertTrue(boosts.charge(Boost.EXTRA_JOKER, g1, 1)); assertEquals(13, boosts.balance(), "retry of purchase #1 after a success is not purchase #2")
+        assertTrue(boosts.charge(Boost.EXTRA_JOKER, g1, 2)); assertEquals(11, boosts.balance())
+        assertTrue(boosts.charge(Boost.EXTRA_JOKER, g1, 2)); assertEquals(11, boosts.balance())
+        assertFalse(boosts.charge(Boost.EXTRA_JOKER, g1, 3), "at most twice per game"); assertEquals(11, boosts.balance())
+        assertFalse(boosts.charge(Boost.SWAP_QUESTION, g1, 0)); assertFalse(boosts.charge(Boost.SWAP_QUESTION, "g1", 1), "a game id must be a unique UUID")
+        // the retry also survives a restart of the TV app
+        assertTrue(WalletBoosts(k.wallet(), p) { 6 }.charge(Boost.SECOND_CHANCE, g1, 1)); assertEquals(11, k.wallet().balance())
+        assertTrue(boosts.charge(Boost.SECOND_CHANCE, uuid(), 1)); assertEquals(6, boosts.balance())       // a new game: a new purchase
+        assertFalse(WalletBoosts(w, TokenPolicy(TokenSettings(secondChance = 50)), { 5 }).charge(Boost.SECOND_CHANCE, uuid(), 1), "solde insuffisant : rien n'est pris"); assertEquals(6, w.balance())
+    }
+
+    @Test fun tokenItemsAndCapsMirrorTheQuizBoosts() {
+        assertEquals(Boost.values().map { it.name }, TokenItem.values().map { it.name })
+        val p = TokenPolicy()
+        for (b in Boost.values()) { val it = TokenItem.valueOf(b.name); assertEquals(b.maxPerGame, p.maxPerGame(it), "cap of ${b.name}"); assertEquals(b.label, p.label(it), "label of ${b.name}") }
+    }
+
+    @Test fun twoInstancesOnTheSameFileLoseNoSpend() {
+        val a = k.wallet(); val b = k.wallet(); k.credit(a, 1, 50)
+        assertEquals(50, b.balance())
+        assertEquals(1L, (a.spend("second-chance", 5, 1, "op-a1") as SpendResult.Ok).seq)
+        assertEquals(2L, (b.spend("extra-joker", 2, 2, "op-b1") as SpendResult.Ok).seq)       // b had cached the pre-spend state
+        assertEquals(3L, (a.spend("swap-question", 3, 3, "op-a2") as SpendResult.Ok).seq)
+        assertEquals(4L, (b.spend("second-chance", 5, 4, "op-b2") as SpendResult.Ok).seq)
+        assertEquals(35, a.balance()); assertEquals(35, b.balance()); assertEquals(35, k.wallet().balance())
+        assertTrue((a.spend("extra-joker", 2, 9, "op-b1") as SpendResult.Ok).replayed, "an operation done through the other instance is a replay")
+        assertEquals(35, k.wallet().balance())
+        assertEquals(CreditResult.STALE, b.credit(TokenGrant("lic-1", 1, 5, k.install.pub, 0), "0123456789abcdef"), "a voucher credited through the other instance is not credited twice")
+        assertEquals(CreditResult.OK, k.credit(b, 2, 10)); assertEquals(45, a.balance())
+    }
+
+    @Test fun manyInstancesAndThreadsOnOneFileNeverLoseOrDoubleDebit() {
+        k.credit(k.wallet(), 1, 100)
+        val wallets = List(4) { k.wallet() }
+        val pool = Executors.newFixedThreadPool(8); val go = CountDownLatch(1); val ok = AtomicInteger()
+        repeat(40) { i -> pool.execute { go.await(); if (wallets[i % 4].spend("swap-question", 3, i.toLong(), "op-$i") is SpendResult.Ok) ok.incrementAndGet() } }
+        go.countDown(); pool.shutdown(); assertTrue(pool.awaitTermination(60, java.util.concurrent.TimeUnit.SECONDS))
+        assertEquals(33, ok.get()); assertEquals(1, k.wallet().balance()); assertEquals(33, k.wallet().summary().lastSpendSeq)
+    }
+
+    @Test fun theFactoryGivesOneInstancePerPathAndSharesTheLock() {
+        val a = TokenWallet.of(k.file, FixedWalletKey(k.key)); val b = TokenWallet.of(File(k.dir, "./wallet.txt"), FixedWalletKey(k.key))
+        assertSame(a, b)
+        k.credit(a, 1, 10); assertEquals(10, b.balance())
+        assertTrue(File(k.dir, "wallet.lock").isFile, "the lock file next to the wallet")
+    }
+
+    @Test fun compactionKeepsTheLastAckedSpendsSoARetryIsStillDeduplicatedAndTheCapStillHolds() {
+        val w = k.wallet(compactAbove = 6, keepRecent = 3, keepWindowMs = 0); k.credit(w, 1, 100)
+        for (i in 1..6) w.spend("swap-question", 1, i * 1000L, "quiz:g:swap-question:$i")
+        assertTrue(w.ack(6))
+        val lines = k.file.readText().trimEnd().lines()
+        assertEquals(3, lines.count { it.startsWith("spend=") }); assertTrue(lines.any { it.startsWith("acked=3|3|") })
+        assertEquals(94, w.balance()); assertEquals(6, w.summary().lastSpendSeq)
+        val r = w.spend("swap-question", 1, 99_000, "quiz:g:swap-question:6") as SpendResult.Ok
+        assertTrue(r.replayed); assertEquals(6, r.seq); assertEquals(94, w.balance())
+        assertEquals(1, w.spendCount(TokenPolicy.opPrefix("g", TokenItem.SWAP_QUESTION).removeSuffix(":") + ":6"))
+        // by default (64 recent, 24 h) nothing a game just did is ever compacted
+        val d = k.wallet(compactAbove = 6); d.spend("second-chance", 5, 10_000, "quiz:h:second-chance:1"); d.ack(7)
+        assertEquals(1, k.file.readText().lines().count { it.contains("quiz:h:second-chance:1") })
+    }
+
+    @Test fun compactionFoldsTheGrantLinesAndKeepsTheChainAndTheNumbering() {
+        val w = k.wallet(compactAbove = 5, keepRecent = 1, keepWindowMs = 0)
+        for (g in 1L..4L) k.credit(w, g, 10)
+        w.spend("second-chance", 5, 1000, "op-1"); w.spend("extra-joker", 2, 2000, "op-2")
+        assertTrue(w.ack(1))
+        val lines = k.file.readText().trimEnd().lines()
+        assertEquals(0, lines.count { it.startsWith("grant=") }); assertTrue(lines.any { it.startsWith("granted=4|40|") })
+        assertEquals(33, w.balance()); assertEquals(4, w.lastGrant())
+        val again = k.wallet(); assertEquals(WalletState.OK, again.state()); assertEquals(33, again.balance()); assertEquals(7, again.summary().spentTotal)
+        assertEquals(CreditResult.STALE, again.credit(TokenGrant("lic-1", 4, 10, k.install.pub, 0), "0123456789abcdef"))
+        assertEquals(CreditResult.OK, k.credit(again, 5, 10)); assertEquals(43, k.wallet().balance()); assertEquals(5, k.wallet().lastGrant())
+        // the folded line is part of the chain: altering it makes the wallet unreadable
+        val text = k.file.readText().replace("granted=4|40|", "granted=4|99|"); k.file.writeText(text)
+        assertEquals(WalletState.UNREADABLE, k.wallet().state())
     }
 }

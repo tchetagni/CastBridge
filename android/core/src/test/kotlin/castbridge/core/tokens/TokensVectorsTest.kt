@@ -47,9 +47,10 @@ class TokensVectorsTest {
     private fun token(r: Map<String, Any?>) = TokenVectors.buildToken(env, r)!!
 
     /** Un jeton `tokens` dont le corps est hors schéma, mais correctement signé (que l'émetteur normal refuserait). */
-    private fun rawToken(body: List<String>): String {
+    private fun rawToken(body: List<String>, expiresAt: Long = t0 + day, anyTarget: Boolean = false): String {
         val s = env.keys.getValue("server").first; val dev = env.devices.getValue("tvA")
-        val unsigned = Envelope("tokens", s.keyId, 9, "00000000000000aa", t0, t0, t0 + day, Envelope.Target.Device(DeviceIdentity.kFor(dev.n), dev.byKind), body, "")
+        val target = if (anyTarget) Envelope.Target.Any else Envelope.Target.Device(DeviceIdentity.kFor(dev.n), dev.byKind)
+        val unsigned = Envelope("tokens", s.keyId, 9, "00000000000000aa", t0, t0, expiresAt, target, body, "")
         return unsigned.withSignature(java.util.Base64.getEncoder().encodeToString(s.sign(unsigned.canonicalPayload().toByteArray()))).encode()
     }
 
@@ -83,6 +84,10 @@ class TokensVectorsTest {
         verify("tokens-malformed", "cbx1.xx.yy", "MALFORMED")
         verify("tokens-not-a-token-type", Orders.issue(e.keys.getValue("server").first, 1, "00000000000000bb", t0, t0, t0 + day, Envelope.Target.Any, "noop"), "UNKNOWN_TYPE")
         verify("tokens-amount-over-limit", rawToken(TokenGrant("lic-w5", 9, 10_001, e.installs.getValue("tvA-install-1").pub, 0).body()), "BAD_GRANT")
+        val okBody = TokenGrant("lic-w5", 9, 20, e.installs.getValue("tvA-install-1").pub, 0).body()
+        verify("tokens-signed-window-over-30-days-is-bad-grant", rawToken(okBody, expiresAt = t0 + 31 * day), "BAD_GRANT")
+        verify("tokens-signed-for-any-device-is-wrong-target", rawToken(okBody, anyTarget = true), "WRONG_TARGET")
+        verify("tokens-grant-expiry-passed", token(req(7, expiry = t0 + day / 2)), "WINDOW_CLOSED", now = t0 + day)
         verify("tokens-non-canonical-body", rawToken(TokenGrant("lic-w5", 9, 20, e.installs.getValue("tvA-install-1").pub, 0).body().map { it.replace("amount=20", "amount=020") }), "BAD_GRANT")
 
         cases += J("id" to "wallet-key-derivation", "type" to "wallet-key", "install" to "tvA-install-1", "expect" to J("key" to hex(WalletKey.derive(e.installs.getValue("tvA-install-1").priv))))
@@ -95,8 +100,8 @@ class TokensVectorsTest {
         fun restart(key: String = "main") = J("do" to "restart", "key" to key)
 
         /** Ajoute un vecteur `wallet` : les lignes exactes du fichier et le rapport sont relevés sur la bibliothèque ; tout le reste est écrit à la main. */
-        fun wallet(id: String, steps: List<Map<String, Any?>>, compactAbove: Int? = null, capture: Boolean = false, reportSince: Long = 0) {
-            val c = J("id" to id, "type" to "wallet", "compactAbove" to compactAbove, "steps" to steps)
+        fun wallet(id: String, steps: List<Map<String, Any?>>, compactAbove: Int? = null, keepRecent: Int? = null, keepWindowMs: Long? = null, capture: Boolean = false, reportSince: Long = 0) {
+            val c = J("id" to id, "type" to "wallet", "compactAbove" to compactAbove, "keepRecent" to keepRecent, "keepWindowMs" to keepWindowMs, "steps" to steps)
             var lines: List<String>? = null; var report: List<String>? = null
             assertNull(TokenVectors.wallet(c, e, "tvA-install-1") { f, w -> if (capture) { lines = f.readText().trimEnd('\n').split('\n'); report = w.report(reportSince)!!.render().trimEnd('\n').split('\n') } }, id)
             cases += if (capture) c + J("reportSince" to reportSince, "expectLines" to lines, "expectReport" to report) else c
@@ -126,7 +131,20 @@ class TokensVectorsTest {
         wallet("wallet-compaction-keeps-balance-and-sequence", listOf(
             credit(1, "OK", 100), spend("second-chance", 5, "quiz:g:a:1", "OK"), spend("extra-joker", 2, "quiz:g:b:1", "OK"), spend("extra-joker", 2, "quiz:g:b:2", "OK"), spend("swap-question", 3, "quiz:g:c:1", "OK"), spend("second-chance", 5, "quiz:h:a:1", "OK"),
             J("do" to "ack", "seq" to 99, "expect" to false), J("do" to "ack", "seq" to 3, "expect" to true),
-            check("OK", 83, 17), restart(), check("OK", 83, 17), spend("swap-question", 3, "quiz:h:c:1", "OK", 80), check("OK", 80, 20)), compactAbove = 6, capture = true, reportSince = 3)
+            check("OK", 83, 17), restart(), check("OK", 83, 17), spend("swap-question", 3, "quiz:h:c:1", "OK", 80), check("OK", 80, 20)), compactAbove = 6, keepRecent = 1, keepWindowMs = 0, capture = true, reportSince = 3)
+        // the last acked spends stay (keepRecent 2, spends 1 s apart, window 0): a retried operation after compaction is still a REPLAY, not a new debit
+        wallet("wallet-replay-after-compaction", listOf(
+            credit(1, "OK", 100), spend("second-chance", 5, "quiz:g:a:1", "OK", at = t0 + 1000), spend("extra-joker", 2, "quiz:g:b:1", "OK", at = t0 + 2000), spend("extra-joker", 2, "quiz:g:b:2", "OK", at = t0 + 3000),
+            spend("swap-question", 3, "quiz:g:c:1", "OK", at = t0 + 4000), spend("second-chance", 5, "quiz:h:a:1", "OK", at = t0 + 5000),
+            J("do" to "ack", "seq" to 3, "expect" to true), check("OK", 83, 17), restart(),
+            spend("swap-question", 3, "quiz:g:c:1", "REPLAY", 83), spend("second-chance", 5, "quiz:h:a:1", "REPLAY", 83), check("OK", 83, 17),
+            spend("swap-question", 3, "quiz:h:c:1", "OK", 80, at = t0 + 6000)), compactAbove = 6, keepRecent = 2, keepWindowMs = 0, capture = true)
+        // grant lines are folded into granted=<last>|<sum>: the file does not grow with the number of vouchers, the numbering still refuses an old voucher
+        wallet("wallet-compaction-folds-grants", listOf(
+            credit(1, "OK", 10), credit(2, "OK", 20), credit(3, "OK", 30), spend("second-chance", 5, "quiz:g:a:1", "OK", at = t0 + 1000), spend("extra-joker", 2, "quiz:g:b:1", "OK", at = t0 + 2000),
+            J("do" to "ack", "seq" to 1, "expect" to true), check("OK", 53, 7), restart(), check("OK", 53, 7),
+            credit(3, "STALE_SEQUENCE"), credit(4, "OK", 40), check("OK", 93, 7), restart(), check("OK", 93, 7)), compactAbove = 4, keepRecent = 1, keepWindowMs = 0, capture = true)
+        wallet("wallet-empty-file-is-unreadable", listOf(credit(1, "OK"), tamper("empty", 0), restart(), check("UNREADABLE", 0), credit(2, "UNREADABLE"), spend("second-chance", 5, "quiz:g:a:1", "UNREADABLE")))
 
         fun policy(id: String, settings: Map<String, Any?>?, balance: Long, vararg x: Triple<String, Map<String, Any?>, Unit>) {
             cases += J("id" to id, "type" to "policy", "settings" to settings, "balance" to balance, "expect" to linkedMapOf<String, Any?>().also { m -> x.forEach { m[it.first] = it.second } })

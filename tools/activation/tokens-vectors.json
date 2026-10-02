@@ -353,6 +353,54 @@
       }
     },
     {
+      "id": "tokens-signed-window-over-30-days-is-bad-grant",
+      "type": "tokens",
+      "request": {
+        "token": "cbx1.Y2FzdGJyaWRnZS1lbnZlbG9wZS12MQp0eXBlPXRva2VucwpraWQ9M2FjNzhlNDAxNzkxODgyNwpzZXE9OQpub25jZT0wMDAwMDAwMDAwMDAwMGFhCmlzc3VlZEF0PTE4MDAwMDAwMDAwMDAKbm90QmVmb3JlPTE4MDAwMDAwMDAwMDAKZXhwaXJlc0F0PTE4MDI2Nzg0MDAwMDAKdGFyZ2V0PWRldmljZQprPTQKZmFjdG9yPUZMQVNIfDlkYzc5NDhjNDg3NDQ4MGViMzcyZDFhY2UzNTA3ZDNkCmZhY3Rvcj1FVEhFUk5FVHw0MDRlMzU3MmM5OWM0YjRhZTM2MzRhMjQzZGU5NDBiNgpmYWN0b3I9V0lGSXxjZWVjYzhiMzMyODZlYTIyY2JlNzdiY2MwYmUzMDMxNwpmYWN0b3I9U1lTVEVNX1NFUklBTHxlMGUyYzBhZTU4ODNlNWQ1OTU2YTY2OTljZDVlOGU4NQpmYWN0b3I9QkxVRVRPT1RIfGJiYzMyOWUyYTFlMzhmYjljMWNiZTA2MzI2NTBiNGZhCi0tCmxpY2Vuc2U9bGljLXc1CmdyYW50PTkKYW1vdW50PTIwCmluc3RhbGw9ZDNlMjQ1ODc3OWE1MTdhMjc5YzJkNWE5ZTEwNTcxZTVjZDRlNTZkNDk0NGE2M2YzMWI2OWMyMDE2N2UyNjkyYgpleHBpcnk9MA.IWhCrSyHyw7FXxq5Avqc1s2t95VaS5phg3SWK3HV3Kv2x9dow+LR+CJ4W7rFBehsDyEd5xFwWS45FEXb2frTDQ==",
+        "device": "tvA",
+        "install": "tvA-install-1",
+        "ring": ["server"],
+        "revoked": [],
+        "now": 1800086400000,
+        "lastGrant": 0
+      },
+      "expect": {
+        "result": "BAD_GRANT"
+      }
+    },
+    {
+      "id": "tokens-signed-for-any-device-is-wrong-target",
+      "type": "tokens",
+      "request": {
+        "token": "cbx1.Y2FzdGJyaWRnZS1lbnZlbG9wZS12MQp0eXBlPXRva2VucwpraWQ9M2FjNzhlNDAxNzkxODgyNwpzZXE9OQpub25jZT0wMDAwMDAwMDAwMDAwMGFhCmlzc3VlZEF0PTE4MDAwMDAwMDAwMDAKbm90QmVmb3JlPTE4MDAwMDAwMDAwMDAKZXhwaXJlc0F0PTE4MDAwODY0MDAwMDAKdGFyZ2V0PWFueQotLQpsaWNlbnNlPWxpYy13NQpncmFudD05CmFtb3VudD0yMAppbnN0YWxsPWQzZTI0NTg3NzlhNTE3YTI3OWMyZDVhOWUxMDU3MWU1Y2Q0ZTU2ZDQ5NDRhNjNmMzFiNjljMjAxNjdlMjY5MmIKZXhwaXJ5PTA.ASPWWq2KvHD/nekvtFjZOaTYpZ3gWXZaKp3Ammenx+WBES/eAS/TxmlvRoCpb3hBW9VK5Uvl1Zr/dpmb9GqmCg==",
+        "device": "tvA",
+        "install": "tvA-install-1",
+        "ring": ["server"],
+        "revoked": [],
+        "now": 1800086400000,
+        "lastGrant": 0
+      },
+      "expect": {
+        "result": "WRONG_TARGET"
+      }
+    },
+    {
+      "id": "tokens-grant-expiry-passed",
+      "type": "tokens",
+      "request": {
+        "token": "cbx1.Y2FzdGJyaWRnZS1lbnZlbG9wZS12MQp0eXBlPXRva2VucwpraWQ9M2FjNzhlNDAxNzkxODgyNwpzZXE9Nwpub25jZT0wMDAwMDAwMDAwMDAwMDA3Cmlzc3VlZEF0PTE4MDAwMDAwMDAwMDAKbm90QmVmb3JlPTE4MDAwMDAwMDAwMDAKZXhwaXJlc0F0PTE4MDA2MDQ4MDAwMDAKdGFyZ2V0PWRldmljZQprPTQKZmFjdG9yPUZMQVNIfDlkYzc5NDhjNDg3NDQ4MGViMzcyZDFhY2UzNTA3ZDNkCmZhY3Rvcj1FVEhFUk5FVHw0MDRlMzU3MmM5OWM0YjRhZTM2MzRhMjQzZGU5NDBiNgpmYWN0b3I9V0lGSXxjZWVjYzhiMzMyODZlYTIyY2JlNzdiY2MwYmUzMDMxNwpmYWN0b3I9U1lTVEVNX1NFUklBTHxlMGUyYzBhZTU4ODNlNWQ1OTU2YTY2OTljZDVlOGU4NQpmYWN0b3I9QkxVRVRPT1RIfGJiYzMyOWUyYTFlMzhmYjljMWNiZTA2MzI2NTBiNGZhCi0tCmxpY2Vuc2U9bGljLXc1CmdyYW50PTcKYW1vdW50PTIwCmluc3RhbGw9ZDNlMjQ1ODc3OWE1MTdhMjc5YzJkNWE5ZTEwNTcxZTVjZDRlNTZkNDk0NGE2M2YzMWI2OWMyMDE2N2UyNjkyYgpleHBpcnk9MTgwMDA0MzIwMDAwMA.BXkSJKsSkEksphGgmBB+Rexa0PaIIOX/vtT9c7C8UAFoiDU1MUNGIEBXx00lgQU+Y27E8KxY6xwNqvePhYqJAQ==",
+        "device": "tvA",
+        "install": "tvA-install-1",
+        "ring": ["server"],
+        "revoked": [],
+        "now": 1800086400000,
+        "lastGrant": 0
+      },
+      "expect": {
+        "result": "WINDOW_CLOSED"
+      }
+    },
+    {
       "id": "tokens-non-canonical-body",
       "type": "tokens",
       "request": {
@@ -928,6 +976,8 @@
       "id": "wallet-compaction-keeps-balance-and-sequence",
       "type": "wallet",
       "compactAbove": 6,
+      "keepRecent": 1,
+      "keepWindowMs": 0,
       "steps": [
         {
           "do": "credit",
@@ -1021,8 +1071,273 @@
         }
       ],
       "reportSince": 3,
-      "expectLines": ["castbridge-token-wallet-v1", "license=lic-w5|16368b5ed3dec3c8|48d45f22167eb58a", "install=4eb3d71317167cd8|07067f5f37973262|96b82a35932fb9f8", "grant=1|100|177f13265e95d8ec|d810562b1124e329|66d3d2053b22f9c7", "acked=3|9|fb8a7f31daea93fe|5773931f14629fec", "spend=4|1800000001000|quiz|swap-question|3|quiz:g:c:1|59edcb608c26135e|2c2001383c96ba33", "spend=5|1800000001000|quiz|second-chance|5|quiz:h:a:1|8e6345d171b204fc|a51e99d96609ed21", "spend=6|1800000001000|quiz|swap-question|3|quiz:h:c:1|e0d36634b79c490d|3ff5e23e40b7552a"],
+      "expectLines": ["castbridge-token-wallet-v1", "license=lic-w5|16368b5ed3dec3c8|48d45f22167eb58a", "install=4eb3d71317167cd8|07067f5f37973262|96b82a35932fb9f8", "grant=1|100|177f13265e95d8ec|d810562b1124e329|66d3d2053b22f9c7", "spend=1|1800000001000|quiz|second-chance|5|quiz:g:a:1|fb8a7f31daea93fe|ff3bc6e8b88353fe", "spend=2|1800000001000|quiz|extra-joker|2|quiz:g:b:1|d15dc029d0b36a33|ff575aeff42fceeb", "spend=3|1800000001000|quiz|extra-joker|2|quiz:g:b:2|2af62e6483d959b7|a040b0ae697da89a", "spend=4|1800000001000|quiz|swap-question|3|quiz:g:c:1|a8cc0bccdb6ccb04|0bfa784472d08983", "spend=5|1800000001000|quiz|second-chance|5|quiz:h:a:1|5517f03f32104144|a22f9f68cf06fa6a", "spend=6|1800000001000|quiz|swap-question|3|quiz:h:c:1|205adc0ca528fb81|60d6d17b21fd8bc0"],
       "expectReport": ["castbridge-token-report-v1", "license=lic-w5", "install=4eb3d71317167cd8", "lastGrant=1", "spentTotal=20", "lastSpendSeq=6", "spend=4|1800000001000|quiz|swap-question|3|quiz:g:c:1", "spend=5|1800000001000|quiz|second-chance|5|quiz:h:a:1", "spend=6|1800000001000|quiz|swap-question|3|quiz:h:c:1", "mac=4bde53a4cd814ccb"]
+    },
+    {
+      "id": "wallet-replay-after-compaction",
+      "type": "wallet",
+      "compactAbove": 6,
+      "keepRecent": 2,
+      "keepWindowMs": 0,
+      "steps": [
+        {
+          "do": "credit",
+          "token": "cbx1.Y2FzdGJyaWRnZS1lbnZlbG9wZS12MQp0eXBlPXRva2VucwpraWQ9M2FjNzhlNDAxNzkxODgyNwpzZXE9MQpub25jZT0wMDAwMDAwMDAwMDAwMDAxCmlzc3VlZEF0PTE4MDAwMDAwMDAwMDAKbm90QmVmb3JlPTE4MDAwMDAwMDAwMDAKZXhwaXJlc0F0PTE4MDA2MDQ4MDAwMDAKdGFyZ2V0PWRldmljZQprPTQKZmFjdG9yPUZMQVNIfDlkYzc5NDhjNDg3NDQ4MGViMzcyZDFhY2UzNTA3ZDNkCmZhY3Rvcj1FVEhFUk5FVHw0MDRlMzU3MmM5OWM0YjRhZTM2MzRhMjQzZGU5NDBiNgpmYWN0b3I9V0lGSXxjZWVjYzhiMzMyODZlYTIyY2JlNzdiY2MwYmUzMDMxNwpmYWN0b3I9U1lTVEVNX1NFUklBTHxlMGUyYzBhZTU4ODNlNWQ1OTU2YTY2OTljZDVlOGU4NQpmYWN0b3I9QkxVRVRPT1RIfGJiYzMyOWUyYTFlMzhmYjljMWNiZTA2MzI2NTBiNGZhCi0tCmxpY2Vuc2U9bGljLXc1CmdyYW50PTEKYW1vdW50PTEwMAppbnN0YWxsPWQzZTI0NTg3NzlhNTE3YTI3OWMyZDVhOWUxMDU3MWU1Y2Q0ZTU2ZDQ5NDRhNjNmMzFiNjljMjAxNjdlMjY5MmIKZXhwaXJ5PTA.cbA2h27VDzey/tDH4dFXpNwRzhG8RZ33uqKig0QOwaKZPwnBpugczF7xtkV4JFFXQmWvJfmTVItQ/eXubYZCCA==",
+          "device": "tvA",
+          "install": "tvA-install-1",
+          "ring": ["server"],
+          "now": 1800086400000,
+          "expect": "OK"
+        },
+        {
+          "do": "spend",
+          "item": "second-chance",
+          "cost": 5,
+          "at": 1800000001000,
+          "op": "quiz:g:a:1",
+          "expect": "OK"
+        },
+        {
+          "do": "spend",
+          "item": "extra-joker",
+          "cost": 2,
+          "at": 1800000002000,
+          "op": "quiz:g:b:1",
+          "expect": "OK"
+        },
+        {
+          "do": "spend",
+          "item": "extra-joker",
+          "cost": 2,
+          "at": 1800000003000,
+          "op": "quiz:g:b:2",
+          "expect": "OK"
+        },
+        {
+          "do": "spend",
+          "item": "swap-question",
+          "cost": 3,
+          "at": 1800000004000,
+          "op": "quiz:g:c:1",
+          "expect": "OK"
+        },
+        {
+          "do": "spend",
+          "item": "second-chance",
+          "cost": 5,
+          "at": 1800000005000,
+          "op": "quiz:h:a:1",
+          "expect": "OK"
+        },
+        {
+          "do": "ack",
+          "seq": 3,
+          "expect": true
+        },
+        {
+          "do": "check",
+          "state": "OK",
+          "balance": 83,
+          "spentTotal": 17
+        },
+        {
+          "do": "restart",
+          "key": "main"
+        },
+        {
+          "do": "spend",
+          "item": "swap-question",
+          "cost": 3,
+          "at": 1800000001000,
+          "op": "quiz:g:c:1",
+          "expect": "REPLAY",
+          "balance": 83
+        },
+        {
+          "do": "spend",
+          "item": "second-chance",
+          "cost": 5,
+          "at": 1800000001000,
+          "op": "quiz:h:a:1",
+          "expect": "REPLAY",
+          "balance": 83
+        },
+        {
+          "do": "check",
+          "state": "OK",
+          "balance": 83,
+          "spentTotal": 17
+        },
+        {
+          "do": "spend",
+          "item": "swap-question",
+          "cost": 3,
+          "at": 1800000006000,
+          "op": "quiz:h:c:1",
+          "expect": "OK",
+          "balance": 80
+        }
+      ],
+      "reportSince": 0,
+      "expectLines": ["castbridge-token-wallet-v1", "license=lic-w5|16368b5ed3dec3c8|48d45f22167eb58a", "install=4eb3d71317167cd8|07067f5f37973262|96b82a35932fb9f8", "granted=1|100|d810562b1124e329|4ceb9ed308cd9032", "acked=3|9|7a9d7ede40579d5a|efb0a86d725f30ae", "spend=4|1800000004000|quiz|swap-question|3|quiz:g:c:1|04371a3d8378b51c|031b9b5eef39c457", "spend=5|1800000005000|quiz|second-chance|5|quiz:h:a:1|935c6a323fc724dd|dc1c6e0be60c7bb3", "spend=6|1800000006000|quiz|swap-question|3|quiz:h:c:1|1694ecbb656dc001|53af440a3c4cd44d"],
+      "expectReport": ["castbridge-token-report-v1", "license=lic-w5", "install=4eb3d71317167cd8", "lastGrant=1", "spentTotal=20", "lastSpendSeq=6", "spend=4|1800000004000|quiz|swap-question|3|quiz:g:c:1", "spend=5|1800000005000|quiz|second-chance|5|quiz:h:a:1", "spend=6|1800000006000|quiz|swap-question|3|quiz:h:c:1", "mac=9ae4e7addd4ed1f9"]
+    },
+    {
+      "id": "wallet-compaction-folds-grants",
+      "type": "wallet",
+      "compactAbove": 4,
+      "keepRecent": 1,
+      "keepWindowMs": 0,
+      "steps": [
+        {
+          "do": "credit",
+          "token": "cbx1.Y2FzdGJyaWRnZS1lbnZlbG9wZS12MQp0eXBlPXRva2VucwpraWQ9M2FjNzhlNDAxNzkxODgyNwpzZXE9MQpub25jZT0wMDAwMDAwMDAwMDAwMDAxCmlzc3VlZEF0PTE4MDAwMDAwMDAwMDAKbm90QmVmb3JlPTE4MDAwMDAwMDAwMDAKZXhwaXJlc0F0PTE4MDA2MDQ4MDAwMDAKdGFyZ2V0PWRldmljZQprPTQKZmFjdG9yPUZMQVNIfDlkYzc5NDhjNDg3NDQ4MGViMzcyZDFhY2UzNTA3ZDNkCmZhY3Rvcj1FVEhFUk5FVHw0MDRlMzU3MmM5OWM0YjRhZTM2MzRhMjQzZGU5NDBiNgpmYWN0b3I9V0lGSXxjZWVjYzhiMzMyODZlYTIyY2JlNzdiY2MwYmUzMDMxNwpmYWN0b3I9U1lTVEVNX1NFUklBTHxlMGUyYzBhZTU4ODNlNWQ1OTU2YTY2OTljZDVlOGU4NQpmYWN0b3I9QkxVRVRPT1RIfGJiYzMyOWUyYTFlMzhmYjljMWNiZTA2MzI2NTBiNGZhCi0tCmxpY2Vuc2U9bGljLXc1CmdyYW50PTEKYW1vdW50PTEwCmluc3RhbGw9ZDNlMjQ1ODc3OWE1MTdhMjc5YzJkNWE5ZTEwNTcxZTVjZDRlNTZkNDk0NGE2M2YzMWI2OWMyMDE2N2UyNjkyYgpleHBpcnk9MA.58RLb+7P6LTGLYuXS+FIL0xPypEahLNfm9M3TU04lT9c6nvgKV9QGP4GnIMCOskqCu6KyTNknNIUDgoybUtqBg==",
+          "device": "tvA",
+          "install": "tvA-install-1",
+          "ring": ["server"],
+          "now": 1800086400000,
+          "expect": "OK"
+        },
+        {
+          "do": "credit",
+          "token": "cbx1.Y2FzdGJyaWRnZS1lbnZlbG9wZS12MQp0eXBlPXRva2VucwpraWQ9M2FjNzhlNDAxNzkxODgyNwpzZXE9Mgpub25jZT0wMDAwMDAwMDAwMDAwMDAyCmlzc3VlZEF0PTE4MDAwMDAwMDAwMDAKbm90QmVmb3JlPTE4MDAwMDAwMDAwMDAKZXhwaXJlc0F0PTE4MDA2MDQ4MDAwMDAKdGFyZ2V0PWRldmljZQprPTQKZmFjdG9yPUZMQVNIfDlkYzc5NDhjNDg3NDQ4MGViMzcyZDFhY2UzNTA3ZDNkCmZhY3Rvcj1FVEhFUk5FVHw0MDRlMzU3MmM5OWM0YjRhZTM2MzRhMjQzZGU5NDBiNgpmYWN0b3I9V0lGSXxjZWVjYzhiMzMyODZlYTIyY2JlNzdiY2MwYmUzMDMxNwpmYWN0b3I9U1lTVEVNX1NFUklBTHxlMGUyYzBhZTU4ODNlNWQ1OTU2YTY2OTljZDVlOGU4NQpmYWN0b3I9QkxVRVRPT1RIfGJiYzMyOWUyYTFlMzhmYjljMWNiZTA2MzI2NTBiNGZhCi0tCmxpY2Vuc2U9bGljLXc1CmdyYW50PTIKYW1vdW50PTIwCmluc3RhbGw9ZDNlMjQ1ODc3OWE1MTdhMjc5YzJkNWE5ZTEwNTcxZTVjZDRlNTZkNDk0NGE2M2YzMWI2OWMyMDE2N2UyNjkyYgpleHBpcnk9MA.+whhUfoGkZDUpzDTm1QdedRRXIwvCYRfs4c7kjqTyufsD+TMjnYCbZccb6VDcJg6yVEa4Y8ynagVQrTxqhpTCw==",
+          "device": "tvA",
+          "install": "tvA-install-1",
+          "ring": ["server"],
+          "now": 1800086400000,
+          "expect": "OK"
+        },
+        {
+          "do": "credit",
+          "token": "cbx1.Y2FzdGJyaWRnZS1lbnZlbG9wZS12MQp0eXBlPXRva2VucwpraWQ9M2FjNzhlNDAxNzkxODgyNwpzZXE9Mwpub25jZT0wMDAwMDAwMDAwMDAwMDAzCmlzc3VlZEF0PTE4MDAwMDAwMDAwMDAKbm90QmVmb3JlPTE4MDAwMDAwMDAwMDAKZXhwaXJlc0F0PTE4MDA2MDQ4MDAwMDAKdGFyZ2V0PWRldmljZQprPTQKZmFjdG9yPUZMQVNIfDlkYzc5NDhjNDg3NDQ4MGViMzcyZDFhY2UzNTA3ZDNkCmZhY3Rvcj1FVEhFUk5FVHw0MDRlMzU3MmM5OWM0YjRhZTM2MzRhMjQzZGU5NDBiNgpmYWN0b3I9V0lGSXxjZWVjYzhiMzMyODZlYTIyY2JlNzdiY2MwYmUzMDMxNwpmYWN0b3I9U1lTVEVNX1NFUklBTHxlMGUyYzBhZTU4ODNlNWQ1OTU2YTY2OTljZDVlOGU4NQpmYWN0b3I9QkxVRVRPT1RIfGJiYzMyOWUyYTFlMzhmYjljMWNiZTA2MzI2NTBiNGZhCi0tCmxpY2Vuc2U9bGljLXc1CmdyYW50PTMKYW1vdW50PTMwCmluc3RhbGw9ZDNlMjQ1ODc3OWE1MTdhMjc5YzJkNWE5ZTEwNTcxZTVjZDRlNTZkNDk0NGE2M2YzMWI2OWMyMDE2N2UyNjkyYgpleHBpcnk9MA.CNyXQ0kkgjrLc2apuuZuhT5HuRizDvfjk/Qjq1J9Cc3tR+fKOGu/TdaaVblsbVml4moVeivRmQ5NUTrjQfI7AA==",
+          "device": "tvA",
+          "install": "tvA-install-1",
+          "ring": ["server"],
+          "now": 1800086400000,
+          "expect": "OK"
+        },
+        {
+          "do": "spend",
+          "item": "second-chance",
+          "cost": 5,
+          "at": 1800000001000,
+          "op": "quiz:g:a:1",
+          "expect": "OK"
+        },
+        {
+          "do": "spend",
+          "item": "extra-joker",
+          "cost": 2,
+          "at": 1800000002000,
+          "op": "quiz:g:b:1",
+          "expect": "OK"
+        },
+        {
+          "do": "ack",
+          "seq": 1,
+          "expect": true
+        },
+        {
+          "do": "check",
+          "state": "OK",
+          "balance": 53,
+          "spentTotal": 7
+        },
+        {
+          "do": "restart",
+          "key": "main"
+        },
+        {
+          "do": "check",
+          "state": "OK",
+          "balance": 53,
+          "spentTotal": 7
+        },
+        {
+          "do": "credit",
+          "token": "cbx1.Y2FzdGJyaWRnZS1lbnZlbG9wZS12MQp0eXBlPXRva2VucwpraWQ9M2FjNzhlNDAxNzkxODgyNwpzZXE9Mwpub25jZT0wMDAwMDAwMDAwMDAwMDAzCmlzc3VlZEF0PTE4MDAwMDAwMDAwMDAKbm90QmVmb3JlPTE4MDAwMDAwMDAwMDAKZXhwaXJlc0F0PTE4MDA2MDQ4MDAwMDAKdGFyZ2V0PWRldmljZQprPTQKZmFjdG9yPUZMQVNIfDlkYzc5NDhjNDg3NDQ4MGViMzcyZDFhY2UzNTA3ZDNkCmZhY3Rvcj1FVEhFUk5FVHw0MDRlMzU3MmM5OWM0YjRhZTM2MzRhMjQzZGU5NDBiNgpmYWN0b3I9V0lGSXxjZWVjYzhiMzMyODZlYTIyY2JlNzdiY2MwYmUzMDMxNwpmYWN0b3I9U1lTVEVNX1NFUklBTHxlMGUyYzBhZTU4ODNlNWQ1OTU2YTY2OTljZDVlOGU4NQpmYWN0b3I9QkxVRVRPT1RIfGJiYzMyOWUyYTFlMzhmYjljMWNiZTA2MzI2NTBiNGZhCi0tCmxpY2Vuc2U9bGljLXc1CmdyYW50PTMKYW1vdW50PTIwCmluc3RhbGw9ZDNlMjQ1ODc3OWE1MTdhMjc5YzJkNWE5ZTEwNTcxZTVjZDRlNTZkNDk0NGE2M2YzMWI2OWMyMDE2N2UyNjkyYgpleHBpcnk9MA.x9BxXmjQen4VxpsvmnRC2Uh+CEE6OutIrN6xnSpFPnLRmaNPSeeqGbTkqkIhI4yTm6VGZq2jnZbI+37n+ArEDw==",
+          "device": "tvA",
+          "install": "tvA-install-1",
+          "ring": ["server"],
+          "now": 1800086400000,
+          "expect": "STALE_SEQUENCE"
+        },
+        {
+          "do": "credit",
+          "token": "cbx1.Y2FzdGJyaWRnZS1lbnZlbG9wZS12MQp0eXBlPXRva2VucwpraWQ9M2FjNzhlNDAxNzkxODgyNwpzZXE9NApub25jZT0wMDAwMDAwMDAwMDAwMDA0Cmlzc3VlZEF0PTE4MDAwMDAwMDAwMDAKbm90QmVmb3JlPTE4MDAwMDAwMDAwMDAKZXhwaXJlc0F0PTE4MDA2MDQ4MDAwMDAKdGFyZ2V0PWRldmljZQprPTQKZmFjdG9yPUZMQVNIfDlkYzc5NDhjNDg3NDQ4MGViMzcyZDFhY2UzNTA3ZDNkCmZhY3Rvcj1FVEhFUk5FVHw0MDRlMzU3MmM5OWM0YjRhZTM2MzRhMjQzZGU5NDBiNgpmYWN0b3I9V0lGSXxjZWVjYzhiMzMyODZlYTIyY2JlNzdiY2MwYmUzMDMxNwpmYWN0b3I9U1lTVEVNX1NFUklBTHxlMGUyYzBhZTU4ODNlNWQ1OTU2YTY2OTljZDVlOGU4NQpmYWN0b3I9QkxVRVRPT1RIfGJiYzMyOWUyYTFlMzhmYjljMWNiZTA2MzI2NTBiNGZhCi0tCmxpY2Vuc2U9bGljLXc1CmdyYW50PTQKYW1vdW50PTQwCmluc3RhbGw9ZDNlMjQ1ODc3OWE1MTdhMjc5YzJkNWE5ZTEwNTcxZTVjZDRlNTZkNDk0NGE2M2YzMWI2OWMyMDE2N2UyNjkyYgpleHBpcnk9MA.06G47op6leIcxZZ9g1Lo62llmEUTV020H9Z7rhjU42x230n6n1z4lWA8P1dvbdzD2XUbGRgiLZVpCR7AlHZjDA==",
+          "device": "tvA",
+          "install": "tvA-install-1",
+          "ring": ["server"],
+          "now": 1800086400000,
+          "expect": "OK"
+        },
+        {
+          "do": "check",
+          "state": "OK",
+          "balance": 93,
+          "spentTotal": 7
+        },
+        {
+          "do": "restart",
+          "key": "main"
+        },
+        {
+          "do": "check",
+          "state": "OK",
+          "balance": 93,
+          "spentTotal": 7
+        }
+      ],
+      "reportSince": 0,
+      "expectLines": ["castbridge-token-wallet-v1", "license=lic-w5|16368b5ed3dec3c8|48d45f22167eb58a", "install=4eb3d71317167cd8|07067f5f37973262|96b82a35932fb9f8", "granted=3|60|d810562b1124e329|b0c732d109c1f098", "acked=1|5|9fa1dac03f53f5b6|0751beee0f932ef0", "spend=2|1800000002000|quiz|extra-joker|2|quiz:g:b:1|b057255ba09dd34a|0f9192c235850d89", "grant=4|40|f6e53f997378d8ad|02737d5ac0cc5d0e|d62488b1c866e18b"],
+      "expectReport": ["castbridge-token-report-v1", "license=lic-w5", "install=4eb3d71317167cd8", "lastGrant=4", "spentTotal=7", "lastSpendSeq=2", "spend=2|1800000002000|quiz|extra-joker|2|quiz:g:b:1", "mac=a7b22de6c53213cb"]
+    },
+    {
+      "id": "wallet-empty-file-is-unreadable",
+      "type": "wallet",
+      "steps": [
+        {
+          "do": "credit",
+          "token": "cbx1.Y2FzdGJyaWRnZS1lbnZlbG9wZS12MQp0eXBlPXRva2VucwpraWQ9M2FjNzhlNDAxNzkxODgyNwpzZXE9MQpub25jZT0wMDAwMDAwMDAwMDAwMDAxCmlzc3VlZEF0PTE4MDAwMDAwMDAwMDAKbm90QmVmb3JlPTE4MDAwMDAwMDAwMDAKZXhwaXJlc0F0PTE4MDA2MDQ4MDAwMDAKdGFyZ2V0PWRldmljZQprPTQKZmFjdG9yPUZMQVNIfDlkYzc5NDhjNDg3NDQ4MGViMzcyZDFhY2UzNTA3ZDNkCmZhY3Rvcj1FVEhFUk5FVHw0MDRlMzU3MmM5OWM0YjRhZTM2MzRhMjQzZGU5NDBiNgpmYWN0b3I9V0lGSXxjZWVjYzhiMzMyODZlYTIyY2JlNzdiY2MwYmUzMDMxNwpmYWN0b3I9U1lTVEVNX1NFUklBTHxlMGUyYzBhZTU4ODNlNWQ1OTU2YTY2OTljZDVlOGU4NQpmYWN0b3I9QkxVRVRPT1RIfGJiYzMyOWUyYTFlMzhmYjljMWNiZTA2MzI2NTBiNGZhCi0tCmxpY2Vuc2U9bGljLXc1CmdyYW50PTEKYW1vdW50PTIwCmluc3RhbGw9ZDNlMjQ1ODc3OWE1MTdhMjc5YzJkNWE5ZTEwNTcxZTVjZDRlNTZkNDk0NGE2M2YzMWI2OWMyMDE2N2UyNjkyYgpleHBpcnk9MA.iZnp4k4w73skLIpWHtVcDxWEjRrtbVOcSE/mUCioXFaoczDRzN/8Y8VEIJqUmzTADhRHfx4pRq+ndcLkbtpbDg==",
+          "device": "tvA",
+          "install": "tvA-install-1",
+          "ring": ["server"],
+          "now": 1800086400000,
+          "expect": "OK"
+        },
+        {
+          "do": "tamper",
+          "kind": "empty",
+          "line": 0
+        },
+        {
+          "do": "restart",
+          "key": "main"
+        },
+        {
+          "do": "check",
+          "state": "UNREADABLE",
+          "balance": 0
+        },
+        {
+          "do": "credit",
+          "token": "cbx1.Y2FzdGJyaWRnZS1lbnZlbG9wZS12MQp0eXBlPXRva2VucwpraWQ9M2FjNzhlNDAxNzkxODgyNwpzZXE9Mgpub25jZT0wMDAwMDAwMDAwMDAwMDAyCmlzc3VlZEF0PTE4MDAwMDAwMDAwMDAKbm90QmVmb3JlPTE4MDAwMDAwMDAwMDAKZXhwaXJlc0F0PTE4MDA2MDQ4MDAwMDAKdGFyZ2V0PWRldmljZQprPTQKZmFjdG9yPUZMQVNIfDlkYzc5NDhjNDg3NDQ4MGViMzcyZDFhY2UzNTA3ZDNkCmZhY3Rvcj1FVEhFUk5FVHw0MDRlMzU3MmM5OWM0YjRhZTM2MzRhMjQzZGU5NDBiNgpmYWN0b3I9V0lGSXxjZWVjYzhiMzMyODZlYTIyY2JlNzdiY2MwYmUzMDMxNwpmYWN0b3I9U1lTVEVNX1NFUklBTHxlMGUyYzBhZTU4ODNlNWQ1OTU2YTY2OTljZDVlOGU4NQpmYWN0b3I9QkxVRVRPT1RIfGJiYzMyOWUyYTFlMzhmYjljMWNiZTA2MzI2NTBiNGZhCi0tCmxpY2Vuc2U9bGljLXc1CmdyYW50PTIKYW1vdW50PTIwCmluc3RhbGw9ZDNlMjQ1ODc3OWE1MTdhMjc5YzJkNWE5ZTEwNTcxZTVjZDRlNTZkNDk0NGE2M2YzMWI2OWMyMDE2N2UyNjkyYgpleHBpcnk9MA.+whhUfoGkZDUpzDTm1QdedRRXIwvCYRfs4c7kjqTyufsD+TMjnYCbZccb6VDcJg6yVEa4Y8ynagVQrTxqhpTCw==",
+          "device": "tvA",
+          "install": "tvA-install-1",
+          "ring": ["server"],
+          "now": 1800086400000,
+          "expect": "UNREADABLE"
+        },
+        {
+          "do": "spend",
+          "item": "second-chance",
+          "cost": 5,
+          "at": 1800000001000,
+          "op": "quiz:g:a:1",
+          "expect": "UNREADABLE"
+        }
+      ]
     },
     {
       "id": "policy-default-costs",

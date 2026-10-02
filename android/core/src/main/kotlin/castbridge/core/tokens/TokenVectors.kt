@@ -115,6 +115,7 @@ object TokenVectors {
             "flipMac" -> lines[line] = lines[line].dropLast(1) + (if (lines[line].last() == '0') '1' else '0')
             "dropLine" -> lines.removeAt(line)
             "truncateTail" -> repeat(line) { lines.removeAt(lines.lastIndex) }
+            "empty" -> lines.clear()
             "swapLines" -> { val t = lines[line]; lines[line] = lines[line + 1]; lines[line + 1] = t }
             else -> error("altération inconnue")
         }
@@ -129,7 +130,7 @@ object TokenVectors {
             val file = File(dir, "wallet.txt")
             val keys = mapOf("main" to WalletKey.derive(e.installs.getValue(walletInstall).priv), "other" to WalletKey.derive(ByteArray(32) { 7 }))
             var key = "main"
-            fun open() = TokenWallet(file, WalletKeyProvider { keys.getValue(key) }, c.long("compactAbove")?.toInt() ?: TokenWallet.COMPACT_ABOVE)
+            fun open() = TokenWallet(file, WalletKeyProvider { keys.getValue(key) }, c.long("compactAbove")?.toInt() ?: TokenWallet.COMPACT_ABOVE, c.long("keepRecent")?.toInt() ?: TokenWallet.KEEP_RECENT, c.long("keepWindowMs") ?: TokenWallet.KEEP_WINDOW_MS)
             var w = open()
             for ((i, s) in (c["steps"] as List<Map<String, Any?>>).withIndex()) {
                 val at = "étape $i (${s.str("do")})"

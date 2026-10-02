@@ -8,12 +8,13 @@ class QuizBoostsTest {
     /** Test double: a fixed balance, a price of 10 for everything, a log of the debits. */
     private class Fake(var tokens: Long = 100, val on: Boolean = true) : QuizBoosts {
         val charged = ArrayList<Pair<Boost, String>>()
+        val numbers = ArrayList<Int>()
         override fun available(b: Boost) = on
         override fun cost(b: Boost) = 10L
         override fun balance() = tokens
-        override fun charge(b: Boost, gameId: String): Boolean {
+        override fun charge(b: Boost, gameId: String, purchaseNo: Int): Boolean {
             if (tokens < 10) return false
-            tokens -= 10; charged += b to gameId; return true
+            tokens -= 10; charged += b to gameId; numbers += purchaseNo; return true
         }
     }
 
@@ -94,8 +95,10 @@ class QuizBoostsTest {
         assertTrue(g.applyBoost(Boost.EXTRA_JOKER, 0)); assertTrue(g.canUse(Joker.AUDIENCE)); assertFalse(g.canUse(Joker.FIFTY) && g.removed.isEmpty())
         assertFalse(g.canBoost(Boost.EXTRA_JOKER), "at most twice per game")
         assertFalse(g.applyBoost(Boost.EXTRA_JOKER, 0)); assertEquals(80L, f.tokens)
-        assertEquals(2, g.boostsUsed[Boost.EXTRA_JOKER])
+        assertEquals(2, g.boostsUsed[Boost.EXTRA_JOKER]); assertEquals(listOf(1, 2), f.numbers, "explicit purchase numbers 1 then 2")
     }
+
+    @Test fun defaultGameIdsAreUnique() { assertNotEquals(QuizGame(qs).gameId, QuizGame(qs).gameId) }
 
     @Test fun fiftyFiftyNeverLeavesFewerThanTwoChoicesEvenWithTheExtraJoker() {
         for (seed in 1L..20L) {
