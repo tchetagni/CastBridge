@@ -39,7 +39,12 @@ class UploadService : Service() {
     data class Job(val fileName: String, val tvName: String, val manualHost: String?, val pin: String? = null,
                    val progressive: Boolean = false, val autoPlay: Boolean = true, val target: String? = null,
                    /** Move instead of copy: once the TV holds the complete file, offer to delete it from the phone. */
-                   val move: Boolean = false)
+                   val move: Boolean = false,
+                   /**
+                    * Ordered classic path (one connection from byte 0, the TV's visible `.part`), never « Transfert rapide »: « Copier sur la TV et lire » of a
+                    * video, so that the TV can start during the copy ([castbridge.core.phone.CopyRoute], R-08). Nothing starts by itself (unlike [progressive]).
+                    */
+                   val ordered: Boolean = false)
 
     /** A moved file that the TV now holds completely: the screen deletes it from the phone (with Android's confirmation). */
     data class MoveRequest(val uri: Uri, val name: String, val size: Long)
@@ -75,7 +80,7 @@ class UploadService : Service() {
         val name = intent.getStringExtra(EXTRA_NAME) ?: uri.lastPathSegment ?: "video"
         val job = Job(name, tvName, intent.getStringExtra(EXTRA_HOST), intent.getStringExtra(EXTRA_PIN),
             intent.getBooleanExtra(EXTRA_PROGRESSIVE, false), intent.getBooleanExtra(EXTRA_AUTOPLAY, true), intent.getStringExtra(EXTRA_TARGET),
-            intent.getBooleanExtra(EXTRA_MOVE, false))
+            intent.getBooleanExtra(EXTRA_MOVE, false), intent.getBooleanExtra(EXTRA_ORDERED, false))
         moveUri = if (job.move) uri else null
         try {
             val n = notification("Envoi de $name…", 0)
@@ -151,8 +156,9 @@ class UploadService : Service() {
             notifyProgress(s)
         }
         // « Transfert rapide » : plusieurs connexions en parallèle, fichier découpé en blocs (docs/TRANSFER.md). Jamais pendant « lire pendant l'envoi »
-        // (les blocs n'arrivent pas dans l'ordre) ; une TV qui ne connaît pas le protocole (null) reçoit l'envoi classique.
-        val fast = if (!progressiveNow && FastTransfer.enabled(this)) runFast(uri, job, total, resolve, credential, onState) else null
+        // ni pour « Copier sur la TV et lire » d'une vidéo (job.ordered, R-08) : les blocs n'arrivent pas dans l'ordre et restent invisibles au lecteur de
+        // la TV (.cbx) jusqu'à la fin ; une TV qui ne connaît pas le protocole (null) reçoit l'envoi classique.
+        val fast = if (!progressiveNow && !job.ordered && FastTransfer.enabled(this)) runFast(uri, job, total, resolve, credential, onState) else null
         val result = fast ?: ResumableUpload(job.fileName, total, resolve, { off -> openAt(uri, off) }, { cancelled }, pin = job.pin,
             target = job.target, onCheck = { _check.value = it }, credential = credential).run(onState)
         run {
@@ -344,17 +350,19 @@ class UploadService : Service() {
         fun moveHandled() { _moveReady.value = null; _moveNote.value = null }
         private const val NOTIF_MOVE = 7
         const val EXTRA_MOVE = "move"
+        const val EXTRA_ORDERED = "ordered"
         private val _state = MutableStateFlow<State>(State.Idle)
         val state: StateFlow<State> = _state
 
         fun start(ctx: Context, uri: Uri, fileName: String, tvName: String, manualHost: String?, pin: String? = null,
-                  progressive: Boolean = false, autoPlay: Boolean = true, target: String? = null, move: Boolean = false) {
+                  progressive: Boolean = false, autoPlay: Boolean = true, target: String? = null, move: Boolean = false, ordered: Boolean = false) {
             // library assistant, option « Rangement automatique des nouveaux envois » (off by default, docs/LIBRARY-AGENT.md)
             val fileName = castbridge.sender.agent.AgentAuto.nameFor(ctx, fileName)       // a CANDIDATE: confirmed in the service once the TV has been asked
             val i = Intent(ctx, UploadService::class.java).setData(uri)
                 .addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION)
                 .putExtra(EXTRA_TV, tvName).putExtra(EXTRA_NAME, fileName).putExtra(EXTRA_HOST, manualHost).putExtra(EXTRA_PIN, pin?.takeIf { it.isNotEmpty() })
                 .putExtra(EXTRA_PROGRESSIVE, progressive).putExtra(EXTRA_AUTOPLAY, autoPlay).putExtra(EXTRA_TARGET, target).putExtra(EXTRA_MOVE, move)
+                .putExtra(EXTRA_ORDERED, ordered)
             _state.value = State.Idle; _check.value = null; _average.value = 0
             ctx.startForegroundService(i)
         }

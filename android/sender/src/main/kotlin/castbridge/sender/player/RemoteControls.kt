@@ -145,8 +145,12 @@ fun CopyBanner(r: Remote, modifier: Modifier = Modifier) {
         } else {
             Text(c.title(r.target.name), style = MaterialTheme.typography.titleSmall, color = Color.White, fontWeight = FontWeight.Bold)
             LinearProgressIndicator({ c.fraction }, Modifier.fillMaxWidth().height(8.dp).clip(RoundedCornerShape(4.dp)))
+            // « Copie en cours · la TV démarrera la lecture dès qu'elle aura assez d'avance » (or why an MP4 indexed at the end must wait, and how long)
+            r.message?.let { Text(it, style = MaterialTheme.typography.bodyMedium, color = Color.White) }
             Text(c.detail(), style = MaterialTheme.typography.bodySmall, color = Color(castbridge.core.brand.BrandTokens.Dark.TEXT_MEDIUM))
         }
-        Text("La lecture continue ici en attendant.", style = MaterialTheme.typography.bodySmall, color = Color(castbridge.core.brand.BrandTokens.Dark.TEXT_MEDIUM))
+        castbridge.core.phone.CopyHandoff.phoneLine(r.phonePlays)?.let {
+            Text(it, style = MaterialTheme.typography.bodySmall, color = Color(castbridge.core.brand.BrandTokens.Dark.TEXT_MEDIUM))
+        }
     }
 }

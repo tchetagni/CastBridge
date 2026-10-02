@@ -229,8 +229,31 @@ object Handoff {
      * the whole file.
      */
     fun copyReady(received: Long, total: Long, durMs: Long, phonePosMs: Long, moovAtEnd: Boolean, uploadBytesPerSec: Long): Boolean =
-        total > 0 && (received >= total ||
-            received >= Progressive.handoffBytes(total, durMs, phoneToTv(phonePosMs, durMs), 30_000, moovAtEnd, uploadBytesPerSec))
+        total > 0 && (received >= total || received >= bytesNeeded(total, durMs, phonePosMs, moovAtEnd, uploadBytesPerSec))
+
+    /** Lead the TV must hold beyond its start position before it takes over. */
+    const val LEAD_MS = 30_000L
+    /**
+     * Lead in bytes when the duration is unknown (« Ouvrir avec » → « Copier sur la TV et lire »: nothing plays on the phone, the duration was never read):
+     * 32 Mio ≈ 30 s of a 8,5 Mbit/s video, on top of the bootstrap. Before R-08 an unknown duration meant « the whole file » (bytesForPosition(dur=0) = total):
+     * the TV never started before the end of the copy.
+     */
+    const val UNKNOWN_DURATION_LEAD_BYTES = 32L shl 20
+
+    /**
+     * Bytes the TV must hold before it may start at the phone's position: the whole file for an MP4 indexed at the end; with a known duration, the data up
+     * to [LEAD_MS] beyond the start plus the bootstrap; with an unknown duration, only a start from the beginning is placed safely (bootstrap +
+     * [UNKNOWN_DURATION_LEAD_BYTES]); a position in the middle of a file of unknown duration cannot be mapped to a byte: the whole file.
+     */
+    fun bytesNeeded(total: Long, durMs: Long, phonePosMs: Long, moovAtEnd: Boolean, uploadBytesPerSec: Long): Long {
+        val start = phoneToTv(phonePosMs, durMs)
+        return when {
+            moovAtEnd -> total
+            durMs > 0 -> Progressive.handoffBytes(total, durMs, start, LEAD_MS, false, uploadBytesPerSec)
+            start == 0L -> minOf(total, Progressive.bootstrapBytes(total, uploadBytesPerSec) + UNKNOWN_DURATION_LEAD_BYTES)
+            else -> total
+        }
+    }
 
     /**
      * How long until [copyReady] becomes true at the current upload speed: 0 = now, null = unknown (no speed measured yet).
@@ -254,7 +277,9 @@ object Handoff {
  * time left before the TV can start playing. Durations are estimates from the measured speed; [handoffInMs] / [fullInMs] are null
  * while the speed is unknown, and the text then says so instead of showing a made-up number.
  */
-data class CopyProgress(val sent: Long, val total: Long, val bytesPerSec: Long, val handoffInMs: Long?, val via: String? = null) {
+data class CopyProgress(val sent: Long, val total: Long, val bytesPerSec: Long, val handoffInMs: Long?, val via: String? = null,
+                        /** MP4 with its index at the end: the TV starts only once the whole copy is there (said explicitly, with the wait). */
+                        val moovAtEnd: Boolean = false) {
     val percent: Int get() = if (total > 0) (sent * 100 / total).toInt().coerceIn(0, 100) else 0
     val fraction: Float get() = if (total > 0) (sent.toFloat() / total).coerceIn(0f, 1f) else 0f
     val fullInMs: Long? get() = if (total > 0 && sent >= total) 0 else if (bytesPerSec > 0 && total > 0) (total - sent) * 1000 / bytesPerSec else null
@@ -264,7 +289,11 @@ data class CopyProgress(val sent: Long, val total: Long, val bytesPerSec: Long, 
     fun detail(): String {
         val speed = if (bytesPerSec > 0) " · ${sizeText(bytesPerSec)}/s" else ""
         val full = fullInMs?.let { if (it <= 0) "copie terminée" else "copie complète dans ${wait(it)}" } ?: "durée en cours d'estimation"
-        val hand = when (handoffInMs) {
+        val hand = if (moovAtEnd) when (val f = fullInMs) {
+            null -> "la TV démarrera la lecture à la fin de la copie (index MP4 à la fin du fichier)"
+            0L -> "la TV démarre la lecture maintenant"
+            else -> "la TV démarrera la lecture à la fin de la copie, dans ${wait(f)} (index MP4 à la fin du fichier)"
+        } else when (handoffInMs) {
             null -> "la TV prendra le relais dès qu'elle aura assez d'avance"
             0L -> "la TV prend le relais maintenant"
             else -> "la TV prend le relais dans ${wait(handoffInMs)}"
