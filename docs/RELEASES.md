@@ -180,6 +180,13 @@ $G :receiver:assembleRelease -PrequireActivation=true
 
 ## 6. Signature
 
+### ⚠ Clé réellement utilisée par les applications installées (correction du 2026-10-02)
+
+Toutes les applications installées chez le propriétaire (CastBridge-TV 0.14.18 à 0.14.20, CastBridge téléphone 1.2.31 à 1.2.33) sont signées avec la **clé du projet** `~/.castbridge-signing/release.jks` (PKCS12, alias `castbridge`, certificat `CN=CastBridge, O=CastBridge, C=CM`, SHA-256 `ef290816819ad081dfe6b6421d3b83b4a2cdc0827142d505a6797de07a757ba0`), et NON avec la clé de debug du Mac (SHA-256 `2e0c587a…`) que ce document citait. Une mise à jour ne s'installe que si elle porte ce même certificat : **signer toute APK à installer par-dessus avec `release.jks`**, et vérifier avant d'installer : `apksigner verify --print-certs <apk>` doit afficher `ef290816…`.
+
+Signer SANS jamais lire ni afficher le mot de passe (référence de fichier, un seul `--ks-pass`, pas de `--key-pass` pour un PKCS12) :
+`apksigner sign --ks ~/.castbridge-signing/release.jks --ks-key-alias castbridge --ks-pass file:$HOME/.castbridge-signing/release.pass --out <signé.apk> <aligné.apk>`
+
 ### Clé de debug (développement)
 
 - **Localisation** : `~/.android/debug.keystore`
