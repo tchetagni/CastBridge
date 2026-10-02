@@ -251,3 +251,38 @@ class FeatureGateTest {
         assertContains(LockedTexts.shareMessage(code, Subject.TV), code); assertContains(LockedTexts.NOTICE, "à valider par le propriétaire")
     }
 }
+
+/** Registry events signed by a delegated agent key (docs/coordination/DESIGN-W4-VENTE-TERRAIN.md § 3): replayed with the ring that holds the mandates, inside their window only. */
+class DelegatedReplayTest {
+    private val t0 = AgentFixtures.T0
+    private val agent = AgentFixtures.key("agent").signer
+    private val tvRing = AgentFixtures.tvRing()
+    private fun replayRing(vararg mandates: String) = tvRing.withDelegated(Delegation.replayKeys(mandates.toList(), tvRing))
+    private fun events(at: Long): List<LicenseEvent> {
+        val d = AgentFixtures.dev("tvA")
+        val a = ActivationIssuer(agent, Delegation.ALLOWED_SCOPES).issue(ActivationIssuer.Request(ActivationKind.PRODUCTION, d.code, d.fp, at, rights = listOf(castbridge.core.lots.Right.Usage(at, at + 30 * AgentFixtures.DAY)), license = "lic-0001", nonce = "c3c3c3c3c3c3c3c3")).activation
+        return listOf(LicenseEvent.license(agent, at - 1, "lic-0001", 1), LicenseEvent.issue(agent, a))
+    }
+
+    @Test fun eventsInsideTheMandateWindowAreReplayed() {
+        val st = LicenseBook.replay(events(t0 + AgentFixtures.DAY), replayRing(AgentFixtures.delegation()))
+        assertEquals(setOf("lic-0001"), st.licenses.keys); assertEquals(1, st.usedSeats("lic-0001")); assertTrue(st.rejected.isEmpty())
+    }
+
+    @Test fun eventsOutsideTheWindowAreRejectedAsKeyNotAllowed() {
+        val late = LicenseBook.replay(events(t0 + 91 * AgentFixtures.DAY), replayRing(AgentFixtures.delegation()))
+        assertTrue(late.licenses.isEmpty()); assertEquals(setOf(Rejection.KEY_NOT_ALLOWED), late.rejected.map { it.second }.toSet())
+        val early = LicenseBook.replay(events(t0 - 10 * AgentFixtures.DAY), replayRing(AgentFixtures.delegation()))
+        assertEquals(2, early.rejected.size)
+    }
+
+    @Test fun withoutAMandateTheAgentKeyIsUnknownAndAnExpiredMandateKeepsPastEvents() {
+        assertEquals(setOf(Rejection.UNKNOWN_KEY), LicenseBook.replay(events(t0 + AgentFixtures.DAY), tvRing).rejected.map { it.second }.toSet())
+        assertEquals(1, LicenseBook.replay(events(t0 + AgentFixtures.DAY), replayRing(AgentFixtures.delegation(validityDays = 10))).licenses.size)       // mandate over since, past event still counts
+    }
+
+    @Test fun aRevokedAgentStaysRevokedInTheReplay() {
+        val ring = replayRing(AgentFixtures.delegation()).withRevoked(setOf(agent.keyId))
+        assertEquals(setOf(Rejection.REVOKED_KEY), LicenseBook.replay(events(t0 + AgentFixtures.DAY), ring).rejected.map { it.second }.toSet())
+    }
+}
