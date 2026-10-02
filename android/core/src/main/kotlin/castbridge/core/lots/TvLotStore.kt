@@ -53,7 +53,8 @@ data class TvLot(val meta: LotMeta, val installedAt: Long)
  * the starter data bundled in the APK ([starterBytes]) included. The cap is enforced at install time and at startup; an install
  * that cannot fit is refused with a reason in French, never accepted over the cap.
  *
- * The TV NEVER downloads lots from the Internet: lots only arrive pushed by the phone (docs/LOTS.md). Every lot is checked here
+ * The TV never downloads lots by itself: they arrive pushed by the phone, or, for Langues only, when the user presses « Mettre à jour les lots Langues » and the TV has
+ * Internet ([TvLotFetcher], docs/LOTS.md § 12), which hands its file to [installReceived] like a phone upload. Every lot is checked here
  * (signed catalog that vouches for it, size, SHA-256, minAppVersion, no downgrade) before the matching [LotConsumer] installs it;
  * the phone is not trusted. Eviction frees room only among the lots the phone did not flag as priority, oldest first.
  *

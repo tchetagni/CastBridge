@@ -48,11 +48,18 @@ class LanguesActivity : Activity() {
     override fun onPause() { if (LanguesHub.screen === this) LanguesHub.screen = null; stopAudio(); super.onPause() }
 
     /** A lot arrived or was removed: back to the first screen, with fresh data. */
-    fun reload() { stack.clear(); go { home() } }
+    fun reload() {
+        if (updating) { reloadLater = true; return }       // a lot just installed by the update in progress: the update screen stays, the list is refreshed at the end
+        stack.clear(); go { home() }
+    }
+    @Volatile private var updating = false
+    @Volatile private var cancelUpdate = false
+    private var reloadLater = false
 
     private fun go(screen: () -> Unit) { val r = Runnable { screen() }; stack.add(r); r.run() }
     @Deprecated("Deprecated in Java") override fun onBackPressed() {
         stopAudio()
+        if (updating) cancelUpdate = true
         if (stack.size > 1) {
             stack.removeAt(stack.lastIndex)
             stack[stack.lastIndex].run()
@@ -84,12 +91,47 @@ class LanguesActivity : Activity() {
     private fun home() {
         val all = packs
         clear("Langues", "Leçons et exercices reçus du téléphone, sans Internet.")
-        if (all.isEmpty()) { label(LangCatalog.EMPTY_MESSAGE, 38, GamesColors.TEXT_MEDIUM, top = 48); return }
+        if (all.isEmpty()) label(LangCatalog.EMPTY_MESSAGE, 38, GamesColors.TEXT_MEDIUM, top = 48)
         for (l in LangCatalog.languages(all)) {
             val n = all.count { it.parts.target == l }
             button("${l.fr}   ·   $n lot(s)") { go { levels(l) } }
         }
+        // only when the system says this TV has Internet, and only when pressed: the TV never fetches by itself (docs/LOTS.md)
+        if (LanguesHub.hasInternet(this)) button("Mettre à jour les lots Langues", primary = all.isEmpty()) { go { update() } }
         focusFirst()
+    }
+
+    /** « Mettre à jour les lots Langues »: server -> TV, free Langues lots only, with progress and a plain result. Runs only while this screen is shown. */
+    private fun update() {
+        clear("Mise à jour des lots Langues", "Téléchargement depuis le serveur CastBridge, parce que vous l'avez demandé. Rien d'autre n'est envoyé.")
+        if (castbridge.receiver.ActivationCenter.trial()) { label(castbridge.core.owner.TrialPolicy.MESSAGE, 34, GamesColors.ERROR, top = 40); button("Retour") { onBackPressed() }; focusFirst(); return }
+        val fetcher = try { LanguesHub.fetcher(this) } catch (e: IllegalArgumentException) {
+            label("L'adresse du serveur n'est pas sécurisée (HTTPS obligatoire) : utilisez le téléphone pour envoyer les leçons.", 34, GamesColors.ERROR, top = 40)
+            button("Retour") { onBackPressed() }; focusFirst(); return
+        }
+        val status = label("Connexion au serveur…", 36, GamesColors.TEXT_HIGH, top = 40)
+        val cancel = button("Annuler") { cancelUpdate = true; status.text = "Interruption…" }
+        focusFirst()
+        updating = true; cancelUpdate = false; reloadLater = false
+        Thread {
+            val report = runCatching { fetcher.run(progress = { p ->
+                val pct = if (p.total > 0) p.done * 100 / p.total else 0
+                runOnUiThread { if (updating) status.text = "Lot ${p.index} sur ${p.count} : ${p.id.scope}   ($pct %)" }
+            }, cancelled = { cancelUpdate }) }.getOrNull()
+            runOnUiThread {
+                updating = false
+                if (isFinishing || isDestroyed) return@runOnUiThread
+                if (body.indexOfChild(status) < 0) { if (reloadLater) reload(); return@runOnUiThread }   // the user went back meanwhile: only refresh the list
+                body.removeView(cancel)
+                val ok = report?.ok == true
+                status.text = report?.message() ?: "La mise à jour a échoué : réessayez plus tard."
+                status.setTextColor(if (ok) GamesColors.SUCCESS else GamesColors.ERROR)
+                report?.results?.filter { it.status == castbridge.core.lots.TvLotFetcher.Status.INSTALLED || it.status == castbridge.core.lots.TvLotFetcher.Status.UPDATED }
+                    ?.take(12)?.forEach { label("✓ ${it.id.scope}", 28, GamesColors.TEXT_MEDIUM, top = 4) }
+                button("Retour aux langues", primary = true) { onBackPressed() }
+                focusFirst()
+            }
+        }.start()
     }
 
     private fun levels(l: Lang) {

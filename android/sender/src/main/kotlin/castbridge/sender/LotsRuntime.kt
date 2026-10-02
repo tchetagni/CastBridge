@@ -14,6 +14,7 @@ import android.net.NetworkCapabilities
 import android.util.Log
 import castbridge.core.langues.Lang
 import castbridge.core.langues.LangLevel
+import castbridge.core.langues.LangLotConsumer
 import castbridge.core.langues.LangLots
 import castbridge.core.langues.LangPlanner
 import castbridge.core.langues.LearnerLang
@@ -92,9 +93,35 @@ object LotsRuntime {
     /** Language text lots known to the phone (announced by the last catalog, or already held): the planner picks the learner's among them. */
     private fun languageLots(): List<LotMeta> = if (learner == null) emptyList() else (catalog?.lots.orEmpty() + store.catalog()).filter { it.id.feature == LangLots.FEATURE }
 
+    /** Langues text lots the user picked one by one in the list of the server's lessons (besides the profile's): kept on the phone and sent to the TV like the profile's. */
+    var pickedLangues: Set<String> get() = sp.getStringSet("lang_picked", emptySet()).orEmpty(); private set(v) { sp.edit().putStringSet("lang_picked", v.toSet()).apply() }
+
+    /** The Langues text lots the last verified catalog announces and the phone does not hold yet (or only in an older version), for the « disponibles sur le serveur » list. */
+    fun availableLanguageLots(): List<LotMeta> {
+        val held = store.list().associateBy { it.meta.id }
+        return catalog?.lots.orEmpty().filter { it.id.feature == LangLots.FEATURE && LangLots.parse(it.id.scope) != null && it.edition == Edition.FULL }
+            .filter { m -> held[m.id]?.meta?.let { it.version >= m.version } != true }.sortedBy { it.id.scope }
+    }
+
+    /** Downloads one Langues lot chosen in the list (verified like every lot), keeps it, and queues it for the TV. */
+    fun downloadLanguage(id: LotId): String {
+        if (id.feature != LangLots.FEATURE) return "Ce n'est pas une leçon de langue."
+        pickedLangues = pickedLangues + id.scope
+        return syncNow(only = id, userAsked = true)
+    }
+
+    /** Content check of a downloaded Langues lot BEFORE it is stored: the very checks of the TV's consumer (LangLotConsumer), so the phone never keeps a lot the TV would refuse. */
+    private fun contentCheck(m: LotMeta, f: File): String? =
+        if (m.id.feature == LangLots.FEATURE) (LangLotConsumer.verifyContent(m, f) as? LangLotConsumer.Companion.Verified.Bad)?.reason else null
+
     /** Classes first, then the learner's language text lots (`langues`; `langues-media` is not delivered to the TV yet). */
-    fun needs(): List<Need> = LotPlanner.needsOf(listOf(ProfileNeed(selectedScopes.sorted(), active = true))) + LangPlanner.needs(learner, languageLots())
-    fun protect(id: LotId) = id.scope in selectedScopes || (id.feature == LangLots.FEATURE && learner?.let { LangPlanner.rank(it, id) } != null)
+    fun needs(): List<Need> {
+        val profile = LangPlanner.needs(learner, languageLots())
+        val have = profile.map { it.id }.toSet()
+        val picked = pickedLangues.sorted().map { Need(LotId(LangLots.FEATURE, it), LangPlanner.NEED_BASE + 10) }.filter { it.id !in have }
+        return LotPlanner.needsOf(listOf(ProfileNeed(selectedScopes.sorted(), active = true))) + profile + picked
+    }
+    fun protect(id: LotId) = id.scope in selectedScopes || (id.feature == LangLots.FEATURE && (id.scope in pickedLangues || learner?.let { LangPlanner.rank(it, id) } != null))
 
     /** The classes of the catalog (Apprendre and Quiz lots only: language lots are chosen with the profile, not as classes). */
     fun classScopes(): List<String> = catalog?.lots?.filter { it.id.feature == "learn" || it.id.feature == "quiz" }?.map { it.id.scope }?.distinct()?.sorted().orEmpty()
@@ -129,7 +156,7 @@ object LotsRuntime {
         running = "sync"; PhoneConnect.changed()
         try {
             val remote = HttpLotRemote(st.baseUrl, deviceToken = st.deviceToken)
-            val sync = LotSync(store, remote, keys(), PhoneConnect.versionCode, ::net)
+            val sync = LotSync(store, remote, keys(), PhoneConnect.versionCode, ::net, check = ::contentCheck)
             val wanted = if (only != null) listOf(only)
                 else (needs().map { it.id } + store.list().map { it.meta.id }).distinct().ifEmpty { selectedScopes.flatMap { s -> listOf(LotId("learn", s), LotId("quiz", s)) } }
             // the catalog also answers "which classes exist" for the wizard: ask for it even when nothing is wanted yet

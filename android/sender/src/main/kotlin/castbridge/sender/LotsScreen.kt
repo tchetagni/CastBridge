@@ -177,6 +177,19 @@ private fun LanguagesSection(busy: Boolean, onMessage: (String?) -> Unit) {
     Button(enabled = !busy && LotsRuntime.learner != null, onClick = {
         scope.launch { onMessage(withContext(Dispatchers.IO) { LotsRuntime.refreshCatalog(); LotsRuntime.syncNow(userAsked = true) }) }
     }) { Text("Télécharger mes leçons de langue") }
+    // the lessons the server offers (from its signed catalog): one by one, besides the profile's
+    val available = LotsRuntime.availableLanguageLots()
+    OutlinedButton(enabled = !busy, onClick = { scope.launch { onMessage(withContext(Dispatchers.IO) { LotsRuntime.refreshCatalog() ?: "Liste des leçons mise à jour" }) } }) { Text("Voir les leçons disponibles sur le serveur") }
+    if (available.isNotEmpty()) Text("Disponibles sur le serveur (${available.size})", style = MaterialTheme.typography.titleSmall)
+    available.take(60).forEach { m ->
+        Row(verticalAlignment = Alignment.CenterVertically) {
+            Column(Modifier.weight(1f)) {
+                Text(m.title.ifBlank { m.id.scope }, style = MaterialTheme.typography.bodyMedium)
+                Text("${m.id.scope} · ${LotStore.mo(m.bytes)}", style = MaterialTheme.typography.bodySmall, color = MaterialTheme.colorScheme.onSurfaceVariant)
+            }
+            OutlinedButton(enabled = !busy, onClick = { scope.launch { onMessage(withContext(Dispatchers.IO) { LotsRuntime.downloadLanguage(m.id) }) } }) { Text("Télécharger") }
+        }
+    }
     Text("L'audio des leçons (lots média) n'est pas encore envoyé à la TV : seuls les textes le sont pour l'instant.", style = MaterialTheme.typography.bodySmall, color = MaterialTheme.colorScheme.onSurfaceVariant)
 }
 
