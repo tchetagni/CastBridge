@@ -22,6 +22,10 @@ object OwnerFrames {
     const val DEVICE_INFO = 6            // TV -> console, device code + fingerprint lines (the "device request")
     const val PAIR = 7                   // console -> TV, the 6-digit pairing code shown on the panel
     const val ACTIVATION = 8             // console -> TV, ASCII "cbx1.…" activation (envelope, docs/ACTIVATION-FORMAT.md) (offline phase)
+    /** Phone -> TV: the challenge of a TV proof, 64 lowercase hex chars (32 random bytes). The TV answers with [PROOF]; both are additive, an old TV simply ignores the type. */
+    const val PROOF_REQUEST = 9
+    /** TV -> phone: ASCII "cbx1.…" envelope of type `proof` signed by the installation key over the challenge (see [TvProof]; docs/coordination/DESIGN-W6-PARENTAL-PHONE-GATE.md § 3.3). */
+    const val PROOF = 10
 
     class Frame(val type: Int, val payload: ByteArray) {
         val text: String get() = String(payload, Charsets.UTF_8)
