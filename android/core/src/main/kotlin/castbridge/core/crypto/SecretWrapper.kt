@@ -13,7 +13,10 @@ interface SecretWrapper {
     /** The blob to store for [plain]. */
     fun wrap(plain: ByteArray): ByteArray
 
-    /** The secret, or null if [blob] is not one of ours (wrong key, altered, truncated). Never throws. */
+    /**
+     * The secret, or null if [blob] is not one of ours FOR GOOD (wrong key, altered, truncated, key gone): the caller may then give the secret up. A TRANSIENT failure (a Keystore that
+     * does not answer now) THROWS instead, so that the caller keeps the blob and retries later (audit w4-03: a swallowed transient error cost the installation key).
+     */
     fun unwrap(blob: ByteArray): ByteArray?
 
     /** Short name stored next to the blob and shown on the admin page (`plain`, `keystore`, `memory`). */

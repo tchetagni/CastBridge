@@ -249,7 +249,7 @@ class TvService : Service(), Device {
                 .then(castbridge.core.tv.FoldersApi(folderIndex) { server?.libraryItems()?.map { it.name }?.toSet().orEmpty() })
                 .then(QuizHub.packApi(this))   // question packs pushed by the phone (docs/QUIZ.md)
                 .then(LotsHub.api(this))        // lots (Apprendre / Quiz data, 10 Mo cap) pushed by the phone, never downloaded by the TV
-                .then(RentalHub.api(this))      // rented lots (sealed, opened with the rental key), the rentals' state, the sweep, activation install (docs/LOTS.md)
+                .then(RentalHub.api(this))      // LAZY (never touches the Keystore here: a Keystore failure answers 503, it cannot bring onCreate down): rented lots (sealed, opened with the rental key), the rentals' state, the sweep, activation install (docs/LOTS.md)
                 .then(castbridge.core.content.ContentFeedbackApi { TvConnect.feedback }),   // reports handed to the phone (docs/CONTENT-VALIDATION.md)
             profile = prefs.profile(), onSettings = { prefs.saveProfile(it); updateStorageStatus() },
             onNotice = { n -> notice(n); setStatus("5-notice", n) },
@@ -839,7 +839,7 @@ class TvService : Service(), Device {
             g.diagnose(host) { l -> lines += l; act?.let { a -> main.post { a.appendDiag(l) } } }
             ApiReply(200, "{\"host\":${ReceiverServer.q(host)},\"lines\":[" + lines.joinToString(",") { ReceiverServer.q(it) } + "]}")
         } ?: ApiReply(409, """{"error":"passerelle non démarrée"}""")
-        path == "/api/activation" && method == "GET" -> { ActivationCenter.init(this); ApiReply(200, "{\"required\":${BuildConfig.REQUIRE_ACTIVATION},\"locked\":${ActivationCenter.locked()},\"label\":${ReceiverServer.q(ActivationCenter.label())},\"code\":${ReceiverServer.q(ActivationCenter.requestText().lineSequence().first().removePrefix("code="))},\"ownerChannel\":${ownerBt != null}${ActivationCenter.statusFields()},\"installKeyProtection\":${ReceiverServer.q(runCatching { RentalHub.installProtection(this) }.getOrDefault("unknown"))},\"installId\":${ReceiverServer.q(runCatching { RentalHub.installKey(this).installId }.getOrDefault(""))},\"remoteAssist\":${ReceiverServer.q(TunnelHub.statusLine(this))}}") }
+        path == "/api/activation" && method == "GET" -> { ActivationCenter.init(this); ApiReply(200, "{\"required\":${BuildConfig.REQUIRE_ACTIVATION},\"locked\":${ActivationCenter.locked()},\"label\":${ReceiverServer.q(ActivationCenter.label())},\"code\":${ReceiverServer.q(ActivationCenter.requestText().lineSequence().first().removePrefix("code="))},\"ownerChannel\":${ownerBt != null}${ActivationCenter.statusFields()},\"installKeyProtection\":${ReceiverServer.q(RentalHub.protectionStatus(this))},\"installId\":${ReceiverServer.q(RentalHub.installIdOrEmpty())},\"remoteAssist\":${ReceiverServer.q(TunnelHub.statusLine(this))}}") }
         path == "/api/bluetooth" && method == "GET" -> bt?.let { ApiReply(200, it.stateJson(statuses["1-bt"])) }
         path == "/api/bluetooth/discoverable" && method == "POST" -> {
             if (bt?.hasPermission() == true) bt?.start()

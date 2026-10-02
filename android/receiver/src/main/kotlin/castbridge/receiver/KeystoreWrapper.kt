@@ -8,6 +8,7 @@ import android.util.Log
 import castbridge.core.crypto.PlainWrapper
 import castbridge.core.crypto.SecretWrapper
 import java.security.KeyStore
+import javax.crypto.AEADBadTagException
 import javax.crypto.Cipher
 import javax.crypto.KeyGenerator
 import javax.crypto.SecretKey
@@ -15,8 +16,9 @@ import javax.crypto.spec.GCMParameterSpec
 
 /**
  * Wraps the installation key of CastBridge-TV under an AES-256-GCM key that lives in the `AndroidKeyStore` (alias [ALIAS], never exportable): a copy of `install.key` taken off the TV
- * is useless without the TV's secure hardware. Blob = iv(12) + ciphertext + tag. [unwrap] never throws (null = not ours / key gone), so [castbridge.core.lots.InstallKeyStore] regenerates
- * a key rather than staying stuck; a failing or invalidated alias is recreated by [wrap].
+ * is useless without the TV's secure hardware. Blob = iv(12) + ciphertext + tag. [unwrap] answers null ONLY when the key is lost for good (wrong tag, alias absent, key permanently
+ * invalidated: [InstallKeyPolicy.unwrapIsLoss]); any other error is RETHROWN, so [castbridge.core.lots.InstallKeyStore] keeps the file and the caller retries later. Only an absent or
+ * permanently invalidated alias is (re)created by [wrap].
  */
 class KeystoreWrapper private constructor(private val alias: String) : SecretWrapper {
     override val label = "keystore"
@@ -54,12 +56,27 @@ class KeystoreWrapper private constructor(private val alias: String) : SecretWra
     }
 
     @Synchronized override fun unwrap(blob: ByteArray): ByteArray? {
-        if (blob.size < IV_BYTES + 16) return null
+        if (blob.size < IV_BYTES + 16) return null                                          // truncated: not ours, for good
+        val ks = store()                                                                    // a Keystore that does not load: rethrown (transient)
+        if (!ks.containsAlias(alias)) return lost(InstallKeyPolicy.UnwrapFailure.MISSING_ALIAS, null)
+        val key = ks.getKey(alias, null) as? SecretKey ?: throw IllegalStateException("clé du coffre Android momentanément illisible")
         return try {
-            val key = existing() ?: return null
             val c = Cipher.getInstance(TRANSFORM); c.init(Cipher.DECRYPT_MODE, key, GCMParameterSpec(128, blob.copyOf(IV_BYTES)))
             c.doFinal(blob, IV_BYTES, blob.size - IV_BYTES)
-        } catch (e: Exception) { null }        // AEADBadTagException (wrong or recreated key, altered blob), KeyStoreException, UnrecoverableKeyException, ProviderException…
+        } catch (e: Exception) { lost(classify(e), e) }
+    }
+
+    /** Null for a lost key, otherwise the error is rethrown (KeyStoreException, UnrecoverableKeyException, ProviderException… are transient: retried later). */
+    private fun lost(f: InstallKeyPolicy.UnwrapFailure, e: Exception?): ByteArray? = if (InstallKeyPolicy.unwrapIsLoss(f)) null else throw (e ?: IllegalStateException("coffre Android indisponible"))
+
+    private fun classify(e: Throwable): InstallKeyPolicy.UnwrapFailure {
+        var t: Throwable? = e; var depth = 0
+        while (t != null && depth++ < 5) {
+            if (t is KeyPermanentlyInvalidatedException) return InstallKeyPolicy.UnwrapFailure.INVALIDATED
+            if (t is AEADBadTagException) return InstallKeyPolicy.UnwrapFailure.BAD_TAG
+            t = t.cause
+        }
+        return InstallKeyPolicy.UnwrapFailure.OTHER
     }
 
     companion object {
@@ -71,6 +88,9 @@ class KeystoreWrapper private constructor(private val alias: String) : SecretWra
         private const val IV_BYTES = 12
         private const val TAG = "KeystoreWrapper"
 
+        /** The wrapper of the real alias WITHOUT probe: the reader of a key stored under `keystore` (its failures are thrown, never answered by a plain fallback). */
+        fun install(): SecretWrapper = KeystoreWrapper(ALIAS)
+
         /**
          * The Keystore wrapper if it works HERE (one generation or reuse and one 32-byte round trip), otherwise a [PlainWrapper] and a warning: the install key is then stored without an
          * envelope, and the admin page says « non protégée ». Call it off the main thread when possible (the first generation can take a few hundred ms on a small TV).
@@ -81,7 +101,7 @@ class KeystoreWrapper private constructor(private val alias: String) : SecretWra
             check(probeWrapper.unwrap(probeWrapper.wrap(probe))?.contentEquals(probe) == true) { "aller-retour du coffre Android incohérent" }
             KeystoreWrapper(ALIAS)
         } catch (e: Exception) {
-            log("coffre Android indisponible : clé d'installation stockée sans enveloppe", e)
+            log("coffre Android indisponible : une nouvelle clé d'installation serait stockée sans enveloppe (une clé existante est toujours lue avec sa propre enveloppe)", e)
             PlainWrapper()
         }
     }

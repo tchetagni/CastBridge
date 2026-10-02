@@ -226,7 +226,7 @@ async function refresh() {
 async function loadEdition() {
   const ed = $("ed"); let a;
   try { a = await api("GET", "/api/activation"); } catch (e) { return; }
-  $("ik").textContent = a && a.installKeyProtection ? "Clé d'installation : " + (a.installKeyProtection === "keystore" ? "protégée par le coffre Android" : a.installKeyProtection === "plain" ? "non protégée" : "inconnue") : "";
+  $("ik").textContent = a && a.installKeyProtection ? "Clé d'installation : " + (a.installKeyProtection === "keystore" ? "protégée par le coffre Android" : a.installKeyProtection === "plain" ? "non protégée" : a.installKeyProtection === "unavailable" ? "coffre de clés indisponible (nouvel essai automatique)" : a.installKeyProtection === "pending" ? "en préparation" : "inconnue") : "";
   $("ra").textContent = (a && a.remoteAssist) || "";                  // « Assistance à distance : connectée / hors ligne / en attente d'acceptation des conditions »
   if (!a || !a.edition) { ed.style.display = "none"; return; }
   ed.className = a.ended ? "end" : a.trial ? "trial" : "prod";

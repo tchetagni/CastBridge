@@ -77,10 +77,10 @@ class InstallKeyTest {
         assertFailsWith<IllegalArgumentException> { MemoryWrapper(ByteArray(16)) }
     }
 
-    /** A wrapper that fails (null) for its first [failures] unwrap calls, then works: a model of a Keystore that is briefly unavailable. */
+    /** A wrapper that THROWS for its first [failures] unwrap calls, then works: a model of a Keystore that is briefly unavailable (transient errors are thrown, SecretWrapper contract). */
     private class Flaky(private val inner: SecretWrapper, var failures: Int) : SecretWrapper {
         override fun wrap(plain: ByteArray) = inner.wrap(plain)
-        override fun unwrap(blob: ByteArray): ByteArray? = if (failures > 0) { failures--; null } else inner.unwrap(blob)
+        override fun unwrap(blob: ByteArray): ByteArray? = if (failures > 0) { failures--; throw IllegalStateException("coffre indisponible") } else inner.unwrap(blob)
         override val label get() = inner.label
     }
 
@@ -91,14 +91,13 @@ class InstallKeyTest {
         assertTrue(dir.list()!!.none { ".unreadable-" in it })
     }
 
-    @Test fun aLongerWrapperFailureNeverDestroysTheOriginalFile() {
+    @Test fun aLongerWrapperFailureThrowsAndTouchesNothing() {
         val dir = Kit.tmp(); val first = InstallKeyStore(dir, MemoryWrapper(wrapKey), seeded(10)).loadOrCreate()
-        val original = File(dir, "install.key").readText()
-        val s = InstallKeyStore(dir, Flaky(MemoryWrapper(wrapKey), 100), seeded(80), now = { 4242L }); val k = s.loadOrCreate()
-        assertFalse(first.pub.contentEquals(k.pub)); assertNotNull(s.loadNote)
-        assertEquals(original, File(dir, "install.key.unreadable-4242").readText(), "the unreadable file was kept aside, not overwritten")
-        File(dir, "install.key").delete(); File(dir, "install.key.bak").delete(); File(dir, "install.key.unreadable-4242").renameTo(File(dir, "install.key"))
-        assertContentEquals(first.pub, InstallKeyStore(dir, MemoryWrapper(wrapKey), seeded(1)).loadOrCreate().pub, "the original key is still readable once put back")
+        val before = dir.list()!!.sorted().associateWith { File(dir, it).readText() }
+        val s = InstallKeyStore(dir, Flaky(MemoryWrapper(wrapKey), 100), seeded(80), now = { 4242L })
+        assertFailsWith<InstallKeyUnavailableException> { s.loadOrCreate() }
+        assertEquals(before, dir.list()!!.sorted().associateWith { File(dir, it).readText() }, "no file renamed, rewritten or created")
+        assertContentEquals(first.pub, InstallKeyStore(dir, MemoryWrapper(wrapKey), seeded(1)).loadOrCreate().pub, "the Keystore is back: the same key")
     }
 
     @Test fun aMainFileThatReadsButDoesNotDecryptFallsBackToTheBackup() {
