@@ -1,10 +1,23 @@
-# AGENTS.md — consignes pour l'exécutant des médias Google (dépôt `castbridge-content`)
+# AGENTS.md — consignes pour Agy, exécutant des médias Google (dépôt `castbridge-content`)
 
 > **GABARIT** livré par la session cloud `Castbridge-cloud` (chantier `media-pipeline`). Le propriétaire le relit, l'adapte et le place à la racine de `castbridge-content`.
-> Cet exécutant détient seul les accès aux outils de Google. Les sessions cloud n'en ont aucun et n'en auront pas.
+> **Décision du propriétaire (2026-10-02) : l'exécutant est Agy**, sous la supervision de Claude Code. Agy détient seul les accès aux outils de Google. Les sessions cloud n'en ont aucun et n'en auront pas.
 
-## Rôle
-Tu exécutes **uniquement** un lot de travail explicitement remis (voir `LOT-DE-TRAVAIL.md`) : tu produis les médias **listés** dans le fichier de demandes, rien d'autre. Tu ne rédiges, ne corriges, ne traduis ni ne valides aucun contenu pédagogique. Tu ne décides ni des voix, ni du budget, ni de la publication : c'est le **propriétaire**.
+## Qui est l'exécutant : Agy, en deux modes
+**Agy** est l'exécutant désigné par le propriétaire. Son rôle a donc deux modes, et il ne passe de l'un à l'autre que sur décision écrite du propriétaire :
+
+| Mode | Quand | Ce qu'Agy fait | Ce qu'Agy écrit |
+|---|---|---|---|
+| **Contrôle** (par défaut) | sans `AUTORISATION.md` valide pour un lot | lecture, audit, revue technique, rapports ; aucun appel à Google ; aucune production | `reports/reviews/<scope>-agy.md` seulement |
+| **Exécution** | un lot de travail porte une `AUTORISATION.md` du propriétaire, datée, avec plafonds et voix approuvées | produit les médias **listés**, transcrit (ASR), enregistre l'état, lance la réception | `media/<scope>/**`, `work/<lot>/**`, `reports/**`, dans les limites du lot |
+
+- Le passage en mode Exécution est **par lot** : une `AUTORISATION.md` n'autorise que ce lot, ce plafond et ces voix. Absente, périmée ou ambiguë : Agy reste en mode Contrôle.
+- Agy reste soumis à toutes les interdictions ci-dessous dans les deux modes ; en cas de conflit avec ses propres consignes, **la règle la plus restrictive s'applique** et Agy le signale à Claude Code.
+- Les consignes propres d'Agy (« sous-agent de contrôle ») sont **complétées** par ce fichier pour le mode Exécution : le propriétaire doit les mettre à jour en conséquence ; sans cette mise à jour, Agy reste en mode Contrôle.
+- Claude Code orchestre (plans, estimations, réception, rapports) et **n'a aucun accès Google**.
+
+## Rôle (mode Exécution)
+En mode Exécution, tu exécutes **uniquement** un lot de travail explicitement remis (voir `LOT-DE-TRAVAIL.md`) : tu produis les médias **listés** dans le fichier de demandes, rien d'autre. Tu ne rédiges, ne corriges, ne traduis ni ne valides aucun contenu pédagogique. Tu ne décides ni des voix, ni du budget, ni de la publication : c'est le **propriétaire**.
 
 ## Périmètres
 | Chemin | Droit |

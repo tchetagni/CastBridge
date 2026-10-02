@@ -17,7 +17,7 @@ paquets de langue ──► mp.py requests ──► media-requests.jsonl ──
 |---|---|---|
 | Choisir moteurs et voix, remplir `pricing.json`, valider les textes juridiques, **autoriser** un lot et un plafond | **propriétaire** | non |
 | Générer les demandes, estimer, planifier sous plafond, recevoir et contrôler | Claude Code (cloud) | oui, sans Google |
-| Appeler Google, produire, transcrire (ASR), `record` | exécutant (accès Google) | oui, **sur autorisation écrite** |
+| Appeler Google, produire, transcrire (ASR), `record` | **Agy** (exécutant désigné par le propriétaire le 2026-10-02 ; accès Google ; mode Contrôle par défaut, mode Exécution seulement sur `AUTORISATION.md` par lot) | oui, **sur autorisation écrite** |
 | Écouter, valider les tons du mandarin, l'accent du japonais, la prosodie | **locuteur natif** | non |
 
 ## 2. Demandes de médias (`mp.py requests <paquets> <sortie.jsonl>`)
