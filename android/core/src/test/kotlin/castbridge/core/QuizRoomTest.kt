@@ -270,4 +270,14 @@ class QuizHttpTest {
         room = null
         assertEquals(410, join("Awa", "1234").code)
     }
+
+    @Test fun boostErrorMentionsTheTvOnlyWhenForbidden() {
+        val a = token(join("Awa"))
+        val forbidden = call("POST", "/quiz/api/act?token=$a&action=boost&arg=EXTRA_JOKER")
+        assertEquals(409, forbidden.code); assertTrue(forbidden.body.contains("réservé à la TV"))
+        val unknown = call("POST", "/quiz/api/act?token=nope&action=boost&arg=EXTRA_JOKER")
+        assertEquals(401, unknown.code); assertFalse(unknown.body.contains("réservé à la TV"))
+        val other = call("POST", "/quiz/api/act?token=$a&action=answer&q=x&choice=0")
+        assertFalse(other.body.contains("réservé à la TV"))
+    }
 }

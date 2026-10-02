@@ -37,7 +37,7 @@ class QuizBoostsTest {
         assertEquals(QuizGame.Phase.LOST_OFFER, g.phase)
         assertTrue(g.canBoost(Boost.SECOND_CHANCE)); assertEquals(10_100L, g.remainingMs(100) + 100)
         assertTrue(g.applyBoost(Boost.SECOND_CHANCE, 200))
-        assertEquals(QuizGame.Phase.QUESTION, g.phase); assertEquals(id, g.question.id, "same question")
+        assertEquals(QuizGame.Phase.QUESTION, g.phase); assertNotEquals(id, g.question.id, "after a wrong answer the right one was shown: another question"); assertEquals(1, g.question.difficulty.let { 1 } )
         assertEquals(1, g.index); assertEquals(20_000L, g.remainingMs(200), "clock re-armed")
         assertEquals(90L, f.tokens); assertEquals(listOf(Boost.SECOND_CHANCE to "g1"), f.charged)
         g.answer(false, 200); g.next(300)
@@ -72,8 +72,9 @@ class QuizBoostsTest {
     }
 
     @Test fun insufficientBalanceLeavesTheGameUntouched() {
-        val f = Fake(tokens = 5); val g = game(f); g.answer(false); g.next(0)
+        val f = Fake(tokens = 10); val g = game(f); g.answer(false); g.next(0)
         assertEquals(QuizGame.Phase.LOST_OFFER, g.phase)
+        f.tokens = 5                                    // spent elsewhere during the offer
         assertFalse(g.applyBoost(Boost.SECOND_CHANCE, 10))
         assertEquals("Jetons insuffisants.", g.lastBoostRefusal)
         assertEquals(QuizGame.Phase.LOST_OFFER, g.phase); assertEquals(5L, f.tokens); assertTrue(f.charged.isEmpty())
@@ -85,13 +86,63 @@ class QuizBoostsTest {
         assertTrue(g.beginJoker(Joker.PHONE, 0)); assertTrue(g.finishPhone(null, null, 0))
         assertFalse(g.canBoost(Boost.EXTRA_JOKER), "the phone joker is never given back")
         assertTrue(g.useFifty()); assertFalse(g.canUse(Joker.FIFTY))
+        assertFalse(g.canBoost(Boost.EXTRA_JOKER), "the 50:50 of THIS question is not given back on it")
+        g.answer(true); g.next(0)                       // question 2: the old 50:50 can come back
         assertTrue(g.applyBoost(Boost.EXTRA_JOKER, 0)); assertTrue(g.canUse(Joker.FIFTY)); assertTrue(Joker.PHONE in g.jokersUsed)
         assertTrue(g.useFifty())
         assertTrue(g.beginJoker(Joker.AUDIENCE, 0)); assertTrue(g.finishAudience(null, 0))
-        assertTrue(g.applyBoost(Boost.EXTRA_JOKER, 0)); assertTrue(g.canUse(Joker.AUDIENCE) || g.canUse(Joker.FIFTY))
+        assertTrue(g.applyBoost(Boost.EXTRA_JOKER, 0)); assertTrue(g.canUse(Joker.AUDIENCE)); assertFalse(g.canUse(Joker.FIFTY) && g.removed.isEmpty())
         assertFalse(g.canBoost(Boost.EXTRA_JOKER), "at most twice per game")
         assertFalse(g.applyBoost(Boost.EXTRA_JOKER, 0)); assertEquals(80L, f.tokens)
         assertEquals(2, g.boostsUsed[Boost.EXTRA_JOKER])
+    }
+
+    @Test fun fiftyFiftyNeverLeavesFewerThanTwoChoicesEvenWithTheExtraJoker() {
+        for (seed in 1L..20L) {
+            val f = Fake()
+            val g = QuizGame(qs, seed = seed, boosts = f, gameId = "g", swapProvider = swap).also { it.start(0) }
+            assertTrue(g.useFifty()); val first = g.removed
+            assertEquals(2, first.size); assertFalse(g.question.answer in first)
+            assertFalse(g.canBoost(Boost.EXTRA_JOKER)); assertFalse(g.applyBoost(Boost.EXTRA_JOKER, 0))
+            assertFalse(g.useFifty()); assertEquals(first, g.removed, "a second 50:50 changes nothing")
+            // even with the audience joker spent and bought back on the same question the 50:50 stays refused
+            assertTrue(g.beginJoker(Joker.AUDIENCE, 0)); assertTrue(g.finishAudience(null, 0))
+            assertTrue(g.applyBoost(Boost.EXTRA_JOKER, 0)); assertTrue(g.canUse(Joker.AUDIENCE))
+            assertFalse(g.useFifty()); assertEquals(first, g.removed)
+            assertTrue(4 - g.removed.size >= 2)
+        }
+    }
+
+    @Test fun secondChanceAfterWrongNeedsAReplacementQuestionElseNotOfferedOrCharged() {
+        val none = Fake(); val g = game(none, provider = { null }); g.answer(false); g.next(0)
+        assertEquals(QuizGame.Phase.LOST_OFFER, g.phase)
+        val id = g.question.id
+        assertFalse(g.applyBoost(Boost.SECOND_CHANCE, 5)); assertEquals("Plus de question de remplacement.", g.lastBoostRefusal)
+        assertEquals(100L, none.tokens); assertEquals(id, g.question.id); assertEquals(QuizGame.Phase.LOST_OFFER, g.phase)
+        val h = game(Fake(), provider = null); h.answer(false); h.next(0)
+        assertEquals(QuizGame.Phase.FINISHED, h.phase, "no way to draw another question: no offer")
+        val t = game(Fake(), provider = { null }); t.tick(20_000)
+        assertEquals(QuizGame.Phase.LOST_OFFER, t.phase, "a time-out keeps the same question: offered without a provider")
+    }
+
+    @Test fun secondChanceAfterTimeoutKeepsTheSameQuestion() {
+        val f = Fake(); val g = game(f, provider = null); val id = g.question.id
+        assertTrue(g.tick(20_000)); assertTrue(g.applyBoost(Boost.SECOND_CHANCE, 21_000))
+        assertEquals(id, g.question.id); assertEquals(QuizGame.Phase.QUESTION, g.phase); assertEquals(90L, f.tokens)
+    }
+
+    @Test fun lostOfferOnlyWhenTheBalanceCoversTheSecondChance() {
+        val g = game(Fake(tokens = 5)); g.answer(false); g.next(0)
+        assertEquals(QuizGame.Phase.FINISHED, g.phase, "poor: no offer")
+        val ok = game(Fake(tokens = 10)); ok.answer(false); ok.next(0)
+        assertEquals(QuizGame.Phase.LOST_OFFER, ok.phase)
+    }
+
+    @Test fun phoneStateNeverCarriesTheBalance() {
+        val g = game(Fake(tokens = 77))
+        @Suppress("UNCHECKED_CAST") val b = Json.obj(g.toJson(0))["boosts"] as Map<String, Any?>
+        assertFalse("balance" in b); assertTrue("costs" in b); assertTrue("available" in b)
+        assertFalse(g.toJson(0).contains("77"))
     }
 
     @Test fun swapQuestionOnceSameDifficultyAndNotAfterAJoker() {
@@ -173,8 +224,16 @@ class QuizBoostsTest {
         assertNull(r.hostBoost(Boost.SECOND_CHANCE)); assertEquals(QuizGame.Phase.QUESTION, g.phase)
         now += 20_000; r.tick(); now += QuizGame.LOST_OFFER_MS; r.tick()
         assertEquals(QuizRoom.Stage.FINISHED, r.stage)
-        val r2 = room(Fake(tokens = 0)); assertNull(r2.startGame(seed = 3))
+        val r2 = room(Fake(tokens = 5)); assertNull(r2.startGame(seed = 3))
         assertEquals("Jetons insuffisants.", r2.hostBoost(Boost.SWAP_QUESTION))
+    }
+
+    @Test fun aSwapThatIsNotPaidDoesNotReserveTheDrawnQuestion() {
+        val f = Fake(tokens = 5); val r = room(f); assertNull(r.startGame(seed = 3))
+        val g = r.game!!; val id = g.question.id
+        repeat(3) { assertEquals("Jetons insuffisants.", r.hostBoost(Boost.SWAP_QUESTION)) }
+        assertEquals(id, g.question.id); assertTrue(f.charged.isEmpty())
+        f.tokens = 100; assertNull(r.hostBoost(Boost.SWAP_QUESTION)); assertNotEquals(id, g.question.id)
     }
 
     @Test fun stakeUnitIsChallengePointsNeverTokens() {

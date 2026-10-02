@@ -18,7 +18,15 @@ interface QuizBoosts {
     fun cost(b: Boost): Long
     /** Tokens the player holds. */
     fun balance(): Long
-    /** Debits [b] for the game [gameId]; false (nothing taken) when the balance is too low. */
+    /**
+     * Debits [b] for the game [gameId]; false (nothing taken) when the balance is too low.
+     *
+     * Idempotence required from the paying implementation: a purchase is identified by
+     * (gameId, [b], purchase number within that game, at most [Boost.maxPerGame]). A retry of the same
+     * purchase (network, double tap, replayed request) must never debit twice and must return the same
+     * result; only a new purchase number may debit again. The game itself only calls this once per
+     * accepted purchase, and applies the effect only when the result is true.
+     */
     fun charge(b: Boost, gameId: String): Boolean
 }
 

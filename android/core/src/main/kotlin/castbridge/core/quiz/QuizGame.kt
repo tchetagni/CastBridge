@@ -157,7 +157,7 @@ class QuizGame(
 
     /** 50:50: removes two wrong answers (never the right one). */
     fun useFifty(): Boolean {
-        if (!canUse(Joker.FIFTY)) return false
+        if (!canUse(Joker.FIFTY) || removed.isNotEmpty()) return false  // never two 50:50 on one question: 2 choices at least stay
         val wrong = (0..3).filter { it != question.answer }.shuffled(rng)
         removed = setOf(wrong[0], wrong[1])
         jokersUsed += Joker.FIFTY; return true
@@ -217,7 +217,9 @@ class QuizGame(
 
     /** A lost question: offers the second chance for [LOST_OFFER_MS] when it can be bought, else the game ends at once. */
     private fun lose(e: End, now: Long) {
-        val can = !practice && boosts.available(Boost.SECOND_CHANCE) && (boostCounts[Boost.SECOND_CHANCE] ?: 0) < Boost.SECOND_CHANCE.maxPerGame
+        // after a wrong answer the right one was shown: the second chance gives ANOTHER question, so it needs a swap provider
+        val can = !practice && boosts.available(Boost.SECOND_CHANCE) && (boostCounts[Boost.SECOND_CHANCE] ?: 0) < Boost.SECOND_CHANCE.maxPerGame &&
+            (e != End.WRONG || swapProvider != null) && boosts.balance() >= boosts.cost(Boost.SECOND_CHANCE)
         if (can) { pendingEnd = e; phase = Phase.LOST_OFFER; deadline = now + LOST_OFFER_MS; activeJoker = null } else finish(e)
     }
 
@@ -226,11 +228,20 @@ class QuizGame(
     private fun swapUntouched() = removed.isEmpty() && audience == null && phone == null
 
     /** Whether [b] can be bought right now: offered by the provider, under its per-game limit, in the right phase, never in practice. */
-    fun canBoost(b: Boost): Boolean {
-        if (practice || !boosts.available(b) || (boostCounts[b] ?: 0) >= b.maxPerGame) return false
+    fun canBoost(b: Boost): Boolean = canBoost(b, boosts.available(b))
+
+    /** The joker an extra one gives back: a 50:50 spent on an EARLIER question, else the public vote; never the 50:50 of this question. */
+    private fun restorableJoker(): Joker? = when {
+        Joker.FIFTY in jokersUsed && removed.isEmpty() -> Joker.FIFTY
+        Joker.AUDIENCE in jokersUsed -> Joker.AUDIENCE
+        else -> null
+    }
+
+    private fun canBoost(b: Boost, offered: Boolean): Boolean {
+        if (practice || !offered || (boostCounts[b] ?: 0) >= b.maxPerGame) return false
         return when (b) {
             Boost.SECOND_CHANCE -> phase == Phase.LOST_OFFER
-            Boost.EXTRA_JOKER -> phase == Phase.QUESTION && (Joker.FIFTY in jokersUsed || Joker.AUDIENCE in jokersUsed)
+            Boost.EXTRA_JOKER -> phase == Phase.QUESTION && restorableJoker() != null
             Boost.SWAP_QUESTION -> phase == Phase.QUESTION && swapProvider != null && swapUntouched()
         }
     }
@@ -249,12 +260,12 @@ class QuizGame(
     fun applyBoost(b: Boost, now: Long): Boolean {
         lastBoostRefusal = null
         if (!canBoost(b)) { lastBoostRefusal = "Cette option n'est pas disponible maintenant."; return false }
-        val replacement = if (b == Boost.SWAP_QUESTION) swapProvider!!.invoke(question) ?: run { lastBoostRefusal = "Plus de question de remplacement."; return false } else null
+        val replacement = if (b == Boost.SWAP_QUESTION || (b == Boost.SECOND_CHANCE && pendingEnd == End.WRONG)) swapProvider?.invoke(question) ?: run { lastBoostRefusal = "Plus de question de remplacement."; return false } else null
         if (!boosts.charge(b, gameId)) { lastBoostRefusal = "Jetons insuffisants."; return false }
         boostCounts[b] = (boostCounts[b] ?: 0) + 1
         when (b) {
-            Boost.SECOND_CHANCE -> { pendingEnd = null; enterQuestion(index, now) }
-            Boost.EXTRA_JOKER -> jokersUsed.remove(if (Joker.FIFTY in jokersUsed) Joker.FIFTY else Joker.AUDIENCE)
+            Boost.SECOND_CHANCE -> { pendingEnd = null; replacement?.let { pool[index] = it }; enterQuestion(index, now) }  // wrong: new question (the right one was shown); time-out: same one
+            Boost.EXTRA_JOKER -> jokersUsed.remove(restorableJoker())
             Boost.SWAP_QUESTION -> { pool[index] = replacement!!; enterQuestion(index, now) }
         }
         return true
@@ -293,17 +304,30 @@ class QuizGame(
             "winnings" to winnings,
             "boosted" to boosted,
             "boosts" to linkedMapOf(
-                "available" to Boost.values().associate { it.name to canBoost(it) },
+                "available" to Boost.values().associate { it.name to canBoost(it, offered(now)[it] == true) },
                 "used" to boostsUsed.mapKeys { it.key.name },
-                "costs" to Boost.values().associate { it.name to boosts.cost(it) },
-                "max" to Boost.values().associate { it.name to it.maxPerGame },
-                "balance" to boosts.balance()),
+                "costs" to Boost.values().associate { it.name to costsOf(now)[it] },
+                "max" to Boost.values().associate { it.name to it.maxPerGame }),  // the balance stays on the TV, never sent to phones
             "safe" to ladder.safeAmount(index),
             "remainingMs" to remainingMs(now),
             "ladder" to ladder.amounts,
             "safeLevels" to ladder.safeLevels.sorted(),
         )
     }
+
+    private var snapAt = Long.MIN_VALUE
+    private var snapOffered: Map<Boost, Boolean> = emptyMap()
+    private var snapCosts: Map<Boost, Long> = emptyMap()
+
+    /** Provider answers cached for [SNAP_MS]: the state is built for every phone, the provider (wallet) is not asked each time. */
+    private fun snapshot(now: Long) {
+        if (snapAt != Long.MIN_VALUE && now - snapAt in 0 until SNAP_MS) return
+        snapAt = now
+        snapOffered = Boost.values().associateWith { boosts.available(it) }
+        snapCosts = Boost.values().associateWith { boosts.cost(it) }
+    }
+    private fun offered(now: Long): Map<Boost, Boolean> { snapshot(now); return snapOffered }
+    private fun costsOf(now: Long): Map<Boost, Long> { snapshot(now); return snapCosts }
 
     fun toJson(now: Long): String = Json.write(toMap(now))
 
@@ -312,6 +336,7 @@ class QuizGame(
         const val MAX_SECONDS = 20
         /** Time to accept a second chance after a lost question. */
         const val LOST_OFFER_MS = 10_000L
+        private const val SNAP_MS = 1_000L
         /** 20 s for every question. */
         val DEFAULT_TIMERS = IntArray(15) { MAX_SECONDS }
         /** Kept for callers of the former "no clock" mode: practice also has the 20 s countdown now. */
