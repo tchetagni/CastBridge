@@ -1,3 +1,5 @@
+> **w5-21 (documents juridiques de la boutique) REPORTÉ jusqu'au 31 décembre 2026** (décision du propriétaire). Ne pas le lancer avant ; les cahiers qui le citent n'en dépendent pas pour le code.
+
 # Vague 5 pour agents Sonnet/Haiku — index (2026-10-02) : boutique, locations en ligne, jetons du Quiz, espèces et bons
 
 Source : `docs/coordination/DESIGN-W5-BOUTIQUE-LOCATIONS-JETONS.md` (lire en entier avant tout cahier). Protocole et règles communes : `docs/COORDINATION.md` et l'en-tête de `SONNET-WAVES-INDEX.md` (branche `claude/<id>` depuis `origin/integration/agents`, rapport `docs/agent-reports/<id>.md`, jamais `main` ni le serveur ni un secret, français, « CastBridge » / « CastBridge-TV »). **Ce fichier ne modifie pas les index des vagues 1-4** ; il liste au § « Changements aux cahiers w4 » ce que la vague 5 **retire ou amende** dans les cahiers w4 (sans les éditer).

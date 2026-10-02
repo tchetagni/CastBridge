@@ -1,3 +1,5 @@
+> **REPORTÉ jusqu'au 31 décembre 2026 (décision du propriétaire, 2026-10-02 : tout le juridique est reporté) : ne pas lancer ce cahier avant cette date.**
+
 # w3-13 — Brouillons juridiques et de vie privée (à faire valider par un juriste)
 
 <!-- routage Fable 2026-10-02 -->

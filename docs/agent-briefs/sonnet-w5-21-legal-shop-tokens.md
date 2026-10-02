@@ -1,3 +1,5 @@
+> **REPORTÉ jusqu'au 31 décembre 2026 (décision du propriétaire, 2026-10-02) : ne pas lancer ce cahier avant cette date.**
+
 # w5-21 — Brouillons juridiques de la boutique : CGV boutique, conditions des bons de recharge, registre des traitements, indicateurs « jetons et mineurs » (pas un avis juridique)
 
 <!-- routage Fable 2026-10-02 -->

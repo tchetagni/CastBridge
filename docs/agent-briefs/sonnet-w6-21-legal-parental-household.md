@@ -1,3 +1,5 @@
+> **REPORTÉ jusqu'au 31 décembre 2026 (décision du propriétaire, 2026-10-02 : tout le juridique est reporté) : ne pas lancer ce cahier avant cette date.**
+
 # w6-21 — Brouillons juridiques W6 : information du foyer (contrôle parental de toute la TV), divulgation de l'accès aux données d'utilisation, politique de confidentialité (parental, mode minimal, session super), registre des traitements
 
 <!-- routage Fable 2026-10-02 -->

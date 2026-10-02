@@ -1,3 +1,5 @@
+> **REPORTÉ jusqu'au 31 décembre 2026 (décision du propriétaire, 2026-10-02 : tout le juridique est reporté) : ne pas lancer ce cahier avant cette date.**
+
 # w10-16 — Brouillons juridiques : accord producteur, charte de modération, CGV œuvres et pack Langues, registre des traitements, liste de contrôle pour le juriste
 
 <!-- routage Fable 2026-10-02 -->
