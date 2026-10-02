@@ -1,20 +1,19 @@
 package castbridge.core.trust
 
+import castbridge.core.phone.CastAction
 import castbridge.core.phone.MediaKind
 
 /**
- * « Copier et lire sur la TV » of « Ouvrir avec CastBridge »: playback starts at once by streaming from the phone (the cast flow's LIVE
- * action) while the normal background copy goes to the TV library. Pure: the dialog feeds facts in and draws what comes out
- * (table-tested in `CopyAndPlayTest`); no state decision lives in the activity.
+ * « Copier sur la TV et lire » of « Ouvrir avec CastBridge »: it is the EXISTING cast action [CastAction.COPY] (the file is copied to the TV,
+ * which starts playing as soon as it holds enough; same path as the library menu and the cast sheet). This object only decides the state of the
+ * button. Pure: the dialog feeds facts in and draws what comes out (table-tested in `CopyAndPlayTest`).
  *
- * The copy part follows the same rules as « Copier vers la TV » ([SendChoices]): a copy is promised ([Decision.copies]) only when the
- * TV will take it. A trial TV closes uploads but allows cast streaming (`TrialPolicy`), so the button degrades to « Lire sur la TV ».
- * The phone does not learn the TV edition yet (no `SendGuard`/proof in this build): [Edition.UNKNOWN] behaves like « Copier » and the
- * TV stays the judge (its refusal is reported by the copy itself).
+ * A trial TV closes uploads but allows cast streaming (`TrialPolicy`), so the button degrades to [CastAction.LIVE] (play only, no copy) with
+ * an explanation. The phone does not learn the TV edition yet (no `SendGuard`/proof in this build): [Edition.UNKNOWN] behaves like COPY and the
+ * TV stays the judge (the trial TV refuses the upload itself, the failure is reported by [CastSession]).
  */
 object CopyAndPlay {
-    const val LABEL = "Copier et lire sur la TV"
-    const val LABEL_PLAY_ONLY = "Lire sur la TV"
+    val LABEL = CastAction.COPY.label
     const val TRIAL_NOTE = "La copie n'est pas disponible en version d'essai : le fichier sera seulement lu sur la TV."
     const val BLUETOOTH_ONLY = "Lire sur la TV demande le Wi-Fi : la liaison Bluetooth seule ne suffit pas."
     const val NO_TV_READY = "Aucune TV prête : voyez l'état de la liaison ci-dessus."
@@ -27,11 +26,11 @@ object CopyAndPlay {
     /** [ipRoute]: the transport has a Wi-Fi/IP base (false = Bluetooth only, where streaming from the phone is impossible). */
     data class Facts(val link: Link, val ipRoute: Boolean, val edition: Edition, val kind: MediaKind)
 
-    /** What the dialog draws: [label] of the button, [copies] whether the background copy is enqueued too, [reason] the one explanation line. */
-    sealed class Decision(val label: String, val copies: Boolean, val reason: String?) {
-        class Enabled : Decision(LABEL, true, null)
-        class Degraded(reasonText: String) : Decision(LABEL_PLAY_ONLY, false, reasonText)
-        class Disabled(reasonText: String) : Decision(LABEL, false, reasonText)
+    /** What the dialog draws: [label] of the button, [action] the cast action to start (COPY, or LIVE when the copy is closed), [reason] the one explanation line. */
+    sealed class Decision(val label: String, val action: CastAction, val reason: String?) {
+        class Enabled : Decision(LABEL, CastAction.COPY, null)
+        class Degraded(reasonText: String) : Decision(LABEL, CastAction.LIVE, reasonText)
+        class Disabled(reasonText: String) : Decision(LABEL, CastAction.COPY, reasonText)
     }
 
     /** The link kind from the dialog's own facts and what [SendChoices.decide] answered (same states as « Copier »). */

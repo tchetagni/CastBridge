@@ -39,7 +39,6 @@ import castbridge.sender.player.CastTarget
 import castbridge.sender.player.Media
 import castbridge.sender.player.PlayItem
 import castbridge.sender.player.PlayerActivity
-import castbridge.core.phone.CastAction
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -82,7 +81,7 @@ class OpenWithActivity : ComponentActivity() {
                     session = session != null, sessionName = session?.tv?.name, btOnly = session != null && session.base == null,
                     pinTvName = pinTv, pinStored = pinTv != null && TvAuth.isUsable(pins.get(pinTv)), pinCheck = check)
                 val choice = SendChoices.decide(facts)
-                // « Copier et lire sur la TV »: every state decision is CopyAndPlay's (this build does not learn the TV edition: UNKNOWN, the TV judges the copy)
+                // « Copier sur la TV et lire »: every state decision is CopyAndPlay's (this build does not learn the TV edition: UNKNOWN, the TV judges the copy)
                 val both = CopyAndPlay.decide(CopyAndPlay.Facts(CopyAndPlay.linkOf(facts, choice), ipRoute = session == null || session.base != null,
                     edition = CopyAndPlay.Edition.UNKNOWN, kind = kind))
                 AlertDialog(
@@ -98,7 +97,7 @@ class OpenWithActivity : ComponentActivity() {
                             if (choice.action != SendAction.NONE)
                                 Button({ openApp(choice.action) }, Modifier.fillMaxWidth()) { Text(choice.action.label) }
                             Button({ send(uri, name, move = false, choice, pinTv, pins) }, Modifier.fillMaxWidth(), enabled = choice.copyEnabled) { Text("Copier vers la TV") }
-                            Button({ copyAndPlay(uri, name, size, both, choice, session, pinTv, pins) }, Modifier.fillMaxWidth(), enabled = both !is CopyAndPlay.Decision.Disabled) { Text(both.label) }
+                            Button({ copyAndPlay(uri, name, size, both, session, pinTv, pins) }, Modifier.fillMaxWidth(), enabled = both !is CopyAndPlay.Decision.Disabled) { Text(both.label) }
                             both.reason?.let { Text(it, style = MaterialTheme.typography.bodySmall) }
                             OutlinedButton({ send(uri, name, move = true, choice, pinTv, pins) }, Modifier.fillMaxWidth(), enabled = choice.moveEnabled) {
                                 Text("Déplacer vers la TV")
@@ -174,43 +173,25 @@ class OpenWithActivity : ComponentActivity() {
     }
 
     /**
-     * « Copier et lire sur la TV »: (1) playback starts at once by streaming from the phone (the cast flow's LIVE action, [CastSession]),
-     * (2) the normal background copy is enqueued as « Copier vers la TV » does ([send]'s routes, move = false) unless [how] says the copy is closed
-     * (trial TV). Each part fails alone: a failed start leaves the copy running, a failed enqueue leaves the playback running; the user is told in one sentence.
-     * The phone serves the stream while the copy runs: [CastSession] and the upload service keep it alive until the copy ends.
+     * « Copier sur la TV et lire »: the existing cast action ([CastAction.COPY], or LIVE when [how] degrades it for a trial TV), started through
+     * [CastSession] exactly like the library menu and the cast sheet (upload, TV plays once it holds enough, notifications, failures are CastSession's).
      */
-    private fun copyAndPlay(uri: Uri, name: String, size: Long, how: CopyAndPlay.Decision, choice: SendChoice, session: castbridge.core.trust.LinkSession?, pinTv: String?, pins: PinStore) {
+    private fun copyAndPlay(uri: Uri, name: String, size: Long, how: CopyAndPlay.Decision, session: castbridge.core.trust.LinkSession?, pinTv: String?, pins: PinStore) {
         lifecycleScope.launch {
             val item = withContext(Dispatchers.IO) { Media.describe(this@OpenWithActivity, uri, intent.type) } ?: PlayItem(uri, name, intent.type, MediaKind.of(intent.type, name), size)
             val target = castTarget(session, pinTv, pins)
-            val playError: String? = if (target == null) "la TV n'est pas encore jointe en Wi-Fi" else runCatching {
-                CastSession.start(applicationContext, target, CastAction.LIVE, item)
+            val error: String? = if (target == null) "la TV n'est pas encore jointe en Wi-Fi" else runCatching {
+                CastSession.start(applicationContext, target, how.action, item)
             }.exceptionOrNull()?.let { it.message ?: "erreur inattendue" }
-            var copyError: String? = null
-            if (how.copies) {
-                withContext(Dispatchers.IO) { runCatching {
-                    contentResolver.takePersistableUriPermission(uri, Intent.FLAG_GRANT_READ_URI_PERMISSION)
-                } }
-                when (choice.route) {
-                    SendRoute.QUEUE -> runCatching { TransferQueue.enqueue(this@OpenWithActivity, uri, name, size, false) }.onFailure { copyError = it.message ?: "erreur inattendue" }
-                    SendRoute.PIN_UPLOAD -> runCatching { UploadService.start(this@OpenWithActivity, uri, name, pinTv!!, null, pins.get(pinTv), autoPlay = false, move = false) }
-                        .onFailure { copyError = it.message ?: "erreur inattendue" }
-                    SendRoute.NONE -> copyError = "aucune TV prête"
-                }
+            if (error != null) {
+                Toast.makeText(this@OpenWithActivity, "Impossible de démarrer : $error", Toast.LENGTH_LONG).show()
+                return@launch
             }
-            val said = when {
-                playError != null && copyError != null -> "Rien n'a pu démarrer : lecture ($playError), copie ($copyError)."
-                playError != null -> "La lecture n'a pas pu démarrer ($playError) ; la copie continue en arrière-plan : voir la notification."
-                copyError != null -> "La lecture est lancée sur la TV, mais la copie n'a pas pu être mise en file ($copyError)."
-                how.copies -> "Lecture lancée sur la TV ; la copie continue en arrière-plan : gardez le téléphone connecté jusqu'à la notification de fin."
-                else -> "Lecture lancée sur la TV (sans copie)."
-            }
-            Toast.makeText(this@OpenWithActivity, said, Toast.LENGTH_LONG).show()
-            if (playError == null) runCatching {
+            runCatching {
                 startActivity(Intent(this@OpenWithActivity, PlayerActivity::class.java).setAction(PlayerActivity.ACTION_REMOTE)
                     .addFlags(Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_SINGLE_TOP))
             }
-            if (playError == null || copyError == null) finish()
+            finish()
         }
     }
 
