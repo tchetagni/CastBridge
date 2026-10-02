@@ -57,6 +57,9 @@ class TransferProgress(
 
     private class Live(var item: Item, var lastEmit: Long, var sampleAt: Long, var sampleBytes: Long)
 
+    /** Interval between two progress repaints of one transfer; [PlaybackGovernor] raises it while a video plays (notification + home chip cost CPU). */
+    @Volatile var emitEveryMs: Long = minEmitMs
+
     private val live = LinkedHashMap<String, Live>()
     private val ended = LinkedHashMap<String, Item>()
     private val seqOf = HashMap<String, Int>()
@@ -103,7 +106,7 @@ class TransferProgress(
             }
             l.item = l.item.copy(received = received, updatedAt = t, bytesPerSec = bps, message = null)
             val last = l.item.total in 1..received
-            if (!last && t - l.lastEmit < minEmitMs) return
+            if (!last && t - l.lastEmit < emitEveryMs) return
             l.lastEmit = t
             l.item
         }

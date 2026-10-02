@@ -88,6 +88,8 @@ class ReceiverServer(
     val progress: castbridge.core.xfer.TransferProgress = castbridge.core.xfer.TransferProgress(),
     /** The name of a trusted phone from its address (what [tokenAuth] returns), for « depuis … » in the reception progress; null = unknown. */
     private val sourceName: (String) -> String? = { null },
+    /** Lowers the receive/hash/write threads while a video plays (the TV app: Process.setThreadPriority); see [castbridge.core.xfer.PlaybackPriority]. */
+    private val receivePriority: castbridge.core.xfer.ThreadPriorityPort = castbridge.core.xfer.ThreadPriorityPort.NONE,
 ) : NanoHTTPD(port) {
 
     override fun createClientHandler(finalAccept: java.net.Socket, inputStream: java.io.InputStream): NanoHTTPD.ClientHandler =
@@ -113,6 +115,35 @@ class ReceiverServer(
         h.finalSizeOf = { n, sz -> findFinalOrOrigin(n, sz)?.size }
     }
     private val chunking = java.util.concurrent.atomic.AtomicInteger()
+    /** The file the TV plays while it is still arriving ([playIncomplete]), null otherwise. */
+    @Volatile private var growingName: String? = null
+    /**
+     * « La lecture d'abord » (docs/agent-reports/fluid-playback-during-copy.md): ONE policy, asked by every receive path. While a video plays,
+     * a copy runs at background priority, capped, on fewer connections, with spaced fsync/progress and a paced (never skipped) final check;
+     * the copy that feeds a growing playback is never starved. At rest nothing changes.
+     */
+    private val playback = castbridge.core.xfer.PlaybackGovernor(::playbackSignal,
+        castbridge.core.xfer.PlaybackPriority.Normal(transfers.maxStreams, cfg.removableSyncBytes), receivePriority,
+        onChange = { d -> progress.emitEveryMs = d.progressEveryMs }).also { g ->
+        transfers.streamLimit = { g.current().maxStreams }
+        transfers.persistEveryMs = { g.current().statePersistMs }
+    }
+
+    private fun playbackSignal(): castbridge.core.xfer.PlaybackSignal {
+        val ps = player.state()
+        if (ps.state != "playing" && ps.state != "buffering") return castbridge.core.xfer.PlaybackSignal(ps.state, ps.name)
+        val g = growingName?.takeIf { n -> ps.name != null && (ps.name == n || volumes.volumes().any { it.storedName(n) == ps.name }) }
+        val part = g?.let { findPart(it) }
+        val total = part?.let { h -> (h.st as? FileStore)?.let { Meta.read(it.dir, h.name) } }
+        val size = total ?: ps.name?.let { n -> findFinal(n)?.size } ?: 0L
+        return castbridge.core.xfer.PlaybackSignal(ps.state, ps.name, growing = part != null, playheadMs = ps.posMs, durMs = ps.durMs, fileBytes = size,
+            writeBps = transfers.stats.bytesPerSec(), feedBps = g?.let { meters[it]?.bytesPerSec() } ?: 0L, contiguousBytes = part?.size ?: 0L)
+    }
+
+    /** The TV player changed state (started, paused, stopped): the policy is read again at once, off the caller's thread (it may run deferred fsyncs). */
+    fun playbackChanged() {
+        Thread({ runCatching { playback.refresh() } }, "cb-playback-policy").apply { isDaemon = true; start() }
+    }
     /** What is being received right now, from every path (PUT /upload, /api/transfer, and Bluetooth through the app): the TV screen and notification read it. */
     /** Address of the trusted phone whose token authenticated the request this thread is serving (NanoHTTPD: one thread per request), else null. */
     private val tokenPhone = ThreadLocal<String?>()
@@ -514,6 +545,7 @@ class ReceiverServer(
                 val hit = findFinal(name)
                 if (hit != null) {
                     playingVolume = hit.v.id
+                    growingName = null
                     val f = hit.file
                     if (f != null) { Storage.markPlayed((hit.st as? FileStore)?.dir ?: f.parentFile, f.name); player.play(f, pos) }
                     else player.playSaf(hit.name, hit.size, pos)
@@ -527,13 +559,13 @@ class ReceiverServer(
                 val scheme = url.substringBefore("://", "").lowercase()
                 if ((scheme != "http" && scheme != "https") || url.length > 4096 || url.any { it.isWhitespace() }) return bad("http(s) url required")
                 val title = safeName(p["title"].orEmpty()) ?: "Depuis le téléphone"
-                playlist = null
+                playlist = null; growingName = null
                 player.playStream(url, title, (p["pos"]?.toLongOrNull() ?: 0).coerceAtLeast(0))
                 ok(info())
             }
             path == "/api/pause" -> { player.pause(); ok(info()) }
             path == "/api/resume" -> { player.resume(); ok(info()) }
-            path == "/api/stop" -> { playlist = null; player.stop(); ok(info()) }
+            path == "/api/stop" -> { playlist = null; player.stop(); growingName = null; playback.refresh(); ok(info()) }
             path == "/api/seek" -> { player.seek(p["pos"]?.toLongOrNull() ?: 0); ok(info()) }
             else -> json(Response.Status.NOT_FOUND, """{"error":"not found"}""")
         }
@@ -656,7 +688,7 @@ class ReceiverServer(
                     val meter = meters.getOrPut(name) { RateMeter() }
                     val input = s.inputStream
                     val out = try { st.openPart(o.name) } catch (e: IOException) { throw DiskError(e) }
-                    out.use {
+                    playback.receive(name).use { rx -> out.use {
                         // Full speed: fill a large block from the socket, then one disk write (no fsync per block; a removable
                         // drive is flushed every removableSyncBytes and at the end, see commit()).
                         val buf = ByteArray(cfg.uploadBufferBytes)
@@ -665,10 +697,14 @@ class ReceiverServer(
                         var sinceSync = 0L
                         fun flush() {
                             if (fill == 0) return
+                            val t0 = System.nanoTime()
                             try { out.write(buf, 0, fill) } catch (e: IOException) { throw DiskError(e) }
+                            transfers.stats.record(fill, System.nanoTime() - t0)      // the disk speed the policy caps against, measured on this path too
                             sinceSync += fill; fill = 0
                             progress.advance(pid, len - left + cur)
-                            if (v.kind == VolumeKind.REMOVABLE && sinceSync >= cfg.removableSyncBytes) {
+                            // while a video plays the periodic fsync is spaced out (bounded: SYNC_DEFER_FACTOR x); the fsync before the commit never changes
+                            val syncEvery = if (rx.decision.on) maxOf(rx.decision.syncEveryBytes, cfg.removableSyncBytes) else cfg.removableSyncBytes
+                            if (v.kind == VolumeKind.REMOVABLE && sinceSync >= syncEvery) {
                                 runCatching { (out as? java.io.FileOutputStream)?.fd?.sync() }; sinceSync = 0
                             }
                         }
@@ -679,14 +715,18 @@ class ReceiverServer(
                                 if (r < 0) break
                                 fill += r; left -= r
                                 meter.add(r.toLong())
+                                rx.onBytes(r)                        // priority and rate of « la lecture d'abord » (no-op at rest)
                                 if (fill == buf.size) flush()
                             }
                         } catch (e: DiskError) { throw e } catch (e: IOException) {
                             flush()                                  // the network dropped: keep what arrived, the phone resumes from there
+                            // an fsync spaced out because of playback is owed to what arrived: done as soon as playback stops
+                            if (v.kind == VolumeKind.REMOVABLE && sinceSync > 0 && rx.decision.on)
+                                playback.deferred.defer("sync:${v.id}:${o.name}") { if (st.partSize(o.name) > 0) st.syncPart(o.name) }
                             throw e
                         }
                         flush()
-                    }
+                    } }
                     if (st.partSize(o.name) == total) {
                         // Last look before the commit (which replaces a final of the same name): a finished homonym of another size is another file. Decision: the
                         // partial copy is KEPT and the phone gets 409 NAME_TAKEN (nothing is overwritten, nothing is deleted, no duplicate name is invented).
@@ -773,7 +813,8 @@ class ReceiverServer(
             if (st == null) { why = "not supported on this volume"; continue }
             val w = ensureRoom(c.volume, m.size, xferCfg)
             if (w != null) { why = w; continue }
-            return castbridge.core.xfer.Allocation.At(st.dir, c.volume.storedName(m.name), c.volume.id)
+            return castbridge.core.xfer.Allocation.At(st.dir, c.volume.storedName(m.name), c.volume.id,
+                preallocate = castbridge.core.xfer.PartAssembler.preallocates(effectiveFs(c.volume)))
         }
         val reason = why ?: "no storage available"
         return if (reason == "not supported on this volume") castbridge.core.xfer.Allocation.Refused(501, reason)
@@ -788,13 +829,16 @@ class ReceiverServer(
         val len = s.headers["content-length"]?.toLongOrNull() ?: return bad("content-length required")
         val sha = s.headers["x-cb-sha256"].orEmpty().lowercase()
         if (idx !in 0 until sess.manifest.blocks) return bad("bad block index")
-        if (chunking.get() >= transfers.maxStreams || !transfers.mayAccept(sess.manifest.length(idx).toLong()))
-            return json(status(429), """{"error":"busy","retryMs":250,"writeBps":${transfers.stats.bytesPerSec()}}""")
+        // fewer connections while a video plays (PlaybackPriority): the extra ones are told « busy », the phone's controller backs off
+        if (chunking.get() >= transfers.allowedStreams() || !transfers.mayAccept(sess.manifest.length(idx).toLong()))
+            return json(status(429), """{"error":"busy","retryMs":${playback.current().busyRetryMs},"writeBps":${transfers.stats.bytesPerSec()}}""")
         chunking.incrementAndGet()
         try {
             val a = sess.assembler
-            val r = p["slice"]?.let { k -> a.writeSlice(idx, k.toIntOrNull() ?: return bad("bad slice"), sha, s.inputStream, len) }
-                ?: a.writeBlock(idx, sha, s.inputStream, len, s.headers["x-cb-enc"].equals("gzip", true))
+            val r = playback.receive(sess.manifest.name).use { rx ->
+                p["slice"]?.let { k -> a.writeSlice(idx, k.toIntOrNull() ?: return bad("bad slice"), sha, s.inputStream, len) }
+                    ?: a.writeBlock(idx, sha, s.inputStream, len, s.headers["x-cb-enc"].equals("gzip", true), pace = rx::onBytes)
+            }
             return when (r) {
                 is castbridge.core.xfer.PartAssembler.Block.Ok -> {
                     if (!a.discard) {
@@ -828,7 +872,13 @@ class ReceiverServer(
         sess.finishing = true
         try {
             synchronized(FileLocks.of(LOCK_ROOT, name)) {
-                return when (val r = sess.assembler.finish(root, sess.diskName)) {
+                // the phone gave up waiting for a long read-back and asked again: the first call may have concluded meanwhile (never a 500 on a closed file)
+                if (transfers.session(sess.manifest.id) !== sess)
+                    return if (findFinalOrOrigin(name, sess.manifest.size)?.size == sess.manifest.size) ok("""{"done":true,"name":${q(name)}}""")
+                        else json(Response.Status.NOT_FOUND, """{"error":"unknown transfer"}""")
+                // the read-back is paced and runs at background priority while a video plays: slower, NEVER skipped (nothing is complete before it)
+                val verified = playback.verify(name).use { v -> sess.assembler.finish(root, sess.diskName, v::onBytes) }
+                return when (val r = verified) {
                     is castbridge.core.xfer.PartAssembler.Finish.Missing -> json(Response.Status.CONFLICT, transfers.stateJson(sess))
                     is castbridge.core.xfer.PartAssembler.Finish.Corrupt -> json(status(422), transfers.stateJson(sess))
                     castbridge.core.xfer.PartAssembler.Finish.RootMismatch -> bad("root mismatch")
@@ -1114,7 +1164,8 @@ class ReceiverServer(
         val used = pv?.let { l.used[it.id] } ?: 0
         val quota = pv?.let { quotaOf(it, used) } ?: 0
         return """{"files":${l.filesJson},"free":$free,"used":$used,"quota":$quota,"target":${q(cfg.target)},"volumes":${volumesJson(l)},""" +
-            """"player":{"state":${q(ps.state)},"name":${ps.name?.let(::q) ?: "null"},"pos":${ps.posMs},"dur":${ps.durMs}},"playlist":${playlistJson()}}"""
+            """"player":{"state":${q(ps.state)},"name":${ps.name?.let(::q) ?: "null"},"pos":${ps.posMs},"dur":${ps.durMs}},"playlist":${playlistJson()},""" +
+            """"playbackPriority":${playback.json()}}"""
     }
 
     private fun volumesJson(l: Listing = listing()): String {
@@ -1408,7 +1459,9 @@ class ReceiverServer(
         val head = s.method == Method.HEAD
         fun body(from: Long, to: Long): InputStream {
             val fs = src.st as? FileStore
-            val raw = if (fs != null) fs.fileOf(src.name).let { loc -> GrowingStream(loc.parentFile ?: fs.dir, loc.name, from, to, alive = { volumes.alive(src.v) }) }
+            // a byte not there yet: wait politely while the copy is alive (up to 2 min) instead of cutting the player after 30 s
+            val raw = if (fs != null) fs.fileOf(src.name).let { loc -> GrowingStream(loc.parentFile ?: fs.dir, loc.name, from, to, alive = { volumes.alive(src.v) },
+                    stillComing = { partBusy(name) }, maxWaitMs = STREAM_MAX_WAIT_MS) }
                 else BoundedStream(src.st.open(src.name, from), to - from + 1)
             return streamUse.track(src.name, raw)       // a reader pins the file: no rename / move / bin under it
         }
@@ -1453,7 +1506,9 @@ class ReceiverServer(
             return json(Response.Status.CONFLICT, """{"error":"buffering","received":$received,"needed":$needed,"size":$total}""")
         Storage.markPlayed(fs.dir, part.name)
         playingVolume = part.v.id
+        growingName = name
         player.playStream(streamUrl(name), name, pos)
+        playback.refresh()
         return ok(info())
     }
 
@@ -1495,6 +1550,8 @@ class ReceiverServer(
         const val MAX_EXT_BODY = 4 shl 20
         /** A partial copy written less than this long ago (or being written) is busy: /api/reset refuses to drop it. */
         const val PART_BUSY_MS = 60_000L
+        /** Longest a /stream/ reader waits for a byte while the copy is still alive (then the player's http-reconnect takes over). */
+        const val STREAM_MAX_WAIT_MS = 120_000L
         private val ADMIN_HTML: String by lazy {
             ReceiverServer::class.java.getResourceAsStream("/castbridge/admin.html")?.use { String(it.readBytes(), Charsets.UTF_8) }
                 ?: "<!doctype html><meta charset=utf-8><title>CastBridge TV</title><h1>CastBridge TV</h1><p>Page d'administration indisponible.</p>"

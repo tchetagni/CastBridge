@@ -26,7 +26,8 @@ class WriteStats(private val now: () -> Long = System::nanoTime) {
 }
 
 /**
- * The TV's side of one transfer: a preallocated file written in place, block by block, in any order, from several connections at once.
+ * The TV's side of one transfer: a file written in place (preallocated where that is free, see [preallocates]), block by block, in any order,
+ * from several connections at once.
  * Nothing is trusted: a block counts only once its SHA-256 matches what the phone announced; [finish] reads everything back from the
  * disk and compares again before the file takes its final name. State survives a restart of the app (map + hashes in a sidecar file).
  *
@@ -38,6 +39,8 @@ class PartAssembler private constructor(
     val stats: WriteStats, private val now: () -> Long,
     /** Bench only ("network alone"): bytes are received, hashed and dropped, nothing touches the disk. */
     val discard: Boolean = false,
+    /** Interval between two saves of the block map (spaced out while a video plays: an older map only means blocks sent again). */
+    private val persistEveryMs: () -> Long = { 1000L },
 ) {
     sealed class Block {
         object Ok : Block()
@@ -73,7 +76,7 @@ class PartAssembler private constructor(
     private fun release(idx: Int) = synchronized(this) { busy.remove(idx) }
 
     /** A whole block in one request. [wireLen] is the body length; [gzip] means the body is a gzip stream of the block. */
-    fun writeBlock(idx: Int, sha: String, input: InputStream, wireLen: Long, gzip: Boolean): Block {
+    fun writeBlock(idx: Int, sha: String, input: InputStream, wireLen: Long, gzip: Boolean, pace: (Int) -> Unit = {}): Block {
         if (idx !in 0 until manifest.blocks) return Block.Bad("bad block index")
         if (!Hash.isHex64(sha)) return Block.Bad("bad hash")
         val len = manifest.length(idx)
@@ -91,6 +94,7 @@ class PartAssembler private constructor(
             while (done < len) {
                 val r = try { src.read(buf, 0, minOf(buf.size, len - done)) } catch (e: IOException) { drain(counted); return if (gzip && e is java.util.zip.ZipException) Block.Bad("bad gzip") else Block.Interrupted(e) }
                 if (r < 0) { return Block.Bad("short body") }
+                pace(r)
                 md.update(buf, 0, r)
                 stats.queue(r.toLong())
                 try { writeAt(buf, r, pos0 + done) } catch (e: IOException) { stats.queue(-r.toLong()); return Block.DiskFail(e) }
@@ -141,7 +145,7 @@ class PartAssembler private constructor(
     fun slicesOf(idx: Int): List<Int> = synchronized(this) { sliceMap[idx]?.let { bs -> (0 until manifest.slices(idx)).filter { bs.get(it) } } ?: emptyList() }
 
     /** Everything is here and right: reads it all back, compares with the announced hashes, then renames to `<diskName>.part`. */
-    fun finish(root: String, diskName: String): Finish {
+    fun finish(root: String, diskName: String, pace: (Int) -> Unit = {}): Finish {
         touched = now()
         val miss = map.missing()
         if (miss.isNotEmpty()) return Finish.Missing(miss)
@@ -153,7 +157,8 @@ class PartAssembler private constructor(
             val md = MessageDigest.getInstance("SHA-256")
             for (i in 0 until manifest.blocks) {
                 md.reset()
-                readBlock(i) { b, n -> md.update(b, 0, n) }
+                // a data file shorter than the manifest (not preallocated, tail lost on a cut): those blocks are resent, it is not a disk failure
+                try { readBlock(i) { b, n -> pace(n); md.update(b, 0, n) } } catch (e: ShortRead) { bad += i; continue }
                 if (Hash.hex(md.digest()) != hs[i]) bad += i
             }
             if (bad.isNotEmpty()) { synchronized(this) { bad.forEach { map.clear(it); hashes[it] = null } }; persist(); return Finish.Corrupt(bad) }
@@ -190,12 +195,15 @@ class PartAssembler private constructor(
         var left = manifest.length(idx); var pos = manifest.offset(idx)
         while (left > 0) {
             val r = (ch ?: throw IOException("no data kept")).read(ByteBuffer.wrap(buf, 0, minOf(buf.size, left)), pos)
-            if (r <= 0) throw IOException("file shorter than expected")
+            if (r <= 0) throw ShortRead()
             sink(buf, r); left -= r; pos += r
         }
     }
 
-    private fun persistSoon() { val t = now(); if (t - lastPersist > 1000) { lastPersist = t; runCatching { persist() } } }
+    private fun persistSoon() { val t = now(); if (t - lastPersist > persistEveryMs()) { lastPersist = t; runCatching { persist() } } }
+
+    /** The data file ends before the block does. */
+    private class ShortRead : IOException("file shorter than expected")
 
     @Synchronized private fun persist() {
         if (discard) return
@@ -217,16 +225,24 @@ class PartAssembler private constructor(
     companion object {
         const val BUF = 256 * 1024
         const val SUB = ".cbx"
+        /**
+         * Is sizing the data file at once ([RandomAccessFile.setLength]) free on [fs]? On ext4/f2fs it makes a sparse file. On FAT32/exFAT/NTFS
+         * (Linux 5.15 of the reference TV: no sparse files, no exFAT valid-size) the kernel writes ZEROS over the whole size before the first block:
+         * 2 GB of extra writes on the key the player reads, minutes of saturated IO. Unknown: treated as FAT (the safe side).
+         */
+        fun preallocates(fs: castbridge.core.tv.Fs): Boolean = fs == castbridge.core.tv.Fs.EXT4 || fs == castbridge.core.tv.Fs.F2FS
 
         /** Opens (resuming what a previous run left) or creates the transfer's files in [dir]. Throws [IOException] if the disk refuses. */
-        fun open(dir: File, manifest: Manifest, stats: WriteStats = WriteStats(), now: () -> Long = System::currentTimeMillis, discard: Boolean = false): PartAssembler {
+        fun open(dir: File, manifest: Manifest, stats: WriteStats = WriteStats(), now: () -> Long = System::currentTimeMillis, discard: Boolean = false,
+                 preallocate: Boolean = true, persistEveryMs: () -> Long = { 1000L }): PartAssembler {
             if (discard) return PartAssembler(dir, manifest, File(dir, ".discard"), File(dir, ".discard"), stats, now, discard = true)
             val sub = File(dir, SUB).apply { mkdirs() }
             val data = File(sub, manifest.id + ".data"); val st = File(sub, manifest.id + ".state")
-            val reuse = data.isFile && data.length() == manifest.size && st.isFile
+            // without preallocation the data file grows as blocks land (it may be shorter than the manifest until the last one)
+            val reuse = data.isFile && st.isFile && (data.length() == manifest.size || (!preallocate && data.length() < manifest.size))
             if (!reuse) { data.delete(); st.delete() }
-            val a = PartAssembler(dir, manifest, data, st, stats, now)
-            if (reuse) a.restore() else { a.raf!!.setLength(manifest.size); a.persist() }
+            val a = PartAssembler(dir, manifest, data, st, stats, now, persistEveryMs = persistEveryMs)
+            if (reuse) a.restore() else { if (preallocate) a.raf!!.setLength(manifest.size); a.persist() }
             return a
         }
 

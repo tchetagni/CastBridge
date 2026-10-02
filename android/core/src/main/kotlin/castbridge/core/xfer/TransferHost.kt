@@ -7,7 +7,8 @@ import java.util.concurrent.ConcurrentHashMap
 
 /** Where the TV puts a new transfer: a real folder of a volume. null from the allocator = refused (see [Allocation.Refused]). */
 sealed class Allocation {
-    class At(val dir: File, val diskName: String, val volumeId: String) : Allocation()
+    /** [preallocate]: size the data file at once (free on ext4/f2fs; on FAT/exFAT the kernel would write zeros over the whole size first, see [PartAssembler.preallocates]). */
+    class At(val dir: File, val diskName: String, val volumeId: String, val preallocate: Boolean = true) : Allocation()
     class Refused(val http: Int, val message: String) : Allocation()
 }
 
@@ -52,12 +53,18 @@ class TransferHost(
         if (a is Allocation.Refused) return Begin.Refused(a.http, a.message)
         a as Allocation.At
         return try {
-            val asm = PartAssembler.open(a.dir, m, stats, now)
+            val asm = PartAssembler.open(a.dir, m, stats, now, preallocate = a.preallocate, persistEveryMs = { persistEveryMs() })
             val s = Session(m, asm, a.diskName, a.volumeId, a.dir)
             val prev = sessions.putIfAbsent(m.id, s)
             if (prev != null) { asm.close(); Begin.Ok(prev, true) } else Begin.Ok(s, asm.map.count() > 0)
         } catch (e: IOException) { Begin.Refused(507, e.message ?: "disk error") }
     }
+
+    /** Concurrent chunk requests the TV accepts right now ([PlaybackGovernor]: fewer while a video plays); clamped to 1..[maxStreams]. */
+    @Volatile var streamLimit: () -> Int = { maxStreams }
+    fun allowedStreams(): Int = runCatching(streamLimit).getOrDefault(maxStreams).coerceIn(1, maxStreams)
+    /** Interval between two saves of a block map ([PlaybackGovernor]: spaced out while a video plays). */
+    @Volatile var persistEveryMs: () -> Long = { 1000L }
 
     fun session(id: String): Session? = sessions[id]
     fun hasName(name: String): Boolean = sessions.values.any { it.manifest.name == name }
@@ -101,7 +108,7 @@ class TransferHost(
         val m = s.manifest; val a = s.assembler
         return "{\"id\":\"${m.id}\",\"name\":${q(m.name)},\"size\":${m.size},\"blockSize\":${m.blockSize},\"blocks\":${m.blocks}," +
             "\"done\":${a.map.count()},\"map\":\"${a.map.toHex()}\",\"volume\":${q(s.volumeId)}," +
-            "\"writeBps\":${stats.bytesPerSec()},\"queued\":${stats.queued()},\"maxStreams\":$maxStreams,\"ready\":${a.map.complete()}" + (note(s)?.let { ",\"note\":${q(it)}" } ?: "") +
+            "\"contiguous\":${minOf(a.map.leading().toLong() * m.blockSize, m.size)},\"writeBps\":${stats.bytesPerSec()},\"queued\":${stats.queued()},\"maxStreams\":$maxStreams,\"ready\":${a.map.complete()}" + (note(s)?.let { ",\"note\":${q(it)}" } ?: "") +
             (if (withHashes) ",\"hashes\":\"${a.hashesJoined()}\"" else "") + "}"
     }
 
