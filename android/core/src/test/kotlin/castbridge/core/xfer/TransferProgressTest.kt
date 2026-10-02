@@ -94,7 +94,7 @@ class TransferProgressTest {
         val s2 = p.sink("AA:BB", "Galaxy"); s2.progress("film.avi", 600, 1000)
         assertEquals(1, events.map { it.seq }.toSet().size, "the resumed Bluetooth copy is the same transfer")
         s2.end(false, "code refusé"); assertEquals(Phase.FAILED, events.last().phase)
-        assertTrue(events.last().screenLine().contains("Bluetooth") || events.last().endLine().contains("code refusé"))
+        assertEquals("Échec de la réception : code refusé · film", events.last().screenLine())
     }
 
     private fun TransferProgress.sink(peer: String, name: String) = Sink(peer, name)

@@ -436,10 +436,9 @@ class PlayerActivity : Activity(), TvService.Screen {
         override fun items() = ParentalHub.filterItems(server?.libraryItems().orEmpty())
         override fun status(): Triple<String, String, String?> {
             val s = server
-            // ONE source for every path (Wi-Fi, Wi-Fi multivoie, Bluetooth): the multivoie copy writes no .part until its end, so the listing alone missed it
-            val rec = s?.progress?.shown()?.let { l -> l.firstOrNull()?.let { it.screenLine() + if (l.size > 1) "  (+${l.size - 1} autre${if (l.size > 2) "s" else ""})" else "" } }
-                ?: s?.receiving()?.firstOrNull()?.let { (n, got, total) -> "⬇ Réception de ${castbridge.core.tv.LibraryLogic.title(n)} : ${got * 100 / total.coerceAtLeast(1)} %" }
-            return Triple(if (s == null) "Démarrage…" else "Prêt à recevoir", ParentalHub.shownPin(pin), rec)
+            // ONE source for every path (Wi-Fi, Wi-Fi multivoie, Bluetooth), held by the service (independent of the HTTP server): castbridge.core.xfer.ReceiveCards
+            val cards = castbridge.core.xfer.ReceiveCards.of(svc?.reception?.shown().orEmpty(), s?.receiving().orEmpty(), s != null)
+            return Triple(castbridge.core.xfer.ReceiveCards.ready(s != null), ParentalHub.shownPin(pin), castbridge.core.xfer.ReceiveCards.headline(cards))
         }
         override fun open(i: castbridge.core.tv.LibraryItem, row: List<castbridge.core.tv.LibraryItem>, index: Int) { libScreen?.open(i, row, index) }
         override fun actions(i: castbridge.core.tv.LibraryItem, row: List<castbridge.core.tv.LibraryItem>, index: Int) { libScreen?.actions(i, row, index) }

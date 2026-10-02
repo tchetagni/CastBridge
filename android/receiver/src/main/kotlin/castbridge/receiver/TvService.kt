@@ -104,6 +104,8 @@ class TvService : Service(), Device {
     lateinit var guard: PinGuard; private set
     var pin = ""; private set
     var server: ReceiverServer? = null; private set
+    /** What the TV is receiving, from every path. Owned here, not by the HTTP server: a Bluetooth copy shows even if the port was taken. */
+    val reception = castbridge.core.xfer.TransferProgress()
     var library: LibraryProvider? = null; private set
     /** Virtual folders of the library (docs/LIBRARY-AGENT.md, "Dossiers sur la TV"): files stay flat, a folder is a label kept here. */
     private val folderIndex by lazy { castbridge.core.tv.FolderIndex(File(filesDir, "folders.db")) }
@@ -140,6 +142,8 @@ class TvService : Service(), Device {
         super.onCreate()
         hookCapture()                      // before any screen resumes, so /api/screenshot always knows the front screen
         running = this
+        runCatching { getSystemService(NotificationManager::class.java).createNotificationChannel(NotificationChannel(CH_TRANSFER, "Réceptions en cours", NotificationManager.IMPORTANCE_LOW)) }
+        reception.addListener(receptionNotifier)
         startInForeground()
         startCore()
     }
@@ -216,7 +220,7 @@ class TvService : Service(), Device {
         LotsHub.startup(this, videosDir)
         Thread { RentalHub.sweep(this, castbridge.core.lots.SweepTrigger.APP_START).forEach { notice(it) }; main.postDelayed(rentalTick, 15 * 60_000L) }.start()   // the autonomous deletion of ended rentals
         bt = BtServer(this, videosDir, guard, negotiate = ::linkInfo, hello = ::btHello, trusted = ::btTrusted, parental = ParentalHub.syncHost,
-            progress = { server?.progress }) { setStatus("1-bt", it) }
+            progress = { reception }) { setStatus("1-bt", it) }
         wd = WifiDirectGroup(this, prefs) { setStatus("2-wd", it); syncIconsAsync() }
         usb = UsbImporter(this, videosDir) { setStatus("3-usb", it) }
         ssh = SshControl(this, { setStatus("4-ssh", it) }, { setStatus("4-ssh-bt", it) },
@@ -254,6 +258,7 @@ class TvService : Service(), Device {
                 .then(LotsHub.api(this))        // lots (Apprendre / Quiz data, 10 Mo cap) pushed by the phone, never downloaded by the TV
                 .then(RentalHub.api(this))      // LAZY (never touches the Keystore here: a Keystore failure answers 503, it cannot bring onCreate down): rented lots (sealed, opened with the rental key), the rentals' state, the sweep, activation install (docs/LOTS.md)
                 .then(castbridge.core.content.ContentFeedbackApi { TvConnect.feedback }),   // reports handed to the phone (docs/CONTENT-VALIDATION.md)
+            progress = reception,
             profile = prefs.profile(), onSettings = { prefs.saveProfile(it); updateStorageStatus() },
             onNotice = { n -> notice(n); setStatus("5-notice", n) },
             safPicker = ::launchSafPicker, settingsOpener = ::openStorageSettings, library = library, readoptJson = { readoptState },
@@ -265,7 +270,6 @@ class TvService : Service(), Device {
             // « Rangement à la réception » (docs/STORAGE.md): received files go to real category folders under a clean name; setting "file_on_receive", on by default
             filingLang = { if (prefs.getBool("file_on_receive", true)) "fr" else null },
             sourceName = { a -> trust.get(a)?.name })
-        s.progress.addListener(receptionNotifier)
         try {
             s.start(15_000, false); server = s
         } catch (e: Exception) {
@@ -625,12 +629,30 @@ class TvService : Service(), Device {
      * update a second): progress bar while it runs, then « Vidéo reçue ✓ » or the error, removed a few seconds later. The screen is told too.
      */
     private val notifTokens = ConcurrentHashMap<Int, Any>()
+    /** Per notification id: the [TransferProgress.Item.updatedAt] last shown (main thread only): an older item (lanes race) is ignored. */
+    private val notifShownAt = HashMap<Int, Long>()
+    private var sweeping = false
+    /** Nobody reads [reception] while a video plays or the app is in the background: this purges an abandoned copy (and its « reprise en attente » notification). */
+    private val sweepTick = object : Runnable {
+        override fun run() {
+            reception.sweep()
+            if (reception.active().isNotEmpty()) main.postDelayed(this, 30_000) else sweeping = false
+        }
+    }
     private val receptionNotifier = castbridge.core.xfer.TransferProgress.Listener { item ->
-        main.post { screen?.transfersChanged() }
+        main.post {
+            screen?.transfersChanged()
+            if (!item.ended && !sweeping) { sweeping = true; main.postDelayed(sweepTick, 30_000) }
+            showReception(item)
+        }
+    }
+
+    private fun showReception(item: castbridge.core.xfer.TransferProgress.Item) {
         runCatching {
-            val nm = getSystemService(NotificationManager::class.java)
-            nm.createNotificationChannel(NotificationChannel(CH_TRANSFER, "Réceptions en cours", NotificationManager.IMPORTANCE_LOW))
             val id = NOTIF_TRANSFER + item.seq % 1000
+            if (item.updatedAt < (notifShownAt[id] ?: Long.MIN_VALUE)) return
+            notifShownAt[id] = item.updatedAt
+            val nm = getSystemService(NotificationManager::class.java)
             val token = notifTokens.getOrPut(id) { Any() }                // Handler compares tokens by identity: one object per id
             val open = PendingIntent.getActivity(this, 2, Intent(this, PlayerActivity::class.java).addFlags(Intent.FLAG_ACTIVITY_NEW_TASK), PendingIntent.FLAG_IMMUTABLE)
             val b = Notification.Builder(this, CH_TRANSFER).setSmallIcon(R.drawable.ic_stat_castbridge).setContentIntent(open).setOnlyAlertOnce(true)
@@ -1044,6 +1066,8 @@ class TvService : Service(), Device {
     override fun onDestroy() {
         stopCore()
         unwatchNetwork()
+        reception.removeListener(receptionNotifier)
+        runCatching { val nm = getSystemService(NotificationManager::class.java); notifTokens.keys.forEach { nm.cancel(it) } }   // no « reprise en attente » left behind
         main.removeCallbacksAndMessages(null)
         bg.shutdownNow(); iconBg.shutdownNow()
         if (running === this) running = null

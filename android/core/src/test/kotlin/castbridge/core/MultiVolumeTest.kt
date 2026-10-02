@@ -13,7 +13,7 @@ import kotlin.random.Random
 import kotlin.test.*
 
 /** Two temporary folders standing for the internal storage and a USB drive, plus a switchable "hot plug". */
-class Rig(pin: String? = null, profile: TvProfile = TvProfile(minFreeBytes = 0, minFreeAfterTransfer = 0), fs: Fs = Fs.EXFAT, settingsOpener: (() -> String?)? = null) {
+class Rig(pin: String? = null, profile: TvProfile = TvProfile(minFreeBytes = 0, minFreeAfterTransfer = 0), fs: Fs = Fs.EXFAT, settingsOpener: (() -> String?)? = null, progress: castbridge.core.xfer.TransferProgress = castbridge.core.xfer.TransferProgress()) {
     val root = kotlin.io.path.createTempDirectory("vol").toFile()
     val internalDir = File(root, "internal").apply { mkdirs() }
     val usbDir = File(root, "usb").apply { mkdirs() }
@@ -33,7 +33,7 @@ class Rig(pin: String? = null, profile: TvProfile = TvProfile(minFreeBytes = 0, 
     val registry = VolumeRegistry(provider) { v -> capacity[v.id]?.let { it - used(v.dir) } ?: v.dir.usableSpace }.also { it.refresh() }
     val port = ServerSocket(0).use { it.localPort }
     val base = "http://127.0.0.1:$port"
-    val server = ReceiverServer(registry, player, port, profile = profile, pin = pin, guard = pin?.let { PinGuard(it, maxFailures = 1000) }, onNotice = { notices += it }, settingsOpener = settingsOpener)
+    val server = ReceiverServer(registry, player, port, profile = profile, pin = pin, guard = pin?.let { PinGuard(it, maxFailures = 1000) }, onNotice = { notices += it }, settingsOpener = settingsOpener, progress = progress)
         .apply { start(5000, false) }
     val tv = TvClient(base, pin)
 

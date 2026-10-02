@@ -84,6 +84,8 @@ class ReceiverServer(
      * (files stay flat exactly as before). Asked at every reception, so the setting applies at once.
      */
     private val filingLang: () -> String? = { null },
+    /** What is being received, from every path. The service owns it (so Bluetooth shows even if this server did not start); tests inject one with a fake clock. */
+    val progress: castbridge.core.xfer.TransferProgress = castbridge.core.xfer.TransferProgress(),
     /** The name of a trusted phone from its address (what [tokenAuth] returns), for « depuis … » in the reception progress; null = unknown. */
     private val sourceName: (String) -> String? = { null },
 ) : NanoHTTPD(port) {
@@ -112,7 +114,6 @@ class ReceiverServer(
     }
     private val chunking = java.util.concurrent.atomic.AtomicInteger()
     /** What is being received right now, from every path (PUT /upload, /api/transfer, and Bluetooth through the app): the TV screen and notification read it. */
-    val progress = castbridge.core.xfer.TransferProgress()
     /** Address of the trusted phone whose token authenticated the request this thread is serving (NanoHTTPD: one thread per request), else null. */
     private val tokenPhone = ThreadLocal<String?>()
     /** « depuis … » of a reception: the trusted phone's name, else its address on the network. */
@@ -666,9 +667,12 @@ class ReceiverServer(
                         finals(name).filter { it.v.id != v.id && !isPlaying(name) }.forEach {
                             it.st.deleteFinal(it.name); (it.st as? FileStore)?.let { f -> Storage.forget(f.dir, it.name) }
                         }
-                        val filed = fileReceived(v, st, o.name, name, total)
+                        // committed: the copy IS received, whatever filing then does (an IOException there must not turn it into « reprise en attente »)
+                        val filed = try { fileReceived(v, st, o.name, name, total) } catch (e: IOException) { null }
                         progress.finish(pid, filed?.name)
                         onNotice(receivedNotice(name, filed))
+                    } else {
+                        progress.interrupted(pid)             // the stream ended short (clean close): the phone resumes, the sweep does not have to wait for it
                     }
                 } catch (e: DiskError) {
                     progress.fail(pid, diskReason(v, e))
@@ -762,7 +766,12 @@ class ReceiverServer(
                 ?: a.writeBlock(idx, sha, s.inputStream, len, s.headers["x-cb-enc"].equals("gzip", true))
             return when (r) {
                 is castbridge.core.xfer.PartAssembler.Block.Ok -> {
-                    if (!a.discard) progress.advance("x:" + sess.manifest.id, transfers.receivedBytes(sess))
+                    if (!a.discard) {
+                        val pid = "x:" + sess.manifest.id
+                        // the 90 s silence closed it (ABORTED) but the phone went on with chunks only: it is a live copy again (same seq, same notification)
+                        if (!progress.isRunning(pid)) progress.begin(pid, sess.manifest.name, sess.manifest.size, castbridge.core.xfer.TransferProgress.Transport.WIFI_MULTI, null, transfers.receivedBytes(sess))
+                        else progress.advance(pid, transfers.receivedBytes(sess))
+                    }
                     ok("""{"ok":true,"done":${a.map.count()},"writeBps":${transfers.stats.bytesPerSec()}}""")
                 }
                 is castbridge.core.xfer.PartAssembler.Block.Already -> ok("""{"already":true}""")
@@ -801,7 +810,7 @@ class ReceiverServer(
                         finals(name).filter { it.v.id != v.id && !isPlaying(name) }.forEach {
                             it.st.deleteFinal(it.name); (it.st as? FileStore)?.let { f -> Storage.forget(f.dir, it.name) }
                         }
-                        val filed = fileReceived(v, st, sess.diskName, name, sess.manifest.size)
+                        val filed = try { fileReceived(v, st, sess.diskName, name, sess.manifest.size) } catch (e: IOException) { null }
                         progress.finish("x:" + sess.manifest.id, filed?.name)
                         onNotice(receivedNotice(name, filed))
                         invalidate()
