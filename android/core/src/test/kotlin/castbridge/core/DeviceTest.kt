@@ -2,7 +2,6 @@ package castbridge.core
 
 import castbridge.core.tv.*
 import java.io.File
-import java.net.ServerSocket
 import java.util.concurrent.CountDownLatch
 import java.util.concurrent.TimeUnit
 import kotlin.test.*
@@ -20,12 +19,12 @@ class DeviceTest {
     private val dir = kotlin.io.path.createTempDirectory("tvd").toFile()
     private val player = FakePlayer()
     private val dev = FakeDevice()
-    private val port = ServerSocket(0).use { it.localPort }
     private val ext = ApiExtension { path, method, _ ->
         if (path == "/api/x-test" && method == "GET") ApiReply(200, """{"x":1}""") else null
     }
-    private val server = ReceiverServer(dir, player, port, profile = TvProfile(minFreeBytes = 0, minFreeAfterTransfer = 0), pin = "135790", device = dev, extension = ext)
-        .apply { start(5000, false) }
+    private val server = ReceiverServer(dir, player, 0, profile = TvProfile(minFreeBytes = 0, minFreeAfterTransfer = 0), pin = "135790", device = dev, extension = ext)
+        .apply { start(5000, false) }     // port 0: the server itself binds a free port (no close-then-reuse race)
+    private val port = server.listeningPort
     private val tv = TvClient("http://127.0.0.1:$port", "135790")
 
     @AfterTest fun tearDown() { server.stop(); dir.deleteRecursively() }
@@ -57,8 +56,8 @@ class DeviceTest {
     }
 
     @Test fun withoutDeviceReports501() {
-        val p2 = ServerSocket(0).use { it.localPort }
-        val s2 = ReceiverServer(dir, player, p2, profile = TvProfile(minFreeBytes = 0, minFreeAfterTransfer = 0)).apply { start(5000, false) }
+        val s2 = ReceiverServer(dir, player, 0, profile = TvProfile(minFreeBytes = 0, minFreeAfterTransfer = 0)).apply { start(5000, false) }
+        val p2 = s2.listeningPort
         try { assertEquals(501, assertFailsWith<TvClient.HttpError> { TvClient("http://127.0.0.1:$p2").sysinfo() }.code) }
         finally { s2.stop() }
     }

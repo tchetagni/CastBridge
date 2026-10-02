@@ -164,6 +164,10 @@ class TvClient(val base: String, val pin: String? = null) {
 
     private fun open(method: String, path: String) = (URL(base + path).openConnection() as HttpURLConnection).apply {
         requestMethod = method; connectTimeout = 4000; readTimeout = 8000
+        // A POST/PUT is never replayed by the JDK (it may have been applied) : it must not ride a pooled keep-alive connection the TV already closed
+        // (SocketException / « Connection reset » / « Error writing request body », seen under load in MultiVolumeServerTest and FilingServerTest),
+        // so it asks for a fresh connection. Only GET (replayed once by [call]) and streams keep the pool.
+        if (method != "GET") setRequestProperty("Connection", "close")
         castbridge.core.trust.TvCredential.apply(this, pin)     // PIN or trusted-phone token (never an unusable one)
     }
 

@@ -10,7 +10,7 @@
 - **Ce qui n'existe PAS dans le dépôt** (ne se reconstitue pas) : accès SSH au serveur et à la TV, clé de signature de production (`secrets/`), mots de passe/PIN, clé de debug du Mac (`~/.android/debug.keystore`, nécessaire pour que les mises à jour s'installent par-dessus l'existant). Un agent cloud ne peut donc **ni déployer, ni installer, ni signer** : il propose des branches.
 - **Règle** : une branche par chantier (`feat/...`), commits par étape, pas de fusion sans tests ; mettre ce document à jour **en temps réel** (§0) à chaque étape, dans le même commit.
 - **Ne jamais fusionner `wip/external-ai-changes`** (code d'autres IA non revu, voir §0 et `docs/AUDIT-EXTERNAL-CHANGES.md` sur `audit/external-ai`).
-- **Tests instables connus** : aucun (les trois anciens tests instables — TvSshServerTest verrouillage, TrustTest jeton altéré, ChessRelayTest sonde — sont déterministes : port 0, horloge/aléa injectés ; 20 passes consécutives vertes).
+- **Tests instables connus** : aucun connu. w15-07 : les tests réseau du cœur n'attendent plus sans borne (`ByteRelay.join(timeout)` + arrêt des deux fils, `ByteRelayTest.noServerMeansRefused` ne peut plus bloquer), les serveurs de test lient le port 0 eux-mêmes (`listeningPort`), plus de pool keep-alive JDK dans les tests (`http.keepAlive=false` dans `core/build.gradle.kts` : un port réutilisé par un autre serveur de test faisait échouer la première requête), `TvClient` n'envoie plus POST/PUT sur une connexion poolée, garde `TestWatchdogGuardTest` (chien de garde de 60 s par test + cliquet des attentes sans borne). Détail : `docs/agent-reports/sonnet-w15-07.md`.
 
 ## 0. Journal en direct (le plus récent en haut)
 

@@ -5,7 +5,6 @@ import java.io.ByteArrayInputStream
 import java.io.File
 import java.io.IOException
 import java.io.InputStream
-import java.net.ServerSocket
 import kotlin.random.Random
 import kotlin.test.*
 
@@ -24,8 +23,8 @@ class FakePlayer : Player {
 class ReceiverTest {
     private val dir = kotlin.io.path.createTempDirectory("tv").toFile()
     private val player = FakePlayer()
-    private val port = ServerSocket(0).use { it.localPort }
-    private val server = ReceiverServer(dir, player, port, profile = TvProfile(minFreeBytes = 0, minFreeAfterTransfer = 0)).apply { start(5000, false) }
+    private val server = ReceiverServer(dir, player, 0, profile = TvProfile(minFreeBytes = 0, minFreeAfterTransfer = 0)).apply { start(5000, false) }
+    private val port = server.listeningPort     // port 0: bound by the server itself, no close-then-reuse race
     private val base = "http://127.0.0.1:$port"
     private val tv = TvClient(base)
     private val data = Random(1).nextBytes(3_000_000)
@@ -79,11 +78,21 @@ class ReceiverTest {
     }
 
     @Test fun insufficientStorageIsFatal() {
-        server.stop()
-        val small = ReceiverServer(dir, player, port, profile = TvProfile(minFreeBytes = Long.MAX_VALUE / 2)).apply { start(5000, false) }
+        val small = ReceiverServer(dir, player, 0, profile = TvProfile(minFreeBytes = Long.MAX_VALUE / 2)).apply { start(5000, false) }
         try {
-            val r = ResumableUpload("big.mp4", 10, { base }, { ByteArrayInputStream(ByteArray(10)) }, sleep = {}).run {}
+            val smallBase = "http://127.0.0.1:${small.listeningPort}"
+            var sleeps = 0
+            var result: ResumableUpload.State? = null
+            // Bounded: at most 20 attempts without any real sleep, and the whole run is cut after 10 s (it must end on the first 507, not loop).
+            val t = kotlin.concurrent.thread(isDaemon = true) {
+                result = ResumableUpload("big.mp4", 10, { smallBase }, { ByteArrayInputStream(ByteArray(10)) }, sleep = { sleeps++ }, giveUpAfter = 20).run {}
+            }
+            t.join(10_000)
+            assertFalse(t.isAlive, "the upload must stop by itself on a fatal 507 (sleeps=$sleeps)")
+            val r = result
             assertTrue(r is ResumableUpload.State.Failed, "$r")
+            assertTrue(r.reason.contains("insuffisant"), r.reason)       // « Espace insuffisant : … libérez … Go »
+            assertTrue(sleeps < 20, "fatal error: no retry loop ($sleeps sleeps)")
         } finally { small.stop() }
     }
 

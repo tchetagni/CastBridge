@@ -483,9 +483,9 @@ class ParentalApiTest {
 /** The real server (TV PIN) + the parental routes + the phone's client, over loopback. */
 class ParentalHttpTest {
     private val dir = kotlin.io.path.createTempDirectory("parental-http").toFile()
-    private val port = java.net.ServerSocket(0).use { it.localPort }
     private val eng = engine()
-    private val server = castbridge.core.tv.ReceiverServer(dir, FakePlayer(), port, pin = "123456", extension = ParentalApi(eng)).apply { start(5000, false) }
+    private val server = castbridge.core.tv.ReceiverServer(dir, FakePlayer(), 0, pin = "123456", extension = ParentalApi(eng)).apply { start(5000, false) }
+    private val port = server.listeningPort     // port 0: bound by the server, no close-then-reuse race
     private val base = "http://127.0.0.1:$port"
 
     @AfterTest fun tearDown() { server.stop(); dir.deleteRecursively() }
@@ -493,6 +493,8 @@ class ParentalHttpTest {
     private fun raw(method: String, path: String, body: String? = null, tvPin: String? = "123456"): Pair<Int, String> {
         val c = java.net.URL(base + path).openConnection() as java.net.HttpURLConnection
         c.requestMethod = method
+        c.setRequestProperty("Connection", "close")        // never reuse a pooled keep-alive connection the server may have closed: SocketException under load
+        c.connectTimeout = 5000; c.readTimeout = 10_000
         tvPin?.let { c.setRequestProperty("X-CB-Pin", it) }
         if (body != null) { c.doOutput = true; c.outputStream.use { it.write(body.toByteArray()) } }
         val code = c.responseCode
