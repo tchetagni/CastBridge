@@ -22,6 +22,8 @@ RÈGLES (identiques pour tous les agents de la vague)
    Claude-Session: https://claude.ai/code/session_<identifiant de ta session>
    Pas de push. Écris docs/agent-reports/<id>.md (≤ 25 lignes) au format RAPPORT, puis arrête-toi. Ton message final = le contenu du rapport, rien d'autre.
 
+PORTE W14 (Barrière anti-régression) : avant le rapport, lance la porte du cahier PUIS `cd android && tools/agents/gradle-lock.sh gradle --offline :core:test --tests 'castbridge.core.journey.*' --tests 'castbridge.core.lint.*'` ; si ton cahier touche android/sender ou android/receiver, écris dans le rapport la ligne `FUMÉE: à lancer par le coordinateur (tools/smoke/smoke.py --tv fake)` ; si ton cahier corrige un défaut de terrain, le rapport contient la sortie ROUGE du test avant correctif puis VERTE après, et la ligne proposée pour docs/REGRESSIONS.md.
+
 RAPPORT (format exact)
 STATUT: TERMINÉ | BLOQUÉ | ÉCHEC
 CAHIER: <id> · MODÈLE: haiku · BRANCHE: claude/<id> · COMMIT: <sha court ou aucun>
@@ -84,6 +86,8 @@ RÈGLES (identiques pour tous les agents de la vague)
    Claude-Session: https://claude.ai/code/session_<identifiant de ta session>
    Pas de push. Rapport docs/agent-reports/<id>.md (≤ 25 lignes, format RAPPORT) ; ton message final = le rapport, rien d'autre. docs/HANDOFF.md seulement si le cahier te le donne.
 
+PORTE W14 (Barrière anti-régression) : avant le rapport, lance la porte du cahier PUIS `cd android && tools/agents/gradle-lock.sh gradle --offline :core:test --tests 'castbridge.core.journey.*' --tests 'castbridge.core.lint.*'` ; si ton cahier touche android/sender ou android/receiver, écris dans le rapport la ligne `FUMÉE: à lancer par le coordinateur (tools/smoke/smoke.py --tv fake)` ; si ton cahier corrige un défaut de terrain, le rapport contient la sortie ROUGE du test avant correctif puis VERTE après, et la ligne proposée pour docs/REGRESSIONS.md.
+
 RAPPORT (format exact)
 STATUT: TERMINÉ | BLOQUÉ | ÉCHEC
 CAHIER: <id> · MODÈLE: sonnet · BRANCHE: claude/<id> · COMMIT: <sha court ou aucun>
@@ -118,6 +122,8 @@ CE QUE TU CHERCHES, dans cet ordre
 2. Conformité au cahier : chaque étape et chaque critère d'acceptation couverts ; fichiers hors zone touchés ; décision de conception modifiée sans le dire ; « À ne pas faire » enfreint.
 3. Correction : cas limites du cahier réellement testés ; concurrence (threads, fsync, atomicité) ; compatibilité ascendante (anciens fichiers, anciennes TV, anciens téléphones) ; messages en français ; noms « CastBridge » / « CastBridge-TV ».
 4. Qualité : tests qui testent (pas de tautologie), code mort, dépendances ajoutées, diff au-delà du plafond.
+
+PORTE W14 (Barrière anti-régression) : avant le rapport, lance la porte du cahier PUIS `cd android && tools/agents/gradle-lock.sh gradle --offline :core:test --tests 'castbridge.core.journey.*' --tests 'castbridge.core.lint.*'` ; si ton cahier touche android/sender ou android/receiver, écris dans le rapport la ligne `FUMÉE: à lancer par le coordinateur (tools/smoke/smoke.py --tv fake)` ; si ton cahier corrige un défaut de terrain, le rapport contient la sortie ROUGE du test avant correctif puis VERTE après, et la ligne proposée pour docs/REGRESSIONS.md.
 
 VERDICT (format exact, français, ≤ 40 lignes)
 VERDICT: ACCEPTER | ACCEPTER AVEC CORRECTIONS | REFUSER

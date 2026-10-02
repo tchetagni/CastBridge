@@ -41,3 +41,18 @@ Pour relancer un workflow : Actions > workflows > Run workflow > Branch/Ref.
 
 ## Ce qui reste manuel (propriétaire)
 Approbations (accès aux dépôts, branches), installation sur la TV, tout ce qui touche au serveur de production.
+
+## Barrière anti-régression (W14)
+
+| Type de cahier | Exécutant doit faire tourner | Coordinateur avant fusion | Opus audite |
+|---|---|---|---|
+| cœur pur hors liaison/transfert/confiance (`C/learn`, `C/quiz`, `C/lots`…) | porte étroite du cahier + `:core:test --tests 'castbridge.core.journey.*'` | `:core:test` complet + lint | si C = 2 (routage existant) |
+| **liaison / confiance / transfert / TV serveur** (`C/trust`, `C/xfer`, `C/tv/ReceiverServer`, `C/link`) | porte + **J complet** + le parcours J **nommé** dans le cahier (nouveau ou étendu) | J complet + **F `--tv fake`** (< 10 min) | **oui** (diff + rapport F) |
+| **écran ou service Android** (`S/**`, `R/**`) | `compileDebugKotlin` + **lint de pureté** + J de la zone (via la fonction pure créée/modifiée) | **F `--tv fake`** obligatoire ; `--tv emu` si l'écran est TV ; **aucune fusion sans `REPORT.md` PASS** | échantillon (1 sur 3) |
+| docs, CI, scripts | porte du cahier | lint YAML/Python | non |
+| **correctif terrain** | test rouge d'abord (§ 4.4), puis vert ; ligne REGRESSIONS | J + F ; H si l'écran TV change | oui si liaison/confiance/transfert |
+
+Règles :
+1. **Aucune fusion d'un cahier touchant `S/**` ou `R/**` sans `tools/smoke/out/<date>/REPORT.md` PASS** cité dans le rapport.
+2. **Au plus 2 cahiers risqués** (liaison/confiance/transfert) en parallèle, un seul sur `C/tv/ReceiverServer.kt`, `C/trust/LinkDriver.kt`, `S/UploadService.kt`, `S/TvLink.kt`.
+3. **Tout correctif terrain** = ligne `docs/REGRESSIONS.md` + test rouge d'abord.
