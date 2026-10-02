@@ -63,6 +63,7 @@ class HomeScreen(private val act: Activity, private val container: FrameLayout, 
     private val heroSub = TextView(act).apply { setTextColor(TvStyle.TEXT2); textSize = TvStyle.Type.BODY; maxLines = 2 }
     private val chip = TextView(act).apply {
         setTextColor(Color.WHITE); textSize = TvStyle.Type.CAPTION; isFocusable = true; isClickable = true
+        maxLines = 2; ellipsize = android.text.TextUtils.TruncateAt.END      // the live reception line (name · % · speed · transport · phone) never pushes the clock away
         setPadding(dp(14), dp(6), dp(14), dp(6)); background = TvStyle.rounded(act, 0x99000000.toInt(), TvStyle.R_XL)
     }
     // Room inside the scroll area for the focus zoom (+10 %) of the first/last cards, so nothing is cut off.
@@ -120,7 +121,7 @@ class HomeScreen(private val act: Activity, private val container: FrameLayout, 
 
     fun onThumbReady(name: String) = main.post { rows.values.forEach { (_, a) -> a.refresh(name) } }
 
-    private fun refreshStatus() {
+    fun refreshStatus() {
         val (ready, code, receiving) = api.status()
         val shown = if (System.currentTimeMillis() < revealUntil || code.length < 4) code else code.take(2) + "••••"
         chip.text = (receiving ?: "● $ready") + "   ·   code $shown"

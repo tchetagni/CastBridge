@@ -84,6 +84,8 @@ class ReceiverServer(
      * (files stay flat exactly as before). Asked at every reception, so the setting applies at once.
      */
     private val filingLang: () -> String? = { null },
+    /** The name of a trusted phone from its address (what [tokenAuth] returns), for « depuis … » in the reception progress; null = unknown. */
+    private val sourceName: (String) -> String? = { null },
 ) : NanoHTTPD(port) {
 
     override fun createClientHandler(finalAccept: java.net.Socket, inputStream: java.io.InputStream): NanoHTTPD.ClientHandler =
@@ -109,6 +111,16 @@ class ReceiverServer(
         h.finalSizeOf = { n, sz -> findFinalOrOrigin(n, sz)?.size }
     }
     private val chunking = java.util.concurrent.atomic.AtomicInteger()
+    /** What is being received right now, from every path (PUT /upload, /api/transfer, and Bluetooth through the app): the TV screen and notification read it. */
+    val progress = castbridge.core.xfer.TransferProgress()
+    /** Address of the trusted phone whose token authenticated the request this thread is serving (NanoHTTPD: one thread per request), else null. */
+    private val tokenPhone = ThreadLocal<String?>()
+    /** « depuis … » of a reception: the trusted phone's name, else its address on the network. */
+    private fun sourceOf(s: IHTTPSession): String? {
+        val addr = tokenPhone.get()                    // set by the authentication of this very request: the token is never verified twice
+        if (addr != null) return sourceName(addr) ?: "téléphone de confiance"
+        return s.remoteIpAddress?.takeIf { it.isNotEmpty() && it != "127.0.0.1" && it != "::1" }
+    }
 
     /** Uploads being received right now (the TV app keeps a partial wake lock only while this is above zero). */
     fun activeTransfers(): Int = uploading.get() + chunking.get() + (if (moveJob?.state == "running") 1 else 0)
@@ -337,6 +349,7 @@ class ReceiverServer(
     }
 
     private fun route(s: IHTTPSession): Response {
+        tokenPhone.remove()                              // a keep-alive thread serves several requests: never inherit the previous one's phone
         val p = s.parameters.mapValues { it.value.firstOrNull().orEmpty() }
         val path = s.uri
         if (hostCheck && !HostGuard.allowed(s.headers["host"])) return json(Response.Status.FORBIDDEN, """{"error":"Hôte non autorisé"}""").also { it.addHeader("Connection", "close") }
@@ -525,8 +538,9 @@ class ReceiverServer(
         val ip = peers?.keyOfAddress(s.remoteIpAddress) ?: s.remoteIpAddress ?: "?"
         val tok = s.headers["x-cb-token"] ?: p["token"]
         if (tok != null && tokenAuth != null) {
-            if (tokenAuth.invoke(tok) != null) {
-                if (castbridge.core.trust.TvAuth.tokenMayCall(s.uri)) return null
+            val phone = tokenAuth.invoke(tok)
+            if (phone != null) {
+                if (castbridge.core.trust.TvAuth.tokenMayCall(s.uri)) { tokenPhone.set(phone); return null }
                 return json(Response.Status.FORBIDDEN, """{"error":"pin required","message":"Cette action demande le code de la TV."}""").also { it.addHeader("Connection", "close") }
             }
             // expired or revoked: the phone asks the TV again over Bluetooth (no PIN is tried, so no lockout is counted)
@@ -604,6 +618,8 @@ class ReceiverServer(
             volumes.notePart(v, o.name)
             val fileStore = st as? FileStore
             val lock = if (fileStore != null) FileLocks.of(fileStore.dir, o.name) else Any()
+            val pid = "put:" + name.lowercase()
+            progress.begin(pid, name, total, castbridge.core.xfer.TransferProgress.Transport.WIFI, if (progress.isRunning(pid)) null else sourceOf(s), cur)
             synchronized(lock) {
                 // Append as bytes arrive: whatever reached the disk before a network cut or a pulled drive is kept for resume.
                 try {
@@ -622,6 +638,7 @@ class ReceiverServer(
                             if (fill == 0) return
                             try { out.write(buf, 0, fill) } catch (e: IOException) { throw DiskError(e) }
                             sinceSync += fill; fill = 0
+                            progress.advance(pid, len - left + cur)
                             if (v.kind == VolumeKind.REMOVABLE && sinceSync >= cfg.removableSyncBytes) {
                                 runCatching { (out as? java.io.FileOutputStream)?.fd?.sync() }; sinceSync = 0
                             }
@@ -650,10 +667,15 @@ class ReceiverServer(
                             it.st.deleteFinal(it.name); (it.st as? FileStore)?.let { f -> Storage.forget(f.dir, it.name) }
                         }
                         val filed = fileReceived(v, st, o.name, name, total)
+                        progress.finish(pid, filed?.name)
                         onNotice(receivedNotice(name, filed))
                     }
                 } catch (e: DiskError) {
+                    progress.fail(pid, diskReason(v, e))
                     return diskFailure(v, e)
+                } catch (e: IOException) {
+                    progress.interrupted(pid)                 // the network dropped: the phone resumes from what arrived
+                    throw e
                 }
             }
             invalidate()
@@ -666,16 +688,16 @@ class ReceiverServer(
     private fun transfer(s: IHTTPSession, op: String, p: Map<String, String>): Response = when {
         op == "caps" && s.method == Method.GET ->
             ok("""{"version":${castbridge.core.xfer.TransferHost.API_VERSION},"maxStreams":${transfers.maxStreams},"slice":${castbridge.core.xfer.Manifest.SLICE}}""")
-        op == "begin" && s.method == Method.POST -> transferBegin(p)
+        op == "begin" && s.method == Method.POST -> transferBegin(s, p)
         op == "chunk" && s.method == Method.PUT -> transferChunk(s, p)
         op == "state" && s.method == Method.GET -> transfers.session(p["id"].orEmpty())?.let { ok(transfers.stateJson(it, p["hashes"] == "1")) }
             ?: json(Response.Status.NOT_FOUND, """{"error":"unknown transfer"}""")
         op == "finish" && s.method == Method.POST -> transferFinish(p)
-        op == "abort" && s.method == Method.POST -> { transfers.discard(p["id"].orEmpty()); ok("""{"ok":true}""") }
+        op == "abort" && s.method == Method.POST -> { transfers.discard(p["id"].orEmpty()); progress.abort("x:" + p["id"].orEmpty(), "annulée par le téléphone"); ok("""{"ok":true}""") }
         else -> json(Response.Status.NOT_FOUND, """{"error":"not found"}""")
     }
 
-    private fun transferBegin(p: Map<String, String>): Response {
+    private fun transferBegin(s: IHTTPSession, p: Map<String, String>): Response {
         val name = safeName(p["name"].orEmpty()) ?: return bad("bad name")
         val size = p["size"]?.toLongOrNull()?.takeIf { it >= 0 } ?: return bad("size required")
         val bs = p["blockSize"]?.toIntOrNull() ?: return bad("blockSize required")
@@ -692,7 +714,13 @@ class ReceiverServer(
                     is castbridge.core.xfer.TransferHost.Begin.AlreadyThere -> ok("""{"done":true,"name":${q(name)}}""")
                     is castbridge.core.xfer.TransferHost.Begin.Refused ->
                         json(status(r.http), """{"error":${q(r.message)},"message":${q(humanRefusal(r.message))}}""")
-                    is castbridge.core.xfer.TransferHost.Begin.Ok -> ok(transfers.stateJson(r.s))
+                    is castbridge.core.xfer.TransferHost.Begin.Ok -> {
+                        if (!r.s.assembler.discard) {
+                            val pid = "x:" + m.id
+                            progress.begin(pid, name, size, castbridge.core.xfer.TransferProgress.Transport.WIFI_MULTI, if (progress.isRunning(pid)) null else sourceOf(s), transfers.receivedBytes(r.s))
+                        }
+                        ok(transfers.stateJson(r.s))
+                    }
                 }
             }
         } finally { uploading.decrementAndGet() }
@@ -720,7 +748,7 @@ class ReceiverServer(
     private fun transferChunk(s: IHTTPSession, p: Map<String, String>): Response {
         val sess = transfers.session(p["id"].orEmpty()) ?: return json(Response.Status.NOT_FOUND, """{"error":"unknown transfer"}""")
         val v = if (sess.assembler.discard) null else volumes[sess.volumeId]?.takeIf { volumes.alive(it) }
-        if (v == null && !sess.assembler.discard) { transfers.remove(sess.manifest.id); sess.assembler.close(); return removed() }
+        if (v == null && !sess.assembler.discard) { transfers.remove(sess.manifest.id); sess.assembler.close(); progress.fail("x:" + sess.manifest.id, "support de stockage retiré"); return removed() }
         val idx = p["idx"]?.toIntOrNull() ?: return bad("idx required")
         val len = s.headers["content-length"]?.toLongOrNull() ?: return bad("content-length required")
         val sha = s.headers["x-cb-sha256"].orEmpty().lowercase()
@@ -733,12 +761,15 @@ class ReceiverServer(
             val r = p["slice"]?.let { k -> a.writeSlice(idx, k.toIntOrNull() ?: return bad("bad slice"), sha, s.inputStream, len) }
                 ?: a.writeBlock(idx, sha, s.inputStream, len, s.headers["x-cb-enc"].equals("gzip", true))
             return when (r) {
-                is castbridge.core.xfer.PartAssembler.Block.Ok -> ok("""{"ok":true,"done":${a.map.count()},"writeBps":${transfers.stats.bytesPerSec()}}""")
+                is castbridge.core.xfer.PartAssembler.Block.Ok -> {
+                    if (!a.discard) progress.advance("x:" + sess.manifest.id, transfers.receivedBytes(sess))
+                    ok("""{"ok":true,"done":${a.map.count()},"writeBps":${transfers.stats.bytesPerSec()}}""")
+                }
                 is castbridge.core.xfer.PartAssembler.Block.Already -> ok("""{"already":true}""")
                 is castbridge.core.xfer.PartAssembler.Block.Corrupt -> json(status(422), """{"error":"corrupt block","idx":$idx}""")
                 is castbridge.core.xfer.PartAssembler.Block.Bad -> bad(r.reason)
                 is castbridge.core.xfer.PartAssembler.Block.Interrupted -> bad("interrupted")
-                is castbridge.core.xfer.PartAssembler.Block.DiskFail -> try { diskFailure(v!!, DiskError(r.cause)) } finally { if (!volumes.alive(v!!)) { transfers.remove(sess.manifest.id); a.close() } }
+                is castbridge.core.xfer.PartAssembler.Block.DiskFail -> try { progress.fail("x:" + sess.manifest.id, diskReason(v!!, DiskError(r.cause))); diskFailure(v, DiskError(r.cause)) } finally { if (!volumes.alive(v!!)) { transfers.remove(sess.manifest.id); a.close() } }
             }
         } finally { chunking.decrementAndGet() }
     }
@@ -761,16 +792,17 @@ class ReceiverServer(
                     is castbridge.core.xfer.PartAssembler.Finish.Missing -> json(Response.Status.CONFLICT, transfers.stateJson(sess))
                     is castbridge.core.xfer.PartAssembler.Finish.Corrupt -> json(status(422), transfers.stateJson(sess))
                     castbridge.core.xfer.PartAssembler.Finish.RootMismatch -> bad("root mismatch")
-                    is castbridge.core.xfer.PartAssembler.Finish.DiskFail -> diskFailure(v, DiskError(r.cause))
+                    is castbridge.core.xfer.PartAssembler.Finish.DiskFail -> { progress.fail("x:" + sess.manifest.id, diskReason(v, DiskError(r.cause))); diskFailure(v, DiskError(r.cause)) }
                     is castbridge.core.xfer.PartAssembler.Finish.Done -> {
                         val st = volumes.store(v); val fileStore = st as? FileStore
-                        try { st.commit(sess.diskName) } catch (e: IOException) { return diskFailure(v, DiskError(e)) }
+                        try { st.commit(sess.diskName) } catch (e: IOException) { progress.fail("x:" + sess.manifest.id, diskReason(v, DiskError(e))); return diskFailure(v, DiskError(e)) }
                         fileStore?.let { Storage.forget(it.dir, sess.diskName); Meta.delete(it.dir, sess.diskName) }
                         transfers.remove(sess.manifest.id)
                         finals(name).filter { it.v.id != v.id && !isPlaying(name) }.forEach {
                             it.st.deleteFinal(it.name); (it.st as? FileStore)?.let { f -> Storage.forget(f.dir, it.name) }
                         }
                         val filed = fileReceived(v, st, sess.diskName, name, sess.manifest.size)
+                        progress.finish("x:" + sess.manifest.id, filed?.name)
                         onNotice(receivedNotice(name, filed))
                         invalidate()
                         ok("""{"done":true,"name":${q(name)},"volume":${q(v.id)}${if (filed != null) ",\"folder\":${q(filed.folder)},\"finalName\":${q(filed.name)}" else ""}}""")
@@ -778,6 +810,16 @@ class ReceiverServer(
                 }
             }
         } finally { sess.finishing = false; uploading.decrementAndGet() }
+    }
+
+    /** The same diagnosis as [diskFailure], in words for the TV screen (no side effect). */
+    private fun diskReason(v: StorageVolume, e: DiskError): String {
+        val msg = e.message.orEmpty()
+        return when {
+            msg == "volume removed" || !volumes.alive(v) -> "support de stockage retiré"
+            msg.contains("ENOSPC") || msg.contains("No space", ignoreCase = true) -> "plus de place sur ${v.label}"
+            else -> "erreur d'écriture sur ${v.label}"
+        }
     }
 
     /** Why a disk write failed: drive pulled (503, retry), read-only (503), file too big for the FS (413), no space (507). */

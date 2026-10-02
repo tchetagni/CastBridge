@@ -80,6 +80,8 @@ class TvService : Service(), Device {
         fun thumbReady(name: String)
         /** A playback request that arrived while the screen was hidden, to run now. */
         fun runPending(r: Pending)
+        /** A reception began, moved on or ended (ReceiverServer.progress): refresh the live line (about once a second at most). */
+        fun transfersChanged() {}
     }
 
     /** A play request kept until the screen is up. */
@@ -213,7 +215,8 @@ class TvService : Service(), Device {
         register()
         LotsHub.startup(this, videosDir)
         Thread { RentalHub.sweep(this, castbridge.core.lots.SweepTrigger.APP_START).forEach { notice(it) }; main.postDelayed(rentalTick, 15 * 60_000L) }.start()   // the autonomous deletion of ended rentals
-        bt = BtServer(this, videosDir, guard, negotiate = ::linkInfo, hello = ::btHello, trusted = ::btTrusted, parental = ParentalHub.syncHost) { setStatus("1-bt", it) }
+        bt = BtServer(this, videosDir, guard, negotiate = ::linkInfo, hello = ::btHello, trusted = ::btTrusted, parental = ParentalHub.syncHost,
+            progress = { server?.progress }) { setStatus("1-bt", it) }
         wd = WifiDirectGroup(this, prefs) { setStatus("2-wd", it); syncIconsAsync() }
         usb = UsbImporter(this, videosDir) { setStatus("3-usb", it) }
         ssh = SshControl(this, { setStatus("4-ssh", it) }, { setStatus("4-ssh-bt", it) },
@@ -260,7 +263,9 @@ class TvService : Service(), Device {
             // the phone's library assistant never touches what the parental control protects (docs/LIBRARY-AGENT.md)
             contentFlags = castbridge.core.library.agent.EngineContentFlags(ParentalHub.engine), folders = folderIndex,
             // « Rangement à la réception » (docs/STORAGE.md): received files go to real category folders under a clean name; setting "file_on_receive", on by default
-            filingLang = { if (prefs.getBool("file_on_receive", true)) "fr" else null })
+            filingLang = { if (prefs.getBool("file_on_receive", true)) "fr" else null },
+            sourceName = { a -> trust.get(a)?.name })
+        s.progress.addListener(receptionNotifier)
         try {
             s.start(15_000, false); server = s
         } catch (e: Exception) {
@@ -611,6 +616,35 @@ class TvService : Service(), Device {
     fun setStatus(key: String, text: String?) {
         if (text == null) statuses.remove(key) else statuses[key] = text
         main.post { screen?.statusesChanged() }
+    }
+
+    // ------------------------------------------------------------------ reception progress (one notification per transfer)
+
+    /**
+     * Every reception (Wi-Fi, Wi-Fi multivoie, Bluetooth) as a notification of its own, fed by ReceiverServer.progress (already throttled to about one
+     * update a second): progress bar while it runs, then « Vidéo reçue ✓ » or the error, removed a few seconds later. The screen is told too.
+     */
+    private val notifTokens = ConcurrentHashMap<Int, Any>()
+    private val receptionNotifier = castbridge.core.xfer.TransferProgress.Listener { item ->
+        main.post { screen?.transfersChanged() }
+        runCatching {
+            val nm = getSystemService(NotificationManager::class.java)
+            nm.createNotificationChannel(NotificationChannel(CH_TRANSFER, "Réceptions en cours", NotificationManager.IMPORTANCE_LOW))
+            val id = NOTIF_TRANSFER + item.seq % 1000
+            val token = notifTokens.getOrPut(id) { Any() }                // Handler compares tokens by identity: one object per id
+            val open = PendingIntent.getActivity(this, 2, Intent(this, PlayerActivity::class.java).addFlags(Intent.FLAG_ACTIVITY_NEW_TASK), PendingIntent.FLAG_IMMUTABLE)
+            val b = Notification.Builder(this, CH_TRANSFER).setSmallIcon(R.drawable.ic_stat_castbridge).setContentIntent(open).setOnlyAlertOnce(true)
+            if (!item.ended) {
+                b.setContentTitle("Réception : ${item.title}").setContentText(item.detail()).setOngoing(true)
+                    .setProgress(100, item.percent, item.total <= 0).setCategory(Notification.CATEGORY_PROGRESS)
+                main.removeCallbacksAndMessages(token)
+            } else {
+                b.setContentTitle(item.endLine()).setContentText(item.title).setOngoing(false).setAutoCancel(true)
+                main.removeCallbacksAndMessages(token)
+                main.postAtTime({ runCatching { nm.cancel(id) } }, token, android.os.SystemClock.uptimeMillis() + 10_000)
+            }
+            nm.notify(id, b.build())
+        }.onFailure { Log.w(TAG, "reception notification: ${it.javaClass.simpleName}") }   // POST_NOTIFICATIONS refused (Android 13+): the screen still shows it
     }
 
     private fun canUseFullScreen(): Boolean = Build.VERSION.SDK_INT < 34 || runCatching { getSystemService(NotificationManager::class.java).canUseFullScreenIntent() }.getOrDefault(false)
@@ -1013,6 +1047,8 @@ class TvService : Service(), Device {
         private const val TAG = "CastBridgeTV"
         private const val CH_SERVICE = "tv-service"
         private const val CH_LAUNCH = "tv-launch"
+        private const val CH_TRANSFER = "tv-transfer"
+        private const val NOTIF_TRANSFER = 5000
         private const val NOTIF = 1
         /** A phone that said hello (or used its token) is shown connected this long without news; each sign of life renews it. */
         private const val PHONE_LEASE_MS = 10 * 60_000L
