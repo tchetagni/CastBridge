@@ -163,7 +163,7 @@ object TvLinkManager {
                     if (saved.list().isNotEmpty()) break
                     val tv = SavedTv(TrustRegistry.norm(c.address), c.name.ifBlank { "Ma TV" }, addedAt = System.currentTimeMillis())
                     val r = runCatching { link.connect(tv, requestTrust = false) }.getOrNull()
-                    Log.i(TAG, "reprise de ${c.name}: ${r?.javaClass?.simpleName}")
+                    Log.i(TAG, "reprise de ${c.name}: ${r?.javaClass?.simpleName}" + ((r as? PhoneLink.Result.Refused)?.let { " code ${it.code} (${castbridge.core.tv.BtProtocol.describe(it.code)}) indice ${it.hint}" } ?: ""))
                     if (r is PhoneLink.Result.Connected) {
                         saved.upsert(r.session.tv, makeDefault = true)
                         LinkJobService.schedulePeriodic(app); driver.adopt(r.session); publish(driver.step(Trigger.USER)); poke()
@@ -221,11 +221,11 @@ object TvLinkManager {
 
     fun makeDefault(address: String) { saved.setDefault(address); retryNow() }
 
-    // ---- « Réassocier »: forget locally, then the whole pairing flow starts by itself in « Ajouter ma TV » ----
+    // ---- « Réassocier »: the TV stays saved (token dropped), then the whole pairing flow starts by itself in « Ajouter ma TV » ----
 
     fun requestReassociate(address: String) {
         pendingReassociate = saved.get(address)
-        forget(address)
+        scope.launch { driver.prepareReassociate(address) }     // off the main thread: a step may be in the middle of a HELLO
     }
 
     fun takeReassociate(): SavedTv? = pendingReassociate.also { pendingReassociate = null }

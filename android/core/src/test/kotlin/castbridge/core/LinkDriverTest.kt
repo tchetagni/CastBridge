@@ -57,6 +57,35 @@ class LinkDriverTest {
         assertEquals(connects + 1, tv.connects, "the user's retry does go through")
     }
 
+    @Test fun reassociateKeepsTheTvSavedUntilTheNewPairingSucceeds() {
+        connect(); tv.reinstall(); tv.bonded += tv.phone
+        phone.run(5 * 60_000)
+        assertEquals("forgot:${BtProtocol.HINT_OTHER_INSTALL}", shown().key)
+        val oldId = phone.saved.get(TV_ADDR)!!.installId
+        // « Réassocier » pressed, then the pairing is abandoned (TV window never opened, app killed, « Saisir le code à la place »)
+        val kept = phone.driver.prepareReassociate(TV_ADDR)
+        assertNotNull(kept)
+        assertEquals(listOf(TV_ADDR), phone.saved.list().map { it.address }, "the TV stays in the list: never « Aucune TV ajoutée » after an unfinished re-pairing")
+        assertNull(phone.driver.credential(), "the token the TV no longer accepts is dropped")
+        assertNull(phone.store.loadCredential(TV_ADDR))
+        phone.clock.advance(5_000)
+        assertTrue(phone.driver.step(Trigger.USER).view.state.key.startsWith("forgot"), "still honest: the TV does not know this phone")
+        // the owner approves on the TV this time: the pairing flow's session replaces the saved TV (same address, new install id)
+        phone.trustOnTv()
+        val r = phone.link.connect(kept!!.copy(installId = null), requestTrust = true)
+        assertTrue(r is PhoneLink.Result.Connected, "$r")
+        phone.driver.adopt(r.session)
+        assertEquals(1, phone.saved.list().size)
+        assertNotEquals(oldId, phone.saved.get(TV_ADDR)!!.installId, "the new installation's id is kept")
+        assertTrue(phone.driver.step(Trigger.USER).view.state.isGood)
+    }
+
+    @Test fun reassociateOfAnUnknownAddressDoesNothing() {
+        connect()
+        assertNull(phone.driver.prepareReassociate("00:00:00:00:00:00"))
+        assertNotNull(phone.driver.credential(), "the current TV's token is untouched")
+    }
+
     @Test fun phoneRemovedOnTheTvIsToldApartFromAReinstall() {
         connect(); tv.reg.revoke(tv.phone)
         phone.run(5 * 60_000)
