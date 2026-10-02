@@ -163,7 +163,7 @@ object TokenVectors {
                     }
                     "deleteFile" -> { file.delete(); SafeFile.bak(file).delete() }
                     "markDelete" -> markFile.delete()
-                    "markWrite" -> { val k = keys.getValue(key); markFile.parentFile.mkdirs(); val body = listOf(FileWalletMark.MAGIC, "install=${s.str("installId")}", "opened=${s.str("fp")}|${s.long("chain")}|${s.long("at") ?: 0L}")
+                    "markWrite" -> { val k = keys.getValue(key); markFile.parentFile.mkdirs(); val body = listOf(FileWalletMark.MAGIC, "install=${s.str("installId")}", "opened=${s.str("fp")}|${s.long("chain")}|${s.long("at") ?: 0L}|${s.long("grantSeq") ?: 0L}")
                         markFile.writeText((body + "mac=${TokenWallet.mac(k, body.joinToString("\n"))}").joinToString("\n") + "\n") }
                     "markFlipMac" -> markFile.writeText(markFile.readText().trimEnd('\n').let { it.dropLast(1) + (if (it.last() == '0') '1' else '0') } + "\n")
                     "checkMark" -> {
@@ -172,6 +172,7 @@ object TokenVectors {
                             if (s["matchesFile"] == true && m.openedFp != firstGrantFp()) return "$at : la marque ne correspond pas au fichier"
                             s.long("chain")?.let { if (m.chain.toLong() != it) return "$at : chaîne ${m.chain} au lieu de $it" }
                             s.str("openedFp")?.let { if (m.openedFp != it) return "$at : opened ${m.openedFp}" }
+                            s.long("grantSeq")?.let { if (m.grantSeq != it) return "$at : grantSeq ${m.grantSeq} au lieu de $it" }
                         }
                     }
                     "copySave" -> copy = file.readText()

@@ -16,6 +16,9 @@ fun interface WalletKeyProvider { fun key(): ByteArray? }
 /** Clé fixe (tests, vecteurs). */
 class FixedWalletKey(private val k: ByteArray?) : WalletKeyProvider { override fun key(): ByteArray? = k?.copyOf() }
 
+/** Où va le journal du porte-jetons (jamais de secret dans les messages). Les tests y branchent une liste ; la TV, son journal. */
+fun interface WalletLog { fun log(message: String) }
+
 object WalletKey {
     /** `HKDF-SHA256(extract("castbridge-wallet-v1", installPriv), "mac", 32)`. */
     fun derive(installPriv: ByteArray): ByteArray = Hkdf.expand(Hkdf.extract("castbridge-wallet-v1".toByteArray(), installPriv), "mac".toByteArray(), 32)
@@ -96,13 +99,14 @@ class WalletSummary(val state: WalletState, val lastGrant: Long, val lastSpendSe
  * jamais de suppression sans renommage. Un bon `fresh=0` n'est crédité qu'en état OK, un bon `fresh=1` jamais en état OK.
  *
  * Limites assumées : retirer les DERNIÈRES lignes revient à restaurer un état antérieur, indétectable localement ; le serveur le voit (`TOKEN_REPLAY`, séquence qui recule). Effacer le fichier ne
- * recrédite plus rien (il faut un bon d'ouverture) ; root qui rejoue le bon d'ouverture de la chaîne courante regagne au plus ce bon (≤ 60 jetons), détecté au contact suivant. La compaction garde les dernières dépenses accusées ([TokenWallet.KEEP_RECENT] au moins, ou celles des dernières 24 h) : seules les clés d'opération plus anciennes sont oubliées, rejouer une
+ * recrédite plus rien (il faut un bon d'ouverture) ; le bon d'ouverture déjà employé (ou plus ancien) est refusé localement tant que la marque est valide ([Mark.grantSeq]) : la boucle « dépenser, casser, rejouer » est impossible hors ligne ; seul un bon d'ouverture NEUF du serveur rouvre (≤ 60 jetons, calculés par le serveur d'après son grand livre). Marque absente ou fausse (root) : le serveur reste le recours (`TOKEN_REPLAY`). La compaction garde les dernières dépenses accusées ([TokenWallet.KEEP_RECENT] au moins, ou celles des dernières 24 h) : seules les clés d'opération plus anciennes sont oubliées, rejouer une
  * opération aussi ancienne n'est pas couvert (une partie dure bien moins de 24 h). Plusieurs instances ou processus sur le même fichier : voir [TokenWallet.of] ; toute opération relit le fichier sous verrou.
  * L'horloge reculée est acceptée (la séquence fait foi) et signalée par [WalletSummary.clockNote].
  */
-class TokenWallet(private val file: File, private val keys: WalletKeyProvider, private val mark: WalletMark, private val compactAbove: Int = COMPACT_ABOVE, private val keepRecent: Int = KEEP_RECENT, private val keepWindowMs: Long = KEEP_WINDOW_MS) {
+class TokenWallet(private val file: File, private val keys: WalletKeyProvider, private val mark: WalletMark, private val compactAbove: Int = COMPACT_ABOVE, private val keepRecent: Int = KEEP_RECENT, private val keepWindowMs: Long = KEEP_WINDOW_MS,
+                  private val log: WalletLog = WalletLog { }) {
     private class GrantLine(val grant: Long, val amount: Long, val fp: String)
-    private class Parsed(val license: String, val install: String, val baseGrant: Long, val baseSum: Long, val grants: List<GrantLine>, val ackedSeq: Long, val ackedTotal: Long, val spends: List<SpendLine>, val lines: List<String>, val tailMac: String, val clockNote: String?, val openFp: String) {
+    private class Parsed(val license: String, val install: String, val baseGrant: Long, val baseSum: Long, val grants: List<GrantLine>, val ackedSeq: Long, val ackedTotal: Long, val spends: List<SpendLine>, val lines: List<String>, val tailMac: String, val clockNote: String?, val openFp: String, val openGrant: Long) {
         val lastGrant get() = grants.lastOrNull()?.grant ?: baseGrant
         val lastSpendSeq get() = spends.lastOrNull()?.seq ?: ackedSeq
         val spentTotal get() = ackedTotal + spends.sumOf { it.cost }
@@ -119,15 +123,20 @@ class TokenWallet(private val file: File, private val keys: WalletKeyProvider, p
     private var parsed: Parsed? = null
     private var cacheText: String? = null
     private var cacheKey: ByteArray? = null
+    /** Vrai pendant une opération dont le verrou `wallet.lock` n'a pu être pris : lectures permises, TOUTE écriture refusée (cause dans [lockProblem]). */
+    private var writesRefused = false
+    private var lockProblem = ""
 
     /** Exclusion entre threads (même verrou pour toutes les instances du fichier) ET entre processus (`FileChannel.lock` sur le fichier `.lock` voisin), réentrant. */
     private fun <T> locked(body: () -> T): T {
         shared.lock.lock()
         try {
             if (shared.lock.holdCount > 1) return body()
-            val ch = runCatching { file.absoluteFile.parentFile?.mkdirs(); java.io.RandomAccessFile(lockFile(file), "rw").channel }.getOrNull() ?: return body()
-            val fl = runCatching { ch.lock() }.getOrNull()
-            try { return body() } finally { runCatching { fl?.release() }; runCatching { ch.close() } }
+            val ch = runCatching { file.absoluteFile.parentFile?.mkdirs(); java.io.RandomAccessFile(lockFile(file), "rw").channel }.onFailure { lockProblem = "ouverture de ${lockFile(file).name} impossible (${it::class.simpleName})" }.getOrNull()
+            val fl = if (ch == null) null else runCatching { ch.lock() }.onFailure { lockProblem = "verrou de ${lockFile(file).name} impossible (${it::class.simpleName})" }.getOrNull()
+            // no inter-process lock: running unlocked silently could lose a spend written by another process, so reads go on and every write is refused (and logged)
+            writesRefused = fl == null
+            try { return body() } finally { writesRefused = false; runCatching { fl?.release() }; runCatching { ch?.close() } }
         } finally { shared.lock.unlock() }
     }
 
@@ -149,7 +158,9 @@ class TokenWallet(private val file: File, private val keys: WalletKeyProvider, p
         if (m != null && m.openedFp != p.openFp) { state = WalletState.UNREADABLE; cause = WalletCause.FOREIGN_CHAIN; parsed = null; cacheText = null; markNote = null; return }
         parsed = p; state = WalletState.OK; cause = WalletCause.NONE; cacheText = text; cacheKey = key.copyOf(); shared.ackedMem = maxOf(shared.ackedMem, p.ackedSeq)
         markNote = null
-        if (m == null) markNote = if (mark.write(Mark(p.install, p.openFp, 1, 0))) MARK_RECREATED else MARK_RECREATE_FAILED   // tolerance: a missing mark never blocks the wallet
+        // the mark is checked ONCE per text (the early return above memoises it): a read path never retries a mark write that failed
+        if (m == null) markNote = if (!writesRefused && mark.write(Mark(p.install, p.openFp, 1, 0, p.openGrant))) MARK_RECREATED else MARK_RECREATE_FAILED   // tolerance: a missing mark never blocks the wallet
+        else if (m.grantSeq < p.openGrant && !writesRefused) mark.write(Mark(m.install, m.openedFp, m.chain, m.atMs, p.openGrant))   // heals the mark of an opening whose last mark write was cut or failed
     }
 
     private fun <T> tx(body: () -> T): T = locked { refresh(); body() }
@@ -200,19 +211,53 @@ class TokenWallet(private val file: File, private val keys: WalletKeyProvider, p
     }
 
     /**
-     * Ouvre une chaîne neuve depuis le bon d'ouverture [g] (état vide ou illisible) : (a) l'ancien `wallet.txt` et son `.bak` sont mis de côté (jamais supprimés), (b) la nouvelle chaîne
-     * `license, install, grant` est écrite, (c) la marque `opened=<fp>|<chain>|<ms>` est écrite. Un échec en (b) ou (c) remet l'ancien fichier en place et rend [CreditResult.WRITE_FAILED] (le bon,
-     * toujours valable, peut être rejoué). Succès : les anciens fichiers deviennent `wallet.txt.broken-<n>` (au plus [KEEP_BROKEN], le plus ancien est effacé).
+     * Ouvre une chaîne neuve depuis le bon d'ouverture [g] (état vide ou illisible). Refusé ([CreditResult.STALE]) si une marque valide existe et que `g.grant <= marque.grantSeq` : le bon d'ouverture
+     * déjà employé (ou plus ancien) ne rouvre JAMAIS, même fichier cassé ou effacé (sinon « dépenser, casser une ligne, rejouer le bon » serait illimité hors ligne). Ordre (coupure de courant
+     * possible à chaque point) : (a) `wallet.txt.broken-new` d'une reprise coupée est numéroté, (b) l'ancien `wallet.txt` et son `.bak` sont mis de côté (jamais supprimés), (c) la marque « ouverture
+     * en cours » `opened=<fp>|<chain>|<ms>|<grant-1>` est écrite AVANT le nouveau fichier (une coupure ici donne [WalletCause.LOST], que le MÊME bon répare), (d) la nouvelle chaîne
+     * `license, install, grant` est écrite, (e) la marque finale (`grantSeq = grant`) remplace la marque provisoire (si elle échoue, la marque provisoire reste cohérente avec le fichier et est
+     * rehaussée à la prochaine relecture). Un échec en (c) n'annule la reprise QUE s'il existait déjà une marque valide ; un échec en (d) remet l'ancien fichier et l'ancienne marque en place et
+     * rend [CreditResult.WRITE_FAILED] (le bon, toujours valable, peut être rejoué). Succès : les anciens fichiers deviennent `wallet.txt.broken-<n>` (au plus [KEEP_BROKEN], le plus ancien est effacé).
      */
     private fun reopen(g: TokenGrant, fp: String, key: ByteArray, nowMs: Long): CreditResult {
-        val chain = ((mark.read()?.chain ?: 0) + 1).coerceAtMost(1_000_000)
+        if (writesRefused) { log.log("reprise refusée : $lockProblem"); return CreditResult.WRITE_FAILED }
+        val prev = mark.read()?.takeIf { it.install == g.installId }
+        if (prev != null && g.grant <= prev.grantSeq) return CreditResult.STALE     // covers « openedFp == fp » (final mark: grantSeq == grant) and any older voucher
+        val chain = ((prev?.chain ?: 0) + 1).coerceAtMost(1_000_000)
+        if (!parkOldBrokenNew()) return CreditResult.WRITE_FAILED
         val aside = moveAside() ?: return CreditResult.WRITE_FAILED
+        val at = nowMs.coerceAtLeast(0)
+        val pendingOk = mark.write(Mark(g.installId, fp, chain, at, g.grant - 1))
+        if (!pendingOk && prev != null) { restoreAside(aside); refresh(); return CreditResult.WRITE_FAILED }    // a valid mark existed: its protection must not be lost; none before: J2 tolerance, open anyway
         val text = seal(listOf("license=${g.license}", "install=${g.installId}", "grant=${g.grant}|${g.amount}|$fp"), key)
-        val written = write(text, key) && mark.write(Mark(g.installId, fp, chain, nowMs.coerceAtLeast(0)))
-        if (!written) { runCatching { file.delete() }; runCatching { SafeFile.bak(file).delete() }; restoreAside(aside); refresh(); return CreditResult.WRITE_FAILED }
-        shared.ackedMem = 0L; markNote = null
+        if (!write(text, key)) {
+            if (prev != null) mark.write(prev)
+            runCatching { file.delete() }; runCatching { SafeFile.bak(file).delete() }; restoreAside(aside); refresh(); return CreditResult.WRITE_FAILED
+        }
+        val finalOk = mark.write(Mark(g.installId, fp, chain, at, g.grant))
+        shared.ackedMem = 0L; markNote = if (!pendingOk && !finalOk) MARK_RECREATE_FAILED else null
         rotateBroken(aside)
         return CreditResult.REOPENED
+    }
+
+    /** Numéros n des fichiers `….broken-<n>` (porte-jetons et copie) présents. */
+    private fun brokenIndexes(): List<Int> {
+        val rx = Regex("^(${Regex.escape(file.name)}|${Regex.escape(SafeFile.bak(file).name)})\\.broken-(\\d+)$")
+        return (file.absoluteFile.parentFile?.listFiles() ?: emptyArray()).mapNotNull { rx.find(it.name)?.groupValues?.get(2)?.toIntOrNull() }.distinct().sorted()
+    }
+
+    /** Un `….broken-new` resté d'une reprise coupée devient `….broken-<n+1>` AVANT tout nouveau renommage (sinon il serait écrasé). Faux si un renommage échoue (rien n'est alors perdu). */
+    private fun parkOldBrokenNew(): Boolean {
+        val olds = listOf(file, SafeFile.bak(file)).filter { brokenName(it, "new").exists() }
+        if (olds.isEmpty()) return true
+        val n = (brokenIndexes().maxOrNull() ?: 0) + 1
+        val done = ArrayList<Pair<File, File>>()
+        for (b in olds) {
+            val ok = runCatching { java.nio.file.Files.move(brokenName(b, "new").toPath(), brokenName(b, n).toPath()) }.isSuccess
+            if (!ok) { restoreAside(done); return false }
+            done += brokenName(b, n) to brokenName(b, "new")
+        }
+        return true
     }
 
     private fun brokenName(base: File, n: Any) = File(base.parentFile, "${base.name}.broken-$n")
@@ -238,8 +283,7 @@ class TokenWallet(private val file: File, private val keys: WalletKeyProvider, p
     private fun rotateBroken(aside: List<Pair<File, File>>) {
         if (aside.isEmpty()) return
         val bases = listOf(file, SafeFile.bak(file))
-        val rx = Regex("^(${Regex.escape(file.name)}|${Regex.escape(SafeFile.bak(file).name)})\\.broken-(\\d+)$")
-        val existing = (file.absoluteFile.parentFile?.listFiles() ?: emptyArray()).mapNotNull { rx.find(it.name)?.groupValues?.get(2)?.toIntOrNull() }.distinct().sorted()
+        val existing = brokenIndexes()
         val keep = existing.takeLast(KEEP_BROKEN - 1)
         for (n in existing - keep.toSet()) for (b in bases) runCatching { brokenName(b, n).delete() }
         keep.forEachIndexed { i, n -> if (n != i + 1) for (b in bases) { val from = brokenName(b, n); if (from.exists()) runCatching { java.nio.file.Files.move(from.toPath(), brokenName(b, i + 1).toPath(), java.nio.file.StandardCopyOption.REPLACE_EXISTING) } } }
@@ -304,6 +348,7 @@ class TokenWallet(private val file: File, private val keys: WalletKeyProvider, p
     }
 
     private fun write(text: String, key: ByteArray): Boolean {
+        if (writesRefused) { log.log("écriture refusée : $lockProblem"); return false }
         val next = parse(text, key) ?: return false
         return runCatching { SafeFile.write(file, text) { parse(it, key) != null } }.isSuccess.also { if (it) { parsed = next; state = WalletState.OK; cacheText = text; cacheKey = key.copyOf() } }
     }
@@ -337,7 +382,7 @@ class TokenWallet(private val file: File, private val keys: WalletKeyProvider, p
          * constructeur (tests), plusieurs instances sur un même fichier partagent le verrou de thread, relisent le fichier sous verrou avant toute opération et se protègent des autres processus par
          * `FileChannel.lock` sur `wallet.lock` : aucune dépense n'est perdue.
          */
-        fun of(file: File, keys: WalletKeyProvider, mark: WalletMark, compactAbove: Int = COMPACT_ABOVE): TokenWallet = INSTANCES.computeIfAbsent(canonical(file)) { TokenWallet(file, keys, mark, compactAbove) }
+        fun of(file: File, keys: WalletKeyProvider, mark: WalletMark, compactAbove: Int = COMPACT_ABOVE, log: WalletLog = WalletLog { }): TokenWallet = INSTANCES.computeIfAbsent(canonical(file)) { TokenWallet(file, keys, mark, compactAbove, log = log) }
 
         fun hash16(line: String): String = MessageDigest.getInstance("SHA-256").digest(line.toByteArray(Charsets.UTF_8)).take(8).joinToString("") { "%02x".format(it) }
         fun mac(key: ByteArray, s: String): String = Mac.getInstance("HmacSHA256").run { init(SecretKeySpec(key, "HmacSHA256")); doFinal(s.toByteArray(Charsets.UTF_8)) }.take(8).joinToString("") { "%02x".format(it) }
@@ -398,7 +443,7 @@ class TokenWallet(private val file: File, private val keys: WalletKeyProvider, p
             }
             val openFp = baseFp ?: grants.firstOrNull()?.fp
             require(openFp != null)       // a chain always starts with its opening voucher
-            Parsed(license, install, baseGrant, baseSum, grants, ackedSeq, ackedTotal, spends, lines, tailMac, clockNote, openFp)
+            Parsed(license, install, baseGrant, baseSum, grants, ackedSeq, ackedTotal, spends, lines, tailMac, clockNote, openFp, if (baseFp != null) baseGrant else grants.first().grant)
         }.getOrNull()
     }
 }
