@@ -284,4 +284,46 @@ class InFlightTest {
         assertEquals(RemoteSession.Link.BAD_PIN, statuses.last().link); assertTrue(statuses.last().message!!.contains("réassociez"))
         assertTrue(rejected.get() in 3..4)
     }
+
+    // ---- w15-05: nothing is taken for « already there » or appended to without proof of the same content ----
+    private fun tvDirect() = TvClient("http://127.0.0.1:$port", "482913")
+
+    @Test fun aFinishedHomonymOfAnotherSizeIsNotDone() {
+        val old = source(10_000, 7); File(dir, "same.mkv").writeBytes(old)
+        val data = source(12_000, 8)
+        assertFalse(tvDirect().part("same.mkv", 12_000).done, "a finished file of another size is not this file")
+        assertTrue(tvDirect().part("same.mkv", 10_000).done, "the same size is already there")
+        val states = ArrayList<ResumableUpload.State>()
+        val r = ResumableUpload("same.mkv", data.size.toLong(), { "http://127.0.0.1:$port" }, { off -> ByteArrayInputStream(data, off.toInt(), data.size - off.toInt()) }, sleep = {}, pin = "482913").run { states += it }
+        val failed = assertIs<ResumableUpload.State.Failed>(r)
+        assertTrue(failed.reason.contains("même nom"), failed.reason)
+        assertTrue(states.none { it == ResumableUpload.State.Done }, "never Done without a byte sent")
+        assertContentEquals(old, File(dir, "same.mkv").readBytes(), "the old file is untouched")
+        val e = assertFailsWith<TvClient.NameTaken> { tvDirect().upload("same.mkv", 0, 12_000, ByteArrayInputStream(data)) {} }
+        assertNotNull(e)
+        assertContentEquals(old, File(dir, "same.mkv").readBytes())
+    }
+
+    @Test fun aPartOfAnotherContentIsNeverResumed() {
+        File(dir, "p2.mkv.part").writeBytes(source(4_000, 1)); File(dir, "p2.mkv.meta").writeText("10000")
+        val data = source(12_000, 2)
+        val before = File(dir, "p2.mkv.part").readBytes()
+        assertFailsWith<TvClient.PartOther> { tvDirect().upload("p2.mkv", 4_000, 12_000, ByteArrayInputStream(data, 4_000, 8_000)) {} }
+        assertContentEquals(before, File(dir, "p2.mkv.part").readBytes(), "nothing appended to a part of another content")
+        assertEquals("PART_OTHER", tvDirect().part("p2.mkv", 12_000).code)
+        // the resumable upload drops that partial copy and sends the whole file, never a chimera
+        val states = ArrayList<ResumableUpload.State>()
+        val r = ResumableUpload("p2.mkv", data.size.toLong(), { "http://127.0.0.1:$port" }, { off -> ByteArrayInputStream(data, off.toInt(), data.size - off.toInt()) }, sleep = {}, pin = "482913").run { states += it }
+        assertEquals(ResumableUpload.State.Done, r)
+        assertContentEquals(data, File(dir, "p2.mkv").readBytes())
+    }
+
+    @Test fun aRenamedFileResumesByOriginAndSizeNotRefused() {
+        // the strict name is free: no 409 NAME_TAKEN, and a part of the same content still resumes
+        val data = source(6_000, 3)
+        File(dir, "ok.mkv.part").writeBytes(data.copyOf(2_000)); File(dir, "ok.mkv.meta").writeText("6000")
+        val r = ResumableUpload("ok.mkv", data.size.toLong(), { "http://127.0.0.1:$port" }, { off -> ByteArrayInputStream(data, off.toInt(), data.size - off.toInt()) }, sleep = {}, pin = "482913").run { }
+        assertEquals(ResumableUpload.State.Done, r)
+        assertContentEquals(data, File(dir, "ok.mkv").readBytes())
+    }
 }

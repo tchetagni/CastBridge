@@ -8,9 +8,14 @@ import java.net.URLEncoder
 
 /** Minimal client for [ReceiverServer]. [base] is like "http://192.168.0.117:8765". Blocking calls. */
 class TvClient(val base: String, val pin: String? = null) {
-    data class Part(val length: Long, val done: Boolean)
+    /** [code] is "NAME_TAKEN" (a finished file of that name but another size is on the TV) or "PART_OTHER" (the partial copy is of another content); null otherwise or on an older TV. */
+    data class Part(val length: Long, val done: Boolean, val code: String? = null, val sizeChecked: Boolean = false)
 
-    fun part(name: String): Part = parsePart(call("GET", "/api/part?name=${enc(name)}"))
+    /**
+     * What the TV holds under [name]. With [size] (the size of the file about to be sent) the TV only says "done" for a finished file of that very size;
+     * without it an older answer is given (any finished file of that name), which a caller deleting something must never take as proof.
+     */
+    fun part(name: String, size: Long? = null): Part = parsePart(call("GET", "/api/part?name=${enc(name)}" + (size?.let { "&size=$it" } ?: "")))
     fun reset(name: String) = call("POST", "/api/reset?name=${enc(name)}")
     fun info(): String = call("GET", "/api/info")
     fun play(name: String, posMs: Long = 0) = call("POST", "/api/play?name=${enc(name)}&pos=$posMs")
@@ -126,10 +131,21 @@ class TvClient(val base: String, val pin: String? = null) {
             }
         }
         val body = read(c, allow409 = true)
-        if (c.responseCode == 409) throw Conflict(parsePart(body).length)
+        if (c.responseCode == 409) {
+            val part = parsePart(body)
+            when (part.code) {
+                "NAME_TAKEN" -> throw NameTaken()
+                "PART_OTHER" -> throw PartOther(part.length)
+            }
+            throw Conflict(part.length)
+        }
         return parsePart(body)
     }
 
+    /** 409 NAME_TAKEN: another finished file of that name (other size) is on the TV; nothing was written. */
+    class NameTaken : IOException("name taken, different size")
+    /** 409 PART_OTHER: the partial copy on the TV belongs to another content; nothing was appended. */
+    class PartOther(val serverLength: Long) : IOException("partial copy of another content")
     class Conflict(val serverLength: Long) : IOException("offset conflict, TV has $serverLength")
     class HttpError(val code: Int, body: String) : IOException("HTTP $code: ${body.take(200)}")
 
@@ -175,7 +191,7 @@ class TvClient(val base: String, val pin: String? = null) {
         }
         fun parsePart(json: String) = Part(
             Regex("\"length\":(\\d+)").find(json)?.groupValues?.get(1)?.toLong() ?: 0,
-            json.contains("\"done\":true"))
+            json.contains("\"done\":true"), str(json, "code"), json.contains("\"sizeChecked\":true"))
         /** Strings of a JSON array of strings under [key] (flat, as produced by the TV). */
         fun strList(json: String, key: String): List<String> {
             val arr = Regex("\"$key\":\\[((?:[^\\]\"]|\"(?:[^\"\\\\]|\\\\.)*\")*)\\]").find(json)?.groupValues?.get(1) ?: return emptyList()
@@ -214,6 +230,10 @@ class ResumableUpload(
     /** The credential to use NOW (a trusted phone's token is renewed while a long transfer waits); falls back to [pin]. A token the TV refused is never sent again. */
     private val credential: (() -> String?)? = null,
 ) {
+    companion object {
+        const val NAME_TAKEN_TEXT = "Un autre fichier du même nom est déjà sur la TV."
+    }
+
     sealed class State {
         data class Uploading(val sent: Long, val total: Long) : State()
         data class Waiting(val sent: Long, val total: Long, val reason: String) : State()
@@ -264,10 +284,11 @@ class ResumableUpload(
                 }
             }
             try {
-                val p = tv.part(name)
+                val p = tv.part(name, total)
                 sent = p.length
                 if (p.done) return State.Done.also(onState)
-                if (sent > total) { tv.reset(name); sent = 0 }
+                if (p.code == "NAME_TAKEN") return State.Failed(NAME_TAKEN_TEXT).also(onState)
+                if (sent > total || p.code == "PART_OTHER") { tv.reset(name); sent = 0 }
                 onState(State.Uploading(sent, total))
                 openAt(sent).use { src ->
                     val r = tv.upload(name, sent, total, src, maxBytesPerSec, target) { n ->
@@ -279,6 +300,10 @@ class ResumableUpload(
                 }
             } catch (e: castbridge.core.trust.TvCredential.Missing) {
                 return State.Failed(castbridge.core.trust.LinkText.failure(e)).also(onState)
+            } catch (e: TvClient.NameTaken) {
+                return State.Failed(NAME_TAKEN_TEXT).also(onState)
+            } catch (e: TvClient.PartOther) {
+                runCatching { tv.reset(name) }; sent = 0            // the partial copy is of another content: dropped, never appended to
             } catch (e: TvClient.HttpError) {
                 if (e.code == 401 && TvClient.isBadToken(e) && credential != null) { refusedToken = cred; continue }
                 if (e.code == 507 || e.code == 413 || e.code == 400 || e.code == 401)

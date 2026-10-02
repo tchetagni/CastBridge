@@ -152,7 +152,7 @@ class ReceiverServer(
      * that size (a different file with a similar name is a different file). Only the resume / "already there" paths use this: every other route is strict.
      */
     private fun findFinalOrOrigin(name: String, size: Long? = null): Hit? {
-        findFinal(name)?.let { return it }
+        findFinal(name)?.let { if (size == null || it.size == size) return it }      // a homonym of another size is another file (see nameTaken)
         val stores = volumes.volumes().mapNotNull { v -> (volumes.store(v) as? FileStore)?.let { v to it } }
         for ((v, fs) in stores) {
             val k = fs.filing.keyOfOrigin(name) ?: continue
@@ -381,8 +381,9 @@ class ReceiverServer(
             path == "/api/storage" -> storage(s.method, p)
             path == "/api/storage/check" -> if (s.method == Method.GET) check(p) else json(Response.Status.METHOD_NOT_ALLOWED, """{"error":"use GET"}""")
             path == "/api/part" -> named(p) { name ->
-                if (findFinalOrOrigin(name) == null && findPart(name) == null) volumes.missingOwner(name)?.let { return@named removed() }
-                ok(partJson(name))
+                val size = p["size"]?.toLongOrNull()?.takeIf { it > 0 }
+                if (findFinalOrOrigin(name, size) == null && findPart(name) == null) volumes.missingOwner(name)?.let { return@named removed() }
+                ok(if (size != null) sizeChecked(partJsonFor(name, size)) else partJson(name))
             }
             path == "/api/sysinfo" -> sysinfo()
             path == "/api/library" && s.method == Method.GET -> ok(libraryJson())
@@ -584,12 +585,18 @@ class ReceiverServer(
         val len = s.headers["content-length"]?.toLongOrNull() ?: return bad("content-length required")
         val target = p["target"]?.takeIf { it.isNotEmpty() } ?: cfg.target
         if (!StoragePolicy.isValidTarget(target, volumes.volumes() + volumes.missingVolumes())) return bad("bad target")
-        findFinalOrOrigin(name, total)?.let { if (it.size == total) return ok(partJson(name, total)) }
+        findFinalOrOrigin(name, total)?.let { if (it.size == total) return ok(sizeChecked(partJson(name, total))) }
+        // A finished file of that very name but another size is another file: never "done", never replaced silently (the phone says so to the user).
+        if (findFinal(name)?.let { it.size != total } == true && findPart(name) == null) return nameTaken(name, total)
         synchronized(FileLocks.of(LOCK_ROOT, name)) {
             if (moving(name)) return json(Response.Status.CONFLICT, """{"error":"moving"}""")
             var owner = findPart(name)
             if (owner == null) volumes.missingOwner(name)?.let { return removed() }
             val cur = owner?.size ?: 0L
+            // The partial copy is of the content announced when it was started: another total is another content, nothing is ever appended to it.
+            owner?.let { o0 -> (o0.st as? FileStore)?.let { fs0 -> Meta.read(fs0.dir, o0.name) } }?.let { m0 ->
+                if (m0 != total) return json(Response.Status.CONFLICT, partOtherJson(name, cur))
+            }
             if (offset != cur || offset + len > total) return json(Response.Status.CONFLICT, partJson(name))
             if (owner == null) {
                 // A new upload: pick the volume (policy), then check quota/space there (evicting old played files if allowed).
@@ -925,6 +932,31 @@ class ReceiverServer(
             val remaining = (op.plan.moves.size - limit).coerceAtLeast(0)
             return ok("""{"moved":$moved,"failed":$failed,"remaining":$remaining,"files":${strs(done)}}""")
         } finally { organizing.set(false) }
+    }
+
+    private fun nameTaken(name: String, total: Long): Response {
+        val have = findFinal(name)?.size ?: 0
+        return json(Response.Status.CONFLICT, """{"error":"name taken, different size","code":"NAME_TAKEN","name":${q(name)},"length":0,"done":false,"existing":$have,"total":$total,""" +
+            """"message":"Un autre fichier du même nom est déjà sur la TV."}""")
+    }
+
+    /** Marks an answer as given with the size taken into account: a phone only takes "done" as proof of the same file when it sees this (an older TV ignores `size`). */
+    private fun sizeChecked(json: String): String = json.dropLast(1) + ""","sizeChecked":true}"""
+
+    private fun partOtherJson(name: String, length: Long): String =
+        """{"error":"part of another content","code":"PART_OTHER","name":${q(name)},"length":$length,"done":false}"""
+
+    /**
+     * The answer of GET /api/part?size=: "done" only for a finished file of exactly [size] (the file the phone is about to send); a finished homonym of another
+     * size is announced as NAME_TAKEN, a partial copy started for another total as PART_OTHER (never resumed).
+     */
+    private fun partJsonFor(name: String, size: Long): String {
+        if (findFinalOrOrigin(name, size) != null) return partJson(name, size)
+        val part = findPart(name)
+        if (part == null && findFinal(name) != null) return """{"name":${q(name)},"length":0,"done":false,"volume":null,"code":"NAME_TAKEN"}"""
+        val meta = part?.let { h -> (h.st as? FileStore)?.let { Meta.read(it.dir, h.name) } }
+        if (part != null && meta != null && meta != size) return partOtherJson(name, part.size)
+        return partJson(name)
     }
 
     private fun partJson(name: String, size: Long? = null): String {
