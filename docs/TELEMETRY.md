@@ -12,6 +12,10 @@ SHA-256(sel de l'app + ":" + ANDROID_ID), jamais l'ANDROID_ID brut ; le serveur 
 L'enregistrement (`POST /api/v1/devices/register`) rend un `deviceId` et un `deviceToken` secret, qui authentifie
 les heartbeats, les plantages et les lots d'événements. Détails : `docs/API-SERVER.md` §3.
 
+**Le nom que l'utilisateur a donné à son appareil (`deviceName`, ex. « TV de Paul ») n'est ni envoyé ni conservé** : c'est un texte
+libre qui peut contenir un prénom. Les apps envoient `null` ; si une ancienne version l'envoie encore, le serveur l'ignore sans
+erreur et ne le stocke pas. L'admin affiche l'étiquette qu'il a choisie, sinon fabricant + modèle.
+
 ## 2. Consentement (deux niveaux)
 
 | Niveau | Contenu | Base | Par défaut |
@@ -141,7 +145,7 @@ récents à partir des événements bruts.
 
 | Donnée | Durée |
 |---|---|
-| Événements bruts | 13 mois, puis supprimés (seuls restent les agrégats) |
+| Événements bruts | 13 mois (propriété `castbridge.telemetry.raw-retention-days`, défaut 395), puis **supprimés par une tâche planifiée** chaque nuit à 03:30 (heure de Douala), par lots de 10 000 (seuls restent les agrégats) |
 | Agrégats par appareil (`kpi_device_day`, `kpi_feature_day`) | 25 mois |
 | Compteurs anonymes (`kpi_event_day`, `kpi_question`) | sans limite (aucun identifiant d'appareil) |
 | Heartbeats détaillés | 30 jours, puis agrégat journalier |

@@ -123,6 +123,18 @@ La clé est lue **dans le dossier des secrets** (`license-signing.key`), jamais 
 Tableau de bord : même code d'appareil sur plusieurs licences actives ; même code vu depuis ≥ 2 téléphones ou ≥ 3 adresses IP en 24 h (seule une empreinte tronquée de la source est gardée, 90 jours) ; postes au-dessus du quota ou dépassements importés en attente ;
 rafale d'émissions (≥ 10 en 10 minutes par licence) ; transferts répétés (plafond atteint, ou 2 en 30 jours). La décision (suspendre, libérer, révoquer) reste la vôtre.
 
+### 3.6 Rotation de la clé serveur
+À faire une fois par an, ou **tout de suite** si la clé privée (`license-signing.key`) a pu fuiter. Règle d'or : **la nouvelle clé est connue des appareils avant d'émettre quoi que ce soit avec elle**. Aucune de ces étapes n'est automatique.
+1. **Préparer** : sauvegarde récente de la base et du dossier des secrets (§ 8). Noter la clé actuelle : `GET /api/v1/admin/licenses/signing` (champs `publicKey`, `kid`). Garder le serveur en émission normale avec l'ancienne clé.
+2. **Générer la nouvelle clé hors ligne** (sur le bureau, pas sur le serveur de production) : même procédure qu'au § 8.1 (fichier de 32 octets aléatoires, `chmod 600`). Relever sa clé publique et son nouveau `kid` (16 premiers chiffres hexadécimaux de SHA-256 de la clé publique). Ne jamais mettre la clé privée dans un dépôt, un courriel ou un journal.
+3. **Distribuer la clé publique d'abord** : l'ajouter à l'anneau de clés de confiance des TV et des téléphones (`KeyRing`/`TrustedKey`, **mêmes portées que l'ancienne** : `ISSUE_TRIAL`, `ISSUE_PRODUCTION`, `REACTIVATE`, `REVOKE`, `REGISTRY`, `POLICY`, ni `TRANSFER` ni `COMMAND_OPEN_ALL`), sans retirer l'ancienne : nouvelle APK TV (CastbridgeTV) et téléphone (CastBridge). Ajouter aussi la clé aux outils du bureau et du téléphone propriétaire.
+4. **Période de chevauchement** : publier les APK, attendre que le parc ait majoritairement mis à jour (tableau de bord `/admin` : versions installées ; compter au moins 30 jours, plus si des TV restent hors ligne). Les TV pas encore à jour ne reconnaîtront pas les activations de la nouvelle clé : ne pas basculer avant.
+5. **Basculer l'émission** : arrêter l'écriture (fenêtre calme), déposer la nouvelle clé comme `license-signing.key` (ancienne copiée hors ligne sous un autre nom), redémarrer le serveur, vérifier `GET /api/v1/admin/licenses/signing` : le `kid` est le nouveau. Émettre une licence d'essai de test et l'installer sur une TV déjà mise à jour.
+6. **Révoquer l'ancienne clé** : produire une révocation du `kid` **ancien** signée par une clé **autre que celle qui est révoquée** (la clé de secours hors ligne, portée `REVOKE`, jamais la clé compromise : elle ne prouverait rien), l'importer dans le registre (`POST /api/v1/admin/licenses/keys/revoke {kid, reason}` côté serveur avec le nouveau kid ayant la portée `REVOKE`, ou import du registre signé par la clé de secours, § 2.5). La liste est au format `cbx1` (l'ancien `cbr1` n'existe plus, § 6).
+7. **Vérifier** : `GET /api/v1/revocations` doit rendre une ligne `cbx1.…` plus récente qui contient l'ancien `kid` ; une TV à jour l'applique à sa prochaine connexion ; un événement signé par l'ancienne clé est refusé à l'import (`REVOKED_KEY`).
+8. **Archiver** : ancienne clé privée chiffrée et hors ligne (deux supports, coffre), jamais supprimée tant que des activations qu'elle a signées existent ; noter dans le journal : dates, anciens et nouveaux `kid`, qui a fait quoi. Retirer l'ancienne clé de l'anneau des appareils dans une APK ultérieure, pas avant la fin de validité des activations qu'elle a émises.
+**Si la clé a fuité** : sauter la période de chevauchement pour l'émission (étapes 5 puis 6 dès que possible), prévenir les clients concernés et réémettre leurs activations avec la nouvelle clé.
+
 ## 4. Format filaire et modèle de données
 
 ### 4.1 Ce que le serveur écrit et lit (docs/ACTIVATION-FORMAT.md)
@@ -226,7 +238,7 @@ Les alertes sont des agrégats avec `LIMIT 50`. Une purge quotidienne efface les
 
 ## 11. Ce que le module ne fait pas (périmètre)
 Aucun paiement, aucun prix, aucun prestataire ; ne signe jamais un transfert ni un « tout ouvert » ; ne bloque rien automatiquement ; n'embarque aucune clé privée ; aucune donnée réelle de client dans les tests ; ne touche pas à l'accès au serveur ni à sa configuration partagée.
-La clé privée du serveur est un **point unique de défaillance** pour l'émission serveur (mais pas pour le « tout ouvert » ni le transfert, que le serveur ne peut pas faire) : sauvegardez-la, et prévoyez sa **rotation** (nouvelle clé = nouveau `kid` ; les appareils acceptent plusieurs clés, ajouter la nouvelle avant de retirer l'ancienne).
+La clé privée du serveur est un **point unique de défaillance** pour l'émission serveur (mais pas pour le « tout ouvert » ni le transfert, que le serveur ne peut pas faire) : sauvegardez-la, et prévoyez sa **rotation** (procédure pas à pas : § 3.6 ; nouvelle clé = nouveau `kid` ; les appareils acceptent plusieurs clés, ajouter la nouvelle avant de retirer l'ancienne).
 
 ## 12. Ce qui a été vérifié, et ce qui ne l'a pas pu être
 **Vérifié** (`cd backend && mvn test`) : conformité au format (9 vecteurs de construction d'activation octet pour octet, 10 vecteurs de registre via l'import, codes d'appareil, k parmi n, base32) ; migrations sur base vide et sur une copie des schémas V1–V30 avec données, retour arrière puis rejeu, contraintes (unicité, clés étrangères, `CHECK`) ;

@@ -23,5 +23,21 @@ Les routines sont suivies par leurs exécutions (`list_runs`). Une session ouver
 Une session qui a fini relit `docs/coordination/ORDRES.md` (sur `origin/integration/agents`) toutes les minutes ; règles et format dans ce fichier.
 Le coordinateur ajoute une ligne `ORDRE n …` qui pointe vers un cahier. Rien n'est exécuté en dehors de ce fichier et des cahiers.
 
+## Flux CI
+
+Trois workflows exécutent les tests et les vérifications de l'intégration :
+
+- **tools.yml** : (`on: push, pull_request, workflow_dispatch` ; `concurrency` par ref ; `timeout: 20 min`) Python 3.12 + FFmpeg ; jobs :
+  - `python-tools` : `python3 -m unittest discover` sur `tools/tests`, `tools/trial-edition`, `tools/anim` ; tests de contenu (`content-validation`, `media-pipeline/tests`)
+  - `quiz-bank` : tests du quiz-bank et `quizbank.py check` (filtre de chemins `tools/quiz-bank/**, content/quiz/**`)
+  - `vectors` : vérification des vecteurs d'activation (dépend de `cryptography`)
+  - `content-checks` : budgets de contenu et vérifications d'essai (filtre de chemins `content/**, tools/content-budget/**, tools/trial-edition/**`)
+
+- **android.yml** : (`on: push, workflow_dispatch` ; `timeout: 30 min`) Gradle + tests : `:core:test :sshd:test :core:checkStarterBudget assembleDebug` ; artefacts : APK + rapports de tests
+
+- **release.yml** : (`on: workflow_dispatch` seulement) Build unsigned release APKs (`-PrequireActivation=true`) ; la signature et la publication se font sur le Mac du propriétaire (docs/RELEASES.md) ; artefacts nommés `NON-VERROUILLEE-NE-PAS-DISTRIBUER`.
+
+Pour relancer un workflow : Actions > workflows > Run workflow > Branch/Ref.
+
 ## Ce qui reste manuel (propriétaire)
 Approbations (accès aux dépôts, branches), installation sur la TV, tout ce qui touche au serveur de production.

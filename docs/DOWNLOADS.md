@@ -198,3 +198,14 @@ qu'il désigne (aria2 : <https://github.com/aria2/aria2/releases/tag/release-1.3
 publié, et joindre ces archives (ou une offre écrite de les fournir) si l'APK est distribué hors de ce dépôt.
 L'écran « À propos » de la TV, du téléphone et de la page web le rappelle. Autres licences : OpenSSL (Apache-2.0),
 c-ares (MIT), libssh2 (BSD-3-Clause), expat (MIT), zlib (zlib).
+
+Le texte de la GPL-2.0 et l'offre écrite de sources sont embarqués dans `android/receiver/src/main/jniLibs/COPYING-aria2.txt`
+(à joindre à chaque distribution de l'APK).
+
+### Profil « hors ligne » (aucun pair, aucun port)
+
+Le moteur ne fait que du HTTP(S)/FTP : `--enable-dht=false`, `--enable-dht6=false`, `--bt-enable-lpd=false`,
+`--enable-peer-exchange=false`, `--follow-torrent=false`, plus aucun `--listen-port`, `--dht-listen-port` ni `--dht-file-path`
+et aucune option `bt-*` de réglage. La TV n'est donc joignable par aucun pair d'Internet (rien n'écoute sur 6881-6889).
+Un `.torrent` ou un magnet n'est plus suivi par aria2 ; l'API ne les propose plus dans l'interface lorsque le coordinateur aura
+retiré leur refus côté `DownloadManager`. (Dans l'édition d'essai, le moteur ne démarre déjà pas : `TvDownloads.engineOnDemand`.)

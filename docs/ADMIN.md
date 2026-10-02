@@ -20,7 +20,8 @@ Il n'existe volontairement aucun moyen de le lire à distance. Il est conservé 
 et n'est jamais écrit dans les journaux.
 
 Toutes les routes sauf `GET /` (page web) et `GET /api/hello` exigent le PIN :
-en-tête `X-CB-Pin: 123456` (recommandé) ou paramètre `?pin=123456`.
+en-tête `X-CB-Pin: 123456` **uniquement** (le paramètre `?pin=` n'est plus accepté : il finissait dans les journaux et permettait le CSRF).
+La TV refuse aussi (`403 Hôte non autorisé`) toute requête dont l'en-tête `Host` n'est pas une adresse IP privée/locale ou `localhost` (anti DNS-rebinding) : utilisez l'adresse IP de la TV, pas un nom DNS.
 Après **5 échecs** depuis une même IP, cette IP est verrouillée **60 s** (même le bon PIN est refusé pendant ce temps).
 Un agent qui reçoit `401` ne doit pas réessayer en boucle : voir `retryAfter`.
 
@@ -243,6 +244,7 @@ Les connexions et les modes de CastBridge-TV ne sont plus annoncés par des band
 L'icône Internet de la barre (anciennement un badge à part) dit **par où** la TV a vraiment Internet :
 « Internet : Wi-Fi », « Internet : Ethernet », « Internet : via le téléphone » (passerelle Bluetooth, voir ci-dessous) ou, en rouge, « Pas d'Internet ». Au démarrage : « vérification… » (estompée).
 - Le badge se fonde sur le test 204 existant (`connectivitycheck.gstatic.com`), pas sur l'état du lien : un Wi-Fi « connecté » sans Internet n'est jamais affiché comme connecté.
+- **Sonde coupée par défaut** (réglage `netProbe`, désactivé) : la TV n'envoie plus périodiquement ce test 204 à un tiers. L'état vient alors des rappels système (`ConnectivityManager`, capacité `NET_CAPABILITY_VALIDATED`) et de l'état de la passerelle, sans trafic sortant : « Internet : Wi-Fi » si le système a validé le réseau ; sans validation, le badge reste « vérification… » (« Wi-Fi connecté · Internet non vérifié » dans le résumé), jamais « Pas d'Internet » en rouge ; « Pas d'Internet » seulement s'il n'y a aucun réseau. La latence n'est plus mesurée (`direct.ms` = 0 dans `/api/net`). Le vrai test 204 ne part que sur action manuelle (écran « Tests Internet »), si `netProbe` est activé, ou tant que l'assistance à distance est activée (conditions acceptées) : elle a besoin de savoir si Internet est joignable.
 - Règle : réseau de la TV d'abord s'il répond, sinon passerelle du téléphone si elle répond, sinon « Pas d'Internet ». Quand les deux répondent, le badge montre le réseau de la TV ; la passerelle disponible reste visible dans « Internet » (réglages) et dans `/api/net` (`gateway.alsoAvailable`).
 - Anti-clignotement (Wi-Fi instable) : 1 succès = en ligne tout de suite, 2 échecs de suite = hors ligne ; un changement de chemin attend 8 s d'affichage minimum (sauf la sortie de « Pas d'Internet »).
 - Cadence : 60 s tant qu'Internet marche ; 10 s, puis 15 s, puis 30 s (plafond) tant qu'il n'y en a pas ; nouveau test aussitôt (1,5 s) après une perte/retour de réseau Android ou la connexion/déconnexion du téléphone-passerelle. Aucune télémétrie nouvelle : l'évènement `connectivity_check` est inchangé.

@@ -328,6 +328,60 @@ Catalogue signé `GET /api/v1/lots/catalog`, fichiers `GET /api/v1/lots/{feature
 
 Catalogue **signé** des bouquets `GET /api/v1/catalog/bundles` (public, lecture seule ; fichier signé hors ligne par le propriétaire, relayé tel quel ; `404` si absent) : voir `docs/CONTENT-PUBLISH.md` § 5 bis. Appelé seulement par les outils du propriétaire, à sa demande.
 
+## 4 ter. Contenus libres (public)
+
+Les utilisateurs dont l'app n'est PAS activée peuvent télécharger tous les contenus marqués CC BY-SA en un seul fichier ZIP. Le fichier est produit hors ligne par le propriétaire (`tools/free-content/build_free_archive.py`) et copié en SSH dans le répertoire configuré sur le serveur (par défaut `{storage-dir}/lots/castbridge-contenus-libres.zip`, variable d'environnement `CASTBRIDGE_FREE_CONTENT_FILE`). Aucun redémarrage du serveur n'est nécessaire après le dépôt du fichier.
+
+### Télécharger l'archive
+
+`GET /api/v1/free-content` (public, pas de cookie, pas d'auth) :
+- `Content-Type: application/zip`
+- `Content-Disposition: attachment; filename="castbridge-contenus-libres.zip"`
+- Support `Accept-Ranges: bytes`, `Range: bytes=N-M` → `206` + `Content-Range` (utile pour reprendre un téléchargement interrompu)
+- ETag et `If-None-Match` → `304` si inchangé
+- `Cache-Control: no-cache` (le contenu peut changer si l'archive est mise à jour)
+- Taille max 200 MiB → `413` si dépassé
+- `404` si absent
+
+```sh
+curl -C - -o castbridge-contenus-libres.zip "$CB/api/v1/free-content"    # reprend un téléchargement
+curl -I "$CB/api/v1/free-content"                                         # HEAD : en-têtes et taille seulement
+```
+
+### Métadonnées de l'archive
+
+`GET /api/v1/free-content/info` (public) : JSON avec les métadonnées (pour l'app : afficher la taille, vérifier le téléchargement) :
+
+```json
+{
+  "available": true,
+  "sizeBytes": 12345678,
+  "sha256": "abcd1234…",
+  "generatedAt": "2026-10-02T10:00:00Z",
+  "licence": "CC BY-SA",
+  "fileName": "castbridge-contenus-libres.zip"
+}
+```
+
+- `available` : `true` si le serveur a l'archive
+- `sizeBytes` : taille en octets
+- `sha256` : empreinte SHA-256 complète (hexadécimal) pour vérifier le téléchargement
+- `generatedAt` : horodatage ISO 8601 du fichier (moment de sa création)
+- `licence` : toujours `"CC BY-SA"`
+- `fileName` : nom du fichier
+
+### Déploiement
+
+Au moment du déploiement de l'archive :
+
+```sh
+scp castbridge-contenus-libres.zip server:/data/apk/lots/
+# ou avec une variable d'environnement personnalisée
+scp castbridge-contenus-libres.zip server:$CASTBRIDGE_FREE_CONTENT_FILE
+```
+
+Le fichier est lu à chaque requête (du disque, avec cache en mémoire basé sur path+mtime+size). Il n'y a pas de redémarrage du serveur à faire.
+
 ## 5. Divers
 
 - `GET /admin` : interface d'administration web (connexion par identifiant/mot de passe, voir `backend/README.md`).
