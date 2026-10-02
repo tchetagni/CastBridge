@@ -40,14 +40,18 @@ public class TelemetryService {
     private static final Pattern UUID = Pattern.compile("[0-9a-fA-F-]{36}");
     private static final int MAX_ERRORS = 20;
     /** Raw events are kept 13 months; per-device aggregates 25 months; anonymous aggregates without limit. */
-    static final int RAW_DAYS = 396, DEVICE_AGG_DAYS = 760;
+    static final int DEVICE_AGG_DAYS = 760, PURGE_BATCH = 10_000;
 
     private final JdbcTemplate jdbc;
     private final ObjectMapper json;
+    /** Raw event retention in days (castbridge.telemetry.raw-retention-days, default 395 = 13 months). */
+    private final int rawRetentionDays;
 
-    public TelemetryService(JdbcTemplate jdbc, ObjectMapper json) {
+    public TelemetryService(JdbcTemplate jdbc, ObjectMapper json,
+                            @org.springframework.beans.factory.annotation.Value("${castbridge.telemetry.raw-retention-days:395}") int rawRetentionDays) {
         this.jdbc = jdbc;
         this.json = json;
+        this.rawRetentionDays = Math.max(1, rawRetentionDays);
     }
 
     public record Rejected(String id, String reason) {}
@@ -292,15 +296,26 @@ public class TelemetryService {
      * anonymous daily counters of yesterday and today are rebuilt from the raw events (repairs any drift, e.g. after an
      * erasure or a replayed batch counted during a failure).
      */
-    @Scheduled(cron = "0 45 3 * * *", zone = "Africa/Douala")
+    @Scheduled(cron = "0 30 3 * * *", zone = "Africa/Douala")
     @Transactional
     public void nightly() {
         LocalDate today = LocalDate.now(CastbridgeApplication.ZONE);
-        int raw = jdbc.update("delete from telemetry_event where stat_day < ?", today.minusDays(RAW_DAYS));
+        int raw = purgeRawEvents(today);
         int dev = jdbc.update("delete from kpi_device_day where stat_day < ?", today.minusDays(DEVICE_AGG_DAYS));
         int feat = jdbc.update("delete from kpi_feature_day where stat_day < ?", today.minusDays(DEVICE_AGG_DAYS));
         for (LocalDate d : List.of(today.minusDays(1), today)) rebuildEventDay(d);
         log.info("telemetry retention: {} raw events, {} device-days, {} feature-days purged", raw, dev, feat);
+    }
+
+    /** Deletes raw events older than the retention, 10 000 rows at a time (never touches the kpi_* aggregates). */
+    public int purgeRawEvents(LocalDate today) {
+        LocalDate limit = today.minusDays(rawRetentionDays);
+        int total = 0, n;
+        do {
+            n = jdbc.update("delete from telemetry_event where stat_day < ? limit " + PURGE_BATCH, limit);
+            total += n;
+        } while (n >= PURGE_BATCH);
+        return total;
     }
 
     void rebuildEventDay(LocalDate day) {

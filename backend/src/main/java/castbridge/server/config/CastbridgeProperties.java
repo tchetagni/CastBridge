@@ -17,6 +17,7 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
  * @param devices       device tracking and retention
  * @param geo           approximate location of devices from their public IP
  * @param catalog       the signed bundle catalogue served to the owner's tools
+ * @param freeContent   the free content archive (CC BY-SA, public download)
  */
 @ConfigurationProperties(prefix = "castbridge")
 public record CastbridgeProperties(
@@ -30,7 +31,8 @@ public record CastbridgeProperties(
         Quiz quiz,
         Devices devices,
         Geo geo,
-        Catalog catalog) {
+        Catalog catalog,
+        FreeContent freeContent) {
 
     public CastbridgeProperties {
         if (web == null) web = new Web(null, null, false);
@@ -45,6 +47,8 @@ public record CastbridgeProperties(
         if (geo == null) geo = new Geo(null, null);
         if (catalog == null) catalog = new Catalog(null);
         if (catalog.bundlesFile() == null || catalog.bundlesFile().toString().isBlank()) catalog = new Catalog(storageDir.resolve("lots").resolve("bundles-catalog.json"));
+        if (freeContent == null) freeContent = new FreeContent(null);
+        if (freeContent.file() == null || freeContent.file().toString().isBlank()) freeContent = new FreeContent(storageDir.resolve("lots").resolve("castbridge-contenus-libres.zip"));
     }
 
     /**
@@ -92,4 +96,7 @@ public record CastbridgeProperties(
 
     /** @param bundlesFile the bundle catalogue signed OFFLINE by the owner (tools/trial-edition sign-catalog); CASTBRIDGE_BUNDLES_CATALOG_FILE, default {storage-dir}/lots/bundles-catalog.json */
     public record Catalog(Path bundlesFile) {}
+
+    /** @param file the ZIP archive of free content (CC BY-SA); CASTBRIDGE_FREE_CONTENT_FILE, default {storage-dir}/lots/castbridge-contenus-libres.zip */
+    public record FreeContent(Path file) {}
 }

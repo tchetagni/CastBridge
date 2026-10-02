@@ -81,6 +81,8 @@ castbridge:
   storage-dir: ${CASTBRIDGE_STORAGE_DIR:/data/apk}
   catalog:
     bundles-file: ${CASTBRIDGE_BUNDLES_CATALOG_FILE:}
+  free-content:
+    file: ${CASTBRIDGE_FREE_CONTENT_FILE:}
   public-base-url: ${CASTBRIDGE_PUBLIC_BASE_URL:}
   rate-limit:
     per-minute: ${CASTBRIDGE_RATE_LIMIT_PER_MINUTE:120}

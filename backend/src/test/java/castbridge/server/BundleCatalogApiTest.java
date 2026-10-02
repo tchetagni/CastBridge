@@ -55,14 +55,26 @@ class BundleCatalogApiTest extends ApiTestBase {
         Files.createDirectories(f.getParent());
         Files.writeString(f, signed);
 
-        JsonNode c = body(mvc.perform(get("/api/v1/catalog/bundles")).andExpect(status().isOk()).andReturn());
+        var first = mvc.perform(get("/api/v1/catalog/bundles")).andExpect(status().isOk()).andReturn();
+        String etag = first.getResponse().getHeader("ETag");
+        assertTrue(etag != null && etag.matches("\"[0-9a-f]{16}\""), etag);
+        assertEquals("no-cache", first.getResponse().getHeader("Cache-Control"));
+        mvc.perform(get("/api/v1/catalog/bundles").header("If-None-Match", etag)).andExpect(status().isNotModified());
+        mvc.perform(get("/api/v1/catalog/bundles").header("If-None-Match", "\"autre\"")).andExpect(status().isOk());
+        JsonNode c = body(first);
         assertEquals(2, c.get("bundles").size());
         Signature v = Signature.getInstance("Ed25519"); v.initVerify(kp.getPublic());
         v.update(canonical(c).getBytes(StandardCharsets.UTF_8));
         assertTrue(v.verify(Base64.getDecoder().decode(c.get("signature").asText())), "the relayed file verifies");
 
+        Files.writeString(f, signed.replace("Classe CM2", "Classe CM2 bis"));
+        String etag2 = mvc.perform(get("/api/v1/catalog/bundles")).andExpect(status().isOk()).andReturn().getResponse().getHeader("ETag");
+        assertTrue(!etag.equals(etag2), "content change gives a new ETag");
+
         Files.writeString(f, "pas du json");
         mvc.perform(get("/api/v1/catalog/bundles")).andExpect(status().isServiceUnavailable());
+        Files.writeString(f, "x".repeat(1024 * 1024 + 1));
+        mvc.perform(get("/api/v1/catalog/bundles")).andExpect(status().isPayloadTooLarge());
         Files.deleteIfExists(f);
     }
 }

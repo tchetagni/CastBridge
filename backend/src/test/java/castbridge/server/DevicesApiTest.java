@@ -55,6 +55,8 @@ class DevicesApiTest extends ApiTestBase {
         assertNotEquals(token, stored);
         assertNotEquals(ANDROID_ID_HASH, jdbc.queryForObject("select android_id_hash from device where public_id = ?", String.class, id));
         assertEquals("CM", jdbc.queryForObject("select country from device where public_id = ?", String.class, id));
+        // the free-text device name sent by an old app is ignored, not stored
+        assertNull(jdbc.queryForObject("select device_name from device where public_id = ?", String.class, id));
 
         // heartbeat with the token
         mvc.perform(post("/api/v1/devices/heartbeat").header("Authorization", "Bearer " + token).contentType(MediaType.APPLICATION_JSON)

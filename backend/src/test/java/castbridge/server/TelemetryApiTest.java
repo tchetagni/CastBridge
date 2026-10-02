@@ -194,4 +194,19 @@ class TelemetryApiTest extends ApiTestBase {
         assertEquals(jdbc.queryForObject("select count(*) from telemetry_event where name = 'cast_end' and stat_day = ?", Integer.class, today),
                 jdbc.queryForObject("select sum(events) from kpi_event_day where name = 'cast_end' and stat_day = ?", Integer.class, today));
     }
+
+    @Test
+    void purgeKeepsAggregatesAndRecentEventsAndWorksInBatches() throws Exception {
+        Dev a = register("usage", "X2");
+        send(a, List.of(ev("feature_used", "{\"feature\":\"usb\"}"), ev("cast_end", "{\"channel\":\"wifi\",\"ok\":true}")), false);
+        long id = jdbc.queryForObject("select id from device where public_id = ?", Long.class, a.id());
+        LocalDate today = LocalDate.now(CastbridgeApplication.ZONE);
+        jdbc.update("update telemetry_event set stat_day = ? where device_id = ? and name = 'feature_used'", today.minusDays(396), id);
+        jdbc.update("update telemetry_event set stat_day = ? where device_id = ? and name = 'cast_end'", today.minusDays(394), id);
+        int aggBefore = jdbc.queryForObject("select count(*) from kpi_event_day", Integer.class);
+        assertEquals(1, telemetry.purgeRawEvents(today), "only the event past 395 days goes");
+        assertEquals(1, jdbc.queryForObject("select count(*) from telemetry_event where device_id = ?", Integer.class, id));
+        assertEquals(aggBefore, jdbc.queryForObject("select count(*) from kpi_event_day", Integer.class), "kpi_* untouched by the raw purge");
+        assertEquals(0, telemetry.purgeRawEvents(today));
+    }
 }

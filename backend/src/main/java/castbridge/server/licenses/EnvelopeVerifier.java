@@ -83,6 +83,9 @@ public final class EnvelopeVerifier {
     public record Result(Reason reason, boolean suspect, WireActivation.Fields activation, boolean weakIdentity) {
         public boolean accepted() { return reason == null; }
 
+        /** End of the implicit usage ceiling of an accepted trial activation without a `usage` right (null: none), see {@link WireActivation#implicitUsageEnd}. */
+        public Long usageEnd() { return activation == null ? null : WireActivation.implicitUsageEnd(activation); }
+
         static Result no(Reason r) { return new Result(r, false, null, false); }
     }
 

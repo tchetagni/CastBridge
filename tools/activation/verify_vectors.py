@@ -1,5 +1,6 @@
 #!/usr/bin/env python3
-"""Vérificateur de référence INDÉPENDANT de Kotlin : rejoue tools/activation/test-vectors.json avec la seule spécification docs/ACTIVATION-FORMAT.md.
+"""Vérificateur de référence INDÉPENDANT de Kotlin : rejoue tools/activation/test-vectors.json, rental-vectors.json et server-issued.json avec la seule spécification docs/ACTIVATION-FORMAT.md
+(et docs/RENTAL-LOTS.md § 3 et 10 pour la clé de location, l'enveloppe par TV et le lot chiffré).
 
     python3 tools/activation/verify_vectors.py            # exit 0 si tous les vecteurs passent
 
@@ -8,6 +9,8 @@ pour ces outils. Dépendance : le paquet `cryptography` (Ed25519).
 """
 import base64
 import hashlib
+import hmac
+import itertools
 import json
 import os
 import re
@@ -15,6 +18,7 @@ import sys
 
 from cryptography.exceptions import InvalidSignature
 from cryptography.hazmat.primitives.asymmetric.ed25519 import Ed25519PrivateKey, Ed25519PublicKey
+from cryptography.hazmat.primitives.ciphers.aead import AESGCM
 
 ALPHABET = "0123456789ABCDEFGHJKMNPQRSTVWXYZ"
 KINDS = {"FLASH": (0, True), "ETHERNET": (1, True), "WIFI": (2, False), "SYSTEM_SERIAL": (3, False), "BLUETOOTH": (4, False)}
@@ -260,12 +264,29 @@ def rental_bounds_ok(line):
             and starts > 0 and 0 < period <= starts and f[2] != "")
 
 
+TRIAL_DEFAULT_DAYS = 30
+
+
+def implicit_usage_end(kind, rights, issued_at, not_before):
+    """Mirror of Activation.implicitUsageEnd: a TRIAL activation without a `usage` right ends 30 days after its issue (a compact key has no issue time: its notBefore).
+    A production activation without usage stays unlimited (None); an explicit usage right always wins (None here: its own `to` applies)."""
+    if kind != "trial" or any(r.startswith("usage|") for r in rights):
+        return None
+    return (issued_at if issued_at > 0 else not_before) + TRIAL_DEFAULT_DAYS * DAY
+
+
 def trial_right_ok(line):
     return line.startswith("usage|") or (line.startswith("rental|") and line.split("|")[1] == TRIAL_PRODUCT)
 
 
+KIND_NAME_RE = re.compile(r"^[a-z][a-z0-9-]{0,31}$")
+KNOWN_KINDS = ("rental", "purchase", "subscription", "openall", "super", "usage")
+
+
 def right_line_ok(line):
     f = line.split("|")
+    if f[0] not in KNOWN_KINDS:      # a right of another kind is kept verbatim and grants nothing (docs/RENTAL-LOTS.md 1.2 and 10.1; RentalLines.unknown)
+        return bool(KIND_NAME_RE.match(f[0])) and "\n" not in line
     if f[0] == "rental":
         return rental_ok(f)
     return (f[0] == "purchase" and len(f) == 4) or (f[0] == "subscription" and len(f) == 7) or (f[0] == "openall" and len(f) == 4) or (f[0] == "super" and len(f) == 3) or (f[0] == "usage" and len(f) == 4 and f[1] == "duree")
@@ -357,7 +378,7 @@ def verify_activation(c, keys, devices):
         return ("rejected", "NOT_YET_VALID")
     if now > e["expiresAt"]:
         return ("rejected", "WINDOW_CLOSED")
-    return ("accepted", {"license": a["license"], "seat": a["seat"]})
+    return ("accepted", {"license": a["license"], "seat": a["seat"], "usageEnd": implicit_usage_end(a["kind"], a["rights"], e["issuedAt"], e["notBefore"])})
 
 
 def sign(seed_hex, message):
@@ -753,14 +774,24 @@ def plan_licence(st, lic, subject, fp):
     return ("new", hashlib.sha256(("castbridge-seat|%s|%s" % (lic, set_hash(fp).hex())).encode()).digest()[:8].hex(), left - 1)
 
 
-def main():
-    path = os.path.join(os.path.dirname(os.path.abspath(__file__)), "test-vectors.json")
-    v = json.load(open(path, encoding="utf-8"))
-    keys = {k["name"]: k for k in v["keys"]}
+HERE = os.path.dirname(os.path.abspath(__file__))
+
+
+def load(name):
+    return json.load(open(os.path.join(HERE, name), encoding="utf-8"))
+
+
+def check_keys(keys):
     for k in keys.values():       # the seeds are TEST keys: check that the published key is the one of the seed
         pub = Ed25519PrivateKey.from_private_bytes(bytes.fromhex(k["seed"])).public_key().public_bytes_raw()
         assert base64.b64encode(pub).decode() == k["publicKey"], "clé publique incohérente : " + k["name"]
         assert hashlib.sha256(pub).digest()[:8].hex() == k["kid"], "kid incohérent : " + k["name"]
+
+
+def run_test_vectors():
+    v = load("test-vectors.json")
+    keys = {k["name"]: k for k in v["keys"]}
+    check_keys(keys)
     devices = {d["name"]: d for d in v["devices"]}
     failures, n = [], 0
 
@@ -831,10 +862,269 @@ def main():
             check(cid, issue_command(c, keys, devices) == e["token"])
         else:
             check(cid, False, "type inconnu " + t)
-    print("%d contrôles, %d échecs" % (n, len(failures)))
-    for f in failures:
-        print("ÉCHEC :", f)
-    return 1 if failures else 0
+    return n, failures
+
+
+# ------------------------------------------------------------------ rental vectors (rental-vectors.json): keys, box and sealed lot (docs/RENTAL-LOTS.md 3 and 10.4)
+
+def hkdf_extract(salt, ikm):
+    return hmac.new(salt if salt else bytes(32), ikm, hashlib.sha256).digest()
+
+
+def hkdf_expand(prk, info, n):
+    out, t, i = b"", b"", 1
+    while len(out) < n:
+        t = hmac.new(prk, t + info + bytes([i]), hashlib.sha256).digest()
+        out += t
+        i += 1
+    return out[:n]
+
+
+def hkdf(ikm, salt, info, n):
+    return hkdf_expand(hkdf_extract(salt.encode(), ikm), info.encode(), n)
+
+
+def kek_of(factors):
+    """Key-encryption key of a set of factors: the lines KIND=fingerprint in the ORDER OF THE FactorKind ENUM (not alphabetical)."""
+    return hkdf_expand(hkdf_extract(b"castbridge-kek-v1", "\n".join("%s=%s" % (k, factors[k]) for k in order(factors)).encode()), b"kek", 32)
+
+
+def rental_key(master, license, seat, product, period):
+    return hkdf(master, "castbridge-rental-v1", "key|%s|%s|%s|%d" % (license, seat, product, period), 32)
+
+
+def lot_key(rkey, lot, version):
+    return hkdf(rkey, "castbridge-rental-lot-v1", "lot|%s|%d" % (lot, version), 32)
+
+
+def seal_lot(rkey, lot, version, plain):
+    key = lot_key(rkey, lot, version)
+    nonce = hkdf(key, "castbridge-rental-nonce-v1", "nonce", 12)
+    return nonce + AESGCM(key).encrypt(nonce, plain, ("castbridge-rental-lot-v1|%s|%d" % (lot, version)).encode())
+
+
+def open_lot(rkey, lot, version, blob):
+    if rkey is None or len(rkey) != 32 or len(blob) < 28:
+        return None
+    try:
+        return AESGCM(lot_key(rkey, lot, version)).decrypt(blob[:12], blob[12:], ("castbridge-rental-lot-v1|%s|%d" % (lot, version)).encode())
+    except Exception:
+        return None
+
+
+def b64u(data):
+    return base64.urlsafe_b64encode(data).decode().rstrip("=")
+
+
+def make_box(fp, k, rkey, product, period):
+    wraps = []
+    for subset in itertools.combinations(list(fp), k):
+        names = "+".join(sorted(subset))
+        kek = kek_of({f: fp[f] for f in subset})
+        nonce = hkdf(kek, "castbridge-rentalbox-nonce-v1", "%s|%d|%s" % (product, period, names), 12)
+        wraps.append((names, names + ":" + b64u(nonce + AESGCM(kek).encrypt(nonce, rkey, ("castbridge-rentalbox-v1|%s|%d|%s" % (product, period, names)).encode()))))
+    return ";".join(w for _, w in sorted(wraps))
+
+
+def open_box(box, current, product, period):
+    for part in [p for p in box.split(";") if p]:
+        names, _, blob = part.partition(":")
+        kinds = names.split("+")
+        try:
+            raw = base64.urlsafe_b64decode(blob + "=" * (-len(blob) % 4))
+        except Exception:
+            continue
+        if any(x not in KINDS or x not in current for x in kinds) or len(raw) < 28:
+            continue
+        try:
+            key = AESGCM(kek_of({x: current[x] for x in kinds})).decrypt(raw[:12], raw[12:], ("castbridge-rentalbox-v1|%s|%d|%s" % (product, period, names)).encode())
+        except Exception:
+            continue
+        if len(key) == 32:
+            return key
+    return None
+
+
+def rental_line(r, box):
+    return "rental|%s|%s|%d|%d|%d|%d|%d|%d|%s" % (r["product"], ",".join(sorted(r["bundles"])), r["startsAt"], r.get("period", r["startsAt"]), r["days"], r["graceMs"], r["usage"], r["concurrent"], box)
+
+
+def granted_bundles(rights, now):
+    """What an OLD device (no rental evaluation) grants: purchases and running subscriptions; unknown kinds and rental lines grant nothing."""
+    out = set()
+    for line in rights:
+        f = line.split("|")
+        if f[0] == "purchase":
+            out |= {b for b in f[2].split(",") if b}
+        elif f[0] == "subscription" and int(f[3]) <= now < int(f[4]) + int(f[5]):
+            out |= {b for b in f[2].split(",") if b}
+    return sorted(out)
+
+
+def run_rental_vectors():
+    v = load("rental-vectors.json")
+    assert v["format"] == "castbridge-rental-vectors-v1"
+    keys = {k["name"]: k for k in v["keys"]}
+    for k in keys.values():       # the published test keys carry a seed and the scopes only: derive the public part, as the Kotlin test does
+        pub = Ed25519PrivateKey.from_private_bytes(bytes.fromhex(k["seed"])).public_key().public_bytes_raw()
+        k["publicKey"] = base64.b64encode(pub).decode()
+        k["kid"] = hashlib.sha256(pub).digest()[:8].hex()
+    devices = {}
+    for d in v["devices"]:
+        fp = fingerprints(d["raw"])
+        devices[d["name"]] = {"name": d["name"], "fingerprints": fp, "code": device_code(fp)}
+    master = bytes.fromhex(v["master"])
+    failures, n = [], 0
+
+    def check(cid, ok, detail=""):
+        nonlocal n
+        n += 1
+        if not ok:
+            failures.append("%s %s" % (cid, detail))
+
+    def seat_of(license, fp):
+        return hashlib.sha256(("castbridge-seat|%s|%s" % (license, set_hash(fp).hex())).encode()).digest()[:8].hex()
+
+    def case_for(token, device, now, expect_subject="tv"):
+        return {"token": token, "trustedKeys": list(keys), "revokedKeys": [], "revokedSeats": [], "lastSeq": {}, "expectSubject": expect_subject, "device": device, "nowMs": now}
+
+    for c in v["cases"]:
+        t, cid, e = c["type"], c["id"], c["expect"] if "expect" in c else None
+        if t == "build-activation":
+            r = c["request"]
+            fp = devices[r["device"]]["fingerprints"]
+            lines = []
+            for rr in r["rentals"]:
+                period = rr.get("period", rr["startsAt"])
+                box = make_box(fp, k_for(len(fp)), rental_key(master, r["license"], seat_of(r["license"], fp), rr["product"], period), rr["product"], period)
+                lines.append(rental_line(rr, box))
+            req = {"device": r["device"], "kind": "production", "subject": "tv", "license": r["license"], "seat": None, "windowHours": r["windowHours"], "rights": lines + r["rights"],
+                   "issuedAt": r["issuedAt"], "notBefore": r["issuedAt"], "nonce": r["nonce"]}
+            tok = issue_activation({"request": req, "signer": c["signer"]}, keys, devices)
+            check(cid, (e.get("refused") and tok is None) or (tok == e.get("token")), "jeton différent" if tok else "refusé")
+            if tok and not e.get("refused"):      # and the independent verifier accepts what it just built
+                res = verify_activation(case_for(tok, r["device"], r["issuedAt"]), keys, devices)
+                check(cid + "/accepted", res[0] == "accepted", str(res))
+        elif t == "box":
+            r = c["request"]
+            fp, other = devices[r["device"]]["fingerprints"], devices[r["otherDevice"]]["fingerprints"]
+            period = r.get("period", r["startsAt"])
+            key = rental_key(master, r["license"], seat_of(r["license"], fp), r["product"], period)
+            box = make_box(fp, k_for(len(fp)), key, r["product"], period)
+            check(cid, box == e["box"] and hashlib.sha256(key).hexdigest()[:16] == e["keyFingerprint"], "octets différents")
+            check(cid + "/own-tv", open_box(box, fp, r["product"], period) == key)
+            check(cid + "/other-tv", open_box(box, other, r["product"], period) is None)
+        elif t == "seal":
+            r = c["request"]
+            fp = devices[r["device"]]["fingerprints"]
+            key = rental_key(master, r["license"], seat_of(r["license"], fp), r["product"], r["period"])
+            lot = "%s:%s" % (r["feature"], r["scope"])
+            plain = bytes.fromhex(r["plainHex"])
+            sealed = seal_lot(key, lot, r["version"], plain)
+            check(cid, sealed.hex() == e["sealedHex"] and hashlib.sha256(key).hexdigest()[:16] == e["keyFingerprint"], "octets différents")
+            check(cid + "/reopen", open_lot(key, lot, r["version"], sealed) == plain)
+            check(cid + "/other-version", open_lot(key, lot, r["version"] + 1, sealed) is None)
+            check(cid + "/no-key", open_lot(None, lot, r["version"], sealed) is None)
+            check(cid + "/tampered", open_lot(key, lot, r["version"], sealed[:-1] + bytes([sealed[-1] ^ 1])) is None)
+        elif t == "old-device":
+            res = verify_activation(case_for(c["token"], c["device"], c["nowMs"]), keys, devices)
+            p = parse_envelope(c["token"])
+            ok = res[0] == "accepted" and p is not None   # accepted although a right is unknown; the canonical form is rebuilt byte for byte by parse_envelope
+            check(cid, ok and granted_bundles(activation_view(p[0])["rights"], c["nowMs"]) == e["granted"], str(res))
+        elif t == "lot-policy":
+            lot = c["lot"]
+            key = "%s:%s" % (lot["feature"], lot["scope"])
+            refused = lot["edition"] == "trial" or key in c["free"] or key not in c["reserved"]     # a free lot, a trial lot or a lot of unknown family is never rented
+            check(cid, refused == e["refused"])
+        elif t == "rental-state":
+            # the clock rules (RentalEngine.judge/evaluate, French messages, monotonic time) stay with the Kotlin implementations; here: every token installs on its TV
+            # and the contracts named by the expectation (product@period) are exactly the rental lines of the tokens
+            names = set()
+            ok = True
+            for tok in c["tokens"]:
+                res = verify_activation(case_for(tok, c["device"], parse_envelope(tok)[0]["issuedAt"]), keys, devices)
+                ok = ok and res[0] == "accepted"
+                for line in activation_view(parse_envelope(tok)[0])["rights"]:
+                    f = line.split("|")
+                    if f[0] == "rental":
+                        names.add("%s@%s" % (f[1], f[4]))
+            check(cid, ok and {x["key"] for x in e} <= names, "jetons ou contrats incohérents")
+        else:
+            check(cid, False, "type inconnu " + t)
+    return n, failures
+
+
+# ------------------------------------------------------------------ server-issued.json: what the SERVER signs, verified by this independent code
+
+def run_server_issued():
+    v = load("server-issued.json")
+    assert v["format"] == "castbridge-server-issued-v1"
+    s = v["server"]
+    pub = base64.b64decode(s["publicKey"])
+    assert hashlib.sha256(pub).digest()[:8].hex() == s["kid"], "kid incohérent"
+    keys = {"server": {"name": "server", "kid": s["kid"], "publicKey": s["publicKey"], "scopes": s["scopes"]}}
+    failures, n = [], 0
+
+    def check(cid, ok, detail=""):
+        nonlocal n
+        n += 1
+        if not ok:
+            failures.append("%s %s" % (cid, detail))
+
+    for c in v["cases"]:
+        t, cid, e = c["type"], c["id"], c["expect"]
+        if t == "activation":
+            fp = c["fingerprints"]
+            devices = {c["device"]: {"fingerprints": fp}}
+            case = {"token": c["token"], "trustedKeys": ["server"], "revokedKeys": [], "revokedSeats": [], "lastSeq": {}, "expectSubject": c["subject"], "device": c["device"], "nowMs": v["nowMs"]}
+            r = verify_activation(case, keys, devices)
+            ok = r[0] == "accepted" and r[1]["license"] == e["license"] and r[1]["seat"] == e["seat"]
+            p = parse_envelope(c["token"])
+            ok = ok and p is not None and p[0]["body"][0] == "kind=" + e["kind"] and sorted(activation_view(p[0])["rights"]) == e["rights"]
+            if ok and e["kind"] == "trial":     # the implicit ceiling of a trial key without `usage`: 30 days after the issue
+                ok = r[1]["usageEnd"] == p[0]["issuedAt"] + 30 * DAY
+            elif ok:
+                ok = r[1]["usageEnd"] is None
+            check(cid, ok, str(r))
+        elif t == "revocation":
+            r = verify_revocation({"token": c["token"], "trustedKeys": ["server"]}, keys)
+            check(cid, r is not None and r["keys"] == e["keys"] and r["seats"] == e["seats"], str(r))
+        elif t == "order":
+            case = {"token": c["token"], "trustedKeys": ["server"], "revokedKeys": [], "lastSeq": {}, "device": c["device"], "deviceLicenses": [], "deviceGroups": [], "nowMs": v["nowMs"]}
+            r = verify_order(case, keys, {c["device"]: {"fingerprints": c["fingerprints"]}})
+            check(cid, r[0] == "accepted" and r[1]["action"] == e["action"] and r[1]["params"] == e["params"] and r[2] == e["seq"], str(r))
+        else:
+            check(cid, False, "type inconnu " + t)
+    return n, failures
+
+
+def run_implicit_usage_end():
+    """Hand-written expectations of the implicit usage ceiling (Activation.implicitUsageEnd), independent of any file."""
+    t0, failures, n = 1_800_000_000_000, [], 0
+    cases = [("trial-no-usage", ("trial", [], t0, t0 - HOUR), t0 + 30 * DAY),
+             ("trial-no-usage-issuedAt-zero-uses-notBefore", ("trial", [], 0, t0), t0 + 30 * DAY),
+             ("trial-with-usage-explicit-wins", ("trial", ["usage|duree|%d|%d" % (t0, t0 + DAY)], t0, t0), None),
+             ("trial-essai-rental-only-still-capped", ("trial", ["rental|essai|a|1|1|3|0|720|0|"], t0, t0), t0 + 30 * DAY),
+             ("production-no-usage-unlimited", ("production", [], t0, t0), None),
+             ("production-no-rights-unlimited", ("production", ["purchase|p|a|1"], t0, t0), None)]
+    for cid, args, want in cases:
+        n += 1
+        got = implicit_usage_end(*args)
+        if got != want:
+            failures.append("%s : %s au lieu de %s" % (cid, got, want))
+    return n, failures
+
+
+def main():
+    total, bad = 0, 0
+    for name, run in (("test-vectors.json", run_test_vectors), ("rental-vectors.json", run_rental_vectors), ("server-issued.json", run_server_issued), ("implicit usage end (sans fichier)", run_implicit_usage_end)):
+        n, failures = run()
+        print("%-36s %4d contrôles, %d échecs" % (name, n, len(failures)))
+        for f in failures:
+            print("ÉCHEC :", name, f)
+        total, bad = total + n, bad + len(failures)
+    print("TOTAL %d contrôles, %d échecs" % (total, bad))
+    return 1 if bad else 0
 
 
 if __name__ == "__main__":

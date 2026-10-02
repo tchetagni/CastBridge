@@ -55,6 +55,20 @@ public final class WireActivation {
         return null;
     }
 
+    /** Default length of the implicit usage ceiling of a trial key without a `usage` right (ActivationPolicy.TRIAL_DEFAULT_DAYS). */
+    public static final int TRIAL_DEFAULT_DAYS = 30;
+    /** A right of another kind is kept verbatim and grants nothing (RentalLines.KIND_NAME, docs/RENTAL-LOTS.md 1.2 and 10.1). */
+    private static final Pattern KIND_NAME = Pattern.compile("^[a-z][a-z0-9-]{0,31}$");
+
+    /**
+     * End of the IMPLICIT usage ceiling (mirror of Activation.implicitUsageEnd): a TRIAL activation without a `usage` right ends {@link #TRIAL_DEFAULT_DAYS} days after its issue (a key
+     * without an issue time: its notBefore). A production activation without usage stays unlimited (null); an explicit usage right always wins (null here: its own end applies).
+     */
+    public static Long implicitUsageEnd(Fields a) {
+        if (!a.kind().equals("trial") || a.rights().stream().anyMatch(WireActivation::isUsage)) return null;
+        return (a.issuedAt() > 0 ? a.issuedAt() : a.notBefore()) + TRIAL_DEFAULT_DAYS * DAY_MS;
+    }
+
     public static boolean isSuper(String rightLine) {
         return rightLine.startsWith("super|");
     }
@@ -139,8 +153,8 @@ public final class WireActivation {
                     Long.parseLong(f[2]);
                     return true;
                 }
-                default -> {
-                    return false;
+                default -> {          // another kind: kept verbatim (an old reader ignores a right it does not know), it only has to look like a right line
+                    return KIND_NAME.matcher(f[0]).matches() && line.indexOf('\n') < 0;
                 }
             }
         } catch (NumberFormatException e) {

@@ -266,6 +266,77 @@ docker cp /var/backups/castbridge/apk/. castbridge-api:/data/apk/
 
 Copiez aussi `/var/backups/castbridge` hors du VPS (et la clé privée Ed25519, et `.env`).
 
+## Supervision et astreinte
+
+Une panne silencieuse (disque plein, certificat expiré, sauvegarde échouée) doit être détectée dans les 30 minutes.
+
+**Sonde externe** (gratuite, 5 min) : créer un compte sur [healthchecks.io](https://healthchecks.io) ou [Better Stack](https://betterstack.com/), pointer `GET /api/v1/updates/public-key` (200 attendu) ; vérifier aussi le TLS (`bridge.sti-cm.com`, 14 jours avant expiration).
+
+**Sonde interne** (10 min) : script [`ops/monitoring/host-check.sh`](../ops/monitoring/host-check.sh) qui vérifie :
+- Disque `/` et `/var/lib/docker` > 85 % → alerte
+- Santé des conteneurs `castbridge-api` et `castbridge-db`
+- Compteur de redémarrages (indice d'instabilité)
+- RAM libre < 100 Mo
+- Certificat TLS expire dans < 14 jours
+- Dernier dump > 26 h (sauvegarde quotidienne manquée)
+
+Pinger healthchecks.io en échec (envoi du message) ou succès ; intégrer au cron :
+
+```sh
+*/10 * * * * cd /opt/castbridge && source ops/monitoring/healthchecks.env && bash ops/monitoring/host-check.sh --apply 2>&1 | logger -t castbridge-host-check
+```
+
+**Copie hors site** (chiffrée, B2/Scaleway/Drive…) : script [`ops/monitoring/offsite-backup.sh`](../ops/monitoring/offsite-backup.sh) qui chiffre le dernier dump en AES-256 (phrase lue depuis `/run/secrets/castbridge-backup-key`) et le copie via `rclone` vers `castbridge-offsite:backups/` ; conserve 30 jours. `--apply` requis :
+
+```sh
+45 3 * * * cd /opt/castbridge && source ops/monitoring/healthchecks.env && bash ops/monitoring/offsite-backup.sh --apply >> /var/log/castbridge-offsite-backup.log 2>&1
+```
+
+Le hook optionnel dans `backup.sh` (variable `OFFSITE_HOOK`) permet d'appeler ce script automatiquement après chaque sauvegarde ; aucun comportement changé sans configuration.
+
+**Rotation des journaux** (hebdomadaire) : Docker retient 30 Mo × 3 par conteneur. Archiver une fois par semaine :
+
+```sh
+0 0 * * 1 docker compose -p castbridge logs --since 24h > /var/log/castbridge/api-$(date +%F).log 2>&1 || true
+logrotate -f /etc/logrotate.d/castbridge     # optionnel : archiver, compresser, supprimer après 14 j
+```
+
+**Exercice de restauration** (trimestriel) : restaurer le dernier dump dans un conteneur jetable et vérifier la cohérence :
+
+```sh
+# 1. Télécharger le dump depuis le stockage hors site
+rclone copy castbridge-offsite:backups/castbridge-AAAAMMJJ-HHMMSS.sql.gz.gpg /tmp/
+
+# 2. Le déchiffrer (phrase depuis un fichier)
+gpg --decrypt /tmp/castbridge-AAAAMMJJ-HHMMSS.sql.gz.gpg > /tmp/backup.sql.gz
+
+# 3. Importer dans un conteneur MySQL jetable
+docker run --rm -i \
+  -e MYSQL_ROOT_PASSWORD=test \
+  -e MYSQL_DATABASE=castbridge \
+  mysql:8.4 sh -c 'MYSQL_PWD="test" mysql -u root castbridge' < /tmp/backup.sql.gz
+
+# 4. Vérifier la cohérence (si le module des licences est actif)
+curl -H "Authorization: Bearer $CASTBRIDGE_ADMIN_TOKEN" \
+  http://127.0.0.1:7090/api/v1/admin/licenses/audit/verify | jq .
+
+# 5. Nettoyer
+docker rm -f $(docker ps -q -f status=exited)
+```
+
+**Astreinte** : les 5 commandes essentielles en cas de panne :
+
+```sh
+docker compose -p castbridge ps                      # état des conteneurs
+docker compose -p castbridge logs --tail=200 -f      # journaux API (ECS JSON, sans secrets ni IP)
+./deploy.sh origin/main                              # redéployer la révision précédente (en cas de bug)
+/opt/castbridge/backend/backup.sh --db-only          # sauvegarder avant un changement manuel
+curl -H "Authorization: Bearer $CASTBRIDGE_ADMIN_TOKEN" \
+  http://127.0.0.1:7090/api/v1/admin/health         # vérifier la base et les dépendances
+```
+
+Mettre à jour ces commandes dans le runbook (wiki ou document partagé) ; former l'astreinte chaque mois.
+
 ## Sécurité (résumé)
 
 - Aucun secret dans le dépôt : `.env`, `secrets/` ignorés par git ; clé privée en secret Docker lisible par

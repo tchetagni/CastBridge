@@ -189,7 +189,7 @@ public class DeviceService {
         if (r.platform() != null) d.platform = PLATFORMS.contains(r.platform()) ? r.platform() : "other";
         if (r.manufacturer() != null) d.manufacturer = cut(r.manufacturer(), 64);
         if (r.model() != null) d.model = cut(r.model(), 64);
-        if (r.deviceName() != null) d.deviceName = cut(r.deviceName(), 80);
+        // r.deviceName() is deliberately ignored: free text typed by the user (often a first name), never stored (docs/TELEMETRY.md § 1)
         if (r.osName() != null) d.osName = cut(r.osName(), 64);
         if (r.osBuild() != null) d.osBuild = cut(r.osBuild(), 160);
         if (r.fingerprint() != null) d.fingerprint = cut(r.fingerprint(), 200);

@@ -68,3 +68,9 @@ if [ "${1:-}" != "--db-only" ]; then
     rm -rf "$BACKUP_DIR/apk/.multipart" "$BACKUP_DIR/apk/.incoming"
     log "APK : $BACKUP_DIR/apk ($(du -sh "$BACKUP_DIR/apk" | cut -f1))"
 fi
+
+# Hook optionnel de sauvegarde hors site (aucun comportement changé sans configuration)
+# Exemple : OFFSITE_HOOK=/opt/castbridge/ops/monitoring/offsite-backup.sh
+if [ -n "${OFFSITE_HOOK:-}" ] && [ -x "$OFFSITE_HOOK" ]; then
+    "$OFFSITE_HOOK" || log "AVERTISSEMENT : hook hors site échoué"
+fi
