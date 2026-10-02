@@ -1,0 +1,14 @@
+STATUT: TERMINÉ
+CAHIER: sonnet-w14-05 · MODÈLE: sonnet · BRANCHE: claude/sonnet-w14-05 · COMMIT: voir git log
+JETONS: inconnu
+PORTE: :core:test --tests 'castbridge.core.trust.*Test' + XferTextsTest + ReceiveCardTest → VERT (30 s ; 12 min d'attente du verrou)
+SUITE COMPLÈTE: :core:test → VERT (4 min 43 s, 2322 tests, 0 échec) ; écarts : aucun
+FICHIERS: core/src/main/.../trust/{HomeLinkView,ManualTvView,PairScreenView,ActivateTargetView,PinKeys}.kt, xfer/{XferTexts,ReceiveCard}.kt ; core/src/test/.../trust/{HomeLinkViewTest,ManualTvViewTest,PairScreenViewTest,ActivateTargetViewTest,PinKeysTest}.kt, xfer/{XferTextsTest,ReceiveCardTest}.kt ; ce rapport. Hors zone : aucun.
+CHOIX: LinkView/LinkStart/SendChoices.display réutilisés (SendChoice.kt non modifié) ; ManualTvFacts reçoit deux champs par défaut (locked, trusted) pour reproduire les trois messages 401 ; ReceiveCards.of lit un tableau JSON de TransferHost.stateJson par regex (pas de bibliothèque JSON dans le cœur) ; download = XferState.Uploading(via = "téléchargement") ; nouveaux textes : Done/Failed/Cancelled (F1) et « Réception de N fichiers ».
+TABLE site → fonction → test : TvHome.kt:104-137,174 → HomeLinkView.decide → HomeLinkViewTest (15 lignes) ; TvScreen.kt:61,113-115,236 → ManualTvViews.decide → ManualTvViewTest (12) ; TvPairScreen.kt:65,294 → PairScreenView.decide/emptyListText → PairScreenViewTest (10) ; ActivateTvActivity.kt:63 → ActivateTargetView.decide → ActivateTargetViewTest (11) ; PinStore/TvLink:191/TvScreen:77 → PinKeys → PinKeysTest (8+) ; 4 services de notification → XferTexts.notification → XferTextsTest (13) ; PlayerActivity.kt:437 + BtServer 1-bt → ReceiveCards → ReceiveCardTest (10).
+DÉFAUTS REPRODUITS (REGRESSION) : R-01 chemin code, 401 ouvre l'assistant (motif désormais porté) ; R-01 « joignable » par défaut tant qu'aucune réponse (TvScreen.kt:61) ; R-04 ligne 1-bt écrasée : seule « réception de X n % » donne une carte.
+CORRIGÉ PAR CONSTRUCTION : jamais « Connectée » sur mémoire > freshMs ; jamais « Aucune TV » si pinTvName connu (ActivateTargetView) ; Failed/Cancelled finaux et non vides.
+NON FAIT / À VALIDER : aucun écran câblé (w14-06) ; critère « grep -c ≥ 7 » : 6 (PinKeys expose keysOf/normalize selon le contrat, pas decide) ; `import android` = 0 ; stateJson/BtServer non testés sur matériel.
+QUESTION: aucune
+POUR L'AUDIT OPUS : (1) freshMs = 10 s : le sondage tourne toutes les 2 s, marge suffisante ? (2) normalize n'ajoute :8765 qu'aux IPv4 nues (pas aux noms d'hôte ni IPv6) ; (3) 401 sur chemin registre = « Reconnexion… » sans assistant ; (4) ReceiveCards.headline n'utilise plus LibraryLogic.title (nom brut) ; (5) HomeFacts n'a pas de champ « jeton » : savedCount > 0 sert d'indicateur de chemin de confiance.
+AUTOCONTRÔLE: [x] zone [x] porte [x] suite [x] secrets [x] dépendances [x] FR [x] diff ≤ plafond [x] un commit
