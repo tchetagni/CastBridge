@@ -15,6 +15,8 @@ enum class Net { NONE, METERED, UNMETERED }
 interface LotRemote {
     /** The signed catalog as received (text), parsed by [LotSync]. */
     @Throws(IOException::class) fun catalogJson(channel: String): String
+    /** The same, asking the server for one [feature] only (the signature binds the filter). Default: the unfiltered catalog, whose entries the caller filters itself. */
+    @Throws(IOException::class) fun catalogJson(channel: String, feature: String?): String = catalogJson(channel)
     /** The bytes of [m] from [offset]; [Stream.from] is where the server really starts (0 if it ignored the range). */
     @Throws(IOException::class) fun open(m: LotMeta, offset: Long): Stream
     class Stream(val input: InputStream, val from: Long, private val onClose: () -> Unit = {}) : AutoCloseable {
@@ -77,6 +79,11 @@ class LotSync(
     private val sleep: (Long) -> Unit = { Thread.sleep(it) },
     /** Edition rule (docs/TRIAL-EDITION.md): may this device hold this lot? Default: yes (nothing changes without the edition model). */
     private val allowed: (LotMeta) -> Boolean = { true },
+    /**
+     * The feature's own content check of a downloaded file (size and SHA-256 are already verified): a reason in French refuses the lot, which is then never stored
+     * (the next sync starts clean). Default: none, so Apprendre and Quiz behave exactly as before.
+     */
+    private val check: (LotMeta, File) -> String? = { _, _ -> null },
 ) {
     enum class Outcome { UP_TO_DATE, INSTALLED, UPDATED, SKIPPED_FULL, SKIPPED_APP_TOO_OLD, NOT_IN_CATALOG, FAILED, CANCELLED, NOT_ENTITLED }
 
@@ -162,6 +169,7 @@ class LotSync(
             try {
                 fetch(m, part, progress, cancelled)
                 stamp.delete()
+                if (part.length() == m.bytes && LotHash.sha256Hex(part).equals(m.sha256, ignoreCase = true)) check(m, part)?.let { why -> part.delete(); return Result(m.id, Outcome.FAILED, why) }
                 return when (val r = store.install(m, part, proof, protect)) {
                     is LotStore.Install.Ok -> Result(m.id, if (update) Outcome.UPDATED else Outcome.INSTALLED, bytes = m.bytes)
                     is LotStore.Install.Full -> Result(m.id, Outcome.SKIPPED_FULL, r.reason)

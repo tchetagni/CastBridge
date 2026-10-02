@@ -43,11 +43,7 @@ class LangLotConsumer(
             if (current.meta.version == meta.version) return if (current.meta.sha256 == meta.sha256) true else no("la version ${meta.version} existe déjà avec un contenu différent")
             if (current.meta.version > meta.version) return no("une version plus récente (${current.meta.version}) est déjà installée")
         }
-        val pack = try { readPack(data) } catch (e: LangPackJson.ParseError) { return no(e.message ?: "lot illisible") } catch (e: IOException) { return no("zip illisible : ${e.message}") }
-        if (pack.parts != parts) return no("le lot (${pack.id}) ne correspond pas à sa description ($scope)")
-        if (pack.version != meta.version) return no("le lot est en version ${pack.version}, sa description annonce ${meta.version}")
-        val problems = LangValidator.validate(pack)
-        if (problems.isNotEmpty()) return no("contenu refusé : ${problems.first()}" + if (problems.size > 1) " (+${problems.size - 1} autre(s))" else "")
+        val pack = when (val v = verifyContent(meta, data)) { is Verified.Ok -> v.pack; is Verified.Bad -> return no(v.reason) }
         val dir = File(root, scope)
         val stage = File(dir, ".stage-${meta.version}-${now()}")
         val target = File(dir, "v${meta.version}")
@@ -102,6 +98,23 @@ class LangLotConsumer(
         const val META_FILE = "meta.json"
         const val MAX_TEXT_LOT_BYTES = 3L shl 20
         private const val MAX_ENTRY = 8L shl 20   // decompressed size cap per file (zip-bomb guard)
+
+        sealed class Verified { class Ok(val pack: LangPack) : Verified(); class Bad(val reason: String) : Verified() }
+
+        /**
+         * The content checks of a Langues lot file ([meta] already vouched for), shared by the TV install and the phone's download (it never stores a lot the TV would refuse):
+         * the zip reads, the pack matches its scope and version, and [LangValidator] finds nothing wrong. No file is written.
+         */
+        fun verifyContent(meta: LotMeta, data: File): Verified {
+            val parts = LangLots.parse(meta.id.scope) ?: return Verified.Bad("lot « ${meta.id.scope} » : nom invalide (<cible>-<niveau>-<thème>-<départ>)")
+            if (meta.id.feature != LangLots.FEATURE) return Verified.Bad("ce lot n'est pas un lot Langues")
+            val pack = try { readPack(data) } catch (e: LangPackJson.ParseError) { return Verified.Bad(e.message ?: "lot illisible") } catch (e: IOException) { return Verified.Bad("zip illisible : ${e.message}") }
+            if (pack.parts != parts) return Verified.Bad("le lot (${pack.id}) ne correspond pas à sa description (${meta.id.scope})")
+            if (pack.version != meta.version) return Verified.Bad("le lot est en version ${pack.version}, sa description annonce ${meta.version}")
+            val problems = LangValidator.validate(pack)
+            if (problems.isNotEmpty()) return Verified.Bad("contenu refusé : ${problems.first()}" + if (problems.size > 1) " (+${problems.size - 1} autre(s))" else "")
+            return Verified.Ok(pack)
+        }
 
         /** Reads `langue.json` and `media.json` from the root of a lot zip. */
         fun readPack(zip: File): LangPack {
