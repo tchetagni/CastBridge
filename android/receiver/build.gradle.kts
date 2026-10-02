@@ -20,15 +20,20 @@ android {
         // -Pcastbridge.extraUpdateKey=<its public key>. Both empty by default: the apps built for Esaie talk to
         // https://bridge.sti-cm.com and trust the production key alone (UpdateKeys).
         buildConfigField("String", "EXTRA_UPDATE_KEY", "\"${(project.findProperty("castbridge.extraUpdateKey") as String?) ?: ""}\"")
-        // Activation requirement (docs/TRIAL-EDITION.md § Interrupteur de déploiement): OFF unless -PrequireActivation=true. An UPDATED install (the owner's TV, beta testers) gets
-        // ACTIVATION_GRACE_DAYS of grace; a fresh install is locked at once. TRUSTED_KEYS = the PUBLIC keys that may sign activations, read from a file OUTSIDE the repository
+        // Activation requirement (docs/TRIAL-EDITION.md § Interrupteur de déploiement): OFF unless -PrequireActivation=true. An install that PREDATES the lock (firstInstallTime < LOCK_GRACE_START_MS: the owner's TV, beta testers) gets
+        // grace until LOCK_GRACE_START_MS + ACTIVATION_GRACE_DAYS (absolute); any later install is locked at once. TRUSTED_KEYS = the PUBLIC keys that may sign activations, read from a file OUTSIDE the repository
         // (~/.castbridge-signing/activation-trusted-keys.txt, one « kid=… pub=… scopes=… » line per tool): empty => nobody can activate (the build then refuses to enable the lock).
         val requireActivation = (project.findProperty("requireActivation") as String?) == "true"
         val trustedFile = (project.findProperty("trustedKeysFile") as String?)?.let { File(it) } ?: File(System.getProperty("user.home"), ".castbridge-signing/activation-trusted-keys.txt")      // -PtrustedKeysFile=… : essais avec une clé jetable
-        val trustedKeys = if (trustedFile.isFile) trustedFile.readLines().map { it.trim() }.filter { it.startsWith("kid=") && " pub=" in it }.joinToString("\\n") else ""
+        val trustedLines = if (trustedFile.isFile) trustedFile.readLines().map { it.trim() }.filter { it.startsWith("kid=") && " pub=" in it } else emptyList()
+        // A line without « scopes= » is accepted by the app but grants NO scope (fail closed): warn at build so a mistyped line is noticed (the TV could not accept anything signed by that key).
+        trustedLines.filter { l -> l.split(' ', '\t').none { it.startsWith("scopes=") && it.length > "scopes=".length } }.forEach { project.logger.warn("ATTENTION clé de confiance sans scopes= (aucune portée accordée, la TV ne l'acceptera pour rien) : ${it.substringBefore(" pub=")}") }
+        val trustedKeys = trustedLines.joinToString("\\n")
         if (requireActivation && trustedKeys.isEmpty()) throw GradleException("requireActivation=true mais aucune clé publique de confiance : créez ~/.castbridge-signing/activation-trusted-keys.txt (lignes « kid=… pub=… scopes=… » données par « Clé publique » de la console ou « cle » de l'outil de bureau). Sans elle, personne ne pourrait activer la TV.")
         buildConfigField("boolean", "REQUIRE_ACTIVATION", requireActivation.toString())
         buildConfigField("int", "ACTIVATION_GRACE_DAYS", ((project.findProperty("castbridge.graceDays") as String?) ?: "30"))
+        // ABSOLUTE start of the grace (version.properties « lock.graceStartMs »): only an install whose firstInstallTime is EARLIER gets the grace, which ends at start + graceDays and never restarts.
+        buildConfigField("long", "LOCK_GRACE_START_MS", "${(project.findProperty("castbridge.lockGraceStartMs") as String?) ?: ver("lock.graceStartMs")}L")
         buildConfigField("String", "TRUSTED_KEYS", "\"$trustedKeys\"")
         buildConfigField("String", "DEFAULT_SERVER", "\"${(project.findProperty("castbridge.serverUrl") as String?) ?: ""}\"")
     }

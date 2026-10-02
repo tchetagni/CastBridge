@@ -75,20 +75,43 @@ class KeyRing(keys: List<TrustedKey>, val revoked: Set<String> = emptySet()) {
  * (the high-water mark stays); a clock jumping FORWARD by more than [MAX_JUMP_MS] is not believed (it would expire everything for good
  * if it was a glitch) until a signed message confirms it.
  */
-class TvClock(var lastSeen: Long = 0L, var floor: Long = 0L) {
-    companion object { const val MAX_JUMP_MS = 400L * 24 * 3600 * 1000 }
+class TvClock(var lastSeen: Long = 0L, var floor: Long = 0L, /** Monotonic milliseconds that never go back during a boot (the receiver passes SystemClock.elapsedRealtime). */ var mono: () -> Long = DEFAULT_MONO) {
+    companion object {
+        const val MAX_JUMP_MS = 400L * 24 * 3600 * 1000
+        /** Below this gap the wall clock is simply believed against the high-water mark; beyond it the monotonic time takes over. */
+        const val BEHIND_TOLERANCE_MS = 60_000L
+        val DEFAULT_MONO: () -> Long = { System.nanoTime() / 1_000_000L }
+    }
+
+    /**
+     * Monotonic reading at the last observation of this boot (never persisted: a reboot restarts it, so a boot adds nothing by itself).
+     * RESIDUAL HOLE: rebooting while rolling the wall clock back loses the elapsed time of the previous boot since the last persisted [lastSeen]
+     * (at worst one observation period, one hour of running); the persisted high-water mark never goes back, so the loss is bounded and never extends anything.
+     */
+    private var monoAtSeen: Long = mono()
+
+    /** Time elapsed (monotonic) since the high-water mark was last refreshed in this boot. */
+    private fun elapsed(): Long = maxOf(0L, mono() - monoAtSeen)
+
+    /** The high-water mark advanced with the monotonic time of this boot: the TV time when the wall clock is BEHIND it (it keeps going forward, never freezes). */
+    fun monotonicNow(): Long { val base = maxOf(lastSeen, floor); return if (base == 0L) 0L else base + elapsed() }
 
     /** Time to use now for a decision. */
     fun now(clock: Long): Long {
         val base = maxOf(lastSeen, floor)
         if (base == 0L) return clock                      // first observation ever: nothing to compare with
-        return if (clock > base + MAX_JUMP_MS) base else maxOf(clock, base)
+        // wall clock behind the high-water mark (rollback): time keeps ADVANCING with the monotonic time instead of freezing; ahead beyond MAX_JUMP_MS: not believed
+        if (clock + BEHIND_TOLERANCE_MS >= base && clock <= base + MAX_JUMP_MS) return maxOf(clock, base)   // normal running (a few seconds of jitter are not a rollback)
+        if (clock > base + MAX_JUMP_MS) return base      // AHEAD jump: capped as before (not believed until a signed message confirms it)
+        return maxOf(clock, base + elapsed())
     }
 
     /** Record what the clock says (call at each start and each hour of running) and what signed messages prove. */
     fun observe(clock: Long, signedIssuedAt: Long = 0L) {
+        val n = now(clock)
         floor = maxOf(floor, signedIssuedAt)
-        lastSeen = maxOf(lastSeen, now(clock))
+        lastSeen = maxOf(lastSeen, n)
+        monoAtSeen = mono()
     }
 
     /** True when the wall clock is clearly behind what the TV already saw (rollback or empty battery clock). */

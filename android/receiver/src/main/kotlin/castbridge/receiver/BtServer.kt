@@ -118,9 +118,10 @@ class BtServer(
                 hello = hello?.let { h -> { p, req -> wasHello = true; idleLimit.set(90_000); last.set(System.currentTimeMillis())
                     val name = runCatching { sock.remoteDevice.name }.getOrNull()
                     h(p, name, req).also { last.set(System.currentTimeMillis()) } } },
-                trusted = trusted, parental = parental)
+                trusted = trusted, parental = parental,
+                acceptFile = { n -> !ActivationCenter.trial() || castbridge.core.owner.TrialPolicy.btFileAllowed(n) })
             LotsHub.adopt(ctx, dir)     // a lot (+ its signed proof) delivered as files by the phone: verified and installed (docs/LOTS.md)
-            if (!wasHello) status("Bluetooth : prêt" + if (r != BtProtocol.OK) " (refusé : ${BtProtocol.describe(r)})" else " (fichier reçu)")
+            if (!wasHello) status(if (r == BtProtocol.ERR_TRIAL) castbridge.core.owner.TrialPolicy.BT_MESSAGE else "Bluetooth : prêt" + if (r != BtProtocol.OK) " (refusé : ${BtProtocol.describe(r)})" else " (fichier reçu)")
         } catch (e: Exception) {
             Log.w(TAG, "transfer interrupted: ${e.javaClass.simpleName}")   // never log request contents
             status("Bluetooth : transfert interrompu, reprise possible")

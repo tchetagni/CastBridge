@@ -94,11 +94,13 @@ object BtProtocol {
     const val ERR_NOT_OPEN = 11
     /** HELLO: another phone is waiting for the owner's answer, or too many refusals. */
     const val ERR_BUSY = 12
+    /** The trial edition does not receive files by Bluetooth (a lot and its proof excepted). */
+    const val ERR_TRIAL = 13
     private const val MAX_NAME = 400
     private const val MAX_INSTALL_ID = 64
 
     /** Errors that retrying cannot fix. */
-    fun isFatal(code: Int) = code in setOf(ERR_MAGIC, ERR_PIN, ERR_NAME, ERR_SPACE, ERR_LOCKED, ERR_SIZE, ERR_UNTRUSTED, ERR_DENIED, ERR_NOT_OPEN)
+    fun isFatal(code: Int) = code in setOf(ERR_MAGIC, ERR_PIN, ERR_NAME, ERR_SPACE, ERR_LOCKED, ERR_SIZE, ERR_UNTRUSTED, ERR_DENIED, ERR_NOT_OPEN, ERR_TRIAL)
 
     fun describe(code: Int) = when (code) {
         OK -> "ok"
@@ -113,6 +115,7 @@ object BtProtocol {
         ERR_TIMEOUT -> "pas de réponse sur la TV"
         ERR_NOT_OPEN -> "la TV n'attend pas de nouveau téléphone"
         ERR_BUSY -> "la TV traite déjà une demande"
+        ERR_TRIAL -> "Version d'essai : la TV ne reçoit pas de fichiers par Bluetooth"
         else -> "erreur TV ($code)"
     }
 
@@ -138,6 +141,8 @@ object BtProtocol {
         trusted: ((String) -> Boolean)? = null,
         /** Reports of the parental control for a designated phone (CBTP); null = this TV does not offer it (ERR_MAGIC). */
         parental: castbridge.core.parental.ReportSyncHost? = null,
+        /** Is this file name accepted right now? false = ERR_TRIAL before any byte is stored (the trial edition keeps only lots). */
+        acceptFile: (String) -> Boolean = { true },
     ): Int {
         dir.mkdirs()
         val din = DataInputStream(input)
@@ -193,6 +198,7 @@ object BtProtocol {
         pinProblem(pin)?.let { return fail(it) }
         val name = ReceiverServer.safeName(rawName) ?: return fail(ERR_NAME)
         if (total <= 0) return fail(ERR_SIZE)
+        if (!acceptFile(name)) return fail(ERR_TRIAL)
 
         val final = File(dir, name)
         val pf = File(dir, "$name.part")

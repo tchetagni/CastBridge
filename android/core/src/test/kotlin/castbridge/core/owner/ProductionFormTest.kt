@@ -1,16 +1,11 @@
 package castbridge.core.owner
 
-import castbridge.core.lots.BundleCatalog
 import castbridge.core.lots.Right
 import kotlin.test.*
 
 class ProductionFormTest {
-    private val catalog = BundleCatalog.parse("""{"bundles":[
-        {"id":"classe-cm2","type":"classe","lots":["learn:cm2"],"title":"CM2","rentalDays":30},
-        {"id":"classe-cp","type":"classe","lots":["learn:cp"],"title":"CP","rentalDays":45},
-        {"id":"classe-ce1","type":"classe","lots":["learn:ce1"],"title":"CE1"}]}""")
     private val now = 1_800_000_000_000L
-    private val prod = ProductionForm(production = true, durationChoice = null, license = "LIC-1", catalog = catalog)
+    private val prod = ProductionForm(production = true, durationChoice = null)
 
     @Test fun productionDefaultsToUnlimitedWithNoUsageRight() {
         assertNull(prod.build(now).usageDays)
@@ -39,28 +34,11 @@ class ProductionFormTest {
         assertNull(p.usageDays); assertTrue(p.rights.any { it is Right.Super })
     }
 
-    @Test fun rentalDurationIsTheServersAndPerBundle() {
-        val p = prod.copy(rentalBundles = setOf("classe-cp", "classe-cm2")).build(now)
-        assertEquals(listOf("loc-classe-cm2" to 30, "loc-classe-cp" to 45), p.rentals.map { it.productId to it.days })
-        val d = prod.copy(rentalBundles = setOf("classe-ce1")).build(now)      // no duration in the catalogue: the owner's default, 30 days
-        assertEquals(listOf("loc-classe-ce1" to 30), d.rentals.map { it.productId to it.days })
-        assertTrue(ProductionForm.bundleLine(catalog.find("classe-ce1")!!, true).contains("30 jours (par défaut)"))
-        assertTrue(ProductionForm.bundleLine(catalog.find("classe-cp")!!, true).contains("45 jours (fixé par le serveur)"))
-        assertFailsWith<IssueException> { prod.copy(rentalBundles = setOf("inconnu")).build(now) }
-    }
-
-    @Test fun purchasesAndSubscriptionsComeFromTheCatalogue() {
-        val p = prod.copy(purchaseBundles = setOf("classe-cp"), subscriptionBundles = setOf("classe-cm2"), subscriptionEnd = "2030-01-01").build(now)
-        assertEquals(2, p.rights.size)
-        assertFailsWith<IssueException> { prod.copy(purchaseBundles = setOf("nope")).build(now) }
-        assertFailsWith<IssueException> { prod.copy(subscriptionBundles = setOf("classe-cm2"), subscriptionEnd = "demain").build(now) }
-        assertFailsWith<IssueException> { prod.copy(subscriptionBundles = setOf("classe-cm2"), subscriptionEnd = "2001-01-01").build(now) }
-    }
-
-    @Test fun withoutCatalogueOnlyOpenAllOrSuperRemain() {
-        val n = prod.copy(catalog = null)
-        assertEquals(ProductionForm.NO_CATALOG, assertFailsWith<IssueException> { n.copy(purchaseBundles = setOf("a")).build(now) }.message)
-        assertFailsWith<IssueException> { n.copy(rentalBundles = setOf("a")).build(now) }
-        assertTrue(n.copy(openProduct = "tout", openDays = "7").build(now).rights.single() is Right.OpenAll)
+    @Test fun productionHasNoContentRightEvenWithSuper() {
+        assertTrue(prod.build(now).rights.isEmpty())
+        assertTrue(prod.copy(durationChoice = 90).build(now).rights.isEmpty())
+        assertEquals(listOf("super"), prod.copy(superUnlimited = true).build(now).rights.map { (it as Right.Super).let { "super" } })
+        // the trial form never carries the super right
+        assertTrue(ProductionForm(superUnlimited = true).build(now).rights.isEmpty())
     }
 }

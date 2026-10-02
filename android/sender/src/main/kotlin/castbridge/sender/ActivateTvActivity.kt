@@ -17,7 +17,9 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import castbridge.core.lots.HttpTvTransport
 import castbridge.core.owner.ActivationScreenState
+import castbridge.core.owner.ActivationSend
 import castbridge.core.tv.TvClient
 import castbridge.owner.TvBluetooth
 
@@ -72,6 +74,45 @@ class ActivateTvActivity : ComponentActivity() {
             }
         }
         fun clean(t: String) = t.replace("\r", "").lineSequence().map { it.trim() }.firstOrNull { it.isNotEmpty() }.orEmpty()
+        var pinText by remember { mutableStateOf("") }; var askPin by remember { mutableStateOf(false) }
+        fun sendBluetooth(tv: TvBluetooth.Tv, k: String, prefix: String) {
+            busy = true; msg = prefix + if (!tv.bonded) "Appairage : validez le code sur la TV et sur le téléphone…" else "Envoi par Bluetooth…"
+            Thread {
+                val a = runCatching { TvBluetooth.with(this@ActivateTvActivity, tv) { c -> c.sendActivation(k) } }
+                runOnUiThread {
+                    busy = false
+                    a.onSuccess { r -> val o = ActivationScreenState.sendOutcome(r.ok, r.message); ok = o.ok; msg = o.text; if (r.ok) refresh() }
+                     .onFailure { ok = false; msg = it.message ?: "Échec de l'envoi" }
+                }
+            }.start()
+        }
+        fun send(forceBluetooth: Boolean) {
+            val k = clean(key); val tv = chosen
+            if (forceBluetooth) { if (tv != null) { askPin = false; sendBluetooth(tv, k, "") }; return }
+            val lan = lanBase
+            val choice = ActivationSend.choose(lan?.first, lan?.second, pinText)
+            when (choice.channel) {
+                ActivationSend.Channel.BLUETOOTH -> if (tv != null) sendBluetooth(tv, k, choice.explanation?.plus(" ").orEmpty()) else { ok = false; msg = "Aucune TV trouvée : allumez la TV et ouvrez CastBridge-TV." }
+                ActivationSend.Channel.LAN_ASKS_PIN -> { askPin = true; ok = false; msg = choice.explanation }
+                ActivationSend.Channel.LAN_WITH_PIN -> {
+                    busy = true; ok = false; msg = "Envoi par le Wi-Fi…"
+                    val t = HttpTvTransport(lan!!.first, choice.pin)
+                    Thread {
+                        val r = runCatching { ActivationSend.sendLan(t, k) }
+                        runOnUiThread {
+                            busy = false
+                            val res = r.getOrNull()
+                            when {
+                                res == null -> { ok = false; msg = r.exceptionOrNull()?.message ?: "Échec de l'envoi" }
+                                res.pinRefused -> { askPin = true; pinText = ""; ok = false; msg = res.message }
+                                res.linkDown && tv != null -> sendBluetooth(tv, k, res.message + " Essai par Bluetooth. ")
+                                else -> { val o = ActivationScreenState.sendOutcome(res.ok, res.message); ok = o.ok; msg = o.text + if (res.linkDown) " Ouvrez CastBridge-TV et réessayez." else ""; if (res.ok) { askPin = false; pinText = "" } }
+                            }
+                        }
+                    }.start()
+                }
+            }
+        }
         val shown = if (allPaired) TvBluetooth.pairedTvs(this).let { p -> (tvs + p).distinctBy { it.address } } else tvs.filter { it.sure || it.bonded }.let { l -> if (l.any { it.sure }) l.filter { it.sure } else l }
         Column(Modifier.fillMaxSize().verticalScroll(rememberScrollState()).padding(16.dp), verticalArrangement = Arrangement.spacedBy(12.dp)) {
             Text("Activer la TV", style = MaterialTheme.typography.headlineSmall)
@@ -102,18 +143,13 @@ class ActivateTvActivity : ComponentActivity() {
                     TextButton({ allPaired = !allPaired; refresh() }) { Text(if (allPaired) "Masquer les autres appareils" else "Ma TV n'apparaît pas") }
                 }
             }
-            Button({
-                val tv = chosen ?: return@Button; val k = clean(key)
-                busy = true; msg = if (!tv.bonded) "Appairage : validez le code sur la TV et sur le téléphone…" else "Envoi…"
-                Thread {
-                    val a = runCatching { TvBluetooth.with(this@ActivateTvActivity, tv) { c -> c.sendActivation(k) } }
-                    runOnUiThread {
-                        busy = false
-                        a.onSuccess { r -> val o = ActivationScreenState.sendOutcome(r.ok, r.message); ok = o.ok; msg = o.text; if (r.ok) refresh() }
-                         .onFailure { ok = false; msg = it.message ?: "Échec de l'envoi" }
-                    }
-                }.start()
-            }, enabled = chosen != null && clean(key).length >= 20 && !busy, modifier = Modifier.fillMaxWidth()) { Text(if (busy) "En cours…" else "3. Envoyer à la TV") }
+            if (askPin) {
+                OutlinedTextField(pinText, { pinText = it.filter(Char::isDigit).take(6); msg = null }, label = { Text("Code de connexion de la TV (6 chiffres)") }, singleLine = true,
+                    keyboardOptions = androidx.compose.foundation.text.KeyboardOptions(keyboardType = androidx.compose.ui.text.input.KeyboardType.NumberPassword),
+                    visualTransformation = androidx.compose.ui.text.input.PasswordVisualTransformation(), modifier = Modifier.fillMaxWidth())
+            }
+            Button({ send(false) }, enabled = (lanBase != null || chosen != null) && clean(key).length >= 20 && !busy, modifier = Modifier.fillMaxWidth()) { Text(if (busy) "En cours…" else if (askPin) "3. Envoyer par le Wi-Fi avec ce code" else "3. Envoyer à la TV") }
+            if (askPin && chosen != null) OutlinedButton({ send(true) }, enabled = !busy && clean(key).length >= 20, modifier = Modifier.fillMaxWidth()) { Text("Envoyer par Bluetooth à la place") }
             msg?.let { Text(it, color = if (ok) MaterialTheme.colorScheme.primary else if (busy) MaterialTheme.colorScheme.onSurface else MaterialTheme.colorScheme.error) }
             Text("Pour recevoir une clé (ou passer de l'essai à la production) : touchez « Demander la clé de production » et envoyez la demande au propriétaire de CastBridge.", style = MaterialTheme.typography.bodySmall)
             OutlinedButton({

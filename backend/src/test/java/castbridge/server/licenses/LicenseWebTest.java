@@ -283,4 +283,20 @@ class LicenseWebTest extends LicenseTestBase {
                 .andExpect(status().isOk()).andReturn().getResponse().getContentAsString();
         assertThat(bad).contains("1 à 3660").doesNotContain("cbx1.");
     }
+
+    @Test
+    void issueFormLicenceIsOptionalAndTheGeneratedIdIsShown() throws Exception {
+        String form = mvc.perform(get("/admin/licenses/issue").with(as(BOSS))).andExpect(status().isOk()).andReturn().getResponse().getContentAsString();
+        assertThat(form).contains("laisser vide : générée").doesNotContain("name=\"productIds\"").doesNotContain("bouquet");
+        assertThat(form).doesNotContain("name=\"licenseId\" th:value=\"${licenseId}\" required");
+        assertThat(form.replaceAll("(?s).*<input[^>]*name=\"licenseId\"([^>]*)>.*", "$1")).doesNotContain("required");
+        String ok = mvc.perform(post("/admin/licenses/issue").with(csrf()).with(as(BOSS)).param("deviceRequest", dev().text()).param("usageDays", "45"))
+                .andExpect(status().isOk()).andReturn().getResponse().getContentAsString();
+        assertThat(ok).containsPattern("lic-[0-9a-f]{10}").contains("45 jours").doesNotContain("cbx1.\"");
+        String gen = java.util.regex.Pattern.compile("lic-[0-9a-f]{10}").matcher(ok).results().findFirst().orElseThrow().group();
+        assertThat(licenses.get(gen).seatsAllowed()).isEqualTo(1);
+        String viaAuto = mvc.perform(post("/admin/licenses/issue").with(csrf()).with(as(BOSS)).param("licenseId", "auto").param("deviceRequest", dev().text()))
+                .andExpect(status().isOk()).andReturn().getResponse().getContentAsString();
+        assertThat(viaAuto).containsPattern("lic-[0-9a-f]{10}").contains("illimitée");
+    }
 }

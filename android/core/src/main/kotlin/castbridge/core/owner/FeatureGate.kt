@@ -28,9 +28,19 @@ data class ActivationRequirement(val required: Boolean = false, val graceDays: I
     init { require(graceDays in 0..365) }
 }
 
-/** Existing installs (the owner's TV and phone, beta testers) get a grace period when the locked version first runs: persist [firstRunAtMs] once. */
-data class FleetMigration(val existingInstall: Boolean, val firstRunAtMs: Long) {
-    fun graceUntil(req: ActivationRequirement): Long? = if (existingInstall && req.graceDays > 0) firstRunAtMs + req.graceDays * 24L * 3600 * 1000 else null
+/**
+ * Grace period of the locked build, ABSOLUTE and never restarted: it applies only to an install that already existed BEFORE the lock was introduced
+ * ([existing] = the package's first-install time, which survives « clear data » and an over-install, is earlier than [graceStartMs]), and it ends at
+ * [graceStartMs] + graceDays whatever the user does (over-install, clear data). A fresh install, or an uninstall followed by an install, has a first-install
+ * time after [graceStartMs]: locked at once. Both times are injected so the rule is testable.
+ */
+data class FleetMigration(val existingInstall: Boolean, val graceStartMs: Long) {
+    fun graceUntil(req: ActivationRequirement): Long? = if (existingInstall && req.graceDays > 0) graceStartMs + req.graceDays * 24L * 3600 * 1000 else null
+
+    companion object {
+        /** [firstInstallTimeMs] = PackageInfo.firstInstallTime; [lockGraceStartMs] = the build constant LOCK_GRACE_START_MS. */
+        fun of(firstInstallTimeMs: Long, lockGraceStartMs: Long) = FleetMigration(firstInstallTimeMs < lockGraceStartMs, lockGraceStartMs)
+    }
 }
 
 sealed class GateState {

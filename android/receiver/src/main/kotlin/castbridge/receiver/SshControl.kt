@@ -39,6 +39,8 @@ class SshControl(ctx: Context, private val onChange: (String?) -> Unit, onBtStat
             (server.hostKeyFingerprint()?.let { "\nEmpreinte : $it" } ?: "")
 
     fun enable(minutes: Int? = null): String? {
+        // The trial edition never opens a shell or SFTP on the TV (the CastBridge Dev app is separate).
+        if (ActivationCenter.trial()) { disable(); throw IllegalStateException(castbridge.core.owner.TrialPolicy.SSH_MESSAGE) }
         server.start(minutes)
         bridge.start()
         return statusLine().also(onChange)

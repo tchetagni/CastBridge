@@ -3,6 +3,7 @@ package castbridge.receiver
 import android.content.Context
 import android.content.pm.PackageManager
 import android.os.Environment
+import android.util.Log
 import castbridge.core.owner.*
 import castbridge.receiver.BuildConfig
 import java.io.File
@@ -21,11 +22,16 @@ object ActivationCenter {
     fun allActivations(): List<Activation> = synchronized(everyActivation) { everyActivation.toList() }
     fun fingerprints(): Fingerprints = fp
     private fun remember(a: Activation) { synchronized(everyActivation) { if (everyActivation.none { it.signature == a.signature }) everyActivation += a } }
-    private val clock = TvClock()
+    // monotonic time of the TV (counts through sleep, never goes back during a boot): a wall clock wound back cannot freeze the usage ceilings (audit finding: clock rollback)
+    private val clock = TvClock(mono = android.os.SystemClock::elapsedRealtime)
     private lateinit var fp: Fingerprints
     lateinit var deviceCode: String; private set
-    private var firstRunAt = 0L
     private var existingInstall = false
+    /** Activation lines (installedAt, text) as last known: the in-memory truth, rewritten whole by [flushIfUnsaved]; [unsaved] = the last write failed and is retried. */
+    private val stored = ArrayList<Pair<Long, String>>()
+    @Volatile private var unsaved = false
+    @Volatile private var clockUnsaved = false
+    private const val TAG = "ActivationCenter"
     private var trusted: List<TrustedKey> = emptyList()
     private var ring = KeyRing(emptyList())
 
@@ -35,12 +41,14 @@ object ActivationCenter {
     @Synchronized fun init(ctx: Context) {
         if (ready) return
         app = ctx.applicationContext
-        trusted = BuildConfig.TRUSTED_KEYS.split('\n').mapNotNull(::parseKey)
+        val parsed = TrustedKeyParser.parse(BuildConfig.TRUSTED_KEYS)
+        parsed.warnings.forEach { Log.w(TAG, it) }
+        trusted = parsed.keys
         ring = KeyRing(trusted)
         fp = DeviceIdentity.fingerprints(rawFactors())
         deviceCode = DeviceCode.of(fp)
-        loadClock(); loadFirstRun()
-        reload()
+        loadClock(); loadGrace()
+        loadStored(); reload(); flushIfUnsaved()
         ready = true
     }
 
@@ -66,17 +74,12 @@ object ActivationCenter {
     /** The « demande d'appareil » (code + full fingerprint set): what the owner's tools need for a complete activation. */
     fun requestText(): String = OwnerFrames.deviceInfo(deviceCode, fp)
 
-    private fun parseKey(line: String): TrustedKey? = runCatching {
-        val kv = line.trim().split(' ').filter { '=' in it }.associate { it.substringBefore('=') to it.substringAfter('=') }
-        val scopes = kv["scopes"]?.split(',')?.mapNotNull { runCatching { KeyScope.valueOf(it) }.getOrNull() }?.toSet() ?: KeyScope.ALL
-        TrustedKey(kv.getValue("kid"), kv.getValue("pub"), scopes)
-    }.getOrNull()
-
     // ---- state ----
     private fun wall() = System.currentTimeMillis()
-    private fun now(): Long = clock.now(wall())
-    private fun access(): TvAccess = TvGate.evaluate(installed.all(), emptyList(), now(), if (ready) RentalHub.statuses(app) else emptyList())
-    private val migration: FleetMigration get() = FleetMigration(existingInstall, firstRunAt)
+    fun now(): Long = clock.now(wall())
+    private fun access(): TvAccess = TvGate.evaluate(installed.all(), emptyList(), now(), if (ready) RentalHub.statuses(app) else emptyList(),
+        clockDoubt = castbridge.core.lots.RentalEngine.judge(clock, wall()).doubt, monotonicNowMs = clock.monotonicNow())
+    private val migration: FleetMigration get() = FleetMigration(existingInstall, BuildConfig.LOCK_GRACE_START_MS)
 
     fun state(): GateState { if (!ready) init(app); return FeatureGate.state(requirement, access(), now(), migration) }
     fun locked(): Boolean = state() is GateState.Locked
@@ -95,7 +98,7 @@ object ActivationCenter {
     @Synchronized fun dailyPrompt(): Boolean {
         val f = File(app.filesDir, "grace_prompt.txt"); val today = wall() / 86_400_000L
         if (read(f.path)?.toLongOrNull() == today) return false
-        runCatching { f.writeText(today.toString()) }; return true
+        runCatching { f.writeText(today.toString()) }; flushIfUnsaved(); return true
     }
 
     // ---- activation channels (file, typed text): one verification path ----
@@ -119,6 +122,7 @@ object ActivationCenter {
             clock.observe(wall(), r.activation.issuedAt); saveClock()
             val text = String(payload, Charsets.UTF_8).removePrefix("﻿").lineSequence().map { it.trim() }.firstOrNull { it.isNotEmpty() }.orEmpty()
             persist(text, t)
+            flushIfUnsaved()
             runCatching { RentalHub.onActivation(app, r.activation) }          // the keys of its rentals go into the rental safe
         }
         return r
@@ -159,37 +163,68 @@ object ActivationCenter {
     }
 
     // ---- persistence (private files; the activation is verified AS OF the day it was installed: its install window is not a validity limit) ----
-    private fun stored() = File(app.filesDir, "activations.txt")          // one line per activation: « installedAt<TAB>text » (the old single-activation file is still read)
-    private fun entries(): List<Pair<Long, String>> {
-        val f = stored()
-        if (f.isFile) return runCatching { f.readLines() }.getOrDefault(emptyList()).mapNotNull { l -> l.split('\t', limit = 2).takeIf { it.size == 2 }?.let { p -> p[0].toLongOrNull()?.let { it to p[1] } } }
-        val legacy = runCatching { File(app.filesDir, "activation.txt").readLines() }.getOrNull() ?: return emptyList()
-        val at = legacy.getOrNull(0)?.toLongOrNull() ?: return emptyList(); val text = legacy.getOrNull(1) ?: return emptyList()
-        return listOf(at to text)
+    // One line per activation: « installedAt<TAB>text », always ending with a newline. Written through [SafeFile] (temporary file in the same folder, fsync, `.bak` of the last good file, rename);
+    // read with a fallback on the `.bak`. A failed write is LOGGED, the in-memory list stays the truth and the write is retried (init, next activation, daily prompt).
+    private fun storedFile() = File(app.filesDir, "activations.txt")
+    private fun parseEntries(text: String): List<Pair<Long, String>>? {
+        if (text.isNotEmpty() && !text.endsWith("\n")) return null                       // truncated last line
+        val out = ArrayList<Pair<Long, String>>()
+        for (l in text.lines()) {
+            if (l.isBlank()) continue
+            val p = l.split('\t', limit = 2); val at = p.getOrNull(0)?.toLongOrNull() ?: return null
+            if (p.size != 2 || p[1].isBlank()) return null
+            out += at to p[1]
+        }
+        return out
+    }
+    private fun loadStored() {
+        stored.clear()
+        val f = storedFile()
+        if (f.isFile || SafeFile.bak(f).isFile) {
+            val r = SafeFile.read(f) { parseEntries(it) != null }
+            if (r == null) Log.e(TAG, "activations.txt et sa copie .bak illisibles : aucune activation relue")
+            else { if (r.fromBackup) Log.w(TAG, "activations.txt illisible : relu depuis activations.txt.bak"); stored += parseEntries(r.text).orEmpty(); if (r.fromBackup) unsaved = true }
+            return
+        }
+        val legacy = runCatching { File(app.filesDir, "activation.txt").readLines() }.getOrNull() ?: return
+        val at = legacy.getOrNull(0)?.toLongOrNull() ?: return; val text = legacy.getOrNull(1) ?: return
+        stored += at to text
     }
     private fun persist(text: String, installedAt: Long) {
-        val old = entries(); if (old.any { it.second == text }) return
-        runCatching { stored().writeText((old + (installedAt to text)).joinToString("") { "${it.first}\t${it.second}\n" }) }
+        synchronized(stored) { if (stored.any { it.second == text }) return; stored += installedAt to text; unsaved = true }
+    }
+    @Synchronized private fun flushIfUnsaved() {
+        if (!unsaved) return
+        val snapshot = synchronized(stored) { stored.toList() }
+        try { SafeFile.write(storedFile(), snapshot.joinToString("") { "${it.first}\t${it.second}\n" }) { parseEntries(it) != null }; unsaved = false }
+        catch (e: Exception) { Log.e(TAG, "écriture d'activations.txt impossible (nouvel essai plus tard, l'activation reste valable jusqu'au redémarrage)", e) }
     }
 
     private fun reload() {
-        for ((at, text) in entries()) {
+        for ((at, text) in synchronized(stored) { stored.toList() }) {
             val r = receiver().receive(Channel.MANUAL, text.toByteArray(Charsets.UTF_8), at)       // verified AS OF the day it was installed
             if (r is ActivationResult.Accepted) { installed.install(r.activation); remember(r.activation); clock.observe(wall(), r.activation.issuedAt) }
         }
     }
 
-    private fun loadClock() { read(File(app.filesDir, "clock.txt").path)?.split(' ')?.let { if (it.size == 2) { clock.lastSeen = it[0].toLongOrNull() ?: 0; clock.floor = it[1].toLongOrNull() ?: 0 } }; clock.observe(wall()); saveClock() }
-    fun saveClock() { runCatching { File(app.filesDir, "clock.txt").writeText("${clock.lastSeen} ${clock.floor}") } }
+    private fun clockFile() = File(app.filesDir, "clock.txt")
+    private fun parseClock(t: String): Pair<Long, Long>? = t.trim().split(' ').takeIf { it.size == 2 }?.let { p -> (p[0].toLongOrNull() ?: return null) to (p[1].toLongOrNull() ?: return null) }
+    private fun loadClock() {
+        SafeFile.read(clockFile()) { parseClock(it) != null }?.let { r -> parseClock(r.text)?.let { clock.lastSeen = it.first; clock.floor = it.second } }
+        clock.observe(wall()); saveClock()
+    }
+    fun saveClock() {
+        try { SafeFile.write(clockFile(), "${clock.lastSeen} ${clock.floor}") { parseClock(it) != null }; clockUnsaved = false }
+        catch (e: Exception) { clockUnsaved = true; Log.e(TAG, "écriture de clock.txt impossible (nouvel essai au prochain enregistrement)", e) }
+    }
 
-    private fun loadFirstRun() {
-        val f = File(app.filesDir, "first_run.txt")
-        val saved = read(f.path)?.toLongOrNull()
-        if (saved != null) { firstRunAt = saved; existingInstall = File(app.filesDir, "first_run_existing").exists(); return }
-        firstRunAt = wall()
-        // an UPDATE of an install that already existed (the owner's TV, beta testers) gets the grace period; a fresh install is locked at once
-        val pi = app.packageManager.getPackageInfo(app.packageName, 0)
-        existingInstall = pi.lastUpdateTime > pi.firstInstallTime + 60_000
-        runCatching { f.writeText(firstRunAt.toString()); if (existingInstall) File(app.filesDir, "first_run_existing").writeText("1") }
+    /**
+     * Grace period of the locked build: ABSOLUTE and never restarted ([FleetMigration]). It applies only to an install that existed BEFORE the lock was introduced: the package's
+     * firstInstallTime survives « clear data » and an over-install, so neither can restart it; a fresh install, or an uninstall then an install, is later than the constant and is locked at once.
+     * Nothing is stored for it (the old first_run files are ignored).
+     */
+    private fun loadGrace() {
+        val first = runCatching { app.packageManager.getPackageInfo(app.packageName, 0).firstInstallTime }.getOrDefault(Long.MAX_VALUE)        // unreadable => treated as a fresh install (locked)
+        existingInstall = FleetMigration.of(first, BuildConfig.LOCK_GRACE_START_MS).existingInstall
     }
 }

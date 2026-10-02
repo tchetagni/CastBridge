@@ -47,6 +47,8 @@ public class TrustedKeys {
 
     public Key find(String kid) { return byKid.get(kid); }
 
+    public java.util.Collection<Key> all() { return java.util.List.copyOf(byKid.values()); }
+
     /** Name of the tool that owns this key (for the pages), or the kid. */
     public String nameOf(String kid) {
         Key k = byKid.get(kid);

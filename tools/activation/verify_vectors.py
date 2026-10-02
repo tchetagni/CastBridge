@@ -385,7 +385,7 @@ def issue_activation(c, keys, devices):
         if "ISSUE_TRIAL" not in scopes or not all(trial_right_ok(x) for x in r["rights"]) or r["license"] != "trial":
             return None
     else:
-        if not ({"ISSUE_PRODUCTION", "REACTIVATE"} & scopes) or not r["rights"]:
+        if not ({"ISSUE_PRODUCTION", "REACTIVATE"} & scopes) or r["license"] == "trial":
             return None
     for line in r["rights"]:
         f = line.split("|")

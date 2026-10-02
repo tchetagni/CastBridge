@@ -18,11 +18,38 @@ object TrialPolicy {
     /** Games of the « Jeux » hub reachable in the trial. */
     val GAMES: Set<String> = setOf("sudoku")
 
-    /** TV API routes (and their sub-paths) a trial key does not open: the copy / move / delete of media and the downloads. Streaming (/api/play, /api/hello, the player) stays. */
-    private val BLOCKED = listOf("/api/transfer", "/api/part", "/api/upload", "/api/storage/move", "/api/storage/target", "/api/delete", "/api/rename", "/api/folders", "/api/downloads", "/api/dl", "/api/trash",
-        "/upload", "/quiz", "/chess")
+    /** Shown when the trial is refused a Bluetooth file (a lot delivery stays accepted). */
+    const val BT_MESSAGE = "Version d'essai : la réception de fichiers par Bluetooth est désactivée."
+    const val USB_MESSAGE = "Version d'essai : l'import depuis une clé USB est désactivé. Entrez un code de production pour le débloquer."
+    const val SSH_MESSAGE = "Version d'essai : l'accès SSH à la TV est désactivé. Entrez un code de production pour le débloquer."
 
-    fun routeBlocked(path: String): Boolean = BLOCKED.any { path == it || path.startsWith("$it/") }
+    /**
+     * ALLOWLIST of what the trial opens (default deny: a route added tomorrow is closed until it is listed here). Exact paths, and prefixes (a path under "<prefix>/").
+     * Streaming with no copy (the phone's « Lire en direct » = /api/playurl, control of the cast), pairing / remote control, activation, rental, lots and « Apprendre »,
+     * the Sudoku, and the connection helpers. Never: files, library, storage, folders, trash, downloads, uploads, transfers, USB, SSH, APK installs, screenshots, quiz, chess.
+     */
+    private val EXACT = setOf("/", "/api/hello", "/api/info", "/api/sysinfo", "/api/playurl", "/api/pause", "/api/resume", "/api/stop", "/api/seek", "/api/volume", "/api/restart",
+        "/api/connections", "/api/net", "/api/background", "/api/autostart", "/api/overlay-permission", "/api/bluetooth", "/api/bluetooth/discoverable",
+        "/api/activation", "/api/rental", "/api/lots", "/api/learn", "/api/sudoku", "/api/games", "/api/games/open", "/api/parental",
+        "/api/server", "/api/server/me", "/api/server/url", "/api/server/contact")
+    private val PREFIXES = listOf("/api/activation", "/api/rental", "/api/lots", "/api/learn", "/api/sudoku", "/api/player", "/api/remote", "/api/bluetooth/tunnel", "/api/gateway",
+        "/api/parental", "/api/content/reports")
+    /** Under an allowed prefix but still closed: the subtitle of a stored file. */
+    private val DENIED_UNDER_ALLOWED = setOf("/api/player/subfile")
+
+    fun routeAllowed(path: String): Boolean {
+        if (path.contains("..") || path.contains("//") || path.contains('\\') || path.contains('%')) return false
+        if (path in DENIED_UNDER_ALLOWED) return false
+        return path in EXACT || PREFIXES.any { path == it || path.startsWith("$it/") }
+    }
+    fun routeBlocked(path: String): Boolean = !routeAllowed(path)
+
+    /** `/stream/<name>` reads the TV's stored media: in the trial only the TV's own player (loopback + its run token) may. */
+    fun streamAllowed(loopbackToken: Boolean): Boolean = loopbackToken
+
+    /** Bluetooth files: only a lot (and its signed proof) is accepted in the trial; any other file is refused. */
+    fun btFileAllowed(name: String): Boolean =
+        castbridge.core.lots.LotNames.parseFileName(name.removeSuffix(castbridge.core.lots.LotNames.PROOF_SUFFIX)) != null
     fun tileAllowed(id: String) = id !in CLOSED_TILES
     fun gameAllowed(id: String) = id in GAMES
 }

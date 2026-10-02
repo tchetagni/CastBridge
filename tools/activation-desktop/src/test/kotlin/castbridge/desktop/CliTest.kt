@@ -11,6 +11,7 @@ import java.nio.file.Files
 import kotlin.test.Test
 import kotlin.test.assertEquals
 import kotlin.test.assertFalse
+import kotlin.test.assertNotEquals
 import kotlin.test.assertNotNull
 import kotlin.test.assertNull
 import kotlin.test.assertTrue
@@ -120,6 +121,21 @@ class CliTest {
         assertEquals(listOf("tout"), w.bundleIds); assertEquals(3, w.durationDays); assertEquals(720, w.maxUsageMinutes)
         assertTrue(r.out.contains("Fenêtre de lots d'essai (usage unique) : 720 min d'usage, dans les 3 jours"), r.out)
         assertFalse(r.out.contains("Location essai"), r.out)
+    }
+
+    @Test fun productionWithoutLicenceGeneratesOneAndNeedsNoRight() {
+        assertEquals(0, cli("cle-creer").code)
+        val r = cli("emettre", "--appareil", request.path, "--production", "--usage-jours", "62", "--sortie", File(dir, "g1").path); assertEquals(0, r.code, r.err)
+        val a = act("g1")
+        assertTrue(Regex("^lic-[0-9a-f]{10}$").matches(a.license), a.license)
+        assertTrue(r.out.contains("Licence ${a.license} (générée)"), r.out)
+        assertEquals(listOf(62 * dayMs), a.rights.map { (it as castbridge.core.lots.Right.Usage).let { u -> u.endsAt - u.startsAt } })      // the duration is the only right
+        val state = cli("registre", "etat"); assertTrue(state.out.contains("${a.license} : 1/1 postes"), state.out)
+        // unlimited by default: no right at all
+        val u = cli("emettre", "--appareil", request.path, "--production", "--sortie", File(dir, "g2").path); assertEquals(0, u.code, u.err)
+        assertTrue(act("g2").rights.isEmpty()); assertNotEquals(a.license, act("g2").license)
+        // a typed licence keeps the old behaviour (unknown: refused)
+        assertEquals(1, cli("emettre", "--appareil", request.path, "--production", "--licence", "lic-nope", "--sortie", File(dir, "g3").path).code)
     }
 
     @Test fun trialWithoutTrialLotsHasNoWindow() {

@@ -373,7 +373,7 @@ class RentalSweepTest {
             val rig = RentalRig(); val lots = FakeLots(); val key = setup(rig, lots); rig.wall = T0 + 10 * DAY
             var n = 0
             val cutting = RentalSweeper(rig.ledger, rig.vault, lots, { rig.installed.toList() }, { emptySet() }, { rig.wall }, { if (n++ == cutAt) throw IllegalStateException("coupure") })
-            assertFailsWith<IllegalStateException> { cutting.sweep(SweepTrigger.APP_START) }
+            assertTrue(cutting.sweep(SweepTrigger.APP_START).failures.isNotEmpty(), "a failing contract is reported, not thrown")
             // reboot: a new ledger from disk, a new sweeper, no cut this time
             val ledger2 = RentalLedger(File(rig.dir, "rental"), TvClock(), RentalConfig(), { rig.wall })
             RentalSweeper(ledger2, rig.vault, lots, { rig.installed.toList() }, { emptySet() }, { rig.wall }).sweep(SweepTrigger.APP_START)
@@ -581,5 +581,92 @@ class RentalPolicyTest {
         rig.wall = T0 + 31 * DAY
         rig.sweeper(TvRentedLots(tv.store)).sweep(SweepTrigger.APP_START)
         assertEquals(0, tv.store.usedBytes(), "the expired lot frees its room"); assertTrue(tv.learn.held.isEmpty())
+    }
+}
+
+class RentalRobustnessTest {
+    private fun setupOne(rig: RentalRig, lots: FakeLots, product: String, bundle: String, lot: LotId, days: Int = 10): String {
+        val a = rig.issue(rig.rental(product = product, bundles = listOf(bundle), days = days)); rig.install(a)
+        val key = "$product@$T0"
+        lots.held[lot] = Edition.FULL
+        rig.vault.putKey(key, rig.key(product))
+        rig.vault.putLot(lot, 1, RentalKeys.seal(rig.key(product), lot, 1, Kit.bytes(lot.scope.length + 1, 500)))
+        rig.ledger.markRented(key, lot, LotMeta(lot, 1, 500, "a".repeat(64), lot.scope), LotFamilies.explicit(emptySet(), setOf(LotNames.key(lot))))
+        return key
+    }
+    private fun reopen(rig: RentalRig) = RentalLedger(File(rig.dir, "rental"), TvClock(), RentalConfig(), { rig.wall })
+
+    @Test fun corruptLedgerWithoutBackupIsKeptAsEvidenceAndSuspendsEveryRental() {
+        val rig = RentalRig(); val lots = FakeLots(); val key = setupOne(rig, lots, "loc-cm2", "classe-cm2", CM2)
+        val file = File(rig.dir, "rental/rentals.json"); File(rig.dir, "rental/rentals.json.bak").delete()
+        file.writeText("""{"clock":{"lastSe""")                          // truncated
+        val ledger2 = reopen(rig)
+        assertTrue(ledger2.degraded); assertNotNull(ledger2.loadNote)
+        assertTrue(File(rig.dir, "rental").list()!!.any { it.startsWith("rentals.json.corrupt-") }, "the corrupt file is kept")
+        // within the first day of a 10-day rental: the unknown state is NOT trusted, the rental is treated as ended
+        assertEquals(RentalState.EXPIRED, ledger2.status(rig.installed.toList()).single().state)
+        val rig2 = RentalSweeperRig(ledger2, rig, lots).sweep()
+        assertFalse(rig.vault.hasKey(key), "key destroyed"); assertTrue(rig2.failures.isEmpty())
+        assertFalse(ledger2.degraded, "quarantine over once every contract is tombstoned")
+        assertFalse(reopen(rig).degraded, "and it stays over after a reboot")
+        // the contract can never be reopened from its activation
+        assertNotEquals("clé installée", rig.ledger.let { reopen(rig).install(rig.installed.first(), rig.installed.toList(), rig.fp, rig.vault) }.values.first())
+    }
+    private fun RentalSweeperRig(ledger: RentalLedger, rig: RentalRig, lots: FakeLots) = object { fun sweep() = RentalSweeper(ledger, rig.vault, lots, { rig.installed.toList() }, { emptySet() }, { rig.wall }).sweep(SweepTrigger.APP_START) }
+
+    @Test fun corruptMainFileFallsBackToTheBackup() {
+        val rig = RentalRig(); val lots = FakeLots(); val key = setupOne(rig, lots, "loc-cm2", "classe-cm2", CM2)
+        rig.wall = T0 + 10 * DAY; rig.sweeper(lots).sweep(SweepTrigger.APP_START)            // saves several times: a .bak of the previous good state exists
+        val dir = File(rig.dir, "rental"); assertTrue(File(dir, "rentals.json.bak").isFile)
+        File(dir, "rentals.json").writeText("not json at all")
+        val ledger2 = reopen(rig)
+        assertFalse(ledger2.degraded); assertNotNull(ledger2.rec(key), "contract state restored from the backup")
+        assertTrue(File(dir, "rentals.json").let { true } && dir.list()!!.any { it.startsWith("rentals.json.corrupt-") })
+    }
+
+    @Test fun missingLedgerWhileKeysAreInTheSafeIsDoubtful_aFreshTvIsNot() {
+        val rig = RentalRig(); val lots = FakeLots(); setupOne(rig, lots, "loc-cm2", "classe-cm2", CM2)
+        val dir = File(rig.dir, "rental"); File(dir, "rentals.json").delete(); File(dir, "rentals.json.bak").delete()
+        assertTrue(reopen(rig).degraded)
+        assertFalse(RentalLedger(File(Kit.tmp(), "rental")).degraded, "nothing at all = a fresh TV")
+    }
+
+    @Test fun oneFailingContractDoesNotStopTheNextOnes() {
+        val rig = RentalRig(); val lots = FakeLots()
+        val k1 = setupOne(rig, lots, "loc-cm2", "classe-cm2", CM2)
+        val cm1 = LotId("learn", "cm1"); val k2 = setupOne(rig, lots, "loc-cm1", "classe-cm1", cm1)
+        rig.wall = T0 + 10 * DAY
+        val errors = ArrayList<String>()
+        var failOnce = true
+        val sw = RentalSweeper(rig.ledger, rig.vault, lots, { rig.installed.toList() }, { emptySet() }, { rig.wall }, { if (it == "key:$k1" && failOnce) { failOnce = false; throw IllegalStateException("boom") } }, { k, _ -> errors += k })
+        val rep = sw.sweep(SweepTrigger.APP_START)
+        assertEquals(listOf(k1), rep.failures); assertEquals(listOf(k1), errors)
+        assertEquals(RentalPhase.DONE, rig.ledger.phase(k2), "the later contract was swept"); assertTrue(cm1 !in lots.held)
+        assertEquals(RentalPhase.EXPIRING, rig.ledger.phase(k1), "the failed one waits at its last persisted step")
+        val rep2 = sw.sweep(SweepTrigger.PERIODIC)                                          // retried at the next sweep
+        assertTrue(rep2.failures.isEmpty()); assertEquals(RentalPhase.DONE, rig.ledger.phase(k1)); assertTrue(CM2 !in lots.held)
+    }
+
+    @Test fun aLotBoughtDuringItsRentalIsKeptAtExpiry_viaOwnedLots() {
+        val rig = RentalRig(); val lots = FakeLots(); val key = setupOne(rig, lots, "loc-cm2", "classe-cm2", CM2)
+        // a permanent « tout » purchase arrives during the rental
+        rig.installed += rig.issue(Right.Purchase("p-all", listOf(Right.ALL_BUNDLE), T0 + DAY), at = T0 + DAY)
+        rig.wall = T0 + 10 * DAY
+        val owned = OwnedLots.of(rig.installed.toList(), rig.wall, lots.heldLots())
+        assertEquals(setOf(CM2), owned)
+        val rep = RentalSweeper(rig.ledger, rig.vault, lots, { rig.installed.toList() }, { owned }, { rig.wall }).sweep(SweepTrigger.APP_START)
+        assertEquals(listOf(CM2), rep.keptBecauseOwned); assertTrue(CM2 in lots.held); assertFalse(rig.vault.hasKey(key))
+    }
+
+    @Test fun ownedLotsResolveBundlesWithACatalogueAndNothingWithoutRights() {
+        val rig = RentalRig()
+        val cat = BundleCatalog(listOf(Bundle("classe-cm2", "classe", setOf("learn:cm2", "quiz:cm2"))))
+        val held = setOf(CM2, CM2Q, LotId("learn", "cm1"))
+        val buy = rig.issue(Right.Purchase("p1", listOf("classe-cm2"), T0))
+        assertEquals(setOf(CM2, CM2Q), OwnedLots.of(listOf(buy), T0 + DAY, held, cat))
+        assertTrue(OwnedLots.of(listOf(buy), T0 + DAY, held, null).isEmpty(), "no catalogue on the TV: a named bundle cannot be resolved")
+        assertTrue(OwnedLots.of(emptyList(), T0, held, cat).isEmpty())
+        val rental = rig.issue(rig.rental())
+        assertTrue(OwnedLots.of(listOf(rental), T0 + DAY, held, cat).isEmpty(), "a rental never counts as owned")
     }
 }

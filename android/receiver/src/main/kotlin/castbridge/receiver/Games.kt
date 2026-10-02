@@ -83,7 +83,7 @@ object GamesHub {
             val a = activity ?: foreground
             if (a == null) ApiReply(409, "{\"error\":\"Ouvrez CastBridge TV sur la TV, puis réessayez\",\"needsForeground\":true}")
             else {
-                val g = Games.byId(params["game"])
+                val g = Games.byId(params["game"])?.takeIf { it in Games.visible() }   // the trial opens the Sudoku only
                 TvConnect.feature(g?.id ?: "games", "phone")
                 a.runOnUiThread {
                     runCatching { if (g != null) g.launch(a) else a.startActivity(Intent(a, GamesActivity::class.java).addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)) }

@@ -70,7 +70,7 @@ object RentalEngine {
         val base = maxOf(tv.lastSeen, tv.floor)
         if (base == 0L) return JudgedTime(wall, null)
         return when {
-            wall + cfg.behindMarginMs < base -> JudgedTime(base, ClockDoubt.BEHIND)
+            wall + cfg.behindMarginMs < base -> JudgedTime(maxOf(base, tv.monotonicNow()), ClockDoubt.BEHIND)      // a rolled-back wall clock never freezes the rental time: the TV time keeps advancing with the monotonic clock
             wall > base + minOf(cfg.aheadDoubtMs, TvClock.MAX_JUMP_MS) -> JudgedTime(base, ClockDoubt.AHEAD)
             else -> JudgedTime(maxOf(wall, base), null)
         }

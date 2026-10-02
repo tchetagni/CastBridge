@@ -1,0 +1,11 @@
+# /etc/fail2ban/jail.d/castbridge-tunnel.local : bannit les adresses qui insistent sur le port des tunnels (2200) avec de mauvaises clés.
+# Une TV légitime s'authentifie du premier coup avec sa clé ; un bannissement ne touche donc que des essais répétés. Ajuster « ignoreip » pour le propriétaire.
+[castbridge-tunnel]
+enabled  = true
+port     = 2200
+filter   = sshd
+backend  = systemd
+journalmatch = _SYSTEMD_UNIT=ssh.service + _COMM=sshd
+maxretry = 5
+findtime = 10m
+bantime  = 1h

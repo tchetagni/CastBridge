@@ -154,7 +154,7 @@ Le code de déverrouillage est demandé au clavier (jamais en argument) ; en scr
             if (kind == ActivationKind.TRIAL) throw Fail("--super : licence de production seulement (--kind production)")
             rights += Right.Super("super-illimite", t)
         }
-        val license = o.opt("--license") ?: if (kind == ActivationKind.TRIAL) Activation.TRIAL_LICENSE else throw Fail("--license obligatoire pour la production")
+        val license = o.opt("--license") ?: if (kind == ActivationKind.TRIAL) Activation.TRIAL_LICENSE else LicenseIds.generate().also { io.err("Licence $it (générée)") }
         val issued = ActivationIssuer(signer).issue(ActivationIssuer.Request(kind, code, fp, issuedAt = t, rights = rights, license = license))
         io.out(issued.token)
         o.opt("--out-file")?.let {

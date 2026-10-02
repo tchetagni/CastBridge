@@ -61,6 +61,20 @@ CASTBRIDGE_CONFIRM_PRODUCTION=yes tools/publish-content.sh --rsync deploy@bridge
 ```
 La copie réelle envoie **d'abord les lots**, **puis** le catalogue et `CONTENT-RELEASE.json` : un téléphone ne voit jamais un catalogue qui annonce un lot pas encore arrivé. Le serveur (`backend/…/lots/`) reçoit ensuite les lots par son point d'entrée d'administration (`POST /api/v1/admin/lots`, non publié par défaut) : cette étape reste **manuelle et hors du dépôt**.
 
+## 5 bis. Catalogue des bouquets signé (import depuis le serveur)
+
+Les outils du propriétaire (console du téléphone, outil de bureau) **importent** le catalogue des bouquets (id, type, lots, titre, `rawBytes`, **`rentalDays`**) **depuis le serveur** : `GET /api/v1/catalog/bundles` (public, lecture seule, HTTPS). Le fichier est **signé hors ligne** avec la clé du propriétaire (la même que les mises à jour et les catalogues de lots) : le serveur ne fait que le relayer, il ne le signe jamais, et un outil refuse un catalogue non signé ou modifié (`SignedBundleCatalog`).
+
+```sh
+# 1. générer le manifeste (durées de location : content/bundles-rental.json)
+python3 tools/trial-edition/trial_edition.py select
+# 2. signer le catalogue des bouquets avec la clé PEM du propriétaire (hors dépôt ; bibliothèque standard seulement)
+python3 tools/trial-edition/trial_edition.py sign-catalog --manifest content/TRIAL-MANIFEST.json --key /chemin/privé/lots.pem --out bundles-catalog.json
+# 3. déposer le fichier sur le serveur (décision du propriétaire, jamais fait par l'outil)
+scp bundles-catalog.json deploy@bridge.sti-cm.com:/data/apk/lots/bundles-catalog.json
+```
+Emplacement : `castbridge.catalog.bundles-file` (variable `CASTBRIDGE_BUNDLES_CATALOG_FILE`), par défaut `<storage-dir>/lots/bundles-catalog.json` (à côté des lots). Absent : `404` « Catalogue des bouquets non publié sur le serveur » ; illisible : `503`. Aucun redémarrage : le fichier est relu à chaque requête. Texte signé : `castbridge-bundle-catalog-v1`, `generatedAt=…`, puis par bouquet (trié par id) `bundle=id|type|rawBytes|rentalDays|sha256(titre)|lot,lot` ; **à garder identique** dans `trial_edition.py` (`canonical_bundles`), `SignedBundleCatalog.kt` et `BundleCatalogApiTest`. Refaire les étapes 1 à 3 à chaque changement de contenu ou de `bundles-rental.json` ; un catalogue plus ancien que celui déjà enregistré est refusé (rejeu).
+
 ## 6. Dépôt de contenu dédié et privé (décision du propriétaire)
 
 Le propriétaire a choisi un **dépôt privé dédié** (nom suggéré : `castbridge-content`, à créer par lui) : texte et ressources vectorielles dans git, médias lourds via **Git LFS** ou assets de release ; le dépôt de code ne contient **aucun** média lourd.

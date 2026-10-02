@@ -85,13 +85,15 @@ class OwnerCliTest {
         assertTrue(ActivationVerifier(trustedFrom(v)).verify(token.dropLast(3) + "AAA", fp, now) is ActivationResult.Rejected)
     }
 
-    @Test fun trialActivationHasNoRightsAndProductionNeedsALicenseAndARight() {
+    @Test fun trialActivationHasNoRightsAndProductionNeedsNeitherALicenseNorARight() {
         val d = dir(); val v = File(d, "c.txt"); OwnerCli.run(listOf("init", "--vault", v.path), Rec()) { now }
         val fp = device(); val req = request(d, fp)
         val t = Rec(); assertEquals(0, OwnerCli.run(listOf("activation", "--vault", v.path, "--request", req.path, "--journal", File(d, "j").path), t) { now })
         assertTrue(ActivationVerifier(trustedFrom(v)).verify(t.out.single(), fp, now) is ActivationResult.Accepted)
-        val noLic = Rec(); assertEquals(2, OwnerCli.run(listOf("activation", "--vault", v.path, "--request", req.path, "--kind", "production"), noLic) { now })
-        val noRight = Rec(); assertEquals(3, OwnerCli.run(listOf("activation", "--vault", v.path, "--request", req.path, "--kind", "production", "--license", "lic-1"), noRight) { now })
+        val noLic = Rec(); assertEquals(0, OwnerCli.run(listOf("activation", "--vault", v.path, "--request", req.path, "--kind", "production"), noLic) { now })
+        val gen = ActivationVerifier(trustedFrom(v)).verify(noLic.out.single(), fp, now); assertTrue(gen is ActivationResult.Accepted)
+        assertTrue(Regex("^lic-[0-9a-f]{10}$").matches((gen as ActivationResult.Accepted).activation.license)); assertTrue(gen.activation.rights.isEmpty())
+        val noRight = Rec(); assertEquals(0, OwnerCli.run(listOf("activation", "--vault", v.path, "--request", req.path, "--kind", "production", "--license", "lic-1"), noRight) { now })
     }
 
     @Test fun openAllIsBoundedToThirtyDays() {

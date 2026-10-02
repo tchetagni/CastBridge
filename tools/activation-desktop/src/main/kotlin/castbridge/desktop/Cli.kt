@@ -28,6 +28,7 @@ class Env(
     val out: PrintStream = PrintStream(System.out, true, "UTF-8"), val err: PrintStream = PrintStream(System.err, true, "UTF-8"), val stdin: InputStream = System.`in`,
     val getenv: (String) -> String? = System::getenv, val console: () -> CharArray? = { System.console()?.readPassword("Code de déverrouillage : ") },
     val clock: () -> Long = System::currentTimeMillis, val kdf: castbridge.core.owner.Kdf = ScryptKdf(),
+    val httpGet: ((String) -> castbridge.core.net.HttpLite.Response)? = null,
 )
 
 class UsageException(message: String) : Exception(message)
@@ -73,6 +74,7 @@ class Cli(private val env: Env) {
         catch (e: UsageException) { env.err.println("Erreur : ${e.message}\n(« aide » liste les commandes)"); 2 }
         catch (e: WrongCode) { 3 }
         catch (e: IssueException) { env.err.println("Refusé : ${e.message}"); 1 }
+        catch (e: castbridge.core.lots.SignedBundleCatalog.Refused) { env.err.println("Refusé : ${e.message}"); 1 }
         catch (e: IllegalArgumentException) { env.err.println("Refusé : ${e.message}"); if (env.getenv("CASTBRIDGE_DEBUG") != null) e.printStackTrace(env.err); 1 }
     }
 
@@ -90,8 +92,77 @@ class Cli(private val env: Env) {
         "journal" -> journal(a)
         "registre", "registry" -> registry(a)
         "autotest", "selftest" -> selftest(a)
+        "catalogue-serveur", "server-catalog" -> serverCatalog(a)
+        "experts-ajouter" -> expertsAdd(a)
+        "experts-retirer" -> expertsRemove(a)
+        "experts-lister" -> expertsList(a)
+        "experts-signer" -> expertsSign(a)
+        "experts-verifier" -> expertsVerify(a)
         "gui", "interface" -> { Gui.launch(home(a)); GUI_RUNNING }
         else -> throw UsageException("Commande inconnue : $cmd")
+    }
+
+    /** The catalogue text behind `--catalogue`: a file, or `serveur` = the kept copy of « catalogue-serveur » (verified again, never trusted blindly). */
+    private fun readCatalogue(path: String, a: Args): String = if (path == ServerCatalogStore.KEYWORD)
+        ServerCatalogStore.readVerified(home(a), ServerCatalogStore.keys(a.all("cle-publique"))).json else readSource(path)
+
+    /** Imports the signed bundle catalogue from the server (HTTPS), verifies the signature, keeps it in the folder. Only on request. */
+    private fun serverCatalog(a: Args): Int {
+        val v = ServerCatalogStore.update(home(a), a.get("serveur"), ServerCatalogStore.keys(a.all("cle-publique")), env.httpGet ?: { u -> castbridge.core.net.HttpLite(userAgent = "CastBridge-desktop").request("GET", u) })
+        env.out.println("Catalogue du ${v.dateFr} : ${v.catalog.bundles.size} bouquets (signé) : ${ServerCatalogStore.file(home(a)).path}")
+        env.out.println("Pour l'utiliser : emettre … --catalogue ${ServerCatalogStore.KEYWORD} --lots-libres FICHIER")
+        return 0
+    }
+
+    private fun experts(a: Args) = ExpertsStore(home(a), env.clock)
+    private fun kidOrNone(a: Args) = keyFile(a).let { if (it.exists()) it.info().kid else "-" }
+
+    private fun expertsAdd(a: Args): Int {
+        val id = a.positional.firstOrNull() ?: throw UsageException("Identifiant de l'expert attendu : experts-ajouter ID --cle-ssh \"ssh-ed25519 AAAA…\" [--jusqu-au AAAA-MM-JJ]")
+        val e = experts(a).add(id, a.need("cle-ssh"), a.get("jusqu-au"), kidOrNone(a))
+        env.out.println("Expert $id ajouté${if (e.notAfter != 0L) " jusqu'au ${date(e.notAfter - 1)}" else " sans date de fin"}. Pas encore actif : « experts-signer » puis publication (docs/REMOTE-TUNNEL.md).")
+        return 0
+    }
+
+    private fun expertsRemove(a: Args): Int {
+        val id = a.positional.firstOrNull() ?: throw UsageException("Identifiant de l'expert attendu : experts-retirer ID")
+        experts(a).remove(id, kidOrNone(a))
+        env.out.println("Expert $id retiré de la liste locale. L'accès ne se ferme qu'après « experts-signer » et la publication de la nouvelle liste.")
+        return 0
+    }
+
+    private fun expertsList(a: Args): Int {
+        val l = experts(a).list()
+        if (l.isEmpty()) { env.out.println("Aucun expert."); return 0 }
+        val now = env.clock()
+        for (e in l.sortedBy { it.id }) env.out.println("${e.id.padEnd(32)} ${e.publicKey.split(' ')[1].takeLast(12).padStart(14)}  ${if (e.notAfter == 0L) "sans date de fin" else (if (e.expiredAt(now)) "EXPIRÉ le " else "jusqu'au ") + date(e.notAfter - 1)}")
+        return 0
+    }
+
+    /** Signs the local list with the desk key (REGISTRY scope required) and writes the experts.json to publish. */
+    private fun expertsSign(a: Args): Int {
+        val kf = keyFile(a); if (!kf.exists()) throw UsageException("Aucune clé : « cle-creer » d'abord (${kf.file.path})")
+        if (KeyScope.REGISTRY !in kf.info().scopes) throw IssueException("La clé du bureau n'a pas la portée REGISTRY : elle ne peut pas signer la liste des experts")
+        val l = experts(a).list()
+        val pass = passphrase(a); val s = kf.unlock(pass, env.kdf); pass.fill('\u0000')
+        s ?: run { env.err.println("Code de déverrouillage faux."); throw WrongCode() }
+        val signed = castbridge.core.tunnel.ExpertsList.sign(s.signer, s.signer.keyId, l, env.clock())
+        castbridge.core.tunnel.ExpertsList.verify(signed.toJson(), listOf(kf.trusted()))      // never write a file the TVs would refuse
+        val out = File(a.get("sortie") ?: "experts.json"); out.absoluteFile.parentFile?.mkdirs(); out.writeText(signed.toJson() + "\n")
+        experts(a).logSigned(s.signer.keyId, l.size)
+        env.out.println("Liste signée : ${out.path} (${l.size} expert(s), ${date(signed.generatedAt)}). À publier sur le serveur : docs/REMOTE-TUNNEL.md.")
+        if (l.isEmpty()) env.out.println("ATTENTION : liste vide = plus aucun expert autorisé (le propriétaire garde son accès).")
+        return 0
+    }
+
+    private fun expertsVerify(a: Args): Int {
+        val file = a.positional.firstOrNull() ?: throw UsageException("Fichier experts.json attendu")
+        val kf = keyFile(a); if (!kf.exists()) throw UsageException("Aucune clé (nécessaire pour connaître la clé publique de confiance)")
+        val l = castbridge.core.tunnel.ExpertsList.verify(readSource(file), listOf(kf.trusted())).list
+        val now = env.clock()
+        env.out.println("Liste VALIDE : signée par ${l.keyId} le ${date(l.generatedAt)} ; ${l.experts.size} expert(s), ${l.authorizedKeysLines(now).size} actif(s) maintenant.")
+        l.experts.sortedBy { it.id }.forEach { env.out.println("  ${it.id}${if (it.notAfter != 0L) " jusqu'au ${date(it.notAfter - 1)}" else ""}${if (it.expiredAt(now)) " (expiré)" else ""}") }
+        return 0
     }
 
     private fun keyFile(a: Args) = KeyFile(File(home(a), "desk.key.json"))
@@ -181,20 +252,21 @@ class Cli(private val env: Env) {
         if (a.get("periode") != null && period == null) throw UsageException("--periode attend le début (ms) de la location à prolonger")
         val explicit = a.all("location").map { RightsSyntax.rental(it, period) }
         if (explicit.isNotEmpty() && a.get("catalogue") == null && !a.flags.contains("sans-controle-catalogue"))
-            throw IssueException("Location : la durée est fixée par le serveur ; chargez le catalogue du serveur (--catalogue TRIAL-MANIFEST.json --lots-libres FICHIER), ou --sans-controle-catalogue (déconseillé : aucune durée vérifiée)")
+            throw IssueException("Location : la durée est fixée par le serveur ; chargez le catalogue du serveur (« catalogue-serveur », puis --catalogue serveur --lots-libres FICHIER), ou --sans-controle-catalogue (déconseillé : aucune durée vérifiée)")
         val bouquets = a.all("location-bouquet").flatMap { it.split(',') }.map { it.trim() }.filter { it.isNotEmpty() }
         val rentals = explicit + if (bouquets.isEmpty()) emptyList() else {
-            val catPath = a.get("catalogue") ?: throw IssueException("--location-bouquet : chargez le catalogue du serveur (--catalogue TRIAL-MANIFEST.json --lots-libres FICHIER) ; la durée vient du catalogue, jamais de la ligne de commande")
-            castbridge.core.lots.RentalDurations.specsFor(castbridge.core.lots.BundleCatalog.parse(readSource(catPath)), bouquets).map { it.copy(period = period) }
+            val catPath = a.get("catalogue") ?: throw IssueException("--location-bouquet : chargez le catalogue du serveur (« catalogue-serveur », puis --catalogue serveur --lots-libres FICHIER) ; la durée vient du catalogue, jamais de la ligne de commande")
+            castbridge.core.lots.RentalDurations.specsFor(castbridge.core.lots.BundleCatalog.parse(readCatalogue(catPath, a)), bouquets).map { it.copy(period = period) }
         }
         val check = if (rentals.isEmpty()) null else rentalCheck(a)
         val trialLots = kind == ActivationKind.TRIAL && !a.flags.contains("sans-lots-essai")      // every trial key carries its one-time 12 h window of rented lots
-        val spec = IssueSpec(kind, if (a.get("sujet") == "phone") Subject.PHONE else Subject.TV, rights(a, now) + permanent(a, kind, now), a.get("licence") ?: Activation.TRIAL_LICENSE,
+        val spec = IssueSpec(kind, if (a.get("sujet") == "phone") Subject.PHONE else Subject.TV, rights(a, now) + permanent(a, kind, now), a.get("licence") ?: if (kind == ActivationKind.PRODUCTION) "" else Activation.TRIAL_LICENSE,      // production without --licence: a new licence is generated
             rentals = rentals, rentalMaster = if (rentals.isEmpty() && !trialLots) null else d.rentalMaster(), rentalCheck = check, usageDays = usageDays(a, kind), trialLots = trialLots)
         val r = d.issue(device, spec)
         val dir = File(a.get("sortie") ?: "."); dir.mkdirs()
         val fileOut = File(dir, r.issued.fileName); fileOut.writeText(r.issued.fileContent)
         env.out.println("Activation ${if (kind == ActivationKind.TRIAL) "d'essai" else "de production"} pour ${device.code}")
+        if (kind == ActivationKind.PRODUCTION) env.out.println("Licence ${r.issued.activation.license}${if (a.get("licence") == null) " (générée)" else ""}")
         env.out.println("Poste : ${r.seat}${if (r.reused) " (ré-activation : aucun poste consommé)" else ""}${r.seatsLeft?.let { " ; postes restants : $it" } ?: ""}")
         env.out.println("Valable à l'installation jusqu'au ${date(r.issued.activation.notAfter)}")
         env.out.println("Fichier pour la clé USB de la TV : ${fileOut.path}  (à copier dans Download/CastBridge/)")
@@ -218,7 +290,7 @@ class Cli(private val env: Env) {
     /** Refuses a rental whose bundles hold a free lot (CC BY-SA) or an unknown bundle, from the bundle catalogue (`--catalogue TRIAL-MANIFEST.json`) and the list of free lots (`--lots-libres FICHIER`, one lot « fonction:périmètre » per line). */
     private fun rentalCheck(a: Args): ((castbridge.core.owner.RentalSpec) -> String?)? {
         val catPath = a.get("catalogue") ?: return null
-        val catalog = castbridge.core.lots.BundleCatalog.parse(readSource(catPath))
+        val catalog = castbridge.core.lots.BundleCatalog.parse(readCatalogue(catPath, a))
         val free = a.get("lots-libres")?.let { readSource(it).lines().map { l -> l.trim() }.filter { l -> l.isNotEmpty() && !l.startsWith("#") }.toSet() }
             ?: throw UsageException("--catalogue demande aussi --lots-libres (la liste des lots libres : jamais louables)")
         val all = catalog.bundles.flatMap { it.lots }.toSet()
@@ -324,21 +396,28 @@ Commandes (français ; alias anglais : keygen key trust device license issue com
   faire-confiance F  ajoute la clé publique d'un autre outil (téléphone propriétaire, serveur) à l'anneau
   appareil [F|-]     lit la « demande d'appareil » donnée par la TV (code=…, k=…, factor=TYPE|empreinte)
   licence ID --postes N [--transferts N]    crée une licence (un achat)
-  emettre --appareil F [--production] [--licence ID] [--super] [--sujet tv|phone]   (clé à installer dans les 48 h ; --super : SUPER_UNLIMITED, lit et débloque tout, locations permanentes, clé super administrateur seulement)
+  emettre --appareil F [--production] [--usage-jours N|illimitee] [--licence ID] [--super] [--sujet tv|phone]   (clé à installer dans les 48 h ; --super : SUPER_UNLIMITED, lit et débloque tout, locations permanentes, clé super administrateur seulement)
+          Production : sans --licence, une licence « lic-… » est GÉNÉRÉE (1 poste) et affichée ; la durée (--usage-jours : 30, 60, 62, 90, 180, 300, 365, autre 1 à 3660, ou illimitee par défaut) est le seul réglage ; aucun droit de contenu n'est nécessaire.
+          Options AVANCÉES (tests, outils de location ; l'interface graphique et la console du téléphone ne les proposent plus) :
           [--achat produit=b1,b2] [--abonnement produit=b1:jours[:tolérance[:auto]]] [--tout-ouvert produit:jours] [--droit ligne]
-          [--location produit=b1,b2:JOURS[:MINUTES_D_USAGE_MAX[:TOLERANCE_JOURS[:SIMULTANEES]]]]   (répétable ; 1 à 366 jours ; production seulement ; avec --catalogue la durée doit être EXACTEMENT celle du serveur)
+          [--location produit=b1,b2:JOURS[:MINUTES_D_USAGE_MAX[:TOLERANCE_JOURS[:SIMULTANEES]]]]   (avancé ; répétable ; 1 à 366 jours ; production seulement ; avec --catalogue la durée doit être EXACTEMENT celle du serveur)
           [--location-bouquet b1,b2]   une location par bouquet (produit loc-<bouquet>), durée EXACTE du catalogue (rentalDays) ; exige --catalogue ; sans durée à saisir
           [--sans-controle-catalogue]  autorise --location sans catalogue (déconseillé : la durée n'est pas vérifiée ; --location sans --catalogue est sinon refusé)
           [--periode MS]  prolonge la location commencée à cet instant (même clé, pas de doublon) au lieu d'en commencer une nouvelle
-          [--catalogue TRIAL-MANIFEST.json --lots-libres FICHIER]   durée exacte du serveur ; refuse la location d'un lot libre (CC BY-SA)
+          [--catalogue serveur|TRIAL-MANIFEST.json --lots-libres FICHIER]   durée exacte du serveur (« serveur » = la copie de catalogue-serveur) ; refuse la location d'un lot libre (CC BY-SA)
           [--sortie DOSSIER] [--qr]       jeton, fichier « activation » (clé USB de la TV) et code QR
   lot-chiffrer --activation F --produit P --lot FICHIER.lot [--sortie DOSSIER]   chiffre un lot pour la TV d'une location émise
+  catalogue-serveur [--serveur URL] [--cle-publique B64]   importe le catalogue des bouquets DEPUIS LE SERVEUR (HTTPS, signature vérifiée avant d'être gardée dans le dossier) ; ensuite --catalogue serveur
   cle-saisissable --code XXXX-XXXX-XXXX-XXXX [--production --ensemble N]   dernier recours : 165 caractères à taper
   commande --appareil F --pouvoir support|unlock|open_all --defi HEX [--jours N] [--action A] [--bouquets a,b] [--lots fn:scope,…]
   verifier JETON --appareil F [--maintenant MS]   vérifie un jeton avec l'anneau de ce bureau
   journal            jetons émis (date, TV, droits ; jamais la clé)
   registre exporter [F] | importer F | etat    registre signé des licences (synchronisation des trois outils)
   autotest [--vecteurs F]   rejoue les vecteurs communs : mêmes entrées, mêmes octets
+  experts-ajouter ID --cle-ssh "ssh-ed25519 AAAA…" [--jusqu-au AAAA-MM-JJ]   ajoute un expert de l'assistance à distance (liste locale, non signée)
+  experts-retirer ID | experts-lister          retire / liste les experts
+  experts-signer [--sortie experts.json]       signe la liste (clé du bureau, portée REGISTRY) : le fichier à publier sur le serveur
+  experts-verifier FICHIER                     vérifie un experts.json avec la clé publique de ce bureau
   gui                interface graphique
 
 Options communes : --dossier D (défaut ~/.castbridge-activation) ; code de déverrouillage : saisie au terminal, ou --code-env NOM, ou --code-fichier CHEMIN.

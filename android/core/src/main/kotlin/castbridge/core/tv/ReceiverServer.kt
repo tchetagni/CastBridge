@@ -269,10 +269,11 @@ class ReceiverServer(
         if (s.method == Method.GET && path == "/") return page()
         if (s.method == Method.GET && path == "/api/hello")
             return ok("""{"app":"castbridge-tv","v":${q(VERSION)},"pinRequired":${guard != null}}""")
-        routeGuard?.invoke(path)?.let { return json(Response.Status.FORBIDDEN, """{"error":${q(it)},"trial":true}""") }
-        publicRoutes?.serve(s)?.let { return it }
         val isStream = (s.method == Method.GET || s.method == Method.HEAD) && path.startsWith("/stream/")
         val loopbackStream = isStream && p["t"] == streamToken && s.remoteIpAddress.let { it == "127.0.0.1" || it == "::1" || it == "0:0:0:0:0:0:0:1" }
+        // The guard (trial allowlist) sees every route; only the TV's own player (loopback + run token) is let through on /stream/.
+        if (!loopbackStream) routeGuard?.invoke(path)?.let { return json(Response.Status.FORBIDDEN, """{"error":${q(it)},"trial":true}""") }
+        publicRoutes?.serve(s)?.let { return it }
         if (!loopbackStream) denied(s, p)?.let { return it }
         if (isStream) return stream(s, path.removePrefix("/stream/"))
         val ext = if (!path.startsWith("/api/")) null

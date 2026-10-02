@@ -1,6 +1,7 @@
 package castbridge.core.owner
 
 import castbridge.core.lots.Access
+import castbridge.core.lots.ClockDoubt
 import castbridge.core.lots.RentalLines
 import castbridge.core.lots.RentalPolicy
 import castbridge.core.lots.RentalStatus
@@ -177,12 +178,29 @@ object TvGate {
      * Rights add up (trial floor + purchases + valid subscription + owner grants); an expired grant simply stops counting: the TV falls back
      * to its acquired rights, nothing is deleted.
      */
-    fun evaluate(activations: List<Activation>, grants: List<OwnerGrant>, nowMs: Long, rentals: List<RentalStatus> = emptyList()): TvAccess {
+    fun evaluate(activations: List<Activation>, grants: List<OwnerGrant>, nowMs: Long, rentals: List<RentalStatus> = emptyList(),
+                 /** The clock judgement ([castbridge.core.lots.RentalEngine.judge]): BEHIND = the wall clock was wound back. */ clockDoubt: ClockDoubt? = null,
+                 /** [TvClock.monotonicNow]: the high-water mark advanced with the monotonic time; used for the usage ceilings when the clock is in doubt BEHIND. */ monotonicNowMs: Long? = null): TvAccess {
         val live = grants.filter { it.untilMs > nowMs && it.power != Power.SUPPORT }
+        // Usage ceilings are never frozen by a clock rolled back: when BEHIND they use the monotonic-advanced time (a TV time that can only go forward during a boot).
+        // AHEAD jumps stay capped by TvClock.MAX_JUMP_MS (the caller passes TvClock.now). RESIDUAL HOLE: a reboot while the wall clock is rolled back loses the monotonic base (see TvClock).
+        val ceilingNow = if (clockDoubt == ClockDoubt.BEHIND && monotonicNowMs != null) maxOf(nowMs, monotonicNowMs) else nowMs
         // an activation whose usage ceiling has passed (or has not begun) counts for nothing: a trial then locks again, a production key must be renewed
-        val counting = activations.filter { a -> a.rights.filterIsInstance<Right.Usage>().none { nowMs >= it.endsAt || nowMs < it.startsAt - ActivationPolicy.USAGE_SKEW_MS } }
+        val counting = activations.filter { a ->
+            a.rights.filterIsInstance<Right.Usage>().none { ceilingNow >= it.endsAt || ceilingNow < it.startsAt - ActivationPolicy.USAGE_SKEW_MS } &&
+                implicitUsageEnd(a).let { it == null || ceilingNow < it }
+        }
         if (activations.isNotEmpty() && counting.isEmpty() && live.isEmpty()) return TvAccess(false, Access.TRIAL_ONLY.copy(message = "Activation terminée : demandez une nouvelle clé"), null, "Activation terminée")
         return evaluateCounting(counting, live, nowMs, rentals)
+    }
+
+    /**
+     * End of the IMPLICIT usage ceiling: a TRIAL activation without a `usage` right (a compact typed key carries no rights list) ends [ActivationPolicy.TRIAL_DEFAULT_DAYS]
+     * after its issue (a compact key has no issue time: its `notBefore`). A production activation without usage stays unlimited (null); an explicit usage right always wins.
+     */
+    fun implicitUsageEnd(a: Activation): Long? {
+        if (a.kind != ActivationKind.TRIAL || a.rights.any { it is Right.Usage }) return null
+        return (if (a.issuedAt > 0L) a.issuedAt else a.notBefore) + ActivationPolicy.TRIAL_DEFAULT_DAYS * 24L * 3600 * 1000
     }
 
     private fun evaluateCounting(activations: List<Activation>, live: List<OwnerGrant>, nowMs: Long, rentals: List<RentalStatus>): TvAccess {

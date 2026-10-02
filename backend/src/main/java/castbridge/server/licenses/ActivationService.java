@@ -130,20 +130,33 @@ public class ActivationService {
         LicenseService.SeatRow s = rows.get(0);
         if (s.anonymized() || s.factorsText() == null || s.factorsText().isBlank()) throw ApiException.conflict("Ce poste a été anonymisé : l'appareil doit refaire une demande");
         var device = new DeviceIdentity.Request(DeviceIdentity.parseStored(s.factorsText()), s.deviceCode(), s.k());
-        return doIssue(actor, lic, s.subject(), device, null, null, null, null, channel, true);
+        return doIssue(actor, lic, s.subject(), device, null, null, null, null, channel, true, false);
     }
 
     private Activation issue(Actor actor, IssueRequest req, String channel, boolean reissueOnly) {
         actor.require(Role.Permission.REISSUE, props.requireTotp());
-        String licenseId = Validate.licenseId(req.licenseId());
+        boolean auto = !reissueOnly && isAuto(req.licenseId());
+        String licenseId = auto ? null : Validate.licenseId(req.licenseId());
         String subject = req.subject() == null || req.subject().isBlank() ? "tv" : req.subject().trim().toLowerCase(Locale.ROOT);
         if (!subject.equals("tv") && !subject.equals("phone")) throw ApiException.badRequest("Type d'appareil : tv ou phone");
         var device = DeviceIdentity.parseRequest(req.deviceRequest());
-        return doIssue(actor, licenseId, subject, device, req.kind(), req.productIds(), req.windowHours(), req.usageDays(), channel, reissueOnly);
+        if (auto) {
+            // a production key without a licence id: the licence is created first, in the same transaction (a refusal below rolls it back)
+            actor.require(Role.Permission.ISSUE_NEW, props.requireTotp());
+            parseDuration(false, req.usageDays());
+            if (req.kind() != null && !req.kind().isBlank() && parseKind(req.kind()) != IssueKind.PRODUCTION) throw ApiException.badRequest("Une licence générée ne délivre que des activations de production");
+            licenseId = licenses.createAuto(actor).licenseId();
+        }
+        return doIssue(actor, licenseId, subject, device, req.kind(), req.productIds(), req.windowHours(), req.usageDays(), channel, reissueOnly, auto);
+    }
+
+    /** Blank or « auto »: the server generates the licence of a production key. */
+    public static boolean isAuto(String licenseId) {
+        return licenseId == null || licenseId.isBlank() || licenseId.trim().equalsIgnoreCase("auto");
     }
 
     private Activation doIssue(Actor actor, String licenseId, String subject, DeviceIdentity.Request device, String askedKind, List<String> productIds, Integer windowHours, String usageDays,
-                               String channel, boolean reissueOnly) {
+                               String channel, boolean reissueOnly, boolean autoLicense) {
         IssueKind asked = parseKind(askedKind);
         // 1. scope first: a forbidden request writes nothing (not even a seat)
         if (asked != null && asked != IssueKind.TRIAL && asked != IssueKind.PRODUCTION || (productIds != null && productIds.contains("*"))) {
@@ -213,12 +226,12 @@ public class ActivationService {
         registry.emitIssue(s, subject, kind.name().toLowerCase(Locale.ROOT), l.wireId(), device.k(), device.factors(), issuedAt.toEpochMilli());
         audit.record(actor, "ACTIVATION_ISSUE", "LICENSE", licenseId, null,
                 Map.of("seat", seatId, "kind", kind.name(), "outcome", seat.outcome().name(), "kid", s.kid(), "fp", s.fingerprint().substring(0, 12), "channel", channel,
-                        "edition", editionOf(kind), "duration", durationText(duration), "end", endText(duration, issuedAt)));
+                        "edition", editionOf(kind), "duration", durationText(duration), "end", endText(duration, issuedAt), "licenseAuto", autoLicense));
         return new Activation(s.text(), s.kid(), s.nonce(), s.fingerprint(), kind.name(), subject, issuedAt, Instant.ofEpochMilli(s.notAfter()), licenseId, seatId, device.code(), false,
                 seat.outcome() != LicenseService.SeatOutcome.REUSED, format(), duration.days(), usageEnd(duration, issuedAt));
     }
 
-    /** The rights plus the usage ceiling line (none for « illimitée »). The server never adds `super` nor the trial rental window (owner tools only). */
+    /** The rights (none for a licence without bundle: the full version) plus the usage ceiling line (none for « illimitée »). The server never adds `super` nor the trial rental window (owner tools only). */
     private static List<String> withUsage(List<String> base, KeyDuration d, long issuedAtMs) {
         if (d.unlimited()) return base;
         List<String> out = new ArrayList<>(base);
@@ -257,7 +270,6 @@ public class ActivationService {
             }
         }
         if (only != null) for (String o : only) if (licenses.productsOf(l.id()).stream().noneMatch(p -> p.productId().equals(o))) throw ApiException.badRequest("Bouquet absent de cette licence : " + AuditLog.clip(o, 48));
-        if (out.isEmpty()) throw ApiException.conflict("Cette licence n'a aucun droit en cours : ajoutez un bouquet (ou prolongez l'abonnement) avant d'émettre");
         return out;
     }
 

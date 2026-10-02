@@ -1,6 +1,7 @@
 package castbridge.receiver
 
 import android.content.Context
+import android.util.Log
 import castbridge.core.lots.*
 import castbridge.core.owner.Activation
 import castbridge.core.owner.ActivationResult
@@ -19,13 +20,18 @@ import java.io.File
 object RentalHub {
     private class Parts(val vault: RentalVault, val ledger: RentalLedger, val sweeper: RentalSweeper)
     @Volatile private var parts: Parts? = null
+    private const val TAG = "RentalHub"
 
     @Synchronized private fun ensure(ctx: Context): Parts = parts ?: run {
         val app = ctx.applicationContext
         val dir = File(app.filesDir, "rental")
         val vault = RentalVault(dir)
-        val ledger = RentalLedger(dir, TvClock(), RentalConfig(), System::currentTimeMillis)
-        val sweeper = RentalSweeper(ledger, vault, TvRentedLots(LotsHub.store(app)), { ActivationCenter.allActivations() }, { emptySet() }, System::currentTimeMillis)
+        val ledger = RentalLedger(dir, TvClock(mono = android.os.SystemClock::elapsedRealtime), RentalConfig(), System::currentTimeMillis)
+        ledger.loadNote?.let { Log.e(TAG, it) }
+        val rented = TvRentedLots(LotsHub.store(app))
+        // Lots a lasting right covers (a lot bought during its rental is kept at expiry). The TV has NO bundle catalogue: OwnedLots resolves only what needs none (owner grants, `tout`), see its doc.
+        val owned = { OwnedLots.of(ActivationCenter.allActivations(), ActivationCenter.now(), rented.heldLots()) }
+        val sweeper = RentalSweeper(ledger, vault, rented, { ActivationCenter.allActivations() }, owned, System::currentTimeMillis, {}, { k, e -> Log.e(TAG, "balayage de la location $k en échec (nouvel essai au prochain balayage)", e) })
         Parts(vault, ledger, sweeper).also { parts = it }
     }
 

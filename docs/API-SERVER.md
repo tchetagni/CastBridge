@@ -326,6 +326,8 @@ Le rapport d'appareil (register / heartbeat) porte le consentement : `"consent":
 ## 4 bis. Lots (données hors ligne d'Apprendre et de Quiz)
 Catalogue signé `GET /api/v1/lots/catalog`, fichiers `GET /api/v1/lots/{feature}/{scope}/{version}` (`Range`, `ETag`, cache immuable) et administration `/api/v1/admin/lots` (dépôt, publication, déploiement, retrait) : voir `docs/LOTS.md` §3-4. Seuls les téléphones appellent ces routes ; la TV ne les appelle jamais.
 
+Catalogue **signé** des bouquets `GET /api/v1/catalog/bundles` (public, lecture seule ; fichier signé hors ligne par le propriétaire, relayé tel quel ; `404` si absent) : voir `docs/CONTENT-PUBLISH.md` § 5 bis. Appelé seulement par les outils du propriétaire, à sa demande.
+
 ## 5. Divers
 
 - `GET /admin` : interface d'administration web (connexion par identifiant/mot de passe, voir `backend/README.md`).

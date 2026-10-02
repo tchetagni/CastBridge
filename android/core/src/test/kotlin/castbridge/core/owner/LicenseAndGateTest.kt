@@ -229,11 +229,11 @@ class FeatureGateTest {
     }
 
     @Test fun anExistingInstallGetsAGraceThenLocks_aFreshOneLocksAtOnce() {
-        val grace = FleetMigration(existingInstall = true, firstRunAtMs = NOW)
+        val grace = FleetMigration(existingInstall = true, graceStartMs = NOW)
         val inGrace = FeatureGate.state(required, access(), NOW + 5 * DAY, grace)
         assertEquals(NOW + 14 * DAY, assertIs<GateState.Grace>(inGrace).untilMs); assertTrue(Feature.values().all { FeatureGate.canUse(it, inGrace) })
         assertIs<GateState.Locked>(FeatureGate.state(required, access(), NOW + 15 * DAY, grace))
-        assertIs<GateState.Locked>(FeatureGate.state(required, access(), NOW, FleetMigration(existingInstall = false, firstRunAtMs = NOW)))
+        assertIs<GateState.Locked>(FeatureGate.state(required, access(), NOW, FleetMigration(existingInstall = false, graceStartMs = NOW)))
         assertEquals(NOW + 30 * DAY, FleetMigration(true, NOW).graceUntil(ActivationRequirement(true, graceDays = 30)), "the grace period is adjustable")
         assertNull(FleetMigration(true, NOW).graceUntil(ActivationRequirement(true, graceDays = 0)))
         assertIs<GateState.Activated>(FeatureGate.state(required, access(tvActivation), NOW + 20 * DAY, grace), "activation always wins")

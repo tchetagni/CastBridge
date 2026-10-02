@@ -71,6 +71,10 @@ class OwnerStore(ctx: Context) {
         catalogFile.writeText(json)
         return c.bundles.size
     }
+    /** Keeps a catalogue the signature of which was ALREADY verified ([castbridge.core.lots.SignedBundleCatalog.verify]); returns the bundle count. */
+    fun saveVerifiedCatalog(v: castbridge.core.lots.SignedBundleCatalog.Verified): Int = saveCatalog(v.json)
+    /** The generatedAt of the kept catalogue when it is a signed one from the server (null for a catalogue imported from a file without one). */
+    fun catalogGeneratedAt(): String? = if (!catalogFile.isFile) null else castbridge.core.lots.SignedBundleCatalog.generatedAtOf(catalogFile.readText())
     /** The imported catalogue and its date (epoch ms), or null. */
     fun catalog(): Pair<castbridge.core.lots.BundleCatalog, Long>? =
         if (!catalogFile.isFile) null else runCatching { castbridge.core.lots.BundleCatalog.parse(catalogFile.readText()) to catalogFile.lastModified() }.getOrNull()

@@ -41,6 +41,15 @@ object SeatIds {
         MessageDigest.getInstance("SHA-256").digest("castbridge-seat|$license|${fp.setHash().joinToString("") { "%02x".format(it) }}".toByteArray(Charsets.UTF_8)).take(8).joinToString("") { "%02x".format(it) }
 }
 
+/** Automatic licence identifiers of production keys: `lic-` + 10 random lowercase hex characters (matches [Activation.ID]). */
+object LicenseIds {
+    const val PREFIX = "lic-"
+    const val AUTO = "auto"
+    fun generate(random: SecureRandom = SecureRandom()): String = PREFIX + ByteArray(5).also(random::nextBytes).joinToString("") { "%02x".format(it) }
+    /** True when the owner left the licence blank (or wrote « auto »): the tool then creates one. */
+    fun wantsAuto(license: String?): Boolean = license == null || license.isBlank() || license.trim().equals(AUTO, ignoreCase = true)
+}
+
 /**
  * The ONE issuing library of the three tools (desk application, owner phone, server): same inputs, same bytes (docs/ACTIVATION-FORMAT.md, tools/activation/test-vectors.json).
  * It refuses any invalid input and any right the key's [scopes] do not allow, so a tool cannot produce a token the device would refuse for a reason known in advance.
@@ -90,7 +99,7 @@ class ActivationIssuer(private val signer: Signer, private val scopes: Set<KeySc
             need(r.license == Activation.TRIAL_LICENSE, "Une clé d'essai porte la licence « trial »")
         } else {
             need(Activation.ID.matches(r.license) && r.license != Activation.TRIAL_LICENSE, "Identifiant de licence invalide")
-            need(r.rights.isNotEmpty(), "Une activation de production porte au moins un droit")
+            // a production activation may carry NO right at all: kind=production means « version complète » (docs/ACTIVATION-FORMAT.md)
         }
         r.rights.forEach(::checkRight)
         val nonce = r.nonce ?: ByteArray(16).also(random::nextBytes).joinToString("") { "%02x".format(it) }

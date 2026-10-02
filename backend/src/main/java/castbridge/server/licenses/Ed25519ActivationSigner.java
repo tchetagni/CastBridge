@@ -6,7 +6,7 @@ import org.springframework.http.HttpStatus;
 
 /**
  * Builds and signs the {@code cbx1} activation with the keyring key. It applies the rules of the format (docs/ACTIVATION-FORMAT.md § 10: window
- * 1..366 days, a trial carries no right and the licence "trial", a production carries at least one right, "tout ouvert" at most 30 days, well-formed
+ * 1..366 days, a trial carries no right and the licence "trial", a production may carry no right at all (the full version: duration only), "tout ouvert" at most 30 days, well-formed
  * rights) but NOT the scope of the key: wrap it in {@link ScopedActivationSigner} (the bean does).
  */
 public final class Ed25519ActivationSigner implements ActivationSigner {
@@ -33,8 +33,8 @@ public final class Ed25519ActivationSigner implements ActivationSigner {
         if (!WireActivation.ID.matcher(r.license()).matches()) throw ApiException.badRequest("Identifiant de licence invalide pour l'activation");
         if (r.kind() == IssueKind.TRIAL) {
             if (!r.rights().stream().allMatch(WireActivation::isTrialRight) || !r.license().equals(WireActivation.TRIAL_LICENSE)) throw ApiException.badRequest("Une clé d'essai ne porte que sa durée d'usage et sa fenêtre de lots, et sa licence est « trial »");
-        } else if (r.rights().stream().allMatch(WireActivation::isUsage)) {
-            throw ApiException.badRequest("Une activation de production porte au moins un droit");
+        } else if (r.license().equals(WireActivation.TRIAL_LICENSE)) {
+            throw ApiException.badRequest("La licence « trial » est réservée aux clés d'essai");
         }
         if (r.rights().stream().filter(WireActivation::isUsage).count() > 1) throw ApiException.badRequest("Une activation porte au plus un plafond d'usage");
         for (String line : r.rights()) {

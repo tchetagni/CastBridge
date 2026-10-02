@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="fr" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{admin/layout :: head('Tunnels TV')}"></head>
+<body>
+<header th:replace="~{admin/layout :: nav}"></header>
+<main>
+    <div th:replace="~{admin/layout :: flash}"></div>
+    <h1>Tunnels TV <small th:text="|${c.total} enrôlée(s)|"></small></h1>
+    <p class="muted small">Chaque CastBridge-TV ouvre elle-même un tunnel SSH inverse vers ce serveur, sur son propre port (127.0.0.1 du serveur seulement :
+        personne n'atteint une TV sans s'authentifier d'abord ici). Une TV hors ligne reste hors ligne. Voir docs/REMOTE-TUNNEL.md.</p>
+
+    <section class="card">
+        <h2>Compteurs</h2>
+        <p>
+            <span class="badge" th:text="|${c.active} actif(s)|"></span>
+            <span class="badge" th:text="|${c.online} connectée(s)|"></span>
+            <span class="badge" th:text="|${c.offline} hors ligne|"></span>
+            <span class="badge" th:text="|${c.revoked} révoqué(s)|"></span>
+            <span class="badge" th:text="|${c.freePorts} port(s) libre(s)|"></span>
+        </p>
+        <form method="post" th:action="@{/admin/tunnels/probe}"><button type="submit">Sonder maintenant</button></form>
+    </section>
+
+    <section class="card">
+        <h2>Tunnels</h2>
+        <div class="scroll">
+        <table class="compact">
+            <thead><tr><th>Code d'appareil</th><th>Licence · édition</th><th>Port</th><th>État</th><th>Dernière connexion</th><th>Commande</th><th></th></tr></thead>
+            <tbody>
+            <tr th:each="t : ${tunnels}">
+                <td th:text="${t.deviceCode}"></td>
+                <td><span th:text="${@fmt.orDash(t.licenseId)}"></span> · <span th:text="${@fmt.orDash(t.edition)}"></span></td>
+                <td th:text="${t.port}"></td>
+                <td>
+                    <span class="badge" th:if="${t.state == 'REVOKED'}">révoqué</span>
+                    <span class="badge" th:if="${t.state == 'ACTIVE' and t.online}">connectée</span>
+                    <span class="badge" th:if="${t.state == 'ACTIVE' and !t.online}">hors ligne</span>
+                </td>
+                <td th:text="${@fmt.ago(t.lastSeen)}" th:title="${@fmt.date(t.lastSeen)}"></td>
+                <td><code class="ssh-command" th:text="${t.command}"></code></td>
+                <td>
+                    <form method="post" th:action="@{/admin/tunnels/{c}/probe(c=${t.deviceCode})}" th:if="${t.state == 'ACTIVE'}"><button type="submit" class="link">Sonder</button></form>
+                    <form method="post" th:action="@{/admin/tunnels/{c}/revoke(c=${t.deviceCode})}" th:if="${t.state == 'ACTIVE'}"><button type="submit" class="link">Révoquer le tunnel</button></form>
+                    <form method="post" th:action="@{/admin/tunnels/{c}/restore(c=${t.deviceCode})}" th:if="${t.state == 'REVOKED'}"><button type="submit" class="link">Rétablir</button></form>
+                </td>
+            </tr>
+            <tr th:if="${tunnels.isEmpty()}"><td colspan="7" class="muted">Aucune TV enrôlée.</td></tr>
+            </tbody>
+        </table>
+        </div>
+        <p class="muted small">Le port d'une TV révoquée reste réservé à cet appareil. Se connecter : <code th:text="|ssh -J &lt;compte expert&gt;@${host}:${sshPort} -p &lt;port&gt; tv@127.0.0.1|"></code></p>
+    </section>
+
+    <section class="card">
+        <h2>Experts</h2>
+        <p>
+            <span class="badge" th:text="${expertsStatus.text}"></span>
+            <span class="muted small" th:if="${expertsStatus.generatedAt != null}" th:text="|liste du ${@fmt.date(expertsStatus.generatedAt)}, clé ${expertsStatus.keyId}, ${expertsStatus.active} actif(s) sur ${expertsStatus.experts}|"></span>
+        </p>
+        <ul>
+            <li th:each="e : ${experts}"><span th:text="${e.id}"></span>
+                <span class="muted small" th:text="${e.notAfter == null} ? 'sans fin' : (${e.expired} ? 'expiré le ' + ${@fmt.date(e.notAfter)} : 'jusqu\'au ' + ${@fmt.date(e.notAfter)})"></span></li>
+        </ul>
+        <p class="muted small">La liste est signée hors ligne par le propriétaire ; le serveur la vérifie (clé de confiance avec le droit « registre »), refuse une liste non signée ou plus ancienne que la dernière acceptée.</p>
+        <form method="post" th:action="@{/admin/tunnels/experts/refresh}"><button type="submit">Recharger la liste des experts</button></form>
+    </section>
+
+    <section class="card">
+        <h2>Journal</h2>
+        <table class="compact">
+            <tr th:each="a : ${audit}">
+                <td class="muted small" th:text="${@fmt.date(a.at)}"></td>
+                <td><span class="badge" th:text="${a.event}"></span></td>
+                <td th:text="${@fmt.orDash(a.deviceCode)}"></td>
+                <td class="muted small" th:text="${a.actor}"></td>
+                <td class="muted small" th:text="${a.detail}"></td>
+            </tr>
+            <tr th:if="${audit.isEmpty()}"><td class="muted">Rien pour le moment.</td></tr>
+        </table>
+    </section>
+</main>
+</body>
+</html>

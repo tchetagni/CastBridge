@@ -5,6 +5,7 @@ import castbridge.core.net.JsonLite.long
 import castbridge.core.net.JsonLite.str
 import castbridge.core.owner.Activation
 import castbridge.core.owner.Fingerprints
+import castbridge.core.owner.SafeFile
 import castbridge.core.owner.TvClock
 import java.io.File
 
@@ -27,6 +28,16 @@ class RentalLedger(private val dir: File, val clock: TvClock = TvClock(), val co
     private val recs = LinkedHashMap<String, Rec>()
     private val log = ArrayList<RentalLogEntry>()
     private val file get() = File(dir, "rentals.json")
+    private val degradedMarker get() = File(dir, "rentals.degraded")
+
+    /**
+     * The ledger could not be read (corrupt file and no usable `.bak`, or its keys are in the safe while the file is gone): the state of every rental is UNKNOWN. Rule chosen for the
+     * owner: unknown never grants free content, so every contract of the installed activations is treated as ENDED (key destroyed by the next sweep, no new key installed), until that
+     * sweep has tombstoned them ([clearDegraded]). Persisted in `rentals.degraded` so that saving a fresh empty ledger does not hide it.
+     */
+    @Volatile var degraded: Boolean = false; private set
+    /** What [load] found, for the log (French); null when everything was normal. */
+    @Volatile var loadNote: String? = null; private set
 
     init { synchronized(lock) { load() } }
 
@@ -55,11 +66,21 @@ class RentalLedger(private val dir: File, val clock: TvClock = TvClock(), val co
     }
 
     private fun inputs(superUnlimited: Boolean = false): RentalInputs = synchronized(lock) {
-        RentalInputs(RentalEngine.judge(clock, wall(), config), recs.mapValues { it.value.used }, recs.filterValues { it.phase != RentalPhase.LIVE }.mapValues { it.value.reason ?: ExpiryReason.DATE }, superUnlimited)
+        RentalInputs(RentalEngine.judge(clock, wall(), config), recs.mapValues { it.value.used },
+            recs.filterValues { it.phase != RentalPhase.LIVE }.mapValues { it.value.reason ?: ExpiryReason.DATE } + (if (degraded && !superUnlimited) quarantine else emptyMap()), superUnlimited)
     }
+    private var quarantine: Map<String, ExpiryReason> = emptyMap()
 
     /** The state of every rental in [activations] right now. Tombstoned contracts stay EXPIRED. */
-    fun status(activations: List<Activation>): List<RentalStatus> = RentalEngine.evaluate(RentalEngine.contracts(activations), inputs(RentalEngine.superUnlimited(activations)), config)
+    fun status(activations: List<Activation>): List<RentalStatus> = synchronized(lock) {
+        val contracts = RentalEngine.contracts(activations)
+        if (degraded) quarantine = contracts.filter { recs[it.key]?.phase?.let { p -> p != RentalPhase.LIVE } != true }.associate { it.key to ExpiryReason.DATE }
+        RentalEngine.evaluate(contracts, inputs(RentalEngine.superUnlimited(activations)), config)
+    }
+
+    /** The quarantine is over once the sweep has tombstoned every contract: from now on new contracts work normally. */
+    internal fun clearDegraded() = synchronized(lock) { if (degraded) { degraded = false; quarantine = emptyMap(); runCatching { degradedMarker.delete() }; save() } }
+    internal fun allEnded(): Boolean = synchronized(lock) { recs.values.none { it.phase == RentalPhase.LIVE } }
 
     /**
      * Installs the keys of the rentals of [activation] that are usable now: opens the box with the device's factors and puts the key in [vault]. A tombstoned contract is never reopened.
@@ -138,8 +159,35 @@ class RentalLedger(private val dir: File, val clock: TvClock = TvClock(), val co
     internal fun addLog(e: RentalLogEntry) = synchronized(lock) { log += e; while (log.size > 200) log.removeAt(0); save() }
     internal fun keys(): List<String> = synchronized(lock) { recs.keys.toList() }
 
+    private fun parse(text: String): Map<String, Any?>? = runCatching { JsonLite.obj(text) }.getOrNull()?.takeIf { it.containsKey("clock") || it.containsKey("contracts") }
+
     private fun load() {
-        val m = runCatching { JsonLite.obj(file.readText()) }.getOrNull() ?: return
+        val bak = SafeFile.bak(file)
+        val markerThere = degradedMarker.isFile
+        var m: Map<String, Any?>? = null
+        if (file.isFile) {
+            m = runCatching { file.readText() }.getOrNull()?.let(::parse)
+            if (m == null) {
+                // keep the evidence, never overwrite it
+                runCatching { file.copyTo(File(dir, "rentals.json.corrupt-${wall()}"), overwrite = true) }
+                loadNote = "rentals.json illisible : copie gardée (rentals.json.corrupt-…)"
+            }
+        }
+        if (m == null && bak.isFile) {
+            m = runCatching { bak.readText() }.getOrNull()?.let(::parse)
+            if (m != null && loadNote != null) loadNote += " ; relu depuis rentals.json.bak"
+            if (m == null && loadNote == null) loadNote = "rentals.json.bak illisible"
+        }
+        val keysThere = File(dir, "keys").list()?.any { it.endsWith(".key") } == true
+        if (m == null) {
+            // nothing readable: a TV that never had a rental is fresh; one that had a ledger file (corrupt) or holds rental keys without a ledger is in doubt
+            if (loadNote != null || keysThere || markerThere) {
+                degraded = true; loadNote = (loadNote ?: "registre des locations absent alors que des clés sont en place") + " : locations suspendues (état suspect)"
+                runCatching { dir.mkdirs(); degradedMarker.writeText("1") }
+            }
+            return
+        }
+        if (markerThere) degraded = true
         (m["clock"] as? Map<*, *>)?.let { c -> (c["lastSeen"] as? Number)?.let { clock.lastSeen = it.toLong() }; (c["floor"] as? Number)?.let { clock.floor = it.toLong() } }
         (m["contracts"] as? Map<*, *>)?.forEach { (k, v) ->
             @Suppress("UNCHECKED_CAST") val e = v as? Map<String, Any?> ?: return@forEach
@@ -160,8 +208,7 @@ class RentalLedger(private val dir: File, val clock: TvClock = TvClock(), val co
             "clock" to linkedMapOf("lastSeen" to clock.lastSeen, "floor" to clock.floor),
             "contracts" to recs.mapValues { (_, r) -> linkedMapOf("used" to r.used, "phase" to r.phase.name, "reason" to r.reason?.name, "expiredAt" to r.expiredAt, "lots" to r.lots.toList(), "removed" to r.removed.toList()) },
             "log" to log.map { linkedMapOf("at" to it.at, "lot" to it.lot, "reason" to it.reason, "step" to it.step) }))
-        val tmp = File(dir, "rentals.json.tmp"); tmp.writeText(json)
-        if (!tmp.renameTo(file)) { file.delete(); tmp.renameTo(file) }
+        SafeFile.write(file, json) { parse(it) != null }
     }
 }
 

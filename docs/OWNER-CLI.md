@@ -52,3 +52,6 @@ Application **séparée** (`castbridge.owner`), **jamais publiée** sur le canal
 
 ## Note : options récentes (outil officiel)
 Le dépannage `castbridge-owner.jar` n'a pas ces options ; elles sont dans l'outil de bureau officiel (`emettre`) : `--usage-jours N|illimitee` (durée de la clé), `--sans-lots-essai`, `--catalogue` (durée de location plafonnée par `rentalDays`). Voir ACTIVATION-TOOLS.md § 8.
+
+## Note : production (2026-10-02)
+Dans l'outil de bureau officiel, `emettre --production` **sans `--licence`** génère une licence `lic-…` (affichée) ; la durée se règle par `--usage-jours` ; aucun droit de contenu n'est nécessaire. Les options `--achat`, `--abonnement`, `--tout-ouvert`, `--droit`, `--location`, `--location-bouquet`, `--catalogue`, `--sans-controle-catalogue` sont **avancées** (tests, outils de location). Voir ACTIVATION-TOOLS.md § 2 et § 8.

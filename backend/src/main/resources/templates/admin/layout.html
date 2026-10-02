@@ -25,6 +25,7 @@
         <a th:href="@{/admin/content}" th:classappend="${active == 'content'} ? 'on'">Contenus</a>
         <a th:if="${@licenseFeature.enabled()}" th:href="@{/admin/licenses}" th:classappend="${active == 'licenses'} ? 'on'">Licences</a>
         <a th:href="@{/admin/orders}" th:classappend="${active == 'orders'} ? 'on'">Ordres</a>
+        <a th:if="${@tunnelFeature.enabled()}" th:href="@{/admin/tunnels}" th:classappend="${active == 'tunnels'} ? 'on'">Tunnels TV</a>
     </nav>
     <form th:action="@{/admin/logout}" method="post" class="logout">
         <button type="submit" class="link">Déconnexion</button>

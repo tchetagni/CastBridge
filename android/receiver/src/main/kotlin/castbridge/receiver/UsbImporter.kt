@@ -36,6 +36,7 @@ class UsbImporter(private val ctx: android.content.Context, private val dir: Fil
 
     /** (a) Scan the app folders of the mounted removable volumes. Returns a message for the UI. */
     fun importFromVolumes(): String {
+        if (ActivationCenter.trial()) return castbridge.core.owner.TrialPolicy.USB_MESSAGE
         val roots = volumeRoots()
         if (roots.isEmpty()) return "Aucune clé USB détectée. Branchez la clé (elle doit être reconnue par la TV)."
         val entries = UsbImport.scan(roots)
@@ -45,7 +46,7 @@ class UsbImporter(private val ctx: android.content.Context, private val dir: Fil
     }
 
     /** (b) Open the system folder picker. */
-    fun launchPicker(act: Activity, requestCode: Int): String? = try {
+    fun launchPicker(act: Activity, requestCode: Int): String? = if (ActivationCenter.trial()) castbridge.core.owner.TrialPolicy.USB_MESSAGE else try {
         act.startActivityForResult(Intent(Intent.ACTION_OPEN_DOCUMENT_TREE), requestCode); null
     } catch (e: ActivityNotFoundException) {
         "Cette TV n'a pas de sélecteur de fichiers Android : utilisez le scan des volumes (dossier de l'app sur la clé) " +
@@ -53,6 +54,7 @@ class UsbImporter(private val ctx: android.content.Context, private val dir: Fil
     } catch (e: Exception) { "Sélecteur indisponible : ${e.message}" }
 
     fun importTree(tree: Uri): String {
+        if (ActivationCenter.trial()) return castbridge.core.owner.TrialPolicy.USB_MESSAGE
         val entries = try { listTree(tree) } catch (e: Exception) { return "Lecture du dossier impossible : ${e.message}" }
         if (entries.isEmpty()) return "Aucune vidéo dans ce dossier."
         return start(entries)
@@ -84,6 +86,7 @@ class UsbImporter(private val ctx: android.content.Context, private val dir: Fil
     }
 
     private fun start(entries: List<ImportEntry>): String {
+        if (ActivationCenter.trial()) return castbridge.core.owner.TrialPolicy.USB_MESSAGE
         if (!running.compareAndSet(false, true)) return "Import déjà en cours."
         cancel = false
         val total = entries.sumOf { it.size }

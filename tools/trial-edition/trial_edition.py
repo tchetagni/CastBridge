@@ -4,6 +4,8 @@
     trial_edition.py select [--repo .] [--out content/TRIAL-MANIFEST.json] [--only learn,quiz,langues] [--previous FILE] [--draft]
     trial_edition.py check  [--repo .] [--manifest content/TRIAL-MANIFEST.json] [--only ...]   # le manifeste correspond-il au contenu ?
     trial_edition.py build  [--repo .] --out DIR [--only ...]                                   # fabrique les lots <lot>-trial (zip)
+    trial_edition.py sign-catalog --manifest content/TRIAL-MANIFEST.json --key CLE.pem --out bundles-catalog.json [--generated-at AAAA-MM-JJTHH:MM:SSZ]
+        # signe (Ed25519, clé privée PEM du propriétaire) le catalogue des bouquets que les outils du propriétaire importent depuis le serveur
 
 Python 3.8+, bibliothèque standard seulement. Déterministe : aucune horloge, aucun hasard (l'ordre « aléatoire » est un hachage
 SHA-256 de l'identifiant), même contenu + même configuration + même manifeste précédent = même manifeste, octet pour octet.
@@ -712,13 +714,112 @@ def report(man):
     return "\n".join(lines)
 
 
+# ---- catalogue des bouquets signé (docs/CONTENT-PUBLISH.md § Catalogue des bouquets) -----------------------------------------------------
+# Même texte signé que castbridge.core.lots.SignedBundleCatalog (Kotlin) et BundleCatalogApiTest (Java) : à changer ensemble.
+BUNDLE_CATALOG_FORMAT = "castbridge-bundle-catalog-v1"
+_P, _L = 2 ** 255 - 19, 2 ** 252 + 27742317777372353535851937790883648493
+_D = -121665 * pow(121666, _P - 2, _P) % _P
+_I = pow(2, (_P - 1) // 4, _P)
+_BY = 4 * pow(5, _P - 2, _P) % _P
+
+
+def _recover_x(y, sign):
+    x2 = (y * y - 1) * pow(_D * y * y + 1, _P - 2, _P) % _P
+    x = pow(x2, (_P + 3) // 8, _P)
+    if (x * x - x2) % _P:
+        x = x * _I % _P
+    return _P - x if x & 1 != sign else x
+
+
+_B = (_recover_x(_BY, 0), _BY)
+
+
+def _add(a, b):
+    (x1, y1), (x2, y2) = a, b
+    t = _D * x1 * x2 * y1 * y2 % _P
+    return ((x1 * y2 + x2 * y1) * pow(1 + t, _P - 2, _P) % _P, (y1 * y2 + x1 * x2) * pow(1 - t, _P - 2, _P) % _P)
+
+
+def _mul(k, pt):
+    r = (0, 1)
+    while k:
+        if k & 1:
+            r = _add(r, pt)
+        pt = _add(pt, pt)
+        k >>= 1
+    return r
+
+
+def _enc(pt):
+    return (pt[1] | ((pt[0] & 1) << 255)).to_bytes(32, "little")
+
+
+def ed25519_public(seed):
+    h = hashlib.sha512(seed).digest()
+    return _enc(_mul(int.from_bytes(h[:32], "little") & (2 ** 254 - 8) | 2 ** 254, _B))
+
+
+def ed25519_sign(seed, msg):
+    """RFC 8032 (bibliothèque standard seulement : l'outil n'exige aucun paquet). Une signature par publication, la lenteur n'a pas d'importance."""
+    h = hashlib.sha512(seed).digest()
+    a = int.from_bytes(h[:32], "little") & (2 ** 254 - 8) | 2 ** 254
+    pub = _enc(_mul(a, _B))
+    r = int.from_bytes(hashlib.sha512(h[32:] + msg).digest(), "little") % _L
+    rr = _enc(_mul(r, _B))
+    k = int.from_bytes(hashlib.sha512(rr + pub + msg).digest(), "little") % _L
+    return rr + ((r + k * a) % _L).to_bytes(32, "little")
+
+
+_PKCS8_ED25519 = bytes.fromhex("302e020100300506032b657004220420")
+
+
+def read_pem_seed(path):
+    """Graine (32 octets) d'une clé privée Ed25519 PEM PKCS#8 (« -----BEGIN PRIVATE KEY----- »)."""
+    import base64
+    txt = open(path, encoding="ascii", errors="replace").read()
+    body = "".join(l.strip() for l in txt.splitlines() if l.strip() and not l.startswith("-----"))
+    try:
+        der = base64.b64decode(body)
+    except Exception:
+        der = b""
+    if len(der) != 48 or not der.startswith(_PKCS8_ED25519):
+        raise Fail("clé illisible : une clé privée Ed25519 PEM (PKCS#8) est attendue")
+    return der[16:]
+
+
+def canonical_bundles(cat):
+    lines = [BUNDLE_CATALOG_FORMAT, "generatedAt=" + cat["generatedAt"]]
+    for b in sorted(cat["bundles"], key=lambda b: b["id"]):
+        lines.append("bundle=%s|%s|%d|%d|%s|%s" % (b["id"], b["type"], b["rawBytes"], b["rentalDays"], sha(b["title"]), ",".join(sorted(b["lots"]))))
+    return "\n".join(lines)
+
+
+def sign_catalog(manifest, seed, generated_at):
+    """Le catalogue signé des bouquets d'un TRIAL-MANIFEST.json (dict) : seuls id, type, lots, title, rawBytes, rentalDays sont publiés."""
+    import base64
+    bs = manifest.get("bundles") or []
+    if not bs:
+        raise Fail("le manifeste ne contient aucun bouquet")
+    out = []
+    for b in bs:
+        if not b.get("id") or not b.get("lots"):
+            raise Fail("bouquet invalide : %r" % (b.get("id"),))
+        out.append({"id": b["id"], "type": b.get("type", ""), "lots": sorted(b["lots"]), "title": b.get("title", ""),
+                    "rawBytes": int(b.get("rawBytes", 0)), "rentalDays": int(b.get("rentalDays", 0))})
+    out.sort(key=lambda b: b["id"])
+    cat = {"bundles": out, "generatedAt": generated_at}
+    cat["keyId"] = hashlib.sha256(ed25519_public(seed)).hexdigest()[:16]
+    cat["signature"] = base64.b64encode(ed25519_sign(seed, canonical_bundles(cat).encode("utf-8"))).decode()
+    return cat
+
+
 def load_cfg(path=None):
     return load(path or os.path.join(HERE, "config.json"))
 
 
 def main(argv=None):
     ap = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
-    ap.add_argument("cmd", choices=["select", "check", "build"])
+    ap.add_argument("cmd", choices=["select", "check", "build", "sign-catalog"])
     ap.add_argument("--repo", default=os.path.abspath(os.path.join(HERE, "..", "..")))
     ap.add_argument("--config")
     ap.add_argument("--out")
@@ -726,8 +827,27 @@ def main(argv=None):
     ap.add_argument("--only")
     ap.add_argument("--rental", help="durées de location par bouquet (défaut : <repo>/content/bundles-rental.json)")
     ap.add_argument("--previous")
+    ap.add_argument("--key", help="sign-catalog : clé privée Ed25519 du propriétaire (PEM PKCS#8) ; jamais dans le dépôt")
+    ap.add_argument("--generated-at", help="sign-catalog : date de génération (défaut : maintenant, UTC)")
     ap.add_argument("--draft", action="store_true", help="écrit <out>.draft.json même si une règle échoue (diagnostic ; exit 1 quand même)")
     a = ap.parse_args(argv)
+    if a.cmd == "sign-catalog":
+        import datetime
+        if not a.key or not a.out:
+            print("ÉCHEC : sign-catalog demande --key CLE.pem et --out bundles-catalog.json", file=sys.stderr)
+            return 1
+        try:
+            mp = a.manifest or os.path.join(a.repo, "content", "TRIAL-MANIFEST.json")
+            cat = sign_catalog(load(mp), read_pem_seed(a.key),
+                               a.generated_at or datetime.datetime.now(datetime.timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ"))
+        except (Fail, OSError, ValueError) as e:
+            print("ÉCHEC : %s" % e, file=sys.stderr)
+            return 1
+        with open(a.out, "w", encoding="utf-8") as f:
+            json.dump(cat, f, ensure_ascii=False, indent=1)
+            f.write("\n")
+        print("Catalogue signé : %s (%d bouquets, clé %s). À déposer sur le serveur : voir docs/CONTENT-PUBLISH.md" % (a.out, len(cat["bundles"]), cat["keyId"]))
+        return 0
     cfg = load_cfg(a.config)
     only = set(a.only.split(",")) if a.only else None
     out = a.out or os.path.join(a.repo, "content", "TRIAL-MANIFEST.json")

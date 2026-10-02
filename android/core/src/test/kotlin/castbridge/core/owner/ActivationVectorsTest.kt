@@ -116,6 +116,8 @@ class ActivationVectorsTest {
         cases += activationCase("act-trial-usage-window", "clé d'essai : plafond d'usage + fenêtre de lots réservée (produit essai, 3 jours, 720 min)", issuer("desk").issue(req("tvA", ActivationKind.TRIAL, trialRights = listOf(usage, trialWindow()))).token, "tvA")
         cases += activationCase("act-trial-usage-only", "clé d'essai : plafond d'usage seul", issuer("desk").issue(req("tvA", ActivationKind.TRIAL, trialRights = listOf(usage))).token, "tvA")
         cases += activationCase("act-production-usage", "production : achat + plafond d'usage", issuer("desk").issue(req("tvA", rights = listOf(purchase, usage))).token, "tvA")
+        cases += activationCase("act-production-no-rights", "production sans aucun droit : valide (version complète, durée illimitée)", issuer("desk").issue(req("tvA", rights = emptyList())).token, "tvA")
+        cases += activationCase("act-production-usage-only", "production avec le seul droit d'usage (durée) : valide", issuer("desk").issue(req("tvA", rights = listOf(usage))).token, "tvA")
         cases += activationCase("act-production-rental", "production : achat + location de 30 jours", issuer("desk").issue(req("tvA", rights = listOf(purchase, otherRental))).token, "tvA")
         cases += activationCase("act-production", "production : achat + abonnement", prodTok, "tvA")
         cases += activationCase("act-open-all", "« tout ouvert » de 10 jours porté par la clé bureau", openTok, "tvA")
@@ -220,7 +222,8 @@ class ActivationVectorsTest {
         cases += refuse("build-refuse-zero-window", "durée nulle", "desk", req("tvA", window = 0), "tvA")
         cases += refuse("build-refuse-scope", "la clé serveur ne peut pas délivrer « tout ouvert »", "server", req("tvA", rights = listOf(openAll)), "tvA")
         cases += refuse("build-refuse-open-all-long", "« tout ouvert » de 31 jours", "desk", req("tvA", rights = listOf(Right.OpenAll("ouvert", t0, t0 + 31 * day))), "tvA")
-        cases += refuse("build-refuse-no-rights", "production sans droit", "desk", req("tvA", rights = emptyList()), "tvA")
+        cases += build("build-production-no-rights", "construire une clé de production SANS aucun droit (version complète, durée illimitée)", "desk", req("tvA", rights = emptyList()), "tvA")
+        cases += build("build-production-usage-only", "construire une clé de production avec le seul droit d'usage (durée)", "desk", req("tvA", rights = listOf(usage)), "tvA")
         cases += J("type" to "build-activation", "id" to "build-refuse-bad-code", "description" to "code d'appareil mal formé", "signer" to "desk",
             "request" to reqJson(req("tvA"), "tvA") + mapOf("deviceCodeOverride" to "ABCD-EFGH-JKMN-PQRZ"), "expect" to J("refused" to true))
         // 5b. envelope: sequence numbers, unknown type

@@ -101,9 +101,9 @@ class LicenseLifecycleTest extends LicenseTestBase {
         assertThat(decode(a).notAfter() - decode(a).notBefore()).isEqualTo(24 * 3_600_000L);
         assertThatThrownBy(() -> activations.issue(OWNER, new ActivationService.IssueRequest(l.licenseId(), "tv", dev().text(), null, null, 49), "server-api")).hasMessageContaining("1 à 48");
         assertThatThrownBy(() -> activations.issue(OWNER, new ActivationService.IssueRequest(l.licenseId(), "tv", dev().text(), null, null, 0), "server-api")).hasMessageContaining("1 à 48");
-        // a licence without any product has nothing to grant
+        // a licence without any product issues a full-version key: no right at all (duration only; unlimited here)
         var empty = licenses.create(OWNER, new LicenseService.NewLicense(null, client().id(), "PAID", 1, null, null, null, null, null));
-        assertThatThrownBy(() -> issue(empty.licenseId(), dev())).hasMessageContaining("aucun droit");
+        assertThat(decode(issue(empty.licenseId(), dev())).rights()).isEmpty();
         // a subscription needs an end date
         var abo = products.create(OWNER, new ProductService.NewProduct("abo-sans-fin", "Abo", "ABONNEMENT", 30, null, null, null, null));
         var open = licenses.create(OWNER, new LicenseService.NewLicense(null, client().id(), "PAID", 1, null, null, null, null, List.of(abo.productId())));

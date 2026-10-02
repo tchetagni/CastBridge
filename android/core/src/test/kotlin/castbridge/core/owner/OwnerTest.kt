@@ -320,13 +320,13 @@ class OwnerCommandTest {
 
 class TvClockTest {
     @Test fun rollbackIsDetectedAndNeverExtendsAnything() {
-        val c = TvClock(); c.observe(T0)
+        val c = TvClock(mono = { 0L }); c.observe(T0)      // frozen monotonic source: the rollback case is tested in ClockRollbackTest
         assertEquals(T0, c.now(T0 - 100 * day)); assertTrue(c.rolledBack(T0 - 100 * day)); assertFalse(c.rolledBack(T0 - 1000))
         c.observe(T0 + 2 * day); assertEquals(T0 + 2 * day, c.now(T0))
     }
 
     @Test fun aWildForwardJumpIsNotBelieved_untilASignedMessageConfirmsIt() {
-        val c = TvClock(); c.observe(T0)
+        val c = TvClock(mono = { 0L }); c.observe(T0)
         val glitch = T0 + 5000 * day
         assertEquals(T0, c.now(glitch)); c.observe(glitch); assertEquals(T0, c.lastSeen)
         c.observe(glitch, signedIssuedAt = glitch - day)         // a signed message proves the time is really there
@@ -334,7 +334,7 @@ class TvClockTest {
     }
 
     @Test fun aSignedMessageIsAFloorForAClockStuckInThePast() {
-        val c = TvClock(); c.observe(0L, signedIssuedAt = T0)
+        val c = TvClock(mono = { 0L }); c.observe(0L, signedIssuedAt = T0)
         assertEquals(T0, c.now(0L))
     }
 }

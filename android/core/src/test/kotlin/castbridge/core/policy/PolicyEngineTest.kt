@@ -135,7 +135,7 @@ class PolicyEngineTest {
         val a = e.receive(expired)
         assertEquals(AckReason.WINDOW_CLOSED, a.reason, "the TV trusts the highest instant it has seen")
         assertTrue(e.journal().first().clockRolledBack)
-        assertEquals(NOW0 + 60 * DAY, e.trustedNow())
+        assertTrue(e.trustedNow() in (NOW0 + 60 * DAY)..(NOW0 + 60 * DAY + 3_600_000L), "time never goes back (it now advances with the monotonic time instead of freezing)")
     }
 
     @Test fun aWildlyAdvancedClockIsNotBelieved() {

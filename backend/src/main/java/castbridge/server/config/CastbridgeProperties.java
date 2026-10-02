@@ -16,6 +16,7 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
  * @param quiz          question bank settings
  * @param devices       device tracking and retention
  * @param geo           approximate location of devices from their public IP
+ * @param catalog       the signed bundle catalogue served to the owner's tools
  */
 @ConfigurationProperties(prefix = "castbridge")
 public record CastbridgeProperties(
@@ -28,7 +29,8 @@ public record CastbridgeProperties(
         Packages packages,
         Quiz quiz,
         Devices devices,
-        Geo geo) {
+        Geo geo,
+        Catalog catalog) {
 
     public CastbridgeProperties {
         if (web == null) web = new Web(null, null, false);
@@ -41,6 +43,8 @@ public record CastbridgeProperties(
         if (quiz.packsDir() == null) quiz = new Quiz(quiz.seed(), quiz.tombstoneDays(), storageDir.resolve("quiz-packs"));
         if (devices == null) devices = new Devices(365, 30, 30, 180, 15, 900);
         if (geo == null) geo = new Geo(null, null);
+        if (catalog == null) catalog = new Catalog(null);
+        if (catalog.bundlesFile() == null || catalog.bundlesFile().toString().isBlank()) catalog = new Catalog(storageDir.resolve("lots").resolve("bundles-catalog.json"));
     }
 
     /**
@@ -85,4 +89,7 @@ public record CastbridgeProperties(
      * @param databaseFile  optional MaxMind GeoLite2 City or Country database (.mmdb) for country and city
      */
     public record Geo(String countryHeader, Path databaseFile) {}
+
+    /** @param bundlesFile the bundle catalogue signed OFFLINE by the owner (tools/trial-edition sign-catalog); CASTBRIDGE_BUNDLES_CATALOG_FILE, default {storage-dir}/lots/bundles-catalog.json */
+    public record Catalog(Path bundlesFile) {}
 }

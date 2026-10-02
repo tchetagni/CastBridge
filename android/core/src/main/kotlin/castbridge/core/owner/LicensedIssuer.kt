@@ -105,6 +105,12 @@ class LicensedIssuer(
 
     fun issue(device: DeviceRequest, spec: IssueSpec): Delivered {
         val issuedAt = spec.issuedAt ?: clock()
+        if (spec.kind == ActivationKind.PRODUCTION && LicenseIds.wantsAuto(spec.license)) {
+            // production without a typed licence: a NEW licence (1 seat) with a generated id, then the usual flow
+            val id = generateSequence { LicenseIds.generate() }.first { id -> LicenseBook.replay(events(), ring()).licenses.keys.none { it == id } }
+            createLicense(id, 1, at = issuedAt - 1)      // 1 ms earlier: the registry replays by date, the licence must come before its first seat
+            return issue(device, IssueSpec(spec.kind, spec.subject, spec.rights, id, spec.windowHours, spec.notBefore, spec.issuedAt, spec.seat, spec.nonce, spec.rentals, spec.rentalMaster, spec.rentalCheck, spec.usageDays, spec.trialLots))
+        }
         var seat = spec.seat; var reused = false; var left: Int? = null
         val current = events()
         if (spec.kind == ActivationKind.PRODUCTION && seat == null) {
@@ -141,11 +147,11 @@ class LicensedIssuer(
     }
 
     /** Creates a licence (a purchase): [seats] seats and a yearly cap of transfers; a signed event in the registry. */
-    fun createLicense(license: String, seats: Int, maxTransfersPerYear: Int = LicenseBook.DEFAULT_TRANSFERS_PER_YEAR) {
+    fun createLicense(license: String, seats: Int, maxTransfersPerYear: Int = LicenseBook.DEFAULT_TRANSFERS_PER_YEAR, at: Long = clock()) {
         if (!Activation.ID.matches(license) || license == Activation.TRIAL_LICENSE) throw IssueException("Identifiant de licence invalide")
         if (seats !in 1..1000) throw IssueException("Nombre de postes hors bornes (1 à 1000)")
         if (KeyScope.ISSUE_PRODUCTION !in scopes) throw IssueException("Cette clé ne peut pas créer de licence")
-        save(LicenseBook.merge(events(), listOf(LicenseEvent.license(signer, clock(), license, seats, maxTransfersPerYear))))
+        save(LicenseBook.merge(events(), listOf(LicenseEvent.license(signer, at, license, seats, maxTransfersPerYear))))
     }
 }
 

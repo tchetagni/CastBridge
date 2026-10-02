@@ -235,7 +235,7 @@ public class LicenseWebController {
     }
 
     @PostMapping("/admin/licenses/issue")
-    public String issue(Authentication auth, @RequestParam String licenseId, @RequestParam(defaultValue = "tv") String subject, @RequestParam String deviceRequest,
+    public String issue(Authentication auth, @RequestParam(required = false) String licenseId, @RequestParam(defaultValue = "tv") String subject, @RequestParam String deviceRequest,
                         @RequestParam(required = false) Integer windowHours, @RequestParam(required = false) String usageDays, @RequestParam(required = false) String reissue, Model m) {
         Actor a = read(auth, Role.Permission.REISSUE, m);
         m.addAttribute("licenseId", licenseId);

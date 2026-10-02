@@ -21,6 +21,8 @@ data class SweepReport(
     val trigger: SweepTrigger, val endedNow: List<String>, val keysDestroyed: List<String>, val lotsRemoved: List<LotId>, val deferred: List<String>,
     /** Lots left in place because a lasting right covers them: the delivery must install the normal copy. */
     val keptBecauseOwned: List<LotId>, val notices: List<String>,
+    /** Contracts whose sweep failed (exception): logged, left at their last persisted step and retried at the next sweep; the other contracts were swept all the same. */
+    val failures: List<String> = emptyList(),
 )
 
 /**
@@ -33,6 +35,8 @@ class RentalSweeper(
     private val ledger: RentalLedger, private val vault: RentalVault, private val lots: RentedLots, private val activations: () -> List<Activation>,
     /** Lots a purchase, a subscription or a grant allows right now. (An account activated by the super administrator code never reaches the deletion: its rentals are permanent, see [RentalEngine.superUnlimited].) */ private val owned: () -> Set<LotId> = { emptySet() },
     private val wall: () -> Long = System::currentTimeMillis, private val onStep: (String) -> Unit = {},
+    /** Called with the contract key and the exception when one contract's sweep fails (the sweep goes on with the next contract). */
+    private val onError: (String, Throwable) -> Unit = { _, _ -> },
 ) {
     companion object { const val PERIOD_MS = 6L * 3600 * 1000 }
 
@@ -50,11 +54,21 @@ class RentalSweeper(
         ledger.observe()
         val ended = ledger.markEnding(ledger.status(activations()))
         val keys = ArrayList<String>(); val removed = ArrayList<LotId>(); val deferred = ArrayList<String>(); val kept = ArrayList<LotId>(); val notices = ArrayList<String>()
+        val failures = ArrayList<String>()
         for (key in ledger.keys()) {
-            val rec = ledger.rec(key) ?: continue
-            if (rec.phase == RentalPhase.LIVE || rec.phase == RentalPhase.DONE) continue
+            try { sweepContract(key, lessonActive, keys, removed, deferred, kept, notices) }
+            catch (e: Throwable) { if (e is VirtualMachineError) throw e; failures += key; onError(key, e) }
+        }
+        // a doubtful ledger (see RentalLedger.degraded) leaves quarantine only when every contract was tombstoned without failure or delay
+        if (ledger.degraded && failures.isEmpty() && deferred.isEmpty() && ledger.allEnded()) ledger.clearDegraded()
+        return SweepReport(trigger, ended, keys, removed, deferred, kept, notices.distinct(), failures)
+    }
+
+    private fun sweepContract(key: String, lessonActive: Boolean, keys: MutableList<String>, removed: MutableList<LotId>, deferred: MutableList<String>, kept: MutableList<LotId>, notices: MutableList<String>) {
+            val rec = ledger.rec(key) ?: return
+            if (rec.phase == RentalPhase.LIVE || rec.phase == RentalPhase.DONE) return
             // a lesson in progress delays the end, by at most the configured time after the end
-            if (lessonActive && ledger.nowMs() - rec.expiredAt < ledger.config.lessonDeferralMs) { deferred += key; continue }
+            if (lessonActive && ledger.nowMs() - rec.expiredAt < ledger.config.lessonDeferralMs) { deferred += key; return }
             val reason = (rec.reason ?: ExpiryReason.DATE).name.lowercase()
             if (rec.phase == RentalPhase.EXPIRING) {
                 onStep("key:$key")
@@ -76,7 +90,5 @@ class RentalSweeper(
             }
             ledger.advance(key, RentalPhase.DONE)
             notices += RentalEngine.ENDED
-        }
-        return SweepReport(trigger, ended, keys, removed, deferred, kept, notices.distinct())
     }
 }

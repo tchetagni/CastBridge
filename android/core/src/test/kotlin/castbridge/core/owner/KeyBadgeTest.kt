@@ -60,12 +60,13 @@ class TrialPolicyTest {
 
     @Test fun activationAndRentalRoutesStayOpenInTrial() {
         for (r in listOf("/api/activation", "/api/activation/install", "/api/activation/request", "/api/rental", "/api/lots/upload", "/api/rental/install")) assertFalse(TrialPolicy.routeBlocked(r), r)
+        assertFalse(TrialPolicy.routeBlocked("/api/learn/state")); assertFalse(TrialPolicy.routeBlocked("/api/lots/part"))
     }
 
     @Test fun streamingAndSudokuStayCopyAndMoveGoAway() {
         assertTrue(TrialPolicy.gameAllowed("sudoku")); assertFalse(TrialPolicy.gameAllowed("chess")); assertFalse(TrialPolicy.gameAllowed("quiz"))
         assertTrue(TrialPolicy.tileAllowed("remote")); for (t in listOf("library", "receive", "usb", "downloads", "langues")) assertFalse(TrialPolicy.tileAllowed(t), t); for (t in listOf("learn", "games", "bluetooth")) assertTrue(TrialPolicy.tileAllowed(t), t)
-        for (p in listOf("/api/transfer/start", "/api/part", "/api/storage/move", "/api/storage/move/cancel", "/api/delete", "/api/rename", "/api/folders/set", "/quiz/api/join")) assertTrue(TrialPolicy.routeBlocked(p), p)
-        for (p in listOf("/api/hello", "/api/play", "/api/playurl", "/api/pause", "/api/info", "/api/rental", "/api/lots/upload", "/api/learn/state")) assertFalse(TrialPolicy.routeBlocked(p), p)
+        for (p in listOf("/api/transfer/start", "/api/part", "/api/storage/move", "/api/storage/move/cancel", "/api/delete", "/api/rename", "/api/folders/set", "/quiz/api/join", "/api/usb/import", "/api/ssh/enable", "/api/apk/install", "/api/library", "/stream/film.mp4", "/api/play", "/api/some-future-route")) assertTrue(TrialPolicy.routeBlocked(p), p)
+        for (p in listOf("/api/hello", "/api/playurl", "/api/pause", "/api/info", "/api/rental", "/api/lots/upload", "/api/learn/state")) assertFalse(TrialPolicy.routeBlocked(p), p)
     }
 }

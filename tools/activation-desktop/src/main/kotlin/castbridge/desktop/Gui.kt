@@ -4,9 +4,6 @@ import castbridge.core.owner.Activation
 import castbridge.core.owner.Delivered
 import castbridge.core.owner.DeviceRequest
 import castbridge.core.owner.IssueSpec
-import castbridge.core.owner.RightsSyntax
-import castbridge.core.lots.BundleCatalog
-import castbridge.core.lots.RentalDurations
 import castbridge.core.lots.Right
 import castbridge.core.owner.ActivationKind
 import castbridge.core.owner.DeviceCode
@@ -14,6 +11,7 @@ import castbridge.core.owner.IssueException
 import castbridge.core.owner.Subject
 import java.awt.BorderLayout
 import java.awt.Dimension
+import castbridge.core.owner.KeyScope
 import java.awt.FlowLayout
 import java.awt.GridBagConstraints
 import java.awt.GridBagLayout
@@ -73,7 +71,7 @@ object Gui {
         fun show() {
             frame.defaultCloseOperation = JFrame.EXIT_ON_CLOSE
             val tabs = JTabbedPane()
-            tabs.addTab("Émettre", issuePanel()); tabs.addTab("Clé", keyPanel()); tabs.addTab("Licences", licencePanel()); tabs.addTab("Journal", journalPanel())
+            tabs.addTab("Émettre", issuePanel()); tabs.addTab("Clé", keyPanel()); tabs.addTab("Licences", licencePanel()); tabs.addTab("Experts", expertsPanel()); tabs.addTab("Journal", journalPanel())
             frame.contentPane.add(tabs, BorderLayout.CENTER); frame.contentPane.add(status.also { it.border = BorderFactory.createEmptyBorder(4, 8, 4, 8) }, BorderLayout.SOUTH)
             frame.size = Dimension(900, 760); frame.setLocationRelativeTo(null); frame.isVisible = true
             if (!kf.exists()) info("Aucune clé : onglet « Clé » pour la créer.")
@@ -97,31 +95,20 @@ object Gui {
             val request = JTextArea(7, 50).apply { font = java.awt.Font(java.awt.Font.MONOSPACED, java.awt.Font.PLAIN, 11) }
             val kind = JComboBox(arrayOf("Essai (aucun droit)", "Production (licence et droits)"))
             val subject = JComboBox(arrayOf("TV", "Téléphone"))
-            val license = JTextField("trial")
+            val license = JTextField("").apply { toolTipText = "Production : laisser vide, une licence « lic-… » est générée (1 poste). Saisir un identifiant existant pour ré-activer ou ajouter un poste." }
+            val licenseRow = JPanel(BorderLayout(6, 0)).apply { add(license, BorderLayout.CENTER); add(JLabel("(laisser vide : générée)"), BorderLayout.EAST) }
             val permanent = JCheckBox("SUPER_UNLIMITED : lit et débloque tout, locations permanentes (clé super administrateur seulement) ; le code reste valable 48 h pour l'installer")
-            val rights = JTextArea(3, 50).apply { toolTipText = "Avancé, une ligne par droit : tout-ouvert produit:jours | droit LIGNE | location produit=bouquet:JOURS (durée EXACTE du catalogue chargé ; refusée sans catalogue)" }
             val trialDays = JTextField("${castbridge.core.owner.ActivationPolicy.TRIAL_DEFAULT_DAYS}").apply { toolTipText = "Essai : durée de la clé en jours (1 à ${castbridge.core.owner.ActivationPolicy.TRIAL_MAX_DAYS}, jamais illimitée). L'essai ouvre aussi, une seule fois, 12 h de lots locatifs." }
             val prodDays = JComboBox(KeyDuration.CHOICES.toTypedArray()).apply { toolTipText = "Production : « ${KeyDuration.UNLIMITED} » (la TV ne se reverrouille jamais), un nombre de jours usuel, ou « ${KeyDuration.OTHER} »." }
             val otherDays = JTextField("90", 6).apply { isEnabled = false; toolTipText = "Nombre de jours (1 à ${castbridge.core.owner.ActivationPolicy.PRODUCTION_MAX_DAYS})" }
             prodDays.addActionListener { otherDays.isEnabled = prodDays.selectedItem == KeyDuration.OTHER && prodDays.isEnabled }
             permanent.addActionListener { if (permanent.isSelected) prodDays.selectedItem = KeyDuration.UNLIMITED; prodDays.isEnabled = !permanent.isSelected; otherDays.isEnabled = false }
             val prodRow = JPanel(FlowLayout(FlowLayout.LEFT, 0, 0)).apply { add(prodDays); add(JLabel("  ")); add(otherDays) }
-            var catalog: BundleCatalog? = null
-            val checklist = Checklist()
-            val catLabel = JLabel("Aucun catalogue chargé : les achats, abonnements et locations par bouquet sont indisponibles.")
-            val loadCat = JButton("Catalogue…").apply {
-                addActionListener {
-                    val f = chooseFile(false) ?: return@addActionListener
-                    try { catalog = BundleCatalog.parse(f.readText()).also { checklist.fill(it) }; catLabel.text = "Catalogue : ${f.name} (${catalog!!.bundles.size} bouquets)" }
-                    catch (e: Exception) { catalog = null; checklist.fill(null); catLabel.text = "Catalogue illisible."; error("Catalogue illisible (TRIAL-MANIFEST.json ou fichier contenant le tableau « bundles ») : ${e.message}") }
-                }
-            }
-            val catRow = JPanel(BorderLayout(8, 0)).apply { add(loadCat, BorderLayout.WEST); add(catLabel, BorderLayout.CENTER) }
-            val catScroll = JScrollPane(checklist.panel).apply { preferredSize = Dimension(600, 190) }
             val pass = JPasswordField()
             val load = JButton("Ouvrir une demande…").apply { addActionListener { chooseFile(false)?.let { request.text = it.readText() } } }
-            kind.addActionListener { license.isEnabled = kind.selectedIndex == 1; if (kind.selectedIndex == 0) license.text = "trial" else if (license.text == "trial") license.text = "" }
-            license.isEnabled = false
+            fun syncKind() { val prod = kind.selectedIndex == 1; license.isEnabled = prod; if (!prod) license.text = ""; prodDays.isEnabled = prod && !permanent.isSelected; otherDays.isEnabled = prod && prodDays.selectedItem == KeyDuration.OTHER && prodDays.isEnabled; trialDays.isEnabled = !prod; permanent.isEnabled = prod }
+            kind.addActionListener { syncKind() }
+            syncKind()
             val go = JButton("Générer l'activation").apply {
                 addActionListener {
                     val p = pass.password
@@ -131,14 +118,14 @@ object Gui {
                         val now = System.currentTimeMillis()
                         val k = if (kind.selectedIndex == 0) ActivationKind.TRIAL else ActivationKind.PRODUCTION
                         val usage: Int? = if (k == ActivationKind.TRIAL) KeyDuration.trial(trialDays.text) else KeyDuration.production(prodDays.selectedItem as String, otherDays.text, permanent.isSelected)
-                        val plan = if (k == ActivationKind.TRIAL) RightsPlan(emptyList(), emptyList()).also { if (rights.text.isNotBlank() || checklist.any()) throw IssueException("Un essai ne porte aucun droit : choisissez « Production » pour des achats, abonnements ou locations") }
-                            else checklist.let { c -> GuiRights.plan(c.purchases(), c.subscriptions(), c.rentals(), rights.text, catalog, now) }
-                        val rentalSpecs = plan.rentals
-                        val spec = IssueSpec(k, if (subject.selectedIndex == 0) Subject.TV else Subject.PHONE, plan.rights + (if (permanent.isSelected && k == ActivationKind.PRODUCTION) listOf(Right.Super("super-illimite", now)) else emptyList()), license.text.trim().ifEmpty { Activation.TRIAL_LICENSE }, rentals = rentalSpecs, rentalMaster = if (rentalSpecs.isEmpty() && k != ActivationKind.TRIAL) null else d.rentalMaster(), usageDays = usage, trialLots = k == ActivationKind.TRIAL)
+                        val spec = IssueSpec(k, if (subject.selectedIndex == 0) Subject.TV else Subject.PHONE,
+                            if (permanent.isSelected && k == ActivationKind.PRODUCTION) listOf(Right.Super("super-illimite", now)) else emptyList(),
+                            if (k == ActivationKind.TRIAL) Activation.TRIAL_LICENSE else license.text.trim(),      // blank = generated by the desk (LicensedIssuer)
+                            rentalMaster = if (k == ActivationKind.TRIAL) d.rentalMaster() else null, usageDays = usage, trialLots = k == ActivationKind.TRIAL)
                         val r = d.issue(device, spec)
                         last = r; token.text = r.issued.token
                         qr.icon = ImageIcon(Qr.image(r.issued.token, 4))
-                        info("Activation émise pour ${device.code} — poste ${r.seat}${if (r.reused) " (ré-activation, aucun poste consommé)" else ""} — installable jusqu'au ${fmt(r.issued.activation.notAfter)}")
+                        info("Activation émise pour ${device.code} — licence ${r.issued.activation.license}${if (k == ActivationKind.PRODUCTION && license.text.isBlank()) " (générée)" else ""} — poste ${r.seat}${if (r.reused) " (ré-activation, aucun poste consommé)" else ""} — installable jusqu'au ${fmt(r.issued.activation.notAfter)}")
                         refreshJournal(d)
                     } catch (e: IssueException) { error(e.message ?: "Refusé") }
                     catch (e: IllegalArgumentException) { error(e.message ?: "Refusé") }
@@ -150,41 +137,13 @@ object Gui {
                 addActionListener { last?.let { r -> chooseFile(true, r.issued.fileName)?.let { f -> f.writeText(r.issued.fileContent); info("Fichier enregistré : ${f.path} — à copier dans Download/CastBridge/ de la clé USB de la TV") } } }
             }
             val savePng = JButton("Enregistrer le code QR…").apply { addActionListener { last?.let { r -> chooseFile(true, "activation.png")?.let { f -> Qr.png(r.issued.token, f); info("Code QR enregistré : ${f.path}") } } } }
-            val form = JPanel(); gb(form, listOf("Demande d'appareil (collée depuis la TV)" to JScrollPane(request), "" to load, "Type" to kind, "Pour" to subject, "Licence" to license,
-                "Privilège" to permanent, "Essai : durée de la clé (jours)" to trialDays, "Production : durée de la clé" to prodRow, "Catalogue du serveur" to catRow, "Achats / abonnements / locations" to catScroll, "Avancé : autres droits (une ligne par droit)" to JScrollPane(rights), "Code de déverrouillage" to pass, "" to go))
+            val form = JPanel(); gb(form, listOf("Demande d'appareil (collée depuis la TV)" to JScrollPane(request), "" to load, "Type" to kind, "Pour" to subject, "Licence (laisser vide : générée)" to licenseRow,
+                "Privilège" to permanent, "Essai : durée de la clé (jours)" to trialDays, "Production : durée de la clé" to prodRow, "Code de déverrouillage" to pass, "" to go))
             val out = JPanel(BorderLayout()).apply {
                 add(JScrollPane(token), BorderLayout.NORTH); add(qr, BorderLayout.CENTER)
                 add(JPanel(FlowLayout(FlowLayout.LEFT)).apply { add(copy); add(save); add(savePng) }, BorderLayout.SOUTH)
             }
             return JPanel(BorderLayout()).apply { add(form, BorderLayout.NORTH); add(out, BorderLayout.CENTER) }
-        }
-
-        /** Checklist of the catalogue's bundles: purchase, subscription (end date) and rental (duration fixed by the server, read-only: the catalogue's rentalDays, else the default of 30 days; disabled only when out of bounds). */
-        class Checklist {
-            val panel = JPanel(GridBagLayout())
-            private class Row(val id: String, val buy: JCheckBox, val sub: JCheckBox, val end: JTextField, val rent: JCheckBox)
-            private var rows = emptyList<Row>()
-            init { fill(null) }
-            fun fill(c: BundleCatalog?) {
-                panel.removeAll()
-                fun cell(comp: java.awt.Component, x: Int, y: Int, w: Double = 0.0) = panel.add(comp, GridBagConstraints().apply { gridx = x; gridy = y; weightx = w; anchor = GridBagConstraints.WEST; insets = Insets(1, 4, 1, 4) })
-                listOf("Bouquet", "Achat", "Abonnement jusqu'au (AAAA-MM-JJ)", "", "Location").forEachIndexed { i, t -> cell(JLabel(t), i, 0, if (i == 0) 1.0 else 0.0) }
-                val fresh = ArrayList<Row>()
-                c?.bundles?.sortedBy { it.id }?.forEachIndexed { n, b ->
-                    val y = n + 1
-                    val days = RentalDurations.daysOf(c, b.id)
-                    val buy = JCheckBox(); val sub = JCheckBox(); val end = JTextField(10).apply { isEnabled = false }
-                    sub.addActionListener { end.isEnabled = sub.isSelected }
-                    val rent = JCheckBox(days.getOrNull()?.let { "fixé par le serveur : $it jours" + (if (b.rentalDays <= 0) " (défaut)" else "") } ?: "durée hors bornes : non louable").apply { isEnabled = days.isSuccess }
-                    cell(JLabel(b.title.ifBlank { b.id } + "  [${b.id}]"), 0, y, 1.0); cell(buy, 1, y); cell(sub, 2, y); cell(end, 3, y); cell(rent, 4, y)
-                    fresh += Row(b.id, buy, sub, end, rent)
-                }
-                rows = fresh; panel.revalidate(); panel.repaint()
-            }
-            fun purchases() = rows.filter { it.buy.isSelected }.map { it.id }
-            fun subscriptions() = rows.filter { it.sub.isSelected }.associate { it.id to it.end.text }
-            fun rentals() = rows.filter { it.rent.isSelected }.map { it.id }
-            fun any() = rows.any { it.buy.isSelected || it.sub.isSelected || it.rent.isSelected }
         }
 
         fun chooseFile(save: Boolean, name: String? = null): File? {
@@ -223,6 +182,37 @@ object Gui {
             val import = JButton("Importer un registre…").apply { addActionListener { if (kf.exists()) chooseFile(false)?.let { f -> val n = Desk(home, castbridge.core.owner.Ed25519Signer(ByteArray(32)), emptySet(), kf.trusted()).importRegistry(f.readText()); info("$n événement(s) nouveau(x) fusionné(s)") } } }
             val p = JPanel(); gb(p, listOf("Identifiant de la licence" to id, "Postes" to seats, "Code de déverrouillage" to pass, "" to create, "Registre (synchronisation)" to JPanel(FlowLayout(FlowLayout.LEFT)).apply { add(export); add(import) }))
             return p
+        }
+
+        /** « Experts » : the remote-assistance experts (local list, public keys); « Signer et enregistrer… » writes the signed experts.json (key with REGISTRY scope). */
+        fun expertsPanel(): JPanel {
+            val store = ExpertsStore(home)
+            val model = DefaultTableModel(arrayOf("Identifiant", "Clé SSH (fin)", "Fin de validité"), 0)
+            fun refresh() { model.rowCount = 0; store.list().forEach { model.addRow(arrayOf(it.id, "…" + it.keyBase64.takeLast(12), if (it.notAfter == 0L) "sans date" else fmt(it.notAfter - 1))) } }
+            val table = JTable(model)
+            val id = JTextField(); val key = JTextField(); val until = JTextField(); val pass = JPasswordField()
+            fun kid() = if (kf.exists()) kf.info().kid else "-"
+            val add = JButton("Ajouter").apply { addActionListener {
+                try { store.add(id.text.trim(), key.text, until.text.trim().ifEmpty { null }, kid()); id.text = ""; key.text = ""; until.text = ""; refresh(); info("Expert ajouté : à signer et publier pour qu'il soit actif") }
+                catch (e: IllegalArgumentException) { error(e.message ?: "Refusé") } } }
+            val remove = JButton("Retirer la ligne choisie").apply { addActionListener {
+                val r = table.selectedRow; if (r < 0) return@addActionListener
+                try { store.remove(model.getValueAt(r, 0) as String, kid()); refresh(); info("Expert retiré : signez et publiez la nouvelle liste pour fermer son accès") } catch (e: IllegalArgumentException) { error(e.message ?: "Refusé") } } }
+            val sign = JButton("Signer et enregistrer…").apply { addActionListener {
+                val p = pass.password
+                try {
+                    if (!kf.exists()) { error("Aucune clé : créez-la dans l'onglet « Clé »"); return@addActionListener }
+                    if (KeyScope.REGISTRY !in kf.info().scopes) { error("La clé du bureau n'a pas la portée REGISTRY : elle ne peut pas signer la liste des experts"); return@addActionListener }
+                    val f = chooseFile(true, "experts.json") ?: return@addActionListener
+                    val s = kf.unlock(p) ?: run { error("Code de déverrouillage faux"); return@addActionListener }
+                    val l = store.list(); val signed = castbridge.core.tunnel.ExpertsList.sign(s.signer, s.signer.keyId, l, System.currentTimeMillis())
+                    castbridge.core.tunnel.ExpertsList.verify(signed.toJson(), listOf(kf.trusted()))
+                    f.writeText(signed.toJson() + "\n"); store.logSigned(s.signer.keyId, l.size); info("Liste signée : ${f.path} (${l.size} expert(s)) ; à publier sur le serveur (docs/REMOTE-TUNNEL.md)")
+                } catch (e: IllegalArgumentException) { error(e.message ?: "Refusé") } finally { p.fill('\u0000'); pass.text = "" } } }
+            val form = JPanel(); gb(form, listOf("Identifiant (a-z, 0-9, -)" to id, "Clé SSH (ssh-ed25519 AAAA… commentaire)" to key, "Jusqu'au (AAAA-MM-JJ, facultatif)" to until, "" to JPanel(FlowLayout(FlowLayout.LEFT)).apply { add(add); add(remove) },
+                "Code de déverrouillage" to pass, "" to sign))
+            val p = JPanel(BorderLayout()); p.add(JScrollPane(table), BorderLayout.CENTER); p.add(form, BorderLayout.SOUTH)
+            refresh(); return p
         }
 
         fun refreshJournal(d: Desk) {
