@@ -57,6 +57,7 @@ object ActivationCenter {
         loadStored(); reload(); flushIfUnsaved()
         ready = true
         startClockTimer()
+        RentalHub.warm(app)          // the Keystore key is made off the main thread, before the first screen asks for the rentals
     }
 
     // ---- hardware identity (the factors of docs/ACTIVATION-FORMAT.md § 1; each one only if readable and meaningful) ----

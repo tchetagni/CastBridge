@@ -20,6 +20,8 @@ import java.io.File
 object RentalHub {
     private class Parts(val vault: RentalVault, val ledger: RentalLedger, val sweeper: RentalSweeper, val keys: InstallKeyStore)
     @Volatile private var parts: Parts? = null
+    @Volatile private var warming = false
+    private val noteTaken = java.util.concurrent.atomic.AtomicBoolean(false)
     private const val TAG = "RentalHub"
 
     @Synchronized private fun ensure(ctx: Context): Parts = parts ?: run {
@@ -27,7 +29,10 @@ object RentalHub {
         val dir = File(app.filesDir, "rental")
         val vault = RentalVault(dir)
         // The installation key (X25519, wrapped by the Android Keystore or, stated, in the clear): made here, not in `ActivationCenter.init`, and without the core started (works on the locked screen).
-        val keys = InstallKeyStore(dir, KeystoreWrapper.orPlain())
+        val wrapper = KeystoreWrapper.orPlain()
+        // A key stored under the Keystore is never read or regenerated through the plain fallback (a failed probe is transient): throw, `parts` stays null, the next call retries. Plain is for a FIRST creation only.
+        check(InstallKeyPolicy.mayUseWrapper(InstallKeyStore.storedWrap(dir), wrapper.label)) { "coffre Android indisponible : clé d'installation protégée conservée, nouvel essai plus tard" }
+        val keys = InstallKeyStore(dir, wrapper)
         keys.loadOrCreate()
         keys.loadNote?.let { Log.w(TAG, it) }
         val ledger = RentalLedger(dir, TvClock(mono = android.os.SystemClock::elapsedRealtime), RentalConfig(), System::currentTimeMillis)
@@ -37,6 +42,14 @@ object RentalHub {
         val owned = { OwnedLots.of(ActivationCenter.allActivations(), ActivationCenter.now(), rented.heldLots()) }
         val sweeper = RentalSweeper(ledger, vault, rented, { ActivationCenter.allActivations() }, owned, System::currentTimeMillis, {}, { k, e -> Log.e(TAG, "balayage de la location $k en échec (nouvel essai au prochain balayage)", e) })
         Parts(vault, ledger, sweeper, keys).also { parts = it }
+    }
+
+    /** Prepares the safe and the installation key (Keystore generation + round trip) on a background thread, so no caller on the main thread has to wait for it. Safe to call often. */
+    fun warm(ctx: Context) {
+        if (parts != null || warming) return
+        warming = true
+        val app = ctx.applicationContext
+        Thread { try { runCatching { installKey(app) }.onFailure { Log.w(TAG, "préparation de la clé d'installation reportée", it) } } finally { warming = false } }.apply { isDaemon = true; name = "rental-warm" }.start()
     }
 
     /** This installation's key pair (works locked or trial: nothing here needs the core to be started). Never throws for a missing or unreadable file: a new key is made. */
@@ -55,13 +68,19 @@ object RentalHub {
     fun onActivation(ctx: Context, a: Activation): List<String> {
         val p = ensure(ctx)
         val result = p.ledger.installKeyed(a, ActivationCenter.allActivations(), ActivationCenter.fingerprints(), p.vault, p.keys.loadOrCreate())
-        val notes = RentalNotes.of(result) + listOfNotNull(p.keys.loadNote?.takeIf { "illisible" in it }?.let { "$it : demandez la réémission des locations" })
+        // the key's load note is cached for the whole process: said once, not at every activation
+        val keyNote = p.keys.loadNote?.takeIf { "illisible" in it && noteTaken.compareAndSet(false, true) }?.let { "$it : demandez la réémission des locations" }
+        val notes = RentalNotes.of(result) + listOfNotNull(keyNote)
         notes.forEach { Log.w(TAG, it) }
         return notes
     }
 
     /** The state of every rental, for the access computation and the screens. */
-    fun statuses(ctx: Context): List<RentalStatus> = runCatching { ensure(ctx).ledger.status(ActivationCenter.allActivations()) }.getOrDefault(emptyList())
+    fun statuses(ctx: Context): List<RentalStatus> = runCatching {
+        // never block the main thread on the first generation of the Keystore key: nothing yet, and the background warm-up is started
+        if (parts == null && android.os.Looper.myLooper() == android.os.Looper.getMainLooper()) { warm(ctx); return@runCatching emptyList<RentalStatus>() }
+        ensure(ctx).ledger.status(ActivationCenter.allActivations())
+    }.getOrDefault(emptyList())
 
     /** The deletion at the end of a rental: the French notices to show, if any. Safe to call often (idempotent). */
     /**
@@ -102,7 +121,7 @@ private class ActivationInstallApi(private val ctx: Context) : ApiExtension {
         if ((ActivationCenter.locked() || ActivationCenter.trial()) && !TunnelHub.termsAccepted(ctx))
             return ApiReply(409, """{"error":${castbridge.core.tv.ReceiverServer.q(castbridge.core.tunnel.TunnelTerms.MUST_ACCEPT_ON_TV)}}""")
         return when (val r = ActivationCenter.accept(Channel.MANUAL, text.toByteArray(Charsets.UTF_8))) {
-            is ActivationResult.Accepted -> ApiReply(200, """{"installed":true,"label":${castbridge.core.tv.ReceiverServer.q(ActivationCenter.label())}}""")
+            is ActivationResult.Accepted -> ApiReply(200, """{"installed":true,"label":${castbridge.core.tv.ReceiverServer.q(ActivationCenter.label())},"notes":[${ActivationCenter.lastRentalNotes.joinToString(",") { castbridge.core.tv.ReceiverServer.q(it) }}]}""")
             is ActivationResult.Rejected -> ApiReply(422, """{"error":${castbridge.core.tv.ReceiverServer.q(r.message)}}""")
         }
     }

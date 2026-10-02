@@ -89,5 +89,13 @@ class InstallKeyStore(private val dir: File, private val wrapper: SecretWrapper,
         return Parsed(pub, blob)
     }
 
-    companion object { const val FILE = "install.key"; private const val HEADER = "castbridge-install-key-v1" }
+    companion object {
+        const val FILE = "install.key"; private const val HEADER = "castbridge-install-key-v1"
+
+        /** The `wrap=` label of the stored key (main file, then `.bak`), or null if there is no readable key file: [InstallKeyPolicy.mayUseWrapper] uses it so a key made under the Keystore is never replaced by a plain one. */
+        fun storedWrap(dir: File): String? = listOf(File(dir, FILE), SafeFile.bak(File(dir, FILE))).firstNotNullOfOrNull { f ->
+            runCatching { f.readText() }.getOrNull()?.replace("\r", "")?.lines()?.map { it.trim() }
+                ?.takeIf { it.firstOrNull() == HEADER }?.firstNotNullOfOrNull { l -> l.takeIf { it.startsWith("wrap=") }?.substring(5)?.takeIf { it.isNotEmpty() } }
+        }
+    }
 }
