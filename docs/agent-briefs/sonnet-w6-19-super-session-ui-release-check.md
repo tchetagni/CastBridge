@@ -41,3 +41,9 @@ Ne pas lier la session à `SUPER_UNLIMITED` ; ne pas donner accès aux rapports 
 
 ## Rapport
 `STATUT`, captures, nom du composable pour w6-16, texte de la procédure de perte pour w6-20.
+
+## Points reportés par l'audit Opus de w6-04 (2026-10-02) — à traiter dans ce cahier
+1. Contrat de scellement : la session peut se fermer toute seule dans `active`, `activeState`, `remainingMs` et `decode`. Après TOUT appel, si `encode()` a changé, resceller ; si elle renvoie `""`, effacer le fichier. Sinon chaque démarrage relit le blob et ajoute un nouveau « super.close » à l'audit.
+2. Écrire `clock.txt` (TvClock) au démarrage et à chaque scellement du blob de session : sinon une boucle de redémarrages avec l'heure murale reculée empêche la session de se terminer (uptime et lastSeen n'avancent pas avant la sauvegarde de 5 min).
+3. (mineurs, Haiku possible) rendre `SuperSession.state` privé/internal ; analyse canonique `\d+` des champs du blob ; utiliser la raison « horloge » aussi dans `active` quand l'uptime recule.
+4. Un ancien blob scellé (failures=0) peut être restauré : nécessite l'accès root au stockage privé, hors cœur ; envisager un compteur monotone côté Keystore.
