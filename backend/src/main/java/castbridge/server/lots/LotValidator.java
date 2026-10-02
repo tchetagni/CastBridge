@@ -12,4 +12,10 @@ public interface LotValidator {
     String feature();
 
     List<String> validate(Path file, long size);
+
+    /**
+     * Same check with the identity the admin declared (scope, version), for the features whose lot file repeats it (Langues).
+     * The default ignores it, so the validators of Apprendre and Quiz are untouched.
+     */
+    default List<String> validate(Path file, long size, String scope, int version) { return validate(file, size); }
 }

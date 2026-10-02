@@ -43,7 +43,7 @@ import org.springframework.transaction.annotation.Transactional;
 public class LotService {
     private static final Logger log = LoggerFactory.getLogger(LotService.class);
 
-    public static final Set<String> FEATURES = Set.of("learn", "quiz");
+    public static final Set<String> FEATURES = Set.of("learn", "quiz", "langues");
     public static final Set<String> CHANNELS = Set.of("stable", "beta");
     /** A lot must fit in the TV's 10 Mo budget (castbridge.core.lots.LotBudget.TV_MAX_BYTES). */
     public static final long MAX_LOT_BYTES = 10L << 20;
@@ -61,6 +61,7 @@ public class LotService {
         this.props = props;
         this.signer = signer;
         for (String f : FEATURES) validators.put(f, new ZipLotValidator(f));
+        validators.put(LangLotValidator.FEATURE, new LangLotValidator());           // Langues: its own format (docs/LANGUES.md), only free text lots
         for (LotValidator v : custom) validators.put(v.feature(), v);     // a feature's own validator replaces the default
     }
 
@@ -78,7 +79,7 @@ public class LotService {
     @Transactional
     public Lot upload(NewLot f, InputStream data) {
         List<String> errors = new ArrayList<>();
-        if (!FEATURES.contains(f.feature())) errors.add("feature : « learn » ou « quiz » attendu");
+        if (!FEATURES.contains(f.feature())) errors.add("feature : « learn », « quiz » ou « langues » attendu");
         if (f.scope() == null || !SEGMENT.matcher(f.scope()).matches()) errors.add("scope : 1 à 32 caractères [a-z0-9-] (ex. cm2, 3e, tle-c, droit-l1)");
         if (f.version() <= 0) errors.add("version : entier positif attendu");
         String channel = f.channel() == null || f.channel().isBlank() ? "stable" : f.channel();
@@ -108,7 +109,7 @@ public class LotService {
             String sha256 = HexFormat.of().formatHex(sha.digest());
             if (f.expectedSha256() != null && !f.expectedSha256().equalsIgnoreCase(sha256))
                 throw ApiException.badRequest("Empreinte SHA-256 reçue " + sha256 + " ≠ attendue " + f.expectedSha256().toLowerCase() + " : envoi corrompu");
-            List<String> problems = validators.get(f.feature()).validate(tmp, size);
+            List<String> problems = validators.get(f.feature()).validate(tmp, size, f.scope(), f.version());
             if (!problems.isEmpty()) throw new ApiException(HttpStatus.BAD_REQUEST, "Contenu du lot refusé", problems);
 
             String fileName = "castbridge-lot-%s-%s-v%d.lot".formatted(f.feature(), f.scope(), f.version());
@@ -187,7 +188,7 @@ public class LotService {
      * deviceId = full rollouts only).
      */
     public LotCatalog catalog(String feature, String channel, String deviceId) {
-        if (feature != null && !feature.isBlank() && !FEATURES.contains(feature)) throw ApiException.badRequest("feature : « learn » ou « quiz » attendu");
+        if (feature != null && !feature.isBlank() && !FEATURES.contains(feature)) throw ApiException.badRequest("feature : « learn », « quiz » ou « langues » attendu");
         String f = feature == null || feature.isBlank() ? null : feature;
         if (channel == null || channel.isBlank()) channel = "stable";
         if (!CHANNELS.contains(channel)) throw ApiException.badRequest("canal : « stable » ou « beta » attendu");
