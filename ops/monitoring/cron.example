@@ -1,0 +1,17 @@
+# Exemples de crontab pour la supervision et les sauvegardes hors site.
+# Ajouter les lignes ci-dessous à votre crontab (crontab -e) après avoir configuré
+# les scripts et rclone.
+
+# Sonde interne toutes les 10 min
+*/10 * * * * cd /opt/castbridge && source ops/monitoring/healthchecks.env && bash ops/monitoring/host-check.sh --apply 2>&1 | logger -t castbridge-host-check
+
+# Sauvegarde existante à 3 h 15
+15 3 * * * /opt/castbridge/backend/backup.sh >> /var/log/castbridge-backup.log 2>&1
+
+# Copie hors site à 3 h 45 (30 min après la sauvegarde)
+45 3 * * * cd /opt/castbridge && source ops/monitoring/healthchecks.env && bash ops/monitoring/offsite-backup.sh --apply >> /var/log/castbridge-offsite-backup.log 2>&1
+
+# Rotation hebdomadaire des journaux Docker (lundi à minuit)
+0 0 * * 1 docker compose -p castbridge logs --since 24h > /var/log/castbridge/api-$(date +\%F).log 2>&1 || true
+
+# Note : adapter /opt/castbridge à votre chemin réel ; source ops/monitoring/healthchecks.env lit HC_URL et autres variables
