@@ -1,5 +1,7 @@
 package castbridge.desktop
 
+import castbridge.core.lots.BoxResult
+import castbridge.core.lots.InstallKey
 import castbridge.core.lots.RentalKeys
 import castbridge.core.lots.RentalLines
 import castbridge.core.lots.RentalVectors
@@ -20,16 +22,20 @@ import kotlin.test.assertTrue
 
 class RentalCliTest {
     private val now = 1_800_000_000_000L
+    private var base = now
     private var tick = 0L
     private val pass = "un-code-de-test-long"
     private class Run(val code: Int, val out: String, val err: String)
     private val dir = Files.createTempDirectory("activation-desktop-rental").toFile().also { it.deleteOnExit() }
     private val fp = DeviceIdentity.fingerprints(RawFactors("FLASHSERIAL-A1", "cid-a1", "AA:BB:CC:00:11:01", "10:20:30:40:50:01", "/sys/devices/platform/soc/ffe03000.sd/mmc_host/mmc1/net/wlan0", "SYSA0001", "11:22:33:44:55:01"))
-    private val request = File(dir, "demande.txt").also { it.writeText(OwnerFrames.deviceInfo(DeviceCode.of(fp), fp)) }
+    private val install = InstallKey.fromSeed(ByteArray(32) { (it + 1).toByte() })      // test seed, never a real key
+    private val request = File(dir, "demande.txt").also { it.writeText(OwnerFrames.deviceInfo(DeviceCode.of(fp), fp, install.pub)) }
+    private val oldTv = File(dir, "demande-v1.txt").also { it.writeText(OwnerFrames.deviceInfo(DeviceCode.of(fp), fp)) }
+    private fun keyOf(box: String, period: Long, who: InstallKey? = install) = (RentalKeys.openBox(box, fp, "loc-cm2", period, who) as? BoxResult.Key)?.bytes
 
     private fun cli(vararg args: String): Run {
         val o = ByteArrayOutputStream(); val e = ByteArrayOutputStream()
-        val env = Env(PrintStream(o, true, "UTF-8"), PrintStream(e, true, "UTF-8"), getenv = { if (it == "CODE_TEST") pass else null }, clock = { now + 1000 * (tick++) }, kdf = ScryptKdf(16, 1, 1))
+        val env = Env(PrintStream(o, true, "UTF-8"), PrintStream(e, true, "UTF-8"), getenv = { if (it == "CODE_TEST") pass else null }, clock = { base + 1000 * (tick++) }, kdf = ScryptKdf(16, 1, 1))
         val code = Cli(env).run(listOf(args[0]) + args.drop(1) + listOf("--dossier", File(dir, "home").path, "--code-env", "CODE_TEST"))
         return Run(code, o.toString("UTF-8"), e.toString("UTF-8"))
     }
@@ -43,7 +49,8 @@ class RentalCliTest {
         val a = Activation.decode(File(dir, "usb/activation").readText().trim())!!
         val l = a.rights.filterIsInstance<Right.Rental>().single()
         assertEquals(30, l.durationDays); assertEquals(600, l.maxUsageMinutes); assertEquals(listOf("classe-cm2", "quiz-cm2"), l.bundleIds); assertEquals(l.startsAt, l.period)
-        assertNotNull(RentalKeys.openBox(l.box, fp, l.productId, l.period))
+        assertTrue(l.box.startsWith("v2:"), "the box is v2 for a TV that sent its installation key")
+        assertNotNull(keyOf(l.box, l.period)); assertEquals(null, keyOf(l.box, l.period, InstallKey.fromSeed(ByteArray(32) { 9 })), "another installation of the same TV cannot open it")
         val v = cli("verifier", File(dir, "usb/activation").path, "--appareil", request.path, "--maintenant", (l.startsAt + 1000).toString()); assertEquals(0, v.code, v.out + v.err)
         assertTrue(RentalLines.line(l).startsWith("rental|loc-cm2|classe-cm2,quiz-cm2|"))
     }
@@ -56,7 +63,7 @@ class RentalCliTest {
         assertEquals(0, r.code, r.err)
         val renewal = Activation.decode(File(dir, "b/activation").readText().trim())!!.rights.filterIsInstance<Right.Rental>().single()
         assertEquals(first.period, renewal.period); assertTrue(renewal.startsAt > first.startsAt)
-        assertEquals(RentalKeys.fingerprintOf(RentalKeys.openBox(first.box, fp, first.productId, first.period)!!), RentalKeys.fingerprintOf(RentalKeys.openBox(renewal.box, fp, renewal.productId, renewal.period)!!), "same key: delivered lots stay readable")
+        assertEquals(RentalKeys.fingerprintOf(keyOf(first.box, first.period)!!), RentalKeys.fingerprintOf(keyOf(renewal.box, renewal.period)!!), "same key: delivered lots stay readable")
     }
 
     @Test fun aFreeLotIsNeverRentedAndOutOfBoundsAreRefused() {
@@ -107,6 +114,37 @@ class RentalCliTest {
         val b = rent("c2", "--location-bouquet", "classe-cm2"); assertEquals(1, b.code); assertTrue(b.err.contains("catalogue"), b.err)
         assertTrue(!File(dir, "c1/activation").exists() && !File(dir, "c2/activation").exists())
         val ok = rent("c3", "--location", "x=classe-cm2:30", "--sans-controle-catalogue"); assertEquals(0, ok.code, ok.err); assertTrue(ok.out.contains("NON vérifiées"), ok.out)
+    }
+
+    private fun issueFor(req: File, name: String, vararg extra: String) = cli("emettre", "--appareil", req.path, "--production", "--licence", "lic-loc", "--location", "loc-cm2=classe-cm2:30", "--sans-controle-catalogue", "--sortie", File(dir, name).path, *extra)
+
+    @Test fun anOldTvWithoutInstallKeyIsRefusedForARentalUnlessV1IsForced() {
+        setup()
+        val r = issueFor(oldTv, "o1"); assertEquals(1, r.code); assertTrue(r.err.contains("clé d'installation") && r.err.contains("CastBridge-TV"), r.err)
+        assertTrue(!File(dir, "o1/activation").exists())
+        val tooLate = issueFor(oldTv, "o2", "--enveloppe-v1"); assertEquals(1, tooLate.code); assertTrue(tooLate.err.contains("Enveloppe v1 périmée"), tooLate.err)
+        base = RentalKeys.V1_BOX_SUNSET_MS - 10_000_000L
+        val ok = issueFor(oldTv, "o3", "--enveloppe-v1"); assertEquals(0, ok.code, ok.err)
+        val l = Activation.decode(File(dir, "o3/activation").readText().trim())!!.rights.filterIsInstance<Right.Rental>().single()
+        assertTrue(!l.box.startsWith("v2:")); assertTrue(RentalKeys.openBox(l.box, fp, l.productId, l.period, null, base) is BoxResult.Key)
+        val v2WithOption = issueFor(request, "o4", "--enveloppe-v1"); assertEquals(0, v2WithOption.code, v2WithOption.err)
+        assertTrue(Activation.decode(File(dir, "o4/activation").readText().trim())!!.rights.filterIsInstance<Right.Rental>().single().box.startsWith("v2:"), "a TV that has a key always gets v2")
+    }
+
+    @Test fun aTrialForAnOldTvNeedsV1Too() {
+        setup()
+        val r = cli("emettre", "--appareil", oldTv.path, "--sortie", File(dir, "t1").path); assertEquals(1, r.code); assertTrue(r.err.contains("clé d'installation"), r.err)
+        base = RentalKeys.V1_BOX_SUNSET_MS - 10_000_000L
+        assertEquals(0, cli("emettre", "--appareil", oldTv.path, "--enveloppe-v1", "--sortie", File(dir, "t2").path).code)
+    }
+
+    @Test fun theDeviceCommandReportsTheInstallKeyAndABadOneIsRefused() {
+        assertTrue(cli("appareil", request.path).out.contains("Clé d'installation : présente"))
+        assertTrue(cli("appareil", oldTv.path).out.contains("Clé d'installation : absente"))
+        val crlf = File(dir, "crlf.txt").also { it.writeText(request.readText().replace("\n", "\r\n\r\n")) }
+        assertTrue(cli("appareil", crlf.path).out.contains("Clé d'installation : présente"), "CRLF and blank lines are cleaned")
+        val odd = File(dir, "impair.txt").also { it.writeText(request.readText().trim().replace("install=x25519|", "install=x25519|a")) }
+        val r = cli("appareil", odd.path); assertEquals(1, r.code); assertTrue(r.err.contains("illisible"), r.err)
     }
 
     @Test fun commonRentalVectorsGiveTheSameBytes() {

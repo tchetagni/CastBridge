@@ -53,7 +53,7 @@ class Cli(private val env: Env) {
         fun get(k: String) = opts[k]?.last()
         fun all(k: String) = opts[k] ?: emptyList()
         fun need(k: String) = get(k) ?: throw UsageException("Option obligatoire : --$k")
-        companion object { val FLAGS = setOf("qr", "production", "essai", "sans-confirmation", "json", "super", "sans-lots-essai", "sans-controle-catalogue") }
+        companion object { val FLAGS = setOf("qr", "production", "essai", "sans-confirmation", "json", "super", "sans-lots-essai", "sans-controle-catalogue", "enveloppe-v1") }
     }
 
     private fun home(a: Args) = File(a.get("dossier") ?: env.getenv("CASTBRIDGE_ACTIVATION_HOME") ?: (System.getProperty("user.home") + "/.castbridge-activation"))
@@ -219,6 +219,7 @@ class Cli(private val env: Env) {
     private fun device(a: Args): Int {
         val d = DeviceRequest.parse(readSource(a.positional.firstOrNull() ?: "-"))
         env.out.println("Code d'appareil : ${d.code}"); env.out.println("k = ${d.k} sur n = ${d.factors.n}")
+        env.out.println("Clé d'installation : ${if (d.installPub != null) "présente" else "absente (CastBridge-TV ancienne : location refusée sans --enveloppe-v1)"}")
         d.factors.byKind.forEach { (kind, fp) -> env.out.println("  ${kind.name.padEnd(14)} $fp${if (kind.strong) "  (soudé)" else ""}") }
         if (castbridge.core.owner.DeviceIdentity.isWeak(d.factors)) env.out.println("Identité FAIBLE : aucun facteur soudé ; l'activation reste possible, signalée sur la TV.")
         return 0
@@ -259,9 +260,11 @@ class Cli(private val env: Env) {
             castbridge.core.lots.RentalDurations.specsFor(castbridge.core.lots.BundleCatalog.parse(readCatalogue(catPath, a)), bouquets).map { it.copy(period = period) }
         }
         val check = if (rentals.isEmpty()) null else rentalCheck(a)
+        val boxV1 = a.flags.contains("enveloppe-v1")
+        if (boxV1 && !castbridge.core.lots.RentalKeys.isV1Accepted(now)) throw IssueException("Enveloppe v1 périmée : mettez CastBridge-TV à jour (la TV doit fournir sa clé d'installation)")
         val trialLots = kind == ActivationKind.TRIAL && !a.flags.contains("sans-lots-essai")      // every trial key carries its one-time 12 h window of rented lots
         val spec = IssueSpec(kind, if (a.get("sujet") == "phone") Subject.PHONE else Subject.TV, rights(a, now) + permanent(a, kind, now), a.get("licence") ?: if (kind == ActivationKind.PRODUCTION) "" else Activation.TRIAL_LICENSE,      // production without --licence: a new licence is generated
-            rentals = rentals, rentalMaster = if (rentals.isEmpty() && !trialLots) null else d.rentalMaster(), rentalCheck = check, usageDays = usageDays(a, kind), trialLots = trialLots)
+            rentals = rentals, rentalMaster = if (rentals.isEmpty() && !trialLots) null else d.rentalMaster(), rentalCheck = check, usageDays = usageDays(a, kind), trialLots = trialLots, boxV1 = boxV1)
         val r = d.issue(device, spec)
         val dir = File(a.get("sortie") ?: "."); dir.mkdirs()
         val fileOut = File(dir, r.issued.fileName); fileOut.writeText(r.issued.fileContent)
@@ -394,7 +397,7 @@ Commandes (français ; alias anglais : keygen key trust device license issue com
   cle-creer          crée la clé du bureau (code de déverrouillage ≥ 10 caractères ; scrypt, 32 Mio par essai)
   cle [--json]       affiche le kid, la clé publique et les portées (JAMAIS la clé privée)
   faire-confiance F  ajoute la clé publique d'un autre outil (téléphone propriétaire, serveur) à l'anneau
-  appareil [F|-]     lit la « demande d'appareil » donnée par la TV (code=…, k=…, factor=TYPE|empreinte)
+  appareil [F|-]     lit la « demande d'appareil » donnée par la TV (code=…, k=…, factor=TYPE|empreinte, install=x25519|… pour une CastBridge-TV récente)
   licence ID --postes N [--transferts N]    crée une licence (un achat)
   emettre --appareil F [--production] [--usage-jours N|illimitee] [--licence ID] [--super] [--sujet tv|phone]   (clé à installer dans les 48 h ; --super : SUPER_UNLIMITED, lit et débloque tout, locations permanentes, clé super administrateur seulement)
           Production : sans --licence, une licence « lic-… » est GÉNÉRÉE (1 poste) et affichée ; la durée (--usage-jours : 30, 60, 62, 90, 180, 300, 365, autre 1 à 3660, ou illimitee par défaut) est le seul réglage ; aucun droit de contenu n'est nécessaire.
@@ -402,6 +405,7 @@ Commandes (français ; alias anglais : keygen key trust device license issue com
           [--achat produit=b1,b2] [--abonnement produit=b1:jours[:tolérance[:auto]]] [--tout-ouvert produit:jours] [--droit ligne]
           [--location produit=b1,b2:JOURS[:MINUTES_D_USAGE_MAX[:TOLERANCE_JOURS[:SIMULTANEES]]]]   (avancé ; répétable ; 1 à 366 jours ; production seulement ; avec --catalogue la durée doit être EXACTEMENT celle du serveur)
           [--location-bouquet b1,b2]   une location par bouquet (produit loc-<bouquet>), durée EXACTE du catalogue (rentalDays) ; exige --catalogue ; sans durée à saisir
+          [--enveloppe-v1]  TV ancienne (sans « install= » dans sa demande) : emballe les clés de location en enveloppe v1, faible ; refusé après le 1er janvier 2027 ; sans cette option une location pour une TV sans clé d'installation est refusée
           [--sans-controle-catalogue]  autorise --location sans catalogue (déconseillé : la durée n'est pas vérifiée ; --location sans --catalogue est sinon refusé)
           [--periode MS]  prolonge la location commencée à cet instant (même clé, pas de doublon) au lieu d'en commencer une nouvelle
           [--catalogue serveur|TRIAL-MANIFEST.json --lots-libres FICHIER]   durée exacte du serveur (« serveur » = la copie de catalogue-serveur) ; refuse la location d'un lot libre (CC BY-SA)

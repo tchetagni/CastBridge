@@ -304,6 +304,86 @@ class RentalRenewalTest {
     }
 }
 
+/** Section « enveloppe v2 » : the box opens with the installation key only; the ledger says why when it does not. */
+class RentalBoxV2Test {
+    private val ik = InstallKey.fromSeed(ByteArray(32) { (it + 1).toByte() })
+    private val otherIk = InstallKey.fromSeed(ByteArray(32) { (it + 101).toByte() })
+    private val eph = ByteArray(32) { (it * 5 + 3).toByte() }
+
+    private fun v2(rig: RentalRig, installPub: ByteArray = ik.pub, product: String = "loc-cm2", start: Long = T0) =
+        Right.Rental(product, listOf("classe-cm2"), start, start, 30, 0, 0, 0, RentalKeys.makeBoxV2(installPub, rig.key(product, start), product, start, eph))
+
+    @Test fun v2BoxOpensWithTheInstallationKeyAndNotWithTheFingerprints() {
+        val rig = RentalRig(); val box = v2(rig).box; val key = rig.key()
+        assertTrue(box.startsWith("v2:") && ';' !in box)
+        assertContentEquals(key, assertIs<BoxResult.Key>(RentalKeys.openBox(box, rig.fp, "loc-cm2", T0, ik)).bytes)
+        assertEquals(BoxResult.NeedsInstallKey, RentalKeys.openBox(box, rig.fp, "loc-cm2", T0, null), "the public fingerprints alone open nothing")
+        assertEquals(BoxResult.OtherInstall, RentalKeys.openBox(box, rig.fp, "loc-cm2", T0, otherIk))
+        assertEquals(BoxResult.OtherInstall, RentalKeys.openBox(box, rig.fp, "loc-other", T0, ik), "bound to its product")
+        assertEquals(BoxResult.OtherInstall, RentalKeys.openBox(box, otherFp(), "loc-cm2", T0 + 1, ik), "bound to its period")
+        assertEquals(box, RentalKeys.makeBoxV2(ik.pub, key, "loc-cm2", T0, eph), "deterministic for a given ephemeral seed")
+        assertNotEquals(box, RentalKeys.makeBoxV2(ik.pub, key, "loc-cm2", T0, ByteArray(32) { 9 }))
+    }
+
+    @Test fun malformedAndMixedBoxesAreUnreadableAndASmallOrderKeyIsRefused() {
+        val rig = RentalRig(); val box = v2(rig).box; val v1 = RentalKeys.makeBox(rig.fp, DeviceIdentity.kFor(rig.fp.n), rig.key(), "loc-cm2", T0)
+        assertEquals(BoxResult.Unreadable, RentalKeys.openBox("$box;$v1", rig.fp, "loc-cm2", T0, ik), "a box is v1 or v2, never both")
+        assertEquals(BoxResult.Unreadable, RentalKeys.openBox("$v1;$box", rig.fp, "loc-cm2", T0, ik), "v1 part first, v2 part after: refused too")
+        assertEquals(BoxResult.Unreadable, RentalKeys.openBox("$v1;$box", rig.fp, "loc-cm2", T0, ik, 0L), "same with the sunset check")
+        @Suppress("DEPRECATION") assertNull(RentalKeys.openBox("$v1;$box", rig.fp, "loc-cm2", T0))
+        assertEquals(BoxResult.Unreadable, RentalKeys.openBox("v2:abc", rig.fp, "loc-cm2", T0, ik))
+        assertEquals(BoxResult.Unreadable, RentalKeys.openBox("v2:" + box.substringAfter("v2:").substringBefore(':').dropLast(3) + ":" + box.substringAfterLast(':'), rig.fp, "loc-cm2", T0, ik))
+        assertFailsWith<IllegalArgumentException> { RentalKeys.makeBoxV2(ByteArray(32), rig.key(), "loc-cm2", T0, eph) }
+        assertFailsWith<IllegalArgumentException> { RentalKeys.makeBoxV2(ik.pub, rig.key(), "loc-cm2", T0, ByteArray(31)) }
+    }
+
+    @Test fun v1BoxIsReadUntilTheSunsetWhenTheCallerGivesTheDate() {
+        val rig = RentalRig(); val v1 = RentalKeys.makeBox(rig.fp, DeviceIdentity.kFor(rig.fp.n), rig.key(), "loc-cm2", T0)
+        val last = RentalKeys.V1_BOX_SUNSET_MS
+        assertIs<BoxResult.Key>(RentalKeys.openBox(v1, rig.fp, "loc-cm2", T0, ik, last - 1))
+        assertEquals(BoxResult.V1Expired, RentalKeys.openBox(v1, rig.fp, "loc-cm2", T0, ik, last))
+        assertIs<BoxResult.Key>(RentalKeys.openBox(v1, rig.fp, "loc-cm2", T0, null, null), "no date: not checked")
+        assertTrue(RentalKeys.isV1Accepted(last - 1)); assertFalse(RentalKeys.isV1Accepted(last))
+    }
+
+    @Test fun ledgerInstallsV2OnlyOnTheRightInstallationAndExplainsTheOthers() {
+        val rig = RentalRig(); val a = rig.issue(v2(rig)); rig.installed += a
+        val k = RentalEngine.contractKey("loc-cm2", T0)
+        assertEquals("clé d'installation absente", rig.ledger.install(a, rig.installed.toList(), rig.fp, rig.vault).getValue(k))
+        assertEquals("clé enveloppée pour une autre installation de cette TV : demandez une réémission", rig.ledger.install(a, rig.installed.toList(), rig.fp, rig.vault, otherIk).getValue(k))
+        assertFalse(rig.vault.hasKey(k))
+        assertEquals("clé installée", rig.ledger.install(a, rig.installed.toList(), rig.fp, rig.vault, ik).getValue(k))
+        assertTrue(rig.vault.hasKey(k))
+    }
+
+    @Test fun ledgerRefusesAV1BoxPastTheSunsetOnlyForACallerWithAnInstallationKey() {
+        val rig = RentalRig(); val a = rig.issue(rig.rental()); rig.installed += a      // issued at T0, after the v1 sunset
+        val k = RentalEngine.contractKey("loc-cm2", T0)
+        assertEquals("enveloppe v1 périmée : refaire la clé avec un outil à jour", rig.ledger.install(a, rig.installed.toList(), rig.fp, rig.vault, ik).getValue(k))
+        assertFalse(rig.vault.hasKey(k))
+        assertEquals("clé installée", rig.ledger.install(a, rig.installed.toList(), rig.fp, rig.vault).getValue(k), "a caller without installation key keeps reading v1")
+    }
+
+    @Test fun issuingBoxesV2WhenTheRequestCarriesTheKeyAndRefusesOtherwise() {
+        val rig = RentalRig(); val spec = RentalSpec("loc-cm2", listOf("classe-cm2"), 30)
+        val r2 = RentalIssuing.right(spec, T0, rig.license, rig.seat(), rig.fp, rig.master, ik.pub, eph)
+        assertTrue(r2.box.startsWith("v2:")); assertContentEquals(rig.key(), assertIs<BoxResult.Key>(RentalKeys.openBox(r2.box, rig.fp, "loc-cm2", T0, ik)).bytes)
+        assertEquals(r2.box, RentalIssuing.right(spec, T0, rig.license, rig.seat(), rig.fp, rig.master, ik.pub, eph).box)
+        assertFailsWith<IssueException> { RentalIssuing.right(spec, T0, rig.license, rig.seat(), rig.fp, rig.master) }
+        assertFailsWith<IssueException> { RentalIssuing.right(spec, T0, rig.license, rig.seat(), rig.fp, rig.master, allowV1 = true) }       // T0 is past the sunset
+        val before = RentalKeys.V1_BOX_SUNSET_MS - 1
+        assertFalse(RentalIssuing.right(spec, before, rig.license, rig.seat(), rig.fp, rig.master, allowV1 = true).box.startsWith("v2:"))
+        assertFailsWith<IssueException> { RentalIssuing.right(spec, T0, rig.license, rig.seat(), rig.fp, rig.master, ByteArray(32), eph) }           // small order
+    }
+
+    @Test fun reissueForAReinstalledTvKeepsTheRentalKey() {
+        val rig = RentalRig()
+        val first = RentalKeys.makeBoxV2(ik.pub, rig.key(), "loc-cm2", T0, eph); val second = RentalKeys.makeBoxV2(otherIk.pub, rig.key(), "loc-cm2", T0, ByteArray(32) { 7 })
+        val k1 = assertIs<BoxResult.Key>(RentalKeys.openBox(first, rig.fp, "loc-cm2", T0, ik)).bytes; val k2 = assertIs<BoxResult.Key>(RentalKeys.openBox(second, rig.fp, "loc-cm2", T0, otherIk)).bytes
+        assertEquals(RentalKeys.fingerprintOf(k1), RentalKeys.fingerprintOf(k2)); assertNotEquals(first, second)
+    }
+}
+
 class RentalKeysTest {
     @Test fun boxOpensOnTheRightDeviceAndToleratesAReplacedModuleButNotAnotherTv() {
         val rig = RentalRig(); val key = rig.key(); val box = RentalKeys.makeBox(rig.fp, DeviceIdentity.kFor(rig.fp.n), key, "loc-cm2", T0)
