@@ -145,6 +145,16 @@ class OfflineScenariosTest {
         assertContains(ok.detail, "données"); assertContains(LotStatusText.tvBudget(tvA, q, clock), "libres")
     }
 
+    @Test fun deliveringOneLotSendsOnlyThatLotAndLeavesTheOthersQueued() {
+        val tv = newTv(); val q = queue(); val d = delivery(q)
+        val a = download("learn", "cm2", 1, 300); val b = download("quiz", "cm2", 1, 200)
+        d.enqueue(tvA)
+        val link = DirectTransport(tv); val r = d.deliver(tvA, link, only = b.id)
+        assertEquals(listOf("quiz:cm2@1"), link.sends, "only the asked lot travels")
+        assertEquals(listOf(b.id), r.sent); assertEquals(DeliveryState.PENDING, q.get(tvA, a.id)!!.state, "the other one stays queued for the global button")
+        val r2 = d.deliver(tvA, link); assertEquals(listOf(a.id), r2.sent)
+    }
+
     @Test fun linkDropAtEveryByteOffset_resumesWithoutResendingAnything() {
         val size = 120
         for (cut in 0..size) {

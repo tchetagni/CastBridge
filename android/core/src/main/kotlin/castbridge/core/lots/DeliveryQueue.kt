@@ -228,7 +228,7 @@ class LotDelivery(
         return plan
     }
 
-    fun deliver(tv: String, transport: LotTransport, cancelled: () -> Boolean = { false }): Report {
+    fun deliver(tv: String, transport: LotTransport, cancelled: () -> Boolean = { false }, only: LotId? = null): Report {
         val live = transport.manifest()
         if (live == null && transport.canReadManifest) {
             val plan = enqueue(tv)                                       // not in range: the delivery waits, nothing is lost
@@ -241,7 +241,7 @@ class LotDelivery(
         if (fresh) transport.setPriority(plan.wanted.map { it.id })
         val sent = ArrayList<LotId>(); val refused = ArrayList<Pair<LotId, String>>(); val confirmed = ArrayList<LotId>()
         while (!cancelled()) {
-            val d = queue.next(tv) ?: break
+            val d = (if (only == null) queue.next(tv) else queue.get(tv, only)?.takeIf { it.active }) ?: break   // only = « Envoyer » on one lot: the others stay queued
             val id = d.lot.id
             val file = store.file(id, d.lot.version)
             val proof = store.proof(id)
