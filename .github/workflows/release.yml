@@ -1,38 +1,7 @@
-# Builds the signed release APKs and publishes them to the CastBridge server (automatic updates of the apps).
-#
-# Secrets (Settings > Secrets and variables > Actions, ideally in a protected "release" environment):
-#   KEYSTORE_BASE64       base64 of the release keystore (base64 -w0 release.jks)
-#   KEYSTORE_PASSWORD     keystore password
-#   KEY_ALIAS             key alias
-#   KEY_PASSWORD          key password
-#   CASTBRIDGE_ADMIN_TOKEN  admin bearer token of the server (CASTBRIDGE_ADMIN_TOKEN of backend/.env)
-# Variable:
-#   CASTBRIDGE_URL        public base URL of the server, e.g. https://castbridge.example.org (empty = build only)
-#
-# A tag "v*" publishes on the stable channel (notes = the tag message); "Run workflow" lets you choose the channel,
-# the rollout percentage, the notes and whether the update is mandatory. The server refuses (409) a versionCode
-# already published for the same app/ABI/channel: bump versionCode in android/*/build.gradle.kts first.
-name: Release APKs
-on:
-  push:
-    tags: ["v*"]
-  workflow_dispatch:
-    inputs:
-      channel:
-        description: "Canal"
-        type: choice
-        options: [beta, stable]
-        default: beta
-      rollout:
-        description: "Déploiement progressif (%)"
-        default: "100"
-      notes:
-        description: "Notes de version (français)"
-        default: ""
-      mandatory:
-        description: "Mise à jour obligatoire"
-        type: boolean
-        default: false
+# Builds release APKs (unsigned, build only).
+# La signature et la publication se font sur le Mac du propriétaire (docs/RELEASES.md).
+name: Release APKs (build only)
+on: workflow_dispatch
 
 permissions:
   contents: read
@@ -44,7 +13,6 @@ concurrency:
 jobs:
   release:
     runs-on: ubuntu-24.04   # ships the Android SDK (ANDROID_HOME)
-    environment: release
     steps:
       - uses: actions/checkout@v5
         with: { fetch-depth: 0 }
@@ -53,65 +21,17 @@ jobs:
       - uses: gradle/actions/setup-gradle@v4
         with: { gradle-version: 8.14.3 }
 
-      - name: Tests and unsigned release APKs
-        run: cd android && gradle --stacktrace :core:test :receiver:assembleRelease :sender:assembleRelease
+      - name: Build unsigned release APKs
+        run: cd android && gradle --stacktrace :core:test :receiver:assembleRelease :sender:assembleRelease -PrequireActivation=true
 
-      - name: Sign (zipalign + apksigner)
-        env:
-          KEYSTORE_BASE64: ${{ secrets.KEYSTORE_BASE64 }}
-          KEYSTORE_PASSWORD: ${{ secrets.KEYSTORE_PASSWORD }}
-          KEY_ALIAS: ${{ secrets.KEY_ALIAS }}
-          KEY_PASSWORD: ${{ secrets.KEY_PASSWORD }}
+      - name: Copy APKs to output
         run: |
-          set -euo pipefail
-          [ -n "$KEYSTORE_BASE64" ] || { echo "::error::secret KEYSTORE_BASE64 manquant"; exit 1; }
-          ks="$RUNNER_TEMP/release.jks"
-          printf '%s' "$KEYSTORE_BASE64" | base64 -d > "$ks"
-          bt="$(ls -d "$ANDROID_HOME"/build-tools/* | sort -V | tail -1)"
           mkdir -p out
-          for f in android/receiver/build/outputs/apk/release/*.apk android/sender/build/outputs/apk/release/*.apk; do
-            name="$(basename "$f" .apk)"; name="${name%-unsigned}"
-            "$bt/zipalign" -f -p 4 "$f" "$RUNNER_TEMP/$name-aligned.apk"
-            "$bt/apksigner" sign --ks "$ks" --ks-pass env:KEYSTORE_PASSWORD --ks-key-alias "$KEY_ALIAS" \
-              --key-pass env:KEY_PASSWORD --out "out/$name.apk" "$RUNNER_TEMP/$name-aligned.apk"
-            "$bt/apksigner" verify "out/$name.apk"
-          done
-          rm -f "$ks"
+          cp android/receiver/build/outputs/apk/release/*.apk out/ 2>/dev/null || true
+          cp android/sender/build/outputs/apk/release/*.apk out/ 2>/dev/null || true
           ls -l out
 
       - uses: actions/upload-artifact@v4
         with:
-          name: castbridge-release-apks
+          name: castbridge-release-apks-NON-VERROUILLEE-NE-PAS-DISTRIBUER
           path: out/*.apk
-
-      - name: Publish to the CastBridge server
-        env:
-          CASTBRIDGE_URL: ${{ vars.CASTBRIDGE_URL }}
-          CASTBRIDGE_ADMIN_TOKEN: ${{ secrets.CASTBRIDGE_ADMIN_TOKEN }}
-          CHANNEL: ${{ github.event_name == 'workflow_dispatch' && inputs.channel || 'stable' }}
-          ROLLOUT: ${{ github.event_name == 'workflow_dispatch' && inputs.rollout || '100' }}
-          MANDATORY: ${{ github.event_name == 'workflow_dispatch' && inputs.mandatory || false }}
-          NOTES_INPUT: ${{ inputs.notes }}
-        run: |
-          set -euo pipefail
-          if [ -z "$CASTBRIDGE_URL" ]; then echo "::warning::variable CASTBRIDGE_URL absente : APK construits, rien de publié"; exit 0; fi
-          [ -n "$CASTBRIDGE_ADMIN_TOKEN" ] || { echo "::error::secret CASTBRIDGE_ADMIN_TOKEN manquant"; exit 1; }
-          notes="$NOTES_INPUT"
-          if [ "${GITHUB_REF_TYPE}" = "tag" ]; then notes="$(git tag -l --format='%(contents)' "$GITHUB_REF_NAME")"; fi
-          [ -n "$notes" ] || notes="Nouvelle version"
-          aapt2="$(ls -d "$ANDROID_HOME"/build-tools/* | sort -V | tail -1)/aapt2"
-          for apk in out/*.apk; do
-            base="$(basename "$apk" .apk)"            # receiver-armeabi-v7a-release, sender-release…
-            case "$base" in receiver*) app=tv ;; sender*) app=phone ;; *) echo "ignoré : $base"; continue ;; esac
-            abi=universal
-            for a in armeabi-v7a arm64-v8a x86_64 x86; do case "$base" in *-"$a"-*) abi="$a" ;; esac; done
-            badging="$("$aapt2" dump badging "$apk" | head -1)"
-            vc="$(printf '%s' "$badging" | sed -n "s/.*versionCode='\([0-9]*\)'.*/\1/p")"
-            vn="$(printf '%s' "$badging" | sed -n "s/.*versionName='\([^']*\)'.*/\1/p")"
-            echo "publication : $app $abi $vn ($vc) canal $CHANNEL, $ROLLOUT %"
-            curl --fail-with-body -sS -H "Authorization: Bearer $CASTBRIDGE_ADMIN_TOKEN" \
-              -F app="$app" -F abi="$abi" -F versionCode="$vc" -F versionName="$vn" -F channel="$CHANNEL" \
-              -F rollout="$ROLLOUT" -F mandatory="$MANDATORY" -F notes="$notes" -F file=@"$apk" \
-              "${CASTBRIDGE_URL%/}/api/v1/admin/releases"
-            echo
-          done

@@ -13,3 +13,20 @@ backend/secrets/
 backend/geoip/
 backend/backups/
 .core-harness/
+# Signing keys and secrets
+*.jks
+*.keystore
+*.p12
+*.pem
+*.key
+release.pass*
+.env
+secrets/
+# Build artifacts (exclude test resources)
+android/*/build/outputs/**/*.apk
+android/*/build/intermediates/**/*.apk
+android/*/build/**/*.ab
+# Note: test artifacts in backend/src/test/resources/ are intentionally tracked
+
+# Médias lourds (audio des langues) : jamais dans le dépôt de code, ils vont dans castbridge-content (règle docs/RELEASES.md, tools/tests)
+content/langues-media/

@@ -1,0 +1,65 @@
+name: Tools (Python, vectors, content)
+on:
+  push:
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ${{ github.ref }}
+  cancel-in-progress: true
+
+timeout-minutes: 20
+
+jobs:
+  python-tools:
+    runs-on: ubuntu-24.04
+    strategy:
+      fail-fast: false
+    steps:
+      - uses: actions/checkout@v5
+      - uses: actions/setup-python@v5
+        with: { python-version: "3.12" }
+      - run: sudo apt-get install -y ffmpeg
+      - run: python3 -m unittest discover -s tools/tests
+      - run: python3 -m unittest discover -s tools/trial-edition
+      - run: python3 -m unittest discover tools/anim
+      - run: cd tools/content-validation && python3 -m unittest -q test_cbvalidate
+      - run: cd tools/media-pipeline/tests && python3 -m unittest test_pipeline
+
+  quiz-bank:
+    runs-on: ubuntu-24.04
+    strategy:
+      fail-fast: false
+    steps:
+      - uses: actions/checkout@v5
+      - uses: actions/setup-python@v5
+        with: { python-version: "3.12" }
+      - run: python3 -m unittest discover -s tools/quiz-bank
+      - run: python3 tools/quiz-bank/quizbank.py check
+
+  vectors:
+    runs-on: ubuntu-24.04
+    strategy:
+      fail-fast: false
+    steps:
+      - uses: actions/checkout@v5
+      - uses: actions/setup-python@v5
+        with: { python-version: "3.12" }
+      - run: pip install -r tools/requirements-dev.txt
+      - run: python3 tools/activation/verify_vectors.py
+
+  content-checks:
+    runs-on: ubuntu-24.04
+    strategy:
+      fail-fast: false
+    steps:
+      - uses: actions/checkout@v5
+      - uses: actions/setup-python@v5
+        with: { python-version: "3.12" }
+      - run: python3 tools/content-budget/content_budget.py --quiet
+      - run: python3 tools/content-budget/langues_budget.py
+      - run: python3 tools/trial-edition/trial_edition.py check --only learn,quiz
+        continue-on-error: true

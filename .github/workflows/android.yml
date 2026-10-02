@@ -1,5 +1,8 @@
 name: Build APK
 on: [push, workflow_dispatch]
+
+timeout-minutes: 30
+
 jobs:
   apk:
     runs-on: ubuntu-24.04   # ships the Android SDK (ANDROID_HOME)
@@ -9,14 +12,14 @@ jobs:
         with: { distribution: temurin, java-version: 17 }
       - uses: gradle/actions/setup-gradle@v4
         with: { gradle-version: 8.14.3 }
-      - run: cd android && gradle --stacktrace :core:test assembleDebug
+      - run: cd android && gradle --stacktrace :core:test :sshd:test :core:checkStarterBudget assembleDebug
       - uses: actions/upload-artifact@v4
         if: always()
         with:
           name: castbridge-apks
           path: android/*/build/outputs/apk/debug/*.apk
       - uses: actions/upload-artifact@v4
-        if: failure()
+        if: always()
         with:
           name: test-reports
           path: android/core/build/reports/tests/
