@@ -311,7 +311,9 @@ class InFlightTest {
         assertFailsWith<TvClient.PartOther> { tvDirect().upload("p2.mkv", 4_000, 12_000, ByteArrayInputStream(data, 4_000, 8_000)) {} }
         assertContentEquals(before, File(dir, "p2.mkv.part").readBytes(), "nothing appended to a part of another content")
         assertEquals("PART_OTHER", tvDirect().part("p2.mkv", 12_000).code)
-        // the resumable upload drops that partial copy and sends the whole file, never a chimera
+        // the resumable upload drops that partial copy and sends the whole file, never a chimera (fix w15-05: only once that partial copy is idle, the TV
+        // refuses /api/reset on a part written less than a minute ago)
+        File(dir, "p2.mkv.part").setLastModified(System.currentTimeMillis() - 10 * 60_000)
         val states = ArrayList<ResumableUpload.State>()
         val r = ResumableUpload("p2.mkv", data.size.toLong(), { "http://127.0.0.1:$port" }, { off -> ByteArrayInputStream(data, off.toInt(), data.size - off.toInt()) }, sleep = {}, pin = "482913").run { states += it }
         assertEquals(ResumableUpload.State.Done, r)

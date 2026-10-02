@@ -232,6 +232,9 @@ class ResumableUpload(
 ) {
     companion object {
         const val NAME_TAKEN_TEXT = "Un autre fichier du même nom est déjà sur la TV."
+        const val PART_OTHER_TEXT = "Un autre envoi du même nom est déjà en cours sur la TV : réessayez plus tard."
+        /** The partial copy on the TV is of another content this many times in a row: another sender is using that name, stop instead of fighting over it. */
+        const val PART_OTHER_MAX = 3
     }
 
     sealed class State {
@@ -249,6 +252,7 @@ class ResumableUpload(
         var failures = 0
         var lastSent = -1L
         var refusedToken: String? = null
+        var partOthers = 0
         while (!cancelled()) {
             if (sent != lastSent) { lastSent = sent; failures = 0 } else if (++failures > giveUpAfter) return State.Failed("liaison perdue").also(onState)
             val base = resolve()
@@ -288,7 +292,10 @@ class ResumableUpload(
                 sent = p.length
                 if (p.done) return State.Done.also(onState)
                 if (p.code == "NAME_TAKEN") return State.Failed(NAME_TAKEN_TEXT).also(onState)
-                if (sent > total || p.code == "PART_OTHER") { tv.reset(name); sent = 0 }
+                if (sent > total || p.code == "PART_OTHER") {
+                    if (++partOthers >= PART_OTHER_MAX) return State.Failed(PART_OTHER_TEXT).also(onState)
+                    tv.reset(name); sent = 0          // refused with 409 "busy" when that partial copy is alive: handled below (wait, never a hot loop)
+                }
                 onState(State.Uploading(sent, total))
                 openAt(sent).use { src ->
                     val r = tv.upload(name, sent, total, src, maxBytesPerSec, target) { n ->
@@ -303,7 +310,10 @@ class ResumableUpload(
             } catch (e: TvClient.NameTaken) {
                 return State.Failed(NAME_TAKEN_TEXT).also(onState)
             } catch (e: TvClient.PartOther) {
-                runCatching { tv.reset(name) }; sent = 0            // the partial copy is of another content: dropped, never appended to
+                if (++partOthers >= PART_OTHER_MAX) return State.Failed(PART_OTHER_TEXT).also(onState)
+                onState(State.Waiting(sent, total, PART_OTHER_TEXT))
+                sleep(backoff); backoff = minOf(backoff * 2, 5000)          // never a hot loop, even when the reset is refused (busy, read-only volume)
+                runCatching { tv.reset(name) }; sent = 0                      // the partial copy is of another content: dropped when the TV agrees, never appended to
             } catch (e: TvClient.HttpError) {
                 if (e.code == 401 && TvClient.isBadToken(e) && credential != null) { refusedToken = cred; continue }
                 if (e.code == 507 || e.code == 413 || e.code == 400 || e.code == 401)

@@ -96,7 +96,7 @@ class PinStore {
     val all: Map<String, String> get() = map.toMap()
 
     /** Les clés sous lesquelles l'application range le code d'une TV, par le `PinKeys` de production : nom, nom mDNS, `bt:<adresse>`, `hôte:port` (le port COURANT). */
-    fun keysOf(tv: TvSim): List<String> = PinKeys.keysOf(tv.name, "CastBridge TV ${tv.name}", tv.bt.tvAddress, "127.0.0.1", tv.port)
+    fun keysOf(tv: TvSim): List<String> = PinKeys.keysOf(tv.name, "CastBridge TV ${tv.name}", tv.bt.tvAddress, listOf("127.0.0.1"), tv.port)
 }
 
 /**

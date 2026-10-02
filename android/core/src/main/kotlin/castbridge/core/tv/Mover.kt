@@ -183,6 +183,9 @@ object Mover {
                     }
                 }
             }
+            // Unconditional flush of the whole copy, on every kind of volume (the periodic sync above only bounds the loss on a cut): if the medium cannot
+            // confirm it, the source stays (the partial copy stays too and is fully compared when resumed).
+            if (!dst.syncPart(job.toName)) throw IOException("the copy could not be flushed to the destination: source kept")
             if (dst.partSize(job.toName) != srcSize) throw IOException("size mismatch after copy")
             if (src.finalSize(job.name) != srcSize || stampOf(src, job.name) != stamp) {
                 dst.deletePart(job.toName); dstDir?.let { Meta.delete(it, job.toName); MoveMarker.delete(it) }
@@ -191,8 +194,11 @@ object Mover {
             dst.commit(job.toName)
             if (dst.finalSize(job.toName) != srcSize) throw IOException("size mismatch after commit")
             // The proof: same size (above), same edges, and for a resumed copy or a big file the SHA-256 of the whole of both. Nothing is deleted without it.
+            // Always the full SHA-256 (a few seconds under 100 MB): [fullProofFrom] is kept for compatibility and no longer lowers the proof.
+            // Note: the destination hash is read through the system, so it may come from the disk cache rather than from the medium; that is why the
+            // copy is flushed (syncPart) before and why a resumed copy is never trusted as it stands.
             var proven = sameEdges(src, job.name, dst, job.toName, srcSize)
-            if (proven && (resumed || srcSize >= fullProofFrom)) {
+            if (proven) {
                 job.phase = "verify"; job.checked = 0
                 val a = fullDigest(src, job.name, { job.cancelled }) { job.checked = it }
                 val b = if (a == null) null else fullDigest(dst, job.toName, { job.cancelled }) { job.checked = it }
