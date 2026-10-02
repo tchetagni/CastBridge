@@ -51,4 +51,14 @@ class PriceGridTest {
         assertContains(refused(signed().replace("castbridge-price-grid-v1", "autre")), "format")
         assertContains(refused(signed().replace("XAF", "EUR")), "monnaie")
     }
+
+    @Test fun daysAndPricesMustBeExactIntegersInBounds() {
+        val base = signed(p = listOf(PriceGrid.Price("cle-essai", 30, 5000)))
+        for (bad in listOf("\"days\":30" to "\"days\":30.9", "\"days\":30" to "\"days\":30.0", "\"price\":5000" to "\"price\":\"5000\"", "\"price\":5000" to "\"price\":5000.5",
+"\"days\":30" to "\"days\":\"30\""))
+            assertContains(refused(base.replace(bad.first, bad.second)), "illisible", message = bad.toString())
+        for (bad in listOf("\"price\":5000" to "\"price\":4294972296", "\"price\":5000" to "\"price\":100000001", "\"days\":30" to "\"days\":4294967326", "\"days\":30" to "\"days\":0"))
+            assertContains(refused(base.replace(bad.first, bad.second)), "hors bornes", message = bad.toString())
+        PriceGrid.verify(signed(p = listOf(PriceGrid.Price("cle-essai", 3660, 100_000_000))), pub)
+    }
 }

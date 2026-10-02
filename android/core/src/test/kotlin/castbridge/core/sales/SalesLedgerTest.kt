@@ -100,4 +100,13 @@ class SalesLedgerTest {
         assertFalse(Regex("fun (delete|remove|rewrite|clear|update)").containsMatchIn(src))
         assertEquals(setOf("append", "all"), LedgerStore::class.java.declaredMethods.map { it.name }.toSet())
     }
+
+    @Test fun anEntryWhoseAgentIsNotTheKeyOwnerIsABadSignature() {
+        val base = chain(1).single().copy(agent = AgentFixtures.kid("agent2"))
+        val hash = base.computeHash()
+        val sig = java.util.Base64.getEncoder().encodeToString(agent.sign((base.canonical() + "\nhash=" + hash).toByteArray(Charsets.UTF_8)))
+        val forged = base.copy(hash = hash, sig = sig)
+        assertTrue(forged.verify(pub))                                                    // hash and signature alone are fine...
+        assertEquals(ChainResult.BadSignature(1), SalesLedger.chain(listOf(forged), pub))   // ...but the `agent` field is not the owner of the key
+    }
 }

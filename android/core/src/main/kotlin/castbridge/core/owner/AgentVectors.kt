@@ -71,7 +71,7 @@ object AgentVectors {
 
     @Suppress("UNCHECKED_CAST")
     private fun delegation(c: Map<String, Any?>, e: Env): String? {
-        val seq = SeqState((c["lastSeq"] as Map<String, Any?>).entries.associate { e.kid(it.key) to (it.value as Number).toLong() })
+        val seq = SeqState((c["lastSeq"] as Map<String, Any?>).entries.associate { en -> en.key.split('/').joinToString("/") { e.kid(it) } to (en.value as Number).toLong() })       // "owner/agent" -> "ownerKid/agentKid"
         val r = Delegation.verify(c.str("token")!!, e.ring(c), RevocationState(), c.long("now")!!, seq)
         val exp = c["expect"] as Map<String, Any?>
         val got = if (r is DelegationResult.Accepted) "accepted" else (r as DelegationResult.Refused).reason.name

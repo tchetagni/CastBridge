@@ -54,7 +54,11 @@ enum class KeyScope {
 /** A public key the TV accepts, with its scopes. Several at once (rotation, spare key kept offline). */
 data class TrustedKey(val keyId: String, val publicKeyBase64: String, val scopes: Set<KeyScope> = KeyScope.ALL,
                       /** Instants (ms) at which this key may sign events; null = no bound. Set for delegated agent keys (`notBefore..expiresAt`): [LicenseBook.replay] rejects an event outside it. */
-                      val validity: LongRange? = null) {
+                      val validity: LongRange? = null,
+                      /** Further validity windows of the same agent (successive mandates, see [KeyRing.withDelegated]); an event is accepted inside [validity] or any of them ([validAt]). */
+                      val moreValidity: List<LongRange> = emptyList()) {
+    /** True when this key may sign an event at instant [t] (ms): no bound, or inside one of its windows. */
+    fun validAt(t: Long): Boolean = validity == null || t in validity || moreValidity.any { t in it }
     fun allows(scope: KeyScope) = scope in scopes
     fun allows(power: Power) = KeyScope.of(power) in scopes
 
@@ -69,8 +73,18 @@ class KeyRing(keys: List<TrustedKey>, val revoked: Set<String> = emptySet()) {
     fun find(keyId: String): TrustedKey? = byId[keyId]
     fun isRevoked(keyId: String) = keyId in revoked
     fun withRevoked(ids: Set<String>) = KeyRing(byId.values.toList(), revoked + ids)
-    /** This ring plus the agent keys of verified delegations. A delegated key never overrides a key of the ring (a compiled key keeps its own scopes); on a duplicate `kid` the first wins. */
-    fun withDelegated(keys: List<TrustedKey>) = KeyRing(byId.values.toList() + keys.filter { it.keyId !in byId }.distinctBy { it.keyId }, revoked)
+    /**
+     * This ring plus the agent keys of verified delegations. A delegated key never overrides a key of the ring (a compiled key keeps its own scopes). Several entries for one `kid`
+     * (successive mandates of the same agent) are MERGED into one key: scopes = union, validity = every window (the first in [TrustedKey.validity], the others in [TrustedKey.moreValidity]),
+     * so each mandate replays its own events. An unbounded entry (no validity) makes the merged key unbounded; delegations always carry a window.
+     */
+    fun withDelegated(keys: List<TrustedKey>): KeyRing {
+        val merged = keys.filter { it.keyId !in byId }.groupBy { it.keyId }.values.map { g ->
+            if (g.size == 1) g[0] else TrustedKey(g[0].keyId, g[0].publicKeyBase64, g.flatMap { it.scopes }.toSet(),
+                if (g.any { it.validity == null }) null else g[0].validity, if (g.any { it.validity == null }) emptyList() else g.drop(1).mapNotNull { it.validity } + g.flatMap { it.moreValidity })
+        }
+        return KeyRing(byId.values.toList() + merged, revoked)
+    }
 
     companion object {
         /** keyId = first 8 bytes (16 hex chars) of SHA-256 of the raw public key: stable, short, no secret. */

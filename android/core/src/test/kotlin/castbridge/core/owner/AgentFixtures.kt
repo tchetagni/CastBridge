@@ -52,4 +52,13 @@ object AgentFixtures {
         val license = if (kind == ActivationKind.TRIAL) Activation.TRIAL_LICENSE else "lic-0001"
         return ActivationIssuer(key(agent).signer, issuerScopes).issue(ActivationIssuer.Request(kind, d.code, d.fp, at, rights = r, license = license, nonce = nonce, seq = seq)).token
     }
+
+    /** An activation signed by the agent key WITHOUT the issuer's bound checks (a hostile agent app signs whatever it wants): [rights] replace the benign ones, then it is re-signed. */
+    fun forgedActivation(rights: List<Right>, kind: ActivationKind = ActivationKind.PRODUCTION, at: Long = T0 + DAY, agent: String = "agent", device: String = "tvA", issuedAt: Long? = null): String {
+        val benign = ActivationIssuer(key(agent).signer, Delegation.ALLOWED_SCOPES).issue(ActivationIssuer.Request(kind, dev(device).code, dev(device).fp, at, rights = listOf(Right.Usage(at, at + DAY)),
+            license = if (kind == ActivationKind.TRIAL) Activation.TRIAL_LICENSE else "lic-0001", nonce = "b2b2b2b2b2b2b2b2")).activation
+        val unsigned = benign.copy(rights = rights, issuedAt = issuedAt ?: benign.issuedAt, signature = "")
+        val sig = java.util.Base64.getEncoder().encodeToString(key(agent).signer.sign(unsigned.canonicalPayload().toByteArray(Charsets.UTF_8)))
+        return unsigned.copy(signature = sig).encode()
+    }
 }

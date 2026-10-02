@@ -230,7 +230,7 @@
       "ring": ["desk", "phone", "server"],
       "revokedKeys": [],
       "lastSeq": {
-        "desk": 1800000000010
+        "desk/agent": 1800000000010
       },
       "now": 1800090000000,
       "expect": {
@@ -401,6 +401,62 @@
       "verifier": "delegated",
       "expect": {
         "result": "REVOKED_KEY"
+      }
+    },
+    {
+      "id": "ticket-usage-overflow-refused",
+      "type": "ticketed",
+      "description": "usage|duree|0|9223372036854775807 : le calcul de durée ne doit pas déborder",
+      "line": "cbx1.Y2FzdGJyaWRnZS1lbnZlbG9wZS12MQp0eXBlPWRlbGVnYXRpb24Ka2lkPWIyZTViNDE4NjBkMWQ4YmUKc2VxPTE4MDAwMDAwMDAwMDAKbm9uY2U9YTFhMWExYTFhMWExYTFhMQppc3N1ZWRBdD0xODAwMDAwMDAwMDAwCm5vdEJlZm9yZT0xODAwMDAwMDAwMDAwCmV4cGlyZXNBdD0xODA3Nzc2MDAwMDAwCnRhcmdldD1hbnkKLS0KYWdlbnQ9OGE2ZTQ0ZmNkOWE5YmI3MwpwdWI9d2dlU0V3b0NaNTEweTZ1cWNwVUtUR0V4REYwaWFpNmJGSVZrRUtqb1pyRT0KbmFtZT1kb3VhbGEtYWt3YS0wMQpzY29wZXM9SVNTVUVfUFJPRFVDVElPTixJU1NVRV9UUklBTAptYXhLZXlEYXlzPTM2NQptYXhSZW50YWxEYXlzPTAKbWF4U2FsZXM9MjAwCmJ1bmRsZXM9dG91dA.IfZUNH4FVdf0yeWLP3Tfc6zOalP1AeD3LT7ArGhGBvLjIWtU680tDguwbg6JXWi0UeBqdao7aHXeAQRV+BKBAA==|cbx1.Y2FzdGJyaWRnZS1lbnZlbG9wZS12MQp0eXBlPWFjdGl2YXRpb24Ka2lkPThhNmU0NGZjZDlhOWJiNzMKc2VxPTE4MDAwODY0MDAwMDAKbm9uY2U9YjJiMmIyYjJiMmIyYjJiMgppc3N1ZWRBdD0xODAwMDg2NDAwMDAwCm5vdEJlZm9yZT0xODAwMDg2NDAwMDAwCmV4cGlyZXNBdD0xODAwMjU5MjAwMDAwCnRhcmdldD1kZXZpY2UKaz00CmZhY3Rvcj1GTEFTSHxjNDhjYWNkODFiOTY2M2QwYmE5N2MyMjFjYmQxN2Y0ZgpmYWN0b3I9RVRIRVJORVR8ZjkxZWZkODllMDAyNWMyMjYyZGExMmNmYmVkNDM2MzIKZmFjdG9yPVdJRkl8ZWE4YjU1MmUyMjQwYmJkZDhjODhjNDIzMTNjNGRlYWIKZmFjdG9yPVNZU1RFTV9TRVJJQUx8Nzc0YmVhY2JmMzUxYjBkMjA1ZjkxNjY2NjllNGQzYzcKZmFjdG9yPUJMVUVUT09USHxkMzY1ZWE2N2UwMDU4NWVkYWY4YmVmNGQ3Mzc4ODUwZAotLQpraW5kPXByb2R1Y3Rpb24Kc3ViamVjdD10dgpsaWNlbnNlPWxpYy0wMDAxCnNlYXQ9ZjM2NzU3YzIyNmRkMmVlNApyaWdodD11c2FnZXxkdXJlZXwwfDkyMjMzNzIwMzY4NTQ3NzU4MDc.Em8tR+6rJxzqpepq8OUcVZI5FHo8mi++FVYYAQfn0pBU7EoHSCD/F+PkDYTuX4pzG8h0rOFUWfUx51YgFnGbAw==",
+      "ring": ["desk", "phone", "server"],
+      "revokedKeys": [],
+      "device": "tvA",
+      "now": 1800090000000,
+      "verifier": "delegated",
+      "expect": {
+        "result": "KEY_NOT_ALLOWED"
+      }
+    },
+    {
+      "id": "ticket-usage-overflow-negative-start-refused",
+      "type": "ticketed",
+      "description": "début négatif et fin énorme : durée qui déborderait",
+      "line": "cbx1.Y2FzdGJyaWRnZS1lbnZlbG9wZS12MQp0eXBlPWRlbGVnYXRpb24Ka2lkPWIyZTViNDE4NjBkMWQ4YmUKc2VxPTE4MDAwMDAwMDAwMDAKbm9uY2U9YTFhMWExYTFhMWExYTFhMQppc3N1ZWRBdD0xODAwMDAwMDAwMDAwCm5vdEJlZm9yZT0xODAwMDAwMDAwMDAwCmV4cGlyZXNBdD0xODA3Nzc2MDAwMDAwCnRhcmdldD1hbnkKLS0KYWdlbnQ9OGE2ZTQ0ZmNkOWE5YmI3MwpwdWI9d2dlU0V3b0NaNTEweTZ1cWNwVUtUR0V4REYwaWFpNmJGSVZrRUtqb1pyRT0KbmFtZT1kb3VhbGEtYWt3YS0wMQpzY29wZXM9SVNTVUVfUFJPRFVDVElPTixJU1NVRV9UUklBTAptYXhLZXlEYXlzPTM2NQptYXhSZW50YWxEYXlzPTAKbWF4U2FsZXM9MjAwCmJ1bmRsZXM9dG91dA.IfZUNH4FVdf0yeWLP3Tfc6zOalP1AeD3LT7ArGhGBvLjIWtU680tDguwbg6JXWi0UeBqdao7aHXeAQRV+BKBAA==|cbx1.Y2FzdGJyaWRnZS1lbnZlbG9wZS12MQp0eXBlPWFjdGl2YXRpb24Ka2lkPThhNmU0NGZjZDlhOWJiNzMKc2VxPTE4MDAwODY0MDAwMDAKbm9uY2U9YjJiMmIyYjJiMmIyYjJiMgppc3N1ZWRBdD0xODAwMDg2NDAwMDAwCm5vdEJlZm9yZT0xODAwMDg2NDAwMDAwCmV4cGlyZXNBdD0xODAwMjU5MjAwMDAwCnRhcmdldD1kZXZpY2UKaz00CmZhY3Rvcj1GTEFTSHxjNDhjYWNkODFiOTY2M2QwYmE5N2MyMjFjYmQxN2Y0ZgpmYWN0b3I9RVRIRVJORVR8ZjkxZWZkODllMDAyNWMyMjYyZGExMmNmYmVkNDM2MzIKZmFjdG9yPVdJRkl8ZWE4YjU1MmUyMjQwYmJkZDhjODhjNDIzMTNjNGRlYWIKZmFjdG9yPVNZU1RFTV9TRVJJQUx8Nzc0YmVhY2JmMzUxYjBkMjA1ZjkxNjY2NjllNGQzYzcKZmFjdG9yPUJMVUVUT09USHxkMzY1ZWE2N2UwMDU4NWVkYWY4YmVmNGQ3Mzc4ODUwZAotLQpraW5kPXByb2R1Y3Rpb24Kc3ViamVjdD10dgpsaWNlbnNlPWxpYy0wMDAxCnNlYXQ9ZjM2NzU3YzIyNmRkMmVlNApyaWdodD11c2FnZXxkdXJlZXwtOTAwMDAwMDAwMDAwMDAwMDAwMHw5MDAwMDAwMDAwMDAwMDAwMDAw.W8cXxPPfTXoyOdUkDHdtMpkrPXlno0+SjBuRp2DbXx0ZoMNJru2IuIGQH/Ic75PLKddZqwFbZWFsea7vf9PUAg==",
+      "ring": ["desk", "phone", "server"],
+      "revokedKeys": [],
+      "device": "tvA",
+      "now": 1800090000000,
+      "verifier": "delegated",
+      "expect": {
+        "result": "KEY_NOT_ALLOWED"
+      }
+    },
+    {
+      "id": "ticket-usage-end-before-start-refused",
+      "type": "ticketed",
+      "description": "fin avant le début",
+      "line": "cbx1.Y2FzdGJyaWRnZS1lbnZlbG9wZS12MQp0eXBlPWRlbGVnYXRpb24Ka2lkPWIyZTViNDE4NjBkMWQ4YmUKc2VxPTE4MDAwMDAwMDAwMDAKbm9uY2U9YTFhMWExYTFhMWExYTFhMQppc3N1ZWRBdD0xODAwMDAwMDAwMDAwCm5vdEJlZm9yZT0xODAwMDAwMDAwMDAwCmV4cGlyZXNBdD0xODA3Nzc2MDAwMDAwCnRhcmdldD1hbnkKLS0KYWdlbnQ9OGE2ZTQ0ZmNkOWE5YmI3MwpwdWI9d2dlU0V3b0NaNTEweTZ1cWNwVUtUR0V4REYwaWFpNmJGSVZrRUtqb1pyRT0KbmFtZT1kb3VhbGEtYWt3YS0wMQpzY29wZXM9SVNTVUVfUFJPRFVDVElPTixJU1NVRV9UUklBTAptYXhLZXlEYXlzPTM2NQptYXhSZW50YWxEYXlzPTAKbWF4U2FsZXM9MjAwCmJ1bmRsZXM9dG91dA.IfZUNH4FVdf0yeWLP3Tfc6zOalP1AeD3LT7ArGhGBvLjIWtU680tDguwbg6JXWi0UeBqdao7aHXeAQRV+BKBAA==|cbx1.Y2FzdGJyaWRnZS1lbnZlbG9wZS12MQp0eXBlPWFjdGl2YXRpb24Ka2lkPThhNmU0NGZjZDlhOWJiNzMKc2VxPTE4MDAwODY0MDAwMDAKbm9uY2U9YjJiMmIyYjJiMmIyYjJiMgppc3N1ZWRBdD0xODAwMDg2NDAwMDAwCm5vdEJlZm9yZT0xODAwMDg2NDAwMDAwCmV4cGlyZXNBdD0xODAwMjU5MjAwMDAwCnRhcmdldD1kZXZpY2UKaz00CmZhY3Rvcj1GTEFTSHxjNDhjYWNkODFiOTY2M2QwYmE5N2MyMjFjYmQxN2Y0ZgpmYWN0b3I9RVRIRVJORVR8ZjkxZWZkODllMDAyNWMyMjYyZGExMmNmYmVkNDM2MzIKZmFjdG9yPVdJRkl8ZWE4YjU1MmUyMjQwYmJkZDhjODhjNDIzMTNjNGRlYWIKZmFjdG9yPVNZU1RFTV9TRVJJQUx8Nzc0YmVhY2JmMzUxYjBkMjA1ZjkxNjY2NjllNGQzYzcKZmFjdG9yPUJMVUVUT09USHxkMzY1ZWE2N2UwMDU4NWVkYWY4YmVmNGQ3Mzc4ODUwZAotLQpraW5kPXByb2R1Y3Rpb24Kc3ViamVjdD10dgpsaWNlbnNlPWxpYy0wMDAxCnNlYXQ9ZjM2NzU3YzIyNmRkMmVlNApyaWdodD11c2FnZXxkdXJlZXwxODAyNjc4NDAwMDAwfDE4MDAwODY0MDAwMDA.zYR76XbDizf3JBql2jv/dNN44+wbAy+Q29mMF5xMe/cswE2+oI4mExCo1zQaG315gZy5N0QGLvSKbvuFCVCJAg==",
+      "ring": ["desk", "phone", "server"],
+      "revokedKeys": [],
+      "device": "tvA",
+      "now": 1800090000000,
+      "verifier": "delegated",
+      "expect": {
+        "result": "KEY_NOT_ALLOWED"
+      }
+    },
+    {
+      "id": "ticket-issued-before-mandate-refused",
+      "type": "ticketed",
+      "description": "activation datée avant le début du mandat",
+      "line": "cbx1.Y2FzdGJyaWRnZS1lbnZlbG9wZS12MQp0eXBlPWRlbGVnYXRpb24Ka2lkPWIyZTViNDE4NjBkMWQ4YmUKc2VxPTE4MDAwMDAwMDAwMDAKbm9uY2U9YTFhMWExYTFhMWExYTFhMQppc3N1ZWRBdD0xODAwMDAwMDAwMDAwCm5vdEJlZm9yZT0xODAwMDAwMDAwMDAwCmV4cGlyZXNBdD0xODA3Nzc2MDAwMDAwCnRhcmdldD1hbnkKLS0KYWdlbnQ9OGE2ZTQ0ZmNkOWE5YmI3MwpwdWI9d2dlU0V3b0NaNTEweTZ1cWNwVUtUR0V4REYwaWFpNmJGSVZrRUtqb1pyRT0KbmFtZT1kb3VhbGEtYWt3YS0wMQpzY29wZXM9SVNTVUVfUFJPRFVDVElPTixJU1NVRV9UUklBTAptYXhLZXlEYXlzPTM2NQptYXhSZW50YWxEYXlzPTAKbWF4U2FsZXM9MjAwCmJ1bmRsZXM9dG91dA.IfZUNH4FVdf0yeWLP3Tfc6zOalP1AeD3LT7ArGhGBvLjIWtU680tDguwbg6JXWi0UeBqdao7aHXeAQRV+BKBAA==|cbx1.Y2FzdGJyaWRnZS1lbnZlbG9wZS12MQp0eXBlPWFjdGl2YXRpb24Ka2lkPThhNmU0NGZjZDlhOWJiNzMKc2VxPTE4MDAwODY0MDAwMDAKbm9uY2U9YjJiMmIyYjJiMmIyYjJiMgppc3N1ZWRBdD0xNzk5ODI3MjAwMDAwCm5vdEJlZm9yZT0xODAwMDg2NDAwMDAwCmV4cGlyZXNBdD0xODAwMjU5MjAwMDAwCnRhcmdldD1kZXZpY2UKaz00CmZhY3Rvcj1GTEFTSHxjNDhjYWNkODFiOTY2M2QwYmE5N2MyMjFjYmQxN2Y0ZgpmYWN0b3I9RVRIRVJORVR8ZjkxZWZkODllMDAyNWMyMjYyZGExMmNmYmVkNDM2MzIKZmFjdG9yPVdJRkl8ZWE4YjU1MmUyMjQwYmJkZDhjODhjNDIzMTNjNGRlYWIKZmFjdG9yPVNZU1RFTV9TRVJJQUx8Nzc0YmVhY2JmMzUxYjBkMjA1ZjkxNjY2NjllNGQzYzcKZmFjdG9yPUJMVUVUT09USHxkMzY1ZWE2N2UwMDU4NWVkYWY4YmVmNGQ3Mzc4ODUwZAotLQpraW5kPXByb2R1Y3Rpb24Kc3ViamVjdD10dgpsaWNlbnNlPWxpYy0wMDAxCnNlYXQ9ZjM2NzU3YzIyNmRkMmVlNApyaWdodD11c2FnZXxkdXJlZXwxODAwMDg2NDAwMDAwfDE4MDI1OTIwMDAwMDA.McVnJICSrOY/+LUvh/d7GwAfaNTP1m2aSyrNRtIZmXt5qwuSIsvkqeDG9f4mGwqGuoZknuQijdphLI/fxvUQBg==",
+      "ring": ["desk", "phone", "server"],
+      "revokedKeys": [],
+      "device": "tvA",
+      "now": 1800090000000,
+      "verifier": "delegated",
+      "expect": {
+        "result": "KEY_NOT_ALLOWED"
       }
     },
     {
@@ -585,6 +641,42 @@
       ],
       "expect": {
         "code": "R-4BKC-ZJMS"
+      }
+    },
+    {
+      "id": "registry-delegated-two-mandates",
+      "type": "registry-delegated",
+      "description": "deux mandats successifs du même agent : chacun rejoue ses événements, l'intervalle entre les deux est refusé",
+      "ring": ["desk", "phone", "server"],
+      "delegations": ["cbx1.Y2FzdGJyaWRnZS1lbnZlbG9wZS12MQp0eXBlPWRlbGVnYXRpb24Ka2lkPWIyZTViNDE4NjBkMWQ4YmUKc2VxPTE3ODI3MjAwMDAwMDAKbm9uY2U9YTFhMWExYTFhMWExYTFhMQppc3N1ZWRBdD0xNzgyNzIwMDAwMDAwCm5vdEJlZm9yZT0xNzgyNzIwMDAwMDAwCmV4cGlyZXNBdD0xNzkwNDk2MDAwMDAwCnRhcmdldD1hbnkKLS0KYWdlbnQ9OGE2ZTQ0ZmNkOWE5YmI3MwpwdWI9d2dlU0V3b0NaNTEweTZ1cWNwVUtUR0V4REYwaWFpNmJGSVZrRUtqb1pyRT0KbmFtZT1kb3VhbGEtYWt3YS0wMQpzY29wZXM9SVNTVUVfUFJPRFVDVElPTixJU1NVRV9UUklBTAptYXhLZXlEYXlzPTM2NQptYXhSZW50YWxEYXlzPTAKbWF4U2FsZXM9MjAwCmJ1bmRsZXM9dG91dA.b9E2AtpfnMK2WD620AJsiPelhMA1xEmTa88dRhyJoWA3rZMAFiSjGdoyil1ibi4zfL8OZnyjN+KZIdQmDuVdBw==", "cbx1.Y2FzdGJyaWRnZS1lbnZlbG9wZS12MQp0eXBlPWRlbGVnYXRpb24Ka2lkPWIyZTViNDE4NjBkMWQ4YmUKc2VxPTE4MDAwMDAwMDAwMDAKbm9uY2U9YTJhMmEyYTJhMmEyYTJhMgppc3N1ZWRBdD0xODAwMDAwMDAwMDAwCm5vdEJlZm9yZT0xODAwMDAwMDAwMDAwCmV4cGlyZXNBdD0xODA3Nzc2MDAwMDAwCnRhcmdldD1hbnkKLS0KYWdlbnQ9OGE2ZTQ0ZmNkOWE5YmI3MwpwdWI9d2dlU0V3b0NaNTEweTZ1cWNwVUtUR0V4REYwaWFpNmJGSVZrRUtqb1pyRT0KbmFtZT1kb3VhbGEtYWt3YS0wMQpzY29wZXM9SVNTVUVfUFJPRFVDVElPTixJU1NVRV9UUklBTAptYXhLZXlEYXlzPTM2NQptYXhSZW50YWxEYXlzPTAKbWF4U2FsZXM9MjAwCmJ1bmRsZXM9dG91dA.QQ8WM+uzvv6lwy/WVSo8rpr5kDcRZASSBGJB6yW4lNOUCs7lHEDsKer9YisBJ9lc1TtTVeMFwWc4TjPH6PkNAQ=="],
+      "events": [
+        {
+          "id": "c64be9fbceb19be9",
+          "kid": "8a6e44fcd9a9bb73",
+          "text": "castbridge-licence-event-v1\ntype=license\nkid=8a6e44fcd9a9bb73\nat=1787040000000\nlicense=lic-old\nseats=1\nmaxTransfersPerYear=2",
+          "signature": "2ux5lz7lAFOfe63L4/zagvOyyebDTu7i6MSO7G5zf0XZRaNaAm7PBmJQBc71mgn8EhkfRJomHKb8x7JyyH7jAA=="
+        },
+        {
+          "id": "f1de788c81171b30",
+          "kid": "8a6e44fcd9a9bb73",
+          "text": "castbridge-licence-event-v1\ntype=license\nkid=8a6e44fcd9a9bb73\nat=1800086400000\nlicense=lic-new\nseats=1\nmaxTransfersPerYear=2",
+          "signature": "vjzJNNrQDyphmTl6n/sJoA4jYyVrSQPnh9kgge+nWge+uYMIzPJK5q4/6vP2crFu2htPCpc7Ao9upsUbKT1LBw=="
+        },
+        {
+          "id": "ddd3fa6e2bd92107",
+          "kid": "8a6e44fcd9a9bb73",
+          "text": "castbridge-licence-event-v1\ntype=license\nkid=8a6e44fcd9a9bb73\nat=1795680000000\nlicense=lic-gap\nseats=1\nmaxTransfersPerYear=2",
+          "signature": "1ynUj1N5BAWZwJQU8+tnFRy/T2RvqOyip0g0RUB9SlEn141TZDaBrbsaDVhyKJA9+ov1dOswRS91GTBOQVVNDg=="
+        }
+      ],
+      "expect": {
+        "licenses": ["lic-new", "lic-old"],
+        "rejected": [
+          {
+            "index": 2,
+            "reason": "KEY_NOT_ALLOWED"
+          }
+        ]
       }
     },
     {

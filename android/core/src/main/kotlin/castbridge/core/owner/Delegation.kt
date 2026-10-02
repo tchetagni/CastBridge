@@ -35,6 +35,9 @@ data class Delegation(
     /** The key the TV and the tools trust for [agent] while the mandate lasts: scopes of the delegation, events only inside `notBefore..expiresAt`. */
     fun agentKey() = TrustedKey(agent, agentPub, scopes, notBefore..expiresAt)
 
+    /** Key of the sequence memory ([SeqState]): per owner key AND per agent, so that the mandates of one agent never make those of another stale. */
+    fun seqKey() = "$ownerKid/$agent"
+
     private fun body(): List<String> = buildList {
         add("agent=$agent"); add("pub=$agentPub"); add("name=$name"); add("scopes=${scopes.map { it.name }.sorted().joinToString(",")}")
         add("maxKeyDays=$maxKeyDays"); add("maxRentalDays=$maxRentalDays"); add("maxSales=$maxSales"); add("bundles=${bundles.joinToString(",")}")
@@ -67,6 +70,7 @@ data class Delegation(
             d.maxSales !in 1..MAX_SALES -> "quota de ventes hors bornes (1 à $MAX_SALES)"
             d.bundles.isEmpty() || d.bundles != d.bundles.distinct().sorted() || (ALL_BUNDLES in d.bundles && d.bundles.size > 1) || !d.bundles.all { Envelope.ID.matches(it) } -> "liste de bouquets invalide"
             d.maxConfirmXafPerDay != null && (!d.confirmOrders || d.maxConfirmXafPerDay !in 1..MAX_CONFIRM_XAF_PER_DAY) -> "plafond de confirmation sans confirmation de commandes, ou hors bornes"
+            d.notBefore <= 0 -> "début de validité du mandat invalide"
             d.expiresAt <= d.notBefore || d.expiresAt - d.notBefore > MAX_VALIDITY_DAYS * DAY -> "validité du mandat : $MAX_VALIDITY_DAYS jours au plus"
             d.agent.length != 16 || !Envelope.HEX.matches(d.agent) || !pubOk(d.agentPub) || KeyRing.idOf(d.agentPub) != d.agent -> "clé du point focal incohérente"
             d.agent == d.ownerKid -> "le point focal ne peut pas être la clé du propriétaire"
@@ -130,16 +134,16 @@ data class Delegation(
 
         /**
          * The agent keys to add to a REPLAY ring ([KeyRing.withDelegated], [LicenseBook.replay]): every delegation of [tokens] that was valid when it was issued (checked at its own `issuedAt`),
-         * so that an expired mandate keeps its past events (each key carries its `notBefore..expiresAt` window). Revoked keys stay revoked through [ring].
+         * so that an expired mandate keeps its past events (each key carries its `notBefore..expiresAt` window). Keys revoked in [ring] or by [revocations] (a `cbr1` list) stay revoked: their mandates give no key. Several mandates of one agent give several keys that [KeyRing.withDelegated] merges (one window each).
          */
-        fun replayKeys(tokens: List<String>, ring: KeyRing): List<TrustedKey> = tokens.mapNotNull { t ->
+        fun replayKeys(tokens: List<String>, ring: KeyRing, revocations: RevocationState = RevocationState()): List<TrustedKey> = tokens.mapNotNull { t ->
             val d = decode(t) ?: return@mapNotNull null
-            (verify(t, ring, RevocationState(), d.issuedAt) as? DelegationResult.Accepted)?.delegation?.agentKey()
+            (verify(t, ring, revocations, d.issuedAt) as? DelegationResult.Accepted)?.delegation?.agentKey()
         }
 
         /**
          * Verifies [token] against the TV's [ring] (owner keys, with [KeyScope.DELEGATE]) and [revocations]. [nowMs] is the TV time; a signed message proves time reached its `issuedAt`.
-         * [seqState] (optional) holds the highest `seq` accepted per owner key: an older one is refused and an accepted one is recorded.
+         * [seqState] (optional) holds the highest `seq` accepted per owner key AND agent (`ownerKid/agent`, [seqKey]): an older one is refused and an accepted one is recorded.
          */
         fun verify(token: String, ring: KeyRing, revocations: RevocationState, nowMs: Long, seqState: SeqState? = null): DelegationResult {
             fun no(r: DelegationRefusal, m: String) = DelegationResult.Refused(r, m)
@@ -154,11 +158,11 @@ data class Delegation(
             if (!ALLOWED_SCOPES.containsAll(d.scopes)) return no(DelegationRefusal.KEY_NOT_ALLOWED, "Le mandat accorde des droits qu'un point focal ne peut pas avoir")
             problem(d)?.let { return no(DelegationRefusal.BAD_DELEGATION, "Mandat invalide : $it") }
             if (ring.find(d.agent) != null) return no(DelegationRefusal.BAD_DELEGATION, "Mandat invalide : la clé du point focal est déjà une clé de cet appareil")
-            if (seqState != null && d.seq < seqState.last(d.ownerKid)) return no(DelegationRefusal.STALE_SEQUENCE, "Mandat plus ancien que celui déjà installé")
+            if (seqState != null && d.seq < seqState.last(d.seqKey())) return no(DelegationRefusal.STALE_SEQUENCE, "Mandat plus ancien que celui déjà installé")
             val now = maxOf(nowMs, d.issuedAt)
             if (now + SKEW_MS < d.notBefore) return no(DelegationRefusal.NOT_YET_VALID, "Mandat pas encore valable")
             if (now > d.expiresAt) return no(DelegationRefusal.WINDOW_CLOSED, "Mandat périmé : le point focal doit en obtenir un nouveau")
-            seqState?.record(d.ownerKid, d.seq)
+            seqState?.record(d.seqKey(), d.seq)
             return DelegationResult.Accepted(d)
         }
     }

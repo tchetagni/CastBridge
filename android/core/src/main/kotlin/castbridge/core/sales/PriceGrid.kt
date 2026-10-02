@@ -12,7 +12,7 @@ import java.util.Base64
  * altered or older grid is refused; an item that is not in the grid cannot be sold. No amount is written in the code.
  *
  * File: `{"format","generatedAt","currency":"XAF","prices":[{"item","days","price"}…],"signature","keyId"}`. Signed text (keep identical to the Python signer): `castbridge-price-grid-v1`,
- * `generatedAt=…`, `currency=XAF`, then the lines `price=<item>|<days>|<xaf>` sorted as plain text.
+ * `generatedAt=…`, `currency=XAF`, then the lines `price=<item>|<days>|<xaf>` sorted as plain text (strict ASCII / UTF-16 order of the whole line, not numeric: `price=a|365|…` comes before `price=a|90|…`). The Python signer of w4-17 MUST sort the same way (plain `sorted()` on the lines) and write days and prices as JSON integers.
  */
 object PriceGrid {
     const val FORMAT = "castbridge-price-grid-v1"
@@ -34,6 +34,18 @@ object PriceGrid {
 
     /** Refused grid; the message is French and meant for the screen. */
     class Refused(message: String) : Exception(message)
+
+    /** Largest price of a line, in francs. */
+    const val MAX_XAF = 100_000_000L
+
+    /**
+     * [v] must be an exact JSON integer ([Long]): a decimal (30.9, 30.0) or a string throws (the grid is refused as unreadable), never truncated. A Long beyond [range] is not narrowed
+     * (4294972296 would wrap to 5000): it is saturated to a value outside the bounds, so the bounds check refuses the grid.
+     */
+    private fun exactInt(v: Any?, range: LongRange): Int {
+        require(v is Long) { "entier exact attendu" }
+        return if (v in range) v.toInt() else if (v < range.first) range.first.toInt() - 1 else range.last.coerceAtMost(Int.MAX_VALUE - 1L).toInt() + 1
+    }
 
     private fun line(p: Price) = "price=${p.item}|${p.days}|${p.xaf}"
 
@@ -60,11 +72,11 @@ object PriceGrid {
         val prices = try {
             (m["prices"] as List<*>).map { e ->
                 val p = e as Map<*, *>
-                Price(p["item"] as String, (p["days"] as Number).toInt(), (p["price"] as Number).toInt())
+                Price(p["item"] as String, exactInt(p["days"], 1L..3660L), exactInt(p["price"], 0L..MAX_XAF))
             }
         } catch (e: Exception) { throw Refused("Grille illisible : lignes de prix invalides") }
         if (prices.isEmpty()) throw Refused("Grille vide")
-        if (prices.any { !ITEM.matches(it.item) || it.days !in 1..3660 || it.xaf < 0 }) throw Refused("Grille invalide : article, durée ou montant hors bornes")
+        if (prices.any { !ITEM.matches(it.item) || it.days !in 1..3660 || it.xaf < 0 || it.xaf > MAX_XAF }) throw Refused("Grille invalide : article, durée ou montant hors bornes")
         if (prices.map { it.item to it.days }.toSet().size != prices.size) throw Refused("Grille invalide : article en double")
         val keys = publicKeys.filter { it.isNotBlank() }
         if (keys.isEmpty()) throw Refused("Aucune clé de vérification dans cette application : grille refusée")

@@ -2,6 +2,7 @@ package castbridge.core.sales
 
 import castbridge.core.net.JsonLite
 import castbridge.core.net.JsonLite.str
+import castbridge.core.owner.KeyRing
 import castbridge.core.owner.Signer
 import castbridge.core.update.Ed25519
 import java.security.MessageDigest
@@ -104,14 +105,15 @@ object SalesLedger {
         data class BadSignature(val seq: Long) : ChainResult()
     }
 
-    /** Checks [entries] (in order, from the first one): contiguous `seq`, `prev` chain, `hash`, then the signature against [publicKeyBase64]. The first fault found is reported. */
+    /** Checks [entries] (in order, from the first one): contiguous `seq`, `prev` chain, `hash`, then that `agent` is the kid of [publicKeyBase64] and the signature. (The 16-hex `hash` is a v2 follow-up: kept short on purpose for now.) The first fault found is reported. */
     fun chain(entries: List<Entry>, publicKeyBase64: String): ChainResult {
+        val agentId = try { KeyRing.idOf(publicKeyBase64) } catch (ex: IllegalArgumentException) { return ChainResult.BadSignature(entries.firstOrNull()?.seq ?: 1L) }
         var prev = GENESIS
         for ((i, e) in entries.withIndex()) {
             val expected = i + 1L
             if (e.seq > expected) return ChainResult.Gap(expected)
             if (e.seq < expected || e.prev != prev || e.hash != e.computeHash()) return ChainResult.Diverged(e.seq)
-            if (!e.verify(publicKeyBase64)) return ChainResult.BadSignature(e.seq)
+            if (e.agent != agentId || !e.verify(publicKeyBase64)) return ChainResult.BadSignature(e.seq)
             prev = e.hash
         }
         return ChainResult.Ok(entries.size, prev)

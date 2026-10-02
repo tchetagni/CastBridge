@@ -31,11 +31,16 @@ class DelegatedVerifier(private val ring: KeyRing, private val revocations: Revo
     /** What the activation carries that the mandate does not allow (French, short), or null. */
     private fun refusal(d: Delegation, a: Activation): String? {
         val day = 24L * 3600 * 1000
+        if (a.issuedAt < d.notBefore || a.issuedAt > d.expiresAt) return "une activation datée hors de la période du mandat"
         for (r in a.rights) when (r) {
             is Right.Usage -> {
-                val days = (r.endsAt - r.startsAt + day - 1) / day
-                if (a.kind == ActivationKind.PRODUCTION && days > d.maxKeyDays) return "une clé de plus de ${d.maxKeyDays} jours"
-                if (a.kind == ActivationKind.TRIAL && days > ActivationPolicy.TRIAL_MAX_DAYS) return "un essai de plus de ${ActivationPolicy.TRIAL_MAX_DAYS} jours"
+                // no addition before the comparisons: a huge or negative bound must not wrap around and pass the cap
+                if (r.startsAt < d.notBefore - day || r.startsAt > d.expiresAt) return "une période d'usage qui ne commence pas pendant le mandat"
+                if (r.endsAt <= r.startsAt) return "une période d'usage vide ou inversée"
+                val span = try { Math.subtractExact(r.endsAt, r.startsAt) } catch (e: ArithmeticException) { return "une période d'usage hors bornes" }
+                val maxProduction = Math.multiplyExact(d.maxKeyDays.toLong(), day); val maxTrial = Math.multiplyExact(ActivationPolicy.TRIAL_MAX_DAYS.toLong(), day)
+                if (a.kind == ActivationKind.PRODUCTION && span > maxProduction) return "une clé de plus de ${d.maxKeyDays} jours"
+                if (a.kind == ActivationKind.TRIAL && span > maxTrial) return "un essai de plus de ${ActivationPolicy.TRIAL_MAX_DAYS} jours"
             }
             is Right.Rental -> return "une location (les locations se font en ligne)"
             is Right.Super -> return "le droit super"

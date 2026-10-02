@@ -100,4 +100,22 @@ class TicketedActivationTest {
         val old = ActivationVerifier(ring).verify(line(AgentFixtures.activation()), tv.fp, now)
         assertEquals(Rejection.MALFORMED, assertIs<ActivationResult.Rejected>(old).reason)
     }
+
+    @Test fun overflowingOrOutOfMandateUsagePeriodsAreRefused() {
+        val max = Long.MAX_VALUE
+        fun usage(from: Long, to: Long, kind: ActivationKind = ActivationKind.PRODUCTION) = AgentFixtures.forgedActivation(listOf(Right.Usage(from, to)), kind)
+        for (a in listOf(usage(0, max), usage(-9_000_000_000_000_000_000L, 9_000_000_000_000_000_000L), usage(Long.MIN_VALUE, max), usage(T0 + DAY, max), usage(0, max, ActivationKind.TRIAL),
+            usage(T0 + DAY, T0 + DAY), usage(T0 + 31 * DAY, T0 + DAY), usage(T0 + DAY, T0 + DAY + 365 * DAY + 1)))
+            assertEquals(Rejection.KEY_NOT_ALLOWED, rejected(check(line(a))).reason, a)
+        assertEquals(Rejection.KEY_NOT_ALLOWED, rejected(check(line(usage(T0 + DAY, T0 + DAY + 366 * DAY, ActivationKind.TRIAL)))).reason)
+        assertEquals(Rejection.KEY_NOT_ALLOWED, rejected(check(line(usage(T0 + 100 * DAY, T0 + 110 * DAY)))).reason)        // starts after the mandate (90 days)
+        assertIs<ActivationResult.Accepted>(check(line(usage(T0 - DAY, T0 + 364 * DAY))).result)                            // starts one skew day before notBefore: allowed
+    }
+
+    @Test fun theActivationMustBeIssuedInsideTheMandateWindow() {
+        val tooEarly = AgentFixtures.forgedActivation(listOf(Right.Usage(T0 + DAY, T0 + 30 * DAY)), issuedAt = T0 - 2 * DAY)
+        assertEquals(Rejection.KEY_NOT_ALLOWED, rejected(check(line(tooEarly))).reason)
+        val late = AgentFixtures.forgedActivation(listOf(Right.Usage(T0 + DAY, T0 + 30 * DAY)), issuedAt = T0 + 91 * DAY)
+        assertEquals(Rejection.WINDOW_CLOSED, rejected(check(line(late))).reason)               // refused earlier still, by the activation window itself
+    }
 }

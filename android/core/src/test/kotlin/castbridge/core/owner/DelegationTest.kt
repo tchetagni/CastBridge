@@ -68,7 +68,7 @@ class DelegationTest {
         assertEquals(DelegationRefusal.BAD_DELEGATION, refusal(verify(unchecked { it.copy(expiresAt = it.notBefore + 181 * DAY) })))
         assertEquals(DelegationRefusal.BAD_DELEGATION, refusal(verify(unchecked { it.copy(name = "Pas Bon") })))
         assertEquals(DelegationRefusal.BAD_DELEGATION, refusal(verify(unchecked { it.copy(maxConfirmXafPerDay = 100) })))      // cap without confirmOrders
-        val seq = SeqState(mapOf(kid("desk") to T0 + 10))
+        val seq = SeqState(mapOf("${kid("desk")}/${kid("agent")}" to T0 + 10))
         assertEquals(DelegationRefusal.STALE_SEQUENCE, refusal(verify(AgentFixtures.delegation(seq = T0), seq = seq)))
         assertEquals(DelegationRefusal.NOT_YET_VALID, refusal(verify(unchecked { d -> d.copy(issuedAt = T0, notBefore = T0 + 5 * DAY, expiresAt = T0 + 50 * DAY) }, now = T0)))
         assertEquals(DelegationRefusal.WINDOW_CLOSED, refusal(verify(AgentFixtures.delegation(), now = T0 + 91 * DAY)))
@@ -84,7 +84,7 @@ class DelegationTest {
     @Test fun acceptedSequenceIsRecordedPerOwnerKey() {
         val seq = SeqState()
         assertIs<DelegationResult.Accepted>(verify(AgentFixtures.delegation(seq = 5), seq = seq))
-        assertEquals(5, seq.last(kid("desk")))
+        assertEquals(5, seq.last("${kid("desk")}/${kid("agent")}"))
         assertEquals(DelegationRefusal.STALE_SEQUENCE, refusal(verify(AgentFixtures.delegation(seq = 4), seq = seq)))
         assertIs<DelegationResult.Accepted>(verify(AgentFixtures.delegation(seq = 5), seq = seq))                       // the same seq again: a renewal of the same content, not stale
     }
@@ -103,5 +103,43 @@ class DelegationTest {
         val keys = Delegation.replayKeys(listOf(expired, "cbx1.garbage.x", AgentFixtures.delegation("rogue")), ring)
         assertEquals(1, keys.size); assertEquals((T0 - 200 * DAY)..(T0 - 110 * DAY), keys.single().validity)
         assertEquals(Delegation.ALLOWED_SCOPES, keys.single().scopes)
+    }
+
+    @Test fun sequenceIsKeptPerAgentNotPerOwnerKey() {
+        val seq = SeqState()
+        val a10 = AgentFixtures.delegation(agent = "agent", seq = 10); val b11 = AgentFixtures.delegation(agent = "agent2", seq = 11, name = "autre-agent", nonce = "c1c1c1c1c1c1c1c1")
+        assertIs<DelegationResult.Accepted>(verify(a10, seq = seq))
+        assertIs<DelegationResult.Accepted>(verify(b11, seq = seq))
+        assertIs<DelegationResult.Accepted>(verify(AgentFixtures.delegation(agent = "agent", seq = 10), seq = seq))        // A is not stale because B went to 11
+        assertEquals(DelegationRefusal.STALE_SEQUENCE, refusal(verify(AgentFixtures.delegation(agent = "agent", seq = 9), seq = seq)))
+    }
+
+    @Test fun notBeforeMustBePositive() {
+        assertEquals(DelegationRefusal.BAD_DELEGATION, refusal(verify(unchecked { it.copy(notBefore = 0, expiresAt = DAY) })))
+        assertEquals(DelegationRefusal.BAD_DELEGATION, refusal(verify(unchecked { it.copy(notBefore = -DAY, expiresAt = DAY) })))
+    }
+
+    @Test fun twoSuccessiveMandatesOfTheSameAgentBothReplayTheirOwnEvents() {
+        val m1 = AgentFixtures.delegation(at = T0 - 200 * DAY, validityDays = 90, nonce = "a1a1a1a1a1a1a1a1")          // T0-200d .. T0-110d
+        val m2 = AgentFixtures.delegation(at = T0, validityDays = 90, nonce = "a2a2a2a2a2a2a2a2")                      // T0 .. T0+90d
+        val keys = Delegation.replayKeys(listOf(m1, m2), ring)
+        assertEquals(2, keys.size)
+        val r = ring.withDelegated(keys)
+        val k = r.find(kid("agent"))!!
+        assertTrue(k.validAt(T0 - 150 * DAY)); assertTrue(k.validAt(T0 + DAY)); assertFalse(k.validAt(T0 - 50 * DAY)); assertFalse(k.validAt(T0 + 100 * DAY))
+        val signer = key("agent").signer
+        val events = listOf(LicenseEvent.license(signer, T0 - 150 * DAY, "lic-old", 1), LicenseEvent.license(signer, T0 + DAY, "lic-new", 1), LicenseEvent.license(signer, T0 - 50 * DAY, "lic-gap", 1))
+        val state = LicenseBook.replay(events, r)
+        assertEquals(setOf("lic-old", "lic-new"), state.licenses.keys); assertEquals(1, state.rejected.size)
+        assertEquals(Rejection.KEY_NOT_ALLOWED, state.rejected.single().second)
+    }
+
+    @Test fun replayKeepsAnAgentRevokedByACbr1ListRevoked() {
+        val m = AgentFixtures.delegation(at = T0 - 10 * DAY)
+        assertEquals(1, Delegation.replayKeys(listOf(m), ring).size)
+        assertEquals(emptyList(), Delegation.replayKeys(listOf(m), ring, RevocationState(keys = setOf(kid("agent")))))
+        val events = listOf(LicenseEvent.license(key("agent").signer, T0 - 5 * DAY, "lic-x", 1))
+        val replayRing = ring.withDelegated(Delegation.replayKeys(listOf(m), ring, RevocationState(keys = setOf(kid("agent")))))
+        assertTrue(LicenseBook.replay(events, replayRing).licenses.isEmpty())
     }
 }

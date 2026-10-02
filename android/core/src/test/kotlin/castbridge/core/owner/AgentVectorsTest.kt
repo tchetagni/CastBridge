@@ -53,7 +53,7 @@ class AgentVectorsTest {
             case("delegation-owner-key-without-delegate", "signé par une clé du propriétaire sans la portée DELEGATE", AgentFixtures.delegation("phone"), "KEY_NOT_ALLOWED"),
             case("delegation-agent-revoked", "l'agent est révoqué", mandate, "REVOKED_KEY", revoked = listOf("agent")),
             case("delegation-unknown-owner-key", "clé signataire inconnue de la TV", AgentFixtures.delegation("rogue"), "UNKNOWN_KEY"),
-            case("delegation-stale-sequence", "seq plus ancienne que celle déjà acceptée", mandate, "STALE_SEQUENCE", last = mapOf("desk" to T0 + 10)),
+            case("delegation-stale-sequence", "seq plus ancienne que celle déjà acceptée", mandate, "STALE_SEQUENCE", last = mapOf("desk/agent" to T0 + 10)),
             case("delegation-rental-days-refused", "maxRentalDays=30 : les locations sont gérées en ligne (W5)", unchecked { it.copy(maxRentalDays = 30) }, "BAD_DELEGATION"),
             case("delegation-bad-signature", "signature altérée", sig, "BAD_SIGNATURE"),
         )
@@ -76,6 +76,10 @@ class AgentVectorsTest {
             case("ticket-openall-refused", "« tout ouvert » refusé", t(AgentFixtures.activation(rights = listOf(usage, Right.OpenAll("ouvert", T0, T0 + 10 * DAY)), issuerScopes = full)), "KEY_NOT_ALLOWED"),
             case("ticket-old-tv-malformed", "une TV ancienne (ActivationVerifier seul) ne lit pas la ligne : MALFORMED", t(AgentFixtures.activation()), "MALFORMED", verifier = "plain"),
             case("ticket-agent-revoked", "agent révoqué : aucune nouvelle activation", t(AgentFixtures.activation()), "REVOKED_KEY", revoked = listOf("agent")),
+            case("ticket-usage-overflow-refused", "usage|duree|0|9223372036854775807 : le calcul de durée ne doit pas déborder", t(AgentFixtures.forgedActivation(listOf(Right.Usage(0, Long.MAX_VALUE)))), "KEY_NOT_ALLOWED"),
+            case("ticket-usage-overflow-negative-start-refused", "début négatif et fin énorme : durée qui déborderait", t(AgentFixtures.forgedActivation(listOf(Right.Usage(-9_000_000_000_000_000_000L, 9_000_000_000_000_000_000L)))), "KEY_NOT_ALLOWED"),
+            case("ticket-usage-end-before-start-refused", "fin avant le début", t(AgentFixtures.forgedActivation(listOf(Right.Usage(T0 + 31 * DAY, T0 + DAY)))), "KEY_NOT_ALLOWED"),
+            case("ticket-issued-before-mandate-refused", "activation datée avant le début du mandat", t(AgentFixtures.forgedActivation(listOf(Right.Usage(T0 + DAY, T0 + 30 * DAY)), issuedAt = T0 - 2 * DAY)), "KEY_NOT_ALLOWED"),
             case("ticket-wrong-device", "activation d'une autre TV", t(AgentFixtures.activation()), "WRONG_DEVICE", device = "tvN1"),
         )
     }
@@ -139,7 +143,11 @@ class AgentVectorsTest {
         fun case(id: String, why: String, ev: List<LicenseEvent>, licenses: List<String>, rejected: String?) =
             J("id" to id, "type" to "registry-delegated", "description" to why, "ring" to ownerRing, "delegations" to listOf(mandate), "events" to ev.map { it.toMap() }, "expect" to J("licenses" to licenses,
                 "rejected" to if (rejected == null) emptyList<Any>() else ev.indices.map { J("index" to it, "reason" to rejected) }))
-        return listOf(
+        val m1 = AgentFixtures.delegation(at = T0 - 200 * DAY, nonce = "a1a1a1a1a1a1a1a1"); val m2 = AgentFixtures.delegation(at = T0, nonce = "a2a2a2a2a2a2a2a2")
+        val two = listOf(LicenseEvent.license(agent, T0 - 150 * DAY, "lic-old", 1), LicenseEvent.license(agent, T0 + DAY, "lic-new", 1), LicenseEvent.license(agent, T0 - 50 * DAY, "lic-gap", 1))
+        val twoCase = J("id" to "registry-delegated-two-mandates", "type" to "registry-delegated", "description" to "deux mandats successifs du même agent : chacun rejoue ses événements, l'intervalle entre les deux est refusé",
+            "ring" to ownerRing, "delegations" to listOf(m1, m2), "events" to two.map { it.toMap() }, "expect" to J("licenses" to listOf("lic-new", "lic-old"), "rejected" to listOf(J("index" to 2, "reason" to "KEY_NOT_ALLOWED"))))
+        return listOf(twoCase,
             case("registry-delegated-in-window", "événements license+issue signés par l'agent, dans la fenêtre du mandat : rejoués", events(T0 + DAY), listOf("lic-0001"), null),
             case("registry-delegated-out-of-window", "mêmes événements 91 jours après le début (mandat de 90 jours) : KEY_NOT_ALLOWED", events(T0 + 91 * DAY), emptyList(), "KEY_NOT_ALLOWED"),
         )
