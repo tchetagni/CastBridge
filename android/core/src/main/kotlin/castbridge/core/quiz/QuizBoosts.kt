@@ -21,13 +21,16 @@ interface QuizBoosts {
     /**
      * Debits [b] for the game [gameId]; false (nothing taken) when the balance is too low.
      *
-     * Idempotence required from the paying implementation: a purchase is identified by
-     * (gameId, [b], purchase number within that game, at most [Boost.maxPerGame]). A retry of the same
-     * purchase (network, double tap, replayed request) must never debit twice and must return the same
-     * result; only a new purchase number may debit again. The game itself only calls this once per
-     * accepted purchase, and applies the effect only when the result is true.
+     * Idempotence required from the paying implementation: a purchase is identified by the explicit key
+     * (gameId, [b], [purchaseNo]) where [purchaseNo] is 1-based within that game and at most [Boost.maxPerGame].
+     * The implementation must NEVER derive the number itself (a retry after a success would then look like
+     * purchase #2): a retry of the same key (network, double tap, replayed request) must never debit twice and
+     * must return the same result (true again if it was debited); only a new purchase number may debit again,
+     * and a number above the cap is refused (false). [gameId] must be unique per game (a random UUID, never a
+     * reusable room code): two games sharing an id would share their purchases. The game itself passes
+     * `boostsUsed + 1` and applies the effect only when the result is true.
      */
-    fun charge(b: Boost, gameId: String): Boolean
+    fun charge(b: Boost, gameId: String, purchaseNo: Int): Boolean
 }
 
 /** Default: no boost at all, the game behaves exactly as before. */
@@ -35,5 +38,5 @@ object NoBoosts : QuizBoosts {
     override fun available(b: Boost) = false
     override fun cost(b: Boost) = 0L
     override fun balance() = 0L
-    override fun charge(b: Boost, gameId: String) = false
+    override fun charge(b: Boost, gameId: String, purchaseNo: Int) = false
 }

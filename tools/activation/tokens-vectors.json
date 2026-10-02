@@ -1,0 +1,2438 @@
+{
+  "format": "castbridge-tokens-vectors-v1",
+  "warning": "CLÉS, APPAREILS ET INSTALLATIONS DE TEST dérivés de textes publics : ne protègent rien. Voir docs/coordination/DESIGN-W5-BOUTIQUE-LOCATIONS-JETONS.md § 3.4 et § 6.",
+  "walletInstall": "tvA-install-1",
+  "keys": [
+    {
+      "name": "desk",
+      "seed": "282562d9a2f66647a16e498fad69a8ee6ecdf4877988c39aa2cb3684c1fc84e5",
+      "scopes": ["COMMAND_OPEN_ALL", "COMMAND_SUPPORT", "COMMAND_UNLOCK", "ISSUE_PRODUCTION", "ISSUE_TRIAL", "POLICY", "REACTIVATE", "REGISTRY", "REVOKE", "SUPER_UNLIMITED", "TRANSFER"]
+    },
+    {
+      "name": "server",
+      "seed": "ced7caf1bbc488963ca2a19872cffd226fa544dd77a025d6b02f1faa1e957fdb",
+      "scopes": ["ISSUE_PRODUCTION", "REACTIVATE", "REGISTRY"]
+    },
+    {
+      "name": "noprod",
+      "seed": "1e9edc07e23a5f68c0d5393760c9b2b926a1f8ac5d53c45183ffad7ae36312a9",
+      "scopes": ["COMMAND_SUPPORT"]
+    }
+  ],
+  "devices": [
+    {
+      "name": "tvA",
+      "raw": {
+        "flashSerial": "FLASHSERIAL-R1",
+        "flashCid": "cid-r1",
+        "ethernetMac": "AA:BB:CC:00:22:01",
+        "wifiMac": "10:20:30:40:60:01",
+        "wifiSysfsPath": "/sys/devices/platform/soc/ffe03000.sd/mmc_host/mmc1/mmc1:0001/net/wlan0",
+        "systemSerial": "SYSR0001",
+        "bluetoothAddress": "11:22:33:44:66:01"
+      }
+    },
+    {
+      "name": "tvB",
+      "raw": {
+        "flashSerial": "FLASHSERIAL-R2",
+        "flashCid": "cid-r2",
+        "ethernetMac": "AA:BB:CC:00:22:02",
+        "wifiMac": "10:20:30:40:60:02",
+        "wifiSysfsPath": "/sys/devices/platform/soc/ffe03000.sd/mmc_host/mmc1/mmc1:0001/net/wlan0",
+        "systemSerial": "SYSR0002",
+        "bluetoothAddress": "11:22:33:44:66:02"
+      }
+    }
+  ],
+  "installs": [
+    {
+      "name": "tvA-install-1",
+      "seed": "bf3b44eca07766f1857ef673625517cf65d0ef17eb189d0d84ce4c7d55cd6081"
+    },
+    {
+      "name": "tvA-install-2",
+      "seed": "72c2efc1eb502b583e5f733aa3b2fcb0bef4f58d69ae5066465f4f05bdfcf57a"
+    },
+    {
+      "name": "tvB-install-1",
+      "seed": "0c979ecd3e9fe24f183c8ace30c728b3e4d5e0681e9909abca11d9fedda63fea"
+    }
+  ],
+  "cases": [
+    {
+      "id": "build-tokens-welcome-20",
+      "type": "build-tokens",
+      "request": {
+        "signer": "server",
+        "device": "tvA",
+        "install": "tvA-install-1",
+        "license": "lic-w5",
+        "grant": 1,
+        "amount": 20,
+        "expiry": 0,
+        "seq": 1,
+        "nonce": "0000000000000001",
+        "issuedAt": 1800000000000,
+        "notBefore": 1800000000000,
+        "expiresAt": 1800172800000
+      },
+      "expect": {
+        "token": "cbx1.Y2FzdGJyaWRnZS1lbnZlbG9wZS12MQp0eXBlPXRva2VucwpraWQ9M2FjNzhlNDAxNzkxODgyNwpzZXE9MQpub25jZT0wMDAwMDAwMDAwMDAwMDAxCmlzc3VlZEF0PTE4MDAwMDAwMDAwMDAKbm90QmVmb3JlPTE4MDAwMDAwMDAwMDAKZXhwaXJlc0F0PTE4MDAxNzI4MDAwMDAKdGFyZ2V0PWRldmljZQprPTQKZmFjdG9yPUZMQVNIfDlkYzc5NDhjNDg3NDQ4MGViMzcyZDFhY2UzNTA3ZDNkCmZhY3Rvcj1FVEhFUk5FVHw0MDRlMzU3MmM5OWM0YjRhZTM2MzRhMjQzZGU5NDBiNgpmYWN0b3I9V0lGSXxjZWVjYzhiMzMyODZlYTIyY2JlNzdiY2MwYmUzMDMxNwpmYWN0b3I9U1lTVEVNX1NFUklBTHxlMGUyYzBhZTU4ODNlNWQ1OTU2YTY2OTljZDVlOGU4NQpmYWN0b3I9QkxVRVRPT1RIfGJiYzMyOWUyYTFlMzhmYjljMWNiZTA2MzI2NTBiNGZhCi0tCmxpY2Vuc2U9bGljLXc1CmdyYW50PTEKYW1vdW50PTIwCmluc3RhbGw9ZDNlMjQ1ODc3OWE1MTdhMjc5YzJkNWE5ZTEwNTcxZTVjZDRlNTZkNDk0NGE2M2YzMWI2OWMyMDE2N2UyNjkyYgpleHBpcnk9MApmcmVzaD0w.ARu3zatp6Rg19mdfWkObU2kwODgsZf2GjQScGLn5NJcr2nzWeey0MuH68/L+iVreCmUDl6dJ867yPwm+miqUBA=="
+      }
+    },
+    {
+      "id": "build-tokens-60-with-expiry",
+      "type": "build-tokens",
+      "request": {
+        "signer": "server",
+        "device": "tvA",
+        "install": "tvA-install-1",
+        "license": "lic-w5",
+        "grant": 2,
+        "amount": 60,
+        "expiry": 1807776000000,
+        "seq": 2,
+        "nonce": "0000000000000002",
+        "issuedAt": 1800000000000,
+        "notBefore": 1800000000000,
+        "expiresAt": 1800172800000
+      },
+      "expect": {
+        "token": "cbx1.Y2FzdGJyaWRnZS1lbnZlbG9wZS12MQp0eXBlPXRva2VucwpraWQ9M2FjNzhlNDAxNzkxODgyNwpzZXE9Mgpub25jZT0wMDAwMDAwMDAwMDAwMDAyCmlzc3VlZEF0PTE4MDAwMDAwMDAwMDAKbm90QmVmb3JlPTE4MDAwMDAwMDAwMDAKZXhwaXJlc0F0PTE4MDAxNzI4MDAwMDAKdGFyZ2V0PWRldmljZQprPTQKZmFjdG9yPUZMQVNIfDlkYzc5NDhjNDg3NDQ4MGViMzcyZDFhY2UzNTA3ZDNkCmZhY3Rvcj1FVEhFUk5FVHw0MDRlMzU3MmM5OWM0YjRhZTM2MzRhMjQzZGU5NDBiNgpmYWN0b3I9V0lGSXxjZWVjYzhiMzMyODZlYTIyY2JlNzdiY2MwYmUzMDMxNwpmYWN0b3I9U1lTVEVNX1NFUklBTHxlMGUyYzBhZTU4ODNlNWQ1OTU2YTY2OTljZDVlOGU4NQpmYWN0b3I9QkxVRVRPT1RIfGJiYzMyOWUyYTFlMzhmYjljMWNiZTA2MzI2NTBiNGZhCi0tCmxpY2Vuc2U9bGljLXc1CmdyYW50PTIKYW1vdW50PTYwCmluc3RhbGw9ZDNlMjQ1ODc3OWE1MTdhMjc5YzJkNWE5ZTEwNTcxZTVjZDRlNTZkNDk0NGE2M2YzMWI2OWMyMDE2N2UyNjkyYgpleHBpcnk9MTgwNzc3NjAwMDAwMApmcmVzaD0w.nUrgOwwlDfFqAYfKAnsWw9mLc8YjvuMv42ExTKCnxKWviFsgKB0r5wG/Vj/ypAGEHq+r8Z3NwHB5C1XlRtc3Bw=="
+      }
+    },
+    {
+      "id": "build-tokens-opening-voucher-20",
+      "type": "build-tokens",
+      "request": {
+        "signer": "server",
+        "device": "tvA",
+        "install": "tvA-install-1",
+        "license": "lic-w5",
+        "grant": 10,
+        "amount": 20,
+        "expiry": 0,
+        "fresh": true,
+        "seq": 10,
+        "nonce": "000000000000000a",
+        "issuedAt": 1800000000000,
+        "notBefore": 1800000000000,
+        "expiresAt": 1800172800000
+      },
+      "expect": {
+        "token": "cbx1.Y2FzdGJyaWRnZS1lbnZlbG9wZS12MQp0eXBlPXRva2VucwpraWQ9M2FjNzhlNDAxNzkxODgyNwpzZXE9MTAKbm9uY2U9MDAwMDAwMDAwMDAwMDAwYQppc3N1ZWRBdD0xODAwMDAwMDAwMDAwCm5vdEJlZm9yZT0xODAwMDAwMDAwMDAwCmV4cGlyZXNBdD0xODAwMTcyODAwMDAwCnRhcmdldD1kZXZpY2UKaz00CmZhY3Rvcj1GTEFTSHw5ZGM3OTQ4YzQ4NzQ0ODBlYjM3MmQxYWNlMzUwN2QzZApmYWN0b3I9RVRIRVJORVR8NDA0ZTM1NzJjOTljNGI0YWUzNjM0YTI0M2RlOTQwYjYKZmFjdG9yPVdJRkl8Y2VlY2M4YjMzMjg2ZWEyMmNiZTc3YmNjMGJlMzAzMTcKZmFjdG9yPVNZU1RFTV9TRVJJQUx8ZTBlMmMwYWU1ODgzZTVkNTk1NmE2Njk5Y2Q1ZThlODUKZmFjdG9yPUJMVUVUT09USHxiYmMzMjllMmExZTM4ZmI5YzFjYmUwNjMyNjUwYjRmYQotLQpsaWNlbnNlPWxpYy13NQpncmFudD0xMAphbW91bnQ9MjAKaW5zdGFsbD1kM2UyNDU4Nzc5YTUxN2EyNzljMmQ1YTllMTA1NzFlNWNkNGU1NmQ0OTQ0YTYzZjMxYjY5YzIwMTY3ZTI2OTJiCmV4cGlyeT0wCmZyZXNoPTE.i/yVJWTbHSmNrp0m6d/XVa2AnOUJYuGy7sBVhrFhbFiR7xmIkxFzUBNT1xUIyu5tx5sncEluyDzXEgTyuy5HCw=="
+      }
+    },
+    {
+      "id": "build-tokens-ordinary-window-72-hours-exact",
+      "type": "build-tokens",
+      "request": {
+        "signer": "server",
+        "device": "tvA",
+        "install": "tvA-install-1",
+        "license": "lic-w5",
+        "grant": 8,
+        "amount": 20,
+        "expiry": 0,
+        "seq": 8,
+        "nonce": "0000000000000008",
+        "issuedAt": 1800000000000,
+        "notBefore": 1800000000000,
+        "expiresAt": 1800259200000
+      },
+      "expect": {
+        "token": "cbx1.Y2FzdGJyaWRnZS1lbnZlbG9wZS12MQp0eXBlPXRva2VucwpraWQ9M2FjNzhlNDAxNzkxODgyNwpzZXE9OApub25jZT0wMDAwMDAwMDAwMDAwMDA4Cmlzc3VlZEF0PTE4MDAwMDAwMDAwMDAKbm90QmVmb3JlPTE4MDAwMDAwMDAwMDAKZXhwaXJlc0F0PTE4MDAyNTkyMDAwMDAKdGFyZ2V0PWRldmljZQprPTQKZmFjdG9yPUZMQVNIfDlkYzc5NDhjNDg3NDQ4MGViMzcyZDFhY2UzNTA3ZDNkCmZhY3Rvcj1FVEhFUk5FVHw0MDRlMzU3MmM5OWM0YjRhZTM2MzRhMjQzZGU5NDBiNgpmYWN0b3I9V0lGSXxjZWVjYzhiMzMyODZlYTIyY2JlNzdiY2MwYmUzMDMxNwpmYWN0b3I9U1lTVEVNX1NFUklBTHxlMGUyYzBhZTU4ODNlNWQ1OTU2YTY2OTljZDVlOGU4NQpmYWN0b3I9QkxVRVRPT1RIfGJiYzMyOWUyYTFlMzhmYjljMWNiZTA2MzI2NTBiNGZhCi0tCmxpY2Vuc2U9bGljLXc1CmdyYW50PTgKYW1vdW50PTIwCmluc3RhbGw9ZDNlMjQ1ODc3OWE1MTdhMjc5YzJkNWE5ZTEwNTcxZTVjZDRlNTZkNDk0NGE2M2YzMWI2OWMyMDE2N2UyNjkyYgpleHBpcnk9MApmcmVzaD0w.ttzHk9icuhiZg9H7NpfEPHNopCaPjfQMFbDxhQgoeDMl6Zdu+DTBIwfAK9NCkzZc9vVsMcEyMcYTRDNpAeflCg=="
+      }
+    },
+    {
+      "id": "build-tokens-opening-window-48-hours-exact",
+      "type": "build-tokens",
+      "request": {
+        "signer": "server",
+        "device": "tvA",
+        "install": "tvA-install-1",
+        "license": "lic-w5",
+        "grant": 9,
+        "amount": 20,
+        "expiry": 0,
+        "fresh": true,
+        "seq": 9,
+        "nonce": "0000000000000009",
+        "issuedAt": 1800000000000,
+        "notBefore": 1800000000000,
+        "expiresAt": 1800172800000
+      },
+      "expect": {
+        "token": "cbx1.Y2FzdGJyaWRnZS1lbnZlbG9wZS12MQp0eXBlPXRva2VucwpraWQ9M2FjNzhlNDAxNzkxODgyNwpzZXE9OQpub25jZT0wMDAwMDAwMDAwMDAwMDA5Cmlzc3VlZEF0PTE4MDAwMDAwMDAwMDAKbm90QmVmb3JlPTE4MDAwMDAwMDAwMDAKZXhwaXJlc0F0PTE4MDAxNzI4MDAwMDAKdGFyZ2V0PWRldmljZQprPTQKZmFjdG9yPUZMQVNIfDlkYzc5NDhjNDg3NDQ4MGViMzcyZDFhY2UzNTA3ZDNkCmZhY3Rvcj1FVEhFUk5FVHw0MDRlMzU3MmM5OWM0YjRhZTM2MzRhMjQzZGU5NDBiNgpmYWN0b3I9V0lGSXxjZWVjYzhiMzMyODZlYTIyY2JlNzdiY2MwYmUzMDMxNwpmYWN0b3I9U1lTVEVNX1NFUklBTHxlMGUyYzBhZTU4ODNlNWQ1OTU2YTY2OTljZDVlOGU4NQpmYWN0b3I9QkxVRVRPT1RIfGJiYzMyOWUyYTFlMzhmYjljMWNiZTA2MzI2NTBiNGZhCi0tCmxpY2Vuc2U9bGljLXc1CmdyYW50PTkKYW1vdW50PTIwCmluc3RhbGw9ZDNlMjQ1ODc3OWE1MTdhMjc5YzJkNWE5ZTEwNTcxZTVjZDRlNTZkNDk0NGE2M2YzMWI2OWMyMDE2N2UyNjkyYgpleHBpcnk9MApmcmVzaD0x.cGAspySvitBXGOBQz7l1ei/NH4v0OhypAbDdvaDIr17sLkfHrEeamjCRzQo6IKgQ8kj7n+i/m4xaAtwydIKWCg=="
+      }
+    },
+    {
+      "id": "build-tokens-refuse-window-over-72-hours",
+      "type": "build-tokens",
+      "request": {
+        "signer": "server",
+        "device": "tvA",
+        "install": "tvA-install-1",
+        "license": "lic-w5",
+        "grant": 3,
+        "amount": 20,
+        "expiry": 0,
+        "seq": 3,
+        "nonce": "0000000000000003",
+        "issuedAt": 1800000000000,
+        "notBefore": 1800000000000,
+        "expiresAt": 1800259200001
+      },
+      "expect": {
+        "refused": true
+      }
+    },
+    {
+      "id": "build-tokens-refuse-opening-window-over-48-hours",
+      "type": "build-tokens",
+      "request": {
+        "signer": "server",
+        "device": "tvA",
+        "install": "tvA-install-1",
+        "license": "lic-w5",
+        "grant": 11,
+        "amount": 20,
+        "expiry": 0,
+        "fresh": true,
+        "seq": 11,
+        "nonce": "000000000000000b",
+        "issuedAt": 1800000000000,
+        "notBefore": 1800000000000,
+        "expiresAt": 1800172800001
+      },
+      "expect": {
+        "refused": true
+      }
+    },
+    {
+      "id": "build-tokens-refuse-amount-zero",
+      "type": "build-tokens",
+      "request": {
+        "signer": "server",
+        "device": "tvA",
+        "install": "tvA-install-1",
+        "license": "lic-w5",
+        "grant": 4,
+        "amount": 0,
+        "expiry": 0,
+        "seq": 4,
+        "nonce": "0000000000000004",
+        "issuedAt": 1800000000000,
+        "notBefore": 1800000000000,
+        "expiresAt": 1800172800000
+      },
+      "expect": {
+        "refused": true
+      }
+    },
+    {
+      "id": "tokens-accepted",
+      "type": "tokens",
+      "request": {
+        "token": "cbx1.Y2FzdGJyaWRnZS1lbnZlbG9wZS12MQp0eXBlPXRva2VucwpraWQ9M2FjNzhlNDAxNzkxODgyNwpzZXE9MQpub25jZT0wMDAwMDAwMDAwMDAwMDAxCmlzc3VlZEF0PTE4MDAwMDAwMDAwMDAKbm90QmVmb3JlPTE4MDAwMDAwMDAwMDAKZXhwaXJlc0F0PTE4MDAxNzI4MDAwMDAKdGFyZ2V0PWRldmljZQprPTQKZmFjdG9yPUZMQVNIfDlkYzc5NDhjNDg3NDQ4MGViMzcyZDFhY2UzNTA3ZDNkCmZhY3Rvcj1FVEhFUk5FVHw0MDRlMzU3MmM5OWM0YjRhZTM2MzRhMjQzZGU5NDBiNgpmYWN0b3I9V0lGSXxjZWVjYzhiMzMyODZlYTIyY2JlNzdiY2MwYmUzMDMxNwpmYWN0b3I9U1lTVEVNX1NFUklBTHxlMGUyYzBhZTU4ODNlNWQ1OTU2YTY2OTljZDVlOGU4NQpmYWN0b3I9QkxVRVRPT1RIfGJiYzMyOWUyYTFlMzhmYjljMWNiZTA2MzI2NTBiNGZhCi0tCmxpY2Vuc2U9bGljLXc1CmdyYW50PTEKYW1vdW50PTIwCmluc3RhbGw9ZDNlMjQ1ODc3OWE1MTdhMjc5YzJkNWE5ZTEwNTcxZTVjZDRlNTZkNDk0NGE2M2YzMWI2OWMyMDE2N2UyNjkyYgpleHBpcnk9MApmcmVzaD0w.ARu3zatp6Rg19mdfWkObU2kwODgsZf2GjQScGLn5NJcr2nzWeey0MuH68/L+iVreCmUDl6dJ867yPwm+miqUBA==",
+        "device": "tvA",
+        "install": "tvA-install-1",
+        "ring": ["server"],
+        "revoked": [],
+        "now": 1800086400000,
+        "lastGrant": 0
+      },
+      "expect": {
+        "result": "ACCEPTED"
+      }
+    },
+    {
+      "id": "tokens-other-installation-is-bad-grant",
+      "type": "tokens",
+      "request": {
+        "token": "cbx1.Y2FzdGJyaWRnZS1lbnZlbG9wZS12MQp0eXBlPXRva2VucwpraWQ9M2FjNzhlNDAxNzkxODgyNwpzZXE9MQpub25jZT0wMDAwMDAwMDAwMDAwMDAxCmlzc3VlZEF0PTE4MDAwMDAwMDAwMDAKbm90QmVmb3JlPTE4MDAwMDAwMDAwMDAKZXhwaXJlc0F0PTE4MDAxNzI4MDAwMDAKdGFyZ2V0PWRldmljZQprPTQKZmFjdG9yPUZMQVNIfDlkYzc5NDhjNDg3NDQ4MGViMzcyZDFhY2UzNTA3ZDNkCmZhY3Rvcj1FVEhFUk5FVHw0MDRlMzU3MmM5OWM0YjRhZTM2MzRhMjQzZGU5NDBiNgpmYWN0b3I9V0lGSXxjZWVjYzhiMzMyODZlYTIyY2JlNzdiY2MwYmUzMDMxNwpmYWN0b3I9U1lTVEVNX1NFUklBTHxlMGUyYzBhZTU4ODNlNWQ1OTU2YTY2OTljZDVlOGU4NQpmYWN0b3I9QkxVRVRPT1RIfGJiYzMyOWUyYTFlMzhmYjljMWNiZTA2MzI2NTBiNGZhCi0tCmxpY2Vuc2U9bGljLXc1CmdyYW50PTEKYW1vdW50PTIwCmluc3RhbGw9ZDNlMjQ1ODc3OWE1MTdhMjc5YzJkNWE5ZTEwNTcxZTVjZDRlNTZkNDk0NGE2M2YzMWI2OWMyMDE2N2UyNjkyYgpleHBpcnk9MApmcmVzaD0w.ARu3zatp6Rg19mdfWkObU2kwODgsZf2GjQScGLn5NJcr2nzWeey0MuH68/L+iVreCmUDl6dJ867yPwm+miqUBA==",
+        "device": "tvA",
+        "install": "tvA-install-2",
+        "ring": ["server"],
+        "revoked": [],
+        "now": 1800086400000,
+        "lastGrant": 0
+      },
+      "expect": {
+        "result": "BAD_GRANT"
+      }
+    },
+    {
+      "id": "tokens-other-tv-is-wrong-target",
+      "type": "tokens",
+      "request": {
+        "token": "cbx1.Y2FzdGJyaWRnZS1lbnZlbG9wZS12MQp0eXBlPXRva2VucwpraWQ9M2FjNzhlNDAxNzkxODgyNwpzZXE9MQpub25jZT0wMDAwMDAwMDAwMDAwMDAxCmlzc3VlZEF0PTE4MDAwMDAwMDAwMDAKbm90QmVmb3JlPTE4MDAwMDAwMDAwMDAKZXhwaXJlc0F0PTE4MDAxNzI4MDAwMDAKdGFyZ2V0PWRldmljZQprPTQKZmFjdG9yPUZMQVNIfDlkYzc5NDhjNDg3NDQ4MGViMzcyZDFhY2UzNTA3ZDNkCmZhY3Rvcj1FVEhFUk5FVHw0MDRlMzU3MmM5OWM0YjRhZTM2MzRhMjQzZGU5NDBiNgpmYWN0b3I9V0lGSXxjZWVjYzhiMzMyODZlYTIyY2JlNzdiY2MwYmUzMDMxNwpmYWN0b3I9U1lTVEVNX1NFUklBTHxlMGUyYzBhZTU4ODNlNWQ1OTU2YTY2OTljZDVlOGU4NQpmYWN0b3I9QkxVRVRPT1RIfGJiYzMyOWUyYTFlMzhmYjljMWNiZTA2MzI2NTBiNGZhCi0tCmxpY2Vuc2U9bGljLXc1CmdyYW50PTEKYW1vdW50PTIwCmluc3RhbGw9ZDNlMjQ1ODc3OWE1MTdhMjc5YzJkNWE5ZTEwNTcxZTVjZDRlNTZkNDk0NGE2M2YzMWI2OWMyMDE2N2UyNjkyYgpleHBpcnk9MApmcmVzaD0w.ARu3zatp6Rg19mdfWkObU2kwODgsZf2GjQScGLn5NJcr2nzWeey0MuH68/L+iVreCmUDl6dJ867yPwm+miqUBA==",
+        "device": "tvB",
+        "install": "tvA-install-1",
+        "ring": ["server"],
+        "revoked": [],
+        "now": 1800086400000,
+        "lastGrant": 0
+      },
+      "expect": {
+        "result": "WRONG_TARGET"
+      }
+    },
+    {
+      "id": "tokens-old-grant-is-stale",
+      "type": "tokens",
+      "request": {
+        "token": "cbx1.Y2FzdGJyaWRnZS1lbnZlbG9wZS12MQp0eXBlPXRva2VucwpraWQ9M2FjNzhlNDAxNzkxODgyNwpzZXE9MQpub25jZT0wMDAwMDAwMDAwMDAwMDAxCmlzc3VlZEF0PTE4MDAwMDAwMDAwMDAKbm90QmVmb3JlPTE4MDAwMDAwMDAwMDAKZXhwaXJlc0F0PTE4MDAxNzI4MDAwMDAKdGFyZ2V0PWRldmljZQprPTQKZmFjdG9yPUZMQVNIfDlkYzc5NDhjNDg3NDQ4MGViMzcyZDFhY2UzNTA3ZDNkCmZhY3Rvcj1FVEhFUk5FVHw0MDRlMzU3MmM5OWM0YjRhZTM2MzRhMjQzZGU5NDBiNgpmYWN0b3I9V0lGSXxjZWVjYzhiMzMyODZlYTIyY2JlNzdiY2MwYmUzMDMxNwpmYWN0b3I9U1lTVEVNX1NFUklBTHxlMGUyYzBhZTU4ODNlNWQ1OTU2YTY2OTljZDVlOGU4NQpmYWN0b3I9QkxVRVRPT1RIfGJiYzMyOWUyYTFlMzhmYjljMWNiZTA2MzI2NTBiNGZhCi0tCmxpY2Vuc2U9bGljLXc1CmdyYW50PTEKYW1vdW50PTIwCmluc3RhbGw9ZDNlMjQ1ODc3OWE1MTdhMjc5YzJkNWE5ZTEwNTcxZTVjZDRlNTZkNDk0NGE2M2YzMWI2OWMyMDE2N2UyNjkyYgpleHBpcnk9MApmcmVzaD0w.ARu3zatp6Rg19mdfWkObU2kwODgsZf2GjQScGLn5NJcr2nzWeey0MuH68/L+iVreCmUDl6dJ867yPwm+miqUBA==",
+        "device": "tvA",
+        "install": "tvA-install-1",
+        "ring": ["server"],
+        "revoked": [],
+        "now": 1800086400000,
+        "lastGrant": 1
+      },
+      "expect": {
+        "result": "STALE_SEQUENCE"
+      }
+    },
+    {
+      "id": "tokens-key-without-production-scope",
+      "type": "tokens",
+      "request": {
+        "token": "cbx1.Y2FzdGJyaWRnZS1lbnZlbG9wZS12MQp0eXBlPXRva2VucwpraWQ9NmU2N2IyMzg3NDY3MTlmMwpzZXE9NQpub25jZT0wMDAwMDAwMDAwMDAwMDA1Cmlzc3VlZEF0PTE4MDAwMDAwMDAwMDAKbm90QmVmb3JlPTE4MDAwMDAwMDAwMDAKZXhwaXJlc0F0PTE4MDAxNzI4MDAwMDAKdGFyZ2V0PWRldmljZQprPTQKZmFjdG9yPUZMQVNIfDlkYzc5NDhjNDg3NDQ4MGViMzcyZDFhY2UzNTA3ZDNkCmZhY3Rvcj1FVEhFUk5FVHw0MDRlMzU3MmM5OWM0YjRhZTM2MzRhMjQzZGU5NDBiNgpmYWN0b3I9V0lGSXxjZWVjYzhiMzMyODZlYTIyY2JlNzdiY2MwYmUzMDMxNwpmYWN0b3I9U1lTVEVNX1NFUklBTHxlMGUyYzBhZTU4ODNlNWQ1OTU2YTY2OTljZDVlOGU4NQpmYWN0b3I9QkxVRVRPT1RIfGJiYzMyOWUyYTFlMzhmYjljMWNiZTA2MzI2NTBiNGZhCi0tCmxpY2Vuc2U9bGljLXc1CmdyYW50PTUKYW1vdW50PTIwCmluc3RhbGw9ZDNlMjQ1ODc3OWE1MTdhMjc5YzJkNWE5ZTEwNTcxZTVjZDRlNTZkNDk0NGE2M2YzMWI2OWMyMDE2N2UyNjkyYgpleHBpcnk9MApmcmVzaD0w.TUKH/wezVF2FNAwCUSf4lx+720bYecI464xdz//b6w2bya4/GxwHAGQPbqVcjjOGT42HI1Xg431B2/9/Mb7uAg==",
+        "device": "tvA",
+        "install": "tvA-install-1",
+        "ring": ["server", "noprod"],
+        "revoked": [],
+        "now": 1800086400000,
+        "lastGrant": 0
+      },
+      "expect": {
+        "result": "KEY_NOT_ALLOWED"
+      }
+    },
+    {
+      "id": "tokens-window-closed",
+      "type": "tokens",
+      "request": {
+        "token": "cbx1.Y2FzdGJyaWRnZS1lbnZlbG9wZS12MQp0eXBlPXRva2VucwpraWQ9M2FjNzhlNDAxNzkxODgyNwpzZXE9MQpub25jZT0wMDAwMDAwMDAwMDAwMDAxCmlzc3VlZEF0PTE4MDAwMDAwMDAwMDAKbm90QmVmb3JlPTE4MDAwMDAwMDAwMDAKZXhwaXJlc0F0PTE4MDAxNzI4MDAwMDAKdGFyZ2V0PWRldmljZQprPTQKZmFjdG9yPUZMQVNIfDlkYzc5NDhjNDg3NDQ4MGViMzcyZDFhY2UzNTA3ZDNkCmZhY3Rvcj1FVEhFUk5FVHw0MDRlMzU3MmM5OWM0YjRhZTM2MzRhMjQzZGU5NDBiNgpmYWN0b3I9V0lGSXxjZWVjYzhiMzMyODZlYTIyY2JlNzdiY2MwYmUzMDMxNwpmYWN0b3I9U1lTVEVNX1NFUklBTHxlMGUyYzBhZTU4ODNlNWQ1OTU2YTY2OTljZDVlOGU4NQpmYWN0b3I9QkxVRVRPT1RIfGJiYzMyOWUyYTFlMzhmYjljMWNiZTA2MzI2NTBiNGZhCi0tCmxpY2Vuc2U9bGljLXc1CmdyYW50PTEKYW1vdW50PTIwCmluc3RhbGw9ZDNlMjQ1ODc3OWE1MTdhMjc5YzJkNWE5ZTEwNTcxZTVjZDRlNTZkNDk0NGE2M2YzMWI2OWMyMDE2N2UyNjkyYgpleHBpcnk9MApmcmVzaD0w.ARu3zatp6Rg19mdfWkObU2kwODgsZf2GjQScGLn5NJcr2nzWeey0MuH68/L+iVreCmUDl6dJ867yPwm+miqUBA==",
+        "device": "tvA",
+        "install": "tvA-install-1",
+        "ring": ["server"],
+        "revoked": [],
+        "now": 1800691200000,
+        "lastGrant": 0
+      },
+      "expect": {
+        "result": "WINDOW_CLOSED"
+      }
+    },
+    {
+      "id": "tokens-not-yet-valid",
+      "type": "tokens",
+      "request": {
+        "token": "cbx1.Y2FzdGJyaWRnZS1lbnZlbG9wZS12MQp0eXBlPXRva2VucwpraWQ9M2FjNzhlNDAxNzkxODgyNwpzZXE9Ngpub25jZT0wMDAwMDAwMDAwMDAwMDA2Cmlzc3VlZEF0PTE4MDAwMDAwMDAwMDAKbm90QmVmb3JlPTE4MDAxNzI4MDAwMDAKZXhwaXJlc0F0PTE4MDAyNTkyMDAwMDAKdGFyZ2V0PWRldmljZQprPTQKZmFjdG9yPUZMQVNIfDlkYzc5NDhjNDg3NDQ4MGViMzcyZDFhY2UzNTA3ZDNkCmZhY3Rvcj1FVEhFUk5FVHw0MDRlMzU3MmM5OWM0YjRhZTM2MzRhMjQzZGU5NDBiNgpmYWN0b3I9V0lGSXxjZWVjYzhiMzMyODZlYTIyY2JlNzdiY2MwYmUzMDMxNwpmYWN0b3I9U1lTVEVNX1NFUklBTHxlMGUyYzBhZTU4ODNlNWQ1OTU2YTY2OTljZDVlOGU4NQpmYWN0b3I9QkxVRVRPT1RIfGJiYzMyOWUyYTFlMzhmYjljMWNiZTA2MzI2NTBiNGZhCi0tCmxpY2Vuc2U9bGljLXc1CmdyYW50PTYKYW1vdW50PTIwCmluc3RhbGw9ZDNlMjQ1ODc3OWE1MTdhMjc5YzJkNWE5ZTEwNTcxZTVjZDRlNTZkNDk0NGE2M2YzMWI2OWMyMDE2N2UyNjkyYgpleHBpcnk9MApmcmVzaD0w.IwoNo7uuEusqG7Wp95o6CRUsAtJmyvJfdsznGDYN0BPt6fpijju+2TbJSQxovxilNMTZYKH1wttSL+AxY2weCA==",
+        "device": "tvA",
+        "install": "tvA-install-1",
+        "ring": ["server"],
+        "revoked": [],
+        "now": 1800000000000,
+        "lastGrant": 0
+      },
+      "expect": {
+        "result": "NOT_YET_VALID"
+      }
+    },
+    {
+      "id": "tokens-unknown-key",
+      "type": "tokens",
+      "request": {
+        "token": "cbx1.Y2FzdGJyaWRnZS1lbnZlbG9wZS12MQp0eXBlPXRva2VucwpraWQ9M2FjNzhlNDAxNzkxODgyNwpzZXE9MQpub25jZT0wMDAwMDAwMDAwMDAwMDAxCmlzc3VlZEF0PTE4MDAwMDAwMDAwMDAKbm90QmVmb3JlPTE4MDAwMDAwMDAwMDAKZXhwaXJlc0F0PTE4MDAxNzI4MDAwMDAKdGFyZ2V0PWRldmljZQprPTQKZmFjdG9yPUZMQVNIfDlkYzc5NDhjNDg3NDQ4MGViMzcyZDFhY2UzNTA3ZDNkCmZhY3Rvcj1FVEhFUk5FVHw0MDRlMzU3MmM5OWM0YjRhZTM2MzRhMjQzZGU5NDBiNgpmYWN0b3I9V0lGSXxjZWVjYzhiMzMyODZlYTIyY2JlNzdiY2MwYmUzMDMxNwpmYWN0b3I9U1lTVEVNX1NFUklBTHxlMGUyYzBhZTU4ODNlNWQ1OTU2YTY2OTljZDVlOGU4NQpmYWN0b3I9QkxVRVRPT1RIfGJiYzMyOWUyYTFlMzhmYjljMWNiZTA2MzI2NTBiNGZhCi0tCmxpY2Vuc2U9bGljLXc1CmdyYW50PTEKYW1vdW50PTIwCmluc3RhbGw9ZDNlMjQ1ODc3OWE1MTdhMjc5YzJkNWE5ZTEwNTcxZTVjZDRlNTZkNDk0NGE2M2YzMWI2OWMyMDE2N2UyNjkyYgpleHBpcnk9MApmcmVzaD0w.ARu3zatp6Rg19mdfWkObU2kwODgsZf2GjQScGLn5NJcr2nzWeey0MuH68/L+iVreCmUDl6dJ867yPwm+miqUBA==",
+        "device": "tvA",
+        "install": "tvA-install-1",
+        "ring": [],
+        "revoked": [],
+        "now": 1800086400000,
+        "lastGrant": 0
+      },
+      "expect": {
+        "result": "UNKNOWN_KEY"
+      }
+    },
+    {
+      "id": "tokens-revoked-key",
+      "type": "tokens",
+      "request": {
+        "token": "cbx1.Y2FzdGJyaWRnZS1lbnZlbG9wZS12MQp0eXBlPXRva2VucwpraWQ9M2FjNzhlNDAxNzkxODgyNwpzZXE9MQpub25jZT0wMDAwMDAwMDAwMDAwMDAxCmlzc3VlZEF0PTE4MDAwMDAwMDAwMDAKbm90QmVmb3JlPTE4MDAwMDAwMDAwMDAKZXhwaXJlc0F0PTE4MDAxNzI4MDAwMDAKdGFyZ2V0PWRldmljZQprPTQKZmFjdG9yPUZMQVNIfDlkYzc5NDhjNDg3NDQ4MGViMzcyZDFhY2UzNTA3ZDNkCmZhY3Rvcj1FVEhFUk5FVHw0MDRlMzU3MmM5OWM0YjRhZTM2MzRhMjQzZGU5NDBiNgpmYWN0b3I9V0lGSXxjZWVjYzhiMzMyODZlYTIyY2JlNzdiY2MwYmUzMDMxNwpmYWN0b3I9U1lTVEVNX1NFUklBTHxlMGUyYzBhZTU4ODNlNWQ1OTU2YTY2OTljZDVlOGU4NQpmYWN0b3I9QkxVRVRPT1RIfGJiYzMyOWUyYTFlMzhmYjljMWNiZTA2MzI2NTBiNGZhCi0tCmxpY2Vuc2U9bGljLXc1CmdyYW50PTEKYW1vdW50PTIwCmluc3RhbGw9ZDNlMjQ1ODc3OWE1MTdhMjc5YzJkNWE5ZTEwNTcxZTVjZDRlNTZkNDk0NGE2M2YzMWI2OWMyMDE2N2UyNjkyYgpleHBpcnk9MApmcmVzaD0w.ARu3zatp6Rg19mdfWkObU2kwODgsZf2GjQScGLn5NJcr2nzWeey0MuH68/L+iVreCmUDl6dJ867yPwm+miqUBA==",
+        "device": "tvA",
+        "install": "tvA-install-1",
+        "ring": ["server"],
+        "revoked": ["server"],
+        "now": 1800086400000,
+        "lastGrant": 0
+      },
+      "expect": {
+        "result": "REVOKED_KEY"
+      }
+    },
+    {
+      "id": "tokens-altered-signature",
+      "type": "tokens",
+      "request": {
+        "token": "cbx1.Y2FzdGJyaWRnZS1lbnZlbG9wZS12MQp0eXBlPXRva2VucwpraWQ9M2FjNzhlNDAxNzkxODgyNwpzZXE9MQpub25jZT0wMDAwMDAwMDAwMDAwMDAxCmlzc3VlZEF0PTE4MDAwMDAwMDAwMDAKbm90QmVmb3JlPTE4MDAwMDAwMDAwMDAKZXhwaXJlc0F0PTE4MDAxNzI4MDAwMDAKdGFyZ2V0PWRldmljZQprPTQKZmFjdG9yPUZMQVNIfDlkYzc5NDhjNDg3NDQ4MGViMzcyZDFhY2UzNTA3ZDNkCmZhY3Rvcj1FVEhFUk5FVHw0MDRlMzU3MmM5OWM0YjRhZTM2MzRhMjQzZGU5NDBiNgpmYWN0b3I9V0lGSXxjZWVjYzhiMzMyODZlYTIyY2JlNzdiY2MwYmUzMDMxNwpmYWN0b3I9U1lTVEVNX1NFUklBTHxlMGUyYzBhZTU4ODNlNWQ1OTU2YTY2OTljZDVlOGU4NQpmYWN0b3I9QkxVRVRPT1RIfGJiYzMyOWUyYTFlMzhmYjljMWNiZTA2MzI2NTBiNGZhCi0tCmxpY2Vuc2U9bGljLXc1CmdyYW50PTEKYW1vdW50PTIwCmluc3RhbGw9ZDNlMjQ1ODc3OWE1MTdhMjc5YzJkNWE5ZTEwNTcxZTVjZDRlNTZkNDk0NGE2M2YzMWI2OWMyMDE2N2UyNjkyYgpleHBpcnk9MApmcmVzaD0w.BRu3zatp6Rg19mdfWkObU2kwODgsZf2GjQScGLn5NJcr2nzWeey0MuH68/L+iVreCmUDl6dJ867yPwm+miqUBA==",
+        "device": "tvA",
+        "install": "tvA-install-1",
+        "ring": ["server"],
+        "revoked": [],
+        "now": 1800086400000,
+        "lastGrant": 0
+      },
+      "expect": {
+        "result": "BAD_SIGNATURE"
+      }
+    },
+    {
+      "id": "tokens-malformed",
+      "type": "tokens",
+      "request": {
+        "token": "cbx1.xx.yy",
+        "device": "tvA",
+        "install": "tvA-install-1",
+        "ring": ["server"],
+        "revoked": [],
+        "now": 1800086400000,
+        "lastGrant": 0
+      },
+      "expect": {
+        "result": "MALFORMED"
+      }
+    },
+    {
+      "id": "tokens-not-a-token-type",
+      "type": "tokens",
+      "request": {
+        "token": "cbx1.Y2FzdGJyaWRnZS1lbnZlbG9wZS12MQp0eXBlPW9yZGVyCmtpZD0zYWM3OGU0MDE3OTE4ODI3CnNlcT0xCm5vbmNlPTAwMDAwMDAwMDAwMDAwYmIKaXNzdWVkQXQ9MTgwMDAwMDAwMDAwMApub3RCZWZvcmU9MTgwMDAwMDAwMDAwMApleHBpcmVzQXQ9MTgwMDA4NjQwMDAwMAp0YXJnZXQ9YW55Ci0tCmFjdGlvbj1ub29w./tfnayv/vioyO02P+vXdaCxMH4IUpuAnzCxGMO4DKtB0jJwdfnRiCfeU1h/nB2LCm9D9waHoMWcxNrbwjtXVBQ==",
+        "device": "tvA",
+        "install": "tvA-install-1",
+        "ring": ["server"],
+        "revoked": [],
+        "now": 1800086400000,
+        "lastGrant": 0
+      },
+      "expect": {
+        "result": "UNKNOWN_TYPE"
+      }
+    },
+    {
+      "id": "tokens-amount-over-limit",
+      "type": "tokens",
+      "request": {
+        "token": "cbx1.Y2FzdGJyaWRnZS1lbnZlbG9wZS12MQp0eXBlPXRva2VucwpraWQ9M2FjNzhlNDAxNzkxODgyNwpzZXE9OQpub25jZT0wMDAwMDAwMDAwMDAwMGFhCmlzc3VlZEF0PTE4MDAwMDAwMDAwMDAKbm90QmVmb3JlPTE4MDAwMDAwMDAwMDAKZXhwaXJlc0F0PTE4MDAwODY0MDAwMDAKdGFyZ2V0PWRldmljZQprPTQKZmFjdG9yPUZMQVNIfDlkYzc5NDhjNDg3NDQ4MGViMzcyZDFhY2UzNTA3ZDNkCmZhY3Rvcj1FVEhFUk5FVHw0MDRlMzU3MmM5OWM0YjRhZTM2MzRhMjQzZGU5NDBiNgpmYWN0b3I9V0lGSXxjZWVjYzhiMzMyODZlYTIyY2JlNzdiY2MwYmUzMDMxNwpmYWN0b3I9U1lTVEVNX1NFUklBTHxlMGUyYzBhZTU4ODNlNWQ1OTU2YTY2OTljZDVlOGU4NQpmYWN0b3I9QkxVRVRPT1RIfGJiYzMyOWUyYTFlMzhmYjljMWNiZTA2MzI2NTBiNGZhCi0tCmxpY2Vuc2U9bGljLXc1CmdyYW50PTkKYW1vdW50PTEwMDAxCmluc3RhbGw9ZDNlMjQ1ODc3OWE1MTdhMjc5YzJkNWE5ZTEwNTcxZTVjZDRlNTZkNDk0NGE2M2YzMWI2OWMyMDE2N2UyNjkyYgpleHBpcnk9MApmcmVzaD0w.9rPfsf2+3WpdJROgMU+veij+nv3h3AA2Bh6CLrHt4KMZAZ4ux/17Q77XYLfaCWpO7r2HalL2gpywoeFjjggzAA==",
+        "device": "tvA",
+        "install": "tvA-install-1",
+        "ring": ["server"],
+        "revoked": [],
+        "now": 1800086400000,
+        "lastGrant": 0
+      },
+      "expect": {
+        "result": "BAD_GRANT"
+      }
+    },
+    {
+      "id": "tokens-signed-window-over-72-hours-is-bad-grant",
+      "type": "tokens",
+      "request": {
+        "token": "cbx1.Y2FzdGJyaWRnZS1lbnZlbG9wZS12MQp0eXBlPXRva2VucwpraWQ9M2FjNzhlNDAxNzkxODgyNwpzZXE9OQpub25jZT0wMDAwMDAwMDAwMDAwMGFhCmlzc3VlZEF0PTE4MDAwMDAwMDAwMDAKbm90QmVmb3JlPTE4MDAwMDAwMDAwMDAKZXhwaXJlc0F0PTE4MDAyNTkyMDAwMDEKdGFyZ2V0PWRldmljZQprPTQKZmFjdG9yPUZMQVNIfDlkYzc5NDhjNDg3NDQ4MGViMzcyZDFhY2UzNTA3ZDNkCmZhY3Rvcj1FVEhFUk5FVHw0MDRlMzU3MmM5OWM0YjRhZTM2MzRhMjQzZGU5NDBiNgpmYWN0b3I9V0lGSXxjZWVjYzhiMzMyODZlYTIyY2JlNzdiY2MwYmUzMDMxNwpmYWN0b3I9U1lTVEVNX1NFUklBTHxlMGUyYzBhZTU4ODNlNWQ1OTU2YTY2OTljZDVlOGU4NQpmYWN0b3I9QkxVRVRPT1RIfGJiYzMyOWUyYTFlMzhmYjljMWNiZTA2MzI2NTBiNGZhCi0tCmxpY2Vuc2U9bGljLXc1CmdyYW50PTkKYW1vdW50PTIwCmluc3RhbGw9ZDNlMjQ1ODc3OWE1MTdhMjc5YzJkNWE5ZTEwNTcxZTVjZDRlNTZkNDk0NGE2M2YzMWI2OWMyMDE2N2UyNjkyYgpleHBpcnk9MApmcmVzaD0w.xZU7czZG9S6xVRTksGgr3gMtn5698Sel7B07FFKYYuPCIzsWq8F8mMo7WIsa/VnEOIRliklZyumaZbA2asG3AQ==",
+        "device": "tvA",
+        "install": "tvA-install-1",
+        "ring": ["server"],
+        "revoked": [],
+        "now": 1800086400000,
+        "lastGrant": 0
+      },
+      "expect": {
+        "result": "BAD_GRANT"
+      }
+    },
+    {
+      "id": "tokens-signed-window-72-hours-exact-is-accepted",
+      "type": "tokens",
+      "request": {
+        "token": "cbx1.Y2FzdGJyaWRnZS1lbnZlbG9wZS12MQp0eXBlPXRva2VucwpraWQ9M2FjNzhlNDAxNzkxODgyNwpzZXE9OQpub25jZT0wMDAwMDAwMDAwMDAwMGFhCmlzc3VlZEF0PTE4MDAwMDAwMDAwMDAKbm90QmVmb3JlPTE4MDAwMDAwMDAwMDAKZXhwaXJlc0F0PTE4MDAyNTkyMDAwMDAKdGFyZ2V0PWRldmljZQprPTQKZmFjdG9yPUZMQVNIfDlkYzc5NDhjNDg3NDQ4MGViMzcyZDFhY2UzNTA3ZDNkCmZhY3Rvcj1FVEhFUk5FVHw0MDRlMzU3MmM5OWM0YjRhZTM2MzRhMjQzZGU5NDBiNgpmYWN0b3I9V0lGSXxjZWVjYzhiMzMyODZlYTIyY2JlNzdiY2MwYmUzMDMxNwpmYWN0b3I9U1lTVEVNX1NFUklBTHxlMGUyYzBhZTU4ODNlNWQ1OTU2YTY2OTljZDVlOGU4NQpmYWN0b3I9QkxVRVRPT1RIfGJiYzMyOWUyYTFlMzhmYjljMWNiZTA2MzI2NTBiNGZhCi0tCmxpY2Vuc2U9bGljLXc1CmdyYW50PTkKYW1vdW50PTIwCmluc3RhbGw9ZDNlMjQ1ODc3OWE1MTdhMjc5YzJkNWE5ZTEwNTcxZTVjZDRlNTZkNDk0NGE2M2YzMWI2OWMyMDE2N2UyNjkyYgpleHBpcnk9MApmcmVzaD0w.v797dTVtBJUXim7e69SHka45mO3IqMszhO0eLdwCm4cqzEJsOMUuipFGYATl61Qwb3Vf1cwThn8reWsSOMr6Cw==",
+        "device": "tvA",
+        "install": "tvA-install-1",
+        "ring": ["server"],
+        "revoked": [],
+        "now": 1800086400000,
+        "lastGrant": 0
+      },
+      "expect": {
+        "result": "ACCEPTED"
+      }
+    },
+    {
+      "id": "tokens-opening-voucher-accepted",
+      "type": "tokens",
+      "request": {
+        "token": "cbx1.Y2FzdGJyaWRnZS1lbnZlbG9wZS12MQp0eXBlPXRva2VucwpraWQ9M2FjNzhlNDAxNzkxODgyNwpzZXE9MTIKbm9uY2U9MDAwMDAwMDAwMDAwMDAwYwppc3N1ZWRBdD0xODAwMDAwMDAwMDAwCm5vdEJlZm9yZT0xODAwMDAwMDAwMDAwCmV4cGlyZXNBdD0xODAwMTcyODAwMDAwCnRhcmdldD1kZXZpY2UKaz00CmZhY3Rvcj1GTEFTSHw5ZGM3OTQ4YzQ4NzQ0ODBlYjM3MmQxYWNlMzUwN2QzZApmYWN0b3I9RVRIRVJORVR8NDA0ZTM1NzJjOTljNGI0YWUzNjM0YTI0M2RlOTQwYjYKZmFjdG9yPVdJRkl8Y2VlY2M4YjMzMjg2ZWEyMmNiZTc3YmNjMGJlMzAzMTcKZmFjdG9yPVNZU1RFTV9TRVJJQUx8ZTBlMmMwYWU1ODgzZTVkNTk1NmE2Njk5Y2Q1ZThlODUKZmFjdG9yPUJMVUVUT09USHxiYmMzMjllMmExZTM4ZmI5YzFjYmUwNjMyNjUwYjRmYQotLQpsaWNlbnNlPWxpYy13NQpncmFudD0xMgphbW91bnQ9MjAKaW5zdGFsbD1kM2UyNDU4Nzc5YTUxN2EyNzljMmQ1YTllMTA1NzFlNWNkNGU1NmQ0OTQ0YTYzZjMxYjY5YzIwMTY3ZTI2OTJiCmV4cGlyeT0wCmZyZXNoPTE.kVUuA4Rv5e/GG/cuq4LmU+UDSte7qmRzAxo6xCbnqdI6ifqrph6oPBosd3feS8Fxco8qvcdJf4Pcs98tLUKQCg==",
+        "device": "tvA",
+        "install": "tvA-install-1",
+        "ring": ["server"],
+        "revoked": [],
+        "now": 1800086400000,
+        "lastGrant": 0
+      },
+      "expect": {
+        "result": "ACCEPTED"
+      }
+    },
+    {
+      "id": "tokens-signed-opening-window-over-48-hours-is-bad-grant",
+      "type": "tokens",
+      "request": {
+        "token": "cbx1.Y2FzdGJyaWRnZS1lbnZlbG9wZS12MQp0eXBlPXRva2VucwpraWQ9M2FjNzhlNDAxNzkxODgyNwpzZXE9OQpub25jZT0wMDAwMDAwMDAwMDAwMGFhCmlzc3VlZEF0PTE4MDAwMDAwMDAwMDAKbm90QmVmb3JlPTE4MDAwMDAwMDAwMDAKZXhwaXJlc0F0PTE4MDAxNzI4MDAwMDEKdGFyZ2V0PWRldmljZQprPTQKZmFjdG9yPUZMQVNIfDlkYzc5NDhjNDg3NDQ4MGViMzcyZDFhY2UzNTA3ZDNkCmZhY3Rvcj1FVEhFUk5FVHw0MDRlMzU3MmM5OWM0YjRhZTM2MzRhMjQzZGU5NDBiNgpmYWN0b3I9V0lGSXxjZWVjYzhiMzMyODZlYTIyY2JlNzdiY2MwYmUzMDMxNwpmYWN0b3I9U1lTVEVNX1NFUklBTHxlMGUyYzBhZTU4ODNlNWQ1OTU2YTY2OTljZDVlOGU4NQpmYWN0b3I9QkxVRVRPT1RIfGJiYzMyOWUyYTFlMzhmYjljMWNiZTA2MzI2NTBiNGZhCi0tCmxpY2Vuc2U9bGljLXc1CmdyYW50PTkKYW1vdW50PTIwCmluc3RhbGw9ZDNlMjQ1ODc3OWE1MTdhMjc5YzJkNWE5ZTEwNTcxZTVjZDRlNTZkNDk0NGE2M2YzMWI2OWMyMDE2N2UyNjkyYgpleHBpcnk9MApmcmVzaD0x.Ja0g41sUkhN+X+D5wV3zgET0g+6SRgD9u/Lfg3ywnno6Ii7P97+M/PpH/nbghjL9GKbsQNPHcX1uyjI0BMSxCg==",
+        "device": "tvA",
+        "install": "tvA-install-1",
+        "ring": ["server"],
+        "revoked": [],
+        "now": 1800086400000,
+        "lastGrant": 0
+      },
+      "expect": {
+        "result": "BAD_GRANT"
+      }
+    },
+    {
+      "id": "tokens-signed-opening-window-48-hours-exact-is-accepted",
+      "type": "tokens",
+      "request": {
+        "token": "cbx1.Y2FzdGJyaWRnZS1lbnZlbG9wZS12MQp0eXBlPXRva2VucwpraWQ9M2FjNzhlNDAxNzkxODgyNwpzZXE9OQpub25jZT0wMDAwMDAwMDAwMDAwMGFhCmlzc3VlZEF0PTE4MDAwMDAwMDAwMDAKbm90QmVmb3JlPTE4MDAwMDAwMDAwMDAKZXhwaXJlc0F0PTE4MDAxNzI4MDAwMDAKdGFyZ2V0PWRldmljZQprPTQKZmFjdG9yPUZMQVNIfDlkYzc5NDhjNDg3NDQ4MGViMzcyZDFhY2UzNTA3ZDNkCmZhY3Rvcj1FVEhFUk5FVHw0MDRlMzU3MmM5OWM0YjRhZTM2MzRhMjQzZGU5NDBiNgpmYWN0b3I9V0lGSXxjZWVjYzhiMzMyODZlYTIyY2JlNzdiY2MwYmUzMDMxNwpmYWN0b3I9U1lTVEVNX1NFUklBTHxlMGUyYzBhZTU4ODNlNWQ1OTU2YTY2OTljZDVlOGU4NQpmYWN0b3I9QkxVRVRPT1RIfGJiYzMyOWUyYTFlMzhmYjljMWNiZTA2MzI2NTBiNGZhCi0tCmxpY2Vuc2U9bGljLXc1CmdyYW50PTkKYW1vdW50PTIwCmluc3RhbGw9ZDNlMjQ1ODc3OWE1MTdhMjc5YzJkNWE5ZTEwNTcxZTVjZDRlNTZkNDk0NGE2M2YzMWI2OWMyMDE2N2UyNjkyYgpleHBpcnk9MApmcmVzaD0x.UjVa0m5tEGVTV5NQVslxywGvFEbuRtyoNZkJwMP7yfBXdj/5vRmNk43FTgH2XykZjEiFqbgtLjpHKBjYfRpgDw==",
+        "device": "tvA",
+        "install": "tvA-install-1",
+        "ring": ["server"],
+        "revoked": [],
+        "now": 1800086400000,
+        "lastGrant": 0
+      },
+      "expect": {
+        "result": "ACCEPTED"
+      }
+    },
+    {
+      "id": "tokens-old-five-line-body-is-bad-grant",
+      "type": "tokens",
+      "request": {
+        "token": "cbx1.Y2FzdGJyaWRnZS1lbnZlbG9wZS12MQp0eXBlPXRva2VucwpraWQ9M2FjNzhlNDAxNzkxODgyNwpzZXE9OQpub25jZT0wMDAwMDAwMDAwMDAwMGFhCmlzc3VlZEF0PTE4MDAwMDAwMDAwMDAKbm90QmVmb3JlPTE4MDAwMDAwMDAwMDAKZXhwaXJlc0F0PTE4MDAwODY0MDAwMDAKdGFyZ2V0PWRldmljZQprPTQKZmFjdG9yPUZMQVNIfDlkYzc5NDhjNDg3NDQ4MGViMzcyZDFhY2UzNTA3ZDNkCmZhY3Rvcj1FVEhFUk5FVHw0MDRlMzU3MmM5OWM0YjRhZTM2MzRhMjQzZGU5NDBiNgpmYWN0b3I9V0lGSXxjZWVjYzhiMzMyODZlYTIyY2JlNzdiY2MwYmUzMDMxNwpmYWN0b3I9U1lTVEVNX1NFUklBTHxlMGUyYzBhZTU4ODNlNWQ1OTU2YTY2OTljZDVlOGU4NQpmYWN0b3I9QkxVRVRPT1RIfGJiYzMyOWUyYTFlMzhmYjljMWNiZTA2MzI2NTBiNGZhCi0tCmxpY2Vuc2U9bGljLXc1CmdyYW50PTkKYW1vdW50PTIwCmluc3RhbGw9ZDNlMjQ1ODc3OWE1MTdhMjc5YzJkNWE5ZTEwNTcxZTVjZDRlNTZkNDk0NGE2M2YzMWI2OWMyMDE2N2UyNjkyYgpleHBpcnk9MA.WJPCRO9Ir2o3gEyRHmYLCcpJulh+6tvzw4LxaoHQonXSknClKeF50DyFqtWlmW72Vsx/nnW9x20Cx/aZ4th2Cg==",
+        "device": "tvA",
+        "install": "tvA-install-1",
+        "ring": ["server"],
+        "revoked": [],
+        "now": 1800086400000,
+        "lastGrant": 0
+      },
+      "expect": {
+        "result": "BAD_GRANT"
+      }
+    },
+    {
+      "id": "tokens-fresh-flag-must-be-0-or-1",
+      "type": "tokens",
+      "request": {
+        "token": "cbx1.Y2FzdGJyaWRnZS1lbnZlbG9wZS12MQp0eXBlPXRva2VucwpraWQ9M2FjNzhlNDAxNzkxODgyNwpzZXE9OQpub25jZT0wMDAwMDAwMDAwMDAwMGFhCmlzc3VlZEF0PTE4MDAwMDAwMDAwMDAKbm90QmVmb3JlPTE4MDAwMDAwMDAwMDAKZXhwaXJlc0F0PTE4MDAwODY0MDAwMDAKdGFyZ2V0PWRldmljZQprPTQKZmFjdG9yPUZMQVNIfDlkYzc5NDhjNDg3NDQ4MGViMzcyZDFhY2UzNTA3ZDNkCmZhY3Rvcj1FVEhFUk5FVHw0MDRlMzU3MmM5OWM0YjRhZTM2MzRhMjQzZGU5NDBiNgpmYWN0b3I9V0lGSXxjZWVjYzhiMzMyODZlYTIyY2JlNzdiY2MwYmUzMDMxNwpmYWN0b3I9U1lTVEVNX1NFUklBTHxlMGUyYzBhZTU4ODNlNWQ1OTU2YTY2OTljZDVlOGU4NQpmYWN0b3I9QkxVRVRPT1RIfGJiYzMyOWUyYTFlMzhmYjljMWNiZTA2MzI2NTBiNGZhCi0tCmxpY2Vuc2U9bGljLXc1CmdyYW50PTkKYW1vdW50PTIwCmluc3RhbGw9ZDNlMjQ1ODc3OWE1MTdhMjc5YzJkNWE5ZTEwNTcxZTVjZDRlNTZkNDk0NGE2M2YzMWI2OWMyMDE2N2UyNjkyYgpleHBpcnk9MApmcmVzaD0y.00femeefWNG58UP1Z0Q7vtjQjTBI5Ci73cHv6v32m2nu6HYEhjK5k/9wOU7kmzWUtdfKWIFPxvEqg4fxsP9ABA==",
+        "device": "tvA",
+        "install": "tvA-install-1",
+        "ring": ["server"],
+        "revoked": [],
+        "now": 1800086400000,
+        "lastGrant": 0
+      },
+      "expect": {
+        "result": "BAD_GRANT"
+      }
+    },
+    {
+      "id": "tokens-signed-for-any-device-is-wrong-target",
+      "type": "tokens",
+      "request": {
+        "token": "cbx1.Y2FzdGJyaWRnZS1lbnZlbG9wZS12MQp0eXBlPXRva2VucwpraWQ9M2FjNzhlNDAxNzkxODgyNwpzZXE9OQpub25jZT0wMDAwMDAwMDAwMDAwMGFhCmlzc3VlZEF0PTE4MDAwMDAwMDAwMDAKbm90QmVmb3JlPTE4MDAwMDAwMDAwMDAKZXhwaXJlc0F0PTE4MDAwODY0MDAwMDAKdGFyZ2V0PWFueQotLQpsaWNlbnNlPWxpYy13NQpncmFudD05CmFtb3VudD0yMAppbnN0YWxsPWQzZTI0NTg3NzlhNTE3YTI3OWMyZDVhOWUxMDU3MWU1Y2Q0ZTU2ZDQ5NDRhNjNmMzFiNjljMjAxNjdlMjY5MmIKZXhwaXJ5PTAKZnJlc2g9MA.jxus0iPf2mYIWs4MFLSz1n1d5v1N1ShGlrPJDDJT/MNgnLpWyXKd2+WfSlQDhQNNlGK3Wj5M/RBPy2keTpvnDw==",
+        "device": "tvA",
+        "install": "tvA-install-1",
+        "ring": ["server"],
+        "revoked": [],
+        "now": 1800086400000,
+        "lastGrant": 0
+      },
+      "expect": {
+        "result": "WRONG_TARGET"
+      }
+    },
+    {
+      "id": "tokens-grant-expiry-passed",
+      "type": "tokens",
+      "request": {
+        "token": "cbx1.Y2FzdGJyaWRnZS1lbnZlbG9wZS12MQp0eXBlPXRva2VucwpraWQ9M2FjNzhlNDAxNzkxODgyNwpzZXE9Nwpub25jZT0wMDAwMDAwMDAwMDAwMDA3Cmlzc3VlZEF0PTE4MDAwMDAwMDAwMDAKbm90QmVmb3JlPTE4MDAwMDAwMDAwMDAKZXhwaXJlc0F0PTE4MDAxNzI4MDAwMDAKdGFyZ2V0PWRldmljZQprPTQKZmFjdG9yPUZMQVNIfDlkYzc5NDhjNDg3NDQ4MGViMzcyZDFhY2UzNTA3ZDNkCmZhY3Rvcj1FVEhFUk5FVHw0MDRlMzU3MmM5OWM0YjRhZTM2MzRhMjQzZGU5NDBiNgpmYWN0b3I9V0lGSXxjZWVjYzhiMzMyODZlYTIyY2JlNzdiY2MwYmUzMDMxNwpmYWN0b3I9U1lTVEVNX1NFUklBTHxlMGUyYzBhZTU4ODNlNWQ1OTU2YTY2OTljZDVlOGU4NQpmYWN0b3I9QkxVRVRPT1RIfGJiYzMyOWUyYTFlMzhmYjljMWNiZTA2MzI2NTBiNGZhCi0tCmxpY2Vuc2U9bGljLXc1CmdyYW50PTcKYW1vdW50PTIwCmluc3RhbGw9ZDNlMjQ1ODc3OWE1MTdhMjc5YzJkNWE5ZTEwNTcxZTVjZDRlNTZkNDk0NGE2M2YzMWI2OWMyMDE2N2UyNjkyYgpleHBpcnk9MTgwMDA0MzIwMDAwMApmcmVzaD0w.PS8DFV7daHFNAtb9rQQbtbz5790f+hjMqb341GIhQvnF9mCYg7h5ARUW88mOvHBNg8SlPQP0UU0RXuhSSJCWAQ==",
+        "device": "tvA",
+        "install": "tvA-install-1",
+        "ring": ["server"],
+        "revoked": [],
+        "now": 1800086400000,
+        "lastGrant": 0
+      },
+      "expect": {
+        "result": "WINDOW_CLOSED"
+      }
+    },
+    {
+      "id": "tokens-non-canonical-body",
+      "type": "tokens",
+      "request": {
+        "token": "cbx1.Y2FzdGJyaWRnZS1lbnZlbG9wZS12MQp0eXBlPXRva2VucwpraWQ9M2FjNzhlNDAxNzkxODgyNwpzZXE9OQpub25jZT0wMDAwMDAwMDAwMDAwMGFhCmlzc3VlZEF0PTE4MDAwMDAwMDAwMDAKbm90QmVmb3JlPTE4MDAwMDAwMDAwMDAKZXhwaXJlc0F0PTE4MDAwODY0MDAwMDAKdGFyZ2V0PWRldmljZQprPTQKZmFjdG9yPUZMQVNIfDlkYzc5NDhjNDg3NDQ4MGViMzcyZDFhY2UzNTA3ZDNkCmZhY3Rvcj1FVEhFUk5FVHw0MDRlMzU3MmM5OWM0YjRhZTM2MzRhMjQzZGU5NDBiNgpmYWN0b3I9V0lGSXxjZWVjYzhiMzMyODZlYTIyY2JlNzdiY2MwYmUzMDMxNwpmYWN0b3I9U1lTVEVNX1NFUklBTHxlMGUyYzBhZTU4ODNlNWQ1OTU2YTY2OTljZDVlOGU4NQpmYWN0b3I9QkxVRVRPT1RIfGJiYzMyOWUyYTFlMzhmYjljMWNiZTA2MzI2NTBiNGZhCi0tCmxpY2Vuc2U9bGljLXc1CmdyYW50PTkKYW1vdW50PTAyMAppbnN0YWxsPWQzZTI0NTg3NzlhNTE3YTI3OWMyZDVhOWUxMDU3MWU1Y2Q0ZTU2ZDQ5NDRhNjNmMzFiNjljMjAxNjdlMjY5MmIKZXhwaXJ5PTAKZnJlc2g9MA.9NeQbCDkiq9tbMPb+PA7yUSsugBW7u3nrc1QbXB++KfgT9i4Z5bcOD9BAJKa6aWvY2/sE7wdVkee9pYQHknoCw==",
+        "device": "tvA",
+        "install": "tvA-install-1",
+        "ring": ["server"],
+        "revoked": [],
+        "now": 1800086400000,
+        "lastGrant": 0
+      },
+      "expect": {
+        "result": "BAD_GRANT"
+      }
+    },
+    {
+      "id": "wallet-key-derivation",
+      "type": "wallet-key",
+      "install": "tvA-install-1",
+      "expect": {
+        "key": "2b8cfad21593a5098f66000ce347ba98852f6d30cf8f1e51fc2ba06348ec1333"
+      }
+    },
+    {
+      "id": "wallet-credit-spend-replay-conflict",
+      "type": "wallet",
+      "steps": [
+        {
+          "do": "credit",
+          "token": "cbx1.Y2FzdGJyaWRnZS1lbnZlbG9wZS12MQp0eXBlPXRva2VucwpraWQ9M2FjNzhlNDAxNzkxODgyNwpzZXE9MQpub25jZT0wMDAwMDAwMDAwMDAwMDAxCmlzc3VlZEF0PTE4MDAwMDAwMDAwMDAKbm90QmVmb3JlPTE4MDAwMDAwMDAwMDAKZXhwaXJlc0F0PTE4MDAxNzI4MDAwMDAKdGFyZ2V0PWRldmljZQprPTQKZmFjdG9yPUZMQVNIfDlkYzc5NDhjNDg3NDQ4MGViMzcyZDFhY2UzNTA3ZDNkCmZhY3Rvcj1FVEhFUk5FVHw0MDRlMzU3MmM5OWM0YjRhZTM2MzRhMjQzZGU5NDBiNgpmYWN0b3I9V0lGSXxjZWVjYzhiMzMyODZlYTIyY2JlNzdiY2MwYmUzMDMxNwpmYWN0b3I9U1lTVEVNX1NFUklBTHxlMGUyYzBhZTU4ODNlNWQ1OTU2YTY2OTljZDVlOGU4NQpmYWN0b3I9QkxVRVRPT1RIfGJiYzMyOWUyYTFlMzhmYjljMWNiZTA2MzI2NTBiNGZhCi0tCmxpY2Vuc2U9bGljLXc1CmdyYW50PTEKYW1vdW50PTIwCmluc3RhbGw9ZDNlMjQ1ODc3OWE1MTdhMjc5YzJkNWE5ZTEwNTcxZTVjZDRlNTZkNDk0NGE2M2YzMWI2OWMyMDE2N2UyNjkyYgpleHBpcnk9MApmcmVzaD0x.oY3LtEWTWfA5dpUmrKvBKyfLvq6Y5O47vB8XGDFOrfLk6uB6E+wtfm2wYsaTFkZ4uwkZbMoLIQX6dTu444x5DQ==",
+          "device": "tvA",
+          "install": "tvA-install-1",
+          "ring": ["server"],
+          "now": 1800086400000,
+          "expect": "REOPENED"
+        },
+        {
+          "do": "check",
+          "state": "OK",
+          "balance": 20,
+          "spentTotal": 0
+        },
+        {
+          "do": "spend",
+          "item": "second-chance",
+          "cost": 5,
+          "at": 1800000001000,
+          "op": "quiz:g1:second-chance:1",
+          "expect": "OK",
+          "balance": 15
+        },
+        {
+          "do": "spend",
+          "item": "second-chance",
+          "cost": 5,
+          "at": 1800000001000,
+          "op": "quiz:g1:second-chance:1",
+          "expect": "REPLAY",
+          "balance": 15
+        },
+        {
+          "do": "spend",
+          "item": "extra-joker",
+          "cost": 2,
+          "at": 1800000001000,
+          "op": "quiz:g1:extra-joker:1",
+          "expect": "OK",
+          "balance": 13
+        },
+        {
+          "do": "spend",
+          "item": "extra-joker",
+          "cost": 9,
+          "at": 1800000001000,
+          "op": "quiz:g1:extra-joker:1",
+          "expect": "CONFLICT"
+        },
+        {
+          "do": "spend",
+          "item": "swap-question",
+          "cost": 100,
+          "at": 1800000001000,
+          "op": "quiz:g1:swap-question:1",
+          "expect": "INSUFFICIENT",
+          "balance": 13
+        },
+        {
+          "do": "spend",
+          "item": "swap-question",
+          "cost": 0,
+          "at": 1800000001000,
+          "op": "quiz:g1:swap-question:2",
+          "expect": "INVALID"
+        },
+        {
+          "do": "credit",
+          "token": "cbx1.Y2FzdGJyaWRnZS1lbnZlbG9wZS12MQp0eXBlPXRva2VucwpraWQ9M2FjNzhlNDAxNzkxODgyNwpzZXE9MQpub25jZT0wMDAwMDAwMDAwMDAwMDAxCmlzc3VlZEF0PTE4MDAwMDAwMDAwMDAKbm90QmVmb3JlPTE4MDAwMDAwMDAwMDAKZXhwaXJlc0F0PTE4MDAxNzI4MDAwMDAKdGFyZ2V0PWRldmljZQprPTQKZmFjdG9yPUZMQVNIfDlkYzc5NDhjNDg3NDQ4MGViMzcyZDFhY2UzNTA3ZDNkCmZhY3Rvcj1FVEhFUk5FVHw0MDRlMzU3MmM5OWM0YjRhZTM2MzRhMjQzZGU5NDBiNgpmYWN0b3I9V0lGSXxjZWVjYzhiMzMyODZlYTIyY2JlNzdiY2MwYmUzMDMxNwpmYWN0b3I9U1lTVEVNX1NFUklBTHxlMGUyYzBhZTU4ODNlNWQ1OTU2YTY2OTljZDVlOGU4NQpmYWN0b3I9QkxVRVRPT1RIfGJiYzMyOWUyYTFlMzhmYjljMWNiZTA2MzI2NTBiNGZhCi0tCmxpY2Vuc2U9bGljLXc1CmdyYW50PTEKYW1vdW50PTIwCmluc3RhbGw9ZDNlMjQ1ODc3OWE1MTdhMjc5YzJkNWE5ZTEwNTcxZTVjZDRlNTZkNDk0NGE2M2YzMWI2OWMyMDE2N2UyNjkyYgpleHBpcnk9MApmcmVzaD0w.ARu3zatp6Rg19mdfWkObU2kwODgsZf2GjQScGLn5NJcr2nzWeey0MuH68/L+iVreCmUDl6dJ867yPwm+miqUBA==",
+          "device": "tvA",
+          "install": "tvA-install-1",
+          "ring": ["server"],
+          "now": 1800086400000,
+          "expect": "STALE_SEQUENCE"
+        },
+        {
+          "do": "check",
+          "state": "OK",
+          "balance": 13,
+          "spentTotal": 7
+        },
+        {
+          "do": "restart",
+          "key": "main"
+        },
+        {
+          "do": "check",
+          "state": "OK",
+          "balance": 13,
+          "spentTotal": 7
+        },
+        {
+          "do": "spend",
+          "item": "swap-question",
+          "cost": 3,
+          "at": 1800000001000,
+          "op": "quiz:g1:swap-question:1",
+          "expect": "OK",
+          "balance": 10
+        }
+      ],
+      "reportSince": 1,
+      "expectLines": ["castbridge-token-wallet-v1", "license=lic-w5|16368b5ed3dec3c8|48d45f22167eb58a", "install=4eb3d71317167cd8|07067f5f37973262|96b82a35932fb9f8", "grant=1|20|3ba816fd693c56c7|d810562b1124e329|31b4849c9799ba40", "spend=1|1800000001000|quiz|second-chance|5|quiz:g1:second-chance:1|d059b0a29283701a|42487fc07fb528a8", "spend=2|1800000001000|quiz|extra-joker|2|quiz:g1:extra-joker:1|b7516e02421f55c0|664990a7205abf5a", "spend=3|1800000001000|quiz|swap-question|3|quiz:g1:swap-question:1|cc19ed0f18bf0514|aceb089fc726c049"],
+      "expectReport": ["castbridge-token-report-v1", "license=lic-w5", "install=4eb3d71317167cd8", "lastGrant=1", "spentTotal=10", "lastSpendSeq=3", "spend=2|1800000001000|quiz|extra-joker|2|quiz:g1:extra-joker:1", "spend=3|1800000001000|quiz|swap-question|3|quiz:g1:swap-question:1", "mac=25781172d461fcea"]
+    },
+    {
+      "id": "wallet-never-negative",
+      "type": "wallet",
+      "steps": [
+        {
+          "do": "credit",
+          "token": "cbx1.Y2FzdGJyaWRnZS1lbnZlbG9wZS12MQp0eXBlPXRva2VucwpraWQ9M2FjNzhlNDAxNzkxODgyNwpzZXE9MQpub25jZT0wMDAwMDAwMDAwMDAwMDAxCmlzc3VlZEF0PTE4MDAwMDAwMDAwMDAKbm90QmVmb3JlPTE4MDAwMDAwMDAwMDAKZXhwaXJlc0F0PTE4MDAxNzI4MDAwMDAKdGFyZ2V0PWRldmljZQprPTQKZmFjdG9yPUZMQVNIfDlkYzc5NDhjNDg3NDQ4MGViMzcyZDFhY2UzNTA3ZDNkCmZhY3Rvcj1FVEhFUk5FVHw0MDRlMzU3MmM5OWM0YjRhZTM2MzRhMjQzZGU5NDBiNgpmYWN0b3I9V0lGSXxjZWVjYzhiMzMyODZlYTIyY2JlNzdiY2MwYmUzMDMxNwpmYWN0b3I9U1lTVEVNX1NFUklBTHxlMGUyYzBhZTU4ODNlNWQ1OTU2YTY2OTljZDVlOGU4NQpmYWN0b3I9QkxVRVRPT1RIfGJiYzMyOWUyYTFlMzhmYjljMWNiZTA2MzI2NTBiNGZhCi0tCmxpY2Vuc2U9bGljLXc1CmdyYW50PTEKYW1vdW50PTUKaW5zdGFsbD1kM2UyNDU4Nzc5YTUxN2EyNzljMmQ1YTllMTA1NzFlNWNkNGU1NmQ0OTQ0YTYzZjMxYjY5YzIwMTY3ZTI2OTJiCmV4cGlyeT0wCmZyZXNoPTE.h2OXvsmiOQm/hP1f+5DiiB2NzE/MTmAmNyBc/pqtdm5DtX+vT6kD+exQPjAGvr/IhkAHQkW900HUsAbVZ0FxCQ==",
+          "device": "tvA",
+          "install": "tvA-install-1",
+          "ring": ["server"],
+          "now": 1800086400000,
+          "expect": "REOPENED"
+        },
+        {
+          "do": "spend",
+          "item": "second-chance",
+          "cost": 3,
+          "at": 1800000001000,
+          "op": "quiz:g:a:1",
+          "expect": "OK",
+          "balance": 2
+        },
+        {
+          "do": "spend",
+          "item": "second-chance",
+          "cost": 3,
+          "at": 1800000001000,
+          "op": "quiz:g:a:2",
+          "expect": "INSUFFICIENT",
+          "balance": 2
+        },
+        {
+          "do": "spend",
+          "item": "extra-joker",
+          "cost": 2,
+          "at": 1800000001000,
+          "op": "quiz:g:b:1",
+          "expect": "OK",
+          "balance": 0
+        },
+        {
+          "do": "spend",
+          "item": "extra-joker",
+          "cost": 1,
+          "at": 1800000001000,
+          "op": "quiz:g:b:2",
+          "expect": "INSUFFICIENT",
+          "balance": 0
+        }
+      ]
+    },
+    {
+      "id": "wallet-two-grants-increasing-only",
+      "type": "wallet",
+      "steps": [
+        {
+          "do": "credit",
+          "token": "cbx1.Y2FzdGJyaWRnZS1lbnZlbG9wZS12MQp0eXBlPXRva2VucwpraWQ9M2FjNzhlNDAxNzkxODgyNwpzZXE9MQpub25jZT0wMDAwMDAwMDAwMDAwMDAxCmlzc3VlZEF0PTE4MDAwMDAwMDAwMDAKbm90QmVmb3JlPTE4MDAwMDAwMDAwMDAKZXhwaXJlc0F0PTE4MDAxNzI4MDAwMDAKdGFyZ2V0PWRldmljZQprPTQKZmFjdG9yPUZMQVNIfDlkYzc5NDhjNDg3NDQ4MGViMzcyZDFhY2UzNTA3ZDNkCmZhY3Rvcj1FVEhFUk5FVHw0MDRlMzU3MmM5OWM0YjRhZTM2MzRhMjQzZGU5NDBiNgpmYWN0b3I9V0lGSXxjZWVjYzhiMzMyODZlYTIyY2JlNzdiY2MwYmUzMDMxNwpmYWN0b3I9U1lTVEVNX1NFUklBTHxlMGUyYzBhZTU4ODNlNWQ1OTU2YTY2OTljZDVlOGU4NQpmYWN0b3I9QkxVRVRPT1RIfGJiYzMyOWUyYTFlMzhmYjljMWNiZTA2MzI2NTBiNGZhCi0tCmxpY2Vuc2U9bGljLXc1CmdyYW50PTEKYW1vdW50PTEwCmluc3RhbGw9ZDNlMjQ1ODc3OWE1MTdhMjc5YzJkNWE5ZTEwNTcxZTVjZDRlNTZkNDk0NGE2M2YzMWI2OWMyMDE2N2UyNjkyYgpleHBpcnk9MApmcmVzaD0x.LYxPLnSW6lCn+HUJMeEnkJnzXdrokIwI0dOlhCti7BLQEhEaUOUn1T74D2LqMog0L08lUCFslF5+FxFylgNABw==",
+          "device": "tvA",
+          "install": "tvA-install-1",
+          "ring": ["server"],
+          "now": 1800086400000,
+          "expect": "REOPENED"
+        },
+        {
+          "do": "credit",
+          "token": "cbx1.Y2FzdGJyaWRnZS1lbnZlbG9wZS12MQp0eXBlPXRva2VucwpraWQ9M2FjNzhlNDAxNzkxODgyNwpzZXE9Mwpub25jZT0wMDAwMDAwMDAwMDAwMDAzCmlzc3VlZEF0PTE4MDAwMDAwMDAwMDAKbm90QmVmb3JlPTE4MDAwMDAwMDAwMDAKZXhwaXJlc0F0PTE4MDAxNzI4MDAwMDAKdGFyZ2V0PWRldmljZQprPTQKZmFjdG9yPUZMQVNIfDlkYzc5NDhjNDg3NDQ4MGViMzcyZDFhY2UzNTA3ZDNkCmZhY3Rvcj1FVEhFUk5FVHw0MDRlMzU3MmM5OWM0YjRhZTM2MzRhMjQzZGU5NDBiNgpmYWN0b3I9V0lGSXxjZWVjYzhiMzMyODZlYTIyY2JlNzdiY2MwYmUzMDMxNwpmYWN0b3I9U1lTVEVNX1NFUklBTHxlMGUyYzBhZTU4ODNlNWQ1OTU2YTY2OTljZDVlOGU4NQpmYWN0b3I9QkxVRVRPT1RIfGJiYzMyOWUyYTFlMzhmYjljMWNiZTA2MzI2NTBiNGZhCi0tCmxpY2Vuc2U9bGljLXc1CmdyYW50PTMKYW1vdW50PTMwCmluc3RhbGw9ZDNlMjQ1ODc3OWE1MTdhMjc5YzJkNWE5ZTEwNTcxZTVjZDRlNTZkNDk0NGE2M2YzMWI2OWMyMDE2N2UyNjkyYgpleHBpcnk9MApmcmVzaD0w.NBRf3vgezac7MExzsJTTLgc1S/WfccOdTV09QydU3fKO9Sz2juC4u7qGM5TnZPgNfzyG87+bcCQGS+ggWpxvCw==",
+          "device": "tvA",
+          "install": "tvA-install-1",
+          "ring": ["server"],
+          "now": 1800086400000,
+          "expect": "OK"
+        },
+        {
+          "do": "credit",
+          "token": "cbx1.Y2FzdGJyaWRnZS1lbnZlbG9wZS12MQp0eXBlPXRva2VucwpraWQ9M2FjNzhlNDAxNzkxODgyNwpzZXE9Mgpub25jZT0wMDAwMDAwMDAwMDAwMDAyCmlzc3VlZEF0PTE4MDAwMDAwMDAwMDAKbm90QmVmb3JlPTE4MDAwMDAwMDAwMDAKZXhwaXJlc0F0PTE4MDAxNzI4MDAwMDAKdGFyZ2V0PWRldmljZQprPTQKZmFjdG9yPUZMQVNIfDlkYzc5NDhjNDg3NDQ4MGViMzcyZDFhY2UzNTA3ZDNkCmZhY3Rvcj1FVEhFUk5FVHw0MDRlMzU3MmM5OWM0YjRhZTM2MzRhMjQzZGU5NDBiNgpmYWN0b3I9V0lGSXxjZWVjYzhiMzMyODZlYTIyY2JlNzdiY2MwYmUzMDMxNwpmYWN0b3I9U1lTVEVNX1NFUklBTHxlMGUyYzBhZTU4ODNlNWQ1OTU2YTY2OTljZDVlOGU4NQpmYWN0b3I9QkxVRVRPT1RIfGJiYzMyOWUyYTFlMzhmYjljMWNiZTA2MzI2NTBiNGZhCi0tCmxpY2Vuc2U9bGljLXc1CmdyYW50PTIKYW1vdW50PTk5Cmluc3RhbGw9ZDNlMjQ1ODc3OWE1MTdhMjc5YzJkNWE5ZTEwNTcxZTVjZDRlNTZkNDk0NGE2M2YzMWI2OWMyMDE2N2UyNjkyYgpleHBpcnk9MApmcmVzaD0w.Um5MxHla68kMhoRaBWF+qHWQyUPCoUbGGr3zkn4yUDU0pIlXXqtMwg+9DRpPD1Tp9FAVdspqW4fU0KL1g3CLDg==",
+          "device": "tvA",
+          "install": "tvA-install-1",
+          "ring": ["server"],
+          "now": 1800086400000,
+          "expect": "STALE_SEQUENCE"
+        },
+        {
+          "do": "check",
+          "state": "OK",
+          "balance": 40
+        }
+      ]
+    },
+    {
+      "id": "wallet-other-license-refused",
+      "type": "wallet",
+      "steps": [
+        {
+          "do": "credit",
+          "token": "cbx1.Y2FzdGJyaWRnZS1lbnZlbG9wZS12MQp0eXBlPXRva2VucwpraWQ9M2FjNzhlNDAxNzkxODgyNwpzZXE9MQpub25jZT0wMDAwMDAwMDAwMDAwMDAxCmlzc3VlZEF0PTE4MDAwMDAwMDAwMDAKbm90QmVmb3JlPTE4MDAwMDAwMDAwMDAKZXhwaXJlc0F0PTE4MDAxNzI4MDAwMDAKdGFyZ2V0PWRldmljZQprPTQKZmFjdG9yPUZMQVNIfDlkYzc5NDhjNDg3NDQ4MGViMzcyZDFhY2UzNTA3ZDNkCmZhY3Rvcj1FVEhFUk5FVHw0MDRlMzU3MmM5OWM0YjRhZTM2MzRhMjQzZGU5NDBiNgpmYWN0b3I9V0lGSXxjZWVjYzhiMzMyODZlYTIyY2JlNzdiY2MwYmUzMDMxNwpmYWN0b3I9U1lTVEVNX1NFUklBTHxlMGUyYzBhZTU4ODNlNWQ1OTU2YTY2OTljZDVlOGU4NQpmYWN0b3I9QkxVRVRPT1RIfGJiYzMyOWUyYTFlMzhmYjljMWNiZTA2MzI2NTBiNGZhCi0tCmxpY2Vuc2U9bGljLXc1CmdyYW50PTEKYW1vdW50PTIwCmluc3RhbGw9ZDNlMjQ1ODc3OWE1MTdhMjc5YzJkNWE5ZTEwNTcxZTVjZDRlNTZkNDk0NGE2M2YzMWI2OWMyMDE2N2UyNjkyYgpleHBpcnk9MApmcmVzaD0x.oY3LtEWTWfA5dpUmrKvBKyfLvq6Y5O47vB8XGDFOrfLk6uB6E+wtfm2wYsaTFkZ4uwkZbMoLIQX6dTu444x5DQ==",
+          "device": "tvA",
+          "install": "tvA-install-1",
+          "ring": ["server"],
+          "now": 1800086400000,
+          "expect": "REOPENED"
+        },
+        {
+          "do": "credit",
+          "token": "cbx1.Y2FzdGJyaWRnZS1lbnZlbG9wZS12MQp0eXBlPXRva2VucwpraWQ9M2FjNzhlNDAxNzkxODgyNwpzZXE9Mgpub25jZT0wMDAwMDAwMDAwMDAwMDAyCmlzc3VlZEF0PTE4MDAwMDAwMDAwMDAKbm90QmVmb3JlPTE4MDAwMDAwMDAwMDAKZXhwaXJlc0F0PTE4MDAxNzI4MDAwMDAKdGFyZ2V0PWRldmljZQprPTQKZmFjdG9yPUZMQVNIfDlkYzc5NDhjNDg3NDQ4MGViMzcyZDFhY2UzNTA3ZDNkCmZhY3Rvcj1FVEhFUk5FVHw0MDRlMzU3MmM5OWM0YjRhZTM2MzRhMjQzZGU5NDBiNgpmYWN0b3I9V0lGSXxjZWVjYzhiMzMyODZlYTIyY2JlNzdiY2MwYmUzMDMxNwpmYWN0b3I9U1lTVEVNX1NFUklBTHxlMGUyYzBhZTU4ODNlNWQ1OTU2YTY2OTljZDVlOGU4NQpmYWN0b3I9QkxVRVRPT1RIfGJiYzMyOWUyYTFlMzhmYjljMWNiZTA2MzI2NTBiNGZhCi0tCmxpY2Vuc2U9bGljLWF1dHJlCmdyYW50PTIKYW1vdW50PTIwCmluc3RhbGw9ZDNlMjQ1ODc3OWE1MTdhMjc5YzJkNWE5ZTEwNTcxZTVjZDRlNTZkNDk0NGE2M2YzMWI2OWMyMDE2N2UyNjkyYgpleHBpcnk9MApmcmVzaD0w.YRZZpMUCvYPklDtOb4N7tKe5MgY/RVfi2mZp4bTNRyh4sJ1ncSdXzrC6qeonFZNQopbST79jPVJK3QcpWm77Dw==",
+          "device": "tvA",
+          "install": "tvA-install-1",
+          "ring": ["server"],
+          "now": 1800086400000,
+          "expect": "WRONG_LICENSE"
+        },
+        {
+          "do": "check",
+          "state": "OK",
+          "balance": 20
+        }
+      ]
+    },
+    {
+      "id": "wallet-altered-mac",
+      "type": "wallet",
+      "steps": [
+        {
+          "do": "credit",
+          "token": "cbx1.Y2FzdGJyaWRnZS1lbnZlbG9wZS12MQp0eXBlPXRva2VucwpraWQ9M2FjNzhlNDAxNzkxODgyNwpzZXE9MQpub25jZT0wMDAwMDAwMDAwMDAwMDAxCmlzc3VlZEF0PTE4MDAwMDAwMDAwMDAKbm90QmVmb3JlPTE4MDAwMDAwMDAwMDAKZXhwaXJlc0F0PTE4MDAxNzI4MDAwMDAKdGFyZ2V0PWRldmljZQprPTQKZmFjdG9yPUZMQVNIfDlkYzc5NDhjNDg3NDQ4MGViMzcyZDFhY2UzNTA3ZDNkCmZhY3Rvcj1FVEhFUk5FVHw0MDRlMzU3MmM5OWM0YjRhZTM2MzRhMjQzZGU5NDBiNgpmYWN0b3I9V0lGSXxjZWVjYzhiMzMyODZlYTIyY2JlNzdiY2MwYmUzMDMxNwpmYWN0b3I9U1lTVEVNX1NFUklBTHxlMGUyYzBhZTU4ODNlNWQ1OTU2YTY2OTljZDVlOGU4NQpmYWN0b3I9QkxVRVRPT1RIfGJiYzMyOWUyYTFlMzhmYjljMWNiZTA2MzI2NTBiNGZhCi0tCmxpY2Vuc2U9bGljLXc1CmdyYW50PTEKYW1vdW50PTIwCmluc3RhbGw9ZDNlMjQ1ODc3OWE1MTdhMjc5YzJkNWE5ZTEwNTcxZTVjZDRlNTZkNDk0NGE2M2YzMWI2OWMyMDE2N2UyNjkyYgpleHBpcnk9MApmcmVzaD0x.oY3LtEWTWfA5dpUmrKvBKyfLvq6Y5O47vB8XGDFOrfLk6uB6E+wtfm2wYsaTFkZ4uwkZbMoLIQX6dTu444x5DQ==",
+          "device": "tvA",
+          "install": "tvA-install-1",
+          "ring": ["server"],
+          "now": 1800086400000,
+          "expect": "REOPENED"
+        },
+        {
+          "do": "spend",
+          "item": "second-chance",
+          "cost": 5,
+          "at": 1800000001000,
+          "op": "quiz:g:a:1",
+          "expect": "OK",
+          "balance": 15
+        },
+        {
+          "do": "tamper",
+          "kind": "flipMac",
+          "line": 4
+        },
+        {
+          "do": "restart",
+          "key": "main"
+        },
+        {
+          "do": "check",
+          "state": "UNREADABLE",
+          "balance": 0
+        },
+        {
+          "do": "spend",
+          "item": "extra-joker",
+          "cost": 2,
+          "at": 1800000001000,
+          "op": "quiz:g:b:1",
+          "expect": "UNREADABLE"
+        }
+      ]
+    },
+    {
+      "id": "wallet-altered-grant-line",
+      "type": "wallet",
+      "steps": [
+        {
+          "do": "credit",
+          "token": "cbx1.Y2FzdGJyaWRnZS1lbnZlbG9wZS12MQp0eXBlPXRva2VucwpraWQ9M2FjNzhlNDAxNzkxODgyNwpzZXE9MQpub25jZT0wMDAwMDAwMDAwMDAwMDAxCmlzc3VlZEF0PTE4MDAwMDAwMDAwMDAKbm90QmVmb3JlPTE4MDAwMDAwMDAwMDAKZXhwaXJlc0F0PTE4MDAxNzI4MDAwMDAKdGFyZ2V0PWRldmljZQprPTQKZmFjdG9yPUZMQVNIfDlkYzc5NDhjNDg3NDQ4MGViMzcyZDFhY2UzNTA3ZDNkCmZhY3Rvcj1FVEhFUk5FVHw0MDRlMzU3MmM5OWM0YjRhZTM2MzRhMjQzZGU5NDBiNgpmYWN0b3I9V0lGSXxjZWVjYzhiMzMyODZlYTIyY2JlNzdiY2MwYmUzMDMxNwpmYWN0b3I9U1lTVEVNX1NFUklBTHxlMGUyYzBhZTU4ODNlNWQ1OTU2YTY2OTljZDVlOGU4NQpmYWN0b3I9QkxVRVRPT1RIfGJiYzMyOWUyYTFlMzhmYjljMWNiZTA2MzI2NTBiNGZhCi0tCmxpY2Vuc2U9bGljLXc1CmdyYW50PTEKYW1vdW50PTIwCmluc3RhbGw9ZDNlMjQ1ODc3OWE1MTdhMjc5YzJkNWE5ZTEwNTcxZTVjZDRlNTZkNDk0NGE2M2YzMWI2OWMyMDE2N2UyNjkyYgpleHBpcnk9MApmcmVzaD0x.oY3LtEWTWfA5dpUmrKvBKyfLvq6Y5O47vB8XGDFOrfLk6uB6E+wtfm2wYsaTFkZ4uwkZbMoLIQX6dTu444x5DQ==",
+          "device": "tvA",
+          "install": "tvA-install-1",
+          "ring": ["server"],
+          "now": 1800086400000,
+          "expect": "REOPENED"
+        },
+        {
+          "do": "tamper",
+          "kind": "flipMac",
+          "line": 3
+        },
+        {
+          "do": "restart",
+          "key": "main"
+        },
+        {
+          "do": "check",
+          "state": "UNREADABLE",
+          "balance": 0
+        },
+        {
+          "do": "credit",
+          "token": "cbx1.Y2FzdGJyaWRnZS1lbnZlbG9wZS12MQp0eXBlPXRva2VucwpraWQ9M2FjNzhlNDAxNzkxODgyNwpzZXE9Mgpub25jZT0wMDAwMDAwMDAwMDAwMDAyCmlzc3VlZEF0PTE4MDAwMDAwMDAwMDAKbm90QmVmb3JlPTE4MDAwMDAwMDAwMDAKZXhwaXJlc0F0PTE4MDAxNzI4MDAwMDAKdGFyZ2V0PWRldmljZQprPTQKZmFjdG9yPUZMQVNIfDlkYzc5NDhjNDg3NDQ4MGViMzcyZDFhY2UzNTA3ZDNkCmZhY3Rvcj1FVEhFUk5FVHw0MDRlMzU3MmM5OWM0YjRhZTM2MzRhMjQzZGU5NDBiNgpmYWN0b3I9V0lGSXxjZWVjYzhiMzMyODZlYTIyY2JlNzdiY2MwYmUzMDMxNwpmYWN0b3I9U1lTVEVNX1NFUklBTHxlMGUyYzBhZTU4ODNlNWQ1OTU2YTY2OTljZDVlOGU4NQpmYWN0b3I9QkxVRVRPT1RIfGJiYzMyOWUyYTFlMzhmYjljMWNiZTA2MzI2NTBiNGZhCi0tCmxpY2Vuc2U9bGljLXc1CmdyYW50PTIKYW1vdW50PTIwCmluc3RhbGw9ZDNlMjQ1ODc3OWE1MTdhMjc5YzJkNWE5ZTEwNTcxZTVjZDRlNTZkNDk0NGE2M2YzMWI2OWMyMDE2N2UyNjkyYgpleHBpcnk9MApmcmVzaD0w.++YBGFienoroBV0KG0AJbxn2FY/4cAvdWqlkV0p45ZjZi7tD+SyEBwXr1ui5S7gcQTik5yoWEutzaUQYyBehCA==",
+          "device": "tvA",
+          "install": "tvA-install-1",
+          "ring": ["server"],
+          "now": 1800086400000,
+          "expect": "NEEDS_FRESH"
+        }
+      ]
+    },
+    {
+      "id": "wallet-head-line-removed",
+      "type": "wallet",
+      "steps": [
+        {
+          "do": "credit",
+          "token": "cbx1.Y2FzdGJyaWRnZS1lbnZlbG9wZS12MQp0eXBlPXRva2VucwpraWQ9M2FjNzhlNDAxNzkxODgyNwpzZXE9MQpub25jZT0wMDAwMDAwMDAwMDAwMDAxCmlzc3VlZEF0PTE4MDAwMDAwMDAwMDAKbm90QmVmb3JlPTE4MDAwMDAwMDAwMDAKZXhwaXJlc0F0PTE4MDAxNzI4MDAwMDAKdGFyZ2V0PWRldmljZQprPTQKZmFjdG9yPUZMQVNIfDlkYzc5NDhjNDg3NDQ4MGViMzcyZDFhY2UzNTA3ZDNkCmZhY3Rvcj1FVEhFUk5FVHw0MDRlMzU3MmM5OWM0YjRhZTM2MzRhMjQzZGU5NDBiNgpmYWN0b3I9V0lGSXxjZWVjYzhiMzMyODZlYTIyY2JlNzdiY2MwYmUzMDMxNwpmYWN0b3I9U1lTVEVNX1NFUklBTHxlMGUyYzBhZTU4ODNlNWQ1OTU2YTY2OTljZDVlOGU4NQpmYWN0b3I9QkxVRVRPT1RIfGJiYzMyOWUyYTFlMzhmYjljMWNiZTA2MzI2NTBiNGZhCi0tCmxpY2Vuc2U9bGljLXc1CmdyYW50PTEKYW1vdW50PTIwCmluc3RhbGw9ZDNlMjQ1ODc3OWE1MTdhMjc5YzJkNWE5ZTEwNTcxZTVjZDRlNTZkNDk0NGE2M2YzMWI2OWMyMDE2N2UyNjkyYgpleHBpcnk9MApmcmVzaD0x.oY3LtEWTWfA5dpUmrKvBKyfLvq6Y5O47vB8XGDFOrfLk6uB6E+wtfm2wYsaTFkZ4uwkZbMoLIQX6dTu444x5DQ==",
+          "device": "tvA",
+          "install": "tvA-install-1",
+          "ring": ["server"],
+          "now": 1800086400000,
+          "expect": "REOPENED"
+        },
+        {
+          "do": "tamper",
+          "kind": "dropLine",
+          "line": 1
+        },
+        {
+          "do": "restart",
+          "key": "main"
+        },
+        {
+          "do": "check",
+          "state": "UNREADABLE",
+          "balance": 0
+        }
+      ]
+    },
+    {
+      "id": "wallet-middle-spend-removed",
+      "type": "wallet",
+      "steps": [
+        {
+          "do": "credit",
+          "token": "cbx1.Y2FzdGJyaWRnZS1lbnZlbG9wZS12MQp0eXBlPXRva2VucwpraWQ9M2FjNzhlNDAxNzkxODgyNwpzZXE9MQpub25jZT0wMDAwMDAwMDAwMDAwMDAxCmlzc3VlZEF0PTE4MDAwMDAwMDAwMDAKbm90QmVmb3JlPTE4MDAwMDAwMDAwMDAKZXhwaXJlc0F0PTE4MDAxNzI4MDAwMDAKdGFyZ2V0PWRldmljZQprPTQKZmFjdG9yPUZMQVNIfDlkYzc5NDhjNDg3NDQ4MGViMzcyZDFhY2UzNTA3ZDNkCmZhY3Rvcj1FVEhFUk5FVHw0MDRlMzU3MmM5OWM0YjRhZTM2MzRhMjQzZGU5NDBiNgpmYWN0b3I9V0lGSXxjZWVjYzhiMzMyODZlYTIyY2JlNzdiY2MwYmUzMDMxNwpmYWN0b3I9U1lTVEVNX1NFUklBTHxlMGUyYzBhZTU4ODNlNWQ1OTU2YTY2OTljZDVlOGU4NQpmYWN0b3I9QkxVRVRPT1RIfGJiYzMyOWUyYTFlMzhmYjljMWNiZTA2MzI2NTBiNGZhCi0tCmxpY2Vuc2U9bGljLXc1CmdyYW50PTEKYW1vdW50PTIwCmluc3RhbGw9ZDNlMjQ1ODc3OWE1MTdhMjc5YzJkNWE5ZTEwNTcxZTVjZDRlNTZkNDk0NGE2M2YzMWI2OWMyMDE2N2UyNjkyYgpleHBpcnk9MApmcmVzaD0x.oY3LtEWTWfA5dpUmrKvBKyfLvq6Y5O47vB8XGDFOrfLk6uB6E+wtfm2wYsaTFkZ4uwkZbMoLIQX6dTu444x5DQ==",
+          "device": "tvA",
+          "install": "tvA-install-1",
+          "ring": ["server"],
+          "now": 1800086400000,
+          "expect": "REOPENED"
+        },
+        {
+          "do": "spend",
+          "item": "second-chance",
+          "cost": 5,
+          "at": 1800000001000,
+          "op": "quiz:g:a:1",
+          "expect": "OK"
+        },
+        {
+          "do": "spend",
+          "item": "extra-joker",
+          "cost": 2,
+          "at": 1800000001000,
+          "op": "quiz:g:b:1",
+          "expect": "OK"
+        },
+        {
+          "do": "spend",
+          "item": "swap-question",
+          "cost": 3,
+          "at": 1800000001000,
+          "op": "quiz:g:c:1",
+          "expect": "OK"
+        },
+        {
+          "do": "tamper",
+          "kind": "dropLine",
+          "line": 5
+        },
+        {
+          "do": "restart",
+          "key": "main"
+        },
+        {
+          "do": "check",
+          "state": "UNREADABLE",
+          "balance": 0
+        }
+      ]
+    },
+    {
+      "id": "wallet-lines-swapped",
+      "type": "wallet",
+      "steps": [
+        {
+          "do": "credit",
+          "token": "cbx1.Y2FzdGJyaWRnZS1lbnZlbG9wZS12MQp0eXBlPXRva2VucwpraWQ9M2FjNzhlNDAxNzkxODgyNwpzZXE9MQpub25jZT0wMDAwMDAwMDAwMDAwMDAxCmlzc3VlZEF0PTE4MDAwMDAwMDAwMDAKbm90QmVmb3JlPTE4MDAwMDAwMDAwMDAKZXhwaXJlc0F0PTE4MDAxNzI4MDAwMDAKdGFyZ2V0PWRldmljZQprPTQKZmFjdG9yPUZMQVNIfDlkYzc5NDhjNDg3NDQ4MGViMzcyZDFhY2UzNTA3ZDNkCmZhY3Rvcj1FVEhFUk5FVHw0MDRlMzU3MmM5OWM0YjRhZTM2MzRhMjQzZGU5NDBiNgpmYWN0b3I9V0lGSXxjZWVjYzhiMzMyODZlYTIyY2JlNzdiY2MwYmUzMDMxNwpmYWN0b3I9U1lTVEVNX1NFUklBTHxlMGUyYzBhZTU4ODNlNWQ1OTU2YTY2OTljZDVlOGU4NQpmYWN0b3I9QkxVRVRPT1RIfGJiYzMyOWUyYTFlMzhmYjljMWNiZTA2MzI2NTBiNGZhCi0tCmxpY2Vuc2U9bGljLXc1CmdyYW50PTEKYW1vdW50PTIwCmluc3RhbGw9ZDNlMjQ1ODc3OWE1MTdhMjc5YzJkNWE5ZTEwNTcxZTVjZDRlNTZkNDk0NGE2M2YzMWI2OWMyMDE2N2UyNjkyYgpleHBpcnk9MApmcmVzaD0x.oY3LtEWTWfA5dpUmrKvBKyfLvq6Y5O47vB8XGDFOrfLk6uB6E+wtfm2wYsaTFkZ4uwkZbMoLIQX6dTu444x5DQ==",
+          "device": "tvA",
+          "install": "tvA-install-1",
+          "ring": ["server"],
+          "now": 1800086400000,
+          "expect": "REOPENED"
+        },
+        {
+          "do": "spend",
+          "item": "second-chance",
+          "cost": 5,
+          "at": 1800000001000,
+          "op": "quiz:g:a:1",
+          "expect": "OK"
+        },
+        {
+          "do": "spend",
+          "item": "extra-joker",
+          "cost": 2,
+          "at": 1800000001000,
+          "op": "quiz:g:b:1",
+          "expect": "OK"
+        },
+        {
+          "do": "tamper",
+          "kind": "swapLines",
+          "line": 4
+        },
+        {
+          "do": "restart",
+          "key": "main"
+        },
+        {
+          "do": "check",
+          "state": "UNREADABLE",
+          "balance": 0
+        }
+      ]
+    },
+    {
+      "id": "wallet-copied-to-another-installation",
+      "type": "wallet",
+      "steps": [
+        {
+          "do": "credit",
+          "token": "cbx1.Y2FzdGJyaWRnZS1lbnZlbG9wZS12MQp0eXBlPXRva2VucwpraWQ9M2FjNzhlNDAxNzkxODgyNwpzZXE9MQpub25jZT0wMDAwMDAwMDAwMDAwMDAxCmlzc3VlZEF0PTE4MDAwMDAwMDAwMDAKbm90QmVmb3JlPTE4MDAwMDAwMDAwMDAKZXhwaXJlc0F0PTE4MDAxNzI4MDAwMDAKdGFyZ2V0PWRldmljZQprPTQKZmFjdG9yPUZMQVNIfDlkYzc5NDhjNDg3NDQ4MGViMzcyZDFhY2UzNTA3ZDNkCmZhY3Rvcj1FVEhFUk5FVHw0MDRlMzU3MmM5OWM0YjRhZTM2MzRhMjQzZGU5NDBiNgpmYWN0b3I9V0lGSXxjZWVjYzhiMzMyODZlYTIyY2JlNzdiY2MwYmUzMDMxNwpmYWN0b3I9U1lTVEVNX1NFUklBTHxlMGUyYzBhZTU4ODNlNWQ1OTU2YTY2OTljZDVlOGU4NQpmYWN0b3I9QkxVRVRPT1RIfGJiYzMyOWUyYTFlMzhmYjljMWNiZTA2MzI2NTBiNGZhCi0tCmxpY2Vuc2U9bGljLXc1CmdyYW50PTEKYW1vdW50PTIwCmluc3RhbGw9ZDNlMjQ1ODc3OWE1MTdhMjc5YzJkNWE5ZTEwNTcxZTVjZDRlNTZkNDk0NGE2M2YzMWI2OWMyMDE2N2UyNjkyYgpleHBpcnk9MApmcmVzaD0x.oY3LtEWTWfA5dpUmrKvBKyfLvq6Y5O47vB8XGDFOrfLk6uB6E+wtfm2wYsaTFkZ4uwkZbMoLIQX6dTu444x5DQ==",
+          "device": "tvA",
+          "install": "tvA-install-1",
+          "ring": ["server"],
+          "now": 1800086400000,
+          "expect": "REOPENED"
+        },
+        {
+          "do": "restart",
+          "key": "other"
+        },
+        {
+          "do": "check",
+          "state": "UNREADABLE",
+          "balance": 0
+        },
+        {
+          "do": "spend",
+          "item": "second-chance",
+          "cost": 5,
+          "at": 1800000001000,
+          "op": "quiz:g:a:1",
+          "expect": "UNREADABLE"
+        }
+      ]
+    },
+    {
+      "id": "wallet-tail-truncation-not-detectable-locally",
+      "type": "wallet",
+      "steps": [
+        {
+          "do": "credit",
+          "token": "cbx1.Y2FzdGJyaWRnZS1lbnZlbG9wZS12MQp0eXBlPXRva2VucwpraWQ9M2FjNzhlNDAxNzkxODgyNwpzZXE9MQpub25jZT0wMDAwMDAwMDAwMDAwMDAxCmlzc3VlZEF0PTE4MDAwMDAwMDAwMDAKbm90QmVmb3JlPTE4MDAwMDAwMDAwMDAKZXhwaXJlc0F0PTE4MDAxNzI4MDAwMDAKdGFyZ2V0PWRldmljZQprPTQKZmFjdG9yPUZMQVNIfDlkYzc5NDhjNDg3NDQ4MGViMzcyZDFhY2UzNTA3ZDNkCmZhY3Rvcj1FVEhFUk5FVHw0MDRlMzU3MmM5OWM0YjRhZTM2MzRhMjQzZGU5NDBiNgpmYWN0b3I9V0lGSXxjZWVjYzhiMzMyODZlYTIyY2JlNzdiY2MwYmUzMDMxNwpmYWN0b3I9U1lTVEVNX1NFUklBTHxlMGUyYzBhZTU4ODNlNWQ1OTU2YTY2OTljZDVlOGU4NQpmYWN0b3I9QkxVRVRPT1RIfGJiYzMyOWUyYTFlMzhmYjljMWNiZTA2MzI2NTBiNGZhCi0tCmxpY2Vuc2U9bGljLXc1CmdyYW50PTEKYW1vdW50PTIwCmluc3RhbGw9ZDNlMjQ1ODc3OWE1MTdhMjc5YzJkNWE5ZTEwNTcxZTVjZDRlNTZkNDk0NGE2M2YzMWI2OWMyMDE2N2UyNjkyYgpleHBpcnk9MApmcmVzaD0x.oY3LtEWTWfA5dpUmrKvBKyfLvq6Y5O47vB8XGDFOrfLk6uB6E+wtfm2wYsaTFkZ4uwkZbMoLIQX6dTu444x5DQ==",
+          "device": "tvA",
+          "install": "tvA-install-1",
+          "ring": ["server"],
+          "now": 1800086400000,
+          "expect": "REOPENED"
+        },
+        {
+          "do": "spend",
+          "item": "second-chance",
+          "cost": 5,
+          "at": 1800000001000,
+          "op": "quiz:g:a:1",
+          "expect": "OK",
+          "balance": 15
+        },
+        {
+          "do": "tamper",
+          "kind": "truncateTail",
+          "line": 1
+        },
+        {
+          "do": "restart",
+          "key": "main"
+        },
+        {
+          "do": "check",
+          "state": "OK",
+          "balance": 20,
+          "spentTotal": 0
+        }
+      ]
+    },
+    {
+      "id": "wallet-clock-set-back-is-noted",
+      "type": "wallet",
+      "steps": [
+        {
+          "do": "credit",
+          "token": "cbx1.Y2FzdGJyaWRnZS1lbnZlbG9wZS12MQp0eXBlPXRva2VucwpraWQ9M2FjNzhlNDAxNzkxODgyNwpzZXE9MQpub25jZT0wMDAwMDAwMDAwMDAwMDAxCmlzc3VlZEF0PTE4MDAwMDAwMDAwMDAKbm90QmVmb3JlPTE4MDAwMDAwMDAwMDAKZXhwaXJlc0F0PTE4MDAxNzI4MDAwMDAKdGFyZ2V0PWRldmljZQprPTQKZmFjdG9yPUZMQVNIfDlkYzc5NDhjNDg3NDQ4MGViMzcyZDFhY2UzNTA3ZDNkCmZhY3Rvcj1FVEhFUk5FVHw0MDRlMzU3MmM5OWM0YjRhZTM2MzRhMjQzZGU5NDBiNgpmYWN0b3I9V0lGSXxjZWVjYzhiMzMyODZlYTIyY2JlNzdiY2MwYmUzMDMxNwpmYWN0b3I9U1lTVEVNX1NFUklBTHxlMGUyYzBhZTU4ODNlNWQ1OTU2YTY2OTljZDVlOGU4NQpmYWN0b3I9QkxVRVRPT1RIfGJiYzMyOWUyYTFlMzhmYjljMWNiZTA2MzI2NTBiNGZhCi0tCmxpY2Vuc2U9bGljLXc1CmdyYW50PTEKYW1vdW50PTIwCmluc3RhbGw9ZDNlMjQ1ODc3OWE1MTdhMjc5YzJkNWE5ZTEwNTcxZTVjZDRlNTZkNDk0NGE2M2YzMWI2OWMyMDE2N2UyNjkyYgpleHBpcnk9MApmcmVzaD0x.oY3LtEWTWfA5dpUmrKvBKyfLvq6Y5O47vB8XGDFOrfLk6uB6E+wtfm2wYsaTFkZ4uwkZbMoLIQX6dTu444x5DQ==",
+          "device": "tvA",
+          "install": "tvA-install-1",
+          "ring": ["server"],
+          "now": 1800086400000,
+          "expect": "REOPENED"
+        },
+        {
+          "do": "spend",
+          "item": "second-chance",
+          "cost": 5,
+          "at": 9000,
+          "op": "quiz:g:a:1",
+          "expect": "OK"
+        },
+        {
+          "do": "spend",
+          "item": "extra-joker",
+          "cost": 2,
+          "at": 1000,
+          "op": "quiz:g:b:1",
+          "expect": "OK"
+        },
+        {
+          "do": "check",
+          "state": "OK",
+          "balance": 13,
+          "spentTotal": 7,
+          "clockNote": "Horloge reculée constatée entre deux dépenses"
+        }
+      ]
+    },
+    {
+      "id": "wallet-compaction-keeps-balance-and-sequence",
+      "type": "wallet",
+      "compactAbove": 6,
+      "keepRecent": 1,
+      "keepWindowMs": 0,
+      "steps": [
+        {
+          "do": "credit",
+          "token": "cbx1.Y2FzdGJyaWRnZS1lbnZlbG9wZS12MQp0eXBlPXRva2VucwpraWQ9M2FjNzhlNDAxNzkxODgyNwpzZXE9MQpub25jZT0wMDAwMDAwMDAwMDAwMDAxCmlzc3VlZEF0PTE4MDAwMDAwMDAwMDAKbm90QmVmb3JlPTE4MDAwMDAwMDAwMDAKZXhwaXJlc0F0PTE4MDAxNzI4MDAwMDAKdGFyZ2V0PWRldmljZQprPTQKZmFjdG9yPUZMQVNIfDlkYzc5NDhjNDg3NDQ4MGViMzcyZDFhY2UzNTA3ZDNkCmZhY3Rvcj1FVEhFUk5FVHw0MDRlMzU3MmM5OWM0YjRhZTM2MzRhMjQzZGU5NDBiNgpmYWN0b3I9V0lGSXxjZWVjYzhiMzMyODZlYTIyY2JlNzdiY2MwYmUzMDMxNwpmYWN0b3I9U1lTVEVNX1NFUklBTHxlMGUyYzBhZTU4ODNlNWQ1OTU2YTY2OTljZDVlOGU4NQpmYWN0b3I9QkxVRVRPT1RIfGJiYzMyOWUyYTFlMzhmYjljMWNiZTA2MzI2NTBiNGZhCi0tCmxpY2Vuc2U9bGljLXc1CmdyYW50PTEKYW1vdW50PTEwMAppbnN0YWxsPWQzZTI0NTg3NzlhNTE3YTI3OWMyZDVhOWUxMDU3MWU1Y2Q0ZTU2ZDQ5NDRhNjNmMzFiNjljMjAxNjdlMjY5MmIKZXhwaXJ5PTAKZnJlc2g9MQ.CM5/+qr56JZWPp5FW4jf48xdMQYjNxxZqan7GNCYVHEGwkWiGz6u5DYMmEMt/0+fQbjHD6zVqdUVIFI3M3GMDQ==",
+          "device": "tvA",
+          "install": "tvA-install-1",
+          "ring": ["server"],
+          "now": 1800086400000,
+          "expect": "REOPENED"
+        },
+        {
+          "do": "spend",
+          "item": "second-chance",
+          "cost": 5,
+          "at": 1800000001000,
+          "op": "quiz:g:a:1",
+          "expect": "OK"
+        },
+        {
+          "do": "spend",
+          "item": "extra-joker",
+          "cost": 2,
+          "at": 1800000001000,
+          "op": "quiz:g:b:1",
+          "expect": "OK"
+        },
+        {
+          "do": "spend",
+          "item": "extra-joker",
+          "cost": 2,
+          "at": 1800000001000,
+          "op": "quiz:g:b:2",
+          "expect": "OK"
+        },
+        {
+          "do": "spend",
+          "item": "swap-question",
+          "cost": 3,
+          "at": 1800000001000,
+          "op": "quiz:g:c:1",
+          "expect": "OK"
+        },
+        {
+          "do": "spend",
+          "item": "second-chance",
+          "cost": 5,
+          "at": 1800000001000,
+          "op": "quiz:h:a:1",
+          "expect": "OK"
+        },
+        {
+          "do": "ack",
+          "seq": 99,
+          "expect": false
+        },
+        {
+          "do": "ack",
+          "seq": 3,
+          "expect": true
+        },
+        {
+          "do": "check",
+          "state": "OK",
+          "balance": 83,
+          "spentTotal": 17
+        },
+        {
+          "do": "restart",
+          "key": "main"
+        },
+        {
+          "do": "check",
+          "state": "OK",
+          "balance": 83,
+          "spentTotal": 17
+        },
+        {
+          "do": "spend",
+          "item": "swap-question",
+          "cost": 3,
+          "at": 1800000001000,
+          "op": "quiz:h:c:1",
+          "expect": "OK",
+          "balance": 80
+        },
+        {
+          "do": "check",
+          "state": "OK",
+          "balance": 80,
+          "spentTotal": 20
+        }
+      ],
+      "reportSince": 3,
+      "expectLines": ["castbridge-token-wallet-v1", "license=lic-w5|16368b5ed3dec3c8|48d45f22167eb58a", "install=4eb3d71317167cd8|07067f5f37973262|96b82a35932fb9f8", "grant=1|100|cbdd95053874e892|d810562b1124e329|f4b5849db9b12693", "spend=1|1800000001000|quiz|second-chance|5|quiz:g:a:1|e6155762ae437dd0|c0d46df474efada8", "spend=2|1800000001000|quiz|extra-joker|2|quiz:g:b:1|34b7ed79ebf02910|d2d1acb58395689d", "spend=3|1800000001000|quiz|extra-joker|2|quiz:g:b:2|39b9cca275a38f23|af92306db3af45e1", "spend=4|1800000001000|quiz|swap-question|3|quiz:g:c:1|c64c38e40b3ebec6|e0877c168585f708", "spend=5|1800000001000|quiz|second-chance|5|quiz:h:a:1|814f2cfc98c23ffb|0f0c362967eeebd2", "spend=6|1800000001000|quiz|swap-question|3|quiz:h:c:1|012db62897277d43|530a97d9276e1d68"],
+      "expectReport": ["castbridge-token-report-v1", "license=lic-w5", "install=4eb3d71317167cd8", "lastGrant=1", "spentTotal=20", "lastSpendSeq=6", "spend=4|1800000001000|quiz|swap-question|3|quiz:g:c:1", "spend=5|1800000001000|quiz|second-chance|5|quiz:h:a:1", "spend=6|1800000001000|quiz|swap-question|3|quiz:h:c:1", "mac=4bde53a4cd814ccb"]
+    },
+    {
+      "id": "wallet-replay-after-compaction",
+      "type": "wallet",
+      "compactAbove": 6,
+      "keepRecent": 2,
+      "keepWindowMs": 0,
+      "steps": [
+        {
+          "do": "credit",
+          "token": "cbx1.Y2FzdGJyaWRnZS1lbnZlbG9wZS12MQp0eXBlPXRva2VucwpraWQ9M2FjNzhlNDAxNzkxODgyNwpzZXE9MQpub25jZT0wMDAwMDAwMDAwMDAwMDAxCmlzc3VlZEF0PTE4MDAwMDAwMDAwMDAKbm90QmVmb3JlPTE4MDAwMDAwMDAwMDAKZXhwaXJlc0F0PTE4MDAxNzI4MDAwMDAKdGFyZ2V0PWRldmljZQprPTQKZmFjdG9yPUZMQVNIfDlkYzc5NDhjNDg3NDQ4MGViMzcyZDFhY2UzNTA3ZDNkCmZhY3Rvcj1FVEhFUk5FVHw0MDRlMzU3MmM5OWM0YjRhZTM2MzRhMjQzZGU5NDBiNgpmYWN0b3I9V0lGSXxjZWVjYzhiMzMyODZlYTIyY2JlNzdiY2MwYmUzMDMxNwpmYWN0b3I9U1lTVEVNX1NFUklBTHxlMGUyYzBhZTU4ODNlNWQ1OTU2YTY2OTljZDVlOGU4NQpmYWN0b3I9QkxVRVRPT1RIfGJiYzMyOWUyYTFlMzhmYjljMWNiZTA2MzI2NTBiNGZhCi0tCmxpY2Vuc2U9bGljLXc1CmdyYW50PTEKYW1vdW50PTEwMAppbnN0YWxsPWQzZTI0NTg3NzlhNTE3YTI3OWMyZDVhOWUxMDU3MWU1Y2Q0ZTU2ZDQ5NDRhNjNmMzFiNjljMjAxNjdlMjY5MmIKZXhwaXJ5PTAKZnJlc2g9MQ.CM5/+qr56JZWPp5FW4jf48xdMQYjNxxZqan7GNCYVHEGwkWiGz6u5DYMmEMt/0+fQbjHD6zVqdUVIFI3M3GMDQ==",
+          "device": "tvA",
+          "install": "tvA-install-1",
+          "ring": ["server"],
+          "now": 1800086400000,
+          "expect": "REOPENED"
+        },
+        {
+          "do": "spend",
+          "item": "second-chance",
+          "cost": 5,
+          "at": 1800000001000,
+          "op": "quiz:g:a:1",
+          "expect": "OK"
+        },
+        {
+          "do": "spend",
+          "item": "extra-joker",
+          "cost": 2,
+          "at": 1800000002000,
+          "op": "quiz:g:b:1",
+          "expect": "OK"
+        },
+        {
+          "do": "spend",
+          "item": "extra-joker",
+          "cost": 2,
+          "at": 1800000003000,
+          "op": "quiz:g:b:2",
+          "expect": "OK"
+        },
+        {
+          "do": "spend",
+          "item": "swap-question",
+          "cost": 3,
+          "at": 1800000004000,
+          "op": "quiz:g:c:1",
+          "expect": "OK"
+        },
+        {
+          "do": "spend",
+          "item": "second-chance",
+          "cost": 5,
+          "at": 1800000005000,
+          "op": "quiz:h:a:1",
+          "expect": "OK"
+        },
+        {
+          "do": "ack",
+          "seq": 3,
+          "expect": true
+        },
+        {
+          "do": "check",
+          "state": "OK",
+          "balance": 83,
+          "spentTotal": 17
+        },
+        {
+          "do": "restart",
+          "key": "main"
+        },
+        {
+          "do": "spend",
+          "item": "swap-question",
+          "cost": 3,
+          "at": 1800000001000,
+          "op": "quiz:g:c:1",
+          "expect": "REPLAY",
+          "balance": 83
+        },
+        {
+          "do": "spend",
+          "item": "second-chance",
+          "cost": 5,
+          "at": 1800000001000,
+          "op": "quiz:h:a:1",
+          "expect": "REPLAY",
+          "balance": 83
+        },
+        {
+          "do": "check",
+          "state": "OK",
+          "balance": 83,
+          "spentTotal": 17
+        },
+        {
+          "do": "spend",
+          "item": "swap-question",
+          "cost": 3,
+          "at": 1800000006000,
+          "op": "quiz:h:c:1",
+          "expect": "OK",
+          "balance": 80
+        }
+      ],
+      "reportSince": 0,
+      "expectLines": ["castbridge-token-wallet-v1", "license=lic-w5|16368b5ed3dec3c8|48d45f22167eb58a", "install=4eb3d71317167cd8|07067f5f37973262|96b82a35932fb9f8", "granted=1|100|cbdd95053874e892|d810562b1124e329|0362051e6c49468d", "acked=3|9|d7171919da048a17|050134db893f8f76", "spend=4|1800000004000|quiz|swap-question|3|quiz:g:c:1|0ce816e800176813|d2944fafd1eeec2e", "spend=5|1800000005000|quiz|second-chance|5|quiz:h:a:1|441633625dae5187|226962b100655e57", "spend=6|1800000006000|quiz|swap-question|3|quiz:h:c:1|2d7456c3a106a479|c99d56d554a43afb"],
+      "expectReport": ["castbridge-token-report-v1", "license=lic-w5", "install=4eb3d71317167cd8", "lastGrant=1", "spentTotal=20", "lastSpendSeq=6", "spend=4|1800000004000|quiz|swap-question|3|quiz:g:c:1", "spend=5|1800000005000|quiz|second-chance|5|quiz:h:a:1", "spend=6|1800000006000|quiz|swap-question|3|quiz:h:c:1", "mac=9ae4e7addd4ed1f9"]
+    },
+    {
+      "id": "wallet-compaction-folds-grants",
+      "type": "wallet",
+      "compactAbove": 4,
+      "keepRecent": 1,
+      "keepWindowMs": 0,
+      "steps": [
+        {
+          "do": "credit",
+          "token": "cbx1.Y2FzdGJyaWRnZS1lbnZlbG9wZS12MQp0eXBlPXRva2VucwpraWQ9M2FjNzhlNDAxNzkxODgyNwpzZXE9MQpub25jZT0wMDAwMDAwMDAwMDAwMDAxCmlzc3VlZEF0PTE4MDAwMDAwMDAwMDAKbm90QmVmb3JlPTE4MDAwMDAwMDAwMDAKZXhwaXJlc0F0PTE4MDAxNzI4MDAwMDAKdGFyZ2V0PWRldmljZQprPTQKZmFjdG9yPUZMQVNIfDlkYzc5NDhjNDg3NDQ4MGViMzcyZDFhY2UzNTA3ZDNkCmZhY3Rvcj1FVEhFUk5FVHw0MDRlMzU3MmM5OWM0YjRhZTM2MzRhMjQzZGU5NDBiNgpmYWN0b3I9V0lGSXxjZWVjYzhiMzMyODZlYTIyY2JlNzdiY2MwYmUzMDMxNwpmYWN0b3I9U1lTVEVNX1NFUklBTHxlMGUyYzBhZTU4ODNlNWQ1OTU2YTY2OTljZDVlOGU4NQpmYWN0b3I9QkxVRVRPT1RIfGJiYzMyOWUyYTFlMzhmYjljMWNiZTA2MzI2NTBiNGZhCi0tCmxpY2Vuc2U9bGljLXc1CmdyYW50PTEKYW1vdW50PTEwCmluc3RhbGw9ZDNlMjQ1ODc3OWE1MTdhMjc5YzJkNWE5ZTEwNTcxZTVjZDRlNTZkNDk0NGE2M2YzMWI2OWMyMDE2N2UyNjkyYgpleHBpcnk9MApmcmVzaD0x.LYxPLnSW6lCn+HUJMeEnkJnzXdrokIwI0dOlhCti7BLQEhEaUOUn1T74D2LqMog0L08lUCFslF5+FxFylgNABw==",
+          "device": "tvA",
+          "install": "tvA-install-1",
+          "ring": ["server"],
+          "now": 1800086400000,
+          "expect": "REOPENED"
+        },
+        {
+          "do": "credit",
+          "token": "cbx1.Y2FzdGJyaWRnZS1lbnZlbG9wZS12MQp0eXBlPXRva2VucwpraWQ9M2FjNzhlNDAxNzkxODgyNwpzZXE9Mgpub25jZT0wMDAwMDAwMDAwMDAwMDAyCmlzc3VlZEF0PTE4MDAwMDAwMDAwMDAKbm90QmVmb3JlPTE4MDAwMDAwMDAwMDAKZXhwaXJlc0F0PTE4MDAxNzI4MDAwMDAKdGFyZ2V0PWRldmljZQprPTQKZmFjdG9yPUZMQVNIfDlkYzc5NDhjNDg3NDQ4MGViMzcyZDFhY2UzNTA3ZDNkCmZhY3Rvcj1FVEhFUk5FVHw0MDRlMzU3MmM5OWM0YjRhZTM2MzRhMjQzZGU5NDBiNgpmYWN0b3I9V0lGSXxjZWVjYzhiMzMyODZlYTIyY2JlNzdiY2MwYmUzMDMxNwpmYWN0b3I9U1lTVEVNX1NFUklBTHxlMGUyYzBhZTU4ODNlNWQ1OTU2YTY2OTljZDVlOGU4NQpmYWN0b3I9QkxVRVRPT1RIfGJiYzMyOWUyYTFlMzhmYjljMWNiZTA2MzI2NTBiNGZhCi0tCmxpY2Vuc2U9bGljLXc1CmdyYW50PTIKYW1vdW50PTIwCmluc3RhbGw9ZDNlMjQ1ODc3OWE1MTdhMjc5YzJkNWE5ZTEwNTcxZTVjZDRlNTZkNDk0NGE2M2YzMWI2OWMyMDE2N2UyNjkyYgpleHBpcnk9MApmcmVzaD0w.++YBGFienoroBV0KG0AJbxn2FY/4cAvdWqlkV0p45ZjZi7tD+SyEBwXr1ui5S7gcQTik5yoWEutzaUQYyBehCA==",
+          "device": "tvA",
+          "install": "tvA-install-1",
+          "ring": ["server"],
+          "now": 1800086400000,
+          "expect": "OK"
+        },
+        {
+          "do": "credit",
+          "token": "cbx1.Y2FzdGJyaWRnZS1lbnZlbG9wZS12MQp0eXBlPXRva2VucwpraWQ9M2FjNzhlNDAxNzkxODgyNwpzZXE9Mwpub25jZT0wMDAwMDAwMDAwMDAwMDAzCmlzc3VlZEF0PTE4MDAwMDAwMDAwMDAKbm90QmVmb3JlPTE4MDAwMDAwMDAwMDAKZXhwaXJlc0F0PTE4MDAxNzI4MDAwMDAKdGFyZ2V0PWRldmljZQprPTQKZmFjdG9yPUZMQVNIfDlkYzc5NDhjNDg3NDQ4MGViMzcyZDFhY2UzNTA3ZDNkCmZhY3Rvcj1FVEhFUk5FVHw0MDRlMzU3MmM5OWM0YjRhZTM2MzRhMjQzZGU5NDBiNgpmYWN0b3I9V0lGSXxjZWVjYzhiMzMyODZlYTIyY2JlNzdiY2MwYmUzMDMxNwpmYWN0b3I9U1lTVEVNX1NFUklBTHxlMGUyYzBhZTU4ODNlNWQ1OTU2YTY2OTljZDVlOGU4NQpmYWN0b3I9QkxVRVRPT1RIfGJiYzMyOWUyYTFlMzhmYjljMWNiZTA2MzI2NTBiNGZhCi0tCmxpY2Vuc2U9bGljLXc1CmdyYW50PTMKYW1vdW50PTMwCmluc3RhbGw9ZDNlMjQ1ODc3OWE1MTdhMjc5YzJkNWE5ZTEwNTcxZTVjZDRlNTZkNDk0NGE2M2YzMWI2OWMyMDE2N2UyNjkyYgpleHBpcnk9MApmcmVzaD0w.NBRf3vgezac7MExzsJTTLgc1S/WfccOdTV09QydU3fKO9Sz2juC4u7qGM5TnZPgNfzyG87+bcCQGS+ggWpxvCw==",
+          "device": "tvA",
+          "install": "tvA-install-1",
+          "ring": ["server"],
+          "now": 1800086400000,
+          "expect": "OK"
+        },
+        {
+          "do": "spend",
+          "item": "second-chance",
+          "cost": 5,
+          "at": 1800000001000,
+          "op": "quiz:g:a:1",
+          "expect": "OK"
+        },
+        {
+          "do": "spend",
+          "item": "extra-joker",
+          "cost": 2,
+          "at": 1800000002000,
+          "op": "quiz:g:b:1",
+          "expect": "OK"
+        },
+        {
+          "do": "ack",
+          "seq": 1,
+          "expect": true
+        },
+        {
+          "do": "check",
+          "state": "OK",
+          "balance": 53,
+          "spentTotal": 7
+        },
+        {
+          "do": "restart",
+          "key": "main"
+        },
+        {
+          "do": "check",
+          "state": "OK",
+          "balance": 53,
+          "spentTotal": 7
+        },
+        {
+          "do": "credit",
+          "token": "cbx1.Y2FzdGJyaWRnZS1lbnZlbG9wZS12MQp0eXBlPXRva2VucwpraWQ9M2FjNzhlNDAxNzkxODgyNwpzZXE9Mwpub25jZT0wMDAwMDAwMDAwMDAwMDAzCmlzc3VlZEF0PTE4MDAwMDAwMDAwMDAKbm90QmVmb3JlPTE4MDAwMDAwMDAwMDAKZXhwaXJlc0F0PTE4MDAxNzI4MDAwMDAKdGFyZ2V0PWRldmljZQprPTQKZmFjdG9yPUZMQVNIfDlkYzc5NDhjNDg3NDQ4MGViMzcyZDFhY2UzNTA3ZDNkCmZhY3Rvcj1FVEhFUk5FVHw0MDRlMzU3MmM5OWM0YjRhZTM2MzRhMjQzZGU5NDBiNgpmYWN0b3I9V0lGSXxjZWVjYzhiMzMyODZlYTIyY2JlNzdiY2MwYmUzMDMxNwpmYWN0b3I9U1lTVEVNX1NFUklBTHxlMGUyYzBhZTU4ODNlNWQ1OTU2YTY2OTljZDVlOGU4NQpmYWN0b3I9QkxVRVRPT1RIfGJiYzMyOWUyYTFlMzhmYjljMWNiZTA2MzI2NTBiNGZhCi0tCmxpY2Vuc2U9bGljLXc1CmdyYW50PTMKYW1vdW50PTIwCmluc3RhbGw9ZDNlMjQ1ODc3OWE1MTdhMjc5YzJkNWE5ZTEwNTcxZTVjZDRlNTZkNDk0NGE2M2YzMWI2OWMyMDE2N2UyNjkyYgpleHBpcnk9MApmcmVzaD0w./TG0w5cyHTgqzeCJecDgC1ZFKKURd2wbO+RSq9haFog+lBe8TfZr4aKwrU6yKJb2d+6cyZyh9yKZBdecwm/fBQ==",
+          "device": "tvA",
+          "install": "tvA-install-1",
+          "ring": ["server"],
+          "now": 1800086400000,
+          "expect": "STALE_SEQUENCE"
+        },
+        {
+          "do": "credit",
+          "token": "cbx1.Y2FzdGJyaWRnZS1lbnZlbG9wZS12MQp0eXBlPXRva2VucwpraWQ9M2FjNzhlNDAxNzkxODgyNwpzZXE9NApub25jZT0wMDAwMDAwMDAwMDAwMDA0Cmlzc3VlZEF0PTE4MDAwMDAwMDAwMDAKbm90QmVmb3JlPTE4MDAwMDAwMDAwMDAKZXhwaXJlc0F0PTE4MDAxNzI4MDAwMDAKdGFyZ2V0PWRldmljZQprPTQKZmFjdG9yPUZMQVNIfDlkYzc5NDhjNDg3NDQ4MGViMzcyZDFhY2UzNTA3ZDNkCmZhY3Rvcj1FVEhFUk5FVHw0MDRlMzU3MmM5OWM0YjRhZTM2MzRhMjQzZGU5NDBiNgpmYWN0b3I9V0lGSXxjZWVjYzhiMzMyODZlYTIyY2JlNzdiY2MwYmUzMDMxNwpmYWN0b3I9U1lTVEVNX1NFUklBTHxlMGUyYzBhZTU4ODNlNWQ1OTU2YTY2OTljZDVlOGU4NQpmYWN0b3I9QkxVRVRPT1RIfGJiYzMyOWUyYTFlMzhmYjljMWNiZTA2MzI2NTBiNGZhCi0tCmxpY2Vuc2U9bGljLXc1CmdyYW50PTQKYW1vdW50PTQwCmluc3RhbGw9ZDNlMjQ1ODc3OWE1MTdhMjc5YzJkNWE5ZTEwNTcxZTVjZDRlNTZkNDk0NGE2M2YzMWI2OWMyMDE2N2UyNjkyYgpleHBpcnk9MApmcmVzaD0w.FBY9t6hr5vZG8EUYpUKf9bVjVFNDY9s++K39d2WK1TST6GDPniVoq1HPrdOCLE6xL7/vZoiQ3TcKNzEoewKfAg==",
+          "device": "tvA",
+          "install": "tvA-install-1",
+          "ring": ["server"],
+          "now": 1800086400000,
+          "expect": "OK"
+        },
+        {
+          "do": "check",
+          "state": "OK",
+          "balance": 93,
+          "spentTotal": 7
+        },
+        {
+          "do": "restart",
+          "key": "main"
+        },
+        {
+          "do": "check",
+          "state": "OK",
+          "balance": 93,
+          "spentTotal": 7
+        }
+      ],
+      "reportSince": 0,
+      "expectLines": ["castbridge-token-wallet-v1", "license=lic-w5|16368b5ed3dec3c8|48d45f22167eb58a", "install=4eb3d71317167cd8|07067f5f37973262|96b82a35932fb9f8", "granted=3|60|70031f707d3d0345|d810562b1124e329|5f4f1dd7dd506121", "acked=1|5|93d60286a654544d|2077a989ca4c57a9", "spend=2|1800000002000|quiz|extra-joker|2|quiz:g:b:1|8d26ed8f3f8208cb|23d490e06092f343", "grant=4|40|a1bf89c2c68cac29|9a53398d7c639588|4ee1f2b4df63f1fe"],
+      "expectReport": ["castbridge-token-report-v1", "license=lic-w5", "install=4eb3d71317167cd8", "lastGrant=4", "spentTotal=7", "lastSpendSeq=2", "spend=2|1800000002000|quiz|extra-joker|2|quiz:g:b:1", "mac=a7b22de6c53213cb"]
+    },
+    {
+      "id": "wallet-empty-file-is-unreadable",
+      "type": "wallet",
+      "steps": [
+        {
+          "do": "credit",
+          "token": "cbx1.Y2FzdGJyaWRnZS1lbnZlbG9wZS12MQp0eXBlPXRva2VucwpraWQ9M2FjNzhlNDAxNzkxODgyNwpzZXE9MQpub25jZT0wMDAwMDAwMDAwMDAwMDAxCmlzc3VlZEF0PTE4MDAwMDAwMDAwMDAKbm90QmVmb3JlPTE4MDAwMDAwMDAwMDAKZXhwaXJlc0F0PTE4MDAxNzI4MDAwMDAKdGFyZ2V0PWRldmljZQprPTQKZmFjdG9yPUZMQVNIfDlkYzc5NDhjNDg3NDQ4MGViMzcyZDFhY2UzNTA3ZDNkCmZhY3Rvcj1FVEhFUk5FVHw0MDRlMzU3MmM5OWM0YjRhZTM2MzRhMjQzZGU5NDBiNgpmYWN0b3I9V0lGSXxjZWVjYzhiMzMyODZlYTIyY2JlNzdiY2MwYmUzMDMxNwpmYWN0b3I9U1lTVEVNX1NFUklBTHxlMGUyYzBhZTU4ODNlNWQ1OTU2YTY2OTljZDVlOGU4NQpmYWN0b3I9QkxVRVRPT1RIfGJiYzMyOWUyYTFlMzhmYjljMWNiZTA2MzI2NTBiNGZhCi0tCmxpY2Vuc2U9bGljLXc1CmdyYW50PTEKYW1vdW50PTIwCmluc3RhbGw9ZDNlMjQ1ODc3OWE1MTdhMjc5YzJkNWE5ZTEwNTcxZTVjZDRlNTZkNDk0NGE2M2YzMWI2OWMyMDE2N2UyNjkyYgpleHBpcnk9MApmcmVzaD0x.oY3LtEWTWfA5dpUmrKvBKyfLvq6Y5O47vB8XGDFOrfLk6uB6E+wtfm2wYsaTFkZ4uwkZbMoLIQX6dTu444x5DQ==",
+          "device": "tvA",
+          "install": "tvA-install-1",
+          "ring": ["server"],
+          "now": 1800086400000,
+          "expect": "REOPENED"
+        },
+        {
+          "do": "tamper",
+          "kind": "empty",
+          "line": 0
+        },
+        {
+          "do": "restart",
+          "key": "main"
+        },
+        {
+          "do": "check",
+          "state": "UNREADABLE",
+          "balance": 0
+        },
+        {
+          "do": "credit",
+          "token": "cbx1.Y2FzdGJyaWRnZS1lbnZlbG9wZS12MQp0eXBlPXRva2VucwpraWQ9M2FjNzhlNDAxNzkxODgyNwpzZXE9Mgpub25jZT0wMDAwMDAwMDAwMDAwMDAyCmlzc3VlZEF0PTE4MDAwMDAwMDAwMDAKbm90QmVmb3JlPTE4MDAwMDAwMDAwMDAKZXhwaXJlc0F0PTE4MDAxNzI4MDAwMDAKdGFyZ2V0PWRldmljZQprPTQKZmFjdG9yPUZMQVNIfDlkYzc5NDhjNDg3NDQ4MGViMzcyZDFhY2UzNTA3ZDNkCmZhY3Rvcj1FVEhFUk5FVHw0MDRlMzU3MmM5OWM0YjRhZTM2MzRhMjQzZGU5NDBiNgpmYWN0b3I9V0lGSXxjZWVjYzhiMzMyODZlYTIyY2JlNzdiY2MwYmUzMDMxNwpmYWN0b3I9U1lTVEVNX1NFUklBTHxlMGUyYzBhZTU4ODNlNWQ1OTU2YTY2OTljZDVlOGU4NQpmYWN0b3I9QkxVRVRPT1RIfGJiYzMyOWUyYTFlMzhmYjljMWNiZTA2MzI2NTBiNGZhCi0tCmxpY2Vuc2U9bGljLXc1CmdyYW50PTIKYW1vdW50PTIwCmluc3RhbGw9ZDNlMjQ1ODc3OWE1MTdhMjc5YzJkNWE5ZTEwNTcxZTVjZDRlNTZkNDk0NGE2M2YzMWI2OWMyMDE2N2UyNjkyYgpleHBpcnk9MApmcmVzaD0w.++YBGFienoroBV0KG0AJbxn2FY/4cAvdWqlkV0p45ZjZi7tD+SyEBwXr1ui5S7gcQTik5yoWEutzaUQYyBehCA==",
+          "device": "tvA",
+          "install": "tvA-install-1",
+          "ring": ["server"],
+          "now": 1800086400000,
+          "expect": "NEEDS_FRESH"
+        },
+        {
+          "do": "spend",
+          "item": "second-chance",
+          "cost": 5,
+          "at": 1800000001000,
+          "op": "quiz:g:a:1",
+          "expect": "UNREADABLE"
+        }
+      ]
+    },
+    {
+      "id": "wallet-opening-voucher-reopens-an-empty-wallet",
+      "type": "wallet",
+      "steps": [
+        {
+          "do": "check",
+          "state": "EMPTY",
+          "cause": "none",
+          "balance": 0
+        },
+        {
+          "do": "credit",
+          "token": "cbx1.Y2FzdGJyaWRnZS1lbnZlbG9wZS12MQp0eXBlPXRva2VucwpraWQ9M2FjNzhlNDAxNzkxODgyNwpzZXE9MQpub25jZT0wMDAwMDAwMDAwMDAwMDAxCmlzc3VlZEF0PTE4MDAwMDAwMDAwMDAKbm90QmVmb3JlPTE4MDAwMDAwMDAwMDAKZXhwaXJlc0F0PTE4MDAxNzI4MDAwMDAKdGFyZ2V0PWRldmljZQprPTQKZmFjdG9yPUZMQVNIfDlkYzc5NDhjNDg3NDQ4MGViMzcyZDFhY2UzNTA3ZDNkCmZhY3Rvcj1FVEhFUk5FVHw0MDRlMzU3MmM5OWM0YjRhZTM2MzRhMjQzZGU5NDBiNgpmYWN0b3I9V0lGSXxjZWVjYzhiMzMyODZlYTIyY2JlNzdiY2MwYmUzMDMxNwpmYWN0b3I9U1lTVEVNX1NFUklBTHxlMGUyYzBhZTU4ODNlNWQ1OTU2YTY2OTljZDVlOGU4NQpmYWN0b3I9QkxVRVRPT1RIfGJiYzMyOWUyYTFlMzhmYjljMWNiZTA2MzI2NTBiNGZhCi0tCmxpY2Vuc2U9bGljLXc1CmdyYW50PTEKYW1vdW50PTIwCmluc3RhbGw9ZDNlMjQ1ODc3OWE1MTdhMjc5YzJkNWE5ZTEwNTcxZTVjZDRlNTZkNDk0NGE2M2YzMWI2OWMyMDE2N2UyNjkyYgpleHBpcnk9MApmcmVzaD0x.oY3LtEWTWfA5dpUmrKvBKyfLvq6Y5O47vB8XGDFOrfLk6uB6E+wtfm2wYsaTFkZ4uwkZbMoLIQX6dTu444x5DQ==",
+          "device": "tvA",
+          "install": "tvA-install-1",
+          "ring": ["server"],
+          "now": 1800086400000,
+          "expect": "REOPENED"
+        },
+        {
+          "do": "check",
+          "state": "OK",
+          "balance": 20,
+          "spentTotal": 0
+        },
+        {
+          "do": "checkMark",
+          "present": true,
+          "matchesFile": true,
+          "chain": 1
+        }
+      ],
+      "reportSince": 0,
+      "expectLines": ["castbridge-token-wallet-v1", "license=lic-w5|16368b5ed3dec3c8|48d45f22167eb58a", "install=4eb3d71317167cd8|07067f5f37973262|96b82a35932fb9f8", "grant=1|20|3ba816fd693c56c7|d810562b1124e329|31b4849c9799ba40"],
+      "expectReport": ["castbridge-token-report-v1", "license=lic-w5", "install=4eb3d71317167cd8", "lastGrant=1", "spentTotal=0", "lastSpendSeq=0", "mac=669735add7497bcb"]
+    },
+    {
+      "id": "wallet-ordinary-voucher-on-empty-needs-fresh",
+      "type": "wallet",
+      "steps": [
+        {
+          "do": "credit",
+          "token": "cbx1.Y2FzdGJyaWRnZS1lbnZlbG9wZS12MQp0eXBlPXRva2VucwpraWQ9M2FjNzhlNDAxNzkxODgyNwpzZXE9MQpub25jZT0wMDAwMDAwMDAwMDAwMDAxCmlzc3VlZEF0PTE4MDAwMDAwMDAwMDAKbm90QmVmb3JlPTE4MDAwMDAwMDAwMDAKZXhwaXJlc0F0PTE4MDAxNzI4MDAwMDAKdGFyZ2V0PWRldmljZQprPTQKZmFjdG9yPUZMQVNIfDlkYzc5NDhjNDg3NDQ4MGViMzcyZDFhY2UzNTA3ZDNkCmZhY3Rvcj1FVEhFUk5FVHw0MDRlMzU3MmM5OWM0YjRhZTM2MzRhMjQzZGU5NDBiNgpmYWN0b3I9V0lGSXxjZWVjYzhiMzMyODZlYTIyY2JlNzdiY2MwYmUzMDMxNwpmYWN0b3I9U1lTVEVNX1NFUklBTHxlMGUyYzBhZTU4ODNlNWQ1OTU2YTY2OTljZDVlOGU4NQpmYWN0b3I9QkxVRVRPT1RIfGJiYzMyOWUyYTFlMzhmYjljMWNiZTA2MzI2NTBiNGZhCi0tCmxpY2Vuc2U9bGljLXc1CmdyYW50PTEKYW1vdW50PTIwCmluc3RhbGw9ZDNlMjQ1ODc3OWE1MTdhMjc5YzJkNWE5ZTEwNTcxZTVjZDRlNTZkNDk0NGE2M2YzMWI2OWMyMDE2N2UyNjkyYgpleHBpcnk9MApmcmVzaD0w.ARu3zatp6Rg19mdfWkObU2kwODgsZf2GjQScGLn5NJcr2nzWeey0MuH68/L+iVreCmUDl6dJ867yPwm+miqUBA==",
+          "device": "tvA",
+          "install": "tvA-install-1",
+          "ring": ["server"],
+          "now": 1800086400000,
+          "expect": "NEEDS_FRESH"
+        },
+        {
+          "do": "check",
+          "state": "EMPTY",
+          "balance": 0
+        },
+        {
+          "do": "expectFile",
+          "name": "wallet.txt",
+          "exists": false
+        },
+        {
+          "do": "checkMark",
+          "present": false
+        }
+      ]
+    },
+    {
+      "id": "wallet-opening-voucher-on-a-healthy-wallet-is-refused",
+      "type": "wallet",
+      "steps": [
+        {
+          "do": "credit",
+          "token": "cbx1.Y2FzdGJyaWRnZS1lbnZlbG9wZS12MQp0eXBlPXRva2VucwpraWQ9M2FjNzhlNDAxNzkxODgyNwpzZXE9MQpub25jZT0wMDAwMDAwMDAwMDAwMDAxCmlzc3VlZEF0PTE4MDAwMDAwMDAwMDAKbm90QmVmb3JlPTE4MDAwMDAwMDAwMDAKZXhwaXJlc0F0PTE4MDAxNzI4MDAwMDAKdGFyZ2V0PWRldmljZQprPTQKZmFjdG9yPUZMQVNIfDlkYzc5NDhjNDg3NDQ4MGViMzcyZDFhY2UzNTA3ZDNkCmZhY3Rvcj1FVEhFUk5FVHw0MDRlMzU3MmM5OWM0YjRhZTM2MzRhMjQzZGU5NDBiNgpmYWN0b3I9V0lGSXxjZWVjYzhiMzMyODZlYTIyY2JlNzdiY2MwYmUzMDMxNwpmYWN0b3I9U1lTVEVNX1NFUklBTHxlMGUyYzBhZTU4ODNlNWQ1OTU2YTY2OTljZDVlOGU4NQpmYWN0b3I9QkxVRVRPT1RIfGJiYzMyOWUyYTFlMzhmYjljMWNiZTA2MzI2NTBiNGZhCi0tCmxpY2Vuc2U9bGljLXc1CmdyYW50PTEKYW1vdW50PTIwCmluc3RhbGw9ZDNlMjQ1ODc3OWE1MTdhMjc5YzJkNWE5ZTEwNTcxZTVjZDRlNTZkNDk0NGE2M2YzMWI2OWMyMDE2N2UyNjkyYgpleHBpcnk9MApmcmVzaD0x.oY3LtEWTWfA5dpUmrKvBKyfLvq6Y5O47vB8XGDFOrfLk6uB6E+wtfm2wYsaTFkZ4uwkZbMoLIQX6dTu444x5DQ==",
+          "device": "tvA",
+          "install": "tvA-install-1",
+          "ring": ["server"],
+          "now": 1800086400000,
+          "expect": "REOPENED"
+        },
+        {
+          "do": "spend",
+          "item": "second-chance",
+          "cost": 5,
+          "at": 1800000001000,
+          "op": "quiz:g:a:1",
+          "expect": "OK",
+          "balance": 15
+        },
+        {
+          "do": "snapshot"
+        },
+        {
+          "do": "credit",
+          "token": "cbx1.Y2FzdGJyaWRnZS1lbnZlbG9wZS12MQp0eXBlPXRva2VucwpraWQ9M2FjNzhlNDAxNzkxODgyNwpzZXE9Mgpub25jZT0wMDAwMDAwMDAwMDAwMDAyCmlzc3VlZEF0PTE4MDAwMDAwMDAwMDAKbm90QmVmb3JlPTE4MDAwMDAwMDAwMDAKZXhwaXJlc0F0PTE4MDAxNzI4MDAwMDAKdGFyZ2V0PWRldmljZQprPTQKZmFjdG9yPUZMQVNIfDlkYzc5NDhjNDg3NDQ4MGViMzcyZDFhY2UzNTA3ZDNkCmZhY3Rvcj1FVEhFUk5FVHw0MDRlMzU3MmM5OWM0YjRhZTM2MzRhMjQzZGU5NDBiNgpmYWN0b3I9V0lGSXxjZWVjYzhiMzMyODZlYTIyY2JlNzdiY2MwYmUzMDMxNwpmYWN0b3I9U1lTVEVNX1NFUklBTHxlMGUyYzBhZTU4ODNlNWQ1OTU2YTY2OTljZDVlOGU4NQpmYWN0b3I9QkxVRVRPT1RIfGJiYzMyOWUyYTFlMzhmYjljMWNiZTA2MzI2NTBiNGZhCi0tCmxpY2Vuc2U9bGljLXc1CmdyYW50PTIKYW1vdW50PTUwCmluc3RhbGw9ZDNlMjQ1ODc3OWE1MTdhMjc5YzJkNWE5ZTEwNTcxZTVjZDRlNTZkNDk0NGE2M2YzMWI2OWMyMDE2N2UyNjkyYgpleHBpcnk9MApmcmVzaD0x.WjuGVchdpfgOqNJGi0xqZqcyRcbGfBDK3UyoO7i01bZU212oWnl7Pe7Z0HsBN3Bu6cehFGFFlxU6F1n2u/DXDw==",
+          "device": "tvA",
+          "install": "tvA-install-1",
+          "ring": ["server"],
+          "now": 1800086400000,
+          "expect": "FRESH_REFUSED"
+        },
+        {
+          "do": "expectUnchanged"
+        },
+        {
+          "do": "check",
+          "state": "OK",
+          "balance": 15,
+          "spentTotal": 5
+        },
+        {
+          "do": "expectFile",
+          "name": "wallet.txt.broken-1",
+          "exists": false
+        },
+        {
+          "do": "checkMark",
+          "present": true,
+          "matchesFile": true,
+          "chain": 1
+        }
+      ]
+    },
+    {
+      "id": "wallet-erased-file-is-lost-then-reopened",
+      "type": "wallet",
+      "steps": [
+        {
+          "do": "credit",
+          "token": "cbx1.Y2FzdGJyaWRnZS1lbnZlbG9wZS12MQp0eXBlPXRva2VucwpraWQ9M2FjNzhlNDAxNzkxODgyNwpzZXE9MQpub25jZT0wMDAwMDAwMDAwMDAwMDAxCmlzc3VlZEF0PTE4MDAwMDAwMDAwMDAKbm90QmVmb3JlPTE4MDAwMDAwMDAwMDAKZXhwaXJlc0F0PTE4MDAxNzI4MDAwMDAKdGFyZ2V0PWRldmljZQprPTQKZmFjdG9yPUZMQVNIfDlkYzc5NDhjNDg3NDQ4MGViMzcyZDFhY2UzNTA3ZDNkCmZhY3Rvcj1FVEhFUk5FVHw0MDRlMzU3MmM5OWM0YjRhZTM2MzRhMjQzZGU5NDBiNgpmYWN0b3I9V0lGSXxjZWVjYzhiMzMyODZlYTIyY2JlNzdiY2MwYmUzMDMxNwpmYWN0b3I9U1lTVEVNX1NFUklBTHxlMGUyYzBhZTU4ODNlNWQ1OTU2YTY2OTljZDVlOGU4NQpmYWN0b3I9QkxVRVRPT1RIfGJiYzMyOWUyYTFlMzhmYjljMWNiZTA2MzI2NTBiNGZhCi0tCmxpY2Vuc2U9bGljLXc1CmdyYW50PTEKYW1vdW50PTIwCmluc3RhbGw9ZDNlMjQ1ODc3OWE1MTdhMjc5YzJkNWE5ZTEwNTcxZTVjZDRlNTZkNDk0NGE2M2YzMWI2OWMyMDE2N2UyNjkyYgpleHBpcnk9MApmcmVzaD0x.oY3LtEWTWfA5dpUmrKvBKyfLvq6Y5O47vB8XGDFOrfLk6uB6E+wtfm2wYsaTFkZ4uwkZbMoLIQX6dTu444x5DQ==",
+          "device": "tvA",
+          "install": "tvA-install-1",
+          "ring": ["server"],
+          "now": 1800086400000,
+          "expect": "REOPENED"
+        },
+        {
+          "do": "spend",
+          "item": "second-chance",
+          "cost": 5,
+          "at": 1800000001000,
+          "op": "quiz:g:a:1",
+          "expect": "OK",
+          "balance": 15
+        },
+        {
+          "do": "deleteFile"
+        },
+        {
+          "do": "restart",
+          "key": "main"
+        },
+        {
+          "do": "check",
+          "state": "UNREADABLE",
+          "cause": "lost",
+          "balance": 0
+        },
+        {
+          "do": "spend",
+          "item": "extra-joker",
+          "cost": 2,
+          "at": 1800000001000,
+          "op": "quiz:g:b:1",
+          "expect": "UNREADABLE"
+        },
+        {
+          "do": "credit",
+          "token": "cbx1.Y2FzdGJyaWRnZS1lbnZlbG9wZS12MQp0eXBlPXRva2VucwpraWQ9M2FjNzhlNDAxNzkxODgyNwpzZXE9Mgpub25jZT0wMDAwMDAwMDAwMDAwMDAyCmlzc3VlZEF0PTE4MDAwMDAwMDAwMDAKbm90QmVmb3JlPTE4MDAwMDAwMDAwMDAKZXhwaXJlc0F0PTE4MDAxNzI4MDAwMDAKdGFyZ2V0PWRldmljZQprPTQKZmFjdG9yPUZMQVNIfDlkYzc5NDhjNDg3NDQ4MGViMzcyZDFhY2UzNTA3ZDNkCmZhY3Rvcj1FVEhFUk5FVHw0MDRlMzU3MmM5OWM0YjRhZTM2MzRhMjQzZGU5NDBiNgpmYWN0b3I9V0lGSXxjZWVjYzhiMzMyODZlYTIyY2JlNzdiY2MwYmUzMDMxNwpmYWN0b3I9U1lTVEVNX1NFUklBTHxlMGUyYzBhZTU4ODNlNWQ1OTU2YTY2OTljZDVlOGU4NQpmYWN0b3I9QkxVRVRPT1RIfGJiYzMyOWUyYTFlMzhmYjljMWNiZTA2MzI2NTBiNGZhCi0tCmxpY2Vuc2U9bGljLXc1CmdyYW50PTIKYW1vdW50PTMwCmluc3RhbGw9ZDNlMjQ1ODc3OWE1MTdhMjc5YzJkNWE5ZTEwNTcxZTVjZDRlNTZkNDk0NGE2M2YzMWI2OWMyMDE2N2UyNjkyYgpleHBpcnk9MApmcmVzaD0w.lSFH7z8LgujtMD4/S9SYIGAVWnj7T8ncJgJDON/9m/N9cOXkX+oftPtsqOEWKQkEfBs73GCrgfYDDczZ8wvSCQ==",
+          "device": "tvA",
+          "install": "tvA-install-1",
+          "ring": ["server"],
+          "now": 1800086400000,
+          "expect": "NEEDS_FRESH"
+        },
+        {
+          "do": "credit",
+          "token": "cbx1.Y2FzdGJyaWRnZS1lbnZlbG9wZS12MQp0eXBlPXRva2VucwpraWQ9M2FjNzhlNDAxNzkxODgyNwpzZXE9Mwpub25jZT0wMDAwMDAwMDAwMDAwMDAzCmlzc3VlZEF0PTE4MDAwMDAwMDAwMDAKbm90QmVmb3JlPTE4MDAwMDAwMDAwMDAKZXhwaXJlc0F0PTE4MDAxNzI4MDAwMDAKdGFyZ2V0PWRldmljZQprPTQKZmFjdG9yPUZMQVNIfDlkYzc5NDhjNDg3NDQ4MGViMzcyZDFhY2UzNTA3ZDNkCmZhY3Rvcj1FVEhFUk5FVHw0MDRlMzU3MmM5OWM0YjRhZTM2MzRhMjQzZGU5NDBiNgpmYWN0b3I9V0lGSXxjZWVjYzhiMzMyODZlYTIyY2JlNzdiY2MwYmUzMDMxNwpmYWN0b3I9U1lTVEVNX1NFUklBTHxlMGUyYzBhZTU4ODNlNWQ1OTU2YTY2OTljZDVlOGU4NQpmYWN0b3I9QkxVRVRPT1RIfGJiYzMyOWUyYTFlMzhmYjljMWNiZTA2MzI2NTBiNGZhCi0tCmxpY2Vuc2U9bGljLXc1CmdyYW50PTMKYW1vdW50PTMwCmluc3RhbGw9ZDNlMjQ1ODc3OWE1MTdhMjc5YzJkNWE5ZTEwNTcxZTVjZDRlNTZkNDk0NGE2M2YzMWI2OWMyMDE2N2UyNjkyYgpleHBpcnk9MApmcmVzaD0x.kNulj6zAyfIfjwEQ9z56C0MqXCjX5ynDhn/hqiMrB4bFkmNUGZGl6ZjsR+8UOaZ1MHc9X5dQr3WvUZTbw/DFCQ==",
+          "device": "tvA",
+          "install": "tvA-install-1",
+          "ring": ["server"],
+          "now": 1800086400000,
+          "expect": "REOPENED"
+        },
+        {
+          "do": "check",
+          "state": "OK",
+          "cause": "none",
+          "balance": 30
+        },
+        {
+          "do": "check",
+          "state": "OK",
+          "balance": 30,
+          "spentTotal": 0
+        },
+        {
+          "do": "expectFile",
+          "name": "wallet.txt.broken-1",
+          "exists": false
+        },
+        {
+          "do": "checkMark",
+          "present": true,
+          "matchesFile": true,
+          "chain": 2
+        },
+        {
+          "do": "restart",
+          "key": "main"
+        },
+        {
+          "do": "check",
+          "state": "OK",
+          "balance": 30,
+          "spentTotal": 0
+        }
+      ],
+      "reportSince": 0,
+      "expectLines": ["castbridge-token-wallet-v1", "license=lic-w5|16368b5ed3dec3c8|48d45f22167eb58a", "install=4eb3d71317167cd8|07067f5f37973262|96b82a35932fb9f8", "grant=3|30|fbfc13aa2e3f3ff2|d810562b1124e329|dedc1ff91ff113ea"],
+      "expectReport": ["castbridge-token-report-v1", "license=lic-w5", "install=4eb3d71317167cd8", "lastGrant=3", "spentTotal=0", "lastSpendSeq=0", "mac=6929c13e81011fb6"]
+    },
+    {
+      "id": "wallet-broken-file-is-moved-aside-on-reopen",
+      "type": "wallet",
+      "steps": [
+        {
+          "do": "credit",
+          "token": "cbx1.Y2FzdGJyaWRnZS1lbnZlbG9wZS12MQp0eXBlPXRva2VucwpraWQ9M2FjNzhlNDAxNzkxODgyNwpzZXE9MQpub25jZT0wMDAwMDAwMDAwMDAwMDAxCmlzc3VlZEF0PTE4MDAwMDAwMDAwMDAKbm90QmVmb3JlPTE4MDAwMDAwMDAwMDAKZXhwaXJlc0F0PTE4MDAxNzI4MDAwMDAKdGFyZ2V0PWRldmljZQprPTQKZmFjdG9yPUZMQVNIfDlkYzc5NDhjNDg3NDQ4MGViMzcyZDFhY2UzNTA3ZDNkCmZhY3Rvcj1FVEhFUk5FVHw0MDRlMzU3MmM5OWM0YjRhZTM2MzRhMjQzZGU5NDBiNgpmYWN0b3I9V0lGSXxjZWVjYzhiMzMyODZlYTIyY2JlNzdiY2MwYmUzMDMxNwpmYWN0b3I9U1lTVEVNX1NFUklBTHxlMGUyYzBhZTU4ODNlNWQ1OTU2YTY2OTljZDVlOGU4NQpmYWN0b3I9QkxVRVRPT1RIfGJiYzMyOWUyYTFlMzhmYjljMWNiZTA2MzI2NTBiNGZhCi0tCmxpY2Vuc2U9bGljLXc1CmdyYW50PTEKYW1vdW50PTIwCmluc3RhbGw9ZDNlMjQ1ODc3OWE1MTdhMjc5YzJkNWE5ZTEwNTcxZTVjZDRlNTZkNDk0NGE2M2YzMWI2OWMyMDE2N2UyNjkyYgpleHBpcnk9MApmcmVzaD0x.oY3LtEWTWfA5dpUmrKvBKyfLvq6Y5O47vB8XGDFOrfLk6uB6E+wtfm2wYsaTFkZ4uwkZbMoLIQX6dTu444x5DQ==",
+          "device": "tvA",
+          "install": "tvA-install-1",
+          "ring": ["server"],
+          "now": 1800086400000,
+          "expect": "REOPENED"
+        },
+        {
+          "do": "spend",
+          "item": "second-chance",
+          "cost": 5,
+          "at": 1800000001000,
+          "op": "quiz:g:a:1",
+          "expect": "OK",
+          "balance": 15
+        },
+        {
+          "do": "tamper",
+          "kind": "flipMac",
+          "line": 4
+        },
+        {
+          "do": "restart",
+          "key": "main"
+        },
+        {
+          "do": "check",
+          "state": "UNREADABLE",
+          "cause": "broken",
+          "balance": 0
+        },
+        {
+          "do": "credit",
+          "token": "cbx1.Y2FzdGJyaWRnZS1lbnZlbG9wZS12MQp0eXBlPXRva2VucwpraWQ9M2FjNzhlNDAxNzkxODgyNwpzZXE9Mgpub25jZT0wMDAwMDAwMDAwMDAwMDAyCmlzc3VlZEF0PTE4MDAwMDAwMDAwMDAKbm90QmVmb3JlPTE4MDAwMDAwMDAwMDAKZXhwaXJlc0F0PTE4MDAxNzI4MDAwMDAKdGFyZ2V0PWRldmljZQprPTQKZmFjdG9yPUZMQVNIfDlkYzc5NDhjNDg3NDQ4MGViMzcyZDFhY2UzNTA3ZDNkCmZhY3Rvcj1FVEhFUk5FVHw0MDRlMzU3MmM5OWM0YjRhZTM2MzRhMjQzZGU5NDBiNgpmYWN0b3I9V0lGSXxjZWVjYzhiMzMyODZlYTIyY2JlNzdiY2MwYmUzMDMxNwpmYWN0b3I9U1lTVEVNX1NFUklBTHxlMGUyYzBhZTU4ODNlNWQ1OTU2YTY2OTljZDVlOGU4NQpmYWN0b3I9QkxVRVRPT1RIfGJiYzMyOWUyYTFlMzhmYjljMWNiZTA2MzI2NTBiNGZhCi0tCmxpY2Vuc2U9bGljLXc1CmdyYW50PTIKYW1vdW50PTMwCmluc3RhbGw9ZDNlMjQ1ODc3OWE1MTdhMjc5YzJkNWE5ZTEwNTcxZTVjZDRlNTZkNDk0NGE2M2YzMWI2OWMyMDE2N2UyNjkyYgpleHBpcnk9MApmcmVzaD0x.4bp7zspeyvlwlEM9XSBmlkJfFexl9ud0ZEziFZC8QAoSNLRVvnP2FQs7Q4Yan+qZwOlBYmy/UO8b7lAV+qxxBg==",
+          "device": "tvA",
+          "install": "tvA-install-1",
+          "ring": ["server"],
+          "now": 1800086400000,
+          "expect": "REOPENED"
+        },
+        {
+          "do": "check",
+          "state": "OK",
+          "balance": 30,
+          "spentTotal": 0
+        },
+        {
+          "do": "expectFile",
+          "name": "wallet.txt.broken-1",
+          "exists": true,
+          "startsWith": "castbridge-token-wallet-v1"
+        },
+        {
+          "do": "expectFile",
+          "name": "wallet.txt.bak.broken-1",
+          "exists": true,
+          "startsWith": "castbridge-token-wallet-v1"
+        },
+        {
+          "do": "expectFile",
+          "name": "wallet.txt.broken-new",
+          "exists": false
+        },
+        {
+          "do": "checkMark",
+          "present": true,
+          "matchesFile": true,
+          "chain": 2
+        }
+      ]
+    },
+    {
+      "id": "wallet-restored-earlier-chain-is-foreign",
+      "type": "wallet",
+      "steps": [
+        {
+          "do": "credit",
+          "token": "cbx1.Y2FzdGJyaWRnZS1lbnZlbG9wZS12MQp0eXBlPXRva2VucwpraWQ9M2FjNzhlNDAxNzkxODgyNwpzZXE9MQpub25jZT0wMDAwMDAwMDAwMDAwMDAxCmlzc3VlZEF0PTE4MDAwMDAwMDAwMDAKbm90QmVmb3JlPTE4MDAwMDAwMDAwMDAKZXhwaXJlc0F0PTE4MDAxNzI4MDAwMDAKdGFyZ2V0PWRldmljZQprPTQKZmFjdG9yPUZMQVNIfDlkYzc5NDhjNDg3NDQ4MGViMzcyZDFhY2UzNTA3ZDNkCmZhY3Rvcj1FVEhFUk5FVHw0MDRlMzU3MmM5OWM0YjRhZTM2MzRhMjQzZGU5NDBiNgpmYWN0b3I9V0lGSXxjZWVjYzhiMzMyODZlYTIyY2JlNzdiY2MwYmUzMDMxNwpmYWN0b3I9U1lTVEVNX1NFUklBTHxlMGUyYzBhZTU4ODNlNWQ1OTU2YTY2OTljZDVlOGU4NQpmYWN0b3I9QkxVRVRPT1RIfGJiYzMyOWUyYTFlMzhmYjljMWNiZTA2MzI2NTBiNGZhCi0tCmxpY2Vuc2U9bGljLXc1CmdyYW50PTEKYW1vdW50PTIwCmluc3RhbGw9ZDNlMjQ1ODc3OWE1MTdhMjc5YzJkNWE5ZTEwNTcxZTVjZDRlNTZkNDk0NGE2M2YzMWI2OWMyMDE2N2UyNjkyYgpleHBpcnk9MApmcmVzaD0x.oY3LtEWTWfA5dpUmrKvBKyfLvq6Y5O47vB8XGDFOrfLk6uB6E+wtfm2wYsaTFkZ4uwkZbMoLIQX6dTu444x5DQ==",
+          "device": "tvA",
+          "install": "tvA-install-1",
+          "ring": ["server"],
+          "now": 1800086400000,
+          "expect": "REOPENED"
+        },
+        {
+          "do": "copySave"
+        },
+        {
+          "do": "deleteFile"
+        },
+        {
+          "do": "restart",
+          "key": "main"
+        },
+        {
+          "do": "check",
+          "state": "UNREADABLE",
+          "cause": "lost",
+          "balance": 0
+        },
+        {
+          "do": "credit",
+          "token": "cbx1.Y2FzdGJyaWRnZS1lbnZlbG9wZS12MQp0eXBlPXRva2VucwpraWQ9M2FjNzhlNDAxNzkxODgyNwpzZXE9Mwpub25jZT0wMDAwMDAwMDAwMDAwMDAzCmlzc3VlZEF0PTE4MDAwMDAwMDAwMDAKbm90QmVmb3JlPTE4MDAwMDAwMDAwMDAKZXhwaXJlc0F0PTE4MDAxNzI4MDAwMDAKdGFyZ2V0PWRldmljZQprPTQKZmFjdG9yPUZMQVNIfDlkYzc5NDhjNDg3NDQ4MGViMzcyZDFhY2UzNTA3ZDNkCmZhY3Rvcj1FVEhFUk5FVHw0MDRlMzU3MmM5OWM0YjRhZTM2MzRhMjQzZGU5NDBiNgpmYWN0b3I9V0lGSXxjZWVjYzhiMzMyODZlYTIyY2JlNzdiY2MwYmUzMDMxNwpmYWN0b3I9U1lTVEVNX1NFUklBTHxlMGUyYzBhZTU4ODNlNWQ1OTU2YTY2OTljZDVlOGU4NQpmYWN0b3I9QkxVRVRPT1RIfGJiYzMyOWUyYTFlMzhmYjljMWNiZTA2MzI2NTBiNGZhCi0tCmxpY2Vuc2U9bGljLXc1CmdyYW50PTMKYW1vdW50PTQwCmluc3RhbGw9ZDNlMjQ1ODc3OWE1MTdhMjc5YzJkNWE5ZTEwNTcxZTVjZDRlNTZkNDk0NGE2M2YzMWI2OWMyMDE2N2UyNjkyYgpleHBpcnk9MApmcmVzaD0x.LhA/3mWfnl7BsbO99Qx3QibEwKQ+kykVcU/DhEpUJLgL2no4Fd0yhuTSlrx4rslojb79KLw8qxM4KW0xApgvAg==",
+          "device": "tvA",
+          "install": "tvA-install-1",
+          "ring": ["server"],
+          "now": 1800086400000,
+          "expect": "REOPENED"
+        },
+        {
+          "do": "copyRestore"
+        },
+        {
+          "do": "restart",
+          "key": "main"
+        },
+        {
+          "do": "check",
+          "state": "UNREADABLE",
+          "cause": "foreign_chain",
+          "balance": 0
+        },
+        {
+          "do": "spend",
+          "item": "second-chance",
+          "cost": 5,
+          "at": 1800000001000,
+          "op": "quiz:g:a:1",
+          "expect": "UNREADABLE"
+        },
+        {
+          "do": "credit",
+          "token": "cbx1.Y2FzdGJyaWRnZS1lbnZlbG9wZS12MQp0eXBlPXRva2VucwpraWQ9M2FjNzhlNDAxNzkxODgyNwpzZXE9NApub25jZT0wMDAwMDAwMDAwMDAwMDA0Cmlzc3VlZEF0PTE4MDAwMDAwMDAwMDAKbm90QmVmb3JlPTE4MDAwMDAwMDAwMDAKZXhwaXJlc0F0PTE4MDAxNzI4MDAwMDAKdGFyZ2V0PWRldmljZQprPTQKZmFjdG9yPUZMQVNIfDlkYzc5NDhjNDg3NDQ4MGViMzcyZDFhY2UzNTA3ZDNkCmZhY3Rvcj1FVEhFUk5FVHw0MDRlMzU3MmM5OWM0YjRhZTM2MzRhMjQzZGU5NDBiNgpmYWN0b3I9V0lGSXxjZWVjYzhiMzMyODZlYTIyY2JlNzdiY2MwYmUzMDMxNwpmYWN0b3I9U1lTVEVNX1NFUklBTHxlMGUyYzBhZTU4ODNlNWQ1OTU2YTY2OTljZDVlOGU4NQpmYWN0b3I9QkxVRVRPT1RIfGJiYzMyOWUyYTFlMzhmYjljMWNiZTA2MzI2NTBiNGZhCi0tCmxpY2Vuc2U9bGljLXc1CmdyYW50PTQKYW1vdW50PTEwCmluc3RhbGw9ZDNlMjQ1ODc3OWE1MTdhMjc5YzJkNWE5ZTEwNTcxZTVjZDRlNTZkNDk0NGE2M2YzMWI2OWMyMDE2N2UyNjkyYgpleHBpcnk9MApmcmVzaD0w.FdYNV+ZXBAmadXwSDw7Gc1aC5TZffhCioWAK2Ou5Wa6z8WOzWf9NkrWDs7cUGpRuBh6jvGjP4XeYEkHgcb59Cg==",
+          "device": "tvA",
+          "install": "tvA-install-1",
+          "ring": ["server"],
+          "now": 1800086400000,
+          "expect": "NEEDS_FRESH"
+        },
+        {
+          "do": "credit",
+          "token": "cbx1.Y2FzdGJyaWRnZS1lbnZlbG9wZS12MQp0eXBlPXRva2VucwpraWQ9M2FjNzhlNDAxNzkxODgyNwpzZXE9NQpub25jZT0wMDAwMDAwMDAwMDAwMDA1Cmlzc3VlZEF0PTE4MDAwMDAwMDAwMDAKbm90QmVmb3JlPTE4MDAwMDAwMDAwMDAKZXhwaXJlc0F0PTE4MDAxNzI4MDAwMDAKdGFyZ2V0PWRldmljZQprPTQKZmFjdG9yPUZMQVNIfDlkYzc5NDhjNDg3NDQ4MGViMzcyZDFhY2UzNTA3ZDNkCmZhY3Rvcj1FVEhFUk5FVHw0MDRlMzU3MmM5OWM0YjRhZTM2MzRhMjQzZGU5NDBiNgpmYWN0b3I9V0lGSXxjZWVjYzhiMzMyODZlYTIyY2JlNzdiY2MwYmUzMDMxNwpmYWN0b3I9U1lTVEVNX1NFUklBTHxlMGUyYzBhZTU4ODNlNWQ1OTU2YTY2OTljZDVlOGU4NQpmYWN0b3I9QkxVRVRPT1RIfGJiYzMyOWUyYTFlMzhmYjljMWNiZTA2MzI2NTBiNGZhCi0tCmxpY2Vuc2U9bGljLXc1CmdyYW50PTUKYW1vdW50PTE1Cmluc3RhbGw9ZDNlMjQ1ODc3OWE1MTdhMjc5YzJkNWE5ZTEwNTcxZTVjZDRlNTZkNDk0NGE2M2YzMWI2OWMyMDE2N2UyNjkyYgpleHBpcnk9MApmcmVzaD0x.Dr18fWhYMBOGoAtqITibXg171AvwCeRH/bXtPUrnJAfQLgaY0CFXzF5gyqakoT9bMNEb5GLFE4AwCpwKc2SqBw==",
+          "device": "tvA",
+          "install": "tvA-install-1",
+          "ring": ["server"],
+          "now": 1800086400000,
+          "expect": "REOPENED"
+        },
+        {
+          "do": "check",
+          "state": "OK",
+          "cause": "none",
+          "balance": 15
+        },
+        {
+          "do": "expectFile",
+          "name": "wallet.txt.broken-1",
+          "exists": true,
+          "startsWith": "castbridge-token-wallet-v1"
+        }
+      ]
+    },
+    {
+      "id": "wallet-forged-mark-mac-is-ignored-and-recreated",
+      "type": "wallet",
+      "steps": [
+        {
+          "do": "credit",
+          "token": "cbx1.Y2FzdGJyaWRnZS1lbnZlbG9wZS12MQp0eXBlPXRva2VucwpraWQ9M2FjNzhlNDAxNzkxODgyNwpzZXE9MQpub25jZT0wMDAwMDAwMDAwMDAwMDAxCmlzc3VlZEF0PTE4MDAwMDAwMDAwMDAKbm90QmVmb3JlPTE4MDAwMDAwMDAwMDAKZXhwaXJlc0F0PTE4MDAxNzI4MDAwMDAKdGFyZ2V0PWRldmljZQprPTQKZmFjdG9yPUZMQVNIfDlkYzc5NDhjNDg3NDQ4MGViMzcyZDFhY2UzNTA3ZDNkCmZhY3Rvcj1FVEhFUk5FVHw0MDRlMzU3MmM5OWM0YjRhZTM2MzRhMjQzZGU5NDBiNgpmYWN0b3I9V0lGSXxjZWVjYzhiMzMyODZlYTIyY2JlNzdiY2MwYmUzMDMxNwpmYWN0b3I9U1lTVEVNX1NFUklBTHxlMGUyYzBhZTU4ODNlNWQ1OTU2YTY2OTljZDVlOGU4NQpmYWN0b3I9QkxVRVRPT1RIfGJiYzMyOWUyYTFlMzhmYjljMWNiZTA2MzI2NTBiNGZhCi0tCmxpY2Vuc2U9bGljLXc1CmdyYW50PTEKYW1vdW50PTIwCmluc3RhbGw9ZDNlMjQ1ODc3OWE1MTdhMjc5YzJkNWE5ZTEwNTcxZTVjZDRlNTZkNDk0NGE2M2YzMWI2OWMyMDE2N2UyNjkyYgpleHBpcnk9MApmcmVzaD0x.oY3LtEWTWfA5dpUmrKvBKyfLvq6Y5O47vB8XGDFOrfLk6uB6E+wtfm2wYsaTFkZ4uwkZbMoLIQX6dTu444x5DQ==",
+          "device": "tvA",
+          "install": "tvA-install-1",
+          "ring": ["server"],
+          "now": 1800086400000,
+          "expect": "REOPENED"
+        },
+        {
+          "do": "markFlipMac"
+        },
+        {
+          "do": "restart",
+          "key": "main"
+        },
+        {
+          "do": "check",
+          "state": "OK",
+          "cause": "none",
+          "balance": 20
+        },
+        {
+          "do": "checkMark",
+          "present": true,
+          "matchesFile": true,
+          "chain": 1
+        }
+      ]
+    },
+    {
+      "id": "wallet-missing-mark-with-a-valid-file-is-recreated",
+      "type": "wallet",
+      "steps": [
+        {
+          "do": "credit",
+          "token": "cbx1.Y2FzdGJyaWRnZS1lbnZlbG9wZS12MQp0eXBlPXRva2VucwpraWQ9M2FjNzhlNDAxNzkxODgyNwpzZXE9MQpub25jZT0wMDAwMDAwMDAwMDAwMDAxCmlzc3VlZEF0PTE4MDAwMDAwMDAwMDAKbm90QmVmb3JlPTE4MDAwMDAwMDAwMDAKZXhwaXJlc0F0PTE4MDAxNzI4MDAwMDAKdGFyZ2V0PWRldmljZQprPTQKZmFjdG9yPUZMQVNIfDlkYzc5NDhjNDg3NDQ4MGViMzcyZDFhY2UzNTA3ZDNkCmZhY3Rvcj1FVEhFUk5FVHw0MDRlMzU3MmM5OWM0YjRhZTM2MzRhMjQzZGU5NDBiNgpmYWN0b3I9V0lGSXxjZWVjYzhiMzMyODZlYTIyY2JlNzdiY2MwYmUzMDMxNwpmYWN0b3I9U1lTVEVNX1NFUklBTHxlMGUyYzBhZTU4ODNlNWQ1OTU2YTY2OTljZDVlOGU4NQpmYWN0b3I9QkxVRVRPT1RIfGJiYzMyOWUyYTFlMzhmYjljMWNiZTA2MzI2NTBiNGZhCi0tCmxpY2Vuc2U9bGljLXc1CmdyYW50PTEKYW1vdW50PTIwCmluc3RhbGw9ZDNlMjQ1ODc3OWE1MTdhMjc5YzJkNWE5ZTEwNTcxZTVjZDRlNTZkNDk0NGE2M2YzMWI2OWMyMDE2N2UyNjkyYgpleHBpcnk9MApmcmVzaD0x.oY3LtEWTWfA5dpUmrKvBKyfLvq6Y5O47vB8XGDFOrfLk6uB6E+wtfm2wYsaTFkZ4uwkZbMoLIQX6dTu444x5DQ==",
+          "device": "tvA",
+          "install": "tvA-install-1",
+          "ring": ["server"],
+          "now": 1800086400000,
+          "expect": "REOPENED"
+        },
+        {
+          "do": "markDelete"
+        },
+        {
+          "do": "restart",
+          "key": "main"
+        },
+        {
+          "do": "check",
+          "state": "OK",
+          "cause": "none",
+          "balance": 20
+        },
+        {
+          "do": "checkMark",
+          "present": true,
+          "matchesFile": true,
+          "chain": 1
+        }
+      ]
+    },
+    {
+      "id": "wallet-mark-of-another-installation-is-ignored",
+      "type": "wallet",
+      "steps": [
+        {
+          "do": "markWrite",
+          "installId": "00000000000000ee",
+          "fp": "0123456789abcdef",
+          "chain": 1,
+          "at": 0
+        },
+        {
+          "do": "checkMark",
+          "present": false
+        },
+        {
+          "do": "check",
+          "state": "EMPTY",
+          "cause": "none",
+          "balance": 0
+        },
+        {
+          "do": "credit",
+          "token": "cbx1.Y2FzdGJyaWRnZS1lbnZlbG9wZS12MQp0eXBlPXRva2VucwpraWQ9M2FjNzhlNDAxNzkxODgyNwpzZXE9MQpub25jZT0wMDAwMDAwMDAwMDAwMDAxCmlzc3VlZEF0PTE4MDAwMDAwMDAwMDAKbm90QmVmb3JlPTE4MDAwMDAwMDAwMDAKZXhwaXJlc0F0PTE4MDAxNzI4MDAwMDAKdGFyZ2V0PWRldmljZQprPTQKZmFjdG9yPUZMQVNIfDlkYzc5NDhjNDg3NDQ4MGViMzcyZDFhY2UzNTA3ZDNkCmZhY3Rvcj1FVEhFUk5FVHw0MDRlMzU3MmM5OWM0YjRhZTM2MzRhMjQzZGU5NDBiNgpmYWN0b3I9V0lGSXxjZWVjYzhiMzMyODZlYTIyY2JlNzdiY2MwYmUzMDMxNwpmYWN0b3I9U1lTVEVNX1NFUklBTHxlMGUyYzBhZTU4ODNlNWQ1OTU2YTY2OTljZDVlOGU4NQpmYWN0b3I9QkxVRVRPT1RIfGJiYzMyOWUyYTFlMzhmYjljMWNiZTA2MzI2NTBiNGZhCi0tCmxpY2Vuc2U9bGljLXc1CmdyYW50PTEKYW1vdW50PTIwCmluc3RhbGw9ZDNlMjQ1ODc3OWE1MTdhMjc5YzJkNWE5ZTEwNTcxZTVjZDRlNTZkNDk0NGE2M2YzMWI2OWMyMDE2N2UyNjkyYgpleHBpcnk9MApmcmVzaD0w.ARu3zatp6Rg19mdfWkObU2kwODgsZf2GjQScGLn5NJcr2nzWeey0MuH68/L+iVreCmUDl6dJ867yPwm+miqUBA==",
+          "device": "tvA",
+          "install": "tvA-install-1",
+          "ring": ["server"],
+          "now": 1800086400000,
+          "expect": "NEEDS_FRESH"
+        }
+      ]
+    },
+    {
+      "id": "wallet-keeps-five-broken-files-and-erases-the-oldest",
+      "type": "wallet",
+      "steps": [
+        {
+          "do": "plantBroken",
+          "indices": [1, 2, 3, 4, 5]
+        },
+        {
+          "do": "credit",
+          "token": "cbx1.Y2FzdGJyaWRnZS1lbnZlbG9wZS12MQp0eXBlPXRva2VucwpraWQ9M2FjNzhlNDAxNzkxODgyNwpzZXE9MQpub25jZT0wMDAwMDAwMDAwMDAwMDAxCmlzc3VlZEF0PTE4MDAwMDAwMDAwMDAKbm90QmVmb3JlPTE4MDAwMDAwMDAwMDAKZXhwaXJlc0F0PTE4MDAxNzI4MDAwMDAKdGFyZ2V0PWRldmljZQprPTQKZmFjdG9yPUZMQVNIfDlkYzc5NDhjNDg3NDQ4MGViMzcyZDFhY2UzNTA3ZDNkCmZhY3Rvcj1FVEhFUk5FVHw0MDRlMzU3MmM5OWM0YjRhZTM2MzRhMjQzZGU5NDBiNgpmYWN0b3I9V0lGSXxjZWVjYzhiMzMyODZlYTIyY2JlNzdiY2MwYmUzMDMxNwpmYWN0b3I9U1lTVEVNX1NFUklBTHxlMGUyYzBhZTU4ODNlNWQ1OTU2YTY2OTljZDVlOGU4NQpmYWN0b3I9QkxVRVRPT1RIfGJiYzMyOWUyYTFlMzhmYjljMWNiZTA2MzI2NTBiNGZhCi0tCmxpY2Vuc2U9bGljLXc1CmdyYW50PTEKYW1vdW50PTIwCmluc3RhbGw9ZDNlMjQ1ODc3OWE1MTdhMjc5YzJkNWE5ZTEwNTcxZTVjZDRlNTZkNDk0NGE2M2YzMWI2OWMyMDE2N2UyNjkyYgpleHBpcnk9MApmcmVzaD0x.oY3LtEWTWfA5dpUmrKvBKyfLvq6Y5O47vB8XGDFOrfLk6uB6E+wtfm2wYsaTFkZ4uwkZbMoLIQX6dTu444x5DQ==",
+          "device": "tvA",
+          "install": "tvA-install-1",
+          "ring": ["server"],
+          "now": 1800086400000,
+          "expect": "REOPENED"
+        },
+        {
+          "do": "tamper",
+          "kind": "flipMac",
+          "line": 3
+        },
+        {
+          "do": "restart",
+          "key": "main"
+        },
+        {
+          "do": "check",
+          "state": "UNREADABLE",
+          "cause": "broken",
+          "balance": 0
+        },
+        {
+          "do": "credit",
+          "token": "cbx1.Y2FzdGJyaWRnZS1lbnZlbG9wZS12MQp0eXBlPXRva2VucwpraWQ9M2FjNzhlNDAxNzkxODgyNwpzZXE9Mgpub25jZT0wMDAwMDAwMDAwMDAwMDAyCmlzc3VlZEF0PTE4MDAwMDAwMDAwMDAKbm90QmVmb3JlPTE4MDAwMDAwMDAwMDAKZXhwaXJlc0F0PTE4MDAxNzI4MDAwMDAKdGFyZ2V0PWRldmljZQprPTQKZmFjdG9yPUZMQVNIfDlkYzc5NDhjNDg3NDQ4MGViMzcyZDFhY2UzNTA3ZDNkCmZhY3Rvcj1FVEhFUk5FVHw0MDRlMzU3MmM5OWM0YjRhZTM2MzRhMjQzZGU5NDBiNgpmYWN0b3I9V0lGSXxjZWVjYzhiMzMyODZlYTIyY2JlNzdiY2MwYmUzMDMxNwpmYWN0b3I9U1lTVEVNX1NFUklBTHxlMGUyYzBhZTU4ODNlNWQ1OTU2YTY2OTljZDVlOGU4NQpmYWN0b3I9QkxVRVRPT1RIfGJiYzMyOWUyYTFlMzhmYjljMWNiZTA2MzI2NTBiNGZhCi0tCmxpY2Vuc2U9bGljLXc1CmdyYW50PTIKYW1vdW50PTMwCmluc3RhbGw9ZDNlMjQ1ODc3OWE1MTdhMjc5YzJkNWE5ZTEwNTcxZTVjZDRlNTZkNDk0NGE2M2YzMWI2OWMyMDE2N2UyNjkyYgpleHBpcnk9MApmcmVzaD0x.4bp7zspeyvlwlEM9XSBmlkJfFexl9ud0ZEziFZC8QAoSNLRVvnP2FQs7Q4Yan+qZwOlBYmy/UO8b7lAV+qxxBg==",
+          "device": "tvA",
+          "install": "tvA-install-1",
+          "ring": ["server"],
+          "now": 1800086400000,
+          "expect": "REOPENED"
+        },
+        {
+          "do": "check",
+          "state": "OK",
+          "balance": 30,
+          "spentTotal": 0
+        },
+        {
+          "do": "expectFile",
+          "name": "wallet.txt.broken-1",
+          "exists": true,
+          "startsWith": "old-2"
+        },
+        {
+          "do": "expectFile",
+          "name": "wallet.txt.broken-4",
+          "exists": true,
+          "startsWith": "old-5"
+        },
+        {
+          "do": "expectFile",
+          "name": "wallet.txt.broken-5",
+          "exists": true,
+          "startsWith": "castbridge-token-wallet-v1"
+        },
+        {
+          "do": "expectFile",
+          "name": "wallet.txt.broken-6",
+          "exists": false
+        },
+        {
+          "do": "expectFile",
+          "name": "wallet.txt.bak.broken-1",
+          "exists": true,
+          "startsWith": "old-bak-2"
+        },
+        {
+          "do": "expectFile",
+          "name": "wallet.txt.bak.broken-4",
+          "exists": true,
+          "startsWith": "old-bak-5"
+        }
+      ]
+    },
+    {
+      "id": "wallet-failed-reopen-puts-the-old-file-back",
+      "type": "wallet",
+      "steps": [
+        {
+          "do": "credit",
+          "token": "cbx1.Y2FzdGJyaWRnZS1lbnZlbG9wZS12MQp0eXBlPXRva2VucwpraWQ9M2FjNzhlNDAxNzkxODgyNwpzZXE9MQpub25jZT0wMDAwMDAwMDAwMDAwMDAxCmlzc3VlZEF0PTE4MDAwMDAwMDAwMDAKbm90QmVmb3JlPTE4MDAwMDAwMDAwMDAKZXhwaXJlc0F0PTE4MDAxNzI4MDAwMDAKdGFyZ2V0PWRldmljZQprPTQKZmFjdG9yPUZMQVNIfDlkYzc5NDhjNDg3NDQ4MGViMzcyZDFhY2UzNTA3ZDNkCmZhY3Rvcj1FVEhFUk5FVHw0MDRlMzU3MmM5OWM0YjRhZTM2MzRhMjQzZGU5NDBiNgpmYWN0b3I9V0lGSXxjZWVjYzhiMzMyODZlYTIyY2JlNzdiY2MwYmUzMDMxNwpmYWN0b3I9U1lTVEVNX1NFUklBTHxlMGUyYzBhZTU4ODNlNWQ1OTU2YTY2OTljZDVlOGU4NQpmYWN0b3I9QkxVRVRPT1RIfGJiYzMyOWUyYTFlMzhmYjljMWNiZTA2MzI2NTBiNGZhCi0tCmxpY2Vuc2U9bGljLXc1CmdyYW50PTEKYW1vdW50PTIwCmluc3RhbGw9ZDNlMjQ1ODc3OWE1MTdhMjc5YzJkNWE5ZTEwNTcxZTVjZDRlNTZkNDk0NGE2M2YzMWI2OWMyMDE2N2UyNjkyYgpleHBpcnk9MApmcmVzaD0x.oY3LtEWTWfA5dpUmrKvBKyfLvq6Y5O47vB8XGDFOrfLk6uB6E+wtfm2wYsaTFkZ4uwkZbMoLIQX6dTu444x5DQ==",
+          "device": "tvA",
+          "install": "tvA-install-1",
+          "ring": ["server"],
+          "now": 1800086400000,
+          "expect": "REOPENED"
+        },
+        {
+          "do": "tamper",
+          "kind": "flipMac",
+          "line": 3
+        },
+        {
+          "do": "restart",
+          "key": "main"
+        },
+        {
+          "do": "snapshot"
+        },
+        {
+          "do": "failWrites"
+        },
+        {
+          "do": "credit",
+          "token": "cbx1.Y2FzdGJyaWRnZS1lbnZlbG9wZS12MQp0eXBlPXRva2VucwpraWQ9M2FjNzhlNDAxNzkxODgyNwpzZXE9Mgpub25jZT0wMDAwMDAwMDAwMDAwMDAyCmlzc3VlZEF0PTE4MDAwMDAwMDAwMDAKbm90QmVmb3JlPTE4MDAwMDAwMDAwMDAKZXhwaXJlc0F0PTE4MDAxNzI4MDAwMDAKdGFyZ2V0PWRldmljZQprPTQKZmFjdG9yPUZMQVNIfDlkYzc5NDhjNDg3NDQ4MGViMzcyZDFhY2UzNTA3ZDNkCmZhY3Rvcj1FVEhFUk5FVHw0MDRlMzU3MmM5OWM0YjRhZTM2MzRhMjQzZGU5NDBiNgpmYWN0b3I9V0lGSXxjZWVjYzhiMzMyODZlYTIyY2JlNzdiY2MwYmUzMDMxNwpmYWN0b3I9U1lTVEVNX1NFUklBTHxlMGUyYzBhZTU4ODNlNWQ1OTU2YTY2OTljZDVlOGU4NQpmYWN0b3I9QkxVRVRPT1RIfGJiYzMyOWUyYTFlMzhmYjljMWNiZTA2MzI2NTBiNGZhCi0tCmxpY2Vuc2U9bGljLXc1CmdyYW50PTIKYW1vdW50PTMwCmluc3RhbGw9ZDNlMjQ1ODc3OWE1MTdhMjc5YzJkNWE5ZTEwNTcxZTVjZDRlNTZkNDk0NGE2M2YzMWI2OWMyMDE2N2UyNjkyYgpleHBpcnk9MApmcmVzaD0x.4bp7zspeyvlwlEM9XSBmlkJfFexl9ud0ZEziFZC8QAoSNLRVvnP2FQs7Q4Yan+qZwOlBYmy/UO8b7lAV+qxxBg==",
+          "device": "tvA",
+          "install": "tvA-install-1",
+          "ring": ["server"],
+          "now": 1800086400000,
+          "expect": "WRITE_FAILED"
+        },
+        {
+          "do": "expectUnchanged"
+        },
+        {
+          "do": "check",
+          "state": "UNREADABLE",
+          "cause": "broken",
+          "balance": 0
+        },
+        {
+          "do": "expectFile",
+          "name": "wallet.txt.broken-1",
+          "exists": false
+        },
+        {
+          "do": "expectFile",
+          "name": "wallet.txt.broken-new",
+          "exists": false
+        },
+        {
+          "do": "checkMark",
+          "present": true,
+          "matchesFile": false,
+          "chain": 1
+        },
+        {
+          "do": "allowWrites"
+        },
+        {
+          "do": "credit",
+          "token": "cbx1.Y2FzdGJyaWRnZS1lbnZlbG9wZS12MQp0eXBlPXRva2VucwpraWQ9M2FjNzhlNDAxNzkxODgyNwpzZXE9Mgpub25jZT0wMDAwMDAwMDAwMDAwMDAyCmlzc3VlZEF0PTE4MDAwMDAwMDAwMDAKbm90QmVmb3JlPTE4MDAwMDAwMDAwMDAKZXhwaXJlc0F0PTE4MDAxNzI4MDAwMDAKdGFyZ2V0PWRldmljZQprPTQKZmFjdG9yPUZMQVNIfDlkYzc5NDhjNDg3NDQ4MGViMzcyZDFhY2UzNTA3ZDNkCmZhY3Rvcj1FVEhFUk5FVHw0MDRlMzU3MmM5OWM0YjRhZTM2MzRhMjQzZGU5NDBiNgpmYWN0b3I9V0lGSXxjZWVjYzhiMzMyODZlYTIyY2JlNzdiY2MwYmUzMDMxNwpmYWN0b3I9U1lTVEVNX1NFUklBTHxlMGUyYzBhZTU4ODNlNWQ1OTU2YTY2OTljZDVlOGU4NQpmYWN0b3I9QkxVRVRPT1RIfGJiYzMyOWUyYTFlMzhmYjljMWNiZTA2MzI2NTBiNGZhCi0tCmxpY2Vuc2U9bGljLXc1CmdyYW50PTIKYW1vdW50PTMwCmluc3RhbGw9ZDNlMjQ1ODc3OWE1MTdhMjc5YzJkNWE5ZTEwNTcxZTVjZDRlNTZkNDk0NGE2M2YzMWI2OWMyMDE2N2UyNjkyYgpleHBpcnk9MApmcmVzaD0x.4bp7zspeyvlwlEM9XSBmlkJfFexl9ud0ZEziFZC8QAoSNLRVvnP2FQs7Q4Yan+qZwOlBYmy/UO8b7lAV+qxxBg==",
+          "device": "tvA",
+          "install": "tvA-install-1",
+          "ring": ["server"],
+          "now": 1800086400000,
+          "expect": "REOPENED"
+        },
+        {
+          "do": "check",
+          "state": "OK",
+          "cause": "none",
+          "balance": 30
+        },
+        {
+          "do": "expectFile",
+          "name": "wallet.txt.broken-1",
+          "exists": true,
+          "startsWith": "castbridge-token-wallet-v1"
+        }
+      ]
+    },
+    {
+      "id": "wallet-sync-apply-opens-first-then-ordinary-by-number",
+      "type": "wallet",
+      "steps": [
+        {
+          "do": "apply",
+          "tokens": ["cbx1.Y2FzdGJyaWRnZS1lbnZlbG9wZS12MQp0eXBlPXRva2VucwpraWQ9M2FjNzhlNDAxNzkxODgyNwpzZXE9Mwpub25jZT0wMDAwMDAwMDAwMDAwMDAzCmlzc3VlZEF0PTE4MDAwMDAwMDAwMDAKbm90QmVmb3JlPTE4MDAwMDAwMDAwMDAKZXhwaXJlc0F0PTE4MDAxNzI4MDAwMDAKdGFyZ2V0PWRldmljZQprPTQKZmFjdG9yPUZMQVNIfDlkYzc5NDhjNDg3NDQ4MGViMzcyZDFhY2UzNTA3ZDNkCmZhY3Rvcj1FVEhFUk5FVHw0MDRlMzU3MmM5OWM0YjRhZTM2MzRhMjQzZGU5NDBiNgpmYWN0b3I9V0lGSXxjZWVjYzhiMzMyODZlYTIyY2JlNzdiY2MwYmUzMDMxNwpmYWN0b3I9U1lTVEVNX1NFUklBTHxlMGUyYzBhZTU4ODNlNWQ1OTU2YTY2OTljZDVlOGU4NQpmYWN0b3I9QkxVRVRPT1RIfGJiYzMyOWUyYTFlMzhmYjljMWNiZTA2MzI2NTBiNGZhCi0tCmxpY2Vuc2U9bGljLXc1CmdyYW50PTMKYW1vdW50PTMwCmluc3RhbGw9ZDNlMjQ1ODc3OWE1MTdhMjc5YzJkNWE5ZTEwNTcxZTVjZDRlNTZkNDk0NGE2M2YzMWI2OWMyMDE2N2UyNjkyYgpleHBpcnk9MApmcmVzaD0w.NBRf3vgezac7MExzsJTTLgc1S/WfccOdTV09QydU3fKO9Sz2juC4u7qGM5TnZPgNfzyG87+bcCQGS+ggWpxvCw==", "cbx1.Y2FzdGJyaWRnZS1lbnZlbG9wZS12MQp0eXBlPXRva2VucwpraWQ9M2FjNzhlNDAxNzkxODgyNwpzZXE9Mgpub25jZT0wMDAwMDAwMDAwMDAwMDAyCmlzc3VlZEF0PTE4MDAwMDAwMDAwMDAKbm90QmVmb3JlPTE4MDAwMDAwMDAwMDAKZXhwaXJlc0F0PTE4MDAxNzI4MDAwMDAKdGFyZ2V0PWRldmljZQprPTQKZmFjdG9yPUZMQVNIfDlkYzc5NDhjNDg3NDQ4MGViMzcyZDFhY2UzNTA3ZDNkCmZhY3Rvcj1FVEhFUk5FVHw0MDRlMzU3MmM5OWM0YjRhZTM2MzRhMjQzZGU5NDBiNgpmYWN0b3I9V0lGSXxjZWVjYzhiMzMyODZlYTIyY2JlNzdiY2MwYmUzMDMxNwpmYWN0b3I9U1lTVEVNX1NFUklBTHxlMGUyYzBhZTU4ODNlNWQ1OTU2YTY2OTljZDVlOGU4NQpmYWN0b3I9QkxVRVRPT1RIfGJiYzMyOWUyYTFlMzhmYjljMWNiZTA2MzI2NTBiNGZhCi0tCmxpY2Vuc2U9bGljLXc1CmdyYW50PTIKYW1vdW50PTEwCmluc3RhbGw9ZDNlMjQ1ODc3OWE1MTdhMjc5YzJkNWE5ZTEwNTcxZTVjZDRlNTZkNDk0NGE2M2YzMWI2OWMyMDE2N2UyNjkyYgpleHBpcnk9MApmcmVzaD0w.eGlNbaWWOKITa2EJ39kURz1A67VqoJpC0OJIfh6gNPGMovpAtm9AxgpHq+Lqs2TyoRSlt6iDM7a42V6XZVgJAQ==", "cbx1.Y2FzdGJyaWRnZS1lbnZlbG9wZS12MQp0eXBlPXRva2VucwpraWQ9M2FjNzhlNDAxNzkxODgyNwpzZXE9MQpub25jZT0wMDAwMDAwMDAwMDAwMDAxCmlzc3VlZEF0PTE4MDAwMDAwMDAwMDAKbm90QmVmb3JlPTE4MDAwMDAwMDAwMDAKZXhwaXJlc0F0PTE4MDAxNzI4MDAwMDAKdGFyZ2V0PWRldmljZQprPTQKZmFjdG9yPUZMQVNIfDlkYzc5NDhjNDg3NDQ4MGViMzcyZDFhY2UzNTA3ZDNkCmZhY3Rvcj1FVEhFUk5FVHw0MDRlMzU3MmM5OWM0YjRhZTM2MzRhMjQzZGU5NDBiNgpmYWN0b3I9V0lGSXxjZWVjYzhiMzMyODZlYTIyY2JlNzdiY2MwYmUzMDMxNwpmYWN0b3I9U1lTVEVNX1NFUklBTHxlMGUyYzBhZTU4ODNlNWQ1OTU2YTY2OTljZDVlOGU4NQpmYWN0b3I9QkxVRVRPT1RIfGJiYzMyOWUyYTFlMzhmYjljMWNiZTA2MzI2NTBiNGZhCi0tCmxpY2Vuc2U9bGljLXc1CmdyYW50PTEKYW1vdW50PTIwCmluc3RhbGw9ZDNlMjQ1ODc3OWE1MTdhMjc5YzJkNWE5ZTEwNTcxZTVjZDRlNTZkNDk0NGE2M2YzMWI2OWMyMDE2N2UyNjkyYgpleHBpcnk9MApmcmVzaD0x.oY3LtEWTWfA5dpUmrKvBKyfLvq6Y5O47vB8XGDFOrfLk6uB6E+wtfm2wYsaTFkZ4uwkZbMoLIQX6dTu444x5DQ=="],
+          "device": "tvA",
+          "install": "tvA-install-1",
+          "ring": ["server"],
+          "now": 1800086400000,
+          "expect": {
+            "reopened": true,
+            "credited": 2,
+            "rejected": 0
+          }
+        },
+        {
+          "do": "check",
+          "state": "OK",
+          "balance": 60,
+          "spentTotal": 0
+        },
+        {
+          "do": "apply",
+          "tokens": ["cbx1.Y2FzdGJyaWRnZS1lbnZlbG9wZS12MQp0eXBlPXRva2VucwpraWQ9M2FjNzhlNDAxNzkxODgyNwpzZXE9Mwpub25jZT0wMDAwMDAwMDAwMDAwMDAzCmlzc3VlZEF0PTE4MDAwMDAwMDAwMDAKbm90QmVmb3JlPTE4MDAwMDAwMDAwMDAKZXhwaXJlc0F0PTE4MDAxNzI4MDAwMDAKdGFyZ2V0PWRldmljZQprPTQKZmFjdG9yPUZMQVNIfDlkYzc5NDhjNDg3NDQ4MGViMzcyZDFhY2UzNTA3ZDNkCmZhY3Rvcj1FVEhFUk5FVHw0MDRlMzU3MmM5OWM0YjRhZTM2MzRhMjQzZGU5NDBiNgpmYWN0b3I9V0lGSXxjZWVjYzhiMzMyODZlYTIyY2JlNzdiY2MwYmUzMDMxNwpmYWN0b3I9U1lTVEVNX1NFUklBTHxlMGUyYzBhZTU4ODNlNWQ1OTU2YTY2OTljZDVlOGU4NQpmYWN0b3I9QkxVRVRPT1RIfGJiYzMyOWUyYTFlMzhmYjljMWNiZTA2MzI2NTBiNGZhCi0tCmxpY2Vuc2U9bGljLXc1CmdyYW50PTMKYW1vdW50PTMwCmluc3RhbGw9ZDNlMjQ1ODc3OWE1MTdhMjc5YzJkNWE5ZTEwNTcxZTVjZDRlNTZkNDk0NGE2M2YzMWI2OWMyMDE2N2UyNjkyYgpleHBpcnk9MApmcmVzaD0w.NBRf3vgezac7MExzsJTTLgc1S/WfccOdTV09QydU3fKO9Sz2juC4u7qGM5TnZPgNfzyG87+bcCQGS+ggWpxvCw==", "cbx1.Y2FzdGJyaWRnZS1lbnZlbG9wZS12MQp0eXBlPXRva2VucwpraWQ9M2FjNzhlNDAxNzkxODgyNwpzZXE9MQpub25jZT0wMDAwMDAwMDAwMDAwMDAxCmlzc3VlZEF0PTE4MDAwMDAwMDAwMDAKbm90QmVmb3JlPTE4MDAwMDAwMDAwMDAKZXhwaXJlc0F0PTE4MDAxNzI4MDAwMDAKdGFyZ2V0PWRldmljZQprPTQKZmFjdG9yPUZMQVNIfDlkYzc5NDhjNDg3NDQ4MGViMzcyZDFhY2UzNTA3ZDNkCmZhY3Rvcj1FVEhFUk5FVHw0MDRlMzU3MmM5OWM0YjRhZTM2MzRhMjQzZGU5NDBiNgpmYWN0b3I9V0lGSXxjZWVjYzhiMzMyODZlYTIyY2JlNzdiY2MwYmUzMDMxNwpmYWN0b3I9U1lTVEVNX1NFUklBTHxlMGUyYzBhZTU4ODNlNWQ1OTU2YTY2OTljZDVlOGU4NQpmYWN0b3I9QkxVRVRPT1RIfGJiYzMyOWUyYTFlMzhmYjljMWNiZTA2MzI2NTBiNGZhCi0tCmxpY2Vuc2U9bGljLXc1CmdyYW50PTEKYW1vdW50PTIwCmluc3RhbGw9ZDNlMjQ1ODc3OWE1MTdhMjc5YzJkNWE5ZTEwNTcxZTVjZDRlNTZkNDk0NGE2M2YzMWI2OWMyMDE2N2UyNjkyYgpleHBpcnk9MApmcmVzaD0x.oY3LtEWTWfA5dpUmrKvBKyfLvq6Y5O47vB8XGDFOrfLk6uB6E+wtfm2wYsaTFkZ4uwkZbMoLIQX6dTu444x5DQ=="],
+          "device": "tvA",
+          "install": "tvA-install-1",
+          "ring": ["server"],
+          "now": 1800086400000,
+          "expect": {
+            "reopened": false,
+            "credited": 0,
+            "rejected": 2
+          }
+        },
+        {
+          "do": "check",
+          "state": "OK",
+          "balance": 60,
+          "spentTotal": 0
+        }
+      ]
+    },
+    {
+      "id": "server-report-below-chain-grant-seq-is-chain-replay",
+      "type": "server",
+      "scope": "w5-08",
+      "chainGrantSeq": 5,
+      "report": {
+        "lastGrant": 3,
+        "lastSpendSeq": 2
+      },
+      "expect": {
+        "anomaly": "TOKEN_CHAIN_REPLAY",
+        "spendsRecorded": false,
+        "offlineAllowed": false
+      }
+    },
+    {
+      "id": "server-first-report-after-recovery-is-not-a-replay",
+      "type": "server",
+      "scope": "w5-08",
+      "chainGrantSeq": 5,
+      "lastSeqSeen": 0,
+      "report": {
+        "lastGrant": 5,
+        "lastSpendSeq": 1
+      },
+      "expect": {
+        "spendsRecorded": true,
+        "offlineAllowed": true
+      }
+    },
+    {
+      "id": "server-wallet-absent-after-delivery-is-wallet-lost",
+      "type": "server",
+      "scope": "w5-08",
+      "deliveredGrants": 1,
+      "walletState": "absent",
+      "walletCause": "lost",
+      "expect": {
+        "anomaly": "TOKEN_WALLET_LOST"
+      }
+    },
+    {
+      "id": "policy-default-costs",
+      "type": "policy",
+      "balance": 23,
+      "expect": {
+        "second-chance": {
+          "cost": 5,
+          "max": 1,
+          "label": "Seconde chance",
+          "confirm": "Utiliser 5 jetons (cinq) pour « Seconde chance » ? Solde : 23 jetons"
+        },
+        "extra-joker": {
+          "cost": 2,
+          "max": 2,
+          "label": "Joker en plus",
+          "confirm": "Utiliser 2 jetons (deux) pour « Joker en plus » ? Solde : 23 jetons"
+        },
+        "swap-question": {
+          "cost": 3,
+          "max": 1,
+          "label": "Changer de question",
+          "confirm": "Utiliser 3 jetons (trois) pour « Changer de question » ? Solde : 23 jetons"
+        }
+      }
+    },
+    {
+      "id": "policy-grid-costs",
+      "type": "policy",
+      "settings": {
+        "secondChance": 1,
+        "extraJoker": 10,
+        "swapQuestion": 71
+      },
+      "balance": 1,
+      "expect": {
+        "second-chance": {
+          "cost": 1,
+          "max": 1,
+          "label": "Seconde chance",
+          "confirm": "Utiliser 1 jeton (un) pour « Seconde chance » ? Solde : 1 jeton"
+        },
+        "extra-joker": {
+          "cost": 10,
+          "max": 2,
+          "label": "Joker en plus",
+          "confirm": "Utiliser 10 jetons (dix) pour « Joker en plus » ? Solde : 1 jeton"
+        },
+        "swap-question": {
+          "cost": 71,
+          "max": 1,
+          "label": "Changer de question",
+          "confirm": "Utiliser 71 jetons (soixante et onze) pour « Changer de question » ? Solde : 1 jeton"
+        }
+      }
+    },
+    {
+      "id": "french-numbers-0",
+      "type": "french-numbers",
+      "n": 0,
+      "expect": {
+        "words": "zéro"
+      }
+    },
+    {
+      "id": "french-numbers-5",
+      "type": "french-numbers",
+      "n": 5,
+      "expect": {
+        "words": "cinq"
+      }
+    },
+    {
+      "id": "french-numbers-21",
+      "type": "french-numbers",
+      "n": 21,
+      "expect": {
+        "words": "vingt et un"
+      }
+    },
+    {
+      "id": "french-numbers-71",
+      "type": "french-numbers",
+      "n": 71,
+      "expect": {
+        "words": "soixante et onze"
+      }
+    },
+    {
+      "id": "french-numbers-80",
+      "type": "french-numbers",
+      "n": 80,
+      "expect": {
+        "words": "quatre-vingts"
+      }
+    },
+    {
+      "id": "french-numbers-81",
+      "type": "french-numbers",
+      "n": 81,
+      "expect": {
+        "words": "quatre-vingt-un"
+      }
+    },
+    {
+      "id": "french-numbers-91",
+      "type": "french-numbers",
+      "n": 91,
+      "expect": {
+        "words": "quatre-vingt-onze"
+      }
+    },
+    {
+      "id": "french-numbers-99",
+      "type": "french-numbers",
+      "n": 99,
+      "expect": {
+        "words": "quatre-vingt-dix-neuf"
+      }
+    },
+    {
+      "id": "french-numbers-100",
+      "type": "french-numbers",
+      "n": 100,
+      "expect": {
+        "words": "cent"
+      }
+    },
+    {
+      "id": "french-numbers-200",
+      "type": "french-numbers",
+      "n": 200,
+      "expect": {
+        "words": "deux cents"
+      }
+    },
+    {
+      "id": "french-numbers-201",
+      "type": "french-numbers",
+      "n": 201,
+      "expect": {
+        "words": "deux cent un"
+      }
+    },
+    {
+      "id": "french-numbers-1000",
+      "type": "french-numbers",
+      "n": 1000,
+      "expect": {
+        "words": "mille"
+      }
+    },
+    {
+      "id": "french-numbers-2080",
+      "type": "french-numbers",
+      "n": 2080,
+      "expect": {
+        "words": "deux mille quatre-vingts"
+      }
+    },
+    {
+      "id": "french-numbers-10000",
+      "type": "french-numbers",
+      "n": 10000,
+      "expect": {
+        "words": "dix mille"
+      }
+    }
+  ]
+}
