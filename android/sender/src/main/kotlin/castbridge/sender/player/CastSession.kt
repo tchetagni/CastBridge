@@ -5,6 +5,9 @@ import android.content.Intent
 import androidx.media3.common.C
 import castbridge.core.phone.CastAction
 import castbridge.core.phone.CastPlan
+import castbridge.core.phone.CopyHandoff
+import castbridge.core.phone.CopyRoute
+import castbridge.core.phone.CopyTransport
 import castbridge.core.phone.Handoff
 import castbridge.core.phone.MediaKind
 import castbridge.core.phone.RemoteClock
@@ -56,6 +59,8 @@ data class Remote(
     val servedByPhone: Boolean = false,
     /** While the file is copied to the TV before it takes over: percentage, time left, time before the hand-over. */
     val copy: castbridge.core.phone.CopyProgress? = null,
+    /** The phone's own player plays this file while it is copied (from « Ouvrir avec », nothing plays here: the screen must not say it does). */
+    val phonePlays: Boolean = false,
 ) {
     enum class Phase { STARTING, COPYING, PLAYING, ENDED, FAILED }
     /** The TV has taken over: the phone shows the remote control instead of its own player. */
@@ -151,51 +156,72 @@ object CastSession {
         poll()
     }
 
-    private suspend fun copy(ctx: Context, target: CastTarget.Box, item: PlayItem, move: Boolean, dur: Long, fallbackPos: Long) {
+    /**
+     * « Copier sur la TV et lire » / « Déplacer » (R-08): the path is chosen before the first byte ([CopyRoute]): a video that plays on the TV goes in order
+     * from byte 0 (visible `.part`), so that `/api/info` shows what arrived and the TV starts as soon as it holds [Handoff.bytesNeeded]; an MP4 indexed at the
+     * end, or a photo, takes « Transfert rapide » (the TV waits for the whole file anyway). The phone keeps playing (if it was) until the TV takes over.
+     */
+    private suspend fun copy(ctx: Context, target: CastTarget.Box, item: PlayItem, move: Boolean, dur0: Long, fallbackPos: Long) {
         val up = UploadService.state.value
         if (up is UploadService.State.Uploading || up is UploadService.State.Waiting)
             throw CastFailure("Un envoi vers la TV est déjà en cours : attendez qu'il se termine.")
-        withContext(Dispatchers.Main) {
-            UploadService.start(ctx, item.uri, item.name, target.tv.name, null, target.pin, progressive = false, autoPlay = false, move = move)
+        val action = if (move) CastAction.MOVE else CastAction.COPY
+        // facts known before the first byte: the size and the MP4 layout decide the path
+        val size = withContext(Dispatchers.IO) {
+            runCatching { ctx.contentResolver.openFileDescriptor(item.uri, "r")!!.use { it.statSize } }.getOrNull()?.takeIf { it > 0 } ?: item.size
         }
-        if (!CastPlan.playsOnTv(if (move) CastAction.MOVE else CastAction.COPY, item.castSource)) {
+        var layout: Mp4Atoms.Layout? = if (size <= 0) null else if (!Mp4Atoms.isIsoName(item.name)) Mp4Atoms.Layout.NOT_ISO
+            else withContext(Dispatchers.IO) { mp4LayoutOf(ctx, item.uri, size) }
+        val route = CopyRoute.decide(CopyRoute.Facts(action, item.castSource, layout, fastEnabled = castbridge.sender.FastTransfer.enabled(ctx)))
+        android.util.Log.i("CastSession", "copy ${item.name}: ${route.transport} (${route.why})")
+        withContext(Dispatchers.Main) {
+            UploadService.start(ctx, item.uri, item.name, target.tv.name, null, target.pin, progressive = false, autoPlay = false, move = move,
+                ordered = route.transport == CopyTransport.ORDERED)
+        }
+        if (!CastPlan.playsOnTv(action, item.castSource)) {
             _notices.tryEmit(if (move) "Déplacement de « ${item.name} » vers ${target.name} : suivez l'envoi dans la notification."
                 else "Copie de « ${item.name} » vers ${target.name} : suivez l'envoi dans la notification.")
             _state.value = null
             return
         }
+        // « Ouvrir avec » starts here without the phone's player: read the duration from the file, else the hand-off can only start from 0 on a byte guess
+        val dur = if (dur0 > 0) dur0 else withContext(Dispatchers.IO) { probeDurationMs(ctx, item) }
+        if (dur > 0) update { it.copy(localDurMs = dur) }
         val client = TvClient(target.tv.base, target.pin)
         var total = 0L
-        var layout: Mp4Atoms.Layout? = null
-        update { it.copy(phase = Remote.Phase.COPYING, message = "Copie vers ${target.name}… La lecture continue ici en attendant.",
-            copy = castbridge.core.phone.CopyProgress(0, 0, 0, null)) }
+        val playsAtStart = phonePlays(item)
+        update { it.copy(phase = Remote.Phase.COPYING, message = CopyHandoff.line(layout == Mp4Atoms.Layout.MOOV_AT_END, null), phonePlays = playsAtStart,
+            copy = castbridge.core.phone.CopyProgress(0, 0, 0, null, moovAtEnd = layout == Mp4Atoms.Layout.MOOV_AT_END)) }
         while (currentCoroutineContextActive()) {
+            // the name the TV receives (« Rangement automatique » may have given a clean one)
+            var sentName = item.name
+            var waiting: String? = null
             when (val u = UploadService.state.value) {
                 is UploadService.State.Failed -> throw CastFailure("Échec de l'envoi : ${u.reason}")
-                is UploadService.State.Uploading -> total = u.total
-                is UploadService.State.Waiting -> { total = u.total; update { it.copy(message = "En attente du réseau : ${u.reason}") } }
+                is UploadService.State.Uploading -> { total = u.total; sentName = u.job.fileName }
+                is UploadService.State.Waiting -> { total = u.total; sentName = u.job.fileName; waiting = "En attente du réseau : ${u.reason}" }
+                is UploadService.State.Done -> sentName = u.job.fileName
                 else -> {}
             }
-            if (total > 0 && layout == null)
-                layout = if (Mp4Atoms.isIsoName(item.name)) mp4LayoutOf(ctx, item.uri, total) else Mp4Atoms.Layout.NOT_ISO
             val info = runCatching { TvInfo.parse(client.info()) }.getOrNull()
-            val f = info?.file(item.name)
+            val f = info?.file(sentName) ?: info?.file(item.name)
             // A small file can be sent completely before the first look: the TV's own size then says it all.
             if (total <= 0 && f != null && f.complete) total = f.size
             if (total > 0 && layout == null)
                 layout = if (Mp4Atoms.isIsoName(item.name)) mp4LayoutOf(ctx, item.uri, total) else Mp4Atoms.Layout.NOT_ISO
+            val moovAtEnd = layout == Mp4Atoms.Layout.MOOV_AT_END
+            if (waiting != null) update { it.copy(message = waiting) }
             if (f != null && total > 0) {
                 val (pos, _) = phonePosition(item, fallbackPos, dur)
-                val moovAtEnd = layout == Mp4Atoms.Layout.MOOV_AT_END
-                val pct = f.received * 100 / total
                 val speed = UploadService.speed.value.takeIf { it > 0 } ?: UploadService.average.value
                 val progress = castbridge.core.phone.CopyProgress(f.received, total, speed,
-                    Handoff.waitMs(f.received, total, dur, pos, moovAtEnd, speed))
-                update { it.copy(copy = progress, message = if (moovAtEnd) "Copie vers ${it.target.name} : $pct %. Ce MP4 doit être copié en entier avant de passer sur la TV ; la lecture continue ici."
-                    else "Copie vers ${it.target.name} : $pct %. La TV prendra le relais dès qu'elle aura assez d'avance ; la lecture continue ici.") }
+                    Handoff.waitMs(f.received, total, dur, pos, moovAtEnd, speed), moovAtEnd = moovAtEnd)
+                val playsHere = phonePlays(item)
+                update { it.copy(copy = progress, phonePlays = playsHere, message = waiting ?: CopyHandoff.line(moovAtEnd, progress.fullInMs)) }
                 if (Handoff.copyReady(f.received, total, dur, pos, moovAtEnd, UploadService.speed.value)) {
                     val start = Handoff.phoneToTv(pos, dur)
-                    val ok = try { client.play(item.name, start); true } catch (e: TvClient.HttpError) {
+                    // f.name: the TV's own name of the file (the clean one it filed it under once complete)
+                    val ok = try { client.play(f.name, start); true } catch (e: TvClient.HttpError) {
                         if (e.code == 409 && "needsForeground" in e.message.orEmpty())
                             update { it.copy(message = TvClient.str(e.message.orEmpty().substringAfter(": "), "message") ?: "Ouvrez CastBridge sur la TV") }
                         false
@@ -209,6 +235,21 @@ object CastSession {
             }
             delay(1000)
         }
+    }
+
+    /** Duration of a local video/audio file read from its own header (0 = unknown). */
+    private fun probeDurationMs(ctx: Context, item: PlayItem): Long {
+        if (item.kind != MediaKind.VIDEO && item.kind != MediaKind.AUDIO) return 0
+        val r = android.media.MediaMetadataRetriever()
+        return try {
+            r.setDataSource(ctx, item.uri)
+            r.extractMetadata(android.media.MediaMetadataRetriever.METADATA_KEY_DURATION)?.toLongOrNull() ?: 0
+        } catch (e: Exception) { 0 } finally { runCatching { r.release() } }
+    }
+
+    /** The phone's own player is playing [item] right now. */
+    private suspend fun phonePlays(item: PlayItem): Boolean = withContext(Dispatchers.Main) {
+        PlaybackService.player.value?.let { it.currentMediaItem?.mediaId == item.uri.toString() && it.isPlaying } == true
     }
 
     private suspend fun currentCoroutineContextActive() = kotlin.coroutines.coroutineContext.isActive
