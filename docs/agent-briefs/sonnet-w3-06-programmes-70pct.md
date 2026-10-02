@@ -1,5 +1,10 @@
 # w3-06 — Programmes officiels par (classe, matière) et porte « 70 % de couverture »
 
+<!-- routage Fable 2026-10-02 -->
+> **Modèle : sonnet** · escalade : opus audit si diff sécurité/crypto/argent · statut : BLOQUÉ partiel (D15 : textes officiels)
+> **Groupe : W3-C** (vague W3) · prérequis : aucun · porte : `python3 -m unittest discover -s tools/content-validation -p 'test_cbvalidate.py'`
+> **Jauge : ≈ 400 k jetons entrée / 20 k sortie** (effort M) · audit Opus : non
+
 **Vague 3 · Effort M (≈ 2 j) · Statut BLOQUÉ PARTIEL** — **D15** : le propriétaire doit fournir les textes officiels (PDF MINESEC « programmes d'études », MINEDUB 2018, GCE Board syllabi). Sans eux, l'agent livre le **format**, l'outil, et 3 fichiers d'exemple marqués « reconstitué, à confirmer » ; il ne « devine » pas 60 programmes. Branche `claude/sonnet-w3-06`. Rapport : `docs/agent-reports/sonnet-w3-06.md`.
 
 ## Objectif

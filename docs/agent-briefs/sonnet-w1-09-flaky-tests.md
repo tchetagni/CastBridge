@@ -1,5 +1,10 @@
 # w1-09 — Trois tests instables rendus déterministes
 
+<!-- routage Fable 2026-10-02 -->
+> **Modèle : sonnet** · escalade : opus audit si diff sécurité/crypto/argent · statut : À VÉRIFIER : HANDOFF dit déjà fait (port 0, horloge/aléa injectés)
+> **Groupe : W1-A** (vague W1) · prérequis : aucun · porte : `cd android && tools/agents/gradle-lock.sh gradle --offline :sshd:test :core:test --tests '*Trust*' --tests '*ChessRelay*'`
+> **Jauge : ≈ 150 k jetons entrée / 8 k sortie** (effort S) · audit Opus : non
+
 **Vague 1 · Effort S (≈ 5 h) · Statut PRÊT.** Branche `claude/sonnet-w1-09`. Rapport : `docs/agent-reports/sonnet-w1-09.md`.
 
 ## Objectif

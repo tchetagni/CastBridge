@@ -112,3 +112,13 @@ Prérequis des vagues 1-3 (fusionnés avant) : w1-01 (allowBackup) → w4-04 ; w
 | D7 | Nom commercial et contact (WhatsApp) à imprimer sur le reçu et la fiche, et à compiler (`OWNER_CONTACT`, w2-03) | w4-13 (ligne du reçu), w4-18 | Fournir les deux ; sans eux la ligne est omise, rien n'est inventé |
 
 Décisions **prises par l'architecte** (renversables, listées à la fin de chaque conception) : coucher de l'enveloppe v1 au 2027-01-01 ; repli en clair signalé si le Keystore échoue ; essai terminé = verrouillage total ; locations en cours continuent en mode réduit, Quiz/Échecs fermés, Sudoku ouvert ; délégation 90 j (180 max), 200 ventes, jamais de clé illimitée ni d'achat définitif par un agent ; maître unique du propriétaire enveloppé dans la délégation ; remboursement après livraison = acte du propriétaire sur le serveur.
+
+## Routage des modèles (Fable, 2026-10-02) — vague 4
+
+Source : `docs/coordination/ROUTAGE-AGENTS-EXECUTION-2026-10-02.md` (grille, jauges, audits, dispatch) ; table machine `docs/agent-briefs/routing.json` ; `python3 tools/agents/dispatch-plan.py --wave <vague> --done <ids>` donne les cahiers lançables. Chaque cahier porte un en-tête « Modèle · Groupe · Jauge ». Modèle **explicite** à chaque lancement ; un seul build JVM à la fois (`tools/agents/gradle-lock.sh`) ; au plus 3 agents en parallèle.
+
+- **haiku** (3) : w4-06, w4-10, w4-18 — cahiers à convertir en forme mécanique (avant/après) avant lancement.
+- **sonnet** (15) : w4-01, w4-02, w4-03, w4-04, w4-05, w4-07, w4-08, w4-09, w4-11, w4-12, w4-13, w4-14, w4-15, w4-16, w4-17.
+- **audit Opus avant fusion** (8) : w4-01, w4-03, w4-04, w4-05, w4-07, w4-11, w4-15, w4-16.
+- **non lançables** : aucun.
+- **opus** n'exécute jamais ; **fable** ne figure dans aucun routage.

@@ -1,5 +1,10 @@
 # w5-18 — Contrôle parental des achats et des jetons : catégorie « Achats et jetons », allocation quotidienne par profil enfant, « PIN pour acheter », profil enfant = jamais d'achat, rapport parental ; réglages côté téléphone ; lacune `games`/`sudoku` corrigée
 
+<!-- routage Fable 2026-10-02 -->
+> **Modèle : sonnet** · escalade : opus audit si diff sécurité/crypto/argent · statut : PRÊT (w5-17 en parallèle)
+> **Groupe : W5d-1** (vague W5d) · prérequis : w5-02 · porte : `cd android && tools/agents/gradle-lock.sh gradle --offline :core:test --tests '*Parental*'`
+> **Jauge : ≈ 400 k jetons entrée / 20 k sortie** (effort M) · audit Opus : non
+
 **Vague 5d · Effort M (≈ 2 j) · Modèle : sonnet · Statut PRÊT (après w5-02 ; w5-17 en parallèle : fournit `TokenHub.spendGuard` et `PinRequester`).** Conception : `DESIGN-W5-BOUTIQUE-LOCATIONS-JETONS.md` § 6.6, § 8, § 9. Branche `claude/sonnet-w5-18`. Rapport : `docs/agent-reports/sonnet-w5-18.md`. Rappel PARENTAL.md : **tout reste local** (TV + téléphone du parent), aucune donnée parentale au serveur.
 
 ## Objectif

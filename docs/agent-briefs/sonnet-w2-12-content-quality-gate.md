@@ -1,5 +1,10 @@
 # w2-12 — Porte qualité v1 du contenu « Apprendre » et vocabulaire d'état unique
 
+<!-- routage Fable 2026-10-02 -->
+> **Modèle : sonnet** · escalade : opus audit si diff sécurité/crypto/argent · statut : PRÊT (D16 : vocabulaire de CONTENT-VALIDATION.md)
+> **Groupe : W2-A** (vague W2) · prérequis : aucun · porte : `python3 -m unittest discover -s tools/content-validation -p 'test_cbvalidate.py' && cd android && tools/agents/gradle-lock.sh gradle --offline :core:test --tests '*LearnContent*'`
+> **Jauge : ≈ 400 k jetons entrée / 20 k sortie** (effort M) · audit Opus : non
+
 **Vague 2 · Effort M (≈ 2 j) · Statut PRÊT** (D16 : si le propriétaire ne tranche pas le vocabulaire, retenir celui de `docs/CONTENT-VALIDATION.md` : `draft → review → validated | needs-fix | rejected`). Branche `claude/sonnet-w2-12`. Rapport : `docs/agent-reports/sonnet-w2-12.md`.
 
 ## Objectif

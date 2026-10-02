@@ -1,5 +1,10 @@
 # w3-12 — Alléger l'APK de CastBridge-TV (29 Mo) sans retirer de fonction
 
+<!-- routage Fable 2026-10-02 -->
+> **Modèle : sonnet** · escalade : opus audit si diff sécurité/crypto/argent · statut : PRÊT (SDK Android local requis pour mesurer)
+> **Groupe : W3-A** (vague W3) · prérequis : aucun · porte : `cd android && tools/agents/gradle-lock.sh gradle --offline :receiver:assembleRelease -PrequireActivation=true`
+> **Jauge : ≈ 400 k jetons entrée / 20 k sortie** (effort M) · audit Opus : non
+
 **Vague 3 · Effort M (≈ 1,5 j, mesures incluses) · Statut PRÊT.** Branche `claude/sonnet-w3-12`. Rapport : `docs/agent-reports/sonnet-w3-12.md`. Nécessite le SDK Android local (mesures) ; sans SDK, livrer les changements et le dire.
 
 ## Objectif

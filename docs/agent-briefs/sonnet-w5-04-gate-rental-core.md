@@ -1,5 +1,10 @@
 # w5-04 — Cœur : portes de l'essai et du mode réduit pour la boutique, partie découverte du Quiz, preuve d'activation, émission d'une location **sans maître**, plafond 60 j en ligne
 
+<!-- routage Fable 2026-10-02 -->
+> **Modèle : sonnet** · escalade : audit Opus obligatoire (diff sensible) · statut : PRÊT
+> **Groupe : W5a-1** (vague W5a) · prérequis : w4-01, w4-07, w1-06 · porte : `cd android && tools/agents/gradle-lock.sh gradle --offline :core:test --tests '*Routes*' --tests '*ActivationProof*' --tests '*Rental*'`
+> **Jauge : ≈ 400 k jetons entrée / 20 k sortie** (effort M) · audit Opus : oui
+
 **Vague 5a · Effort M (≈ 2 j) · Modèle : sonnet · Statut PRÊT.** Conception : `DESIGN-W5-BOUTIQUE-LOCATIONS-JETONS.md` § 3.4 (a, b), § 4.2, § 6.2, § 6.3, § 9. Branche `claude/sonnet-w5-04`. Rapport : `docs/agent-reports/sonnet-w5-04.md`. Dépend de w4-01 (`RentalKeys.makeBoxV2`, `InstallKey`), w4-07 (`DegradedPolicy`, `GateState.Degraded`), w1-06 (`tools/routes/routes.txt`).
 
 ## Objectif

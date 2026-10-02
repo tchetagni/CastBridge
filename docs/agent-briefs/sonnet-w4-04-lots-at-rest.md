@@ -1,5 +1,10 @@
 # w4-04 — Lots chiffrés au repos sur la TV (`LotCrypt`, lecture déchiffrée en mémoire, lots loués scellés sous la clé de contrat)
 
+<!-- routage Fable 2026-10-02 -->
+> **Modèle : sonnet** · escalade : audit Opus obligatoire (diff sensible) · statut : PRÊT (après w4-01, w4-03, w1-01)
+> **Groupe : W4a-3** (vague W4a) · prérequis : w4-01, w4-03, w1-01 · porte : `cd android && tools/agents/gradle-lock.sh gradle --offline :core:test --tests '*LotCrypt*' --tests '*Lots*'`
+> **Jauge : ≈ 800 k jetons entrée / 40 k sortie** (effort L) · audit Opus : oui · découpage proposé : voir ROUTAGE § 2.3
+
 **Vague 4a · Effort L (≈ 3,5 j) · Statut PRÊT (après w4-01 et w4-03 ; dépend de w1-01 fusionné pour `allowBackup`).** Conception : `docs/coordination/DESIGN-W4-ENVELOPPE-LOCATIONS.md` § 7, § 8. Branche `claude/sonnet-w4-04`. Rapport : `docs/agent-reports/sonnet-w4-04.md`.
 
 ## Objectif

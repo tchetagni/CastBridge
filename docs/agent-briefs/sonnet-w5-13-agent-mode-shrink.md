@@ -1,5 +1,10 @@
 # w5-13 — CastBridge (téléphone) : mode « Point focal » recentré (clés d'activation, vente de bons de recharge, confirmation de commandes en espèces) ; plus de location, plus de scellement
 
+<!-- routage Fable 2026-10-02 -->
+> **Modèle : sonnet** · escalade : opus audit si diff sécurité/crypto/argent · statut : PRÊT (D7 contact)
+> **Groupe : W5c-1** (vague W5c) · prérequis : w4-13, w4-14, w5-01 · porte : `cd android && tools/agents/gradle-lock.sh gradle --offline :core:test --tests '*SaleFlow*' --tests '*LedgerSync*'`
+> **Jauge : ≈ 400 k jetons entrée / 20 k sortie** (effort M) · audit Opus : non
+
 **Vague 5c · Effort M (≈ 2 j) · Modèle : sonnet · Statut PRÊT (après w4-13 et w4-14 fusionnés dans leur version réduite, w5-01 ; D7 pour le contact du reçu).** Conception : `DESIGN-W5-BOUTIQUE-LOCATIONS-JETONS.md` § 0 (P1, P5), § 5.2 (b), § 5.4, § 14 ; `SONNET-WAVE5-INDEX.md` « Changements aux cahiers w4 » (w4-11, w4-13, w4-14). Branche `claude/sonnet-w5-13`. Rapport : `docs/agent-reports/sonnet-w5-13.md`. **Décision du propriétaire (P1) : « pour l'instant le commercial vendra les clés d'activation »** ; P5 : espèces et bons.
 
 ## Objectif

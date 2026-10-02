@@ -1,5 +1,10 @@
 # w2-13 — Pipeline de publication du contenu : un seul registre de versions, manifeste d'essai commité, échec au lieu d'avertissement
 
+<!-- routage Fable 2026-10-02 -->
+> **Modèle : sonnet** · escalade : opus audit si diff sécurité/crypto/argent · statut : PRÊT
+> **Groupe : W2-A** (vague W2) · prérequis : aucun · porte : `python3 -m unittest discover -s tools/tests -p 'test_content_tools.py'`
+> **Jauge : ≈ 400 k jetons entrée / 20 k sortie** (effort M) · audit Opus : non
+
 **Vague 2 · Effort M (≈ 1,5 j) · Statut PRÊT.** Branche `claude/sonnet-w2-13`. Rapport : `docs/agent-reports/sonnet-w2-13.md`.
 
 ## Objectif

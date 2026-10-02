@@ -1,5 +1,10 @@
 # w4-13 — CastBridge (téléphone) : mode « Point focal » (clé de l'agent, délégation, vente, émission, scellement, livraison)
 
+<!-- routage Fable 2026-10-02 -->
+> **Modèle : sonnet** · escalade : opus audit si diff sécurité/crypto/argent · statut : PRÊT **version réduite W5** (pas de scellement ni livraison de lots) ; D7 contact
+> **Groupe : W4c-2** (vague W4c) · prérequis : w4-11 · porte : `cd android && tools/agents/gradle-lock.sh gradle --offline :core:test --tests '*SaleFlow*' && cd android && tools/agents/gradle-lock.sh gradle --offline :sender:compileDebugKotlin`
+> **Jauge : ≈ 800 k jetons entrée / 40 k sortie** (effort L) · audit Opus : non
+
 **Vague 4c · Effort L (≈ 4 j) · Statut PRÊT (après w4-11 ; w4-14 en parallèle sur des fichiers disjoints ; D7 pour le contact affiché, sinon `BuildConfig.OWNER_CONTACT` vide).** Conception : `docs/coordination/DESIGN-W4-VENTE-TERRAIN.md` § 1, § 2, § 5, § 7. Branche `claude/sonnet-w4-13`. Rapport : `docs/agent-reports/sonnet-w4-13.md`.
 
 ## Objectif

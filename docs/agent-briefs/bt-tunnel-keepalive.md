@@ -1,5 +1,10 @@
 # Brief : tunnel Bluetooth « API » fiable (une liaison réutilisée, pas une par requête)
 
+<!-- routage Fable 2026-10-02 -->
+> **Modèle : sonnet** · escalade : opus audit si diff sécurité/crypto/argent · statut : LANCÉ (BOARD 13:41 UTC) : laisser finir ; relance = sonnet
+> **Groupe : X-1** (vague X) · prérequis : aucun · porte : `cd android && tools/agents/gradle-lock.sh gradle --offline :core:test --tests '*BtTunnel*'`
+> **Jauge : ≈ 400 k jetons entrée / 20 k sortie** (effort M) · audit Opus : non
+
 Agent cloud. Base `origin/integration/agents`. Branche `claude/bt-tunnel-keepalive`, petits commits, push, pas de PR, pas de main. Français. Apps « CastBridge » / « CastBridge-TV ».
 Lire : `docs/BT-PLUG-AND-PLAY.md` (service « CastBridge API »), `docs/ADMIN.md` §11, `core/.../tv/BtTunnel*.kt`, `TcpTunnel`, sender `BtSshGatewayService.kt`
 (`api: connect attempt`, `ensureApi`, `apiBase`), receiver `BtApiControl.kt`, `BtTunnelBridge`.

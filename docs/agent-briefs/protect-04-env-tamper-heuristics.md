@@ -1,5 +1,10 @@
 # protect-04 — Heuristiques d'environnement (émulateur / root / hook) — drapeau, pas blocage
 
+<!-- routage Fable 2026-10-02 -->
+> **Modèle : sonnet** · escalade : audit Opus obligatoire (diff sensible) · statut : PRÊT (PD2)
+> **Groupe : P-B** (vague PROTECT) · prérequis : protect-01 · porte : `cd android && tools/agents/gradle-lock.sh gradle --offline :core:test --tests '*EnvTrust*'`
+> **Jauge : ≈ 400 k jetons entrée / 20 k sortie** (effort M) · audit Opus : oui
+
 **Modèle recommandé : sonnet** (heuristiques + maîtrise des faux positifs).
 **Vague B.** Dépend de protect-01. Parallélisable (fichiers neufs disjoints).
 

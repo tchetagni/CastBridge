@@ -1,5 +1,10 @@
 # w2-03 — Parcours d'activation lisible (TV et téléphone)
 
+<!-- routage Fable 2026-10-02 -->
+> **Modèle : sonnet** · escalade : opus audit si diff sécurité/crypto/argent · statut : BLOQUÉ partiel (D7 : textes + contact)
+> **Groupe : W2-B** (vague W2) · prérequis : aucun · porte : `cd android && tools/agents/gradle-lock.sh gradle --offline :core:test --tests '*LicenseAndGate*'`
+> **Jauge : ≈ 400 k jetons entrée / 20 k sortie** (effort M) · audit Opus : non
+
 **Vague 2 · Effort M (≈ 2 j) · Statut BLOQUÉ PARTIEL** — tout est faisable sauf deux chaînes qui attendent la décision D7 : (1) le texte définitif de l'avis d'usage, (2) le **contact du vendeur** (numéro WhatsApp). L'agent prépare les emplacements (`OWNER_CONTACT` vide = ligne masquée) et pose `QUESTION: texte de l'avis d'usage et numéro de contact ?`. Branche `claude/sonnet-w2-03`. Rapport : `docs/agent-reports/sonnet-w2-03.md`.
 
 ## Objectif

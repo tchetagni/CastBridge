@@ -1,5 +1,10 @@
 # w6-01 — `PhoneGate` (cœur) : fonctions du téléphone, listes blanches figées, états, matrice fonction × état de la TV
 
+<!-- routage Fable 2026-10-02 -->
+> **Modèle : sonnet** · escalade : opus audit si diff sécurité/crypto/argent · statut : PRÊT
+> **Groupe : W6a-1** (vague W6a) · prérequis : aucun · porte : `cd android && tools/agents/gradle-lock.sh gradle --offline :core:test --tests '*PhoneGate*' --tests '*PhoneMatrix*'`
+> **Jauge : ≈ 400 k jetons entrée / 20 k sortie** (effort M) · audit Opus : non
+
 **Vague 6a · Effort M (≈ 2 j) · Modèle : sonnet · Statut PRÊT.** Conception : `docs/coordination/DESIGN-W6-PARENTAL-PHONE-GATE.md` § 3.1, § 3.2, § 3.4, § 3.7, § 3.9. Branche `claude/sonnet-w6-01`. Rapport : `docs/agent-reports/sonnet-w6-01.md`. Protocole : `docs/COORDINATION.md`, en-tête de `SONNET-WAVES-INDEX.md` (jamais `main`, jamais le serveur, jamais de secret, français, « CastBridge » / « CastBridge-TV »).
 
 ## Objectif

@@ -1,5 +1,10 @@
 # w5-05 — Miroirs Java (serveur) et Python des formats de la boutique et des jetons ; rejeu des vecteurs
 
+<!-- routage Fable 2026-10-02 -->
+> **Modèle : sonnet** · escalade : opus audit si diff sécurité/crypto/argent · statut : PRÊT (après w5-01, w5-02)
+> **Groupe : W5a-2** (vague W5a) · prérequis : w5-01, w5-02, w4-05, w4-17 · porte : `python3 tools/activation/verify_vectors.py && cd backend && tools/agents/gradle-lock.sh ./mvnw -q -o test -Dtest=ShopVectorsTest`
+> **Jauge : ≈ 400 k jetons entrée / 20 k sortie** (effort M) · audit Opus : non
+
 **Vague 5a (fin) · Effort M (≈ 2 j) · Modèle : sonnet · Statut PRÊT (après w5-01 et w5-02).** Conception : `DESIGN-W5-BOUTIQUE-LOCATIONS-JETONS.md` § 3.4, § 3.5. Branche `claude/sonnet-w5-05`. Rapport : `docs/agent-reports/sonnet-w5-05.md`. Dépend de w1-10 (vecteurs Java/Python v1), w4-05 (`RentalBoxV2.java`, XDH, Python `x25519`), w4-17 (`Delegation.java`, `verify_vectors.py` étendu).
 
 ## Objectif

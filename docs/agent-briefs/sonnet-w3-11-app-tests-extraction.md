@@ -1,5 +1,10 @@
 # w3-11 — Rendre les apps testables : logique pure extraite vers le cœur, écrans Quiz en fichiers séparés
 
+<!-- routage Fable 2026-10-02 -->
+> **Modèle : sonnet** · escalade : opus audit si diff sécurité/crypto/argent · statut : PRÊT (après w2-04)
+> **Groupe : W3-A** (vague W3) · prérequis : w2-04 · porte : `cd android && tools/agents/gradle-lock.sh gradle --offline :core:test --tests '*HomeTools*'`
+> **Jauge : ≈ 400 k jetons entrée / 20 k sortie** (effort M) · audit Opus : non
+
 **Vague 3 · Effort M (≈ 2 j) · Statut PRÊT** (après w2-04 : `PlayerActivity` stabilisé). Branche `claude/sonnet-w3-11`. Rapport : `docs/agent-reports/sonnet-w3-11.md`.
 
 ## Objectif

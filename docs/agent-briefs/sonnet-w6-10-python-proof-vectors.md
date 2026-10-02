@@ -1,5 +1,10 @@
 # w6-10 — Python : rejouer `proof-vectors.json` dans `verify_vectors.py` (implémentation indépendante)
 
+<!-- routage Fable 2026-10-02 -->
+> **Modèle : haiku** · escalade : sonnet au 2e échec ou fichier sensible · statut : PRÊT (après w6-03)
+> **Groupe : W6b-1** (vague W6b) · prérequis : w6-03 · porte : `python3 tools/activation/verify_vectors.py && python3 -m unittest discover -s tools/tests -p 'test_verify_vectors.py'`
+> **Jauge : ≈ 60 k jetons entrée / 5 k sortie** (effort S) · audit Opus : non
+
 **Vague 6b · Effort S (≈ 0,5 j) · Modèle : haiku · Statut PRÊT (après w6-03 fusionné).** Conception : `DESIGN-W6-PARENTAL-PHONE-GATE.md` § 3.3, § 5 (tests). Branche `claude/sonnet-w6-10`. Rapport : `docs/agent-reports/sonnet-w6-10.md`.
 
 ## Objectif

@@ -1,5 +1,10 @@
 # protect-08 — Mesure taille APK + démarrage à froid (v7a + arm64 ; TV de référence = pire cas 32 bits)
 
+<!-- routage Fable 2026-10-02 -->
+> **Modèle : haiku** · escalade : sonnet au 2e échec ou fichier sensible · statut : PRÊT (après A, idéalement B ; SDK local)
+> **Groupe : P-E** (vague PROTECT) · prérequis : protect-01 · porte : `cd android && tools/agents/gradle-lock.sh gradle --offline :receiver:assembleRelease -PrequireActivation=true`
+> **Jauge : ≈ 60 k jetons entrée / 5 k sortie** (effort S) · audit Opus : non
+
 **Modèle recommandé : haiku** (build + mesure + rapport ; pas de modification de source).
 **Vague E.** Dépend de protect-01 (idéalement après B). Coordination w3-12 (affinage ProGuard) et A6-6 (budget mémoire des lots).
 

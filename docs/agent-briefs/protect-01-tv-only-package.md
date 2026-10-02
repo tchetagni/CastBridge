@@ -1,5 +1,10 @@
 # protect-01 — Déploiement TV uniquement au niveau du paquet + champs BuildConfig
 
+<!-- routage Fable 2026-10-02 -->
+> **Modèle : sonnet** · escalade : opus audit si diff sécurité/crypto/argent · statut : PRÊT
+> **Groupe : P-A** (vague PROTECT) · prérequis : aucun · porte : `cd android && tools/agents/gradle-lock.sh gradle --offline :receiver:assembleDebug`
+> **Jauge : ≈ 400 k jetons entrée / 20 k sortie** (effort M) · audit Opus : non
+
 **Modèle recommandé : sonnet** (logique Gradle + manifestPlaceholders + exceptions dev à ne pas casser).
 **Vague A (fondation).** Les cahiers protect-02/03/04/06/08 consomment les champs BuildConfig/placeholders définis ici.
 

@@ -1,5 +1,10 @@
 # w5-22 — Campagne de test de la boutique : outil de fumée `tools/shop-test`, `tools/rental-test` sans maître, liste de contrôle TV + téléphone + point focal dans `docs/TEST-CAMPAIGN.md`
 
+<!-- routage Fable 2026-10-02 -->
+> **Modèle : sonnet** · escalade : opus audit si diff sécurité/crypto/argent · statut : PRÊT (propriétaire présent pour la TV)
+> **Groupe : W5e-1** (vague W5e) · prérequis : w5-06, w5-07, w5-08, w5-09, w5-10, w5-11, w5-12, w5-13, w5-14, w5-15, w5-16, w5-17, w5-18, w5-19 · porte : `python3 tools/shop-test/smoke.py --fake`
+> **Jauge : ≈ 400 k jetons entrée / 20 k sortie** (effort M) · audit Opus : non
+
 **Vague 5e · Effort M (≈ 2 j) · Modèle : sonnet · Statut PRÊT (après la fusion de 5a…5d ; la partie « vraie TV » exige le propriétaire présent).** Conception : `docs/coordination/DESIGN-W5-BOUTIQUE-LOCATIONS-JETONS.md` § 4.5, § 5.2, § 6.4-6.5, § 12 (risques). Branche `claude/sonnet-w5-22`. Rapport : `docs/agent-reports/sonnet-w5-22.md`.
 
 ## Objectif

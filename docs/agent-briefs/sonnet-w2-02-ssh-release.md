@@ -1,5 +1,10 @@
 # w2-02 — SSH de CastBridge-TV : pas de shell ni d'exec en release, SFTP limité au média
 
+<!-- routage Fable 2026-10-02 -->
+> **Modèle : sonnet** · escalade : audit Opus obligatoire (diff sensible) · statut : PRÊT réduit (D5 = NON : drapeau de build + SFTP limité seulement)
+> **Groupe : W2-A** (vague W2) · prérequis : w1-09 · porte : `cd android && tools/agents/gradle-lock.sh gradle --offline :sshd:test`
+> **Jauge : ≈ 400 k jetons entrée / 20 k sortie** (effort M) · audit Opus : oui
+
 **Vague 2 · Effort M (≈ 1-2 j) · Statut PRÊT** (décision D5 recommandée ; si le propriétaire refuse, le cahier se réduit au drapeau de build). Après w1-09 (tests SSH fiabilisés). Branche `claude/sonnet-w2-02`. Rapport : `docs/agent-reports/sonnet-w2-02.md`.
 
 ## Objectif

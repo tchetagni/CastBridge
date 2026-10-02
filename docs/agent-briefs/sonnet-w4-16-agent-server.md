@@ -1,5 +1,10 @@
 # w4-16 — Serveur : synchronisation des journaux d'agents, réconciliation, tableau de bord « Points focaux », grille de prix, révocation d'un agent
 
+<!-- routage Fable 2026-10-02 -->
+> **Modèle : sonnet** · escalade : audit Opus obligatoire (diff sensible) · statut : PRÊT **amendé W5** (colonnes may_*, exposer verifyDelegation/verifyEntry)
+> **Groupe : W4c-3** (vague W4c) · prérequis : w4-11, w4-17 · porte : `cd backend && tools/agents/gradle-lock.sh ./mvnw -q -o test -Dtest='Agent*Test,LicenseKeyringTest'`
+> **Jauge : ≈ 800 k jetons entrée / 40 k sortie** (effort L) · audit Opus : oui
+
 **Vague 4c · Effort L (≈ 4 j) · Statut PRÊT (après w4-11 et w4-17 : le serveur vérifie les délégations avec `Delegation.java`).** Conception : `docs/coordination/DESIGN-W4-VENTE-TERRAIN.md` § 4, § 6, § 8, § 9. Branche `claude/sonnet-w4-16`. Rapport : `docs/agent-reports/sonnet-w4-16.md`. **Rien n'est déployé.**
 
 ## Objectif

@@ -1,5 +1,10 @@
 # w6-07 — Rapports v2 (cœur) : corps `daily/weekly/alert/snapshot`, signature Ed25519 de la TV + HMAC, CBTP v2, vérification côté téléphone, liste noire
 
+<!-- routage Fable 2026-10-02 -->
+> **Modèle : sonnet** · escalade : audit Opus obligatoire (diff sensible) · statut : PRÊT (interfaces de w6-05/06)
+> **Groupe : W6a-2** (vague W6a) · prérequis : w6-05, w6-06, w6-03 · porte : `cd android && tools/agents/gradle-lock.sh gradle --offline :core:test --tests '*ReportV2*' --tests '*ReportSyncV2*'`
+> **Jauge : ≈ 800 k jetons entrée / 40 k sortie** (effort L) · audit Opus : oui
+
 **Vague 6a · Effort L (≈ 3 j) · Modèle : sonnet · Statut PRÊT (en parallèle de w6-05/w6-06 : codez contre leurs API décrites dans la conception ; si elles ne sont pas fusionnées, des interfaces locales minimales + le dire).** Conception : `DESIGN-W6-PARENTAL-PHONE-GATE.md` § 2.5, § 2.7 (Bluetooth), § 2.6 (alertes détenteurs). Branche `claude/sonnet-w6-07`. Rapport : `docs/agent-reports/sonnet-w6-07.md`.
 
 ## Objectif

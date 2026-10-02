@@ -1,5 +1,10 @@
 # w1-10 — Vecteurs de location rejoués en Java et Python ; plafond implicite aligné
 
+<!-- routage Fable 2026-10-02 -->
+> **Modèle : sonnet** · escalade : opus audit si diff sécurité/crypto/argent · statut : PRÊT
+> **Groupe : W1-A** (vague W1) · prérequis : aucun · porte : `python3 tools/activation/verify_vectors.py && cd backend && tools/agents/gradle-lock.sh ./mvnw -q -o test -Dtest=RentalVectorsTest`
+> **Jauge : ≈ 150 k jetons entrée / 8 k sortie** (effort S) · audit Opus : non
+
 **Vague 1 · Effort S (≈ 5 h) · Statut PRÊT.** Branche `claude/sonnet-w1-10`. Rapport : `docs/agent-reports/sonnet-w1-10.md`.
 
 ## Objectif

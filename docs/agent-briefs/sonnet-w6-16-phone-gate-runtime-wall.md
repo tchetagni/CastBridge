@@ -1,5 +1,10 @@
 # w6-16 — CastBridge (téléphone) : `PhoneGateRuntime`, synchronisation de la preuve (Bluetooth + Wi-Fi), `GateWall`, onglets cadenassés, puce « TV cible », avertissement de preuve périmée
 
+<!-- routage Fable 2026-10-02 -->
+> **Modèle : sonnet** · escalade : audit Opus obligatoire (diff sensible) · statut : PRÊT (après 6a, w6-11, w6-12)
+> **Groupe : W6d-1** (vague W6d) · prérequis : w6-01, w6-02, w6-03, w6-11, w6-12 · porte : `cd android && tools/agents/gradle-lock.sh gradle --offline :sender:compileDebugKotlin`
+> **Jauge : ≈ 800 k jetons entrée / 40 k sortie** (effort L) · audit Opus : oui
+
 **Vague 6d · Effort L (≈ 3,5 j) · Modèle : sonnet · Statut PRÊT (après 6a, w6-11, w6-12 fusionnés ; w6-17/18/19 en parallèle sur des fichiers disjoints : ils consomment `GateWall` et `PhoneGateRuntime` ; tant que ce cahier n'est pas fusionné, ils codent contre les signatures ci-dessous).** Conception : `DESIGN-W6-PARENTAL-PHONE-GATE.md` § 3.3 à § 3.9. Branche `claude/sonnet-w6-16`. Rapport : `docs/agent-reports/sonnet-w6-16.md`.
 
 ## Objectif

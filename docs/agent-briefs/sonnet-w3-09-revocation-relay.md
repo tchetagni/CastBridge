@@ -1,5 +1,10 @@
 # w3-09 — Le téléphone relaie la liste de révocation du serveur vers la TV ; compteur d'essais par appareil
 
+<!-- routage Fable 2026-10-02 -->
+> **Modèle : sonnet** · escalade : audit Opus obligatoire (diff sensible) · statut : PRÊT (après w2-01)
+> **Groupe : W3-A** (vague W3) · prérequis : w2-01 · porte : `cd android && tools/agents/gradle-lock.sh gradle --offline :core:test --tests '*ServerLink*' && cd backend && tools/agents/gradle-lock.sh ./mvnw -q -o test -Dtest='Abuse*Test,PublicLicense*Test'`
+> **Jauge : ≈ 400 k jetons entrée / 20 k sortie** (effort M) · audit Opus : oui
+
 **Vague 3 · Effort M (≈ 1,5 j) · Statut PRÊT** (après w2-01 : la TV sait appliquer un `cbr1`). Branche `claude/sonnet-w3-09`. Rapport : `docs/agent-reports/sonnet-w3-09.md`.
 
 ## Objectif

@@ -1,5 +1,10 @@
 # w1-11 — Hygiène du serveur : `deviceName`, purge des événements, règle Flyway, catalogue borné, rotation de clé
 
+<!-- routage Fable 2026-10-02 -->
+> **Modèle : sonnet** · escalade : opus audit si diff sécurité/crypto/argent · statut : PRÊT
+> **Groupe : W1-A** (vague W1) · prérequis : aucun · porte : `cd backend && tools/agents/gradle-lock.sh ./mvnw -q -o test -Dtest='Device*Test,Telemetry*Test'`
+> **Jauge : ≈ 150 k jetons entrée / 8 k sortie** (effort S) · audit Opus : non
+
 **Vague 1 · Effort S (≈ 5 h) · Statut PRÊT.** Branche `claude/sonnet-w1-11`. Rapport : `docs/agent-reports/sonnet-w1-11.md`. **Rien n'est déployé** : code et docs seulement.
 
 ## Objectif

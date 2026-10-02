@@ -1,5 +1,10 @@
 # w5-11 — CastBridge (téléphone) : onglet « Boutique » (leçons à louer, jetons du Quiz, payer par code de recharge ou en espèces chez le point focal, commandes, reçus, ma TV)
 
+<!-- routage Fable 2026-10-02 -->
+> **Modèle : sonnet** · escalade : opus audit si diff sécurité/crypto/argent · statut : PRÊT (w5-12 en parallèle, contrat ShopRuntimeView)
+> **Groupe : W5c-1** (vague W5c) · prérequis : w5-01 · porte : `cd android && tools/agents/gradle-lock.sh gradle --offline :sender:compileDebugKotlin`
+> **Jauge : ≈ 800 k jetons entrée / 40 k sortie** (effort L) · audit Opus : non
+
 **Vague 5c · Effort L (≈ 3 j) · Modèle : sonnet · Statut PRÊT (après w5-01 ; w5-12 en parallèle : les deux codent contre `ShopApi` et une interface `ShopRuntimeView` convenue ici).** Conception : `DESIGN-W5-BOUTIQUE-LOCATIONS-JETONS.md` § 5.1 (textes des écrans), § 6.1, § 6.6, § 7 (lire en entier). Branche `claude/sonnet-w5-11`. Rapport : `docs/agent-reports/sonnet-w5-11.md`. **Décisions du propriétaire** : P3 (boutique), P4 (jetons = Quiz seulement), P5 (espèces et bons seulement : **aucun** écran de mobile money).
 
 ## Objectif

@@ -1,5 +1,10 @@
 # w1-07 — CI utile et sans danger (Python, vecteurs, contenu, sshd ; release neutralisée)
 
+<!-- routage Fable 2026-10-02 -->
+> **Modèle : haiku** · escalade : sonnet au 2e échec ou fichier sensible · statut : PRÊT
+> **Groupe : W1-A** (vague W1) · prérequis : aucun · porte : `python3 -c "import yaml,glob;[yaml.safe_load(open(f)) for f in glob.glob('.github/workflows/*.yml')]" && python3 -m unittest discover -s tools/tests -p 'test_*.py'`
+> **Jauge : ≈ 60 k jetons entrée / 5 k sortie** (effort S) · audit Opus : non
+
 **Vague 1 · Effort S (≈ 4 h) · Statut PRÊT.** Branche `claude/sonnet-w1-07`. Rapport : `docs/agent-reports/sonnet-w1-07.md`.
 
 ## Objectif

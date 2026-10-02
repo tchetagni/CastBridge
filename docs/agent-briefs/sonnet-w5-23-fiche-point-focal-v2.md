@@ -1,5 +1,10 @@
 # w5-23 — Fiche du point focal v2 et `VENTE-TERRAIN.md` : clés, bons de recharge (stock, serial, vente, perte), confirmation de commandes en espèces, versements ; plus de location
 
+<!-- routage Fable 2026-10-02 -->
+> **Modèle : haiku** · escalade : sonnet au 2e échec ou fichier sensible · statut : BLOQUÉ partiel (D7, D-W5-2, D9-bis en `[…]`)
+> **Groupe : W5e-1** (vague W5e) · prérequis : w4-18, w5-13 · porte : `grep -c 'bon' docs/FICHE-POINT-FOCAL.md`
+> **Jauge : ≈ 60 k jetons entrée / 5 k sortie** (effort S) · audit Opus : non
+
 **Vague 5e · Effort S (≈ 1 j) · Modèle : haiku · Statut BLOQUÉ partiel (D7 nom/contact, D-W5-2 dénominations, D9-bis montants : laissés en `[…]`).** Conception : `docs/coordination/DESIGN-W5-BOUTIQUE-LOCATIONS-JETONS.md` § 0 (P1, P5), § 5 ; `SONNET-WAVE5-INDEX.md` « Changements aux cahiers w4 » (w4-18). Branche `claude/sonnet-w5-23`. Rapport : `docs/agent-reports/sonnet-w5-23.md`. Dépend de w4-18 (fichiers existants) et du rapport de w5-13 (écrans réels).
 
 ## Objectif

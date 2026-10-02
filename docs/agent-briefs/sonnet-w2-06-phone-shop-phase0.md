@@ -1,5 +1,10 @@
 # w2-06 — Boutique « Louer des leçons » sur le téléphone, phase 0 (preuve de paiement manuelle)
 
+<!-- routage Fable 2026-10-02 -->
+> **Modèle : sonnet** · escalade : opus audit si diff sécurité/crypto/argent · statut : REMPLACÉ par w5-11/w5-12 : ne pas lancer
+> **Groupe : —** (vague W2) · prérequis : aucun · porte : `—`
+> **Jauge : ≈ 800 k jetons entrée / 40 k sortie** (effort L) · audit Opus : non
+
 **Vague 2 · Effort L (≈ 4-5 j) · Statut BLOQUÉ** — questions au propriétaire : **D8** (secret maître des locations : serveur dédié, recommandé) et **D9** (grille de prix XAF par bouquet/durée, numéro marchand MoMo/OM, validation de la phase 0 manuelle). Sans réponse, l'agent construit l'écran et le modèle avec des montants **absents** (« prix communiqué par le vendeur ») et le flux de commande, et pose `QUESTION:`. Dépend de w2-10 (serveur) pour le bout en bout ; peut être développé contre un faux serveur. Branche `claude/sonnet-w2-06`. Rapport : `docs/agent-reports/sonnet-w2-06.md`.
 
 ## Objectif

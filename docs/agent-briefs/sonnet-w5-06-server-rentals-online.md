@@ -1,5 +1,10 @@
 # w5-06 — Serveur : locations gérées en ligne (clé de contrat aléatoire sous KEK, boîte v2 vers la clé d'installation, scellement et cache des lots, réémission, fenêtre d'essai gratuite), schéma de la boutique
 
+<!-- routage Fable 2026-10-02 -->
+> **Modèle : sonnet** · escalade : audit Opus obligatoire (diff sensible) · statut : PRÊT (après 5a)
+> **Groupe : W5b-1** (vague W5b) · prérequis : w5-04, w5-05, w4-05 · porte : `cd backend && tools/agents/gradle-lock.sh ./mvnw -q -o test -Dtest='Rental*Test'`
+> **Jauge : ≈ 800 k jetons entrée / 40 k sortie** (effort L) · audit Opus : oui · découpage proposé : voir ROUTAGE § 2.3
+
 **Vague 5b · Effort L (≈ 4 j) · Modèle : sonnet · Statut PRÊT (après w5-04, w5-05 ; w4-05 fusionné).** Conception : `DESIGN-W5-BOUTIQUE-LOCATIONS-JETONS.md` § 3.3, § 4 (lire en entier). Branche `claude/sonnet-w5-06`. Rapport : `docs/agent-reports/sonnet-w5-06.md`. **Premier cahier de la sous-vague 5b** : il crée la migration, `ShopProperties` et le service de contrats que w5-07/08/09 utilisent. **Rien n'est déployé.**
 
 ## Objectif

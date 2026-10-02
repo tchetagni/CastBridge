@@ -1,5 +1,10 @@
 # w3-01 — Table de routes en cœur et découpage de `ReceiverServer`
 
+<!-- routage Fable 2026-10-02 -->
+> **Modèle : sonnet** · escalade : opus audit si diff sécurité/crypto/argent · statut : PRÊT (après w2-07, w1-06)
+> **Groupe : W3-A** (vague W3) · prérequis : w2-07, w1-06 · porte : `cd android && tools/agents/gradle-lock.sh gradle --offline :core:test --tests '*Tv*'`
+> **Jauge : ≈ 800 k jetons entrée / 40 k sortie** (effort L) · audit Opus : non
+
 **Vague 3 · Effort L (≈ 4 j) · Statut PRÊT** (après fusion de w2-07 et w1-06). Branche `claude/sonnet-w3-01`. Rapport : `docs/agent-reports/sonnet-w3-01.md`.
 
 ## Objectif

@@ -1,5 +1,10 @@
 # w5-07 — Serveur : commandes, paiements (bon de recharge, espèces chez le point focal, geste du propriétaire), bons, reçus, routes `/api/v1/shop/**`, confirmation par les agents
 
+<!-- routage Fable 2026-10-02 -->
+> **Modèle : sonnet** · escalade : audit Opus obligatoire (diff sensible) · statut : PRÊT (après w5-06)
+> **Groupe : W5b-2** (vague W5b) · prérequis : w5-06, w4-16 · porte : `cd backend && tools/agents/gradle-lock.sh ./mvnw -q -o test -Dtest='Order*Test,Voucher*Test,Receipt*Test'`
+> **Jauge : ≈ 800 k jetons entrée / 40 k sortie** (effort L) · audit Opus : oui · découpage proposé : voir ROUTAGE § 2.3
+
 **Vague 5b · Effort L (≈ 4 j) · Modèle : sonnet · Statut PRÊT (après w5-06 ; w4-16 fusionné).** Conception : `DESIGN-W5-BOUTIQUE-LOCATIONS-JETONS.md` § 3.3-3.5, § 4.4, § 5 (lire en entier). Branche `claude/sonnet-w5-07`. Rapport : `docs/agent-reports/sonnet-w5-07.md`. **Décision du propriétaire (P5) : espèces et bons seulement ; aucun agrégateur, aucun mobile money** : l'abstraction `PaymentMethod` a exactement trois implémentations.
 
 ## Objectif

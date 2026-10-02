@@ -1,5 +1,10 @@
 # w6-11 — Téléphone : interrupteur `REQUIRE_TV_PROOF`, grâce absolue 14 j, `TRUSTED_KEYS` du téléphone, règles de sauvegarde (preuves, session super)
 
+<!-- routage Fable 2026-10-02 -->
+> **Modèle : haiku** · escalade : sonnet au 2e échec ou fichier sensible · statut : PRÊT
+> **Groupe : W6b-1** (vague W6b) · prérequis : aucun · porte : `python3 -m unittest discover -s tools/tests -p 'test_backup_rules.py' && cd android && tools/agents/gradle-lock.sh gradle --offline :sender:compileDebugKotlin -PrequireTvProof=true`
+> **Jauge : ≈ 60 k jetons entrée / 5 k sortie** (effort S) · audit Opus : non
+
 **Vague 6b · Effort S (≈ 0,5 j) · Modèle : haiku · Statut PRÊT.** Conception : `DESIGN-W6-PARENTAL-PHONE-GATE.md` § 3.4 (interrupteur, grâce), § 4.2 (session scellée), § 1 (Sauvegardes). Branche `claude/sonnet-w6-11`. Rapport : `docs/agent-reports/sonnet-w6-11.md`.
 
 ## Objectif

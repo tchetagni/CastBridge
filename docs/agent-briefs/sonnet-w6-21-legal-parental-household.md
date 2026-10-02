@@ -1,5 +1,10 @@
 # w6-21 — Brouillons juridiques W6 : information du foyer (contrôle parental de toute la TV), divulgation de l'accès aux données d'utilisation, politique de confidentialité (parental, mode minimal, session super), registre des traitements
 
+<!-- routage Fable 2026-10-02 -->
+> **Modèle : sonnet** · escalade : opus audit si diff sécurité/crypto/argent · statut : BLOQUÉ partiel (D-W6-4 juriste, D7)
+> **Groupe : W6e-1** (vague W6e) · prérequis : w6-06 · porte : `grep -L 'pas un avis juridique' docs/legal/*.md | wc -l`
+> **Jauge : ≈ 400 k jetons entrée / 20 k sortie** (effort M) · audit Opus : non
+
 **Vague 6e · Effort M (≈ 2 j) · Modèle : sonnet · Statut BLOQUÉ partiel (D-W6-4 : validation par un juriste ; D7 : nom et contact). L'agent rédige tout ce qui ne dépend pas de ces faits, avec des emplacements `[À COMPLÉTER : …]`.** Conception : `DESIGN-W6-PARENTAL-PHONE-GATE.md` § 2.1, § 2.2, § 2.6, § 6, § 3.5. Branche `claude/sonnet-w6-21`. Rapport : `docs/agent-reports/sonnet-w6-21.md`.
 
 ## Objectif

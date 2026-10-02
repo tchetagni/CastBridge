@@ -52,3 +52,13 @@ Dispatch : A → (B ∥ D) → (C : 05 ∥ 06, puis 09 dès que 02 et w2-01 sont
 - **D7** (contact) : protect-02/06/07/09 laissent un placeholder de contact marqué.
 - **w2-01** (révocation persistée + canaux) : prérequis de protect-09 pour la livraison ; protect-09 reste testable par fichier.
 - **W4** (boîte v2) : conception en cours par un autre agent ; aucun cahier PROTECT ne l'implémente ni n'en dépend pour compiler, mais la couche 1 du plan n'est complète qu'avec lui.
+
+## Routage des modèles (Fable, 2026-10-02) — PROTECT (confirme la colonne « Modèle » : aucune divergence)
+
+Source : `docs/coordination/ROUTAGE-AGENTS-EXECUTION-2026-10-02.md` (grille, jauges, audits, dispatch) ; table machine `docs/agent-briefs/routing.json` ; `python3 tools/agents/dispatch-plan.py --wave <vague> --done <ids>` donne les cahiers lançables. Chaque cahier porte un en-tête « Modèle · Groupe · Jauge ». Modèle **explicite** à chaque lancement ; un seul build JVM à la fois (`tools/agents/gradle-lock.sh`) ; au plus 3 agents en parallèle.
+
+- **haiku** (3) : protect-06, protect-07, protect-08 — cahiers à convertir en forme mécanique (avant/après) avant lancement.
+- **sonnet** (6) : protect-01, protect-02, protect-03, protect-04, protect-05, protect-09.
+- **audit Opus avant fusion** (4) : protect-02, protect-03, protect-04, protect-09.
+- **non lançables** : aucun.
+- **opus** n'exécute jamais ; **fable** ne figure dans aucun routage.

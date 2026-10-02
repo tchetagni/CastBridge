@@ -1,5 +1,10 @@
 # w5-14 — Outils du propriétaire : délégation sans maître (+ `confirmOrders`, `sellVouchers`, `maxConfirmXafPerDay`), retrait du secret maître, grille avec jetons, fabrication des lots de bons (`tools/vouchers`), vecteurs agents régénérés
 
+<!-- routage Fable 2026-10-02 -->
+> **Modèle : sonnet** · escalade : opus audit si diff sécurité/crypto/argent · statut : BLOQUÉ partiel (D-W5-1, D-W5-2 : fichiers TEST)
+> **Groupe : W5c-1** (vague W5c) · prérequis : w4-11, w4-12, w5-01 · porte : `cd android && tools/agents/gradle-lock.sh gradle --offline :core:test --tests '*Delegation*' && python3 -m unittest discover -s tools/tests -p 'test_make_vouchers.py'`
+> **Jauge : ≈ 400 k jetons entrée / 20 k sortie** (effort M) · audit Opus : non
+
 **Vague 5c · Effort M (≈ 2 j) · Modèle : sonnet · Statut BLOQUÉ partiel (D-W5-1 montants/paquets, D-W5-2 dénominations : l'agent livre la mécanique avec des fichiers `TEST` ; D9-bis inchangé).** Conception : `DESIGN-W5-BOUTIQUE-LOCATIONS-JETONS.md` § 3.1, § 3.4 (d), § 5.3, § 14 ; `SONNET-WAVE5-INDEX.md` « Changements aux cahiers w4 » (w4-11, w4-12, w4-17). Branche `claude/sonnet-w5-14`. Rapport : `docs/agent-reports/sonnet-w5-14.md`. Dépend de w4-11, w4-12 fusionnés.
 
 ## Objectif

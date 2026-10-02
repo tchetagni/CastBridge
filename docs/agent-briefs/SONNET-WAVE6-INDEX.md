@@ -142,3 +142,13 @@ D-W6-1 liste minimale (§ 3.2) et matrice (§ 3.7, dont : copie de média = prod
 |---|---|---|---|
 | **D-W6-4** | Validation par un juriste des textes d'information du foyer, de la divulgation « accès aux données d'utilisation » et du complément de politique de confidentialité | distribution de la fonction parentale v2 hors du cercle de test (w6-21 rédige les brouillons sans attendre) | faire relire avant toute diffusion ; garder l'indicateur non désactivable quoi qu'il arrive |
 | **D7** (existant) | Nom commercial et contact | textes de w6-21, « À propos », mur du téléphone (« demandez une clé à … ») | inchangé |
+
+## Routage des modèles (Fable, 2026-10-02) — vague 6 (confirme la colonne « Modèle » : aucune divergence)
+
+Source : `docs/coordination/ROUTAGE-AGENTS-EXECUTION-2026-10-02.md` (grille, jauges, audits, dispatch) ; table machine `docs/agent-briefs/routing.json` ; `python3 tools/agents/dispatch-plan.py --wave <vague> --done <ids>` donne les cahiers lançables. Chaque cahier porte un en-tête « Modèle · Groupe · Jauge ». Modèle **explicite** à chaque lancement ; un seul build JVM à la fois (`tools/agents/gradle-lock.sh`) ; au plus 3 agents en parallèle.
+
+- **haiku** (4) : w6-10, w6-11, w6-22, w6-23 — cahiers à convertir en forme mécanique (avant/après) avant lancement.
+- **sonnet** (19) : w6-01, w6-02, w6-03, w6-04, w6-05, w6-06, w6-07, w6-08, w6-09, w6-12, w6-13, w6-14, w6-15, w6-16, w6-17, w6-18, w6-19, w6-20, w6-21.
+- **audit Opus avant fusion** (9) : w6-03, w6-04, w6-07, w6-09, w6-12, w6-15, w6-16, w6-17, w6-19.
+- **non lançables** : aucun.
+- **opus** n'exécute jamais ; **fable** ne figure dans aucun routage.

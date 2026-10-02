@@ -1,5 +1,10 @@
 # w1-05 — Horloge de la TV : uptime cumulé persisté, règle AHEAD, grâce sans faille
 
+<!-- routage Fable 2026-10-02 -->
+> **Modèle : sonnet** · escalade : audit Opus obligatoire (diff sensible) · statut : PRÊT (D1 décidée : oui)
+> **Groupe : W1-A** (vague W1) · prérequis : aucun · porte : `cd android && tools/agents/gradle-lock.sh gradle --offline :core:test --tests '*Clock*'`
+> **Jauge : ≈ 400 k jetons entrée / 20 k sortie** (effort M) · audit Opus : oui
+
 **Vague 1 · Effort M (≈ 2 j) · Statut PRÊT** (la mise de `graceDays=0` par défaut attend D1 : ce cahier **prépare** le réglage, ne le bascule pas). Branche `claude/sonnet-w1-05`. Rapport : `docs/agent-reports/sonnet-w1-05.md`.
 
 ## Objectif

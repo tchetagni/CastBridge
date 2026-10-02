@@ -1,5 +1,10 @@
 # w1-01 — Sauvegardes Android fermées et super-admin désactivé par défaut
 
+<!-- routage Fable 2026-10-02 -->
+> **Modèle : sonnet** · escalade : audit Opus obligatoire (diff sensible) · statut : PRÊT
+> **Groupe : W1-A** (vague W1) · prérequis : aucun · porte : `python3 -m unittest discover -s tools/tests -p 'test_backup_rules.py'`
+> **Jauge : ≈ 150 k jetons entrée / 8 k sortie** (effort S) · audit Opus : oui
+
 **Vague 1 · Effort S (≈ 3 h) · Statut PRÊT.** Branche `claude/sonnet-w1-01` depuis `origin/integration/agents`. Rapport : `docs/agent-reports/sonnet-w1-01.md`.
 
 ## Objectif

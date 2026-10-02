@@ -1,5 +1,10 @@
 # w1-08 — `docs/RELEASES.md`, `.gitignore` des secrets, `SHA256SUMS`
 
+<!-- routage Fable 2026-10-02 -->
+> **Modèle : haiku** · escalade : sonnet au 2e échec ou fichier sensible · statut : PRÊT (RELEASES.md et sha256sums.sh existent déjà : vérifier, compléter)
+> **Groupe : W1-A** (vague W1) · prérequis : aucun · porte : `bash -n tools/release/sha256sums.sh && git check-ignore -q secrets/x.jks`
+> **Jauge : ≈ 60 k jetons entrée / 5 k sortie** (effort S) · audit Opus : non
+
 **Vague 1 · Effort S (≈ 3 h) · Statut PRÊT.** Branche `claude/sonnet-w1-08`. Rapport : `docs/agent-reports/sonnet-w1-08.md`.
 
 ## Objectif

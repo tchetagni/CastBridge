@@ -1,5 +1,10 @@
 # w2-07 — Découper `TvService` sans changer le comportement
 
+<!-- routage Fable 2026-10-02 -->
+> **Modèle : sonnet** · escalade : opus audit si diff sécurité/crypto/argent · statut : PRÊT (après w1-04)
+> **Groupe : W2-A** (vague W2) · prérequis : w1-04 · porte : `cd android && tools/agents/gradle-lock.sh gradle --offline :receiver:compileDebugKotlin`
+> **Jauge : ≈ 400 k jetons entrée / 20 k sortie** (effort M) · audit Opus : non
+
 **Vague 2 · Effort M (≈ 2 j) · Statut PRÊT** (après fusion de w1-04 qui touche la zone `netTick`). Branche `claude/sonnet-w2-07`. Rapport : `docs/agent-reports/sonnet-w2-07.md`.
 
 ## Objectif

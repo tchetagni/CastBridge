@@ -1,5 +1,10 @@
 # w6-19 — Console du propriétaire : session super administrateur (ouverture, durée, bandeau, fermeture, scellement), `PhoneGate` en `Super`, contrôle de publication « aucun haché dans un APK distribuable »
 
+<!-- routage Fable 2026-10-02 -->
+> **Modèle : sonnet** · escalade : audit Opus obligatoire (diff sensible) · statut : PRÊT (après w6-04)
+> **Groupe : W6d-1** (vague W6d) · prérequis : w6-04 · porte : `python3 -m unittest discover -s tools/tests -p 'test_check_no_superadmin.py' && cd android && tools/agents/gradle-lock.sh gradle --offline :ownerlib:compileDebugKotlin`
+> **Jauge : ≈ 400 k jetons entrée / 20 k sortie** (effort M) · audit Opus : oui
+
 **Vague 6d · Effort M (≈ 2 j) · Modèle : sonnet · Statut PRÊT (après w6-04 fusionné ; w6-16 en parallèle : contrat `PhoneGateRuntime.superActive` lu via `SuperSessionStore.active()`).** Conception : `DESIGN-W6-PARENTAL-PHONE-GATE.md` § 4. Branche `claude/sonnet-w6-19`. Rapport : `docs/agent-reports/sonnet-w6-19.md`.
 
 ## Objectif

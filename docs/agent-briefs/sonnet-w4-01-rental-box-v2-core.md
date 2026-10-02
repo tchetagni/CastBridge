@@ -1,5 +1,10 @@
 # w4-01 — Cœur : X25519, clé d'installation, boîte de location v2, vecteurs v2
 
+<!-- routage Fable 2026-10-02 -->
+> **Modèle : sonnet** · escalade : audit Opus obligatoire (diff sensible) · statut : PRÊT
+> **Groupe : W4a-1** (vague W4a) · prérequis : aucun · porte : `cd android && tools/agents/gradle-lock.sh gradle --offline :core:test --tests '*X25519*' --tests '*InstallKey*' --tests '*RentalVectorsV2*'`
+> **Jauge : ≈ 400 k jetons entrée / 20 k sortie** (effort M) · audit Opus : oui
+
 **Vague 4a · Effort M (≈ 2,5 j) · Statut PRÊT.** Conception : `docs/coordination/DESIGN-W4-ENVELOPPE-LOCATIONS.md` § 3, § 5, § 6 (à lire en entier avant de coder). Branche `claude/sonnet-w4-01`. Rapport : `docs/agent-reports/sonnet-w4-01.md`. **Premier cahier de la vague 4a** : w4-02, w4-03, w4-04, w4-05 en dépendent.
 
 ## Objectif

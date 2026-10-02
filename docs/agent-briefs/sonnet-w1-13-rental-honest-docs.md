@@ -1,5 +1,10 @@
 # w1-13 — Documentation et commentaires honnêtes sur le chiffrement des locations
 
+<!-- routage Fable 2026-10-02 -->
+> **Modèle : haiku** · escalade : sonnet au 2e échec ou fichier sensible · statut : REMPLACÉ par w4-01…06 (D4 = NON) : ne pas lancer
+> **Groupe : —** (vague W1) · prérequis : aucun · porte : `—`
+> **Jauge : ≈ 60 k jetons entrée / 5 k sortie** (effort S) · audit Opus : non
+
 **Vague 1 · Effort S (≈ 2 h) · Statut PRÊT** (décision D4 recommandée : accepter la limite pour l'instant). Branche `claude/sonnet-w1-13`. Rapport : `docs/agent-reports/sonnet-w1-13.md`.
 
 ## Objectif

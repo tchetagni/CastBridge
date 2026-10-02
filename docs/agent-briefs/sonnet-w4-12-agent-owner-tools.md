@@ -1,5 +1,10 @@
 # w4-12 — Outils du propriétaire : onglet « Points focaux », maître des locations explicite, commande `delegation`, grille de prix signée
 
+<!-- routage Fable 2026-10-02 -->
+> **Modèle : sonnet** · escalade : opus audit si diff sécurité/crypto/argent · statut : PRÊT **version réduite W5** (sans maître) ; D9-bis pour la grille réelle
+> **Groupe : W4c-2** (vague W4c) · prérequis : w4-11 · porte : `cd android && tools/agents/gradle-lock.sh gradle --offline :core:test --tests '*OwnerCli*' && python3 -m unittest discover -s tools/tests -p 'test_sign_prices.py'`
+> **Jauge : ≈ 400 k jetons entrée / 20 k sortie** (effort M) · audit Opus : non
+
 **Vague 4c · Effort M (≈ 2 j) · Statut PRÊT (après w4-11). BLOQUÉ partiel : D9-bis (montants) pour le fichier de grille réel ; l'agent livre un exemple `TEST` à 0.** Conception : `docs/coordination/DESIGN-W4-VENTE-TERRAIN.md` § 5, § 6, § 10. Branche `claude/sonnet-w4-12`. Rapport : `docs/agent-reports/sonnet-w4-12.md`.
 
 ## Objectif

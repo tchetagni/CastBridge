@@ -1,5 +1,10 @@
 # w2-11 — « Langues » sur CastBridge-TV : badge « voix de synthèse », limites dites une fois, focus initial
 
+<!-- routage Fable 2026-10-02 -->
+> **Modèle : haiku** · escalade : sonnet au 2e échec ou fichier sensible · statut : PRÊT
+> **Groupe : W2-A** (vague W2) · prérequis : aucun · porte : `cd android && tools/agents/gradle-lock.sh gradle --offline :core:test --tests '*Lang*' :receiver:compileDebugKotlin`
+> **Jauge : ≈ 60 k jetons entrée / 5 k sortie** (effort S) · audit Opus : non
+
 **Vague 2 · Effort S (≈ 4 h) · Statut PRÊT.** Branche `claude/sonnet-w2-11`. Rapport : `docs/agent-reports/sonnet-w2-11.md`.
 
 ## Objectif

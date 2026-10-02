@@ -1,5 +1,10 @@
 # w2-15 — Tunnel SSH inverse : enrôlement réservé à la production, portée dédiée aux experts, divulgation
 
+<!-- routage Fable 2026-10-02 -->
+> **Modèle : sonnet** · escalade : audit Opus obligatoire (diff sensible) · statut : PRÊT (D13 = oui ; client TV reste hors cahier)
+> **Groupe : W2-B** (vague W2) · prérequis : aucun · porte : `cd android && tools/agents/gradle-lock.sh gradle --offline :core:test --tests '*Tunnel*' && cd backend && tools/agents/gradle-lock.sh ./mvnw -q -o test -Dtest='Tunnel*Test'`
+> **Jauge : ≈ 150 k jetons entrée / 8 k sortie** (effort S) · audit Opus : oui
+
 **Vague 2 · Effort S (≈ 1 j) · Statut BLOQUÉ PARTIEL** — le **client TV** reste suspendu à D13 (ne pas le construire) ; les durcissements serveur/cœur ci-dessous sont faisables maintenant. **Rien n'est déployé ; le module reste `enabled=false`.** Branche `claude/sonnet-w2-15`. Rapport : `docs/agent-reports/sonnet-w2-15.md`.
 
 ## Objectif

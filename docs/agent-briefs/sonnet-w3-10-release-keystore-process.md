@@ -1,5 +1,10 @@
 # w3-10 — Clé de signature de release : procédure, migration unique du parc, tags
 
+<!-- routage Fable 2026-10-02 -->
+> **Modèle : haiku** · escalade : sonnet au 2e échec ou fichier sensible · statut : BLOQUÉ (D12) ; rédaction de procédure seulement, aucune commande de clé
+> **Groupe : W3-C** (vague W3) · prérequis : aucun · porte : `grep -c 'keystore' docs/RELEASES.md`
+> **Jauge : ≈ 60 k jetons entrée / 5 k sortie** (effort S) · audit Opus : non
+
 **Vague 3 · Effort S (≈ 3 h) · Statut BLOQUÉ** — **D12** : le propriétaire décide de créer le keystore de release maintenant. L'agent n'exécute **aucune** commande de génération de clé ni ne touche `~/.android` ; il écrit la procédure et les scripts simulés. Branche `claude/sonnet-w3-10`. Rapport : `docs/agent-reports/sonnet-w3-10.md`.
 
 ## Objectif

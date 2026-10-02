@@ -1,5 +1,10 @@
 # w4-06 — Documentation : enveloppe v2, clé d'installation, lots au repos, limites honnêtes
 
+<!-- routage Fable 2026-10-02 -->
+> **Modèle : haiku** · escalade : sonnet au 2e échec ou fichier sensible · statut : PRÊT (après 4a ; ne pas écrire RENTAL-LOTS § 15)
+> **Groupe : W4a-4** (vague W4a) · prérequis : w4-01, w4-02, w4-03, w4-04, w4-05 · porte : `grep -l 'v2:' docs/RENTAL-LOTS.md docs/ACTIVATION-FORMAT.md | wc -l`
+> **Jauge : ≈ 60 k jetons entrée / 5 k sortie** (effort S) · audit Opus : non
+
 **Vague 4a · Effort S (≈ 0,5 j) · Statut PRÊT (après w4-01…w4-05 fusionnés, ou en parallèle avec les signatures du rapport de w4-01).** Conception : `docs/coordination/DESIGN-W4-ENVELOPPE-LOCATIONS.md` (source unique). Branche `claude/sonnet-w4-06`. Rapport : `docs/agent-reports/sonnet-w4-06.md`. Remplace **w1-13** (qui documentait l'acceptation de la faille : ne pas l'exécuter ; si déjà fusionné, réécrire ses paragraphes).
 
 ## Objectif

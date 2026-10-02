@@ -1,5 +1,10 @@
 # w5-02 — Cœur : jetons du Quiz (bon de jetons `type=tokens`, porte-jetons local chaîné et lié à l'installation, politique des commodités, protocole de réconciliation), vecteurs
 
+<!-- routage Fable 2026-10-02 -->
+> **Modèle : sonnet** · escalade : audit Opus obligatoire (diff sensible) · statut : PRÊT
+> **Groupe : W5a-1** (vague W5a) · prérequis : w4-01 · porte : `cd android && tools/agents/gradle-lock.sh gradle --offline :core:test --tests '*Token*'`
+> **Jauge : ≈ 800 k jetons entrée / 40 k sortie** (effort L) · audit Opus : oui
+
 **Vague 5a · Effort L (≈ 3 j) · Modèle : sonnet · Statut PRÊT.** Conception : `DESIGN-W5-BOUTIQUE-LOCATIONS-JETONS.md` § 3.4 (c, f), § 6 (lire en entier). Branche `claude/sonnet-w5-02`. Rapport : `docs/agent-reports/sonnet-w5-02.md`. Dépend de w4-01 (`C/crypto/SecretWrapper.kt`, `C/lots/InstallKey.kt`, `Hkdf`). **Décision du propriétaire (P4) : seul le Quiz consomme des jetons** ; ce cahier ne connaît qu'un identifiant de jeu `quiz`.
 
 ## Objectif

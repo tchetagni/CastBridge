@@ -1,5 +1,10 @@
 # protect-05 — Empreinte de signature + drapeaux au battement de cœur, registre & anomalies serveur
 
+<!-- routage Fable 2026-10-02 -->
+> **Modèle : sonnet** · escalade : opus audit si diff sécurité/crypto/argent · statut : PRÊT (coord. w3-09)
+> **Groupe : P-C** (vague PROTECT) · prérequis : protect-01 · porte : `cd backend && tools/agents/gradle-lock.sh ./mvnw -q -o test -Dtest='Device*Test,Abuse*Test'`
+> **Jauge : ≈ 400 k jetons entrée / 20 k sortie** (effort M) · audit Opus : non
+
 **Modèle recommandé : sonnet** (Kotlin + Java backend + tests ; coordination w3-09).
 **Vague C.** Dépend de protect-01 (watermark), protect-03 (`SelfIntegrity`), protect-04 (`EnvTrust`) pour les valeurs à rapporter — peut démarrer en parallèle en stubant ces lectures si besoin. **Coordination w3-09** (relais de révocation) : champs **distincts**, ne pas empiéter.
 

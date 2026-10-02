@@ -1,5 +1,10 @@
 # w6-12 — CastBridge-TV : clé d'installation de signature, route `GET /api/activation/proof?nonce=`, trames Bluetooth `PROOF_REQUEST/PROOF`, empreinte dans « À propos »
 
+<!-- routage Fable 2026-10-02 -->
+> **Modèle : sonnet** · escalade : audit Opus obligatoire (diff sensible) · statut : PRÊT (après w6-03)
+> **Groupe : W6c-1** (vague W6c) · prérequis : w6-03, w4-03 · porte : `cd android && tools/agents/gradle-lock.sh gradle --offline :receiver:compileDebugKotlin :core:test --tests '*Proof*'`
+> **Jauge : ≈ 400 k jetons entrée / 20 k sortie** (effort M) · audit Opus : oui
+
 **Vague 6c · Effort M (≈ 2 j) · Modèle : sonnet · Statut PRÊT (après w6-03 ; après w4-03 si fusionné pour `KeystoreWrapper`, sinon repli fichier).** Conception : `DESIGN-W6-PARENTAL-PHONE-GATE.md` § 3.3, § 7 (4). Branche `claude/sonnet-w6-12`. Rapport : `docs/agent-reports/sonnet-w6-12.md`.
 
 ## Objectif

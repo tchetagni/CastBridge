@@ -1,5 +1,10 @@
 # w4-14 — Journal des ventes sur le téléphone : fichier à ajout seul, synchronisation serveur, écran des ventes, reçus
 
+<!-- routage Fable 2026-10-02 -->
+> **Modèle : sonnet** · escalade : opus audit si diff sécurité/crypto/argent · statut : PRÊT (après w4-11)
+> **Groupe : W4c-2** (vague W4c) · prérequis : w4-11 · porte : `cd android && tools/agents/gradle-lock.sh gradle --offline :core:test --tests '*Ledger*'`
+> **Jauge : ≈ 400 k jetons entrée / 20 k sortie** (effort M) · audit Opus : non
+
 **Vague 4c · Effort M (≈ 2 j) · Statut PRÊT (après w4-11 ; en parallèle de w4-13 ; le bout en bout exige w4-16).** Conception : `docs/coordination/DESIGN-W4-VENTE-TERRAIN.md` § 4, § 9. Branche `claude/sonnet-w4-14`. Rapport : `docs/agent-reports/sonnet-w4-14.md`.
 
 ## Objectif

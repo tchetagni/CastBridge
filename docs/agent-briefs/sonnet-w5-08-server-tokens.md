@@ -1,5 +1,10 @@
 # w5-08 — Serveur : grand livre des jetons du Quiz, bons de jetons signés pour la TV, rapport de dépenses, réconciliation et anomalies
 
+<!-- routage Fable 2026-10-02 -->
+> **Modèle : sonnet** · escalade : audit Opus obligatoire (diff sensible) · statut : PRÊT (après w5-06)
+> **Groupe : W5b-2** (vague W5b) · prérequis : w5-06, w5-05 · porte : `cd backend && tools/agents/gradle-lock.sh ./mvnw -q -o test -Dtest='Token*Test'`
+> **Jauge : ≈ 800 k jetons entrée / 40 k sortie** (effort L) · audit Opus : oui
+
 **Vague 5b · Effort L (≈ 3 j) · Modèle : sonnet · Statut PRÊT (après w5-06 ; w5-05 pour `TokenGrant.java`).** Conception : `DESIGN-W5-BOUTIQUE-LOCATIONS-JETONS.md` § 3.3, § 3.4 (c), § 6.4, § 6.5, § 10. Branche `claude/sonnet-w5-08`. Rapport : `docs/agent-reports/sonnet-w5-08.md`. **Décision du propriétaire (P4) : seul le Quiz consomme des jetons.**
 
 ## Objectif

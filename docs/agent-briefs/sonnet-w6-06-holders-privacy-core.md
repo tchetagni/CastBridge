@@ -1,5 +1,10 @@
 # w6-06 — Téléphones détenteurs (`Holders`), consentement sur la TV, `ParentalPrivacy` (collecté / jamais), routes `holders/*`, option « sans titres »
 
+<!-- routage Fable 2026-10-02 -->
+> **Modèle : sonnet** · escalade : opus audit si diff sécurité/crypto/argent · statut : PRÊT (s'empile sur w5-18)
+> **Groupe : W6a-1** (vague W6a) · prérequis : w5-18 · porte : `cd android && tools/agents/gradle-lock.sh gradle --offline :core:test --tests '*ParentalHolders*'`
+> **Jauge : ≈ 400 k jetons entrée / 20 k sortie** (effort M) · audit Opus : non
+
 **Vague 6a · Effort M (≈ 2 j) · Modèle : sonnet · Statut PRÊT (après w5-18 si fusionné : relire ses champs de `ParentalModel`/`ParentalApi` et s'y empiler).** Conception : `DESIGN-W6-PARENTAL-PHONE-GATE.md` § 2.1, § 2.2 (liste « jamais »), § 2.6. Branche `claude/sonnet-w6-06`. Rapport : `docs/agent-reports/sonnet-w6-06.md`.
 
 ## Objectif

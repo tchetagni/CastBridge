@@ -1,5 +1,10 @@
 # w1-04 — Profil « TV hors ligne » : sonde Google et BitTorrent coupés
 
+<!-- routage Fable 2026-10-02 -->
+> **Modèle : sonnet** · escalade : opus audit si diff sécurité/crypto/argent · statut : PRÊT (D3 pour le retrait total)
+> **Groupe : W1-A** (vague W1) · prérequis : aucun · porte : `cd android && tools/agents/gradle-lock.sh gradle --offline :core:test --tests '*Aria2*'`
+> **Jauge : ≈ 150 k jetons entrée / 8 k sortie** (effort S) · audit Opus : non
+
 **Vague 1 · Effort S/M (≈ 6 h) · Statut PRÊT** (le **retrait complet** d'aria2 attend la décision D3 ; ce cahier coupe DHT/BitTorrent et garde HTTP). Branche `claude/sonnet-w1-04`. Rapport : `docs/agent-reports/sonnet-w1-04.md`.
 
 ## Objectif

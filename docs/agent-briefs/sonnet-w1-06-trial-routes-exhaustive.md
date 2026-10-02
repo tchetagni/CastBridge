@@ -1,5 +1,10 @@
 # w1-06 — Liste blanche d'essai prouvée exhaustive (table des routes générée depuis le code)
 
+<!-- routage Fable 2026-10-02 -->
+> **Modèle : sonnet** · escalade : opus audit si diff sécurité/crypto/argent · statut : PRÊT
+> **Groupe : W1-A** (vague W1) · prérequis : aucun · porte : `cd android && tools/agents/gradle-lock.sh gradle --offline :core:test --tests '*TrialRoutes*'`
+> **Jauge : ≈ 150 k jetons entrée / 8 k sortie** (effort S) · audit Opus : non
+
 **Vague 1 · Effort S (≈ 4 h) · Statut PRÊT.** Branche `claude/sonnet-w1-06`. Rapport : `docs/agent-reports/sonnet-w1-06.md`.
 
 ## Objectif

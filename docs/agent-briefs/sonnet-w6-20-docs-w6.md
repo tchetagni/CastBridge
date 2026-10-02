@@ -1,5 +1,10 @@
 # w6-20 — Documentation W6 : PARENTAL (détenteurs, v2, Wi-Fi, confidentialité), nouveau PHONE-GATE (matrice, messages, preuve), ACTIVATION-FORMAT (type `proof`), OWNER-CONSOLE (session, perte), TRIAL-EDITION § 14 amendé, HANDOFF
 
+<!-- routage Fable 2026-10-02 -->
+> **Modèle : sonnet** · escalade : opus audit si diff sécurité/crypto/argent · statut : PRÊT (après 6a-6d)
+> **Groupe : W6e-1** (vague W6e) · prérequis : w6-01, w6-02, w6-03, w6-04, w6-05, w6-06, w6-07, w6-08, w6-09, w6-10, w6-11, w6-12, w6-13, w6-14, w6-15, w6-16, w6-17, w6-18, w6-19 · porte : `ls docs/PHONE-GATE.md`
+> **Jauge : ≈ 400 k jetons entrée / 20 k sortie** (effort M) · audit Opus : non
+
 **Vague 6e · Effort M (≈ 2 j) · Modèle : sonnet · Statut PRÊT (après fusion de 6a-6d ; lire tous les rapports `docs/agent-reports/sonnet-w6-*.md`).** Conception : `DESIGN-W6-PARENTAL-PHONE-GATE.md` (entier). Branche `claude/sonnet-w6-20`. Rapport : `docs/agent-reports/sonnet-w6-20.md`.
 
 ## Objectif

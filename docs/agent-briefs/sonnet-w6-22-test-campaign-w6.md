@@ -1,5 +1,10 @@
 # w6-22 — Campagne de test W6 : `docs/TEST-CAMPAIGN.md` § W6 (TV de référence 32 bits + téléphone), scénarios émulateur, liste de contrôle du coordinateur
 
+<!-- routage Fable 2026-10-02 -->
+> **Modèle : haiku** · escalade : sonnet au 2e échec ou fichier sensible · statut : PRÊT (après 6c, 6d)
+> **Groupe : W6e-1** (vague W6e) · prérequis : w6-12, w6-13, w6-14, w6-15, w6-16, w6-17, w6-18, w6-19 · porte : `grep -c '^- \[ \]' docs/TEST-CAMPAIGN.md`
+> **Jauge : ≈ 60 k jetons entrée / 5 k sortie** (effort S) · audit Opus : non
+
 **Vague 6e · Effort S (≈ 1 j) · Modèle : haiku · Statut PRÊT (après fusion de 6c et 6d).** Conception : `DESIGN-W6-PARENTAL-PHONE-GATE.md` § 2.7, § 3.3, § 3.7, § 3.8, § 4.2. Branche `claude/sonnet-w6-22`. Rapport : `docs/agent-reports/sonnet-w6-22.md`.
 
 ## Objectif

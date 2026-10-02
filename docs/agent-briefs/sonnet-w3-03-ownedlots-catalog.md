@@ -1,5 +1,10 @@
 # w3-03 — Un lot acheté n'est jamais supprimé : catalogue signé sur la TV ; plafond 3 Mo à la réception
 
+<!-- routage Fable 2026-10-02 -->
+> **Modèle : sonnet** · escalade : opus audit si diff sécurité/crypto/argent · statut : PRÊT (après w1-02)
+> **Groupe : W3-A** (vague W3) · prérequis : w1-02 · porte : `cd android && tools/agents/gradle-lock.sh gradle --offline :core:test --tests '*Lots*'`
+> **Jauge : ≈ 400 k jetons entrée / 20 k sortie** (effort M) · audit Opus : non
+
 **Vague 3 · Effort M (≈ 1,5 j) · Statut PRÊT** (après w1-02). Branche `claude/sonnet-w3-03`. Rapport : `docs/agent-reports/sonnet-w3-03.md`.
 
 ## Objectif

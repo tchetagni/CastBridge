@@ -1,5 +1,10 @@
 # w4-18 — Documentation de la vente terrain et fiche de formation du point focal
 
+<!-- routage Fable 2026-10-02 -->
+> **Modèle : haiku** · escalade : sonnet au 2e échec ou fichier sensible · statut : PRÊT **amendé W5** (fiche : clés + bons, pas de location) ; D7/D9-bis en `[…]`
+> **Groupe : W4c-4** (vague W4c) · prérequis : w4-11, w4-12, w4-13, w4-14, w4-15, w4-16, w4-17 · porte : `ls docs/VENTE-TERRAIN.md docs/FICHE-POINT-FOCAL.md`
+> **Jauge : ≈ 150 k jetons entrée / 10 k sortie** (effort M) · audit Opus : non
+
 **Vague 4c · Effort M (≈ 1 j) · Statut PRÊT (après w4-11…w4-17 ; BLOQUÉ partiel D7/D9-bis pour les montants et le contact dans la fiche).** Conception : `docs/coordination/DESIGN-W4-VENTE-TERRAIN.md` (source unique). Branche `claude/sonnet-w4-18`. Rapport : `docs/agent-reports/sonnet-w4-18.md`.
 
 ## Objectif

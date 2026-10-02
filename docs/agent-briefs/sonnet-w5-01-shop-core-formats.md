@@ -1,5 +1,10 @@
 # w5-01 — Cœur : formats de la boutique (demande, code de commande, bon de recharge, lot de bons, catalogue de boutique, politique, commande, `ShopApi`), vecteurs
 
+<!-- routage Fable 2026-10-02 -->
+> **Modèle : sonnet** · escalade : opus audit si diff sécurité/crypto/argent · statut : PRÊT
+> **Groupe : W5a-1** (vague W5a) · prérequis : w4-11 · porte : `cd android && tools/agents/gradle-lock.sh gradle --offline :core:test --tests '*Shop*'`
+> **Jauge : ≈ 800 k jetons entrée / 40 k sortie** (effort L) · audit Opus : non
+
 **Vague 5a · Effort L (≈ 3 j) · Modèle : sonnet · Statut PRÊT.** Conception : `docs/coordination/DESIGN-W5-BOUTIQUE-LOCATIONS-JETONS.md` § 3, § 5, § 9 (lire en entier). Branche `claude/sonnet-w5-01`. Rapport : `docs/agent-reports/sonnet-w5-01.md`. **Premier cahier de la vague** : w5-05, w5-11, w5-12, w5-15, w5-16 codent contre ses API. Dépend de w4-11 (`C/sales/PriceGrid.kt`, `C/sales/Receipt.kt`, `Base32C`).
 
 ## Objectif

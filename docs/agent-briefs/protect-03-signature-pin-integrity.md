@@ -1,5 +1,10 @@
 # protect-03 — Épinglage de la signature APK + auto-intégrité (contrôles redondants)
 
+<!-- routage Fable 2026-10-02 -->
+> **Modèle : sonnet** · escalade : audit Opus obligatoire (diff sensible) · statut : PRÊT (D12 : empreinte vide = ignorée)
+> **Groupe : P-B** (vague PROTECT) · prérequis : protect-01 · porte : `cd android && tools/agents/gradle-lock.sh gradle --offline :core:test --tests '*ApkIntegrity*'`
+> **Jauge : ≈ 400 k jetons entrée / 20 k sortie** (effort M) · audit Opus : oui
+
 **Modèle recommandé : sonnet** (redondance, PackageManager multi-API, dégradation sans faux positifs).
 **Vague B.** Dépend de protect-01 (`BuildConfig.EXPECTED_SIG_SHA256`). Parallélisable avec protect-02/04 (fichiers disjoints ; touche ActivationCenter, pas PlayerActivity).
 

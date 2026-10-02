@@ -1,5 +1,10 @@
 # w3-02 — Démarrage à froid hors du fil principal ; type de service d'avant-plan Android 14 ; StrictMode en debug
 
+<!-- routage Fable 2026-10-02 -->
+> **Modèle : sonnet** · escalade : opus audit si diff sécurité/crypto/argent · statut : PRÊT (après w3-01)
+> **Groupe : W3-B** (vague W3) · prérequis : w3-01, w2-01, w2-07 · porte : `cd android && tools/agents/gradle-lock.sh gradle --offline :receiver:compileDebugKotlin`
+> **Jauge : ≈ 400 k jetons entrée / 20 k sortie** (effort M) · audit Opus : non
+
 **Vague 3 · Effort M (≈ 2 j) · Statut PRÊT** (après w2-01 et w2-07, qui touchent `ActivationCenter` et `TvService`). Branche `claude/sonnet-w3-02`. Rapport : `docs/agent-reports/sonnet-w3-02.md`.
 
 ## Objectif

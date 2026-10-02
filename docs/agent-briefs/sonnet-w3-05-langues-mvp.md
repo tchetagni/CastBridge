@@ -1,5 +1,10 @@
 # w3-05 — « Langues » : tranche minimale 1 langue × A0-A1 (texte), générateur et validateur
 
+<!-- routage Fable 2026-10-02 -->
+> **Modèle : sonnet** · escalade : opus audit si diff sécurité/crypto/argent · statut : BLOQUÉ (D14 : première langue)
+> **Groupe : W3-C** (vague W3) · prérequis : aucun · porte : `python3 -m unittest discover -s tools/langues -p 'test_languelib.py'`
+> **Jauge : ≈ 800 k jetons entrée / 40 k sortie** (effort L) · audit Opus : non
+
 **Vague 3 · Effort L (≈ 3 j) · Statut BLOQUÉ** — **D14** : quelle première langue ? (recommandation : anglais, départ français ; sinon chinois). Sans réponse : construire `languelib.py` et le validateur, produire **une** unité d'exemple par langue pour prouver la chaîne, et poser `QUESTION:`. Branche `claude/sonnet-w3-05`. Rapport : `docs/agent-reports/sonnet-w3-05.md`.
 
 ## Objectif

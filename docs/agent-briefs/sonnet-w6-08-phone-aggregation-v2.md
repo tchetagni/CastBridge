@@ -1,5 +1,10 @@
 # w6-08 — Agrégation v2 sur le téléphone (cœur) : `ParentalLedger` absorbe les tranches, l'écran, les connexions ; aujourd'hui / semaine ; carte horaire ; exports
 
+<!-- routage Fable 2026-10-02 -->
+> **Modèle : sonnet** · escalade : opus audit si diff sécurité/crypto/argent · statut : PRÊT (schéma v2)
+> **Groupe : W6a-3** (vague W6a) · prérequis : w6-07 · porte : `cd android && tools/agents/gradle-lock.sh gradle --offline :core:test --tests '*WholeTv*' --tests '*Aggregation*'`
+> **Jauge : ≈ 400 k jetons entrée / 20 k sortie** (effort M) · audit Opus : non
+
 **Vague 6a · Effort M (≈ 2 j) · Modèle : sonnet · Statut PRÊT (en parallèle de w6-07 : codez contre le schéma JSON v2 de § 2.5 ; un rapport v1 doit rester absorbé à l'identique).** Conception : `DESIGN-W6-PARENTAL-PHONE-GATE.md` § 2.5, § 2.8. Branche `claude/sonnet-w6-08`. Rapport : `docs/agent-reports/sonnet-w6-08.md`.
 
 ## Objectif

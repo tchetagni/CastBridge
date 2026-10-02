@@ -1,5 +1,10 @@
 # w6-02 — `PhoneSync` (machine d'états de synchronisation par TV) et `PhoneGateTexts` (catalogue unique des messages de déblocage)
 
+<!-- routage Fable 2026-10-02 -->
+> **Modèle : sonnet** · escalade : opus audit si diff sécurité/crypto/argent · statut : PRÊT (constantes de w6-01)
+> **Groupe : W6a-2** (vague W6a) · prérequis : w6-01 · porte : `cd android && tools/agents/gradle-lock.sh gradle --offline :core:test --tests '*PhoneSync*' --tests '*PhoneGateTexts*'`
+> **Jauge : ≈ 400 k jetons entrée / 20 k sortie** (effort M) · audit Opus : non
+
 **Vague 6a · Effort M (≈ 2 j) · Modèle : sonnet · Statut PRÊT (en parallèle de w6-01 : codez contre les constantes `PhoneMessages.*` de § 3.8 ; si w6-01 n'est pas encore fusionné, définissez-les localement dans un `private object` et dites-le).** Conception : `DESIGN-W6-PARENTAL-PHONE-GATE.md` § 3.5, § 3.8, § 3.9. Branche `claude/sonnet-w6-02`. Rapport : `docs/agent-reports/sonnet-w6-02.md`.
 
 ## Objectif

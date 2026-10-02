@@ -1,5 +1,10 @@
 # protect-09 — Ordre serveur signé « classe d'appareil » (block / allow), autoritaire, persistant, levable
 
+<!-- routage Fable 2026-10-02 -->
+> **Modèle : sonnet** · escalade : audit Opus obligatoire (diff sensible) · statut : PRÊT (après protect-02, w2-01)
+> **Groupe : P-C2** (vague PROTECT) · prérequis : protect-02, w2-01 · porte : `cd android && tools/agents/gradle-lock.sh gradle --offline :core:test --tests '*DeviceClassOrder*' --tests '*Policy*'`
+> **Jauge : ≈ 400 k jetons entrée / 20 k sortie** (effort M) · audit Opus : oui
+
 **Modèle recommandé : sonnet** (extension d'un moteur de politiques signé, vérification de cible/scope/séquence, persistance, UX de blocage, tests).
 **Vague C+ (après B).** Dépend de **protect-02** (classe d'appareil calculée et persistée) et de **w2-01** (persistance SeqState/RevocationState + canaux de livraison USB/Bluetooth/HTTP des listes signées). Décision propriétaire **PD4** : INCERTAIN passe par défaut, mais le serveur doit pouvoir **bloquer ou autoriser ensuite par un ordre signé autoritaire**.
 

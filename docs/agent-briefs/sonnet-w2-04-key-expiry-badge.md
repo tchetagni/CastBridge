@@ -1,5 +1,10 @@
 # w2-04 — Fin de clé annoncée, badge lisible, tuile Langues honnête
 
+<!-- routage Fable 2026-10-02 -->
+> **Modèle : sonnet** · escalade : opus audit si diff sécurité/crypto/argent · statut : PRÊT (D6 décidée : mode réduit → w4-07 prend la suite)
+> **Groupe : W2-A** (vague W2) · prérequis : aucun · porte : `cd android && tools/agents/gradle-lock.sh gradle --offline :core:test --tests '*KeyBadge*'`
+> **Jauge : ≈ 400 k jetons entrée / 20 k sortie** (effort M) · audit Opus : non
+
 **Vague 2 · Effort M (≈ 1,5 j) · Statut PRÊT** (le **mode dégradé** à l'échéance d'une production attend D6 : ce cahier prépare l'écran et les rappels, pas le changement de `TvGate`). Branche `claude/sonnet-w2-04`. Rapport : `docs/agent-reports/sonnet-w2-04.md`.
 
 ## Objectif

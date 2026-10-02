@@ -1,5 +1,10 @@
 # w5-20 — Documentation : `SHOP.md`, `TOKENS.md`, RENTAL-LOTS § 15 réécrit, LOTS, TRIAL-EDITION, QUIZ, GAMES, PARENTAL, API-SERVER, ACTIVATION-FORMAT, OWNER-CONSOLE, ACTIVATION-TOOLS, LICENSE-ADMIN, ADMIN, TELEMETRY, HANDOFF
 
+<!-- routage Fable 2026-10-02 -->
+> **Modèle : sonnet** · escalade : opus audit si diff sécurité/crypto/argent · statut : PRÊT (après 5a…5d)
+> **Groupe : W5e-1** (vague W5e) · prérequis : w5-01, w5-02, w5-03, w5-04, w5-05, w5-06, w5-07, w5-08, w5-09, w5-10, w5-11, w5-12, w5-13, w5-14, w5-15, w5-16, w5-17, w5-18, w5-19 · porte : `ls docs/SHOP.md docs/TOKENS.md`
+> **Jauge : ≈ 400 k jetons entrée / 20 k sortie** (effort M) · audit Opus : non
+
 **Vague 5e · Effort M (≈ 2 j) · Modèle : sonnet · Statut PRÊT (après la fusion de 5a…5d ; lire les rapports `docs/agent-reports/sonnet-w5-*.md`).** Conception : `docs/coordination/DESIGN-W5-BOUTIQUE-LOCATIONS-JETONS.md` (source de vérité ; les rapports donnent les formats **réellement** livrés : en cas d'écart, documenter le livré et noter l'écart). Branche `claude/sonnet-w5-20`. Rapport : `docs/agent-reports/sonnet-w5-20.md`.
 
 ## Objectif

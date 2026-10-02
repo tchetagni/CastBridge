@@ -1,5 +1,10 @@
 # w5-12 — CastBridge (téléphone) : passerelle de la boutique (client HTTP, demande de la TV en cache, sondage des commandes, lots scellés, livraison activation + lots + bons de jetons, relais catalogue / bon en attente / rapport de dépenses)
 
+<!-- routage Fable 2026-10-02 -->
+> **Modèle : sonnet** · escalade : audit Opus obligatoire (diff sensible) · statut : PRÊT (FakeShopApi ou préprod 5b)
+> **Groupe : W5c-1** (vague W5c) · prérequis : w5-01, w5-02 · porte : `cd android && tools/agents/gradle-lock.sh gradle --offline :core:test --tests '*RentalDelivery*' && cd android && tools/agents/gradle-lock.sh gradle --offline :sender:compileDebugKotlin`
+> **Jauge : ≈ 800 k jetons entrée / 40 k sortie** (effort L) · audit Opus : oui · découpage proposé : voir ROUTAGE § 2.3
+
 **Vague 5c · Effort L (≈ 4 j) · Modèle : sonnet · Statut PRÊT (après w5-01, w5-02 ; serveur de préprod 5b ou `FakeShopApi` ; w5-11 en parallèle).** Conception : `DESIGN-W5-BOUTIQUE-LOCATIONS-JETONS.md` § 4.5, § 5.2, § 6.4, § 6.5, § 15. Branche `claude/sonnet-w5-12`. Rapport : `docs/agent-reports/sonnet-w5-12.md`.
 
 ## Objectif

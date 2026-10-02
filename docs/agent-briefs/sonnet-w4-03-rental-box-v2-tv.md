@@ -1,5 +1,10 @@
 # w4-03 — CastBridge-TV : clé d'installation (Keystore), demande v2, ouverture des boîtes v2
 
+<!-- routage Fable 2026-10-02 -->
+> **Modèle : sonnet** · escalade : audit Opus obligatoire (diff sensible) · statut : PRÊT (après w4-01 ; déployer après w4-02, w4-05)
+> **Groupe : W4a-2** (vague W4a) · prérequis : w4-01 · porte : `cd android && tools/agents/gradle-lock.sh gradle --offline :receiver:compileDebugKotlin`
+> **Jauge : ≈ 400 k jetons entrée / 20 k sortie** (effort M) · audit Opus : oui
+
 **Vague 4a · Effort M (≈ 1,5 j) · Statut PRÊT (après w4-01 ; déployer après w4-02 et w4-05).** Conception : `docs/coordination/DESIGN-W4-ENVELOPPE-LOCATIONS.md` § 3, § 4, § 6. Branche `claude/sonnet-w4-03`. Rapport : `docs/agent-reports/sonnet-w4-03.md`.
 
 ## Objectif

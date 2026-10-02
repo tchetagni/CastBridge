@@ -135,3 +135,13 @@ Préfixes : `R/` = `android/receiver/src/main/kotlin/castbridge/receiver/`, `S/`
 3. **Jour 3-4** : w2-01, w2-02, w2-05, w2-07, w2-08, w2-09, w2-11, w2-12, w2-13, w2-14 ; w2-03, w2-04 dès D6/D7 ; w2-06, w2-10, w2-15 dès D8/D9/D13.
 4. **Fusion vague 2** ; campagne w3-14 avec le propriétaire (bloque la vague 3 côté TV).
 5. **Jour 7+** : w3-01, w3-03, w3-04, w3-07, w3-08, w3-09, w3-11, w3-12 ; w3-02 après w3-01 ; w3-05, w3-06, w3-10, w3-13 dès les décisions.
+
+## Routage des modèles (Fable, 2026-10-02) — vagues 1-3
+
+Source : `docs/coordination/ROUTAGE-AGENTS-EXECUTION-2026-10-02.md` (grille, jauges, audits, dispatch) ; table machine `docs/agent-briefs/routing.json` ; `python3 tools/agents/dispatch-plan.py --wave <vague> --done <ids>` donne les cahiers lançables. Chaque cahier porte un en-tête « Modèle · Groupe · Jauge ». Modèle **explicite** à chaque lancement ; un seul build JVM à la fois (`tools/agents/gradle-lock.sh`) ; au plus 3 agents en parallèle.
+
+- **haiku** (4) : w1-07, w1-08, w2-11, w3-10 — cahiers à convertir en forme mécanique (avant/après) avant lancement.
+- **sonnet** (34) : w1-01, w1-02, w1-03, w1-04, w1-05, w1-06, w1-09, w1-10, w1-11, w2-01, w2-02, w2-03, w2-04, w2-05, w2-07, w2-08, w2-09, w2-12, w2-13, w2-14, w2-15, w3-01, w3-02, w3-03, w3-04, w3-05, w3-06, w3-07, w3-08, w3-09, w3-11, w3-12, w3-13, w3-14.
+- **audit Opus avant fusion** (7) : w1-01, w1-03, w1-05, w2-01, w2-02, w2-15, w3-09.
+- **non lançables** : w1-12 (FAIT), w1-13 (REMPLACÉ), w2-06 (REMPLACÉ), w2-10 (REMPLACÉ).
+- **opus** n'exécute jamais ; **fable** ne figure dans aucun routage.

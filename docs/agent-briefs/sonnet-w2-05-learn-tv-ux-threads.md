@@ -1,5 +1,10 @@
 # w2-05 — « Apprendre » sur la TV : lisible à 3 m, essai visible, fin de location annoncée, threads propres
 
+<!-- routage Fable 2026-10-02 -->
+> **Modèle : sonnet** · escalade : opus audit si diff sécurité/crypto/argent · statut : PRÊT
+> **Groupe : W2-A** (vague W2) · prérequis : aucun · porte : `cd android && tools/agents/gradle-lock.sh gradle --offline :core:test --tests '*Learn*'`
+> **Jauge : ≈ 400 k jetons entrée / 20 k sortie** (effort M) · audit Opus : non
+
 **Vague 2 · Effort M (≈ 2 j) · Statut PRÊT.** Branche `claude/sonnet-w2-05`. Rapport : `docs/agent-reports/sonnet-w2-05.md`.
 
 ## Objectif

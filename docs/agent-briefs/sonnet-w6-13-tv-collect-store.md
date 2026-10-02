@@ -1,5 +1,10 @@
 # w6-13 — CastBridge-TV : collecte « toute la TV » branchée (écran, tranches, lancements, Sudoku, connexions), magasin parental chiffré au repos, rapports v2 émis
 
+<!-- routage Fable 2026-10-02 -->
+> **Modèle : sonnet** · escalade : opus audit si diff sécurité/crypto/argent · statut : PRÊT (w6-12 en parallèle)
+> **Groupe : W6c-1** (vague W6c) · prérequis : w6-05, w6-06, w6-07 · porte : `cd android && tools/agents/gradle-lock.sh gradle --offline :receiver:compileDebugKotlin && python3 -m unittest discover -s tools/tests -p 'test_backup_rules.py'`
+> **Jauge : ≈ 800 k jetons entrée / 40 k sortie** (effort L) · audit Opus : non
+
 **Vague 6c · Effort L (≈ 3 j) · Modèle : sonnet · Statut PRÊT (après w6-05, w6-06, w6-07 fusionnés ; w6-12 en parallèle fournit `installSigner()` : coder contre `ActivationCenter.installSigner()` et, s'il manque, `null` = HMAC seul).** Conception : `DESIGN-W6-PARENTAL-PHONE-GATE.md` § 2.2, § 2.3, § 2.4, § 2.5. Branche `claude/sonnet-w6-13`. Rapport : `docs/agent-reports/sonnet-w6-13.md`.
 
 ## Objectif

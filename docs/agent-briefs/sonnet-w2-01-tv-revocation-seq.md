@@ -1,5 +1,10 @@
 # w2-01 — Révocation et numéro de séquence persistés sur CastBridge-TV
 
+<!-- routage Fable 2026-10-02 -->
+> **Modèle : sonnet** · escalade : audit Opus obligatoire (diff sensible) · statut : PRÊT (après w1-05)
+> **Groupe : W2-A** (vague W2) · prérequis : w1-05 · porte : `cd android && tools/agents/gradle-lock.sh gradle --offline :core:test --tests '*Revocation*'`
+> **Jauge : ≈ 400 k jetons entrée / 20 k sortie** (effort M) · audit Opus : oui
+
 **Vague 2 · Effort M (≈ 2-3 j) · Statut PRÊT** (après fusion de w1-05, qui stabilise `ActivationCenter`). Branche `claude/sonnet-w2-01`. Rapport : `docs/agent-reports/sonnet-w2-01.md`.
 
 ## Objectif

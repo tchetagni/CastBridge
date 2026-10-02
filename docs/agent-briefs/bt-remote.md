@@ -1,5 +1,10 @@
 # Brief : télécommande 100 % Bluetooth, trois voies
 
+<!-- routage Fable 2026-10-02 -->
+> **Modèle : sonnet** · escalade : opus audit si diff sécurité/crypto/argent · statut : FUSIONNÉ (BOARD) : ne pas relancer
+> **Groupe : —** (vague X) · prérequis : aucun · porte : `—`
+> **Jauge : ≈ 800 k jetons entrée / 40 k sortie** (effort L) · audit Opus : non · découpage proposé : voir ROUTAGE § 2.3
+
 Agent cloud. Base : branche `integration/agents` (PAS main). Créer `claude/bt-remote` depuis `origin/integration/agents`,
 petits commits, pousser cette branche. Pas de pull request. Ne pas toucher `main`, `feat/ssh`, `integration/agents`.
 Apps : « CastBridge » (téléphone), « CastBridge-TV » (TV). Textes utilisateur en français.

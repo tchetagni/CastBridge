@@ -1,5 +1,10 @@
 # w6-17 — CastBridge (téléphone) : garde de la file de transfert (`SendGuard`) et chemins de données (lots, téléchargements, lecteur, jeux, Apprendre, boutique, bibliothèque et admin de la TV, tunnel)
 
+<!-- routage Fable 2026-10-02 -->
+> **Modèle : sonnet** · escalade : audit Opus obligatoire (diff sensible) · statut : PRÊT (contrat w6-16)
+> **Groupe : W6d-1** (vague W6d) · prérequis : w6-01, w6-02 · porte : `cd android && tools/agents/gradle-lock.sh gradle --offline :core:test --tests '*SendGuard*' && cd android && tools/agents/gradle-lock.sh gradle --offline :sender:compileDebugKotlin`
+> **Jauge : ≈ 800 k jetons entrée / 40 k sortie** (effort L) · audit Opus : oui · découpage proposé : voir ROUTAGE § 2.3
+
 **Vague 6d · Effort L (≈ 3 j) · Modèle : sonnet · Statut PRÊT (après 6a ; en parallèle de w6-16 : coder contre `PhoneGateRuntime`/`GateWall` du contrat de w6-16 ; tant qu'ils n'existent pas, un `object PhoneGateRuntime` minimal **dans `S/gate/GateStub.kt`** que w6-16 supprimera — le dire).** Conception : `DESIGN-W6-PARENTAL-PHONE-GATE.md` § 3.4 (chemin des données), § 3.7 (garde, matrice), § 3.6. Branche `claude/sonnet-w6-17`. Rapport : `docs/agent-reports/sonnet-w6-17.md`.
 
 ## Objectif

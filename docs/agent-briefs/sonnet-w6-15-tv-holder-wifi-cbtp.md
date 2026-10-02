@@ -1,5 +1,10 @@
 # w6-15 — CastBridge-TV : tirage des rapports par Wi-Fi local (`/api/parental/holder/*`, identité par jeton de téléphone de confiance), CBTP v2 dans `BtServer`, routes parentales interdites au tunnel
 
+<!-- routage Fable 2026-10-02 -->
+> **Modèle : sonnet** · escalade : audit Opus obligatoire (diff sensible) · statut : PRÊT (après w6-06, w6-07)
+> **Groupe : W6c-1** (vague W6c) · prérequis : w6-06, w6-07 · porte : `cd android && tools/agents/gradle-lock.sh gradle --offline :core:test --tests '*HolderHttp*' && python3 -m unittest discover -s tools/tests -p 'test_routes.py'`
+> **Jauge : ≈ 400 k jetons entrée / 20 k sortie** (effort M) · audit Opus : oui
+
 **Vague 6c · Effort M (≈ 2 j) · Modèle : sonnet · Statut PRÊT (après w6-06, w6-07 fusionnés).** Conception : `DESIGN-W6-PARENTAL-PHONE-GATE.md` § 2.7, § 2.6 (séparation tunnel), § 7 (2). Branche `claude/sonnet-w6-15`. Rapport : `docs/agent-reports/sonnet-w6-15.md`.
 
 ## Objectif

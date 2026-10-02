@@ -1,5 +1,10 @@
 # w5-24 — CI et outillage : tests Python des bons et de la boutique dans `tools.yml`, vecteurs boutique/jetons, script de contrôle « clé publique du serveur dans les clés de confiance de la TV »
 
+<!-- routage Fable 2026-10-02 -->
+> **Modèle : haiku** · escalade : sonnet au 2e échec ou fichier sensible · statut : PRÊT
+> **Groupe : W5e-1** (vague W5e) · prérequis : w5-05, w5-14, w5-22 · porte : `bash -n tools/release/check_server_key.sh`
+> **Jauge : ≈ 60 k jetons entrée / 5 k sortie** (effort S) · audit Opus : non
+
 **Vague 5e · Effort S (≈ 0,5 j) · Modèle : haiku · Statut PRÊT (après w5-05, w5-14, w5-22).** Conception : `docs/coordination/DESIGN-W5-BOUTIQUE-LOCATIONS-JETONS.md` § 12 (risque n° 1), `docs/COORDINATION.md` § CI. Branche `claude/sonnet-w5-24`. Rapport : `docs/agent-reports/sonnet-w5-24.md`.
 
 ## Objectif

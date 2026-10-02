@@ -1,5 +1,10 @@
 # w4-10 — Documentation du mode réduit (formats, édition d'essai, console, CGV)
 
+<!-- routage Fable 2026-10-02 -->
+> **Modèle : haiku** · escalade : sonnet au 2e échec ou fichier sensible · statut : PRÊT (après 4b)
+> **Groupe : W4b-3** (vague W4b) · prérequis : w4-07, w4-08, w4-09 · porte : `grep -c 'mode réduit' docs/TRIAL-EDITION.md`
+> **Jauge : ≈ 60 k jetons entrée / 5 k sortie** (effort S) · audit Opus : non
+
 **Vague 4b · Effort S (≈ 0,5 j) · Statut PRÊT (après w4-07, w4-08, w4-09).** Conception : `docs/coordination/DESIGN-W4-MODE-DEGRADE.md`. Branche `claude/sonnet-w4-10`. Rapport : `docs/agent-reports/sonnet-w4-10.md`.
 
 ## Objectif

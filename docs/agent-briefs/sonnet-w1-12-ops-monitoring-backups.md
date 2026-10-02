@@ -1,5 +1,10 @@
 # w1-12 — Supervision minimale et sauvegardes hors site (scripts et runbook, rien d'appliqué)
 
+<!-- routage Fable 2026-10-02 -->
+> **Modèle : sonnet** · escalade : opus audit si diff sécurité/crypto/argent · statut : FAIT (rapport docs/agent-reports/sonnet-w1-12.md) : ne pas relancer
+> **Groupe : —** (vague W1) · prérequis : aucun · porte : `—`
+> **Jauge : ≈ 150 k jetons entrée / 8 k sortie** (effort S) · audit Opus : non
+
 **Vague 1 · Effort S/M (≈ 1 j) · Statut PRÊT.** Branche `claude/sonnet-w1-12`. Rapport : `docs/agent-reports/sonnet-w1-12.md`. **Interdit** : toute connexion au serveur, toute commande `ssh`/`docker` réelle. Livrer des scripts **simulés par défaut** (`--apply` requis), testés localement.
 
 ## Objectif

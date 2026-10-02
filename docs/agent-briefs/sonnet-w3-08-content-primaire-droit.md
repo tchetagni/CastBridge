@@ -1,5 +1,10 @@
 # w3-08 — Contenu « Apprendre » : French et Citizenship en Class 1-5, droit L1-L2, avertissements droit/santé
 
+<!-- routage Fable 2026-10-02 -->
+> **Modèle : sonnet** · escalade : opus audit si diff sécurité/crypto/argent · statut : PRÊT (après w2-12)
+> **Groupe : W3-A** (vague W3) · prérequis : w2-12 · porte : `python3 tools/content-validation/cbvalidate.py content/learn --lot <lot>`
+> **Jauge : ≈ 800 k jetons entrée / 40 k sortie** (effort L) · audit Opus : non
+
 **Vague 3 · Effort L (≈ 3 j) · Statut PRÊT** (après w2-12). Branche `claude/sonnet-w3-08`. Rapport : `docs/agent-reports/sonnet-w3-08.md`.
 
 ## Objectif

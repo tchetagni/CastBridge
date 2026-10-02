@@ -156,3 +156,13 @@ Bon de recharge = chemin principal, commande en espèces = complément ; aucun m
 | **D-W5-2** | Dénominations et premier tirage des bons de recharge ; lots affectés par point focal ou libres | w5-14 (fabrication), w5-23 | `jetons\|60` et `loc-<bouquet>\|30` pour 3 bouquets phares, 200 bons chacun, lots affectés |
 | **D9-bis** | Montants XAF des clés et des locations par bouquet | grille | inchangé (W4) |
 | **D7** | Nom commercial et contact (reçus, « point focal le plus proche », CGV) | textes | inchangé (W4) |
+
+## Routage des modèles (Fable, 2026-10-02) — vague 5 (confirme la colonne « Modèle » : aucune divergence)
+
+Source : `docs/coordination/ROUTAGE-AGENTS-EXECUTION-2026-10-02.md` (grille, jauges, audits, dispatch) ; table machine `docs/agent-briefs/routing.json` ; `python3 tools/agents/dispatch-plan.py --wave <vague> --done <ids>` donne les cahiers lançables. Chaque cahier porte un en-tête « Modèle · Groupe · Jauge ». Modèle **explicite** à chaque lancement ; un seul build JVM à la fois (`tools/agents/gradle-lock.sh`) ; au plus 3 agents en parallèle.
+
+- **haiku** (4) : w5-10, w5-19, w5-23, w5-24 — cahiers à convertir en forme mécanique (avant/après) avant lancement.
+- **sonnet** (20) : w5-01, w5-02, w5-03, w5-04, w5-05, w5-06, w5-07, w5-08, w5-09, w5-11, w5-12, w5-13, w5-14, w5-15, w5-16, w5-17, w5-18, w5-20, w5-21, w5-22.
+- **audit Opus avant fusion** (8) : w5-02, w5-04, w5-06, w5-07, w5-08, w5-12, w5-16, w5-17.
+- **non lançables** : aucun.
+- **opus** n'exécute jamais ; **fable** ne figure dans aucun routage.

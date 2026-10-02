@@ -1,5 +1,10 @@
 # w6-05 — Collecte « toute la TV » (cœur) : tranches horaires par application, écran allumé/éteint, lancements, connexions, Sudoku, journal 14 jours
 
+<!-- routage Fable 2026-10-02 -->
+> **Modèle : sonnet** · escalade : opus audit si diff sécurité/crypto/argent · statut : PRÊT
+> **Groupe : W6a-1** (vague W6a) · prérequis : aucun · porte : `cd android && tools/agents/gradle-lock.sh gradle --offline :core:test --tests '*Collect*' --tests '*TvJournal*'`
+> **Jauge : ≈ 400 k jetons entrée / 20 k sortie** (effort M) · audit Opus : non
+
 **Vague 6a · Effort M (≈ 2 j) · Modèle : sonnet · Statut PRÊT.** Conception : `DESIGN-W6-PARENTAL-PHONE-GATE.md` § 2.2, § 2.3. Branche `claude/sonnet-w6-05`. Rapport : `docs/agent-reports/sonnet-w6-05.md`.
 
 ## Objectif

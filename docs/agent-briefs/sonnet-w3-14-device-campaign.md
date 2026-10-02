@@ -1,5 +1,10 @@
 # w3-14 — Campagne de test sur la vraie TV GaiaOS et le Samsung S21+ : liste de contrôle, scripts, `rental_test` sur matériel
 
+<!-- routage Fable 2026-10-02 -->
+> **Modèle : sonnet** · escalade : opus audit si diff sécurité/crypto/argent · statut : PRÊT (propriétaire présent pour la partie TV)
+> **Groupe : W3-B** (vague W3) · prérequis : w1-01, w1-02, w1-03, w1-04, w1-05, w1-06, w2-01, w2-02, w2-03, w2-04, w2-05 · porte : `bash -n tools/device/*.sh && python3 -m unittest discover -s tools/rental-test -p 'test_*.py'`
+> **Jauge : ≈ 400 k jetons entrée / 20 k sortie** (effort M) · audit Opus : non
+
 **Vague 3 · Effort M (≈ 1 j d'agent + 1 journée avec le propriétaire) · Statut PRÊT** (après la vague 1 et w2-01..05 ; **le propriétaire doit être présent** : installation par l'explorateur de la clé USB, PIN, Bluetooth réel). Branche `claude/sonnet-w3-14`. Rapport : `docs/agent-reports/sonnet-w3-14.md`.
 
 ## Objectif

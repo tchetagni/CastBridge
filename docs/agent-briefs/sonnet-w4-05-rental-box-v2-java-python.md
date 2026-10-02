@@ -1,5 +1,10 @@
 # w4-05 — Miroirs Java (serveur) et Python : demande v2 tolérée, boîte v2 rejouée
 
+<!-- routage Fable 2026-10-02 -->
+> **Modèle : sonnet** · escalade : audit Opus obligatoire (diff sensible) · statut : PRÊT (après w4-01, w1-10 ; exposer makeBox côté émission, cf. index W5)
+> **Groupe : W4a-2** (vague W4a) · prérequis : w4-01, w1-10 · porte : `python3 tools/activation/verify_vectors.py && cd backend && tools/agents/gradle-lock.sh ./mvnw -q -o test -Dtest='RentalVectorsV2Test,DeviceIdentityTest'`
+> **Jauge : ≈ 400 k jetons entrée / 20 k sortie** (effort M) · audit Opus : oui
+
 **Vague 4a · Effort M (≈ 1,5 j) · Statut PRÊT (après w4-01).** Conception : `docs/coordination/DESIGN-W4-ENVELOPPE-LOCATIONS.md` § 4, § 5, § 6. Branche `claude/sonnet-w4-05`. Rapport : `docs/agent-reports/sonnet-w4-05.md`.
 
 ## Objectif

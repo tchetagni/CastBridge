@@ -1,5 +1,10 @@
 # w5-17 — CastBridge-TV : porte-jetons (`TokenHub`, clé HMAC dérivée de la clé d'installation) et Quiz des Millions avec commodités à jetons, « points de défi », partie découverte en essai
 
+<!-- routage Fable 2026-10-02 -->
+> **Modèle : sonnet** · escalade : audit Opus obligatoire (diff sensible) · statut : PRÊT (w5-18 en parallèle)
+> **Groupe : W5d-1** (vague W5d) · prérequis : w5-02, w5-03, w5-04, w4-03 · porte : `cd android && tools/agents/gradle-lock.sh gradle --offline :receiver:compileDebugKotlin`
+> **Jauge : ≈ 800 k jetons entrée / 40 k sortie** (effort L) · audit Opus : oui
+
 **Vague 5d · Effort L (≈ 3 j) · Modèle : sonnet · Statut PRÊT (après w5-02, w5-03, w5-04 ; w4-03 fusionné : `KeystoreWrapper`, `InstallKeyStore` ; w5-18 en parallèle via `TokenHub.spendGuard`).** Conception : `DESIGN-W5-BOUTIQUE-LOCATIONS-JETONS.md` § 6 (lire en entier), § 15 (ligne Quiz). Branche `claude/sonnet-w5-17`. Rapport : `docs/agent-reports/sonnet-w5-17.md`. **Décision du propriétaire (P4) : seul le Quiz consomme des jetons ; Sudoku et Échecs ne changent pas.**
 
 ## Objectif

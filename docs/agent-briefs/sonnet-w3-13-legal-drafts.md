@@ -1,5 +1,10 @@
 # w3-13 — Brouillons juridiques et de vie privée (à faire valider par un juriste)
 
+<!-- routage Fable 2026-10-02 -->
+> **Modèle : sonnet** · escalade : opus audit si diff sécurité/crypto/argent · statut : PRÊT partiel (brouillons marqués « à valider par un juriste »)
+> **Groupe : W3-C** (vague W3) · prérequis : aucun · porte : `ls docs/legal/*.md && grep -L 'pas un avis juridique' docs/legal/*.md | wc -l`
+> **Jauge : ≈ 400 k jetons entrée / 20 k sortie** (effort M) · audit Opus : non
+
 **Vague 3 · Effort M (≈ 1,5 j) · Statut BLOQUÉ PARTIEL** — l'agent rédige des **brouillons** clairement marqués « à valider par un juriste ; ceci n'est pas un avis juridique » ; aucune mise en production de texte. Dépend des décisions D7 (contact), D10 (Langues libres), D13 (tunnel). Branche `claude/sonnet-w3-13`. Rapport : `docs/agent-reports/sonnet-w3-13.md`.
 
 ## Objectif

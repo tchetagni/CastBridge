@@ -1,5 +1,10 @@
 # protect-02 — Porte de classe d'appareil à l'exécution (TV / PAS_TV / INCERTAIN)
 
+<!-- routage Fable 2026-10-02 -->
+> **Modèle : sonnet** · escalade : audit Opus obligatoire (diff sensible) · statut : PRÊT (après protect-01)
+> **Groupe : P-B** (vague PROTECT) · prérequis : protect-01 · porte : `cd android && tools/agents/gradle-lock.sh gradle --offline :core:test --tests '*DeviceClass*'`
+> **Jauge : ≈ 400 k jetons entrée / 20 k sortie** (effort M) · audit Opus : oui
+
 **Modèle recommandé : sonnet** (logique pure testable + UX de dégradation sans faux positifs).
 **Vague B.** Dépend de protect-01 (`BuildConfig.DEV_BUILD`). Parallélisable avec protect-03/04 (fichiers disjoints).
 

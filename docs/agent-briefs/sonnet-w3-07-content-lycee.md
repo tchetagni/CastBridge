@@ -1,5 +1,10 @@
 # w3-07 — Contenu « Apprendre » : étoffer la 2nde et les matières minces de 1re/Tle
 
+<!-- routage Fable 2026-10-02 -->
+> **Modèle : sonnet** · escalade : opus audit si diff sécurité/crypto/argent · statut : PRÊT (après w2-12)
+> **Groupe : W3-A** (vague W3) · prérequis : w2-12 · porte : `python3 tools/content-validation/cbvalidate.py content/learn --lot <lot>`
+> **Jauge : ≈ 800 k jetons entrée / 40 k sortie** (effort L) · audit Opus : non
+
 **Vague 3 · Effort L (≈ 3-4 j) · Statut PRÊT** (après w2-12 : la porte qualité v1 guide la rédaction). Branche `claude/sonnet-w3-07`. Rapport : `docs/agent-reports/sonnet-w3-07.md`.
 
 ## Objectif

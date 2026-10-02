@@ -1,5 +1,10 @@
 # w4-07 — Cœur : `GateState.Degraded`, droits durables, `DegradedPolicy`, badge « CLÉ TERMINÉE »
 
+<!-- routage Fable 2026-10-02 -->
+> **Modèle : sonnet** · escalade : audit Opus obligatoire (diff sensible) · statut : PRÊT (D6 = oui)
+> **Groupe : W4b-1** (vague W4b) · prérequis : w2-04, w1-05, w1-06 · porte : `cd android && tools/agents/gradle-lock.sh gradle --offline :core:test --tests '*Degraded*' --tests '*LicenseAndGate*'`
+> **Jauge : ≈ 400 k jetons entrée / 20 k sortie** (effort M) · audit Opus : oui
+
 **Vague 4b · Effort M (≈ 1,5 j) · Statut PRÊT (décision D6 = OUI).** Conception : `docs/coordination/DESIGN-W4-MODE-DEGRADE.md` § 2, § 3, § 5, § 6. Branche `claude/sonnet-w4-07`. Rapport : `docs/agent-reports/sonnet-w4-07.md`. **Premier cahier de la sous-vague 4b** (w4-08, w4-09 en dépendent).
 
 ## Objectif

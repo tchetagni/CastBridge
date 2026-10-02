@@ -1,5 +1,10 @@
 # w5-15 — CastBridge-TV : écran « Boutique » à la télécommande (leçons à louer, jetons du Quiz, code de recharge, mes locations, mes reçus ; hors ligne, essai, mode réduit, profil enfant), tuile d'accueil, « À propos : Boutique et jetons »
 
+<!-- routage Fable 2026-10-02 -->
+> **Modèle : sonnet** · escalade : opus audit si diff sécurité/crypto/argent · statut : PRÊT (w5-16 en parallèle, contrat ShopStore)
+> **Groupe : W5d-1** (vague W5d) · prérequis : w5-01 · porte : `cd android && tools/agents/gradle-lock.sh gradle --offline :receiver:compileDebugKotlin`
+> **Jauge : ≈ 800 k jetons entrée / 40 k sortie** (effort L) · audit Opus : non
+
 **Vague 5d · Effort L (≈ 3 j) · Modèle : sonnet · Statut PRÊT (après w5-01 ; w5-16 en parallèle : cet écran code contre l'interface `ShopStore` définie **ici** et implémentée par w5-16 ; d'ici là, une implémentation mémoire).** Conception : `DESIGN-W5-BOUTIQUE-LOCATIONS-JETONS.md` § 5.1 (textes), § 6.2, § 6.3, § 6.6, § 8 (lire en entier). Branche `claude/sonnet-w5-15`. Rapport : `docs/agent-reports/sonnet-w5-15.md`. TV de référence : 32 bits, 720p, D-pad seulement ; cibles : toutes les smart TV (aucune hypothèse GaiaOS).
 
 ## Objectif

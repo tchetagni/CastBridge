@@ -1,5 +1,10 @@
 # w6-09 — Serveur : en-tête `X-CB-TV-Proof` exigé pour les lots complets, la boutique et les jetons ; miroir Java de la preuve ; vecteurs rejoués
 
+<!-- routage Fable 2026-10-02 -->
+> **Modèle : sonnet** · escalade : audit Opus obligatoire (diff sensible) · statut : PRÊT (après w6-03)
+> **Groupe : W6b-1** (vague W6b) · prérequis : w6-03 · porte : `cd backend && tools/agents/gradle-lock.sh ./mvnw -q -o test -Dtest='TvProof*Test'`
+> **Jauge : ≈ 400 k jetons entrée / 20 k sortie** (effort M) · audit Opus : oui
+
 **Vague 6b · Effort M (≈ 2 j) · Modèle : sonnet · Statut PRÊT (après w6-03 fusionné ; après w5-06/07/08 si fusionnés, sinon ne gater que les lots).** Conception : `DESIGN-W6-PARENTAL-PHONE-GATE.md` § 3.4 (serveur), § 3.6, § 7 (4). Branche `claude/sonnet-w6-09`. Rapport : `docs/agent-reports/sonnet-w6-09.md`.
 
 ## Objectif

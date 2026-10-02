@@ -1,5 +1,10 @@
 # w5-03 — Cœur Quiz : commodités à jetons (`QuizBoosts`), « points de défi » séparés des jetons, état JSON
 
+<!-- routage Fable 2026-10-02 -->
+> **Modèle : sonnet** · escalade : opus audit si diff sécurité/crypto/argent · statut : PRÊT
+> **Groupe : W5a-1** (vague W5a) · prérequis : aucun · porte : `cd android && tools/agents/gradle-lock.sh gradle --offline :core:test --tests '*Quiz*'`
+> **Jauge : ≈ 400 k jetons entrée / 20 k sortie** (effort M) · audit Opus : non
+
 **Vague 5a · Effort M (≈ 2 j) · Modèle : sonnet · Statut PRÊT.** Conception : `DESIGN-W5-BOUTIQUE-LOCATIONS-JETONS.md` § 6.1, § 6.2, § 15 (ligne Quiz). Branche `claude/sonnet-w5-03`. Rapport : `docs/agent-reports/sonnet-w5-03.md`. Indépendant de w5-02 : ce cahier définit l'**interface** `QuizBoosts` ; le branchement au porte-jetons réel est fait sur la TV par w5-17. **Décision du propriétaire (P4) : seul le Quiz consomme des jetons** ; **décision d'architecte : jamais de mise redistribuée en jetons achetés.**
 
 ## Objectif

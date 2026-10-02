@@ -1,5 +1,10 @@
 # w6-03 — Preuve de TV (`TvProof`), clé d'installation de signature (`InstallSigner`), cache (`ProofCache`), trames et vecteurs
 
+<!-- routage Fable 2026-10-02 -->
+> **Modèle : sonnet** · escalade : audit Opus obligatoire (diff sensible) · statut : PRÊT (w4-01 souhaité)
+> **Groupe : W6a-1** (vague W6a) · prérequis : aucun · porte : `cd android && tools/agents/gradle-lock.sh gradle --offline :core:test --tests '*Proof*'`
+> **Jauge : ≈ 800 k jetons entrée / 40 k sortie** (effort L) · audit Opus : oui
+
 **Vague 6a · Effort L (≈ 3 j) · Modèle : sonnet · Statut PRÊT.** Conception : `DESIGN-W6-PARENTAL-PHONE-GATE.md` § 3.3, § 1 (lignes « Clé d'installation », « Preuve d'activation »). Branche `claude/sonnet-w6-03`. Rapport : `docs/agent-reports/sonnet-w6-03.md`.
 
 ## Objectif

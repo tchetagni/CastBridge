@@ -1,5 +1,10 @@
 # w5-09 — Serveur : console `/admin/shop/**` (commandes, paiements, contrats, bons, jetons, reçus, remboursements, anomalies, CSV)
 
+<!-- routage Fable 2026-10-02 -->
+> **Modèle : sonnet** · escalade : opus audit si diff sécurité/crypto/argent · statut : PRÊT (après 5b)
+> **Groupe : W5b-3** (vague W5b) · prérequis : w5-06, w5-07, w5-08 · porte : `cd backend && tools/agents/gradle-lock.sh ./mvnw -q -o test -Dtest='ShopAdmin*Test'`
+> **Jauge : ≈ 400 k jetons entrée / 20 k sortie** (effort M) · audit Opus : non
+
 **Vague 5b · Effort M (≈ 2 j) · Modèle : sonnet · Statut PRÊT (après w5-06, w5-07, w5-08).** Conception : `DESIGN-W5-BOUTIQUE-LOCATIONS-JETONS.md` § 4.4 (dernière ligne), § 5.4, § 6.5, § 10. Branche `claude/sonnet-w5-09`. Rapport : `docs/agent-reports/sonnet-w5-09.md`.
 
 ## Objectif

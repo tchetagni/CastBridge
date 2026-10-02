@@ -1,5 +1,10 @@
 # w5-10 — Battement de cœur : champs du porte-jetons et de la boutique (client cœur + serveur), recoupement avec les bons livrés
 
+<!-- routage Fable 2026-10-02 -->
+> **Modèle : haiku** · escalade : sonnet au 2e échec ou fichier sensible · statut : PRÊT (après protect-05, w5-08)
+> **Groupe : W5b-3** (vague W5b) · prérequis : protect-05, w5-08 · porte : `cd android && tools/agents/gradle-lock.sh gradle --offline :core:test --tests '*DeviceReport*' && cd backend && tools/agents/gradle-lock.sh ./mvnw -q -o test -Dtest=DevicesApiTest`
+> **Jauge : ≈ 60 k jetons entrée / 5 k sortie** (effort S) · audit Opus : non
+
 **Vague 5b (fin) · Effort S (≈ 0,5 j) · Modèle : haiku · Statut PRÊT (après protect-05 **fusionné** et w5-08).** Conception : `DESIGN-W5-BOUTIQUE-LOCATIONS-JETONS.md` § 6.5 (battement de cœur), § 9 (protection). Branche `claude/sonnet-w5-10`. Rapport : `docs/agent-reports/sonnet-w5-10.md`.
 
 ## Objectif

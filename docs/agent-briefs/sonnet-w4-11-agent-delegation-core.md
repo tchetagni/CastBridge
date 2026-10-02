@@ -1,5 +1,10 @@
 # w4-11 — Cœur : délégation (`type=delegation`, portée `DELEGATE`), activation « avec ticket », grille de prix signée, journal des ventes chaîné, reçus, vecteurs
 
+<!-- routage Fable 2026-10-02 -->
+> **Modèle : sonnet** · escalade : audit Opus obligatoire (diff sensible) · statut : PRÊT **amendé par W5** (plus de master=/agentx=, maxRentalDays=0, champs confirmOrders/sellVouchers)
+> **Groupe : W4c-1** (vague W4c) · prérequis : aucun · porte : `cd android && tools/agents/gradle-lock.sh gradle --offline :core:test --tests '*Delegation*' --tests '*Ticketed*' --tests '*Sales*'`
+> **Jauge : ≈ 800 k jetons entrée / 40 k sortie** (effort L) · audit Opus : oui
+
 **Vague 4c · Effort L (≈ 3 j) · Statut PRÊT.** Conception : `docs/coordination/DESIGN-W4-VENTE-TERRAIN.md` § 3, § 4, § 6 (lire en entier). Branche `claude/sonnet-w4-11`. Rapport : `docs/agent-reports/sonnet-w4-11.md`. **Premier cahier de la sous-vague 4c** : tous les autres en dépendent. Dépend de w4-01 (boîte v2 : `RentalKeys.makeBoxV2/openBox`, `X25519`) pour la ligne `master=`.
 
 ## Objectif

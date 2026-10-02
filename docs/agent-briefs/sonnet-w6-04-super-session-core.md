@@ -1,5 +1,10 @@
 # w6-04 — `SuperSession` (cœur) : session super administrateur limitée, horloge monotone, scellée
 
+<!-- routage Fable 2026-10-02 -->
+> **Modèle : sonnet** · escalade : audit Opus obligatoire (diff sensible) · statut : PRÊT
+> **Groupe : W6a-1** (vague W6a) · prérequis : aucun · porte : `cd android && tools/agents/gradle-lock.sh gradle --offline :core:test --tests '*SuperSession*'`
+> **Jauge : ≈ 150 k jetons entrée / 8 k sortie** (effort S) · audit Opus : oui
+
 **Vague 6a · Effort S (≈ 1 j) · Modèle : sonnet · Statut PRÊT.** Conception : `DESIGN-W6-PARENTAL-PHONE-GATE.md` § 4.2, § 4.3. Branche `claude/sonnet-w6-04`. Rapport : `docs/agent-reports/sonnet-w6-04.md`.
 
 ## Objectif

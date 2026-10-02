@@ -1,5 +1,10 @@
 # w2-08 — Un exécuteur partagé pour CastBridge-TV ; plus de `Thread {}` bruts
 
+<!-- routage Fable 2026-10-02 -->
+> **Modèle : sonnet** · escalade : opus audit si diff sécurité/crypto/argent · statut : PRÊT (HomeScreen : w2-04 prioritaire)
+> **Groupe : W2-A** (vague W2) · prérequis : aucun · porte : `cd android && tools/agents/gradle-lock.sh gradle --offline :receiver:compileDebugKotlin`
+> **Jauge : ≈ 150 k jetons entrée / 8 k sortie** (effort S) · audit Opus : non
+
 **Vague 2 · Effort S (≈ 4 h) · Statut PRÊT.** Branche `claude/sonnet-w2-08`. Rapport : `docs/agent-reports/sonnet-w2-08.md`.
 
 ## Objectif

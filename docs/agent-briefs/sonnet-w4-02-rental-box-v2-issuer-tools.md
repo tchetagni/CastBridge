@@ -1,5 +1,10 @@
 # w4-02 — Outils d'émission (console téléphone, bureau, `OwnerCli`) : demande v2 et boîte v2
 
+<!-- routage Fable 2026-10-02 -->
+> **Modèle : sonnet** · escalade : opus audit si diff sécurité/crypto/argent · statut : PRÊT (après w4-01)
+> **Groupe : W4a-2** (vague W4a) · prérequis : w4-01 · porte : `cd android && tools/agents/gradle-lock.sh gradle --offline :core:test --tests '*OwnerCli*' && cd ../tools/activation-desktop && tools/agents/gradle-lock.sh gradle --offline test`
+> **Jauge : ≈ 400 k jetons entrée / 20 k sortie** (effort M) · audit Opus : non
+
 **Vague 4a · Effort M (≈ 1,5 j) · Statut PRÊT (après w4-01).** Conception : `docs/coordination/DESIGN-W4-ENVELOPPE-LOCATIONS.md` § 4, § 6. Branche `claude/sonnet-w4-02`. Rapport : `docs/agent-reports/sonnet-w4-02.md`.
 
 ## Objectif

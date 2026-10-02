@@ -1,5 +1,10 @@
 # w5-16 — CastBridge-TV : `ShopHub` (routes `/api/shop/*`, `/api/tokens/*`, `GET /api/activation/proof`), `ShopStore` (cache signé), `ShopClient` (TV en ligne : mêmes routes serveur), `RentalOnlineInstaller`, télémétrie
 
+<!-- routage Fable 2026-10-02 -->
+> **Modèle : sonnet** · escalade : audit Opus obligatoire (diff sensible) · statut : PRÊT **amendé W6** (pas de route proof sans nonce)
+> **Groupe : W5d-1** (vague W5d) · prérequis : w5-01, w5-02, w5-04 · porte : `cd android && tools/agents/gradle-lock.sh gradle --offline :core:test --tests '*RentalApi*' && cd android && tools/agents/gradle-lock.sh gradle --offline :receiver:compileDebugKotlin`
+> **Jauge : ≈ 800 k jetons entrée / 40 k sortie** (effort L) · audit Opus : oui
+
 **Vague 5d · Effort L (≈ 3 j) · Modèle : sonnet · Statut PRÊT (après w5-01, w5-02, w5-04 ; serveur 5b en préprod ou `FakeShopApi` ; w5-15 en parallèle).** Conception : `DESIGN-W5-BOUTIQUE-LOCATIONS-JETONS.md` § 3.4 (a), § 4.5 (étapes 2, 7), § 4.7, § 5.2, § 6.4, § 6.5, § 9, § 15. Branche `claude/sonnet-w5-16`. Rapport : `docs/agent-reports/sonnet-w5-16.md`.
 
 ## Objectif

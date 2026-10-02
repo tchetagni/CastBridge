@@ -1,5 +1,10 @@
 # w4-08 — CastBridge-TV : câblage du mode réduit (routes, tuiles, écran, réévaluation périodique)
 
+<!-- routage Fable 2026-10-02 -->
+> **Modèle : sonnet** · escalade : opus audit si diff sécurité/crypto/argent · statut : PRÊT (après w4-07)
+> **Groupe : W4b-2** (vague W4b) · prérequis : w4-07 · porte : `cd android && tools/agents/gradle-lock.sh gradle --offline :receiver:compileDebugKotlin`
+> **Jauge : ≈ 400 k jetons entrée / 20 k sortie** (effort M) · audit Opus : non
+
 **Vague 4b · Effort M (≈ 1,5 j) · Statut PRÊT (après w4-07).** Conception : `docs/coordination/DESIGN-W4-MODE-DEGRADE.md` § 4, § 5. Branche `claude/sonnet-w4-08`. Rapport : `docs/agent-reports/sonnet-w4-08.md`.
 
 ## Objectif

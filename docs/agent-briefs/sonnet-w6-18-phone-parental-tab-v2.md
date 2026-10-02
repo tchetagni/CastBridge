@@ -1,5 +1,10 @@
 # w6-18 — CastBridge (téléphone) : onglet Parental v2 (Aujourd'hui / Semaine, « Toute la TV », parents de cette TV, confidentialité), tirage Wi-Fi, mur `PARENTAL_*`
 
+<!-- routage Fable 2026-10-02 -->
+> **Modèle : sonnet** · escalade : opus audit si diff sécurité/crypto/argent · statut : PRÊT (contrat w6-16)
+> **Groupe : W6d-1** (vague W6d) · prérequis : w6-01, w6-02, w6-15 · porte : `cd android && tools/agents/gradle-lock.sh gradle --offline :sender:compileDebugKotlin`
+> **Jauge : ≈ 800 k jetons entrée / 40 k sortie** (effort L) · audit Opus : non
+
 **Vague 6d · Effort L (≈ 3 j) · Modèle : sonnet · Statut PRÊT (après 6a, w6-15 fusionnés ; w6-16 en parallèle : contrat `GateWall`/`PhoneGateRuntime`).** Conception : `DESIGN-W6-PARENTAL-PHONE-GATE.md` § 2.7, § 2.8, § 3.7 (lignes parental), § 3.9. Branche `claude/sonnet-w6-18`. Rapport : `docs/agent-reports/sonnet-w6-18.md`.
 
 ## Objectif

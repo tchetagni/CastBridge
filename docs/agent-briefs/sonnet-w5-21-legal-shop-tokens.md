@@ -1,5 +1,10 @@
 # w5-21 — Brouillons juridiques de la boutique : CGV boutique, conditions des bons de recharge, registre des traitements, indicateurs « jetons et mineurs » (pas un avis juridique)
 
+<!-- routage Fable 2026-10-02 -->
+> **Modèle : sonnet** · escalade : opus audit si diff sécurité/crypto/argent · statut : BLOQUÉ partiel (juriste, D7, montants en `[…]`)
+> **Groupe : W5e-1** (vague W5e) · prérequis : aucun · porte : `grep -L 'pas un avis juridique' docs/legal/*.md | wc -l`
+> **Jauge : ≈ 400 k jetons entrée / 20 k sortie** (effort M) · audit Opus : non
+
 **Vague 5e · Effort M (≈ 2 j) · Modèle : sonnet · Statut BLOQUÉ partiel (validation par un juriste ; D7 pour le nom commercial et le contact ; D-W5-1/D9-bis pour les montants : laissés en `[…]`).** Conception : `docs/coordination/DESIGN-W5-BOUTIQUE-LOCATIONS-JETONS.md` § 5, § 6.1, § 6.6, § 9, § 11. Branche `claude/sonnet-w5-21`. Rapport : `docs/agent-reports/sonnet-w5-21.md`. Si `sonnet-w3-13` a été fusionné : même dossier, même ton, renvois croisés ; sinon créer `docs/legal/README.md` (« projets, à valider par un avocat de chaque marché »).
 
 ## Objectif

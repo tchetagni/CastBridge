@@ -1,5 +1,10 @@
 # protect-06 — Étiquettes éthiques embarquées + filigrane de provenance
 
+<!-- routage Fable 2026-10-02 -->
+> **Modèle : haiku** · escalade : sonnet au 2e échec ou fichier sensible · statut : PRÊT (D7 placeholder)
+> **Groupe : P-C** (vague PROTECT) · prérequis : protect-01 · porte : `ls LICENSE-NOTICE android/receiver/src/main/assets/NOTICE && grep -c 'license_notice_short' android/receiver/src/main/res/values/strings.xml`
+> **Jauge : ≈ 60 k jetons entrée / 5 k sortie** (effort S) · audit Opus : non
+
 **Modèle recommandé : haiku** (fichiers/ressources, mécanique bornée).
 **Vague C/D.** Dépend de protect-01 pour `BuildConfig.BUILD_WATERMARK` et la `<meta-data>` du manifeste (réfère `@string/license_notice_short`).
 

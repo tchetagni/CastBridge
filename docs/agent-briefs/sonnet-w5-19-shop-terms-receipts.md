@@ -1,5 +1,10 @@
 # w5-19 — Conditions de vente de la boutique (acceptation versionnée sur TV et téléphone) et magasin local des reçus
 
+<!-- routage Fable 2026-10-02 -->
+> **Modèle : haiku** · escalade : sonnet au 2e échec ou fichier sensible · statut : PRÊT (texte CGV version 0 d'attente)
+> **Groupe : W5d-2** (vague W5d) · prérequis : w5-01 · porte : `cd android && tools/agents/gradle-lock.sh gradle --offline :core:test --tests '*ShopTerms*' --tests '*ReceiptStore*'`
+> **Jauge : ≈ 60 k jetons entrée / 5 k sortie** (effort S) · audit Opus : non
+
 **Vague 5d · Effort S/M (≈ 1 j) · Modèle : haiku · Statut PRÊT (après w5-01 ; le texte des CGV vient de w5-21 : d'ici là, version « 0 » = texte d'attente clairement marqué « projet, à valider »).** Conception : `DESIGN-W5-BOUTIQUE-LOCATIONS-JETONS.md` § 9 (tunnel / conditions), § 11. Branche `claude/sonnet-w5-19`. Rapport : `docs/agent-reports/sonnet-w5-19.md`.
 
 ## Objectif

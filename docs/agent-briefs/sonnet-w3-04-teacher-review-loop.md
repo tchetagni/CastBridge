@@ -1,5 +1,10 @@
 # w3-04 — Boucle de relecture enseignants : exports par pack, rapports QA par lot, import des décisions
 
+<!-- routage Fable 2026-10-02 -->
+> **Modèle : sonnet** · escalade : opus audit si diff sécurité/crypto/argent · statut : PRÊT (après w2-12 ; D16 relecteurs)
+> **Groupe : W3-A** (vague W3) · prérequis : w2-12 · porte : `python3 -m unittest discover -s tools/content-validation -p 'test_*.py'`
+> **Jauge : ≈ 400 k jetons entrée / 20 k sortie** (effort M) · audit Opus : non
+
 **Vague 3 · Effort M (≈ 2 j d'agent, puis le temps des enseignants) · Statut PRÊT** (après w2-12 ; D16 pour recruter les relecteurs). Branche `claude/sonnet-w3-04`. Rapport : `docs/agent-reports/sonnet-w3-04.md`.
 
 ## Objectif

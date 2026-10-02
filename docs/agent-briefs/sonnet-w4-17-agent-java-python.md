@@ -1,5 +1,10 @@
 # w4-17 — Miroirs Java et Python : type `delegation`, activation avec ticket, journal chaîné, grille, reçus (vecteurs `agent-vectors.json`)
 
+<!-- routage Fable 2026-10-02 -->
+> **Modèle : sonnet** · escalade : opus audit si diff sécurité/crypto/argent · statut : PRÊT **amendé W5** (Delegation.java sans master=)
+> **Groupe : W4c-2** (vague W4c) · prérequis : w4-11 · porte : `python3 tools/activation/verify_vectors.py && cd backend && tools/agents/gradle-lock.sh ./mvnw -q -o test -Dtest=AgentVectorsTest`
+> **Jauge : ≈ 400 k jetons entrée / 20 k sortie** (effort M) · audit Opus : non
+
 **Vague 4c · Effort M (≈ 1,5 j) · Statut PRÊT (après w4-11 ; **avant** w4-16 qui l'utilise).** Conception : `docs/coordination/DESIGN-W4-VENTE-TERRAIN.md` § 3, § 4, § 6. Branche `claude/sonnet-w4-17`. Rapport : `docs/agent-reports/sonnet-w4-17.md`.
 
 ## Objectif

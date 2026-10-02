@@ -1,5 +1,10 @@
 # w1-03 — Durcissement de l'API HTTP de CastBridge-TV
 
+<!-- routage Fable 2026-10-02 -->
+> **Modèle : sonnet** · escalade : audit Opus obligatoire (diff sensible) · statut : PRÊT
+> **Groupe : W1-A** (vague W1) · prérequis : aucun · porte : `cd android && tools/agents/gradle-lock.sh gradle --offline :core:test --tests '*TvHardening*'`
+> **Jauge : ≈ 150 k jetons entrée / 8 k sortie** (effort S) · audit Opus : oui
+
 **Vague 1 · Effort S (≈ 5 h) · Statut PRÊT.** Branche `claude/sonnet-w1-03`. Rapport : `docs/agent-reports/sonnet-w1-03.md`.
 
 ## Objectif

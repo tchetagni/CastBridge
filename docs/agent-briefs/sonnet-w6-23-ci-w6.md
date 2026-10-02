@@ -1,5 +1,10 @@
 # w6-23 — CI : vecteurs de preuve (Python, Java), contrôle « aucun haché super-admin » sur les APK distribuables, tests des règles de sauvegarde et des routes, § CI de COORDINATION
 
+<!-- routage Fable 2026-10-02 -->
+> **Modèle : haiku** · escalade : sonnet au 2e échec ou fichier sensible · statut : PRÊT (après w6-10, w6-11, w6-15, w6-19)
+> **Groupe : W6e-1** (vague W6e) · prérequis : w6-10, w6-11, w6-15, w6-19 · porte : `python3 -c "import yaml,glob;[yaml.safe_load(open(f)) for f in glob.glob('.github/workflows/*.yml')]"`
+> **Jauge : ≈ 60 k jetons entrée / 5 k sortie** (effort S) · audit Opus : non
+
 **Vague 6e · Effort S (≈ 0,5 j) · Modèle : haiku · Statut PRÊT (après w6-10, w6-11, w6-15, w6-19 fusionnés).** Conception : `DESIGN-W6-PARENTAL-PHONE-GATE.md` § 4.3, § 5 (tests). Branche `claude/sonnet-w6-23`. Rapport : `docs/agent-reports/sonnet-w6-23.md`.
 
 ## Objectif

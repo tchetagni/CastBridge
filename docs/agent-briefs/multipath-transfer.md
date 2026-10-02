@@ -1,5 +1,10 @@
 # Brief : transfert de fichiers à débit maximal (plusieurs voies en même temps, fichier découpé)
 
+<!-- routage Fable 2026-10-02 -->
+> **Modèle : sonnet** · escalade : opus audit si diff sécurité/crypto/argent · statut : LANCÉ (BOARD) : laisser finir ; relance = découper
+> **Groupe : X-1** (vague X) · prérequis : aucun · porte : `cd android && tools/agents/gradle-lock.sh gradle --offline :core:test --tests '*Transfer*'`
+> **Jauge : ≈ 800 k jetons entrée / 40 k sortie** (effort L) · audit Opus : non · découpage proposé : voir ROUTAGE § 2.3
+
 Agent cloud. Base `origin/integration/agents`. Branche `claude/multipath-transfer`. Protocole `docs/COORDINATION.md` (rapport vivant `docs/agent-reports/multipath-transfer.md`). Pas de PR, pas de main. Français, aucun secret.
 Lire : `core/.../tv/ResumableUpload*.kt`, `core/.../tv/ResumableBtUpload*`, `sender/UploadService.kt`, `sender/BtUploadService.kt`, `receiver` serveur d'envoi (`ReceiverServer`, stockage `Storage*`, `docs/STORAGE.md`), `docs/BT-PLUG-AND-PLAY.md`.
 

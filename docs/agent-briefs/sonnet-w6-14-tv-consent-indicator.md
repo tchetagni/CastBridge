@@ -1,5 +1,10 @@
 # w6-14 — CastBridge-TV : écran de consentement du détenteur, page « Téléphones des parents », indicateur permanent (adulte / enfant), « À propos : contrôle parental et rapports »
 
+<!-- routage Fable 2026-10-02 -->
+> **Modèle : sonnet** · escalade : opus audit si diff sécurité/crypto/argent · statut : PRÊT (après w6-06)
+> **Groupe : W6c-1** (vague W6c) · prérequis : w6-06 · porte : `cd android && tools/agents/gradle-lock.sh gradle --offline :receiver:compileDebugKotlin`
+> **Jauge : ≈ 400 k jetons entrée / 20 k sortie** (effort M) · audit Opus : non
+
 **Vague 6c · Effort M (≈ 2 j) · Modèle : sonnet · Statut PRÊT (après w6-06 fusionné ; w6-12 fournit `ActivationCenter.identityLine()` à afficher si disponible).** Conception : `DESIGN-W6-PARENTAL-PHONE-GATE.md` § 2.1, § 2.6, § 6. Branche `claude/sonnet-w6-14`. Rapport : `docs/agent-reports/sonnet-w6-14.md`.
 
 ## Objectif

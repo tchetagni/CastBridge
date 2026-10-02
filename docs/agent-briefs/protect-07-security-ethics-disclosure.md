@@ -1,5 +1,10 @@
 # protect-07 — SECURITY.md + ETHICS.md (divulgation responsable, safe harbour, charte IA)
 
+<!-- routage Fable 2026-10-02 -->
+> **Modèle : haiku** · escalade : sonnet au 2e échec ou fichier sensible · statut : PRÊT (D7 placeholder ; coord. w3-13)
+> **Groupe : P-D** (vague PROTECT) · prérequis : aucun · porte : `ls SECURITY.md ETHICS.md`
+> **Jauge : ≈ 60 k jetons entrée / 5 k sortie** (effort S) · audit Opus : non
+
 **Modèle recommandé : haiku** (rédaction cadrée).
 **Vague D, indépendant.** Coordination w3-13 (CGV/CGU) et `docs/CONDITIONS-ASSISTANCE-A-DISTANCE.md` : textes **distincts** (ici : sécurité et éthique technique, pas le contrat commercial).
 

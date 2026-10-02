@@ -1,5 +1,10 @@
 # w4-09 — Lots, locations et balayage en mode réduit ; liste de contrôle TV
 
+<!-- routage Fable 2026-10-02 -->
+> **Modèle : sonnet** · escalade : opus audit si diff sécurité/crypto/argent · statut : PRÊT (après w4-07 ; w3-03 souhaitable)
+> **Groupe : W4b-2** (vague W4b) · prérequis : w4-07 · porte : `cd android && tools/agents/gradle-lock.sh gradle --offline :core:test --tests '*OwnedLots*'`
+> **Jauge : ≈ 150 k jetons entrée / 8 k sortie** (effort S) · audit Opus : non
+
 **Vague 4b · Effort S (≈ 0,5-1 j) · Statut PRÊT (après w4-07).** Conception : `docs/coordination/DESIGN-W4-MODE-DEGRADE.md` § 2 (tableau), § 3 (dernier point), § 5. Branche `claude/sonnet-w4-09`. Rapport : `docs/agent-reports/sonnet-w4-09.md`.
 
 ## Objectif
