@@ -1,6 +1,7 @@
 package castbridge.core.owner
 
 import castbridge.core.crypto.MemoryWrapper
+import castbridge.core.crypto.PlainWrapper
 import castbridge.core.lots.Access
 import castbridge.core.lots.Right
 import java.io.File
@@ -41,8 +42,14 @@ class TvProofTest {
     private fun proof(token: String? = act(), access: TvAccess = full, fp: Fingerprints = devA, signer: InstallSigner = install, n: String = nonce, seq: Long = 5, now: Long = t0, name: String = "Salon", grace: Boolean = false) =
         TvProof.build(signer, fp, n, seq, now, access, token, name, grace, uptimeMs = 12_345)
 
-    private fun verify(token: String, pinned: TrustedKey? = pin, now: Long = t0 + 60_000, consumed: Set<String> = emptySet(), lastSeq: Long? = null, ringOf: KeyRing = ring, n: String = nonce, rev: RevocationState = RevocationState()) =
-        TvProof.verify(token, n, pinned, ringOf, now, consumed, lastSeq, rev)
+    private var mono = 0L
+    private fun clock() = TvClock(mono = { mono })
+    /** A phone book that issued [nonce] at [now] (unless [consumed] says it is already used): the way a phone would have sent the challenge. */
+    private fun book(n: String = nonce, now: Long = t0 + 60_000, consumed: Set<String> = emptySet(), clock: TvClock = clock()) = NonceBook(clock).also { if (n !in consumed) it.issue(now, n) }
+
+    private fun verify(token: String, pinned: TrustedKey? = pin, now: Long = t0 + 60_000, consumed: Set<String> = emptySet(), lastSeq: Long? = null, ringOf: KeyRing = ring, n: String = nonce, rev: RevocationState = RevocationState(),
+                       lastAct: ActivationMark? = null, nonces: NonceBook = book(n, now, consumed)) =
+        TvProof.verify(token, n, pinned, ringOf, now, nonces, lastSeq, lastAct, rev)
 
     private fun rejected(r: ProofResult, why: ProofRejection): ProofResult.Rejected { assertIs<ProofResult.Rejected>(r, r.toString()); assertEquals(why, r.reason, r.message); return r }
 
@@ -204,6 +211,91 @@ class TvProofTest {
         rejected(verify(Envelope(e.type, e.keyId, e.seq, e.nonce, e.issuedAt, e.notBefore, e.expiresAt, e.target, body, install.sign(payload)).encode()), ProofRejection.MALFORMED)
     }
 
+    // ---- audit w6-03: the pin question is authenticated ----
+    @Test fun theNeedsPinCodeIsOnlyOfferedWhenTheActivationChainPasses() {
+        rejected(verify(proof(act(fp = devB), fp = devA), pinned = null), ProofRejection.CODE_MISMATCH)           // a TV claiming another TV's code
+        rejected(verify(proof(act(signer = rogue), fp = devA), pinned = null), ProofRejection.ACTIVATION_INVALID)
+        rejected(verify(proof(), pinned = null, ringOf = KeyRing(listOf(desk.trusted()), setOf(desk.keyId))), ProofRejection.ACTIVATION_INVALID)
+        assertIs<ProofResult.NeedsPin>(verify(proof(), pinned = null))
+    }
+
+    @Test fun theIdentityChangedQuestionIsOnlyOfferedWhenTheActivationChainPasses() {
+        rejected(verify(proof(act(fp = devB), fp = devA, signer = install2)), ProofRejection.CODE_MISMATCH)
+        rejected(verify(proof(act(signer = rogue), signer = install2)), ProofRejection.ACTIVATION_INVALID)
+        assertIs<ProofResult.IdentityChanged>(verify(proof(signer = install2)))
+    }
+
+    @Test fun aReinstalledTvWithSeqZeroIsNotAReplayAgainstTheOldKeyCounter() {
+        assertIs<ProofResult.IdentityChanged>(verify(proof(signer = install2, seq = 0), lastSeq = 50))
+    }
+
+    @Test fun aProofWithoutActivationStillGetsThePinQuestion() { assertIs<ProofResult.NeedsPin>(verify(proof(token = null, access = full), pinned = null)) }
+
+    @Test fun thePinQuestionDoesNotConsumeTheChallengeButTheAnswerDoes() {
+        val b = book(); val token = proof()
+        assertIs<ProofResult.NeedsPin>(verify(token, pinned = null, nonces = b))
+        assertIs<ProofResult.Accepted>(verify(token, nonces = b))
+        rejected(verify(token, nonces = b), ProofRejection.REPLAY)
+    }
+
+    // ---- audit w6-03: borrowed activation ----
+    /** KNOWN LIMIT (finding 1, designed apart): the install key is not bound to the activation, so a copied activation of TV A carried by ANOTHER device's install key is accepted. Flip this test when the binding lands. */
+    @Test fun borrowedActivationAcceptedUntilTheBindingLands() {
+        val r = assertIs<ProofResult.Accepted>(verify(proof(act(fp = devA), fp = devA, signer = install2), pinned = TrustedKey(install2.keyId, install2.publicKeyBase64)))
+        assertEquals(DeviceCode.of(devA), r.proof.tvCode); assertEquals(install2.keyId, r.proof.installKeyId)
+    }
+
+    // ---- audit w6-03: activation rollback ----
+    @Test fun anOlderActivationOfTheSameIssuerKeyIsRefusedButAnotherIssuerOrANewerOneIsNot() {
+        val a = Activation.decode(act(seq = 7))!!
+        rejected(verify(proof(act(seq = 6)), lastAct = ActivationMark(a.keyId, 7)), ProofRejection.ACTIVATION_INVALID)
+        assertIs<ProofResult.Accepted>(verify(proof(act(seq = 7)), lastAct = ActivationMark(a.keyId, 7)))
+        assertIs<ProofResult.Accepted>(verify(proof(act(seq = 8)), lastAct = ActivationMark(a.keyId, 7)))
+        assertIs<ProofResult.Accepted>(verify(proof(act(seq = 2)), lastAct = ActivationMark("0000000000000000", 99)))
+    }
+
+    @Test fun theCacheFeedsTheActivationMarkBack() {
+        val c = ProofCache(object : ProofCacheStore { var t: String? = null; override fun load() = t; override fun save(text: String) { t = text } }, clock(), MemoryWrapper(ByteArray(32) { 1 }))
+        val ok = assertIs<ProofResult.Accepted>(verify(proof(act(seq = 7))))
+        c.put(ok.proof, t0)
+        assertEquals(ActivationMark(desk.keyId, 7), c.activationMark(ok.proof.tvCode))
+        c.dropProof(ok.proof.tvCode)
+        rejected(verify(proof(act(seq = 3)), lastAct = c.activationMark(ok.proof.tvCode)), ProofRejection.ACTIVATION_INVALID)
+    }
+
+    // ---- audit w6-03: NonceBook ----
+    @Test fun aNonceIsIssuedOnceConsumedOnceAndExpiresAfterTenMinutes() {
+        val b = NonceBook(clock()); val n = b.issue(t0)
+        assertTrue(Regex("^[0-9a-f]{64}$").matches(n)); assertNotEquals(n, b.issue(t0))
+        assertTrue(b.isLive(n, t0)); assertTrue(b.consume(n, t0 + 1000)); assertFalse(b.consume(n, t0 + 1000)); assertFalse(b.isLive(n, t0))
+        val m = b.issue(t0)
+        assertTrue(b.isLive(m, t0 + 10 * 60_000L))
+        assertFalse(b.isLive(m, t0 + 10 * 60_000L + 1)); assertFalse(b.consume(m, t0 + 10 * 60_000L + 1))
+    }
+
+    @Test fun aWoundBackWallClockDoesNotKeepAnExpiredNonceAlive() {
+        val c = clock(); val b = NonceBook(c); val n = b.issue(t0); mono += 11 * 60_000L
+        assertFalse(b.isLive(n, t0 - 30 * day))
+    }
+
+    @Test fun theNonceBookIsBoundedAndForgetsTheOldestFirst() {
+        val b = NonceBook(clock(), maxSize = 3)
+        val ns = (1..5).map { b.issue(t0) }
+        assertEquals(3, b.size()); assertFalse(b.isLive(ns[0], t0)); assertFalse(b.isLive(ns[1], t0)); assertTrue(b.isLive(ns[4], t0))
+    }
+
+    @Test fun anUnissuedOrExpiredChallengeIsRefusedByVerifyAsAReplay() {
+        rejected(verify(proof(), nonces = NonceBook(clock())), ProofRejection.REPLAY)
+        val b = NonceBook(clock()); b.issue(t0 + 60_000, nonce)
+        rejected(verify(proof(), now = t0 + 60_000 + 11 * 60_000L, nonces = b), ProofRejection.REPLAY)
+    }
+
+    @Test fun aSecondUseOfTheSameAnsweredChallengeIsAReplayEvenAfterARefusal() {
+        val b = book(); val token = proof(access = full.copy(trial = true))
+        rejected(verify(token, nonces = b), ProofRejection.TRIAL)
+        rejected(verify(token, nonces = b), ProofRejection.REPLAY)
+    }
+
     // ---- frames ----
     @Test fun theTwoFramesAreFreeTypesAndTheProofFitsAFrame() {
         assertEquals(9, OwnerFrames.PROOF_REQUEST); assertEquals(10, OwnerFrames.PROOF)
@@ -225,30 +317,81 @@ class TvProofTest {
         assertNotEquals(install.keyId, install2.keyId)
     }
 
-    @Test fun theSealedSeedSurvivesAReloadAndABadWrapperRegenerates() {
-        val store = object : InstallSignerStore { var blob: ByteArray? = null; override fun load() = blob; override fun save(blob: ByteArray) { this.blob = blob } }
+    private class MemSigStore(var blob: ByteArray? = null, var failKeep: Boolean = false) : InstallSignerStore {
+        val kept = ArrayList<Pair<ByteArray, Long>>()
+        override fun load() = blob
+        override fun save(blob: ByteArray) { this.blob = blob }
+        override fun keepUnreadable(blob: ByteArray, nowMs: Long) { if (failKeep) throw java.io.IOException("disque plein"); kept += blob to nowMs }
+    }
+
+    @Test fun theSealedSeedSurvivesAReloadAndABadWrapperRegeneratesKeepingTheOldBlob() {
+        val store = MemSigStore()
         val w = MemoryWrapper(ByteArray(32) { 7 })
         val first = InstallSigner.loadOrCreate(store, w, SecureRandom())
-        assertFalse(first.regenerated)
+        assertFalse(first.regenerated); assertTrue(store.kept.isEmpty())
         assertFalse(Base64.getEncoder().encodeToString(store.blob!!).contains(first.signer.publicKeyBase64.take(10)))
+        val old = store.blob!!
         val again = InstallSigner.loadOrCreate(store, w)
         assertFalse(again.regenerated); assertEquals(first.signer.keyId, again.signer.keyId)
-        val other = InstallSigner.loadOrCreate(store, MemoryWrapper(ByteArray(32) { 9 }))
+        val other = InstallSigner.loadOrCreate(store, MemoryWrapper(ByteArray(32) { 9 }), SecureRandom(), nowMs = { 4242L })
         assertTrue(other.regenerated); assertNotEquals(first.signer.keyId, other.signer.keyId)
+        assertEquals(1, store.kept.size); assertContentEquals(old, store.kept[0].first); assertEquals(4242L, store.kept[0].second)
+        assertEquals(first.signer.keyId, InstallSigner.loadOrCreate(MemSigStore(old), w).signer.keyId, "the kept blob opens again with the right wrapper")
+    }
+
+    /** Fake wrapper: [failures] unwraps answer null (a transient hiccup), then it delegates; [boom] throws. */
+    private class FlakyWrapper(val inner: MemoryWrapper, var failures: Int = 0, val boom: Boolean = false) : castbridge.core.crypto.SecretWrapper {
+        var unwraps = 0
+        override fun wrap(plain: ByteArray) = inner.wrap(plain)
+        override fun unwrap(blob: ByteArray): ByteArray? { unwraps++; if (boom) throw IllegalStateException("Keystore indisponible"); return if (failures-- > 0) null else inner.unwrap(blob) }
+        override val label = "flaky"
+    }
+
+    @Test fun aSingleTransientUnwrapFailureIsRetriedAndChangesNothing() {
+        val key = MemoryWrapper(ByteArray(32) { 5 }); val store = MemSigStore(); val first = InstallSigner.loadOrCreate(store, key)
+        val blob = store.blob!!.copyOf()
+        val w = FlakyWrapper(key, failures = 1)
+        val r = InstallSigner.loadOrCreate(store, w)
+        assertFalse(r.regenerated); assertEquals(first.signer.keyId, r.signer.keyId); assertEquals(2, w.unwraps)
+        assertContentEquals(blob, store.blob); assertTrue(store.kept.isEmpty())
+    }
+
+    @Test fun anUnwrapThatStillFailsAfterTheRetryKeepsTheOldBlobThenReplacesIt() {
+        val key = MemoryWrapper(ByteArray(32) { 5 }); val store = MemSigStore(); InstallSigner.loadOrCreate(store, key)
+        val blob = store.blob!!.copyOf()
+        val r = InstallSigner.loadOrCreate(store, FlakyWrapper(key, failures = 2))
+        assertTrue(r.regenerated); assertEquals(1, store.kept.size); assertContentEquals(blob, store.kept[0].first)
+    }
+
+    @Test fun anErrorFromTheWrapperIsRethrownAndNothingIsReplaced() {
+        val key = MemoryWrapper(ByteArray(32) { 5 }); val store = MemSigStore(); InstallSigner.loadOrCreate(store, key)
+        val blob = store.blob!!.copyOf()
+        assertFailsWith<IllegalStateException> { InstallSigner.loadOrCreate(store, FlakyWrapper(key, boom = true)) }
+        assertContentEquals(blob, store.blob); assertTrue(store.kept.isEmpty())
+    }
+
+    @Test fun ifTheOldBlobCannotBeKeptItIsNeverOverwritten() {
+        val key = MemoryWrapper(ByteArray(32) { 5 }); val store = MemSigStore(); InstallSigner.loadOrCreate(store, key)
+        val blob = store.blob!!.copyOf(); store.failKeep = true
+        assertFailsWith<java.io.IOException> { InstallSigner.loadOrCreate(store, MemoryWrapper(ByteArray(32) { 6 })) }
+        assertContentEquals(blob, store.blob)
     }
 
     @Test fun aFailedWriteThrowsAndNoUnsavedIdentityIsReturned() {
-        val store = object : InstallSignerStore { override fun load(): ByteArray? = null; override fun save(blob: ByteArray) { throw java.io.IOException("disque plein") } }
-        assertFailsWith<java.io.IOException> { InstallSigner.loadOrCreate(store) }
+        val store = object : InstallSignerStore { override fun load(): ByteArray? = null; override fun save(blob: ByteArray) { throw java.io.IOException("disque plein") }; override fun keepUnreadable(blob: ByteArray, nowMs: Long) {} }
+        assertFailsWith<java.io.IOException> { InstallSigner.loadOrCreate(store, PlainWrapper()) }
     }
 
     @Test fun theFileStoreKeepsTheSameKeyWithThePlainFallback() {
         val dir = kotlin.io.path.createTempDirectory("install").toFile()
         try {
             val f = File(dir, "install.key")
-            val a = InstallSigner.loadOrCreate(FileInstallSignerStore(f))
-            val b = InstallSigner.loadOrCreate(FileInstallSignerStore(f))
+            val a = InstallSigner.loadOrCreate(FileInstallSignerStore(f), PlainWrapper())
+            val b = InstallSigner.loadOrCreate(FileInstallSignerStore(f), PlainWrapper())
             assertEquals(a.signer.keyId, b.signer.keyId); assertFalse(b.regenerated)
+            // a lost wrapper key: the old file is kept as .unreadable-<ms> next to it
+            val c = InstallSigner.loadOrCreate(FileInstallSignerStore(f), MemoryWrapper(ByteArray(32) { 1 }), SecureRandom(), nowMs = { 99L })
+            assertTrue(c.regenerated); assertTrue(File(dir, "install.key.unreadable-99").isFile)
         } finally { dir.deleteRecursively() }
     }
 }

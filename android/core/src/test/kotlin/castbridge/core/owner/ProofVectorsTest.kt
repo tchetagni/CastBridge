@@ -39,10 +39,10 @@ class ProofVectorsTest {
 
     private fun J(vararg p: Pair<String, Any?>): Map<String, Any?> = linkedMapOf(*p)
 
-    private fun act(signer: String = "desk", dev: String = "tvA", kind: ActivationKind = ActivationKind.PRODUCTION, rights: List<Right> = emptyList(), issued: Long = t0): String {
+    private fun act(signer: String = "desk", dev: String = "tvA", kind: ActivationKind = ActivationKind.PRODUCTION, rights: List<Right> = emptyList(), issued: Long = t0, seq: Long = 1): String {
         val s = key(signer).signer; val f = fp(dev); val seat = SeatIds.of("lic-0001", f); val k = DeviceIdentity.kFor(f.n); val nc = "00112233445566778899aabbccddeeff"
-        val p = Activation.payload(kind, Subject.TV, s.keyId, 1, nc, issued, issued - hour, issued + 47 * hour, "lic-0001", seat, k, f.byKind, rights)
-        return Activation(kind, Subject.TV, s.keyId, 1, nc, issued, issued - hour, issued + 47 * hour, "lic-0001", seat, k, f.byKind, rights, Base64.getEncoder().encodeToString(s.sign(p.toByteArray()))).encode()
+        val p = Activation.payload(kind, Subject.TV, s.keyId, seq, nc, issued, issued - hour, issued + 47 * hour, "lic-0001", seat, k, f.byKind, rights)
+        return Activation(kind, Subject.TV, s.keyId, seq, nc, issued, issued - hour, issued + 47 * hour, "lic-0001", seat, k, f.byKind, rights, Base64.getEncoder().encodeToString(s.sign(p.toByteArray()))).encode()
     }
 
     private class Acc(val keyInstalled: Boolean = true, val trial: Boolean = false, val suspended: Boolean = false, val superUnlimited: Boolean = false, val label: String = "Version complète") {
@@ -54,6 +54,8 @@ class ProofVectorsTest {
         TvProof.build(key(install).install, fp(dev), n, seq, now, acc.access(), activation, name, grace, uptime)
 
     private fun ringOf(names: List<String>, revoked: List<String>) = KeyRing(names.map { key(it).signer.trusted(key(it).scopes ?: KeyScope.ALL) }, revoked.map { key(it).signer.keyId }.toSet())
+    /** The phone's challenge book as the case describes it: [nonce] was issued at [now] unless the case lists it as already consumed. */
+    private fun bookOf(nonce: String, now: Long, consumed: Collection<String>) = NonceBook(TvClock()).also { if (nonce !in consumed) it.issue(now, nonce) }
     private fun pinOf(name: String?) = name?.let { TrustedKey(key(it).install.keyId, key(it).install.publicKeyBase64) }
 
     private fun outcome(r: ProofResult): Map<String, Any?> = when (r) {
@@ -71,10 +73,10 @@ class ProofVectorsTest {
     }
 
     private fun proofCase(id: String, why: String, token: String, pinned: String? = "tv-install-1", now: Long = t0 + 60_000, expectNonce: String = nonce, consumed: List<String> = emptyList(),
-                          lastSeq: Long? = null, trusted: List<String> = listOf("desk", "support"), revoked: List<String> = emptyList()): Map<String, Any?> {
-        val r = TvProof.verify(token, expectNonce, pinOf(pinned), ringOf(trusted, revoked), now, consumed.toSet(), lastSeq)
+                          lastSeq: Long? = null, trusted: List<String> = listOf("desk", "support"), revoked: List<String> = emptyList(), lastActivation: ActivationMark? = null): Map<String, Any?> {
+        val r = TvProof.verify(token, expectNonce, pinOf(pinned), ringOf(trusted, revoked), now, bookOf(expectNonce, now, consumed), lastSeq, lastActivation, RevocationState())
         return J("type" to "proof", "id" to id, "description" to why, "token" to token, "nonce" to expectNonce, "pinned" to pinned, "trustedKeys" to trusted, "revokedKeys" to revoked,
-            "consumed" to consumed, "lastSeq" to lastSeq, "nowMs" to now, "expect" to outcome(r))
+            "consumed" to consumed, "lastSeq" to lastSeq, "lastActivation" to lastActivation?.let { J("keyId" to it.keyId, "seq" to it.seq) }, "nowMs" to now, "expect" to outcome(r))
     }
 
     private fun buildCase(id: String, why: String, install: String = "tv-install-1", dev: String = "tvA", seq: Long = 5, now: Long = t0, acc: Acc = Acc(), activation: String? = act(), name: String = "Salon", grace: Boolean = false, uptime: Long = 12_345) =
@@ -108,6 +110,15 @@ class ProofVectorsTest {
         out += proofCase("proof-activation-unknown-key", "activation signée par une clé inconnue", build(activation = act(signer = "rogue")))
         out += proofCase("proof-activation-key-without-scope", "activation signée par une clé sans portée de production", build(activation = act(signer = "support")))
         out += proofCase("proof-activation-key-revoked", "activation signée par une clé révoquée", good, revoked = listOf("desk"))
+        out += proofCase("proof-first-link-foreign-code", "aucune clé épinglée mais l'activation est celle d'une autre TV : refus (code non authentifié), pas de question TOFU", build(activation = act(dev = "tvB")), pinned = null)
+        out += proofCase("proof-first-link-unknown-activation-key", "aucune clé épinglée, activation d'une clé inconnue : refus avant toute question TOFU", build(activation = act(signer = "rogue")), pinned = null)
+        out += proofCase("proof-identity-changed-bad-activation", "autre clé d'installation et activation d'une autre TV : refus, pas de demande de confirmation", build(install = "tv-install-2", activation = act(dev = "tvB")))
+        out += proofCase("proof-identity-changed-seq-restart", "TV réinstallée dont le compteur repart à 0 : demande de confirmation, pas un rejeu", build(install = "tv-install-2", seq = 0), lastSeq = 50)
+        out += proofCase("proof-activation-rollback", "activation plus ancienne (seq 3) que la dernière vue (seq 7) pour la même clé émettrice : refusée", build(activation = act(seq = 3)), lastActivation = ActivationMark(key("desk").signer.keyId, 7))
+        out += proofCase("proof-activation-newer-accepted", "activation plus récente (seq 9) que la dernière vue (seq 7) : acceptée", build(activation = act(seq = 9)), lastActivation = ActivationMark(key("desk").signer.keyId, 7))
+        out += proofCase("proof-nonce-not-issued", "défi jamais émis par ce téléphone (carnet vide) : rejeu", good, consumed = listOf(nonce))
+        out += proofCase("proof-borrowed-activation-accepted", "LIMITE CONNUE (à inverser quand la liaison clé d'installation / activation sera livrée) : l'activation copiée de la TV A portée par la clé d'une AUTRE installation, épinglée, est acceptée",
+            build(install = "tv-install-2"), pinned = "tv-install-2")
         out += buildCase("build-production", "même entrées, mêmes octets : TV de production")
         out += buildCase("build-super", "même entrées, mêmes octets : super", acc = Acc(superUnlimited = true, label = "Super illimité"), activation = act(rights = listOf(Right.Super("super", t0))))
         out += buildCase("build-trial-long-name", "essai, nom coupé à 40 caractères et sans retour à la ligne", acc = Acc(trial = true, label = "Version d'essai"), activation = null, name = "Salon\nde la maison avec un nom vraiment trop long pour tenir")
@@ -162,7 +173,9 @@ class ProofVectorsTest {
                 "proof" -> {
                     val pinned = (c["pinned"] as String?)?.let { n -> InstallSigner(seed(n)).let { TrustedKey(it.keyId, it.publicKeyBase64) } }
                     val ring = KeyRing(trusted(c["trustedKeys"] as List<*>), (c["revokedKeys"] as List<*>).map { ks.getValue(it as String)["kid"] as String }.toSet())
-                    val r = TvProof.verify(c["token"] as String, c["nonce"] as String, pinned, ring, (c["nowMs"] as Number).toLong(), (c["consumed"] as List<*>).map { it as String }.toSet(), (c["lastSeq"] as Number?)?.toLong())
+                    val now = (c["nowMs"] as Number).toLong()
+                    @Suppress("UNCHECKED_CAST") val la = (c["lastActivation"] as Map<String, Any?>?)?.let { ActivationMark(it["keyId"] as String, (it["seq"] as Number).toLong()) }
+                    val r = TvProof.verify(c["token"] as String, c["nonce"] as String, pinned, ring, now, bookOf(c["nonce"] as String, now, (c["consumed"] as List<*>).map { it as String }), (c["lastSeq"] as Number?)?.toLong(), la, RevocationState())
                     assertEquals(JsonLite.write(expect), JsonLite.write(outcome(r)), id)
                 }
                 "build-proof" -> {

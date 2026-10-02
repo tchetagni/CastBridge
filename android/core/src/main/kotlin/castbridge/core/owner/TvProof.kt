@@ -12,6 +12,9 @@ enum class ProofRejection {
     ACTIVATION_INVALID, CODE_MISMATCH, USAGE_EXCEEDED,
 }
 
+/** The newest activation a phone has seen for a TV: its issuer key and its `seq`. A proof may not carry an older activation of the same issuer key (no rollback to a longer or `super` one). */
+data class ActivationMark(val keyId: String, val seq: Long)
+
 /** What the phone keeps of an accepted proof. [activationToken] is the raw production activation: the phone sends it as `X-CB-TV-Proof` (w6-09). */
 data class Proof(val tvCode: String, val tvName: String, val installKeyId: String, val endsAt: Long?, val superUnlimited: Boolean, val verifiedAt: Long, val seq: Long, val activationToken: String)
 
@@ -92,26 +95,40 @@ object TvProof {
     private fun bad(r: ProofRejection, m: String, b: Body? = null) = ProofResult.Rejected(r, m, b?.code, b?.name)
 
     /**
-     * Phone side, fixed order, first reason wins: readable → type → nonce (equal to [expectedNonce], not in [consumed]) → signature (by the key the proof carries; then [pinnedKey]:
-     * none = [ProofResult.NeedsPin], another = [ProofResult.IdentityChanged]) → sequence not older than [lastSeq] → window (±[skewMs]) → `state == production` → the embedded activation
-     * (key known, not revoked, scope, signature, subject TV, seat not revoked; NO hardware check: the phone has no factors) → `kind == PRODUCTION` → device code = hash of the activation's
-     * factors = the proof's target factors → no `usage` ceiling passed at `max(nowMs, issuedAt)`. [ActivationVerifier] is not used (it checks the 48 h install window and the hardware).
-     * The caller marks the nonce consumed after ANY answer other than [ProofResult.NeedsPin].
+     * Phone side, fixed order, first reason wins: readable → type → nonce (equal to [expectedNonce] AND still live in [nonces]: issued by this phone, not consumed, not older than 10 min on the
+     * [TvClock]; this is the authoritative freshness check) → signature (by the key the proof carries) → then the chain, run with the key the proof carries even when it is not pinned:
+     * sequence not older than [lastSeq] (only against the pinned key: a seq counter belongs to one installation key) → window (±[skewMs]) → `state == production` → the embedded activation
+     * (key known, not revoked in [trusted] or [revocations], scope, signature, not older than [lastActivation] for the same issuer key, subject TV, seat not revoked; NO hardware check: the phone
+     * has no factors) → `kind == PRODUCTION` → device code = hash of the activation's factors = the proof's target factors → no `usage` ceiling passed at `max(nowMs, issuedAt)`.
+     * [ActivationVerifier] is not used (it checks the 48 h install window and the hardware).
+     * Pinning: when the proof carries an activation, [ProofResult.NeedsPin] (no pin) or [ProofResult.IdentityChanged] (another pin) is returned only if that whole chain passed, so the TV code and name
+     * proposed to the user are authenticated by a production activation; a refusal of the chain wins over the pin question. A proof without activation gets the pin question directly (it unlocks nothing).
+     * [nonces] consumes the challenge after ANY answer other than [ProofResult.NeedsPin] / [ProofResult.IdentityChanged] (the caller then verifies AGAIN, with the pin, on the same challenge).
      */
-    fun verify(token: String, expectedNonce: String, pinnedKey: TrustedKey?, trusted: KeyRing, nowMs: Long, consumed: Set<String> = emptySet(), lastSeq: Long? = null,
-               revocations: RevocationState = RevocationState(), skewMs: Long = SKEW_MS): ProofResult {
+    fun verify(token: String, expectedNonce: String, pinnedKey: TrustedKey?, trusted: KeyRing, nowMs: Long, nonces: NonceBook, lastSeq: Long?, lastActivation: ActivationMark?,
+               revocations: RevocationState, skewMs: Long = SKEW_MS): ProofResult {
         val env = Envelope.decode(token) ?: return bad(ProofRejection.MALFORMED, "Preuve illisible")
         if (env.type != TYPE) return bad(ProofRejection.WRONG_TYPE, "Ce message n'est pas une preuve de TV")
         val body = parseBody(env) ?: return bad(ProofRejection.MALFORMED, "Preuve illisible")
         val target = env.target as? Envelope.Target.Device ?: return bad(ProofRejection.MALFORMED, "Preuve illisible")
         if (env.nonce != expectedNonce) return bad(ProofRejection.NONCE_MISMATCH, "Cette réponse ne correspond pas à la demande")
-        if (expectedNonce in consumed) return bad(ProofRejection.REPLAY, "Cette réponse a déjà été utilisée")
+        if (!nonces.isLive(expectedNonce, nowMs)) return bad(ProofRejection.REPLAY, "Cette réponse a déjà été utilisée ou a expiré")
         val pub = runCatching { Base64.getDecoder().decode(body.installKey) }.getOrNull()
         if (pub == null || pub.size != 32 || KeyRing.idOf(body.installKey) != env.keyId) return bad(ProofRejection.MALFORMED, "Preuve illisible")
         if (!runCatching { TrustedKey(env.keyId, body.installKey).verify(env.canonicalPayload(), env.signature) }.getOrDefault(false)) return bad(ProofRejection.BAD_SIGNATURE, "Signature de la preuve invalide")
-        if (pinnedKey == null) return ProofResult.NeedsPin(env.keyId, body.installKey, InstallSigner.fingerprintOf(body.installKey), body.code, body.name)
-        if (pinnedKey.keyId != env.keyId || pinnedKey.publicKeyBase64 != body.installKey)
-            return ProofResult.IdentityChanged(env.keyId, body.installKey, InstallSigner.fingerprintOf(body.installKey), body.code, body.name)
+        val samePin = pinnedKey != null && pinnedKey.keyId == env.keyId && pinnedKey.publicKeyBase64 == body.installKey
+        fun pinQuestion(): ProofResult {
+            val fp = InstallSigner.fingerprintOf(body.installKey)
+            return if (pinnedKey == null) ProofResult.NeedsPin(env.keyId, body.installKey, fp, body.code, body.name) else ProofResult.IdentityChanged(env.keyId, body.installKey, fp, body.code, body.name)
+        }
+        if (!samePin && body.activation == null) return pinQuestion()
+        val r = chain(env, body, target, if (samePin) lastSeq else null, lastActivation, trusted, nowMs, revocations, skewMs)
+        if (!samePin && r is ProofResult.Accepted) return pinQuestion()
+        nonces.consume(expectedNonce, nowMs)
+        return r
+    }
+
+    private fun chain(env: Envelope, body: Body, target: Envelope.Target.Device, lastSeq: Long?, lastActivation: ActivationMark?, trusted: KeyRing, nowMs: Long, revocations: RevocationState, skewMs: Long): ProofResult {
         if (lastSeq != null && env.seq < lastSeq) return bad(ProofRejection.REPLAY, "Preuve plus ancienne que la dernière reçue", body)
         if (nowMs > env.expiresAt + skewMs || nowMs + skewMs < env.notBefore) return bad(ProofRejection.WINDOW_CLOSED, "Preuve périmée : à redemander", body)
         when (body.state) {
@@ -129,6 +146,7 @@ object TvProof {
             key == null -> return bad(ProofRejection.ACTIVATION_INVALID, "Activation signée par une clé inconnue", body)
             trusted.isRevoked(a.keyId) || a.keyId in revocations.keys -> return bad(ProofRejection.ACTIVATION_INVALID, "Activation signée par une clé révoquée", body)
             !key.verify(a.canonicalPayload(), a.signature) -> return bad(ProofRejection.ACTIVATION_INVALID, "Signature de l'activation invalide", body)
+            lastActivation != null && lastActivation.keyId == a.keyId && a.seq < lastActivation.seq -> return bad(ProofRejection.ACTIVATION_INVALID, "Activation plus ancienne que celle déjà vue pour cette TV", body)
             a.subject != Subject.TV -> return bad(ProofRejection.ACTIVATION_INVALID, "Cette activation n'est pas celle d'une TV", body)
             a.kind == ActivationKind.TRIAL -> return bad(ProofRejection.TRIAL, "La TV est en version d'essai", body)
             !(key.allows(KeyScope.ISSUE_PRODUCTION) || key.allows(KeyScope.REACTIVATE)) -> return bad(ProofRejection.ACTIVATION_INVALID, "Cette clé ne délivre pas de production", body)
