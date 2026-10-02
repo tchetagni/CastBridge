@@ -120,7 +120,20 @@ class LinkDriver(
         last = null
     }
 
-    /** Forgets the TV locally (the user chose « Oublier » or « Réassocier »). */
+    /**
+     * « Réassocier » : the TV is KEPT in the list (the pairing that follows may be abandoned, fail, or the app may be killed);
+     * only what the TV no longer accepts goes (session, token). The saved TV is replaced by [adopt] once the TV said yes.
+     * Forgetting it first left the phone with no TV at all (« Aucune TV ajoutée », recovery refused) whenever the pairing did not finish.
+     */
+    @Synchronized fun prepareReassociate(address: String): SavedTv? {
+        val tv = saved.get(address) ?: return null
+        store.clearCredential(tv.address); gate.clear(tv.address)
+        if (session?.tv?.address == tv.address) session = null
+        last = null
+        return tv
+    }
+
+    /** Forgets the TV locally (the user chose « Oublier »). */
     @Synchronized fun forget(address: String) {
         saved.remove(address); store.clearCredential(address); gate.clear(TrustRegistry.norm(address))
         session = null; model = null; last = null
