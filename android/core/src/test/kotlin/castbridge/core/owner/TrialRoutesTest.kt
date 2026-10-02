@@ -33,7 +33,7 @@ class TrialRoutesTest {
         "/api/parental/apps/rules/set", "/api/parental/reports/config/get", "/api/parental/reports/config/set", "/api/parental/reports/recipients/add",
         "/api/parental/reports/recipients/remove", "/api/parental/reports/now")
     private val denied = listOf(
-        "/api/play", "/api/playlist", "/api/library", "/api/library/watched", "/api/thumb", "/api/part", "/api/reset", "/api/delete", "/api/rename", "/api/folders", "/api/folders/set",
+        "/api/play", "/api/playlist", "/api/library", "/api/library/organize", "/api/library/organize/apply", "/api/library/watched", "/api/thumb", "/api/part", "/api/reset", "/api/delete", "/api/rename", "/api/folders", "/api/folders/set",
         "/api/storage", "/api/storage/move", "/api/storage/target", "/api/storage/saf/pick", "/api/transfer/start", "/api/transfer/caps", "/api/upload", "/upload/film.mp4",
         "/api/trash", "/api/trash/put", "/api/downloads", "/api/downloads/add", "/api/downloads/upload", "/api/dl", "/api/usb", "/api/usb/import", "/api/ssh", "/api/ssh/enable",
         "/api/ssh/key", "/api/apk", "/api/apk/install", "/api/update", "/api/update/install", "/api/server/install", "/api/server/erase", "/api/screenshot", "/api/devsettings",
