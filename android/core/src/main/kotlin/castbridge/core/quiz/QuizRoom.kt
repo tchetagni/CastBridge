@@ -205,8 +205,8 @@ class QuizRoom(
         if (mode == Mode.MILLIONAIRE) {
             val qs = draw(15, seed)
             val practice = play == Play.PRACTICE
-            val inGame = qs.map { it.id }.toMutableSet()
-            val swap = { q: Question -> swapQuestion(q, inGame) }
+            inGame = qs.map { it.id }.toMutableSet()
+            val swap = { q: Question -> swapQuestion(q) }
             game = QuizGame(qs, timers = if (practice) QuizGame.NO_TIMERS else gameTimers, seed = seed, practice = practice, markChannel = bank.channel,
                 boosts = if (practice) NoBoosts else boosts, gameId = "$code-${gameNo + 1}", swapProvider = swap).also { it.start(t) }
             duel = null
@@ -338,12 +338,13 @@ class QuizRoom(
     }
 
     /** A question of the same difficulty, in the same course, not asked yet in this session nor in this game (null = none). */
-    private fun swapQuestion(q: Question, inGame: MutableSet<String>): Question? {
+    private var inGame: MutableSet<String> = mutableSetOf()
+
+    private fun swapQuestion(q: Question): Question? {
         val exclude = asked + inGame
         val pick = bank.draw(count = 200, seed = random.nextLong(), exclude = exclude, filter = filter)
             .firstOrNull { it.difficulty == q.difficulty && it.id !in exclude } ?: return null
-        inGame += pick.id
-        return pick
+        return pick  // reserved in [inGame] by hostBoost, only once the charge succeeded
     }
 
     /**
@@ -354,6 +355,7 @@ class QuizRoom(
         val g = game?.takeIf { stage == Stage.PLAYING && mode == Mode.MILLIONAIRE } ?: return "Aucune partie en cours."
         if (!g.applyBoost(b, now())) return g.lastBoostRefusal ?: "Option indisponible."
         asked += g.question.id
+        inGame += g.question.id
         changed(); null
     }
 
