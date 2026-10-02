@@ -4,6 +4,7 @@
 > **Modèle : sonnet** · escalade : audit Opus sur échantillon · statut : PRÊT
 > **Groupe : W10d-3** (vague W10d) · prérequis : w10-04, w10-08 · porte : `python3 -m unittest discover -s tools/tests -p 'test_livrer.py'`
 > **Jauge : ≈ 400 k jetons entrée / 20 k sortie** (effort M) · audit Opus : non
+> **Amendement W16 (architecte, 2026-10-03)** : lire `docs/coordination/DESIGN-W16-LOCATION-DUREE-CHOISIE-PILOTE-2026-10-02.md` § 3.2, § 4.3. « Ne pas contourner la durée du catalogue » vaut pour `rental.userChosen = 0` ; au pilote, `livrer.py` accepte `--choix <defaut|Nj|Nh>` et `--pilote pilot.json` en **réutilisant** `tools/pilot/rentalops.py` et `louer.py` de **w16-05** (qui factorisent `rental_test.py`) au lieu de recopier les fonctions ; si w16-05 est fusionné avant ce cahier, `livrer.py` n'est qu'un alias documenté de `louer.py` pour les bouquets `oeuvre-*`/`chaine-*`.
 
 **Vague 10d · Effort M (≈ 1,5 j) · Modèle : sonnet · Statut PRÊT.** Conception : DESIGN-W10 § 10.4 (A et B, point 7), § 14 (ligne « Outils du propriétaire »). Branche `claude/sonnet-w10-13`. Rapport : `docs/agent-reports/sonnet-w10-13.md`. Dépend de w10-04 (lots d'œuvres et catalogue des bouquets avec `oeuvre-*`), w10-08 (routes TV : `/api/oeuvres`, routage de `/api/rental/install`).
 

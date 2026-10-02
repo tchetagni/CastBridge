@@ -4,6 +4,7 @@
 > **Modèle : sonnet** · escalade : audit Opus sur échantillon · statut : PRÊT (w5-01 souhaité)
 > **Groupe : W10a-2** (vague W10a) · prérequis : w10-01 ; w5-01 souhaité · porte : `cd android && tools/agents/gradle-lock.sh gradle --offline :core:test --tests 'castbridge.core.shop.*' --tests 'castbridge.core.sales.*'`
 > **Jauge : ≈ 400 k jetons entrée / 20 k sortie** (effort M) · audit Opus : non
+> **Amendement W16 (architecte, 2026-10-03)** : lire `docs/coordination/DESIGN-W16-LOCATION-DUREE-CHOISIE-PILOTE-2026-10-02.md` § 1.1, § 4.3. Un article de location porte l'unité : `loc-oeuvre-<id>|<N>j` (jours de validité) **ou** `loc-oeuvre-<id>|<N>h` (heures d'utilisation) ; la variante `-7j` (second bouquet) est inutile quand `rental.userChosen = 1` (le sélecteur la remplace) : ne la créer que si `userChosen = 0`. L'analyseur d'articles accepte `j` et `h` et refuse toute conversion.
 
 **Vague 10a · Effort M (≈ 2 j) · Modèle : sonnet · Statut PRÊT (w5-01 souhaité).** Conception : DESIGN-W10 § 2.2, § 2.3, § 5.1, § 13 ; DESIGN-W5 § 3.1 (articles, grille). Branche `claude/sonnet-w10-02`. Rapport : `docs/agent-reports/sonnet-w10-02.md`. Dépend de w10-01 (`WorksCatalog`, `WorkEntry`).
 

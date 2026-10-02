@@ -3,6 +3,7 @@
 > **Modèle : sonnet** · escalade : **audit Opus obligatoire** (vérification de signature, bornes €/🔒) · statut : PRÊT
 > **Groupe : W12-a** (vague W12) · prérequis : aucun · porte : `cd android && tools/agents/gradle-lock.sh gradle --offline :core:test --tests 'castbridge.core.settings.*'`
 > **Jauge : ≈ 800 k jetons entrée / 40 k sortie** (effort L) · audit Opus : **oui**
+> **Amendement W16 (architecte, 2026-10-03)** : lire `docs/coordination/DESIGN-W16-LOCATION-DUREE-CHOISIE-PILOTE-2026-10-02.md` § 4.1. Déclarer dès la tranche 1, avec leurs bornes et défauts : `rental.userChosen` (BOOL, 1 au pilote / 0 après), `rental.defaultDays` (30, 1–366, existante), `rental.pickerDays` (TEXT `1,3,7,14`), `rental.maxDays` (30, 1–60), `rental.hourly.maxUseHours` (96, 1–720), `rental.hourly.pickerHours` (TEXT `1,3,6,12,24,48,96`), `rental.hourly.validityDays` (30, 1–60), `rental.hourly.weeklyQuotaHours` (192, 0–672), `rental.cooldownMin` (0, 0–1440), `pilot.start`, `pilot.end` (ms, `end − start` ≤ 90 j), `pilot.graceDays` (14, 0–30) ; les noms sont ceux de `C/lots/PilotRules.kt` (w16-04 : `PilotParams`), qui lit `Settings` quand ce cahier est fusionné, sinon `tools/pilot/pilot.json`.
 
 **Vague 12a (cœur, JVM, testé) · Effort L (≈ 3 j) · Modèle : sonnet · Statut PRÊT.** Conception : `docs/coordination/DESIGN-W12-REGLAGES-TEASING-2026-10-02.md` § 1.2, § 1.3, § 2 (tout), § 7, § 9 (D-W12-1, 2, 4, 6, 7). Branche `claude/sonnet-w12-01`. Rapport : `docs/agent-reports/sonnet-w12-01.md`. Textes en français ; dire « CastBridge » (téléphone) / « CastBridge-TV ».
 

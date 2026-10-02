@@ -4,6 +4,7 @@
 > **Modèle : sonnet** · escalade : audit Opus obligatoire (diff sensible) · statut : PRÊT
 > **Groupe : W5a-1** (vague W5a) · prérequis : w4-01, w4-07, w1-06 · porte : `cd android && tools/agents/gradle-lock.sh gradle --offline :core:test --tests '*Routes*' --tests '*ActivationProof*' --tests '*Rental*'`
 > **Jauge : ≈ 400 k jetons entrée / 20 k sortie** (effort M) · audit Opus : oui
+> **Amendement W16 (architecte, 2026-10-03)** : lire `docs/coordination/DESIGN-W16-LOCATION-DUREE-CHOISIE-PILOTE-2026-10-02.md` § 1, § 4.1-4.3. Le plafond « 60 j en ligne » reste une **borne** (`rental.maxOnlineDays`) ; la durée d'une location n'est plus toujours « exacte » : quand `rental.userChosen = 1`, `C/lots/PilotRules.kt` (**w16-04**) fixe jours (validité, ≤ 30) ou heures d'utilisation (`maxUsageMinutes` ≤ 5 760, borne de sûreté calendaire). L'émission sans maître de ce cahier reste valable ; ne pas y coder de durée en dur : lire `PilotRules`/`Settings` si fusionnés, sinon une constante nommée.
 
 **Vague 5a · Effort M (≈ 2 j) · Modèle : sonnet · Statut PRÊT.** Conception : `DESIGN-W5-BOUTIQUE-LOCATIONS-JETONS.md` § 3.4 (a, b), § 4.2, § 6.2, § 6.3, § 9. Branche `claude/sonnet-w5-04`. Rapport : `docs/agent-reports/sonnet-w5-04.md`. Dépend de w4-01 (`RentalKeys.makeBoxV2`, `InstallKey`), w4-07 (`DegradedPolicy`, `GateState.Degraded`), w1-06 (`tools/routes/routes.txt`).
 

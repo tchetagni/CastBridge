@@ -4,6 +4,7 @@
 > **Modèle : sonnet** · escalade : opus audit si diff sécurité/crypto/argent · statut : PRÊT (w5-12 en parallèle, contrat ShopRuntimeView)
 > **Groupe : W5c-1** (vague W5c) · prérequis : w5-01 · porte : `cd android && tools/agents/gradle-lock.sh gradle --offline :sender:compileDebugKotlin`
 > **Jauge : ≈ 800 k jetons entrée / 40 k sortie** (effort L) · audit Opus : non
+> **Amendement W16 (architecte, 2026-10-03)** : lire `docs/coordination/DESIGN-W16-LOCATION-DUREE-CHOISIE-PILOTE-2026-10-02.md` § 1.1, § 1.3, § 4.3. « 30 jours » n'est plus une durée affichée en dur : la fiche d'un bouquet ouvre le **sélecteur à trois groupes** (« Sans durée précise : 30 jours » · jours 1/3/7/14 · heures d'utilisation 1/3/6/12/24/48/96) de **w16-11** (`S/RentalPickerScreen.kt`, `PickerModel`), avec la date de fin réelle et sans conversion heures ↔ jours ; la ligne « Il vous reste … » suit l'unité du contrat (`TvRentalView.unit`, w16-03).
 
 **Vague 5c · Effort L (≈ 3 j) · Modèle : sonnet · Statut PRÊT (après w5-01 ; w5-12 en parallèle : les deux codent contre `ShopApi` et une interface `ShopRuntimeView` convenue ici).** Conception : `DESIGN-W5-BOUTIQUE-LOCATIONS-JETONS.md` § 5.1 (textes des écrans), § 6.1, § 6.6, § 7 (lire en entier). Branche `claude/sonnet-w5-11`. Rapport : `docs/agent-reports/sonnet-w5-11.md`. **Décisions du propriétaire** : P3 (boutique), P4 (jetons = Quiz seulement), P5 (espèces et bons seulement : **aucun** écran de mobile money).
 

@@ -4,6 +4,7 @@
 > **Modèle : sonnet** · escalade : audit Opus obligatoire (diff sensible) · statut : PRÊT (FakeShopApi ou préprod 5b)
 > **Groupe : W5c-1** (vague W5c) · prérequis : w5-01, w5-02 · porte : `cd android && tools/agents/gradle-lock.sh gradle --offline :core:test --tests '*RentalDelivery*' && cd android && tools/agents/gradle-lock.sh gradle --offline :sender:compileDebugKotlin`
 > **Jauge : ≈ 800 k jetons entrée / 40 k sortie** (effort L) · audit Opus : oui · découpage proposé : voir ROUTAGE § 2.3
+> **Amendement W16 (architecte, 2026-10-03)** : lire `docs/coordination/DESIGN-W16-LOCATION-DUREE-CHOISIE-PILOTE-2026-10-02.md` § 2.5, § 3.3, § 4.3. À chaque liaison avec la TV, la passerelle **relève** l'usage (`GET /api/rental/usage`, format `castbridge-rental-usage-v1`, `RentalUsageReport`/`RentalReportStore` de **w16-03**) et le remet au serveur (`POST /api/v1/pilot/rentals/{contract}/usage` ou la route W5 équivalente, maximum monotone) ; la commande de location porte `unit` et `amount` (devis/commande de w16-08 ou `/shop/quote` étendu).
 
 **Vague 5c · Effort L (≈ 4 j) · Modèle : sonnet · Statut PRÊT (après w5-01, w5-02 ; serveur de préprod 5b ou `FakeShopApi` ; w5-11 en parallèle).** Conception : `DESIGN-W5-BOUTIQUE-LOCATIONS-JETONS.md` § 4.5, § 5.2, § 6.4, § 6.5, § 15. Branche `claude/sonnet-w5-12`. Rapport : `docs/agent-reports/sonnet-w5-12.md`.
 

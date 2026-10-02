@@ -4,6 +4,7 @@
 > **Modèle : sonnet** · escalade : audit Opus obligatoire (diff sensible) · statut : PRÊT (après 5a)
 > **Groupe : W5b-1** (vague W5b) · prérequis : w5-04, w5-05, w4-05 · porte : `cd backend && tools/agents/gradle-lock.sh ./mvnw -q -o test -Dtest='Rental*Test'`
 > **Jauge : ≈ 800 k jetons entrée / 40 k sortie** (effort L) · audit Opus : oui · découpage proposé : voir ROUTAGE § 2.3
+> **Amendement W16 (architecte, 2026-10-03)** : lire `docs/coordination/DESIGN-W16-LOCATION-DUREE-CHOISIE-PILOTE-2026-10-02.md` § 1, § 3.3, § 4.3. « Durée exacte du catalogue ≤ 60 j » devient : durée = `PilotRules` (miroir Java) quand `rental.userChosen = 1` (jours de validité **ou** heures d'utilisation ≤ 96 h avec borne de sûreté) ; `rental_contract` gagne `unit ENUM(HOURS, DAYS, DEFAULT)` et `max_use_minutes` ; les tables `pilot_rental_*` de **w16-08** fusionnent dans `rental_contract`/`shop_order` (prix 0) quand ce cahier existe ; le relevé d'usage (`POST …/usage`, maximum monotone) est à reprendre de w16-08.
 
 **Vague 5b · Effort L (≈ 4 j) · Modèle : sonnet · Statut PRÊT (après w5-04, w5-05 ; w4-05 fusionné).** Conception : `DESIGN-W5-BOUTIQUE-LOCATIONS-JETONS.md` § 3.3, § 4 (lire en entier). Branche `claude/sonnet-w5-06`. Rapport : `docs/agent-reports/sonnet-w5-06.md`. **Premier cahier de la sous-vague 5b** : il crée la migration, `ShopProperties` et le service de contrats que w5-07/08/09 utilisent. **Rien n'est déployé.**
 
