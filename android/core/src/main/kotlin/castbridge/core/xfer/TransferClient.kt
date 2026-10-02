@@ -8,7 +8,7 @@ import java.net.URL
 /** The small calls of the protocol (begin, state, finish). Chunks travel on the lanes. */
 interface TransferApi {
     class Caps(val version: Int, val maxStreams: Int)
-    class Begin(val done: Boolean, val id: String, val map: BlockMap, val hashes: List<String>, val writeBps: Long, val maxStreams: Int, val volume: String, val note: String? = null)
+    class Begin(val done: Boolean, val id: String, val map: BlockMap, val hashes: List<String>, val writeBps: Long, val maxStreams: Int, val volume: String, val note: String? = null, val ordered: Boolean = false)
     sealed class Finish { object Done : Finish(); class Missing(val map: BlockMap) : Finish(); class Corrupt(val map: BlockMap) : Finish(); class Refused(val message: String) : Finish() }
     /** A refusal that no retry fixes (no room, name refused, bad credential...); [message] is for the user. */
     class Refused(val http: Int, override val message: String) : IOException(message)
@@ -60,6 +60,8 @@ class HttpTransferApi(private val baseOf: () -> String?, private val credential:
         val (code, body) = call("POST", "/api/transfer/finish?id=$id&root=$root")
         return when {
             code == 200 -> TransferApi.Finish.Done
+            // the TV is still verifying (a first call is reading the file back) or lost the session: neither is a refusal, the phone resumes by begin
+            code == 503 || code == 404 -> throw IOException(if ("verifying" in body) "la TV vérifie encore le fichier" else "TV : transfert à reprendre ($code)")
             code == 409 -> TransferApi.Finish.Missing(parseState(body)?.map ?: BlockMap(0))
             code == 422 -> TransferApi.Finish.Corrupt(parseState(body)?.map ?: BlockMap(0))
             code in 400..499 -> TransferApi.Finish.Refused(TvClient.str(body, "message") ?: TvClient.str(body, "error") ?: "refusé ($code)")
@@ -77,7 +79,7 @@ class HttpTransferApi(private val baseOf: () -> String?, private val credential:
         val blocks = TvClient.num(body, "blocks")?.toInt() ?: return null
         val map = BlockMap.fromHex(blocks, TvClient.str(body, "map") ?: "")
         val hashes = (TvClient.str(body, "hashes") ?: "").let { if (it.isEmpty()) emptyList() else it.split(',') }
-        return TransferApi.Begin(false, TvClient.str(body, "id") ?: "", map, hashes, TvClient.num(body, "writeBps") ?: 0, (TvClient.num(body, "maxStreams") ?: 4).toInt(), TvClient.str(body, "volume") ?: "", TvClient.str(body, "note"))
+        return TransferApi.Begin(false, TvClient.str(body, "id") ?: "", map, hashes, TvClient.num(body, "writeBps") ?: 0, (TvClient.num(body, "maxStreams") ?: 4).toInt(), TvClient.str(body, "volume") ?: "", TvClient.str(body, "note"), body.contains("\"ordered\":true"))
     }
 }
 
@@ -131,7 +133,7 @@ class TransferClient(
             val full = try { api.state(b.id, withHashes = true) } catch (e: IOException) { null } ?: b
             full.hashes.forEachIndexed { i, h -> if (i < m.blocks && full.map.has(i)) hashes.preload(i, h) }
             val ls = lanes(b.id, minOf(caps.maxStreams, b.maxStreams))
-            val sched = Scheduler(m, full.map, ls, { c -> SendContext(m, source, hashes, c, compress) }, object : Scheduler.Listener() {
+            val sched = Scheduler(m, full.map, ls, { c -> SendContext(m, source, hashes, c, compress) }, slowFromHead = full.ordered || b.ordered, listener = object : Scheduler.Listener() {
                 override fun progress(doneBytes: Long, total: Long) { onProgress(doneBytes, total) }
                 override fun waiting(reason: String) { onWaiting(reason) }
                 override fun laneEvent(lane: String, what: String) { onEvent("$lane : $what") }

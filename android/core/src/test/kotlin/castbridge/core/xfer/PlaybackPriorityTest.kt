@@ -90,13 +90,6 @@ class PlaybackPriorityTest {
         assertFalse("underrun-risk" in ok.reasons)
     }
 
-    @Test fun leadAheadOfThePlayheadIsComputedFromTheContiguousPrefix() {
-        // 1 MB/s of video, playhead at 10 s (10 MB), 25 MB contiguous: 15 s of lead
-        assertEquals(15_000, PlaybackPriority.leadMs(contiguousBytes = 25_000_000, playheadMs = 10_000, fileBytes = 100_000_000, durMs = 100_000))
-        assertEquals(0, PlaybackPriority.leadMs(5_000_000, 10_000, 100_000_000, 100_000))       // behind the playhead: no lead, never negative
-        assertNull(PlaybackPriority.leadMs(5_000_000, 10_000, 100_000_000, 0))                    // duration unknown: unknown
-    }
-
     @Test fun headFirstWindowAdmitsOnlyBlocksJustAfterTheContiguousPrefix() {
         val w = PlaybackPriority.HEAD_WINDOW_BYTES
         assertTrue(PlaybackPriority.admitAhead(blockOffset = 0, contiguousBytes = 0))

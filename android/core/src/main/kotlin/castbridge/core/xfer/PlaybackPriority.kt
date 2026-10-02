@@ -111,15 +111,14 @@ object PlaybackPriority {
     /** Average bitrate of the video (bytes/s), 0 = unknown. */
     fun videoBps(fileBytes: Long, durMs: Long): Long = if (fileBytes <= 0 || durMs <= 0) 0 else fileBytes * 1000 / durMs
 
-    /** Playback time held ahead of the playhead in the contiguous prefix (constant-bitrate estimate), null = unknown; never negative. */
-    fun leadMs(contiguousBytes: Long, playheadMs: Long, fileBytes: Long, durMs: Long): Long? {
-        val bps = videoBps(fileBytes, durMs).takeIf { it > 0 } ?: return null
-        val playheadByte = fileBytes * playheadMs.coerceIn(0, durMs) / durMs
-        return ((contiguousBytes - playheadByte).coerceAtLeast(0) * 1000 / bps)
-    }
+    /** A `buffering` player whose playhead has not moved for this long no longer counts as playing (crashed or stuck player, dead copy). */
+    const val BUFFERING_GRACE_MS = 30_000L
 
     /** Head first: a block is taken now only if it starts within [window] bytes of the contiguous prefix (blocks behind it are resends: always). */
     fun admitAhead(blockOffset: Long, contiguousBytes: Long, window: Long = HEAD_WINDOW_BYTES): Boolean = blockOffset < contiguousBytes + window
+
+    /** Head window of a copy that is not preallocated: never less than [HEAD_WINDOW_BYTES], never less than what the connections legitimately hold in flight. */
+    fun headWindow(blockSize: Int, maxStreams: Int): Long = maxOf(HEAD_WINDOW_BYTES, (maxStreams + 2).toLong() * blockSize)
 
     /** libVLC `:file-caching` of a local file: 400 ms at rest (RAM), 2 s while a copy writes to the disk the player reads. */
     fun fileCachingMs(receiving: Boolean): Long = if (receiving) 2_000 else 400
@@ -180,6 +179,11 @@ class PlaybackGovernor(
     @Volatile private var sig = PlaybackSignal()
     @Volatile private var cached: PlaybackDecision? = null
     @Volatile private var at = 0L
+    private val notifyLock = Any()
+    // « buffering without progress »: see [settle]
+    private var lastHead = -1L
+    private var lastAdvanceAt = 0L
+    private var stuck = false
 
     fun current(): PlaybackDecision {
         val c = cached
@@ -187,14 +191,30 @@ class PlaybackGovernor(
         return refresh()
     }
 
-    /** Reads the signal now (the player just changed state). */
-    fun refresh(): PlaybackDecision {
-        val s = runCatching(signal).getOrDefault(PlaybackSignal())
+    /** Reads the signal now (the player just changed state). Runs the deferred work (an fsync) on the calling thread once playback is over. */
+    fun refresh(): PlaybackDecision = update(drainInline = true)
+
+    private fun update(drainInline: Boolean): PlaybackDecision {
+        val s = settle(runCatching(signal).getOrDefault(PlaybackSignal()))
         val d = PlaybackPriority.decide(s, normal)
         val prev = synchronized(this) { cached.also { sig = s; cached = d; at = clock() } }
-        if (prev?.on != d.on) runCatching { onChange(d) }
-        if (!d.on) deferred.drain()
+        // delivered one at a time and always with the LATEST decision: two racing refreshes must not leave a stale one last
+        if (prev?.on != d.on) synchronized(notifyLock) { runCatching { onChange(cached ?: d) } }
+        if (!d.on && drainInline) deferred.drain()
         return d
+    }
+
+    /**
+     * `buffering` counts as playing for at most [PlaybackPriority.BUFFERING_GRACE_MS] without playhead advance: a crashed or stuck player (or a
+     * dead copy that a reader keeps reconnecting to) must not keep every other copy throttled, nor the deferred fsync waiting, for ever. Once
+     * latched off it stays off, whatever flapping the player reports, until the playhead really moves again.
+     */
+    private fun settle(raw: PlaybackSignal): PlaybackSignal = synchronized(this) {
+        if (raw.playerState != "playing" && raw.playerState != "buffering") { stuck = false; lastHead = -1L; return raw }
+        val now = clock()
+        if (raw.playheadMs != lastHead) { lastHead = raw.playheadMs; lastAdvanceAt = now; stuck = false }
+        else if (raw.playerState == "buffering" && now - lastAdvanceAt >= PlaybackPriority.BUFFERING_GRACE_MS) stuck = true
+        if (stuck) raw.copy(playerState = "stalled") else raw
     }
 
     /** The decision for one transfer (the copy that feeds a growing playback is treated apart). */
@@ -202,7 +222,11 @@ class PlaybackGovernor(
 
     /** Read-only state for /api/info `playbackPriority` (no secret, no address). */
     fun json(): String {
-        val d = current()
+        // never the deferred fsync on this thread (/api/info answers the phone and the TV screen): refresh without draining, drain on a thread of its own
+        val c = cached
+        val d = if (c != null && clock() - at < refreshMs) c else update(drainInline = false)
+        if (!d.on && deferred.pending().isNotEmpty())
+            Thread({ runCatching { deferred.drain() } }, "cb-deferred-sync").apply { isDaemon = true; start() }
         val q = { x: String -> "\"" + x.replace("\\", "\\\\").replace("\"", "\\\"") + "\"" }
         return "{\"on\":${d.on},\"reasons\":${d.reasons.joinToString(",", "[", "]") { q(it) }},\"backgroundThreads\":${d.backgroundThreads}," +
             "\"maxStreams\":${d.maxStreams},\"receiveCapBps\":${d.receiveCapBps},\"progressEveryMs\":${d.progressEveryMs}," +

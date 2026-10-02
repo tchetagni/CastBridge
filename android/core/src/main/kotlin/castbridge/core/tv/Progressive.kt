@@ -48,9 +48,13 @@ class GrowingStream(
     private val available: (File) -> Long = { it.length() },
     private val stillComing: () -> Boolean = { false },
     private val maxWaitMs: Long = waitMs,
+    /** True once the HTTP client has hung up (checked while waiting for bytes, about once a second). */
+    private val clientGone: () -> Boolean = { false },
+    /** Longest wait once the copy is no longer coming ([stillComing] false): the player is told sooner than [waitMs] that nothing more will arrive. */
+    private val deadWaitMs: Long = waitMs,
 ) : InputStream() {
     private var pos = start
-    private var closed = false
+    @Volatile private var closed = false
 
     override fun read(): Int {
         val b = ByteArray(1)
@@ -64,6 +68,7 @@ class GrowingStream(
         val want = minOf(len.toLong(), BLOCK.toLong(), end - pos + 1).toInt()
         val waitStart = clock()
         var lastHope = waitStart
+        var lastProbe = waitStart
         var missingSince = -1L
         while (true) {
             if (closed) throw IOException("closed")
@@ -88,15 +93,19 @@ class GrowingStream(
                 } catch (e: java.io.FileNotFoundException) { continue }   // renamed just now: look again by name
             }
             val t = clock()
-            if (runCatching(stillComing).getOrDefault(false)) lastHope = t
-            if (t - lastHope >= waitMs || t - waitStart >= maxOf(waitMs, maxWaitMs)) throw IOException("timeout waiting for upload at byte $pos")
+            val coming = runCatching(stillComing).getOrDefault(false)
+            if (coming) lastHope = t
+            // the copy is dead (nothing written for a while): the player is told after [deadWaitMs], not after the long patience owed to a live copy
+            if (t - lastHope >= (if (coming) waitMs else deadWaitMs) || t - waitStart >= maxOf(waitMs, maxWaitMs)) throw IOException("timeout waiting for upload at byte $pos")
+            // the player hung up (seek, stop): nobody will read these bytes, free the thread now
+            if (t - lastProbe >= PROBE_MS) { lastProbe = t; if (runCatching(clientGone).getOrDefault(false)) throw IOException("client gone") }
             sleep(pollMs)
         }
     }
 
     override fun close() { closed = true }
 
-    companion object { const val BLOCK = 64 * 1024 }
+    companion object { const val BLOCK = 64 * 1024; const val PROBE_MS = 1000L }
 }
 
 /** Thresholds and limits for progressive playback (pure functions). */

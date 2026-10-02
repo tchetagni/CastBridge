@@ -92,8 +92,33 @@ class ReceiverServer(
     private val receivePriority: castbridge.core.xfer.ThreadPriorityPort = castbridge.core.xfer.ThreadPriorityPort.NONE,
 ) : NanoHTTPD(port) {
 
-    override fun createClientHandler(finalAccept: java.net.Socket, inputStream: java.io.InputStream): NanoHTTPD.ClientHandler =
-        super.createClientHandler(castbridge.core.tunnel.AttributedSocket.of(finalAccept, peers), inputStream)
+    /** The socket of the connection this thread serves (NanoHTTPD: one thread per connection), for [hungUp]. */
+    private val connectionSocket = ThreadLocal<java.net.Socket?>()
+
+    override fun createClientHandler(finalAccept: java.net.Socket, inputStream: java.io.InputStream): NanoHTTPD.ClientHandler {
+        val sock = castbridge.core.tunnel.AttributedSocket.of(finalAccept, peers)
+        return object : NanoHTTPD.ClientHandler(inputStream, sock) {
+            override fun run() { connectionSocket.set(sock); try { super.run() } finally { connectionSocket.remove() } }
+        }
+    }
+
+    /**
+     * Has the client of this connection closed it? Peeks one byte with a very short timeout and puts it back (mark/reset): called only by a
+     * `/stream/` reader that is WAITING for bytes, on the connection's own thread, so no request can be in flight on this input.
+     */
+    private fun hungUp(sock: java.net.Socket?, input: InputStream): Boolean {
+        if (sock == null || !input.markSupported()) return false
+        return try {
+            if (sock.isClosed || sock.isInputShutdown) return true
+            val old = sock.soTimeout
+            sock.soTimeout = 30
+            try {
+                input.mark(1)
+                val r = input.read()
+                if (r < 0) true else { input.reset(); false }
+            } catch (e: java.net.SocketTimeoutException) { false } finally { runCatching { sock.soTimeout = old } }
+        } catch (e: IOException) { true }
+    }
 
     /** Single internal folder (tests, simple setups). */
     constructor(
@@ -115,6 +140,10 @@ class ReceiverServer(
         h.finalSizeOf = { n, sz -> findFinalOrOrigin(n, sz)?.size }
     }
     private val chunking = java.util.concurrent.atomic.AtomicInteger()
+    /** Chunk requests being served right now (tests). */
+    internal val activeChunks: Int get() = chunking.get()
+    /** A `finish` of transfer [id] is verifying right now (tests). */
+    internal fun finishingNow(id: String): Boolean = transfers.session(id)?.finishing == true
     /** The file the TV plays while it is still arriving ([playIncomplete]), null otherwise. */
     @Volatile private var growingName: String? = null
     /**
@@ -394,6 +423,7 @@ class ReceiverServer(
 
     private fun route(s: IHTTPSession): Response {
         tokenPhone.remove()                              // a keep-alive thread serves several requests: never inherit the previous one's phone
+        bodyDrained.remove()
         val p = s.parameters.mapValues { it.value.firstOrNull().orEmpty() }
         val path = s.uri
         if (hostCheck && !HostGuard.allowed(s.headers["host"])) return json(Response.Status.FORBIDDEN, """{"error":"Hôte non autorisé"}""").also { it.addHeader("Connection", "close") }
@@ -418,7 +448,7 @@ class ReceiverServer(
                 if (it.status != Response.Status.OK) it.addHeader("Connection", "close")
             }
             path.startsWith("/api/transfer/") -> transfer(s, path.removePrefix("/api/transfer/"), p).also {
-                if (it.status != Response.Status.OK) it.addHeader("Connection", "close")
+                if (it.status != Response.Status.OK && !(it.status.requestStatus == 429 && bodyDrained.get() == true)) it.addHeader("Connection", "close")
             }
             path == "/api/info" -> ok(info())
             path == "/api/storage" -> storage(s.method, p)
@@ -762,7 +792,7 @@ class ReceiverServer(
 
     private fun transfer(s: IHTTPSession, op: String, p: Map<String, String>): Response = when {
         op == "caps" && s.method == Method.GET ->
-            ok("""{"version":${castbridge.core.xfer.TransferHost.API_VERSION},"maxStreams":${transfers.maxStreams},"slice":${castbridge.core.xfer.Manifest.SLICE}}""")
+            ok("""{"version":${castbridge.core.xfer.TransferHost.API_VERSION},"maxStreams":${transfers.allowedStreams()},"slice":${castbridge.core.xfer.Manifest.SLICE}}""")
         op == "begin" && s.method == Method.POST -> transferBegin(s, p)
         op == "chunk" && s.method == Method.PUT -> transferChunk(s, p)
         op == "state" && s.method == Method.GET -> transfers.session(p["id"].orEmpty())?.let { ok(transfers.stateJson(it, p["hashes"] == "1")) }
@@ -829,9 +859,10 @@ class ReceiverServer(
         val len = s.headers["content-length"]?.toLongOrNull() ?: return bad("content-length required")
         val sha = s.headers["x-cb-sha256"].orEmpty().lowercase()
         if (idx !in 0 until sess.manifest.blocks) return bad("bad block index")
-        // fewer connections while a video plays (PlaybackPriority): the extra ones are told « busy », the phone's controller backs off
-        if (chunking.get() >= transfers.allowedStreams() || !transfers.mayAccept(sess.manifest.length(idx).toLong()))
-            return json(status(429), """{"error":"busy","retryMs":${playback.current().busyRetryMs},"writeBps":${transfers.stats.bytesPerSec()}}""")
+        // fewer connections while a video plays (PlaybackPriority): the extra ones are told « busy », the phone's controller backs off.
+        // A block beyond the head window of a file that is not preallocated waits too (the kernel would zero-fill the gap): same answer.
+        if (chunking.get() >= transfers.allowedStreams() || !transfers.mayAccept(sess.manifest.length(idx).toLong()) || !transfers.admitAhead(sess, idx))
+            return busy(s, len)
         chunking.incrementAndGet()
         try {
             val a = sess.assembler
@@ -858,8 +889,31 @@ class ReceiverServer(
         } finally { chunking.decrementAndGet() }
     }
 
+    /** Largest body read and dropped before a 429 (a gzip block of 16 MiB at most, see the manifest limit). */
+    private val maxDrainBytes = 17L shl 20
+    /** The request body of this thread's request was read to the end: the answer may keep the connection alive. */
+    private val bodyDrained = ThreadLocal<Boolean?>()
+
+    /**
+     * 429 « busy ». The phone sends the WHOLE block before it reads the answer: answering and closing with that body unread resets the connection
+     * (the phone books a failure, not « busy »; its lanes get benched). So the body is read and dropped first (no disk, no hash, no pacing), and the
+     * connection stays usable.
+     */
+    private fun busy(s: IHTTPSession, bodyLen: Long): Response {
+        if (bodyLen in 0..maxDrainBytes) {
+            try {
+                val buf = ByteArray(64 * 1024); var left = bodyLen
+                while (left > 0) { val r = s.inputStream.read(buf, 0, minOf(buf.size.toLong(), left).toInt()); if (r < 0) break; left -= r }
+                if (left == 0L) bodyDrained.set(true)
+            } catch (e: IOException) { /* the phone went away: nothing to answer to */ }
+        }
+        return json(status(429), """{"error":"busy","retryMs":${playback.current().busyRetryMs},"writeBps":${transfers.stats.bytesPerSec()}}""")
+    }
+
     private fun transferFinish(p: Map<String, String>): Response {
-        val sess = transfers.session(p["id"].orEmpty()) ?: return json(Response.Status.NOT_FOUND, """{"error":"unknown transfer"}""")
+        // The session is gone (restart, sweep, or a first finish concluded and removed it): NOT a 404, which the phone takes for a refusal and
+        // gives up on. 503 makes it resume by begin, which answers « done » if the file is there, or resends what is missing.
+        val sess = transfers.session(p["id"].orEmpty()) ?: return json(SERVICE_UNAVAILABLE, """{"error":"unknown transfer","retry":true}""")
         val root = p["root"].orEmpty()
         val name = sess.manifest.name
         if (sess.assembler.discard) {
@@ -868,14 +922,16 @@ class ReceiverServer(
             return if (r is castbridge.core.xfer.PartAssembler.Finish.Done) ok("""{"done":true,"discarded":true}""") else bad("incomplete")
         }
         val v = volumes[sess.volumeId]?.takeIf { volumes.alive(it) } ?: return removed()
+        // A first finish is reading the file back (2 GB paced at 12 MB/s is minutes): never queue a second HTTP thread behind its lock; the phone
+        // gave up after 60 s and asks again, it is told at once that the check is under way.
+        if (!sess.tryBeginFinish()) return json(SERVICE_UNAVAILABLE, """{"error":"verifying","retryMs":2000}""")
         uploading.incrementAndGet()
-        sess.finishing = true
         try {
             synchronized(FileLocks.of(LOCK_ROOT, name)) {
                 // the phone gave up waiting for a long read-back and asked again: the first call may have concluded meanwhile (never a 500 on a closed file)
                 if (transfers.session(sess.manifest.id) !== sess)
                     return if (findFinalOrOrigin(name, sess.manifest.size)?.size == sess.manifest.size) ok("""{"done":true,"name":${q(name)}}""")
-                        else json(Response.Status.NOT_FOUND, """{"error":"unknown transfer"}""")
+                        else json(SERVICE_UNAVAILABLE, """{"error":"unknown transfer","retry":true}""")
                 // the read-back is paced and runs at background priority while a video plays: slower, NEVER skipped (nothing is complete before it)
                 val verified = playback.verify(name).use { v -> sess.assembler.finish(root, sess.diskName, v::onBytes) }
                 return when (val r = verified) {
@@ -1460,12 +1516,19 @@ class ReceiverServer(
         fun body(from: Long, to: Long): InputStream {
             val fs = src.st as? FileStore
             // a byte not there yet: wait politely while the copy is alive (up to 2 min) instead of cutting the player after 30 s
+            val sock = connectionSocket.get()
             val raw = if (fs != null) fs.fileOf(src.name).let { loc -> GrowingStream(loc.parentFile ?: fs.dir, loc.name, from, to, alive = { volumes.alive(src.v) },
-                    stillComing = { partBusy(name) }, maxWaitMs = STREAM_MAX_WAIT_MS) }
+                    stillComing = { partBusy(name) }, maxWaitMs = STREAM_MAX_WAIT_MS, deadWaitMs = STREAM_DEAD_WAIT_MS,
+                    clientGone = { hungUp(sock, s.inputStream) }) }
                 else BoundedStream(src.st.open(src.name, from), to - from + 1)
-            return streamUse.track(src.name, raw)       // a reader pins the file: no rename / move / bin under it
+            // a reader pins the file: no rename / move / bin under it. On a file still growing, at most two readers per file: a player that jumps
+            // leaves its previous connection waiting; it is closed as soon as the next one opens (its thread must not sit there for minutes).
+            return streamUse.track(src.name, raw, maxOpen = if (fin == null) MAX_GROWING_READERS else Int.MAX_VALUE)
         }
         fun reply(st: Response.IStatus, from: Long, to: Long): Response {
+            // bytes that are not there and a copy that is dead (nobody wrote for PART_BUSY_MS): an error at once, not an endless buffering
+            if (!head && fin == null && from >= src.size && !partBusy(name))
+                return json(SERVICE_UNAVAILABLE, """{"error":"copy stopped","message":"La copie de ce fichier est arrêtée : reprenez l'envoi depuis le téléphone."}""")
             val len = to - from + 1
             val r = if (head) newFixedLengthResponse(st, mime, java.io.ByteArrayInputStream(ByteArray(0)), 0)
                     else newFixedLengthResponse(st, mime, body(from, to), len)
@@ -1552,6 +1615,10 @@ class ReceiverServer(
         const val PART_BUSY_MS = 60_000L
         /** Longest a /stream/ reader waits for a byte while the copy is still alive (then the player's http-reconnect takes over). */
         const val STREAM_MAX_WAIT_MS = 120_000L
+        /** Once the copy is dead (see [PART_BUSY_MS]) a waiting reader gets its error after this long. */
+        const val STREAM_DEAD_WAIT_MS = 5_000L
+        /** Readers of one growing file at the same time (a seek opens a new connection while the old one closes). */
+        const val MAX_GROWING_READERS = 2
         private val ADMIN_HTML: String by lazy {
             ReceiverServer::class.java.getResourceAsStream("/castbridge/admin.html")?.use { String(it.readBytes(), Charsets.UTF_8) }
                 ?: "<!doctype html><meta charset=utf-8><title>CastBridge TV</title><h1>CastBridge TV</h1><p>Page d'administration indisponible.</p>"

@@ -5,7 +5,8 @@ import java.util.concurrent.atomic.AtomicLong
 
 /**
  * Work stealing over the lanes. Each worker of each lane takes the next missing block as soon as it is free, so the fastest lane does
- * the most. Slow lanes take from the end of the queue, the others from the front (they meet in the middle). When nothing is left to take
+ * the most. Slow lanes take from the end of the queue, the others from the front (they meet in the middle) - except when the TV does not
+ * preallocate its file ([slowFromHead]): a block written far ahead would make a FAT/exFAT kernel zero-fill the whole gap, so everyone goes in order. When nothing is left to take
  * but blocks are still in flight, a fast worker sends a copy of the oldest one (the last blocks are never held hostage by a slow lane);
  * the first copy to arrive wins and the others are told to stop. A lane that fails repeatedly is set aside for a while, then tried again.
  */
@@ -20,6 +21,8 @@ class Scheduler(
     private val maxCorrupt: Int = 4,
     private val strikesToBench: Int = 3,
     private val benchBaseMs: Long = 1500,
+    /** The TV does not preallocate (FAT/exFAT): the slow lane takes from the front too (see [PlaybackPriority.headWindow]). */
+    private val slowFromHead: Boolean = false,
 ) {
     open class Listener {
         open fun progress(doneBytes: Long, total: Long) {}
@@ -96,7 +99,7 @@ class Scheduler(
     private fun take(lane: Lane): Pair<Int, Run>? {
         synchronized(lock) {
             val now = clock()
-            var idx: Int? = if (lane.slow) pending.removeLastOrNull() else pending.removeFirstOrNull()
+            var idx: Int? = if (lane.slow && !slowFromHead) pending.removeLastOrNull() else pending.removeFirstOrNull()
             if (idx == null && !lane.slow) idx = duplicateCandidate(lane, now)?.also { duplicates.incrementAndGet() }
             if (idx == null) return null
             val r = Run(lane, now)

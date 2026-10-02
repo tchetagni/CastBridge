@@ -10,7 +10,11 @@ import java.security.MessageDigest
 import java.util.BitSet
 import java.util.zip.GZIPInputStream
 
-/** How fast the disk really absorbs data (time spent inside `write` only, not waiting for the network). Announced to the phone. */
+/**
+ * How fast the disk really absorbs data (time spent inside `write` only, not waiting for the network). Announced to the phone.
+ * Caveat: a `write` returns when the bytes reach the page cache, not the medium, so this over-estimates a slow USB key until the cache fills
+ * (then it drops): the policy ([PlaybackPriority.receiveCap]) only halves it and clamps the result, so a transient over-estimate is bounded.
+ */
 class WriteStats(private val now: () -> Long = System::nanoTime) {
     @Volatile private var bps = 0.0
     @Volatile private var inflight = 0L
@@ -71,6 +75,12 @@ class PartAssembler private constructor(
     @Volatile private var closed = false
     @Volatile var touched = now(); private set
     private var lastPersist = 0L
+    /**
+     * Was the data file sized at once? When NOT (FAT/exFAT/unknown), a block written far past the end of the file makes the kernel zero-fill the
+     * whole gap synchronously under the inode lock (Linux 5.15 `cont_write_begin`): the TV then only takes blocks near the contiguous prefix
+     * ([TransferHost.admitAhead]) and tells the phone to keep its blocks in order (`ordered` in the state).
+     */
+    @Volatile var preallocated: Boolean = true; private set
 
     private fun claim(idx: Int): Boolean = synchronized(this) { !map.has(idx) && busy.add(idx) }
     private fun release(idx: Int) = synchronized(this) { busy.remove(idx) }
@@ -242,6 +252,7 @@ class PartAssembler private constructor(
             val reuse = data.isFile && st.isFile && (data.length() == manifest.size || (!preallocate && data.length() < manifest.size))
             if (!reuse) { data.delete(); st.delete() }
             val a = PartAssembler(dir, manifest, data, st, stats, now, persistEveryMs = persistEveryMs)
+            a.preallocated = preallocate
             if (reuse) a.restore() else { if (preallocate) a.raf!!.setLength(manifest.size); a.persist() }
             return a
         }
