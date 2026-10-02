@@ -1,3 +1,10 @@
+import java.time.Duration
+import java.util.concurrent.Executors
+import java.util.concurrent.ScheduledExecutorService
+import java.util.concurrent.ScheduledFuture
+import java.util.concurrent.TimeUnit
+import java.util.concurrent.atomic.AtomicReference
+
 plugins { kotlin("jvm") }  // pure-logic module shared by the Android apps
 dependencies {
     api("org.nanohttpd:nanohttpd:2.3.1")
@@ -131,6 +138,30 @@ tasks.register<JavaExec>("checkContentGraph") {
 
 // UTF-8 file names in tests, as on Android (CI/containers often have no locale set)
 tasks.test {
+    // Bounded time: JUnit 4 has no global per-test timeout, so no test may hang the suite (ByteRelayTest.noServerMeansRefused once did, for an hour).
+    // (1) the whole task gives up after 40 minutes (the full core suite takes ~5); (2) a watchdog kills the test worker when ONE test runs longer than
+    // 60 s (-PtestTimeoutMs=… to change) and names that test: Gradle then reports the worker crash. Slow tests must be fixed, not waited for.
+    timeout.set(Duration.ofMinutes(40))
+    val perTestMs = (project.findProperty("testTimeoutMs") as String?)?.toLong() ?: 60_000L
+    val watch = AtomicReference<ScheduledExecutorService?>(null)
+    val pending = AtomicReference<ScheduledFuture<*>?>(null)
+    val log = logger
+    doFirst { watch.set(Executors.newSingleThreadScheduledExecutor { r -> Thread(r, "test-watchdog").apply { isDaemon = true } }) }
+    doLast { watch.getAndSet(null)?.shutdownNow() }
+    addTestListener(object : TestListener {
+        override fun beforeSuite(suite: TestDescriptor) {}
+        override fun afterSuite(suite: TestDescriptor, result: TestResult) {}
+        override fun beforeTest(test: TestDescriptor) {
+            val name = "${test.className}.${test.name}"
+            pending.set(watch.get()?.schedule({
+                log.error("TEST TROP LONG (plus de $perTestMs ms) : $name : le processus de test est tué")
+                ProcessHandle.current().descendants()
+                    .filter { it.info().commandLine().orElse("").contains("Gradle Test Executor") }
+                    .forEach { it.destroyForcibly() }
+            }, perTestMs, TimeUnit.MILLISECONDS))
+        }
+        override fun afterTest(test: TestDescriptor, result: TestResult) { pending.getAndSet(null)?.cancel(false) }
+    })
     environment("LC_ALL", "C.UTF-8")
     // « Apprendre »: the tests validate every pack source of the repository (docs/LEARN.md)
     systemProperty("learn.content", learnContent.absolutePath)

@@ -89,3 +89,18 @@ Préfixes de code : `C/` = `android/core/src/main/kotlin/castbridge/core/`, `CT/
 | **H** (humain) | P-01, P-02, P-03, P-04, P-06, P-07, P-11, P-12, P-13, P-16, P-18, P-20, P-25, P-26, P-27, P-28, P-31, P-33, P-34, P-35 | 20 (dont **12** retenus dans la liste humaine de 15 min) |
 
 **Ce que le JVM ne prouve jamais** (et qui reste humain) : le Bluetooth RFCOMM réel du S21+, GaiaOS 32 bits (libVLC, `startForeground`, économie d'énergie au boot), la clé USB exFAT/FAT32 réelle, les dialogues de permission de Samsung, la lisibilité à 3 m. **Ce que l'émulateur ne prouve pas** : le 32 bits (AVD arm64 ⇒ tranche `arm64-v8a` de l'APK), le Bluetooth (absent de l'émulateur : le harnais rejoue le HELLO par TCP sur `FakeTvMain`), la vraie box avec isolation des clients.
+
+## Limites connues du harnais JVM (audit Opus de 06c4150, corrigé par `fix-journey-harness`)
+
+Un parcours JVM vert ne prouve **pas** les points ci-dessous ; chacun reste à `ÉMU` / `ADB` / `H` ou attend w14-05 (« non couvert par le harnais : voir w14-05 ou fumée »).
+
+| Point | Pourquoi le harnais ne le prouve pas | Où le vérifier |
+|---|---|---|
+| Notification **finale** du téléphone (« Terminé », « Envoi interrompu : … ») : P-11, P-15, P-36 | `UploadService` n'en publie pas ; `Notice.syntheticFinal` est inventée par le harnais, lecture interdite à la compilation. Aucun test ne doit asserter dessus avant le branchement de `XferTexts` (w14-05) | w14-05 (`XferTexts`), `ADB` (`dumpsys notification`) |
+| Copie par **Bluetooth** (P-13, J-14) | pas de voie de données Bluetooth dans le harnais : une liaison Bluetooth seule ne donne aucune adresse d'envoi (test `bluetoothOnlyLinkHasNoDataLane`) ; `j14…` est `@Ignore` | fumée `ÉMU` (`FakeTvMain`), `H` |
+| R-01 côté Android : l'**erreur 401 avalée** par `UploadService`, la carte « code changé » | le harnais reproduit le noyau (clé d'écran qui ne désigne pas la TV ⇒ ancien code figé ⇒ refus nommé par le cœur, `autorisation refusée par la TV`) mais pas l'écran ni la notification | w14-02 (carte pure), `ADB` |
+| R-01 corrigé (`PinKeys` tolérant, w15-02) | test `r01UnmatchedScreenKeyStillCopiesWithTheTrustedToken` `@Ignore("REGRESSION R-01 …")` : rouge vérifié aujourd'hui, à réactiver par w15-02 | w15-02 |
+| TV **verrouillée** : activation par écran / clé USB / canal Bluetooth du propriétaire | la TV simulée verrouillée n'a ni serveur HTTP ni HELLO (fidèle à `TvService.startCore`), `unlock()` la démarre ; l'écran d'activation et la lecture de la clé USB ne sont pas rejoués | `ÉMU`, `H` |
+| Icônes de la barre d'état de la TV (`phoneSeen` → `icons.up`), notification de réception de la TV | Android seulement ; `TransferProgress` (qui les nourrit) est, lui, vérifié | `ÉMU`, `ADB` |
+| Vitesse d'écriture du disque (`slow`), saturation HTTP 429 (`busy`), reprise `.cbx` après `restart()` | annoncé / non rejoué | fumée, w14-03 |
+| Attentes d'envoi et horloge | les attentes de reprise n'avancent plus l'horloge simulée (`PhoneSim.waitsAdvanceClock = false`) : l'expiration d'un jeton **pendant** un envoi bloqué n'est rejouée que si le test l'active | w14-03 |

@@ -6,7 +6,7 @@ import java.io.*
 import kotlin.concurrent.thread
 
 /** A clock the tests move by hand: nothing here ever sleeps. */
-class FakeClock(var t: Long = 1_000_000L) { fun now() = t; fun advance(ms: Long) { t += ms } }
+open class FakeClock(var t: Long = 1_000_000L) { open fun now() = t; open fun advance(ms: Long) { t += ms } }
 
 /**
  * A TV (real registry, pairing, HELLO and CBTH protocol over in-memory pipes) with every way of misbehaving the field showed:

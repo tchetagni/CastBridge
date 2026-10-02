@@ -11,6 +11,10 @@ import castbridge.core.tv.ApiReply
  */
 class ActivationApiSim(@Volatile var trial: Boolean = false) : ApiExtension {
     @Volatile var required: Boolean = true
+    /**
+     * Reflet de l'état « verrouillée » de [TvSim] : une TV verrouillée n'a AUCUN serveur HTTP (R/TvService.kt:202), donc cette route ne répond jamais
+     * `locked:true` à un client réel ; la valeur n'est lue que par les tests qui interrogent la simulation directement.
+     */
     @Volatile var locked: Boolean = false
     @Volatile var label: String = if (trial) "Essai" else "Version complète"
     @Volatile var usageEndsAt: Long? = null
