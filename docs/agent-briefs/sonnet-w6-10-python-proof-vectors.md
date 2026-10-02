@@ -4,6 +4,7 @@
 > **Modèle : haiku** · escalade : sonnet au 2e échec ou fichier sensible · statut : PRÊT (après w6-03)
 > **Groupe : W6b-1** (vague W6b) · prérequis : w6-03 · porte : `python3 tools/activation/verify_vectors.py && python3 -m unittest discover -s tools/tests -p 'test_verify_vectors.py'`
 > **Jauge : ≈ 60 k jetons entrée / 5 k sortie** (effort S) · audit Opus : non
+> **Amendement (architecte, 2026-10-02)** : lire d'abord `docs/coordination/ADDENDUM-W6-PREUVE-TV-LIEN-CLE-2026-10-02.md` (§ 2 D-W6-L2/L5/L8/L9, § 7). Il **prévaut**. En plus : `parse_device_request` lit la ligne `sign=ed25519|…` ; corps `activation` avec `install=<16 hex>` en position 4 (facultatif, forme canonique) ; cas additifs `proof-bound-*`, `proof-unbound-*`, `proof-seq-*`, `proof-compact-only`, `nonce-*` (contrat du défi : dépensé à la première sortie après signature valide, jamais sur `NeedsPin`). Prérequis : `claude/sonnet-w6-03-fix` fusionné. Toujours écrit depuis la description, jamais depuis le Kotlin.
 
 **Vague 6b · Effort S (≈ 0,5 j) · Modèle : haiku · Statut PRÊT (après w6-03 fusionné).** Conception : `DESIGN-W6-PARENTAL-PHONE-GATE.md` § 3.3, § 5 (tests). Branche `claude/sonnet-w6-10`. Rapport : `docs/agent-reports/sonnet-w6-10.md`.
 

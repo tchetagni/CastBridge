@@ -4,6 +4,7 @@
 > **Modèle : sonnet** · escalade : audit Opus obligatoire (diff sensible) · statut : PRÊT (w4-01 souhaité)
 > **Groupe : W6a-1** (vague W6a) · prérequis : aucun · porte : `cd android && tools/agents/gradle-lock.sh gradle --offline :core:test --tests '*Proof*'`
 > **Jauge : ≈ 800 k jetons entrée / 40 k sortie** (effort L) · audit Opus : oui
+> **Amendement (architecte, 2026-10-02)** : lire d'abord `docs/coordination/ADDENDUM-W6-PREUVE-TV-LIEN-CLE-2026-10-02.md` (§ 2, § 3, § 7). Il **prévaut** sur ce cahier et sur la conception § 3.3. Suite sur `claude/sonnet-w6-03-fix` : ligne de corps **`install=<kid de signature>`** (position 4, facultative) dans `Activation` et l'émission ; `TvProof.verify` : liaison vérifiée **avant** tout épinglage (D-W6-L5), `trust = BOUND|UNBOUND`, `ACTIVATION_UNBOUND` après `BIND_SUNSET_MS` (2027-01-01), `COMPACT_ONLY`, `seq` de preuve **strictement** croissant et `seq` d'activation non régressif (D-W6-L8), **`NonceBook`** (8 ouverts, 10 min, 512 dépensés ; dépense à la première sortie après signature valide, jamais sur `NeedsPin`) (D-W6-L9) ; `ProofCache` : `pin.bound`, validité 3 j (non liée) / 14 j (liée) ; `OwnerFrames.deviceInfo(…, signPub)` et ligne `sign=ed25519|…`. Vecteurs additifs § 7 ; aucun vecteur existant ne change d'octets.
 
 **Vague 6a · Effort L (≈ 3 j) · Modèle : sonnet · Statut PRÊT.** Conception : `DESIGN-W6-PARENTAL-PHONE-GATE.md` § 3.3, § 1 (lignes « Clé d'installation », « Preuve d'activation »). Branche `claude/sonnet-w6-03`. Rapport : `docs/agent-reports/sonnet-w6-03.md`.
 

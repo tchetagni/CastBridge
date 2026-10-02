@@ -4,6 +4,7 @@
 > **Modèle : sonnet** · escalade : opus audit si diff sécurité/crypto/argent · statut : PRÊT **version réduite W5** (sans maître) ; D9-bis pour la grille réelle
 > **Groupe : W4c-2** (vague W4c) · prérequis : w4-11 · porte : `cd android && tools/agents/gradle-lock.sh gradle --offline :core:test --tests '*OwnerCli*' && python3 -m unittest discover -s tools/tests -p 'test_sign_prices.py'`
 > **Jauge : ≈ 400 k jetons entrée / 20 k sortie** (effort M) · audit Opus : non
+> **Amendement (architecte, 2026-10-02)** : lire `docs/coordination/ADDENDUM-W6-PREUVE-TV-LIEN-CLE-2026-10-02.md` (§ 2 D-W6-L3/L6, § 4). Il **prévaut**. L'app du point focal et la console lisent `sign=` dans la demande et **lient** toute production (`install=`) ; la grille de prix gagne l'article **`reemission-cle|0`** (réémission gratuite après réinstallation de la TV ou pour remplacer une clé compacte) pour que l'anomalie serveur « même appareil vendu deux fois en < 48 h » ne se déclenche pas. Dépend de `claude/sonnet-w4-02-fix` et `claude/sonnet-w4-11-fix`.
 
 **Vague 4c · Effort M (≈ 2 j) · Statut PRÊT (après w4-11). BLOQUÉ partiel : D9-bis (montants) pour le fichier de grille réel ; l'agent livre un exemple `TEST` à 0.** Conception : `docs/coordination/DESIGN-W4-VENTE-TERRAIN.md` § 5, § 6, § 10. Branche `claude/sonnet-w4-12`. Rapport : `docs/agent-reports/sonnet-w4-12.md`.
 

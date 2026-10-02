@@ -4,6 +4,7 @@
 > **Modèle : sonnet** · escalade : audit Opus obligatoire (diff sensible) · statut : PRÊT (après 6a, w6-11, w6-12)
 > **Groupe : W6d-1** (vague W6d) · prérequis : w6-01, w6-02, w6-03, w6-11, w6-12 · porte : `cd android && tools/agents/gradle-lock.sh gradle --offline :sender:compileDebugKotlin`
 > **Jauge : ≈ 800 k jetons entrée / 40 k sortie** (effort L) · audit Opus : oui
+> **Amendement (architecte, 2026-10-02)** : lire d'abord `docs/coordination/ADDENDUM-W6-PREUVE-TV-LIEN-CLE-2026-10-02.md` (§ 2 D-W6-L4/L5/L9, § 6). Il **prévaut**. En plus : puce « production · **non liée** » (`Proof.trust = UNBOUND`, cache 3 j) ; messages **M-ACT-UNBOUND**, **M-TV-REINSTALLED**, **M-TV-COMPACT** dans `PhoneGateTexts` (seul endroit) ; **aucun dialogue TOFU** pour une preuve liée (l'empreinte reste affichée en information ; `NeedsPin`/`IdentityChanged` ne surviennent que pour une activation non liée) ; `ProofSync` tient le `NonceBook` (8 ouverts, 10 min). La matrice § 3.7 ne change pas. Prérequis supplémentaire : `claude/sonnet-w6-03-fix`.
 
 **Vague 6d · Effort L (≈ 3,5 j) · Modèle : sonnet · Statut PRÊT (après 6a, w6-11, w6-12 fusionnés ; w6-17/18/19 en parallèle sur des fichiers disjoints : ils consomment `GateWall` et `PhoneGateRuntime` ; tant que ce cahier n'est pas fusionné, ils codent contre les signatures ci-dessous).** Conception : `DESIGN-W6-PARENTAL-PHONE-GATE.md` § 3.3 à § 3.9. Branche `claude/sonnet-w6-16`. Rapport : `docs/agent-reports/sonnet-w6-16.md`.
 

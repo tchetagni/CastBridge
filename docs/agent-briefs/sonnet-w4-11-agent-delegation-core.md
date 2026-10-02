@@ -4,6 +4,7 @@
 > **Modèle : sonnet** · escalade : audit Opus obligatoire (diff sensible) · statut : PRÊT **amendé par W5** (plus de master=/agentx=, maxRentalDays=0, champs confirmOrders/sellVouchers)
 > **Groupe : W4c-1** (vague W4c) · prérequis : aucun · porte : `cd android && tools/agents/gradle-lock.sh gradle --offline :core:test --tests '*Delegation*' --tests '*Ticketed*' --tests '*Sales*'`
 > **Jauge : ≈ 800 k jetons entrée / 40 k sortie** (effort L) · audit Opus : oui
+> **Amendement (architecte, 2026-10-02 ; cahier fusionné → correctif `claude/sonnet-w4-11-fix`)** : lire `docs/coordination/ADDENDUM-W6-PREUVE-TV-LIEN-CLE-2026-10-02.md` (§ 2 D-W6-L3/L6, § 7). Il **prévaut**. Un point focal **peut et doit** lier : `DelegatedVerifier` refuse une production d'agent **sans** ligne `install=` (`KEY_NOT_ALLOWED` « Le point focal ne délivre que des clés liées à la TV ») ; rien d'autre ne change dans la délégation. Journal des ventes : la réémission gratuite (réinstallation, clé compacte) s'écrit `NOTE réémission` avec l'article `reemission-cle|0`. Vecteurs additifs `delegated-production-unbound` (refus) et `delegated-production-bound`. Dépend de `claude/sonnet-w6-03-fix`.
 
 **Vague 4c · Effort L (≈ 3 j) · Statut PRÊT.** Conception : `docs/coordination/DESIGN-W4-VENTE-TERRAIN.md` § 3, § 4, § 6 (lire en entier). Branche `claude/sonnet-w4-11`. Rapport : `docs/agent-reports/sonnet-w4-11.md`. **Premier cahier de la sous-vague 4c** : tous les autres en dépendent. Dépend de w4-01 (boîte v2 : `RentalKeys.makeBoxV2/openBox`, `X25519`) pour la ligne `master=`.
 

@@ -4,6 +4,7 @@
 > **Modèle : sonnet** · escalade : audit Opus obligatoire (diff sensible) · statut : PRÊT (après w4-01 ; déployer après w4-02, w4-05)
 > **Groupe : W4a-2** (vague W4a) · prérequis : w4-01 · porte : `cd android && tools/agents/gradle-lock.sh gradle --offline :receiver:compileDebugKotlin`
 > **Jauge : ≈ 400 k jetons entrée / 20 k sortie** (effort M) · audit Opus : oui
+> **Amendement (architecte, 2026-10-02)** : lire `docs/coordination/ADDENDUM-W6-PREUVE-TV-LIEN-CLE-2026-10-02.md` (§ 2 D-W6-L2, § 3 « w4-03 »). Ce cahier **ne change pas** : il écrit la seule ligne `install=x25519|…` ; la ligne **`sign=ed25519|…`** (clé de signature `InstallSigner`) est ajoutée par **w6-12**, pas ici. La règle « `install.key` jamais réécrit sur panne du wrapper » (correctif w4-01) vaut aussi pour la graine de signature de w6-12 ; `KeystoreWrapper` sert aux deux graines sous deux alias distincts.
 
 **Vague 4a · Effort M (≈ 1,5 j) · Statut PRÊT (après w4-01 ; déployer après w4-02 et w4-05).** Conception : `docs/coordination/DESIGN-W4-ENVELOPPE-LOCATIONS.md` § 3, § 4, § 6. Branche `claude/sonnet-w4-03`. Rapport : `docs/agent-reports/sonnet-w4-03.md`.
 

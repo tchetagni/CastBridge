@@ -4,6 +4,7 @@
 > **Modèle : sonnet** · escalade : audit Opus obligatoire (diff sensible) · statut : PRÊT (après w4-11, w2-01) ; refuse toute ligne rental d'agent
 > **Groupe : W4c-2** (vague W4c) · prérequis : w4-11, w2-01 · porte : `cd android && tools/agents/gradle-lock.sh gradle --offline :receiver:compileDebugKotlin :core:test --tests '*Delegat*'`
 > **Jauge : ≈ 400 k jetons entrée / 20 k sortie** (effort M) · audit Opus : oui
+> **Amendement (architecte, 2026-10-02)** : lire `docs/coordination/ADDENDUM-W6-PREUVE-TV-LIEN-CLE-2026-10-02.md` (§ 2 D-W6-L6, § 3 « w4-15 »). Il **prévaut**. Une activation avec ticket liée (`install=`) suit la même règle que les autres sur la TV : comparée à `InstallSigner.keyId`, **acceptée** en `mismatch` avec le message « Clé faite pour une autre installation : demandez sa réémission », état `installBound` affiché avec le nom du point focal. Dépend de w6-12 pour `installBound`.
 
 **Vague 4c · Effort M (≈ 1,5 j) · Statut PRÊT (après w4-11 ; w2-01 fusionné pour la révocation persistée).** Conception : `docs/coordination/DESIGN-W4-VENTE-TERRAIN.md` § 2, § 3. Branche `claude/sonnet-w4-15`. Rapport : `docs/agent-reports/sonnet-w4-15.md`.
 

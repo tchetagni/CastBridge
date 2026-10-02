@@ -4,6 +4,7 @@
 > **Modèle : sonnet** · escalade : opus audit si diff sécurité/crypto/argent · statut : PRÊT (après w4-01)
 > **Groupe : W4a-2** (vague W4a) · prérequis : w4-01 · porte : `cd android && tools/agents/gradle-lock.sh gradle --offline :core:test --tests '*OwnerCli*' && cd ../tools/activation-desktop && tools/agents/gradle-lock.sh gradle --offline test`
 > **Jauge : ≈ 400 k jetons entrée / 20 k sortie** (effort M) · audit Opus : non
+> **Amendement (architecte, 2026-10-02 ; cahier fusionné → correctif `claude/sonnet-w4-02-fix`)** : lire d'abord `docs/coordination/ADDENDUM-W6-PREUVE-TV-LIEN-CLE-2026-10-02.md` (§ 2 D-W6-L2/L3/L4, § 3 « w4-02 »). Il **prévaut**. Les trois outils (console, bureau, `OwnerCli`) lisent la ligne **`sign=ed25519|…`** de la demande (`DeviceInfo.signPub`, `DeviceRequest.signPub`) et émettent la ligne de corps **`install=<kid>`** pour toute **production** et tout **`super`** (jamais pour un essai) ; sans `sign=` (TV ancienne) : refus par défaut « cette TV n'a pas fourni sa clé de signature : mettez CastBridge-TV à jour », option explicite « sans liaison (TV ancienne) » journalisée et refusée après le coucher 2027-01-01 ; le récapitulatif affiche « clé liée : oui/non ». Dépend de `claude/sonnet-w6-03-fix` (`Activation.installKid`).
 
 **Vague 4a · Effort M (≈ 1,5 j) · Statut PRÊT (après w4-01).** Conception : `docs/coordination/DESIGN-W4-ENVELOPPE-LOCATIONS.md` § 4, § 6. Branche `claude/sonnet-w4-02`. Rapport : `docs/agent-reports/sonnet-w4-02.md`.
 

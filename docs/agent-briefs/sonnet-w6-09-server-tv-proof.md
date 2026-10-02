@@ -4,6 +4,7 @@
 > **Modèle : sonnet** · escalade : audit Opus obligatoire (diff sensible) · statut : PRÊT (après w6-03)
 > **Groupe : W6b-1** (vague W6b) · prérequis : w6-03 · porte : `cd backend && tools/agents/gradle-lock.sh ./mvnw -q -o test -Dtest='TvProof*Test'`
 > **Jauge : ≈ 400 k jetons entrée / 20 k sortie** (effort M) · audit Opus : oui
+> **Amendement (architecte, 2026-10-02)** : lire d'abord `docs/coordination/ADDENDUM-W6-PREUVE-TV-LIEN-CLE-2026-10-02.md` (§ 2 D-W6-L1/L4, § 3 « w6-09 »). Il **prévaut**. `X-CB-TV-Proof` accepte **deux formes** : le jeton d'activation brut (jusqu'au coucher 2027-01-01, et toujours pour une activation **non liée**) ou l'enveloppe `proof` ; pour une activation portant `install=`, l'enveloppe est **exigée** (signature par la clé embarquée, `kid` = `install=`, `issuedAt` dans [−14 j, +24 h]) ; codes `TV_PROOF_UNBOUND`, `TV_PROOF_KID_MISMATCH`, `TV_PROOF_STALE`. Détection seulement : table additive `tv_proof_seen`, anomalies `TV_PROOF_MANY_PHONES` (≥ 6 téléphones / 30 j par `install_kid`) et `TV_PROOF_MANY_INSTALLS` (≥ 3 installations / 90 j par code), jamais de blocage automatique. `WireActivation` lit `install=`. Prérequis supplémentaire : `claude/sonnet-w6-03-fix`.
 
 **Vague 6b · Effort M (≈ 2 j) · Modèle : sonnet · Statut PRÊT (après w6-03 fusionné ; après w5-06/07/08 si fusionnés, sinon ne gater que les lots).** Conception : `DESIGN-W6-PARENTAL-PHONE-GATE.md` § 3.4 (serveur), § 3.6, § 7 (4). Branche `claude/sonnet-w6-09`. Rapport : `docs/agent-reports/sonnet-w6-09.md`.
 

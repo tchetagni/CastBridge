@@ -4,6 +4,7 @@
 > **Modèle : sonnet** · escalade : audit Opus obligatoire (diff sensible) · statut : PRÊT (après w6-03)
 > **Groupe : W6c-1** (vague W6c) · prérequis : w6-03, w4-03 · porte : `cd android && tools/agents/gradle-lock.sh gradle --offline :receiver:compileDebugKotlin :core:test --tests '*Proof*'`
 > **Jauge : ≈ 400 k jetons entrée / 20 k sortie** (effort M) · audit Opus : oui
+> **Amendement (architecte, 2026-10-02)** : lire d'abord `docs/coordination/ADDENDUM-W6-PREUVE-TV-LIEN-CLE-2026-10-02.md` (§ 2 D-W6-L2/L6/L8, § 3 « w6-12 », § 4). Il **prévaut**. En plus : la demande d'appareil (`requestText()`, `device-request.txt`, trame `DEVICE_INFO`, `/api/activation/request`) ajoute **`sign=ed25519|<64 hex>`** après `install=` ; la TV vérifie `install=` d'une activation contre `InstallSigner.keyId` et l'**accepte** en `mismatch` (jamais de refus net) ; `GET /api/activation` expose `"installBound": "bound"|"unbound"|"mismatch"` et l'écran d'activation le dit ; `seq` de preuve persistant et **strictement** croissant ; preuve d'une TV à clé compacte : `activation=` absent **et** `compact=1`. Prérequis supplémentaire : `claude/sonnet-w6-03-fix`.
 
 **Vague 6c · Effort M (≈ 2 j) · Modèle : sonnet · Statut PRÊT (après w6-03 ; après w4-03 si fusionné pour `KeystoreWrapper`, sinon repli fichier).** Conception : `DESIGN-W6-PARENTAL-PHONE-GATE.md` § 3.3, § 7 (4). Branche `claude/sonnet-w6-12`. Rapport : `docs/agent-reports/sonnet-w6-12.md`.
 
