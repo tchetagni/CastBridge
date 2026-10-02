@@ -49,6 +49,9 @@ class UploadService : Service() {
     /** A moved file that the TV now holds completely: the screen deletes it from the phone (with Android's confirmation). */
     data class MoveRequest(val uri: Uri, val name: String, val size: Long)
 
+    /** Thrown by [start] while another upload runs: nothing is started, nothing of the running upload is touched (R-09). */
+    class Busy : IllegalStateException(BUSY_TEXT)
+
     sealed class State {
         object Idle : State()
         data class Uploading(val job: Job, val sent: Long, val total: Long) : State()
@@ -76,7 +79,14 @@ class UploadService : Service() {
         if (intent?.action == ACTION_CANCEL) { cancelled = true; stopSelf(); return START_NOT_STICKY }
         val uri = intent?.data
         val tvName = intent?.getStringExtra(EXTRA_TV)
-        if (uri == null || tvName == null || worker?.isAlive == true) return START_NOT_STICKY
+        if (uri == null || tvName == null) return START_NOT_STICKY
+        if (worker?.isAlive == true) {
+            // R-09: a start that slipped past [start]'s check is never dropped in silence (and never leaves Android waiting for startForeground)
+            runCatching { val n = notification("Envoi en cours…", 0)
+                if (Build.VERSION.SDK_INT >= 29) startForeground(NOTIF, n, ServiceInfo.FOREGROUND_SERVICE_TYPE_DATA_SYNC) else startForeground(NOTIF, n) }
+            Log.w(TAG, "start ignored while an upload runs: ${intent.getStringExtra(EXTRA_NAME)}")
+            return START_NOT_STICKY
+        }
         val name = intent.getStringExtra(EXTRA_NAME) ?: uri.lastPathSegment ?: "video"
         val job = Job(name, tvName, intent.getStringExtra(EXTRA_HOST), intent.getStringExtra(EXTRA_PIN),
             intent.getBooleanExtra(EXTRA_PROGRESSIVE, false), intent.getBooleanExtra(EXTRA_AUTOPLAY, true), intent.getStringExtra(EXTRA_TARGET),
@@ -88,7 +98,7 @@ class UploadService : Service() {
             else startForeground(NOTIF, n)
         } catch (e: Exception) {
             Log.e(TAG, "startForeground", e)
-            _state.value = State.Failed(job, "Service refusé par le système : ${e.message}")
+            _state.value = State.Failed(job, "$REFUSED : ${e.message}")
             stopSelf(); return START_NOT_STICKY
         }
         acquireLocks()
@@ -351,12 +361,19 @@ class UploadService : Service() {
         private const val NOTIF_MOVE = 7
         const val EXTRA_MOVE = "move"
         const val EXTRA_ORDERED = "ordered"
+        /** Prefix of the failure when Android refuses the foreground service (in the background since Android 12): the queue waits for the app instead. */
+        const val REFUSED = "Service refusé par le système"
+        const val BUSY_TEXT = "Un envoi vers la TV est déjà en cours : celui-ci n'a pas été lancé. « Copier vers la TV » le met dans la file d'attente."
+        /** An upload is running in this process (its worker thread is alive). */
+        fun active(): Boolean = instance?.worker?.isAlive == true
         private val _state = MutableStateFlow<State>(State.Idle)
         val state: StateFlow<State> = _state
 
         fun start(ctx: Context, uri: Uri, fileName: String, tvName: String, manualHost: String?, pin: String? = null,
                   progressive: Boolean = false, autoPlay: Boolean = true, target: String? = null, move: Boolean = false, ordered: Boolean = false) {
             // library assistant, option « Rangement automatique des nouveaux envois » (off by default, docs/LIBRARY-AGENT.md)
+            // R-09: one upload at a time; a second start used to reset the state of the running one and be dropped in silence (onStartCommand)
+            if (active()) throw Busy()
             val fileName = castbridge.sender.agent.AgentAuto.nameFor(ctx, fileName)       // a CANDIDATE: confirmed in the service once the TV has been asked
             val i = Intent(ctx, UploadService::class.java).setData(uri)
                 .addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION)

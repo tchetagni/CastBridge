@@ -160,11 +160,10 @@ object CastSession {
      * « Copier sur la TV et lire » / « Déplacer » (R-08): the path is chosen before the first byte ([CopyRoute]): a video that plays on the TV goes in order
      * from byte 0 (visible `.part`), so that `/api/info` shows what arrived and the TV starts as soon as it holds [Handoff.bytesNeeded]; an MP4 indexed at the
      * end, or a photo, takes « Transfert rapide » (the TV waits for the whole file anyway). The phone keeps playing (if it was) until the TV takes over.
+     * R-09: the file goes through the transfer queue ([castbridge.sender.TransferQueue]); while another copy runs it is queued (« Ajouté à la file : n° 2 »),
+     * never refused, and the hand-off starts once its own copy runs (a « Copier et lire » goes before the plain copies waiting, [castbridge.core.tv.QueueRules]).
      */
     private suspend fun copy(ctx: Context, target: CastTarget.Box, item: PlayItem, move: Boolean, dur0: Long, fallbackPos: Long) {
-        val up = UploadService.state.value
-        if (up is UploadService.State.Uploading || up is UploadService.State.Waiting)
-            throw CastFailure("Un envoi vers la TV est déjà en cours : attendez qu'il se termine.")
         val action = if (move) CastAction.MOVE else CastAction.COPY
         // facts known before the first byte: the size and the MP4 layout decide the path
         val size = withContext(Dispatchers.IO) {
@@ -174,16 +173,20 @@ object CastSession {
             else withContext(Dispatchers.IO) { mp4LayoutOf(ctx, item.uri, size) }
         val route = CopyRoute.decide(CopyRoute.Facts(action, item.castSource, layout, fastEnabled = castbridge.sender.FastTransfer.enabled(ctx)))
         android.util.Log.i("CastSession", "copy ${item.name}: ${route.transport} (${route.why})")
-        withContext(Dispatchers.Main) {
-            UploadService.start(ctx, item.uri, item.name, target.tv.name, null, target.pin, progressive = false, autoPlay = false, move = move,
-                ordered = route.transport == CopyTransport.ORDERED)
+        val plays = CastPlan.playsOnTv(action, item.castSource)
+        val ticket = withContext(Dispatchers.Main) {
+            castbridge.sender.TransferQueue.add(ctx, item.uri, item.name, size, move, playOnTv = plays, ordered = route.transport == CopyTransport.ORDERED,
+                tvName = target.tv.name, credential = target.pin)
         }
-        if (!CastPlan.playsOnTv(action, item.castSource)) {
-            _notices.tryEmit(if (move) "Déplacement de « ${item.name} » vers ${target.name} : suivez l'envoi dans la notification."
+        if (!plays) {
+            _notices.tryEmit(if (ticket.queued) "${ticket.text} (« ${item.name} »)."
+                else if (move) "Déplacement de « ${item.name} » vers ${target.name} : suivez l'envoi dans la notification."
                 else "Copie de « ${item.name} » vers ${target.name} : suivez l'envoi dans la notification.")
             _state.value = null
             return
         }
+        if (ticket.queued) _notices.tryEmit("${ticket.text}.")
+        awaitTurn(ticket.id, item)
         // « Ouvrir avec » starts here without the phone's player: read the duration from the file, else the hand-off can only start from 0 on a byte guess
         val dur = if (dur0 > 0) dur0 else withContext(Dispatchers.IO) { probeDurationMs(ctx, item) }
         if (dur > 0) update { it.copy(localDurMs = dur) }
@@ -196,7 +199,12 @@ object CastSession {
             // the name the TV receives (« Rangement automatique » may have given a clean one)
             var sentName = item.name
             var waiting: String? = null
-            when (val u = UploadService.state.value) {
+            // the upload states describe this file only while the queue's last launch is this file (the next file of the queue may follow it)
+            val own = castbridge.sender.TransferQueue.owns(ticket.id)
+            val q = castbridge.sender.TransferQueue.item(ticket.id)
+            if (q?.status == castbridge.core.tv.QueueStatus.FAILED) throw CastFailure("Échec de l'envoi : ${q.error ?: "envoi interrompu"}")
+            if (q?.status == castbridge.core.tv.QueueStatus.CANCELLED) throw CastFailure("Envoi annulé : « ${item.name} » a été retiré de la file d'attente.")
+            when (val u = if (own) UploadService.state.value else null) {
                 is UploadService.State.Failed -> throw CastFailure("Échec de l'envoi : ${u.reason}")
                 is UploadService.State.Uploading -> { total = u.total; sentName = u.job.fileName }
                 is UploadService.State.Waiting -> { total = u.total; sentName = u.job.fileName; waiting = "En attente du réseau : ${u.reason}" }
@@ -213,12 +221,12 @@ object CastSession {
             if (waiting != null) update { it.copy(message = waiting) }
             if (f != null && total > 0) {
                 val (pos, _) = phonePosition(item, fallbackPos, dur)
-                val speed = UploadService.speed.value.takeIf { it > 0 } ?: UploadService.average.value
+                val speed = if (!own) 0L else UploadService.speed.value.takeIf { it > 0 } ?: UploadService.average.value
                 val progress = castbridge.core.phone.CopyProgress(f.received, total, speed,
                     Handoff.waitMs(f.received, total, dur, pos, moovAtEnd, speed), moovAtEnd = moovAtEnd)
                 val playsHere = phonePlays(item)
                 update { it.copy(copy = progress, phonePlays = playsHere, message = waiting ?: CopyHandoff.line(moovAtEnd, progress.fullInMs)) }
-                if (Handoff.copyReady(f.received, total, dur, pos, moovAtEnd, UploadService.speed.value)) {
+                if (Handoff.copyReady(f.received, total, dur, pos, moovAtEnd, if (own) UploadService.speed.value else 0L)) {
                     val start = Handoff.phoneToTv(pos, dur)
                     // f.name: the TV's own name of the file (the clean one it filed it under once complete)
                     val ok = try { client.play(f.name, start); true } catch (e: TvClient.HttpError) {
@@ -233,6 +241,27 @@ object CastSession {
                     }
                 }
             }
+            delay(1000)
+        }
+    }
+
+    /**
+     * Waits for this file's turn in the transfer queue (the copy running before it ends first; it is never interrupted), saying its place;
+     * a file removed or failed in the queue ends the cast with its cause. Returns once its own upload was launched (or it was already on the TV).
+     */
+    private suspend fun awaitTurn(id: Long, item: PlayItem) {
+        while (currentCoroutineContextActive()) {
+            val q = castbridge.sender.TransferQueue.item(id)
+            when {
+                castbridge.sender.TransferQueue.owns(id) -> return
+                q == null || q.status == castbridge.core.tv.QueueStatus.CANCELLED -> throw CastFailure("Envoi annulé : « ${item.name} » a été retiré de la file d'attente.")
+                q.status == castbridge.core.tv.QueueStatus.FAILED -> throw CastFailure("Échec de l'envoi : ${q.error ?: "envoi interrompu"}")
+                q.status == castbridge.core.tv.QueueStatus.DONE -> return
+            }
+            val n = castbridge.sender.TransferQueue.position(id)
+            val ahead = castbridge.sender.TransferQueue.runningName()?.takeIf { it != item.name }
+            val why = castbridge.sender.TransferQueue.note.value
+            update { it.copy(message = why ?: if (n > 1) "En file d'attente : n° $n" + (ahead?.let { a -> " — la copie et la lecture commenceront après « $a »" } ?: "") else "Démarrage de la copie…") }
             delay(1000)
         }
     }

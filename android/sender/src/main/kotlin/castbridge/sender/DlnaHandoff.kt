@@ -60,7 +60,9 @@ fun HandoffButton(fileUri: Uri?, fileName: String?, posSec: Long, durSec: Long, 
             PinField(pins, tv.name, pin, { pin = it }, Modifier.fillMaxWidth())
             OutlinedButton(enabled = !running && fileUri != null && fileName != null && castbridge.core.trust.TvCredential.isUsable(pin), onClick = {
                 running = true; status = "Envoi vers ${tv.name}…"
-                UploadService.start(ctx, fileUri!!, fileName!!, tv.name, null, pin, progressive = false, autoPlay = false)
+                // R-09: refused (never dropped in silence) while another upload runs
+                runCatching { UploadService.start(ctx, fileUri!!, fileName!!, tv.name, null, pin, progressive = false, autoPlay = false) }
+                    .onFailure { running = false; status = it.message ?: "Impossible de démarrer l'envoi" }
             }) { Text("Continuer sur la TV sans réseau") }
         }
         if (status.isNotEmpty()) Text(status, style = MaterialTheme.typography.bodySmall)
