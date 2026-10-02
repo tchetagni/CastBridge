@@ -9,7 +9,8 @@ import castbridge.core.quiz.Json.str
  * Pure and serializable: the app stores [toJson] in its preferences.
  */
 class HighScores(entries: List<Entry> = emptyList(), private val perBoard: Int = 10) {
-    data class Entry(val board: String, val name: String, val score: Long, val detail: String, val atMs: Long)
+    /** [boosted] = played with paid tokens (« avec jetons »): such an entry never ranks above one without. */
+    data class Entry(val board: String, val name: String, val score: Long, val detail: String, val atMs: Long, val boosted: Boolean = false)
 
     private val list = ArrayList(entries)
 
@@ -27,11 +28,11 @@ class HighScores(entries: List<Entry> = emptyList(), private val perBoard: Int =
     /** Boards that have scores, most recently played first. */
     @Synchronized fun boards(): List<String> = list.sortedByDescending { it.atMs }.map { it.board }.distinct()
 
-    /** Best score first; for equal scores the older one stays ahead (it was there first). */
-    private fun sorted(board: String) = list.filter { it.board == board }.sortedWith(compareByDescending<Entry> { it.score }.thenBy { it.atMs })
+    /** Entries without tokens first, then best score first; for equal scores the older one stays ahead (it was there first). */
+    private fun sorted(board: String) = list.filter { it.board == board }.sortedWith(compareBy<Entry> { it.boosted }.thenByDescending { it.score }.thenBy { it.atMs })
 
     @Synchronized fun toJson(): String = Json.write(mapOf("version" to 1, "scores" to list.map {
-        linkedMapOf("board" to it.board, "name" to it.name, "score" to it.score, "detail" to it.detail, "at" to it.atMs)
+        linkedMapOf("board" to it.board, "name" to it.name, "score" to it.score, "detail" to it.detail, "at" to it.atMs) + (if (it.boosted) mapOf("boosted" to true) else emptyMap())
     }))
 
     companion object {
@@ -40,7 +41,7 @@ class HighScores(entries: List<Entry> = emptyList(), private val perBoard: Int =
             @Suppress("UNCHECKED_CAST")
             val l = Json.obj(s ?: return HighScores(perBoard = perBoard))["scores"] as List<Map<String, Any?>>
             HighScores(l.mapNotNull { m ->
-                Entry(m.str("board") ?: return@mapNotNull null, m.str("name") ?: "", m.long("score") ?: 0, m.str("detail") ?: "", m.long("at") ?: 0)
+                Entry(m.str("board") ?: return@mapNotNull null, m.str("name") ?: "", m.long("score") ?: 0, m.str("detail") ?: "", m.long("at") ?: 0, m["boosted"] == true)
             }, perBoard)
         }.getOrElse { HighScores(perBoard = perBoard) }
     }

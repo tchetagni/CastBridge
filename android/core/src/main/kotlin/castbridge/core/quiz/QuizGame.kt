@@ -33,7 +33,7 @@ enum class Joker(val label: String) { FIFTY("50:50"), AUDIENCE("Avis du public")
  * commands safely (network idempotency).
  */
 class QuizGame(
-    val questions: List<Question>,
+    questions: List<Question>,
     val ladder: Ladder = Ladder.DEFAULT,
     /** Seconds per question level (index 0 = question 1). Every question has a countdown, never above [MAX_SECONDS]. */
     timers: IntArray = DEFAULT_TIMERS,
@@ -42,8 +42,18 @@ class QuizGame(
     val practice: Boolean = false,
     /** Channel of the device: on the beta channel a question not validated yet carries a visible mark in the state (castbridge.core.content.PlayPolicy). */
     val markChannel: castbridge.core.content.Channel? = null,
+    /** Paid conveniences (seconde chance, joker en plus, changer de question): [NoBoosts] = free game as before. */
+    val boosts: QuizBoosts = NoBoosts,
+    /** Id of this game for the debit of a boost. */
+    val gameId: String = "",
+    /** Gives a replacement question of the same difficulty for [Boost.SWAP_QUESTION] (null = none left); without it the boost is unavailable. */
+    val swapProvider: ((Question) -> Question?)? = null,
 ) {
-    enum class Phase { READY, QUESTION, CONFIRM, JOKER, LOCKED, REVEALED, FINISHED }
+    /** LOST_OFFER: after a wrong answer or a time-out, [LOST_OFFER_MS] to accept a [Boost.SECOND_CHANCE]; otherwise the game ends. */
+    enum class Phase { READY, QUESTION, CONFIRM, JOKER, LOCKED, REVEALED, LOST_OFFER, FINISHED }
+
+    private val pool: MutableList<Question> = questions.toMutableList()
+    val questions: List<Question> get() = pool
 
     /** Clock per question: missing or 0 means the maximum, anything longer is cut to [MAX_SECONDS]. */
     val timers: IntArray = IntArray(maxOf(questions.size, timers.size)) { i ->
@@ -52,7 +62,7 @@ class QuizGame(
     enum class End { WON, WRONG, WALKED, TIMEOUT, PRACTICE_DONE }
     data class PhoneResult(val choice: Int, val confidence: Int, val friend: String?, val simulated: Boolean)
 
-    init { require(questions.isNotEmpty() && questions.size <= ladder.size) }
+    init { require(pool.isNotEmpty() && pool.size <= ladder.size) }
 
     private val rng = Random(seed)
     var phase = Phase.READY; private set
@@ -78,7 +88,17 @@ class QuizGame(
     val levels get() = questions.size
     /** Right answers so far. */
     val reached: Int get() = if (phase == Phase.REVEALED && lastCorrect == true || phase == Phase.FINISHED && end == End.WON) index + 1 else index
-    val winnings: Long get() = if (practice) 0 else when (end) {
+    /** What the game would end with once the lost-offer countdown is over (set only in [Phase.LOST_OFFER]). */
+    private var pendingEnd: End? = null
+    private val boostCounts = java.util.EnumMap<Boost, Int>(Boost::class.java)
+    /** How many times each boost was bought in this game. */
+    val boostsUsed: Map<Boost, Int> get() = Boost.values().associateWith { boostCounts[it] ?: 0 }
+    /** true once any boost was bought: the score is marked « avec jetons » and never beats a record without tokens. */
+    val boosted: Boolean get() = boostCounts.values.any { it > 0 }
+    /** Why the last [applyBoost] was refused (French, for the TV), null if it was not refused. */
+    var lastBoostRefusal: String? = null; private set
+
+    val winnings: Long get() = if (practice) 0 else when (end ?: pendingEnd) {
         End.PRACTICE_DONE -> 0
         End.WON -> ladder.amount(levels)
         End.WALKED -> ladder.amount(index)
@@ -120,7 +140,7 @@ class QuizGame(
         when {
             practice && index + 1 >= levels -> finish(End.PRACTICE_DONE)
             practice -> enterQuestion(index + 1, now)
-            lastCorrect != true -> finish(End.WRONG)
+            lastCorrect != true -> lose(End.WRONG, now)
             index + 1 >= levels -> { index = levels - 1; finish(End.WON) }
             else -> enterQuestion(index + 1, now)
         }
@@ -169,7 +189,8 @@ class QuizGame(
 
     /** Clock: a question left unanswered past its deadline ends the game (safe level kept). */
     fun tick(now: Long): Boolean {
-        if ((phase == Phase.QUESTION || phase == Phase.CONFIRM) && expired(now)) { selected = null; finish(End.TIMEOUT); return true }
+        if ((phase == Phase.QUESTION || phase == Phase.CONFIRM) && expired(now)) { selected = null; lose(End.TIMEOUT, now); return true }
+        if (phase == Phase.LOST_OFFER && expired(now)) { finish(pendingEnd ?: End.WRONG); return true }
         return false
     }
 
@@ -194,7 +215,50 @@ class QuizGame(
         phase = Phase.QUESTION
     }
 
-    private fun finish(e: End) { end = e; phase = Phase.FINISHED; deadline = 0; activeJoker = null }
+    /** A lost question: offers the second chance for [LOST_OFFER_MS] when it can be bought, else the game ends at once. */
+    private fun lose(e: End, now: Long) {
+        val can = !practice && boosts.available(Boost.SECOND_CHANCE) && (boostCounts[Boost.SECOND_CHANCE] ?: 0) < Boost.SECOND_CHANCE.maxPerGame
+        if (can) { pendingEnd = e; phase = Phase.LOST_OFFER; deadline = now + LOST_OFFER_MS; activeJoker = null } else finish(e)
+    }
+
+    private fun finish(e: End) { end = e; pendingEnd = null; phase = Phase.FINISHED; deadline = 0; activeJoker = null }
+
+    private fun swapUntouched() = removed.isEmpty() && audience == null && phone == null
+
+    /** Whether [b] can be bought right now: offered by the provider, under its per-game limit, in the right phase, never in practice. */
+    fun canBoost(b: Boost): Boolean {
+        if (practice || !boosts.available(b) || (boostCounts[b] ?: 0) >= b.maxPerGame) return false
+        return when (b) {
+            Boost.SECOND_CHANCE -> phase == Phase.LOST_OFFER
+            Boost.EXTRA_JOKER -> phase == Phase.QUESTION && (Joker.FIFTY in jokersUsed || Joker.AUDIENCE in jokersUsed)
+            Boost.SWAP_QUESTION -> phase == Phase.QUESTION && swapProvider != null && swapUntouched()
+        }
+    }
+
+    /** Refuses the second chance: the game ends now. */
+    fun declineBoost(): Boolean {
+        if (phase != Phase.LOST_OFFER) return false
+        finish(pendingEnd ?: End.WRONG); return true
+    }
+
+    /**
+     * Buys [b]: checks, then debits, then applies the effect. False with nothing changed when it cannot be bought or the
+     * balance is too low ([lastBoostRefusal] says why). Second chance = same question, new clock; extra joker = a spent
+     * 50:50 (else public vote) can be used again; swap = another question of the same difficulty (the old one counts as asked).
+     */
+    fun applyBoost(b: Boost, now: Long): Boolean {
+        lastBoostRefusal = null
+        if (!canBoost(b)) { lastBoostRefusal = "Cette option n'est pas disponible maintenant."; return false }
+        val replacement = if (b == Boost.SWAP_QUESTION) swapProvider!!.invoke(question) ?: run { lastBoostRefusal = "Plus de question de remplacement."; return false } else null
+        if (!boosts.charge(b, gameId)) { lastBoostRefusal = "Jetons insuffisants."; return false }
+        boostCounts[b] = (boostCounts[b] ?: 0) + 1
+        when (b) {
+            Boost.SECOND_CHANCE -> { pendingEnd = null; enterQuestion(index, now) }
+            Boost.EXTRA_JOKER -> jokersUsed.remove(if (Joker.FIFTY in jokersUsed) Joker.FIFTY else Joker.AUDIENCE)
+            Boost.SWAP_QUESTION -> { pool[index] = replacement!!; enterQuestion(index, now) }
+        }
+        return true
+    }
 
     /**
      * Public state. The right answer (and the explanation) is only included once the current question is revealed
@@ -227,6 +291,13 @@ class QuizGame(
             "lastCorrect" to lastCorrect,
             "end" to end?.name,
             "winnings" to winnings,
+            "boosted" to boosted,
+            "boosts" to linkedMapOf(
+                "available" to Boost.values().associate { it.name to canBoost(it) },
+                "used" to boostsUsed.mapKeys { it.key.name },
+                "costs" to Boost.values().associate { it.name to boosts.cost(it) },
+                "max" to Boost.values().associate { it.name to it.maxPerGame },
+                "balance" to boosts.balance()),
             "safe" to ladder.safeAmount(index),
             "remainingMs" to remainingMs(now),
             "ladder" to ladder.amounts,
@@ -239,6 +310,8 @@ class QuizGame(
     companion object {
         /** Longest time to answer a question, in every mode (Esaie: countdown, never more than 20 s). */
         const val MAX_SECONDS = 20
+        /** Time to accept a second chance after a lost question. */
+        const val LOST_OFFER_MS = 10_000L
         /** 20 s for every question. */
         val DEFAULT_TIMERS = IntArray(15) { MAX_SECONDS }
         /** Kept for callers of the former "no clock" mode: practice also has the 20 s countdown now. */

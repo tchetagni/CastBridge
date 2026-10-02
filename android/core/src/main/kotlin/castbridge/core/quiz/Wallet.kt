@@ -1,17 +1,17 @@
 package castbridge.core.quiz
 
 /**
- * Stakes of the « Compétition avec mise » mode, behind an interface.
+ * Stakes of the « Défi en points » mode (formerly « avec mise »), behind an interface. Points have no value, cannot be bought, and are never linked to the tokens of the shop.
  *
- * IMPORTANT — POC: the only implementation is [VirtualWallet]: virtual tokens WITHOUT ANY VALUE, created from nothing,
+ * IMPORTANT — POC: the only implementation is [ChallengePointsWallet]: challenge points WITHOUT ANY VALUE, created from nothing,
  * never bought, never cashed out. No real money, no payment integration, no bank or Mobile Money data. Plugging a real
  * provider requires first checking the Cameroonian legal framework on games of chance / contests (skill vs chance,
  * licence, minimum age, KYC): see docs/QUIZ.md, « Mise payante ».
  */
 interface WalletProvider {
-    /** true = demo tokens without value (the UI must then say « Jetons virtuels — démo »). */
+    /** true = points without value (the UI must then say « Points de défi — sans valeur »). */
     val virtual: Boolean
-    /** Name of the unit shown to players ("jetons"). */
+    /** Name of the unit shown to players ("points de défi"). */
     val unit: String
     fun balance(player: String): Long
     /** Takes [amount] from [player] for the game [gameId]; false (nothing taken) if the balance is too low. */
@@ -22,10 +22,10 @@ interface WalletProvider {
     fun refund(gameId: String)
 }
 
-/** In-memory demo tokens: every new player starts with [initial] tokens; everything is forgotten when the app stops. */
-class VirtualWallet(private val initial: Long = 1_000) : WalletProvider {
+/** In-memory challenge points: no value, not purchasable, never linked to shop tokens. Every new player starts with [initial] points; forgotten when the app stops. */
+class ChallengePointsWallet(private val initial: Long = 1_000) : WalletProvider {
     override val virtual = true
-    override val unit = "jetons"
+    override val unit = "points de défi"
     private val balances = HashMap<String, Long>()
     private val stakes = HashMap<String, MutableMap<String, Long>>()
 
@@ -83,3 +83,7 @@ object Pot {
         return out
     }
 }
+
+/** Former name of [ChallengePointsWallet], kept so nothing breaks. */
+@Deprecated("Renamed: points de défi, not tokens", ReplaceWith("ChallengePointsWallet(initial)"))
+fun VirtualWallet(initial: Long = 1_000): ChallengePointsWallet = ChallengePointsWallet(initial)
