@@ -107,7 +107,8 @@ class QuizHttp(
             QuizRoom.Act.CLOSED -> 410
         }
         val view = if (res == QuizRoom.Act.UNKNOWN_PLAYER) "null" else r.viewJson(p["token"])
-        return json(code, """{"result":"$res","state":$view}""")
+        val why = if (p["action"] == "boost" || p["action"] == "declineBoost") ",\"error\":\"réservé à la TV\"" else ""
+        return json(code, """{"result":"$res"$why,"state":$view}""")
     }
 
     private fun events(token: String?): Response {

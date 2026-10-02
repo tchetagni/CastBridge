@@ -33,8 +33,10 @@ class QuizRoom(
     val callMs: Long = 20_000,
     /** Ids already asked in this TV session (no repeat until the bank runs dry). */
     private val asked: MutableSet<String> = LinkedHashSet(),
-    /** Stakes of the « avec mise » competition: virtual demo tokens in the POC (see [WalletProvider]). */
-    val wallet: WalletProvider = VirtualWallet(),
+    /** Stakes of the « Défi en points » competition: points without value in the POC (see [WalletProvider]), never shop tokens. */
+    val wallet: WalletProvider = ChallengePointsWallet(),
+    /** Paid conveniences of the Millionnaire game, only reachable from the TV (never from a phone). Free default. */
+    val boosts: QuizBoosts = NoBoosts,
     /** Anti-repetition histories (docs/QUIZ.md, Règle des 300 parties): the host's and those of the phones. In memory by default. */
     val histories: QuizHistoryBook = QuizHistoryBook(null),
     /** A question is not asked again to the same players before this many games of the same course, while the bank allows it. */
@@ -42,7 +44,7 @@ class QuizRoom(
 ) {
     enum class Mode(val label: String) { MILLIONAIRE("Millionnaire"), DUEL("Duel") }
     /** How the game is played: free competition, competition with a (virtual) stake, or practice without anything at stake. */
-    enum class Play(val label: String) { FRIENDS("Compétition entre amis"), STAKE("Compétition avec mise"), PRACTICE("Entraînement") }
+    enum class Play(val label: String) { FRIENDS("Compétition entre amis"), STAKE("Défi en points"), PRACTICE("Entraînement") }
     enum class Stage { LOBBY, PLAYING, FINISHED, CLOSED }
     enum class Join { OK, BAD_CODE, FULL, CLOSED, BAD_NAME }
     enum class Act { OK, IGNORED, FORBIDDEN, BAD_REQUEST, UNKNOWN_PLAYER, CLOSED }
@@ -203,7 +205,10 @@ class QuizRoom(
         if (mode == Mode.MILLIONAIRE) {
             val qs = draw(15, seed)
             val practice = play == Play.PRACTICE
-            game = QuizGame(qs, timers = if (practice) QuizGame.NO_TIMERS else gameTimers, seed = seed, practice = practice, markChannel = bank.channel).also { it.start(t) }
+            val inGame = qs.map { it.id }.toMutableSet()
+            val swap = { q: Question -> swapQuestion(q, inGame) }
+            game = QuizGame(qs, timers = if (practice) QuizGame.NO_TIMERS else gameTimers, seed = seed, practice = practice, markChannel = bank.channel,
+                boosts = if (practice) NoBoosts else boosts, gameId = "$code-${gameNo + 1}", swapProvider = swap).also { it.start(t) }
             duel = null
             if (candidate != null && players[candidate]?.left != false) candidate = null
         } else {
@@ -320,6 +325,7 @@ class QuizRoom(
                 game?.finishPhone(choice, p.name, t); call = null; Act.OK
             }
             "report" -> reportAct(questionId, arg)   // « Signaler une erreur »: any player, on the question on screen
+            "boost", "declineBoost" -> Act.FORBIDDEN  // réservé à la TV: a phone can never spend tokens
             else -> {
                 val g = game ?: return Act.IGNORED
                 if (candidate != p.id) return Act.FORBIDDEN
@@ -329,6 +335,32 @@ class QuizRoom(
         }
         if (r == Act.OK) changed()
         r
+    }
+
+    /** A question of the same difficulty, in the same course, not asked yet in this session nor in this game (null = none). */
+    private fun swapQuestion(q: Question, inGame: MutableSet<String>): Question? {
+        val exclude = asked + inGame
+        val pick = bank.draw(count = 200, seed = random.nextLong(), exclude = exclude, filter = filter)
+            .firstOrNull { it.difficulty == q.difficulty && it.id !in exclude } ?: return null
+        inGame += pick.id
+        return pick
+    }
+
+    /**
+     * The TV host (remote control) buys [b] for the Millionnaire game. Returns null when done, else the French reason for
+     * the screen. Phones cannot call this: `act=boost` is refused (« réservé à la TV »).
+     */
+    fun hostBoost(b: Boost): String? = synchronized(lock) {
+        val g = game?.takeIf { stage == Stage.PLAYING && mode == Mode.MILLIONAIRE } ?: return "Aucune partie en cours."
+        if (!g.applyBoost(b, now())) return g.lastBoostRefusal ?: "Option indisponible."
+        asked += g.question.id
+        changed(); null
+    }
+
+    /** The TV host refuses the second chance: the game ends. */
+    fun hostDeclineBoost(): Boolean = synchronized(lock) {
+        val g = game ?: return false
+        g.declineBoost().also { if (it) { stage = Stage.FINISHED; changed() } }
     }
 
     /** Where « Signaler une erreur » goes (set by the app: the queue of reports of this device); null = reports not available. */
@@ -404,7 +436,7 @@ class QuizRoom(
             if (stage != Stage.PLAYING) return
             var ch = false
             game?.let { g ->
-                if (g.tick(t)) { stage = Stage.FINISHED; ch = true }
+                if (g.tick(t)) { if (g.phase == QuizGame.Phase.FINISHED) stage = Stage.FINISHED; ch = true }
                 if (g.phase == QuizGame.Phase.LOCKED && t - lockedAt >= suspenseMs) { g.reveal(); ch = true }
                 vote?.let { if (t >= it.deadline) { finishVote(); ch = true } }
                 call?.let { c ->
@@ -461,7 +493,7 @@ class QuizRoom(
             "settings" to linkedMapOf("mode" to mode.name, "play" to play.name, "playLabel" to play.label, "track" to filter.track.key,
                 "level" to filter.level, "field" to filter.field, "label" to filter.label, "stake" to (if (play == Play.STAKE) stake else 0),
                 "repeats" to lastDrawReport?.let { linkedMapOf("count" to it.repeats, "shortestGap" to it.shortestGap, "quotaBroken" to it.quotaBroken) },
-                "virtualTokens" to wallet.virtual, "tokens" to (if (wallet.virtual) TOKENS_LABEL else wallet.unit)),
+                "unit" to wallet.unit, "virtualTokens" to wallet.virtual, "tokens" to (if (wallet.virtual) TOKENS_LABEL else wallet.unit)),
             "pot" to (if (play == Play.STAKE) linkedMapOf("stake" to stake, "total" to pot, "stakers" to stakers.toList(), "payouts" to payouts) else null),
             "me" to me?.let { linkedMapOf("id" to it.id, "name" to it.name, "role" to role, "score" to (d?.score(it.id) ?: 0),
                 "balance" to (if (play == Play.STAKE) wallet.balance(it.walletKey) else null)) },
@@ -534,7 +566,7 @@ class QuizRoom(
         const val MAX_NAME = 16
         const val MIN_QUESTIONS = 5
         /** Shown wherever tokens appear: they are a demo, without any value. */
-        const val TOKENS_LABEL = "Jetons virtuels — démo"
+        const val TOKENS_LABEL = "Points de défi — sans valeur"
 
         /** Trimmed, control characters removed, at most [MAX_NAME] characters; null if nothing is left. */
         fun cleanName(n: String?): String? = n?.filter { !it.isISOControl() && it != '<' && it != '>' }?.trim()
