@@ -138,7 +138,7 @@ class PlaybackPriorityTest {
     @Test fun governorDrainsTheDeferredWorkWhenPlaybackStops() {
         var t = 0L
         var sig = PlaybackSignal(playerState = "playing", playingName = "a.mkv")
-        val g = PlaybackGovernor({ sig }, normal, clock = { t }, refreshMs = 500)
+        val g = PlaybackGovernor({ sig }, normal, clock = { t }, refreshMs = 500, drainer = { it() })
         assertTrue(g.current().on)
         var synced = 0
         g.deferred.defer("sync:x") { synced++ }

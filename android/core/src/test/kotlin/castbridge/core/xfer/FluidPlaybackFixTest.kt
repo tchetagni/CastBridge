@@ -289,7 +289,7 @@ class FluidPlaybackFixTest {
 
     @Test fun aBufferingPlayerThatNeverAdvancesStopsCountingAsPlayingAfterThirtySeconds() {
         var t = 0L; var state = "buffering"; var head = 5_000L; val ran = ArrayList<String>()
-        val g = PlaybackGovernor({ PlaybackSignal(state, "v.mp4", playheadMs = head) }, normal, clock = { t }, refreshMs = 0)
+        val g = PlaybackGovernor({ PlaybackSignal(state, "v.mp4", playheadMs = head) }, normal, clock = { t }, refreshMs = 0, drainer = { it() })
         g.deferred.defer("sync") { ran += "sync" }
         assertTrue(g.refresh().on)
         t = 29_000; assertTrue(g.refresh().on, "still within the grace")
@@ -354,5 +354,99 @@ class FluidPlaybackFixTest {
         assertFalse(File(dir, "gone.mp4.part").exists(), "a late sync must not resurrect an empty .part")
         File(dir, "here.mp4.part").writeBytes(ByteArray(10))
         assertTrue(st.syncPart("here.mp4"))
+    }
+
+    // ================= audit 2 : (1) begin pendant un finish long, (4) verrou « buffering », (5) fsync reporté hors des fils de requête =================
+
+    @Test fun aBeginWhileAFinishVerifiesAnswersVerifyingAtOnceAndNeverBlocksAThreadOrAnotherFile() {
+        val r = rig(); val bs = 4 * MiB; val n = 12
+        val m = begin(r, "long2.mkv", n.toLong() * bs, bs)
+        val blocks = (0 until n).map { Random(it + 30).nextBytes(bs) }
+        blocks.forEachIndexed { i, b -> assertEquals(200, chunk(r, m, i, b).status) }
+        val root = Manifest.root(blocks.map { sha(it) })
+        playing(r)
+        val first = AtomicReference<Pair<Int, String>>()
+        val th = Thread { first.set(r.call("POST", "/api/transfer/finish?id=${m.id}&root=$root")) }.apply { isDaemon = true; start() }
+        waitFor(what = "the finish is verifying") { r.server.finishingNow(m.id) }
+        // the phone's finish timed out after 60 s and it restarts by begin: same file, and a begin with another block size (other id, same name)
+        for (q in listOf("name=long2.mkv&size=${n.toLong() * bs}&blockSize=$bs", "name=long2.mkv&size=${n.toLong() * bs}&blockSize=${bs / 2}")) {
+            val t0 = System.nanoTime()
+            val (code, body) = r.call("POST", "/api/transfer/begin?$q")
+            val ms = (System.nanoTime() - t0) / 1_000_000
+            assertEquals(503, code, "$q -> $body (waited $ms ms)"); assertTrue("verifying" in body && "\"retryMs\":2000" in body, body)
+            assertTrue(ms < 1500, "begin waited $ms ms behind the finish's lock")
+        }
+        val t1 = System.nanoTime()
+        val (c2, b2) = r.call("POST", "/api/transfer/begin?name=other2.mkv&size=${bs.toLong()}&blockSize=$bs")
+        assertEquals(200, c2, b2); assertTrue((System.nanoTime() - t1) / 1_000_000 < 1500, "another file's begin must not wait")
+        val api = HttpTransferApi(r.base) { null }
+        val e = assertFailsWith<TransferApi.Verifying>("the phone must learn it is only verifying") { api.begin(m, null, false) }
+        assertEquals(2000, e.retryMs)
+        th.join(30_000)
+        assertEquals(200, first.get()?.first, first.get()?.second)
+    }
+
+    private class VerifyingApi : TransferApi {
+        override fun caps() = TransferApi.Caps(1, 4)
+        override fun begin(m: Manifest, target: String?, discard: Boolean): TransferApi.Begin = throw TransferApi.Verifying(5000)
+        override fun state(id: String, withHashes: Boolean): TransferApi.Begin? = null
+        override fun finish(id: String, root: String): TransferApi.Finish = throw TransferApi.Verifying(5000)
+        override fun abort(id: String) {}
+    }
+
+    @Test fun thePhoneWaitsForTheRetryMsOfAVerifyingAnswerInsteadOfHammering() {
+        val sleeps = ArrayList<Long>()
+        val src = object : BlockSource { override val size = 1024L; override fun read(pos: Long, buf: ByteArray, off: Int, len: Int) = -1 }
+        val c = TransferClient(VerifyingApi(), src, "v.mkv", { _, _ -> emptyList() }, cancelled = { sleeps.size >= 2 }, sleep = { sleeps += it }, retryDelayMs = 200)
+        assertEquals(TransferClient.Result.Cancelled, c.run())
+        assertEquals(listOf(5000L, 5000L), sleeps)
+    }
+
+    private fun copySig(state: String, head: Long, bytes: Long, growing: Boolean = true) = PlaybackSignal(state, "v.mp4", growing = growing, playheadMs = head, copyBytes = bytes)
+
+    @Test fun aBufferingPlayerStarvedByALiveCopyOfTheSameFileKeepsThePolicyOn() {
+        var t = 0L; var bytes = 0L
+        val g = PlaybackGovernor({ copySig("buffering", 5_000, bytes) }, normal, clock = { t }, refreshMs = 0)
+        for (i in 1..12) { t += 10_000; bytes += 4_000_000; assertTrue(g.refresh().on, "t=$t: the copy still writes, the player is IO-starved: the policy must stay") }
+    }
+
+    @Test fun aBufferingPlayerWithADeadCopyIsStillReleasedAfterThirtySeconds() {
+        var t = 0L
+        val g = PlaybackGovernor({ copySig("buffering", 5_000, 777) }, normal, clock = { t }, refreshMs = 0)
+        assertTrue(g.refresh().on)
+        t = 29_000; assertTrue(g.refresh().on)
+        t = 31_000; assertFalse(g.refresh().on, "no copy wrote a byte for 30 s")
+    }
+
+    @Test fun aBufferingPlayerOfAFileThatIsNotBeingCopiedIsReleasedEvenWhileAnotherCopyWrites() {
+        var t = 0L; var bytes = 0L
+        val g = PlaybackGovernor({ copySig("buffering", 5_000, bytes, growing = false) }, normal, clock = { t }, refreshMs = 0)
+        assertTrue(g.refresh().on)
+        t = 31_000; bytes = 9; assertFalse(g.refresh().on)
+    }
+
+    @Test fun goingThroughPausedResetsTheBufferingCounters() {
+        var t = 0L; var state = "buffering"
+        val g = PlaybackGovernor({ PlaybackSignal(state, "v.mp4", playheadMs = 5_000) }, normal, clock = { t }, refreshMs = 0)
+        assertTrue(g.refresh().on)
+        t = 25_000; assertTrue(g.refresh().on)
+        t = 26_000; state = "paused"; g.refresh()
+        t = 27_000; state = "buffering"; assertTrue(g.refresh().on)
+        t = 50_000; assertTrue(g.refresh().on, "23 s since the resume: the 30 s of before the pause must not count")
+        t = 58_000; assertFalse(g.refresh().on)
+    }
+
+    @Test fun everyDeferredSyncRunsOnTheDedicatedThreadWhateverTheCaller() {
+        for (how in listOf("current", "refresh", "json")) {
+            var t = 0L; var sig = PlaybackSignal("playing", "a.mkv", playheadMs = 1)
+            val g = PlaybackGovernor({ sig }, normal, clock = { t }, refreshMs = 0)
+            g.refresh()
+            val ranOn = AtomicReference<String>(); val done = CountDownLatch(1)
+            g.deferred.defer("sync") { ranOn.set(Thread.currentThread().name); done.countDown() }
+            t = 10; sig = PlaybackSignal()
+            when (how) { "current" -> g.current(); "refresh" -> g.refresh(); else -> g.json() }
+            assertTrue(done.await(5, TimeUnit.SECONDS), how)
+            assertEquals("cb-deferred-sync", ranOn.get(), "$how drained on the caller's thread")
+        }
     }
 }

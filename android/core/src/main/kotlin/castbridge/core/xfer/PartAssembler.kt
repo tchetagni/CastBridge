@@ -18,8 +18,13 @@ import java.util.zip.GZIPInputStream
 class WriteStats(private val now: () -> Long = System::nanoTime) {
     @Volatile private var bps = 0.0
     @Volatile private var inflight = 0L
+    private val written = java.util.concurrent.atomic.AtomicLong()
+    /** Cumulative bytes written by every copy (a change of it = a copy is writing). */
+    fun total(): Long = written.get()
     fun record(bytes: Int, nanos: Long) {
-        if (bytes <= 0 || nanos <= 0) return
+        if (bytes <= 0) return
+        written.addAndGet(bytes.toLong())
+        if (nanos <= 0) return
         val sample = bytes * 1e9 / nanos
         synchronized(this) { bps = if (bps == 0.0) sample else bps * 0.85 + sample * 0.15 }
     }

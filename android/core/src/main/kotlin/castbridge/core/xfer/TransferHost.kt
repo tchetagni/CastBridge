@@ -85,6 +85,8 @@ class TransferHost(
         val contiguous = minOf(s.assembler.map.leading().toLong() * m.blockSize, m.size)
         return PlaybackPriority.admitAhead(m.offset(idx), contiguous, PlaybackPriority.headWindow(m.blockSize, maxStreams))
     }
+    /** A `finish` of [name] is reading the file back right now, whatever session object (block size) started it. */
+    fun finishingName(name: String): Boolean = sessions.values.any { it.finishing && it.manifest.name == name }
     fun hasName(name: String): Boolean = sessions.values.any { it.manifest.name == name }
 
     /** True if one more block of [blockBytes] may be taken now (back-pressure). */

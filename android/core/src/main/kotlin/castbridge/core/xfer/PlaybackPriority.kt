@@ -20,6 +20,8 @@ data class PlaybackSignal(
     /** The file being played is still arriving (« lire pendant l'envoi »: the player reads a growing `.part`). */
     val growing: Boolean = false,
     val playheadMs: Long = 0,
+    /** Cumulative bytes the TV's copies have written to disk (any copy): « a copy is writing » is a change of this number. */
+    val copyBytes: Long = 0,
     val durMs: Long = 0,
     /** Final size of the file being played (0 = unknown): with [durMs], its average bitrate. */
     val fileBytes: Long = 0,
@@ -172,6 +174,8 @@ class PlaybackGovernor(
     private val refreshMs: Long = 500,
     private val sleep: (Long) -> Unit = Thread::sleep,
     private val onChange: (PlaybackDecision) -> Unit = {},
+    /** Runs a deferred drain: by default on a thread of its own (`cb-deferred-sync`), never on a request thread (an fsync takes seconds on a USB key). */
+    private val drainer: (() -> Unit) -> Unit = { job -> Thread({ runCatching { job() } }, "cb-deferred-sync").apply { isDaemon = true; start() } },
 ) {
     val deferred = DeferredWork()
     private val receivePacer = RatePacer({ clock() * 1_000_000 }, sleep)
@@ -184,6 +188,8 @@ class PlaybackGovernor(
     private var lastHead = -1L
     private var lastAdvanceAt = 0L
     private var stuck = false
+    private var lastCopyBytes = -1L
+    private var lastCopyAt = 0L
 
     fun current(): PlaybackDecision {
         val c = cached
@@ -191,16 +197,23 @@ class PlaybackGovernor(
         return refresh()
     }
 
-    /** Reads the signal now (the player just changed state). Runs the deferred work (an fsync) on the calling thread once playback is over. */
-    fun refresh(): PlaybackDecision = update(drainInline = true)
+    /** Reads the signal now (the player just changed state). The deferred work (an fsync) runs on the `cb-deferred-sync` thread once playback is over. */
+    fun refresh(): PlaybackDecision = update()
 
-    private fun update(drainInline: Boolean): PlaybackDecision {
+    private val draining = java.util.concurrent.atomic.AtomicBoolean(false)
+    /** Every drain goes through here: one drainer at a time, off the caller's thread. */
+    private fun drainAsync() {
+        if (deferred.pending().isEmpty() || !draining.compareAndSet(false, true)) return
+        try { drainer { try { deferred.drain() } finally { draining.set(false) } } } catch (e: Throwable) { draining.set(false) }
+    }
+
+    private fun update(): PlaybackDecision {
         val s = settle(runCatching(signal).getOrDefault(PlaybackSignal()))
         val d = PlaybackPriority.decide(s, normal)
         val prev = synchronized(this) { cached.also { sig = s; cached = d; at = clock() } }
         // delivered one at a time and always with the LATEST decision: two racing refreshes must not leave a stale one last
         if (prev?.on != d.on) synchronized(notifyLock) { runCatching { onChange(cached ?: d) } }
-        if (!d.on && drainInline) deferred.drain()
+        if (!d.on) drainAsync()
         return d
     }
 
@@ -210,10 +223,14 @@ class PlaybackGovernor(
      * latched off it stays off, whatever flapping the player reports, until the playhead really moves again.
      */
     private fun settle(raw: PlaybackSignal): PlaybackSignal = synchronized(this) {
-        if (raw.playerState != "playing" && raw.playerState != "buffering") { stuck = false; lastHead = -1L; return raw }
         val now = clock()
+        if (raw.copyBytes != lastCopyBytes) { lastCopyBytes = raw.copyBytes; lastCopyAt = now }
+        if (raw.playerState != "playing" && raw.playerState != "buffering") { stuck = false; lastHead = -1L; lastAdvanceAt = now; return raw }   // paused/idle: the counters restart
         if (raw.playheadMs != lastHead) { lastHead = raw.playheadMs; lastAdvanceAt = now; stuck = false }
-        else if (raw.playerState == "buffering" && now - lastAdvanceAt >= PlaybackPriority.BUFFERING_GRACE_MS) stuck = true
+        else if (raw.playerState == "buffering" && now - lastAdvanceAt >= PlaybackPriority.BUFFERING_GRACE_MS &&
+            // a player IO-starved by a copy of ITS OWN file on the same flash is exactly what the policy is for: lock off only for a dead copy
+            // (no byte written for the whole window) or when the file played is not the one being copied
+            (!raw.growing || now - lastCopyAt >= PlaybackPriority.BUFFERING_GRACE_MS)) stuck = true
         if (stuck) raw.copy(playerState = "stalled") else raw
     }
 
@@ -222,11 +239,9 @@ class PlaybackGovernor(
 
     /** Read-only state for /api/info `playbackPriority` (no secret, no address). */
     fun json(): String {
-        // never the deferred fsync on this thread (/api/info answers the phone and the TV screen): refresh without draining, drain on a thread of its own
         val c = cached
-        val d = if (c != null && clock() - at < refreshMs) c else update(drainInline = false)
-        if (!d.on && deferred.pending().isNotEmpty())
-            Thread({ runCatching { deferred.drain() } }, "cb-deferred-sync").apply { isDaemon = true; start() }
+        val d = if (c != null && clock() - at < refreshMs) c else update()
+        if (!d.on) drainAsync()
         val q = { x: String -> "\"" + x.replace("\\", "\\\\").replace("\"", "\\\"") + "\"" }
         return "{\"on\":${d.on},\"reasons\":${d.reasons.joinToString(",", "[", "]") { q(it) }},\"backgroundThreads\":${d.backgroundThreads}," +
             "\"maxStreams\":${d.maxStreams},\"receiveCapBps\":${d.receiveCapBps},\"progressEveryMs\":${d.progressEveryMs}," +

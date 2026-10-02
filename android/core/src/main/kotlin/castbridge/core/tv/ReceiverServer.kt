@@ -166,7 +166,7 @@ class ReceiverServer(
         val total = part?.let { h -> (h.st as? FileStore)?.let { Meta.read(it.dir, h.name) } }
         val size = total ?: ps.name?.let { n -> findFinal(n)?.size } ?: 0L
         return castbridge.core.xfer.PlaybackSignal(ps.state, ps.name, growing = part != null, playheadMs = ps.posMs, durMs = ps.durMs, fileBytes = size,
-            writeBps = transfers.stats.bytesPerSec(), feedBps = g?.let { meters[it]?.bytesPerSec() } ?: 0L, contiguousBytes = part?.size ?: 0L)
+            writeBps = transfers.stats.bytesPerSec(), feedBps = g?.let { meters[it]?.bytesPerSec() } ?: 0L, contiguousBytes = part?.size ?: 0L, copyBytes = transfers.stats.total())
     }
 
     /** The TV player changed state (started, paused, stopped): the policy is read again at once, off the caller's thread (it may run deferred fsyncs). */
@@ -809,6 +809,10 @@ class ReceiverServer(
         val m = try { castbridge.core.xfer.Manifest(name, size, bs).also { require(bs <= 16 shl 20) } } catch (e: IllegalArgumentException) { return bad("bad blockSize") }
         val target = p["target"]?.takeIf { it.isNotEmpty() } ?: cfg.target
         if (!StoragePolicy.isValidTarget(target, volumes.volumes() + volumes.missingVolumes())) return bad("bad target")
+        // A finish of this name is reading the file back under the per-name lock (minutes for a big file): never park an HTTP thread behind it (8 of
+        // them and /stream/ and /api/info starve). The phone treats 5xx of begin as « resume » and waits retryMs. Looked up by id AND by name.
+        if (transfers.session(m.id)?.finishing == true || transfers.finishingName(name))
+            return json(SERVICE_UNAVAILABLE, """{"error":"verifying","retryMs":2000}""")
         uploading.incrementAndGet()
         try {
             synchronized(FileLocks.of(LOCK_ROOT, name)) {
