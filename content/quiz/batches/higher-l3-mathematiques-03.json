@@ -1,0 +1,2007 @@
+{
+  "batch": "higher-l3-mathematiques-03",
+  "author": "Claude (rédacteur Quiz Supérieur, filière Mathématiques L3)",
+  "date": "2026-10-03",
+  "questions": [
+    {
+      "course": "l3-maths",
+      "category": "Analyse complexe : fonctions holomorphes",
+      "difficulty": 4,
+      "question": "Quel est le comportement d'une limite uniforme sur tout compact de fonctions holomorphes ?",
+      "choices": [
+        "elle est seulement continue",
+        "elle est holomorphe mais les dérivées peuvent diverger",
+        "elle est constante",
+        "elle est holomorphe, et les dérivées convergent aussi"
+      ],
+      "answer": "D",
+      "explanation": "C'est le théorème de Weierstrass pour les suites de fonctions holomorphes ; il n'a pas d'analogue réel.",
+      "source": "Cours de licence d'analyse complexe, famille des manuels de Cartan (Théorie élémentaire des fonctions analytiques) et de Rudin",
+      "verif": "import"
+    },
+    {
+      "course": "l3-maths",
+      "category": "Intégrale de Lebesgue",
+      "difficulty": 2,
+      "question": "Quelle hypothèse du théorème de Tonelli autorise l'interversion de deux intégrales sans autre vérification ?",
+      "choices": [
+        "f est continue",
+        "f est mesurable et positive",
+        "f est bornée",
+        "f est périodique"
+      ],
+      "answer": "B",
+      "explanation": "Pour f ≥ 0 mesurable, ∫∫ f dx dy = ∫∫ f dy dx dans [0, +∞] ; Fubini exige en revanche l'intégrabilité.",
+      "source": "Cours de licence de théorie de la mesure et d'intégration, famille des manuels de Rudin (Analyse réelle et complexe)",
+      "verif": "import"
+    },
+    {
+      "course": "l3-maths",
+      "category": "Calcul différentiel dans Rn",
+      "difficulty": 1,
+      "question": "Que représente la différentielle df(a) d'une application f différentiable en a ?",
+      "choices": [
+        "le nombre f′(a) uniquement",
+        "la matrice des dérivées secondes de f en a",
+        "une application affine quelconque",
+        "l'application linéaire L telle que f(a + h) = f(a) + L(h) + o(‖h‖)"
+      ],
+      "answer": "D",
+      "explanation": "La différentielle est la meilleure approximation linéaire de f − f(a) au voisinage de a.",
+      "source": "Cours de licence de calcul différentiel et d'intégration dans Rⁿ, famille des manuels de Cartan et de Rudin",
+      "verif": "import"
+    },
+    {
+      "course": "l3-maths",
+      "category": "Complétude et point fixe de Banach",
+      "difficulty": 1,
+      "question": "Qu'affirme le théorème du point fixe de Banach ?",
+      "choices": [
+        "toute application continue d'un espace complet admet un point fixe",
+        "toute contraction admet au moins deux points fixes",
+        "toute application lipschitzienne d'un compact admet un point fixe",
+        "une contraction d'un espace métrique complet non vide dans lui-même admet un unique point fixe"
+      ],
+      "answer": "D",
+      "explanation": "Dans un complet, une application k-lipschitzienne avec k < 1 possède un unique point fixe, limite de la suite xₙ₊₁ = f(xₙ).",
+      "source": "Cours de licence de topologie et d'analyse (espaces métriques et normés), famille des manuels de Dieudonné et de Rudin",
+      "verif": "import"
+    },
+    {
+      "course": "l3-maths",
+      "category": "Formes bilinéaires et espaces euclidiens",
+      "difficulty": 3,
+      "question": "Quelle est la signature de la forme quadratique q(x, y) = x² + 4xy + 3y² ?",
+      "choices": [
+        "(2, 0)",
+        "(0, 2)",
+        "(1, 1)",
+        "(1, 0)"
+      ],
+      "answer": "C",
+      "explanation": "La matrice [[1, 2], [2, 3]] a pour déterminant −1 < 0 : valeurs propres de signes opposés.",
+      "source": "Cours de licence d'algèbre linéaire avancée (réduction, espaces euclidiens et hermitiens), famille des manuels de Gourdon et de Grifone",
+      "verif": "import"
+    },
+    {
+      "course": "l3-maths",
+      "category": "Séries entières",
+      "difficulty": 4,
+      "question": "Quelle est la valeur de Σ_{n≥1} (−1)ⁿ⁺¹/n ?",
+      "choices": [
+        "π/4",
+        "1",
+        "ln 2",
+        "e"
+      ],
+      "answer": "C",
+      "explanation": "C'est ln(1 + x) en x = 1, valable par le théorème d'Abel (série alternée convergente).",
+      "source": "Cours de licence d'analyse (suites et séries de fonctions, séries entières, séries de Fourier), famille des manuels de Rudin et de Gourdon",
+      "verif": "import"
+    },
+    {
+      "course": "l3-maths",
+      "category": "Équations différentielles : Cauchy-Lipschitz",
+      "difficulty": 5,
+      "question": "Si f est de classe C¹, comment la solution de y′ = f(t, y) dépend-elle de la condition initiale (t₀, y₀) ?",
+      "choices": [
+        "de manière seulement continue en général",
+        "de manière C¹ : le flot est de classe C¹",
+        "de manière discontinue",
+        "elle ne dépend pas de y₀"
+      ],
+      "answer": "B",
+      "explanation": "C'est le théorème de dépendance différentiable par rapport aux conditions initiales.",
+      "source": "Cours de licence d'équations différentielles ordinaires, famille des manuels d'Arnold et de Demailly",
+      "verif": "import"
+    },
+    {
+      "course": "l3-maths",
+      "category": "Méthodes itératives pour les systèmes linéaires",
+      "difficulty": 2,
+      "question": "À quelle condition une méthode itérative x^{k+1} = Mx^k + c converge-t-elle pour tout x⁰ ?",
+      "choices": [
+        "‖M‖ > 1",
+        "M est symétrique",
+        "det(M) = 1",
+        "ρ(M) < 1, où ρ désigne le rayon spectral"
+      ],
+      "answer": "D",
+      "explanation": "L'erreur vérifie e^k = Mᵏe⁰ ; Mᵏ → 0 si et seulement si ρ(M) < 1.",
+      "source": "Cours de licence d'analyse numérique matricielle et d'interpolation, famille des manuels de Ciarlet et de Quarteroni",
+      "verif": "import"
+    },
+    {
+      "course": "l3-maths",
+      "category": "Théorème spectral",
+      "difficulty": 5,
+      "question": "Soient q₁ une forme quadratique définie positive et q₂ une forme quadratique réelle. Que peut-on dire ?",
+      "choices": [
+        "c'est impossible en général",
+        "il existe une base orthogonale pour q₁ et pour q₂ simultanément",
+        "c'est possible seulement si les matrices commutent",
+        "c'est possible seulement en dimension 2"
+      ],
+      "answer": "B",
+      "explanation": "On orthonormalise q₁ puis on applique le théorème spectral à q₂ dans cet espace euclidien.",
+      "source": "Cours de licence d'algèbre linéaire avancée (réduction, espaces euclidiens et hermitiens), famille des manuels de Gourdon et de Grifone",
+      "verif": "import"
+    },
+    {
+      "course": "l3-maths",
+      "category": "Systèmes linéaires et stabilité",
+      "difficulty": 1,
+      "question": "Pour un système linéaire X′ = AX, à quelle condition l'origine est-elle asymptotiquement stable ?",
+      "choices": [
+        "toutes les valeurs propres ont une partie réelle positive",
+        "toutes les valeurs propres sont de module < 1",
+        "A est symétrique",
+        "toutes les valeurs propres de A ont une partie réelle strictement négative"
+      ],
+      "answer": "D",
+      "explanation": "Les termes e^{λt} tendent alors vers 0 (avec des facteurs polynomiaux éventuels).",
+      "source": "Cours de licence d'équations différentielles ordinaires, famille des manuels d'Arnold et de Demailly",
+      "verif": "import"
+    },
+    {
+      "course": "l3-maths",
+      "category": "Intégrales multiples",
+      "difficulty": 3,
+      "question": "Pour u = x + y et v = x − y, quelle est l'égalité entre éléments d'aire ?",
+      "choices": [
+        "dx dy = 2 du dv",
+        "dx dy = (1/2) du dv",
+        "dx dy = du dv",
+        "dx dy = (1/4) du dv"
+      ],
+      "answer": "B",
+      "explanation": "Le jacobien de (x, y) ↦ (u, v) vaut −2, de valeur absolue 2, donc du dv = 2 dx dy, soit dx dy = du dv / 2.",
+      "source": "Cours de licence de calcul différentiel et d'intégration dans Rⁿ, famille des manuels de Cartan et de Rudin",
+      "verif": "import"
+    },
+    {
+      "course": "l3-maths",
+      "category": "Théorème spectral",
+      "difficulty": 3,
+      "question": "Quelle est la norme d'opérateur (subordonnée à la norme euclidienne) d'une matrice symétrique de valeurs propres −5 et 3 ?",
+      "choices": [
+        "3",
+        "2",
+        "moins 5",
+        "5"
+      ],
+      "answer": "D",
+      "explanation": "Pour une matrice symétrique, ‖A‖ = max |λ|, ici |−5| = 5.",
+      "source": "Cours de licence d'algèbre linéaire avancée (réduction, espaces euclidiens et hermitiens), famille des manuels de Gourdon et de Grifone",
+      "verif": "import"
+    },
+    {
+      "course": "l3-maths",
+      "category": "Anneaux, idéaux et corps",
+      "difficulty": 3,
+      "question": "À quoi l'anneau ℝ[X]/(X² − 1) est-il isomorphe ?",
+      "choices": [
+        "ℂ",
+        "ℝ",
+        "ℝ[X]",
+        "ℝ × ℝ"
+      ],
+      "answer": "D",
+      "explanation": "X² − 1 = (X − 1)(X + 1) avec facteurs premiers entre eux : théorème chinois.",
+      "source": "Cours de licence d'algèbre générale (groupes, anneaux, corps, théorie de Galois élémentaire), famille des manuels de Perrin et de Lang",
+      "verif": "import"
+    },
+    {
+      "course": "l3-maths",
+      "category": "Intégrale de Lebesgue",
+      "difficulty": 2,
+      "question": "Soit (fₙ) une suite croissante de fonctions mesurables positives convergeant vers f. Que dit le théorème de convergence monotone ?",
+      "choices": [
+        "∫ fₙ tend vers ∫ f (éventuellement +∞)",
+        "∫ fₙ tend vers 0",
+        "∫ fₙ tend vers ∫ f seulement si la convergence est uniforme",
+        "∫ f < lim ∫ fₙ"
+      ],
+      "answer": "A",
+      "explanation": "C'est le théorème de Beppo Levi : aucune domination n'est nécessaire, mais la positivité et la monotonie le sont.",
+      "source": "Cours de licence de théorie de la mesure et d'intégration, famille des manuels de Rudin (Analyse réelle et complexe)",
+      "verif": "import"
+    },
+    {
+      "course": "l3-maths",
+      "category": "Suites et séries de fonctions",
+      "difficulty": 1,
+      "question": "Quelle proposition complète correctement l'énoncé : « La convergence uniforme implique … » ?",
+      "choices": [
+        "la dérivabilité de la limite",
+        "la convergence uniforme de la série des dérivées",
+        "la convergence simple",
+        "la monotonie de la limite"
+      ],
+      "answer": "C",
+      "explanation": "Si sup |fₙ − f| → 0, alors fₙ(x) → f(x) pour chaque x.",
+      "source": "Cours de licence d'analyse (suites et séries de fonctions, séries entières, séries de Fourier), famille des manuels de Rudin et de Gourdon",
+      "verif": "import"
+    },
+    {
+      "course": "l3-maths",
+      "category": "Réduction des endomorphismes",
+      "difficulty": 2,
+      "question": "Une matrice 3 × 3 a pour valeurs propres 1, 2 et 3. Quelles sont sa trace et son déterminant ?",
+      "choices": [
+        "6 et 6",
+        "6 et 5",
+        "5 et 6",
+        "3 et 6"
+      ],
+      "answer": "A",
+      "explanation": "La trace est la somme des valeurs propres (6) et le déterminant leur produit (6).",
+      "source": "Cours de licence d'algèbre linéaire avancée (réduction, espaces euclidiens et hermitiens), famille des manuels de Gourdon et de Grifone",
+      "verif": "import"
+    },
+    {
+      "course": "l3-maths",
+      "category": "Analyse complexe : fonctions holomorphes",
+      "difficulty": 1,
+      "question": "Que vaut ∮_{|z|=1} z² dz ?",
+      "choices": [
+        "2πi",
+        "0",
+        "π",
+        "1"
+      ],
+      "answer": "B",
+      "explanation": "z² est holomorphe sur ℂ : par Cauchy, l'intégrale sur un lacet fermé est nulle.",
+      "source": "Cours de licence d'analyse complexe, famille des manuels de Cartan (Théorie élémentaire des fonctions analytiques) et de Rudin",
+      "verif": "import"
+    },
+    {
+      "course": "l3-maths",
+      "category": "Statistique : estimation et tests",
+      "difficulty": 3,
+      "question": "Quelle taille minimale d'échantillon assure une marge d'erreur de ±3 points à 95 % pour une proportion, dans le pire cas p = 1/2 ?",
+      "choices": [
+        "environ 1068",
+        "environ 100",
+        "environ 400",
+        "environ 3000"
+      ],
+      "answer": "A",
+      "explanation": "n ≥ 1,96² × 0,25/0,03² ≈ 1067,1, donc 1068.",
+      "source": "Cours de licence de statistique mathématique (estimation et tests), famille des manuels de Saporta et de Lehmann",
+      "verif": "import"
+    },
+    {
+      "course": "l3-maths",
+      "category": "Statistique : estimation et tests",
+      "difficulty": 2,
+      "question": "Quel est l'intervalle de confiance de niveau 95 % pour la moyenne d'un échantillon gaussien de variance σ² connue ?",
+      "choices": [
+        "X̄ ± 1,96 σ",
+        "X̄ ± 1,96 σ²/√n",
+        "X̄ ± 1,96 σ/√n",
+        "X̄ ± 0,95 σ/√n"
+      ],
+      "answer": "C",
+      "explanation": "Le quantile d'ordre 0,975 de N(0, 1) vaut environ 1,96 et l'écart-type de X̄ est σ/√n.",
+      "source": "Cours de licence de statistique mathématique (estimation et tests), famille des manuels de Saporta et de Lehmann",
+      "verif": "import"
+    },
+    {
+      "course": "l3-maths",
+      "category": "Analyse numérique : interpolation et équations non linéaires",
+      "difficulty": 4,
+      "question": "Comment les nœuds de Tchebychev améliorent-ils l'interpolation ?",
+      "choices": [
+        "ils minimisent le maximum de |∏(x − xᵢ)| sur [−1, 1]",
+        "ils annulent l'erreur d'interpolation",
+        "ils rendent f polynomiale",
+        "ils sont toujours équidistants"
+      ],
+      "answer": "A",
+      "explanation": "Les racines de Tₙ₊₁ minimisent la norme sup du polynôme nodal unitaire.",
+      "source": "Cours de licence d'analyse numérique matricielle et d'interpolation, famille des manuels de Ciarlet et de Quarteroni",
+      "verif": "import"
+    },
+    {
+      "course": "l3-maths",
+      "category": "Formes bilinéaires et espaces euclidiens",
+      "difficulty": 1,
+      "question": "À quoi sert le procédé de Gram-Schmidt ?",
+      "choices": [
+        "à diagonaliser une matrice quelconque",
+        "à calculer un déterminant",
+        "à inverser une forme bilinéaire",
+        "à orthonormaliser une famille libre"
+      ],
+      "answer": "D",
+      "explanation": "Il transforme une base en une base orthonormée engendrant les mêmes sous-espaces emboîtés.",
+      "source": "Cours de licence d'algèbre linéaire avancée (réduction, espaces euclidiens et hermitiens), famille des manuels de Gourdon et de Grifone",
+      "verif": "import"
+    },
+    {
+      "course": "l3-maths",
+      "category": "Statistique : estimation et tests",
+      "difficulty": 5,
+      "question": "La variance de X̄ pour un échantillon de Bernoulli(p) vaut p(1 − p)/n. Comment se situe-t-elle par rapport à la borne de Cramér-Rao ?",
+      "choices": [
+        "elle est strictement inférieure à la borne",
+        "elle est strictement supérieure à la borne",
+        "elle ne peut pas être comparée à la borne",
+        "elle lui est égale : X̄ est efficace"
+      ],
+      "answer": "D",
+      "explanation": "L'information de Fisher de Bernoulli(p) est 1/(p(1 − p)), donc la borne 1/(nI) = p(1 − p)/n.",
+      "source": "Cours de licence de statistique mathématique (estimation et tests), famille des manuels de Saporta et de Lehmann",
+      "verif": "import"
+    },
+    {
+      "course": "l3-maths",
+      "category": "Probabilités : espérance, variance, lois usuelles",
+      "difficulty": 2,
+      "question": "Que vaut Var(aX + b) pour des constantes a et b ?",
+      "choices": [
+        "a·Var(X)",
+        "a²·Var(X)",
+        "a²·Var(X) + b",
+        "Var(X) + b²"
+      ],
+      "answer": "B",
+      "explanation": "La translation par b ne change pas la dispersion et la multiplication par a multiplie la variance par a².",
+      "source": "Cours de licence de probabilités, famille des manuels de Foata-Fuchs et de Ouvrard",
+      "verif": "import"
+    },
+    {
+      "course": "l3-maths",
+      "category": "Probabilités : espérance, variance, lois usuelles",
+      "difficulty": 2,
+      "question": "Pour une variable X de loi de Poisson de paramètre 2, que vaut P(X = 0) ?",
+      "choices": [
+        "2e^{−2}",
+        "e^{−2}",
+        "e^{−1}",
+        "1 − e^{−2}"
+      ],
+      "answer": "B",
+      "explanation": "P(X = k) = e^{−λ}λᵏ/k! donne e^{−2} pour k = 0.",
+      "source": "Cours de licence de probabilités, famille des manuels de Foata-Fuchs et de Ouvrard",
+      "verif": "import"
+    },
+    {
+      "course": "l3-maths",
+      "category": "Séries de Fourier",
+      "difficulty": 4,
+      "question": "Quel est le développement en série de Fourier de x² sur [−π, π] ?",
+      "choices": [
+        "π²/3 + 4 Σ_{n≥1} (−1)ⁿ cos(nx)/n²",
+        "π²/3 + 4 Σ_{n≥1} cos(nx)/n²",
+        "π²/3 + 4 Σ_{n≥1} (−1)ⁿ sin(nx)/n²",
+        "π² + 4 Σ_{n≥1} (−1)ⁿ cos(nx)/n²"
+      ],
+      "answer": "A",
+      "explanation": "f est paire : a₀/2 = π²/3 et aₙ = 4(−1)ⁿ/n² ; en x = 0 on retrouve Σ(−1)ⁿ/n² = −π²/12.",
+      "source": "Cours de licence d'analyse (suites et séries de fonctions, séries entières, séries de Fourier), famille des manuels de Rudin et de Gourdon",
+      "verif": "import"
+    },
+    {
+      "course": "l3-maths",
+      "category": "Compacité et connexité",
+      "difficulty": 4,
+      "question": "Quelle différence topologique y a-t-il entre ℝ et ℝ² ?",
+      "choices": [
+        "ℝ ∖ {point} est non connexe, alors que ℝ² ∖ {point} est connexe",
+        "ℝ est compact alors que ℝ² ne l'est pas",
+        "ℝ² ∖ {point} est borné",
+        "ℝ ∖ {point} est connexe alors que ℝ² ∖ {point} ne l'est pas"
+      ],
+      "answer": "A",
+      "explanation": "Retirer un point sépare la droite en deux demi-droites, mais le plan privé d'un point reste connexe par arcs ; aucun des deux espaces n'est compact.",
+      "source": "Cours de licence de topologie et d'analyse (espaces métriques et normés), famille des manuels de Dieudonné et de Rudin",
+      "verif": "import"
+    },
+    {
+      "course": "l3-maths",
+      "category": "Espaces normés et topologie des espaces métriques",
+      "difficulty": 1,
+      "question": "Quelle proposition complète correctement l'énoncé : « Dans un espace métrique, une partie F est dite fermée lorsque … » ?",
+      "choices": [
+        "son complémentaire est fermé",
+        "elle est bornée",
+        "elle n'est pas ouverte",
+        "son complémentaire est ouvert"
+      ],
+      "answer": "D",
+      "explanation": "Un fermé est, par définition, le complémentaire d'un ouvert.",
+      "source": "Cours de licence de topologie et d'analyse (espaces métriques et normés), famille des manuels de Dieudonné et de Rudin",
+      "verif": "import"
+    },
+    {
+      "course": "l3-maths",
+      "category": "Espaces Lp",
+      "difficulty": 1,
+      "question": "Quelle proposition complète correctement l'énoncé : « Pour p = q = 2, l'inégalité de Hölder devient … » ?",
+      "choices": [
+        "l'inégalité de Cauchy-Schwarz",
+        "l'inégalité de Jensen",
+        "l'inégalité de Bessel",
+        "l'inégalité de Minkowski"
+      ],
+      "answer": "A",
+      "explanation": "Elle s'écrit ∫|fg| ≤ ‖f‖₂‖g‖₂.",
+      "source": "Cours de licence de théorie de la mesure et d'intégration, famille des manuels de Rudin (Analyse réelle et complexe)",
+      "verif": "import"
+    },
+    {
+      "course": "l3-maths",
+      "category": "Intégrales multiples",
+      "difficulty": 2,
+      "question": "Quelle est l'aire de l'ellipse x²/a² + y²/b² ≤ 1 ?",
+      "choices": [
+        "π(a² + b²)/2",
+        "πa²b²",
+        "2πab",
+        "πab"
+      ],
+      "answer": "D",
+      "explanation": "Avec x = ar cos θ, y = br sin θ, le jacobien vaut abr, d'où πab.",
+      "source": "Cours de licence de calcul différentiel et d'intégration dans Rⁿ, famille des manuels de Cartan et de Rudin",
+      "verif": "import"
+    },
+    {
+      "course": "l3-maths",
+      "category": "Espaces normés et topologie des espaces métriques",
+      "difficulty": 2,
+      "question": "Pour (x, y) ∈ ℝ², on pose ‖(x, y)‖₁ = |x| + |y| et ‖(x, y)‖∞ = max(|x|, |y|). Quelle majoration est valable pour tout (x, y) ?",
+      "choices": [
+        "‖(x, y)‖₁ inférieur ou égal à racine de 2 fois ‖(x, y)‖∞",
+        "‖(x, y)‖₁ inférieur ou égal à 2‖(x, y)‖∞",
+        "‖(x, y)‖₁ inférieur ou égal à ‖(x, y)‖∞",
+        "‖(x, y)‖₁ inférieur ou égal à ‖(x, y)‖∞²"
+      ],
+      "answer": "B",
+      "explanation": "On a |x| + |y| ≤ 2 max(|x|, |y|), avec égalité pour (1, 1) ; la constante √2 est donc insuffisante.",
+      "source": "Cours de licence de topologie et d'analyse (espaces métriques et normés), famille des manuels de Dieudonné et de Rudin",
+      "verif": "import"
+    },
+    {
+      "course": "l3-maths",
+      "category": "Séries de Fourier",
+      "difficulty": 1,
+      "question": "Quelle est la pulsation fondamentale d'une fonction T-périodique ?",
+      "choices": [
+        "T/2π",
+        "2π/T",
+        "2πT",
+        "1/T"
+      ],
+      "answer": "B",
+      "explanation": "Les harmoniques sont e^{i n (2π/T) x} ; la fréquence fondamentale est 1/T, la pulsation 2π/T.",
+      "source": "Cours de licence d'analyse (suites et séries de fonctions, séries entières, séries de Fourier), famille des manuels de Rudin et de Gourdon",
+      "verif": "import"
+    },
+    {
+      "course": "l3-maths",
+      "category": "Séries entières",
+      "difficulty": 2,
+      "question": "Quel est le développement en série entière de ln(1 + x) ?",
+      "choices": [
+        "Σ xⁿ/n!",
+        "Σ_{n≥1} (−1)ⁿ⁺¹ xⁿ/n pour |x| < 1",
+        "Σ_{n≥1} xⁿ/n pour |x| < 1",
+        "Σ (−1)ⁿ xⁿ/n! pour tout x"
+      ],
+      "answer": "B",
+      "explanation": "On intègre 1/(1 + x) = Σ (−1)ⁿ xⁿ ; le rayon vaut 1.",
+      "source": "Cours de licence d'analyse (suites et séries de fonctions, séries entières, séries de Fourier), famille des manuels de Rudin et de Gourdon",
+      "verif": "import"
+    },
+    {
+      "course": "l3-maths",
+      "category": "Polynômes et extensions de corps",
+      "difficulty": 3,
+      "question": "Par quoi est engendré le groupe de Galois de ℚ(√2)/ℚ, d'ordre 2 ?",
+      "choices": [
+        "par l'automorphisme qui envoie √2 sur 2√2",
+        "par l'identité seulement",
+        "par l'automorphisme qui envoie √2 sur −√2",
+        "par l'automorphisme qui envoie √2 sur 1/√2"
+      ],
+      "answer": "C",
+      "explanation": "Un automorphisme envoie √2 sur une racine de X² − 2, soit ±√2.",
+      "source": "Cours de licence d'algèbre générale (groupes, anneaux, corps, théorie de Galois élémentaire), famille des manuels de Perrin et de Lang",
+      "verif": "import"
+    },
+    {
+      "course": "l3-maths",
+      "category": "Polynômes et extensions de corps",
+      "difficulty": 3,
+      "question": "À quoi le groupe de Galois de ℚ(√2, √3) sur ℚ est-il isomorphe ?",
+      "choices": [
+        "ℤ/2ℤ × ℤ/2ℤ (groupe de Klein)",
+        "ℤ/4ℤ",
+        "S₃",
+        "ℤ/3ℤ"
+      ],
+      "answer": "A",
+      "explanation": "Les automorphismes sont déterminés par les signes choisis pour √2 et √3 : quatre éléments d'ordre ≤ 2.",
+      "source": "Cours de licence d'algèbre générale (groupes, anneaux, corps, théorie de Galois élémentaire), famille des manuels de Perrin et de Lang",
+      "verif": "import"
+    },
+    {
+      "course": "l3-maths",
+      "category": "Méthodes itératives pour les systèmes linéaires",
+      "difficulty": 4,
+      "question": "Combien d'itérations au plus la méthode du gradient conjugué requiert-elle en arithmétique exacte pour A symétrique définie positive de taille n ?",
+      "choices": [
+        "n²",
+        "2ⁿ",
+        "1",
+        "n"
+      ],
+      "answer": "D",
+      "explanation": "L'espace de Krylov est de dimension au plus n : on atteint la solution exacte en au plus n itérations.",
+      "source": "Cours de licence d'analyse numérique matricielle et d'interpolation, famille des manuels de Ciarlet et de Quarteroni",
+      "verif": "import"
+    },
+    {
+      "course": "l3-maths",
+      "category": "Groupes et théorème de Lagrange",
+      "difficulty": 4,
+      "question": "Combien de 2-sous-groupes de Sylow le groupe S₃ possède-t-il ?",
+      "choices": [
+        "1",
+        "2",
+        "6",
+        "3"
+      ],
+      "answer": "D",
+      "explanation": "Les sous-groupes d'ordre 2 sont engendrés par les trois transpositions ; leur nombre est ≡ 1 mod 2 et divise 3.",
+      "source": "Cours de licence d'algèbre générale (groupes, anneaux, corps, théorie de Galois élémentaire), famille des manuels de Perrin et de Lang",
+      "verif": "import"
+    },
+    {
+      "course": "l3-maths",
+      "category": "Compacité et connexité",
+      "difficulty": 2,
+      "question": "Que dit le théorème de Heine sur une fonction continue définie sur un compact ?",
+      "choices": [
+        "elle est dérivable",
+        "elle est uniformément continue",
+        "elle est lipschitzienne",
+        "elle est monotone"
+      ],
+      "answer": "B",
+      "explanation": "Continue sur un compact implique uniformément continue ; ni dérivabilité ni lipschitzianité ne suivent (x ↦ √x sur [0, 1]).",
+      "source": "Cours de licence de topologie et d'analyse (espaces métriques et normés), famille des manuels de Dieudonné et de Rudin",
+      "verif": "import"
+    },
+    {
+      "course": "l3-maths",
+      "category": "Suites et séries de fonctions",
+      "difficulty": 4,
+      "question": "Quelle proposition complète correctement l'énoncé : « Théorème de dérivation terme à terme : si fₙ → f simplement, fₙ′ → g uniformément sur un segment, alors … » ?",
+      "choices": [
+        "f est continue seulement",
+        "f′ = g seulement si les fₙ sont affines",
+        "f n'est pas nécessairement dérivable",
+        "f est dérivable et f′ = g"
+      ],
+      "answer": "D",
+      "explanation": "Hypothèses : fₙ de classe C¹, convergence simple en un point et uniforme des dérivées sur le segment ; alors f est C¹ et f′ = lim fₙ′.",
+      "source": "Cours de licence d'analyse (suites et séries de fonctions, séries entières, séries de Fourier), famille des manuels de Rudin et de Gourdon",
+      "verif": "import"
+    },
+    {
+      "course": "l3-maths",
+      "category": "Réduction des endomorphismes",
+      "difficulty": 4,
+      "question": "Que peut-on dire des polynômes caractéristiques de AB et BA pour deux matrices carrées A, B ?",
+      "choices": [
+        "ils sont égaux seulement si AB = BA",
+        "ils sont égaux",
+        "AB et BA sont toujours semblables",
+        "ils ont toujours le même polynôme minimal"
+      ],
+      "answer": "B",
+      "explanation": "χ_{AB} = χ_{BA} ; en revanche A = [[0, 1], [0, 0]] et B = diag(0, 1) donnent des polynômes minimaux X² et X.",
+      "source": "Cours de licence d'algèbre linéaire avancée (réduction, espaces euclidiens et hermitiens), famille des manuels de Gourdon et de Grifone",
+      "verif": "import"
+    },
+    {
+      "course": "l3-maths",
+      "category": "Inversion locale et fonctions implicites",
+      "difficulty": 5,
+      "question": "Que montre f(x) = x + 2x² sin(1/x), f(0) = 0 ?",
+      "choices": [
+        "f est de classe C¹ mais non inversible",
+        "f′(0) = 1 mais f n'est monotone sur aucun voisinage de 0 : l'hypothèse C¹ est indispensable",
+        "le théorème d'inversion locale est vrai sans continuité de f′",
+        "f n'est pas dérivable en 0"
+      ],
+      "answer": "B",
+      "explanation": "f est dérivable en 0 avec f′(0) = 1, mais f′(x) = 1 + 4x sin(1/x) − 2cos(1/x) change de signe près de 0.",
+      "source": "Cours de licence de calcul différentiel et d'intégration dans Rⁿ, famille des manuels de Cartan et de Rudin",
+      "verif": "import"
+    },
+    {
+      "course": "l3-maths",
+      "category": "Calcul différentiel dans Rn",
+      "difficulty": 1,
+      "question": "Que vaut ∂/∂x de f(x, y) = x²y³ ?",
+      "choices": [
+        "2xy³",
+        "3x²y²",
+        "2xy²",
+        "2x"
+      ],
+      "answer": "A",
+      "explanation": "On dérive par rapport à x en considérant y comme constante.",
+      "source": "Cours de licence de calcul différentiel et d'intégration dans Rⁿ, famille des manuels de Cartan et de Rudin",
+      "verif": "import"
+    },
+    {
+      "course": "l3-maths",
+      "category": "Complétude et point fixe de Banach",
+      "difficulty": 4,
+      "question": "Dans la démonstration du théorème de Banach, quelle propriété de l'espace permet de passer de « suite de Cauchy » à « suite convergente » ?",
+      "choices": [
+        "la compacité",
+        "la connexité",
+        "la complétude",
+        "la séparabilité"
+      ],
+      "answer": "C",
+      "explanation": "On montre que (xₙ) est de Cauchy grâce à la série géométrique, puis la complétude donne la limite, qui est le point fixe.",
+      "source": "Cours de licence de topologie et d'analyse (espaces métriques et normés), famille des manuels de Dieudonné et de Rudin",
+      "verif": "import"
+    },
+    {
+      "course": "l3-maths",
+      "category": "Calcul différentiel dans Rn",
+      "difficulty": 1,
+      "question": "Comment le gradient d'une fonction C¹ est-il positionné par rapport aux lignes de niveau ?",
+      "choices": [
+        "il est tangent aux lignes de niveau",
+        "il est colinéaire à (1, 1)",
+        "il est orthogonal aux lignes de niveau",
+        "il est toujours nul"
+      ],
+      "answer": "C",
+      "explanation": "Le long d'une ligne de niveau f est constante, donc ∇f est orthogonal à son vecteur tangent.",
+      "source": "Cours de licence de calcul différentiel et d'intégration dans Rⁿ, famille des manuels de Cartan et de Rudin",
+      "verif": "import"
+    },
+    {
+      "course": "l3-maths",
+      "category": "Compacité et connexité",
+      "difficulty": 1,
+      "question": "Quelle propriété est conservée par image continue ?",
+      "choices": [
+        "le caractère ouvert",
+        "la connexité",
+        "le caractère fermé",
+        "le caractère borné"
+      ],
+      "answer": "B",
+      "explanation": "L'image continue d'un connexe est connexe ; ouverts, fermés et bornés ne sont pas conservés (x ↦ x² envoie ]−1, 1[ sur [0, 1[).",
+      "source": "Cours de licence de topologie et d'analyse (espaces métriques et normés), famille des manuels de Dieudonné et de Rudin",
+      "verif": "import"
+    },
+    {
+      "course": "l3-maths",
+      "category": "Inversion locale et fonctions implicites",
+      "difficulty": 2,
+      "question": "Pour f de classe C¹ de ℝ dans ℝ avec f′(a) ≠ 0, que dit le théorème d'inversion locale ?",
+      "choices": [
+        "f est constante au voisinage de a",
+        "f est bijective de ℝ sur ℝ",
+        "f est strictement monotone au voisinage de a",
+        "f est convexe au voisinage de a"
+      ],
+      "answer": "C",
+      "explanation": "f′ continue et non nulle en a garde son signe près de a ; f est alors un difféomorphisme sur un voisinage.",
+      "source": "Cours de licence de calcul différentiel et d'intégration dans Rⁿ, famille des manuels de Cartan et de Rudin",
+      "verif": "import"
+    },
+    {
+      "course": "l3-maths",
+      "category": "Espaces Lp",
+      "difficulty": 2,
+      "question": "Quel est l'exposant conjugué q de p = 3 ?",
+      "choices": [
+        "3/2",
+        "2/3",
+        "3",
+        "1/3"
+      ],
+      "answer": "A",
+      "explanation": "1/q = 1 − 1/3 = 2/3.",
+      "source": "Cours de licence de théorie de la mesure et d'intégration, famille des manuels de Rudin (Analyse réelle et complexe)",
+      "verif": "import"
+    },
+    {
+      "course": "l3-maths",
+      "category": "Systèmes linéaires et stabilité",
+      "difficulty": 4,
+      "question": "Que dit le théorème de linéarisation de Lyapunov pour un équilibre a de X′ = F(X) ?",
+      "choices": [
+        "si une valeur propre de dF(a) est de partie réelle nulle, a est instable",
+        "si toutes les valeurs propres de dF(a) ont une partie réelle < 0, a est asymptotiquement stable",
+        "si dF(a) est symétrique, a est stable",
+        "si dF(a) est inversible, a est stable"
+      ],
+      "answer": "B",
+      "explanation": "Le cas de valeurs propres de partie réelle nulle est indéterminé ; la linéarisation ne tranche pas.",
+      "source": "Cours de licence d'équations différentielles ordinaires, famille des manuels d'Arnold et de Demailly",
+      "verif": "import"
+    },
+    {
+      "course": "l3-maths",
+      "category": "Polynômes et extensions de corps",
+      "difficulty": 4,
+      "question": "Quel élément engendre l'extension ℚ(√2, √3) sur ℚ ?",
+      "choices": [
+        "√2",
+        "√6",
+        "√2 + √3",
+        "√5"
+      ],
+      "answer": "C",
+      "explanation": "ℚ(√2 + √3) contient (√2 + √3)³ et donc √2 et √3 ; c'est un élément primitif de degré 4.",
+      "source": "Cours de licence d'algèbre générale (groupes, anneaux, corps, théorie de Galois élémentaire), famille des manuels de Perrin et de Lang",
+      "verif": "import"
+    },
+    {
+      "course": "l3-maths",
+      "category": "Groupes et théorème de Lagrange",
+      "difficulty": 5,
+      "question": "Quel est l'ordre du plus petit groupe simple non abélien ?",
+      "choices": [
+        "60",
+        "24",
+        "120",
+        "12"
+      ],
+      "answer": "A",
+      "explanation": "C'est le groupe alterné A₅, d'ordre 60.",
+      "source": "Cours de licence d'algèbre générale (groupes, anneaux, corps, théorie de Galois élémentaire), famille des manuels de Perrin et de Lang",
+      "verif": "import"
+    },
+    {
+      "course": "l3-maths",
+      "category": "Complétude et point fixe de Banach",
+      "difficulty": 1,
+      "question": "Qu'est-ce qu'un espace de Banach ?",
+      "choices": [
+        "un espace vectoriel normé de dimension finie",
+        "un espace vectoriel muni d'un produit scalaire",
+        "un espace vectoriel normé complet",
+        "un espace métrique compact"
+      ],
+      "answer": "C",
+      "explanation": "Banach : normé complet ; Hilbert : préhilbertien complet.",
+      "source": "Cours de licence de topologie et d'analyse (espaces métriques et normés), famille des manuels de Dieudonné et de Rudin",
+      "verif": "import"
+    },
+    {
+      "course": "l3-maths",
+      "category": "Théorème des résidus",
+      "difficulty": 3,
+      "question": "Que vaut ∮_{|z|=1} eᶻ/z³ dz ?",
+      "choices": [
+        "2πi",
+        "πi",
+        "πi/3",
+        "πi/6"
+      ],
+      "answer": "B",
+      "explanation": "Le résidu en 0 est le coefficient de z² dans eᶻ, soit 1/2 ; 2πi × 1/2 = πi.",
+      "source": "Cours de licence d'analyse complexe, famille des manuels de Cartan (Théorie élémentaire des fonctions analytiques) et de Rudin",
+      "verif": "import"
+    },
+    {
+      "course": "l3-maths",
+      "category": "Calcul différentiel dans Rn",
+      "difficulty": 2,
+      "question": "Quelle est la dérivée directionnelle de f(x, y) = x² + 3y au point (1, 1) dans la direction du vecteur unitaire u = (3/5, 4/5) ?",
+      "choices": [
+        "2",
+        "18/5",
+        "18/25",
+        "5"
+      ],
+      "answer": "B",
+      "explanation": "∇f(1, 1) = (2, 3) et ⟨∇f, u⟩ = 6/5 + 12/5 = 18/5.",
+      "source": "Cours de licence de calcul différentiel et d'intégration dans Rⁿ, famille des manuels de Cartan et de Rudin",
+      "verif": "import"
+    },
+    {
+      "course": "l3-maths",
+      "category": "Analyse complexe : fonctions holomorphes",
+      "difficulty": 3,
+      "question": "Qu'affirme le théorème d'analyticité des fonctions holomorphes sur un disque D(a, R) ?",
+      "choices": [
+        "f est développable en série entière seulement si f est entière",
+        "le rayon de convergence de la série est exactement R",
+        "f est somme de sa série de Taylor en a, de rayon de convergence au moins R",
+        "la série de Taylor est de rayon nul en général"
+      ],
+      "answer": "C",
+      "explanation": "C'est une différence essentielle avec le cas réel : holomorphe implique analytique.",
+      "source": "Cours de licence d'analyse complexe, famille des manuels de Cartan (Théorie élémentaire des fonctions analytiques) et de Rudin",
+      "verif": "import"
+    },
+    {
+      "course": "l3-maths",
+      "category": "Théorème des résidus",
+      "difficulty": 4,
+      "question": "Que vaut ∫₀^{2π} dθ/(2 + cos θ) ?",
+      "choices": [
+        "π/ racine de 3",
+        "2π/3",
+        "2π/ racine de 3",
+        "π/3"
+      ],
+      "answer": "C",
+      "explanation": "∫₀^{2π} dθ/(a + cos θ) = 2π/√(a² − 1) pour a > 1 ; ici a = 2.",
+      "source": "Cours de licence d'analyse complexe, famille des manuels de Cartan (Théorie élémentaire des fonctions analytiques) et de Rudin",
+      "verif": "import"
+    },
+    {
+      "course": "l3-maths",
+      "category": "Réduction des endomorphismes",
+      "difficulty": 3,
+      "question": "Que dit le théorème de Cayley-Hamilton ?",
+      "choices": [
+        "le polynôme minimal de A est toujours égal à son polynôme caractéristique",
+        "le polynôme caractéristique de A annule A : χ_A(A) = 0",
+        "A est diagonalisable si χ_A est scindé",
+        "χ_A(A) est inversible"
+      ],
+      "answer": "B",
+      "explanation": "Le polynôme minimal divise χ_A ; il peut en être strictement plus petit.",
+      "source": "Cours de licence d'algèbre linéaire avancée (réduction, espaces euclidiens et hermitiens), famille des manuels de Gourdon et de Grifone",
+      "verif": "import"
+    },
+    {
+      "course": "l3-maths",
+      "category": "Calcul différentiel dans Rn",
+      "difficulty": 4,
+      "question": "Que dit l'inégalité des accroissements finis pour f de classe C¹ sur un ouvert convexe avec ‖df(x)‖ ≤ M ?",
+      "choices": [
+        "‖f(x) moins f(y)‖ inférieur ou égal à M‖x moins y‖",
+        "‖f(x) moins f(y)‖ égal à M‖x moins y‖",
+        "‖f(x) moins f(y)‖ supérieur ou égal à M‖x moins y‖",
+        "‖f(x) moins f(y)‖ inférieur ou égal à M‖x plus y‖"
+      ],
+      "answer": "A",
+      "explanation": "f est alors M-lipschitzienne sur ce convexe.",
+      "source": "Cours de licence de calcul différentiel et d'intégration dans Rⁿ, famille des manuels de Cartan et de Rudin",
+      "verif": "import"
+    },
+    {
+      "course": "l3-maths",
+      "category": "Séries entières",
+      "difficulty": 2,
+      "question": "La règle de d'Alembert donne R = 1/ℓ si |aₙ₊₁/aₙ| tend vers ℓ. Quel est R pour Σ 2ⁿ zⁿ/n ?",
+      "choices": [
+        "1/2",
+        "2",
+        "1",
+        "+∞"
+      ],
+      "answer": "A",
+      "explanation": "|aₙ₊₁/aₙ| = 2n/(n+1) → 2, donc R = 1/2.",
+      "source": "Cours de licence d'analyse (suites et séries de fonctions, séries entières, séries de Fourier), famille des manuels de Rudin et de Gourdon",
+      "verif": "import"
+    },
+    {
+      "course": "l3-maths",
+      "category": "Équations différentielles : Cauchy-Lipschitz",
+      "difficulty": 3,
+      "question": "Que dit le théorème de Peano pour y′ = f(t, y) avec f continue ?",
+      "choices": [
+        "il existe au moins une solution locale, mais l'unicité n'est pas garantie",
+        "il existe une unique solution locale",
+        "il n'existe pas de solution en général",
+        "les solutions sont toujours globales"
+      ],
+      "answer": "A",
+      "explanation": "Peano ne suppose pas f lipschitzienne : on perd l'unicité (y′ = √|y|).",
+      "source": "Cours de licence d'équations différentielles ordinaires, famille des manuels d'Arnold et de Demailly",
+      "verif": "import"
+    },
+    {
+      "course": "l3-maths",
+      "category": "Complétude et point fixe de Banach",
+      "difficulty": 5,
+      "question": "Quel est le complété de (ℚ, |·|) ?",
+      "choices": [
+        "ℚ lui-même",
+        "ℂ",
+        "ℝ",
+        "l'ensemble des irrationnels"
+      ],
+      "answer": "C",
+      "explanation": "ℝ peut être construit comme complété de ℚ pour la valeur absolue (classes de suites de Cauchy).",
+      "source": "Cours de licence de topologie et d'analyse (espaces métriques et normés), famille des manuels de Dieudonné et de Rudin",
+      "verif": "import"
+    },
+    {
+      "course": "l3-maths",
+      "category": "Systèmes linéaires et stabilité",
+      "difficulty": 2,
+      "question": "Quelle est l'exponentielle e^{tA} pour A = [[0, −1], [1, 0]] ?",
+      "choices": [
+        "[[cos t, sin t], [moins sin t, cos t]]",
+        "[[eᵗ, 0], [0, e^{ moins t}]]",
+        "[[cosh t, sinh t], [sinh t, cosh t]]",
+        "[[cos t, moins sin t], [sin t, cos t]]"
+      ],
+      "answer": "D",
+      "explanation": "A² = −I, donc e^{tA} = cos t·I + sin t·A, matrice de rotation d'angle t.",
+      "source": "Cours de licence d'équations différentielles ordinaires, famille des manuels d'Arnold et de Demailly",
+      "verif": "import"
+    },
+    {
+      "course": "l3-maths",
+      "category": "Séries de Fourier",
+      "difficulty": 2,
+      "question": "Que dit le théorème de Dirichlet pour f 2π-périodique de classe C¹ par morceaux ?",
+      "choices": [
+        "la série converge en tout x vers f(x⁺)",
+        "la série converge en tout x vers f(x) même aux discontinuités",
+        "la série de Fourier converge en tout x vers (f(x⁺) + f(x⁻))/2",
+        "la série converge uniformément vers f sur ℝ"
+      ],
+      "answer": "C",
+      "explanation": "Aux points de discontinuité, la somme vaut la moyenne des limites à droite et à gauche.",
+      "source": "Cours de licence d'analyse (suites et séries de fonctions, séries entières, séries de Fourier), famille des manuels de Rudin et de Gourdon",
+      "verif": "import"
+    },
+    {
+      "course": "l3-maths",
+      "category": "Espaces Lp",
+      "difficulty": 2,
+      "question": "Quelle proposition complète correctement l'énoncé : « La fonction x ↦ 1/√x sur ]0, 1] appartient à … » ?",
+      "choices": [
+        "L¹ mais pas à L²",
+        "L² mais pas à L¹",
+        "L¹ et L²",
+        "aucun des deux"
+      ],
+      "answer": "A",
+      "explanation": "∫₀¹ x^{−1/2} dx = 2 < ∞, tandis que ∫₀¹ x^{−1} dx = +∞.",
+      "source": "Cours de licence de théorie de la mesure et d'intégration, famille des manuels de Rudin (Analyse réelle et complexe)",
+      "verif": "import"
+    },
+    {
+      "course": "l3-maths",
+      "category": "Anneaux, idéaux et corps",
+      "difficulty": 3,
+      "question": "Que peut-on dire du groupe multiplicatif d'un corps fini ?",
+      "choices": [
+        "il est cyclique",
+        "il est trivial",
+        "il est non abélien",
+        "il est d'ordre pair seulement"
+      ],
+      "answer": "A",
+      "explanation": "Tout sous-groupe fini du groupe multiplicatif d'un corps est cyclique.",
+      "source": "Cours de licence d'algèbre générale (groupes, anneaux, corps, théorie de Galois élémentaire), famille des manuels de Perrin et de Lang",
+      "verif": "import"
+    },
+    {
+      "course": "l3-maths",
+      "category": "Inversion locale et fonctions implicites",
+      "difficulty": 1,
+      "question": "Pour f : ℝⁿ → ℝⁿ de classe C¹, à quelle condition sur la jacobienne df(a) est-elle inversible ?",
+      "choices": [
+        "det Jf(a) ≠ 0",
+        "tr Jf(a) ≠ 0",
+        "Jf(a) est symétrique",
+        "Jf(a) = Iₙ"
+      ],
+      "answer": "A",
+      "explanation": "Une matrice carrée est inversible si et seulement si son déterminant est non nul.",
+      "source": "Cours de licence de calcul différentiel et d'intégration dans Rⁿ, famille des manuels de Cartan et de Rudin",
+      "verif": "import"
+    },
+    {
+      "course": "l3-maths",
+      "category": "Formes bilinéaires et espaces euclidiens",
+      "difficulty": 2,
+      "question": "Quelle est la projection orthogonale du vecteur (1, 2, 3) sur la droite engendrée par (1, 1, 1) ?",
+      "choices": [
+        "(1, 1, 1)",
+        "(2, 2, 2)",
+        "(6, 6, 6)",
+        "(1, 2, 3)"
+      ],
+      "answer": "B",
+      "explanation": "p = ⟨v, u⟩/‖u‖² u = (6/3)(1, 1, 1) = (2, 2, 2).",
+      "source": "Cours de licence d'algèbre linéaire avancée (réduction, espaces euclidiens et hermitiens), famille des manuels de Gourdon et de Grifone",
+      "verif": "import"
+    },
+    {
+      "course": "l3-maths",
+      "category": "Analyse complexe : fonctions holomorphes",
+      "difficulty": 1,
+      "question": "Qu'appelle-t-on fonction entière ?",
+      "choices": [
+        "une fonction à valeurs entières",
+        "un polynôme à coefficients entiers",
+        "une fonction holomorphe sur le disque unité",
+        "une fonction holomorphe sur tout ℂ"
+      ],
+      "answer": "D",
+      "explanation": "Les fonctions eᶻ, sin z, cos z et les polynômes sont entières.",
+      "source": "Cours de licence d'analyse complexe, famille des manuels de Cartan (Théorie élémentaire des fonctions analytiques) et de Rudin",
+      "verif": "import"
+    },
+    {
+      "course": "l3-maths",
+      "category": "Équations différentielles : Cauchy-Lipschitz",
+      "difficulty": 1,
+      "question": "Quelle est la solution générale de y′ = a·y, a réel constant ?",
+      "choices": [
+        "y(x) égal à C fois e^{x/a}",
+        "y(x) égal à C plus a fois x",
+        "y(x) égal à C fois a^x",
+        "y(x) égal à C fois e^{ax}"
+      ],
+      "answer": "D",
+      "explanation": "C'est une équation linéaire homogène d'ordre 1 ; la constante C est fixée par la condition initiale.",
+      "source": "Cours de licence d'équations différentielles ordinaires, famille des manuels d'Arnold et de Demailly",
+      "verif": "import"
+    },
+    {
+      "course": "l3-maths",
+      "category": "Polynômes et extensions de corps",
+      "difficulty": 2,
+      "question": "Quel polynôme est irréductible sur ℚ d'après le critère d'Eisenstein avec p = 2 ?",
+      "choices": [
+        "X³ − 1",
+        "X² − 4",
+        "X³ + 2X + 2",
+        "X³ + 2X² + X"
+      ],
+      "answer": "C",
+      "explanation": "Les coefficients non dominants sont divisibles par 2 et le terme constant 2 n'est pas divisible par 4 ; les autres polynômes sont réductibles.",
+      "source": "Cours de licence d'algèbre générale (groupes, anneaux, corps, théorie de Galois élémentaire), famille des manuels de Perrin et de Lang",
+      "verif": "import"
+    },
+    {
+      "course": "l3-maths",
+      "category": "Équations différentielles : Cauchy-Lipschitz",
+      "difficulty": 2,
+      "question": "Quelle est la solution de y′ = 2ty, y(0) = 1 ?",
+      "choices": [
+        "y(t) = e^{t²}",
+        "y(t) = e^{2t}",
+        "y(t) = 1 + t²",
+        "y(t) = e^{t}"
+      ],
+      "answer": "A",
+      "explanation": "y′/y = 2t donne ln y = t² + C ; y(0) = 1 fixe C = 0.",
+      "source": "Cours de licence d'équations différentielles ordinaires, famille des manuels d'Arnold et de Demailly",
+      "verif": "import"
+    },
+    {
+      "course": "l3-maths",
+      "category": "Convergences, loi des grands nombres, théorème central limite",
+      "difficulty": 2,
+      "question": "Quelle implication est vraie pour une suite de variables aléatoires ?",
+      "choices": [
+        "convergence en probabilité ⟹ convergence presque sûre",
+        "convergence en loi ⟹ convergence en probabilité",
+        "convergence presque sûre ⟹ convergence en probabilité",
+        "convergence en loi ⟹ convergence presque sûre"
+      ],
+      "answer": "C",
+      "explanation": "Les implications inverses sont fausses en général (sauf limite constante pour la loi vers la probabilité).",
+      "source": "Cours de licence de probabilités, famille des manuels de Foata-Fuchs et de Ouvrard",
+      "verif": "import"
+    },
+    {
+      "course": "l3-maths",
+      "category": "Séries de Fourier",
+      "difficulty": 2,
+      "question": "Que dit le lemme de Riemann-Lebesgue pour f 2π-périodique intégrable ?",
+      "choices": [
+        "Σ|cₙ| converge toujours",
+        "cₙ(f) = O(1/n²) toujours",
+        "cₙ(f) tend vers 1",
+        "cₙ(f) tend vers 0 quand |n| tend vers l'infini"
+      ],
+      "answer": "D",
+      "explanation": "Les coefficients de Fourier tendent vers 0, sans vitesse précise pour f seulement intégrable.",
+      "source": "Cours de licence d'analyse (suites et séries de fonctions, séries entières, séries de Fourier), famille des manuels de Rudin et de Gourdon",
+      "verif": "import"
+    },
+    {
+      "course": "l3-maths",
+      "category": "Systèmes linéaires et stabilité",
+      "difficulty": 5,
+      "question": "Que dit le théorème de Hartman-Grobman ?",
+      "choices": [
+        "le flot est toujours linéaire près d'un équilibre",
+        "le flot est C¹-conjugué au flot linéarisé près de tout équilibre",
+        "près d'un équilibre hyperbolique, le flot est topologiquement conjugué au flot linéarisé",
+        "tout équilibre est asymptotiquement stable"
+      ],
+      "answer": "C",
+      "explanation": "Hyperbolique signifie qu'aucune valeur propre de la linéarisée n'est de partie réelle nulle ; la conjugaison n'est en général que continue.",
+      "source": "Cours de licence d'équations différentielles ordinaires, famille des manuels d'Arnold et de Demailly",
+      "verif": "import"
+    },
+    {
+      "course": "l3-maths",
+      "category": "Anneaux, idéaux et corps",
+      "difficulty": 2,
+      "question": "Quel entier n engendre l'idéal 6ℤ + 10ℤ de ℤ ?",
+      "choices": [
+        "4",
+        "6",
+        "30",
+        "2"
+      ],
+      "answer": "D",
+      "explanation": "Dans ℤ, l'idéal engendré par a et b est pgcd(a, b)ℤ ; pgcd(6, 10) = 2.",
+      "source": "Cours de licence d'algèbre générale (groupes, anneaux, corps, théorie de Galois élémentaire), famille des manuels de Perrin et de Lang",
+      "verif": "import"
+    },
+    {
+      "course": "l3-maths",
+      "category": "Espaces normés et topologie des espaces métriques",
+      "difficulty": 4,
+      "question": "Quelle proposition complète correctement l'énoncé : « Dans un espace métrique muni de la distance discrète (d(x, y) = 1 si x ≠ y), toute partie est … » ?",
+      "choices": [
+        "ouverte mais pas toujours fermée",
+        "à la fois ouverte et fermée",
+        "fermée mais pas toujours ouverte",
+        "ni ouverte ni fermée en général"
+      ],
+      "answer": "B",
+      "explanation": "Chaque singleton est la boule ouverte B(x, 1/2), donc toute partie est ouverte ; son complémentaire l'est aussi.",
+      "source": "Cours de licence de topologie et d'analyse (espaces métriques et normés), famille des manuels de Dieudonné et de Rudin",
+      "verif": "import"
+    },
+    {
+      "course": "l3-maths",
+      "category": "Complétude et point fixe de Banach",
+      "difficulty": 2,
+      "question": "Quelle proposition complète correctement l'énoncé : « Un sous-espace fermé d'un espace de Banach est … » ?",
+      "choices": [
+        "un espace non complet en général",
+        "un espace de Banach",
+        "de dimension finie",
+        "compact"
+      ],
+      "answer": "B",
+      "explanation": "Un fermé d'un complet est complet.",
+      "source": "Cours de licence de topologie et d'analyse (espaces métriques et normés), famille des manuels de Dieudonné et de Rudin",
+      "verif": "import"
+    },
+    {
+      "course": "l3-maths",
+      "category": "Inversion locale et fonctions implicites",
+      "difficulty": 2,
+      "question": "Quelle est l'équation de la tangente à la courbe x² + xy + y² = 3 au point (1, 1) ?",
+      "choices": [
+        "x − y = 0",
+        "x + y = 2",
+        "x + y = 3",
+        "y = 3x − 2"
+      ],
+      "answer": "B",
+      "explanation": "∇F(1, 1) = (3, 3), donc la tangente est (x − 1) + (y − 1) = 0.",
+      "source": "Cours de licence de calcul différentiel et d'intégration dans Rⁿ, famille des manuels de Cartan et de Rudin",
+      "verif": "import"
+    },
+    {
+      "course": "l3-maths",
+      "category": "Suites et séries de fonctions",
+      "difficulty": 2,
+      "question": "Quelle condition permet d'intervertir limite et intégrale sur [a, b] pour une suite de fonctions continues fₙ ?",
+      "choices": [
+        "la convergence simple seule",
+        "la dérivabilité des fₙ",
+        "la convergence uniforme sur [a, b]",
+        "la monotonie de (fₙ(x))"
+      ],
+      "answer": "C",
+      "explanation": "Si fₙ → f uniformément sur [a, b], alors ∫ fₙ → ∫ f ; la convergence simple ne suffit pas.",
+      "source": "Cours de licence d'analyse (suites et séries de fonctions, séries entières, séries de Fourier), famille des manuels de Rudin et de Gourdon",
+      "verif": "import"
+    },
+    {
+      "course": "l3-maths",
+      "category": "Équations différentielles : Cauchy-Lipschitz",
+      "difficulty": 2,
+      "question": "Quelle est la solution générale de y″ + 4y = 0 ?",
+      "choices": [
+        "y = A cos 4x + B sin 4x",
+        "y = A e^{2x} + B e^{−2x}",
+        "y = A cos x + B sin x",
+        "y = A cos 2x + B sin 2x"
+      ],
+      "answer": "D",
+      "explanation": "r² + 4 = 0 donne r = ±2i.",
+      "source": "Cours de licence d'équations différentielles ordinaires, famille des manuels d'Arnold et de Demailly",
+      "verif": "import"
+    },
+    {
+      "course": "l3-maths",
+      "category": "Théorème des résidus",
+      "difficulty": 4,
+      "question": "Combien de zéros dans le disque |z| < 2 le polynôme z⁴ − 5z + 1 possède-t-il ?",
+      "choices": [
+        "1",
+        "2",
+        "3",
+        "4"
+      ],
+      "answer": "D",
+      "explanation": "Sur |z| = 2, |z⁴| = 16 > |5z − 1| ≤ 11 : par Rouché il y en a autant que pour z⁴, soit 4 (tous les zéros).",
+      "source": "Cours de licence d'analyse complexe, famille des manuels de Cartan (Théorie élémentaire des fonctions analytiques) et de Rudin",
+      "verif": "import"
+    },
+    {
+      "course": "l3-maths",
+      "category": "Théorème spectral",
+      "difficulty": 2,
+      "question": "Quelles sont les valeurs propres de [[5, 2], [2, 2]] ?",
+      "choices": [
+        "1 et 6",
+        "2 et 5",
+        "3 et 4",
+        "0 et 7"
+      ],
+      "answer": "A",
+      "explanation": "tr = 7 et det = 6 donnent λ² − 7λ + 6 = (λ − 1)(λ − 6).",
+      "source": "Cours de licence d'algèbre linéaire avancée (réduction, espaces euclidiens et hermitiens), famille des manuels de Gourdon et de Grifone",
+      "verif": "import"
+    },
+    {
+      "course": "l3-maths",
+      "category": "Équations différentielles : Cauchy-Lipschitz",
+      "difficulty": 2,
+      "question": "Quelle hypothèse sur f garantit existence et unicité locale du problème de Cauchy y′ = f(t, y), y(t₀) = y₀ (théorème de Cauchy-Lipschitz) ?",
+      "choices": [
+        "f continue seulement",
+        "f continue et localement lipschitzienne par rapport à y",
+        "f dérivable par rapport à t seulement",
+        "f bornée"
+      ],
+      "answer": "B",
+      "explanation": "La continuité seule donne l'existence (Peano) mais pas l'unicité.",
+      "source": "Cours de licence d'équations différentielles ordinaires, famille des manuels d'Arnold et de Demailly",
+      "verif": "import"
+    },
+    {
+      "course": "l3-maths",
+      "category": "Réduction des endomorphismes",
+      "difficulty": 3,
+      "question": "Quel critère caractérise la diagonalisabilité de A à l'aide d'un polynôme annulateur ?",
+      "choices": [
+        "A est annulée par un polynôme scindé à racines simples",
+        "A est annulée par un polynôme de degré 2",
+        "A est annulée par un polynôme à racines doubles",
+        "A est annulée par un polynôme irréductible"
+      ],
+      "answer": "A",
+      "explanation": "Équivalent : le polynôme minimal est scindé à racines simples.",
+      "source": "Cours de licence d'algèbre linéaire avancée (réduction, espaces euclidiens et hermitiens), famille des manuels de Gourdon et de Grifone",
+      "verif": "import"
+    },
+    {
+      "course": "l3-maths",
+      "category": "Groupes et théorème de Lagrange",
+      "difficulty": 2,
+      "question": "Dans un groupe d'ordre 15, quelle valeur ne peut pas être l'ordre d'un élément ?",
+      "choices": [
+        "3",
+        "4",
+        "5",
+        "15"
+      ],
+      "answer": "B",
+      "explanation": "L'ordre d'un élément divise l'ordre du groupe, et 4 ne divise pas 15.",
+      "source": "Cours de licence d'algèbre générale (groupes, anneaux, corps, théorie de Galois élémentaire), famille des manuels de Perrin et de Lang",
+      "verif": "import"
+    },
+    {
+      "course": "l3-maths",
+      "category": "Théorème spectral",
+      "difficulty": 3,
+      "question": "Quelles sont les valeurs propres de la matrice [[3, 1], [1, 3]] de la forme quadratique 3x² + 2xy + 3y² ?",
+      "choices": [
+        "1 et 5",
+        "3 et 3",
+        "2 et 4",
+        "0 et 6"
+      ],
+      "answer": "C",
+      "explanation": "tr = 6 et det = 8 donnent λ² − 6λ + 8 = (λ − 2)(λ − 4).",
+      "source": "Cours de licence d'algèbre linéaire avancée (réduction, espaces euclidiens et hermitiens), famille des manuels de Gourdon et de Grifone",
+      "verif": "import"
+    },
+    {
+      "course": "l3-maths",
+      "category": "Intégrale de Lebesgue",
+      "difficulty": 5,
+      "question": "Quel est le cardinal de la tribu borélienne de ℝ ?",
+      "choices": [
+        "2^𝔠",
+        "ℵ₀",
+        "𝔠, celui de ℝ",
+        "un cardinal fini"
+      ],
+      "answer": "C",
+      "explanation": "La tribu borélienne a la puissance du continuum, strictement moindre que celle de la tribu de Lebesgue.",
+      "source": "Cours de licence de théorie de la mesure et d'intégration, famille des manuels de Rudin (Analyse réelle et complexe)",
+      "verif": "import"
+    },
+    {
+      "course": "l3-maths",
+      "category": "Espaces normés et topologie des espaces métriques",
+      "difficulty": 2,
+      "question": "Quelle proposition complète correctement l'énoncé : « Sur C([0, 1]) on pose ‖f‖₁ = ∫₀¹ |f(t)| dt et ‖f‖∞ = sup |f|. Pour toute f, on a … » ?",
+      "choices": [
+        "‖f‖∞ inférieur ou égal à ‖f‖₁",
+        "‖f‖∞ inférieur ou égal à 2‖f‖₁",
+        "‖f‖₁ inférieur ou égal à ‖f‖∞",
+        "‖f‖₁ égal à ‖f‖∞"
+      ],
+      "answer": "C",
+      "explanation": "Comme |f(t)| ≤ ‖f‖∞ sur [0, 1], l'intégrale est majorée par ‖f‖∞ ; la réciproque est fausse pour une fonction très pointue.",
+      "source": "Cours de licence de topologie et d'analyse (espaces métriques et normés), famille des manuels de Dieudonné et de Rudin",
+      "verif": "import"
+    },
+    {
+      "course": "l3-maths",
+      "category": "Espaces Lp",
+      "difficulty": 4,
+      "question": "Pour 1 ≤ p < ∞, à quel espace s'identifie le dual topologique de L^p (σ-fini) ?",
+      "choices": [
+        "L^q avec 1/p + 1/q = 1",
+        "L^p lui-même pour tout p",
+        "L¹ pour tout p",
+        "L^∞ pour tout p"
+      ],
+      "answer": "A",
+      "explanation": "Le théorème de représentation de Riesz donne (L^p)′ = L^q ; pour p = 2, L² est autodual.",
+      "source": "Cours de licence de théorie de la mesure et d'intégration, famille des manuels de Rudin (Analyse réelle et complexe)",
+      "verif": "import"
+    },
+    {
+      "course": "l3-maths",
+      "category": "Compacité et connexité",
+      "difficulty": 1,
+      "question": "Que peut-on dire de l'image d'un compact par une application continue à valeurs dans un espace métrique ?",
+      "choices": [
+        "c'est un ouvert",
+        "c'est un compact",
+        "c'est un connexe non borné",
+        "c'est une partie bornée mais pas forcément fermée"
+      ],
+      "answer": "B",
+      "explanation": "La continuité conserve la compacité : de tout recouvrement ouvert de l'image on extrait un sous-recouvrement fini par image réciproque.",
+      "source": "Cours de licence de topologie et d'analyse (espaces métriques et normés), famille des manuels de Dieudonné et de Rudin",
+      "verif": "import"
+    },
+    {
+      "course": "l3-maths",
+      "category": "Méthodes itératives pour les systèmes linéaires",
+      "difficulty": 3,
+      "question": "Que dit-on de Gauss-Seidel pour A symétrique définie positive ?",
+      "choices": [
+        "la méthode diverge",
+        "la méthode converge seulement si A est diagonale",
+        "la méthode n'est pas définie",
+        "la méthode converge"
+      ],
+      "answer": "D",
+      "explanation": "C'est le théorème d'Ostrowski-Reich avec ω = 1.",
+      "source": "Cours de licence d'analyse numérique matricielle et d'interpolation, famille des manuels de Ciarlet et de Quarteroni",
+      "verif": "import"
+    },
+    {
+      "course": "l3-maths",
+      "category": "Séries entières",
+      "difficulty": 1,
+      "question": "Quel est le rayon de convergence de Σ n! zⁿ ?",
+      "choices": [
+        "1",
+        "e",
+        "+∞",
+        "0"
+      ],
+      "answer": "D",
+      "explanation": "|aₙ₊₁/aₙ| = n + 1 → ∞ : la série diverge pour tout z ≠ 0.",
+      "source": "Cours de licence d'analyse (suites et séries de fonctions, séries entières, séries de Fourier), famille des manuels de Rudin et de Gourdon",
+      "verif": "import"
+    },
+    {
+      "course": "l3-maths",
+      "category": "Statistique : estimation et tests",
+      "difficulty": 3,
+      "question": "Quelle est la loi de (X̄ − μ)/(S/√n) pour un échantillon gaussien de taille n ?",
+      "choices": [
+        "la loi normale N(0, 1)",
+        "la loi de Student à n − 1 degrés de liberté",
+        "la loi du χ² à n degrés de liberté",
+        "la loi de Student à n degrés de liberté"
+      ],
+      "answer": "B",
+      "explanation": "Remplacer σ par S introduit la loi de Student à n − 1 degrés de liberté.",
+      "source": "Cours de licence de statistique mathématique (estimation et tests), famille des manuels de Saporta et de Lehmann",
+      "verif": "import"
+    },
+    {
+      "course": "l3-maths",
+      "category": "Polynômes et extensions de corps",
+      "difficulty": 1,
+      "question": "Sur lequel de ces corps le polynôme X² + 1 est-il irréductible ?",
+      "choices": [
+        "ℝ",
+        "ℂ",
+        "𝔽₂",
+        "𝔽₅"
+      ],
+      "answer": "A",
+      "explanation": "X² + 1 n'a pas de racine réelle ; sur ℂ il s'écrit (X − i)(X + i), sur 𝔽₂ c'est (X + 1)², sur 𝔽₅ il admet 2 pour racine.",
+      "source": "Cours de licence d'algèbre générale (groupes, anneaux, corps, théorie de Galois élémentaire), famille des manuels de Perrin et de Lang",
+      "verif": "import"
+    },
+    {
+      "course": "l3-maths",
+      "category": "Statistique : estimation et tests",
+      "difficulty": 1,
+      "question": "Quand un estimateur θ̂ de θ est-il sans biais ?",
+      "choices": [
+        "quand Var(θ̂) = 0",
+        "quand E(θ̂) = θ",
+        "quand θ̂ converge presque sûrement",
+        "quand θ̂ = θ"
+      ],
+      "answer": "B",
+      "explanation": "Le biais est E(θ̂) − θ ; il peut être nul sans que l'estimateur soit exact pour chaque échantillon.",
+      "source": "Cours de licence de statistique mathématique (estimation et tests), famille des manuels de Saporta et de Lehmann",
+      "verif": "import"
+    },
+    {
+      "course": "l3-maths",
+      "category": "Intégrales multiples",
+      "difficulty": 1,
+      "question": "Quel est le volume de la boule de rayon R dans ℝ³ ?",
+      "choices": [
+        "πR³",
+        "2πR³/3",
+        "4πR³/3",
+        "4πR²"
+      ],
+      "answer": "C",
+      "explanation": "4πR² est l'aire de la sphère ; le volume est son intégrale en R.",
+      "source": "Cours de licence de calcul différentiel et d'intégration dans Rⁿ, famille des manuels de Cartan et de Rudin",
+      "verif": "import"
+    },
+    {
+      "course": "l3-maths",
+      "category": "Analyse complexe : fonctions holomorphes",
+      "difficulty": 2,
+      "question": "Que dit le principe du maximum pour f holomorphe non constante sur un ouvert connexe ?",
+      "choices": [
+        "|f| est maximal au centre de chaque disque",
+        "f atteint son maximum sur le bord et au centre",
+        "f est bornée",
+        "|f| n'a pas de maximum local en un point de l'ouvert"
+      ],
+      "answer": "D",
+      "explanation": "Le maximum de |f| sur un compact est atteint sur la frontière.",
+      "source": "Cours de licence d'analyse complexe, famille des manuels de Cartan (Théorie élémentaire des fonctions analytiques) et de Rudin",
+      "verif": "import"
+    },
+    {
+      "course": "l3-maths",
+      "category": "Formes bilinéaires et espaces euclidiens",
+      "difficulty": 3,
+      "question": "La matrice [[2, 1], [1, 2]] est-elle définie positive ?",
+      "choices": [
+        "non, elle est indéfinie",
+        "non, elle est définie négative",
+        "non, elle est semi-définie non définie",
+        "oui : trace 4 > 0 et déterminant 3 > 0"
+      ],
+      "answer": "D",
+      "explanation": "Ses valeurs propres 1 et 3 sont strictement positives.",
+      "source": "Cours de licence d'algèbre linéaire avancée (réduction, espaces euclidiens et hermitiens), famille des manuels de Gourdon et de Grifone",
+      "verif": "import"
+    },
+    {
+      "course": "l3-maths",
+      "category": "Théorème spectral",
+      "difficulty": 1,
+      "question": "Que dit le théorème spectral réel ?",
+      "choices": [
+        "toute matrice réelle est diagonalisable",
+        "toute matrice symétrique a des valeurs propres complexes non réelles",
+        "toute matrice orthogonale est symétrique",
+        "toute matrice symétrique réelle est diagonalisable dans une base orthonormée"
+      ],
+      "answer": "D",
+      "explanation": "Il existe P orthogonale avec PᵀAP diagonale réelle.",
+      "source": "Cours de licence d'algèbre linéaire avancée (réduction, espaces euclidiens et hermitiens), famille des manuels de Gourdon et de Grifone",
+      "verif": "import"
+    },
+    {
+      "course": "l3-maths",
+      "category": "Convergences, loi des grands nombres, théorème central limite",
+      "difficulty": 4,
+      "question": "Que dit le lemme de Slutsky ?",
+      "choices": [
+        "si Xₙ → X en loi et Yₙ → c en probabilité (c constante), alors Xₙ + Yₙ → X + c en loi",
+        "si Xₙ → X en loi et Yₙ → Y en loi, alors Xₙ + Yₙ → X + Y en loi",
+        "si Xₙ → X en probabilité, alors Xₙ → X presque sûrement",
+        "si Xₙ → X en loi, alors Xₙ² → X² presque sûrement"
+      ],
+      "answer": "A",
+      "explanation": "Sans indépendance ou limite constante, la somme de deux suites convergentes en loi peut ne pas converger vers la somme des limites.",
+      "source": "Cours de licence de probabilités, famille des manuels de Foata-Fuchs et de Ouvrard",
+      "verif": "import"
+    },
+    {
+      "course": "l3-maths",
+      "category": "Suites et séries de fonctions",
+      "difficulty": 5,
+      "question": "Quelle proposition complète correctement l'énoncé : « Théorème de Weierstrass d'approximation : l'ensemble des polynômes est … » ?",
+      "choices": [
+        "dense dans l'espace des fonctions mesurables bornées pour ‖·‖∞",
+        "fermé dans C([a, b])",
+        "d'intérieur non vide dans C([a, b])",
+        "dense dans (C([a, b]), ‖·‖∞)"
+      ],
+      "answer": "D",
+      "explanation": "Toute fonction continue sur un segment est limite uniforme de polynômes.",
+      "source": "Cours de licence d'analyse (suites et séries de fonctions, séries entières, séries de Fourier), famille des manuels de Rudin et de Gourdon",
+      "verif": "import"
+    },
+    {
+      "course": "l3-maths",
+      "category": "Anneaux, idéaux et corps",
+      "difficulty": 1,
+      "question": "Combien d'éléments inversibles l'anneau ℤ/12ℤ possède-t-il ?",
+      "choices": [
+        "4",
+        "3",
+        "6",
+        "11"
+      ],
+      "answer": "A",
+      "explanation": "Ce sont les classes de 1, 5, 7, 11, premiers avec 12 ; φ(12) = 4.",
+      "source": "Cours de licence d'algèbre générale (groupes, anneaux, corps, théorie de Galois élémentaire), famille des manuels de Perrin et de Lang",
+      "verif": "import"
+    },
+    {
+      "course": "l3-maths",
+      "category": "Intégrales multiples",
+      "difficulty": 1,
+      "question": "Que vaut ∫₀^{+∞}∫₀^{+∞} e^{−(x+y)} dx dy ?",
+      "choices": [
+        "1",
+        "2",
+        "+∞",
+        "1/2"
+      ],
+      "answer": "A",
+      "explanation": "Le produit de deux intégrales ∫₀^∞ e^{−x} dx = 1.",
+      "source": "Cours de licence de calcul différentiel et d'intégration dans Rⁿ, famille des manuels de Cartan et de Rudin",
+      "verif": "import"
+    },
+    {
+      "course": "l3-maths",
+      "category": "Probabilités : espérance, variance, lois usuelles",
+      "difficulty": 1,
+      "question": "Quelle est la définition de la probabilité conditionnelle P(A | B) lorsque P(B) > 0 ?",
+      "choices": [
+        "P(A ∩ B)/P(A)",
+        "P(A)·P(B)",
+        "P(A ∩ B)/P(B)",
+        "P(A) + P(B) − P(A ∩ B)"
+      ],
+      "answer": "C",
+      "explanation": "C'est la probabilité de A restreinte à l'univers réduit B.",
+      "source": "Cours de licence de probabilités, famille des manuels de Foata-Fuchs et de Ouvrard",
+      "verif": "import"
+    },
+    {
+      "course": "l3-maths",
+      "category": "Probabilités : espérance, variance, lois usuelles",
+      "difficulty": 5,
+      "question": "Si X ~ P(λ) et Y ~ P(μ) sont indépendantes, quelle est la loi de X sachant X + Y = n ?",
+      "choices": [
+        "binomiale B(n, λ/(λ + μ))",
+        "Poisson P(λ)",
+        "binomiale B(n, 1/2)",
+        "uniforme sur {0, …, n}"
+      ],
+      "answer": "A",
+      "explanation": "P(X = k | X + Y = n) = C(n, k) (λ/(λ + μ))ᵏ (μ/(λ + μ))^{n−k}.",
+      "source": "Cours de licence de probabilités, famille des manuels de Foata-Fuchs et de Ouvrard",
+      "verif": "import"
+    },
+    {
+      "course": "l3-maths",
+      "category": "Méthodes itératives pour les systèmes linéaires",
+      "difficulty": 3,
+      "question": "Quel est le rayon spectral de la matrice de Jacobi de A = [[4, 1], [1, 3]] ?",
+      "choices": [
+        "1/(2√3) ≈ 0,289",
+        "1/12",
+        "1/3",
+        "1/4"
+      ],
+      "answer": "A",
+      "explanation": "M_J = [[0, −1/4], [−1/3, 0]], de valeurs propres ±1/√12 = ±1/(2√3).",
+      "source": "Cours de licence d'analyse numérique matricielle et d'interpolation, famille des manuels de Ciarlet et de Quarteroni",
+      "verif": "import"
+    },
+    {
+      "course": "l3-maths",
+      "category": "Convergences, loi des grands nombres, théorème central limite",
+      "difficulty": 3,
+      "question": "Si Xₙ ~ B(n, λ/n), vers quelle loi Xₙ converge-t-elle en loi quand n tend vers l'infini ?",
+      "choices": [
+        "la loi de Poisson de paramètre λ",
+        "la loi normale N(λ, λ)",
+        "la loi exponentielle de paramètre λ",
+        "la loi uniforme sur [0, λ]"
+      ],
+      "answer": "A",
+      "explanation": "C'est le théorème de Poisson des événements rares : C(n, k)(λ/n)ᵏ(1 − λ/n)^{n−k} → e^{−λ}λᵏ/k!.",
+      "source": "Cours de licence de probabilités, famille des manuels de Foata-Fuchs et de Ouvrard",
+      "verif": "import"
+    },
+    {
+      "course": "l3-maths",
+      "category": "Réduction des endomorphismes",
+      "difficulty": 2,
+      "question": "Que dire de la matrice [[0, −1], [1, 0]] (rotation d'angle π/2) ?",
+      "choices": [
+        "diagonalisable sur ℝ",
+        "non diagonalisable sur ℂ",
+        "diagonalisable sur ℂ mais pas sur ℝ",
+        "non inversible"
+      ],
+      "answer": "C",
+      "explanation": "Son polynôme caractéristique λ² + 1 n'a pas de racine réelle, mais admet les racines ±i simples sur ℂ.",
+      "source": "Cours de licence d'algèbre linéaire avancée (réduction, espaces euclidiens et hermitiens), famille des manuels de Gourdon et de Grifone",
+      "verif": "import"
+    },
+    {
+      "course": "l3-maths",
+      "category": "Séries de Fourier",
+      "difficulty": 1,
+      "question": "Que contient la série de Fourier réelle d'une fonction 2π-périodique paire ?",
+      "choices": [
+        "uniquement des termes en sinus",
+        "uniquement un terme constant",
+        "des termes en cosinus et en sinus, tous non nuls",
+        "uniquement un terme constant et des termes en cosinus"
+      ],
+      "answer": "D",
+      "explanation": "Pour f paire, bₙ = (1/π)∫ f(x) sin(nx) dx = 0 car l'intégrande est impaire.",
+      "source": "Cours de licence d'analyse (suites et séries de fonctions, séries entières, séries de Fourier), famille des manuels de Rudin et de Gourdon",
+      "verif": "import"
+    },
+    {
+      "course": "l3-maths",
+      "category": "Séries de Fourier",
+      "difficulty": 5,
+      "question": "Existe-t-il une fonction continue 2π-périodique dont la série de Fourier diverge en un point ?",
+      "choices": [
+        "non : la série d'une fonction continue converge toujours en tout point",
+        "non : la convergence est toujours normale",
+        "oui : la continuité seule ne garantit pas la convergence ponctuelle",
+        "oui, mais seulement si f n'est pas bornée"
+      ],
+      "answer": "C",
+      "explanation": "Des exemples classiques (du Bois-Reymond) existent ; Carleson a montré la convergence presque partout.",
+      "source": "Cours de licence d'analyse (suites et séries de fonctions, séries entières, séries de Fourier), famille des manuels de Rudin et de Gourdon",
+      "verif": "import"
+    },
+    {
+      "course": "l3-maths",
+      "category": "Théorème des résidus",
+      "difficulty": 2,
+      "question": "Quel est le résidu en 0 de eᶻ/z² ?",
+      "choices": [
+        "0",
+        "1",
+        "1/2",
+        "2"
+      ],
+      "answer": "B",
+      "explanation": "eᶻ/z² = 1/z² + 1/z + 1/2 + … : le coefficient de 1/z vaut 1.",
+      "source": "Cours de licence d'analyse complexe, famille des manuels de Cartan (Théorie élémentaire des fonctions analytiques) et de Rudin",
+      "verif": "import"
+    },
+    {
+      "course": "l3-maths",
+      "category": "Intégrale de Lebesgue",
+      "difficulty": 4,
+      "question": "Que vaut ∫₀^{+∞} x⁴ e^{−x} dx ?",
+      "choices": [
+        "4",
+        "24",
+        "120",
+        "16"
+      ],
+      "answer": "B",
+      "explanation": "C'est Γ(5) = 4! = 24.",
+      "source": "Cours de licence de théorie de la mesure et d'intégration, famille des manuels de Rudin (Analyse réelle et complexe)",
+      "verif": "import"
+    },
+    {
+      "course": "l3-maths",
+      "category": "Analyse numérique : interpolation et équations non linéaires",
+      "difficulty": 3,
+      "question": "Quelle est l'erreur d'interpolation de f par le polynôme P de degré ≤ n aux nœuds x₀, …, xₙ ?",
+      "choices": [
+        "f(x) − P(x) = f^{(n)}(ξ)/n! · ∏ (x − xᵢ)",
+        "f(x) − P(x) = f^{(n+1)}(ξ)/(n + 1)! · ∏ (x − xᵢ)",
+        "f(x) − P(x) = f^{(n+1)}(ξ) · ∏ (x − xᵢ)",
+        "f(x) − P(x) = f(ξ)/(n + 1)!"
+      ],
+      "answer": "B",
+      "explanation": "Pour un certain ξ dans le plus petit intervalle contenant x et les nœuds.",
+      "source": "Cours de licence d'analyse numérique matricielle et d'interpolation, famille des manuels de Ciarlet et de Quarteroni",
+      "verif": "import"
+    },
+    {
+      "course": "l3-maths",
+      "category": "Probabilités : espérance, variance, lois usuelles",
+      "difficulty": 3,
+      "question": "Une maladie touche 1 % d'une population. Un test est positif pour 99 % des malades et pour 5 % des non-malades. Quelle est la probabilité d'être malade sachant le test positif ?",
+      "choices": [
+        "0,99",
+        "1/2",
+        "1/6",
+        "1/100"
+      ],
+      "answer": "C",
+      "explanation": "P(M | +) = 0,01×0,99/(0,01×0,99 + 0,99×0,05) = 0,0099/0,0594 = 1/6.",
+      "source": "Cours de licence de probabilités, famille des manuels de Foata-Fuchs et de Ouvrard",
+      "verif": "import"
+    },
+    {
+      "course": "l3-maths",
+      "category": "Espaces normés et topologie des espaces métriques",
+      "difficulty": 1,
+      "question": "Quelle est l'adhérence de ℚ dans ℝ ?",
+      "choices": [
+        "ℝ tout entier",
+        "ℚ",
+        "l'ensemble vide",
+        "ℝ ∖ ℚ"
+      ],
+      "answer": "A",
+      "explanation": "Tout réel est limite d'une suite de rationnels : ℚ est dense dans ℝ.",
+      "source": "Cours de licence de topologie et d'analyse (espaces métriques et normés), famille des manuels de Dieudonné et de Rudin",
+      "verif": "import"
+    },
+    {
+      "course": "l3-maths",
+      "category": "Analyse numérique : interpolation et équations non linéaires",
+      "difficulty": 2,
+      "question": "Quel est l'ordre de convergence de la méthode de dichotomie ?",
+      "choices": [
+        "quadratique",
+        "superlinéaire d'ordre (1 + √5)/2",
+        "cubique",
+        "linéaire, de rapport 1/2"
+      ],
+      "answer": "D",
+      "explanation": "L'erreur est divisée au plus par 2 à chaque itération.",
+      "source": "Cours de licence d'analyse numérique matricielle et d'interpolation, famille des manuels de Ciarlet et de Quarteroni",
+      "verif": "import"
+    },
+    {
+      "course": "l3-maths",
+      "category": "Compacité et connexité",
+      "difficulty": 2,
+      "question": "Soit f : [0, 1] → [0, 1] continue. Que peut-on affirmer ?",
+      "choices": [
+        "f admet un point fixe seulement si elle est croissante",
+        "f n'admet pas toujours de point fixe : f(x) = 1 − x en est un exemple",
+        "f admet au moins un point fixe",
+        "f admet un point fixe seulement si elle est contractante"
+      ],
+      "answer": "C",
+      "explanation": "g(x) = f(x) − x vérifie g(0) ≥ 0 et g(1) ≤ 0 ; par le théorème des valeurs intermédiaires elle s'annule. (1 − x a le point fixe 1/2.)",
+      "source": "Cours de licence de topologie et d'analyse (espaces métriques et normés), famille des manuels de Dieudonné et de Rudin",
+      "verif": "import"
+    },
+    {
+      "course": "l3-maths",
+      "category": "Groupes et théorème de Lagrange",
+      "difficulty": 1,
+      "question": "Quel groupe est isomorphe à tout groupe cyclique d'ordre n ?",
+      "choices": [
+        "ℤ/nℤ",
+        "S_n",
+        "(ℤ/nℤ) fois",
+        "ℤ"
+      ],
+      "answer": "A",
+      "explanation": "Un groupe cyclique d'ordre n est engendré par un élément d'ordre n et est isomorphe à (ℤ/nℤ, +).",
+      "source": "Cours de licence d'algèbre générale (groupes, anneaux, corps, théorie de Galois élémentaire), famille des manuels de Perrin et de Lang",
+      "verif": "import"
+    },
+    {
+      "course": "l3-maths",
+      "category": "Anneaux, idéaux et corps",
+      "difficulty": 1,
+      "question": "Qu'est-ce qu'un corps ?",
+      "choices": [
+        "un anneau intègre quelconque",
+        "un anneau commutatif sans diviseurs de zéro",
+        "un anneau commutatif unitaire non nul dont tout élément non nul est inversible",
+        "un groupe abélien pour la multiplication"
+      ],
+      "answer": "C",
+      "explanation": "Un anneau intègre comme ℤ n'est pas un corps : 2 n'y est pas inversible.",
+      "source": "Cours de licence d'algèbre générale (groupes, anneaux, corps, théorie de Galois élémentaire), famille des manuels de Perrin et de Lang",
+      "verif": "import"
+    },
+    {
+      "course": "l3-maths",
+      "category": "Systèmes linéaires et stabilité",
+      "difficulty": 2,
+      "question": "Pour A = [[1, 2], [2, 1]], quelle est la stabilité de l'origine pour X′ = AX ?",
+      "choices": [
+        "instable : les valeurs propres sont 3 et −1",
+        "asymptotiquement stable",
+        "stable mais non asymptotiquement",
+        "instable avec valeurs propres 1 ± 2i"
+      ],
+      "answer": "A",
+      "explanation": "tr A = 2 et det A = −3 donnent λ² − 2λ − 3 = 0, soit λ = 3 ou −1 : c'est un col.",
+      "source": "Cours de licence d'équations différentielles ordinaires, famille des manuels d'Arnold et de Demailly",
+      "verif": "import"
+    },
+    {
+      "course": "l3-maths",
+      "category": "Groupes et théorème de Lagrange",
+      "difficulty": 3,
+      "question": "Que dit le théorème de Cauchy sur les groupes finis ?",
+      "choices": [
+        "si p premier divise |G|, alors G possède un sous-groupe distingué d'ordre p",
+        "tout groupe d'ordre pair est abélien",
+        "tout élément de G est d'ordre premier",
+        "si un nombre premier p divise |G|, alors G possède un élément d'ordre p"
+      ],
+      "answer": "D",
+      "explanation": "Il garantit l'existence d'éléments d'ordre p, mais pas leur caractère distingué.",
+      "source": "Cours de licence d'algèbre générale (groupes, anneaux, corps, théorie de Galois élémentaire), famille des manuels de Perrin et de Lang",
+      "verif": "import"
+    },
+    {
+      "course": "l3-maths",
+      "category": "Analyse numérique : interpolation et équations non linéaires",
+      "difficulty": 2,
+      "question": "Quel polynôme de degré ≤ 2 interpole (0, 1), (1, 3) et (2, 7) ?",
+      "choices": [
+        "2x + 1",
+        "2x² + 1",
+        "x² + x + 3",
+        "x² + x + 1"
+      ],
+      "answer": "D",
+      "explanation": "P(0) = 1, P(1) = 3 et P(2) = 7 sont vérifiées par x² + x + 1.",
+      "source": "Cours de licence d'analyse numérique matricielle et d'interpolation, famille des manuels de Ciarlet et de Quarteroni",
+      "verif": "import"
+    },
+    {
+      "course": "l3-maths",
+      "category": "Inversion locale et fonctions implicites",
+      "difficulty": 2,
+      "question": "Quelle est la valeur maximale de x + y sur le cercle x² + y² = 1 ?",
+      "choices": [
+        "1",
+        "2",
+        "racine de 2",
+        "racine de 2/2"
+      ],
+      "answer": "C",
+      "explanation": "Par Cauchy-Schwarz x + y ≤ √2·√(x² + y²) = √2, atteint en (√2/2, √2/2).",
+      "source": "Cours de licence de calcul différentiel et d'intégration dans Rⁿ, famille des manuels de Cartan et de Rudin",
+      "verif": "import"
+    },
+    {
+      "course": "l3-maths",
+      "category": "Suites et séries de fonctions",
+      "difficulty": 1,
+      "question": "Quel critère garantit la convergence normale d'une série de fonctions Σ uₙ sur I ?",
+      "choices": [
+        "la convergence simple de Σ uₙ en chaque point",
+        "la convergence de Σ uₙ(x₀) en un seul point",
+        "la convergence de la série numérique Σ sup_I |uₙ|",
+        "la décroissance de (uₙ)"
+      ],
+      "answer": "C",
+      "explanation": "La convergence normale se vérifie par la série des normes sup ; elle implique la convergence uniforme et absolue.",
+      "source": "Cours de licence d'analyse (suites et séries de fonctions, séries entières, séries de Fourier), famille des manuels de Rudin et de Gourdon",
+      "verif": "import"
+    },
+    {
+      "course": "l3-maths",
+      "category": "Théorème des résidus",
+      "difficulty": 1,
+      "question": "Comment calcule-t-on le résidu d'une fonction f en un pôle simple a ?",
+      "choices": [
+        "Res(f, a) = f(a)",
+        "Res(f, a) = lim_{z→a} f(z)/(z − a)",
+        "Res(f, a) = la dérivée f′(a)",
+        "Res(f, a) = lim_{z→a} (z − a) f(z)"
+      ],
+      "answer": "D",
+      "explanation": "Pour un pôle simple, (z − a)f(z) se prolonge holomorphiquement ; sa valeur en a est le résidu.",
+      "source": "Cours de licence d'analyse complexe, famille des manuels de Cartan (Théorie élémentaire des fonctions analytiques) et de Rudin",
+      "verif": "import"
+    },
+    {
+      "course": "l3-maths",
+      "category": "Groupes et théorème de Lagrange",
+      "difficulty": 1,
+      "question": "Que dire du noyau d'un morphisme de groupes f : G → G′ ?",
+      "choices": [
+        "c'est un sous-groupe de G non distingué en général",
+        "c'est un sous-groupe distingué de G",
+        "c'est un sous-groupe abélien",
+        "c'est un sous-ensemble sans structure particulière"
+      ],
+      "answer": "B",
+      "explanation": "Pour k ∈ ker f et g ∈ G, f(gkg⁻¹) = f(g)f(k)f(g)⁻¹ = e.",
+      "source": "Cours de licence d'algèbre générale (groupes, anneaux, corps, théorie de Galois élémentaire), famille des manuels de Perrin et de Lang",
+      "verif": "import"
+    },
+    {
+      "course": "l3-maths",
+      "category": "Intégrale de Lebesgue",
+      "difficulty": 1,
+      "question": "Quand dit-on qu'une fonction f : X → ℝ est mesurable ?",
+      "choices": [
+        "quand f est continue",
+        "quand f est bornée",
+        "quand f⁻¹(B) est mesurable pour tout borélien B",
+        "quand f(A) est mesurable pour toute partie mesurable A"
+      ],
+      "answer": "C",
+      "explanation": "C'est l'image réciproque qui doit préserver la mesurabilité ; toute fonction continue est mesurable mais la réciproque est fausse.",
+      "source": "Cours de licence de théorie de la mesure et d'intégration, famille des manuels de Rudin (Analyse réelle et complexe)",
+      "verif": "import"
+    }
+  ]
+}
