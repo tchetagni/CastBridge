@@ -1,0 +1,133 @@
+package castbridge.play
+
+import castbridge.core.quiz.EmbeddedQuestionSource
+import castbridge.core.quiz.QUIZ_PACK_SUFFIX
+import castbridge.core.quiz.QuizBank
+import castbridge.core.quiz.QuizLotFormat
+import castbridge.core.quiz.online.PlayScope
+import castbridge.core.quiz.online.ServerRoom
+import java.io.File
+import java.io.IOException
+import java.net.InetAddress
+import java.net.InetSocketAddress
+import java.net.ServerSocket
+import java.net.Socket
+import java.security.SecureRandom
+import java.util.concurrent.ConcurrentHashMap
+import java.util.concurrent.Semaphore
+
+/**
+ * Le service castbridge-play : HTTP/1.1 + WebSocket écrits sur le JDK seul (un fil virtuel par connexion), qui héberge les salles `ServerRoom` du cœur.
+ * `/play` (page), `/play/ws` (WebSocket), `/play/events` + `/play/act` + `/play/state` (repli SSE et long-poll), `/play/health`, `/play/.well-known/caps`.
+ * Rien sous `/api/`. [clock] est l'horloge du SERVEUR (ms) donnée aux salles (injectable en test) ; [roomScope] ne change qu'en test (production : `INTERNET`).
+ */
+class PlayServer(
+    val cfg: PlayConfig,
+    private val clock: () -> Long = System::currentTimeMillis,
+    random: () -> java.util.Random = { SecureRandom() },
+    roomScope: PlayScope = PlayScope.INTERNET,
+    settings: ServerRoom.Settings = ServerRoom.Settings(),
+    bank: QuizBank? = null,
+) : AutoCloseable {
+    private val limits = ConnectionLimits(cfg.maxPerIp, cfg.maxConnections)
+    private val verifier = TicketVerifier(cfg.ticketPubKeys)
+    private val origin = OriginCheck(cfg.origins)
+    val hub = PlayHub(cfg, clock, bank ?: loadBank(cfg.lotsDir), verifier, random, roomScope, settings, limits)
+    private val fallback = PlayFallbackController(cfg, hub, limits, verifier, origin)
+    private val pages = PlayPageController()
+    private val health = HealthController(cfg, hub, limits)
+    private val ticker = Ticker(cfg.tickMs) { hub.tick() }
+    private val sockets = ConcurrentHashMap.newKeySet<Socket>()
+    private val raw = Semaphore(cfg.maxConnections * 2)
+    private lateinit var server: ServerSocket
+    @Volatile private var running = false
+
+    val port: Int get() = server.localPort
+    fun rooms(): List<ServerRoom> = hub.rooms()
+
+    fun start(): PlayServer {
+        server = ServerSocket().apply { reuseAddress = true; bind(InetSocketAddress(InetAddress.getByName(cfg.bind), cfg.port), 256) }
+        running = true
+        ticker.start()
+        Thread.ofPlatform().name("play-accept").daemon(true).start { acceptLoop() }
+        return this
+    }
+
+    private fun acceptLoop() {
+        while (running) {
+            val s = try { server.accept() } catch (_: IOException) { return }
+            if (!raw.tryAcquire()) { runCatching { s.close() }; continue }
+            sockets += s
+            Thread.ofVirtual().start { try { handle(s) } catch (_: Throwable) {} finally { sockets -= s; raw.release(); runCatching { s.close() } } }
+        }
+    }
+
+    private fun handle(socket: Socket) {
+        socket.soTimeout = 15_000; socket.tcpNoDelay = true
+        val out = socket.getOutputStream()
+        val req = try { MiniHttp.readRequest(socket.getInputStream(), socket.inetAddress) } catch (e: HttpError) {
+            MiniHttp.json(out, e.status, """{"error":"requête invalide"}""")
+            // vide ce que le client envoie encore, pour que la réponse d'erreur ne soit pas perdue par une remise à zéro de la connexion
+            runCatching { socket.shutdownOutput(); socket.soTimeout = 200; socket.getInputStream().readNBytes(65_536) }
+            return
+        } catch (_: IOException) { return }
+        val ip = ClientIp.resolve(socket.inetAddress, req.header("x-forwarded-for"), cfg.trustedProxies)
+        val head = req.method == "HEAD"
+        val p = req.path
+        when {
+            p == "/play/ws" -> ws(req, socket, out, ip)
+            p == "/play/act" -> if (req.method == "POST") fallback.act(req, out, ip) else notAllowed(out)
+            p == "/play/events" -> if (req.method == "GET") fallback.events(req, socket, out) else notAllowed(out)
+            p == "/play/state" -> if (req.method == "GET") fallback.state(req, out) else notAllowed(out)
+            req.method != "GET" && !head -> notAllowed(out)
+            p == "/play/health" -> MiniHttp.json(out, 200, health.health())
+            p == "/play/.well-known/caps" -> MiniHttp.json(out, 200, health.caps())
+            pages.serve(p, out, head) -> {}
+            else -> MiniHttp.json(out, 404, """{"error":"introuvable"}""")
+        }
+        // fermeture propre : ce que le client envoie encore (corps non lu) ne doit pas provoquer une remise à zéro qui efface la réponse
+        runCatching { socket.shutdownOutput(); socket.soTimeout = 100; socket.getInputStream().readNBytes(65_536) }
+    }
+
+    private fun notAllowed(out: java.io.OutputStream) = MiniHttp.json(out, 405, """{"error":"méthode non permise"}""", mapOf("Allow" to "GET, POST"))
+
+    private fun ws(req: HttpReq, socket: Socket, out: java.io.OutputStream, ip: String) {
+        val key = req.header("sec-websocket-key")
+        val upgrade = req.header("upgrade")?.equals("websocket", ignoreCase = true) == true && req.header("connection")?.lowercase()?.contains("upgrade") == true
+        if (req.method != "GET" || !upgrade || key == null || req.header("sec-websocket-version")?.trim() != "13") return MiniHttp.json(out, 400, """{"error":"WebSocket attendu"}""")
+        val ticket = req.header("x-play-ticket")
+        if (!origin.allows(req.header("origin"), verifier.verify(ticket, System.currentTimeMillis()))) return MiniHttp.json(out, 403, """{"error":"origine refusée"}""")
+        when (limits.acquire(ip)) {
+            ConnectionLimits.Verdict.IP_FULL -> return MiniHttp.json(out, 429, """{"error":"trop de connexions depuis cette adresse"}""", mapOf("Retry-After" to "10"))
+            ConnectionLimits.Verdict.TOTAL_FULL -> return MiniHttp.json(out, 503, """{"error":"service complet"}""", mapOf("Retry-After" to "30"))
+            ConnectionLimits.Verdict.OK -> {}
+        }
+        val id = ByteArray(12).also { SecureRandom().nextBytes(it) }.joinToString("") { "%02x".format(it) }
+        val conn = WsConn("w$id", ip, socket, cfg, hub)
+        try {
+            out.write(("HTTP/1.1 101 Switching Protocols\r\nUpgrade: websocket\r\nConnection: Upgrade\r\nSec-WebSocket-Accept: ${WsProtocol.acceptKey(key)}\r\n\r\n").toByteArray(Charsets.ISO_8859_1))
+            out.flush()
+        } catch (e: IOException) { limits.release(ip); return }
+        conn.ticket = ticket
+        hub.register(conn)
+        conn.run(req.input)
+    }
+
+    override fun close() {
+        running = false
+        ticker.close()
+        runCatching { hub.closeAll() }
+        runCatching { server.close() }
+        for (s in ArrayList(sockets)) runCatching { s.close() }
+    }
+
+    companion object {
+        /** Banque du service : les questions LIBRES intégrées + les lots `.quiz.zip` du dossier en lecture seule (les réservées : w20-04). Un lot illisible est ignoré. */
+        fun loadBank(dir: File?): QuizBank {
+            var bank = EmbeddedQuestionSource(levels = null).bank()
+            val files = dir?.takeIf { it.isDirectory }?.listFiles { f -> f.isFile && f.name.endsWith(QUIZ_PACK_SUFFIX) }?.sortedBy { it.name }.orEmpty()
+            for (f in files) runCatching { bank = bank.merge(QuizLotFormat.read(f).bank) }
+            return bank
+        }
+    }
+}
