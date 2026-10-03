@@ -233,7 +233,10 @@ class UploadService : Service() {
                 onWaiting = { why -> onState(ResumableUpload.State.Waiting(sent, total, why)) },
                 onEvent = { Log.i(TAG, it) },
                 // the TV's measured disk speed: said once, in French, when the disk (not the Wi-Fi) is what limits the copy
-                onDisk = { _, note -> if (note != null && _notice.value != note) _notice.value = note })
+                onDisk = { _, note ->
+                    if (note != null && _notice.value != note) _notice.value = note
+                    else if (note == null && _notice.value == castbridge.core.xfer.PlaybackAwareCopyPolicy.SLOWED_TEXT) _notice.value = null    // R-15: the notice goes with the slowdown
+                })
             return when (val r = tc.run()) {
                 TransferClient.Result.Done -> { sentWholeProof = tc.verifiedWhole; ResumableUpload.State.Done.also(onState) }
                 TransferClient.Result.Unsupported -> null

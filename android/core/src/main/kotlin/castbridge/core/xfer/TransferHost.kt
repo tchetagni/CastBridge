@@ -117,7 +117,11 @@ class TransferHost(
 
     // ---- JSON (hand-written like the rest of the API) ----
     /** French hint when the disk (not the Wi-Fi) is what limits the copy; null while unknown or fast enough. */
+    /** R-15: « Copie ralentie pour ne pas gêner la lecture » while the TV really holds the copy back for its player (set by the server). */
+    @Volatile var slowedNote: () -> String? = { null }
+
     fun note(s: Session): String? {
+        slowedNote()?.let { return it }
         val bps = stats.bytesPerSec()
         if (s.assembler.discard || bps <= 0 || s.assembler.map.count() < 2 || bps >= SLOW_DISK_BPS) return null
         return "Le disque de la TV écrit à ${String.format(java.util.Locale.ROOT, "%.1f", bps / 1e6).replace('.', ',')} Mo/s : c'est lui qui limite la copie, pas le Wi-Fi. " +

@@ -14,7 +14,7 @@ import java.util.concurrent.ConcurrentHashMap
  */
 class HttpConn(
     private val connect: () -> SocketChannel,
-    private val stallMs: Long = 20_000,
+    private val stallMs: Long = DEFAULT_STALL_MS,
     private val bufferBytes: Int = 1 shl 20,
 ) : AutoCloseable {
     class Reply(val status: Int, val headers: Map<String, String>, val body: String) { val keepAlive get() = headers["connection"]?.equals("close", true) != true }
@@ -94,6 +94,8 @@ class HttpConn(
     }
 
     companion object {
+        /** No progress for this long and the phone closes the connection (see PlaybackAwareCopyPolicy.worstProgressGapMs). */
+        const val DEFAULT_STALL_MS = 20_000L
         fun tcp(host: String, port: Int, connectTimeoutMs: Int = 4000): () -> SocketChannel = {
             // a Wi-Fi Direct group joined by WifiNetworkSpecifier: only this socket goes through its network (castbridge.core.net.BoundRoute, R-14)
             SocketChannel.open().also { ch -> try { castbridge.core.net.BoundRoute.bind(host, ch.socket()); ch.socket().connect(InetSocketAddress(host, port), connectTimeoutMs) } catch (e: Throwable) { ch.close(); throw e } }

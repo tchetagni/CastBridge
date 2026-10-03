@@ -31,6 +31,10 @@ data class PlaybackSignal(
     val feedBps: Long = 0,
     /** Bytes of the growing file present from its first byte without a hole: the most the player may read. */
     val contiguousBytes: Long = 0,
+    /** Volume the played file lives on (null = unknown): a copy is « on the same disk » when it writes to this one. */
+    val playingVolumeId: String? = null,
+    /** Seconds of comfort the player has in hand ([PlaybackHealth]); null = the player gives no measure (open-loop fallback). */
+    val bufferSec: Double? = null,
 )
 
 /** One decision of the policy. Every field has its « TV at rest » value when [on] is false, so the receive paths behave exactly as before. */
@@ -90,7 +94,7 @@ object PlaybackPriority {
 
     private val ACTIVE = setOf("playing", "buffering")
 
-    fun decide(s: PlaybackSignal, normal: Normal, transferName: String? = null): PlaybackDecision {
+    fun decide(s: PlaybackSignal, normal: Normal, transferName: String? = null, targetVolumeId: String? = null): PlaybackDecision {
         val rest = PlaybackDecision(false, emptyList(), false, normal.maxStreams.coerceAtLeast(1), 0, IDLE_PROGRESS_MS, normal.syncEveryBytes,
             0, IDLE_PERSIST_MS, IDLE_RETRY_MS)
         if (s.playerState !in ACTIVE) return rest
@@ -103,8 +107,12 @@ object PlaybackPriority {
             syncEveryBytes = normal.syncEveryBytes * SYNC_DEFER_FACTOR, statePersistMs = PLAYING_PERSIST_MS)
         if (feeds) return spaced.copy(reasons = reasons + "feeds-playback")
         reasons += "copy:background"
+        // R-15: same disk as the player => paced disk; another disk => no disk pacing (CPU relief stays); unknown => R-06 values
+        val same = PlaybackAwareCopyPolicy.sameVolume(s.playingVolumeId, targetVolumeId)
+        reasons += when (same) { true -> "same-volume"; false -> "other-volume"; null -> "volume:unknown" }
         return spaced.copy(reasons = reasons, backgroundThreads = true, maxStreams = minOf(PLAYING_MAX_STREAMS, normal.maxStreams).coerceAtLeast(1),
-            receiveCapBps = receiveCap(s.writeBps), verifyReadBps = VERIFY_CAP_BPS, busyRetryMs = PLAYING_RETRY_MS)
+            receiveCapBps = PlaybackAwareCopyPolicy.receiveCap(s.writeBps, same), verifyReadBps = PlaybackAwareCopyPolicy.verifyCap(same),
+            syncEveryBytes = if (PlaybackAwareCopyPolicy.deferFsync(same)) spaced.syncEveryBytes else normal.syncEveryBytes, busyRetryMs = PLAYING_RETRY_MS)
     }
 
     /** Half of what the disk absorbs (the player reads the same medium), within [MIN_CAP_BPS]..[MAX_CAP_BPS]; [UNKNOWN_DISK_CAP_BPS] until measured. */
@@ -124,6 +132,18 @@ object PlaybackPriority {
 
     /** libVLC `:file-caching` of a local file: 400 ms at rest (RAM), 2 s while a copy writes to the disk the player reads. */
     fun fileCachingMs(receiving: Boolean): Long = if (receiving) 2_000 else 400
+
+    /**
+     * R-15: read-ahead of a local file while a copy writes to the disk it is read from, bounded by the memory of the TV: at most 1/16 of the app's heap
+     * ([maxMemoryBytes] = `Runtime.maxMemory()`, an upper estimate of what a 32-bit 1 GB TV spares; libVLC's cache is native memory, so this is a
+     * declared prudence, not a measure) and 32 MiB, for an assumed 2 MB/s video (720p to 1080p): 2 s to 4 s, 400 ms at rest. Applied when a file starts.
+     */
+    fun fileCachingMs(receiving: Boolean, maxMemoryBytes: Long): Long {
+        if (!receiving) return 400
+        val budget = minOf(maxMemoryBytes / 16, 32L shl 20).coerceAtLeast(0)
+        return (budget * 1000 / ASSUMED_VIDEO_BPS).coerceIn(2_000, 4_000)
+    }
+    const val ASSUMED_VIDEO_BPS = 2_000_000L
 
     /** libVLC `:network-caching`: 1.2 s for a link, 3 s for a file still arriving (rides out a write burst or a Wi-Fi dip). */
     fun networkCachingMs(growing: Boolean): Long = if (growing) 3_000 else 1_200
@@ -178,6 +198,9 @@ class PlaybackGovernor(
     private val drainer: (() -> Unit) -> Unit = { job -> Thread({ runCatching { job() } }, "cb-deferred-sync").apply { isDaemon = true; start() } },
 ) {
     val deferred = DeferredWork()
+    /** R-15: closed-loop regulator fed with the player's comfort (seconds); open loop whenever the player gives no measure. */
+    val buffer = BufferGovernor(clock)
+    @Volatile private var lastPacedAt = Long.MIN_VALUE / 2
     private val receivePacer = RatePacer({ clock() * 1_000_000 }, sleep)
     private val verifyPacer = RatePacer({ clock() * 1_000_000 }, sleep)
     @Volatile private var sig = PlaybackSignal()
@@ -212,6 +235,7 @@ class PlaybackGovernor(
         val d = PlaybackPriority.decide(s, normal)
         val prev = synchronized(this) { cached.also { sig = s; cached = d; at = clock() } }
         // delivered one at a time and always with the LATEST decision: two racing refreshes must not leave a stale one last
+        if (d.on) buffer.sample(s.bufferSec) else buffer.reset()
         if (prev?.on != d.on) synchronized(notifyLock) { runCatching { onChange(cached ?: d) } }
         if (!d.on) drainAsync()
         return d
@@ -235,7 +259,10 @@ class PlaybackGovernor(
     }
 
     /** The decision for one transfer (the copy that feeds a growing playback is treated apart). */
-    fun forTransfer(name: String?): PlaybackDecision { val d = current(); return if (!d.on) d else PlaybackPriority.decide(sig, normal, name) }
+    fun forTransfer(name: String?, volumeId: String? = null): PlaybackDecision { val d = current(); return if (!d.on) d else PlaybackPriority.decide(sig, normal, name, volumeId) }
+
+    /** « Copie ralentie pour ne pas gêner la lecture » is true only while a copy byte was really held back in the last [SLOWED_LINGER_MS] and a video plays. */
+    fun slowedNow(): Boolean = current().on && clock() - lastPacedAt < SLOWED_LINGER_MS
 
     /** Read-only state for /api/info `playbackPriority` (no secret, no address). */
     fun json(): String {
@@ -245,22 +272,34 @@ class PlaybackGovernor(
         val q = { x: String -> "\"" + x.replace("\\", "\\\\").replace("\"", "\\\"") + "\"" }
         return "{\"on\":${d.on},\"reasons\":${d.reasons.joinToString(",", "[", "]") { q(it) }},\"backgroundThreads\":${d.backgroundThreads}," +
             "\"maxStreams\":${d.maxStreams},\"receiveCapBps\":${d.receiveCapBps},\"progressEveryMs\":${d.progressEveryMs}," +
-            "\"syncEveryBytes\":${d.syncEveryBytes},\"verifyReadBps\":${d.verifyReadBps},\"deferred\":${deferred.pending().size}}"
+            "\"syncEveryBytes\":${d.syncEveryBytes},\"verifyReadBps\":${d.verifyReadBps},\"deferred\":${deferred.pending().size}," +
+            "\"slowed\":${slowedNow()},\"bufferBand\":\"${buffer.band.name.lowercase()}\",\"bufferSec\":${buffer.smoothedSec()?.let { String.format(java.util.Locale.ROOT, "%.1f", it) } ?: "null"}}"
     }
 
     /**
      * One receive request (or one long upload) on the calling thread: lowers its priority while the policy says so, paces the bytes, re-reads
      * the decision every [refreshMs] (playback may start or stop in the middle of a copy), and ALWAYS restores the priority on [close].
      */
-    inner class Receive internal constructor(private val name: String?, private val verify: Boolean) : Closeable {
+    inner class Receive internal constructor(private val name: String?, private val verify: Boolean, private val volumeId: String?) : Closeable {
         private var lowered = false
         private var checked = clock()
-        var decision: PlaybackDecision = forTransfer(name).also { apply(it) }; private set
+        var decision: PlaybackDecision = forTransfer(name, volumeId).also { apply(it) }; private set
+
+        private fun recheck() { val t = clock(); if (t - checked >= refreshMs) { checked = t; decision = forTransfer(name, volumeId); apply(decision) } }
 
         fun onBytes(n: Int) {
-            val t = clock()
-            if (t - checked >= refreshMs) { checked = t; decision = forTransfer(name); apply(decision) }
-            if (verify) verifyPacer.pace(n, decision.verifyReadBps) else receivePacer.pace(n, decision.receiveCapBps)
+            recheck()
+            val governed = decision.backgroundThreads
+            // R-15 closed loop: the player's buffer is nearly empty => wait (bounded by MAX_HOLD_MS, a heartbeat slice then passes)
+            while (governed && decision.backgroundThreads) {
+                val h = buffer.holdMs()
+                if (h <= 0) break
+                lastPacedAt = clock(); sleep(minOf(h, HOLD_SLICE_MS)); recheck()
+            }
+            val slept = if (verify) verifyPacer.pace(n, decision.verifyReadBps)
+                else receivePacer.pace(n, if (decision.backgroundThreads) buffer.allowedBps(decision.receiveCapBps) else decision.receiveCapBps)
+            if (slept >= MIN_SLOW_MS) lastPacedAt = clock()
+            if (governed) buffer.passed()
         }
 
         private fun apply(d: PlaybackDecision) {
@@ -271,7 +310,14 @@ class PlaybackGovernor(
         override fun close() { if (lowered) { runCatching { port.normal() }; lowered = false } }
     }
 
-    fun receive(name: String?): Receive = Receive(name, false)
-    /** The final read-back of a copy: same priority rule, paced to [PlaybackDecision.verifyReadBps]. */
-    fun verify(name: String?): Receive = Receive(name, true)
+    /** [volumeId] = the volume the copy writes to (R-15: same disk as the player or not). */
+    fun receive(name: String?, volumeId: String? = null): Receive = Receive(name, false, volumeId)
+    /** The final read-back of a copy: same priority rule, paced to [PlaybackDecision.verifyReadBps], held (never skipped) while the player's buffer is nearly empty. */
+    fun verify(name: String?, volumeId: String? = null): Receive = Receive(name, true, volumeId)
+
+    companion object {
+        const val SLOWED_LINGER_MS = 4_000L
+        const val MIN_SLOW_MS = 20L
+        const val HOLD_SLICE_MS = 250L
+    }
 }
