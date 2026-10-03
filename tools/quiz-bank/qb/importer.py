@@ -1,7 +1,8 @@
 """Import of batches written by experts or by an AI, to be reviewed by a human before they are played.
 
 A batch is a JSON file: either a list of questions or {"batch": "name", "author": "...", "date": "...", "questions": [...]}.
-A question needs: course (general | cm2 | 3e | tle | l1-droit | l1-eco | l1-maths) or track/level/field, category,
+A question needs: course (any key of core.COURSES, e.g. general | cm2 | l1-droit | l1-geo; the 26 higher-education cells are
+in courses_sup.py, see docs/QUIZ-CONTENT-HIGHER.md) or track/level/field, category,
 difficulty 1..5, question, choices (4), answer (0-3 or A-D), explanation, source; and region (CM | AF | WORLD) for
 general knowledge. Imported questions always enter as status "review": only approvals.json (a named human reviewer)
 makes them "approved". Invalid questions are listed and left out, the valid ones are stored normalized in

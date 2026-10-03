@@ -27,6 +27,10 @@ COURSES = {
 from .courses_pc import PC_COURSES  # noqa: E402
 COURSES.update(PC_COURSES)
 
+# Supérieur : les 26 cellules niveau × filière restantes (L1/L2/L3), enregistrées une fois pour tous les rédacteurs de lots.
+from .courses_sup import SUP_COURSES  # noqa: E402
+COURSES.update(SUP_COURSES)
+
 STATUS_REVIEW, STATUS_APPROVED = "review", "approved"
 VERIF = ("computed", "fact", "import")
 # 1 game = 15 questions (3 per difficulty level); 300 games without repeat = 4 500 questions.
