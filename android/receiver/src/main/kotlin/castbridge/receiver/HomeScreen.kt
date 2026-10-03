@@ -111,45 +111,70 @@ class HomeScreen(private val act: Activity, private val container: FrameLayout, 
         root.addView(content, FrameLayout.LayoutParams(-1, -1))
         container.addView(root, FrameLayout.LayoutParams(-1, -1))
         // OK on the chip: the cause and the action are the first lines of « Connexion & réglages »; the code is revealed for 10 s
-        chip.setOnClickListener { revealUntil = System.currentTimeMillis() + 10_000; refreshStatus(); if (signal != null) api.openSettings() }
+        chip.setOnClickListener { revealUntil = System.currentTimeMillis() + 10_000; refreshStatus(force = true); if (signal != null) api.openSettings() }
         chip.setOnFocusChangeListener { _, has -> signal?.takeIf { has }?.let { heroTitle.text = it.text; heroSub.text = it.action ?: castbridge.core.ux.TvSignal.LEGEND } }
         TvStyle.focusZoom(chip)
     }
 
-    private val tick = object : Runnable { override fun run() { if (visible) { reload(); refreshTools(); main.postDelayed(this, 4000) } } }
+    private val tick = object : Runnable { override fun run() { if (visible && !paused) { reload(); refreshTools(); main.postDelayed(this, 4000) } } }
+    private var paused = false
 
     fun show() {
         container.fadeTo(true)
-        zoom.start()
         reload(focusFirst = true)
-        main.removeCallbacks(tick); main.postDelayed(tick, 4000)
+        if (!paused) { zoom.start(); main.removeCallbacks(tick); main.postDelayed(tick, 4000) }
     }
 
-    fun hide() { container.fadeTo(false); zoom.stop(); main.removeCallbacks(tick) }
+    fun hide() { container.fadeTo(false); zoom.stop(); main.removeCallbacks(tick); main.removeCallbacks(chipLater) }
+
+    /**
+     * Another screen covers the home (Quiz, Apprendre, Langues… are activities on top: the home stays « visible »): no zoom, no 4 s reload.
+     * Before, both kept running on the shared main thread under the Quiz (docs/agent-reports/tv-perf.md, R-11). [resume] restarts them.
+     */
+    fun pause() { paused = true; zoom.stop(); main.removeCallbacks(tick); main.removeCallbacks(chipLater) }
+    fun resume() {
+        if (!paused) return
+        paused = false
+        if (!visible) return
+        zoom.start(); main.removeCallbacks(tick); reload(); refreshTools(); main.postDelayed(tick, 4000)
+    }
 
     fun release() { hide(); io.shutdownNow() }
 
     fun onThumbReady(name: String) = main.post { rows.values.forEach { (_, a) -> a.refresh(name) } }
 
-    fun refreshStatus() {
+    // Reception events arrive about once a second per transfer (several at once with lanes): the chip is recomputed at most once a second
+    // and repainted only when its text changed (setText lays the header out again). The chip's content is unchanged (castbridge.core.ux.Throttle / StateGate).
+    private val chipPace = castbridge.core.ux.Throttle(1000)
+    private val chipGate = castbridge.core.ux.StateGate<String>()
+    private val chipLater = Runnable { refreshStatus() }
+
+    fun refreshStatus(force: Boolean = false) {
+        if (paused && !force) return                                    // covered by another screen: refreshed on resume
+        val wait = chipPace.admit(android.os.SystemClock.uptimeMillis())
+        if (wait > 0 && !force) { main.removeCallbacks(chipLater); main.postDelayed(chipLater, wait); return }
         val (ready, code, receiving) = api.status()
         val shown = if (System.currentTimeMillis() < revealUntil || code.length < 4) code else code.take(2) + "••••"
         val sig = runCatching { api.signal() }.getOrNull().also { signal = it }
-        if (sig == null) { chip.text = (receiving ?: "● $ready") + "   ·   code $shown"; return }
+        if (sig == null) { val t = (receiving ?: "● $ready") + "   ·   code $shown"; if (chipGate.changed(t)) chip.text = t; return }
         // never hide a red state behind a transfer line; otherwise a transfer in progress tells more than « Prêt »
         val head = if (sig.level == castbridge.core.ux.SignalLevel.RED || receiving == null) sig.text else receiving
-        chip.text = "$head   ·   code $shown"
-        TvSignalViews.style(chip, sig.level, 16)
-        signalRow.render(sig)
+        val text = "$head   ·   code $shown"
+        // redraw only when the text or the signal facts really changed (R-11: no 60 Hz repaint of an idle home)
+        if (chipGate.changed("$text|$sig")) {
+            chip.text = text
+            TvSignalViews.style(chip, sig.level, 16)
+            signalRow.render(sig)
+        }
     }
 
     private fun reload(focusFirst: Boolean = false) {
         refreshStatus()
-        runCatching { io.execute { val items = runCatching { api.items() }.getOrDefault(emptyList()); main.post { apply(items, focusFirst) } } }
+        // the list and its signature are computed here, off the main thread (a big library made items.hashCode() a main-thread cost every 4 s)
+        runCatching { io.execute { val items = runCatching { api.items() }.getOrDefault(emptyList()); val sig = items.hashCode(); main.post { apply(items, sig, focusFirst) } } }
     }
 
-    private fun apply(items: List<LibraryItem>, focusFirst: Boolean) {
-        val sig = items.hashCode()
+    private fun apply(items: List<LibraryItem>, sig: Int, focusFirst: Boolean) {
         if (sig == signature && rows.isNotEmpty() && !focusFirst) return
         signature = sig
         val media = items.filter { it.type != MediaType.OTHER }

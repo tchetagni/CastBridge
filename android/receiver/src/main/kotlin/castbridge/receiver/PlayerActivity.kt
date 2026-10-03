@@ -132,7 +132,7 @@ class PlayerActivity : Activity(), TvService.Screen {
         serverScreens()
     }
 
-    override fun onStart() { super.onStart(); TvConnect.addListener(serverListener) }
+    override fun onStart() { super.onStart(); TvConnect.addListener(serverListener); home?.resume() }
 
     private val serverListener: () -> Unit = { if (resumed) serverScreens() }
 
@@ -194,6 +194,7 @@ class PlayerActivity : Activity(), TvService.Screen {
     override fun onStop() {
         super.onStop()
         TvConnect.removeListener(serverListener)
+        home?.pause()                                       // Quiz, Apprendre… on top: the hidden home stops its zoom and its 4 s reload (R-11)
         consentShown = false; mandatoryShown = false
         // The screen is gone: give libVLC back (the service keeps serving). Back in front = the library.
         if (mp != null && !isChangingConfigurations) {
@@ -438,8 +439,10 @@ class PlayerActivity : Activity(), TvService.Screen {
         showHome()
     }
 
+    /** Count of the home's last listing (computed on its own thread): the « Bibliothèque » tile reads it instead of listing the library on the main thread every 4 s (R-11). */
+    @Volatile private var homeItemCount = -1
     private fun homeApi() = object : HomeScreen.Api {
-        override fun items() = ParentalHub.filterItems(server?.libraryItems().orEmpty())
+        override fun items() = ParentalHub.filterItems(server?.libraryItems().orEmpty()).also { homeItemCount = it.size }
         override fun status(): Triple<String, String, String?> {
             val s = server
             // ONE source for every path (Wi-Fi, Wi-Fi multivoie, Bluetooth), held by the service (independent of the HTTP server): castbridge.core.xfer.ReceiveCards
@@ -547,7 +550,7 @@ class PlayerActivity : Activity(), TvService.Screen {
                 startActivity(Intent(this, ActivationActivity::class.java).putExtra(ActivationActivity.EXTRA_UPGRADE, true))
             }) else emptyList()
         return ParentalHub.filterHome(upgrade + listOf(
-            tile("library", R.drawable.ic_cb_bibliotheque, "Bibliothèque", "Toutes vos vidéos et vos fichiers, en grille.", "${ParentalHub.filterItems(server?.libraryItems().orEmpty()).size} fichier(s)", false) { showLibrary() },
+            tile("library", R.drawable.ic_cb_bibliotheque, "Bibliothèque", "Toutes vos vidéos et vos fichiers, en grille.", "${homeItemCount.takeIf { it >= 0 } ?: ParentalHub.filterItems(server?.libraryItems().orEmpty()).size} fichier(s)", false) { showLibrary() },
             tile("bluetooth", R.drawable.ic_cb_bluetooth, "Ajouter un téléphone", "Le téléphone trouve et pilote la TV par Bluetooth, sans code à saisir : une seule validation ici.",
                 (svc?.trust?.list()?.size ?: 0).let { if (it == 0) "Aucun" else "$it de confiance" }, (svc?.trust?.list()?.size ?: 0) > 0) { PairActivity.open(this) },
             tile("learn", R.drawable.ic_cb_apprendre, "Apprendre", "Leçons de la maternelle à la licence, exercices corrigés, préparer le CEP, le BEPC, le GCE, le Bac.", "Élèves", true) {

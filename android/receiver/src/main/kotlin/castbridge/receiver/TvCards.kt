@@ -323,12 +323,22 @@ fun View.fadeTo(visible: Boolean, ms: Long = TvStyle.BASE.toLong()) {
     }
 }
 
-/** A slow back-and-forth zoom of a background image ("Ken Burns"), GPU only; [stop] cancels it. */
+/**
+ * A slow back-and-forth zoom of a background image ("Ken Burns"); [stop] cancels it. Stepped every [castbridge.core.ux.SlowZoomCurve.STEP_MS]
+ * (4 images/s, under 2 px per step) instead of a 60 images/s animator: the infinite animator redrew the whole home 58 times a second at rest and
+ * woke the main thread on every vsync, even under the Quiz (docs/agent-reports/tv-perf.md, R-11).
+ */
 class SlowZoom(private val v: View) {
-    private val anim = ValueAnimator.ofFloat(1f, 1.12f).apply {
-        duration = 30_000; repeatMode = ValueAnimator.REVERSE; repeatCount = ValueAnimator.INFINITE
-        addUpdateListener { a -> val s = a.animatedValue as Float; v.scaleX = s; v.scaleY = s; v.translationX = (s - 1f) * v.width * 0.15f }
+    private var startedAt = 0L
+    private var running = false
+    private val step = object : Runnable {
+        override fun run() {
+            if (!running) return
+            val s = castbridge.core.ux.SlowZoomCurve.scaleAt(android.os.SystemClock.uptimeMillis() - startedAt)
+            v.scaleX = s; v.scaleY = s; v.translationX = (s - 1f) * v.width * 0.15f
+            v.postDelayed(this, castbridge.core.ux.SlowZoomCurve.STEP_MS)
+        }
     }
-    fun start() { if (!anim.isStarted) anim.start() }
-    fun stop() { anim.cancel() }
+    fun start() { if (running) return; running = true; startedAt = android.os.SystemClock.uptimeMillis(); v.removeCallbacks(step); v.post(step) }
+    fun stop() { running = false; v.removeCallbacks(step) }
 }

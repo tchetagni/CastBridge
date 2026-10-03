@@ -201,27 +201,39 @@ class StageBackground(ctx: Context) : View(ctx) {
     private val start = android.os.SystemClock.uptimeMillis()
     private val colors = intArrayOf(0x5527C7B0, 0x40FFB020, 0x35FF5C39)
 
+    // Shaders built once per size and moved with a matrix: no allocation per image (3 RadialGradient + 1 LinearGradient per image before, R-11).
+    private var shaders: Array<android.graphics.RadialGradient>? = null
+    private var shaderH = -1
+    private val move = android.graphics.Matrix()
+
     override fun onDraw(c: Canvas) {
         base.setBounds(0, 0, width, height); base.draw(c)
         val w = width.toFloat(); val h = height.toFloat()
+        val r = h * 0.55f
+        if (shaders == null || shaderH != height) {
+            shaderH = height
+            shaders = Array(colors.size) { i -> android.graphics.RadialGradient(0f, 0f, r.coerceAtLeast(1f), colors[i], 0x00000000, Shader.TileMode.CLAMP) }
+            floor.shader = LinearGradient(0f, h * 0.78f, 0f, h, 0x00000000, 0x3327C7B0, Shader.TileMode.CLAMP)
+        }
         val t = (android.os.SystemClock.uptimeMillis() - start) / (if (calm) 9000.0 else 4000.0)
         for (i in colors.indices) {
             val phase = t + i * 2.1
             val x = w * (0.5f + 0.42f * Math.sin(phase).toFloat())
             val y = h * (0.18f + 0.1f * Math.cos(phase * 1.3).toFloat())
-            val r = h * 0.55f
-            spot.shader = android.graphics.RadialGradient(x, y, r, colors[i], 0x00000000, Shader.TileMode.CLAMP)
+            val s = shaders!![i]
+            move.setTranslate(x, y); s.setLocalMatrix(move)
+            spot.shader = s
             c.drawCircle(x, y, r, spot)
         }
         // a glowing « floor » at the bottom, as on a TV set
-        floor.shader = LinearGradient(0f, h * 0.78f, 0f, h, 0x00000000, 0x3327C7B0, Shader.TileMode.CLAMP)
         c.drawRect(0f, h * 0.78f, w, h, floor)
         val now = android.os.SystemClock.uptimeMillis()
         if (now < flashUntil) {
             val a = ((flashUntil - now) / 900f * 110).toInt().coerceIn(0, 255)
             c.drawColor((a shl 24) or (flash and 0xFFFFFF))
         }
-        postInvalidateDelayed(if (now < flashUntil) 30 else 50)
+        // ~12 images/s (8 during a question), fluid only during the 0.9 s flash: the spotlights move slowly (castbridge.core.ux.StagePace)
+        postInvalidateDelayed(castbridge.core.ux.StagePace.delayMs(calm, now < flashUntil))
     }
 }
 

@@ -31,7 +31,7 @@ object LanguesHub {
     /** The consumer registered in [LotsHub]: installs / removes, then tells the open screen. */
     fun lotsConsumer(ctx: Context): LotConsumer {
         val d = lots(ctx)
-        fun refresh() { screen?.let { s -> runCatching { s.runOnUiThread { s.reload() } } } }
+        fun refresh() { forgetCount(); screen?.let { s -> runCatching { s.runOnUiThread { s.reload() } } } }
         return object : LotConsumer by d {
             override fun install(meta: LotMeta, data: File): Boolean = d.install(meta, data).also { if (it) refresh() }
             override fun remove(id: LotId) { d.remove(id); refresh() }
@@ -66,14 +66,22 @@ object LanguesHub {
     /** What the screen lists: the starter + the installed lots (an installed lot of the same name and a version at least as recent replaces the starter). */
     fun packs(ctx: Context): List<LangPack> = EmbeddedLangSource.merge(starter.packs, runCatching { lots(ctx).packs() }.getOrDefault(emptyList()))
 
+    /**
+     * Number of packs for the home tile, kept until a lot is installed or removed ([lotsConsumer]). The tile is refreshed every 4 s on the main thread:
+     * counting meant opening and parsing EVERY installed lot zip, twice (status + hasContent) — 46 lots on the owner's TV (docs/agent-reports/tv-perf.md, R-11).
+     */
+    @Volatile private var packCount: Int? = null
+    private fun count(ctx: Context): Int = packCount ?: runCatching { packs(ctx).size }.getOrDefault(0).also { packCount = it }
+    private fun forgetCount() { packCount = null }
+
     /** Status line of the home tile. */
     fun status(ctx: Context): String {
-        val n = runCatching { packs(ctx).size }.getOrDefault(0)
+        val n = count(ctx)
         return if (n == 0) "Aucune langue" else "$n pack(s)"
     }
 
     /** True when something can be learnt (starter or lot). */
-    fun hasContent(ctx: Context): Boolean = runCatching { packs(ctx).isNotEmpty() }.getOrDefault(false)
+    fun hasContent(ctx: Context): Boolean = count(ctx) > 0
 
     /** A media file referenced as `m:<id>` by [file] (the name in media.json), if a media lot holding it is installed; null otherwise. */
     fun mediaFile(ctx: Context, mediaScope: String, file: String): File? {
