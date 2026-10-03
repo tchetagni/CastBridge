@@ -1,0 +1,2028 @@
+{
+ "batch": "higher-l1-geographie-01",
+ "author": "claude-sonnet-5-5",
+ "date": "2026-10-03",
+ "questions": [
+  {
+   "course": "l1-geo",
+   "category": "Systèmes d'information géographique",
+   "difficulty": 4,
+   "question": "Pourquoi le mode raster convient-il bien pour représenter l'altitude ?",
+   "choices": [
+    "Il représente seulement des frontières administratives",
+    "Il remplace les coordonnées de la carte",
+    "Il donne une valeur à chaque pixel et traduit la continuité",
+    "Il ne contient aucune valeur numérique exploitable"
+   ],
+   "answer": "C",
+   "explanation": "L'altitude varie progressivement dans l'espace : une grille de valeurs la décrit bien.",
+   "source": "Cours de licence de télédétection et de SIG, famille des manuels d'introduction aux systèmes d'information géographique",
+   "verif": "import"
+  },
+  {
+   "course": "l1-geo",
+   "category": "Circulation atmosphérique et saisons",
+   "difficulty": 2,
+   "question": "Qu'est-ce qu'une mousson ?",
+   "choices": [
+    "Un vent qui s'inverse entre été et hiver",
+    "Un vent de montagne qui souffle la nuit",
+    "Un vent de sable permanent du désert",
+    "Un orage isolé en fin de journée"
+   ],
+   "answer": "A",
+   "explanation": "La mousson résulte du contraste thermique entre terre et mer selon la saison.",
+   "source": "Cours de licence de climatologie, famille des manuels de climatologie générale (classification de Köppen)",
+   "verif": "import"
+  },
+  {
+   "course": "l1-geo",
+   "category": "Les milieux naturels d'Afrique centrale",
+   "difficulty": 5,
+   "question": "Quels plateaux sableux s'étendent entre le Gabon, le Congo et la RDC ?",
+   "choices": [
+    "Les monts Kapsiki",
+    "Les monts Mandara",
+    "Le plateau de l'Adamaoua",
+    "Les plateaux Batéké"
+   ],
+   "answer": "D",
+   "explanation": "Les plateaux Batéké sont couverts de savanes sur un sol sableux.",
+   "source": "Cours de licence de géographie de l'Afrique, famille des atlas et manuels de géographie régionale de l'Afrique",
+   "verif": "import",
+   "region": "AF"
+  },
+  {
+   "course": "l1-geo",
+   "category": "Démographie : natalité, mortalité, croissance naturelle",
+   "difficulty": 3,
+   "question": "Que mesure le rapport de masculinité ?",
+   "choices": [
+    "Le pourcentage de garçons parmi les enfants",
+    "Le nombre d'hommes pour 1 000 habitants",
+    "Le nombre de naissances masculines par an",
+    "Le nombre d'hommes pour 100 femmes"
+   ],
+   "answer": "D",
+   "explanation": "Il est proche de 100 dans beaucoup de populations.",
+   "source": "Cours de licence de démographie et de géographie de la population, famille des manuels de géographie humaine",
+   "verif": "import"
+  },
+  {
+   "course": "l1-geo",
+   "category": "Circulation atmosphérique et saisons",
+   "difficulty": 1,
+   "question": "Quel instrument indique la direction du vent ?",
+   "choices": [
+    "La girouette",
+    "Le pluviomètre",
+    "Le baromètre",
+    "L'anémomètre"
+   ],
+   "answer": "A",
+   "explanation": "La girouette s'oriente dans le sens d'où vient le vent.",
+   "source": "Cours de licence de climatologie, famille des manuels de climatologie générale (classification de Köppen)",
+   "verif": "import"
+  },
+  {
+   "course": "l1-geo",
+   "category": "Le relief : montagnes, plateaux, plaines",
+   "difficulty": 1,
+   "question": "Comment nomme-t-on une vaste étendue presque plane, à faible altitude ?",
+   "choices": [
+    "Un massif",
+    "Un plateau",
+    "Une plaine",
+    "Un col"
+   ],
+   "answer": "C",
+   "explanation": "Une plaine est une surface peu accidentée, généralement basse.",
+   "source": "Cours de licence de géographie physique, famille des manuels de géomorphologie générale",
+   "verif": "import"
+  },
+  {
+   "course": "l1-geo",
+   "category": "Peuplement et densités",
+   "difficulty": 2,
+   "question": "Qu'est-ce qu'un foyer de peuplement ?",
+   "choices": [
+    "Un camp de réfugiés installé en zone de guerre",
+    "Une région de forte concentration humaine",
+    "Un territoire vide de population",
+    "Un port de commerce international"
+   ],
+   "answer": "B",
+   "explanation": "L'Asie de l'Est, l'Asie du Sud et l'Europe sont de grands foyers de peuplement.",
+   "source": "Cours de licence de géographie humaine, famille des manuels de géographie urbaine et du peuplement",
+   "verif": "import"
+  },
+  {
+   "course": "l1-geo",
+   "category": "Cameroun : relief, climats, régions naturelles",
+   "difficulty": 5,
+   "question": "Quelle succession de grands milieux observe-t-on du sud au nord du Cameroun ?",
+   "choices": [
+    "Désert, steppe, savane, forêt, toundra",
+    "Steppe sahélienne, savane soudanienne, forêt dense, mangrove",
+    "Mangrove, désert, forêt dense, savane",
+    "Forêt dense, savane d'altitude, savane, steppe sahélienne"
+   ],
+   "answer": "D",
+   "explanation": "Les pluies diminuent vers le nord et font passer de la forêt équatoriale à la steppe du lac Tchad.",
+   "source": "Cours de géographie du Cameroun de licence, famille des atlas et monographies de géographie régionale du Cameroun",
+   "verif": "import",
+   "region": "CM"
+  },
+  {
+   "course": "l1-geo",
+   "category": "Peuplement et densités",
+   "difficulty": 1,
+   "question": "Que désigne le peuplement d'un espace ?",
+   "choices": [
+    "La répartition de ses habitants dans l'espace",
+    "Le niveau d'entretien de ses routes principales",
+    "Le nombre de ses villes et de ses villages",
+    "La couleur dominante de ses sols agricoles"
+   ],
+   "answer": "A",
+   "explanation": "Le peuplement décrit comment et où les hommes occupent un territoire.",
+   "source": "Cours de licence de géographie humaine, famille des manuels de géographie urbaine et du peuplement",
+   "verif": "import"
+  },
+  {
+   "course": "l1-geo",
+   "category": "Projections cartographiques",
+   "difficulty": 3,
+   "question": "Que peut-on affirmer de toute projection plane de la sphère terrestre ?",
+   "choices": [
+    "Elle conserve toujours exactement les surfaces",
+    "Elle peut tout conserver si le plan est tangent à l'équateur",
+    "Elle ne peut tout conserver : distances, angles et surfaces",
+    "Elle ne déforme que les océans et les pôles"
+   ],
+   "answer": "C",
+   "explanation": "Une sphère n'est pas développable : chaque projection sacrifie un type de propriété.",
+   "source": "Cours de licence de cartographie et repérage, famille des manuels d'initiation à la cartographie et à la lecture de cartes",
+   "verif": "import"
+  },
+  {
+   "course": "l1-geo",
+   "category": "Zones climatiques et classification de Köppen",
+   "difficulty": 2,
+   "question": "Dans la classification de Köppen, quelle lettre désigne les climats tropicaux ?",
+   "choices": [
+    "A",
+    "C",
+    "B",
+    "E"
+   ],
+   "answer": "A",
+   "explanation": "A désigne les climats tropicaux, B les arides, C les tempérés, D les continentaux, E les polaires.",
+   "source": "Cours de licence de climatologie, famille des manuels de climatologie générale (classification de Köppen)",
+   "verif": "import"
+  },
+  {
+   "course": "l1-geo",
+   "category": "Démographie : natalité, mortalité, croissance naturelle",
+   "difficulty": 5,
+   "question": "Comment calcule-t-on le taux de fécondité d'une tranche d'âge ?",
+   "choices": [
+    "Naissances multipliées par 1 000 hommes",
+    "Naissances d'un âge donné rapportées aux femmes de cet âge",
+    "Naissances totales divisées par la population totale",
+    "Décès de femmes divisés par les naissances"
+   ],
+   "answer": "B",
+   "explanation": "On rapporte les naissances des femmes d'un âge donné au nombre de femmes de cet âge.",
+   "source": "Cours de licence de démographie et de géographie de la population, famille des manuels de géographie humaine",
+   "verif": "import"
+  },
+  {
+   "course": "l1-geo",
+   "category": "Circulation atmosphérique et saisons",
+   "difficulty": 3,
+   "question": "Comment se déplace la ZCIT pendant l'été de l'hémisphère nord ?",
+   "choices": [
+    "Vers le nord de l'équateur",
+    "Vers le sud de l'équateur",
+    "Elle disparaît",
+    "Elle reste fixe"
+   ],
+   "answer": "A",
+   "explanation": "La ZCIT suit le Soleil : elle migre vers le nord en juillet et vers le sud en janvier.",
+   "source": "Cours de licence de climatologie, famille des manuels de climatologie générale (classification de Köppen)",
+   "verif": "import"
+  },
+  {
+   "course": "l1-geo",
+   "category": "Projections cartographiques",
+   "difficulty": 3,
+   "question": "Pourquoi les pôles ne figurent-ils pas sur une carte de Mercator complète ?",
+   "choices": [
+    "Ils sont rejetés à l'infini",
+    "Ils sont toujours gelés",
+    "Ils ne sont pas des points",
+    "Leurs méridiens sont parallèles"
+   ],
+   "answer": "A",
+   "explanation": "Dans la projection de Mercator, l'ordonnée tend vers l'infini quand la latitude tend vers 90°.",
+   "source": "Cours de licence de cartographie et repérage, famille des manuels d'initiation à la cartographie et à la lecture de cartes",
+   "verif": "import"
+  },
+  {
+   "course": "l1-geo",
+   "category": "Transition démographique",
+   "difficulty": 1,
+   "question": "Si la natalité et la mortalité sont toutes deux de 10 ‰, quel est l'accroissement naturel ?",
+   "choices": [
+    "Nul",
+    "Positif, égal à 10 ‰",
+    "Positif, égal à 20 ‰",
+    "Négatif, égal à -10 ‰"
+   ],
+   "answer": "A",
+   "explanation": "10 ‰ moins 10 ‰ donne 0 : la population ne change pas par accroissement naturel.",
+   "source": "Cours de licence de démographie et de géographie de la population, famille des manuels de géographie humaine",
+   "verif": "import"
+  },
+  {
+   "course": "l1-geo",
+   "category": "Grands fleuves et lacs d'Afrique",
+   "difficulty": 2,
+   "question": "Quelle capitale est située sur la rive du fleuve Congo, face à Kinshasa ?",
+   "choices": [
+    "Yaoundé",
+    "Libreville",
+    "Bangui",
+    "Brazzaville"
+   ],
+   "answer": "D",
+   "explanation": "Brazzaville et Kinshasa se font face de part et d'autre du Congo.",
+   "source": "Cours de licence de géographie de l'Afrique, famille des atlas et manuels de géographie régionale de l'Afrique",
+   "verif": "import",
+   "region": "AF"
+  },
+  {
+   "course": "l1-geo",
+   "category": "Migrations et réfugiés",
+   "difficulty": 2,
+   "question": "Quel organisme des Nations unies est chargé de la protection des réfugiés ?",
+   "choices": [
+    "L'OMS",
+    "Le HCR",
+    "La FAO",
+    "L'UNESCO"
+   ],
+   "answer": "B",
+   "explanation": "Le Haut-Commissariat des Nations unies pour les réfugiés assiste et protège les réfugiés.",
+   "source": "Cours de licence de démographie et de géographie de la population, famille des manuels de géographie humaine",
+   "verif": "import"
+  },
+  {
+   "course": "l1-geo",
+   "category": "La Terre : forme, dimensions, mouvements",
+   "difficulty": 2,
+   "question": "Quelle est l'inclinaison de l'axe de la Terre par rapport à la perpendiculaire au plan de son orbite ?",
+   "choices": [
+    "Environ 12°",
+    "Environ 45°",
+    "Environ 23,5°",
+    "Environ 90°"
+   ],
+   "answer": "C",
+   "explanation": "L'axe est incliné d'environ 23°26′, valeur qui fixe la latitude des tropiques.",
+   "source": "Cours de licence de géographie générale (introduction à la géographie), famille des manuels d'introduction à la géographie",
+   "verif": "import"
+  },
+  {
+   "course": "l1-geo",
+   "category": "Urbanisation et villes du monde",
+   "difficulty": 4,
+   "question": "Que dit la loi rang-taille de Zipf ?",
+   "choices": [
+    "Toutes les villes ont la même taille",
+    "La taille ne dépend pas du rang",
+    "Taille inversement proportionnelle au rang",
+    "Les petites villes sont plus peuplées que les grandes"
+   ],
+   "answer": "C",
+   "explanation": "Si la première ville a P habitants, la deuxième en a environ P/2, la troisième P/3.",
+   "source": "Cours de licence de géographie humaine, famille des manuels de géographie urbaine et du peuplement",
+   "verif": "import"
+  },
+  {
+   "course": "l1-geo",
+   "category": "Le relief : montagnes, plateaux, plaines",
+   "difficulty": 3,
+   "question": "Qu'est-ce qu'un anticlinal ?",
+   "choices": [
+    "Un pli en creux vers le haut",
+    "Une faille horizontale",
+    "Un pli bombé vers le haut",
+    "Un compartiment effondré"
+   ],
+   "answer": "C",
+   "explanation": "Dans un anticlinal, les couches sont bombées vers le haut ; dans un synclinal, elles sont en creux.",
+   "source": "Cours de licence de géographie physique, famille des manuels de géomorphologie générale",
+   "verif": "import"
+  },
+  {
+   "course": "l1-geo",
+   "category": "Migrations et réfugiés",
+   "difficulty": 4,
+   "question": "Que signifie le principe de non-refoulement ?",
+   "choices": [
+    "On ne renvoie pas un réfugié là où il est persécuté",
+    "On doit refouler les demandeurs d'asile à la frontière",
+    "Les migrants ne peuvent pas quitter leur pays",
+    "Les réfugiés doivent rester dans les camps"
+   ],
+   "answer": "A",
+   "explanation": "C'est un principe central du droit international des réfugiés.",
+   "source": "Cours de licence de démographie et de géographie de la population, famille des manuels de géographie humaine",
+   "verif": "import"
+  },
+  {
+   "course": "l1-geo",
+   "category": "Démographie : natalité, mortalité, croissance naturelle",
+   "difficulty": 4,
+   "question": "Pourquoi un pays très jeune peut-il garder une forte croissance même si sa fécondité baisse ?",
+   "choices": [
+    "La natalité ne dépend plus de la structure par âge de la population",
+    "Les jeunes ne se marient plus",
+    "Les nombreux jeunes arrivent à l'âge d'avoir des enfants",
+    "Les décès disparaissent"
+   ],
+   "answer": "C",
+   "explanation": "C'est l'inertie démographique : l'effectif des futurs parents reste élevé.",
+   "source": "Cours de licence de démographie et de géographie de la population, famille des manuels de géographie humaine",
+   "verif": "import"
+  },
+  {
+   "course": "l1-geo",
+   "category": "Le relief : montagnes, plateaux, plaines",
+   "difficulty": 4,
+   "question": "Quel mécanisme explique la formation du Grand Rift est-africain ?",
+   "choices": [
+    "Le dépôt de sédiments d'origine marine ancienne",
+    "La rotation de la Terre sur son axe polaire",
+    "L'étirement de la croûte et l'effondrement de blocs",
+    "L'érosion glaciaire de grandes vallées en altitude"
+   ],
+   "answer": "C",
+   "explanation": "La distension de la croûte provoque des failles normales et un effondrement central.",
+   "source": "Cours de licence de géographie physique, famille des manuels de géomorphologie générale",
+   "verif": "import",
+   "region": "AF"
+  },
+  {
+   "course": "l1-geo",
+   "category": "Érosion et modelé du relief",
+   "difficulty": 1,
+   "question": "Quel relief littoral résulte de l'attaque des vagues sur une côte rocheuse ?",
+   "choices": [
+    "Une mangrove",
+    "Un delta",
+    "Une dune",
+    "Une falaise"
+   ],
+   "answer": "D",
+   "explanation": "Les vagues sapent le pied de la roche et font reculer la falaise.",
+   "source": "Cours de licence de géographie physique, famille des manuels de géomorphologie générale",
+   "verif": "import"
+  },
+  {
+   "course": "l1-geo",
+   "category": "Hydrologie : cycle de l'eau, bassins versants",
+   "difficulty": 3,
+   "question": "Comment nomme-t-on le régime d'un cours d'eau alimenté surtout par la fonte des neiges ?",
+   "choices": [
+    "Nival",
+    "Désertique",
+    "Équatorial",
+    "Pluvial"
+   ],
+   "answer": "A",
+   "explanation": "Un régime nival présente des hautes eaux au printemps et en été, à la fonte.",
+   "source": "Cours de licence d'hydrologie et d'hydrographie, famille des manuels de géographie physique",
+   "verif": "import"
+  },
+  {
+   "course": "l1-geo",
+   "category": "Climats du monde : facteurs et éléments",
+   "difficulty": 1,
+   "question": "Quel instrument mesure la quantité de pluie tombée ?",
+   "choices": [
+    "Le pluviomètre",
+    "La girouette",
+    "Le sismographe",
+    "Le thermomètre"
+   ],
+   "answer": "A",
+   "explanation": "Le pluviomètre recueille l'eau tombée, exprimée en millimètres.",
+   "source": "Cours de licence de climatologie, famille des manuels de climatologie générale (classification de Köppen)",
+   "verif": "import"
+  },
+  {
+   "course": "l1-geo",
+   "category": "Urbanisation et villes du monde",
+   "difficulty": 1,
+   "question": "Quel secteur d'activité domine généralement dans les grandes villes ?",
+   "choices": [
+    "La culture vivrière de subsistance",
+    "Le secteur tertiaire, des services",
+    "L'élevage extensif de bovins",
+    "Le secteur de la pêche artisanale"
+   ],
+   "answer": "B",
+   "explanation": "Commerce, administration, transports et services dominent les emplois urbains.",
+   "source": "Cours de licence de géographie humaine, famille des manuels de géographie urbaine et du peuplement",
+   "verif": "import"
+  },
+  {
+   "course": "l1-geo",
+   "category": "Peuplement et densités",
+   "difficulty": 2,
+   "question": "Pourquoi les vallées fluviales sont-elles souvent densément peuplées ?",
+   "choices": [
+    "Elles offrent de l'eau et des sols fertiles",
+    "Elles sont toujours désertiques",
+    "Elles ne permettent aucune culture agricole viable",
+    "Elles sont inondées en permanence"
+   ],
+   "answer": "A",
+   "explanation": "L'eau et les alluvions favorisent l'agriculture.",
+   "source": "Cours de licence de géographie humaine, famille des manuels de géographie urbaine et du peuplement",
+   "verif": "import"
+  },
+  {
+   "course": "l1-geo",
+   "category": "Zones climatiques et classification de Köppen",
+   "difficulty": 3,
+   "question": "Dans la classification de Köppen, un climat tropical a une température moyenne mensuelle toujours supérieure à quelle valeur ?",
+   "choices": [
+    "10 °C",
+    "0 °C",
+    "18 °C",
+    "25 °C"
+   ],
+   "answer": "C",
+   "explanation": "Pour les climats du groupe A, le mois le plus froid a une moyenne supérieure à 18 °C.",
+   "source": "Cours de licence de climatologie, famille des manuels de climatologie générale (classification de Köppen)",
+   "verif": "import"
+  },
+  {
+   "course": "l1-geo",
+   "category": "Peuplement et densités",
+   "difficulty": 3,
+   "question": "Que désigne le surpeuplement ?",
+   "choices": [
+    "Un excès de villes dans un pays",
+    "Une absence de routes entre les villes",
+    "Un fort nombre d'habitants dans un grand pays",
+    "Un déséquilibre entre population et ressources"
+   ],
+   "answer": "D",
+   "explanation": "Le surpeuplement est une notion relative aux ressources et aux techniques d'un espace.",
+   "source": "Cours de licence de géographie humaine, famille des manuels de géographie urbaine et du peuplement",
+   "verif": "import"
+  },
+  {
+   "course": "l1-geo",
+   "category": "Grands fleuves et lacs d'Afrique",
+   "difficulty": 4,
+   "question": "Quel fleuve naît au Fouta-Djalon, en Guinée, et se jette dans l'Atlantique près de Saint-Louis ?",
+   "choices": [
+    "La Gambie",
+    "Le Sénégal",
+    "La Volta",
+    "Le Niger"
+   ],
+   "answer": "B",
+   "explanation": "Le fleuve Sénégal est formé notamment du Bafing, qui naît au Fouta-Djalon.",
+   "source": "Cours de licence de géographie de l'Afrique, famille des atlas et manuels de géographie régionale de l'Afrique",
+   "verif": "import",
+   "region": "AF"
+  },
+  {
+   "course": "l1-geo",
+   "category": "Sols et ressources",
+   "difficulty": 2,
+   "question": "À quelle catégorie de ressources le pétrole appartient-il ?",
+   "choices": [
+    "Les ressources inépuisables",
+    "Les ressources biologiques",
+    "Les ressources non renouvelables",
+    "Les ressources renouvelables"
+   ],
+   "answer": "C",
+   "explanation": "Le pétrole se forme sur des millions d'années : on ne peut pas le renouveler à l'échelle humaine.",
+   "source": "Cours de licence de biogéographie et de pédologie, famille des manuels de géographie physique",
+   "verif": "import"
+  },
+  {
+   "course": "l1-geo",
+   "category": "Objet et méthodes de la géographie",
+   "difficulty": 5,
+   "question": "Quel concept vidalien désigne l'ensemble des techniques et habitudes qui permettent à un groupe de tirer parti de son milieu ?",
+   "choices": [
+    "Le terroir",
+    "La région polarisée",
+    "Le genre de vie",
+    "L'écoumène"
+   ],
+   "answer": "C",
+   "explanation": "Le genre de vie est une notion centrale de la géographie de Vidal de La Blache.",
+   "source": "Cours de licence de géographie générale (introduction à la géographie), famille des manuels d'introduction à la géographie",
+   "verif": "import"
+  },
+  {
+   "course": "l1-geo",
+   "category": "Tectonique des plaques, séismes et volcans",
+   "difficulty": 2,
+   "question": "Quel nom donne-t-on au supercontinent unique qui existait il y a environ 250 millions d'années ?",
+   "choices": [
+    "L'Atlantide",
+    "La Pangée",
+    "La Laurasie seule",
+    "La Gondwana seule"
+   ],
+   "answer": "B",
+   "explanation": "La Pangée a commencé à se fragmenter il y a environ 200 millions d'années.",
+   "source": "Cours de licence de géographie physique, famille des manuels de géomorphologie générale",
+   "verif": "import"
+  },
+  {
+   "course": "l1-geo",
+   "category": "Migrations et réfugiés",
+   "difficulty": 2,
+   "question": "Quel facteur attire souvent les ruraux vers les villes ?",
+   "choices": [
+    "La baisse des prix agricoles en ville",
+    "L'absence de routes",
+    "L'abondance des terres libres",
+    "Les emplois et l'accès aux services"
+   ],
+   "answer": "D",
+   "explanation": "La ville offre emplois, écoles, hôpitaux et marchés.",
+   "source": "Cours de licence de démographie et de géographie de la population, famille des manuels de géographie humaine",
+   "verif": "import"
+  },
+  {
+   "course": "l1-geo",
+   "category": "Circulation atmosphérique et saisons",
+   "difficulty": 4,
+   "question": "Pourquoi le sud du Cameroun connaît-il généralement deux saisons des pluies ?",
+   "choices": [
+    "La mer y monte deux fois par an",
+    "La ZCIT passe deux fois par an sur ces latitudes",
+    "Les montagnes y bloquent le vent une fois sur deux",
+    "Le Soleil y est deux fois plus chaud"
+   ],
+   "answer": "B",
+   "explanation": "Dans sa montée vers le nord puis son retour vers le sud, la ZCIT traverse deux fois la zone équatoriale.",
+   "source": "Cours de licence de climatologie, famille des manuels de climatologie générale (classification de Köppen)",
+   "verif": "import",
+   "region": "CM"
+  },
+  {
+   "course": "l1-geo",
+   "category": "Climats du monde : facteurs et éléments",
+   "difficulty": 1,
+   "question": "Quel instrument mesure la température de l'air ?",
+   "choices": [
+    "L'hygromètre",
+    "L'anémomètre",
+    "Le baromètre",
+    "Le thermomètre"
+   ],
+   "answer": "D",
+   "explanation": "Le thermomètre mesure la température, généralement sous abri.",
+   "source": "Cours de licence de climatologie, famille des manuels de climatologie générale (classification de Köppen)",
+   "verif": "import"
+  },
+  {
+   "course": "l1-geo",
+   "category": "Zones climatiques et classification de Köppen",
+   "difficulty": 3,
+   "question": "Quelle limite thermique définit le climat polaire (groupe E) dans la classification de Köppen ?",
+   "choices": [
+    "Moyenne du mois le plus chaud supérieure à 30 °C",
+    "Moyenne du mois le plus froid supérieure à 18 °C",
+    "Moyenne annuelle supérieure à 25 °C",
+    "Moyenne du mois le plus chaud inférieure à 10 °C"
+   ],
+   "answer": "D",
+   "explanation": "Dans le groupe E, même le mois le plus chaud reste sous 10 °C.",
+   "source": "Cours de licence de climatologie, famille des manuels de climatologie générale (classification de Köppen)",
+   "verif": "import"
+  },
+  {
+   "course": "l1-geo",
+   "category": "Cameroun : relief, climats, régions naturelles",
+   "difficulty": 3,
+   "question": "Pour quelle particularité climatique la région de Debundscha, au pied du mont Cameroun, est-elle connue ?",
+   "choices": [
+    "Une sécheresse extrême toute l'année",
+    "Des températures glaciales en toute saison de l'année",
+    "Des pluies parmi les plus abondantes d'Afrique",
+    "Des chutes de neige hivernales"
+   ],
+   "answer": "C",
+   "explanation": "Le versant océanique du mont Cameroun reçoit de très fortes pluies.",
+   "source": "Cours de géographie du Cameroun de licence, famille des atlas et monographies de géographie régionale du Cameroun",
+   "verif": "import",
+   "region": "CM"
+  },
+  {
+   "course": "l1-geo",
+   "category": "La Terre : forme, dimensions, mouvements",
+   "difficulty": 1,
+   "question": "Combien de temps dure un jour solaire moyen ?",
+   "choices": [
+    "12 heures",
+    "30 jours",
+    "365 jours",
+    "24 heures"
+   ],
+   "answer": "D",
+   "explanation": "Le jour solaire moyen, qui sépare deux passages du Soleil au méridien, dure 24 heures.",
+   "source": "Cours de licence de géographie générale (introduction à la géographie), famille des manuels d'introduction à la géographie",
+   "verif": "import"
+  },
+  {
+   "course": "l1-geo",
+   "category": "Transition démographique",
+   "difficulty": 2,
+   "question": "Quelle forme prend la pyramide des âges d'un pays très vieilli ?",
+   "choices": [
+    "Une base rétrécie et un sommet plus large",
+    "Une base large et un sommet très étroit",
+    "Une forme sans habitants âgés",
+    "Un triangle régulier"
+   ],
+   "answer": "A",
+   "explanation": "Peu de naissances et une longue espérance de vie gonflent le haut de la pyramide.",
+   "source": "Cours de licence de démographie et de géographie de la population, famille des manuels de géographie humaine",
+   "verif": "import"
+  },
+  {
+   "course": "l1-geo",
+   "category": "Objet et méthodes de la géographie",
+   "difficulty": 1,
+   "question": "Que signifie le mot grec à l'origine du terme « géographie » ?",
+   "choices": [
+    "Étude des peuples",
+    "Dessin des cartes",
+    "Mesure du ciel",
+    "Description de la Terre"
+   ],
+   "answer": "D",
+   "explanation": "Le mot vient du grec ge (Terre) et graphein (décrire).",
+   "source": "Cours de licence de géographie générale (introduction à la géographie), famille des manuels d'introduction à la géographie",
+   "verif": "import"
+  },
+  {
+   "course": "l1-geo",
+   "category": "Hydrologie : cycle de l'eau, bassins versants",
+   "difficulty": 2,
+   "question": "Que désigne le régime d'un cours d'eau ?",
+   "choices": [
+    "Le nombre de ses affluents principaux et secondaires",
+    "Sa vitesse de croissance en longueur",
+    "La forme générale de sa vallée",
+    "La variation de son débit au cours de l'année"
+   ],
+   "answer": "D",
+   "explanation": "Le régime peut être pluvial, nival, glaciaire ou mixte.",
+   "source": "Cours de licence d'hydrologie et d'hydrographie, famille des manuels de géographie physique",
+   "verif": "import"
+  },
+  {
+   "course": "l1-geo",
+   "category": "Zones climatiques et classification de Köppen",
+   "difficulty": 4,
+   "question": "Quel critère distingue les climats arides (groupe B) des autres dans la classification de Köppen ?",
+   "choices": [
+    "L'évaporation potentielle dépasse les précipitations",
+    "La pluie tombe uniquement en hiver",
+    "La température moyenne est inférieure à 0 °C",
+    "L'altitude dépasse 2 000 m"
+   ],
+   "answer": "A",
+   "explanation": "Un climat est aride quand les pluies sont insuffisantes pour compenser la perte d'eau par évaporation.",
+   "source": "Cours de licence de climatologie, famille des manuels de climatologie générale (classification de Köppen)",
+   "verif": "import"
+  },
+  {
+   "course": "l1-geo",
+   "category": "Projections cartographiques",
+   "difficulty": 1,
+   "question": "Pourquoi ne peut-on pas représenter fidèlement la sphère terrestre sur un plan ?",
+   "choices": [
+    "Les océans ne peuvent pas être dessinés à plat",
+    "Les cartes ont toujours un format imposé",
+    "Une sphère ne peut être aplatie sans déformation",
+    "La Terre est trop grande pour tenir sur une feuille"
+   ],
+   "answer": "C",
+   "explanation": "Aplatir une sphère entraîne forcément des déformations de distances, d'angles ou de surfaces.",
+   "source": "Cours de licence de cartographie et repérage, famille des manuels d'initiation à la cartographie et à la lecture de cartes",
+   "verif": "import"
+  },
+  {
+   "course": "l1-geo",
+   "category": "Cameroun : relief, climats, régions naturelles",
+   "difficulty": 2,
+   "question": "Quelle ville camerounaise est située sur le plateau de l'Adamaoua ?",
+   "choices": [
+    "Maroua",
+    "Garoua",
+    "Ngaoundéré",
+    "Kribi"
+   ],
+   "answer": "C",
+   "explanation": "Ngaoundéré est la capitale régionale de l'Adamaoua.",
+   "source": "Cours de géographie du Cameroun de licence, famille des atlas et monographies de géographie régionale du Cameroun",
+   "verif": "import",
+   "region": "CM"
+  },
+  {
+   "course": "l1-geo",
+   "category": "Photographies aériennes et télédétection",
+   "difficulty": 1,
+   "question": "Quel avantage majeur la télédétection offre-t-elle au géographe ?",
+   "choices": [
+    "Connaître l'opinion des habitants d'un lieu",
+    "Remplacer définitivement tout travail de terrain",
+    "Observer de vastes espaces, même inaccessibles",
+    "Éviter tout traitement informatique des données"
+   ],
+   "answer": "C",
+   "explanation": "Les images couvrent de grandes surfaces et peuvent être répétées pour suivre les changements.",
+   "source": "Cours de licence de télédétection et de SIG, famille des manuels d'introduction aux systèmes d'information géographique",
+   "verif": "import"
+  },
+  {
+   "course": "l1-geo",
+   "category": "Migrations et réfugiés",
+   "difficulty": 2,
+   "question": "Qu'est-ce qu'une migration saisonnière ?",
+   "choices": [
+    "Un exil pour raison politique",
+    "Un départ définitif de la famille",
+    "Un déplacement de chaque jour",
+    "Un déplacement temporaire lié aux saisons"
+   ],
+   "answer": "D",
+   "explanation": "Elle suit les rythmes de travail ou de pâturage.",
+   "source": "Cours de licence de démographie et de géographie de la population, famille des manuels de géographie humaine",
+   "verif": "import"
+  },
+  {
+   "course": "l1-geo",
+   "category": "Les milieux naturels d'Afrique centrale",
+   "difficulty": 2,
+   "question": "Qu'est-ce que la cuvette centrale congolaise ?",
+   "choices": [
+    "Une vaste dépression drainée par le Congo",
+    "Un delta côtier sur l'Atlantique",
+    "Un haut plateau désertique du nord",
+    "Une chaîne de montagnes volcaniques"
+   ],
+   "answer": "A",
+   "explanation": "La cuvette centrale occupe une grande partie de la RDC et du Congo.",
+   "source": "Cours de licence de géographie de l'Afrique, famille des atlas et manuels de géographie régionale de l'Afrique",
+   "verif": "import",
+   "region": "AF"
+  },
+  {
+   "course": "l1-geo",
+   "category": "Urbanisation et villes du monde",
+   "difficulty": 5,
+   "question": "Que décrit le modèle concentrique de Burgess ?",
+   "choices": [
+    "Une ville en zones circulaires autour du centre",
+    "Une ville sans centre défini",
+    "Une ville organisée en bandes parallèles successives",
+    "Une ville dispersée en secteurs isolés"
+   ],
+   "answer": "A",
+   "explanation": "Le modèle de Burgess propose des anneaux successifs : centre, zone de transition, zones résidentielles.",
+   "source": "Cours de licence de géographie humaine, famille des manuels de géographie urbaine et du peuplement",
+   "verif": "import"
+  },
+  {
+   "course": "l1-geo",
+   "category": "Transition démographique",
+   "difficulty": 5,
+   "question": "Qu'est-ce que la « seconde transition démographique » ?",
+   "choices": [
+    "Un retour général à la forte natalité des générations passées",
+    "La fin de la première transition en Afrique",
+    "Un ensemble de changements des comportements familiaux",
+    "Un exode massif vers les campagnes d'origine"
+   ],
+   "answer": "C",
+   "explanation": "Elle décrit, dans les pays développés, la baisse de la nuptialité, la cohabitation et une fécondité inférieure au seuil de remplacement.",
+   "source": "Cours de licence de démographie et de géographie de la population, famille des manuels de géographie humaine",
+   "verif": "import"
+  },
+  {
+   "course": "l1-geo",
+   "category": "Le relief : montagnes, plateaux, plaines",
+   "difficulty": 1,
+   "question": "Comment appelle-t-on le point le plus haut d'une montagne ?",
+   "choices": [
+    "Le col",
+    "Le sommet",
+    "Le piémont",
+    "Le versant"
+   ],
+   "answer": "B",
+   "explanation": "Le sommet, ou la cime, est le point culminant d'un relief.",
+   "source": "Cours de licence de géographie physique, famille des manuels de géomorphologie générale",
+   "verif": "import"
+  },
+  {
+   "course": "l1-geo",
+   "category": "Objet et méthodes de la géographie",
+   "difficulty": 3,
+   "question": "Pourquoi présente-t-on souvent la géographie comme une science de synthèse ?",
+   "choices": [
+    "Elle remplace l'histoire et la géologie réunies",
+    "Elle ne s'intéresse qu'aux cartes de synthèse",
+    "Elle croise données physiques et humaines",
+    "Elle résume toutes les autres sciences en une formule"
+   ],
+   "answer": "C",
+   "explanation": "Le géographe articule des facteurs naturels, sociaux et économiques dans l'analyse d'un lieu.",
+   "source": "Cours de licence de géographie générale (introduction à la géographie), famille des manuels d'introduction à la géographie",
+   "verif": "import"
+  },
+  {
+   "course": "l1-geo",
+   "category": "Projections cartographiques",
+   "difficulty": 1,
+   "question": "Quel objet représente la Terre sans déformer ni les formes ni les surfaces ?",
+   "choices": [
+    "L'atlas routier",
+    "Le globe",
+    "Le planisphère de Mercator",
+    "Le planisphère de Robinson"
+   ],
+   "answer": "B",
+   "explanation": "Seul le globe respecte à la fois formes, surfaces et distances.",
+   "source": "Cours de licence de cartographie et repérage, famille des manuels d'initiation à la cartographie et à la lecture de cartes",
+   "verif": "import"
+  },
+  {
+   "course": "l1-geo",
+   "category": "Lecture de cartes : échelle, légende, courbes de niveau",
+   "difficulty": 2,
+   "question": "Sur une carte au 1/200 000, quelle distance réelle représentent 5 cm ?",
+   "choices": [
+    "1 km",
+    "10 km",
+    "2,5 km",
+    "100 km"
+   ],
+   "answer": "B",
+   "explanation": "1 cm vaut 2 km à cette échelle ; 5 cm valent donc 10 km.",
+   "source": "Cours de licence de cartographie et repérage, famille des manuels d'initiation à la cartographie et à la lecture de cartes",
+   "verif": "import"
+  },
+  {
+   "course": "l1-geo",
+   "category": "Grands fleuves et lacs d'Afrique",
+   "difficulty": 1,
+   "question": "Quelles célèbres chutes se trouvent sur le Zambèze ?",
+   "choices": [
+    "Les chutes d'Iguazú",
+    "Les chutes Victoria",
+    "Les chutes du Niagara",
+    "Les chutes de la Lobé"
+   ],
+   "answer": "B",
+   "explanation": "Les chutes Victoria sont situées à la frontière de la Zambie et du Zimbabwe.",
+   "source": "Cours de licence de géographie de l'Afrique, famille des atlas et manuels de géographie régionale de l'Afrique",
+   "verif": "import",
+   "region": "AF"
+  },
+  {
+   "course": "l1-geo",
+   "category": "Hydrologie : cycle de l'eau, bassins versants",
+   "difficulty": 1,
+   "question": "Comment appelle-t-on un cours d'eau qui se jette dans un autre ?",
+   "choices": [
+    "Un affluent",
+    "Un delta",
+    "Un estuaire",
+    "Un torrent"
+   ],
+   "answer": "A",
+   "explanation": "L'affluent rejoint un cours d'eau plus important.",
+   "source": "Cours de licence d'hydrologie et d'hydrographie, famille des manuels de géographie physique",
+   "verif": "import"
+  },
+  {
+   "course": "l1-geo",
+   "category": "Climats du monde : facteurs et éléments",
+   "difficulty": 3,
+   "question": "Quel effet un courant marin froid a-t-il sur un littoral voisin, comme celui du Namib ?",
+   "choices": [
+    "Des pluies tropicales très abondantes et régulières",
+    "Un climat frais et très sec, avec brouillards",
+    "Des tempêtes de neige fréquentes",
+    "Un climat équatorial humide"
+   ],
+   "answer": "B",
+   "explanation": "Le courant froid refroidit l'air au contact de la côte et empêche la formation de pluies : désert côtier.",
+   "source": "Cours de licence de climatologie, famille des manuels de climatologie générale (classification de Köppen)",
+   "verif": "import",
+   "region": "AF"
+  },
+  {
+   "course": "l1-geo",
+   "category": "Photographies aériennes et télédétection",
+   "difficulty": 2,
+   "question": "Quelle est la différence entre télédétection passive et télédétection active ?",
+   "choices": [
+    "La passive sert de nuit, l'active seulement de jour",
+    "La passive utilise le son, l'active la lumière seule",
+    "La passive est aérienne, l'active seulement terrestre ou marine",
+    "La passive capte un rayonnement, l'active émet un signal"
+   ],
+   "answer": "D",
+   "explanation": "Un capteur passif enregistre surtout la lumière solaire réfléchie ; un radar est un capteur actif.",
+   "source": "Cours de licence de télédétection et de SIG, famille des manuels d'introduction aux systèmes d'information géographique",
+   "verif": "import"
+  },
+  {
+   "course": "l1-geo",
+   "category": "Circulation atmosphérique et saisons",
+   "difficulty": 3,
+   "question": "Dans l'hémisphère nord, dans quel sens tournent les vents autour d'une dépression ?",
+   "choices": [
+    "En ligne droite vers l'extérieur",
+    "Dans le sens inverse des aiguilles d'une montre",
+    "Dans le sens des aiguilles d'une montre",
+    "Sans tourner, vers le nord"
+   ],
+   "answer": "B",
+   "explanation": "Les vents convergent vers le centre en tournant dans le sens antihoraire dans l'hémisphère nord.",
+   "source": "Cours de licence de climatologie, famille des manuels de climatologie générale (classification de Köppen)",
+   "verif": "import"
+  },
+  {
+   "course": "l1-geo",
+   "category": "Systèmes d'information géographique",
+   "difficulty": 3,
+   "question": "Pourquoi faut-il harmoniser les systèmes de projection des couches ?",
+   "choices": [
+    "Pour réduire le poids des fichiers",
+    "Pour qu'elles se superposent correctement",
+    "Pour changer les couleurs des symboles",
+    "Pour supprimer les tables attributaires"
+   ],
+   "answer": "B",
+   "explanation": "Des couches dans des systèmes différents seraient décalées l'une par rapport à l'autre.",
+   "source": "Cours de licence de télédétection et de SIG, famille des manuels d'introduction aux systèmes d'information géographique",
+   "verif": "import"
+  },
+  {
+   "course": "l1-geo",
+   "category": "Lecture de cartes : échelle, légende, courbes de niveau",
+   "difficulty": 3,
+   "question": "Pourquoi une carte à petite échelle contient-elle moins de détails ?",
+   "choices": [
+    "Son papier est plus petit que celui des autres cartes",
+    "Les symboles y sont interdits par convention",
+    "Elle est toujours plus ancienne que les autres",
+    "Elle représente un grand espace et doit généraliser"
+   ],
+   "answer": "D",
+   "explanation": "Une forte réduction oblige à sélectionner et simplifier les informations.",
+   "source": "Cours de licence de cartographie et repérage, famille des manuels d'initiation à la cartographie et à la lecture de cartes",
+   "verif": "import"
+  },
+  {
+   "course": "l1-geo",
+   "category": "Systèmes d'information géographique",
+   "difficulty": 1,
+   "question": "Dans un SIG, quels éléments représentent des objets par des points, des lignes ou des polygones ?",
+   "choices": [
+    "Les données textuelles seules",
+    "Les données raster",
+    "Les données sonores",
+    "Les données vectorielles"
+   ],
+   "answer": "D",
+   "explanation": "Le mode vecteur décrit les objets par leur géométrie : points, lignes et surfaces.",
+   "source": "Cours de licence de télédétection et de SIG, famille des manuels d'introduction aux systèmes d'information géographique",
+   "verif": "import"
+  },
+  {
+   "course": "l1-geo",
+   "category": "Érosion et modelé du relief",
+   "difficulty": 1,
+   "question": "Quel agent d'érosion a façonné les vallées en U ?",
+   "choices": [
+    "Les vagues",
+    "Les glaciers",
+    "Les vents",
+    "Les rivières"
+   ],
+   "answer": "B",
+   "explanation": "Les glaciers élargissent et creusent le fond des vallées, d'où leur profil en U.",
+   "source": "Cours de licence de géographie physique, famille des manuels de géomorphologie générale",
+   "verif": "import"
+  },
+  {
+   "course": "l1-geo",
+   "category": "Le relief : montagnes, plateaux, plaines",
+   "difficulty": 1,
+   "question": "Quel relief est une surface élevée, plane, entaillée par des vallées ?",
+   "choices": [
+    "Un delta",
+    "Un récif",
+    "Un plateau",
+    "Une plaine"
+   ],
+   "answer": "C",
+   "explanation": "Un plateau est une étendue élevée, au sommet plat, souvent dominée par des rebords.",
+   "source": "Cours de licence de géographie physique, famille des manuels de géomorphologie générale",
+   "verif": "import"
+  },
+  {
+   "course": "l1-geo",
+   "category": "Biomes et grandes formations végétales",
+   "difficulty": 2,
+   "question": "Comment appelle-t-on l'étage supérieur de la forêt dense ?",
+   "choices": [
+    "La litière",
+    "Le sous-bois",
+    "La canopée",
+    "Le terreau"
+   ],
+   "answer": "C",
+   "explanation": "La canopée forme un toit de feuillage à 30 mètres ou plus au-dessus du sol.",
+   "source": "Cours de licence de biogéographie et de pédologie, famille des manuels de géographie physique",
+   "verif": "import"
+  },
+  {
+   "course": "l1-geo",
+   "category": "Systèmes d'information géographique",
+   "difficulty": 1,
+   "question": "Dans un SIG, comment appelle-t-on un ensemble de données d'un même thème, comme les routes ou les rivières ?",
+   "choices": [
+    "Une couche",
+    "Une équidistance",
+    "Une rose des vents",
+    "Une légende"
+   ],
+   "answer": "A",
+   "explanation": "Un SIG superpose des couches thématiques.",
+   "source": "Cours de licence de télédétection et de SIG, famille des manuels d'introduction aux systèmes d'information géographique",
+   "verif": "import"
+  },
+  {
+   "course": "l1-geo",
+   "category": "Biomes et grandes formations végétales",
+   "difficulty": 2,
+   "question": "Quelle forêt couvre naturellement une grande partie des climats tempérés océaniques ?",
+   "choices": [
+    "La forêt de feuillus caducifoliés",
+    "La forêt équatoriale dense et sempervirente",
+    "La toundra du Grand Nord",
+    "La mangrove des estuaires"
+   ],
+   "answer": "A",
+   "explanation": "Chênes et hêtres perdent leurs feuilles en hiver.",
+   "source": "Cours de licence de biogéographie et de pédologie, famille des manuels de géographie physique",
+   "verif": "import"
+  },
+  {
+   "course": "l1-geo",
+   "category": "Systèmes d'information géographique",
+   "difficulty": 1,
+   "question": "Quel instrument fournit les coordonnées d'un point grâce aux satellites de positionnement ?",
+   "choices": [
+    "Un récepteur GPS",
+    "Un pluviomètre",
+    "Un baromètre",
+    "Un sismographe"
+   ],
+   "answer": "A",
+   "explanation": "Un récepteur GPS calcule sa position à partir des signaux de plusieurs satellites.",
+   "source": "Cours de licence de télédétection et de SIG, famille des manuels d'introduction aux systèmes d'information géographique",
+   "verif": "import"
+  },
+  {
+   "course": "l1-geo",
+   "category": "Urbanisation et villes du monde",
+   "difficulty": 4,
+   "question": "Quelle différence fait-on entre la ville et l'agglomération ?",
+   "choices": [
+    "La ville est plus petite que le village",
+    "Ce sont deux mots exactement identiques",
+    "L'agglomération désigne uniquement la banlieue",
+    "Commune administrative contre ensemble bâti continu"
+   ],
+   "answer": "D",
+   "explanation": "L'agglomération couvre l'espace bâti continu, au-delà des limites administratives.",
+   "source": "Cours de licence de géographie humaine, famille des manuels de géographie urbaine et du peuplement",
+   "verif": "import"
+  },
+  {
+   "course": "l1-geo",
+   "category": "La Terre : forme, dimensions, mouvements",
+   "difficulty": 3,
+   "question": "Dans quel sens la Terre tourne-t-elle sur elle-même ?",
+   "choices": [
+    "Du sud au nord",
+    "D'ouest en est",
+    "D'est en ouest",
+    "Du nord au sud"
+   ],
+   "answer": "B",
+   "explanation": "Le Soleil semble se lever à l'est parce que la Terre tourne d'ouest en est.",
+   "source": "Cours de licence de géographie générale (introduction à la géographie), famille des manuels d'introduction à la géographie",
+   "verif": "import"
+  },
+  {
+   "course": "l1-geo",
+   "category": "Océans, courants marins et littoraux",
+   "difficulty": 2,
+   "question": "Quel courant froid longe les côtes de la Namibie ?",
+   "choices": [
+    "Le courant de Guinée",
+    "Le courant du Mozambique",
+    "Le courant de Benguela",
+    "Le Gulf Stream"
+   ],
+   "answer": "C",
+   "explanation": "Le courant de Benguela remonte le long de la côte sud-ouest de l'Afrique.",
+   "source": "Cours de licence de géographie physique, famille des manuels d'océanographie et de géographie des littoraux",
+   "verif": "import",
+   "region": "AF"
+  },
+  {
+   "course": "l1-geo",
+   "category": "Hydrologie : cycle de l'eau, bassins versants",
+   "difficulty": 1,
+   "question": "Quel est le plus grand réservoir d'eau de la planète ?",
+   "choices": [
+    "Les nappes souterraines",
+    "Les lacs",
+    "Les glaciers",
+    "Les océans"
+   ],
+   "answer": "D",
+   "explanation": "Les océans contiennent environ 97 % de l'eau de la Terre.",
+   "source": "Cours de licence d'hydrologie et d'hydrographie, famille des manuels de géographie physique",
+   "verif": "import"
+  },
+  {
+   "course": "l1-geo",
+   "category": "Climats du monde : facteurs et éléments",
+   "difficulty": 3,
+   "question": "Dans l'hémisphère nord, quel versant d'une montagne reçoit le plus de soleil ?",
+   "choices": [
+    "Le versant ouest uniquement",
+    "Aucun, ils reçoivent tous la même chaleur",
+    "L'adret, exposé au sud",
+    "L'ubac, exposé au nord"
+   ],
+   "answer": "C",
+   "explanation": "L'adret est ensoleillé, l'ubac est à l'ombre.",
+   "source": "Cours de licence de climatologie, famille des manuels de climatologie générale (classification de Köppen)",
+   "verif": "import"
+  },
+  {
+   "course": "l1-geo",
+   "category": "Coordonnées géographiques et fuseaux horaires",
+   "difficulty": 3,
+   "question": "Quel méridien correspond approximativement à la ligne de changement de date ?",
+   "choices": [
+    "90° ouest",
+    "180°",
+    "90° est",
+    "0°"
+   ],
+   "answer": "B",
+   "explanation": "La ligne de changement de date suit en gros le méridien 180°, opposé à Greenwich.",
+   "source": "Cours de licence de cartographie et repérage, famille des manuels d'initiation à la cartographie et à la lecture de cartes",
+   "verif": "import"
+  },
+  {
+   "course": "l1-geo",
+   "category": "Les milieux naturels d'Afrique centrale",
+   "difficulty": 3,
+   "question": "Quel rôle la forêt du bassin du Congo joue-t-elle à l'échelle planétaire ?",
+   "choices": [
+    "Elle produit l'essentiel du pétrole mondial",
+    "Elle empêche tout réchauffement",
+    "Elle remplace l'action des océans",
+    "Elle stocke du carbone et régule le climat"
+   ],
+   "answer": "D",
+   "explanation": "Les grandes forêts tropicales absorbent du dioxyde de carbone et influencent les pluies.",
+   "source": "Cours de licence de géographie de l'Afrique, famille des atlas et manuels de géographie régionale de l'Afrique",
+   "verif": "import",
+   "region": "AF"
+  },
+  {
+   "course": "l1-geo",
+   "category": "Sols et ressources",
+   "difficulty": 1,
+   "question": "Quelle énergie utilise la chute de l'eau pour produire de l'électricité ?",
+   "choices": [
+    "L'énergie hydroélectrique",
+    "L'énergie nucléaire",
+    "L'énergie géothermique",
+    "L'énergie éolienne"
+   ],
+   "answer": "A",
+   "explanation": "Les barrages utilisent la force de l'eau pour entraîner des turbines.",
+   "source": "Cours de licence de biogéographie et de pédologie, famille des manuels de géographie physique",
+   "verif": "import"
+  },
+  {
+   "course": "l1-geo",
+   "category": "Tectonique des plaques, séismes et volcans",
+   "difficulty": 4,
+   "question": "Où le mont Cameroun se situe-t-il par rapport aux limites de plaques ?",
+   "choices": [
+    "Sur une dorsale océanique en expansion",
+    "À l'intérieur de la plaque africaine, loin des bords",
+    "Dans une zone de collision entre deux plaques continentales",
+    "Sur une zone de subduction très active"
+   ],
+   "answer": "B",
+   "explanation": "Le mont Cameroun est un volcan intraplaque appartenant à la ligne volcanique du Cameroun, sur la plaque africaine.",
+   "source": "Cours de licence de géographie physique, famille des manuels de géomorphologie générale",
+   "verif": "import",
+   "region": "CM"
+  },
+  {
+   "course": "l1-geo",
+   "category": "Les milieux naturels d'Afrique centrale",
+   "difficulty": 4,
+   "question": "Quelle ligne de volcans relie l'île d'Annobón au mont Cameroun et se prolonge vers le nord-est ?",
+   "choices": [
+    "Le rift est-africain",
+    "La ceinture de feu du Pacifique",
+    "La ligne volcanique du Cameroun",
+    "La dorsale atlantique"
+   ],
+   "answer": "C",
+   "explanation": "Cette chaîne volcanique comprend des îles du golfe de Guinée et des massifs du Cameroun.",
+   "source": "Cours de licence de géographie de l'Afrique, famille des atlas et manuels de géographie régionale de l'Afrique",
+   "verif": "import",
+   "region": "CM"
+  },
+  {
+   "course": "l1-geo",
+   "category": "Grands fleuves et lacs d'Afrique",
+   "difficulty": 3,
+   "question": "Que signifie le caractère endoréique du lac Tchad ?",
+   "choices": [
+    "Il est relié à l'océan par un fleuve",
+    "Ses eaux n'ont pas d'exutoire vers la mer",
+    "Il est situé en montagne",
+    "Il est toujours gelé"
+   ],
+   "answer": "B",
+   "explanation": "Le lac Tchad ne se vide dans aucun fleuve : l'évaporation et l'infiltration l'équilibrent.",
+   "source": "Cours de licence de géographie de l'Afrique, famille des atlas et manuels de géographie régionale de l'Afrique",
+   "verif": "import",
+   "region": "AF"
+  },
+  {
+   "course": "l1-geo",
+   "category": "Zones climatiques et classification de Köppen",
+   "difficulty": 2,
+   "question": "Dans la classification de Köppen, que désigne la lettre B ?",
+   "choices": [
+    "Les climats polaires",
+    "Les climats tropicaux",
+    "Les climats tempérés",
+    "Les climats arides"
+   ],
+   "answer": "D",
+   "explanation": "La lettre B est réservée aux climats secs, désertiques ou steppiques.",
+   "source": "Cours de licence de climatologie, famille des manuels de climatologie générale (classification de Köppen)",
+   "verif": "import"
+  },
+  {
+   "course": "l1-geo",
+   "category": "Biomes et grandes formations végétales",
+   "difficulty": 1,
+   "question": "Qu'appelle-t-on un biome ?",
+   "choices": [
+    "Un type de sol agricole particulièrement fertile",
+    "Un grand milieu défini par son climat et sa végétation",
+    "Un type de roche des grandes régions volcaniques actives",
+    "Un découpage administratif d'un État fédéral"
+   ],
+   "answer": "B",
+   "explanation": "La forêt équatoriale ou la toundra sont des biomes.",
+   "source": "Cours de licence de biogéographie et de pédologie, famille des manuels de géographie physique",
+   "verif": "import"
+  },
+  {
+   "course": "l1-geo",
+   "category": "Océans, courants marins et littoraux",
+   "difficulty": 3,
+   "question": "Quelle est la cause d'un tsunami ?",
+   "choices": [
+    "Un vent violent à la surface de l'océan",
+    "La fonte des glaces polaires",
+    "Une marée de vives-eaux",
+    "Un séisme ou une éruption sous-marins"
+   ],
+   "answer": "D",
+   "explanation": "Les tsunamis sont engendrés par un mouvement brutal du fond marin.",
+   "source": "Cours de licence de géographie physique, famille des manuels d'océanographie et de géographie des littoraux",
+   "verif": "import"
+  },
+  {
+   "course": "l1-geo",
+   "category": "Les milieux naturels d'Afrique centrale",
+   "difficulty": 2,
+   "question": "Lequel de ces pays d'Afrique centrale est enclavé, sans accès à la mer ?",
+   "choices": [
+    "Le Cameroun",
+    "Le Tchad",
+    "Le Congo",
+    "Le Gabon"
+   ],
+   "answer": "B",
+   "explanation": "Le Tchad n'a pas de façade maritime.",
+   "source": "Cours de licence de géographie de l'Afrique, famille des atlas et manuels de géographie régionale de l'Afrique",
+   "verif": "import",
+   "region": "AF"
+  },
+  {
+   "course": "l1-geo",
+   "category": "Transition démographique",
+   "difficulty": 3,
+   "question": "Dans la dernière phase de la transition, comment évoluent natalité, mortalité et croissance ?",
+   "choices": [
+    "Natalité et mortalité fortes, croissance forte",
+    "Natalité nulle et mortalité forte, population qui disparaît",
+    "Natalité forte et mortalité faible, croissance forte",
+    "Natalité et mortalité faibles, croissance faible ou nulle"
+   ],
+   "answer": "D",
+   "explanation": "Une fois la transition achevée, les deux taux sont bas et la population se stabilise ou croît peu.",
+   "source": "Cours de licence de démographie et de géographie de la population, famille des manuels de géographie humaine",
+   "verif": "import"
+  },
+  {
+   "course": "l1-geo",
+   "category": "Sols et ressources",
+   "difficulty": 3,
+   "question": "Quel sol noir, très fertile, est typique des steppes tempérées comme celles d'Ukraine ?",
+   "choices": [
+    "Le podzol",
+    "Le sol ferrallitique",
+    "Le tchernozem",
+    "La latérite"
+   ],
+   "answer": "C",
+   "explanation": "Le tchernozem est riche en humus et très favorable aux céréales.",
+   "source": "Cours de licence de biogéographie et de pédologie, famille des manuels de géographie physique",
+   "verif": "import"
+  },
+  {
+   "course": "l1-geo",
+   "category": "Projections cartographiques",
+   "difficulty": 1,
+   "question": "À quelle famille appartient la projection de Mercator ?",
+   "choices": [
+    "Les projections azimutales",
+    "Les projections coniques",
+    "Les projections cylindriques",
+    "Les projections polyédriques"
+   ],
+   "answer": "C",
+   "explanation": "La projection de Mercator est cylindrique et conforme.",
+   "source": "Cours de licence de cartographie et repérage, famille des manuels d'initiation à la cartographie et à la lecture de cartes",
+   "verif": "import"
+  },
+  {
+   "course": "l1-geo",
+   "category": "Océans, courants marins et littoraux",
+   "difficulty": 1,
+   "question": "Comment appelle-t-on un groupe d'îles proches les unes des autres ?",
+   "choices": [
+    "Un détroit",
+    "Une presqu'île",
+    "Un archipel",
+    "Un isthme"
+   ],
+   "answer": "C",
+   "explanation": "Les Comores ou les Açores sont des archipels.",
+   "source": "Cours de licence de géographie physique, famille des manuels d'océanographie et de géographie des littoraux",
+   "verif": "import"
+  },
+  {
+   "course": "l1-geo",
+   "category": "Cameroun : relief, climats, régions naturelles",
+   "difficulty": 5,
+   "question": "Quelle est approximativement la superficie du Cameroun ?",
+   "choices": [
+    "Environ 275 000 km²",
+    "Environ 1 000 000 km²",
+    "Environ 750 000 km²",
+    "Environ 475 000 km²"
+   ],
+   "answer": "D",
+   "explanation": "Le Cameroun couvre un peu plus de 475 000 km².",
+   "source": "Cours de géographie du Cameroun de licence, famille des atlas et monographies de géographie régionale du Cameroun",
+   "verif": "import",
+   "region": "CM"
+  },
+  {
+   "course": "l1-geo",
+   "category": "Sols et ressources",
+   "difficulty": 1,
+   "question": "Quelle ressource fossile gazeuse sert au chauffage et à la cuisine ?",
+   "choices": [
+    "Le charbon de bois",
+    "Le bois de feu",
+    "L'hydrogène solaire",
+    "Le gaz naturel"
+   ],
+   "answer": "D",
+   "explanation": "Le gaz naturel est un combustible fossile gazeux.",
+   "source": "Cours de licence de biogéographie et de pédologie, famille des manuels de géographie physique",
+   "verif": "import"
+  },
+  {
+   "course": "l1-geo",
+   "category": "Océans, courants marins et littoraux",
+   "difficulty": 1,
+   "question": "Quel est le plus grand océan du monde ?",
+   "choices": [
+    "L'océan Arctique",
+    "L'océan Atlantique",
+    "L'océan Indien",
+    "L'océan Pacifique"
+   ],
+   "answer": "D",
+   "explanation": "Le Pacifique couvre à lui seul près d'un tiers de la surface du globe.",
+   "source": "Cours de licence de géographie physique, famille des manuels d'océanographie et de géographie des littoraux",
+   "verif": "import"
+  },
+  {
+   "course": "l1-geo",
+   "category": "Photographies aériennes et télédétection",
+   "difficulty": 1,
+   "question": "Comment nomme-t-on une vue du sol prise du ciel par un appareil installé dans un avion ?",
+   "choices": [
+    "Un plan cadastral",
+    "Une photographie aérienne",
+    "Un bloc-diagramme",
+    "Un profil topographique"
+   ],
+   "answer": "B",
+   "explanation": "La photographie aérienne est l'un des supports historiques de l'observation de l'espace.",
+   "source": "Cours de licence de télédétection et de SIG, famille des manuels d'introduction aux systèmes d'information géographique",
+   "verif": "import"
+  },
+  {
+   "course": "l1-geo",
+   "category": "Photographies aériennes et télédétection",
+   "difficulty": 1,
+   "question": "Comment appelle-t-on un petit aéronef sans pilote utilisé pour photographier un terrain ?",
+   "choices": [
+    "Un cerf-volant",
+    "Un dirigeable",
+    "Un planeur",
+    "Un drone"
+   ],
+   "answer": "D",
+   "explanation": "Les drones permettent de produire des images à très grande échelle sur de petits espaces.",
+   "source": "Cours de licence de télédétection et de SIG, famille des manuels d'introduction aux systèmes d'information géographique",
+   "verif": "import"
+  },
+  {
+   "course": "l1-geo",
+   "category": "Urbanisation et villes du monde",
+   "difficulty": 1,
+   "question": "Comment appelle-t-on la ville où siègent le gouvernement et les principales institutions d'un État ?",
+   "choices": [
+    "La capitale",
+    "Le chef-lieu de canton",
+    "Le port",
+    "La métropole régionale"
+   ],
+   "answer": "A",
+   "explanation": "La capitale est le siège du pouvoir politique.",
+   "source": "Cours de licence de géographie humaine, famille des manuels de géographie urbaine et du peuplement",
+   "verif": "import"
+  },
+  {
+   "course": "l1-geo",
+   "category": "Lecture de cartes : échelle, légende, courbes de niveau",
+   "difficulty": 1,
+   "question": "Quel type de carte représente le relief par des courbes de niveau ?",
+   "choices": [
+    "La carte routière",
+    "La carte politique",
+    "La carte du climat",
+    "La carte topographique"
+   ],
+   "answer": "D",
+   "explanation": "La carte topographique figure le relief, l'hydrographie et les constructions.",
+   "source": "Cours de licence de cartographie et repérage, famille des manuels d'initiation à la cartographie et à la lecture de cartes",
+   "verif": "import"
+  },
+  {
+   "course": "l1-geo",
+   "category": "Biomes et grandes formations végétales",
+   "difficulty": 2,
+   "question": "Quel arbre au tronc massif est emblématique de la savane sèche africaine ?",
+   "choices": [
+    "Le baobab",
+    "Le bouleau",
+    "Le sapin",
+    "Le hêtre"
+   ],
+   "answer": "A",
+   "explanation": "Le baobab est un arbre typique des savanes africaines.",
+   "source": "Cours de licence de biogéographie et de pédologie, famille des manuels de géographie physique",
+   "verif": "import",
+   "region": "AF"
+  },
+  {
+   "course": "l1-geo",
+   "category": "Tectonique des plaques, séismes et volcans",
+   "difficulty": 1,
+   "question": "Quelle couche se trouve entre la croûte terrestre et le noyau ?",
+   "choices": [
+    "Le noyau externe seulement",
+    "Le manteau",
+    "La stratosphère",
+    "La magnétosphère"
+   ],
+   "answer": "B",
+   "explanation": "Le manteau constitue la plus grande partie du volume de la Terre.",
+   "source": "Cours de licence de géographie physique, famille des manuels de géomorphologie générale",
+   "verif": "import"
+  },
+  {
+   "course": "l1-geo",
+   "category": "Transition démographique",
+   "difficulty": 2,
+   "question": "Quel facteur contribue à faire baisser la natalité ?",
+   "choices": [
+    "L'éducation des filles et la contraception",
+    "La baisse de l'espérance de vie moyenne des femmes",
+    "La rareté de l'eau potable",
+    "La disparition des villes"
+   ],
+   "answer": "A",
+   "explanation": "Scolarisation des filles, urbanisation et contraception réduisent la fécondité.",
+   "source": "Cours de licence de démographie et de géographie de la population, famille des manuels de géographie humaine",
+   "verif": "import"
+  },
+  {
+   "course": "l1-geo",
+   "category": "Photographies aériennes et télédétection",
+   "difficulty": 4,
+   "question": "Une photographie aérienne est prise avec une focale de 150 mm à 3 000 m au-dessus du sol. Quelle est son échelle approximative ?",
+   "choices": [
+    "1/200 000",
+    "1/2 000",
+    "1/20 000",
+    "1/30 000"
+   ],
+   "answer": "C",
+   "explanation": "L'échelle vaut focale divisée par hauteur : 0,15 m pour 3 000 m, soit 1/20 000.",
+   "source": "Cours de licence de télédétection et de SIG, famille des manuels d'introduction aux systèmes d'information géographique",
+   "verif": "import"
+  },
+  {
+   "course": "l1-geo",
+   "category": "Lecture de cartes : échelle, légende, courbes de niveau",
+   "difficulty": 3,
+   "question": "Dans une vallée, vers où la pointe du V des courbes de niveau est-elle tournée ?",
+   "choices": [
+    "Vers l'aval",
+    "Vers l'amont",
+    "Vers le nord",
+    "Vers la mer"
+   ],
+   "answer": "B",
+   "explanation": "Les courbes de niveau remontent la vallée : la pointe du V indique l'amont.",
+   "source": "Cours de licence de cartographie et repérage, famille des manuels d'initiation à la cartographie et à la lecture de cartes",
+   "verif": "import"
+  },
+  {
+   "course": "l1-geo",
+   "category": "Cameroun : relief, climats, régions naturelles",
+   "difficulty": 2,
+   "question": "Pourquoi appelle-t-on souvent le Cameroun l'« Afrique en miniature » ?",
+   "choices": [
+    "Il n'a qu'une seule langue nationale parlée",
+    "Il est le plus petit pays d'Afrique centrale et australe",
+    "Il réunit forêt, savane, désert, montagnes et mer",
+    "Il est entièrement recouvert de désert"
+   ],
+   "answer": "C",
+   "explanation": "La diversité de ses milieux naturels reflète celle du continent.",
+   "source": "Cours de géographie du Cameroun de licence, famille des atlas et monographies de géographie régionale du Cameroun",
+   "verif": "import",
+   "region": "CM"
+  },
+  {
+   "course": "l1-geo",
+   "category": "Sols et ressources",
+   "difficulty": 2,
+   "question": "Qu'est-ce qu'un horizon de sol ?",
+   "choices": [
+    "La ligne d'horizon que l'on voit au loin sur la plaine",
+    "Un instrument de mesure de l'altitude",
+    "Une couche aux caractères propres dans un profil",
+    "Un type de roche mère"
+   ],
+   "answer": "C",
+   "explanation": "Un profil de sol se compose d'horizons superposés.",
+   "source": "Cours de licence de biogéographie et de pédologie, famille des manuels de géographie physique",
+   "verif": "import"
+  },
+  {
+   "course": "l1-geo",
+   "category": "Coordonnées géographiques et fuseaux horaires",
+   "difficulty": 4,
+   "question": "Dans quel océan se trouve le point de coordonnées 0° de latitude et 0° de longitude ?",
+   "choices": [
+    "L'océan Arctique, au nord de la Sibérie",
+    "L'océan Atlantique, dans le golfe de Guinée",
+    "L'océan Indien, au large de la Somalie",
+    "L'océan Pacifique, près des îles Galápagos"
+   ],
+   "answer": "B",
+   "explanation": "Le croisement de l'équateur et du méridien de Greenwich est dans le golfe de Guinée, au sud du Ghana.",
+   "source": "Cours de licence de cartographie et repérage, famille des manuels d'initiation à la cartographie et à la lecture de cartes",
+   "verif": "import"
+  },
+  {
+   "course": "l1-geo",
+   "category": "Érosion et modelé du relief",
+   "difficulty": 2,
+   "question": "Comment appelle-t-on l'amas de blocs et de débris abandonné par un glacier ?",
+   "choices": [
+    "Une moraine",
+    "Un atoll",
+    "Une dune",
+    "Un delta"
+   ],
+   "answer": "A",
+   "explanation": "Les moraines sont des dépôts glaciaires non triés.",
+   "source": "Cours de licence de géographie physique, famille des manuels de géomorphologie générale",
+   "verif": "import"
+  },
+  {
+   "course": "l1-geo",
+   "category": "Objet et méthodes de la géographie",
+   "difficulty": 2,
+   "question": "Que soutient le possibilisme à propos du milieu naturel ?",
+   "choices": [
+    "Il impose à chaque société un mode de vie unique",
+    "Il disparaît dès que l'industrie se développe dans un pays",
+    "Il propose des possibilités, les sociétés choisissent",
+    "Il n'exerce aucune influence sur l'organisation des sociétés"
+   ],
+   "answer": "C",
+   "explanation": "Pour les possibilistes, le milieu propose, mais ce sont les sociétés qui décident et aménagent.",
+   "source": "Cours de licence de géographie générale (introduction à la géographie), famille des manuels d'introduction à la géographie",
+   "verif": "import"
+  },
+  {
+   "course": "l1-geo",
+   "category": "Lecture de cartes : échelle, légende, courbes de niveau",
+   "difficulty": 3,
+   "question": "Sur une carte au 1/25 000, quelle longueur représentent 3 km sur le terrain ?",
+   "choices": [
+    "12 cm",
+    "6 cm",
+    "3 cm",
+    "30 cm"
+   ],
+   "answer": "A",
+   "explanation": "3 km valent 300 000 cm ; divisé par 25 000, cela donne 12 cm.",
+   "source": "Cours de licence de cartographie et repérage, famille des manuels d'initiation à la cartographie et à la lecture de cartes",
+   "verif": "import"
+  },
+  {
+   "course": "l1-geo",
+   "category": "Démographie : natalité, mortalité, croissance naturelle",
+   "difficulty": 2,
+   "question": "Natalité de 40 ‰ et mortalité de 10 ‰ : quel est le taux d'accroissement naturel ?",
+   "choices": [
+    "3 %",
+    "30 %",
+    "0,3 %",
+    "5 %"
+   ],
+   "answer": "A",
+   "explanation": "40 ‰ moins 10 ‰ égalent 30 ‰, soit 3 %.",
+   "source": "Cours de licence de démographie et de géographie de la population, famille des manuels de géographie humaine",
+   "verif": "import"
+  },
+  {
+   "course": "l1-geo",
+   "category": "Coordonnées géographiques et fuseaux horaires",
+   "difficulty": 2,
+   "question": "Quand il est 12 h à Greenwich, quelle est l'heure solaire approximative en un lieu situé à 30° est ?",
+   "choices": [
+    "13 h",
+    "14 h",
+    "10 h",
+    "15 h"
+   ],
+   "answer": "B",
+   "explanation": "Chaque tranche de 15° vers l'est ajoute une heure : 30° ajoutent 2 heures.",
+   "source": "Cours de licence de cartographie et repérage, famille des manuels d'initiation à la cartographie et à la lecture de cartes",
+   "verif": "import"
+  },
+  {
+   "course": "l1-geo",
+   "category": "Tectonique des plaques, séismes et volcans",
+   "difficulty": 2,
+   "question": "Que se passe-t-il à une dorsale océanique ?",
+   "choices": [
+    "Deux continents entrent en collision frontale",
+    "Une plaque plonge sous une autre plaque",
+    "Une chaîne de montagnes se plisse lentement",
+    "Les plaques s'écartent et de la croûte se forme"
+   ],
+   "answer": "D",
+   "explanation": "Le magma remonte à la dorsale et forme du plancher océanique neuf.",
+   "source": "Cours de licence de géographie physique, famille des manuels de géomorphologie générale",
+   "verif": "import"
+  },
+  {
+   "course": "l1-geo",
+   "category": "Grands fleuves et lacs d'Afrique",
+   "difficulty": 2,
+   "question": "Quels deux grands bras forment le Nil à Khartoum ?",
+   "choices": [
+    "Le Nil Blanc et le Nil Bleu",
+    "Le Nil Noir et le Nil Rouge",
+    "Le Niger et la Bénoué",
+    "Le Congo et l'Oubangui"
+   ],
+   "answer": "A",
+   "explanation": "Le Nil Blanc et le Nil Bleu se rejoignent à Khartoum, au Soudan.",
+   "source": "Cours de licence de géographie de l'Afrique, famille des atlas et manuels de géographie régionale de l'Afrique",
+   "verif": "import",
+   "region": "AF"
+  },
+  {
+   "course": "l1-geo",
+   "category": "Démographie : natalité, mortalité, croissance naturelle",
+   "difficulty": 5,
+   "question": "Pourquoi le taux brut de natalité est-il imparfait pour comparer deux pays ?",
+   "choices": [
+    "Il ne tient pas compte de la structure par âge",
+    "Il est toujours identique d'un pays à l'autre",
+    "Il ne compte pas toutes les naissances",
+    "Il dépend seulement de la superficie du pays"
+   ],
+   "answer": "A",
+   "explanation": "Un pays à forte proportion de femmes en âge d'avoir des enfants a un taux plus élevé, à fécondité égale.",
+   "source": "Cours de licence de démographie et de géographie de la population, famille des manuels de géographie humaine",
+   "verif": "import"
+  },
+  {
+   "course": "l1-geo",
+   "category": "Climats du monde : facteurs et éléments",
+   "difficulty": 2,
+   "question": "Quel est l'effet de la proximité de l'océan sur les températures ?",
+   "choices": [
+    "Il n'a aucun effet",
+    "Il les accentue fortement en toute saison",
+    "Il atténue les écarts thermiques",
+    "Il supprime toute pluie"
+   ],
+   "answer": "C",
+   "explanation": "L'eau se réchauffe et se refroidit lentement et modère les extrêmes.",
+   "source": "Cours de licence de climatologie, famille des manuels de climatologie générale (classification de Köppen)",
+   "verif": "import"
+  },
+  {
+   "course": "l1-geo",
+   "category": "Coordonnées géographiques et fuseaux horaires",
+   "difficulty": 2,
+   "question": "Quelle latitude a approximativement le tropique du Capricorne ?",
+   "choices": [
+    "23,5° sud",
+    "0°",
+    "23,5° nord",
+    "66,5° sud"
+   ],
+   "answer": "A",
+   "explanation": "Le tropique du Capricorne est situé à environ 23°26′ de latitude sud.",
+   "source": "Cours de licence de cartographie et repérage, famille des manuels d'initiation à la cartographie et à la lecture de cartes",
+   "verif": "import"
+  },
+  {
+   "course": "l1-geo",
+   "category": "La Terre : forme, dimensions, mouvements",
+   "difficulty": 2,
+   "question": "Au solstice de juin, sur quel parallèle le Soleil est-il au zénith à midi ?",
+   "choices": [
+    "Le tropique du Cancer",
+    "L'équateur",
+    "Le tropique du Capricorne",
+    "Le cercle polaire arctique"
+   ],
+   "answer": "A",
+   "explanation": "Au solstice de juin, le Soleil est au zénith à environ 23°26′ de latitude nord, sur le tropique du Cancer.",
+   "source": "Cours de licence de géographie générale (introduction à la géographie), famille des manuels d'introduction à la géographie",
+   "verif": "import"
+  },
+  {
+   "course": "l1-geo",
+   "category": "Océans, courants marins et littoraux",
+   "difficulty": 5,
+   "question": "Quelle est approximativement la profondeur maximale des océans dans la fosse des Mariannes ?",
+   "choices": [
+    "Environ 6 000 m",
+    "Environ 11 000 m",
+    "Environ 8 000 m",
+    "Environ 15 000 m"
+   ],
+   "answer": "B",
+   "explanation": "La fosse des Mariannes dépasse 10 900 m de profondeur.",
+   "source": "Cours de licence de géographie physique, famille des manuels d'océanographie et de géographie des littoraux",
+   "verif": "import"
+  },
+  {
+   "course": "l1-geo",
+   "category": "Migrations et réfugiés",
+   "difficulty": 5,
+   "question": "Qu'est-ce qui distingue juridiquement un réfugié d'un migrant économique ?",
+   "choices": [
+    "Aucune différence juridique n'existe",
+    "Le réfugié est protégé par le droit international",
+    "Le migrant économique est protégé comme réfugié",
+    "Le réfugié a toujours plus de ressources"
+   ],
+   "answer": "B",
+   "explanation": "La protection des réfugiés repose sur la crainte fondée de persécution, non sur la recherche d'un emploi.",
+   "source": "Cours de licence de démographie et de géographie de la population, famille des manuels de géographie humaine",
+   "verif": "import"
+  },
+  {
+   "course": "l1-geo",
+   "category": "La Terre : forme, dimensions, mouvements",
+   "difficulty": 2,
+   "question": "Quel est approximativement le rayon moyen de la Terre ?",
+   "choices": [
+    "Environ 1 600 km",
+    "Environ 6 400 km",
+    "Environ 3 200 km",
+    "Environ 12 700 km"
+   ],
+   "answer": "B",
+   "explanation": "Le rayon moyen terrestre est d'environ 6 371 km.",
+   "source": "Cours de licence de géographie générale (introduction à la géographie), famille des manuels d'introduction à la géographie",
+   "verif": "import"
+  },
+  {
+   "course": "l1-geo",
+   "category": "Érosion et modelé du relief",
+   "difficulty": 1,
+   "question": "Comment appelle-t-on les dépôts de sédiments laissés par un cours d'eau ?",
+   "choices": [
+    "Des laves",
+    "Des dunes",
+    "Des alluvions",
+    "Des moraines"
+   ],
+   "answer": "C",
+   "explanation": "Les alluvions sont des sédiments transportés puis déposés par l'eau.",
+   "source": "Cours de licence de géographie physique, famille des manuels de géomorphologie générale",
+   "verif": "import"
+  },
+  {
+   "course": "l1-geo",
+   "category": "Hydrologie : cycle de l'eau, bassins versants",
+   "difficulty": 4,
+   "question": "Pourquoi l'urbanisation augmente-t-elle les risques de crues rapides ?",
+   "choices": [
+    "Les sols imperméabilisés limitent l'infiltration",
+    "Les bâtiments réchauffent l'eau des rivières",
+    "Les routes absorbent toute l'eau de pluie",
+    "Les villes provoquent davantage de pluie partout"
+   ],
+   "answer": "A",
+   "explanation": "L'eau n'a plus le temps de s'infiltrer et arrive vite dans les cours d'eau.",
+   "source": "Cours de licence d'hydrologie et d'hydrographie, famille des manuels de géographie physique",
+   "verif": "import"
+  },
+  {
+   "course": "l1-geo",
+   "category": "Tectonique des plaques, séismes et volcans",
+   "difficulty": 4,
+   "question": "Quelle sorte de lave forme les volcans en bouclier, aux pentes douces ?",
+   "choices": [
+    "Uniquement des cendres",
+    "Une lave basaltique très fluide",
+    "Des blocs de glace",
+    "Une lave très visqueuse riche en silice"
+   ],
+   "answer": "B",
+   "explanation": "Les laves fluides s'étalent loin et construisent des cônes aplatis, comme à Hawaï.",
+   "source": "Cours de licence de géographie physique, famille des manuels de géomorphologie générale",
+   "verif": "import"
+  },
+  {
+   "course": "l1-geo",
+   "category": "Coordonnées géographiques et fuseaux horaires",
+   "difficulty": 1,
+   "question": "Quelle coordonnée géographique varie de 0° à 180° vers l'est ou vers l'ouest ?",
+   "choices": [
+    "L'altitude",
+    "L'azimut",
+    "La latitude",
+    "La longitude"
+   ],
+   "answer": "D",
+   "explanation": "La longitude se compte à partir du méridien origine.",
+   "source": "Cours de licence de cartographie et repérage, famille des manuels d'initiation à la cartographie et à la lecture de cartes",
+   "verif": "import"
+  },
+  {
+   "course": "l1-geo",
+   "category": "Peuplement et densités",
+   "difficulty": 1,
+   "question": "Comment calcule-t-on la densité de population ?",
+   "choices": [
+    "En additionnant naissances et décès",
+    "En divisant le nombre d'habitants par la superficie",
+    "En divisant la superficie par le nombre d'habitants",
+    "En multipliant la population par la superficie"
+   ],
+   "answer": "B",
+   "explanation": "La densité exprime le nombre moyen d'habitants par unité de surface.",
+   "source": "Cours de licence de géographie humaine, famille des manuels de géographie urbaine et du peuplement",
+   "verif": "import"
+  },
+  {
+   "course": "l1-geo",
+   "category": "Érosion et modelé du relief",
+   "difficulty": 1,
+   "question": "Comment nomme-t-on la décomposition sur place des roches par l'eau, le gel ou la chaleur ?",
+   "choices": [
+    "La sédimentation",
+    "La subduction",
+    "L'infiltration",
+    "L'altération"
+   ],
+   "answer": "D",
+   "explanation": "L'altération prépare les matériaux que l'érosion pourra ensuite transporter.",
+   "source": "Cours de licence de géographie physique, famille des manuels de géomorphologie générale",
+   "verif": "import"
+  },
+  {
+   "course": "l1-geo",
+   "category": "Objet et méthodes de la géographie",
+   "difficulty": 2,
+   "question": "Quelle question centrale guide la démarche géographique face à un phénomène ?",
+   "choices": [
+    "Qui l'a inventé et à quelle date précise ?",
+    "Combien a-t-il coûté à la collectivité ?",
+    "Quel auteur l'a décrit en premier ?",
+    "Où est-il et pourquoi se trouve-t-il là ?"
+   ],
+   "answer": "D",
+   "explanation": "La géographie part de la localisation d'un fait et cherche à expliquer sa répartition dans l'espace.",
+   "source": "Cours de licence de géographie générale (introduction à la géographie), famille des manuels d'introduction à la géographie",
+   "verif": "import"
+  },
+  {
+   "course": "l1-geo",
+   "category": "Biomes et grandes formations végétales",
+   "difficulty": 2,
+   "question": "Comment appelle-t-on la forêt de palétuviers des côtes tropicales vaseuses ?",
+   "choices": [
+    "La mangrove",
+    "La garrigue",
+    "La steppe",
+    "La taïga"
+   ],
+   "answer": "A",
+   "explanation": "La mangrove colonise les estuaires et les littoraux soumis aux marées, comme au Cameroun.",
+   "source": "Cours de licence de biogéographie et de pédologie, famille des manuels de géographie physique",
+   "verif": "import"
+  }
+ ]
+}
