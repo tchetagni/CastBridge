@@ -7,7 +7,7 @@ ROOT = Path(__file__).resolve().parents[2]
 spec = importlib.util.spec_from_file_location("build_embedded", ROOT / "tools/quiz-bank/build_embedded.py")
 be = importlib.util.module_from_spec(spec); sys.modules["build_embedded"] = be; spec.loader.exec_module(be)
 
-TOTAL = 217494
+TOTAL = 230481   # 217 494 + 12 987 questions des 26 filières du supérieur (2026-10-04)
 
 
 def catalog():
@@ -33,7 +33,7 @@ class EmbeddedBuildTest(unittest.TestCase):
                 for r in f["q"]:
                     yield fam, name, f, r
 
-    def test_total_217494_chaque_id_une_seule_fois(self):
+    def test_total_230481_chaque_id_une_seule_fois(self):
         ids = [r[0] for _, _, _, r in self.all_rows()]
         self.assertEqual(TOTAL, len(ids))
         self.assertEqual(TOTAL, len(set(ids)))
@@ -41,7 +41,7 @@ class EmbeddedBuildTest(unittest.TestCase):
 
     def test_chaque_lot_du_catalogue_est_present(self):
         lots = {l["id"]: l["questions"] for l in catalog()}
-        self.assertEqual(93, len(lots))
+        self.assertEqual(119, len(lots))   # 93 lots + 26 filières du supérieur
         got = collections.Counter()
         for _, _, f, r in self.all_rows():
             got[f["lot"]] += 1

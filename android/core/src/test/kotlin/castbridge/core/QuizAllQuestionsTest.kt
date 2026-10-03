@@ -4,7 +4,7 @@ import castbridge.core.quiz.*
 import kotlin.test.*
 
 /**
- * Toutes les questions du dépôt sont embarquées (docs/agent-reports/quiz-toutes-les-questions.md) : 217 494 questions, réservables PAR QUESTION
+ * Toutes les questions du dépôt sont embarquées (docs/agent-reports/quiz-toutes-les-questions.md) : 230 481 questions (217 494 + 12 987 du supérieur), réservables PAR QUESTION
  * (≈ 30 %), chargées à la demande par fichier de lot : une partie ne lit que quelques fichiers (≤ 2000 questions, ≤ 3 Mo de JSON).
  */
 class QuizAllQuestionsTest {
@@ -24,11 +24,11 @@ class QuizAllQuestionsTest {
     private fun levels(trial: Boolean = true, rot: Rotation = Rotation.Memory(0), spy: Spy? = null) =
         EmbeddedLevels(reader = spy?.reader ?: ::resource, rotation = rot, trialOpen = trial)
 
-    @Test fun theIndexAnnounces217494QuestionsInTheTwentyEightLevels() {
+    @Test fun theIndexAnnounces230481QuestionsInTheTwentyEightLevels() {
         val spy = Spy(res)
         val lv = levels(spy = spy)
         assertEquals(28, lv.levels.size, lv.levels.map { it.key }.toString())
-        assertEquals(217_494, lv.totalCount())
+        assertEquals(230_481, lv.totalCount())   // 217 494 + 12 987 (26 filières du supérieur)
         assertEquals(listOf("embedded/index.json"), spy.reads, "counting never reads a level file")
         for (l in lv.levels) {
             assertEquals(l.count, l.freeCount + l.reservedCount, l.key)
