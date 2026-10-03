@@ -105,38 +105,60 @@ class HomeScreen(private val act: Activity, private val container: FrameLayout, 
         content.addView(scroll, LinearLayout.LayoutParams(-1, 0, 1f))
         root.addView(content, FrameLayout.LayoutParams(-1, -1))
         container.addView(root, FrameLayout.LayoutParams(-1, -1))
-        chip.setOnClickListener { revealUntil = System.currentTimeMillis() + 10_000; refreshStatus() }
+        chip.setOnClickListener { revealUntil = System.currentTimeMillis() + 10_000; refreshStatus(force = true) }
         TvStyle.focusZoom(chip)
     }
 
-    private val tick = object : Runnable { override fun run() { if (visible) { reload(); refreshTools(); main.postDelayed(this, 4000) } } }
+    private val tick = object : Runnable { override fun run() { if (visible && !paused) { reload(); refreshTools(); main.postDelayed(this, 4000) } } }
+    private var paused = false
 
     fun show() {
         container.fadeTo(true)
-        zoom.start()
         reload(focusFirst = true)
-        main.removeCallbacks(tick); main.postDelayed(tick, 4000)
+        if (!paused) { zoom.start(); main.removeCallbacks(tick); main.postDelayed(tick, 4000) }
     }
 
-    fun hide() { container.fadeTo(false); zoom.stop(); main.removeCallbacks(tick) }
+    fun hide() { container.fadeTo(false); zoom.stop(); main.removeCallbacks(tick); main.removeCallbacks(chipLater) }
+
+    /**
+     * Another screen covers the home (Quiz, Apprendre, Langues… are activities on top: the home stays « visible »): no zoom, no 4 s reload.
+     * Before, both kept running on the shared main thread under the Quiz (docs/agent-reports/tv-perf.md, R-11). [resume] restarts them.
+     */
+    fun pause() { paused = true; zoom.stop(); main.removeCallbacks(tick); main.removeCallbacks(chipLater) }
+    fun resume() {
+        if (!paused) return
+        paused = false
+        if (!visible) return
+        zoom.start(); main.removeCallbacks(tick); reload(); refreshTools(); main.postDelayed(tick, 4000)
+    }
 
     fun release() { hide(); io.shutdownNow() }
 
     fun onThumbReady(name: String) = main.post { rows.values.forEach { (_, a) -> a.refresh(name) } }
 
-    fun refreshStatus() {
+    // Reception events arrive about once a second per transfer (several at once with lanes): the chip is recomputed at most once a second
+    // and repainted only when its text changed (setText lays the header out again). The chip's content is unchanged (castbridge.core.ux.Throttle / StateGate).
+    private val chipPace = castbridge.core.ux.Throttle(1000)
+    private val chipGate = castbridge.core.ux.StateGate<String>()
+    private val chipLater = Runnable { refreshStatus() }
+
+    fun refreshStatus(force: Boolean = false) {
+        if (paused && !force) return                                    // covered by another screen: refreshed on resume
+        val wait = chipPace.admit(android.os.SystemClock.uptimeMillis())
+        if (wait > 0 && !force) { main.removeCallbacks(chipLater); main.postDelayed(chipLater, wait); return }
         val (ready, code, receiving) = api.status()
         val shown = if (System.currentTimeMillis() < revealUntil || code.length < 4) code else code.take(2) + "••••"
-        chip.text = (receiving ?: "● $ready") + "   ·   code $shown"
+        val text = (receiving ?: "● $ready") + "   ·   code $shown"
+        if (chipGate.changed(text)) chip.text = text
     }
 
     private fun reload(focusFirst: Boolean = false) {
         refreshStatus()
-        runCatching { io.execute { val items = runCatching { api.items() }.getOrDefault(emptyList()); main.post { apply(items, focusFirst) } } }
+        // the list and its signature are computed here, off the main thread (a big library made items.hashCode() a main-thread cost every 4 s)
+        runCatching { io.execute { val items = runCatching { api.items() }.getOrDefault(emptyList()); val sig = items.hashCode(); main.post { apply(items, sig, focusFirst) } } }
     }
 
-    private fun apply(items: List<LibraryItem>, focusFirst: Boolean) {
-        val sig = items.hashCode()
+    private fun apply(items: List<LibraryItem>, sig: Int, focusFirst: Boolean) {
         if (sig == signature && rows.isNotEmpty() && !focusFirst) return
         signature = sig
         val media = items.filter { it.type != MediaType.OTHER }
