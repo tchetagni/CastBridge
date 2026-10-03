@@ -266,7 +266,13 @@ object TvLinkManager {
             s != null && s.tv.address == tv.address && (v.state.isGood || v.state is LinkState.Reconnecting) -> LinkUi.Connected(s, v)
             else -> LinkUi.Status(v, tv)
         }
+        val pending = (_state.value as? LinkUi.Status)?.let { castbridge.core.trust.CredentialDecision.linkFacts(it.view.state).pending } == true
+        pendingSince = if (!pending) null else pendingSince ?: System.currentTimeMillis()
     }
+
+    @Volatile private var pendingSince: Long? = null
+    /** How long the default TV's link has been connecting / reconnecting (0 = not): « aucun code à saisir » is said for a bounded time only. */
+    fun pendingForMs(): Long = pendingSince?.let { System.currentTimeMillis() - it } ?: 0
 
     private suspend fun loop() {
         var trigger = Trigger.APP_OPENED

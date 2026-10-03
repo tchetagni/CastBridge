@@ -16,7 +16,7 @@ Diagnostic et correctif livré : `docs/agent-reports/pin-persistence.md`, régre
  │  tvId ─┬─ fiche « bt:AA:BB:… »   (TV appairée)             │  HELLO   │ registre des téléphones de confiance │
  │        │   jeton (12 h, renouvelé à mi-vie, par TV)  ◄─────┼──────────┤   jetons (haché), révocation          │
  │        │   code tapé (repli)  · installId vu au HELLO       │  BT/Wi-Fi│ code (PIN) 6 chiffres, stable         │
- │        │   alias : nom, nom mDNS, « (2) », IP:port, bt:     │          │                                      │
+ │        │   clés d écran : nom, nom mDNS, IP:port, bt:       │          │                                      │
  │        ├─ fiche « name:castbridge tv m1 » (TV à code)       │  X-CB-Pin│ GET /api/hello  (public, + tvId)       │
  │        │   code tapé · alias IP:port vus par la découverte  ├──────────► GET /api/info, /api/library, /api/lots, │
  │        └─ fiche …                                          │ X-CB-Token /api/rental, /api/parental/config/get,│
@@ -33,6 +33,7 @@ Diagnostic et correctif livré : `docs/agent-reports/pin-persistence.md`, régre
 ### 1.1 Identité stable d'une TV (jamais son IP)
 - TV appairée par Bluetooth : **`bt:<adresse>`** (ce que la liaison appairée prouve ; c'est déjà la clé de `SavedTvs`), complétée par l'`installId` reçu au HELLO : un `installId` différent = TV réinitialisée (nouveau code, nouveaux jetons).
 - TV jointe seulement par le code (cas du propriétaire aujourd'hui, registre de confiance vide) : la TV ne donne aujourd'hui **aucun** identifiant stable sur le Wi-Fi (`GET /api/hello` = `app`, `v`, `pinRequired`). Livré maintenant : fiche par **nom de service** (`name:<nom>`, « (Bluetooth) » retiré, « (2) » gardé car c'est peut-être l'autre TV du même modèle) + **alias** d'adresses vues avec ce nom (`PinBook.link`). Cible : `tvId` public dans `/api/hello` (cahier tvctx-01), **haché** depuis l'`installId` (`H = SHA-256("cbtv-id|" + installId)`, 16 hex) pour ne pas exposer l'identifiant qui sert aux locations ; le téléphone recalcule `H` depuis l'`installId` du HELLO Bluetooth et relie les deux fiches.
+- Règles d'alias (après audit Opus) : seules les **adresses** sont des alias, jamais un nom (« … (n) » peut être l'autre TV du même modèle) ; un alias d'adresse ne mène à un code que si un nom de **même nom de base** est vu à cette adresse ; aucune écriture ne passe par un alias (elle le délie) ; un 401 ne marque un code refusé que si nom **et** adresse concordent.
 - La boucle locale du tunnel (`127.0.0.1:18765`) n'est pas une TV : elle vaut `bt:<adresse que la passerelle atteint>` tant que la passerelle tourne, **rien** sinon. L'adresse Wi-Fi Direct `192.168.49.1` est la même sur toutes les TV : jamais un alias.
 
 ### 1.2 Une fiche d'identifiant par TV
@@ -88,5 +89,5 @@ Une ligne par fiche : nom, état **joignable** (sonde `/api/hello`), **identifia
 ## 2. Ce qui est livré maintenant (sans écran nouveau)
 - `C/trust/PinBook.kt` : `PinBook` (une fiche par TV, alias, migration des anciennes clés, refus marqués, TV réinitialisée), `CredentialDecision`, `TvAuthReply` (401 `bad pin` / `locked` / `bad token`), `HomeTvMatch` (nom mDNS « (2) »).
 - `C/trust/LinkDriver.kt` : un 401 « bad token » retire le jeton de la TV qui le détient (plus celui du défaut).
-- `S/PinStore.kt` (lecture/écriture par `PinBook`, `commit()`), `S/TvLink.kt` (`pinScope`, `linkFacts`, liste des TV en `commit()`), `S/TvHome.kt` (TV retrouvée malgré « (2) », adresse reliée, `locked` ≠ code changé), règles de sauvegarde.
+- `S/PinStore.kt` (lecture/écriture par `PinBook`, `commit()`), `S/TvLink.kt` (`pinScope`, `linkFacts`, liste des TV en `commit()`), `S/TvHome.kt` (TV retrouvée à son adresse connue même renommée « (2) », sinon choix de l utilisateur avec le code gardé proposé ; `locked` ≠ code changé ; refus marqué seulement si nom et adresse concordent), règles de sauvegarde.
 - Aucune modification de CastBridge-TV : non nécessaire au correctif (preuve : tous les cas de R-10 se corrigent côté téléphone ; le seul cas qui demande la TV — deux TV **du même modèle** à code dont les « (2) » s'échangent — est rare et documenté, cahier tvctx-01).

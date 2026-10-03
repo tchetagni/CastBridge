@@ -240,6 +240,8 @@ class LinkDriverTest {
         phone.store.saveCredential(other, StoredCredential(tokB, phone.clock.now(), phone.clock.now() + 12 * 3600_000L))
         assertEquals(tokB, phone.driver.credential(other))
         phone.driver.reportTokenRejected(tokB)
+        phone.driver.reportTokenRejected(tokB)                  // deux 401 en parallèle : le second ne trouve plus de détenteur
+        assertFalse(phone.driver.rejectionPending, "la TV principale n'est jamais marquée refusée par le 401 d'une autre TV, ni au second")
         assertNull(phone.driver.credential(other), "le jeton refusé par la chambre n'est plus présenté à la chambre")
         assertEquals(mine, phone.driver.credential(), "le jeton de la TV principale est intact")
         phone.clock.advance(2_000)

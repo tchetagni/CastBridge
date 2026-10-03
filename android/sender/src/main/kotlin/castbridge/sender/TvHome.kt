@@ -64,9 +64,9 @@ fun TvHub() {
 /** The TV the home talks to (chosen once in the first-connection assistant). */
 internal class HomeTv(ctx: Context) {
     private val sp = ctx.applicationContext.getSharedPreferences("castbridge_home", Context.MODE_PRIVATE)
-    var name: String? get() = sp.getString("tv", null); set(v) { sp.edit().putString("tv", v).commit() }
-    /** Last address the home TV answered at (R-10: finds it again when Android renamed its service « X (2) »). */
-    var host: String? get() = sp.getString("host", null); set(v) { sp.edit().putString("host", v).commit() }
+    var name: String? get() = sp.getString("tv", null); set(v) { PinIo.save(sp) { it.putString("tv", v) } }
+    /** Last address the home TV answered at with its name (R-10: tells « X (2) » of the same TV from the other TV of the same model). */
+    var host: String? get() = sp.getString("host", null); set(v) { PinIo.save(sp) { it.putString("host", v) } }
 }
 
 /**
@@ -106,8 +106,10 @@ fun TvHome(onAdvanced: () -> Unit) {
     var msg by remember { mutableStateOf<castbridge.core.ux.UiNotice?>(null) }
     LaunchedEffect(Unit) { TvLinkManager.start(ctx) }
     var wizard by rememberSaveable { mutableStateOf(TvLinkManager.saved.list().isEmpty() && (tvName == null || !TvAuth.isUsable(pins.get(tvName)))) }
-    // R-10: the remembered TV, also when the mDNS name came back with a « (2) » (same address, same base name); never a TV picked by its name alone
-    val match = castbridge.core.trust.HomeTvMatch.pick(tvName, home.host, tvs.map { castbridge.core.trust.HomeTvMatch.Seen(it.name, it.host, it.port) })
+    // R-10: the remembered TV at its remembered address (also renamed « (2) »); an exact name elsewhere may be the other TV of the same model: the user chooses
+    val seen = tvs.map { castbridge.core.trust.HomeTvMatch.Seen(it.name, it.host, it.port) }
+    val match = castbridge.core.trust.HomeTvMatch.pick(tvName, home.host, seen)
+    val ambiguous = session == null && castbridge.core.trust.HomeTvMatch.ambiguous(tvName, home.host, seen)
     val tv = match?.let { m -> tvs.firstOrNull { it.name == m.tv.name && it.host == m.tv.host } }
     val client = session?.base?.let { TvClient(it, session.credential) }
         ?: tv?.takeIf { TvAuth.isUsable(pin) || TvLinkManager.saved.list().isEmpty() }?.let { TvClient(it.base, pin) }
@@ -129,8 +131,9 @@ fun TvHome(onAdvanced: () -> Unit) {
         return
     }
     if (wizard) {
-        FirstConnection(tvs, onRetry = { discovery.restart() }, onAdvanced = onAdvanced, onAddTv = { adding = true }, notice = msg?.takeIf { it.error }?.text) { name, code ->
-            home.name = name; pins.put(name, code); tvName = name; pin = code; wizard = false; msg = null
+        FirstConnection(tvs, onRetry = { discovery.restart() }, onAdvanced = onAdvanced, onAddTv = { adding = true }, notice = msg?.takeIf { it.error }?.text,
+            kept = { t -> pins.pinOnly(t.name) }) { t, code ->
+            home.name = t.name; home.host = t.host.takeUnless { castbridge.core.trust.PinBook.isLoopback(it) }; pins.put(t.name, code); tvName = t.name; pin = code; wizard = false; msg = null
         }
         return
     }
@@ -156,7 +159,7 @@ fun TvHome(onAdvanced: () -> Unit) {
             // R-10: the code was accepted at this address: every screen key of this TV (its address, a « (2) » name) finds the same code next time
             if (r.isSuccess && !linked && session == null && tv != null && tvName != null && !TvAuth.isToken(client.pin) && !castbridge.core.trust.PinBook.isLoopback(tv.host)) {
                 linked = true
-                pins.link(tvName!!, "${tv.host}:${tv.port}"); if (tv.name != tvName) pins.link(tvName!!, tv.name); home.host = tv.host
+                pins.link(tvName!!, "${tv.host}:${tv.port}"); if (home.host != tv.host) home.host = tv.host
             }
             val err = r.exceptionOrNull() as? TvClient.HttpError
             if (err?.code == 401) {
@@ -164,10 +167,11 @@ fun TvHome(onAdvanced: () -> Unit) {
                 // R-10: « too many tries » is not « the code changed »: wait for the TV, never re-ask (the right code is refused while locked)
                 val reply = castbridge.core.trust.TvAuthReply.of(err.code, err.message)
                 if (reply is castbridge.core.trust.TvAuthReply.Kind.Locked) {
+                    tvName?.let { pins.locked(it, reply.retryAfterSec) }
                     msg = castbridge.core.ux.HomeNotices.info(castbridge.core.trust.CredentialDecision.locked(reply.retryAfterSec)); delay(reply.retryAfterSec.coerceIn(5, 120) * 1000); continue
                 }
-                // the TV refused this code: kept but never sent again by itself (only when the TV was matched by its exact name: an address may be another TV now)
-                if (match?.how == castbridge.core.trust.HomeTvMatch.How.NAME) tvName?.let { k -> client.pin?.let { pins.refused(k, it) } }
+                // the TV refused this code: kept but never sent again by itself, only when name AND address agree (a name-only match may be another TV)
+                if (castbridge.core.trust.HomeTvMatch.refuseOn401(match)) tvName?.let { k -> client.pin?.let { pins.refused(k, it) } }
                 msg = castbridge.core.ux.HomeNotices.error(castbridge.core.trust.CredentialDecision.PIN_CHANGED); wizard = true; break
             }
             if (n++ % 5 == 0) withContext(Dispatchers.IO) { runCatching { items = TvLibraryParser.parse(client.library()) } }
@@ -223,7 +227,8 @@ fun TvHome(onAdvanced: () -> Unit) {
             Spacer(Modifier.width(10.dp))
             Column(Modifier.weight(1f)) {
                 Text(tvName?.removePrefix("CastBridge TV ")?.ifBlank { "Ma TV" } ?: "Ma TV", style = MaterialTheme.typography.titleLarge, fontWeight = FontWeight.SemiBold)
-                Text(if (reachable) "Connectée" + (info?.let { " · ${formatSize(it.free)} libres" } ?: "") else "Recherche de la TV… (même Wi-Fi, app CastBridge TV installée)",
+                Text(if (reachable) "Connectée" + (info?.let { " · ${formatSize(it.free)} libres" } ?: "") else if (ambiguous) "Votre TV n'est plus à son adresse, ou une autre TV du même modèle est là : touchez « Changer » pour la choisir (son code est gardé)."
+                    else "Recherche de la TV… (même Wi-Fi, app CastBridge TV installée)",
                     style = MaterialTheme.typography.bodySmall, color = cs.onSurfaceVariant)
             }
             TextButton(onClick = { wizard = true }) { Text("Changer") }
@@ -437,7 +442,8 @@ private fun Poster(client: TvClient, i: TvLibItem, onClick: () -> Unit) {
 
 /** First connection: find the TV (same Wi-Fi), then type its code once. */
 @Composable
-private fun FirstConnection(tvs: List<Tv>, onRetry: () -> Unit, onAdvanced: () -> Unit, onAddTv: () -> Unit, notice: String? = null, onDone: (String, String) -> Unit) {
+private fun FirstConnection(tvs: List<Tv>, onRetry: () -> Unit, onAdvanced: () -> Unit, onAddTv: () -> Unit, notice: String? = null,
+                            kept: (Tv) -> String = { "" }, onDone: (Tv, String) -> Unit) {
     val scope = rememberCoroutineScope()
     var chosen by remember { mutableStateOf<Tv?>(null) }
     var code by remember { mutableStateOf("") }
@@ -456,7 +462,8 @@ private fun FirstConnection(tvs: List<Tv>, onRetry: () -> Unit, onAdvanced: () -
             Text("Ouvrez l'app CastBridge TV sur la TV. Le téléphone et la TV doivent être sur le même Wi-Fi.", textAlign = TextAlign.Center, color = cs.onSurfaceVariant)
             if (tvs.isEmpty()) { CircularProgressIndicator(); Text("Recherche…", color = cs.onSurfaceVariant) }
             tvs.forEach { t ->
-                ElevatedCard(Modifier.fillMaxWidth().clickable { chosen = t; error = null }) {
+                // R-10: the user chose the TV; a code already kept for that exact name is offered (hidden), confirmed by « Se connecter »
+                ElevatedCard(Modifier.fillMaxWidth().clickable { chosen = t; error = null; code = kept(t).takeIf { Pin.isValidFormat(it) }.orEmpty() }) {
                     Row(Modifier.padding(16.dp), verticalAlignment = Alignment.CenterVertically) {
                         Icon(Icons.Filled.Tv, null, tint = cs.primary); Spacer(Modifier.width(12.dp))
                         Text(t.name.removePrefix("CastBridge TV ").ifBlank { t.name }, Modifier.weight(1f), style = MaterialTheme.typography.titleMedium)
@@ -472,14 +479,15 @@ private fun FirstConnection(tvs: List<Tv>, onRetry: () -> Unit, onAdvanced: () -
                 "Vous ne le saisirez qu'une fois.", textAlign = TextAlign.Center, color = cs.onSurfaceVariant)
             OutlinedTextField(code, { v -> code = v.filter { it.isDigit() }.take(Pin.LENGTH); error = null }, singleLine = true,
                 textStyle = MaterialTheme.typography.headlineMedium.copy(textAlign = TextAlign.Center, letterSpacing = 8.sp),
-                keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.NumberPassword), modifier = Modifier.width(240.dp), isError = error != null)
+                keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.NumberPassword), modifier = Modifier.width(240.dp), isError = error != null,
+                visualTransformation = androidx.compose.ui.text.input.PasswordVisualTransformation())
             error?.let { Text(it, color = cs.error) }
             Button(enabled = Pin.isValidFormat(code) && !checking, onClick = {
                 checking = true
                 scope.launch {
                     val r = withContext(Dispatchers.IO) { runCatching { TvClient(c.base, code).info() } }
                     checking = false
-                    r.onSuccess { onDone(c.name, code) }.onFailure { e ->
+                    r.onSuccess { onDone(c, code) }.onFailure { e ->
                         error = if ((e as? TvClient.HttpError)?.code == 401) (if ("locked" in e.message.orEmpty()) "Trop d'essais : attendez une minute" else "Code incorrect")
                             else "TV injoignable : ${e.message}"
                     }

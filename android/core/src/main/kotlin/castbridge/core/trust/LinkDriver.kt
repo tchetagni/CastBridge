@@ -88,6 +88,8 @@ class LinkDriver(
     private var forceCheck = false
 
     val currentModel: LinkMachine.Model? @Synchronized get() = model
+    /** A token refusal of the default TV waits for the next [step] (tests: never set by another TV's refusal, nor twice). */
+    internal val rejectionPending: Boolean get() = rejected
 
     /** The token to present to the TV right now, or null: kept while valid even if the link is lost, never one the TV refused. Never blocks (a HELLO may be running). */
     fun credential(address: String? = null): String? {
@@ -105,6 +107,8 @@ class LinkDriver(
     fun reportTokenRejected(token: String) {
         val default = saved.default()
         val holder = saved.list().firstOrNull { tv -> (session?.let { it.tv.address == tv.address && it.credential == token } == true) || store.loadCredential(tv.address)?.token == token }
+        // a second 401 for the same token (two calls in parallel): the first one already refused it at its TV ([dropToken] refuses before it clears), nothing more
+        if (holder == null && saved.list().any { !gate.allows(it.address, token) }) return
         val tv = holder ?: default ?: return
         dropToken(tv, token)
         if (tv.address == default?.address) rejected = true

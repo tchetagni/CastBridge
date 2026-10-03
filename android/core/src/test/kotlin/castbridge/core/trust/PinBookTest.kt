@@ -39,11 +39,12 @@ class PinBookTest {
         val s = scope()
         book.write("CastBridge TV M1", "222222", s)                                 // accueil : la clé est le nom mDNS
         assertTrue(book.link("CastBridge TV M1", "192.168.1.20:8765", s))          // la découverte a vu ce nom à cette adresse, la TV a accepté le code
-        assertEquals("222222", book.read("192.168.1.20:8765", s), "télécommande / écran avancé (clé hôte:port)")
-        assertEquals("222222", book.read("192.168.1.20", s), "IP sans port")
-        assertEquals("222222", book.read("http://192.168.1.20:8765", s), "URL")
+        val n = "CastBridge TV M1"
+        assertEquals("222222", book.read("192.168.1.20:8765", s, seenName = n), "télécommande / écran avancé (clé hôte:port, nom vu à cette adresse)")
+        assertEquals("222222", book.read("192.168.1.20", s, seenName = n), "IP sans port")
+        assertEquals("222222", book.read("http://192.168.1.20:8765", s, seenName = n), "URL")
         assertTrue(book.link("CastBridge TV M1", "192.168.1.33:8765", s), "DHCP : nouvelle adresse")
-        assertEquals("222222", book.read("192.168.1.33:8765", s))
+        assertEquals("222222", book.read("192.168.1.33:8765", s, seenName = n))
     }
 
     @Test fun aPinTypedOnAHostKeyFollowsTheNameWhenLinked() {
@@ -71,6 +72,62 @@ class PinBookTest {
         book.write("CastBridge TV M1 (2)", "555555", s)
         assertEquals("111111", book.read("CastBridge TV M1", s))
         assertEquals("555555", book.read("CastBridge TV M1 (2)", s), "« (2) » est une autre TV : jamais confondues")
+        assertFalse(book.link("CastBridge TV M1", "CastBridge TV M1 (2)", s), "un nom « … (n) » n'est jamais un alias : c'est peut-être l'autre TV")
+        assertEquals("555555", book.read("CastBridge TV M1 (2)", s))
+    }
+
+    // ------------------------------------------------------------------------------------------------ audit : alias (mutations « écriture à travers un alias »)
+
+    @Test fun aWriteThroughAnAliasNeverOverwritesTheLinkedTv() {
+        val s = scope()
+        book.write("CastBridge TV M1", "111111", s)
+        book.link("CastBridge TV M1", "192.168.1.20:8765", s)
+        // le DHCP a redonné 192.168.1.20 à une autre TV : le code tapé pour elle sur l'écran avancé
+        book.write("192.168.1.20:8765", "555555", s)
+        assertEquals("111111", book.read("CastBridge TV M1", s), "la fiche de la TV liée n'est jamais écrasée (plus de ping-pong)")
+        assertEquals("555555", book.read("192.168.1.20:8765", s), "le code va sous la forme propre de l'adresse")
+        assertEquals("555555", book.read("192.168.1.20:8765", s, seenName = "CastBridge TV M1"), "l'alias est délié par cette écriture")
+    }
+
+    @Test fun anAddressAliasSendsACodeOnlyWhenTheBaseNameAgrees() {
+        val s = scope()
+        book.write("CastBridge TV M1", "111111", s)
+        book.link("CastBridge TV M1", "192.168.1.20:8765", s)
+        assertEquals("", book.read("192.168.1.20:8765", s), "l'adresse seule ne suffit pas à envoyer le code")
+        assertEquals("", book.read("192.168.1.20:8765", s, seenName = "CastBridge TV X9"), "autre nom à cette adresse : rien")
+        assertEquals("111111", book.read("192.168.1.20:8765", s, seenName = "CastBridge TV M1"))
+    }
+
+    // ------------------------------------------------------------------------------------------------ audit : lecture pure, migration à l'initialisation
+
+    @Test fun readNeverWritesAndMigrationRunsOnceAtStartup() {
+        val writes = ArrayList<Map<String, String>>()
+        val counting = object : PinKv by kv { override fun write(put: Map<String, String>, remove: Collection<String>): Boolean { writes += put; return kv.write(put, remove) } }
+        val b2 = PinBook(counting)
+        kv.map["CastBridge TV M1"] = "123456"
+        kv.map["192.168.1.5"] = "654321"
+        assertEquals("123456", b2.read("CastBridge TV M1", scope(tvA)))
+        assertEquals(CredentialDecision.Choice.UsePin("123456"), CredentialDecision.decide(Facts(storedPin = b2.read("CastBridge TV M1", scope(tvA)))))
+        assertTrue(writes.isEmpty(), "une lecture (donc la décision d'un écran en composition) n'écrit jamais : $writes")
+        assertEquals(2, b2.migrateAll(scope(tvA)))
+        assertEquals("654321", kv.map["id:bt:$A"]); assertEquals("123456", kv.map["id:name:castbridge tv m1"])
+        assertEquals(0, b2.migrateAll(scope(tvA)), "une seule fois")
+    }
+
+    @Test fun aLockIsRememberedForThePinField() {
+        var now = 1_000L
+        val m = LockMemo { now }
+        m.locked("name:castbridge tv m1", 42)
+        assertEquals(42L, m.left("name:castbridge tv m1"))
+        now += 40_000; assertEquals(2L, m.left("name:castbridge tv m1"))
+        now += 5_000; assertNull(m.left("name:castbridge tv m1"))
+        assertNull(m.left("name:autre"))
+    }
+
+    @Test fun aLongReconnectionStopsSayingNoCodeIsNeeded() {
+        val d = CredentialDecision.decide(Facts(trustedTv = true, linkPending = true, pendingForMs = 25_000))
+        assertTrue(d is Choice.AskPin && d.cause == Cause.TV_OUT_OF_REACH && d.text.contains("allumez-la"), "après 20 s : cause et geste ($d)")
+        assertTrue(CredentialDecision.decide(Facts(trustedTv = true, linkPending = true, pendingForMs = 5_000)) is Choice.Wait)
     }
 
     @Test fun aRefusedCodeUnlinksTheHostAliasInsteadOfServingAnotherTv() {
@@ -175,6 +232,7 @@ class PinBookTest {
     @Test fun legacyPinsByNameOrIpAreMigratedWithoutLoss() {
         kv.map["CastBridge TV M1"] = "123456"
         kv.map["192.168.1.5"] = "654321"                         // ancienne clé brute (TvScreen.kt) d'une TV sauvegardée
+        book.migrateAll(scope(tvA))                              // au démarrage, hors du fil principal
         assertEquals("123456", book.read("CastBridge TV M1", scope()))
         assertEquals("654321", book.read("192.168.1.5:8765", scope(tvA)))
         assertEquals("123456", kv.map["CastBridge TV M1"], "l'ancienne entrée reste (retour arrière possible)")
@@ -193,11 +251,25 @@ class PinBookTest {
 
     @Test fun homeTvIsFoundAfterItsMdnsNameGotASuffix() {
         val seen = listOf(HomeTvMatch.Seen("CastBridge TV M1 (2)", "192.168.1.20", 8765), HomeTvMatch.Seen("CastBridge TV X9", "192.168.1.21", 8765))
-        assertEquals(HomeTvMatch.How.NAME, HomeTvMatch.pick("CastBridge TV X9", "192.168.1.21", seen)?.how)
+        assertEquals(HomeTvMatch.How.NAME_AND_HOST, HomeTvMatch.pick("CastBridge TV X9", "192.168.1.21", seen)?.how)
         val m = HomeTvMatch.pick("CastBridge TV M1", "192.168.1.20", seen)
         assertEquals("CastBridge TV M1 (2)", m?.tv?.name, "même adresse, même nom de base : la même TV renommée par le mDNS")
         assertEquals(HomeTvMatch.How.HOST, m?.how)
         assertNull(HomeTvMatch.pick("CastBridge TV M1", "192.168.1.21", seen), "une TV d'un autre modèle à l'ancienne adresse n'est pas la nôtre")
         assertNull(HomeTvMatch.pick("CastBridge TV M1", null, seen), "sans adresse connue, un « (2) » peut être l'autre TV du même modèle")
+    }
+
+    @Test fun exactNameAtAnotherAddressIsNotMatchedWhenTheAddressIsKnown() {
+        // deux TV du même modèle : TV2 s'annonce maintenant « M1 » ailleurs ; notre TV (à 192.168.1.20) est éteinte
+        val seen = listOf(HomeTvMatch.Seen("CastBridge TV M1", "192.168.1.30", 8765))
+        assertNull(HomeTvMatch.pick("CastBridge TV M1", "192.168.1.20", seen), "adresse connue et différente : ne rien apparier (l'utilisateur choisit)")
+        val both = listOf(HomeTvMatch.Seen("CastBridge TV M1", "192.168.1.30", 8765), HomeTvMatch.Seen("CastBridge TV M1 (2)", "192.168.1.20", 8765))
+        assertEquals("192.168.1.20", HomeTvMatch.pick("CastBridge TV M1", "192.168.1.20", both)?.tv?.host, "adresse + nom de base d'abord")
+        val same = HomeTvMatch.pick("CastBridge TV M1", "192.168.1.30", seen)
+        assertEquals(HomeTvMatch.How.NAME_AND_HOST, same?.how)
+        assertTrue(HomeTvMatch.refuseOn401(same), "nom et adresse concordent : le refus vient bien de notre TV")
+        assertFalse(HomeTvMatch.refuseOn401(HomeTvMatch.pick("CastBridge TV M1", null, seen)), "nom seul : un 401 peut venir d'une autre TV, le code n'est jamais marqué refusé")
+        assertFalse(HomeTvMatch.refuseOn401(HomeTvMatch.pick("CastBridge TV M1", "192.168.1.20", both)), "adresse seule (nom « (2) ») : jamais marqué")
+        assertFalse(HomeTvMatch.refuseOn401(null))
     }
 }
