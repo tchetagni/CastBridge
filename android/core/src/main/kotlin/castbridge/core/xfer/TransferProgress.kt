@@ -26,6 +26,8 @@ class TransferProgress(
     data class Item(
         val id: String, val seq: Int, val name: String, val total: Long, val received: Long, val transport: Transport,
         val source: String?, val startedAt: Long, val updatedAt: Long, val bytesPerSec: Long, val phase: Phase, val message: String? = null,
+        /** R-15: the copy is held back so that a video playing on the TV stays smooth. */
+        val slowed: Boolean = false,
     ) {
         val percent: Int get() = if (total > 0) (received * 100 / total).toInt().coerceIn(0, 100) else 0
         val ended: Boolean get() = phase != Phase.RUNNING
@@ -39,6 +41,7 @@ class TransferProgress(
             append(" · ").append(transport.label)
             source?.let { append(" · depuis ").append(it) }
             message?.let { append(" · ").append(it) }
+            if (slowed && message == null) append(" · ").append(PlaybackAwareCopyPolicy.SLOWED_TEXT)
         }
 
         /** The final line once it ended: « Vidéo reçue ✓ », « Fichier reçu ✓ » or why it stopped. */
@@ -59,6 +62,8 @@ class TransferProgress(
 
     /** Interval between two progress repaints of one transfer; [PlaybackGovernor] raises it while a video plays (notification + home chip cost CPU). */
     @Volatile var emitEveryMs: Long = minEmitMs
+    /** R-15: asked at each repaint of a running transfer; true = « Copie ralentie pour ne pas gêner la lecture » is added to its line. */
+    @Volatile var slowedNow: () -> Boolean = { false }
 
     private val live = LinkedHashMap<String, Live>()
     private val ended = LinkedHashMap<String, Item>()
@@ -104,7 +109,7 @@ class TransferProgress(
                 bps = if (bps <= 0) inst else (bps * 6 + inst * 4) / 10
                 l.sampleAt = t; l.sampleBytes = received
             }
-            l.item = l.item.copy(received = received, updatedAt = t, bytesPerSec = bps, message = null)
+            l.item = l.item.copy(received = received, updatedAt = t, bytesPerSec = bps, message = null, slowed = runCatching(slowedNow).getOrDefault(false))
             val last = l.item.total in 1..received
             if (!last && t - l.lastEmit < emitEveryMs) return
             l.lastEmit = t

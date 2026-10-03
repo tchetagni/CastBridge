@@ -25,7 +25,9 @@ interface Player {
     fun subtitleFile(file: File): Boolean = false
 }
 
-data class PlayerState(val state: String = "idle", val name: String? = null, val posMs: Long = 0, val durMs: Long = 0)
+data class PlayerState(val state: String = "idle", val name: String? = null, val posMs: Long = 0, val durMs: Long = 0,
+                       /** R-15: seconds of comfort of the player (PlaybackHealth), null = unknown (open-loop copy pacing). */
+                       val comfortSec: Double? = null)
 
 /**
  * CastBridge TV HTTP API (port 8765). Videos are uploaded whole, resumably, into one of the storage volumes of [volumes]
@@ -165,6 +167,8 @@ class ReceiverServer(
         onChange = { d -> progress.emitEveryMs = d.progressEveryMs }).also { g ->
         transfers.streamLimit = { g.current().maxStreams }
         transfers.persistEveryMs = { g.current().statePersistMs }
+        transfers.slowedNote = { if (g.slowedNow()) castbridge.core.xfer.PlaybackAwareCopyPolicy.SLOWED_TEXT else null }   // R-15: the phone shows it
+        progress.slowedNow = g::slowedNow                                                                                 // R-15: so does the TV card
     }
 
     private fun playbackSignal(): castbridge.core.xfer.PlaybackSignal {
@@ -175,7 +179,8 @@ class ReceiverServer(
         val total = part?.let { h -> (h.st as? FileStore)?.let { Meta.read(it.dir, h.name) } }
         val size = total ?: ps.name?.let { n -> findFinal(n)?.size } ?: 0L
         return castbridge.core.xfer.PlaybackSignal(ps.state, ps.name, growing = part != null, playheadMs = ps.posMs, durMs = ps.durMs, fileBytes = size,
-            writeBps = transfers.stats.bytesPerSec(), feedBps = g?.let { meters[it]?.bytesPerSec() } ?: 0L, contiguousBytes = part?.size ?: 0L, copyBytes = transfers.stats.total())
+            writeBps = transfers.stats.bytesPerSec(), feedBps = g?.let { meters[it]?.bytesPerSec() } ?: 0L, contiguousBytes = part?.size ?: 0L, copyBytes = transfers.stats.total(),
+            playingVolumeId = (ps.name?.let { findFinal(it) } ?: part)?.v?.id, bufferSec = ps.comfortSec)
     }
 
     /** The TV player changed state (started, paused, stopped): the policy is read again at once, off the caller's thread (it may run deferred fsyncs). */
@@ -836,7 +841,7 @@ class ReceiverServer(
                     val meter = meters.getOrPut(name) { RateMeter() }
                     val input = s.inputStream
                     val out = try { st.openPart(o.name) } catch (e: IOException) { throw DiskError(e) }
-                    playback.receive(name).use { rx -> out.use {
+                    playback.receive(name, v.id).use { rx -> out.use {
                         // Full speed: fill a large block from the socket, then one disk write (no fsync per block; a removable
                         // drive is flushed every removableSyncBytes and at the end, see commit()).
                         val buf = ByteArray(cfg.uploadBufferBytes)
@@ -989,7 +994,7 @@ class ReceiverServer(
         chunking.incrementAndGet()
         try {
             val a = sess.assembler
-            val r = playback.receive(sess.manifest.name).use { rx ->
+            val r = playback.receive(sess.manifest.name, v?.id).use { rx ->
                 p["slice"]?.let { k -> a.writeSlice(idx, k.toIntOrNull() ?: return bad("bad slice"), sha, s.inputStream, len) }
                     ?: a.writeBlock(idx, sha, s.inputStream, len, s.headers["x-cb-enc"].equals("gzip", true), pace = rx::onBytes)
             }
@@ -1056,7 +1061,7 @@ class ReceiverServer(
                     return if (findFinalOrOrigin(name, sess.manifest.size)?.size == sess.manifest.size) ok("""{"done":true,"name":${q(name)}}""")
                         else json(SERVICE_UNAVAILABLE, """{"error":"unknown transfer","retry":true}""")
                 // the read-back is paced and runs at background priority while a video plays: slower, NEVER skipped (nothing is complete before it)
-                val verified = playback.verify(name).use { v -> sess.assembler.finish(root, sess.diskName, v::onBytes) }
+                val verified = playback.verify(name, v.id).use { rx -> sess.assembler.finish(root, sess.diskName, rx::onBytes) }
                 return when (val r = verified) {
                     is castbridge.core.xfer.PartAssembler.Finish.Missing -> json(Response.Status.CONFLICT, transfers.stateJson(sess))
                     is castbridge.core.xfer.PartAssembler.Finish.Corrupt -> json(status(422), transfers.stateJson(sess))

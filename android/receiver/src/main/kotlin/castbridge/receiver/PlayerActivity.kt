@@ -86,6 +86,8 @@ class PlayerActivity : Activity(), TvService.Screen {
 
     // Snapshot read by HTTP threads; written on the main thread from libVLC events.
     @Volatile private var snapshot = PlayerState()
+    /** R-15: stutter detector from libVLC's playhead and Buffering events (libVLC gives no read-ahead level); read by the copy's closed-loop pacing. */
+    private val health = castbridge.core.xfer.PlaybackHealth()
     private var current: File? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -289,19 +291,20 @@ class PlayerActivity : Activity(), TvService.Screen {
         p.attachViews(findViewById<VLCVideoLayout>(R.id.video), null, false, false)
         p.setEventListener { ev ->
             when (ev.type) {
-                MediaPlayer.Event.Playing -> { update("playing"); main.post { mp?.let { extras.onPlaying(it, playerSpu) }; playbackPlaying() } }
-                MediaPlayer.Event.Paused -> update("paused")
-                MediaPlayer.Event.TimeChanged -> { snapshot = snapshot.copy(posMs = ev.timeChanged); main.post { updateLead() } }
+                MediaPlayer.Event.Playing -> { health.onPlaying(android.os.SystemClock.elapsedRealtime()); update("playing"); main.post { mp?.let { extras.onPlaying(it, playerSpu) }; playbackPlaying() } }
+                MediaPlayer.Event.Paused -> { health.onStopped(); update("paused") }
+                MediaPlayer.Event.TimeChanged -> { health.onTime(android.os.SystemClock.elapsedRealtime(), ev.timeChanged); snapshot = snapshot.copy(posMs = ev.timeChanged); main.post { updateLead() } }
                 MediaPlayer.Event.Buffering -> {
                     // libVLC pauses by itself when the data runs out (playback caught up with the upload) and resumes alone.
                     val st = snapshot.state
+                    health.onBuffering(android.os.SystemClock.elapsedRealtime(), ev.buffering)
                     if (ev.buffering < 100f && st == "playing") { update("buffering"); main.post { flash("Mise en mémoire tampon… (en attente de l'envoi)") } }
                     else if (ev.buffering >= 100f && st == "buffering") update("playing")
                 }
                 MediaPlayer.Event.LengthChanged -> snapshot = snapshot.copy(durMs = ev.lengthChanged)
                 // Never release from inside libVLC's own event thread: hop to the main thread.
                 MediaPlayer.Event.EndReached -> {
-                    update("ended"); val n = current?.name; val size = currentSize; val dur = snapshot.durMs
+                    health.onStopped(); update("ended"); val n = current?.name; val size = currentSize; val dur = snapshot.durMs
                     main.post {
                         playbackEnd(abandoned = false, complete = true)
                         current = null; streamingName = null; releasePlayer()
@@ -884,7 +887,7 @@ class PlayerActivity : Activity(), TvService.Screen {
         streamingName = null
         val m = Media(libVlc!!, file.absolutePath)
         // a copy writes to the disk this file is read from: more read-ahead rides out its write bursts (400 ms at rest, see PlaybackPriority)
-        m.addOption(":file-caching=${castbridge.core.xfer.PlaybackPriority.fileCachingMs(receiving = (server?.activeTransfers() ?: 0) > 0)}")
+        m.addOption(":file-caching=${castbridge.core.xfer.PlaybackPriority.fileCachingMs((server?.activeTransfers() ?: 0) > 0, Runtime.getRuntime().maxMemory())}")
         configure(m, posMs)
         p.media = m
         m.release()
@@ -971,7 +974,9 @@ class PlayerActivity : Activity(), TvService.Screen {
         if (::bar.isInitialized) bar.hideNow()
         if (wasPlaying || libScreen?.visible == true) afterPlayback() else showHome()
     }
-    override fun state(): PlayerState = snapshot
+    override fun state(): PlayerState = snapshot.let { s ->
+        if (s.state == "playing" || s.state == "buffering") s.copy(comfortSec = health.bufferSec(android.os.SystemClock.elapsedRealtime())) else s
+    }
 
     override fun tracks(): PlayerTracks? = runCatching {
         onMain { val p = mp; if (p == null || current == null) null else extras.read(p, playerSpu, currentSize, snapshot.durMs) }
