@@ -1,0 +1,2007 @@
+{
+ "batch": "higher-l3-chimie-01",
+ "author": "Claude (rédacteur IA, à relire)",
+ "date": "2026-10-03",
+ "questions": [
+  {
+   "course": "l3-chim",
+   "category": "Orbitales moléculaires et Hückel",
+   "difficulty": 1,
+   "question": "Dans la méthode de Hückel simple, quels électrons sont traités explicitement ?",
+   "choices": [
+    "Les électrons π du système conjugué",
+    "L'ensemble des électrons de valence, σ comme π",
+    "Uniquement les électrons des doublets non liants",
+    "Les électrons de cœur des atomes de carbone"
+   ],
+   "answer": "A",
+   "explanation": "La méthode de Hückel ne traite que le système π conjugué, la charpente σ étant supposée fixe.",
+   "source": "Cours de chimie physique de licence, famille Atkins",
+   "verif": "import"
+  },
+  {
+   "course": "l3-chim",
+   "category": "Orbitales moléculaires et Hückel",
+   "difficulty": 2,
+   "question": "Quelle condition sur le nombre d'électrons π rend un cycle plan conjugué aromatique selon la règle de Hückel ?",
+   "choices": [
+    "4n électrons π (n entier)",
+    "4n + 2 électrons π (n entier)",
+    "2n électrons π (n entier)",
+    "4n + 1 électrons π (n entier)"
+   ],
+   "answer": "B",
+   "explanation": "La règle de Hückel impose 4n + 2 électrons π ; 4n correspond à un cycle antiaromatique.",
+   "source": "Cours de licence de chimie organique, famille des manuels Clayden/McMurry",
+   "verif": "import"
+  },
+  {
+   "course": "l3-chim",
+   "category": "Orbitales moléculaires et Hückel",
+   "difficulty": 3,
+   "question": "Dans le buta-1,3-diène, combien d'orbitales moléculaires π existe-t-il et combien sont occupées à l'état fondamental ?",
+   "choices": [
+    "Quatre OM π, dont quatre occupées",
+    "Deux OM π, dont deux occupées",
+    "Quatre OM π, dont deux occupées",
+    "Quatre OM π, dont trois occupées"
+   ],
+   "answer": "C",
+   "explanation": "Quatre orbitales p donnent quatre OM π ; les quatre électrons π remplissent les deux plus basses.",
+   "source": "Cours de licence de chimie organique, famille des manuels Clayden/McMurry",
+   "verif": "import"
+  },
+  {
+   "course": "l3-chim",
+   "category": "Orbitales moléculaires et Hückel",
+   "difficulty": 4,
+   "question": "Dans le modèle de Hückel (avec β < 0), quelle est l'énergie de l'OM π liante de l'éthylène ?",
+   "choices": [
+    "α moins β",
+    "α seul",
+    "2α plus β",
+    "α plus β"
+   ],
+   "answer": "D",
+   "explanation": "Les deux OM π de l'éthylène ont pour énergies α + β (liante) et α − β (antiliante).",
+   "source": "Cours de chimie physique de licence, famille Atkins",
+   "verif": "import"
+  },
+  {
+   "course": "l3-chim",
+   "category": "Orbitales moléculaires et Hückel",
+   "difficulty": 5,
+   "question": "Dans le modèle de Hückel du cyclobutadiène carré, comment se répartissent les 4 électrons π ?",
+   "choices": [
+    "Quatre dans deux OM liantes dégénérées, toutes remplies",
+    "Deux dans l'OM liante, un dans chacune des deux OM non liantes dégénérées",
+    "Deux dans l'OM liante et deux dans l'OM antiliante",
+    "Un dans chacune des quatre OM, sans appariement"
+   ],
+   "answer": "B",
+   "explanation": "Les niveaux sont α + 2β, α, α, α − 2β : la règle de Hund laisse deux électrons non appariés, d'où l'antiaromaticité.",
+   "source": "Cours de chimie physique de licence, famille Atkins",
+   "verif": "import"
+  },
+  {
+   "course": "l3-chim",
+   "category": "Symétrie moléculaire et groupes ponctuels",
+   "difficulty": 1,
+   "question": "Quel élément de symétrie est noté σ ?",
+   "choices": [
+    "Un plan de symétrie (miroir)",
+    "Un axe de rotation propre",
+    "Un centre d'inversion",
+    "Un axe de rotation-réflexion"
+   ],
+   "answer": "A",
+   "explanation": "Le symbole σ désigne un plan miroir ; Cn est un axe de rotation, i un centre d'inversion, Sn un axe impropre.",
+   "source": "Cours de chimie physique de licence, famille Atkins",
+   "verif": "import"
+  },
+  {
+   "course": "l3-chim",
+   "category": "Symétrie moléculaire et groupes ponctuels",
+   "difficulty": 2,
+   "question": "Quel est le groupe ponctuel de la molécule d'eau ?",
+   "choices": [
+    "D2h",
+    "Cs",
+    "C2v",
+    "C∞v"
+   ],
+   "answer": "C",
+   "explanation": "L'eau possède un axe C2 et deux plans de symétrie verticaux : groupe C2v.",
+   "source": "Cours de chimie physique de licence, famille Atkins",
+   "verif": "import"
+  },
+  {
+   "course": "l3-chim",
+   "category": "Symétrie moléculaire et groupes ponctuels",
+   "difficulty": 3,
+   "question": "Quel est le groupe ponctuel de la molécule d'ammoniac NH3 ?",
+   "choices": [
+    "D3h",
+    "Td",
+    "C3h",
+    "C3v"
+   ],
+   "answer": "D",
+   "explanation": "NH3 est pyramidale : un axe C3 et trois plans σv, sans plan horizontal.",
+   "source": "Chimie inorganique, famille Housecroft-Sharpe / Shriver-Atkins",
+   "verif": "import"
+  },
+  {
+   "course": "l3-chim",
+   "category": "Symétrie moléculaire et groupes ponctuels",
+   "difficulty": 4,
+   "question": "Quelle condition de symétrie est nécessaire et suffisante pour qu'une molécule soit chirale ?",
+   "choices": [
+    "Ne posséder aucun plan de symétrie, quel que soit le reste",
+    "Ne posséder aucun axe impropre Sn (σ = S1 et i = S2 inclus)",
+    "Ne posséder aucun centre d'inversion, quel que soit le reste",
+    "Ne posséder aucun axe de rotation propre Cn"
+   ],
+   "answer": "B",
+   "explanation": "Une molécule est achirale si elle possède un axe impropre Sn quelconque ; sinon elle est chirale.",
+   "source": "Chimie inorganique, famille Housecroft-Sharpe / Shriver-Atkins",
+   "verif": "import"
+  },
+  {
+   "course": "l3-chim",
+   "category": "Symétrie moléculaire et groupes ponctuels",
+   "difficulty": 5,
+   "question": "Combien d'axes de rotation C3 une molécule de symétrie Td, comme CH4, possède-t-elle ?",
+   "choices": [
+    "Trois",
+    "Six",
+    "Huit",
+    "Quatre"
+   ],
+   "answer": "D",
+   "explanation": "Chaque liaison C–H définit un axe C3 : il y en a quatre, avec trois axes C2 et six plans σd.",
+   "source": "Chimie inorganique, famille Housecroft-Sharpe / Shriver-Atkins",
+   "verif": "import"
+  },
+  {
+   "course": "l3-chim",
+   "category": "Spectroscopies moléculaires",
+   "difficulty": 1,
+   "question": "Dans quel domaine de nombre d'onde observe-t-on la bande d'élongation C=O d'une cétone saturée en IR ?",
+   "choices": [
+    "Vers 1700–1720 cm⁻¹",
+    "Vers 2100–2250 cm⁻¹",
+    "Vers 3300–3400 cm⁻¹",
+    "Vers 600–800 cm⁻¹"
+   ],
+   "answer": "A",
+   "explanation": "La bande C=O est intense et se situe vers 1715 cm⁻¹ pour une cétone saturée.",
+   "source": "Cours de spectroscopie organique de licence, famille Silverstein / Pavia",
+   "verif": "import"
+  },
+  {
+   "course": "l3-chim",
+   "category": "Spectroscopies moléculaires",
+   "difficulty": 2,
+   "question": "En RMN du proton, un signal en triplet traduit un couplage avec combien de protons voisins équivalents ?",
+   "choices": [
+    "Un",
+    "Trois",
+    "Deux",
+    "Quatre"
+   ],
+   "answer": "C",
+   "explanation": "La règle des n + 1 raies donne un triplet pour n = 2 voisins équivalents.",
+   "source": "Cours de spectroscopie organique de licence, famille Silverstein / Pavia",
+   "verif": "import"
+  },
+  {
+   "course": "l3-chim",
+   "category": "Spectroscopies moléculaires",
+   "difficulty": 3,
+   "question": "Quelle transition électronique explique la faible bande d'absorption vers 280 nm de la propanone (acétone) ?",
+   "choices": [
+    "La transition π → π* du groupe carbonyle",
+    "La transition σ → σ* des liaisons C–H",
+    "La transition n → π* du groupe carbonyle",
+    "La transition n → σ* de l'oxygène"
+   ],
+   "answer": "C",
+   "explanation": "Le carbonyle saturé absorbe faiblement vers 280 nm par une transition n → π* interdite par la symétrie.",
+   "source": "Cours de spectroscopie organique de licence, famille Silverstein / Pavia",
+   "verif": "import"
+  },
+  {
+   "course": "l3-chim",
+   "category": "Spectroscopies moléculaires",
+   "difficulty": 4,
+   "question": "Combien de signaux le spectre RMN du carbone 13 du para-xylène (1,4-diméthylbenzène) présente-t-il ?",
+   "choices": [
+    "Deux",
+    "Quatre",
+    "Huit",
+    "Trois"
+   ],
+   "answer": "D",
+   "explanation": "La symétrie donne trois carbones distincts : CH3, carbone aromatique porteur du méthyle et CH aromatiques.",
+   "source": "Cours de spectroscopie organique de licence, famille Silverstein / Pavia",
+   "verif": "import"
+  },
+  {
+   "course": "l3-chim",
+   "category": "Spectroscopies moléculaires",
+   "difficulty": 5,
+   "question": "Pour une molécule centrosymétrique, qu'affirme la règle d'exclusion mutuelle à propos d'un mode de vibration actif en IR ?",
+   "choices": [
+    "Il est inactif en diffusion Raman",
+    "Il est aussi actif en diffusion Raman",
+    "Il est actif uniquement en RMN",
+    "Il est toujours dégénéré deux fois"
+   ],
+   "answer": "A",
+   "explanation": "Dans une molécule avec centre d'inversion, aucun mode n'est à la fois actif en IR et en Raman.",
+   "source": "Cours de spectroscopie organique de licence, famille Silverstein / Pavia",
+   "verif": "import"
+  },
+  {
+   "course": "l3-chim",
+   "category": "Spectrométrie de masse",
+   "difficulty": 1,
+   "question": "Quelle grandeur un spectromètre de masse sépare-t-il et mesure-t-il ?",
+   "choices": [
+    "L'absorbance des ions à une longueur d'onde donnée",
+    "Le rapport masse/charge (m/z) des ions",
+    "Le déplacement chimique des noyaux",
+    "Le temps de relaxation des électrons"
+   ],
+   "answer": "B",
+   "explanation": "Le spectromètre trie des ions gazeux selon leur rapport m/z.",
+   "source": "Cours de spectroscopie organique de licence, famille Silverstein / Pavia",
+   "verif": "import"
+  },
+  {
+   "course": "l3-chim",
+   "category": "Spectrométrie de masse",
+   "difficulty": 2,
+   "question": "À quoi correspond le pic moléculaire M⁺• d'un spectre de masse en impact électronique ?",
+   "choices": [
+    "Au fragment le plus abondant du spectre",
+    "Au radical-cation de la molécule intacte",
+    "À l'anion de la molécule",
+    "À un dimère formé dans la source"
+   ],
+   "answer": "B",
+   "explanation": "M⁺• est l'ion formé par perte d'un électron, sans fragmentation de la molécule.",
+   "source": "Cours de spectroscopie organique de licence, famille Silverstein / Pavia",
+   "verif": "import"
+  },
+  {
+   "course": "l3-chim",
+   "category": "Spectrométrie de masse",
+   "difficulty": 3,
+   "question": "Quel rapport d'intensités M : M+2 présente un composé monochloré ?",
+   "choices": [
+    "Environ 1 : 1",
+    "Environ 9 : 1",
+    "Environ 1 : 2",
+    "Environ 3 : 1"
+   ],
+   "answer": "D",
+   "explanation": "Les isotopes ³⁵Cl et ³⁷Cl ont une abondance relative voisine de 3 : 1.",
+   "source": "Cours de spectroscopie organique de licence, famille Silverstein / Pavia",
+   "verif": "import"
+  },
+  {
+   "course": "l3-chim",
+   "category": "Spectrométrie de masse",
+   "difficulty": 4,
+   "question": "Selon la règle de l'azote, que contient un composé organique de masse moléculaire impaire ?",
+   "choices": [
+    "Un nombre impair d'atomes d'azote",
+    "Un nombre pair d'atomes d'azote",
+    "Obligatoirement un atome de chlore",
+    "Aucun atome d'azote ni d'oxygène"
+   ],
+   "answer": "A",
+   "explanation": "Pour C, H, O, N, S et halogènes, une masse nominale impaire exige un nombre impair d'atomes d'azote.",
+   "source": "Cours de spectroscopie organique de licence, famille Silverstein / Pavia",
+   "verif": "import"
+  },
+  {
+   "course": "l3-chim",
+   "category": "Spectrométrie de masse",
+   "difficulty": 5,
+   "question": "Quelle condition structurale est requise pour un réarrangement de McLafferty ?",
+   "choices": [
+    "Deux atomes d'halogène en position vicinale",
+    "Un cycle aromatique sans aucun substituant",
+    "Un groupe insaturé (par exemple C=O) portant un hydrogène en position γ",
+    "Une triple liaison C≡C terminale"
+   ],
+   "answer": "C",
+   "explanation": "Le réarrangement transfère l'hydrogène γ vers l'oxygène du carbonyle via un état de transition à six centres.",
+   "source": "Cours de spectroscopie organique de licence, famille Silverstein / Pavia",
+   "verif": "import"
+  },
+  {
+   "course": "l3-chim",
+   "category": "Réactions péricycliques",
+   "difficulty": 1,
+   "question": "La réaction de Diels-Alder est une cycloaddition [4+2] entre quels partenaires ?",
+   "choices": [
+    "Un diène conjugué et un alcène (diénophile)",
+    "Deux alcènes isolés",
+    "Un alcool et un acide carboxylique",
+    "Un carbocation et un anion halogénure"
+   ],
+   "answer": "A",
+   "explanation": "Un diène à 4 électrons π réagit avec un diénophile à 2 électrons π pour donner un cyclohexène.",
+   "source": "Cours de licence de chimie organique, famille des manuels Clayden/McMurry",
+   "verif": "import"
+  },
+  {
+   "course": "l3-chim",
+   "category": "Réactions péricycliques",
+   "difficulty": 2,
+   "question": "Quelle conformation le diène doit-il adopter pour réagir dans une réaction de Diels-Alder ?",
+   "choices": [
+    "La conformation s-trans",
+    "La conformation s-cis",
+    "Une conformation perpendiculaire (90°)",
+    "La conformation anti-périplanaire"
+   ],
+   "answer": "B",
+   "explanation": "Seule la conformation s-cis place les extrémités du diène assez proches pour former les deux liaisons.",
+   "source": "Cours de licence de chimie organique, famille des manuels Clayden/McMurry",
+   "verif": "import"
+  },
+  {
+   "course": "l3-chim",
+   "category": "Réactions péricycliques",
+   "difficulty": 3,
+   "question": "Pourquoi la cycloaddition [2+2] thermique de deux alcènes est-elle défavorisée ?",
+   "choices": [
+    "Elle exige toujours un catalyseur acide de Lewis",
+    "Elle forme obligatoirement un cycle à trois chaînons",
+    "Elle ne peut créer aucune liaison σ",
+    "Elle est interdite par la symétrie des orbitales en mode suprafacial-suprafacial"
+   ],
+   "answer": "D",
+   "explanation": "Selon les règles de Woodward-Hoffmann, [2+2] suprafacial-suprafacial est permise sous irradiation, pas thermiquement.",
+   "source": "Cours de licence de chimie organique, famille des manuels Clayden/McMurry",
+   "verif": "import"
+  },
+  {
+   "course": "l3-chim",
+   "category": "Réactions péricycliques",
+   "difficulty": 4,
+   "question": "Quel est le mode de l'électrocyclisation thermique d'un hexa-1,3,5-triène (6 électrons π) ?",
+   "choices": [
+    "Conrotatoire",
+    "Antarafacial-antarafacial",
+    "Disrotatoire",
+    "Radicalaire en chaîne"
+   ],
+   "answer": "C",
+   "explanation": "Pour 4n + 2 électrons, la réaction thermique est disrotatoire ; pour 4n électrons, elle est conrotatoire.",
+   "source": "Cours de licence de chimie organique, famille des manuels Clayden/McMurry",
+   "verif": "import"
+  },
+  {
+   "course": "l3-chim",
+   "category": "Réactions péricycliques",
+   "difficulty": 5,
+   "question": "Dans la réaction du cyclopentadiène avec l'anhydride maléique, quel adduit est favorisé cinétiquement (règle d'Alder) ?",
+   "choices": [
+    "L'adduit exo",
+    "Un adduit [2+2] cyclobutanique",
+    "L'adduit endo",
+    "Le produit de substitution allylique"
+   ],
+   "answer": "C",
+   "explanation": "Les recouvrements secondaires orbitalaires stabilisent l'état de transition endo ; l'exo est le plus stable thermodynamiquement.",
+   "source": "Cours de licence de chimie organique, famille des manuels Clayden/McMurry",
+   "verif": "import"
+  },
+  {
+   "course": "l3-chim",
+   "category": "Rétrosynthèse et groupes protecteurs",
+   "difficulty": 1,
+   "question": "Quel est le principe de l'analyse rétrosynthétique ?",
+   "choices": [
+    "Augmenter progressivement la masse molaire des réactifs",
+    "Déconnecter la molécule cible en précurseurs de plus en plus simples",
+    "Purifier le produit final par recristallisation",
+    "Calculer le rendement global de la synthèse"
+   ],
+   "answer": "B",
+   "explanation": "On part de la cible et on la découpe par déconnexions jusqu'à des produits de départ disponibles.",
+   "source": "Cours de licence de chimie organique, famille des manuels Clayden/McMurry",
+   "verif": "import"
+  },
+  {
+   "course": "l3-chim",
+   "category": "Rétrosynthèse et groupes protecteurs",
+   "difficulty": 2,
+   "question": "À quoi sert un groupe protecteur en synthèse multi-étapes ?",
+   "choices": [
+    "À masquer temporairement une fonction pour qu'elle ne réagisse pas",
+    "À accélérer toutes les réactions de la molécule",
+    "À augmenter définitivement la masse molaire du produit",
+    "À remplacer le catalyseur de la réaction"
+   ],
+   "answer": "A",
+   "explanation": "Le groupe protecteur est posé, supporte les conditions de l'étape suivante, puis est retiré.",
+   "source": "Cours de licence de chimie organique, famille des manuels Clayden/McMurry",
+   "verif": "import"
+  },
+  {
+   "course": "l3-chim",
+   "category": "Rétrosynthèse et groupes protecteurs",
+   "difficulty": 3,
+   "question": "Quel groupe protège une amine sous forme de carbamate clivable en milieu acide ?",
+   "choices": [
+    "Le groupe TBS (tert-butyldiméthylsilyle)",
+    "Le groupe THP (tétrahydropyranyle)",
+    "Le groupe MOM (méthoxyméthyle)",
+    "Le groupe Boc (tert-butoxycarbonyle)"
+   ],
+   "answer": "D",
+   "explanation": "Le Boc est retiré par un acide comme l'acide trifluoroacétique ; TBS, THP et MOM protègent des alcools.",
+   "source": "Cours de licence de chimie organique, famille des manuels Clayden/McMurry",
+   "verif": "import"
+  },
+  {
+   "course": "l3-chim",
+   "category": "Rétrosynthèse et groupes protecteurs",
+   "difficulty": 4,
+   "question": "Comment protège-t-on couramment une cétone avant de réduire un ester par LiAlH4 dans la même molécule ?",
+   "choices": [
+    "En oxime avec l'hydroxylamine",
+    "En acétal cyclique avec l'éthylène glycol, en catalyse acide",
+    "En imine avec une amine primaire",
+    "En énolate avec une base forte"
+   ],
+   "answer": "B",
+   "explanation": "L'acétal est stable en milieu basique et réducteur ; on le retire ensuite par hydrolyse acide.",
+   "source": "Cours de licence de chimie organique, famille des manuels Clayden/McMurry",
+   "verif": "import"
+  },
+  {
+   "course": "l3-chim",
+   "category": "Rétrosynthèse et groupes protecteurs",
+   "difficulty": 5,
+   "question": "Que signifie que deux groupes protecteurs sont orthogonaux ?",
+   "choices": [
+    "Ils sont retirés par le même réactif en une seule étape",
+    "Ils sont portés par le même atome de la molécule",
+    "Chacun peut être retiré sélectivement sans affecter l'autre",
+    "Ils ont la même masse molaire"
+   ],
+   "answer": "C",
+   "explanation": "L'orthogonalité permet de déprotéger une fonction à la fois, dans l'ordre voulu.",
+   "source": "Cours de licence de chimie organique, famille des manuels Clayden/McMurry",
+   "verif": "import"
+  },
+  {
+   "course": "l3-chim",
+   "category": "Organométalliques et couplages Pd",
+   "difficulty": 1,
+   "question": "Dans quel type de solvant prépare-t-on un réactif de Grignard ?",
+   "choices": [
+    "L'eau distillée",
+    "L'éthanol absolu",
+    "L'acide acétique glacial",
+    "Un éther anhydre (éther diéthylique, THF)"
+   ],
+   "answer": "D",
+   "explanation": "Les éthers solvatent le magnésium ; tout solvant protique détruirait le réactif.",
+   "source": "Cours de licence de chimie organique, famille des manuels Clayden/McMurry",
+   "verif": "import"
+  },
+  {
+   "course": "l3-chim",
+   "category": "Organométalliques et couplages Pd",
+   "difficulty": 2,
+   "question": "Que forme, après hydrolyse acide, l'addition d'un réactif de Grignard sur une cétone ?",
+   "choices": [
+    "Un alcool tertiaire",
+    "Un alcool primaire",
+    "Un acide carboxylique",
+    "Un alcène"
+   ],
+   "answer": "A",
+   "explanation": "Le carbanion attaque le carbonyle ; l'alcoolate formé donne un alcool tertiaire après hydrolyse.",
+   "source": "Cours de licence de chimie organique, famille des manuels Clayden/McMurry",
+   "verif": "import"
+  },
+  {
+   "course": "l3-chim",
+   "category": "Organométalliques et couplages Pd",
+   "difficulty": 3,
+   "question": "Quel produit obtient-on par action du dioxyde de carbone sur un réactif de Grignard, puis hydrolyse acide ?",
+   "choices": [
+    "Un aldéhyde",
+    "Un alcool secondaire",
+    "Un acide carboxylique",
+    "Un ester"
+   ],
+   "answer": "C",
+   "explanation": "RMgX s'additionne sur CO2 en carboxylate, qui donne RCOOH après acidification.",
+   "source": "Cours de licence de chimie organique, famille des manuels Clayden/McMurry",
+   "verif": "import"
+  },
+  {
+   "course": "l3-chim",
+   "category": "Organométalliques et couplages Pd",
+   "difficulty": 4,
+   "question": "Le couplage de Suzuki-Miyaura associe un halogénure organique à quel partenaire, sous catalyse au palladium ?",
+   "choices": [
+    "Un acide (ou ester) boronique organique",
+    "Un organostannane",
+    "Un alcène non activé",
+    "Un organozincique"
+   ],
+   "answer": "A",
+   "explanation": "Le partenaire est organoboré ; l'organostannane relève du couplage de Stille et l'organozincique de celui de Negishi.",
+   "source": "Cours de licence de chimie organique, famille des manuels Clayden/McMurry",
+   "verif": "import"
+  },
+  {
+   "course": "l3-chim",
+   "category": "Organométalliques et couplages Pd",
+   "difficulty": 5,
+   "question": "Quel est l'ordre des étapes élémentaires du cycle catalytique d'un couplage de Suzuki ?",
+   "choices": [
+    "Élimination réductrice, transmétallation, addition oxydante",
+    "Addition oxydante, transmétallation, élimination réductrice",
+    "Transmétallation, addition oxydante, élimination réductrice",
+    "Addition oxydante, élimination réductrice, transmétallation"
+   ],
+   "answer": "B",
+   "explanation": "Pd(0) s'insère dans la liaison C–X, reçoit le groupe organique du bore, puis expulse le produit couplé.",
+   "source": "Cours de licence de chimie organique, famille des manuels Clayden/McMurry",
+   "verif": "import"
+  },
+  {
+   "course": "l3-chim",
+   "category": "Chimie des hétérocycles",
+   "difficulty": 1,
+   "question": "Quel hétéroatome contient le noyau du furane, hétérocycle aromatique à cinq chaînons ?",
+   "choices": [
+    "L'azote",
+    "Le soufre",
+    "Le phosphore",
+    "L'oxygène"
+   ],
+   "answer": "D",
+   "explanation": "Le furane est le cycle à cinq chaînons comportant un oxygène ; le pyrrole porte un azote et le thiophène un soufre.",
+   "source": "Cours de licence de chimie organique, famille des manuels Clayden/McMurry",
+   "verif": "import"
+  },
+  {
+   "course": "l3-chim",
+   "category": "Chimie des hétérocycles",
+   "difficulty": 2,
+   "question": "Pourquoi le pyrrole est-il très peu basique ?",
+   "choices": [
+    "L'azote ne possède pas de doublet non liant",
+    "Le doublet de l'azote fait partie du sextet aromatique",
+    "Le noyau est entièrement saturé en hydrogène",
+    "L'azote est lié à trois atomes d'oxygène"
+   ],
+   "answer": "B",
+   "explanation": "Le doublet de N est délocalisé dans le cycle : le protoner détruirait l'aromaticité.",
+   "source": "Cours de licence de chimie organique, famille des manuels Clayden/McMurry",
+   "verif": "import"
+  },
+  {
+   "course": "l3-chim",
+   "category": "Chimie des hétérocycles",
+   "difficulty": 3,
+   "question": "Sur quelle position du pyrrole la substitution électrophile aromatique a-t-elle lieu préférentiellement ?",
+   "choices": [
+    "La position 3 (β)",
+    "L'azote en position 1 uniquement",
+    "Aucune : le pyrrole est inerte face aux électrophiles",
+    "La position 2 (α)"
+   ],
+   "answer": "D",
+   "explanation": "L'attaque en C2 donne un intermédiaire mieux stabilisé par résonance qu'en C3.",
+   "source": "Cours de licence de chimie organique, famille des manuels Clayden/McMurry",
+   "verif": "import"
+  },
+  {
+   "course": "l3-chim",
+   "category": "Chimie des hétérocycles",
+   "difficulty": 4,
+   "question": "La synthèse de l'indole de Fischer part de quels composés, en milieu acide ?",
+   "choices": [
+    "Une arylhydrazone d'aldéhyde ou de cétone",
+    "Une aniline et un halogénure d'alkyle",
+    "Un nitrile aromatique et un alcool",
+    "Un phénol et un chlorure d'acyle"
+   ],
+   "answer": "A",
+   "explanation": "L'arylhydrazone s'isomérise en ène-hydrazine puis subit un réarrangement [3,3] avec perte d'ammoniac.",
+   "source": "Cours de licence de chimie organique, famille des manuels Clayden/McMurry",
+   "verif": "import"
+  },
+  {
+   "course": "l3-chim",
+   "category": "Chimie des hétérocycles",
+   "difficulty": 5,
+   "question": "La synthèse de Hantzsch des dihydropyridines associe un aldéhyde, l'ammoniac et quel autre réactif ?",
+   "choices": [
+    "Deux équivalents d'halogénure d'alkyle",
+    "Un équivalent d'anhydride d'acide",
+    "Deux équivalents de β-cétoester",
+    "Un équivalent de phénol"
+   ],
+   "answer": "C",
+   "explanation": "Les deux β-cétoesters, l'aldéhyde et NH3 se condensent en 1,4-dihydropyridine.",
+   "source": "Cours de licence de chimie organique, famille des manuels Clayden/McMurry",
+   "verif": "import"
+  },
+  {
+   "course": "l3-chim",
+   "category": "Stéréosélectivité et synthèse asymétrique",
+   "difficulty": 1,
+   "question": "Quel est l'excès énantiomérique d'un mélange racémique ?",
+   "choices": [
+    "25 %",
+    "0 %",
+    "50 %",
+    "100 %"
+   ],
+   "answer": "B",
+   "explanation": "Un racémique contient autant de chaque énantiomère : l'excès énantiomérique est nul.",
+   "source": "Cours de licence de chimie organique, famille des manuels Clayden/McMurry",
+   "verif": "import"
+  },
+  {
+   "course": "l3-chim",
+   "category": "Stéréosélectivité et synthèse asymétrique",
+   "difficulty": 2,
+   "question": "Que vise une synthèse asymétrique ?",
+   "choices": [
+    "Obtenir uniquement un mélange racémique",
+    "Détruire tous les centres stéréogènes",
+    "Former exclusivement des isomères de constitution",
+    "Former un énantiomère de façon préférentielle"
+   ],
+   "answer": "D",
+   "explanation": "Elle crée un nouveau centre stéréogène avec un excès énantiomérique non nul.",
+   "source": "Cours de licence de chimie organique, famille des manuels Clayden/McMurry",
+   "verif": "import"
+  },
+  {
+   "course": "l3-chim",
+   "category": "Stéréosélectivité et synthèse asymétrique",
+   "difficulty": 3,
+   "question": "Qu'est-ce qu'un auxiliaire chiral ?",
+   "choices": [
+    "Un groupe chiral lié temporairement au substrat puis retiré",
+    "Un catalyseur chiral récupéré par filtration sans liaison",
+    "Un solvant optiquement actif utilisé en excès",
+    "Un groupe qui rend le produit définitivement racémique"
+   ],
+   "answer": "A",
+   "explanation": "L'auxiliaire oriente la stéréochimie de la réaction, puis est clivé du produit.",
+   "source": "Cours de licence de chimie organique, famille des manuels Clayden/McMurry",
+   "verif": "import"
+  },
+  {
+   "course": "l3-chim",
+   "category": "Stéréosélectivité et synthèse asymétrique",
+   "difficulty": 4,
+   "question": "Quel type de substrat l'époxydation asymétrique de Sharpless transforme-t-elle ?",
+   "choices": [
+    "Les alcènes non fonctionnalisés",
+    "Les cétones α,β-insaturées",
+    "Les alcools allyliques",
+    "Les alcynes terminaux"
+   ],
+   "answer": "C",
+   "explanation": "Elle utilise Ti(OiPr)4, un tartrate chiral et un hydroperoxyde sur des alcools allyliques.",
+   "source": "Cours de licence de chimie organique, famille des manuels Clayden/McMurry",
+   "verif": "import"
+  },
+  {
+   "course": "l3-chim",
+   "category": "Stéréosélectivité et synthèse asymétrique",
+   "difficulty": 5,
+   "question": "Pourquoi le ligand BINAP est-il chiral ?",
+   "choices": [
+    "À cause d'un carbone asymétrique central",
+    "À cause d'un plan de symétrie interne",
+    "À cause d'un atome de phosphore stéréogène",
+    "À cause de l'atropisomérie autour de l'axe binaphtyle"
+   ],
+   "answer": "D",
+   "explanation": "La rotation autour de la liaison reliant les deux naphtyles est bloquée : l'axe est stéréogène.",
+   "source": "Cours de licence de chimie organique, famille des manuels Clayden/McMurry",
+   "verif": "import"
+  },
+  {
+   "course": "l3-chim",
+   "category": "Polymères : masses molaires et propriétés",
+   "difficulty": 1,
+   "question": "Quelle masse molaire moyenne est la moyenne arithmétique des masses des chaînes, pondérée par leur nombre ?",
+   "choices": [
+    "La masse molaire moyenne en masse, Mw",
+    "La masse molaire moyenne en nombre, Mn",
+    "La masse molaire moyenne viscosimétrique, Mv",
+    "La masse molaire du monomère, M0"
+   ],
+   "answer": "B",
+   "explanation": "Mn = somme des masses divisée par le nombre de chaînes.",
+   "source": "Cours de licence de chimie des polymères, famille des manuels de science des macromolécules",
+   "verif": "import"
+  },
+  {
+   "course": "l3-chim",
+   "category": "Polymères : masses molaires et propriétés",
+   "difficulty": 1,
+   "question": "Que vaut la dispersité Đ = Mw/Mn d'un polymère dont toutes les chaînes ont exactement la même masse ?",
+   "choices": [
+    "1",
+    "0",
+    "2",
+    "0,5"
+   ],
+   "answer": "A",
+   "explanation": "Dans un échantillon parfaitement monodisperse, Mw = Mn donc Đ = 1.",
+   "source": "Cours de licence de chimie des polymères, famille des manuels de science des macromolécules",
+   "verif": "import"
+  },
+  {
+   "course": "l3-chim",
+   "category": "Polymères : masses molaires et propriétés",
+   "difficulty": 2,
+   "question": "À une température inférieure à sa Tg, dans quel état se trouve un polymère amorphe ?",
+   "choices": [
+    "Caoutchoutique, souple et élastique",
+    "Fondu, liquide très visqueux",
+    "Vitreux, rigide et cassant",
+    "Cristallin parfait, sans chaînes mobiles"
+   ],
+   "answer": "C",
+   "explanation": "Sous la température de transition vitreuse, les mouvements de segments de chaîne sont gelés.",
+   "source": "Cours de licence de chimie des polymères, famille des manuels de science des macromolécules",
+   "verif": "import"
+  },
+  {
+   "course": "l3-chim",
+   "category": "Polymères : masses molaires et propriétés",
+   "difficulty": 3,
+   "question": "Pourquoi la masse molaire moyenne en masse Mw est-elle toujours supérieure ou égale à Mn ?",
+   "choices": [
+    "Parce qu'elle ignore entièrement les chaînes les plus courtes",
+    "Parce qu'elle compte chaque chaîne une seule fois",
+    "Parce qu'elle pondère davantage les chaînes les plus longues",
+    "Parce qu'elle inclut la masse du solvant"
+   ],
+   "answer": "C",
+   "explanation": "Mw pondère par la masse, donc favorise les grandes chaînes ; l'égalité n'a lieu qu'en cas de monodispersité.",
+   "source": "Cours de licence de chimie des polymères, famille des manuels de science des macromolécules",
+   "verif": "import"
+  },
+  {
+   "course": "l3-chim",
+   "category": "Polymères : masses molaires et propriétés",
+   "difficulty": 4,
+   "question": "Quelle condition est indispensable pour obtenir un polymère de grande masse par polycondensation (polymérisation par étapes) ?",
+   "choices": [
+    "Une faible conversion, inférieure à 50 %",
+    "Un taux de conversion des fonctions très proche de 1",
+    "Un excès important d'un des monomères",
+    "La présence d'un amorceur radicalaire"
+   ],
+   "answer": "B",
+   "explanation": "L'équation de Carothers montre que le degré de polymérisation diverge quand la conversion tend vers 1.",
+   "source": "Cours de licence de chimie des polymères, famille des manuels de science des macromolécules",
+   "verif": "import"
+  },
+  {
+   "course": "l3-chim",
+   "category": "Complexes et champ cristallin",
+   "difficulty": 1,
+   "question": "Dans un complexe octaédrique, comment le champ cristallin scinde-t-il les cinq orbitales d ?",
+   "choices": [
+    "En deux orbitales t₂g et trois orbitales e_g",
+    "En quatre orbitales e et une orbitale a₁",
+    "En cinq niveaux tous distincts",
+    "En trois orbitales t₂g et deux orbitales e_g"
+   ],
+   "answer": "D",
+   "explanation": "Les t₂g (dxy, dxz, dyz) sont stabilisées ; les e_g (dz², dx²−y²) sont déstabilisées.",
+   "source": "Chimie inorganique, famille Housecroft-Sharpe / Shriver-Atkins",
+   "verif": "import"
+  },
+  {
+   "course": "l3-chim",
+   "category": "Complexes et champ cristallin",
+   "difficulty": 2,
+   "question": "Parmi ces ligands, lequel provoque le plus grand éclatement Δo selon la série spectrochimique ?",
+   "choices": [
+    "CN⁻",
+    "Cl⁻",
+    "F⁻",
+    "I⁻"
+   ],
+   "answer": "A",
+   "explanation": "CN⁻ est un ligand à champ très fort, au contraire des halogénures qui sont à champ faible.",
+   "source": "Chimie inorganique, famille Housecroft-Sharpe / Shriver-Atkins",
+   "verif": "import"
+  },
+  {
+   "course": "l3-chim",
+   "category": "Complexes et champ cristallin",
+   "difficulty": 3,
+   "question": "Combien d'électrons non appariés possède un complexe octaédrique d⁶ à champ fort (bas spin), comme [Fe(CN)₆]⁴⁻ ?",
+   "choices": [
+    "2",
+    "4",
+    "6",
+    "0"
+   ],
+   "answer": "D",
+   "explanation": "La configuration t₂g⁶ e_g⁰ est entièrement appariée.",
+   "source": "Chimie inorganique, famille Housecroft-Sharpe / Shriver-Atkins",
+   "verif": "import"
+  },
+  {
+   "course": "l3-chim",
+   "category": "Complexes et champ cristallin",
+   "difficulty": 4,
+   "question": "Quelle distorsion présente typiquement un complexe octaédrique de Cu(II), d⁹ ?",
+   "choices": [
+    "Une élongation tétragonale des liaisons axiales",
+    "Un passage spontané à un tétraèdre régulier",
+    "Une dimérisation systématique par liaison Cu–Cu",
+    "Aucune déformation, grâce à un niveau e_g symétrique"
+   ],
+   "answer": "A",
+   "explanation": "La configuration t₂g⁶ e_g³ est dégénérée de façon asymétrique : l'effet Jahn-Teller allonge les liaisons axiales.",
+   "source": "Chimie inorganique, famille Housecroft-Sharpe / Shriver-Atkins",
+   "verif": "import"
+  },
+  {
+   "course": "l3-chim",
+   "category": "Complexes et champ cristallin",
+   "difficulty": 5,
+   "question": "Pour un même ion métallique et les mêmes ligands, à quoi vaut approximativement l'éclatement tétraédrique Δt ?",
+   "choices": [
+    "9/4 de Δo",
+    "4/9 de Δo",
+    "Le double de Δo",
+    "La même valeur que Δo"
+   ],
+   "answer": "B",
+   "explanation": "Le champ tétraédrique est plus faible : Δt ≈ (4/9) Δo.",
+   "source": "Chimie inorganique, famille Housecroft-Sharpe / Shriver-Atkins",
+   "verif": "import"
+  },
+  {
+   "course": "l3-chim",
+   "category": "Chimie des solides",
+   "difficulty": 1,
+   "question": "Combien d'atomes en propre contient la maille cubique à faces centrées d'un métal ?",
+   "choices": [
+    "2",
+    "6",
+    "4",
+    "8"
+   ],
+   "answer": "C",
+   "explanation": "8 sommets × 1/8 + 6 faces × 1/2 = 4 atomes.",
+   "source": "Cours de chimie générale, famille Chang / Atkins",
+   "verif": "import"
+  },
+  {
+   "course": "l3-chim",
+   "category": "Chimie des solides",
+   "difficulty": 2,
+   "question": "Dans la structure de type NaCl, quelle est la coordinence de chaque cation ?",
+   "choices": [
+    "4",
+    "6",
+    "8",
+    "12"
+   ],
+   "answer": "B",
+   "explanation": "Chaque Na⁺ est entouré de six Cl⁻ en environnement octaédrique.",
+   "source": "Cours de chimie générale, famille Chang / Atkins",
+   "verif": "import"
+  },
+  {
+   "course": "l3-chim",
+   "category": "Chimie des solides",
+   "difficulty": 3,
+   "question": "Quelle est la compacité de l'empilement cubique à faces centrées d'atomes assimilés à des sphères dures ?",
+   "choices": [
+    "0,52",
+    "0,68",
+    "0,91",
+    "0,74"
+   ],
+   "answer": "D",
+   "explanation": "Elle vaut π/(3√2) ≈ 0,74 ; le cubique simple donne 0,52 et le cubique centré 0,68.",
+   "source": "Cours de chimie générale, famille Chang / Atkins",
+   "verif": "import"
+  },
+  {
+   "course": "l3-chim",
+   "category": "Chimie des solides",
+   "difficulty": 4,
+   "question": "Quelle structure type présente une coordinence 8 pour chacun des deux ions ?",
+   "choices": [
+    "NaCl",
+    "ZnS blende",
+    "CsCl",
+    "CaF₂"
+   ],
+   "answer": "C",
+   "explanation": "Dans CsCl, chaque ion occupe le centre d'un cube d'ions de signe opposé.",
+   "source": "Chimie inorganique, famille Housecroft-Sharpe / Shriver-Atkins",
+   "verif": "import"
+  },
+  {
+   "course": "l3-chim",
+   "category": "Chimie des solides",
+   "difficulty": 5,
+   "question": "Dans la fluorine CaF₂, quels sites du réseau cubique à faces centrées de Ca²⁺ les ions F⁻ occupent-ils ?",
+   "choices": [
+    "L'ensemble des sites tétraédriques",
+    "L'ensemble des sites octaédriques",
+    "La moitié des sites tétraédriques",
+    "Uniquement les sommets de la maille"
+   ],
+   "answer": "A",
+   "explanation": "Il y a 8 sites tétraédriques pour 4 Ca²⁺, soit 8 F⁻ par maille.",
+   "source": "Chimie inorganique, famille Housecroft-Sharpe / Shriver-Atkins",
+   "verif": "import"
+  },
+  {
+   "course": "l3-chim",
+   "category": "Électrochimie avancée",
+   "difficulty": 1,
+   "question": "Qu'appelle-t-on surtension d'une électrode ?",
+   "choices": [
+    "La différence entre les potentiels standard de deux couples",
+    "La chute ohmique dans le fil de connexion",
+    "Le potentiel de jonction entre deux solutions",
+    "L'écart entre le potentiel imposé et le potentiel d'équilibre quand un courant circule"
+   ],
+   "answer": "D",
+   "explanation": "La surtension mesure l'écart à l'équilibre nécessaire pour faire passer un courant donné.",
+   "source": "Cours de chimie physique de licence, famille Atkins",
+   "verif": "import"
+  },
+  {
+   "course": "l3-chim",
+   "category": "Électrochimie avancée",
+   "difficulty": 1,
+   "question": "Quelle équation relie la densité de courant à la surtension en cinétique électrochimique ?",
+   "choices": [
+    "L'équation de Butler-Volmer",
+    "L'équation de Nernst",
+    "L'équation de Henderson-Hasselbalch",
+    "L'équation de Clausius-Clapeyron"
+   ],
+   "answer": "A",
+   "explanation": "Butler-Volmer donne le courant en fonction de la surtension, des coefficients de transfert et du courant d'échange.",
+   "source": "Cours de chimie physique de licence, famille Atkins",
+   "verif": "import"
+  },
+  {
+   "course": "l3-chim",
+   "category": "Électrochimie avancée",
+   "difficulty": 2,
+   "question": "Quelle est la tension nominale d'un élément d'accumulateur au plomb ?",
+   "choices": [
+    "Environ 1,2 V",
+    "Environ 2 V",
+    "Environ 3,7 V",
+    "Environ 12 V"
+   ],
+   "answer": "B",
+   "explanation": "Un élément Pb/PbO₂ délivre environ 2 V ; une batterie de voiture en met six en série (12 V).",
+   "source": "Cours de chimie physique de licence, famille Atkins",
+   "verif": "import"
+  },
+  {
+   "course": "l3-chim",
+   "category": "Électrochimie avancée",
+   "difficulty": 3,
+   "question": "Lors de la charge d'un accumulateur lithium-ion, comment migrent les ions Li⁺ dans l'électrolyte ?",
+   "choices": [
+    "Du graphite vers l'oxyde de l'électrode positive",
+    "À travers le circuit électrique externe, comme les électrons",
+    "De l'électrode positive vers le graphite de l'électrode négative",
+    "Ils restent fixes dans l'électrolyte"
+   ],
+   "answer": "C",
+   "explanation": "La charge insère le lithium dans le graphite ; la décharge inverse le mouvement.",
+   "source": "Cours de chimie physique de licence, famille Atkins",
+   "verif": "import"
+  },
+  {
+   "course": "l3-chim",
+   "category": "Électrochimie avancée",
+   "difficulty": 4,
+   "question": "Quel facteur augmente le courant limite de diffusion d'une électrode plane ?",
+   "choices": [
+    "Une épaisseur plus grande de la couche de diffusion",
+    "Une agitation plus forte de la solution",
+    "Une concentration plus faible de l'espèce électroactive",
+    "L'ajout d'un électrolyte inerte très concentré"
+   ],
+   "answer": "B",
+   "explanation": "L'agitation amincit la couche de diffusion, ce qui accroît le flux de matière vers l'électrode.",
+   "source": "Cours de chimie physique de licence, famille Atkins",
+   "verif": "import"
+  },
+  {
+   "course": "l3-chim",
+   "category": "Thermodynamique statistique",
+   "difficulty": 1,
+   "question": "Quelle relation de Boltzmann relie l'entropie S au nombre de micro-états W d'un système ?",
+   "choices": [
+    "S égale k_B fois le logarithme de W",
+    "S égale k_B fois W",
+    "S égale k_B divisé par W",
+    "S égale k_B fois l'exponentielle de W"
+   ],
+   "answer": "A",
+   "explanation": "L'entropie est proportionnelle au logarithme du nombre de micro-états accessibles.",
+   "source": "Cours de chimie physique de licence, famille Atkins",
+   "verif": "import"
+  },
+  {
+   "course": "l3-chim",
+   "category": "Thermodynamique statistique",
+   "difficulty": 1,
+   "question": "Quand la température augmente, comment évolue la population relative des niveaux d'énergie élevés (distribution de Boltzmann) ?",
+   "choices": [
+    "Elle diminue",
+    "Elle reste strictement constante",
+    "Elle s'annule",
+    "Elle augmente"
+   ],
+   "answer": "D",
+   "explanation": "Le facteur exp(−E/kT) croît avec T, donc les niveaux élevés se peuplent davantage.",
+   "source": "Cours de chimie physique de licence, famille Atkins",
+   "verif": "import"
+  },
+  {
+   "course": "l3-chim",
+   "category": "Thermodynamique statistique",
+   "difficulty": 2,
+   "question": "Que mesure la fonction de partition q d'un système ?",
+   "choices": [
+    "L'énergie totale du système",
+    "La pression exercée sur les parois",
+    "Le nombre d'états thermiquement accessibles",
+    "La masse molaire moyenne des molécules"
+   ],
+   "answer": "C",
+   "explanation": "q somme les facteurs de Boltzmann sur les niveaux : elle indique combien d'états sont peuplés à T.",
+   "source": "Cours de chimie physique de licence, famille Atkins",
+   "verif": "import"
+  },
+  {
+   "course": "l3-chim",
+   "category": "Thermodynamique statistique",
+   "difficulty": 3,
+   "question": "Selon le théorème d'équipartition, à quelle énergie moyenne chaque terme quadratique de l'énergie contribue-t-il ?",
+   "choices": [
+    "kT/2",
+    "kT",
+    "3kT/2",
+    "2kT"
+   ],
+   "answer": "A",
+   "explanation": "Chaque degré de liberté quadratique en équilibre thermique apporte kT/2 par molécule.",
+   "source": "Cours de chimie physique de licence, famille Atkins",
+   "verif": "import"
+  },
+  {
+   "course": "l3-chim",
+   "category": "Thermodynamique statistique",
+   "difficulty": 4,
+   "question": "Quelle est la capacité thermique molaire à volume constant d'un gaz parfait monoatomique ?",
+   "choices": [
+    "R",
+    "3R/2",
+    "5R/2",
+    "3R"
+   ],
+   "answer": "B",
+   "explanation": "Trois degrés de liberté de translation donnent U = 3RT/2 par mole, donc Cv = 3R/2.",
+   "source": "Cours de chimie physique de licence, famille Atkins",
+   "verif": "import"
+  },
+  {
+   "course": "l3-chim",
+   "category": "Cinétique complexe",
+   "difficulty": 1,
+   "question": "Comment nomme-t-on une espèce formée puis consommée au cours d'un mécanisme, absente de l'équation globale ?",
+   "choices": [
+    "Un catalyseur",
+    "Un réactif limitant",
+    "Un produit secondaire final",
+    "Un intermédiaire réactionnel"
+   ],
+   "answer": "D",
+   "explanation": "L'intermédiaire apparaît dans le mécanisme mais ni dans les réactifs ni dans les produits.",
+   "source": "Cours de chimie physique de licence, famille Atkins",
+   "verif": "import"
+  },
+  {
+   "course": "l3-chim",
+   "category": "Cinétique complexe",
+   "difficulty": 1,
+   "question": "Dans un mécanisme en plusieurs étapes, quelle étape impose la vitesse globale ?",
+   "choices": [
+    "L'étape la plus exothermique",
+    "La première étape, toujours",
+    "L'étape la plus lente",
+    "L'étape qui forme le produit principal"
+   ],
+   "answer": "C",
+   "explanation": "L'étape cinétiquement déterminante est la plus lente de la séquence.",
+   "source": "Cours de chimie physique de licence, famille Atkins",
+   "verif": "import"
+  },
+  {
+   "course": "l3-chim",
+   "category": "Cinétique complexe",
+   "difficulty": 2,
+   "question": "Que suppose l'approximation de l'état quasi stationnaire pour un intermédiaire I ?",
+   "choices": [
+    "Sa concentration est nulle à tout instant",
+    "Sa concentration reste faible et sa dérivée par rapport au temps est négligeable",
+    "Sa concentration égale celle du réactif initial",
+    "Sa concentration croît linéairement avec le temps"
+   ],
+   "answer": "B",
+   "explanation": "On pose d[I]/dt ≈ 0 pour un intermédiaire réactif consommé aussi vite qu'il se forme.",
+   "source": "Cours de chimie physique de licence, famille Atkins",
+   "verif": "import"
+  },
+  {
+   "course": "l3-chim",
+   "category": "Cinétique complexe",
+   "difficulty": 3,
+   "question": "Dans une réaction en chaîne radicalaire, comment appelle-t-on l'étape où un radical réagit en en régénérant un autre ?",
+   "choices": [
+    "La propagation",
+    "L'amorçage",
+    "La terminaison",
+    "L'inhibition"
+   ],
+   "answer": "A",
+   "explanation": "La propagation entretient la chaîne ; l'amorçage crée les radicaux et la terminaison les détruit.",
+   "source": "Cours de chimie physique de licence, famille Atkins",
+   "verif": "import"
+  },
+  {
+   "course": "l3-chim",
+   "category": "Cinétique complexe",
+   "difficulty": 4,
+   "question": "Que prévoit le mécanisme de Lindemann pour une réaction unimoléculaire en phase gazeuse ?",
+   "choices": [
+    "Ordre 2 à haute pression et ordre 1 à basse pression",
+    "Ordre 0 à toute pression",
+    "Ordre 1 à toute pression",
+    "Ordre 1 à haute pression et ordre 2 à basse pression"
+   ],
+   "answer": "D",
+   "explanation": "À basse pression l'activation collisionnelle limite la vitesse (ordre 2) ; à haute pression, c'est la décomposition (ordre 1).",
+   "source": "Cours de chimie physique de licence, famille Atkins",
+   "verif": "import"
+  },
+  {
+   "course": "l3-chim",
+   "category": "Photochimie et réactions radicalaires",
+   "difficulty": 1,
+   "question": "Selon la loi de Stark-Einstein, l'excitation d'une molécule résulte de l'absorption de combien de photons ?",
+   "choices": [
+    "De deux photons simultanés",
+    "D'une mole entière de photons",
+    "D'un seul photon",
+    "D'un nombre quelconque, sans règle"
+   ],
+   "answer": "C",
+   "explanation": "Chaque molécule excitée absorbe un photon, dans le cadre de l'étape primaire de la photochimie.",
+   "source": "Cours de chimie physique de licence, famille Atkins",
+   "verif": "import"
+  },
+  {
+   "course": "l3-chim",
+   "category": "Photochimie et réactions radicalaires",
+   "difficulty": 1,
+   "question": "Qu'est-ce qui caractérise un radical ?",
+   "choices": [
+    "La présence d'un électron non apparié",
+    "Une charge positive portée par un atome de carbone",
+    "Un doublet non liant sur l'oxygène",
+    "Une liaison double conjuguée"
+   ],
+   "answer": "A",
+   "explanation": "Un radical possède un électron célibataire, ce qui le rend très réactif.",
+   "source": "Cours de licence de chimie organique, famille des manuels Clayden/McMurry",
+   "verif": "import"
+  },
+  {
+   "course": "l3-chim",
+   "category": "Photochimie et réactions radicalaires",
+   "difficulty": 2,
+   "question": "Que représente le rendement quantique d'une réaction photochimique ?",
+   "choices": [
+    "L'énergie du photon divisée par la masse du produit",
+    "Le nombre de photons émis par seconde par la lampe",
+    "Le nombre de molécules transformées par photon absorbé",
+    "La fraction de lumière réfléchie par l'échantillon"
+   ],
+   "answer": "C",
+   "explanation": "Φ rapporte le nombre d'événements (réactions) au nombre de photons absorbés.",
+   "source": "Cours de chimie physique de licence, famille Atkins",
+   "verif": "import"
+  },
+  {
+   "course": "l3-chim",
+   "category": "Photochimie et réactions radicalaires",
+   "difficulty": 2,
+   "question": "Qu'est-ce qui distingue la phosphorescence de la fluorescence ?",
+   "choices": [
+    "Elle implique une transition singulet → singulet, permise et très rapide",
+    "Elle ne nécessite aucune absorption préalable de lumière",
+    "Elle se produit uniquement en phase gazeuse",
+    "Elle implique une transition triplet → singulet, interdite de spin et plus lente"
+   ],
+   "answer": "D",
+   "explanation": "L'interdiction de spin allonge la durée de vie de l'état émetteur.",
+   "source": "Cours de chimie physique de licence, famille Atkins",
+   "verif": "import"
+  },
+  {
+   "course": "l3-chim",
+   "category": "Photochimie et réactions radicalaires",
+   "difficulty": 3,
+   "question": "Parmi la chloration et la bromation radicalaires des alcanes, laquelle est la plus sélective envers les liaisons C–H tertiaires ?",
+   "choices": [
+    "La chloration",
+    "La bromation",
+    "La fluoration",
+    "L'hydrogénation catalytique"
+   ],
+   "answer": "B",
+   "explanation": "Br• est moins réactif et plus sélectif, selon le postulat de Hammond (état de transition tardif).",
+   "source": "Cours de licence de chimie organique, famille des manuels Clayden/McMurry",
+   "verif": "import"
+  },
+  {
+   "course": "l3-chim",
+   "category": "Méthodes d'analyse instrumentales",
+   "difficulty": 1,
+   "question": "Selon la loi de Beer-Lambert, comment varie l'absorbance d'une solution diluée avec la concentration ?",
+   "choices": [
+    "Elle est inversement proportionnelle à la concentration",
+    "Elle est proportionnelle au carré de la concentration",
+    "Elle est proportionnelle à la concentration",
+    "Elle est indépendante de la concentration"
+   ],
+   "answer": "C",
+   "explanation": "A = ε·l·c : l'absorbance croît linéairement avec c.",
+   "source": "Cours de chimie analytique, famille Skoog",
+   "verif": "import"
+  },
+  {
+   "course": "l3-chim",
+   "category": "Méthodes d'analyse instrumentales",
+   "difficulty": 1,
+   "question": "En chromatographie, comment nomme-t-on la phase qui entraîne les solutés le long de la colonne ?",
+   "choices": [
+    "La phase stationnaire",
+    "La phase de référence",
+    "La phase greffée",
+    "La phase mobile"
+   ],
+   "answer": "D",
+   "explanation": "La phase mobile (gaz ou liquide) transporte les solutés à travers la phase stationnaire fixe.",
+   "source": "Cours de chimie analytique, famille Skoog",
+   "verif": "import"
+  },
+  {
+   "course": "l3-chim",
+   "category": "Méthodes d'analyse instrumentales",
+   "difficulty": 2,
+   "question": "En chromatographie en phase gazeuse, quelle est la nature de la phase mobile ?",
+   "choices": [
+    "Un gaz vecteur inerte (hélium, azote)",
+    "Un liquide polaire",
+    "Un solvant organique volatil",
+    "Une résine échangeuse d'ions"
+   ],
+   "answer": "A",
+   "explanation": "Le gaz vecteur transporte les analytes vaporisés sans réagir avec eux.",
+   "source": "Cours de chimie analytique, famille Skoog",
+   "verif": "import"
+  },
+  {
+   "course": "l3-chim",
+   "category": "Méthodes d'analyse instrumentales",
+   "difficulty": 2,
+   "question": "En HPLC en phase inversée, quelle est la nature de la phase stationnaire ?",
+   "choices": [
+    "Polaire (silice non greffée)",
+    "Apolaire (par exemple silice greffée C18)",
+    "Chargée (résine échangeuse d'ions)",
+    "Un gel de dextrane poreux"
+   ],
+   "answer": "B",
+   "explanation": "La phase inversée associe une phase stationnaire apolaire à une phase mobile plus polaire.",
+   "source": "Cours de chimie analytique, famille Skoog",
+   "verif": "import"
+  },
+  {
+   "course": "l3-chim",
+   "category": "Méthodes d'analyse instrumentales",
+   "difficulty": 3,
+   "question": "Quelle source de rayonnement est typiquement utilisée en spectrométrie d'absorption atomique ?",
+   "choices": [
+    "Une lampe à filament de tungstène seule",
+    "Une lampe à cathode creuse propre à l'élément dosé",
+    "Un laser à CO₂ pulsé",
+    "Une lampe à deutérium sans monochromateur"
+   ],
+   "answer": "B",
+   "explanation": "Les raies étroites de la lampe correspondent à celles de l'élément à doser, d'où la sélectivité.",
+   "source": "Cours de chimie analytique, famille Skoog",
+   "verif": "import"
+  },
+  {
+   "course": "l3-chim",
+   "category": "Incertitudes et validation des méthodes",
+   "difficulty": 1,
+   "question": "Que caractérise la justesse d'une méthode d'analyse ?",
+   "choices": [
+    "La dispersion des résultats autour de leur moyenne",
+    "La plus petite concentration détectable",
+    "L'accord entre la valeur moyenne mesurée et la valeur de référence",
+    "La rapidité d'exécution de l'analyse"
+   ],
+   "answer": "C",
+   "explanation": "Une méthode juste n'a pas de biais notable par rapport à la valeur vraie ou conventionnelle.",
+   "source": "Cours de chimie analytique, famille Skoog",
+   "verif": "import"
+  },
+  {
+   "course": "l3-chim",
+   "category": "Incertitudes et validation des méthodes",
+   "difficulty": 1,
+   "question": "Que traduit la fidélité (répétabilité) d'une mesure ?",
+   "choices": [
+    "L'absence totale de biais par rapport à la valeur vraie",
+    "La linéarité de la courbe d'étalonnage",
+    "La sélectivité vis-à-vis des interférents",
+    "La faible dispersion de mesures répétées dans les mêmes conditions"
+   ],
+   "answer": "D",
+   "explanation": "La répétabilité se quantifie par l'écart-type de mesures successives faites dans des conditions identiques.",
+   "source": "Cours de chimie analytique, famille Skoog",
+   "verif": "import"
+  },
+  {
+   "course": "l3-chim",
+   "category": "Incertitudes et validation des méthodes",
+   "difficulty": 2,
+   "question": "Que représente la limite de détection d'une méthode analytique ?",
+   "choices": [
+    "La plus petite quantité détectable, sans être forcément quantifiable avec exactitude",
+    "La plus grande concentration mesurable sans dilution",
+    "L'écart entre deux étalons consécutifs",
+    "La concentration donnant 100 % de la réponse maximale"
+   ],
+   "answer": "A",
+   "explanation": "Elle se situe en dessous de la limite de quantification, qui exige une exactitude acceptable.",
+   "source": "Cours de chimie analytique, famille Skoog",
+   "verif": "import"
+  },
+  {
+   "course": "l3-chim",
+   "category": "Incertitudes et validation des méthodes",
+   "difficulty": 2,
+   "question": "Quel est l'écart-type de la moyenne de n mesures indépendantes d'écart-type s ?",
+   "choices": [
+    "s divisé par n",
+    "s multiplié par la racine de n",
+    "s divisé par n au carré",
+    "s divisé par la racine de n"
+   ],
+   "answer": "D",
+   "explanation": "L'incertitude sur la moyenne décroît en 1/√n quand on multiplie les mesures.",
+   "source": "Cours de chimie analytique, famille Skoog",
+   "verif": "import"
+  },
+  {
+   "course": "l3-chim",
+   "category": "Incertitudes et validation des méthodes",
+   "difficulty": 3,
+   "question": "Quelle propriété distingue une erreur systématique d'une erreur aléatoire ?",
+   "choices": [
+    "Elle varie au hasard et se compense en moyennant",
+    "Elle ne dépend jamais de l'instrument ni de l'opérateur",
+    "Elle fausse les résultats dans le même sens et ne diminue pas en répétant la mesure",
+    "Elle disparaît toujours quand on augmente le nombre de mesures"
+   ],
+   "answer": "C",
+   "explanation": "Un biais constant n'est pas réduit par la répétition ; il faut étalonner ou corriger la méthode.",
+   "source": "Cours de chimie analytique, famille Skoog",
+   "verif": "import"
+  },
+  {
+   "course": "l3-chim",
+   "category": "Pollution de l'eau et de l'air",
+   "difficulty": 1,
+   "question": "L'eutrophisation d'un lac est favorisée par un apport excessif de quelles espèces ?",
+   "choices": [
+    "Chlorure de sodium",
+    "Nitrates et phosphates",
+    "Dioxygène dissous",
+    "Dioxyde de carbone atmosphérique"
+   ],
+   "answer": "B",
+   "explanation": "Ces nutriments provoquent une prolifération d'algues puis un déficit en oxygène.",
+   "source": "Cours de chimie de l'environnement de licence, famille des manuels de chimie de l'environnement",
+   "verif": "import"
+  },
+  {
+   "course": "l3-chim",
+   "category": "Pollution de l'eau et de l'air",
+   "difficulty": 1,
+   "question": "Que mesure la demande biochimique en oxygène (DBO) d'une eau ?",
+   "choices": [
+    "L'oxygène consommé par des micro-organismes pour dégrader la matière organique",
+    "La teneur en oxygène dissous à saturation",
+    "La masse de matières en suspension",
+    "La concentration en ions nitrate"
+   ],
+   "answer": "A",
+   "explanation": "Plus la DBO est élevée, plus l'eau est chargée en matière organique biodégradable.",
+   "source": "Cours de chimie de l'environnement de licence, famille des manuels de chimie de l'environnement",
+   "verif": "import"
+  },
+  {
+   "course": "l3-chim",
+   "category": "Pollution de l'eau et de l'air",
+   "difficulty": 2,
+   "question": "Quels polluants gazeux sont principalement responsables des pluies acides ?",
+   "choices": [
+    "Les oxydes de soufre et d'azote",
+    "Le dioxyde de carbone et le méthane",
+    "L'ozone et l'argon",
+    "Le monoxyde de carbone et l'hélium"
+   ],
+   "answer": "A",
+   "explanation": "SO₂ et NOx s'oxydent dans l'atmosphère en acides sulfurique et nitrique.",
+   "source": "Cours de chimie de l'environnement de licence, famille des manuels de chimie de l'environnement",
+   "verif": "import"
+  },
+  {
+   "course": "l3-chim",
+   "category": "Pollution de l'eau et de l'air",
+   "difficulty": 2,
+   "question": "Quelles substances ont provoqué l'amincissement de la couche d'ozone stratosphérique ?",
+   "choices": [
+    "Le dioxyde de soufre",
+    "Les chlorofluorocarbures (CFC)",
+    "Le monoxyde de carbone",
+    "Le diazote"
+   ],
+   "answer": "B",
+   "explanation": "Les atomes de chlore libérés des CFC par photolyse catalysent la destruction de l'ozone.",
+   "source": "Cours de chimie de l'environnement de licence, famille des manuels de chimie de l'environnement",
+   "verif": "import"
+  },
+  {
+   "course": "l3-chim",
+   "category": "Pollution de l'eau et de l'air",
+   "difficulty": 3,
+   "question": "Comment se forme l'ozone troposphérique du smog photochimique ?",
+   "choices": [
+    "Par électrolyse de l'eau de pluie",
+    "Par réaction de CO₂ avec N₂ à froid",
+    "Par dissolution de l'ozone stratosphérique dans les nuages",
+    "À partir d'oxydes d'azote et de composés organiques volatils sous rayonnement UV"
+   ],
+   "answer": "D",
+   "explanation": "La photolyse de NO₂ libère des atomes d'oxygène qui forment O₃ ; les COV entretiennent le cycle.",
+   "source": "Cours de chimie de l'environnement de licence, famille des manuels de chimie de l'environnement",
+   "verif": "import"
+  },
+  {
+   "course": "l3-chim",
+   "category": "Traitement et potabilisation des eaux",
+   "difficulty": 1,
+   "question": "Quel réactif oxydant est couramment utilisé pour désinfecter l'eau potable ?",
+   "choices": [
+    "Le chlorure de sodium",
+    "Le sulfate de calcium",
+    "Le chlore (ou l'hypochlorite)",
+    "Le carbonate de potassium"
+   ],
+   "answer": "C",
+   "explanation": "Le chlore et l'hypochlorite détruisent les micro-organismes et laissent un désinfectant résiduel.",
+   "source": "Cours de chimie de l'environnement de licence, famille des manuels de chimie de l'environnement",
+   "verif": "import"
+  },
+  {
+   "course": "l3-chim",
+   "category": "Traitement et potabilisation des eaux",
+   "difficulty": 1,
+   "question": "Quel sel est classiquement employé comme coagulant en traitement des eaux ?",
+   "choices": [
+    "Le chlorure de sodium",
+    "Le nitrate de potassium",
+    "Le carbonate de calcium",
+    "Le sulfate d'aluminium"
+   ],
+   "answer": "D",
+   "explanation": "Les ions Al³⁺ neutralisent les colloïdes et forment des flocs hydroxylés qui décantent.",
+   "source": "Cours de chimie de l'environnement de licence, famille des manuels de chimie de l'environnement",
+   "verif": "import"
+  },
+  {
+   "course": "l3-chim",
+   "category": "Traitement et potabilisation des eaux",
+   "difficulty": 2,
+   "question": "À quels ions la dureté d'une eau est-elle principalement due ?",
+   "choices": [
+    "Na⁺ et K⁺",
+    "Ca²⁺ et Mg²⁺",
+    "Cl⁻ et SO₄²⁻",
+    "Fe³⁺ et Mn²⁺"
+   ],
+   "answer": "B",
+   "explanation": "La dureté totale correspond à la teneur en calcium et magnésium dissous.",
+   "source": "Cours de chimie de l'environnement de licence, famille des manuels de chimie de l'environnement",
+   "verif": "import"
+  },
+  {
+   "course": "l3-chim",
+   "category": "Traitement et potabilisation des eaux",
+   "difficulty": 2,
+   "question": "Par quel phénomène le charbon actif retire-t-il des micropolluants de l'eau ?",
+   "choices": [
+    "La précipitation sous forme d'hydroxydes",
+    "L'oxydation par le dioxygène dissous",
+    "L'adsorption à sa surface poreuse",
+    "La distillation azéotropique"
+   ],
+   "answer": "C",
+   "explanation": "Sa grande surface spécifique retient les molécules organiques par adsorption.",
+   "source": "Cours de chimie de l'environnement de licence, famille des manuels de chimie de l'environnement",
+   "verif": "import"
+  },
+  {
+   "course": "l3-chim",
+   "category": "Traitement et potabilisation des eaux",
+   "difficulty": 3,
+   "question": "Dans une filière classique de potabilisation d'une eau de surface, quel ordre de traitement est correct ?",
+   "choices": [
+    "Coagulation-floculation, décantation, filtration, désinfection",
+    "Désinfection, filtration, décantation, coagulation-floculation",
+    "Filtration, désinfection, coagulation-floculation, décantation",
+    "Décantation, désinfection, coagulation-floculation, filtration"
+   ],
+   "answer": "A",
+   "explanation": "On élimine d'abord les particules, puis on désinfecte l'eau clarifiée.",
+   "source": "Cours de chimie de l'environnement de licence, famille des manuels de chimie de l'environnement",
+   "verif": "import"
+  },
+  {
+   "course": "l3-chim",
+   "category": "Substances naturelles et plantes médicinales",
+   "difficulty": 1,
+   "question": "Que contiennent les alcaloïdes, composés d'origine naturelle souvent actifs sur l'organisme ?",
+   "choices": [
+    "Au moins un atome de soufre acide",
+    "Un noyau benzénique et un groupe phénol",
+    "Uniquement du carbone et de l'hydrogène",
+    "Au moins un atome d'azote, souvent basique"
+   ],
+   "answer": "D",
+   "explanation": "Les alcaloïdes sont des composés azotés, généralement basiques, d'origine végétale surtout.",
+   "source": "Cours de pharmacognosie et de chimie des substances naturelles de licence",
+   "verif": "import"
+  },
+  {
+   "course": "l3-chim",
+   "category": "Substances naturelles et plantes médicinales",
+   "difficulty": 1,
+   "question": "Quelle technique extrait classiquement les huiles essentielles d'une plante aromatique ?",
+   "choices": [
+    "L'entraînement à la vapeur d'eau (hydrodistillation)",
+    "La saponification en milieu basique",
+    "La cristallisation fractionnée à froid",
+    "La chromatographie échangeuse d'ions"
+   ],
+   "answer": "A",
+   "explanation": "Les composés volatils sont entraînés par la vapeur puis condensés et séparés de l'eau.",
+   "source": "Cours de pharmacognosie et de chimie des substances naturelles de licence",
+   "verif": "import"
+  },
+  {
+   "course": "l3-chim",
+   "category": "Substances naturelles et plantes médicinales",
+   "difficulty": 2,
+   "question": "De quelle écorce extrait-on la quinine, alcaloïde antipaludique historique ?",
+   "choices": [
+    "Le saule (Salix)",
+    "Le quinquina (Cinchona)",
+    "Le caféier (Coffea)",
+    "Le pavot (Papaver)"
+   ],
+   "answer": "B",
+   "explanation": "La quinine provient de l'écorce du quinquina ; le saule fournit la salicine et le pavot la morphine.",
+   "source": "Cours de pharmacognosie et de chimie des substances naturelles de licence",
+   "verif": "import"
+  },
+  {
+   "course": "l3-chim",
+   "category": "Substances naturelles et plantes médicinales",
+   "difficulty": 2,
+   "question": "Quelle unité de base à cinq atomes de carbone constitue les terpénoïdes ?",
+   "choices": [
+    "L'acétate (éthanoate)",
+    "Le glucose",
+    "L'isoprène (2-méthylbuta-1,3-diène)",
+    "Le styrène"
+   ],
+   "answer": "C",
+   "explanation": "Les terpénoïdes sont des multiples de l'unité isoprène C₅ (règle isoprénique).",
+   "source": "Cours de pharmacognosie et de chimie des substances naturelles de licence",
+   "verif": "import"
+  },
+  {
+   "course": "l3-chim",
+   "category": "Substances naturelles et plantes médicinales",
+   "difficulty": 3,
+   "question": "Le réactif de Dragendorff est utilisé en criblage phytochimique pour mettre en évidence quelle famille de composés ?",
+   "choices": [
+    "Les tanins",
+    "Les saponines",
+    "Les flavonoïdes",
+    "Les alcaloïdes"
+   ],
+   "answer": "D",
+   "explanation": "Il donne un précipité orangé avec les alcaloïdes ; d'autres tests ciblent les tanins ou les saponines.",
+   "source": "Cours de pharmacognosie et de chimie des substances naturelles de licence",
+   "verif": "import"
+  },
+  {
+   "course": "l3-chim",
+   "category": "Chimie agroalimentaire et conservation",
+   "difficulty": 1,
+   "question": "Quelle réaction entre sucres réducteurs et acides aminés est responsable du brunissement et des arômes de la croûte du pain ?",
+   "choices": [
+    "La réaction de Maillard",
+    "La saponification",
+    "La fermentation alcoolique",
+    "La photosynthèse"
+   ],
+   "answer": "A",
+   "explanation": "La réaction de Maillard produit des mélanoïdines colorées et des composés aromatiques à la cuisson.",
+   "source": "Cours de chimie des aliments de licence, famille des manuels de science des aliments",
+   "verif": "import"
+  },
+  {
+   "course": "l3-chim",
+   "category": "Chimie agroalimentaire et conservation",
+   "difficulty": 1,
+   "question": "Comment le séchage conserve-t-il un aliment ?",
+   "choices": [
+    "En augmentant l'activité de l'eau pour diluer les germes",
+    "En abaissant l'activité de l'eau, ce qui freine les micro-organismes",
+    "En élevant le pH au-dessus de 10",
+    "En enrichissant l'aliment en dioxygène"
+   ],
+   "answer": "B",
+   "explanation": "Les micro-organismes ont besoin d'eau disponible ; sa réduction bloque leur développement.",
+   "source": "Cours de chimie des aliments de licence, famille des manuels de science des aliments",
+   "verif": "import"
+  },
+  {
+   "course": "l3-chim",
+   "category": "Chimie agroalimentaire et conservation",
+   "difficulty": 2,
+   "question": "Quels constituants d'un aliment subissent le rancissement oxydatif ?",
+   "choices": [
+    "Les sucres réducteurs",
+    "Les sels minéraux",
+    "Les lipides insaturés",
+    "Les fibres cellulosiques"
+   ],
+   "answer": "C",
+   "explanation": "Les doubles liaisons des acides gras insaturés sont attaquées par le dioxygène, formant des composés malodorants.",
+   "source": "Cours de chimie des aliments de licence, famille des manuels de science des aliments",
+   "verif": "import"
+  },
+  {
+   "course": "l3-chim",
+   "category": "Chimie agroalimentaire et conservation",
+   "difficulty": 2,
+   "question": "En quoi consiste la pasteurisation ?",
+   "choices": [
+    "Un chauffage extrême détruisant toutes les spores",
+    "Une congélation prolongée à très basse température",
+    "Une irradiation systématique par rayons X",
+    "Un chauffage modéré qui détruit la plupart des germes pathogènes"
+   ],
+   "answer": "D",
+   "explanation": "La pasteurisation réduit la flore sans stériliser complètement l'aliment.",
+   "source": "Cours de chimie des aliments de licence, famille des manuels de science des aliments",
+   "verif": "import"
+  },
+  {
+   "course": "l3-chim",
+   "category": "Chimie agroalimentaire et conservation",
+   "difficulty": 3,
+   "question": "Comment la fermentation lactique contribue-t-elle à la conservation ?",
+   "choices": [
+    "Elle produit de l'acide lactique, qui abaisse le pH",
+    "Elle produit de l'éthanol, qui élève le pH",
+    "Elle transforme les protéines en sucres simples",
+    "Elle consomme tout le dioxygène en formant du CO₂ seul"
+   ],
+   "answer": "A",
+   "explanation": "Un pH bas limite le développement de nombreux micro-organismes d'altération.",
+   "source": "Cours de chimie des aliments de licence, famille des manuels de science des aliments",
+   "verif": "import"
+  },
+  {
+   "course": "l3-chim",
+   "category": "Chimie industrielle",
+   "difficulty": 1,
+   "question": "Quel produit est synthétisé directement à partir du diazote et du dihydrogène par le procédé Haber-Bosch ?",
+   "choices": [
+    "L'acide nitrique",
+    "L'ammoniac",
+    "L'urée",
+    "Le nitrate d'ammonium"
+   ],
+   "answer": "B",
+   "explanation": "N₂ + 3 H₂ ⇌ 2 NH₃ sur catalyseur de fer ; les autres produits en dérivent.",
+   "source": "Cours de chimie industrielle de licence, famille des manuels de chimie industrielle",
+   "verif": "import"
+  },
+  {
+   "course": "l3-chim",
+   "category": "Chimie industrielle",
+   "difficulty": 2,
+   "question": "Quel procédé produit l'acide nitrique par oxydation catalytique de l'ammoniac ?",
+   "choices": [
+    "Le procédé Solvay",
+    "Le procédé Haber-Bosch",
+    "Le procédé Ostwald",
+    "Le procédé de contact"
+   ],
+   "answer": "C",
+   "explanation": "L'ammoniac est oxydé en NO sur platine-rhodium, puis en NO₂ absorbé dans l'eau.",
+   "source": "Cours de chimie industrielle de licence, famille des manuels de chimie industrielle",
+   "verif": "import"
+  },
+  {
+   "course": "l3-chim",
+   "category": "Chimie industrielle",
+   "difficulty": 2,
+   "question": "Quelles matières premières sont cuites à très haute température pour obtenir le clinker du ciment Portland ?",
+   "choices": [
+    "Du sable pur et de la soude",
+    "Du gypse pur et du sel",
+    "Du minerai de fer et du coke",
+    "Un mélange de calcaire et d'argile"
+   ],
+   "answer": "D",
+   "explanation": "Le clinker résulte de la cuisson d'un mélange calcaire-argile ; le gypse est ajouté ensuite au broyage.",
+   "source": "Cours de chimie industrielle de licence, famille des manuels de chimie industrielle",
+   "verif": "import"
+  },
+  {
+   "course": "l3-chim",
+   "category": "Chimie industrielle",
+   "difficulty": 2,
+   "question": "Que réalise le craquage catalytique en raffinage du pétrole ?",
+   "choices": [
+    "La conversion de coupes lourdes en molécules plus légères",
+    "La séparation des coupes par volatilité",
+    "L'assemblage de petites molécules en polymères",
+    "L'élimination du soufre par simple lavage"
+   ],
+   "answer": "A",
+   "explanation": "Le craquage casse les longues chaînes en fractions plus légères, comme l'essence.",
+   "source": "Cours de chimie industrielle de licence, famille des manuels de chimie industrielle",
+   "verif": "import"
+  },
+  {
+   "course": "l3-chim",
+   "category": "Chimie industrielle",
+   "difficulty": 3,
+   "question": "Quel catalyseur est classiquement utilisé pour oxyder SO₂ en SO₃ dans la fabrication de l'acide sulfurique ?",
+   "choices": [
+    "Le fer promu par K₂O",
+    "Le pentoxyde de divanadium V₂O₅",
+    "Le platine-rhodium en toiles",
+    "Le nickel de Raney"
+   ],
+   "answer": "B",
+   "explanation": "Le procédé de contact emploie V₂O₅ ; le fer sert à l'ammoniac et Pt-Rh à l'acide nitrique.",
+   "source": "Cours de chimie industrielle de licence, famille des manuels de chimie industrielle",
+   "verif": "import"
+  },
+  {
+   "course": "l3-chim",
+   "category": "Chimie verte et développement durable",
+   "difficulty": 1,
+   "question": "Quel est l'objectif général de la chimie verte ?",
+   "choices": [
+    "Supprimer toute activité de l'industrie chimique",
+    "Maximiser uniquement le rendement économique",
+    "Concevoir des procédés qui réduisent ou suppriment les substances dangereuses",
+    "Interdire l'usage de tout solvant"
+   ],
+   "answer": "C",
+   "explanation": "Elle cherche à prévenir la pollution dès la conception des produits et procédés.",
+   "source": "Principes de la chimie verte (Anastas et Warner), cours de chimie durable",
+   "verif": "import"
+  },
+  {
+   "course": "l3-chim",
+   "category": "Chimie verte et développement durable",
+   "difficulty": 2,
+   "question": "Comment définit-on l'économie d'atomes d'une réaction ?",
+   "choices": [
+    "Rapport de la masse de déchets à la masse de produit",
+    "Rapport de la masse molaire du produit désiré à la somme des masses molaires des réactifs",
+    "Rapport de la quantité de produit obtenue à la quantité théorique",
+    "Rapport du nombre d'étapes au nombre de réactifs"
+   ],
+   "answer": "B",
+   "explanation": "L'économie d'atomes mesure la part des atomes des réactifs qui se retrouvent dans le produit désiré.",
+   "source": "Principes de la chimie verte (Anastas et Warner), cours de chimie durable",
+   "verif": "import"
+  },
+  {
+   "course": "l3-chim",
+   "category": "Chimie verte et développement durable",
+   "difficulty": 2,
+   "question": "Que quantifie le facteur E (facteur environnemental) de Sheldon ?",
+   "choices": [
+    "La masse de produit obtenue par litre de solvant",
+    "La consommation d'énergie par mole de produit",
+    "La masse de déchets produite par masse de produit obtenu",
+    "Le rendement massique du catalyseur"
+   ],
+   "answer": "C",
+   "explanation": "Plus E est élevé, plus le procédé est producteur de déchets.",
+   "source": "Principes de la chimie verte (Anastas et Warner), cours de chimie durable",
+   "verif": "import"
+  },
+  {
+   "course": "l3-chim",
+   "category": "Chimie verte et développement durable",
+   "difficulty": 2,
+   "question": "Lequel de ces solvants est généralement considéré comme un solvant vert ?",
+   "choices": [
+    "L'eau",
+    "Le tétrachlorométhane",
+    "Le benzène",
+    "Le chloroforme"
+   ],
+   "answer": "A",
+   "explanation": "L'eau est non toxique, non inflammable et peu coûteuse, contrairement aux solvants chlorés ou au benzène.",
+   "source": "Principes de la chimie verte (Anastas et Warner), cours de chimie durable",
+   "verif": "import"
+  },
+  {
+   "course": "l3-chim",
+   "category": "Chimie verte et développement durable",
+   "difficulty": 3,
+   "question": "Quel type de réaction présente en principe une économie d'atomes de 100 % ?",
+   "choices": [
+    "La substitution nucléophile",
+    "L'élimination (par exemple la déshydratation d'un alcool)",
+    "La réaction de Wittig",
+    "L'addition (par exemple une cycloaddition de Diels-Alder)"
+   ],
+   "answer": "D",
+   "explanation": "Dans une addition, tous les atomes des réactifs se retrouvent dans le produit.",
+   "source": "Principes de la chimie verte (Anastas et Warner), cours de chimie durable",
+   "verif": "import"
+  },
+  {
+   "course": "l3-chim",
+   "category": "Sécurité chimique et gestion des déchets",
+   "difficulty": 1,
+   "question": "Que signale le pictogramme SGH représentant une flamme ?",
+   "choices": [
+    "Un produit corrosif",
+    "Un produit inflammable",
+    "Un produit toxique aigu",
+    "Un danger pour l'environnement aquatique"
+   ],
+   "answer": "B",
+   "explanation": "La flamme du SGH indique un produit inflammable ou pyrophorique ou auto-échauffant.",
+   "source": "Cours de sécurité au laboratoire de chimie et système général harmonisé (SGH)",
+   "verif": "import"
+  },
+  {
+   "course": "l3-chim",
+   "category": "Sécurité chimique et gestion des déchets",
+   "difficulty": 2,
+   "question": "Comment appelle-t-on le document normalisé décrivant les dangers et les précautions d'un produit chimique ?",
+   "choices": [
+    "La fiche de données de sécurité (FDS)",
+    "Le certificat d'analyse",
+    "La notice de calibrage",
+    "Le bordereau de livraison"
+   ],
+   "answer": "A",
+   "explanation": "La FDS fournit identification des dangers, premiers secours, stockage et élimination.",
+   "source": "Cours de sécurité au laboratoire de chimie et système général harmonisé (SGH)",
+   "verif": "import"
+  },
+  {
+   "course": "l3-chim",
+   "category": "Sécurité chimique et gestion des déchets",
+   "difficulty": 2,
+   "question": "Quel gaz toxique se dégage en mélangeant de l'eau de Javel et un acide fort ?",
+   "choices": [
+    "Le dioxyde de carbone",
+    "Le dihydrogène",
+    "Le dichlore Cl₂",
+    "L'ammoniac"
+   ],
+   "answer": "C",
+   "explanation": "ClO⁻ + Cl⁻ + 2 H⁺ → Cl₂ + H₂O : ne jamais mélanger eau de Javel et acide.",
+   "source": "Cours de sécurité au laboratoire de chimie et système général harmonisé (SGH)",
+   "verif": "import"
+  },
+  {
+   "course": "l3-chim",
+   "category": "Sécurité chimique et gestion des déchets",
+   "difficulty": 2,
+   "question": "Pourquoi sépare-t-on les solvants halogénés des autres solvants usagés ?",
+   "choices": [
+    "Ils peuvent être rejetés à l'évier après dilution",
+    "Ils sont toujours solubles dans l'eau",
+    "Ils ne présentent aucun danger pour la santé",
+    "Leur élimination par incinération exige un traitement spécifique"
+   ],
+   "answer": "D",
+   "explanation": "Leur combustion libère des gaz acides (HCl) nécessitant un traitement des fumées.",
+   "source": "Cours de sécurité au laboratoire de chimie et système général harmonisé (SGH)",
+   "verif": "import"
+  },
+  {
+   "course": "l3-chim",
+   "category": "Sécurité chimique et gestion des déchets",
+   "difficulty": 3,
+   "question": "Quelle règle de sécurité applique-t-on pour diluer un acide concentré ?",
+   "choices": [
+    "Verser l'eau dans l'acide, en une seule fois",
+    "Verser l'acide dans l'eau, lentement, en agitant",
+    "Mélanger les deux d'un seul coup sans agiter",
+    "Chauffer l'acide avant d'ajouter l'eau"
+   ],
+   "answer": "B",
+   "explanation": "La dilution dégage beaucoup de chaleur : on ajoute l'acide à l'eau pour éviter les projections.",
+   "source": "Cours de sécurité au laboratoire de chimie et système général harmonisé (SGH)",
+   "verif": "import"
+  }
+ ]
+}
