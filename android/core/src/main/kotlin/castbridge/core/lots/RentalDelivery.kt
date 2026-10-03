@@ -60,14 +60,24 @@ data class RentalDeliveryReport(val results: List<LotDeliveryResult>, val summar
 
 /** What the TV says about its rentals (GET /api/rental), in the words of the phone screen. */
 data class TvRentalView(val reachable: Boolean, val superUnlimited: Boolean, val rentals: List<Rental>, val error: String? = null) {
-    data class Rental(val contract: String, val product: String, val state: String, val usable: Boolean, val remainingMs: Long?, val message: String, val lots: List<String>)
+    data class Rental(val contract: String, val product: String, val state: String, val usable: Boolean, val remainingMs: Long?, val message: String, val lots: List<String>,
+        val unit: String? = null, val usedMinutes: Long? = null, val maxUsageMinutes: Long? = null, val remainingUsageMinutes: Long? = null, val reason: String? = null, val period: Long? = null, val endsAt: Long? = null)
     fun find(contract: String) = rentals.firstOrNull { it.contract == contract }
-    fun lines(): List<String> = when {
+    fun lines(zone: java.time.ZoneId = java.time.ZoneId.systemDefault()): List<String> = when {
         !reachable -> listOf(error ?: "La TV n'est pas joignable.")
         rentals.isEmpty() -> listOf("Aucune location sur cette TV." + if (superUnlimited) " (droit illimité actif)" else "")
-        else -> rentals.map { "${it.product} : ${it.message.ifBlank { it.state }} - ${it.lots.size} lot(s) sur la TV" } + if (superUnlimited) listOf("Droit illimité actif : aucune location ne se termine.") else emptyList()
+        else -> rentals.map { r ->
+            val left = r.remainingUsageMinutes; val max = r.maxUsageMinutes; val end = r.endsAt
+            if (r.unit == "hours" && r.usable && left != null && max != null && max > 0 && end != null)
+                "${r.product} : ${RentalUsageReport.span(left)} d'utilisation restante(s) sur ${RentalUsageReport.span(max)} · à utiliser avant le " +
+                    java.time.format.DateTimeFormatter.ofPattern("dd/MM").withZone(zone).format(java.time.Instant.ofEpochMilli(end))
+            else "${r.product} : ${r.message.ifBlank { r.state }} - ${r.lots.size} lot(s) sur la TV"
+        } + if (superUnlimited) listOf("Droit illimité actif : aucune location ne se termine.") else emptyList()
     }
 }
+
+/** The answer of [RentalDelivery.usage]: the statement, or null and a French [message] saying why. */
+data class TvUsageResult(val report: RentalUsageReport.Report?, val message: String?)
 
 /**
  * Delivers rented lots from the phone to the TV (the TV stays OFFLINE; everything comes from the phone). Per lot: skip it if the contract has ended, skip it if the TV already holds it
@@ -83,12 +93,24 @@ class RentalDelivery(private val tv: TvTransport) {
             val o = JsonLite.obj(r.json)
             val rentals = (o["rentals"] as? List<*>).orEmpty().mapNotNull { it as? Map<*, *> }.map { m ->
                 TvRentalView.Rental(m["contract"] as? String ?: "", m["product"] as? String ?: "", m["state"] as? String ?: "", m["usable"] == true,
-                    (m["remainingMs"] as? Number)?.toLong(), m["message"] as? String ?: "", (m["lots"] as? List<*>).orEmpty().map { it.toString() })
+                    (m["remainingMs"] as? Number)?.toLong(), m["message"] as? String ?: "", (m["lots"] as? List<*>).orEmpty().map { it.toString() },
+                    m["unit"] as? String, (m["usedMinutes"] as? Number)?.toLong(), (m["maxUsageMinutes"] as? Number)?.toLong(), (m["remainingUsageMinutes"] as? Number)?.toLong(),
+                    m["reason"] as? String, (m["period"] as? Number)?.toLong(), (m["endsAt"] as? Number)?.toLong())
             }
             TvRentalView(true, o["superUnlimited"] == true, rentals)
         }
     } catch (e: IOException) { TvRentalView(false, false, emptyList(), "La TV n'est pas à portée.") }
     catch (e: Exception) { TvRentalView(false, false, emptyList(), "Réponse illisible de la TV.") }
+
+    /** The TV's usage statement (GET /api/rental/usage), parsed. An old TV has no such route (404): [TvUsageResult.message] then asks to update CastBridge-TV. */
+    fun usage(): TvUsageResult = try {
+        val r = tv.call("GET", "/api/rental/usage", emptyMap(), null)
+        when {
+            r.status == 404 -> TvUsageResult(null, "cette TV ne fournit pas de relevé : mettez CastBridge-TV à jour")
+            r.status != 200 -> TvUsageResult(null, "La TV refuse de donner le relevé (${reason(r)}).")
+            else -> RentalUsageReport.parse(r.json)?.let { TvUsageResult(it, null) } ?: TvUsageResult(null, "Relevé illisible de la TV.")
+        }
+    } catch (e: IOException) { TvUsageResult(null, "La TV n'est pas à portée.") }
 
     /** Lots the TV holds, read from its manifest; null if it cannot be read (then nothing is skipped as already held). */
     private fun held(): TvManifest? = try { tv.call("GET", "/api/lots", emptyMap(), null).takeIf { it.status == 200 }?.let { TvManifest.parse(it.json) } } catch (e: IOException) { null }
