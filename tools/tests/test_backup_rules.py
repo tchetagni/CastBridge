@@ -7,7 +7,7 @@ ROOT = Path(__file__).resolve().parents[2] / "android"
 ANDROID = "{http://schemas.android.com/apk/res/android}"
 
 RECEIVER = [("file", p) for p in ("activations.txt", "activations.txt.bak", "clock.txt", "grace_prompt.txt",
-                                  "rental/", "lots/", "learn/", "ssh/", "policy/", "tunnel/")] + \
+                                  "rental/", "lots/", "learn/", "ssh/", "policy/", "tunnel/", "content-index.key", "content-index.key.tmp")] + \
            [("sharedpref", "castbridge_tv.xml"), ("sharedpref", "castbridge_parental_reports.xml"),
             ("file", "trusted_phones.txt")]
 SENDER = [("file", "owner-vault.txt"), ("sharedpref", "owner_guard.xml"), ("sharedpref", "castbridge_trust.xml"), ("sharedpref", "castbridge_pins.xml"),
