@@ -24,6 +24,12 @@ class RentalLedger(private val dir: File, val clock: TvClock = TvClock(), val co
     class Rec(var used: Long = 0, var phase: RentalPhase = RentalPhase.LIVE, var reason: ExpiryReason? = null, var expiredAt: Long = 0,
               val lots: LinkedHashSet<String> = LinkedHashSet(), val removed: LinkedHashSet<String> = LinkedHashSet())
 
+    private companion object {
+        val INSTALL_ID = Regex("^[0-9a-f]{16}$")
+        const val MINUTE_MS = 60_000L
+        const val GUARD_SLACK_MS = 10 * MINUTE_MS
+    }
+
     private val lock = Any()
     private val recs = LinkedHashMap<String, Rec>()
     private val log = ArrayList<RentalLogEntry>()
@@ -137,14 +143,62 @@ class RentalLedger(private val dir: File, val clock: TvClock = TvClock(), val co
     fun recordUsage(lot: LotId, minutes: Int, all: List<Activation>): List<RentalStatus> = synchronized(lock) {
         require(minutes in 0..24 * 60)
         val before = status(all)
-        val target = before.filter { RentalLogic.covers(it, lot, recs) && (it.usable || it.state == RentalState.SUSPENDED) }.minByOrNull { it.contract.endsAt }
+        // a USABLE day contract covering the lot only measures the minutes and the hourly budget is NOT touched (the customer does not burn hours under a day pass); otherwise the
+        // contract that ends first. What exceeds a budget is dropped (never carried to another contract).
+        val covering = before.filter { RentalLogic.covers(it, lot, recs) && (it.usable || it.state == RentalState.SUSPENDED) }
+        val target = covering.filter { it.usable && it.contract.unit == RentalUnit.DAYS }.minByOrNull { it.contract.endsAt } ?: covering.minByOrNull { it.contract.endsAt }
         if (target != null && minutes > 0) {
             val r = recs.getOrPut(target.key) { Rec() }
-            r.used += minutes
+            val budget = target.contract.maxUsageMinutes
+            r.used = if (budget > 0) minOf(r.used + minutes, maxOf(budget, r.used)) else r.used + minutes     // used never exceeds the budget
             if (target.contract.maxUsageMinutes > 0 && r.used >= target.contract.maxUsageMinutes && r.phase == RentalPhase.LIVE && r.expiredAt == 0L) r.expiredAt = clock.now(wall())
             save()
         }
         status(all)
+    }
+
+    /** Minutes of use counted and the (clamped) budget of contract [key] among [all]; (0, 0) for an unknown contract, budget 0 for a contract in days. */
+    fun usageOf(key: String, all: List<Activation>): Pair<Long, Long> = synchronized(lock) {
+        val s = status(all).firstOrNull { it.key == key }
+        Pair(s?.usedMinutes ?: usedMinutes(key), s?.maxUsageMinutes ?: 0L)
+    }
+
+    /**
+     * The usage statement `castbridge-rental-usage-v1` (text, unsigned at the pilot): the installation id, then one line per contract sorted by key, `contract=|unit=|used=|max=|state=|reason=|endsAt=|at=`
+     * ([nowTv] is the TV's time of the statement). Nothing else: no licence, seat, box, device factor or person.
+     */
+    fun usageReport(all: List<Activation>, installId: String): String = synchronized(lock) {
+        require(INSTALL_ID.matches(installId)) { "installId must be the 16 hex characters of install.key (never the telemetry id)" }
+        val nowTv = nowMs()
+        val shown = status(all).associateBy { it.key }
+        val lines = (shown.keys + recs.keys).toSortedSet().map { k ->
+            val s = shown[k]
+            if (s != null) "contract=$k|unit=${s.contract.unit.name.lowercase()}|used=${s.usedMinutes}|max=${s.maxUsageMinutes}|state=${s.state.name}|reason=${s.reason?.name ?: "-"}|endsAt=${s.contract.endsAt}|at=$nowTv"
+            else recs[k]!!.let { r -> "contract=$k|unit=unknown|used=${r.used}|max=0|state=ORPHAN|reason=${r.reason?.name ?: "-"}|endsAt=0|at=$nowTv" }   // activation removed: the minutes are still reported
+        }
+        (listOf("castbridge-rental-usage-v1", "install=$installId") + lines).joinToString("\n", postfix = "\n")
+    }
+
+    // Guard of recordTick (memory only): a token bucket on the monotone clock.
+    private var guardLast: Long? = null
+    private var guardCredit = 0L
+
+    /**
+     * Imputes what a [UseMeter] returned, behind a token bucket on the monotone clock ([nowMono], the same as the meter's): at each call `credit = min(credit, GUARD_SLACK_MS) +
+     * (time elapsed since the previous call)`, the minutes imputed are taken from it, the rest of the minutes is dropped. So a long time without any rental (standby, free lots, process
+     * alive) never becomes credit: after the first call that follows it, at most [GUARD_SLACK_MS] of surplus remains. Two meters ticking on the same lot (a wiring mistake) can therefore
+     * count at most [GUARD_SLACK_MS] too many; one meter is never held back, whatever its tick period. A reading going back gives no credit. Known limit (accepted): leftovers
+     * accumulated BEFORE the first imputation beyond that slack (many lots opened for under a minute each, then reopened) are refused. The guard is not persisted (a restart starts a new one).
+     */
+    fun recordTick(t: Tick, nowMono: Long, all: List<Activation>): List<RentalStatus> = synchronized(lock) {
+        val lot = t.lot
+        if (lot == null || t.minutes <= 0) return status(all)
+        val last = guardLast ?: (nowMono - t.minutes * MINUTE_MS)                    // first call: it may impute what it brings
+        guardCredit = minOf(guardCredit, GUARD_SLACK_MS) + maxOf(0L, nowMono - last)
+        guardLast = nowMono
+        val minutes = minOf(t.minutes.toLong(), guardCredit / MINUTE_MS).toInt()
+        guardCredit -= minutes * MINUTE_MS
+        recordUsage(lot, minutes, all)
     }
 
     /** Marks as ending every contract that is EXPIRED now and still LIVE (called by the sweep). Returns the keys newly marked. */
