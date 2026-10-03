@@ -5,50 +5,18 @@
   "questions": [
     {
       "course": "l2-psy",
-      "category": "Méthodologie : plans expérimentaux et variables",
+      "category": "Psychométrie",
       "difficulty": 2,
-      "question": "Pourquoi une corrélation ne suffit-elle pas à établir une relation causale entre deux variables ?",
+      "question": "Que signifie la validité discriminante d'une mesure ?",
       "choices": [
-        "Une troisième variable ou un sens inverse peut expliquer le lien",
-        "Parce qu'une corrélation est toujours due au hasard",
-        "Parce que les corrélations sont toujours négatives",
-        "Parce que les corrélations ne se calculent que sur de petits échantillons"
+        "Elle est peu corrélée avec des mesures de concepts différents",
+        "Elle ne s'applique qu'aux tests collectifs",
+        "Elle ne donne que deux scores possibles",
+        "Elle est fortement corrélée avec toutes les mesures"
       ],
       "answer": "A",
-      "explanation": "Un lien statistique peut venir d'une variable tierce ou d'une causalité inverse ; seule une manipulation contrôlée permet de trancher.",
-      "source": "Cours de licence de méthodes et statistiques en psychologie, famille des manuels de méthodologie de la recherche en psychologie",
-      "verif": "import"
-    },
-    {
-      "course": "l2-psy",
-      "category": "Psychologie de la santé et du stress",
-      "difficulty": 3,
-      "question": "Quel concept de Rotter désigne la croyance que les événements dépendent de soi ou de facteurs extérieurs ?",
-      "choices": [
-        "L'évaluation primaire",
-        "Le comportement de type A",
-        "Le soutien social perçu",
-        "Le locus de contrôle"
-      ],
-      "answer": "D",
-      "explanation": "Le locus de contrôle, interne ou externe, influence notamment les conduites de santé.",
-      "source": "Cours de licence de psychologie de la santé, famille des manuels de psychologie de la santé",
-      "verif": "import"
-    },
-    {
-      "course": "l2-psy",
-      "category": "Méthodologie : plans expérimentaux et variables",
-      "difficulty": 2,
-      "question": "Quel est l'intérêt d'un groupe placebo dans un essai sur l'effet d'un traitement ?",
-      "choices": [
-        "Supprimer le besoin d'un échantillon",
-        "Garantir que tous les patients guérissent",
-        "Réduire le coût de l'étude",
-        "Distinguer l'effet du traitement de celui des attentes du patient"
-      ],
-      "answer": "D",
-      "explanation": "Le groupe placebo reçoit une intervention neutre : la différence avec le groupe traité reflète l'effet spécifique du traitement.",
-      "source": "Cours de licence de méthodes et statistiques en psychologie, famille des manuels de méthodologie de la recherche en psychologie",
+      "explanation": "La validité discriminante est établie quand le test se distingue de mesures de concepts théoriquement distincts.",
+      "source": "Cours de licence de psychométrie, famille des manuels de psychométrie et de construction des tests",
       "verif": "import"
     },
     {
@@ -69,790 +37,34 @@
     },
     {
       "course": "l2-psy",
-      "category": "Statistiques inférentielles",
-      "difficulty": 1,
-      "question": "Qu'est-ce qu'une erreur de type I ?",
-      "choices": [
-        "Accepter H1 alors qu'elle est vraie",
-        "Ne pas rejeter H0 alors qu'elle est fausse",
-        "Calculer mal la moyenne",
-        "Rejeter H0 alors qu'elle est vraie"
-      ],
-      "answer": "D",
-      "explanation": "L'erreur de type I est un faux positif ; sa probabilité maximale est fixée par le seuil α.",
-      "source": "Cours de licence de méthodes et statistiques en psychologie, famille des manuels de statistique appliquée aux sciences humaines",
-      "verif": "import"
-    },
-    {
-      "course": "l2-psy",
       "category": "Méthodologie : plans expérimentaux et variables",
-      "difficulty": 1,
-      "question": "Que vise l'assignation aléatoire des participants aux conditions expérimentales ?",
+      "difficulty": 4,
+      "question": "Dans un plan 2 × 2, l'effet d'une variable indépendante dépend du niveau de l'autre. Comment nomme-t-on cela ?",
       "choices": [
-        "Représenter exactement la population générale",
-        "Choisir les participants les plus motivés",
-        "Rendre les groupes équivalents au départ, en moyenne",
-        "Garantir que tous les participants se ressemblent"
+        "Une interaction",
+        "Une corrélation partielle",
+        "Un effet principal",
+        "Un effet de contrôle"
       ],
-      "answer": "C",
-      "explanation": "Le hasard répartit les caractéristiques individuelles de façon équilibrée entre les groupes, ce qui limite les biais de départ.",
+      "answer": "A",
+      "explanation": "Il y a interaction lorsque l'effet d'un facteur varie selon les niveaux de l'autre facteur.",
       "source": "Cours de licence de méthodes et statistiques en psychologie, famille des manuels de méthodologie de la recherche en psychologie",
       "verif": "import"
     },
     {
       "course": "l2-psy",
-      "category": "Psychométrie",
-      "difficulty": 2,
-      "question": "Quelles sont la moyenne et l'écart-type d'une note T ?",
-      "choices": [
-        "Moyenne 100, écart-type 15",
-        "Moyenne 50, écart-type 10",
-        "Moyenne 10, écart-type 3",
-        "Moyenne 0, écart-type 1"
-      ],
-      "answer": "B",
-      "explanation": "La note T est une transformation linéaire de la note Z : T = 50 + 10 Z.",
-      "source": "Cours de licence de psychométrie, famille des manuels de psychométrie et de construction des tests",
-      "verif": "import"
-    },
-    {
-      "course": "l2-psy",
-      "category": "Psychologie interculturelle et ethnopsychologie",
-      "difficulty": 3,
-      "question": "Que désigne un syndrome lié à la culture (culture-bound syndrome) ?",
-      "choices": [
-        "Un tableau de souffrance dont la forme est propre à un contexte culturel",
-        "Un test psychologique spécifique",
-        "Une maladie causée uniquement par un virus",
-        "Un trouble identique dans toutes les cultures"
-      ],
-      "answer": "A",
-      "explanation": "Ces syndromes sont reconnus et nommés comme tels par la culture concernée, et leur expression dépend de ses croyances.",
-      "source": "Cours de licence de psychologie interculturelle, famille des manuels de psychologie interculturelle et d'ethnopsychologie",
-      "verif": "import"
-    },
-    {
-      "course": "l2-psy",
-      "category": "Statistiques inférentielles",
-      "difficulty": 5,
-      "question": "Comment définit-on correctement la valeur p ?",
-      "choices": [
-        "La probabilité de reproduire exactement le résultat",
-        "La probabilité que H0 soit vraie",
-        "La probabilité d'un résultat au moins aussi extrême si H0 est vraie",
-        "La probabilité que H1 soit vraie"
-      ],
-      "answer": "C",
-      "explanation": "La valeur p est une probabilité conditionnelle à H0 ; ce n'est pas la probabilité de l'hypothèse elle-même.",
-      "source": "Cours de licence de méthodes et statistiques en psychologie, famille des manuels de statistique appliquée aux sciences humaines",
-      "verif": "import"
-    },
-    {
-      "course": "l2-psy",
-      "category": "Psychologie interculturelle et ethnopsychologie",
-      "difficulty": 3,
-      "question": "Que désigne le pluralisme thérapeutique dans les sociétés africaines ?",
-      "choices": [
-        "Le recours à plusieurs systèmes de soins, traditionnels et biomédicaux",
-        "L'usage exclusif de la médecine moderne",
-        "L'usage d'un seul remède pour tout trouble",
-        "L'interdiction de la médecine traditionnelle"
-      ],
-      "answer": "A",
-      "explanation": "De nombreux patients consultent successivement ou simultanément guérisseurs et services de santé biomédicaux.",
-      "source": "Cours de licence de psychologie interculturelle, famille des manuels de psychologie interculturelle et d'ethnopsychologie",
-      "verif": "import",
-      "region": "AF"
-    },
-    {
-      "course": "l2-psy",
-      "category": "Psychologie interculturelle et ethnopsychologie",
-      "difficulty": 2,
-      "question": "Dans l'opposition émique-étique, que désigne l'approche émique ?",
-      "choices": [
-        "La comparaison de nombreuses cultures avec un même outil",
-        "L'étude d'une culture selon le point de vue de ses membres",
-        "L'étude biologique du comportement",
-        "L'étude statistique des échantillons"
-      ],
-      "answer": "B",
-      "explanation": "Venue de la linguistique (Pike), l'approche émique décrit les significations internes à une culture ; l'approche étique adopte un cadre extérieur comparatif.",
-      "source": "Cours de licence de psychologie interculturelle, famille des manuels de psychologie interculturelle et d'ethnopsychologie",
-      "verif": "import"
-    },
-    {
-      "course": "l2-psy",
-      "category": "Psychologie de l'éducation : motivation scolaire",
-      "difficulty": 3,
-      "question": "Que montre l'effet de surjustification (Lepper, Greene et Nisbett) ?",
-      "choices": [
-        "Une récompense augmente toujours l'intérêt intrinsèque",
-        "Une récompense externe peut diminuer l'intérêt intrinsèque pour une activité",
-        "Seules les punitions modifient la motivation",
-        "Les récompenses n'ont aucun effet sur le comportement"
-      ],
-      "answer": "B",
-      "explanation": "Des enfants récompensés pour une activité qu'ils aimaient s'y sont ensuite moins intéressés spontanément.",
-      "source": "Cours de licence de psychologie de l'éducation, famille des manuels de psychologie de l'éducation",
-      "verif": "import"
-    },
-    {
-      "course": "l2-psy",
-      "category": "Psychométrie",
-      "difficulty": 4,
-      "question": "Dans une distribution normale, à quel centile environ correspond une note Z de +1 ?",
-      "choices": [
-        "Le 68e",
-        "Le 50e",
-        "Le 84e",
-        "Le 97e"
-      ],
-      "answer": "C",
-      "explanation": "Environ 34 % des scores se situent entre la moyenne et +1 écart-type : 50 + 34 = 84 %.",
-      "source": "Cours de licence de psychométrie, famille des manuels de psychométrie et de construction des tests",
-      "verif": "import"
-    },
-    {
-      "course": "l2-psy",
-      "category": "Psychologie de la santé et du stress",
-      "difficulty": 3,
-      "question": "Quel axe neuroendocrinien est central dans la réponse physiologique au stress ?",
-      "choices": [
-        "L'axe thyroïdien",
-        "L'axe hypothalamo-gonadique",
-        "L'axe hypophyso-pancréatique",
-        "L'axe hypothalamo-hypophyso-surrénalien"
-      ],
-      "answer": "D",
-      "explanation": "L'hypothalamus active l'hypophyse, qui stimule les surrénales et la sécrétion de cortisol.",
-      "source": "Cours de licence de psychologie de la santé, famille des manuels de psychologie de la santé",
-      "verif": "import"
-    },
-    {
-      "course": "l2-psy",
-      "category": "Psychologie de la santé et du stress",
-      "difficulty": 2,
-      "question": "Laquelle de ces stratégies relève du coping centré sur l'émotion ?",
-      "choices": [
-        "Demander un conseil technique",
-        "Établir un plan d'action détaillé",
-        "Négocier avec la personne en cause",
-        "Chercher à se calmer en relativisant la situation"
-      ],
-      "answer": "D",
-      "explanation": "Le coping centré sur l'émotion vise à réguler la détresse sans agir directement sur la source du stress.",
-      "source": "Cours de licence de psychologie de la santé, famille des manuels de psychologie de la santé",
-      "verif": "import"
-    },
-    {
-      "course": "l2-psy",
-      "category": "Psychologie de l'éducation : motivation scolaire",
-      "difficulty": 2,
-      "question": "Quels sont les trois besoins psychologiques fondamentaux de la théorie de l'autodétermination de Deci et Ryan ?",
-      "choices": [
-        "Survie, pouvoir, plaisir",
-        "Sécurité, estime, repos",
-        "Réussite, évitement, performance",
-        "Autonomie, compétence, affiliation"
-      ],
-      "answer": "D",
-      "explanation": "Selon Deci et Ryan, la satisfaction de ces trois besoins favorise une motivation autonome.",
-      "source": "Cours de licence de psychologie de l'éducation, famille des manuels de psychologie de l'éducation",
-      "verif": "import"
-    },
-    {
-      "course": "l2-psy",
-      "category": "Psychologie de l'éducation : motivation scolaire",
-      "difficulty": 1,
-      "question": "Quel est l'objectif d'un élève orienté vers des buts de maîtrise ?",
-      "choices": [
-        "Obtenir l'approbation des parents",
-        "Éviter tout effort",
-        "Paraître meilleur que les autres",
-        "Apprendre et progresser"
-      ],
-      "answer": "D",
-      "explanation": "Les buts de maîtrise visent le développement des compétences, tandis que les buts de performance visent la comparaison avec autrui.",
-      "source": "Cours de licence de psychologie de l'éducation, famille des manuels de psychologie de l'éducation",
-      "verif": "import"
-    },
-    {
-      "course": "l2-psy",
       "category": "Méthodologie : plans expérimentaux et variables",
-      "difficulty": 3,
-      "question": "Dans une étude suivie dans le temps, quelle menace pour la validité interne est liée à la perte différentielle de participants ?",
+      "difficulty": 2,
+      "question": "Quel est l'intérêt d'un groupe placebo dans un essai sur l'effet d'un traitement ?",
       "choices": [
-        "L'instrumentation",
-        "L'attrition",
-        "La maturation",
-        "L'effet de test"
+        "Supprimer le besoin d'un échantillon",
+        "Garantir que tous les patients guérissent",
+        "Réduire le coût de l'étude",
+        "Distinguer l'effet du traitement de celui des attentes du patient"
       ],
-      "answer": "B",
-      "explanation": "Si les participants qui abandonnent diffèrent selon les groupes, les groupes restants ne sont plus comparables.",
+      "answer": "D",
+      "explanation": "Le groupe placebo reçoit une intervention neutre : la différence avec le groupe traité reflète l'effet spécifique du traitement.",
       "source": "Cours de licence de méthodes et statistiques en psychologie, famille des manuels de méthodologie de la recherche en psychologie",
-      "verif": "import"
-    },
-    {
-      "course": "l2-psy",
-      "category": "Psychologie de la santé et du stress",
-      "difficulty": 2,
-      "question": "Que désigne l'effet tampon du soutien social ?",
-      "choices": [
-        "Il remplace le coping de la personne",
-        "Il atténue l'impact du stress sur la santé",
-        "Il augmente la sécrétion de cortisol",
-        "Il supprime la source du stress"
-      ],
-      "answer": "B",
-      "explanation": "Le soutien perçu protège la santé en réduisant les effets négatifs d'événements stressants.",
-      "source": "Cours de licence de psychologie de la santé, famille des manuels de psychologie de la santé",
-      "verif": "import"
-    },
-    {
-      "course": "l2-psy",
-      "category": "Statistiques inférentielles",
-      "difficulty": 1,
-      "question": "Entre quelles valeurs varie le coefficient de corrélation r de Pearson ?",
-      "choices": [
-        "Entre −1 et +1",
-        "Entre 0 et 100",
-        "Entre −10 et +10",
-        "Entre 0 et 1"
-      ],
-      "answer": "A",
-      "explanation": "r est borné : −1 indique une liaison linéaire négative parfaite, +1 une liaison positive parfaite.",
-      "source": "Cours de licence de méthodes et statistiques en psychologie, famille des manuels de statistique appliquée aux sciences humaines",
-      "verif": "import"
-    },
-    {
-      "course": "l2-psy",
-      "category": "Psychologie de l'éducation : motivation scolaire",
-      "difficulty": 1,
-      "question": "Comment Bandura définit-il le sentiment d'efficacité personnelle d'un élève ?",
-      "choices": [
-        "Sa croyance en sa capacité de réussir une tâche donnée",
-        "Son rang dans la classe",
-        "Son niveau réel de compétence",
-        "Son goût pour l'école"
-      ],
-      "answer": "A",
-      "explanation": "Les élèves qui se sentent efficaces persistent davantage face aux difficultés.",
-      "source": "Cours de licence de psychologie de l'éducation, famille des manuels de psychologie de l'éducation",
-      "verif": "import"
-    },
-    {
-      "course": "l2-psy",
-      "category": "Psychologie de l'éducation : motivation scolaire",
-      "difficulty": 4,
-      "question": "Quelles activités caractérisent l'apprentissage autorégulé décrit par Zimmerman ?",
-      "choices": [
-        "Mémoriser sans réfléchir",
-        "Éviter les tâches difficiles",
-        "Planifier, contrôler et auto-évaluer son apprentissage",
-        "Attendre les consignes de l'enseignant"
-      ],
-      "answer": "C",
-      "explanation": "L'élève autorégulé fixe des buts, surveille sa progression et ajuste ses stratégies.",
-      "source": "Cours de licence de psychologie de l'éducation, famille des manuels de psychologie de l'éducation",
-      "verif": "import"
-    },
-    {
-      "course": "l2-psy",
-      "category": "Psychologie de l'éducation : motivation scolaire",
-      "difficulty": 5,
-      "question": "Selon Weiner, un élève attribue sa réussite à la chance. Quelles dimensions caractérisent cette cause ?",
-      "choices": [
-        "Externe, stable et contrôlable",
-        "Externe, instable et incontrôlable",
-        "Interne, instable et contrôlable",
-        "Interne, stable et contrôlable"
-      ],
-      "answer": "B",
-      "explanation": "La chance échappe à la personne, varie d'une situation à l'autre et ne peut être contrôlée.",
-      "source": "Cours de licence de psychologie de l'éducation, famille des manuels de psychologie de l'éducation",
-      "verif": "import"
-    },
-    {
-      "course": "l2-psy",
-      "category": "Psychologie interculturelle et ethnopsychologie",
-      "difficulty": 2,
-      "question": "Que signifie le concept d'Ubuntu, souvent traduit par « je suis parce que nous sommes » ?",
-      "choices": [
-        "La personne n'a aucune obligation envers autrui",
-        "La réussite individuelle prime sur tout",
-        "L'individu se définit contre la communauté",
-        "L'humanité d'une personne se définit par ses liens avec les autres"
-      ],
-      "answer": "D",
-      "explanation": "Ubuntu est un concept des langues bantoues d'Afrique australe qui souligne l'interdépendance entre les personnes.",
-      "source": "Cours de licence de psychologie interculturelle, famille des manuels de psychologie interculturelle et d'ethnopsychologie",
-      "verif": "import",
-      "region": "AF"
-    },
-    {
-      "course": "l2-psy",
-      "category": "Statistiques inférentielles",
-      "difficulty": 1,
-      "question": "Quel seuil de signification α est le plus souvent retenu en psychologie ?",
-      "choices": [
-        "0,50",
-        "0,05",
-        "0,25",
-        "0,005"
-      ],
-      "answer": "B",
-      "explanation": "Par convention, on rejette H0 lorsque la probabilité p est inférieure à 0,05.",
-      "source": "Cours de licence de méthodes et statistiques en psychologie, famille des manuels de statistique appliquée aux sciences humaines",
-      "verif": "import"
-    },
-    {
-      "course": "l2-psy",
-      "category": "Psychologie interculturelle et ethnopsychologie",
-      "difficulty": 5,
-      "question": "Quelle position définit le complémentarisme de Devereux en ethnopsychiatrie ?",
-      "choices": [
-        "Écarter toute référence à la culture",
-        "Réduire tout trouble à une cause biologique",
-        "Utiliser conjointement les discours de l'anthropologie et de la psychanalyse",
-        "Remplacer la psychologie par l'anthropologie"
-      ],
-      "answer": "C",
-      "explanation": "Pour Devereux, les deux disciplines apportent des lectures différentes et non réductibles qui doivent être utilisées ensemble.",
-      "source": "Cours de licence de psychologie interculturelle, famille des manuels de psychologie interculturelle et d'ethnopsychologie",
-      "verif": "import"
-    },
-    {
-      "course": "l2-psy",
-      "category": "Psychologie de la santé et du stress",
-      "difficulty": 2,
-      "question": "Que détermine l'évaluation primaire dans le modèle de Lazarus et Folkman ?",
-      "choices": [
-        "Combien de temps durera la situation",
-        "Quelles ressources la personne possède",
-        "Si la situation est menaçante, nuisible ou constitue un défi",
-        "Quelle stratégie de coping est la plus efficace"
-      ],
-      "answer": "C",
-      "explanation": "L'évaluation primaire porte sur la signification de la situation pour le bien-être de la personne.",
-      "source": "Cours de licence de psychologie de la santé, famille des manuels de psychologie de la santé",
-      "verif": "import"
-    },
-    {
-      "course": "l2-psy",
-      "category": "Psychologie de l'éducation : motivation scolaire",
-      "difficulty": 3,
-      "question": "Que désigne l'impuissance apprise (Seligman) appliquée à l'école ?",
-      "choices": [
-        "La croyance que ses efforts n'influencent pas ses résultats",
-        "Un besoin de réussite supérieur à la moyenne",
-        "Une motivation intrinsèque forte",
-        "Un excès de confiance en soi"
-      ],
-      "answer": "A",
-      "explanation": "Les élèves qui attribuent leurs échecs à des causes stables et incontrôlables renoncent plus facilement à agir.",
-      "source": "Cours de licence de psychologie de l'éducation, famille des manuels de psychologie de l'éducation",
-      "verif": "import"
-    },
-    {
-      "course": "l2-psy",
-      "category": "Psychologie de la santé et du stress",
-      "difficulty": 1,
-      "question": "Quels auteurs ont proposé le modèle transactionnel du stress fondé sur l'évaluation cognitive ?",
-      "choices": [
-        "Friedman et Rosenman",
-        "Selye et Cannon",
-        "Holmes et Rahe",
-        "Lazarus et Folkman"
-      ],
-      "answer": "D",
-      "explanation": "Dans ce modèle, le stress naît de la transaction entre la personne et son environnement, selon l'évaluation que la personne en fait.",
-      "source": "Cours de licence de psychologie de la santé, famille des manuels de psychologie de la santé",
-      "verif": "import"
-    },
-    {
-      "course": "l2-psy",
-      "category": "Psychologie de l'éducation : motivation scolaire",
-      "difficulty": 1,
-      "question": "Selon Skinner, que produit un renforcement positif sur un comportement ?",
-      "choices": [
-        "Le comportement ne dépend jamais de ses conséquences",
-        "Seul l'exemple d'autrui modifie le comportement",
-        "Un comportement suivi d'une conséquence agréable tend à se répéter",
-        "Un comportement suivi d'une punition se répète toujours"
-      ],
-      "answer": "C",
-      "explanation": "Dans le conditionnement opérant, le renforcement positif augmente la fréquence du comportement qu'il suit.",
-      "source": "Cours de licence de psychologie de l'éducation, famille des manuels de psychologie de l'éducation",
-      "verif": "import"
-    },
-    {
-      "course": "l2-psy",
-      "category": "Psychométrie",
-      "difficulty": 2,
-      "question": "Quelle moyenne et quel écart-type ont classiquement les échelles de QI de Wechsler ?",
-      "choices": [
-        "Moyenne 0, écart-type 1",
-        "Moyenne 100, écart-type 15",
-        "Moyenne 50, écart-type 10",
-        "Moyenne 10, écart-type 100"
-      ],
-      "answer": "B",
-      "explanation": "Les QI de Wechsler sont des notes standard de moyenne 100 et d'écart-type 15.",
-      "source": "Cours de licence de psychométrie, famille des manuels de psychométrie et de construction des tests",
-      "verif": "import"
-    },
-    {
-      "course": "l2-psy",
-      "category": "Statistiques inférentielles",
-      "difficulty": 2,
-      "question": "Que mesure une taille d'effet comme le d de Cohen ?",
-      "choices": [
-        "Le seuil de signification",
-        "L'ampleur de la différence entre moyennes en unités d'écart-type",
-        "La probabilité que H0 soit vraie",
-        "Le nombre de participants nécessaire"
-      ],
-      "answer": "B",
-      "explanation": "Contrairement à p, la taille d'effet indique l'importance de la différence, indépendamment de la taille de l'échantillon.",
-      "source": "Cours de licence de méthodes et statistiques en psychologie, famille des manuels de statistique appliquée aux sciences humaines",
-      "verif": "import"
-    },
-    {
-      "course": "l2-psy",
-      "category": "Psychologie de la santé et du stress",
-      "difficulty": 2,
-      "question": "Que porte l'évaluation secondaire dans le modèle de Lazarus et Folkman ?",
-      "choices": [
-        "La gravité du symptôme physique",
-        "Les ressources disponibles pour faire face à la situation",
-        "Le passé médical de la famille",
-        "L'appartenance sociale du sujet"
-      ],
-      "answer": "B",
-      "explanation": "Dans l'évaluation secondaire, la personne estime si elle dispose des moyens de faire face à la situation.",
-      "source": "Cours de licence de psychologie de la santé, famille des manuels de psychologie de la santé",
-      "verif": "import"
-    },
-    {
-      "course": "l2-psy",
-      "category": "Psychologie de la santé et du stress",
-      "difficulty": 4,
-      "question": "Quelles sont les trois dimensions du burn-out décrites par Maslach ?",
-      "choices": [
-        "Alarme, résistance, épuisement",
-        "Menace, perte, défi",
-        "Épuisement émotionnel, dépersonnalisation, baisse de l'accomplissement personnel",
-        "Anxiété, dépression, insomnie"
-      ],
-      "answer": "C",
-      "explanation": "Le Maslach Burnout Inventory évalue ces trois dimensions, étudiées d'abord chez les professionnels de l'aide.",
-      "source": "Cours de licence de psychologie de la santé, famille des manuels de psychologie de la santé",
-      "verif": "import"
-    },
-    {
-      "course": "l2-psy",
-      "category": "Psychologie de l'éducation : motivation scolaire",
-      "difficulty": 5,
-      "question": "Dans la théorie de l'autodétermination, quel type de régulation extrinsèque est le plus autodéterminé ?",
-      "choices": [
-        "La régulation introjectée",
-        "La régulation intégrée",
-        "La régulation identifiée",
-        "La régulation externe"
-      ],
-      "answer": "B",
-      "explanation": "Elle correspond à des valeurs extérieures pleinement assimilées au soi ; elle est plus autonome que les régulations identifiée, introjectée et externe.",
-      "source": "Cours de licence de psychologie de l'éducation, famille des manuels de psychologie de l'éducation",
-      "verif": "import"
-    },
-    {
-      "course": "l2-psy",
-      "category": "Psychologie de la santé et du stress",
-      "difficulty": 1,
-      "question": "Quel outil, proposé par Holmes et Rahe, classe des événements de vie selon leur charge de stress ?",
-      "choices": [
-        "L'échelle d'efficacité de Bandura",
-        "Le questionnaire de Maslach",
-        "L'échelle de Likert",
-        "L'échelle de réajustement social"
-      ],
-      "answer": "D",
-      "explanation": "Holmes et Rahe ont attribué des valeurs aux événements de vie nécessitant une réadaptation, du deuil à la retraite.",
-      "source": "Cours de licence de psychologie de la santé, famille des manuels de psychologie de la santé",
-      "verif": "import"
-    },
-    {
-      "course": "l2-psy",
-      "category": "Psychologie de la santé et du stress",
-      "difficulty": 1,
-      "question": "Quelle hormone est considérée comme un marqueur majeur de la réponse de stress ?",
-      "choices": [
-        "Le cortisol",
-        "L'ocytocine",
-        "La mélatonine",
-        "L'insuline"
-      ],
-      "answer": "A",
-      "explanation": "Le cortisol, sécrété par les glandes surrénales, augmente lors d'une réponse de stress prolongée.",
-      "source": "Cours de licence de psychologie de la santé, famille des manuels de psychologie de la santé",
-      "verif": "import"
-    },
-    {
-      "course": "l2-psy",
-      "category": "Psychométrie",
-      "difficulty": 2,
-      "question": "Quel indice est utilisé pour mesurer l'accord entre deux observateurs qui classent des comportements ?",
-      "choices": [
-        "Le khi-deux d'indépendance",
-        "Le coefficient alpha de Cronbach",
-        "Le d de Cohen",
-        "Le kappa de Cohen"
-      ],
-      "answer": "D",
-      "explanation": "Le kappa de Cohen mesure l'accord inter-juges en corrigeant la part d'accord attendue par hasard.",
-      "source": "Cours de licence de psychométrie, famille des manuels de psychométrie et de construction des tests",
-      "verif": "import"
-    },
-    {
-      "course": "l2-psy",
-      "category": "Méthodologie : plans expérimentaux et variables",
-      "difficulty": 3,
-      "question": "Qu'est-ce qu'une variable médiatrice ?",
-      "choices": [
-        "Une variable qui modifie seulement la force d'un lien",
-        "Une variable qui explique par quel mécanisme la VI agit sur la VD",
-        "Une variable qui n'a aucun lien avec la VD",
-        "Une variable mesurée avant le début de l'étude"
-      ],
-      "answer": "B",
-      "explanation": "La médiation décrit le processus intermédiaire (VI → médiateur → VD), alors que la modération décrit une condition qui change la force du lien.",
-      "source": "Cours de licence de méthodes et statistiques en psychologie, famille des manuels de méthodologie de la recherche en psychologie",
-      "verif": "import"
-    },
-    {
-      "course": "l2-psy",
-      "category": "Statistiques inférentielles",
-      "difficulty": 5,
-      "question": "Pourquoi un p supérieur à α ne démontre-t-il pas que H0 est vraie ?",
-      "choices": [
-        "On ne fait que ne pas rejeter H0, faute de preuve suffisante",
-        "Parce que H0 est toujours fausse",
-        "Parce que p est toujours inférieur à 0,05",
-        "Parce que α est arbitrairement élevé"
-      ],
-      "answer": "A",
-      "explanation": "Un résultat non significatif peut venir d'un manque de puissance : l'absence de preuve d'un effet n'est pas la preuve de son absence.",
-      "source": "Cours de licence de méthodes et statistiques en psychologie, famille des manuels de statistique appliquée aux sciences humaines",
-      "verif": "import"
-    },
-    {
-      "course": "l2-psy",
-      "category": "Méthodologie : plans expérimentaux et variables",
-      "difficulty": 4,
-      "question": "Comment nomme-t-on l'influence des attentes de l'expérimentateur sur les résultats qu'il obtient (Rosenthal) ?",
-      "choices": [
-        "L'effet de l'expérimentateur",
-        "L'effet de plancher",
-        "L'effet de maturation",
-        "L'effet de régression"
-      ],
-      "answer": "A",
-      "explanation": "Les attentes de l'expérimentateur peuvent influencer, souvent sans qu'il le sache, le comportement des participants ; d'où le recours au double aveugle.",
-      "source": "Cours de licence de méthodes et statistiques en psychologie, famille des manuels de méthodologie de la recherche en psychologie",
-      "verif": "import"
-    },
-    {
-      "course": "l2-psy",
-      "category": "Psychologie interculturelle et ethnopsychologie",
-      "difficulty": 2,
-      "question": "Comment nomme-t-on, dans la tradition africaine, l'assemblée de discussion collective destinée à régler un différend ?",
-      "choices": [
-        "Le plébiscite",
-        "La palabre",
-        "Le cadastre",
-        "Le référendum"
-      ],
-      "answer": "B",
-      "explanation": "La palabre est un lieu de parole où la communauté délibère pour rétablir l'harmonie après un conflit.",
-      "source": "Cours de licence de psychologie interculturelle, famille des manuels de psychologie interculturelle et d'ethnopsychologie",
-      "verif": "import",
-      "region": "AF"
-    },
-    {
-      "course": "l2-psy",
-      "category": "Psychologie de l'éducation : motivation scolaire",
-      "difficulty": 3,
-      "question": "Quelles dimensions causales Weiner utilise-t-il pour classer les attributions de réussite et d'échec ?",
-      "choices": [
-        "Alarme, résistance, épuisement",
-        "Autonomie, compétence, affiliation",
-        "Lieu de causalité, stabilité, contrôlabilité",
-        "Intelligence, mémoire, attention"
-      ],
-      "answer": "C",
-      "explanation": "Chaque cause invoquée (effort, aptitude, chance, difficulté de la tâche) se situe sur ces dimensions.",
-      "source": "Cours de licence de psychologie de l'éducation, famille des manuels de psychologie de l'éducation",
-      "verif": "import"
-    },
-    {
-      "course": "l2-psy",
-      "category": "Méthodologie : plans expérimentaux et variables",
-      "difficulty": 1,
-      "question": "Quel est le rôle principal d'un groupe contrôle dans une expérience ?",
-      "choices": [
-        "Recevoir le traitement le plus intensif",
-        "Augmenter le nombre total de participants",
-        "Remplacer la mesure de la variable dépendante",
-        "Fournir une base de comparaison sans la manipulation"
-      ],
-      "answer": "D",
-      "explanation": "Le groupe contrôle ne reçoit pas la manipulation et permet de juger de l'effet propre du traitement.",
-      "source": "Cours de licence de méthodes et statistiques en psychologie, famille des manuels de méthodologie de la recherche en psychologie",
-      "verif": "import"
-    },
-    {
-      "course": "l2-psy",
-      "category": "Psychologie interculturelle et ethnopsychologie",
-      "difficulty": 1,
-      "question": "Qui est considéré comme le fondateur de l'ethnopsychiatrie ?",
-      "choices": [
-        "Jean Piaget",
-        "Georges Devereux",
-        "Henri Wallon",
-        "Carl Gustav Jung"
-      ],
-      "answer": "B",
-      "explanation": "Devereux (1908-1985), ethnologue et psychanalyste, a fondé l'ethnopsychiatrie en articulant anthropologie et psychanalyse.",
-      "source": "Cours de licence de psychologie interculturelle, famille des manuels de psychologie interculturelle et d'ethnopsychologie",
-      "verif": "import"
-    },
-    {
-      "course": "l2-psy",
-      "category": "Psychologie de l'éducation : motivation scolaire",
-      "difficulty": 1,
-      "question": "Comment appelle-t-on la motivation d'un élève qui étudie par intérêt et plaisir pour la matière ?",
-      "choices": [
-        "La motivation intrinsèque",
-        "La motivation de performance",
-        "La motivation extrinsèque",
-        "L'amotivation"
-      ],
-      "answer": "A",
-      "explanation": "La motivation intrinsèque vient de l'activité elle-même, sans récompense extérieure.",
-      "source": "Cours de licence de psychologie de l'éducation, famille des manuels de psychologie de l'éducation",
-      "verif": "import"
-    },
-    {
-      "course": "l2-psy",
-      "category": "Psychologie interculturelle et ethnopsychologie",
-      "difficulty": 4,
-      "question": "Que cherchent à montrer les études d'Ekman sur la reconnaissance d'expressions faciales dans différentes cultures ?",
-      "choices": [
-        "Que le visage ne reflète jamais l'émotion",
-        "Que les émotions n'existent pas chez les adultes",
-        "Que certaines émotions de base sont reconnues dans de nombreuses cultures",
-        "Que chaque culture a ses propres expressions de base"
-      ],
-      "answer": "C",
-      "explanation": "Ekman et ses collègues ont trouvé une reconnaissance largement partagée d'expressions comme la joie ou la colère, tout en reconnaissant des règles culturelles d'expression.",
-      "source": "Cours de licence de psychologie interculturelle, famille des manuels de psychologie interculturelle et d'ethnopsychologie",
-      "verif": "import"
-    },
-    {
-      "course": "l2-psy",
-      "category": "Psychologie interculturelle et ethnopsychologie",
-      "difficulty": 3,
-      "question": "Pourquoi les matrices progressives de Raven ont-elles été conçues avec des items non verbaux ?",
-      "choices": [
-        "Pour éviter tout calcul de score",
-        "Pour mesurer uniquement la mémoire",
-        "Pour raccourcir l'étalonnage",
-        "Pour réduire l'influence du langage et de la culture"
-      ],
-      "answer": "D",
-      "explanation": "Raven a visé un test de raisonnement abstrait moins dépendant des connaissances scolaires et de la langue, d'où l'usage des figures.",
-      "source": "Cours de licence de psychologie interculturelle, famille des manuels de psychologie interculturelle et d'ethnopsychologie",
-      "verif": "import"
-    },
-    {
-      "course": "l2-psy",
-      "category": "Psychologie interculturelle et ethnopsychologie",
-      "difficulty": 3,
-      "question": "Quel psychiatre en poste à Blida, en Algérie, a analysé les effets psychologiques de la colonisation dans « Les Damnés de la terre » ?",
-      "choices": [
-        "Frantz Fanon",
-        "Tobie Nathan",
-        "Thomas Adeoye Lambo",
-        "Henri Collomb"
-      ],
-      "answer": "A",
-      "explanation": "Né en Martinique, Fanon fut chef de service à l'hôpital de Blida-Joinville et a lié clinique psychiatrique et analyse de la domination coloniale.",
-      "source": "Cours de licence de psychologie interculturelle, famille des manuels de psychologie interculturelle et d'ethnopsychologie",
-      "verif": "import",
-      "region": "AF"
-    },
-    {
-      "course": "l2-psy",
-      "category": "Psychométrie",
-      "difficulty": 4,
-      "question": "Quelle technique statistique sert couramment à examiner la structure interne d'un test (validité de construit) ?",
-      "choices": [
-        "L'analyse factorielle",
-        "Le test de Bonferroni",
-        "Le test du khi-deux",
-        "Le test t apparié"
-      ],
-      "answer": "A",
-      "explanation": "L'analyse factorielle regroupe les items en facteurs et permet de vérifier si la structure observée correspond à la théorie.",
-      "source": "Cours de licence de psychométrie, famille des manuels de psychométrie et de construction des tests",
-      "verif": "import"
-    },
-    {
-      "course": "l2-psy",
-      "category": "Psychométrie",
-      "difficulty": 5,
-      "question": "Quel cadre méthodologique de Campbell et Fiske examine à la fois validité convergente et validité discriminante ?",
-      "choices": [
-        "La matrice multitrait-multiméthode",
-        "La matrice de Spearman-Brown",
-        "Le diagramme de dispersion",
-        "Le tableau de contingence"
-      ],
-      "answer": "A",
-      "explanation": "La matrice multitrait-multiméthode croise plusieurs traits et plusieurs méthodes de mesure : les mesures d'un même trait doivent converger, celles de traits distincts diverger.",
-      "source": "Cours de licence de psychométrie, famille des manuels de psychométrie et de construction des tests",
-      "verif": "import"
-    },
-    {
-      "course": "l2-psy",
-      "category": "Psychométrie",
-      "difficulty": 2,
-      "question": "Que montre la validité prédictive d'un test ?",
-      "choices": [
-        "Que les scores sont stables sur deux semaines",
-        "Que le test est facile à corriger",
-        "Que les scores prédisent un critère mesuré plus tard",
-        "Que les items sont cohérents entre eux"
-      ],
-      "answer": "C",
-      "explanation": "La validité prédictive est une validité critériée : on corrèle le score au critère obtenu ultérieurement.",
-      "source": "Cours de licence de psychométrie, famille des manuels de psychométrie et de construction des tests",
-      "verif": "import"
-    },
-    {
-      "course": "l2-psy",
-      "category": "Psychométrie",
-      "difficulty": 3,
-      "question": "À quoi sert la formule de Spearman-Brown ?",
-      "choices": [
-        "Estimer une taille d'effet",
-        "Calculer un centile",
-        "Estimer la fidélité d'un test dont on change la longueur",
-        "Mesurer l'accord inter-juges"
-      ],
-      "answer": "C",
-      "explanation": "Elle permet de corriger la corrélation entre deux moitiés d'un test ou de prévoir l'effet d'un allongement du test.",
-      "source": "Cours de licence de psychométrie, famille des manuels de psychométrie et de construction des tests",
       "verif": "import"
     },
     {
@@ -868,22 +80,6 @@
       ],
       "answer": "B",
       "explanation": "L'effet plafond limite la variabilité des scores et empêche de détecter des différences entre les conditions.",
-      "source": "Cours de licence de méthodes et statistiques en psychologie, famille des manuels de méthodologie de la recherche en psychologie",
-      "verif": "import"
-    },
-    {
-      "course": "l2-psy",
-      "category": "Méthodologie : plans expérimentaux et variables",
-      "difficulty": 2,
-      "question": "Qu'est-ce qui caractérise un plan quasi-expérimental ?",
-      "choices": [
-        "L'absence d'assignation aléatoire aux conditions",
-        "La présence de plus de trois groupes",
-        "L'absence de toute mesure chiffrée",
-        "L'absence de variable dépendante"
-      ],
-      "answer": "A",
-      "explanation": "Dans un plan quasi-expérimental, les groupes existent déjà ou sont formés sans tirage au sort, ce qui affaiblit la validité interne.",
       "source": "Cours de licence de méthodes et statistiques en psychologie, famille des manuels de méthodologie de la recherche en psychologie",
       "verif": "import"
     },
@@ -907,466 +103,177 @@
       "course": "l2-psy",
       "category": "Psychologie interculturelle et ethnopsychologie",
       "difficulty": 2,
-      "question": "Dans le modèle d'acculturation de Berry, laquelle de ces stratégies associe maintien de sa culture d'origine et contact avec la culture d'accueil ?",
+      "question": "Dans l'opposition émique-étique, que désigne l'approche émique ?",
       "choices": [
-        "La séparation",
-        "L'assimilation",
-        "L'intégration",
-        "La marginalisation"
-      ],
-      "answer": "C",
-      "explanation": "Berry distingue quatre stratégies selon que l'on conserve sa culture d'origine et que l'on entre en relation avec la société d'accueil.",
-      "source": "Cours de licence de psychologie interculturelle, famille des manuels de psychologie interculturelle et d'ethnopsychologie",
-      "verif": "import"
-    },
-    {
-      "course": "l2-psy",
-      "category": "Psychologie interculturelle et ethnopsychologie",
-      "difficulty": 4,
-      "question": "Quel psychiatre nigérian est connu pour le « village system » de soin psychiatrique à Aro, près d'Abeokuta ?",
-      "choices": [
-        "Thomas Adeoye Lambo",
-        "Frantz Fanon",
-        "Henri Collomb",
-        "Georges Devereux"
-      ],
-      "answer": "A",
-      "explanation": "Lambo a associé familles, villages voisins et soins psychiatriques, en intégrant des guérisseurs traditionnels à la prise en charge.",
-      "source": "Cours de licence de psychologie interculturelle, famille des manuels de psychologie interculturelle et d'ethnopsychologie",
-      "verif": "import",
-      "region": "AF"
-    },
-    {
-      "course": "l2-psy",
-      "category": "Statistiques inférentielles",
-      "difficulty": 2,
-      "question": "Combien de degrés de liberté a un test t de Student sur deux échantillons indépendants de tailles n1 et n2 ?",
-      "choices": [
-        "La somme des deux effectifs",
-        "Le plus petit effectif moins 1",
-        "Le produit des deux effectifs",
-        "La somme des deux effectifs moins 2"
-      ],
-      "answer": "D",
-      "explanation": "Chaque moyenne estimée coûte un degré de liberté : ddl = n1 + n2 − 2.",
-      "source": "Cours de licence de méthodes et statistiques en psychologie, famille des manuels de statistique appliquée aux sciences humaines",
-      "verif": "import"
-    },
-    {
-      "course": "l2-psy",
-      "category": "Psychologie de la santé et du stress",
-      "difficulty": 4,
-      "question": "Quel modèle explique les comportements de santé par la vulnérabilité perçue, la gravité perçue, les bénéfices et les obstacles perçus ?",
-      "choices": [
-        "Le modèle des croyances relatives à la santé",
-        "Le modèle transactionnel",
-        "Le modèle de l'adaptation générale",
-        "Le modèle biopsychosocial"
-      ],
-      "answer": "A",
-      "explanation": "Le Health Belief Model attribue l'adoption d'un comportement préventif à ces perceptions et à des signaux d'action.",
-      "source": "Cours de licence de psychologie de la santé, famille des manuels de psychologie de la santé",
-      "verif": "import"
-    },
-    {
-      "course": "l2-psy",
-      "category": "Statistiques inférentielles",
-      "difficulty": 1,
-      "question": "Quel test sert à comparer les moyennes de deux groupes ?",
-      "choices": [
-        "Le coefficient de Pearson",
-        "Le test du khi-deux d'indépendance",
-        "Le test t de Student",
-        "Le coefficient alpha de Cronbach"
-      ],
-      "answer": "C",
-      "explanation": "Le test t compare deux moyennes pour juger si leur différence dépasse ce que le hasard d'échantillonnage produirait.",
-      "source": "Cours de licence de méthodes et statistiques en psychologie, famille des manuels de statistique appliquée aux sciences humaines",
-      "verif": "import"
-    },
-    {
-      "course": "l2-psy",
-      "category": "Statistiques inférentielles",
-      "difficulty": 1,
-      "question": "Que postule l'hypothèse nulle (H0) dans un test statistique ?",
-      "choices": [
-        "Que les données sont toutes identiques",
-        "L'absence d'effet ou de différence dans la population",
-        "Que l'échantillon est biaisé",
-        "L'existence d'un effet important"
+        "La comparaison de nombreuses cultures avec un même outil",
+        "L'étude d'une culture selon le point de vue de ses membres",
+        "L'étude biologique du comportement",
+        "L'étude statistique des échantillons"
       ],
       "answer": "B",
-      "explanation": "H0 est l'hypothèse de « rien de particulier » dans la population ; le test évalue si les données sont compatibles avec elle.",
-      "source": "Cours de licence de méthodes et statistiques en psychologie, famille des manuels de statistique appliquée aux sciences humaines",
+      "explanation": "Venue de la linguistique (Pike), l'approche émique décrit les significations internes à une culture ; l'approche étique adopte un cadre extérieur comparatif.",
+      "source": "Cours de licence de psychologie interculturelle, famille des manuels de psychologie interculturelle et d'ethnopsychologie",
       "verif": "import"
     },
     {
       "course": "l2-psy",
-      "category": "Psychologie de la santé et du stress",
-      "difficulty": 2,
-      "question": "Au cours de quelle phase du syndrome général d'adaptation l'organisme mobilise-t-il ses ressources pour s'adapter au stresseur persistant ?",
+      "category": "Psychologie de l'éducation : motivation scolaire",
+      "difficulty": 1,
+      "question": "Comment Bandura définit-il le sentiment d'efficacité personnelle d'un élève ?",
       "choices": [
-        "La phase d'épuisement",
-        "La phase de récupération",
-        "La phase d'alarme",
-        "La phase de résistance"
+        "Sa croyance en sa capacité de réussir une tâche donnée",
+        "Son rang dans la classe",
+        "Son niveau réel de compétence",
+        "Son goût pour l'école"
       ],
-      "answer": "D",
-      "explanation": "Après l'alarme, l'organisme s'adapte à la situation en maintenant une activation prolongée : c'est la résistance.",
-      "source": "Cours de licence de psychologie de la santé, famille des manuels de psychologie de la santé",
-      "verif": "import"
-    },
-    {
-      "course": "l2-psy",
-      "category": "Psychologie de la santé et du stress",
-      "difficulty": 2,
-      "question": "Quel modèle explique la santé par l'interaction de facteurs biologiques, psychologiques et sociaux ?",
-      "choices": [
-        "Le modèle psychanalytique",
-        "Le modèle behavioriste",
-        "Le modèle biopsychosocial",
-        "Le modèle biomédical"
-      ],
-      "answer": "C",
-      "explanation": "Proposé par Engel, il s'oppose au modèle biomédical centré sur les seuls facteurs biologiques.",
-      "source": "Cours de licence de psychologie de la santé, famille des manuels de psychologie de la santé",
+      "answer": "A",
+      "explanation": "Les élèves qui se sentent efficaces persistent davantage face aux difficultés.",
+      "source": "Cours de licence de psychologie de l'éducation, famille des manuels de psychologie de l'éducation",
       "verif": "import"
     },
     {
       "course": "l2-psy",
       "category": "Psychométrie",
-      "difficulty": 1,
-      "question": "Quelle méthode évalue la stabilité des scores dans le temps ?",
+      "difficulty": 2,
+      "question": "Que montre la validité prédictive d'un test ?",
       "choices": [
-        "Le test-retest",
-        "L'analyse factorielle",
-        "Le coefficient alpha de Cronbach",
-        "Le calcul du centile"
+        "Que les scores sont stables sur deux semaines",
+        "Que le test est facile à corriger",
+        "Que les scores prédisent un critère mesuré plus tard",
+        "Que les items sont cohérents entre eux"
       ],
-      "answer": "A",
-      "explanation": "On fait passer le même test deux fois aux mêmes personnes et on corrèle les deux séries de scores.",
+      "answer": "C",
+      "explanation": "La validité prédictive est une validité critériée : on corrèle le score au critère obtenu ultérieurement.",
       "source": "Cours de licence de psychométrie, famille des manuels de psychométrie et de construction des tests",
       "verif": "import"
     },
     {
       "course": "l2-psy",
       "category": "Psychologie de l'éducation : motivation scolaire",
-      "difficulty": 2,
-      "question": "Qu'appelle-t-on amotivation dans la théorie de l'autodétermination ?",
-      "choices": [
-        "L'absence d'intention d'agir ou de valorisation de l'activité",
-        "Une motivation excessive",
-        "Une motivation intrinsèque passagère",
-        "Une motivation uniquement sociale"
-      ],
-      "answer": "A",
-      "explanation": "L'amotivation correspond à un état où la personne n'a ni intérêt ni raison d'agir, ce qui est le niveau le moins autodéterminé.",
-      "source": "Cours de licence de psychologie de l'éducation, famille des manuels de psychologie de l'éducation",
-      "verif": "import"
-    },
-    {
-      "course": "l2-psy",
-      "category": "Psychologie de l'éducation : motivation scolaire",
-      "difficulty": 2,
-      "question": "Que montre l'étude de Rosenthal et Jacobson sur l'effet Pygmalion en classe ?",
-      "choices": [
-        "Les notes chiffrées motivent tous les élèves",
-        "Les attentes n'ont aucun effet sur l'apprentissage",
-        "Les élèves apprennent mieux sans enseignant",
-        "Les attentes de l'enseignant peuvent influencer les progrès des élèves"
-      ],
-      "answer": "D",
-      "explanation": "Des élèves présentés à tort comme à fort potentiel ont davantage progressé, ce qui illustre le rôle des attentes de l'enseignant.",
-      "source": "Cours de licence de psychologie de l'éducation, famille des manuels de psychologie de l'éducation",
-      "verif": "import"
-    },
-    {
-      "course": "l2-psy",
-      "category": "Méthodologie : plans expérimentaux et variables",
-      "difficulty": 1,
-      "question": "Dans un plan intra-sujets, comment les participants sont-ils répartis entre les conditions ?",
-      "choices": [
-        "Seuls les volontaires passent la condition contrôle",
-        "Chaque participant ne passe que dans une seule condition",
-        "Les participants choisissent leur condition",
-        "Chaque participant passe dans toutes les conditions"
-      ],
-      "answer": "D",
-      "explanation": "Un plan intra-sujets (mesures répétées) expose les mêmes personnes à tous les niveaux de la variable indépendante.",
-      "source": "Cours de licence de méthodes et statistiques en psychologie, famille des manuels de méthodologie de la recherche en psychologie",
-      "verif": "import"
-    },
-    {
-      "course": "l2-psy",
-      "category": "Psychologie interculturelle et ethnopsychologie",
-      "difficulty": 4,
-      "question": "Quelle école de psychiatrie transculturelle, liée à l'hôpital de Fann, est associée à Henri Collomb ?",
-      "choices": [
-        "L'école de Dakar",
-        "L'école de Palo Alto",
-        "L'école de Chicago",
-        "L'école de Francfort"
-      ],
-      "answer": "A",
-      "explanation": "Henri Collomb a animé à Dakar une psychiatrie ouverte aux réalités culturelles locales à partir des années 1950.",
-      "source": "Cours de licence de psychologie interculturelle, famille des manuels de psychologie interculturelle et d'ethnopsychologie",
-      "verif": "import",
-      "region": "AF"
-    },
-    {
-      "course": "l2-psy",
-      "category": "Statistiques inférentielles",
       "difficulty": 5,
-      "question": "Quelle correction consiste à diviser α par le nombre de comparaisons effectuées ?",
+      "question": "Selon Weiner, un élève attribue sa réussite à la chance. Quelles dimensions caractérisent cette cause ?",
       "choices": [
-        "La correction de Bonferroni",
-        "La correction de Spearman-Brown",
-        "La correction de Welch",
-        "La correction de Yates"
-      ],
-      "answer": "A",
-      "explanation": "Multiplier les tests gonfle le risque cumulé d'erreur de type I ; Bonferroni abaisse le seuil de chaque test pour le contenir.",
-      "source": "Cours de licence de méthodes et statistiques en psychologie, famille des manuels de statistique appliquée aux sciences humaines",
-      "verif": "import"
-    },
-    {
-      "course": "l2-psy",
-      "category": "Psychométrie",
-      "difficulty": 1,
-      "question": "Que désigne la fidélité d'un instrument de mesure ?",
-      "choices": [
-        "Le fait qu'il mesure bien le concept visé",
-        "La constance et la précision des mesures qu'il fournit",
-        "Sa capacité à prédire un critère",
-        "Le nombre d'items qu'il contient"
+        "Externe, stable et contrôlable",
+        "Externe, instable et incontrôlable",
+        "Interne, instable et contrôlable",
+        "Interne, stable et contrôlable"
       ],
       "answer": "B",
-      "explanation": "Un test fidèle donne des résultats stables et peu entachés d'erreur de mesure.",
-      "source": "Cours de licence de psychométrie, famille des manuels de psychométrie et de construction des tests",
-      "verif": "import"
-    },
-    {
-      "course": "l2-psy",
-      "category": "Psychométrie",
-      "difficulty": 2,
-      "question": "Qu'estime le coefficient alpha de Cronbach ?",
-      "choices": [
-        "La validité prédictive d'un test",
-        "La cohérence interne d'un test",
-        "La stabilité temporelle d'un test",
-        "L'accord entre deux juges"
-      ],
-      "answer": "B",
-      "explanation": "Alpha reflète dans quelle mesure les items d'une échelle varient ensemble.",
-      "source": "Cours de licence de psychométrie, famille des manuels de psychométrie et de construction des tests",
-      "verif": "import"
-    },
-    {
-      "course": "l2-psy",
-      "category": "Statistiques inférentielles",
-      "difficulty": 3,
-      "question": "Comment définit-on la puissance statistique d'un test ?",
-      "choices": [
-        "La probabilité que H0 soit vraie",
-        "La probabilité de rejeter H0 quand elle est vraie",
-        "La probabilité de rejeter H0 quand elle est fausse",
-        "La valeur de la taille d'échantillon"
-      ],
-      "answer": "C",
-      "explanation": "La puissance vaut 1 − β : c'est la chance de détecter un effet réel.",
-      "source": "Cours de licence de méthodes et statistiques en psychologie, famille des manuels de statistique appliquée aux sciences humaines",
-      "verif": "import"
-    },
-    {
-      "course": "l2-psy",
-      "category": "Méthodologie : plans expérimentaux et variables",
-      "difficulty": 1,
-      "question": "Dans une expérience, comment appelle-t-on la variable que le chercheur manipule volontairement ?",
-      "choices": [
-        "La variable de contrôle",
-        "La variable dépendante",
-        "La variable confondue",
-        "La variable indépendante"
-      ],
-      "answer": "D",
-      "explanation": "La variable indépendante est celle que l'expérimentateur fait varier pour en observer l'effet.",
-      "source": "Cours de licence de méthodes et statistiques en psychologie, famille des manuels de méthodologie de la recherche en psychologie",
-      "verif": "import"
-    },
-    {
-      "course": "l2-psy",
-      "category": "Psychologie de l'éducation : motivation scolaire",
-      "difficulty": 4,
-      "question": "Quel conseil, issu des travaux de Dweck, est adapté pour un enseignant qui encourage un élève ?",
-      "choices": [
-        "Ne jamais donner de retour",
-        "Féliciter uniquement le talent naturel",
-        "Comparer publiquement les élèves",
-        "Féliciter l'effort et les stratégies plutôt que l'intelligence"
-      ],
-      "answer": "D",
-      "explanation": "Le retour centré sur l'effort et les stratégies favorise une conception évolutive de l'intelligence et la persévérance.",
+      "explanation": "La chance échappe à la personne, varie d'une situation à l'autre et ne peut être contrôlée.",
       "source": "Cours de licence de psychologie de l'éducation, famille des manuels de psychologie de l'éducation",
       "verif": "import"
     },
     {
       "course": "l2-psy",
-      "category": "Statistiques inférentielles",
-      "difficulty": 3,
-      "question": "Toutes choses égales par ailleurs, qu'entraîne l'augmentation de la taille de l'échantillon ?",
+      "category": "Psychologie de l'éducation : motivation scolaire",
+      "difficulty": 5,
+      "question": "Selon Bandura, quelle source est généralement considérée comme la plus influente pour le sentiment d'efficacité ?",
       "choices": [
-        "Une hausse automatique de α",
-        "Une diminution de la puissance",
-        "Une augmentation de la puissance du test",
-        "Une disparition de l'erreur de type I"
+        "La persuasion verbale par autrui",
+        "Les états physiologiques seuls",
+        "Les expériences de maîtrise, c'est-à-dire les réussites vécues",
+        "L'observation des autres uniquement"
       ],
       "answer": "C",
-      "explanation": "Un plus grand échantillon réduit l'erreur d'échantillonnage et rend plus probable la détection d'un effet réel.",
-      "source": "Cours de licence de méthodes et statistiques en psychologie, famille des manuels de statistique appliquée aux sciences humaines",
+      "explanation": "Réussir une tâche renforce la croyance en ses capacités plus durablement que les autres sources.",
+      "source": "Cours de licence de psychologie de l'éducation, famille des manuels de psychologie de l'éducation",
       "verif": "import"
     },
     {
       "course": "l2-psy",
       "category": "Psychologie interculturelle et ethnopsychologie",
-      "difficulty": 1,
-      "question": "Quel auteur a décrit le choc culturel, ressenti lors de l'immersion dans une culture inconnue ?",
+      "difficulty": 2,
+      "question": "Comment nomme-t-on, dans la tradition africaine, l'assemblée de discussion collective destinée à régler un différend ?",
       "choices": [
-        "Geert Hofstede",
-        "Frantz Fanon",
-        "Georges Devereux",
-        "Kalervo Oberg"
+        "Le plébiscite",
+        "La palabre",
+        "Le cadastre",
+        "Le référendum"
       ],
-      "answer": "D",
-      "explanation": "Oberg a décrit en 1960 le choc culturel et ses phases d'adaptation chez les personnes installées à l'étranger.",
+      "answer": "B",
+      "explanation": "La palabre est un lieu de parole où la communauté délibère pour rétablir l'harmonie après un conflit.",
       "source": "Cours de licence de psychologie interculturelle, famille des manuels de psychologie interculturelle et d'ethnopsychologie",
-      "verif": "import"
-    },
-    {
-      "course": "l2-psy",
-      "category": "Statistiques inférentielles",
-      "difficulty": 1,
-      "question": "Si la valeur p est inférieure au seuil α, quelle est la décision usuelle ?",
-      "choices": [
-        "Rejeter l'hypothèse nulle",
-        "Doubler la taille de l'échantillon",
-        "Accepter l'hypothèse nulle",
-        "Refaire le test avec un α plus grand"
-      ],
-      "answer": "A",
-      "explanation": "Un p inférieur à α signifie que les données sont peu compatibles avec H0, que l'on rejette.",
-      "source": "Cours de licence de méthodes et statistiques en psychologie, famille des manuels de statistique appliquée aux sciences humaines",
-      "verif": "import"
+      "verif": "import",
+      "region": "AF"
     },
     {
       "course": "l2-psy",
       "category": "Psychométrie",
       "difficulty": 3,
-      "question": "Dans la théorie classique des tests, comment décompose-t-on un score observé ?",
+      "question": "À quoi sert la formule de Spearman-Brown ?",
       "choices": [
-        "Score brut multiplié par l'écart-type",
-        "Score vrai moins score moyen",
-        "Score vrai plus erreur de mesure",
-        "Moyenne plus note Z"
+        "Estimer une taille d'effet",
+        "Calculer un centile",
+        "Estimer la fidélité d'un test dont on change la longueur",
+        "Mesurer l'accord inter-juges"
       ],
       "answer": "C",
-      "explanation": "Le modèle classique pose X = V + E : la fidélité est la part de variance du score observé due au score vrai.",
+      "explanation": "Elle permet de corriger la corrélation entre deux moitiés d'un test ou de prévoir l'effet d'un allongement du test.",
       "source": "Cours de licence de psychométrie, famille des manuels de psychométrie et de construction des tests",
+      "verif": "import"
+    },
+    {
+      "course": "l2-psy",
+      "category": "Psychologie de l'éducation : motivation scolaire",
+      "difficulty": 1,
+      "question": "Comment appelle-t-on la motivation d'un élève qui étudie par intérêt et plaisir pour la matière ?",
+      "choices": [
+        "La motivation intrinsèque",
+        "La motivation de performance",
+        "La motivation extrinsèque",
+        "L'amotivation"
+      ],
+      "answer": "A",
+      "explanation": "La motivation intrinsèque vient de l'activité elle-même, sans récompense extérieure.",
+      "source": "Cours de licence de psychologie de l'éducation, famille des manuels de psychologie de l'éducation",
+      "verif": "import"
+    },
+    {
+      "course": "l2-psy",
+      "category": "Psychométrie",
+      "difficulty": 2,
+      "question": "Quelles sont la moyenne et l'écart-type d'une note T ?",
+      "choices": [
+        "Moyenne 100, écart-type 15",
+        "Moyenne 50, écart-type 10",
+        "Moyenne 10, écart-type 3",
+        "Moyenne 0, écart-type 1"
+      ],
+      "answer": "B",
+      "explanation": "La note T est une transformation linéaire de la note Z : T = 50 + 10 Z.",
+      "source": "Cours de licence de psychométrie, famille des manuels de psychométrie et de construction des tests",
+      "verif": "import"
+    },
+    {
+      "course": "l2-psy",
+      "category": "Psychologie de l'éducation : motivation scolaire",
+      "difficulty": 1,
+      "question": "Quel modèle représente les besoins humains en niveaux hiérarchisés ?",
+      "choices": [
+        "La zone proximale de développement",
+        "La pyramide des besoins de Maslow",
+        "Le syndrome général d'adaptation",
+        "Le modèle transactionnel"
+      ],
+      "answer": "B",
+      "explanation": "Maslow a ordonné les besoins, des besoins physiologiques à l'accomplissement de soi.",
+      "source": "Cours de licence de psychologie de l'éducation, famille des manuels de psychologie de l'éducation",
       "verif": "import"
     },
     {
       "course": "l2-psy",
       "category": "Méthodologie : plans expérimentaux et variables",
       "difficulty": 1,
-      "question": "Combien de conditions comporte un plan factoriel croisé 2 × 3 ?",
+      "question": "Quel est le rôle principal d'un groupe contrôle dans une expérience ?",
       "choices": [
-        "12",
-        "8",
-        "6",
-        "5"
+        "Recevoir le traitement le plus intensif",
+        "Augmenter le nombre total de participants",
+        "Remplacer la mesure de la variable dépendante",
+        "Fournir une base de comparaison sans la manipulation"
       ],
-      "answer": "C",
-      "explanation": "Un plan factoriel croisé multiplie les niveaux des facteurs : 2 × 3 = 6 conditions.",
+      "answer": "D",
+      "explanation": "Le groupe contrôle ne reçoit pas la manipulation et permet de juger de l'effet propre du traitement.",
       "source": "Cours de licence de méthodes et statistiques en psychologie, famille des manuels de méthodologie de la recherche en psychologie",
-      "verif": "import"
-    },
-    {
-      "course": "l2-psy",
-      "category": "Statistiques inférentielles",
-      "difficulty": 4,
-      "question": "Si r = 0,60 entre deux variables, quelle proportion de variance partagent-elles ?",
-      "choices": [
-        "84 %",
-        "60 %",
-        "36 %",
-        "6 %"
-      ],
-      "answer": "C",
-      "explanation": "La variance partagée est r² = 0,60² = 0,36, soit 36 %.",
-      "source": "Cours de licence de méthodes et statistiques en psychologie, famille des manuels de statistique appliquée aux sciences humaines",
-      "verif": "import"
-    },
-    {
-      "course": "l2-psy",
-      "category": "Psychologie de l'éducation : motivation scolaire",
-      "difficulty": 4,
-      "question": "Quel modèle explique l'engagement scolaire par les attentes de succès et la valeur accordée à la tâche ?",
-      "choices": [
-        "Le modèle de Berry",
-        "Le modèle de Lazarus et Folkman",
-        "Le modèle biopsychosocial",
-        "Le modèle attentes-valeur d'Eccles et Wigfield"
-      ],
-      "answer": "D",
-      "explanation": "Un élève s'engage davantage quand il pense pouvoir réussir et quand la tâche a de la valeur pour lui.",
-      "source": "Cours de licence de psychologie de l'éducation, famille des manuels de psychologie de l'éducation",
-      "verif": "import"
-    },
-    {
-      "course": "l2-psy",
-      "category": "Psychologie de la santé et du stress",
-      "difficulty": 3,
-      "question": "Quel profil comportemental, décrit par Friedman et Rosenman, a été associé au risque coronarien ?",
-      "choices": [
-        "Le comportement de type D",
-        "Le comportement de type C",
-        "Le comportement de type B",
-        "Le comportement de type A"
-      ],
-      "answer": "D",
-      "explanation": "Le type A (compétitivité, urgence, hostilité) a été relié aux maladies coronariennes ; l'hostilité s'est révélée la composante la plus délétère.",
-      "source": "Cours de licence de psychologie de la santé, famille des manuels de psychologie de la santé",
-      "verif": "import"
-    },
-    {
-      "course": "l2-psy",
-      "category": "Statistiques inférentielles",
-      "difficulty": 3,
-      "question": "Un khi-deux est calculé et les effectifs observés sont tous égaux aux effectifs théoriques. Quelle est sa valeur ?",
-      "choices": [
-        "Elle est négative",
-        "Elle est égale à l'effectif total",
-        "0",
-        "1"
-      ],
-      "answer": "C",
-      "explanation": "Le khi-deux somme les écarts entre observé et théorique : sans écart, il vaut 0.",
-      "source": "Cours de licence de méthodes et statistiques en psychologie, famille des manuels de statistique appliquée aux sciences humaines",
-      "verif": "import"
-    },
-    {
-      "course": "l2-psy",
-      "category": "Psychologie de l'éducation : motivation scolaire",
-      "difficulty": 2,
-      "question": "Selon Dweck, que croit un élève qui a une théorie incrémentale de l'intelligence ?",
-      "choices": [
-        "Que l'intelligence peut se développer par l'effort",
-        "Que seule la chance compte",
-        "Que l'effort est inutile",
-        "Que l'intelligence est fixée à la naissance"
-      ],
-      "answer": "A",
-      "explanation": "Dweck oppose cette conception évolutive à la conception fixiste, selon laquelle l'intelligence ne change pas.",
-      "source": "Cours de licence de psychologie de l'éducation, famille des manuels de psychologie de l'éducation",
       "verif": "import"
     },
     {
@@ -1387,179 +294,18 @@
     },
     {
       "course": "l2-psy",
-      "category": "Psychologie interculturelle et ethnopsychologie",
-      "difficulty": 1,
-      "question": "Qu'appelle-t-on un tradipraticien ?",
-      "choices": [
-        "Un psychologue diplômé d'université",
-        "Un praticien de la médecine traditionnelle",
-        "Un chirurgien hospitalier",
-        "Un statisticien de la santé"
-      ],
-      "answer": "B",
-      "explanation": "Le terme, utilisé notamment par l'OMS, désigne les praticiens de soins fondés sur des savoirs traditionnels locaux.",
-      "source": "Cours de licence de psychologie interculturelle, famille des manuels de psychologie interculturelle et d'ethnopsychologie",
-      "verif": "import",
-      "region": "AF"
-    },
-    {
-      "course": "l2-psy",
-      "category": "Méthodologie : plans expérimentaux et variables",
-      "difficulty": 2,
-      "question": "Qu'appelle-t-on variable confondue dans une expérience ?",
-      "choices": [
-        "Une variable non contrôlée qui varie avec la variable indépendante",
-        "Une variable mesurée avec trop d'items",
-        "Une variable manipulée dans toutes les conditions",
-        "Une variable dont les valeurs sont toutes identiques"
-      ],
-      "answer": "A",
-      "explanation": "Si une autre variable varie systématiquement avec la manipulation, on ne peut plus attribuer l'effet à la seule variable indépendante.",
-      "source": "Cours de licence de méthodes et statistiques en psychologie, famille des manuels de méthodologie de la recherche en psychologie",
-      "verif": "import"
-    },
-    {
-      "course": "l2-psy",
-      "category": "Méthodologie : plans expérimentaux et variables",
-      "difficulty": 1,
-      "question": "Quelle validité concerne la possibilité de généraliser les résultats à d'autres personnes, lieux et situations ?",
-      "choices": [
-        "La validité critériée",
-        "La validité de construit",
-        "La validité externe",
-        "La validité interne"
-      ],
-      "answer": "C",
-      "explanation": "La validité externe renvoie à la généralisation des résultats au-delà de l'échantillon et du contexte étudiés.",
-      "source": "Cours de licence de méthodes et statistiques en psychologie, famille des manuels de méthodologie de la recherche en psychologie",
-      "verif": "import"
-    },
-    {
-      "course": "l2-psy",
-      "category": "Méthodologie : plans expérimentaux et variables",
-      "difficulty": 5,
-      "question": "Des participants choisis pour leurs scores extrêmes au prétest obtiennent des scores plus proches de la moyenne au post-test sans intervention. De quoi s'agit-il ?",
-      "choices": [
-        "Un effet de maturation",
-        "Une interaction avec la sélection",
-        "Une régression statistique vers la moyenne",
-        "Un effet d'attrition"
-      ],
-      "answer": "C",
-      "explanation": "Les scores extrêmes contiennent une part d'erreur de mesure : lors d'une seconde mesure, ils tendent à se rapprocher de la moyenne.",
-      "source": "Cours de licence de méthodes et statistiques en psychologie, famille des manuels de méthodologie de la recherche en psychologie",
-      "verif": "import"
-    },
-    {
-      "course": "l2-psy",
-      "category": "Psychologie de l'éducation : motivation scolaire",
-      "difficulty": 3,
-      "question": "Selon Weiner, un élève attribue son échec à un manque d'effort. Quelles dimensions caractérisent cette cause ?",
-      "choices": [
-        "Interne, instable et contrôlable",
-        "Externe, instable et incontrôlable",
-        "Interne, stable et incontrôlable",
-        "Externe, stable et incontrôlable"
-      ],
-      "answer": "A",
-      "explanation": "L'effort dépend de la personne, peut varier et peut être modifié, ce qui soutient l'espoir de réussir la fois suivante.",
-      "source": "Cours de licence de psychologie de l'éducation, famille des manuels de psychologie de l'éducation",
-      "verif": "import"
-    },
-    {
-      "course": "l2-psy",
       "category": "Statistiques inférentielles",
-      "difficulty": 2,
-      "question": "Dans quel cas utilise-t-on un test t pour échantillons appariés ?",
+      "difficulty": 5,
+      "question": "Pourquoi un p supérieur à α ne démontre-t-il pas que H0 est vraie ?",
       "choices": [
-        "Quand les variables sont qualitatives",
-        "Quand on cherche une corrélation entre deux variables",
-        "Quand les mêmes participants sont mesurés deux fois",
-        "Quand on compare trois groupes indépendants"
-      ],
-      "answer": "C",
-      "explanation": "Le test apparié analyse les différences intra-individuelles entre deux mesures, par exemple avant et après une intervention.",
-      "source": "Cours de licence de méthodes et statistiques en psychologie, famille des manuels de statistique appliquée aux sciences humaines",
-      "verif": "import"
-    },
-    {
-      "course": "l2-psy",
-      "category": "Psychologie de la santé et du stress",
-      "difficulty": 4,
-      "question": "Quel modèle décrit le changement de comportement en stades : précontemplation, contemplation, préparation, action, maintien ?",
-      "choices": [
-        "Le modèle de Maslach",
-        "Le modèle de Holmes et Rahe",
-        "Le modèle transthéorique de Prochaska et DiClemente",
-        "Le modèle de Selye"
-      ],
-      "answer": "C",
-      "explanation": "Ce modèle présente le changement de comportement comme un processus qui passe par des étapes successives.",
-      "source": "Cours de licence de psychologie de la santé, famille des manuels de psychologie de la santé",
-      "verif": "import"
-    },
-    {
-      "course": "l2-psy",
-      "category": "Méthodologie : plans expérimentaux et variables",
-      "difficulty": 2,
-      "question": "Dans une étude en double aveugle, qui ignore la condition à laquelle chaque participant est affecté ?",
-      "choices": [
-        "Les participants et l'expérimentateur",
-        "Seulement le comité d'éthique",
-        "Seulement les participants",
-        "Seulement l'expérimentateur"
+        "On ne fait que ne pas rejeter H0, faute de preuve suffisante",
+        "Parce que H0 est toujours fausse",
+        "Parce que p est toujours inférieur à 0,05",
+        "Parce que α est arbitrairement élevé"
       ],
       "answer": "A",
-      "explanation": "Le double aveugle protège contre les attentes des participants comme celles de l'expérimentateur.",
-      "source": "Cours de licence de méthodes et statistiques en psychologie, famille des manuels de méthodologie de la recherche en psychologie",
-      "verif": "import"
-    },
-    {
-      "course": "l2-psy",
-      "category": "Méthodologie : plans expérimentaux et variables",
-      "difficulty": 1,
-      "question": "Dans une expérience, comment appelle-t-on la variable mesurée pour évaluer l'effet de la manipulation ?",
-      "choices": [
-        "La variable modératrice",
-        "La variable dépendante",
-        "La variable parasite",
-        "La variable indépendante"
-      ],
-      "answer": "B",
-      "explanation": "La variable dépendante est le comportement ou le score mesuré, censé varier en fonction de la variable indépendante.",
-      "source": "Cours de licence de méthodes et statistiques en psychologie, famille des manuels de méthodologie de la recherche en psychologie",
-      "verif": "import"
-    },
-    {
-      "course": "l2-psy",
-      "category": "Méthodologie : plans expérimentaux et variables",
-      "difficulty": 2,
-      "question": "Quelle différence oppose une étude transversale à une étude longitudinale ?",
-      "choices": [
-        "La longitudinale n'utilise jamais de questionnaires",
-        "La transversale suit les mêmes personnes sur des années",
-        "La transversale porte toujours sur un seul participant",
-        "La transversale compare des groupes à un moment, la longitudinale suit les mêmes personnes"
-      ],
-      "answer": "D",
-      "explanation": "L'étude longitudinale mesure les mêmes individus à plusieurs reprises ; la transversale compare des groupes (par exemple d'âges différents) au même moment.",
-      "source": "Cours de licence de méthodes et statistiques en psychologie, famille des manuels de méthodologie de la recherche en psychologie",
-      "verif": "import"
-    },
-    {
-      "course": "l2-psy",
-      "category": "Méthodologie : plans expérimentaux et variables",
-      "difficulty": 1,
-      "question": "Quelle validité désigne la possibilité de conclure à un effet causal de la variable indépendante sur la variable dépendante ?",
-      "choices": [
-        "La validité externe",
-        "La validité de contenu",
-        "La validité apparente",
-        "La validité interne"
-      ],
-      "answer": "D",
-      "explanation": "La validité interne porte sur la qualité de l'inférence causale à l'intérieur de l'étude.",
-      "source": "Cours de licence de méthodes et statistiques en psychologie, famille des manuels de méthodologie de la recherche en psychologie",
+      "explanation": "Un résultat non significatif peut venir d'un manque de puissance : l'absence de preuve d'un effet n'est pas la preuve de son absence.",
+      "source": "Cours de licence de méthodes et statistiques en psychologie, famille des manuels de statistique appliquée aux sciences humaines",
       "verif": "import"
     },
     {
@@ -1580,33 +326,530 @@
     },
     {
       "course": "l2-psy",
-      "category": "Psychométrie",
-      "difficulty": 1,
-      "question": "Quelles sont la moyenne et l'écart-type d'une note Z ?",
+      "category": "Psychologie de la santé et du stress",
+      "difficulty": 2,
+      "question": "Laquelle de ces stratégies relève du coping centré sur l'émotion ?",
       "choices": [
-        "Moyenne 50, écart-type 10",
-        "Moyenne 100, écart-type 15",
-        "Moyenne 1, écart-type 0",
-        "Moyenne 0, écart-type 1"
+        "Demander un conseil technique",
+        "Établir un plan d'action détaillé",
+        "Négocier avec la personne en cause",
+        "Chercher à se calmer en relativisant la situation"
       ],
       "answer": "D",
-      "explanation": "Une note Z exprime l'écart à la moyenne en nombre d'écarts-types.",
-      "source": "Cours de licence de psychométrie, famille des manuels de psychométrie et de construction des tests",
+      "explanation": "Le coping centré sur l'émotion vise à réguler la détresse sans agir directement sur la source du stress.",
+      "source": "Cours de licence de psychologie de la santé, famille des manuels de psychologie de la santé",
+      "verif": "import"
+    },
+    {
+      "course": "l2-psy",
+      "category": "Psychologie de l'éducation : motivation scolaire",
+      "difficulty": 4,
+      "question": "Quelles activités caractérisent l'apprentissage autorégulé décrit par Zimmerman ?",
+      "choices": [
+        "Mémoriser sans réfléchir",
+        "Éviter les tâches difficiles",
+        "Planifier, contrôler et auto-évaluer son apprentissage",
+        "Attendre les consignes de l'enseignant"
+      ],
+      "answer": "C",
+      "explanation": "L'élève autorégulé fixe des buts, surveille sa progression et ajuste ses stratégies.",
+      "source": "Cours de licence de psychologie de l'éducation, famille des manuels de psychologie de l'éducation",
+      "verif": "import"
+    },
+    {
+      "course": "l2-psy",
+      "category": "Psychologie de la santé et du stress",
+      "difficulty": 1,
+      "question": "Quelles sont les trois phases du syndrome général d'adaptation de Selye ?",
+      "choices": [
+        "Alarme, résistance, épuisement",
+        "Perception, évaluation, action",
+        "Choc, déni, acceptation",
+        "Contemplation, préparation, maintien"
+      ],
+      "answer": "A",
+      "explanation": "Selye distingue la réaction d'alarme, la phase de résistance, puis l'épuisement si le stresseur persiste.",
+      "source": "Cours de licence de psychologie de la santé, famille des manuels de psychologie de la santé",
+      "verif": "import"
+    },
+    {
+      "course": "l2-psy",
+      "category": "Psychologie interculturelle et ethnopsychologie",
+      "difficulty": 2,
+      "question": "Que cherche à tester une démarche interculturelle (cross-cultural) en psychologie ?",
+      "choices": [
+        "La mémoire d'un seul participant",
+        "L'universalité ou la variabilité d'un phénomène psychologique selon les cultures",
+        "L'efficacité d'un seul médicament",
+        "La structure du cerveau de chaque individu"
+      ],
+      "answer": "B",
+      "explanation": "Comparer plusieurs cultures permet de savoir si un phénomène observé en un lieu est universel ou lié à un contexte.",
+      "source": "Cours de licence de psychologie interculturelle, famille des manuels de psychologie interculturelle et d'ethnopsychologie",
       "verif": "import"
     },
     {
       "course": "l2-psy",
       "category": "Méthodologie : plans expérimentaux et variables",
       "difficulty": 4,
-      "question": "Dans un plan 2 × 2, l'effet d'une variable indépendante dépend du niveau de l'autre. Comment nomme-t-on cela ?",
+      "question": "Comment nomme-t-on l'influence des attentes de l'expérimentateur sur les résultats qu'il obtient (Rosenthal) ?",
       "choices": [
-        "Une interaction",
-        "Une corrélation partielle",
-        "Un effet principal",
-        "Un effet de contrôle"
+        "L'effet de l'expérimentateur",
+        "L'effet de plancher",
+        "L'effet de maturation",
+        "L'effet de régression"
       ],
       "answer": "A",
-      "explanation": "Il y a interaction lorsque l'effet d'un facteur varie selon les niveaux de l'autre facteur.",
+      "explanation": "Les attentes de l'expérimentateur peuvent influencer, souvent sans qu'il le sache, le comportement des participants ; d'où le recours au double aveugle.",
+      "source": "Cours de licence de méthodes et statistiques en psychologie, famille des manuels de méthodologie de la recherche en psychologie",
+      "verif": "import"
+    },
+    {
+      "course": "l2-psy",
+      "category": "Psychologie interculturelle et ethnopsychologie",
+      "difficulty": 1,
+      "question": "Dans une culture à dominante collectiviste, quels objectifs sont placés en priorité ?",
+      "choices": [
+        "Ceux des étrangers",
+        "Ceux du groupe d'appartenance",
+        "Ceux de l'individu seul",
+        "Ceux de l'État uniquement"
+      ],
+      "answer": "B",
+      "explanation": "Dans les cultures collectivistes, l'identité et les choix individuels sont fortement liés aux obligations envers le groupe (famille, communauté).",
+      "source": "Cours de licence de psychologie interculturelle, famille des manuels de psychologie interculturelle et d'ethnopsychologie",
+      "verif": "import"
+    },
+    {
+      "course": "l2-psy",
+      "category": "Psychologie interculturelle et ethnopsychologie",
+      "difficulty": 2,
+      "question": "Dans le modèle d'acculturation de Berry, laquelle de ces stratégies associe maintien de sa culture d'origine et contact avec la culture d'accueil ?",
+      "choices": [
+        "La séparation",
+        "L'assimilation",
+        "L'intégration",
+        "La marginalisation"
+      ],
+      "answer": "C",
+      "explanation": "Berry distingue quatre stratégies selon que l'on conserve sa culture d'origine et que l'on entre en relation avec la société d'accueil.",
+      "source": "Cours de licence de psychologie interculturelle, famille des manuels de psychologie interculturelle et d'ethnopsychologie",
+      "verif": "import"
+    },
+    {
+      "course": "l2-psy",
+      "category": "Psychométrie",
+      "difficulty": 5,
+      "question": "Quel cadre méthodologique de Campbell et Fiske examine à la fois validité convergente et validité discriminante ?",
+      "choices": [
+        "La matrice multitrait-multiméthode",
+        "La matrice de Spearman-Brown",
+        "Le diagramme de dispersion",
+        "Le tableau de contingence"
+      ],
+      "answer": "A",
+      "explanation": "La matrice multitrait-multiméthode croise plusieurs traits et plusieurs méthodes de mesure : les mesures d'un même trait doivent converger, celles de traits distincts diverger.",
+      "source": "Cours de licence de psychométrie, famille des manuels de psychométrie et de construction des tests",
+      "verif": "import"
+    },
+    {
+      "course": "l2-psy",
+      "category": "Psychologie interculturelle et ethnopsychologie",
+      "difficulty": 3,
+      "question": "Pourquoi les matrices progressives de Raven ont-elles été conçues avec des items non verbaux ?",
+      "choices": [
+        "Pour éviter tout calcul de score",
+        "Pour mesurer uniquement la mémoire",
+        "Pour raccourcir l'étalonnage",
+        "Pour réduire l'influence du langage et de la culture"
+      ],
+      "answer": "D",
+      "explanation": "Raven a visé un test de raisonnement abstrait moins dépendant des connaissances scolaires et de la langue, d'où l'usage des figures.",
+      "source": "Cours de licence de psychologie interculturelle, famille des manuels de psychologie interculturelle et d'ethnopsychologie",
+      "verif": "import"
+    },
+    {
+      "course": "l2-psy",
+      "category": "Psychologie de l'éducation : motivation scolaire",
+      "difficulty": 2,
+      "question": "Quels sont les trois besoins psychologiques fondamentaux de la théorie de l'autodétermination de Deci et Ryan ?",
+      "choices": [
+        "Survie, pouvoir, plaisir",
+        "Sécurité, estime, repos",
+        "Réussite, évitement, performance",
+        "Autonomie, compétence, affiliation"
+      ],
+      "answer": "D",
+      "explanation": "Selon Deci et Ryan, la satisfaction de ces trois besoins favorise une motivation autonome.",
+      "source": "Cours de licence de psychologie de l'éducation, famille des manuels de psychologie de l'éducation",
+      "verif": "import"
+    },
+    {
+      "course": "l2-psy",
+      "category": "Statistiques inférentielles",
+      "difficulty": 5,
+      "question": "Quelle correction consiste à diviser α par le nombre de comparaisons effectuées ?",
+      "choices": [
+        "La correction de Bonferroni",
+        "La correction de Spearman-Brown",
+        "La correction de Welch",
+        "La correction de Yates"
+      ],
+      "answer": "A",
+      "explanation": "Multiplier les tests gonfle le risque cumulé d'erreur de type I ; Bonferroni abaisse le seuil de chaque test pour le contenir.",
+      "source": "Cours de licence de méthodes et statistiques en psychologie, famille des manuels de statistique appliquée aux sciences humaines",
+      "verif": "import"
+    },
+    {
+      "course": "l2-psy",
+      "category": "Psychologie de la santé et du stress",
+      "difficulty": 1,
+      "question": "Quel chercheur a décrit le syndrome général d'adaptation ?",
+      "choices": [
+        "Sigmund Freud",
+        "Richard Lazarus",
+        "Albert Bandura",
+        "Hans Selye"
+      ],
+      "answer": "D",
+      "explanation": "Hans Selye a décrit à partir des années 1930 la réponse de l'organisme à un agent stressant.",
+      "source": "Cours de licence de psychologie de la santé, famille des manuels de psychologie de la santé",
+      "verif": "import"
+    },
+    {
+      "course": "l2-psy",
+      "category": "Psychologie de la santé et du stress",
+      "difficulty": 4,
+      "question": "Quel modèle décrit le changement de comportement en stades : précontemplation, contemplation, préparation, action, maintien ?",
+      "choices": [
+        "Le modèle de Maslach",
+        "Le modèle de Holmes et Rahe",
+        "Le modèle transthéorique de Prochaska et DiClemente",
+        "Le modèle de Selye"
+      ],
+      "answer": "C",
+      "explanation": "Ce modèle présente le changement de comportement comme un processus qui passe par des étapes successives.",
+      "source": "Cours de licence de psychologie de la santé, famille des manuels de psychologie de la santé",
+      "verif": "import"
+    },
+    {
+      "course": "l2-psy",
+      "category": "Psychologie interculturelle et ethnopsychologie",
+      "difficulty": 4,
+      "question": "Que cherchent à montrer les études d'Ekman sur la reconnaissance d'expressions faciales dans différentes cultures ?",
+      "choices": [
+        "Que le visage ne reflète jamais l'émotion",
+        "Que les émotions n'existent pas chez les adultes",
+        "Que certaines émotions de base sont reconnues dans de nombreuses cultures",
+        "Que chaque culture a ses propres expressions de base"
+      ],
+      "answer": "C",
+      "explanation": "Ekman et ses collègues ont trouvé une reconnaissance largement partagée d'expressions comme la joie ou la colère, tout en reconnaissant des règles culturelles d'expression.",
+      "source": "Cours de licence de psychologie interculturelle, famille des manuels de psychologie interculturelle et d'ethnopsychologie",
+      "verif": "import"
+    },
+    {
+      "course": "l2-psy",
+      "category": "Statistiques inférentielles",
+      "difficulty": 2,
+      "question": "Dans quel cas utilise-t-on un test t pour échantillons appariés ?",
+      "choices": [
+        "Quand les variables sont qualitatives",
+        "Quand on cherche une corrélation entre deux variables",
+        "Quand les mêmes participants sont mesurés deux fois",
+        "Quand on compare trois groupes indépendants"
+      ],
+      "answer": "C",
+      "explanation": "Le test apparié analyse les différences intra-individuelles entre deux mesures, par exemple avant et après une intervention.",
+      "source": "Cours de licence de méthodes et statistiques en psychologie, famille des manuels de statistique appliquée aux sciences humaines",
+      "verif": "import"
+    },
+    {
+      "course": "l2-psy",
+      "category": "Statistiques inférentielles",
+      "difficulty": 3,
+      "question": "Pour tester la significativité d'un r de Pearson calculé sur n paires de scores, combien y a-t-il de degrés de liberté ?",
+      "choices": [
+        "n",
+        "n − 1",
+        "2n − 1",
+        "n − 2"
+      ],
+      "answer": "D",
+      "explanation": "Deux paramètres sont estimés (ordonnée et pente), d'où ddl = n − 2.",
+      "source": "Cours de licence de méthodes et statistiques en psychologie, famille des manuels de statistique appliquée aux sciences humaines",
+      "verif": "import"
+    },
+    {
+      "course": "l2-psy",
+      "category": "Psychologie interculturelle et ethnopsychologie",
+      "difficulty": 2,
+      "question": "Que signifie le concept d'Ubuntu, souvent traduit par « je suis parce que nous sommes » ?",
+      "choices": [
+        "La personne n'a aucune obligation envers autrui",
+        "La réussite individuelle prime sur tout",
+        "L'individu se définit contre la communauté",
+        "L'humanité d'une personne se définit par ses liens avec les autres"
+      ],
+      "answer": "D",
+      "explanation": "Ubuntu est un concept des langues bantoues d'Afrique australe qui souligne l'interdépendance entre les personnes.",
+      "source": "Cours de licence de psychologie interculturelle, famille des manuels de psychologie interculturelle et d'ethnopsychologie",
+      "verif": "import",
+      "region": "AF"
+    },
+    {
+      "course": "l2-psy",
+      "category": "Psychologie de l'éducation : motivation scolaire",
+      "difficulty": 1,
+      "question": "Quel est l'objectif d'un élève orienté vers des buts de maîtrise ?",
+      "choices": [
+        "Obtenir l'approbation des parents",
+        "Éviter tout effort",
+        "Paraître meilleur que les autres",
+        "Apprendre et progresser"
+      ],
+      "answer": "D",
+      "explanation": "Les buts de maîtrise visent le développement des compétences, tandis que les buts de performance visent la comparaison avec autrui.",
+      "source": "Cours de licence de psychologie de l'éducation, famille des manuels de psychologie de l'éducation",
+      "verif": "import"
+    },
+    {
+      "course": "l2-psy",
+      "category": "Psychologie interculturelle et ethnopsychologie",
+      "difficulty": 3,
+      "question": "Quelle dimension de Hofstede mesure l'acceptation d'une répartition inégale du pouvoir dans une société ?",
+      "choices": [
+        "La distance hiérarchique",
+        "La masculinité",
+        "L'orientation à long terme",
+        "L'évitement de l'incertitude"
+      ],
+      "answer": "A",
+      "explanation": "Hofstede a défini la distance hiérarchique à partir d'enquêtes menées auprès de salariés d'une entreprise multinationale.",
+      "source": "Cours de licence de psychologie interculturelle, famille des manuels de psychologie interculturelle et d'ethnopsychologie",
+      "verif": "import"
+    },
+    {
+      "course": "l2-psy",
+      "category": "Psychologie de l'éducation : motivation scolaire",
+      "difficulty": 4,
+      "question": "Quel modèle explique l'engagement scolaire par les attentes de succès et la valeur accordée à la tâche ?",
+      "choices": [
+        "Le modèle de Berry",
+        "Le modèle de Lazarus et Folkman",
+        "Le modèle biopsychosocial",
+        "Le modèle attentes-valeur d'Eccles et Wigfield"
+      ],
+      "answer": "D",
+      "explanation": "Un élève s'engage davantage quand il pense pouvoir réussir et quand la tâche a de la valeur pour lui.",
+      "source": "Cours de licence de psychologie de l'éducation, famille des manuels de psychologie de l'éducation",
+      "verif": "import"
+    },
+    {
+      "course": "l2-psy",
+      "category": "Méthodologie : plans expérimentaux et variables",
+      "difficulty": 2,
+      "question": "Qu'est-ce qui caractérise un plan quasi-expérimental ?",
+      "choices": [
+        "L'absence d'assignation aléatoire aux conditions",
+        "La présence de plus de trois groupes",
+        "L'absence de toute mesure chiffrée",
+        "L'absence de variable dépendante"
+      ],
+      "answer": "A",
+      "explanation": "Dans un plan quasi-expérimental, les groupes existent déjà ou sont formés sans tirage au sort, ce qui affaiblit la validité interne.",
+      "source": "Cours de licence de méthodes et statistiques en psychologie, famille des manuels de méthodologie de la recherche en psychologie",
+      "verif": "import"
+    },
+    {
+      "course": "l2-psy",
+      "category": "Psychologie de l'éducation : motivation scolaire",
+      "difficulty": 2,
+      "question": "Qu'appelle-t-on amotivation dans la théorie de l'autodétermination ?",
+      "choices": [
+        "L'absence d'intention d'agir ou de valorisation de l'activité",
+        "Une motivation excessive",
+        "Une motivation intrinsèque passagère",
+        "Une motivation uniquement sociale"
+      ],
+      "answer": "A",
+      "explanation": "L'amotivation correspond à un état où la personne n'a ni intérêt ni raison d'agir, ce qui est le niveau le moins autodéterminé.",
+      "source": "Cours de licence de psychologie de l'éducation, famille des manuels de psychologie de l'éducation",
+      "verif": "import"
+    },
+    {
+      "course": "l2-psy",
+      "category": "Statistiques inférentielles",
+      "difficulty": 2,
+      "question": "Qu'est-ce qu'une erreur de type II ?",
+      "choices": [
+        "Rejeter H0 alors qu'elle est vraie",
+        "Rejeter H1 alors qu'elle est fausse",
+        "Ne pas rejeter H0 alors qu'elle est fausse",
+        "Choisir un seuil α trop petit"
+      ],
+      "answer": "C",
+      "explanation": "L'erreur de type II est un faux négatif ; sa probabilité est notée β.",
+      "source": "Cours de licence de méthodes et statistiques en psychologie, famille des manuels de statistique appliquée aux sciences humaines",
+      "verif": "import"
+    },
+    {
+      "course": "l2-psy",
+      "category": "Psychologie interculturelle et ethnopsychologie",
+      "difficulty": 1,
+      "question": "Qui est considéré comme le fondateur de l'ethnopsychiatrie ?",
+      "choices": [
+        "Jean Piaget",
+        "Georges Devereux",
+        "Henri Wallon",
+        "Carl Gustav Jung"
+      ],
+      "answer": "B",
+      "explanation": "Devereux (1908-1985), ethnologue et psychanalyste, a fondé l'ethnopsychiatrie en articulant anthropologie et psychanalyse.",
+      "source": "Cours de licence de psychologie interculturelle, famille des manuels de psychologie interculturelle et d'ethnopsychologie",
+      "verif": "import"
+    },
+    {
+      "course": "l2-psy",
+      "category": "Psychologie de la santé et du stress",
+      "difficulty": 3,
+      "question": "Quel axe neuroendocrinien est central dans la réponse physiologique au stress ?",
+      "choices": [
+        "L'axe thyroïdien",
+        "L'axe hypothalamo-gonadique",
+        "L'axe hypophyso-pancréatique",
+        "L'axe hypothalamo-hypophyso-surrénalien"
+      ],
+      "answer": "D",
+      "explanation": "L'hypothalamus active l'hypophyse, qui stimule les surrénales et la sécrétion de cortisol.",
+      "source": "Cours de licence de psychologie de la santé, famille des manuels de psychologie de la santé",
+      "verif": "import"
+    },
+    {
+      "course": "l2-psy",
+      "category": "Statistiques inférentielles",
+      "difficulty": 1,
+      "question": "Quel seuil de signification α est le plus souvent retenu en psychologie ?",
+      "choices": [
+        "0,50",
+        "0,05",
+        "0,25",
+        "0,005"
+      ],
+      "answer": "B",
+      "explanation": "Par convention, on rejette H0 lorsque la probabilité p est inférieure à 0,05.",
+      "source": "Cours de licence de méthodes et statistiques en psychologie, famille des manuels de statistique appliquée aux sciences humaines",
+      "verif": "import"
+    },
+    {
+      "course": "l2-psy",
+      "category": "Psychologie de l'éducation : motivation scolaire",
+      "difficulty": 4,
+      "question": "Quel conseil, issu des travaux de Dweck, est adapté pour un enseignant qui encourage un élève ?",
+      "choices": [
+        "Ne jamais donner de retour",
+        "Féliciter uniquement le talent naturel",
+        "Comparer publiquement les élèves",
+        "Féliciter l'effort et les stratégies plutôt que l'intelligence"
+      ],
+      "answer": "D",
+      "explanation": "Le retour centré sur l'effort et les stratégies favorise une conception évolutive de l'intelligence et la persévérance.",
+      "source": "Cours de licence de psychologie de l'éducation, famille des manuels de psychologie de l'éducation",
+      "verif": "import"
+    },
+    {
+      "course": "l2-psy",
+      "category": "Psychologie de la santé et du stress",
+      "difficulty": 1,
+      "question": "Quels auteurs ont proposé le modèle transactionnel du stress fondé sur l'évaluation cognitive ?",
+      "choices": [
+        "Friedman et Rosenman",
+        "Selye et Cannon",
+        "Holmes et Rahe",
+        "Lazarus et Folkman"
+      ],
+      "answer": "D",
+      "explanation": "Dans ce modèle, le stress naît de la transaction entre la personne et son environnement, selon l'évaluation que la personne en fait.",
+      "source": "Cours de licence de psychologie de la santé, famille des manuels de psychologie de la santé",
+      "verif": "import"
+    },
+    {
+      "course": "l2-psy",
+      "category": "Statistiques inférentielles",
+      "difficulty": 1,
+      "question": "Si la valeur p est inférieure au seuil α, quelle est la décision usuelle ?",
+      "choices": [
+        "Rejeter l'hypothèse nulle",
+        "Doubler la taille de l'échantillon",
+        "Accepter l'hypothèse nulle",
+        "Refaire le test avec un α plus grand"
+      ],
+      "answer": "A",
+      "explanation": "Un p inférieur à α signifie que les données sont peu compatibles avec H0, que l'on rejette.",
+      "source": "Cours de licence de méthodes et statistiques en psychologie, famille des manuels de statistique appliquée aux sciences humaines",
+      "verif": "import"
+    },
+    {
+      "course": "l2-psy",
+      "category": "Statistiques inférentielles",
+      "difficulty": 1,
+      "question": "Qu'est-ce qu'une erreur de type I ?",
+      "choices": [
+        "Accepter H1 alors qu'elle est vraie",
+        "Ne pas rejeter H0 alors qu'elle est fausse",
+        "Calculer mal la moyenne",
+        "Rejeter H0 alors qu'elle est vraie"
+      ],
+      "answer": "D",
+      "explanation": "L'erreur de type I est un faux positif ; sa probabilité maximale est fixée par le seuil α.",
+      "source": "Cours de licence de méthodes et statistiques en psychologie, famille des manuels de statistique appliquée aux sciences humaines",
+      "verif": "import"
+    },
+    {
+      "course": "l2-psy",
+      "category": "Statistiques inférentielles",
+      "difficulty": 3,
+      "question": "Toutes choses égales par ailleurs, qu'entraîne l'augmentation de la taille de l'échantillon ?",
+      "choices": [
+        "Une hausse automatique de α",
+        "Une diminution de la puissance",
+        "Une augmentation de la puissance du test",
+        "Une disparition de l'erreur de type I"
+      ],
+      "answer": "C",
+      "explanation": "Un plus grand échantillon réduit l'erreur d'échantillonnage et rend plus probable la détection d'un effet réel.",
+      "source": "Cours de licence de méthodes et statistiques en psychologie, famille des manuels de statistique appliquée aux sciences humaines",
+      "verif": "import"
+    },
+    {
+      "course": "l2-psy",
+      "category": "Méthodologie : plans expérimentaux et variables",
+      "difficulty": 1,
+      "question": "Combien de conditions comporte un plan factoriel croisé 2 × 3 ?",
+      "choices": [
+        "12",
+        "8",
+        "6",
+        "5"
+      ],
+      "answer": "C",
+      "explanation": "Un plan factoriel croisé multiplie les niveaux des facteurs : 2 × 3 = 6 conditions.",
+      "source": "Cours de licence de méthodes et statistiques en psychologie, famille des manuels de méthodologie de la recherche en psychologie",
+      "verif": "import"
+    },
+    {
+      "course": "l2-psy",
+      "category": "Méthodologie : plans expérimentaux et variables",
+      "difficulty": 1,
+      "question": "Dans une expérience, comment appelle-t-on la variable que le chercheur manipule volontairement ?",
+      "choices": [
+        "La variable de contrôle",
+        "La variable dépendante",
+        "La variable confondue",
+        "La variable indépendante"
+      ],
+      "answer": "D",
+      "explanation": "La variable indépendante est celle que l'expérimentateur fait varier pour en observer l'effet.",
       "source": "Cours de licence de méthodes et statistiques en psychologie, famille des manuels de méthodologie de la recherche en psychologie",
       "verif": "import"
     },
@@ -1629,177 +872,34 @@
     {
       "course": "l2-psy",
       "category": "Psychologie interculturelle et ethnopsychologie",
-      "difficulty": 3,
-      "question": "Quelle dimension de Hofstede mesure l'acceptation d'une répartition inégale du pouvoir dans une société ?",
-      "choices": [
-        "La distance hiérarchique",
-        "La masculinité",
-        "L'orientation à long terme",
-        "L'évitement de l'incertitude"
-      ],
-      "answer": "A",
-      "explanation": "Hofstede a défini la distance hiérarchique à partir d'enquêtes menées auprès de salariés d'une entreprise multinationale.",
-      "source": "Cours de licence de psychologie interculturelle, famille des manuels de psychologie interculturelle et d'ethnopsychologie",
-      "verif": "import"
-    },
-    {
-      "course": "l2-psy",
-      "category": "Psychologie interculturelle et ethnopsychologie",
-      "difficulty": 2,
-      "question": "Quelle est la source principale du biais culturel d'un test d'intelligence conçu dans un pays et utilisé dans un autre ?",
-      "choices": [
-        "Un nombre d'items trop élevé",
-        "Une passation trop courte",
-        "Une moyenne égale à 100",
-        "Un contenu fondé sur des références propres à la culture d'origine"
-      ],
-      "answer": "D",
-      "explanation": "Un test peut supposer des connaissances, un vocabulaire ou des habitudes propres à la culture où il a été construit.",
-      "source": "Cours de licence de psychologie interculturelle, famille des manuels de psychologie interculturelle et d'ethnopsychologie",
-      "verif": "import"
-    },
-    {
-      "course": "l2-psy",
-      "category": "Statistiques inférentielles",
       "difficulty": 1,
-      "question": "À quel type de données s'applique le test du khi-deux d'indépendance ?",
+      "question": "Qu'appelle-t-on un tradipraticien ?",
       "choices": [
-        "À des scores continus appariés",
-        "À des variables qualitatives sous forme d'effectifs",
-        "À des temps de réaction mesurés",
-        "À des moyennes de deux groupes"
+        "Un psychologue diplômé d'université",
+        "Un praticien de la médecine traditionnelle",
+        "Un chirurgien hospitalier",
+        "Un statisticien de la santé"
       ],
       "answer": "B",
-      "explanation": "Le khi-deux compare des effectifs observés à des effectifs théoriques dans un tableau de contingence.",
-      "source": "Cours de licence de méthodes et statistiques en psychologie, famille des manuels de statistique appliquée aux sciences humaines",
-      "verif": "import"
-    },
-    {
-      "course": "l2-psy",
-      "category": "Psychométrie",
-      "difficulty": 1,
-      "question": "Que désigne la validité d'un test ?",
-      "choices": [
-        "Le fait qu'il donne toujours le même score",
-        "Le fait qu'il soit largement diffusé",
-        "Le fait qu'il mesure bien ce qu'il est censé mesurer",
-        "Le fait qu'il soit rapide à passer"
-      ],
-      "answer": "C",
-      "explanation": "La validité concerne la signification des scores et leur interprétation.",
-      "source": "Cours de licence de psychométrie, famille des manuels de psychométrie et de construction des tests",
-      "verif": "import"
-    },
-    {
-      "course": "l2-psy",
-      "category": "Statistiques inférentielles",
-      "difficulty": 2,
-      "question": "Qu'est-ce qu'une erreur de type II ?",
-      "choices": [
-        "Rejeter H0 alors qu'elle est vraie",
-        "Rejeter H1 alors qu'elle est fausse",
-        "Ne pas rejeter H0 alors qu'elle est fausse",
-        "Choisir un seuil α trop petit"
-      ],
-      "answer": "C",
-      "explanation": "L'erreur de type II est un faux négatif ; sa probabilité est notée β.",
-      "source": "Cours de licence de méthodes et statistiques en psychologie, famille des manuels de statistique appliquée aux sciences humaines",
-      "verif": "import"
-    },
-    {
-      "course": "l2-psy",
-      "category": "Statistiques inférentielles",
-      "difficulty": 2,
-      "question": "Que signifie un coefficient de Pearson r égal à 0 ?",
-      "choices": [
-        "Aucune liaison linéaire entre les deux variables",
-        "Aucune relation d'aucune sorte entre les variables",
-        "Une liaison linéaire parfaite",
-        "Une erreur de calcul"
-      ],
-      "answer": "A",
-      "explanation": "r = 0 indique l'absence de liaison linéaire ; une relation non linéaire peut subsister.",
-      "source": "Cours de licence de méthodes et statistiques en psychologie, famille des manuels de statistique appliquée aux sciences humaines",
-      "verif": "import"
-    },
-    {
-      "course": "l2-psy",
-      "category": "Psychologie interculturelle et ethnopsychologie",
-      "difficulty": 2,
-      "question": "Que cherche à tester une démarche interculturelle (cross-cultural) en psychologie ?",
-      "choices": [
-        "La mémoire d'un seul participant",
-        "L'universalité ou la variabilité d'un phénomène psychologique selon les cultures",
-        "L'efficacité d'un seul médicament",
-        "La structure du cerveau de chaque individu"
-      ],
-      "answer": "B",
-      "explanation": "Comparer plusieurs cultures permet de savoir si un phénomène observé en un lieu est universel ou lié à un contexte.",
+      "explanation": "Le terme, utilisé notamment par l'OMS, désigne les praticiens de soins fondés sur des savoirs traditionnels locaux.",
       "source": "Cours de licence de psychologie interculturelle, famille des manuels de psychologie interculturelle et d'ethnopsychologie",
-      "verif": "import"
+      "verif": "import",
+      "region": "AF"
     },
     {
       "course": "l2-psy",
       "category": "Statistiques inférentielles",
-      "difficulty": 3,
-      "question": "Pour tester la significativité d'un r de Pearson calculé sur n paires de scores, combien y a-t-il de degrés de liberté ?",
+      "difficulty": 1,
+      "question": "Entre quelles valeurs varie le coefficient de corrélation r de Pearson ?",
       "choices": [
-        "n",
-        "n − 1",
-        "2n − 1",
-        "n − 2"
+        "Entre −1 et +1",
+        "Entre 0 et 100",
+        "Entre −10 et +10",
+        "Entre 0 et 1"
       ],
-      "answer": "D",
-      "explanation": "Deux paramètres sont estimés (ordonnée et pente), d'où ddl = n − 2.",
+      "answer": "A",
+      "explanation": "r est borné : −1 indique une liaison linéaire négative parfaite, +1 une liaison positive parfaite.",
       "source": "Cours de licence de méthodes et statistiques en psychologie, famille des manuels de statistique appliquée aux sciences humaines",
-      "verif": "import"
-    },
-    {
-      "course": "l2-psy",
-      "category": "Psychologie de la santé et du stress",
-      "difficulty": 1,
-      "question": "Quelles sont les trois phases du syndrome général d'adaptation de Selye ?",
-      "choices": [
-        "Alarme, résistance, épuisement",
-        "Perception, évaluation, action",
-        "Choc, déni, acceptation",
-        "Contemplation, préparation, maintien"
-      ],
-      "answer": "A",
-      "explanation": "Selye distingue la réaction d'alarme, la phase de résistance, puis l'épuisement si le stresseur persiste.",
-      "source": "Cours de licence de psychologie de la santé, famille des manuels de psychologie de la santé",
-      "verif": "import"
-    },
-    {
-      "course": "l2-psy",
-      "category": "Psychométrie",
-      "difficulty": 2,
-      "question": "Que signifie la validité discriminante d'une mesure ?",
-      "choices": [
-        "Elle est peu corrélée avec des mesures de concepts différents",
-        "Elle ne s'applique qu'aux tests collectifs",
-        "Elle ne donne que deux scores possibles",
-        "Elle est fortement corrélée avec toutes les mesures"
-      ],
-      "answer": "A",
-      "explanation": "La validité discriminante est établie quand le test se distingue de mesures de concepts théoriquement distincts.",
-      "source": "Cours de licence de psychométrie, famille des manuels de psychométrie et de construction des tests",
-      "verif": "import"
-    },
-    {
-      "course": "l2-psy",
-      "category": "Psychologie de l'éducation : motivation scolaire",
-      "difficulty": 1,
-      "question": "Quel modèle représente les besoins humains en niveaux hiérarchisés ?",
-      "choices": [
-        "La zone proximale de développement",
-        "La pyramide des besoins de Maslow",
-        "Le syndrome général d'adaptation",
-        "Le modèle transactionnel"
-      ],
-      "answer": "B",
-      "explanation": "Maslow a ordonné les besoins, des besoins physiologiques à l'accomplissement de soi.",
-      "source": "Cours de licence de psychologie de l'éducation, famille des manuels de psychologie de l'éducation",
       "verif": "import"
     },
     {
@@ -1822,16 +922,803 @@
       "course": "l2-psy",
       "category": "Psychologie de la santé et du stress",
       "difficulty": 1,
-      "question": "Quel chercheur a décrit le syndrome général d'adaptation ?",
+      "question": "Quel outil, proposé par Holmes et Rahe, classe des événements de vie selon leur charge de stress ?",
       "choices": [
-        "Sigmund Freud",
-        "Richard Lazarus",
-        "Albert Bandura",
-        "Hans Selye"
+        "L'échelle d'efficacité de Bandura",
+        "Le questionnaire de Maslach",
+        "L'échelle de Likert",
+        "L'échelle de réajustement social"
       ],
       "answer": "D",
-      "explanation": "Hans Selye a décrit à partir des années 1930 la réponse de l'organisme à un agent stressant.",
+      "explanation": "Holmes et Rahe ont attribué des valeurs aux événements de vie nécessitant une réadaptation, du deuil à la retraite.",
       "source": "Cours de licence de psychologie de la santé, famille des manuels de psychologie de la santé",
+      "verif": "import"
+    },
+    {
+      "course": "l2-psy",
+      "category": "Psychologie interculturelle et ethnopsychologie",
+      "difficulty": 4,
+      "question": "Quel psychiatre nigérian est connu pour le « village system » de soin psychiatrique à Aro, près d'Abeokuta ?",
+      "choices": [
+        "Thomas Adeoye Lambo",
+        "Frantz Fanon",
+        "Henri Collomb",
+        "Georges Devereux"
+      ],
+      "answer": "A",
+      "explanation": "Lambo a associé familles, villages voisins et soins psychiatriques, en intégrant des guérisseurs traditionnels à la prise en charge.",
+      "source": "Cours de licence de psychologie interculturelle, famille des manuels de psychologie interculturelle et d'ethnopsychologie",
+      "verif": "import",
+      "region": "AF"
+    },
+    {
+      "course": "l2-psy",
+      "category": "Psychométrie",
+      "difficulty": 2,
+      "question": "Qu'estime le coefficient alpha de Cronbach ?",
+      "choices": [
+        "La validité prédictive d'un test",
+        "La cohérence interne d'un test",
+        "La stabilité temporelle d'un test",
+        "L'accord entre deux juges"
+      ],
+      "answer": "B",
+      "explanation": "Alpha reflète dans quelle mesure les items d'une échelle varient ensemble.",
+      "source": "Cours de licence de psychométrie, famille des manuels de psychométrie et de construction des tests",
+      "verif": "import"
+    },
+    {
+      "course": "l2-psy",
+      "category": "Psychométrie",
+      "difficulty": 4,
+      "question": "Quelle technique statistique sert couramment à examiner la structure interne d'un test (validité de construit) ?",
+      "choices": [
+        "L'analyse factorielle",
+        "Le test de Bonferroni",
+        "Le test du khi-deux",
+        "Le test t apparié"
+      ],
+      "answer": "A",
+      "explanation": "L'analyse factorielle regroupe les items en facteurs et permet de vérifier si la structure observée correspond à la théorie.",
+      "source": "Cours de licence de psychométrie, famille des manuels de psychométrie et de construction des tests",
+      "verif": "import"
+    },
+    {
+      "course": "l2-psy",
+      "category": "Psychologie de l'éducation : motivation scolaire",
+      "difficulty": 2,
+      "question": "Que montre l'étude de Rosenthal et Jacobson sur l'effet Pygmalion en classe ?",
+      "choices": [
+        "Les notes chiffrées motivent tous les élèves",
+        "Les attentes n'ont aucun effet sur l'apprentissage",
+        "Les élèves apprennent mieux sans enseignant",
+        "Les attentes de l'enseignant peuvent influencer les progrès des élèves"
+      ],
+      "answer": "D",
+      "explanation": "Des élèves présentés à tort comme à fort potentiel ont davantage progressé, ce qui illustre le rôle des attentes de l'enseignant.",
+      "source": "Cours de licence de psychologie de l'éducation, famille des manuels de psychologie de l'éducation",
+      "verif": "import"
+    },
+    {
+      "course": "l2-psy",
+      "category": "Psychométrie",
+      "difficulty": 1,
+      "question": "Quelles sont la moyenne et l'écart-type d'une note Z ?",
+      "choices": [
+        "Moyenne 50, écart-type 10",
+        "Moyenne 100, écart-type 15",
+        "Moyenne 1, écart-type 0",
+        "Moyenne 0, écart-type 1"
+      ],
+      "answer": "D",
+      "explanation": "Une note Z exprime l'écart à la moyenne en nombre d'écarts-types.",
+      "source": "Cours de licence de psychométrie, famille des manuels de psychométrie et de construction des tests",
+      "verif": "import"
+    },
+    {
+      "course": "l2-psy",
+      "category": "Psychologie de la santé et du stress",
+      "difficulty": 4,
+      "question": "Quel modèle explique les comportements de santé par la vulnérabilité perçue, la gravité perçue, les bénéfices et les obstacles perçus ?",
+      "choices": [
+        "Le modèle des croyances relatives à la santé",
+        "Le modèle transactionnel",
+        "Le modèle de l'adaptation générale",
+        "Le modèle biopsychosocial"
+      ],
+      "answer": "A",
+      "explanation": "Le Health Belief Model attribue l'adoption d'un comportement préventif à ces perceptions et à des signaux d'action.",
+      "source": "Cours de licence de psychologie de la santé, famille des manuels de psychologie de la santé",
+      "verif": "import"
+    },
+    {
+      "course": "l2-psy",
+      "category": "Méthodologie : plans expérimentaux et variables",
+      "difficulty": 1,
+      "question": "Quelle validité concerne la possibilité de généraliser les résultats à d'autres personnes, lieux et situations ?",
+      "choices": [
+        "La validité critériée",
+        "La validité de construit",
+        "La validité externe",
+        "La validité interne"
+      ],
+      "answer": "C",
+      "explanation": "La validité externe renvoie à la généralisation des résultats au-delà de l'échantillon et du contexte étudiés.",
+      "source": "Cours de licence de méthodes et statistiques en psychologie, famille des manuels de méthodologie de la recherche en psychologie",
+      "verif": "import"
+    },
+    {
+      "course": "l2-psy",
+      "category": "Psychométrie",
+      "difficulty": 2,
+      "question": "Quel indice est utilisé pour mesurer l'accord entre deux observateurs qui classent des comportements ?",
+      "choices": [
+        "Le khi-deux d'indépendance",
+        "Le coefficient alpha de Cronbach",
+        "Le d de Cohen",
+        "Le kappa de Cohen"
+      ],
+      "answer": "D",
+      "explanation": "Le kappa de Cohen mesure l'accord inter-juges en corrigeant la part d'accord attendue par hasard.",
+      "source": "Cours de licence de psychométrie, famille des manuels de psychométrie et de construction des tests",
+      "verif": "import"
+    },
+    {
+      "course": "l2-psy",
+      "category": "Psychométrie",
+      "difficulty": 1,
+      "question": "Que désigne la fidélité d'un instrument de mesure ?",
+      "choices": [
+        "Le fait qu'il mesure bien le concept visé",
+        "La constance et la précision des mesures qu'il fournit",
+        "Sa capacité à prédire un critère",
+        "Le nombre d'items qu'il contient"
+      ],
+      "answer": "B",
+      "explanation": "Un test fidèle donne des résultats stables et peu entachés d'erreur de mesure.",
+      "source": "Cours de licence de psychométrie, famille des manuels de psychométrie et de construction des tests",
+      "verif": "import"
+    },
+    {
+      "course": "l2-psy",
+      "category": "Psychologie de l'éducation : motivation scolaire",
+      "difficulty": 3,
+      "question": "Que désigne l'impuissance apprise (Seligman) appliquée à l'école ?",
+      "choices": [
+        "La croyance que ses efforts n'influencent pas ses résultats",
+        "Un besoin de réussite supérieur à la moyenne",
+        "Une motivation intrinsèque forte",
+        "Un excès de confiance en soi"
+      ],
+      "answer": "A",
+      "explanation": "Les élèves qui attribuent leurs échecs à des causes stables et incontrôlables renoncent plus facilement à agir.",
+      "source": "Cours de licence de psychologie de l'éducation, famille des manuels de psychologie de l'éducation",
+      "verif": "import"
+    },
+    {
+      "course": "l2-psy",
+      "category": "Psychométrie",
+      "difficulty": 4,
+      "question": "Dans une distribution normale, à quel centile environ correspond une note Z de +1 ?",
+      "choices": [
+        "Le 68e",
+        "Le 50e",
+        "Le 84e",
+        "Le 97e"
+      ],
+      "answer": "C",
+      "explanation": "Environ 34 % des scores se situent entre la moyenne et +1 écart-type : 50 + 34 = 84 %.",
+      "source": "Cours de licence de psychométrie, famille des manuels de psychométrie et de construction des tests",
+      "verif": "import"
+    },
+    {
+      "course": "l2-psy",
+      "category": "Psychologie de l'éducation : motivation scolaire",
+      "difficulty": 5,
+      "question": "Dans la théorie de l'autodétermination, quel type de régulation extrinsèque est le plus autodéterminé ?",
+      "choices": [
+        "La régulation introjectée",
+        "La régulation intégrée",
+        "La régulation identifiée",
+        "La régulation externe"
+      ],
+      "answer": "B",
+      "explanation": "Elle correspond à des valeurs extérieures pleinement assimilées au soi ; elle est plus autonome que les régulations identifiée, introjectée et externe.",
+      "source": "Cours de licence de psychologie de l'éducation, famille des manuels de psychologie de l'éducation",
+      "verif": "import"
+    },
+    {
+      "course": "l2-psy",
+      "category": "Psychométrie",
+      "difficulty": 3,
+      "question": "Quel est le lien entre fidélité et validité ?",
+      "choices": [
+        "Elles sont sans aucun lien",
+        "La validité garantit la fidélité",
+        "La fidélité garantit la validité",
+        "La fidélité est nécessaire mais non suffisante pour la validité"
+      ],
+      "answer": "D",
+      "explanation": "Un test peut mesurer de façon constante autre chose que ce qu'on vise ; en revanche, un test peu fidèle ne peut pas être valide.",
+      "source": "Cours de licence de psychométrie, famille des manuels de psychométrie et de construction des tests",
+      "verif": "import"
+    },
+    {
+      "course": "l2-psy",
+      "category": "Psychologie interculturelle et ethnopsychologie",
+      "difficulty": 3,
+      "question": "Que désigne un syndrome lié à la culture (culture-bound syndrome) ?",
+      "choices": [
+        "Un tableau de souffrance dont la forme est propre à un contexte culturel",
+        "Un test psychologique spécifique",
+        "Une maladie causée uniquement par un virus",
+        "Un trouble identique dans toutes les cultures"
+      ],
+      "answer": "A",
+      "explanation": "Ces syndromes sont reconnus et nommés comme tels par la culture concernée, et leur expression dépend de ses croyances.",
+      "source": "Cours de licence de psychologie interculturelle, famille des manuels de psychologie interculturelle et d'ethnopsychologie",
+      "verif": "import"
+    },
+    {
+      "course": "l2-psy",
+      "category": "Méthodologie : plans expérimentaux et variables",
+      "difficulty": 5,
+      "question": "Des participants choisis pour leurs scores extrêmes au prétest obtiennent des scores plus proches de la moyenne au post-test sans intervention. De quoi s'agit-il ?",
+      "choices": [
+        "Un effet de maturation",
+        "Une interaction avec la sélection",
+        "Une régression statistique vers la moyenne",
+        "Un effet d'attrition"
+      ],
+      "answer": "C",
+      "explanation": "Les scores extrêmes contiennent une part d'erreur de mesure : lors d'une seconde mesure, ils tendent à se rapprocher de la moyenne.",
+      "source": "Cours de licence de méthodes et statistiques en psychologie, famille des manuels de méthodologie de la recherche en psychologie",
+      "verif": "import"
+    },
+    {
+      "course": "l2-psy",
+      "category": "Psychologie de la santé et du stress",
+      "difficulty": 3,
+      "question": "Quel concept de Rotter désigne la croyance que les événements dépendent de soi ou de facteurs extérieurs ?",
+      "choices": [
+        "L'évaluation primaire",
+        "Le comportement de type A",
+        "Le soutien social perçu",
+        "Le locus de contrôle"
+      ],
+      "answer": "D",
+      "explanation": "Le locus de contrôle, interne ou externe, influence notamment les conduites de santé.",
+      "source": "Cours de licence de psychologie de la santé, famille des manuels de psychologie de la santé",
+      "verif": "import"
+    },
+    {
+      "course": "l2-psy",
+      "category": "Méthodologie : plans expérimentaux et variables",
+      "difficulty": 3,
+      "question": "Dans une étude suivie dans le temps, quelle menace pour la validité interne est liée à la perte différentielle de participants ?",
+      "choices": [
+        "L'instrumentation",
+        "L'attrition",
+        "La maturation",
+        "L'effet de test"
+      ],
+      "answer": "B",
+      "explanation": "Si les participants qui abandonnent diffèrent selon les groupes, les groupes restants ne sont plus comparables.",
+      "source": "Cours de licence de méthodes et statistiques en psychologie, famille des manuels de méthodologie de la recherche en psychologie",
+      "verif": "import"
+    },
+    {
+      "course": "l2-psy",
+      "category": "Statistiques inférentielles",
+      "difficulty": 3,
+      "question": "Comment définit-on la puissance statistique d'un test ?",
+      "choices": [
+        "La probabilité que H0 soit vraie",
+        "La probabilité de rejeter H0 quand elle est vraie",
+        "La probabilité de rejeter H0 quand elle est fausse",
+        "La valeur de la taille d'échantillon"
+      ],
+      "answer": "C",
+      "explanation": "La puissance vaut 1 − β : c'est la chance de détecter un effet réel.",
+      "source": "Cours de licence de méthodes et statistiques en psychologie, famille des manuels de statistique appliquée aux sciences humaines",
+      "verif": "import"
+    },
+    {
+      "course": "l2-psy",
+      "category": "Méthodologie : plans expérimentaux et variables",
+      "difficulty": 3,
+      "question": "Qu'est-ce qu'une variable médiatrice ?",
+      "choices": [
+        "Une variable qui modifie seulement la force d'un lien",
+        "Une variable qui explique par quel mécanisme la VI agit sur la VD",
+        "Une variable qui n'a aucun lien avec la VD",
+        "Une variable mesurée avant le début de l'étude"
+      ],
+      "answer": "B",
+      "explanation": "La médiation décrit le processus intermédiaire (VI → médiateur → VD), alors que la modération décrit une condition qui change la force du lien.",
+      "source": "Cours de licence de méthodes et statistiques en psychologie, famille des manuels de méthodologie de la recherche en psychologie",
+      "verif": "import"
+    },
+    {
+      "course": "l2-psy",
+      "category": "Psychométrie",
+      "difficulty": 1,
+      "question": "Que désigne la validité d'un test ?",
+      "choices": [
+        "Le fait qu'il donne toujours le même score",
+        "Le fait qu'il soit largement diffusé",
+        "Le fait qu'il mesure bien ce qu'il est censé mesurer",
+        "Le fait qu'il soit rapide à passer"
+      ],
+      "answer": "C",
+      "explanation": "La validité concerne la signification des scores et leur interprétation.",
+      "source": "Cours de licence de psychométrie, famille des manuels de psychométrie et de construction des tests",
+      "verif": "import"
+    },
+    {
+      "course": "l2-psy",
+      "category": "Psychologie de l'éducation : motivation scolaire",
+      "difficulty": 3,
+      "question": "Quelles dimensions causales Weiner utilise-t-il pour classer les attributions de réussite et d'échec ?",
+      "choices": [
+        "Alarme, résistance, épuisement",
+        "Autonomie, compétence, affiliation",
+        "Lieu de causalité, stabilité, contrôlabilité",
+        "Intelligence, mémoire, attention"
+      ],
+      "answer": "C",
+      "explanation": "Chaque cause invoquée (effort, aptitude, chance, difficulté de la tâche) se situe sur ces dimensions.",
+      "source": "Cours de licence de psychologie de l'éducation, famille des manuels de psychologie de l'éducation",
+      "verif": "import"
+    },
+    {
+      "course": "l2-psy",
+      "category": "Psychologie de la santé et du stress",
+      "difficulty": 2,
+      "question": "Que désigne l'effet tampon du soutien social ?",
+      "choices": [
+        "Il remplace le coping de la personne",
+        "Il atténue l'impact du stress sur la santé",
+        "Il augmente la sécrétion de cortisol",
+        "Il supprime la source du stress"
+      ],
+      "answer": "B",
+      "explanation": "Le soutien perçu protège la santé en réduisant les effets négatifs d'événements stressants.",
+      "source": "Cours de licence de psychologie de la santé, famille des manuels de psychologie de la santé",
+      "verif": "import"
+    },
+    {
+      "course": "l2-psy",
+      "category": "Psychologie interculturelle et ethnopsychologie",
+      "difficulty": 1,
+      "question": "Quel auteur a décrit le choc culturel, ressenti lors de l'immersion dans une culture inconnue ?",
+      "choices": [
+        "Geert Hofstede",
+        "Frantz Fanon",
+        "Georges Devereux",
+        "Kalervo Oberg"
+      ],
+      "answer": "D",
+      "explanation": "Oberg a décrit en 1960 le choc culturel et ses phases d'adaptation chez les personnes installées à l'étranger.",
+      "source": "Cours de licence de psychologie interculturelle, famille des manuels de psychologie interculturelle et d'ethnopsychologie",
+      "verif": "import"
+    },
+    {
+      "course": "l2-psy",
+      "category": "Psychologie de l'éducation : motivation scolaire",
+      "difficulty": 3,
+      "question": "Selon Weiner, un élève attribue son échec à un manque d'effort. Quelles dimensions caractérisent cette cause ?",
+      "choices": [
+        "Interne, instable et contrôlable",
+        "Externe, instable et incontrôlable",
+        "Interne, stable et incontrôlable",
+        "Externe, stable et incontrôlable"
+      ],
+      "answer": "A",
+      "explanation": "L'effort dépend de la personne, peut varier et peut être modifié, ce qui soutient l'espoir de réussir la fois suivante.",
+      "source": "Cours de licence de psychologie de l'éducation, famille des manuels de psychologie de l'éducation",
+      "verif": "import"
+    },
+    {
+      "course": "l2-psy",
+      "category": "Psychologie interculturelle et ethnopsychologie",
+      "difficulty": 5,
+      "question": "Quelle position définit le complémentarisme de Devereux en ethnopsychiatrie ?",
+      "choices": [
+        "Écarter toute référence à la culture",
+        "Réduire tout trouble à une cause biologique",
+        "Utiliser conjointement les discours de l'anthropologie et de la psychanalyse",
+        "Remplacer la psychologie par l'anthropologie"
+      ],
+      "answer": "C",
+      "explanation": "Pour Devereux, les deux disciplines apportent des lectures différentes et non réductibles qui doivent être utilisées ensemble.",
+      "source": "Cours de licence de psychologie interculturelle, famille des manuels de psychologie interculturelle et d'ethnopsychologie",
+      "verif": "import"
+    },
+    {
+      "course": "l2-psy",
+      "category": "Psychologie de la santé et du stress",
+      "difficulty": 3,
+      "question": "Quel profil comportemental, décrit par Friedman et Rosenman, a été associé au risque coronarien ?",
+      "choices": [
+        "Le comportement de type D",
+        "Le comportement de type C",
+        "Le comportement de type B",
+        "Le comportement de type A"
+      ],
+      "answer": "D",
+      "explanation": "Le type A (compétitivité, urgence, hostilité) a été relié aux maladies coronariennes ; l'hostilité s'est révélée la composante la plus délétère.",
+      "source": "Cours de licence de psychologie de la santé, famille des manuels de psychologie de la santé",
+      "verif": "import"
+    },
+    {
+      "course": "l2-psy",
+      "category": "Psychologie de la santé et du stress",
+      "difficulty": 1,
+      "question": "Comment appelle-t-on, en psychologie de la santé, un événement qui déclenche une réponse de stress ?",
+      "choices": [
+        "Un biais",
+        "Un stresseur",
+        "Un symptôme",
+        "Un trait"
+      ],
+      "answer": "B",
+      "explanation": "Le stresseur est la situation ou l'événement susceptible de provoquer une réponse de stress.",
+      "source": "Cours de licence de psychologie de la santé, famille des manuels de psychologie de la santé",
+      "verif": "import"
+    },
+    {
+      "course": "l2-psy",
+      "category": "Psychométrie",
+      "difficulty": 3,
+      "question": "Dans la théorie classique des tests, comment décompose-t-on un score observé ?",
+      "choices": [
+        "Score brut multiplié par l'écart-type",
+        "Score vrai moins score moyen",
+        "Score vrai plus erreur de mesure",
+        "Moyenne plus note Z"
+      ],
+      "answer": "C",
+      "explanation": "Le modèle classique pose X = V + E : la fidélité est la part de variance du score observé due au score vrai.",
+      "source": "Cours de licence de psychométrie, famille des manuels de psychométrie et de construction des tests",
+      "verif": "import"
+    },
+    {
+      "course": "l2-psy",
+      "category": "Méthodologie : plans expérimentaux et variables",
+      "difficulty": 1,
+      "question": "Que vise l'assignation aléatoire des participants aux conditions expérimentales ?",
+      "choices": [
+        "Représenter exactement la population générale",
+        "Choisir les participants les plus motivés",
+        "Rendre les groupes équivalents au départ, en moyenne",
+        "Garantir que tous les participants se ressemblent"
+      ],
+      "answer": "C",
+      "explanation": "Le hasard répartit les caractéristiques individuelles de façon équilibrée entre les groupes, ce qui limite les biais de départ.",
+      "source": "Cours de licence de méthodes et statistiques en psychologie, famille des manuels de méthodologie de la recherche en psychologie",
+      "verif": "import"
+    },
+    {
+      "course": "l2-psy",
+      "category": "Psychologie de la santé et du stress",
+      "difficulty": 1,
+      "question": "Quelle hormone est considérée comme un marqueur majeur de la réponse de stress ?",
+      "choices": [
+        "Le cortisol",
+        "L'ocytocine",
+        "La mélatonine",
+        "L'insuline"
+      ],
+      "answer": "A",
+      "explanation": "Le cortisol, sécrété par les glandes surrénales, augmente lors d'une réponse de stress prolongée.",
+      "source": "Cours de licence de psychologie de la santé, famille des manuels de psychologie de la santé",
+      "verif": "import"
+    },
+    {
+      "course": "l2-psy",
+      "category": "Statistiques inférentielles",
+      "difficulty": 3,
+      "question": "Combien de degrés de liberté a un khi-deux d'indépendance sur un tableau de contingence à 3 lignes et 4 colonnes ?",
+      "choices": [
+        "6",
+        "7",
+        "10",
+        "12"
+      ],
+      "answer": "A",
+      "explanation": "ddl = (lignes − 1) × (colonnes − 1) = 2 × 3 = 6.",
+      "source": "Cours de licence de méthodes et statistiques en psychologie, famille des manuels de statistique appliquée aux sciences humaines",
+      "verif": "import"
+    },
+    {
+      "course": "l2-psy",
+      "category": "Statistiques inférentielles",
+      "difficulty": 1,
+      "question": "Que postule l'hypothèse nulle (H0) dans un test statistique ?",
+      "choices": [
+        "Que les données sont toutes identiques",
+        "L'absence d'effet ou de différence dans la population",
+        "Que l'échantillon est biaisé",
+        "L'existence d'un effet important"
+      ],
+      "answer": "B",
+      "explanation": "H0 est l'hypothèse de « rien de particulier » dans la population ; le test évalue si les données sont compatibles avec elle.",
+      "source": "Cours de licence de méthodes et statistiques en psychologie, famille des manuels de statistique appliquée aux sciences humaines",
+      "verif": "import"
+    },
+    {
+      "course": "l2-psy",
+      "category": "Psychologie de la santé et du stress",
+      "difficulty": 5,
+      "question": "Pourquoi la réponse décrite par Selye est-elle qualifiée de non spécifique ?",
+      "choices": [
+        "Elle ne s'accompagne d'aucune réaction hormonale",
+        "Elle n'apparaît qu'en cas de blessure physique",
+        "Elle survient quelle que soit la nature du stresseur",
+        "Elle varie complètement selon chaque personne"
+      ],
+      "answer": "C",
+      "explanation": "Pour Selye, divers agents (froid, infection, effort, etc.) déclenchent la même réponse générale de l'organisme.",
+      "source": "Cours de licence de psychologie de la santé, famille des manuels de psychologie de la santé",
+      "verif": "import"
+    },
+    {
+      "course": "l2-psy",
+      "category": "Psychologie interculturelle et ethnopsychologie",
+      "difficulty": 3,
+      "question": "Quel psychiatre en poste à Blida, en Algérie, a analysé les effets psychologiques de la colonisation dans « Les Damnés de la terre » ?",
+      "choices": [
+        "Frantz Fanon",
+        "Tobie Nathan",
+        "Thomas Adeoye Lambo",
+        "Henri Collomb"
+      ],
+      "answer": "A",
+      "explanation": "Né en Martinique, Fanon fut chef de service à l'hôpital de Blida-Joinville et a lié clinique psychiatrique et analyse de la domination coloniale.",
+      "source": "Cours de licence de psychologie interculturelle, famille des manuels de psychologie interculturelle et d'ethnopsychologie",
+      "verif": "import",
+      "region": "AF"
+    },
+    {
+      "course": "l2-psy",
+      "category": "Psychologie de la santé et du stress",
+      "difficulty": 2,
+      "question": "Quel modèle explique la santé par l'interaction de facteurs biologiques, psychologiques et sociaux ?",
+      "choices": [
+        "Le modèle psychanalytique",
+        "Le modèle behavioriste",
+        "Le modèle biopsychosocial",
+        "Le modèle biomédical"
+      ],
+      "answer": "C",
+      "explanation": "Proposé par Engel, il s'oppose au modèle biomédical centré sur les seuls facteurs biologiques.",
+      "source": "Cours de licence de psychologie de la santé, famille des manuels de psychologie de la santé",
+      "verif": "import"
+    },
+    {
+      "course": "l2-psy",
+      "category": "Psychologie de l'éducation : motivation scolaire",
+      "difficulty": 1,
+      "question": "Comment appelle-t-on la motivation d'un élève qui travaille pour obtenir une récompense ou éviter une punition ?",
+      "choices": [
+        "La motivation de maîtrise",
+        "La motivation intrinsèque",
+        "La motivation extrinsèque",
+        "L'amotivation"
+      ],
+      "answer": "C",
+      "explanation": "La motivation extrinsèque dépend de conséquences extérieures à l'activité (notes, récompenses, sanctions).",
+      "source": "Cours de licence de psychologie de l'éducation, famille des manuels de psychologie de l'éducation",
+      "verif": "import"
+    },
+    {
+      "course": "l2-psy",
+      "category": "Statistiques inférentielles",
+      "difficulty": 3,
+      "question": "Un khi-deux est calculé et les effectifs observés sont tous égaux aux effectifs théoriques. Quelle est sa valeur ?",
+      "choices": [
+        "Elle est négative",
+        "Elle est égale à l'effectif total",
+        "0",
+        "1"
+      ],
+      "answer": "C",
+      "explanation": "Le khi-deux somme les écarts entre observé et théorique : sans écart, il vaut 0.",
+      "source": "Cours de licence de méthodes et statistiques en psychologie, famille des manuels de statistique appliquée aux sciences humaines",
+      "verif": "import"
+    },
+    {
+      "course": "l2-psy",
+      "category": "Statistiques inférentielles",
+      "difficulty": 2,
+      "question": "Que signifie un coefficient de Pearson r égal à 0 ?",
+      "choices": [
+        "Aucune liaison linéaire entre les deux variables",
+        "Aucune relation d'aucune sorte entre les variables",
+        "Une liaison linéaire parfaite",
+        "Une erreur de calcul"
+      ],
+      "answer": "A",
+      "explanation": "r = 0 indique l'absence de liaison linéaire ; une relation non linéaire peut subsister.",
+      "source": "Cours de licence de méthodes et statistiques en psychologie, famille des manuels de statistique appliquée aux sciences humaines",
+      "verif": "import"
+    },
+    {
+      "course": "l2-psy",
+      "category": "Psychologie de l'éducation : motivation scolaire",
+      "difficulty": 1,
+      "question": "Selon Skinner, que produit un renforcement positif sur un comportement ?",
+      "choices": [
+        "Le comportement ne dépend jamais de ses conséquences",
+        "Seul l'exemple d'autrui modifie le comportement",
+        "Un comportement suivi d'une conséquence agréable tend à se répéter",
+        "Un comportement suivi d'une punition se répète toujours"
+      ],
+      "answer": "C",
+      "explanation": "Dans le conditionnement opérant, le renforcement positif augmente la fréquence du comportement qu'il suit.",
+      "source": "Cours de licence de psychologie de l'éducation, famille des manuels de psychologie de l'éducation",
+      "verif": "import"
+    },
+    {
+      "course": "l2-psy",
+      "category": "Psychologie de la santé et du stress",
+      "difficulty": 2,
+      "question": "Que détermine l'évaluation primaire dans le modèle de Lazarus et Folkman ?",
+      "choices": [
+        "Combien de temps durera la situation",
+        "Quelles ressources la personne possède",
+        "Si la situation est menaçante, nuisible ou constitue un défi",
+        "Quelle stratégie de coping est la plus efficace"
+      ],
+      "answer": "C",
+      "explanation": "L'évaluation primaire porte sur la signification de la situation pour le bien-être de la personne.",
+      "source": "Cours de licence de psychologie de la santé, famille des manuels de psychologie de la santé",
+      "verif": "import"
+    },
+    {
+      "course": "l2-psy",
+      "category": "Méthodologie : plans expérimentaux et variables",
+      "difficulty": 1,
+      "question": "Quelle validité désigne la possibilité de conclure à un effet causal de la variable indépendante sur la variable dépendante ?",
+      "choices": [
+        "La validité externe",
+        "La validité de contenu",
+        "La validité apparente",
+        "La validité interne"
+      ],
+      "answer": "D",
+      "explanation": "La validité interne porte sur la qualité de l'inférence causale à l'intérieur de l'étude.",
+      "source": "Cours de licence de méthodes et statistiques en psychologie, famille des manuels de méthodologie de la recherche en psychologie",
+      "verif": "import"
+    },
+    {
+      "course": "l2-psy",
+      "category": "Méthodologie : plans expérimentaux et variables",
+      "difficulty": 2,
+      "question": "Dans une étude en double aveugle, qui ignore la condition à laquelle chaque participant est affecté ?",
+      "choices": [
+        "Les participants et l'expérimentateur",
+        "Seulement le comité d'éthique",
+        "Seulement les participants",
+        "Seulement l'expérimentateur"
+      ],
+      "answer": "A",
+      "explanation": "Le double aveugle protège contre les attentes des participants comme celles de l'expérimentateur.",
+      "source": "Cours de licence de méthodes et statistiques en psychologie, famille des manuels de méthodologie de la recherche en psychologie",
+      "verif": "import"
+    },
+    {
+      "course": "l2-psy",
+      "category": "Psychométrie",
+      "difficulty": 2,
+      "question": "Quelle moyenne et quel écart-type ont classiquement les échelles de QI de Wechsler ?",
+      "choices": [
+        "Moyenne 0, écart-type 1",
+        "Moyenne 100, écart-type 15",
+        "Moyenne 50, écart-type 10",
+        "Moyenne 10, écart-type 100"
+      ],
+      "answer": "B",
+      "explanation": "Les QI de Wechsler sont des notes standard de moyenne 100 et d'écart-type 15.",
+      "source": "Cours de licence de psychométrie, famille des manuels de psychométrie et de construction des tests",
+      "verif": "import"
+    },
+    {
+      "course": "l2-psy",
+      "category": "Méthodologie : plans expérimentaux et variables",
+      "difficulty": 2,
+      "question": "À quoi sert le contrebalancement dans un plan intra-sujets ?",
+      "choices": [
+        "À supprimer la variance entre participants",
+        "À neutraliser les effets d'ordre de présentation des conditions",
+        "À remplacer le groupe contrôle",
+        "À augmenter la taille de l'effet"
+      ],
+      "answer": "B",
+      "explanation": "En variant l'ordre des conditions selon les participants, on évite que l'ordre soit confondu avec la condition.",
+      "source": "Cours de licence de méthodes et statistiques en psychologie, famille des manuels de méthodologie de la recherche en psychologie",
+      "verif": "import"
+    },
+    {
+      "course": "l2-psy",
+      "category": "Psychologie interculturelle et ethnopsychologie",
+      "difficulty": 3,
+      "question": "Que désigne le pluralisme thérapeutique dans les sociétés africaines ?",
+      "choices": [
+        "Le recours à plusieurs systèmes de soins, traditionnels et biomédicaux",
+        "L'usage exclusif de la médecine moderne",
+        "L'usage d'un seul remède pour tout trouble",
+        "L'interdiction de la médecine traditionnelle"
+      ],
+      "answer": "A",
+      "explanation": "De nombreux patients consultent successivement ou simultanément guérisseurs et services de santé biomédicaux.",
+      "source": "Cours de licence de psychologie interculturelle, famille des manuels de psychologie interculturelle et d'ethnopsychologie",
+      "verif": "import",
+      "region": "AF"
+    },
+    {
+      "course": "l2-psy",
+      "category": "Statistiques inférentielles",
+      "difficulty": 1,
+      "question": "À quel type de données s'applique le test du khi-deux d'indépendance ?",
+      "choices": [
+        "À des scores continus appariés",
+        "À des variables qualitatives sous forme d'effectifs",
+        "À des temps de réaction mesurés",
+        "À des moyennes de deux groupes"
+      ],
+      "answer": "B",
+      "explanation": "Le khi-deux compare des effectifs observés à des effectifs théoriques dans un tableau de contingence.",
+      "source": "Cours de licence de méthodes et statistiques en psychologie, famille des manuels de statistique appliquée aux sciences humaines",
+      "verif": "import"
+    },
+    {
+      "course": "l2-psy",
+      "category": "Psychologie de la santé et du stress",
+      "difficulty": 2,
+      "question": "Que porte l'évaluation secondaire dans le modèle de Lazarus et Folkman ?",
+      "choices": [
+        "La gravité du symptôme physique",
+        "Les ressources disponibles pour faire face à la situation",
+        "Le passé médical de la famille",
+        "L'appartenance sociale du sujet"
+      ],
+      "answer": "B",
+      "explanation": "Dans l'évaluation secondaire, la personne estime si elle dispose des moyens de faire face à la situation.",
+      "source": "Cours de licence de psychologie de la santé, famille des manuels de psychologie de la santé",
+      "verif": "import"
+    },
+    {
+      "course": "l2-psy",
+      "category": "Statistiques inférentielles",
+      "difficulty": 1,
+      "question": "Quel test sert à comparer les moyennes de deux groupes ?",
+      "choices": [
+        "Le coefficient de Pearson",
+        "Le test du khi-deux d'indépendance",
+        "Le test t de Student",
+        "Le coefficient alpha de Cronbach"
+      ],
+      "answer": "C",
+      "explanation": "Le test t compare deux moyennes pour juger si leur différence dépasse ce que le hasard d'échantillonnage produirait.",
+      "source": "Cours de licence de méthodes et statistiques en psychologie, famille des manuels de statistique appliquée aux sciences humaines",
+      "verif": "import"
+    },
+    {
+      "course": "l2-psy",
+      "category": "Méthodologie : plans expérimentaux et variables",
+      "difficulty": 1,
+      "question": "Dans une expérience, comment appelle-t-on la variable mesurée pour évaluer l'effet de la manipulation ?",
+      "choices": [
+        "La variable modératrice",
+        "La variable dépendante",
+        "La variable parasite",
+        "La variable indépendante"
+      ],
+      "answer": "B",
+      "explanation": "La variable dépendante est le comportement ou le score mesuré, censé varier en fonction de la variable indépendante.",
+      "source": "Cours de licence de méthodes et statistiques en psychologie, famille des manuels de méthodologie de la recherche en psychologie",
       "verif": "import"
     },
     {
@@ -1868,114 +1755,50 @@
     },
     {
       "course": "l2-psy",
-      "category": "Psychologie de la santé et du stress",
-      "difficulty": 5,
-      "question": "Pourquoi la réponse décrite par Selye est-elle qualifiée de non spécifique ?",
-      "choices": [
-        "Elle ne s'accompagne d'aucune réaction hormonale",
-        "Elle n'apparaît qu'en cas de blessure physique",
-        "Elle survient quelle que soit la nature du stresseur",
-        "Elle varie complètement selon chaque personne"
-      ],
-      "answer": "C",
-      "explanation": "Pour Selye, divers agents (froid, infection, effort, etc.) déclenchent la même réponse générale de l'organisme.",
-      "source": "Cours de licence de psychologie de la santé, famille des manuels de psychologie de la santé",
-      "verif": "import"
-    },
-    {
-      "course": "l2-psy",
-      "category": "Psychologie de l'éducation : motivation scolaire",
-      "difficulty": 1,
-      "question": "Comment appelle-t-on la motivation d'un élève qui travaille pour obtenir une récompense ou éviter une punition ?",
-      "choices": [
-        "La motivation de maîtrise",
-        "La motivation intrinsèque",
-        "La motivation extrinsèque",
-        "L'amotivation"
-      ],
-      "answer": "C",
-      "explanation": "La motivation extrinsèque dépend de conséquences extérieures à l'activité (notes, récompenses, sanctions).",
-      "source": "Cours de licence de psychologie de l'éducation, famille des manuels de psychologie de l'éducation",
-      "verif": "import"
-    },
-    {
-      "course": "l2-psy",
-      "category": "Psychologie interculturelle et ethnopsychologie",
-      "difficulty": 1,
-      "question": "Dans une culture à dominante collectiviste, quels objectifs sont placés en priorité ?",
-      "choices": [
-        "Ceux des étrangers",
-        "Ceux du groupe d'appartenance",
-        "Ceux de l'individu seul",
-        "Ceux de l'État uniquement"
-      ],
-      "answer": "B",
-      "explanation": "Dans les cultures collectivistes, l'identité et les choix individuels sont fortement liés aux obligations envers le groupe (famille, communauté).",
-      "source": "Cours de licence de psychologie interculturelle, famille des manuels de psychologie interculturelle et d'ethnopsychologie",
-      "verif": "import"
-    },
-    {
-      "course": "l2-psy",
       "category": "Méthodologie : plans expérimentaux et variables",
-      "difficulty": 2,
-      "question": "À quoi sert le contrebalancement dans un plan intra-sujets ?",
+      "difficulty": 1,
+      "question": "Dans un plan intra-sujets, comment les participants sont-ils répartis entre les conditions ?",
       "choices": [
-        "À supprimer la variance entre participants",
-        "À neutraliser les effets d'ordre de présentation des conditions",
-        "À remplacer le groupe contrôle",
-        "À augmenter la taille de l'effet"
+        "Seuls les volontaires passent la condition contrôle",
+        "Chaque participant ne passe que dans une seule condition",
+        "Les participants choisissent leur condition",
+        "Chaque participant passe dans toutes les conditions"
       ],
-      "answer": "B",
-      "explanation": "En variant l'ordre des conditions selon les participants, on évite que l'ordre soit confondu avec la condition.",
+      "answer": "D",
+      "explanation": "Un plan intra-sujets (mesures répétées) expose les mêmes personnes à tous les niveaux de la variable indépendante.",
       "source": "Cours de licence de méthodes et statistiques en psychologie, famille des manuels de méthodologie de la recherche en psychologie",
       "verif": "import"
     },
     {
       "course": "l2-psy",
-      "category": "Psychométrie",
-      "difficulty": 3,
-      "question": "Quel est le lien entre fidélité et validité ?",
-      "choices": [
-        "Elles sont sans aucun lien",
-        "La validité garantit la fidélité",
-        "La fidélité garantit la validité",
-        "La fidélité est nécessaire mais non suffisante pour la validité"
-      ],
-      "answer": "D",
-      "explanation": "Un test peut mesurer de façon constante autre chose que ce qu'on vise ; en revanche, un test peu fidèle ne peut pas être valide.",
-      "source": "Cours de licence de psychométrie, famille des manuels de psychométrie et de construction des tests",
-      "verif": "import"
-    },
-    {
-      "course": "l2-psy",
       "category": "Psychologie de l'éducation : motivation scolaire",
-      "difficulty": 5,
-      "question": "Selon Bandura, quelle source est généralement considérée comme la plus influente pour le sentiment d'efficacité ?",
+      "difficulty": 2,
+      "question": "Selon Dweck, que croit un élève qui a une théorie incrémentale de l'intelligence ?",
       "choices": [
-        "La persuasion verbale par autrui",
-        "Les états physiologiques seuls",
-        "Les expériences de maîtrise, c'est-à-dire les réussites vécues",
-        "L'observation des autres uniquement"
+        "Que l'intelligence peut se développer par l'effort",
+        "Que seule la chance compte",
+        "Que l'effort est inutile",
+        "Que l'intelligence est fixée à la naissance"
       ],
-      "answer": "C",
-      "explanation": "Réussir une tâche renforce la croyance en ses capacités plus durablement que les autres sources.",
+      "answer": "A",
+      "explanation": "Dweck oppose cette conception évolutive à la conception fixiste, selon laquelle l'intelligence ne change pas.",
       "source": "Cours de licence de psychologie de l'éducation, famille des manuels de psychologie de l'éducation",
       "verif": "import"
     },
     {
       "course": "l2-psy",
-      "category": "Statistiques inférentielles",
+      "category": "Psychologie de l'éducation : motivation scolaire",
       "difficulty": 3,
-      "question": "Combien de degrés de liberté a un khi-deux d'indépendance sur un tableau de contingence à 3 lignes et 4 colonnes ?",
+      "question": "Que montre l'effet de surjustification (Lepper, Greene et Nisbett) ?",
       "choices": [
-        "6",
-        "7",
-        "10",
-        "12"
+        "Une récompense augmente toujours l'intérêt intrinsèque",
+        "Une récompense externe peut diminuer l'intérêt intrinsèque pour une activité",
+        "Seules les punitions modifient la motivation",
+        "Les récompenses n'ont aucun effet sur le comportement"
       ],
-      "answer": "A",
-      "explanation": "ddl = (lignes − 1) × (colonnes − 1) = 2 × 3 = 6.",
-      "source": "Cours de licence de méthodes et statistiques en psychologie, famille des manuels de statistique appliquée aux sciences humaines",
+      "answer": "B",
+      "explanation": "Des enfants récompensés pour une activité qu'ils aimaient s'y sont ensuite moins intéressés spontanément.",
+      "source": "Cours de licence de psychologie de l'éducation, famille des manuels de psychologie de l'éducation",
       "verif": "import"
     },
     {
@@ -1996,18 +1819,195 @@
     },
     {
       "course": "l2-psy",
-      "category": "Psychologie de la santé et du stress",
+      "category": "Psychométrie",
       "difficulty": 1,
-      "question": "Comment appelle-t-on, en psychologie de la santé, un événement qui déclenche une réponse de stress ?",
+      "question": "Quelle méthode évalue la stabilité des scores dans le temps ?",
       "choices": [
-        "Un biais",
-        "Un stresseur",
-        "Un symptôme",
-        "Un trait"
+        "Le test-retest",
+        "L'analyse factorielle",
+        "Le coefficient alpha de Cronbach",
+        "Le calcul du centile"
+      ],
+      "answer": "A",
+      "explanation": "On fait passer le même test deux fois aux mêmes personnes et on corrèle les deux séries de scores.",
+      "source": "Cours de licence de psychométrie, famille des manuels de psychométrie et de construction des tests",
+      "verif": "import"
+    },
+    {
+      "course": "l2-psy",
+      "category": "Méthodologie : plans expérimentaux et variables",
+      "difficulty": 2,
+      "question": "Quelle différence oppose une étude transversale à une étude longitudinale ?",
+      "choices": [
+        "La longitudinale n'utilise jamais de questionnaires",
+        "La transversale suit les mêmes personnes sur des années",
+        "La transversale porte toujours sur un seul participant",
+        "La transversale compare des groupes à un moment, la longitudinale suit les mêmes personnes"
+      ],
+      "answer": "D",
+      "explanation": "L'étude longitudinale mesure les mêmes individus à plusieurs reprises ; la transversale compare des groupes (par exemple d'âges différents) au même moment.",
+      "source": "Cours de licence de méthodes et statistiques en psychologie, famille des manuels de méthodologie de la recherche en psychologie",
+      "verif": "import"
+    },
+    {
+      "course": "l2-psy",
+      "category": "Statistiques inférentielles",
+      "difficulty": 5,
+      "question": "Comment définit-on correctement la valeur p ?",
+      "choices": [
+        "La probabilité de reproduire exactement le résultat",
+        "La probabilité que H0 soit vraie",
+        "La probabilité d'un résultat au moins aussi extrême si H0 est vraie",
+        "La probabilité que H1 soit vraie"
+      ],
+      "answer": "C",
+      "explanation": "La valeur p est une probabilité conditionnelle à H0 ; ce n'est pas la probabilité de l'hypothèse elle-même.",
+      "source": "Cours de licence de méthodes et statistiques en psychologie, famille des manuels de statistique appliquée aux sciences humaines",
+      "verif": "import"
+    },
+    {
+      "course": "l2-psy",
+      "category": "Psychologie interculturelle et ethnopsychologie",
+      "difficulty": 2,
+      "question": "Quelle est la source principale du biais culturel d'un test d'intelligence conçu dans un pays et utilisé dans un autre ?",
+      "choices": [
+        "Un nombre d'items trop élevé",
+        "Une passation trop courte",
+        "Une moyenne égale à 100",
+        "Un contenu fondé sur des références propres à la culture d'origine"
+      ],
+      "answer": "D",
+      "explanation": "Un test peut supposer des connaissances, un vocabulaire ou des habitudes propres à la culture où il a été construit.",
+      "source": "Cours de licence de psychologie interculturelle, famille des manuels de psychologie interculturelle et d'ethnopsychologie",
+      "verif": "import"
+    },
+    {
+      "course": "l2-psy",
+      "category": "Statistiques inférentielles",
+      "difficulty": 2,
+      "question": "Combien de degrés de liberté a un test t de Student sur deux échantillons indépendants de tailles n1 et n2 ?",
+      "choices": [
+        "La somme des deux effectifs",
+        "Le plus petit effectif moins 1",
+        "Le produit des deux effectifs",
+        "La somme des deux effectifs moins 2"
+      ],
+      "answer": "D",
+      "explanation": "Chaque moyenne estimée coûte un degré de liberté : ddl = n1 + n2 − 2.",
+      "source": "Cours de licence de méthodes et statistiques en psychologie, famille des manuels de statistique appliquée aux sciences humaines",
+      "verif": "import"
+    },
+    {
+      "course": "l2-psy",
+      "category": "Méthodologie : plans expérimentaux et variables",
+      "difficulty": 2,
+      "question": "Pourquoi une corrélation ne suffit-elle pas à établir une relation causale entre deux variables ?",
+      "choices": [
+        "Une troisième variable ou un sens inverse peut expliquer le lien",
+        "Parce qu'une corrélation est toujours due au hasard",
+        "Parce que les corrélations sont toujours négatives",
+        "Parce que les corrélations ne se calculent que sur de petits échantillons"
+      ],
+      "answer": "A",
+      "explanation": "Un lien statistique peut venir d'une variable tierce ou d'une causalité inverse ; seule une manipulation contrôlée permet de trancher.",
+      "source": "Cours de licence de méthodes et statistiques en psychologie, famille des manuels de méthodologie de la recherche en psychologie",
+      "verif": "import"
+    },
+    {
+      "course": "l2-psy",
+      "category": "Psychologie de la santé et du stress",
+      "difficulty": 4,
+      "question": "Quelles sont les trois dimensions du burn-out décrites par Maslach ?",
+      "choices": [
+        "Alarme, résistance, épuisement",
+        "Menace, perte, défi",
+        "Épuisement émotionnel, dépersonnalisation, baisse de l'accomplissement personnel",
+        "Anxiété, dépression, insomnie"
+      ],
+      "answer": "C",
+      "explanation": "Le Maslach Burnout Inventory évalue ces trois dimensions, étudiées d'abord chez les professionnels de l'aide.",
+      "source": "Cours de licence de psychologie de la santé, famille des manuels de psychologie de la santé",
+      "verif": "import"
+    },
+    {
+      "course": "l2-psy",
+      "category": "Psychologie de la santé et du stress",
+      "difficulty": 2,
+      "question": "Au cours de quelle phase du syndrome général d'adaptation l'organisme mobilise-t-il ses ressources pour s'adapter au stresseur persistant ?",
+      "choices": [
+        "La phase d'épuisement",
+        "La phase de récupération",
+        "La phase d'alarme",
+        "La phase de résistance"
+      ],
+      "answer": "D",
+      "explanation": "Après l'alarme, l'organisme s'adapte à la situation en maintenant une activation prolongée : c'est la résistance.",
+      "source": "Cours de licence de psychologie de la santé, famille des manuels de psychologie de la santé",
+      "verif": "import"
+    },
+    {
+      "course": "l2-psy",
+      "category": "Statistiques inférentielles",
+      "difficulty": 2,
+      "question": "Que mesure une taille d'effet comme le d de Cohen ?",
+      "choices": [
+        "Le seuil de signification",
+        "L'ampleur de la différence entre moyennes en unités d'écart-type",
+        "La probabilité que H0 soit vraie",
+        "Le nombre de participants nécessaire"
       ],
       "answer": "B",
-      "explanation": "Le stresseur est la situation ou l'événement susceptible de provoquer une réponse de stress.",
-      "source": "Cours de licence de psychologie de la santé, famille des manuels de psychologie de la santé",
+      "explanation": "Contrairement à p, la taille d'effet indique l'importance de la différence, indépendamment de la taille de l'échantillon.",
+      "source": "Cours de licence de méthodes et statistiques en psychologie, famille des manuels de statistique appliquée aux sciences humaines",
+      "verif": "import"
+    },
+    {
+      "course": "l2-psy",
+      "category": "Méthodologie : plans expérimentaux et variables",
+      "difficulty": 2,
+      "question": "Qu'appelle-t-on variable confondue dans une expérience ?",
+      "choices": [
+        "Une variable non contrôlée qui varie avec la variable indépendante",
+        "Une variable mesurée avec trop d'items",
+        "Une variable manipulée dans toutes les conditions",
+        "Une variable dont les valeurs sont toutes identiques"
+      ],
+      "answer": "A",
+      "explanation": "Si une autre variable varie systématiquement avec la manipulation, on ne peut plus attribuer l'effet à la seule variable indépendante.",
+      "source": "Cours de licence de méthodes et statistiques en psychologie, famille des manuels de méthodologie de la recherche en psychologie",
+      "verif": "import"
+    },
+    {
+      "course": "l2-psy",
+      "category": "Psychologie interculturelle et ethnopsychologie",
+      "difficulty": 4,
+      "question": "Quelle école de psychiatrie transculturelle, liée à l'hôpital de Fann, est associée à Henri Collomb ?",
+      "choices": [
+        "L'école de Dakar",
+        "L'école de Palo Alto",
+        "L'école de Chicago",
+        "L'école de Francfort"
+      ],
+      "answer": "A",
+      "explanation": "Henri Collomb a animé à Dakar une psychiatrie ouverte aux réalités culturelles locales à partir des années 1950.",
+      "source": "Cours de licence de psychologie interculturelle, famille des manuels de psychologie interculturelle et d'ethnopsychologie",
+      "verif": "import",
+      "region": "AF"
+    },
+    {
+      "course": "l2-psy",
+      "category": "Statistiques inférentielles",
+      "difficulty": 4,
+      "question": "Si r = 0,60 entre deux variables, quelle proportion de variance partagent-elles ?",
+      "choices": [
+        "84 %",
+        "60 %",
+        "36 %",
+        "6 %"
+      ],
+      "answer": "C",
+      "explanation": "La variance partagée est r² = 0,60² = 0,36, soit 36 %.",
+      "source": "Cours de licence de méthodes et statistiques en psychologie, famille des manuels de statistique appliquée aux sciences humaines",
       "verif": "import"
     }
   ]
