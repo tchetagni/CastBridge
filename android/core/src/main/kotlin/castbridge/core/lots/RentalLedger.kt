@@ -73,7 +73,7 @@ class RentalLedger(private val dir: File, val clock: TvClock = TvClock(), val co
 
     /** The state of every rental in [activations] right now. Tombstoned contracts stay EXPIRED. */
     fun status(activations: List<Activation>): List<RentalStatus> = synchronized(lock) {
-        val contracts = RentalEngine.contracts(activations)
+        val contracts = RentalEngine.contracts(activations, config)
         if (degraded) quarantine = contracts.filter { recs[it.key]?.phase?.let { p -> p != RentalPhase.LIVE } != true }.associate { it.key to ExpiryReason.DATE }
         RentalEngine.evaluate(contracts, inputs(RentalEngine.superUnlimited(activations)), config)
     }
@@ -90,7 +90,7 @@ class RentalLedger(private val dir: File, val clock: TvClock = TvClock(), val co
         observe(activation.issuedAt)
         val out = LinkedHashMap<String, String>()
         val statuses = status(all).associateBy { it.key }
-        for (c in RentalEngine.contracts(all)) {
+        for (c in RentalEngine.contracts(all, config)) {
             if (activation.rights.none { it is Right.Rental && it.productId == c.productId && it.period == c.period }) continue
             // the trial window is granted ONCE for the life of the application: any later trial key (new period) finds it already used, whatever happened to the first one
             if (c.productId == RentalLines.TRIAL_PRODUCT && recs.keys.any { it != c.key && it.startsWith(RentalLines.TRIAL_PRODUCT + "@") }) {

@@ -7,9 +7,11 @@ import kotlin.test.*
 private const val DAY = 24L * 3600 * 1000
 private const val T0 = 1_800_000_000_000L
 private const val MIN = 60_000L
+/** The legacy sentences and thresholds (before W16), explicitly: these tests describe the engine without the per-unit messages. */
+private val LEGACY = RentalConfig(perUnitMessages = false)
 
 /** A TV in a temp folder with its rental ledger, safe and a controllable wall clock. */
-private class RentalRig(val fp: Fingerprints = tvFp(), startWall: Long = T0) {
+private class RentalRig(val fp: Fingerprints = tvFp(), startWall: Long = T0, val cfg: RentalConfig = LEGACY) {
     var wall = startWall
     val dir: File = Kit.tmp()
     val signer = Ed25519Signer(ByteArray(32) { (it + 7).toByte() })
@@ -18,7 +20,7 @@ private class RentalRig(val fp: Fingerprints = tvFp(), startWall: Long = T0) {
     val master = ByteArray(32) { (it * 3 + 1).toByte() }
     val license = "lic-secret-1"
     val vault = RentalVault(File(dir, "rental"))
-    val ledger = RentalLedger(File(dir, "rental"), TvClock(), RentalConfig(), { wall })
+    val ledger = RentalLedger(File(dir, "rental"), TvClock(), cfg, { wall })
     val installed = ArrayList<Activation>()
     val steps = ArrayList<String>()
     val progressFile = File(dir, "progress/learner.json").also { it.parentFile.mkdirs(); it.writeText("""{"score":42}""") }
@@ -250,7 +252,7 @@ class RentalClockTest {
     @Test fun ledgerSurvivesARestartWithTheHighWaterMark() {
         val rig = RentalRig(); rig.install(rig.issue(rig.rental(days = 30)))
         rig.wall = T0 + 25 * DAY; rig.ledger.observe(); rig.ledger.recordUsage(CM2, 5, rig.installed)
-        val again = RentalLedger(File(rig.dir, "rental"), TvClock(), RentalConfig(), { T0 + DAY })
+        val again = RentalLedger(File(rig.dir, "rental"), TvClock(), LEGACY, { T0 + DAY })
         assertEquals(T0 + 25 * DAY, again.clock.lastSeen, "high-water mark persisted: a reboot with a wrong clock cannot go back")
         assertEquals(RentalState.SUSPENDED, again.status(rig.installed).single().state)
     }
@@ -474,7 +476,7 @@ class RentalSweepTest {
             val cutting = RentalSweeper(rig.ledger, rig.vault, lots, { rig.installed.toList() }, { emptySet() }, { rig.wall }, { if (n++ == cutAt) throw IllegalStateException("coupure") })
             assertTrue(cutting.sweep(SweepTrigger.APP_START).failures.isNotEmpty(), "a failing contract is reported, not thrown")
             // reboot: a new ledger from disk, a new sweeper, no cut this time
-            val ledger2 = RentalLedger(File(rig.dir, "rental"), TvClock(), RentalConfig(), { rig.wall })
+            val ledger2 = RentalLedger(File(rig.dir, "rental"), TvClock(), LEGACY, { rig.wall })
             RentalSweeper(ledger2, rig.vault, lots, { rig.installed.toList() }, { emptySet() }, { rig.wall }).sweep(SweepTrigger.APP_START)
             assertFalse(rig.vault.hasKey(key), "cut at $cutAt"); assertTrue(lots.held.isEmpty(), "cut at $cutAt"); assertEquals(RentalPhase.DONE, ledger2.phase(key))
         }
@@ -497,7 +499,7 @@ class RentalSweepTest {
     @Test fun aWipedTvWithTheOldActivationStillCannotReopenAnEndedRental() {
         val rig = RentalRig(); val lots = FakeLots(); setup(rig, lots)
         rig.wall = T0 + 10 * DAY
-        val fresh = RentalLedger(File(rig.dir, "fresh"), TvClock(), RentalConfig(), { rig.wall })    // app data wiped: no tombstone
+        val fresh = RentalLedger(File(rig.dir, "fresh"), TvClock(), LEGACY, { rig.wall })    // app data wiped: no tombstone
         val vault2 = RentalVault(File(rig.dir, "fresh"))
         val out = fresh.install(rig.installed.first(), rig.installed, rig.fp, vault2)
         assertFalse(vault2.hasKey("loc-cm2@$T0"), "ended by the dates in the signed line itself: $out")
@@ -693,7 +695,7 @@ class RentalRobustnessTest {
         rig.ledger.markRented(key, lot, LotMeta(lot, 1, 500, "a".repeat(64), lot.scope), LotFamilies.explicit(emptySet(), setOf(LotNames.key(lot))))
         return key
     }
-    private fun reopen(rig: RentalRig) = RentalLedger(File(rig.dir, "rental"), TvClock(), RentalConfig(), { rig.wall })
+    private fun reopen(rig: RentalRig) = RentalLedger(File(rig.dir, "rental"), TvClock(), LEGACY, { rig.wall })
 
     @Test fun corruptLedgerWithoutBackupIsKeptAsEvidenceAndSuspendsEveryRental() {
         val rig = RentalRig(); val lots = FakeLots(); val key = setupOne(rig, lots, "loc-cm2", "classe-cm2", CM2)
@@ -793,5 +795,45 @@ class RentalVaultDurabilityTest {
         repeat(300) { assertTrue(v.putKey("loc-cm2@1", if (it % 2 == 0) b else a)) }
         stop.set(true); reader.join(5000)
         assertNull(bad.get(), "the visible key was the old one or the new one, never empty or partial")
+    }
+}
+
+/** W16-01: the REAL path (the ledger with the default configuration, as RentalHub builds it) gives the per-unit sentences, the 96 h cap and the refusal of mixed units. */
+class RentalLedgerUnitsTest {
+    private fun rig() = RentalRig(cfg = RentalConfig())
+
+    @Test fun ledgerEndsAnHourlyRentalAtTheCapAndSaysSo() {
+        val rig = rig()
+        rig.install(rig.issue(rig.rental(days = 30, usage = 5400)))                                                 // 90 h
+        rig.install(rig.issue(rig.rental(start = T0 + DAY, period = T0, days = 30, usage = 720), at = T0 + DAY))    // +12 h: 6 h too many
+        rig.wall = T0 + DAY
+        val s = rig.status().single()
+        assertEquals(5760L, s.maxUsageMinutes); assertTrue(s.perUnit)
+        assertEquals(listOf("6 h non applicables : plafond de 96 h par location"), s.notes)
+        assertTrue(s.message.startsWith("Il vous reste 96 h d'utilisation · à utiliser avant le "), s.message)
+        rig.ledger.markRented("loc-cm2@$T0", CM2, LotMeta(CM2, 1, 10, "a".repeat(64), "CM2"), LotFamilies.explicit(emptySet(), setOf("learn:cm2")))
+        repeat(3) { rig.ledger.recordUsage(CM2, 1440, rig.installed) }
+        assertEquals(RentalState.ACTIVE, rig.status().single().state, "4320 of 5760 minutes: still running")
+        val after = rig.ledger.recordUsage(CM2, 1440, rig.installed).single()
+        assertEquals(RentalState.EXPIRED, after.state); assertEquals(ExpiryReason.USAGE, after.reason)
+        assertEquals("Vos 96 heures d'utilisation sont épuisées : ce contenu n'est plus disponible. Relouer ?", after.message)
+    }
+
+    @Test fun ledgerIgnoresALineOfAnotherUnit() {
+        val rig = rig()
+        rig.install(rig.issue(rig.rental(days = 30, usage = 360)))                                                  // 6 h
+        rig.install(rig.issue(rig.rental(start = T0 + DAY, period = T0, days = 5), at = T0 + DAY))                  // "5 days, no budget" by mistake
+        rig.wall = T0 + DAY
+        val s = rig.status().single()
+        assertEquals(360L, s.maxUsageMinutes); assertEquals(RentalUnit.HOURS, s.contract.unit)
+        assertEquals(T0 + 30 * DAY, s.contract.endsAt)
+        assertEquals(1, s.notes.size); assertTrue(s.notes.single().contains("ignorée"))
+    }
+
+    @Test fun ledgerOneHourRentalIsSilentAtOpening() {
+        val rig = rig()
+        rig.install(rig.issue(rig.rental(days = 30, usage = 60)))
+        rig.wall = T0 + 1000
+        assertEquals(RentalWarning.NONE, rig.status().single().warning)
     }
 }
