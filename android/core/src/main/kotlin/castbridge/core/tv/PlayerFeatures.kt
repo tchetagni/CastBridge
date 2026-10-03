@@ -35,6 +35,10 @@ data class PlayerTracks(
     val repeat: String = "off",
     val queue: List<String> = emptyList(),
     val queueIndex: Int = -1,
+    /** Affichage (VideoFit.Mode.key) : celui qui s'applique, l'avis propre au fichier (null = aucun) et le réglage par défaut. Pas dans [toJson] (TV seulement). */
+    val fit: String = VideoFit.DEFAULT.key,
+    val fitFile: String? = null,
+    val fitDefault: String = VideoFit.DEFAULT.key,
 ) {
     fun toJson(): String {
         val q = ReceiverServer::q
@@ -66,6 +70,10 @@ sealed class PlayerCommand {
     data class Title(val index: Int) : PlayerCommand()
     data class Hw(val mode: String) : PlayerCommand()
     data class Eq(val preset: Int) : PlayerCommand()
+    /** Affichage d'UN fichier (VideoFit.Mode.key) ; null = revenir au réglage par défaut. TV seulement : aucune route HTTP. */
+    data class Fit(val mode: String?) : PlayerCommand()
+    /** Affichage par défaut de l'utilisateur (VideoFit.Mode.key). */
+    data class FitDefault(val mode: String) : PlayerCommand()
 }
 
 /** Validation and bounds of every player setting (shared by the HTTP API and the TV panels). Pure. */
@@ -133,6 +141,8 @@ data class PlayerPrefs(
     val subScale: Int = 100,
     val rate: Float = 1f,
     val aspect: String = "auto",
+    /** Affichage (VideoFit.Mode.key) choisi pour ce fichier ; null = le réglage par défaut de l'utilisateur. */
+    val fit: String? = null,
 ) {
     /** True when this file needs libVLC's subtitle engine (off by default to save memory on the TV). */
     val wantsSubtitles: Boolean get() = (subtitle ?: -1) >= 0 || subFile != null
@@ -146,6 +156,7 @@ data class PlayerPrefs(
         if (subScale != 100) add("ss=$subScale")
         if (rate != 1f) add("r=" + String.format(Locale.ROOT, "%.2f", rate))
         if (aspect != "auto") add("ar=$aspect")
+        fit?.let { add("fm=$it") }
     }.joinToString(";")
 
     companion object {
@@ -161,6 +172,7 @@ data class PlayerPrefs(
                 subScale = PlayerParams.clampSubScale(m["ss"]?.toIntOrNull() ?: 100),
                 rate = PlayerParams.rate(m["r"]) ?: 1f,
                 aspect = PlayerParams.aspect(m["ar"]) ?: "auto",
+                fit = VideoFit.parse(m["fm"])?.key,
             )
         }
     }

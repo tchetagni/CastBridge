@@ -190,3 +190,22 @@ object CopyBadgeTexts {
         return lead + (percent?.let { " : $it %" } ?: "") + if (slowed) " · $SLOWED" else ""
     }
 }
+
+/** Réglage « Affichage » du lecteur de CastBridge-TV : libellés (français) de `castbridge.core.tv.VideoFit`. */
+object DisplayTexts {
+    const val ROW = "Affichage"
+    const val ROW_DEFAULT = "Affichage par défaut"
+    const val FOLLOW_DEFAULT = "Comme le réglage par défaut"
+    fun label(m: castbridge.core.tv.VideoFit.Mode) = when (m) {
+        castbridge.core.tv.VideoFit.Mode.FIT -> "Ajusté à l'écran"
+        castbridge.core.tv.VideoFit.Mode.FILL -> "Remplir l'écran"
+        castbridge.core.tv.VideoFit.Mode.STRETCH -> "Étirer"
+        castbridge.core.tv.VideoFit.Mode.NATIVE -> "Natif"
+    }
+    fun hint(m: castbridge.core.tv.VideoFit.Mode) = when (m) {
+        castbridge.core.tv.VideoFit.Mode.FIT -> "Image entière, proportions respectées"
+        castbridge.core.tv.VideoFit.Mode.FILL -> "Plein écran, les bords sont rognés"
+        castbridge.core.tv.VideoFit.Mode.STRETCH -> "Plein écran, l'image est déformée"
+        castbridge.core.tv.VideoFit.Mode.NATIVE -> "Taille et qualité d'origine, sans filtre"
+    }
+}

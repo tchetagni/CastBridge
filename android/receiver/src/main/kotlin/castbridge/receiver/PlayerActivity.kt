@@ -304,8 +304,14 @@ class PlayerActivity : Activity(), TvService.Screen {
         playerSpu = spu
         val p = MediaPlayer(lv)
         p.attachViews(findViewById<VLCVideoLayout>(R.id.video), null, false, false)
+        // Affichage (VideoFit): the real size of the video surface, re-applied when it changes (display mode switch, rotation) and on each Vout event.
+        extras.panel = { panelSize() }
+        findViewById<View>(R.id.video).addOnLayoutChangeListener { _, l, t, r, b, ol, ot, orr, ob ->
+            if (r - l != orr - ol || b - t != ob - ot) mp?.let { extras.applyFit(it) }
+        }
         p.setEventListener { ev ->
             when (ev.type) {
+                MediaPlayer.Event.Vout -> main.post { mp?.let { extras.applyFit(it) } }
                 MediaPlayer.Event.Playing -> { health.onPlaying(android.os.SystemClock.elapsedRealtime()); update("playing"); main.post { mp?.let { extras.onPlaying(it, playerSpu) }; playbackPlaying(); startStats() } }
                 MediaPlayer.Event.Paused -> { health.onStopped(); update("paused") }
                 MediaPlayer.Event.TimeChanged -> { health.onTime(android.os.SystemClock.elapsedRealtime(), ev.timeChanged); snapshot = snapshot.copy(posMs = ev.timeChanged); main.post { updateLead() } }
@@ -894,7 +900,31 @@ class PlayerActivity : Activity(), TvService.Screen {
         if (t.skipFrame > 0) m.addOption(":avcodec-skip-frame=${t.skipFrame}")
         if (t.skipIdct > 0) m.addOption(":avcodec-skip-idct=${t.skipIdct}")
         if (t.fileCachingMs > 0) m.addOption(":file-caching=${t.fileCachingMs}")
+        // Picture quality (PictureQuality, pure): composed AFTER the tuning, distress wins; Natif adds no filter at all.
+        pictureQuality = castbridge.core.tv.PictureQuality.decide(qualityFacts(tuneStage)).also { q -> q.options.forEach { m.addOption(it) } }
         if (posMs > 0) m.addOption(":start-time=${posMs / 1000.0}")
+    }
+
+    private var pictureQuality: castbridge.core.tv.PictureQuality.Quality? = null
+
+    /** What libVLC 3.6 does not tell us (interlaced flag, bit depth) stays null: nothing is guessed. */
+    private fun qualityFacts(distress: Int): castbridge.core.tv.PictureQuality.Facts {
+        val codec = pbCodec
+        val (w, h) = videoSize()
+        val capable = castbridge.core.xfer.CodecMime.hwCapable(codec) { mime -> CodecCapabilityProbe.hardware(mime, w, h) }
+        val hwOn = extras.hwMode() != "off"
+        val (pw, ph) = panelSize()
+        return castbridge.core.tv.PictureQuality.Facts(extras.fitMode(), codec, w, h, null, if (hwOn && capable == true) true else if (!hwOn || capable == false) false else null,
+            if (!hwOn || capable == false) true else if (capable == true) false else null,
+            Runtime.getRuntime().availableProcessors(), (server?.activeTransfers() ?: 0) > 0, distress, pw, ph)
+    }
+
+    /** The real size of the video surface (the panel as the app sees it); the display size while the layout is not measured yet. */
+    private fun panelSize(): Pair<Int, Int> {
+        val v = findViewById<View>(R.id.video)
+        if (v != null && v.width > 0 && v.height > 0) return v.width to v.height
+        val m = resources.displayMetrics
+        return m.widthPixels to m.heightPixels
     }
 
     /** Facts of PlayerTuning for the file being opened ([distress]: 0 none, 1 frozen / lost frames, 2 lasting). */
@@ -1122,6 +1152,10 @@ class PlayerActivity : Activity(), TvService.Screen {
         is PlayerCommand.Chapter, is PlayerCommand.ChapterStep -> "Chapitre ${(mp?.chapter ?: 0) + 1}"
         is PlayerCommand.Title -> "Titre ${c.index + 1}"
         is PlayerCommand.Hw -> "Décodage : ${PlayerParams.hwLabel(c.mode)}"
+        is PlayerCommand.Fit, is PlayerCommand.FitDefault -> {
+            val m = extras.fitMode()
+            "Affichage : ${castbridge.core.ux.DisplayTexts.label(m)}" + if (m == castbridge.core.tv.VideoFit.Mode.STRETCH) " (déforme l'image)" else ""
+        }
         is PlayerCommand.Eq -> if (c.preset < 0) "Égaliseur désactivé" else "Égaliseur : ${runCatching { MediaPlayer.Equalizer.getPresetName(c.preset) }.getOrDefault("")}"
     }
 
@@ -1145,6 +1179,8 @@ class PlayerActivity : Activity(), TvService.Screen {
                 append("\nDécodage : ${it.decoder}\n")
             }
             decoderLines().forEach { append(it).append('\n') }       // R-16: what was asked, what the TV can, what is only a hint
+            extras.fitInfo()?.let { append(it).append('\n') }
+            pictureQuality?.notes?.forEach { append(it).append('\n') }
             t.audioCodec?.let { append("Audio : $it\n") }
             append("Pistes audio : ${t.audio.size}, sous-titres : ${t.subtitles.count { it.id >= 0 } + t.subtitleFiles.size}\n")
             if (t.chapters.isNotEmpty()) append("Chapitres : ${t.chapters.size}\n")
