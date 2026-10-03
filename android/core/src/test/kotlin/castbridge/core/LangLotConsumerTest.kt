@@ -69,7 +69,7 @@ class LangLotConsumerTest {
     }
 
     @Test fun emptyCatalogHasTheFrenchMessage() {
-        assertEquals("Aucune langue installée : envoyez un lot depuis le téléphone", LangCatalog.EMPTY_MESSAGE)
+        assertEquals("Aucune langue installée. Sur le téléphone : CastBridge › Apprendre › « Données hors ligne » › Langues : choisissez la langue puis « Télécharger mes leçons de langue ».", LangCatalog.EMPTY_MESSAGE)
         assertTrue(LangCatalog.languages(emptyList()).isEmpty())
     }
 }

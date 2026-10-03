@@ -401,7 +401,7 @@ class UploadService : Service() {
         const val EXTRA_ORDERED = "ordered"
         /** Prefix of the failure when Android refuses the foreground service (in the background since Android 12): the queue waits for the app instead. */
         const val REFUSED = "Service refusé par le système"
-        const val BUSY_TEXT = "Un envoi vers la TV est déjà en cours : celui-ci n'a pas été lancé. « Copier vers la TV » le met dans la file d'attente."
+        const val BUSY_TEXT = "Un envoi vers la TV est déjà en cours : celui-ci n'a pas été lancé. « Copier sur la TV » le met dans la file d'attente."
         /** An upload is running in this process (its worker thread is alive). */
         fun active(): Boolean = slot.held()
         private val _state = MutableStateFlow<State>(State.Idle)

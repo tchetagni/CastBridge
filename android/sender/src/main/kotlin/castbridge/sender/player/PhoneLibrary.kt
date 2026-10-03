@@ -174,9 +174,9 @@ fun PhoneLibraryScreen() {
                         else Tile(e, Modifier.combinedClickable(onClick = open, onLongClick = { menuFor = e }))
                         DropdownMenu(menuFor == e, { menuFor = null }) {
                             DropdownMenuItem({ Text("Ouvrir") }, { menuFor = null; open() }, leadingIcon = { Icon(cbv(castbridge.sender.R.drawable.ic_cb_lecture), null) })
-                            DropdownMenuItem({ Text("Caster…") }, { menuFor = null; castFor = e to null }, leadingIcon = { Icon(cbv(castbridge.sender.R.drawable.ic_cb_caster), null) })
-                            DropdownMenuItem({ Text("Copier sur la TV…") }, { menuFor = null; castFor = e to CastAction.COPY }, leadingIcon = { Icon(cbv(castbridge.sender.R.drawable.ic_cb_copier), null) })
-                            DropdownMenuItem({ Text("Déplacer vers la TV…") }, { menuFor = null; castFor = e to CastAction.MOVE }, leadingIcon = { Icon(cbv(castbridge.sender.R.drawable.ic_cb_deplacer_vers_tv), null) })
+                            DropdownMenuItem({ Text(castbridge.core.ux.SendWays.MENU_PLAY_ON_TV) }, { menuFor = null; castFor = e to null }, leadingIcon = { Icon(cbv(castbridge.sender.R.drawable.ic_cb_caster), null) })
+                            DropdownMenuItem({ Text(castbridge.core.ux.SendWay.COPY_AND_PLAY.label + "…") }, { menuFor = null; castFor = e to CastAction.COPY }, leadingIcon = { Icon(cbv(castbridge.sender.R.drawable.ic_cb_copier), null) })
+                            DropdownMenuItem({ Text(castbridge.core.ux.SendWay.MOVE.label + "…") }, { menuFor = null; castFor = e to CastAction.MOVE }, leadingIcon = { Icon(cbv(castbridge.sender.R.drawable.ic_cb_deplacer_vers_tv), null) })
                         }
                     }
                 }

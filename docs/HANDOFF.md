@@ -14,6 +14,11 @@
 
 ## 0. Journal en direct (le plus récent en haut)
 
+### 2026-10-03 : ergonomie et navigation (branche `claude/ux-ergonomie`, non poussée, non validé sur appareils)
+- **Demande du propriétaire** : « améliore et optimise l'ergonomie et la navigation ». Audit chiffré + corrections sûres dans le gel : `docs/coordination/DESIGN-UX-ERGONOMIE-NAVIGATION-2026-10-03.md`, rapport `docs/agent-reports/ux-ergonomie.md`.
+- Fait (décisions pures `android/core/.../core/ux/UiTexts.kt`, 20 tests) : départ sur l'onglet « CastBridge TV » ; vocabulaire unique *Copier sur la TV et lire* / *Copier sur la TV* / *Déplacer vers la TV* / *Lire en direct* avec une ligne d'explication ; sept blocages muets de l'accueil expliqués ; barre « où en est ma copie » sur tous les onglets ; TV : focus D-pad de l'accueil jamais perdu, RETOUR sur la tuile d'origine, « Jeux » en profil enfant, aide et écran Langues vide corrigés.
+- Reste : 7 cahiers `docs/agent-briefs/SONNET-UX-INDEX.md` (ux-01…07) ; 6 décisions D-UX-1…6 ; parcours à confirmer sur appareils P-40…P-44.
+
 ### 2026-10-02 (soir) : correctifs de l'audit « la lecture d'abord » (branche `claude/fluid-playback-fix`, non poussée, non validé sur TV)
 - Tête d'abord sur FAT/exFAT (429 au-delà de la fenêtre, `ordered` annoncé, voie lente en tête), 429 lisible (corps lu puis jeté, connexion gardée), `maxStreams` réel annoncé, lecteurs `/stream/` bornés à 2 et libérés si le client raccroche, `finish` second appel = 503 `verifying`, session perdue = 503 (reprise par `begin`), « buffering » limité à 30 s sans avance, copie morte = 503 sur `/stream/`. Détail et preuves : `docs/agent-reports/fluid-playback-fix.md` ; ligne R-06 de `docs/REGRESSIONS.md`.
 

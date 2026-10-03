@@ -75,8 +75,9 @@ class TransferQueueService : Service() {
         val pct = (UploadService.state.value as? UploadService.State.Uploading)?.let { if (it.total > 0) (it.sent * 100 / it.total).toInt() else null }
         val running = TransferQueue.runningName()
         val text = TransferQueue.note.value ?: listOfNotNull(running?.let { "« $it »" }, TransferQueue.waitingText()).joinToString(" · ").ifEmpty { "Envoi en cours" }
-        val open = PendingIntent.getActivity(this, 9, Intent(this, MainActivity::class.java)
-            .addFlags(Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_SINGLE_TOP), PendingIntent.FLAG_IMMUTABLE)
+        // touching the notification opens the « CastBridge TV » tab, where the queue card is (it used to open whatever tab was last shown)
+        val open = PendingIntent.getActivity(this, 9, Intent(this, MainActivity::class.java).putExtra(TvHomeRequest.EXTRA, TvHomeRequest.TV)
+            .addFlags(Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_SINGLE_TOP), PendingIntent.FLAG_IMMUTABLE or PendingIntent.FLAG_UPDATE_CURRENT)
         return Notification.Builder(this, CHANNEL).setSmallIcon(android.R.drawable.stat_sys_upload)
             .setContentTitle("CastBridge : file d'envoi vers la TV")
             .setContentText(if (pct != null) "$text · $pct %" else text)

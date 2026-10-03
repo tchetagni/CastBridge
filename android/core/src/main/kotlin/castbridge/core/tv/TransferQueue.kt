@@ -37,7 +37,7 @@ enum class QueueStatus { WAITING, RUNNING, DONE, FAILED, CANCELLED }
 
 /** French texts of the queue (one place, tested). */
 object QueueTexts {
-    const val SOURCE_LOST = "Accès au fichier perdu (téléphone redémarré, ou fichier déplacé) : rouvrez-le avec « Ouvrir avec » puis « Copier vers la TV »."
+    const val SOURCE_LOST = "Accès au fichier perdu (téléphone redémarré, ou fichier déplacé) : rouvrez-le avec « Ouvrir avec » puis « Copier sur la TV »."
     const val TV_BUSY = "En attente : un autre envoi vers la TV est en cours, celui-ci partira juste après."
     const val NO_TV = "TV non connectée : l'envoi n'a pas pu démarrer. Touchez « Réessayer » quand la TV est allumée."
     const val NO_CREDENTIAL = "Code de la TV inconnu : reconnectez la TV dans CastBridge, puis touchez « Réessayer »."

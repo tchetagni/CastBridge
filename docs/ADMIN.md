@@ -172,7 +172,7 @@ Les noms de fichiers sont sans `/`, `\`, ni `.part` final, 200 caractères max. 
 - **Lecteur** : barre fine de progression, titre, temps écoulé / total / restant, sur un dégradé, qui se masque seule après 4 s.
 - **Mémoire** : pas de vidéo en fond ; le fond est la miniature déjà en cache, réduite une fois (quelques ko) ; une rangée = une
   `RecyclerView` ; bitmaps RGB_565, 4 Mo au plus.
-- **Téléphone, onglet CastBridge TV** : accueil par tâches : « Envoyer une vidéo », « Regarder sur la TV » (télécommande si une vidéo joue, sinon la bibliothèque),
+- **Téléphone, onglet CastBridge TV** : accueil par tâches (ouvert au lancement depuis 2026-10-03) : « Copier sur la TV » (ancien « Envoyer une vidéo »), « Regarder sur la TV » (télécommande si une vidéo joue, sinon la bibliothèque),
   « Bibliothèque de la TV », « Échanger des fichiers » ; carte « Sur la TV » (lecture en cours) ; rangée « Reprendre sur la TV » ; progression d'envoi en grand avec
   temps restant et débit ; **assistant de première connexion** (trouver la TV sur le Wi-Fi, saisir son code une seule fois, vérifié aussitôt). Tout le reste
   (adresse manuelle, Bluetooth, Wi-Fi Direct, passerelle SSH, stockage, APK) est sous **« Avancé »** (l'écran d'avant, inchangé).

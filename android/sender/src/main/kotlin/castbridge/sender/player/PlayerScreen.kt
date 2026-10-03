@@ -236,7 +236,7 @@ fun VideoPlayerScreen(act: PlayerActivity, p: ExoPlayer) {
                     Row(Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.End) {
                         if (fatal) TextButton({ p.prepare(); p.play() }) { Text("Réessayer") }
                         TextButton({ formatDismissed = true }) { Text("Fermer") }
-                        Button({ castOpen = true }) { Icon(cbv(castbridge.sender.R.drawable.ic_cb_caster), null); Spacer(Modifier.width(6.dp)); Text("Caster vers la TV") }
+                        Button({ castOpen = true }) { Icon(cbv(castbridge.sender.R.drawable.ic_cb_caster), null); Spacer(Modifier.width(6.dp)); Text(castbridge.core.ux.SendWays.SHEET_TITLE) }
                     }
                 }
             }
@@ -260,7 +260,7 @@ fun VideoPlayerScreen(act: PlayerActivity, p: ExoPlayer) {
                         Text(current?.name ?: "", color = Color.White, maxLines = 1, overflow = TextOverflow.Ellipsis, style = MaterialTheme.typography.titleMedium)
                         if (obs.count > 1) Text("${obs.index + 1} / ${obs.count}", color = Color(castbridge.core.brand.BrandTokens.Dark.TEXT_MEDIUM), style = MaterialTheme.typography.labelSmall)
                     }
-                    IconButton({ castOpen = true; touch() }) { Icon(cbv(castbridge.sender.R.drawable.ic_cb_caster), "Caster", tint = Color.White) }
+                    IconButton({ castOpen = true; touch() }) { Icon(cbv(castbridge.sender.R.drawable.ic_cb_caster), castbridge.core.ux.SendWays.SHEET_TITLE, tint = Color.White) }
                     IconButton({ menu = "tracks"; touch() }) { Icon(cbv(castbridge.sender.R.drawable.ic_cb_sous_titres), "Pistes audio et sous-titres", tint = Color.White) }
                     Box {
                         IconButton({ menu = "more"; touch() }) { Icon(Icons.Filled.MoreVert, "Plus", tint = Color.White) }

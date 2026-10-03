@@ -74,7 +74,7 @@ fun CastSheet(item: PlayItem, posMs: Long, durMs: Long, only: CastAction? = null
                     Icon(cbv(castbridge.sender.R.drawable.ic_cb_caster), null, tint = MaterialTheme.colorScheme.primary)
                     Spacer(Modifier.width(12.dp))
                     Column(Modifier.weight(1f)) {
-                        Text("Diffuser sur", style = MaterialTheme.typography.titleLarge)
+                        Text(castbridge.core.ux.SendWays.SHEET_TITLE, style = MaterialTheme.typography.titleLarge)
                         Text(item.name, style = MaterialTheme.typography.bodySmall, maxLines = 1, overflow = TextOverflow.Ellipsis,
                             color = MaterialTheme.colorScheme.onSurfaceVariant)
                     }
@@ -99,10 +99,10 @@ fun CastSheet(item: PlayItem, posMs: Long, durMs: Long, only: CastAction? = null
                 if (open) Column(Modifier.padding(horizontal = 20.dp, vertical = 4.dp), verticalArrangement = Arrangement.spacedBy(6.dp)) {
                     val pinOk = castbridge.core.trust.TvCredential.isUsable(pin)   // a trusted phone holds a token, not a 6-digit PIN
                     if (!pinOk) PinField(pins, tv.name, pin, { pin = it }, Modifier.fillMaxWidth())
-                    val actions = CastPlan.actions(TargetKind.CASTBRIDGE, src).filter { only == null || it == only }
+                    val actions = castbridge.core.ux.SendWays.castOrder(CastPlan.actions(TargetKind.CASTBRIDGE, src).filter { only == null || it == only })
                     for (a in actions) {
                         val needsUpload = a != CastAction.LIVE
-                        ActionButton(icon(a), a.label, subtitle(a, item), enabled = pinOk && !(needsUpload && busy)) {
+                        ActionButton(icon(a), castbridge.core.ux.SendWays.castLabel(a, item.kind), subtitle(a, item), enabled = pinOk && !(needsUpload && busy)) {
                             go(CastTarget.Box(tv, pin), a)
                         }
                     }
@@ -146,12 +146,8 @@ private fun icon(a: CastAction): ImageVector = when (a) {
     CastAction.MOVE -> cbv(castbridge.sender.R.drawable.ic_cb_deplacer_vers_tv)
 }
 
-private fun subtitle(a: CastAction, item: PlayItem): String = when (a) {
-    CastAction.LIVE -> if (item.isWeb) "La TV ouvre le lien elle-même" else "La TV lit depuis le téléphone, qui doit rester sur le Wi-Fi"
-    CastAction.COPY -> if (item.kind == castbridge.core.phone.MediaKind.IMAGE) "Garder une copie sur la TV"
-        else "La lecture passe sur la TV dès qu'elle a assez d'avance ; le téléphone peut ensuite partir"
-    CastAction.MOVE -> "Comme « Copier », puis supprimé du téléphone une fois la copie vérifiée (taille exacte)"
-}
+/** One explanation line per way, the same words as « Ouvrir avec CastBridge » (castbridge.core.ux.SendWays). */
+private fun subtitle(a: CastAction, item: PlayItem): String = castbridge.core.ux.SendWays.castHint(a, item.kind, item.isWeb)
 
 @Composable
 private fun ActionButton(icon: ImageVector, title: String, subtitle: String, enabled: Boolean, onClick: () -> Unit) {

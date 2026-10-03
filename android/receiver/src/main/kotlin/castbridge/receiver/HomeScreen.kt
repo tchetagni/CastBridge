@@ -76,6 +76,9 @@ class HomeScreen(private val act: Activity, private val container: FrameLayout, 
     private var signature = 0
     private var revealUntil = 0L
     private var lastFocused: LibraryItem? = null
+    // D-pad focus memory (castbridge.core.ux.TvHomeFocus): what was opened last from the home, so BACK lands on the tile it came from
+    private var opened = castbridge.core.ux.TvHomeFocus.Opened.NOTHING
+    private var openedTool = 0
     val visible get() = container.visibility == View.VISIBLE
     /** The « ready · code » chip of the header: the status bar is reached with UP from it. */
     val headerChip: View get() = chip
@@ -147,7 +150,12 @@ class HomeScreen(private val act: Activity, private val container: FrameLayout, 
         ).filter { it.second.isNotEmpty() }
         // Keep the row views (and the focus) when only their content changed.
         // (also the very first time: an empty TV still needs its tools row, or the home has nothing to focus)
+        var rebuilt: castbridge.core.ux.TvHomeFocus.Target = castbridge.core.ux.TvHomeFocus.Target.None
         if (toolsRow == null || wanted.map { it.first } != rows.keys.toList()) {
+            val hadFocus = rowsBox.hasFocus()
+            val oldTools = toolsRow?.tag as? ViewGroup
+            val focusedTool = oldTools?.let { b -> (0 until b.childCount).firstOrNull { b.getChildAt(it).hasFocus() } }
+            rebuilt = castbridge.core.ux.TvHomeFocus.afterRebuild(hadFocus, focusedTool, oldTools?.childCount ?: 0, wanted.isNotEmpty())
             rowsBox.removeAllViews(); rows.clear()
             // Tools first: every feature (Internet test, USB, Bluetooth, quiz…) is visible without scrolling.
             toolsRow = tools().also { rowsBox.addView(it) }
@@ -172,11 +180,21 @@ class HomeScreen(private val act: Activity, private val container: FrameLayout, 
             val first = wanted.firstOrNull()?.second?.firstOrNull()
             if (first != null) describe(first)
         }
-        if (focusFirst) main.postDelayed({
-            val firstRow = (0 until rowsBox.childCount).map { rowsBox.getChildAt(it) }.firstOrNull { it is RecyclerView } as? RecyclerView
-            val v = firstRow?.getChildAt(0) ?: ((toolsRow?.tag as? ViewGroup)?.getChildAt(0))
-            v?.requestFocus()
-        }, 80)
+        val target = if (focusFirst) castbridge.core.ux.TvHomeFocus.onShow(opened, openedTool, (toolsRow?.tag as? ViewGroup)?.childCount ?: 0, wanted.isNotEmpty())
+            .also { opened = castbridge.core.ux.TvHomeFocus.Opened.NOTHING } else rebuilt
+        if (target != castbridge.core.ux.TvHomeFocus.Target.None) main.postDelayed({ focus(target) }, 80)
+    }
+
+    /** Puts the D-pad focus where [castbridge.core.ux.TvHomeFocus] says (first card of the first row, or a tile; falls back to the other). */
+    private fun focus(target: castbridge.core.ux.TvHomeFocus.Target) {
+        val firstRow = (0 until rowsBox.childCount).map { rowsBox.getChildAt(it) }.firstOrNull { it is RecyclerView } as? RecyclerView
+        val tools = toolsRow?.tag as? ViewGroup
+        val v = when (target) {
+            is castbridge.core.ux.TvHomeFocus.Target.Tool -> tools?.getChildAt(minOf(target.index, (tools.childCount - 1).coerceAtLeast(0))) ?: firstRow?.getChildAt(0)
+            castbridge.core.ux.TvHomeFocus.Target.FirstCard -> firstRow?.getChildAt(0) ?: tools?.getChildAt(0)
+            else -> null
+        }
+        v?.requestFocus()
     }
 
     private var toolsSig = ""
@@ -204,9 +222,9 @@ class HomeScreen(private val act: Activity, private val container: FrameLayout, 
         toolsSig = list.joinToString("|") { "${it.label}:${it.status}:${it.on}" }
         val focusedIndex = (0 until box.childCount).firstOrNull { box.getChildAt(it).hasFocus() }
         box.removeAllViews()
-        list.forEach { t ->
+        list.forEachIndexed { index, t ->
             box.addView(IconTile(act, t, w).also { v ->
-                v.setOnClickListener { t.action() }
+                v.setOnClickListener { opened = castbridge.core.ux.TvHomeFocus.Opened.TOOL; openedTool = index; t.action() }
                 v.setOnFocusChangeListener { _, has -> if (has) { heroTitle.text = t.label; heroSub.text = t.description + (t.status?.let { "  —  $it" } ?: "") } }
             })
         }
@@ -258,7 +276,7 @@ class HomeScreen(private val act: Activity, private val container: FrameLayout, 
             card.layoutParams = RecyclerView.LayoutParams(dp(220), ViewGroup.LayoutParams.WRAP_CONTENT).apply { setMargins(dp(10), dp(10), dp(10), dp(10)) }
             val h = object : RecyclerView.ViewHolder(card) {}
             TvStyle.focusZoom(card) { has -> if (has) card.item?.let { describe(it) } }
-            card.setOnClickListener { val p = h.bindingAdapterPosition; if (p >= 0) api.open(list[p], list, p) }
+            card.setOnClickListener { val p = h.bindingAdapterPosition; if (p >= 0) { opened = castbridge.core.ux.TvHomeFocus.Opened.CARD; api.open(list[p], list, p) } }
             card.setOnLongClickListener { val p = h.bindingAdapterPosition; if (p >= 0) api.actions(list[p], list, p); true }
             card.setOnKeyListener { _, code, ev ->
                 if (ev.action == KeyEvent.ACTION_DOWN && (code == KeyEvent.KEYCODE_MENU || code == KeyEvent.KEYCODE_INFO)) {

@@ -100,6 +100,8 @@ fun TvHome(onAdvanced: () -> Unit) {
     val session = (link as? LinkUi.Connected)?.session
     var adding by rememberSaveable { mutableStateOf(false) }
     var managing by remember { mutableStateOf(false) }
+    // the one message line of the home (castbridge.core.ux.HomeNotices): near the top, red only for a problem, dismissible; declared before the early returns so the wizard can show it
+    var msg by remember { mutableStateOf<castbridge.core.ux.UiNotice?>(null) }
     LaunchedEffect(Unit) { TvLinkManager.start(ctx) }
     var wizard by rememberSaveable { mutableStateOf(TvLinkManager.saved.list().isEmpty() && (tvName == null || !TvAuth.isUsable(pins.get(tvName)))) }
     val tv = tvs.firstOrNull { it.name == tvName }
@@ -123,8 +125,8 @@ fun TvHome(onAdvanced: () -> Unit) {
         return
     }
     if (wizard) {
-        FirstConnection(tvs, onRetry = { discovery.restart() }, onAdvanced = onAdvanced, onAddTv = { adding = true }) { name, code ->
-            home.name = name; pins.put(name, code); tvName = name; pin = code; wizard = false
+        FirstConnection(tvs, onRetry = { discovery.restart() }, onAdvanced = onAdvanced, onAddTv = { adding = true }, notice = msg?.takeIf { it.error }?.text) { name, code ->
+            home.name = name; pins.put(name, code); tvName = name; pin = code; wizard = false; msg = null
         }
         return
     }
@@ -135,7 +137,6 @@ fun TvHome(onAdvanced: () -> Unit) {
     var info by remember { mutableStateOf<castbridge.core.tv.TvInfo?>(null) }
     var items by remember { mutableStateOf<List<TvLibItem>>(emptyList()) }
     var reachable by remember { mutableStateOf(false) }
-    var msg by remember { mutableStateOf<String?>(null) }
     var showLibrary by remember { mutableStateOf(false) }
     var showExchange by remember { mutableStateOf(false) }
     var showPlayer by remember { mutableStateOf(false) }
@@ -146,9 +147,10 @@ fun TvHome(onAdvanced: () -> Unit) {
         while (client != null) {
             val r = withContext(Dispatchers.IO) { runCatching { castbridge.core.tv.TvInfo.parse(client.info()) } }
             reachable = r.isSuccess; info = r.getOrNull() ?: info
+            if (r.isSuccess && msg == castbridge.core.ux.HomeNotices.info("Reconnexion à la TV…")) msg = null      // reconnected: the line goes away by itself
             if ((r.exceptionOrNull() as? TvClient.HttpError)?.code == 401) {
-                if (TvAuth.isToken(client.pin)) { TvLinkManager.poke(); msg = "Reconnexion à la TV…"; delay(3000); continue }   // token expired or revoked: HELLO again
-                msg = "Le code de la TV a changé : saisissez-le à nouveau."; wizard = true; break
+                if (TvAuth.isToken(client.pin)) { TvLinkManager.poke(); msg = castbridge.core.ux.HomeNotices.info("Reconnexion à la TV…"); delay(3000); continue }   // token expired or revoked: HELLO again
+                msg = castbridge.core.ux.HomeNotices.error("Le code de la TV a changé : saisissez-le à nouveau."); wizard = true; break
             }
             if (n++ % 5 == 0) withContext(Dispatchers.IO) { runCatching { items = TvLibraryParser.parse(client.library()) } }
             delay(2000)
@@ -156,9 +158,12 @@ fun TvHome(onAdvanced: () -> Unit) {
     }
     var moveNext by remember { mutableStateOf(false) }       // the next picked file is moved (deleted from the phone once on the TV)
     val pick = rememberLauncherForActivityResult(ActivityResultContracts.OpenMultipleDocuments()) { uris ->
-        if (uris.isEmpty() || (tvName == null && session == null)) return@rememberLauncherForActivityResult
+        if (uris.isEmpty()) return@rememberLauncherForActivityResult
+        // the link dropped while the picker was open: say it (the files used to be dropped without a word)
+        if (!castbridge.core.ux.HomeNotices.canPick(session != null, tvName)) { msg = castbridge.core.ux.HomeNotices.pickBlocked(TvLinkManager.saved.list().size); return@rememberLauncherForActivityResult }
         val move = moveNext; moveNext = false
         var queued = 0
+        var refused: String? = null
         uris.forEach { uri ->
             // Keep write access when the provider gives it: a move deletes the original once the TV holds it.
             runCatching { ctx.contentResolver.takePersistableUriPermission(uri, Intent.FLAG_GRANT_READ_URI_PERMISSION or Intent.FLAG_GRANT_WRITE_URI_PERMISSION) }
@@ -170,21 +175,23 @@ fun TvHome(onAdvanced: () -> Unit) {
             var last: TransferQueue.Ticket? = null
             if (session != null) {
                 runCatching { last = TransferQueue.add(ctx, uri, name, size, move, autoPlay = uris.size == 1, progressive = progressive); queued++ }
-                    .onFailure { msg = "Impossible de mettre l'envoi en file : ${it.message}" }
+                    .onFailure { refused = "Impossible de mettre l'envoi en file : ${it.message}" }
             } else {
                 runCatching { last = TransferQueue.add(ctx, uri, name, size, move, autoPlay = uris.size == 1, progressive = progressive, tvName = tvName!!, credential = pin); queued++ }
-                    .onFailure { msg = "Impossible de mettre l'envoi en file : ${it.message}" }
+                    .onFailure { refused = "Impossible de mettre l'envoi en file : ${it.message}" }
             }
-            if (uris.size == 1) last?.takeIf { it.queued }?.let { msg = it.text }
+            if (uris.size == 1) last?.takeIf { it.queued }?.let { msg = castbridge.core.ux.HomeNotices.info(it.text) }
         }
-        val refused = msg?.takeIf { queued < uris.size }
-        if (queued > 1) msg = "$queued fichiers ajoutés à la file d'attente : ils partent l'un après l'autre." + (refused?.let { " $it" } ?: "")
-        else if (queued == 1 && session != null && session.base == null) msg = "Envoi par Bluetooth (plus lent que le Wi-Fi)"
+        if (queued > 1) msg = castbridge.core.ux.HomeNotices.queued(queued, refused)
+        else if (queued == 0) refused?.let { msg = castbridge.core.ux.HomeNotices.error(it) }
+        else if (queued == 1 && refused != null) msg = castbridge.core.ux.HomeNotices.queued(1, refused)
+        else if (queued == 1 && session != null && session.base == null) msg = castbridge.core.ux.HomeNotices.info("Envoi par Bluetooth (plus lent que le Wi-Fi)")
     }
     fun cmd(f: TvClient.() -> Unit) = scope.launch {
-        val c = client ?: return@launch
+        val c = client ?: run { msg = castbridge.core.ux.HomeNotices.needsTv("Commande de lecture"); return@launch }
         val e = withContext(Dispatchers.IO) { runCatching { c.f() }.exceptionOrNull() }
-        msg = (e as? TvClient.HttpError)?.message?.substringAfter(": ")?.let { TvClient.str(it, "message") ?: TvClient.str(it, "error") } ?: e?.message
+        msg = ((e as? TvClient.HttpError)?.message?.substringAfter(": ")?.let { TvClient.str(it, "message") ?: TvClient.str(it, "error") } ?: e?.message)
+            ?.let { castbridge.core.ux.HomeNotices.error(it) }
     }
 
     val cs = MaterialTheme.colorScheme
@@ -202,6 +209,14 @@ fun TvHome(onAdvanced: () -> Unit) {
                     style = MaterialTheme.typography.bodySmall, color = cs.onSurfaceVariant)
             }
             TextButton(onClick = { wizard = true }) { Text("Changer") }
+        }
+
+        // The message line: right under the TV, where it is seen (it used to sit below the posters, out of sight)
+        msg?.let { n ->
+            Row(verticalAlignment = Alignment.CenterVertically) {
+                Text(n.text, Modifier.weight(1f), color = if (n.error) cs.error else cs.onSurfaceVariant, style = MaterialTheme.typography.bodyMedium)
+                IconButton({ msg = null }) { Icon(Icons.Filled.Close, "Fermer le message") }
+            }
         }
 
         // Big progress while sending
@@ -269,7 +284,7 @@ fun TvHome(onAdvanced: () -> Unit) {
                 if (undoable) TextButton(onClick = {
                     scope.launch {
                         val n = withContext(Dispatchers.IO) { SeriesClassifying.undoLast(client) }
-                        undoable = false; msg = "$n fichier(s) remis à la racine."
+                        undoable = false; msg = castbridge.core.ux.HomeNotices.info("$n fichier(s) remis à la racine.")
                         withContext(Dispatchers.IO) { runCatching { items = TvLibraryParser.parse(client.library()) } }
                     }
                 }) { Text("Annuler le dernier classement") }
@@ -288,7 +303,7 @@ fun TvHome(onAdvanced: () -> Unit) {
                     scope.launch {
                         val (ok, ko) = withContext(Dispatchers.IO) { SeriesClassifying.apply(client!!, plan) }
                         undoable = ok > 0
-                        msg = if (ko == 0) "$ok épisode(s) classé(s)." else "$ok classé(s), $ko échec(s) : réessayez."
+                        msg = if (ko == 0) castbridge.core.ux.HomeNotices.info("$ok épisode(s) classé(s).") else castbridge.core.ux.HomeNotices.error("$ok classé(s), $ko échec(s) : réessayez.")
                         withContext(Dispatchers.IO) { runCatching { items = TvLibraryParser.parse(client!!.library()) } }
                     }
                 }) { Text("Classer") } },
@@ -317,19 +332,24 @@ fun TvHome(onAdvanced: () -> Unit) {
 
         // Tasks
         Row(horizontalArrangement = Arrangement.spacedBy(12.dp)) {
-            Task(cbv(R.drawable.ic_cb_envoyer), "Envoyer une vidéo", "Copiée : elle reste aussi sur le téléphone", Modifier.weight(1f)) { PhoneConnect.feature("send"); moveNext = false; pick.launch(arrayOf("video/*", "audio/*")) }
-            Task(cbv(R.drawable.ic_cb_deplacer_vers_tv), "Déplacer vers la TV", "Libère la place du téléphone", Modifier.weight(1f)) { PhoneConnect.feature("move"); moveNext = true; pick.launch(arrayOf("video/*", "audio/*")) }
+            // files with nowhere to go are refused BEFORE the picker, with the reason (they used to be picked then dropped in silence)
+            fun pickFor(move: Boolean) {
+                if (!castbridge.core.ux.HomeNotices.canPick(session != null, tvName)) { msg = castbridge.core.ux.HomeNotices.pickBlocked(TvLinkManager.saved.list().size); return }
+                moveNext = move; pick.launch(arrayOf("video/*", "audio/*"))
+            }
+            Task(cbv(R.drawable.ic_cb_envoyer), castbridge.core.ux.SendWay.COPY.label, castbridge.core.ux.SendWays.HOME_COPY_HINT, Modifier.weight(1f)) { PhoneConnect.feature("send"); pickFor(move = false) }
+            Task(cbv(R.drawable.ic_cb_deplacer_vers_tv), castbridge.core.ux.SendWay.MOVE.label, castbridge.core.ux.SendWays.HOME_MOVE_HINT, Modifier.weight(1f)) { PhoneConnect.feature("move"); pickFor(move = true) }
         }
         Row(horizontalArrangement = Arrangement.spacedBy(12.dp)) {
             Task(Icons.Filled.PlayCircle, "Regarder sur la TV", if (now != null) "Lecture en cours" else "Choisir une vidéo", Modifier.weight(1f)) {
                 PhoneConnect.feature("watch_on_tv")
-                if (now != null) showPlayer = true else showLibrary = true
+                when { client == null -> msg = castbridge.core.ux.HomeNotices.needsTv("Regarder sur la TV"); now != null -> showPlayer = true; else -> showLibrary = true }
             }
             Task(cbv(R.drawable.ic_cb_telecommande), "Télécommande", "Flèches, OK, volume, clavier", Modifier.weight(1f)) { PhoneConnect.feature("remote"); RemoteActivity.open(ctx) }
         }
         Row(horizontalArrangement = Arrangement.spacedBy(12.dp)) {
-            Task(cbv(R.drawable.ic_cb_bibliotheque), "Bibliothèque de la TV", "${items.size} fichier(s)", Modifier.weight(1f)) { PhoneConnect.feature("tv_library"); showLibrary = true }
-            Task(Icons.Filled.SwapVert, "Échanger des fichiers", "Dans les deux sens", Modifier.weight(1f)) { PhoneConnect.feature("file_exchange"); showExchange = true }
+            Task(cbv(R.drawable.ic_cb_bibliotheque), "Bibliothèque de la TV", "${items.size} fichier(s)", Modifier.weight(1f)) { PhoneConnect.feature("tv_library"); if (client == null) msg = castbridge.core.ux.HomeNotices.needsTv("Bibliothèque de la TV") else showLibrary = true }
+            Task(Icons.Filled.SwapVert, "Échanger des fichiers", "Dans les deux sens", Modifier.weight(1f)) { PhoneConnect.feature("file_exchange"); if (client == null) msg = castbridge.core.ux.HomeNotices.needsTv("Échanger des fichiers") else showExchange = true }
         }
 
         // Continue watching
@@ -341,7 +361,6 @@ fun TvHome(onAdvanced: () -> Unit) {
                 items(resume, key = { "${it.volume}:${it.name}" }) { i -> Poster(client, i) { cmd { play(i.name, if (i.watched) 0 else i.resumeMs) } } }
             }
         }
-        msg?.let { Text(it, color = cs.error, style = MaterialTheme.typography.bodySmall) }
 
         // Advanced
         HorizontalDivider()
@@ -400,7 +419,7 @@ private fun Poster(client: TvClient, i: TvLibItem, onClick: () -> Unit) {
 
 /** First connection: find the TV (same Wi-Fi), then type its code once. */
 @Composable
-private fun FirstConnection(tvs: List<Tv>, onRetry: () -> Unit, onAdvanced: () -> Unit, onAddTv: () -> Unit, onDone: (String, String) -> Unit) {
+private fun FirstConnection(tvs: List<Tv>, onRetry: () -> Unit, onAdvanced: () -> Unit, onAddTv: () -> Unit, notice: String? = null, onDone: (String, String) -> Unit) {
     val scope = rememberCoroutineScope()
     var chosen by remember { mutableStateOf<Tv?>(null) }
     var code by remember { mutableStateOf("") }
@@ -410,6 +429,7 @@ private fun FirstConnection(tvs: List<Tv>, onRetry: () -> Unit, onAdvanced: () -
     Column(Modifier.fillMaxSize().verticalScroll(rememberScrollState()).padding(24.dp), verticalArrangement = Arrangement.spacedBy(16.dp),
         horizontalAlignment = Alignment.CenterHorizontally) {
         Icon(Icons.Filled.Tv, null, Modifier.size(72.dp), tint = cs.primary)
+        notice?.let { Text(it, color = cs.error, textAlign = TextAlign.Center) }
         val c = chosen
         if (c == null) {
             Text("Trouvons votre TV", style = MaterialTheme.typography.headlineSmall, fontWeight = FontWeight.SemiBold)
@@ -474,7 +494,7 @@ fun TransferQueueCard() {
                 val sorted = shownQueue.filter { it.status == castbridge.core.tv.QueueStatus.RUNNING } + order + shownQueue.filter { it.status == castbridge.core.tv.QueueStatus.FAILED }
                 sorted.forEach { q ->
                     val n = castbridge.core.tv.QueueRules.position(queue, q.id)
-                    val kind = (if (q.playOnTv) " · copier et lire" else "") + (if (q.move) " · déplacement" else "")
+                    val kind = " · " + castbridge.core.ux.QueueGlances.kind(q)
                     Row(verticalAlignment = Alignment.CenterVertically) {
                         Column(Modifier.weight(1f)) {
                             Text((if (n > 0) "$n. " else "") + LibraryLogic.title(q.name), maxLines = 1, overflow = TextOverflow.Ellipsis, style = MaterialTheme.typography.bodyMedium)
