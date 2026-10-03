@@ -90,6 +90,11 @@ class ReceiverServer(
     private val sourceName: (String) -> String? = { null },
     /** Lowers the receive/hash/write threads while a video plays (the TV app: Process.setThreadPriority); see [castbridge.core.xfer.PlaybackPriority]. */
     private val receivePriority: castbridge.core.xfer.ThreadPriorityPort = castbridge.core.xfer.ThreadPriorityPort.NONE,
+    /**
+     * Index of the CONTENT of the files the TV holds (size + SHA-256, R-12, docs/agent-reports/copy-dedup.md), read by GET /api/have. true = its background
+     * pass runs (the TV app); false = it is only filled on demand by [indexStep] (tests). Either way it never hashes while a video plays or a copy runs.
+     */
+    private val contentIndexing: Boolean = false,
 ) : NanoHTTPD(port) {
 
     /** The socket of the connection this thread serves (NanoHTTPD: one thread per connection), for [hungUp]. */
@@ -183,6 +188,45 @@ class ReceiverServer(
         return s.remoteIpAddress?.takeIf { it.isNotEmpty() && it != "127.0.0.1" && it != "::1" }
     }
 
+    /** « Déjà sur la TV ? » by content (R-12): the finished files of the real folders, hashed in the background while the TV is idle. */
+    private val contentIndex = ContentIndex(::heldFiles, ::indexIdle)
+
+    /** Finished files of the real folders (not the system picker's), with the path the index keys them by. Partial copies are never held files. */
+    private fun heldFiles(): List<HeldFile> = listing().entries.filter { it.complete }.mapNotNull { e ->
+        val fs = volumes.store(e.v) as? FileStore ?: return@mapNotNull null
+        val f = fs.fileOf(e.name)
+        val rel = f.relativeToOrNull(fs.dir)?.invariantSeparatorsPath ?: return@mapNotNull null
+        if (rel.startsWith("..")) return@mapNotNull null
+        HeldFile(e.v.id, fs.dir, rel, e.name, e.folder)
+    }
+
+    /** The background hash runs only when nothing plays or buffers and nothing is being received or moved (R-06: « la lecture d'abord »). */
+    private fun indexIdle(): Boolean {
+        val st = player.state().state
+        return st != "playing" && st != "buffering" && activeTransfers() == 0 && transfers.active() == 0 && progress.active().isEmpty()
+    }
+
+    /** Hashes one file of the index now if the TV is idle (tests; the TV app uses the background pass). */
+    internal fun indexStep(): Boolean = contentIndex.step()
+
+    /** GET /api/have?size=N[&sha256=H]: does the TV hold a finished file of that size (and of that content)? Never a name but the matching one. */
+    private fun have(p: Map<String, String>): Response {
+        val size = p["size"]?.toLongOrNull()?.takeIf { it > 0 } ?: return bad("size required")
+        val sha = p["sha256"]?.lowercase()
+        if (sha != null && !ContentHash.valid(sha)) return bad("bad sha256")
+        return when (val a = contentIndex.query(size, sha)) {
+            ContentIndex.Answer.Absent -> ok("""{"state":"absent"}""")
+            is ContentIndex.Answer.Candidates -> ok("""{"state":"candidates","count":${a.count},"indexing":${a.indexing}}""")
+            is ContentIndex.Answer.Indexing -> ok("""{"state":"indexing","pending":${a.pending}}""")
+            is ContentIndex.Answer.Present -> ok("""{"state":"present","name":${q(a.file.name)},"folder":${q(a.file.folder)},"volume":${q(a.file.volumeId)},"size":${a.size},"sha256":${q(a.sha256)},"complete":true}""")
+        }
+    }
+
+    override fun start(timeout: Int, daemon: Boolean) {
+        super.start(timeout, daemon)
+        if (contentIndexing) contentIndex.startWorker()
+    }
+
     /** Uploads being received right now (the TV app keeps a partial wake lock only while this is above zero). */
     fun activeTransfers(): Int = uploading.get() + chunking.get() + (if (moveJob?.state == "running") 1 else 0)
     @Volatile private var playingVolume: String? = null
@@ -255,6 +299,7 @@ class ReceiverServer(
             if (r.keepFlat) return null
             val pl = Filing.place(r, effectiveFs(v), size, self = diskName, taken = ::nameTaken) ?: return null
             if (!fs.fileInto(diskName, pl.folder, pl.name, original)) return null
+            contentIndex.renamed(fs.dir, fs.diskName(diskName), pl.rel)      // same bytes: the hash follows the file
             folders?.set(pl.name, pl.folder)
             invalidate()
             pl
@@ -409,6 +454,7 @@ class ReceiverServer(
 
     override fun stop() {
         moveJob?.cancelled = true
+        contentIndex.stop()
         super.stop()
     }
 
@@ -453,6 +499,7 @@ class ReceiverServer(
             path == "/api/info" -> ok(info())
             path == "/api/storage" -> storage(s.method, p)
             path == "/api/storage/check" -> if (s.method == Method.GET) check(p) else json(Response.Status.METHOD_NOT_ALLOWED, """{"error":"use GET"}""")
+            path == "/api/have" -> if (s.method == Method.GET) have(p) else json(Response.Status.METHOD_NOT_ALLOWED, """{"error":"use GET"}""")
             path == "/api/part" -> named(p) { name ->
                 val size = p["size"]?.toLongOrNull()?.takeIf { it > 0 }
                 if (findFinalOrOrigin(name, size) == null && findPart(name) == null) volumes.missingOwner(name)?.let { return@named removed() }
@@ -771,7 +818,7 @@ class ReceiverServer(
                         // committed: the copy IS received, whatever filing then does (an IOException there must not turn it into « reprise en attente »)
                         val filed = try { fileReceived(v, st, o.name, name, total) } catch (e: IOException) { null }
                         progress.finish(pid, filed?.name)
-                        onNotice(receivedNotice(name, filed))
+                        onNotice(receivedNotice(name, filed)); contentIndex.poke()
                     } else {
                         progress.interrupted(pid)             // the stream ended short (clean close): the phone resumes, the sweep does not have to wait for it
                     }
@@ -954,7 +1001,7 @@ class ReceiverServer(
                         }
                         val filed = try { fileReceived(v, st, sess.diskName, name, sess.manifest.size) } catch (e: IOException) { null }
                         progress.finish("x:" + sess.manifest.id, filed?.name)
-                        onNotice(receivedNotice(name, filed))
+                        onNotice(receivedNotice(name, filed)); contentIndex.poke()
                         invalidate()
                         ok("""{"done":true,"name":${q(name)},"volume":${q(v.id)}${if (filed != null) ",\"folder\":${q(filed.folder)},\"finalName\":${q(filed.name)}" else ""}}""")
                     }

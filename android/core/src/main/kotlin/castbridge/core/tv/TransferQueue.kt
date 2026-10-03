@@ -28,6 +28,14 @@ data class QueueItem(
     val linkTv: String? = null,
     /** « Annuler » asked while it runs: the runner must not launch it / must stop it ([QueueCancel]). Not saved. */
     val cancelAsked: Boolean = false,
+    /** SHA-256 of the phone's file, computed only when a same-size file exists (on the TV or in this queue): R-12, [DedupDecision]. */
+    val sha256: String? = null,
+    /** « Copier quand même »: copied even if the same content is already on the TV (no content check). */
+    val force: Boolean = false,
+    /** Not copied because the TV already holds the same content: the TV's name of that file (« Copier et lire » plays it). */
+    val heldAs: String? = null,
+    /** French line shown with a finished file (« Déjà sur la TV : Films/… »); null once « Copier quand même » was offered and used. */
+    val note: String? = null,
 )
 
 /** An add the queue refuses, with the reason in French (the same file already queued with the other action). */
@@ -110,7 +118,7 @@ class TransferQueueModel(private val keepFinished: Int = 12, private val now: ()
 
     @Synchronized fun enqueue(uri: String, name: String, size: Long, move: Boolean, autoPlay: Boolean = false, progressive: Boolean = false,
                               playOnTv: Boolean = false, ordered: Boolean = false, tvName: String? = null, host: String? = null,
-                              target: String? = null, linkTv: String? = null): QueueItem {
+                              target: String? = null, linkTv: String? = null, force: Boolean = false): QueueItem {
         // the same file to the SAME TV (name, address, trusted TV): never the item of another TV
         val same = list.indexOfFirst { it.uri == uri && it.tvName == tvName && it.host == host && it.linkTv == linkTv &&
             (it.status == QueueStatus.WAITING || it.status == QueueStatus.RUNNING) }
@@ -123,7 +131,7 @@ class TransferQueueModel(private val keepFinished: Int = 12, private val now: ()
             return list[same]
         }
         val it = QueueItem(++seq, uri, name, size, move, autoPlay, progressive, playOnTv = playOnTv, ordered = ordered, tvName = tvName, host = host,
-            target = target, enqueuedAt = now(), linkTv = linkTv)
+            target = target, enqueuedAt = now(), linkTv = linkTv, force = force)
         list += it
         save()
         return it
@@ -149,6 +157,35 @@ class TransferQueueModel(private val keepFinished: Int = 12, private val now: ()
         update(id) { it.copy(status = if (ok) QueueStatus.DONE else QueueStatus.FAILED, error = if (ok) null else error ?: "Échec de l'envoi") }
         trim(); save()
     }
+
+    /** Same TV (name, address, trusted TV) as [a]. */
+    private fun sameTv(a: QueueItem, b: QueueItem) = a.tvName == b.tvName && a.host == b.host && a.linkTv == b.linkTv
+
+    /** The SHA-256 of [id]'s file, once the runner computed it (kept with the queue: never computed twice). */
+    @Synchronized fun setHash(id: Long, sha: String) { if (ContentHash.valid(sha)) { update(id) { it.copy(sha256 = sha) }; save() } }
+
+    /** Other files of this queue for the same TV with exactly the same size (waiting, running or sent): the only ones worth hashing to find a twin. */
+    @Synchronized fun sameSize(id: Long): List<QueueItem> {
+        val me = list.firstOrNull { it.id == id } ?: return emptyList()
+        if (me.size <= 0) return emptyList()
+        return list.filter { it.id != id && it.size == me.size && sameTv(it, me) && it.status != QueueStatus.FAILED && it.status != QueueStatus.CANCELLED }
+    }
+
+    /** A file of this queue already SENT to the same TV with the same content as [id] (same size, same SHA-256 known on both): [id] needs no copy. */
+    @Synchronized fun twinOf(id: Long): QueueItem? {
+        val me = list.firstOrNull { it.id == id } ?: return null
+        val sha = me.sha256 ?: return null
+        return list.firstOrNull { it.id != id && it.status == QueueStatus.DONE && sameTv(it, me) && it.size == me.size && it.sha256 == sha }
+    }
+
+    /** [id] was not copied: the TV already holds the same content as [heldAs]; [note] says it to the user (with « Copier quand même »). */
+    @Synchronized fun finishSkipped(id: Long, heldAs: String, note: String) {
+        update(id) { it.copy(status = QueueStatus.DONE, error = null, heldAs = heldAs, note = note, cancelAsked = false) }
+        trim(); save()
+    }
+
+    /** « Copier quand même » was used (or dismissed) for [id]: offered once, the line goes. */
+    @Synchronized fun dropNote(id: Long) { update(id) { it.copy(note = null) }; save() }
 
     /** The running file waits again, at its place (Android refused to start it in the background; it goes first when the app is back). */
     @Synchronized fun release(id: Long) { update(id) { if (it.status == QueueStatus.RUNNING) it.copy(status = QueueStatus.WAITING) else it }; save() }
@@ -199,7 +236,9 @@ class TransferQueueModel(private val keepFinished: Int = 12, private val now: ()
     @Synchronized fun encode(): String = JsonLite.write(mapOf("v" to 1, "seq" to seq, "items" to list.map { i ->
         mapOf("id" to i.id, "uri" to i.uri, "name" to i.name, "size" to i.size, "move" to i.move, "autoPlay" to i.autoPlay, "progressive" to i.progressive,
             "status" to i.status.name, "error" to i.error, "playOnTv" to i.playOnTv, "ordered" to i.ordered, "tvName" to i.tvName, "host" to i.host,
-            "target" to i.target, "enqueuedAt" to i.enqueuedAt, "attempts" to i.attempts, "linkTv" to i.linkTv)
+            "target" to i.target, "enqueuedAt" to i.enqueuedAt, "attempts" to i.attempts, "linkTv" to i.linkTv) +
+            // R-12 fields only when set (a hash of the user's own file and the TV's name of it: never a credential)
+            listOfNotNull(i.sha256?.let { "sha256" to it }, if (i.force) "force" to true else null, i.heldAs?.let { "heldAs" to it }, i.note?.let { "note" to it })
     }))
 
     init { store?.let { s -> runCatching { s.load()?.let(::decodeInto) }.onFailure { list.clear(); seq = 0 } } }
@@ -214,7 +253,8 @@ class TransferQueueModel(private val keepFinished: Int = 12, private val now: ()
                 m.bool("move") ?: false, m.bool("autoPlay") ?: false, m.bool("progressive") ?: false,
                 if (st == QueueStatus.RUNNING) QueueStatus.WAITING else st, m.str("error"), playOnTv = false, ordered = m.bool("ordered") ?: false,
                 tvName = m.str("tvName"), host = m.str("host"), target = m.str("target"), enqueuedAt = m.long("enqueuedAt") ?: 0, attempts = (m.long("attempts") ?: 0).toInt(),
-                linkTv = m.str("linkTv"))
+                linkTv = m.str("linkTv"), sha256 = m.str("sha256")?.takeIf { ContentHash.valid(it) }, force = m.bool("force") ?: false,
+                heldAs = m.str("heldAs"), note = m.str("note"))
         }
         list.clear(); list += read
         seq = maxOf(o.long("seq") ?: 0, read.maxOfOrNull { it.id } ?: 0)

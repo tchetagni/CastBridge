@@ -18,6 +18,8 @@ class TvClient(val base: String, val pin: String? = null) {
     fun part(name: String, size: Long? = null): Part = parsePart(call("GET", "/api/part?name=${enc(name)}" + (size?.let { "&size=$it" } ?: "")))
     fun reset(name: String) = call("POST", "/api/reset?name=${enc(name)}")
     fun info(): String = call("GET", "/api/info")
+    /** GET /api/have (R-12): a finished file of [size] bytes (and of that SHA-256) on the TV? An older TV answers 404 (HttpError): treat as unknown. */
+    fun have(size: Long, sha256: String? = null): String = call("GET", "/api/have?size=$size" + (sha256?.let { "&sha256=$it" } ?: ""))
     fun play(name: String, posMs: Long = 0) = call("POST", "/api/play?name=${enc(name)}&pos=$posMs")
     /** Plays an http(s) link on the TV (nothing stored). 404 on a TV older than this route. */
     fun playUrl(url: String, title: String, posMs: Long = 0) = call("POST", "/api/playurl?url=${enc(url)}&title=${enc(title)}&pos=$posMs")

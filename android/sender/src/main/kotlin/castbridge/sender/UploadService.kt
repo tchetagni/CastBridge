@@ -390,6 +390,11 @@ class UploadService : Service() {
         private val moves = castbridge.core.tv.MoveInbox<MoveRequest>()
         /** Several moves ending close together wait in turn (never overwritten). */
         private fun offerMove(r: MoveRequest) { moves.offer(r); _moveReady.value = moves.head() }
+        /**
+         * R-12: a MOVE whose content the TV ALREADY holds, proven by hash ([castbridge.core.tv.MoveProof.byContentHash], nothing was copied): the screen asks
+         * Android to delete the original exactly like after a verified copy ([MoveHandler], with Android's own confirmation). Never called on the TV's word alone.
+         */
+        fun offerVerifiedMove(r: MoveRequest) = offerMove(r)
         /** The current deletion request is handled: the next one (if any) is shown. */
         fun moveHandled() { _moveReady.value = moves.done() }
         fun noteHandled() { _moveNote.value = null }

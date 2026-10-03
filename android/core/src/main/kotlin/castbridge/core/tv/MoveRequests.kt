@@ -32,6 +32,18 @@ object MoveProof {
         localSize > 0 && localSize == tvSize && localHead != null && tvHead != null && localTail != null && tvTail != null &&
             localHead.contentEquals(tvHead) && localTail.contentEquals(tvTail)
 
+    /**
+     * « Déplacer » a file whose content the TV ALREADY holds (nothing is copied, R-12). The ONLY case where that original may be deleted:
+     *  1. the phone computed [localSha] itself, from the original's bytes, just now (never a hash received from anywhere);
+     *  2. the TV answered GET /api/have with a FINISHED file ([tvComplete]) whose hash it computed from ITS bytes on the disk, still valid for its size and mtime;
+     *  3. both sizes are equal and > 0, and both SHA-256 are equal (64 hex characters);
+     *  4. then, and only then, the phone hands the deletion to Android, which asks the user (MoveHandler: createDeleteRequest / deleteDocument).
+     * The TV's « I have it » alone (a name, a size, an "indexing" or a twin sent earlier by this queue) is never a proof: the original stays.
+     */
+    fun byContentHash(localSize: Long, localSha: String?, tvSize: Long, tvSha: String?, tvComplete: Boolean): Boolean =
+        localSize > 0 && localSize == tvSize && tvComplete && ContentHash.valid(localSha?.lowercase()) && ContentHash.valid(tvSha?.lowercase()) &&
+            localSha!!.lowercase() == tvSha!!.lowercase()
+
     /** Where to read the head and the tail of a file of [size] bytes: (offset, length) pairs. */
     fun edges(size: Long): Pair<Pair<Long, Int>, Pair<Long, Int>> {
         val n = minOf(size, EDGE.toLong()).toInt()

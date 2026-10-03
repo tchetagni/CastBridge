@@ -271,7 +271,9 @@ class TvService : Service(), Device {
             filingLang = { if (prefs.getBool("file_on_receive", true)) "fr" else null },
             sourceName = { a -> trust.get(a)?.name },
             // « la lecture d'abord »: a copy's threads go to the background while a video plays (docs/agent-reports/fluid-playback-during-copy.md)
-            receivePriority = ReceivePriority)
+            receivePriority = ReceivePriority,
+            // « déjà sur la TV ? » par contenu (R-12) : empreintes calculées en tâche de fond, à basse priorité, jamais pendant une lecture ou une copie
+            contentIndexing = true)
         try {
             s.start(15_000, false); server = s
         } catch (e: Exception) {

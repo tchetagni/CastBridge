@@ -525,7 +525,9 @@ fun TransferQueueCard() {
     val cs = MaterialTheme.colorScheme
     val queue by TransferQueue.items.collectAsState()
     val note by TransferQueue.note.collectAsState()
-    val shownQueue = queue.filter { it.status == castbridge.core.tv.QueueStatus.WAITING || it.status == castbridge.core.tv.QueueStatus.RUNNING || it.status == castbridge.core.tv.QueueStatus.FAILED }
+    // R-12: a file not copied because the TV already holds the same content stays shown with its line and « Copier quand même » (once)
+    val shownQueue = queue.filter { it.status == castbridge.core.tv.QueueStatus.WAITING || it.status == castbridge.core.tv.QueueStatus.RUNNING || it.status == castbridge.core.tv.QueueStatus.FAILED ||
+        (it.status == castbridge.core.tv.QueueStatus.DONE && it.note != null) }
     val order = castbridge.core.tv.QueueRules.runOrder(queue)
     AnimatedVisibility(shownQueue.isNotEmpty()) {
         ElevatedCard(Modifier.fillMaxWidth()) {
@@ -534,7 +536,8 @@ fun TransferQueueCard() {
                 Text("File d'attente des envois" + if (waiting > 0) " · $waiting en attente" else "", style = MaterialTheme.typography.labelLarge, color = cs.primary)
                 note?.let { Text(it, style = MaterialTheme.typography.bodySmall, color = cs.onSurfaceVariant) }
                 // in the order they will run: the running one, the waiting ones (« Copier et lire » first), then the failures
-                val sorted = shownQueue.filter { it.status == castbridge.core.tv.QueueStatus.RUNNING } + order + shownQueue.filter { it.status == castbridge.core.tv.QueueStatus.FAILED }
+                val sorted = shownQueue.filter { it.status == castbridge.core.tv.QueueStatus.RUNNING } + order + shownQueue.filter { it.status == castbridge.core.tv.QueueStatus.FAILED } +
+                    shownQueue.filter { it.status == castbridge.core.tv.QueueStatus.DONE }
                 sorted.forEach { q ->
                     val n = castbridge.core.tv.QueueRules.position(queue, q.id)
                     val kind = " · " + castbridge.core.ux.QueueGlances.kind(q)
@@ -544,16 +547,18 @@ fun TransferQueueCard() {
                             Text(when (q.status) {
                                 castbridge.core.tv.QueueStatus.RUNNING -> "En cours$kind"
                                 castbridge.core.tv.QueueStatus.WAITING -> "En attente$kind" + if (q.size > 0) " · ${formatSize(q.size)}" else ""
+                                castbridge.core.tv.QueueStatus.DONE -> q.note ?: "Terminé"
                                 else -> "Échec : ${q.error ?: "envoi interrompu"}"
                             }, style = MaterialTheme.typography.bodySmall, color = if (q.status == castbridge.core.tv.QueueStatus.FAILED) cs.error else cs.onSurfaceVariant)
                         }
                         if (q.status == castbridge.core.tv.QueueStatus.FAILED) TextButton(onClick = { TransferQueue.retry(ctx, q.id) }) { Text("Réessayer") }
+                        else if (q.status == castbridge.core.tv.QueueStatus.DONE) TextButton(onClick = { TransferQueue.copyAnyway(ctx, q.id) }) { Text(castbridge.core.tv.DedupTexts.COPY_ANYWAY) }
                         else TextButton(onClick = { TransferQueue.cancel(ctx, q.id) }) { Text("Annuler") }
                     }
                 }
                 Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
                     if (waiting > 1) TextButton(onClick = { TransferQueue.cancelWaiting() }) { Text("Annuler les envois en attente") }
-                    if (shownQueue.any { it.status == castbridge.core.tv.QueueStatus.FAILED }) TextButton(onClick = { TransferQueue.clearFinished() }) { Text("Effacer les échecs") }
+                    if (shownQueue.any { it.status == castbridge.core.tv.QueueStatus.FAILED || it.status == castbridge.core.tv.QueueStatus.DONE }) TextButton(onClick = { TransferQueue.clearFinished() }) { Text("Effacer les terminés") }
                 }
             }
         }
