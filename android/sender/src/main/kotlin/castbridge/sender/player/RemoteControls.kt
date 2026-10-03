@@ -140,13 +140,14 @@ fun CopyBanner(r: Remote, modifier: Modifier = Modifier) {
     val c = r.copy
     Column(modifier, verticalArrangement = Arrangement.spacedBy(6.dp)) {
         if (c == null || c.total <= 0) {
-            Text(r.message ?: "Préparation de la copie vers ${r.target.name}…", style = MaterialTheme.typography.titleSmall, color = Color.White)
+            Text(r.message ?: "Préparation de la copie vers ${r.target.name}…", style = MaterialTheme.typography.titleSmall,
+                color = r.messageLevel?.let { l -> Color(castbridge.core.ux.SignalColors.of(l)) } ?: Color.White)
             LinearProgressIndicator(Modifier.fillMaxWidth())
         } else {
             Text(c.title(r.target.name), style = MaterialTheme.typography.titleSmall, color = Color.White, fontWeight = FontWeight.Bold)
             LinearProgressIndicator({ c.fraction }, Modifier.fillMaxWidth().height(8.dp).clip(RoundedCornerShape(4.dp)))
             // « Copie en cours · la TV démarrera la lecture dès qu'elle aura assez d'avance » (or why an MP4 indexed at the end must wait, and how long)
-            r.message?.let { Text(it, style = MaterialTheme.typography.bodyMedium, color = Color.White) }
+            r.message?.let { Text(it, style = MaterialTheme.typography.bodyMedium, color = r.messageLevel?.let { l -> Color(castbridge.core.ux.SignalColors.of(l)) } ?: Color.White) }
             Text(c.detail(), style = MaterialTheme.typography.bodySmall, color = Color(castbridge.core.brand.BrandTokens.Dark.TEXT_MEDIUM))
         }
         castbridge.core.phone.CopyHandoff.phoneLine(r.phonePlays)?.let {
