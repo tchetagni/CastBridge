@@ -4,25 +4,24 @@ import castbridge.core.lots.StarterBudget
 import castbridge.core.quiz.*
 import kotlin.test.*
 
-/** The Quiz bundled per level (docs/agent-reports/quiz-embarque.md): 2000+ questions per free level, none for the reserved ones, loaded on demand. */
+/**
+ * The Quiz bundled per level (docs/agent-reports/quiz-embarque.md, then quiz-toutes-les-questions.md): every level is bundled, in files by lot;
+ * a game loads a few of them only. Adapted on 2026-10-03 to the owner's decision « toutes les questions, réservables par question ».
+ */
 class QuizEmbeddedLevelsTest {
-    private val reserved = setOf("tle", "l1", "l2", "l3")
     private val levels = EmbeddedLevels()
 
-    @Test fun everyFreeLevelHasAtLeast2000Questions() {
-        assertEquals(24, levels.levels.size, levels.levels.map { it.key }.toString())
-        for (l in levels.levels) {
-            assertTrue(l.count >= 2000, "${l.key}: ${l.count}")
-            assertEquals(l.count, levels.load(l).all.size, "${l.key}: the index count matches the file")
-        }
+    @Test fun everyLevelHasAtLeast2000QuestionsInTheIndex() {
+        assertEquals(28, levels.levels.size, levels.levels.map { it.key }.toString())
+        for (l in levels.levels) assertTrue(l.count >= 2000, "${l.key}: ${l.count}")
         assertTrue(levels.levels.any { it.level == null && it.track == Track.GENERAL }, "culture générale")
     }
 
-    @Test fun noReservedLevelIsBundled() {
-        assertTrue(levels.levels.none { it.key in reserved || it.level in setOf("Tle", "L1", "L2", "L3") })
-        for (l in levels.levels) assertTrue(levels.load(l).all.none { it.level in setOf("Tle", "L1", "L2", "L3") || it.track == Track.HIGHER }, l.key)
+    @Test fun noLevelIsReservedAsAWhole() {
+        // the 2026-10-03 decision: only questions are reservable; Tle, L1, L2, L3 are normal levels with free questions
+        for (k in listOf("tle", "l1", "l2", "l3")) assertTrue(levels.levels.first { it.key == k }.freeCount > 0, k)
         val index = javaClass.getResourceAsStream("/castbridge/quiz/embedded/index.json")!!.use { String(it.readBytes()) }
-        assertTrue(reserved.all { "\"$it\"" in index }, "the reserved levels are listed as not embedded")
+        assertTrue("reservedNotEmbedded" !in index && "reservedLevels" !in index)
     }
 
     @Test fun noDuplicateIdAndStatusIsKept() {
@@ -33,18 +32,20 @@ class QuizEmbeddedLevelsTest {
             assertTrue(q.review, q.id)
             assertEquals(4, q.choices.size); assertTrue(q.answer in 0..3)
         }
-        assertTrue(seen.size >= 24 * 2000)
+        assertTrue(seen.size >= 28 * 400)
     }
 
     @Test fun aLevelIsValidAsABank() {
-        for (key in listOf("cp", "culture-generale", "2nde", "form-5")) {
+        for (key in listOf("cp", "culture-generale", "2nde", "form-5", "l2")) {
             val l = levels.levels.first { it.key == key }
             assertEquals(emptyList(), levels.load(l).validate().take(5), key)
         }
     }
 
     @Test fun generalKnowledgeKeepsTheThreeRegions() {
-        val g = levels.load(levels.levels.first { it.key == "culture-generale" }).all
+        val l = levels.levels.first { it.key == "culture-generale" }
+        val g = (l.files + l.reservedFiles).flatMap { levels.loadFile(l, it) }
+        assertEquals(l.count, g.size)
         val by = g.groupingBy { it.region }.eachCount()
         assertTrue(Region.values().all { (by[it] ?: 0) >= 300 }, by.toString())
         assertTrue((1..5).all { d -> g.any { it.difficulty == d } })
@@ -52,21 +53,22 @@ class QuizEmbeddedLevelsTest {
 
     @Test fun aGameLoadsOnlyItsLevelOnDemandAndReleasesTheOthers() {
         val reads = ArrayList<String>()
-        val lv = EmbeddedLevels(reader = { p -> reads += p.substringAfterLast('/'); EmbeddedLevels::class.java.getResourceAsStream(p)?.use { it.readBytes() } })
+        val lv = EmbeddedLevels(reader = { p -> reads += p.substringAfter("/castbridge/quiz/"); EmbeddedLevels::class.java.getResourceAsStream(p)?.use { it.readBytes() } })
         val src = EmbeddedQuestionSource(levels = lv)
         val cm2 = QuestionFilter(Track.PRIMARY, "CM2")
         assertEquals(320, src.bank().all.size, "the old bundled bank is unchanged")
         val b = src.bankFor(cm2)
-        assertTrue(b.count(cm2, includeReview = true) >= 2000)
-        assertEquals(listOf("index.json", "cm2.json"), reads.distinct(), "only the index and the CM2 file were read")
+        assertTrue(b.count(cm2, includeReview = true) >= 500)
+        assertEquals("embedded/index.json", reads.first())
+        assertTrue(reads.drop(1).all { it.startsWith("embedded/cm2/") || it.startsWith("embedded-reserved/cm2/") }, "only CM2 files were read: $reads")
         assertSame(b, src.bankFor(cm2), "kept while the level does not change")
         val cp = src.bankFor(QuestionFilter(Track.PRIMARY, "CP"))
-        assertEquals(listOf("index.json", "cm2.json", "cp.json"), reads.distinct())
+        assertTrue(reads.any { it.startsWith("embedded/cp/") || it.startsWith("embedded-reserved/cp/") })
         assertEquals(src.bank().count(cm2, includeReview = true), cp.count(cm2, includeReview = true), "the CM2 questions of the previous level are released: only the old bank's remain")
         assertEquals(320, src.bank().all.size)
-        // a filter without bundled level (a university field, Tle…) = the small bundled bank, nothing loaded
+        // a filter without bundled level (a track without level) = the small bundled bank, nothing loaded
         val before = reads.size
-        assertSame(src.bank(), src.bankFor(QuestionFilter(Track.HIGHER, "L1", "droit")))
+        assertSame(src.bank(), src.bankFor(QuestionFilter(Track.HIGHER, "L9", "droit")))
         assertEquals(before, reads.size)
     }
 
