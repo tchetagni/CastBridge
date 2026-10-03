@@ -1,6 +1,7 @@
 # w18-10 — Cast « Lire en direct », télécommande, lots, parental par la route active (téléphone) ; Quiz : URL par interface et QR invité (TV)
 
 <!-- routage Fable 2026-10-03 -->
+> **Amendement (W20, Fable, 2026-10-03)** : le QR et les URL par interface de la salle Quiz décrits ici restent ceux du périmètre **« Réseau local »** (⌂). W20 ajoute, à côté et seulement quand l'hôte l'a ouvert, un **second** code et QR « Internet » (◎, `https://bridge.sti-cm.com/play/j/<code>`) ; un invité entré par le QR `WIFI:` du groupe fait passer le signe « Partie sûre » en **orange** (« 1 invité dans le Wi-Fi de la TV », rotation du mot de passe proposée à la fin, D-W18-8 inchangé). Le dessin de la salle d'attente doit laisser la place au bandeau `SafetyView` (1 ligne en haut). Voir `docs/coordination/DESIGN-W20-QUIZ-EN-LIGNE-2026-10-03.md` § 1.3, § 1.6 ; les fichiers de W20 côté TV sont ceux de `sonnet-w20-05`, disjoints de ce cahier.
 > **Modèle : sonnet** · escalade : audit Opus sur échantillon · statut : **ATTEND** sortie du gel W15 (après w18-08)
 > **Groupe : W18b-3** (vague W18b, téléphone + TV, fichiers disjoints de w18-07/08/09) · prérequis : w18-05, 08 fusionnés · porte : `cd android && tools/agents/gradle-lock.sh gradle --offline :sender:compileDebugKotlin :receiver:compileDebugKotlin :core:test --tests 'castbridge.core.link.CastRouteTest' --tests 'castbridge.core.link.LocalAddressTest' --tests 'castbridge.core.quiz.*'`
 > **Jauge : ≈ 450 k jetons entrée / 22 k sortie** (effort M, ≈ 2 j) · audit Opus : échantillon
