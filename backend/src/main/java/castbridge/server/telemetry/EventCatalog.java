@@ -44,12 +44,12 @@ public final class EventCatalog {
             "library", "Bibliothèque", "quiz", "Quiz", "chess", "Échecs", "receive", "Recevoir du téléphone", "usb", "Clé USB",
             "bluetooth", "Bluetooth", "internet", "Internet / test", "wifi_direct", "Wi-Fi Direct", "admin", "Administration",
             "downloads", "Téléchargements", "updates", "Mises à jour", "settings", "Réglages", "learn", "Apprendre",
-            "remote", "Télécommande", "help", "Aide", "dev_options", "Options développeur", "games", "Jeux", "sudoku", "Sudoku");
+            "remote", "Télécommande", "help", "Aide", "dev_options", "Options développeur", "games", "Jeux", "sudoku", "Sudoku", "store", "Boutique");
     public static final Map<String, String> PHONE_FEATURES = ordered(
             "send", "Envoyer", "move", "Déplacer", "watch_on_tv", "Regarder sur la TV", "tv_library", "Bibliothèque TV",
             "file_exchange", "Échange de fichiers", "remote", "Télécommande", "player", "Lecteur / Ouvrir avec", "cast", "Caster",
             "quiz", "Quiz", "chess", "Échecs", "bt_gateway", "Passerelle Bluetooth", "downloads", "Téléchargements",
-            "updates", "Mises à jour", "settings", "Réglages", "learn", "Apprendre", "games", "Jeux");
+            "updates", "Mises à jour", "settings", "Réglages", "learn", "Apprendre", "games", "Jeux", "store", "Boutique");
     /** Screens that are not features. */
     public static final Map<String, String> OTHER_SCREENS = ordered("home", "Accueil", "onboarding", "Premier lancement",
             "player", "Lecteur", "privacy", "Confidentialité");

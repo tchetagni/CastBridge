@@ -15,6 +15,15 @@ class TelemetryTest {
     private fun tmp() = File(kotlin.io.path.createTempDirectory("tel").toFile(), "events.jsonl")
 
     @Test
+    fun theStoreIsAFeatureOfBothApps() {
+        val q = EventQueue(tmp())
+        val tv = Telemetry("tv", 8, q, { Consent.USAGE }, { 1_000_000L })
+        val phone = Telemetry("phone", 8, q, { Consent.USAGE }, { 1_000_000L })
+        assertTrue(tv.featureUsed("store")); assertTrue(phone.featureUsed("store"))
+        assertFalse(tv.featureUsed("boutique"), "only the listed id")
+    }
+
+    @Test
     fun consentCatalogAndForbiddenKeys() {
         val q = EventQueue(tmp())
         var consent = Consent.ESSENTIAL

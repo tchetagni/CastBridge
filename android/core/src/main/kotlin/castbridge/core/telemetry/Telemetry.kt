@@ -14,9 +14,9 @@ import java.util.UUID
 object EventCatalog {
     /** Stable feature ids (tiles / menu entries). Screens use the same ids, plus [OTHER_SCREENS]. */
     val TV_FEATURES = listOf("library", "quiz", "chess", "receive", "usb", "bluetooth", "internet", "wifi_direct", "admin", "downloads",
-        "updates", "settings", "learn", "remote", "help", "dev_options", "games", "sudoku")
+        "updates", "settings", "learn", "remote", "help", "dev_options", "games", "sudoku", "store")
     val PHONE_FEATURES = listOf("send", "move", "watch_on_tv", "tv_library", "file_exchange", "remote", "player", "cast", "quiz", "chess",
-        "bt_gateway", "downloads", "updates", "settings", "learn", "games")
+        "bt_gateway", "downloads", "updates", "settings", "learn", "games", "store")
     val OTHER_SCREENS = listOf("home", "onboarding", "player", "privacy")
 
     /** Kept even without the "usage statistics" consent: needed to maintain the apps (errors, updates). */

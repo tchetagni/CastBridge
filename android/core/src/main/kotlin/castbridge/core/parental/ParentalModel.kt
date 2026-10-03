@@ -224,7 +224,7 @@ object ParentalRules {
     }
 
     /** Tiles of the simplified home: what a child sees in kid mode (by label, see PlayerActivity.homeTools). */
-    val KID_HOME = listOf("Apprendre", "Quiz", "Échecs", "Bibliothèque", "Aide", "Contrôle parental")
+    val KID_HOME = listOf("Apprendre", "Quiz", "Échecs", "Bibliothèque", "Boutique", "Aide", "Contrôle parental")
 
     fun kidHome(labels: List<String>, p: ChildProfile): List<String> = labels.filter { l ->
         l in KID_HOME && !(l in listOf("Quiz", "Échecs") && Category.GAMES in p.blocked)

@@ -47,6 +47,12 @@ class PolicyEngineTest {
         assertTrue(PolicyActions.ALL.none { id -> listOf("delete", "wipe", "exec", "shell", "remote", "file", "ssh", "uninstall", "reset").any { it in id } })
     }
 
+    @Test fun theStoreFlagIsTheOnlyStoreFlag() {
+        assertEquals(AckReason.APPLIED, e.receive(k.order(PolicyActions.FLAG_SET, mapOf("name" to "store.enabled", "value" to "1"), seq = 1)).reason)
+        assertTrue(e.current.flag("store.enabled"))
+        assertEquals(AckReason.BAD_PARAMS, e.receive(k.order(PolicyActions.FLAG_SET, mapOf("name" to "store.foo", "value" to "1"), seq = 2)).reason)
+    }
+
     @Test fun unlistedParametersAndFlagsAreRefused() {
         assertEquals(AckReason.BAD_PARAMS, e.receive(k.order(PolicyActions.FLAG_SET, mapOf("name" to "update.verify", "value" to "0"), seq = 1)).reason, "no flag for the signed update check")
         assertEquals(AckReason.BAD_PARAMS, e.receive(k.order(PolicyActions.FLAG_SET, mapOf("name" to "learn.beta", "value" to "1", "extra" to "x"), seq = 2)).reason)
