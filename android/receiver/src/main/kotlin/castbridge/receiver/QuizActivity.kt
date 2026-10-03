@@ -24,6 +24,7 @@ import castbridge.core.quiz.HighScores
 import castbridge.core.quiz.Ladder
 import castbridge.core.quiz.QrCode
 import castbridge.core.quiz.QuestionFilter
+import castbridge.core.quiz.LevelGridLayout
 import castbridge.core.quiz.QuizCatalog
 import castbridge.core.quiz.QuizLevelAvailability
 import castbridge.core.quiz.QuizRoom
@@ -31,7 +32,7 @@ import castbridge.core.quiz.Track
 
 /** One card of a setup screen. */
 /** [why] = what the footer says when a card that cannot be chosen (enabled = false) is pressed; the card stays focusable. */
-private data class Choice(val title: String, val sub: String?, val enabled: Boolean = true, val why: String? = null, val action: () -> Unit)
+private data class Choice(val title: String, val sub: String?, val enabled: Boolean = true, val why: String? = null, val detail: String? = null, val action: () -> Unit)
 
 /**
  * « Quiz culture générale » on the TV screen, played with the remote (D-pad / OK / BACK) and the players' phones.
@@ -241,7 +242,7 @@ class QuizActivity : Activity() {
             QuizLevelAvailability.Kind.RESERVED -> "« ${s.level.label} » est réservé : il s'ouvre avec un lot loué depuis votre téléphone CastBridge."
             else -> "« ${s.level.label} » : pas encore de questions. Elles arriveront avec les prochaines mises à jour."
         }
-        return Choice(s.level.label, QuizLevelAvailability.cardText(s, room?.minGapGames ?: 30), ok, why, pick)
+        return Choice(s.level.label, QuizLevelAvailability.compactText(s), ok, why, QuizLevelAvailability.detailText(s, room?.minGapGames ?: 30), pick)
     }
     /** "240 questions, environ 16 parties sans repetition": the bank's size against the goal of 300 games without repeat (docs/QUIZ.md). */
     private fun bankNote(f: QuestionFilter): String {
@@ -281,6 +282,8 @@ class QuizActivity : Activity() {
 
     private inner class SetupScreen(val step: String) : Screen("setup-$step") {
         private val footer = quizText(this@QuizActivity, "", 17f, QuizColors.MUTED).apply { gravity = Gravity.CENTER }
+        /** Grid steps: the long text of the focused card (parties sans répétition, objectif, relecture, alias, essai). */
+        private val detailLine = quizText(this@QuizActivity, "", 19f, QuizColors.TEXT).apply { gravity = Gravity.CENTER; maxLines = 2 }
         private var first: View? = null
         private var firstAny: View? = null   // every card of a level list can be reserved: the focus still lands on the first one
         override val view: View
@@ -288,7 +291,11 @@ class QuizActivity : Activity() {
         init {
             val (title, sub, choices) = content()
             val compact = choices.size > 5
-            view = column().apply {
+            // levels and fields: fixed compact cards in a wrapped grid (LevelGridLayout), the long text under the grid follows the focus
+            val grid = step == "level" || step == "field"
+            val cols = if (grid) LevelGridLayout.columns(resources.displayMetrics.let { (it.widthPixels / it.density).toInt() }) else 0
+            val cards = ArrayList<View>()
+            val body = column().apply {
                 setPadding(dpi(40), dpi(20), dpi(40), dpi(16))
                 if (step == "home") {
                     // the wordmark of the sub-brand (branding/logo/quiz-des-millions-horizontal) replaces the text title
@@ -296,7 +303,7 @@ class QuizActivity : Activity() {
                         lp(h = dpi(84)))
                 } else addView(quizText(context, title, 36f, QuizColors.GOLD, true).apply { gravity = Gravity.CENTER }, lp())
                 if (sub != null) addView(quizText(context, sub, 21f, QuizColors.TEXT).apply { gravity = Gravity.CENTER }, lp(t = 6, b = 18))
-                val perRow = if (compact) 6 else if (step == "home" || choices.size == 4) 2 else 1
+                val perRow = if (grid) cols else if (compact) 6 else if (step == "home" || choices.size == 4) 2 else 1
                 var line: LinearLayout? = null
                 choices.forEachIndexed { i, c ->
                     if (i % perRow == 0) line = row(Gravity.CENTER).also { addView(it, lp(t = 6, b = 6)) }
@@ -304,15 +311,40 @@ class QuizActivity : Activity() {
                         if (c.enabled) { play(QuizSound.Clip.SELECT); c.action() }
                         else { play(QuizSound.Clip.WRONG); footer.text = c.why ?: "« ${c.title} » : pas encore de questions. Elles arriveront avec les prochaines mises à jour." }
                     }
-                    if (compact) { card.minWidth = dpi(120); card.setTextSize(android.util.TypedValue.COMPLEX_UNIT_SP, 20f) }
-                    line!!.addView(card, lp(l = 8, r = 8))
+                    if (grid) {
+                        card.setTextSize(android.util.TypedValue.COMPLEX_UNIT_SP, 22f)
+                        card.minWidth = dpi(LevelGridLayout.CARD_DP); card.maxWidth = dpi(LevelGridLayout.CARD_DP)   // never wider, focused or not
+                        card.setPadding(dpi(10), dpi(12), dpi(10), dpi(12))
+                        val styled = card.onFocusChangeListener   // quizButton's gold focus look stays
+                        card.setOnFocusChangeListener { v, has -> styled?.onFocusChange(v, has); if (has) detailLine.text = c.detail ?: "" }
+                        val at = cards.size
+                        card.setOnKeyListener { _, code, ev ->
+                            val dir = when (code) {
+                                android.view.KeyEvent.KEYCODE_DPAD_LEFT -> LevelGridLayout.Dir.LEFT
+                                android.view.KeyEvent.KEYCODE_DPAD_RIGHT -> LevelGridLayout.Dir.RIGHT
+                                android.view.KeyEvent.KEYCODE_DPAD_UP -> LevelGridLayout.Dir.UP
+                                android.view.KeyEvent.KEYCODE_DPAD_DOWN -> LevelGridLayout.Dir.DOWN
+                                else -> null
+                            }
+                            if (dir == null) false
+                            else { if (ev.action == android.view.KeyEvent.ACTION_DOWN) LevelGridLayout.move(at, dir, cards.size, cols)?.let { cards[it].requestFocus() }; true }
+                        }
+                        cards += card
+                    } else if (compact) { card.minWidth = dpi(120); card.setTextSize(android.util.TypedValue.COMPLEX_UNIT_SP, 20f) }
+                    line!!.addView(card, if (grid) lp(w = dpi(LevelGridLayout.CARD_DP), l = 8, r = 8) else lp(l = 8, r = 8))
                     if (first == null && c.enabled) first = card
                     if (firstAny == null) firstAny = card
                 }
-                addView(footer, lp(t = 14))
+                if (grid) addView(detailLine, lp(t = 12))
+                addView(footer, lp(t = if (grid) 6 else 14))
                 // cards slide in one after the other
                 for (k in 0 until childCount) getChildAt(k).apply { alpha = 0f; translationY = dp(24f); animate().alpha(1f).translationY(0f).setStartDelay(60L * k).setDuration(300).start() }
             }
+            // a tall grid scrolls so that the focused card stays visible (the focus already walks every card)
+            view = if (grid) android.widget.ScrollView(this@QuizActivity).apply {
+                isFillViewport = true; isVerticalScrollBarEnabled = false
+                addView(body, FrameLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT))
+            } else body
         }
 
         private fun content(): Triple<String, String?, List<Choice>> = when (step) {
@@ -334,7 +366,7 @@ class QuizActivity : Activity() {
             "level" -> Triple("Quel niveau ?", track.label, QuizLevelAvailability.states(track, levelIndex, bank = { f -> room?.let { QuizLevelAvailability.countsOf(it.bank, f) } ?: QuizLevelAvailability.Counts(0, 0) }).map { s ->
                 levelChoice(s) { level = s.level.key; if (track == Track.HIGHER) push("field") else afterFilter() }
             })
-            "field" -> Triple("Quelle filière ?", "${track.label} · ${level ?: ""}", QuizLevelAvailability.fieldStates(track, level ?: "", levelIndex, count = { f ->
+            "field" -> Triple("Quelle filière ?", "${track.label} · ${level ?: ""}", QuizLevelAvailability.fieldStates(track, count = { f ->
                 // the level is chosen: its bundled file may be read now (one level at a time)
                 QuizLevelAvailability.Counts(0, count(QuestionFilter(track, level, f)))
             }).map { s -> levelChoice(s) { field = s.level.key; afterFilter() } })

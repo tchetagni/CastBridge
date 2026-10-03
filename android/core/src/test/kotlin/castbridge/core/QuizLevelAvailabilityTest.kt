@@ -12,23 +12,22 @@ import kotlin.test.*
  * pure functions (QuizLevelAvailability); the screen only draws them. Review questions are playable, approved ones come first.
  */
 class QuizLevelAvailabilityTest {
-    // ---- index fixtures: the two forms of embedded/index.json
-    private fun lvl(key: String, level: String?, track: String, count: Int) =
-        """{"key":"$key","level":${level?.let { "\"$it\"" } ?: "null"},"track":"$track","count":$count,"file":"$key.json","lots":["$key"]}"""
-    private fun indexJson(levels: List<String>, reservedNotEmbedded: List<String>, reservedLevels: List<String>? = null): String {
-        fun arr(l: List<String>) = l.joinToString(",", "[", "]") { "\"$it\"" }
-        return """{"v":1,"seed":"t","levels":[${levels.joinToString(",")}],"reservedNotEmbedded":${arr(reservedNotEmbedded)}""" +
-            (reservedLevels?.let { ""","reservedLevels":${arr(it)}""" } ?: "") + "}"
-    }
+    // ---- index fixtures: the two forms of embedded/index.json (old: count only = all free; new: count + freeCount + reservedCount)
+    private fun lvl(key: String, level: String?, track: String, count: Int, reservedCount: Int? = null) =
+        """{"key":"$key","level":${level?.let { "\"$it\"" } ?: "null"},"track":"$track","count":$count,""" +
+            (reservedCount?.let { """"freeCount":${count - it},"reservedCount":$it,""" } ?: "") + """"file":"$key.json","lots":["$key"]}"""
+    private fun indexJson(levels: List<String>, legacyReserved: List<String>? = null): String =
+        """{"v":1,"seed":"t","levels":[${levels.joinToString(",")}]""" +
+            (legacyReserved?.let { ""","reservedNotEmbedded":${it.joinToString(",", "[", "]") { k -> "\"$k\"" }}""" } ?: "") + "}"
     private val freeLevels = listOf(lvl("cp", "CP", "primary", 2000), lvl("form-3", "Form 3", "secondary", 2000), lvl("form-5", "Form 5", "secondary", 2000),
         lvl("class-1", "Class 1", "primary", 2000), lvl("culture-generale", null, "general", 2000))
-    /** Today's form: the reserved family is not embedded. */
+    /** Old form (count only, reservedNotEmbedded ignored): the level list of the first import. */
     private val indexNow = Index.parse(indexJson(freeLevels, listOf("l1", "l2", "l3", "tle")))
-    /** Trial edition: everything embedded, reservedNotEmbedded empty, the family named by reservedLevels. */
-    private val trialLevels = freeLevels + listOf(lvl("tle", "Tle", "secondary", 800), lvl("l1", "L1", "higher", 600), lvl("l2", "L2", "higher", 500), lvl("l3", "L3", "higher", 400))
-    private val indexTrial = Index.parse(indexJson(trialLevels, emptyList(), listOf("l1", "l2", "l3", "tle")))
-    /** Everything embedded and nothing declared reserved. */
-    private val indexOpen = Index.parse(indexJson(trialLevels, emptyList()))
+    /** New form: every level has free questions and about 30 % reservable ones. */
+    private val splitLevels = listOf(lvl("cp", "CP", "primary", 2000, 600), lvl("form-3", "Form 3", "secondary", 2000, 600), lvl("form-5", "Form 5", "secondary", 2000, 600),
+        lvl("tle", "Tle", "secondary", 1000, 300), lvl("l1", "L1", "higher", 500, 150), lvl("l2", "L2", "higher", 400, 400), lvl("l3", "L3", "higher", 300, 90),
+        lvl("culture-generale", null, "general", 2000, 600))
+    private val indexSplit = Index.parse(indexJson(splitLevels))
 
     private fun none(f: QuestionFilter) = Counts(0, 0)
     private fun fake(vararg c: Pair<String, Counts>): (QuestionFilter) -> Counts { val m = c.toMap(); return { f -> m[f.level] ?: Counts(0, 0) } }
@@ -87,20 +86,16 @@ class QuizLevelAvailabilityTest {
         assertEquals(1000, state(idx, "Form 4", Track.SECONDARY).counts.total, "only what exists: Form 3's share")
     }
 
-    @Test fun reservedLevelsWithNoContentAreReservedNotSoon() {
-        for ((lv, tr) in listOf("L1" to Track.HIGHER, "L2" to Track.HIGHER, "L3" to Track.HIGHER, "Tle" to Track.SECONDARY)) {
+    @Test fun noLevelIsReservedAsAWholeAndALevelWithoutContentIsSoon() {
+        for ((lv, tr) in listOf("L1" to Track.HIGHER, "Tle" to Track.SECONDARY)) {
             val s = state(indexNow, lv, tr)
-            assertEquals(Kind.RESERVED, s.kind, lv)
-            assertEquals("Réservé · en location", text(s))
-            assertNotEquals("bientôt", text(s))
+            assertEquals(Kind.SOON, s.kind, "$lv: no content in this index, and nothing is reserved by level")
         }
     }
 
-    @Test fun anInstalledRentalLotOpensAReservedLevel() {
+    @Test fun anInstalledRentalLotOpensALevelWithoutBundledContent() {
         val s = state(indexNow, "Tle", Track.SECONDARY, fake("Tle" to Counts(0, 40)))
-        assertEquals(Kind.AVAILABLE, s.kind); assertEquals(40, s.counts.total)
-        assertFalse(s.trial, "the content comes from a rental, not from the trial flag")
-        assertFalse(QuizLevelAvailability.TRIAL_NOTE in text(s))
+        assertEquals(Kind.AVAILABLE, s.kind); assertEquals(40, s.counts.total); assertEquals(0, s.trialCount)
     }
 
     @Test fun aTrulyUnknownLevelIsSoon() {
@@ -109,40 +104,46 @@ class QuizLevelAvailabilityTest {
         assertEquals(Kind.SOON, s.kind); assertEquals("bientôt", text(s))
     }
 
-    @Test fun trialFlagOpensTheReservedFamilyWhenItsContentIsBundledAndSaysEssai() {
-        for ((lv, tr, n) in listOf(Triple("Tle", Track.SECONDARY, 800), Triple("L1", Track.HIGHER, 600), Triple("L3", Track.HIGHER, 400))) {
-            val s = state(indexTrial, lv, tr)
-            assertEquals(Kind.AVAILABLE, s.kind, lv); assertEquals(n, s.counts.total); assertTrue(s.trial)
-            assertTrue(QuizLevelAvailability.TRIAL_NOTE in text(s), text(s))
-        }
-        // production edition: the flag is off, the bundled content of a reserved level is ignored
-        val prod = state(indexTrial, "Tle", Track.SECONDARY, trial = false)
+    @Test fun reservableQuestionsCountOnlyWhileTheTrialIsOpen() {
+        val open = state(indexSplit, "Tle", Track.SECONDARY)
+        assertEquals(Kind.AVAILABLE, open.kind); assertEquals(1000, open.counts.total); assertEquals(300, open.trialCount)
+        assertTrue("1000 questions" in text(open) && "dont 300 questions en essai" in text(open), text(open))
+        val closed = state(indexSplit, "Tle", Track.SECONDARY, trial = false)
+        assertEquals(Kind.AVAILABLE, closed.kind); assertEquals(700, closed.counts.total); assertEquals(0, closed.trialCount)
+        assertFalse("essai" in text(closed))
+        assertEquals("700 questions", QuizLevelAvailability.compactText(closed))
+    }
+
+    @Test fun aLevelWithOnlyReservableQuestionsIsReservedWhenTheTrialIsClosed() {
+        val prod = state(indexSplit, "L2", Track.HIGHER, trial = false)
         assertEquals(Kind.RESERVED, prod.kind); assertEquals("Réservé · en location", text(prod))
+        val trial = state(indexSplit, "L2", Track.HIGHER)
+        assertEquals(Kind.AVAILABLE, trial.kind); assertEquals(400, trial.counts.total)
     }
 
-    @Test fun anIndexWhereNothingIsReservedWorksToo() {
-        assertEquals(Kind.AVAILABLE, state(indexOpen, "Tle", Track.SECONDARY).kind)
-        assertFalse(state(indexOpen, "Tle", Track.SECONDARY).trial, "not reserved: no « essai » note")
-        val empty = Index.parse(indexJson(freeLevels, emptyList()))
-        assertEquals(Kind.SOON, state(empty, "Tle", Track.SECONDARY).kind, "no content and not reserved = bientôt")
+    @Test fun anIndexWithoutTheSplitMeansEverythingIsFree() {
+        val s = state(indexNow, "CP", Track.PRIMARY, trial = false)
+        assertEquals(2000, s.counts.total); assertEquals(0, s.trialCount)
+        assertEquals(QuizLevelAvailability.Entry(2000, 2000, 0), indexNow.entry("cp"))
+        assertEquals(QuizLevelAvailability.Entry(2000, 1400, 600), indexSplit.entry("cp"))
+        assertEquals(QuizLevelAvailability.Entry(0, 0, 0), indexSplit.entry("nope"))
+        assertTrue(Index.parse(null).entries.isEmpty()); assertTrue(Index.parse("{broken").entries.isEmpty())
     }
 
-    @Test fun theReservedListIsReadFromTheIndexNeverHardCoded() {
-        val idx = Index.parse(indexJson(freeLevels, listOf("cp")))
-        assertEquals(setOf("cp"), idx.reserved)
-        assertEquals(setOf("l1", "tle"), Index.parse(indexJson(freeLevels, listOf("tle"), listOf("l1", "tle"))).reserved, "reservedLevels wins when present")
-        assertEquals(emptySet(), Index.parse(null).reserved); assertEquals(emptySet(), Index.parse("{broken").reserved)
+    @Test fun aliasesCountTheTrialQuestionsOfTheirSources() {
+        val sil = state(indexSplit, "SIL", Track.PRIMARY)
+        assertEquals(2000, sil.counts.total); assertEquals(600, sil.trialCount)
+        val f4 = state(indexSplit, "Form 4", Track.SECONDARY, trial = false)
+        assertEquals(2 * minOf(1400, QuizLevelAvailability.FORM4_PER_SOURCE), f4.counts.total)
     }
 
     @Test fun fieldStepKeepsTheSameStates() {
         val counts: (String) -> Counts = { f -> if (f == "droit") Counts(0, 120) else Counts(0, 0) }
-        val trial = QuizLevelAvailability.fieldStates(Track.HIGHER, "L1", indexTrial, counts, trialOpen = true)
-        assertEquals(QuizCatalog.fields.size, trial.size)
-        assertEquals(Kind.AVAILABLE, trial.first { it.level.key == "droit" }.kind)
-        assertEquals(Kind.RESERVED, trial.first { it.level.key == "physique" }.kind, "level reserved by the family, field without content")
-        val soon = QuizLevelAvailability.fieldStates(Track.HIGHER, "L1", indexOpen, counts, trialOpen = true)
-        assertEquals(Kind.SOON, soon.first { it.level.key == "physique" }.kind)
-        assertTrue(text(trial.first { it.level.key == "droit" }).contains("120 questions"))
+        val ss = QuizLevelAvailability.fieldStates(Track.HIGHER, counts)
+        assertEquals(QuizCatalog.fields.size, ss.size)
+        assertEquals(Kind.AVAILABLE, ss.first { it.level.key == "droit" }.kind)
+        assertEquals(Kind.SOON, ss.first { it.level.key == "physique" }.kind)
+        assertEquals("120 questions", QuizLevelAvailability.compactText(ss.first { it.level.key == "droit" }))
     }
 
     // ---- the real catalogue, the real index, the real base bank
@@ -156,10 +157,16 @@ class QuizLevelAvailabilityTest {
             val ss = QuizLevelAvailability.states(t, realIndex, ::realBase, trial)
             assertEquals(QuizCatalog.levels(t).map { it.key }, ss.map { it.level.key })
             for (s in ss) {
-                assertNotEquals(Kind.SOON, s.kind, "${s.level.key} must not be « bientôt »")
-                assertNotEquals("bientôt", text(s), s.level.key)
+                val bundled = QuizLevelAvailability.EMBEDDED_KEYS[s.level.key]?.let { realIndex.entry(it).count > 0 } ?: true
+                if (bundled) { assertNotEquals(Kind.SOON, s.kind, "${s.level.key} must not be « bientôt »"); assertNotEquals("bientôt", text(s), s.level.key) }
             }
         }
+    }
+
+    @Test fun withTheSplitIndexNoLevelOfAnyTrackIsSoon() {
+        val full = Index.parse(indexJson(QuizLevelAvailability.EMBEDDED_KEYS.values.map { k -> lvl(k, k, "primary", 1000, 300) }))
+        for (t in listOf(Track.PRIMARY, Track.SECONDARY, Track.HIGHER)) for (trial in listOf(true, false))
+            for (s in QuizLevelAvailability.states(t, full, ::none, trial)) assertEquals(Kind.AVAILABLE, s.kind, "${s.level.key} trial=$trial")
     }
 
     @Test fun everyFreeLevelIsAvailableWithItsFullCount() {
@@ -197,10 +204,9 @@ class QuizLevelAvailabilityTest {
         for (l in QuizCatalog.levels) QuizLevelAvailability.EMBEDDED_KEYS[l.key]?.let { key ->
             EmbeddedLevels().levelFor(QuestionFilter(l.track, l.key))?.let { assertEquals(key, it.key, l.key) }
         }
-        // the levels absent from the index are the aliases and the reserved family, nothing else
+        // the levels absent from the index are the aliases and the levels whose content is still to be imported
         val inIndex = levels.mapNotNull { it.level }.toSet()
-        val reserved = realIndex.reserved
-        for (k in pickerKeys.filter { it !in inIndex }) assertTrue(k in aliasLevels || k.lowercase() in reserved, "$k is neither embedded, nor an alias, nor reserved")
+        for (k in pickerKeys.filter { it !in inIndex }) assertTrue(k in aliasLevels || k in setOf("Tle", "L1", "L2", "L3"), "$k is neither embedded, nor an alias, nor to be imported")
     }
 
     // ---- aliases at the source

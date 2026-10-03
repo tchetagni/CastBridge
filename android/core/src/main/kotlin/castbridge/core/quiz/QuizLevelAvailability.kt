@@ -7,9 +7,9 @@ import castbridge.core.content.PlayPolicy
 /** Edition flags of the Quiz on CastBridge-TV: one line to change for a production edition. */
 object QuizEdition {
     /**
-     * Trial edition (owner, 2026-10-03: « mets toutes les questions disponibles »): the levels the family reserves (Tle, L1, L2, L3,
-     * see `reservedLevels` / `reservedNotEmbedded` in embedded/index.json) are open when their content is bundled, marked « essai ».
-     * Production edition: set to false, the bundled content of a reserved level is then ignored and the level reads « Réservé · en location ».
+     * Trial edition (owner, 2026-10-03: « ce sont les questions qui sont réservables, pas les niveaux »): every level has FREE questions
+     * and RESERVABLE ones (about 30 %, marked one by one, `reservedCount` in embedded/index.json). True = the reservable questions are playable
+     * during the trial and counted on the card (« dont N questions en essai »). False (production) = only the free ones (`freeCount`).
      */
     const val TRIAL_OPEN = true
 
@@ -26,11 +26,11 @@ object QuizEdition {
 /**
  * What « Quel niveau ? » / « Quelle filière ? » of CastBridge-TV shows for each level, as pure functions (the screen only draws them).
  * The state depends ONLY on the content really present on this TV: the base bank, the bundled index (index.json only: a level file is
- * never read just to count it) and the installed lots; the reserved family is read from the index, never coded here.
+ * never read just to count it) and the installed lots.
  *
- * - AVAILABLE: some content (n > 0), whatever the family; a level reserved by the family but opened by [QuizEdition.TRIAL_OPEN] says « essai ».
- * - RESERVED: no content and the index declares the level reserved (it comes through a rental lot delivered by the phone).
- * - SOON: nothing and not reserved.
+ * - AVAILABLE: at least one playable question (the free ones, plus the reservable ones while [QuizEdition.TRIAL_OPEN]).
+ * - RESERVED: (rare) every question of the level is reservable and the trial flag is off: « Réservé · en location ».
+ * - SOON: nothing at all. No level is reserved as a whole.
  * - Aliases: « SIL » plays the CP questions; « Form 4 » (no lot, no question of its own) plays Form 3 and Form 5 interleaved.
  */
 object QuizLevelAvailability {
@@ -41,21 +41,32 @@ object QuizLevelAvailability {
     /** A level without content of its own, served from [sources] (at most [perSource] questions of each, null = all). */
     data class Alias(val level: String, val track: Track, val sources: List<String>, val perSource: Int?, val note: String)
 
-    /** [level] is the catalogue level (for a field: a pseudo level carrying the field's key and label). [trial] = open by the trial flag only. */
-    data class State(val level: QuizCatalog.Level, val kind: Kind, val counts: Counts, val alias: Alias? = null, val trial: Boolean = false)
+    /** [level] is the catalogue level (for a field: a pseudo level carrying the field's key and label). [trialCount] = reservable questions counted only because of the trial flag. */
+    data class State(val level: QuizCatalog.Level, val kind: Kind, val counts: Counts, val alias: Alias? = null, val trialCount: Int = 0)
 
-    /** The bundled index, read without touching any level file: the levels and the family reserved by the owner. */
-    class Index(val levels: List<EmbeddedLevels.Level>, val reserved: Set<String>) {
-        fun countOf(key: String): Int = levels.firstOrNull { it.key == key }?.count ?: 0
+    /** One level of the index: total, free and reservable questions (an index without the split: everything is free). */
+    data class Entry(val count: Int, val free: Int, val reservable: Int)
+
+    /** The bundled index, read without touching any level file. */
+    class Index(val levels: List<EmbeddedLevels.Level>, val entries: Map<String, Entry>) {
+        fun entry(key: String): Entry = entries[key] ?: Entry(0, 0, 0)
 
         companion object {
-            /** Reads index.json (`reservedLevels` when present, else `reservedNotEmbedded`); a missing or broken index = nothing bundled. */
+            /** Reads index.json (`count`, and `freeCount` / `reservedCount` when present); a missing or broken index = nothing bundled. */
             fun parse(json: String?): Index {
-                if (json == null) return Index(emptyList(), emptySet())
-                val root = runCatching { Json.obj(json) }.getOrNull() ?: return Index(emptyList(), emptySet())
+                if (json == null) return Index(emptyList(), emptyMap())
+                val root = runCatching { Json.obj(json) }.getOrNull() ?: return Index(emptyList(), emptyMap())
                 val levels = EmbeddedLevels(reader = { json.toByteArray(Charsets.UTF_8) }).levels
-                val raw = (root["reservedLevels"] ?: root["reservedNotEmbedded"]) as? List<*>
-                return Index(levels, raw.orEmpty().filterIsInstance<String>().map { it.trim().lowercase() }.toSet())
+                val entries = HashMap<String, Entry>()
+                for (o in root["levels"] as? List<*> ?: emptyList<Any?>()) {
+                    val m = o as? Map<*, *> ?: continue
+                    val key = m["key"] as? String ?: continue
+                    val count = (m["count"] as? Number)?.toInt() ?: 0
+                    val reservable = ((m["reservedCount"] as? Number)?.toInt() ?: 0).coerceIn(0, count)
+                    val free = ((m["freeCount"] as? Number)?.toInt() ?: (count - reservable)).coerceIn(0, count)
+                    entries[key] = Entry(count, free, reservable)
+                }
+                return Index(levels, entries)
             }
 
             /** The index bundled in the APK. */
@@ -66,7 +77,6 @@ object QuizLevelAvailability {
     const val RESERVED_TEXT = "Réservé · en location"
     const val SOON_TEXT = "bientôt"
     const val REVIEW_NOTE = "contenu en cours de relecture"
-    const val TRIAL_NOTE = "essai"
     /** Form 4 takes this many questions from each of Form 3 and Form 5 (a level is about 2000 questions, one level in memory at a time). */
     const val FORM4_PER_SOURCE = 1000
 
@@ -102,18 +112,21 @@ object QuizLevelAvailability {
         return Counts(a, r)
     }
 
-    private fun reserved(index: Index, level: String) = level.lowercase() in index.reserved
-
-    /** Content of one real level: the bank (base + installed lots) and the bundled file, as far as the index tells. */
-    private fun levelCounts(level: QuizCatalog.Level, index: Index, bank: (QuestionFilter) -> Counts, trialOpen: Boolean): Pair<Counts, Boolean> {
+    /** Content of one real level: the bank (base + installed lots) and the bundled file, as far as the index tells. [Pair.second] = trial-only questions. */
+    private fun levelCounts(level: QuizCatalog.Level, index: Index, bank: (QuestionFilter) -> Counts, trialOpen: Boolean): Pair<Counts, Int> {
         val b = bank(QuestionFilter(level.track, level.key))
-        val key = EMBEDDED_KEYS[level.key]
-        val family = reserved(index, level.key) || (key != null && key in index.reserved)
-        val embedded = if (key == null || (family && !trialOpen)) 0 else index.countOf(key)
+        val e = EMBEDDED_KEYS[level.key]?.let { index.entry(it) } ?: Entry(0, 0, 0)
+        val embedded = e.free + if (trialOpen) e.reservable else 0
         // an installed lot of the same level replaces the bundled questions of the same id: not added, the larger one counts
         val total = maxOf(b.total, embedded)
         val approved = minOf(b.approved, total)
-        return Counts(approved, total - approved) to (family && trialOpen && embedded > 0)
+        return Counts(approved, total - approved) to (if (trialOpen && embedded >= b.total) e.reservable else 0)
+    }
+
+    /** Only reservable questions and the trial closed: the level cannot be played without a rental. */
+    private fun onlyReservable(level: QuizCatalog.Level, index: Index, trialOpen: Boolean): Boolean {
+        val e = EMBEDDED_KEYS[level.key]?.let { index.entry(it) } ?: return false
+        return !trialOpen && e.free == 0 && e.reservable > 0
     }
 
     /** The state of each level of [levels] (the catalogue's levels of a track). */
@@ -122,41 +135,39 @@ object QuizLevelAvailability {
             val alias = aliases.firstOrNull { it.level == l.key && it.track == l.track }
             if (alias != null) {
                 val parts = alias.sources.map { s ->
-                    val sl = QuizCatalog.levels.firstOrNull { it.key == s && it.track == l.track } ?: return@map Counts(0, 0)
-                    val c = levelCounts(sl, index, bank, trialOpen).first
+                    val sl = QuizCatalog.levels.firstOrNull { it.key == s && it.track == l.track } ?: return@map Counts(0, 0) to 0
+                    val (c, t) = levelCounts(sl, index, bank, trialOpen)
                     val cap = alias.perSource ?: Int.MAX_VALUE
-                    if (c.total <= cap) c else Counts(minOf(c.approved, cap), cap - minOf(c.approved, cap))
+                    if (c.total <= cap) c to t else Counts(minOf(c.approved, cap), cap - minOf(c.approved, cap)) to minOf(t, cap)
                 }
-                val c = Counts(parts.sumOf { it.approved }, parts.sumOf { it.review })
-                State(l, if (c.total > 0) Kind.AVAILABLE else Kind.SOON, c, alias)
+                val c = Counts(parts.sumOf { it.first.approved }, parts.sumOf { it.first.review })
+                State(l, if (c.total > 0) Kind.AVAILABLE else Kind.SOON, c, alias, parts.sumOf { it.second })
             } else {
                 val (c, trial) = levelCounts(l, index, bank, trialOpen)
-                State(l, kindOf(c.total, reserved(index, l.key)), c, trial = trial)
+                State(l, kindOf(c.total, onlyReservable(l, index, trialOpen)), c, trialCount = trial)
             }
         }
 
     fun states(track: Track, index: Index, bank: (QuestionFilter) -> Counts, trialOpen: Boolean = QuizEdition.TRIAL_OPEN): List<State> =
         states(QuizCatalog.levels(track), index, bank, trialOpen)
 
-    /** The « Quelle filière ? » step of [level]: [count] gives the content of one field (the level is chosen, so its file may be read). */
-    fun fieldStates(track: Track, level: String, index: Index, count: (String) -> Counts, trialOpen: Boolean = QuizEdition.TRIAL_OPEN): List<State> {
-        val family = reserved(index, level)
-        return QuizCatalog.fields.map { f ->
+    /** The « Quelle filière ? » step: [count] gives the playable content of one field (the level is chosen, so its file may be read). */
+    fun fieldStates(track: Track, count: (String) -> Counts): List<State> =
+        QuizCatalog.fields.map { f ->
             val c = count(f.key)
-            State(QuizCatalog.Level(f.key, f.label, track), kindOf(c.total, family), c, trial = family && trialOpen && c.total > 0)
+            State(QuizCatalog.Level(f.key, f.label, track), kindOf(c.total, false), c)
         }
-    }
 
-    private fun kindOf(total: Int, reserved: Boolean) = when {
+    private fun kindOf(total: Int, onlyReservable: Boolean) = when {
         total > 0 -> Kind.AVAILABLE
-        reserved -> Kind.RESERVED
+        onlyReservable -> Kind.RESERVED
         else -> Kind.SOON
     }
 
     /**
-     * The text of a card: « N questions · ≈ P parties sans répétition (objectif G) » (or « G parties sans répétition garanties »)
-     * then the notes (alias, essai, relecture), each on its own line; « Réservé · en location » or « bientôt » without content.
-     * P is the capacity of the pool for [perGame] questions a game (the player's history is not read: the picker never loads a level).
+     * The long text of a level: « N questions · ≈ P parties sans répétition (objectif G) » (or « G parties sans répétition garanties »)
+     * then the notes (alias, « dont N questions en essai », relecture), each on its own line; « Réservé · en location » or « bientôt »
+     * without content. P is the capacity of the pool for [perGame] questions a game (the player's history is not read: the picker never loads a level).
      */
     fun cardText(s: State, goal: Int, perGame: Int = 15): String = when (s.kind) {
         Kind.RESERVED -> RESERVED_TEXT
@@ -170,9 +181,22 @@ object QuizLevelAvailability {
                 s.counts.approved == 0 -> REVIEW_NOTE
                 else -> "dont ${s.counts.review} en cours de relecture"
             }
-            listOfNotNull(head, s.alias?.note, if (s.trial) TRIAL_NOTE else null, review).joinToString("\n")
+            listOfNotNull(head, s.alias?.note, if (s.trialCount > 0) "dont ${s.trialCount} questions en essai" else null, review).joinToString("\n")
         }
     }
+
+    /** Thousands grouped with a no-break space: « 2 000 ». */
+    private fun readable(n: Int): String = n.toString().reversed().chunked(3).joinToString(" ").reversed()
+
+    /** The ONE short line of a fixed-width card: « 2 000 questions », « Réservé » or « bientôt » (the long text is [detailText]). */
+    fun compactText(s: State): String = when (s.kind) {
+        Kind.RESERVED -> "Réservé"
+        Kind.SOON -> SOON_TEXT
+        Kind.AVAILABLE -> if (s.counts.total == 1) "1 question" else "${readable(s.counts.total)} questions"
+    }
+
+    /** The single detail line under the grid, following the focused card: « CP : 2000 questions · … · contenu en cours de relecture ». */
+    fun detailText(s: State, goal: Int, perGame: Int = 15): String = s.level.label + " : " + cardText(s, goal, perGame).replace("\n", " · ")
 
     /**
      * The questions of an alias level, built from its sources one after the other (the previous source is released before the next

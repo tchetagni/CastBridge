@@ -1,52 +1,48 @@
-# Quiz « Quel niveau ? » : tous les niveaux gratuits remplis (2026-10-03)
+# Quiz « Quel niveau ? » : tous les niveaux remplis, grille compacte (2026-10-03)
 
-Branche `claude/quiz-levels-available` (depuis `origin/integration/agents`). Cahier du propriétaire : « Je veux voir tous les niveaux remplis au lieu de bientôt ».
+Branche `claude/quiz-levels-available`. Cahier du propriétaire : « Je veux voir tous les niveaux remplis au lieu de bientôt », puis « les quiz vont de 6e en 4e au lieu de tous les niveaux » (TV 0.14.23), puis « ce sont les questions qui sont réservables, pas les niveaux ».
 
 ## Causes
-1. `QuizActivity.count(f)` comptait `room.bank` = la petite banque de base (320 questions), jamais les fichiers par niveau chargés au lancement d'une partie : seul CM2 apparaissait rempli.
-2. `QuizBank.count` / `poolOf` utilisent `playable`, qui exclut les questions « review » ; 100 % des questions embarquées et des lots sont « review » (0 approuvée dans `content/quiz/dist/coverage.json`) : même comptées, elles auraient été exclues du sélecteur et du tirage. De plus la TV jouait sur le canal `stable` du serveur (par défaut), qui bloque les « review ».
+1. `QuizActivity.count(f)` comptait `room.bank` = la petite banque de base (320 questions), jamais les fichiers par niveau : seul CM2 apparaissait rempli.
+2. `QuizBank.count` / `poolOf` excluent les questions « review » (100 % des questions embarquées et des lots) ; la TV jouait en plus sur le canal `stable` par défaut.
+3. (0.14.23) Une fiche portait une note longue et s'élargissait au focus : la ligne de 14 niveaux du Secondaire débordait de l'écran 1280x720 @160 dpi, les niveaux suivants n'étaient ni visibles ni atteignables.
 
 ## Règle des questions en relecture (décision du coordinateur)
-Les questions « en cours de relecture » SONT jouables. `QuizEdition.REVIEW_PLAYABLE = true` : la TV joue sur le canal bêta (`QuizEdition.playChannel`), donc les marques « bêta : non validé » restent visibles en jeu ; les questions rejetées ou à corriger ne sont jamais jouées. Le tirage prend les questions APPROUVÉES d'abord (`drawDetailed(approvedFirst = true)`), puis celles en relecture. Chaque fiche porte « contenu en cours de relecture » (ou « dont N en cours de relecture »), jamais cachée.
+Les questions « en cours de relecture » SONT jouables. `QuizEdition.REVIEW_PLAYABLE = true` : la TV joue sur le canal bêta (`QuizEdition.playChannel`), les marques « bêta : non validé » restent visibles en jeu ; les questions rejetées ou à corriger ne sont jamais jouées. Le tirage prend les approuvées d'abord (`drawDetailed(approvedFirst = true)`). L'information « contenu en cours de relecture » est dans la ligne de détail, jamais cachée.
 
-## Logique pure (`core/quiz/QuizLevelAvailability.kt`)
-- États : AVAILABLE (n > 0), RESERVED (« Réservé · en location » : aucun contenu ET niveau dans l'index `reservedLevels`, à défaut `reservedNotEmbedded`), SOON (rien et non réservé). La liste réservée est LUE dans index.json, jamais codée.
-- Comptage : index.json seul (aucun fichier de niveau lu pour compter), banque de base + lots installés (`countsOf`), total = max(banque, index) car un lot du même niveau remplace les ids embarqués ; l'index ne donne pas le détail approuvé/relecture : l'embarqué compte comme relecture.
-- Drapeau d'essai `QuizEdition.TRIAL_OPEN = true` : un niveau réservé par la famille mais ouvert par ce drapeau affiche « essai ». À false (édition de production) le contenu embarqué d'un niveau réservé est ignoré. Testé avec les deux formes d'index (réservé non embarqué ; `reservedNotEmbedded` vide + `reservedLevels`) et un index sans liste.
-- Table clé du sélecteur -> clé embarquée (`EMBEDDED_KEYS`) testée contre le vrai index : chaque niveau embarqué correspond à exactement un niveau du sélecteur, et inversement (hors alias et famille réservée) ; culture-generale n'a pas de niveau.
-- Texte de fiche (`cardText`) : « N questions · ≈ P parties sans répétition (objectif G) » ou « G parties sans répétition garanties » (P = N / 15, sans historique : le sélecteur ne charge jamais un niveau).
+## Questions réservables (décision du propriétaire, dernière version)
+Aucun niveau n'est réservé en entier : chaque niveau a des questions LIBRES (≈ 70 %) et RÉSERVABLES (≈ 30 %, marquées une à une). Index `embedded/index.json` : par niveau `count` (total), `freeCount`, `reservedCount` ; sans le découpage (ancienne forme) tout est libre. Plus aucune lecture de `reservedNotEmbedded` / `reservedLevels`. `QuizEdition.TRIAL_OPEN = true` : les questions réservables sont jouables pendant l'essai ; nombre de la fiche = freeCount + reservedCount (si TRIAL_OPEN) et le détail ajoute « dont N questions en essai » ; à false = freeCount seul. États : AVAILABLE dès qu'une question est jouable ; RESERVED (« Réservé · en location ») seulement si TOUTES les questions du niveau sont réservables et l'essai fermé ; SOON si rien du tout.
 
-## Alias (transparents)
-- SIL : mêmes questions que le CP (fiche : « mêmes questions que le CP »). Questions du CP re-étiquetées niveau SIL, id suffixé `@SIL` (un lot CP installé ne les remplace pas).
-- Form 4 (absent du catalogue, ni lot ni question) : 1000 questions de Form 3 + 1000 de Form 5, répartition régulière sur les ids, entrelacées (une de chaque tour à tour), déterministe ; id suffixé `@Form-4` ; fiche : « questions des Form 3 et Form 5 ». Les deux niveaux sources sont lus l'un après l'autre (un seul niveau complet en mémoire, R-11) puis relâchés. Aucun autre contenu inventé.
-- Limite : un lot loué « cp » ne sert pas SIL (autre niveau) ; le jeu affiche « SIL » (pas « CP »).
+## Logique pure (core/quiz)
+- `QuizLevelAvailability` : états, comptes (index.json seul, base, lots installés ; total = max(banque, index) car un lot du même niveau remplace les ids embarqués), `compactText` (ligne unique de la fiche : « 2 000 questions », « Réservé », « bientôt »), `detailText` (« CP : 2000 questions · ≈ P parties sans répétition (objectif G) · alias · dont N en essai · contenu en cours de relecture »), table `EMBEDDED_KEYS` testée contre le vrai index (chaque niveau embarqué = exactement un niveau du sélecteur et inversement hors alias et niveaux à importer Tle, L1-L3).
+- `LevelGridLayout` : `columns(widthDp, cardWidthDp)` (1280 dp → 5 colonnes, 190 dp de carte, 16 de marge, 80 de bords) et `move(index, dir, count, cols)` : gauche/droite suivent l'ordre de lecture avec retour à la ligne, haut/bas d'une rangée, bas depuis une colonne sans carte en dernière rangée = dernière carte. Testé : tous les niveaux atteignables pour 1, 4, 12, 13, 14, 24 cartes et 1 à 6 colonnes.
+- Alias : SIL = questions du CP (id `@SIL`) ; Form 4 = 1000 questions de Form 3 + 1000 de Form 5 entrelacées, déterministe (id `@Form-4`), sources lues l'une après l'autre (un seul niveau en mémoire, R-11). Un lot loué « cp » ne sert pas SIL.
 
-## État final de chaque niveau du sélecteur (index actuel, édition d'essai)
-| Niveau | État | Détail |
+## Écran (QuizActivity, étapes level et field)
+Fiches compactes de largeur fixe 190 dp (ne s'élargissent plus au focus), grille qui passe à la ligne (colonnes calculées de la largeur d'écran et de la densité), ScrollView vertical (la vue suit le focus), D-pad par `LevelGridLayout.move`, ligne de détail unique sous la grille qui suit la fiche focalisée. Fiches « bientôt » et « Réservé » focalisables, non choisissables (message en pied). Filières (L1-L3) et mêmes rendus. `bankNote` est gardé pour « Comment jouer ? » et Culture générale. Rien dans android/sender ni sur l'accueil TV.
+
+## Vérification visuelle (émulateur emulator-5580, 1280x720 @160, build non verrouillée d'essai)
+`docs/agent-reports/quiz-niveaux/selecteur-primaire.png` (12 niveaux, 3 rangées), `selecteur-secondaire.png` (14 niveaux, 3 rangées, Upper Sixth atteint à la télécommande, détail « Upper Sixth : 2000 questions · ≈ 133 parties… »), `selecteur-superieur.png` (3 niveaux). Taille et densité remises à l'origine, application arrêtée.
+
+## État final de chaque niveau (index actuel : ancienne forme, 24 niveaux de 2000 ; essai ouvert)
+| Niveau | État | Fiche |
 |---|---|---|
-| SIL | AVAILABLE | alias CP, 2000 (relecture) |
-| CP, CE1, CE2, CM1 | AVAILABLE | 2000 (relecture) |
-| CM2 | AVAILABLE | 2000 (index) ; les 20 approuvées de la base restent jouées en premier |
-| Class 1 à 6 | AVAILABLE | 2000 chacun |
-| 6e, 5e, 4e, 3e, 2nde, 1re | AVAILABLE | 2000 chacun |
-| Tle | RESERVED « Réservé · en location » | aucune question embarquée aujourd'hui ; AVAILABLE + « essai » dès que l'index en compte ; AVAILABLE sans « essai » avec un lot loué |
-| Form 1, 2, 3, 5 | AVAILABLE | 2000 chacun |
-| Form 4 | AVAILABLE | alias Form 3 + Form 5, 2000 |
-| Lower Sixth, Upper Sixth | AVAILABLE | 2000 chacun |
-| L1, L2, L3 | RESERVED | idem Tle ; l'étape filière compte par filière (le niveau choisi est alors chargé, un seul) |
-Aucun niveau des parcours gratuits ne reste « bientôt » (test réel sur l'index embarqué, drapeau d'essai activé ou non).
-
-## Écran (fin)
-Étapes « level » et « field » : texte de fiche = `cardText` ; seules les fiches AVAILABLE se choisissent ; une fiche RESERVED reste focalisable (D-pad) et affiche son message au OK (« réservé : il s'ouvre avec un lot loué depuis votre téléphone CastBridge ») ; si toutes les fiches sont réservées, le focus tombe sur la première. `count` de l'écran utilise `QuizRoom.playableCount` (relecture comprise). Rien dans android/sender, accueil TV inchangé.
+| SIL | AVAILABLE (alias CP) | 2 000 questions |
+| CP, CE1, CE2, CM1, CM2 | AVAILABLE | 2 000 questions |
+| Class 1 à 6 | AVAILABLE | 2 000 questions |
+| 6e, 5e, 4e, 3e, 2nde, 1re | AVAILABLE | 2 000 questions |
+| Tle | AVAILABLE (base seule) | 20 questions ; passera à N dès l'import de `tle` dans l'index |
+| Form 1, 2, 3, 5 ; Lower, Upper Sixth | AVAILABLE | 2 000 questions |
+| Form 4 | AVAILABLE (alias Form 3 + 5) | 2 000 questions |
+| L1 | AVAILABLE (base seule) | 60 questions |
+| L2, L3 | SOON (« bientôt ») | rien dans la base ni l'index tant que l'autre agent n'a pas importé l'index complet ; aucun niveau n'est réservé en entier |
+Avec l'index complet (freeCount / reservedCount) : tout niveau non vide est AVAILABLE (test), et RESERVED n'apparaît que pour un niveau 100 % réservable avec l'essai fermé.
 
 ## Tests
-`QuizLevelAvailabilityTest` (25) écrit d'abord : 24 rouges par assertion sur une ébauche, puis verts. Les tirages réels (CP, Class 1, 6e, Form 1, Lower Sixth, Culture générale, SIL, Form 4) donnent 15 questions distinctes via `QuizRoom` construit comme `QuizHub`. `:core:test` complet : 3049 tests, 0 échec ; `:sender` et `:receiver` compilent. Aucune attente existante changée (le test de `QuizBank` sur SIL = 0 concerne la banque seule, inchangé).
+`QuizLevelAvailabilityTest` (nouveau modèle, deux formes d'index) et `LevelGridLayoutTest` écrits d'abord : 4 rouges par assertion sur l'ébauche de la grille, puis verts. Tirages réels en salle (CP, Class 1, 6e, Form 1, Lower Sixth, Culture générale, SIL, Form 4) : 15 questions distinctes. Aucune attente existante modifiée.
 
-## Risques
-- Les questions marquées « bêta : non validé » apparaissent en jeu (décision du propriétaire) ; à retirer en repassant `REVIEW_PLAYABLE` à false quand la relecture sera faite.
-- Le total affiché est une approximation (index, et max banque/index) ; l'écran « Comment jouer ? » recharge le niveau et donne le compte exact.
-- `drawDetailed` donne désormais la priorité aux approuvées : sur banque mixte, la difficulté cible passe après (tri final par difficulté inchangé).
-- Index futur avec tous les niveaux embarqués : `EmbeddedLevels` doit faire correspondre `levelFor` pour `Tle`, `L1…L3` (clés `tle`, `l1`, `l2`, `l3` déjà dans la table) ; le sélecteur de filières charge un fichier de 2000+ questions.
-
-## Seule la vraie TV confirme
-Fluidité du sélecteur (24 cartes à 3 lignes sur GaiaOS 720p 32 bits), lisibilité de la note de relecture, temps de chargement d'un niveau (et de Form 4 : deux fichiers), mémoire après plusieurs changements de niveau.
+## Risques et à faire par ailleurs
+- Le jeu ne distingue pas encore les questions réservables dans le tirage : tant que `TRIAL_OPEN = true` tout est jouable ; pour la production il faudra exclure du tirage les questions marquées réservables (marque à définir par l'import de l'index).
+- Total affiché approximatif (index et max banque/index) ; « Comment jouer ? » donne le compte exact après chargement du niveau.
+- Questions « bêta : non validé » visibles en jeu (décision du propriétaire) ; retour en arrière par `REVIEW_PLAYABLE = false`.
+- Sur la vraie TV (GaiaOS 720p 32 bits) seuls restent à confirmer : fluidité du défilement et des animations d'entrée des cartes, lisibilité à 3 m des fiches de 16 sp, temps de chargement d'un niveau (Form 4 : deux fichiers), mémoire après plusieurs changements de niveau.
