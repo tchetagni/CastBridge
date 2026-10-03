@@ -209,4 +209,33 @@ class TelemetryApiTest extends ApiTestBase {
         assertEquals(aggBefore, jdbc.queryForObject("select count(*) from kpi_event_day", Integer.class), "kpi_* untouched by the raw purge");
         assertEquals(0, telemetry.purgeRawEvents(today));
     }
+
+    @Test
+    void rentalEventsNeedUsageConsentAndKeepOnlyTheWhiteList() throws Exception {
+        Dev usage = register("usage", "R1"), essential = register("essential", "R2");
+        List<String> events = List.of(
+                ev("rental_start", "{\"bundle\":\"pack-fr\",\"unit\":\"hours\",\"amount\":12,\"maxMinutes\":720}"),
+                ev("rental_use", "{\"bundle\":\"pack-fr\",\"unit\":\"hours\",\"minutes\":95}"),
+                ev("rental_end", "{\"bundle\":\"pack-fr\",\"unit\":\"days\",\"reason\":\"over_limit\",\"usedMinutes\":300,\"maxMinutes\":4320,\"contractId\":\"C-1\"}"),
+                ev("rental_extend", "{\"bundle\":\"pack-fr\",\"unit\":\"days\",\"amount\":2}"),
+                ev("rental_survey", "{\"unit\":\"hours\",\"q\":\"price\",\"answer\":\"yes\"}"));
+        JsonNode ok = send(usage, events, false);
+        assertEquals(5, ok.get("accepted").asInt(), ok.toString());
+        long id = jdbc.queryForObject("select id from device where public_id = ?", Long.class, usage.id());
+        String end = jdbc.queryForObject("select props from telemetry_event where device_id = ? and name = 'rental_end'", String.class, id);
+        assertFalse(end.contains("contractId") || end.contains("C-1"), end);
+        assertTrue(end.contains("over_limit"), end);
+
+        JsonNode refused = send(essential, events, false);
+        assertEquals(0, refused.get("accepted").asInt(), refused.toString());
+        assertEquals(5, refused.get("rejected").asInt());
+        assertTrue(refused.get("errors").get(0).get("reason").asText().contains("non consenties"));
+
+        JsonNode bad = send(usage, List.of(ev("rental_start", "{\"bundle\":\"pack-fr\",\"email\":\"a@b.c\"}"),
+                ev("rental_start", "{\"bundle\":\"pack-fr\",\"unit\":\"weeks\"}"),
+                ev("rental_end", "{\"bundle\":\"pack-fr\",\"reason\":\"refund\"}"),
+                ev("rental_use", "{\"bundle\":\"a b\",\"minutes\":1}")), false);
+        assertEquals(4, bad.get("rejected").asInt(), bad.toString());
+        assertTrue(bad.get("errors").toString().contains("propriété interdite : email"));
+    }
 }

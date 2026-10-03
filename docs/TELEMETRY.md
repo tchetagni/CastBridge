@@ -85,6 +85,11 @@ passerelle Bluetooth du téléphone est disponible (proxy SOCKS local possible).
 | `gateway_session` | `ms`, `bytes` (passerelle Internet Bluetooth) | usage |
 | `connectivity_check` | `via` = `wifi` \| `bluetooth` \| `ethernet` \| `wifidirect` \| `none`, `ok`, `latency_ms` | usage |
 | `content_stat` | `kind` = `question` \| `lesson` \| `exercise`, `item` (id), `shown`, `correct`, `ms` (temps total), `reports` : totaux par élément depuis le dernier envoi, **identifiants et nombres seulement** (`docs/CONTENT-VALIDATION.md` § 5) | usage |
+| `rental_start` | `bundle` (code public du catalogue), `unit` = `hours` \| `days` \| `default`, `amount`, `maxMinutes` | usage |
+| `rental_use` | `bundle`, `unit`, `minutes` : agrégé **par jour et par contrat sur l'appareil, jamais par minute** ; jamais d'identifiant de contrat | usage |
+| `rental_end` | `bundle`, `unit`, `reason` = `usage` \| `date` \| `over_limit`, `usedMinutes`, `maxMinutes` | usage |
+| `rental_extend` | `bundle`, `unit`, `amount` | usage |
+| `rental_survey` | `unit`, `q`, `answer` : réponse facultative de fin de location, une fois par contrat, **jamais sous profil enfant**, sans contrat | usage |
 | `update_install` | `from`, `to` (versionCode), `ok`, `error` | essentiel |
 | `error`, `crash` | `screen`, `type`, `message` (≤ 200, nettoyé) | essentiel |
 

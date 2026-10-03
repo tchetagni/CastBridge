@@ -49,6 +49,12 @@ object EventCatalog {
             "out_of", "ms", "badge", "level", "version"),
         // Quality signals of the content (docs/CONTENT-VALIDATION.md § 5): per item totals since the last flush, ids and numbers only
         "content_stat" to setOf("kind", "item", "shown", "correct", "ms", "reports"),
+        // Rentals (docs/TELEMETRY.md § 4, w16-07): public catalog code + unit + numbers; never a contract, licence or device id
+        "rental_start" to setOf("bundle", "unit", "amount", "maxMinutes"),
+        "rental_use" to setOf("bundle", "unit", "minutes"),
+        "rental_end" to setOf("bundle", "unit", "reason", "usedMinutes", "maxMinutes"),
+        "rental_extend" to setOf("bundle", "unit", "amount"),
+        "rental_survey" to setOf("unit", "q", "answer"),
     )
 
     /** Values of "action" in the "learn" event (the names of LearnProgress.EVENTS). */
@@ -202,6 +208,10 @@ class Telemetry(
     fun screenView(screen: String) = track("screen_view", mapOf("screen" to screen))
 
     fun screenTime(screen: String, ms: Long) = track("screen_time", mapOf("screen" to screen, "ms" to ms))
+
+    /** Rental survey answer (w16-07): never under a child profile; the contract id is not a property. */
+    fun rentalSurvey(unit: String, q: String, answer: String, childProfile: Boolean = false) =
+        !childProfile && track("rental_survey", mapOf("unit" to unit, "q" to q, "answer" to answer))
 
     fun error(screen: String?, type: String, message: String) = track("error", mapOf("screen" to screen, "type" to type, "message" to message))
 

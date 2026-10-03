@@ -23,6 +23,43 @@ class TelemetryTest {
         assertFalse(tv.featureUsed("boutique"), "only the listed id")
     }
 
+    private val rentalProps = mapOf(
+        "rental_start" to mapOf("bundle" to "pack-fr", "unit" to "hours", "amount" to 12, "maxMinutes" to 720),
+        "rental_use" to mapOf("bundle" to "pack-fr", "unit" to "hours", "minutes" to 95),
+        "rental_end" to mapOf("bundle" to "pack-fr", "unit" to "days", "reason" to "date", "usedMinutes" to 300, "maxMinutes" to 4320),
+        "rental_extend" to mapOf("bundle" to "pack-fr", "unit" to "days", "amount" to 2),
+        "rental_survey" to mapOf("unit" to "hours", "q" to "price", "answer" to "yes"),
+    )
+
+    @Test
+    fun rentalEventsNeedUsageConsent() {
+        var consent = Consent.ESSENTIAL
+        val q = EventQueue(tmp())
+        val t = Telemetry("phone", 8, q, { consent }, { 1_000_000L })
+        for ((name, props) in rentalProps) assertFalse(t.track(name, props), "$name needs the usage consent")
+        assertEquals(0, q.size())
+        consent = Consent.USAGE
+        for ((name, props) in rentalProps) assertTrue(t.track(name, props), "$name accepted with consent")
+        assertEquals(rentalProps.keys.toList(), q.peek().map { JsonLite.obj(it)["name"] })
+        for (n in rentalProps.keys) assertFalse(n in castbridge.core.telemetry.EventCatalog.ESSENTIAL)
+    }
+
+    @Test
+    fun rentalEventsRejectForbiddenAndUnknownProps() {
+        val q = EventQueue(tmp())
+        val t = Telemetry("phone", 8, q, { Consent.USAGE }, { 1_000_000L })
+        assertFalse(t.track("rental_start", mapOf("bundle" to "pack-fr", "email" to "a@b.c")), "forbidden key")
+        assertFalse(t.track("rental_use", mapOf("bundle" to "pack-fr", "name" to "x")), "forbidden key")
+        assertTrue(t.track("rental_end", mapOf("bundle" to "pack-fr", "contractId" to "C-123", "deviceId" to "d", "licenseId" to "L", "reason" to "usage")))
+        @Suppress("UNCHECKED_CAST")
+        val props = JsonLite.obj(q.peek().single())["props"] as Map<String, Any?>
+        assertEquals(setOf("bundle", "reason"), props.keys, "no contract, device or license id survives")
+        assertFalse(t.track("rental_pause", mapOf("bundle" to "pack-fr")), "unknown event")
+        assertFalse(t.rentalSurvey("hours", "price", "yes", childProfile = true), "no survey under a child profile")
+        assertTrue(t.rentalSurvey("hours", "price", "yes"))
+        assertEquals(2, q.size())
+    }
+
     @Test
     fun consentCatalogAndForbiddenKeys() {
         val q = EventQueue(tmp())

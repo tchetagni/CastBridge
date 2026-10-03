@@ -117,6 +117,15 @@ public final class EventCatalog {
         // flush of the device, ids and numbers only. dim1 = kind, dim2 = item id; the totals feed the content_stat table.
         def("content_stat", false, Map.of("kind", Prop.oneOf("question", "lesson", "exercise"), "item", id, "shown", Prop.integer(1e6),
                 "correct", Prop.integer(1e6), "ms", Prop.integer(1e9), "reports", Prop.integer(1e4)), "kind", "item", "ms", null, "shown", null, false);
+        // Rentals (docs/TELEMETRY.md § 4): public catalog code + unit + numbers, never a contract, licence or device id
+        Prop unit = Prop.oneOf("hours", "days", "default"), minutes = Prop.integer(1e6);
+        def("rental_start", false, Map.of("bundle", id, "unit", unit, "amount", Prop.integer(1e4), "maxMinutes", minutes),
+                "bundle", "unit", null, null, "amount", null, true);
+        def("rental_use", false, Map.of("bundle", id, "unit", unit, "minutes", minutes), "bundle", "unit", null, null, "minutes", null, false);
+        def("rental_end", false, Map.of("bundle", id, "unit", unit, "reason", Prop.oneOf("usage", "date", "over_limit"), "usedMinutes", minutes,
+                "maxMinutes", minutes), "bundle", "reason", null, null, "usedMinutes", null, true);
+        def("rental_extend", false, Map.of("bundle", id, "unit", unit, "amount", Prop.integer(1e4)), "bundle", "unit", null, null, "amount", null, true);
+        def("rental_survey", false, Map.of("unit", unit, "q", Prop.text(32), "answer", Prop.text(32)), "q", "answer", null, null, null, null, true);
     }
 
     private static void def(String name, boolean essential, Map<String, Prop> props, String dim1, String dim2, String ms, String bytes,
