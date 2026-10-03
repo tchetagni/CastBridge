@@ -30,12 +30,13 @@ object TrialPolicy {
      */
     private val EXACT = setOf("/", "/api/hello", "/api/info", "/api/sysinfo", "/api/playurl", "/api/pause", "/api/resume", "/api/stop", "/api/seek", "/api/volume", "/api/restart",
         "/api/connections", "/api/net", "/api/background", "/api/autostart", "/api/overlay-permission", "/api/bluetooth", "/api/bluetooth/discoverable",
-        "/api/activation", "/api/rental", "/api/lots", "/api/learn", "/api/sudoku", "/api/games", "/api/games/open", "/api/parental",
+        "/api/activation", "/api/rental", "/api/lots", "/api/store", "/api/store/catalog", "/api/learn", "/api/sudoku", "/api/games", "/api/games/open", "/api/parental",
         "/api/server", "/api/server/me", "/api/server/url", "/api/server/contact")
-    private val PREFIXES = listOf("/api/activation", "/api/rental", "/api/lots", "/api/learn", "/api/sudoku", "/api/player", "/api/remote", "/api/bluetooth/tunnel", "/api/gateway",
+    private val PREFIXES = listOf("/api/activation", "/api/rental", "/api/lots", "/api/store", "/api/learn", "/api/sudoku", "/api/player", "/api/remote", "/api/bluetooth/tunnel", "/api/gateway",
         "/api/parental", "/api/content/reports")
     /** Under an allowed prefix but still closed: the subtitle of a stored file, the owner's reset of the installation key, and « Apprendre » pack installs/imports (an import reads a pack from the TV's storage; the trial gets its lots through /api/lots). */
-    private val DENIED_UNDER_ALLOWED = setOf("/api/player/subfile", "/api/learn/packs/import", "/api/learn/packs/install", "/api/activation/install-key/reset")
+    private val DENIED_UNDER_ALLOWED = setOf("/api/player/subfile", "/api/learn/packs/import", "/api/learn/packs/install", "/api/activation/install-key/reset",
+        "/api/store/requests", "/api/store/requests/ack", "/api/store/request")
 
     fun routeAllowed(path: String): Boolean {
         if (path.contains("..") || path.contains("//") || path.contains('\\') || path.contains('%')) return false
