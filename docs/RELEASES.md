@@ -414,3 +414,16 @@ bash tools/release/deploy-server.sh --rollback --apply      # release précéden
 
 Première exécution et migration depuis la disposition non git : `docs/coordination/VERSIONING-DEVOPS-2026-10-02.md` § 11.
 
+### 14.1 Service de jeu en ligne `castbridge-play` : tag `server-play-<version>` (ajouté le 2026-10-03)
+
+Le service de jeu (`server-play/`) se version et se déploie **indépendamment** de `castbridge-api` : tag annoté `server-play-<version>` (exemple `server-play-0.1.0`), jamais `main`, jamais un commit nu. Un tag `server-<version>` déploie l'API ; un tag `server-play-<version>` déploie le service de jeu, avec l'option `--service play` (sans l'option, un tag `server-play-*` est refusé).
+
+```bash
+bash tools/release/deploy-server.sh server-play-0.1.0 --service play            # plan (aucune connexion)
+bash tools/release/deploy-server.sh server-play-0.1.0 --service play --apply    # push du tag + déploiement (hors partie : refus si des salles sont ouvertes)
+bash tools/release/deploy-server.sh --status --service play --apply             # lecture seule
+bash tools/release/deploy-server.sh --rollback --service play --apply           # image et release précédentes
+```
+
+Projet compose `castbridge-play` (fichier `backend/docker-compose.play.yml`), image `castbridge-play:candidate` → `:current` (ancienne : `:previous`), liens `~/castbridge/current-play` et `previous-play`, `.env.play` conservé hors dépôt dans `~/castbridge/services/play/`. `castbridge-api`, la base, nginx et les conteneurs de l'autre projet de l'hôte ne sont pas touchés. La route nginx `/play/` reste un acte manuel du propriétaire. Pas à pas : `docs/PLAY-OPS.md` ; test sans connexion : `bash tools/tests/test_deploy_play.sh`.
+

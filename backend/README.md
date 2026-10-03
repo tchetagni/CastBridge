@@ -193,6 +193,27 @@ location /castbridge/ {
 Puis `CASTBRIDGE_PUBLIC_BASE_URL=https://castbridge.exemple.org` (ou `https://exemple.org/castbridge`) dans `.env`,
 `./deploy.sh`, et dans les apps l'URL du serveur. Tester avec `./smoke-test.sh https://castbridge.exemple.org`.
 
+Ces deux propositions ne transmettent **pas** l'`Upgrade` WebSocket (et ne sont pas celles du serveur réel, dont le nginx est le
+conteneur `infra-nginx`) : pour la route `/play/` du service de jeu en ligne, voir la section suivante et `docs/PLAY-OPS.md` § 4.4.
+
+## Service de jeu en ligne (`castbridge-play`)
+
+Service séparé (Kotlin/JVM, `server-play/`, tag `server-play-<version>`) qui héberge les salles de Quiz sur Internet (WebSocket,
+repli SSE et long-poll) derrière `https://bridge.sti-cm.com/play/`. Il ne partage **ni** conteneur, **ni** base, **ni** secret avec
+`castbridge-api` (il ne lit que des clés publiques de tickets).
+
+- Compose **séparé** : [`docker-compose.play.yml`](docker-compose.play.yml) (projet `castbridge-play`, port `127.0.0.1:7091:8080`, réseau externe
+  `infra-net`, 384 Mo, lecture seule, `stop_grace_period: 30s`) ; variables : [`.env.play.example`](.env.play.example) (copie `0600` hors dépôt
+  dans `~/castbridge/services/play/.env.play`, jamais de clé privée).
+- Déploiement : `bash tools/release/deploy-server.sh server-play-<v> --service play` (DRY-RUN) puis `--apply` ; hors partie ; l'API, la base et nginx
+  ne sont pas touchés. `--status` et `--rollback` acceptent aussi `--service play`.
+- Base (facultative, après w20-09) : [`sql/play-schema.sql`](sql/play-schema.sql), sans mot de passe.
+- Runbook complet (staging par tunnel SSH, clés de ticket, route nginx, essais, retour arrière) : [`docs/PLAY-OPS.md`](../docs/PLAY-OPS.md) ;
+  exigences des audits : [`docs/PLAY-OPS-REQUIREMENTS.md`](../docs/PLAY-OPS-REQUIREMENTS.md).
+- Surveillance : `GET http://127.0.0.1:7091/play/health` (jamais par l'adresse publique : 403) toutes les 5 minutes ; commande de contrôle dans
+  `docs/PLAY-OPS.md` § 9 (alertes : > 80 % des connexions ou des salles, tas > 85 %, service injoignable). Journaux : `sudo docker logs castbridge-play`
+  (aucune requête journalisée) et `sudo docker logs infra-nginx` pour l'accès à `/play/` (sans query string).
+
 ## Interface d'administration (`/admin`)
 
 Connexion par identifiant et mot de passe (compte créé au premier démarrage depuis `.env`, BCrypt coût 12). Après
@@ -271,6 +292,8 @@ Copiez aussi `/var/backups/castbridge` hors du VPS (et la clé privée Ed25519, 
 Une panne silencieuse (disque plein, certificat expiré, sauvegarde échouée) doit être détectée dans les 30 minutes.
 
 **Sonde externe** (gratuite, 5 min) : créer un compte sur [healthchecks.io](https://healthchecks.io) ou [Better Stack](https://betterstack.com/), pointer `GET /api/v1/updates/public-key` (200 attendu) ; vérifier aussi le TLS (`bridge.sti-cm.com`, 14 jours avant expiration).
+
+**Service de jeu en ligne** : sonde locale `GET http://127.0.0.1:7091/play/health` toutes les 5 min (commande et seuils : `docs/PLAY-OPS.md` § 9) ; `castbridge-play` est un projet compose distinct (`docker compose -p castbridge-play ps`).
 
 **Sonde interne** (10 min) : script [`ops/monitoring/host-check.sh`](../ops/monitoring/host-check.sh) qui vérifie :
 - Disque `/` et `/var/lib/docker` > 85 % → alerte
