@@ -183,8 +183,10 @@ def cmd_import(args):
     from qb import importer
     load_generators()
     bad = 0
+    import tempfile
+    tmp = tempfile.TemporaryDirectory() if args.dry_run else None      # --dry-run : validation seule, content/quiz/batches reste intact
     for f in args.files:
-        ok, problems = importer.import_file(Path(f), BATCHES)
+        ok, problems = importer.import_file(Path(f), Path(tmp.name) if tmp else BATCHES)
         print("%s : %d questions valides importées (statut review)" % (f, ok))
         for p in problems:
             print("   ", p)
@@ -217,7 +219,7 @@ def main(argv=None):
     l = sub.add_parser("lots"); l.add_argument("--out"); l.set_defaults(fn=cmd_lots)
     sub.add_parser("check").set_defaults(fn=cmd_check)
     sub.add_parser("report").set_defaults(fn=cmd_report)
-    i = sub.add_parser("import"); i.add_argument("files", nargs="+"); i.set_defaults(fn=cmd_import)
+    i = sub.add_parser("import"); i.add_argument("files", nargs="+"); i.add_argument("--dry-run", action="store_true", help="valide sans rien écrire dans content/quiz/batches"); i.set_defaults(fn=cmd_import)
     a = sub.add_parser("approve"); a.add_argument("file"); a.add_argument("--by", required=True); a.add_argument("--date", default="")
     a.set_defaults(fn=cmd_approve)
     args = ap.parse_args(argv)

@@ -7,6 +7,7 @@ import json
 from collections import Counter
 
 from .core import COURSES
+from .courses_sup import SUP_SCOPES
 from .pack import _zip_bytes, question_json, PACK_SUFFIX
 
 MAX_LOT_BYTES = 3 << 20      # a lot above this is a build error (a TV downloads through a flaky phone link)
@@ -108,6 +109,8 @@ SCOPES = {
     "tle-droit": ("tle-ecm", None, "Lycée · Tle · ECM"),
     "tle-philosophie": ("tle-philo", None, "Lycée · Tle · Philosophie"),
 }
+# Supérieur : 26 cellules niveau × filière (physique-l1, geographie-l2, mathematiques-l3...), voir courses_sup.py.
+SCOPES.update(SUP_SCOPES)
 
 
 def lot_file(scope, version):

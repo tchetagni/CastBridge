@@ -216,11 +216,14 @@ class QuizLotsTest {
         assertEquals((catalog["totalBytes"] as Number).toLong(), total)
         // the whole catalogue lives on the PHONE (100 Mo); the TV only keeps what the LotPlanner picks within its own 10 Mo, lot by lot
         assertTrue(total < LotBudget.PHONE_MAX_BYTES / 2, "all the quiz lots together fit in the phone budget ($total)")
-        assertEquals(QuizLotScopes.specs.map { it.scope }.sorted(), lots.map { it["scope"] as String }.sorted(), "the Kotlin table and the built lots agree")
+        val built = lots.map { it["scope"] as String }.toSet()
+        assertTrue(QuizLotScopes.specs.map { it.scope }.containsAll(built), "every built lot is in the Kotlin table")
+        assertTrue(QuizLotScopes.specs.filter { it.scope !in built }.all { it.track == Track.HIGHER }, "only higher-education cells may be registered without a lot yet (« bientôt »)")
+        for (s in QuizLotScopes.specs) assertEquals(s.scope, QuizLotScopes.scopeFor(s.track, s.level, s.field, s.region), "the naming rule gives the scope of ${s.scope}")
         assertFalse(c.install(LotMeta(LotId("quiz", "cm2"), 1, 1, "x", "t"), File(lotsDir(), "catalog-lots.json")))
         // the installed lots serve every course of the table
         val bank = unsigned.bank()
-        for (s in QuizLotScopes.specs.filter { it.track != Track.GENERAL }) assertTrue(bank.count(s.filter(), includeReview = true) > 10, s.scope)   // the smallest lots (lycée droit/ECM) hold 15 questions today: they are thin, not empty
+        for (s in QuizLotScopes.specs.filter { it.track != Track.GENERAL && it.scope in built }) assertTrue(bank.count(s.filter(), includeReview = true) > 10, s.scope)   // the smallest lots (lycée droit/ECM) hold 15 questions today: they are thin, not empty
         assertTrue(bank.count(QuestionFilter.GENERAL, includeReview = true) > 3000)
         assertTrue(bank.count(cm2) > 1000, "computed questions of the lots are playable under the current policy")
     }

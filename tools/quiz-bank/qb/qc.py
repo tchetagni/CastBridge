@@ -188,6 +188,8 @@ def coverage(questions):
             games_by_difficulty=min((by_d.get(d, 0) // 3 for d in range(1, 6)), default=0),
             answer_positions={"ABCD"[p]: sum(1 for q in qs if q["answer"] == p) for p in range(4)},
         )
+        if not qs:
+            out[course]["note"] = "sans question"      # parcours enregistré mais vide : ni pack ni lot n'est produit
         if general:
             by = Counter(q["region"] for q in qs)
             out[course]["missing"] = dict(CM=max(0, int(0.7 * NEEDED) - by["CM"]), AF=max(0, int(0.2 * NEEDED) - by["AF"]),
