@@ -230,6 +230,24 @@ class LinkDriverTest {
         assertTrue(s.view.state.isGood)
     }
 
+    /** R-10 (plusieurs TV) : un 401 « bad token » d'une AUTRE TV que la TV principale retire le jeton de CETTE TV, jamais celui de la TV principale. */
+    @Test fun aTokenRejectedByASecondTvDropsThatTvsTokenOnly() {
+        connect()
+        val mine = phone.driver.credential()!!
+        val other = "AA:BB:CC:DD:EE:77"
+        phone.saved.upsert(SavedTv(other, "TV de la chambre", addedAt = 2))
+        val tokB = "cbk_" + "b".repeat(64)
+        phone.store.saveCredential(other, StoredCredential(tokB, phone.clock.now(), phone.clock.now() + 12 * 3600_000L))
+        assertEquals(tokB, phone.driver.credential(other))
+        phone.driver.reportTokenRejected(tokB)
+        phone.driver.reportTokenRejected(tokB)                  // deux 401 en parallèle : le second ne trouve plus de détenteur
+        assertFalse(phone.driver.rejectionPending, "la TV principale n'est jamais marquée refusée par le 401 d'une autre TV, ni au second")
+        assertNull(phone.driver.credential(other), "le jeton refusé par la chambre n'est plus présenté à la chambre")
+        assertEquals(mine, phone.driver.credential(), "le jeton de la TV principale est intact")
+        phone.clock.advance(2_000)
+        assertTrue(phone.driver.step(Trigger.USER).view.state.isGood, "la TV principale reste connectée")
+    }
+
     // ------------------------------------------------------------------------------------------------ routes
 
     @Test fun wifiFailureFallsBackToBluetoothAndComesBackToWifi() {

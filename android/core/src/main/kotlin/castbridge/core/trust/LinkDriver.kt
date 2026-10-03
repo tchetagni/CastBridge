@@ -88,6 +88,8 @@ class LinkDriver(
     private var forceCheck = false
 
     val currentModel: LinkMachine.Model? @Synchronized get() = model
+    /** A token refusal of the default TV waits for the next [step] (tests: never set by another TV's refusal, nor twice). */
+    internal val rejectionPending: Boolean get() = rejected
 
     /** The token to present to the TV right now, or null: kept while valid even if the link is lost, never one the TV refused. Never blocks (a HELLO may be running). */
     fun credential(address: String? = null): String? {
@@ -97,11 +99,19 @@ class LinkDriver(
         return store.loadCredential(tv.address)?.takeIf { now < it.expiresAt - skewMs && gate.allows(tv.address, it.token) }?.token
     }
 
-    /** The TV's API said this token is expired or revoked (HTTP 401 "bad token"): it is dropped and a new HELLO follows at the next [step]. */
+    /**
+     * The TV's API said this token is expired or revoked (HTTP 401 "bad token"): it is dropped FOR THE TV THAT HOLDS IT (R-10: with several TVs, a 401 of
+     * another TV used to drop nothing of that TV and mark the default TV rejected), and a new HELLO follows at the next [step] when it is the default TV's.
+     * A token no TV holds any more (rotated) is treated as the default TV's, as before.
+     */
     fun reportTokenRejected(token: String) {
-        val tv = saved.default() ?: return
+        val default = saved.default()
+        val holder = saved.list().firstOrNull { tv -> (session?.let { it.tv.address == tv.address && it.credential == token } == true) || store.loadCredential(tv.address)?.token == token }
+        // a second 401 for the same token (two calls in parallel): the first one already refused it at its TV ([dropToken] refuses before it clears), nothing more
+        if (holder == null && saved.list().any { !gate.allows(it.address, token) }) return
+        val tv = holder ?: default ?: return
         dropToken(tv, token)
-        rejected = true
+        if (tv.address == default?.address) rejected = true
     }
 
     private fun dropToken(tv: SavedTv, token: String) {

@@ -10,7 +10,7 @@ RECEIVER = [("file", p) for p in ("activations.txt", "activations.txt.bak", "clo
                                   "rental/", "lots/", "learn/", "ssh/", "policy/", "tunnel/")] + \
            [("sharedpref", "castbridge_tv.xml"), ("sharedpref", "castbridge_parental_reports.xml"),
             ("file", "trusted_phones.txt")]
-SENDER = [("file", "owner-vault.txt"), ("sharedpref", "owner_guard.xml"), ("sharedpref", "castbridge_trust.xml"),
+SENDER = [("file", "owner-vault.txt"), ("sharedpref", "owner_guard.xml"), ("sharedpref", "castbridge_trust.xml"), ("sharedpref", "castbridge_pins.xml"),
           ("file", "orders/"), ("file", "lots/")]
 
 

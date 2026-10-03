@@ -96,7 +96,7 @@ object PinKeys {
     }
 
     /** host and port of "host", "host:port", "[v6]:port", "scheme://host:port/path"; host null when [key] cannot be one (contains spaces). */
-    private fun hostAndPort(key: String): Pair<String?, Int?> {
+    internal fun hostAndPort(key: String): Pair<String?, Int?> {
         var s = key.trim()
         s.indexOf("://").takeIf { it >= 0 }?.let { s = s.substring(it + 3) }
         s = s.substringBefore('/').substringBefore('?')

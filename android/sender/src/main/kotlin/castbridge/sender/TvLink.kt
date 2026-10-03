@@ -51,10 +51,10 @@ import java.util.UUID
 import java.util.concurrent.CountDownLatch
 import java.util.concurrent.TimeUnit
 
-/** SharedPreferences as a [TrustPersistence] (private; excluded from backups by the manifest rules). */
+/** SharedPreferences as a [TrustPersistence] (private; excluded from backups by the manifest rules). Synchronous (R-10): the list of TVs survives a kill right after a pairing. */
 class PrefsPersistence(private val sp: SharedPreferences, private val key: String) : TrustPersistence {
     override fun load(): String? = sp.getString(key, null)
-    override fun save(text: String) { sp.edit().putString(key, text).apply() }
+    override fun save(text: String) { sp.edit().putString(key, text).commit() }
 }
 
 /**
@@ -206,6 +206,22 @@ object TvLinkManager {
 
     fun savedForHost(host: String): SavedTv? = savedFor(host)
 
+    /** What the code book ([castbridge.core.trust.PinBook]) needs to give every screen key of a TV the same record (R-10). */
+    fun pinScope(): castbridge.core.trust.PinScope = if (!::saved.isInitialized) castbridge.core.trust.PinScope()
+        else castbridge.core.trust.PinScope(saved.list(), saved.default(), tunnelPort = BtSshGatewayService.API_PORT, tunnelTv = BtSshGatewayService.apiTunnelTv(),
+            hasToken = { driver.credential(it.address) != null })
+
+    /** What the trusted link says about the credential of the TV [key] designates (only the default TV has a live link state). */
+    fun linkFacts(key: String?): castbridge.core.trust.CredentialDecision.LinkFacts? {
+        val tv = savedFor(key) ?: return null
+        if (tv.address != saved.default()?.address) return null
+        return when (val l = _state.value) {
+            is LinkUi.Connected -> castbridge.core.trust.CredentialDecision.LinkFacts(pending = false, tokenRefused = false, tvReset = false, phoneRemoved = false)
+            is LinkUi.Status -> castbridge.core.trust.CredentialDecision.linkFacts(l.view.state)
+            else -> castbridge.core.trust.CredentialDecision.linkFacts(null)
+        }
+    }
+
     /** A call to the TV's API was answered "bad token": the token is dropped for good and a new HELLO follows. */
     fun tokenRejected(token: String) { if (::driver.isInitialized) { driver.reportTokenRejected(token); wake.trySend(Trigger.USER) } }
 
@@ -250,7 +266,13 @@ object TvLinkManager {
             s != null && s.tv.address == tv.address && (v.state.isGood || v.state is LinkState.Reconnecting) -> LinkUi.Connected(s, v)
             else -> LinkUi.Status(v, tv)
         }
+        val pending = (_state.value as? LinkUi.Status)?.let { castbridge.core.trust.CredentialDecision.linkFacts(it.view.state).pending } == true
+        pendingSince = if (!pending) null else pendingSince ?: System.currentTimeMillis()
     }
+
+    @Volatile private var pendingSince: Long? = null
+    /** How long the default TV's link has been connecting / reconnecting (0 = not): « aucun code à saisir » is said for a bounded time only. */
+    fun pendingForMs(): Long = pendingSince?.let { System.currentTimeMillis() - it } ?: 0
 
     private suspend fun loop() {
         var trigger = Trigger.APP_OPENED

@@ -2,6 +2,7 @@
 <!-- Android 11 et avant (en plus de allowBackup=false) : jetons TV, coffre de signature propriétaire, compteur de déverrouillage, commandes et lots ne partent jamais dans une sauvegarde ni vers un autre téléphone. -->
 <full-backup-content>
     <exclude domain="sharedpref" path="castbridge_trust.xml" />
+    <exclude domain="sharedpref" path="castbridge_pins.xml" />
     <exclude domain="sharedpref" path="castbridge_parental_inbox.xml" />
     <exclude domain="sharedpref" path="castbridge_parental_ledger.xml" />
     <exclude domain="file" path="owner-vault.txt" />
