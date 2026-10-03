@@ -12,6 +12,8 @@ import castbridge.core.quiz.online.PlayRules
 import castbridge.core.quiz.online.PlayScope
 import castbridge.core.quiz.online.RoomCode
 import castbridge.core.quiz.online.ServerMsg
+import castbridge.play.guard.InvalidTally
+import castbridge.play.guard.PlayGuard
 import castbridge.core.quiz.online.ServerRoom
 import castbridge.play.entitlement.DayCounter
 import castbridge.play.entitlement.HostRightsEvaluator
@@ -31,6 +33,10 @@ abstract class PlayConn(val id: String, val ip: String, rate: Int, burst: Int) {
     @Volatile var ticket: String? = null
     internal val closed = AtomicBoolean(false)
     @Volatile var lastInboundMs = System.currentTimeMillis()
+    /** Messages invalides de cette connexion (3 en une minute : fermeture 1008, w20-07). */
+    internal val invalidTally = InvalidTally()
+    /** (salle, appareil) du siège de joueur de cette connexion, pour que le plafond relevé des adresses partagées ne compte que des joueurs présents. */
+    @Volatile internal var seatKey: Pair<String, String>? = null
 
     /** Met un message serveur en file de sortie ; false = file pleine (la connexion est alors fermée par le hub). */
     abstract fun offer(text: String): Boolean
@@ -46,6 +52,8 @@ class RoomEntry(val room: ServerRoom, /** Appareil attesté par le ticket qui a 
     /** Horloge RÉELLE (ms) : la salle peut tourner sur l'horloge de test, la purge jamais. */
     val createdRealMs: Long = System.currentTimeMillis()
     @Volatile var lastActiveRealMs: Long = createdRealMs
+    /** Le journal a déjà dit que la partie n'est pas classée (une seule fois, w20-07). */
+    @Volatile internal var unrankedLogged = false
 }
 
 /**
@@ -80,9 +88,12 @@ class PlayHub(
     private val all = ConcurrentHashMap<String, PlayConn>()
     private val roomLock = Any()
     @Volatile private var draining = false
-    private val badCodes = BadCodeCounter()
-    private val badCodes48 = BadCodeCounter(perIpMax = MAX_BAD_CODES_PER_48)   // un /48 IPv6 contient 65 536 /64
+    private val badCodes = BadCodeCounter(perIpDayMax = MAX_BAD_CODES_PER_IP_PER_DAY)       // une adresse seule : 5 000 par jour (école, CGNAT)
+    private val badPairs = BadCodeCounter()                                                  // la PAIRE adresse + appareil : 30 / 5 min, 300 / jour
+    private val badCodes48 = BadCodeCounter(perIpMax = MAX_BAD_CODES_PER_48, perIpDayMax = Int.MAX_VALUE)   // un /48 IPv6 contient 65 536 /64
     private val rnd = random()
+    /** Gardes anti-abus (w20-07) : le service y met ses seaux et son journal ; par défaut, ceux d'un hub autonome. */
+    @Volatile var guard = PlayGuard()
 
     fun rooms(): List<ServerRoom> = rooms.values.map { it.room }
     fun roomCount() = rooms.size
@@ -96,14 +107,18 @@ class PlayHub(
         if (c.closed.get()) return false
         c.lastInboundMs = System.currentTimeMillis()
         if (!c.bucket.take()) { c.close(1008, "trop de messages"); onClosed(c); return false }
-        when (val d = PlayCodec.decodeClient(text)) {
-            is PlayCodec.Decoded.Bad -> send(c, ServerMsg.Error(0, d.reason, d.detail, false))
+        when (val d = guard.decode(c, text)) {
+            is PlayCodec.Decoded.Bad -> {
+                send(c, ServerMsg.Error(0, d.reason, d.detail, false))
+                if (d.reason == PlayProtocol.BAD_REQUEST && guard.tooManyInvalid(c)) { c.close(1008, "messages invalides"); onClosed(c); return false }
+            }
             is PlayCodec.Decoded.Ok -> dispatch(c, d.msg, clock())
         }
         return true
     }
 
     private fun dispatch(c: PlayConn, msg: ClientMsg, now: Long) {
+        guard.refuse(c, msg)?.let { send(c, it); return }   // pseudonyme interdit, débit d'entrée de l'appareil
         val entry = c.entry
         when {
             msg is ClientMsg.Hello -> {
@@ -157,9 +172,9 @@ class PlayHub(
         var refusal: ServerMsg.Error? = null
         val e = synchronized(roomLock) {
             when {
-                rooms.size >= cfg.maxRooms -> { refusal = ServerMsg.Error(0, BUSY, "Le service de jeu est très sollicité. Réessayez dans une minute.", true); null }
+                rooms.size >= cfg.maxRooms -> { refusal = err(PlayReason.PLAY_BUSY); null }
                 openRooms() >= subjectCap -> { refusal = subjectFull; null }
-                trial && !trialDays.record(identity ?: "", real) -> { refusal = ServerMsg.Error(0, BUSY, "Le service de jeu est très sollicité. Réessayez dans une minute.", true); null }
+                trial && !trialDays.record(identity ?: "", real) -> { refusal = err(PlayReason.PLAY_BUSY); null }
                 !trial && (identityDays.count(identity ?: "", real) >= cfg.createsPerIdentityPerDay || !identityDays.record(identity ?: "", real)) -> {
                     refusal = ServerMsg.Error(0, BUSY, "Trop de parties ouvertes aujourd'hui avec cette activation : réessayez demain.", true); null }
                 else -> RoomEntry(ServerRoom(id, scope, roomBank, rnd, createdAt = now, settings = roomSettings), ticket.deviceId, identity).also { rooms[id] = it }
@@ -174,11 +189,13 @@ class PlayHub(
     fun sweepUsedTickets(realNow: Long) { used.sweep(realNow); createRate.sweep(realNow); create48.sweep(realNow) }
 
     private fun join(c: PlayConn, m: ClientMsg.Join, now: Long) {
-        if (codesBlocked(c.ip, now)) { send(c, err(PlayReason.PLAY_BAD_CODE)); return }
         val typed = RoomCode.normalize(m.code)
         val e = typed?.let { t -> rooms.values.firstOrNull { it.room.code == t } }
-        if (e == null) { codeFailed(c.ip, now); send(c, err(PlayReason.PLAY_BAD_CODE)); return }
-        attachAndForward(e, c, m, now)
+        // Un code VALIDE n'est jamais refusé par un compteur de mauvais codes : derrière une adresse partagée (école, CGNAT), un élève malveillant ne doit pas fermer la porte aux autres.
+        if (e != null) { attachAndForward(e, c, m, now); return }
+        val pair = c.ip + "|" + (m.deviceHash ?: "-")
+        if (codesBlocked(c.ip, pair, now)) { send(c, err(PlayReason.PLAY_BAD_CODE, codesRetryAfterMs(c.ip, pair, now))); return }   // bloqué : réponse identique, rien n'est compté
+        codeFailed(c.ip, pair, now); typed?.let { nearMiss(it, now) }; send(c, err(PlayReason.PLAY_BAD_CODE))
     }
 
     private fun resume(c: PlayConn, m: ClientMsg.Resume, now: Long) {
@@ -191,10 +208,12 @@ class PlayHub(
     /** Attache la connexion à la salle le temps d'un message d'entrée ; sans `welcome` en retour, elle est détachée (et la salle neuve supprimée). */
     private fun attachAndForward(e: RoomEntry, c: PlayConn, m: ClientMsg, now: Long) {
         val overflow = ArrayList<PlayConn>()
+        var seatedRole: castbridge.core.quiz.online.PlayRole? = null
         synchronized(e) {
             e.conns[c.id] = c; c.entry = e
             val outs = e.room.handle(c.id, m, now, c.ip)
             e.lastActiveRealMs = System.currentTimeMillis()
+            seatedRole = (outs.firstOrNull { it.to == c.id && it.msg is ServerMsg.Welcome }?.msg as? ServerMsg.Welcome)?.role
             deliver(e, outs, overflow)   // d'abord les réponses (un refus doit atteindre la connexion), puis détachement si elle n'est pas entrée
             if (outs.none { it.to == c.id && it.msg is ServerMsg.Welcome }) {
                 e.conns.remove(c.id); c.entry = null
@@ -202,9 +221,11 @@ class PlayHub(
             }
         }
         overflow.forEach { dropOverflow(it) }
+        seatedRole?.let { guard.seated(c, m, e.room.roomId, it) }   // journal et plafond relevé : hors du verrou de la salle
     }
 
     private fun forward(e: RoomEntry, c: PlayConn, m: ClientMsg, now: Long) {
+        guard.filter.room(c, e.room.roomId)?.let { send(c, it); return }   // débit de messages de la salle
         val overflow = ArrayList<PlayConn>()
         synchronized(e) {
             e.lastActiveRealMs = System.currentTimeMillis()
@@ -223,13 +244,14 @@ class PlayHub(
     private fun dropOverflow(c: PlayConn) { c.close(1008, "file de sortie pleine"); onClosed(c) }
 
     private fun send(c: PlayConn, m: ServerMsg) { if (!c.offer(PlayCodec.encode(m))) dropOverflow(c) }
-    private fun err(r: PlayReason) = ServerMsg.Error(0, r.code, r.message, r.retryable)
+    private fun err(r: PlayReason, retryAfterMs: Long = r.retryAfterMs) = ServerMsg.Error(0, r.code, r.message, r.retryable, retryAfterMs)
 
     /** La connexion est tombée : la place est gardée (reprise par `resume`, 10 min). Idempotent. */
     fun onClosed(c: PlayConn) {
         if (!c.closed.compareAndSet(false, true)) return
         all.remove(c.id)
         limits.release(c.ip)
+        guard.unseated(c)
         val e = c.entry ?: return
         val overflow = ArrayList<PlayConn>()
         synchronized(e) {
@@ -245,6 +267,7 @@ class PlayHub(
         val mono = System.currentTimeMillis()
         for (e in ArrayList(rooms.values)) {   // copie sûre d'une table concurrente (toList() peut échouer si une entrée part pendant la copie)
             val overflow = ArrayList<PlayConn>()
+            var unranked: Map<String, Any?>? = null
             synchronized(e) {
                 if (e.room.phase() != ServerRoom.State.GONE) {
                     val tooOld = mono - e.createdRealMs >= cfg.roomMaxMs
@@ -252,11 +275,17 @@ class PlayHub(
                         deliver(e, e.room.close(if (tooOld) "EXPIRED" else "IDLE", now), overflow)
                     } else deliver(e, e.room.tick(now), overflow)
                 }
-                if (e.room.phase() == ServerRoom.State.GONE) { rooms.remove(e.room.roomId); e.conns.values.forEach { it.entry = null }; e.conns.clear() }
+                if (e.room.phase() != ServerRoom.State.FINISHED) e.unrankedLogged = false
+                else if (!e.unrankedLogged && e.room.unrankedSeats() > 0) {
+                    e.unrankedLogged = true
+                    unranked = mapOf("roomId" to e.room.roomId, "seats" to e.room.unrankedSeats(), "reasons" to e.room.botResults().filterValues { it.flagged }.values.flatMap { it.reasons }.distinct())
+                }
+                if (e.room.phase() == ServerRoom.State.GONE) { guard.forget(e.room.roomId); rooms.remove(e.room.roomId); e.conns.values.forEach { it.entry = null }; e.conns.clear() }
             }
             overflow.forEach { dropOverflow(it) }
+            unranked?.let { guard.log.event("play.game.unranked", "sièges hors classement", it) }   // jamais d'écriture de journal sous le verrou de la salle
         }
-        synchronized(badCodes) { badCodes.sweep(now) }; synchronized(badCodes48) { badCodes48.sweep(now) }
+        synchronized(badCodes) { badCodes.sweep(now) }; synchronized(badCodes48) { badCodes48.sweep(now) }; synchronized(badPairs) { badPairs.sweep(now) }
         if (mono - lastSweepMs >= 5_000L) { lastSweepMs = mono; sweepUsedTickets(mono) }
         for (c in ArrayList(all.values)) c.housekeeping(mono)
     }
@@ -279,10 +308,26 @@ class PlayHub(
         for (c in ArrayList(all.values)) { c.close(1001, "arrêt du service"); onClosed(c) }
     }
 
-    private fun codesBlocked(ip: String, now: Long) = badCodes.synchronizedBlocked(ip, now) || (ClientIp.group48(ip)?.let { badCodes48.synchronizedBlocked(it, now) } ?: false)
-    private fun codeFailed(ip: String, now: Long) { badCodes.synchronizedFail(ip, now); ClientIp.group48(ip)?.let { badCodes48.synchronizedFail(it, now) } }
+    private fun codesBlocked(ip: String, pair: String, now: Long) = badCodes.synchronizedBlocked(ip, now) || badPairs.synchronizedBlocked(pair, now) || (ClientIp.group48(ip)?.let { badCodes48.synchronizedBlocked(it, now) } ?: false)
+    /** Attente avant que cette adresse (ou son /48) puisse retaper un code : la plus longue des deux. */
+    private fun codesRetryAfterMs(ip: String, pair: String, now: Long): Long =
+        maxOf(synchronized(badCodes) { badCodes.retryAfterMs(ip, now) }, synchronized(badPairs) { badPairs.retryAfterMs(pair, now) }, ClientIp.group48(ip)?.let { g -> synchronized(badCodes48) { badCodes48.retryAfterMs(g, now) } } ?: 0L)
 
-    companion object { const val BUSY = "PLAY_BUSY"; const val MAINTENANCE = "PLAY_MAINTENANCE"; const val MAX_BAD_CODES_PER_48 = 120 }
+    /**
+     * Une frappe fausse proche d'un code vivant (un seul symbole d'écart) : compte pour CETTE salle ; à la 50e, son code change (au plus une fois par minute, salle d'attente seulement).
+     * Seul chemin qui peut faire tourner un code : `join`.
+     */
+    private fun nearMiss(typed: String, now: Long) {
+        for (e in ArrayList(rooms.values)) {
+            if (!RoomCode.nearMiss(typed, e.room.code)) continue
+            val rotated = synchronized(e) { e.room.noteNearMiss(now) }
+            if (rotated) guard.log.event("play.room.code_rotated", "code de salle renouvelé après des frappes proches", mapOf("roomId" to e.room.roomId))
+        }
+    }
+
+    private fun codeFailed(ip: String, pair: String, now: Long) { badCodes.synchronizedFail(ip, now); badPairs.synchronizedFail(pair, now); ClientIp.group48(ip)?.let { badCodes48.synchronizedFail(it, now) } }
+
+    companion object { const val BUSY = "PLAY_BUSY"; const val MAINTENANCE = "PLAY_MAINTENANCE"; const val MAX_BAD_CODES_PER_48 = 120; const val MAX_BAD_CODES_PER_IP_PER_DAY = 5_000 }
 }
 
 private fun BadCodeCounter.synchronizedBlocked(ip: String, now: Long) = synchronized(this) { ipBlocked(ip, now) }

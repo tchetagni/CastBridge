@@ -41,6 +41,12 @@ class PlayConfig(
     val maxRooms: Int = 400,
     val maxConnections: Int = 3_000,
     val maxPerIp: Int = 8,
+    /** Plafond de connexions ouvertes d'une adresse PARTAGÉE (≥ 8 appareils distincts dans une même salle : classe, famille) ; `CASTBRIDGE_PLAY_MAX_PER_IP_SHARED`. */
+    val maxPerIpShared: Int = 64,
+    /** Nouvelles connexions par minute et par adresse (60 : CGNAT, école) ; `CASTBRIDGE_PLAY_CONN_PER_MIN`. */
+    val connPerMinute: Int = 60,
+    /** Nouvelles connexions par seconde, toutes adresses confondues ; `CASTBRIDGE_PLAY_CONN_PER_SEC`. */
+    val connPerSecond: Int = 60,
     /** Origines autorisées pour la page de jeu (WebSocket, POST). */
     val origins: Set<String> = setOf("https://bridge.sti-cm.com"),
     /** Réseaux dont l'`X-Forwarded-For` est cru (dernier saut seulement). AUCUN par défaut (audit w20-03) : en production, l'adresse exacte de nginx en /32. */
@@ -87,7 +93,7 @@ class PlayConfig(
     companion object {
         const val VERSION = "w20-04"
         /** Les SEULES variables d'environnement lues par le service. */
-        val ENV_NAMES = listOf("CASTBRIDGE_PLAY_PORT", "CASTBRIDGE_PLAY_BIND", "CASTBRIDGE_PLAY_MAX_ROOMS", "CASTBRIDGE_PLAY_MAX_CONNECTIONS", "CASTBRIDGE_PLAY_MAX_PER_IP",
+        val ENV_NAMES = listOf("CASTBRIDGE_PLAY_PORT", "CASTBRIDGE_PLAY_BIND", "CASTBRIDGE_PLAY_MAX_ROOMS", "CASTBRIDGE_PLAY_MAX_CONNECTIONS", "CASTBRIDGE_PLAY_MAX_PER_IP", "CASTBRIDGE_PLAY_MAX_PER_IP_SHARED", "CASTBRIDGE_PLAY_CONN_PER_MIN", "CASTBRIDGE_PLAY_CONN_PER_SEC",
             "CASTBRIDGE_PLAY_ORIGINS", "CASTBRIDGE_PLAY_TRUSTED_PROXIES", "CASTBRIDGE_PLAY_LOTS_DIR", "CASTBRIDGE_PLAY_TICKET_PUBKEY", "CASTBRIDGE_PLAY_TICKET_PUBKEY_2",
             "CASTBRIDGE_PLAY_TICKET_PUBKEY_3", "CASTBRIDGE_PLAY_TRUSTED_KEYS", "CASTBRIDGE_PLAY_RESERVED_DIR", "CASTBRIDGE_PLAY_RESERVED_IDS", "CASTBRIDGE_PLAY_REVOCATIONS_URL",
             "CASTBRIDGE_PLAY_MAX_ROOMS_PER_SUBJECT", "CASTBRIDGE_PLAY_CREATES_PER_IP_HOUR", "CASTBRIDGE_PLAY_MAX_USED_TICKETS", "CASTBRIDGE_PLAY_DIRECT",
@@ -126,6 +132,9 @@ class PlayConfig(
                 maxRooms = e("CASTBRIDGE_PLAY_MAX_ROOMS")?.toIntOrNull() ?: d.maxRooms,
                 maxConnections = e("CASTBRIDGE_PLAY_MAX_CONNECTIONS")?.toIntOrNull() ?: d.maxConnections,
                 maxPerIp = e("CASTBRIDGE_PLAY_MAX_PER_IP")?.toIntOrNull() ?: d.maxPerIp,
+                maxPerIpShared = e("CASTBRIDGE_PLAY_MAX_PER_IP_SHARED")?.toIntOrNull()?.coerceAtLeast(1) ?: d.maxPerIpShared,
+                connPerMinute = e("CASTBRIDGE_PLAY_CONN_PER_MIN")?.toIntOrNull()?.coerceAtLeast(1) ?: d.connPerMinute,
+                connPerSecond = e("CASTBRIDGE_PLAY_CONN_PER_SEC")?.toIntOrNull()?.coerceAtLeast(1) ?: d.connPerSecond,
                 origins = e("CASTBRIDGE_PLAY_ORIGINS")?.split(',')?.map { it.trim().lowercase() }?.filter { it.isNotEmpty() }?.toSet() ?: d.origins,
                 trustedProxies = trusted,
                 ticketPubKeys = listOf("CASTBRIDGE_PLAY_TICKET_PUBKEY", "CASTBRIDGE_PLAY_TICKET_PUBKEY_2", "CASTBRIDGE_PLAY_TICKET_PUBKEY_3").mapNotNull { e(it) },

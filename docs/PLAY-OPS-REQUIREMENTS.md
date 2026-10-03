@@ -40,6 +40,12 @@
 4. **Rotation** : générer une nouvelle paire dans un **autre** dossier, mettre l'ancienne et la nouvelle publiques dans `CASTBRIDGE_PLAY_TICKET_PUBKEY` et `_2`, remplacer la privée de l'API, attendre 15 min (vie maximale d'un ticket), retirer l'ancienne publique.
 5. Vérifier : `docker inspect` du conteneur `castbridge-play` ne montre aucune clé privée ni `play_ticket_key` ; `GET /play/health` (depuis la VM) dit `"revocations":"ok"` après 15 min.
 
+## Limites réglables (w20-07)
+
+- `CASTBRIDGE_PLAY_CONN_PER_MIN` (60) : nouvelles connexions par minute et par adresse (HTTP 429 + `Retry-After` avant l'upgrade). Valeur large exprès : derrière un CGNAT d'opérateur ou dans une école, des dizaines d'appareils partagent une adresse. Ne la baisser qu'en cas d'abus constaté ; la limite horaire (600 par adresse) n'est pas réglable. `CASTBRIDGE_PLAY_CONN_PER_SEC` (60) : nouvelles connexions par seconde, toutes adresses confondues (rafale = la même valeur).
+- `CASTBRIDGE_PLAY_MAX_PER_IP_SHARED` (64) : borne du plafond relevé d'une adresse dont au moins 8 appareils distincts sont assis comme JOUEURS (pas spectateurs) depuis au moins 30 s dans une MÊME salle (classe) ; le plafond vaut alors `8 + appareils assis`, au plus cette valeur ; sinon `CASTBRIDGE_PLAY_MAX_PER_IP` (8). Un seul /48 IPv6 est de plus limité à 300 nouvelles connexions par minute (avant le seau global). Le plafond par /48 IPv6 (64) reste le dernier mot.
+- Le **journal** du service (`LogRedactor`, une ligne JSON par évènement sur la sortie d'erreur du conteneur) ne contient ni jeton, ni ticket, ni pseudonyme, ni code complet, ni adresse complète : à garder tel quel dans la collecte de journaux (ne pas ajouter de journal d'accès qui réintroduirait ces valeurs).
+
 ## Exploitation
 
 14. **Déployer hors partie.** Le service ne migre pas les salles : un redémarrage les perd. À l'arrêt (SIGTERM), il annonce « maintenance » aux salles, refuse les nouvelles et attend jusqu'à 25 s ; une partie en cours est interrompue au-delà. Choisir une heure creuse et vérifier `/play/health` (`rooms`) depuis la VM avant de relancer.

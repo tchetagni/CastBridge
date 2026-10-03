@@ -67,7 +67,7 @@ class AuditFixesTest {
     // ---- B2 : fils virtuels non épinglés ----
 
     @Test fun threeHundredIdleStreamsAndTwentyMuteWebSocketsDoNotStarveNewConnections() {
-        val srv = server(PlayConfig(port = 0, trustedProxies = LOOPBACK, maxPerIp = 5_000, maxConnections = 5_000, ticketPubKeys = listOf(TestKeys.pub), trustedKeys = TestRights.trustedKeys, createsPerIpPerHour = 10_000))
+        val srv = server(PlayConfig(port = 0, trustedProxies = LOOPBACK, maxPerIp = 5_000, maxConnections = 5_000, connPerMinute = 100_000, connPerSecond = 100_000, ticketPubKeys = listOf(TestKeys.pub), trustedKeys = TestRights.trustedKeys, createsPerIpPerHour = 10_000))
         val hello = PlayCodec.encode(ClientMsg.Hello(PlayProtocol.PROTO, PlayProtocol.CAPS, null, null))
         val socks = ArrayList<Socket>()
         repeat(300) { i ->

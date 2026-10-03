@@ -10,6 +10,8 @@ object PlayProtocol {
     /** Taille maximale d'un message client (octets UTF-8). */
     const val MAX_MESSAGE_BYTES = 2_048
     const val MAX_NAME = 16
+    /** Borne du champ `name` sur le fil : au-delà de 16 caractères, c'est `Pseudonym` qui refuse (BAD_NAME, motif LENGTH) plutôt que le codec (BAD_REQUEST). */
+    const val MAX_NAME_WIRE = 64
     const val MAX_ID = 64
     const val MAX_TOKEN = 64
     const val MAX_ARG = 256
@@ -47,16 +49,31 @@ enum class PlayRole { HOST, PLAYER, SPECTATOR }
 sealed class ClientMsg {
     abstract val type: String
 
-    data class Hello(val proto: Int, val caps: List<String>, val deviceHash: String?, val ticket: String?) : ClientMsg() { override val type get() = "hello" }
+    data class Hello(val proto: Int, val caps: List<String>, val deviceHash: String?, val ticket: String?) : ClientMsg() {
+        override val type get() = "hello"
+        override fun toString() = "Hello(proto=$proto, device=${PlayRedact.device(deviceHash)}, ticket=${if (ticket == null) "-" else PlayRedact.REDACTED})"   // jamais le ticket (T-18)
+    }
     /** Premier message de l'hôte (TV) : crée la salle ; `mode` = MILLIONAIRE | DUEL (facultatif). `name` null = la TV ne joue pas. */
     data class Create(val name: String?, val mode: String?,
                       /** w20-04 (additif, capacité `play-ticket`) : l'activation `cbx1` de la TV (preuve d'édition, évaluée par le SERVICE avec son horloge) et, au plus [PlayProtocol.MAX_RENTALS], ses lignes de location signées (autres activations `cbx1`). */
-                      val activation: String? = null, val rentals: List<String> = emptyList()) : ClientMsg() { override val type get() = "create" }
-    data class Join(val code: String, val name: String?, val token: String?, val deviceHash: String?, val spectate: Boolean) : ClientMsg() { override val type get() = "join" }
-    data class Resume(val roomId: String, val token: String, val lastSeq: Long) : ClientMsg() { override val type get() = "resume" }
+                      val activation: String? = null, val rentals: List<String> = emptyList()) : ClientMsg() {
+        override val type get() = "create"
+        override fun toString() = "Create(name=${PlayRedact.pseudo(name)}, mode=$mode, activation=${if (activation == null) "-" else PlayRedact.REDACTED}, rentals=${rentals.size})"   // jamais l'activation `cbx1` (T-18)
+    }
+    data class Join(val code: String, val name: String?, val token: String?, val deviceHash: String?, val spectate: Boolean) : ClientMsg() {
+        override val type get() = "join"
+        override fun toString() = "Join(code=${PlayRedact.code(code)}, name=${PlayRedact.pseudo(name)}, token=${if (token == null) "-" else PlayRedact.REDACTED}, device=${PlayRedact.device(deviceHash)}, spectate=$spectate)"
+    }
+    data class Resume(val roomId: String, val token: String, val lastSeq: Long) : ClientMsg() {
+        override val type get() = "resume"
+        override fun toString() = "Resume(roomId=$roomId, token=${PlayRedact.REDACTED}, lastSeq=$lastSeq)"
+    }
     data class Act(val questionId: String?, val action: String, val choice: Int?, val arg: String?, val seq: Long) : ClientMsg() { override val type get() = "act" }
     /** La TV relaie la réponse d'un de ses joueurs locaux avec son temps mesuré sur SON horloge monotone. */
-    data class RelayAct(val token: String, val questionId: String, val choice: Int, val localElapsedMono: Long, val seq: Long) : ClientMsg() { override val type get() = "relayAct" }
+    data class RelayAct(val token: String, val questionId: String, val choice: Int, val localElapsedMono: Long, val seq: Long) : ClientMsg() {
+        override val type get() = "relayAct"
+        override fun toString() = "RelayAct(token=${PlayRedact.REDACTED}, questionId=$questionId, choice=$choice, localElapsedMono=$localElapsedMono, seq=$seq)"
+    }
     data class Scope(val open: Boolean) : ClientMsg() { override val type get() = "scope" }
     data class Kick(val playerId: String) : ClientMsg() { override val type get() = "kick" }
     data class Mute(val playerId: String, val muted: Boolean) : ClientMsg() { override val type get() = "mute" }
@@ -70,7 +87,10 @@ sealed class ServerMsg {
     abstract val seq: Long
 
     data class Welcome(override val seq: Long, val roomId: String, val code: String, val token: String, val role: PlayRole, val playerId: String?,
-                       val proto: Int, val caps: List<String>) : ServerMsg() { override val type get() = "welcome" }
+                       val proto: Int, val caps: List<String>) : ServerMsg() {
+        override val type get() = "welcome"
+        override fun toString() = "Welcome(seq=$seq, roomId=$roomId, code=${PlayRedact.code(code)}, token=${PlayRedact.REDACTED}, role=$role, playerId=$playerId)"
+    }
     /** Vue complète du joueur (la vue différentielle viendra comme capacité additive). `full` : resynchronisation complète. */
     data class State(override val seq: Long, val view: Map<String, Any?>, val full: Boolean) : ServerMsg() { override val type get() = "state" }
     /** Annonce de la question : UNE question, sans réponse ; `opensAtServerMs` = instant absolu (horloge du serveur) de l'ouverture. */
@@ -80,7 +100,8 @@ sealed class ServerMsg {
     data class Reveal(override val seq: Long, val questionId: String, val index: Int, val answer: Int, val explanation: String?) : ServerMsg() { override val type get() = "reveal" }
     data class Safety(override val seq: Long, val view: SafetyView) : ServerMsg() { override val type get() = "safety" }
     data class Ping(override val seq: Long, val id: String, val serverNowMs: Long) : ServerMsg() { override val type get() = "ping" }
-    data class Error(override val seq: Long, val reason: String, val message: String, val retryable: Boolean) : ServerMsg() { override val type get() = "error" }
+    /** `retryAfterMs` (additif, w20-07) : attente conseillée avant de réessayer ; 0 = non précisée (le champ n'est alors pas écrit). */
+    data class Error(override val seq: Long, val reason: String, val message: String, val retryable: Boolean, val retryAfterMs: Long = 0L) : ServerMsg() { override val type get() = "error" }
     data class RoomGone(override val seq: Long, val reason: String) : ServerMsg() { override val type get() = "roomGone" }
     data class Replay(override val seq: Long, val events: List<EventRing.Event>) : ServerMsg() { override val type get() = "replay" }
     /** Accusé d'un `act` : `ref` = `seq` du client ; `result` ∈ OK, SAME, CLOSED, UNKNOWN_QUESTION, TOO_EARLY, FORBIDDEN, BAD_REQUEST, UNKNOWN_PLAYER, IGNORED. */

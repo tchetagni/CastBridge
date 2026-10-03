@@ -103,7 +103,9 @@ class PlayFallbackController(private val cfg: PlayConfig, val hub: PlayHub, priv
         var created = false
         if (c == null) {
             if (cred(req) != null) return gone(req, out, "connexion terminée : reprenez avec resume")
-            when (limits.acquire(ip)) {
+            val admission = limits.admit(ip)
+            when (admission.verdict) {
+                ConnectionLimits.Verdict.RATE -> return MiniHttp.json(out, 429, """{"error":"trop de connexions : réessayez dans un instant","retryAfterMs":${admission.retryAfterMs}}""", mapOf("Retry-After" to ((admission.retryAfterMs + 999) / 1000).coerceAtLeast(1).toString()))
                 ConnectionLimits.Verdict.IP_FULL -> return MiniHttp.json(out, 429, """{"error":"trop de connexions depuis cette adresse"}""", mapOf("Retry-After" to "10"))
                 ConnectionLimits.Verdict.TOTAL_FULL -> return MiniHttp.json(out, 503, """{"error":"service complet"}""", mapOf("Retry-After" to "30"))
                 ConnectionLimits.Verdict.OK -> {}

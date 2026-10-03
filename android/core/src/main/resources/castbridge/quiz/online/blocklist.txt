@@ -1,0 +1,77 @@
+# Pseudonymes interdits du Quiz en ligne (français, anglais, pidgin camerounais/nigérian), contrôlés par Pseudonym.kt (DESIGN-W20 § 3.3).
+# Les entrées sont écrites en clair, sans accent : le contrôle normalise le nom (minuscules, accents, « leet » 0->o 1->i 3->e 4->a 5->s 7->t, homoglyphes,
+# séparateurs retirés, lettres répétées réduites) AVANT de comparer.
+# Une ligne = un FRAGMENT (3 lettres au moins) : le nom est refusé s'il le contient.
+# Une ligne commençant par « = » = un MOT entier : le nom est refusé s'il contient ce mot isolé (pour les mots courts qui se cachent dans des noms ordinaires).
+# Écartés exprès pour ne pas refuser des prénoms courants : « nique » en fragment (Dominique, Monique), « nazi » (Nazir), « shit » (Shittu) : mots entiers seulement.
+# Une ligne commençant par « ~ » = un fragment cherché sur la forme NON réduite du mot (accents et leet levés, mais lettres doublées gardées) : « nigger » ne doit pas
+# devenir « niger » (le pays : Niger, Nigeria, Nigérian, Nigérien passent), ni « faggot » devenir « fagot » (le mot français).
+# Les entrées sont écrites en forme DÉJÀ RÉDUITE (minuscules, sans accent, lettres doublées réduites, hors « ~ ») ; chaque fragment est cherché MOT PAR MOT, jamais à cheval
+# sur deux mots (« Sasha Wolf » ≠ « ashawo ») ; les lettres isolées d'un même nom (« c.o.n », « f u c k ») sont d'abord recollées en un mot.
+# Liste volontairement courte : elle se complète à chaque signalement traité par la modération (jamais d'exposition à l'écran du mot refusé).
+
+# --- français : insultes, sexe, haine, violence ---
+merde
+putain
+salope
+connard
+connasse
+encule
+batard
+=nique
+niquer
+pedophile
+pedocriminel
+couille
+bordel
+negre
+=nazi
+nazis
+hitler
+violeur
+terroriste
+bougnoule
+youpin
+suceur
+branleur
+=pute
+=con
+=bite
+=cul
+=sexe
+=ntm
+=fdp
+=pd
+=pede
+=viol
+=chier
+=tapette
+
+# --- anglais ---
+fuck
+=shit
+bullshit
+shithead
+bitch
+asshole
+cunt
+whore
+slut
+~nigger
+~nigga
+~faggot
+retard
+rapist
+porn
+cocksucker
+dickhead
+motherfucker
+=rape
+=cock
+=kkk
+=sex
+
+# --- pidgin (Cameroun, Nigeria) ---
+ashawo
+=mumu
+=mbutuku

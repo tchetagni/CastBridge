@@ -112,14 +112,19 @@ class LimitsTest {
         assertEquals("PLAY_BUSY", e["reason"]); assertEquals(true, e["retryable"]); assertEquals(1, srv.rooms().size)
     }
 
-    @Test fun tenWrongCodesFromOneIpThenEvenTheRightCodeIsRefused() {
+    @Test fun thirtyWrongCodesFromOneIpBlockOnlyFurtherWrongCodesNeverTheRightOne() {
         val srv = server()
         val tv = ws(srv, xff = "203.0.113.50"); tv.send(PlayCodec.encode(ClientMsg.Hello(PlayProtocol.PROTO, PlayProtocol.CAPS, null, TestKeys.ticket()))); tv.send(PlayCodec.encode(TestRights.create()))
         val code = tv.await("welcome")!!["code"] as String
         repeat(3) { n -> val c = ws(srv, xff = "203.0.113.51"); repeat(10) { i -> c.send(PlayCodec.encode(ClientMsg.Join("ZZZZ%04d".format(n * 10 + i), "Awa", null, dev(), false))); assertEquals("PLAY_BAD_CODE", c.await("error")?.get("reason")) } }
         val p = ws(srv, xff = "203.0.113.51")
         p.send(PlayCodec.encode(ClientMsg.Join(code, "Awa", null, dev(), false)))
-        assertEquals("PLAY_BAD_CODE", p.await("error")?.get("reason"), "30 codes faux en 5 min : l'adresse est bloquée, même pour le bon code")
+        assertEquals("PLAYER", p.await("welcome")?.get("role"), "30 codes faux en 5 min : le BON code entre quand même (adresse partagée : un voisin malveillant ne ferme pas la porte)")
+        val w = ws(srv, xff = "203.0.113.51")
+        w.send(PlayCodec.encode(ClientMsg.Join("ZZZZ9999", "Awa", null, dev(), false)))
+        val e = w.await("error")!!
+        assertEquals("PLAY_BAD_CODE", e["reason"], "un code faux depuis l'adresse bloquée est refusé")
+        assertTrue((e["retryAfterMs"] as? Number)?.toLong()?.let { it > 0 } == true, "avec une attente structurée : $e")
         val q = ws(srv, xff = "203.0.113.52")
         q.send(PlayCodec.encode(ClientMsg.Join(code, "Bello", null, dev(), false)))
         assertEquals("PLAYER", q.await("welcome")?.get("role"), "une autre adresse n'est pas touchée")

@@ -5,12 +5,14 @@ import castbridge.core.quiz.QUIZ_PACK_SUFFIX
 import castbridge.core.quiz.QuizBank
 import castbridge.core.quiz.QuizLotFormat
 import castbridge.core.quiz.online.PlayScope
+import castbridge.core.quiz.online.Limits
 import castbridge.core.quiz.online.ServerRoom
 import castbridge.play.entitlement.DirReservedSource
 import castbridge.play.entitlement.ReservedBank
 import castbridge.play.entitlement.RevocationsFeed
 import castbridge.play.entitlement.TicketVerifier
 import castbridge.play.entitlement.TrustedIssuers
+import castbridge.play.guard.PlayGuard
 import java.io.File
 import java.io.IOException
 import java.net.InetAddress
@@ -34,13 +36,15 @@ class PlayServer(
     settings: ServerRoom.Settings = ServerRoom.Settings(),
     bank: QuizBank? = null,
 ) : AutoCloseable {
-    private val limits = ConnectionLimits(cfg.maxPerIp, cfg.maxConnections)
+    /** Gardes anti-abus : seaux de débit (CGNAT-friendly, voir `Limits`), plafond relevé des adresses partagées, journal sans secret. */
+    private val guard = PlayGuard(Limits(config = Limits.Config(connPerMinute = cfg.connPerMinute, connPerSecondGlobal = cfg.connPerSecond, maxOpenPerIp = cfg.maxPerIp, maxOpenPerIpShared = cfg.maxPerIpShared)))
+    private val limits = ConnectionLimits(cfg.maxPerIp, cfg.maxConnections, gate = guard.limits, maxPerIpShared = cfg.maxPerIpShared)
     private val verifier = TicketVerifier(cfg.ticketPubKeys)
     private val origin = OriginCheck(cfg.origins)
     private val feed = RevocationsFeed(TrustedIssuers.parse(cfg.trustedKeys.joinToString(",")).ring, cfg.revocationsUrl?.let { runCatching { RevocationsFeed.httpFetcher(it) }.getOrNull() } ?: { null }, file = cfg.revocationsFile)
     /** La banque libre du service SANS les ids réservables, et les paquets réservés lus à la demande (w20-04). */
     private val reserved = ReservedBank(bank ?: loadBank(cfg.lotsDir), DirReservedSource(cfg.reservedDir), ReservedBank.readIds(cfg.reservedIdsFile))
-    val hub = PlayHub(cfg, clock, reserved.freeBank, verifier, random, roomScope, settings, limits, reserved, feed::current, revocationsReady = { cfg.revocationsUrl == null || feed.usable() })
+    val hub = PlayHub(cfg, clock, reserved.freeBank, verifier, random, roomScope, settings, limits, reserved, feed::current, revocationsReady = { cfg.revocationsUrl == null || feed.usable() }).also { it.guard = guard }
     private val fallback = PlayFallbackController(cfg, hub, limits, verifier, origin)
     private val pages = PlayPageController()
     private val health = HealthController(cfg, hub, limits, notice = feed::staleNotice)
@@ -119,7 +123,9 @@ class PlayServer(
         key!!
         val ticket = req.header("x-play-ticket")
         if (!origin.allows(req.header("origin"), verifier.verify(ticket, System.currentTimeMillis()))) return MiniHttp.json(out, 403, """{"error":"origine refusée"}""")
-        when (limits.acquire(ip)) {
+        val admission = limits.admit(ip)
+        when (admission.verdict) {
+            ConnectionLimits.Verdict.RATE -> { guard.log.event("play.limit.exceeded", "débit de connexions dépassé", mapOf("scope" to "CONNECT", "ip" to ip, "retryAfterMs" to admission.retryAfterMs)); return MiniHttp.json(out, 429, """{"error":"trop de connexions : réessayez dans un instant","retryAfterMs":${admission.retryAfterMs}}""", mapOf("Retry-After" to ((admission.retryAfterMs + 999) / 1000).coerceAtLeast(1).toString())) }
             ConnectionLimits.Verdict.IP_FULL -> return MiniHttp.json(out, 429, """{"error":"trop de connexions depuis cette adresse"}""", mapOf("Retry-After" to "10"))
             ConnectionLimits.Verdict.TOTAL_FULL -> return MiniHttp.json(out, 503, """{"error":"service complet"}""", mapOf("Retry-After" to "30"))
             ConnectionLimits.Verdict.OK -> {}

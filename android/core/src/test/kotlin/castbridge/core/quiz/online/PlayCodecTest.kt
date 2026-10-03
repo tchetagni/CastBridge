@@ -32,7 +32,7 @@ class PlayCodecTest {
         for (s in listOf("not json", "[]", "{}", """{"t":5}""", """{"t":"join"}""", """{"t":"join","code":5}""", """{"t":"act","action":"answer","choice":4}""",
             """{"t":"act","action":"launch"}""", """{"t":"act","action":"answer","choice":"1"}""", """{"t":"relayAct","token":"a","questionId":"q","choice":1,"localElapsedMono":-1}""",
             """{"t":"relayAct","token":"a","questionId":"q","choice":1,"localElapsedMono":60001}""", """{"t":"hello","proto":0}""", """{"t":"hello","proto":1,"caps":"x"}""",
-            """{"t":"resume","roomId":"r","token":"t","lastSeq":-1}""", """{"t":"scope"}""", """{"t":"pong","id":""}""", """{"t":"join","code":"AAAAAAAA","name":"${"x".repeat(17)}"}""",
+            """{"t":"resume","roomId":"r","token":"t","lastSeq":-1}""", """{"t":"scope"}""", """{"t":"pong","id":""}""", """{"t":"join","code":"AAAAAAAA","name":"${"x".repeat(65)}"}""",
             "{\"t\":\"pong\",\"id\":\"a\\u0001b\"}"))
             assertEquals(PlayProtocol.BAD_REQUEST, bad(s).reason, s)
     }

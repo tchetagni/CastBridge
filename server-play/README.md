@@ -27,6 +27,9 @@ Le secret de la session de repli (128 bits, vie courte) n'est JAMAIS dans une ad
 | `CASTBRIDGE_PLAY_MAX_ROOMS` | 400 | salles ; au-delà : `error PLAY_BUSY` |
 | `CASTBRIDGE_PLAY_MAX_CONNECTIONS` | 3000 | connexions ; au-delà : HTTP 503 |
 | `CASTBRIDGE_PLAY_MAX_PER_IP` | 8 | connexions par adresse cliente ; au-delà : HTTP 429 avant l'upgrade |
+| `CASTBRIDGE_PLAY_MAX_PER_IP_SHARED` | 64 | idem pour une adresse partagée (≥ 8 appareils distincts dans une même salle : classe) |
+| `CASTBRIDGE_PLAY_CONN_PER_MIN` | 60 | nouvelles connexions par minute et par adresse (HTTP 429 + `Retry-After`) |
+| `CASTBRIDGE_PLAY_CONN_PER_SEC` | 60 | nouvelles connexions par seconde, toutes adresses |
 | `CASTBRIDGE_PLAY_ORIGINS` | `https://bridge.sti-cm.com` | origines autorisées (liste séparée par des virgules) |
 | `CASTBRIDGE_PLAY_TRUSTED_PROXIES` | OBLIGATOIRE | réseaux dont `X-Forwarded-For` est cru (dernier saut seulement) : en production l'adresse exacte de nginx en /32. Absent ou entrée invalide : le service REFUSE de démarrer. Un `X-Forwarded-For` illisible venant de ce proxy : 400 |
 | `CASTBRIDGE_PLAY_DIRECT` | (vide) | `1` : staging et tests seulement (accès direct, aucun proxy, avertissement au démarrage) ; n'excuse pas une entrée invalide |

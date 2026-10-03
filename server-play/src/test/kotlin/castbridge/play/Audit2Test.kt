@@ -49,13 +49,16 @@ class Audit2Test {
         // trois voisins du même NAT (même adresse publique) tapent 30 codes faux
         repeat(3) { n ->
             val c = ws(srv, "198.51.100.50")
-            repeat(10) { i -> c.send(PlayCodec.encode(ClientMsg.Join("ZZZZ%04d".format(n * 10 + i), "X", null, dev(), false))); assertEquals("PLAY_BAD_CODE", c.await("error")?.get("reason")) }
+            repeat(10) { i -> c.send(PlayCodec.encode(ClientMsg.Join("ZZZZ%04d".format(n * 10 + i), "Xa", null, dev(), false))); assertEquals("PLAY_BAD_CODE", c.await("error")?.get("reason")) }
         }
         val late = ws(srv, "198.51.100.50")
         late.send(PlayCodec.encode(ClientMsg.Join(w["code"] as String, "Neuf", null, dev(), false)))
-        assertEquals("PLAY_BAD_CODE", late.await("error")?.get("reason"), "30 codes faux : l'adresse ne peut plus entrer")
-        late.send(PlayCodec.encode(ClientMsg.Resume(welcome["roomId"] as String, welcome["token"] as String, 0)))
-        assertEquals(welcome["token"], late.await("welcome")?.get("token"), "mais le joueur déjà assis reprend avec son jeton")
+        assertEquals("PLAYER", late.await("welcome")?.get("role"), "30 codes faux d'un voisin : le BON code entre quand même")
+        val wrong = ws(srv, "198.51.100.50")
+        wrong.send(PlayCodec.encode(ClientMsg.Join("ZZZZ9999", "Xa", null, dev(), false)))
+        assertEquals("PLAY_BAD_CODE", wrong.await("error")?.get("reason"), "un code faux de l'adresse bloquée est refusé")
+        wrong.send(PlayCodec.encode(ClientMsg.Resume(welcome["roomId"] as String, welcome["token"] as String, 0)))
+        assertEquals(welcome["token"], wrong.await("welcome")?.get("token"), "et le joueur déjà assis reprend avec son jeton")
     }
 
     @Test fun wrongResumesAreNotCountedByTheService() {
@@ -77,7 +80,7 @@ class Audit2Test {
         repeat(3) { n ->
             val s = ws(srv, "198.51.100.${70 + n}")
             s.send(PlayCodec.encode(ClientMsg.Join(code, "V$n", null, dev(), true))); assertNotNull(s.await("welcome"))
-            repeat(20) { i -> s.send(PlayCodec.encode(ClientMsg.Join("ZZZZ%04d".format(n * 20 + i), "X", null, dev(), false))) }
+            repeat(20) { i -> s.send(PlayCodec.encode(ClientMsg.Join("ZZZZ%04d".format(n * 20 + i), "Xa", null, dev(), false))) }
         }
         Thread.sleep(500)
         assertEquals(code, RoomCodeOf(srv), "60 join faux de connexions assises : le code ne tourne pas")
@@ -185,7 +188,7 @@ class Audit2Test {
     }
 
     @Test fun carriersStayFewAndLatencyLowUnderThreeHundredIdleStreams() {
-        val srv = server(PlayConfig(port = 0, trustedProxies = LOOPBACK, maxPerIp = 5_000, maxConnections = 5_000, ticketPubKeys = listOf(TestKeys.pub), trustedKeys = TestRights.trustedKeys, createsPerIpPerHour = 10_000))
+        val srv = server(PlayConfig(port = 0, trustedProxies = LOOPBACK, maxPerIp = 5_000, maxConnections = 5_000, connPerMinute = 100_000, connPerSecond = 100_000, ticketPubKeys = listOf(TestKeys.pub), trustedKeys = TestRights.trustedKeys, createsPerIpPerHour = 10_000))
         val hello = PlayCodec.encode(ClientMsg.Hello(PlayProtocol.PROTO, PlayProtocol.CAPS, null, null))
         repeat(300) { i ->
             val cred = Cred.of(SseWire.post(srv.port, hello, null, "https://bridge.sti-cm.com", "203.0.113.${i % 200 + 1}"))!!
@@ -225,9 +228,11 @@ class Audit2Test {
         val tv = Fake("tv", "203.0.113.1").also { it.ticket = TestKeys.ticket(); hub.register(it) }
         hub.onText(tv, PlayCodec.encode(TestRights.create()))
         val code = Regex("\"code\":\"([0-9A-Z]{8})\"").find(tv.got.first { it.startsWith("{\"t\":\"welcome\"") })!!.groupValues[1]
-        repeat(PlayProtocol.MAX_BAD_CODES_PER_IP * 4) { i -> hub.onText(Fake("b$i", key(i)).also { hub.register(it) }, PlayCodec.encode(ClientMsg.Join("ZZZZ%04d".format(i), "X", null, dev(), false))) }
+        repeat(PlayProtocol.MAX_BAD_CODES_PER_IP * 4) { i -> hub.onText(Fake("b$i", key(i)).also { hub.register(it) }, PlayCodec.encode(ClientMsg.Join("ZZZZ%04d".format(i), "Xa", null, dev(), false))) }
         val same48 = Fake("late1", key(5_000)).also { hub.register(it) }; hub.onText(same48, PlayCodec.encode(ClientMsg.Join(code, "Awa", null, dev(), false)))
-        assertTrue(same48.got.any { it.contains("PLAY_BAD_CODE") }, "120 codes faux depuis un même /48 (par /64 différents) : tout le /48 est bloqué")
+        assertTrue(same48.got.any { it.startsWith("{\"t\":\"welcome\"") }, "120 codes faux depuis un même /48 : le BON code entre quand même")
+        val wrong48 = Fake("late3", key(5_001)).also { hub.register(it) }; hub.onText(wrong48, PlayCodec.encode(ClientMsg.Join("ZZZZ9999", "Xa", null, dev(), false)))
+        assertTrue(wrong48.got.any { it.contains("PLAY_BAD_CODE") && it.contains("retryAfterMs") }, "un code faux du /48 bloqué est refusé avec une attente structurée")
         val other48 = Fake("late2", key(1, "abce")).also { hub.register(it) }; hub.onText(other48, PlayCodec.encode(ClientMsg.Join(code, "Bello", null, dev(), false)))
         assertTrue(other48.got.any { it.startsWith("{\"t\":\"welcome\"") }, "un autre /48 entre")
     }
