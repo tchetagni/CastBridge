@@ -1,5 +1,6 @@
 package castbridge.play
 
+import castbridge.play.entitlement.TicketVerifier
 import java.io.File
 import kotlin.test.Test
 import kotlin.test.assertEquals

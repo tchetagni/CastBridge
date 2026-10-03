@@ -5,7 +5,7 @@ object PlayProtocol {
     const val PROTO = 1
     const val NAME = "play-v1"
     /** Capacités annoncées dans `hello` ; le serveur répond avec l'intersection. */
-    val CAPS = listOf("play1", "sse", "longpoll", "relay", "spectate")
+    val CAPS = listOf("play1", "sse", "longpoll", "relay", "spectate", "play-ticket")
 
     /** Taille maximale d'un message client (octets UTF-8). */
     const val MAX_MESSAGE_BYTES = 2_048
@@ -14,6 +14,10 @@ object PlayProtocol {
     const val MAX_TOKEN = 64
     const val MAX_ARG = 256
     const val MAX_TICKET = 1_200
+    /** w20-04 : un jeton `cbx1` joint à `create` ; au plus [MAX_RENTALS] jetons de location ; `create` seul peut dépasser [MAX_MESSAGE_BYTES] (jusqu'à [MAX_CREATE_BYTES]). */
+    const val MAX_ACTIVATION = 4_096
+    const val MAX_RENTALS = 2
+    const val MAX_CREATE_BYTES = 16_384
     const val MAX_CAPS = 12
     const val MAX_REASON = 64
     const val MAX_ELAPSED_MS = 60_000L
@@ -45,7 +49,9 @@ sealed class ClientMsg {
 
     data class Hello(val proto: Int, val caps: List<String>, val deviceHash: String?, val ticket: String?) : ClientMsg() { override val type get() = "hello" }
     /** Premier message de l'hôte (TV) : crée la salle ; `mode` = MILLIONAIRE | DUEL (facultatif). `name` null = la TV ne joue pas. */
-    data class Create(val name: String?, val mode: String?) : ClientMsg() { override val type get() = "create" }
+    data class Create(val name: String?, val mode: String?,
+                      /** w20-04 (additif, capacité `play-ticket`) : l'activation `cbx1` de la TV (preuve d'édition, évaluée par le SERVICE avec son horloge) et, au plus [PlayProtocol.MAX_RENTALS], ses lignes de location signées (autres activations `cbx1`). */
+                      val activation: String? = null, val rentals: List<String> = emptyList()) : ClientMsg() { override val type get() = "create" }
     data class Join(val code: String, val name: String?, val token: String?, val deviceHash: String?, val spectate: Boolean) : ClientMsg() { override val type get() = "join" }
     data class Resume(val roomId: String, val token: String, val lastSeq: Long) : ClientMsg() { override val type get() = "resume" }
     data class Act(val questionId: String?, val action: String, val choice: Int?, val arg: String?, val seq: Long) : ClientMsg() { override val type get() = "act" }

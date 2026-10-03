@@ -16,18 +16,27 @@ import java.util.concurrent.LinkedBlockingQueue
 import java.util.concurrent.TimeUnit
 import java.util.concurrent.atomic.AtomicBoolean
 
-/** Clé de test + émetteur de tickets de test : le service vérifie VRAIMENT la signature (w20-04 remplacera l'émetteur, pas le vérificateur). */
+/** Clé de test + émetteur de tickets `cbp1` de test : le service vérifie VRAIMENT la signature (l'émetteur réel est l'API principale, w20-04). */
 object TestKeys {
     val pair: KeyPair = KeyPairGenerator.getInstance("Ed25519").generateKeyPair()
     /** Clé publique au format du service : SPKI X.509 en Base64. */
     val pub: String = Base64.getEncoder().encodeToString(pair.public.encoded)
     private val b64 = Base64.getUrlEncoder().withoutPadding()
+    private val rnd = java.security.SecureRandom()
 
-    fun ticket(now: Long = System.currentTimeMillis(), lifeMs: Long = 60_000, iat: Long = now, pair: KeyPair = this.pair): String {
-        val payload = b64.encodeToString("""{"iat":$iat,"exp":${iat + lifeMs}}""".toByteArray())
-        val head = "v1.$payload"
-        val sig = Signature.getInstance("Ed25519").run { initSign(pair.private); update(head.toByteArray()); sign() }
-        return head + "." + b64.encodeToString(sig)
+    fun hex(n: Int) = ByteArray(n).also { rnd.nextBytes(it) }.joinToString("") { "%02x".format(it) }
+
+    /** Un ticket `cbp1` : appareil attesté frais par défaut (un sujet par ticket), `jti` de 128 bits frais, code d'appareil de la TV de test. */
+    fun ticket(now: Long = System.currentTimeMillis(), lifeMs: Long = 60_000, iat: Long = now, pair: KeyPair = this.pair, deviceId: String = "dev-" + hex(8),
+               deviceCode: String? = TestRights.CODE, aud: String = "castbridge-play", blocked: Boolean = false, jti: String? = hex(16)): String {
+        val fields = ArrayList<String>()
+        fields += "\"aud\":\"$aud\""; fields += "\"deviceId\":\"$deviceId\""; fields += "\"blocked\":$blocked"; fields += "\"country\":\"CM\""
+        if (deviceCode != null) fields += "\"deviceCode\":\"$deviceCode\""
+        fields += "\"iat\":$iat"; fields += "\"exp\":${iat + lifeMs}"
+        if (jti != null) fields += "\"jti\":\"$jti\""
+        val payload = b64.encodeToString(("{" + fields.joinToString(",") + "}").toByteArray())
+        val sig = Signature.getInstance("Ed25519").run { initSign(pair.private); update("castbridge-play-ticket-v1\ncbp1.$payload".toByteArray()); sign() }
+        return "cbp1.$payload." + b64.encodeToString(sig)
     }
 }
 

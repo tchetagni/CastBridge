@@ -1,5 +1,6 @@
 package castbridge.play
 
+import castbridge.play.entitlement.TicketVerifier
 import castbridge.core.quiz.EmbeddedQuestionSource
 import castbridge.core.quiz.online.ClientMsg
 import castbridge.core.quiz.online.PlayCodec
@@ -32,16 +33,15 @@ class MemoryProfileTest {
     @Test fun hundredRoomsOfEightClientsFitInMemory() {
         val bank = EmbeddedQuestionSource(levels = null).bank()
         val limits = ConnectionLimits(100_000, 100_000)
-        val hub = PlayHub(PlayConfig(maxRooms = 400, ticketPubKeys = listOf(TestKeys.pub)), { 1_000L }, bank, TicketVerifier(listOf(TestKeys.pub)), limits = limits)
-        val ticket = TestKeys.ticket()
+        val hub = PlayHub(PlayConfig(maxRooms = 400, ticketPubKeys = listOf(TestKeys.pub), trustedKeys = TestRights.trustedKeys, createsPerIpPerHour = 10_000), { 1_000L }, bank, TicketVerifier(listOf(TestKeys.pub)), limits = limits)
         val keep = ArrayList<PlayConn>()
         // échauffement : une salle jouée puis fermée charge les classes et remplit les caches avant la mesure
-        val warm = PlayHub(PlayConfig(ticketPubKeys = listOf(TestKeys.pub)), { 1_000L }, bank, TicketVerifier(listOf(TestKeys.pub)), limits = limits)
-        Sink("warm").also { it.ticket = ticket; warm.register(it); warm.onText(it, PlayCodec.encode(ClientMsg.Create(null, "DUEL"))); warm.onText(it, PlayCodec.encode(ClientMsg.Act(null, "start", null, "7", 1))); warm.closeAll() }
+        val warm = PlayHub(PlayConfig(ticketPubKeys = listOf(TestKeys.pub), trustedKeys = TestRights.trustedKeys, createsPerIpPerHour = 10_000), { 1_000L }, bank, TicketVerifier(listOf(TestKeys.pub)), limits = limits)
+        Sink("warm").also { it.ticket = TestKeys.ticket(); warm.register(it); warm.onText(it, PlayCodec.encode(TestRights.create())); warm.onText(it, PlayCodec.encode(ClientMsg.Act(null, "start", null, "7", 1))); warm.closeAll() }
         val before = used()
         repeat(100) { r ->
-            val tv: Sink = Sink("tv$r").also { it.ticket = ticket; hub.register(it); keep += it }
-            hub.onText(tv, PlayCodec.encode(ClientMsg.Create(null, "DUEL")))
+            val tv: Sink = Sink("tv$r").also { it.ticket = TestKeys.ticket(); hub.register(it); keep += it }
+            hub.onText(tv, PlayCodec.encode(TestRights.create()))
             val code = tv.code!!
             repeat(8) { p ->
                 val c = Sink("c$r-$p").also { hub.register(it); keep += it }

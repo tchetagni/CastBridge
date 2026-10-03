@@ -6,6 +6,11 @@ import castbridge.core.quiz.QuizBank
 import castbridge.core.quiz.QuizLotFormat
 import castbridge.core.quiz.online.PlayScope
 import castbridge.core.quiz.online.ServerRoom
+import castbridge.play.entitlement.DirReservedSource
+import castbridge.play.entitlement.ReservedBank
+import castbridge.play.entitlement.RevocationsFeed
+import castbridge.play.entitlement.TicketVerifier
+import castbridge.play.entitlement.TrustedIssuers
 import java.io.File
 import java.io.IOException
 import java.net.InetAddress
@@ -32,10 +37,13 @@ class PlayServer(
     private val limits = ConnectionLimits(cfg.maxPerIp, cfg.maxConnections)
     private val verifier = TicketVerifier(cfg.ticketPubKeys)
     private val origin = OriginCheck(cfg.origins)
-    val hub = PlayHub(cfg, clock, bank ?: loadBank(cfg.lotsDir), verifier, random, roomScope, settings, limits)
+    private val feed = RevocationsFeed(TrustedIssuers.parse(cfg.trustedKeys.joinToString(",")).ring, cfg.revocationsUrl?.let { runCatching { RevocationsFeed.httpFetcher(it) }.getOrNull() } ?: { null })
+    /** La banque libre du service SANS les ids réservables, et les paquets réservés lus à la demande (w20-04). */
+    private val reserved = ReservedBank(bank ?: loadBank(cfg.lotsDir), DirReservedSource(cfg.reservedDir), ReservedBank.readIds(cfg.reservedIdsFile))
+    val hub = PlayHub(cfg, clock, reserved.freeBank, verifier, random, roomScope, settings, limits, reserved, feed::current)
     private val fallback = PlayFallbackController(cfg, hub, limits, verifier, origin)
     private val pages = PlayPageController()
-    private val health = HealthController(cfg, hub, limits)
+    private val health = HealthController(cfg, hub, limits, notice = feed::staleNotice)
     private val ticker = Ticker(cfg.tickMs) { hub.tick() }
     private val sockets = ConcurrentHashMap.newKeySet<Socket>()
     private val raw = Semaphore(cfg.maxConnections * 2)
@@ -50,8 +58,17 @@ class PlayServer(
         server = ServerSocket().apply { reuseAddress = true; bind(InetSocketAddress(InetAddress.getByName(cfg.bind), cfg.port), 256) }
         running = true
         ticker.start()
+        if (cfg.revocationsUrl != null) Thread.ofPlatform().name("play-revocations").daemon(true).start { refreshRevocations() }
         Thread.ofPlatform().name("play-accept").daemon(true).start { acceptLoop() }
         return this
+    }
+
+    /** Relit la liste signée des révocations toutes les 15 min (5 min après un échec) ; seul appel sortant du service, en lecture publique. */
+    private fun refreshRevocations() {
+        while (running) {
+            val ok = feed.refresh()
+            try { Thread.sleep(if (ok) feed.refreshMs else 5 * 60_000L) } catch (_: InterruptedException) { return }
+        }
     }
 
     private fun acceptLoop() {

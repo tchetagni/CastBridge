@@ -1,5 +1,6 @@
 package castbridge.play
 
+import castbridge.play.entitlement.TicketVerifier
 import castbridge.core.quiz.Json
 import castbridge.core.quiz.online.ClientMsg
 import castbridge.core.quiz.online.PlayCodec
@@ -23,7 +24,7 @@ import kotlin.test.assertTrue
 class AuditFixesTest {
     private val servers = ArrayList<PlayServer>()
     private val closeables = ArrayList<AutoCloseable>()
-    private fun server(cfg: PlayConfig = PlayConfig(port = 0, trustedProxies = LOOPBACK, ticketPubKeys = listOf(TestKeys.pub))) = PlayServer(cfg).also { it.start(); servers += it }
+    private fun server(cfg: PlayConfig = PlayConfig(port = 0, trustedProxies = LOOPBACK, ticketPubKeys = listOf(TestKeys.pub), trustedKeys = TestRights.trustedKeys, createsPerIpPerHour = 10_000)) = PlayServer(cfg).also { it.start(); servers += it }
     @AfterTest fun stop() { closeables.forEach { runCatching { it.close() } }; servers.forEach { it.close() }; closeables.clear(); servers.clear() }
     private fun raw(srv: PlayServer, autoPong: Boolean = false, n: Int = closeables.size + 1, connection: String = "Upgrade", key: String? = null) =
         RawWs(srv.port, mapOf("Origin" to "https://bridge.sti-cm.com", "X-Forwarded-For" to "203.0.113.${n % 250 + 1}"), autoPong = autoPong, connection = connection, keyOverride = key).also { closeables += it }
@@ -66,7 +67,7 @@ class AuditFixesTest {
     // ---- B2 : fils virtuels non épinglés ----
 
     @Test fun threeHundredIdleStreamsAndTwentyMuteWebSocketsDoNotStarveNewConnections() {
-        val srv = server(PlayConfig(port = 0, trustedProxies = LOOPBACK, maxPerIp = 5_000, maxConnections = 5_000, ticketPubKeys = listOf(TestKeys.pub)))
+        val srv = server(PlayConfig(port = 0, trustedProxies = LOOPBACK, maxPerIp = 5_000, maxConnections = 5_000, ticketPubKeys = listOf(TestKeys.pub), trustedKeys = TestRights.trustedKeys, createsPerIpPerHour = 10_000))
         val hello = PlayCodec.encode(ClientMsg.Hello(PlayProtocol.PROTO, PlayProtocol.CAPS, null, null))
         val socks = ArrayList<Socket>()
         repeat(300) { i ->
@@ -112,7 +113,7 @@ class AuditFixesTest {
     }
 
     @Test fun ipv6ClientsOfOneSlash64SharetheSocketLevelLimit() {
-        val srv = server(PlayConfig(port = 0, trustedProxies = LOOPBACK, maxPerIp = 3, ticketPubKeys = listOf(TestKeys.pub)))
+        val srv = server(PlayConfig(port = 0, trustedProxies = LOOPBACK, maxPerIp = 3, ticketPubKeys = listOf(TestKeys.pub), trustedKeys = TestRights.trustedKeys, createsPerIpPerHour = 10_000))
         repeat(3) { WsWire(srv.port, xff = "2001:db8:5:5::$it").also { w -> closeables += AutoCloseable { w.close() } } }
         val e = runCatching { WsWire(srv.port, xff = "2001:db8:5:5:9::77") }.exceptionOrNull() as? WsRefused
         assertEquals(429, e?.status)
@@ -124,7 +125,7 @@ class AuditFixesTest {
         val srv = server()
         SeenUrls.all.clear()
         val tv = WsWire(srv.port, xff = "203.0.113.1").also { w -> closeables += AutoCloseable { w.close() } }
-        tv.send(PlayCodec.encode(ClientMsg.Hello(PlayProtocol.PROTO, PlayProtocol.CAPS, null, TestKeys.ticket()))); tv.send(PlayCodec.encode(ClientMsg.Create(null, "DUEL")))
+        tv.send(PlayCodec.encode(ClientMsg.Hello(PlayProtocol.PROTO, PlayProtocol.CAPS, null, TestKeys.ticket()))); tv.send(PlayCodec.encode(TestRights.create()))
         val code = tv.await("welcome")!!["code"] as String
         val sse = SseWire(srv.port, xff = "203.0.113.2").also { closeables += AutoCloseable { it.close() } }
         sse.send(PlayCodec.encode(ClientMsg.Join(code, "Awa", null, dev(), false))); assertNotNull(sse.await("welcome"))
@@ -195,7 +196,7 @@ class AuditFixesTest {
     }
 
     @Test fun slowRequestHeadIsCutByAGlobalDeadline() {
-        val srv = server(PlayConfig(port = 0, trustedProxies = LOOPBACK, headDeadlineMs = 800, ticketPubKeys = listOf(TestKeys.pub)))
+        val srv = server(PlayConfig(port = 0, trustedProxies = LOOPBACK, headDeadlineMs = 800, ticketPubKeys = listOf(TestKeys.pub), trustedKeys = TestRights.trustedKeys, createsPerIpPerHour = 10_000))
         Socket("127.0.0.1", srv.port).use { s ->
             s.soTimeout = 5_000
             val out = s.getOutputStream(); val t0 = System.currentTimeMillis()
@@ -216,7 +217,7 @@ class AuditFixesTest {
     }
 
     @Test fun fallbackBacklogCountsUtf8BytesNotCharacters() {
-        val cfg = PlayConfig(port = 0, outboxMaxBytes = 100, ticketPubKeys = listOf(TestKeys.pub))
+        val cfg = PlayConfig(port = 0, outboxMaxBytes = 100, ticketPubKeys = listOf(TestKeys.pub), trustedKeys = TestRights.trustedKeys, createsPerIpPerHour = 10_000)
         val limits = ConnectionLimits(8, 100)
         val hub = PlayHub(cfg, { 0L }, castbridge.core.quiz.EmbeddedQuestionSource(levels = null).bank(), TicketVerifier(emptyList()), limits = limits)
         val fb = FbConn("x", "1.2.3.4", cfg, PlayFallbackController(cfg, hub, limits, TicketVerifier(emptyList()), OriginCheck(emptySet())))
@@ -226,7 +227,7 @@ class AuditFixesTest {
     @Test fun defaultsTrustNoProxyAndTheConnectionSlotNeverLeaks() {
         assertTrue(PlayConfig().trustedProxies.isEmpty(), "aucun proxy de confiance par défaut")
         assertTrue(PlayConfig.fromEnv({ k -> if (k == "CASTBRIDGE_PLAY_DIRECT") "1" else null }).trustedProxies.isEmpty())
-        val srv = server(PlayConfig(port = 0, trustedProxies = LOOPBACK, maxPerIp = 2, ticketPubKeys = listOf(TestKeys.pub)))
+        val srv = server(PlayConfig(port = 0, trustedProxies = LOOPBACK, maxPerIp = 2, ticketPubKeys = listOf(TestKeys.pub), trustedKeys = TestRights.trustedKeys, createsPerIpPerHour = 10_000))
         repeat(20) { runCatching { RawWs(srv.port, mapOf("Origin" to "https://evil.example")).close() } }   // refusées avant l'acquisition
         repeat(20) { Socket("127.0.0.1", srv.port).use { s -> s.getOutputStream().write("GET /play/ws HTTP/1.1\r\nHost: x\r\nUpgrade: websocket\r\nConnection: Upgrade\r\nSec-WebSocket-Version: 13\r\nSec-WebSocket-Key: AAAA\r\nOrigin: https://bridge.sti-cm.com\r\n\r\n".toByteArray()); s.getInputStream().readNBytes(20) } }
         Thread.sleep(300)

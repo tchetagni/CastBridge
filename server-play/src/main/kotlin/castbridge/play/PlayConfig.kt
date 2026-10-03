@@ -48,13 +48,26 @@ class PlayConfig(
     /** Clés publiques Ed25519 des tickets (Base64 : 32 octets bruts ou SPKI X.509). Vide = aucune salle ne peut être créée. */
     val ticketPubKeys: List<String> = emptyList(),
     val lotsDir: File? = null,
+    /** Clés PUBLIQUES des émetteurs d'activations de confiance (`nom:clé:PORTÉES`, w20-04) : sans elles, aucune activation n'est valable, donc aucune salle. */
+    val trustedKeys: List<String> = emptyList(),
+    /** Paquets réservés (lecture seule) et gel des ids réservables ; absents = aucune question réservée servie. */
+    val reservedDir: File? = null,
+    val reservedIdsFile: File? = null,
+    /** Adresse de la liste signée des révocations (lecture publique, https) ; absente = aucune relecture. */
+    val revocationsUrl: String? = null,
+    /** Salles ouvertes en même temps par appareil attesté (sujet du ticket). */
+    val maxRoomsPerSubject: Int = 2,
+    /** Créations de salle (tickets valides présentés) par adresse cliente (/64 en IPv6) et par heure. */
+    val createsPerIpPerHour: Int = 20,
+    /** `jti` mémorisés jusqu'à leur échéance (plafond dur, plein = refus). */
+    val maxUsedTickets: Int = 20_000,
     val tickMs: Long = 200,
     val pingMs: Long = 25_000,
     val pongTimeoutMs: Long = 40_000,
     val ratePerSec: Int = castbridge.core.quiz.online.PlayProtocol.RATE_PER_SEC,
     val burst: Int = castbridge.core.quiz.online.PlayProtocol.BURST,
     val outboxMaxBytes: Int = 64 * 1024,
-    val maxFrameBytes: Int = 8 * 1024,
+    val maxFrameBytes: Int = 20 * 1024,   // `create` porte une activation (≤ 16 Ko, PlayProtocol.MAX_CREATE_BYTES)
     val pollMs: Long = 25_000,
     /** Échéance GLOBALE de lecture de la tête d'une requête (anti-goutte-à-goutte). */
     val headDeadlineMs: Long = 10_000,
@@ -66,11 +79,12 @@ class PlayConfig(
     val version: String = VERSION,
 ) {
     companion object {
-        const val VERSION = "w20-03"
+        const val VERSION = "w20-04"
         /** Les SEULES variables d'environnement lues par le service. */
         val ENV_NAMES = listOf("CASTBRIDGE_PLAY_PORT", "CASTBRIDGE_PLAY_BIND", "CASTBRIDGE_PLAY_MAX_ROOMS", "CASTBRIDGE_PLAY_MAX_CONNECTIONS", "CASTBRIDGE_PLAY_MAX_PER_IP",
             "CASTBRIDGE_PLAY_ORIGINS", "CASTBRIDGE_PLAY_TRUSTED_PROXIES", "CASTBRIDGE_PLAY_LOTS_DIR", "CASTBRIDGE_PLAY_TICKET_PUBKEY", "CASTBRIDGE_PLAY_TICKET_PUBKEY_2",
-            "CASTBRIDGE_PLAY_TICKET_PUBKEY_3", "CASTBRIDGE_PLAY_DIRECT")
+            "CASTBRIDGE_PLAY_TICKET_PUBKEY_3", "CASTBRIDGE_PLAY_TRUSTED_KEYS", "CASTBRIDGE_PLAY_RESERVED_DIR", "CASTBRIDGE_PLAY_RESERVED_IDS", "CASTBRIDGE_PLAY_REVOCATIONS_URL",
+            "CASTBRIDGE_PLAY_MAX_ROOMS_PER_SUBJECT", "CASTBRIDGE_PLAY_CREATES_PER_IP_HOUR", "CASTBRIDGE_PLAY_MAX_USED_TICKETS", "CASTBRIDGE_PLAY_DIRECT")
 
         /**
          * Les réseaux de confiance sont OBLIGATOIRES (adresse exacte de nginx en /32) : absents, le service refuse de démarrer, sauf `CASTBRIDGE_PLAY_DIRECT=1` (staging, tests :
@@ -106,6 +120,13 @@ class PlayConfig(
                 trustedProxies = trusted,
                 ticketPubKeys = listOf("CASTBRIDGE_PLAY_TICKET_PUBKEY", "CASTBRIDGE_PLAY_TICKET_PUBKEY_2", "CASTBRIDGE_PLAY_TICKET_PUBKEY_3").mapNotNull { e(it) },
                 lotsDir = e("CASTBRIDGE_PLAY_LOTS_DIR")?.let { File(it) },
+                trustedKeys = e("CASTBRIDGE_PLAY_TRUSTED_KEYS")?.split(',')?.map { it.trim() }?.filter { it.isNotEmpty() } ?: d.trustedKeys,
+                reservedDir = e("CASTBRIDGE_PLAY_RESERVED_DIR")?.let { File(it) },
+                reservedIdsFile = e("CASTBRIDGE_PLAY_RESERVED_IDS")?.let { File(it) } ?: e("CASTBRIDGE_PLAY_RESERVED_DIR")?.let { File(it, "reserved-ids.json") },
+                revocationsUrl = e("CASTBRIDGE_PLAY_REVOCATIONS_URL"),
+                maxRoomsPerSubject = e("CASTBRIDGE_PLAY_MAX_ROOMS_PER_SUBJECT")?.toIntOrNull()?.coerceIn(1, 20) ?: d.maxRoomsPerSubject,
+                createsPerIpPerHour = e("CASTBRIDGE_PLAY_CREATES_PER_IP_HOUR")?.toIntOrNull()?.coerceIn(1, 10_000) ?: d.createsPerIpPerHour,
+                maxUsedTickets = e("CASTBRIDGE_PLAY_MAX_USED_TICKETS")?.toIntOrNull()?.coerceIn(100, 500_000) ?: d.maxUsedTickets,
             )
         }
     }

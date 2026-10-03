@@ -19,12 +19,12 @@ class DrainTest {
     private fun host(srv: PlayServer, ip: String): Pair<WsWire, Map<*, *>> {
         val tv = WsWire(srv.port, xff = ip).also { wires += it }
         tv.send(PlayCodec.encode(ClientMsg.Hello(PlayProtocol.PROTO, PlayProtocol.CAPS, null, TestKeys.ticket())))
-        tv.send(PlayCodec.encode(ClientMsg.Create(null, "DUEL")))
+        tv.send(PlayCodec.encode(TestRights.create()))
         return tv to tv.await("welcome")!!
     }
 
     @Test fun drainingRefusesNewRoomsTellsTheExistingOnesAndClosesAfterTheGrace() {
-        val srv = PlayServer(PlayConfig(port = 0, trustedProxies = LOOPBACK, ticketPubKeys = listOf(TestKeys.pub))).start().also { servers += it }
+        val srv = PlayServer(PlayConfig(port = 0, trustedProxies = LOOPBACK, ticketPubKeys = listOf(TestKeys.pub), trustedKeys = TestRights.trustedKeys, createsPerIpPerHour = 10_000)).start().also { servers += it }
         val (tv, w) = host(srv, "203.0.113.1")
         val p = WsWire(srv.port, xff = "203.0.113.2").also { wires += it }
         p.send(PlayCodec.encode(ClientMsg.Join(w["code"] as String, "Awa", null, dev(), false))); assertNotNull(p.await("welcome"))
@@ -35,7 +35,7 @@ class DrainTest {
             assertTrue((e["message"] as String).contains("maintenance"), "message en français : ${e["message"]}")
         }
         val late = WsWire(srv.port, xff = "203.0.113.3").also { wires += it }
-        late.send(PlayCodec.encode(ClientMsg.Hello(PlayProtocol.PROTO, PlayProtocol.CAPS, null, TestKeys.ticket()))); late.send(PlayCodec.encode(ClientMsg.Create(null, "DUEL")))
+        late.send(PlayCodec.encode(ClientMsg.Hello(PlayProtocol.PROTO, PlayProtocol.CAPS, null, TestKeys.ticket()))); late.send(PlayCodec.encode(TestRights.create()))
         assertEquals("PLAY_MAINTENANCE", late.await("error")?.get("reason"))
         assertEquals(1, srv.rooms().size, "aucune nouvelle salle pendant l'arrêt")
         val t0 = System.currentTimeMillis()

@@ -15,7 +15,7 @@ import kotlin.test.assertTrue
  */
 class PlayLoopbackTest {
     private val servers = ArrayList<PlayServer>()
-    private fun server(cfg: PlayConfig = PlayConfig(port = 0, trustedProxies = LOOPBACK, ticketPubKeys = listOf(TestKeys.pub))) = PlayServer(cfg).also { it.start(); servers += it }
+    private fun server(cfg: PlayConfig = PlayConfig(port = 0, trustedProxies = LOOPBACK, ticketPubKeys = listOf(TestKeys.pub), trustedKeys = TestRights.trustedKeys, createsPerIpPerHour = 10_000)) = PlayServer(cfg).also { it.start(); servers += it }
     @AfterTest fun stop() { servers.forEach { it.close() }; servers.clear() }
 
     @Test fun threeTransportsPlayTheSameDuelWithTheSameResult() {
@@ -31,17 +31,17 @@ class PlayLoopbackTest {
         val srv = server()
         val w = WsWire(srv.port)
         w.send(PlayCodec.encode(ClientMsg.Hello(PlayProtocol.PROTO, PlayProtocol.CAPS, null, TestKeys.ticket(now = System.currentTimeMillis() - 120_000, lifeMs = 60_000))))
-        w.send(PlayCodec.encode(ClientMsg.Create(null, "DUEL")))
+        w.send(PlayCodec.encode(TestRights.create()))
         assertEquals("PLAY_TICKET_REFUSED", w.await("error")?.get("reason"))
         assertTrue(srv.rooms().isEmpty(), "aucune salle sans ticket valide")
         // sans ticket du tout
-        val w2 = WsWire(srv.port); w2.send(PlayCodec.encode(ClientMsg.Create(null, "DUEL")))
+        val w2 = WsWire(srv.port); w2.send(PlayCodec.encode(TestRights.create()))
         assertEquals("PLAY_TICKET_REFUSED", w2.await("error")?.get("reason")); assertTrue(srv.rooms().isEmpty())
         // ticket signé par une AUTRE clé
         val other = java.security.KeyPairGenerator.getInstance("Ed25519").generateKeyPair()
         val w3 = WsWire(srv.port)
         w3.send(PlayCodec.encode(ClientMsg.Hello(PlayProtocol.PROTO, PlayProtocol.CAPS, null, TestKeys.ticket(pair = other))))
-        w3.send(PlayCodec.encode(ClientMsg.Create(null, "DUEL")))
+        w3.send(PlayCodec.encode(TestRights.create()))
         assertEquals("PLAY_TICKET_REFUSED", w3.await("error")?.get("reason")); assertTrue(srv.rooms().isEmpty())
         listOf(w, w2, w3).forEach { it.close() }
     }
@@ -52,7 +52,7 @@ class PlayLoopbackTest {
         w.send(PlayCodec.encode(ClientMsg.Hello(2, PlayProtocol.CAPS, null, TestKeys.ticket())))
         val e = w.await("error")!!
         assertEquals("UNSUPPORTED", e["reason"]); assertEquals(false, e["retryable"])
-        w.send(PlayCodec.encode(ClientMsg.Create(null, "DUEL")))
+        w.send(PlayCodec.encode(TestRights.create()))
         assertEquals("PLAY_TICKET_REFUSED", w.await("error")?.get("reason"), "le ticket d'un hello refusé n'est pas retenu")
         w.close()
     }
@@ -61,7 +61,7 @@ class PlayLoopbackTest {
         val srv = server()
         val tv = WsWire(srv.port)
         tv.send(PlayCodec.encode(ClientMsg.Hello(PlayProtocol.PROTO, PlayProtocol.CAPS, null, TestKeys.ticket())))
-        tv.send(PlayCodec.encode(ClientMsg.Create(null, "DUEL")))
+        tv.send(PlayCodec.encode(TestRights.create()))
         val w = tv.await("welcome")!!
         assertEquals("HOST", w["role"]); assertEquals(1, srv.rooms().size)
         val p = WsWire(srv.port)

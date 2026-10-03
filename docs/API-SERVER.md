@@ -382,6 +382,15 @@ scp castbridge-contenus-libres.zip server:$CASTBRIDGE_FREE_CONTENT_FILE
 
 Le fichier est lu à chaque requête (du disque, avec cache en mémoire basé sur path+mtime+size). Il n'y a pas de redémarrage du serveur à faire.
 
+## 4 quater. Ticket de jeu (appareils, w20-04)
+
+`POST /api/v1/play/ticket` avec `Authorization: Bearer <deviceToken>` (celui de `/api/v1/devices/*`) et le corps `{"deviceCode":"XXXX-XXXX-XXXX-XXXX"}` (code d'appareil de la TV) :
+
+- **200** `{"ticket":"cbp1.<charge>.<signature>","expiresAt":<ms>,"ttlSeconds":600}` : une **attestation d'appareil** (`aud`, `deviceId`, `blocked`, `country`, `deviceCode`, `iat`, `exp`, `jti` de 128 bits), signée Ed25519 par une clé **dédiée** (`castbridge.play.ticket-key-file`, secret `play-ticket.key`, jamais la clé des mises à jour ni celle des licences). **Aucune édition, aucun droit** : l'API ne connaît pas le cœur des licences ; le service `castbridge-play` évalue l'activation `cbx1` que la TV joint à `create`.
+- **401** sans `Bearer` valide · **403** appareil bloqué · **400** code d'appareil absent ou invalide · **429** au 21e ticket de l'heure pour un appareil (`castbridge.play.per-device-per-hour`) · **503** « Ticket désactivé » si le fichier de clé est absent ou illisible.
+- Le ticket est à **usage unique** côté service (`jti`), valable 600 s ; la clé publique correspondante est `CASTBRIDGE_PLAY_TICKET_PUBKEY` du service (jamais la privée). Génération de la paire : `tools/play/gen-ticket-keypair.sh` ; déclaration du secret : `backend/docker-compose.yml` (`play_ticket_key`, non monté tant que l'exploitant ne l'a pas décidé) ; étape d'exploitation : `docs/PLAY-OPS-REQUIREMENTS.md`.
+- Tests : `PlayTicketControllerTest`, `PlayTicketDisabledTest`, `PlayTicketGoldenTest` (le ticket Java est vérifié par le vérificateur Kotlin du service : `TicketGoldenTest`).
+
 ## 5. Divers
 
 - `GET /admin` : interface d'administration web (connexion par identifiant/mot de passe, voir `backend/README.md`).

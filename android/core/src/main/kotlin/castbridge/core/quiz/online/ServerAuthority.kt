@@ -64,7 +64,7 @@ class ServerAuthority(private val transport: PlayTransport, override val scope: 
     }
 
     fun hello(deviceHash: String? = null, ticket: String? = null) { send(ClientMsg.Hello(PlayProtocol.PROTO, PlayProtocol.CAPS, deviceHash, ticket)) }
-    fun create(name: String?, mode: String?) { send(ClientMsg.Create(name, mode)) }
+    fun create(name: String?, mode: String?, activation: String? = null, rentals: List<String> = emptyList()) { send(ClientMsg.Create(name, mode, activation, rentals)) }
     fun resume(roomId: String, token: String, lastSeq: Long) { send(ClientMsg.Resume(roomId, token, lastSeq)) }
     fun setScope(open: Boolean) { send(ClientMsg.Scope(open)) }
     fun relay(token: String, questionId: String, choice: Int, localElapsedMono: Long) { send(ClientMsg.RelayAct(token, questionId, choice, localElapsedMono, ++clientSeq)) }

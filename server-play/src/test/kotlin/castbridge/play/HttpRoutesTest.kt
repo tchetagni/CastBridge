@@ -18,7 +18,7 @@ import kotlin.test.assertTrue
 class HttpRoutesTest {
     private val servers = ArrayList<PlayServer>()
     private val closeables = ArrayList<Wire>()
-    private fun server() = PlayServer(PlayConfig(port = 0, trustedProxies = LOOPBACK, ticketPubKeys = listOf(TestKeys.pub))).also { it.start(); servers += it }
+    private fun server() = PlayServer(PlayConfig(port = 0, trustedProxies = LOOPBACK, ticketPubKeys = listOf(TestKeys.pub), trustedKeys = TestRights.trustedKeys, createsPerIpPerHour = 10_000)).also { it.start(); servers += it }
     @AfterTest fun stop() { closeables.forEach { it.close() }; servers.forEach { it.close() } }
     private val http = HttpClient.newHttpClient()
     private fun get(srv: PlayServer, path: String, method: String = "GET"): HttpResponse<String> =
@@ -56,7 +56,7 @@ class HttpRoutesTest {
     @Test fun healthIsJsonWithoutIpCodeOrToken() {
         val srv = server()
         val tv = WsWire(srv.port, xff = "203.0.113.77").also { closeables += it }
-        tv.send(PlayCodec.encode(ClientMsg.Hello(PlayProtocol.PROTO, PlayProtocol.CAPS, null, TestKeys.ticket()))); tv.send(PlayCodec.encode(ClientMsg.Create(null, "DUEL")))
+        tv.send(PlayCodec.encode(ClientMsg.Hello(PlayProtocol.PROTO, PlayProtocol.CAPS, null, TestKeys.ticket()))); tv.send(PlayCodec.encode(TestRights.create()))
         val w = tv.await("welcome")!!
         val r = get(srv, "/play/health")
         assertEquals(200, r.statusCode()); assertEquals("no-store", r.headers().firstValue("cache-control").get())

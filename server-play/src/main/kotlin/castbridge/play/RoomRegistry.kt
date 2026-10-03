@@ -1,15 +1,25 @@
 package castbridge.play
 
+import castbridge.core.owner.RevocationState
 import castbridge.core.quiz.QuizBank
 import castbridge.core.quiz.online.BadCodeCounter
 import castbridge.core.quiz.online.ClientMsg
 import castbridge.core.quiz.online.PlayCodec
 import castbridge.core.quiz.online.PlayProtocol
+import castbridge.core.quiz.online.HostEdition
 import castbridge.core.quiz.online.PlayReason
+import castbridge.core.quiz.online.PlayRules
 import castbridge.core.quiz.online.PlayScope
 import castbridge.core.quiz.online.RoomCode
 import castbridge.core.quiz.online.ServerMsg
 import castbridge.core.quiz.online.ServerRoom
+import castbridge.play.entitlement.DayCounter
+import castbridge.play.entitlement.HostRightsEvaluator
+import castbridge.play.entitlement.RateWindow
+import castbridge.play.entitlement.ReservedBank
+import castbridge.play.entitlement.TicketVerifier
+import castbridge.play.entitlement.TrustedIssuers
+import castbridge.play.entitlement.UsedTickets
 import java.security.SecureRandom
 import java.util.concurrent.ConcurrentHashMap
 import java.util.concurrent.atomic.AtomicBoolean
@@ -31,7 +41,7 @@ abstract class PlayConn(val id: String, val ip: String, rate: Int, burst: Int) {
 }
 
 /** Une salle hébergée : la logique est `ServerRoom` du cœur ; ici seulement les connexions et les dates d'activité. */
-class RoomEntry(val room: ServerRoom) {
+class RoomEntry(val room: ServerRoom, /** Appareil attesté par le ticket qui a ouvert la salle (plafond de salles par sujet). */ val subject: String = "") {
     internal val conns = ConcurrentHashMap<String, PlayConn>()
     /** Horloge RÉELLE (ms) : la salle peut tourner sur l'horloge de test, la purge jamais. */
     val createdRealMs: Long = System.currentTimeMillis()
@@ -52,8 +62,17 @@ class PlayHub(
     private val scope: PlayScope = PlayScope.INTERNET,
     private val settings: ServerRoom.Settings = ServerRoom.Settings(),
     private val limits: ConnectionLimits,
+    /** Banques réservées (w20-04) : sans elle, toutes les salles jouent la [bank] libre. */
+    private val reserved: ReservedBank? = null,
+    /** Révocations courantes (liste signée relue toutes les 15 min par [castbridge.play.entitlement.RevocationsFeed]). */
+    revocations: () -> RevocationState = { RevocationState() },
 ) {
     private val rooms = ConcurrentHashMap<String, RoomEntry>()
+    private val evaluator = HostRightsEvaluator(TrustedIssuers.parse(cfg.trustedKeys.joinToString(",")).ring, revocations)
+    private val used = UsedTickets(cfg.maxUsedTickets)
+    private val createRate = RateWindow(cfg.createsPerIpPerHour, 3_600_000L)
+    private val trialDays = DayCounter()
+    @Volatile private var lastSweepMs = 0L
     private val all = ConcurrentHashMap<String, PlayConn>()
     private val roomLock = Any()
     @Volatile private var draining = false
@@ -95,18 +114,52 @@ class PlayHub(
         }
     }
 
+    /**
+     * Ouvre une salle. Ordre (le plus bon marché d'abord, FERMÉ à chaque pas) : ticket `cbp1` valide (signature, `aud`, `exp`, appareil non bloqué), maintenance, plafond de
+     * créations par adresse, USAGE UNIQUE du `jti` (un ticket brûlé par le premier essai, même refusé ensuite : l'API en redonne 20 par heure), preuves de la TV évaluées par le
+     * SERVICE (`HostRights`), règles commerciales (`PlayRules`), puis plafonds de salles (par appareil attesté, global). Le ticket vit en temps RÉEL, même si les salles tournent
+     * sur une horloge de test.
+     */
     private fun create(c: PlayConn, m: ClientMsg.Create, now: Long) {
-        // un ticket vit en temps RÉEL, même si les salles tournent sur une horloge de test
-        if (!verifier.verify(c.ticket, System.currentTimeMillis())) { send(c, err(PlayReason.PLAY_TICKET_REFUSED)); return }
+        val real = System.currentTimeMillis()
+        val ticket = (verifier.check(c.ticket, real) as? TicketVerifier.Result.Ok)?.ticket
+        if (ticket == null) { send(c, err(PlayReason.PLAY_TICKET_REFUSED)); return }
         if (draining) { send(c, ServerMsg.Error(0, MAINTENANCE, "Le serveur de jeu est en maintenance : réessayez dans quelques minutes.", true)); return }
-        val id = ByteArray(16).also { rnd.nextBytes(it) }.joinToString("") { "%02x".format(it) }
-        val e = synchronized(roomLock) {
-            if (rooms.size >= cfg.maxRooms) null
-            else RoomEntry(ServerRoom(id, scope, bank, rnd, createdAt = now, settings = settings)).also { rooms[id] = it }
+        if (!createRate.allow(c.ip, real)) { send(c, ServerMsg.Error(0, BUSY, "Trop de parties ouvertes depuis cette adresse : réessayez dans une heure.", true)); return }
+        when (used.use(ticket.jti, ticket.exp, real)) {
+            UsedTickets.Use.REPLAY -> { send(c, err(PlayReason.PLAY_TICKET_REFUSED)); return }
+            UsedTickets.Use.FULL -> { send(c, ServerMsg.Error(0, BUSY, "Le service de jeu est très sollicité. Réessayez dans une minute.", true)); return }
+            UsedTickets.Use.OK -> {}
         }
-        if (e == null) { send(c, ServerMsg.Error(0, BUSY, "Le service de jeu est très sollicité. Réessayez dans une minute.", true)); return }
+        val rights = evaluator.evaluate(ticket.deviceCode, listOfNotNull(m.activation) + m.rentals, real)
+        val trial = rights.edition == HostEdition.TRIAL
+        val verdict = PlayRules.canCreate(rights.actor, publicRoom = false, gamesToday = if (trial) trialDays.count(rights.identity ?: "", real) else 0)
+        if (!verdict.allowed) {
+            val why = verdict.reason ?: PlayReason.PLAY_SCOPE_FORBIDDEN
+            send(c, ServerMsg.Error(0, why.code, if (rights.edition == HostEdition.NONE) rights.note else verdict.message, why.retryable)); return
+        }
+        val subjectCap = if (trial) minOf(1, cfg.maxRoomsPerSubject) else cfg.maxRoomsPerSubject
+        val subjectFull = ServerMsg.Error(0, BUSY, "Vous avez déjà $subjectCap partie${if (subjectCap > 1) "s" else ""} ouverte${if (subjectCap > 1) "s" else ""} : terminez-en une avant d'en ouvrir une autre.", true)
+        if (rooms.values.count { it.subject == ticket.deviceId } >= subjectCap) { send(c, subjectFull); return }
+        // le lot réservé se lit hors verrou (première lecture : un zip) ; sans droit : la banque libre PARTAGÉE
+        val roomBank = if (rights.coveredScopes.isEmpty() || reserved == null) bank else reserved.bankFor(rights.coveredScopes)
+        val id = ByteArray(16).also { rnd.nextBytes(it) }.joinToString("") { "%02x".format(it) }
+        var refusal: ServerMsg.Error? = null
+        val e = synchronized(roomLock) {
+            when {
+                rooms.size >= cfg.maxRooms -> { refusal = ServerMsg.Error(0, BUSY, "Le service de jeu est très sollicité. Réessayez dans une minute.", true); null }
+                rooms.values.count { it.subject == ticket.deviceId } >= subjectCap -> { refusal = subjectFull; null }
+                trial && !trialDays.record(rights.identity ?: "", real) -> { refusal = ServerMsg.Error(0, BUSY, "Le service de jeu est très sollicité. Réessayez dans une minute.", true); null }
+                else -> RoomEntry(ServerRoom(id, scope, roomBank, rnd, createdAt = now, settings = settings), ticket.deviceId).also { rooms[id] = it }
+            }
+        }
+        if (e == null) { send(c, refusal!!); return }
         attachAndForward(e, c, m, now)
     }
+
+    /** Nombre de `jti` mémorisés (tests, santé). */
+    fun usedTicketCount(): Int = used.size()
+    fun sweepUsedTickets(realNow: Long) { used.sweep(realNow); createRate.sweep(realNow) }
 
     private fun join(c: PlayConn, m: ClientMsg.Join, now: Long) {
         if (codesBlocked(c.ip, now)) { send(c, err(PlayReason.PLAY_BAD_CODE)); return }
@@ -192,6 +245,7 @@ class PlayHub(
             overflow.forEach { dropOverflow(it) }
         }
         synchronized(badCodes) { badCodes.sweep(now) }; synchronized(badCodes48) { badCodes48.sweep(now) }
+        if (mono - lastSweepMs >= 5_000L) { lastSweepMs = mono; sweepUsedTickets(mono) }
         for (c in ArrayList(all.values)) c.housekeeping(mono)
     }
 
