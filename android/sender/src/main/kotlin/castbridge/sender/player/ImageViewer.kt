@@ -84,7 +84,7 @@ fun ImageViewer(act: PlayerActivity, items: List<PlayItem>, start: Int) {
                     Text(current?.name ?: "", color = Color.White, maxLines = 1, overflow = TextOverflow.Ellipsis, style = MaterialTheme.typography.titleMedium)
                     if (items.size > 1) Text("${pager.currentPage + 1} / ${items.size}", color = Color(castbridge.core.brand.BrandTokens.Dark.TEXT_MEDIUM), style = MaterialTheme.typography.labelSmall)
                 }
-                IconButton({ castOpen = true }) { Icon(cbv(castbridge.sender.R.drawable.ic_cb_caster), "Caster", tint = Color.White) }
+                IconButton({ castOpen = true }) { Icon(cbv(castbridge.sender.R.drawable.ic_cb_caster), castbridge.core.ux.SendWays.SHEET_TITLE, tint = Color.White) }
                 if (items.size > 1) IconButton({ slideshow = !slideshow; if (slideshow) chrome = false }) {
                     Icon(if (slideshow) cbv(castbridge.sender.R.drawable.ic_cb_pause) else Icons.Filled.Slideshow, "Diaporama", tint = Color.White)
                 }

@@ -153,5 +153,5 @@ object LangCatalog {
         LangExerciseKind.SPEAK -> "Expression orale"; LangExerciseKind.WRITE -> "Expression écrite"; LangExerciseKind.STROKES -> "Tracé"
     }
 
-    const val EMPTY_MESSAGE = "Aucune langue installée : envoyez un lot depuis le téléphone"
+    const val EMPTY_MESSAGE = "Aucune langue installée. Sur le téléphone : CastBridge › Apprendre › « Données hors ligne » › Langues : choisissez la langue puis « Télécharger mes leçons de langue »."
 }

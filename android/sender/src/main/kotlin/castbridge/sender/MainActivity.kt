@@ -86,18 +86,22 @@ class MainActivity : ComponentActivity() {
     @OptIn(ExperimentalMaterial3Api::class)
     @Composable
     fun Root() {
-        var tab by rememberSaveable { mutableStateOf(0) }
+        // opens on the task home « CastBridge TV », not on « TV DLNA » (castbridge.core.ux.PhoneTabs; order and telemetry ids unchanged)
+        var tab by rememberSaveable { mutableStateOf(castbridge.core.ux.PhoneTabs.START) }
         var settings by rememberSaveable { mutableStateOf(false) }
-        // screen_time per tab (ids of EventCatalog: the "CastBridge TV" tab is the app's home)
-        val tabScreens = listOf("cast", "home", "games", "player", "learn")
-        // the Parental tab (index 5) is never reported to the telemetry
-        LaunchedEffect(tab, settings) { if (!settings) tabScreens.getOrNull(tab)?.let { PhoneConnect.screens.enter(it) } }
+        val home = castbridge.core.ux.PhoneTabs.index(castbridge.core.ux.PhoneTabs.Tab.HOME)
+        // screen_time per tab (ids of EventCatalog: the "CastBridge TV" tab is the app's home); the Parental tab is never reported
+        LaunchedEffect(tab, settings) { if (!settings) castbridge.core.ux.PhoneTabs.at(tab).screen?.let { PhoneConnect.screens.enter(it) } }
         fun select(i: Int) {
-            if (i != tab) listOf("cast", null, "games", "player", "learn", null)[i]?.let { PhoneConnect.feature(it, "tile") }
+            if (i != tab) castbridge.core.ux.PhoneTabs.at(i).feature?.let { PhoneConnect.feature(it, "tile") }
             tab = i
         }
         val tvRequest by TvHomeRequest.pending.collectAsState()
-        LaunchedEffect(tvRequest) { if (tvRequest != null) { settings = false; tab = 1 } }     // the CastBridge TV tab, where TvHome consumes the request
+        LaunchedEffect(tvRequest) { if (tvRequest != null) { settings = false; tab = home } }     // the CastBridge TV tab, where TvHome consumes the request
+        // « où en est ma copie » : the send queue, visible from every other tab (the home has the full card)
+        val queueItems by TransferQueue.items.collectAsState()
+        val queueNote by TransferQueue.note.collectAsState()
+        val glance = castbridge.core.ux.QueueGlances.of(queueItems, queueNote)
         Scaffold(
             containerColor = MaterialTheme.colorScheme.background,
             topBar = {
@@ -122,12 +126,12 @@ class MainActivity : ComponentActivity() {
                     // scrollable: four tabs never squeeze or wrap their labels on a narrow phone
                     ScrollableTabRow(selectedTabIndex = tab, containerColor = MaterialTheme.colorScheme.surface, edgePadding = 0.dp) {
                         val ic = Modifier.size(20.dp)
-                        LeadingIconTab(tab == 0, onClick = { select(0) }, text = { Text("TV DLNA", maxLines = 1) }, icon = { CbIcon(R.drawable.ic_cb_caster, null, ic) })
-                        LeadingIconTab(tab == 1, onClick = { select(1) }, text = { Text("CastBridge TV", maxLines = 1) }, icon = { CbIcon(R.drawable.ic_cb_recevoir_du_telephone, null, ic) })
-                        LeadingIconTab(tab == 2, onClick = { select(2) }, text = { Text("Jeux", maxLines = 1) }, icon = { CbIcon(R.drawable.ic_cb_quiz, null, ic) })
-                        LeadingIconTab(tab == 3, onClick = { select(3) }, text = { Text("Sur le téléphone", maxLines = 1) }, icon = { CbIcon(R.drawable.ic_cb_sur_le_telephone, null, ic) })
-                        LeadingIconTab(tab == 4, onClick = { select(4) }, text = { Text("Apprendre", maxLines = 1) }, icon = { CbIcon(R.drawable.ic_cb_apprendre, null, ic) })
-                        LeadingIconTab(tab == 5, onClick = { select(5) }, text = { Text("Parental", maxLines = 1) }, icon = { Icon(Icons.Filled.Lock, null, ic) })
+                        LeadingIconTab(tab == 0, onClick = { select(0) }, text = { Text(castbridge.core.ux.PhoneTabs.Tab.DLNA.label, maxLines = 1) }, icon = { CbIcon(R.drawable.ic_cb_caster, null, ic) })
+                        LeadingIconTab(tab == 1, onClick = { select(1) }, text = { Text(castbridge.core.ux.PhoneTabs.Tab.HOME.label, maxLines = 1) }, icon = { CbIcon(R.drawable.ic_cb_recevoir_du_telephone, null, ic) })
+                        LeadingIconTab(tab == 2, onClick = { select(2) }, text = { Text(castbridge.core.ux.PhoneTabs.Tab.GAMES.label, maxLines = 1) }, icon = { CbIcon(R.drawable.ic_cb_quiz, null, ic) })
+                        LeadingIconTab(tab == 3, onClick = { select(3) }, text = { Text(castbridge.core.ux.PhoneTabs.Tab.PHONE.label, maxLines = 1) }, icon = { CbIcon(R.drawable.ic_cb_sur_le_telephone, null, ic) })
+                        LeadingIconTab(tab == 4, onClick = { select(4) }, text = { Text(castbridge.core.ux.PhoneTabs.Tab.LEARN.label, maxLines = 1) }, icon = { CbIcon(R.drawable.ic_cb_apprendre, null, ic) })
+                        LeadingIconTab(tab == 5, onClick = { select(5) }, text = { Text(castbridge.core.ux.PhoneTabs.Tab.PARENTAL.label, maxLines = 1) }, icon = { Icon(Icons.Filled.Lock, null, ic) })
                     }
                 }
             },
@@ -135,6 +139,7 @@ class MainActivity : ComponentActivity() {
         ) { pad ->
             Column(Modifier.padding(pad).fillMaxSize()) {
                 // sub-brand wordmark (branding/logo) above the Apprendre tab; the Jeux tab shows its own cards
+                if (castbridge.core.ux.QueueGlances.stripVisible(onHome = tab == home, glance = glance)) glance?.let { g -> QueueStrip(g) { select(home) } }
                 if (tab == 4) SubBrandHeader(R.drawable.logo_apprendre_horizontal, "Apprendre")
                 Box(Modifier.weight(1f).fillMaxWidth()) { when (tab) { 0 -> App(); 1 -> TvHub(); 2 -> GamesScreen(); 3 -> castbridge.sender.player.PhoneLibraryScreen(); 5 -> ParentalTab(); else -> LearnScreen() } }
             }
@@ -249,7 +254,7 @@ class MainActivity : ComponentActivity() {
             } else {
                 Button(enabled = selected != null && fileUri != null, onClick = ::cast,
                     modifier = Modifier.fillMaxWidth().padding(16.dp)) {
-                    Icon(cbv(R.drawable.ic_cb_caster), null); Spacer(Modifier.width(8.dp)); Text("Diffuser")
+                    Icon(cbv(R.drawable.ic_cb_caster), null); Spacer(Modifier.width(8.dp)); Text(castbridge.core.ux.SendWay.LIVE.label)
                 }
             }
             if (playing) HandoffButton(fileUri, fileName, pos, dur) {
@@ -266,6 +271,23 @@ class MainActivity : ComponentActivity() {
                 onToggle = ::toggle,
                 onSkip = { d -> scope.launch { runCatching { Upnp.seek(selected!!, (pos + d).coerceIn(0, maxOf(dur, 0))) } } },
                 onStop = { stopPlayback() }, onDismiss = { showPlayer = false })
+        }
+    }
+}
+
+/** « Où en est ma copie » : one line over every tab but the home while the send queue holds something (text and tone from QueueGlances). */
+@Composable
+private fun QueueStrip(g: castbridge.core.ux.QueueGlance, onOpen: () -> Unit) {
+    val cs = MaterialTheme.colorScheme
+    Surface(color = if (g.error) cs.errorContainer else cs.secondaryContainer, modifier = Modifier.fillMaxWidth().clickable(onClick = onOpen)) {
+        Row(Modifier.padding(horizontal = 16.dp, vertical = 6.dp), verticalAlignment = androidx.compose.ui.Alignment.CenterVertically) {
+            CbIcon(R.drawable.ic_cb_envoyer, null, Modifier.size(20.dp))
+            Spacer(Modifier.width(10.dp))
+            Column(Modifier.weight(1f)) {
+                Text(g.title, style = MaterialTheme.typography.bodyMedium, maxLines = 1, overflow = androidx.compose.ui.text.style.TextOverflow.Ellipsis)
+                g.detail?.let { Text(it, style = MaterialTheme.typography.bodySmall, maxLines = 2, overflow = androidx.compose.ui.text.style.TextOverflow.Ellipsis) }
+            }
+            TextButton(onClick = onOpen) { Text(g.action) }
         }
     }
 }

@@ -452,12 +452,9 @@ class PlayerActivity : Activity(), TvService.Screen {
         override fun openSettings() = showSettings()
         override fun tools(): List<HomeTool> = homeTools()
         override fun openHelp() {
-            AlertDialog.Builder(this@PlayerActivity).setTitle("Envoyer une vidéo sur la TV")
-                .setMessage("1. Sur le téléphone, ouvrez l'app CastBridge, onglet « CastBridge TV ».\n" +
-                    "2. Touchez « Envoyer une vidéo » et choisissez-la.\n" +
-                    "3. La première fois, saisissez le code de la TV : ${ParentalHub.shownPin(pin)}.\n\n" +
-                    "La vidéo est copiée sur la TV (ou sur sa clé USB) : elle continue même si le téléphone s'en va. " +
-                    "Depuis un ordinateur : ouvrez http://${TvService.localIp() ?: "adresse-de-la-TV"}:${ReceiverServer.PORT} dans un navigateur.")
+            // the phone button is named by its current label (castbridge.core.ux.TvHelpTexts ← SendWay.COPY), never a stale one
+            AlertDialog.Builder(this@PlayerActivity).setTitle(castbridge.core.ux.TvHelpTexts.SEND_TITLE)
+                .setMessage(castbridge.core.ux.TvHelpTexts.send(ParentalHub.shownPin(pin), "http://${TvService.localIp() ?: "adresse-de-la-TV"}:${ReceiverServer.PORT}"))
                 .setPositiveButton("Compris", null).show()
         }
     }

@@ -92,18 +92,20 @@ class OpenWithActivity : ComponentActivity() {
                         Column(verticalArrangement = Arrangement.spacedBy(6.dp)) {
                             if (size > 0) Text(formatSize(size), style = MaterialTheme.typography.bodyMedium)
                             Text(choice.status, style = MaterialTheme.typography.bodyMedium)
-                            Text("« Copier vers la TV » se fait en arrière-plan, sans lire le fichier. Suivez-la dans la notification.", style = MaterialTheme.typography.bodySmall)
                             choice.note?.let { Text(it, style = MaterialTheme.typography.bodySmall) }
                             androidx.compose.foundation.layout.Spacer(Modifier.height(8.dp))
                             if (choice.action != SendAction.NONE)
                                 Button({ openApp(choice.action) }, Modifier.fillMaxWidth()) { Text(choice.action.label) }
-                            Button({ send(uri, name, move = false, choice, pinTv, pins) }, Modifier.fillMaxWidth(), enabled = choice.copyEnabled) { Text("Copier vers la TV") }
+                            // the three ways, most wanted first, each with its one-line explanation (castbridge.core.ux.SendWay: same words everywhere)
                             Button({ copyAndPlay(uri, name, size, both, session, pinTv, pins) }, Modifier.fillMaxWidth(), enabled = both !is CopyAndPlay.Decision.Disabled) { Text(both.label) }
                             // the reason it is limited, else what it does: the TV starts as soon as it has enough lead, this phone becomes its remote (R-08)
                             Text(both.reason ?: castbridge.core.phone.CopyHandoff.BUTTON_HINT, style = MaterialTheme.typography.bodySmall)
+                            OutlinedButton({ send(uri, name, move = false, choice, pinTv, pins) }, Modifier.fillMaxWidth(), enabled = choice.copyEnabled) { Text(castbridge.core.ux.SendWay.COPY.label) }
+                            Text(castbridge.core.ux.SendWay.COPY.hint + " Suivez la copie dans la notification.", style = MaterialTheme.typography.bodySmall)
                             OutlinedButton({ send(uri, name, move = true, choice, pinTv, pins) }, Modifier.fillMaxWidth(), enabled = choice.moveEnabled) {
-                                Text("Déplacer vers la TV")
+                                Text(castbridge.core.ux.SendWay.MOVE.label)
                             }
+                            Text(castbridge.core.ux.SendWay.MOVE.hint, style = MaterialTheme.typography.bodySmall)
                         }
                     },
                     confirmButton = { if (canPlay) TextButton({ forwardToPlayer(); finish() }) { Text("Lire ici") } },

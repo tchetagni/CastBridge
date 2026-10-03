@@ -223,11 +223,16 @@ object ParentalRules {
         return Decision(true, "ok", null, left)
     }
 
-    /** Tiles of the simplified home: what a child sees in kid mode (by label, see PlayerActivity.homeTools). */
-    val KID_HOME = listOf("Apprendre", "Quiz", "Échecs", "Bibliothèque", "Aide", "Contrôle parental")
+    /**
+     * Tiles of the simplified home: what a child sees in kid mode (by label, see PlayerActivity.homeTools). « Jeux » is the hub that holds
+     * Quiz, Échecs and Sudoku since the games moved there: without it the games tile vanished in kid mode (UX audit 2026-10-03). The move to
+     * tile ids stays with w11-04.
+     */
+    val KID_HOME = listOf("Apprendre", "Jeux", "Quiz", "Échecs", "Bibliothèque", "Aide", "Contrôle parental")
+    private val GAME_TILES = listOf("Jeux", "Quiz", "Échecs")
 
     fun kidHome(labels: List<String>, p: ChildProfile): List<String> = labels.filter { l ->
-        l in KID_HOME && !(l in listOf("Quiz", "Échecs") && Category.GAMES in p.blocked)
+        l in KID_HOME && !(l in GAME_TILES && Category.GAMES in p.blocked)
     }
 }
 
