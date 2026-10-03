@@ -1,5 +1,6 @@
 package castbridge.play
 
+import castbridge.core.quiz.online.Limits
 import java.net.InetAddress
 import java.util.concurrent.ConcurrentHashMap
 import java.util.concurrent.atomic.AtomicInteger
@@ -8,18 +9,34 @@ import java.util.concurrent.atomic.AtomicInteger
  * Plafonds de connexions : par adresse IP cliente et au total. S'applique AVANT l'ouverture d'une connexion de jeu (avant l'upgrade WebSocket :
  * le refus est une réponse HTTP 429 ou 503). Une « connexion » = une session WebSocket ou une session de repli (SSE / long-poll).
  */
-class ConnectionLimits(private val maxPerIp: Int, private val maxTotal: Int, private val maxPerPrefix48: Int = 64) {
-    enum class Verdict { OK, IP_FULL, TOTAL_FULL }
+class ConnectionLimits(private val maxPerIp: Int, private val maxTotal: Int, private val maxPerPrefix48: Int = 64,
+                       /** Seaux de débit de nouvelles connexions et plafond relevé des adresses partagées (w20-07) ; absent = comportement d'origine. */
+                       private val gate: Limits? = null, private val maxPerIpShared: Int = 64) {
+    enum class Verdict { OK, IP_FULL, TOTAL_FULL, RATE }
+
+    /** Verdict et, pour un refus de débit, l'attente conseillée en millisecondes. */
+    class Admission(val verdict: Verdict, val retryAfterMs: Long = 0L)
 
     private val perIp = ConcurrentHashMap<String, AtomicInteger>()
     private val per48 = ConcurrentHashMap<String, AtomicInteger>()
     private val total = AtomicInteger()
 
     /** Prend une place : plafond total, plafond par clé d'adresse (IPv4, ou /64), et pour l'IPv6 un second plafond par /48 (65 536 /64 dans un /48). */
-    fun acquire(ip: String): Verdict {
+    fun acquire(ip: String): Verdict = admit(ip).verdict
+
+    /** Comme [acquire], avec l'attente conseillée quand le débit de nouvelles connexions est dépassé (aucune place n'est alors prise). */
+    fun admit(ip: String): Admission {
+        gate?.admitConnection(ip)?.let { if (!it.allowed) return Admission(Verdict.RATE, it.retryAfterMs) }
+        return Admission(take(ip))
+    }
+
+    /** Plafond de connexions ouvertes pour cette clé : relevé pour une adresse partagée (salle de classe), sinon [maxPerIp]. */
+    private fun ceiling(ip: String): Int = if (gate == null) maxPerIp else maxOf(maxPerIp, minOf(gate.openCeiling(ip), maxPerIpShared))
+
+    private fun take(ip: String): Verdict {
         if (total.incrementAndGet() > maxTotal) { total.decrementAndGet(); return Verdict.TOTAL_FULL }
         val n = perIp.computeIfAbsent(ip) { AtomicInteger() }
-        if (n.incrementAndGet() > maxPerIp) { decrement(perIp, ip); total.decrementAndGet(); return Verdict.IP_FULL }
+        if (n.incrementAndGet() > ceiling(ip)) { decrement(perIp, ip); total.decrementAndGet(); return Verdict.IP_FULL }
         ClientIp.group48(ip)?.let { g ->
             val m = per48.computeIfAbsent(g) { AtomicInteger() }
             if (m.incrementAndGet() > maxPerPrefix48) { decrement(per48, g); decrement(perIp, ip); total.decrementAndGet(); return Verdict.IP_FULL }

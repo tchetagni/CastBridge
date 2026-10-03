@@ -47,7 +47,9 @@ class ServerRoom(
         var ip: String? = null; internal set
     }
 
-    data class AnswerRecord(val questionIndex: Int, val conn: String, val playerId: String, val elapsedMs: Long, val arrivedAtServerMs: Long)
+    /** Une réponse retenue. `choice` et `correct` sont additifs (w20-07) : ils nourrissent [BotScore], jamais l'écran. */
+    data class AnswerRecord(val questionIndex: Int, val conn: String, val playerId: String, val elapsedMs: Long, val arrivedAtServerMs: Long,
+                            val choice: Int = -1, val correct: Boolean = false)
 
     internal class TableClock { var now = 0L; var shift = 0L; fun read() = now - shift }
     private class Ev(val kind: String, val data: Map<String, Any?> = emptyMap())
@@ -68,7 +70,7 @@ class ServerRoom(
         fun answerLog(): List<AnswerRecord> = log.toList()
         fun lastElapsedMs(conn: String): Long? = log.lastOrNull { it.conn == conn }?.elapsedMs
         internal fun record(r: AnswerRecord) { log += r }
-        internal fun reset() { announcedIndex = -1; revealedIndex = -1; lastDuel = null; lastGame = null; abandoned = null; pausedAt = null }
+        internal fun reset() { log.clear(); announcedIndex = -1; revealedIndex = -1; lastDuel = null; lastGame = null; abandoned = null; pausedAt = null }
     }
 
     private val lock = Any()
@@ -109,6 +111,47 @@ class ServerRoom(
     fun spectatorCount(): Int = synchronized(lock) { seats.values.count { it.role == PlayRole.SPECTATOR } }
     fun eventsSince(lastSeq: Long): List<EventRing.Event>? = synchronized(lock) { ring.since(lastSeq) }
     fun seq(): Long = synchronized(lock) { seq }
+
+    // ------------------------------------------------------------------ anti-triche (w20-07) : actions DOUCES seulement
+
+    private var botCache: Pair<Int, Map<String, BotScore.Result>>? = null
+
+    /**
+     * Soupçon de robot par joueur (clé : identifiant de joueur), sur les réponses déjà données au Duel. Interne : pour la modération, jamais affiché. Mémorisé tant que
+     * le journal des réponses ne change pas.
+     */
+    fun botResults(): Map<String, BotScore.Result> = synchronized(lock) {
+        val log = table0.answerLog()
+        botCache?.takeIf { it.first == log.size }?.let { return it.second }
+        val byPlayer = seats.values.filter { it.playerId != null }.associateBy { it.playerId!! }
+        val traces = log.groupBy { it.playerId }.map { (pid, rs) ->
+            BotScore.Trace(pid, byPlayer[pid]?.ip, byPlayer[pid]?.deviceHash,
+                rs.map { BotScore.Answer(it.questionIndex, it.elapsedMs, it.correct, it.choice) })
+        }
+        BotScore.scoreAll(traces).also { botCache = log.size to it }
+    }
+
+    /**
+     * Ce joueur est-il CLASSÉ ? Siège par siège (audit Opus) : seul un siège qui atteint [BotScore.THRESHOLD] sort du classement ; un intrus ne rend pas la partie des autres
+     * « non classée ». Hors Internet, et pour un siège sans réponse, toujours vrai. Aucune expulsion : la partie se joue pareil, son écran dit seulement [BotScore.NEUTRAL_TEXT].
+     */
+    fun isRanked(playerId: String?): Boolean = synchronized(lock) { scope != PlayScope.INTERNET || playerId == null || botResults()[playerId]?.flagged != true }
+
+    /** Combien de sièges sont sortis du classement (journal et modération ; jamais montré). */
+    fun unrankedSeats(): Int = synchronized(lock) { if (scope != PlayScope.INTERNET) 0 else botResults().count { it.value.flagged } }
+
+    private var lastRotationAt = Long.MIN_VALUE / 2
+
+    /**
+     * Une frappe PROCHE du code de cette salle ([RoomCode.nearMiss]) vient d'être refusée. À la [RoomCode.ROTATE_AFTER]e, le code change (la salle s'annonce par l'évènement
+     * `codeRotated`), SEULEMENT en salle d'attente et au plus une fois par [ROTATE_MIN_MS] : une salle en jeu n'a rien à gagner d'un nouveau code, et un énumérateur ne doit
+     * pas pouvoir faire tourner le code sous les pieds d'une famille qui tape le sien. Appelée par le service depuis le seul chemin `join` ; rend vrai si le code a changé.
+     */
+    fun noteNearMiss(now: Long): Boolean = synchronized(lock) {
+        if (!badCodes.roomFail() || state != State.OPEN || now - lastRotationAt < ROTATE_MIN_MS) return false
+        code = RoomCode.generate(random); lastRotationAt = now; pending += Ev("codeRotated")
+        true
+    }
 
     // ------------------------------------------------------------------ messages
 
@@ -315,12 +358,12 @@ class ServerRoom(
                 val seed = if (scope == PlayScope.INTERNET) random.nextLong() else m.arg?.toLongOrNull() ?: random.nextLong()   // Internet : la graine est tirée par le serveur seul
                 val reason = room.startGame(seed)
                 if (reason != null) { out += errp(conn, PlayProtocol.BAD_REQUEST, reason); ActResult.BAD_REQUEST }
-                else { table0.reset(); state = State.PLAYING; pending += Ev("started"); ActResult.OK }
+                else { table0.reset(); botCache = null; state = State.PLAYING; pending += Ev("started"); ActResult.OK }
             }
             "skip" -> if (state != State.PLAYING || table0.abandoned != null || table0.pausedAt != null) ActResult.IGNORED
                 else if (room.duel?.phase == QuizDuel.Phase.QUESTION && now < table0.opensAtServerMs) ActResult.IGNORED   // jamais pendant le délai
                 else if (room.hostSkip()) ActResult.OK else ActResult.IGNORED
-            "lobby" -> if (room.backToLobby()) { table0.reset(); state = State.OPEN; autoHost = false; pending += Ev("lobby"); ActResult.OK } else ActResult.FORBIDDEN
+            "lobby" -> if (room.backToLobby()) { table0.reset(); botCache = null; state = State.OPEN; autoHost = false; pending += Ev("lobby"); ActResult.OK } else ActResult.FORBIDDEN
             "end" -> if (state == State.PLAYING) { table0.abandoned = "HOST_ENDED"; state = State.FINISHED; pending += Ev("ended"); ActResult.OK } else ActResult.FORBIDDEN
             "autohost" -> { autoHost = true; pending += Ev("autohost"); ActResult.OK }
             "candidate" -> if (room.setCandidate(m.arg?.takeIf { it.isNotEmpty() })) ActResult.OK else ActResult.FORBIDDEN
@@ -376,7 +419,7 @@ class ServerRoom(
         clock.now = t.opensAtServerMs + elapsed            // horloge de table = ouverture + temps compté
         val r = try { t.room.act(token, "answer", q, choice, null) } finally { clock.now = now }
         if (r != QuizRoom.Act.OK) return if (r == QuizRoom.Act.CLOSED) ActResult.CLOSED else ActResult.IGNORED
-        t.record(AnswerRecord(d.index, conn, pid, elapsed, now))
+        t.record(AnswerRecord(d.index, conn, pid, elapsed, now, choice, choice == d.question.answer))
         pending += Ev("answered", mapOf("count" to d.answered().size))
         return ActResult.OK
     }
@@ -514,6 +557,11 @@ class ServerRoom(
         v["room"] = linkedMapOf("id" to roomId, "code" to RoomCode.display(code), "state" to state.name, "scope" to scope.name, "role" to s.role.name, "seq" to seq,
             "serverNowMs" to now, "abandoned" to t.abandoned, "paused" to (t.pausedAt != null), "internetOpen" to (scopeClosedAt == null),
             "spectators" to seats.values.count { it.role == PlayRole.SPECTATOR }, "hostConnected" to (host?.conn != null), "autoHost" to autoHost)
+        // `ranked` : seulement en fin de partie et au siège concerné (en direct, ce serait un oracle pour régler un robot juste sous le seuil)
+        if (state == State.FINISHED && scope == PlayScope.INTERNET && s.playerId != null) {
+            val ranked = isRanked(s.playerId)
+            (v["room"] as MutableMap<String, Any?>).let { it["ranked"] = ranked; it["rankNote"] = if (ranked) null else BotScore.NEUTRAL_TEXT }
+        }
         v["timing"] = linkedMapOf("gapMs" to PlayTiming.gapFor(scope, gapRequestedMs), "opensAtServerMs" to t.opensAtServerMs, "serverNowMs" to now, "waitMs" to wait)
         v
     }
@@ -541,11 +589,13 @@ class ServerRoom(
     fun close(reason: String, now: Long): List<Out> = synchronized(lock) { clock.now = now; if (state == State.GONE) emptyList() else gone(reason, ArrayList()) }
 
     private fun newToken(): String = ByteArray(16).also { random.nextBytes(it) }.joinToString("") { "%02x".format(it) }
-    private fun err(conn: String, r: PlayReason) = Out(conn, ServerMsg.Error(seq, r.code, r.message, r.retryable))
+    private fun err(conn: String, r: PlayReason) = Out(conn, ServerMsg.Error(seq, r.code, r.message, r.retryable, r.retryAfterMs))
     private fun errp(conn: String, code: String, message: String) = Out(conn, ServerMsg.Error(seq, code, message, false))
 
     companion object {
         const val PING_EVERY_MS = 5_000L
+        /** Délai minimal entre deux rotations du code d'une salle. */
+        const val ROTATE_MIN_MS = 60_000L
         const val HOST_LOST_MS = 60_000L
         const val SPECTATOR_GRACE_MS = 30_000L
         const val PURGE_MS = 10 * 60_000L

@@ -65,12 +65,22 @@ Décodage **strict** (`PlayCodec.decodeClient`) : type inconnu ⇒ `error UNSUPP
 | `reveal` | `questionId`, `index`, `answer`, `explanation?` | envoyé seulement **après** la clôture | non mesuré |
 | `safety` | `scope`, `level`, `word`, `text`, `action?`, `detail` | signe « Partie sûre » (`SafetyView`) | non mesuré |
 | `ping` | `id`, `serverNowMs` | toutes les 5 s (salle ouverte ou en jeu) | 50 |
-| `error` | `reason`, `message`, `retryable` | refus : `PLAY_*` (voir `PlayReason`) ou `UNSUPPORTED`, `BAD_REQUEST`, `FORBIDDEN` | non mesuré |
+| `error` | `reason`, `message`, `retryable`, `retryAfterMs?` | refus : `PLAY_*` (voir `PlayReason`) ou `UNSUPPORTED`, `BAD_REQUEST`, `FORBIDDEN`, `BAD_NAME` (pseudonyme refusé : le message dit le motif). `retryAfterMs` (additif, w20-07) : attente conseillée avant de réessayer, absent s'il n'est pas précisé ; porté par `PLAY_BUSY` (service ou salle saturés) et par `PLAY_BAD_CODE` quand l'adresse est bloquée | non mesuré |
 | `roomGone` | `reason` | salle fermée : `EXPIRED`, `HOST_CLOSED_INTERNET`, `HOST_LOST`… | non mesuré |
 | `replay` | `events` | évènements manqués (anneau de 50) avant le `state` d'une reprise | non mesuré |
 | `ack` | `ref`, `result` | accusé d'un `act` / `relayAct` : `OK SAME CLOSED UNKNOWN_QUESTION TOO_EARLY FORBIDDEN BAD_REQUEST UNKNOWN_PLAYER IGNORED` | 42 |
 
 Limites reprises de `QuizHttp` (constantes de `PlayProtocol`) : 12 flux, rafale 30, 10 requêtes/s, 30 codes faux de `join` par adresse et par 5 minutes (jamais de blocage ni de compte sur un `resume`). Le service les applique.
+
+### Anti-triche et limites (w20-07)
+
+Toutes les décisions sont **douces** : un message refusé, jamais de liste noire d'adresses, jamais de blocage par pays, jamais d'empreinte de navigateur. Table des valeurs effectives : `docs/agent-reports/sonnet-w20-07.md`.
+
+- **Schéma** : un message invalide reçoit `BAD_REQUEST` ou `UNSUPPORTED` sans effet sur la salle ; imbrication > 6 niveaux refusée ; **3 `BAD_REQUEST` en une minute ⇒ fermeture 1008** (un type inconnu, `UNSUPPORTED`, répond sans compter : un client plus récent n'est pas coupé). Les clés inconnues restent acceptées (règle additive).
+- **Pseudonymes** (`Pseudonym`) : NFKC, 2 à 16 caractères, lettres/chiffres/espace/`-`/`'`/`.` (et marques de ton des langues camerounaises, 2 au plus par lettre), une seule écriture (latin mêlé de cyrillique ou de grec refusé), au plus 6 chiffres, pas d'adresse web, pas d'usurpation (`CastBridge`, `Admin`, `Modérateur`, `Prof`…), liste fr/en/pidgin avec « leet » et homoglyphes ; refus = `BAD_NAME` (« Pseudonyme refusé : <motif>. »). Un nom de 17 à 64 caractères donne `BAD_NAME` (motif : 2 à 16 caractères) ; au-delà de 64, le codec refuse (`BAD_REQUEST`).
+- **Robots** (`BotScore`) : à partir de 70/100, **ce siège** sort du classement (les autres restent classés). En FIN de partie seulement, la vue `room` du joueur concerné porte `ranked` (et `rankNote: "Classement non pris en compte."` s'il est sorti) : jamais en direct pendant la partie (ce serait un oracle pour régler un robot sous le seuil), jamais pour un autre siège. Aucune accusation, aucune expulsion ; les motifs restent internes (modération). Hors Internet : toujours classé.
+- **Codes faux** : le BON code entre toujours (la salle est cherchée d'abord) ; les mauvais codes sont comptés par adresse (30 / 5 min, 5 000 / jour), par paire adresse + appareil (30 / 5 min, 300 / jour) et par /48 IPv6 (120 / 5 min, aucun quota de jour) ; une adresse bloquée reçoit `PLAY_BAD_CODE` avec `retryAfterMs`.
+- **Code de salle** : une frappe à un seul symbole d'un code vivant compte pour cette salle ; à la 50e son code change (salle d'attente seulement, au plus une fois par minute) ; seul chemin : `join`.
 
 ## Réponses d'un `act` (`answer`)
 

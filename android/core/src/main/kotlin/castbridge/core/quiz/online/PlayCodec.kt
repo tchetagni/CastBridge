@@ -44,8 +44,8 @@ object PlayCodec {
         return try {
             Decoded.Ok(when (t) {
                 "hello" -> ClientMsg.Hello(f.int("proto", 1..1_000), f.strings("caps"), f.str("deviceHash", PlayProtocol.MAX_ID, false), f.str("ticket", PlayProtocol.MAX_TICKET, false))
-                "create" -> ClientMsg.Create(f.str("name", PlayProtocol.MAX_NAME, false), f.str("mode", 16, false), f.token("activation"), f.tokens("rentals"))
-                "join" -> ClientMsg.Join(f.str("code", 16, true)!!, f.str("name", PlayProtocol.MAX_NAME, false), f.str("token", PlayProtocol.MAX_TOKEN, false),
+                "create" -> ClientMsg.Create(f.str("name", PlayProtocol.MAX_NAME_WIRE, false), f.str("mode", 16, false), f.token("activation"), f.tokens("rentals"))
+                "join" -> ClientMsg.Join(f.str("code", 16, true)!!, f.str("name", PlayProtocol.MAX_NAME_WIRE, false), f.str("token", PlayProtocol.MAX_TOKEN, false),
                     f.str("deviceHash", PlayProtocol.MAX_ID, false), f.boolOr("spectate", false))
                 "resume" -> ClientMsg.Resume(f.str("roomId", PlayProtocol.MAX_ID, true)!!, f.str("token", PlayProtocol.MAX_TOKEN, true)!!, f.long("lastSeq", 0L..(1L shl 53), true)!!)
                 "act" -> {
@@ -120,7 +120,8 @@ object PlayCodec {
         is ServerMsg.Safety -> linkedMapOf("t" to m.type, "seq" to m.seq, "scope" to m.view.scope.name, "level" to m.view.level.name, "word" to m.view.word,
             "text" to m.view.text, "action" to m.view.action, "detail" to m.view.detail)
         is ServerMsg.Ping -> linkedMapOf("t" to m.type, "seq" to m.seq, "id" to m.id, "serverNowMs" to m.serverNowMs)
-        is ServerMsg.Error -> linkedMapOf("t" to m.type, "seq" to m.seq, "reason" to m.reason, "message" to m.message, "retryable" to m.retryable)
+        is ServerMsg.Error -> linkedMapOf<String, Any?>("t" to m.type, "seq" to m.seq, "reason" to m.reason, "message" to m.message, "retryable" to m.retryable)
+            .also { if (m.retryAfterMs > 0) it["retryAfterMs"] = m.retryAfterMs }
         is ServerMsg.RoomGone -> linkedMapOf("t" to m.type, "seq" to m.seq, "reason" to m.reason)
         is ServerMsg.Replay -> linkedMapOf("t" to m.type, "seq" to m.seq, "events" to m.events.map { linkedMapOf("seq" to it.seq, "kind" to it.kind, "data" to it.data) })
         is ServerMsg.Ack -> linkedMapOf("t" to m.type, "seq" to m.seq, "ref" to m.ref, "result" to m.result)
@@ -143,7 +144,7 @@ object PlayCodec {
             "safety" -> ServerMsg.Safety(seq, SafetyView(PlayScope.valueOf(s("scope")!!), SignalLevel.valueOf(s("level")!!), s("word")!!, s("text")!!, s("action"),
                 (m["detail"] as? List<*>)?.map { it.toString() } ?: emptyList()))
             "ping" -> ServerMsg.Ping(seq, s("id")!!, l("serverNowMs") ?: 0L)
-            "error" -> ServerMsg.Error(seq, s("reason")!!, s("message") ?: "", m["retryable"] as? Boolean ?: false)
+            "error" -> ServerMsg.Error(seq, s("reason")!!, s("message") ?: "", m["retryable"] as? Boolean ?: false, l("retryAfterMs")?.coerceIn(0L, 3_600_000L) ?: 0L)
             "roomGone" -> ServerMsg.RoomGone(seq, s("reason") ?: "")
             "replay" -> ServerMsg.Replay(seq, (m["events"] as List<Map<String, Any?>>).map { EventRing.Event((it["seq"] as Number).toLong(), it["kind"] as String, (it["data"] as? Map<String, Any?>) ?: emptyMap()) })
             "ack" -> ServerMsg.Ack(seq, l("ref") ?: 0L, s("result")!!)
