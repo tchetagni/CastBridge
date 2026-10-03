@@ -969,11 +969,11 @@
       },
       "expect": {
         "refused": true,
-        "reason": "Même installation que la location d'origine : la TV garde déjà cette location, une réémission s'y ajouterait (fin doublée, heures rendues) ; prolongez-la plutôt"
+        "reason": "Réémission indisponible pendant le pilote : la preuve d'installation n'est pas encore en place ; le contrat d'origine reste valable ; contactez le propriétaire"
       }
     },
     {
-      "id": "reissue-hours-other-key",
+      "id": "reissue-hours-other-key-refused",
       "type": "pilot-reissue",
       "bundle": "classe-cm2",
       "issuedAt": 1792494000000,
@@ -1006,15 +1006,12 @@
         "hoursLast168": 0
       },
       "expect": {
-        "ok": true,
-        "days": 22,
-        "usage": 900,
-        "concurrent": 3,
-        "line": "rental|loc-classe-cm2|classe-cm2|T2|T|22|0|900|3|"
+        "refused": true,
+        "reason": "Réémission indisponible pendant le pilote : la preuve d'installation n'est pas encore en place ; le contrat d'origine reste valable ; contactez le propriétaire"
       }
     },
     {
-      "id": "reissue-days-floor",
+      "id": "reissue-days-floor-refused",
       "type": "pilot-reissue",
       "bundle": "classe-cm2",
       "issuedAt": 1792515600000,
@@ -1047,11 +1044,8 @@
         "hoursLast168": 0
       },
       "expect": {
-        "ok": true,
-        "days": 21,
-        "usage": 0,
-        "concurrent": 3,
-        "line": "rental|loc-classe-cm2|classe-cm2|T2|T|21|0|0|3|"
+        "refused": true,
+        "reason": "Réémission indisponible pendant le pilote : la preuve d'installation n'est pas encore en place ; le contrat d'origine reste valable ; contactez le propriétaire"
       }
     },
     {
@@ -1089,11 +1083,11 @@
       },
       "expect": {
         "refused": true,
-        "reason": "Les heures d'utilisation de cette location sont épuisées : il n'y a rien à réémettre"
+        "reason": "Réémission indisponible pendant le pilote : la preuve d'installation n'est pas encore en place ; le contrat d'origine reste valable ; contactez le propriétaire"
       }
     },
     {
-      "id": "reissue-after-pilot-allowed-until-original-end",
+      "id": "reissue-after-pilot-refused",
       "type": "pilot-reissue",
       "bundle": "classe-cm2",
       "issuedAt": 1793876400000,
@@ -1126,11 +1120,8 @@
         "hoursLast168": 0
       },
       "expect": {
-        "ok": true,
-        "days": 6,
-        "usage": 0,
-        "concurrent": 3,
-        "line": "rental|loc-classe-cm2|classe-cm2|T2|T|6|0|0|3|"
+        "refused": true,
+        "reason": "Réémission indisponible pendant le pilote : la preuve d'installation n'est pas encore en place ; le contrat d'origine reste valable ; contactez le propriétaire"
       }
     },
     {

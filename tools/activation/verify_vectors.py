@@ -1337,6 +1337,8 @@ def pilot_reissue(v, c):
     refuse_if(c["usedMinutes"] < 0, "relevé invalide")
     old, new = (ex["installPub"] or "").strip(), (c["newInstallPub"] or "").strip()
     refuse_if(not old or not new or old == new, "clé d'installation absente ou identique")      # the same key would merge with the old line
+    # Pilot slice 1 (audit B1 2026-10-03): every reissue is refused; the TV engine merges a reissue with the original contract (same product and period).
+    refuse_if(True, "Réémission indisponible pendant le pilote : la preuve d'installation n'est pas encore en place ; le contrat d'origine reste valable ; contactez le propriétaire")
     whole_days = (ex["endsAt"] - issued) // DAY      # rounded DOWN
     refuse_if(whole_days < 1, "moins d'un jour restant")
     if ex["unit"] == "hours":

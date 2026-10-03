@@ -112,10 +112,10 @@ class RentalPilotVectorsTest {
         extend("extend-quota-168h-refused", "5h", contract(usage = 360), at("2026-10-14"), st = state(contract(usage = 360), hours = 190))
         // ---- re-issue on another installation ----
         reissue("reissue-same-key-refused", contract(usage = 1200), 300, at("2026-10-20"), newPub = "OLD")
-        reissue("reissue-hours-other-key", contract(usage = 1200, endsAt = at("2026-11-11")), 300, at("2026-10-20"))
-        reissue("reissue-days-floor", contract(unit = "days", usage = 0, endsAt = at("2026-11-11")), 0, at("2026-10-20", 18))
+        reissue("reissue-hours-other-key-refused", contract(usage = 1200, endsAt = at("2026-11-11")), 300, at("2026-10-20"))
+        reissue("reissue-days-floor-refused", contract(unit = "days", usage = 0, endsAt = at("2026-11-11")), 0, at("2026-10-20", 18))
         reissue("reissue-hours-exhausted-refused", contract(usage = 600), 600, at("2026-10-20"))
-        reissue("reissue-after-pilot-allowed-until-original-end", contract(unit = "days", usage = 0, endsAt = at("2026-11-11")), 0, at("2026-11-05"))
+        reissue("reissue-after-pilot-refused", contract(unit = "days", usage = 0, endsAt = at("2026-11-11")), 0, at("2026-11-05"))
         // ---- engine: the unit, the 96 h ceiling, the sentences ----
         engine("clamp-60h-plus-36h-no-note", listOf(rl(usage = 3600, days = 30), rl(start = at("2026-10-14"), period = at("2026-10-12"), days = 1, usage = 2160)), at("2026-10-14"))
         engine("clamp-sum-above-96h", listOf(rl(usage = 3600), rl(start = at("2026-10-14"), period = at("2026-10-12"), days = 1, usage = 3600)), at("2026-10-14"))
@@ -188,10 +188,15 @@ class RentalPilotVectorsTest {
         assertNull(expect("line-12h-bound-12oct-first-instant")["refused"]); assertNull(expect("line-1h-last-instant-of-pilot")["refused"])
         for (id in listOf("before-pilot-refused", "after-pilot-end-refused", "hours-above-cap-refused", "days-above-max-refused", "fourth-contract-refused", "langues-refused", "unknown-family-refused",
             "quota-192h-168h-refused", "extend-37h-after-60h-refused", "extend-12h-after-90h-refused", "extend-days-on-hourly-contract-refused", "extend-hours-on-day-contract-refused",
-            "extend-hours-after-16nov-limit-refused", "extend-hours-edge-plus-1ms-refused", "extend-after-pilot-end-refused", "reissue-same-key-refused", "reissue-hours-exhausted-refused", "bundle-already-rented-refused"))
+            "extend-hours-after-16nov-limit-refused", "extend-hours-edge-plus-1ms-refused", "extend-after-pilot-end-refused", "reissue-same-key-refused", "reissue-hours-exhausted-refused", "reissue-hours-other-key-refused", "reissue-days-floor-refused", "reissue-after-pilot-refused", "bundle-already-rented-refused"))
             assertEquals(true, expect(id)["refused"], "$id must be refused")
-        for (id in listOf("third-contract-accepted", "quota-192h-168h-last-hour-accepted", "extend-36h-after-60h", "extend-hours-to-16nov-once", "reissue-hours-other-key", "reissue-after-pilot-allowed-until-original-end"))
+        for (id in listOf("third-contract-accepted", "quota-192h-168h-last-hour-accepted", "extend-36h-after-60h", "extend-hours-to-16nov-once"))
             assertNull(expect(id)["refused"], "$id must be accepted")
+        // Pilot slice 1: every reissue is refused (the TV engine merges a reissue with the original contract, audit B1 2026-10-03).
+        for (id in listOf("reissue-same-key-refused", "reissue-hours-other-key-refused", "reissue-days-floor-refused", "reissue-after-pilot-refused", "reissue-hours-exhausted-refused"))
+            assertTrue(((expect(id)["reason"] as? String) ?: "").isNotBlank(), "$id must carry a reason")
+        for (id in listOf("reissue-hours-other-key-refused", "reissue-days-floor-refused", "reissue-after-pilot-refused"))
+            assertTrue((expect(id)["reason"] as String).contains("Réémission indisponible"), "$id: reissue is closed during the pilot")
         assertTrue((expect("after-pilot-end-refused")["reason"] as String).contains("terminé"))
         assertTrue((expect("langues-refused")["reason"] as String).contains("Langues"))
         assertTrue((expect("extend-12h-after-90h-refused")["reason"] as String).contains("96"))
