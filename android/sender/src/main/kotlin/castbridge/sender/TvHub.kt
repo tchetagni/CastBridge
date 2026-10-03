@@ -34,8 +34,8 @@ enum class Channel(val label: String) { WIFI("Wi-Fi"), BLUETOOTH("Bluetooth"), W
 
 /** "Avancé" part of the "CastBridge TV" tab: pick the channel (Wi-Fi, Bluetooth, Wi-Fi Direct), then use the matching screen. */
 @Composable
-fun TvHubAdvanced() {
-    var channel by rememberSaveable { mutableStateOf(Channel.WIFI) }
+fun TvHubAdvanced(start: Channel = Channel.WIFI) {
+    var channel by rememberSaveable { mutableStateOf(start) }
     Column(Modifier.fillMaxSize()) {
         SingleChoiceSegmentedButtonRow(Modifier.fillMaxWidth().padding(horizontal = 16.dp, vertical = 8.dp)) {
             Channel.values().forEachIndexed { i, c ->

@@ -102,6 +102,9 @@ class MainActivity : ComponentActivity() {
         val queueItems by TransferQueue.items.collectAsState()
         val queueNote by TransferQueue.note.collectAsState()
         val glance = castbridge.core.ux.QueueGlances.of(queueItems, queueNote)
+        // the Bluetooth gateway, when it runs: visible from every other tab, with « Arrêter » (the home has its full card)
+        val gw by BtSshGatewayService.state.collectAsState()
+        val gwGlance = castbridge.core.ux.BtGatewayView.glance(gw.running, gw.tv, gw.ssh.running, gw.api.running, gw.ssh.listen.contains("0.0.0.0"))
         Scaffold(
             containerColor = MaterialTheme.colorScheme.background,
             topBar = {
@@ -140,6 +143,7 @@ class MainActivity : ComponentActivity() {
             Column(Modifier.padding(pad).fillMaxSize()) {
                 // sub-brand wordmark (branding/logo) above the Apprendre tab; the Jeux tab shows its own cards
                 if (castbridge.core.ux.QueueGlances.stripVisible(onHome = tab == home, glance = glance)) glance?.let { g -> QueueStrip(g) { select(home) } }
+                if (castbridge.core.ux.BtGatewayView.stripVisible(onHome = tab == home, glance = gwGlance)) gwGlance?.let { g -> GatewayStrip(g) { select(home) } }
                 if (tab == 4) SubBrandHeader(R.drawable.logo_apprendre_horizontal, "Apprendre")
                 Box(Modifier.weight(1f).fillMaxWidth()) { when (tab) { 0 -> App(); 1 -> TvHub(); 2 -> GamesScreen(); 3 -> castbridge.sender.player.PhoneLibraryScreen(); 5 -> ParentalTab(); else -> LearnScreen() } }
             }
