@@ -14,6 +14,9 @@
 
 ## 0. Journal en direct (le plus récent en haut)
 
+### 2026-10-03 : W17 — Boutique et location depuis la TV (branche `integration/agents`, cœur fusionné, écrans après la sortie du gel)
+- **W17 conçue, cœur en cours**. Conception : `docs/coordination/DESIGN-W17-STORE-TELEPHONE-ET-TV-2026-10-03.md` (deux rendus, aucun format nouveau, demande depuis la TV). Cœur fusionné (w17-01…04, 4 cahiers sonnet : `StoreCatalog`/`StoreAlias`, `StoreView`/`StoreTexts`/`StoreFlag`, `RentRequest`/`RentRequests`, `StoreApi`/`TrialPolicy`), harnais de tests (`StoreSim`/`StoreJourneyTest`, 6 parcours), docs (`STORE.md`, renvois dans `LOTS.md`/`RENTAL-LOTS.md`), outils (w17-10…11, après gel). Écrans (w17-06…08, téléphone + TV) : après sortie du gel W15 R3/R5, ou immédiate sur exception avec drapeau éteint (défaut false en release). Tous rapports : `docs/agent-reports/w17-*.md`. Reste : 3 cahiers écran, 2 cahiers outils. État : drapeau `store.enabled` composé (politique, lieu dans Settings), aucune dépendance.
+
 ### 2026-10-03 : ergonomie et navigation (branche `claude/ux-ergonomie`, non poussée, non validé sur appareils)
 - **Demande du propriétaire** : « améliore et optimise l'ergonomie et la navigation ». Audit chiffré + corrections sûres dans le gel : `docs/coordination/DESIGN-UX-ERGONOMIE-NAVIGATION-2026-10-03.md`, rapport `docs/agent-reports/ux-ergonomie.md`.
 - Fait (décisions pures `android/core/.../core/ux/UiTexts.kt`, 20 tests) : départ sur l'onglet « CastBridge TV » ; vocabulaire unique *Copier sur la TV et lire* / *Copier sur la TV* / *Déplacer vers la TV* / *Lire en direct* avec une ligne d'explication ; sept blocages muets de l'accueil expliqués ; barre « où en est ma copie » sur tous les onglets ; TV : focus D-pad de l'accueil jamais perdu, RETOUR sur la tuile d'origine, « Jeux » en profil enfant, aide et écran Langues vide corrigés.
