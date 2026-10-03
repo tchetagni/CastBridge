@@ -7,6 +7,7 @@ import kotlin.test.*
 
 private const val DAY = 24L * 3600 * 1000
 private const val T = 1_800_000_000_000L
+private const val INSTALL = "0123456789abcdef"
 
 /**
  * The whole path of a rented lot over the TV's API, in process: an activation carries the rental (its key wrapped for this TV), the lot arrives SEALED through the normal chunked upload,
@@ -31,7 +32,8 @@ class RentalApiTest {
         val installed = ArrayList<Activation>()
         val sweeper = RentalSweeper(ledger, vault, TvRentedLots(store), { installed.toList() }, { emptySet() }, { wall })
         val lotApi = TvLotApi(store)
-        val api = RentalApi(store, ledger, vault, { installed.toList() }, sweeper)
+        val api = RentalApi(store, ledger, vault, { installed.toList() }, sweeper, installId = { INSTALL })
+        fun rent() { ledger.markRented(contractKey(), id, meta, LotFamilies.explicit(emptySet(), setOf("learn:cm2"))) }
         fun install(a: Activation) { installed += a; ledger.install(a, installed.toList(), fp, vault) }
         fun upload(name: String, sealed: ByteArray) = lotApi.handleBody("/api/lots/upload", "POST", mapOf("name" to name, "offset" to "0", "total" to sealed.size.toString()), sealed)!!
         fun rentalInstall(name: String, contract: String, catalog: String) = api.handleBody("/api/rental/install", "POST", mapOf("name" to name, "contract" to contract), catalog.toByteArray())!!
@@ -40,6 +42,10 @@ class RentalApiTest {
     private fun rentalRight(days: Int, device: Fingerprints = fp, product: String = "loc-cm2", start: Long = T): Right.Rental {
         val key = RentalKeys.rentalKey(master, license, SeatIds.of(license, device), product, start)
         return Right.Rental(product, listOf("classe-cm2"), start, start, days, 0L, 0, 0, RentalKeys.makeBox(device, DeviceIdentity.kFor(device.n), key, product, start))
+    }
+    private fun hourRight(usageMinutes: Int, days: Int = 30, product: String = "loc-cm2", device: Fingerprints = fp): Right.Rental {
+        val key = RentalKeys.rentalKey(master, license, SeatIds.of(license, device), product, T)
+        return Right.Rental(product, listOf("classe-cm2"), T, T, days, 0L, usageMinutes, 3, RentalKeys.makeBox(device, DeviceIdentity.kFor(device.n), key, product, T))
     }
     private fun activation(vararg rights: Right, at: Long = T): Activation = Activation.decode(issuer.issue(ActivationIssuer.Request(ActivationKind.PRODUCTION, DeviceCode.of(fp), fp, at,
         rights = rights.toList(), license = license, seat = SeatIds.of(license, fp), windowHours = 48)).token)!!
@@ -103,5 +109,39 @@ class RentalApiTest {
         tv.upload(name, RentalKeys.seal(key(), id, 1, data))
         val r = tv.rentalInstall(name, contractKey(), trialCat)
         assertEquals(422, r.status, r.json); assertFalse(id in tv.learn.held, "refused as rented, so the installed copy is taken back")
+    }
+
+    @Test fun statusCarriesUnitAndUsage() {
+        val tv = Tv(); tv.install(activation(hourRight(720))); tv.rent()
+        tv.ledger.recordUsage(LotId("learn", "cm2"), 400, tv.installed)
+        val r = (JsonLite.obj(tv.api.statusJson())["rentals"] as List<*>)[0] as Map<*, *>
+        assertEquals("hours", r["unit"]); assertEquals(400L, (r["usedMinutes"] as Number).toLong()); assertEquals(720L, (r["maxUsageMinutes"] as Number).toLong())
+        assertEquals(320L, (r["remainingUsageMinutes"] as Number).toLong()); assertEquals(T, (r["period"] as Number).toLong()); assertEquals(T, (r["startsAt"] as Number).toLong())
+        assertFalse(r.containsKey("reason"), "no reason while the rental runs (null entries are not written)")
+        for (old in listOf("contract", "product", "bundles", "state", "usable", "remainingMs", "message", "endsAt", "lots", "keyInSafe")) assertTrue(r.containsKey(old), "old key « $old » unchanged")
+        // the budget is spent: the reason appears
+        tv.ledger.recordUsage(LotId("learn", "cm2"), 400, tv.installed)
+        val e = (JsonLite.obj(tv.api.statusJson())["rentals"] as List<*>)[0] as Map<*, *>
+        assertEquals("EXPIRED", e["state"]); assertEquals("USAGE", e["reason"])
+        // a rental in days: measured, no budget
+        val d = Tv(); d.install(activation(rentalRight(days = 7)))
+        val dr = (JsonLite.obj(d.api.statusJson())["rentals"] as List<*>)[0] as Map<*, *>
+        assertEquals("days", dr["unit"]); assertEquals(0L, (dr["maxUsageMinutes"] as Number).toLong())
+    }
+
+    @Test fun usageRouteReturnsTheReport() {
+        val tv = Tv(); tv.install(activation(hourRight(720))); tv.rent()
+        tv.ledger.recordUsage(LotId("learn", "cm2"), 90, tv.installed)
+        val r = tv.api.handle("/api/rental/usage", "GET", emptyMap())!!
+        assertEquals(200, r.status); assertTrue(r.mime.startsWith("text/plain"), "plain text, not JSON: ${r.mime}")
+        assertEquals(r.json, String(r.bytes!!, Charsets.UTF_8), "the same text in both forms")
+        val lines = r.json.lines().filter { it.isNotEmpty() }
+        assertEquals("castbridge-rental-usage-v1", lines[0]); assertEquals("install=$INSTALL", lines[1])
+        assertTrue(lines[2].startsWith("contract=loc-cm2@$T|unit=hours|used=90|max=720|state=ACTIVE"), lines[2])
+        for (secret in listOf(license, SeatIds.of(license, fp))) assertFalse(secret in r.json, "no licence, no seat in the statement")
+        assertEquals(405, tv.api.handle("/api/rental/usage", "POST", emptyMap())!!.status)
+        // without an installation id the TV says so instead of inventing one
+        val noId = RentalApi(tv.store, tv.ledger, tv.vault, { tv.installed.toList() }, tv.sweeper)
+        assertEquals(404, noId.handle("/api/rental/usage", "GET", emptyMap())!!.status)
     }
 }

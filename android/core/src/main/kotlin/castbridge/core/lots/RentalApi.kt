@@ -8,10 +8,11 @@ import java.io.File
 
 /**
  * TV side routes for RENTED lots (an [ApiExtension] behind the TV's authentication: PIN or trusted-phone token), additive to [TvLotApi]:
- * - GET  /api/rental                               the rentals of this TV: state, time left, lots held, SUPER_UNLIMITED or not
+ * - GET  /api/rental                               the rentals of this TV: state, time left, unit, minutes used / budget / left, lots held, SUPER_UNLIMITED or not (keys only ever ADDED)
  * - POST /api/rental/install?name=&contract=       body = the signed catalog. The lot file (SEALED for this TV by [RentalKeys], sent in chunks through /api/lots/upload) is opened with
  *                                                  the contract's key from the rental safe, then handed to the normal [TvLotStore] (signed catalog, plain size and SHA-256, budget), then
  *                                                  registered as rented so that the autonomous sweep deletes it at the end of the rental. 422 + French reason otherwise.
+ * - GET  /api/rental/usage                        the usage statement `castbridge-rental-usage-v1` (plain text; 404 when the installation id is not wired)
  * - POST /api/rental/sweep                         runs the sweep now (the phone calls it at reconnection; the TV also runs it at start and every few hours)
  *
  * The family of a lot (free / reserved) is the SEALING party's duty (the issuing tools refuse a free lot before they sign): only the holder of the rental master can seal a lot that opens with
@@ -21,6 +22,7 @@ import java.io.File
 class RentalApi(
     private val store: TvLotStore, private val ledger: RentalLedger, private val vault: RentalVault, private val activations: () -> List<Activation>,
     private val sweeper: RentalSweeper? = null, private val families: LotFamilies = LotFamilies { LotFamily.RESERVED },
+    private val installId: () -> String? = { null },
 ) : ApiExtension {
     override fun wantsBody(path: String) = path == "/api/rental/install"
 
@@ -55,6 +57,8 @@ class RentalApi(
                 val r = s.sweep(SweepTrigger.PHONE_RECONNECT)
                 ApiReply(200, JsonLite.write(linkedMapOf("ended" to r.endedNow, "keysDestroyed" to r.keysDestroyed, "lotsRemoved" to r.lotsRemoved.map(LotNames::key), "notices" to r.notices)))
             } ?: err(404, "balayage indisponible")
+            path == "/api/rental/usage" -> if (method != "GET") err(405, "utilisez GET") else installId()?.let { id -> runCatching { ledger.usageReport(activations(), id) }.getOrNull() }
+                ?.let { t -> ApiReply(200, t, t.toByteArray(Charsets.UTF_8), "text/plain; charset=utf-8") } ?: err(404, "relevé indisponible")
             else -> null
         }
     }
@@ -67,7 +71,9 @@ class RentalApi(
             "rentals" to statuses.map { s ->
                 linkedMapOf("contract" to s.key, "product" to s.contract.productId, "bundles" to s.contract.bundleIds, "state" to s.state.name, "usable" to s.usable,
                     "remainingMs" to s.remainingMs, "message" to s.message, "endsAt" to s.contract.endsAt,
-                    "lots" to (ledger.rec(s.key)?.lots?.toList() ?: emptyList()), "keyInSafe" to vault.hasKey(s.key))
+                    "lots" to (ledger.rec(s.key)?.lots?.toList() ?: emptyList()), "keyInSafe" to vault.hasKey(s.key),
+                    "unit" to s.contract.unit.name.lowercase(), "usedMinutes" to s.usedMinutes, "maxUsageMinutes" to s.maxUsageMinutes, "remainingUsageMinutes" to s.remainingUsageMinutes,
+                    "reason" to s.reason?.name, "period" to s.contract.period, "startsAt" to s.contract.startsAt)
             }))
     }
 

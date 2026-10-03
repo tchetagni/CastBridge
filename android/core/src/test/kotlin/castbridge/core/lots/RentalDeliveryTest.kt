@@ -24,7 +24,7 @@ class RentalDeliveryTest {
         val store = TvLotStore(File(dir, "lots"), mapOf("learn" to learn, "quiz" to quiz), listOf(Kit.pub), 10, { 0 }, LotBudget.TV_MAX_BYTES, { wall })
         val installed = ArrayList<Activation>()
         val sweeper = RentalSweeper(ledger, vault, TvRentedLots(store), { installed.toList() }, { emptySet() }, { wall })
-        val exts = listOf<castbridge.core.tv.ApiExtension>(TvLotApi(store), RentalApi(store, ledger, vault, { installed.toList() }, sweeper))
+        val exts = listOf<castbridge.core.tv.ApiExtension>(TvLotApi(store), RentalApi(store, ledger, vault, { installed.toList() }, sweeper, installId = { "0123456789abcdef" }))
         val log = ArrayList<String>()
         var failAfterUploads = Int.MAX_VALUE
         var uploads = 0
@@ -136,4 +136,37 @@ class RentalDeliveryTest {
     }
 
     private fun Tv.api() = exts[1]
+
+    @Test fun viewReadsUsageAndStaysCompatibleWithOldTv() {
+        val tv = Tv(); tv.install(activation(rentalRight(3)))
+        val live = RentalDelivery(tv).status().rentals.single()
+        assertEquals("days", live.unit); assertEquals(0L, live.maxUsageMinutes); assertEquals(0L, live.usedMinutes); assertEquals(T, live.period)
+        assertEquals(contract.substringAfter('@').toLong(), live.period)
+        // what an installed TV answered BEFORE this change (frozen fixture): no new key, nothing breaks, the new fields are null
+        val oldJson = """{"superUnlimited":false,"rentals":[{"contract":"loc-cm2@1800000000000","product":"loc-cm2","bundles":["classe-cm2"],"state":"ACTIVE","usable":true,"remainingMs":172800000,"message":"Il vous reste 2 jours","endsAt":1800172800000,"lots":["learn:cm2"],"keyInSafe":true}]}"""
+        val old = RentalDelivery { _, _, _, _ -> TvReply(200, oldJson) }.status()
+        assertTrue(old.reachable, old.error ?: ""); val r = old.rentals.single()
+        assertEquals("loc-cm2@1800000000000", r.contract); assertEquals(172_800_000L, r.remainingMs); assertEquals(listOf("learn:cm2"), r.lots)
+        assertNull(r.unit); assertNull(r.usedMinutes); assertNull(r.maxUsageMinutes); assertNull(r.remainingUsageMinutes); assertNull(r.reason); assertNull(r.period)
+        assertEquals(listOf("loc-cm2 : Il vous reste 2 jours - 1 lot(s) sur la TV"), old.lines(), "an old TV is shown exactly as before")
+    }
+
+    @Test fun hourRentalLineSaysUsageLeftAndTheLastDay() {
+        val r = TvRentalView.Rental("loc-cm2@1", "CM2", "ACTIVE", true, 5L, "x", listOf("learn:cm2"), unit = "hours", usedMinutes = 400, maxUsageMinutes = 720, remainingUsageMinutes = 320,
+            endsAt = 1_794_700_800_000L, period = 1)       // 2026-11-15 00:00 UTC
+        val v = TvRentalView(true, false, listOf(r))
+        assertEquals(listOf("CM2 : 5 h 20 d'utilisation restante(s) sur 12 h · à utiliser avant le 15/11"), v.lines(java.time.ZoneOffset.UTC))
+    }
+
+    @Test fun usageIsFetchedParsedAndAnOldTvIsToldToUpdate() {
+        val tv = Tv(); tv.install(activation(rentalRight(3)))
+        val got = RentalDelivery(tv).usage()
+        assertNotNull(got.report, got.message); assertEquals("0123456789abcdef", got.report!!.install); assertEquals(1, got.report!!.lines.size)
+        val none = RentalDelivery { _, _, _, _ -> TvReply(404, "{}") }.usage()
+        assertNull(none.report); assertEquals("cette TV ne fournit pas de relevé : mettez CastBridge-TV à jour", none.message)
+        val down = RentalDelivery { _, _, _, _ -> throw IOException("down") }.usage()
+        assertNull(down.report); assertEquals("La TV n'est pas à portée.", down.message)
+        val junk = RentalDelivery { _, _, _, _ -> TvReply(200, "pas un relevé") }.usage()
+        assertNull(junk.report); assertEquals("Relevé illisible de la TV.", junk.message)
+    }
 }
