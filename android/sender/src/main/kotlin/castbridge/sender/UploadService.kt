@@ -117,7 +117,7 @@ class UploadService : Service() {
         watchNetwork(disc)
         cancelled = false
         instance = this
-        _notice.value = null; _speed.value = 0
+        _notice.value = null; _speed.value = 0; _route.value = null
         worker = thread(name = "upload") { runJob(uri, job, disc) }
         return START_NOT_STICKY
     }
@@ -125,9 +125,15 @@ class UploadService : Service() {
     private fun runJob(uri: Uri, job0: Job, disc: TvDiscovery?) {
         val total = runCatching { contentResolver.openFileDescriptor(uri, "r")!!.use { it.statSize } }.getOrDefault(-1)
         if (total <= 0) { finish(State.Failed(job0, "Fichier illisible")); return }
-        val resolve: () -> String? = {
-            job0.manualHost?.let { h -> if (':' in h) "http://$h" else "http://$h:8765" } ?: disc?.find(job0.tvName)?.base
+        // R-18: ONE resolver (core TvEndpointResolver): manual/known address, discovery, Bluetooth gateway; the last address that answered stays valid 30 s,
+        // so a discovery emptied by a network change or a lost mDNS announcement no longer turns a progressing copy into « TV introuvable »
+        val endpoints = castbridge.core.tv.TvEndpointResolver({ System.currentTimeMillis() }) {
+            // a fresh discovery first (a TV that changed address), then the typed address, the Bluetooth gateway, and the address the cast screen already talks to
+            listOf(disc?.find(job0.tvName)?.base, job0.manualHost?.let { h -> if (':' in h) "http://$h" else "http://$h:8765" },
+                disc?.find("${job0.tvName} (Bluetooth)")?.base, hints[job0.tvName])
         }
+        val gate = castbridge.core.tv.MissingTvGate({ System.currentTimeMillis() })
+        val resolve: () -> String? = { endpoints.current()?.also { _route.value = routeOf(it.kind) }?.base }
         // « Rangement automatique » : the clean name is only kept if the TV is reachable and has no file of that name (never resume into another file)
         val job = castbridge.sender.agent.AgentAuto.settle(job0, resolve)
         progressiveNow = job.progressive
@@ -151,6 +157,7 @@ class UploadService : Service() {
         val t0 = System.nanoTime(); var first = -1L
         val onState: (ResumableUpload.State) -> Unit = { s ->
             if (s is ResumableUpload.State.Uploading) {
+                gate.progress(); endpoints.answered()            // R-18: bytes moved = the TV answers at this address
                 if (first < 0) first = s.sent
                 val dt = (System.nanoTime() - t0) / 1_000_000
                 if (dt > 500) _average.value = (s.sent - first) * 1000 / dt
@@ -184,7 +191,7 @@ class UploadService : Service() {
         // R-12 (second audit): what the original looked like BEFORE the copy (size, date): a « Déplacer » deletes only that very file
         val stamp0 = if (job.move) fileStamp(this, uri) else null
         sentWholeProof = false
-        val fast = if (!progressiveNow && !job.ordered && FastTransfer.enabled(this)) runFast(uri, job, total, resolve, credential, onState) else null
+        val fast = if (!progressiveNow && !job.ordered && FastTransfer.enabled(this)) runFast(uri, job, total, resolve, credential, gate, onState) else null
         val result = fast ?: ResumableUpload(job.fileName, total, resolve, { off -> openAt(uri, off) }, { cancelled }, pin = job.pin,
             target = job.target, onCheck = { _check.value = it }, credential = credential, noFiling = noFiling()).let { ru ->
                 ru.run(onState).also { r -> sentWholeProof = ru.sentWholeFile(r == ResumableUpload.State.Done) }
@@ -212,11 +219,14 @@ class UploadService : Service() {
      * Transfert rapide. null = la TV n'a pas le protocole multivoie (ou ne peut pas l'utiliser) : l'appelant envoie à l'ancienne.
      * Le débit alimente la même progression (pourcentage, durée) que l'envoi classique.
      */
-    private fun runFast(uri: Uri, job: Job, total: Long, resolve: () -> String?, credential: () -> String?,
+    private fun runFast(uri: Uri, job: Job, total: Long, resolve: () -> String?, credential: () -> String?, gate: castbridge.core.tv.MissingTvGate,
                         onState: (ResumableUpload.State) -> Unit): ResumableUpload.State? {
         var sent = 0L
         // the TV may need a moment to be (re)discovered; the classic path waits the same way
-        while (!cancelled && resolve() == null) { onState(ResumableUpload.State.Waiting(sent, total, "TV introuvable")); Thread.sleep(1000) }
+        // R-18: a miss is retried silently (bounded), « TV introuvable » only after a real silence (no lane progressed for 10 s), and the wait ends visibly
+        var gaveUp = false
+        castbridge.core.tv.TvWait.until(resolve, gate, { cancelled }, { Thread.sleep(it) }, { why -> onState(ResumableUpload.State.Waiting(sent, total, why)) }, { gaveUp = true })
+        if (gaveUp) return ResumableUpload.State.Failed("La TV reste introuvable : vérifiez qu'elle est allumée, sur le même Wi-Fi, puis réessayez").also(onState)
         if (cancelled) return ResumableUpload.State.Failed("annulé")
         val pfd = runCatching { contentResolver.openFileDescriptor(uri, "r") }.getOrNull() ?: return null
         pfd.use {
@@ -230,7 +240,8 @@ class UploadService : Service() {
                 lanes = { id, max -> listOf(WifiLane("wifi", resolve()?.removePrefix("http://") ?: "tv", id, connect, credential, maxStreams = max)) },
                 target = job.target, cancelled = { cancelled },
                 onProgress = { s, t -> sent = s; onState(ResumableUpload.State.Uploading(s, t)) },
-                onWaiting = { why -> onState(ResumableUpload.State.Waiting(sent, total, why)) },
+                // R-18: a lane that moved bytes in the last 10 s means the transfer is alive: a lane's passing failure is not shown as a wait
+                onWaiting = { why -> if (!gate.recentProgress()) onState(ResumableUpload.State.Waiting(sent, total, why)) },
                 onEvent = { Log.i(TAG, it) },
                 // the TV's measured disk speed: said once, in French, when the disk (not the Wi-Fi) is what limits the copy
                 onDisk = { _, note ->
@@ -309,11 +320,16 @@ class UploadService : Service() {
         val now = System.currentTimeMillis()
         if (now - lastNotified < 1000 && s is ResumableUpload.State.Uploading) return
         lastNotified = now
-        val (text, pct) = when (s) {
-            is ResumableUpload.State.Uploading -> "Envoi vers la TV" to (s.sent * 100 / s.total).toInt()
-            is ResumableUpload.State.Waiting -> "En attente du réseau (${s.reason})" to (s.sent * 100 / s.total).toInt()
+        // R-18: the same line as the cast screen (core TransferStatusLine)
+        val pct: Int
+        val facts = when (s) {
+            is ResumableUpload.State.Uploading -> { pct = (s.sent * 100 / s.total).toInt()
+                castbridge.core.ux.TransferFacts(pct, _route.value, copying = true, slowed = _notice.value == castbridge.core.xfer.PlaybackAwareCopyPolicy.SLOWED_TEXT, waiting = false, failure = null) }
+            is ResumableUpload.State.Waiting -> { pct = (s.sent * 100 / s.total).toInt()
+                castbridge.core.ux.TransferFacts(pct, _route.value, copying = false, slowed = false, waiting = true, failure = null) }
             else -> return
         }
+        val text = castbridge.core.ux.TransferStatusLine.forNotification(facts)
         runCatching { getSystemService(NotificationManager::class.java).notify(NOTIF, notification(text, pct)) }
     }
 
@@ -322,7 +338,7 @@ class UploadService : Service() {
         nm.createNotificationChannel(NotificationChannel(CHANNEL, "Envoi vers la TV", NotificationManager.IMPORTANCE_LOW))
         val cancel = android.app.PendingIntent.getService(this, 1,
             Intent(this, UploadService::class.java).setAction(ACTION_CANCEL), android.app.PendingIntent.FLAG_IMMUTABLE)
-        return Notification.Builder(this, CHANNEL).setContentTitle("CastBridge").setContentText("$text · $pct %").setSubText("$pct %")
+        return Notification.Builder(this, CHANNEL).setContentTitle("CastBridge").setContentText(text).setSubText("$pct %")
             .setSmallIcon(R.drawable.ic_stat_castbridge).setOngoing(true).setOnlyAlertOnce(true)
             .setProgress(100, pct, false)
             .addAction(Notification.Action.Builder(null, "Annuler", cancel).build()).build()
@@ -397,6 +413,18 @@ class UploadService : Service() {
         /** Average speed of the current upload since it (re)started, bytes per second. */
         val average: StateFlow<Long> = _average
         @Volatile private var instance: UploadService? = null
+        private val hints = java.util.concurrent.ConcurrentHashMap<String, String>()
+        /** R-18: the address the cast screen already reaches the TV at (its info polls work) is a source for the upload of the same TV (memory only). */
+        fun hintBase(tvName: String, base: String) { hints[tvName] = base }
+        private val _route = MutableStateFlow<castbridge.core.ux.CopyRouteKind?>(null)
+        /** R-18: the route the current upload really uses (resolver kind), for the one status line of the screen and the notification. */
+        val route: StateFlow<castbridge.core.ux.CopyRouteKind?> = _route
+        private fun routeOf(k: castbridge.core.tv.EndpointKind): castbridge.core.ux.CopyRouteKind? = when (k) {
+            castbridge.core.tv.EndpointKind.LAN -> castbridge.core.ux.CopyRouteKind.WIFI
+            castbridge.core.tv.EndpointKind.WIFI_DIRECT -> castbridge.core.ux.CopyRouteKind.WIFI_DIRECT
+            castbridge.core.tv.EndpointKind.BLUETOOTH -> castbridge.core.ux.CopyRouteKind.BLUETOOTH
+            castbridge.core.tv.EndpointKind.LAST_GOOD -> _route.value
+        }
         private val _notice = MutableStateFlow<String?>(null)
         /** Explains automatic fallbacks (e.g. MP4 index at the end of the file). */
         val notice: StateFlow<String?> = _notice

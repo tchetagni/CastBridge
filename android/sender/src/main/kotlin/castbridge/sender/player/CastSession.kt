@@ -56,6 +56,8 @@ data class Remote(
     val localDurMs: Long = 0,
     val volume: Int? = null,
     val message: String? = null,
+    /** R-18: colour of [message] while copying (core TransferStatusLine: green copying, orange waiting/slowed); null = the usual text colour. */
+    val messageLevel: castbridge.core.ux.SignalLevel? = null,
     val servedByPhone: Boolean = false,
     /** While the file is copied to the TV before it takes over: percentage, time left, time before the hand-over. */
     val copy: castbridge.core.phone.CopyProgress? = null,
@@ -174,6 +176,7 @@ object CastSession {
         val route = CopyRoute.decide(CopyRoute.Facts(action, item.castSource, layout, fastEnabled = castbridge.sender.FastTransfer.enabled(ctx)))
         android.util.Log.i("CastSession", "copy ${item.name}: ${route.transport} (${route.why})")
         val plays = CastPlan.playsOnTv(action, item.castSource)
+        UploadService.hintBase(target.tv.name, target.tv.base)       // R-18: the address this screen already reaches the TV at is a source for the upload too
         val ticket = try {
             withContext(Dispatchers.Main) {
                 castbridge.sender.TransferQueue.add(ctx, item.uri, item.name, size, move, playOnTv = plays, ordered = route.transport == CopyTransport.ORDERED,
@@ -200,8 +203,9 @@ object CastSession {
         // the name the TV receives (« Rangement automatique » may have given a clean one), remembered once the upload states stop being this file's
         var sentName = item.name
         var toldHeld = false
+        var lastReceived = -1L; var lastGrowthAt = 0L           // R-18: what the TV itself says (bytes received) is the second witness of « the copy goes on »
         while (currentCoroutineContextActive()) {
-            var waiting: String? = null
+            var waitingNow = false
             // the upload states describe this file only while the queue's last launch is this file (the next file of the queue may follow it)
             val own = castbridge.sender.TransferQueue.owns(ticket.id)
             val q = castbridge.sender.TransferQueue.item(ticket.id)
@@ -214,10 +218,11 @@ object CastSession {
                     if (!toldHeld) { toldHeld = true; q.note?.let { n -> _notices.tryEmit(n) } }
                 }
             }
-            when (val u = if (own) UploadService.state.value else null) {
+            val u0 = if (own) UploadService.state.value else null
+            when (val u = u0) {
                 is UploadService.State.Failed -> throw CastFailure("Échec de l'envoi : ${u.reason}")
                 is UploadService.State.Uploading -> { total = u.total; sentName = u.job.fileName }
-                is UploadService.State.Waiting -> { total = u.total; sentName = u.job.fileName; waiting = "En attente du réseau : ${u.reason}" }
+                is UploadService.State.Waiting -> { total = u.total; sentName = u.job.fileName; waitingNow = true }
                 is UploadService.State.Done -> sentName = u.job.fileName
                 else -> {}
             }
@@ -228,14 +233,24 @@ object CastSession {
             if (total > 0 && layout == null)
                 layout = if (Mp4Atoms.isIsoName(item.name)) mp4LayoutOf(ctx, item.uri, total) else Mp4Atoms.Layout.NOT_ISO
             val moovAtEnd = layout == Mp4Atoms.Layout.MOOV_AT_END
-            if (waiting != null) update { it.copy(message = waiting) }
+            // R-18: ONE line (core TransferStatusLine), the same as the notification's: bytes that grew on the TV in the last 10 s, or an upload in progress, mean « copying »
+            val nowMs = System.currentTimeMillis()
+            if (f != null && f.received > lastReceived) { if (lastReceived >= 0) lastGrowthAt = nowMs; lastReceived = f.received }
+            val copying = (own && u0 is UploadService.State.Uploading) || (nowMs - lastGrowthAt <= 10_000 && lastGrowthAt > 0)
+            val statusLine = castbridge.core.ux.TransferStatusLine.of(castbridge.core.ux.TransferFacts(
+                if (f != null && total > 0) (f.received * 100 / total).toInt() else null, if (own) UploadService.route.value else null,
+                copying, UploadService.notice.value == castbridge.core.xfer.PlaybackAwareCopyPolicy.SLOWED_TEXT, waitingNow, null))
+            val waiting: String? = if (waitingNow || copying && statusLine.level != castbridge.core.ux.SignalLevel.GREEN) statusLine.text else null
+            val waitingLevel = if (waiting != null) statusLine.level else null
+            if (waiting != null) update { it.copy(message = waiting, messageLevel = waitingLevel) }
             if (f != null && total > 0) {
                 val (pos, _) = phonePosition(item, fallbackPos, dur)
                 val speed = if (!own) 0L else UploadService.speed.value.takeIf { it > 0 } ?: UploadService.average.value
                 val progress = castbridge.core.phone.CopyProgress(f.received, total, speed,
                     Handoff.waitMs(f.received, total, dur, pos, moovAtEnd, speed), moovAtEnd = moovAtEnd)
                 val playsHere = phonePlays(item)
-                update { it.copy(copy = progress, phonePlays = playsHere, message = waiting ?: CopyHandoff.line(moovAtEnd, progress.fullInMs)) }
+                update { it.copy(copy = progress, phonePlays = playsHere, messageLevel = waitingLevel ?: if (copying) castbridge.core.ux.SignalLevel.GREEN else null,
+                    message = waiting ?: (CopyHandoff.line(moovAtEnd, progress.fullInMs) + (if (own) UploadService.route.value?.let { " · ${it.label}" }.orEmpty() else ""))) }
                 if (Handoff.copyReady(f.received, total, dur, pos, moovAtEnd, if (own) UploadService.speed.value else 0L)) {
                     val start = Handoff.phoneToTv(pos, dur)
                     // f.name: the TV's own name of the file (the clean one it filed it under once complete)

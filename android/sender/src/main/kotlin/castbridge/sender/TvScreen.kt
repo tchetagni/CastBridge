@@ -224,7 +224,9 @@ fun TvScreen(fixedBase: String? = null, extra: @Composable (TvClient) -> Unit = 
                         }
                         is UploadService.State.Waiting -> {
                             LinearProgressIndicator({ u.sent.toFloat() / u.total }, Modifier.fillMaxWidth())
-                            Text("En attente du réseau, reprise automatique à ${size(u.sent)} (${u.reason})",
+                            val route by UploadService.route.collectAsState()
+                            // R-18: the same line as the cast screen and the notification (core TransferStatusLine)
+                            Text(castbridge.core.ux.TransferStatusLine.forScreen(castbridge.core.ux.TransferFacts(if (u.total > 0) (u.sent * 100 / u.total).toInt() else null, route, false, false, true, null)) + " · ${size(u.sent)}",
                                 style = MaterialTheme.typography.bodySmall)
                         }
                         is UploadService.State.Done -> Text("« ${u.job.fileName} » est sur la TV, lecture lancée.",

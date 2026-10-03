@@ -14,6 +14,11 @@
 
 ## 0. Journal en direct (le plus récent en haut)
 
+### 2026-10-03 : « En attente du réseau : TV introuvable » alors que la copie avance (R-18) (branche `claude/fix-cast-status-introuvable`, non poussée, NON MESURÉ sur appareil, audit Opus à faire)
+- Rapport du propriétaire (CastBridge 1.2.40, CastBridge-TV 0.14.27/0.14.26) : l'écran de diffusion dit « TV introuvable » à 65 % alors que la notification montre la copie. **Cause établie par lecture** : la diffusion ajoute le fichier à la file sans adresse, l'envoi ne cherche la TV que par mDNS, dont la liste est vidée à chaque changement de réseau ; `runFast` annonçait « introuvable » sans tolérance. Les routes Wi-Fi Direct / Bluetooth hors découverte : hypothèse non observée.
+- Fait : `C/tv/TvEndpointResolver` (une seule adresse utilisable, péremption 30 s), `MissingTvGate`/`TvWait` (10 s de progrès, 15 s de silence, abandon visible à 10 min), `C/ux/TransferStatusLine` (même ligne et même couleur sur l'écran, l'onglet TV et la notification), `UploadService`/`CastSession`/`RemoteControls`/`TvScreen` câblés minces. Aucun changement de protocole, aucun changement côté TV.
+- Reste : **P-55** sur appareil (Wi-Fi, Wi-Fi Direct, Bluetooth seul) ; la notification de la file (canal `queue`) affiche encore son propre texte (nom du fichier, attente de la file) : seule la notification d'envoi (canal `upload`) suit la ligne unique.
+
 ### 2026-10-03 : affichage ajusté par défaut + mode Natif + qualité d'image du lecteur de la TV (branche `claude/tv-player-fit-quality`, non poussée, NON MESURÉ sur la TV, audit Opus à faire)
 - Demande du propriétaire : image qui s'ajuste parfaitement à la dalle par défaut, réglage « Natif » (format et qualité d'origine). Fait : `C/tv/VideoFit` (FIT défaut / FILL / STRETCH / NATIVE ; SAR et rotation honorés ; dalle lue à l'exécution), `C/tv/PictureQuality` (désentrelacement et `swscale` selon le processeur, détresse R-16 toujours prioritaire), clé `fm=` dans `PlayerPrefs`, préférence `video_fit`, deux lignes dans MENU (« Affichage », « Affichage par défaut »), ligne INFO. Additif : aucun changement téléphone ↔ TV. Détail et limites : `docs/TV-PLAYER.md`. Reste : **P-54** sur la TV.
 
