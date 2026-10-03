@@ -1,0 +1,2007 @@
+{
+ "batch": "higher-l3-physique-04",
+ "author": "Claude",
+ "date": "2026-10-03",
+ "questions": [
+  {
+   "course": "l3-phys",
+   "category": "Mécanique quantique : postulats, fonction d'onde, équation de Schrödinger",
+   "difficulty": 1,
+   "question": "Quel opérateur de l'équation de Schrödinger représente l'énergie totale d'une particule de masse m dans un potentiel V ?",
+   "choices": [
+    "Le lagrangien L = p²/(2m) − V",
+    "L'opérateur d'impulsion p = −iħ d/dx",
+    "L'hamiltonien H = p²/(2m) + V",
+    "Le commutateur [x, p] = iħ"
+   ],
+   "answer": "C",
+   "explanation": "L'hamiltonien est la somme des opérateurs d'énergie cinétique et potentielle, et gouverne l'évolution : iħ∂ψ/∂t = Hψ.",
+   "source": "Cours de mécanique quantique, famille Cohen-Tannoudji",
+   "verif": "import"
+  },
+  {
+   "course": "l3-phys",
+   "category": "Mécanique quantique : postulats, fonction d'onde, équation de Schrödinger",
+   "difficulty": 2,
+   "question": "Quelle est la relation de dispersion E(k) d'une particule libre non relativiste de masse m ?",
+   "choices": [
+    "E = ħck, linéaire en k",
+    "E = ħ²k²/(2m), parabolique en k",
+    "E = ħk/m, linéaire en k",
+    "E = ħ²k/(2m), sans carré sur k"
+   ],
+   "answer": "B",
+   "explanation": "L'onde plane e^(ikx) est état propre de l'impulsion p = ħk, d'où l'énergie p²/2m.",
+   "source": "Cours de mécanique quantique, famille Cohen-Tannoudji",
+   "verif": "import"
+  },
+  {
+   "course": "l3-phys",
+   "category": "Mécanique quantique : postulats, fonction d'onde, équation de Schrödinger",
+   "difficulty": 2,
+   "question": "Que vaut l'effet physique d'une phase globale e^(iθ) multipliant le vecteur d'état |ψ⟩ ?",
+   "choices": [
+    "Aucun : les probabilités de mesure restent inchangées",
+    "Elle modifie toutes les probabilités de mesure de l'état",
+    "Elle change l'énergie moyenne de l'état concerné",
+    "Elle rend l'état orthogonal à l'état de départ"
+   ],
+   "answer": "A",
+   "explanation": "Les amplitudes ⟨a|ψ⟩ sont toutes multipliées par la même phase, qui disparaît dans |⟨a|ψ⟩|². Les phases relatives, elles, comptent.",
+   "source": "Cours de mécanique quantique, famille Cohen-Tannoudji",
+   "verif": "import"
+  },
+  {
+   "course": "l3-phys",
+   "category": "Mécanique quantique : postulats, fonction d'onde, équation de Schrödinger",
+   "difficulty": 3,
+   "question": "Pour un potentiel pair V(−x) = V(x), que peut-on dire des états propres non dégénérés de l'énergie ?",
+   "choices": [
+    "Ils sont tous des fonctions paires, sans exception",
+    "Ils ont une parité définie, paire ou impaire",
+    "Ils sont tous des fonctions impaires, sans exception",
+    "Ils n'ont aucune parité définie en général"
+   ],
+   "answer": "B",
+   "explanation": "L'opérateur de parité commute avec H, et ses valeurs propres sont ±1.",
+   "source": "Cours de mécanique quantique, famille Cohen-Tannoudji",
+   "verif": "import"
+  },
+  {
+   "course": "l3-phys",
+   "category": "Mécanique quantique : postulats, fonction d'onde, équation de Schrödinger",
+   "difficulty": 4,
+   "question": "Que montre la violation des inégalités de Bell par des expériences comme celles d'Aspect ?",
+   "choices": [
+    "Que la mécanique quantique est fausse pour les photons",
+    "Que l'information voyage plus vite que la lumière",
+    "Que l'intrication disparaît quand la distance augmente",
+    "Qu'aucune théorie locale à variables cachées ne convient"
+   ],
+   "answer": "D",
+   "explanation": "Les corrélations mesurées dépassent la borne de toute théorie locale réaliste, sans permettre de signal supraluminique.",
+   "source": "Cours de mécanique quantique, famille Cohen-Tannoudji",
+   "verif": "import"
+  },
+  {
+   "course": "l3-phys",
+   "category": "Puits de potentiel et effet tunnel",
+   "difficulty": 1,
+   "question": "Quel phénomène permet à une particule de traverser une barrière de potentiel plus haute que son énergie ?",
+   "choices": [
+    "L'effet Doppler",
+    "L'effet tunnel",
+    "L'effet photoélectrique",
+    "L'effet Compton"
+   ],
+   "answer": "B",
+   "explanation": "La fonction d'onde décroît dans la barrière sans s'annuler, d'où une probabilité de transmission non nulle.",
+   "source": "Cours de mécanique quantique, famille Cohen-Tannoudji",
+   "verif": "import"
+  },
+  {
+   "course": "l3-phys",
+   "category": "Puits de potentiel et effet tunnel",
+   "difficulty": 1,
+   "question": "Quelles conditions de raccordement doit-on imposer à ψ en un point où le potentiel présente un saut fini ?",
+   "choices": [
+    "ψ et sa dérivée ψ′ sont continues",
+    "Seule ψ′ est continue, ψ pouvant sauter",
+    "ψ est continue et sa dérivée s'annule",
+    "ψ et ψ′ peuvent toutes deux sauter"
+   ],
+   "answer": "A",
+   "explanation": "L'équation de Schrödinger du second ordre à potentiel borné impose la continuité de ψ et de ψ′.",
+   "source": "Cours de mécanique quantique, famille Cohen-Tannoudji",
+   "verif": "import"
+  },
+  {
+   "course": "l3-phys",
+   "category": "Puits de potentiel et effet tunnel",
+   "difficulty": 2,
+   "question": "Pour une particule dans une boîte cubique de côté L, quelle est la dégénérescence du premier niveau excité ?",
+   "choices": [
+    "3",
+    "1",
+    "2",
+    "6"
+   ],
+   "answer": "A",
+   "explanation": "Les états (2,1,1), (1,2,1) et (1,1,2) ont la même énergie 6 × π²ħ²/(2mL²).",
+   "source": "Cours de mécanique quantique, famille Cohen-Tannoudji",
+   "verif": "import"
+  },
+  {
+   "course": "l3-phys",
+   "category": "Puits de potentiel et effet tunnel",
+   "difficulty": 2,
+   "question": "Que dit-on d'un puits sphérique de potentiel attractif en trois dimensions ?",
+   "choices": [
+    "Il admet toujours au moins un état lié, comme à 1D",
+    "Il n'a d'état lié que si sa profondeur dépasse un seuil",
+    "Il n'admet jamais d'état lié, quelle que soit sa profondeur",
+    "Il admet une infinité d'états liés d'énergie positive"
+   ],
+   "answer": "B",
+   "explanation": "Contrairement au cas à une dimension, le potentiel effectif de l'onde s impose une profondeur minimale V₀a² ≥ π²ħ²/8m.",
+   "source": "Cours de mécanique quantique, famille Cohen-Tannoudji",
+   "verif": "import"
+  },
+  {
+   "course": "l3-phys",
+   "category": "Puits de potentiel et effet tunnel",
+   "difficulty": 3,
+   "question": "Pour une barrière rectangulaire large (κa ≫ 1), comment se comporte la transmission T ?",
+   "choices": [
+    "T ≈ e^(−κa) sans facteur supplémentaire",
+    "T ≈ 1 − e^(−2κa)",
+    "T ≈ (E/V₀) · e^(+2κa)",
+    "T ≈ 16 E(V₀−E)/V₀² · e^(−2κa)"
+   ],
+   "answer": "D",
+   "explanation": "Le préfacteur est de l'ordre de l'unité ; l'exponentielle e^(−2κa) domine la dépendance.",
+   "source": "Cours de mécanique quantique, famille Cohen-Tannoudji",
+   "verif": "import"
+  },
+  {
+   "course": "l3-phys",
+   "category": "Oscillateur harmonique quantique",
+   "difficulty": 1,
+   "question": "Quelle observation expérimentale s'interprète par la quantification des vibrations moléculaires ?",
+   "choices": [
+    "Les raies d'émission visibles de la série de Balmer",
+    "Les franges de diffraction des rayons X dans un cristal",
+    "L'effet Hall observé dans les semi-conducteurs dopés",
+    "Les raies d'absorption infrarouge des molécules diatomiques"
+   ],
+   "answer": "D",
+   "explanation": "La vibration d'une liaison est modélisée par un oscillateur harmonique dont les niveaux sont espacés de ħω.",
+   "source": "Cours de mécanique quantique, famille Cohen-Tannoudji",
+   "verif": "import"
+  },
+  {
+   "course": "l3-phys",
+   "category": "Oscillateur harmonique quantique",
+   "difficulty": 1,
+   "question": "Quel est l'effet de l'opérateur d'annihilation a sur l'état |n⟩ ?",
+   "choices": [
+    "a|n⟩ = √(n+1) |n+1⟩",
+    "a|n⟩ = √n |n−1⟩",
+    "a|n⟩ = n |n⟩",
+    "a|n⟩ = |n⟩ pour tout n"
+   ],
+   "answer": "B",
+   "explanation": "Il abaisse d'un quantum ; a|0⟩ = 0, il n'y a pas d'état d'énergie inférieure au fondamental.",
+   "source": "Cours de mécanique quantique, famille Cohen-Tannoudji",
+   "verif": "import"
+  },
+  {
+   "course": "l3-phys",
+   "category": "Oscillateur harmonique quantique",
+   "difficulty": 2,
+   "question": "Que valent les moyennes ⟨x⟩ et ⟨p⟩ dans un état propre |n⟩ de l'oscillateur ?",
+   "choices": [
+    "Elles sont égales à ±√(ħ/2mω)",
+    "Elles sont nulles toutes les deux",
+    "⟨x⟩ est nulle et ⟨p⟩ vaut ħω",
+    "⟨x⟩ vaut n et ⟨p⟩ vaut n"
+   ],
+   "answer": "B",
+   "explanation": "|ψₙ|² est une fonction paire de x, donc ⟨x⟩ = 0, de même pour ⟨p⟩.",
+   "source": "Cours de mécanique quantique, famille Cohen-Tannoudji",
+   "verif": "import"
+  },
+  {
+   "course": "l3-phys",
+   "category": "Oscillateur harmonique quantique",
+   "difficulty": 2,
+   "question": "Quel comportement la chaleur spécifique du modèle d'Einstein (oscillateurs de même ω) présente-t-elle à basse température ?",
+   "choices": [
+    "Elle tend vers zéro de façon exponentielle",
+    "Elle reste égale à 3Nk_B quelle que soit la température",
+    "Elle tend vers zéro comme T³ aux basses températures",
+    "Elle diverge quand la température tend vers zéro"
+   ],
+   "answer": "A",
+   "explanation": "Le gap ħω gèle les excitations quand k_BT ≪ ħω ; à haute T on retrouve Dulong-Petit.",
+   "source": "Cours de mécanique quantique, famille Cohen-Tannoudji",
+   "verif": "import"
+  },
+  {
+   "course": "l3-phys",
+   "category": "Oscillateur harmonique quantique",
+   "difficulty": 3,
+   "question": "Qu'est-ce que l'effet Casimir ?",
+   "choices": [
+    "Une force attractive entre deux plaques neutres, due au vide",
+    "Une force répulsive entre deux aimants permanents voisins",
+    "L'émission de photons par un atome fortement excité",
+    "La dilatation de deux plaques conductrices chauffées"
+   ],
+   "answer": "A",
+   "explanation": "L'énergie de point zéro ½ħω par mode du champ électromagnétique varie avec la distance d, d'où une force en 1/d⁴ par unité de surface.",
+   "source": "Cours de mécanique quantique, famille Cohen-Tannoudji",
+   "verif": "import"
+  },
+  {
+   "course": "l3-phys",
+   "category": "Moment cinétique et spin",
+   "difficulty": 1,
+   "question": "Combien d'états de spin indépendants possède une particule de spin 1/2 ?",
+   "choices": [
+    "1",
+    "2",
+    "3",
+    "4"
+   ],
+   "answer": "B",
+   "explanation": "2s + 1 = 2 états, notés |↑⟩ et |↓⟩.",
+   "source": "Cours de mécanique quantique, famille Cohen-Tannoudji",
+   "verif": "import"
+  },
+  {
+   "course": "l3-phys",
+   "category": "Moment cinétique et spin",
+   "difficulty": 1,
+   "question": "Quelle valeur approchée du facteur de Landé g_s le spin de l'électron a-t-il ?",
+   "choices": [
+    "environ 1",
+    "environ 2",
+    "environ 1/2",
+    "environ 4"
+   ],
+   "answer": "B",
+   "explanation": "Le moment magnétique de spin est μ = −g_s μ_B S/ħ, avec g_s = 2,0023... d'après l'électrodynamique quantique.",
+   "source": "Cours de mécanique quantique, famille Cohen-Tannoudji",
+   "verif": "import"
+  },
+  {
+   "course": "l3-phys",
+   "category": "Moment cinétique et spin",
+   "difficulty": 2,
+   "question": "À quelle fréquence résonne un proton dans un champ de 1 T en résonance magnétique nucléaire ?",
+   "choices": [
+    "environ 42,6 MHz",
+    "environ 426 MHz",
+    "environ 4,26 MHz",
+    "environ 42,6 GHz"
+   ],
+   "answer": "A",
+   "explanation": "La fréquence de Larmor du proton est f = γ_p B/2π ≈ 42,58 MHz par tesla : base de l'IRM.",
+   "source": "Cours de mécanique quantique, famille Cohen-Tannoudji",
+   "verif": "import"
+  },
+  {
+   "course": "l3-phys",
+   "category": "Moment cinétique et spin",
+   "difficulty": 2,
+   "question": "Un spin 1/2 est préparé dans |+z⟩. Quelle est la probabilité de trouver +ħ/2 selon un axe faisant l'angle θ avec z ?",
+   "choices": [
+    "cos θ",
+    "sin²(θ/2)",
+    "cos²θ",
+    "cos²(θ/2)"
+   ],
+   "answer": "D",
+   "explanation": "Pour θ = 0, la probabilité vaut 1 ; pour θ = π, elle est nulle ; pour θ = π/2 elle vaut 1/2.",
+   "source": "Cours de mécanique quantique, famille Cohen-Tannoudji",
+   "verif": "import"
+  },
+  {
+   "course": "l3-phys",
+   "category": "Moment cinétique et spin",
+   "difficulty": 3,
+   "question": "Pourquoi le photon, de spin 1, n'a-t-il que deux états de polarisation et non trois ?",
+   "choices": [
+    "Parce qu'il est sa propre antiparticule, sans charge",
+    "Parce qu'il se comporte comme un fermion de spin 1/2",
+    "Parce que sa masse est nulle : l'hélicité 0 est exclue",
+    "Parce que sa charge électrique est strictement nulle"
+   ],
+   "answer": "C",
+   "explanation": "Pour une particule de masse nulle, seules les hélicités ±1 se propagent.",
+   "source": "Cours de mécanique quantique, famille Cohen-Tannoudji",
+   "verif": "import"
+  },
+  {
+   "course": "l3-phys",
+   "category": "Atome d'hydrogène",
+   "difficulty": 1,
+   "question": "Que signifie une énergie positive pour l'électron de l'atome d'hydrogène ?",
+   "choices": [
+    "L'électron est libre (état du continuum)",
+    "L'électron est dans un état excité lié",
+    "L'électron est dans l'état fondamental",
+    "L'atome est dans un état instable de courte durée"
+   ],
+   "answer": "A",
+   "explanation": "Les états liés ont E < 0 ; l'énergie positive correspond à un état de diffusion.",
+   "source": "Cours de mécanique quantique, famille Cohen-Tannoudji",
+   "verif": "import"
+  },
+  {
+   "course": "l3-phys",
+   "category": "Atome d'hydrogène",
+   "difficulty": 1,
+   "question": "Avec R∞ = 1,097×10⁷ m⁻¹, quelle est la longueur d'onde de la raie Hα (n = 3 vers n = 2) ?",
+   "choices": [
+    "environ 656 nm",
+    "environ 486 nm",
+    "environ 122 nm",
+    "environ 1875 nm"
+   ],
+   "answer": "A",
+   "explanation": "On a 1/λ = R∞(1/4 − 1/9) = R∞ × 5/36, d'où λ ≈ 656 nm : raie rouge de la série de Balmer.",
+   "source": "Cours de mécanique quantique, famille Cohen-Tannoudji",
+   "verif": "import"
+  },
+  {
+   "course": "l3-phys",
+   "category": "Atome d'hydrogène",
+   "difficulty": 2,
+   "question": "Que donne le théorème du viriel pour un potentiel coulombien en 1/r, entre énergie totale E et énergies cinétique T et potentielle V moyennes ?",
+   "choices": [
+    "⟨T⟩ = E et ⟨V⟩ = 0",
+    "⟨T⟩ = ⟨V⟩ = E/2",
+    "⟨T⟩ = −E et ⟨V⟩ = 2E",
+    "⟨T⟩ = 2E et ⟨V⟩ = −E"
+   ],
+   "answer": "C",
+   "explanation": "Pour V ∝ 1/r, 2⟨T⟩ = −⟨V⟩, donc E = ⟨T⟩ + ⟨V⟩ = −⟨T⟩.",
+   "source": "Cours de mécanique quantique, famille Cohen-Tannoudji",
+   "verif": "import"
+  },
+  {
+   "course": "l3-phys",
+   "category": "Atome d'hydrogène",
+   "difficulty": 2,
+   "question": "Quelle est la valeur moyenne ⟨r⟩ de la distance au noyau pour l'état 1s de l'hydrogène ?",
+   "choices": [
+    "a₀",
+    "2a₀",
+    "a₀/2",
+    "3a₀/2"
+   ],
+   "answer": "D",
+   "explanation": "La distance la plus probable est a₀, mais la dissymétrie de la densité radiale déplace la moyenne à 3a₀/2.",
+   "source": "Cours de mécanique quantique, famille Cohen-Tannoudji",
+   "verif": "import"
+  },
+  {
+   "course": "l3-phys",
+   "category": "Atome d'hydrogène",
+   "difficulty": 3,
+   "question": "Quelle symétrie cachée explique la dégénérescence en l des niveaux de l'atome d'hydrogène non relativiste ?",
+   "choices": [
+    "Une symétrie SO(4), liée au vecteur de Runge-Lenz",
+    "Une symétrie de jauge U(1) de l'électromagnétisme",
+    "Une symétrie par renversement du temps uniquement",
+    "Une symétrie SU(3) de saveur des quarks légers"
+   ],
+   "answer": "A",
+   "explanation": "Le vecteur de Runge-Lenz, conservé pour le potentiel en 1/r, regroupe les états de même n.",
+   "source": "Cours de mécanique quantique, famille Cohen-Tannoudji",
+   "verif": "import"
+  },
+  {
+   "course": "l3-phys",
+   "category": "Méthodes d'approximation : perturbations",
+   "difficulty": 1,
+   "question": "Qu'appelle-t-on effet Zeeman ?",
+   "choices": [
+    "La séparation des niveaux atomiques par un champ électrique",
+    "La diffusion de la lumière par des électrons libres",
+    "L'émission d'électrons par un métal éclairé en UV",
+    "Le déplacement et la séparation des niveaux par un champ magnétique"
+   ],
+   "answer": "D",
+   "explanation": "Le champ magnétique couple le moment magnétique de l'atome et lève la dégénérescence en m_j.",
+   "source": "Cours de mécanique quantique, famille Cohen-Tannoudji",
+   "verif": "import"
+  },
+  {
+   "course": "l3-phys",
+   "category": "Méthodes d'approximation : perturbations",
+   "difficulty": 1,
+   "question": "Quelle condition de validité la théorie des perturbations non dégénérées exige-t-elle ?",
+   "choices": [
+    "|⟨k|W|n⟩| ≫ |Eₙ − E_k|, éléments grands devant l'écart",
+    "|⟨k|W|n⟩| ≪ |Eₙ − E_k|, éléments petits devant l'écart",
+    "W doit être exactement égale à H₀ pour tout état",
+    "L'énergie du niveau non perturbé doit être nulle"
+   ],
+   "answer": "B",
+   "explanation": "Si la perturbation est comparable à l'écart entre niveaux, la série diverge ou est inadaptée.",
+   "source": "Cours de mécanique quantique, famille Cohen-Tannoudji",
+   "verif": "import"
+  },
+  {
+   "course": "l3-phys",
+   "category": "Méthodes d'approximation : perturbations",
+   "difficulty": 2,
+   "question": "Quand une perturbation sinusoïdale de pulsation ω induit-elle des transitions entre deux niveaux, au premier ordre ?",
+   "choices": [
+    "Quand ω est le plus grand possible",
+    "Quand ħω ≈ |E_f − E_i| (condition de résonance)",
+    "Quand ω est nulle",
+    "Quand ħω est très inférieure à |E_f − E_i|"
+   ],
+   "answer": "B",
+   "explanation": "Le terme résonnant conserve l'énergie : absorption si E_f > E_i, émission stimulée sinon.",
+   "source": "Cours de mécanique quantique, famille Cohen-Tannoudji",
+   "verif": "import"
+  },
+  {
+   "course": "l3-phys",
+   "category": "Méthodes d'approximation : perturbations",
+   "difficulty": 2,
+   "question": "Que dit l'approximation de Born pour la diffusion par un potentiel faible V(r) ?",
+   "choices": [
+    "L'amplitude est proportionnelle à la transformée de Fourier de V",
+    "L'amplitude est proportionnelle au carré du potentiel V",
+    "L'amplitude est nulle à tout ordre de perturbation",
+    "L'amplitude est indépendante de la forme du potentiel V"
+   ],
+   "answer": "A",
+   "explanation": "C'est le premier ordre de la théorie des perturbations pour la diffusion : f ∝ ∫V(r)e^(−iq·r)dr.",
+   "source": "Cours de mécanique quantique, famille Cohen-Tannoudji",
+   "verif": "import"
+  },
+  {
+   "course": "l3-phys",
+   "category": "Méthodes d'approximation : perturbations",
+   "difficulty": 3,
+   "question": "Quand la méthode variationnelle donne-t-elle une borne supérieure à l'énergie d'un état excité ?",
+   "choices": [
+    "Toujours, pour toute fonction d'essai normalisée",
+    "Jamais, c'est impossible pour un état excité",
+    "Quand la fonction d'essai est orthogonale aux états plus bas",
+    "Quand la fonction d'essai est une gaussienne centrée"
+   ],
+   "answer": "C",
+   "explanation": "L'orthogonalité aux états plus bas (par exemple par symétrie) garantit E[ψ] ≥ E_n.",
+   "source": "Cours de mécanique quantique, famille Cohen-Tannoudji",
+   "verif": "import"
+  },
+  {
+   "course": "l3-phys",
+   "category": "Physique statistique : ensembles microcanonique, canonique, grand-canonique",
+   "difficulty": 1,
+   "question": "Quelle est la valeur de la constante de Boltzmann k_B ?",
+   "choices": [
+    "1,38×10⁻²³ J/K",
+    "1,38×10⁻³ J/K",
+    "6,02×10²³ J/K",
+    "8,31 J/K"
+   ],
+   "answer": "A",
+   "explanation": "Elle relie température et énergie : k_B = R/N_A, avec R la constante des gaz parfaits.",
+   "source": "Cours de physique statistique, famille Diu / Reif",
+   "verif": "import"
+  },
+  {
+   "course": "l3-phys",
+   "category": "Physique statistique : ensembles microcanonique, canonique, grand-canonique",
+   "difficulty": 2,
+   "question": "Que dit le troisième principe de la thermodynamique à propos de l'entropie d'un cristal parfait à T → 0 ?",
+   "choices": [
+    "Elle tend vers zéro",
+    "Elle tend vers l'infini",
+    "Elle reste constante et non nulle quel que soit le système",
+    "Elle devient négative"
+   ],
+   "answer": "A",
+   "explanation": "Si l'état fondamental est non dégénéré, Ω = 1 et S = k_B ln 1 = 0.",
+   "source": "Cours de physique statistique, famille Diu / Reif",
+   "verif": "import"
+  },
+  {
+   "course": "l3-phys",
+   "category": "Physique statistique : ensembles microcanonique, canonique, grand-canonique",
+   "difficulty": 3,
+   "question": "Quelle est la fonction de partition Z de N sous-systèmes indépendants, discernables, de fonction de partition z chacun ?",
+   "choices": [
+    "Z = N·z, multiple de z",
+    "Z = z/N, quotient par N",
+    "Z = z^N / N!, avec factorielle",
+    "Z = z^N, puissance N-ième"
+   ],
+   "answer": "D",
+   "explanation": "Les probabilités se factorisent pour des sous-systèmes indépendants ; le 1/N! n'intervient que pour des particules identiques indiscernables.",
+   "source": "Cours de physique statistique, famille Diu / Reif",
+   "verif": "import"
+  },
+  {
+   "course": "l3-phys",
+   "category": "Physique statistique : ensembles microcanonique, canonique, grand-canonique",
+   "difficulty": 4,
+   "question": "Pourquoi les ensembles microcanonique, canonique et grand-canonique donnent-ils les mêmes résultats macroscopiques ?",
+   "choices": [
+    "Parce que tous les systèmes étudiés sont strictement isolés",
+    "Dans la limite thermodynamique, les fluctuations relatives s'effacent",
+    "Parce que la température est la même dans chaque ensemble",
+    "Parce que les fluctuations sont toujours de l'ordre de la moyenne"
+   ],
+   "answer": "B",
+   "explanation": "Les fluctuations relatives en 1/√N disparaissent pour N très grand : les ensembles deviennent équivalents.",
+   "source": "Cours de physique statistique, famille Diu / Reif",
+   "verif": "import"
+  },
+  {
+   "course": "l3-phys",
+   "category": "Physique statistique : ensembles microcanonique, canonique, grand-canonique",
+   "difficulty": 5,
+   "question": "Pour un gaz parfait classique en ensemble grand-canonique, que vaut la variance relative ⟨ΔN²⟩/⟨N⟩² du nombre de particules ?",
+   "choices": [
+    "1",
+    "1/⟨N⟩²",
+    "k_BT/⟨N⟩",
+    "1/⟨N⟩"
+   ],
+   "answer": "D",
+   "explanation": "Le nombre de particules suit une loi de Poisson dont la variance est égale à la moyenne.",
+   "source": "Cours de physique statistique, famille Diu / Reif",
+   "verif": "import"
+  },
+  {
+   "course": "l3-phys",
+   "category": "Statistiques de Fermi-Dirac et de Bose-Einstein",
+   "difficulty": 1,
+   "question": "Laquelle de ces particules est un fermion ?",
+   "choices": [
+    "Le photon",
+    "L'électron",
+    "Le pion π⁰",
+    "Le noyau d'hélium 4"
+   ],
+   "answer": "B",
+   "explanation": "L'électron est de spin 1/2 ; le photon (spin 1), le pion (spin 0) et l'hélium 4 (spin 0) sont des bosons.",
+   "source": "Cours de physique statistique, famille Diu / Reif",
+   "verif": "import"
+  },
+  {
+   "course": "l3-phys",
+   "category": "Statistiques de Fermi-Dirac et de Bose-Einstein",
+   "difficulty": 2,
+   "question": "Au-dessous de quelle température l'hélium 4 devient-il superfluide, à pression de vapeur saturante ?",
+   "choices": [
+    "environ 2,17 K",
+    "environ 4,2 K",
+    "environ 0,3 K",
+    "environ 77 K"
+   ],
+   "answer": "A",
+   "explanation": "La transition lambda a lieu à 2,17 K ; l'hélium 4 ne bout qu'à 4,2 K.",
+   "source": "Cours de physique statistique, famille Diu / Reif",
+   "verif": "import"
+  },
+  {
+   "course": "l3-phys",
+   "category": "Statistiques de Fermi-Dirac et de Bose-Einstein",
+   "difficulty": 3,
+   "question": "Comment la densité d'états des photons g(ω) varie-t-elle avec la pulsation ω dans une cavité de volume V ?",
+   "choices": [
+    "g(ω) ∝ ω V, linéaire en ω",
+    "g(ω) ∝ √ω V, racine carrée de ω",
+    "g(ω) ∝ ω² V, parabolique en ω",
+    "g(ω) est constante, indépendante de ω"
+   ],
+   "answer": "C",
+   "explanation": "Pour une relation de dispersion linéaire ω = ck en 3D, g(ω) = Vω²/(π²c³), avec deux polarisations.",
+   "source": "Cours de physique statistique, famille Diu / Reif",
+   "verif": "import"
+  },
+  {
+   "course": "l3-phys",
+   "category": "Statistiques de Fermi-Dirac et de Bose-Einstein",
+   "difficulty": 4,
+   "question": "Comment la pression d'un gaz de Fermi dégénéré à T = 0 s'exprime-t-elle en fonction de la densité n et de E_F ?",
+   "choices": [
+    "P = n E_F",
+    "P = (3/5) n E_F",
+    "P = (2/5) n E_F",
+    "P = (1/2) n E_F"
+   ],
+   "answer": "C",
+   "explanation": "La pression vaut les deux tiers de la densité d'énergie (3/5)nE_F, soit (2/5)nE_F.",
+   "source": "Cours de physique statistique, famille Diu / Reif",
+   "verif": "import"
+  },
+  {
+   "course": "l3-phys",
+   "category": "Statistiques de Fermi-Dirac et de Bose-Einstein",
+   "difficulty": 5,
+   "question": "Comment varie la chaleur spécifique d'un gaz parfait de bosons en 3D sous la température de condensation T_c ?",
+   "choices": [
+    "C_V ∝ T^(3/2)",
+    "C_V ∝ T³",
+    "C_V ∝ T",
+    "C_V = constante"
+   ],
+   "answer": "A",
+   "explanation": "L'énergie interne est celle des particules hors condensat, en proportion (T/T_c)^(3/2), donc U ∝ T^(5/2).",
+   "source": "Cours de physique statistique, famille Diu / Reif",
+   "verif": "import"
+  },
+  {
+   "course": "l3-phys",
+   "category": "Gaz de photons et rayonnement du corps noir",
+   "difficulty": 1,
+   "question": "Qu'observe-t-on sur la couleur d'un corps noir lorsque sa température augmente ?",
+   "choices": [
+    "Il passe du bleu au rouge",
+    "Il reste rouge, seule l'intensité augmente",
+    "Il devient invisible",
+    "Il passe du rouge au blanc puis au bleuté"
+   ],
+   "answer": "D",
+   "explanation": "Le maximum d'émission se déplace vers les courtes longueurs d'onde (loi de Wien).",
+   "source": "Cours de physique statistique, famille Diu / Reif",
+   "verif": "import"
+  },
+  {
+   "course": "l3-phys",
+   "category": "Gaz de photons et rayonnement du corps noir",
+   "difficulty": 2,
+   "question": "Comment s'exprime la puissance rayonnée par unité de surface d'un corps gris d'émissivité ε à la température T ?",
+   "choices": [
+    "P/S = σ T⁴/ε",
+    "P/S = ε σ T²",
+    "P/S = (1 − ε) σ T⁴",
+    "P/S = ε σ T⁴"
+   ],
+   "answer": "D",
+   "explanation": "L'émissivité, comprise entre 0 et 1, mesure l'écart au corps noir parfait (ε = 1).",
+   "source": "Cours de physique statistique, famille Diu / Reif",
+   "verif": "import"
+  },
+  {
+   "course": "l3-phys",
+   "category": "Gaz de photons et rayonnement du corps noir",
+   "difficulty": 3,
+   "question": "Que dit la loi de Kirchhoff sur l'émissivité et l'absorptivité d'un corps à l'équilibre thermique ?",
+   "choices": [
+    "Elles sont inversement proportionnelles l'une à l'autre",
+    "Elles sont indépendantes l'une de l'autre en général",
+    "Elles sont égales pour chaque longueur d'onde",
+    "Leur somme est toujours égale à 1 pour tout corps"
+   ],
+   "answer": "C",
+   "explanation": "Un bon absorbeur est un bon émetteur à chaque longueur d'onde : e_λ = a_λ.",
+   "source": "Cours de physique statistique, famille Diu / Reif",
+   "verif": "import"
+  },
+  {
+   "course": "l3-phys",
+   "category": "Gaz de photons et rayonnement du corps noir",
+   "difficulty": 4,
+   "question": "Quelle puissance 1 m² de corps noir à 1000 K rayonne-t-il, avec σ = 5,67×10⁻⁸ W·m⁻²·K⁻⁴ ?",
+   "choices": [
+    "environ 5,67 kW",
+    "environ 567 kW",
+    "environ 56,7 W",
+    "environ 56,7 kW"
+   ],
+   "answer": "D",
+   "explanation": "P = σT⁴ = 5,67×10⁻⁸ × 10¹² = 5,67×10⁴ W.",
+   "source": "Cours de physique statistique, famille Diu / Reif",
+   "verif": "import"
+  },
+  {
+   "course": "l3-phys",
+   "category": "Gaz de photons et rayonnement du corps noir",
+   "difficulty": 5,
+   "question": "Quelle luminosité obtient-on pour le Soleil (R ≈ 6,96×10⁸ m, T ≈ 5800 K) en le traitant comme un corps noir ?",
+   "choices": [
+    "environ 4×10²³ W",
+    "environ 4×10²⁶ W",
+    "environ 4×10³⁰ W",
+    "environ 4×10²⁰ W"
+   ],
+   "answer": "B",
+   "explanation": "L = 4πR²σT⁴ ≈ 3,9×10²⁶ W, en bon accord avec la valeur mesurée.",
+   "source": "Cours de physique statistique, famille Diu / Reif",
+   "verif": "import"
+  },
+  {
+   "course": "l3-phys",
+   "category": "Thermodynamique des phénomènes irréversibles",
+   "difficulty": 1,
+   "question": "Dans quel sens la chaleur s'écoule-t-elle spontanément lorsqu'on met en contact deux corps de températures différentes ?",
+   "choices": [
+    "Du corps chaud vers le corps froid",
+    "Du corps froid vers le corps chaud",
+    "Dans les deux sens à la fois, avec des flux égaux",
+    "Dans le sens de la plus grande masse"
+   ],
+   "answer": "A",
+   "explanation": "Ce sens traduit l'irréversibilité : la production d'entropie J_Q·∇(1/T) est positive.",
+   "source": "Cours de thermodynamique et physique statistique, famille Diu / Callen",
+   "verif": "import"
+  },
+  {
+   "course": "l3-phys",
+   "category": "Thermodynamique des phénomènes irréversibles",
+   "difficulty": 2,
+   "question": "Quelle équation obtient-on en combinant la loi de Fick avec la conservation du nombre de particules ?",
+   "choices": [
+    "∂n/∂t = −D ∇n, premier ordre en espace",
+    "∂²n/∂t² = D ∇²n, équation d'onde",
+    "∂n/∂t = D ∇²n, premier ordre en temps",
+    "∂n/∂t = D n, sans dérivée spatiale"
+   ],
+   "answer": "C",
+   "explanation": "C'est l'équation de diffusion, analogue à l'équation de la chaleur.",
+   "source": "Cours de thermodynamique et physique statistique, famille Diu / Callen",
+   "verif": "import"
+  },
+  {
+   "course": "l3-phys",
+   "category": "Thermodynamique des phénomènes irréversibles",
+   "difficulty": 3,
+   "question": "Quel ordre de grandeur donne le temps t ≈ L²/D pour une molécule qui diffuse sur L = 1 mm, avec D = 10⁻⁹ m²/s ?",
+   "choices": [
+    "environ 1 s",
+    "environ 1000 s",
+    "environ 10⁶ s",
+    "environ 10⁻³ s"
+   ],
+   "answer": "B",
+   "explanation": "t = (10⁻³)²/10⁻⁹ = 10³ s : la diffusion est lente aux grandes échelles, le temps croît comme L².",
+   "source": "Cours de thermodynamique et physique statistique, famille Diu / Callen",
+   "verif": "import"
+  },
+  {
+   "course": "l3-phys",
+   "category": "Thermodynamique des phénomènes irréversibles",
+   "difficulty": 4,
+   "question": "Que donne la relation de Stokes-Einstein pour le coefficient de diffusion d'une sphère de rayon r dans un fluide de viscosité η ?",
+   "choices": [
+    "D = 6πηr/(k_BT)",
+    "D = k_BT/(6πη r²)",
+    "D = k_BT/(6πηr)",
+    "D = 6π k_BT η r"
+   ],
+   "answer": "C",
+   "explanation": "Elle combine la relation d'Einstein D = μk_BT et la mobilité de Stokes μ = 1/(6πηr).",
+   "source": "Cours de thermodynamique et physique statistique, famille Diu / Callen",
+   "verif": "import"
+  },
+  {
+   "course": "l3-phys",
+   "category": "Thermodynamique des phénomènes irréversibles",
+   "difficulty": 5,
+   "question": "Que dit la formule de Green-Kubo pour le coefficient de diffusion D en 1D ?",
+   "choices": [
+    "D est le carré de la vitesse moyenne de la particule",
+    "D est l'intégrale de l'autocorrélation des vitesses",
+    "D est la dérivée de la vitesse par rapport au temps",
+    "D est la moyenne de la force exercée sur la particule"
+   ],
+   "answer": "B",
+   "explanation": "Les coefficients de transport se déduisent des fluctuations à l'équilibre : exemple du théorème de fluctuation-dissipation.",
+   "source": "Cours de thermodynamique et physique statistique, famille Diu / Callen",
+   "verif": "import"
+  },
+  {
+   "course": "l3-phys",
+   "category": "Mécanique analytique : équations de Lagrange, principe de moindre action",
+   "difficulty": 1,
+   "question": "Qu'appelle-t-on liaison holonome ?",
+   "choices": [
+    "Une contrainte sur les vitesses, non intégrable",
+    "Une force de frottement visqueux sur le mobile",
+    "Une contrainte f(q₁ à qₙ, t) = 0 entre les coordonnées",
+    "Une force centrale dérivant d'un potentiel conservatif"
+   ],
+   "answer": "C",
+   "explanation": "Une liaison holonome réduit le nombre de degrés de liberté, ce qui n'est pas le cas d'une liaison non holonome.",
+   "source": "Cours de mécanique analytique, famille Goldstein / Landau-Lifchitz",
+   "verif": "import"
+  },
+  {
+   "course": "l3-phys",
+   "category": "Mécanique analytique : équations de Lagrange, principe de moindre action",
+   "difficulty": 2,
+   "question": "Quelle est la période des petites oscillations d'un pendule simple de longueur l ?",
+   "choices": [
+    "T = 2π√(g/l), racine du rapport g sur l",
+    "T = π√(l/g), sans le facteur deux",
+    "T = 2π l/g, sans racine carrée",
+    "T = 2π√(l/g), racine du rapport l sur g"
+   ],
+   "answer": "D",
+   "explanation": "Pour θ petit, sin θ ≈ θ et l'équation θ̈ + (g/l)θ = 0 donne ω = √(g/l).",
+   "source": "Cours de mécanique analytique, famille Goldstein / Landau-Lifchitz",
+   "verif": "import"
+  },
+  {
+   "course": "l3-phys",
+   "category": "Mécanique analytique : équations de Lagrange, principe de moindre action",
+   "difficulty": 3,
+   "question": "Quelle grandeur est conservée pour une particule libre en vertu de l'invariance du lagrangien par translation spatiale ?",
+   "choices": [
+    "Le moment cinétique",
+    "L'énergie cinétique seule",
+    "La position du centre de masse",
+    "L'impulsion (quantité de mouvement)"
+   ],
+   "answer": "D",
+   "explanation": "Théorème de Noether : à la symétrie par translation correspond la conservation de la quantité de mouvement.",
+   "source": "Cours de mécanique analytique, famille Goldstein / Landau-Lifchitz",
+   "verif": "import"
+  },
+  {
+   "course": "l3-phys",
+   "category": "Mécanique analytique : équations de Lagrange, principe de moindre action",
+   "difficulty": 4,
+   "question": "Comment traite-t-on dans le formalisme de Lagrange une force de frottement visqueux F = −γq̇ ?",
+   "choices": [
+    "On l'inclut simplement dans l'énergie potentielle V(q)",
+    "On ajoute un terme de dissipation de Rayleigh, −∂𝒟/∂q̇",
+    "On l'ignore, car elle ne dérive d'aucun lagrangien",
+    "On remplace le lagrangien par l'énergie mécanique totale"
+   ],
+   "answer": "B",
+   "explanation": "La force ne dérive pas d'un potentiel ; la fonction de Rayleigh permet d'écrire d(∂L/∂q̇)/dt − ∂L/∂q = −∂𝒟/∂q̇.",
+   "source": "Cours de mécanique analytique, famille Goldstein / Landau-Lifchitz",
+   "verif": "import"
+  },
+  {
+   "course": "l3-phys",
+   "category": "Mécanique analytique : équations de Lagrange, principe de moindre action",
+   "difficulty": 5,
+   "question": "Quel exemple est une contrainte non holonome ?",
+   "choices": [
+    "Une bille roulant sans glisser sur un plan, libre de pivoter",
+    "Un pendule simple suspendu à un fil de longueur fixe",
+    "Une perle glissant sans frottement sur un cerceau rigide",
+    "Un point astreint à rester sur la surface d'une sphère"
+   ],
+   "answer": "A",
+   "explanation": "Les vitesses de contact doivent être nulles, mais la condition n'est pas intégrable en une relation entre coordonnées seules.",
+   "source": "Cours de mécanique analytique, famille Goldstein / Landau-Lifchitz",
+   "verif": "import"
+  },
+  {
+   "course": "l3-phys",
+   "category": "Formalisme hamiltonien",
+   "difficulty": 1,
+   "question": "Quelles variables décrivent l'espace des phases d'une particule se déplaçant sur une droite ?",
+   "choices": [
+    "La position x seule",
+    "La vitesse v et l'accélération a",
+    "La position x et l'impulsion p",
+    "L'énergie E et le temps t"
+   ],
+   "answer": "C",
+   "explanation": "L'état est un point du plan (x, p) ; une trajectoire hamiltonienne est une courbe dans ce plan.",
+   "source": "Cours de mécanique analytique, famille Goldstein / Landau-Lifchitz",
+   "verif": "import"
+  },
+  {
+   "course": "l3-phys",
+   "category": "Formalisme hamiltonien",
+   "difficulty": 1,
+   "question": "Quelle propriété le crochet de Poisson vérifie-t-il ?",
+   "choices": [
+    "La symétrie : {f, g} = {g, f}",
+    "La nullité : {f, g} = 0 pour tout couple",
+    "La commutativité des produits : {f, g} = fg",
+    "L'antisymétrie : {f, g} = −{g, f}"
+   ],
+   "answer": "D",
+   "explanation": "Il en résulte {f, f} = 0, donc dH/dt = ∂H/∂t.",
+   "source": "Cours de mécanique analytique, famille Goldstein / Landau-Lifchitz",
+   "verif": "import"
+  },
+  {
+   "course": "l3-phys",
+   "category": "Formalisme hamiltonien",
+   "difficulty": 2,
+   "question": "Quel type de transformation fait passer du lagrangien L(q, q̇) à l'hamiltonien H(q, p) ?",
+   "choices": [
+    "Une transformée de Fourier",
+    "Une transformée de Legendre",
+    "Une transformée de Laplace",
+    "Une transformation de Lorentz"
+   ],
+   "answer": "B",
+   "explanation": "On remplace la variable q̇ par son conjugué p = ∂L/∂q̇ ; H = pq̇ − L.",
+   "source": "Cours de mécanique analytique, famille Goldstein / Landau-Lifchitz",
+   "verif": "import"
+  },
+  {
+   "course": "l3-phys",
+   "category": "Formalisme hamiltonien",
+   "difficulty": 3,
+   "question": "Comment se distinguent les mouvements du pendule simple dans l'espace des phases ?",
+   "choices": [
+    "Toutes les trajectoires sont des cercles centrés à l'origine",
+    "Une séparatrice sépare oscillations (fermées) et rotations (ouvertes)",
+    "Toutes les trajectoires sont des droites de pente constante",
+    "Il n'existe que des trajectoires ouvertes non bornées"
+   ],
+   "answer": "B",
+   "explanation": "La séparatrice correspond à l'énergie 2mgl, où le pendule atteint le point haut avec une vitesse nulle.",
+   "source": "Cours de mécanique analytique, famille Goldstein / Landau-Lifchitz",
+   "verif": "import"
+  },
+  {
+   "course": "l3-phys",
+   "category": "Formalisme hamiltonien",
+   "difficulty": 5,
+   "question": "Que dit l'identité de Jacobi pour les crochets de Poisson ?",
+   "choices": [
+    "{f,{g,h}} = {{f,g},h} pour toute fonction",
+    "{f,{g,h}} = {f,g}{f,h}",
+    "{f,{g,h}} + {g,{h,f}} + {h,{f,g}} = 0",
+    "{f, gh} = {f, g} + {f, h}"
+   ],
+   "answer": "C",
+   "explanation": "Avec l'antisymétrie, elle fait de l'ensemble des fonctions sur l'espace des phases une algèbre de Lie.",
+   "source": "Cours de mécanique analytique, famille Goldstein / Landau-Lifchitz",
+   "verif": "import"
+  },
+  {
+   "course": "l3-phys",
+   "category": "Électromagnétisme dans la matière : diélectriques, milieux magnétiques",
+   "difficulty": 1,
+   "question": "Que se passe-t-il à l'échelle microscopique lorsqu'on place un diélectrique dans un champ électrique ?",
+   "choices": [
+    "Des charges libres circulent sans limite dans le matériau",
+    "Le champ s'annule instantanément à l'intérieur du matériau",
+    "Des dipôles se créent ou s'orientent le long du champ",
+    "Les atomes se transforment spontanément en ions positifs"
+   ],
+   "answer": "C",
+   "explanation": "La polarisation résulte de la déformation des nuages électroniques ou de l'orientation des molécules polaires.",
+   "source": "Cours d'électromagnétisme, famille Jackson / Griffiths",
+   "verif": "import"
+  },
+  {
+   "course": "l3-phys",
+   "category": "Électromagnétisme dans la matière : diélectriques, milieux magnétiques",
+   "difficulty": 1,
+   "question": "Qu'appelle-t-on rigidité diélectrique d'un matériau ?",
+   "choices": [
+    "La capacité du matériau à conduire un courant",
+    "La constante diélectrique relative",
+    "Le champ électrique maximal avant le claquage",
+    "La fréquence de résonance de ses dipôles"
+   ],
+   "answer": "C",
+   "explanation": "Pour l'air sec, ce champ est de l'ordre de 3 MV/m.",
+   "source": "Cours d'électromagnétisme, famille Jackson / Griffiths",
+   "verif": "import"
+  },
+  {
+   "course": "l3-phys",
+   "category": "Électromagnétisme dans la matière : diélectriques, milieux magnétiques",
+   "difficulty": 2,
+   "question": "Comment varie la susceptibilité magnétique d'un ferromagnétique au-dessus de sa température de Curie T_C ?",
+   "choices": [
+    "χ = C/(T − T_C), loi de Curie-Weiss",
+    "χ = C/T, loi de Curie sans décalage",
+    "χ = C, constante quelle que soit la température",
+    "χ = 0, le matériau devenant diamagnétique parfait"
+   ],
+   "answer": "A",
+   "explanation": "Le matériau devient paramagnétique, avec une divergence de la susceptibilité en approchant T_C par le haut.",
+   "source": "Cours d'électromagnétisme, famille Jackson / Griffiths",
+   "verif": "import"
+  },
+  {
+   "course": "l3-phys",
+   "category": "Électromagnétisme dans la matière : diélectriques, milieux magnétiques",
+   "difficulty": 3,
+   "question": "Quelle conséquence l'absence de monopôles magnétiques a-t-elle à une interface entre deux milieux ?",
+   "choices": [
+    "La composante normale de B est continue",
+    "La composante normale de H est continue",
+    "La composante tangentielle de B est continue",
+    "Les composantes normales de B et H sont discontinues"
+   ],
+   "answer": "A",
+   "explanation": "∇·B = 0 donne la continuité de B_n ; la composante tangentielle de H est continue en l'absence de courants surfaciques libres.",
+   "source": "Cours d'électromagnétisme, famille Jackson / Griffiths",
+   "verif": "import"
+  },
+  {
+   "course": "l3-phys",
+   "category": "Électromagnétisme dans la matière : diélectriques, milieux magnétiques",
+   "difficulty": 5,
+   "question": "Que traduisent les relations de Kramers-Kronig entre les parties réelle et imaginaire de la permittivité ε(ω) ?",
+   "choices": [
+    "La causalité de la réponse du milieu au champ",
+    "La conservation de la charge électrique totale du milieu",
+    "L'isotropie spatiale parfaite du milieu étudié",
+    "La linéarité stricte de la réponse du milieu"
+   ],
+   "answer": "A",
+   "explanation": "Une réponse qui ne précède pas l'excitation rend analytique ε(ω) dans le demi-plan supérieur : la dispersion implique l'absorption.",
+   "source": "Cours d'électromagnétisme, famille Jackson / Griffiths",
+   "verif": "import"
+  },
+  {
+   "course": "l3-phys",
+   "category": "Rayonnement d'une charge accélérée et antennes",
+   "difficulty": 1,
+   "question": "Qu'engendre une antenne émettrice parcourue par un courant alternatif ?",
+   "choices": [
+    "Un champ électrostatique pur, sans propagation",
+    "Une onde électromagnétique qui se propage au loin",
+    "Un champ magnétostatique pur, sans propagation",
+    "Un courant continu dans l'espace environnant"
+   ],
+   "answer": "B",
+   "explanation": "Le courant variable crée des champs variables, qui se propagent à la vitesse de la lumière.",
+   "source": "Cours d'électromagnétisme, famille Jackson / Griffiths",
+   "verif": "import"
+  },
+  {
+   "course": "l3-phys",
+   "category": "Rayonnement d'une charge accélérée et antennes",
+   "difficulty": 1,
+   "question": "Quel critère distingue le champ lointain du champ proche d'une antenne ?",
+   "choices": [
+    "r ≪ λ, à proximité immédiate de l'antenne",
+    "Seule la fréquence en décide, jamais la distance",
+    "Le champ proche décroît toujours en 1/r, comme le lointain",
+    "r ≫ λ et r ≫ d²/λ, d étant la taille de l'antenne"
+   ],
+   "answer": "D",
+   "explanation": "En champ lointain, E et B sont transverses et décroissent en 1/r ; le champ proche contient des termes en 1/r² et 1/r³.",
+   "source": "Cours d'électromagnétisme, famille Jackson / Griffiths",
+   "verif": "import"
+  },
+  {
+   "course": "l3-phys",
+   "category": "Rayonnement d'une charge accélérée et antennes",
+   "difficulty": 2,
+   "question": "Pourquoi le ciel est-il bleu, d'après la diffusion Rayleigh ?",
+   "choices": [
+    "Diffusion en λ⁴ : les grandes longueurs d'onde diffusent plus",
+    "Absorption sélective du rouge par la haute atmosphère",
+    "Émission du Soleil concentrée dans le bleu uniquement",
+    "Diffusion en 1/λ⁴ : les courtes longueurs d'onde diffusent plus"
+   ],
+   "answer": "D",
+   "explanation": "La section de diffusion par de petites particules est proportionnelle à ω⁴, le bleu étant diffusé environ 5 à 10 fois plus que le rouge.",
+   "source": "Cours d'électromagnétisme, famille Jackson / Griffiths",
+   "verif": "import"
+  },
+  {
+   "course": "l3-phys",
+   "category": "Rayonnement d'une charge accélérée et antennes",
+   "difficulty": 3,
+   "question": "Que dit le théorème de réciprocité pour une antenne ?",
+   "choices": [
+    "Elle ne peut fonctionner qu'en émission pure",
+    "Son diagramme est identique en émission et en réception",
+    "Son gain en réception est toujours nul",
+    "Sa fréquence d'émission diffère de celle de réception"
+   ],
+   "answer": "B",
+   "explanation": "Pour des milieux linéaires et réciproques, les propriétés directionnelles sont identiques.",
+   "source": "Cours d'électromagnétisme, famille Jackson / Griffiths",
+   "verif": "import"
+  },
+  {
+   "course": "l3-phys",
+   "category": "Rayonnement d'une charge accélérée et antennes",
+   "difficulty": 5,
+   "question": "Quand une particule chargée émet-elle du rayonnement Tcherenkov dans un milieu d'indice n ?",
+   "choices": [
+    "Quand sa vitesse est inférieure à c/n",
+    "Quand elle est immobile",
+    "Quand son accélération est nulle et sa vitesse inférieure à c",
+    "Quand sa vitesse dépasse c/n"
+   ],
+   "answer": "D",
+   "explanation": "La lumière est émise en cône d'angle θ tel que cos θ = c/(nv).",
+   "source": "Cours d'électromagnétisme, famille Jackson / Griffiths",
+   "verif": "import"
+  },
+  {
+   "course": "l3-phys",
+   "category": "Guides d'ondes et optique ondulatoire",
+   "difficulty": 1,
+   "question": "Que dit le principe de Huygens-Fresnel ?",
+   "choices": [
+    "L'onde se propage uniquement en ligne droite, sans diffraction",
+    "L'onde ne se propage que dans le vide parfait",
+    "Chaque point d'un front d'onde est une source secondaire",
+    "Les rayons lumineux ne peuvent jamais interférer entre eux"
+   ],
+   "answer": "C",
+   "explanation": "La superposition des ondelettes secondaires, avec leurs phases, reconstruit le front d'onde suivant et explique la diffraction.",
+   "source": "Cours d'optique ondulatoire et d'électromagnétisme, famille Hecht / Jackson",
+   "verif": "import"
+  },
+  {
+   "course": "l3-phys",
+   "category": "Guides d'ondes et optique ondulatoire",
+   "difficulty": 1,
+   "question": "Qu'observe-t-on au centre de l'image de diffraction d'une ouverture circulaire éclairée en onde plane ?",
+   "choices": [
+    "Une tache centrale sombre entourée d'anneaux brillants",
+    "Des franges rectilignes parallèles et équidistantes",
+    "Une tache centrale brillante (Airy) entourée d'anneaux",
+    "Une lumière uniforme sans aucune structure"
+   ],
+   "answer": "C",
+   "explanation": "La tache d'Airy contient environ 84 % de l'énergie diffractée.",
+   "source": "Cours d'optique ondulatoire et d'électromagnétisme, famille Hecht / Jackson",
+   "verif": "import"
+  },
+  {
+   "course": "l3-phys",
+   "category": "Guides d'ondes et optique ondulatoire",
+   "difficulty": 2,
+   "question": "Quelle épaisseur minimale d'un traitement antireflet à une couche faut-il pour une longueur d'onde λ, pour un indice n de la couche ?",
+   "choices": [
+    "e = λ/(2n)",
+    "e = λ/(4n)",
+    "e = λ n/4",
+    "e = λ/n"
+   ],
+   "answer": "B",
+   "explanation": "Les deux réflexions interfèrent destructivement lorsque le trajet aller-retour 2ne vaut λ/2.",
+   "source": "Cours d'optique ondulatoire et d'électromagnétisme, famille Hecht / Jackson",
+   "verif": "import"
+  },
+  {
+   "course": "l3-phys",
+   "category": "Guides d'ondes et optique ondulatoire",
+   "difficulty": 3,
+   "question": "Quelle est l'ouverture numérique d'une fibre d'indice de coeur n₁ = 1,48 et de gaine n₂ = 1,46 ?",
+   "choices": [
+    "environ 0,02",
+    "environ 0,98",
+    "environ 0,24",
+    "environ 1,47"
+   ],
+   "answer": "C",
+   "explanation": "NA = √(n₁² − n₂²) = √(2,1904 − 2,1316) ≈ 0,242.",
+   "source": "Cours d'optique ondulatoire et d'électromagnétisme, famille Hecht / Jackson",
+   "verif": "import"
+  },
+  {
+   "course": "l3-phys",
+   "category": "Guides d'ondes et optique ondulatoire",
+   "difficulty": 5,
+   "question": "Quel est le pouvoir de résolution d'un réseau de N traits observé à l'ordre m ?",
+   "choices": [
+    "R = mN, produit de l'ordre par N",
+    "R = m/N, quotient de l'ordre par N",
+    "R = N/m², quotient de N par m²",
+    "R = m + N, somme de l'ordre et de N"
+   ],
+   "answer": "A",
+   "explanation": "Il mesure λ/Δλ minimal séparable : plus l'ordre et le nombre de traits éclairés sont grands, plus la résolution est fine.",
+   "source": "Cours d'optique ondulatoire et d'électromagnétisme, famille Hecht / Jackson",
+   "verif": "import"
+  },
+  {
+   "course": "l3-phys",
+   "category": "Relativité restreinte : quadrivecteurs, énergie-impulsion",
+   "difficulty": 1,
+   "question": "Quelle est la valeur exacte de la vitesse de la lumière dans le vide, dans le système SI ?",
+   "choices": [
+    "300 000 000 m/s, valeur arrondie",
+    "299 792 458 m/s",
+    "299 792 kilomètres par heure",
+    "3,0×10⁸ m/s, mesurée à ± 1 %"
+   ],
+   "answer": "B",
+   "explanation": "Depuis 1983, c est fixée à 299 792 458 m/s, et le mètre est défini à partir d'elle.",
+   "source": "Cours de relativité restreinte, famille Landau-Lifchitz / Jackson",
+   "verif": "import"
+  },
+  {
+   "course": "l3-phys",
+   "category": "Relativité restreinte : quadrivecteurs, énergie-impulsion",
+   "difficulty": 1,
+   "question": "Que dit la relativité sur la simultanéité de deux événements en des lieux différents ?",
+   "choices": [
+    "Elle dépend du référentiel inertiel de l'observateur",
+    "Elle est absolue, la même pour tous les observateurs",
+    "Elle n'a de sens que pour des événements au même lieu",
+    "Elle est impossible à définir"
+   ],
+   "answer": "A",
+   "explanation": "Deux événements simultanés dans un référentiel ne le sont pas dans un référentiel en mouvement.",
+   "source": "Cours de relativité restreinte, famille Landau-Lifchitz / Jackson",
+   "verif": "import"
+  },
+  {
+   "course": "l3-phys",
+   "category": "Relativité restreinte : quadrivecteurs, énergie-impulsion",
+   "difficulty": 2,
+   "question": "Comment s'écrit la quantité de mouvement relativiste d'une particule de masse m et de vitesse v ?",
+   "choices": [
+    "p = m v",
+    "p = m v/γ",
+    "p = γ m v",
+    "p = γ m v²"
+   ],
+   "answer": "C",
+   "explanation": "Elle tend vers mv aux faibles vitesses et diverge quand v tend vers c.",
+   "source": "Cours de relativité restreinte, famille Landau-Lifchitz / Jackson",
+   "verif": "import"
+  },
+  {
+   "course": "l3-phys",
+   "category": "Relativité restreinte : quadrivecteurs, énergie-impulsion",
+   "difficulty": 3,
+   "question": "Quelle est la masse invariante de deux photons de même énergie E qui se propagent en sens opposés ?",
+   "choices": [
+    "E/c²",
+    "0",
+    "√2 E/c²",
+    "2E/c²"
+   ],
+   "answer": "D",
+   "explanation": "L'énergie totale vaut 2E et l'impulsion totale est nulle : M c² = 2E. Pour deux photons de même direction, M serait nulle.",
+   "source": "Cours de relativité restreinte, famille Landau-Lifchitz / Jackson",
+   "verif": "import"
+  },
+  {
+   "course": "l3-phys",
+   "category": "Relativité restreinte : quadrivecteurs, énergie-impulsion",
+   "difficulty": 5,
+   "question": "Quelle combinaison des champs E et B est invariante par transformation de Lorentz ?",
+   "choices": [
+    "E² + c²B², somme des carrés",
+    "E² − c²B², différence des carrés",
+    "E²·c²B², produit des carrés",
+    "E × B, produit vectoriel"
+   ],
+   "answer": "B",
+   "explanation": "Les invariants du champ électromagnétique sont E² − c²B² et E·B.",
+   "source": "Cours de relativité restreinte, famille Landau-Lifchitz / Jackson",
+   "verif": "import"
+  },
+  {
+   "course": "l3-phys",
+   "category": "Physique du solide : réseaux cristallins, diffraction des rayons X",
+   "difficulty": 1,
+   "question": "Combien de réseaux de Bravais différents existe-t-il en trois dimensions ?",
+   "choices": [
+    "7",
+    "32",
+    "14",
+    "230"
+   ],
+   "answer": "C",
+   "explanation": "Ils se répartissent entre 7 systèmes cristallins ; 230 est le nombre de groupes d'espace.",
+   "source": "Cours de physique du solide, famille Kittel / Ashcroft-Mermin",
+   "verif": "import"
+  },
+  {
+   "course": "l3-phys",
+   "category": "Physique du solide : réseaux cristallins, diffraction des rayons X",
+   "difficulty": 1,
+   "question": "Quelle valeur la chaleur spécifique molaire d'un solide monoatomique atteint-elle à haute température (loi de Dulong et Petit) ?",
+   "choices": [
+    "environ 12,5 J/(mol·K), soit 3R/2",
+    "environ 25 J/(mol·K), soit 3R",
+    "environ 8,3 J/(mol·K), soit R",
+    "environ 75 J/(mol·K), soit 9R"
+   ],
+   "answer": "B",
+   "explanation": "Chaque atome possède 3 oscillateurs, chacun apportant k_B à haute température.",
+   "source": "Cours de physique du solide, famille Kittel / Ashcroft-Mermin",
+   "verif": "import"
+  },
+  {
+   "course": "l3-phys",
+   "category": "Physique du solide : réseaux cristallins, diffraction des rayons X",
+   "difficulty": 2,
+   "question": "Pour un réseau cubique à faces centrées, quels indices (hkl) donnent des raies de diffraction ?",
+   "choices": [
+    "Ceux dont la somme h + k + l est paire",
+    "Ceux dont la somme h + k + l est impaire",
+    "Ceux dont les trois indices sont de même parité",
+    "N'importe quel triplet d'entiers sans exception"
+   ],
+   "answer": "C",
+   "explanation": "Les mailles à faces centrées interdisent les mélanges d'indices pairs et impairs (extinction).",
+   "source": "Cours de physique du solide, famille Kittel / Ashcroft-Mermin",
+   "verif": "import"
+  },
+  {
+   "course": "l3-phys",
+   "category": "Physique du solide : réseaux cristallins, diffraction des rayons X",
+   "difficulty": 3,
+   "question": "Pourquoi une symétrie d'ordre 5 est-elle interdite dans un cristal périodique ?",
+   "choices": [
+    "Le nombre 5 étant premier, il ne divise pas 360",
+    "Les atomes ne peuvent pas former de pentagones réguliers",
+    "Cette symétrie est incompatible avec l'énergie de liaison",
+    "Un pavage périodique n'admet que les ordres 1, 2, 3, 4 et 6"
+   ],
+   "answer": "D",
+   "explanation": "Les quasi-cristaux, ordonnés mais non périodiques, peuvent présenter une symétrie d'ordre 5.",
+   "source": "Cours de physique du solide, famille Kittel / Ashcroft-Mermin",
+   "verif": "import"
+  },
+  {
+   "course": "l3-phys",
+   "category": "Physique du solide : réseaux cristallins, diffraction des rayons X",
+   "difficulty": 4,
+   "question": "Quel rôle jouent les processus Umklapp dans la conductivité thermique d'un isolant ?",
+   "choices": [
+    "Ils conservent exactement le moment cristallin des phonons",
+    "Ils modifient le vecteur d'onde total d'un vecteur du réseau réciproque",
+    "Ils n'existent que dans les métaux, jamais dans un isolant",
+    "Ils transforment les phonons en photons infrarouges"
+   ],
+   "answer": "B",
+   "explanation": "Sans processus Umklapp, un gaz de phonons aurait une conductivité thermique infinie.",
+   "source": "Cours de physique du solide, famille Kittel / Ashcroft-Mermin",
+   "verif": "import"
+  },
+  {
+   "course": "l3-phys",
+   "category": "Modèle des bandes et semi-conducteurs",
+   "difficulty": 1,
+   "question": "Quels porteurs sont majoritaires dans un semi-conducteur de type p ?",
+   "choices": [
+    "Les électrons",
+    "Les ions positifs",
+    "Les photons",
+    "Les trous"
+   ],
+   "answer": "D",
+   "explanation": "Le dopage par des accepteurs (bore dans le silicium) crée des trous dans la bande de valence.",
+   "source": "Cours de physique du solide, famille Kittel / Ashcroft-Mermin",
+   "verif": "import"
+  },
+  {
+   "course": "l3-phys",
+   "category": "Modèle des bandes et semi-conducteurs",
+   "difficulty": 1,
+   "question": "Que fait une polarisation directe d'une jonction p-n ?",
+   "choices": [
+    "Elle élève la barrière et bloque le courant",
+    "Elle supprime tous les porteurs de la jonction",
+    "Elle transforme la jonction en isolant parfait",
+    "Elle abaisse la barrière et laisse passer un fort courant"
+   ],
+   "answer": "D",
+   "explanation": "Le courant croît de façon exponentielle avec la tension directe.",
+   "source": "Cours de physique du solide, famille Kittel / Ashcroft-Mermin",
+   "verif": "import"
+  },
+  {
+   "course": "l3-phys",
+   "category": "Modèle des bandes et semi-conducteurs",
+   "difficulty": 2,
+   "question": "Quelle longueur d'onde émet une LED de gap 1,9 eV (hc = 1240 eV·nm) ?",
+   "choices": [
+    "environ 400 nm, soit du violet",
+    "environ 653 nm, soit du rouge",
+    "environ 1240 nm, soit de l'infrarouge",
+    "environ 1,9 µm, soit de l'infrarouge"
+   ],
+   "answer": "B",
+   "explanation": "λ = 1240/1,9 ≈ 653 nm.",
+   "source": "Cours de physique du solide, famille Kittel / Ashcroft-Mermin",
+   "verif": "import"
+  },
+  {
+   "course": "l3-phys",
+   "category": "Modèle des bandes et semi-conducteurs",
+   "difficulty": 3,
+   "question": "Quel est le principe d'un transistor MOSFET ?",
+   "choices": [
+    "Un courant de grille amplifie le courant de collecteur",
+    "Un champ magnétique commande le passage dans le canal",
+    "Une jonction illuminée engendre le courant de drain",
+    "Une tension de grille module la conduction d'un canal"
+   ],
+   "answer": "D",
+   "explanation": "L'effet de champ crée ou supprime un canal d'inversion sous l'oxyde de grille.",
+   "source": "Cours de physique du solide, famille Kittel / Ashcroft-Mermin",
+   "verif": "import"
+  },
+  {
+   "course": "l3-phys",
+   "category": "Modèle des bandes et semi-conducteurs",
+   "difficulty": 4,
+   "question": "Dans un semi-conducteur non dégénéré, comment la densité d'électrons n dépend-elle de la position du niveau de Fermi ?",
+   "choices": [
+    "n = N_c exp[+(E_c − E_F)/k_BT], croissance exponentielle",
+    "n = N_c (E_c − E_F), proportion directe",
+    "n = N_c exp[−(E_c − E_F)/k_BT], décroissance exponentielle",
+    "n = N_c k_BT/(E_c − E_F), loi en inverse"
+   ],
+   "answer": "C",
+   "explanation": "Plus E_F est proche de la bande de conduction, plus n est grande.",
+   "source": "Cours de physique du solide, famille Kittel / Ashcroft-Mermin",
+   "verif": "import"
+  },
+  {
+   "course": "l3-phys",
+   "category": "Supraconductivité (phénoménologie)",
+   "difficulty": 1,
+   "question": "Comment appelle-t-on la température en dessous de laquelle un matériau devient supraconducteur ?",
+   "choices": [
+    "La température critique T_c",
+    "La température de Debye",
+    "La température de Fermi",
+    "La température de Curie"
+   ],
+   "answer": "A",
+   "explanation": "Elle est propre à chaque matériau : environ 9,3 K pour le niobium.",
+   "source": "Cours de physique du solide, famille Kittel / Ashcroft-Mermin",
+   "verif": "import"
+  },
+  {
+   "course": "l3-phys",
+   "category": "Supraconductivité (phénoménologie)",
+   "difficulty": 1,
+   "question": "Que se passe-t-il quand on place un petit aimant au-dessus d'un supraconducteur refroidi sous T_c ?",
+   "choices": [
+    "L'aimant est attiré et colle au supraconducteur",
+    "L'aimant perd son aimantation",
+    "L'aimant lévite, grâce à l'expulsion du champ (effet Meissner)",
+    "Le supraconducteur s'aimante dans le même sens que l'aimant"
+   ],
+   "answer": "C",
+   "explanation": "Les courants d'écrantage créent un champ opposé qui compense le poids de l'aimant.",
+   "source": "Cours de physique du solide, famille Kittel / Ashcroft-Mermin",
+   "verif": "import"
+  },
+  {
+   "course": "l3-phys",
+   "category": "Supraconductivité (phénoménologie)",
+   "difficulty": 2,
+   "question": "Quelle énergie minimale un photon doit-il avoir pour être absorbé par un supraconducteur à T = 0 ?",
+   "choices": [
+    "2Δ, énergie de brisure d'une paire de Cooper",
+    "Δ/2, moitié du gap de la paire",
+    "k_BT_c, énergie thermique à la température critique",
+    "Aucune : tout photon est absorbé quelle que soit son énergie"
+   ],
+   "answer": "A",
+   "explanation": "Il faut briser une paire de Cooper pour créer deux quasi-particules, d'où un seuil d'absorption dans le domaine micro-onde ou infrarouge lointain.",
+   "source": "Cours de physique du solide, famille Kittel / Ashcroft-Mermin",
+   "verif": "import"
+  },
+  {
+   "course": "l3-phys",
+   "category": "Supraconductivité (phénoménologie)",
+   "difficulty": 3,
+   "question": "Quel critère sépare supraconducteurs de type I et de type II, en fonction du rapport κ = λ_L/ξ ?",
+   "choices": [
+    "Type I si κ > 1/√2, type II sinon",
+    "Type II si κ > 1/√2, type I sinon",
+    "Type II si κ = 0",
+    "Type I si κ > 10"
+   ],
+   "answer": "B",
+   "explanation": "Dans le type II, l'énergie de surface entre phase normale et supraconductrice est négative : les vortex apparaissent.",
+   "source": "Cours de physique du solide, famille Kittel / Ashcroft-Mermin",
+   "verif": "import"
+  },
+  {
+   "course": "l3-phys",
+   "category": "Supraconductivité (phénoménologie)",
+   "difficulty": 4,
+   "question": "Quelle symétrie de l'appariement est observée dans les cuprates à haute T_c ?",
+   "choices": [
+    "Une symétrie d (d-wave), qui s'annule dans certaines directions",
+    "Une symétrie s isotrope, comme dans les supraconducteurs conventionnels",
+    "Aucun appariement",
+    "Une symétrie f"
+   ],
+   "answer": "A",
+   "explanation": "Le gap change de signe selon la direction dans l'espace des k, avec des nœuds.",
+   "source": "Cours de physique du solide, famille Kittel / Ashcroft-Mermin",
+   "verif": "import"
+  },
+  {
+   "course": "l3-phys",
+   "category": "Physique nucléaire : radioactivité, énergie de liaison, fission et fusion",
+   "difficulty": 1,
+   "question": "Comment nomme-t-on collectivement les protons et les neutrons du noyau ?",
+   "choices": [
+    "Les hadrons",
+    "Les leptons",
+    "Les nucléons",
+    "Les baryons légers"
+   ],
+   "answer": "C",
+   "explanation": "Un noyau de nombre de masse A compte A nucléons, dont Z protons.",
+   "source": "Cours de physique nucléaire et des particules, famille Krane / Griffiths",
+   "verif": "import"
+  },
+  {
+   "course": "l3-phys",
+   "category": "Physique nucléaire : radioactivité, énergie de liaison, fission et fusion",
+   "difficulty": 2,
+   "question": "À quelle énergie correspond l'unité de masse atomique (1 u) ?",
+   "choices": [
+    "environ 931,5 MeV/c²",
+    "environ 511 keV/c²",
+    "environ 938 GeV/c²",
+    "environ 1 eV/c²"
+   ],
+   "answer": "A",
+   "explanation": "Par la relation E = mc², 1 u = 1,6605×10⁻²⁷ kg ≈ 931,5 MeV/c².",
+   "source": "Cours de physique nucléaire et des particules, famille Krane / Griffiths",
+   "verif": "import"
+  },
+  {
+   "course": "l3-phys",
+   "category": "Physique nucléaire : radioactivité, énergie de liaison, fission et fusion",
+   "difficulty": 2,
+   "question": "Avec m_p = 1,007276 u, m_n = 1,008665 u, m_d = 2,013553 u et 1 u = 931,5 MeV/c², quelle est l'énergie de liaison du deutéron ?",
+   "choices": [
+    "environ 22,2 MeV",
+    "environ 0,22 MeV",
+    "environ 8 MeV",
+    "environ 2,22 MeV"
+   ],
+   "answer": "D",
+   "explanation": "Δm = 1,007276 + 1,008665 − 2,013553 = 0,002388 u, soit 2,224 MeV.",
+   "source": "Cours de physique nucléaire et des particules, famille Krane / Griffiths",
+   "verif": "import"
+  },
+  {
+   "course": "l3-phys",
+   "category": "Physique nucléaire : radioactivité, énergie de liaison, fission et fusion",
+   "difficulty": 3,
+   "question": "Pourquoi l'uranium 235 est-il fissile avec des neutrons thermiques, contrairement à l'uranium 238 ?",
+   "choices": [
+    "L'uranium 238 est radioactif alors que l'uranium 235 est stable",
+    "Le noyau U-236, pair-pair, gagne assez d'énergie d'appariement",
+    "L'uranium 235 n'absorbe pas les neutrons, qui le traversent",
+    "L'uranium 238 possède moins de protons que l'uranium 235"
+   ],
+   "answer": "B",
+   "explanation": "L'énergie d'appariement du neutron ajouté suffit à franchir la barrière de fission pour l'U-235, mais pas pour l'U-238, qui exige des neutrons rapides.",
+   "source": "Cours de physique nucléaire et des particules, famille Krane / Griffiths",
+   "verif": "import"
+  },
+  {
+   "course": "l3-phys",
+   "category": "Physique nucléaire : radioactivité, énergie de liaison, fission et fusion",
+   "difficulty": 4,
+   "question": "Que précise le critère de Lawson pour la fusion thermonucléaire contrôlée ?",
+   "choices": [
+    "Le produit densité × température doit rester minimal",
+    "La pression du plasma doit rester sous la pression atmosphérique",
+    "Le temps de confinement doit être aussi court que possible",
+    "Le produit densité × température × temps de confinement dépasse un seuil"
+   ],
+   "answer": "D",
+   "explanation": "Le triple produit n·T·τ_E doit dépasser environ 3×10²¹ keV·s·m⁻³ pour la réaction D-T.",
+   "source": "Cours de physique nucléaire et des particules, famille Krane / Griffiths",
+   "verif": "import"
+  },
+  {
+   "course": "l3-phys",
+   "category": "Physique des particules : particules élémentaires et interactions",
+   "difficulty": 1,
+   "question": "Quelle est la propriété commune des leptons (électron, muon, tau, neutrinos) ?",
+   "choices": [
+    "Ils sont tous électriquement chargés",
+    "Ils sont composés de quarks",
+    "Ils ne subissent pas l'interaction forte",
+    "Ils ont tous la même masse"
+   ],
+   "answer": "C",
+   "explanation": "Ils sont des fermions élémentaires de spin 1/2 qui interagissent par les forces faible, électromagnétique (si chargés) et gravitationnelle.",
+   "source": "Cours de physique nucléaire et des particules, famille Krane / Griffiths",
+   "verif": "import"
+  },
+  {
+   "course": "l3-phys",
+   "category": "Physique des particules : particules élémentaires et interactions",
+   "difficulty": 2,
+   "question": "Que partagent une particule et son antiparticule ?",
+   "choices": [
+    "La même masse et le même spin, avec des charges opposées",
+    "La même charge et une masse opposée à la sienne",
+    "La même charge et un spin de sens opposé",
+    "Aucune propriété, les deux étant indépendantes"
+   ],
+   "answer": "A",
+   "explanation": "La rencontre d'une particule et de son antiparticule peut conduire à leur annihilation en photons.",
+   "source": "Cours de physique nucléaire et des particules, famille Krane / Griffiths",
+   "verif": "import"
+  },
+  {
+   "course": "l3-phys",
+   "category": "Physique des particules : particules élémentaires et interactions",
+   "difficulty": 2,
+   "question": "Où et à quelle masse approximative le boson de Higgs a-t-il été observé ?",
+   "choices": [
+    "Au LEP du CERN, vers 12 GeV/c²",
+    "Au Tevatron, vers 1,25 TeV/c²",
+    "Au LHC du CERN, vers 125 GeV/c²",
+    "Dans les rayons cosmiques, vers 125 MeV/c²"
+   ],
+   "answer": "C",
+   "explanation": "Il a été annoncé en 2012 par les collaborations ATLAS et CMS.",
+   "source": "Cours de physique nucléaire et des particules, famille Krane / Griffiths",
+   "verif": "import"
+  },
+  {
+   "course": "l3-phys",
+   "category": "Physique des particules : particules élémentaires et interactions",
+   "difficulty": 3,
+   "question": "Que démontrent les oscillations de neutrinos ?",
+   "choices": [
+    "Que les neutrinos ont une masse non nulle",
+    "Que les neutrinos sont plus rapides que la lumière",
+    "Que les neutrinos ont une charge électrique",
+    "Que les neutrinos sont stables"
+   ],
+   "answer": "A",
+   "explanation": "Les états de saveur sont des mélanges d'états de masse, dont les différences de masse induisent des oscillations.",
+   "source": "Cours de physique nucléaire et des particules, famille Krane / Griffiths",
+   "verif": "import"
+  },
+  {
+   "course": "l3-phys",
+   "category": "Physique des particules : particules élémentaires et interactions",
+   "difficulty": 4,
+   "question": "Que traduit la liberté asymptotique de la chromodynamique quantique ?",
+   "choices": [
+    "Le couplage fort diminue aux courtes distances, à haute énergie",
+    "Le couplage fort augmente aux courtes distances",
+    "Les quarks sont libres à grande distance de séparation",
+    "Les gluons n'interagissent jamais entre eux"
+   ],
+   "answer": "A",
+   "explanation": "À haute énergie, les quarks se comportent presque comme des particules libres : on peut utiliser la théorie des perturbations.",
+   "source": "Cours de physique nucléaire et des particules, famille Krane / Griffiths",
+   "verif": "import"
+  },
+  {
+   "course": "l3-phys",
+   "category": "Astrophysique d'introduction : étoiles, cosmologie de base",
+   "difficulty": 1,
+   "question": "Quel nom porte la galaxie qui contient le système solaire ?",
+   "choices": [
+    "Andromède",
+    "Le Grand Nuage de Magellan",
+    "La Voie lactée",
+    "Le Triangle"
+   ],
+   "answer": "C",
+   "explanation": "Le Soleil se trouve dans un des bras spiraux de cette galaxie spirale barrée.",
+   "source": "Cours d'astrophysique d'introduction, famille Carroll-Ostlie",
+   "verif": "import"
+  },
+  {
+   "course": "l3-phys",
+   "category": "Astrophysique d'introduction : étoiles, cosmologie de base",
+   "difficulty": 2,
+   "question": "Combien d'années-lumière un parsec représente-t-il approximativement ?",
+   "choices": [
+    "environ 0,3 année-lumière",
+    "environ 3,26 années-lumière",
+    "environ 32,6 années-lumière",
+    "environ 1 année-lumière exactement"
+   ],
+   "answer": "B",
+   "explanation": "Un parsec est la distance d'où l'unité astronomique est vue sous un angle d'une seconde d'arc.",
+   "source": "Cours d'astrophysique d'introduction, famille Carroll-Ostlie",
+   "verif": "import"
+  },
+  {
+   "course": "l3-phys",
+   "category": "Astrophysique d'introduction : étoiles, cosmologie de base",
+   "difficulty": 2,
+   "question": "Quel indice observationnel appuie l'existence de matière noire dans les galaxies spirales ?",
+   "choices": [
+    "Des courbes de rotation qui décroissent en 1/√r à grande distance",
+    "L'absence totale de rayonnement",
+    "Une luminosité décroissant avec la distance",
+    "Des courbes de rotation qui restent plates à grande distance du centre"
+   ],
+   "answer": "D",
+   "explanation": "La vitesse orbitale devrait décroître selon Kepler en l'absence de masse invisible.",
+   "source": "Cours d'astrophysique d'introduction, famille Carroll-Ostlie",
+   "verif": "import"
+  },
+  {
+   "course": "l3-phys",
+   "category": "Astrophysique d'introduction : étoiles, cosmologie de base",
+   "difficulty": 3,
+   "question": "Comment la luminosité d'une étoile de la séquence principale varie-t-elle approximativement avec sa masse M ?",
+   "choices": [
+    "L ∝ M^0,5",
+    "L ∝ M^3,5",
+    "L ∝ M^(−1)",
+    "L ∝ M^10"
+   ],
+   "answer": "B",
+   "explanation": "Les étoiles massives sont beaucoup plus lumineuses, d'où une vie plus courte.",
+   "source": "Cours d'astrophysique d'introduction, famille Carroll-Ostlie",
+   "verif": "import"
+  },
+  {
+   "course": "l3-phys",
+   "category": "Astrophysique d'introduction : étoiles, cosmologie de base",
+   "difficulty": 4,
+   "question": "Quelle équation relie le taux d'expansion H de l'Univers à sa densité ρ et à sa courbure k (Friedmann) ?",
+   "choices": [
+    "H = (8πG/3)ρ, sans carré ni courbure",
+    "H² = Gρc², sans facteur de courbure",
+    "H = ρ/a², proportionnel à la densité",
+    "H² = (8πG/3)ρ − kc²/a², avec la courbure k"
+   ],
+   "answer": "D",
+   "explanation": "Pour k = 0, on retrouve ρ = ρ_c = 3H²/8πG.",
+   "source": "Cours d'astrophysique d'introduction, famille Carroll-Ostlie",
+   "verif": "import"
+  },
+  {
+   "course": "l3-phys",
+   "category": "Optique quantique et laser (principe)",
+   "difficulty": 1,
+   "question": "Quelles propriétés caractérisent la lumière d'un laser ?",
+   "choices": [
+    "Blanche, divergente et incohérente",
+    "Polychromatique et isotrope",
+    "Monochromatique, directive et cohérente",
+    "De faible intensité et de fréquence variable"
+   ],
+   "answer": "C",
+   "explanation": "Ces propriétés permettent le pointage, la lecture de codes-barres et la découpe.",
+   "source": "Cours d'optique quantique et de lasers, famille Fox / Loudon",
+   "verif": "import"
+  },
+  {
+   "course": "l3-phys",
+   "category": "Optique quantique et laser (principe)",
+   "difficulty": 2,
+   "question": "Quel gaz fournit le milieu actif d'un laser hélium-néon rouge, de longueur d'onde 632,8 nm ?",
+   "choices": [
+    "L'hélium, excité par transfert d'énergie du néon",
+    "L'argon, ionisé",
+    "L'azote, excité par choc",
+    "Le néon, excité par transfert d'énergie de l'hélium"
+   ],
+   "answer": "D",
+   "explanation": "L'hélium est excité par la décharge, puis transfère l'énergie aux atomes de néon.",
+   "source": "Cours d'optique quantique et de lasers, famille Fox / Loudon",
+   "verif": "import"
+  },
+  {
+   "course": "l3-phys",
+   "category": "Optique quantique et laser (principe)",
+   "difficulty": 2,
+   "question": "Pourquoi un laser à quatre niveaux est-il plus facile à pomper qu'un laser à trois niveaux ?",
+   "choices": [
+    "Le niveau supérieur de la transition est le niveau fondamental",
+    "Il utilise un seul niveau d'énergie atomique",
+    "Le niveau inférieur de la transition est quasi vide",
+    "Il n'a besoin d'aucun pompage extérieur"
+   ],
+   "answer": "C",
+   "explanation": "Dans un schéma à trois niveaux, il faut vider plus de la moitié du fondamental.",
+   "source": "Cours d'optique quantique et de lasers, famille Fox / Loudon",
+   "verif": "import"
+  },
+  {
+   "course": "l3-phys",
+   "category": "Optique quantique et laser (principe)",
+   "difficulty": 3,
+   "question": "Quelle condition le gain g doit-il remplir pour atteindre le seuil laser dans une cavité de longueur L avec miroirs R₁ et R₂ ?",
+   "choices": [
+    "R₁R₂ e^(2gL) ≤ 0 : le gain annule les miroirs",
+    "R₁R₂ e^(2gL) ≥ 1 : le gain compense les pertes",
+    "g = 0 quelle que soit la longueur L de la cavité",
+    "R₁ + R₂ = 1 exactement, quel que soit le gain"
+   ],
+   "answer": "B",
+   "explanation": "À chaque aller-retour, l'amplification doit compenser les pertes par transmission, absorption ou diffusion.",
+   "source": "Cours d'optique quantique et de lasers, famille Fox / Loudon",
+   "verif": "import"
+  },
+  {
+   "course": "l3-phys",
+   "category": "Optique quantique et laser (principe)",
+   "difficulty": 4,
+   "question": "Comment le refroidissement laser Doppler ralentit-il des atomes ?",
+   "choices": [
+    "Les photons échauffent les atomes en les accélérant sur place",
+    "Les atomes sont poussés par la pression de radiation dans un seul sens",
+    "Il absorbe surtout les photons venant en face (bleus), ce qui le freine",
+    "Les atomes rayonnent leur énergie cinétique par effet tunnel"
+   ],
+   "answer": "C",
+   "explanation": "Un laser légèrement désaccordé vers le rouge de la résonance exerce une force de friction sur les atomes en mouvement.",
+   "source": "Cours d'optique quantique et de lasers, famille Fox / Loudon",
+   "verif": "import"
+  },
+  {
+   "course": "l3-phys",
+   "category": "Physique de l'énergie : photovoltaïque, énergies renouvelables en Afrique",
+   "difficulty": 1,
+   "question": "Laquelle de ces sources d'énergie est renouvelable à l'échelle humaine ?",
+   "choices": [
+    "L'énergie hydraulique des fleuves",
+    "Le charbon extrait des mines",
+    "Le pétrole des gisements",
+    "Le gaz naturel des réservoirs"
+   ],
+   "answer": "A",
+   "explanation": "L'eau des fleuves, en circulant, se renouvelle par le cycle de l'eau alimenté par le Soleil.",
+   "source": "Cours de physique des semi-conducteurs et de l'énergie solaire, famille Sze / Kittel",
+   "verif": "import"
+  },
+  {
+   "course": "l3-phys",
+   "category": "Physique de l'énergie : photovoltaïque, énergies renouvelables en Afrique",
+   "difficulty": 2,
+   "question": "Quel éclairement et quelle température de cellule définissent les conditions standard de test (STC) d'un panneau photovoltaïque ?",
+   "choices": [
+    "1000 W/m² et 25 °C",
+    "100 W/m² et 25 °C",
+    "1000 W/m² et 100 °C",
+    "1361 W/m² et 0 °C"
+   ],
+   "answer": "A",
+   "explanation": "La puissance crête (Wc) d'un panneau est mesurée dans ces conditions normalisées.",
+   "source": "Cours de physique des semi-conducteurs et de l'énergie solaire, famille Sze / Kittel",
+   "verif": "import"
+  },
+  {
+   "course": "l3-phys",
+   "category": "Physique de l'énergie : photovoltaïque, énergies renouvelables en Afrique",
+   "difficulty": 2,
+   "question": "Sur quel fleuve le grand site hydroélectrique d'Inga est-il situé ?",
+   "choices": [
+    "Le fleuve Niger (Mali)",
+    "Le fleuve Nil (Égypte)",
+    "Le Zambèze (Zimbabwe)",
+    "Le fleuve Congo (RDC)"
+   ],
+   "answer": "D",
+   "explanation": "Les chutes d'Inga, sur le Congo inférieur, ont un potentiel hydroélectrique exceptionnel.",
+   "source": "Cours de physique des semi-conducteurs et de l'énergie solaire, famille Sze / Kittel",
+   "verif": "import"
+  },
+  {
+   "course": "l3-phys",
+   "category": "Physique de l'énergie : photovoltaïque, énergies renouvelables en Afrique",
+   "difficulty": 3,
+   "question": "Un panneau de 300 Wc reçoit 5 heures d'ensoleillement équivalent plein par jour, avec un rendement global de 0,8. Quelle énergie fournit-il par jour ?",
+   "choices": [
+    "1,2 kWh",
+    "1,5 kWh",
+    "12 kWh",
+    "0,24 kWh"
+   ],
+   "answer": "A",
+   "explanation": "E = 300 W × 5 h × 0,8 = 1200 Wh = 1,2 kWh.",
+   "source": "Cours de physique des semi-conducteurs et de l'énergie solaire, famille Sze / Kittel",
+   "verif": "import"
+  },
+  {
+   "course": "l3-phys",
+   "category": "Physique de l'énergie : photovoltaïque, énergies renouvelables en Afrique",
+   "difficulty": 4,
+   "question": "Que fait un régulateur MPPT dans une installation photovoltaïque ?",
+   "choices": [
+    "Il convertit le courant continu en courant alternatif",
+    "Il stocke l'énergie du panneau dans un condensateur",
+    "Il ajuste la charge pour viser le point de puissance maximale",
+    "Il oriente mécaniquement le panneau vers le Soleil"
+   ],
+   "answer": "C",
+   "explanation": "Le point de puissance maximale dépend de l'éclairement et de la température.",
+   "source": "Cours de physique des semi-conducteurs et de l'énergie solaire, famille Sze / Kittel",
+   "verif": "import"
+  },
+  {
+   "course": "l3-phys",
+   "category": "Méthodes expérimentales : traitement du signal, électronique analogique et numérique",
+   "difficulty": 1,
+   "question": "Quelle est la résolution en fréquence Δf d'une transformée de Fourier discrète calculée sur une durée T ?",
+   "choices": [
+    "Δf = 1/T",
+    "Δf = T",
+    "Δf = 2/T²",
+    "Δf = f_e"
+   ],
+   "answer": "A",
+   "explanation": "Pour séparer deux fréquences voisines, il faut observer le signal sur une durée suffisante.",
+   "source": "Cours d'électronique et de traitement du signal, famille Horowitz-Hill / Oppenheim",
+   "verif": "import"
+  },
+  {
+   "course": "l3-phys",
+   "category": "Méthodes expérimentales : traitement du signal, électronique analogique et numérique",
+   "difficulty": 2,
+   "question": "Pourquoi la porte NAND est-elle dite universelle ?",
+   "choices": [
+    "Elle est la seule porte logique qui existe",
+    "Elle consomme moins d'énergie que toutes les autres",
+    "Toute fonction logique peut se bâtir avec des portes NAND seules",
+    "Elle fonctionne sans aucune alimentation électrique"
+   ],
+   "answer": "C",
+   "explanation": "Les portes NON, ET et OU se réalisent avec des combinaisons de NAND.",
+   "source": "Cours d'électronique et de traitement du signal, famille Horowitz-Hill / Oppenheim",
+   "verif": "import"
+  },
+  {
+   "course": "l3-phys",
+   "category": "Méthodes expérimentales : traitement du signal, électronique analogique et numérique",
+   "difficulty": 2,
+   "question": "Combien d'états distincts un compteur binaire de n bascules peut-il représenter ?",
+   "choices": [
+    "n",
+    "n²",
+    "2n",
+    "2ⁿ"
+   ],
+   "answer": "D",
+   "explanation": "Chaque bascule stocke un bit : 4 bascules donnent 16 états.",
+   "source": "Cours d'électronique et de traitement du signal, famille Horowitz-Hill / Oppenheim",
+   "verif": "import"
+  },
+  {
+   "course": "l3-phys",
+   "category": "Méthodes expérimentales : traitement du signal, électronique analogique et numérique",
+   "difficulty": 3,
+   "question": "Quel inconvénient la troncature d'un signal par une fenêtre rectangulaire apporte-t-elle au spectre calculé par FFT ?",
+   "choices": [
+    "Un repliement de spectre systématique",
+    "Une perte totale de l'information de phase",
+    "Une amplification des basses fréquences",
+    "La fuite spectrale (lobes secondaires)"
+   ],
+   "answer": "D",
+   "explanation": "Une fenêtre à bords lisses (Hann, Hamming) atténue les lobes secondaires au prix d'un lobe principal plus large.",
+   "source": "Cours d'électronique et de traitement du signal, famille Horowitz-Hill / Oppenheim",
+   "verif": "import"
+  },
+  {
+   "course": "l3-phys",
+   "category": "Méthodes expérimentales : traitement du signal, électronique analogique et numérique",
+   "difficulty": 4,
+   "question": "Que dit le théorème de convolution ?",
+   "choices": [
+    "La TF d'une convolution est la somme des TF",
+    "La convolution de deux signaux est leur produit point à point",
+    "La TF d'un produit est le produit des TF individuelles",
+    "La TF d'une convolution est le produit des TF"
+   ],
+   "answer": "D",
+   "explanation": "Filtrer un signal revient à multiplier son spectre par la fonction de transfert.",
+   "source": "Cours d'électronique et de traitement du signal, famille Horowitz-Hill / Oppenheim",
+   "verif": "import"
+  }
+ ]
+}
