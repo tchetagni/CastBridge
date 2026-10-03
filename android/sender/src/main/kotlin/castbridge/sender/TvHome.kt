@@ -64,7 +64,9 @@ fun TvHub() {
 /** The TV the home talks to (chosen once in the first-connection assistant). */
 internal class HomeTv(ctx: Context) {
     private val sp = ctx.applicationContext.getSharedPreferences("castbridge_home", Context.MODE_PRIVATE)
-    var name: String? get() = sp.getString("tv", null); set(v) { sp.edit().putString("tv", v).apply() }
+    var name: String? get() = sp.getString("tv", null); set(v) { sp.edit().putString("tv", v).commit() }
+    /** Last address the home TV answered at (R-10: finds it again when Android renamed its service « X (2) »). */
+    var host: String? get() = sp.getString("host", null); set(v) { sp.edit().putString("host", v).commit() }
 }
 
 /**
@@ -104,7 +106,9 @@ fun TvHome(onAdvanced: () -> Unit) {
     var msg by remember { mutableStateOf<castbridge.core.ux.UiNotice?>(null) }
     LaunchedEffect(Unit) { TvLinkManager.start(ctx) }
     var wizard by rememberSaveable { mutableStateOf(TvLinkManager.saved.list().isEmpty() && (tvName == null || !TvAuth.isUsable(pins.get(tvName)))) }
-    val tv = tvs.firstOrNull { it.name == tvName }
+    // R-10: the remembered TV, also when the mDNS name came back with a « (2) » (same address, same base name); never a TV picked by its name alone
+    val match = castbridge.core.trust.HomeTvMatch.pick(tvName, home.host, tvs.map { castbridge.core.trust.HomeTvMatch.Seen(it.name, it.host, it.port) })
+    val tv = match?.let { m -> tvs.firstOrNull { it.name == m.tv.name && it.host == m.tv.host } }
     val client = session?.base?.let { TvClient(it, session.credential) }
         ?: tv?.takeIf { TvAuth.isUsable(pin) || TvLinkManager.saved.list().isEmpty() }?.let { TvClient(it.base, pin) }
     // sent by « Ouvrir avec CastBridge »: « Ajouter ma TV » or the code entry of the assistant
@@ -144,13 +148,27 @@ fun TvHome(onAdvanced: () -> Unit) {
 
     LaunchedEffect(client?.base, client?.pin) {
         var n = 0
+        var linked = false
         while (client != null) {
             val r = withContext(Dispatchers.IO) { runCatching { castbridge.core.tv.TvInfo.parse(client.info()) } }
             reachable = r.isSuccess; info = r.getOrNull() ?: info
             if (r.isSuccess && msg == castbridge.core.ux.HomeNotices.info("Reconnexion à la TV…")) msg = null      // reconnected: the line goes away by itself
-            if ((r.exceptionOrNull() as? TvClient.HttpError)?.code == 401) {
+            // R-10: the code was accepted at this address: every screen key of this TV (its address, a « (2) » name) finds the same code next time
+            if (r.isSuccess && !linked && session == null && tv != null && tvName != null && !TvAuth.isToken(client.pin) && !castbridge.core.trust.PinBook.isLoopback(tv.host)) {
+                linked = true
+                pins.link(tvName!!, "${tv.host}:${tv.port}"); if (tv.name != tvName) pins.link(tvName!!, tv.name); home.host = tv.host
+            }
+            val err = r.exceptionOrNull() as? TvClient.HttpError
+            if (err?.code == 401) {
                 if (TvAuth.isToken(client.pin)) { TvLinkManager.poke(); msg = castbridge.core.ux.HomeNotices.info("Reconnexion à la TV…"); delay(3000); continue }   // token expired or revoked: HELLO again
-                msg = castbridge.core.ux.HomeNotices.error("Le code de la TV a changé : saisissez-le à nouveau."); wizard = true; break
+                // R-10: « too many tries » is not « the code changed »: wait for the TV, never re-ask (the right code is refused while locked)
+                val reply = castbridge.core.trust.TvAuthReply.of(err.code, err.message)
+                if (reply is castbridge.core.trust.TvAuthReply.Kind.Locked) {
+                    msg = castbridge.core.ux.HomeNotices.info(castbridge.core.trust.CredentialDecision.locked(reply.retryAfterSec)); delay(reply.retryAfterSec.coerceIn(5, 120) * 1000); continue
+                }
+                // the TV refused this code: kept but never sent again by itself (only when the TV was matched by its exact name: an address may be another TV now)
+                if (match?.how == castbridge.core.trust.HomeTvMatch.How.NAME) tvName?.let { k -> client.pin?.let { pins.refused(k, it) } }
+                msg = castbridge.core.ux.HomeNotices.error(castbridge.core.trust.CredentialDecision.PIN_CHANGED); wizard = true; break
             }
             if (n++ % 5 == 0) withContext(Dispatchers.IO) { runCatching { items = TvLibraryParser.parse(client.library()) } }
             delay(2000)

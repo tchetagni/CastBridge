@@ -97,11 +97,17 @@ class LinkDriver(
         return store.loadCredential(tv.address)?.takeIf { now < it.expiresAt - skewMs && gate.allows(tv.address, it.token) }?.token
     }
 
-    /** The TV's API said this token is expired or revoked (HTTP 401 "bad token"): it is dropped and a new HELLO follows at the next [step]. */
+    /**
+     * The TV's API said this token is expired or revoked (HTTP 401 "bad token"): it is dropped FOR THE TV THAT HOLDS IT (R-10: with several TVs, a 401 of
+     * another TV used to drop nothing of that TV and mark the default TV rejected), and a new HELLO follows at the next [step] when it is the default TV's.
+     * A token no TV holds any more (rotated) is treated as the default TV's, as before.
+     */
     fun reportTokenRejected(token: String) {
-        val tv = saved.default() ?: return
+        val default = saved.default()
+        val holder = saved.list().firstOrNull { tv -> (session?.let { it.tv.address == tv.address && it.credential == token } == true) || store.loadCredential(tv.address)?.token == token }
+        val tv = holder ?: default ?: return
         dropToken(tv, token)
-        rejected = true
+        if (tv.address == default?.address) rejected = true
     }
 
     private fun dropToken(tv: SavedTv, token: String) {
