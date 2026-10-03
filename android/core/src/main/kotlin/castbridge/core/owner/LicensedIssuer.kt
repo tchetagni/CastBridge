@@ -40,6 +40,9 @@ class IssueSpec(
  */
 data class RentalSpec(val productId: String, val bundleIds: List<String>, val days: Int, val maxUsageMinutes: Int = 0, val graceDays: Int = 0, val maxConcurrent: Int = 0, val period: Long? = null)
 
+/** The owner's choice of a pilot rental: the bundle, what the person picked, and the period of the rental it extends (null = a new one). */
+data class RentalChoice(val bundleId: String, val choice: castbridge.core.lots.Choice, val period: Long? = null)
+
 /** The ONE place a [RentalSpec] becomes a signed-ready [Right.Rental] (desk tool, owner phone console and server port all go through it). */
 object RentalIssuing {
     /**
@@ -92,6 +95,16 @@ object RightsSyntax {
         if (spec.days !in 1..castbridge.core.lots.RentalLines.MAX_DAYS) bad("Location : de 1 à ${castbridge.core.lots.RentalLines.MAX_DAYS} jours")
         if (spec.bundleIds.isEmpty()) bad("Location : au moins un bouquet")
         return spec
+    }
+
+    /** `bouquet=choix` (`defaut`, `7j`, `12h`): what the pilot's issuer is asked ([castbridge.core.lots.PilotRules] decides). [period] = the rental to extend (null = a new one). One bundle only. */
+    fun rentalChoice(s: String, period: Long? = null): RentalChoice {
+        val f = s.split('=')
+        if (f.size != 2 || f[0].isBlank() || f[1].isBlank()) bad("Location : « bouquet=choix » attendu (choix : defaut, 7j ou 12h)")
+        val bundle = f[0].trim()
+        if (!Regex("^[a-z0-9][a-z0-9-]{0,63}$").matches(bundle)) bad("Location : identifiant de bouquet invalide « $bundle » (un seul bouquet, en minuscules)")
+        val choice = try { castbridge.core.lots.Choice.parse(f[1]) } catch (e: IllegalArgumentException) { bad("Location : ${e.message}") }
+        return RentalChoice(bundle, choice, period)
     }
 
     /** `produit:jours` (30 jours au plus, clé avec la portée « tout ouvert ») */

@@ -41,4 +41,29 @@ object RentalDurations {
         }
         return null
     }
+
+    /**
+     * Pilot rule (W16), the hook for [castbridge.core.owner.IssueSpec.rentalCheck]: French reason when [spec] is not something the pilot lets a person choose, or null. `userChosen = 0`:
+     * the EXACT rule of [check], and no usage budget. Otherwise ONE bundle; days (no budget) from 1 to `min(maxDays, rentalDays of the bundle)`; hours (budget) whole hours up to 96 (the
+     * engine's clamp, never above) with 1 to `hourly.validityDays` days of safety; no grace; 1 to `maxConcurrent` simultaneous. State-dependent rules (quota, contracts, window) are [PilotRules].
+     */
+    fun checkChosen(spec: RentalSpec, catalog: BundleCatalog, params: PilotParams): String? {
+        if (!params.userChosen) return check(spec, catalog) ?: if (spec.maxUsageMinutes != 0) "la durée est fixée par le serveur : pas de plafond d'usage choisi" else null
+        if (spec.bundleIds.size != 1) return "une location par bouquet : ${spec.bundleIds.size} bouquets demandés"
+        val b = catalog.find(spec.bundleIds.single()) ?: return "bouquet inconnu : ${spec.bundleIds.single()}"
+        if (spec.productId != productOf(b.id)) return "le produit d'une location est « loc-${b.id} », pas « ${spec.productId} »"      // adds to RentalPolicy.refusals (lot families), which the caller still runs
+        if (spec.graceDays != 0) return "aucune tolérance n'est prévue dans une location du pilote"
+        if (spec.maxConcurrent !in 1..params.maxConcurrent) return "locations simultanées : de 1 à ${params.maxConcurrent}"
+        if (spec.maxUsageMinutes < 0) return "plafond d'usage invalide"
+        if (spec.maxUsageMinutes > 0) {
+            val cap = minOf(params.hourlyMaxUseHours, PilotParams.HARD_CAP_HOURS)
+            if (spec.maxUsageMinutes > cap * 60) return "une location en heures d'utilisation ne dépasse pas $cap heures"
+            if (spec.maxUsageMinutes % 60 != 0) return "les heures d'utilisation se comptent en heures entières"
+            if (spec.days !in 1..params.hourlyValidityDays) return "borne de sûreté d'une location en heures : de 1 à ${params.hourlyValidityDays} jours (${spec.days})"
+        } else {
+            val cap = minOf(params.maxDays, if (b.rentalDays > 0) b.rentalDays else params.maxDays)
+            if (spec.days !in 1..cap) return "« ${b.title.ifBlank { b.id }} » : une location en jours va de 1 à $cap jours (${spec.days})"
+        }
+        return null
+    }
 }

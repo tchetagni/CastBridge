@@ -1,6 +1,7 @@
 # w16-05 — Bureau et Python : `emettre --location-choix`, `--pilote`, `--registre`, commande `louer` (dossier de livraison), `rapport-usage` ; `tools/pilot/louer.py` (LAN ou relais téléphone), `tools/pilot/bilan.py`
 
 <!-- routage Fable 2026-10-03 -->
+> **Amendement W16-04 (audit Opus, 2026-10-03)** : exiger un **relevé d'usage FRAIS** (GET /api/rental ou fichier `castbridge-rental-usage-v1` du jour) avant toute **prolongation** ou **réémission** d'une location en heures : sans lui, la ligne part, compte au quota (168 h glissantes, `PilotRegistry.hoursIssuedLast168h`) et se perd après le balayage. La réémission exige aussi la clé d'installation d'origine (`ContractSummary.installPub`) et celle, différente, de la TV (`PilotRules.reissue(..., newInstallPub, ...)`) ; le code TV du registre passe par `PilotRegistry.mask` ; écrire par `PilotRegistry.update(file)` (atomique, verrou) ; `pilot.json` n'accepte que les clés connues (dont `freeBundles`).
 > **Modèle : sonnet** · escalade : audit Opus sur échantillon (chemin d'émission réel) · statut : PRÊT (après w16-03, w16-04)
 > **Groupe : W16b-1** (vague W16b, outils, autorisé pendant le gel) · prérequis : w16-03, w16-04 · porte : `cd tools/activation-desktop && tools/agents/gradle-lock.sh gradle --offline test && python3 -m unittest discover -s tools/tests -p 'test_pilot*.py'`
 > **Jauge : ≈ 500 k jetons entrée / 25 k sortie** (effort M-L, ≈ 2,5 j) · audit Opus : échantillon
