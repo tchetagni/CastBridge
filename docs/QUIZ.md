@@ -420,3 +420,7 @@ téléphones variés (iPhone/Safari, Android ancien). L'app téléphone n'a pas 
 
 Pistes : questions en anglais (parcours anglophones), plus de niveaux et de filières, serveur de questions, relecture
 humaine des questions, sons plus riches, écran « podium » avec confettis, mode équipes, historique des scores par joueur.
+
+## Quiz embarqué par niveau (2026-10-03)
+
+En plus du jeu de départ (~320 questions), l'APK de CastBridge-TV embarque **2000 questions par niveau libre** (24 niveaux : primaire, collège, 2nde, 1re, Form 1-3 et 5, Lower/Upper Sixth, Class 1-6, culture générale), un fichier par niveau chargé à la demande (un seul en mémoire). Les niveaux réservés (Tle, L1, L2, L3) ne sont pas embarqués. Statut « review » conservé. Détails, tailles et régénération : `docs/agent-reports/quiz-embarque.md`, outil `tools/quiz-bank/build_embedded.py`.

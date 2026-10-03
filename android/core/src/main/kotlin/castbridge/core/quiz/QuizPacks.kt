@@ -356,20 +356,29 @@ class PackedQuestionSource(
 ) : QuestionSource {
     private class Built(val bank: QuizBank, val baseBank: QuizBank, val drive: String)
     @Volatile private var built: Built? = null
+    @Volatile private var builtLevel: Built? = null
     @Volatile override var origin: String = base.origin; private set
 
     /** Rebuilt when the bundled/server bank, the installed packs or the files on the USB drive changed. */
-    override fun bank(): QuizBank {
-        val b = base.bank(); val sig = driveSignature(); val c = built
+    override fun bank(): QuizBank = current(base.bank(), { built }) { built = it }
+
+    /** The bundled level of [filter] (loaded on demand, one at a time) + packs + lots; an installed lot replaces the bundled questions of the same id. */
+    override fun bankFor(filter: QuestionFilter): QuizBank {
+        val b = base.bankFor(filter)
+        return if (b === base.bank()) bank() else current(b, { builtLevel }) { builtLevel = it }
+    }
+
+    private fun current(b: QuizBank, get: () -> Built?, set: (Built) -> Unit): QuizBank {
+        val sig = driveSignature(); val c = get()
         if (c != null && c.baseBank === b && c.drive == sig) return c.bank
         return synchronized(this) {
-            val again = built
-            if (again != null && again.baseBank === b && again.drive == sig) again.bank else build(b, sig).also { built = it }.bank
+            val again = get()
+            if (again != null && again.baseBank === b && again.drive == sig) again.bank else build(b, sig).also(set).bank
         }
     }
 
     /** The installed packs changed: the next [bank] call rebuilds. */
-    fun refresh() { synchronized(this) { built = null } }
+    fun refresh() { synchronized(this) { built = null; builtLevel = null } }
 
     private fun driveFiles(): List<File> = runCatching { driveDirs() }.getOrDefault(emptyList()).flatMap { d ->
         d.listFiles { f -> f.isFile && f.name.endsWith(QUIZ_PACK_SUFFIX) }?.sortedBy { it.name }.orEmpty()
