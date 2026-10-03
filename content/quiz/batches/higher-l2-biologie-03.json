@@ -1,2017 +1,1872 @@
 {
-  "batch": "higher-l2-biologie-03",
-  "author": "claude-sonnet-5.5",
-  "date": "2026-10-03",
-  "questions": [
-    {
-      "course": "l2-bio",
-      "category": "la cellule : théorie cellulaire et organites",
-      "difficulty": 1,
-      "question": "Parmi ces structures, laquelle est présente dans la cellule végétale mais absente de la cellule animale ?",
-      "choices": [
-        "L'appareil de Golgi",
-        "Le chloroplaste",
-        "Le réticulum endoplasmique",
-        "La mitochondrie"
-      ],
-      "answer": "B",
-      "explanation": "Les chloroplastes, avec la paroi cellulosique et la grande vacuole, caractérisent les cellules végétales ; les autres organites existent dans les deux types.",
-      "source": "Cours de licence de biologie cellulaire, famille Alberts (Biologie moléculaire de la cellule)",
-      "verif": "import"
-    },
-    {
-      "course": "l2-bio",
-      "category": "la cellule : théorie cellulaire et organites",
-      "difficulty": 2,
-      "question": "Quel critère distingue une cellule eucaryote d'une cellule procaryote ?",
-      "choices": [
-        "Un noyau délimité par une enveloppe nucléaire",
-        "La présence d'ADN comme support génétique",
-        "La présence de ribosomes dans le cytoplasme",
-        "La présence d'une membrane plasmique"
-      ],
-      "answer": "A",
-      "explanation": "Tous les êtres vivants ont membrane, ribosomes et ADN ; seul l'eucaryote enferme son ADN dans un noyau délimité par une enveloppe.",
-      "source": "Cours de licence de biologie cellulaire, famille Alberts (Biologie moléculaire de la cellule)",
-      "verif": "import"
-    },
-    {
-      "course": "l2-bio",
-      "category": "la cellule : théorie cellulaire et organites",
-      "difficulty": 2,
-      "question": "Quel organite est très développé dans les hépatocytes pour la détoxication des médicaments et des xénobiotiques ?",
-      "choices": [
-        "Le nucléole",
-        "L'appareil de Golgi",
-        "Le centrosome",
-        "Le réticulum endoplasmique lisse"
-      ],
-      "answer": "D",
-      "explanation": "Le réticulum endoplasmique lisse porte des enzymes (cytochromes P450) qui transforment les substances étrangères liposolubles.",
-      "source": "Cours de licence de biologie cellulaire, famille Alberts (Biologie moléculaire de la cellule)",
-      "verif": "import"
-    },
-    {
-      "course": "l2-bio",
-      "category": "la cellule : théorie cellulaire et organites",
-      "difficulty": 4,
-      "question": "Dans une cellule acineuse du pancréas qui exporte des enzymes digestives, quelle voie suit une enzyme sécrétée ?",
-      "choices": [
-        "Réticulum rugueux, lysosome, mitochondrie, exocytose",
-        "Appareil de Golgi, réticulum rugueux, lysosome, membrane",
-        "Noyau, réticulum lisse, vésicule de sécrétion, endocytose",
-        "Réticulum rugueux, appareil de Golgi, vésicules de sécrétion, exocytose"
-      ],
-      "answer": "D",
-      "explanation": "Les protéines d'export sont synthétisées au réticulum rugueux, modifiées et triées dans le Golgi, puis libérées par exocytose.",
-      "source": "Cours de licence de biologie cellulaire, famille Alberts (Biologie moléculaire de la cellule)",
-      "verif": "import"
-    },
-    {
-      "course": "l2-bio",
-      "category": "membrane plasmique : structure et transports",
-      "difficulty": 1,
-      "question": "Quel transport traverse directement la bicouche lipidique, sans énergie, selon le gradient de concentration ?",
-      "choices": [
-        "Le transport actif primaire",
-        "Le cotransport actif secondaire",
-        "L'endocytose",
-        "La diffusion simple"
-      ],
-      "answer": "D",
-      "explanation": "La diffusion simple de petites molécules apolaires (O2, CO2) suit le gradient sans protéine ni dépense d'ATP.",
-      "source": "Cours de licence de biologie cellulaire, famille Alberts (Biologie moléculaire de la cellule)",
-      "verif": "import"
-    },
-    {
-      "course": "l2-bio",
-      "category": "membrane plasmique : structure et transports",
-      "difficulty": 2,
-      "question": "Par quel mécanisme le glucose pénètre-t-il dans les hématies humaines ?",
-      "choices": [
-        "Diffusion facilitée par un transporteur (GLUT)",
-        "Transport actif par la pompe Na+/K+-ATPase",
-        "Diffusion simple à travers les phospholipides",
-        "Endocytose par récepteur"
-      ],
-      "answer": "A",
-      "explanation": "Le glucose, polaire, passe par un transporteur de la famille GLUT selon son gradient, sans dépense d'énergie.",
-      "source": "Cours de licence de biologie cellulaire, famille Alberts (Biologie moléculaire de la cellule)",
-      "verif": "import"
-    },
-    {
-      "course": "l2-bio",
-      "category": "membrane plasmique : structure et transports",
-      "difficulty": 3,
-      "question": "Que devient une hématie placée dans l'eau distillée, comparée à une cellule végétale dans la même solution ?",
-      "choices": [
-        "Le volume reste stable pour l'hématie comme pour la plante",
-        "L'hématie se ratatine ; la cellule végétale éclate",
-        "Toutes deux perdent de l'eau et se plasmolysent",
-        "L'hématie éclate ; la cellule végétale devient turgescente sans éclater"
-      ],
-      "answer": "D",
-      "explanation": "L'eau entre par osmose ; sans paroi l'hématie éclate (hémolyse), alors que la paroi végétale résiste à la pression de turgescence.",
-      "source": "Cours de licence de biologie cellulaire, famille Alberts (Biologie moléculaire de la cellule)",
-      "verif": "import"
-    },
-    {
-      "course": "l2-bio",
-      "category": "membrane plasmique : structure et transports",
-      "difficulty": 2,
-      "question": "Quelle est la stœchiométrie d'un cycle de la pompe Na+/K+-ATPase ?",
-      "choices": [
-        "2 Na+ expulsés pour 3 K+ importés",
-        "3 Na+ expulsés pour 2 K+ importés",
-        "3 Na+ expulsés pour 3 K+ importés",
-        "1 Na+ expulsé pour 1 K+ importé"
-      ],
-      "answer": "B",
-      "explanation": "Chaque cycle consomme un ATP, expulse 3 Na+ et importe 2 K+, d'où sa nature électrogène.",
-      "source": "Cours de licence de biologie cellulaire, famille Alberts (Biologie moléculaire de la cellule)",
-      "verif": "import"
-    },
-    {
-      "course": "l2-bio",
-      "category": "métabolisme énergétique : respiration cellulaire et ATP",
-      "difficulty": 1,
-      "question": "Où se situe la chaîne respiratoire dans une cellule eucaryote ?",
-      "choices": [
-        "Dans la membrane interne de la mitochondrie",
-        "Dans la membrane du noyau",
-        "Dans la matrice du peroxysome",
-        "Dans le cytosol"
-      ],
-      "answer": "A",
-      "explanation": "Les complexes de la chaîne respiratoire et l'ATP synthase sont insérés dans la membrane interne mitochondriale.",
-      "source": "Biochimie, famille Stryer/Lehninger",
-      "verif": "import"
-    },
-    {
-      "course": "l2-bio",
-      "category": "métabolisme énergétique : respiration cellulaire et ATP",
-      "difficulty": 2,
-      "question": "Quel est le gain net d'ATP de la glycolyse par molécule de glucose ?",
-      "choices": [
-        "4 ATP",
-        "32 ATP",
-        "6 ATP",
-        "2 ATP"
-      ],
-      "answer": "D",
-      "explanation": "La glycolyse consomme 2 ATP puis en forme 4 : le gain net est de 2 ATP par glucose.",
-      "source": "Biochimie, famille Stryer/Lehninger",
-      "verif": "import"
-    },
-    {
-      "course": "l2-bio",
-      "category": "métabolisme énergétique : respiration cellulaire et ATP",
-      "difficulty": 2,
-      "question": "Quels produits forme la levure Saccharomyces lors de la fermentation alcoolique ?",
-      "choices": [
-        "Éthanol et dioxygène",
-        "Éthanol et dioxyde de carbone",
-        "Lactate et dioxyde de carbone",
-        "Acétate et eau"
-      ],
-      "answer": "B",
-      "explanation": "La levure convertit le pyruvate en éthanol et CO2, d'où la levée du pain et la fabrication de boissons fermentées.",
-      "source": "Biochimie, famille Stryer/Lehninger",
-      "verif": "import"
-    },
-    {
-      "course": "l2-bio",
-      "category": "métabolisme énergétique : respiration cellulaire et ATP",
-      "difficulty": 4,
-      "question": "Le cyanure bloque le complexe IV de la chaîne respiratoire. Quel est l'effet sur des mitochondries isolées ?",
-      "choices": [
-        "Consommation accrue d'O2 pour compenser le manque d'ATP",
-        "Production accrue d'ATP par l'ATP synthase mitochondriale",
-        "Arrêt de la consommation d'O2 et de la synthèse d'ATP oxydative",
-        "Blocage direct de la glycolyse cytosolique"
-      ],
-      "answer": "C",
-      "explanation": "Sans transfert final des électrons à l'oxygène, le gradient de protons ne s'établit plus et la phosphorylation oxydative s'arrête.",
-      "source": "Biochimie, famille Stryer/Lehninger",
-      "verif": "import"
-    },
-    {
-      "course": "l2-bio",
-      "category": "métabolisme énergétique : respiration cellulaire et ATP",
-      "difficulty": 5,
-      "question": "Quel effet un découplant comme le 2,4-dinitrophénol a-t-il sur des mitochondries actives ?",
-      "choices": [
-        "Un arrêt de la chaîne respiratoire et une baisse de la consommation d'O2",
-        "Une consommation d'O2 maintenue sans synthèse d'ATP, l'énergie étant dissipée en chaleur",
-        "Une synthèse d'ATP accrue pour une même consommation d'O2",
-        "Un blocage de l'ATP synthase seule, sans effet sur les protons"
-      ],
-      "answer": "B",
-      "explanation": "Il dissipe le gradient de protons : la chaîne continue de fonctionner mais l'ATP synthase ne reçoit plus la force protomotrice.",
-      "source": "Biochimie, famille Stryer/Lehninger",
-      "verif": "import"
-    },
-    {
-      "course": "l2-bio",
-      "category": "photosynthèse : phases et rendement",
-      "difficulty": 1,
-      "question": "Où se déroule la phase photochimique (claire) de la photosynthèse ?",
-      "choices": [
-        "Dans la membrane interne mitochondriale",
-        "Dans la vacuole",
-        "Dans les membranes des thylakoïdes",
-        "Dans le stroma uniquement"
-      ],
-      "answer": "C",
-      "explanation": "Les pigments et la chaîne de transfert d'électrons sont dans les membranes thylakoïdiennes du chloroplaste.",
-      "source": "Botanique, famille Raven",
-      "verif": "import"
-    },
-    {
-      "course": "l2-bio",
-      "category": "photosynthèse : phases et rendement",
-      "difficulty": 2,
-      "question": "D'où provient le dioxygène libéré par la photosynthèse oxygénique ?",
-      "choices": [
-        "De la dégradation du RuBP",
-        "De l'hydrolyse du glucose",
-        "De la photolyse de l'eau",
-        "De la réduction du CO2"
-      ],
-      "answer": "C",
-      "explanation": "Le photosystème II oxyde l'eau, ce qui libère O2, des protons et des électrons.",
-      "source": "Botanique, famille Raven",
-      "verif": "import"
-    },
-    {
-      "course": "l2-bio",
-      "category": "photosynthèse : phases et rendement",
-      "difficulty": 1,
-      "question": "Laquelle de ces cultures est une plante en C4 ?",
-      "choices": [
-        "Le haricot",
-        "Le blé",
-        "Le maïs",
-        "Le riz"
-      ],
-      "answer": "C",
-      "explanation": "Le maïs et la canne à sucre fixent d'abord le CO2 en composés à 4 carbones ; riz, blé et haricot sont des plantes en C3.",
-      "source": "Botanique, famille Raven",
-      "verif": "import"
-    },
-    {
-      "course": "l2-bio",
-      "category": "photosynthèse : phases et rendement",
-      "difficulty": 4,
-      "question": "Des chloroplastes isolés, à l'obscurité mais pourvus de CO2, d'ATP et de NADPH, peuvent-ils fixer le CO2 ?",
-      "choices": [
-        "Oui, car le cycle de Calvin utilise l'ATP et le NADPH, non la lumière directement",
-        "Non, car la Rubisco exige la présence directe de la lumière",
-        "Oui, mais seulement si l'oxygène est fourni",
-        "Non, car l'eau est indispensable à la fixation"
-      ],
-      "answer": "A",
-      "explanation": "La phase sombre dépend de l'ATP et du NADPH issus de la phase claire ; leur apport artificiel permet la fixation du carbone.",
-      "source": "Botanique, famille Raven",
-      "verif": "import"
-    },
-    {
-      "course": "l2-bio",
-      "category": "photosynthèse : phases et rendement",
-      "difficulty": 5,
-      "question": "Pourquoi la photorespiration est-elle limitée chez les plantes en C4 ?",
-      "choices": [
-        "Elles n'utilisent pas de Rubisco mais seulement la PEP carboxylase",
-        "Le CO2 est concentré autour de la Rubisco dans les cellules de la gaine périvasculaire",
-        "Leur Rubisco est incapable de fixer l'oxygène en aucune circonstance",
-        "Leurs stomates restent fermés en permanence"
-      ],
-      "answer": "B",
-      "explanation": "La concentration locale du CO2 favorise la carboxylation du RuBP plutôt que son oxygénation, ce qui réduit les pertes.",
-      "source": "Botanique, famille Raven",
-      "verif": "import"
-    },
-    {
-      "course": "l2-bio",
-      "category": "enzymes : cinétique et régulation",
-      "difficulty": 1,
-      "question": "Comment une enzyme accélère-t-elle une réaction chimique ?",
-      "choices": [
-        "En abaissant l'énergie d'activation",
-        "En déplaçant l'équilibre vers les produits",
-        "En étant consommée pendant la réaction",
-        "En augmentant la quantité d'énergie libérée"
-      ],
-      "answer": "A",
-      "explanation": "Un catalyseur diminue l'énergie d'activation sans modifier l'équilibre ni être consommé.",
-      "source": "Biochimie, famille Stryer/Lehninger",
-      "verif": "import"
-    },
-    {
-      "course": "l2-bio",
-      "category": "enzymes : cinétique et régulation",
-      "difficulty": 2,
-      "question": "Que représente la constante de Michaelis Km ?",
-      "choices": [
-        "La concentration de produit atteinte à l'équilibre",
-        "La concentration totale d'enzyme présente dans le milieu",
-        "La vitesse maximale de la réaction",
-        "La concentration de substrat pour laquelle la vitesse vaut Vmax/2"
-      ],
-      "answer": "D",
-      "explanation": "Km est la concentration de substrat donnant la moitié de la vitesse maximale ; c'est un indicateur d'affinité.",
-      "source": "Biochimie, famille Stryer/Lehninger",
-      "verif": "import"
-    },
-    {
-      "course": "l2-bio",
-      "category": "enzymes : cinétique et régulation",
-      "difficulty": 3,
-      "question": "Quel effet a un inhibiteur compétitif sur les paramètres cinétiques de l'enzyme ?",
-      "choices": [
-        "Km apparent augmente, Vmax inchangée",
-        "Km apparent diminue, Vmax diminue",
-        "Km inchangé, Vmax diminue",
-        "Km et Vmax augmentent"
-      ],
-      "answer": "A",
-      "explanation": "L'inhibiteur rivalise avec le substrat : il faut plus de substrat pour atteindre Vmax/2, mais à saturation Vmax est retrouvée.",
-      "source": "Biochimie, famille Stryer/Lehninger",
-      "verif": "import"
-    },
-    {
-      "course": "l2-bio",
-      "category": "enzymes : cinétique et régulation",
-      "difficulty": 2,
-      "question": "Les statines, utilisées contre l'excès de cholestérol, inhibent quelle enzyme ?",
-      "choices": [
-        "L'HMG-CoA réductase",
-        "La lactase",
-        "L'amylase pancréatique",
-        "La pepsine"
-      ],
-      "answer": "A",
-      "explanation": "Les statines inhibent l'HMG-CoA réductase, enzyme limitante de la synthèse du cholestérol.",
-      "source": "Biochimie, famille Stryer/Lehninger",
-      "verif": "import"
-    },
-    {
-      "course": "l2-bio",
-      "category": "cycle cellulaire : mitose et contrôle",
-      "difficulty": 1,
-      "question": "Dans quelle phase du cycle cellulaire l'ADN est-il répliqué ?",
-      "choices": [
-        "La phase G2",
-        "La phase M",
-        "La phase S",
-        "La phase G1"
-      ],
-      "answer": "C",
-      "explanation": "La réplication de l'ADN a lieu en phase S, entre G1 et G2.",
-      "source": "Cours de licence de biologie cellulaire, famille Alberts (Biologie moléculaire de la cellule)",
-      "verif": "import"
-    },
-    {
-      "course": "l2-bio",
-      "category": "cycle cellulaire : mitose et contrôle",
-      "difficulty": 2,
-      "question": "Comment la cytocinèse diffère-t-elle entre cellule animale et cellule végétale ?",
-      "choices": [
-        "Plaque cellulaire chez l'animal, anneau contractile chez la plante",
-        "Anneau contractile chez l'animal, plaque cellulaire (phragmoplaste) chez la plante",
-        "Elle est identique dans les deux cas grâce à un anneau d'actine",
-        "Elle n'existe que chez l'animal"
-      ],
-      "answer": "B",
-      "explanation": "La cellule animale se pince par un anneau d'actine-myosine ; la cellule végétale construit une nouvelle paroi au centre.",
-      "source": "Cours de licence de biologie cellulaire, famille Alberts (Biologie moléculaire de la cellule)",
-      "verif": "import"
-    },
-    {
-      "course": "l2-bio",
-      "category": "cycle cellulaire : mitose et contrôle",
-      "difficulty": 3,
-      "question": "Quel complexe contrôle principalement l'entrée en mitose à la transition G2/M ?",
-      "choices": [
-        "L'ARN polymérase II",
-        "CDK1 associée à la cycline B",
-        "CDK4 associée à la cycline D",
-        "La protéine p53 seule"
-      ],
-      "answer": "B",
-      "explanation": "La CDK1 liée à la cycline B déclenche l'entrée en mitose ; CDK4/cycline D agit en G1.",
-      "source": "Cours de licence de biologie cellulaire, famille Alberts (Biologie moléculaire de la cellule)",
-      "verif": "import"
-    },
-    {
-      "course": "l2-bio",
-      "category": "cycle cellulaire : mitose et contrôle",
-      "difficulty": 1,
-      "question": "Comment la quantité d'ADN d'une cellule en G2 se compare-t-elle à celle de la phase G1 ?",
-      "choices": [
-        "Elle est doublée",
-        "Elle est réduite de moitié",
-        "Elle est quadruplée",
-        "Elle est identique"
-      ],
-      "answer": "A",
-      "explanation": "Après la phase S, chaque chromosome possède deux chromatides : la quantité d'ADN a doublé, sans changer le nombre de chromosomes.",
-      "source": "Cours de licence de biologie cellulaire, famille Alberts (Biologie moléculaire de la cellule)",
-      "verif": "import"
-    },
-    {
-      "course": "l2-bio",
-      "category": "méiose et brassage génétique",
-      "difficulty": 1,
-      "question": "Quel est le résultat d'une méiose complète à partir d'une cellule diploïde ?",
-      "choices": [
-        "Deux cellules haploïdes",
-        "Quatre cellules diploïdes",
-        "Deux cellules diploïdes",
-        "Quatre cellules haploïdes"
-      ],
-      "answer": "D",
-      "explanation": "Deux divisions successives après une seule réplication donnent quatre cellules haploïdes.",
-      "source": "Cours de génétique, famille Griffiths",
-      "verif": "import"
-    },
-    {
-      "course": "l2-bio",
-      "category": "méiose et brassage génétique",
-      "difficulty": 2,
-      "question": "Dans quelle phase se produisent les enjambements (crossing-over) ?",
-      "choices": [
-        "La prophase I",
-        "La métaphase II",
-        "L'anaphase II",
-        "La télophase I"
-      ],
-      "answer": "A",
-      "explanation": "Les chromosomes homologues, appariés en prophase I, échangent des segments au niveau des chiasmas.",
-      "source": "Cours de génétique, famille Griffiths",
-      "verif": "import"
-    },
-    {
-      "course": "l2-bio",
-      "category": "méiose et brassage génétique",
-      "difficulty": 3,
-      "question": "Un individu 2n = 6 (3 paires) produit, sans crossing-over, combien de types de gamètes chromosomiquement différents ?",
-      "choices": [
-        "6",
-        "3",
-        "9",
-        "8"
-      ],
-      "answer": "D",
-      "explanation": "Chaque paire s'oriente indépendamment : 2^3 = 8 combinaisons possibles.",
-      "source": "Cours de génétique, famille Griffiths",
-      "verif": "import"
-    },
-    {
-      "course": "l2-bio",
-      "category": "méiose et brassage génétique",
-      "difficulty": 4,
-      "question": "Pour l'espèce humaine (23 paires), combien de combinaisons chromosomiques gamétiques le brassage interchromosomique permet-il, sans crossing-over ?",
-      "choices": [
-        "46^2",
-        "2^23",
-        "2 x 23",
-        "23^2"
-      ],
-      "answer": "B",
-      "explanation": "Chaque paire d'homologues se répartit de deux façons indépendantes : 2^23, soit environ 8,4 millions.",
-      "source": "Cours de génétique, famille Griffiths",
-      "verif": "import"
-    },
-    {
-      "course": "l2-bio",
-      "category": "génétique mendélienne et croisements",
-      "difficulty": 1,
-      "question": "Avec quel génotype réalise-t-on un croisement-test (test cross) ?",
-      "choices": [
-        "Un individu homozygote pour l'allèle dominant",
-        "Un individu homozygote récessif",
-        "Un individu de la même lignée pure que lui",
-        "Un individu hétérozygote"
-      ],
-      "answer": "B",
-      "explanation": "Le croisement avec l'homozygote récessif révèle le génotype de l'individu testé d'après ses descendants.",
-      "source": "Cours de génétique, famille Griffiths",
-      "verif": "import"
-    },
-    {
-      "course": "l2-bio",
-      "category": "génétique mendélienne et croisements",
-      "difficulty": 2,
-      "question": "Quelle proportion phénotypique attend-on d'un croisement Aa x Aa avec dominance complète ?",
-      "choices": [
-        "3 dominants pour 1 récessif",
-        "1 dominant pour 3 récessifs",
-        "Tous dominants",
-        "1 dominant pour 1 récessif"
-      ],
-      "answer": "A",
-      "explanation": "La descendance est AA, Aa, Aa, aa : trois quarts de phénotype dominant et un quart de récessif.",
-      "source": "Cours de génétique, famille Griffiths",
-      "verif": "import"
-    },
-    {
-      "course": "l2-bio",
-      "category": "génétique mendélienne et croisements",
-      "difficulty": 3,
-      "question": "Dans un croisement AaBb x AaBb (gènes indépendants), quelle proportion de descendants est aabb ?",
-      "choices": [
-        "1/4",
-        "1/8",
-        "1/16",
-        "9/16"
-      ],
-      "answer": "C",
-      "explanation": "Chaque gène donne 1/4 de récessifs homozygotes : 1/4 x 1/4 = 1/16.",
-      "source": "Cours de génétique, famille Griffiths",
-      "verif": "import"
-    },
-    {
-      "course": "l2-bio",
-      "category": "génétique mendélienne et croisements",
-      "difficulty": 2,
-      "question": "Deux parents hétérozygotes AS ont un enfant : quelle est la probabilité qu'il soit drépanocytaire (SS) ?",
-      "choices": [
-        "1/4",
-        "1/8",
-        "3/4",
-        "1/2"
-      ],
-      "answer": "A",
-      "explanation": "L'allèle S est récessif : le croisement AS x AS donne 1/4 d'enfants SS.",
-      "source": "Cours de génétique, famille Griffiths",
-      "verif": "import",
-      "region": "AF"
-    },
-    {
-      "course": "l2-bio",
-      "category": "génétique mendélienne et croisements",
-      "difficulty": 4,
-      "question": "Un enfant de groupe O naît de parents de groupes A et B. Quels sont les génotypes des parents ?",
-      "choices": [
-        "IAIA et IBi",
-        "IAi et IBIB",
-        "IAi et IBi",
-        "IAIA et IBIB"
-      ],
-      "answer": "C",
-      "explanation": "L'enfant ii a reçu un allèle i de chaque parent : les deux parents sont donc hétérozygotes IAi et IBi.",
-      "source": "Cours de génétique, famille Griffiths",
-      "verif": "import"
-    },
-    {
-      "course": "l2-bio",
-      "category": "hérédité liée au sexe",
-      "difficulty": 1,
-      "question": "Quelle maladie est due à un allèle récessif porté par le chromosome X ?",
-      "choices": [
-        "La drépanocytose",
-        "La mucoviscidose",
-        "L'hémophilie A",
-        "La trisomie 21"
-      ],
-      "answer": "C",
-      "explanation": "L'hémophilie A est liée à l'X récessif, comme le daltonisme ; les autres citées ne le sont pas.",
-      "source": "Cours de génétique, famille Griffiths",
-      "verif": "import"
-    },
-    {
-      "course": "l2-bio",
-      "category": "hérédité liée au sexe",
-      "difficulty": 2,
-      "question": "Un homme atteint d'une maladie récessive liée à l'X a des enfants avec une femme non porteuse. Que sera-t-il de ses enfants ?",
-      "choices": [
-        "Ses filles seront porteuses, ses fils non atteints",
-        "Toutes ses filles seront atteintes",
-        "La moitié de ses fils seront atteints",
-        "Ses fils seront atteints, ses filles saines non porteuses"
-      ],
-      "answer": "A",
-      "explanation": "Il transmet son X à toutes ses filles (porteuses) et son Y à ses fils, qui reçoivent un X sain de la mère.",
-      "source": "Cours de génétique, famille Griffiths",
-      "verif": "import"
-    },
-    {
-      "course": "l2-bio",
-      "category": "hérédité liée au sexe",
-      "difficulty": 3,
-      "question": "Une femme conductrice d'hémophilie A épouse un homme sain. Quelle proportion de leurs fils sera atteinte ?",
-      "choices": [
-        "Le quart",
-        "La moitié",
-        "Aucun",
-        "Tous"
-      ],
-      "answer": "B",
-      "explanation": "Le fils reçoit l'X maternel : un sur deux porte l'allèle muté et est atteint.",
-      "source": "Cours de génétique, famille Griffiths",
-      "verif": "import"
-    },
-    {
-      "course": "l2-bio",
-      "category": "hérédité liée au sexe",
-      "difficulty": 4,
-      "question": "Pourquoi les chats à pelage écaille de tortue sont-ils presque toujours des femelles ?",
-      "choices": [
-        "Le chromosome Y porte le gène de la couleur orange chez les mâles",
-        "L'un des deux X est inactivé au hasard dans chaque cellule, avec des allèles de couleur différents",
-        "Les femelles possèdent un petit chromosome Y supplémentaire",
-        "Les mâles sont homozygotes pour tous les gènes de couleur"
-      ],
-      "answer": "B",
-      "explanation": "Le mélange orange et noir exige deux allèles différents sur deux X, dont l'inactivation mosaïque produit les plages colorées.",
-      "source": "Cours de génétique, famille Griffiths",
-      "verif": "import"
-    },
-    {
-      "course": "l2-bio",
-      "category": "ADN : structure, réplication",
-      "difficulty": 1,
-      "question": "Quelles bases s'apparient dans l'ADN double brin ?",
-      "choices": [
-        "A avec T, et G avec C",
-        "A avec C, et T avec G",
-        "A avec U, et G avec C",
-        "A avec G, et T avec C"
-      ],
-      "answer": "A",
-      "explanation": "L'adénine forme deux liaisons hydrogène avec la thymine, la guanine trois avec la cytosine.",
-      "source": "Biologie moléculaire, famille Watson (Biologie moléculaire du gène)",
-      "verif": "import"
-    },
-    {
-      "course": "l2-bio",
-      "category": "ADN : structure, réplication",
-      "difficulty": 2,
-      "question": "Quelle expérience a établi que la réplication de l'ADN est semi-conservative ?",
-      "choices": [
-        "Celle de Pasteur, avec des ballons à col de cygne",
-        "Celle de Griffith, avec des pneumocoques et des souris",
-        "Celle de Hershey et Chase, avec des phages marqués",
-        "Celle de Meselson et Stahl, avec des isotopes de l'azote"
-      ],
-      "answer": "D",
-      "explanation": "Meselson et Stahl ont suivi, par centrifugation, la densité de l'ADN de bactéries passées de 15N à 14N.",
-      "source": "Biologie moléculaire, famille Watson (Biologie moléculaire du gène)",
-      "verif": "import"
-    },
-    {
-      "course": "l2-bio",
-      "category": "ADN : structure, réplication",
-      "difficulty": 3,
-      "question": "Quelle différence existe entre la réplication de E. coli et celle d'un chromosome eucaryote ?",
-      "choices": [
-        "Une réplication unidirectionnelle chez E. coli et bidirectionnelle chez l'eucaryote",
-        "Une origine unique chez E. coli, de nombreuses origines chez l'eucaryote",
-        "Une réplication conservative chez l'eucaryote seulement",
-        "Un seul réplicon chez l'eucaryote"
-      ],
-      "answer": "B",
-      "explanation": "Le chromosome circulaire bactérien a une origine ; les chromosomes eucaryotes, longs, en possèdent de multiples pour une réplication rapide.",
-      "source": "Biologie moléculaire, famille Watson (Biologie moléculaire du gène)",
-      "verif": "import"
-    },
-    {
-      "course": "l2-bio",
-      "category": "ADN : structure, réplication",
-      "difficulty": 3,
-      "question": "Un ADN bicaténaire contient 30 % d'adénine. Quel est son pourcentage de guanine ?",
-      "choices": [
-        "60 %",
-        "30 %",
-        "20 %",
-        "40 %"
-      ],
-      "answer": "C",
-      "explanation": "Selon Chargaff, T = A = 30 %, donc G + C = 40 %, soit G = 20 %.",
-      "source": "Biologie moléculaire, famille Watson (Biologie moléculaire du gène)",
-      "verif": "import"
-    },
-    {
-      "course": "l2-bio",
-      "category": "ADN : structure, réplication",
-      "difficulty": 5,
-      "question": "Entre deux ADN de même longueur, lequel dénature à la température de fusion (Tm) la plus élevée ?",
-      "choices": [
-        "Celui qui contient de l'uracile à la place de la thymine",
-        "Celui qui est le plus riche en paires A-T",
-        "Celui qui est le plus riche en paires G-C",
-        "Celui qui est monocaténaire"
-      ],
-      "answer": "C",
-      "explanation": "Les paires G-C ont trois liaisons hydrogène : l'ADN riche en G-C est plus stable et fond à plus haute température.",
-      "source": "Biologie moléculaire, famille Watson (Biologie moléculaire du gène)",
-      "verif": "import"
-    },
-    {
-      "course": "l2-bio",
-      "category": "transcription et traduction : synthèse des protéines",
-      "difficulty": 1,
-      "question": "Quel codon initie habituellement la traduction ?",
-      "choices": [
-        "UGA",
-        "UAA",
-        "AUG",
-        "GCC"
-      ],
-      "answer": "C",
-      "explanation": "AUG code la méthionine d'initiation ; UAA et UGA sont des codons stop.",
-      "source": "Biologie moléculaire, famille Watson (Biologie moléculaire du gène)",
-      "verif": "import"
-    },
-    {
-      "course": "l2-bio",
-      "category": "transcription et traduction : synthèse des protéines",
-      "difficulty": 2,
-      "question": "Quelle modification subit un pré-ARNm eucaryote mais pas un ARNm bactérien typique ?",
-      "choices": [
-        "Dégradation immédiate par l'ADN polymérase",
-        "Coiffe, queue poly-A et épissage des introns",
-        "Fixation d'une coiffe protectrice directement sur l'ADN",
-        "Traduction pendant la transcription"
-      ],
-      "answer": "B",
-      "explanation": "Chez l'eucaryote, la maturation précède l'export nucléaire ; chez les bactéries, la traduction peut commencer dès la transcription.",
-      "source": "Biologie moléculaire, famille Watson (Biologie moléculaire du gène)",
-      "verif": "import"
-    },
-    {
-      "course": "l2-bio",
-      "category": "transcription et traduction : synthèse des protéines",
-      "difficulty": 3,
-      "question": "Un brin matrice d'ADN 3'-TACCGG-5' est transcrit. Quel est l'ARNm formé ?",
-      "choices": [
-        "5'-TACCGG-3'",
-        "5'-UACCGG-3'",
-        "5'-ATGGCC-3'",
-        "5'-AUGGCC-3'"
-      ],
-      "answer": "D",
-      "explanation": "L'ARN est complémentaire et antiparallèle au brin matrice, avec U à la place de T : 5'-AUGGCC-3'.",
-      "source": "Biologie moléculaire, famille Watson (Biologie moléculaire du gène)",
-      "verif": "import"
-    },
-    {
-      "course": "l2-bio",
-      "category": "transcription et traduction : synthèse des protéines",
-      "difficulty": 3,
-      "question": "Un ARNm contient 300 nucléotides dans sa seule phase codante, sans codon stop. Combien d'acides aminés code-t-il ?",
-      "choices": [
-        "150",
-        "100",
-        "900",
-        "300"
-      ],
-      "answer": "B",
-      "explanation": "Trois nucléotides codent un acide aminé : 300 / 3 = 100.",
-      "source": "Biologie moléculaire, famille Watson (Biologie moléculaire du gène)",
-      "verif": "import"
-    },
-    {
-      "course": "l2-bio",
-      "category": "transcription et traduction : synthèse des protéines",
-      "difficulty": 2,
-      "question": "Quelle ARN polymérase eucaryote transcrit les gènes codant des protéines ?",
-      "choices": [
-        "L'ARN polymérase II",
-        "L'ADN polymérase delta",
-        "L'ARN polymérase III",
-        "L'ARN polymérase I"
-      ],
-      "answer": "A",
-      "explanation": "L'ARN polymérase II synthétise les pré-ARNm ; la I forme les ARNr majeurs et la III les ARNt.",
-      "source": "Biologie moléculaire, famille Watson (Biologie moléculaire du gène)",
-      "verif": "import"
-    },
-    {
-      "course": "l2-bio",
-      "category": "mutations et maladies génétiques",
-      "difficulty": 1,
-      "question": "Quelle altération moléculaire cause la drépanocytose ?",
-      "choices": [
-        "La substitution d'un acide glutamique par une valine dans la chaîne β de l'hémoglobine",
-        "La délétion complète du gène de la chaîne α de l'hémoglobine",
-        "L'absence totale de globine",
-        "La duplication du gène de l'insuline"
-      ],
-      "answer": "A",
-      "explanation": "Une mutation ponctuelle (GAG en GTG) change l'acide glutamique en valine et favorise la polymérisation de l'HbS.",
-      "source": "Cours de génétique, famille Griffiths",
-      "verif": "import",
-      "region": "AF"
-    },
-    {
-      "course": "l2-bio",
-      "category": "mutations et maladies génétiques",
-      "difficulty": 2,
-      "question": "Quelle conséquence a la délétion d'un seul nucléotide dans une région codante ?",
-      "choices": [
-        "Aucun effet sur la protéine",
-        "Une substitution d'un seul acide aminé",
-        "Une mutation silencieuse systématique",
-        "Un décalage du cadre de lecture"
-      ],
-      "answer": "D",
-      "explanation": "Le retrait d'un nucléotide décale tout le cadre de lecture en aval, modifiant la séquence protéique.",
-      "source": "Cours de génétique, famille Griffiths",
-      "verif": "import"
-    },
-    {
-      "course": "l2-bio",
-      "category": "mutations et maladies génétiques",
-      "difficulty": 1,
-      "question": "Quel caryotype correspond à une trisomie 21 libre chez une fille ?",
-      "choices": [
-        "47,XXY",
-        "45,X",
-        "46,XX",
-        "47,XX,+21"
-      ],
-      "answer": "D",
-      "explanation": "La trisomie 21 correspond à un chromosome 21 supplémentaire : 47 chromosomes avec formule sexuelle XX chez la fille.",
-      "source": "Cours de génétique, famille Griffiths",
-      "verif": "import"
-    },
-    {
-      "course": "l2-bio",
-      "category": "mutations et maladies génétiques",
-      "difficulty": 1,
-      "question": "Qu'est-ce qu'une mutation non-sens ?",
-      "choices": [
-        "Une inversion d'un grand segment chromosomique",
-        "Une substitution qui ne modifie pas l'acide aminé codé",
-        "Une insertion de trois nucléotides",
-        "Une substitution qui crée un codon stop prématuré"
-      ],
-      "answer": "D",
-      "explanation": "Elle transforme un codon d'acide aminé en codon stop et donne une protéine tronquée.",
-      "source": "Cours de génétique, famille Griffiths",
-      "verif": "import"
-    },
-    {
-      "course": "l2-bio",
-      "category": "régulation de l'expression génétique",
-      "difficulty": 1,
-      "question": "Dans l'opéron lactose d'E. coli, quel signal lève la répression ?",
-      "choices": [
-        "La présence de tryptophane",
-        "La présence de lactose (allolactose)",
-        "La présence de glucose seul",
-        "L'absence de lactose"
-      ],
-      "answer": "B",
-      "explanation": "L'allolactose se lie au répresseur LacI et l'empêche de se fixer à l'opérateur.",
-      "source": "Biologie moléculaire, famille Watson (Biologie moléculaire du gène)",
-      "verif": "import"
-    },
-    {
-      "course": "l2-bio",
-      "category": "régulation de l'expression génétique",
-      "difficulty": 2,
-      "question": "En l'absence de lactose, que fait le répresseur LacI de l'opéron lactose ?",
-      "choices": [
-        "Il se fixe au promoteur du gène LacI et l'active",
-        "Il dégrade l'ARNm déjà formé dans le cytoplasme",
-        "Il se fixe à l'opérateur et bloque la transcription",
-        "Il hydrolyse directement le lactose en glucose et galactose"
-      ],
-      "answer": "C",
-      "explanation": "Le répresseur actif occupe l'opérateur et empêche l'ARN polymérase de transcrire les gènes de structure.",
-      "source": "Biologie moléculaire, famille Watson (Biologie moléculaire du gène)",
-      "verif": "import"
-    },
-    {
-      "course": "l2-bio",
-      "category": "régulation de l'expression génétique",
-      "difficulty": 3,
-      "question": "Quelle différence existe entre l'opéron lactose et l'opéron tryptophane ?",
-      "choices": [
-        "Le premier est répressible, le second est inductible",
-        "Ils sont exprimés en permanence, sans régulation",
-        "Aucun n'a de régulateur",
-        "Le premier est inductible, le second est répressible"
-      ],
-      "answer": "D",
-      "explanation": "Le lactose inactive le répresseur de lac ; le tryptophane active celui de trp, d'où une répression quand il abonde.",
-      "source": "Biologie moléculaire, famille Watson (Biologie moléculaire du gène)",
-      "verif": "import"
-    },
-    {
-      "course": "l2-bio",
-      "category": "régulation de l'expression génétique",
-      "difficulty": 5,
-      "question": "Avec glucose et lactose présents, l'opéron lac est peu exprimé. Pourquoi ?",
-      "choices": [
-        "Le glucose se fixe sur l'opérateur à la place du répresseur",
-        "Le répresseur est directement activé par le glucose",
-        "L'AMPc est bas, donc le complexe CAP-AMPc n'active pas la transcription",
-        "Le lactose est dégradé avant son entrée dans la bactérie"
-      ],
-      "answer": "C",
-      "explanation": "Le glucose abaisse l'AMPc : CAP, non activé, ne stimule plus le promoteur (répression catabolique).",
-      "source": "Biologie moléculaire, famille Watson (Biologie moléculaire du gène)",
-      "verif": "import"
-    },
-    {
-      "course": "l2-bio",
-      "category": "biotechnologies : PCR, clonage, OGM",
-      "difficulty": 1,
-      "question": "Quelle caractéristique de la Taq polymérase la rend utile à la PCR ?",
-      "choices": [
-        "Elle coupe l'ADN aux sites de restriction palindromiques",
-        "Elle ne fonctionne qu'à basse température, vers 4 °C",
-        "Elle copie l'ARN en ADN",
-        "Elle résiste aux températures élevées de dénaturation"
-      ],
-      "answer": "D",
-      "explanation": "Issue de Thermus aquaticus, elle reste active après chaque dénaturation vers 95 °C.",
-      "source": "Biologie moléculaire, famille Watson (Biologie moléculaire du gène)",
-      "verif": "import"
-    },
-    {
-      "course": "l2-bio",
-      "category": "biotechnologies : PCR, clonage, OGM",
-      "difficulty": 2,
-      "question": "Quel est l'ordre des étapes d'un cycle de PCR ?",
-      "choices": [
-        "Dénaturation, élongation, hybridation",
-        "Dénaturation, hybridation des amorces, élongation",
-        "Élongation, dénaturation, hybridation",
-        "Hybridation, élongation, dénaturation"
-      ],
-      "answer": "B",
-      "explanation": "L'ADN est dénaturé, les amorces s'hybrident, puis la polymérase allonge les brins.",
-      "source": "Biologie moléculaire, famille Watson (Biologie moléculaire du gène)",
-      "verif": "import"
-    },
-    {
-      "course": "l2-bio",
-      "category": "biotechnologies : PCR, clonage, OGM",
-      "difficulty": 3,
-      "question": "Quel nombre théorique de copies obtient-on après 10 cycles de PCR à partir d'une seule molécule d'ADN ?",
-      "choices": [
-        "512",
-        "1 024",
-        "20",
-        "100"
-      ],
-      "answer": "B",
-      "explanation": "Le nombre de copies double à chaque cycle : 2^10 = 1 024 en théorie.",
-      "source": "Biologie moléculaire, famille Watson (Biologie moléculaire du gène)",
-      "verif": "import"
-    },
-    {
-      "course": "l2-bio",
-      "category": "biotechnologies : PCR, clonage, OGM",
-      "difficulty": 3,
-      "question": "Dans l'électrophorèse sur gel d'agarose, comment migrent les fragments d'ADN ?",
-      "choices": [
-        "Vers le pôle positif, les plus petits allant plus vite",
-        "Ils migrent sans rapport avec leur taille",
-        "Vers le pôle positif, les plus gros allant le plus vite",
-        "Vers le pôle négatif, les plus petits allant plus lentement"
-      ],
-      "answer": "A",
-      "explanation": "L'ADN, chargé négativement, migre vers l'anode ; le gel freine davantage les grands fragments.",
-      "source": "Biologie moléculaire, famille Watson (Biologie moléculaire du gène)",
-      "verif": "import"
-    },
-    {
-      "course": "l2-bio",
-      "category": "biotechnologies : PCR, clonage, OGM",
-      "difficulty": 4,
-      "question": "Pour détecter un virus à ARN par PCR, quelle étape préalable faut-il ?",
-      "choices": [
-        "Une électrophorèse de l'ARN seul",
-        "Une traduction in vitro",
-        "Une transcription inverse de l'ARN en ADNc",
-        "Une digestion par une enzyme de restriction"
-      ],
-      "answer": "C",
-      "explanation": "La RT-PCR utilise une transcriptase inverse pour fabriquer un ADN complémentaire que la Taq pourra amplifier.",
-      "source": "Biologie moléculaire, famille Watson (Biologie moléculaire du gène)",
-      "verif": "import"
-    },
-    {
-      "course": "l2-bio",
-      "category": "évolution : sélection naturelle et spéciation",
-      "difficulty": 1,
-      "question": "Selon Darwin, quel mécanisme explique l'adaptation des populations ?",
-      "choices": [
-        "L'apparition de mutations orientées par le milieu",
-        "La transmission héréditaire des caractères acquis",
-        "La sélection naturelle de variants héritables avantageux",
-        "L'usage et le non-usage des organes"
-      ],
-      "answer": "C",
-      "explanation": "Les individus aux caractères héritables favorables se reproduisent davantage, ce qui modifie la population.",
-      "source": "Cours d'évolution, famille Futuyma",
-      "verif": "import"
-    },
-    {
-      "course": "l2-bio",
-      "category": "évolution : sélection naturelle et spéciation",
-      "difficulty": 2,
-      "question": "Comment l'apparition de bactéries résistantes aux antibiotiques s'interprète-t-elle ?",
-      "choices": [
-        "Par une adaptation volontaire des bactéries à l'antibiotique",
-        "Par la seule disparition des bactéries sensibles",
-        "Par transmission de caractères acquis par chaque bactérie",
-        "Par sélection naturelle de variants résistants préexistants"
-      ],
-      "answer": "D",
-      "explanation": "L'antibiotique élimine les sensibles et favorise la multiplication des mutants résistants.",
-      "source": "Cours d'évolution, famille Futuyma",
-      "verif": "import"
-    },
-    {
-      "course": "l2-bio",
-      "category": "évolution : sélection naturelle et spéciation",
-      "difficulty": 4,
-      "question": "Dans une population à l'équilibre de Hardy-Weinberg, q^2 = 0,04. Quelle est la fréquence des hétérozygotes ?",
-      "choices": [
-        "0,32",
-        "0,64",
-        "0,20",
-        "0,16"
-      ],
-      "answer": "A",
-      "explanation": "q = 0,2 donc p = 0,8 et 2pq = 2 x 0,8 x 0,2 = 0,32.",
-      "source": "Cours d'évolution, famille Futuyma",
-      "verif": "import"
-    },
-    {
-      "course": "l2-bio",
-      "category": "évolution : sélection naturelle et spéciation",
-      "difficulty": 3,
-      "question": "Pourquoi l'allèle S de l'hémoglobine reste-t-il fréquent dans des régions touchées par le paludisme ?",
-      "choices": [
-        "Le paludisme provoque la mutation S",
-        "Les homozygotes SS sont les plus résistants au paludisme",
-        "Les hétérozygotes AS sont mieux protégés contre le paludisme grave",
-        "L'allèle S est dominant"
-      ],
-      "answer": "C",
-      "explanation": "L'avantage des hétérozygotes maintient l'allèle malgré le désavantage des homozygotes SS.",
-      "source": "Cours d'évolution, famille Futuyma",
-      "verif": "import",
-      "region": "AF"
-    },
-    {
-      "course": "l2-bio",
-      "category": "évolution : sélection naturelle et spéciation",
-      "difficulty": 5,
-      "question": "Dans une population en équilibre de Hardy-Weinberg, q^2 = 0,0001 pour une maladie récessive. Quelle est la fréquence approximative des porteurs ?",
-      "choices": [
-        "0,0198",
-        "0,0099",
-        "0,01",
-        "0,0001"
-      ],
-      "answer": "A",
-      "explanation": "q = 0,01 et p = 0,99, donc 2pq = 2 x 0,99 x 0,01 = 0,0198.",
-      "source": "Cours d'évolution, famille Futuyma",
-      "verif": "import"
-    },
-    {
-      "course": "l2-bio",
-      "category": "classification du vivant : bactéries, archées, eucaryotes",
-      "difficulty": 1,
-      "question": "Quels sont les trois domaines du vivant ?",
-      "choices": [
-        "Virus, bactéries et eucaryotes",
-        "Bacteria, Archaea et Eukarya",
-        "Procaryotes, protistes et champignons",
-        "Animaux, végétaux et bactéries"
-      ],
-      "answer": "B",
-      "explanation": "La classification de Woese distingue Bacteria, Archaea et Eukarya d'après l'ARN ribosomique.",
-      "source": "Microbiologie, famille Madigan/Prescott",
-      "verif": "import"
-    },
-    {
-      "course": "l2-bio",
-      "category": "classification du vivant : bactéries, archées, eucaryotes",
-      "difficulty": 2,
-      "question": "Quelle différence de paroi existe entre bactéries et archées ?",
-      "choices": [
-        "Les archées ont toujours une paroi de cellulose rigide",
-        "Les archées n'ont pas de peptidoglycane (muréine) typique",
-        "Les bactéries n'ont jamais de paroi",
-        "Leur paroi est identique, faite de chitine"
-      ],
-      "answer": "B",
-      "explanation": "La paroi bactérienne contient du peptidoglycane ; celle des archées en est dépourvue.",
-      "source": "Microbiologie, famille Madigan/Prescott",
-      "verif": "import"
-    },
-    {
-      "course": "l2-bio",
-      "category": "classification du vivant : bactéries, archées, eucaryotes",
-      "difficulty": 3,
-      "question": "Quels organismes sont les plus proches parents des animaux parmi ces groupes ?",
-      "choices": [
-        "Les cyanobactéries",
-        "Les champignons",
-        "Les plantes à fleurs",
-        "Les algues vertes"
-      ],
-      "answer": "B",
-      "explanation": "Animaux et champignons appartiennent aux opisthocontes ; les plantes appartiennent à une autre lignée.",
-      "source": "Microbiologie, famille Madigan/Prescott",
-      "verif": "import"
-    },
-    {
-      "course": "l2-bio",
-      "category": "classification du vivant : bactéries, archées, eucaryotes",
-      "difficulty": 2,
-      "question": "À quel groupe appartient la spiruline récoltée dans la région du lac Tchad ?",
-      "choices": [
-        "Aux champignons",
-        "Aux algues brunes",
-        "Aux archées méthanogènes",
-        "Aux cyanobactéries"
-      ],
-      "answer": "D",
-      "explanation": "La spiruline (Arthrospira) est une cyanobactérie, donc un procaryote photosynthétique.",
-      "source": "Microbiologie, famille Madigan/Prescott",
-      "verif": "import",
-      "region": "AF"
-    },
-    {
-      "course": "l2-bio",
-      "category": "virus : structure et cycle de réplication",
-      "difficulty": 1,
-      "question": "De quoi se compose un virus nu ?",
-      "choices": [
-        "D'un génome entouré d'une simple enveloppe lipidique",
-        "D'un génome (ADN ou ARN) entouré d'une capside",
-        "D'un noyau entouré d'une paroi rigide",
-        "De ribosomes et d'ADN"
-      ],
-      "answer": "B",
-      "explanation": "Un virus nu est formé d'un acide nucléique protégé par une capside protéique.",
-      "source": "Virologie, famille Flint (Principles of Virology)",
-      "verif": "import"
-    },
-    {
-      "course": "l2-bio",
-      "category": "virus : structure et cycle de réplication",
-      "difficulty": 2,
-      "question": "Quelle enzyme caractérise le VIH, rétrovirus à ARN ?",
-      "choices": [
-        "La DNase",
-        "L'ARN polymérase ADN-dépendante",
-        "La transcriptase inverse",
-        "La lactase"
-      ],
-      "answer": "C",
-      "explanation": "La transcriptase inverse synthétise un ADN à partir de l'ARN viral, intégré ensuite au génome de la cellule.",
-      "source": "Virologie, famille Flint (Principles of Virology)",
-      "verif": "import"
-    },
-    {
-      "course": "l2-bio",
-      "category": "virus : structure et cycle de réplication",
-      "difficulty": 3,
-      "question": "Qu'est-ce qui distingue le cycle lysogénique du cycle lytique d'un bactériophage ?",
-      "choices": [
-        "Le virus ne pénètre jamais dans la cellule hôte",
-        "Le génome viral s'intègre au chromosome sans lyser la cellule immédiatement",
-        "La cellule est détruite tout de suite après l'infection",
-        "Aucune réplication de l'ADN viral n'a lieu"
-      ],
-      "answer": "B",
-      "explanation": "Le prophage se réplique avec la bactérie et peut être induit plus tard vers un cycle lytique.",
-      "source": "Virologie, famille Flint (Principles of Virology)",
-      "verif": "import"
-    },
-    {
-      "course": "l2-bio",
-      "category": "virus : structure et cycle de réplication",
-      "difficulty": 4,
-      "question": "Pourquoi le génome segmenté du virus grippal favorise-t-il l'apparition de nouveaux sous-types ?",
-      "choices": [
-        "Il transforme directement l'ARN viral en ADN",
-        "Il rend le virus incapable de toute recombinaison",
-        "Il permet des réassortiments entre souches coinfectant une cellule",
-        "Il empêche toute mutation de se produire"
-      ],
-      "answer": "C",
-      "explanation": "Les segments de deux souches peuvent se mélanger dans une même cellule, créant de nouvelles combinaisons.",
-      "source": "Virologie, famille Flint (Principles of Virology)",
-      "verif": "import"
-    },
-    {
-      "course": "l2-bio",
-      "category": "virus : structure et cycle de réplication",
-      "difficulty": 5,
-      "question": "Quelle particularité a le virus de l'hépatite B ?",
-      "choices": [
-        "Un génome d'ARN simple brin répliqué sans intermédiaire",
-        "Un génome d'ADN dépourvu de toute capside",
-        "Un génome d'ARN segmenté comme celui de la grippe",
-        "Un génome d'ADN partiellement bicaténaire répliqué par transcription inverse"
-      ],
-      "answer": "D",
-      "explanation": "Le VHB est un virus à ADN dont la réplication passe par un intermédiaire ARN transcrit à l'envers.",
-      "source": "Virologie, famille Flint (Principles of Virology)",
-      "verif": "import"
-    },
-    {
-      "course": "l2-bio",
-      "category": "microbiologie : bactéries, culture et antibiotiques",
-      "difficulty": 1,
-      "question": "Quelle caractéristique distingue les bactéries à Gram positif ?",
-      "choices": [
-        "L'absence de paroi",
-        "Une membrane externe riche en lipopolysaccharides",
-        "Une paroi épaisse de peptidoglycane qui retient le violet de gentiane",
-        "Un noyau visible"
-      ],
-      "answer": "C",
-      "explanation": "La paroi épaisse retient le colorant cristal violet ; les Gram négatifs possèdent une membrane externe.",
-      "source": "Microbiologie, famille Madigan/Prescott",
-      "verif": "import"
-    },
-    {
-      "course": "l2-bio",
-      "category": "microbiologie : bactéries, culture et antibiotiques",
-      "difficulty": 2,
-      "question": "Quel est le mode d'action des pénicillines ?",
-      "choices": [
-        "Elles lient l'ADN gyrase",
-        "Elles inhibent la synthèse du peptidoglycane",
-        "Elles détruisent la membrane nucléaire",
-        "Elles bloquent la traduction sur le ribosome 30S"
-      ],
-      "answer": "B",
-      "explanation": "Les β-lactamines empêchent la formation des liaisons croisées du peptidoglycane.",
-      "source": "Microbiologie, famille Madigan/Prescott",
-      "verif": "import"
-    },
-    {
-      "course": "l2-bio",
-      "category": "microbiologie : bactéries, culture et antibiotiques",
-      "difficulty": 3,
-      "question": "Une bactérie double toutes les 20 minutes. À partir d'une cellule, combien y en a-t-il après 3 heures de croissance exponentielle idéale ?",
-      "choices": [
-        "60",
-        "180",
-        "512",
-        "9"
-      ],
-      "answer": "C",
-      "explanation": "3 heures = 9 générations : 2^9 = 512.",
-      "source": "Microbiologie, famille Madigan/Prescott",
-      "verif": "import"
-    },
-    {
-      "course": "l2-bio",
-      "category": "microbiologie : bactéries, culture et antibiotiques",
-      "difficulty": 2,
-      "question": "Quelle coloration met en évidence les mycobactéries comme Mycobacterium tuberculosis ?",
-      "choices": [
-        "L'encre de Chine",
-        "La coloration au bleu de méthylène seul",
-        "La coloration de Ziehl-Neelsen",
-        "La coloration de Gram simple"
-      ],
-      "answer": "C",
-      "explanation": "Les mycobactéries sont acido-alcoolo-résistantes et se colorent par Ziehl-Neelsen.",
-      "source": "Microbiologie, famille Madigan/Prescott",
-      "verif": "import"
-    },
-    {
-      "course": "l2-bio",
-      "category": "parasitologie : paludisme et autres parasitoses tropicales",
-      "difficulty": 1,
-      "question": "Quel vecteur transmet le paludisme ?",
-      "choices": [
-        "Le phlébotome",
-        "La simulie",
-        "La glossine",
-        "L'anophèle femelle"
-      ],
-      "answer": "D",
-      "explanation": "Les Plasmodium sont inoculés par la piqûre d'un moustique anophèle femelle.",
-      "source": "Parasitologie médicale, famille Golvan/Bussieras",
-      "verif": "import",
-      "region": "AF"
-    },
-    {
-      "course": "l2-bio",
-      "category": "parasitologie : paludisme et autres parasitoses tropicales",
-      "difficulty": 3,
-      "question": "Quelle espèce de Plasmodium forme des hypnozoïtes responsables de rechutes tardives ?",
-      "choices": [
-        "Plasmodium vivax",
-        "Plasmodium falciparum",
-        "Plasmodium malariae",
-        "Plasmodium knowlesi"
-      ],
-      "answer": "A",
-      "explanation": "P. vivax et P. ovale ont des formes dormantes hépatiques ; P. falciparum n'en forme pas.",
-      "source": "Parasitologie médicale, famille Golvan/Bussieras",
-      "verif": "import"
-    },
-    {
-      "course": "l2-bio",
-      "category": "parasitologie : paludisme et autres parasitoses tropicales",
-      "difficulty": 2,
-      "question": "Quel vecteur transmet Onchocerca volvulus, agent de la cécité des rivières ?",
-      "choices": [
-        "La glossine",
-        "La simulie",
-        "Le triatome",
-        "L'anophèle"
-      ],
-      "answer": "B",
-      "explanation": "La simulie se reproduit dans les rivières rapides, d'où le nom de la maladie.",
-      "source": "Parasitologie médicale, famille Golvan/Bussieras",
-      "verif": "import",
-      "region": "AF"
-    },
-    {
-      "course": "l2-bio",
-      "category": "parasitologie : paludisme et autres parasitoses tropicales",
-      "difficulty": 1,
-      "question": "Quel vecteur transmet la trypanosomiase humaine africaine ?",
-      "choices": [
-        "Le stomoxe",
-        "Le triatome",
-        "Le phlébotome",
-        "La glossine (mouche tsé-tsé)"
-      ],
-      "answer": "D",
-      "explanation": "Trypanosoma brucei gambiense et rhodesiense sont transmis par la tsé-tsé.",
-      "source": "Parasitologie médicale, famille Golvan/Bussieras",
-      "verif": "import",
-      "region": "AF"
-    },
-    {
-      "course": "l2-bio",
-      "category": "parasitologie : paludisme et autres parasitoses tropicales",
-      "difficulty": 5,
-      "question": "Quel est le mode de contamination humaine dans la cysticercose à Taenia solium ?",
-      "choices": [
-        "La pénétration de larves par la peau",
-        "L'ingestion de viande de bœuf crue",
-        "L'ingestion d'œufs du ténia",
-        "La piqûre d'un moustique"
-      ],
-      "answer": "C",
-      "explanation": "L'humain devient hôte intermédiaire en ingérant des œufs ; la viande de porc mal cuite donne le téniasis.",
-      "source": "Parasitologie médicale, famille Golvan/Bussieras",
-      "verif": "import"
-    },
-    {
-      "course": "l2-bio",
-      "category": "immunologie : immunité innée et adaptative",
-      "difficulty": 1,
-      "question": "Quelles cellules fabriquent les anticorps ?",
-      "choices": [
-        "Les érythrocytes",
-        "Les macrophages",
-        "Les lymphocytes T cytotoxiques",
-        "Les plasmocytes issus des lymphocytes B"
-      ],
-      "answer": "D",
-      "explanation": "Les lymphocytes B activés se différencient en plasmocytes sécréteurs d'anticorps.",
-      "source": "Immunologie, famille Janeway/Abbas",
-      "verif": "import"
-    },
-    {
-      "course": "l2-bio",
-      "category": "immunologie : immunité innée et adaptative",
-      "difficulty": 2,
-      "question": "Quelle caractéristique distingue l'immunité adaptative de l'immunité innée ?",
-      "choices": [
-        "La spécificité et la mémoire immunitaire",
-        "L'action des phagocytes dès l'infection",
-        "La présence de barrières cutanées et muqueuses",
-        "La rapidité de la réponse immédiate"
-      ],
-      "answer": "A",
-      "explanation": "L'innée est rapide mais non spécifique ; l'adaptative est spécifique de l'antigène et garde une mémoire.",
-      "source": "Immunologie, famille Janeway/Abbas",
-      "verif": "import"
-    },
-    {
-      "course": "l2-bio",
-      "category": "immunologie : immunité innée et adaptative",
-      "difficulty": 1,
-      "question": "Quel type d'anticorps est transmis de la mère au fœtus à travers le placenta ?",
-      "choices": [
-        "Les IgD",
-        "Les IgM",
-        "Les IgG",
-        "Les IgE"
-      ],
-      "answer": "C",
-      "explanation": "Les IgG traversent le placenta et assurent une protection passive du nouveau-né.",
-      "source": "Immunologie, famille Janeway/Abbas",
-      "verif": "import"
-    },
-    {
-      "course": "l2-bio",
-      "category": "immunologie : immunité innée et adaptative",
-      "difficulty": 3,
-      "question": "Quelles molécules du CMH reconnaissent respectivement les lymphocytes T CD8 et CD4 ?",
-      "choices": [
-        "Classe I pour CD8 comme pour CD4",
-        "CD8 : classe II ; CD4 : classe I",
-        "CD8 : CMH de classe I ; CD4 : CMH de classe II",
-        "Classe II pour CD8 comme pour CD4"
-      ],
-      "answer": "C",
-      "explanation": "Les T CD8 reconnaissent les peptides présentés par le CMH I, les T CD4 ceux du CMH II.",
-      "source": "Immunologie, famille Janeway/Abbas",
-      "verif": "import"
-    },
-    {
-      "course": "l2-bio",
-      "category": "immunologie : immunité innée et adaptative",
-      "difficulty": 4,
-      "question": "Une mère Rh négatif porte un fœtus Rh positif. Quel risque peut apparaître lors d'une grossesse ultérieure ?",
-      "choices": [
-        "Une allergie saisonnière au pollen",
-        "La production d'anticorps anti-D pouvant atteindre le fœtus",
-        "Une immunodéficience acquise",
-        "Une hémophilie"
-      ],
-      "answer": "B",
-      "explanation": "Une sensibilisation à l'antigène D peut mener à une maladie hémolytique du nouveau-né ; une prophylaxie existe.",
-      "source": "Immunologie, famille Janeway/Abbas",
-      "verif": "import"
-    },
-    {
-      "course": "l2-bio",
-      "category": "vaccination et sérologie",
-      "difficulty": 1,
-      "question": "Quel est le principe d'une vaccination ?",
-      "choices": [
-        "Induire une mémoire immunitaire sans provoquer la maladie",
-        "Fournir directement des anticorps tout prêts",
-        "Empêcher les mutations de l'agent pathogène",
-        "Tuer directement l'agent pathogène dans le sang"
-      ],
-      "answer": "A",
-      "explanation": "Le vaccin présente l'antigène pour que l'organisme développe une réponse mémoire.",
-      "source": "Immunologie, famille Janeway/Abbas",
-      "verif": "import"
-    },
-    {
-      "course": "l2-bio",
-      "category": "vaccination et sérologie",
-      "difficulty": 2,
-      "question": "Quelle sérologie suggère une infection récente ?",
-      "choices": [
-        "L'absence d'anticorps",
-        "La présence d'IgM spécifiques",
-        "La présence d'IgA seules",
-        "La présence d'IgG seules"
-      ],
-      "answer": "B",
-      "explanation": "Les IgM apparaissent précocement ; les IgG persistent après l'infection ou la vaccination.",
-      "source": "Immunologie, famille Janeway/Abbas",
-      "verif": "import"
-    },
-    {
-      "course": "l2-bio",
-      "category": "vaccination et sérologie",
-      "difficulty": 2,
-      "question": "Quel est le principe du vaccin BCG ?",
-      "choices": [
-        "Une souche vivante atténuée de Mycobacterium bovis",
-        "Un virus entier inactivé par la chaleur",
-        "Une anatoxine",
-        "Un sérum prélevé sur un animal immunisé"
-      ],
-      "answer": "A",
-      "explanation": "Le BCG est une souche atténuée de M. bovis utilisée contre les formes graves de tuberculose.",
-      "source": "Immunologie, famille Janeway/Abbas",
-      "verif": "import"
-    },
-    {
-      "course": "l2-bio",
-      "category": "vaccination et sérologie",
-      "difficulty": 4,
-      "question": "Pourquoi un test sérologique VIH peut-il être négatif peu après l'infection ?",
-      "choices": [
-        "Les anticorps sont trop nombreux pour être détectés",
-        "Le test détecte seulement des antigènes viraux",
-        "Le virus est déjà éliminé de l'organisme",
-        "Les anticorps n'ont pas encore atteint un taux détectable"
-      ],
-      "answer": "D",
-      "explanation": "Le délai de séroconversion précède l'apparition d'anticorps détectables.",
-      "source": "Immunologie, famille Janeway/Abbas",
-      "verif": "import"
-    },
-    {
-      "course": "l2-bio",
-      "category": "physiologie animale : système nerveux et hormonal",
-      "difficulty": 1,
-      "question": "Quel mécanisme transmet l'information le long d'un axone ?",
-      "choices": [
-        "La diffusion de l'hormone",
-        "La contraction du muscle",
-        "La circulation sanguine",
-        "Le potentiel d'action"
-      ],
-      "answer": "D",
-      "explanation": "L'axone transmet l'influx nerveux par potentiels d'action.",
-      "source": "Physiologie animale, famille Sherwood",
-      "verif": "import"
-    },
-    {
-      "course": "l2-bio",
-      "category": "physiologie animale : système nerveux et hormonal",
-      "difficulty": 2,
-      "question": "Quelles hormones régulent la glycémie, et dans quel sens ?",
-      "choices": [
-        "Insuline et glucagon augmentent tous deux la glycémie",
-        "Adrénaline baisse la glycémie, insuline l'augmente",
-        "Insuline augmente la glycémie, glucagon la baisse",
-        "Insuline baisse la glycémie, glucagon l'augmente"
-      ],
-      "answer": "D",
-      "explanation": "Les cellules β sécrètent l'insuline hypoglycémiante, les cellules α le glucagon hyperglycémiant.",
-      "source": "Physiologie animale, famille Sherwood",
-      "verif": "import"
-    },
-    {
-      "course": "l2-bio",
-      "category": "physiologie animale : système nerveux et hormonal",
-      "difficulty": 3,
-      "question": "Comment les systèmes nerveux et endocrinien diffèrent-ils ?",
-      "choices": [
-        "Le nerveux agit par le sang, l'endocrinien par les axones",
-        "L'endocrinien agit par un influx électrique rapide",
-        "Le nerveux agit rapidement et localement, l'endocrinien plus lentement par le sang",
-        "Ils agissent de manière identique et simultanée"
-      ],
-      "answer": "C",
-      "explanation": "Les neurones agissent en millisecondes sur leurs cibles ; les hormones circulent et ont des effets plus lents et durables.",
-      "source": "Physiologie animale, famille Sherwood",
-      "verif": "import"
-    },
-    {
-      "course": "l2-bio",
-      "category": "physiologie animale : système nerveux et hormonal",
-      "difficulty": 1,
-      "question": "Quel ion entre massivement dans le neurone lors de la dépolarisation d'un potentiel d'action ?",
-      "choices": [
-        "Le calcium (Ca2+)",
-        "Le chlorure (Cl-)",
-        "Le sodium (Na+)",
-        "Le potassium (K+)"
-      ],
-      "answer": "C",
-      "explanation": "L'ouverture des canaux Na+ voltage-dépendants provoque l'entrée de sodium, puis K+ sort pour la repolarisation.",
-      "source": "Physiologie animale, famille Sherwood",
-      "verif": "import"
-    },
-    {
-      "course": "l2-bio",
-      "category": "physiologie de la circulation et de la respiration",
-      "difficulty": 1,
-      "question": "Quelle molécule transporte surtout le dioxygène dans le sang ?",
-      "choices": [
-        "L'albumine",
-        "Le fibrinogène",
-        "La myosine",
-        "L'hémoglobine"
-      ],
-      "answer": "D",
-      "explanation": "L'hémoglobine des globules rouges se lie à O2 dans les poumons.",
-      "source": "Physiologie animale, famille Sherwood",
-      "verif": "import"
-    },
-    {
-      "course": "l2-bio",
-      "category": "physiologie de la circulation et de la respiration",
-      "difficulty": 2,
-      "question": "Quel sang contient l'artère pulmonaire ?",
-      "choices": [
-        "Du sang sans CO2",
-        "Du sang pauvre en dioxygène venant du cœur droit",
-        "Du sang riche en dioxygène venant directement des poumons",
-        "Du sang riche en dioxygène venant du cœur gauche"
-      ],
-      "answer": "B",
-      "explanation": "L'artère pulmonaire conduit du sang désoxygéné du ventricule droit vers les poumons.",
-      "source": "Physiologie animale, famille Sherwood",
-      "verif": "import"
-    },
-    {
-      "course": "l2-bio",
-      "category": "physiologie de la circulation et de la respiration",
-      "difficulty": 1,
-      "question": "Quelle différence caractérise veines et artères ?",
-      "choices": [
-        "Les veines possèdent des valvules, pas les artères",
-        "Les artères ramènent le sang vers le cœur",
-        "Les veines ont des parois plus épaisses que les artères",
-        "Les artères ont des valvules"
-      ],
-      "answer": "A",
-      "explanation": "Les valvules des veines empêchent le reflux du sang vers les extrémités.",
-      "source": "Physiologie animale, famille Sherwood",
-      "verif": "import"
-    },
-    {
-      "course": "l2-bio",
-      "category": "physiologie de la circulation et de la respiration",
-      "difficulty": 3,
-      "question": "Un cœur bat à 70 battements par minute avec un volume d'éjection systolique de 70 mL. Quel est son débit cardiaque ?",
-      "choices": [
-        "4 900 mL/min",
-        "490 mL/min",
-        "49 000 mL/min",
-        "140 mL/min"
-      ],
-      "answer": "A",
-      "explanation": "Débit = fréquence x volume systolique = 70 x 70 = 4 900 mL/min.",
-      "source": "Physiologie animale, famille Sherwood",
-      "verif": "import"
-    },
-    {
-      "course": "l2-bio",
-      "category": "physiologie de la circulation et de la respiration",
-      "difficulty": 5,
-      "question": "Que décrit l'effet Bohr ?",
-      "choices": [
-        "L'hémoglobine perd tout son O2 dans les poumons",
-        "Une hausse du pH augmente la libération de O2 dans les tissus",
-        "Une baisse du pH ou une hausse de CO2 diminue l'affinité de l'hémoglobine pour O2",
-        "L'affinité de l'hémoglobine pour O2 reste toujours constante"
-      ],
-      "answer": "C",
-      "explanation": "Dans les tissus actifs, le CO2 et l'acidité favorisent la libération de O2 par l'hémoglobine.",
-      "source": "Physiologie animale, famille Sherwood",
-      "verif": "import"
-    },
-    {
-      "course": "l2-bio",
-      "category": "digestion et nutrition",
-      "difficulty": 1,
-      "question": "Quelle enzyme de la salive commence la digestion de l'amidon ?",
-      "choices": [
-        "La lipase gastrique",
-        "La pepsine",
-        "La trypsine",
-        "L'amylase salivaire"
-      ],
-      "answer": "D",
-      "explanation": "L'amylase salivaire hydrolyse l'amidon en maltose.",
-      "source": "Physiologie animale, famille Sherwood",
-      "verif": "import"
-    },
-    {
-      "course": "l2-bio",
-      "category": "digestion et nutrition",
-      "difficulty": 2,
-      "question": "Pourquoi la pepsine agit-elle dans l'estomac ?",
-      "choices": [
-        "Elle est active en milieu basique",
-        "Elle est active en milieu très acide",
-        "Elle digère uniquement les lipides",
-        "Elle est sécrétée par la vésicule biliaire"
-      ],
-      "answer": "B",
-      "explanation": "La pepsine, enzyme protéolytique, a un pH optimal acide, assuré par l'acide chlorhydrique.",
-      "source": "Physiologie animale, famille Sherwood",
-      "verif": "import"
-    },
-    {
-      "course": "l2-bio",
-      "category": "digestion et nutrition",
-      "difficulty": 1,
-      "question": "Quel est le rôle de la bile dans la digestion ?",
-      "choices": [
-        "Digérer les protéines",
-        "Émulsionner les lipides pour faciliter l'action des lipases",
-        "Neutraliser l'acidité du suc pancréatique",
-        "Hydrolyser l'amidon"
-      ],
-      "answer": "B",
-      "explanation": "Les sels biliaires émulsionnent les graisses ; la bile ne contient pas d'enzyme digestive majeure.",
-      "source": "Physiologie animale, famille Sherwood",
-      "verif": "import"
-    },
-    {
-      "course": "l2-bio",
-      "category": "digestion et nutrition",
-      "difficulty": 3,
-      "question": "Quelle différence distingue le kwashiorkor du marasme ?",
-      "choices": [
-        "Le kwashiorkor est une maladie virale transmise par voie sanguine",
-        "Le marasme est dû à un excès alimentaire de protéines",
-        "Tous deux résultent d'une carence isolée en iode",
-        "Le kwashiorkor est dû surtout à une carence protéique, le marasme à un déficit calorique global"
-      ],
-      "answer": "D",
-      "explanation": "Ces deux formes de malnutrition sévère n'ont pas la même prédominance de carence.",
-      "source": "Physiologie animale, famille Sherwood",
-      "verif": "import",
-      "region": "AF"
-    },
-    {
-      "course": "l2-bio",
-      "category": "physiologie de la reproduction",
-      "difficulty": 1,
-      "question": "Où se déroule la spermatogenèse ?",
-      "choices": [
-        "Dans les tubes séminifères du testicule",
-        "Dans l'épididyme",
-        "Dans les vésicules séminales",
-        "Dans la prostate"
-      ],
-      "answer": "A",
-      "explanation": "Les spermatogonies se divisent et se différencient dans les tubes séminifères.",
-      "source": "Physiologie animale, famille Sherwood",
-      "verif": "import"
-    },
-    {
-      "course": "l2-bio",
-      "category": "physiologie de la reproduction",
-      "difficulty": 2,
-      "question": "Quel événement hormonal déclenche l'ovulation ?",
-      "choices": [
-        "Le pic de progestérone",
-        "La sécrétion d'hCG",
-        "Le pic de LH",
-        "La chute de FSH"
-      ],
-      "answer": "C",
-      "explanation": "Le pic de LH, précédé d'un pic d'œstradiol, provoque la rupture du follicule mûr.",
-      "source": "Physiologie animale, famille Sherwood",
-      "verif": "import"
-    },
-    {
-      "course": "l2-bio",
-      "category": "physiologie de la reproduction",
-      "difficulty": 3,
-      "question": "Quelle différence existe entre spermatogenèse et ovogenèse ?",
-      "choices": [
-        "La spermatogenèse donne un seul gamète fonctionnel",
-        "L'ovogenèse ne comporte aucune étape de méiose",
-        "Une cellule mère donne quatre spermatozoïdes mais un seul ovule fonctionnel",
-        "Chacune donne toujours quatre gamètes fonctionnels"
-      ],
-      "answer": "C",
-      "explanation": "La méiose féminine est inégale et produit un ovocyte et des globules polaires.",
-      "source": "Physiologie animale, famille Sherwood",
-      "verif": "import"
-    },
-    {
-      "course": "l2-bio",
-      "category": "physiologie de la reproduction",
-      "difficulty": 2,
-      "question": "Quelle hormone est détectée par un test de grossesse urinaire ?",
-      "choices": [
-        "L'hCG",
-        "La testostérone",
-        "L'insuline",
-        "La FSH"
-      ],
-      "answer": "A",
-      "explanation": "L'hCG est produite par le trophoblaste de l'embryon après la nidation.",
-      "source": "Physiologie animale, famille Sherwood",
-      "verif": "import"
-    },
-    {
-      "course": "l2-bio",
-      "category": "physiologie de la reproduction",
-      "difficulty": 4,
-      "question": "Comment une pilule œstroprogestative empêche-t-elle l'ovulation ?",
-      "choices": [
-        "En bloquant seulement la fécondation dans la trompe",
-        "Par un rétrocontrôle négatif sur l'axe hypothalamo-hypophysaire",
-        "En augmentant la FSH",
-        "En détruisant les spermatozoïdes dans le vagin"
-      ],
-      "answer": "B",
-      "explanation": "Les hormones synthétiques diminuent la sécrétion de FSH et LH, donc le pic de LH n'a pas lieu.",
-      "source": "Physiologie animale, famille Sherwood",
-      "verif": "import"
-    },
-    {
-      "course": "l2-bio",
-      "category": "biologie végétale : organisation et croissance de la plante",
-      "difficulty": 1,
-      "question": "Quel tissu conduit la sève brute dans la plante ?",
-      "choices": [
-        "Le xylème",
-        "Le phloème",
-        "Le parenchyme chlorophyllien",
-        "L'épiderme"
-      ],
-      "answer": "A",
-      "explanation": "Le xylème transporte l'eau et les sels minéraux des racines vers les feuilles.",
-      "source": "Botanique, famille Raven",
-      "verif": "import"
-    },
-    {
-      "course": "l2-bio",
-      "category": "biologie végétale : organisation et croissance de la plante",
-      "difficulty": 2,
-      "question": "Quel caractère distingue une monocotylédone du maïs d'une dicotylédone comme le haricot ?",
-      "choices": [
-        "Deux cotylédons et des nervures parallèles",
-        "Un seul cotylédon et des nervures parallèles",
-        "Des feuilles toujours composées de folioles",
-        "Pas de racines"
-      ],
-      "answer": "B",
-      "explanation": "Le maïs a une graine à un cotylédon et des feuilles à nervures parallèles.",
-      "source": "Botanique, famille Raven",
-      "verif": "import",
-      "region": "AF"
-    },
-    {
-      "course": "l2-bio",
-      "category": "biologie végétale : organisation et croissance de la plante",
-      "difficulty": 1,
-      "question": "Quelle hormone végétale favorise la maturation des fruits tels que la mangue ?",
-      "choices": [
-        "L'auxine seule",
-        "La cytokinine",
-        "La gibbérelline",
-        "L'éthylène"
-      ],
-      "answer": "D",
-      "explanation": "L'éthylène, hormone gazeuse, stimule le mûrissement des fruits climactériques.",
-      "source": "Botanique, famille Raven",
-      "verif": "import"
-    },
-    {
-      "course": "l2-bio",
-      "category": "biologie végétale : organisation et croissance de la plante",
-      "difficulty": 4,
-      "question": "Comment l'ouverture des stomates est-elle déclenchée ?",
-      "choices": [
-        "La sécrétion d'auxine par la racine vers la feuille",
-        "La fermeture des vaisseaux conducteurs du xylème",
-        "La perte d'eau par les cellules de garde",
-        "L'entrée de potassium et d'eau rend les cellules de garde turgescentes"
-      ],
-      "answer": "D",
-      "explanation": "La turgescence des cellules de garde écarte les cellules et ouvre l'ostiole.",
-      "source": "Botanique, famille Raven",
-      "verif": "import"
-    },
-    {
-      "course": "l2-bio",
-      "category": "écologie : écosystèmes et chaînes alimentaires",
-      "difficulty": 1,
-      "question": "Quel est le rôle des producteurs primaires dans un écosystème ?",
-      "choices": [
-        "Consommer d'autres organismes vivants",
-        "Fixer le fer dans les couches du sol",
-        "Décomposer la matière organique morte",
-        "Produire de la matière organique à partir de l'énergie lumineuse"
-      ],
-      "answer": "D",
-      "explanation": "Les organismes photosynthétiques fabriquent la matière organique à la base du réseau trophique.",
-      "source": "Écologie, famille Ricklefs/Begon",
-      "verif": "import"
-    },
-    {
-      "course": "l2-bio",
-      "category": "écologie : écosystèmes et chaînes alimentaires",
-      "difficulty": 2,
-      "question": "Quelle relation unit les rhizobiums aux légumineuses comme l'arachide ?",
-      "choices": [
-        "Un mutualisme avec fixation d'azote dans les nodosités",
-        "Un parasitisme",
-        "Une compétition pour la lumière du soleil",
-        "Une prédation"
-      ],
-      "answer": "A",
-      "explanation": "Les bactéries fixent l'azote atmosphérique et reçoivent des glucides de la plante.",
-      "source": "Écologie, famille Ricklefs/Begon",
-      "verif": "import",
-      "region": "AF"
-    },
-    {
-      "course": "l2-bio",
-      "category": "écologie : écosystèmes et chaînes alimentaires",
-      "difficulty": 3,
-      "question": "Pourquoi une pyramide des énergies n'est-elle jamais inversée ?",
-      "choices": [
-        "Les décomposeurs fournissent à eux seuls toute l'énergie",
-        "Les herbivores produisent plus d'énergie que les plantes",
-        "L'énergie diminue à chaque niveau trophique par respiration et chaleur",
-        "L'énergie augmente avec chaque niveau trophique"
-      ],
-      "answer": "C",
-      "explanation": "Chaque transfert perd de l'énergie, de sorte que chaque niveau en dispose moins que le précédent.",
-      "source": "Écologie, famille Ricklefs/Begon",
-      "verif": "import"
-    },
-    {
-      "course": "l2-bio",
-      "category": "écologie : écosystèmes et chaînes alimentaires",
-      "difficulty": 5,
-      "question": "Que stipule le principe d'exclusion compétitive de Gause ?",
-      "choices": [
-        "Les prédateurs éliminent toujours toutes leurs proies",
-        "Deux espèces de niches différentes s'excluent toujours",
-        "La compétition favorise toujours la symbiose",
-        "Deux espèces ayant la même niche écologique ne coexistent pas durablement"
-      ],
-      "answer": "D",
-      "explanation": "Si deux espèces utilisent exactement la même ressource limitante, l'une élimine l'autre.",
-      "source": "Écologie, famille Ricklefs/Begon",
-      "verif": "import"
-    },
-    {
-      "course": "l2-bio",
-      "category": "biostatistiques et méthode expérimentale",
-      "difficulty": 1,
-      "question": "À quoi sert un groupe témoin dans une expérience ?",
-      "choices": [
-        "À augmenter automatiquement la taille de l'échantillon",
-        "À remplacer l'hypothèse de départ",
-        "À fournir une référence sans le facteur étudié",
-        "À mesurer l'erreur de l'instrument seulement"
-      ],
-      "answer": "C",
-      "explanation": "Le témoin permet d'attribuer la différence au facteur testé.",
-      "source": "Biostatistiques, famille Sokal/Rohlf",
-      "verif": "import"
-    },
-    {
-      "course": "l2-bio",
-      "category": "biostatistiques et méthode expérimentale",
-      "difficulty": 2,
-      "question": "Quelle est la moyenne des valeurs 2, 4 et 6 ?",
-      "choices": [
-        "6",
-        "3",
-        "4",
-        "12"
-      ],
-      "answer": "C",
-      "explanation": "La somme vaut 12, divisée par 3 valeurs : 4.",
-      "source": "Biostatistiques, famille Sokal/Rohlf",
-      "verif": "import"
-    },
-    {
-      "course": "l2-bio",
-      "category": "biostatistiques et méthode expérimentale",
-      "difficulty": 3,
-      "question": "Quel est l'écart-type de l'échantillon 2, 4, 6 (variance d'échantillon avec n-1) ?",
-      "choices": [
-        "2",
-        "8",
-        "4",
-        "1"
-      ],
-      "answer": "A",
-      "explanation": "La somme des carrés des écarts est 8 ; 8 / 2 = 4 ; l'écart-type est sa racine carrée : 2.",
-      "source": "Biostatistiques, famille Sokal/Rohlf",
-      "verif": "import"
-    },
-    {
-      "course": "l2-bio",
-      "category": "biostatistiques et méthode expérimentale",
-      "difficulty": 4,
-      "question": "Un khi-deux calculé de 4,44 avec 1 degré de liberté dépasse le seuil de 3,84 à 5 %. Que conclut-on ?",
-      "choices": [
-        "On rejette l'hypothèse nulle",
-        "Le test est invalide",
-        "On accepte l'hypothèse nulle sans risque",
-        "Le résultat est non significatif"
-      ],
-      "answer": "A",
-      "explanation": "Au-dessus du seuil critique, l'écart aux effectifs théoriques n'est pas attribuable au seul hasard.",
-      "source": "Biostatistiques, famille Sokal/Rohlf",
-      "verif": "import"
-    },
-    {
-      "course": "l2-bio",
-      "category": "biostatistiques et méthode expérimentale",
-      "difficulty": 5,
-      "question": "Que représente l'erreur de type I d'un test statistique ?",
-      "choices": [
-        "Rejeter l'hypothèse nulle alors qu'elle est vraie",
-        "Ne pas calculer de p-valeur",
-        "Accepter l'hypothèse nulle alors qu'elle est fausse",
-        "Choisir un mauvais échantillon"
-      ],
-      "answer": "A",
-      "explanation": "C'est un faux positif, dont le risque est fixé par le seuil alpha.",
-      "source": "Biostatistiques, famille Sokal/Rohlf",
-      "verif": "import"
-    }
-  ]
+ "batch": "higher-l2-biologie-03",
+ "author": "claude-sonnet-5.5",
+ "date": "2026-10-03",
+ "questions": [
+  {
+   "course": "l2-bio",
+   "category": "la cellule : théorie cellulaire et organites",
+   "difficulty": 1,
+   "question": "Parmi ces structures, laquelle est présente dans la cellule végétale mais absente de la cellule animale ?",
+   "choices": [
+    "L'appareil de Golgi",
+    "Le chloroplaste",
+    "Le réticulum endoplasmique",
+    "La mitochondrie"
+   ],
+   "answer": "B",
+   "explanation": "Les chloroplastes, avec la paroi cellulosique et la grande vacuole, caractérisent les cellules végétales ; les autres organites existent dans les deux types.",
+   "source": "Cours de licence de biologie cellulaire, famille Alberts (Biologie moléculaire de la cellule)",
+   "verif": "import"
+  },
+  {
+   "course": "l2-bio",
+   "category": "la cellule : théorie cellulaire et organites",
+   "difficulty": 2,
+   "question": "Quel critère distingue une cellule eucaryote d'une cellule procaryote ?",
+   "choices": [
+    "Un noyau délimité par une enveloppe nucléaire",
+    "La présence d'ADN comme support génétique",
+    "La présence de ribosomes dans le cytoplasme",
+    "La présence d'une membrane plasmique"
+   ],
+   "answer": "A",
+   "explanation": "Tous les êtres vivants ont membrane, ribosomes et ADN ; seul l'eucaryote enferme son ADN dans un noyau délimité par une enveloppe.",
+   "source": "Cours de licence de biologie cellulaire, famille Alberts (Biologie moléculaire de la cellule)",
+   "verif": "import"
+  },
+  {
+   "course": "l2-bio",
+   "category": "la cellule : théorie cellulaire et organites",
+   "difficulty": 2,
+   "question": "Quel organite est très développé dans les hépatocytes pour la détoxication des médicaments et des xénobiotiques ?",
+   "choices": [
+    "Le nucléole",
+    "L'appareil de Golgi",
+    "Le centrosome",
+    "Le réticulum endoplasmique lisse"
+   ],
+   "answer": "D",
+   "explanation": "Le réticulum endoplasmique lisse porte des enzymes (cytochromes P450) qui transforment les substances étrangères liposolubles.",
+   "source": "Cours de licence de biologie cellulaire, famille Alberts (Biologie moléculaire de la cellule)",
+   "verif": "import"
+  },
+  {
+   "course": "l2-bio",
+   "category": "la cellule : théorie cellulaire et organites",
+   "difficulty": 4,
+   "question": "Dans une cellule acineuse du pancréas qui exporte des enzymes digestives, quelle voie suit une enzyme sécrétée ?",
+   "choices": [
+    "Réticulum rugueux, lysosome, mitochondrie, exocytose",
+    "Appareil de Golgi, réticulum rugueux, lysosome, membrane",
+    "Noyau, réticulum lisse, vésicule de sécrétion, endocytose",
+    "Réticulum rugueux, appareil de Golgi, vésicules de sécrétion, exocytose"
+   ],
+   "answer": "D",
+   "explanation": "Les protéines d'export sont synthétisées au réticulum rugueux, modifiées et triées dans le Golgi, puis libérées par exocytose.",
+   "source": "Cours de licence de biologie cellulaire, famille Alberts (Biologie moléculaire de la cellule)",
+   "verif": "import"
+  },
+  {
+   "course": "l2-bio",
+   "category": "membrane plasmique : structure et transports",
+   "difficulty": 1,
+   "question": "Quel transport traverse directement la bicouche lipidique, sans énergie, selon le gradient de concentration ?",
+   "choices": [
+    "Le transport actif primaire",
+    "Le cotransport actif secondaire",
+    "L'endocytose",
+    "La diffusion simple"
+   ],
+   "answer": "D",
+   "explanation": "La diffusion simple de petites molécules apolaires (O2, CO2) suit le gradient sans protéine ni dépense d'ATP.",
+   "source": "Cours de licence de biologie cellulaire, famille Alberts (Biologie moléculaire de la cellule)",
+   "verif": "import"
+  },
+  {
+   "course": "l2-bio",
+   "category": "membrane plasmique : structure et transports",
+   "difficulty": 2,
+   "question": "Par quel mécanisme le glucose pénètre-t-il dans les hématies humaines ?",
+   "choices": [
+    "Diffusion facilitée par un transporteur (GLUT)",
+    "Transport actif par la pompe Na+/K+-ATPase",
+    "Diffusion simple à travers les phospholipides",
+    "Endocytose par récepteur"
+   ],
+   "answer": "A",
+   "explanation": "Le glucose, polaire, passe par un transporteur de la famille GLUT selon son gradient, sans dépense d'énergie.",
+   "source": "Cours de licence de biologie cellulaire, famille Alberts (Biologie moléculaire de la cellule)",
+   "verif": "import"
+  },
+  {
+   "course": "l2-bio",
+   "category": "membrane plasmique : structure et transports",
+   "difficulty": 3,
+   "question": "Que devient une hématie placée dans l'eau distillée, comparée à une cellule végétale dans la même solution ?",
+   "choices": [
+    "Le volume reste stable pour l'hématie comme pour la plante",
+    "L'hématie se ratatine ; la cellule végétale éclate",
+    "Toutes deux perdent de l'eau et se plasmolysent",
+    "L'hématie éclate ; la cellule végétale devient turgescente sans éclater"
+   ],
+   "answer": "D",
+   "explanation": "L'eau entre par osmose ; sans paroi l'hématie éclate (hémolyse), alors que la paroi végétale résiste à la pression de turgescence.",
+   "source": "Cours de licence de biologie cellulaire, famille Alberts (Biologie moléculaire de la cellule)",
+   "verif": "import"
+  },
+  {
+   "course": "l2-bio",
+   "category": "membrane plasmique : structure et transports",
+   "difficulty": 2,
+   "question": "Quelle est la stœchiométrie d'un cycle de la pompe Na+/K+-ATPase ?",
+   "choices": [
+    "2 Na+ expulsés pour 3 K+ importés",
+    "3 Na+ expulsés pour 2 K+ importés",
+    "3 Na+ expulsés pour 3 K+ importés",
+    "1 Na+ expulsé pour 1 K+ importé"
+   ],
+   "answer": "B",
+   "explanation": "Chaque cycle consomme un ATP, expulse 3 Na+ et importe 2 K+, d'où sa nature électrogène.",
+   "source": "Cours de licence de biologie cellulaire, famille Alberts (Biologie moléculaire de la cellule)",
+   "verif": "import"
+  },
+  {
+   "course": "l2-bio",
+   "category": "métabolisme énergétique : respiration cellulaire et ATP",
+   "difficulty": 1,
+   "question": "Où se situe la chaîne respiratoire dans une cellule eucaryote ?",
+   "choices": [
+    "Dans la membrane interne de la mitochondrie",
+    "Dans la membrane du noyau",
+    "Dans la matrice du peroxysome",
+    "Dans le cytosol"
+   ],
+   "answer": "A",
+   "explanation": "Les complexes de la chaîne respiratoire et l'ATP synthase sont insérés dans la membrane interne mitochondriale.",
+   "source": "Biochimie, famille Stryer/Lehninger",
+   "verif": "import"
+  },
+  {
+   "course": "l2-bio",
+   "category": "métabolisme énergétique : respiration cellulaire et ATP",
+   "difficulty": 2,
+   "question": "Quel est le gain net d'ATP de la glycolyse par molécule de glucose ?",
+   "choices": [
+    "4 ATP",
+    "32 ATP",
+    "6 ATP",
+    "2 ATP"
+   ],
+   "answer": "D",
+   "explanation": "La glycolyse consomme 2 ATP puis en forme 4 : le gain net est de 2 ATP par glucose.",
+   "source": "Biochimie, famille Stryer/Lehninger",
+   "verif": "import"
+  },
+  {
+   "course": "l2-bio",
+   "category": "métabolisme énergétique : respiration cellulaire et ATP",
+   "difficulty": 2,
+   "question": "Quels produits forme la levure Saccharomyces lors de la fermentation alcoolique ?",
+   "choices": [
+    "Éthanol et dioxygène",
+    "Éthanol et dioxyde de carbone",
+    "Lactate et dioxyde de carbone",
+    "Acétate et eau"
+   ],
+   "answer": "B",
+   "explanation": "La levure convertit le pyruvate en éthanol et CO2, d'où la levée du pain et la fabrication de boissons fermentées.",
+   "source": "Biochimie, famille Stryer/Lehninger",
+   "verif": "import"
+  },
+  {
+   "course": "l2-bio",
+   "category": "métabolisme énergétique : respiration cellulaire et ATP",
+   "difficulty": 4,
+   "question": "Le cyanure bloque le complexe IV de la chaîne respiratoire. Quel est l'effet sur des mitochondries isolées ?",
+   "choices": [
+    "Consommation accrue d'O2 pour compenser le manque d'ATP",
+    "Production accrue d'ATP par l'ATP synthase mitochondriale",
+    "Arrêt de la consommation d'O2 et de la synthèse d'ATP oxydative",
+    "Blocage direct de la glycolyse cytosolique"
+   ],
+   "answer": "C",
+   "explanation": "Sans transfert final des électrons à l'oxygène, le gradient de protons ne s'établit plus et la phosphorylation oxydative s'arrête.",
+   "source": "Biochimie, famille Stryer/Lehninger",
+   "verif": "import"
+  },
+  {
+   "course": "l2-bio",
+   "category": "métabolisme énergétique : respiration cellulaire et ATP",
+   "difficulty": 5,
+   "question": "Quel effet un découplant comme le 2,4-dinitrophénol a-t-il sur des mitochondries actives ?",
+   "choices": [
+    "Un arrêt de la chaîne respiratoire et une baisse de la consommation d'O2",
+    "Une consommation d'O2 maintenue sans synthèse d'ATP, l'énergie étant dissipée en chaleur",
+    "Une synthèse d'ATP accrue pour une même consommation d'O2",
+    "Un blocage de l'ATP synthase seule, sans effet sur les protons"
+   ],
+   "answer": "B",
+   "explanation": "Il dissipe le gradient de protons : la chaîne continue de fonctionner mais l'ATP synthase ne reçoit plus la force protomotrice.",
+   "source": "Biochimie, famille Stryer/Lehninger",
+   "verif": "import"
+  },
+  {
+   "course": "l2-bio",
+   "category": "photosynthèse : phases et rendement",
+   "difficulty": 1,
+   "question": "Où se déroule la phase photochimique (claire) de la photosynthèse ?",
+   "choices": [
+    "Dans la membrane interne mitochondriale",
+    "Dans la vacuole",
+    "Dans les membranes des thylakoïdes",
+    "Dans le stroma uniquement"
+   ],
+   "answer": "C",
+   "explanation": "Les pigments et la chaîne de transfert d'électrons sont dans les membranes thylakoïdiennes du chloroplaste.",
+   "source": "Botanique, famille Raven",
+   "verif": "import"
+  },
+  {
+   "course": "l2-bio",
+   "category": "photosynthèse : phases et rendement",
+   "difficulty": 1,
+   "question": "Laquelle de ces cultures est une plante en C4 ?",
+   "choices": [
+    "Le haricot",
+    "Le blé",
+    "Le maïs",
+    "Le riz"
+   ],
+   "answer": "C",
+   "explanation": "Le maïs et la canne à sucre fixent d'abord le CO2 en composés à 4 carbones ; riz, blé et haricot sont des plantes en C3.",
+   "source": "Botanique, famille Raven",
+   "verif": "import"
+  },
+  {
+   "course": "l2-bio",
+   "category": "photosynthèse : phases et rendement",
+   "difficulty": 4,
+   "question": "Des chloroplastes isolés, à l'obscurité mais pourvus de CO2, d'ATP et de NADPH, peuvent-ils fixer le CO2 ?",
+   "choices": [
+    "Oui, car le cycle de Calvin utilise l'ATP et le NADPH, non la lumière directement",
+    "Non, car la Rubisco exige la présence directe de la lumière",
+    "Oui, mais seulement si l'oxygène est fourni",
+    "Non, car l'eau est indispensable à la fixation"
+   ],
+   "answer": "A",
+   "explanation": "La phase sombre dépend de l'ATP et du NADPH issus de la phase claire ; leur apport artificiel permet la fixation du carbone.",
+   "source": "Botanique, famille Raven",
+   "verif": "import"
+  },
+  {
+   "course": "l2-bio",
+   "category": "photosynthèse : phases et rendement",
+   "difficulty": 5,
+   "question": "Pourquoi la photorespiration est-elle limitée chez les plantes en C4 ?",
+   "choices": [
+    "Elles n'utilisent pas de Rubisco mais seulement la PEP carboxylase",
+    "Le CO2 est concentré autour de la Rubisco dans les cellules de la gaine périvasculaire",
+    "Leur Rubisco est incapable de fixer l'oxygène en aucune circonstance",
+    "Leurs stomates restent fermés en permanence"
+   ],
+   "answer": "B",
+   "explanation": "La concentration locale du CO2 favorise la carboxylation du RuBP plutôt que son oxygénation, ce qui réduit les pertes.",
+   "source": "Botanique, famille Raven",
+   "verif": "import"
+  },
+  {
+   "course": "l2-bio",
+   "category": "enzymes : cinétique et régulation",
+   "difficulty": 1,
+   "question": "Comment une enzyme accélère-t-elle une réaction chimique ?",
+   "choices": [
+    "En abaissant l'énergie d'activation",
+    "En déplaçant l'équilibre vers les produits",
+    "En étant consommée pendant la réaction",
+    "En augmentant la quantité d'énergie libérée"
+   ],
+   "answer": "A",
+   "explanation": "Un catalyseur diminue l'énergie d'activation sans modifier l'équilibre ni être consommé.",
+   "source": "Biochimie, famille Stryer/Lehninger",
+   "verif": "import"
+  },
+  {
+   "course": "l2-bio",
+   "category": "enzymes : cinétique et régulation",
+   "difficulty": 3,
+   "question": "Quel effet a un inhibiteur compétitif sur les paramètres cinétiques de l'enzyme ?",
+   "choices": [
+    "Km apparent augmente, Vmax inchangée",
+    "Km apparent diminue, Vmax diminue",
+    "Km inchangé, Vmax diminue",
+    "Km et Vmax augmentent"
+   ],
+   "answer": "A",
+   "explanation": "L'inhibiteur rivalise avec le substrat : il faut plus de substrat pour atteindre Vmax/2, mais à saturation Vmax est retrouvée.",
+   "source": "Biochimie, famille Stryer/Lehninger",
+   "verif": "import"
+  },
+  {
+   "course": "l2-bio",
+   "category": "enzymes : cinétique et régulation",
+   "difficulty": 2,
+   "question": "Les statines, utilisées contre l'excès de cholestérol, inhibent quelle enzyme ?",
+   "choices": [
+    "L'HMG-CoA réductase",
+    "La lactase",
+    "L'amylase pancréatique",
+    "La pepsine"
+   ],
+   "answer": "A",
+   "explanation": "Les statines inhibent l'HMG-CoA réductase, enzyme limitante de la synthèse du cholestérol.",
+   "source": "Biochimie, famille Stryer/Lehninger",
+   "verif": "import"
+  },
+  {
+   "course": "l2-bio",
+   "category": "cycle cellulaire : mitose et contrôle",
+   "difficulty": 1,
+   "question": "Dans quelle phase du cycle cellulaire l'ADN est-il répliqué ?",
+   "choices": [
+    "La phase G2",
+    "La phase M",
+    "La phase S",
+    "La phase G1"
+   ],
+   "answer": "C",
+   "explanation": "La réplication de l'ADN a lieu en phase S, entre G1 et G2.",
+   "source": "Cours de licence de biologie cellulaire, famille Alberts (Biologie moléculaire de la cellule)",
+   "verif": "import"
+  },
+  {
+   "course": "l2-bio",
+   "category": "cycle cellulaire : mitose et contrôle",
+   "difficulty": 2,
+   "question": "Comment la cytocinèse diffère-t-elle entre cellule animale et cellule végétale ?",
+   "choices": [
+    "Plaque cellulaire chez l'animal, anneau contractile chez la plante",
+    "Anneau contractile chez l'animal, plaque cellulaire (phragmoplaste) chez la plante",
+    "Elle est identique dans les deux cas grâce à un anneau d'actine",
+    "Elle n'existe que chez l'animal"
+   ],
+   "answer": "B",
+   "explanation": "La cellule animale se pince par un anneau d'actine-myosine ; la cellule végétale construit une nouvelle paroi au centre.",
+   "source": "Cours de licence de biologie cellulaire, famille Alberts (Biologie moléculaire de la cellule)",
+   "verif": "import"
+  },
+  {
+   "course": "l2-bio",
+   "category": "cycle cellulaire : mitose et contrôle",
+   "difficulty": 3,
+   "question": "Quel complexe contrôle principalement l'entrée en mitose à la transition G2/M ?",
+   "choices": [
+    "L'ARN polymérase II",
+    "CDK1 associée à la cycline B",
+    "CDK4 associée à la cycline D",
+    "La protéine p53 seule"
+   ],
+   "answer": "B",
+   "explanation": "La CDK1 liée à la cycline B déclenche l'entrée en mitose ; CDK4/cycline D agit en G1.",
+   "source": "Cours de licence de biologie cellulaire, famille Alberts (Biologie moléculaire de la cellule)",
+   "verif": "import"
+  },
+  {
+   "course": "l2-bio",
+   "category": "cycle cellulaire : mitose et contrôle",
+   "difficulty": 1,
+   "question": "Comment la quantité d'ADN d'une cellule en G2 se compare-t-elle à celle de la phase G1 ?",
+   "choices": [
+    "Elle est doublée",
+    "Elle est réduite de moitié",
+    "Elle est quadruplée",
+    "Elle est identique"
+   ],
+   "answer": "A",
+   "explanation": "Après la phase S, chaque chromosome possède deux chromatides : la quantité d'ADN a doublé, sans changer le nombre de chromosomes.",
+   "source": "Cours de licence de biologie cellulaire, famille Alberts (Biologie moléculaire de la cellule)",
+   "verif": "import"
+  },
+  {
+   "course": "l2-bio",
+   "category": "méiose et brassage génétique",
+   "difficulty": 1,
+   "question": "Quel est le résultat d'une méiose complète à partir d'une cellule diploïde ?",
+   "choices": [
+    "Deux cellules haploïdes",
+    "Quatre cellules diploïdes",
+    "Deux cellules diploïdes",
+    "Quatre cellules haploïdes"
+   ],
+   "answer": "D",
+   "explanation": "Deux divisions successives après une seule réplication donnent quatre cellules haploïdes.",
+   "source": "Cours de génétique, famille Griffiths",
+   "verif": "import"
+  },
+  {
+   "course": "l2-bio",
+   "category": "méiose et brassage génétique",
+   "difficulty": 2,
+   "question": "Dans quelle phase se produisent les enjambements (crossing-over) ?",
+   "choices": [
+    "La prophase I",
+    "La métaphase II",
+    "L'anaphase II",
+    "La télophase I"
+   ],
+   "answer": "A",
+   "explanation": "Les chromosomes homologues, appariés en prophase I, échangent des segments au niveau des chiasmas.",
+   "source": "Cours de génétique, famille Griffiths",
+   "verif": "import"
+  },
+  {
+   "course": "l2-bio",
+   "category": "méiose et brassage génétique",
+   "difficulty": 3,
+   "question": "Un individu 2n = 6 (3 paires) produit, sans crossing-over, combien de types de gamètes chromosomiquement différents ?",
+   "choices": [
+    "6",
+    "3",
+    "9",
+    "8"
+   ],
+   "answer": "D",
+   "explanation": "Chaque paire s'oriente indépendamment : 2^3 = 8 combinaisons possibles.",
+   "source": "Cours de génétique, famille Griffiths",
+   "verif": "import"
+  },
+  {
+   "course": "l2-bio",
+   "category": "méiose et brassage génétique",
+   "difficulty": 4,
+   "question": "Pour l'espèce humaine (23 paires), combien de combinaisons chromosomiques gamétiques le brassage interchromosomique permet-il, sans crossing-over ?",
+   "choices": [
+    "46^2",
+    "2^23",
+    "2 x 23",
+    "23^2"
+   ],
+   "answer": "B",
+   "explanation": "Chaque paire d'homologues se répartit de deux façons indépendantes : 2^23, soit environ 8,4 millions.",
+   "source": "Cours de génétique, famille Griffiths",
+   "verif": "import"
+  },
+  {
+   "course": "l2-bio",
+   "category": "génétique mendélienne et croisements",
+   "difficulty": 1,
+   "question": "Avec quel génotype réalise-t-on un croisement-test (test cross) ?",
+   "choices": [
+    "Un individu homozygote pour l'allèle dominant",
+    "Un individu homozygote récessif",
+    "Un individu de la même lignée pure que lui",
+    "Un individu hétérozygote"
+   ],
+   "answer": "B",
+   "explanation": "Le croisement avec l'homozygote récessif révèle le génotype de l'individu testé d'après ses descendants.",
+   "source": "Cours de génétique, famille Griffiths",
+   "verif": "import"
+  },
+  {
+   "course": "l2-bio",
+   "category": "génétique mendélienne et croisements",
+   "difficulty": 2,
+   "question": "Quelle proportion phénotypique attend-on d'un croisement Aa x Aa avec dominance complète ?",
+   "choices": [
+    "3 dominants pour 1 récessif",
+    "1 dominant pour 3 récessifs",
+    "Tous dominants",
+    "1 dominant pour 1 récessif"
+   ],
+   "answer": "A",
+   "explanation": "La descendance est AA, Aa, Aa, aa : trois quarts de phénotype dominant et un quart de récessif.",
+   "source": "Cours de génétique, famille Griffiths",
+   "verif": "import"
+  },
+  {
+   "course": "l2-bio",
+   "category": "génétique mendélienne et croisements",
+   "difficulty": 3,
+   "question": "Dans un croisement AaBb x AaBb (gènes indépendants), quelle proportion de descendants est aabb ?",
+   "choices": [
+    "1/4",
+    "1/8",
+    "1/16",
+    "9/16"
+   ],
+   "answer": "C",
+   "explanation": "Chaque gène donne 1/4 de récessifs homozygotes : 1/4 x 1/4 = 1/16.",
+   "source": "Cours de génétique, famille Griffiths",
+   "verif": "import"
+  },
+  {
+   "course": "l2-bio",
+   "category": "génétique mendélienne et croisements",
+   "difficulty": 2,
+   "question": "Deux parents hétérozygotes AS ont un enfant : quelle est la probabilité qu'il soit drépanocytaire (SS) ?",
+   "choices": [
+    "1/4",
+    "1/8",
+    "3/4",
+    "1/2"
+   ],
+   "answer": "A",
+   "explanation": "L'allèle S est récessif : le croisement AS x AS donne 1/4 d'enfants SS.",
+   "source": "Cours de génétique, famille Griffiths",
+   "verif": "import",
+   "region": "AF"
+  },
+  {
+   "course": "l2-bio",
+   "category": "génétique mendélienne et croisements",
+   "difficulty": 4,
+   "question": "Un enfant de groupe O naît de parents de groupes A et B. Quels sont les génotypes des parents ?",
+   "choices": [
+    "IAIA et IBi",
+    "IAi et IBIB",
+    "IAi et IBi",
+    "IAIA et IBIB"
+   ],
+   "answer": "C",
+   "explanation": "L'enfant ii a reçu un allèle i de chaque parent : les deux parents sont donc hétérozygotes IAi et IBi.",
+   "source": "Cours de génétique, famille Griffiths",
+   "verif": "import"
+  },
+  {
+   "course": "l2-bio",
+   "category": "hérédité liée au sexe",
+   "difficulty": 1,
+   "question": "Quelle maladie est due à un allèle récessif porté par le chromosome X ?",
+   "choices": [
+    "La drépanocytose",
+    "La mucoviscidose",
+    "L'hémophilie A",
+    "La trisomie 21"
+   ],
+   "answer": "C",
+   "explanation": "L'hémophilie A est liée à l'X récessif, comme le daltonisme ; les autres citées ne le sont pas.",
+   "source": "Cours de génétique, famille Griffiths",
+   "verif": "import"
+  },
+  {
+   "course": "l2-bio",
+   "category": "hérédité liée au sexe",
+   "difficulty": 2,
+   "question": "Un homme atteint d'une maladie récessive liée à l'X a des enfants avec une femme non porteuse. Que sera-t-il de ses enfants ?",
+   "choices": [
+    "Ses filles seront porteuses, ses fils non atteints",
+    "Toutes ses filles seront atteintes",
+    "La moitié de ses fils seront atteints",
+    "Ses fils seront atteints, ses filles saines non porteuses"
+   ],
+   "answer": "A",
+   "explanation": "Il transmet son X à toutes ses filles (porteuses) et son Y à ses fils, qui reçoivent un X sain de la mère.",
+   "source": "Cours de génétique, famille Griffiths",
+   "verif": "import"
+  },
+  {
+   "course": "l2-bio",
+   "category": "hérédité liée au sexe",
+   "difficulty": 3,
+   "question": "Une femme conductrice d'hémophilie A épouse un homme sain. Quelle proportion de leurs fils sera atteinte ?",
+   "choices": [
+    "Le quart",
+    "La moitié",
+    "Aucun",
+    "Tous"
+   ],
+   "answer": "B",
+   "explanation": "Le fils reçoit l'X maternel : un sur deux porte l'allèle muté et est atteint.",
+   "source": "Cours de génétique, famille Griffiths",
+   "verif": "import"
+  },
+  {
+   "course": "l2-bio",
+   "category": "hérédité liée au sexe",
+   "difficulty": 4,
+   "question": "Pourquoi les chats à pelage écaille de tortue sont-ils presque toujours des femelles ?",
+   "choices": [
+    "Le chromosome Y porte le gène de la couleur orange chez les mâles",
+    "L'un des deux X est inactivé au hasard dans chaque cellule, avec des allèles de couleur différents",
+    "Les femelles possèdent un petit chromosome Y supplémentaire",
+    "Les mâles sont homozygotes pour tous les gènes de couleur"
+   ],
+   "answer": "B",
+   "explanation": "Le mélange orange et noir exige deux allèles différents sur deux X, dont l'inactivation mosaïque produit les plages colorées.",
+   "source": "Cours de génétique, famille Griffiths",
+   "verif": "import"
+  },
+  {
+   "course": "l2-bio",
+   "category": "ADN : structure, réplication",
+   "difficulty": 1,
+   "question": "Quelles bases s'apparient dans l'ADN double brin ?",
+   "choices": [
+    "A avec T, et G avec C",
+    "A avec C, et T avec G",
+    "A avec U, et G avec C",
+    "A avec G, et T avec C"
+   ],
+   "answer": "A",
+   "explanation": "L'adénine forme deux liaisons hydrogène avec la thymine, la guanine trois avec la cytosine.",
+   "source": "Biologie moléculaire, famille Watson (Biologie moléculaire du gène)",
+   "verif": "import"
+  },
+  {
+   "course": "l2-bio",
+   "category": "ADN : structure, réplication",
+   "difficulty": 2,
+   "question": "Quelle expérience a établi que la réplication de l'ADN est semi-conservative ?",
+   "choices": [
+    "Celle de Pasteur, avec des ballons à col de cygne",
+    "Celle de Griffith, avec des pneumocoques et des souris",
+    "Celle de Hershey et Chase, avec des phages marqués",
+    "Celle de Meselson et Stahl, avec des isotopes de l'azote"
+   ],
+   "answer": "D",
+   "explanation": "Meselson et Stahl ont suivi, par centrifugation, la densité de l'ADN de bactéries passées de 15N à 14N.",
+   "source": "Biologie moléculaire, famille Watson (Biologie moléculaire du gène)",
+   "verif": "import"
+  },
+  {
+   "course": "l2-bio",
+   "category": "ADN : structure, réplication",
+   "difficulty": 3,
+   "question": "Quelle différence existe entre la réplication de E. coli et celle d'un chromosome eucaryote ?",
+   "choices": [
+    "Une réplication unidirectionnelle chez E. coli et bidirectionnelle chez l'eucaryote",
+    "Une origine unique chez E. coli, de nombreuses origines chez l'eucaryote",
+    "Une réplication conservative chez l'eucaryote seulement",
+    "Un seul réplicon chez l'eucaryote"
+   ],
+   "answer": "B",
+   "explanation": "Le chromosome circulaire bactérien a une origine ; les chromosomes eucaryotes, longs, en possèdent de multiples pour une réplication rapide.",
+   "source": "Biologie moléculaire, famille Watson (Biologie moléculaire du gène)",
+   "verif": "import"
+  },
+  {
+   "course": "l2-bio",
+   "category": "ADN : structure, réplication",
+   "difficulty": 3,
+   "question": "Un ADN bicaténaire contient 30 % d'adénine. Quel est son pourcentage de guanine ?",
+   "choices": [
+    "60 %",
+    "30 %",
+    "20 %",
+    "40 %"
+   ],
+   "answer": "C",
+   "explanation": "Selon Chargaff, T = A = 30 %, donc G + C = 40 %, soit G = 20 %.",
+   "source": "Biologie moléculaire, famille Watson (Biologie moléculaire du gène)",
+   "verif": "import"
+  },
+  {
+   "course": "l2-bio",
+   "category": "ADN : structure, réplication",
+   "difficulty": 5,
+   "question": "Entre deux ADN de même longueur, lequel dénature à la température de fusion (Tm) la plus élevée ?",
+   "choices": [
+    "Celui qui contient de l'uracile à la place de la thymine",
+    "Celui qui est le plus riche en paires A-T",
+    "Celui qui est le plus riche en paires G-C",
+    "Celui qui est monocaténaire"
+   ],
+   "answer": "C",
+   "explanation": "Les paires G-C ont trois liaisons hydrogène : l'ADN riche en G-C est plus stable et fond à plus haute température.",
+   "source": "Biologie moléculaire, famille Watson (Biologie moléculaire du gène)",
+   "verif": "import"
+  },
+  {
+   "course": "l2-bio",
+   "category": "transcription et traduction : synthèse des protéines",
+   "difficulty": 1,
+   "question": "Quel codon initie habituellement la traduction ?",
+   "choices": [
+    "UGA",
+    "UAA",
+    "AUG",
+    "GCC"
+   ],
+   "answer": "C",
+   "explanation": "AUG code la méthionine d'initiation ; UAA et UGA sont des codons stop.",
+   "source": "Biologie moléculaire, famille Watson (Biologie moléculaire du gène)",
+   "verif": "import"
+  },
+  {
+   "course": "l2-bio",
+   "category": "transcription et traduction : synthèse des protéines",
+   "difficulty": 2,
+   "question": "Quelle modification subit un pré-ARNm eucaryote mais pas un ARNm bactérien typique ?",
+   "choices": [
+    "Dégradation immédiate par l'ADN polymérase",
+    "Coiffe, queue poly-A et épissage des introns",
+    "Fixation d'une coiffe protectrice directement sur l'ADN",
+    "Traduction pendant la transcription"
+   ],
+   "answer": "B",
+   "explanation": "Chez l'eucaryote, la maturation précède l'export nucléaire ; chez les bactéries, la traduction peut commencer dès la transcription.",
+   "source": "Biologie moléculaire, famille Watson (Biologie moléculaire du gène)",
+   "verif": "import"
+  },
+  {
+   "course": "l2-bio",
+   "category": "transcription et traduction : synthèse des protéines",
+   "difficulty": 3,
+   "question": "Un brin matrice d'ADN 3'-TACCGG-5' est transcrit. Quel est l'ARNm formé ?",
+   "choices": [
+    "5'-TACCGG-3'",
+    "5'-UACCGG-3'",
+    "5'-ATGGCC-3'",
+    "5'-AUGGCC-3'"
+   ],
+   "answer": "D",
+   "explanation": "L'ARN est complémentaire et antiparallèle au brin matrice, avec U à la place de T : 5'-AUGGCC-3'.",
+   "source": "Biologie moléculaire, famille Watson (Biologie moléculaire du gène)",
+   "verif": "import"
+  },
+  {
+   "course": "l2-bio",
+   "category": "transcription et traduction : synthèse des protéines",
+   "difficulty": 3,
+   "question": "Un ARNm contient 300 nucléotides dans sa seule phase codante, sans codon stop. Combien d'acides aminés code-t-il ?",
+   "choices": [
+    "150",
+    "100",
+    "900",
+    "300"
+   ],
+   "answer": "B",
+   "explanation": "Trois nucléotides codent un acide aminé : 300 / 3 = 100.",
+   "source": "Biologie moléculaire, famille Watson (Biologie moléculaire du gène)",
+   "verif": "import"
+  },
+  {
+   "course": "l2-bio",
+   "category": "transcription et traduction : synthèse des protéines",
+   "difficulty": 2,
+   "question": "Quelle ARN polymérase eucaryote transcrit les gènes codant des protéines ?",
+   "choices": [
+    "L'ARN polymérase II",
+    "L'ADN polymérase delta",
+    "L'ARN polymérase III",
+    "L'ARN polymérase I"
+   ],
+   "answer": "A",
+   "explanation": "L'ARN polymérase II synthétise les pré-ARNm ; la I forme les ARNr majeurs et la III les ARNt.",
+   "source": "Biologie moléculaire, famille Watson (Biologie moléculaire du gène)",
+   "verif": "import"
+  },
+  {
+   "course": "l2-bio",
+   "category": "mutations et maladies génétiques",
+   "difficulty": 1,
+   "question": "Quelle altération moléculaire cause la drépanocytose ?",
+   "choices": [
+    "La substitution d'un acide glutamique par une valine dans la chaîne β de l'hémoglobine",
+    "La délétion complète du gène de la chaîne α de l'hémoglobine",
+    "L'absence totale de globine",
+    "La duplication du gène de l'insuline"
+   ],
+   "answer": "A",
+   "explanation": "Une mutation ponctuelle (GAG en GTG) change l'acide glutamique en valine et favorise la polymérisation de l'HbS.",
+   "source": "Cours de génétique, famille Griffiths",
+   "verif": "import",
+   "region": "AF"
+  },
+  {
+   "course": "l2-bio",
+   "category": "mutations et maladies génétiques",
+   "difficulty": 2,
+   "question": "Quelle conséquence a la délétion d'un seul nucléotide dans une région codante ?",
+   "choices": [
+    "Aucun effet sur la protéine",
+    "Une substitution d'un seul acide aminé",
+    "Une mutation silencieuse systématique",
+    "Un décalage du cadre de lecture"
+   ],
+   "answer": "D",
+   "explanation": "Le retrait d'un nucléotide décale tout le cadre de lecture en aval, modifiant la séquence protéique.",
+   "source": "Cours de génétique, famille Griffiths",
+   "verif": "import"
+  },
+  {
+   "course": "l2-bio",
+   "category": "mutations et maladies génétiques",
+   "difficulty": 1,
+   "question": "Quel caryotype correspond à une trisomie 21 libre chez une fille ?",
+   "choices": [
+    "47,XXY",
+    "45,X",
+    "46,XX",
+    "47,XX,+21"
+   ],
+   "answer": "D",
+   "explanation": "La trisomie 21 correspond à un chromosome 21 supplémentaire : 47 chromosomes avec formule sexuelle XX chez la fille.",
+   "source": "Cours de génétique, famille Griffiths",
+   "verif": "import"
+  },
+  {
+   "course": "l2-bio",
+   "category": "mutations et maladies génétiques",
+   "difficulty": 1,
+   "question": "Qu'est-ce qu'une mutation non-sens ?",
+   "choices": [
+    "Une inversion d'un grand segment chromosomique",
+    "Une substitution qui ne modifie pas l'acide aminé codé",
+    "Une insertion de trois nucléotides",
+    "Une substitution qui crée un codon stop prématuré"
+   ],
+   "answer": "D",
+   "explanation": "Elle transforme un codon d'acide aminé en codon stop et donne une protéine tronquée.",
+   "source": "Cours de génétique, famille Griffiths",
+   "verif": "import"
+  },
+  {
+   "course": "l2-bio",
+   "category": "régulation de l'expression génétique",
+   "difficulty": 1,
+   "question": "Dans l'opéron lactose d'E. coli, quel signal lève la répression ?",
+   "choices": [
+    "La présence de tryptophane",
+    "La présence de lactose (allolactose)",
+    "La présence de glucose seul",
+    "L'absence de lactose"
+   ],
+   "answer": "B",
+   "explanation": "L'allolactose se lie au répresseur LacI et l'empêche de se fixer à l'opérateur.",
+   "source": "Biologie moléculaire, famille Watson (Biologie moléculaire du gène)",
+   "verif": "import"
+  },
+  {
+   "course": "l2-bio",
+   "category": "régulation de l'expression génétique",
+   "difficulty": 2,
+   "question": "En l'absence de lactose, que fait le répresseur LacI de l'opéron lactose ?",
+   "choices": [
+    "Il se fixe au promoteur du gène LacI et l'active",
+    "Il dégrade l'ARNm déjà formé dans le cytoplasme",
+    "Il se fixe à l'opérateur et bloque la transcription",
+    "Il hydrolyse directement le lactose en glucose et galactose"
+   ],
+   "answer": "C",
+   "explanation": "Le répresseur actif occupe l'opérateur et empêche l'ARN polymérase de transcrire les gènes de structure.",
+   "source": "Biologie moléculaire, famille Watson (Biologie moléculaire du gène)",
+   "verif": "import"
+  },
+  {
+   "course": "l2-bio",
+   "category": "régulation de l'expression génétique",
+   "difficulty": 3,
+   "question": "Quelle différence existe entre l'opéron lactose et l'opéron tryptophane ?",
+   "choices": [
+    "Le premier est répressible, le second est inductible",
+    "Ils sont exprimés en permanence, sans régulation",
+    "Aucun n'a de régulateur",
+    "Le premier est inductible, le second est répressible"
+   ],
+   "answer": "D",
+   "explanation": "Le lactose inactive le répresseur de lac ; le tryptophane active celui de trp, d'où une répression quand il abonde.",
+   "source": "Biologie moléculaire, famille Watson (Biologie moléculaire du gène)",
+   "verif": "import"
+  },
+  {
+   "course": "l2-bio",
+   "category": "régulation de l'expression génétique",
+   "difficulty": 5,
+   "question": "Avec glucose et lactose présents, l'opéron lac est peu exprimé. Pourquoi ?",
+   "choices": [
+    "Le glucose se fixe sur l'opérateur à la place du répresseur",
+    "Le répresseur est directement activé par le glucose",
+    "L'AMPc est bas, donc le complexe CAP-AMPc n'active pas la transcription",
+    "Le lactose est dégradé avant son entrée dans la bactérie"
+   ],
+   "answer": "C",
+   "explanation": "Le glucose abaisse l'AMPc : CAP, non activé, ne stimule plus le promoteur (répression catabolique).",
+   "source": "Biologie moléculaire, famille Watson (Biologie moléculaire du gène)",
+   "verif": "import"
+  },
+  {
+   "course": "l2-bio",
+   "category": "biotechnologies : PCR, clonage, OGM",
+   "difficulty": 1,
+   "question": "Quelle caractéristique de la Taq polymérase la rend utile à la PCR ?",
+   "choices": [
+    "Elle coupe l'ADN aux sites de restriction palindromiques",
+    "Elle ne fonctionne qu'à basse température, vers 4 °C",
+    "Elle copie l'ARN en ADN",
+    "Elle résiste aux températures élevées de dénaturation"
+   ],
+   "answer": "D",
+   "explanation": "Issue de Thermus aquaticus, elle reste active après chaque dénaturation vers 95 °C.",
+   "source": "Biologie moléculaire, famille Watson (Biologie moléculaire du gène)",
+   "verif": "import"
+  },
+  {
+   "course": "l2-bio",
+   "category": "biotechnologies : PCR, clonage, OGM",
+   "difficulty": 3,
+   "question": "Quel nombre théorique de copies obtient-on après 10 cycles de PCR à partir d'une seule molécule d'ADN ?",
+   "choices": [
+    "512",
+    "1 024",
+    "20",
+    "100"
+   ],
+   "answer": "B",
+   "explanation": "Le nombre de copies double à chaque cycle : 2^10 = 1 024 en théorie.",
+   "source": "Biologie moléculaire, famille Watson (Biologie moléculaire du gène)",
+   "verif": "import"
+  },
+  {
+   "course": "l2-bio",
+   "category": "biotechnologies : PCR, clonage, OGM",
+   "difficulty": 3,
+   "question": "Dans l'électrophorèse sur gel d'agarose, comment migrent les fragments d'ADN ?",
+   "choices": [
+    "Vers le pôle positif, les plus petits allant plus vite",
+    "Ils migrent sans rapport avec leur taille",
+    "Vers le pôle positif, les plus gros allant le plus vite",
+    "Vers le pôle négatif, les plus petits allant plus lentement"
+   ],
+   "answer": "A",
+   "explanation": "L'ADN, chargé négativement, migre vers l'anode ; le gel freine davantage les grands fragments.",
+   "source": "Biologie moléculaire, famille Watson (Biologie moléculaire du gène)",
+   "verif": "import"
+  },
+  {
+   "course": "l2-bio",
+   "category": "biotechnologies : PCR, clonage, OGM",
+   "difficulty": 4,
+   "question": "Pour détecter un virus à ARN par PCR, quelle étape préalable faut-il ?",
+   "choices": [
+    "Une électrophorèse de l'ARN seul",
+    "Une traduction in vitro",
+    "Une transcription inverse de l'ARN en ADNc",
+    "Une digestion par une enzyme de restriction"
+   ],
+   "answer": "C",
+   "explanation": "La RT-PCR utilise une transcriptase inverse pour fabriquer un ADN complémentaire que la Taq pourra amplifier.",
+   "source": "Biologie moléculaire, famille Watson (Biologie moléculaire du gène)",
+   "verif": "import"
+  },
+  {
+   "course": "l2-bio",
+   "category": "évolution : sélection naturelle et spéciation",
+   "difficulty": 1,
+   "question": "Selon Darwin, quel mécanisme explique l'adaptation des populations ?",
+   "choices": [
+    "L'apparition de mutations orientées par le milieu",
+    "La transmission héréditaire des caractères acquis",
+    "La sélection naturelle de variants héritables avantageux",
+    "L'usage et le non-usage des organes"
+   ],
+   "answer": "C",
+   "explanation": "Les individus aux caractères héritables favorables se reproduisent davantage, ce qui modifie la population.",
+   "source": "Cours d'évolution, famille Futuyma",
+   "verif": "import"
+  },
+  {
+   "course": "l2-bio",
+   "category": "évolution : sélection naturelle et spéciation",
+   "difficulty": 2,
+   "question": "Comment l'apparition de bactéries résistantes aux antibiotiques s'interprète-t-elle ?",
+   "choices": [
+    "Par une adaptation volontaire des bactéries à l'antibiotique",
+    "Par la seule disparition des bactéries sensibles",
+    "Par transmission de caractères acquis par chaque bactérie",
+    "Par sélection naturelle de variants résistants préexistants"
+   ],
+   "answer": "D",
+   "explanation": "L'antibiotique élimine les sensibles et favorise la multiplication des mutants résistants.",
+   "source": "Cours d'évolution, famille Futuyma",
+   "verif": "import"
+  },
+  {
+   "course": "l2-bio",
+   "category": "évolution : sélection naturelle et spéciation",
+   "difficulty": 4,
+   "question": "Dans une population à l'équilibre de Hardy-Weinberg, q^2 = 0,04. Quelle est la fréquence des hétérozygotes ?",
+   "choices": [
+    "0,32",
+    "0,64",
+    "0,20",
+    "0,16"
+   ],
+   "answer": "A",
+   "explanation": "q = 0,2 donc p = 0,8 et 2pq = 2 x 0,8 x 0,2 = 0,32.",
+   "source": "Cours d'évolution, famille Futuyma",
+   "verif": "import"
+  },
+  {
+   "course": "l2-bio",
+   "category": "évolution : sélection naturelle et spéciation",
+   "difficulty": 3,
+   "question": "Pourquoi l'allèle S de l'hémoglobine reste-t-il fréquent dans des régions touchées par le paludisme ?",
+   "choices": [
+    "Le paludisme provoque la mutation S",
+    "Les homozygotes SS sont les plus résistants au paludisme",
+    "Les hétérozygotes AS sont mieux protégés contre le paludisme grave",
+    "L'allèle S est dominant"
+   ],
+   "answer": "C",
+   "explanation": "L'avantage des hétérozygotes maintient l'allèle malgré le désavantage des homozygotes SS.",
+   "source": "Cours d'évolution, famille Futuyma",
+   "verif": "import",
+   "region": "AF"
+  },
+  {
+   "course": "l2-bio",
+   "category": "évolution : sélection naturelle et spéciation",
+   "difficulty": 5,
+   "question": "Dans une population en équilibre de Hardy-Weinberg, q^2 = 0,0001 pour une maladie récessive. Quelle est la fréquence approximative des porteurs ?",
+   "choices": [
+    "0,0198",
+    "0,0099",
+    "0,01",
+    "0,0001"
+   ],
+   "answer": "A",
+   "explanation": "q = 0,01 et p = 0,99, donc 2pq = 2 x 0,99 x 0,01 = 0,0198.",
+   "source": "Cours d'évolution, famille Futuyma",
+   "verif": "import"
+  },
+  {
+   "course": "l2-bio",
+   "category": "classification du vivant : bactéries, archées, eucaryotes",
+   "difficulty": 2,
+   "question": "Quelle différence de paroi existe entre bactéries et archées ?",
+   "choices": [
+    "Les archées ont toujours une paroi de cellulose rigide",
+    "Les archées n'ont pas de peptidoglycane (muréine) typique",
+    "Les bactéries n'ont jamais de paroi",
+    "Leur paroi est identique, faite de chitine"
+   ],
+   "answer": "B",
+   "explanation": "La paroi bactérienne contient du peptidoglycane ; celle des archées en est dépourvue.",
+   "source": "Microbiologie, famille Madigan/Prescott",
+   "verif": "import"
+  },
+  {
+   "course": "l2-bio",
+   "category": "classification du vivant : bactéries, archées, eucaryotes",
+   "difficulty": 3,
+   "question": "Quels organismes sont les plus proches parents des animaux parmi ces groupes ?",
+   "choices": [
+    "Les cyanobactéries",
+    "Les champignons",
+    "Les plantes à fleurs",
+    "Les algues vertes"
+   ],
+   "answer": "B",
+   "explanation": "Animaux et champignons appartiennent aux opisthocontes ; les plantes appartiennent à une autre lignée.",
+   "source": "Microbiologie, famille Madigan/Prescott",
+   "verif": "import"
+  },
+  {
+   "course": "l2-bio",
+   "category": "classification du vivant : bactéries, archées, eucaryotes",
+   "difficulty": 2,
+   "question": "À quel groupe appartient la spiruline récoltée dans la région du lac Tchad ?",
+   "choices": [
+    "Aux champignons",
+    "Aux algues brunes",
+    "Aux archées méthanogènes",
+    "Aux cyanobactéries"
+   ],
+   "answer": "D",
+   "explanation": "La spiruline (Arthrospira) est une cyanobactérie, donc un procaryote photosynthétique.",
+   "source": "Microbiologie, famille Madigan/Prescott",
+   "verif": "import",
+   "region": "AF"
+  },
+  {
+   "course": "l2-bio",
+   "category": "virus : structure et cycle de réplication",
+   "difficulty": 1,
+   "question": "De quoi se compose un virus nu ?",
+   "choices": [
+    "D'un génome entouré d'une simple enveloppe lipidique",
+    "D'un génome (ADN ou ARN) entouré d'une capside",
+    "D'un noyau entouré d'une paroi rigide",
+    "De ribosomes et d'ADN"
+   ],
+   "answer": "B",
+   "explanation": "Un virus nu est formé d'un acide nucléique protégé par une capside protéique.",
+   "source": "Virologie, famille Flint (Principles of Virology)",
+   "verif": "import"
+  },
+  {
+   "course": "l2-bio",
+   "category": "virus : structure et cycle de réplication",
+   "difficulty": 2,
+   "question": "Quelle enzyme caractérise le VIH, rétrovirus à ARN ?",
+   "choices": [
+    "La DNase",
+    "L'ARN polymérase ADN-dépendante",
+    "La transcriptase inverse",
+    "La lactase"
+   ],
+   "answer": "C",
+   "explanation": "La transcriptase inverse synthétise un ADN à partir de l'ARN viral, intégré ensuite au génome de la cellule.",
+   "source": "Virologie, famille Flint (Principles of Virology)",
+   "verif": "import"
+  },
+  {
+   "course": "l2-bio",
+   "category": "virus : structure et cycle de réplication",
+   "difficulty": 3,
+   "question": "Qu'est-ce qui distingue le cycle lysogénique du cycle lytique d'un bactériophage ?",
+   "choices": [
+    "Le virus ne pénètre jamais dans la cellule hôte",
+    "Le génome viral s'intègre au chromosome sans lyser la cellule immédiatement",
+    "La cellule est détruite tout de suite après l'infection",
+    "Aucune réplication de l'ADN viral n'a lieu"
+   ],
+   "answer": "B",
+   "explanation": "Le prophage se réplique avec la bactérie et peut être induit plus tard vers un cycle lytique.",
+   "source": "Virologie, famille Flint (Principles of Virology)",
+   "verif": "import"
+  },
+  {
+   "course": "l2-bio",
+   "category": "virus : structure et cycle de réplication",
+   "difficulty": 4,
+   "question": "Pourquoi le génome segmenté du virus grippal favorise-t-il l'apparition de nouveaux sous-types ?",
+   "choices": [
+    "Il transforme directement l'ARN viral en ADN",
+    "Il rend le virus incapable de toute recombinaison",
+    "Il permet des réassortiments entre souches coinfectant une cellule",
+    "Il empêche toute mutation de se produire"
+   ],
+   "answer": "C",
+   "explanation": "Les segments de deux souches peuvent se mélanger dans une même cellule, créant de nouvelles combinaisons.",
+   "source": "Virologie, famille Flint (Principles of Virology)",
+   "verif": "import"
+  },
+  {
+   "course": "l2-bio",
+   "category": "virus : structure et cycle de réplication",
+   "difficulty": 5,
+   "question": "Quelle particularité a le virus de l'hépatite B ?",
+   "choices": [
+    "Un génome d'ARN simple brin répliqué sans intermédiaire",
+    "Un génome d'ADN dépourvu de toute capside",
+    "Un génome d'ARN segmenté comme celui de la grippe",
+    "Un génome d'ADN partiellement bicaténaire répliqué par transcription inverse"
+   ],
+   "answer": "D",
+   "explanation": "Le VHB est un virus à ADN dont la réplication passe par un intermédiaire ARN transcrit à l'envers.",
+   "source": "Virologie, famille Flint (Principles of Virology)",
+   "verif": "import"
+  },
+  {
+   "course": "l2-bio",
+   "category": "microbiologie : bactéries, culture et antibiotiques",
+   "difficulty": 1,
+   "question": "Quelle caractéristique distingue les bactéries à Gram positif ?",
+   "choices": [
+    "L'absence de paroi",
+    "Une membrane externe riche en lipopolysaccharides",
+    "Une paroi épaisse de peptidoglycane qui retient le violet de gentiane",
+    "Un noyau visible"
+   ],
+   "answer": "C",
+   "explanation": "La paroi épaisse retient le colorant cristal violet ; les Gram négatifs possèdent une membrane externe.",
+   "source": "Microbiologie, famille Madigan/Prescott",
+   "verif": "import"
+  },
+  {
+   "course": "l2-bio",
+   "category": "microbiologie : bactéries, culture et antibiotiques",
+   "difficulty": 2,
+   "question": "Quel est le mode d'action des pénicillines ?",
+   "choices": [
+    "Elles lient l'ADN gyrase",
+    "Elles inhibent la synthèse du peptidoglycane",
+    "Elles détruisent la membrane nucléaire",
+    "Elles bloquent la traduction sur le ribosome 30S"
+   ],
+   "answer": "B",
+   "explanation": "Les β-lactamines empêchent la formation des liaisons croisées du peptidoglycane.",
+   "source": "Microbiologie, famille Madigan/Prescott",
+   "verif": "import"
+  },
+  {
+   "course": "l2-bio",
+   "category": "microbiologie : bactéries, culture et antibiotiques",
+   "difficulty": 3,
+   "question": "Une bactérie double toutes les 20 minutes. À partir d'une cellule, combien y en a-t-il après 3 heures de croissance exponentielle idéale ?",
+   "choices": [
+    "60",
+    "180",
+    "512",
+    "9"
+   ],
+   "answer": "C",
+   "explanation": "3 heures = 9 générations : 2^9 = 512.",
+   "source": "Microbiologie, famille Madigan/Prescott",
+   "verif": "import"
+  },
+  {
+   "course": "l2-bio",
+   "category": "microbiologie : bactéries, culture et antibiotiques",
+   "difficulty": 2,
+   "question": "Quelle coloration met en évidence les mycobactéries comme Mycobacterium tuberculosis ?",
+   "choices": [
+    "L'encre de Chine",
+    "La coloration au bleu de méthylène seul",
+    "La coloration de Ziehl-Neelsen",
+    "La coloration de Gram simple"
+   ],
+   "answer": "C",
+   "explanation": "Les mycobactéries sont acido-alcoolo-résistantes et se colorent par Ziehl-Neelsen.",
+   "source": "Microbiologie, famille Madigan/Prescott",
+   "verif": "import"
+  },
+  {
+   "course": "l2-bio",
+   "category": "parasitologie : paludisme et autres parasitoses tropicales",
+   "difficulty": 1,
+   "question": "Quel vecteur transmet le paludisme ?",
+   "choices": [
+    "Le phlébotome",
+    "La simulie",
+    "La glossine",
+    "L'anophèle femelle"
+   ],
+   "answer": "D",
+   "explanation": "Les Plasmodium sont inoculés par la piqûre d'un moustique anophèle femelle.",
+   "source": "Parasitologie médicale, famille Golvan/Bussieras",
+   "verif": "import",
+   "region": "AF"
+  },
+  {
+   "course": "l2-bio",
+   "category": "parasitologie : paludisme et autres parasitoses tropicales",
+   "difficulty": 3,
+   "question": "Quelle espèce de Plasmodium forme des hypnozoïtes responsables de rechutes tardives ?",
+   "choices": [
+    "Plasmodium vivax",
+    "Plasmodium falciparum",
+    "Plasmodium malariae",
+    "Plasmodium knowlesi"
+   ],
+   "answer": "A",
+   "explanation": "P. vivax et P. ovale ont des formes dormantes hépatiques ; P. falciparum n'en forme pas.",
+   "source": "Parasitologie médicale, famille Golvan/Bussieras",
+   "verif": "import"
+  },
+  {
+   "course": "l2-bio",
+   "category": "parasitologie : paludisme et autres parasitoses tropicales",
+   "difficulty": 2,
+   "question": "Quel vecteur transmet Onchocerca volvulus, agent de la cécité des rivières ?",
+   "choices": [
+    "La glossine",
+    "La simulie",
+    "Le triatome",
+    "L'anophèle"
+   ],
+   "answer": "B",
+   "explanation": "La simulie se reproduit dans les rivières rapides, d'où le nom de la maladie.",
+   "source": "Parasitologie médicale, famille Golvan/Bussieras",
+   "verif": "import",
+   "region": "AF"
+  },
+  {
+   "course": "l2-bio",
+   "category": "parasitologie : paludisme et autres parasitoses tropicales",
+   "difficulty": 5,
+   "question": "Quel est le mode de contamination humaine dans la cysticercose à Taenia solium ?",
+   "choices": [
+    "La pénétration de larves par la peau",
+    "L'ingestion de viande de bœuf crue",
+    "L'ingestion d'œufs du ténia",
+    "La piqûre d'un moustique"
+   ],
+   "answer": "C",
+   "explanation": "L'humain devient hôte intermédiaire en ingérant des œufs ; la viande de porc mal cuite donne le téniasis.",
+   "source": "Parasitologie médicale, famille Golvan/Bussieras",
+   "verif": "import"
+  },
+  {
+   "course": "l2-bio",
+   "category": "immunologie : immunité innée et adaptative",
+   "difficulty": 1,
+   "question": "Quelles cellules fabriquent les anticorps ?",
+   "choices": [
+    "Les érythrocytes",
+    "Les macrophages",
+    "Les lymphocytes T cytotoxiques",
+    "Les plasmocytes issus des lymphocytes B"
+   ],
+   "answer": "D",
+   "explanation": "Les lymphocytes B activés se différencient en plasmocytes sécréteurs d'anticorps.",
+   "source": "Immunologie, famille Janeway/Abbas",
+   "verif": "import"
+  },
+  {
+   "course": "l2-bio",
+   "category": "immunologie : immunité innée et adaptative",
+   "difficulty": 2,
+   "question": "Quelle caractéristique distingue l'immunité adaptative de l'immunité innée ?",
+   "choices": [
+    "La spécificité et la mémoire immunitaire",
+    "L'action des phagocytes dès l'infection",
+    "La présence de barrières cutanées et muqueuses",
+    "La rapidité de la réponse immédiate"
+   ],
+   "answer": "A",
+   "explanation": "L'innée est rapide mais non spécifique ; l'adaptative est spécifique de l'antigène et garde une mémoire.",
+   "source": "Immunologie, famille Janeway/Abbas",
+   "verif": "import"
+  },
+  {
+   "course": "l2-bio",
+   "category": "immunologie : immunité innée et adaptative",
+   "difficulty": 1,
+   "question": "Quel type d'anticorps est transmis de la mère au fœtus à travers le placenta ?",
+   "choices": [
+    "Les IgD",
+    "Les IgM",
+    "Les IgG",
+    "Les IgE"
+   ],
+   "answer": "C",
+   "explanation": "Les IgG traversent le placenta et assurent une protection passive du nouveau-né.",
+   "source": "Immunologie, famille Janeway/Abbas",
+   "verif": "import"
+  },
+  {
+   "course": "l2-bio",
+   "category": "immunologie : immunité innée et adaptative",
+   "difficulty": 3,
+   "question": "Quelles molécules du CMH reconnaissent respectivement les lymphocytes T CD8 et CD4 ?",
+   "choices": [
+    "Classe I pour CD8 comme pour CD4",
+    "CD8 : classe II ; CD4 : classe I",
+    "CD8 : CMH de classe I ; CD4 : CMH de classe II",
+    "Classe II pour CD8 comme pour CD4"
+   ],
+   "answer": "C",
+   "explanation": "Les T CD8 reconnaissent les peptides présentés par le CMH I, les T CD4 ceux du CMH II.",
+   "source": "Immunologie, famille Janeway/Abbas",
+   "verif": "import"
+  },
+  {
+   "course": "l2-bio",
+   "category": "immunologie : immunité innée et adaptative",
+   "difficulty": 4,
+   "question": "Une mère Rh négatif porte un fœtus Rh positif. Quel risque peut apparaître lors d'une grossesse ultérieure ?",
+   "choices": [
+    "Une allergie saisonnière au pollen",
+    "La production d'anticorps anti-D pouvant atteindre le fœtus",
+    "Une immunodéficience acquise",
+    "Une hémophilie"
+   ],
+   "answer": "B",
+   "explanation": "Une sensibilisation à l'antigène D peut mener à une maladie hémolytique du nouveau-né ; une prophylaxie existe.",
+   "source": "Immunologie, famille Janeway/Abbas",
+   "verif": "import"
+  },
+  {
+   "course": "l2-bio",
+   "category": "vaccination et sérologie",
+   "difficulty": 2,
+   "question": "Quelle sérologie suggère une infection récente ?",
+   "choices": [
+    "L'absence d'anticorps",
+    "La présence d'IgM spécifiques",
+    "La présence d'IgA seules",
+    "La présence d'IgG seules"
+   ],
+   "answer": "B",
+   "explanation": "Les IgM apparaissent précocement ; les IgG persistent après l'infection ou la vaccination.",
+   "source": "Immunologie, famille Janeway/Abbas",
+   "verif": "import"
+  },
+  {
+   "course": "l2-bio",
+   "category": "vaccination et sérologie",
+   "difficulty": 2,
+   "question": "Quel est le principe du vaccin BCG ?",
+   "choices": [
+    "Une souche vivante atténuée de Mycobacterium bovis",
+    "Un virus entier inactivé par la chaleur",
+    "Une anatoxine",
+    "Un sérum prélevé sur un animal immunisé"
+   ],
+   "answer": "A",
+   "explanation": "Le BCG est une souche atténuée de M. bovis utilisée contre les formes graves de tuberculose.",
+   "source": "Immunologie, famille Janeway/Abbas",
+   "verif": "import"
+  },
+  {
+   "course": "l2-bio",
+   "category": "vaccination et sérologie",
+   "difficulty": 4,
+   "question": "Pourquoi un test sérologique VIH peut-il être négatif peu après l'infection ?",
+   "choices": [
+    "Les anticorps sont trop nombreux pour être détectés",
+    "Le test détecte seulement des antigènes viraux",
+    "Le virus est déjà éliminé de l'organisme",
+    "Les anticorps n'ont pas encore atteint un taux détectable"
+   ],
+   "answer": "D",
+   "explanation": "Le délai de séroconversion précède l'apparition d'anticorps détectables.",
+   "source": "Immunologie, famille Janeway/Abbas",
+   "verif": "import"
+  },
+  {
+   "course": "l2-bio",
+   "category": "physiologie animale : système nerveux et hormonal",
+   "difficulty": 1,
+   "question": "Quel mécanisme transmet l'information le long d'un axone ?",
+   "choices": [
+    "La diffusion de l'hormone",
+    "La contraction du muscle",
+    "La circulation sanguine",
+    "Le potentiel d'action"
+   ],
+   "answer": "D",
+   "explanation": "L'axone transmet l'influx nerveux par potentiels d'action.",
+   "source": "Physiologie animale, famille Sherwood",
+   "verif": "import"
+  },
+  {
+   "course": "l2-bio",
+   "category": "physiologie animale : système nerveux et hormonal",
+   "difficulty": 2,
+   "question": "Quelles hormones régulent la glycémie, et dans quel sens ?",
+   "choices": [
+    "Insuline et glucagon augmentent tous deux la glycémie",
+    "Adrénaline baisse la glycémie, insuline l'augmente",
+    "Insuline augmente la glycémie, glucagon la baisse",
+    "Insuline baisse la glycémie, glucagon l'augmente"
+   ],
+   "answer": "D",
+   "explanation": "Les cellules β sécrètent l'insuline hypoglycémiante, les cellules α le glucagon hyperglycémiant.",
+   "source": "Physiologie animale, famille Sherwood",
+   "verif": "import"
+  },
+  {
+   "course": "l2-bio",
+   "category": "physiologie animale : système nerveux et hormonal",
+   "difficulty": 3,
+   "question": "Comment les systèmes nerveux et endocrinien diffèrent-ils ?",
+   "choices": [
+    "Le nerveux agit par le sang, l'endocrinien par les axones",
+    "L'endocrinien agit par un influx électrique rapide",
+    "Le nerveux agit rapidement et localement, l'endocrinien plus lentement par le sang",
+    "Ils agissent de manière identique et simultanée"
+   ],
+   "answer": "C",
+   "explanation": "Les neurones agissent en millisecondes sur leurs cibles ; les hormones circulent et ont des effets plus lents et durables.",
+   "source": "Physiologie animale, famille Sherwood",
+   "verif": "import"
+  },
+  {
+   "course": "l2-bio",
+   "category": "physiologie animale : système nerveux et hormonal",
+   "difficulty": 1,
+   "question": "Quel ion entre massivement dans le neurone lors de la dépolarisation d'un potentiel d'action ?",
+   "choices": [
+    "Le calcium (Ca2+)",
+    "Le chlorure (Cl-)",
+    "Le sodium (Na+)",
+    "Le potassium (K+)"
+   ],
+   "answer": "C",
+   "explanation": "L'ouverture des canaux Na+ voltage-dépendants provoque l'entrée de sodium, puis K+ sort pour la repolarisation.",
+   "source": "Physiologie animale, famille Sherwood",
+   "verif": "import"
+  },
+  {
+   "course": "l2-bio",
+   "category": "physiologie de la circulation et de la respiration",
+   "difficulty": 1,
+   "question": "Quelle molécule transporte surtout le dioxygène dans le sang ?",
+   "choices": [
+    "L'albumine",
+    "Le fibrinogène",
+    "La myosine",
+    "L'hémoglobine"
+   ],
+   "answer": "D",
+   "explanation": "L'hémoglobine des globules rouges se lie à O2 dans les poumons.",
+   "source": "Physiologie animale, famille Sherwood",
+   "verif": "import"
+  },
+  {
+   "course": "l2-bio",
+   "category": "physiologie de la circulation et de la respiration",
+   "difficulty": 2,
+   "question": "Quel sang contient l'artère pulmonaire ?",
+   "choices": [
+    "Du sang sans CO2",
+    "Du sang pauvre en dioxygène venant du cœur droit",
+    "Du sang riche en dioxygène venant directement des poumons",
+    "Du sang riche en dioxygène venant du cœur gauche"
+   ],
+   "answer": "B",
+   "explanation": "L'artère pulmonaire conduit du sang désoxygéné du ventricule droit vers les poumons.",
+   "source": "Physiologie animale, famille Sherwood",
+   "verif": "import"
+  },
+  {
+   "course": "l2-bio",
+   "category": "physiologie de la circulation et de la respiration",
+   "difficulty": 1,
+   "question": "Quelle différence caractérise veines et artères ?",
+   "choices": [
+    "Les veines possèdent des valvules, pas les artères",
+    "Les artères ramènent le sang vers le cœur",
+    "Les veines ont des parois plus épaisses que les artères",
+    "Les artères ont des valvules"
+   ],
+   "answer": "A",
+   "explanation": "Les valvules des veines empêchent le reflux du sang vers les extrémités.",
+   "source": "Physiologie animale, famille Sherwood",
+   "verif": "import"
+  },
+  {
+   "course": "l2-bio",
+   "category": "physiologie de la circulation et de la respiration",
+   "difficulty": 3,
+   "question": "Un cœur bat à 70 battements par minute avec un volume d'éjection systolique de 70 mL. Quel est son débit cardiaque ?",
+   "choices": [
+    "4 900 mL/min",
+    "490 mL/min",
+    "49 000 mL/min",
+    "140 mL/min"
+   ],
+   "answer": "A",
+   "explanation": "Débit = fréquence x volume systolique = 70 x 70 = 4 900 mL/min.",
+   "source": "Physiologie animale, famille Sherwood",
+   "verif": "import"
+  },
+  {
+   "course": "l2-bio",
+   "category": "physiologie de la circulation et de la respiration",
+   "difficulty": 5,
+   "question": "Que décrit l'effet Bohr ?",
+   "choices": [
+    "L'hémoglobine perd tout son O2 dans les poumons",
+    "Une hausse du pH augmente la libération de O2 dans les tissus",
+    "Une baisse du pH ou une hausse de CO2 diminue l'affinité de l'hémoglobine pour O2",
+    "L'affinité de l'hémoglobine pour O2 reste toujours constante"
+   ],
+   "answer": "C",
+   "explanation": "Dans les tissus actifs, le CO2 et l'acidité favorisent la libération de O2 par l'hémoglobine.",
+   "source": "Physiologie animale, famille Sherwood",
+   "verif": "import"
+  },
+  {
+   "course": "l2-bio",
+   "category": "digestion et nutrition",
+   "difficulty": 1,
+   "question": "Quelle enzyme de la salive commence la digestion de l'amidon ?",
+   "choices": [
+    "La lipase gastrique",
+    "La pepsine",
+    "La trypsine",
+    "L'amylase salivaire"
+   ],
+   "answer": "D",
+   "explanation": "L'amylase salivaire hydrolyse l'amidon en maltose.",
+   "source": "Physiologie animale, famille Sherwood",
+   "verif": "import"
+  },
+  {
+   "course": "l2-bio",
+   "category": "digestion et nutrition",
+   "difficulty": 2,
+   "question": "Pourquoi la pepsine agit-elle dans l'estomac ?",
+   "choices": [
+    "Elle est active en milieu basique",
+    "Elle est active en milieu très acide",
+    "Elle digère uniquement les lipides",
+    "Elle est sécrétée par la vésicule biliaire"
+   ],
+   "answer": "B",
+   "explanation": "La pepsine, enzyme protéolytique, a un pH optimal acide, assuré par l'acide chlorhydrique.",
+   "source": "Physiologie animale, famille Sherwood",
+   "verif": "import"
+  },
+  {
+   "course": "l2-bio",
+   "category": "digestion et nutrition",
+   "difficulty": 1,
+   "question": "Quel est le rôle de la bile dans la digestion ?",
+   "choices": [
+    "Digérer les protéines",
+    "Émulsionner les lipides pour faciliter l'action des lipases",
+    "Neutraliser l'acidité du suc pancréatique",
+    "Hydrolyser l'amidon"
+   ],
+   "answer": "B",
+   "explanation": "Les sels biliaires émulsionnent les graisses ; la bile ne contient pas d'enzyme digestive majeure.",
+   "source": "Physiologie animale, famille Sherwood",
+   "verif": "import"
+  },
+  {
+   "course": "l2-bio",
+   "category": "digestion et nutrition",
+   "difficulty": 3,
+   "question": "Quelle différence distingue le kwashiorkor du marasme ?",
+   "choices": [
+    "Le kwashiorkor est une maladie virale transmise par voie sanguine",
+    "Le marasme est dû à un excès alimentaire de protéines",
+    "Tous deux résultent d'une carence isolée en iode",
+    "Le kwashiorkor est dû surtout à une carence protéique, le marasme à un déficit calorique global"
+   ],
+   "answer": "D",
+   "explanation": "Ces deux formes de malnutrition sévère n'ont pas la même prédominance de carence.",
+   "source": "Physiologie animale, famille Sherwood",
+   "verif": "import",
+   "region": "AF"
+  },
+  {
+   "course": "l2-bio",
+   "category": "physiologie de la reproduction",
+   "difficulty": 3,
+   "question": "Quelle différence existe entre spermatogenèse et ovogenèse ?",
+   "choices": [
+    "La spermatogenèse donne un seul gamète fonctionnel",
+    "L'ovogenèse ne comporte aucune étape de méiose",
+    "Une cellule mère donne quatre spermatozoïdes mais un seul ovule fonctionnel",
+    "Chacune donne toujours quatre gamètes fonctionnels"
+   ],
+   "answer": "C",
+   "explanation": "La méiose féminine est inégale et produit un ovocyte et des globules polaires.",
+   "source": "Physiologie animale, famille Sherwood",
+   "verif": "import"
+  },
+  {
+   "course": "l2-bio",
+   "category": "physiologie de la reproduction",
+   "difficulty": 2,
+   "question": "Quelle hormone est détectée par un test de grossesse urinaire ?",
+   "choices": [
+    "L'hCG",
+    "La testostérone",
+    "L'insuline",
+    "La FSH"
+   ],
+   "answer": "A",
+   "explanation": "L'hCG est produite par le trophoblaste de l'embryon après la nidation.",
+   "source": "Physiologie animale, famille Sherwood",
+   "verif": "import"
+  },
+  {
+   "course": "l2-bio",
+   "category": "physiologie de la reproduction",
+   "difficulty": 4,
+   "question": "Comment une pilule œstroprogestative empêche-t-elle l'ovulation ?",
+   "choices": [
+    "En bloquant seulement la fécondation dans la trompe",
+    "Par un rétrocontrôle négatif sur l'axe hypothalamo-hypophysaire",
+    "En augmentant la FSH",
+    "En détruisant les spermatozoïdes dans le vagin"
+   ],
+   "answer": "B",
+   "explanation": "Les hormones synthétiques diminuent la sécrétion de FSH et LH, donc le pic de LH n'a pas lieu.",
+   "source": "Physiologie animale, famille Sherwood",
+   "verif": "import"
+  },
+  {
+   "course": "l2-bio",
+   "category": "biologie végétale : organisation et croissance de la plante",
+   "difficulty": 1,
+   "question": "Quel tissu conduit la sève brute dans la plante ?",
+   "choices": [
+    "Le xylème",
+    "Le phloème",
+    "Le parenchyme chlorophyllien",
+    "L'épiderme"
+   ],
+   "answer": "A",
+   "explanation": "Le xylème transporte l'eau et les sels minéraux des racines vers les feuilles.",
+   "source": "Botanique, famille Raven",
+   "verif": "import"
+  },
+  {
+   "course": "l2-bio",
+   "category": "biologie végétale : organisation et croissance de la plante",
+   "difficulty": 2,
+   "question": "Quel caractère distingue une monocotylédone du maïs d'une dicotylédone comme le haricot ?",
+   "choices": [
+    "Deux cotylédons et des nervures parallèles",
+    "Un seul cotylédon et des nervures parallèles",
+    "Des feuilles toujours composées de folioles",
+    "Pas de racines"
+   ],
+   "answer": "B",
+   "explanation": "Le maïs a une graine à un cotylédon et des feuilles à nervures parallèles.",
+   "source": "Botanique, famille Raven",
+   "verif": "import",
+   "region": "AF"
+  },
+  {
+   "course": "l2-bio",
+   "category": "biologie végétale : organisation et croissance de la plante",
+   "difficulty": 1,
+   "question": "Quelle hormone végétale favorise la maturation des fruits tels que la mangue ?",
+   "choices": [
+    "L'auxine seule",
+    "La cytokinine",
+    "La gibbérelline",
+    "L'éthylène"
+   ],
+   "answer": "D",
+   "explanation": "L'éthylène, hormone gazeuse, stimule le mûrissement des fruits climactériques.",
+   "source": "Botanique, famille Raven",
+   "verif": "import"
+  },
+  {
+   "course": "l2-bio",
+   "category": "biologie végétale : organisation et croissance de la plante",
+   "difficulty": 4,
+   "question": "Comment l'ouverture des stomates est-elle déclenchée ?",
+   "choices": [
+    "La sécrétion d'auxine par la racine vers la feuille",
+    "La fermeture des vaisseaux conducteurs du xylème",
+    "La perte d'eau par les cellules de garde",
+    "L'entrée de potassium et d'eau rend les cellules de garde turgescentes"
+   ],
+   "answer": "D",
+   "explanation": "La turgescence des cellules de garde écarte les cellules et ouvre l'ostiole.",
+   "source": "Botanique, famille Raven",
+   "verif": "import"
+  },
+  {
+   "course": "l2-bio",
+   "category": "écologie : écosystèmes et chaînes alimentaires",
+   "difficulty": 1,
+   "question": "Quel est le rôle des producteurs primaires dans un écosystème ?",
+   "choices": [
+    "Consommer d'autres organismes vivants",
+    "Fixer le fer dans les couches du sol",
+    "Décomposer la matière organique morte",
+    "Produire de la matière organique à partir de l'énergie lumineuse"
+   ],
+   "answer": "D",
+   "explanation": "Les organismes photosynthétiques fabriquent la matière organique à la base du réseau trophique.",
+   "source": "Écologie, famille Ricklefs/Begon",
+   "verif": "import"
+  },
+  {
+   "course": "l2-bio",
+   "category": "écologie : écosystèmes et chaînes alimentaires",
+   "difficulty": 2,
+   "question": "Quelle relation unit les rhizobiums aux légumineuses comme l'arachide ?",
+   "choices": [
+    "Un mutualisme avec fixation d'azote dans les nodosités",
+    "Un parasitisme",
+    "Une compétition pour la lumière du soleil",
+    "Une prédation"
+   ],
+   "answer": "A",
+   "explanation": "Les bactéries fixent l'azote atmosphérique et reçoivent des glucides de la plante.",
+   "source": "Écologie, famille Ricklefs/Begon",
+   "verif": "import",
+   "region": "AF"
+  },
+  {
+   "course": "l2-bio",
+   "category": "écologie : écosystèmes et chaînes alimentaires",
+   "difficulty": 3,
+   "question": "Pourquoi une pyramide des énergies n'est-elle jamais inversée ?",
+   "choices": [
+    "Les décomposeurs fournissent à eux seuls toute l'énergie",
+    "Les herbivores produisent plus d'énergie que les plantes",
+    "L'énergie diminue à chaque niveau trophique par respiration et chaleur",
+    "L'énergie augmente avec chaque niveau trophique"
+   ],
+   "answer": "C",
+   "explanation": "Chaque transfert perd de l'énergie, de sorte que chaque niveau en dispose moins que le précédent.",
+   "source": "Écologie, famille Ricklefs/Begon",
+   "verif": "import"
+  },
+  {
+   "course": "l2-bio",
+   "category": "écologie : écosystèmes et chaînes alimentaires",
+   "difficulty": 5,
+   "question": "Que stipule le principe d'exclusion compétitive de Gause ?",
+   "choices": [
+    "Les prédateurs éliminent toujours toutes leurs proies",
+    "Deux espèces de niches différentes s'excluent toujours",
+    "La compétition favorise toujours la symbiose",
+    "Deux espèces ayant la même niche écologique ne coexistent pas durablement"
+   ],
+   "answer": "D",
+   "explanation": "Si deux espèces utilisent exactement la même ressource limitante, l'une élimine l'autre.",
+   "source": "Écologie, famille Ricklefs/Begon",
+   "verif": "import"
+  },
+  {
+   "course": "l2-bio",
+   "category": "biostatistiques et méthode expérimentale",
+   "difficulty": 2,
+   "question": "Quelle est la moyenne des valeurs 2, 4 et 6 ?",
+   "choices": [
+    "6",
+    "3",
+    "4",
+    "12"
+   ],
+   "answer": "C",
+   "explanation": "La somme vaut 12, divisée par 3 valeurs : 4.",
+   "source": "Biostatistiques, famille Sokal/Rohlf",
+   "verif": "import"
+  },
+  {
+   "course": "l2-bio",
+   "category": "biostatistiques et méthode expérimentale",
+   "difficulty": 3,
+   "question": "Quel est l'écart-type de l'échantillon 2, 4, 6 (variance d'échantillon avec n-1) ?",
+   "choices": [
+    "2",
+    "8",
+    "4",
+    "1"
+   ],
+   "answer": "A",
+   "explanation": "La somme des carrés des écarts est 8 ; 8 / 2 = 4 ; l'écart-type est sa racine carrée : 2.",
+   "source": "Biostatistiques, famille Sokal/Rohlf",
+   "verif": "import"
+  },
+  {
+   "course": "l2-bio",
+   "category": "biostatistiques et méthode expérimentale",
+   "difficulty": 4,
+   "question": "Un khi-deux calculé de 4,44 avec 1 degré de liberté dépasse le seuil de 3,84 à 5 %. Que conclut-on ?",
+   "choices": [
+    "On rejette l'hypothèse nulle",
+    "Le test est invalide",
+    "On accepte l'hypothèse nulle sans risque",
+    "Le résultat est non significatif"
+   ],
+   "answer": "A",
+   "explanation": "Au-dessus du seuil critique, l'écart aux effectifs théoriques n'est pas attribuable au seul hasard.",
+   "source": "Biostatistiques, famille Sokal/Rohlf",
+   "verif": "import"
+  },
+  {
+   "course": "l2-bio",
+   "category": "biostatistiques et méthode expérimentale",
+   "difficulty": 5,
+   "question": "Que représente l'erreur de type I d'un test statistique ?",
+   "choices": [
+    "Rejeter l'hypothèse nulle alors qu'elle est vraie",
+    "Ne pas calculer de p-valeur",
+    "Accepter l'hypothèse nulle alors qu'elle est fausse",
+    "Choisir un mauvais échantillon"
+   ],
+   "answer": "A",
+   "explanation": "C'est un faux positif, dont le risque est fixé par le seuil alpha.",
+   "source": "Biostatistiques, famille Sokal/Rohlf",
+   "verif": "import"
+  }
+ ]
 }

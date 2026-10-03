@@ -41,9 +41,9 @@
    "difficulty": 5,
    "question": "Un diploïde partiel d'E. coli est F' lacOᶜ lacZ⁻ / chromosome lacO⁺ lacZ⁺ (lacI⁺ partout). En l'absence de lactose, produit-il de la β-galactosidase fonctionnelle ?",
    "choices": [
-    "Oui : le répresseur est titré par l'opérateur lacOᶜ en excès",
-    "Oui : l'opérateur constitutif agit en trans sur le lacZ⁺ du chromosome",
-    "Non : lacOᶜ bloque la transcription des deux copies de lacZ",
+    "Oui : l'opérateur constitutif agit en trans sur le lacZ⁺ du chromosome bactérien",
+    "Oui : le répresseur est titré par l'opérateur lacOᶜ en excès dans la cellule",
+    "Non : lacOᶜ bloque la transcription des deux copies de lacZ de la cellule",
     "Non : l'opérateur constitutif n'agit qu'en cis, sur le lacZ muté qui lui est lié"
    ],
    "answer": "D",
@@ -283,7 +283,7 @@
    "choices": [
     "Le ligand est internalisé mais le récepteur reste actif",
     "Pas de trans-autophosphorylation : la voie n'est pas activée malgré le ligand",
-    "Le récepteur s'active seul, sans ligand, de façon constitutive",
+    "Le récepteur s'active seul, sans ligand, de façon constitutive et durable",
     "Le récepteur est phosphorylé sur la sérine par la protéine kinase A"
    ],
    "answer": "B",
@@ -299,8 +299,8 @@
    "choices": [
     "Elle augmente et reste élevée plus longtemps, l'AMPc étant moins hydrolysé",
     "Elle reste inchangée, car l'AMPc est éliminé par simple diffusion",
-    "Elle diminue, car l'AMPc est converti en GMPc par la cellule",
-    "Elle diminue, car la synthèse d'AMPc est bloquée par l'inhibiteur"
+    "Elle diminue, car la synthèse d'AMPc est bloquée par l'inhibiteur utilisé",
+    "Elle diminue, car l'AMPc est converti en GMPc par la cellule"
    ],
    "answer": "A",
    "explanation": "La phosphodiestérase dégrade l'AMPc en AMP : son inhibition prolonge le signal.",
@@ -329,9 +329,9 @@
    "difficulty": 2,
    "question": "Des cellules traitées par la cytochalasine, qui bloque la polymérisation de l'actine, subissent une mitose. Quelle anomalie observe-t-on à l'issue de la division ?",
    "choices": [
-    "Des cellules anucléées, car le fuseau mitotique ne se forme pas",
+    "Des cellules à chromosomes non répliqués, par défaut de la phase S du cycle",
     "Des cellules à noyau fragmenté, par défaut de lamines nucléaires",
-    "Des cellules à chromosomes non répliqués, par défaut de phase S",
+    "Des cellules anucléées, car le fuseau mitotique ne se forme pas",
     "Des cellules binucléées, car l'anneau d'actine ne permet pas la cytocinèse"
    ],
    "answer": "D",
@@ -394,8 +394,8 @@
    "question": "Un filament d'actine est placé dans une solution où la concentration d'actine-G libre est supérieure à la concentration critique de l'extrémité (+) mais inférieure à celle de l'extrémité (−). Que se passe-t-il ?",
    "choices": [
     "Il croît côté (+) et se raccourcit côté (−) : c'est le treadmilling",
-    "Il croît aux deux extrémités à la même vitesse",
     "Il se dépolymérise aux deux extrémités à la même vitesse",
+    "Il croît aux deux extrémités à la même vitesse, jusqu'à saturation du milieu",
     "Il reste strictement inchangé aux deux extrémités"
    ],
    "answer": "A",
@@ -409,9 +409,9 @@
    "difficulty": 3,
    "question": "Un enfant hérite d'une copie mutée de RB1 dans toutes ses cellules. Pourquoi son risque de rétinoblastome est-il très élevé ?",
    "choices": [
+    "Chaque copie doit être mutée de façon indépendante dans la cellule",
     "Le gène RB1 est un oncogène activé par la mutation héritée",
-    "Les deux copies doivent être mutées de façon indépendante dans chaque cellule",
-    "La copie mutée est dominante et suffit à elle seule à transformer la cellule",
+    "La copie mutée est dominante et suffit à elle seule à transformer la cellule en tumeur",
     "Une seule mutation somatique sur l'allèle normal suffit pour perdre la fonction du gène"
    ],
    "answer": "D",
@@ -425,9 +425,9 @@
    "difficulty": 1,
    "question": "Une cellule perd la fonction de p53 et subit des dommages à l'ADN. Quelle réponse cellulaire normale est alors absente ?",
    "choices": [
-    "L'activation de la télomérase",
-    "La fixation des facteurs de croissance sur leurs récepteurs",
-    "La réplication de l'ADN en phase S",
+    "L'activation de la télomérase dans les cellules souches",
+    "La réplication de l'ADN en phase S du cycle cellulaire",
+    "La fixation des facteurs de croissance sur leurs récepteurs de surface",
     "L'arrêt du cycle en G1 ou l'apoptose en cas de lésions irréparables"
    ],
    "answer": "D",
@@ -505,10 +505,10 @@
    "difficulty": 2,
    "question": "Une lignée cellulaire n'exprime plus Apaf-1. Quelle voie de l'apoptose est directement altérée ?",
    "choices": [
-    "La nécrose, car la membrane plasmique n'est plus rompue",
+    "La phagocytose des corps apoptotiques par les macrophages du tissu voisin",
     "La voie intrinsèque (mitochondriale), car l'apoptosome ne peut plus activer la caspase-9",
-    "La phagocytose des corps apoptotiques par les macrophages",
-    "La voie extrinsèque des récepteurs de mort, car Fas ne peut plus se trimériser"
+    "La voie extrinsèque des récepteurs de mort, car Fas ne peut plus se trimériser",
+    "La nécrose, car la membrane plasmique de la cellule n'est plus rompue brutalement"
    ],
    "answer": "B",
    "explanation": "Après libération de cytochrome c, Apaf-1 forme l'apoptosome qui active la caspase-9 initiatrice.",
@@ -697,9 +697,9 @@
    "difficulty": 1,
    "question": "Un polymorphisme d'un seul nucléotide (SNP) transforme le codon GAA (Glu) en GAG dans la région codante. Quelle est la conséquence sur la protéine ?",
    "choices": [
-    "Le Glu est remplacé par une lysine (mutation faux-sens)",
-    "Le cadre de lecture est décalé en aval du codon",
-    "Un codon stop prématuré apparaît (mutation non-sens)",
+    "Le Glu est remplacé par une lysine (mutation faux-sens à effet probable)",
+    "Un codon stop prématuré apparaît (mutation non-sens) en position 1",
+    "Le cadre de lecture est décalé en aval du codon, d'un nucléotide",
     "Aucune : GAG code aussi pour l'acide glutamique (mutation synonyme)"
    ],
    "answer": "D",
@@ -713,8 +713,8 @@
    "difficulty": 4,
    "question": "Lors de l'assemblage d'un génome riche en séquences répétées, que permettent les lectures appariées (paired-end) ?",
    "choices": [
-    "Supprimer toutes les erreurs de séquençage par simple comparaison",
     "Obtenir des lectures dépassant 10 000 bases à elles seules",
+    "Supprimer toutes les erreurs de séquençage par simple comparaison de lectures",
     "Ordonner et orienter les contigs grâce à une distance connue entre lectures",
     "Se passer de toute étape d'assemblage des fragments obtenus"
    ],
@@ -793,10 +793,10 @@
    "difficulty": 3,
    "question": "Un étudiant écrit que deux protéines sont « homologues à 60 % ». Quelle est la remarque correcte ?",
    "choices": [
-    "L'homologie ne s'applique qu'aux séquences d'ADN, pas aux protéines",
-    "Cette expression est correcte : l'homologie mesure la similarité en %",
+    "Cette expression est correcte : l'homologie mesure bien la similarité en %",
+    "Seule l'identité de séquence peut établir une absence d'homologie entre gènes",
     "L'homologie traduit un ancêtre commun : on mesure l'identité en %, pas l'homologie",
-    "Seule l'identité de séquence peut établir une absence d'homologie"
+    "L'homologie ne s'applique qu'aux séquences d'ADN, pas aux protéines"
    ],
    "answer": "C",
    "explanation": "L'identité et la similarité s'expriment en pourcentage ; l'homologie est une inférence qualitative d'origine commune.",
@@ -889,7 +889,7 @@
    "difficulty": 1,
    "question": "En électrophorèse SDS-PAGE, deux protéines monomériques de 25 kDa et de 50 kDa migrent dans le même gel. Laquelle migre le plus loin ?",
    "choices": [
-    "Les deux migrent à la même distance",
+    "Elles migrent à la même distance",
     "Cela dépend de leur point isoélectrique",
     "La protéine de 25 kDa",
     "La protéine de 50 kDa"
@@ -921,10 +921,10 @@
    "difficulty": 1,
    "question": "En isoélectrofocalisation, une protéine cesse de migrer dans le gradient de pH. Pourquoi ?",
    "choices": [
-    "Elle atteint la limite de taille des pores du gel de séparation",
-    "Elle est dénaturée par le gradient de pH du gel",
+    "Elle se lie de façon irréversible à l'anode de la cuve d'électrophorèse",
+    "Elle est dénaturée par le gradient de pH du gel de polyacrylamide",
     "Elle atteint le pH de son point isoélectrique, où sa charge nette est nulle",
-    "Elle se lie de façon irréversible à l'anode de la cuve"
+    "Elle atteint la limite de taille des pores du gel de séparation utilisé"
    ],
    "answer": "C",
    "explanation": "À pH = pI, la charge nette est nulle : le champ électrique n'exerce plus de force de migration.",
@@ -1017,9 +1017,9 @@
    "difficulty": 3,
    "question": "Le 2,4-dinitrophénol est un découplant : il rend la membrane mitochondriale interne perméable aux protons. Quel est l'effet observé ?",
    "choices": [
-    "La consommation d'O₂ chute et la synthèse d'ATP augmente en parallèle",
-    "La consommation d'O₂ augmente, la synthèse d'ATP chute et de la chaleur apparaît",
     "La consommation d'O₂ et la synthèse d'ATP augmentent toutes deux",
+    "La consommation d'O₂ augmente, la synthèse d'ATP chute et de la chaleur apparaît",
+    "La consommation d'O₂ chute et la synthèse d'ATP augmente en parallèle, avec moins de chaleur",
     "La consommation d'O₂ s'arrête, le gradient de protons étant maintenu"
    ],
    "answer": "B",
@@ -1066,8 +1066,8 @@
    "question": "Dans la phénylcétonurie, la phénylalanine hydroxylase est déficiente. Quelles sont les conséquences biochimiques ?",
    "choices": [
     "Le glucose s'accumule, la glycolyse étant bloquée dans le foie",
-    "Les corps cétoniques disparaissent de l'organisme en quelques jours",
-    "La tyrosine s'accumule et la phénylalanine devient indispensable",
+    "Les corps cétoniques disparaissent de l'organisme en quelques jours de régime",
+    "La tyrosine s'accumule et la phénylalanine devient indispensable à l'apport",
     "La phénylalanine s'accumule et la tyrosine devient indispensable à l'apport"
    ],
    "answer": "D",
@@ -1227,7 +1227,7 @@
    "choices": [
     "Peu de CMH II en surface, car les peptides ne sont pas dégradés",
     "Un excès de CMH I portant des peptides viraux à la surface cellulaire",
-    "Une absence de récepteurs des cellules T sur les lymphocytes circulants",
+    "Une absence de récepteurs des cellules T sur les lymphocytes circulants du sang",
     "Peu de CMH I chargés de peptides en surface, les peptides n'entrant pas dans le RE"
    ],
    "answer": "D",
@@ -1337,9 +1337,9 @@
    "difficulty": 4,
    "question": "Le virus de la grippe peut donner des virus recombinés par réassortiment, alors que le VIH ne le fait pas de cette façon. Quelle caractéristique du génome grippal l'explique ?",
    "choices": [
-    "Son génome est de l'ADN double brin, facile à recombiner entre virus",
-    "Son génome est intégré au chromosome de la cellule hôte",
-    "Son génome est plus long que celui de tout autre virus connu",
+    "Son génome est plus long que celui de tout autre virus connu à ce jour",
+    "Son génome est intégré au chromosome de la cellule hôte, comme un provirus",
+    "Son génome est de l'ADN double brin, facile à recombiner entre deux virus infectant la même cellule",
     "Son génome est segmenté : deux virus d'une même cellule peuvent échanger des segments"
    ],
    "answer": "D",
@@ -1418,9 +1418,9 @@
    "question": "Pourquoi l'arrêt prématuré d'un traitement antibiotique favorise-t-il la résistance ?",
    "choices": [
     "Les bactéries peu sensibles survivent et se multiplient : sélection de souches résistantes",
+    "L'antibiotique provoque lui-même les mutations qui rendent les bactéries résistantes",
     "Les bactéries sensibles se transforment en bactéries résistantes à l'arrêt",
-    "L'antibiotique devient inactif dans l'organisme après quelques jours",
-    "L'antibiotique provoque lui-même les mutations qui rendent résistant"
+    "L'antibiotique devient inactif dans l'organisme après quelques jours de prise"
    ],
    "answer": "A",
    "explanation": "L'antibiotique exerce une pression de sélection : un traitement insuffisant laisse des survivants moins sensibles.",
@@ -1450,8 +1450,8 @@
    "question": "Dans les régions impaludées d'Afrique, l'allèle de l'hémoglobine S est fréquent. Quelle est l'explication évolutive ?",
    "choices": [
     "Les hétérozygotes AS résistent au paludisme grave, ce qui compense la perte des SS",
+    "L'allèle S est apparu uniquement après l'arrivée de Plasmodium dans ces régions d'Afrique",
     "Les homozygotes SS sont les plus protégés contre le paludisme",
-    "L'allèle S est apparu uniquement après l'arrivée de Plasmodium",
     "L'allèle S confère une résistance à tous les parasites sanguins connus"
    ],
    "answer": "A",
@@ -1513,10 +1513,10 @@
    "difficulty": 4,
    "question": "Pourquoi l'obtention d'un vaccin contre la trypanosomiase africaine est-elle très difficile ?",
    "choices": [
-    "Le parasite vit uniquement à l'intérieur des hépatocytes du malade",
+    "Le parasite vit uniquement à l'intérieur des hépatocytes du malade, à l'abri des anticorps",
     "La variation antigénique des VSG permet au parasite d'échapper aux anticorps",
-    "Le parasite n'est pas immunogène du tout pour son hôte humain",
-    "Le parasite est transmis par voie sexuelle uniquement, sans vecteur"
+    "Le parasite est transmis par voie sexuelle uniquement, sans vecteur",
+    "Le parasite n'est pas immunogène du tout pour son hôte humain"
    ],
    "answer": "B",
    "explanation": "Les trypanosomes remplacent périodiquement leur manteau de VSG, ce qui rend inefficaces les anticorps déjà produits.",
@@ -1529,9 +1529,9 @@
    "difficulty": 3,
    "question": "Un poisson osseux d'eau douce vit dans un milieu hypotonique par rapport à ses liquides internes. Quelle stratégie d'osmorégulation adopte-t-il ?",
    "choices": [
-    "Il accumule l'urée pour s'équilibrer avec le milieu extérieur",
-    "Il boit beaucoup d'eau et excrète le sel par ses branchies",
-    "Il retient l'eau en excrétant une urine très concentrée",
+    "Il boit beaucoup d'eau et excrète le sel par ses branchies, comme en mer",
+    "Il retient l'eau en excrétant une urine très concentrée et peu abondante",
+    "Il accumule l'urée pour s'équilibrer avec le milieu extérieur, comme les requins",
     "Il excrète une urine abondante et diluée et capte des sels par les branchies"
    ],
    "answer": "D",
@@ -1545,10 +1545,10 @@
    "difficulty": 3,
    "question": "Pourquoi les requins gardent-ils de l'urée et de l'oxyde de triméthylamine dans leur sang ?",
    "choices": [
-    "Pour détecter leurs proies par électroréception à distance",
-    "Pour rendre leur peau imperméable aux ions de l'eau de mer",
+    "Pour fabriquer de la chaleur nécessaire à leur nage rapide en eau froide",
+    "Pour détecter leurs proies par électroréception à distance dans l'eau trouble",
     "Pour être à peu près isoosmotiques à l'eau de mer et limiter la perte d'eau",
-    "Pour fabriquer de la chaleur nécessaire à leur nage rapide"
+    "Pour rendre leur peau imperméable aux ions de l'eau de mer environnante"
    ],
    "answer": "C",
    "explanation": "Ces solutés relèvent l'osmolarité interne : les requins ne perdent pas d'eau par osmose dans l'eau de mer.",
@@ -1562,9 +1562,9 @@
    "question": "Une courbe de saturation en O₂ est hyperbolique pour la myoglobine et sigmoïde pour l'hémoglobine. Que montre ce résultat ?",
    "choices": [
     "La myoglobine est allostérique et coopérative, l'hémoglobine étant monomérique",
-    "L'hémoglobine est allostérique et coopérative, alors que la myoglobine est monomérique",
-    "L'hémoglobine ne fixe l'O₂ qu'à très faible pression partielle",
-    "Les deux protéines ont strictement la même affinité pour l'O₂"
+    "L'hémoglobine est allostérique et coopérative, la myoglobine étant monomérique",
+    "Ces protéines ont strictement la même affinité pour l'O₂",
+    "L'hémoglobine ne fixe l'O₂ qu'à très faible pression partielle"
    ],
    "answer": "B",
    "explanation": "La coopérativité de l'hémoglobine tétramérique produit une courbe en S ; la myoglobine fixe l'O₂ avec une affinité élevée sans coopérativité.",
@@ -1593,10 +1593,10 @@
    "difficulty": 3,
    "question": "Chez les oiseaux, les poumons sont reliés à des sacs aériens. Quelle particularité en résulte pour la circulation de l'air dans les poumons ?",
    "choices": [
-    "Un flux alternatif d'entrée et de sortie, comme chez les mammifères",
+    "Un flux alternatif d'entrée puis de sortie, comme dans les alvéoles des mammifères",
     "Un flux d'air unidirectionnel dans les parabronches, à l'inspiration et à l'expiration",
-    "Un flux d'air uniquement lors de l'expiration, jamais à l'inspiration",
-    "Un flux d'air stagnant, sans renouvellement des gaz dans les poumons"
+    "Un flux d'air uniquement lors de l'expiration, jamais lors de l'inspiration",
+    "Un flux d'air stagnant, sans renouvellement des gaz dans les poumons du tout"
    ],
    "answer": "B",
    "explanation": "Les sacs aériens servent de soufflets : l'air traverse les poumons dans un seul sens, ce qui améliore les échanges gazeux.",
@@ -1737,9 +1737,9 @@
    "difficulty": 4,
    "question": "La fragmentation d'une forêt isole des populations de primates sur de petits fragments. Quel risque génétique en découle à long terme ?",
    "choices": [
-    "Une augmentation de la diversité génétique par isolement",
-    "Une disparition totale de la sélection naturelle",
-    "Une hybridation obligatoire avec toutes les espèces voisines",
+    "Une augmentation de la diversité génétique par isolement des groupes",
+    "Une disparition totale de la sélection naturelle dans ces fragments",
+    "Une hybridation obligatoire avec toutes les espèces voisines de la forêt",
     "Une dérive génétique accrue et une consanguinité, avec perte de diversité"
    ],
    "answer": "D",
@@ -1754,9 +1754,9 @@
    "question": "Les gènes Hox présentent une colinéarité. En quoi consiste-t-elle ?",
    "choices": [
     "L'ordre des gènes sur le chromosome reflète l'ordre antéro-postérieur d'expression",
-    "Tous les gènes Hox s'expriment dans le même segment de l'embryon",
-    "Chaque gène Hox est situé sur un chromosome différent",
-    "L'ordre des gènes est indépendant de leur zone d'expression"
+    "Ces gènes s'expriment tous dans le même segment de l'embryon à la fois",
+    "Chaque gène Hox est situé sur un chromosome différent chez les vertébrés",
+    "L'ordre des gènes sur le chromosome est indépendant de leur zone d'expression"
    ],
    "answer": "A",
    "explanation": "Les gènes en 3' du complexe s'expriment plus antérieurement, ceux en 5' plus postérieurement.",
@@ -1785,10 +1785,10 @@
    "difficulty": 3,
    "question": "Un embryon de drosophile issu d'une mère homozygote mutante pour bicoid n'a ni tête ni thorax. Quelle conclusion en tire-t-on ?",
    "choices": [
-    "Bicoid est un gène zygotique exprimé après la gastrulation",
-    "Bicoid contrôle uniquement la segmentation de l'abdomen",
+    "Bicoid est un gène zygotique exprimé seulement après la gastrulation",
+    "Bicoid contrôle uniquement la segmentation de l'abdomen de la larve",
     "Bicoid est un déterminant maternel en gradient dans l'œuf, côté antérieur",
-    "Bicoid agit uniquement chez les mouches mâles adultes"
+    "Bicoid agit uniquement chez les mouches mâles adultes, pas chez l'embryon"
    ],
    "answer": "C",
    "explanation": "L'ARNm de bicoid, déposé à l'extrémité antérieure par la mère, forme un gradient de protéine qui spécifie les structures antérieures.",
@@ -1801,9 +1801,9 @@
    "difficulty": 5,
    "question": "Une mère Drosophila bcd⁻/bcd⁻ est croisée avec un père bcd⁺/bcd⁺. Quel est le phénotype des embryons, tous hétérozygotes bcd⁺/bcd⁻ ?",
    "choices": [
-    "Normal : seul le génotype de l'embryon détermine son phénotype",
-    "Létal avant la fécondation, faute de gamètes viables chez la mère",
-    "Normal : l'allèle bcd⁺ du père est dominant et corrige le défaut",
+    "Normal : l'allèle bcd⁺ du père est dominant et corrige le défaut maternel",
+    "Normal : seul le génotype de l'embryon détermine son phénotype final",
+    "Létal avant la fécondation, faute de gamètes viables chez la mère mutante",
     "Anormal : l'effet est maternel, le génotype de la mère détermine le phénotype"
    ],
    "answer": "D",
@@ -1849,10 +1849,10 @@
    "difficulty": 2,
    "question": "Un cageot contient une pomme très mûre et des bananes encore vertes. Pourquoi les bananes mûrissent-elles plus vite ?",
    "choices": [
-    "La pomme émet de l'acide abscissique, qui retarde la sénescence",
-    "La pomme émet de l'auxine, qui active la maturation des fruits",
+    "La pomme consomme l'éthylène des bananes",
+    "La pomme émet de l'acide abscissique, qui retarde la sénescence des fruits verts",
     "La pomme émet de l'éthylène, hormone gazeuse qui déclenche le mûrissement",
-    "La pomme consomme l'éthylène des bananes"
+    "La pomme émet de l'auxine, qui active la maturation des fruits"
    ],
    "answer": "C",
    "explanation": "L'éthylène est une hormone gazeuse du mûrissement des fruits climactériques et agit à distance.",
@@ -1945,10 +1945,10 @@
    "difficulty": 3,
    "question": "Dans un test statistique, on obtient p = 0,03. Quelle est l'interprétation correcte ?",
    "choices": [
-    "L'hypothèse nulle a 3 % de chances d'être vraie",
+    "L'hypothèse nulle a 3 % de chances d'être vraie, d'après ce résultat",
     "Si H₀ était vraie, un résultat aussi extrême surviendrait dans 3 % des cas",
-    "L'effet observé représente 3 % de la valeur moyenne",
-    "L'hypothèse alternative a 97 % de chances d'être vraie"
+    "L'hypothèse alternative a 97 % de chances d'être vraie, d'après ce test",
+    "L'effet observé représente 3 % de la valeur moyenne du groupe témoin"
    ],
    "answer": "B",
    "explanation": "La valeur p est la probabilité d'observer des données aussi extrêmes sous H₀ ; ce n'est pas la probabilité que H₀ soit vraie.",
@@ -1993,9 +1993,9 @@
    "difficulty": 1,
    "question": "Quel est le rôle de la partie « Matériel et méthodes » d'un mémoire de biologie ?",
    "choices": [
-    "Lister uniquement les ouvrages cités dans le texte du mémoire",
-    "Interpréter les résultats à la lumière de la littérature",
+    "Interpréter les résultats à la lumière de la littérature scientifique",
     "Résumer en une phrase les conclusions principales du travail",
+    "Lister uniquement les ouvrages cités dans le texte du mémoire de l'étudiant",
     "Décrire les procédures assez précisément pour que l'étude soit reproductible"
    ],
    "answer": "D",

@@ -41,10 +41,10 @@
    "difficulty": 4,
    "question": "Chez E. coli, une mutation lacOc (opérateur constitutif) empêche la fixation du répresseur. Que se passe-t-il sans lactose ?",
    "choices": [
-    "L'opéron est transcrit uniquement si une copie sauvage de l'opérateur est ajoutée sur un autre plasmide",
+    "L'opéron n'est transcrit que si un opérateur sauvage est ajouté sur un autre plasmide de la cellule",
     "Les gènes lacZYA restent réprimés, car LacI se fixe malgré la mutation grâce au complexe AMPc-CAP",
-    "Les gènes lacZYA situés sur le même ADN sont transcrits, car le répresseur ne reconnaît plus l'opérateur muté",
-    "Seul le gène lacI cesse d'être exprimé, ce qui laisse l'opéron sans effet"
+    "Les gènes lacZYA en cis sont transcrits, car le répresseur ne reconnaît plus l'opérateur muté",
+    "Seul le gène lacI cesse d'être exprimé, ce qui laisse l'opéron lac sans aucun effet visible"
    ],
    "answer": "C",
    "explanation": "L'opérateur agit en cis : muté, il n'est plus reconnu par LacI, d'où une expression constitutive des gènes qu'il contrôle.",
@@ -57,9 +57,9 @@
    "difficulty": 3,
    "question": "Comment un activateur fixé sur un enhancer très éloigné du promoteur stimule-t-il la transcription ?",
    "choices": [
-    "L'activateur est transcrit en ARN qui se fixe de façon covalente sur le promoteur",
-    "L'ADN forme une boucle qui rapproche l'activateur, via le complexe Médiateur, de la machinerie du promoteur",
-    "L'enhancer est coupé puis ligaturé au promoteur par une enzyme de restriction cellulaire",
+    "L'activateur est transcrit en un ARN qui se fixe de façon covalente sur le promoteur du gène",
+    "L'ADN forme une boucle qui rapproche l'activateur, via le Médiateur, de la machinerie du promoteur",
+    "L'enhancer est coupé puis ligaturé au promoteur par une enzyme de restriction de la cellule",
     "L'activateur glisse le long de l'ADN jusqu'au promoteur en dégradant les séquences intermédiaires"
    ],
    "answer": "B",
@@ -73,10 +73,10 @@
    "difficulty": 5,
    "question": "Dans l'atténuation de l'opéron tryptophane chez E. coli, que se passe-t-il quand le tryptophane est abondant ?",
    "choices": [
-    "Le tryptophane est transformé en AMPc qui lève la répression de l'opéron",
-    "Le ribosome traduit vite le peptide leader, ce qui favorise la structure de terminaison et arrête la transcription",
-    "Le ribosome cale sur les codons Trp du leader, ce qui empêche la formation de la boucle de terminaison",
-    "Le tryptophane se fixe à l'opérateur et active directement l'ARN polymérase sur trpE"
+    "Le tryptophane est transformé en AMPc, ce qui lève la répression de l'opéron trp",
+    "Le ribosome traduit vite le peptide leader, ce qui favorise la boucle terminatrice",
+    "Le ribosome cale sur les codons Trp du leader, ce qui bloque la boucle terminatrice",
+    "Le tryptophane se fixe à l'opérateur et active directement l'ARN polymérase"
    ],
    "answer": "B",
    "explanation": "Avec beaucoup de Trp-ARNt, le ribosome avance, la boucle 3-4 terminatrice se forme et la transcription s'interrompt avant les gènes de structure.",
@@ -89,10 +89,10 @@
    "difficulty": 1,
    "question": "Quel complexe catalyse l'excision des introns des pré-ARNm nucléaires ?",
    "choices": [
-    "Le splicéosome, formé de snRNP (U1, U2, U4/U6, U5) et de protéines associées",
-    "Le complexe du pore nucléaire, formé de nucléoporines",
-    "Le protéasome, formé d'un cylindre de sous-unités protéolytiques",
-    "Le ribosome, formé de deux sous-unités d'ARNr et de protéines"
+    "Le splicéosome, formé de snRNP (U1, U2, U4/U6, U5) et de protéines",
+    "Le complexe du pore nucléaire, formé de nombreuses nucléoporines de la membrane nucléaire",
+    "Le protéasome, formé d'un cylindre de sous-unités protéolytiques à activité catalytique",
+    "Le ribosome, formé de deux sous-unités composées d'ARN ribosomiques et de protéines"
    ],
    "answer": "A",
    "explanation": "Le splicéosome, ribonucléoprotéine constituée de snRNP, reconnaît les sites d'épissage et élimine les introns.",
@@ -201,9 +201,9 @@
    "difficulty": 1,
    "question": "Quel est le rôle du signal KDEL à l'extrémité C-terminale de certaines protéines du réticulum ?",
    "choices": [
-    "Il les dirige vers la membrane plasmique par exocytose constitutive, sans passage par le Golgi",
+    "Il les dirige vers la membrane plasmique par exocytose, sans passage par le Golgi",
     "Il les adresse aux lysosomes par fixation de mannose-6-phosphate dans le réseau trans-golgien",
-    "Il les importe dans la mitochondrie grâce aux translocases TOM et TIM des membranes mitochondriales",
+    "Il les importe dans la mitochondrie grâce aux translocases TOM et TIM de ses membranes",
     "Il permet leur retour depuis le Golgi vers le réticulum, par un récepteur et des vésicules COPI"
    ],
    "answer": "D",
@@ -217,9 +217,9 @@
    "difficulty": 2,
    "question": "Comment les hydrolases acides sont-elles adressées aux lysosomes ?",
    "choices": [
-    "Elles sont marquées par l'ubiquitine, ce qui les envoie au lysosome par le protéasome",
-    "Elles sont glycosylées sur un résidu galactose, reconnu par des récepteurs de la membrane plasmique",
-    "Elles reçoivent du mannose-6-phosphate dans le Golgi, reconnu par des récepteurs dans le réseau trans-golgien",
+    "Elles sont marquées par l'ubiquitine, ce qui les envoie vers le protéasome pour dégradation",
+    "Elles sont glycosylées sur un galactose, reconnu par des récepteurs membranaires",
+    "Elles reçoivent du mannose-6-phosphate, reconnu par des récepteurs du réseau trans-golgien",
     "Elles reçoivent un signal KDEL dans le réticulum, reconnu par des récepteurs dans le Golgi"
    ],
    "answer": "C",
@@ -234,9 +234,9 @@
    "question": "Quel rôle jouent les protéines SNARE dans la fusion d'une vésicule avec sa membrane cible ?",
    "choices": [
     "Les v-SNARE et t-SNARE s'apparient en faisceau, rapprochant les deux membranes jusqu'à la fusion",
-    "Les SNARE polymérisent des filaments d'actine qui poussent la vésicule vers la cible",
-    "Les SNARE forment le manteau externe qui déforme la membrane donneuse en vésicule",
-    "Les SNARE hydrolysent le GTP pour pincer le col de la vésicule et la détacher"
+    "Les SNARE polymérisent des filaments d'actine qui poussent la vésicule vers sa cible",
+    "Les SNARE forment le manteau externe qui déforme la membrane donneuse en une vésicule",
+    "Les SNARE hydrolysent le GTP pour pincer le col de la vésicule et la détacher de sa membrane"
    ],
    "answer": "A",
    "explanation": "Les SNARE de la vésicule (v-SNARE) et de la cible (t-SNARE) forment un complexe très stable qui assure la spécificité et force la fusion.",
@@ -329,10 +329,10 @@
    "difficulty": 3,
    "question": "Qu'appelle-t-on instabilité dynamique des microtubules ?",
    "choices": [
-    "L'alternance de croissance et de raccourcissement rapide à l'extrémité plus, liée au GTP de la tubuline",
-    "La conversion des microtubules en filaments d'actine pendant la mitose, sous contrôle du centrosome",
-    "La rotation continue des protofilaments autour de l'axe du microtubule, grâce à la dynéine ciliaire",
-    "La polymérisation exclusive à l'extrémité moins, sans aucune phase de raccourcissement du microtubule"
+    "L'alternance de croissance et de raccourcissement rapide, liée au GTP de la tubuline",
+    "La conversion des microtubules en filaments d'actine pendant la mitose",
+    "La rotation continue des protofilaments autour de l'axe du tube, grâce à la dynéine",
+    "La polymérisation exclusive à l'extrémité moins, sans aucune phase de raccourcissement du tube"
    ],
    "answer": "A",
    "explanation": "Les microtubules passent de la croissance à la dépolymérisation (catastrophe) selon l'état du GTP lié à la tubuline β.",
@@ -393,29 +393,13 @@
    "difficulty": 1,
    "question": "Quelle différence caractérise un oncogène activé et un gène suppresseur de tumeur muté ?",
    "choices": [
-    "Les deux se comportent comme des mutations récessives sans effet sur le cycle",
-    "L'oncogène résulte d'une perte de fonction, le suppresseur d'un gain de fonction",
-    "Les deux exigent la perte des deux allèles pour agir sur la prolifération",
+    "Ils se comportent comme des mutations récessives sans effet sur le cycle cellulaire",
+    "Oncogène : perte de fonction (deux allèles) ; suppresseur : gain de fonction (un allèle)",
+    "Ils exigent tous deux la perte des deux allèles pour agir sur la prolifération",
     "Oncogène : gain de fonction (un allèle suffit) ; suppresseur : perte de fonction (deux allèles)"
    ],
    "answer": "D",
    "explanation": "Un oncogène agit de façon dominante au niveau cellulaire ; un suppresseur doit en général perdre ses deux copies pour que la cellule échappe au contrôle.",
-   "source": "Cours de licence de biologie cellulaire, famille Alberts (Biologie moléculaire de la cellule)",
-   "verif": "import"
-  },
-  {
-   "course": "l3-bio",
-   "category": "cancer : oncogènes et gènes suppresseurs",
-   "difficulty": 2,
-   "question": "Après une lésion de l'ADN, comment p53 provoque-t-elle l'arrêt du cycle en G1 ?",
-   "choices": [
-    "Elle stimule la transcription de p21, inhibiteur des complexes cycline-CDK",
-    "Elle inhibe la transcription de p21, ce qui libère E2F",
-    "Elle phosphoryle directement l'ADN lésé et le répare",
-    "Elle stimule la transcription de la cycline D, qui active Rb"
-   ],
-   "answer": "A",
-   "explanation": "p53 active le gène CDKN1A (p21), qui inhibe les CDK et laisse du temps à la réparation de l'ADN.",
    "source": "Cours de licence de biologie cellulaire, famille Alberts (Biologie moléculaire de la cellule)",
    "verif": "import"
   },
@@ -444,7 +428,7 @@
     "Le gène Rb est lié au chromosome X, ce qui donne une expression bilatérale de la tumeur",
     "Un oncogène dominant est transmis, et une seule mutation de Rb est ensuite sans effet sur la tumeur",
     "Le premier allèle muté est présent partout, un seul événement somatique suffit ensuite",
-    "Les deux allèles sont déjà mutés à la naissance dans toutes les cellules de la rétine de l'enfant"
+    "Chaque allèle est déjà muté à la naissance dans toutes les cellules de la rétine de l'enfant"
    ],
    "answer": "C",
    "explanation": "Les formes héréditaires ont déjà un coup germinal ; un second coup somatique dans une rétinoblaste suffit, d'où des tumeurs précoces et multiples.",
@@ -489,10 +473,10 @@
    "difficulty": 2,
    "question": "Quel événement mitochondrial déclenche la voie intrinsèque de l'apoptose ?",
    "choices": [
-    "L'entrée de calcium, qui active le récepteur Fas à la surface de la cellule",
+    "L'entrée de calcium, qui active le récepteur Fas à la surface de la cellule en apoptose",
     "La libération de cytochrome c, qui forme avec Apaf-1 l'apoptosome activant la caspase-9",
-    "La libération d'ATP, qui active la caspase-8 par fixation à FADD",
-    "La fusion des mitochondries, qui libère Bcl-2 dans le noyau"
+    "La libération d'ATP, qui active la caspase-8 par fixation à la protéine adaptatrice FADD",
+    "La fusion des mitochondries, qui libère la protéine Bcl-2 dans le noyau de la cellule"
    ],
    "answer": "B",
    "explanation": "La perméabilisation de la membrane mitochondriale externe libère le cytochrome c ; l'apoptosome active la caspase-9, puis les caspases effectrices.",
@@ -537,10 +521,10 @@
    "difficulty": 4,
    "question": "Que se passe-t-il quand le facteur MyoD est exprimé de force dans des fibroblastes ?",
    "choices": [
-    "Ils entrent en apoptose rapidement, car MyoD active directement la caspase-9 dans la mitochondrie",
+    "Ils entrent en apoptose rapidement, car MyoD active directement la caspase-9 mitochondriale",
     "Ils s'engagent dans la voie musculaire, car MyoD active des gènes myogéniques",
     "Ils deviennent des neurones, car MyoD active les gènes de la neurogenèse chez les mammifères",
-    "Ils restent inchangés, car MyoD agit seulement dans des cellules qui sont déjà des cellules musculaires"
+    "Ils restent inchangés, car MyoD agit seulement dans des cellules déjà de type musculaire"
    ],
    "answer": "B",
    "explanation": "MyoD est un régulateur maître : exprimé dans des fibroblastes, il peut les convertir en cellules de type musculaire.",
@@ -633,10 +617,10 @@
    "difficulty": 1,
    "question": "Sur quel principe repose le séquençage d'ADN de Sanger ?",
    "choices": [
-    "Des didésoxynucléotides arrêtent l'élongation et donnent des fragments de longueurs échelonnées",
+    "Des didésoxynucléotides arrêtent l'élongation et donnent des fragments de tailles échelonnées",
     "L'hybridation d'oligonucléotides marqués sur une matrice d'ADN fixée sur une membrane de nylon",
-    "L'hydrolyse sélective de l'ADN par des enzymes de restriction à des sites choisis, puis lecture sur gel",
-    "Le passage de l'ADN simple brin à travers un nanopore dont on mesure les variations de courant"
+    "L'hydrolyse sélective de l'ADN par des enzymes de restriction, puis lecture sur gel",
+    "Le passage de l'ADN simple brin dans un nanopore dont on mesure le courant"
    ],
    "answer": "A",
    "explanation": "Les ddNTP n'ont pas de 3'-OH : la polymérase s'arrête après leur incorporation, ce qui fournit les fragments à lire.",
@@ -649,9 +633,9 @@
    "difficulty": 1,
    "question": "Quelle succession d'étapes décrit un cycle de PCR ?",
    "choices": [
-    "Élongation vers 72 °C, puis digestion par une enzyme de restriction, puis hybridation",
-    "Dénaturation vers 37 °C, élongation par la transcriptase inverse, puis hybridation",
-    "Hybridation des amorces, dénaturation vers 95 °C, puis ligature par une ADN ligase",
+    "Élongation vers 72 °C, puis digestion par une enzyme de restriction, puis hybridation des amorces",
+    "Dénaturation vers 37 °C, élongation par la transcriptase inverse, puis hybridation des amorces",
+    "Hybridation des amorces, dénaturation vers 95 °C, puis ligature par une ADN ligase thermostable",
     "Dénaturation vers 95 °C, hybridation des amorces, puis élongation par une polymérase thermostable"
    ],
    "answer": "D",
@@ -665,10 +649,10 @@
    "difficulty": 4,
    "question": "Dans le séquençage Illumina, comment la séquence est-elle lue ?",
    "choices": [
-    "Par ligature de nucléotides tous marqués, sans terminateur, sur des gouttes en émulsion",
-    "Par synthèse, à l'aide de nucléotides fluorescents terminateurs réversibles sur des amplifiats fixés",
-    "Par hydrolyse de l'ADN fixé sur la plaque suivie d'une lecture au spectromètre de masse",
-    "Par la mesure de la variation de courant d'un pore protéique traversé par l'ADN"
+    "Par ligature de nucléotides tous marqués, sans terminateur, sur des gouttes en émulsion d'huile",
+    "Par synthèse, avec des nucléotides fluorescents terminateurs réversibles sur des amplifiats fixés",
+    "Par hydrolyse de l'ADN fixé sur la plaque, suivie d'une lecture au spectromètre de masse",
+    "Par mesure de la variation de courant d'un pore protéique traversé par l'ADN simple brin"
    ],
    "answer": "B",
    "explanation": "Chaque cycle incorpore un nucléotide terminateur marqué, on lit sa fluorescence, puis le terminateur est clivé pour passer au suivant.",
@@ -713,10 +697,10 @@
    "difficulty": 1,
    "question": "Quelle est la différence entre un alignement global et un alignement local de séquences ?",
    "choices": [
-    "L'alignement global est réservé aux protéines ; le local est réservé à l'ADN",
-    "L'alignement global couvre les séquences entières ; le local ne retient que les régions les plus similaires",
-    "L'alignement global suppose des gaps interdits ; le local n'autorise que des gaps",
-    "L'alignement global ne compare que des régions codantes ; le local compare des génomes entiers"
+    "L'alignement global est réservé aux protéines ; le local, à l'ADN",
+    "L'alignement global couvre les séquences entières ; le local, les régions les plus similaires",
+    "L'alignement global interdit les gaps ; le local autorise les gaps",
+    "L'alignement global ne compare que des régions codantes ; le local, des génomes entiers"
    ],
    "answer": "B",
    "explanation": "Needleman-Wunsch aligne de bout en bout ; Smith-Waterman recherche les meilleurs segments similaires.",
@@ -730,7 +714,7 @@
    "question": "Que représente la valeur E (E-value) d'un résultat BLAST ?",
    "choices": [
     "Le pourcentage de résidus identiques sur l'ensemble de l'alignement entre les deux séquences",
-    "La probabilité que la séquence requête soit homologue de la séquence trouvée dans la banque de données",
+    "La probabilité que la séquence requête soit homologue de la séquence trouvée dans la banque",
     "Le nombre de gaps introduits dans l'alignement pour maximiser le score global obtenu",
     "Le nombre d'alignements de score égal ou supérieur attendus par hasard dans la banque"
    ],
@@ -747,7 +731,7 @@
    "choices": [
     "Le 0 évite la division par zéro lors du calcul de la valeur E de l'alignement obtenu",
     "Le score reste positif ou nul, ce qui permet de reprendre un alignement local à tout endroit",
-    "Le score de chaque cellule est ramené à 0 pour forcer l'alignement à rester global sur toute la longueur",
+    "Le score de chaque cellule est ramené à 0 pour forcer l'alignement à rester global sur la longueur",
     "Le 0 représente la pénalité de gap, qui doit toujours être appliquée à chaque insertion ou délétion"
    ],
    "answer": "B",
@@ -796,7 +780,7 @@
     "Elle reconnaît une courte séquence d'ADN, souvent palindromique, et coupe dans ou près de ce site",
     "Elle reconnaît les codons stop dans les gènes et coupe l'ADN quelques nucléotides en aval",
     "Elle reconnaît la queue poly(A) des ARN messagers et coupe le premier intron de chaque transcrit",
-    "Elle reconnaît n'importe quelle séquence d'ADN et coupe à intervalles réguliers de 1 000 paires de bases"
+    "Elle reconnaît n'importe quelle séquence d'ADN et coupe à intervalles réguliers de 1 000 pb"
    ],
    "answer": "A",
    "explanation": "Les enzymes de type II (EcoRI, par exemple) coupent l'ADN à des sites spécifiques, souvent palindromiques.",
@@ -857,9 +841,9 @@
    "difficulty": 4,
    "question": "Pourquoi digère-t-on vecteur et insert par deux enzymes différentes dans un clonage directionnel ?",
    "choices": [
-    "Les deux enzymes permettent de se passer de gène de sélection dans le vecteur de clonage",
-    "Les deux enzymes doublent le nombre de copies du plasmide dans la bactérie hôte après transformation",
-    "Les deux enzymes remplacent la ligase pour sceller les extrémités du vecteur et de l'insert",
+    "Ces enzymes permettent de se passer de gène de sélection dans le vecteur de clonage",
+    "Ces enzymes doublent le nombre de copies du plasmide dans la bactérie hôte après transformation",
+    "Ces enzymes remplacent la ligase pour sceller les extrémités du vecteur et de l'insert",
     "Les extrémités incompatibles empêchent la recircularisation du vecteur et orientent l'insert"
    ],
    "answer": "D",
@@ -889,10 +873,10 @@
    "difficulty": 2,
    "question": "Dans la focalisation isoélectrique, où une protéine cesse-t-elle de migrer ?",
    "choices": [
-    "À la position où le pH est égal à 7, quelle que soit la protéine",
-    "À l'extrémité du gel proche de l'anode, où elle se dépose",
+    "À la position où le pH est égal à 7, quelle que soit la protéine analysée sur le gel",
+    "À l'extrémité du gel proche de l'anode, où elle se dépose après la migration",
     "À la position où le pH est égal à son point isoélectrique, charge nette nulle",
-    "À la position où sa masse est égale à celle du marqueur de taille"
+    "À la position où sa masse est égale à celle du marqueur de taille déposé sur le gel"
    ],
    "answer": "C",
    "explanation": "Dans un gradient de pH, une protéine migre jusqu'à pH = pI, où sa charge nette est nulle.",
@@ -1017,10 +1001,10 @@
    "difficulty": 5,
    "question": "Que provoque le 2,4-dinitrophénol (découplant) dans des mitochondries qui oxydent un substrat ?",
    "choices": [
-    "La consommation d'O2 continue et le gradient augmente, avec plus d'ATP et de chaleur",
-    "La consommation d'O2 s'arrête et le gradient de protons augmente, avec plus d'ATP",
+    "La consommation d'O2 continue et le gradient de protons augmente, avec plus d'ATP et de chaleur",
+    "La consommation d'O2 s'arrête et le gradient de protons augmente, avec plus d'ATP produit",
     "La consommation d'O2 continue mais le gradient de protons se dissipe : moins d'ATP, plus de chaleur",
-    "La consommation d'O2 s'arrête, car le substrat n'est plus oxydé, sans variation de l'ATP"
+    "La consommation d'O2 s'arrête, car le substrat n'est plus oxydé, et l'ATP reste inchangé"
    ],
    "answer": "C",
    "explanation": "Le découplant ramène les protons dans la matrice sans passer par l'ATP synthase : la chaîne fonctionne, l'énergie est perdue en chaleur.",
@@ -1114,9 +1098,9 @@
    "question": "Comment l'insuline abaisse-t-elle la glycémie dans le muscle et le tissu adipeux ?",
    "choices": [
     "Elle bloque GLUT4 dans la membrane plasmique, ce qui retient le glucose dans le sang",
-    "Elle provoque l'insertion de transporteurs GLUT4 dans la membrane, ce qui accroît l'entrée du glucose",
-    "Elle stimule la néoglucogenèse dans ces cellules, ce qui consomme le glucose circulant",
-    "Elle active la glycogène phosphorylase dans ces cellules, ce qui libère du glucose dans le sang"
+    "Elle provoque l'insertion de transporteurs GLUT4 dans la membrane, d'où une entrée accrue de glucose",
+    "Elle stimule la néoglucogenèse, ce qui consomme le glucose circulant",
+    "Elle active la glycogène phosphorylase, ce qui libère du glucose dans le sang"
    ],
    "answer": "B",
    "explanation": "La fixation de l'insuline déclenche la translocation de GLUT4 vers la membrane, d'où une captation accrue du glucose.",
@@ -1178,9 +1162,9 @@
    "question": "Quelle est la différence de présentation entre les molécules du CMH de classe I et de classe II ?",
    "choices": [
     "La classe I présente des lipides aux lymphocytes B, la classe II des glucides aux lymphocytes T",
-    "La classe I est exprimée seulement par les cellules présentatrices professionnelles, la classe II par toutes les cellules",
-    "La classe I présente des peptides endogènes aux lymphocytes T CD8+, la classe II des peptides exogènes aux CD4+",
-    "La classe I présente des peptides exogènes aux lymphocytes T CD4+, la classe II des peptides endogènes aux CD8+"
+    "La classe I est exprimée seulement par les cellules présentatrices, la classe II par toutes",
+    "La classe I présente des peptides endogènes aux lymphocytes CD8+, la classe II des exogènes aux CD4+",
+    "La classe I présente des peptides exogènes aux CD4+, la classe II des peptides endogènes aux CD8+"
    ],
    "answer": "C",
    "explanation": "Les CMH I, présents sur presque toutes les cellules nucléées, interagissent avec CD8 ; les CMH II, sur les cellules présentatrices, avec CD4.",
@@ -1209,10 +1193,10 @@
    "difficulty": 3,
    "question": "Quel mécanisme permet à un lymphocyte B de passer de la production d'IgM à celle d'IgG sans changer de spécificité ?",
    "choices": [
-    "L'hypermutation somatique, qui remplace le domaine variable de la chaîne lourde et garde la région constante",
-    "La commutation de classe, qui remplace la région constante de la chaîne lourde et garde le domaine variable",
-    "L'épissage alternatif des chaînes légères, qui échange entre elles les régions variables d'un anticorps",
-    "La recombinaison V(D)J, qui échange la région constante de la chaîne lourde au hasard dans la cellule"
+    "L'hypermutation somatique, qui change le domaine variable, région constante gardée",
+    "La commutation de classe, qui change la région constante, domaine variable gardé",
+    "L'épissage alternatif des chaînes légères, qui échange entre elles les régions variables",
+    "La recombinaison V(D)J, qui échange au hasard la région constante"
    ],
    "answer": "B",
    "explanation": "La recombinaison de commutation (avec l'enzyme AID) change l'isotype de la chaîne lourde ; la spécificité de l'antigène reste identique.",
@@ -1273,10 +1257,10 @@
    "difficulty": 2,
    "question": "Quelles molécules de surface permettent l'entrée du VIH dans un lymphocyte T auxiliaire ?",
    "choices": [
-    "Le récepteur Fas et le corécepteur FADD",
+    "Le récepteur Fas et le corécepteur FADD de la cellule",
     "Le récepteur CD4 et un corécepteur (CCR5 ou CXCR4)",
-    "Le CMH II et le corécepteur CD28",
-    "Le récepteur CD8 et le corécepteur TAP"
+    "Le CMH II et le corécepteur CD28 du lymphocyte",
+    "Le récepteur CD8 et le corécepteur TAP des cellules"
    ],
    "answer": "B",
    "explanation": "La gp120 se lie à CD4, puis au corécepteur CCR5 ou CXCR4, ce qui permet la fusion avec la gp41.",
@@ -1305,10 +1289,10 @@
    "difficulty": 3,
    "question": "Pourquoi le virus de l'hépatite C varie-t-il beaucoup au sein d'un même patient ?",
    "choices": [
-    "Son génome est de l'ADN double brin, réparé de façon imparfaite par la cellule",
-    "Il s'intègre à l'ADN de l'hôte, ce qui accroît ses mutations",
+    "Son génome est de l'ADN double brin, réparé de façon imparfaite par les enzymes de la cellule",
+    "Il s'intègre dans l'ADN de l'hôte, ce qui augmente fortement son taux de mutation",
     "Sa polymérase ARN-dépendante n'a pas de relecture, ce qui produit de nombreuses mutations",
-    "Son génome est segmenté, ce qui permet des réassortiments fréquents"
+    "Son génome est segmenté, ce qui permet des réassortiments fréquents entre souches virales"
    ],
    "answer": "C",
    "explanation": "Le VHC est un virus à ARN simple brin positif dont la polymérase est peu fidèle, ce qui entretient une grande diversité de variants.",
@@ -1401,10 +1385,10 @@
    "difficulty": 4,
    "question": "Pourquoi associe-t-on plusieurs antibiotiques dans le traitement de la tuberculose ?",
    "choices": [
-    "Pour obtenir une action immédiate sur toutes les bactéries, y compris celles qui sont au repos total",
+    "Pour obtenir une action immédiate sur toutes les bactéries, même celles au repos total",
     "Pour supprimer la résistance déjà présente dans le génome de toutes les mycobactéries du patient",
-    "Pour réduire la sélection de mutants résistants, une résistance simultanée à plusieurs molécules étant rare",
-    "Pour que les antibiotiques se transforment en une molécule unique plus active contre la paroi bactérienne"
+    "Pour limiter la sélection de mutants résistants, une résistance à plusieurs molécules étant rare",
+    "Pour que les antibiotiques fusionnent en une seule molécule plus active"
    ],
    "answer": "C",
    "explanation": "Un mutant résistant à un médicament est sélectionné en monothérapie ; plusieurs molécules rendent l'émergence d'un mutant résistant à toutes très improbable.",
@@ -1641,10 +1625,10 @@
    "difficulty": 2,
    "question": "Quel effet génétique la fragmentation d'un habitat forestier a-t-elle sur une population animale ?",
    "choices": [
-    "Elle augmente la diversité génétique de chaque fragment grâce à l'isolement",
-    "Elle accroît le flux de gènes entre sous-populations, ce qui homogénéise leur diversité",
-    "Elle supprime la dérive génétique, car les populations sont plus petites",
-    "Elle isole les sous-populations, réduit le flux de gènes et accroît la dérive et la consanguinité"
+    "Elle augmente la diversité génétique de chaque fragment grâce à l'isolement des sous-populations",
+    "Elle accroît le flux de gènes entre sous-populations, ce qui homogénéise leur diversité génétique",
+    "Elle supprime la dérive génétique, car les populations de chaque fragment sont plus petites",
+    "Elle isole les sous-populations, réduit le flux de gènes et accroît dérive et consanguinité"
    ],
    "answer": "D",
    "explanation": "De petites populations isolées perdent de la diversité par dérive et subissent plus de consanguinité.",
@@ -1689,10 +1673,10 @@
    "difficulty": 3,
    "question": "Pourquoi la disparition de l'éléphant de forêt peut-elle modifier la composition des forêts d'Afrique centrale ?",
    "choices": [
-    "Il pollinise les fleurs de la canopée, ce qui assure la reproduction des arbres",
+    "Il pollinise les fleurs de la canopée forestière, ce qui assure la reproduction de nombreux arbres",
     "Il disperse les graines de nombreux arbres à gros fruits, qui perdent un agent de dispersion",
-    "Il consomme les herbivores concurrents, ce qui régule leurs populations",
-    "Il fixe l'azote dans le sol, ce qui nourrit les jeunes arbres"
+    "Il consomme des herbivores concurrents dans le sous-bois, ce qui régule leurs populations",
+    "Il fixe l'azote atmosphérique dans le sol, ce qui nourrit les jeunes arbres de la forêt"
    ],
    "answer": "B",
    "explanation": "En avalant des fruits et en rejetant les graines, l'éléphant de forêt contribue à la régénération de certaines essences.",
@@ -1721,10 +1705,10 @@
    "difficulty": 2,
    "question": "Que signifie la colinéarité des gènes Hox ?",
    "choices": [
-    "Les gènes Hox s'expriment dans l'ordre inverse de leur position sur le chromosome, de l'arrière vers l'avant",
+    "Les gènes Hox s'expriment dans l'ordre inverse de leur position sur le chromosome",
     "Les gènes Hox sont répartis sur des chromosomes différents, selon la fonction de chaque gène",
-    "L'ordre des gènes sur le chromosome reproduit l'ordre de leur expression antéro-postérieur",
-    "Tous les gènes Hox s'expriment au même endroit de l'embryon, quel que soit leur ordre sur le chromosome"
+    "L'ordre des gènes sur le chromosome reproduit l'ordre de leur expression le long de l'axe",
+    "L'ensemble des gènes Hox s'expriment au même endroit de l'embryon, quel que soit leur ordre"
    ],
    "answer": "C",
    "explanation": "Les gènes en 3' s'expriment plus antérieurement ; ceux en 5' plus postérieurement.",
@@ -1799,22 +1783,6 @@
    "course": "l3-bio",
    "category": "physiologie végétale : hormones et stress",
    "difficulty": 1,
-   "question": "Comment l'auxine explique-t-elle le phototropisme positif de la tige ?",
-   "choices": [
-    "Elle reste répartie uniformément, la courbure vient seulement de l'évaporation",
-    "Elle est détruite du côté ombragé, ce qui bloque la division cellulaire",
-    "Elle s'accumule du côté ombragé, où elle stimule davantage l'élongation cellulaire",
-    "Elle s'accumule du côté éclairé, où elle stimule davantage l'élongation cellulaire"
-   ],
-   "answer": "C",
-   "explanation": "La croissance plus rapide du côté ombragé courbe la tige vers la lumière.",
-   "source": "Botanique et physiologie végétale, famille Raven",
-   "verif": "import"
-  },
-  {
-   "course": "l3-bio",
-   "category": "physiologie végétale : hormones et stress",
-   "difficulty": 1,
    "question": "Quelle hormone végétale gazeuse accélère la maturation des fruits ?",
    "choices": [
     "La gibbérelline",
@@ -1833,10 +1801,10 @@
    "difficulty": 4,
    "question": "Dans une culture de tissus de tabac, que provoque un rapport cytokinine/auxine élevé dans le milieu ?",
    "choices": [
-    "La formation d'un cal non différencié, quel que soit le rapport",
+    "La formation d'un cal non différencié, quel que soit le rapport entre les deux hormones",
     "La formation de bourgeons et de tiges, alors qu'un rapport faible favorise les racines",
-    "La formation de racines, alors qu'un rapport faible favorise les bourgeons",
-    "La mort des cellules, quel que soit le rapport"
+    "La formation de racines, alors qu'un rapport faible favorise les bourgeons et les tiges",
+    "La mort des cellules du cal, quel que soit le rapport entre les deux hormones du milieu"
    ],
    "answer": "B",
    "explanation": "Skoog et Miller ont montré que le rapport entre les deux hormones oriente l'organogenèse.",
@@ -1849,9 +1817,9 @@
    "difficulty": 3,
    "question": "Comment les gibbérellines déclenchent-elles la mobilisation des réserves d'une graine de céréale ?",
    "choices": [
-    "Elles inhibent la germination, par l'accumulation d'acide abscissique",
-    "Elles inhibent l'α-amylase dans la couche à aleurone, ce qui conserve l'amidon",
-    "Elles induisent la synthèse de lipase dans l'embryon, qui hydrolyse l'amidon",
+    "Elles inhibent la germination par accumulation d'acide abscissique dans l'albumen de la graine",
+    "Elles inhibent l'α-amylase dans la couche à aleurone, ce qui conserve l'amidon de la graine",
+    "Elles induisent la synthèse de lipase dans l'embryon, qui hydrolyse l'amidon de la graine",
     "Elles induisent la synthèse d'α-amylase dans la couche à aleurone, qui hydrolyse l'amidon"
    ],
    "answer": "D",
@@ -1881,10 +1849,10 @@
    "difficulty": 2,
    "question": "Comment Agrobacterium tumefaciens est-il utilisé pour transformer des plantes ?",
    "choices": [
-    "Le T-DNA du plasmide Ti, modifié pour porter le gène voulu, est transféré dans le génome de la cellule végétale",
-    "La bactérie remplace les chloroplastes de la plante par ses propres organites",
-    "Le génome bactérien est fusionné avec celui de la plante par électroporation",
-    "Le plasmide Ti complet est introduit dans le noyau et se réplique indépendamment du génome végétal"
+    "Le T-DNA du plasmide Ti, modifié pour porter le gène voulu, passe dans le génome végétal",
+    "La bactérie remplace les chloroplastes de la plante par ses propres organites photosynthétiques",
+    "Le génome bactérien est fusionné avec celui de la plante par électroporation dans le noyau",
+    "Le plasmide Ti complet entre dans le noyau et se réplique indépendamment du génome de la plante"
    ],
    "answer": "A",
    "explanation": "Agrobacterium transfère naturellement un segment d'ADN (T-DNA) du plasmide Ti ; on remplace les gènes tumoraux par le gène d'intérêt.",
@@ -1929,8 +1897,8 @@
    "difficulty": 1,
    "question": "Dans un test statistique, que représente l'hypothèse nulle H0 ?",
    "choices": [
-    "L'hypothèse que le chercheur souhaite démontrer et dont il cherche à établir la preuve avec ses données",
-    "L'hypothèse qui affirme qu'il existe une différence d'au moins 5 % entre les groupes comparés",
+    "L'hypothèse que le chercheur souhaite démontrer et dont il cherche à établir la preuve",
+    "L'hypothèse qui affirme qu'il existe une différence d'au moins 5 % entre les groupes",
     "L'hypothèse que l'échantillon est trop petit pour que l'on puisse conclure à un effet",
     "L'absence d'effet ou de différence, que l'on cherche à réfuter grâce aux données"
    ],
