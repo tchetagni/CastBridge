@@ -525,6 +525,7 @@ fun TransferQueueCard() {
     val cs = MaterialTheme.colorScheme
     val queue by TransferQueue.items.collectAsState()
     val note by TransferQueue.note.collectAsState()
+    val wdLine by AutoWifiDirect.line.collectAsState()
     // R-12: a file not copied because the TV already holds the same content stays shown with its line and « Copier quand même » (once)
     val shownQueue = queue.filter { it.status == castbridge.core.tv.QueueStatus.WAITING || it.status == castbridge.core.tv.QueueStatus.RUNNING || it.status == castbridge.core.tv.QueueStatus.FAILED ||
         (it.status == castbridge.core.tv.QueueStatus.DONE && it.note != null) }
@@ -535,6 +536,14 @@ fun TransferQueueCard() {
                 val waiting = shownQueue.count { it.status == castbridge.core.tv.QueueStatus.WAITING }
                 Text("File d'attente des envois" + if (waiting > 0) " · $waiting en attente" else "", style = MaterialTheme.typography.labelLarge, color = cs.primary)
                 note?.let { Text(it, style = MaterialTheme.typography.bodySmall, color = cs.onSurfaceVariant) }
+                // R-14: the honest route line (« Par Wi-Fi Direct (automatique) » green, « Bluetooth seulement : lent » orange, red only when nothing works)
+                wdLine?.let { l ->
+                    val c = when (l.level) { castbridge.core.ux.SignalLevel.GREEN -> androidx.compose.ui.graphics.Color(0xFF2E9E5B)
+                        castbridge.core.ux.SignalLevel.ORANGE -> androidx.compose.ui.graphics.Color(0xFFE06A00); castbridge.core.ux.SignalLevel.RED -> cs.error
+                        castbridge.core.ux.SignalLevel.BLACK -> cs.onSurfaceVariant }
+                    Text(l.level.word + " · " + l.text, style = MaterialTheme.typography.bodySmall, color = c)
+                    l.detail?.let { Text(it, style = MaterialTheme.typography.bodySmall, color = cs.onSurfaceVariant) }
+                }
                 // in the order they will run: the running one, the waiting ones (« Copier et lire » first), then the failures
                 val sorted = shownQueue.filter { it.status == castbridge.core.tv.QueueStatus.RUNNING } + order + shownQueue.filter { it.status == castbridge.core.tv.QueueStatus.FAILED } +
                     shownQueue.filter { it.status == castbridge.core.tv.QueueStatus.DONE }

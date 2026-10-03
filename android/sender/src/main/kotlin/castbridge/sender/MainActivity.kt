@@ -149,6 +149,7 @@ class MainActivity : ComponentActivity() {
             }
         }
         MoveHandler()
+        AutoWifiDirectAsker()       // R-14: the one just-in-time request of the automatic Wi-Fi Direct (permission, or the Wi-Fi panel)
         if (settings) SettingsScreen { settings = false }
     }
 

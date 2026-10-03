@@ -26,8 +26,8 @@ class BtServer(
     private val ctx: Context,
     private val dir: File,
     private val guard: PinGuard,
-    /** Answers "is there a faster link?" (CBTN): addresses of the TV and its Wi-Fi Direct group. */
-    private val negotiate: ((Boolean) -> castbridge.core.tv.LinkInfo)? = null,
+    /** Answers "is there a faster link?" (CBTN): (peer address proven by the paired link, flags) -> addresses of the TV and its Wi-Fi Direct group. */
+    private val negotiate: ((String, Int) -> castbridge.core.tv.LinkInfo)? = null,
     /** Plug and play (CBTH): (peer address, peer name, asks to be trusted) -> answer. The peer is the socket's paired device, never a claim. */
     private val hello: ((String, String?, Boolean) -> castbridge.core.tv.HelloReply)? = null,
     /** Trusted phone (registered AND still paired): its PIN field is not checked. */
@@ -118,7 +118,7 @@ class BtServer(
                 sink?.progress(name, done, total)
                 val pct = (done * 100 / total).toInt()
                 if (pct != lastPct) { lastPct = pct; status("Bluetooth : réception de $name $pct %") }
-            }, negotiate = negotiate, remote = { i, o -> status("Bluetooth : télécommande du téléphone connectée"); RemoteHub.serveBt(i, o) { last.set(System.currentTimeMillis()) } },
+            }, negotiateFlags = negotiate, remote ={ i, o -> status("Bluetooth : télécommande du téléphone connectée"); RemoteHub.serveBt(i, o) { last.set(System.currentTimeMillis()) } },
                 hello = hello?.let { h -> { p, req -> wasHello = true; idleLimit.set(90_000); last.set(System.currentTimeMillis())
                     val name = runCatching { sock.remoteDevice.name }.getOrNull()
                     h(p, name, req).also { last.set(System.currentTimeMillis()) } } },

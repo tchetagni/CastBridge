@@ -118,10 +118,12 @@ object TvLinkManager {
         creds = app.getSharedPreferences("castbridge_trust", Context.MODE_PRIVATE)
         saved = SavedTvs(PrefsPersistence(creds, "tvs"))
         linkEnv = AndroidLinkEnv(app) { foreground }
-        driver = LinkDriver(PhoneLink(AndroidBtTransport(app), linkEnv::probe, { Build.VERSION.SDK_INT >= 29 },
+        // R-14: the control route never picks a Wi-Fi Direct group it has not joined (its address would not answer); the bulk plane joins it when it is
+        // worth it (AutoWifiDirect, core BulkRoute) and the control stays on Bluetooth meanwhile
+        driver = LinkDriver(PhoneLink(AndroidBtTransport(app), linkEnv::probe, { false },
             tunnelBase = { BtSshGatewayService.apiBase(saved.default()?.address) }),     // route of last resort: the TV's API through the Bluetooth gateway
             linkEnv, saved, PrefsLinkStore(creds),
-            canJoinWifiDirect = { Build.VERSION.SDK_INT >= 29 })
+            canJoinWifiDirect = { false })
         if (_state.value is LinkUi.NoTv) publish(null)       // the first HELLO takes seconds: until then « Vérification… » for a saved TV, not the initial NoTv
         if (saved.list().isNotEmpty()) LinkJobService.schedulePeriodic(app)
     }
@@ -159,7 +161,7 @@ object TvLinkManager {
         scope.launch {
             try {
                 if (!castbridge.owner.TvBluetooth.permitted(app)) return@launch
-                val link = PhoneLink(AndroidBtTransport(app), linkEnv::probe, { Build.VERSION.SDK_INT >= 29 })
+                val link = PhoneLink(AndroidBtTransport(app), linkEnv::probe, { false })
                 for (c in castbridge.owner.TvBluetooth.pairedTvs(app)) {
                     if (saved.list().isNotEmpty()) break
                     val tv = SavedTv(TrustRegistry.norm(c.address), c.name.ifBlank { "Ma TV" }, addedAt = System.currentTimeMillis())
@@ -324,7 +326,7 @@ object TvLinkManager {
         val address = TrustRegistry.norm(candidate.address)
         // the install id of an earlier pairing is meaningless for a new one: do not claim it
         val tv0 = (saved.get(address) ?: SavedTv(address, candidate.name.ifBlank { "Ma TV" }, addedAt = System.currentTimeMillis())).copy(installId = null)
-        val flow = PairFlow(PhoneLink(AndroidBtTransport(app), linkEnv::probe, { Build.VERSION.SDK_INT >= 29 }), AndroidPairEnv(app, linkEnv))
+        val flow = PairFlow(PhoneLink(AndroidBtTransport(app), linkEnv::probe, { false }), AndroidPairEnv(app, linkEnv))
         val r = flow.run(tv0, onStep)
         if (r is PairStep.Done) { LinkJobService.schedulePeriodic(app); driver.adopt(r.session); publish(driver.step(Trigger.USER)); poke() }
     }

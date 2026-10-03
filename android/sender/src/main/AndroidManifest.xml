@@ -13,6 +13,9 @@
     <!-- Wi-Fi Direct channel (WifiNetworkSpecifier) -->
     <uses-permission android:name="android.permission.CHANGE_NETWORK_STATE" />
     <uses-permission android:name="android.permission.CHANGE_WIFI_STATE" />
+    <!-- « Seul le Bluetooth » : Wi-Fi Direct automatique (Android 13+, WifiP2pManager.connect, sans boîte de dialogue) ; jamais pour localiser -->
+    <uses-permission android:name="android.permission.NEARBY_WIFI_DEVICES" android:usesPermissionFlags="neverForLocation" />
+    <uses-feature android:name="android.hardware.wifi.direct" android:required="false" />
     <!-- Bluetooth channel to CastBridge TV -->
     <uses-permission android:name="android.permission.BLUETOOTH" android:maxSdkVersion="30" />
     <uses-permission android:name="android.permission.BLUETOOTH_ADMIN" android:maxSdkVersion="30" />

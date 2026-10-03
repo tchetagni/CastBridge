@@ -681,6 +681,9 @@ class PlayerActivity : Activity(), TvService.Screen {
         val wanted = buildList {
             if (Build.VERSION.SDK_INT >= 31) { add(Manifest.permission.BLUETOOTH_CONNECT); add(Manifest.permission.BLUETOOTH_ADVERTISE) }
             if (Build.VERSION.SDK_INT >= 33) add(Manifest.permission.POST_NOTIFICATIONS)   // "ouvrez CastBridge TV" when asked from the phone
+            // « Seul le Bluetooth » (docs/agent-reports/auto-wifi-direct.md): the automatic Wi-Fi Direct group needs it; same « Appareils à proximité » group as
+            // BLUETOOTH_CONNECT (one answer for both), neverForLocation. Nothing starts a group until a trusted phone asks.
+            if (Build.VERSION.SDK_INT >= 33) add(Manifest.permission.NEARBY_WIFI_DEVICES)
         }.filter { checkSelfPermission(it) != PackageManager.PERMISSION_GRANTED }
         if (wanted.isEmpty()) svc?.onPermissionsReady()
         else runCatching { requestPermissions(wanted.toTypedArray(), REQ_PERMS) }.onFailure { svc?.onPermissionsReady() }
