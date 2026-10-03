@@ -1,0 +1,2007 @@
+{
+ "batch": "higher-l1-physique-02",
+ "author": "Claude",
+ "date": "2026-10-03",
+ "questions": [
+  {
+   "course": "l1-phys",
+   "category": "mécanique du point : cinématique, repères et vecteurs",
+   "difficulty": 1,
+   "question": "Que représente la dérivée du vecteur vitesse par rapport au temps ?",
+   "choices": [
+    "Le vecteur accélération",
+    "Le vecteur position",
+    "L'énergie cinétique",
+    "La quantité de mouvement"
+   ],
+   "answer": "A",
+   "explanation": "L'accélération est le taux de variation de la vitesse : a = dv/dt.",
+   "source": "Cours de physique générale de licence (mécanique), famille Feynman Lectures",
+   "verif": "import"
+  },
+  {
+   "course": "l1-phys",
+   "category": "mécanique du point : cinématique, repères et vecteurs",
+   "difficulty": 2,
+   "question": "Que vaut le produit vectoriel de deux vecteurs non nuls parallèles ?",
+   "choices": [
+    "Un scalaire égal au produit scalaire",
+    "Un vecteur de norme égale à la somme des normes",
+    "Un vecteur de norme égale au produit des normes",
+    "Le vecteur nul"
+   ],
+   "answer": "D",
+   "explanation": "La norme du produit vectoriel contient sin θ, qui est nul si θ = 0° ou 180°.",
+   "source": "Cours de mécanique de licence, famille Kleppner-Kolenkow",
+   "verif": "import"
+  },
+  {
+   "course": "l1-phys",
+   "category": "mécanique du point : cinématique, repères et vecteurs",
+   "difficulty": 2,
+   "question": "Dans un repère cartésien, un point a pour coordonnées (3 ; −4 ; 12) en mètres. À quelle distance est-il de l'origine ?",
+   "choices": [
+    "19 m",
+    "5 m",
+    "13 m",
+    "11 m"
+   ],
+   "answer": "C",
+   "explanation": "d = racine de (9 + 16 + 144) = racine de 169 = 13 m.",
+   "source": "Cours de licence de mécanique du point, famille Halliday-Resnick",
+   "verif": "import"
+  },
+  {
+   "course": "l1-phys",
+   "category": "mécanique du point : cinématique, repères et vecteurs",
+   "difficulty": 3,
+   "question": "Une barque traverse un fleuve en pointant perpendiculairement aux berges à 3 m/s par rapport à l'eau ; le courant est de 4 m/s. Quelle est sa vitesse par rapport aux berges ?",
+   "choices": [
+    "5 m/s",
+    "7 m/s",
+    "3,5 m/s",
+    "1 m/s"
+   ],
+   "answer": "A",
+   "explanation": "Les deux vitesses sont perpendiculaires : v = racine de (9 + 16) = 5 m/s.",
+   "source": "Cours de physique générale de licence (mécanique), famille Feynman Lectures",
+   "verif": "import"
+  },
+  {
+   "course": "l1-phys",
+   "category": "mécanique du point : cinématique, repères et vecteurs",
+   "difficulty": 1,
+   "question": "Quelle est l'unité SI de l'accélération ?",
+   "choices": [
+    "Le newton par seconde",
+    "Le mètre carré par seconde",
+    "Le mètre par seconde",
+    "Le mètre par seconde au carré"
+   ],
+   "answer": "D",
+   "explanation": "Une accélération est une vitesse par unité de temps : m/s².",
+   "source": "Cours de mécanique de licence, famille Kleppner-Kolenkow",
+   "verif": "import"
+  },
+  {
+   "course": "l1-phys",
+   "category": "mouvements rectiligne uniforme et uniformément varié",
+   "difficulty": 1,
+   "question": "Que représente la pente d'une droite sur le graphe position-temps d'un mouvement rectiligne uniforme ?",
+   "choices": [
+    "La durée du mouvement",
+    "La vitesse",
+    "La position initiale",
+    "L'accélération"
+   ],
+   "answer": "B",
+   "explanation": "La pente de x(t) est dx/dt, c'est-à-dire la vitesse.",
+   "source": "Cours de physique générale de licence (mécanique), famille Feynman Lectures",
+   "verif": "import"
+  },
+  {
+   "course": "l1-phys",
+   "category": "mouvements rectiligne uniforme et uniformément varié",
+   "difficulty": 1,
+   "question": "Que représente l'aire sous la courbe vitesse-temps d'un mobile entre deux instants ?",
+   "choices": [
+    "Le déplacement effectué",
+    "L'accélération moyenne",
+    "La force appliquée",
+    "L'énergie cinétique"
+   ],
+   "answer": "A",
+   "explanation": "Le déplacement est l'intégrale de la vitesse sur le temps.",
+   "source": "Cours de mécanique de licence, famille Kleppner-Kolenkow",
+   "verif": "import"
+  },
+  {
+   "course": "l1-phys",
+   "category": "mouvements rectiligne uniforme et uniformément varié",
+   "difficulty": 2,
+   "question": "Un cycliste roule à 6 m/s pendant 10 minutes à vitesse constante. Quelle distance parcourt-il ?",
+   "choices": [
+    "0,36 km",
+    "36 km",
+    "6 km",
+    "3,6 km"
+   ],
+   "answer": "D",
+   "explanation": "d = v·t = 6 × 600 = 3 600 m.",
+   "source": "Cours de licence de mécanique du point, famille Halliday-Resnick",
+   "verif": "import"
+  },
+  {
+   "course": "l1-phys",
+   "category": "mouvements rectiligne uniforme et uniformément varié",
+   "difficulty": 2,
+   "question": "Un mobile passe uniformément de 4 m/s à 10 m/s en 3 s. Quelle est son accélération ?",
+   "choices": [
+    "4,7 m/s²",
+    "3 m/s²",
+    "2 m/s²",
+    "6 m/s²"
+   ],
+   "answer": "C",
+   "explanation": "a = Δv/Δt = 6/3 = 2 m/s².",
+   "source": "Cours de physique générale de licence (mécanique), famille Feynman Lectures",
+   "verif": "import"
+  },
+  {
+   "course": "l1-phys",
+   "category": "mouvements rectiligne uniforme et uniformément varié",
+   "difficulty": 3,
+   "question": "Pour ce même mobile (de 4 à 10 m/s en 3 s, accélération constante), quelle distance parcourt-il pendant ces 3 s ?",
+   "choices": [
+    "21 m",
+    "12 m",
+    "30 m",
+    "42 m"
+   ],
+   "answer": "A",
+   "explanation": "d = vitesse moyenne × durée = (4 + 10)/2 × 3 = 21 m.",
+   "source": "Cours de mécanique de licence, famille Kleppner-Kolenkow",
+   "verif": "import"
+  },
+  {
+   "course": "l1-phys",
+   "category": "mouvements rectiligne uniforme et uniformément varié",
+   "difficulty": 4,
+   "question": "Une voiture A roule à 20 m/s. Une voiture B part du repos au même point et au même instant, avec une accélération de 2 m/s². Quand B rattrape-t-elle A ?",
+   "choices": [
+    "Au bout de 10 s",
+    "Au bout de 40 s",
+    "Au bout de 20 s",
+    "Au bout de 5 s"
+   ],
+   "answer": "C",
+   "explanation": "20·t = ½ × 2 × t² donne t = 20 s.",
+   "source": "Cours de licence de mécanique du point, famille Halliday-Resnick",
+   "verif": "import"
+  },
+  {
+   "course": "l1-phys",
+   "category": "mouvement circulaire et accélération centripète",
+   "difficulty": 1,
+   "question": "À combien de radians par seconde correspond une rotation de 1 tour par seconde ?",
+   "choices": [
+    "2π rad/s, soit environ 6,28 rad/s",
+    "π rad/s, soit environ 3,14 rad/s",
+    "1 rad/s",
+    "360 rad/s"
+   ],
+   "answer": "A",
+   "explanation": "Un tour vaut 2π radians.",
+   "source": "Cours de mécanique de licence, famille Kleppner-Kolenkow",
+   "verif": "import"
+  },
+  {
+   "course": "l1-phys",
+   "category": "mouvement circulaire et accélération centripète",
+   "difficulty": 2,
+   "question": "Quelle relation lie la vitesse linéaire v d'un point, la vitesse angulaire ω et le rayon R de sa trajectoire circulaire ?",
+   "choices": [
+    "v = ω²·R",
+    "v = R/ω²",
+    "v = ω·R",
+    "v = ω·R²"
+   ],
+   "answer": "C",
+   "explanation": "La vitesse est le produit de la vitesse angulaire par le rayon.",
+   "source": "Cours de licence de mécanique du point, famille Halliday-Resnick",
+   "verif": "import"
+  },
+  {
+   "course": "l1-phys",
+   "category": "mouvement circulaire et accélération centripète",
+   "difficulty": 2,
+   "question": "Une roue de rayon 0,3 m tourne à 10 rad/s. Quelle est la vitesse d'un point de sa jante ?",
+   "choices": [
+    "3 m/s",
+    "30 m/s",
+    "33 m/s",
+    "0,03 m/s"
+   ],
+   "answer": "A",
+   "explanation": "v = ω·R = 10 × 0,3 = 3 m/s.",
+   "source": "Cours de physique générale de licence (mécanique), famille Feynman Lectures",
+   "verif": "import"
+  },
+  {
+   "course": "l1-phys",
+   "category": "mouvement circulaire et accélération centripète",
+   "difficulty": 3,
+   "question": "Dans un mouvement circulaire uniforme, que peut-on dire de la vitesse ?",
+   "choices": [
+    "Sa norme varie mais sa direction est constante",
+    "Sa norme et sa direction varient proportionnellement",
+    "Son vecteur est constant",
+    "Sa norme est constante mais son vecteur varie"
+   ],
+   "answer": "D",
+   "explanation": "La direction de la vitesse change à chaque instant, la norme reste la même.",
+   "source": "Cours de mécanique de licence, famille Kleppner-Kolenkow",
+   "verif": "import"
+  },
+  {
+   "course": "l1-phys",
+   "category": "mouvement circulaire et accélération centripète",
+   "difficulty": 5,
+   "question": "Avec R = 6,4×10⁶ m et T = 86 400 s, quelle est l'accélération centripète d'un point de l'équateur terrestre, due à la rotation de la Terre sur elle-même ?",
+   "choices": [
+    "Environ 9,8 m/s²",
+    "Environ 0,34 m/s²",
+    "Environ 3,4×10⁻² m/s²",
+    "Environ 3,4×10⁻³ m/s²"
+   ],
+   "answer": "C",
+   "explanation": "a = 4π²R/T² ≈ 0,034 m/s², très inférieure à g.",
+   "source": "Cours de licence de mécanique du point, famille Halliday-Resnick",
+   "verif": "import"
+  },
+  {
+   "course": "l1-phys",
+   "category": "lois de Newton",
+   "difficulty": 2,
+   "question": "Un objet au repos est soumis à des forces dont la somme est nulle. Que fait-il ?",
+   "choices": [
+    "Il prend une vitesse constante non nulle",
+    "Il reste au repos",
+    "Il se met à tourner sur lui-même",
+    "Il accélère dans le sens de la plus grande force"
+   ],
+   "answer": "B",
+   "explanation": "Sans force nette, la vitesse ne change pas : un corps au repos reste au repos.",
+   "source": "Cours de mécanique de licence, famille Kleppner-Kolenkow",
+   "verif": "import"
+  },
+  {
+   "course": "l1-phys",
+   "category": "lois de Newton",
+   "difficulty": 1,
+   "question": "Pourquoi un passager est-il projeté vers l'avant lors d'un freinage brusque ?",
+   "choices": [
+    "La pesanteur augmente pendant le freinage",
+    "Son corps tend à conserver sa vitesse",
+    "Une force vers l'avant s'exerce sur lui",
+    "Sa masse augmente pendant le freinage"
+   ],
+   "answer": "B",
+   "explanation": "C'est l'effet de l'inertie : le corps garde sa vitesse tant que rien ne le ralentit.",
+   "source": "Cours de licence de mécanique du point, famille Halliday-Resnick",
+   "verif": "import"
+  },
+  {
+   "course": "l1-phys",
+   "category": "lois de Newton",
+   "difficulty": 2,
+   "question": "Un chariot de 10 kg est tiré par une force de 30 N, avec un frottement de 10 N de sens opposé. Quelle est son accélération ?",
+   "choices": [
+    "2 m/s²",
+    "4 m/s²",
+    "3 m/s²",
+    "1 m/s²"
+   ],
+   "answer": "A",
+   "explanation": "La force nette vaut 20 N : a = 20/10 = 2 m/s².",
+   "source": "Cours de physique générale de licence (mécanique), famille Feynman Lectures",
+   "verif": "import"
+  },
+  {
+   "course": "l1-phys",
+   "category": "lois de Newton",
+   "difficulty": 4,
+   "question": "Un ascenseur de 800 kg monte avec une accélération de 1 m/s², avec g = 10 m/s². Quelle est la tension du câble ?",
+   "choices": [
+    "8 800 N",
+    "8 000 N",
+    "7 200 N",
+    "800 N"
+   ],
+   "answer": "A",
+   "explanation": "T − m·g = m·a donne T = 800 × (10 + 1) = 8 800 N.",
+   "source": "Cours de mécanique de licence, famille Kleppner-Kolenkow",
+   "verif": "import"
+  },
+  {
+   "course": "l1-phys",
+   "category": "lois de Newton",
+   "difficulty": 5,
+   "question": "Deux chariots de 2 kg et 3 kg, reliés par une corde, glissent sans frottement sur une table. On tire le chariot de 3 kg avec 10 N. Quelle est la tension de la corde ?",
+   "choices": [
+    "10 N",
+    "6 N",
+    "4 N",
+    "2 N"
+   ],
+   "answer": "C",
+   "explanation": "a = 10/5 = 2 m/s², et la corde accélère le chariot de 2 kg : T = 2 × 2 = 4 N.",
+   "source": "Cours de licence de mécanique du point, famille Halliday-Resnick",
+   "verif": "import"
+  },
+  {
+   "course": "l1-phys",
+   "category": "forces usuelles (poids, tension, réaction, frottement)",
+   "difficulty": 1,
+   "question": "Quelle est la direction du poids d'un objet près de la surface de la Terre ?",
+   "choices": [
+    "Horizontale",
+    "Perpendiculaire à la vitesse de l'objet",
+    "Verticale, vers le bas",
+    "Tangente au sol"
+   ],
+   "answer": "C",
+   "explanation": "Le poids est dirigé vers le centre de la Terre, soit la verticale descendante.",
+   "source": "Cours de mécanique de licence, famille Kleppner-Kolenkow",
+   "verif": "import"
+  },
+  {
+   "course": "l1-phys",
+   "category": "forces usuelles (poids, tension, réaction, frottement)",
+   "difficulty": 2,
+   "question": "Quel est le poids sur la Lune d'un objet de 5 kg, avec g(Lune) ≈ 1,6 N/kg ?",
+   "choices": [
+    "5 N",
+    "8 N",
+    "0 N",
+    "49 N"
+   ],
+   "answer": "B",
+   "explanation": "P = m·g = 5 × 1,6 = 8 N. Sa masse reste 5 kg.",
+   "source": "Cours de licence de mécanique du point, famille Halliday-Resnick",
+   "verif": "import"
+  },
+  {
+   "course": "l1-phys",
+   "category": "forces usuelles (poids, tension, réaction, frottement)",
+   "difficulty": 3,
+   "question": "Un bloc de 10 kg repose sur un sol horizontal (μs = 0,4, g = 10 N/kg). Quelle force horizontale minimale le met en mouvement ?",
+   "choices": [
+    "40 N",
+    "25 N",
+    "100 N",
+    "4 N"
+   ],
+   "answer": "A",
+   "explanation": "F = μs·N = 0,4 × 100 = 40 N.",
+   "source": "Cours de physique générale de licence (mécanique), famille Feynman Lectures",
+   "verif": "import"
+  },
+  {
+   "course": "l1-phys",
+   "category": "forces usuelles (poids, tension, réaction, frottement)",
+   "difficulty": 4,
+   "question": "Un bloc de 4 kg est posé sur un plan incliné de 30° sans frottement, avec g = 10 N/kg. Quelle est la composante du poids qui l'entraîne le long de la pente ?",
+   "choices": [
+    "20 N",
+    "40 N",
+    "10 N",
+    "34,6 N"
+   ],
+   "answer": "A",
+   "explanation": "m·g·sin 30° = 40 × 0,5 = 20 N.",
+   "source": "Cours de mécanique de licence, famille Kleppner-Kolenkow",
+   "verif": "import"
+  },
+  {
+   "course": "l1-phys",
+   "category": "chute libre et projectile",
+   "difficulty": 1,
+   "question": "Quelle est la valeur approchée de l'accélération de la pesanteur à la surface de la Terre ?",
+   "choices": [
+    "98 m/s²",
+    "1,6 m/s²",
+    "9,8 m/s²",
+    "0,98 m/s²"
+   ],
+   "answer": "C",
+   "explanation": "g vaut environ 9,8 m/s², soit 9,8 N/kg.",
+   "source": "Cours de physique générale de licence (mécanique), famille Feynman Lectures",
+   "verif": "import"
+  },
+  {
+   "course": "l1-phys",
+   "category": "chute libre et projectile",
+   "difficulty": 4,
+   "question": "Un projectile est lancé horizontalement à 10 m/s du haut d'une falaise de 20 m (g = 10 m/s²). À quelle distance horizontale du pied touche-t-il le sol ?",
+   "choices": [
+    "40 m",
+    "200 m",
+    "20 m",
+    "10 m"
+   ],
+   "answer": "C",
+   "explanation": "La chute dure t = racine de (2h/g) = 2 s, donc x = 10 × 2 = 20 m.",
+   "source": "Cours de mécanique de licence, famille Kleppner-Kolenkow",
+   "verif": "import"
+  },
+  {
+   "course": "l1-phys",
+   "category": "chute libre et projectile",
+   "difficulty": 4,
+   "question": "Un caillou est lancé verticalement vers le haut à 15 m/s, avec g = 10 m/s². Combien de temps met-il à revenir à son point de départ ?",
+   "choices": [
+    "3 s",
+    "1,5 s",
+    "6 s",
+    "2 s"
+   ],
+   "answer": "A",
+   "explanation": "Montée en 1,5 s, descente en 1,5 s : 2v0/g = 3 s.",
+   "source": "Cours de licence de mécanique du point, famille Halliday-Resnick",
+   "verif": "import"
+  },
+  {
+   "course": "l1-phys",
+   "category": "chute libre et projectile",
+   "difficulty": 5,
+   "question": "Deux projectiles sont lancés avec la même vitesse initiale, l'un à 30° et l'autre à 60° au-dessus de l'horizontale, sans frottement. Que dire de leurs portées ?",
+   "choices": [
+    "On ne peut rien dire sans la masse",
+    "La portée à 30° est le double",
+    "Elles sont égales",
+    "La portée à 60° est la plus grande"
+   ],
+   "answer": "C",
+   "explanation": "La portée est proportionnelle à sin 2α, qui vaut la même valeur pour 30° et 60°.",
+   "source": "Cours de physique générale de licence (mécanique), famille Feynman Lectures",
+   "verif": "import"
+  },
+  {
+   "course": "l1-phys",
+   "category": "travail et puissance d'une force",
+   "difficulty": 1,
+   "question": "Dans quel cas le travail d'une force est-il négatif ?",
+   "choices": [
+    "Quand la force est nulle",
+    "Quand la force est perpendiculaire au déplacement",
+    "Quand la force s'oppose au déplacement",
+    "Quand la force est dans le sens du déplacement"
+   ],
+   "answer": "C",
+   "explanation": "Si l'angle entre force et déplacement dépasse 90°, cos θ est négatif.",
+   "source": "Cours de licence de mécanique du point, famille Halliday-Resnick",
+   "verif": "import"
+  },
+  {
+   "course": "l1-phys",
+   "category": "travail et puissance d'une force",
+   "difficulty": 2,
+   "question": "Quel est le travail du poids d'un objet de masse m qui descend d'une hauteur h ?",
+   "choices": [
+    "Positif, égal à ½·m·g·h",
+    "Positif, égal à m·g·h",
+    "Négatif, égal à −m·g·h",
+    "Nul, car le poids est constant"
+   ],
+   "answer": "B",
+   "explanation": "Le poids a le même sens que le déplacement vertical : son travail est moteur.",
+   "source": "Cours de physique générale de licence (mécanique), famille Feynman Lectures",
+   "verif": "import"
+  },
+  {
+   "course": "l1-phys",
+   "category": "travail et puissance d'une force",
+   "difficulty": 2,
+   "question": "Un moteur de 2 kW fonctionne pendant 5 minutes. Quelle énergie fournit-il ?",
+   "choices": [
+    "10 000 J",
+    "2 000 J",
+    "120 000 J",
+    "600 000 J"
+   ],
+   "answer": "D",
+   "explanation": "E = P·t = 2 000 × 300 = 600 000 J.",
+   "source": "Cours de mécanique de licence, famille Kleppner-Kolenkow",
+   "verif": "import"
+  },
+  {
+   "course": "l1-phys",
+   "category": "travail et puissance d'une force",
+   "difficulty": 3,
+   "question": "Quelle est la puissance instantanée d'une force F dont le point d'application a la vitesse v, colinéaire à F ?",
+   "choices": [
+    "P = F·t",
+    "P = F·v",
+    "P = F·v·t",
+    "P = F·v²"
+   ],
+   "answer": "B",
+   "explanation": "La puissance est le produit scalaire de la force et de la vitesse.",
+   "source": "Cours de licence de mécanique du point, famille Halliday-Resnick",
+   "verif": "import"
+  },
+  {
+   "course": "l1-phys",
+   "category": "travail et puissance d'une force",
+   "difficulty": 4,
+   "question": "Une personne tire un traîneau avec une force de 100 N par une corde inclinée de 60° sur l'horizontale, sur 10 m. Quel travail fournit-elle ?",
+   "choices": [
+    "500 J",
+    "866 J",
+    "50 J",
+    "1 000 J"
+   ],
+   "answer": "A",
+   "explanation": "W = F·d·cos 60° = 100 × 10 × 0,5 = 500 J.",
+   "source": "Cours de physique générale de licence (mécanique), famille Feynman Lectures",
+   "verif": "import"
+  },
+  {
+   "course": "l1-phys",
+   "category": "énergie cinétique et théorème de l'énergie cinétique",
+   "difficulty": 1,
+   "question": "Dans quelle unité s'exprime l'énergie cinétique ?",
+   "choices": [
+    "Le newton",
+    "Le joule",
+    "Le pascal",
+    "Le watt"
+   ],
+   "answer": "B",
+   "explanation": "Comme toute énergie, l'énergie cinétique se mesure en joules.",
+   "source": "Cours de licence de mécanique du point, famille Halliday-Resnick",
+   "verif": "import"
+  },
+  {
+   "course": "l1-phys",
+   "category": "énergie cinétique et théorème de l'énergie cinétique",
+   "difficulty": 2,
+   "question": "L'énergie cinétique d'un corps peut-elle être négative ?",
+   "choices": [
+    "Oui, si la vitesse est dirigée vers l'arrière",
+    "Non, elle est positive ou nulle",
+    "Oui, si le travail reçu est négatif",
+    "Oui, si l'accélération est négative"
+   ],
+   "answer": "B",
+   "explanation": "Ec = ½·m·v² est un produit de la masse positive par un carré.",
+   "source": "Cours de physique générale de licence (mécanique), famille Feynman Lectures",
+   "verif": "import"
+  },
+  {
+   "course": "l1-phys",
+   "category": "énergie cinétique et théorème de l'énergie cinétique",
+   "difficulty": 3,
+   "question": "Un objet de 3 kg a une énergie cinétique de 150 J. Quelle est sa vitesse ?",
+   "choices": [
+    "25 m/s",
+    "7,1 m/s",
+    "10 m/s",
+    "50 m/s"
+   ],
+   "answer": "C",
+   "explanation": "v = racine de (2·Ec/m) = racine de 100 = 10 m/s.",
+   "source": "Cours de mécanique de licence, famille Kleppner-Kolenkow",
+   "verif": "import"
+  },
+  {
+   "course": "l1-phys",
+   "category": "énergie cinétique et théorème de l'énergie cinétique",
+   "difficulty": 4,
+   "question": "Deux voitures de même masse roulent, l'une à 20 m/s, l'autre à 30 m/s. Quel est le rapport de l'énergie cinétique de la seconde à celle de la première ?",
+   "choices": [
+    "3",
+    "1,5",
+    "0,44",
+    "2,25"
+   ],
+   "answer": "D",
+   "explanation": "Le rapport vaut (30/20)² = 2,25.",
+   "source": "Cours de licence de mécanique du point, famille Halliday-Resnick",
+   "verif": "import"
+  },
+  {
+   "course": "l1-phys",
+   "category": "énergie potentielle et conservation de l'énergie mécanique",
+   "difficulty": 1,
+   "question": "Qu'est-ce qu'une force conservative ?",
+   "choices": [
+    "Une force dont le travail est toujours nul",
+    "Une force qui reste constante au cours du temps",
+    "Une force dont le travail ne dépend pas du chemin suivi",
+    "Une force qui s'oppose toujours au mouvement"
+   ],
+   "answer": "C",
+   "explanation": "Pour une force conservative, le travail entre deux points ne dépend que de ces points.",
+   "source": "Cours de mécanique de licence, famille Kleppner-Kolenkow",
+   "verif": "import"
+  },
+  {
+   "course": "l1-phys",
+   "category": "énergie potentielle et conservation de l'énergie mécanique",
+   "difficulty": 1,
+   "question": "Laquelle de ces forces est non conservative ?",
+   "choices": [
+    "Le frottement de glissement",
+    "La force de rappel d'un ressort idéal",
+    "La force de Coulomb",
+    "Le poids"
+   ],
+   "answer": "A",
+   "explanation": "Le travail du frottement dépend du chemin et dissipe de l'énergie.",
+   "source": "Cours de licence de mécanique du point, famille Halliday-Resnick",
+   "verif": "import"
+  },
+  {
+   "course": "l1-phys",
+   "category": "énergie potentielle et conservation de l'énergie mécanique",
+   "difficulty": 4,
+   "question": "Un skieur de 60 kg descend un dénivelé de 50 m et atteint 20 m/s au bas de la pente, avec g = 10 m/s². Quelle énergie a été dissipée par les frottements ?",
+   "choices": [
+    "12 000 J",
+    "42 000 J",
+    "30 000 J",
+    "18 000 J"
+   ],
+   "answer": "D",
+   "explanation": "Perte = m·g·h − ½·m·v² = 30 000 − 12 000 = 18 000 J.",
+   "source": "Cours de physique générale de licence (mécanique), famille Feynman Lectures",
+   "verif": "import"
+  },
+  {
+   "course": "l1-phys",
+   "category": "énergie potentielle et conservation de l'énergie mécanique",
+   "difficulty": 2,
+   "question": "Un ressort de raideur 100 N/m est comprimé de 0,2 m. Quelle énergie potentielle élastique emmagasine-t-il ?",
+   "choices": [
+    "20 J",
+    "4 J",
+    "2 J",
+    "10 J"
+   ],
+   "answer": "C",
+   "explanation": "Ep = ½·k·x² = ½ × 100 × 0,04 = 2 J.",
+   "source": "Cours de mécanique de licence, famille Kleppner-Kolenkow",
+   "verif": "import"
+  },
+  {
+   "course": "l1-phys",
+   "category": "oscillateur harmonique (ressort, pendule simple)",
+   "difficulty": 1,
+   "question": "Un oscillateur effectue 30 oscillations en 15 s. Quelle est sa fréquence ?",
+   "choices": [
+    "15 Hz",
+    "0,5 Hz",
+    "30 Hz",
+    "2 Hz"
+   ],
+   "answer": "D",
+   "explanation": "f = 30/15 = 2 Hz, soit une période de 0,5 s.",
+   "source": "Cours de physique générale de licence (mécanique), famille Feynman Lectures",
+   "verif": "import"
+  },
+  {
+   "course": "l1-phys",
+   "category": "oscillateur harmonique (ressort, pendule simple)",
+   "difficulty": 2,
+   "question": "Comment évolue l'énergie mécanique d'un oscillateur harmonique idéal, sans frottement ?",
+   "choices": [
+    "Elle s'annule à chaque période",
+    "Elle décroît linéairement avec le temps",
+    "Elle reste constante",
+    "Elle croît avec le temps"
+   ],
+   "answer": "C",
+   "explanation": "L'énergie se transforme entre cinétique et potentielle, mais la somme est constante.",
+   "source": "Cours de mécanique de licence, famille Kleppner-Kolenkow",
+   "verif": "import"
+  },
+  {
+   "course": "l1-phys",
+   "category": "oscillateur harmonique (ressort, pendule simple)",
+   "difficulty": 2,
+   "question": "Un ressort de raideur 50 N/m porte une masse de 0,5 kg. Quelle est sa pulsation propre ?",
+   "choices": [
+    "0,1 rad/s",
+    "25 rad/s",
+    "10 rad/s",
+    "100 rad/s"
+   ],
+   "answer": "C",
+   "explanation": "ω0 = racine de (k/m) = racine de 100 = 10 rad/s.",
+   "source": "Cours de licence de mécanique du point, famille Halliday-Resnick",
+   "verif": "import"
+  },
+  {
+   "course": "l1-phys",
+   "category": "oscillateur harmonique (ressort, pendule simple)",
+   "difficulty": 3,
+   "question": "À quel moment la vitesse d'une masse oscillant sur un ressort est-elle maximale ?",
+   "choices": [
+    "Au passage par la position d'équilibre",
+    "Aux positions extrêmes",
+    "Quand l'énergie potentielle est maximale",
+    "Quand l'accélération est maximale"
+   ],
+   "answer": "A",
+   "explanation": "À l'équilibre, l'énergie potentielle est minimale donc l'énergie cinétique est maximale.",
+   "source": "Cours de physique générale de licence (mécanique), famille Feynman Lectures",
+   "verif": "import"
+  },
+  {
+   "course": "l1-phys",
+   "category": "oscillateur harmonique (ressort, pendule simple)",
+   "difficulty": 5,
+   "question": "Une masse suspendue à un ressort l'allonge de 4 cm à l'équilibre (g = 10 m/s²). Quelle est la période de ses oscillations verticales ?",
+   "choices": [
+    "Environ 0,4 s",
+    "Environ 1,26 s",
+    "Environ 4 s",
+    "Environ 0,04 s"
+   ],
+   "answer": "A",
+   "explanation": "m/k = x/g, donc T = 2π·racine de (0,04/10) ≈ 0,4 s.",
+   "source": "Cours de mécanique de licence, famille Kleppner-Kolenkow",
+   "verif": "import"
+  },
+  {
+   "course": "l1-phys",
+   "category": "quantité de mouvement et chocs",
+   "difficulty": 1,
+   "question": "Que devient la quantité de mouvement totale d'un système isolé ?",
+   "choices": [
+    "Elle augmente avec le temps",
+    "Elle se conserve",
+    "Elle diminue à cause des chocs",
+    "Elle s'annule toujours"
+   ],
+   "answer": "B",
+   "explanation": "En l'absence de force extérieure, la quantité de mouvement totale est constante.",
+   "source": "Cours de physique générale de licence (mécanique), famille Feynman Lectures",
+   "verif": "import"
+  },
+  {
+   "course": "l1-phys",
+   "category": "quantité de mouvement et chocs",
+   "difficulty": 2,
+   "question": "Quelle grandeur est égale à la variation de la quantité de mouvement d'un corps ?",
+   "choices": [
+    "La puissance de la force résultante",
+    "Le travail de la force résultante",
+    "L'énergie cinétique du corps",
+    "L'impulsion de la force résultante"
+   ],
+   "answer": "D",
+   "explanation": "L'impulsion F·Δt est égale à Δp (théorème de l'impulsion).",
+   "source": "Cours de mécanique de licence, famille Kleppner-Kolenkow",
+   "verif": "import"
+  },
+  {
+   "course": "l1-phys",
+   "category": "quantité de mouvement et chocs",
+   "difficulty": 4,
+   "question": "Un canon de 1 000 kg tire horizontalement un obus de 10 kg à 100 m/s. Quelle est la vitesse de recul du canon ?",
+   "choices": [
+    "10 m/s",
+    "1 m/s",
+    "100 m/s",
+    "0,1 m/s"
+   ],
+   "answer": "B",
+   "explanation": "0 = 10 × 100 − 1 000 × v donne v = 1 m/s.",
+   "source": "Cours de licence de mécanique du point, famille Halliday-Resnick",
+   "verif": "import"
+  },
+  {
+   "course": "l1-phys",
+   "category": "quantité de mouvement et chocs",
+   "difficulty": 3,
+   "question": "Une balle de 0,1 kg arrive à 20 m/s sur un mur et rebondit à 20 m/s (choc élastique). Quelle est la norme de la variation de sa quantité de mouvement ?",
+   "choices": [
+    "2 kg·m/s",
+    "4 kg·m/s",
+    "8 kg·m/s",
+    "0 kg·m/s"
+   ],
+   "answer": "B",
+   "explanation": "Δp = 0,1 × 20 − 0,1 × (−20) = 4 kg·m/s.",
+   "source": "Cours de physique générale de licence (mécanique), famille Feynman Lectures",
+   "verif": "import"
+  },
+  {
+   "course": "l1-phys",
+   "category": "quantité de mouvement et chocs",
+   "difficulty": 4,
+   "question": "Une force moyenne de 50 N agit pendant 0,2 s sur une balle de 0,5 kg, initialement au repos. Quelle vitesse acquiert-elle ?",
+   "choices": [
+    "100 m/s",
+    "2 m/s",
+    "5 m/s",
+    "20 m/s"
+   ],
+   "answer": "D",
+   "explanation": "F·Δt = m·v donne v = 10/0,5 = 20 m/s.",
+   "source": "Cours de mécanique de licence, famille Kleppner-Kolenkow",
+   "verif": "import"
+  },
+  {
+   "course": "l1-phys",
+   "category": "gravitation universelle et lois de Kepler",
+   "difficulty": 1,
+   "question": "Qui a formulé la loi de la gravitation universelle ?",
+   "choices": [
+    "Johannes Kepler",
+    "Nicolas Copernic",
+    "Galilée",
+    "Isaac Newton"
+   ],
+   "answer": "D",
+   "explanation": "Newton a publié la loi de gravitation universelle au XVIIᵉ siècle.",
+   "source": "Cours de physique générale de licence (mécanique), famille Feynman Lectures",
+   "verif": "import"
+  },
+  {
+   "course": "l1-phys",
+   "category": "gravitation universelle et lois de Kepler",
+   "difficulty": 2,
+   "question": "Quelle est l'unité de la constante de gravitation G dans le SI ?",
+   "choices": [
+    "N·m·kg⁻¹",
+    "N·m²·kg⁻²",
+    "J·kg⁻¹",
+    "N·kg·m⁻²"
+   ],
+   "answer": "B",
+   "explanation": "F = G·m1·m2/r² donne G = F·r²/(m1·m2).",
+   "source": "Cours de mécanique de licence, famille Kleppner-Kolenkow",
+   "verif": "import"
+  },
+  {
+   "course": "l1-phys",
+   "category": "gravitation universelle et lois de Kepler",
+   "difficulty": 1,
+   "question": "Comment évolue le poids d'un objet lorsqu'on l'éloigne de la Terre ?",
+   "choices": [
+    "Il augmente avec la distance",
+    "Il s'annule dès l'altitude de 1 km",
+    "Il reste constant",
+    "Il diminue avec la distance au centre de la Terre"
+   ],
+   "answer": "D",
+   "explanation": "L'attraction varie en 1/r² : elle diminue quand r augmente.",
+   "source": "Cours de licence de mécanique du point, famille Halliday-Resnick",
+   "verif": "import"
+  },
+  {
+   "course": "l1-phys",
+   "category": "gravitation universelle et lois de Kepler",
+   "difficulty": 3,
+   "question": "Une planète a la même masse que la Terre mais un rayon double. Comment son accélération de la pesanteur de surface se compare-t-elle à celle de la Terre ?",
+   "choices": [
+    "Quatre fois plus faible",
+    "Deux fois plus faible",
+    "Deux fois plus grande",
+    "Quatre fois plus grande"
+   ],
+   "answer": "A",
+   "explanation": "g = G·M/R² : doubler R divise g par 4.",
+   "source": "Cours de physique générale de licence (mécanique), famille Feynman Lectures",
+   "verif": "import"
+  },
+  {
+   "course": "l1-phys",
+   "category": "gravitation universelle et lois de Kepler",
+   "difficulty": 5,
+   "question": "De quelles grandeurs dépend la vitesse de libération d'un astre ?",
+   "choices": [
+    "De la masse du projectile et du rayon de l'astre seulement",
+    "De la masse et du rayon de l'astre, pas de la masse du projectile",
+    "De la masse du projectile seulement",
+    "De la température de l'astre"
+   ],
+   "answer": "B",
+   "explanation": "v = racine de (2·G·M/R) : la masse du projectile se simplifie.",
+   "source": "Cours de mécanique de licence, famille Kleppner-Kolenkow",
+   "verif": "import"
+  },
+  {
+   "course": "l1-phys",
+   "category": "statique des solides et moment d'une force",
+   "difficulty": 1,
+   "question": "Qu'est-ce que le centre de gravité d'un solide ?",
+   "choices": [
+    "Le point fixe du solide quand il tourne",
+    "Le point le plus bas du solide",
+    "Le point où sa masse est nulle",
+    "Le point d'application de son poids"
+   ],
+   "answer": "D",
+   "explanation": "Le poids peut être considéré comme appliqué en ce point.",
+   "source": "Cours de physique générale de licence (mécanique), famille Feynman Lectures",
+   "verif": "import"
+  },
+  {
+   "course": "l1-phys",
+   "category": "statique des solides et moment d'une force",
+   "difficulty": 2,
+   "question": "Un levier de 2 m a son pivot à 0,5 m d'une extrémité. On exerce 30 N sur l'autre extrémité. Quelle force maximale équilibre-t-on à l'extrémité proche du pivot ?",
+   "choices": [
+    "90 N",
+    "10 N",
+    "30 N",
+    "60 N"
+   ],
+   "answer": "A",
+   "explanation": "30 × 1,5 = F × 0,5 donne F = 90 N.",
+   "source": "Cours de mécanique de licence, famille Kleppner-Kolenkow",
+   "verif": "import"
+  },
+  {
+   "course": "l1-phys",
+   "category": "statique des solides et moment d'une force",
+   "difficulty": 3,
+   "question": "Dans quel cas le moment d'une force par rapport à un axe est-il nul ?",
+   "choices": [
+    "Quand la force est maximale",
+    "Quand le bras de levier est maximal",
+    "Quand la force est perpendiculaire au bras de levier",
+    "Quand la droite d'action de la force passe par l'axe"
+   ],
+   "answer": "D",
+   "explanation": "Le moment vaut F·d, avec d la distance de l'axe à la droite d'action : d = 0 donne M = 0.",
+   "source": "Cours de licence de mécanique du point, famille Halliday-Resnick",
+   "verif": "import"
+  },
+  {
+   "course": "l1-phys",
+   "category": "statique des solides et moment d'une force",
+   "difficulty": 4,
+   "question": "Deux forces de même norme et de sens opposés s'exercent sur un solide selon deux droites parallèles distinctes. Quel est l'effet résultant ?",
+   "choices": [
+    "Résultante nulle et moment non nul",
+    "Résultante non nulle et moment nul",
+    "Résultante et moment nuls",
+    "Résultante et moment non nuls"
+   ],
+   "answer": "A",
+   "explanation": "C'est un couple : il fait tourner le solide sans le translater.",
+   "source": "Cours de physique générale de licence (mécanique), famille Feynman Lectures",
+   "verif": "import"
+  },
+  {
+   "course": "l1-phys",
+   "category": "analyse dimensionnelle et unités SI",
+   "difficulty": 1,
+   "question": "Quelle est l'unité SI de la pression ?",
+   "choices": [
+    "L'atmosphère",
+    "Le bar",
+    "Le pascal",
+    "Le newton"
+   ],
+   "answer": "C",
+   "explanation": "1 Pa = 1 N/m².",
+   "source": "Cours de licence de physique générale (grandeurs et unités), famille Halliday-Resnick",
+   "verif": "import"
+  },
+  {
+   "course": "l1-phys",
+   "category": "analyse dimensionnelle et unités SI",
+   "difficulty": 1,
+   "question": "Combien d'unités de base le Système international compte-t-il ?",
+   "choices": [
+    "6",
+    "9",
+    "5",
+    "7"
+   ],
+   "answer": "D",
+   "explanation": "Mètre, kilogramme, seconde, ampère, kelvin, mole et candela.",
+   "source": "Brochure sur le Système international d'unités (SI), Bureau international des poids et mesures",
+   "verif": "import"
+  },
+  {
+   "course": "l1-phys",
+   "category": "analyse dimensionnelle et unités SI",
+   "difficulty": 2,
+   "question": "Quelle est l'unité de base du SI pour l'intensité du courant électrique ?",
+   "choices": [
+    "Le volt",
+    "L'ohm",
+    "Le coulomb",
+    "L'ampère"
+   ],
+   "answer": "D",
+   "explanation": "L'ampère est l'unité de base ; le coulomb en est dérivé (A·s).",
+   "source": "Cours de licence de physique générale (grandeurs et unités), famille Halliday-Resnick",
+   "verif": "import"
+  },
+  {
+   "course": "l1-phys",
+   "category": "analyse dimensionnelle et unités SI",
+   "difficulty": 3,
+   "question": "Quelle est la dimension de l'énergie ?",
+   "choices": [
+    "M·L²·T⁻²",
+    "M·L⁻¹·T⁻²",
+    "M·L·T⁻²",
+    "M·L²·T⁻¹"
+   ],
+   "answer": "A",
+   "explanation": "E = ½·m·v² a pour dimension M·(L·T⁻¹)².",
+   "source": "Brochure sur le Système international d'unités (SI), Bureau international des poids et mesures",
+   "verif": "import"
+  },
+  {
+   "course": "l1-phys",
+   "category": "analyse dimensionnelle et unités SI",
+   "difficulty": 3,
+   "question": "Un élève propose T = 2π·racine de (L·g) pour la période d'un pendule. Pourquoi cette formule est-elle fausse ?",
+   "choices": [
+    "Parce que π n'a pas de dimension",
+    "Parce que la période dépend de la masse",
+    "Le membre de gauche et celui de droite n'ont pas la même dimension",
+    "Parce que g n'a pas d'unité"
+   ],
+   "answer": "C",
+   "explanation": "L·g a pour dimension L²·T⁻², dont la racine n'est pas un temps.",
+   "source": "Cours de licence de physique générale (grandeurs et unités), famille Halliday-Resnick",
+   "verif": "import"
+  },
+  {
+   "course": "l1-phys",
+   "category": "incertitudes et chiffres significatifs",
+   "difficulty": 1,
+   "question": "Que signifie l'écriture 5,00 ± 0,02 cm ?",
+   "choices": [
+    "Valeur mesurée de 5,00 cm avec une incertitude de 0,02 cm",
+    "Valeur exacte égale à 5,02 cm",
+    "Mesure répétée 5,00 fois",
+    "Valeur toujours supérieure à 5,00 cm"
+   ],
+   "answer": "A",
+   "explanation": "Le résultat s'écrit valeur ± incertitude, dans la même unité.",
+   "source": "Cours de travaux pratiques de physique de licence (mesures et incertitudes)",
+   "verif": "import"
+  },
+  {
+   "course": "l1-phys",
+   "category": "incertitudes et chiffres significatifs",
+   "difficulty": 2,
+   "question": "Pour la somme de deux longueurs mesurées indépendamment, comment combine-t-on les incertitudes absolues (méthode quadratique) ?",
+   "choices": [
+    "Par le produit des incertitudes",
+    "Par la racine de la somme de leurs carrés",
+    "Par la somme des incertitudes relatives",
+    "Par la différence des incertitudes"
+   ],
+   "answer": "B",
+   "explanation": "Pour une somme de grandeurs indépendantes, Δz² = Δx² + Δy².",
+   "source": "Cours de licence de méthodes expérimentales, famille des manuels d'analyse d'erreurs (type Taylor)",
+   "verif": "import"
+  },
+  {
+   "course": "l1-phys",
+   "category": "incertitudes et chiffres significatifs",
+   "difficulty": 2,
+   "question": "Combien de chiffres significatifs compte 1,200×10³ ?",
+   "choices": [
+    "5",
+    "4",
+    "2",
+    "3"
+   ],
+   "answer": "B",
+   "explanation": "Les zéros de la mantisse 1,200 sont significatifs.",
+   "source": "Cours de travaux pratiques de physique de licence (mesures et incertitudes)",
+   "verif": "import"
+  },
+  {
+   "course": "l1-phys",
+   "category": "incertitudes et chiffres significatifs",
+   "difficulty": 3,
+   "question": "Quel est le nombre 3,4567 arrondi à trois chiffres significatifs ?",
+   "choices": [
+    "3,5",
+    "3,457",
+    "3,45",
+    "3,46"
+   ],
+   "answer": "D",
+   "explanation": "Le chiffre suivant est 6 : on arrondit 3,45 au supérieur, soit 3,46.",
+   "source": "Cours de licence de méthodes expérimentales, famille des manuels d'analyse d'erreurs (type Taylor)",
+   "verif": "import"
+  },
+  {
+   "course": "l1-phys",
+   "category": "incertitudes et chiffres significatifs",
+   "difficulty": 3,
+   "question": "Une série de mesures est très groupée, mais loin de la valeur vraie. Comment la qualifie-t-on ?",
+   "choices": [
+    "Fidèle mais peu juste",
+    "Juste et fidèle",
+    "Juste mais peu fidèle",
+    "Ni fidèle ni juste"
+   ],
+   "answer": "A",
+   "explanation": "La fidélité traduit la faible dispersion, la justesse la proximité de la valeur vraie.",
+   "source": "Cours de travaux pratiques de physique de licence (mesures et incertitudes)",
+   "verif": "import"
+  },
+  {
+   "course": "l1-phys",
+   "category": "thermodynamique de base : température, chaleur, calorimétrie",
+   "difficulty": 1,
+   "question": "Quel est le zéro absolu en degrés Celsius ?",
+   "choices": [
+    "−273,15 °C",
+    "−32 °C",
+    "−373,15 °C",
+    "−100 °C"
+   ],
+   "answer": "A",
+   "explanation": "0 K correspond à −273,15 °C.",
+   "source": "Cours de thermodynamique de licence, famille Halliday-Resnick",
+   "verif": "import"
+  },
+  {
+   "course": "l1-phys",
+   "category": "thermodynamique de base : température, chaleur, calorimétrie",
+   "difficulty": 1,
+   "question": "Comment appelle-t-on l'énergie échangée par un corps pur qui change d'état à température constante ?",
+   "choices": [
+    "La chaleur massique",
+    "La chaleur latente",
+    "L'énergie interne",
+    "La capacité thermique"
+   ],
+   "answer": "B",
+   "explanation": "La chaleur latente sert au changement d'état, sans variation de température.",
+   "source": "Cours de thermodynamique, famille Diu",
+   "verif": "import"
+  },
+  {
+   "course": "l1-phys",
+   "category": "thermodynamique de base : température, chaleur, calorimétrie",
+   "difficulty": 2,
+   "question": "La chaleur latente de fusion de la glace est de 334 kJ/kg. Quelle énergie faut-il pour fondre 0,5 kg de glace à 0 °C ?",
+   "choices": [
+    "16,7 kJ",
+    "167 kJ",
+    "334 kJ",
+    "668 kJ"
+   ],
+   "answer": "B",
+   "explanation": "Q = m·L = 0,5 × 334 = 167 kJ.",
+   "source": "Cours de thermodynamique de licence, famille Halliday-Resnick",
+   "verif": "import"
+  },
+  {
+   "course": "l1-phys",
+   "category": "thermodynamique de base : température, chaleur, calorimétrie",
+   "difficulty": 1,
+   "question": "Quels sont les trois modes de transfert thermique ?",
+   "choices": [
+    "La conduction, la diffusion et l'induction",
+    "La convection, la fission et le rayonnement",
+    "La conduction, la réfraction et la convection",
+    "La conduction, la convection et le rayonnement"
+   ],
+   "answer": "D",
+   "explanation": "Ce sont les trois modes classiques de transfert de chaleur.",
+   "source": "Cours de thermodynamique, famille Diu",
+   "verif": "import"
+  },
+  {
+   "course": "l1-phys",
+   "category": "thermodynamique de base : température, chaleur, calorimétrie",
+   "difficulty": 5,
+   "question": "On plonge un bloc de cuivre de 0,2 kg (c = 400 J/(kg·K)) à 100 °C dans 0,5 kg d'eau (c = 4 200 J/(kg·K)) à 20 °C, sans pertes. Quelle est la température finale ?",
+   "choices": [
+    "Environ 22,9 °C",
+    "Environ 30 °C",
+    "Environ 19 °C",
+    "Environ 60 °C"
+   ],
+   "answer": "A",
+   "explanation": "0,2 × 400 × (100 − θ) = 0,5 × 4 200 × (θ − 20) donne θ ≈ 22,9 °C.",
+   "source": "Cours de thermodynamique de licence, famille Halliday-Resnick",
+   "verif": "import"
+  },
+  {
+   "course": "l1-phys",
+   "category": "gaz parfaits et loi des gaz",
+   "difficulty": 1,
+   "question": "Quelle est la valeur de la constante des gaz parfaits R ?",
+   "choices": [
+    "1,38 J/(mol·K)",
+    "6,02 J/(mol·K)",
+    "83,1 J/(mol·K)",
+    "8,31 J/(mol·K)"
+   ],
+   "answer": "D",
+   "explanation": "R vaut environ 8,31 J·mol⁻¹·K⁻¹.",
+   "source": "Cours de thermodynamique de licence, famille Halliday-Resnick",
+   "verif": "import"
+  },
+  {
+   "course": "l1-phys",
+   "category": "gaz parfaits et loi des gaz",
+   "difficulty": 1,
+   "question": "Quelle est la valeur approchée du nombre d'Avogadro ?",
+   "choices": [
+    "9,6×10⁴ mol⁻¹",
+    "1,38×10⁻²³ mol⁻¹",
+    "3,0×10⁸ mol⁻¹",
+    "6,02×10²³ mol⁻¹"
+   ],
+   "answer": "D",
+   "explanation": "Une mole contient environ 6,02×10²³ entités.",
+   "source": "Cours de thermodynamique, famille Diu",
+   "verif": "import"
+  },
+  {
+   "course": "l1-phys",
+   "category": "gaz parfaits et loi des gaz",
+   "difficulty": 2,
+   "question": "À pression constante, comment le volume d'un gaz parfait varie-t-il avec la température absolue ?",
+   "choices": [
+    "Il lui est proportionnel",
+    "Il en est indépendant",
+    "Il est proportionnel à son carré",
+    "Il lui est inversement proportionnel"
+   ],
+   "answer": "A",
+   "explanation": "V/T est constant : c'est la loi de Charles.",
+   "source": "Cours de thermodynamique de licence, famille Halliday-Resnick",
+   "verif": "import"
+  },
+  {
+   "course": "l1-phys",
+   "category": "gaz parfaits et loi des gaz",
+   "difficulty": 3,
+   "question": "Quelle pression exercent 2 mol de gaz parfait à 300 K dans un récipient de 5 L (R = 8,31 J/(mol·K)) ?",
+   "choices": [
+    "Environ 1,0×10⁵ Pa",
+    "Environ 1,0×10⁶ Pa",
+    "Environ 1,0×10⁴ Pa",
+    "Environ 5,0×10⁶ Pa"
+   ],
+   "answer": "B",
+   "explanation": "P = nRT/V = 2 × 8,31 × 300/0,005 ≈ 1,0×10⁶ Pa.",
+   "source": "Cours de thermodynamique, famille Diu",
+   "verif": "import"
+  },
+  {
+   "course": "l1-phys",
+   "category": "gaz parfaits et loi des gaz",
+   "difficulty": 3,
+   "question": "Un pneu est gonflé à 2,0 bar à 15 °C. Il s'échauffe à 45 °C, à volume constant. Quelle est sa nouvelle pression, environ ?",
+   "choices": [
+    "6,0 bar",
+    "1,8 bar",
+    "2,0 bar",
+    "2,2 bar"
+   ],
+   "answer": "D",
+   "explanation": "P2 = P1 × T2/T1 = 2,0 × 318/288 ≈ 2,2 bar.",
+   "source": "Cours de thermodynamique de licence, famille Halliday-Resnick",
+   "verif": "import"
+  },
+  {
+   "course": "l1-phys",
+   "category": "gaz parfaits et loi des gaz",
+   "difficulty": 5,
+   "question": "Un récipient contient 1 mol de dioxygène et 3 mol de diazote, à la pression totale de 2 bar. Quelle est la pression partielle du dioxygène ?",
+   "choices": [
+    "1,5 bar",
+    "0,25 bar",
+    "1 bar",
+    "0,5 bar"
+   ],
+   "answer": "D",
+   "explanation": "Selon Dalton, la pression partielle vaut la fraction molaire (1/4) fois la pression totale.",
+   "source": "Cours de thermodynamique, famille Diu",
+   "verif": "import"
+  },
+  {
+   "course": "l1-phys",
+   "category": "premier principe (énergie interne)",
+   "difficulty": 1,
+   "question": "Quel est le signe du travail reçu par un gaz lors d'une compression ?",
+   "choices": [
+    "Positif",
+    "Négatif",
+    "Nul",
+    "Cela dépend de la température"
+   ],
+   "answer": "A",
+   "explanation": "Lors d'une compression, l'extérieur fournit du travail au gaz.",
+   "source": "Cours de thermodynamique, famille Diu",
+   "verif": "import"
+  },
+  {
+   "course": "l1-phys",
+   "category": "premier principe (énergie interne)",
+   "difficulty": 2,
+   "question": "Un gaz se dilate à la pression constante de 2×10⁵ Pa en passant de 1 L à 3 L. Quel travail reçoit-il ?",
+   "choices": [
+    "−800 J",
+    "−200 J",
+    "−600 J",
+    "−400 J"
+   ],
+   "answer": "D",
+   "explanation": "W = −P·ΔV = −2×10⁵ × 2×10⁻³ = −400 J.",
+   "source": "Cours de thermodynamique de licence, famille Halliday-Resnick",
+   "verif": "import"
+  },
+  {
+   "course": "l1-phys",
+   "category": "premier principe (énergie interne)",
+   "difficulty": 3,
+   "question": "Quelle est l'énergie interne d'un gaz parfait monoatomique de n moles à la température T ?",
+   "choices": [
+    "(5/2)·n·R·T",
+    "(3/2)·n·R·T",
+    "3·n·R·T",
+    "n·R·T"
+   ],
+   "answer": "B",
+   "explanation": "Chaque atome a trois degrés de liberté de translation, soit ½·R·T par mole et par degré.",
+   "source": "Cours de thermodynamique, famille Diu",
+   "verif": "import"
+  },
+  {
+   "course": "l1-phys",
+   "category": "premier principe (énergie interne)",
+   "difficulty": 2,
+   "question": "On fournit 600 J de chaleur à un gaz qui, en se dilatant, fournit 250 J de travail. Quelle est la variation de son énergie interne ?",
+   "choices": [
+    "+350 J",
+    "+250 J",
+    "+850 J",
+    "+600 J"
+   ],
+   "answer": "A",
+   "explanation": "ΔU = Q + W = 600 − 250 = 350 J.",
+   "source": "Cours de thermodynamique de licence, famille Halliday-Resnick",
+   "verif": "import"
+  },
+  {
+   "course": "l1-phys",
+   "category": "premier principe (énergie interne)",
+   "difficulty": 4,
+   "question": "Une mole de gaz parfait monoatomique est chauffée de 100 K à volume constant. Quelle chaleur reçoit-elle, avec R = 8,31 J/(mol·K) ?",
+   "choices": [
+    "Environ 831 J",
+    "Environ 623 J",
+    "Environ 1 247 J",
+    "Environ 2 078 J"
+   ],
+   "answer": "C",
+   "explanation": "À volume constant, Q = ΔU = (3/2)·n·R·ΔT = 1,5 × 8,31 × 100.",
+   "source": "Cours de thermodynamique, famille Diu",
+   "verif": "import"
+  },
+  {
+   "course": "l1-phys",
+   "category": "ondes mécaniques : onde progressive, célérité, périodicité",
+   "difficulty": 1,
+   "question": "Qu'est-ce qu'une onde transversale ?",
+   "choices": [
+    "Une onde qui n'existe que dans l'air",
+    "Une onde qui ne se propage pas",
+    "Une onde dont la perturbation est perpendiculaire à la propagation",
+    "Une onde dont la perturbation est parallèle à la propagation"
+   ],
+   "answer": "C",
+   "explanation": "Par exemple, l'onde sur une corde tendue.",
+   "source": "Cours d'ondes et de vibrations de licence, famille Halliday-Resnick",
+   "verif": "import"
+  },
+  {
+   "course": "l1-phys",
+   "category": "ondes mécaniques : onde progressive, célérité, périodicité",
+   "difficulty": 2,
+   "question": "Une onde a une longueur d'onde de 2 m et une période de 0,01 s. Quelle est sa célérité ?",
+   "choices": [
+    "20 m/s",
+    "200 m/s",
+    "0,02 m/s",
+    "2 m/s"
+   ],
+   "answer": "B",
+   "explanation": "c = λ/T = 2/0,01 = 200 m/s.",
+   "source": "Cours de physique générale de licence (ondes), famille Feynman Lectures",
+   "verif": "import"
+  },
+  {
+   "course": "l1-phys",
+   "category": "ondes mécaniques : onde progressive, célérité, périodicité",
+   "difficulty": 1,
+   "question": "Le son peut-il se propager dans le vide ?",
+   "choices": [
+    "Oui, plus vite que dans l'eau",
+    "Oui, aussi vite que dans l'air",
+    "Non, il lui faut un milieu matériel",
+    "Oui, mais plus lentement que dans l'air"
+   ],
+   "answer": "C",
+   "explanation": "Une onde sonore est une onde mécanique : elle a besoin d'un milieu.",
+   "source": "Cours d'ondes et de vibrations de licence, famille Halliday-Resnick",
+   "verif": "import"
+  },
+  {
+   "course": "l1-phys",
+   "category": "ondes mécaniques : onde progressive, célérité, périodicité",
+   "difficulty": 3,
+   "question": "Deux ondes de même fréquence et de même amplitude arrivent en phase en un point. Que devient l'amplitude de leur somme ?",
+   "choices": [
+    "Elle est divisée par deux",
+    "Elle est doublée",
+    "Elle est nulle",
+    "Elle est inchangée"
+   ],
+   "answer": "B",
+   "explanation": "Les amplitudes s'ajoutent lors d'une interférence constructive.",
+   "source": "Cours de physique générale de licence (ondes), famille Feynman Lectures",
+   "verif": "import"
+  },
+  {
+   "course": "l1-phys",
+   "category": "ondes mécaniques : onde progressive, célérité, périodicité",
+   "difficulty": 5,
+   "question": "Une corde de longueur L est fixée à ses deux extrémités. Quelles longueurs d'onde peuvent s'y former en régime d'ondes stationnaires ?",
+   "choices": [
+    "λ = 2L/n, avec n entier positif",
+    "λ = 2L/(2n + 1), avec n entier",
+    "λ = n·L, avec n entier positif",
+    "λ = L/n, avec n entier positif"
+   ],
+   "answer": "A",
+   "explanation": "Il faut un nombre entier de demi-longueurs d'onde dans L.",
+   "source": "Cours d'ondes et de vibrations de licence, famille Halliday-Resnick",
+   "verif": "import"
+  },
+  {
+   "course": "l1-phys",
+   "category": "son, intensité sonore et niveau en décibels",
+   "difficulty": 1,
+   "question": "Dans lequel de ces milieux le son se propage-t-il le plus vite ?",
+   "choices": [
+    "L'eau",
+    "L'acier",
+    "L'air",
+    "Le vide"
+   ],
+   "answer": "B",
+   "explanation": "La célérité du son est plus grande dans les solides rigides que dans les liquides et les gaz.",
+   "source": "Cours d'ondes et de vibrations de licence, famille Halliday-Resnick",
+   "verif": "import"
+  },
+  {
+   "course": "l1-phys",
+   "category": "son, intensité sonore et niveau en décibels",
+   "difficulty": 1,
+   "question": "Quelle grandeur physique détermine si un son est grave ou aigu ?",
+   "choices": [
+    "Son amplitude",
+    "Sa fréquence",
+    "Son timbre",
+    "Sa durée"
+   ],
+   "answer": "B",
+   "explanation": "Plus la fréquence est élevée, plus le son est aigu.",
+   "source": "Cours de physique générale de licence (ondes), famille Feynman Lectures",
+   "verif": "import"
+  },
+  {
+   "course": "l1-phys",
+   "category": "son, intensité sonore et niveau en décibels",
+   "difficulty": 1,
+   "question": "Quelle est la plage approximative de fréquences audibles par l'oreille humaine ?",
+   "choices": [
+    "De 20 kHz à 20 MHz",
+    "De 2 Hz à 2 kHz",
+    "De 200 Hz à 200 kHz",
+    "De 20 Hz à 20 kHz"
+   ],
+   "answer": "D",
+   "explanation": "L'oreille humaine perçoit environ de 20 Hz à 20 kHz.",
+   "source": "Cours d'ondes et de vibrations de licence, famille Halliday-Resnick",
+   "verif": "import"
+  },
+  {
+   "course": "l1-phys",
+   "category": "son, intensité sonore et niveau en décibels",
+   "difficulty": 3,
+   "question": "Un écho d'un cri est entendu 2 s après son émission ; la vitesse du son est de 340 m/s. À quelle distance est l'obstacle ?",
+   "choices": [
+    "680 m",
+    "340 m",
+    "1 360 m",
+    "170 m"
+   ],
+   "answer": "B",
+   "explanation": "Le son fait un aller-retour : d = 340 × 2/2 = 340 m.",
+   "source": "Cours de physique générale de licence (ondes), famille Feynman Lectures",
+   "verif": "import"
+  },
+  {
+   "course": "l1-phys",
+   "category": "son, intensité sonore et niveau en décibels",
+   "difficulty": 5,
+   "question": "Trois sources incohérentes identiques produisent chacune 80 dB au même point. Quel niveau total obtient-on, environ ?",
+   "choices": [
+    "90 dB",
+    "240 dB",
+    "83 dB",
+    "85 dB"
+   ],
+   "answer": "D",
+   "explanation": "L = 80 + 10·log 3 ≈ 80 + 4,8 ≈ 85 dB.",
+   "source": "Cours d'ondes et de vibrations de licence, famille Halliday-Resnick",
+   "verif": "import"
+  },
+  {
+   "course": "l1-phys",
+   "category": "optique géométrique : réflexion, réfraction, loi de Snell-Descartes",
+   "difficulty": 1,
+   "question": "Comment la lumière se propage-t-elle dans un milieu homogène et transparent ?",
+   "choices": [
+    "En ligne droite",
+    "En cercle",
+    "En zigzag",
+    "En spirale"
+   ],
+   "answer": "A",
+   "explanation": "C'est le principe de propagation rectiligne de la lumière.",
+   "source": "Cours d'optique de licence, famille Hecht",
+   "verif": "import"
+  },
+  {
+   "course": "l1-phys",
+   "category": "optique géométrique : réflexion, réfraction, loi de Snell-Descartes",
+   "difficulty": 1,
+   "question": "Quel est l'indice de réfraction de l'eau, environ ?",
+   "choices": [
+    "1,50",
+    "2,42",
+    "0,75",
+    "1,33"
+   ],
+   "answer": "D",
+   "explanation": "L'indice de l'eau est voisin de 1,33.",
+   "source": "Cours d'optique et d'électricité de licence, famille Halliday-Resnick / Hecht",
+   "verif": "import"
+  },
+  {
+   "course": "l1-phys",
+   "category": "optique géométrique : réflexion, réfraction, loi de Snell-Descartes",
+   "difficulty": 2,
+   "question": "Quelle est la vitesse de la lumière dans un verre d'indice 1,5, avec c = 3×10⁸ m/s dans le vide ?",
+   "choices": [
+    "4,5×10⁸ m/s",
+    "3×10⁸ m/s",
+    "1,5×10⁸ m/s",
+    "2×10⁸ m/s"
+   ],
+   "answer": "D",
+   "explanation": "v = c/n = 3×10⁸/1,5 = 2×10⁸ m/s.",
+   "source": "Cours d'optique de licence, famille Hecht",
+   "verif": "import"
+  },
+  {
+   "course": "l1-phys",
+   "category": "optique géométrique : réflexion, réfraction, loi de Snell-Descartes",
+   "difficulty": 3,
+   "question": "Un rayon arrive sur un miroir plan avec un angle d'incidence de 35°. Quel angle forment le rayon incident et le rayon réfléchi ?",
+   "choices": [
+    "35°",
+    "110°",
+    "70°",
+    "145°"
+   ],
+   "answer": "C",
+   "explanation": "Chaque rayon fait 35° avec la normale, de part et d'autre : 70° au total.",
+   "source": "Cours d'optique et d'électricité de licence, famille Halliday-Resnick / Hecht",
+   "verif": "import"
+  },
+  {
+   "course": "l1-phys",
+   "category": "optique géométrique : réflexion, réfraction, loi de Snell-Descartes",
+   "difficulty": 5,
+   "question": "Pourquoi un prisme décompose-t-il la lumière blanche ?",
+   "choices": [
+    "Le verre colore la lumière qui le traverse",
+    "L'indice du verre dépend de la longueur d'onde",
+    "La vitesse de la lumière dans le vide dépend de la couleur",
+    "Les rayons de couleurs différentes sont réfléchis différemment"
+   ],
+   "answer": "B",
+   "explanation": "Chaque couleur est réfractée avec un angle différent : c'est la dispersion.",
+   "source": "Cours d'optique de licence, famille Hecht",
+   "verif": "import"
+  },
+  {
+   "course": "l1-phys",
+   "category": "lentilles minces et formation des images",
+   "difficulty": 1,
+   "question": "Quel type de lentille a des bords plus minces que son centre ?",
+   "choices": [
+    "Une lentille divergente",
+    "Une lentille plan-concave",
+    "Une lentille convergente",
+    "Une lentille afocale"
+   ],
+   "answer": "C",
+   "explanation": "Les lentilles à bords minces font converger un faisceau parallèle.",
+   "source": "Cours d'optique de licence, famille Hecht",
+   "verif": "import"
+  },
+  {
+   "course": "l1-phys",
+   "category": "lentilles minces et formation des images",
+   "difficulty": 2,
+   "question": "Quelle image une lentille divergente donne-t-elle d'un objet réel ?",
+   "choices": [
+    "Virtuelle, renversée et plus petite",
+    "Virtuelle, droite et plus petite",
+    "Réelle, renversée et plus grande",
+    "Réelle, droite et plus grande"
+   ],
+   "answer": "B",
+   "explanation": "Une lentille divergente donne toujours une image virtuelle, droite et réduite d'un objet réel.",
+   "source": "Cours d'optique et d'électricité de licence, famille Halliday-Resnick / Hecht",
+   "verif": "import"
+  },
+  {
+   "course": "l1-phys",
+   "category": "lentilles minces et formation des images",
+   "difficulty": 2,
+   "question": "Quelle est la distance focale image d'une lentille de vergence +5 δ ?",
+   "choices": [
+    "5 m",
+    "0,5 m",
+    "0,20 m",
+    "2 m"
+   ],
+   "answer": "C",
+   "explanation": "f' = 1/C = 1/5 = 0,20 m.",
+   "source": "Cours d'optique de licence, famille Hecht",
+   "verif": "import"
+  },
+  {
+   "course": "l1-phys",
+   "category": "lentilles minces et formation des images",
+   "difficulty": 4,
+   "question": "Un objet de 3 cm est placé à 12 cm d'une lentille convergente de focale 8 cm. Quelle est la taille de l'image ?",
+   "choices": [
+    "1,5 cm",
+    "9 cm",
+    "6 cm",
+    "3 cm"
+   ],
+   "answer": "C",
+   "explanation": "1/p' = 1/8 − 1/12 donne p' = 24 cm et γ = −2, donc 6 cm.",
+   "source": "Cours d'optique et d'électricité de licence, famille Halliday-Resnick / Hecht",
+   "verif": "import"
+  },
+  {
+   "course": "l1-phys",
+   "category": "lentilles minces et formation des images",
+   "difficulty": 3,
+   "question": "Quelle lentille corrige la myopie ?",
+   "choices": [
+    "Une lentille divergente",
+    "Une lentille convergente",
+    "Une lame à faces parallèles",
+    "Une lentille cylindrique"
+   ],
+   "answer": "A",
+   "explanation": "L'œil myope forme l'image en avant de la rétine : il faut diverger les rayons.",
+   "source": "Cours d'optique de licence, famille Hecht",
+   "verif": "import"
+  },
+  {
+   "course": "l1-phys",
+   "category": "lentilles minces et formation des images",
+   "difficulty": 2,
+   "question": "Deux lentilles minces accolées ont pour vergences 2 δ et 3 δ. Quelle est la vergence du système ?",
+   "choices": [
+    "1 δ",
+    "5 δ",
+    "2,5 δ",
+    "6 δ"
+   ],
+   "answer": "B",
+   "explanation": "Pour des lentilles minces accolées, les vergences s'ajoutent.",
+   "source": "Cours d'optique et d'électricité de licence, famille Halliday-Resnick / Hecht",
+   "verif": "import"
+  },
+  {
+   "course": "l1-phys",
+   "category": "électrostatique : charge, loi de Coulomb, champ et potentiel",
+   "difficulty": 1,
+   "question": "Quelle est l'unité SI de la charge électrique ?",
+   "choices": [
+    "Le volt",
+    "L'ampère",
+    "Le farad",
+    "Le coulomb"
+   ],
+   "answer": "D",
+   "explanation": "1 C = 1 A·s.",
+   "source": "Cours d'électricité et magnétisme de licence, famille Purcell",
+   "verif": "import"
+  },
+  {
+   "course": "l1-phys",
+   "category": "électrostatique : charge, loi de Coulomb, champ et potentiel",
+   "difficulty": 2,
+   "question": "Que vaut le champ électrostatique à l'intérieur d'un conducteur en équilibre ?",
+   "choices": [
+    "Il est maximal",
+    "Il est proportionnel au rayon",
+    "Il est nul",
+    "Il est uniforme et non nul"
+   ],
+   "answer": "C",
+   "explanation": "À l'équilibre, les charges se placent de manière à annuler le champ dans le conducteur.",
+   "source": "Cours d'électricité de licence, famille Halliday-Resnick",
+   "verif": "import"
+  },
+  {
+   "course": "l1-phys",
+   "category": "électrostatique : charge, loi de Coulomb, champ et potentiel",
+   "difficulty": 2,
+   "question": "Quelle est la force qui s'exerce sur une charge q placée dans un champ électrique E ?",
+   "choices": [
+    "F = E/q²",
+    "F = q·E",
+    "F = q²·E",
+    "F = q·E²"
+   ],
+   "answer": "B",
+   "explanation": "La force électrique est le produit de la charge par le champ.",
+   "source": "Cours d'électricité et magnétisme de licence, famille Purcell",
+   "verif": "import"
+  },
+  {
+   "course": "l1-phys",
+   "category": "électrostatique : charge, loi de Coulomb, champ et potentiel",
+   "difficulty": 3,
+   "question": "Deux charges de 2 µC et 3 µC sont distantes de 3 m, avec k = 9×10⁹ SI. Quelle est la norme de la force qu'elles exercent l'une sur l'autre ?",
+   "choices": [
+    "1,8×10⁻² N",
+    "6×10⁻⁶ N",
+    "6×10⁻³ N",
+    "6×10⁻² N"
+   ],
+   "answer": "C",
+   "explanation": "F = k·q1·q2/r² = 9×10⁹ × 6×10⁻¹² / 9 = 6×10⁻³ N.",
+   "source": "Cours d'électricité de licence, famille Halliday-Resnick",
+   "verif": "import"
+  },
+  {
+   "course": "l1-phys",
+   "category": "électrostatique : charge, loi de Coulomb, champ et potentiel",
+   "difficulty": 4,
+   "question": "Entre deux plaques parallèles distantes de 2 cm, la tension est de 100 V. Quelle est la valeur du champ, supposé uniforme ?",
+   "choices": [
+    "2 000 V/m",
+    "50 V/m",
+    "200 V/m",
+    "5 000 V/m"
+   ],
+   "answer": "D",
+   "explanation": "E = U/d = 100/0,02 = 5 000 V/m.",
+   "source": "Cours d'électricité et magnétisme de licence, famille Purcell",
+   "verif": "import"
+  },
+  {
+   "course": "l1-phys",
+   "category": "circuits en courant continu : loi d'Ohm, lois de Kirchhoff",
+   "difficulty": 1,
+   "question": "Comment branche-t-on un ampèremètre pour mesurer le courant dans une branche ?",
+   "choices": [
+    "En parallèle aux bornes de la branche",
+    "À côté de la branche, sans contact",
+    "En court-circuit sur le générateur",
+    "En série dans la branche"
+   ],
+   "answer": "D",
+   "explanation": "L'ampèremètre mesure le courant qui le traverse.",
+   "source": "Cours d'électricité et magnétisme de licence, famille Purcell",
+   "verif": "import"
+  },
+  {
+   "course": "l1-phys",
+   "category": "circuits en courant continu : loi d'Ohm, lois de Kirchhoff",
+   "difficulty": 2,
+   "question": "Comment branche-t-on un voltmètre pour mesurer la tension aux bornes d'un dipôle ?",
+   "choices": [
+    "Après la dernière résistance, en série",
+    "En parallèle aux bornes du dipôle",
+    "En série avec le dipôle",
+    "En court-circuit sur le générateur"
+   ],
+   "answer": "B",
+   "explanation": "La tension se mesure en dérivation, entre les deux bornes.",
+   "source": "Cours d'électricité de licence, famille Halliday-Resnick",
+   "verif": "import"
+  },
+  {
+   "course": "l1-phys",
+   "category": "circuits en courant continu : loi d'Ohm, lois de Kirchhoff",
+   "difficulty": 3,
+   "question": "Quelle est la résistance équivalente de trois résistances de 6 Ω montées en parallèle ?",
+   "choices": [
+    "2 Ω",
+    "18 Ω",
+    "6 Ω",
+    "3 Ω"
+   ],
+   "answer": "A",
+   "explanation": "1/Req = 3/6 donne Req = 2 Ω.",
+   "source": "Cours d'électricité et magnétisme de licence, famille Purcell",
+   "verif": "import"
+  },
+  {
+   "course": "l1-phys",
+   "category": "circuits en courant continu : loi d'Ohm, lois de Kirchhoff",
+   "difficulty": 2,
+   "question": "Une ampoule porte l'indication 60 W – 120 V. Quelle est l'intensité du courant qui la traverse sous 120 V ?",
+   "choices": [
+    "5 A",
+    "0,05 A",
+    "0,5 A",
+    "2 A"
+   ],
+   "answer": "C",
+   "explanation": "I = P/U = 60/120 = 0,5 A.",
+   "source": "Cours d'électricité de licence, famille Halliday-Resnick",
+   "verif": "import"
+  },
+  {
+   "course": "l1-phys",
+   "category": "circuits en courant continu : loi d'Ohm, lois de Kirchhoff",
+   "difficulty": 4,
+   "question": "Deux résistances de 1 kΩ et 3 kΩ sont en série sous 12 V. Quelle est la tension aux bornes de celle de 3 kΩ ?",
+   "choices": [
+    "4 V",
+    "3 V",
+    "6 V",
+    "9 V"
+   ],
+   "answer": "D",
+   "explanation": "Diviseur de tension : U = 12 × 3/(1 + 3) = 9 V.",
+   "source": "Cours d'électricité et magnétisme de licence, famille Purcell",
+   "verif": "import"
+  },
+  {
+   "course": "l1-phys",
+   "category": "forces usuelles (poids, tension, réaction, frottement)",
+   "difficulty": 2,
+   "question": "Une corde idéale soutient à l'équilibre une masse de 5 kg, avec g = 10 N/kg. Quelle est la tension de la corde ?",
+   "choices": [
+    "500 N",
+    "5 N",
+    "50 N",
+    "0,5 N"
+   ],
+   "answer": "C",
+   "explanation": "À l'équilibre, la tension équilibre le poids : T = m·g = 50 N.",
+   "source": "Cours de licence de mécanique du point, famille Halliday-Resnick",
+   "verif": "import"
+  },
+  {
+   "course": "l1-phys",
+   "category": "chute libre et projectile",
+   "difficulty": 2,
+   "question": "Quelle distance parcourt un objet en chute libre en 2 s depuis le repos, avec g = 10 m/s² ?",
+   "choices": [
+    "10 m",
+    "20 m",
+    "40 m",
+    "5 m"
+   ],
+   "answer": "B",
+   "explanation": "d = ½·g·t² = ½ × 10 × 4 = 20 m.",
+   "source": "Cours de mécanique de licence, famille Kleppner-Kolenkow",
+   "verif": "import"
+  },
+  {
+   "course": "l1-phys",
+   "category": "travail et puissance d'une force",
+   "difficulty": 1,
+   "question": "Que vaut le travail d'une force perpendiculaire au déplacement ?",
+   "choices": [
+    "Il est négatif",
+    "Il est maximal",
+    "Il est égal à F·d",
+    "Il est nul"
+   ],
+   "answer": "D",
+   "explanation": "Si θ = 90°, cos θ = 0 : le travail est nul.",
+   "source": "Cours de physique générale de licence (mécanique), famille Feynman Lectures",
+   "verif": "import"
+  },
+  {
+   "course": "l1-phys",
+   "category": "énergie cinétique et théorème de l'énergie cinétique",
+   "difficulty": 2,
+   "question": "Une voiture de 1 000 kg roule à 10 m/s. Quelle est son énergie cinétique ?",
+   "choices": [
+    "10 000 J",
+    "5 000 J",
+    "50 000 J",
+    "100 000 J"
+   ],
+   "answer": "C",
+   "explanation": "Ec = ½ × 1 000 × 100 = 50 000 J.",
+   "source": "Cours de licence de mécanique du point, famille Halliday-Resnick",
+   "verif": "import"
+  },
+  {
+   "course": "l1-phys",
+   "category": "énergie potentielle et conservation de l'énergie mécanique",
+   "difficulty": 2,
+   "question": "Une masse de 2 kg est montée de 3 m, avec g = 10 N/kg. De combien varie son énergie potentielle de pesanteur ?",
+   "choices": [
+    "600 J",
+    "6 J",
+    "60 J",
+    "30 J"
+   ],
+   "answer": "C",
+   "explanation": "ΔEp = m·g·Δh = 2 × 10 × 3 = 60 J.",
+   "source": "Cours de mécanique de licence, famille Kleppner-Kolenkow",
+   "verif": "import"
+  },
+  {
+   "course": "l1-phys",
+   "category": "gravitation universelle et lois de Kepler",
+   "difficulty": 3,
+   "question": "On double la distance entre deux masses. Par quel facteur la force gravitationnelle est-elle multipliée ?",
+   "choices": [
+    "1/2",
+    "1/4",
+    "1/8",
+    "2"
+   ],
+   "answer": "B",
+   "explanation": "La force varie en 1/r² : doubler r la divise par 4.",
+   "source": "Cours de licence de mécanique du point, famille Halliday-Resnick",
+   "verif": "import"
+  },
+  {
+   "course": "l1-phys",
+   "category": "statique des solides et moment d'une force",
+   "difficulty": 3,
+   "question": "Sur une balançoire en équilibre, un enfant de 30 kg est à 2 m du pivot. À quelle distance doit s'asseoir, de l'autre côté, un enfant de 20 kg ?",
+   "choices": [
+    "3 m",
+    "1,3 m",
+    "4 m",
+    "2 m"
+   ],
+   "answer": "A",
+   "explanation": "30 × 2 = 20 × d donne d = 3 m.",
+   "source": "Cours de mécanique de licence, famille Kleppner-Kolenkow",
+   "verif": "import"
+  }
+ ]
+}

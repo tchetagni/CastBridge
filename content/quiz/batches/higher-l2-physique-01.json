@@ -1,0 +1,2007 @@
+{
+  "batch": "higher-l2-physique-01",
+  "author": "Claude",
+  "date": "2026-10-03",
+  "questions": [
+    {
+      "course": "l2-phys",
+      "category": "mécanique analytique d'introduction : coordonnées généralisées",
+      "difficulty": 1,
+      "question": "Qu'appelle-t-on coordonnées généralisées d'un système mécanique ?",
+      "choices": [
+        "Des paramètres indépendants qui fixent entièrement la configuration du système",
+        "Les trois coordonnées cartésiennes du seul centre de masse du système",
+        "Les composantes des forces appliquées exprimées dans une base polaire",
+        "Les vitesses de ses points matériels mesurées dans un référentiel galiléen"
+      ],
+      "answer": "A",
+      "explanation": "Les coordonnées généralisées q_i sont en nombre égal aux degrés de liberté ; ce peuvent être des longueurs, des angles ou toute autre grandeur adaptée.",
+      "source": "Cours de licence de mécanique analytique, famille Landau-Lifchitz / Goldstein",
+      "verif": "import"
+    },
+    {
+      "course": "l2-phys",
+      "category": "mécanique analytique d'introduction : coordonnées généralisées",
+      "difficulty": 2,
+      "question": "Quelle est la forme des équations d'Euler-Lagrange pour une coordonnée généralisée q de Lagrangien L ?",
+      "choices": [
+        "d/dt de (∂L/∂coordonnée) égale ∂L/∂vitesse",
+        "∂L/∂vitesse plus ∂L/∂coordonnée égale zéro",
+        "d/dt de (∂L/∂vitesse) égale ∂L/∂coordonnée",
+        "d²L/dt² égale ∂L/∂t"
+      ],
+      "answer": "C",
+      "explanation": "Le principe de moindre action conduit, pour chaque coordonnée généralisée, à d/dt(∂L/∂q̇) = ∂L/∂q.",
+      "source": "Cours de licence de mécanique analytique, famille Landau-Lifchitz / Goldstein",
+      "verif": "import"
+    },
+    {
+      "course": "l2-phys",
+      "category": "mécanique analytique d'introduction : coordonnées généralisées",
+      "difficulty": 3,
+      "question": "Dans un système de Lagrangien L(q, q̇), la coordonnée q n'apparaît pas explicitement dans L. Que peut-on affirmer ?",
+      "choices": [
+        "Le moment conjugué ∂L/∂q̇ est conservé",
+        "L'énergie mécanique du système est nécessairement nulle",
+        "La coordonnée q est forcément une longueur",
+        "La vitesse q̇ reste constante à tout instant"
+      ],
+      "answer": "A",
+      "explanation": "Si q est cyclique, l'équation d'Euler-Lagrange donne d/dt(∂L/∂q̇) = 0 : le moment conjugué est une constante du mouvement.",
+      "source": "Cours de licence de mécanique analytique, famille Landau-Lifchitz / Goldstein",
+      "verif": "import"
+    },
+    {
+      "course": "l2-phys",
+      "category": "mécanique analytique d'introduction : coordonnées généralisées",
+      "difficulty": 4,
+      "question": "Pour une particule dans un potentiel central V(r), L = ½m(ṙ² + r²θ̇²) − V(r) en coordonnées polaires. Quelle grandeur se conserve car θ est cyclique ?",
+      "choices": [
+        "La quantité de mouvement radiale mṙ",
+        "L'énergie potentielle V(r)",
+        "Le moment cinétique mr²θ̇",
+        "La vitesse angulaire du repère"
+      ],
+      "answer": "C",
+      "explanation": "L'angle θ est absent de L : son moment conjugué ∂L/∂θ̇ = mr²θ̇, c'est-à-dire le moment cinétique, est conservé.",
+      "source": "Cours de licence de mécanique analytique, famille Landau-Lifchitz / Goldstein",
+      "verif": "import"
+    },
+    {
+      "course": "l2-phys",
+      "category": "mécanique analytique d'introduction : coordonnées généralisées",
+      "difficulty": 5,
+      "question": "Deux Lagrangiens L et L' = L + dF(q,t)/dt, où F est une fonction régulière quelconque de q et t, donnent-ils des équations du mouvement différentes ?",
+      "choices": [
+        "Oui : le terme dF/dt ajoute une force supplémentaire",
+        "Oui : l'action varie donc les trajectoires extrémales aussi",
+        "Non, mais seulement si F ne dépend pas du temps",
+        "Non : ils donnent les mêmes équations d'Euler-Lagrange"
+      ],
+      "answer": "D",
+      "explanation": "L'action change d'une quantité qui ne dépend que des extrémités, dont la variation est nulle : le Lagrangien est défini à une dérivée totale près.",
+      "source": "Cours de licence de mécanique analytique, famille Landau-Lifchitz / Goldstein",
+      "verif": "import"
+    },
+    {
+      "course": "l2-phys",
+      "category": "référentiels non galiléens et forces d'inertie",
+      "difficulty": 1,
+      "question": "Un référentiel en translation rectiligne uniforme par rapport à un référentiel galiléen est-il galiléen ?",
+      "choices": [
+        "Non : une force d'inertie d'entraînement constante y apparaît",
+        "Oui : les lois de Newton y ont la même forme",
+        "Non : seul le référentiel de Copernic est galiléen",
+        "Oui, mais seulement pour des vitesses inférieures à 1 m/s"
+      ],
+      "answer": "B",
+      "explanation": "Une translation rectiligne uniforme ne crée pas de force d'inertie : tous ces référentiels sont galiléens (principe de relativité de Galilée).",
+      "source": "Cours de licence de mécanique du point et du solide, famille Kleppner-Kolenkow / Taylor",
+      "verif": "import"
+    },
+    {
+      "course": "l2-phys",
+      "category": "référentiels non galiléens et forces d'inertie",
+      "difficulty": 1,
+      "question": "Dans l'hémisphère nord, vers quel côté la force de Coriolis dévie-t-elle un mobile qui se déplace horizontalement ?",
+      "choices": [
+        "Vers sa gauche par rapport au sens du mouvement",
+        "Vers sa droite par rapport au sens du mouvement",
+        "Vers l'est quel que soit le sens du mouvement",
+        "Vers le pôle Nord quel que soit le mouvement"
+      ],
+      "answer": "B",
+      "explanation": "La force de Coriolis −2mΩ×v dévie vers la droite dans l'hémisphère nord et vers la gauche dans l'hémisphère sud.",
+      "source": "Cours de licence de mécanique du point et du solide, famille Kleppner-Kolenkow / Taylor",
+      "verif": "import"
+    },
+    {
+      "course": "l2-phys",
+      "category": "référentiels non galiléens et forces d'inertie",
+      "difficulty": 3,
+      "question": "Pourquoi le poids apparent d'un corps est-il plus faible à l'équateur qu'aux pôles, même en ignorant l'aplatissement de la Terre ?",
+      "choices": [
+        "À cause de la force d'inertie centrifuge due à la rotation de la Terre",
+        "À cause de la force de Coriolis qui s'oppose à l'attraction terrestre",
+        "Parce que la masse du corps diminue quand sa vitesse augmente",
+        "Parce que la gravitation s'annule à la latitude zéro"
+      ],
+      "answer": "A",
+      "explanation": "Dans le référentiel terrestre en rotation, la force centrifuge m Ω² R est maximale à l'équateur et s'oppose à l'attraction.",
+      "source": "Cours de licence de mécanique du point et du solide, famille Kleppner-Kolenkow / Taylor",
+      "verif": "import"
+    },
+    {
+      "course": "l2-phys",
+      "category": "référentiels non galiléens et forces d'inertie",
+      "difficulty": 2,
+      "question": "Quel énoncé exprime le principe d'équivalence faible ?",
+      "choices": [
+        "Tout référentiel en mouvement uniforme équivaut à un référentiel au repos",
+        "L'énergie et la masse sont deux formes d'une même grandeur",
+        "La masse inertielle et la masse grave d'un corps sont égales",
+        "Les forces d'inertie et les forces de frottement ont la même origine"
+      ],
+      "answer": "C",
+      "explanation": "L'égalité de la masse inertielle et de la masse grave rend l'accélération de chute libre indépendante de la masse du corps.",
+      "source": "Cours de licence de mécanique du point et du solide, famille Kleppner-Kolenkow / Taylor",
+      "verif": "import"
+    },
+    {
+      "course": "l2-phys",
+      "category": "référentiels non galiléens et forces d'inertie",
+      "difficulty": 1,
+      "question": "Dans un wagon qui démarre en accélérant vers l'avant, une boule suspendue à un fil dévie de la verticale. Dans quel sens, pour un observateur du wagon ?",
+      "choices": [
+        "Vers l'arrière du wagon",
+        "Vers l'avant du wagon",
+        "Latéralement, vers la droite",
+        "Elle reste exactement verticale"
+      ],
+      "answer": "A",
+      "explanation": "L'observateur du wagon voit une force d'inertie −m a dirigée vers l'arrière, qui écarte la boule de la verticale dans ce sens.",
+      "source": "Cours de licence de mécanique du point et du solide, famille Kleppner-Kolenkow / Taylor",
+      "verif": "import"
+    },
+    {
+      "course": "l2-phys",
+      "category": "forces centrales et moment cinétique",
+      "difficulty": 1,
+      "question": "Quelle est l'expression du moment cinétique par rapport à O d'un point matériel de position r et de quantité de mouvement p ?",
+      "choices": [
+        "Le produit scalaire r · p",
+        "Le produit vectoriel r × F",
+        "Le rapport p / r",
+        "Le produit vectoriel r × p"
+      ],
+      "answer": "D",
+      "explanation": "Le moment cinétique est le produit vectoriel du vecteur position et de la quantité de mouvement.",
+      "source": "Cours de licence de mécanique, famille Landau-Lifchitz / Goldstein",
+      "verif": "import"
+    },
+    {
+      "course": "l2-phys",
+      "category": "forces centrales et moment cinétique",
+      "difficulty": 2,
+      "question": "Pourquoi le moment cinétique d'un point soumis à une force centrale est-il conservé ?",
+      "choices": [
+        "Le moment de la force par rapport au centre est nul",
+        "La force centrale est toujours constante en module",
+        "La vitesse du point est constamment perpendiculaire au rayon",
+        "L'énergie cinétique du point reste constante"
+      ],
+      "answer": "A",
+      "explanation": "dL/dt = r × F ; pour une force centrale F est parallèle à r, donc r × F = 0.",
+      "source": "Cours de licence de mécanique, famille Landau-Lifchitz / Goldstein",
+      "verif": "import"
+    },
+    {
+      "course": "l2-phys",
+      "category": "forces centrales et moment cinétique",
+      "difficulty": 3,
+      "question": "Dans l'étude d'un mouvement à force centrale, que représente le terme L²/(2mr²) de l'énergie potentielle effective ?",
+      "choices": [
+        "La barrière centrifuge liée au mouvement angulaire",
+        "L'énergie potentielle gravitationnelle du centre attracteur",
+        "L'énergie cinétique radiale du point",
+        "Le travail des forces de frottement"
+      ],
+      "answer": "A",
+      "explanation": "Ce terme provient de la partie angulaire de l'énergie cinétique, écrite avec le moment cinétique conservé L ; il repousse le point du centre.",
+      "source": "Cours de licence de mécanique, famille Landau-Lifchitz / Goldstein",
+      "verif": "import"
+    },
+    {
+      "course": "l2-phys",
+      "category": "forces centrales et moment cinétique",
+      "difficulty": 4,
+      "question": "Pour un satellite de masse m en orbite circulaire de rayon r autour d'une masse M (énergie potentielle −GMm/r), quelle est son énergie mécanique ?",
+      "choices": [
+        "Négative, égale à −GMm/r",
+        "Négative, égale à −GMm/(2r)",
+        "Positive, égale à +GMm/(2r)",
+        "Négative, égale à −GMm/(4r)"
+      ],
+      "answer": "B",
+      "explanation": "Pour une orbite circulaire, Ec = GMm/(2r) et Ep = −GMm/r, d'où E = Ec + Ep = −GMm/(2r).",
+      "source": "Cours de licence de mécanique, famille Landau-Lifchitz / Goldstein",
+      "verif": "import"
+    },
+    {
+      "course": "l2-phys",
+      "category": "forces centrales et moment cinétique",
+      "difficulty": 5,
+      "question": "Quel théorème affirme que seuls les potentiels centraux en 1/r et en r² donnent des orbites liées toujours fermées ?",
+      "choices": [
+        "Le théorème de Bertrand",
+        "Le théorème de Noether",
+        "Le théorème de Liouville",
+        "Le théorème de Gauss"
+      ],
+      "answer": "A",
+      "explanation": "Le théorème de Bertrand classe les potentiels centraux pour lesquels toutes les trajectoires bornées sont fermées : Kepler (1/r) et oscillateur harmonique (r²).",
+      "source": "Cours de licence de mécanique, famille Landau-Lifchitz / Goldstein",
+      "verif": "import"
+    },
+    {
+      "course": "l2-phys",
+      "category": "oscillateurs amortis et forcés, résonance",
+      "difficulty": 1,
+      "question": "Comment nomme-t-on les trois régimes de l'oscillateur harmonique amorti libre ?",
+      "choices": [
+        "Sinusoïdal, harmonique et chaotique",
+        "Stationnaire, transitoire et résonant",
+        "Pseudo-périodique, critique et apériodique",
+        "Sous-critique, linéaire et divergent"
+      ],
+      "answer": "C",
+      "explanation": "Selon l'importance de l'amortissement, l'oscillateur est pseudo-périodique (faible), critique ou apériodique (fort).",
+      "source": "Cours de licence sur les oscillations et les ondes, famille Berkeley Physics Course / Pain",
+      "verif": "import"
+    },
+    {
+      "course": "l2-phys",
+      "category": "oscillateurs amortis et forcés, résonance",
+      "difficulty": 2,
+      "question": "Pour m ẍ + λ ẋ + k x = 0, quelle condition donne un régime pseudo-périodique ?",
+      "choices": [
+        "λ² > 4mk (amortissement fort)",
+        "λ² = 4mk (amortissement critique)",
+        "λ² < 4mk (amortissement faible)",
+        "λ = 0 (amortissement nul)"
+      ],
+      "answer": "C",
+      "explanation": "Le discriminant de l'équation caractéristique, λ² − 4mk, est négatif : les racines sont complexes conjuguées et le mouvement oscille en s'amortissant.",
+      "source": "Cours de licence sur les oscillations et les ondes, famille Berkeley Physics Course / Pain",
+      "verif": "import"
+    },
+    {
+      "course": "l2-phys",
+      "category": "oscillateurs amortis et forcés, résonance",
+      "difficulty": 3,
+      "question": "Pour un oscillateur de masse m, de pulsation propre ω0 et de coefficient d'amortissement λ, quelle est l'expression usuelle du facteur de qualité ?",
+      "choices": [
+        "Q = λω0/m",
+        "Q = λ/(mω0)",
+        "Q = mλ/ω0",
+        "Q = mω0/λ"
+      ],
+      "answer": "D",
+      "explanation": "Le facteur de qualité compare l'énergie stockée à l'énergie perdue par période : Q = mω0/λ, d'autant plus grand que l'amortissement est faible.",
+      "source": "Cours de licence sur les oscillations et les ondes, famille Berkeley Physics Course / Pain",
+      "verif": "import"
+    },
+    {
+      "course": "l2-phys",
+      "category": "oscillateurs amortis et forcés, résonance",
+      "difficulty": 4,
+      "question": "Pour un oscillateur amorti forcé par F0 cos ωt, à quelle pulsation l'amplitude de la vitesse est-elle maximale en régime permanent ?",
+      "choices": [
+        "À une pulsation inférieure à ω0, d'un terme dépendant de λ",
+        "À ω = 2ω0",
+        "Exactement à la pulsation propre ω0",
+        "À la pseudo-pulsation du régime libre"
+      ],
+      "answer": "C",
+      "explanation": "L'amplitude de vitesse vaut F0/√(λ² + (mω − k/ω)²) : elle est maximale quand mω = k/ω, soit ω = ω0, quel que soit λ.",
+      "source": "Cours de licence sur les oscillations et les ondes, famille Berkeley Physics Course / Pain",
+      "verif": "import"
+    },
+    {
+      "course": "l2-phys",
+      "category": "oscillateurs amortis et forcés, résonance",
+      "difficulty": 2,
+      "question": "Quel régime d'amortissement ramène l'oscillateur à l'équilibre le plus vite sans le dépasser ?",
+      "choices": [
+        "Le régime pseudo-périodique",
+        "Le régime apériodique fortement amorti",
+        "Le régime non amorti",
+        "Le régime critique"
+      ],
+      "answer": "D",
+      "explanation": "Le régime critique revient à l'équilibre plus vite que le régime apériodique et sans oscillation, contrairement au régime pseudo-périodique.",
+      "source": "Cours de licence sur les oscillations et les ondes, famille Berkeley Physics Course / Pain",
+      "verif": "import"
+    },
+    {
+      "course": "l2-phys",
+      "category": "systèmes de points et centre de masse",
+      "difficulty": 1,
+      "question": "Pour des points matériels de masses m_i et de positions r_i, comment définit-on le centre de masse G ?",
+      "choices": [
+        "OG = Σ r_i / N",
+        "OG = Σ m_i² r_i / Σ m_i²",
+        "OG = Σ m_i r_i / Σ m_i",
+        "OG = Σ m_i r_i, sans normalisation"
+      ],
+      "answer": "C",
+      "explanation": "Le centre de masse est le barycentre des points pondérés par leurs masses.",
+      "source": "Cours de licence de mécanique du point et du solide, famille Kleppner-Kolenkow / Taylor",
+      "verif": "import"
+    },
+    {
+      "course": "l2-phys",
+      "category": "systèmes de points et centre de masse",
+      "difficulty": 2,
+      "question": "Quel est l'effet des forces intérieures sur le mouvement du centre de masse d'un système ?",
+      "choices": [
+        "Elles l'accélèrent dans la direction de leur résultante",
+        "Elles le freinent dès qu'elles dissipent de l'énergie",
+        "Aucun : seules les forces extérieures le modifient",
+        "Elles le maintiennent immobile dans tous les cas"
+      ],
+      "answer": "C",
+      "explanation": "Par le principe des actions réciproques, la somme des forces intérieures est nulle : M a_G = somme des forces extérieures.",
+      "source": "Cours de licence de mécanique du point et du solide, famille Kleppner-Kolenkow / Taylor",
+      "verif": "import"
+    },
+    {
+      "course": "l2-phys",
+      "category": "systèmes de points et centre de masse",
+      "difficulty": 2,
+      "question": "Deux masses ponctuelles de 2 kg et 6 kg sont placées sur un axe aux abscisses 0 m et 4 m. Quelle est l'abscisse de leur centre de masse ?",
+      "choices": [
+        "3 m",
+        "2 m",
+        "2,5 m",
+        "1 m"
+      ],
+      "answer": "A",
+      "explanation": "x_G = (2×0 + 6×4)/(2 + 6) = 24/8 = 3 m.",
+      "source": "Cours de licence de mécanique du point et du solide, famille Kleppner-Kolenkow / Taylor",
+      "verif": "import"
+    },
+    {
+      "course": "l2-phys",
+      "category": "systèmes de points et centre de masse",
+      "difficulty": 4,
+      "question": "Selon le théorème de König, comment s'écrit l'énergie cinétique d'un système de masse totale M et de centre de masse G ?",
+      "choices": [
+        "½Mv_G² moins l'énergie cinétique relative au référentiel barycentrique",
+        "½Mv_G² plus l'énergie cinétique relative au référentiel barycentrique",
+        "Σ m_i v_i, sans terme lié au centre de masse",
+        "½Mv_G² seul, quel que soit le système"
+      ],
+      "answer": "B",
+      "explanation": "L'énergie cinétique est la somme de celle du centre de masse affecté de la masse totale et de l'énergie cinétique relative au centre de masse.",
+      "source": "Cours de licence de mécanique du point et du solide, famille Kleppner-Kolenkow / Taylor",
+      "verif": "import"
+    },
+    {
+      "course": "l2-phys",
+      "category": "systèmes de points et centre de masse",
+      "difficulty": 3,
+      "question": "Quelle est la masse réduite μ de deux corps de masses m1 et m2 en interaction mutuelle ?",
+      "choices": [
+        "La somme des masses divisée par leur produit",
+        "La moyenne arithmétique des deux masses",
+        "La racine carrée du produit des masses",
+        "Le produit des masses divisé par leur somme"
+      ],
+      "answer": "D",
+      "explanation": "Le problème à deux corps se ramène à un corps fictif de masse réduite μ = m1 m2/(m1 + m2) dans le champ de force.",
+      "source": "Cours de licence de mécanique du point et du solide, famille Kleppner-Kolenkow / Taylor",
+      "verif": "import"
+    },
+    {
+      "course": "l2-phys",
+      "category": "mécanique du solide : moment d'inertie, rotation autour d'un axe",
+      "difficulty": 1,
+      "question": "Quelle grandeur mesure l'inertie d'un solide vis-à-vis de sa mise en rotation autour d'un axe fixe ?",
+      "choices": [
+        "Le moment d'inertie",
+        "Le moment cinétique",
+        "La quantité de mouvement",
+        "Le moment de la force"
+      ],
+      "answer": "A",
+      "explanation": "Le moment d'inertie joue en rotation le rôle de la masse en translation : Γ = I θ̈.",
+      "source": "Cours de licence de mécanique du solide, famille Halliday-Resnick / Kleppner-Kolenkow",
+      "verif": "import"
+    },
+    {
+      "course": "l2-phys",
+      "category": "mécanique du solide : moment d'inertie, rotation autour d'un axe",
+      "difficulty": 1,
+      "question": "Quel est le moment d'inertie d'un disque plein homogène de masse M et de rayon R par rapport à son axe de révolution ?",
+      "choices": [
+        "MR²",
+        "¼MR²",
+        "½MR²",
+        "⅖MR²"
+      ],
+      "answer": "C",
+      "explanation": "Le calcul de ∫ r² dm sur le disque donne ½MR².",
+      "source": "Cours de licence de mécanique du solide, famille Halliday-Resnick / Kleppner-Kolenkow",
+      "verif": "import"
+    },
+    {
+      "course": "l2-phys",
+      "category": "mécanique du solide : moment d'inertie, rotation autour d'un axe",
+      "difficulty": 3,
+      "question": "Que dit le théorème de Huygens-Steiner pour un axe parallèle à un axe passant par G, à la distance d ?",
+      "choices": [
+        "I est égal à I_G moins M d²",
+        "I est égal à I_G plus M d²",
+        "I est égal à I_G plus M d",
+        "I est égal à I_G multiplié par d²"
+      ],
+      "answer": "B",
+      "explanation": "Le moment d'inertie par rapport à un axe décalé de d est celui de l'axe passant par G augmenté de M d².",
+      "source": "Cours de licence de mécanique du solide, famille Halliday-Resnick / Kleppner-Kolenkow",
+      "verif": "import"
+    },
+    {
+      "course": "l2-phys",
+      "category": "mécanique du solide : moment d'inertie, rotation autour d'un axe",
+      "difficulty": 4,
+      "question": "Un cylindre plein homogène descend sans glisser un plan incliné d'angle θ. Quelle est l'accélération de son centre ?",
+      "choices": [
+        "(2/3) g sin θ",
+        "g sin θ",
+        "(1/2) g sin θ",
+        "(3/4) g sin θ"
+      ],
+      "answer": "A",
+      "explanation": "a = g sin θ/(1 + I/(MR²)) avec I = ½MR², soit a = (2/3) g sin θ.",
+      "source": "Cours de licence de mécanique du solide, famille Halliday-Resnick / Kleppner-Kolenkow",
+      "verif": "import"
+    },
+    {
+      "course": "l2-phys",
+      "category": "mécanique du solide : moment d'inertie, rotation autour d'un axe",
+      "difficulty": 5,
+      "question": "Quelle propriété caractérise les axes principaux d'inertie d'un solide ?",
+      "choices": [
+        "Le moment d'inertie y est nul",
+        "Ils sont toujours verticaux",
+        "Le tenseur d'inertie y est diagonal",
+        "Le moment cinétique y est toujours nul"
+      ],
+      "answer": "C",
+      "explanation": "Dans la base des axes principaux, le tenseur d'inertie est diagonal, et L est parallèle à ω pour une rotation autour d'un tel axe.",
+      "source": "Cours de licence de mécanique du solide, famille Halliday-Resnick / Kleppner-Kolenkow",
+      "verif": "import"
+    },
+    {
+      "course": "l2-phys",
+      "category": "ondes : superposition, interférences, ondes stationnaires",
+      "difficulty": 1,
+      "question": "Quel principe permet d'affirmer que l'onde résultante en un point est la somme des ondes qui s'y croisent ?",
+      "choices": [
+        "Le principe de superposition",
+        "Le principe de moindre action",
+        "Le principe d'incertitude",
+        "Le principe de Fermat"
+      ],
+      "answer": "A",
+      "explanation": "Dans un milieu linéaire, les équations d'onde admettent des solutions qui s'additionnent : c'est le principe de superposition.",
+      "source": "Cours de licence sur les oscillations et les ondes, famille Berkeley Physics Course / Pain",
+      "verif": "import"
+    },
+    {
+      "course": "l2-phys",
+      "category": "ondes : superposition, interférences, ondes stationnaires",
+      "difficulty": 2,
+      "question": "À quelle différence de marche δ deux ondes cohérentes émises en phase interfèrent-elles destructivement (n entier) ?",
+      "choices": [
+        "δ = nλ",
+        "δ = nλ/4",
+        "δ = (2n + 1)λ",
+        "δ = (n + ½)λ"
+      ],
+      "answer": "D",
+      "explanation": "Les ondes arrivent en opposition de phase quand la différence de marche est un nombre demi-entier de longueurs d'onde.",
+      "source": "Cours de licence sur les oscillations et les ondes, famille Berkeley Physics Course / Pain",
+      "verif": "import"
+    },
+    {
+      "course": "l2-phys",
+      "category": "ondes : superposition, interférences, ondes stationnaires",
+      "difficulty": 2,
+      "question": "Quelles sont les fréquences propres d'une corde de longueur L fixée à ses deux extrémités, de célérité d'onde v ?",
+      "choices": [
+        "f_n = (2n + 1) v/(4L)",
+        "f_n = n v/L",
+        "f_n = n v/(2L), avec n = 1, 2, 3…",
+        "f_n = n v/(4L)"
+      ],
+      "answer": "C",
+      "explanation": "Les nœuds aux extrémités imposent L = n λ/2, d'où f_n = n v/(2L).",
+      "source": "Cours de licence sur les oscillations et les ondes, famille Berkeley Physics Course / Pain",
+      "verif": "import"
+    },
+    {
+      "course": "l2-phys",
+      "category": "ondes : superposition, interférences, ondes stationnaires",
+      "difficulty": 3,
+      "question": "Quelle est la célérité des ondes transversales sur une corde tendue de tension T et de masse linéique μ ?",
+      "choices": [
+        "La racine carrée du rapport μ / T",
+        "Le rapport T / μ, sans racine",
+        "La racine carrée du produit T μ",
+        "La racine carrée du rapport T / μ"
+      ],
+      "answer": "D",
+      "explanation": "Une tension plus grande et une masse linéique plus faible augmentent la célérité : v = √(T/μ).",
+      "source": "Cours de licence sur les oscillations et les ondes, famille Berkeley Physics Course / Pain",
+      "verif": "import"
+    },
+    {
+      "course": "l2-phys",
+      "category": "ondes : superposition, interférences, ondes stationnaires",
+      "difficulty": 4,
+      "question": "Quel déphasage subit une onde sur une corde lorsqu'elle se réfléchit sur une extrémité libre ?",
+      "choices": [
+        "Un déphasage de π",
+        "Un déphasage de π/2",
+        "Aucun déphasage",
+        "Un déphasage de 3π/2"
+      ],
+      "answer": "C",
+      "explanation": "À une extrémité libre l'onde réfléchie garde le même signe, alors qu'une extrémité fixe inverse le signe de l'élongation.",
+      "source": "Cours de licence sur les oscillations et les ondes, famille Berkeley Physics Course / Pain",
+      "verif": "import"
+    },
+    {
+      "course": "l2-phys",
+      "category": "diffraction et réseaux",
+      "difficulty": 1,
+      "question": "Quel est le pas d'un réseau comportant 500 traits par millimètre ?",
+      "choices": [
+        "0,2 µm",
+        "2 µm",
+        "5 µm",
+        "20 µm"
+      ],
+      "answer": "B",
+      "explanation": "Le pas est l'inverse de la densité de traits : 1 mm / 500 = 2 µm.",
+      "source": "Cours de licence d'optique ondulatoire, famille Hecht / Born-Wolf",
+      "verif": "import"
+    },
+    {
+      "course": "l2-phys",
+      "category": "diffraction et réseaux",
+      "difficulty": 2,
+      "question": "Pour une fente simple de largeur a éclairée par une onde de longueur d'onde λ, quelle relation donne les directions des minima d'intensité (m entier non nul) ?",
+      "choices": [
+        "a sin θ = (m + ½)λ",
+        "a cos θ = mλ",
+        "a sin θ = mλ/2",
+        "a sin θ = mλ"
+      ],
+      "answer": "D",
+      "explanation": "Les minima de diffraction apparaissent quand les contributions des deux moitiés de la fente s'annulent deux à deux : a sin θ = mλ.",
+      "source": "Cours de licence d'optique ondulatoire, famille Hecht / Born-Wolf",
+      "verif": "import"
+    },
+    {
+      "course": "l2-phys",
+      "category": "diffraction et réseaux",
+      "difficulty": 3,
+      "question": "Un réseau de pas d est éclairé en incidence normale par une lumière de longueur d'onde λ. Quelle condition limite l'ordre m observable ?",
+      "choices": [
+        "|m| < d/λ, car sin θ ne peut dépasser 1",
+        "|m| < λ/d, car sin θ ne peut dépasser 1",
+        "|m| < N, le nombre de traits éclairés",
+        "|m| < 2d/λ, quelle que soit la longueur d'onde"
+      ],
+      "answer": "A",
+      "explanation": "La formule sin θ = mλ/d n'a de solution que si |mλ/d| < 1, soit |m| < d/λ.",
+      "source": "Cours de licence d'optique ondulatoire, famille Hecht / Born-Wolf",
+      "verif": "import"
+    },
+    {
+      "course": "l2-phys",
+      "category": "diffraction et réseaux",
+      "difficulty": 4,
+      "question": "Selon le critère de Rayleigh, quelle est la résolution angulaire approximative d'une ouverture circulaire de diamètre D pour une longueur d'onde λ ?",
+      "choices": [
+        "θ ≈ λ/(2D)",
+        "θ ≈ 1,22 D/λ",
+        "θ ≈ λ D",
+        "θ ≈ 1,22 λ/D"
+      ],
+      "answer": "D",
+      "explanation": "Deux sources sont tout juste séparées quand le maximum de l'une tombe sur le premier minimum de l'autre, soit θ ≈ 1,22 λ/D.",
+      "source": "Cours de licence d'optique ondulatoire, famille Hecht / Born-Wolf",
+      "verif": "import"
+    },
+    {
+      "course": "l2-phys",
+      "category": "diffraction et réseaux",
+      "difficulty": 1,
+      "question": "Comment s'écrit la formule des réseaux en incidence normale pour l'ordre m ?",
+      "choices": [
+        "sin θ_m = m d/λ",
+        "sin θ_m = mλ/d",
+        "tan θ_m = mλ/d",
+        "cos θ_m = mλ/d"
+      ],
+      "answer": "B",
+      "explanation": "Les maxima principaux apparaissent quand la différence de marche entre traits voisins, d sin θ, vaut mλ.",
+      "source": "Cours de licence d'optique ondulatoire, famille Hecht / Born-Wolf",
+      "verif": "import"
+    },
+    {
+      "course": "l2-phys",
+      "category": "polarisation de la lumière",
+      "difficulty": 1,
+      "question": "Que transmet un système de deux polariseurs parfaits aux axes perpendiculaires, pour une lumière incidente quelconque ?",
+      "choices": [
+        "Aucune lumière",
+        "La moitié de l'intensité incidente",
+        "Un quart de l'intensité incidente",
+        "Toute la lumière polarisée selon le premier axe"
+      ],
+      "answer": "A",
+      "explanation": "Après le premier polariseur, la polarisation est rectiligne selon son axe ; le second, croisé, l'arrête totalement (cos² 90° = 0).",
+      "source": "Cours de licence d'optique ondulatoire, famille Hecht / Born-Wolf",
+      "verif": "import"
+    },
+    {
+      "course": "l2-phys",
+      "category": "polarisation de la lumière",
+      "difficulty": 2,
+      "question": "Que dit la loi de Malus pour une lumière polarisée rectilignement traversant un analyseur dont l'axe forme l'angle θ avec la polarisation ?",
+      "choices": [
+        "I = I0 cos²θ",
+        "I = I0 cos θ",
+        "I = I0 sin²θ",
+        "I = I0 cos 2θ"
+      ],
+      "answer": "A",
+      "explanation": "L'amplitude transmise est E0 cos θ et l'intensité est proportionnelle au carré de l'amplitude.",
+      "source": "Cours de licence d'optique ondulatoire, famille Hecht / Born-Wolf",
+      "verif": "import"
+    },
+    {
+      "course": "l2-phys",
+      "category": "polarisation de la lumière",
+      "difficulty": 3,
+      "question": "Quel est l'angle d'incidence de Brewster θ_B pour une interface entre un milieu d'indice n1 (incidence) et un milieu d'indice n2 ?",
+      "choices": [
+        "sin θ_B = n2/n1",
+        "tan θ_B = n1/n2",
+        "tan θ_B = n2/n1",
+        "cos θ_B = n2/n1"
+      ],
+      "answer": "C",
+      "explanation": "À cet angle les rayons réfléchi et réfracté sont perpendiculaires, et la composante parallèle au plan d'incidence n'est pas réfléchie.",
+      "source": "Cours de licence d'optique ondulatoire, famille Hecht / Born-Wolf",
+      "verif": "import"
+    },
+    {
+      "course": "l2-phys",
+      "category": "polarisation de la lumière",
+      "difficulty": 4,
+      "question": "De la lumière naturelle d'intensité I0 traverse trois polariseurs parfaits d'axes à 0°, 45° et 90°. Quelle est l'intensité finale ?",
+      "choices": [
+        "I0/4",
+        "I0/8",
+        "I0/2",
+        "0"
+      ],
+      "answer": "B",
+      "explanation": "Le premier polariseur donne I0/2, le deuxième I0/2 × cos²45° = I0/4, le troisième I0/4 × cos²45° = I0/8.",
+      "source": "Cours de licence d'optique ondulatoire, famille Hecht / Born-Wolf",
+      "verif": "import"
+    },
+    {
+      "course": "l2-phys",
+      "category": "polarisation de la lumière",
+      "difficulty": 1,
+      "question": "Quelle fraction de l'intensité d'une lumière naturelle non polarisée traverse un polariseur parfait ?",
+      "choices": [
+        "Un quart",
+        "La totalité",
+        "La moitié",
+        "Un tiers"
+      ],
+      "answer": "C",
+      "explanation": "La lumière naturelle contient toutes les orientations de polarisation de façon équiprobable ; en moyenne cos² vaut 1/2.",
+      "source": "Cours de licence d'optique ondulatoire, famille Hecht / Born-Wolf",
+      "verif": "import"
+    },
+    {
+      "course": "l2-phys",
+      "category": "thermodynamique : deuxième principe et entropie",
+      "difficulty": 1,
+      "question": "Quel énoncé correspond à celui de Clausius du deuxième principe ?",
+      "choices": [
+        "La chaleur ne passe pas spontanément d'un corps froid à un corps chaud",
+        "La chaleur passe spontanément du froid au chaud si l'on attend assez longtemps",
+        "L'entropie d'un système isolé reste strictement constante",
+        "Le rendement d'un moteur réel peut dépasser celui de Carnot"
+      ],
+      "answer": "A",
+      "explanation": "Sans apport de travail, le transfert thermique spontané se fait toujours du corps chaud vers le corps froid.",
+      "source": "Cours de thermodynamique, famille Callen / Diu",
+      "verif": "import"
+    },
+    {
+      "course": "l2-phys",
+      "category": "thermodynamique : deuxième principe et entropie",
+      "difficulty": 1,
+      "question": "Comment évolue l'entropie d'un système isolé au cours d'une transformation quelconque ?",
+      "choices": [
+        "Elle diminue ou reste constante",
+        "Elle reste toujours constante",
+        "Elle augmente ou reste constante",
+        "Elle oscille autour d'une valeur moyenne"
+      ],
+      "answer": "C",
+      "explanation": "Pour un système isolé, ΔS = S_créée ≥ 0 : l'égalité correspond aux transformations réversibles.",
+      "source": "Cours de thermodynamique, famille Callen / Diu",
+      "verif": "import"
+    },
+    {
+      "course": "l2-phys",
+      "category": "thermodynamique : deuxième principe et entropie",
+      "difficulty": 3,
+      "question": "Quelle est la variation d'entropie de n moles de gaz parfait lors d'une détente isotherme de V1 à V2 ?",
+      "choices": [
+        "ΔS = nR ln(V1/V2)",
+        "ΔS = nR (V2 − V1)",
+        "ΔS = nR ln(V2/V1)",
+        "ΔS = 0, car T est constante"
+      ],
+      "answer": "C",
+      "explanation": "Pour un gaz parfait à T constante, dS = P dV/T = nR dV/V, d'où nR ln(V2/V1).",
+      "source": "Cours de thermodynamique, famille Callen / Diu",
+      "verif": "import"
+    },
+    {
+      "course": "l2-phys",
+      "category": "thermodynamique : deuxième principe et entropie",
+      "difficulty": 4,
+      "question": "Un gaz parfait subit une détente de Joule–Gay-Lussac dans le vide, dans une enceinte calorifugée. Que vaut l'entropie créée ?",
+      "choices": [
+        "Elle est nulle car il n'y a aucun échange de chaleur",
+        "Elle est négative car le volume augmente",
+        "Elle est nulle car la température reste constante",
+        "Elle est strictement positive"
+      ],
+      "answer": "D",
+      "explanation": "Q = 0, mais ΔS = nR ln(V2/V1) > 0 : toute l'augmentation d'entropie est de l'entropie créée par l'irréversibilité.",
+      "source": "Cours de thermodynamique, famille Callen / Diu",
+      "verif": "import"
+    },
+    {
+      "course": "l2-phys",
+      "category": "thermodynamique : deuxième principe et entropie",
+      "difficulty": 3,
+      "question": "Pour un système fermé à température et pression constantes, dans quel sens évolue une transformation spontanée ?",
+      "choices": [
+        "Dans le sens où l'enthalpie H augmente",
+        "Dans le sens où l'enthalpie libre G diminue",
+        "Dans le sens où l'énergie libre F augmente",
+        "Dans le sens où l'entropie du système diminue"
+      ],
+      "answer": "B",
+      "explanation": "À T et P fixées, dG ≤ 0 ; l'équilibre correspond au minimum de G.",
+      "source": "Cours de thermodynamique, famille Callen / Diu",
+      "verif": "import"
+    },
+    {
+      "course": "l2-phys",
+      "category": "cycles thermodynamiques et machines thermiques (Carnot)",
+      "difficulty": 1,
+      "question": "De quelles transformations est constitué le cycle de Carnot ?",
+      "choices": [
+        "Deux isobares et deux isochores",
+        "Deux isothermes et deux isochores",
+        "Deux adiabatiques et deux isobares",
+        "Deux isothermes et deux adiabatiques réversibles"
+      ],
+      "answer": "D",
+      "explanation": "Le cycle de Carnot alterne détentes et compressions isothermes et adiabatiques, toutes réversibles.",
+      "source": "Cours de thermodynamique, famille Callen / Diu",
+      "verif": "import"
+    },
+    {
+      "course": "l2-phys",
+      "category": "cycles thermodynamiques et machines thermiques (Carnot)",
+      "difficulty": 1,
+      "question": "Quel est le rendement d'un moteur de Carnot fonctionnant entre une source chaude à 600 K et une source froide à 300 K ?",
+      "choices": [
+        "0,25",
+        "0,5",
+        "0,33",
+        "0,67"
+      ],
+      "answer": "B",
+      "explanation": "η = 1 − Tf/Tc = 1 − 300/600 = 0,5.",
+      "source": "Cours de thermodynamique, famille Callen / Diu",
+      "verif": "import"
+    },
+    {
+      "course": "l2-phys",
+      "category": "cycles thermodynamiques et machines thermiques (Carnot)",
+      "difficulty": 3,
+      "question": "Quelle est l'efficacité d'un réfrigérateur de Carnot fonctionnant entre une source froide à Tf et une source chaude à Tc ?",
+      "choices": [
+        "Tc/(Tc − Tf)",
+        "(Tc − Tf)/Tc",
+        "1 − Tf/Tc",
+        "Tf/(Tc − Tf)"
+      ],
+      "answer": "D",
+      "explanation": "L'efficacité d'un réfrigérateur est Qf/W ; pour un cycle réversible elle vaut Tf/(Tc − Tf).",
+      "source": "Cours de thermodynamique, famille Callen / Diu",
+      "verif": "import"
+    },
+    {
+      "course": "l2-phys",
+      "category": "cycles thermodynamiques et machines thermiques (Carnot)",
+      "difficulty": 4,
+      "question": "Un moteur à essence idéal suit un cycle d'Otto de taux de compression 10, avec γ = 1,4. Quel est son rendement thermique ?",
+      "choices": [
+        "0,40",
+        "0,50",
+        "0,75",
+        "0,60"
+      ],
+      "answer": "D",
+      "explanation": "η = 1 − 1/r^(γ−1) = 1 − 10^(−0,4) ≈ 0,60.",
+      "source": "Cours de thermodynamique, famille Callen / Diu",
+      "verif": "import"
+    },
+    {
+      "course": "l2-phys",
+      "category": "cycles thermodynamiques et machines thermiques (Carnot)",
+      "difficulty": 3,
+      "question": "Quelles sont les quatre transformations du cycle de Stirling idéal ?",
+      "choices": [
+        "Deux isothermes et deux adiabatiques",
+        "Deux isothermes et deux isochores",
+        "Deux isobares et deux adiabatiques",
+        "Deux isobares et deux isochores"
+      ],
+      "answer": "B",
+      "explanation": "Le cycle de Stirling comprend deux isothermes et deux isochores, avec régénérateur de chaleur.",
+      "source": "Cours de thermodynamique, famille Callen / Diu",
+      "verif": "import"
+    },
+    {
+      "course": "l2-phys",
+      "category": "changements d'état et diagramme de phases",
+      "difficulty": 1,
+      "question": "Comment nomme-t-on l'énergie échangée sous forme de chaleur lors d'un changement d'état d'un corps pur à température constante ?",
+      "choices": [
+        "La chaleur latente",
+        "La chaleur sensible",
+        "La capacité thermique",
+        "L'enthalpie de formation"
+      ],
+      "answer": "A",
+      "explanation": "La chaleur latente est l'énergie thermique par unité de masse nécessaire pour changer d'état sans variation de température.",
+      "source": "Cours de thermodynamique, famille Callen / Diu",
+      "verif": "import"
+    },
+    {
+      "course": "l2-phys",
+      "category": "changements d'état et diagramme de phases",
+      "difficulty": 2,
+      "question": "Que caractérise le point triple d'un corps pur ?",
+      "choices": [
+        "La température au-delà de laquelle liquide et vapeur sont indiscernables",
+        "La coexistence à l'équilibre des phases solide, liquide et vapeur",
+        "La pression maximale de la vapeur saturante",
+        "L'égalité des chaleurs latentes de fusion et de vaporisation"
+      ],
+      "answer": "B",
+      "explanation": "Au point triple, une seule pression et une seule température permettent la coexistence des trois phases.",
+      "source": "Cours de thermodynamique, famille Callen / Diu",
+      "verif": "import"
+    },
+    {
+      "course": "l2-phys",
+      "category": "changements d'état et diagramme de phases",
+      "difficulty": 3,
+      "question": "Quelle particularité présente la courbe de fusion de l'eau dans le diagramme (P, T) ?",
+      "choices": [
+        "Elle a une pente positive comme la plupart des corps",
+        "Elle a une pente négative",
+        "Elle est verticale pour toute pression",
+        "Elle est confondue avec la courbe de sublimation"
+      ],
+      "answer": "B",
+      "explanation": "La glace est moins dense que l'eau liquide : d'après la relation de Clapeyron, la température de fusion diminue quand la pression augmente.",
+      "source": "Cours de thermodynamique, famille Callen / Diu",
+      "verif": "import"
+    },
+    {
+      "course": "l2-phys",
+      "category": "changements d'état et diagramme de phases",
+      "difficulty": 4,
+      "question": "Quelle relation lie la pente dP/dT de la courbe de coexistence de deux phases à la chaleur latente L et à la variation de volume massique Δv ?",
+      "choices": [
+        "Le produit T Δv divisé par la chaleur latente",
+        "Le produit L Δv divisé par T",
+        "Le produit L T divisé par Δv",
+        "La chaleur latente divisée par le produit T Δv"
+      ],
+      "answer": "D",
+      "explanation": "C'est la relation de Clapeyron, issue de l'égalité des enthalpies libres des deux phases le long de la courbe d'équilibre.",
+      "source": "Cours de thermodynamique, famille Callen / Diu",
+      "verif": "import"
+    },
+    {
+      "course": "l2-phys",
+      "category": "changements d'état et diagramme de phases",
+      "difficulty": 5,
+      "question": "Selon la règle des phases de Gibbs, quelle est la variance d'un corps pur en équilibre sous trois phases ?",
+      "choices": [
+        "1",
+        "2",
+        "3",
+        "0"
+      ],
+      "answer": "D",
+      "explanation": "v = c + 2 − φ = 1 + 2 − 3 = 0 : le point triple est invariant.",
+      "source": "Cours de thermodynamique, famille Callen / Diu",
+      "verif": "import"
+    },
+    {
+      "course": "l2-phys",
+      "category": "transferts thermiques : conduction, convection, rayonnement",
+      "difficulty": 1,
+      "question": "Quelle loi relie le flux thermique par conduction au gradient de température dans un solide ?",
+      "choices": [
+        "La loi de Fourier",
+        "La loi de Wien",
+        "La loi de Stefan-Boltzmann",
+        "La loi de Joule"
+      ],
+      "answer": "A",
+      "explanation": "La loi de Fourier donne une densité de flux thermique proportionnelle à l'opposé du gradient de température, le coefficient étant la conductivité thermique.",
+      "source": "Cours de transferts thermiques de licence, famille Incropera-DeWitt",
+      "verif": "import"
+    },
+    {
+      "course": "l2-phys",
+      "category": "transferts thermiques : conduction, convection, rayonnement",
+      "difficulty": 2,
+      "question": "Que stipule la loi de Fourier pour la conduction thermique ?",
+      "choices": [
+        "La densité de flux thermique est proportionnelle à l'opposé du gradient de température",
+        "Le flux thermique est proportionnel à la puissance quatrième de la température",
+        "Le flux thermique est proportionnel au volume du milieu",
+        "La température varie linéairement avec le temps"
+      ],
+      "answer": "A",
+      "explanation": "j = −λ grad T : la chaleur s'écoule des zones chaudes vers les zones froides.",
+      "source": "Cours de transferts thermiques, famille Incropera-DeWitt",
+      "verif": "import"
+    },
+    {
+      "course": "l2-phys",
+      "category": "transferts thermiques : conduction, convection, rayonnement",
+      "difficulty": 2,
+      "question": "Si la température absolue d'un corps noir double, par quel facteur sa puissance rayonnée est-elle multipliée ?",
+      "choices": [
+        "2",
+        "16",
+        "4",
+        "8"
+      ],
+      "answer": "B",
+      "explanation": "D'après la loi de Stefan-Boltzmann, P = σ S T⁴ : 2⁴ = 16.",
+      "source": "Cours de transferts thermiques, famille Incropera-DeWitt",
+      "verif": "import"
+    },
+    {
+      "course": "l2-phys",
+      "category": "transferts thermiques : conduction, convection, rayonnement",
+      "difficulty": 3,
+      "question": "Quelle est la résistance thermique d'une paroi plane d'épaisseur e, de surface S et de conductivité λ ?",
+      "choices": [
+        "R = λS/e",
+        "R = e/(λS)",
+        "R = eλ/S",
+        "R = λ/(eS)"
+      ],
+      "answer": "B",
+      "explanation": "Le flux est Φ = λS ΔT/e = ΔT/R, d'où R = e/(λS) en K/W.",
+      "source": "Cours de transferts thermiques, famille Incropera-DeWitt",
+      "verif": "import"
+    },
+    {
+      "course": "l2-phys",
+      "category": "transferts thermiques : conduction, convection, rayonnement",
+      "difficulty": 2,
+      "question": "Comment définit-on la diffusivité thermique a d'un matériau de conductivité λ, de masse volumique ρ et de capacité thermique massique c ?",
+      "choices": [
+        "a = ρc/λ",
+        "a = λρc",
+        "a = λ/(ρc²)",
+        "a = λ/(ρc)"
+      ],
+      "answer": "D",
+      "explanation": "L'équation de la chaleur s'écrit ∂T/∂t = a ∇²T avec a = λ/(ρc), exprimée en m²/s.",
+      "source": "Cours de transferts thermiques, famille Incropera-DeWitt",
+      "verif": "import"
+    },
+    {
+      "course": "l2-phys",
+      "category": "électrostatique : théorème de Gauss, dipôle, condensateurs",
+      "difficulty": 1,
+      "question": "Quelle est la force de Coulomb entre deux charges ponctuelles q1 et q2 séparées d'une distance r dans le vide ?",
+      "choices": [
+        "F = q1q2/(4πε0 r)",
+        "F = q1q2 r²/(4πε0)",
+        "F = q1q2/(4πε0 r²)",
+        "F = q1q2/(4πε0 r³)"
+      ],
+      "answer": "C",
+      "explanation": "La force varie en 1/r² ; elle est répulsive si les charges sont de même signe.",
+      "source": "Cours d'électromagnétisme, famille Griffiths / Jackson",
+      "verif": "import"
+    },
+    {
+      "course": "l2-phys",
+      "category": "électrostatique : théorème de Gauss, dipôle, condensateurs",
+      "difficulty": 2,
+      "question": "Que dit le théorème de Gauss en électrostatique ?",
+      "choices": [
+        "La circulation de E sur un contour fermé vaut Q_int/ε0",
+        "Le flux de E à travers une surface fermée est toujours nul",
+        "Le flux de E à travers une surface fermée vaut Q_ext/ε0",
+        "Le flux de E à travers une surface fermée vaut Q_int/ε0"
+      ],
+      "answer": "D",
+      "explanation": "Seules les charges intérieures à la surface fermée contribuent au flux du champ électrique.",
+      "source": "Cours d'électromagnétisme, famille Griffiths / Jackson",
+      "verif": "import"
+    },
+    {
+      "course": "l2-phys",
+      "category": "électrostatique : théorème de Gauss, dipôle, condensateurs",
+      "difficulty": 3,
+      "question": "Quel est le champ électrique créé par un plan infini uniformément chargé, de densité surfacique σ ?",
+      "choices": [
+        "σ/ε0, uniforme de part et d'autre",
+        "σ/(2ε0), uniforme de part et d'autre",
+        "σ/(4πε0 r²), décroissant avec la distance",
+        "σ/(2πε0 r), décroissant avec la distance"
+      ],
+      "answer": "B",
+      "explanation": "Le théorème de Gauss sur un cylindre traversant le plan donne 2ES = σS/ε0, d'où E = σ/(2ε0).",
+      "source": "Cours d'électromagnétisme, famille Griffiths / Jackson",
+      "verif": "import"
+    },
+    {
+      "course": "l2-phys",
+      "category": "électrostatique : théorème de Gauss, dipôle, condensateurs",
+      "difficulty": 1,
+      "question": "Quel est le champ électrique à l'intérieur d'un conducteur à l'équilibre électrostatique ?",
+      "choices": [
+        "Uniforme et non nul",
+        "Nul",
+        "Dirigé vers la surface",
+        "Proportionnel à la distance à la surface"
+      ],
+      "answer": "B",
+      "explanation": "Si le champ était non nul, les charges libres se déplaceraient : à l'équilibre il est nul dans le volume du conducteur.",
+      "source": "Cours d'électromagnétisme, famille Griffiths / Jackson",
+      "verif": "import"
+    },
+    {
+      "course": "l2-phys",
+      "category": "électrostatique : théorème de Gauss, dipôle, condensateurs",
+      "difficulty": 2,
+      "question": "Comment décroît le module du champ électrique d'un dipôle avec la distance r, loin du dipôle ?",
+      "choices": [
+        "En 1/r³",
+        "En 1/r",
+        "En 1/r²",
+        "En 1/r⁴"
+      ],
+      "answer": "A",
+      "explanation": "Les champs des deux charges opposées se compensent en grande partie : il reste un terme en 1/r³.",
+      "source": "Cours d'électromagnétisme, famille Griffiths / Jackson",
+      "verif": "import"
+    },
+    {
+      "course": "l2-phys",
+      "category": "magnétostatique : champ magnétique, loi de Biot et Savart, théorème d'Ampère",
+      "difficulty": 2,
+      "question": "Que dit le théorème d'Ampère en magnétostatique ?",
+      "choices": [
+        "Le flux de B à travers une surface fermée vaut μ0 fois le courant enlacé",
+        "La circulation de B sur un contour fermé vaut μ0 fois le courant enlacé",
+        "La circulation de B sur un contour fermé est toujours nulle",
+        "La circulation de B vaut ε0 fois la charge enlacée"
+      ],
+      "answer": "B",
+      "explanation": "∮B·dl = μ0 I_enlacé, valable en régime stationnaire.",
+      "source": "Cours d'électromagnétisme, famille Griffiths / Jackson",
+      "verif": "import"
+    },
+    {
+      "course": "l2-phys",
+      "category": "magnétostatique : champ magnétique, loi de Biot et Savart, théorème d'Ampère",
+      "difficulty": 2,
+      "question": "Quel est le module du champ magnétique à la distance r d'un fil rectiligne infini parcouru par un courant I ?",
+      "choices": [
+        "μ0 I/(2π r)",
+        "μ0 I/(4π r²)",
+        "μ0 I/(2 r)",
+        "μ0 I r/(2π)"
+      ],
+      "answer": "A",
+      "explanation": "Le théorème d'Ampère sur un cercle de rayon r donne B × 2πr = μ0 I.",
+      "source": "Cours d'électromagnétisme, famille Griffiths / Jackson",
+      "verif": "import"
+    },
+    {
+      "course": "l2-phys",
+      "category": "magnétostatique : champ magnétique, loi de Biot et Savart, théorème d'Ampère",
+      "difficulty": 1,
+      "question": "Que vaut le champ magnétique à l'intérieur d'un long solénoïde de n spires par mètre, parcouru par un courant I ?",
+      "choices": [
+        "μ0 I/n",
+        "μ0 n I",
+        "μ0 n I/2",
+        "Zéro"
+      ],
+      "answer": "B",
+      "explanation": "Dans un solénoïde infini le champ intérieur est uniforme et axial, B = μ0 n I.",
+      "source": "Cours d'électromagnétisme, famille Griffiths / Jackson",
+      "verif": "import"
+    },
+    {
+      "course": "l2-phys",
+      "category": "magnétostatique : champ magnétique, loi de Biot et Savart, théorème d'Ampère",
+      "difficulty": 3,
+      "question": "Quel est le champ magnétique au centre d'une spire circulaire de rayon R parcourue par un courant I ?",
+      "choices": [
+        "μ0 I/(2πR)",
+        "μ0 I/(4R)",
+        "μ0 I R/2",
+        "μ0 I/(2R)"
+      ],
+      "answer": "D",
+      "explanation": "La loi de Biot et Savart, intégrée sur la spire, donne B = μ0 I/(2R) au centre.",
+      "source": "Cours d'électromagnétisme, famille Griffiths / Jackson",
+      "verif": "import"
+    },
+    {
+      "course": "l2-phys",
+      "category": "magnétostatique : champ magnétique, loi de Biot et Savart, théorème d'Ampère",
+      "difficulty": 4,
+      "question": "Quel est le champ magnétique à l'intérieur d'un tore de N spires, à la distance r de l'axe, parcouru par un courant I ?",
+      "choices": [
+        "μ0 N I/(4π r)",
+        "μ0 N I/(2π r)",
+        "μ0 N I r/(2π)",
+        "Zéro, car le champ reste confiné à l'extérieur"
+      ],
+      "answer": "B",
+      "explanation": "Le théorème d'Ampère sur un cercle de rayon r à l'intérieur du tore donne B × 2πr = μ0 N I.",
+      "source": "Cours d'électromagnétisme, famille Griffiths / Jackson",
+      "verif": "import"
+    },
+    {
+      "course": "l2-phys",
+      "category": "induction électromagnétique : loi de Faraday, loi de Lenz",
+      "difficulty": 1,
+      "question": "Quelle est la loi de Faraday de l'induction ?",
+      "choices": [
+        "e = +Φ t",
+        "e = −dB/dt",
+        "e = −dΦ/dt",
+        "e = Φ/R"
+      ],
+      "answer": "C",
+      "explanation": "La force électromotrice induite est l'opposé de la dérivée temporelle du flux magnétique.",
+      "source": "Cours d'électromagnétisme, famille Griffiths / Jackson",
+      "verif": "import"
+    },
+    {
+      "course": "l2-phys",
+      "category": "induction électromagnétique : loi de Faraday, loi de Lenz",
+      "difficulty": 1,
+      "question": "Que dit la loi de Lenz ?",
+      "choices": [
+        "Le courant induit renforce la variation de flux qui lui donne naissance",
+        "Le courant induit circule toujours dans le sens horaire",
+        "Le courant induit s'oppose, par ses effets, à la variation de flux qui lui donne naissance",
+        "Le courant induit ne dépend pas du sens de variation du flux"
+      ],
+      "answer": "C",
+      "explanation": "Le signe moins de la loi de Faraday traduit cette opposition, liée à la conservation de l'énergie.",
+      "source": "Cours d'électromagnétisme, famille Griffiths / Jackson",
+      "verif": "import"
+    },
+    {
+      "course": "l2-phys",
+      "category": "induction électromagnétique : loi de Faraday, loi de Lenz",
+      "difficulty": 2,
+      "question": "Une tige de longueur 0,4 m se déplace à 5 m/s perpendiculairement à un champ uniforme de 0,5 T, lui-même perpendiculaire à la tige et à la vitesse. Quelle f.é.m. apparaît ?",
+      "choices": [
+        "1 V",
+        "0,2 V",
+        "2,5 V",
+        "4 V"
+      ],
+      "answer": "A",
+      "explanation": "e = B l v = 0,5 × 0,4 × 5 = 1 V.",
+      "source": "Cours d'électromagnétisme, famille Griffiths / Jackson",
+      "verif": "import"
+    },
+    {
+      "course": "l2-phys",
+      "category": "induction électromagnétique : loi de Faraday, loi de Lenz",
+      "difficulty": 3,
+      "question": "Que sont les courants de Foucault ?",
+      "choices": [
+        "Des courants de conduction dus à une tension continue",
+        "Des courants de déplacement dans le vide",
+        "Des courants d'électrons émis par un métal chauffé",
+        "Des courants induits circulant dans la masse d'un conducteur soumis à un flux variable"
+      ],
+      "answer": "D",
+      "explanation": "Le flux variable induit des courants en boucles dans le conducteur massif, qui dissipent de l'énergie par effet Joule.",
+      "source": "Cours d'électromagnétisme, famille Griffiths / Jackson",
+      "verif": "import"
+    },
+    {
+      "course": "l2-phys",
+      "category": "induction électromagnétique : loi de Faraday, loi de Lenz",
+      "difficulty": 2,
+      "question": "Dans un transformateur idéal, que vaut le rapport des tensions secondaire/primaire ?",
+      "choices": [
+        "Le rapport N1/N2 du nombre de spires",
+        "Le rapport N2/N1 du nombre de spires",
+        "Le rapport I2/I1 des courants",
+        "Le rapport des résistances des enroulements"
+      ],
+      "answer": "B",
+      "explanation": "Le même flux traverse les deux enroulements : U2/U1 = N2/N1.",
+      "source": "Cours d'électromagnétisme, famille Griffiths / Jackson",
+      "verif": "import"
+    },
+    {
+      "course": "l2-phys",
+      "category": "circuits RLC en régime sinusoïdal et impédances",
+      "difficulty": 1,
+      "question": "Quelle est l'impédance complexe d'un condensateur idéal de capacité C en régime sinusoïdal de pulsation ω ?",
+      "choices": [
+        "jCω",
+        "jω/C",
+        "C/(jω)",
+        "1/(jCω)"
+      ],
+      "answer": "D",
+      "explanation": "Pour un condensateur, i = C du/dt : en notation complexe I = jCω U, d'où Z = 1/(jCω).",
+      "source": "Cours d'électricité et de circuits en régime sinusoïdal, famille Purcell / Halliday-Resnick",
+      "verif": "import"
+    },
+    {
+      "course": "l2-phys",
+      "category": "circuits RLC en régime sinusoïdal et impédances",
+      "difficulty": 2,
+      "question": "Quelle est la fréquence de résonance d'un circuit RLC série ?",
+      "choices": [
+        "2π fois la racine carrée de LC",
+        "L'inverse de 2π fois le produit LC",
+        "L'inverse de 2π fois la racine carrée de LC",
+        "La racine carrée de L/C divisée par 2π"
+      ],
+      "answer": "C",
+      "explanation": "À la résonance, Lω = 1/(Cω) : la partie imaginaire de l'impédance s'annule.",
+      "source": "Cours d'électricité et de circuits en régime sinusoïdal, famille Purcell / Halliday-Resnick",
+      "verif": "import"
+    },
+    {
+      "course": "l2-phys",
+      "category": "circuits RLC en régime sinusoïdal et impédances",
+      "difficulty": 3,
+      "question": "Quelle est l'expression du facteur de qualité d'un circuit RLC série ?",
+      "choices": [
+        "Q = R divisé par Lω0",
+        "Q = Lω0 divisé par R",
+        "Q = R C ω0",
+        "Q = Lω0 multiplié par R"
+      ],
+      "answer": "B",
+      "explanation": "Q = Lω0/R = (1/R)√(L/C) mesure l'acuité de la résonance.",
+      "source": "Cours d'électricité et de circuits en régime sinusoïdal, famille Purcell / Halliday-Resnick",
+      "verif": "import"
+    },
+    {
+      "course": "l2-phys",
+      "category": "circuits RLC en régime sinusoïdal et impédances",
+      "difficulty": 4,
+      "question": "Pour un circuit RLC série de pulsation de résonance ω0, quelle est la largeur de la bande passante à −3 dB en pulsation ?",
+      "choices": [
+        "Δω = L/R",
+        "Δω = ω0 R",
+        "Δω = 1/(RC²)",
+        "Δω = R/L"
+      ],
+      "answer": "D",
+      "explanation": "Δω = ω0/Q = R/L.",
+      "source": "Cours d'électricité et de circuits en régime sinusoïdal, famille Purcell / Halliday-Resnick",
+      "verif": "import"
+    },
+    {
+      "course": "l2-phys",
+      "category": "circuits RLC en régime sinusoïdal et impédances",
+      "difficulty": 5,
+      "question": "Que dit le théorème de Boucherot pour un réseau en régime sinusoïdal ?",
+      "choices": [
+        "Les puissances apparentes s'additionnent algébriquement",
+        "Les puissances active et réactive totales sont les sommes de celles de chaque élément",
+        "La puissance active est conservée mais la puissance réactive ne l'est pas",
+        "Les puissances actives de tous les dipôles se compensent : leur somme est nulle"
+      ],
+      "answer": "B",
+      "explanation": "La conservation de la puissance complexe permet d'additionner puissances actives et réactives, mais pas les puissances apparentes.",
+      "source": "Cours d'électricité et de circuits en régime sinusoïdal, famille Purcell / Halliday-Resnick",
+      "verif": "import"
+    },
+    {
+      "course": "l2-phys",
+      "category": "équations de Maxwell (forme usuelle)",
+      "difficulty": 1,
+      "question": "Quelle équation de Maxwell traduit l'absence de monopôle magnétique ?",
+      "choices": [
+        "div B = 0",
+        "div E = ρ/ε0",
+        "rot E = −∂B/∂t",
+        "rot B = μ0 j"
+      ],
+      "answer": "A",
+      "explanation": "Le flux de B à travers toute surface fermée est nul : les lignes de champ magnétique se referment sur elles-mêmes.",
+      "source": "Cours d'électromagnétisme, famille Griffiths / Jackson",
+      "verif": "import"
+    },
+    {
+      "course": "l2-phys",
+      "category": "équations de Maxwell (forme usuelle)",
+      "difficulty": 2,
+      "question": "Quelle équation de Maxwell exprime sous forme locale la loi de Faraday ?",
+      "choices": [
+        "rot E = −∂B/∂t",
+        "rot B = μ0 j + μ0ε0 ∂E/∂t",
+        "div B = 0",
+        "div E = ρ/ε0"
+      ],
+      "answer": "A",
+      "explanation": "Un champ magnétique variable crée un champ électrique à circulation non nulle.",
+      "source": "Cours d'électromagnétisme, famille Griffiths / Jackson",
+      "verif": "import"
+    },
+    {
+      "course": "l2-phys",
+      "category": "équations de Maxwell (forme usuelle)",
+      "difficulty": 3,
+      "question": "Quel terme Maxwell a-t-il ajouté à l'équation d'Ampère ?",
+      "choices": [
+        "Un courant de conduction supplémentaire μ0σE",
+        "Un terme −∂B/∂t",
+        "Un terme de charge ρ/ε0",
+        "Le courant de déplacement μ0ε0 ∂E/∂t"
+      ],
+      "answer": "D",
+      "explanation": "Ce terme assure la cohérence avec la conservation de la charge et prévoit la propagation des ondes électromagnétiques.",
+      "source": "Cours d'électromagnétisme, famille Griffiths / Jackson",
+      "verif": "import"
+    },
+    {
+      "course": "l2-phys",
+      "category": "équations de Maxwell (forme usuelle)",
+      "difficulty": 2,
+      "question": "Quelle est la densité volumique d'énergie électromagnétique dans le vide ?",
+      "choices": [
+        "Différence ε0E²/2 moins B²/(2μ0)",
+        "Somme de ε0E² et de B²/μ0",
+        "Produit E·B divisé par μ0",
+        "Somme de ε0E²/2 et de B²/(2μ0)"
+      ],
+      "answer": "D",
+      "explanation": "Elle est la somme de la densité d'énergie électrique et de la densité d'énergie magnétique.",
+      "source": "Cours d'électromagnétisme, famille Griffiths / Jackson",
+      "verif": "import"
+    },
+    {
+      "course": "l2-phys",
+      "category": "équations de Maxwell (forme usuelle)",
+      "difficulty": 5,
+      "question": "Dans la jauge de Lorenz, quelle condition lie le potentiel scalaire V et le potentiel vecteur A ?",
+      "choices": [
+        "div A moins (1/c²) ∂V/∂t égale zéro",
+        "div A plus (1/c²) ∂V/∂t égale zéro",
+        "div A égale zéro",
+        "∂A/∂t égale −grad V"
+      ],
+      "answer": "B",
+      "explanation": "La condition de Lorenz découple les équations des potentiels en équations d'onde (d'Alembert).",
+      "source": "Cours d'électromagnétisme, famille Griffiths / Jackson",
+      "verif": "import"
+    },
+    {
+      "course": "l2-phys",
+      "category": "ondes électromagnétiques dans le vide",
+      "difficulty": 1,
+      "question": "Quelle est la longueur d'onde dans le vide d'une onde radio de fréquence 100 MHz ?",
+      "choices": [
+        "30 m",
+        "0,3 m",
+        "3 m",
+        "300 m"
+      ],
+      "answer": "C",
+      "explanation": "λ = c/f = 3×10⁸ / 10⁸ = 3 m.",
+      "source": "Cours d'électromagnétisme, famille Griffiths / Jackson",
+      "verif": "import"
+    },
+    {
+      "course": "l2-phys",
+      "category": "ondes électromagnétiques dans le vide",
+      "difficulty": 2,
+      "question": "Dans une onde plane électromagnétique dans le vide, quel est le rapport des modules E/B ?",
+      "choices": [
+        "1/c",
+        "c",
+        "c²",
+        "μ0"
+      ],
+      "answer": "B",
+      "explanation": "Les équations de Maxwell imposent E = cB pour une onde plane progressive dans le vide.",
+      "source": "Cours d'électromagnétisme, famille Griffiths / Jackson",
+      "verif": "import"
+    },
+    {
+      "course": "l2-phys",
+      "category": "ondes électromagnétiques dans le vide",
+      "difficulty": 1,
+      "question": "Quelles sont les orientations relatives de E, B et du vecteur d'onde k pour une onde plane dans le vide ?",
+      "choices": [
+        "E et B sont parallèles, k leur est perpendiculaire",
+        "E est parallèle à k, B leur est perpendiculaire",
+        "B est parallèle à k, E leur est perpendiculaire",
+        "Les trois sont deux à deux orthogonaux"
+      ],
+      "answer": "D",
+      "explanation": "L'onde est transversale et le trièdre (E, B, k) est direct.",
+      "source": "Cours d'électromagnétisme, famille Griffiths / Jackson",
+      "verif": "import"
+    },
+    {
+      "course": "l2-phys",
+      "category": "ondes électromagnétiques dans le vide",
+      "difficulty": 4,
+      "question": "Quelle est l'intensité moyenne d'une onde plane monochromatique d'amplitude de champ électrique E0 dans le vide ?",
+      "choices": [
+        "I = ε0 c E0²",
+        "I = ½ ε0 E0²",
+        "I = ½ μ0 c E0²",
+        "I = ½ ε0 c E0²"
+      ],
+      "answer": "D",
+      "explanation": "La moyenne temporelle du vecteur de Poynting vaut ½ ε0 c E0².",
+      "source": "Cours d'électromagnétisme, famille Griffiths / Jackson",
+      "verif": "import"
+    },
+    {
+      "course": "l2-phys",
+      "category": "ondes électromagnétiques dans le vide",
+      "difficulty": 2,
+      "question": "Quelle est la valeur approchée de l'impédance caractéristique du vide, √(μ0/ε0) ?",
+      "choices": [
+        "50 Ω",
+        "75 Ω",
+        "377 Ω",
+        "1 000 Ω"
+      ],
+      "answer": "C",
+      "explanation": "√(μ0/ε0) ≈ 376,7 Ω ; c'est le rapport E/H pour une onde plane dans le vide.",
+      "source": "Cours d'électromagnétisme, famille Griffiths / Jackson",
+      "verif": "import"
+    },
+    {
+      "course": "l2-phys",
+      "category": "relativité restreinte : postulats, dilatation du temps, contraction des longueurs",
+      "difficulty": 1,
+      "question": "Quels sont les deux postulats de la relativité restreinte ?",
+      "choices": [
+        "Le principe de relativité et la dépendance de c vis-à-vis de la vitesse de la source",
+        "Le principe de relativité et l'invariance de la vitesse de la lumière dans le vide",
+        "Le temps absolu et la conservation de la masse inertielle",
+        "L'équivalence des masses et une vitesse de la lumière infinie"
+      ],
+      "answer": "B",
+      "explanation": "Les lois physiques sont identiques dans tous les référentiels inertiels, et c a la même valeur pour tous les observateurs inertiels.",
+      "source": "Cours de relativité restreinte, famille Feynman Lectures / Taylor-Wheeler",
+      "verif": "import"
+    },
+    {
+      "course": "l2-phys",
+      "category": "relativité restreinte : postulats, dilatation du temps, contraction des longueurs",
+      "difficulty": 1,
+      "question": "Quelle est la valeur du facteur de Lorentz γ pour une vitesse v = 0,6 c ?",
+      "choices": [
+        "1,20",
+        "1,67",
+        "1,25",
+        "0,80"
+      ],
+      "answer": "C",
+      "explanation": "γ = 1/√(1 − 0,36) = 1/0,8 = 1,25.",
+      "source": "Cours de relativité restreinte, famille Feynman Lectures / Taylor-Wheeler",
+      "verif": "import"
+    },
+    {
+      "course": "l2-phys",
+      "category": "relativité restreinte : postulats, dilatation du temps, contraction des longueurs",
+      "difficulty": 1,
+      "question": "Qu'appelle-t-on temps propre entre deux événements ?",
+      "choices": [
+        "Le temps mesuré par une horloge présente aux deux événements",
+        "Le temps mesuré par l'observateur le plus rapide",
+        "Le temps mesuré dans le référentiel de la source lumineuse uniquement",
+        "Le temps de parcours de la lumière entre les deux événements"
+      ],
+      "answer": "A",
+      "explanation": "Le temps propre est mesuré par l'horloge qui se trouve en même lieu pour les deux événements ; c'est le plus court des temps mesurés.",
+      "source": "Cours de relativité restreinte, famille Feynman Lectures / Taylor-Wheeler",
+      "verif": "import"
+    },
+    {
+      "course": "l2-phys",
+      "category": "relativité restreinte : postulats, dilatation du temps, contraction des longueurs",
+      "difficulty": 4,
+      "question": "Deux vaisseaux s'éloignent d'un observateur en sens opposés, chacun à 0,6 c. Quelle vitesse relative l'un mesure-t-il pour l'autre ?",
+      "choices": [
+        "1,2 c",
+        "0,6 c",
+        "≈ 0,88 c",
+        "≈ 0,75 c"
+      ],
+      "answer": "C",
+      "explanation": "u = (0,6 + 0,6)c/(1 + 0,36) = 1,2/1,36 c ≈ 0,88 c, inférieure à c.",
+      "source": "Cours de relativité restreinte, famille Feynman Lectures / Taylor-Wheeler",
+      "verif": "import"
+    },
+    {
+      "course": "l2-phys",
+      "category": "relativité restreinte : postulats, dilatation du temps, contraction des longueurs",
+      "difficulty": 5,
+      "question": "Quelle grandeur est invariante pour un système de quadrivecteur énergie-impulsion (E/c, p) ?",
+      "choices": [
+        "La différence E² − p²c²",
+        "La somme E² + p²c²",
+        "La différence E − pc",
+        "Le rapport E/p"
+      ],
+      "answer": "A",
+      "explanation": "E² − p²c² = m²c⁴ est identique dans tous les référentiels inertiels.",
+      "source": "Cours de relativité restreinte, famille Feynman Lectures / Taylor-Wheeler",
+      "verif": "import"
+    },
+    {
+      "course": "l2-phys",
+      "category": "introduction à la physique quantique : effet photoélectrique, dualité onde-corpuscule",
+      "difficulty": 1,
+      "question": "Quelle observation sur l'effet photoélectrique a conduit à introduire le photon ?",
+      "choices": [
+        "Une émission d'électrons proportionnelle à la température du métal",
+        "Un courant qui disparaît quand on augmente l'intensité",
+        "Une énergie cinétique des électrons croissant avec l'intensité",
+        "Un seuil de fréquence indépendant de l'intensité lumineuse"
+      ],
+      "answer": "D",
+      "explanation": "L'émission n'a lieu qu'au-dessus d'une fréquence seuil, ce que la théorie ondulatoire classique ne prévoit pas ; Einstein l'explique par des quanta hν.",
+      "source": "Cours de physique quantique, famille Cohen-Tannoudji / Feynman Lectures",
+      "verif": "import"
+    },
+    {
+      "course": "l2-phys",
+      "category": "introduction à la physique quantique : effet photoélectrique, dualité onde-corpuscule",
+      "difficulty": 2,
+      "question": "Quelle est la relation de de Broglie entre la longueur d'onde λ et la quantité de mouvement p d'une particule ?",
+      "choices": [
+        "h divisé par p",
+        "p divisé par h",
+        "Le produit h p",
+        "h divisé par p²"
+      ],
+      "answer": "A",
+      "explanation": "À toute particule de quantité de mouvement p est associée une onde de longueur λ = h/p.",
+      "source": "Cours de physique quantique, famille Cohen-Tannoudji / Feynman Lectures",
+      "verif": "import"
+    },
+    {
+      "course": "l2-phys",
+      "category": "introduction à la physique quantique : effet photoélectrique, dualité onde-corpuscule",
+      "difficulty": 3,
+      "question": "Une lumière de longueur d'onde 200 nm éclaire un métal de travail d'extraction 4,5 eV. Avec hc = 1 240 eV·nm, quelle est l'énergie cinétique maximale des photoélectrons ?",
+      "choices": [
+        "6,2 eV",
+        "4,5 eV",
+        "1,7 eV",
+        "10,7 eV"
+      ],
+      "answer": "C",
+      "explanation": "L'énergie du photon est 1 240/200 = 6,2 eV ; Ec max = 6,2 − 4,5 = 1,7 eV.",
+      "source": "Cours de physique quantique, famille Cohen-Tannoudji / Feynman Lectures",
+      "verif": "import"
+    },
+    {
+      "course": "l2-phys",
+      "category": "introduction à la physique quantique : effet photoélectrique, dualité onde-corpuscule",
+      "difficulty": 2,
+      "question": "Qu'est-ce que l'effet tunnel ?",
+      "choices": [
+        "Le passage au-dessus d'une barrière grâce à une énergie supérieure à sa hauteur",
+        "Le franchissement d'une barrière par une particule d'énergie inférieure à sa hauteur",
+        "La traversée d'un matériau par la lumière sans absorption",
+        "La diffusion d'un électron sur une barrière avec perte d'énergie"
+      ],
+      "answer": "B",
+      "explanation": "La fonction d'onde décroît dans la barrière sans s'annuler : la probabilité de transmission est non nulle.",
+      "source": "Cours de physique quantique, famille Cohen-Tannoudji / Feynman Lectures",
+      "verif": "import"
+    },
+    {
+      "course": "l2-phys",
+      "category": "introduction à la physique quantique : effet photoélectrique, dualité onde-corpuscule",
+      "difficulty": 5,
+      "question": "Quel est le décalage de longueur d'onde d'un photon diffusé d'un angle θ par un électron libre (effet Compton) ?",
+      "choices": [
+        "Le terme h/(mₑc) multiplié par (1 plus cos θ)",
+        "Le terme h/(mₑc) multiplié par sin θ",
+        "Le terme h/(mₑc) multiplié par (1 moins cos θ)",
+        "Le terme h/(mₑc) multiplié par cos θ"
+      ],
+      "answer": "C",
+      "explanation": "Le décalage est nul vers l'avant (θ = 0) et maximal vers l'arrière ; il ne dépend pas de la longueur d'onde incidente.",
+      "source": "Cours de physique quantique, famille Cohen-Tannoudji / Feynman Lectures",
+      "verif": "import"
+    },
+    {
+      "course": "l2-phys",
+      "category": "atome de Bohr et spectres",
+      "difficulty": 1,
+      "question": "Quelle est l'énergie du niveau n de l'atome d'hydrogène dans le modèle de Bohr ?",
+      "choices": [
+        "Négative, −13,6 eV multiplié par n²",
+        "Négative, −13,6 eV divisé par n",
+        "Négative, −13,6 eV divisé par n²",
+        "Positive, +13,6 eV divisé par n²"
+      ],
+      "answer": "C",
+      "explanation": "Les niveaux liés sont d'énergie négative et se resserrent vers 0 quand n augmente.",
+      "source": "Cours de physique quantique et atomique, famille Cohen-Tannoudji / Basdevant-Dalibard",
+      "verif": "import"
+    },
+    {
+      "course": "l2-phys",
+      "category": "atome de Bohr et spectres",
+      "difficulty": 2,
+      "question": "Quelle condition de quantification Bohr impose-t-il au moment cinétique de l'électron ?",
+      "choices": [
+        "L = nħ²",
+        "L = nħ",
+        "L = (n + ½)ħ",
+        "L = n/ħ"
+      ],
+      "answer": "B",
+      "explanation": "Seules les orbites dont le moment cinétique est un multiple entier de ħ sont permises.",
+      "source": "Cours de physique quantique et atomique, famille Cohen-Tannoudji / Basdevant-Dalibard",
+      "verif": "import"
+    },
+    {
+      "course": "l2-phys",
+      "category": "atome de Bohr et spectres",
+      "difficulty": 3,
+      "question": "Quelle est la longueur d'onde de la raie Hα de l'hydrogène, qui correspond à la transition n = 3 → n = 2 ?",
+      "choices": [
+        "≈ 486 nm",
+        "≈ 121 nm",
+        "≈ 656 nm",
+        "≈ 1 875 nm"
+      ],
+      "answer": "C",
+      "explanation": "1/λ = R_H(1/4 − 1/9) avec R_H ≈ 1,097×10⁷ m⁻¹, soit λ ≈ 656 nm.",
+      "source": "Cours de physique quantique et atomique, famille Cohen-Tannoudji / Basdevant-Dalibard",
+      "verif": "import"
+    },
+    {
+      "course": "l2-phys",
+      "category": "atome de Bohr et spectres",
+      "difficulty": 2,
+      "question": "Quelle limite essentielle présente le modèle de Bohr ?",
+      "choices": [
+        "Il ne rend pas compte des atomes à plusieurs électrons ni de la structure fine",
+        "Il prédit des niveaux d'énergie indépendants du nombre quantique n",
+        "Il ne prévoit aucun spectre de raies",
+        "Il est incompatible avec la quantification de la lumière"
+      ],
+      "answer": "A",
+      "explanation": "Le modèle fonctionne pour l'hydrogène et les ions hydrogénoïdes mais échoue pour les atomes à plusieurs électrons et ne décrit pas la structure fine.",
+      "source": "Cours de physique quantique et atomique, famille Cohen-Tannoudji / Basdevant-Dalibard",
+      "verif": "import"
+    },
+    {
+      "course": "l2-phys",
+      "category": "atome de Bohr et spectres",
+      "difficulty": 3,
+      "question": "Quelle est la vitesse de l'électron sur la première orbite de Bohr ?",
+      "choices": [
+        "α c ≈ c/137",
+        "c/10",
+        "c/2",
+        "c/1 000"
+      ],
+      "answer": "A",
+      "explanation": "v₁ = α c avec α ≈ 1/137 la constante de structure fine : le traitement non relativiste est justifié.",
+      "source": "Cours de physique quantique et atomique, famille Cohen-Tannoudji / Basdevant-Dalibard",
+      "verif": "import"
+    },
+    {
+      "course": "l2-phys",
+      "category": "méthodes mathématiques : équations différentielles, séries de Fourier",
+      "difficulty": 1,
+      "question": "Quelle est la solution générale de y′ + a y = 0, avec a constante ?",
+      "choices": [
+        "C e^(a t) : exponentielle croissante",
+        "C e^(−a t) : exponentielle décroissante",
+        "C cos(a t) : oscillation",
+        "C + a t : droite"
+      ],
+      "answer": "B",
+      "explanation": "On sépare les variables : dy/y = −a dt, d'où y = C e^(−a t).",
+      "source": "Cours de méthodes mathématiques pour la physique, famille Boas / Arfken",
+      "verif": "import"
+    },
+    {
+      "course": "l2-phys",
+      "category": "méthodes mathématiques : équations différentielles, séries de Fourier",
+      "difficulty": 2,
+      "question": "Quelle est la solution générale de y″ + ω² y = 0 ?",
+      "choices": [
+        "y = A cos ωt + B sin ωt",
+        "y = A e^(ωt) + B e^(−ωt)",
+        "y = A cos ω²t + B sin ω²t",
+        "y = A + B t"
+      ],
+      "answer": "A",
+      "explanation": "L'équation caractéristique r² + ω² = 0 a pour racines ±jω.",
+      "source": "Cours de méthodes mathématiques pour la physique, famille Boas / Arfken",
+      "verif": "import"
+    },
+    {
+      "course": "l2-phys",
+      "category": "méthodes mathématiques : équations différentielles, séries de Fourier",
+      "difficulty": 2,
+      "question": "Que dire des coefficients de la série de Fourier d'une fonction paire de période T ?",
+      "choices": [
+        "Les coefficients en cosinus a_n sont nuls",
+        "Seul a_0 est non nul",
+        "Les coefficients d'indice pair sont nuls",
+        "Les coefficients en sinus b_n sont nuls"
+      ],
+      "answer": "D",
+      "explanation": "Une fonction paire se développe uniquement en cosinus (et constante).",
+      "source": "Cours de méthodes mathématiques pour la physique, famille Boas / Arfken",
+      "verif": "import"
+    },
+    {
+      "course": "l2-phys",
+      "category": "méthodes mathématiques : équations différentielles, séries de Fourier",
+      "difficulty": 3,
+      "question": "Quels harmoniques contient la série de Fourier d'un signal carré alternant entre +1 et −1, impair et de valeur moyenne nulle ?",
+      "choices": [
+        "Uniquement des harmoniques impairs, en sinus",
+        "Harmoniques de tous rangs, en cosinus",
+        "Uniquement des harmoniques pairs",
+        "Un seul harmonique, le fondamental"
+      ],
+      "answer": "A",
+      "explanation": "Le signal carré impair vaut (4/π) Σ sin((2k+1)ωt)/(2k+1).",
+      "source": "Cours de méthodes mathématiques pour la physique, famille Boas / Arfken",
+      "verif": "import"
+    },
+    {
+      "course": "l2-phys",
+      "category": "méthodes mathématiques : équations différentielles, séries de Fourier",
+      "difficulty": 5,
+      "question": "Quel phénomène désigne les oscillations persistantes d'une somme partielle de série de Fourier au voisinage d'une discontinuité ?",
+      "choices": [
+        "Le phénomène de Runge",
+        "Le théorème de Dirichlet",
+        "Le phénomène de Gibbs",
+        "L'aliasing de Nyquist"
+      ],
+      "answer": "C",
+      "explanation": "Le dépassement d'environ 9 % près d'un saut ne disparaît pas quand on ajoute des termes : c'est le phénomène de Gibbs.",
+      "source": "Cours de méthodes mathématiques pour la physique, famille Boas / Arfken",
+      "verif": "import"
+    },
+    {
+      "course": "l2-phys",
+      "category": "physique statistique d'introduction : distribution de Maxwell-Boltzmann",
+      "difficulty": 1,
+      "question": "Quelle relation lie la constante de Boltzmann k_B, la constante des gaz parfaits R et le nombre d'Avogadro N_A ?",
+      "choices": [
+        "R multiplié par N_A",
+        "N_A divisé par R",
+        "R divisé par N_A²",
+        "R divisé par N_A"
+      ],
+      "answer": "D",
+      "explanation": "k_B est la constante des gaz parfaits ramenée à une molécule.",
+      "source": "Cours de physique statistique, famille Reif / Diu",
+      "verif": "import"
+    },
+    {
+      "course": "l2-phys",
+      "category": "physique statistique d'introduction : distribution de Maxwell-Boltzmann",
+      "difficulty": 2,
+      "question": "Quelle est la probabilité relative qu'un système à l'équilibre à la température T occupe un état d'énergie E ?",
+      "choices": [
+        "Exponentiellement croissante avec E/(k_B T)",
+        "Proportionnelle à E/(k_B T)",
+        "Indépendante de E",
+        "Exponentiellement décroissante avec E/(k_B T)"
+      ],
+      "answer": "D",
+      "explanation": "C'est le facteur de Boltzmann : les états de basse énergie sont plus probables.",
+      "source": "Cours de physique statistique, famille Reif / Diu",
+      "verif": "import"
+    },
+    {
+      "course": "l2-phys",
+      "category": "physique statistique d'introduction : distribution de Maxwell-Boltzmann",
+      "difficulty": 2,
+      "question": "Quelle est l'énergie cinétique moyenne de translation d'une molécule d'un gaz parfait à la température T ?",
+      "choices": [
+        "(3/2) k_B T",
+        "(1/2) k_B T",
+        "(5/2) k_B T",
+        "3 k_B T"
+      ],
+      "answer": "A",
+      "explanation": "Trois degrés de liberté de translation, chacun contribuant ½ k_B T selon le théorème d'équipartition.",
+      "source": "Cours de physique statistique, famille Reif / Diu",
+      "verif": "import"
+    },
+    {
+      "course": "l2-phys",
+      "category": "physique statistique d'introduction : distribution de Maxwell-Boltzmann",
+      "difficulty": 3,
+      "question": "Quelle est l'expression de la vitesse quadratique moyenne d'une molécule de masse m dans un gaz parfait à la température T ?",
+      "choices": [
+        "Racine carrée de 3k_BT divisé par m",
+        "Racine carrée de 2k_BT divisé par m",
+        "Racine carrée de k_BT divisé par m",
+        "Racine carrée de 3k_BT multiplié par m"
+      ],
+      "answer": "A",
+      "explanation": "½ m <v²> = (3/2) k_B T donne v_rms = √(3k_BT/m).",
+      "source": "Cours de physique statistique, famille Reif / Diu",
+      "verif": "import"
+    },
+    {
+      "course": "l2-phys",
+      "category": "physique statistique d'introduction : distribution de Maxwell-Boltzmann",
+      "difficulty": 5,
+      "question": "Quelle différence fondamentale distingue les statistiques de Fermi-Dirac et de Bose-Einstein ?",
+      "choices": [
+        "Les fermions sont discernables, les bosons ne le sont pas",
+        "Les bosons obéissent au principe d'exclusion, pas les fermions",
+        "Seule la statistique de Bose-Einstein tend vers celle de Maxwell-Boltzmann à haute température",
+        "Un état quantique contient au plus un fermion mais un nombre quelconque de bosons"
+      ],
+      "answer": "D",
+      "explanation": "Le principe d'exclusion de Pauli s'applique aux fermions ; les bosons peuvent occuper en nombre illimité un même état.",
+      "source": "Cours de physique statistique, famille Reif / Diu",
+      "verif": "import"
+    },
+    {
+      "course": "l2-phys",
+      "category": "référentiels non galiléens et forces d'inertie",
+      "difficulty": 2,
+      "question": "Un ascenseur monte avec une accélération de 2 m/s². Avec g = 10 m/s², quelle force indique une balance sous une personne de 60 kg ?",
+      "choices": [
+        "600 N",
+        "480 N",
+        "720 N",
+        "840 N"
+      ],
+      "answer": "C",
+      "explanation": "Dans le référentiel de l'ascenseur, le poids apparent vaut m(g + a) = 60 × 12 = 720 N.",
+      "source": "Cours de licence de mécanique du point et du solide, famille Kleppner-Kolenkow / Taylor",
+      "verif": "import"
+    },
+    {
+      "course": "l2-phys",
+      "category": "mécanique du solide : moment d'inertie, rotation autour d'un axe",
+      "difficulty": 2,
+      "question": "Quelle est la puissance instantanée d'un couple Γ appliqué à un solide tournant à la vitesse angulaire ω autour de son axe ?",
+      "choices": [
+        "Γ divisé par ω",
+        "½ Γ ω²",
+        "Γ multiplié par ω",
+        "Γ ω²"
+      ],
+      "answer": "C",
+      "explanation": "La puissance en rotation est le produit du moment du couple et de la vitesse angulaire, par analogie avec P = F v.",
+      "source": "Cours de licence de mécanique du solide, famille Halliday-Resnick / Kleppner-Kolenkow",
+      "verif": "import"
+    },
+    {
+      "course": "l2-phys",
+      "category": "thermodynamique : deuxième principe et entropie",
+      "difficulty": 4,
+      "question": "Une masse m, de capacité thermique massique c constante, est chauffée réversiblement de T1 à T2. Quelle est sa variation d'entropie ?",
+      "choices": [
+        "m c (T2 − T1)/T1",
+        "m c ln(T2/T1)",
+        "m c fois (T2 moins T1)",
+        "m c ln(T2 moins T1)"
+      ],
+      "answer": "B",
+      "explanation": "ΔS = ∫ δQ/T = ∫ m c dT/T = m c ln(T2/T1).",
+      "source": "Cours de thermodynamique, famille Callen / Diu",
+      "verif": "import"
+    },
+    {
+      "course": "l2-phys",
+      "category": "électrostatique : théorème de Gauss, dipôle, condensateurs",
+      "difficulty": 1,
+      "question": "Quelle est la capacité équivalente de deux condensateurs C1 et C2 montés en parallèle ?",
+      "choices": [
+        "C1 C2 divisé par (C1 plus C2)",
+        "C1 plus C2",
+        "La moyenne de C1 et C2",
+        "La racine carrée de C1 C2"
+      ],
+      "answer": "B",
+      "explanation": "En parallèle, la tension est commune et les charges s'ajoutent.",
+      "source": "Cours d'électromagnétisme, famille Griffiths / Jackson",
+      "verif": "import"
+    },
+    {
+      "course": "l2-phys",
+      "category": "équations de Maxwell (forme usuelle)",
+      "difficulty": 2,
+      "question": "Quelle relation lie la vitesse de la lumière c aux constantes ε0 et μ0 ?",
+      "choices": [
+        "La racine carrée de ε0 μ0",
+        "L'inverse du produit ε0 μ0",
+        "La racine carrée de μ0/ε0",
+        "L'inverse de la racine carrée de ε0 μ0"
+      ],
+      "answer": "D",
+      "explanation": "Les équations de Maxwell dans le vide donnent une équation d'onde de célérité 1/√(ε0 μ0).",
+      "source": "Cours d'électromagnétisme, famille Griffiths / Jackson",
+      "verif": "import"
+    }
+  ]
+}
