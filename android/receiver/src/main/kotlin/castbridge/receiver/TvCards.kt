@@ -255,7 +255,7 @@ class ToolTile(ctx: Context, glyph: String, label: String, widthPx: Int) : Linea
 }
 
 /** One feature of the home "Fonctions" row: vector icon, name, live status (e.g. "Prêt", "Actif"), and what OK does. */
-data class HomeTool(val icon: Int, val label: String, val description: String, val status: String?, val on: Boolean, val action: () -> Unit)
+data class HomeTool(val icon: Int, val label: String, val description: String, val status: String?, val on: Boolean, val warn: Boolean = false, val action: () -> Unit)
 
 /** Icon tile for [HomeTool]: the icon lights up (accent) when the feature is active, and a small status line sits under the name. */
 class IconTile(ctx: Context, tool: HomeTool, widthPx: Int) : LinearLayout(ctx) {
@@ -276,8 +276,8 @@ class IconTile(ctx: Context, tool: HomeTool, widthPx: Int) : LinearLayout(ctx) {
         addView(TextView(ctx).apply { text = tool.label; textSize = 16f; setTextColor(Color.WHITE); gravity = Gravity.CENTER; maxLines = 2; setPadding(m, m / 2, m, 0) })
         tool.status?.let { st ->
             addView(TextView(ctx).apply {
-                text = (if (tool.on) "● " else "") + st; textSize = TvStyle.Type.CAPTION; gravity = Gravity.CENTER; maxLines = 1
-                setTextColor(if (tool.on) TvStyle.GOOD_TEXT else TvStyle.TEXT3)
+                text = (if (tool.warn) "▲ " else if (tool.on) "● " else "") + st; textSize = TvStyle.Type.CAPTION; gravity = Gravity.CENTER; maxLines = 1
+                setTextColor(if (tool.warn) castbridge.core.ux.SignalColors.ORANGE else if (tool.on) TvStyle.GOOD_TEXT else TvStyle.TEXT3)
             })
         }
         TvStyle.focusZoom(this)

@@ -200,6 +200,25 @@ Aujourd'hui (rangée unique de 18 tuiles)          Cible W11 (w11-10, non faite 
 └───────────────────────────────────────────┘
 ```
 
+## Signalétique de la TV (2026-10-03, décision du propriétaire)
+
+Fait de terrain : la puce « ● Prêt à recevoir » restait **verte** alors que la TV n'avait ni Wi-Fi/Ethernet ni Internet. Règle : la couleur dit ce que l'usager peut **faire**. Une seule fonction pure, `castbridge.core.ux.TvSignal.of(TvFacts)`, décide de la couleur, du texte et de l'action de la puce **et** des cinq indicateurs ; rien d'autre ne choisit une couleur. Tests : `CT/ux/TvSignalTest.kt`.
+
+| Niveau | Sens | Forme | Jeton (fond 0A0F1E) |
+|---|---|---|---|
+| **Vert** | marche maintenant : adresse du réseau local active (Wi-Fi OU Ethernet) + service à l'écoute + stockage utilisable | cercle plein | `#3DDC84` |
+| **Orange** | marche mais dégradé / attention : Bluetooth seul, Wi-Fi sans adresse, signal faible, stockage < 1 Go, transfert échoué en attente, clé lente, code qui va changer | triangle | `#FF7A1A` |
+| **Rouge** | ne peut pas tenir sa promesse : aucun réseau ET Bluetooth coupé/inutilisable, service muet, stockage < 100 Mo, contrôle parental bloquant | carré arrondi | `#FF5252` |
+| **Noir** | inactif ou sans objet par choix : Bluetooth coupé par l'usager, pas de clé, SSH arrêté, **Internet absent** | anneau clair sur gris très sombre | contour `#B7C0D4`, fond `#10141C` |
+
+Jamais la couleur seule : forme + mot court (contraste ≥ 4,5:1 vérifié par test). L'ambre de la marque `#F5B025` reste la couleur de marque, **pas** une couleur d'état.
+
+- **Internet** : CastBridge-TV n'en a jamais besoin (le téléphone apporte les données). Absent = **noir** (« Internet : non connecté, inutile pour CastBridge »), jamais rouge ni orange ; orange « Internet requis » seulement sur la tuile Téléchargements.
+- **Puce** (Réception) = le pire des indicateurs requis (Réseau, Stockage) + service + verrou ; jamais plus verte. Textes : « Prêt à recevoir » / « Bluetooth seulement » / « Aucun réseau : la TV ne peut rien recevoir » (et les causes de stockage, service, contrôle parental). Sous la rangée, une ligne unique donne l'action (« Branchez le câble réseau ou connectez le Wi-Fi : MENU > Connexion & réglages »). OK sur la puce ouvre « Connexion & réglages » dont les premières lignes redisent cause, action et indicateurs. Focus sur la puce : titre et sous-titre de l'accueil reprennent cause et action.
+- **Rangée** sous la barre du haut : Réseau, Bluetooth, Internet, Stockage (pastille + mot). Légende en une ligne dans « Aide » (`TvSignal.LEGEND`).
+- **Téléphone** : `TvSignal.phoneLevel(LinkState)` colore la pastille de la fiche TV (« TV injoignable » rouge, « liaison réduite / Bluetooth seulement » orange, connectée verte, pas de TV noir) ; aucun texte ni écran nouveau.
+- Pas d'arrêt dur sur l'horloge (locations) : non branché ici. Contrôle parental bloquant, transfert échoué et code qui change sont prévus par la fonction mais pas encore alimentés par l'écran (faits à `false`).
+
 ## 6. Amendements aux vagues W11 et W17 (sans éditer leurs cahiers)
 
 | Cahier | Ce que cette branche a déjà fait | Ce qui reste au cahier |
