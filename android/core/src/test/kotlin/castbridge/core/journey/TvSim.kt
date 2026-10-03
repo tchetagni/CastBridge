@@ -12,6 +12,7 @@ import castbridge.core.trust.TrustRegistry
 import castbridge.core.trust.TvRefusals
 import castbridge.core.ssh.PeerRegistry
 import castbridge.core.xfer.TransferProgress
+import castbridge.core.tv.ApiExtension
 import castbridge.core.tv.Fs
 import castbridge.core.tv.LinkInfo
 import castbridge.core.tv.Pin
@@ -22,6 +23,7 @@ import castbridge.core.tv.StorageVolume
 import castbridge.core.tv.TvProfile
 import castbridge.core.tv.VolumeKind
 import castbridge.core.tv.VolumeRegistry
+import castbridge.core.tv.then
 import castbridge.core.xfer.TransferHost
 import java.io.File
 import java.util.Random
@@ -55,6 +57,7 @@ class TvSim(val clock: JourneyClock, val name: String = "SMART_TV", private val 
         val pin: String = "123456",
         /** TV verrouillée (activation requise) : aucun serveur HTTP ni Bluetooth tant que [TvSim.unlock] n'a pas été appelé. */
         val locked: Boolean = false,
+        val extensions: List<ApiExtension> = emptyList(),
     )
 
     private val dirs = ArrayList<File>()
@@ -139,7 +142,7 @@ class TvSim(val clock: JourneyClock, val name: String = "SMART_TV", private val 
         val vols = VolumeRegistry(provider) { _ -> capacity - used(media) }.also { it.refresh() }
         val s = ReceiverServer(
             volumes = vols, player = FakePlayer(), port = 0, profile = TvProfile(), pin = pin, guard = guard,
-            extension = activation, onNotice = { noticeList += it },
+            extension = scenario.extensions.fold<ApiExtension, ApiExtension>(activation) { a, e -> a.then(e) }, onNotice = { noticeList += it },
             routeGuard = { path -> if (activation.trial && TrialPolicy.routeBlocked(path)) TrialPolicy.MESSAGE else null },
             tokenAuth = { t -> registry.verifyToken(t)?.also { a -> presence.seen(a) } }, peers = PeerRegistry(), hostCheck = true,
             filingLang = { "fr" }, progress = progress, sourceName = { a -> registry.get(a)?.name },
@@ -194,6 +197,8 @@ class TvSim(val clock: JourneyClock, val name: String = "SMART_TV", private val 
     // ------------------------------------------------------------------------------------------------------ scénarios
 
     fun setTrial(on: Boolean) = activation.switchTrial(on)
+
+    val isTrial: Boolean get() = activation.trial   // état de la simulation d'activation
 
     /** Fixe l'espace libre ANNONCÉ à [freeBytes] octets à cet instant (il diminue ensuite avec les fichiers reçus). */
     fun fill(freeBytes: Long) { capacity = used(media) + freeBytes; refreshVolumes() }
