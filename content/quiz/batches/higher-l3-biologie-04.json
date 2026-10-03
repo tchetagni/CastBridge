@@ -57,10 +57,10 @@
    "difficulty": 2,
    "question": "Dans un milieu contenant à la fois du glucose et du lactose, l'expression de l'opéron lac est faible. Quelle est l'explication principale ?",
    "choices": [
-    "Le glucose empêche le lactose d'entrer par inhibition de l'ARN polymérase",
-    "Le glucose maintient un taux d'AMPc bas : le complexe CAP-AMPc ne stimule pas le promoteur",
+    "Le glucose active le répresseur et renforce sa fixation à l'opérateur",
+    "Le glucose maintient l'AMPc bas : CAP-AMPc ne stimule pas le promoteur",
     "Le glucose détruit l'allolactose dès sa formation dans la cellule",
-    "Le glucose se fixe sur le répresseur et le rend plus actif sur l'opérateur"
+    "Le glucose empêche le lactose d'entrer en inhibant l'ARN polymérase"
    ],
    "answer": "B",
    "explanation": "C'est la répression catabolique : en présence de glucose, l'AMPc est bas, CAP n'est pas activé et la transcription reste faible.",
@@ -73,10 +73,10 @@
    "difficulty": 4,
    "question": "Une cellule diploïde partielle porte lacI⁻ sur le chromosome et lacI⁺ sur un plasmide F' (opérateurs normaux sur les deux). Sans lactose, quel est son comportement ?",
    "choices": [
-    "Les gènes lac sont réprimés, car le répresseur diffusible agit en trans sur les deux opérateurs",
-    "Les gènes lac sont exprimés, car le répresseur n'agit qu'en cis",
-    "Les gènes lac sont exprimés, car lacI⁻ est dominant sur lacI⁺",
-    "Seul l'opéron du plasmide est réprimé, le chromosome restant actif"
+    "Réprimés : le répresseur diffusible agit en trans sur les deux opérateurs",
+    "Seul l'opéron du plasmide est réprimé, le chromosome restant actif",
+    "Exprimés : le répresseur lacI⁺ du plasmide n'agit qu'en cis sur son opérateur",
+    "Exprimés : l'allèle lacI⁻ est dominant sur l'allèle lacI⁺ du plasmide"
    ],
    "answer": "A",
    "explanation": "Le gène lacI code une protéine diffusible : une copie lacI⁺ suffit à réprimer tous les opérateurs de la cellule (mutation récessive).",
@@ -169,10 +169,10 @@
    "difficulty": 2,
    "question": "Une protéine soluble porte à son extrémité C-terminale la séquence KDEL. Où la retrouve-t-on à l'état stationnaire ?",
    "choices": [
-    "Dans le milieu extracellulaire, après sécrétion constitutive",
     "Dans la matrice mitochondriale, après passage par les translocases",
     "Dans les lysosomes, après modification par le mannose-6-phosphate",
-    "Dans la lumière du réticulum endoplasmique, grâce à sa récupération depuis le Golgi"
+    "Dans le milieu extracellulaire, après sécrétion constitutive",
+    "Dans la lumière du RE, après récupération depuis le Golgi"
    ],
    "answer": "D",
    "explanation": "KDEL est un signal de rétention : les protéines qui s'échappent vers le Golgi sont renvoyées au RE par un récepteur KDEL.",
@@ -185,10 +185,10 @@
    "difficulty": 3,
    "question": "Chez des patients atteints de la maladie à inclusions (I-cell), les hydrolases lysosomales ne reçoivent pas de mannose-6-phosphate. Où ces enzymes sont-elles retrouvées ?",
    "choices": [
-    "Majoritairement sécrétées hors de la cellule, les lysosomes en étant dépourvus",
-    "Dégradées immédiatement dans le cytosol par le protéasome",
+    "Sécrétées hors de la cellule, faute d'adressage vers les lysosomes",
+    "Accumulées dans le noyau, faute de signal d'adressage nucléaire",
     "Retenues dans le réticulum endoplasmique sans pouvoir le quitter",
-    "Accumulées dans le noyau, faute de signal d'adressage"
+    "Dégradées immédiatement dans le cytosol par le protéasome"
    ],
    "answer": "A",
    "explanation": "Le mannose-6-phosphate est le signal d'adressage vers les lysosomes ; sans lui, les hydrolases suivent la voie de sécrétion par défaut.",
@@ -217,10 +217,10 @@
    "difficulty": 5,
    "question": "Une cellule exprime une dynamine mutante qui fixe le GTP mais ne peut pas l'hydrolyser. Quel effet observe-t-on sur l'endocytose à clathrine ?",
    "choices": [
-    "Les vésicules fusionnent directement avec les lysosomes",
+    "La clathrine ne peut plus s'assembler à la membrane plasmique",
     "Les vésicules se détachent mais ne perdent jamais leur manteau",
-    "Les vésicules bourgeonnent mais restent rattachées à la membrane par un col étroit",
-    "La clathrine ne peut plus s'assembler à la membrane plasmique"
+    "Les vésicules bourgeonnent mais restent attachées par un col étroit",
+    "Les vésicules fusionnent directement avec les lysosomes sans manteau"
    ],
    "answer": "C",
    "explanation": "La dynamine, par son activité GTPasique, pince le col de la vésicule ; la forme non hydrolysable bloque la scission.",
@@ -234,9 +234,9 @@
    "question": "Une protéine transmembranaire de la membrane du RE a un domaine orienté vers la lumière du RE. Après transport vésiculaire jusqu'à la membrane plasmique, vers quel côté ce domaine est-il orienté ?",
    "choices": [
     "Vers l'extérieur de la cellule, face extracellulaire",
-    "Vers le noyau, face nucléaire",
-    "Vers le cytosol, face cytoplasmique",
-    "Il s'oriente au hasard selon la vésicule"
+    "Vers le cytosol, face cytoplasmique de la membrane",
+    "Vers le noyau, face nucléaire de l'enveloppe",
+    "Il s'oriente au hasard selon la vésicule d'origine"
    ],
    "answer": "A",
    "explanation": "La topologie est conservée : la lumière des vésicules devient l'espace extracellulaire après exocytose.",
@@ -297,10 +297,10 @@
    "difficulty": 1,
    "question": "On traite des cellules par un inhibiteur de la phosphodiestérase de l'AMPc. Quel est l'effet attendu sur la concentration d'AMPc après stimulation d'un récepteur couplé à Gs ?",
    "choices": [
-    "Elle augmente et reste élevée plus longtemps, l'AMPc n'étant plus hydrolysé en AMP",
-    "Elle diminue, car l'AMPc est converti en GMPc",
-    "Elle diminue, car la synthèse d'AMPc est bloquée",
-    "Elle reste inchangée, car l'AMPc est éliminé par diffusion"
+    "Elle augmente et reste élevée plus longtemps, l'AMPc étant moins hydrolysé",
+    "Elle reste inchangée, car l'AMPc est éliminé par simple diffusion",
+    "Elle diminue, car l'AMPc est converti en GMPc par la cellule",
+    "Elle diminue, car la synthèse d'AMPc est bloquée par l'inhibiteur"
    ],
    "answer": "A",
    "explanation": "La phosphodiestérase dégrade l'AMPc en AMP : son inhibition prolonge le signal.",
@@ -329,10 +329,10 @@
    "difficulty": 2,
    "question": "Des cellules traitées par la cytochalasine, qui bloque la polymérisation de l'actine, subissent une mitose. Quelle anomalie observe-t-on à l'issue de la division ?",
    "choices": [
-    "Des cellules anucléées, le fuseau mitotique ne se formant pas",
-    "Des cellules à chromosomes non répliqués, par défaut de phase S",
+    "Des cellules anucléées, car le fuseau mitotique ne se forme pas",
     "Des cellules à noyau fragmenté, par défaut de lamines nucléaires",
-    "Des cellules binucléées, l'anneau contractile d'actine ne permettant pas la cytocinèse"
+    "Des cellules à chromosomes non répliqués, par défaut de phase S",
+    "Des cellules binucléées, car l'anneau d'actine ne permet pas la cytocinèse"
    ],
    "answer": "D",
    "explanation": "La cytocinèse dépend de l'anneau contractile actine-myosine ; la mitose se déroule mais les deux noyaux restent dans une même cellule.",
@@ -377,9 +377,9 @@
    "difficulty": 2,
    "question": "Dans le syndrome de Kartagener, une anomalie des dynéines axonémales entraîne notamment une stérilité masculine. Quelle est l'explication ?",
    "choices": [
-    "Les microtubules des flagelles sont absents, faute de tubuline",
-    "Les flagelles des spermatozoïdes sont immobiles, l'axonème ne pouvant pas générer de glissement",
     "Les spermatozoïdes n'ont pas de noyau, faute de lamines",
+    "Les flagelles des spermatozoïdes sont immobiles, faute de glissement",
+    "Les microtubules des flagelles sont absents, faute de tubuline",
     "L'acrosome ne se forme pas, faute de vésicules golgiennes"
    ],
    "answer": "B",
@@ -393,9 +393,9 @@
    "difficulty": 5,
    "question": "Un filament d'actine est placé dans une solution où la concentration d'actine-G libre est supérieure à la concentration critique de l'extrémité (+) mais inférieure à celle de l'extrémité (−). Que se passe-t-il ?",
    "choices": [
-    "Il croît côté (+) et se raccourcit côté (−) : c'est le « treadmilling »",
-    "Il se dépolymérise aux deux extrémités",
+    "Il croît côté (+) et se raccourcit côté (−) : c'est le treadmilling",
     "Il croît aux deux extrémités à la même vitesse",
+    "Il se dépolymérise aux deux extrémités à la même vitesse",
     "Il reste strictement inchangé aux deux extrémités"
    ],
    "answer": "A",
@@ -441,10 +441,10 @@
    "difficulty": 1,
    "question": "Dans la leucémie myéloïde chronique, la translocation t(9;22) forme le chromosome de Philadelphie. Quel est son effet moléculaire ?",
    "choices": [
-    "Elle inactive les deux copies du gène suppresseur p53",
-    "Elle crée le gène de fusion BCR-ABL, codant une tyrosine kinase constitutivement active",
-    "Elle amplifie le gène MYC par duplication en tandem",
-    "Elle supprime le gène RB1 par délétion"
+    "Elle inactive les deux copies du gène suppresseur p53 par délétion",
+    "Elle crée le gène de fusion BCR-ABL, codant une kinase toujours active",
+    "Elle amplifie le gène MYC par duplication en tandem localisée",
+    "Elle supprime le gène RB1 par une délétion de grande taille"
    ],
    "answer": "B",
    "explanation": "La fusion BCR-ABL produit une kinase active en permanence, cible de l'imatinib.",
@@ -489,10 +489,10 @@
    "difficulty": 1,
    "question": "Dans le lymphome folliculaire, la translocation t(14;18) place BCL2 sous le contrôle d'un promoteur de gène d'immunoglobuline. Quelle est la conséquence cellulaire ?",
    "choices": [
-    "Une perte de Bcl-2 qui déclenche l'apoptose massive des lymphocytes B",
-    "Une surexpression de Bcl-2 qui inhibe l'apoptose et prolonge la survie des lymphocytes B",
+    "Une perte de Bcl-2 qui déclenche l'apoptose des lymphocytes B",
+    "Une surexpression de Bcl-2 qui inhibe l'apoptose des lymphocytes B",
     "Une activation directe de la caspase-3 dans les lymphocytes B",
-    "Une inactivation de p53 par fixation directe de Bcl-2 sur l'ADN"
+    "Une inactivation de p53 par fixation de Bcl-2 sur son gène"
    ],
    "answer": "B",
    "explanation": "Bcl-2 est anti-apoptotique : sa surexpression favorise l'accumulation de cellules qui auraient dû mourir.",
@@ -537,10 +537,10 @@
    "difficulty": 2,
    "question": "Des fibroblastes sont reprogrammés en cellules souches pluripotentes induites par l'expression de quatre facteurs de transcription (Oct4, Sox2, Klf4, c-Myc). Que montre cette expérience ?",
    "choices": [
-    "Que la différenciation est irréversible sauf par transfert de noyau",
-    "Que les cellules différenciées ont perdu les gènes inutiles à leur fonction",
+    "Que les cellules différenciées ont perdu les gènes qui leur sont inutiles",
+    "Que la différenciation est irréversible, sauf par transfert de noyau",
     "Que la pluripotence n'exige aucun programme d'expression génique",
-    "Que l'état différencié est réversible par des facteurs de transcription, sans changement de séquence d'ADN"
+    "Que l'état différencié est réversible, sans changement de séquence d'ADN"
    ],
    "answer": "D",
    "explanation": "Le génome des cellules différenciées est complet : la reprogrammation modifie l'expression génique et l'épigénome.",
@@ -713,10 +713,10 @@
    "difficulty": 4,
    "question": "Lors de l'assemblage d'un génome riche en séquences répétées, que permettent les lectures appariées (paired-end) ?",
    "choices": [
-    "Obtenir des lectures plus longues que 10 000 bases à elles seules",
     "Supprimer toutes les erreurs de séquençage par simple comparaison",
-    "Ordonner et orienter les contigs en reliant des lectures séparées par une distance connue",
-    "Se passer de toute étape d'assemblage des fragments"
+    "Obtenir des lectures dépassant 10 000 bases à elles seules",
+    "Ordonner et orienter les contigs grâce à une distance connue entre lectures",
+    "Se passer de toute étape d'assemblage des fragments obtenus"
    ],
    "answer": "C",
    "explanation": "La distance connue entre les deux extrémités d'un fragment aide à franchir les répétitions et à structurer l'assemblage.",
@@ -793,10 +793,10 @@
    "difficulty": 3,
    "question": "Un étudiant écrit que deux protéines sont « homologues à 60 % ». Quelle est la remarque correcte ?",
    "choices": [
-    "Seule l'identité de séquence peut établir une absence d'homologie",
     "L'homologie ne s'applique qu'aux séquences d'ADN, pas aux protéines",
-    "L'homologie est une relation d'ancêtre commun : elle est présente ou non, seule l'identité se mesure en %",
-    "Cette expression est correcte, l'homologie étant une mesure de similarité"
+    "Cette expression est correcte : l'homologie mesure la similarité en %",
+    "L'homologie traduit un ancêtre commun : on mesure l'identité en %, pas l'homologie",
+    "Seule l'identité de séquence peut établir une absence d'homologie"
    ],
    "answer": "C",
    "explanation": "L'identité et la similarité s'expriment en pourcentage ; l'homologie est une inférence qualitative d'origine commune.",
@@ -921,10 +921,10 @@
    "difficulty": 1,
    "question": "En isoélectrofocalisation, une protéine cesse de migrer dans le gradient de pH. Pourquoi ?",
    "choices": [
-    "Elle se lie de façon irréversible à l'anode",
-    "Elle est dénaturée par le gradient de pH",
-    "Elle atteint le pH égal à son point isoélectrique, où sa charge nette est nulle",
-    "Elle atteint la limite de taille des pores du gel"
+    "Elle atteint la limite de taille des pores du gel de séparation",
+    "Elle est dénaturée par le gradient de pH du gel",
+    "Elle atteint le pH de son point isoélectrique, où sa charge nette est nulle",
+    "Elle se lie de façon irréversible à l'anode de la cuve"
    ],
    "answer": "C",
    "explanation": "À pH = pI, la charge nette est nulle : le champ électrique n'exerce plus de force de migration.",
@@ -1017,9 +1017,9 @@
    "difficulty": 3,
    "question": "Le 2,4-dinitrophénol est un découplant : il rend la membrane mitochondriale interne perméable aux protons. Quel est l'effet observé ?",
    "choices": [
+    "La consommation d'O₂ chute et la synthèse d'ATP augmente en parallèle",
+    "La consommation d'O₂ augmente, la synthèse d'ATP chute et de la chaleur apparaît",
     "La consommation d'O₂ et la synthèse d'ATP augmentent toutes deux",
-    "La consommation d'O₂ augmente, la synthèse d'ATP chute et de la chaleur est libérée",
-    "La consommation d'O₂ chute et la synthèse d'ATP augmente",
     "La consommation d'O₂ s'arrête, le gradient de protons étant maintenu"
    ],
    "answer": "B",
@@ -1065,10 +1065,10 @@
    "difficulty": 2,
    "question": "Dans la phénylcétonurie, la phénylalanine hydroxylase est déficiente. Quelles sont les conséquences biochimiques ?",
    "choices": [
-    "Les corps cétoniques disparaissent de l'organisme",
+    "Le glucose s'accumule, la glycolyse étant bloquée dans le foie",
+    "Les corps cétoniques disparaissent de l'organisme en quelques jours",
     "La tyrosine s'accumule et la phénylalanine devient indispensable",
-    "Le glucose s'accumule, la glycolyse étant bloquée",
-    "La phénylalanine s'accumule et la tyrosine devient indispensable dans l'alimentation"
+    "La phénylalanine s'accumule et la tyrosine devient indispensable à l'apport"
    ],
    "answer": "D",
    "explanation": "L'enzyme convertit la phénylalanine en tyrosine ; son déficit entraîne l'accumulation du substrat et un déficit en tyrosine.",
@@ -1145,10 +1145,10 @@
    "difficulty": 2,
    "question": "Chez un patient atteint de diabète de type 1 non traité, pourquoi observe-t-on une acidocétose ?",
    "choices": [
-    "La production d'acétyl-CoA est interrompue dans les mitochondries",
-    "Un excès d'insuline bloque l'utilisation des acides gras par le foie",
-    "Sans insuline, la lipolyse et la production hépatique de corps cétoniques augmentent",
-    "Le glucose est entièrement oxydé, produisant un excès d'acide lactique"
+    "Le glucose est entièrement oxydé, produisant un excès de lactate",
+    "La production d'acétyl-CoA est interrompue dans les mitochondries du foie",
+    "Sans insuline, la lipolyse et la cétogenèse hépatique augmentent",
+    "Un excès d'insuline bloque l'utilisation des acides gras par le foie"
    ],
    "answer": "C",
    "explanation": "En l'absence d'insuline, les adipocytes libèrent des acides gras, dégradés en acétyl-CoA puis en corps cétoniques acides.",
@@ -1193,10 +1193,10 @@
    "difficulty": 2,
    "question": "Quel est l'effet métabolique principal d'un excès chronique de cortisol ?",
    "choices": [
-    "Une stimulation du stockage du glucose en glycogène dans le muscle",
-    "Une stimulation de la gluconéogenèse hépatique et une tendance à l'hyperglycémie",
+    "Une stimulation du stockage du glucose en glycogène musculaire",
+    "Une stimulation de la gluconéogenèse et une tendance à l'hyperglycémie",
     "Une baisse de la glycémie par inhibition de la gluconéogenèse",
-    "Une hausse de la synthèse protéique musculaire"
+    "Une hausse de la synthèse protéique et une prise de masse musculaire"
    ],
    "answer": "B",
    "explanation": "Le cortisol est une hormone hyperglycémiante qui favorise la protéolyse et la gluconéogenèse.",
@@ -1225,10 +1225,10 @@
    "difficulty": 5,
    "question": "Un patient présente un déficit du transporteur TAP. Quelle anomalie en résulte à la surface des cellules ?",
    "choices": [
-    "Une absence de récepteurs des cellules T sur les lymphocytes",
-    "Un excès de molécules du CMH de classe I portant des peptides viraux",
-    "Peu de molécules du CMH de classe II, car les peptides ne sont pas dégradés",
-    "Peu de molécules du CMH de classe I portant un peptide, car les peptides n'entrent pas dans le RE"
+    "Peu de CMH II en surface, car les peptides ne sont pas dégradés",
+    "Un excès de CMH I portant des peptides viraux à la surface cellulaire",
+    "Une absence de récepteurs des cellules T sur les lymphocytes circulants",
+    "Peu de CMH I chargés de peptides en surface, les peptides n'entrant pas dans le RE"
    ],
    "answer": "D",
    "explanation": "TAP transporte les peptides du cytosol vers le RE pour le chargement du CMH I ; son déficit réduit l'expression en surface de ce dernier.",
@@ -1273,10 +1273,10 @@
    "difficulty": 3,
    "question": "Une femme Rh négatif porte un fœtus Rh positif. Quel est le but de l'administration d'immunoglobulines anti-D après l'accouchement ?",
    "choices": [
-    "Transformer les hématies fœtales en hématies Rh négatif",
-    "Éliminer les hématies fœtales Rh positif avant que la mère ne soit immunisée",
-    "Protéger le nouveau-né contre toute infection virale",
-    "Stimuler la production d'anticorps anti-D chez la mère"
+    "Protéger le nouveau-né contre toute infection virale pendant des mois",
+    "Détruire les hématies fœtales Rh positif avant l'immunisation de la mère",
+    "Stimuler la production d'anticorps anti-D chez la mère après la naissance",
+    "Transformer les hématies fœtales en hématies Rh négatif dans le sang"
    ],
    "answer": "B",
    "explanation": "Les anticorps anti-D passifs détruisent les hématies Rh⁺ fœtales passées dans la circulation maternelle et préviennent l'alloimmunisation pour les grossesses suivantes.",
@@ -1289,10 +1289,10 @@
    "difficulty": 3,
    "question": "Pourquoi les inhibiteurs de la transcriptase inverse du VIH sont-ils relativement bien tolérés par les cellules humaines ?",
    "choices": [
-    "Leur cible est une enzyme virale sans équivalent essentiel dans la cellule saine",
-    "Ils sont dégradés avant de pénétrer dans le noyau",
-    "Ils ciblent l'ARN polymérase II, abondante dans les cellules",
-    "Ils ne traversent pas la membrane des cellules humaines"
+    "Leur cible est une enzyme virale sans équivalent essentiel chez l'hôte sain",
+    "Ils ne traversent jamais la membrane plasmique des cellules humaines",
+    "Ils ciblent l'ARN polymérase II, abondante dans les cellules saines",
+    "Ils sont dégradés avant de pénétrer dans le noyau des cellules"
    ],
    "answer": "A",
    "explanation": "La rétrotranscription n'a pas lieu dans une cellule humaine saine : la sélectivité vient de ce que la cible est spécifique du virus.",
@@ -1321,10 +1321,10 @@
    "difficulty": 5,
    "question": "Le virus de l'hépatite B possède un génome d'ADN, mais sa réplication passe par un intermédiaire à ARN. Quelle enzyme virale est impliquée ?",
    "choices": [
-    "Une ARN polymérase ARN-dépendante",
+    "Une ARN polymérase ARN-dépendante, comme chez les virus à ARN",
     "Une ADN polymérase à activité de transcriptase inverse",
-    "Une intégrase uniquement",
-    "Une topoisomérase de type II"
+    "Une topoisomérase de type II, issue de la cellule hôte",
+    "Une intégrase agissant seule, sans aucune autre enzyme"
    ],
    "answer": "B",
    "explanation": "Le VHB (hépadnavirus) rétrotranscrit un ARN prégénomique en ADN : c'est un virus à ADN utilisant la transcription inverse.",
@@ -1337,10 +1337,10 @@
    "difficulty": 4,
    "question": "Le virus de la grippe peut donner des virus recombinés par réassortiment, alors que le VIH ne le fait pas de cette façon. Quelle caractéristique du génome grippal l'explique ?",
    "choices": [
-    "Son génome est plus long que celui de tout autre virus",
+    "Son génome est de l'ADN double brin, facile à recombiner entre virus",
     "Son génome est intégré au chromosome de la cellule hôte",
-    "Son génome est constitué d'ADN double brin, facile à recombiner",
-    "Son génome est segmenté, ce qui permet l'échange de segments entre deux virus d'une même cellule"
+    "Son génome est plus long que celui de tout autre virus connu",
+    "Son génome est segmenté : deux virus d'une même cellule peuvent échanger des segments"
    ],
    "answer": "D",
    "explanation": "Le génome de la grippe comporte huit segments d'ARN ; une co-infection permet leur échange, ce qui peut produire des virus nouveaux.",
@@ -1417,10 +1417,10 @@
    "difficulty": 2,
    "question": "Pourquoi l'arrêt prématuré d'un traitement antibiotique favorise-t-il la résistance ?",
    "choices": [
-    "Les bactéries les moins sensibles survivent et se multiplient, ce qui sélectionne des souches résistantes",
+    "Les bactéries peu sensibles survivent et se multiplient : sélection de souches résistantes",
+    "Les bactéries sensibles se transforment en bactéries résistantes à l'arrêt",
     "L'antibiotique devient inactif dans l'organisme après quelques jours",
-    "L'antibiotique provoque lui-même les mutations qui rendent résistant",
-    "Les bactéries sensibles se transforment en bactéries résistantes à l'arrêt"
+    "L'antibiotique provoque lui-même les mutations qui rendent résistant"
    ],
    "answer": "A",
    "explanation": "L'antibiotique exerce une pression de sélection : un traitement insuffisant laisse des survivants moins sensibles.",
@@ -1449,10 +1449,10 @@
    "difficulty": 2,
    "question": "Dans les régions impaludées d'Afrique, l'allèle de l'hémoglobine S est fréquent. Quelle est l'explication évolutive ?",
    "choices": [
-    "Les hétérozygotes AS sont protégés contre le paludisme grave, ce qui compense la perte des homozygotes SS",
+    "Les hétérozygotes AS résistent au paludisme grave, ce qui compense la perte des SS",
     "Les homozygotes SS sont les plus protégés contre le paludisme",
     "L'allèle S est apparu uniquement après l'arrivée de Plasmodium",
-    "L'allèle S confère une résistance à tous les parasites sanguins"
+    "L'allèle S confère une résistance à tous les parasites sanguins connus"
    ],
    "answer": "A",
    "explanation": "C'est un avantage de l'hétérozygote : AS résiste mieux au paludisme grave, tandis que SS développe la drépanocytose.",
@@ -1481,10 +1481,10 @@
    "difficulty": 2,
    "question": "Pour interrompre la transmission de la bilharziose urogénitale, quelle cible du cycle de Schistosoma haematobium peut-on viser ?",
    "choices": [
-    "Les mollusques d'eau douce, hôtes intermédiaires",
-    "Les glossines, ou mouches tsé-tsé",
-    "Les tiques molles des habitations",
-    "Les moustiques du genre Anopheles"
+    "Les mollusques d'eau douce, hôtes intermédiaires du parasite",
+    "Les tiques molles des habitations, vectrices du parasite",
+    "Les moustiques du genre Anopheles, vecteurs du parasite",
+    "Les glossines, ou mouches tsé-tsé, vectrices du parasite"
    ],
    "answer": "A",
    "explanation": "Les larves émises par le mollusque (cercaires) pénètrent par la peau lors des contacts avec l'eau douce ; agir sur le mollusque ou l'eau coupe le cycle.",
@@ -1497,10 +1497,10 @@
    "difficulty": 3,
    "question": "Pourquoi l'onchocercose sévit-elle surtout dans des villages proches de cours d'eau rapides ?",
    "choices": [
-    "Les cercaires de Onchocerca nagent dans les rivières",
-    "Les moustiques Anopheles pondent dans les rapides",
-    "Les larves de glossines se développent dans l'eau courante",
-    "Les larves des simulies, vecteurs du parasite, se développent dans ces eaux courantes oxygénées"
+    "Les moustiques Anopheles pondent surtout dans les eaux des rapides",
+    "Les larves de glossines se développent dans l'eau courante des rivières",
+    "Les cercaires d'Onchocerca nagent librement dans les rivières",
+    "Les larves de simulies, vecteurs du parasite, vivent dans ces eaux courantes"
    ],
    "answer": "D",
    "explanation": "Les simulies pondent dans les eaux vives ; les femelles piquent et transmettent Onchocerca volvulus.",
@@ -1513,10 +1513,10 @@
    "difficulty": 4,
    "question": "Pourquoi l'obtention d'un vaccin contre la trypanosomiase africaine est-elle très difficile ?",
    "choices": [
-    "Le parasite vit uniquement à l'intérieur des hépatocytes",
-    "La variation antigénique des glycoprotéines de surface (VSG) permet au parasite d'échapper aux anticorps",
-    "Le parasite est transmis par voie sexuelle uniquement",
-    "Le parasite n'est pas immunogène du tout"
+    "Le parasite vit uniquement à l'intérieur des hépatocytes du malade",
+    "La variation antigénique des VSG permet au parasite d'échapper aux anticorps",
+    "Le parasite n'est pas immunogène du tout pour son hôte humain",
+    "Le parasite est transmis par voie sexuelle uniquement, sans vecteur"
    ],
    "answer": "B",
    "explanation": "Les trypanosomes remplacent périodiquement leur manteau de VSG, ce qui rend inefficaces les anticorps déjà produits.",
@@ -1529,10 +1529,10 @@
    "difficulty": 3,
    "question": "Un poisson osseux d'eau douce vit dans un milieu hypotonique par rapport à ses liquides internes. Quelle stratégie d'osmorégulation adopte-t-il ?",
    "choices": [
-    "Il retient l'eau en excrétant une urine très concentrée",
-    "Il accumule l'urée pour s'équilibrer avec le milieu",
+    "Il accumule l'urée pour s'équilibrer avec le milieu extérieur",
     "Il boit beaucoup d'eau et excrète le sel par ses branchies",
-    "Il excrète une urine abondante et diluée, et absorbe activement des sels par ses branchies"
+    "Il retient l'eau en excrétant une urine très concentrée",
+    "Il excrète une urine abondante et diluée et capte des sels par les branchies"
    ],
    "answer": "D",
    "explanation": "L'eau entre par osmose : le poisson rejette l'excès d'eau et récupère les sels perdus.",
@@ -1545,10 +1545,10 @@
    "difficulty": 3,
    "question": "Pourquoi les requins gardent-ils de l'urée et de l'oxyde de triméthylamine dans leur sang ?",
    "choices": [
-    "Pour rendre leur peau imperméable aux ions",
-    "Pour fabriquer de la chaleur nécessaire à leur nage rapide",
+    "Pour détecter leurs proies par électroréception à distance",
+    "Pour rendre leur peau imperméable aux ions de l'eau de mer",
     "Pour être à peu près isoosmotiques à l'eau de mer et limiter la perte d'eau",
-    "Pour détecter les proies par électroréception"
+    "Pour fabriquer de la chaleur nécessaire à leur nage rapide"
    ],
    "answer": "C",
    "explanation": "Ces solutés relèvent l'osmolarité interne : les requins ne perdent pas d'eau par osmose dans l'eau de mer.",
@@ -1577,10 +1577,10 @@
    "difficulty": 1,
    "question": "Les oiseaux excrètent surtout de l'acide urique, peu soluble, plutôt que de l'urée. Quel est l'avantage de ce choix ?",
    "choices": [
-    "Il permet de se passer de reins",
-    "Il permet une excrétion rapide dans une grande quantité d'urine",
-    "Il permet d'économiser l'eau et convient au développement dans un œuf à coquille",
-    "Il consomme moins d'énergie que la production d'ammoniac"
+    "Il consomme moins d'énergie que la production d'ammoniac",
+    "Il permet de se passer de reins fonctionnels chez l'adulte",
+    "Il économise l'eau et convient au développement dans un œuf à coquille",
+    "Il permet une excrétion rapide dans une grande quantité d'urine"
    ],
    "answer": "C",
    "explanation": "L'acide urique précipite et s'élimine avec très peu d'eau, adapté à la vie terrestre et à l'œuf cléidoïque.",
@@ -1594,9 +1594,9 @@
    "question": "Chez les oiseaux, les poumons sont reliés à des sacs aériens. Quelle particularité en résulte pour la circulation de l'air dans les poumons ?",
    "choices": [
     "Un flux alternatif d'entrée et de sortie, comme chez les mammifères",
-    "Un flux d'air unidirectionnel dans les parabronches, à l'inspiration comme à l'expiration",
-    "Un flux uniquement lors de l'expiration",
-    "Un flux d'air stagnant sans renouvellement"
+    "Un flux d'air unidirectionnel dans les parabronches, à l'inspiration et à l'expiration",
+    "Un flux d'air uniquement lors de l'expiration, jamais à l'inspiration",
+    "Un flux d'air stagnant, sans renouvellement des gaz dans les poumons"
    ],
    "answer": "B",
    "explanation": "Les sacs aériens servent de soufflets : l'air traverse les poumons dans un seul sens, ce qui améliore les échanges gazeux.",
@@ -1657,10 +1657,10 @@
    "difficulty": 2,
    "question": "Selon le principe d'exclusion compétitive de Gause, que se passe-t-il pour deux espèces dont les besoins sont identiques dans un milieu stable et limité ?",
    "choices": [
-    "Elles évoluent toujours vers une symbiose obligatoire",
-    "Elles coexistent indéfiniment en équilibre stable",
-    "L'une finit par éliminer l'autre : elles ne peuvent pas coexister durablement",
-    "Elles s'hybrident pour former une seule espèce"
+    "Elles s'hybrident pour former une seule espèce intermédiaire",
+    "Elles évoluent toujours vers une symbiose obligatoire entre elles",
+    "L'une finit par éliminer l'autre : elles ne coexistent pas durablement",
+    "Elles coexistent indéfiniment en équilibre stable dans ce milieu"
    ],
    "answer": "C",
    "explanation": "Deux espèces utilisant exactement la même niche ne coexistent pas : la plus compétitive exclut l'autre.",
@@ -1706,9 +1706,9 @@
    "question": "L'okapi est un grand mammifère forestier. Dans quel pays vit-il à l'état sauvage ?",
    "choices": [
     "En République démocratique du Congo, où il est endémique",
+    "Au Kenya, où il est endémique des hauts plateaux",
     "À Madagascar, où il est endémique",
-    "Au Cameroun, où il est endémique",
-    "Au Kenya, où il est endémique"
+    "Au Cameroun, où il est endémique de la forêt côtière"
    ],
    "answer": "A",
    "explanation": "L'okapi est endémique des forêts du nord-est de la RDC.",
@@ -1721,10 +1721,10 @@
    "difficulty": 3,
    "question": "Quels sont les deux critères classiques qui définissent un « point chaud de biodiversité » (hotspot) ?",
    "choices": [
-    "Un fort endémisme de plantes vasculaires et une perte importante de l'habitat d'origine",
-    "Une forte densité humaine et une forte production agricole",
+    "Un fort endémisme de plantes vasculaires et une perte importante d'habitat",
     "Une grande surface et un faible nombre d'espèces menacées",
-    "Une forte altitude et un climat tempéré"
+    "Une forte densité humaine et une forte production agricole locale",
+    "Une forte altitude et un climat tempéré toute l'année"
    ],
    "answer": "A",
    "explanation": "Les hotspots (Myers) combinent un taux élevé d'espèces endémiques et une forte menace par destruction de l'habitat.",
@@ -1737,9 +1737,9 @@
    "difficulty": 4,
    "question": "La fragmentation d'une forêt isole des populations de primates sur de petits fragments. Quel risque génétique en découle à long terme ?",
    "choices": [
-    "Une hybridation obligatoire avec toutes les espèces voisines",
-    "Une disparition de la sélection naturelle",
     "Une augmentation de la diversité génétique par isolement",
+    "Une disparition totale de la sélection naturelle",
+    "Une hybridation obligatoire avec toutes les espèces voisines",
     "Une dérive génétique accrue et une consanguinité, avec perte de diversité"
    ],
    "answer": "D",
@@ -1753,10 +1753,10 @@
    "difficulty": 2,
    "question": "Les gènes Hox présentent une colinéarité. En quoi consiste-t-elle ?",
    "choices": [
-    "L'ordre des gènes sur le chromosome correspond à l'ordre antéro-postérieur de leur expression",
-    "L'ordre des gènes est indépendant de leur zone d'expression",
+    "L'ordre des gènes sur le chromosome reflète l'ordre antéro-postérieur d'expression",
+    "Tous les gènes Hox s'expriment dans le même segment de l'embryon",
     "Chaque gène Hox est situé sur un chromosome différent",
-    "Tous les gènes Hox s'expriment dans le même segment de l'embryon"
+    "L'ordre des gènes est indépendant de leur zone d'expression"
    ],
    "answer": "A",
    "explanation": "Les gènes en 3' du complexe s'expriment plus antérieurement, ceux en 5' plus postérieurement.",
@@ -1787,8 +1787,8 @@
    "choices": [
     "Bicoid est un gène zygotique exprimé après la gastrulation",
     "Bicoid contrôle uniquement la segmentation de l'abdomen",
-    "Bicoid est un déterminant maternel de l'axe antéro-postérieur, présent en gradient dans l'œuf",
-    "Bicoid agit uniquement chez les mâles"
+    "Bicoid est un déterminant maternel en gradient dans l'œuf, côté antérieur",
+    "Bicoid agit uniquement chez les mouches mâles adultes"
    ],
    "answer": "C",
    "explanation": "L'ARNm de bicoid, déposé à l'extrémité antérieure par la mère, forme un gradient de protéine qui spécifie les structures antérieures.",
@@ -1801,9 +1801,9 @@
    "difficulty": 5,
    "question": "Une mère Drosophila bcd⁻/bcd⁻ est croisée avec un père bcd⁺/bcd⁺. Quel est le phénotype des embryons, tous hétérozygotes bcd⁺/bcd⁻ ?",
    "choices": [
-    "Létal avant la fécondation, faute de gamètes viables",
-    "Normal : l'allèle bcd⁺ du père est dominant et corrige le défaut",
     "Normal : seul le génotype de l'embryon détermine son phénotype",
+    "Létal avant la fécondation, faute de gamètes viables chez la mère",
+    "Normal : l'allèle bcd⁺ du père est dominant et corrige le défaut",
     "Anormal : l'effet est maternel, le génotype de la mère détermine le phénotype"
    ],
    "answer": "D",
@@ -1929,10 +1929,10 @@
    "difficulty": 4,
    "question": "Pourquoi impose-t-on souvent des zones refuges de plantes non Bt à côté des champs Bt ?",
    "choices": [
-    "Pour supprimer la reproduction des insectes",
-    "Pour maintenir des insectes sensibles qui retardent la sélection de la résistance",
-    "Pour augmenter la quantité de toxine produite par les plantes Bt",
-    "Pour éviter la pollinisation des cultures Bt"
+    "Pour augmenter la quantité de toxine produite par les plants Bt",
+    "Pour maintenir des insectes sensibles qui retardent la résistance",
+    "Pour supprimer la reproduction des insectes ravageurs",
+    "Pour éviter la pollinisation croisée des cultures Bt"
    ],
    "answer": "B",
    "explanation": "Les insectes sensibles des refuges se croisent avec les rares survivants résistants, ce qui dilue l'allèle de résistance.",
@@ -1946,8 +1946,8 @@
    "question": "Dans un test statistique, on obtient p = 0,03. Quelle est l'interprétation correcte ?",
    "choices": [
     "L'hypothèse nulle a 3 % de chances d'être vraie",
-    "Si H₀ était vraie, un résultat aussi extrême surviendrait avec une probabilité de 3 %",
-    "L'effet observé est de 3 % de la moyenne",
+    "Si H₀ était vraie, un résultat aussi extrême surviendrait dans 3 % des cas",
+    "L'effet observé représente 3 % de la valeur moyenne",
     "L'hypothèse alternative a 97 % de chances d'être vraie"
    ],
    "answer": "B",
@@ -1993,10 +1993,10 @@
    "difficulty": 1,
    "question": "Quel est le rôle de la partie « Matériel et méthodes » d'un mémoire de biologie ?",
    "choices": [
-    "Résumer en une phrase les conclusions principales",
-    "Lister uniquement les ouvrages cités dans le texte",
+    "Lister uniquement les ouvrages cités dans le texte du mémoire",
     "Interpréter les résultats à la lumière de la littérature",
-    "Décrire les procédures avec assez de détails pour permettre la reproduction de l'étude"
+    "Résumer en une phrase les conclusions principales du travail",
+    "Décrire les procédures assez précisément pour que l'étude soit reproductible"
    ],
    "answer": "D",
    "explanation": "Cette section décrit échantillons, protocoles et analyses pour que d'autres puissent refaire l'étude.",

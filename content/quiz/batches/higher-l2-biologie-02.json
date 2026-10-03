@@ -203,8 +203,8 @@
    "choices": [
     "Le transfert direct d'un phosphate depuis un substrat riche en énergie",
     "L'expulsion des protons hors de la matrice consomme du NADH",
-    "La réduction du dioxygène libère un phosphate libre",
-    "Le retour des protons vers la matrice, selon leur gradient, entraîne la synthèse"
+    "La réduction du dioxygène libère un phosphate libre dans la matrice",
+    "Le retour des protons vers la matrice entraîne la phosphorylation de l'ADP"
    ],
    "answer": "D",
    "explanation": "Le flux de protons à travers l'ATP synthase fournit l'énergie de phosphorylation de l'ADP (chimiosmose).",
@@ -217,9 +217,9 @@
    "difficulty": 3,
    "question": "Que provoque un agent découplant (comme le dinitrophénol) sur la mitochondrie ?",
    "choices": [
-    "Le transport d'électrons est bloqué et le gradient augmente",
+    "Le transport d'électrons est bloqué et le gradient de protons augmente",
     "L'ATP synthase tourne plus vite et produit plus d'ATP",
-    "Le gradient de protons se dissipe : moins d'ATP produit, davantage de chaleur",
+    "Le gradient de protons se dissipe : moins d'ATP, davantage de chaleur",
     "Le cycle de Krebs est inhibé par blocage du pyruvate"
    ],
    "answer": "C",
@@ -281,8 +281,8 @@
    "difficulty": 5,
    "question": "Comment les plantes de type C4 (maïs, canne à sucre) limitent-elles la photorespiration ?",
    "choices": [
-    "Le CO2 est fixé par la PEP carboxylase puis concentré autour de la RuBisCO",
-    "La RuBisCO est remplacée par une enzyme sans activité oxygénase",
+    "Le CO2 est fixé par la PEP carboxylase puis concentré près de la RuBisCO",
+    "La RuBisCO est remplacée par une enzyme dépourvue d'activité oxygénase",
     "Les stomates restent ouverts pour saturer la feuille en O2",
     "Le cycle de Calvin est supprimé au profit de la glycolyse"
    ],
@@ -395,7 +395,7 @@
    "choices": [
     "Les chromosomes s'alignent sur la plaque équatoriale",
     "L'enveloppe nucléaire se reforme autour de chaque lot",
-    "L'ADN est répliqué dans chaque noyau",
+    "L'ADN est répliqué dans chaque noyau avant la division",
     "Les chromatides sœurs se séparent et migrent vers les pôles"
    ],
    "answer": "D",
@@ -409,10 +409,10 @@
    "difficulty": 3,
    "question": "Comment la cycline contrôle-t-elle la kinase CDK ?",
    "choices": [
-    "La CDK n'est active que liée à sa cycline, dont la quantité varie au cours du cycle",
-    "La cycline est une kinase qui phosphoryle la CDK en permanence",
-    "La CDK est active seule et la cycline la détruit après usage",
-    "La cycline reste à concentration constante pendant tout le cycle"
+    "La CDK n'est active que liée à sa cycline, dont la quantité varie selon le cycle",
+    "La cycline est une kinase qui phosphoryle la CDK de façon permanente",
+    "La CDK est active seule et la cycline la détruit juste après usage",
+    "La cycline garde une concentration constante pendant tout le cycle"
    ],
    "answer": "A",
    "explanation": "Les CDK sont présentes en quantité stable ; leur activation dépend de l'accumulation puis de la dégradation des cyclines.",
@@ -425,10 +425,10 @@
    "difficulty": 5,
    "question": "Après une lésion de l'ADN, comment p53 provoque-t-elle l'arrêt du cycle en G1 ?",
    "choices": [
-    "Elle active la transcription de p21, un inhibiteur des complexes cycline-CDK",
-    "Elle phosphoryle directement la cycline D pour l'activer",
-    "Elle réplique l'ADN endommagé avant la phase S",
-    "Elle dégrade le fuseau mitotique"
+    "Elle active la transcription de p21, inhibiteur des complexes cycline-CDK",
+    "Elle phosphoryle directement la cycline D pour augmenter son activité",
+    "Elle réplique l'ADN endommagé avant l'entrée de la cellule en phase S",
+    "Elle dégrade le fuseau mitotique avant la formation des centrosomes"
    ],
    "answer": "A",
    "explanation": "p53 stabilisée induit p21, qui bloque les CDK et laisse du temps à la réparation ou à l'apoptose.",
@@ -457,10 +457,10 @@
    "difficulty": 2,
    "question": "Quand et entre quels éléments se produit le crossing-over ?",
    "choices": [
-    "En anaphase II, entre chromatides sœurs",
-    "En métaphase I, entre chromosomes non homologues",
-    "En prophase I, entre chromatides non sœurs de chromosomes homologues",
-    "En interphase, avant la réplication de l'ADN"
+    "En anaphase II, entre les chromatides sœurs d'un même chromosome",
+    "En métaphase I, entre des chromosomes non homologues de la cellule",
+    "En prophase I, entre chromatides non sœurs d'homologues",
+    "En interphase, juste avant la réplication de l'ADN nucléaire"
    ],
    "answer": "C",
    "explanation": "Les échanges ont lieu entre chromatides non sœurs d'homologues appariés (chiasmas).",
@@ -473,9 +473,9 @@
    "difficulty": 2,
    "question": "Qu'est-ce qui se sépare lors de l'anaphase I de la méiose ?",
    "choices": [
-    "Les chromatides sœurs",
-    "Les deux moitiés de chaque centromère",
-    "Les gamètes issus de la division",
+    "Les chromatides sœurs de chaque chromosome",
+    "Les moitiés de chaque centromère",
+    "Les gamètes issus de la première division",
     "Les chromosomes homologues"
    ],
    "answer": "D",
@@ -617,10 +617,10 @@
    "difficulty": 3,
    "question": "Quel mécanisme égalise la dose des gènes liés à l'X entre femme et homme ?",
    "choices": [
-    "La duplication du chromosome X chez l'homme",
-    "La perte du chromosome Y dans les cellules somatiques",
-    "L'inactivation aléatoire d'un X dans chaque cellule (corpuscule de Barr)",
-    "La surexpression constante du X paternel"
+    "La duplication du chromosome X dans toutes les cellules de l'homme",
+    "La perte du chromosome Y dans les cellules somatiques de l'homme",
+    "L'inactivation aléatoire d'un X par cellule (corpuscule de Barr)",
+    "La surexpression permanente du chromosome X d'origine paternelle"
    ],
    "answer": "C",
    "explanation": "Un des deux X de la femme est condensé et en grande partie silencieux (corpuscule de Barr).",
@@ -698,9 +698,9 @@
    "question": "Pourquoi les chromosomes linéaires raccourcissent-ils sans télomérase ?",
    "choices": [
     "Le brin retardé ne peut être complété après retrait de l'amorce terminale",
-    "L'hélicase digère les extrémités à chaque cycle",
-    "L'ADN polymérase synthétise en 3'→5' aux extrémités",
-    "Les histones détruisent les extrémités à chaque division"
+    "L'hélicase digère les extrémités du chromosome à chaque cycle de réplication",
+    "L'ADN polymérase synthétise en 3'→5' au niveau des extrémités",
+    "Les histones détruisent les extrémités à chaque division cellulaire"
    ],
    "answer": "A",
    "explanation": "La télomérase, qui porte sa propre matrice d'ARN, rallonge les extrémités et compense ce raccourcissement.",
@@ -777,10 +777,10 @@
    "difficulty": 4,
    "question": "Quelle entité catalyse la formation de la liaison peptidique dans le ribosome ?",
    "choices": [
-    "L'ARNt synthétase",
-    "L'ARN polymérase II",
-    "L'ARN ribosomique de la grande sous-unité (activité peptidyl-transférase)",
-    "Un facteur d'initiation eIF"
+    "Une aminoacyl-ARNt synthétase cytosolique",
+    "L'ARN polymérase II du noyau",
+    "L'ARN ribosomique de la grande sous-unité",
+    "Un facteur d'initiation de type eIF"
    ],
    "answer": "C",
    "explanation": "La liaison peptidique est formée par un ribozyme : l'ARNr de la grande sous-unité.",
@@ -825,10 +825,10 @@
    "difficulty": 3,
    "question": "Quelle mutation est à l'origine de la drépanocytose ?",
    "choices": [
-    "Une délétion complète du gène de la chaîne α",
-    "Une trisomie du chromosome 21",
-    "Une insertion dans le gène de la dystrophine",
-    "Une substitution remplaçant l'acide glutamique par la valine dans la chaîne β de l'hémoglobine"
+    "Une délétion complète du gène de la chaîne α de l'hémoglobine",
+    "Une trisomie du chromosome 21 dans les globules rouges",
+    "Une insertion décalant le cadre de lecture du gène de la dystrophine",
+    "Une substitution remplaçant l'acide glutamique par la valine dans la chaîne β"
    ],
    "answer": "D",
    "explanation": "Une substitution ponctuelle (GAG→GTG) donne l'hémoglobine S qui polymérise en conditions pauvres en O2.",
@@ -905,10 +905,10 @@
    "difficulty": 4,
    "question": "Que se passe-t-il quand glucose et lactose sont tous deux présents chez E. coli ?",
    "choices": [
-    "Transcription faible : le glucose maintient un AMPc bas et CAP n'active pas le promoteur",
-    "Transcription maximale : le glucose stimule CAP",
-    "Aucune transcription : le lactose active le répresseur",
-    "Transcription maximale car le glucose inactive l'opérateur"
+    "Transcription faible : le glucose maintient l'AMPc bas et CAP n'active pas",
+    "Transcription maximale : le glucose stimule fortement l'activité de CAP",
+    "Aucune transcription : le lactose active définitivement le répresseur",
+    "Transcription maximale car le glucose inactive l'opérateur du promoteur"
    ],
    "answer": "A",
    "explanation": "C'est la répression catabolique : l'AMPc, nécessaire à CAP, reste bas en présence de glucose.",
@@ -937,10 +937,10 @@
    "difficulty": 1,
    "question": "Pourquoi utilise-t-on la Taq polymérase en PCR ?",
    "choices": [
-    "Elle fonctionne sans amorce",
-    "Elle copie l'ARN en ADN",
-    "Elle résiste aux hautes températures de la dénaturation",
-    "Elle coupe l'ADN à des sites précis"
+    "Elle fonctionne sans amorce, à partir d'un brin nu",
+    "Elle copie l'ARN en ADN complémentaire",
+    "Elle reste active aux hautes températures de dénaturation",
+    "Elle coupe l'ADN à des sites de restriction précis"
    ],
    "answer": "C",
    "explanation": "Cette polymérase de la bactérie thermophile Thermus aquaticus reste active après chaque dénaturation à environ 95 °C.",
@@ -953,10 +953,10 @@
    "difficulty": 2,
    "question": "Quel est le rôle de l'ADN ligase en clonage moléculaire ?",
    "choices": [
-    "Couper l'ADN à des sites spécifiques",
-    "Amplifier l'insert en chaîne",
-    "Sceller les liaisons phosphodiester entre l'insert et le vecteur",
-    "Synthétiser l'ARNm de l'insert"
+    "Couper l'ADN à des sites de reconnaissance spécifiques",
+    "Amplifier l'insert en chaîne grâce à des amorces",
+    "Sceller les liaisons phosphodiester entre l'insert et le plasmide",
+    "Synthétiser l'ARNm à partir de l'insert cloné"
    ],
    "answer": "C",
    "explanation": "Après coupure par la même enzyme de restriction, la ligase soude insert et plasmide.",
@@ -987,7 +987,7 @@
    "choices": [
     "Le plasmide est vide et lacZ fonctionne",
     "La bactérie ne contient aucun plasmide et résiste à l'antibiotique",
-    "L'insert a interrompu lacZ : la bactérie contient un plasmide recombinant",
+    "L'insert a interrompu lacZ : le plasmide est recombinant",
     "L'insert active la production de β-galactosidase"
    ],
    "answer": "C",
@@ -1001,10 +1001,10 @@
    "difficulty": 1,
    "question": "Quelles conditions sont nécessaires à la sélection naturelle ?",
    "choices": [
-    "Un besoin de l'individu qui crée le caractère utile",
-    "Des mutations dirigées par le milieu",
-    "Un hasard sans effet sur la reproduction",
-    "Une variation héritable et une reproduction différentielle selon les caractères"
+    "Un besoin ressenti par l'individu, qui crée le caractère utile",
+    "Des mutations dirigées par le milieu dans le sens favorable",
+    "Un hasard total sans aucun effet sur la reproduction des individus",
+    "Une variation héritable et un succès reproducteur différent selon les caractères"
    ],
    "answer": "D",
    "explanation": "Si des variants héritables diffèrent par leur succès reproducteur, leurs fréquences changent au fil des générations.",
@@ -1017,10 +1017,10 @@
    "difficulty": 2,
    "question": "Dans quelles populations la dérive génétique a-t-elle l'effet le plus marqué ?",
    "choices": [
-    "Dans les très grandes populations, par sélection forte",
-    "Uniquement dans les populations sans mutation",
-    "Dans les populations de petit effectif, par fluctuations aléatoires des fréquences alléliques",
-    "Dans toutes les populations avec la même intensité"
+    "Dans les très grandes populations, où la sélection est toujours forte",
+    "Uniquement dans les populations où aucune mutation n'a lieu",
+    "Dans les populations de petit effectif, par fluctuations aléatoires des fréquences",
+    "Dans toutes les populations, avec exactement la même intensité"
    ],
    "answer": "C",
    "explanation": "Plus l'effectif est faible, plus l'échantillonnage aléatoire des gamètes modifie les fréquences.",
@@ -1097,10 +1097,10 @@
    "difficulty": 2,
    "question": "Quel caractère distingue les archées des bactéries ?",
    "choices": [
-    "La présence d'un noyau délimité par une enveloppe",
-    "Une paroi toujours en cellulose",
-    "Des ribosomes 80S exclusivement",
-    "Des lipides membranaires à liaisons éther et l'absence de muréine"
+    "La présence d'un noyau délimité par une enveloppe nucléaire",
+    "Une paroi toujours en cellulose, comme chez les plantes",
+    "Des ribosomes de type 80S uniquement, comme les eucaryotes",
+    "Des lipides membranaires à liaisons éther, sans muréine"
    ],
    "answer": "D",
    "explanation": "Leurs lipides membranaires diffèrent ; elles n'ont pas de peptidoglycane de type muréine.",
@@ -1129,10 +1129,10 @@
    "difficulty": 2,
    "question": "Quelle caractéristique est commune aux champignons ?",
    "choices": [
-    "Une paroi de cellulose et la photosynthèse",
-    "L'absence de paroi et la digestion par ingestion",
+    "Une paroi de cellulose et une nutrition par photosynthèse",
+    "Aucune paroi et une digestion par ingestion de proies",
     "Une paroi de chitine et une nutrition hétérotrophe par absorption",
-    "Des chloroplastes et des racines"
+    "Des chloroplastes et de vraies racines absorbantes"
    ],
    "answer": "C",
    "explanation": "Les champignons sont des eucaryotes hétérotrophes à paroi chitineuse.",
@@ -1145,10 +1145,10 @@
    "difficulty": 1,
    "question": "De quoi est constitué un virion minimal ?",
    "choices": [
-    "D'un noyau, de ribosomes et d'une membrane",
-    "D'un génome (ADN ou ARN) entouré d'une capside protéique",
-    "D'un génome à la fois ADN et ARN dans le cytosol",
-    "D'une paroi et de mitochondries"
+    "Un noyau, des ribosomes et une membrane plasmique",
+    "Un génome (ADN ou ARN) entouré d'une capside protéique",
+    "Un génome constitué à la fois d'ADN et d'ARN, dans le cytosol",
+    "Une paroi rigide, des mitochondries et un cytosquelette"
    ],
    "answer": "B",
    "explanation": "Un virion contient un seul type d'acide nucléique protégé par une capside, parfois une enveloppe.",
@@ -1209,10 +1209,10 @@
    "difficulty": 1,
    "question": "Pourquoi les bactéries Gram positives apparaissent-elles violettes après la coloration de Gram ?",
    "choices": [
-    "Leur membrane externe riche en LPS retient le colorant",
+    "Leur membrane externe riche en LPS retient le colorant violet",
     "Leur épaisse couche de peptidoglycane retient le cristal violet",
-    "Elles n'ont pas de paroi et fixent la fuchsine",
-    "Leur capsule empêche la décoloration"
+    "Elles n'ont aucune paroi et fixent seulement la fuchsine rose",
+    "Leur capsule empêche toute décoloration par l'alcool"
    ],
    "answer": "B",
    "explanation": "Après décoloration à l'alcool, les Gram positives gardent le complexe violet ; les Gram négatives se recolorent en rose.",
@@ -1225,9 +1225,9 @@
    "difficulty": 2,
    "question": "Comment les pénicillines détruisent-elles les bactéries en croissance ?",
    "choices": [
-    "Elles bloquent la sous-unité 30S du ribosome",
-    "Elles inhibent la gyrase bactérienne",
-    "Elles empêchent la synthèse de l'ARN messager",
+    "Elles bloquent la sous-unité 30S du ribosome bactérien",
+    "Elles inhibent la gyrase et la réplication de l'ADN",
+    "Elles empêchent la synthèse de l'ARN messager chez la bactérie",
     "Elles inhibent la synthèse du peptidoglycane de la paroi"
    ],
    "answer": "D",
@@ -1305,10 +1305,10 @@
    "difficulty": 3,
    "question": "Pourquoi les accès fébriles palustres sont-ils périodiques ?",
    "choices": [
-    "Les moustiques piquent à intervalles fixes",
-    "Le parasite se divise uniquement dans le foie",
+    "Les moustiques piquent à intervalles de temps rigoureusement fixes",
+    "Le parasite se divise uniquement dans les cellules du foie",
     "L'éclatement synchrone des hématies parasitées libère des mérozoïtes",
-    "Les sporozoïtes sont libérés dans le sang chaque jour"
+    "Des sporozoïtes sont libérés dans le sang chaque jour du cycle"
    ],
    "answer": "C",
    "explanation": "La rupture simultanée des hématies et la libération de substances parasitaires provoquent la fièvre.",
@@ -1385,10 +1385,10 @@
    "difficulty": 2,
    "question": "Pourquoi la réponse immunitaire secondaire est-elle plus rapide ?",
    "choices": [
-    "Elle s'appuie sur les lymphocytes mémoire produits lors du premier contact",
-    "Les anticorps du premier contact restent en nombre inchangé",
-    "Le complément remplace les lymphocytes",
-    "L'antigène se modifie pour être reconnu"
+    "Elle s'appuie sur les lymphocytes mémoire formés lors du premier contact",
+    "Les anticorps du premier contact sont toujours présents en grande quantité",
+    "Le complément remplace les lymphocytes au deuxième contact",
+    "L'antigène se modifie pour être mieux reconnu lors du second contact"
    ],
    "answer": "A",
    "explanation": "Les cellules mémoire, plus nombreuses, répondent plus vite et plus fort à un même antigène.",
@@ -1449,10 +1449,10 @@
    "difficulty": 2,
    "question": "Que signifie la séroconversion ?",
    "choices": [
-    "L'apparition d'anticorps détectables spécifiques d'un agent infectieux",
-    "La disparition des antigènes dans le sérum",
-    "L'effet protecteur du vaccin à vie",
-    "La transformation d'un sérum en plasma"
+    "L'apparition d'anticorps spécifiques détectables dans le sérum",
+    "La disparition de tous les antigènes présents dans le sérum",
+    "L'effet protecteur du vaccin qui dure toute la vie",
+    "La transformation du sérum sanguin en plasma sanguin"
    ],
    "answer": "A",
    "explanation": "Une sérologie négative devient positive quand la production d'anticorps devient détectable.",
@@ -1465,10 +1465,10 @@
    "difficulty": 3,
    "question": "Pourquoi la vaccination protège-t-elle aussi indirectement des personnes non vaccinées ?",
    "choices": [
-    "Elle transmet les anticorps du vacciné au non-vacciné par contact",
-    "Elle supprime définitivement l'agent pathogène du milieu",
-    "Elle modifie le génome des non-vaccinés",
-    "Elle réduit la circulation de l'agent pathogène dans la population (immunité collective)"
+    "Elle transmet les anticorps du vacciné au non-vacciné par simple contact",
+    "Elle supprime définitivement le pathogène de tous les milieux naturels",
+    "Elle modifie le génome des personnes non vaccinées de la population",
+    "Elle réduit la circulation du pathogène dans la population (immunité collective)"
    ],
    "answer": "D",
    "explanation": "Quand une fraction suffisante est immunisée, les chaînes de transmission se rompent.",
@@ -1498,9 +1498,9 @@
    "question": "Que déclenche l'arrivée d'un potentiel d'action au bouton présynaptique ?",
    "choices": [
     "L'entrée de Ca2+ et la libération du neurotransmetteur par exocytose",
-    "La sortie de Na+ et la recapture du neurotransmetteur",
-    "L'entrée de Cl- et la fusion des neurones",
-    "La synthèse d'ARN dans la fente synaptique"
+    "La sortie de Na+ et la recapture du neurotransmetteur par la cellule",
+    "L'entrée de Cl- et la fusion des deux neurones voisins",
+    "La synthèse d'ARN dans la fente synaptique elle-même"
    ],
    "answer": "A",
    "explanation": "Les canaux calciques s'ouvrent et le calcium provoque la fusion des vésicules avec la membrane présynaptique.",
@@ -1530,9 +1530,9 @@
    "question": "Comment les hormones thyroïdiennes freinent-elles la sécrétion de TSH ?",
    "choices": [
     "Par rétroaction négative sur l'hypophyse et l'hypothalamus",
-    "Par rétroaction positive sur l'hypophyse",
-    "En détruisant les cellules thyroïdiennes",
-    "En stimulant la sécrétion de TRH"
+    "Par rétroaction positive sur l'hypophyse et l'hypothalamus",
+    "En détruisant les cellules de la thyroïde elle-même",
+    "En stimulant la sécrétion de TRH par l'hypothalamus"
    ],
    "answer": "A",
    "explanation": "Un taux élevé de T3 et T4 inhibe la libération de TRH et de TSH.",
@@ -1545,10 +1545,10 @@
    "difficulty": 4,
    "question": "Quelle propriété assure la propagation unidirectionnelle du potentiel d'action le long de l'axone ?",
    "choices": [
-    "L'absence de canaux K+ dans l'axone",
-    "L'ouverture permanente des canaux Cl-",
+    "L'absence de canaux K+ dans la membrane de l'axone",
+    "L'ouverture permanente de tous les canaux Cl- de l'axone",
     "La période réfractaire des canaux Na+ inactivés en amont",
-    "L'hydrolyse d'ATP à chaque point de la membrane"
+    "L'hydrolyse d'ATP à chaque point de la membrane axonale"
    ],
    "answer": "C",
    "explanation": "Les canaux Na+ derrière le front sont inactivés : la dépolarisation ne peut progresser que vers l'aval.",
@@ -1561,10 +1561,10 @@
    "difficulty": 1,
    "question": "Quel est le trajet du sang dans le cœur droit ?",
    "choices": [
-    "Oreillette gauche, ventricule gauche, aorte",
+    "Oreillette gauche, ventricule gauche, aorte ascendante",
     "Oreillette droite, ventricule droit, artère pulmonaire",
     "Ventricule droit, oreillette droite, veine pulmonaire",
-    "Oreillette droite, ventricule gauche, aorte"
+    "Oreillette droite, ventricule gauche et aorte ascendante"
    ],
    "answer": "B",
    "explanation": "Le sang veineux entre dans l'oreillette droite puis le ventricule droit l'envoie aux poumons par l'artère pulmonaire.",
@@ -1593,10 +1593,10 @@
    "difficulty": 3,
    "question": "Qu'est-ce que l'effet Bohr ?",
    "choices": [
-    "Une hausse du pH augmente la libération d'O2 par l'hémoglobine",
-    "Une baisse de température diminue la libération d'O2",
-    "Une baisse du pH ou une hausse de CO2 diminue l'affinité de l'hémoglobine pour l'O2",
-    "Une hausse de CO2 augmente l'affinité de l'hémoglobine pour l'O2"
+    "Une hausse du pH augmente la libération d'O2 par l'hémoglobine des hématies",
+    "Une baisse de température augmente fortement la libération d'O2",
+    "Plus de CO2 ou moins de pH : l'hémoglobine libère plus facilement l'O2",
+    "Une hausse de CO2 augmente l'affinité de l'hémoglobine pour l'O2 des tissus"
    ],
    "answer": "C",
    "explanation": "Dans les tissus actifs, acidité et CO2 favorisent la libération de l'oxygène.",
@@ -1609,10 +1609,10 @@
    "difficulty": 2,
    "question": "Que se passe-t-il lors d'une inspiration calme ?",
    "choices": [
-    "Le diaphragme se contracte, le volume thoracique augmente et la pression intrapulmonaire baisse",
-    "Le diaphragme se relâche et la pression intrapulmonaire monte",
-    "Les poumons se vident activement par contraction musculaire",
-    "Le volume thoracique diminue grâce aux côtes"
+    "Le diaphragme se contracte, le volume thoracique augmente, la pression intrapulmonaire baisse",
+    "Le diaphragme se relâche et la pression intrapulmonaire monte dans les alvéoles",
+    "Les poumons se vident activement par contraction de leurs muscles propres",
+    "Le volume thoracique diminue grâce au relèvement des côtes vers le haut"
    ],
    "answer": "A",
    "explanation": "L'air entre selon le gradient de pression créé par l'augmentation du volume thoracique.",
@@ -1657,10 +1657,10 @@
    "difficulty": 2,
    "question": "Quel est le rôle de la bile dans la digestion des lipides ?",
    "choices": [
-    "Hydrolyser directement les triglycérides",
-    "Neutraliser les protéines",
+    "Hydrolyser directement les triglycérides en acides gras",
+    "Neutraliser l'acidité du chyme et inactiver les protéases",
     "Émulsionner les graisses pour faciliter l'action des lipases",
-    "Absorber les acides gras dans l'estomac"
+    "Absorber les acides gras directement dans l'estomac"
    ],
    "answer": "C",
    "explanation": "Les sels biliaires fragmentent les gouttelettes lipidiques et augmentent la surface d'attaque des lipases.",
@@ -1673,10 +1673,10 @@
    "difficulty": 3,
    "question": "Pourquoi le pepsinogène est-il sécrété sous forme inactive ?",
    "choices": [
-    "Pour qu'il soit actif dans la bouche",
-    "Pour éviter l'autodigestion des cellules gastriques, l'acidité l'activant en pepsine",
-    "Pour qu'il hydrolyse l'amidon dans l'estomac",
-    "Parce qu'il n'a aucun rôle digestif"
+    "Pour qu'il soit déjà actif au contact des aliments dans la bouche",
+    "Pour éviter l'autodigestion des cellules gastriques ; l'acidité l'active en pepsine",
+    "Pour qu'il hydrolyse l'amidon dès son arrivée dans l'estomac",
+    "Parce qu'il n'a aucun rôle dans la digestion des protéines"
    ],
    "answer": "B",
    "explanation": "L'acidité gastrique transforme le pepsinogène en pepsine, qui hydrolyse les protéines dans la lumière.",
@@ -1689,10 +1689,10 @@
    "difficulty": 3,
    "question": "Comment les acides gras à longue chaîne gagnent-ils la circulation après absorption ?",
    "choices": [
-    "Libérés dans la veine porte sans transformation",
+    "Libérés dans la veine porte sans aucune transformation",
     "Intégrés dans des chylomicrons qui passent par la lymphe",
-    "Liés à l'hémoglobine dans le plasma",
-    "Sous forme de glucose après conversion immédiate"
+    "Liés à l'hémoglobine dans le plasma sanguin des capillaires",
+    "Convertis en glucose par les entérocytes avant passage"
    ],
    "answer": "B",
    "explanation": "Les acides gras sont réestérifiés dans l'entérocyte, empaquetés en chylomicrons et déversés dans les vaisseaux chylifères.",
@@ -1738,9 +1738,9 @@
    "question": "Quel mécanisme limite la polyspermie après la fusion du premier spermatozoïde ?",
    "choices": [
     "La réaction corticale, qui modifie la zone pellucide",
-    "La destruction de l'ovule voisin",
-    "La perte des cils du spermatozoïde",
-    "L'expulsion du noyau de l'ovocyte"
+    "La destruction de l'ovule voisin par le premier spermatozoïde",
+    "La perte des cils et du flagelle de tous les spermatozoïdes",
+    "L'expulsion du noyau de l'ovocyte vers le milieu extérieur"
    ],
    "answer": "A",
    "explanation": "L'exocytose des granules corticaux durcit la zone pellucide et empêche d'autres spermatozoïdes de s'y fixer.",
@@ -1754,9 +1754,9 @@
    "question": "Que provoque la chute de la progestérone en fin de cycle sans fécondation ?",
    "choices": [
     "La desquamation de l'endomètre, c'est-à-dire les règles",
-    "Une nouvelle ovulation immédiate",
-    "La formation d'un nouveau corps jaune",
-    "L'implantation d'un embryon"
+    "Une nouvelle ovulation immédiate déclenchée par la FSH",
+    "La formation d'un nouveau corps jaune dans l'ovaire",
+    "L'implantation d'un embryon dans la muqueuse utérine"
    ],
    "answer": "A",
    "explanation": "Sans maintien hormonal, la muqueuse utérine se détache.",
@@ -1785,10 +1785,10 @@
    "difficulty": 3,
    "question": "Quel mécanisme explique principalement la montée de la sève brute dans les arbres ?",
    "choices": [
-    "Une pompe cardiaque située dans la tige",
-    "L'aspiration créée par la transpiration des feuilles, avec cohésion de la colonne d'eau",
-    "L'activité de la pression racinaire seule",
-    "La poussée de la sève élaborée"
+    "Une pompe musculaire située à la base de la tige de l'arbre",
+    "L'aspiration créée par la transpiration foliaire, avec cohésion de la colonne d'eau",
+    "L'activité de la seule pression racinaire à travers tout le tronc",
+    "La poussée de la sève élaborée venant des feuilles vers les racines"
    ],
    "answer": "B",
    "explanation": "La théorie cohésion-tension explique que l'évaporation foliaire tire la colonne d'eau.",
@@ -1801,10 +1801,10 @@
    "difficulty": 2,
    "question": "Qu'est-ce qui provoque l'ouverture d'un stomate ?",
    "choices": [
-    "La perte d'eau des cellules de garde",
-    "La division des cellules de garde",
-    "L'entrée d'eau dans les cellules de garde, qui deviennent turgescentes",
-    "L'obstruction par la cuticule"
+    "La perte d'eau des cellules de garde, qui deviennent flasques",
+    "La division rapide des cellules de garde de l'épiderme",
+    "L'entrée d'eau dans les cellules de garde, qui se gonflent",
+    "L'obstruction progressive de l'ostiole par la cuticule"
    ],
    "answer": "C",
    "explanation": "Le gonflement des cellules de garde, à parois inégalement épaissies, écarte les deux cellules et ouvre l'ostiole.",
@@ -1817,10 +1817,10 @@
    "difficulty": 4,
    "question": "Comment l'auxine explique-t-elle le phototropisme positif de la tige ?",
    "choices": [
-    "Elle s'accumule du côté éclairé et y accélère la croissance",
-    "Elle s'accumule du côté ombragé, allonge davantage ces cellules et courbe la tige vers la lumière",
-    "Elle bloque la croissance sur toute la tige",
-    "Elle est détruite à l'obscurité et supprime la courbure"
+    "Elle s'accumule côté éclairé et y accélère la croissance des cellules de la tige",
+    "Elle s'accumule côté ombre, allonge ces cellules et courbe la tige vers la lumière",
+    "Elle bloque la croissance sur toute la tige quelle que soit la lumière",
+    "Elle est détruite à l'obscurité, ce qui supprime toute courbure de la tige"
    ],
    "answer": "B",
    "explanation": "L'allongement plus rapide du côté ombragé incurve la tige vers la lumière.",
@@ -1849,9 +1849,9 @@
    "difficulty": 1,
    "question": "Quels organismes constituent les producteurs primaires d'un écosystème ?",
    "choices": [
-    "Les herbivores",
-    "Les décomposeurs",
-    "Les carnivores",
+    "Les herbivores primaires, qui broutent les végétaux",
+    "Les décomposeurs du sol, bactéries et champignons",
+    "Les carnivores du sommet de la chaîne alimentaire",
     "Les organismes autotrophes, comme les plantes et les algues"
    ],
    "answer": "D",
@@ -1865,10 +1865,10 @@
    "difficulty": 2,
    "question": "Pourquoi les chaînes alimentaires sont-elles généralement courtes ?",
    "choices": [
-    "Les prédateurs refusent de manger d'autres prédateurs",
-    "Les producteurs disparaissent après quelques niveaux",
-    "Une grande partie de l'énergie est perdue à chaque niveau trophique (respiration, chaleur)",
-    "L'énergie augmente à chaque niveau"
+    "Les prédateurs refusent de manger d'autres prédateurs de leur milieu",
+    "Les producteurs disparaissent après quelques niveaux trophiques",
+    "L'énergie est en grande partie perdue à chaque niveau (respiration, chaleur)",
+    "L'énergie disponible augmente à chaque niveau trophique successif"
    ],
    "answer": "C",
    "explanation": "Seule une fraction de l'énergie passe au niveau suivant ; le reste est dissipé.",
@@ -1897,10 +1897,10 @@
    "difficulty": 2,
    "question": "Quel est le rôle des décomposeurs dans un écosystème ?",
    "choices": [
-    "Capter l'énergie solaire pour produire des glucides",
-    "Dégrader la matière organique morte et libérer les éléments minéraux",
-    "Servir uniquement de proies aux carnivores",
-    "Fixer le dioxygène atmosphérique"
+    "Capter l'énergie lumineuse pour synthétiser des glucides",
+    "Dégrader la matière morte et libérer les éléments minéraux",
+    "Servir uniquement de proies aux carnivores du milieu",
+    "Fixer le dioxyde de carbone dans les feuilles"
    ],
    "answer": "B",
    "explanation": "Bactéries et champignons minéralisent la matière organique, ce qui rend les nutriments aux producteurs.",
@@ -1914,9 +1914,9 @@
    "question": "Dans un modèle de croissance logistique, pour quel effectif la croissance de la population est-elle la plus rapide ?",
    "choices": [
     "Environ la moitié de la capacité de charge K",
-    "Au voisinage de K",
-    "Quand l'effectif est proche de zéro",
-    "Quand l'effectif dépasse K"
+    "Au voisinage immédiat de la capacité de charge K",
+    "Quand l'effectif est proche de zéro individu",
+    "Quand l'effectif dépasse nettement la capacité de charge"
    ],
    "answer": "A",
    "explanation": "La vitesse de croissance rN(1-N/K) est maximale pour N = K/2.",
@@ -1929,8 +1929,8 @@
    "difficulty": 1,
    "question": "À quoi sert un groupe témoin dans une expérience ?",
    "choices": [
-    "À augmenter le nombre de mesures sans comparaison",
-    "À éviter la répétition des essais",
+    "À multiplier les mesures sans jamais les comparer entre elles",
+    "À répéter l'essai sans changer aucun facteur",
     "À modifier tous les facteurs à la fois",
     "À comparer pour isoler l'effet du seul facteur testé"
    ],
@@ -1961,10 +1961,10 @@
    "difficulty": 3,
    "question": "Que signifie une valeur p inférieure à 0,05 dans un test ?",
    "choices": [
-    "L'hypothèse nulle est fausse avec certitude",
-    "L'hypothèse alternative a 95 % de chances d'être vraie",
-    "L'expérience est sans erreur possible",
-    "Un résultat au moins aussi extrême aurait une probabilité inférieure à 5 % si H0 était vraie"
+    "L'hypothèse nulle est fausse avec certitude dans la population étudiée",
+    "L'hypothèse alternative a 95 % de chances d'être vraie dans la population",
+    "L'expérience est parfaite et ne peut comporter aucune erreur de mesure",
+    "La probabilité d'un résultat au moins aussi extrême sous H0 est inférieure à 5 %"
    ],
    "answer": "D",
    "explanation": "p est la probabilité d'observer un résultat au moins aussi extrême sous H0 ; ce n'est pas la probabilité que H0 soit vraie.",
@@ -1993,7 +1993,7 @@
    "difficulty": 5,
    "question": "Pourquoi divise-t-on par n-1 pour l'écart-type d'un échantillon ?",
    "choices": [
-    "Pour corriger le biais d'estimation de la variance de la population",
+    "Pour corriger le biais d'estimation de la variance",
     "Parce que la moyenne est toujours connue d'avance",
     "Parce qu'un individu est exclu aléatoirement",
     "Pour rendre l'écart-type toujours plus petit que la moyenne"

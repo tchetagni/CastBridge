@@ -39,10 +39,10 @@
    "course": "l3-bio",
    "category": "biologie moléculaire : régulation de la transcription, opéron lactose",
    "difficulty": 4,
-   "question": "Chez Escherichia coli, une mutation lacOc (opérateur constitutif) empêche la fixation du répresseur. Que se passe-t-il sans lactose ?",
+   "question": "Chez E. coli, une mutation lacOc (opérateur constitutif) empêche la fixation du répresseur. Que se passe-t-il sans lactose ?",
    "choices": [
-    "Les gènes lacZYA restent réprimés, car LacI se fixe malgré la mutation grâce au complexe AMPc-CAP",
     "L'opéron est transcrit uniquement si une copie sauvage de l'opérateur est ajoutée sur un autre plasmide",
+    "Les gènes lacZYA restent réprimés, car LacI se fixe malgré la mutation grâce au complexe AMPc-CAP",
     "Les gènes lacZYA situés sur le même ADN sont transcrits, car le répresseur ne reconnaît plus l'opérateur muté",
     "Seul le gène lacI cesse d'être exprimé, ce qui laisse l'opéron sans effet"
    ],
@@ -105,10 +105,10 @@
    "difficulty": 3,
    "question": "Dans la première réaction d'épissage d'un intron nucléaire, quel groupement attaque le site d'épissage 5' ?",
    "choices": [
-    "Une molécule d'eau activée par U1, ce qui hydrolyse la liaison phosphodiester",
-    "Le groupement 2'-OH de l'adénosine du point de ramification, ce qui forme un intermédiaire en lasso",
-    "Le phosphate 5' de la coiffe, ce qui forme une boucle fermée avec la queue poly(A)",
-    "Le groupement 3'-OH de l'exon amont, ce qui libère directement l'intron linéaire"
+    "Une molécule d'eau activée par la snRNP U1, ce qui hydrolyse la liaison phosphodiester du site 5'",
+    "Le 2'-OH de l'adénosine du point de ramification, qui forme un intermédiaire en lasso",
+    "Le phosphate 5' de la coiffe, ce qui forme une boucle fermée avec la queue poly(A) de l'ARN",
+    "Le 3'-OH de l'exon amont, ce qui libère directement l'intron sous forme linéaire dans le noyau"
    ],
    "answer": "B",
    "explanation": "Une transestérification par le 2'-OH de l'adénosine de branchement coupe le site 5' et crée le lasso ; une seconde réaction joint les exons.",
@@ -201,10 +201,10 @@
    "difficulty": 1,
    "question": "Quel est le rôle du signal KDEL à l'extrémité C-terminale de certaines protéines du réticulum ?",
    "choices": [
-    "Il les dirige vers la membrane plasmique par exocytose constitutive",
-    "Il les adresse aux lysosomes par fixation de mannose-6-phosphate",
-    "Il les importe dans la mitochondrie grâce aux translocases TOM et TIM",
-    "Il permet leur récupération depuis le Golgi vers le réticulum par un récepteur et des vésicules COPI"
+    "Il les dirige vers la membrane plasmique par exocytose constitutive, sans passage par le Golgi",
+    "Il les adresse aux lysosomes par fixation de mannose-6-phosphate dans le réseau trans-golgien",
+    "Il les importe dans la mitochondrie grâce aux translocases TOM et TIM des membranes mitochondriales",
+    "Il permet leur retour depuis le Golgi vers le réticulum, par un récepteur et des vésicules COPI"
    ],
    "answer": "D",
    "explanation": "Les protéines résidentes qui s'échappent vers le Golgi sont reconnues par le récepteur KDEL et ramenées dans le réticulum.",
@@ -282,9 +282,9 @@
    "question": "Quel événement suit la fixation d'un facteur de croissance sur un récepteur à activité tyrosine kinase ?",
    "choices": [
     "Dimérisation puis autophosphorylation sur des tyrosines, qui recrutent des protéines à domaine SH2",
-    "Entrée de calcium qui lie la calmoduline, puis dégradation du récepteur",
-    "Clivage du récepteur par une caspase, ce qui libère un domaine actif nucléaire",
-    "Échange GDP-GTP sur la sous-unité α, qui active l'adénylate cyclase"
+    "Entrée de calcium qui se lie à la calmoduline, puis dégradation lysosomiale du récepteur",
+    "Clivage du récepteur par une caspase, qui libère un domaine actif dans le noyau cellulaire",
+    "Échange GDP-GTP sur la sous-unité α d'une protéine G, qui active ensuite l'adénylate cyclase"
    ],
    "answer": "A",
    "explanation": "La dimérisation rapproche les domaines kinase ; l'autophosphorylation crée des sites d'ancrage pour les protéines à domaine SH2.",
@@ -329,10 +329,10 @@
    "difficulty": 3,
    "question": "Qu'appelle-t-on instabilité dynamique des microtubules ?",
    "choices": [
-    "L'alternance de phases de croissance et de raccourcissement rapide à l'extrémité plus, liée au GTP de la tubuline",
-    "La conversion des microtubules en filaments d'actine lors de la mitose",
-    "La rotation continue des protofilaments autour de l'axe du microtubule grâce à la dynéine",
-    "La polymérisation uniquement à l'extrémité moins, sans phase de raccourcissement"
+    "L'alternance de croissance et de raccourcissement rapide à l'extrémité plus, liée au GTP de la tubuline",
+    "La conversion des microtubules en filaments d'actine pendant la mitose, sous contrôle du centrosome",
+    "La rotation continue des protofilaments autour de l'axe du microtubule, grâce à la dynéine ciliaire",
+    "La polymérisation exclusive à l'extrémité moins, sans aucune phase de raccourcissement du microtubule"
    ],
    "answer": "A",
    "explanation": "Les microtubules passent de la croissance à la dépolymérisation (catastrophe) selon l'état du GTP lié à la tubuline β.",
@@ -377,10 +377,10 @@
    "difficulty": 2,
    "question": "Quel processus pousse la membrane vers l'avant au bord d'une cellule en migration (lamellipode) ?",
    "choices": [
-    "La contraction de la myosine II à l'avant, qui étire la membrane",
-    "La dépolymérisation des microtubules, qui libère de l'énergie mécanique",
-    "La polymérisation de l'actine à l'avant, nucléée en réseau ramifié par le complexe Arp2/3",
-    "La polymérisation de filaments intermédiaires, nucléés par la lamine"
+    "La contraction de la myosine II à l'avant, qui étire la membrane vers l'extérieur de la cellule",
+    "La dépolymérisation des microtubules, qui libère de l'énergie mécanique contre la membrane",
+    "La polymérisation de l'actine à l'avant, nucléée en réseau ramifié par Arp2/3",
+    "La polymérisation de filaments intermédiaires à l'avant, nucléés par les lamines nucléaires"
    ],
    "answer": "C",
    "explanation": "La croissance des filaments d'actine ramifiés par Arp2/3 repousse la membrane et fait avancer le bord cellulaire.",
@@ -396,7 +396,7 @@
     "Les deux se comportent comme des mutations récessives sans effet sur le cycle",
     "L'oncogène résulte d'une perte de fonction, le suppresseur d'un gain de fonction",
     "Les deux exigent la perte des deux allèles pour agir sur la prolifération",
-    "L'oncogène résulte d'un gain de fonction (un allèle suffit), le suppresseur d'une perte de fonction (deux allèles touchés)"
+    "Oncogène : gain de fonction (un allèle suffit) ; suppresseur : perte de fonction (deux allèles)"
    ],
    "answer": "D",
    "explanation": "Un oncogène agit de façon dominante au niveau cellulaire ; un suppresseur doit en général perdre ses deux copies pour que la cellule échappe au contrôle.",
@@ -441,10 +441,10 @@
    "difficulty": 5,
    "question": "Dans l'hypothèse de Knudson (deux coups), pourquoi le rétinoblastome héréditaire apparaît-il tôt et souvent aux deux yeux ?",
    "choices": [
-    "Le gène Rb est lié à l'X, ce qui donne une expression bilatérale",
-    "Un oncogène dominant est transmis, et une seule mutation de Rb est ensuite inutile",
-    "Le premier allèle muté est présent dans toutes les cellules, un seul événement somatique suffit ensuite",
-    "Les deux allèles sont déjà mutés à la naissance dans toutes les cellules de la rétine"
+    "Le gène Rb est lié au chromosome X, ce qui donne une expression bilatérale de la tumeur",
+    "Un oncogène dominant est transmis, et une seule mutation de Rb est ensuite sans effet sur la tumeur",
+    "Le premier allèle muté est présent partout, un seul événement somatique suffit ensuite",
+    "Les deux allèles sont déjà mutés à la naissance dans toutes les cellules de la rétine de l'enfant"
    ],
    "answer": "C",
    "explanation": "Les formes héréditaires ont déjà un coup germinal ; un second coup somatique dans une rétinoblaste suffit, d'où des tumeurs précoces et multiples.",
@@ -457,10 +457,10 @@
    "difficulty": 1,
    "question": "Qu'est-ce que le chromosome de Philadelphie dans la leucémie myéloïde chronique ?",
    "choices": [
-    "Une délétion du bras court du chromosome 17 qui supprime le gène p53",
-    "Une trisomie 21 qui augmente l'expression de l'oncogène Ras",
-    "Une translocation t(9;22) qui crée le gène de fusion BCR-ABL, tyrosine kinase constitutivement active",
-    "Une inversion du chromosome 11 qui inactive le gène Rb"
+    "Une délétion du bras court du chromosome 17 qui supprime le gène p53 dans les cellules sanguines",
+    "Une trisomie 21 acquise qui augmente l'expression de l'oncogène Ras dans la moelle osseuse",
+    "Une translocation t(9;22) créant le gène de fusion BCR-ABL, une tyrosine kinase active en permanence",
+    "Une inversion du chromosome 11 qui inactive le gène Rb dans les cellules de la lignée myéloïde"
    ],
    "answer": "C",
    "explanation": "La fusion BCR-ABL produit une kinase active en permanence, qui stimule la prolifération des cellules myéloïdes.",
@@ -537,10 +537,10 @@
    "difficulty": 4,
    "question": "Que se passe-t-il quand le facteur MyoD est exprimé de force dans des fibroblastes ?",
    "choices": [
-    "Ils entrent en apoptose, car MyoD active directement la caspase-9",
-    "Ils s'engagent dans la voie musculaire, car MyoD active des gènes de la différenciation myogénique",
-    "Ils deviennent des neurones, car MyoD active les gènes de la neurogenèse",
-    "Ils restent inchangés, car MyoD agit seulement dans les cellules déjà musculaires"
+    "Ils entrent en apoptose rapidement, car MyoD active directement la caspase-9 dans la mitochondrie",
+    "Ils s'engagent dans la voie musculaire, car MyoD active des gènes myogéniques",
+    "Ils deviennent des neurones, car MyoD active les gènes de la neurogenèse chez les mammifères",
+    "Ils restent inchangés, car MyoD agit seulement dans des cellules qui sont déjà des cellules musculaires"
    ],
    "answer": "B",
    "explanation": "MyoD est un régulateur maître : exprimé dans des fibroblastes, il peut les convertir en cellules de type musculaire.",
@@ -601,10 +601,10 @@
    "difficulty": 2,
    "question": "Laquelle de ces situations écarte une population de l'équilibre de Hardy-Weinberg ?",
    "choices": [
-    "Un croisement au hasard entre tous les individus",
+    "Un croisement entièrement au hasard entre tous les individus de la population",
     "Des unions préférentielles entre apparentés, qui modifient les fréquences génotypiques",
-    "Une absence de migration avec les populations voisines",
-    "Une population de très grand effectif"
+    "Une absence totale de migration avec les populations voisines, sur de nombreuses générations",
+    "Une population de très grand effectif, sans migration ni mutation notables"
    ],
    "answer": "B",
    "explanation": "L'équilibre suppose panmixie, grand effectif, absence de sélection, de migration et de mutation ; la consanguinité viole la panmixie.",
@@ -633,10 +633,10 @@
    "difficulty": 1,
    "question": "Sur quel principe repose le séquençage d'ADN de Sanger ?",
    "choices": [
-    "L'incorporation de didésoxynucléotides qui arrêtent l'élongation, produisant des fragments de longueurs échelonnées",
-    "L'hybridation d'oligonucléotides marqués sur une matrice fixée sur une membrane",
-    "L'hydrolyse sélective de l'ADN par des enzymes de restriction à des sites choisis",
-    "Le passage de l'ADN simple brin à travers un pore dont on mesure la fermeture"
+    "Des didésoxynucléotides arrêtent l'élongation et donnent des fragments de longueurs échelonnées",
+    "L'hybridation d'oligonucléotides marqués sur une matrice d'ADN fixée sur une membrane de nylon",
+    "L'hydrolyse sélective de l'ADN par des enzymes de restriction à des sites choisis, puis lecture sur gel",
+    "Le passage de l'ADN simple brin à travers un nanopore dont on mesure les variations de courant"
    ],
    "answer": "A",
    "explanation": "Les ddNTP n'ont pas de 3'-OH : la polymérase s'arrête après leur incorporation, ce qui fournit les fragments à lire.",
@@ -652,7 +652,7 @@
     "Élongation vers 72 °C, puis digestion par une enzyme de restriction, puis hybridation",
     "Dénaturation vers 37 °C, élongation par la transcriptase inverse, puis hybridation",
     "Hybridation des amorces, dénaturation vers 95 °C, puis ligature par une ADN ligase",
-    "Dénaturation vers 95 °C, hybridation des amorces, puis élongation par une ADN polymérase thermostable"
+    "Dénaturation vers 95 °C, hybridation des amorces, puis élongation par une polymérase thermostable"
    ],
    "answer": "D",
    "explanation": "Chaque cycle sépare les brins, hybride les amorces puis les allonge avec la Taq ; la quantité d'ADN double en théorie à chaque cycle.",
@@ -729,10 +729,10 @@
    "difficulty": 2,
    "question": "Que représente la valeur E (E-value) d'un résultat BLAST ?",
    "choices": [
-    "Le pourcentage de résidus identiques sur l'ensemble de l'alignement",
-    "La probabilité que la séquence requête soit homologue de la séquence trouvée",
-    "Le nombre de gaps introduits dans l'alignement pour maximiser le score",
-    "Le nombre d'alignements de score au moins égal attendus par hasard dans la banque interrogée"
+    "Le pourcentage de résidus identiques sur l'ensemble de l'alignement entre les deux séquences",
+    "La probabilité que la séquence requête soit homologue de la séquence trouvée dans la banque de données",
+    "Le nombre de gaps introduits dans l'alignement pour maximiser le score global obtenu",
+    "Le nombre d'alignements de score égal ou supérieur attendus par hasard dans la banque"
    ],
    "answer": "D",
    "explanation": "Plus la valeur E est faible, moins il est probable que l'alignement soit dû au hasard.",
@@ -745,10 +745,10 @@
    "difficulty": 5,
    "question": "Dans l'algorithme de Smith-Waterman, pourquoi chaque cellule de la matrice prend-elle le maximum incluant la valeur 0 ?",
    "choices": [
-    "Le 0 évite la division par zéro lors du calcul de la valeur E",
-    "Le score ne devient jamais négatif, ce qui permet de recommencer un alignement local à tout endroit",
-    "Le score de chaque cellule est ramené à 0 pour forcer l'alignement à rester global",
-    "Le 0 représente la pénalité de gap, qui doit toujours être appliquée"
+    "Le 0 évite la division par zéro lors du calcul de la valeur E de l'alignement obtenu",
+    "Le score reste positif ou nul, ce qui permet de reprendre un alignement local à tout endroit",
+    "Le score de chaque cellule est ramené à 0 pour forcer l'alignement à rester global sur toute la longueur",
+    "Le 0 représente la pénalité de gap, qui doit toujours être appliquée à chaque insertion ou délétion"
    ],
    "answer": "B",
    "explanation": "Le plancher à 0 permet à un alignement local de commencer n'importe où et de ne retenir que les segments de score positif.",
@@ -777,10 +777,10 @@
    "difficulty": 3,
    "question": "Pourquoi utilise-t-on souvent une pénalité de gap affine (ouverture plus extension) ?",
    "choices": [
-    "Elle évite d'aligner des résidus identiques placés face à face",
-    "Elle rend le temps de calcul indépendant de la longueur des séquences",
-    "Une indel de plusieurs résidus est un seul événement, donc l'extension doit coûter moins que l'ouverture",
-    "Elle impose que tous les gaps aient la même longueur dans l'alignement"
+    "Elle évite d'aligner des résidus identiques placés face à face dans deux séquences homologues",
+    "Elle rend le temps de calcul indépendant de la longueur des séquences comparées par l'algorithme",
+    "Une indel de plusieurs résidus est un seul événement : l'extension coûte moins que l'ouverture",
+    "Elle impose que tous les gaps aient la même longueur dans l'alignement, pour simplifier le calcul"
    ],
    "answer": "C",
    "explanation": "Une insertion-délétion de plusieurs résidus résulte d'un seul événement mutationnel : l'ouverture est coûteuse, l'extension moins.",
@@ -793,10 +793,10 @@
    "difficulty": 1,
    "question": "Comment une enzyme de restriction de type II reconnaît-elle sa cible ?",
    "choices": [
-    "Elle reconnaît une courte séquence d'ADN, souvent palindromique, et coupe à l'intérieur ou tout près",
-    "Elle reconnaît des codons stop et coupe l'ADN en aval",
-    "Elle reconnaît la queue poly(A) des ARN et coupe le premier intron",
-    "Elle reconnaît n'importe quelle séquence et coupe à intervalles réguliers de 1 000 pb"
+    "Elle reconnaît une courte séquence d'ADN, souvent palindromique, et coupe dans ou près de ce site",
+    "Elle reconnaît les codons stop dans les gènes et coupe l'ADN quelques nucléotides en aval",
+    "Elle reconnaît la queue poly(A) des ARN messagers et coupe le premier intron de chaque transcrit",
+    "Elle reconnaît n'importe quelle séquence d'ADN et coupe à intervalles réguliers de 1 000 paires de bases"
    ],
    "answer": "A",
    "explanation": "Les enzymes de type II (EcoRI, par exemple) coupent l'ADN à des sites spécifiques, souvent palindromiques.",
@@ -809,9 +809,9 @@
    "difficulty": 1,
    "question": "Quelle enzyme scelle les liaisons phosphodiester entre les extrémités compatibles d'un vecteur et d'un insert ?",
    "choices": [
-    "L'hélicase du phage T7",
-    "La phosphatase alcaline",
-    "L'ADN polymérase de Taq",
+    "L'hélicase du phage T7 qui sépare les brins d'ADN",
+    "La phosphatase alcaline d'intestin de veau ou de bactérie",
+    "L'ADN polymérase thermostable de Thermus aquaticus (Taq)",
     "L'ADN ligase, par exemple celle du phage T4"
    ],
    "answer": "D",
@@ -857,10 +857,10 @@
    "difficulty": 4,
    "question": "Pourquoi digère-t-on vecteur et insert par deux enzymes différentes dans un clonage directionnel ?",
    "choices": [
-    "Les deux enzymes permettent de se passer de gène de sélection dans le vecteur",
-    "Les deux enzymes doublent le nombre de copies du plasmide dans la bactérie hôte",
-    "Les deux enzymes remplacent la ligase pour sceller les extrémités",
-    "Les extrémités incompatibles empêchent la recircularisation du vecteur et imposent l'orientation de l'insert"
+    "Les deux enzymes permettent de se passer de gène de sélection dans le vecteur de clonage",
+    "Les deux enzymes doublent le nombre de copies du plasmide dans la bactérie hôte après transformation",
+    "Les deux enzymes remplacent la ligase pour sceller les extrémités du vecteur et de l'insert",
+    "Les extrémités incompatibles empêchent la recircularisation du vecteur et orientent l'insert"
    ],
    "answer": "D",
    "explanation": "Avec deux extrémités différentes, l'insert ne se ligature que dans un sens, et le vecteur ne se referme pas sur lui-même.",
@@ -873,10 +873,10 @@
    "difficulty": 1,
    "question": "Pourquoi l'électrophorèse SDS-PAGE sépare-t-elle les protéines selon leur masse ?",
    "choices": [
-    "Le SDS les replie en sphères de charge nulle qui migrent selon leur pI",
-    "Le SDS leur donne une charge négative proportionnelle à leur taille et le gel agit comme un tamis",
-    "Le SDS fixe une charge positive et le gel les trie selon leur affinité",
-    "Le SDS les coupe en fragments de taille égale qui migrent à la même vitesse"
+    "Le SDS les replie en sphères de charge nulle qui migrent selon leur point isoélectrique dans le gel",
+    "Le SDS donne une charge négative proportionnelle à la taille et le gel agit comme un tamis",
+    "Le SDS leur fixe une charge positive et le gel les trie selon leur affinité pour l'acrylamide",
+    "Le SDS les coupe en fragments de taille égale qui migrent tous à la même vitesse dans le gel"
    ],
    "answer": "B",
    "explanation": "Le SDS dénature et recouvre les protéines d'une charge négative proportionnelle à la masse, ce qui rend la migration dépendante de la taille.",
@@ -969,9 +969,9 @@
    "difficulty": 3,
    "question": "Comment la phosphofructokinase-1 est-elle régulée dans la glycolyse ?",
    "choices": [
-    "Elle est inhibée par le fructose-2,6-bisphosphate et activée par le glycogène",
-    "Elle est activée par l'ATP et le citrate, et inhibée par l'AMP",
-    "Elle est activée par le glucagon via la fixation directe de l'AMPc",
+    "Elle est inhibée par le fructose-2,6-bisphosphate et activée par le glycogène stocké dans la cellule",
+    "Elle est activée par l'ATP et le citrate, et inhibée par l'AMP et le fructose-2,6-bisphosphate",
+    "Elle est activée par le glucagon via la fixation directe de l'AMPc sur le site catalytique",
     "Elle est inhibée par l'ATP et le citrate, et activée par l'AMP et le fructose-2,6-bisphosphate"
    ],
    "answer": "D",
@@ -1001,10 +1001,10 @@
    "difficulty": 2,
    "question": "Selon la théorie chimiosmotique, comment la synthèse d'ATP mitochondriale est-elle couplée à la chaîne respiratoire ?",
    "choices": [
-    "L'hydrolyse de l'acétyl-CoA fournit directement l'énergie à l'ATP synthase",
-    "Les électrons passent par l'ATP synthase, qui les transmet à l'oxygène",
-    "Le transfert d'électrons phosphoryle directement l'ADP sur le complexe III",
-    "Les protons pompés vers l'espace intermembranaire retournent par l'ATP synthase et entraînent la synthèse d'ATP"
+    "L'hydrolyse de l'acétyl-CoA fournit directement l'énergie à l'ATP synthase de la membrane interne",
+    "Les électrons passent par l'ATP synthase, qui les transmet à l'oxygène en formant de l'ATP",
+    "Le transfert d'électrons phosphoryle directement l'ADP sur le complexe III, sans gradient de protons",
+    "Les protons pompés retournent par l'ATP synthase, ce qui entraîne la synthèse d'ATP"
    ],
    "answer": "D",
    "explanation": "La force proton-motrice créée par la chaîne respiratoire est utilisée par l'ATP synthase (F0F1) pour fabriquer l'ATP.",
@@ -1049,9 +1049,9 @@
    "difficulty": 2,
    "question": "Quel est le rôle de la carnitine dans l'oxydation des acides gras ?",
    "choices": [
-    "Elle transporte l'acétyl-CoA hors de la mitochondrie vers le cytosol",
-    "Elle oxyde les acides gras directement dans le peroxysome",
-    "Elle active les acides gras en acyl-CoA dans le cytosol",
+    "Elle transporte l'acétyl-CoA hors de la mitochondrie vers le cytosol, pour la synthèse des lipides",
+    "Elle oxyde les acides gras directement dans le peroxysome, sans passer par la mitochondrie",
+    "Elle active les acides gras en acyl-CoA dans le cytosol, avant leur entrée dans la mitochondrie",
     "Elle transporte les groupements acyle à longue chaîne dans la matrice mitochondriale"
    ],
    "answer": "D",
@@ -1065,10 +1065,10 @@
    "difficulty": 3,
    "question": "Que fait une transaminase lors du catabolisme des acides aminés ?",
    "choices": [
-    "Elle libère l'ammoniac sous forme d'urée, avec la biotine comme cofacteur",
-    "Elle coupe la chaîne latérale de l'acide aminé, avec la thiamine comme cofacteur",
-    "Elle transfère le groupement amine vers l'α-cétoglutarate, avec le phosphate de pyridoxal comme cofacteur",
-    "Elle ajoute un groupement carboxyle à l'acide aminé, avec le NAD+ comme cofacteur"
+    "Elle libère l'ammoniac sous forme d'urée, avec la biotine comme cofacteur de l'enzyme",
+    "Elle coupe la chaîne latérale de l'acide aminé, avec la thiamine comme cofacteur de l'enzyme",
+    "Elle transfère le groupement amine vers l'α-cétoglutarate, avec le phosphate de pyridoxal",
+    "Elle ajoute un groupement carboxyle à l'acide aminé, avec le NAD+ comme cofacteur de la réaction"
    ],
    "answer": "C",
    "explanation": "La transamination forme un nouvel acide aminé (glutamate) et un α-cétoacide ; le cofacteur dérive de la vitamine B6.",
@@ -1113,10 +1113,10 @@
    "difficulty": 1,
    "question": "Comment l'insuline abaisse-t-elle la glycémie dans le muscle et le tissu adipeux ?",
    "choices": [
-    "Elle bloque GLUT4 dans la membrane, ce qui retient le glucose dans les cellules",
-    "Elle provoque l'insertion de transporteurs GLUT4 dans la membrane plasmique, ce qui favorise l'entrée du glucose",
-    "Elle stimule la néoglucogenèse, ce qui consomme le glucose circulant",
-    "Elle active la glycogène phosphorylase, ce qui libère du glucose dans le sang"
+    "Elle bloque GLUT4 dans la membrane plasmique, ce qui retient le glucose dans le sang",
+    "Elle provoque l'insertion de transporteurs GLUT4 dans la membrane, ce qui accroît l'entrée du glucose",
+    "Elle stimule la néoglucogenèse dans ces cellules, ce qui consomme le glucose circulant",
+    "Elle active la glycogène phosphorylase dans ces cellules, ce qui libère du glucose dans le sang"
    ],
    "answer": "B",
    "explanation": "La fixation de l'insuline déclenche la translocation de GLUT4 vers la membrane, d'où une captation accrue du glucose.",
@@ -1129,10 +1129,10 @@
    "difficulty": 2,
    "question": "Comment le glucagon stimule-t-il la glycogénolyse hépatique ?",
    "choices": [
-    "Par la fixation sur un récepteur à tyrosine kinase, qui active la glycogène synthase",
-    "Par l'IP3 et le calcium, qui inactivent la glycogène phosphorylase",
-    "Par l'AMPc et la protéine kinase A, qui activent la phosphorylase kinase puis la glycogène phosphorylase",
-    "Par la déphosphorylation de la glycogène phosphorylase, activée par une phosphatase"
+    "Par la fixation sur un récepteur à tyrosine kinase, qui active ensuite la glycogène synthase",
+    "Par l'IP3 et le calcium, qui inactivent la glycogène phosphorylase dans l'hépatocyte",
+    "Par l'AMPc et la PKA, qui activent la phosphorylase kinase puis la glycogène phosphorylase",
+    "Par la déphosphorylation de la glycogène phosphorylase, que catalyse une phosphatase activée"
    ],
    "answer": "C",
    "explanation": "Le glucagon agit via un récepteur couplé à une protéine G ; la cascade AMPc-PKA aboutit à la phosphorylation et à l'activation de la phosphorylase.",
@@ -1209,10 +1209,10 @@
    "difficulty": 3,
    "question": "Quel mécanisme permet à un lymphocyte B de passer de la production d'IgM à celle d'IgG sans changer de spécificité ?",
    "choices": [
-    "L'hypermutation somatique, qui remplace le domaine variable en gardant la région constante",
-    "La commutation de classe, qui remplace la région constante de la chaîne lourde en gardant le domaine variable",
-    "L'épissage alternatif des chaînes légères, qui échange les régions variables",
-    "La recombinaison V(D)J, qui échange la région constante au hasard"
+    "L'hypermutation somatique, qui remplace le domaine variable de la chaîne lourde et garde la région constante",
+    "La commutation de classe, qui remplace la région constante de la chaîne lourde et garde le domaine variable",
+    "L'épissage alternatif des chaînes légères, qui échange entre elles les régions variables d'un anticorps",
+    "La recombinaison V(D)J, qui échange la région constante de la chaîne lourde au hasard dans la cellule"
    ],
    "answer": "B",
    "explanation": "La recombinaison de commutation (avec l'enzyme AID) change l'isotype de la chaîne lourde ; la spécificité de l'antigène reste identique.",
@@ -1225,10 +1225,10 @@
    "difficulty": 4,
    "question": "Que provoque l'hypermutation somatique dans les centres germinatifs des organes lymphoïdes ?",
    "choices": [
-    "Des délétions dans les régions constantes, source du changement d'isotype",
-    "Des réarrangements V(D)J complets, source de la diversité initiale du répertoire",
-    "Des mutations dans le CMH de classe I, source de la tolérance aux antigènes du soi",
-    "Des mutations ponctuelles dans les gènes de domaines variables, source de la maturation d'affinité"
+    "Des délétions dans les régions constantes des chaînes lourdes, source du changement d'isotype",
+    "Des réarrangements V(D)J complets, source de la diversité initiale du répertoire des lymphocytes B",
+    "Des mutations dans le CMH de classe I, source de la tolérance aux antigènes du soi chez l'individu",
+    "Des mutations ponctuelles dans les gènes des domaines variables, source de maturation d'affinité"
    ],
    "answer": "D",
    "explanation": "Après contact avec l'antigène, les lymphocytes B mutent leurs gènes V ; les clones de plus forte affinité sont sélectionnés.",
@@ -1385,10 +1385,10 @@
    "difficulty": 2,
    "question": "Comment les pompes d'efflux contribuent-elles à la résistance aux antibiotiques ?",
    "choices": [
-    "Elles exportent l'antibiotique hors de la cellule, ce qui maintient une concentration intracellulaire basse",
-    "Elles hydrolysent l'antibiotique dans le périplasme, ce qui le rend inactif",
-    "Elles modifient la cible ribosomique, ce qui empêche la fixation de l'antibiotique",
-    "Elles transfèrent le gène de résistance à d'autres bactéries par contact"
+    "Elles exportent l'antibiotique hors de la cellule, ce qui maintient sa concentration basse",
+    "Elles hydrolysent l'antibiotique dans le périplasme, ce qui le rend inactif avant son entrée",
+    "Elles modifient la cible ribosomique de l'antibiotique, ce qui empêche sa fixation",
+    "Elles transfèrent le gène de résistance à d'autres bactéries par contact direct entre cellules"
    ],
    "answer": "A",
    "explanation": "Les pompes d'efflux expulsent plusieurs classes d'antibiotiques, ce qui peut entraîner une résistance multiple.",
@@ -1401,10 +1401,10 @@
    "difficulty": 4,
    "question": "Pourquoi associe-t-on plusieurs antibiotiques dans le traitement de la tuberculose ?",
    "choices": [
-    "Pour obtenir une action immédiate sur toutes les bactéries, y compris celles qui sont au repos",
-    "Pour supprimer la résistance déjà présente dans le génome des mycobactéries",
-    "Pour réduire la sélection de mutants résistants, car une résistance simultanée à plusieurs molécules est rare",
-    "Pour que les antibiotiques se transforment en une molécule unique plus active"
+    "Pour obtenir une action immédiate sur toutes les bactéries, y compris celles qui sont au repos total",
+    "Pour supprimer la résistance déjà présente dans le génome de toutes les mycobactéries du patient",
+    "Pour réduire la sélection de mutants résistants, une résistance simultanée à plusieurs molécules étant rare",
+    "Pour que les antibiotiques se transforment en une molécule unique plus active contre la paroi bactérienne"
    ],
    "answer": "C",
    "explanation": "Un mutant résistant à un médicament est sélectionné en monothérapie ; plusieurs molécules rendent l'émergence d'un mutant résistant à toutes très improbable.",
@@ -1497,10 +1497,10 @@
    "difficulty": 2,
    "question": "Pourquoi la courbe de saturation en oxygène de l'hémoglobine est-elle sigmoïde et celle de la myoglobine hyperbolique ?",
    "choices": [
-    "L'hémoglobine tétramérique présente une coopérativité, la myoglobine monomérique n'en présente pas",
-    "L'hémoglobine ne fixe l'oxygène qu'en présence de CO2, la myoglobine non",
-    "L'hémoglobine monomérique fixe l'oxygène mieux que la myoglobine tétramérique",
-    "La myoglobine présente une coopérativité, l'hémoglobine n'en présente pas"
+    "L'hémoglobine tétramérique est coopérative, la myoglobine monomérique ne l'est pas",
+    "L'hémoglobine ne fixe l'oxygène qu'en présence de CO2, alors que la myoglobine le fixe seule",
+    "L'hémoglobine monomérique fixe l'oxygène mieux que la myoglobine tétramérique, à toute pression d'O2",
+    "La myoglobine est coopérative alors que l'hémoglobine ne l'est pas, malgré sa structure tétramérique"
    ],
    "answer": "A",
    "explanation": "La fixation d'O2 sur une sous-unité de l'hémoglobine facilite les suivantes, d'où la forme en S ; la myoglobine, monomérique, a une courbe hyperbolique.",
@@ -1545,10 +1545,10 @@
    "difficulty": 3,
    "question": "Pourquoi l'échange à contre-courant des branchies de poisson est-il efficace ?",
    "choices": [
-    "L'eau reste immobile dans la lamelle, ce qui laisse le temps de diffuser",
-    "Le sang circule plus vite que l'eau, ce qui évite la saturation de l'hémoglobine",
-    "L'eau et le sang circulent en sens inverses, ce qui maintient un gradient d'O2 sur toute la lamelle",
-    "L'eau et le sang circulent dans le même sens, ce qui égalise vite les pressions d'O2"
+    "L'eau reste immobile dans la lamelle, ce qui laisse à l'oxygène le temps de diffuser vers le sang",
+    "Le sang circule plus vite que l'eau, ce qui évite la saturation de l'hémoglobine dans la lamelle",
+    "L'eau et le sang circulent en sens inverses, ce qui garde un gradient d'O2 sur toute la lamelle",
+    "L'eau et le sang circulent dans le même sens, ce qui égalise rapidement les pressions d'oxygène"
    ],
    "answer": "C",
    "explanation": "Le sang rencontre toujours une eau plus riche en O2 que lui : l'extraction d'oxygène est élevée.",
@@ -1609,10 +1609,10 @@
    "difficulty": 1,
    "question": "Quelle différence caractérise une succession secondaire d'une succession primaire ?",
    "choices": [
-    "Elle débute sur un sol déjà formé, avec des graines et des organismes préservés",
-    "Elle débute sur une roche nue, sans sol ni organismes",
-    "Elle ne concerne que des animaux et jamais des végétaux",
-    "Elle débute dans l'eau et s'arrête à la formation de la forêt"
+    "Elle débute sur un sol déjà formé, avec graines et organismes préservés",
+    "Elle débute sur une roche nue, sans sol ni organismes, après le retrait d'un glacier ou d'une coulée",
+    "Elle ne concerne que des animaux et jamais des végétaux, quel que soit le milieu colonisé",
+    "Elle débute dans l'eau et s'arrête à la formation de la forêt, sans stade intermédiaire"
    ],
    "answer": "A",
    "explanation": "Après un incendie ou une culture abandonnée, le sol existe encore : la recolonisation est plus rapide que sur un substrat nu.",
@@ -1705,10 +1705,10 @@
    "difficulty": 1,
    "question": "Quel processus de l'embryogenèse met en place les trois feuillets embryonnaires ?",
    "choices": [
-    "La gastrulation, par des mouvements cellulaires qui forment ectoderme, mésoderme et endoderme",
-    "La segmentation, par des divisions qui forment un amas de cellules identiques",
-    "La neurulation, par le plissement de l'endoderme en tube",
-    "L'organogenèse, par la différenciation des feuillets déjà formés"
+    "La gastrulation, qui forme ectoderme, mésoderme et endoderme",
+    "La segmentation, par des divisions rapides qui forment un amas de cellules totalement identiques",
+    "La neurulation, par le plissement de l'endoderme qui forme un tube dorsal chez l'embryon",
+    "L'organogenèse, par la différenciation de feuillets embryonnaires qui sont déjà formés"
    ],
    "answer": "A",
    "explanation": "Au cours de la gastrulation, les mouvements cellulaires mettent en place les trois feuillets.",
@@ -1721,10 +1721,10 @@
    "difficulty": 2,
    "question": "Que signifie la colinéarité des gènes Hox ?",
    "choices": [
-    "Les gènes Hox s'expriment dans l'ordre inverse de leur position sur le chromosome",
-    "Les gènes Hox sont répartis sur des chromosomes différents, selon leur fonction",
-    "L'ordre des gènes sur le chromosome correspond à l'ordre de leur expression le long de l'axe antéro-postérieur",
-    "Tous les gènes Hox s'expriment au même endroit de l'embryon, quel que soit leur ordre"
+    "Les gènes Hox s'expriment dans l'ordre inverse de leur position sur le chromosome, de l'arrière vers l'avant",
+    "Les gènes Hox sont répartis sur des chromosomes différents, selon la fonction de chaque gène",
+    "L'ordre des gènes sur le chromosome reproduit l'ordre de leur expression antéro-postérieur",
+    "Tous les gènes Hox s'expriment au même endroit de l'embryon, quel que soit leur ordre sur le chromosome"
    ],
    "answer": "C",
    "explanation": "Les gènes en 3' s'expriment plus antérieurement ; ceux en 5' plus postérieurement.",
@@ -1929,10 +1929,10 @@
    "difficulty": 1,
    "question": "Dans un test statistique, que représente l'hypothèse nulle H0 ?",
    "choices": [
-    "L'hypothèse que le chercheur souhaite démontrer et dont il établit la preuve",
-    "L'hypothèse qui affirme qu'il existe une différence d'au moins 5 %",
-    "L'hypothèse que l'échantillon est trop petit pour conclure",
-    "L'hypothèse d'absence d'effet ou de différence, que l'on cherche à réfuter avec les données"
+    "L'hypothèse que le chercheur souhaite démontrer et dont il cherche à établir la preuve avec ses données",
+    "L'hypothèse qui affirme qu'il existe une différence d'au moins 5 % entre les groupes comparés",
+    "L'hypothèse que l'échantillon est trop petit pour que l'on puisse conclure à un effet",
+    "L'absence d'effet ou de différence, que l'on cherche à réfuter grâce aux données"
    ],
    "answer": "D",
    "explanation": "On suppose H0 vraie et on mesure si les données observées sont compatibles avec elle.",
@@ -1945,10 +1945,10 @@
    "difficulty": 3,
    "question": "Que signifie p = 0,03 dans un test statistique ?",
    "choices": [
-    "La probabilité que H0 soit vraie est de 3 %",
-    "La probabilité que l'hypothèse alternative soit fausse est de 3 %",
-    "L'effet observé représente 3 % de la variation totale",
-    "Si H0 était vraie, on observerait un résultat au moins aussi extrême dans 3 % des cas"
+    "La probabilité que H0 soit vraie est de 3 % compte tenu des données de l'expérience",
+    "La probabilité que l'hypothèse alternative soit fausse est de 3 % d'après l'échantillon étudié",
+    "L'effet observé représente 3 % de la variation totale mesurée dans l'ensemble de l'échantillon",
+    "Si H0 était vraie, un résultat au moins aussi extrême surviendrait dans 3 % des cas"
    ],
    "answer": "D",
    "explanation": "La valeur p est calculée en supposant H0 vraie ; elle n'est pas la probabilité que H0 soit vraie.",
@@ -1961,10 +1961,10 @@
    "difficulty": 1,
    "question": "Quel est le rôle d'un lot témoin négatif dans une expérience ?",
    "choices": [
-    "Il est analysé uniquement à la fin, afin de gagner du temps sur les mesures",
-    "Il reçoit une dose double du facteur étudié, afin de vérifier la réponse maximale",
-    "Il est constitué d'individus choisis pour leur réponse nette au traitement",
-    "Il subit tout le protocole sans le facteur étudié, afin de repérer un effet dû aux autres conditions"
+    "Il est analysé uniquement à la fin de l'expérience, afin de gagner du temps sur les mesures",
+    "Il reçoit une dose double du facteur étudié, afin de vérifier la réponse maximale de l'organisme",
+    "Il est constitué d'individus choisis pour leur réponse nette au traitement dès le début de l'essai",
+    "Il subit tout le protocole sans le facteur étudié, pour repérer un effet dû aux autres conditions"
    ],
    "answer": "D",
    "explanation": "En comparant traité et témoin, on attribue la différence au facteur étudié.",
@@ -1994,9 +1994,9 @@
    "question": "Pourquoi répartit-on les individus d'un essai au hasard entre les lots (randomisation) ?",
    "choices": [
     "Pour répartir de façon équilibrée les facteurs de confusion connus et inconnus entre les lots",
-    "Pour supprimer la variabilité individuelle au sein de chaque lot",
-    "Pour augmenter la taille de l'effet observé entre les lots traité et témoin",
-    "Pour s'assurer que chaque lot contient le même nombre d'individus de chaque âge"
+    "Pour supprimer toute la variabilité individuelle au sein de chaque lot étudié dans l'expérience",
+    "Pour augmenter la taille de l'effet observé entre les lots traité et témoin dans l'essai clinique",
+    "Pour s'assurer que chaque lot contient exactement le même nombre d'individus de chaque classe d'âge"
    ],
    "answer": "A",
    "explanation": "La randomisation limite les biais de sélection et d'affectation ; elle ne supprime pas la variabilité individuelle.",
