@@ -1,0 +1,2007 @@
+{
+ "batch": "higher-l3-biologie-01",
+ "author": "claude-sonnet-5.5",
+ "date": "2026-10-03",
+ "questions": [
+  {
+   "course": "l3-bio",
+   "category": "Biologie moléculaire : régulation de la transcription, opéron lactose",
+   "difficulty": 2,
+   "question": "Quel gène code le répresseur de l'opéron lactose chez Escherichia coli ?",
+   "choices": [
+    "lacI",
+    "lacZ",
+    "lacY",
+    "lacA"
+   ],
+   "answer": "A",
+   "explanation": "Le gène lacI, situé en amont de l'opéron, code le répresseur Lac, exprimé de façon constitutive.",
+   "source": "Biologie moléculaire du gène, famille Watson",
+   "verif": "import"
+  },
+  {
+   "course": "l3-bio",
+   "category": "Biologie moléculaire : régulation de la transcription, opéron lactose",
+   "difficulty": 1,
+   "question": "Quelle enzyme est codée par le gène lacZ de l'opéron lactose ?",
+   "choices": [
+    "La β-galactosidase",
+    "La galactokinase",
+    "La perméase du lactose",
+    "La transacétylase"
+   ],
+   "answer": "A",
+   "explanation": "lacZ code la β-galactosidase, qui hydrolyse le lactose en glucose et galactose.",
+   "source": "Biologie moléculaire du gène, famille Watson",
+   "verif": "import"
+  },
+  {
+   "course": "l3-bio",
+   "category": "Biologie moléculaire : régulation de la transcription, opéron lactose",
+   "difficulty": 3,
+   "question": "Quel est le rôle du site opérateur de l'opéron lactose ?",
+   "choices": [
+    "Fixer l'ARN polymérase pour initier la transcription",
+    "Fixer le ribosome pour initier la traduction",
+    "Fixer l'allolactose pour activer le promoteur",
+    "Fixer le répresseur Lac et bloquer la transcription"
+   ],
+   "answer": "D",
+   "explanation": "Quand le répresseur est fixé sur l'opérateur, l'ARN polymérase ne peut pas transcrire les gènes de structure.",
+   "source": "Biologie moléculaire du gène, famille Watson",
+   "verif": "import"
+  },
+  {
+   "course": "l3-bio",
+   "category": "Biologie moléculaire : régulation de la transcription, opéron lactose",
+   "difficulty": 2,
+   "question": "Quel composé est l'inducteur physiologique de l'opéron lactose ?",
+   "choices": [
+    "Le glucose",
+    "Le galactose-1-phosphate",
+    "L'AMP cyclique",
+    "L'allolactose"
+   ],
+   "answer": "D",
+   "explanation": "L'allolactose, isomère du lactose, se fixe sur le répresseur et le libère de l'opérateur.",
+   "source": "Biologie moléculaire du gène, famille Watson",
+   "verif": "import"
+  },
+  {
+   "course": "l3-bio",
+   "category": "Biologie moléculaire : régulation de la transcription, opéron lactose",
+   "difficulty": 5,
+   "question": "Pourquoi une mutation de l'opérateur (O^c) est-elle dite cis-dominante ?",
+   "choices": [
+    "Elle ne dérègle que les gènes portés par la même molécule d'ADN",
+    "Elle produit un répresseur défectueux qui diffuse dans la cellule",
+    "Elle supprime le promoteur de tous les opérons de la cellule",
+    "Elle augmente l'affinité de l'AMPc pour la protéine CAP"
+   ],
+   "answer": "A",
+   "explanation": "L'opérateur est un site d'ADN et non un produit diffusible : son altération n'affecte que les gènes en cis.",
+   "source": "Biologie moléculaire du gène, famille Watson",
+   "verif": "import"
+  },
+  {
+   "course": "l3-bio",
+   "category": "Épissage et maturation des ARN",
+   "difficulty": 1,
+   "question": "Comment appelle-t-on les séquences d'un pré-ARNm éliminées lors de l'épissage ?",
+   "choices": [
+    "Les opérateurs",
+    "Les introns",
+    "Les exons",
+    "Les promoteurs"
+   ],
+   "answer": "B",
+   "explanation": "Les introns sont excisés et les exons sont raccordés pour former l'ARNm mature.",
+   "source": "Cours de licence de biologie cellulaire et moléculaire, famille Alberts (Biologie moléculaire de la cellule)",
+   "verif": "import"
+  },
+  {
+   "course": "l3-bio",
+   "category": "Épissage et maturation des ARN",
+   "difficulty": 2,
+   "question": "Quelle structure est ajoutée à l'extrémité 5' des pré-ARNm eucaryotes lors de leur maturation ?",
+   "choices": [
+    "Une queue de poly(A)",
+    "Un groupement 3'-phosphate cyclique",
+    "Une coiffe de 7-méthylguanosine",
+    "Un site de liaison au ribosome de type Shine-Dalgarno"
+   ],
+   "answer": "C",
+   "explanation": "La coiffe est une guanosine méthylée liée au premier nucléotide par une liaison triphosphate 5'-5'.",
+   "source": "Cours de licence de biologie cellulaire et moléculaire, famille Alberts (Biologie moléculaire de la cellule)",
+   "verif": "import"
+  },
+  {
+   "course": "l3-bio",
+   "category": "Épissage et maturation des ARN",
+   "difficulty": 2,
+   "question": "De quoi est principalement constitué le splicéosome majeur ?",
+   "choices": [
+    "De snRNP associant petits ARN nucléaires et protéines",
+    "De microARN et de protéines Argonaute",
+    "D'ARN messagers et de nucléosomes",
+    "D'ARN de transfert et de sous-unités ribosomiques"
+   ],
+   "answer": "A",
+   "explanation": "Les snRNP U1, U2, U4, U5 et U6 forment, avec d'autres facteurs, le splicéosome.",
+   "source": "Cours de licence de biologie cellulaire et moléculaire, famille Alberts (Biologie moléculaire de la cellule)",
+   "verif": "import"
+  },
+  {
+   "course": "l3-bio",
+   "category": "Épissage et maturation des ARN",
+   "difficulty": 2,
+   "question": "Quels dinucléotides bordent respectivement les extrémités 5' et 3' d'un intron typique du splicéosome majeur ?",
+   "choices": [
+    "AU en 5' et GC en 3'",
+    "GG en 5' et UU en 3'",
+    "AG en 5' et GU en 3'",
+    "GU en 5' et AG en 3'"
+   ],
+   "answer": "D",
+   "explanation": "La règle GU-AG : l'intron commence par GU et se termine par AG.",
+   "source": "Cours de licence de biologie cellulaire et moléculaire, famille Alberts (Biologie moléculaire de la cellule)",
+   "verif": "import"
+  },
+  {
+   "course": "l3-bio",
+   "category": "Épissage et maturation des ARN",
+   "difficulty": 5,
+   "question": "Quel nucléotide de l'intron forme la liaison 2'-5' qui crée la structure en lasso ?",
+   "choices": [
+    "Le dernier G du site accepteur",
+    "Le premier G du site donneur",
+    "Une adénosine du site de branchement",
+    "Une cytosine du tractus polypyrimidique"
+   ],
+   "answer": "C",
+   "explanation": "L'hydroxyle 2' de l'adénosine du point de branchement attaque le site d'épissage 5' et forme le lasso.",
+   "source": "Cours de licence de biologie cellulaire et moléculaire, famille Alberts (Biologie moléculaire de la cellule)",
+   "verif": "import"
+  },
+  {
+   "course": "l3-bio",
+   "category": "Biologie cellulaire avancée : trafic membranaire",
+   "difficulty": 1,
+   "question": "Dans quel organite les protéines destinées à la sécrétion entrent-elles au cours de leur traduction ?",
+   "choices": [
+    "Le noyau",
+    "Le peroxysome",
+    "La mitochondrie",
+    "Le réticulum endoplasmique rugueux"
+   ],
+   "answer": "D",
+   "explanation": "Le peptide signal adresse le ribosome au réticulum rugueux, où la chaîne est transloquée.",
+   "source": "Cours de licence de biologie cellulaire et moléculaire, famille Alberts (Biologie moléculaire de la cellule)",
+   "verif": "import"
+  },
+  {
+   "course": "l3-bio",
+   "category": "Biologie cellulaire avancée : trafic membranaire",
+   "difficulty": 2,
+   "question": "Quel manteau protéique recouvre les vésicules du transport antérograde du réticulum vers le Golgi ?",
+   "choices": [
+    "COPI",
+    "La cavéoline",
+    "COPII",
+    "La clathrine"
+   ],
+   "answer": "C",
+   "explanation": "Les vésicules COPII bourgeonnent à partir du RE ; COPI assure surtout le transport rétrograde.",
+   "source": "Cours de licence de biologie cellulaire et moléculaire, famille Alberts (Biologie moléculaire de la cellule)",
+   "verif": "import"
+  },
+  {
+   "course": "l3-bio",
+   "category": "Biologie cellulaire avancée : trafic membranaire",
+   "difficulty": 2,
+   "question": "Quelle séquence C-terminale assure la rétention ou le retour des protéines solubles dans le RE ?",
+   "choices": [
+    "SKL",
+    "KDEL",
+    "NLS",
+    "Mannose-6-phosphate"
+   ],
+   "answer": "B",
+   "explanation": "Les protéines portant KDEL sont récupérées dans le RE par un récepteur du cis-Golgi.",
+   "source": "Cours de licence de biologie cellulaire et moléculaire, famille Alberts (Biologie moléculaire de la cellule)",
+   "verif": "import"
+  },
+  {
+   "course": "l3-bio",
+   "category": "Biologie cellulaire avancée : trafic membranaire",
+   "difficulty": 2,
+   "question": "Quel marqueur dirige les hydrolases acides vers les lysosomes ?",
+   "choices": [
+    "Un peptide d'import mitochondrial",
+    "Le signal KDEL",
+    "Une ancre GPI",
+    "Le mannose-6-phosphate"
+   ],
+   "answer": "D",
+   "explanation": "Les enzymes lysosomales reçoivent du mannose-6-phosphate dans le Golgi, reconnu par des récepteurs spécifiques.",
+   "source": "Cours de licence de biologie cellulaire et moléculaire, famille Alberts (Biologie moléculaire de la cellule)",
+   "verif": "import"
+  },
+  {
+   "course": "l3-bio",
+   "category": "Biologie cellulaire avancée : trafic membranaire",
+   "difficulty": 5,
+   "question": "Quelle GTPase catalyse la scission du col des vésicules à clathrine ?",
+   "choices": [
+    "Arf1",
+    "Rab5",
+    "Sar1",
+    "La dynamine"
+   ],
+   "answer": "D",
+   "explanation": "La dynamine s'assemble autour du col de la vésicule et provoque sa fission.",
+   "source": "Cours de licence de biologie cellulaire et moléculaire, famille Alberts (Biologie moléculaire de la cellule)",
+   "verif": "import"
+  },
+  {
+   "course": "l3-bio",
+   "category": "Signalisation cellulaire et récepteurs",
+   "difficulty": 1,
+   "question": "Combien de domaines transmembranaires possède un récepteur couplé aux protéines G ?",
+   "choices": [
+    "Sept",
+    "Un seul",
+    "Douze",
+    "Quatre"
+   ],
+   "answer": "A",
+   "explanation": "Les RCPG sont des protéines à sept hélices transmembranaires.",
+   "source": "Cours de licence de biologie cellulaire et moléculaire, famille Alberts (Biologie moléculaire de la cellule)",
+   "verif": "import"
+  },
+  {
+   "course": "l3-bio",
+   "category": "Signalisation cellulaire et récepteurs",
+   "difficulty": 1,
+   "question": "À partir de quel substrat l'adénylate cyclase synthétise-t-elle l'AMP cyclique ?",
+   "choices": [
+    "Le GTP",
+    "L'AMP",
+    "L'ATP",
+    "L'ADP"
+   ],
+   "answer": "C",
+   "explanation": "L'adénylate cyclase transforme l'ATP en AMPc et en pyrophosphate.",
+   "source": "Cours de licence de biologie cellulaire et moléculaire, famille Alberts (Biologie moléculaire de la cellule)",
+   "verif": "import"
+  },
+  {
+   "course": "l3-bio",
+   "category": "Signalisation cellulaire et récepteurs",
+   "difficulty": 2,
+   "question": "Quel second messager issu du PIP2 libère le calcium du réticulum en se fixant à un canal ?",
+   "choices": [
+    "Le GMP cyclique",
+    "L'AMP cyclique",
+    "Le diacylglycérol",
+    "L'inositol trisphosphate (IP3)"
+   ],
+   "answer": "D",
+   "explanation": "L'IP3 se lie à un récepteur-canal du RE et provoque la sortie du Ca2+.",
+   "source": "Cours de licence de biologie cellulaire et moléculaire, famille Alberts (Biologie moléculaire de la cellule)",
+   "verif": "import"
+  },
+  {
+   "course": "l3-bio",
+   "category": "Signalisation cellulaire et récepteurs",
+   "difficulty": 3,
+   "question": "Quel événement suit la fixation du ligand sur un récepteur à activité tyrosine kinase ?",
+   "choices": [
+    "Dimérisation puis transphosphorylation de tyrosines",
+    "Clivage du récepteur par une γ-sécrétase",
+    "Ouverture directe d'un canal ionique",
+    "Échange GDP-GTP sur une sous-unité α"
+   ],
+   "answer": "A",
+   "explanation": "La dimérisation rapproche les domaines kinases, qui se phosphorylent mutuellement sur des tyrosines.",
+   "source": "Cours de licence de biologie cellulaire et moléculaire, famille Alberts (Biologie moléculaire de la cellule)",
+   "verif": "import"
+  },
+  {
+   "course": "l3-bio",
+   "category": "Signalisation cellulaire et récepteurs",
+   "difficulty": 5,
+   "question": "Comment la toxine cholérique provoque-t-elle une élévation prolongée de l'AMPc ?",
+   "choices": [
+    "Par fixation directe sur l'adénylate cyclase",
+    "Par ADP-ribosylation de Gαs, qui reste actif",
+    "Par inhibition de la phosphodiestérase",
+    "Par blocage de la protéine kinase A"
+   ],
+   "answer": "B",
+   "explanation": "Gαs modifiée n'hydrolyse plus son GTP : l'adénylate cyclase reste activée.",
+   "source": "Cours de licence de biologie cellulaire et moléculaire, famille Alberts (Biologie moléculaire de la cellule)",
+   "verif": "import"
+  },
+  {
+   "course": "l3-bio",
+   "category": "Cytosquelette et motilité cellulaire",
+   "difficulty": 1,
+   "question": "Quelle protéine globulaire polymérise pour former les microfilaments ?",
+   "choices": [
+    "L'actine",
+    "La kératine",
+    "La myosine",
+    "La tubuline"
+   ],
+   "answer": "A",
+   "explanation": "Les microfilaments sont des polymères d'actine G organisés en filaments d'actine F.",
+   "source": "Cours de licence de biologie cellulaire et moléculaire, famille Alberts (Biologie moléculaire de la cellule)",
+   "verif": "import"
+  },
+  {
+   "course": "l3-bio",
+   "category": "Cytosquelette et motilité cellulaire",
+   "difficulty": 1,
+   "question": "De quelles sous-unités les microtubules sont-ils formés ?",
+   "choices": [
+    "Des dimères de kératine",
+    "Des tétramères de lamine",
+    "Des monomères d'actine",
+    "Des dimères de tubuline α et β"
+   ],
+   "answer": "D",
+   "explanation": "Les dimères αβ s'assemblent en protofilaments, au nombre de 13 par microtubule.",
+   "source": "Cours de licence de biologie cellulaire et moléculaire, famille Alberts (Biologie moléculaire de la cellule)",
+   "verif": "import"
+  },
+  {
+   "course": "l3-bio",
+   "category": "Cytosquelette et motilité cellulaire",
+   "difficulty": 2,
+   "question": "Quel type de filament intermédiaire caractérise les cellules épithéliales ?",
+   "choices": [
+    "Les lamines",
+    "Les kératines",
+    "La desmine",
+    "La vimentine"
+   ],
+   "answer": "B",
+   "explanation": "Les cytokératines forment le cytosquelette des cellules épithéliales.",
+   "source": "Cours de licence de biologie cellulaire et moléculaire, famille Alberts (Biologie moléculaire de la cellule)",
+   "verif": "import"
+  },
+  {
+   "course": "l3-bio",
+   "category": "Cytosquelette et motilité cellulaire",
+   "difficulty": 3,
+   "question": "Dans quel sens la kinésine conventionnelle se déplace-t-elle le long d'un microtubule ?",
+   "choices": [
+    "Vers l'extrémité plus (+)",
+    "Vers l'extrémité moins (-)",
+    "Elle ne se déplace qu'au centrosome",
+    "Elle se déplace au hasard"
+   ],
+   "answer": "A",
+   "explanation": "La kinésine marche vers l'extrémité plus ; la dynéine cytoplasmique vers l'extrémité moins.",
+   "source": "Cours de licence de biologie cellulaire et moléculaire, famille Alberts (Biologie moléculaire de la cellule)",
+   "verif": "import"
+  },
+  {
+   "course": "l3-bio",
+   "category": "Cytosquelette et motilité cellulaire",
+   "difficulty": 4,
+   "question": "Quel est le mode d'action du paclitaxel (Taxol) sur les microtubules ?",
+   "choices": [
+    "Il fragmente les microtubules en dimères",
+    "Il les stabilise et empêche leur dépolymérisation",
+    "Il bloque la polymérisation de la tubuline libre",
+    "Il lie les microtubules aux filaments d'actine"
+   ],
+   "answer": "B",
+   "explanation": "Le paclitaxel fige les microtubules et bloque ainsi la mitose ; la colchicine agit à l'inverse.",
+   "source": "Cours de licence de biologie cellulaire et moléculaire, famille Alberts (Biologie moléculaire de la cellule)",
+   "verif": "import"
+  },
+  {
+   "course": "l3-bio",
+   "category": "Cancer : oncogènes et gènes suppresseurs",
+   "difficulty": 1,
+   "question": "Qu'est-ce qu'un proto-oncogène ?",
+   "choices": [
+    "Un gène viral absent des cellules saines",
+    "Un gène normal dont l'altération peut devenir oncogène",
+    "Un gène de réparation de l'ADN",
+    "Un gène suppresseur de tumeur inactivé"
+   ],
+   "answer": "B",
+   "explanation": "Un proto-oncogène contrôle la croissance cellulaire ; sa mutation ou sa surexpression en fait un oncogène.",
+   "source": "Cancérologie fondamentale, famille Weinberg (The Biology of Cancer)",
+   "verif": "import"
+  },
+  {
+   "course": "l3-bio",
+   "category": "Cancer : oncogènes et gènes suppresseurs",
+   "difficulty": 1,
+   "question": "Quel rôle la protéine p53 joue-t-elle en cas de dommage à l'ADN ?",
+   "choices": [
+    "Stimulation de la synthèse d'ADN",
+    "Arrêt du cycle cellulaire ou apoptose",
+    "Activation de la télomérase",
+    "Inhibition de la p21"
+   ],
+   "answer": "B",
+   "explanation": "p53 active notamment p21, qui arrête le cycle, ou déclenche l'apoptose si les lésions sont irréparables.",
+   "source": "Cancérologie fondamentale, famille Weinberg (The Biology of Cancer)",
+   "verif": "import"
+  },
+  {
+   "course": "l3-bio",
+   "category": "Cancer : oncogènes et gènes suppresseurs",
+   "difficulty": 2,
+   "question": "Quelle protéine la protéine du rétinoblastome (Rb) hypophosphorylée séquestre-t-elle ?",
+   "choices": [
+    "La protéine Ras",
+    "La cycline D",
+    "La protéine p53",
+    "Le facteur de transcription E2F"
+   ],
+   "answer": "D",
+   "explanation": "La phosphorylation de Rb par les CDK libère E2F, qui active les gènes de la phase S.",
+   "source": "Cancérologie fondamentale, famille Weinberg (The Biology of Cancer)",
+   "verif": "import"
+  },
+  {
+   "course": "l3-bio",
+   "category": "Cancer : oncogènes et gènes suppresseurs",
+   "difficulty": 3,
+   "question": "Quelle altération moléculaire rend la protéine Ras oncogénique ?",
+   "choices": [
+    "Une perte d'activité GTPasique qui la bloque liée au GTP",
+    "Une perte de la liaison au GTP",
+    "Une dégradation accélérée par le protéasome",
+    "Une phosphorylation constitutive de Rb"
+   ],
+   "answer": "A",
+   "explanation": "Ras muté reste à l'état actif lié au GTP et stimule en continu la prolifération.",
+   "source": "Cancérologie fondamentale, famille Weinberg (The Biology of Cancer)",
+   "verif": "import"
+  },
+  {
+   "course": "l3-bio",
+   "category": "Cancer : oncogènes et gènes suppresseurs",
+   "difficulty": 4,
+   "question": "Que postule l'hypothèse « à deux coups » de Knudson pour un gène suppresseur de tumeur ?",
+   "choices": [
+    "Une mutation et une translocation sont nécessaires",
+    "Chaque copie du gène doit être inactivée",
+    "Le gène concerné est un proto-oncogène activé",
+    "Un seul allèle muté suffit à transformer la cellule"
+   ],
+   "answer": "B",
+   "explanation": "Pour un gène suppresseur, la perte des deux copies est requise ; une copie défectueuse héritée prédispose au cancer.",
+   "source": "Cancérologie fondamentale, famille Weinberg (The Biology of Cancer)",
+   "verif": "import"
+  },
+  {
+   "course": "l3-bio",
+   "category": "Apoptose et différenciation",
+   "difficulty": 1,
+   "question": "Quel type d'enzymes exécute le programme de l'apoptose ?",
+   "choices": [
+    "Les ligases",
+    "Les caspases",
+    "Les polymérases",
+    "Les kinases dépendantes des cyclines"
+   ],
+   "answer": "B",
+   "explanation": "Les caspases sont des protéases à cystéine qui clivent leurs cibles après un résidu aspartate.",
+   "source": "Cours de licence de biologie cellulaire et moléculaire, famille Alberts (Biologie moléculaire de la cellule)",
+   "verif": "import"
+  },
+  {
+   "course": "l3-bio",
+   "category": "Apoptose et différenciation",
+   "difficulty": 2,
+   "question": "Avec quelle protéine le cytochrome c libéré par la mitochondrie forme-t-il l'apoptosome ?",
+   "choices": [
+    "p53",
+    "Bcl-2",
+    "Apaf-1",
+    "Fas"
+   ],
+   "answer": "C",
+   "explanation": "Le cytochrome c, Apaf-1 et la procaspase-9 s'assemblent en apoptosome.",
+   "source": "Cours de licence de biologie cellulaire et moléculaire, famille Alberts (Biologie moléculaire de la cellule)",
+   "verif": "import"
+  },
+  {
+   "course": "l3-bio",
+   "category": "Apoptose et différenciation",
+   "difficulty": 2,
+   "question": "Laquelle de ces protéines de la famille Bcl-2 est pro-apoptotique ?",
+   "choices": [
+    "Mcl-1",
+    "Bcl-2",
+    "Bax",
+    "Bcl-xL"
+   ],
+   "answer": "C",
+   "explanation": "Bax perméabilise la membrane mitochondriale externe, alors que Bcl-2, Bcl-xL et Mcl-1 protègent de l'apoptose.",
+   "source": "Cours de licence de biologie cellulaire et moléculaire, famille Alberts (Biologie moléculaire de la cellule)",
+   "verif": "import"
+  },
+  {
+   "course": "l3-bio",
+   "category": "Apoptose et différenciation",
+   "difficulty": 3,
+   "question": "Quelle caractéristique distingue l'apoptose de la nécrose ?",
+   "choices": [
+    "Le processus est toujours accidentel",
+    "L'ADN reste intact",
+    "La membrane plasmique éclate précocement",
+    "Les corps apoptotiques sont phagocytés sans inflammation"
+   ],
+   "answer": "D",
+   "explanation": "L'apoptose est un processus programmé et ordonné ; la nécrose libère le contenu cellulaire et provoque une inflammation.",
+   "source": "Cours de licence de biologie cellulaire et moléculaire, famille Alberts (Biologie moléculaire de la cellule)",
+   "verif": "import"
+  },
+  {
+   "course": "l3-bio",
+   "category": "Apoptose et différenciation",
+   "difficulty": 3,
+   "question": "Quelle propriété définit une cellule souche pluripotente ?",
+   "choices": [
+    "Donner tous les types cellulaires des trois feuillets, sans placenta",
+    "Donner un organisme entier à elle seule",
+    "Donner un seul type de cellule différenciée",
+    "Donner uniquement des cellules du sang"
+   ],
+   "answer": "A",
+   "explanation": "La pluripotence couvre ectoderme, mésoderme et endoderme ; la totipotence inclut aussi les annexes embryonnaires.",
+   "source": "Cours de licence de biologie cellulaire et moléculaire, famille Alberts (Biologie moléculaire de la cellule)",
+   "verif": "import"
+  },
+  {
+   "course": "l3-bio",
+   "category": "Génétique des populations : Hardy-Weinberg",
+   "difficulty": 1,
+   "question": "Quelle relation exprime la loi de Hardy-Weinberg pour deux allèles de fréquences p et q ?",
+   "choices": [
+    "p² + 2pq + q² = 1",
+    "p + q² = 1",
+    "2p + 2q = 1",
+    "p² - q² = 1"
+   ],
+   "answer": "A",
+   "explanation": "À l'équilibre, les fréquences génotypiques sont p² (AA), 2pq (Aa) et q² (aa).",
+   "source": "Cours de génétique, famille Griffiths",
+   "verif": "import"
+  },
+  {
+   "course": "l3-bio",
+   "category": "Génétique des populations : Hardy-Weinberg",
+   "difficulty": 2,
+   "question": "Laquelle de ces conditions est requise pour l'équilibre de Hardy-Weinberg ?",
+   "choices": [
+    "Une panmixie dans une population de grande taille",
+    "Un flux de gènes constant avec d'autres populations",
+    "Une mutation fréquente des allèles",
+    "Une sélection forte contre les hétérozygotes"
+   ],
+   "answer": "A",
+   "explanation": "L'équilibre suppose union au hasard, grand effectif, et absence de sélection, mutation et migration.",
+   "source": "Cours de génétique, famille Griffiths",
+   "verif": "import"
+  },
+  {
+   "course": "l3-bio",
+   "category": "Génétique des populations : Hardy-Weinberg",
+   "difficulty": 3,
+   "question": "Dans une population à l'équilibre, la fréquence des homozygotes aa est de 0,04. Quelle est la fréquence des hétérozygotes ?",
+   "choices": [
+    "0,16",
+    "0,20",
+    "0,32",
+    "0,64"
+   ],
+   "answer": "C",
+   "explanation": "q = 0,2 donc p = 0,8 et 2pq = 2 × 0,8 × 0,2 = 0,32.",
+   "source": "Cours de génétique, famille Griffiths",
+   "verif": "import"
+  },
+  {
+   "course": "l3-bio",
+   "category": "Génétique des populations : Hardy-Weinberg",
+   "difficulty": 2,
+   "question": "À l'équilibre, un allèle A a une fréquence p = 0,7. Quelle est la fréquence attendue des hétérozygotes Aa ?",
+   "choices": [
+    "0,49",
+    "0,42",
+    "0,21",
+    "0,09"
+   ],
+   "answer": "B",
+   "explanation": "q = 0,3 donc 2pq = 2 × 0,7 × 0,3 = 0,42.",
+   "source": "Cours de génétique, famille Griffiths",
+   "verif": "import"
+  },
+  {
+   "course": "l3-bio",
+   "category": "Génétique des populations : Hardy-Weinberg",
+   "difficulty": 5,
+   "question": "Une maladie autosomique récessive touche 1 naissance sur 10 000. À l'équilibre, quelle proportion de porteurs sains attend-on environ ?",
+   "choices": [
+    "Environ 1 sur 50",
+    "Environ 1 sur 100",
+    "Environ 1 sur 5 000",
+    "Environ 1 sur 10 000"
+   ],
+   "answer": "A",
+   "explanation": "q² = 0,0001 donc q = 0,01 et 2pq ≈ 0,0198, soit environ 1 sur 50.",
+   "source": "Cours de génétique, famille Griffiths",
+   "verif": "import"
+  },
+  {
+   "course": "l3-bio",
+   "category": "Génomique et séquençage",
+   "difficulty": 1,
+   "question": "Quelle méthode de séquençage repose sur des didésoxynucléotides terminateurs de chaîne ?",
+   "choices": [
+    "La méthode de Sanger",
+    "La puce à ADN",
+    "Le Southern blot",
+    "La PCR en temps réel"
+   ],
+   "answer": "A",
+   "explanation": "Les ddNTP, dépourvus de 3'-OH, arrêtent l'élongation et génèrent des fragments de longueurs différentes.",
+   "source": "Cours de génétique, famille Griffiths",
+   "verif": "import"
+  },
+  {
+   "course": "l3-bio",
+   "category": "Génomique et séquençage",
+   "difficulty": 2,
+   "question": "Que cible le séquençage de l'exome ?",
+   "choices": [
+    "Les régions intergéniques répétées",
+    "Les télomères uniquement",
+    "Les seuls ARN de transfert",
+    "Les régions codantes, c'est-à-dire les exons"
+   ],
+   "answer": "D",
+   "explanation": "L'exome est l'ensemble des exons d'un génome, capturés puis séquencés.",
+   "source": "Cours de génétique, famille Griffiths",
+   "verif": "import"
+  },
+  {
+   "course": "l3-bio",
+   "category": "Génomique et séquençage",
+   "difficulty": 2,
+   "question": "Quelle caractéristique définit le séquençage de nouvelle génération (NGS) ?",
+   "choices": [
+    "La lecture exclusive de l'ARN",
+    "L'absence de toute amplification ou préparation",
+    "La lecture d'un seul fragment à la fois",
+    "La lecture parallèle de millions de fragments"
+   ],
+   "answer": "D",
+   "explanation": "Le NGS séquence massivement en parallèle des millions de fragments d'ADN.",
+   "source": "Cours de génétique, famille Griffiths",
+   "verif": "import"
+  },
+  {
+   "course": "l3-bio",
+   "category": "Génomique et séquençage",
+   "difficulty": 2,
+   "question": "Que désigne la profondeur de couverture d'un séquençage ?",
+   "choices": [
+    "Le nombre moyen de lectures qui recouvrent une base",
+    "Le taux de GC de l'échantillon",
+    "La longueur d'une lecture",
+    "La taille du génome séquencé"
+   ],
+   "answer": "A",
+   "explanation": "Une profondeur élevée améliore la fiabilité de l'identification des variants.",
+   "source": "Cours de génétique, famille Griffiths",
+   "verif": "import"
+  },
+  {
+   "course": "l3-bio",
+   "category": "Génomique et séquençage",
+   "difficulty": 4,
+   "question": "Quel avantage majeur offrent les technologies de lectures longues (type nanopore) ?",
+   "choices": [
+    "Un coût nul par échantillon",
+    "L'élimination de toute extraction d'ADN",
+    "Résoudre les régions répétées et les variants structuraux",
+    "Une précision par base supérieure à toute autre technique"
+   ],
+   "answer": "C",
+   "explanation": "Les lectures longues traversent les séquences répétées, difficiles à assembler avec des lectures courtes.",
+   "source": "Cours de génétique, famille Griffiths",
+   "verif": "import"
+  },
+  {
+   "course": "l3-bio",
+   "category": "Bio-informatique : alignement de séquences",
+   "difficulty": 1,
+   "question": "À quoi sert principalement le programme BLAST ?",
+   "choices": [
+    "Assembler un génome bactérien complet",
+    "Prédire la température de fusion de l'ADN",
+    "Synthétiser des amorces",
+    "Rechercher des séquences similaires dans une banque"
+   ],
+   "answer": "D",
+   "explanation": "BLAST compare une séquence requête à une banque et classe les alignements par significativité.",
+   "source": "Bio-informatique, famille Mount (Bioinformatics)",
+   "verif": "import"
+  },
+  {
+   "course": "l3-bio",
+   "category": "Bio-informatique : alignement de séquences",
+   "difficulty": 2,
+   "question": "Quel algorithme réalise un alignement local optimal par programmation dynamique ?",
+   "choices": [
+    "UPGMA",
+    "Kruskal",
+    "Needleman-Wunsch",
+    "Smith-Waterman"
+   ],
+   "answer": "D",
+   "explanation": "Smith-Waterman cherche le meilleur segment aligné ; Needleman-Wunsch réalise un alignement global.",
+   "source": "Bio-informatique, famille Mount (Bioinformatics)",
+   "verif": "import"
+  },
+  {
+   "course": "l3-bio",
+   "category": "Bio-informatique : alignement de séquences",
+   "difficulty": 2,
+   "question": "À quoi sert la matrice de substitution BLOSUM62 ?",
+   "choices": [
+    "Corriger les erreurs de séquençage",
+    "Noter les paires d'acides aminés alignés",
+    "Tracer un arbre de parenté",
+    "Calculer le poids moléculaire"
+   ],
+   "answer": "B",
+   "explanation": "Elle attribue un score à chaque paire d'acides aminés selon leur fréquence de substitution observée.",
+   "source": "Bio-informatique, famille Mount (Bioinformatics)",
+   "verif": "import"
+  },
+  {
+   "course": "l3-bio",
+   "category": "Bio-informatique : alignement de séquences",
+   "difficulty": 5,
+   "question": "Que représente une E-value de 10^-30 dans un résultat BLAST ?",
+   "choices": [
+    "Un nombre attendu d'alignements dus au hasard, très faible",
+    "La longueur de l'alignement",
+    "Le pourcentage d'identité de l'alignement",
+    "Une probabilité de 30 % que l'alignement soit juste"
+   ],
+   "answer": "A",
+   "explanation": "Plus l'E-value est faible, moins l'alignement a de chances d'être dû au hasard.",
+   "source": "Bio-informatique, famille Mount (Bioinformatics)",
+   "verif": "import"
+  },
+  {
+   "course": "l3-bio",
+   "category": "Génie génétique : plasmides, enzymes de restriction",
+   "difficulty": 1,
+   "question": "Que reconnaît une enzyme de restriction de type II ?",
+   "choices": [
+    "Une séquence d'ARN messager",
+    "Un promoteur d'ARN polymérase",
+    "Une extrémité de protéine",
+    "Une séquence palindromique spécifique d'ADN"
+   ],
+   "answer": "D",
+   "explanation": "Elle coupe l'ADN à l'intérieur ou près d'un site de reconnaissance palindromique.",
+   "source": "Biotechnologie moléculaire, famille Glick/Pasternak",
+   "verif": "import"
+  },
+  {
+   "course": "l3-bio",
+   "category": "Génie génétique : plasmides, enzymes de restriction",
+   "difficulty": 1,
+   "question": "Quelle enzyme soude les fragments d'ADN par liaison phosphodiester ?",
+   "choices": [
+    "La phosphatase alcaline",
+    "L'ADN ligase",
+    "La nucléase S1",
+    "La transcriptase inverse"
+   ],
+   "answer": "B",
+   "explanation": "L'ADN ligase relie le 3'-OH et le 5'-phosphate adjacents.",
+   "source": "Biotechnologie moléculaire, famille Glick/Pasternak",
+   "verif": "import"
+  },
+  {
+   "course": "l3-bio",
+   "category": "Génie génétique : plasmides, enzymes de restriction",
+   "difficulty": 1,
+   "question": "Qu'est-ce qu'un plasmide bactérien ?",
+   "choices": [
+    "Un ribosome libre",
+    "Un chromosome linéaire",
+    "Une molécule d'ADN circulaire à réplication autonome",
+    "Un fragment de paroi cellulaire"
+   ],
+   "answer": "C",
+   "explanation": "Les plasmides sont des éléments extrachromosomiques souvent utilisés comme vecteurs de clonage.",
+   "source": "Biotechnologie moléculaire, famille Glick/Pasternak",
+   "verif": "import"
+  },
+  {
+   "course": "l3-bio",
+   "category": "Génie génétique : plasmides, enzymes de restriction",
+   "difficulty": 3,
+   "question": "Quelle séquence est reconnue par l'enzyme EcoRI ?",
+   "choices": [
+    "AAGCTT",
+    "GGATCC",
+    "GAATTC",
+    "CCCGGG"
+   ],
+   "answer": "C",
+   "explanation": "EcoRI coupe entre G et A du site GAATTC ; les autres sont BamHI, HindIII et SmaI.",
+   "source": "Biotechnologie moléculaire, famille Glick/Pasternak",
+   "verif": "import"
+  },
+  {
+   "course": "l3-bio",
+   "category": "Génie génétique : plasmides, enzymes de restriction",
+   "difficulty": 4,
+   "question": "Sur un milieu contenant du X-gal et de l'IPTG, que signifie une colonie blanche avec un vecteur de type pUC ?",
+   "choices": [
+    "Le vecteur est dépourvu du gène de résistance",
+    "La cellule a perdu son plasmide",
+    "La β-galactosidase est surexprimée",
+    "Une insertion a interrompu lacZα du vecteur"
+   ],
+   "answer": "D",
+   "explanation": "Sans lacZα fonctionnel, le X-gal n'est pas hydrolysé et la colonie reste blanche.",
+   "source": "Biotechnologie moléculaire, famille Glick/Pasternak",
+   "verif": "import"
+  },
+  {
+   "course": "l3-bio",
+   "category": "Protéomique et techniques d'analyse (électrophorèse, chromatographie)",
+   "difficulty": 1,
+   "question": "Selon quelle propriété la SDS-PAGE sépare-t-elle les protéines ?",
+   "choices": [
+    "Leur affinité pour un ligand",
+    "Leur point isoélectrique",
+    "Leur masse moléculaire",
+    "Leur hydrophobicité"
+   ],
+   "answer": "C",
+   "explanation": "Le SDS dénature et charge uniformément les protéines : la migration dépend de leur taille.",
+   "source": "Biochimie, famille Voet",
+   "verif": "import"
+  },
+  {
+   "course": "l3-bio",
+   "category": "Protéomique et techniques d'analyse (électrophorèse, chromatographie)",
+   "difficulty": 2,
+   "question": "Selon quelle propriété la focalisation isoélectrique sépare-t-elle les protéines ?",
+   "choices": [
+    "Leur masse moléculaire",
+    "Leur spécificité enzymatique",
+    "Leur solubilité dans l'eau",
+    "Leur point isoélectrique"
+   ],
+   "answer": "D",
+   "explanation": "Chaque protéine migre dans un gradient de pH jusqu'à son pH égal à son pI.",
+   "source": "Biochimie, famille Voet",
+   "verif": "import"
+  },
+  {
+   "course": "l3-bio",
+   "category": "Protéomique et techniques d'analyse (électrophorèse, chromatographie)",
+   "difficulty": 3,
+   "question": "Dans une chromatographie d'exclusion stérique, quelles molécules sont éluées en premier ?",
+   "choices": [
+    "Les plus petites",
+    "Les plus chargées",
+    "Les plus grosses",
+    "Les plus hydrophobes"
+   ],
+   "answer": "C",
+   "explanation": "Les grosses molécules n'entrent pas dans les pores du gel et traversent la colonne plus vite.",
+   "source": "Biochimie, famille Voet",
+   "verif": "import"
+  },
+  {
+   "course": "l3-bio",
+   "category": "Protéomique et techniques d'analyse (électrophorèse, chromatographie)",
+   "difficulty": 3,
+   "question": "Quelle grandeur un spectromètre de masse mesure-t-il pour identifier un peptide ?",
+   "choices": [
+    "Le volume d'élution",
+    "Le rapport masse sur charge (m/z)",
+    "Le coefficient de sédimentation",
+    "Le point isoélectrique"
+   ],
+   "answer": "B",
+   "explanation": "Le spectromètre sépare les ions selon leur rapport m/z.",
+   "source": "Biochimie, famille Voet",
+   "verif": "import"
+  },
+  {
+   "course": "l3-bio",
+   "category": "Protéomique et techniques d'analyse (électrophorèse, chromatographie)",
+   "difficulty": 4,
+   "question": "Comment élue-t-on une protéine à étiquette poly-histidine fixée sur une colonne Ni-NTA ?",
+   "choices": [
+    "Avec du glucose",
+    "Avec une baisse de la température à 4 °C",
+    "Avec un excès d'imidazole en compétition",
+    "Avec une forte concentration de SDS"
+   ],
+   "answer": "C",
+   "explanation": "L'imidazole entre en compétition avec les histidines pour le nickel et libère la protéine.",
+   "source": "Biochimie, famille Voet",
+   "verif": "import"
+  },
+  {
+   "course": "l3-bio",
+   "category": "Biochimie métabolique : glycolyse, cycle de Krebs, chaîne respiratoire",
+   "difficulty": 1,
+   "question": "Dans quel compartiment cellulaire se déroule la glycolyse ?",
+   "choices": [
+    "La membrane interne mitochondriale",
+    "Le noyau",
+    "Le cytosol",
+    "La matrice mitochondriale"
+   ],
+   "answer": "C",
+   "explanation": "Toutes les enzymes de la glycolyse sont cytosoliques.",
+   "source": "Biochimie, famille Stryer/Lehninger",
+   "verif": "import"
+  },
+  {
+   "course": "l3-bio",
+   "category": "Biochimie métabolique : glycolyse, cycle de Krebs, chaîne respiratoire",
+   "difficulty": 1,
+   "question": "Quel est le bilan net en ATP de la glycolyse par molécule de glucose ?",
+   "choices": [
+    "1 ATP",
+    "2 ATP",
+    "36 ATP",
+    "4 ATP"
+   ],
+   "answer": "B",
+   "explanation": "Deux ATP sont consommés puis quatre sont produits : gain net de 2 ATP.",
+   "source": "Biochimie, famille Stryer/Lehninger",
+   "verif": "import"
+  },
+  {
+   "course": "l3-bio",
+   "category": "Biochimie métabolique : glycolyse, cycle de Krebs, chaîne respiratoire",
+   "difficulty": 2,
+   "question": "Quelle enzyme catalyse la condensation de l'acétyl-CoA avec l'oxaloacétate ?",
+   "choices": [
+    "L'aconitase",
+    "La malate déshydrogénase",
+    "La citrate synthase",
+    "La pyruvate kinase"
+   ],
+   "answer": "C",
+   "explanation": "La citrate synthase forme le citrate, première étape du cycle de Krebs.",
+   "source": "Biochimie, famille Stryer/Lehninger",
+   "verif": "import"
+  },
+  {
+   "course": "l3-bio",
+   "category": "Biochimie métabolique : glycolyse, cycle de Krebs, chaîne respiratoire",
+   "difficulty": 2,
+   "question": "Quelle réaction catalyse le complexe IV de la chaîne respiratoire ?",
+   "choices": [
+    "L'oxydation du succinate en fumarate",
+    "La réduction de l'O2 en eau",
+    "La synthèse d'ATP",
+    "L'oxydation du NADH par l'ubiquinone"
+   ],
+   "answer": "B",
+   "explanation": "La cytochrome c oxydase transfère les électrons à l'oxygène, accepteur final.",
+   "source": "Biochimie, famille Stryer/Lehninger",
+   "verif": "import"
+  },
+  {
+   "course": "l3-bio",
+   "category": "Biochimie métabolique : glycolyse, cycle de Krebs, chaîne respiratoire",
+   "difficulty": 5,
+   "question": "Quel est l'effet du 2,4-dinitrophénol sur les mitochondries ?",
+   "choices": [
+    "Il bloque le complexe I",
+    "Il inhibe l'ATP synthase par fixation sur F0",
+    "Il empêche l'entrée du pyruvate",
+    "Il dissipe le gradient de protons et découple la synthèse d'ATP"
+   ],
+   "answer": "D",
+   "explanation": "Les protons traversent la membrane sans passer par l'ATP synthase : l'oxygène est consommé sans produire d'ATP.",
+   "source": "Biochimie, famille Stryer/Lehninger",
+   "verif": "import"
+  },
+  {
+   "course": "l3-bio",
+   "category": "Métabolisme des lipides et des acides aminés",
+   "difficulty": 1,
+   "question": "Quel est le produit principal de la β-oxydation des acides gras ?",
+   "choices": [
+    "L'acétyl-CoA",
+    "Le pyruvate",
+    "Le glycérol",
+    "L'oxaloacétate"
+   ],
+   "answer": "A",
+   "explanation": "Chaque tour de β-oxydation libère un acétyl-CoA, avec du NADH et du FADH2.",
+   "source": "Biochimie, famille Stryer/Lehninger",
+   "verif": "import"
+  },
+  {
+   "course": "l3-bio",
+   "category": "Métabolisme des lipides et des acides aminés",
+   "difficulty": 2,
+   "question": "Quel système permet l'entrée des acides gras à longue chaîne dans la matrice mitochondriale ?",
+   "choices": [
+    "La navette malate-aspartate",
+    "La navette de la carnitine",
+    "Le transporteur ADP/ATP",
+    "Le cycle de l'urée"
+   ],
+   "answer": "B",
+   "explanation": "La carnitine acyltransférase transporte les groupements acyle à travers la membrane interne.",
+   "source": "Biochimie, famille Stryer/Lehninger",
+   "verif": "import"
+  },
+  {
+   "course": "l3-bio",
+   "category": "Métabolisme des lipides et des acides aminés",
+   "difficulty": 2,
+   "question": "Quel coenzyme est indispensable aux aminotransférases lors de la transamination ?",
+   "choices": [
+    "Le tétrahydrofolate",
+    "Le phosphate de pyridoxal",
+    "Le thiamine pyrophosphate",
+    "La biotine"
+   ],
+   "answer": "B",
+   "explanation": "Le phosphate de pyridoxal, dérivé de la vitamine B6, transfère le groupement amine.",
+   "source": "Biochimie, famille Stryer/Lehninger",
+   "verif": "import"
+  },
+  {
+   "course": "l3-bio",
+   "category": "Métabolisme des lipides et des acides aminés",
+   "difficulty": 3,
+   "question": "Quelle enzyme catalyse la première étape du cycle de l'urée dans la mitochondrie ?",
+   "choices": [
+    "La glutamine synthétase",
+    "L'argininosuccinate lyase",
+    "L'arginase",
+    "La carbamoyl-phosphate synthétase I"
+   ],
+   "answer": "D",
+   "explanation": "Elle forme le carbamoyl-phosphate à partir de NH4+, CO2 et ATP.",
+   "source": "Biochimie, famille Stryer/Lehninger",
+   "verif": "import"
+  },
+  {
+   "course": "l3-bio",
+   "category": "Métabolisme des lipides et des acides aminés",
+   "difficulty": 5,
+   "question": "Pourquoi le foie ne peut-il pas utiliser les corps cétoniques qu'il synthétise ?",
+   "choices": [
+    "Il est dépourvu de l'enzyme qui les active en acyl-CoA",
+    "Il élimine les corps cétoniques avant leur synthèse",
+    "Il ne possède pas d'acétyl-CoA",
+    "Il manque de mitochondries"
+   ],
+   "answer": "A",
+   "explanation": "Le foie n'exprime pas la CoA-transférase nécessaire à leur activation : ils sont exportés vers les tissus périphériques.",
+   "source": "Biochimie, famille Stryer/Lehninger",
+   "verif": "import"
+  },
+  {
+   "course": "l3-bio",
+   "category": "Régulation hormonale du métabolisme",
+   "difficulty": 1,
+   "question": "Quelles cellules du pancréas sécrètent l'insuline ?",
+   "choices": [
+    "Les cellules β des îlots de Langerhans",
+    "Les cellules acineuses",
+    "Les cellules des canaux pancréatiques",
+    "Les cellules α des îlots de Langerhans"
+   ],
+   "answer": "A",
+   "explanation": "Les cellules β sécrètent l'insuline ; les cellules α sécrètent le glucagon.",
+   "source": "Physiologie animale, famille Sherwood",
+   "verif": "import"
+  },
+  {
+   "course": "l3-bio",
+   "category": "Régulation hormonale du métabolisme",
+   "difficulty": 1,
+   "question": "Quel est l'effet principal du glucagon sur le foie ?",
+   "choices": [
+    "Il stimule la glycogénolyse et la néoglucogenèse",
+    "Il inhibe la libération de glucose",
+    "Il stimule la lipogenèse",
+    "Il stimule la glycogénèse"
+   ],
+   "answer": "A",
+   "explanation": "Le glucagon élève la glycémie en mobilisant le glucose hépatique.",
+   "source": "Physiologie animale, famille Sherwood",
+   "verif": "import"
+  },
+  {
+   "course": "l3-bio",
+   "category": "Régulation hormonale du métabolisme",
+   "difficulty": 3,
+   "question": "Quel transporteur de glucose insulino-dépendant est mobilisé vers la membrane du muscle et du tissu adipeux ?",
+   "choices": [
+    "GLUT3",
+    "GLUT2",
+    "GLUT1",
+    "GLUT4"
+   ],
+   "answer": "D",
+   "explanation": "L'insuline provoque la translocation de vésicules contenant GLUT4 vers la membrane plasmique.",
+   "source": "Physiologie animale, famille Sherwood",
+   "verif": "import"
+  },
+  {
+   "course": "l3-bio",
+   "category": "Régulation hormonale du métabolisme",
+   "difficulty": 2,
+   "question": "Quelle enzyme du glycogène, activée par phosphorylation, libère du glucose-1-phosphate ?",
+   "choices": [
+    "La glucose-6-phosphatase",
+    "La glycogène phosphorylase",
+    "La glycogène synthase",
+    "L'enzyme branchante"
+   ],
+   "answer": "B",
+   "explanation": "Sous l'effet de l'adrénaline ou du glucagon, la phosphorylase kinase active la glycogène phosphorylase.",
+   "source": "Physiologie animale, famille Sherwood",
+   "verif": "import"
+  },
+  {
+   "course": "l3-bio",
+   "category": "Régulation hormonale du métabolisme",
+   "difficulty": 4,
+   "question": "Quel est le rôle du fructose-2,6-bisphosphate dans le foie ?",
+   "choices": [
+    "Il active la fructose-1,6-bisphosphatase",
+    "Il active la glycogène phosphorylase",
+    "Il active la PFK-1 et favorise la glycolyse",
+    "Il inhibe la PFK-1"
+   ],
+   "answer": "C",
+   "explanation": "Ce régulateur allostérique active la PFK-1 et inhibe la FBPase-1 quand l'insuline domine.",
+   "source": "Biochimie, famille Stryer/Lehninger",
+   "verif": "import"
+  },
+  {
+   "course": "l3-bio",
+   "category": "Immunologie avancée : complexe majeur d'histocompatibilité, anticorps",
+   "difficulty": 1,
+   "question": "De quels types de chaînes une immunoglobuline G est-elle constituée ?",
+   "choices": [
+    "Deux chaînes α et deux chaînes β",
+    "Une chaîne lourde et une chaîne légère",
+    "Quatre chaînes lourdes identiques",
+    "Deux chaînes lourdes et deux chaînes légères"
+   ],
+   "answer": "D",
+   "explanation": "Quatre chaînes reliées par des ponts disulfure forment la structure en Y.",
+   "source": "Immunologie, famille Janeway/Abbas",
+   "verif": "import"
+  },
+  {
+   "course": "l3-bio",
+   "category": "Immunologie avancée : complexe majeur d'histocompatibilité, anticorps",
+   "difficulty": 2,
+   "question": "À quels lymphocytes T les molécules du CMH de classe I présentent-elles des peptides ?",
+   "choices": [
+    "Les cellules NK",
+    "Les lymphocytes B",
+    "Les lymphocytes T CD4+",
+    "Les lymphocytes T CD8+"
+   ],
+   "answer": "D",
+   "explanation": "Le CMH I interagit avec le corécepteur CD8 ; le CMH II avec CD4.",
+   "source": "Immunologie, famille Janeway/Abbas",
+   "verif": "import"
+  },
+  {
+   "course": "l3-bio",
+   "category": "Immunologie avancée : complexe majeur d'histocompatibilité, anticorps",
+   "difficulty": 2,
+   "question": "Quelle classe d'immunoglobulines est sécrétée sous forme pentamérique ?",
+   "choices": [
+    "Les IgM",
+    "Les IgE",
+    "Les IgG",
+    "Les IgD"
+   ],
+   "answer": "A",
+   "explanation": "Les IgM forment des pentamères reliés par la chaîne J et dominent la réponse primaire.",
+   "source": "Immunologie, famille Janeway/Abbas",
+   "verif": "import"
+  },
+  {
+   "course": "l3-bio",
+   "category": "Immunologie avancée : complexe majeur d'histocompatibilité, anticorps",
+   "difficulty": 3,
+   "question": "Quelles régions de l'anticorps déterminent sa spécificité antigénique ?",
+   "choices": [
+    "Les domaines constants CH2 et CH3",
+    "Les régions hypervariables VH et VL",
+    "La région charnière",
+    "La chaîne J"
+   ],
+   "answer": "B",
+   "explanation": "Les CDR des domaines variables forment le site de liaison à l'antigène.",
+   "source": "Immunologie, famille Janeway/Abbas",
+   "verif": "import"
+  },
+  {
+   "course": "l3-bio",
+   "category": "Immunologie avancée : complexe majeur d'histocompatibilité, anticorps",
+   "difficulty": 5,
+   "question": "Quelles enzymes initient la recombinaison V(D)J ?",
+   "choices": [
+    "La topoisomérase II",
+    "La télomérase",
+    "RAG1 et RAG2",
+    "AID"
+   ],
+   "answer": "C",
+   "explanation": "RAG1/RAG2 coupent l'ADN aux séquences signal de recombinaison, générant la diversité des récepteurs.",
+   "source": "Immunologie, famille Janeway/Abbas",
+   "verif": "import"
+  },
+  {
+   "course": "l3-bio",
+   "category": "Virologie : VIH, hépatites, virus émergents",
+   "difficulty": 1,
+   "question": "Quelle enzyme virale permet au VIH de convertir son ARN en ADN ?",
+   "choices": [
+    "L'hélicase",
+    "L'ARN polymérase ARN-dépendante",
+    "La transcriptase inverse",
+    "La neuraminidase"
+   ],
+   "answer": "C",
+   "explanation": "Le VIH est un rétrovirus : sa transcriptase inverse synthétise un ADN proviral.",
+   "source": "Virologie, famille Flint (Principles of Virology)",
+   "verif": "import"
+  },
+  {
+   "course": "l3-bio",
+   "category": "Virologie : VIH, hépatites, virus émergents",
+   "difficulty": 2,
+   "question": "Quelles molécules de surface le VIH utilise-t-il pour entrer dans la cellule ?",
+   "choices": [
+    "CD4 et un corécepteur CCR5 ou CXCR4",
+    "Le récepteur de la transferrine uniquement",
+    "CD8 et CD3",
+    "Le CMH de classe II seul"
+   ],
+   "answer": "A",
+   "explanation": "La gp120 se lie à CD4 puis à un corécepteur chimiokine.",
+   "source": "Virologie, famille Flint (Principles of Virology)",
+   "verif": "import"
+  },
+  {
+   "course": "l3-bio",
+   "category": "Virologie : VIH, hépatites, virus émergents",
+   "difficulty": 3,
+   "question": "Quel est le type de génome du virus de l'hépatite B ?",
+   "choices": [
+    "De l'ADN circulaire partiellement bicaténaire",
+    "De l'ARN double brin segmenté",
+    "De l'ADN simple brin linéaire",
+    "De l'ARN simple brin de polarité positive"
+   ],
+   "answer": "A",
+   "explanation": "Le VHB est un Hepadnaviridae qui se réplique par transcription inverse d'un ARN intermédiaire.",
+   "source": "Virologie, famille Flint (Principles of Virology)",
+   "verif": "import"
+  },
+  {
+   "course": "l3-bio",
+   "category": "Virologie : VIH, hépatites, virus émergents",
+   "difficulty": 3,
+   "question": "Quel génome possède le virus Ebola ?",
+   "choices": [
+    "De l'ARN simple brin de polarité négative",
+    "De l'ARN simple brin de polarité positive",
+    "De l'ADN simple brin",
+    "De l'ADN double brin"
+   ],
+   "answer": "A",
+   "explanation": "Ebola est un Filoviridae à ARN monocaténaire négatif non segmenté.",
+   "source": "Virologie, famille Flint (Principles of Virology)",
+   "verif": "import"
+  },
+  {
+   "course": "l3-bio",
+   "category": "Virologie : VIH, hépatites, virus émergents",
+   "difficulty": 4,
+   "question": "Quelle est la cible des inhibiteurs de protéase utilisés contre le VIH ?",
+   "choices": [
+    "La transcription inverse",
+    "Le clivage des polyprotéines Gag-Pol",
+    "L'intégration de l'ADN proviral",
+    "L'entrée du virus par CCR5"
+   ],
+   "answer": "B",
+   "explanation": "Sans protéase, les particules produites restent immatures et non infectieuses.",
+   "source": "Virologie, famille Flint (Principles of Virology)",
+   "verif": "import"
+  },
+  {
+   "course": "l3-bio",
+   "category": "Microbiologie médicale : résistance aux antibiotiques",
+   "difficulty": 1,
+   "question": "Quelle réaction catalysent les β-lactamases ?",
+   "choices": [
+    "L'acétylation du chloramphénicol",
+    "La méthylation de l'ARNr 23S",
+    "L'hydrolyse du cycle β-lactame",
+    "La phosphorylation d'un aminoside"
+   ],
+   "answer": "C",
+   "explanation": "L'ouverture du cycle β-lactame inactive pénicillines et céphalosporines.",
+   "source": "Microbiologie, famille Madigan/Prescott",
+   "verif": "import"
+  },
+  {
+   "course": "l3-bio",
+   "category": "Microbiologie médicale : résistance aux antibiotiques",
+   "difficulty": 2,
+   "question": "Quel mécanisme de transfert horizontal repose sur un contact direct par un pilus sexuel ?",
+   "choices": [
+    "La transduction",
+    "La conjugaison",
+    "La transformation",
+    "La scission binaire"
+   ],
+   "answer": "B",
+   "explanation": "La conjugaison transfère un plasmide d'une bactérie donneuse à une receveuse.",
+   "source": "Microbiologie, famille Madigan/Prescott",
+   "verif": "import"
+  },
+  {
+   "course": "l3-bio",
+   "category": "Microbiologie médicale : résistance aux antibiotiques",
+   "difficulty": 3,
+   "question": "Quelle protéine confère la résistance à la méticilline chez Staphylococcus aureus résistant (SARM) ?",
+   "choices": [
+    "La protéine A",
+    "La PBP2a codée par mecA",
+    "Une pompe d'efflux Tet",
+    "Une β-lactamase codée par blaZ"
+   ],
+   "answer": "B",
+   "explanation": "La PBP2a a une faible affinité pour les β-lactamines et assure la synthèse du peptidoglycane.",
+   "source": "Microbiologie, famille Madigan/Prescott",
+   "verif": "import"
+  },
+  {
+   "course": "l3-bio",
+   "category": "Microbiologie médicale : résistance aux antibiotiques",
+   "difficulty": 2,
+   "question": "Comment agit une pompe d'efflux dans la résistance aux antibiotiques ?",
+   "choices": [
+    "Elle fixe l'antibiotique sur la paroi",
+    "Elle bloque l'entrée des phages",
+    "Elle expulse l'antibiotique hors de la bactérie",
+    "Elle détruit l'antibiotique dans le milieu"
+   ],
+   "answer": "C",
+   "explanation": "L'expulsion active maintient une concentration intracellulaire insuffisante.",
+   "source": "Microbiologie, famille Madigan/Prescott",
+   "verif": "import"
+  },
+  {
+   "course": "l3-bio",
+   "category": "Microbiologie médicale : résistance aux antibiotiques",
+   "difficulty": 5,
+   "question": "Pourquoi les mycoplasmes sont-ils naturellement résistants aux β-lactamines ?",
+   "choices": [
+    "Ils possèdent une capsule épaisse",
+    "Ils produisent beaucoup de β-lactamases",
+    "Ils vivent exclusivement en anaérobiose",
+    "Ils n'ont pas de paroi de peptidoglycane"
+   ],
+   "answer": "D",
+   "explanation": "Les β-lactamines inhibent la synthèse du peptidoglycane, absent chez les mycoplasmes.",
+   "source": "Microbiologie, famille Madigan/Prescott",
+   "verif": "import"
+  },
+  {
+   "course": "l3-bio",
+   "category": "Parasitologie et maladies tropicales négligées",
+   "difficulty": 1,
+   "question": "Quel vecteur transmet Plasmodium falciparum à l'homme ?",
+   "choices": [
+    "La simulie",
+    "L'anophèle femelle",
+    "La glossine",
+    "Le phlébotome"
+   ],
+   "answer": "B",
+   "explanation": "Seules les femelles du genre Anopheles piquent et transmettent le paludisme.",
+   "source": "Parasitologie médicale, famille Golvan/Bussieras",
+   "verif": "import"
+  },
+  {
+   "course": "l3-bio",
+   "category": "Parasitologie et maladies tropicales négligées",
+   "difficulty": 3,
+   "question": "Quel mollusque est l'hôte intermédiaire de Schistosoma haematobium ?",
+   "choices": [
+    "Lymnaea",
+    "Oncomelania",
+    "Biomphalaria",
+    "Bulinus"
+   ],
+   "answer": "D",
+   "explanation": "Bulinus pour S. haematobium ; Biomphalaria pour S. mansoni.",
+   "source": "Parasitologie médicale, famille Golvan/Bussieras",
+   "verif": "import"
+  },
+  {
+   "course": "l3-bio",
+   "category": "Parasitologie et maladies tropicales négligées",
+   "difficulty": 2,
+   "question": "Quel insecte transmet Onchocerca volvulus, agent de l'onchocercose ?",
+   "choices": [
+    "La glossine",
+    "Le chrysops",
+    "La simulie",
+    "L'anophèle"
+   ],
+   "answer": "C",
+   "explanation": "Les simulies, ou mouches noires, se développent dans les eaux courantes.",
+   "source": "Parasitologie médicale, famille Golvan/Bussieras",
+   "verif": "import"
+  },
+  {
+   "course": "l3-bio",
+   "category": "Parasitologie et maladies tropicales négligées",
+   "difficulty": 4,
+   "question": "Quelle forme hépatique de Plasmodium vivax explique les rechutes tardives ?",
+   "choices": [
+    "Le mérozoïte",
+    "L'hypnozoïte",
+    "Le gamétocyte",
+    "Le sporozoïte"
+   ],
+   "answer": "B",
+   "explanation": "Les hypnozoïtes dormants peuvent se réactiver des mois plus tard.",
+   "source": "Parasitologie médicale, famille Golvan/Bussieras",
+   "verif": "import"
+  },
+  {
+   "course": "l3-bio",
+   "category": "Physiologie comparée",
+   "difficulty": 1,
+   "question": "Sous quelle forme les poissons osseux excrètent-ils principalement leurs déchets azotés ?",
+   "choices": [
+    "De l'acide urique",
+    "De la créatinine",
+    "De l'ammoniac",
+    "De l'urée"
+   ],
+   "answer": "C",
+   "explanation": "L'ammoniac, très toxique mais très soluble, est éliminé par les branchies dans l'eau.",
+   "source": "Physiologie animale comparée, famille Randall/Eckert",
+   "verif": "import"
+  },
+  {
+   "course": "l3-bio",
+   "category": "Physiologie comparée",
+   "difficulty": 3,
+   "question": "Quel principe explique l'efficacité des échanges gazeux des branchies de poisson ?",
+   "choices": [
+    "Une diffusion passive sans circulation d'eau",
+    "Une circulation à contre-courant eau-sang",
+    "Une respiration par la peau uniquement",
+    "Une circulation à co-courant eau-sang"
+   ],
+   "answer": "B",
+   "explanation": "Le contre-courant maintient un gradient de pression partielle d'O2 sur toute la lamelle.",
+   "source": "Physiologie animale comparée, famille Randall/Eckert",
+   "verif": "import"
+  },
+  {
+   "course": "l3-bio",
+   "category": "Physiologie comparée",
+   "difficulty": 2,
+   "question": "Quel compartiment de l'estomac des ruminants est le siège principal de la fermentation microbienne ?",
+   "choices": [
+    "Le feuillet",
+    "Le gésier",
+    "Le rumen (panse)",
+    "L'abomasum (caillette)"
+   ],
+   "answer": "C",
+   "explanation": "Les microbes du rumen dégradent la cellulose en acides gras volatils.",
+   "source": "Physiologie animale comparée, famille Randall/Eckert",
+   "verif": "import"
+  },
+  {
+   "course": "l3-bio",
+   "category": "Physiologie comparée",
+   "difficulty": 4,
+   "question": "Quel groupe de reptiles possède un cœur à deux ventricules complètement séparés ?",
+   "choices": [
+    "Les serpents",
+    "Les tortues",
+    "Les crocodiliens",
+    "Les lézards"
+   ],
+   "answer": "C",
+   "explanation": "Seuls les crocodiliens ont un ventricule cloisonné, comme les oiseaux et les mammifères.",
+   "source": "Physiologie animale comparée, famille Randall/Eckert",
+   "verif": "import"
+  },
+  {
+   "course": "l3-bio",
+   "category": "Écologie des populations et des communautés",
+   "difficulty": 1,
+   "question": "Comment définit-on la niche écologique d'une espèce ?",
+   "choices": [
+    "Son rang taxonomique",
+    "L'ensemble des conditions et ressources qu'elle utilise",
+    "Le lieu où elle vit uniquement",
+    "Son nombre d'individus"
+   ],
+   "answer": "B",
+   "explanation": "La niche inclut les facteurs abiotiques et biotiques exploités par l'espèce.",
+   "source": "Écologie, famille Ricklefs/Begon",
+   "verif": "import"
+  },
+  {
+   "course": "l3-bio",
+   "category": "Écologie des populations et des communautés",
+   "difficulty": 1,
+   "question": "Que représente K dans le modèle de croissance logistique ?",
+   "choices": [
+    "Le nombre de naissances",
+    "Le taux de mortalité",
+    "La capacité limite du milieu",
+    "Le taux de croissance maximal"
+   ],
+   "answer": "C",
+   "explanation": "K est l'effectif maximal soutenable par le milieu à long terme.",
+   "source": "Écologie, famille Ricklefs/Begon",
+   "verif": "import"
+  },
+  {
+   "course": "l3-bio",
+   "category": "Écologie des populations et des communautés",
+   "difficulty": 3,
+   "question": "Quelle combinaison caractérise une espèce de stratégie r ?",
+   "choices": [
+    "Maturité tardive, peu de petits, soins parentaux importants",
+    "Reproduction unique à un âge avancé",
+    "Longue durée de vie, population stable près de K",
+    "Reproduction précoce, nombreux petits, faible soin parental"
+   ],
+   "answer": "D",
+   "explanation": "Les espèces r maximisent le taux de croissance en milieu instable.",
+   "source": "Écologie, famille Ricklefs/Begon",
+   "verif": "import"
+  },
+  {
+   "course": "l3-bio",
+   "category": "Écologie des populations et des communautés",
+   "difficulty": 4,
+   "question": "Que prédit le modèle de Lotka-Volterra pour un système proie-prédateur simple ?",
+   "choices": [
+    "Une disparition immédiate des proies",
+    "Des oscillations décalées des deux effectifs",
+    "Une croissance exponentielle des deux populations",
+    "Un équilibre fixe sans variation"
+   ],
+   "answer": "B",
+   "explanation": "Les effectifs des proies et des prédateurs oscillent avec un décalage de phase.",
+   "source": "Écologie, famille Ricklefs/Begon",
+   "verif": "import"
+  },
+  {
+   "course": "l3-bio",
+   "category": "Biodiversité et conservation en Afrique centrale",
+   "difficulty": 1,
+   "question": "Quel fleuve donne son nom au grand bassin forestier d'Afrique centrale ?",
+   "choices": [
+    "Le Nil",
+    "Le Niger",
+    "Le Congo",
+    "Le Zambèze"
+   ],
+   "answer": "C",
+   "explanation": "Le bassin du Congo abrite l'une des grandes forêts tropicales humides du monde.",
+   "source": "Biologie de la conservation, famille Primack",
+   "verif": "import"
+  },
+  {
+   "course": "l3-bio",
+   "category": "Biodiversité et conservation en Afrique centrale",
+   "difficulty": 1,
+   "question": "Qu'est-ce qu'une espèce endémique ?",
+   "choices": [
+    "Une espèce limitée à une aire géographique donnée",
+    "Une espèce introduite par l'homme",
+    "Une espèce migratrice",
+    "Une espèce menacée dans le monde entier"
+   ],
+   "answer": "A",
+   "explanation": "L'endémisme désigne une distribution restreinte à une région précise.",
+   "source": "Biologie de la conservation, famille Primack",
+   "verif": "import"
+  },
+  {
+   "course": "l3-bio",
+   "category": "Biodiversité et conservation en Afrique centrale",
+   "difficulty": 3,
+   "question": "Quel grand singe est endémique de la République démocratique du Congo ?",
+   "choices": [
+    "Le gorille de l'Ouest",
+    "Le chimpanzé commun",
+    "Le bonobo",
+    "Le gorille de montagne"
+   ],
+   "answer": "C",
+   "explanation": "Pan paniscus vit uniquement en RDC, au sud du fleuve Congo.",
+   "source": "Biologie de la conservation, famille Primack",
+   "verif": "import"
+  },
+  {
+   "course": "l3-bio",
+   "category": "Biodiversité et conservation en Afrique centrale",
+   "difficulty": 3,
+   "question": "Dans la Liste rouge de l'UICN, quelle catégorie correspond au risque d'extinction le plus élevé parmi celles-ci ?",
+   "choices": [
+    "En danger",
+    "Vulnérable",
+    "Quasi menacé",
+    "En danger critique"
+   ],
+   "answer": "D",
+   "explanation": "La gravité croît de quasi menacé à vulnérable, en danger, puis en danger critique.",
+   "source": "Biologie de la conservation, famille Primack",
+   "verif": "import"
+  },
+  {
+   "course": "l3-bio",
+   "category": "Biologie du développement : embryogenèse et gènes Hox",
+   "difficulty": 1,
+   "question": "Quel processus embryonnaire met en place les trois feuillets germinaux ?",
+   "choices": [
+    "La segmentation",
+    "La neurulation",
+    "La fécondation",
+    "La gastrulation"
+   ],
+   "answer": "D",
+   "explanation": "La gastrulation forme ectoderme, mésoderme et endoderme.",
+   "source": "Biologie du développement, famille Gilbert",
+   "verif": "import"
+  },
+  {
+   "course": "l3-bio",
+   "category": "Biologie du développement : embryogenèse et gènes Hox",
+   "difficulty": 2,
+   "question": "Quel motif de liaison à l'ADN les gènes Hox codent-ils ?",
+   "choices": [
+    "Le domaine bHLH",
+    "Le doigt de zinc de type C2H2",
+    "L'homéodomaine",
+    "La fermeture éclair à leucine"
+   ],
+   "answer": "C",
+   "explanation": "Les protéines Hox sont des facteurs de transcription à homéodomaine.",
+   "source": "Biologie du développement, famille Gilbert",
+   "verif": "import"
+  },
+  {
+   "course": "l3-bio",
+   "category": "Biologie du développement : embryogenèse et gènes Hox",
+   "difficulty": 3,
+   "question": "Que traduit la colinéarité des gènes Hox ?",
+   "choices": [
+    "L'expression ne dépend pas de la position",
+    "Ces gènes s'expriment à la même position",
+    "Chaque gène code un feuillet germinal",
+    "L'ordre des gènes sur le chromosome suit l'axe antéro-postérieur"
+   ],
+   "answer": "D",
+   "explanation": "Les gènes en 3' s'expriment plus antérieurement, ceux en 5' plus postérieurement.",
+   "source": "Biologie du développement, famille Gilbert",
+   "verif": "import"
+  },
+  {
+   "course": "l3-bio",
+   "category": "Biologie du développement : embryogenèse et gènes Hox",
+   "difficulty": 1,
+   "question": "Quel feuillet embryonnaire donne naissance au tube neural ?",
+   "choices": [
+    "L'ectoderme",
+    "Le trophoblaste",
+    "Le mésoderme",
+    "L'endoderme"
+   ],
+   "answer": "A",
+   "explanation": "La plaque neurale dérive de l'ectoderme.",
+   "source": "Biologie du développement, famille Gilbert",
+   "verif": "import"
+  },
+  {
+   "course": "l3-bio",
+   "category": "Biologie du développement : embryogenèse et gènes Hox",
+   "difficulty": 4,
+   "question": "Que provoque la mutation Antennapedia chez la drosophile ?",
+   "choices": [
+    "Des ailes supplémentaires sur l'abdomen",
+    "Des yeux supplémentaires",
+    "L'absence de segments thoraciques",
+    "Des pattes à la place des antennes"
+   ],
+   "answer": "D",
+   "explanation": "Cette transformation homéotique résulte d'une expression ectopique d'un gène Hox dans la tête.",
+   "source": "Biologie du développement, famille Gilbert",
+   "verif": "import"
+  },
+  {
+   "course": "l3-bio",
+   "category": "Physiologie végétale : hormones et stress",
+   "difficulty": 1,
+   "question": "Quelle hormone végétale favorise l'élongation cellulaire et la dominance apicale ?",
+   "choices": [
+    "L'acide abscissique",
+    "L'éthylène",
+    "L'auxine",
+    "La cytokinine"
+   ],
+   "answer": "C",
+   "explanation": "L'auxine, produite surtout dans l'apex, inhibe le développement des bourgeons latéraux.",
+   "source": "Botanique et physiologie végétale, famille Raven",
+   "verif": "import"
+  },
+  {
+   "course": "l3-bio",
+   "category": "Physiologie végétale : hormones et stress",
+   "difficulty": 1,
+   "question": "Quelle hormone provoque la fermeture des stomates lors d'un stress hydrique ?",
+   "choices": [
+    "L'auxine",
+    "L'acide abscissique",
+    "La gibbérelline",
+    "La cytokinine"
+   ],
+   "answer": "B",
+   "explanation": "L'ABA déclenche la perte de turgescence des cellules de garde.",
+   "source": "Botanique et physiologie végétale, famille Raven",
+   "verif": "import"
+  },
+  {
+   "course": "l3-bio",
+   "category": "Physiologie végétale : hormones et stress",
+   "difficulty": 1,
+   "question": "Quelle hormone végétale gazeuse favorise la maturation des fruits ?",
+   "choices": [
+    "L'éthylène",
+    "La gibbérelline",
+    "L'auxine",
+    "L'acide abscissique"
+   ],
+   "answer": "A",
+   "explanation": "L'éthylène, gaz, déclenche la maturation climactérique de nombreux fruits.",
+   "source": "Botanique et physiologie végétale, famille Raven",
+   "verif": "import"
+  },
+  {
+   "course": "l3-bio",
+   "category": "Physiologie végétale : hormones et stress",
+   "difficulty": 3,
+   "question": "Quelle hormone stimule la division cellulaire et retarde la sénescence des feuilles ?",
+   "choices": [
+    "La cytokinine",
+    "L'éthylène",
+    "L'acide abscissique",
+    "L'acide jasmonique"
+   ],
+   "answer": "A",
+   "explanation": "Les cytokinines agissent avec l'auxine sur la division cellulaire.",
+   "source": "Botanique et physiologie végétale, famille Raven",
+   "verif": "import"
+  },
+  {
+   "course": "l3-bio",
+   "category": "Physiologie végétale : hormones et stress",
+   "difficulty": 4,
+   "question": "Quelle hormone induit la synthèse d'α-amylase dans l'aleurone au cours de la germination des céréales ?",
+   "choices": [
+    "L'acide abscissique",
+    "La gibbérelline",
+    "L'éthylène",
+    "L'auxine"
+   ],
+   "answer": "B",
+   "explanation": "Les gibbérellines issues de l'embryon activent l'hydrolyse de l'amidon de l'albumen.",
+   "source": "Botanique et physiologie végétale, famille Raven",
+   "verif": "import"
+  },
+  {
+   "course": "l3-bio",
+   "category": "Biotechnologie agricole et sécurité alimentaire",
+   "difficulty": 1,
+   "question": "Qu'est-ce qu'un organisme génétiquement modifié (OGM) ?",
+   "choices": [
+    "Un organisme traité par des pesticides",
+    "Un organisme dont le génome est modifié par génie génétique",
+    "Un organisme cultivé hors-sol",
+    "Un organisme issu d'un croisement classique"
+   ],
+   "answer": "B",
+   "explanation": "Un OGM porte une modification précise de son génome qui ne résulte pas d'une reproduction naturelle.",
+   "source": "Biotechnologie moléculaire, famille Glick/Pasternak",
+   "verif": "import"
+  },
+  {
+   "course": "l3-bio",
+   "category": "Biotechnologie agricole et sécurité alimentaire",
+   "difficulty": 2,
+   "question": "Quel organisme est utilisé comme vecteur naturel de transfert de gènes chez les plantes ?",
+   "choices": [
+    "Agrobacterium tumefaciens",
+    "Bacillus subtilis",
+    "Escherichia coli",
+    "Saccharomyces cerevisiae"
+   ],
+   "answer": "A",
+   "explanation": "Agrobacterium transfère une région de son plasmide Ti dans le génome végétal.",
+   "source": "Biotechnologie moléculaire, famille Glick/Pasternak",
+   "verif": "import"
+  },
+  {
+   "course": "l3-bio",
+   "category": "Biotechnologie agricole et sécurité alimentaire",
+   "difficulty": 3,
+   "question": "De quel organisme provient le gène de la protéine Cry exprimée par le maïs Bt ?",
+   "choices": [
+    "Streptomyces griseus",
+    "Escherichia coli",
+    "Bacillus thuringiensis",
+    "Agrobacterium tumefaciens"
+   ],
+   "answer": "C",
+   "explanation": "La protéine Cry de B. thuringiensis est toxique pour certains insectes ravageurs.",
+   "source": "Biotechnologie moléculaire, famille Glick/Pasternak",
+   "verif": "import"
+  },
+  {
+   "course": "l3-bio",
+   "category": "Biotechnologie agricole et sécurité alimentaire",
+   "difficulty": 4,
+   "question": "Quelle région du plasmide Ti est transférée dans le génome de la cellule végétale ?",
+   "choices": [
+    "Le gène de résistance bactérien",
+    "La région vir",
+    "L'origine de réplication",
+    "L'ADN-T"
+   ],
+   "answer": "D",
+   "explanation": "L'ADN-T est délimité par des bordures et inséré dans le génome de la plante.",
+   "source": "Biotechnologie moléculaire, famille Glick/Pasternak",
+   "verif": "import"
+  },
+  {
+   "course": "l3-bio",
+   "category": "Méthodologie de la recherche et mémoire de biologie",
+   "difficulty": 1,
+   "question": "Quel est le rôle d'un lot témoin dans une expérience ?",
+   "choices": [
+    "Cacher les résultats parasites",
+    "Servir de référence pour attribuer l'effet au facteur testé",
+    "Augmenter l'effectif de l'étude",
+    "Remplacer la répétition de l'expérience"
+   ],
+   "answer": "B",
+   "explanation": "Le témoin ne reçoit pas le traitement et permet de comparer les résultats.",
+   "source": "Cours de méthodologie de la recherche scientifique en biologie (rédaction du mémoire)",
+   "verif": "import"
+  },
+  {
+   "course": "l3-bio",
+   "category": "Méthodologie de la recherche et mémoire de biologie",
+   "difficulty": 2,
+   "question": "Dans le plan IMRaD d'un mémoire, quelle section présente les données obtenues sans les interpréter ?",
+   "choices": [
+    "Les résultats",
+    "L'introduction",
+    "Les méthodes",
+    "La discussion"
+   ],
+   "answer": "A",
+   "explanation": "Les résultats exposent les données ; l'interprétation relève de la discussion.",
+   "source": "Cours de méthodologie de la recherche scientifique en biologie (rédaction du mémoire)",
+   "verif": "import"
+  },
+  {
+   "course": "l3-bio",
+   "category": "Méthodologie de la recherche et mémoire de biologie",
+   "difficulty": 3,
+   "question": "Que mesure une valeur de p dans un test statistique ?",
+   "choices": [
+    "La probabilité d'un résultat au moins aussi extrême si H0 est vraie",
+    "La probabilité que H0 soit vraie",
+    "La taille de l'effet observé",
+    "Le pourcentage de variance expliquée"
+   ],
+   "answer": "A",
+   "explanation": "La valeur p suppose H0 vraie et ne donne pas la probabilité de H0.",
+   "source": "Cours de méthodologie de la recherche scientifique en biologie (rédaction du mémoire)",
+   "verif": "import"
+  },
+  {
+   "course": "l3-bio",
+   "category": "Méthodologie de la recherche et mémoire de biologie",
+   "difficulty": 4,
+   "question": "Quelle est la différence entre réplicat biologique et réplicat technique ?",
+   "choices": [
+    "Le technique porte sur des espèces différentes",
+    "Le biologique est mesuré une seule fois",
+    "Le biologique porte sur des individus indépendants, le technique sur un même échantillon",
+    "Il n'y a aucune différence"
+   ],
+   "answer": "C",
+   "explanation": "Seuls les réplicats biologiques évaluent la variabilité entre individus.",
+   "source": "Cours de méthodologie de la recherche scientifique en biologie (rédaction du mémoire)",
+   "verif": "import"
+  },
+  {
+   "course": "l3-bio",
+   "category": "épissage et maturation des ARN",
+   "difficulty": 1,
+   "question": "Quel composant du splicéosome reconnaît en premier le site donneur 5' d'un intron par appariement de bases ?",
+   "choices": [
+    "Le snARN U1 (au sein de la snRNP U1)",
+    "Le snARN U6 seul, sans autre composant",
+    "Le ribosome 40S lié à l'ARNm",
+    "L'ARN de transfert initiateur"
+   ],
+   "answer": "A",
+   "explanation": "Le snARN U1 s'apparie au site 5' de l'intron, première étape de l'assemblage du splicéosome.",
+   "source": "Cours de licence de biologie cellulaire, famille Alberts (Biologie moléculaire de la cellule)",
+   "verif": "import"
+  },
+  {
+   "course": "l3-bio",
+   "category": "apoptose et différenciation",
+   "difficulty": 1,
+   "question": "Quel signal exposé à la surface d'une cellule apoptotique est reconnu par les macrophages qui la phagocytent ?",
+   "choices": [
+    "Le cholestérol du feuillet interne",
+    "Des molécules du CMH de classe II",
+    "La phosphatidylsérine du feuillet externe",
+    "L'ADN nucléaire libre"
+   ],
+   "answer": "C",
+   "explanation": "Au cours de l'apoptose, la phosphatidylsérine, normalement tournée vers le cytosol, apparaît sur la face externe et sert de signal « mangez-moi ».",
+   "source": "Cours de licence de biologie cellulaire, famille Alberts (Biologie moléculaire de la cellule)",
+   "verif": "import"
+  }
+ ]
+}
