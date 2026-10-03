@@ -197,9 +197,9 @@ object CastSession {
         val playsAtStart = phonePlays(item)
         update { it.copy(phase = Remote.Phase.COPYING, message = CopyHandoff.line(layout == Mp4Atoms.Layout.MOOV_AT_END, null), phonePlays = playsAtStart,
             copy = castbridge.core.phone.CopyProgress(0, 0, 0, null, moovAtEnd = layout == Mp4Atoms.Layout.MOOV_AT_END)) }
+        // the name the TV receives (« Rangement automatique » may have given a clean one), remembered once the upload states stop being this file's
+        var sentName = item.name
         while (currentCoroutineContextActive()) {
-            // the name the TV receives (« Rangement automatique » may have given a clean one)
-            var sentName = item.name
             var waiting: String? = null
             // the upload states describe this file only while the queue's last launch is this file (the next file of the queue may follow it)
             val own = castbridge.sender.TransferQueue.owns(ticket.id)

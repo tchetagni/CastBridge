@@ -48,6 +48,9 @@ object QueueTexts {
     /** Android's time budget for background transfers (dataSync, Android 15) is used up. */
     const val TIME_LIMIT = "Android a limité les envois en arrière-plan (limite de durée)"
     const val PAUSED_TIME_LIMIT = "En pause : $TIME_LIMIT. Ouvrez CastBridge pour continuer la file."
+    /** The upload service refused a start because the previous upload is still ending: the file is put back at its place, not failed. */
+    const val PREVIOUS_ENDING = "L'envoi précédent se termine encore : celui-ci repart dans un instant."
+    fun otherTarget(name: String) = "« $name » est déjà dans la file vers un autre emplacement de la TV : retirez-le d'abord de la file (« Annuler »)."
     const val OTHER_TV = "La TV connectée n'est pas celle de cet envoi : reconnectez la bonne TV, puis touchez « Réessayer »."
     fun alreadyQueued(name: String, asMove: Boolean) =
         "« $name » est déjà dans la file en ${if (asMove) "déplacement" else "copie"} : retirez-le d'abord de la file (« Annuler »)."
@@ -112,6 +115,7 @@ class TransferQueueModel(private val keepFinished: Int = 12, private val now: ()
         val same = list.indexOfFirst { it.uri == uri && it.tvName == tvName && it.host == host && it.linkTv == linkTv &&
             (it.status == QueueStatus.WAITING || it.status == QueueStatus.RUNNING) }
         if (same >= 0 && list[same].move != move) throw QueueRefused(QueueTexts.alreadyQueued(list[same].name, list[same].move))
+        if (same >= 0 && list[same].target != target) throw QueueRefused(QueueTexts.otherTarget(list[same].name))
         if (same >= 0) {
             // « Copier et lire » of a file already waiting to be copied: it becomes the file someone waits to watch (it moves up, in order)
             val old = list[same]

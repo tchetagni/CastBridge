@@ -177,7 +177,8 @@ fun TvHome(onAdvanced: () -> Unit) {
             }
             if (uris.size == 1) last?.takeIf { it.queued }?.let { msg = it.text }
         }
-        if (queued > 1) msg = "$queued fichiers ajoutés à la file d'attente : ils partent l'un après l'autre."
+        val refused = msg?.takeIf { queued < uris.size }
+        if (queued > 1) msg = "$queued fichiers ajoutés à la file d'attente : ils partent l'un après l'autre." + (refused?.let { " $it" } ?: "")
         else if (queued == 1 && session != null && session.base == null) msg = "Envoi par Bluetooth (plus lent que le Wi-Fi)"
     }
     fun cmd(f: TvClient.() -> Unit) = scope.launch {
