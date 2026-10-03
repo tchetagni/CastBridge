@@ -124,7 +124,8 @@ fun BtScreen() {
         val busy = state is ResumableUpload.State.Uploading || state is ResumableUpload.State.Waiting
         Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
             Button(enabled = !busy && granted && selected != null && castbridge.core.trust.TvAuth.isUsable(pin) && fileUri != null && fileName != null,
-                onClick = { BtUploadService.start(ctx, fileUri!!, fileName!!, selected!!, pin) }) { Text("Envoyer") }
+                onClick = { runCatching { BtUploadService.start(ctx, fileUri!!, fileName!!, selected!!, pin) }
+                    .onFailure { android.widget.Toast.makeText(ctx, it.message ?: "Impossible de démarrer l'envoi", android.widget.Toast.LENGTH_LONG).show() } }) { Text("Envoyer") }
             if (busy) OutlinedButton(onClick = { BtUploadService.cancel(ctx) }) { Text("Annuler") }
         }
         GatewaySwitch(selected, pin, granted)

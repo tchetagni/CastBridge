@@ -49,6 +49,9 @@ class UploadService : Service() {
     /** A moved file that the TV now holds completely: the screen deletes it from the phone (with Android's confirmation). */
     data class MoveRequest(val uri: Uri, val name: String, val size: Long)
 
+    /** Thrown by [start] while another upload runs: nothing is started, nothing of the running upload is touched (R-09). */
+    class Busy : IllegalStateException(BUSY_TEXT)
+
     sealed class State {
         object Idle : State()
         data class Uploading(val job: Job, val sent: Long, val total: Long) : State()
@@ -58,6 +61,8 @@ class UploadService : Service() {
     }
 
     @Volatile private var cancelled = false
+    /** This upload's reservation of the phone's single upload slot ([castbridge.core.tv.UploadSlot], taken by [start]). */
+    @Volatile private var myToken = 0L
     @Volatile private var moveUri: Uri? = null
     @Volatile private var progressiveNow = false     // play as soon as enough has arrived (see switchToFullPreload)
     @Volatile private var started = false            // playback already launched during the upload
@@ -76,19 +81,31 @@ class UploadService : Service() {
         if (intent?.action == ACTION_CANCEL) { cancelled = true; stopSelf(); return START_NOT_STICKY }
         val uri = intent?.data
         val tvName = intent?.getStringExtra(EXTRA_TV)
-        if (uri == null || tvName == null || worker?.isAlive == true) return START_NOT_STICKY
+        val token = intent?.getLongExtra(EXTRA_TOKEN, 0L) ?: 0L
+        if (uri == null || tvName == null) { slot.release(token); stopSelf(); return START_NOT_STICKY }
+        if (worker?.isAlive == true) {
+            // R-09: a start that slipped past [start]'s check is never dropped in silence (and never leaves Android waiting for startForeground)
+            runCatching { val n = notification("Envoi en cours…", 0)
+                if (Build.VERSION.SDK_INT >= 29) startForeground(NOTIF, n, ServiceInfo.FOREGROUND_SERVICE_TYPE_DATA_SYNC) else startForeground(NOTIF, n) }
+            Log.w(TAG, "start refused while the previous upload ends: ${intent.getStringExtra(EXTRA_NAME)}")
+            // the reservation of this start is given back and the refusal is said (the queue keeps the file and shows the cause)
+            if (slot.release(token)) _state.value = State.Failed(null, "L'envoi précédent se termine encore : réessayez dans un instant.")
+            return START_NOT_STICKY
+        }
         val name = intent.getStringExtra(EXTRA_NAME) ?: uri.lastPathSegment ?: "video"
         val job = Job(name, tvName, intent.getStringExtra(EXTRA_HOST), intent.getStringExtra(EXTRA_PIN),
             intent.getBooleanExtra(EXTRA_PROGRESSIVE, false), intent.getBooleanExtra(EXTRA_AUTOPLAY, true), intent.getStringExtra(EXTRA_TARGET),
             intent.getBooleanExtra(EXTRA_MOVE, false), intent.getBooleanExtra(EXTRA_ORDERED, false))
         moveUri = if (job.move) uri else null
+        myToken = token
         try {
             val n = notification("Envoi de $name…", 0)
             if (Build.VERSION.SDK_INT >= 29) startForeground(NOTIF, n, ServiceInfo.FOREGROUND_SERVICE_TYPE_DATA_SYNC)
             else startForeground(NOTIF, n)
         } catch (e: Exception) {
             Log.e(TAG, "startForeground", e)
-            _state.value = State.Failed(job, "Service refusé par le système : ${e.message}")
+            _state.value = State.Failed(job, "$REFUSED : ${e.message}")
+            slot.release(token)
             stopSelf(); return START_NOT_STICKY
         }
         acquireLocks()
@@ -147,7 +164,8 @@ class UploadService : Service() {
                     }
                 }
             }
-            _state.value = when (s) {
+            // a late write of an upload whose slot was released (cancelled, service destroyed) never overwrites the next upload's state
+            if (mine()) _state.value = when (s) {
                 is ResumableUpload.State.Uploading -> State.Uploading(job, s.sent, s.total)
                 is ResumableUpload.State.Waiting -> State.Waiting(job, s.sent, s.total, s.reason)
                 ResumableUpload.State.Done -> State.Done(job)
@@ -169,7 +187,7 @@ class UploadService : Service() {
             if (!ok && !cancelled) PhoneConnect.error("send", "upload", (result as? ResumableUpload.State.Failed)?.reason)
         }
         if (result == ResumableUpload.State.Done) castbridge.sender.agent.AgentAuto.completed(this, job.fileName)
-        if (result == ResumableUpload.State.Done) moveUri?.let { u -> checkMoved(job, u, resolve()) }
+        if (result == ResumableUpload.State.Done && !cancelled) moveUri?.let { u -> checkMoved(job, u, resolve()) }
         if (result == ResumableUpload.State.Done) {
             if (started || !job.autoPlay) { finish(State.Done(job)); return }      // already playing (or the caller starts it)
             val base = resolve()
@@ -225,8 +243,9 @@ class UploadService : Service() {
             runCatching { castbridge.core.tv.TvInfo.parse(TvClient(b, job.pin).info()) }.getOrNull()
                 ?.files?.firstOrNull { it.name.equals(job.fileName, ignoreCase = true) }
         }
-        if (local > 0 && tvFile != null && tvFile.complete && tvFile.size == local) {
-            _moveReady.value = MoveRequest(uri, job.fileName, local)
+        // a cancelled move never asks for the deletion (R-09, audit 3)
+        if (castbridge.core.tv.QueueCancel.mayDeleteMoved(cancelled, local > 0 && tvFile != null && tvFile.complete && tvFile.size == local)) {
+            offerMove(MoveRequest(uri, job.fileName, local))
             runCatching {
                 val open = android.app.PendingIntent.getActivity(this, 2, Intent(this, MainActivity::class.java)
                     .addFlags(Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_SINGLE_TOP), android.app.PendingIntent.FLAG_IMMUTABLE)
@@ -281,6 +300,12 @@ class UploadService : Service() {
             .addAction(Notification.Action.Builder(null, "Annuler", cancel).build()).build()
     }
 
+    /** Android 15: the dataSync time budget is used up. The upload stops (the TV keeps its partial copy) and the queue pauses with this cause. */
+    override fun onTimeout(startId: Int, fgsType: Int) {
+        cancelled = true
+        finish(State.Failed((_state.value as? State.Uploading)?.job ?: (_state.value as? State.Waiting)?.job, castbridge.core.tv.QueueTexts.TIME_LIMIT))
+    }
+
     private fun acquireLocks() {
         wakeLock = runCatching {
             getSystemService(PowerManager::class.java).newWakeLock(PowerManager.PARTIAL_WAKE_LOCK, "castbridge:upload")
@@ -298,14 +323,18 @@ class UploadService : Service() {
         }.getOrNull()
     }
 
+    private fun mine() = slot.holds(myToken) || !slot.held()
+
     private fun finish(s: State) {
-        _state.value = s
+        if (mine()) _state.value = s
+        slot.release(myToken)
         stopSelf()
     }
 
     override fun onDestroy() {
         cancelled = true
         if (instance === this) instance = null
+        slot.release(myToken)
         discovery?.stop()
         netCallback?.let { cb -> runCatching { getSystemService(ConnectivityManager::class.java).unregisterNetworkCallback(cb) } }
         runCatching { wakeLock?.let { if (it.isHeld) it.release() } }
@@ -347,22 +376,43 @@ class UploadService : Service() {
         val moveReady: StateFlow<MoveRequest?> = _moveReady
         private val _moveNote = MutableStateFlow<String?>(null)
         val moveNote: StateFlow<String?> = _moveNote
-        fun moveHandled() { _moveReady.value = null; _moveNote.value = null }
+        private val moves = castbridge.core.tv.MoveInbox<MoveRequest>()
+        /** Several moves ending close together wait in turn (never overwritten). */
+        private fun offerMove(r: MoveRequest) { moves.offer(r); _moveReady.value = moves.head() }
+        /** The current deletion request is handled: the next one (if any) is shown. */
+        fun moveHandled() { _moveReady.value = moves.done() }
+        fun noteHandled() { _moveNote.value = null }
+        const val EXTRA_TOKEN = "slot"
+        /** The phone's single upload slot, shared with [BtUploadService]: reserved atomically by [start] before any service starts (R-09, audit 1). */
+        val slot = castbridge.core.tv.UploadSlot()
         private const val NOTIF_MOVE = 7
         const val EXTRA_MOVE = "move"
         const val EXTRA_ORDERED = "ordered"
+        /** Prefix of the failure when Android refuses the foreground service (in the background since Android 12): the queue waits for the app instead. */
+        const val REFUSED = "Service refusé par le système"
+        const val BUSY_TEXT = "Un envoi vers la TV est déjà en cours : celui-ci n'a pas été lancé. « Copier vers la TV » le met dans la file d'attente."
+        /** An upload is running in this process (its worker thread is alive). */
+        fun active(): Boolean = slot.held()
         private val _state = MutableStateFlow<State>(State.Idle)
         val state: StateFlow<State> = _state
 
         fun start(ctx: Context, uri: Uri, fileName: String, tvName: String, manualHost: String?, pin: String? = null,
                   progressive: Boolean = false, autoPlay: Boolean = true, target: String? = null, move: Boolean = false, ordered: Boolean = false) {
             // library assistant, option « Rangement automatique des nouveaux envois » (off by default, docs/LIBRARY-AGENT.md)
+            // R-09: one upload at a time, reserved ATOMICALLY here (before the service exists): the loser of a race is refused, never dropped in silence
+            val token = slot.tryReserve(fileName) ?: throw Busy()
+            try { startReserved(ctx, token, uri, fileName, tvName, manualHost, pin, progressive, autoPlay, target, move, ordered) }
+            catch (e: Throwable) { slot.release(token); throw e }
+        }
+
+        private fun startReserved(ctx: Context, token: Long, uri: Uri, fileName: String, tvName: String, manualHost: String?, pin: String?,
+                                  progressive: Boolean, autoPlay: Boolean, target: String?, move: Boolean, ordered: Boolean) {
             val fileName = castbridge.sender.agent.AgentAuto.nameFor(ctx, fileName)       // a CANDIDATE: confirmed in the service once the TV has been asked
             val i = Intent(ctx, UploadService::class.java).setData(uri)
                 .addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION)
                 .putExtra(EXTRA_TV, tvName).putExtra(EXTRA_NAME, fileName).putExtra(EXTRA_HOST, manualHost).putExtra(EXTRA_PIN, pin?.takeIf { it.isNotEmpty() })
                 .putExtra(EXTRA_PROGRESSIVE, progressive).putExtra(EXTRA_AUTOPLAY, autoPlay).putExtra(EXTRA_TARGET, target).putExtra(EXTRA_MOVE, move)
-                .putExtra(EXTRA_ORDERED, ordered)
+                .putExtra(EXTRA_ORDERED, ordered).putExtra(EXTRA_TOKEN, token)
             _state.value = State.Idle; _check.value = null; _average.value = 0
             ctx.startForegroundService(i)
         }

@@ -31,6 +31,7 @@ import kotlin.concurrent.thread
 @SuppressLint("MissingPermission")   // BLUETOOTH_CONNECT is checked by the UI before starting
 class BtUploadService : Service() {
     @Volatile private var cancelled = false
+    @Volatile private var myToken = 0L
     private var worker: Thread? = null
 
     override fun onBind(intent: Intent?): IBinder? = null
@@ -41,17 +42,27 @@ class BtUploadService : Service() {
         val address = intent?.getStringExtra(EXTRA_ADDR)
         val pin = intent?.getStringExtra(EXTRA_PIN)
         val name = intent?.getStringExtra(EXTRA_NAME)
-        if (uri == null || address == null || pin == null || name == null || worker?.isAlive == true) return START_NOT_STICKY
+        val token = intent?.getLongExtra(UploadService.EXTRA_TOKEN, 0L) ?: 0L
+        if (uri == null || address == null || pin == null || name == null) { UploadService.slot.release(token); stopSelf(); return START_NOT_STICKY }
+        if (worker?.isAlive == true) {
+            // R-09: never dropped in silence, never leaves Android waiting for startForeground
+            runCatching { val n = notification("Envoi Bluetooth en cours…", 0)
+                if (Build.VERSION.SDK_INT >= 29) startForeground(NOTIF, n, ServiceInfo.FOREGROUND_SERVICE_TYPE_CONNECTED_DEVICE) else startForeground(NOTIF, n) }
+            return START_NOT_STICKY
+        }
         try {
             val n = notification("Envoi Bluetooth de $name…", 0)
             if (Build.VERSION.SDK_INT >= 29) startForeground(NOTIF, n, ServiceInfo.FOREGROUND_SERVICE_TYPE_CONNECTED_DEVICE)
             else startForeground(NOTIF, n)
         } catch (e: Exception) {
             Log.e(TAG, "startForeground", e)
-            _state.value = ResumableUpload.State.Failed("Service refusé par le système")
+            _state.value = ResumableUpload.State.Failed(UploadService.REFUSED)
+            UploadService.slot.release(token)
             stopSelf(); return START_NOT_STICKY
         }
         cancelled = false
+        myToken = token
+        current = this
         worker = thread(name = "bt-upload") { run(uri, address, pin, name) }
         return START_NOT_STICKY
     }
@@ -193,10 +204,10 @@ class BtUploadService : Service() {
                 when { ok -> null; cancelled -> "cancelled"; else -> "failed" })
             castStart = 0
         }
-        _state.value = s; stopSelf()
+        _state.value = s; UploadService.slot.release(myToken); stopSelf()
     }
 
-    override fun onDestroy() { cancelled = true; super.onDestroy() }
+    override fun onDestroy() { cancelled = true; if (current === this) current = null; UploadService.slot.release(myToken); super.onDestroy() }
 
     companion object {
         private const val TAG = "BtUploadService"
@@ -212,11 +223,19 @@ class BtUploadService : Service() {
         /** Which link carries the file: "Wi-Fi (réseau commun)", "Wi-Fi Direct" or "Bluetooth". */
         val route: StateFlow<String?> = _route
 
+        @Volatile private var current: BtUploadService? = null
+        /** A Bluetooth upload is running in this process. */
+        fun active(): Boolean = current?.worker?.isAlive == true || UploadService.slot.held()
+
         fun start(ctx: Context, uri: Uri, fileName: String, address: String, pin: String) {
-            _state.value = null
-            ctx.startForegroundService(Intent(ctx, BtUploadService::class.java).setData(uri)
-                .addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION)
-                .putExtra(EXTRA_ADDR, address).putExtra(EXTRA_PIN, pin).putExtra(EXTRA_NAME, fileName))
+            // R-09: the same atomic reservation as Wi-Fi (one upload at a time on the phone); the loser is refused, never dropped
+            val token = UploadService.slot.tryReserve(fileName) ?: throw UploadService.Busy()
+            try {
+                _state.value = null
+                ctx.startForegroundService(Intent(ctx, BtUploadService::class.java).setData(uri)
+                    .addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION)
+                    .putExtra(EXTRA_ADDR, address).putExtra(EXTRA_PIN, pin).putExtra(EXTRA_NAME, fileName).putExtra(UploadService.EXTRA_TOKEN, token))
+            } catch (e: Throwable) { UploadService.slot.release(token); throw e }
         }
 
         fun cancel(ctx: Context) {

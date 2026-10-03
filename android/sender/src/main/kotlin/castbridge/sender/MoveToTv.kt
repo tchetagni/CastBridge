@@ -33,8 +33,8 @@ fun MoveHandler() {
         UploadService.moveHandled()
     }
     note?.let { n ->
-        AlertDialog(onDismissRequest = { UploadService.moveHandled() },
-            confirmButton = { TextButton({ UploadService.moveHandled() }) { Text("OK") } },
+        AlertDialog(onDismissRequest = { UploadService.noteHandled() },
+            confirmButton = { TextButton({ UploadService.noteHandled() }) { Text("OK") } },
             title = { Text("Déplacement") }, text = { Text(n) })
     }
     LaunchedEffect(req) {

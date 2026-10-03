@@ -166,16 +166,19 @@ fun TvHome(onAdvanced: () -> Unit) {
             val (name, size) = OpenWithActivity.describe(ctx, uri)
             // Little room on the TV: play while the file arrives instead of storing it all first (one file only).
             val progressive = uris.size == 1 && (info?.let { size > 0 && it.free < size * 2 } ?: false)
+            // R-09: the code path goes through the queue as well (a second file used to be dropped, several files refused)
+            var last: TransferQueue.Ticket? = null
             if (session != null) {
-                runCatching { TransferQueue.enqueue(ctx, uri, name, size, move, autoPlay = uris.size == 1, progressive = progressive); queued++ }
+                runCatching { last = TransferQueue.add(ctx, uri, name, size, move, autoPlay = uris.size == 1, progressive = progressive); queued++ }
                     .onFailure { msg = "Impossible de mettre l'envoi en file : ${it.message}" }
-            } else if (uris.size == 1) {
-                runCatching { UploadService.start(ctx, uri, name, tvName!!, null, pin, progressive, move = move) }
-                    .onFailure { msg = "Impossible de démarrer l'envoi : ${it.message}" }
-            } else msg = "Plusieurs fichiers : ajoutez d'abord la TV (association) pour utiliser la file d'attente."
+            } else {
+                runCatching { last = TransferQueue.add(ctx, uri, name, size, move, autoPlay = uris.size == 1, progressive = progressive, tvName = tvName!!, credential = pin); queued++ }
+                    .onFailure { msg = "Impossible de mettre l'envoi en file : ${it.message}" }
+            }
+            if (uris.size == 1) last?.takeIf { it.queued }?.let { msg = it.text }
         }
         if (queued > 1) msg = "$queued fichiers ajoutés à la file d'attente : ils partent l'un après l'autre."
-        else if (queued == 1 && session?.base == null) msg = "Envoi par Bluetooth (plus lent que le Wi-Fi)"
+        else if (queued == 1 && session != null && session.base == null) msg = "Envoi par Bluetooth (plus lent que le Wi-Fi)"
     }
     fun cmd(f: TvClient.() -> Unit) = scope.launch {
         val c = client ?: return@launch
@@ -239,34 +242,8 @@ fun TvHome(onAdvanced: () -> Unit) {
         (u as? UploadService.State.Done)?.let { Text("« ${LibraryLogic.title(it.job.fileName)} » est sur la TV ✓", style = MaterialTheme.typography.bodyMedium, color = Cb.success) }
         (u as? UploadService.State.Failed)?.let { Text(it.reason, style = MaterialTheme.typography.bodyMedium, color = cs.error) }
 
-        // Queue of the files waiting to be sent (several files, « Ouvrir avec », …): one at a time, cancel one by one.
-        val queue by TransferQueue.items.collectAsState()
-        val shownQueue = queue.filter { it.status == castbridge.core.tv.QueueStatus.WAITING || it.status == castbridge.core.tv.QueueStatus.RUNNING || it.status == castbridge.core.tv.QueueStatus.FAILED }
-        AnimatedVisibility(shownQueue.isNotEmpty()) {
-            ElevatedCard(Modifier.fillMaxWidth()) {
-                Column(Modifier.padding(16.dp), verticalArrangement = Arrangement.spacedBy(6.dp)) {
-                    val waiting = shownQueue.count { it.status == castbridge.core.tv.QueueStatus.WAITING }
-                    Text("File d'attente des envois" + if (waiting > 0) " · $waiting en attente" else "", style = MaterialTheme.typography.labelLarge, color = cs.primary)
-                    shownQueue.forEach { q ->
-                        Row(verticalAlignment = Alignment.CenterVertically) {
-                            Column(Modifier.weight(1f)) {
-                                Text(LibraryLogic.title(q.name), maxLines = 1, overflow = TextOverflow.Ellipsis, style = MaterialTheme.typography.bodyMedium)
-                                Text(when (q.status) {
-                                    castbridge.core.tv.QueueStatus.RUNNING -> "En cours" + if (q.move) " (déplacement)" else ""
-                                    castbridge.core.tv.QueueStatus.WAITING -> "En attente" + if (q.move) " (déplacement)" else "" + if (q.size > 0) " · ${formatSize(q.size)}" else ""
-                                    else -> "Échec : ${q.error ?: "envoi interrompu"}"
-                                }, style = MaterialTheme.typography.bodySmall, color = if (q.status == castbridge.core.tv.QueueStatus.FAILED) cs.error else cs.onSurfaceVariant)
-                            }
-                            if (q.status != castbridge.core.tv.QueueStatus.FAILED) TextButton(onClick = { TransferQueue.cancel(ctx, q.id) }) { Text("Annuler") }
-                        }
-                    }
-                    Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
-                        if (waiting > 1) TextButton(onClick = { TransferQueue.cancelWaiting() }) { Text("Annuler les envois en attente") }
-                        if (shownQueue.any { it.status == castbridge.core.tv.QueueStatus.FAILED }) TextButton(onClick = { TransferQueue.clearFinished() }) { Text("Effacer les échecs") }
-                    }
-                }
-            }
-        }
+        // Queue of the files waiting to be sent (several files, « Ouvrir avec », « Copier et lire », …): one at a time, cancel one by one, retry a failure.
+        TransferQueueCard()
 
         // Series in « Titre / Saison » folders (virtual: nothing moves), automatic after each send, or on demand with a confirmation and an undo
         var autoClass by remember { mutableStateOf(SeriesClassifying.auto(ctx)) }
@@ -470,6 +447,51 @@ private fun FirstConnection(tvs: List<Tv>, onRetry: () -> Unit, onAdvanced: () -
                 }
             }, modifier = Modifier.fillMaxWidth(0.7f)) { if (checking) CircularProgressIndicator(Modifier.size(18.dp)) else Text("Se connecter") }
             TextButton(onClick = { chosen = null }) { Text("Choisir une autre TV") }
+        }
+    }
+}
+
+/**
+ * The transfer queue (R-09): each file with its place (« n° 2 »), « Copier et lire » marked, the cause of a failure with « Réessayer »,
+ * and why the queue is not moving when it is not (another upload, Android refusing a background start).
+ */
+@Composable
+fun TransferQueueCard() {
+    val ctx = LocalContext.current
+    val cs = MaterialTheme.colorScheme
+    val queue by TransferQueue.items.collectAsState()
+    val note by TransferQueue.note.collectAsState()
+    val shownQueue = queue.filter { it.status == castbridge.core.tv.QueueStatus.WAITING || it.status == castbridge.core.tv.QueueStatus.RUNNING || it.status == castbridge.core.tv.QueueStatus.FAILED }
+    val order = castbridge.core.tv.QueueRules.runOrder(queue)
+    AnimatedVisibility(shownQueue.isNotEmpty()) {
+        ElevatedCard(Modifier.fillMaxWidth()) {
+            Column(Modifier.padding(16.dp), verticalArrangement = Arrangement.spacedBy(6.dp)) {
+                val waiting = shownQueue.count { it.status == castbridge.core.tv.QueueStatus.WAITING }
+                Text("File d'attente des envois" + if (waiting > 0) " · $waiting en attente" else "", style = MaterialTheme.typography.labelLarge, color = cs.primary)
+                note?.let { Text(it, style = MaterialTheme.typography.bodySmall, color = cs.onSurfaceVariant) }
+                // in the order they will run: the running one, the waiting ones (« Copier et lire » first), then the failures
+                val sorted = shownQueue.filter { it.status == castbridge.core.tv.QueueStatus.RUNNING } + order + shownQueue.filter { it.status == castbridge.core.tv.QueueStatus.FAILED }
+                sorted.forEach { q ->
+                    val n = castbridge.core.tv.QueueRules.position(queue, q.id)
+                    val kind = (if (q.playOnTv) " · copier et lire" else "") + (if (q.move) " · déplacement" else "")
+                    Row(verticalAlignment = Alignment.CenterVertically) {
+                        Column(Modifier.weight(1f)) {
+                            Text((if (n > 0) "$n. " else "") + LibraryLogic.title(q.name), maxLines = 1, overflow = TextOverflow.Ellipsis, style = MaterialTheme.typography.bodyMedium)
+                            Text(when (q.status) {
+                                castbridge.core.tv.QueueStatus.RUNNING -> "En cours$kind"
+                                castbridge.core.tv.QueueStatus.WAITING -> "En attente$kind" + if (q.size > 0) " · ${formatSize(q.size)}" else ""
+                                else -> "Échec : ${q.error ?: "envoi interrompu"}"
+                            }, style = MaterialTheme.typography.bodySmall, color = if (q.status == castbridge.core.tv.QueueStatus.FAILED) cs.error else cs.onSurfaceVariant)
+                        }
+                        if (q.status == castbridge.core.tv.QueueStatus.FAILED) TextButton(onClick = { TransferQueue.retry(ctx, q.id) }) { Text("Réessayer") }
+                        else TextButton(onClick = { TransferQueue.cancel(ctx, q.id) }) { Text("Annuler") }
+                    }
+                }
+                Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
+                    if (waiting > 1) TextButton(onClick = { TransferQueue.cancelWaiting() }) { Text("Annuler les envois en attente") }
+                    if (shownQueue.any { it.status == castbridge.core.tv.QueueStatus.FAILED }) TextButton(onClick = { TransferQueue.clearFinished() }) { Text("Effacer les échecs") }
+                }
+            }
         }
     }
 }

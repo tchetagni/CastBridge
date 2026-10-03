@@ -47,7 +47,6 @@ fun TvTransferDialog(client: TvClient, onDismiss: () -> Unit) {
     var dest by remember { mutableStateOf("auto") }
     var picked by remember { mutableStateOf<List<Picked>>(emptyList()) }
     var checks by remember { mutableStateOf<Map<String, TvClient.StorageCheck?>>(emptyMap()) }
-    var next by remember { mutableIntStateOf(-1) }
     var msg by remember { mutableStateOf<String?>(null) }
     var tree by remember { mutableStateOf<String?>(null) }
     val upload by UploadService.state.collectAsState()
@@ -81,7 +80,7 @@ fun TvTransferDialog(client: TvClient, onDismiss: () -> Unit) {
             }
             Picked(u, name, size)
         }
-        next = -1; msg = null
+        msg = null
     }
     val pickTree = rememberLauncherForActivityResult(ActivityResultContracts.OpenDocumentTree()) { u ->
         if (u != null) {
@@ -89,18 +88,17 @@ fun TvTransferDialog(client: TvClient, onDismiss: () -> Unit) {
             tree = u.toString()
         }
     }
-    fun startUpload(i: Int) {
-        val p = picked[i]; next = i
-        runCatching { UploadService.start(ctx, p.uri, p.name, host, host, client.pin, progressive = false, autoPlay = false, target = dest) }
-            .onFailure { next = -1; msg = "Impossible de démarrer l'envoi : ${it.message}" }
-    }
-    // One file after the other.
-    LaunchedEffect(upload) {
-        val u = upload
-        if (next < 0 || next >= picked.size) return@LaunchedEffect
-        if (u is UploadService.State.Done && castbridge.sender.agent.AgentAuto.originalOf(u.job.fileName) == picked[next].name) {
-            if (next + 1 < picked.size) startUpload(next + 1) else { next = -1; msg = "Envoi terminé (${picked.size} fichier(s))." }
-        } else if (u is UploadService.State.Failed) { next = -1; msg = "Envoi échoué : ${u.reason}" }
+    // R-09: one file after the other through the transfer queue (it used to be a chain held by this dialog: a failure stopped every file behind it,
+    // closing the dialog stopped the chain, and a file started while another upload ran was dropped in silence)
+    fun startAll() {
+        var n = 0; var last: TransferQueue.Ticket? = null
+        picked.forEach { p ->
+            runCatching { last = TransferQueue.add(ctx, p.uri, p.name, p.size, move = false, tvName = host, credential = client.pin, host = host, target = dest); n++ }
+                .onFailure { msg = "Impossible de mettre « ${p.name} » en file : ${it.message}" }
+        }
+        if (n > 1) msg = "$n fichiers ajoutés à la file d'attente : ils partent l'un après l'autre (suivi ci-dessous et dans la notification)."
+        else if (n == 1) msg = last?.takeIf { it.queued }?.text ?: "Envoi en cours."
+        picked = emptyList()
     }
 
     Dialog(onDismissRequest = onDismiss, properties = DialogProperties(usePlatformDefaultWidth = false)) {
@@ -126,9 +124,7 @@ fun TvTransferDialog(client: TvClient, onDismiss: () -> Unit) {
                     Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
                         OutlinedButton(onClick = { pick.launch(arrayOf("*/*")) }) { Icon(Icons.Filled.AttachFile, null); Spacer(Modifier.width(6.dp)); Text("Choisir des fichiers") }
                         val allOk = picked.isNotEmpty() && picked.all { checks[it.name]?.ok == true }
-                        val busy = upload is UploadService.State.Uploading || upload is UploadService.State.Waiting
-                        Button(enabled = allOk && !busy && next < 0, onClick = { startUpload(0) }) { Icon(cbv(R.drawable.ic_cb_envoyer), null); Spacer(Modifier.width(6.dp)); Text("Envoyer") }
-                        if (busy) TextButton(onClick = { UploadService.cancel(ctx); next = -1 }) { Text("Annuler") }
+                        Button(enabled = allOk, onClick = { startAll() }) { Icon(cbv(R.drawable.ic_cb_envoyer), null); Spacer(Modifier.width(6.dp)); Text("Envoyer") }
                     }
                     picked.forEach { p ->
                         val c = checks[p.name]
@@ -144,7 +140,7 @@ fun TvTransferDialog(client: TvClient, onDismiss: () -> Unit) {
                             style = MaterialTheme.typography.labelSmall, color = MaterialTheme.colorScheme.onSurfaceVariant)
                     }
                     when (val u = upload) {
-                        is UploadService.State.Uploading -> if (next >= 0) {
+                        is UploadService.State.Uploading -> run {
                             LinearProgressIndicator({ u.sent.toFloat() / u.total.coerceAtLeast(1) }, Modifier.fillMaxWidth())
                             Text("${u.job.fileName} : ${formatSize(u.sent)} / ${formatSize(u.total)} · ${rate(speed)} (moyenne ${rate(average)})${eta(u.total - u.sent, average)}",
                                 style = MaterialTheme.typography.bodySmall)
@@ -152,10 +148,11 @@ fun TvTransferDialog(client: TvClient, onDismiss: () -> Unit) {
                             if (destVol != null && destVol.writeBps in 1..(average * 12 / 10 + 1)) Text("Débit limité par l'écriture de ${destVol.label} (~${formatSize(destVol.writeBps)}/s mesurés).",
                                 style = MaterialTheme.typography.labelSmall)
                         }
-                        is UploadService.State.Waiting -> if (next >= 0) Text("En attente, reprise automatique à ${formatSize(u.sent)} (${u.reason})", style = MaterialTheme.typography.bodySmall)
+                        is UploadService.State.Waiting -> Text("En attente, reprise automatique à ${formatSize(u.sent)} (${u.reason})", style = MaterialTheme.typography.bodySmall)
                         else -> {}
                     }
                     msg?.let { Text(it, style = MaterialTheme.typography.bodyMedium) }
+                    TransferQueueCard()
 
                     HorizontalDivider(Modifier.padding(vertical = 8.dp))
                     // ------------------------------------------------ TV -> phone

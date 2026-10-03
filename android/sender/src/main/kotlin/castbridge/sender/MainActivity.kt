@@ -37,6 +37,11 @@ class MainActivity : ComponentActivity() {
         installFrom(intent)
     }
 
+    override fun onResume() {
+        super.onResume()
+        TransferQueue.resume(this)                 // R-09: a queue saved before the app was killed (or paused by Android in the background) goes on
+    }
+
     override fun onNewIntent(intent: Intent) {
         super.onNewIntent(intent)
         setIntent(intent)

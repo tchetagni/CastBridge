@@ -62,6 +62,7 @@ class OpenWithActivity : ComponentActivity() {
         val uri = incomingUri(intent)
         if (uri == null) { forwardToPlayer(); finish(); return }
         TvLinkManager.start(this)
+        TransferQueue.resume(this)                 // R-09: a queue saved before the app was killed goes on
         val (name, size) = describe(this, uri)
         val canPlay = true
         val kind = MediaKind.of(intent.type, name)
@@ -162,16 +163,20 @@ class OpenWithActivity : ComponentActivity() {
         val what = if (move) "Déplacement" else "Copie"
         when (choice.route) {
             // the trusted link: the queue waits (≤ 1 min) for the link being (re)established
-            SendRoute.QUEUE -> runCatching { TransferQueue.enqueue(this, uri, name, size, move) }
-                .onSuccess { where -> Toast.makeText(this, "$what vers la TV en arrière-plan ($where) : voir la notification.", Toast.LENGTH_LONG).show(); finish() }
+            SendRoute.QUEUE -> runCatching { TransferQueue.add(this, uri, name, size, move) }
+                .onSuccess { t -> Toast.makeText(this, sent(what, t), Toast.LENGTH_LONG).show(); finish() }
                 .onFailure { Toast.makeText(this, "Impossible de mettre l'envoi en file : ${it.message}", Toast.LENGTH_LONG).show() }
-            // the code path: the same upload as the home screen for one file (finds the TV by its name, waits for it), nothing played on the TV
-            SendRoute.PIN_UPLOAD -> runCatching { UploadService.start(this, uri, name, pinTv!!, null, pins.get(pinTv), autoPlay = false, move = move) }
-                .onSuccess { Toast.makeText(this, "$what vers la TV en arrière-plan : voir la notification.", Toast.LENGTH_LONG).show(); finish() }
-                .onFailure { Toast.makeText(this, "Impossible de démarrer l'envoi : ${it.message}", Toast.LENGTH_LONG).show() }
+            // the code path: the same upload as the home screen (finds the TV by its name, waits for it), nothing played on the TV;
+            // R-09: through the queue too, so a second « Copier » while one runs is queued instead of being dropped in silence
+            SendRoute.PIN_UPLOAD -> runCatching { TransferQueue.add(this, uri, name, size, move, tvName = pinTv!!, credential = pins.get(pinTv)) }
+                .onSuccess { t -> Toast.makeText(this, sent(what, t), Toast.LENGTH_LONG).show(); finish() }
+                .onFailure { Toast.makeText(this, "Impossible de mettre l'envoi en file : ${it.message}", Toast.LENGTH_LONG).show() }
             SendRoute.NONE -> Unit
         }
     }
+
+    private fun sent(what: String, t: TransferQueue.Ticket) =
+        if (t.queued) "$what vers la TV : ${t.text}. Voir la notification." else "$what vers la TV en arrière-plan : voir la notification."
 
     /**
      * « Copier sur la TV et lire »: the existing cast action ([CastAction.COPY], or LIVE when [how] degrades it for a trial TV), started through
