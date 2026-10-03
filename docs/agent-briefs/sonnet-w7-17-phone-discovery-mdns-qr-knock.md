@@ -1,5 +1,7 @@
 # w7-17 — CastBridge (téléphone) : découverte v2 (NSD mDNS v2, sonde LAN, lien profond QR `castbridge://tv`, toc)
 
+> **Amendement (Fable, 2026-10-03, DESIGN-W18)** : le lien profond QR porte **aussi** `wd=<nom>&wp=<mot de passe>` (`WdCredentials.fromDeepLinkParams`, w18-01) : `DeepLinkTv` les relit, les range par `PinBook.writeWd` et déclenche la jonction (`WdRuntime.learn`, w18-08) : c'est le **chemin zéro saisie** du premier contact (D-W18-5). `NsdDiscoveryV2` ne traverse pas un groupe P2P : la présence sur le groupe vient de `WdDnsSdClient` (w18-08) et de la sonde `/api/hello` sur 192.168.49.1 (identité par `id`, jamais par l'adresse). Lire `DESIGN-W18-WIFI-DIRECT-PRIMAIRE-2026-10-03.md` § 2.1 (f), § 5.2 ; le reste du cahier est inchangé.
+
 **Vague 7c · Effort M (≈ 2 j) · Modèle : sonnet · Statut PRÊT (après 7a/7b ; en parallèle de w7-16 : contrat `LinkRuntime.onCandidates`).** Conception : `DESIGN-W7-PLUG-AND-PLAY-SYNC.md` § 4.1 (rangs 1, 3, 4, 6). Branche `claude/sonnet-w7-17`. Rapport : `docs/agent-reports/sonnet-w7-17.md`.
 
 ## Objectif

@@ -1,5 +1,7 @@
 # w7-16 — CastBridge (téléphone) : `LinkRuntime` (boucle, réveils, JobScheduler, règles FGS, association Companion Device Manager), façade `TvLinkManager`
 
+> **Amendement (Fable, 2026-10-03, DESIGN-W18)** : `LinkRuntime` **héberge** `WdRuntime` (w18-08) et lui transmet ses déclencheurs (premier plan, action, `ACL_CONNECTED`, présence CDM) selon `C/link/WdTriggers` (w18-02) ; **aucune** jonction Wi-Fi Direct en arrière-plan (le job 15 min ne fait qu'une étape Bluetooth). La route de contrôle `Direct` n'est prise que si `WdRuntime.isUp(tv)` (`LinkPlanner2`). Le bouton « Wi-Fi Direct » de la fiche (branche `claude/wd-manual-button`) reste un déclencheur explicite. Lire `DESIGN-W18-WIFI-DIRECT-PRIMAIRE-2026-10-03.md` § 3.2, § 5.3 ; le reste du cahier est inchangé.
+
 **Vague 7c · Effort L (≈ 3,5 j) · Modèle : sonnet · Statut PRÊT (après 7a et 7b fusionnées).** Conception : `DESIGN-W7-PLUG-AND-PLAY-SYNC.md` § 5.1-5.3, § 2 (problème 3, 8), D-W7-6. Branche `claude/sonnet-w7-16`. Rapport : `docs/agent-reports/sonnet-w7-16.md`.
 
 ## Objectif

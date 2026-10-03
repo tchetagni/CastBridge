@@ -1,5 +1,7 @@
 # w7-21 — CastBridge (téléphone) : politique de voie pour les transferts (LAN > Wi-Fi Direct > Bluetooth), Wi-Fi Direct automatique en isolation, file d'envoi persistée, ETA, carte de progression nourrie par `xfer`
 
+> **Amendement (Fable, 2026-10-03, DESIGN-W18)** : les points (1) et (2) de ce cahier sont **remplacés** : la voie est choisie par `C/link/WdPolicy.route(BULK)` (w18-02, qui enveloppe `BulkRoute` de la branche R-14) et la jonction par `WdRuntime` (w18-08 : identifiants persistants ⇒ jonction directe `WifiP2pManager.connect` sur 33+ ; `WifiNetworkSpecifier` **seulement** sur Android 10-12, approbation mémorisée) ; `WifiDirectAuto`/`BtUploadService.kt:140-163` ne sont plus à extraire. Le Wi-Fi Direct est tenté pour **tout** envoi sans LAN (plus de seuil 5 Mo quand les identifiants sont connus), pas seulement en isolation. La file persistée (R-09, déjà faite), l'ETA et la carte nourrie par `xfer` (points 3-6) restent à exécuter tels quels ; le dialogue « > 50 Mo par Bluetooth » devient `C/link/BtPlan` (w18-13) quand le Bluetooth est la seule voie. Lire `DESIGN-W18-WIFI-DIRECT-PRIMAIRE-2026-10-03.md` § 5.1, § 9.
+
 **Vague 7c · Effort M (≈ 2,5 j) · Modèle : sonnet · Statut PRÊT (après 7a/7b ; en parallèle de w7-16/18 : contrats `LinkRuntime.routeTable()`, `DomainStores.xfer`).** Conception : `DESIGN-W7-PLUG-AND-PLAY-SYNC.md` § 5.2, § 4.3, § 2 (problème 7). Branche `claude/sonnet-w7-21`. Rapport : `docs/agent-reports/sonnet-w7-21.md`.
 
 ## Objectif

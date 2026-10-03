@@ -1,5 +1,7 @@
 # w7-09 — `DiscoveryPlanner` (ordre, délais, fusion, isolation, cache d'adresses), `RoutePolicy` (notation des routes, étiquettes), TXT mDNS v2
 
+> **Amendement (Fable, 2026-10-03, DESIGN-W18)** : le Wi-Fi Direct n'est plus « rang 5, isolation détectée seulement » : c'est la **voie principale dès qu'aucun LAN commun ne répond** (85 % des foyers sans point d'accès) pour **tous** les usages. `RoutePolicy.forUse` doit **déléguer** à `C/link/WdPolicy.route` (w18-02) au lieu de porter sa propre table ; `DiscoveryPlanner` ajoute la source `P2P_DNSSD` (présence `id`/nom sans identifiant) et consomme `PinBook.wdOf` (identifiants connus ⇒ jonction directe). Lire `DESIGN-W18-WIFI-DIRECT-PRIMAIRE-2026-10-03.md` § 3.2, § 5.1 avant d'exécuter ; le reste du cahier est inchangé.
+
 **Vague 7a · Effort M (≈ 2,5 j) · Modèle : sonnet · Statut PRÊT (en parallèle de w7-01 : implémente l'interface `RouteTable` de son cahier).** Conception : `DESIGN-W7-PLUG-AND-PLAY-SYNC.md` § 4.1, § 4.3, § 5.2. Branche `claude/sonnet-w7-09`. Rapport : `docs/agent-reports/sonnet-w7-09.md`.
 
 ## Objectif

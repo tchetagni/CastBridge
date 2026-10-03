@@ -1,5 +1,7 @@
 # w7-12 — CastBridge-TV : `TvBeacon` toujours allumé (canaux `…0005` et `…0006`, mDNS v2), `TvPermissions` sans boucle, démarrage/redémarrage
 
+> **Amendement (Fable, 2026-10-03, DESIGN-W18)** : `TvBeacon` publie **aussi** le service DNS-SD **P2P** (`WdDnsSd`, w18-07 : `_castbridge._tcp` avec `id`, nom, version ; jamais MAC ni mot de passe) quand le groupe Wi-Fi Direct persistant est allumé, et `TvPermissions` demande `NEARBY_WIFI_DEVICES` (33+) avec le Bluetooth, une fois. La règle « allumé à l'écran » du groupe (D-W18-3) appartient à `TvService`/`WifiDirectGroup` (w18-07), pas au beacon. Lire `DESIGN-W18-WIFI-DIRECT-PRIMAIRE-2026-10-03.md` § 3.1, § 5.3 ; le reste du cahier est inchangé.
+
 **Vague 7b · Effort L (≈ 3,5 j) · Modèle : sonnet · Statut PRÊT (après 7a fusionnée).** Conception : `DESIGN-W7-PLUG-AND-PLAY-SYNC.md` § 2 (problèmes 1, 9), § 4.2, § 5.4, § 8.3. Branche `claude/sonnet-w7-12`. Rapport : `docs/agent-reports/sonnet-w7-12.md`.
 
 ## Objectif
