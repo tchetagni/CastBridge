@@ -18,6 +18,11 @@ interface QuestionSource {
      * previous one released). Default = [bank] (sources without per-level content).
      */
     fun bankFor(filter: QuestionFilter): QuizBank = bank()
+    /**
+     * A new game of [filter] begins: a source that serves a bundled level in slices (see [EmbeddedLevels]) moves on to the next slice
+     * (the first game keeps the slice already loaded). Default: nothing.
+     */
+    fun newGame(filter: QuestionFilter) {}
 }
 
 /** The banks shipped in the app's resources (general knowledge + school tracks). */
@@ -25,6 +30,7 @@ class EmbeddedQuestionSource(
     private val resources: List<String> = DEFAULT_RESOURCES,
     /** Per-level bundled content (null = none). Only one level is kept in memory at a time. */
     private val levels: EmbeddedLevels? = EmbeddedLevels(),
+    private val clock: () -> Long = System::currentTimeMillis, private val idleMs: Long = 600_000,
 ) : QuestionSource {
     override val origin = "embarquée"
     private val bank: QuizBank by lazy {
@@ -34,22 +40,42 @@ class EmbeddedQuestionSource(
     }
     override fun bank() = bank
 
-    private class Loaded(val key: String, val bank: QuizBank)
+    private class Loaded(val key: String, val bank: QuizBank, var used: Boolean = false, var lastUse: Long = 0)
     @Volatile private var loaded: Loaded? = null
+
+    /** Key of the slice of [filter]: the level and the field (a lycée subject / university field loads only the lots of that field). */
+    private fun keyOf(lv: EmbeddedLevels.Level, f: QuestionFilter) = lv.key + "/" + (f.field ?: "")
 
     override fun bankFor(filter: QuestionFilter): QuizBank {
         QuizLevelAvailability.aliasFor(filter)?.let { return aliasBank(it) }
         val lv = levels?.levelFor(filter) ?: return bank
-        loaded?.let { if (it.key == lv.key) return it.bank }
+        val key = keyOf(lv, filter)
+        loaded?.takeIf { it.key == key }?.let { cur ->
+            // untouched for a long time = another game: move on to the next files (the host may also say so with [newGame])
+            if (clock() - cur.lastUse <= idleMs) { cur.lastUse = clock(); return cur.bank }
+        }
         return synchronized(this) {
-            loaded?.takeIf { it.key == lv.key }?.bank
-                ?: bank.merge(levels.load(lv)).also { loaded = Loaded(lv.key, it) }   // replaces (not adds to) the previous level
+            val cur = loaded?.takeIf { it.key == key }
+            if (cur != null && clock() - cur.lastUse <= idleMs) { cur.lastUse = clock(); return@synchronized cur.bank }
+            if (cur != null) levels.advance(lv, filter.field)   // idle: the next game starts on the following files
+            Loaded(key, bank.merge(levels.load(lv, filter.field)), lastUse = clock()).also { loaded = it }.bank   // replaces (not adds to) the previous level
+        }
+    }
+
+    /** A game of [filter] begins: the first one plays the slice loaded for it, each next one the following files (anti-repetition works by id). */
+    override fun newGame(filter: QuestionFilter) {
+        val lv = levels?.levelFor(filter) ?: return
+        val cur = loaded?.takeIf { it.key == keyOf(lv, filter) }
+        synchronized(this) {
+            if (cur == null) { bankFor(filter); loaded?.used = true; return }
+            if (cur.used) { levels.advance(lv, filter.field); loaded = null; bankFor(filter) }
+            loaded?.used = true
         }
     }
 
     /**
      * « SIL » (the CP questions) and « Form 4 » (Form 3 + Form 5 interleaved): built from the source levels one after the other,
-     * so that only one bundled level is in memory at a time (R-11); the result replaces the level kept before.
+     * so that only one bundled slice is in memory at a time (R-11); the result replaces the level kept before.
      */
     private fun aliasBank(alias: QuizLevelAvailability.Alias): QuizBank {
         val lv = levels ?: return bank
@@ -101,6 +127,8 @@ class CachedQuestionSource(
 
     private class ForLevel(val from: QuizBank, val result: QuizBank, val cacheGen: Any?)
     @Volatile private var forLevel: ForLevel? = null
+
+    override fun newGame(filter: QuestionFilter) = fallback.newGame(filter)
 
     /** Bundled level + server cache; one level kept (see [EmbeddedQuestionSource.bankFor]). */
     override fun bankFor(filter: QuestionFilter): QuizBank {
