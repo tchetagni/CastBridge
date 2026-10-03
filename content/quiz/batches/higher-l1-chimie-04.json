@@ -326,22 +326,6 @@
   {
    "course": "l1-chim",
    "category": "Lewis et VSEPR",
-   "difficulty": 1,
-   "question": "Quelle est la géométrie de la molécule de méthane CH₄ ?",
-   "choices": [
-    "Plane carrée, avec des angles de 90°",
-    "Tétraédrique, avec des angles H–C–H de 109,5°",
-    "Pyramidale à base carrée",
-    "Plane triangulaire, avec des angles de 120°"
-   ],
-   "answer": "B",
-   "explanation": "Quatre doublets liants autour du carbone se repoussent au maximum : disposition tétraédrique.",
-   "source": "Cours de chimie générale, famille Chang / Atkins",
-   "verif": "import"
-  },
-  {
-   "course": "l1-chim",
-   "category": "Lewis et VSEPR",
    "difficulty": 2,
    "question": "Pourquoi CO₂ est-il linéaire alors que H₂O est coudée ?",
    "choices": [
@@ -822,22 +806,6 @@
   {
    "course": "l1-chim",
    "category": "Acides et bases de Brønsted",
-   "difficulty": 1,
-   "question": "Quelle est la base conjuguée de l'ion ammonium NH₄⁺ ?",
-   "choices": [
-    "L'ion hydroxyde OH⁻",
-    "L'ammoniac NH₃",
-    "L'ion amidure NH₂⁻",
-    "L'ion nitrate NO₃⁻"
-   ],
-   "answer": "B",
-   "explanation": "NH₄⁺ cède un proton pour donner NH₃ : le couple est NH₄⁺/NH₃.",
-   "source": "Cours de chimie générale, famille Chang / Atkins",
-   "verif": "import"
-  },
-  {
-   "course": "l1-chim",
-   "category": "Acides et bases de Brønsted",
    "difficulty": 2,
    "question": "Quelle est la base conjuguée de l'acide sulfurique H₂SO₄ en solution aqueuse ?",
    "choices": [
@@ -945,22 +913,6 @@
    "answer": "A",
    "explanation": "L'autoprotolyse est endothermique : Ke croît avec T, [H₃O⁺] = [OH⁻] = √Ke est supérieure à 10⁻⁷ mol/L, mais l'eau reste neutre.",
    "source": "Cours de chimie physique de licence, famille Atkins",
-   "verif": "import"
-  },
-  {
-   "course": "l1-chim",
-   "category": "pH et produit ionique de l'eau",
-   "difficulty": 5,
-   "question": "Quel est le pH, à 25 °C, d'une solution d'acide chlorhydrique à 1,0 × 10⁻⁸ mol/L ?",
-   "choices": [
-    "8,0",
-    "Environ 6,98",
-    "6,0",
-    "Environ 7,5"
-   ],
-   "answer": "B",
-   "explanation": "Il faut tenir compte de l'autoprotolyse de l'eau : [H₃O⁺] ≈ 1,05 × 10⁻⁷ mol/L. Un acide ne peut pas rendre la solution basique.",
-   "source": "Cours de chimie analytique, famille Skoog",
    "verif": "import"
   },
   {
@@ -1126,54 +1078,6 @@
   {
    "course": "l1-chim",
    "category": "Oxydoréduction",
-   "difficulty": 1,
-   "question": "Dans la réaction Zn + Cu²⁺ → Zn²⁺ + Cu, quelle espèce joue le rôle d'oxydant ?",
-   "choices": [
-    "Zn",
-    "Zn²⁺",
-    "Cu²⁺",
-    "Cu"
-   ],
-   "answer": "C",
-   "explanation": "Cu²⁺ capte des électrons (il est réduit en Cu) : c'est l'oxydant.",
-   "source": "Cours de chimie générale, famille Chang / Atkins",
-   "verif": "import"
-  },
-  {
-   "course": "l1-chim",
-   "category": "Oxydoréduction",
-   "difficulty": 2,
-   "question": "Quel est le nombre d'oxydation du manganèse dans l'ion permanganate MnO₄⁻ ?",
-   "choices": [
-    "+4",
-    "+7",
-    "+2",
-    "+5"
-   ],
-   "answer": "B",
-   "explanation": "x + 4 × (−2) = −1 donne x = +7.",
-   "source": "Cours de chimie générale, famille Chang / Atkins",
-   "verif": "import"
-  },
-  {
-   "course": "l1-chim",
-   "category": "Oxydoréduction",
-   "difficulty": 2,
-   "question": "Quel est le nombre d'oxydation de l'oxygène dans le peroxyde d'hydrogène H₂O₂ ?",
-   "choices": [
-    "−2",
-    "0",
-    "−1/2",
-    "−1"
-   ],
-   "answer": "D",
-   "explanation": "Dans un peroxyde, la liaison O–O fait que chaque oxygène a pour nombre d'oxydation −1 (et non −2).",
-   "source": "Cours de chimie générale, famille Chang / Atkins",
-   "verif": "import"
-  },
-  {
-   "course": "l1-chim",
-   "category": "Oxydoréduction",
    "difficulty": 3,
    "question": "Dans la préparation de l'eau de Javel (Cl₂ + 2 OH⁻ → Cl⁻ + ClO⁻ + H₂O), quelle transformation le dichlore subit-il ?",
    "choices": [
@@ -1296,22 +1200,6 @@
    ],
    "answer": "C",
    "explanation": "Une réaction exothermique libère de la chaleur : son enthalpie de réaction à pression constante est négative.",
-   "source": "Cours de chimie physique de licence, famille Atkins",
-   "verif": "import"
-  },
-  {
-   "course": "l1-chim",
-   "category": "Thermochimie",
-   "difficulty": 2,
-   "question": "Quelle est l'enthalpie standard de formation du dioxygène O₂(g) à 298 K ?",
-   "choices": [
-    "−286 kJ/mol",
-    "−394 kJ/mol",
-    "+249 kJ/mol",
-    "0 kJ/mol"
-   ],
-   "answer": "D",
-   "explanation": "L'enthalpie standard de formation d'un corps simple dans son état standard de référence est nulle par convention.",
    "source": "Cours de chimie physique de licence, famille Atkins",
    "verif": "import"
   },
@@ -1776,22 +1664,6 @@
    ],
    "answer": "C",
    "explanation": "Le groupe hydroxyle donne le suffixe -ol (éthanol, propan-2-ol) ; -al est celui des aldéhydes, -one celui des cétones.",
-   "source": "Cours de licence de chimie organique, famille des manuels Clayden/McMurry",
-   "verif": "import"
-  },
-  {
-   "course": "l1-chim",
-   "category": "Nomenclature organique",
-   "difficulty": 1,
-   "question": "Quel est le nom IUPAC de CH₃–CH(CH₃)–CH₂–CH₃ ?",
-   "choices": [
-    "2-méthylbutane",
-    "3-méthylbutane",
-    "2-méthylpropane",
-    "2-éthylpropane"
-   ],
-   "answer": "A",
-   "explanation": "La chaîne la plus longue compte 4 carbones et porte un méthyle en position 2 (numérotation la plus basse).",
    "source": "Cours de licence de chimie organique, famille des manuels Clayden/McMurry",
    "verif": "import"
   },
