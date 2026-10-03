@@ -11,9 +11,30 @@ object WifiDirect {
     // No look-alike characters (0/O, 1/l/I): the password is read off a TV screen and typed on a phone.
     private const val ALPHABET = "abcdefghijkmnpqrstuvwxyzABCDEFGHJKLMNPQRSTUVWXYZ23456789"
 
-    fun generatePassphrase(random: java.util.Random = SecureRandom(), length: Int = 10): String {
+    /** Length of a group's WPA2-PSK passphrase: 16 random characters of [ALPHABET] (about 93 bits), fresh for every group. */
+    const val PASSPHRASE_LENGTH = 16
+
+    fun generatePassphrase(random: java.util.Random = SecureRandom(), length: Int = PASSPHRASE_LENGTH): String {
         require(length in 8..63)
         return (1..length).joinToString("") { ALPHABET[random.nextInt(ALPHABET.length)].toString() }
+    }
+
+    /** A new group's passphrase (never stored: it lives as long as the group, docs/agent-reports/auto-wifi-direct.md). */
+    fun groupPassphrase(random: java.util.Random = SecureRandom()): String = generatePassphrase(random, PASSPHRASE_LENGTH)
+
+    /** A new group's network name, "DIRECT-CB-" + 6 random characters: two TVs side by side never share a name, so a phone never tries the wrong one. */
+    fun groupNetworkName(random: java.util.Random = SecureRandom()): String =
+        "DIRECT-CB-" + (1..6).joinToString("") { ALPHABET[random.nextInt(ALPHABET.length)].toString() }
+
+    /** Why the TV gave no group (CBTN answer `wd.err=`): one known word, never free text. */
+    object Err {
+        const val WIFI_OFF = "wifi_off"
+        const val UNSUPPORTED = "unsupported"
+        const val PERMISSION = "permission"
+        const val TRIAL = "trial"
+        const val POLICY = "policy"
+        const val FAILED = "failed"
+        val ALL = setOf(WIFI_OFF, UNSUPPORTED, PERMISSION, TRIAL, POLICY, FAILED)
     }
 
     /** A Wi-Fi Direct group name must be "DIRECT-xy" (x, y alphanumeric) plus an optional suffix, 9..32 bytes. */

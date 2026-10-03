@@ -268,6 +268,17 @@ private fun ConnectionSection(@Suppress("UNUSED_PARAMETER") v: Int) {
     Line("Dernier contact", whenText(st.lastContactAt) + (st.lastContactMessage?.let { " — $it" } ?: ""))
     if (st.blocked) Text("Appareil bloqué par l'administrateur : pas de mise à jour.", color = MaterialTheme.colorScheme.error)
     if (st.channel == "beta") Line("Canal", "bêta (choisi par l'administrateur)")
+    // R-14 (docs/agent-reports/auto-wifi-direct.md): on by default; off = big files go by Bluetooth (slow) when no common Wi-Fi exists
+    val ctx = LocalContext.current
+    var autoWd by remember { mutableStateOf(AutoWifiDirect.enabled(ctx)) }
+    Row(verticalAlignment = Alignment.CenterVertically) {
+        Column(Modifier.weight(1f)) {
+            Text("Wi-Fi Direct automatique (si seul le Bluetooth est disponible)", style = MaterialTheme.typography.bodyLarge)
+            Text("Sans réseau commun avec la TV, les gros fichiers passent par un lien Wi-Fi direct créé tout seul (bien plus rapide que le Bluetooth). " +
+                "Le Bluetooth reste le lien de secours.", style = MaterialTheme.typography.bodySmall, color = MaterialTheme.colorScheme.onSurfaceVariant)
+        }
+        Switch(autoWd, { autoWd = it; AutoWifiDirect.set(ctx, it) })
+    }
 }
 
 @Composable

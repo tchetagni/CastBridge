@@ -300,24 +300,43 @@ class TvService : Service(), Device {
     }
 
     /**
-     * What a phone gets over Bluetooth when it asks for a faster link (CBTN): the TV's addresses and, if the group exists or
-     * may be created now (LinkPlanner.mayStartWifiDirect), its Wi-Fi Direct network. Waits up to 8 s for a new group.
+     * What a phone gets over Bluetooth when it asks for a faster link (CBTN, [peer] = the paired socket's device, already checked: trusted phone or PIN
+     * holder): the TV's addresses and, if the group exists or may be created now (LinkPlanner.mayStartWifiDirect), its Wi-Fi Direct network. Waits up to
+     * 8 s for a new group. « Seul le Bluetooth » (docs/agent-reports/auto-wifi-direct.md): a phone that cannot reach the TV's network
+     * ([castbridge.core.tv.BtProtocol.WD_LAN_UNREACHABLE]) gets an AUTOMATIC group (random name, fresh password, removed by [wdLeaseCheck]);
+     * [castbridge.core.tv.BtProtocol.WD_RELEASE] gives it back. [peer] null = the HELLO answer: an automatic group's password is never in it.
      */
-    fun linkInfo(wantWifiDirect: Boolean): castbridge.core.tv.LinkInfo {
+    fun linkInfo(peer: String?, flags: Int): castbridge.core.tv.LinkInfo {
         val ips = runCatching {
             NetworkInterface.getNetworkInterfaces().toList().filter { it.isUp && !it.isLoopback }
                 .flatMap { it.inetAddresses.toList() }.filterIsInstance<Inet4Address>().filter { it.isSiteLocalAddress }.mapNotNull { it.hostAddress }
         }.getOrDefault(emptyList())
-        val g = wd
-        val hasLan = ips.any { !it.startsWith("192.168.49.") }
-        if (g != null && g.active == null && g.hasPermission() &&
-            castbridge.core.tv.LinkPlanner.mayStartWifiDirect(wantWifiDirect, prefs.getBool("wd_enabled", false), hasLan)) {
-            main.post { g.start() }
-            val until = System.currentTimeMillis() + 8000
-            while (g.active == null && System.currentTimeMillis() < until) Thread.sleep(200)
-        }
-        val a = g?.active
-        return castbridge.core.tv.LinkInfo(ReceiverServer.PORT, ips, a?.first, a?.second, a?.let { castbridge.core.tv.WifiDirect.GROUP_OWNER_IP })
+        val host = wdHost ?: return castbridge.core.tv.LinkInfo(ReceiverServer.PORT, castbridge.core.link.HelloIps.lanOnly(ips))
+        // all the decisions (group addresses never announced, one creation at a time, a lease per phone, trial first) live in core TvWdHost (tested)
+        val r = host.answer(peer, flags, ips, ReceiverServer.PORT, ActivationCenter.trial(), prefs.getBool("wd_enabled", false))
+        if (peer != null && flags and castbridge.core.tv.BtProtocol.WD_RELEASE != 0) main.post { wdLeaseCheck() }
+        return r
+    }
+
+    /** The core side of the automatic group; its Android calls run on the main looper like the MENU's. */
+    private val wdHost: castbridge.core.link.TvWdHost? by lazy {
+        val g = wd ?: return@lazy null
+        castbridge.core.link.TvWdHost(object : castbridge.core.link.WdGroupDriver by g {
+            override fun start(forPhone: Boolean) { main.post { g.start(forPhone) } }
+        }, System::currentTimeMillis)
+    }
+
+    /**
+     * The automatic Wi-Fi Direct group ([castbridge.core.link.WdGroupLease]): removed once every phone gave it back, they left (no client after 45 s), or it
+     * stopped receiving; never during a reception. Only HTTP receptions keep it ([castbridge.core.link.LeaseBusy]: an open phone remote never does). Called
+     * every 5 s by [transferTick] and at once after a WD_RELEASE. The owner's group (MENU) is never touched.
+     */
+    private fun wdLeaseCheck() {
+        val g = wd ?: return
+        val host = wdHost ?: return
+        if (g.active == null || !g.auto) return
+        val busy = castbridge.core.link.LeaseBusy.count(httpTransfers = server?.activeTransfers() ?: 0, btReceptions = if (bt?.busy == true) 1 else 0, remoteSessions = 0)
+        g.clients { n -> if (host.leaseCheck(busy, n)) syncIconsAsync() }
     }
 
     // ---- plug and play: a trusted phone asks "who am I?" over Bluetooth (CBTH) and gets the TV's Wi-Fi address and its own token ----
@@ -329,7 +348,7 @@ class TvService : Service(), Device {
 
     private val helloHandler by lazy {
         castbridge.core.trust.HelloHandler(trust, pairing, ::btBonded, ::tvName, runCatching { packageManager.getPackageInfo(packageName, 0).versionName }.getOrNull() ?: "?",
-            { "CastBridge TV " + (Build.MODEL ?: "") }, { linkInfo(false) }, { p -> phoneConnected(p) }, castbridge.core.trust.AttemptLimiter(global = 40, perPeer = 10),
+            { "CastBridge TV " + (Build.MODEL ?: "") }, { linkInfo(null, 0) }, { p -> phoneConnected(p) }, castbridge.core.trust.AttemptLimiter(global = 40, perPeer = 10),
             { name, d -> castbridge.core.trust.TvRefusals.message(name, d)?.let { notice(it); setStatus("1-phone", it) } })
     }
 
@@ -605,6 +624,7 @@ class TvService : Service(), Device {
                     (applicationContext.getSystemService(Context.WIFI_SERVICE) as WifiManager).createWifiLock(WifiManager.WIFI_MODE_FULL_HIGH_PERF, "castbridge-transfer").also { it.acquire() }
                 }.getOrNull()
             } else releaseLocks()
+            runCatching { wdLeaseCheck() }
             main.postDelayed(this, 5000)
         }
     }

@@ -65,11 +65,12 @@ class BtUploadService : Service() {
         cancelled = false
         myToken = token
         current = this
-        worker = thread(name = "bt-upload") { run(uri, address, pin, name) }
+        val allowWd = intent.getBooleanExtra(EXTRA_WD, true)
+        worker = thread(name = "bt-upload") { run(uri, address, pin, name, allowWd) }
         return START_NOT_STICKY
     }
 
-    private fun run(uri: Uri, address: String, pin: String, name: String) {
+    private fun run(uri: Uri, address: String, pin: String, name: String, allowWd: Boolean) {
         val total = runCatching { contentResolver.openFileDescriptor(uri, "r")!!.use { it.statSize } }.getOrDefault(-1)
         if (total <= 0) { finish(ResumableUpload.State.Failed("Fichier illisible")); return }
         val adapter = getSystemService(BluetoothManager::class.java)?.adapter
@@ -89,9 +90,10 @@ class BtUploadService : Service() {
         }
         // Bluetooth first as the control link: ask the TV for a faster way (same Wi-Fi, or its Wi-Fi Direct group).
         _route.value = "Recherche du lien le plus rapide…"
-        val info = runCatching { connect().use { l -> BtProtocol.negotiate(l.input, l.output, castbridge.core.trust.TvAuth.btPin(pin), wantWifiDirect = Build.VERSION.SDK_INT >= 29) } }
+        val wd = allowWd && Build.VERSION.SDK_INT >= 29
+        val info = runCatching { connect().use { l -> BtProtocol.negotiate(l.input, l.output, castbridge.core.trust.TvAuth.btPin(pin), wantWifiDirect = wd) } }
             .onFailure { Log.i(TAG, "negotiate: ${it.javaClass.simpleName} ${it.message}") }.getOrNull()   // older TV (ERR_MAGIC) or no answer: Bluetooth
-        val routes = LinkPlanner.plan(info, ::reachable, canJoinWifiDirect = Build.VERSION.SDK_INT >= 29)
+        val routes = LinkPlanner.plan(info, ::reachable, canJoinWifiDirect = wd)
         for (r in routes) {
             if (cancelled) break
             val res = when (r) {
@@ -227,6 +229,7 @@ class BtUploadService : Service() {
         private const val EXTRA_ADDR = "addr"
         private const val EXTRA_PIN = "pin"
         private const val EXTRA_NAME = "name"
+        private const val EXTRA_WD = "allow_wd"
         private val _state = MutableStateFlow<ResumableUpload.State?>(null)
         val state: StateFlow<ResumableUpload.State?> = _state
         private val _route = MutableStateFlow<String?>(null)
@@ -237,14 +240,19 @@ class BtUploadService : Service() {
         /** A Bluetooth upload is running in this process. */
         fun active(): Boolean = current?.worker?.isAlive == true || UploadService.slot.held()
 
-        fun start(ctx: Context, uri: Uri, fileName: String, address: String, pin: String) {
+        /**
+         * [allowWifiDirect] false = the caller (the queue, core BulkRoute + AutoWifiDirect) already chose Bluetooth: no CBTN Wi-Fi Direct request and no
+         * system dialog here. True = the manual Bluetooth channel (TvHub), unchanged.
+         */
+        fun start(ctx: Context, uri: Uri, fileName: String, address: String, pin: String, allowWifiDirect: Boolean = true) {
             // R-09: the same atomic reservation as Wi-Fi (one upload at a time on the phone); the loser is refused, never dropped
             val token = UploadService.slot.tryReserve(fileName) ?: throw UploadService.Busy()
             try {
                 _state.value = null
                 ctx.startForegroundService(Intent(ctx, BtUploadService::class.java).setData(uri)
                     .addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION)
-                    .putExtra(EXTRA_ADDR, address).putExtra(EXTRA_PIN, pin).putExtra(EXTRA_NAME, fileName).putExtra(UploadService.EXTRA_TOKEN, token))
+                    .putExtra(EXTRA_ADDR, address).putExtra(EXTRA_PIN, pin).putExtra(EXTRA_NAME, fileName).putExtra(UploadService.EXTRA_TOKEN, token)
+                    .putExtra(EXTRA_WD, allowWifiDirect))
             } catch (e: Throwable) { UploadService.slot.release(token); throw e }
         }
 

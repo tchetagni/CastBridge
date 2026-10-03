@@ -30,7 +30,7 @@ class HttpTransferApi(private val baseOf: () -> String?, private val credential:
 
     private fun call(method: String, path: String): Pair<Int, String> {
         val base = baseOf() ?: throw IOException("TV introuvable")
-        val c = URL(base + path).openConnection() as HttpURLConnection
+        val c = castbridge.core.net.BoundRoute.open(URL(base + path)) as HttpURLConnection
         c.requestMethod = method; c.connectTimeout = 4000; c.readTimeout = 60_000   // finish re-reads the file on the TV
         castbridge.core.trust.TvCredential.apply(c, credential())
         if (method == "POST") { c.doOutput = true; c.setFixedLengthStreamingMode(0); c.outputStream.close() }

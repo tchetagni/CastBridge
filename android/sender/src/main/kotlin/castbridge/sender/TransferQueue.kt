@@ -211,6 +211,7 @@ object TransferQueue {
         if (!readable(app, uri)) { model.lost(item.id); publish(); return }
         val launch: () -> Unit
         var viaBt = false
+        var viaWd = false; var wdSince = 0L
         // the name sent to the TV: the file's own, or a unique one when the TV holds another content under that very name (R-12, second audit)
         var sendName = item.name
         var dedupe: (suspend () -> Boolean)? = null
@@ -222,14 +223,20 @@ object TransferQueue {
             val session = waitForTv()
             if (session == null) { model.finish(item.id, false, QueueTexts.NO_TV); publish(); return }
             if (item.linkTv != null && session.tv.address != item.linkTv) { model.finish(item.id, false, QueueTexts.OTHER_TV); publish(); return }
-            val base = session.base
+            // « Seul le Bluetooth » (R-14): no common network that answers ⇒ the phone and the TV set up Wi-Fi Direct by themselves (core BulkRoute decides,
+            // AutoWifiDirect joins); the same upload then runs over it, ordered path and « Copier et lire » included. Never instead of a working LAN.
+            val wdBase = if (!castbridge.core.link.BulkRoute.lanRoute(session.route))
+                runCatching { AutoWifiDirect.bulkBase(app, session, item.size) }.onFailure { android.util.Log.w("TransferQueue", "Wi-Fi Direct", it) }.getOrNull() else null
+            if (wdBase != null) { viaWd = true; wdSince = AutoWifiDirect.clock() }     // the same monotonic clock as lostSince
+            val base = wdBase ?: session.base
             viaBt = base == null
             afterBase = base; afterCred = session.credential
             dedupBase = base; dedupCred = session.credential
             // never copy the same file twice: same name, complete, same size already on the TV
             if (base != null) dedupe = { withContext(Dispatchers.IO) { runCatching { castbridge.core.tv.TvDedupe.alreadyThere(castbridge.core.tv.TvInfo.parse(castbridge.core.tv.TvClient(base, session.credential).info()).file(item.name), item.size) }.getOrDefault(false) } }
             launch = {
-                if (viaBt) BtUploadService.start(app, uri, sendName, session.tv.address, session.credential)
+                // the queue already chose the route (BulkRoute): the Bluetooth service never sets up Wi-Fi Direct on its own (no system dialog)
+                if (viaBt) BtUploadService.start(app, uri, sendName, session.tv.address, session.credential, allowWifiDirect = false)
                 else UploadService.start(app, uri, sendName, session.tv.mdns ?: session.tv.name, base!!.removePrefix("http://"), session.credential,
                     progressive = item.progressive, autoPlay = item.autoPlay, move = item.move, ordered = item.ordered, target = item.target)
             }
@@ -290,10 +297,23 @@ object TransferQueue {
             castbridge.core.tv.QueueOutcome.Kind.PAUSE_BACKGROUND -> { requeuePaused(item, QueueTexts.PAUSED_BACKGROUND); return }
             // the previous upload was still ending: back to its place, again in a moment (never a failure)
             castbridge.core.tv.QueueOutcome.Kind.RETRY_SOON -> { model.release(item.id); publish(); delay(2_000); return }
-            castbridge.core.tv.QueueOutcome.Kind.FAILED -> model.finish(item.id, false, outcome)
+            castbridge.core.tv.QueueOutcome.Kind.FAILED -> {
+                // the Wi-Fi Direct group fell during the copy: back to its place for a new decision (re-join, or Bluetooth after 3 failures), at most twice
+                val n = wdReroutes[item.id] ?: 0
+                if (castbridge.core.link.BulkRoute.rerouteAfterLoss(viaWd, AutoWifiDirect.lostSince(wdSince), n)) {
+                    wdReroutes[item.id] = n + 1
+                    model.release(item.id); publish(); delay(2_000); return
+                }
+                wdReroutes.remove(item.id)
+                model.finish(item.id, false, outcome)
+            }
         }
+        if (!model.busy()) AutoWifiDirect.queueIdle()
         publish()
     }
+
+    /** Reroutes of a file after the loss of the Wi-Fi Direct group ([castbridge.core.link.BulkRoute.MAX_REROUTES]), in memory. */
+    private val wdReroutes = ConcurrentHashMap<Long, Int>()
 
     private enum class Dedup { COPY, SKIPPED, CANCELLED, SAME_NAME_UNKNOWN }
     /** [sendAs] = a unique name to send under (same name and size on the TV, different content). */

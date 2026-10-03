@@ -55,7 +55,8 @@ fun rememberBtPermission(): Pair<Boolean, @Composable () -> Unit> {
             Text(if (blocked) "Le Bluetooth est bloqué pour CastBridge. Ouvrez les réglages de l'app › Autorisations › « Appareils à proximité » › Autoriser."
                 else "CastBridge a besoin de l'autorisation « Appareils à proximité » pour parler à la TV en Bluetooth.",
                 style = MaterialTheme.typography.bodyMedium, color = if (blocked) MaterialTheme.colorScheme.error else MaterialTheme.colorScheme.onSurface)
-            if (!blocked) Button(onClick = { ask.launch(BT_PERMISSIONS) }) { Text("Autoriser le Bluetooth") }
+            // R-14: the automatic Wi-Fi Direct's permission (Android 13+) belongs to the same « Appareils à proximité » group: asked with it, one answer
+            if (!blocked) Button(onClick = { ask.launch(BT_PERMISSIONS + listOfNotNull(castbridge.core.link.WdJoin.permission(Build.VERSION.SDK_INT))) }) { Text("Autoriser le Bluetooth") }
             OutlinedButton(onClick = {
                 runCatching { ctx.startActivity(Intent(Settings.ACTION_APPLICATION_DETAILS_SETTINGS, Uri.parse("package:${ctx.packageName}")).addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)) }
             }) { Text("Ouvrir les réglages de l'app") }
