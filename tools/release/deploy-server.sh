@@ -9,16 +9,23 @@
 #   bash tools/release/deploy-server.sh <ref> --push-only --apply   # pousse seulement la référence vers « bridge »
 #   bash tools/release/deploy-server.sh --status --apply   # révision en service + références du dépôt bare (lecture seule, se connecte)
 #   bash tools/release/deploy-server.sh --rollback --apply # revient à la release précédente
+#   bash tools/release/deploy-server.sh server-play-<v> --service play            # DRY-RUN du service de jeu en ligne castbridge-play
+#   bash tools/release/deploy-server.sh server-play-<v> --service play --apply    # le déploie (hors partie ; voir docs/PLAY-OPS.md)
+#   bash tools/release/deploy-server.sh --status --service play --apply | --rollback --service play --apply
 #
 # Options : --apply  exécute (sans lui : aucune connexion, aucune écriture, aucun effet)
 #           --host U@H   cible (défaut : $CB_DEPLOY_HOST, sinon ubuntu@bridge.sti-cm.com)
 #           --no-push    ne pousse rien : la révision doit déjà être dans le dépôt bare (accepte alors un commit nu)
 #           --push-only  s'arrête après le push
 #           --strict-clean   refuse aussi s'il existe des fichiers non suivis (par défaut : seulement les fichiers suivis modifiés)
+#           --service api|play   service visé (défaut api : comportement inchangé). « play » = castbridge-play (tag server-play-<v>), projet
+#                                compose « castbridge-play », image castbridge-play:candidate -> :current -> :previous, santé GET /play/health,
+#                                liens <root>/current-play et previous-play ; castbridge-api, la base et nginx ne sont JAMAIS touchés.
 #           -h, --help
 # Variables : CB_DEPLOY_HOST, CB_DEPLOY_ROOT (/home/ubuntu/castbridge), CB_LIVE_DIR (<root>/services/castbridge/backend, disposition
 #             d'origine), CB_BARE_REPO (<root>/castbridge.git), CB_BRIDGE_REMOTE (bridge), CB_DOCKER ("sudo docker"),
-#             CB_HEALTH_TIMEOUT (240 s), CB_SSH_OPTS. Aucun secret n'est lu ni écrit par ce script : .env, secrets/ et geoip/ sont copiés
+#             CB_HEALTH_TIMEOUT (240 s), CB_SSH_OPTS ; service play : CB_PLAY_LIVE_DIR (<root>/services/play, contient .env.play 0600),
+#             CB_PLAY_RUNTIME_IMAGE (image d'exécution par digest, relevée sur l'hôte le 2026-10-03), CB_PLAY_FORCE=1 (déployer malgré des salles ouvertes). Aucun secret n'est lu ni écrit par ce script : .env, secrets/ et geoip/ sont copiés
 #             SUR LE SERVEUR depuis la release en service.
 #
 # Ce que fait --apply, dans l'ordre (rien n'est modifié en service avant l'étape 6) :
@@ -34,6 +41,9 @@
 #               --no-deps castbridge-api » (la base et les autres conteneurs de l'hôte ne sont pas touchés, nginx n'est pas redémarré).
 #   7 serveur : attend le healthcheck ; si OK, bascule le lien <root>/current (et <root>/previous) ; sinon ROLLBACK AUTOMATIQUE (image
 #               précédente + fichiers de la release précédente) et code de sortie 1.
+# Service play (--service play) : mêmes garde-fous locaux ; étapes distantes : release extraite (backend/docker-compose.play.yml, server-play/, android/core,
+# content/learn, content/langues), .env.play copié (0600) depuis <root>/services/play, image construite depuis la RACINE de la release, refus si des salles
+# sont ouvertes, bascule, vérification que le port n'est publié que sur 127.0.0.1, santé, rollback automatique.
 # Première exécution (disposition d'origine, pas encore de lien <root>/current) : la release en service est <root>/services/castbridge/backend,
 # COPIÉE (jamais déplacée) ; sa révision n'étant pas connue (image étiquetée « unknown »), elle est notée « révision initiale inconnue ».
 set -Eeuo pipefail
@@ -46,7 +56,10 @@ BRIDGE="${CB_BRIDGE_REMOTE:-bridge}"
 DOCKER_CMD="${CB_DOCKER:-sudo docker}"
 HEALTH_TIMEOUT="${CB_HEALTH_TIMEOUT:-240}"
 SSH_OPTS="${CB_SSH_OPTS:--o BatchMode=yes -o ConnectTimeout=15}"
-APPLY=0; MODE=deploy; REF=""; STRICT=0; NOPUSH=0; PUSHONLY=0
+PLAY_LIVE_DIR="${CB_PLAY_LIVE_DIR:-$ROOT/services/play}"
+PLAY_RUNTIME_IMAGE="${CB_PLAY_RUNTIME_IMAGE:-eclipse-temurin@sha256:fcd7fd7b387f94bb2ac461478a7436ad8e349924c374ea8313919624dceae636}"
+PLAY_FORCE="${CB_PLAY_FORCE:-0}"
+APPLY=0; MODE=deploy; REF=""; STRICT=0; NOPUSH=0; PUSHONLY=0; SERVICE=api
 
 usage() { awk 'NR>1 && /^#/ {sub(/^# ?/, ""); print; next} NR>1 {exit}' "$0"; }
 while [ $# -gt 0 ]; do
@@ -57,6 +70,8 @@ while [ $# -gt 0 ]; do
         --strict-clean) STRICT=1 ;;
         --no-push) NOPUSH=1 ;;
         --push-only) PUSHONLY=1 ;;
+        --service) shift; [ $# -gt 0 ] || { echo "--service attend api ou play" >&2; exit 2; }
+            case "$1" in api|play) SERVICE="$1" ;; *) echo "--service : api ou play seulement (reçu : $1)" >&2; exit 2 ;; esac ;;
         --host) shift; [ $# -gt 0 ] || { echo "--host attend user@hôte" >&2; exit 2; }; HOST="$1" ;;
         -h|--help) usage; exit 0 ;;
         -*) echo "option inconnue : $1 (voir --help)" >&2; exit 2 ;;
@@ -267,6 +282,175 @@ exit 0
 REMOTE
 }
 
+# --------------------------------------------------------------------------- service play (ajout : n'altère aucune fonction ci-dessus)
+remote_play_common() { cat <<'REMOTE'
+PLAY_CT=castbridge-play
+play_compose() { # $1 = répertoire de release : projet compose DISTINCT de « castbridge » (l'API et la base ne sont pas dans ce projet)
+    PCOMPOSE=("${DOCKER[@]}" compose --project-name castbridge-play -f "$1/backend/docker-compose.play.yml")
+}
+wait_healthy_play() {
+    local waited=0 state
+    while [ "$waited" -lt "$HEALTH_TIMEOUT" ]; do
+        state="$("${DOCKER[@]}" inspect -f '{{if .State.Health}}{{.State.Health.Status}}{{else}}{{.State.Status}}{{end}}' "$PLAY_CT" 2>/dev/null || echo absent)"
+        case "$state" in
+            healthy) return 0 ;;
+            unhealthy|exited|dead|absent) [ "$waited" -gt 20 ] && return 1 ;;
+        esac
+        sleep 5; waited=$((waited + 5))
+    done
+    return 1
+}
+# le port ne doit être publié QUE sur 127.0.0.1 (exigence 1 de docs/PLAY-OPS-REQUIREMENTS.md)
+port_loopback_only() {
+    local ports; ports="$("${DOCKER[@]}" port "$PLAY_CT" 2>/dev/null || true)"
+    [ -n "$ports" ] || return 1
+    ! printf '%s\n' "$ports" | grep -v -- '-> 127\.0\.0\.1:' | grep -q .
+}
+play_rooms() { "${DOCKER[@]}" exec "$PLAY_CT" curl -fsS http://127.0.0.1:8080/play/health 2>/dev/null | sed -n 's/.*"rooms":\([0-9][0-9]*\).*/\1/p'; }
+REMOTE
+}
+
+remote_deploy_play() { remote_play_common; cat <<'REMOTE'
+mkdir -p "$ROOT/releases"
+exec 9>"$ROOT/releases/.deploy.lock"; flock -n 9 || die "un autre déploiement est en cours"
+case "$REL" in "$ROOT"/releases/?*) ;; *) die "répertoire de release hors de $ROOT/releases : $REL" ;; esac
+[ ! -e "$REL" ] || die "la release existe déjà : $REL"
+[ -d "$BARE" ] || die "dépôt bare introuvable : $BARE (le push vers « bridge » a-t-il eu lieu ?)"
+git --git-dir="$BARE" cat-file -e "$SHA^{commit}" 2>/dev/null || die "la révision $SHA est absente du dépôt bare : pousser la référence vers « bridge » d'abord"
+if [ -n "$GITREF" ]; then
+    [ "$(git --git-dir="$BARE" rev-parse -q --verify "$GITREF^{commit}" 2>/dev/null || echo none)" = "$SHA" ] \
+        || die "$GITREF du dépôt bare ne désigne pas $SHA : abandon"
+fi
+[ -f "$PLAY_LIVE_DIR/.env.play" ] || die "$PLAY_LIVE_DIR/.env.play absent (copier backend/.env.play.example, le remplir, chmod 600) : rien n'a été modifié en service"
+if [ -L "$ROOT/current-play" ]; then OLD="$(readlink -f "$ROOT/current-play")"; else OLD=""; fi
+
+# ---- 3. release extraite du dépôt bare (le contexte de construction du Dockerfile est la RACINE de la release)
+mkdir -p "$ROOT/releases" && mkdir "$REL"
+if ! git --git-dir="$BARE" archive --format=tar "$SHA" backend/docker-compose.play.yml backend/.env.play.example backend/sql \
+        android/core android/gradle.properties server-play content/learn content/langues | tar -x -C "$REL" -f -; then
+    rm -rf "$REL"; die "extraction impossible (révision sans server-play/ ni backend/docker-compose.play.yml ?) : rien n'a été modifié en service"
+fi
+install -m 600 "$PLAY_LIVE_DIR/.env.play" "$REL/backend/.env.play"
+if grep -Eq '^[[:space:]]*CASTBRIDGE_PLAY_DIRECT=1' "$REL/backend/.env.play"; then
+    log "avertissement : CASTBRIDGE_PLAY_DIRECT=1 dans .env.play (profil STAGING) : derrière nginx, tous les clients partageraient l'adresse de nginx ; ne pas exposer /play/ avec ce profil"
+fi
+printf '%s\n' "$SHA" > "$REL/REVISION"
+{ echo "service=play"; echo "ref=$REF"; echo "version=$VERSION"; echo "sha=$SHA"; echo "deployed_utc=$(date -u +%FT%TZ)"; echo "previous_release=${OLD:-aucune}"; echo "runtime_image=$PLAY_RUNTIME_IMAGE"; } > "$REL/RELEASE"
+play_compose "$REL"; NEW_COMPOSE=("${PCOMPOSE[@]}")
+"${NEW_COMPOSE[@]}" config -q || die "backend/docker-compose.play.yml ou .env.play invalide dans $REL"
+OLD_COMPOSE=()
+if [ -n "$OLD" ] && [ -f "$OLD/backend/docker-compose.play.yml" ]; then play_compose "$OLD"; OLD_COMPOSE=("${PCOMPOSE[@]}"); fi
+
+# ---- 4. image candidate (le service en cours n'est pas touché)
+log "mémoire disponible avant la construction (Gradle est gourmand) : $(free -m 2>/dev/null | awk '/^Mem:/ {print $7 " Mo"}')"
+log "construction castbridge-play:candidate ($SHA, $VERSION) sur $PLAY_RUNTIME_IMAGE"
+"${DOCKER[@]}" build -f "$REL/server-play/Dockerfile" -t castbridge-play:candidate \
+    --build-arg "RUNTIME_IMAGE=$PLAY_RUNTIME_IMAGE" --build-arg "VCS_REF=$SHA" \
+    --label "$LABEL_REV=$SHA" --label "$LABEL_VER=$VERSION" --label "org.opencontainers.image.created=$(date -u +%FT%TZ)" "$REL" \
+    || die "échec de la construction : rien n'a été modifié en service"
+[ "$(img_label castbridge-play:candidate $LABEL_REV)" = "$SHA" ] || die "l'étiquette de révision de l'image ne correspond pas"
+
+# ---- 5. jamais pendant une partie : le redémarrage perd les salles (le service annonce la maintenance puis attend 25 s)
+if [ "$("${DOCKER[@]}" inspect -f '{{.State.Running}}' "$PLAY_CT" 2>/dev/null || echo false)" = "true" ]; then
+    ROOMS="$(play_rooms || true)"
+    log "salles ouvertes : ${ROOMS:-inconnu}"
+    if [ "${ROOMS:-inconnu}" != "0" ] && [ "$PLAY_FORCE" != "1" ]; then
+        "${DOCKER[@]}" rmi castbridge-play:candidate >/dev/null 2>&1 || true
+        die "des salles sont ouvertes (${ROOMS:-inconnu}) : déployer hors partie (heure creuse), ou CB_PLAY_FORCE=1 pour passer outre. Rien n'a été modifié en service"
+    fi
+fi
+
+# ---- 6. bascule de l'image
+rollback() {
+    log "ÉCHEC : retour automatique à la version précédente"
+    "${DOCKER[@]}" logs --tail 80 "$PLAY_CT" 2>&1 || true
+    if "${DOCKER[@]}" image inspect castbridge-play:previous >/dev/null 2>&1; then
+        # fichiers de la release précédente si elle est tracée ; sinon (première bascule depuis un essai manuel) ceux de la release en échec
+        [ "${#OLD_COMPOSE[@]}" -gt 0 ] || OLD_COMPOSE=("${NEW_COMPOSE[@]}")
+        "${DOCKER[@]}" tag castbridge-play:previous castbridge-play:current
+        "${OLD_COMPOSE[@]}" up -d --no-build --no-deps castbridge-play || true
+        if wait_healthy_play && port_loopback_only; then log "version précédente rétablie ($OLD)"; else log "la version précédente ne répond pas non plus : INTERVENTION MANUELLE"; fi
+    else
+        log "pas de version précédente : service castbridge-play arrêté (le reste de l'hôte n'est pas touché)"
+        "${NEW_COMPOSE[@]}" stop castbridge-play || true
+    fi
+    log "le lien $ROOT/current-play n'a pas été modifié ; release en échec conservée : $REL"
+    exit 1
+}
+if "${DOCKER[@]}" image inspect castbridge-play:current >/dev/null 2>&1; then
+    "${DOCKER[@]}" tag castbridge-play:current castbridge-play:previous
+    log "image en service conservée sous castbridge-play:previous"
+fi
+"${DOCKER[@]}" tag castbridge-play:candidate castbridge-play:current
+log "démarrage de castbridge-play depuis $REL (castbridge-api, castbridge-db, nginx non touchés)"
+"${NEW_COMPOSE[@]}" up -d --no-build --no-deps castbridge-play || rollback
+
+# ---- 7. santé, port local seulement, puis bascule des liens
+if wait_healthy_play && port_loopback_only; then
+    log "OK : castbridge-play en bonne santé, port publié sur 127.0.0.1 seulement"
+    if [ -n "$OLD" ]; then ln -sfn "$OLD" "$ROOT/previous-play.new" && mv -T "$ROOT/previous-play.new" "$ROOT/previous-play"; fi
+    ln -sfn "$REL" "$ROOT/current-play.new" && mv -T "$ROOT/current-play.new" "$ROOT/current-play"
+    "${DOCKER[@]}" rmi castbridge-play:candidate >/dev/null 2>&1 || true
+    printf '%s deploy-play %s %s %s <- %s\n' "$(date -u +%FT%TZ)" "$VERSION" "$SHA" "$REL" "${OLD:-aucune}" >> "$ROOT/releases/HISTORY.log"
+    log "en service : $REL ($SHA, $VERSION) ; précédente : ${OLD:-aucune}"
+else
+    rollback
+fi
+REMOTE
+}
+
+remote_rollback_play() { remote_play_common; cat <<'REMOTE'
+mkdir -p "$ROOT/releases"
+exec 9>"$ROOT/releases/.deploy.lock"; flock -n 9 || die "un autre déploiement est en cours"
+[ -L "$ROOT/current-play" ] && [ -L "$ROOT/previous-play" ] || die "pas de release play précédente enregistrée"
+CUR="$(readlink -f "$ROOT/current-play")"; PRV="$(readlink -f "$ROOT/previous-play")"
+[ -d "$PRV" ] || die "release précédente introuvable : $PRV"
+"${DOCKER[@]}" image inspect castbridge-play:previous >/dev/null 2>&1 || die "image castbridge-play:previous absente"
+ROOMS="$(play_rooms || true)"
+if [ "${ROOMS:-0}" != "0" ] && [ "$PLAY_FORCE" != "1" ]; then die "des salles sont ouvertes (${ROOMS}) : revenir en arrière hors partie, ou CB_PLAY_FORCE=1"; fi
+CUR_ID="$("${DOCKER[@]}" image inspect -f '{{.Id}}' castbridge-play:current)"
+play_compose "$PRV"; PRV_COMPOSE=("${PCOMPOSE[@]}")
+play_compose "$CUR"; CUR_COMPOSE=("${PCOMPOSE[@]}")
+"${DOCKER[@]}" tag castbridge-play:previous castbridge-play:current
+"${DOCKER[@]}" tag "$CUR_ID" castbridge-play:previous
+"${PRV_COMPOSE[@]}" up -d --no-build --no-deps castbridge-play || true
+if wait_healthy_play && port_loopback_only; then
+    ln -sfn "$CUR" "$ROOT/previous-play.new" && mv -T "$ROOT/previous-play.new" "$ROOT/previous-play"
+    ln -sfn "$PRV" "$ROOT/current-play.new" && mv -T "$ROOT/current-play.new" "$ROOT/current-play"
+    printf '%s rollback-play %s <- %s\n' "$(date -u +%FT%TZ)" "$PRV" "$CUR" >> "$ROOT/releases/HISTORY.log"
+    log "OK : retour à $PRV ($(cat "$PRV/REVISION" 2>/dev/null || echo 'révision inconnue'))"
+else
+    log "ÉCHEC du retour : remise de la version quittée"
+    "${DOCKER[@]}" tag "$CUR_ID" castbridge-play:current
+    "${CUR_COMPOSE[@]}" up -d --no-build --no-deps castbridge-play || true
+    wait_healthy_play && log "version quittée rétablie ($CUR)" || log "INTERVENTION MANUELLE"
+    exit 1
+fi
+REMOTE
+}
+
+remote_status_play() { remote_play_common; cat <<'REMOTE'
+echo "== Service play (disposition : $([ -L "$ROOT/current-play" ] && echo 'releases tracées' || echo 'aucun déploiement tracé'))"
+if [ -L "$ROOT/current-play" ]; then
+    SRC="$(readlink -f "$ROOT/current-play")"
+    echo "répertoire     : $SRC"
+    echo "REVISION       : $(cat "$SRC/REVISION" 2>/dev/null || echo absent)"
+    [ -f "$SRC/RELEASE" ] && sed 's/^/RELEASE        : /' "$SRC/RELEASE"
+    echo "précédente     : $([ -L "$ROOT/previous-play" ] && readlink -f "$ROOT/previous-play" || echo aucune)"
+fi
+echo "== Conteneur $PLAY_CT"
+echo "image          : $("${DOCKER[@]}" inspect -f '{{.Config.Image}} ({{.Image}})' "$PLAY_CT" 2>/dev/null || echo absent)"
+echo "santé          : $("${DOCKER[@]}" inspect -f '{{if .State.Health}}{{.State.Health.Status}}{{else}}{{.State.Status}}{{end}}' "$PLAY_CT" 2>/dev/null || echo absent)"
+echo "ports publiés  : $("${DOCKER[@]}" port "$PLAY_CT" 2>/dev/null | tr '\n' ' ' || true)"
+echo "salles ouvertes: $(play_rooms || echo inconnu)"
+echo "== Images"
+echo "current        : revision $(img_label castbridge-play:current $LABEL_REV), version $(img_label castbridge-play:current $LABEL_VER)"
+echo "previous       : revision $(img_label castbridge-play:previous $LABEL_REV), version $(img_label castbridge-play:previous $LABEL_VER)"
+[ -f "$ROOT/releases/HISTORY.log" ] && { echo "== Historique (lignes play, 10 dernières)"; grep -E 'deploy-play|rollback-play' "$ROOT/releases/HISTORY.log" | tail -n 10 || true; }
+exit 0
+REMOTE
+}
+
 run_remote() { # $1 = nom de la fonction du script ; variables d'en-tête : le reste
     local fn="$1"; shift
     local script
@@ -282,7 +466,9 @@ run_remote() { # $1 = nom de la fonction du script ; variables d'en-tête : le r
 if [ "$MODE" != deploy ]; then
     echo "== Mode $MODE sur $HOST ($( [ "$APPLY" = 1 ] && echo APPLY || echo DRY-RUN ))"
     [ "$APPLY" = 1 ] || echo "DRY-RUN : aucune connexion. Ajouter --apply pour exécuter."
-    if [ "$MODE" = status ]; then run_remote remote_status; else run_remote remote_rollback; fi
+    if [ "$SERVICE" = play ]; then
+        if [ "$MODE" = status ]; then run_remote remote_status_play PLAY_FORCE; else run_remote remote_rollback_play PLAY_FORCE; fi
+    elif [ "$MODE" = status ]; then run_remote remote_status; else run_remote remote_rollback; fi
     exit 0
 fi
 
@@ -325,13 +511,16 @@ if [ "$NOPUSH" = 0 ]; then
     fi
 fi
 VERSION=""
-case "$REF" in server-*) VERSION="${REF#server-}" ;; esac
+TAGGLOB='server-*'; TAGPFX='server-'
+if [ "$SERVICE" = play ]; then TAGGLOB='server-play-*'; TAGPFX='server-play-'; fi
+case "$REF" in $TAGGLOB) VERSION="${REF#$TAGPFX}" ;; esac
 if [ -z "$VERSION" ] && [ "$SHA" != "$ZERO" ]; then
-    t="$(git tag --points-at "$SHA" 'server-*' 2>/dev/null | sed -n 1p)"
-    if [ -n "$t" ]; then VERSION="${t#server-}"; fi
+    t="$(git tag --points-at "$SHA" "$TAGGLOB" 2>/dev/null | sed -n 1p)"
+    if [ -n "$t" ]; then VERSION="${t#$TAGPFX}"; fi
 fi
+case "$REF" in server-play-*) [ "$SERVICE" = play ] || problem "« $REF » est une étiquette du service de jeu : utiliser --service play (castbridge-api n'est pas concerné)" ;; esac
 [ -n "$VERSION" ] || VERSION="untagged-$SHA7"
-case "$VERSION" in untagged-*) log "avertissement : révision sans tag server-* (version étiquetée « $VERSION ») ; préférer un tag server-<version>" ;; esac
+case "$VERSION" in untagged-*) log "avertissement : révision sans tag $TAGGLOB (version étiquetée « $VERSION ») ; préférer un tag ${TAGPFX}<version>" ;; esac
 UTC="$(date -u +%Y%m%dT%H%M%SZ)"
 case "$KIND" in
     tag) PART="$REF" ;;
@@ -341,13 +530,19 @@ esac
 NAME="$PART-$UTC"
 REL="$ROOT/releases/$NAME"
 
-echo "== Déploiement serveur CastBridge ($( [ "$APPLY" = 1 ] && echo APPLY || echo DRY-RUN ))"
+echo "== Déploiement serveur CastBridge$( [ "$SERVICE" = play ] && echo ' : service de jeu castbridge-play') ($( [ "$APPLY" = 1 ] && echo APPLY || echo DRY-RUN ))"
 echo "cible            : $HOST"
 echo "référence        : $REF ($KIND) -> $SHA ($VERSION)"
 echo "dépôt bare       : $BARE (remote local « $BRIDGE » : ${BRIDGE_URL:-non utilisé})"
 echo "nouvelle release : $REL"
+if [ "$SERVICE" = play ]; then
+    echo "release en service (liens $ROOT/current-play, previous-play) ; .env.play (0600) copié depuis $PLAY_LIVE_DIR ; image d'exécution : $PLAY_RUNTIME_IMAGE"
+    echo "projet compose   : castbridge-play (conteneur castbridge-play seulement ; castbridge-api, castbridge-db, sti-*, infra-nginx, infra-certbot non touchés)"
+    echo "image            : castbridge-play:candidate -> :current (ancienne : :previous) ; santé GET /play/health ; port publié 127.0.0.1:7091 seulement"
+else
 echo "release en service (source de .env, secrets/, geoip/, override) : lien $ROOT/current s'il existe, sinon $LIVE_DIR (copie, jamais déplacée)"
 echo "projet compose   : castbridge (conteneurs castbridge-api / castbridge-db uniquement ; sti-*, infra-nginx, infra-certbot non touchés)"
+fi
 if [ -n "$PROBLEMS" ]; then
     echo "BLOQUANT en --apply :$PROBLEMS"
     if [ "$APPLY" = 1 ]; then exit 3; fi
@@ -382,5 +577,6 @@ if [ "$PUSHONLY" = 1 ]; then
     [ "$APPLY" = 1 ] || echo "DRY-RUN : rien n'a été poussé. Relancer avec --apply."
     exit 0
 fi
-run_remote remote_deploy REL SHA REF VERSION GITREF
+if [ "$SERVICE" = play ]; then run_remote remote_deploy_play REL SHA REF VERSION GITREF PLAY_LIVE_DIR PLAY_RUNTIME_IMAGE PLAY_FORCE
+else run_remote remote_deploy REL SHA REF VERSION GITREF; fi
 [ "$APPLY" = 1 ] || { echo; echo "DRY-RUN : rien n'a été envoyé ni exécuté. Relancer avec --apply."; }

@@ -1,0 +1,61 @@
+# castbridge-play : service de jeu en ligne (WebSocket, SSE, long-poll). Fichier SÉPARÉ de docker-compose.yml : projet compose « castbridge-play »,
+# donc ni castbridge-api, ni castbridge-db, ni les conteneurs de l'autre projet de l'hôte (sti-*) ne sont concernés par un « up » ou un « down » d'ici.
+# Exigences : docs/PLAY-OPS-REQUIREMENTS.md ; mode d'emploi pas à pas : docs/PLAY-OPS.md.
+#
+#   docker compose -f backend/docker-compose.play.yml config -q          # validation (a besoin de backend/.env.play : copier .env.play.example)
+#   docker compose -f backend/docker-compose.play.yml up -d --no-build   # l'image castbridge-play:current doit déjà exister (deploy-server.sh --service play)
+#
+# Port : publié sur 127.0.0.1:7091 SEULEMENT (jamais 0.0.0.0) ; seul nginx (443, TLS) joint le service, par son nom Docker sur « infra-net ».
+# Aucun secret ici : le service ne lit que des CLÉS PUBLIQUES de tickets (voir .env.play.example). Aucun accès à castbridge-internal (base) :
+# le service n'utilise pas de base tant que w20-09 n'est pas déployé.
+name: castbridge-play
+
+x-logging: &logging
+  driver: json-file
+  options:
+    max-size: "10m"
+    max-file: "3"
+
+services:
+  castbridge-play:
+    image: castbridge-play:current
+    container_name: castbridge-play
+    restart: unless-stopped
+    user: "10002:10002"
+    # toutes les variables CASTBRIDGE_PLAY_* viennent de ce fichier (0600, jamais commité) ; modèle : .env.play.example
+    env_file:
+      - .env.play
+    ports:
+      - "127.0.0.1:7091:8080"
+    networks:
+      - infra-net
+    mem_limit: 384m
+    read_only: true
+    tmpfs:
+      - /tmp:size=32m,mode=1777
+    cap_drop:
+      - ALL
+    security_opt:
+      - no-new-privileges:true
+    ulimits:
+      nofile:
+        soft: 16384
+        hard: 16384
+    # le service annonce « maintenance » aux salles puis attend jusqu'à 25 s à l'arrêt ; Docker tue à 10 s par défaut
+    stop_grace_period: 30s
+    healthcheck:
+      test: ["CMD-SHELL", "curl -fsS http://127.0.0.1:8080/play/health >/dev/null || exit 1"]
+      interval: 30s
+      timeout: 5s
+      retries: 3
+      start_period: 40s
+    # lots de questions réservés (lecture seule), inutile avant w20-04 : décommenter avec CASTBRIDGE_PLAY_LOTS_DIR=/lots dans .env.play
+    # volumes:
+    #   - /home/ubuntu/castbridge/services/play/lots:/lots:ro      # chemin proposé : à confirmer sur la machine
+    logging: *logging
+
+# réseau de nginx (infra-nginx) : créé et possédé par le compose d'infrastructure, qui n'est pas dans ce dépôt ; ne jamais le créer ni le supprimer d'ici
+networks:
+  infra-net:
+    external: true
+    name: infra-net
