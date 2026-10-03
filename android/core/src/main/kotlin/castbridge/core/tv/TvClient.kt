@@ -166,7 +166,7 @@ class TvClient(val base: String, val pin: String? = null) {
         return read(c)
     }
 
-    private fun open(method: String, path: String) = (URL(base + path).openConnection() as HttpURLConnection).apply {
+    private fun open(method: String, path: String) = (castbridge.core.net.BoundRoute.open(URL(base + path)) as HttpURLConnection).apply {
         requestMethod = method; connectTimeout = 4000; readTimeout = 8000
         // A POST/PUT is never replayed by the JDK (it may have been applied) : it must not ride a pooled keep-alive connection the TV already closed
         // (SocketException / « Connection reset » / « Error writing request body », seen under load in MultiVolumeServerTest and FilingServerTest),

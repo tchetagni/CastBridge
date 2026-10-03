@@ -71,10 +71,12 @@ data class StateLine(val level: SignalLevel, val text: String, val detail: Strin
  * Échecs récents de Wi-Fi Direct : 3 échecs en moins de 10 minutes ⇒ Bluetooth pendant 10 minutes, puis un nouvel essai est permis.
  * Jamais de boucle : un groupe qui ne monte pas ne fait pas recommencer sans fin.
  */
-data class WdBackoff(val failures: Int = 0, val lastFailureAt: Long = 0, val until: Long = 0) {
+data class WdBackoff(val failures: Int = 0, val firstFailureAt: Long = 0, val until: Long = 0) {
+    /** [now] : horloge MONOTONE (`SystemClock.elapsedRealtime` sur le téléphone : un changement d'heure ne lève ni ne prolonge la pause). Fenêtre depuis le PREMIER échec. */
     fun failed(now: Long): WdBackoff {
-        val n = if (failures > 0 && now - lastFailureAt > WINDOW_MS) 1 else failures + 1
-        return if (n >= MAX_FAILURES) WdBackoff(0, now, now + PAUSE_MS) else WdBackoff(n, now, until)
+        if (failures == 0 || now - firstFailureAt > WINDOW_MS) return WdBackoff(1, now, until)
+        val n = failures + 1
+        return if (n >= MAX_FAILURES) WdBackoff(0, now, now + PAUSE_MS) else WdBackoff(n, firstFailureAt, until)
     }
     fun succeeded() = WdBackoff()
     fun blocked(now: Long) = now < until
@@ -115,9 +117,27 @@ object BulkRoute {
         val backoffUntil: Long = 0,
         val wifiAskedOnce: Boolean = false,
         val foreground: Boolean = true,
+        /** Le téléphone est connecté à un Wi-Fi (STA) : sur Android 10-12, le spécificateur peut le lui faire quitter. */
+        val phoneOnWifi: Boolean = false,
+        /** Deux sondes LAN négatives espacées ([lanConfirmedDead]) : le LAN est vraiment mort, on peut quitter le Wi-Fi. */
+        val lanDeadConfirmed: Boolean = false,
     )
 
-    enum class Why { SMALL, SETTING_OFF, TRIAL, PHONE_TOO_OLD, TV_NO_WD, TV_WIFI_OFF, BACKOFF, PERMISSION_DENIED, PERMISSION_PENDING, PHONE_WIFI_OFF, BACKGROUND }
+    enum class Why { SMALL, SETTING_OFF, TRIAL, PHONE_TOO_OLD, TV_NO_WD, TV_WIFI_OFF, BACKOFF, PERMISSION_DENIED, PERMISSION_PENDING, PHONE_WIFI_OFF, BACKGROUND, LAN_UNCONFIRMED }
+
+    /** Écart minimal entre deux sondes LAN négatives avant de quitter un Wi-Fi (Android 10-12). */
+    const val LAN_PROBE_GAP_MS = 3_000L
+
+    /** Une route de la session compte comme LAN seulement si son adresse n'est pas celle d'un groupe Wi-Fi Direct ([HelloIps], audit I-1). */
+    fun lanRoute(r: castbridge.core.tv.LinkPlanner.Route): Boolean =
+        r is castbridge.core.tv.LinkPlanner.Route.Lan && HelloIps.isLan(r.base.removePrefix("http://").substringBefore(':'))
+
+    /** [probes] = (instant, réponse) : au moins deux échecs espacés de [LAN_PROBE_GAP_MS] et aucune réponse. */
+    fun lanConfirmedDead(probes: List<Pair<Long, Boolean>>): Boolean {
+        if (probes.any { it.second }) return false
+        val t = probes.map { it.first }
+        return t.size >= 2 && t.maxOrNull()!! - t.minOrNull()!! >= LAN_PROBE_GAP_MS
+    }
     enum class Ask { PERMISSION, PHONE_WIFI }
 
     sealed class Decision {
@@ -142,6 +162,11 @@ object BulkRoute {
         if (f.tvOffersWd == false) return Decision.UseBt(Why.TV_NO_WD)
         if (f.now < f.backoffUntil) return Decision.UseBt(Why.BACKOFF)
         if (!f.phoneWifiOn) return if (!f.wifiAskedOnce && f.foreground) Decision.AskOnce(Ask.PHONE_WIFI) else Decision.UseBt(Why.PHONE_WIFI_OFF)
+        if (WdJoin.method(f.api) == JoinMethod.NETWORK_SPECIFIER) {
+            // Android 10-12: a system dialog the user must see, and a radio that may leave its Wi-Fi (audit I-3)
+            if (!f.foreground) return Decision.UseBt(Why.BACKGROUND)
+            if (f.phoneOnWifi && !f.lanDeadConfirmed) return Decision.UseBt(Why.LAN_UNCONFIRMED)
+        }
         return when (f.permission) {
             WdPermission.GRANTED, WdPermission.NOT_NEEDED -> Decision.UseWd(start = true)
             WdPermission.ASKING -> Decision.Wait(Why.PERMISSION_PENDING)
@@ -165,7 +190,8 @@ object BulkRoute {
         Why.PERMISSION_DENIED -> "Autorisation « Appareils à proximité » refusée : envoi par Bluetooth (lent). Réglages de l'app › Autorisations pour l'accorder."
         Why.PERMISSION_PENDING -> "En attente de l'autorisation « Appareils à proximité »…"
         Why.PHONE_WIFI_OFF -> "Le Wi-Fi du téléphone est éteint : allumez-le (sans réseau) pour un envoi rapide. Envoi par Bluetooth."
-        Why.BACKGROUND -> "CastBridge n'est pas à l'écran : envoi par Bluetooth (ouvrez CastBridge une fois pour autoriser le Wi-Fi Direct)."
+        Why.BACKGROUND -> "CastBridge n'est pas à l'écran : envoi par Bluetooth (ouvrez CastBridge pour le Wi-Fi Direct)."
+        Why.LAN_UNCONFIRMED -> "Le réseau de la TV n'est pas encore confirmé hors d'atteinte : le téléphone garde son Wi-Fi, envoi par Bluetooth."
     }
 }
 

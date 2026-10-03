@@ -232,12 +232,12 @@ class AutoWifiDirectTest {
     // ------------------------------------------------------------------ WdGroupLease : le groupe automatique de la TV
 
     @Test fun tvGroupLifecycle() {
-        val f = WdGroupLease.Facts(auto = true, createdAt = 0, lastUse = 0, activeTransfers = 0, clients = null, releaseAsked = false, now = 0)
+        val f = WdGroupLease.Facts(auto = true, createdAt = 0, lastUse = 0, activeTransfers = 0, clients = null, holders = 1, now = 0)
         assertFalse(WdGroupLease.shouldRemove(f.copy(auto = false, now = 10 * 3_600_000L)), "le groupe de l'utilisateur (MENU) reste")
         assertFalse(WdGroupLease.shouldRemove(f.copy(now = WdGroupLease.JOIN_GRACE_MS - 1, clients = 0)), "le téléphone a le temps de rejoindre")
         assertTrue(WdGroupLease.shouldRemove(f.copy(now = WdGroupLease.JOIN_GRACE_MS, clients = 0)), "le téléphone est parti")
-        assertTrue(WdGroupLease.shouldRemove(f.copy(now = 1_000, releaseAsked = true)), "le téléphone l'a rendu")
-        assertFalse(WdGroupLease.shouldRemove(f.copy(now = 1_000, releaseAsked = true, activeTransfers = 1)), "jamais pendant une réception")
+        assertTrue(WdGroupLease.shouldRemove(f.copy(now = 1_000, holders = 0)), "le dernier téléphone l'a rendu")
+        assertFalse(WdGroupLease.shouldRemove(f.copy(now = 1_000, holders = 0, activeTransfers = 1)), "jamais pendant une réception")
         assertFalse(WdGroupLease.shouldRemove(f.copy(now = 3_600_000, clients = 0, activeTransfers = 1)))
         // client count unknown: 30 s without use after the grace
         assertFalse(WdGroupLease.shouldRemove(f.copy(now = WdGroupLease.JOIN_GRACE_MS, lastUse = WdGroupLease.JOIN_GRACE_MS - WdGroupLease.IDLE_MS + 1)))

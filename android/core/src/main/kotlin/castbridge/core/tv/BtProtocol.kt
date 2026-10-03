@@ -450,7 +450,8 @@ object LinkPlanner {
      */
     fun plan(info: LinkInfo?, reachable: (String) -> Boolean, canJoinWifiDirect: Boolean, tunnelBase: String? = null): List<Route> = buildList {
         if (info != null) {
-            info.ips.map { "http://$it:${info.port}" }.firstOrNull(reachable)?.let { add(Route.Lan(it)) }
+            // never a Wi-Fi Direct group address (192.168.49.x): it is not a common network (R-14 audit I-1, defence in depth)
+            castbridge.core.link.HelloIps.lanOnly(info.ips).map { "http://$it:${info.port}" }.firstOrNull(reachable)?.let { add(Route.Lan(it)) }
             if (canJoinWifiDirect && info.wdSsid != null && info.wdPass != null)
                 add(Route.Direct(info.wdSsid, info.wdPass, "http://${info.wdIp ?: WifiDirect.GROUP_OWNER_IP}:${info.port}"))
         }

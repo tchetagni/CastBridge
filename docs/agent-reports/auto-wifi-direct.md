@@ -102,6 +102,8 @@ Préconditions : TV GaiaOS avec CastBridge-TV de cette branche (build verrouill�
 9. **H-9 perte** : couper le Wi-Fi de la TV à 30 % : la file reprend (re-jonction ou Bluetooth), jamais de boucle ; après 3 échecs, « nouvel essai dans 10 minutes ».
 10. **H-10 Wi-Fi éteint** : Wi-Fi du téléphone éteint : le panneau Wi-Fi s'ouvre une fois ; Wi-Fi de la TV éteint : « Le Wi-Fi de la TV est éteint… », envoi par Bluetooth.
 11. **H-11 secrets** : `logcat` complet des deux appareils pendant H-3 : aucun mot de passe de 16 caractères, aucun `wd.pass`.
+12. **H-12 (non bloquant) WPS par bouton** : sur une TV où la jonction par mot de passe échouerait, vérifier qu'un WPS « bouton » (PBC) côté propriétaire du groupe n'est possible **que** par l'acceptation à l'écran de la TV (boîte « Invitation Wi-Fi Direct », touche OK de la télécommande) : ce n'est donc pas une voie « sans action » ; elle reste écartée.
+13. **H-13 Android 10-12 (si un tel téléphone est disponible)** : téléphone connecté à un Wi-Fi sans la TV : la copie commence par Bluetooth le temps des deux sondes (≈ 3 s), puis la boîte « Se connecter à l'appareil ? » ; pendant la copie, une page web dans le navigateur **et** dans CastBridge (Réglages › À propos, contact serveur) se charge encore (seuls les sockets vers 192.168.49.x passent par le groupe) ; depuis « Ouvrir avec » (app pas à l'écran) : Bluetooth tout de suite, aucune attente.
 
 ## 6. Commandes et résultats
 
@@ -112,6 +114,27 @@ ANDROID_HOME=$HOME/Library/Android/sdk bash ../tools/agents/gradle-lock.sh --tim
 … :sender:compileDebugKotlin :receiver:compileDebugKotlin                                                                                          # BUILD SUCCESSFUL
 … :core:test                                                                                                                                        # complet : BUILD SUCCESSFUL, 3 137 tests, 0 échec (365 classes)
 ```
+
+## 8. Audit Opus (MERGEABLE AVEC CORRECTIFS) et correctifs (3ᵉ commit)
+
+Sécurité des identifiants jugée correcte (`pinProblem` avant `negotiateFlags`, rien dans le HELLO ni les journaux). Correctifs :
+
+| Point | Défaut | Correctif | Test (rouge par assertion avant, vert après) |
+|---|---|---|---|
+| I-1 | le HELLO listait toutes les adresses site-local, donc 192.168.49.1 dès que le groupe existait ; `LinkPlanner.plan` en faisait une `Route.Lan` ⇒ `lanAlive` vrai, « Par le Wi-Fi (réseau commun) », la file sautait le Wi-Fi Direct, et la route de contrôle mourait avec le groupe | `C/link/WdHost.kt` `HelloIps.lanOnly` (pur) : jamais 192.168.49.x ni une adresse du groupe courant ; appliqué par la TV (`TvWdHost.answer`) ET par le téléphone (`LinkPlanner.plan`, `BulkRoute.lanRoute` pour `lanAlive` et la file) | `groupAddressesAreNeverLanAddresses`, `aPhoneInsideTheGroupNeverTurnsTheControlRouteIntoLan49`, `theTvNeverAnnouncesItsGroupAddressInHello` |
+| I-2 | le bail comptait `bt.busy`, vrai aussi avec la télécommande CBTR ouverte ⇒ groupe jamais supprimé | `LeaseBusy.count` : seules les réceptions HTTP (les seules qui passent par le groupe) ; le jeton HTTP ne « touche » plus le groupe (il pouvait venir du LAN) | `anOpenRemoteNeverKeepsTheGroupAlive` |
+| I-3 | Android 10-12 : attente ~80 s depuis « Ouvrir avec » ; `bindProcessToNetwork` coupait tout l'Internet de l'app ; un faux négatif de la sonde LAN pouvait faire quitter le Wi-Fi du téléphone | `decide` : chemin `NETWORK_SPECIFIER` et app pas à l'écran ⇒ `UseBt(BACKGROUND)` ; Wi-Fi connecté ⇒ deux sondes LAN négatives espacées de 3 s (`BulkRoute.lanConfirmedDead`) sinon `UseBt(LAN_UNCONFIRMED)` ; plus de liaison du processus : `C/net/BoundRoute.kt` ne lie que les sockets vers 192.168.49.x (`Network.openConnection`/`bindSocket`, via `TvClient`, `TransferClient`, `HttpConn.tcp`) | `theSystemDialogPathNeedsTheAppVisible`, `leavingAWifiNeedsTwoSpacedNegativeLanProbes`, `onlyTheUploadSocketIsBoundToTheGroupNetwork` |
+| mineur | WD_RELEASE d'un autre téléphone supprimait le groupe partagé | bail PAR téléphone (`TvWdHost`, `WdGroupLease.Facts.holders`) : le groupe part quand plus aucun bail n'est actif ; un tiers qui n'a rien demandé ne fait rien | `aReleaseFromAnotherPhoneNeverRemovesTheSharedGroup` |
+| mineur | deux CBTN simultanés (un fil par lien) lançaient deux `start()` | création sérialisée (verrou) : le second reçoit le MÊME groupe | `twoSimultaneousRequestsGetTheSameGroup` |
+| mineur | TV d'essai : `claimed()` avant le contrôle d'essai | essai contrôlé avant tout bail | `neverOnATrialEvenWhenAGroupExists` |
+| mineur | le groupe du MENU changeait de mot de passe à chaque démarrage | le groupe du MENU garde son mot de passe enregistré (`wd_pass`) ; seul le groupe AUTOMATIQUE est éphémère (jamais écrit) | `theOwnersMenuGroupIsNeverRemovedByTheLease` (bail), relu dans `R/WifiDirectGroup.kt` |
+| mineur | repli de 10 min sur l'horloge murale, fenêtre comptée depuis le dernier échec | horloge monotone (`SystemClock.elapsedRealtime`, aussi pour `lostSince`), fenêtre depuis le PREMIER échec | `backoffWindowCountsFromTheFirstFailure` |
+| mineur | code mort `isolated` côté téléphone | supprimé | — |
+| doc | WPS par bouton | possible seulement par l'acceptation à l'écran de la TV : H-12 | — |
+
+Résultat : `AutoWifiDirectAuditTest` 11/14 rouges par assertion contre des ébauches reproduisant le comportement d'avant (adresse du groupe acceptée, télécommande comptée, release global, création non sérialisée, essai après le bail, pas de règle Android 10-12, une sonde suffit, liaison de tout le processus, fenêtre depuis le dernier échec), puis 41/41 verts dans `castbridge.core.link.*` ; câblage TV réduit à `TvWdHost` (testé avec un faux pilote de groupe). Le côté TV de la décision n'est plus dans `R/TvService.kt` mais dans `C/link/WdHost.kt`.
+
+`:core:test` complet après correctifs : 3 150 tests, 2 échecs : (1) `TestWatchdogGuardTest` (mon `await()` sans borne dans `twoSimultaneousRequestsGetTheSameGroup`, corrigé : `await(5 s)`) ; (2) `TvFoldersTest.theFolderFollowsRenameDeleteAndTheBin` (`SocketException: Unexpected end of file` dans `AgentRig.call`, client HTTP du test lui-même, sans lien avec ce chantier ; vert au premier essai complet). Relance ciblée : `TestWatchdogGuardTest`, `castbridge.core.library.agent.*` (dont `TvFoldersTest`), `castbridge.core.link.*` : vert. `:sender:compileDebugKotlin`, `:receiver:compileDebugKotlin` : verts.
 
 ## 7. Limites connues
 

@@ -40,8 +40,7 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.withTimeoutOrNull
-import java.net.Inet4Address
-import java.net.NetworkInterface
+import castbridge.core.link.HelloIps
 import java.util.concurrent.Executors
 import java.util.concurrent.TimeUnit
 
@@ -100,7 +99,9 @@ object AutoWifiDirect {
     private var specCb: ConnectivityManager.NetworkCallback? = null
     @Volatile private var method = JoinMethod.NONE
 
-    private fun now() = System.currentTimeMillis()
+    /** Horloge MONOTONE (repli de 10 minutes, délais de l'automate) : un changement d'heure du téléphone ne change rien. */
+    fun clock(): Long = android.os.SystemClock.elapsedRealtime()
+    private fun now() = clock()
 
     fun permission(ctx: Context): WdPermission {
         val p = WdJoin.permission(Build.VERSION.SDK_INT) ?: return WdPermission.NOT_NEEDED
@@ -126,21 +127,33 @@ object AutoWifiDirect {
 
     private fun wifiOn(ctx: Context) = runCatching { (ctx.applicationContext.getSystemService(Context.WIFI_SERVICE) as WifiManager).isWifiEnabled }.getOrDefault(false)
 
-    /** La TV annonce une adresse du même /24 que le téléphone, qui ne répond pas : isolation des clients (DESIGN-W7 § 4.3), pour l'explication seulement. */
-    private fun isolated(tvIps: List<String>): Boolean = runCatching {
-        val mine = NetworkInterface.getNetworkInterfaces().toList().filter { it.isUp && !it.isLoopback && !it.name.startsWith("p2p") }
-            .flatMap { it.inetAddresses.toList() }.filterIsInstance<Inet4Address>().mapNotNull { it.hostAddress?.substringBeforeLast('.') }.toSet()
-        tvIps.any { it.substringBeforeLast('.') in mine && !it.startsWith("192.168.49.") }
+    /** Le téléphone est-il connecté à un Wi-Fi (STA) ? Sur Android 10-12, le spécificateur peut le lui faire quitter. */
+    private fun onWifi(ctx: Context): Boolean = runCatching {
+        val cm = ctx.getSystemService(ConnectivityManager::class.java)
+        cm.getNetworkCapabilities(cm.activeNetwork)?.hasTransport(NetworkCapabilities.TRANSPORT_WIFI) == true
     }.getOrDefault(false)
 
-    private fun facts(ctx: Context, s: LinkSession, bytes: Long) = BulkRoute.Facts(
+    /** Android 10-12 et Wi-Fi connecté : deux sondes LAN espacées avant de quitter ce Wi-Fi ([BulkRoute.lanConfirmedDead], audit I-3). */
+    private suspend fun lanConfirmedDead(s: LinkSession): Boolean {
+        val bases = HelloIps.lanOnly(s.info.link.ips).map { "http://$it:${s.info.link.port}" }
+        if (bases.isEmpty()) return true                                   // the TV has no LAN address at all: nothing to lose
+        val probes = mutableListOf<Pair<Long, Boolean>>()
+        repeat(2) { i ->
+            if (i > 0) delay(BulkRoute.LAN_PROBE_GAP_MS)
+            probes += now() to bases.any { TvLinkManager.reachable(it) }
+        }
+        return BulkRoute.lanConfirmedDead(probes)
+    }
+
+    private fun facts(ctx: Context, s: LinkSession, bytes: Long, lanDead: Boolean) = BulkRoute.Facts(
         bytes = bytes,
-        lanAlive = s.route is LinkPlanner.Route.Lan,
+        lanAlive = BulkRoute.lanRoute(s.route),              // never a 192.168.49.x « LAN » (audit I-1)
         btConnected = true,                                  // a session exists: the Bluetooth control link answered
         api = Build.VERSION.SDK_INT,
         permission = permission(ctx),
         now = now(),
-        isolated = s.route !is LinkPlanner.Route.Lan && isolated(s.info.link.ips),
+        phoneOnWifi = onWifi(ctx),
+        lanDeadConfirmed = lanDead,
         phoneWifiOn = wifiOn(ctx),
         tvOffersWd = s.info.link.wdCap,
         tvWdError = tvErr?.takeIf { now() - tvErrAt < TV_ERR_MS },
@@ -159,7 +172,11 @@ object AutoWifiDirect {
      */
     suspend fun bulkBase(ctx: Context, s: LinkSession, bytes: Long): String? {
         app = ctx.applicationContext
-        var d = BulkRoute.decide(facts(app, s, bytes))
+        val specifierLeavesWifi = WdJoin.method(Build.VERSION.SDK_INT) == JoinMethod.NETWORK_SPECIFIER && onWifi(app) && TvLinkManager.foreground &&
+            !BulkRoute.lanRoute(s.route) && bytes >= BulkRoute.MIN_WD_BYTES && enabled(app)
+        val lanDead = if (specifierLeavesWifi) lanConfirmedDead(s) else false
+        fun f() = facts(app, s, bytes, lanDead)
+        var d = BulkRoute.decide(f())
         if (d is BulkRoute.Decision.AskOnce) {
             if (d.what == BulkRoute.Ask.PERMISSION) askingPermission = true
             lastDecision = d; publishLine()
@@ -168,11 +185,11 @@ object AutoWifiDirect {
             if (_ask.value != null) { _ask.value = null; askingPermission = false }
             // the Wi-Fi panel: a moment for the radio to come up
             if (d.what == BulkRoute.Ask.PHONE_WIFI) withTimeoutOrNull(10_000) { while (!wifiOn(app)) delay(500) }
-            d = BulkRoute.decide(facts(app, s, bytes))
+            d = BulkRoute.decide(f())
         }
         if (d is BulkRoute.Decision.Wait || d is BulkRoute.Decision.AskOnce) {
             withTimeoutOrNull(ASK_WAIT_MS) { while (askingPermission) delay(500) }
-            d = BulkRoute.decide(facts(app, s, bytes)).let { if (it is BulkRoute.Decision.Wait || it is BulkRoute.Decision.AskOnce) BulkRoute.Decision.UseBt(BulkRoute.Why.PERMISSION_PENDING) else it }
+            d = BulkRoute.decide(f()).let { if (it is BulkRoute.Decision.Wait || it is BulkRoute.Decision.AskOnce) BulkRoute.Decision.UseBt(BulkRoute.Why.PERMISSION_PENDING) else it }
         }
         lastDecision = d; publishLine()
         Log.i(TAG, "voie de masse : $d")
@@ -188,7 +205,7 @@ object AutoWifiDirect {
                         _state.first { it is WdClient.State.Up || it is WdClient.State.Failed || it == WdClient.State.Off }
                     }
                     if (end !is WdClient.State.Up) {
-                        val reroute = BulkRoute.decide(facts(app, s, bytes).copy(wdUp = false, backoffUntil = backoff.until))
+                        val reroute = BulkRoute.decide(f().copy(wdUp = false, backoffUntil = backoff.until))
                         lastDecision = if (reroute is BulkRoute.Decision.UseWd) BulkRoute.Decision.UseBt(BulkRoute.Why.BACKOFF) else reroute
                         publishLine()
                     }
@@ -313,7 +330,11 @@ object AutoWifiDirect {
         }, 1_000, TimeUnit.MILLISECONDS)
     }
 
-    /** API 29-32 : Android demande « Se connecter à l'appareil ? » ; l'app est liée au réseau du groupe le temps de l'envoi (les autres apps gardent le leur). */
+    /**
+     * API 29-32 : Android demande « Se connecter à l'appareil ? ». Seuls les sockets vers le groupe (192.168.49.x) passent par son réseau
+     * ([castbridge.core.net.BoundRoute] : `Network.openConnection` / `bindSocket`) ; le reste de l'app garde son Internet (audit I-3 : plus de
+     * `bindProcessToNetwork`).
+     */
     private fun joinSpecifier(ssid: String, pass: String) {
         val cm = app.getSystemService(ConnectivityManager::class.java)
         val spec = runCatching { WifiNetworkSpecifier.Builder().setSsid(ssid).setWpa2Passphrase(pass).build() }.getOrNull()
@@ -321,7 +342,13 @@ object AutoWifiDirect {
         val req = NetworkRequest.Builder().addTransportType(NetworkCapabilities.TRANSPORT_WIFI)
             .removeCapability(NetworkCapabilities.NET_CAPABILITY_INTERNET).setNetworkSpecifier(spec).build()
         val cb = object : ConnectivityManager.NetworkCallback() {
-            override fun onAvailable(network: Network) { cm.bindProcessToNetwork(network); post(WdClient.Event.Joined(null, now())) }
+            override fun onAvailable(network: Network) {
+                castbridge.core.net.BoundRoute.set(HelloIps.GROUP_PREFIX, object : castbridge.core.net.BoundRoute.Binding {
+                    override fun open(url: java.net.URL): java.net.URLConnection = network.openConnection(url)
+                    override fun bind(s: java.net.Socket) = network.bindSocket(s)
+                })
+                post(WdClient.Event.Joined(null, now()))
+            }
             override fun onUnavailable() { post(WdClient.Event.JoinFailed(WdClient.Fail.JOIN_DENIED, now())) }
             override fun onLost(network: Network) { post(WdClient.Event.Lost(now())) }
         }
@@ -333,7 +360,7 @@ object AutoWifiDirect {
     private fun probe(base: String) {
         if (_state.value is WdClient.State.Probing && (_state.value as WdClient.State.Probing).tries > 0) Thread.sleep(1_000)
         val ok = runCatching {
-            val c = java.net.URL("$base/api/hello").openConnection() as java.net.HttpURLConnection
+            val c = castbridge.core.net.BoundRoute.open(java.net.URL("$base/api/hello")) as java.net.HttpURLConnection
             c.connectTimeout = 2_000; c.readTimeout = 2_000
             c.responseCode == 200 && c.inputStream.use { it.readBytes() }.decodeToString().contains("castbridge-tv")
         }.getOrDefault(false)
@@ -356,7 +383,7 @@ object AutoWifiDirect {
         p2p = null; channel = null
         specCb?.let { cb ->
             val cm = app.getSystemService(ConnectivityManager::class.java)
-            runCatching { cm.bindProcessToNetwork(null) }
+            castbridge.core.net.BoundRoute.clear()
             runCatching { cm.unregisterNetworkCallback(cb) }
         }
         specCb = null

@@ -273,7 +273,7 @@ class TvService : Service(), Device {
             safPicker = ::launchSafPicker, settingsOpener = ::openStorageSettings, library = library, readoptJson = { readoptState },
             publicRoutes = castbridge.core.tv.CombinedRoutes(QuizHub.http, ChessHub.http),
             routeGuard = { path -> if (ActivationCenter.trial() && castbridge.core.owner.TrialPolicy.routeBlocked(path)) castbridge.core.owner.TrialPolicy.MESSAGE else null },
-            tokenAuth = { t -> trust.verifyToken(t)?.also { a -> phoneSeen(a); presence.seen(a); wd?.touch() } }, peers = btApi?.peers,
+            tokenAuth = { t -> trust.verifyToken(t)?.also { a -> phoneSeen(a); presence.seen(a) } }, peers = btApi?.peers,
             // the phone's library assistant never touches what the parental control protects (docs/LIBRARY-AGENT.md)
             contentFlags = castbridge.core.library.agent.EngineContentFlags(ParentalHub.engine), folders = folderIndex,
             // « Rangement à la réception » (docs/STORAGE.md): received files go to real category folders under a clean name; setting "file_on_receive", on by default
@@ -311,49 +311,32 @@ class TvService : Service(), Device {
             NetworkInterface.getNetworkInterfaces().toList().filter { it.isUp && !it.isLoopback }
                 .flatMap { it.inetAddresses.toList() }.filterIsInstance<Inet4Address>().filter { it.isSiteLocalAddress }.mapNotNull { it.hostAddress }
         }.getOrDefault(emptyList())
-        val g = wd
-        val trial = ActivationCenter.trial()
-        val cap = g?.capable() == true && !trial
-        if (g != null && peer != null && flags and castbridge.core.tv.BtProtocol.WD_RELEASE != 0) {
-            g.askRelease(); main.post { wdLeaseCheck() }
-            return castbridge.core.tv.LinkInfo(ReceiverServer.PORT, ips, wdCap = cap)
-        }
-        val want = peer != null && flags and castbridge.core.tv.BtProtocol.WANT_WIFI_DIRECT != 0
-        val ownerOn = prefs.getBool("wd_enabled", false)
-        val hasLan = ips.any { !it.startsWith("192.168.49.") }
-        var err: String? = null
-        if (g != null && want) {
-            if (g.active != null) g.claimed()
-            else if (castbridge.core.tv.LinkPlanner.mayStartWifiDirect(true, ownerOn, hasLan,
-                    phoneCannotReachLan = flags and castbridge.core.tv.BtProtocol.WD_LAN_UNREACHABLE != 0, trial = trial)) {
-                if (!g.hasPermission()) err = castbridge.core.tv.WifiDirect.Err.PERMISSION
-                else {
-                    main.post { g.start(forPhone = !ownerOn) }
-                    val until = System.currentTimeMillis() + 8000
-                    while (g.active == null && System.currentTimeMillis() < until) Thread.sleep(200)
-                    if (g.active == null) err = g.lastError ?: castbridge.core.tv.WifiDirect.Err.FAILED
-                }
-            } else err = if (trial) castbridge.core.tv.WifiDirect.Err.TRIAL else castbridge.core.tv.WifiDirect.Err.POLICY
-        }
-        val a = g?.active
-        val give = a != null && (peer != null || !g.auto)
-        return castbridge.core.tv.LinkInfo(ReceiverServer.PORT, ips, if (give) a?.first else null, if (give) a?.second else null,
-            if (give) castbridge.core.tv.WifiDirect.GROUP_OWNER_IP else null, wdCap = cap, wdErr = err)
+        val host = wdHost ?: return castbridge.core.tv.LinkInfo(ReceiverServer.PORT, castbridge.core.link.HelloIps.lanOnly(ips))
+        // all the decisions (group addresses never announced, one creation at a time, a lease per phone, trial first) live in core TvWdHost (tested)
+        val r = host.answer(peer, flags, ips, ReceiverServer.PORT, ActivationCenter.trial(), prefs.getBool("wd_enabled", false))
+        if (peer != null && flags and castbridge.core.tv.BtProtocol.WD_RELEASE != 0) main.post { wdLeaseCheck() }
+        return r
+    }
+
+    /** The core side of the automatic group; its Android calls run on the main looper like the MENU's. */
+    private val wdHost: castbridge.core.link.TvWdHost? by lazy {
+        val g = wd ?: return@lazy null
+        castbridge.core.link.TvWdHost(object : castbridge.core.link.WdGroupDriver by g {
+            override fun start(forPhone: Boolean) { main.post { g.start(forPhone) } }
+        }, System::currentTimeMillis)
     }
 
     /**
-     * The automatic Wi-Fi Direct group ([castbridge.core.link.WdGroupLease]): removed once the phone gave it back, left (no client after 45 s), or stopped
-     * using it; never during a reception. Called every 5 s by [transferTick] and at once after a WD_RELEASE. The owner's group (MENU) is never touched.
+     * The automatic Wi-Fi Direct group ([castbridge.core.link.WdGroupLease]): removed once every phone gave it back, they left (no client after 45 s), or it
+     * stopped receiving; never during a reception. Only HTTP receptions keep it ([castbridge.core.link.LeaseBusy]: an open phone remote never does). Called
+     * every 5 s by [transferTick] and at once after a WD_RELEASE. The owner's group (MENU) is never touched.
      */
     private fun wdLeaseCheck() {
         val g = wd ?: return
+        val host = wdHost ?: return
         if (g.active == null || !g.auto) return
-        val busy = (server?.activeTransfers() ?: 0) + (if (bt?.busy == true) 1 else 0)
-        if (busy > 0) g.touch()
-        g.clients { n ->
-            val f = castbridge.core.link.WdGroupLease.Facts(true, g.createdAt, g.lastUse, busy, n, g.releaseAsked, System.currentTimeMillis())
-            if (g.auto && g.active != null && castbridge.core.link.WdGroupLease.shouldRemove(f)) { g.stop(); syncIconsAsync() }
-        }
+        val busy = castbridge.core.link.LeaseBusy.count(httpTransfers = server?.activeTransfers() ?: 0, btReceptions = if (bt?.busy == true) 1 else 0, remoteSessions = 0)
+        g.clients { n -> if (host.leaseCheck(busy, n)) syncIconsAsync() }
     }
 
     // ---- plug and play: a trusted phone asks "who am I?" over Bluetooth (CBTH) and gets the TV's Wi-Fi address and its own token ----

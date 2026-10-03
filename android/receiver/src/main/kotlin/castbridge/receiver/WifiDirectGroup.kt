@@ -24,38 +24,33 @@ import castbridge.core.tv.WifiDirect
  * In both cases the passphrase is FRESH for every group (16 random characters), kept in memory only while the group exists, never logged, never stored.
  */
 @SuppressLint("MissingPermission")
-class WifiDirectGroup(private val ctx: Context, private val prefs: TvPrefs, private val status: (String?) -> Unit) {
+class WifiDirectGroup(private val ctx: Context, private val prefs: TvPrefs, private val status: (String?) -> Unit) : castbridge.core.link.WdGroupDriver {
     private val mgr = ctx.getSystemService(Context.WIFI_P2P_SERVICE) as? WifiP2pManager
     private var channel: WifiP2pManager.Channel? = null
     /** (network name, password) while the group exists: given to a phone over Bluetooth (CBTN) so it can join by itself. */
-    @Volatile var active: Pair<String, String>? = null; private set
+    @Volatile override var active: Pair<String, String>? = null; private set
     /** The group was created for a phone (not by the owner from the MENU). */
-    @Volatile var auto = false; private set
-    @Volatile var createdAt = 0L; private set
-    /** Last time the group served: a token request over HTTP, a reception. */
-    @Volatile var lastUse = 0L; private set
-    /** The phone sent CBTN with WD_RELEASE. */
-    @Volatile var releaseAsked = false; private set
+    @Volatile override var auto = false; private set
+    @Volatile override var createdAt = 0L; private set
     /** Why the last [start] gave no group ([WifiDirect.Err]); null = none or not tried. */
-    @Volatile var lastError: String? = null; private set
-
-    // older versions kept one password forever: forgotten (putString(null) removes the key), never written again
-    init { if (prefs.getString("wd_pass") != null) prefs.putString("wd_pass", null) }
+    @Volatile override var lastError: String? = null; private set
 
     fun permission(): String = if (Build.VERSION.SDK_INT >= 33) Manifest.permission.NEARBY_WIFI_DEVICES else Manifest.permission.ACCESS_FINE_LOCATION
-    fun hasPermission() = ctx.checkSelfPermission(permission()) == PackageManager.PERMISSION_GRANTED
+    override fun hasPermission() = ctx.checkSelfPermission(permission()) == PackageManager.PERMISSION_GRANTED
     private fun supported() = mgr != null && Build.VERSION.SDK_INT >= 29 && ctx.packageManager.hasSystemFeature(PackageManager.FEATURE_WIFI_DIRECT)
     /** Can this TV create a group for a phone right now (capability `wd.cap` of the CBTN / HELLO answer)? */
-    fun capable() = supported() && hasPermission()
+    override fun capable() = supported() && hasPermission()
     private fun wifiOn() = runCatching { (ctx.applicationContext.getSystemService(Context.WIFI_SERVICE) as WifiManager).isWifiEnabled }.getOrDefault(true)
 
-    fun touch() { if (active != null) lastUse = System.currentTimeMillis() }
-    fun askRelease() { if (active != null && auto) releaseAsked = true }
-    /** A phone asked for the group again (CBTN WANT_WIFI_DIRECT) while it exists: it serves again. */
-    fun claimed() { releaseAsked = false; touch() }
+    /**
+     * The owner's group (MENU) keeps its configured password (it may be saved on a phone: audit R-14); only an AUTOMATIC group's password is ephemeral
+     * (fresh for every group, never stored).
+     */
+    private fun ownerPassphrase(): String = prefs.getString("wd_pass")?.takeIf { WifiDirect.isValidPassphrase(it) }
+        ?: WifiDirect.groupPassphrase().also { prefs.putString("wd_pass", it) }
 
     /** [forPhone] = an automatic group for a phone that asked over Bluetooth; false = the owner's group (MENU). */
-    fun start(forPhone: Boolean = false) {
+    override fun start(forPhone: Boolean) {
         val m = mgr
         when {
             m == null || !ctx.packageManager.hasSystemFeature(PackageManager.FEATURE_WIFI_DIRECT) -> {
@@ -69,7 +64,7 @@ class WifiDirectGroup(private val ctx: Context, private val prefs: TvPrefs, priv
         m!!
         val ch = channel ?: m.initialize(ctx, Looper.getMainLooper(), null).also { channel = it }
         val name = if (forPhone) WifiDirect.groupNetworkName() else WifiDirect.networkName()
-        val pass = WifiDirect.groupPassphrase()
+        val pass = if (forPhone) WifiDirect.groupPassphrase() else ownerPassphrase()
         val cfg = try { WifiP2pConfig.Builder().setNetworkName(name).setPassphrase(pass).enablePersistentMode(false).build() }
         catch (e: Exception) { Log.w(TAG, "config: ${e.javaClass.simpleName}"); lastError = WifiDirect.Err.FAILED; status("Wi-Fi Direct : configuration refusée"); return }
         // A stale group from a previous run would make createGroup fail with BUSY: remove it first.
@@ -82,8 +77,8 @@ class WifiDirectGroup(private val ctx: Context, private val prefs: TvPrefs, priv
     private fun create(m: WifiP2pManager, ch: WifiP2pManager.Channel, cfg: WifiP2pConfig, name: String, pass: String, forPhone: Boolean) {
         m.createGroup(ch, cfg, object : WifiP2pManager.ActionListener {
             override fun onSuccess() {
-                auto = forPhone; releaseAsked = false; lastError = null
-                createdAt = System.currentTimeMillis(); lastUse = createdAt
+                auto = forPhone; lastError = null
+                createdAt = System.currentTimeMillis()
                 active = name to pass
                 // the owner's group shows its password (it is typed on the phone); an automatic one never does
                 status(if (forPhone) "Wi-Fi Direct automatique : liaison rapide avec un téléphone (${WifiDirect.GROUP_OWNER_IP})"
@@ -108,10 +103,13 @@ class WifiDirectGroup(private val ctx: Context, private val prefs: TvPrefs, priv
         runCatching { m.requestGroupInfo(ch) { g -> cb(g?.clientList?.size) } }.onFailure { cb(null) }
     }
 
-    fun stop() {
+    /** The owner's group (MENU). */
+    fun start() = start(forPhone = false)
+
+    override fun stop() {
         val m = mgr ?: return
         val ch = channel ?: return
-        active = null; auto = false; releaseAsked = false
+        active = null; auto = false
         runCatching { m.removeGroup(ch, null) }
         runCatching { if (Build.VERSION.SDK_INT >= 27) ch.close() }
         channel = null

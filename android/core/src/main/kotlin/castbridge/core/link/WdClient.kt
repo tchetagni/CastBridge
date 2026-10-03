@@ -143,12 +143,15 @@ object WdGroupLease {
     /** Un téléphone encore associé mais muet depuis 10 minutes (application tuée) : le groupe part. */
     const val STALE_MS = 10 * 60_000L
 
-    /** [clients] : nombre de téléphones associés (`WifiP2pGroup.clientList`), null = inconnu. [lastUse] : dernier usage HTTP par jeton ou dernière réception. */
-    data class Facts(val auto: Boolean, val createdAt: Long, val lastUse: Long, val activeTransfers: Int, val clients: Int?, val releaseAsked: Boolean, val now: Long)
+    /**
+     * [clients] : nombre de téléphones associés (`WifiP2pGroup.clientList`), null = inconnu. [lastUse] : dernière réception HTTP ([LeaseBusy]).
+     * [holders] : téléphones qui ont demandé le groupe et ne l'ont pas rendu (bail PAR téléphone, [TvWdHost]) ; 0 = tous l'ont rendu.
+     */
+    data class Facts(val auto: Boolean, val createdAt: Long, val lastUse: Long, val activeTransfers: Int, val clients: Int?, val holders: Int, val now: Long)
 
     fun shouldRemove(f: Facts): Boolean {
         if (!f.auto || f.activeTransfers > 0) return false
-        if (f.releaseAsked) return true
+        if (f.holders <= 0) return true
         if (f.now - f.createdAt < JOIN_GRACE_MS) return false
         if (f.clients == 0) return true
         val idle = f.now - maxOf(f.lastUse, f.createdAt)

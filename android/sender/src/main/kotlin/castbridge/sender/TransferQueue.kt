@@ -225,9 +225,9 @@ object TransferQueue {
             if (item.linkTv != null && session.tv.address != item.linkTv) { model.finish(item.id, false, QueueTexts.OTHER_TV); publish(); return }
             // « Seul le Bluetooth » (R-14): no common network that answers ⇒ the phone and the TV set up Wi-Fi Direct by themselves (core BulkRoute decides,
             // AutoWifiDirect joins); the same upload then runs over it, ordered path and « Copier et lire » included. Never instead of a working LAN.
-            val wdBase = if (session.route !is castbridge.core.tv.LinkPlanner.Route.Lan)
+            val wdBase = if (!castbridge.core.link.BulkRoute.lanRoute(session.route))
                 runCatching { AutoWifiDirect.bulkBase(app, session, item.size) }.onFailure { android.util.Log.w("TransferQueue", "Wi-Fi Direct", it) }.getOrNull() else null
-            if (wdBase != null) { viaWd = true; wdSince = System.currentTimeMillis() }
+            if (wdBase != null) { viaWd = true; wdSince = AutoWifiDirect.clock() }     // the same monotonic clock as lostSince
             val base = wdBase ?: session.base
             viaBt = base == null
             afterBase = base; afterCred = session.credential

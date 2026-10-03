@@ -95,7 +95,8 @@ class HttpConn(
 
     companion object {
         fun tcp(host: String, port: Int, connectTimeoutMs: Int = 4000): () -> SocketChannel = {
-            SocketChannel.open().also { ch -> try { ch.socket().connect(InetSocketAddress(host, port), connectTimeoutMs) } catch (e: IOException) { ch.close(); throw e } }
+            // a Wi-Fi Direct group joined by WifiNetworkSpecifier: only this socket goes through its network (castbridge.core.net.BoundRoute, R-14)
+            SocketChannel.open().also { ch -> try { castbridge.core.net.BoundRoute.bind(host, ch.socket()); ch.socket().connect(InetSocketAddress(host, port), connectTimeoutMs) } catch (e: Throwable) { ch.close(); throw e } }
         }
     }
 }
