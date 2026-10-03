@@ -13,10 +13,19 @@ interface QuestionSource {
     val origin: String
     /** The questions available now (never blocks on the network). */
     fun bank(): QuizBank
+    /**
+     * The questions for one game filter: the bank plus, for the bundled levels, that level only (loaded on demand, the
+     * previous one released). Default = [bank] (sources without per-level content).
+     */
+    fun bankFor(filter: QuestionFilter): QuizBank = bank()
 }
 
 /** The banks shipped in the app's resources (general knowledge + school tracks). */
-class EmbeddedQuestionSource(private val resources: List<String> = DEFAULT_RESOURCES) : QuestionSource {
+class EmbeddedQuestionSource(
+    private val resources: List<String> = DEFAULT_RESOURCES,
+    /** Per-level bundled content (null = none). Only one level is kept in memory at a time. */
+    private val levels: EmbeddedLevels? = EmbeddedLevels(),
+) : QuestionSource {
     override val origin = "embarquée"
     private val bank: QuizBank by lazy {
         resources.mapNotNull { r -> EmbeddedQuestionSource::class.java.getResourceAsStream(r)?.use { String(it.readBytes(), Charsets.UTF_8) } }
@@ -24,6 +33,21 @@ class EmbeddedQuestionSource(private val resources: List<String> = DEFAULT_RESOU
             .fold(QuizBank(emptyList())) { acc, b -> acc.merge(b) }
     }
     override fun bank() = bank
+
+    private class Loaded(val key: String, val bank: QuizBank)
+    @Volatile private var loaded: Loaded? = null
+
+    override fun bankFor(filter: QuestionFilter): QuizBank {
+        val lv = levels?.levelFor(filter) ?: return bank
+        loaded?.let { if (it.key == lv.key) return it.bank }
+        return synchronized(this) {
+            loaded?.takeIf { it.key == lv.key }?.bank
+                ?: bank.merge(levels.load(lv)).also { loaded = Loaded(lv.key, it) }   // replaces (not adds to) the previous level
+        }
+    }
+
+    /** Levels bundled (index only), for the tests and the about screen. */
+    fun levels(): List<EmbeddedLevels.Level> = levels?.levels.orEmpty()
 
     companion object {
         val DEFAULT_RESOURCES = listOf("/castbridge/quiz/questions.json", "/castbridge/quiz/questions-school.json")
@@ -51,11 +75,24 @@ class CachedQuestionSource(
     @Volatile override var origin: String = fallback.origin; private set
 
     override fun bank(): QuizBank = merged ?: synchronized(this) {
-        merged ?: load().also { merged = it }
+        merged ?: load(fallback.bank()).also { merged = it }
     }
 
-    private fun load(): QuizBank {
-        val base = fallback.bank()
+    private class ForLevel(val from: QuizBank, val result: QuizBank, val cacheGen: Any?)
+    @Volatile private var forLevel: ForLevel? = null
+
+    /** Bundled level + server cache; one level kept (see [EmbeddedQuestionSource.bankFor]). */
+    override fun bankFor(filter: QuestionFilter): QuizBank {
+        val from = fallback.bankFor(filter)
+        if (from === fallback.bank()) return bank()
+        forLevel?.let { if (it.from === from && it.cacheGen === merged) return it.result }
+        return synchronized(this) {
+            forLevel?.takeIf { it.from === from && it.cacheGen === merged }?.result
+                ?: load(from).also { forLevel = ForLevel(from, it, merged) }
+        }
+    }
+
+    private fun load(base: QuizBank): QuizBank {
         var deleted: Set<String> = emptySet()
         val cached = runCatching {
             if (!cacheFile.isFile || cacheFile.length() > maxBytes) null
@@ -92,10 +129,10 @@ class CachedQuestionSource(
             tmp.writeBytes(bytes)
             if (!tmp.renameTo(cacheFile)) { cacheFile.delete(); if (!tmp.renameTo(cacheFile)) throw IOException("rename failed") }
         } catch (e: IOException) { return "écriture impossible : ${e.message}" }
-        synchronized(this) { merged = null }
+        synchronized(this) { merged = null; forLevel = null }
         return null
     }
 
     /** Forgets the server questions (back to the bundled bank). */
-    fun clear() { cacheFile.delete(); synchronized(this) { merged = null } }
+    fun clear() { cacheFile.delete(); synchronized(this) { merged = null; forLevel = null } }
 }

@@ -41,6 +41,8 @@ class QuizRoom(
     val histories: QuizHistoryBook = QuizHistoryBook(null),
     /** A question is not asked again to the same players before this many games of the same course, while the bank allows it. */
     val minGapGames: Int = histories.gap,
+    /** Bank to draw from for a given filter (bundled levels are loaded on demand, one at a time); null = always [bank]. */
+    private val bankFor: ((QuestionFilter) -> QuizBank)? = null,
 ) {
     enum class Mode(val label: String) { MILLIONAIRE("Millionnaire"), DUEL("Duel") }
     /** How the game is played: free competition, competition with a (virtual) stake, or practice without anything at stake. */
@@ -150,8 +152,10 @@ class QuizRoom(
         host(); true
     }
 
+    private fun bankOf(f: QuestionFilter): QuizBank = bankFor?.invoke(f) ?: bank
+
     /** Playable questions for the current settings. */
-    fun available(): Int = synchronized(lock) { bank.count(filter) }
+    fun available(): Int = synchronized(lock) { bankOf(filter).count(filter) }
 
     /** Profiles whose histories apply to a game with the current settings: identified phones, or empty = the TV's host. */
     private fun historyKeys(t: Long): List<String> {
@@ -162,7 +166,7 @@ class QuizRoom(
 
     /** How fresh the bank is for [f] for whoever would play now (the phones connected in a Duel, else the TV): shown in the game choice. */
     fun freshness(f: QuestionFilter = filter): QuizBank.Freshness = synchronized(lock) {
-        bank.remainingFresh(f, histories.viewFor(historyKeys(now())), minGapGames, if (mode == Mode.DUEL) duelCount else 15)
+        bankOf(f).remainingFresh(f, histories.viewFor(historyKeys(now())), minGapGames, if (mode == Mode.DUEL) duelCount else 15)
     }
 
     /** What the last draw had to do for a small bank (null before the first game or when it was perfect). */
@@ -196,7 +200,7 @@ class QuizRoom(
      */
     fun startGame(seed: Long = random.nextLong()): String? = synchronized(lock) {
         if (stage != Stage.LOBBY && stage != Stage.FINISHED) return "Une partie est déjà en cours."
-        if (bank.count(filter) < MIN_QUESTIONS) return "Pas encore assez de questions pour « ${filter.label} » (il en faut au moins $MIN_QUESTIONS)."
+        if (bankOf(filter).count(filter) < MIN_QUESTIONS) return "Pas encore assez de questions pour « ${filter.label} » (il en faut au moins $MIN_QUESTIONS)."
         val t = now()
         settle(refundOnly = true)
         vote = null; call = null; callMissed = null; payouts = null
@@ -233,7 +237,7 @@ class QuizRoom(
         val t = now()
         val keys = historyKeys(t).ifEmpty { listOf(QuizHistoryBook.HOST) }
         val view = histories.viewFor(keys.filter { it != QuizHistoryBook.HOST })
-        val d = bank.drawDetailed(count, seed, asked, filter, history = view, minGapGames = minGapGames)
+        val d = bankOf(filter).drawDetailed(count, seed, asked, filter, history = view, minGapGames = minGapGames)
         lastDrawReport = d.report.takeUnless { it.clean }
         gameKeys = keys; gameIds = d.questions.map { it.id }; shownCount = 0
         for (k in keys) histories.profile(k).beginGame(filter.courseKey)
@@ -342,7 +346,7 @@ class QuizRoom(
 
     private fun swapQuestion(q: Question): Question? {
         val exclude = asked + inGame
-        val pick = bank.draw(count = 200, seed = random.nextLong(), exclude = exclude, filter = filter)
+        val pick = bankOf(filter).draw(count = 200, seed = random.nextLong(), exclude = exclude, filter = filter)
             .firstOrNull { it.difficulty == q.difficulty && it.id !in exclude } ?: return null
         return pick  // reserved in [inGame] by hostBoost, only once the charge succeeded
     }

@@ -248,6 +248,19 @@ class QuizLotsTest {
         assertEquals(before, src.bank().count(cm2))
     }
 
+    @Test fun anInstalledLotOfTheSameLevelDoesNotDuplicateTheBundledLevel() {
+        val (c, sigs) = consumer()
+        val src = PackedQuestionSource(EmbeddedQuestionSource(), null, lots = c)
+        val own = src.bankFor(cm2).all.filter { it.id.startsWith("p2-") }.take(20)
+        assertEquals(20, own.size)
+        val before = src.bankFor(cm2).all.size
+        c.put(lot(1, questions = own.map { qmap(0, text = it.question + " (lot)", scope = "x") + mapOf("id" to it.id) }), sigs)
+        val after = src.bankFor(cm2)
+        assertEquals(before, after.all.size, "the lot replaces the bundled questions with the same id")
+        assertEquals(after.all.size, after.all.map { it.id }.toSet().size)
+        assertEquals(20, after.all.count { it.question.endsWith("(lot)") })
+    }
+
     @Test fun isPlayableIsTheSinglePlacePolicyAndKeepsTheCurrentBehaviour() {
         fun q(review: Boolean, computed: Boolean = false) = Question("x", Region.CM, "c", 1, "q ?", listOf("a", "b", "c", "d"), 0, "e", "s", review = review, computedOk = computed)
         for (ch in QuizChannel.values()) {

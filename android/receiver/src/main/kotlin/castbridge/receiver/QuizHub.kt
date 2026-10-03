@@ -126,7 +126,7 @@ object QuizHub {
     /** Opens a fresh room (new code), closing the previous one. */
     @Synchronized fun open(ctx: Context): QuizRoom {
         room?.close()
-        return QuizRoom(source(ctx).bank().forChannel(TvConnect.channel()), asked = asked, wallet = wallet, histories = historyBook(ctx))
+        return QuizRoom(source(ctx).bank().forChannel(TvConnect.channel()), bankFor = { f -> source(ctx).bankFor(f).forChannel(TvConnect.channel()) }, asked = asked, wallet = wallet, histories = historyBook(ctx))
             .also { it.feedback = TvConnect.feedback; room = it }
     }
 
