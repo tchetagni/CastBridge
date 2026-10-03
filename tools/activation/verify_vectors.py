@@ -1115,7 +1115,92 @@ def run_implicit_usage_end():
     return n, failures
 
 
+def store_canonical(f):
+    """castbridge-rent-request-v1 (DESIGN-W17 § 4.1) : en-tête puis les huit champs triés par clé, séparés par \n, sans retour final."""
+    keys = ["at", "bundle", "choice", "kind", "nonce", "origin", "period", "tv"]
+    return "castbridge-rent-request-v1\n" + "\n".join("%s=%s" % (k, f[k]) for k in keys)
+
+
+def store_short_code(f, alias):
+    """<ALIAS>-<CHOIX>-<4 Crockford> : 20 premiers bits de SHA-256 de castbridge-rent-request-v1|tv|bundle|choice|nonce."""
+    assert re.fullmatch(r"[A-Z0-9]{1,6}", alias)
+    d = hashlib.sha256(("castbridge-rent-request-v1|%s|%s|%s|%s" % (f["tv"], f["bundle"], f["choice"], f["nonce"])).encode()).digest()
+    bits = (d[0] << 12) | (d[1] << 4) | (d[2] >> 4)
+    tail = "".join(ALPHABET[(bits >> s) & 31] for s in (15, 10, 5, 0))
+    return "%s-%s-%s" % (alias, "DEF" if f["choice"] == "defaut" else f["choice"].upper(), tail)
+
+
+def store_parse_ok(text):
+    """Analyse stricte : les huit champs et eux seuls, chacun à sa grammaire, period = 0 ssi kind = new, puis relecture canonique."""
+    if len(text) > 1024:
+        return False
+    lines = text.split("\n")
+    if lines[0] != "castbridge-rent-request-v1":
+        return False
+    kv = {}
+    for line in lines[1:]:
+        k, eq, v = line.partition("=")
+        if not eq or not k or k in kv:
+            return False
+        kv[k] = v
+    if set(kv) != {"at", "bundle", "choice", "kind", "nonce", "origin", "period", "tv"}:
+        return False
+    ok = (re.fullmatch(r"[0-9a-f]{16}", kv["tv"]) and re.fullmatch(r"[a-z0-9][a-z0-9-]{0,63}", kv["bundle"]) and re.fullmatch(r"defaut|[1-9][0-9]{0,2}[jh]", kv["choice"])
+          and re.fullmatch(r"[0-9a-f]{8}", kv["nonce"]) and kv["kind"] in ("new", "extend") and kv["origin"] in ("tv", "phone")
+          and re.fullmatch(r"[0-9]{1,15}", kv["at"]) and re.fullmatch(r"[0-9]{1,15}", kv["period"]))
+    if not ok or (kv["kind"] == "new") != (int(kv["period"]) == 0):
+        return False
+    return store_canonical({**kv, "at": int(kv["at"]), "period": int(kv["period"])}) == text
+
+
+def store_label(choice):
+    """W16 § 1.3 : libellés exacts, jamais de conversion jours / heures."""
+    if choice == "defaut":
+        return "Sans durée précise : 30 jours"
+    n = int(choice[:-1])
+    if choice.endswith("h"):
+        return "1 heure d'utilisation" if n == 1 else "%d heures d'utilisation" % n
+    return "1 jour" if n == 1 else "%d jours" % n
+
+
+def run_store_vectors():
+    """tools/activation/store-vectors.json : octets (forme canonique, code court, refus d'analyse, libellés) rejoués sans Kotlin ; les scénarios d'états sont rejoués par StoreVectorsTest."""
+    with open(os.path.join(os.path.dirname(os.path.abspath(__file__)), "store-vectors.json"), encoding="utf-8") as fh:
+        doc = json.load(fh)
+    failures, n = [], 0
+    if doc.get("format") != "castbridge-store-vectors-v1":
+        return 1, ["format inattendu : %s" % doc.get("format")]
+    for c in doc["cases"]:
+        t, cid = c["type"], c["id"]
+        if t == "scenario":
+            continue
+        n += 1
+        if t == "canonical":
+            got = store_canonical(c["fields"]); want = c["expect"]
+        elif t == "shortcode":
+            got = store_short_code(c["fields"], c["alias"]); want = c["expect"]
+        elif t == "parse-ok":
+            got = "accepté" if store_parse_ok(c["text"]) else "refusé"; want = "accepté"
+        elif t == "parse-refused":
+            got = "MALFORMED" if not store_parse_ok(c["text"]) else "accepté"; want = c["expect"]
+        elif t == "labels":
+            got = [store_label(x) for x in c["choices"]]; want = c["expect"]
+        else:
+            got, want = "type inconnu " + t, None
+        if got != want:
+            failures.append("%s : %s au lieu de %s" % (cid, got, want))
+        if t == "canonical" and not store_parse_ok(c["expect"]):
+            failures.append("%s : le texte canonique n'est pas accepté par l'analyse stricte" % cid)
+    return n, failures
+
+
 def main():
+    if "--only" in sys.argv and sys.argv[sys.argv.index("--only") + 1:][:1] == ["store"]:
+        n, failures = run_store_vectors()
+        print("%-36s %4d contrôles, %d échecs" % ("store-vectors.json", n, len(failures)))
+        for f in failures:
+            print("ÉCHEC :", f)
+        return 1 if failures else 0
     total, bad = 0, 0
     for name, run in (("test-vectors.json", run_test_vectors), ("rental-vectors.json", run_rental_vectors), ("server-issued.json", run_server_issued), ("implicit usage end (sans fichier)", run_implicit_usage_end)):
         n, failures = run()

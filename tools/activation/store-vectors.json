@@ -1,0 +1,1046 @@
+{
+  "format": "castbridge-store-vectors-v1",
+  "warning": "Identifiants d'essai publics : aucune clé, aucun secret. Voir docs/agent-briefs/sonnet-w17-03-rent-request-core.md.",
+  "cases": [
+    {
+      "id": "canonical-extend-from-phone",
+      "type": "canonical",
+      "fields": {
+        "tv": "0123456789abcdef",
+        "bundle": "classe-cm2",
+        "choice": "7j",
+        "kind": "extend",
+        "period": 1799740800000,
+        "nonce": "a1b2c3d4",
+        "at": 1800000000000,
+        "origin": "phone"
+      },
+      "expect": "castbridge-rent-request-v1\nat=1800000000000\nbundle=classe-cm2\nchoice=7j\nkind=extend\nnonce=a1b2c3d4\norigin=phone\nperiod=1799740800000\ntv=0123456789abcdef"
+    },
+    {
+      "id": "shortcode-12h",
+      "type": "shortcode",
+      "fields": {
+        "tv": "0123456789abcdef",
+        "bundle": "classe-cm2",
+        "choice": "12h",
+        "kind": "new",
+        "period": 0,
+        "nonce": "a1b2c3d4",
+        "at": 1800000000000,
+        "origin": "tv"
+      },
+      "alias": "CM2",
+      "expect": "CM2-12H-0PF8"
+    },
+    {
+      "id": "shortcode-default-choice",
+      "type": "shortcode",
+      "fields": {
+        "tv": "0123456789abcdef",
+        "bundle": "classe-cm2",
+        "choice": "defaut",
+        "kind": "new",
+        "period": 0,
+        "nonce": "0000000a",
+        "at": 1800000000000,
+        "origin": "tv"
+      },
+      "alias": "CM2",
+      "expect": "CM2-DEF-1TK8"
+    },
+    {
+      "id": "canonical-new-at-boundaries",
+      "type": "canonical",
+      "fields": {
+        "tv": "0123456789abcdef",
+        "bundle": "abbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+        "choice": "999h",
+        "kind": "new",
+        "period": 0,
+        "nonce": "00ff00ff",
+        "at": 0,
+        "origin": "tv"
+      },
+      "expect": "castbridge-rent-request-v1\nat=0\nbundle=abbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb\nchoice=999h\nkind=new\nnonce=00ff00ff\norigin=tv\nperiod=0\ntv=0123456789abcdef"
+    },
+    {
+      "id": "parse-ok-boundaries",
+      "type": "parse-ok",
+      "text": "castbridge-rent-request-v1\nat=0\nbundle=abbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb\nchoice=999h\nkind=new\nnonce=00ff00ff\norigin=tv\nperiod=0\ntv=0123456789abcdef"
+    },
+    {
+      "id": "parse-ok-new-default",
+      "type": "parse-ok",
+      "text": "castbridge-rent-request-v1\nat=1800000000000\nbundle=classe-cm2\nchoice=defaut\nkind=new\nnonce=a1b2c3d4\norigin=tv\nperiod=0\ntv=0123456789abcdef"
+    },
+    {
+      "id": "parse-refused-wrong-header",
+      "type": "parse-refused",
+      "text": "castbridge-rent-request-v2\nat=1800000000000\nbundle=classe-cm2\nchoice=12h\nkind=new\nnonce=a1b2c3d4\norigin=tv\nperiod=0\ntv=0123456789abcdef",
+      "expect": "MALFORMED"
+    },
+    {
+      "id": "parse-refused-unsorted-lines",
+      "type": "parse-refused",
+      "text": "castbridge-rent-request-v1\ntv=0123456789abcdef\nperiod=0\norigin=tv\nnonce=a1b2c3d4\nkind=new\nchoice=12h\nbundle=classe-cm2\nat=1800000000000",
+      "expect": "MALFORMED"
+    },
+    {
+      "id": "parse-refused-missing-nonce",
+      "type": "parse-refused",
+      "text": "castbridge-rent-request-v1\nat=1800000000000\nbundle=classe-cm2\nchoice=12h\nkind=new\norigin=tv\nperiod=0\ntv=0123456789abcdef",
+      "expect": "MALFORMED"
+    },
+    {
+      "id": "parse-refused-new-with-period",
+      "type": "parse-refused",
+      "text": "castbridge-rent-request-v1\nat=1800000000000\nbundle=classe-cm2\nchoice=12h\nkind=new\nnonce=a1b2c3d4\norigin=tv\nperiod=5\ntv=0123456789abcdef",
+      "expect": "MALFORMED"
+    },
+    {
+      "id": "choice-labels",
+      "type": "labels",
+      "choices": ["defaut", "1j", "7j", "1h", "12h"],
+      "expect": ["Sans durée précise : 30 jours", "1 jour", "7 jours", "1 heure d'utilisation", "12 heures d'utilisation"]
+    },
+    {
+      "id": "lifecycle-create-ack-reconcile-expire",
+      "type": "scenario",
+      "steps": [
+        {
+          "op": "create",
+          "now": 1800000000000,
+          "nonce": "00000001",
+          "bundle": "classe-cm2",
+          "choice": "12h",
+          "extend": false,
+          "facts": {
+            "trial": false,
+            "kid": false,
+            "shelf": "APPRENDRE",
+            "lots": ["RESERVED"],
+            "max": 3,
+            "rentals": []
+          },
+          "expect": "OK"
+        },
+        {
+          "op": "create",
+          "now": 1800000000001,
+          "nonce": "00000002",
+          "bundle": "classe-cm2",
+          "choice": "12h",
+          "extend": false,
+          "facts": {
+            "trial": false,
+            "kid": false,
+            "shelf": "APPRENDRE",
+            "lots": ["RESERVED"],
+            "max": 3,
+            "rentals": []
+          },
+          "expect": "REFUSED:DUPLICATE"
+        },
+        {
+          "op": "create",
+          "now": 1800000000002,
+          "nonce": "00000003",
+          "bundle": "classe-cm1",
+          "choice": "7j",
+          "extend": false,
+          "facts": {
+            "trial": false,
+            "kid": false,
+            "shelf": "APPRENDRE",
+            "lots": ["RESERVED"],
+            "max": 3,
+            "rentals": []
+          },
+          "expect": "OK"
+        },
+        {
+          "op": "states",
+          "expect": ["00000001:PENDING", "00000003:PENDING"]
+        },
+        {
+          "op": "ack",
+          "now": 1800000001000,
+          "nonce": "00000001",
+          "answer": "ACCEPTED",
+          "expect": "APPLIED:ACCEPTED"
+        },
+        {
+          "op": "ack",
+          "now": 1800000002000,
+          "nonce": "00000001",
+          "answer": "ACCEPTED",
+          "expect": "SAME:ACCEPTED"
+        },
+        {
+          "op": "ack",
+          "now": 1800000003000,
+          "nonce": "00000001",
+          "answer": "REFUSED",
+          "expect": "CONFLICT:ACCEPTED"
+        },
+        {
+          "op": "ack",
+          "now": 1800000003000,
+          "nonce": "deadbeef",
+          "answer": "ACCEPTED",
+          "expect": "UNKNOWN:null"
+        },
+        {
+          "op": "reconcile",
+          "now": 1800000004000,
+          "rentals": [
+            {
+              "bundle": "autre",
+              "period": 1799827200000,
+              "state": "ACTIVE",
+              "unit": "days",
+              "endsAt": 1800864000000,
+              "usage": 360
+            }
+          ],
+          "expect": 0
+        },
+        {
+          "op": "reconcile",
+          "now": 1800000005000,
+          "rentals": [
+            {
+              "bundle": "classe-cm2",
+              "period": 1800000004000,
+              "state": "ACTIVE",
+              "unit": "days",
+              "endsAt": 1802592000000,
+              "usage": 360
+            }
+          ],
+          "expect": 1
+        },
+        {
+          "op": "expire",
+          "now": 1800604800002,
+          "expect": 0
+        },
+        {
+          "op": "expire",
+          "now": 1800604800003,
+          "expect": 1
+        },
+        {
+          "op": "states",
+          "expect": ["00000001:FULFILLED", "00000003:EXPIRED"]
+        }
+      ]
+    },
+    {
+      "id": "lost-ack-pending-is-fulfilled-by-the-delivery",
+      "type": "scenario",
+      "steps": [
+        {
+          "op": "create",
+          "now": 1800000000000,
+          "nonce": "00000001",
+          "bundle": "classe-cm2",
+          "choice": "12h",
+          "extend": false,
+          "facts": {
+            "trial": false,
+            "kid": false,
+            "shelf": "APPRENDRE",
+            "lots": ["RESERVED"],
+            "max": 3,
+            "rentals": []
+          },
+          "expect": "OK"
+        },
+        {
+          "op": "reconcile",
+          "now": 1800000001000,
+          "rentals": [
+            {
+              "bundle": "classe-cm2",
+              "period": 1800000000500,
+              "state": "ACTIVE",
+              "unit": "days",
+              "endsAt": 1802592000000,
+              "usage": 360
+            }
+          ],
+          "expect": 1
+        },
+        {
+          "op": "ack",
+          "now": 1800000002000,
+          "nonce": "00000001",
+          "answer": "ACCEPTED",
+          "expect": "SAME:FULFILLED"
+        },
+        {
+          "op": "states",
+          "expect": ["00000001:FULFILLED"]
+        }
+      ]
+    },
+    {
+      "id": "two-hour-extensions-each-need-their-own-delivery",
+      "type": "scenario",
+      "steps": [
+        {
+          "op": "create",
+          "now": 1800000000000,
+          "nonce": "00000001",
+          "bundle": "classe-cm2",
+          "choice": "6h",
+          "extend": false,
+          "facts": {
+            "trial": false,
+            "kid": false,
+            "shelf": "APPRENDRE",
+            "lots": ["RESERVED"],
+            "max": 3,
+            "rentals": [
+              {
+                "bundle": "classe-cm2",
+                "period": 1799827200000,
+                "state": "ACTIVE",
+                "unit": "hours",
+                "endsAt": 1800864000000,
+                "usage": 360
+              }
+            ]
+          },
+          "expect": "OK"
+        },
+        {
+          "op": "create",
+          "now": 1800000000000,
+          "nonce": "00000002",
+          "bundle": "classe-cm2",
+          "choice": "12h",
+          "extend": false,
+          "facts": {
+            "trial": false,
+            "kid": false,
+            "shelf": "APPRENDRE",
+            "lots": ["RESERVED"],
+            "max": 3,
+            "rentals": [
+              {
+                "bundle": "classe-cm2",
+                "period": 1799827200000,
+                "state": "ACTIVE",
+                "unit": "hours",
+                "endsAt": 1800864000000,
+                "usage": 360
+              }
+            ]
+          },
+          "expect": "OK"
+        },
+        {
+          "op": "ack",
+          "now": 1800000000000,
+          "nonce": "00000001",
+          "answer": "ACCEPTED",
+          "expect": "APPLIED:ACCEPTED"
+        },
+        {
+          "op": "ack",
+          "now": 1800000000000,
+          "nonce": "00000002",
+          "answer": "ACCEPTED",
+          "expect": "APPLIED:ACCEPTED"
+        },
+        {
+          "op": "reconcile",
+          "now": 1800000000001,
+          "rentals": [
+            {
+              "bundle": "classe-cm2",
+              "period": 1799827200000,
+              "state": "ACTIVE",
+              "unit": "hours",
+              "endsAt": 1800864000000,
+              "usage": 720
+            }
+          ],
+          "expect": 1
+        },
+        {
+          "op": "states",
+          "expect": ["00000001:FULFILLED", "00000002:ACCEPTED"]
+        },
+        {
+          "op": "reconcile",
+          "now": 1800000000002,
+          "rentals": [
+            {
+              "bundle": "classe-cm2",
+              "period": 1799827200000,
+              "state": "ACTIVE",
+              "unit": "hours",
+              "endsAt": 1800864000000,
+              "usage": 1440
+            }
+          ],
+          "expect": 1
+        },
+        {
+          "op": "states",
+          "expect": ["00000001:FULFILLED", "00000002:FULFILLED"]
+        }
+      ]
+    },
+    {
+      "id": "langues-bundle-with-a-reserved-lot-is-free",
+      "type": "scenario",
+      "steps": [
+        {
+          "op": "create",
+          "now": 1800000000000,
+          "nonce": "00000001",
+          "bundle": "langues-zh-a0",
+          "choice": "30j",
+          "extend": false,
+          "facts": {
+            "trial": false,
+            "kid": false,
+            "shelf": "LANGUES",
+            "lots": ["RESERVED"],
+            "max": 3,
+            "rentals": []
+          },
+          "expect": "REFUSED:FREE_BUNDLE"
+        },
+        {
+          "op": "states",
+          "expect": []
+        }
+      ]
+    },
+    {
+      "id": "kid-profile-refused",
+      "type": "scenario",
+      "steps": [
+        {
+          "op": "create",
+          "now": 1800000000000,
+          "nonce": "00000001",
+          "bundle": "classe-cm2",
+          "choice": "12h",
+          "extend": false,
+          "facts": {
+            "trial": false,
+            "kid": true,
+            "shelf": "APPRENDRE",
+            "lots": ["RESERVED"],
+            "max": 3,
+            "rentals": []
+          },
+          "expect": "REFUSED:KID_PROFILE"
+        },
+        {
+          "op": "states",
+          "expect": []
+        }
+      ]
+    },
+    {
+      "id": "trial-tv-refused",
+      "type": "scenario",
+      "steps": [
+        {
+          "op": "create",
+          "now": 1800000000000,
+          "nonce": "00000001",
+          "bundle": "classe-cm2",
+          "choice": "12h",
+          "extend": false,
+          "facts": {
+            "trial": true,
+            "kid": false,
+            "shelf": "APPRENDRE",
+            "lots": ["RESERVED"],
+            "max": 3,
+            "rentals": []
+          },
+          "expect": "REFUSED:TRIAL_TV"
+        },
+        {
+          "op": "states",
+          "expect": []
+        }
+      ]
+    },
+    {
+      "id": "free-bundle-refused",
+      "type": "scenario",
+      "steps": [
+        {
+          "op": "create",
+          "now": 1800000000000,
+          "nonce": "00000001",
+          "bundle": "langues-zh-a0",
+          "choice": "30j",
+          "extend": false,
+          "facts": {
+            "trial": false,
+            "kid": false,
+            "shelf": "APPRENDRE",
+            "lots": ["FREE"],
+            "max": 3,
+            "rentals": []
+          },
+          "expect": "REFUSED:FREE_BUNDLE"
+        },
+        {
+          "op": "states",
+          "expect": []
+        }
+      ]
+    },
+    {
+      "id": "quota-counts-pending-new-requests",
+      "type": "scenario",
+      "steps": [
+        {
+          "op": "create",
+          "now": 1800000000000,
+          "nonce": "00000001",
+          "bundle": "classe-a",
+          "choice": "12h",
+          "extend": false,
+          "facts": {
+            "trial": false,
+            "kid": false,
+            "shelf": "APPRENDRE",
+            "lots": ["RESERVED"],
+            "max": 1,
+            "rentals": []
+          },
+          "expect": "OK"
+        },
+        {
+          "op": "create",
+          "now": 1800000000000,
+          "nonce": "00000002",
+          "bundle": "classe-a",
+          "choice": "24h",
+          "extend": false,
+          "facts": {
+            "trial": false,
+            "kid": false,
+            "shelf": "APPRENDRE",
+            "lots": ["RESERVED"],
+            "max": 1,
+            "rentals": []
+          },
+          "expect": "OK"
+        },
+        {
+          "op": "create",
+          "now": 1800000000000,
+          "nonce": "00000003",
+          "bundle": "classe-b",
+          "choice": "12h",
+          "extend": false,
+          "facts": {
+            "trial": false,
+            "kid": false,
+            "shelf": "APPRENDRE",
+            "lots": ["RESERVED"],
+            "max": 1,
+            "rentals": []
+          },
+          "expect": "REFUSED:OVER_LIMIT"
+        }
+      ]
+    },
+    {
+      "id": "same-bundle-other-unit-then-same-unit-extends",
+      "type": "scenario",
+      "steps": [
+        {
+          "op": "create",
+          "now": 1800000000000,
+          "nonce": "00000001",
+          "bundle": "classe-cm2",
+          "choice": "7j",
+          "extend": false,
+          "facts": {
+            "trial": false,
+            "kid": false,
+            "shelf": "APPRENDRE",
+            "lots": ["RESERVED"],
+            "max": 3,
+            "rentals": [
+              {
+                "bundle": "classe-cm2",
+                "period": 1799827200000,
+                "state": "ACTIVE",
+                "unit": "hours",
+                "endsAt": 1800864000000,
+                "usage": 360
+              }
+            ]
+          },
+          "expect": "REFUSED:SAME_BUNDLE_OTHER_UNIT"
+        },
+        {
+          "op": "create",
+          "now": 1800000000000,
+          "nonce": "00000002",
+          "bundle": "classe-cm2",
+          "choice": "6h",
+          "extend": false,
+          "facts": {
+            "trial": false,
+            "kid": false,
+            "shelf": "APPRENDRE",
+            "lots": ["RESERVED"],
+            "max": 3,
+            "rentals": [
+              {
+                "bundle": "classe-cm2",
+                "period": 1799827200000,
+                "state": "ACTIVE",
+                "unit": "hours",
+                "endsAt": 1800864000000,
+                "usage": 360
+              }
+            ]
+          },
+          "expect": "OK"
+        },
+        {
+          "op": "states",
+          "expect": ["00000002:PENDING"]
+        }
+      ]
+    },
+    {
+      "id": "clock-set-back-never-expires",
+      "type": "scenario",
+      "steps": [
+        {
+          "op": "create",
+          "now": 1800000000000,
+          "nonce": "00000001",
+          "bundle": "classe-cm2",
+          "choice": "12h",
+          "extend": false,
+          "facts": {
+            "trial": false,
+            "kid": false,
+            "shelf": "APPRENDRE",
+            "lots": ["RESERVED"],
+            "max": 3,
+            "rentals": []
+          },
+          "expect": "OK"
+        },
+        {
+          "op": "expire",
+          "now": 1797408000000,
+          "expect": 0
+        },
+        {
+          "op": "states",
+          "expect": ["00000001:PENDING"]
+        }
+      ]
+    },
+    {
+      "id": "queue-full-at-twenty",
+      "type": "scenario",
+      "steps": [
+        {
+          "op": "create",
+          "now": 1800000000000,
+          "nonce": "00000001",
+          "bundle": "classe-1",
+          "choice": "12h",
+          "extend": false,
+          "facts": {
+            "trial": false,
+            "kid": false,
+            "shelf": "APPRENDRE",
+            "lots": ["RESERVED"],
+            "max": 99,
+            "rentals": []
+          },
+          "expect": "OK"
+        },
+        {
+          "op": "create",
+          "now": 1800000000000,
+          "nonce": "00000002",
+          "bundle": "classe-2",
+          "choice": "12h",
+          "extend": false,
+          "facts": {
+            "trial": false,
+            "kid": false,
+            "shelf": "APPRENDRE",
+            "lots": ["RESERVED"],
+            "max": 99,
+            "rentals": []
+          },
+          "expect": "OK"
+        },
+        {
+          "op": "create",
+          "now": 1800000000000,
+          "nonce": "00000003",
+          "bundle": "classe-3",
+          "choice": "12h",
+          "extend": false,
+          "facts": {
+            "trial": false,
+            "kid": false,
+            "shelf": "APPRENDRE",
+            "lots": ["RESERVED"],
+            "max": 99,
+            "rentals": []
+          },
+          "expect": "OK"
+        },
+        {
+          "op": "create",
+          "now": 1800000000000,
+          "nonce": "00000004",
+          "bundle": "classe-4",
+          "choice": "12h",
+          "extend": false,
+          "facts": {
+            "trial": false,
+            "kid": false,
+            "shelf": "APPRENDRE",
+            "lots": ["RESERVED"],
+            "max": 99,
+            "rentals": []
+          },
+          "expect": "OK"
+        },
+        {
+          "op": "create",
+          "now": 1800000000000,
+          "nonce": "00000005",
+          "bundle": "classe-5",
+          "choice": "12h",
+          "extend": false,
+          "facts": {
+            "trial": false,
+            "kid": false,
+            "shelf": "APPRENDRE",
+            "lots": ["RESERVED"],
+            "max": 99,
+            "rentals": []
+          },
+          "expect": "OK"
+        },
+        {
+          "op": "create",
+          "now": 1800000000000,
+          "nonce": "00000006",
+          "bundle": "classe-6",
+          "choice": "12h",
+          "extend": false,
+          "facts": {
+            "trial": false,
+            "kid": false,
+            "shelf": "APPRENDRE",
+            "lots": ["RESERVED"],
+            "max": 99,
+            "rentals": []
+          },
+          "expect": "OK"
+        },
+        {
+          "op": "create",
+          "now": 1800000000000,
+          "nonce": "00000007",
+          "bundle": "classe-7",
+          "choice": "12h",
+          "extend": false,
+          "facts": {
+            "trial": false,
+            "kid": false,
+            "shelf": "APPRENDRE",
+            "lots": ["RESERVED"],
+            "max": 99,
+            "rentals": []
+          },
+          "expect": "OK"
+        },
+        {
+          "op": "create",
+          "now": 1800000000000,
+          "nonce": "00000008",
+          "bundle": "classe-8",
+          "choice": "12h",
+          "extend": false,
+          "facts": {
+            "trial": false,
+            "kid": false,
+            "shelf": "APPRENDRE",
+            "lots": ["RESERVED"],
+            "max": 99,
+            "rentals": []
+          },
+          "expect": "OK"
+        },
+        {
+          "op": "create",
+          "now": 1800000000000,
+          "nonce": "00000009",
+          "bundle": "classe-9",
+          "choice": "12h",
+          "extend": false,
+          "facts": {
+            "trial": false,
+            "kid": false,
+            "shelf": "APPRENDRE",
+            "lots": ["RESERVED"],
+            "max": 99,
+            "rentals": []
+          },
+          "expect": "OK"
+        },
+        {
+          "op": "create",
+          "now": 1800000000000,
+          "nonce": "0000000a",
+          "bundle": "classe-10",
+          "choice": "12h",
+          "extend": false,
+          "facts": {
+            "trial": false,
+            "kid": false,
+            "shelf": "APPRENDRE",
+            "lots": ["RESERVED"],
+            "max": 99,
+            "rentals": []
+          },
+          "expect": "OK"
+        },
+        {
+          "op": "create",
+          "now": 1800000000000,
+          "nonce": "0000000b",
+          "bundle": "classe-11",
+          "choice": "12h",
+          "extend": false,
+          "facts": {
+            "trial": false,
+            "kid": false,
+            "shelf": "APPRENDRE",
+            "lots": ["RESERVED"],
+            "max": 99,
+            "rentals": []
+          },
+          "expect": "OK"
+        },
+        {
+          "op": "create",
+          "now": 1800000000000,
+          "nonce": "0000000c",
+          "bundle": "classe-12",
+          "choice": "12h",
+          "extend": false,
+          "facts": {
+            "trial": false,
+            "kid": false,
+            "shelf": "APPRENDRE",
+            "lots": ["RESERVED"],
+            "max": 99,
+            "rentals": []
+          },
+          "expect": "OK"
+        },
+        {
+          "op": "create",
+          "now": 1800000000000,
+          "nonce": "0000000d",
+          "bundle": "classe-13",
+          "choice": "12h",
+          "extend": false,
+          "facts": {
+            "trial": false,
+            "kid": false,
+            "shelf": "APPRENDRE",
+            "lots": ["RESERVED"],
+            "max": 99,
+            "rentals": []
+          },
+          "expect": "OK"
+        },
+        {
+          "op": "create",
+          "now": 1800000000000,
+          "nonce": "0000000e",
+          "bundle": "classe-14",
+          "choice": "12h",
+          "extend": false,
+          "facts": {
+            "trial": false,
+            "kid": false,
+            "shelf": "APPRENDRE",
+            "lots": ["RESERVED"],
+            "max": 99,
+            "rentals": []
+          },
+          "expect": "OK"
+        },
+        {
+          "op": "create",
+          "now": 1800000000000,
+          "nonce": "0000000f",
+          "bundle": "classe-15",
+          "choice": "12h",
+          "extend": false,
+          "facts": {
+            "trial": false,
+            "kid": false,
+            "shelf": "APPRENDRE",
+            "lots": ["RESERVED"],
+            "max": 99,
+            "rentals": []
+          },
+          "expect": "OK"
+        },
+        {
+          "op": "create",
+          "now": 1800000000000,
+          "nonce": "00000010",
+          "bundle": "classe-16",
+          "choice": "12h",
+          "extend": false,
+          "facts": {
+            "trial": false,
+            "kid": false,
+            "shelf": "APPRENDRE",
+            "lots": ["RESERVED"],
+            "max": 99,
+            "rentals": []
+          },
+          "expect": "OK"
+        },
+        {
+          "op": "create",
+          "now": 1800000000000,
+          "nonce": "00000011",
+          "bundle": "classe-17",
+          "choice": "12h",
+          "extend": false,
+          "facts": {
+            "trial": false,
+            "kid": false,
+            "shelf": "APPRENDRE",
+            "lots": ["RESERVED"],
+            "max": 99,
+            "rentals": []
+          },
+          "expect": "OK"
+        },
+        {
+          "op": "create",
+          "now": 1800000000000,
+          "nonce": "00000012",
+          "bundle": "classe-18",
+          "choice": "12h",
+          "extend": false,
+          "facts": {
+            "trial": false,
+            "kid": false,
+            "shelf": "APPRENDRE",
+            "lots": ["RESERVED"],
+            "max": 99,
+            "rentals": []
+          },
+          "expect": "OK"
+        },
+        {
+          "op": "create",
+          "now": 1800000000000,
+          "nonce": "00000013",
+          "bundle": "classe-19",
+          "choice": "12h",
+          "extend": false,
+          "facts": {
+            "trial": false,
+            "kid": false,
+            "shelf": "APPRENDRE",
+            "lots": ["RESERVED"],
+            "max": 99,
+            "rentals": []
+          },
+          "expect": "OK"
+        },
+        {
+          "op": "create",
+          "now": 1800000000000,
+          "nonce": "00000014",
+          "bundle": "classe-20",
+          "choice": "12h",
+          "extend": false,
+          "facts": {
+            "trial": false,
+            "kid": false,
+            "shelf": "APPRENDRE",
+            "lots": ["RESERVED"],
+            "max": 99,
+            "rentals": []
+          },
+          "expect": "OK"
+        },
+        {
+          "op": "create",
+          "now": 1800000000000,
+          "nonce": "000000ff",
+          "bundle": "classe-21",
+          "choice": "12h",
+          "extend": false,
+          "facts": {
+            "trial": false,
+            "kid": false,
+            "shelf": "APPRENDRE",
+            "lots": ["RESERVED"],
+            "max": 99,
+            "rentals": []
+          },
+          "expect": "REFUSED:QUEUE_FULL"
+        },
+        {
+          "op": "ack",
+          "now": 1800000000000,
+          "nonce": "00000001",
+          "answer": "REFUSED",
+          "expect": "APPLIED:REFUSED"
+        },
+        {
+          "op": "create",
+          "now": 1800000000000,
+          "nonce": "000000fe",
+          "bundle": "classe-21",
+          "choice": "12h",
+          "extend": false,
+          "facts": {
+            "trial": false,
+            "kid": false,
+            "shelf": "APPRENDRE",
+            "lots": ["RESERVED"],
+            "max": 99,
+            "rentals": []
+          },
+          "expect": "OK"
+        }
+      ]
+    }
+  ]
+}
