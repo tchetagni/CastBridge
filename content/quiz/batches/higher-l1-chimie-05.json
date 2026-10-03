@@ -1,0 +1,375 @@
+{
+ "batch": "higher-l1-chimie-05",
+ "author": "Claude (rédacteur IA, à relire)",
+ "date": "2026-10-03",
+ "questions": [
+  {
+   "course": "l1-chim",
+   "category": "Classification périodique",
+   "difficulty": 1,
+   "question": "Parmi le brome, le chlore, l'iode et le soufre, quel élément est liquide à 25 °C sous 1 atm ?",
+   "choices": [
+    "Le chlore",
+    "Le brome",
+    "L'iode",
+    "Le soufre"
+   ],
+   "answer": "B",
+   "explanation": "Le brome est l'un des deux seuls éléments liquides dans ces conditions ; le chlore est gazeux, l'iode et le soufre sont solides.",
+   "source": "Tableau périodique et recommandations IUPAC",
+   "verif": "import"
+  },
+  {
+   "course": "l1-chim",
+   "category": "Configuration électronique",
+   "difficulty": 1,
+   "question": "Combien d'électrons de valence possède un atome d'un métal alcalino-terreux (groupe 2) ?",
+   "choices": [
+    "2",
+    "1",
+    "3",
+    "8"
+   ],
+   "answer": "A",
+   "explanation": "Les alcalino-terreux ont une configuration de valence ns², soit deux électrons de valence.",
+   "source": "Cours de chimie générale, famille Chang / Atkins",
+   "verif": "import"
+  },
+  {
+   "course": "l1-chim",
+   "category": "Polarité et électronégativité",
+   "difficulty": 1,
+   "question": "Dans une liaison A–B où B est plus électronégatif que A, quelle charge partielle porte l'atome B ?",
+   "choices": [
+    "δ+ (partielle positive)",
+    "Aucune, la charge est nulle",
+    "Une charge entière −1",
+    "δ− (partielle négative)"
+   ],
+   "answer": "D",
+   "explanation": "Le doublet est déplacé vers l'atome le plus électronégatif, qui porte donc une charge partielle négative.",
+   "source": "Cours de chimie générale, famille Chang / Atkins",
+   "verif": "import"
+  },
+  {
+   "course": "l1-chim",
+   "category": "Solutions : dilution et préparation",
+   "difficulty": 1,
+   "question": "On dissout 2,0 g de glucose dans de l'eau pour obtenir 250 mL de solution. Quelle est la concentration massique ?",
+   "choices": [
+    "0,50 g/L",
+    "2,0 g/L",
+    "8,0 g/L",
+    "125 g/L"
+   ],
+   "answer": "C",
+   "explanation": "C_m = m/V = 2,0 g / 0,250 L = 8,0 g/L.",
+   "source": "Cours de chimie générale, famille Chang / Atkins",
+   "verif": "import"
+  },
+  {
+   "course": "l1-chim",
+   "category": "pH et produit ionique de l'eau",
+   "difficulty": 1,
+   "question": "À 25 °C, quel est le pOH d'une solution aqueuse de pH 9,0 ?",
+   "choices": [
+    "9,0",
+    "7,0",
+    "4,0",
+    "5,0"
+   ],
+   "answer": "D",
+   "explanation": "À 25 °C, pH + pOH = 14, donc pOH = 14 − 9,0 = 5,0.",
+   "source": "Cours de chimie générale, famille Chang / Atkins",
+   "verif": "import"
+  },
+  {
+   "course": "l1-chim",
+   "category": "Cinétique chimique",
+   "difficulty": 1,
+   "question": "Pourquoi un comprimé effervescent écrasé se dissout-il plus vite qu'un comprimé entier ?",
+   "choices": [
+    "L'énergie d'activation de la réaction est plus faible",
+    "La constante d'équilibre augmente",
+    "La surface de contact avec l'eau est plus grande",
+    "La quantité de matière de réactif diminue"
+   ],
+   "answer": "C",
+   "explanation": "Le broyage augmente la surface de contact, donc le nombre de chocs efficaces par unité de temps ; Ea et K ne changent pas.",
+   "source": "Cours de chimie physique de licence, famille Atkins",
+   "verif": "import"
+  },
+  {
+   "course": "l1-chim",
+   "category": "Fonctions oxygénées",
+   "difficulty": 1,
+   "question": "Quel est le nom usuel IUPAC de l'acide carboxylique de formule HCOOH ?",
+   "choices": [
+    "L'acide éthanoïque",
+    "L'acide méthanoïque",
+    "Le méthanol",
+    "Le méthanal"
+   ],
+   "answer": "B",
+   "explanation": "HCOOH possède un seul atome de carbone portant le groupe carboxyle : c'est l'acide méthanoïque.",
+   "source": "Cours de licence de chimie organique, famille des manuels Clayden/McMurry",
+   "verif": "import"
+  },
+  {
+   "course": "l1-chim",
+   "category": "Liaison chimique",
+   "difficulty": 2,
+   "question": "Comment nomme-t-on la liaison covalente dont les deux électrons du doublet partagé proviennent du même atome ?",
+   "choices": [
+    "Liaison covalente dative",
+    "Liaison ionique",
+    "Liaison métallique",
+    "Liaison hydrogène"
+   ],
+   "answer": "A",
+   "explanation": "Dans une liaison dative (de coordination), un atome fournit le doublet entier, comme dans la formation de NH₄⁺ à partir de NH₃ et H⁺.",
+   "source": "Cours de chimie générale, famille Chang / Atkins",
+   "verif": "import"
+  },
+  {
+   "course": "l1-chim",
+   "category": "Mole et concentration",
+   "difficulty": 2,
+   "question": "Un gaz parfait a un volume molaire de 24 L/mol à 25 °C et 1 atm. Quel volume occupent 0,50 mol de ce gaz ?",
+   "choices": [
+    "48 L",
+    "24 L",
+    "6,0 L",
+    "12 L"
+   ],
+   "answer": "D",
+   "explanation": "V = n × Vm = 0,50 × 24 = 12 L.",
+   "source": "Cours de chimie générale, famille Chang / Atkins",
+   "verif": "import"
+  },
+  {
+   "course": "l1-chim",
+   "category": "Acides et bases forts et faibles",
+   "difficulty": 2,
+   "question": "Parmi ces composés, lequel est une base faible dans l'eau ?",
+   "choices": [
+    "L'hydroxyde de sodium NaOH",
+    "L'ammoniac NH₃",
+    "L'hydroxyde de potassium KOH",
+    "L'hydroxyde de baryum Ba(OH)₂"
+   ],
+   "answer": "B",
+   "explanation": "NH₃ ne réagit que partiellement avec l'eau, alors que les hydroxydes alcalins et de baryum sont totalement dissociés.",
+   "source": "Cours de chimie générale, famille Chang / Atkins",
+   "verif": "import"
+  },
+  {
+   "course": "l1-chim",
+   "category": "Oxydoréduction",
+   "difficulty": 2,
+   "question": "Quel est le nombre d'oxydation de l'azote dans l'ammoniac NH₃ ?",
+   "choices": [
+    "−3",
+    "+5",
+    "−1",
+    "0"
+   ],
+   "answer": "A",
+   "explanation": "H vaut +1 et la molécule est neutre, donc n.o.(N) + 3(+1) = 0, soit −3.",
+   "source": "Cours de chimie générale, famille Chang / Atkins",
+   "verif": "import"
+  },
+  {
+   "course": "l1-chim",
+   "category": "Piles et électrolyse",
+   "difficulty": 2,
+   "question": "Pour protéger une coque en fer de la corrosion par anode sacrificielle, quel métal peut-on fixer dessus ?",
+   "choices": [
+    "Le cuivre",
+    "L'argent",
+    "Le zinc",
+    "L'or"
+   ],
+   "answer": "C",
+   "explanation": "Le zinc, plus réducteur que le fer (E° plus faible), s'oxyde à la place du fer qu'il protège ; Cu, Ag et Au sont moins réducteurs.",
+   "source": "Cours de chimie générale, famille Chang / Atkins",
+   "verif": "import"
+  },
+  {
+   "course": "l1-chim",
+   "category": "Équilibre chimique",
+   "difficulty": 2,
+   "question": "Que traduit une constante d'équilibre K très supérieure à 1 pour une réaction à une température donnée ?",
+   "choices": [
+    "La réaction est très lente",
+    "La réaction est quasi totale dans le sens inverse",
+    "La réaction a besoin d'un catalyseur",
+    "La réaction est quasi totale dans le sens direct"
+   ],
+   "answer": "D",
+   "explanation": "K ≫ 1 signifie qu'à l'équilibre les produits dominent largement ; K ne renseigne pas sur la vitesse.",
+   "source": "Cours de chimie physique de licence, famille Atkins",
+   "verif": "import"
+  },
+  {
+   "course": "l1-chim",
+   "category": "Nomenclature organique",
+   "difficulty": 2,
+   "question": "Quel est le nom IUPAC du composé de formule semi-développée CH₃–CH=CH–CH₂–CH₃ ?",
+   "choices": [
+    "Pent-1-ène",
+    "Pentane",
+    "Pent-2-ène",
+    "Pent-2-yne"
+   ],
+   "answer": "C",
+   "explanation": "La chaîne de cinq carbones porte une double liaison entre C2 et C3 : pent-2-ène.",
+   "source": "Cours de licence de chimie organique, famille des manuels Clayden/McMurry",
+   "verif": "import"
+  },
+  {
+   "course": "l1-chim",
+   "category": "Structure de la matière",
+   "difficulty": 3,
+   "question": "Quelle série du spectre de l'hydrogène correspond aux transitions électroniques vers le niveau n = 1, situées dans l'ultraviolet ?",
+   "choices": [
+    "La série de Lyman",
+    "La série de Balmer",
+    "La série de Paschen",
+    "La série de Brackett"
+   ],
+   "answer": "A",
+   "explanation": "Lyman : transitions vers n = 1 (UV) ; Balmer vers n = 2 (visible) ; Paschen vers n = 3 et Brackett vers n = 4 (infrarouge).",
+   "source": "Cours de chimie physique de licence, famille Atkins",
+   "verif": "import"
+  },
+  {
+   "course": "l1-chim",
+   "category": "Lewis et géométrie VSEPR",
+   "difficulty": 3,
+   "question": "Quelle est la charge formelle de l'atome d'oxygène dans l'ion hydronium H₃O⁺ ?",
+   "choices": [
+    "0",
+    "+1",
+    "−2",
+    "+3"
+   ],
+   "answer": "B",
+   "explanation": "L'oxygène a 6 électrons de valence ; il en « possède » 2 en doublet non liant + 3 par ses liaisons : 6 − 5 = +1.",
+   "source": "Cours de chimie générale, famille Chang / Atkins",
+   "verif": "import"
+  },
+  {
+   "course": "l1-chim",
+   "category": "Stœchiométrie et réactif limitant",
+   "difficulty": 3,
+   "question": "Pour 2 Al + 6 HCl → 2 AlCl₃ + 3 H₂, quelle quantité de H₂ se forme à partir de 0,20 mol d'aluminium avec HCl en excès ?",
+   "choices": [
+    "0,20 mol",
+    "0,60 mol",
+    "0,30 mol",
+    "0,10 mol"
+   ],
+   "answer": "C",
+   "explanation": "n(H₂) = (3/2) × n(Al) = 1,5 × 0,20 = 0,30 mol.",
+   "source": "Cours de chimie générale, famille Chang / Atkins",
+   "verif": "import"
+  },
+  {
+   "course": "l1-chim",
+   "category": "Principe de Le Chatelier",
+   "difficulty": 3,
+   "question": "Dans la synthèse de l'ammoniac, NH₃ est liquéfié et retiré en continu du mélange N₂ + 3 H₂ ⇌ 2 NH₃. Quel est l'effet sur l'équilibre ?",
+   "choices": [
+    "Il est déplacé dans le sens de la formation de NH₃",
+    "Il est déplacé dans le sens de la formation de N₂ et H₂",
+    "Il n'est pas modifié car K est constante",
+    "La constante K augmente"
+   ],
+   "answer": "A",
+   "explanation": "Retirer un produit abaisse Q sous K : le système évolue dans le sens direct. K, qui ne dépend que de T, ne change pas.",
+   "source": "Cours de chimie physique de licence, famille Atkins",
+   "verif": "import"
+  },
+  {
+   "course": "l1-chim",
+   "category": "Alcanes, alcènes, alcynes",
+   "difficulty": 3,
+   "question": "Combien de moles de dihydrogène faut-il pour hydrogéner totalement une mole de propyne CH₃–C≡CH en propane ?",
+   "choices": [
+    "1 mol",
+    "2 mol",
+    "3 mol",
+    "4 mol"
+   ],
+   "answer": "B",
+   "explanation": "Une triple liaison nécessite deux additions successives de H₂ (alcyne → alcène → alcane).",
+   "source": "Cours de licence de chimie organique, famille des manuels Clayden/McMurry",
+   "verif": "import"
+  },
+  {
+   "course": "l1-chim",
+   "category": "Thermochimie",
+   "difficulty": 4,
+   "question": "N₂ + 3 H₂ → 2 NH₃ a pour enthalpie ΔH = −92 kJ (pour les quantités de l'équation). Quelle chaleur est libérée par la formation de 3,4 g de NH₃ (M = 17 g/mol) ?",
+   "choices": [
+    "18,4 kJ",
+    "4,6 kJ",
+    "92 kJ",
+    "9,2 kJ"
+   ],
+   "answer": "D",
+   "explanation": "n(NH₃) = 3,4/17 = 0,20 mol ; −92 kJ correspond à 2 mol, soit 46 kJ/mol ; 0,20 × 46 = 9,2 kJ.",
+   "source": "Cours de chimie physique de licence, famille Atkins",
+   "verif": "import"
+  },
+  {
+   "course": "l1-chim",
+   "category": "Dosages acido-basiques",
+   "difficulty": 4,
+   "question": "On mélange 50,0 mL d'HCl à 0,100 mol/L et 50,0 mL de NaOH à 0,0600 mol/L. Quel est le pH du mélange à 25 °C ?",
+   "choices": [
+    "1,70",
+    "1,30",
+    "2,00",
+    "1,00"
+   ],
+   "answer": "A",
+   "explanation": "Excès de H₃O⁺ : 5,00 − 3,00 = 2,00 mmol dans 100 mL, soit 0,0200 mol/L ; pH = −log 0,0200 = 1,70.",
+   "source": "Cours de chimie analytique, famille Skoog",
+   "verif": "import"
+  },
+  {
+   "course": "l1-chim",
+   "category": "Solubilité et produit de solubilité",
+   "difficulty": 4,
+   "question": "Une solution contient Cl⁻ et I⁻ à la même concentration (0,010 mol/L). On y ajoute progressivement Ag⁺. Avec Ks(AgCl) ≈ 1,8×10⁻¹⁰ et Ks(AgI) ≈ 8×10⁻¹⁷, quel sel précipite en premier ?",
+   "choices": [
+    "AgCl",
+    "AgI",
+    "AgCl et AgI précipitent en même temps",
+    "Aucun des deux ne précipite"
+   ],
+   "answer": "B",
+   "explanation": "Les deux sels sont de type 1:1 ; AgI, au Ks le plus faible, atteint son seuil de précipitation pour une concentration en Ag⁺ bien plus basse.",
+   "source": "Cours de chimie analytique, famille Skoog",
+   "verif": "import"
+  },
+  {
+   "course": "l1-chim",
+   "category": "Acides et bases forts et faibles",
+   "difficulty": 5,
+   "question": "On mélange 50,0 mL d'acide éthanoïque à 0,10 mol/L et 50,0 mL d'éthanoate de sodium à 0,20 mol/L (pKa = 4,76). Quel est le pH du mélange ?",
+   "choices": [
+    "4,46",
+    "4,76",
+    "5,06",
+    "5,36"
+   ],
+   "answer": "C",
+   "explanation": "Henderson-Hasselbalch : pH = pKa + log([base]/[acide]) = 4,76 + log 2 = 4,76 + 0,30 = 5,06 (les deux concentrations sont diluées de moitié, le rapport reste 2).",
+   "source": "Cours de chimie analytique, famille Skoog",
+   "verif": "import"
+  }
+ ]
+}
