@@ -55,10 +55,11 @@ import kotlinx.coroutines.withContext
 @Composable
 fun TvHub() {
     var advanced by rememberSaveable { mutableStateOf(false) }
+    var bluetooth by rememberSaveable { mutableStateOf(false) }      // « Passerelle Bluetooth » > choose the TV: Avancé opens on its Bluetooth part
     if (advanced) Column(Modifier.fillMaxSize()) {
-        TextButton(onClick = { advanced = false }, Modifier.padding(start = 8.dp)) { Icon(Icons.Filled.ArrowBack, null); Spacer(Modifier.width(6.dp)); Text("Accueil") }
-        TvHubAdvanced()
-    } else TvHome(onAdvanced = { advanced = true })
+        TextButton(onClick = { advanced = false; bluetooth = false }, Modifier.padding(start = 8.dp)) { Icon(Icons.Filled.ArrowBack, null); Spacer(Modifier.width(6.dp)); Text("Accueil") }
+        TvHubAdvanced(if (bluetooth) Channel.BLUETOOTH else Channel.WIFI)
+    } else TvHome(onAdvanced = { advanced = true }, onBluetooth = { bluetooth = true; advanced = true })
 }
 
 /** The TV the home talks to (chosen once in the first-connection assistant). */
@@ -85,7 +86,7 @@ private fun eta(left: Long, bps: Long): String {
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun TvHome(onAdvanced: () -> Unit) {
+fun TvHome(onAdvanced: () -> Unit, onBluetooth: () -> Unit = onAdvanced) {
     val ctx = LocalContext.current
     val scope = rememberCoroutineScope()
     val home = remember { HomeTv(ctx) }
@@ -105,7 +106,10 @@ fun TvHome(onAdvanced: () -> Unit) {
     LaunchedEffect(Unit) { TvLinkManager.start(ctx) }
     var wizard by rememberSaveable { mutableStateOf(TvLinkManager.saved.list().isEmpty() && (tvName == null || !TvAuth.isUsable(pins.get(tvName)))) }
     val tv = tvs.firstOrNull { it.name == tvName }
+    // TV not on the Wi-Fi: the switch to Bluetooth (castbridge.core.ux.BtFallback) starts the API gateway and gives its loopback as the TV's address
+    val fallback by rememberBtFallback(tvs.filter { tvName == null || it.name == tvName }.map { it.base }, session?.base?.let { "127.0.0.1" !in it } == true)
     val client = session?.base?.let { TvClient(it, session.credential) }
+        ?: TvClient(castbridge.core.ux.BtFallback.LOOPBACK_BASE, pin).takeIf { fallback.viaBluetooth && tvName != null && TvAuth.isUsable(pin) && TvLinkManager.saved.list().isEmpty() }
         ?: tv?.takeIf { TvAuth.isUsable(pin) || TvLinkManager.saved.list().isEmpty() }?.let { TvClient(it.base, pin) }
     // sent by « Ouvrir avec CastBridge »: « Ajouter ma TV » or the code entry of the assistant
     val request by TvHomeRequest.pending.collectAsState()
@@ -125,7 +129,8 @@ fun TvHome(onAdvanced: () -> Unit) {
         return
     }
     if (wizard) {
-        FirstConnection(tvs, onRetry = { discovery.restart() }, onAdvanced = onAdvanced, onAddTv = { adding = true }, notice = msg?.takeIf { it.error }?.text) { name, code ->
+        FirstConnection(tvs, onRetry = { discovery.restart() }, onAdvanced = onAdvanced, onAddTv = { adding = true }, notice = msg?.takeIf { it.error }?.text,
+            gateway = { BtGatewayHomeBlock(fallback.signal, tvReachable = false, onAddTv = { adding = true }, onChoose = onBluetooth, showAddTv = false) }) { name, code ->
             home.name = name; pins.put(name, code); tvName = name; pin = code; wizard = false; msg = null
         }
         return
@@ -201,15 +206,22 @@ fun TvHome(onAdvanced: () -> Unit) {
             TvLinkStatus(link, onAdd = { adding = true }, onManage = { managing = true })
             if (reachable) info?.let { Text("${formatSize(it.free)} libres sur la TV", style = MaterialTheme.typography.bodySmall, color = cs.onSurfaceVariant) }
         } else Row(verticalAlignment = Alignment.CenterVertically) {
-            Box(Modifier.size(12.dp).clip(RoundedCornerShape(6.dp)).background(if (reachable) Cb.success else cs.outline))
+            val sig = fallback.signal      // no misleading grey: orange Bluetooth only, red unreachable (castbridge.core.ux.BtFallback)
+            Box(Modifier.size(12.dp).clip(RoundedCornerShape(6.dp)).background(when {
+                reachable && fallback.viaBluetooth -> Cb.warning; reachable -> Cb.success
+                sig?.light == castbridge.core.ux.LinkLight.RED -> cs.error; sig?.light == castbridge.core.ux.LinkLight.ORANGE -> Cb.warning; else -> cs.outline }))
             Spacer(Modifier.width(10.dp))
             Column(Modifier.weight(1f)) {
                 Text(tvName?.removePrefix("CastBridge TV ")?.ifBlank { "Ma TV" } ?: "Ma TV", style = MaterialTheme.typography.titleLarge, fontWeight = FontWeight.SemiBold)
-                Text(if (reachable) "Connectée" + (info?.let { " · ${formatSize(it.free)} libres" } ?: "") else "Recherche de la TV… (même Wi-Fi, app CastBridge TV installée)",
+                Text(if (reachable) "Connectée" + (if (fallback.viaBluetooth) " par Bluetooth" else "") + (info?.let { " · ${formatSize(it.free)} libres" } ?: "")
+                    else sig?.title ?: "Recherche de la TV… (même Wi-Fi, app CastBridge TV installée)",
                     style = MaterialTheme.typography.bodySmall, color = cs.onSurfaceVariant)
             }
             TextButton(onClick = { wizard = true }) { Text("Changer") }
         }
+
+        // Wi-Fi absent: the honest state (orange Bluetooth / red neither) and the « Passerelle Bluetooth » button, right under the TV
+        if (!reachable || fallback.signal != null) BtGatewayHomeBlock(fallback.signal, reachable, onAddTv = { adding = true }, onChoose = onBluetooth)
 
         // The message line: right under the TV, where it is seen (it used to sit below the posters, out of sight)
         msg?.let { n ->
@@ -362,6 +374,9 @@ fun TvHome(onAdvanced: () -> Unit) {
             }
         }
 
+        // TV reachable but bonded in Bluetooth: the gateway stays at hand (for the Mac), lower down
+        if (reachable && fallback.signal == null) BtGatewayCard(tvReachable = true, onAddTv = { adding = true }, onChoose = onBluetooth)
+
         // Advanced
         HorizontalDivider()
         ListItem(modifier = Modifier.clickable(onClick = onAdvanced),
@@ -419,7 +434,8 @@ private fun Poster(client: TvClient, i: TvLibItem, onClick: () -> Unit) {
 
 /** First connection: find the TV (same Wi-Fi), then type its code once. */
 @Composable
-private fun FirstConnection(tvs: List<Tv>, onRetry: () -> Unit, onAdvanced: () -> Unit, onAddTv: () -> Unit, notice: String? = null, onDone: (String, String) -> Unit) {
+private fun FirstConnection(tvs: List<Tv>, onRetry: () -> Unit, onAdvanced: () -> Unit, onAddTv: () -> Unit, notice: String? = null,
+                            gateway: @Composable () -> Unit = {}, onDone: (String, String) -> Unit) {
     val scope = rememberCoroutineScope()
     var chosen by remember { mutableStateOf<Tv?>(null) }
     var code by remember { mutableStateOf("") }
@@ -434,6 +450,7 @@ private fun FirstConnection(tvs: List<Tv>, onRetry: () -> Unit, onAdvanced: () -
         if (c == null) {
             Text("Trouvons votre TV", style = MaterialTheme.typography.headlineSmall, fontWeight = FontWeight.SemiBold)
             Button(onClick = onAddTv, modifier = Modifier.fillMaxWidth(0.9f)) { Icon(Icons.Filled.Bluetooth, null); Spacer(Modifier.width(8.dp)); Text("Ajouter ma TV (Bluetooth, sans code)") }
+            gateway()
             Text("La façon la plus simple : pas d'adresse, pas de code à saisir. Sinon, avec le code de la TV :", textAlign = TextAlign.Center, color = cs.onSurfaceVariant)
             Text("Ouvrez l'app CastBridge TV sur la TV. Le téléphone et la TV doivent être sur le même Wi-Fi.", textAlign = TextAlign.Center, color = cs.onSurfaceVariant)
             if (tvs.isEmpty()) { CircularProgressIndicator(); Text("Recherche…", color = cs.onSurfaceVariant) }
@@ -456,6 +473,7 @@ private fun FirstConnection(tvs: List<Tv>, onRetry: () -> Unit, onAdvanced: () -
                 textStyle = MaterialTheme.typography.headlineMedium.copy(textAlign = TextAlign.Center, letterSpacing = 8.sp),
                 keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.NumberPassword), modifier = Modifier.width(240.dp), isError = error != null)
             error?.let { Text(it, color = cs.error) }
+            if (error?.startsWith("TV injoignable") == true) gateway()      // « TV injoignable » : the Bluetooth way, right there
             Button(enabled = Pin.isValidFormat(code) && !checking, onClick = {
                 checking = true
                 scope.launch {

@@ -31,7 +31,8 @@ class TvDiscovery(ctx: Context) {
     private val scope = CoroutineScope(SupervisorJob() + Dispatchers.Default)
     /** The TVs of the network; if none answers and the phone's Bluetooth API gateway runs, the TV through it (127.0.0.1, "Bluetooth"). */
     val tvs: StateFlow<List<Tv>> = combine(_tvs, BtSshGatewayService.state) { lan, gw ->
-        if (lan.isEmpty() && gw.api.running) listOf(Tv("${gw.tv} (Bluetooth)", "127.0.0.1", BtSshGatewayService.API_PORT)) else lan
+        // also next to stale Wi-Fi entries (a TV that left the Wi-Fi may still be announced): the TV through the gateway stays choosable
+        if (gw.api.running) lan + Tv("${gw.tv} (Bluetooth)", "127.0.0.1", BtSshGatewayService.API_PORT) else lan
     }.stateIn(scope, SharingStarted.WhileSubscribed(5000), emptyList())
     private val queue = ArrayDeque<NsdServiceInfo>()
     private var resolving = false
