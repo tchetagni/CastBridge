@@ -1,5 +1,6 @@
 package castbridge.core.store
 
+import castbridge.core.langues.LangLevel
 import castbridge.core.lots.Bundle
 import castbridge.core.lots.BundleCatalog
 import castbridge.core.lots.Edition
@@ -32,10 +33,16 @@ object StoreCatalog {
     const val MAX_BUNDLES_CATALOG_BYTES = 64L shl 10
 
     private const val SECTION_OTHER = "Autres"
-    private val SECTIONS = listOf("Primaire", "Secondaire", "Supérieur", SECTION_OTHER)
-    private val PRIMAIRE = Regex("^(cp|ce1|ce2|cm1|cm2)$")
-    private val SECONDAIRE = Regex("^(6e|5e|4e|3e|2nde|2de|1ere|1re|tle.*)$")
-    private val SUPERIEUR = Regex("^(droit-.*|gce-.*)$")
+    private const val SECTION_CULTURE = "Culture générale"
+    /** Sous-rayons dans l'ordre d'affichage : niveaux scolaires, culture générale (Quiz), niveaux CEFR (Langues), puis « Autres ». */
+    private val SECTIONS = listOf("Primaire", "Secondaire", "Supérieur", SECTION_CULTURE) + LangLevel.entries.map { it.name } + SECTION_OTHER
+    private val PRIMAIRE = Regex("^(cp|ce1|ce2|cm1|cm2|class-[1-6])$")
+    private val SECONDAIRE = Regex("^(6e|5e|4e|3e|(2nde|2de|1ere|1re)(-.*)?|tle.*|form-.*|(lower|upper)-sixth.*)$")
+    private val SUPERIEUR = Regex("^(droit-.*|gce-.*|.*-l[1-3])$")
+    private val CULTURE = Regex("^(culture-.*|geo-.*|monde|afrique|general)$")
+    private val LEVELLED = setOf(Shelf.APPRENDRE, Shelf.QUIZ, Shelf.LANGUES)
+    private val INDEXED = Regex("^(?:class|form)-(\\d)")
+    private val UPPER_LEVEL = Regex("-l([1-3])$")
 
     /** Document refusé ; le message est en français et destiné à l'écran. */
     class Refused(message: String) : Exception(message)
@@ -121,20 +128,22 @@ object StoreCatalog {
             val trials = d.ids.mapNotNull { trialsOfFull[it] }.sortedWith(ORDER).also { t -> t.forEach { attachedTrials += LotEditions.fullOf(it.id) } }
             val scope = classScope(d.ids)
             val shelf = shelfOf(d.type, d.ids)
+            val section = sectionOf(shelf, d.ids, scope)
+            if (section == SECTION_OTHER && shelf in LEVELLED) warnings += "Article ${d.id} : niveau inconnu (rangé dans Autres)"
             val fam = d.lots.map { families.of(it.id) }
             val family = when {
                 fam.isEmpty() || fam.any { it == null } -> null
                 fam.all { it == LotFamily.FREE } -> LotFamily.FREE
                 else -> LotFamily.RESERVED
             }
-            Sorted(StoreItem(d.id, d.title, shelf, if (shelf == Shelf.APPRENDRE) sectionOf(scope) else "", d.lots, trials, family,
+            Sorted(StoreItem(d.id, d.title, shelf, section, d.lots, trials, family,
                 if (d.rawBytes > 0) d.rawBytes else d.lots.sumOf { it.bytes }, d.bundle, alias), scope)
         }
         trialsOfFull.filterKeys { it !in attachedTrials }.values.sortedWith(ORDER).forEach {
             warnings += "Lot d'essai ${LotNames.key(it.id)} sans lot complet connu (ignoré)"
         }
         val sorted = items.sortedWith(compareBy<Sorted>({ it.item.shelf.ordinal }, { SECTIONS.indexOf(it.item.section).let { i -> if (i < 0) SECTIONS.size else i } },
-            { it.scope }, { it.item.id })).map { it.item }
+            { rank(it.scope) }, { it.scope }, { it.item.id })).map { it.item }
         return Store(sorted, lotsAt, bundlesAt, bundles == null, warnings)
     }
 
@@ -148,11 +157,43 @@ object StoreCatalog {
         return (sorted.firstOrNull { it.feature == "learn" } ?: sorted.firstOrNull())?.scope.orEmpty()
     }
 
-    private fun sectionOf(scope: String): String = when {
+    private fun schoolSection(scope: String): String = when {
         PRIMAIRE.matches(scope) -> "Primaire"
         SECONDAIRE.matches(scope) -> "Secondaire"
         SUPERIEUR.matches(scope) -> "Supérieur"
         else -> SECTION_OTHER
+    }
+
+    /** Niveau CEFR d'un lot de langue : second segment de la portée (`zh-a0-famille-fr` -> A0), null si inconnu. */
+    private fun langLevel(scope: String): LangLevel? = LangLevel.of(scope.split('-').getOrNull(1))
+
+    private fun sectionOf(shelf: Shelf, ids: List<LotId>, scope: String): String = when (shelf) {
+        Shelf.APPRENDRE -> schoolSection(scope)
+        Shelf.QUIZ -> if (CULTURE.matches(scope)) SECTION_CULTURE else schoolSection(scope)
+        Shelf.LANGUES -> {
+            val levels = ids.filter { it.feature == "langues" }.map { langLevel(it.scope) }
+            (if (levels.isEmpty() || levels.any { it == null }) null else levels.filterNotNull().min())?.name ?: SECTION_OTHER
+        }
+        else -> ""
+    }
+
+    /** Rang du niveau dans son sous-rayon (CP->CM2, 6e->Tle, L1->L3) ; à rang égal, la portée départage. */
+    private fun rank(scope: String): Int {
+        val n = INDEXED.find(scope)?.groupValues?.get(1)?.toInt() ?: 0
+        return when {
+            scope == "cp" -> 1
+            scope == "ce1" -> 2
+            scope == "ce2" -> 3
+            scope == "cm1" -> 4
+            scope == "cm2" -> 5
+            scope.startsWith("class-") -> n
+            scope.startsWith("form-") -> 5 + n
+            scope.length == 2 && scope[1] == 'e' && scope[0] in '3'..'6' -> 12 - scope[0].digitToInt()
+            scope.startsWith("2nde") || scope.startsWith("2de") -> 10
+            scope.startsWith("1re") || scope.startsWith("1ere") || scope.startsWith("lower-sixth") -> 11
+            scope.startsWith("tle") || scope.startsWith("upper-sixth") -> 12
+            else -> UPPER_LEVEL.find(scope)?.groupValues?.get(1)?.toInt() ?: 50
+        }
     }
 
     private fun shelfOf(type: String?, ids: List<LotId>): Shelf {
