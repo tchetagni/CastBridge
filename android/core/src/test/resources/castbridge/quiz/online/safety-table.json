@@ -1,0 +1,20 @@
+{"rows":[
+{"id":"tv-green","facts":{"scope":"TV_ONLY"},"level":"GREEN","shape":"CIRCLE","word":"Partie sûre","text":"TV seule · personne d'autre ne peut entrer","action":null},
+{"id":"lan-green","facts":{"scope":"LAN"},"level":"GREEN","shape":"CIRCLE","word":"Partie sûre","text":"Réseau local · rien ne sort de la maison","action":null},
+{"id":"lan-guest","facts":{"scope":"LAN","guestsViaQr":1},"level":"ORANGE","shape":"TRIANGLE","word":"Attention","text":"Réseau local · 1 invité dans le Wi-Fi de la TV","action":"Changer le mot de passe Wi-Fi Direct à la fin"},
+{"id":"lan-guests-2","facts":{"scope":"LAN","guestsViaQr":2},"level":"ORANGE","shape":"TRIANGLE","word":"Attention","text":"Réseau local · 2 invités dans le Wi-Fi de la TV","action":"Changer le mot de passe Wi-Fi Direct à la fin"},
+{"id":"lan-gone","facts":{"scope":"LAN","disconnectedPlayer":"Amina"},"level":"ORANGE","shape":"TRIANGLE","word":"Attention","text":"Réseau local · Amina ne répond plus","action":null},
+{"id":"lan-lost","facts":{"scope":"LAN","lanLink":"LOST"},"level":"RED","shape":"SQUARE","word":"Problème","text":"Réseau local perdu : les téléphones ne peuvent plus répondre","action":"Télécommande : continuer seul, ou attendre"},
+{"id":"net-green","facts":{"scope":"INTERNET"},"level":"GREEN","shape":"CIRCLE","word":"Partie sûre","text":"Internet · partie sûre · chiffrée, pseudonymes seulement","action":null},
+{"id":"net-link","facts":{"scope":"INTERNET","serverLink":"LOST","serverLostSec":12},"level":"ORANGE","shape":"TRIANGLE","word":"Attention","text":"Internet · liaison en reprise (12 s)","action":null},
+{"id":"net-link-59","facts":{"scope":"INTERNET","serverLink":"LOST","serverLostSec":59},"level":"ORANGE","shape":"TRIANGLE","word":"Attention","text":"Internet · liaison en reprise (59 s)","action":null},
+{"id":"net-player","facts":{"scope":"INTERNET","resumingPlayer":"Koffi"},"level":"ORANGE","shape":"TRIANGLE","word":"Attention","text":"Internet · Koffi en reprise","action":null},
+{"id":"net-slow","facts":{"scope":"INTERNET","rttMs":1501},"level":"ORANGE","shape":"TRIANGLE","word":"Attention","text":"Internet · réseau lent","action":null},
+{"id":"net-cert","facts":{"scope":"INTERNET","tls":"INVALID"},"level":"RED","shape":"SQUARE","word":"Problème","text":"Internet : impossible · certificat non valide","action":"Fermer Internet"},
+{"id":"net-ticket","facts":{"scope":"INTERNET","ticketValid":false},"level":"RED","shape":"SQUARE","word":"Problème","text":"Internet : impossible · autorisation refusée","action":"Réessayer"},
+{"id":"net-lost","facts":{"scope":"INTERNET","serverLink":"LOST","serverLostSec":60},"level":"RED","shape":"SQUARE","word":"Problème","text":"Internet perdu : la partie continue en local","action":"Réessayer"},
+{"id":"net-off","facts":{"scope":"INTERNET","internetDisabledByOwner":true},"level":"BLACK","shape":"RING","word":"Inactif","text":"Internet : désactivé","action":"Contrôle parental"},
+{"id":"net-kid","facts":{"scope":"INTERNET","kidProfile":true},"level":"BLACK","shape":"RING","word":"Inactif","text":"Internet : réservé aux adultes (code parental)","action":"Contrôle parental"},
+{"id":"net-notv","facts":{"scope":"INTERNET","tvHasInternet":false},"level":"BLACK","shape":"RING","word":"Inactif","text":"Internet : la TV n'est pas connectée","action":"Connexion & réglages"},
+{"id":"net-clock","facts":{"scope":"INTERNET","clockDoubt":true},"level":"BLACK","shape":"RING","word":"Inactif","text":"Internet : vérifiez l'heure de la TV","action":"Connexion & réglages"}
+]}

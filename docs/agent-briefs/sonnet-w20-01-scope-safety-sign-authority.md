@@ -1,6 +1,6 @@
 # w20-01 — Cœur : `PlayScope` (trois périmètres), `SafetySign` (signe « Partie sûre »), `GameAuthority` + `LocalAuthority`, codes `Reason` `PLAY_*`
 <!-- routage Fable 2026-10-03 -->
-> **Modèle : sonnet** · escalade : audit Opus **échantillon** (sémantique du signe) · statut : PRÊT — **premier cahier de la vague**
+> **Modèle : sonnet** · escalade : audit Opus **échantillon** (sémantique du signe) · statut : FAIT (branche `claude/w20-01-scope-signe-autorite`, non fusionnée) — **premier cahier de la vague**
 > **Groupe : W20-S0** (cœur pur) · prérequis : aucun · porte : `tools/core-harness/run.sh :core:test --tests 'castbridge.core.quiz.online.*' --tests 'castbridge.core.quiz.*'`
 > **Jauge : ≈ 400 k jetons entrée / 20 k sortie** (effort M, ≈ 1,5 j) · audit Opus : échantillon
 
@@ -28,6 +28,9 @@ Donner au Quiz, dans le cœur partagé, (1) les **trois périmètres** `PlayScop
 5. `PlayReason` : codes, HTTP, réessayable, français (§ 1.3 et § 2.8) ; si `Reason` existe : ajout à l'`enum` + test que les nouveaux codes ont un message.
 6. `SafetySignAgreementTest` : charge `castbridge/quiz/online/safety-table.json` (ressource de test écrite par ce cahier : la table § 1.3) et vérifie `SafetySign.of` contre chaque ligne ; cette ressource sera relue par w20-06 (page web) pour prouver la **même** sémantique.
 7. **Vert** : porte ; `:core:test` complet dans le rapport (échecs préexistants `LearnLotsTest` ×10 et `BaseContentTest` listés à part).
+
+## Ajout du propriétaire (2026-10-03) : délai entre deux questions
+« Entre 2 questions laisse 1 ou 2 s de latence pour pouvoir synchroniser les parties en ligne. » Cœur pur `C/quiz/online/PlayTiming.kt` : `INTER_QUESTION_GAP_MS = 1500`, plage 1000..2000 (`gap(demandé)` borne), `gapFor(scope)` = 0 pour `TV_ONLY` et `LAN` (comportement inchangé), délai borné pour `INTERNET`. Après la révélation, la question suivante est annoncée aussitôt avec `opensAtServerMs = revealAtServerMs + gap` (horloge serveur) ; personne ne répond avant ; les points se comptent depuis `opensAtServerMs` ; une annonce tardive démarre aussitôt, fenêtre raccourcie seulement du temps mesuré par le serveur. Test : `CT/quiz/online/PlayTimingTest.kt`. Protocole : `docs/PLAY-PROTOCOL.md` § Timing (w20-02 le complète).
 
 ## Critères d'acceptation
 - 100 % des lignes de la table § 1.3 testées ; `TV_ONLY` ⇒ vert quelles que soient les `facts` ; `INTERNET` + `kidProfile` sans autorisation ⇒ `BLACK` ; `INTERNET` + `tls = INVALID` ⇒ `RED` avec action « Fermer Internet ».
