@@ -1,6 +1,7 @@
 # w16-04 — Cœur émission : `PilotRules` (trois choix, plafonds, borne de sûreté, quotas, prolongation sans mélange d'unités, fin de pilote), `RightsSyntax` « choix », `RentalDurations` en mode « choisi par l'utilisateur », registre d'émission
 
 <!-- routage Fable 2026-10-03 -->
+> **Amendement W16-01 (audit Opus, 2026-10-03)** : le moteur TV clampe tout contrat horaire à 96 h (`RentalConfig.maxUseMinutesPerContract = 5760`, règle du moteur) et IGNORE toute ligne dont l'unité (heures / jours) diffère de la première du contrat. Les heures au-delà sont perdues (la TV le dit : « 6 h non applicables : plafond de 96 h par location »). **L'ÉMETTEUR doit donc refuser** la prolongation qui dépasserait 96 h au total et le mélange d'unités (« cette location a déjà 96 h », « on ne mélange pas les heures et les jours »), au lieu de compter sur la TV.
 > **Modèle : sonnet** · escalade : **audit Opus obligatoire** (règles d'émission = ce que la TV accepte sans discuter) · statut : PRÊT (après w16-01)
 > **Groupe : W16a-4** (vague W16a, cœur, autorisé pendant le gel) · prérequis : w16-01 · porte : `cd android && tools/agents/gradle-lock.sh gradle --offline :core:test --tests '*PilotRules*' --tests '*RentalDurations*' --tests '*RightsSyntax*' --tests '*LicensedIssuer*'`
 > **Jauge : ≈ 450 k jetons entrée / 22 k sortie** (effort M, ≈ 2 j) · audit Opus : **oui**

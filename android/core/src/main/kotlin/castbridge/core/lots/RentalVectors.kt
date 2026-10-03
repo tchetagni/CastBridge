@@ -11,6 +11,9 @@ import castbridge.core.owner.*
  * Returns the failures (empty = all good). The keys and devices in the file are TEST data derived from public strings.
  */
 object RentalVectors {
+    /** The vectors v1/v2 describe the sentences and thresholds of before W16: per-unit messages are off, explicitly. */
+    private val LEGACY = RentalConfig(perUnitMessages = false)
+
     const val FORMAT = "castbridge-rental-vectors-v1"
     private fun hex(s: String) = s.chunked(2).map { it.toInt(16).toByte() }.toByteArray()
     private fun hex(b: ByteArray) = b.joinToString("") { "%02x".format(it) }
@@ -84,7 +87,7 @@ object RentalVectors {
         val used = (c["usedMinutes"] as? Map<String, Any?>).orEmpty().mapValues { (it.value as Number).toLong() }
         val expired = (c["expired"] as? Map<String, Any?>).orEmpty().mapValues { ExpiryReason.valueOf(it.value as String) }
         val tv = TvClock(clock.long("lastSeen") ?: 0L, clock.long("floor") ?: 0L)
-        val st = RentalEngine.evaluate(RentalEngine.contracts(acts), RentalInputs(RentalEngine.judge(tv, c.long("wallMs")!!), used, expired, RentalEngine.superUnlimited(acts)))
+        val st = RentalEngine.evaluate(RentalEngine.contracts(acts), RentalInputs(RentalEngine.judge(tv, c.long("wallMs")!!), used, expired, RentalEngine.superUnlimited(acts)), LEGACY)
         check(dev.n > 0)
         return st.map(::statusJson)
     }

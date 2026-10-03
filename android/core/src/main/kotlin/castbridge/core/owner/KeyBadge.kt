@@ -1,6 +1,8 @@
 package castbridge.core.owner
 
+import castbridge.core.lots.RentalEngine
 import castbridge.core.lots.RentalLines
+import castbridge.core.lots.RentalUnit
 import castbridge.core.lots.RentalState
 import castbridge.core.lots.RentalStatus
 import castbridge.core.lots.Right
@@ -20,6 +22,19 @@ object KeyBadge {
     private fun left(ms: Long): String { val d = ms / DAY; val h = ms / 3_600_000L; return when { d >= 2 -> "$d j"; h >= 1 -> "$h h"; else -> "${maxOf(1L, ms / 60_000L)} min" } }
     private fun minutes(m: Long) = if (m >= 60) "${m / 60} h" + (if (m % 60 != 0L) " ${m % 60} min" else "") else "$m min"
 
+    /** The "Location" lines: hours of use and days are never converted into each other; the contract with the FEWEST hours left (not the earliest date), none in grace. */
+    private fun rentalLines(rentals: List<RentalStatus>): List<String> {
+        val live = rentals.filter { it.usable && it.contract.productId != RentalLines.TRIAL_PRODUCT && it.remainingMs != null }
+        if (live.none { it.perUnit }) return live.minByOrNull { it.remainingMs!! }?.let { listOf("Location : ${left(it.remainingMs!!)} restant(s)") }.orEmpty()
+        val out = ArrayList<String>()
+        live.filter { it.state == RentalState.ACTIVE && it.contract.unit == RentalUnit.HOURS }.minByOrNull { it.remainingUsageMinutes ?: Long.MAX_VALUE }
+            ?.let { out += "Location : ${RentalEngine.hoursLeft(it.remainingUsageMinutes ?: 0)} d'utilisation restante(s)" }
+        live.filter { it.state == RentalState.ACTIVE && it.contract.unit == RentalUnit.DAYS }.minByOrNull { it.remainingMs!! }
+            ?.let { out += "Location : ${maxOf(1L, (it.remainingMs!! + DAY - 1) / DAY)} jour(s) restant(s)" }
+        live.filter { it.state == RentalState.GRACE }.minByOrNull { it.remainingMs!! }?.let { out += "Location : ${left(it.remainingMs!!)} de tolérance" }
+        return out
+    }
+
     /** [activations]: every verified activation installed; [rentals]: their rental statuses (the trial window is one of them). */
     fun of(activations: List<Activation>, nowMs: Long, rentals: List<RentalStatus> = emptyList(), zone: ZoneId = ZoneId.systemDefault()): Badge {
         if (activations.isEmpty()) return Badge("SANS CLÉ", listOf("Entrez un code d'activation"), ended = true)
@@ -38,7 +53,7 @@ object KeyBadge {
                 if (bundles.isNotEmpty()) lines += "${bundles.size} bouquet(s) acheté(s)"
                 rights.filterIsInstance<Right.Subscription>().maxOfOrNull { it.endsAt }?.let { lines += "Abonnement jusqu'au ${date(it, zone)}" }
                 rights.filterIsInstance<Right.OpenAll>().maxOfOrNull { it.endsAt }?.takeIf { it > nowMs }?.let { lines += "Tout ouvert jusqu'au ${date(it, zone)}" }
-                rentals.filter { it.usable && it.contract.productId != RentalLines.TRIAL_PRODUCT }.minOfOrNull { it.remainingMs ?: Long.MAX_VALUE }?.takeIf { it != Long.MAX_VALUE }?.let { lines += "Location : ${left(it)} restant(s)" }
+                lines += rentalLines(rentals)
                 Badge("PRODUCTION", lines)
             }
             else -> {
