@@ -55,16 +55,19 @@ l'adresse est connue) :
 Doublons **dans** la file : même fichier deux fois = un seul élément (règle R-09 inchangée) ; même contenu sous deux noms : l'élément suivant est
 haché (avec les éléments déjà envoyés de même taille, une seule fois, empreinte gardée avec la file) puis reconnu (`twinOf`), sans copie.
 
-## 3. Règle de suppression d'un DÉPLACEMENT sans copie (pour l'audit)
+## 3. Règle de suppression d'un DÉPLACEMENT sans copie (pour l'audit ; version après l'audit Opus, § 8)
 
-`C/tv/MoveRequests.kt` `MoveProof.byContentHash` — l'original n'est supprimé **que** si TOUT est vrai :
-1. le téléphone a calculé lui-même l'empreinte de l'original, à partir de ses octets, juste avant (jamais une empreinte reçue) ;
-2. la TV a répondu `present` pour un fichier **terminé**, dont elle a calculé l'empreinte à partir de **ses** octets sur le disque, encore valide pour sa taille et son mtime ;
-3. tailles égales et > 0, empreintes SHA-256 égales (64 hexadécimaux) ;
-4. alors seulement, la demande passe par `UploadService.offerVerifiedMove` → `MoveHandler` : Android demande confirmation (`createDeleteRequest` / `deleteDocument`).
+`C/tv/MoveRequests.kt` `MoveProof.mayDeleteWithoutCopy(byContentHash, byEdges)` — l'original n'est proposé à la suppression **que** si TOUT est vrai :
+1. le téléphone a calculé lui-même l'empreinte de l'original **au moment de la décision** (jamais une empreinte gardée dans la file : `DedupDecision.mayReuseHash`) ;
+2. la TV a répondu `present` à `GET /api/have?…&fresh=1` pour un fichier **terminé** dont **cette exécution** de la TV a relu les octets (`fresh:true` ; une ligne du cache `.cbhash`, même signée, n'est jamais fraîche) ;
+3. tailles égales et > 0, SHA-256 égaux (`byContentHash`) ;
+4. le téléphone a lu **lui-même** les 64 premiers et 64 derniers Kio du fichier de la TV (`/stream/` en Range) et ils sont identiques aux siens (`byEdges`) ;
+5. « Annuler » n'a pas été demandé pendant ces contrôles (R-09) ;
+6. alors seulement `offerVerifiedMove` → `MoveHandler` : boîte système d'Android (MediaStore, Android 11+) **ou**, pour un document ou Android ≤ 10 (suppression directe), une
+   confirmation dans l'app : « Supprimer l'original de ce téléphone ? La TV en a une copie vérifiée. » (« Garder » ⇒ rien n'est supprimé).
 
-Tout le reste (un nom, une taille, « indexing », un jumeau de la file, une TV ancienne) n'est **pas** une preuve : l'original reste, le message le dit.
-Le déplacement normal (avec copie) garde son contrôle existant (`checkMoved`). Une collision SHA-256 entre deux fichiers de même taille est tenue pour impossible.
+Tout le reste (un nom, une taille, « indexing », une empreinte en cache, un jumeau de la file, une TV ancienne, un profil enfant actif) n'est pas une preuve : l'original reste,
+le message le dit. Le déplacement normal (avec copie) garde son contrôle existant (`checkMoved`).
 
 ## 4. Preuves
 
@@ -91,6 +94,29 @@ Durée réelle du hachage sur le S21+ (fichier de 4 Go : attendu ~10 s) et sur l
 lecture pendant que l'index tourne puis s'interrompt ; dialogue de suppression d'Android pour un « Déplacer » sans copie ; comportement d'une clé
 FAT32/exFAT réelle (mtime à 2 s).
 
+## 8. Correctifs de l'audit Opus (commit 3)
+
+| # | Constat de l'audit | Correctif |
+|---|---|---|
+| BLOQUANT | `.cbhash` relu et cru sur (chemin, taille, mtime) : fichier forgé ou MP3 retouché à date et taille identiques ⇒ `present` ⇒ suppression de l'original | cache **signé HMAC-SHA-256** par une clé propre à la TV (`content-index.key` dans le stockage privé de l'app TV, jamais sur la clé USB) : ligne non signée, fausse ou d'une autre TV ignorée et recalculée ; hash du cache jamais `fresh` ; `fresh=1` relit le fichier (en tête de file, « indexing » d'ici là) ; `byContentHash` exige `fresh` ; seconde preuve `byEdges` lue par le téléphone ; commentaire faux corrigé |
+| 2 | empreinte gardée dans la file réutilisée pour un MOVE | `mayReuseHash` : recalcul au moment de la décision pour un MOVE |
+| 3 | `deleteDocument` / Android ≤ 10 suppriment sans confirmation | confirmation dans l'app sur ces chemins ; texte `DedupTexts.moved` corrigé |
+| 4 | `query()` lisait les métadonnées de tous les fichiers | filtre par taille sur la liste en cache (`listing()` garde les tailles), stat des seuls fichiers de cette taille |
+| 5 | repasse complète toutes les 60 s ; lecteurs `/stream/`, téléchargements, import USB ignorés | liste relue seulement sur évènement (réception, volume, question) ; `indexIdle` compte `StreamUse.anyBusy()`, les téléchargements actifs et l'import USB (`indexBusy` de `TvService`) |
+| 6 | `.cbhash` réécrit toutes les 10 s et à chaque fichier ≥ 64 Mio | au plus une écriture toutes les 5 min, plus fin de passe et arrêt propre (compteur `writes`) |
+| 7 | fichier gardé ouvert pendant une pause | fermé pendant toute pause, rouvert à l'offset si taille et mtime inchangés |
+| mineurs | éviction sans fin au-delà de 100 000 ; « Annuler » avant la proposition ; nom d'un fichier sous profil enfant ; `pendingFiling` en mémoire | plafond sans éviction ni recalcul ; annulation revérifiée juste avant ; `present` masqué (`masked:true`, ni nom ni dossier ; le téléphone ne lit ni ne supprime) ; liste d'attente du rangement sauvegardée par volume (`.cbfiling-pending`) |
+
+ROUGE (ébauches : cache non signé accepté, `fresh` ignoré, bords ignorés, réutilisation permise, masquage et sauvegarde absents) : `:core:test` ciblé → « 35 tests completed,
+9 failed », tous par assertion : `ContentIndexServerTest.aForgedOrForeignCacheIsIgnored` (« ligne non signée : ignorée » … était `Present`),
+`contentChangedWithTheSameDateAndSizeIsCaughtByTheFreshHash`, `theSignedIndexSurvivesARestartButItsHashesAreNeverFresh`, `underAChildProfileTheAnswerGivesNoNameNorFolder`,
+`DedupDecisionTest.aCachedHashOfTheTvNeverDeletesTheOriginal`, `differentEdgesKeepTheOriginal`, `aMoveNeverReusesAHashKeptWithTheQueue`,
+`FilingTreeServerTest.aCopyAndPlayFileWaitingForItsReaderIsFiledAfterARestart` ; plus `aChangedModificationTimeOrContentInvalidatesTheHash`, qui comptait sur la
+repasse de 60 s : il pose maintenant la question du téléphone avant (la liste n'est relue que sur évènement, voulu).
+
 ## 7. Vert
+
+Après l'audit (commit 3) : même commande, une exécution après la dernière modification → BUILD SUCCESSFUL, **3 076 tests, 0 échec**, 4 ignorés ; `test_routes.py` OK.
+
 
 `gradle --offline :core:test :sender:compileDebugKotlin :receiver:compileDebugKotlin` (verrou `gradle-lock.sh`, une exécution après la dernière modification) → BUILD SUCCESSFUL : **3 067 tests, 0 échec**, 4 ignorés (préexistants) ; `DedupDecisionTest` 13/13, `ContentIndexServerTest` 6/6, `CopyDedupQueueTest` 4/4, `FilingPlanTest` 13/13, `FilingTreeServerTest` 7/7, `FilingServerTest` 17/17, `TrialRoutesTest` vert ; `python3 tools/tests/test_routes.py` → OK (routes.txt : + `/api/have`, + `/api/rental/usage` qui manquait déjà à HEAD).

@@ -180,7 +180,7 @@ class TransferQueueModel(private val keepFinished: Int = 12, private val now: ()
 
     /** [id] was not copied: the TV already holds the same content as [heldAs]; [note] says it to the user (with « Copier quand même »). */
     @Synchronized fun finishSkipped(id: Long, heldAs: String, note: String) {
-        update(id) { it.copy(status = QueueStatus.DONE, error = null, heldAs = heldAs, note = note, cancelAsked = false) }
+        update(id) { it.copy(status = QueueStatus.DONE, error = null, heldAs = heldAs.ifEmpty { null }, note = note, cancelAsked = false) }
         trim(); save()
     }
 

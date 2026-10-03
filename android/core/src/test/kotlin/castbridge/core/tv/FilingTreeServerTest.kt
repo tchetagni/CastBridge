@@ -76,6 +76,25 @@ class FilingTreeServerTest {
         assertContentEquals(data, File(internalDir, "Films/Inception (2010).mkv").readBytes())
     }
 
+    // audit Opus (mineur) : la liste d'attente du rangement survit à un redémarrage de la TV
+    @Test fun aCopyAndPlayFileWaitingForItsReaderIsFiledAfterARestart() {
+        val name = "Interstellar.2014.1080p.mkv"
+        val total = data.size.toLong()
+        assertEquals(200, put(name, 0, total, data.copyOfRange(0, 50_000)))
+        player.st = PlayerState("playing", name, 0, 1000)
+        assertEquals(200, put(name, 50_000, total, data.copyOfRange(50_000, data.size)))
+        assertEquals(listOf(name), files(internalDir))
+        server.stop()                                                        // the TV restarts while it still plays it
+        player.st = PlayerState()
+        val s2 = ReceiverServer(registry, player, 0, profile = TvProfile(minFreeBytes = 0, minFreeAfterTransfer = 0, target = "internal"),
+            filingLang = { "fr" }, hostCheck = false).apply { start(5000, false) }
+        try {
+            val deadline = System.currentTimeMillis() + 5_000
+            while (System.currentTimeMillis() < deadline && files(internalDir) == listOf(name)) Thread.sleep(50)
+            assertEquals(listOf("Films/Interstellar (2014).mkv"), files(internalDir), "rangé au démarrage suivant, jamais à plat pour toujours")
+        } finally { s2.stop() }
+    }
+
     @Test fun thePhoneCanSwitchTheFilingOff() {
         assertEquals(200, put("Prison.Break.S01E05.720p.mkv", 0, data.size.toLong(), data, extra = "&filing=0"))
         assertEquals(listOf("Prison.Break.S01E05.720p.mkv"), files(internalDir))

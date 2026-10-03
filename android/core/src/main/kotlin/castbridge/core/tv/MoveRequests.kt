@@ -33,16 +33,25 @@ object MoveProof {
             localHead.contentEquals(tvHead) && localTail.contentEquals(tvTail)
 
     /**
-     * « Déplacer » a file whose content the TV ALREADY holds (nothing is copied, R-12). The ONLY case where that original may be deleted:
-     *  1. the phone computed [localSha] itself, from the original's bytes, just now (never a hash received from anywhere);
-     *  2. the TV answered GET /api/have with a FINISHED file ([tvComplete]) whose hash it computed from ITS bytes on the disk, still valid for its size and mtime;
-     *  3. both sizes are equal and > 0, and both SHA-256 are equal (64 hex characters);
-     *  4. then, and only then, the phone hands the deletion to Android, which asks the user (MoveHandler: createDeleteRequest / deleteDocument).
-     * The TV's « I have it » alone (a name, a size, an "indexing" or a twin sent earlier by this queue) is never a proof: the original stays.
+     * « Déplacer » a file whose content the TV ALREADY holds (nothing is copied, R-12). FIRST proof, by hash — all of:
+     *  1. the phone computed [localSha] itself, from the original's bytes, at the moment of the decision (never a hash kept from earlier, never a hash received);
+     *  2. the TV answered GET /api/have with `fresh=1` for a FINISHED file ([tvComplete]) whose hash THIS run of the TV computed from the bytes on its disk
+     *     ([tvFresh]; a line of the signed cache `.cbhash` is never fresh);
+     *  3. both sizes are equal and > 0, both SHA-256 are equal (64 hex characters).
      */
-    fun byContentHash(localSize: Long, localSha: String?, tvSize: Long, tvSha: String?, tvComplete: Boolean): Boolean =
-        localSize > 0 && localSize == tvSize && tvComplete && ContentHash.valid(localSha?.lowercase()) && ContentHash.valid(tvSha?.lowercase()) &&
+    fun byContentHash(localSize: Long, localSha: String?, tvSize: Long, tvSha: String?, tvComplete: Boolean, tvFresh: Boolean): Boolean =
+        localSize > 0 && localSize == tvSize && tvComplete && tvFresh && ContentHash.valid(localSha?.lowercase()) && ContentHash.valid(tvSha?.lowercase()) &&
             localSha!!.lowercase() == tvSha!!.lowercase()
+
+    /** SECOND proof: the phone read the first and last [EDGE] bytes of the TV's file itself (/stream/ Range) and they equal its own ([alreadyThere]). */
+    fun byEdges(localSize: Long, tvSize: Long, localHead: ByteArray?, tvHead: ByteArray?, localTail: ByteArray?, tvTail: ByteArray?): Boolean =
+        alreadyThere(localSize, tvSize, localHead, tvHead, localTail, tvTail)
+
+    /**
+     * The original of a MOVE without copy may be offered for deletion only with BOTH proofs; then Android or the app asks the user (MoveHandler). A name, a size,
+     * « indexing », a cached hash, a twin of the queue or an older TV are never proofs: the original stays.
+     */
+    fun mayDeleteWithoutCopy(hashProof: Boolean, edgesProof: Boolean): Boolean = hashProof && edgesProof
 
     /** Where to read the head and the tail of a file of [size] bytes: (offset, length) pairs. */
     fun edges(size: Long): Pair<Pair<Long, Int>, Pair<Long, Int>> {

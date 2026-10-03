@@ -34,41 +34,52 @@ object ContentHash {
     fun hex(b: ByteArray): String = b.joinToString("") { "%02x".format(it) }
 }
 
-/** One finished file the TV holds: [dir] = its volume folder, [rel] = path inside it ("Films/X.mkv"), [name] = the TV's key name, [folder] = its category folder. */
-data class HeldFile(val volumeId: String, val dir: File, val rel: String, val name: String, val folder: String = "")
 
 /**
- * « Déjà sur la TV ? » by CONTENT (docs/agent-reports/copy-dedup.md): size + SHA-256 of every finished file the TV holds, computed LAZILY in the background.
+ * One finished file the TV holds: [dir] = its volume folder, [rel] = path inside it ("Films/X.mkv"), [name] = the TV's key name, [folder] = its category folder,
+ * [size] = its size as the listing knows it (-1 = unknown): a size question only looks at the files of that size.
+ */
+data class HeldFile(val volumeId: String, val dir: File, val rel: String, val name: String, val folder: String = "", val size: Long = -1)
+
+/**
+ * « Déjà sur la TV ? » by CONTENT (docs/agent-reports/copy-dedup.md): size + SHA-256 of the finished files the TV holds, computed LAZILY in the background.
  *
  * Rules that never bend (R-06 / R-11, docs/agent-reports/fluid-playback-during-copy.md):
- *  - nothing is hashed while [idle] is false (a video plays or buffers, a copy or a move runs, a reception is live): the read in progress PAUSES (its digest is kept)
- *    and goes on only once the TV is idle again, and only if the file did not change meanwhile;
+ *  - nothing is hashed while [idle] is false (playback, a copy, a move, a /stream/ reader, a download, a USB import): the read in progress PAUSES with the
+ *    file CLOSED (a USB key can be pulled) and reopens at its offset once idle, only if the file did not change (size + mtime);
  *  - reads are paced to [bytesPerSec] in [chunk] blocks, on ONE daemon thread at the lowest priority ([startWorker]), never on a request thread;
- *  - a hash is valid for (path, size, mtime): a file that changed (or vanished) is simply unknown again — never « present » on an old hash;
+ *  - a hash is valid for (path, size, mtime) only: a changed or vanished file is unknown again;
  *  - partial copies are never held files ([held] lists finished files only), so they never count as present;
- *  - the cache lives on each volume (`.cbhash` in the volume folder, written atomically): it survives a reboot and travels with a USB key; a missing or damaged cache is rebuilt.
+ *  - the cache on each volume (`.cbhash`) is SIGNED with this TV's own key ([key], HMAC-SHA-256, kept in the TV app's private storage, never on the key):
+ *    a line whose signature does not match (forged, written by another TV, damaged) is ignored and the file hashed again. No key = no cache read or written;
+ *  - a hash read from the cache is never FRESH: [Answer.Present.fresh] is true only for a hash computed by THIS process from the bytes on the disk. A « Déplacer »
+ *    needs a fresh hash ([MoveProof.byContentHash]); a query with `fresh` re-reads the file (first in the queue) and answers « indexing » until it is done;
+ *  - the list of files is read again only when something changed ([poke]: a reception, a volume event, a question about an unknown file);
+ *  - `.cbhash` is written at most every [SAVE_EVERY_MS], at the end of a pass and at a clean stop (a USB key's flash is not worn by the index).
  * A query never hashes: what is unknown answers « indexing » and is moved to the front of the queue.
  */
 class ContentIndex(
-    private val held: () -> List<HeldFile>,
+    private val held: (Long?) -> List<HeldFile>,
     private val idle: () -> Boolean,
+    private val key: ByteArray? = null,
     private val bytesPerSec: Long = DEFAULT_BPS,
     private val clock: () -> Long = System::currentTimeMillis,
     private val sleep: (Long) -> Unit = Thread::sleep,
     private val chunk: Int = 1 shl 20,
     private val maxEntries: Int = 100_000,
 ) {
-    data class Entry(val size: Long, val mtime: Long, val sha256: String)
+    /** [fresh] = computed by this process from the file's bytes (never true for a line read from `.cbhash`). */
+    data class Entry(val size: Long, val mtime: Long, val sha256: String, val fresh: Boolean = false)
 
     sealed interface Answer {
         /** No finished file of that size (or none of that content, every candidate being hashed). */
         object Absent : Answer
         /** Size-only question: [count] finished files of that size; [indexing] = some of them are not hashed yet. Names are never given here. */
         data class Candidates(val count: Int, val indexing: Boolean) : Answer
-        /** Same size, but [pending] candidates are not hashed yet: the answer is not known (the phone copies, never blocked). */
+        /** Same size, but [pending] candidates are not hashed yet (or not freshly, when asked): not known; the phone copies, never blocked. */
         data class Indexing(val pending: Int) : Answer
-        /** A finished file of exactly that size and SHA-256 (hash computed from its bytes on the disk, still valid for its size and mtime). */
-        data class Present(val file: HeldFile, val size: Long, val sha256: String) : Answer
+        /** A finished file of exactly that size and SHA-256, valid for its size and mtime; [fresh] = hashed by this process (see the class rules). */
+        data class Present(val file: HeldFile, val size: Long, val sha256: String, val fresh: Boolean) : Answer
     }
 
     private class VolumeCache(val dir: File) {
@@ -78,8 +89,12 @@ class ContentIndex(
     }
 
     private val caches = HashMap<String, VolumeCache>()
-    private val urgent = LinkedHashSet<String>()                  // keys "dir|rel" asked about by a phone
+    private val urgent = LinkedHashMap<String, HeldFile>()        // asked about by a phone: hashed first
+    private val needFresh = HashSet<String>()                     // asked with `fresh`: hashed again even if the cache knows it
+    private val skipped = HashSet<String>()                       // over [maxEntries]: not hashed again by the background pass
     private val queue = ArrayDeque<HeldFile>()
+    @Volatile private var listDirty = true
+    private var hashedSinceSave = 0
     private val pacer = castbridge.core.xfer.RatePacer({ clock() * 1_000_000 }, sleep)
     private val wake = Object()
     @Volatile private var stopped = false
@@ -87,6 +102,8 @@ class ContentIndex(
     private var lastSave = 0L
     /** Files hashed since start (tests, diagnostics). */
     @Volatile var hashedCount = 0; private set
+    /** `.cbhash` writes since start (tests: the key's flash is spared). */
+    @Volatile var writes = 0; private set
 
     private fun key(f: HeldFile) = f.dir.path + "|" + f.rel.lowercase()
     private fun fileOf(f: HeldFile) = File(f.dir, f.rel)
@@ -106,27 +123,33 @@ class ContentIndex(
     }
 
     /**
-     * Does the TV hold a finished file of [size] bytes (and, with [sha256], of that very content)? Never reads a file (stat only); what is not known yet
-     * is put at the front of the background queue.
+     * Does the TV hold a finished file of [size] bytes (and, with [sha256], of that very content)? With [fresh], only a hash computed by this process counts.
+     * Never reads a file (stat of the same-size files only); what is not known yet goes to the front of the background queue.
      */
-    fun query(size: Long, sha256: String?): Answer {
+    fun query(size: Long, sha256: String?, fresh: Boolean = false): Answer {
         if (size <= 0) return Answer.Absent
         val sha = sha256?.lowercase()
-        val cands = held().filter { f -> fileOf(f).let { it.isFile && it.length() == size } }
+        val cands = held(size).filter { f -> (f.size < 0 || f.size == size) && fileOf(f).let { it.isFile && it.length() == size } }
         if (cands.isEmpty()) return Answer.Absent
         var unknown = 0
         for (c in cands) {
             val e = known(c)
-            if (e == null) { unknown++; synchronized(this) { urgent += key(c) }; continue }
-            if (sha != null && e.sha256 == sha) return Answer.Present(c, size, e.sha256)
+            if (e == null || (fresh && !e.fresh)) {
+                unknown++
+                synchronized(this) { urgent[key(c)] = c; if (fresh) needFresh += key(c) }
+                continue
+            }
+            if (sha != null && e.sha256 == sha) return Answer.Present(c, size, e.sha256, e.fresh)
         }
-        if (unknown > 0) poke()
+        if (unknown > 0) wakeUp()
         if (sha == null) return Answer.Candidates(cands.size, unknown > 0)
         return if (unknown > 0) Answer.Indexing(unknown) else Answer.Absent
     }
 
-    /** Wakes the worker and makes it read the list of files again (a reception ended, a phone asked). */
-    fun poke() { synchronized(this) { queue.clear() }; synchronized(wake) { wake.notifyAll() } }
+    private fun wakeUp() { synchronized(wake) { wake.notifyAll() } }
+
+    /** Something changed (a reception, a volume event): the list of files is read again at the next step. */
+    fun poke() { synchronized(this) { listDirty = true; queue.clear() }; wakeUp() }
 
     /** A file was renamed or filed on its volume: its hash follows it (same bytes), no second read. */
     @Synchronized fun renamed(dir: File, fromRel: String, toRel: String) {
@@ -136,87 +159,122 @@ class ContentIndex(
         c.dirty = true
     }
 
+    private fun wanted(f: HeldFile): Boolean {
+        if (!fileOf(f).isFile) return false
+        val e = known(f) ?: return true
+        return synchronized(this) { key(f) in needFresh } && !e.fresh
+    }
+
     /**
-     * Hashes ONE file not known yet (the ones a phone asked about first, then the smallest), if the TV is idle. Returns false when there was nothing to do
-     * (or the TV is busy, or the file changed while it was read). Called by the worker, and by tests directly.
+     * Hashes ONE file (the ones a phone asked about first, then the smallest unknown), if the TV is idle. Returns false when there was nothing to do (or the
+     * TV is busy, or the file changed while it was read). Called by the worker, and by tests directly.
      */
     fun step(): Boolean {
         if (stopped || !idle()) return false
-        val f = next() ?: return false
+        val f = next()
+        if (f == null) { if (hashedSinceSave > 0) flush(force = true); return false }      // end of a pass
         return hashOne(f)
     }
 
     private fun next(): HeldFile? {
-        val list: List<HeldFile>
-        synchronized(this) {
-            if (queue.isEmpty()) {
-                val all = runCatching(held).getOrDefault(emptyList())
-                val pending = all.filter { known(it) == null && fileOf(it).isFile }
-                queue.addAll(pending.sortedWith(compareBy({ key(it) !in urgent }, { fileOf(it).length() })))
-            } else if (urgent.isNotEmpty()) {
-                // a file asked about jumps ahead of what was queued before the question
-                val sorted = queue.sortedWith(compareBy { key(it) !in urgent }); queue.clear(); queue.addAll(sorted)
-            }
-            list = queue.toList()
+        val asked = synchronized(this) { urgent.values.toList() }
+        for (f in asked) {
+            if (wanted(f)) return f
+            synchronized(this) { urgent.remove(key(f)); needFresh.remove(key(f)) }
         }
-        for (f in list) {
-            synchronized(this) { queue.remove(f) }
+        val refill = synchronized(this) { val d = listDirty; listDirty = false; d && queue.isEmpty() }
+        if (refill) {
+            val all = runCatching { held(null) }.getOrDefault(emptyList())
+            val pending = all.filter { synchronized(this) { key(it) !in skipped } && known(it) == null && fileOf(it).isFile }
+            synchronized(this) { queue.addAll(pending.sortedBy { if (it.size >= 0) it.size else fileOf(it).length() }) }
+        }
+        while (true) {
+            val f = synchronized(this) { queue.removeFirstOrNull() } ?: return null
             if (known(f) == null && fileOf(f).isFile) return f
         }
-        return null
     }
 
     private fun hashOne(f: HeldFile): Boolean {
         val file = fileOf(f)
         val size0 = file.length(); val mt0 = file.lastModified()
-        val sha = try {
-            FileInputStream(file).use { inp ->
-                ContentHash.sha256(inp, size0, chunk, cancelled = {
-                    // playback, a copy, a move: pause here (digest kept) until the TV is idle again
+        val md = java.security.MessageDigest.getInstance("SHA-256")
+        val buf = ByteArray(chunk)
+        var off = 0L
+        var inp: FileInputStream? = null
+        try {
+            while (off < size0) {
+                if (stopped) return false
+                if (!idle()) {
+                    // playback, a copy, a reader: pause with the file CLOSED (a USB key may be pulled), digest kept in memory
+                    inp?.close(); inp = null
                     while (!stopped && !idle()) sleep(PAUSE_MS)
-                    stopped
-                }, onProgress = { _, _ -> pacer.pace(chunk, bytesPerSec) })
+                    if (stopped || !file.isFile || file.length() != size0 || file.lastModified() != mt0) return false
+                }
+                val s = inp ?: FileInputStream(file).also { it.channel.position(off); inp = it }
+                val n = s.read(buf, 0, minOf(buf.size.toLong(), size0 - off).toInt())
+                if (n < 0) break
+                md.update(buf, 0, n); off += n
+                pacer.pace(n, bytesPerSec)
             }
-        } catch (e: IOException) { null }                    // drive pulled, file deleted under us: unknown, tried again on a later pass
-        synchronized(this) { urgent.remove(key(f)) }
-        if (sha == null || !file.isFile || file.length() != size0 || file.lastModified() != mt0) return false
+        } catch (e: IOException) { return false }                // drive pulled, file deleted under us: unknown, tried again later
+        finally { runCatching { inp?.close() } }
+        if (off != size0 || !file.isFile || file.length() != size0 || file.lastModified() != mt0) return false
+        val sha = ContentHash.hex(md.digest())
         synchronized(this) {
+            urgent.remove(key(f)); needFresh.remove(key(f))
             val c = cache(f.dir)
-            if (c.map.size >= maxEntries && !c.map.containsKey(f.rel.lowercase())) c.map.remove(c.map.keys.first())
-            c.map[f.rel.lowercase()] = f.rel to Entry(size0, mt0, sha)
-            c.dirty = true
+            if (c.map.size >= maxEntries && !c.map.containsKey(f.rel.lowercase())) {
+                skipped += key(f)                                  // full: kept out (never evicting, never hashing it again in the background)
+            } else {
+                c.map[f.rel.lowercase()] = f.rel to Entry(size0, mt0, sha, fresh = true)
+                c.dirty = true; hashedSinceSave++
+            }
         }
         hashedCount++
-        if (size0 >= BIG_FILE || clock() - lastSave >= SAVE_EVERY_MS) flush()
+        flush(force = false)
         return true
     }
 
-    /** Writes the dirty caches (atomically, on each volume). Entries of files that are gone are dropped first. */
-    fun flush() {
-        val toSave = synchronized(this) { lastSave = clock(); caches.values.filter { it.dirty }.onEach { it.dirty = false } }
+    /** Writes the dirty caches, at most every [SAVE_EVERY_MS] unless [force] (end of a pass, clean stop). Entries of files that are gone are dropped first. */
+    fun flush(force: Boolean = true) {
+        if (key == null) return
+        val toSave = synchronized(this) {
+            if (!force && clock() - lastSave < SAVE_EVERY_MS) return
+            lastSave = clock(); hashedSinceSave = 0
+            caches.values.filter { it.dirty }.onEach { it.dirty = false }
+        }
         for (c in toSave) {
             if (!c.dir.isDirectory) continue                      // never prune or write while the volume is away
             val text = synchronized(this) {
                 c.map.entries.removeAll { (_, v) -> !File(c.dir, v.first).isFile }
-                c.map.values.joinToString("") { (rel, e) -> "${enc(rel)}\t${e.size}\t${e.mtime}\t${e.sha256}\n" }
+                c.map.values.joinToString("") { (rel, e) -> "${enc(rel)}\t${e.size}\t${e.mtime}\t${e.sha256}\t${mac(rel, e)}\n" }
             }
-            runCatching { AtomicFile.write(File(c.dir, FILE), ("v1\n" + text).toByteArray(Charsets.UTF_8)) }
+            runCatching { AtomicFile.write(File(c.dir, FILE), ("$VERSION\n" + text).toByteArray(Charsets.UTF_8)); writes++ }
         }
     }
 
+    private fun mac(rel: String, e: Entry): String {
+        val m = javax.crypto.Mac.getInstance("HmacSHA256")
+        m.init(javax.crypto.spec.SecretKeySpec(key ?: return "", "HmacSHA256"))
+        return ContentHash.hex(m.doFinal("$rel\n${e.size}\n${e.mtime}\n${e.sha256}".toByteArray(Charsets.UTF_8)))
+    }
+
     private fun load(c: VolumeCache) {
+        if (key == null) return                                   // no key of this TV: nothing on a volume is trusted
         val f = File(c.dir, FILE)
         if (!f.isFile) return
         runCatching {
             val lines = f.readLines()
-            if (lines.firstOrNull() != "v1") return
+            if (lines.firstOrNull() != VERSION) return            // an older unsigned cache: ignored, rebuilt
             for (l in lines.drop(1)) {
                 val p = l.split('\t')
-                if (p.size != 4 || !ContentHash.valid(p[3])) continue          // a damaged line is skipped, never trusted
+                if (p.size != 5 || !ContentHash.valid(p[3])) continue
                 val size = p[1].toLongOrNull() ?: continue; val mt = p[2].toLongOrNull() ?: continue
                 val rel = dec(p[0])
                 if (rel.isEmpty() || rel.startsWith("/") || rel.split('/').any { it == ".." }) continue
-                c.map[rel.lowercase()] = rel to Entry(size, mt, p[3])
+                val e = Entry(size, mt, p[3], fresh = false)
+                if (!java.security.MessageDigest.isEqual(mac(rel, e).toByteArray(), p[4].toByteArray())) continue   // forged or another TV's: ignored
+                c.map[rel.lowercase()] = rel to e
             }
         }
     }
@@ -228,27 +286,24 @@ class ContentIndex(
         worker = Thread({
             while (!stopped) {
                 val did = runCatching { step() }.getOrDefault(false)
-                if (!did) {
-                    runCatching { flush() }
-                    synchronized(wake) { if (!stopped) wake.wait(if (idle()) IDLE_SCAN_MS else PAUSE_MS) }
-                }
+                if (!did) synchronized(wake) { if (!stopped) wake.wait(if (idle()) IDLE_SCAN_MS else PAUSE_MS) }
             }
-            runCatching { flush() }
         }, "cb-content-index").apply { isDaemon = true; priority = Thread.MIN_PRIORITY; start() }
     }
 
-    fun stop() { stopped = true; synchronized(wake) { wake.notifyAll() }; runCatching { flush() } }
+    fun stop() { stopped = true; wakeUp(); runCatching { flush(force = true) } }
 
     private fun enc(s: String) = java.net.URLEncoder.encode(s, "UTF-8")
     private fun dec(s: String) = runCatching { java.net.URLDecoder.decode(s, "UTF-8") }.getOrDefault("")
 
     companion object {
         const val FILE = ".cbhash"
+        const val VERSION = "v2"
         /** Read pace of the background hash: well under what a USB 2 key gives, so a remote-control press never waits on the bus. */
         const val DEFAULT_BPS = 16L shl 20
         const val PAUSE_MS = 2_000L
         const val IDLE_SCAN_MS = 60_000L
-        const val SAVE_EVERY_MS = 10_000L
-        const val BIG_FILE = 64L shl 20
+        /** At most one `.cbhash` write per volume every 5 minutes while indexing (plus the end of a pass and a clean stop). */
+        const val SAVE_EVERY_MS = 300_000L
     }
 }

@@ -290,6 +290,8 @@ object TransferQueue {
     private enum class Dedup { COPY, SKIPPED, CANCELLED }
     private const val INDEX_WAIT_TRIES = 4
     private const val INDEX_WAIT_MS = 3_000L
+    /** A MOVE waits up to 2 minutes for the TV to re-read its file (fresh hash); then the usual copy goes. */
+    private const val MOVE_WAIT_TRIES = 40
 
     /**
      * R-12 (docs/agent-reports/copy-dedup.md): asks the TV by SIZE first (GET /api/have?size=), hashes the phone's file (off the main thread, « Vérification… n % »,
@@ -307,12 +309,15 @@ object TransferQueue {
             item.playOnTv || item.autoPlay -> DedupDecision.Action.COPY_AND_PLAY
             else -> DedupDecision.Action.COPY
         }
-        fun ask(sha: String?): DedupDecision.Tv = runCatching { DedupDecision.parse(client.have(size, sha)) }.getOrDefault(DedupDecision.Tv.Unsupported)
+        val move = action == DedupDecision.Action.MOVE
+        // a MOVE asks for a FRESH hash (computed by the TV from its bytes in this run, never its cache): MoveProof.byContentHash requires it
+        fun ask(sha: String?): DedupDecision.Tv = runCatching { DedupDecision.parse(client.have(size, sha, fresh = move && sha != null)) }.getOrDefault(DedupDecision.Tv.Unsupported)
         val bySize = ask(null)
         val siblings = model.sameSize(item.id)
         if (!DedupDecision.mustHash(bySize, siblings.isNotEmpty(), item.force)) return@withContext Dedup.COPY
         val cancelled = { model.cancelAsked(item.id) }
-        val sha = item.sha256 ?: hashUri(app, uri, item.name, size, cancelled)
+        // a MOVE never reuses a hash kept from earlier (the file may have changed since: a photo rotated in the Gallery keeps its size)
+        val sha = item.sha256?.takeIf { DedupDecision.mayReuseHash(action, it) } ?: hashUri(app, uri, item.name, size, cancelled)
         if (sha == null) return@withContext if (cancelled()) Dedup.CANCELLED else Dedup.COPY
         model.setHash(item.id, sha)
         // the same-size files this queue already SENT: their hash too (once, kept with the queue), to recognise the same content under another name
@@ -320,9 +325,9 @@ object TransferQueue {
             hashUri(app, Uri.parse(s.uri), s.name, s.size, cancelled)?.let { model.setHash(s.id, it) }
         if (cancelled()) return@withContext Dedup.CANCELLED
         var tv = if (bySize is DedupDecision.Tv.Unsupported) bySize else ask(sha)
-        // the TV hashes a same-size candidate first when it is asked about it: a short wait, never a block (not ready = the copy goes)
+        // the TV hashes a same-size candidate first when it is asked about it: a short wait (longer for a MOVE: the TV re-reads its file), never a block
         var tries = 0
-        while (tv is DedupDecision.Tv.Indexing && tries++ < INDEX_WAIT_TRIES && !cancelled()) {
+        while (tv is DedupDecision.Tv.Indexing && tries++ < (if (move) MOVE_WAIT_TRIES else INDEX_WAIT_TRIES) && !cancelled()) {
             _note.value = DedupTexts.checking(item.name, 100) + " · la TV vérifie un fichier de même taille…"
             delay(INDEX_WAIT_MS)
             tv = ask(sha)
@@ -332,18 +337,39 @@ object TransferQueue {
             val f = runCatching { castbridge.core.tv.TvInfo.parse(client.info()).file(t.heldAs ?: t.name) }.getOrNull()
             DedupDecision.Twin(t.name, f?.name ?: t.heldAs ?: t.name, t.size, t.sha256!!, castbridge.core.tv.TvDedupe.alreadyThere(f, size))
         }
-        when (val out = DedupDecision.decide(DedupDecision.Facts(action, size, sha, tv, twin, item.force))) {
-            is DedupDecision.Outcome.Copy -> { android.util.Log.i("TransferQueue", "copie de ${item.name} : ${out.why}"); Dedup.COPY }
+        when (val first = DedupDecision.decide(DedupDecision.Facts(action, size, sha, tv, twin, item.force))) {
+            is DedupDecision.Outcome.Copy -> { android.util.Log.i("TransferQueue", "copie de ${item.name} : ${first.why}"); Dedup.COPY }
             is DedupDecision.Outcome.Skip -> {
+                // MOVE: second proof, read by the phone itself: the first and last bytes of the TV's file (/stream/ Range) against its own
+                val out = if (first.deleteSource) DedupDecision.afterEdges(first, edgesMatch(app, client, uri, first.tvName, size)) else first
                 // « Copier sur la TV et lire » from the phone's player (playOnTv): CastSession starts the TV's file at the phone's position (heldAs);
                 // a plain « Copier et lire » (autoPlay) is started here
-                if (out.play && !item.playOnTv) runCatching { client.play(out.tvName) }
-                // MOVE: the original goes ONLY on a proof by hash, and Android asks the user (MoveHandler); otherwise it stays
+                if (out.play && !item.playOnTv && out.tvName.isNotEmpty()) runCatching { client.play(out.tvName) }
+                // « Annuler » landed during the checks: nothing is offered for deletion (R-09)
+                if (cancelled()) return@withContext Dedup.CANCELLED
+                // MOVE: the original goes ONLY with both proofs (fresh hash + edges), and the user confirms (MoveHandler); otherwise it stays
                 if (out.deleteSource) UploadService.offerVerifiedMove(UploadService.MoveRequest(uri, out.tvName, size))
                 model.finishSkipped(item.id, out.tvName, out.text)
                 Dedup.SKIPPED
             }
         }
+    }
+
+    /** [castbridge.core.tv.MoveProof.byEdges]: the first and last 64 KiB of the TV's file, read by the phone over /stream/ Range, equal its own. Any error = false. */
+    private fun edgesMatch(app: Context, client: castbridge.core.tv.TvClient, uri: Uri, tvName: String, size: Long): Boolean = runCatching {
+        if (tvName.isEmpty()) return false
+        val (head, tail) = castbridge.core.tv.MoveProof.edges(size)
+        fun tvBytes(at: Pair<Long, Int>): ByteArray = client.openRange(tvName, at.first).input.use { readN(it, at.second) }
+        fun localBytes(at: Pair<Long, Int>): ByteArray = app.contentResolver.openFileDescriptor(uri, "r")!!.use { pfd ->
+            java.io.FileInputStream(pfd.fileDescriptor).use { s -> s.channel.position(at.first); readN(s, at.second) }
+        }
+        castbridge.core.tv.MoveProof.byEdges(size, size, localBytes(head), tvBytes(head), localBytes(tail), tvBytes(tail))
+    }.getOrDefault(false)
+
+    private fun readN(s: java.io.InputStream, n: Int): ByteArray {
+        val b = ByteArray(n); var off = 0
+        while (off < n) { val r = s.read(b, off, n - off); if (r < 0) break; off += r }
+        return if (off == n) b else b.copyOf(off)
     }
 
     /** SHA-256 of a phone file, streamed (never in memory), progress in the queue's note; null = cancelled or unreadable. */

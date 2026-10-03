@@ -23,8 +23,12 @@ object DedupDecision {
         object Absent : Tv
         data class Candidates(val count: Int, val indexing: Boolean) : Tv
         data class Indexing(val pending: Int) : Tv
-        /** [complete] false would be a partial copy: never counts (the TV never answers it, the phone checks it anyway). */
-        data class Present(val name: String, val folder: String, val size: Long, val sha256: String, val complete: Boolean = true) : Tv {
+        /**
+         * [complete] false would be a partial copy: never counts. [fresh] = the TV hashed the file's bytes in this run (never a cached hash): required for a MOVE.
+         * [masked] = a child profile is active on the TV: no name nor folder is given (the phone says « Déjà sur la TV » without a place, never plays nor deletes on it).
+         */
+        data class Present(val name: String, val folder: String, val size: Long, val sha256: String, val complete: Boolean = true,
+                           val fresh: Boolean = false, val masked: Boolean = false) : Tv {
             val where: String get() = if (folder.isEmpty()) name else "$folder/$name"
         }
     }
@@ -38,8 +42,8 @@ object DedupDecision {
         /** Copy as usual; [why] for the log. */
         data class Copy(val why: String) : Outcome
         /**
-         * Nothing is copied. [tvName] = the TV's file to use; [play] = start it on the TV (« Copier et lire »); [deleteSource] = MOVE whose TV copy is PROVEN
-         * identical by hash ([MoveProof.byContentHash]): the phone may then ask Android to delete the original (with its confirmation). [text] = French, for the user.
+         * Nothing is copied. [tvName] = the TV's file to use; [play] = start it on the TV (« Copier et lire »); [deleteSource] = MOVE whose TV copy passed the FRESH
+         * hash proof ([MoveProof.byContentHash]): still a candidate only, the phone must then compare the edges itself ([afterEdges]) before asking the user.
          */
         data class Skip(val tvName: String, val where: String, val play: Boolean, val deleteSource: Boolean, val text: String) : Outcome
     }
@@ -48,13 +52,31 @@ object DedupDecision {
     fun mustHash(sizeAnswer: Tv, sameSizeInQueue: Boolean, force: Boolean = false): Boolean =
         !force && (sizeAnswer is Tv.Candidates || sameSizeInQueue)
 
+    /** A hash kept with the queue may be reused to recognise a twin for a copy, NEVER for a MOVE (the file may have changed since: recomputed at the decision). */
+    fun mayReuseHash(action: Action, stored: String?): Boolean = action != Action.MOVE && ContentHash.valid(stored)
+
+    /**
+     * The last step of a MOVE without copy: the phone read the first and last bytes of the TV's file itself (/stream/ Range) and compared them to its own
+     * ([MoveProof.byEdges]). Without that second proof the original STAYS.
+     */
+    fun afterEdges(s: Outcome.Skip, edgesMatch: Boolean): Outcome.Skip =
+        if (!s.deleteSource) s else if (MoveProof.mayDeleteWithoutCopy(hashProof = true, edgesProof = edgesMatch)) s
+        else s.copy(deleteSource = false, text = DedupTexts.kept(s.where))
+
     fun decide(f: Facts): Outcome {
         if (f.force) return Outcome.Copy("copie demandée malgré le doublon")
         val sha = f.localSha?.lowercase()
         if (f.localSize <= 0 || !ContentHash.valid(sha)) return Outcome.Copy("empreinte du fichier inconnue")
         val tv = f.tv
+        if (tv is Tv.Present && tv.masked && tv.complete && tv.size == f.localSize && tv.sha256.lowercase() == sha) {
+            return when (f.action) {
+                Action.COPY -> Outcome.Skip("", "", play = false, deleteSource = false, text = DedupTexts.ALREADY_THERE_MASKED)
+                Action.COPY_AND_PLAY -> Outcome.Copy("profil enfant : fichier de la TV non désigné")
+                Action.MOVE -> Outcome.Skip("", "", play = false, deleteSource = false, text = DedupTexts.KEPT_MASKED)
+            }
+        }
         if (tv is Tv.Present && tv.complete && tv.size == f.localSize && tv.sha256.lowercase() == sha) {
-            val proof = MoveProof.byContentHash(f.localSize, sha, tv.size, tv.sha256, tv.complete)
+            val proof = MoveProof.byContentHash(f.localSize, sha, tv.size, tv.sha256, tv.complete, tv.fresh)
             return when (f.action) {
                 Action.COPY -> Outcome.Skip(tv.name, tv.where, play = false, deleteSource = false, text = DedupTexts.alreadyThere(tv.where))
                 Action.COPY_AND_PLAY -> Outcome.Skip(tv.name, tv.where, play = true, deleteSource = false, text = DedupTexts.playing(tv.where))
@@ -88,7 +110,9 @@ object DedupDecision {
             "indexing" -> Tv.Indexing((o.long("pending") ?: 0).toInt())
             "present" -> {
                 val name = o.str("name").orEmpty(); val sha = o.str("sha256").orEmpty().lowercase(); val size = o.long("size") ?: 0
-                if (name.isEmpty() || !ContentHash.valid(sha) || size <= 0) Tv.Unsupported else Tv.Present(name, o.str("folder").orEmpty(), size, sha, o.bool("complete") != false)
+                val masked = o.bool("masked") == true
+                if ((name.isEmpty() && !masked) || !ContentHash.valid(sha) || size <= 0) Tv.Unsupported
+                else Tv.Present(if (masked) "" else name, if (masked) "" else o.str("folder").orEmpty(), size, sha, o.bool("complete") != false, o.bool("fresh") == true, masked)
             }
             else -> Tv.Unsupported
         }
@@ -99,7 +123,9 @@ object DedupDecision {
 object DedupTexts {
     fun alreadyThere(where: String) = "Déjà sur la TV : $where — contenu identique, non recopié."
     fun playing(where: String) = "Déjà sur la TV : $where — lecture du fichier de la TV, sans copie."
-    fun moved(where: String) = "Déjà sur la TV : $where — contenu identique vérifié : l'original peut être retiré du téléphone (Android demande confirmation)."
+    fun moved(where: String) = "Déjà sur la TV : $where — contenu identique vérifié (empreinte recalculée et début/fin du fichier) : la suppression de l'original vous est proposée, avec confirmation."
+    const val ALREADY_THERE_MASKED = "Déjà sur la TV — contenu identique, non recopié."
+    const val KEPT_MASKED = "Déjà sur la TV — non recopié ; l'original reste sur le téléphone (profil enfant actif sur la TV)."
     fun kept(where: String) = "Déjà sur la TV : $where — non recopié ; l'original reste sur le téléphone (la TV n'a pas confirmé l'empreinte)."
     fun twin(first: String, tvName: String) = "Même contenu que « $first », déjà envoyé dans cette file (sur la TV : $tvName) : non recopié."
     fun checking(name: String, pct: Int) = "Vérification de « $name » (doublon ?) : $pct %"

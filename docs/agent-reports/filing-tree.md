@@ -75,6 +75,11 @@ Voir § 7.
   rangement. Piste : brancher l'assistant sur `/api/library/organize/apply` (hors gel).
 - Les fichiers déjà à plat dans `Download/CastBridge` ne sont pas déplacés (seules les nouvelles réceptions sont classées).
 
+- Après l'audit Opus : la liste d'attente du rangement est sauvegardée sur le volume (`.cbfiling-pending`) et reprise au démarrage suivant. À savoir (documenté, non
+  changé) : « Effacer » dans les réglages de l'assistant remet le classement à ACTIVÉ (son défaut) ; `Musique/<Artiste>/<Album>` n'est jamais déclenché à la réception
+  (la TV ne reçoit que le nom et la taille : pas d'étiquettes) ; les vidéos d'appareil sans motif reconnu peuvent aller dans `Films/` ; un fichier lu par un téléphone via
+  `/stream/` pendant sa réception est rangé au prochain changement d'état du lecteur de la TV (ou au démarrage suivant).
+
 ## 6. Ce que seuls les vrais appareils confirment
 
 Création des dossiers `Download/CastBridge/<Catégorie>` par MediaStore sur le S21+ (Android 14) et leur affichage dans « Fichiers » / la Galerie ; un

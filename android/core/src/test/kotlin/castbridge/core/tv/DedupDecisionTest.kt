@@ -11,7 +11,7 @@ class DedupDecisionTest {
     private val sha = "a".repeat(64)
     private val other = "b".repeat(64)
     private val size = 1_234_567L
-    private fun present(s: String = sha, sz: Long = size, complete: Boolean = true) = Tv.Present("Avatar (2009).mkv", "Films", sz, s, complete)
+    private fun present(s: String = sha, sz: Long = size, complete: Boolean = true, fresh: Boolean = false) = Tv.Present("Avatar (2009).mkv", "Films", sz, s, complete, fresh)
 
     @Test fun identicalPresentSkipsTheCopyAndSaysWhere() {
         val o = DedupDecision.decide(Facts(Action.COPY, size, sha, present()))
@@ -44,12 +44,53 @@ class DedupDecisionTest {
         assertIs<Outcome.Copy>(DedupDecision.decide(Facts(Action.MOVE, size, sha, present(complete = false))))
     }
 
-    @Test fun moveWithAVerifiedIdenticalCopyMayDeleteTheSourceAfterTheHashCheck() {
-        val o = DedupDecision.decide(Facts(Action.MOVE, size, sha, present()))
+    @Test fun moveWithAFreshIdenticalHashAndIdenticalEdgesMayOfferTheDeletion() {
+        val o = DedupDecision.decide(Facts(Action.MOVE, size, sha, present(fresh = true)))
         assertIs<Outcome.Skip>(o)
-        assertTrue(o.deleteSource, "hash local = hash de la TV, fichier complet : suppression proposée (avec la confirmation d'Android)")
+        assertTrue(o.deleteSource, "première preuve : hash FRAIS de la TV = hash local, fichier complet")
         assertFalse(o.play)
-        assertTrue(o.text.contains("Android demande confirmation"), o.text)
+        val after = DedupDecision.afterEdges(o, edgesMatch = true)
+        assertTrue(after.deleteSource, "seconde preuve : début et fin lus par le téléphone identiques")
+        assertTrue(after.text.contains("avec confirmation"), after.text)
+    }
+
+    // audit Opus, mutation « empreinte enregistrée réutilisée pour MOVE » / « suppression sans fresh »
+    @Test fun aCachedHashOfTheTvNeverDeletesTheOriginal() {
+        val o = DedupDecision.decide(Facts(Action.MOVE, size, sha, present(fresh = false)))
+        assertIs<Outcome.Skip>(o)
+        assertFalse(o.deleteSource, "hash lu du cache de la TV : jamais une preuve pour supprimer")
+        assertTrue(o.text.contains("l'original reste"), o.text)
+        assertFalse(MoveProof.byContentHash(size, sha, size, sha, tvComplete = true, tvFresh = false))
+    }
+
+    // audit Opus, mutation « bords différents ⇒ garder »
+    @Test fun differentEdgesKeepTheOriginal() {
+        val o = DedupDecision.decide(Facts(Action.MOVE, size, sha, present(fresh = true))) as Outcome.Skip
+        val after = DedupDecision.afterEdges(o, edgesMatch = false)
+        assertFalse(after.deleteSource); assertTrue(after.text.contains("l'original reste"), after.text)
+        val head = ByteArray(10) { 1 }; val tail = ByteArray(10) { 2 }
+        assertTrue(MoveProof.byEdges(size, size, head, head.copyOf(), tail, tail.copyOf()))
+        assertFalse(MoveProof.byEdges(size, size, head, head.copyOf().also { it[3] = 9 }, tail, tail.copyOf()), "début différent")
+        assertFalse(MoveProof.byEdges(size, size, head, head.copyOf(), tail, null), "fin non lue")
+        assertFalse(MoveProof.mayDeleteWithoutCopy(hashProof = true, edgesProof = false))
+        assertFalse(MoveProof.mayDeleteWithoutCopy(hashProof = false, edgesProof = true))
+        assertTrue(MoveProof.mayDeleteWithoutCopy(hashProof = true, edgesProof = true))
+    }
+
+    @Test fun aMoveNeverReusesAHashKeptWithTheQueue() {
+        assertFalse(DedupDecision.mayReuseHash(Action.MOVE, sha), "photo tournée dans la Galerie, même taille : recalcul")
+        assertTrue(DedupDecision.mayReuseHash(Action.COPY, sha))
+        assertFalse(DedupDecision.mayReuseHash(Action.COPY, "abc"))
+    }
+
+    @Test fun underAChildProfileTheTvGivesNoPlaceAndNothingIsPlayedNorDeleted() {
+        val masked = DedupDecision.parse("""{"state":"present","masked":true,"size":$size,"sha256":"$sha","complete":true,"fresh":true}""")
+        assertIs<Tv.Present>(masked); assertTrue(masked.masked); assertEquals("", masked.name)
+        val c = DedupDecision.decide(Facts(Action.COPY, size, sha, masked))
+        assertIs<Outcome.Skip>(c); assertEquals("Déjà sur la TV — contenu identique, non recopié.", c.text)
+        assertIs<Outcome.Copy>(DedupDecision.decide(Facts(Action.COPY_AND_PLAY, size, sha, masked)))
+        val m = DedupDecision.decide(Facts(Action.MOVE, size, sha, masked))
+        assertIs<Outcome.Skip>(m); assertFalse(m.deleteSource)
     }
 
     @Test fun moveWithAnUnverifiableCopyKeepsTheSource() {
@@ -96,14 +137,14 @@ class DedupDecisionTest {
 
     /** La règle de suppression d'un DÉPLACEMENT sans copie, lisible en 10 lignes (MoveProof.byContentHash). */
     @Test fun moveProofByContentHash() {
-        assertTrue(MoveProof.byContentHash(size, sha, size, sha, tvComplete = true))
-        assertTrue(MoveProof.byContentHash(size, sha.uppercase(), size, sha, tvComplete = true))
-        assertFalse(MoveProof.byContentHash(size, sha, size, other, tvComplete = true), "contenu différent")
-        assertFalse(MoveProof.byContentHash(size, sha, size + 1, sha, tvComplete = true), "taille différente")
-        assertFalse(MoveProof.byContentHash(size, sha, size, sha, tvComplete = false), "copie partielle")
-        assertFalse(MoveProof.byContentHash(0, sha, 0, sha, tvComplete = true), "fichier vide")
-        assertFalse(MoveProof.byContentHash(size, null, size, sha, tvComplete = true), "pas de hash local")
-        assertFalse(MoveProof.byContentHash(size, sha, size, null, tvComplete = true), "la parole de la TV sans hash")
+        assertTrue(MoveProof.byContentHash(size, sha, size, sha, tvComplete = true, tvFresh = true))
+        assertTrue(MoveProof.byContentHash(size, sha.uppercase(), size, sha, tvComplete = true, tvFresh = true))
+        assertFalse(MoveProof.byContentHash(size, sha, size, other, tvComplete = true, tvFresh = true), "contenu différent")
+        assertFalse(MoveProof.byContentHash(size, sha, size + 1, sha, tvComplete = true, tvFresh = true), "taille différente")
+        assertFalse(MoveProof.byContentHash(size, sha, size, sha, tvComplete = false, tvFresh = true), "copie partielle")
+        assertFalse(MoveProof.byContentHash(0, sha, 0, sha, tvComplete = true, tvFresh = true), "fichier vide")
+        assertFalse(MoveProof.byContentHash(size, null, size, sha, tvComplete = true, tvFresh = true), "pas de hash local")
+        assertFalse(MoveProof.byContentHash(size, sha, size, null, tvComplete = true, tvFresh = true), "la parole de la TV sans hash")
     }
 
     @Test fun streamingHashMatchesTheJdkAndCanBeCancelled() {

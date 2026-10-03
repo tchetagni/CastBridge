@@ -95,6 +95,10 @@ class ReceiverServer(
      * pass runs (the TV app); false = it is only filled on demand by [indexStep] (tests). Either way it never hashes while a video plays or a copy runs.
      */
     private val contentIndexing: Boolean = false,
+    /** This TV's own key for the signature of the `.cbhash` caches (the TV app's private storage, never a volume); null = no cache read or written. */
+    private val contentIndexKey: ByteArray? = null,
+    /** Other disk or network users that must not share the bus with the background hash (downloads, USB import): true = busy. */
+    private val indexBusy: () -> Boolean = { false },
 ) : NanoHTTPD(port) {
 
     /** The socket of the connection this thread serves (NanoHTTPD: one thread per connection), for [hungUp]. */
@@ -190,21 +194,25 @@ class ReceiverServer(
     }
 
     /** « Déjà sur la TV ? » by content (R-12): the finished files of the real folders, hashed in the background while the TV is idle. */
-    private val contentIndex = ContentIndex(::heldFiles, ::indexIdle)
+    private val contentIndex = ContentIndex(::heldFiles, ::indexIdle, contentIndexKey)
 
-    /** Finished files of the real folders (not the system picker's), with the path the index keys them by. Partial copies are never held files. */
-    private fun heldFiles(): List<HeldFile> = listing().entries.filter { it.complete }.mapNotNull { e ->
+    /**
+     * Finished files of the real folders (not the system picker's), with the path the index keys them by; with [size], only the files of that size (from the
+     * cached listing: a question never stats the whole library). Partial copies are never held files.
+     */
+    private fun heldFiles(size: Long?): List<HeldFile> = listing().entries.filter { it.complete && (size == null || it.size == size) }.mapNotNull { e ->
         val fs = volumes.store(e.v) as? FileStore ?: return@mapNotNull null
         val f = fs.fileOf(e.name)
         val rel = f.relativeToOrNull(fs.dir)?.invariantSeparatorsPath ?: return@mapNotNull null
         if (rel.startsWith("..")) return@mapNotNull null
-        HeldFile(e.v.id, fs.dir, rel, e.name, e.folder)
+        HeldFile(e.v.id, fs.dir, rel, e.name, e.folder, e.size)
     }
 
     /** The background hash runs only when nothing plays or buffers and nothing is being received or moved (R-06: « la lecture d'abord »). */
     private fun indexIdle(): Boolean {
         val st = player.state().state
-        return st != "playing" && st != "buffering" && activeTransfers() == 0 && transfers.active() == 0 && progress.active().isEmpty()
+        return st != "playing" && st != "buffering" && activeTransfers() == 0 && transfers.active() == 0 && progress.active().isEmpty() &&
+            !streamUse.anyBusy() && !runCatching(indexBusy).getOrDefault(true)        // /stream/ readers, downloads, USB import: not on the bus with them
     }
 
     /** Hashes one file of the index now if the TV is idle (tests; the TV app uses the background pass). */
@@ -215,11 +223,15 @@ class ReceiverServer(
         val size = p["size"]?.toLongOrNull()?.takeIf { it > 0 } ?: return bad("size required")
         val sha = p["sha256"]?.lowercase()
         if (sha != null && !ContentHash.valid(sha)) return bad("bad sha256")
-        return when (val a = contentIndex.query(size, sha)) {
+        // fresh=1 (a « Déplacer »): only a hash this run computed from the file's bytes counts; the file is re-read first in the queue, « indexing » meanwhile
+        return when (val a = contentIndex.query(size, sha, fresh = p["fresh"] == "1")) {
             ContentIndex.Answer.Absent -> ok("""{"state":"absent"}""")
             is ContentIndex.Answer.Candidates -> ok("""{"state":"candidates","count":${a.count},"indexing":${a.indexing}}""")
             is ContentIndex.Answer.Indexing -> ok("""{"state":"indexing","pending":${a.pending}}""")
-            is ContentIndex.Answer.Present -> ok("""{"state":"present","name":${q(a.file.name)},"folder":${q(a.file.folder)},"volume":${q(a.file.volumeId)},"size":${a.size},"sha256":${q(a.sha256)},"complete":true}""")
+            is ContentIndex.Answer.Present ->
+                // a child profile is active: never the name nor the folder of a file (it may be protected); « present » without a place
+                if (contentFlags?.childActive() == true) ok("""{"state":"present","masked":true,"size":${a.size},"sha256":${q(a.sha256)},"complete":true,"fresh":${a.fresh}}""")
+                else ok("""{"state":"present","name":${q(a.file.name)},"folder":${q(a.file.folder)},"volume":${q(a.file.volumeId)},"size":${a.size},"sha256":${q(a.sha256)},"complete":true,"fresh":${a.fresh}}""")
         }
     }
 
@@ -298,8 +310,8 @@ class ReceiverServer(
             // No NameSpace.lock here: the caller holds the lock of this name (the one /api/rename takes AFTER NameSpace.lock): taking it now could deadlock.
             // The final name is checked again, atomically, by FileStore.fileInto (never over an existing file).
             // A reader holds the flat name (« Copier et lire » plays it while it arrives, R-08): filed as soon as nothing reads it any more (R-13; it used to stay flat for ever).
-            if (streamUse.busy(diskName) || isPlaying(diskName)) { pendingFiling[diskName] = PendingFiling(v.id, original, size); return null }
-            pendingFiling.remove(diskName)
+            if (streamUse.busy(diskName) || isPlaying(diskName)) { addPending(diskName, PendingFiling(v.id, original, size)); return null }
+            dropPending(diskName)
             // R-13: the category tree of a new copy (Films, Séries/Titre/Saison, Musique, Photos/AAAA-MM, Documents…), docs/agent-reports/filing-tree.md
             val r = FilingPlan.plan(FilingPlan.Input(original, size = size), lang)
             if (r.keepFlat) return null
@@ -318,6 +330,31 @@ class ReceiverServer(
     /** Names (lowercase) whose current send asked for no filing (`filing=0`, the phone's option is off): consumed at the commit. */
     private val noFiling: MutableSet<String> = java.util.concurrent.ConcurrentHashMap.newKeySet()
 
+    // The pending list is kept on its volume (`.cbfiling-pending`, atomic): a restart during « Copier et lire » does not leave the file flat for ever.
+    private fun addPending(disk: String, p: PendingFiling) { pendingFiling[disk] = p; savePending(p.volumeId) }
+    private fun dropPending(disk: String) { pendingFiling.remove(disk)?.let { savePending(it.volumeId) } }
+    @Synchronized private fun savePending(volumeId: String) {
+        val v = volumes[volumeId] ?: return
+        val fs = volumes.store(v) as? FileStore ?: return
+        val f = File(fs.dir, PENDING_FILE)
+        val text = pendingFiling.entries.filter { it.value.volumeId == volumeId }
+            .joinToString("") { "${java.net.URLEncoder.encode(it.key, "UTF-8")}\t${java.net.URLEncoder.encode(it.value.original, "UTF-8")}\t${it.value.size}\n" }
+        runCatching { if (text.isEmpty()) f.delete() else AtomicFile.write(f, text.toByteArray(Charsets.UTF_8)) }
+    }
+    private fun loadPendingFiling(v: StorageVolume) {
+        val fs = volumes.store(v) as? FileStore ?: return
+        val f = File(fs.dir, PENDING_FILE)
+        if (!f.isFile) return
+        runCatching {
+            for (l in f.readLines()) {
+                val p = l.split('\t'); if (p.size != 3) continue
+                val disk = java.net.URLDecoder.decode(p[0], "UTF-8"); val size = p[2].toLongOrNull() ?: continue
+                if (disk.isEmpty() || disk.contains('/') || disk.contains('\\')) continue        // a flat name only, never a path
+                pendingFiling.putIfAbsent(disk, PendingFiling(v.id, java.net.URLDecoder.decode(p[1], "UTF-8"), size))
+            }
+        }
+    }
+
     /**
      * Files the receptions that waited for their reader (« Copier et lire »). Off the caller's thread (renames on a USB key are synced); under the per-name lock
      * the uploads take, so nothing races a new send of that name. A file gone meanwhile (deleted after play, moved) is simply forgotten.
@@ -328,7 +365,7 @@ class ReceiverServer(
             for ((disk, p) in pendingFiling.entries.toList()) runCatching {
                 val v = volumes[p.volumeId] ?: return@runCatching
                 val st = volumes.store(v)
-                if (st.finalSize(disk) != p.size) { pendingFiling.remove(disk); return@runCatching }
+                if (st.finalSize(disk) != p.size) { dropPending(disk); return@runCatching }
                 if (streamUse.busy(disk) || isPlaying(disk) || playlist?.contains(disk) == true) return@runCatching          // still read: next playback change
                 synchronized(FileLocks.of(LOCK_ROOT, p.original)) { if (fileReceived(v, st, disk, p.original, p.size) != null) invalidate() }
             }
@@ -387,9 +424,11 @@ class ReceiverServer(
     }
 
     init {
-        volumes.volumes().forEach { cleanOrphans(it); recoverMove(it); resyncFiling(it) }
+        volumes.volumes().forEach { cleanOrphans(it); recoverMove(it); resyncFiling(it); loadPendingFiling(it) }
         volumes.addListener { ev ->
             invalidate()
+            contentIndex.poke()                                         // a key came or went: the index reads the list again
+            if (ev.present) loadPendingFiling(ev.volume)
             if (!ev.present) {
                 if (playingVolume == ev.volume.id && player.state().state != "idle") {
                     runCatching { player.stop() }
@@ -402,6 +441,7 @@ class ReceiverServer(
             }
         }
         setAsyncRunner(BoundedRunner(cfg.maxHttpThreads + (publicRoutes?.extraThreads ?: 0)))
+        fileDeferredAsync()                                             // receptions left flat by a restart during « Copier et lire »
     }
 
     /** A move cut after its copy was verified (power, process killed, key pulled): finish removing the source. Never deletes anything unverified. */
@@ -1694,6 +1734,8 @@ class ReceiverServer(
 
     companion object {
         const val PORT = 8765
+        /** Receptions waiting for their reader before being filed (R-13), one per volume folder. */
+        const val PENDING_FILE = ".cbfiling-pending"
         const val VERSION = "0.7"
         const val MAX_EXT_BODY = 4 shl 20
         /** A partial copy written less than this long ago (or being written) is busy: /api/reset refuses to drop it. */
