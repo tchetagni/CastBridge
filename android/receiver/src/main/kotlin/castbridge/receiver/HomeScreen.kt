@@ -45,6 +45,8 @@ class HomeScreen(private val act: Activity, private val container: FrameLayout, 
         fun items(): List<LibraryItem>
         /** (ready text, code, receiving line or null). */
         fun status(): Triple<String, String, String?>
+        /** The status signalling (castbridge.core.ux.TvSignal): colour, text and the one action. null = old chip. */
+        fun signal(): castbridge.core.ux.TvSignalView? = null
         fun open(i: LibraryItem, row: List<LibraryItem>, index: Int)
         fun actions(i: LibraryItem, row: List<LibraryItem>, index: Int)
         fun openLibrary()
@@ -66,6 +68,8 @@ class HomeScreen(private val act: Activity, private val container: FrameLayout, 
         maxLines = 2; ellipsize = android.text.TextUtils.TruncateAt.END      // the live reception line (name · % · speed · transport · phone) never pushes the clock away
         setPadding(dp(14), dp(6), dp(14), dp(6)); background = TvStyle.rounded(act, 0x99000000.toInt(), TvStyle.R_XL)
     }
+    private val signalRow = TvSignalViews.Row(act)
+    private var signal: castbridge.core.ux.TvSignalView? = null
     // Room inside the scroll area for the focus zoom (+10 %) of the first/last cards, so nothing is cut off.
     private val rowsBox = LinearLayout(act).apply { orientation = LinearLayout.VERTICAL; setPadding(dp(8), dp(18), dp(8), dp(60)); clipChildren = false; clipToPadding = false }
     // The scroll area clips what scrolls out of it: cards must never slide over the title and description above it
@@ -98,6 +102,7 @@ class HomeScreen(private val act: Activity, private val container: FrameLayout, 
         top.addView(chip, LinearLayout.LayoutParams(-2, -2).apply { rightMargin = dp(20) })
         top.addView(TextClock(act).apply { format24Hour = "HH:mm"; format12Hour = "HH:mm"; textSize = 30f; setTextColor(Color.WHITE) })
         content.addView(top)
+        content.addView(signalRow, LinearLayout.LayoutParams(-1, -2).apply { topMargin = dp(8); rightMargin = dp(220) })   // keeps clear of the icon status bar (under the clock)
         content.addView(heroTitle, LinearLayout.LayoutParams(-1, -2).apply { topMargin = dp(26) })
         // Fixed height: a one- or two-line description never pushes the rows around.
         heroSub.minLines = 2
@@ -105,7 +110,9 @@ class HomeScreen(private val act: Activity, private val container: FrameLayout, 
         content.addView(scroll, LinearLayout.LayoutParams(-1, 0, 1f))
         root.addView(content, FrameLayout.LayoutParams(-1, -1))
         container.addView(root, FrameLayout.LayoutParams(-1, -1))
-        chip.setOnClickListener { revealUntil = System.currentTimeMillis() + 10_000; refreshStatus() }
+        // OK on the chip: the cause and the action are the first lines of « Connexion & réglages »; the code is revealed for 10 s
+        chip.setOnClickListener { revealUntil = System.currentTimeMillis() + 10_000; refreshStatus(); if (signal != null) api.openSettings() }
+        chip.setOnFocusChangeListener { _, has -> signal?.takeIf { has }?.let { heroTitle.text = it.text; heroSub.text = it.action ?: castbridge.core.ux.TvSignal.LEGEND } }
         TvStyle.focusZoom(chip)
     }
 
@@ -127,7 +134,13 @@ class HomeScreen(private val act: Activity, private val container: FrameLayout, 
     fun refreshStatus() {
         val (ready, code, receiving) = api.status()
         val shown = if (System.currentTimeMillis() < revealUntil || code.length < 4) code else code.take(2) + "••••"
-        chip.text = (receiving ?: "● $ready") + "   ·   code $shown"
+        val sig = runCatching { api.signal() }.getOrNull().also { signal = it }
+        if (sig == null) { chip.text = (receiving ?: "● $ready") + "   ·   code $shown"; return }
+        // never hide a red state behind a transfer line; otherwise a transfer in progress tells more than « Prêt »
+        val head = if (sig.level == castbridge.core.ux.SignalLevel.RED || receiving == null) sig.text else receiving
+        chip.text = "$head   ·   code $shown"
+        TvSignalViews.style(chip, sig.level, 16)
+        signalRow.render(sig)
     }
 
     private fun reload(focusFirst: Boolean = false) {

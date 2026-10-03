@@ -67,7 +67,9 @@ fun TvLinkStatus(link: LinkUi, onAdd: () -> Unit, onManage: () -> Unit, modifier
         is LinkUi.Status -> link.view
     }
     val tv: SavedTv? = when (link) { is LinkUi.Connected -> link.session.tv; is LinkUi.Status -> link.tv; else -> null }
-    val dot = when (view.tone) { Tone.GOOD -> GOOD; Tone.WARN -> WARN; Tone.BAD -> cs.error; Tone.NEUTRAL -> cs.outline }
+    // same signalling as CastBridge-TV (castbridge.core.ux.TvSignal): green works, orange degraded, red cannot, black inactive
+    val level = castbridge.core.ux.TvSignal.phoneLevel(view.state)
+    val dot = if (level == castbridge.core.ux.SignalLevel.BLACK) cs.outline else Color(castbridge.core.ux.SignalColors.of(level))
     fun startIt(intent: Intent) { runCatching { ctx.startActivity(intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)) } }
     fun act(a: LinkAction) = when (a) {
         LinkAction.ADD_TV, LinkAction.PAIR, LinkAction.ENTER_CODE -> onAdd()

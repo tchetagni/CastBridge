@@ -446,6 +446,7 @@ class PlayerActivity : Activity(), TvService.Screen {
             val cards = castbridge.core.xfer.ReceiveCards.of(svc?.reception?.shown().orEmpty(), s?.receiving().orEmpty(), s != null)
             return Triple(castbridge.core.xfer.ReceiveCards.ready(s != null), ParentalHub.shownPin(pin), castbridge.core.xfer.ReceiveCards.headline(cards))
         }
+        override fun signal() = castbridge.core.ux.TvSignal.of(TvSignalViews.facts(this@PlayerActivity, svc, server != null))
         override fun open(i: castbridge.core.tv.LibraryItem, row: List<castbridge.core.tv.LibraryItem>, index: Int) { libScreen?.open(i, row, index) }
         override fun actions(i: castbridge.core.tv.LibraryItem, row: List<castbridge.core.tv.LibraryItem>, index: Int) { libScreen?.actions(i, row, index) }
         override fun openLibrary() = showLibrary()
@@ -454,7 +455,7 @@ class PlayerActivity : Activity(), TvService.Screen {
         override fun openHelp() {
             // the phone button is named by its current label (castbridge.core.ux.TvHelpTexts ← SendWay.COPY), never a stale one
             AlertDialog.Builder(this@PlayerActivity).setTitle(castbridge.core.ux.TvHelpTexts.SEND_TITLE)
-                .setMessage(castbridge.core.ux.TvHelpTexts.send(ParentalHub.shownPin(pin), "http://${TvService.localIp() ?: "adresse-de-la-TV"}:${ReceiverServer.PORT}"))
+                .setMessage(castbridge.core.ux.TvHelpTexts.send(ParentalHub.shownPin(pin), "http://${TvService.localIp() ?: "adresse-de-la-TV"}:${ReceiverServer.PORT}") + "\n\nPastilles : " + castbridge.core.ux.TvSignal.LEGEND)
                 .setPositiveButton("Compris", null).show()
         }
     }
@@ -513,8 +514,8 @@ class PlayerActivity : Activity(), TvService.Screen {
 
     /** Every feature of the app as a home icon, with its live state. */
     /** A home tile that also counts its use (feature_used, docs/TELEMETRY.md: closed list of ids). */
-    private fun tile(feature: String, icon: Int, label: String, description: String, status: String?, on: Boolean, action: () -> Unit) =
-        HomeTool(icon, label, description, status, on) { TvConnect.feature(feature, "tile"); ParentalHub.guardTile(this, feature, action) }
+    private fun tile(feature: String, icon: Int, label: String, description: String, status: String?, on: Boolean, warn: Boolean = false, action: () -> Unit) =
+        HomeTool(icon, label, description, status, on, warn) { TvConnect.feature(feature, "tile"); ParentalHub.guardTile(this, feature, action) }
 
     /** Status line of the "Mises à jour" tile: what the server link knows right now. */
     private fun updateStatus(): String {
@@ -538,6 +539,7 @@ class PlayerActivity : Activity(), TvService.Screen {
         val drives = s?.registry?.let { r -> runCatching { r.volumes().filter { it.kind == castbridge.core.tv.VolumeKind.REMOVABLE } }.getOrNull() }.orEmpty()
         val btOk = st["1-bt"]?.contains("prêt") == true || st["1-bt"]?.contains("réception") == true
         val net = st["6-gw"]
+        val internetUp = s?.let { it.netDirectMs != null || it.netGatewayMs != null || it.netCheckedAt == 0L } != false
         val wdOn = prefs.getBool("wd_enabled", false)
         val sshOn = ssh?.running == true
         val upgrade = if (ActivationCenter.trial()) listOf(
@@ -559,7 +561,8 @@ class PlayerActivity : Activity(), TvService.Screen {
             tile("games", R.drawable.ic_t_games, "Jeux", "Quiz des Millions, Échecs et Sudoku, en solo ou avec les téléphones.", Games.visible().size.let { n -> if (n > 1) "$n jeux" else "$n jeu" }, true) {
                 startActivity(Intent(this, GamesActivity::class.java))
             },
-            tile("downloads", R.drawable.ic_cb_telechargements, "Téléchargements", "Télécharger sur la TV (liens, magnet, torrent) : les fichiers rejoignent la bibliothèque.", "aria2", false) {
+            tile("downloads", R.drawable.ic_cb_telechargements, "Téléchargements", "Télécharger sur la TV (liens, magnet, torrent) : les fichiers rejoignent la bibliothèque.",
+                if (internetUp) "aria2" else castbridge.core.ux.TvSignal.INTERNET_REQUIRED, false, warn = !internetUp) {
                 startActivity(Intent(this, DownloadsActivity::class.java))
             },
             tile("remote", R.drawable.ic_cb_telecommande, "Télécommande", "Piloter la TV avec le téléphone ; option « toute la TV » (accessibilité).",
@@ -619,7 +622,10 @@ class PlayerActivity : Activity(), TvService.Screen {
         val labels = mapOf("0-storage" to "Stockage", "1-bt" to "Bluetooth", "2-wd" to "Wi-Fi Direct (sans box)", "3-usb" to "Import depuis une clé",
             "4-ssh" to "Administration à distance (SSH)", "4-ssh-bt" to "SSH par Bluetooth", "4-api-bt" to "API par Bluetooth", "5-update" to "Installation d'applications",
             "5-notice" to "Dernier événement", "9-server" to "Serveur", "1-phone" to "Téléphone connecté")
+        val sig = castbridge.core.ux.TvSignal.of(TvSignalViews.facts(this, s, server != null))
         val info = buildList {
+            add("Signalétique : " + sig.text to (sig.action ?: castbridge.core.ux.TvSignal.LEGEND))
+            sig.indicators.filter { it.kind != castbridge.core.ux.IndicatorKind.RECEPTION }.forEach { add(it.kind.label to (it.text + (it.action?.let { a -> " — $a" } ?: ""))) }
             add("Code de connexion (à saisir une fois sur le téléphone)" to ParentalHub.shownPin(pin))
             add("Téléphones de confiance (Bluetooth, sans code)" to s.trust.list().let { l -> if (l.isEmpty()) "aucun : menu « Ajouter un téléphone »" else l.joinToString(", ") { it.name } })
             add("Adresse de la TV" to (ip?.let { "$it:${ReceiverServer.PORT}   ·   page web : http://$it:${ReceiverServer.PORT}" } ?: "pas de réseau (Bluetooth ou Wi-Fi Direct possibles)"))
