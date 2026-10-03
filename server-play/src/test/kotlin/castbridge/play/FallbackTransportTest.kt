@@ -20,7 +20,7 @@ import kotlin.test.assertTrue
 class FallbackTransportTest {
     private val servers = ArrayList<PlayServer>()
     private val wires = ArrayList<Wire>()
-    private fun server(cfg: PlayConfig = PlayConfig(port = 0, ticketPubKeys = listOf(TestKeys.pub))) = PlayServer(cfg).also { it.start(); servers += it }
+    private fun server(cfg: PlayConfig = PlayConfig(port = 0, trustedProxies = LOOPBACK, ticketPubKeys = listOf(TestKeys.pub))) = PlayServer(cfg).also { it.start(); servers += it }
     @AfterTest fun stop() { wires.forEach { it.close() }; servers.forEach { it.close() }; wires.clear(); servers.clear() }
     private fun <W : Wire> W.keep(): W { wires += this; return this }
     private val http = HttpClient.newBuilder().connectTimeout(Duration.ofSeconds(5)).build()
@@ -36,7 +36,7 @@ class FallbackTransportTest {
         val srv = server()
         val (tv, w) = host(srv)
         val awa = WsWire(srv.port, xff = "203.0.113.2").keep()
-        awa.send(PlayCodec.encode(ClientMsg.Join(w["code"] as String, "Awa", null, null, false)))
+        awa.send(PlayCodec.encode(ClientMsg.Join(w["code"] as String, "Awa", null, dev(), false)))
         val welcome = awa.await("welcome")!!
         val lastSeq = (awa.await("state")!!["seq"] as Number).toLong()
         // « le proxy coupe » : la session WebSocket disparaît sans au revoir
@@ -55,9 +55,9 @@ class FallbackTransportTest {
     @Test fun sseNamesEventsByTypeAndNumbersThem() {
         val srv = server()
         val (_, w) = host(srv)
-        val post = SseWire.post(srv.port, PlayCodec.encode(ClientMsg.Join(w["code"] as String, "Awa", null, null, false)), null, "https://bridge.sti-cm.com", "203.0.113.2")
-        val conn = (Json.parse(post.body()) as Map<*, *>)["conn"] as String
-        val req = HttpRequest.newBuilder(URI("http://127.0.0.1:${srv.port}/play/events?token=$conn")).header("X-Forwarded-For", "203.0.113.2").build()
+        val post = SseWire.post(srv.port, PlayCodec.encode(ClientMsg.Join(w["code"] as String, "Awa", null, dev(), false)), null, "https://bridge.sti-cm.com", "203.0.113.2")
+        val conn = Cred.of(post)!!
+        val req = HttpRequest.newBuilder(URI(Cred.url(srv.port, "/play/events", conn))).header("X-Forwarded-For", "203.0.113.2").also { Cred.apply(it, conn) }.build()
         val resp = http.send(req, HttpResponse.BodyHandlers.ofLines())
         assertEquals("text/event-stream; charset=utf-8", resp.headers().firstValue("content-type").get())
         assertEquals("no", resp.headers().firstValue("x-accel-buffering").get())
@@ -67,11 +67,11 @@ class FallbackTransportTest {
     }
 
     @Test fun longPollKeepsMessagesUntilAcknowledgedAndAnswersEmptyAfterTheDelay() {
-        val srv = server(PlayConfig(port = 0, pollMs = 400, ticketPubKeys = listOf(TestKeys.pub)))
+        val srv = server(PlayConfig(port = 0, trustedProxies = LOOPBACK, pollMs = 400, ticketPubKeys = listOf(TestKeys.pub)))
         val (_, w) = host(srv)
-        val post = SseWire.post(srv.port, PlayCodec.encode(ClientMsg.Join(w["code"] as String, "Awa", null, null, false)), null, "https://bridge.sti-cm.com", "203.0.113.2")
-        val conn = (Json.parse(post.body()) as Map<*, *>)["conn"] as String
-        fun poll(since: Long) = Json.parse(http.send(HttpRequest.newBuilder(URI("http://127.0.0.1:${srv.port}/play/state?token=$conn&since=$since")).header("X-Forwarded-For", "203.0.113.2").build(),
+        val post = SseWire.post(srv.port, PlayCodec.encode(ClientMsg.Join(w["code"] as String, "Awa", null, dev(), false)), null, "https://bridge.sti-cm.com", "203.0.113.2")
+        val conn = Cred.of(post)!!
+        fun poll(since: Long) = Json.parse(http.send(HttpRequest.newBuilder(URI(Cred.url(srv.port, "/play/state", conn, "since=$since"))).header("X-Forwarded-For", "203.0.113.2").also { Cred.apply(it, conn) }.build(),
             HttpResponse.BodyHandlers.ofString()).body()) as Map<*, *>
         val first = poll(0); val msgs = first["msgs"] as List<*>
         assertTrue(msgs.size >= 2 && (msgs[0] as Map<*, *>)["t"] == "welcome")
@@ -84,10 +84,10 @@ class FallbackTransportTest {
     }
 
     @Test fun idleFallbackSessionIsClosedButTheSeatSurvivesForResume() {
-        val srv = server(PlayConfig(port = 0, fallbackIdleMs = 600, tickMs = 50, ticketPubKeys = listOf(TestKeys.pub)))
+        val srv = server(PlayConfig(port = 0, trustedProxies = LOOPBACK, fallbackIdleMs = 600, tickMs = 50, ticketPubKeys = listOf(TestKeys.pub)))
         val (_, w) = host(srv)
         val sse = SseWire(srv.port, xff = "203.0.113.2").keep()
-        sse.send(PlayCodec.encode(ClientMsg.Join(w["code"] as String, "Awa", null, null, false)))
+        sse.send(PlayCodec.encode(ClientMsg.Join(w["code"] as String, "Awa", null, dev(), false)))
         val welcome = sse.await("welcome")!!
         sse.close()   // plus de flux ni de requête
         Thread.sleep(1_500)
@@ -116,7 +116,7 @@ class FallbackTransportTest {
     @Test fun postRateLimitDropsTheFallbackSession() {
         val srv = server()
         val first = SseWire.post(srv.port, PlayCodec.encode(ClientMsg.Pong("x")), null, "https://bridge.sti-cm.com", "203.0.113.4")
-        val conn = (Json.parse(first.body()) as Map<*, *>)["conn"] as String
+        val conn = Cred.of(first)!!
         val codes = (1..40).map { SseWire.post(srv.port, PlayCodec.encode(ClientMsg.Pong("x")), conn, "https://bridge.sti-cm.com", "203.0.113.4").statusCode() }
         assertTrue(429 in codes, "débit dépassé : 429 $codes")
         assertEquals(410, codes.last(), "puis la session est rompue (reprise par resume)")
@@ -126,8 +126,8 @@ class FallbackTransportTest {
         val srv = server()
         val (_, w) = host(srv)
         val code = w["code"] as String
-        val msgs = listOf(PlayCodec.encode(ClientMsg.Join("ZZZZZZZZ", "Awa", null, null, false)), PlayCodec.encode(ClientMsg.Pong("x")),
-            """{"t":"inconnu"}""", """{"t":"act","action":"fly"}""", PlayCodec.encode(ClientMsg.Join(code, "Awa", null, null, false)))
+        val msgs = listOf(PlayCodec.encode(ClientMsg.Join("ZZZZZZZZ", "Awa", null, dev(), false)), PlayCodec.encode(ClientMsg.Pong("x")),
+            """{"t":"inconnu"}""", """{"t":"act","action":"fly"}""", PlayCodec.encode(ClientMsg.Join(code, "Awa", null, dev(), false)))
         fun run(w: Wire): List<String> {
             msgs.forEach { w.send(it) }
             val seen = ArrayList<String>(); val end = System.currentTimeMillis() + 2_000

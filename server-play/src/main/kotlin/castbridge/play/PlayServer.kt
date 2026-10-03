@@ -63,9 +63,9 @@ class PlayServer(
     }
 
     private fun handle(socket: Socket) {
-        socket.soTimeout = 15_000; socket.tcpNoDelay = true
+        socket.tcpNoDelay = true
         val out = socket.getOutputStream()
-        val req = try { MiniHttp.readRequest(socket.getInputStream(), socket.inetAddress) } catch (e: HttpError) {
+        val req = try { MiniHttp.readRequest(socket, cfg.headDeadlineMs) } catch (e: HttpError) {
             MiniHttp.json(out, e.status, """{"error":"requête invalide"}""")
             // vide ce que le client envoie encore, pour que la réponse d'erreur ne soit pas perdue par une remise à zéro de la connexion
             runCatching { socket.shutdownOutput(); socket.soTimeout = 200; socket.getInputStream().readNBytes(65_536) }
@@ -93,8 +93,10 @@ class PlayServer(
 
     private fun ws(req: HttpReq, socket: Socket, out: java.io.OutputStream, ip: String) {
         val key = req.header("sec-websocket-key")
-        val upgrade = req.header("upgrade")?.equals("websocket", ignoreCase = true) == true && req.header("connection")?.lowercase()?.contains("upgrade") == true
-        if (req.method != "GET" || !upgrade || key == null || req.header("sec-websocket-version")?.trim() != "13") return MiniHttp.json(out, 400, """{"error":"WebSocket attendu"}""")
+        val upgrade = req.header("upgrade")?.equals("websocket", ignoreCase = true) == true && req.header("connection")?.split(',')?.any { it.trim().equals("upgrade", ignoreCase = true) } == true
+        val keyOk = key != null && runCatching { java.util.Base64.getDecoder().decode(key.trim()).size == 16 }.getOrDefault(false)   // base64 de 16 octets exactement (RFC 6455 § 4.1)
+        if (req.method != "GET" || !upgrade || !keyOk || req.header("sec-websocket-version")?.trim() != "13") return MiniHttp.json(out, 400, """{"error":"WebSocket attendu"}""")
+        key!!
         val ticket = req.header("x-play-ticket")
         if (!origin.allows(req.header("origin"), verifier.verify(ticket, System.currentTimeMillis()))) return MiniHttp.json(out, 403, """{"error":"origine refusée"}""")
         when (limits.acquire(ip)) {
@@ -102,15 +104,25 @@ class PlayServer(
             ConnectionLimits.Verdict.TOTAL_FULL -> return MiniHttp.json(out, 503, """{"error":"service complet"}""", mapOf("Retry-After" to "30"))
             ConnectionLimits.Verdict.OK -> {}
         }
-        val id = ByteArray(12).also { SecureRandom().nextBytes(it) }.joinToString("") { "%02x".format(it) }
-        val conn = WsConn("w$id", ip, socket, cfg, hub)
+        // la place prise ci-dessus est rendue quoi qu'il arrive avant l'enregistrement (sinon fuite de place) ; après, c'est `hub.onClosed` qui la rend
+        var registered = false
         try {
+            val id = ByteArray(12).also { SecureRandom().nextBytes(it) }.joinToString("") { "%02x".format(it) }
+            val conn = WsConn("w$id", ip, socket, cfg, hub)
             out.write(("HTTP/1.1 101 Switching Protocols\r\nUpgrade: websocket\r\nConnection: Upgrade\r\nSec-WebSocket-Accept: ${WsProtocol.acceptKey(key)}\r\n\r\n").toByteArray(Charsets.ISO_8859_1))
             out.flush()
-        } catch (e: IOException) { limits.release(ip); return }
-        conn.ticket = ticket
-        hub.register(conn)
-        conn.run(req.input)
+            conn.ticket = ticket
+            hub.register(conn); registered = true
+            conn.run(req.input)
+        } finally { if (!registered) limits.release(ip) }
+    }
+
+    /** Arrêt en douceur : annonce la maintenance aux salles, refuse les nouvelles, attend au plus [graceMs] que les connexions partent, puis ferme. */
+    fun drain(graceMs: Long) {
+        hub.startDrain()
+        val end = System.currentTimeMillis() + graceMs
+        while (System.currentTimeMillis() < end && hub.connectionsOpen() > 0) Thread.sleep(50)
+        close()
     }
 
     override fun close() {

@@ -17,7 +17,7 @@ if (!dev) { dev = Array.from(crypto.getRandomValues(new Uint8Array(8)), b => b.t
 
 let session = null; try { session = JSON.parse(store.get("playSession") || "null"); } catch (e) {}   // { roomId, token, code, name } : le jeton reste en sessionStorage, jamais dans une adresse
 let S = { view: null, role: null, opensAtLocal: 0, deadline: 0, timerTotal: 0, err: "", gone: null, myTooEarly: false };
-let kind = 0, gen = 0, seq = 0, lastSeq = 0, conn = null, since = 0, link = null, pendingJoin = null, leaving = false, shortLives = 0, retries = 0;
+let kind = 0, gen = 0, seq = 0, lastSeq = 0, conn = false, since = 0, link = null, pendingJoin = null, leaving = false, shortLives = 0, retries = 0;
 
 function note(text) { netEl.textContent = text || ""; netEl.classList.toggle("hidden", !text); }
 function save() { store.set("playSession", session ? JSON.stringify(session) : null); }
@@ -26,7 +26,7 @@ function normCode(s) { return String(s || "").toUpperCase().replace(/[^0-9A-Z]/g
 function prettyCode(c) { return c.length === 8 ? c.slice(0, 4) + "-" + c.slice(4) : c; }
 
 // ---------- transports ----------
-function stop() { gen++; if (link) { try { link.close(); } catch (e) {} } link = null; conn = null; since = 0; }
+function stop() { gen++; if (link) { try { link.close(); } catch (e) {} } link = null; conn = false; since = 0; }
 function start(idx) {
   stop(); kind = idx; const g = gen;
   const k = TRANSPORTS[kind];
@@ -59,12 +59,12 @@ let chain = Promise.resolve();
 const post = (g, m) => { chain = chain.then(() => doPost(g, m)); return chain; };   // un message à la fois : le premier crée la session de repli
 async function doPost(g, m) {
   try {
-    const r = await fetch("/play/act", { method: "POST", cache: "no-store", headers: Object.assign({ "Content-Type": "application/json" }, conn ? { "X-Play-Conn": conn } : {}), body: JSON.stringify(m) });
+    const r = await fetch("/play/act", { method: "POST", cache: "no-store", headers: { "Content-Type": "application/json" }, credentials: "same-origin", body: JSON.stringify(m) });
     if (g !== gen) return;
-    if (r.status === 410) { conn = null; since = 0; if (session) { await sleep(300); if (g === gen) { ready(); } } return; }   // session de repli terminée : reprise avec le jeton
+    if (r.status === 410) { conn = false; since = 0; if (session) { await sleep(300); if (g === gen) { ready(); } } return; }   // session de repli terminée : reprise avec le jeton
     if (r.status === 429) { S.err = "Trop de messages ou de connexions : patientez un instant."; render(); return; }
     const b = await r.json();
-    if (!conn && b.conn) { conn = b.conn; if (TRANSPORTS[kind] === "sse") openStream(g); else pollLoop(g); }
+    if (!conn && b.ok) { conn = true; if (TRANSPORTS[kind] === "sse") openStream(g); else pollLoop(g); }   // le secret de session est un cookie HttpOnly posé par le service : la page ne le voit jamais
   } catch (e) { note("Réseau indisponible, nouvel essai…"); }
 }
 function openFallback(g, k) {
@@ -72,18 +72,18 @@ function openFallback(g, k) {
   ready();
 }
 function openStream(g) {
-  const es = new EventSource("/play/events?token=" + encodeURIComponent(conn));
+  const es = new EventSource("/play/events");
   link.es = es;
   for (const t of ["welcome", "state", "question", "reveal", "safety", "ping", "error", "roomGone", "replay", "ack"]) es.addEventListener(t, ev => { if (g === gen) handle(JSON.parse(ev.data)); });
-  es.onerror = () => { if (g !== gen) return; es.close(); conn = null; note("Flux interrompu, reprise…"); setTimeout(() => { if (g === gen && !leaving) ready(); }, 1000); };
+  es.onerror = () => { if (g !== gen) return; es.close(); conn = false; note("Flux interrompu, reprise…"); setTimeout(() => { if (g === gen && !leaving) ready(); }, 1000); };
 }
 async function pollLoop(g) {
   let fails = 0;
   while (g === gen && conn) {
     try {
-      const r = await fetch("/play/state?token=" + encodeURIComponent(conn) + "&since=" + since, { cache: "no-store" });
+      const r = await fetch("/play/state?since=" + since, { cache: "no-store", credentials: "same-origin" });
       if (g !== gen) return;
-      if (r.status === 410) { conn = null; since = 0; await sleep(300); if (g === gen) ready(); return; }
+      if (r.status === 410) { conn = false; since = 0; await sleep(300); if (g === gen) ready(); return; }
       if (r.status !== 200) throw new Error("http " + r.status);
       const b = await r.json(); fails = 0; since = b.next; for (const m of b.msgs) handle(m);
     } catch (e) { if (++fails > 5) { note("Réseau indisponible."); fails = 0; } await sleep(2000); }

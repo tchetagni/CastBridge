@@ -43,8 +43,8 @@ class PlayConfig(
     val maxPerIp: Int = 8,
     /** Origines autorisées pour la page de jeu (WebSocket, POST). */
     val origins: Set<String> = setOf("https://bridge.sti-cm.com"),
-    /** Réseaux dont l'`X-Forwarded-For` est cru (dernier saut seulement) : boucle locale et réseaux Docker par défaut. */
-    val trustedProxies: List<Cidr> = DEFAULT_TRUSTED.mapNotNull { Cidr.parse(it) },
+    /** Réseaux dont l'`X-Forwarded-For` est cru (dernier saut seulement). AUCUN par défaut (audit w20-03) : en production, l'adresse exacte de nginx en /32. */
+    val trustedProxies: List<Cidr> = emptyList(),
     /** Clés publiques Ed25519 des tickets (Base64 : 32 octets bruts ou SPKI X.509). Vide = aucune salle ne peut être créée. */
     val ticketPubKeys: List<String> = emptyList(),
     val lotsDir: File? = null,
@@ -56,6 +56,10 @@ class PlayConfig(
     val outboxMaxBytes: Int = 64 * 1024,
     val maxFrameBytes: Int = 8 * 1024,
     val pollMs: Long = 25_000,
+    /** Échéance GLOBALE de lecture de la tête d'une requête (anti-goutte-à-goutte). */
+    val headDeadlineMs: Long = 10_000,
+    /** Une écriture WebSocket qui dure plus longtemps (client qui ne lit plus) coupe la connexion. */
+    val writeTimeoutMs: Long = 10_000,
     val fallbackIdleMs: Long = 40_000,
     val roomIdleMs: Long = 10 * 60_000L,
     val roomMaxMs: Long = 2 * 60 * 60_000L,
@@ -63,7 +67,6 @@ class PlayConfig(
 ) {
     companion object {
         const val VERSION = "w20-03"
-        val DEFAULT_TRUSTED = listOf("127.0.0.0/8", "::1/128", "172.16.0.0/12")
         /** Les SEULES variables d'environnement lues par le service. */
         val ENV_NAMES = listOf("CASTBRIDGE_PLAY_PORT", "CASTBRIDGE_PLAY_BIND", "CASTBRIDGE_PLAY_MAX_ROOMS", "CASTBRIDGE_PLAY_MAX_CONNECTIONS", "CASTBRIDGE_PLAY_MAX_PER_IP",
             "CASTBRIDGE_PLAY_ORIGINS", "CASTBRIDGE_PLAY_TRUSTED_PROXIES", "CASTBRIDGE_PLAY_LOTS_DIR", "CASTBRIDGE_PLAY_TICKET_PUBKEY", "CASTBRIDGE_PLAY_TICKET_PUBKEY_2",

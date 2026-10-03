@@ -18,7 +18,7 @@ import kotlin.test.assertTrue
 class HttpRoutesTest {
     private val servers = ArrayList<PlayServer>()
     private val closeables = ArrayList<Wire>()
-    private fun server() = PlayServer(PlayConfig(port = 0, ticketPubKeys = listOf(TestKeys.pub))).also { it.start(); servers += it }
+    private fun server() = PlayServer(PlayConfig(port = 0, trustedProxies = LOOPBACK, ticketPubKeys = listOf(TestKeys.pub))).also { it.start(); servers += it }
     @AfterTest fun stop() { closeables.forEach { it.close() }; servers.forEach { it.close() } }
     private val http = HttpClient.newHttpClient()
     private fun get(srv: PlayServer, path: String, method: String = "GET"): HttpResponse<String> =

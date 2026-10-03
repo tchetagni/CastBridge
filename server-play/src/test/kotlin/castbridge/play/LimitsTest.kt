@@ -15,7 +15,7 @@ import kotlin.test.assertTrue
 class LimitsTest {
     private val servers = ArrayList<PlayServer>()
     private val closeables = ArrayList<AutoCloseable>()
-    private fun server(cfg: PlayConfig = PlayConfig(port = 0, ticketPubKeys = listOf(TestKeys.pub))) = PlayServer(cfg).also { it.start(); servers += it }
+    private fun server(cfg: PlayConfig = PlayConfig(port = 0, trustedProxies = LOOPBACK, ticketPubKeys = listOf(TestKeys.pub))) = PlayServer(cfg).also { it.start(); servers += it }
     @AfterTest fun stop() { closeables.forEach { runCatching { it.close() } }; servers.forEach { it.close() }; servers.clear(); closeables.clear() }
     private fun ws(srv: PlayServer, xff: String? = "203.0.113.7", origin: String? = "https://bridge.sti-cm.com", ticket: String? = null) = WsWire(srv.port, origin, xff, ticket).also { closeables += AutoCloseable { it.close() } }
 
@@ -35,14 +35,14 @@ class LimitsTest {
     }
 
     @Test fun slotIsFreedWhenAConnectionCloses() {
-        val srv = server(PlayConfig(port = 0, maxPerIp = 1, ticketPubKeys = listOf(TestKeys.pub)))
+        val srv = server(PlayConfig(port = 0, trustedProxies = LOOPBACK, maxPerIp = 1, ticketPubKeys = listOf(TestKeys.pub)))
         val a = ws(srv); assertFailsWith<WsRefused> { ws(srv) }
         a.close(); Thread.sleep(300)
         ws(srv)
     }
 
     @Test fun totalConnectionCapAnswers503() {
-        val srv = server(PlayConfig(port = 0, maxConnections = 2, ticketPubKeys = listOf(TestKeys.pub)))
+        val srv = server(PlayConfig(port = 0, trustedProxies = LOOPBACK, maxConnections = 2, ticketPubKeys = listOf(TestKeys.pub)))
         ws(srv, xff = "198.51.100.1"); ws(srv, xff = "198.51.100.2")
         assertEquals(503, assertFailsWith<WsRefused> { ws(srv, xff = "198.51.100.3") }.status)
     }
@@ -61,7 +61,7 @@ class LimitsTest {
         RawWs(srv.port).use { c ->
             val hello = PlayCodec.encode(ClientMsg.Hello(PlayProtocol.PROTO, PlayProtocol.CAPS, null, null))   // aucune réponse attendue
             repeat(29) { c.sendText(hello) }
-            c.sendText(PlayCodec.encode(ClientMsg.Join("ZZZZZZZZ", "Awa", null, null, false)))   // le 30e message de la rafale passe encore
+            c.sendText(PlayCodec.encode(ClientMsg.Join("ZZZZZZZZ", "Awa", null, dev(), false)))   // le 30e message de la rafale passe encore
             assertEquals("PLAY_BAD_CODE", c.await("error", 2_000)?.get("reason") ?: "pas de réponse")
         }
     }
@@ -103,7 +103,7 @@ class LimitsTest {
     }
 
     @Test fun roomCapAnswersPlayBusyAndKeepsTheOtherRoom() {
-        val srv = server(PlayConfig(port = 0, maxRooms = 1, ticketPubKeys = listOf(TestKeys.pub)))
+        val srv = server(PlayConfig(port = 0, trustedProxies = LOOPBACK, maxRooms = 1, ticketPubKeys = listOf(TestKeys.pub)))
         val a = ws(srv); a.send(PlayCodec.encode(ClientMsg.Hello(PlayProtocol.PROTO, PlayProtocol.CAPS, null, TestKeys.ticket()))); a.send(PlayCodec.encode(ClientMsg.Create(null, "DUEL")))
         assertEquals("HOST", a.await("welcome")?.get("role"))
         val b = ws(srv, xff = "203.0.113.9"); b.send(PlayCodec.encode(ClientMsg.Hello(PlayProtocol.PROTO, PlayProtocol.CAPS, null, TestKeys.ticket()))); b.send(PlayCodec.encode(ClientMsg.Create(null, "DUEL")))
@@ -116,18 +116,18 @@ class LimitsTest {
         val tv = ws(srv, xff = "203.0.113.50"); tv.send(PlayCodec.encode(ClientMsg.Hello(PlayProtocol.PROTO, PlayProtocol.CAPS, null, TestKeys.ticket()))); tv.send(PlayCodec.encode(ClientMsg.Create(null, "DUEL")))
         val code = tv.await("welcome")!!["code"] as String
         val p = ws(srv, xff = "203.0.113.51")
-        repeat(10) { p.send(PlayCodec.encode(ClientMsg.Join("ZZZZ000$it", "Awa", null, null, false))); assertEquals("PLAY_BAD_CODE", p.await("error")?.get("reason")) }
-        p.send(PlayCodec.encode(ClientMsg.Join(code, "Awa", null, null, false)))
+        repeat(10) { p.send(PlayCodec.encode(ClientMsg.Join("ZZZZ000$it", "Awa", null, dev(), false))); assertEquals("PLAY_BAD_CODE", p.await("error")?.get("reason")) }
+        p.send(PlayCodec.encode(ClientMsg.Join(code, "Awa", null, dev(), false)))
         assertEquals("PLAY_BAD_CODE", p.await("error")?.get("reason"), "10 codes faux en 5 min : l'adresse est bloquée, même pour le bon code")
         val q = ws(srv, xff = "203.0.113.52")
-        q.send(PlayCodec.encode(ClientMsg.Join(code, "Bello", null, null, false)))
+        q.send(PlayCodec.encode(ClientMsg.Join(code, "Bello", null, dev(), false)))
         assertEquals("PLAYER", q.await("welcome")?.get("role"), "une autre adresse n'est pas touchée")
     }
 
     // ---- X-Forwarded-For : jamais cru hors du réseau de confiance, dernier saut seulement ----
 
     @Test fun clientIpTakesTheLastHopOnlyFromATrustedProxy() {
-        val trusted = PlayConfig().trustedProxies
+        val trusted = listOf("127.0.0.0/8", "::1/128", "172.16.0.0/12").mapNotNull { Cidr.parse(it) }
         val proxy = InetAddress.getByName("172.18.0.5"); val stranger = InetAddress.getByName("198.51.100.77")
         assertEquals("203.0.113.9", ClientIp.resolve(proxy, "1.2.3.4, 203.0.113.9", trusted), "le dernier saut (celui que nginx a écrit)")
         assertEquals("203.0.113.9", ClientIp.resolve(InetAddress.getByName("127.0.0.1"), "203.0.113.9", trusted))
@@ -135,7 +135,7 @@ class LimitsTest {
         assertEquals("172.18.0.5", ClientIp.resolve(proxy, "pas-une-ip", trusted), "saut invalide : l'adresse de la socket")
         assertEquals("172.18.0.5", ClientIp.resolve(proxy, "evil.example", trusted), "jamais de résolution DNS")
         assertEquals("172.18.0.5", ClientIp.resolve(proxy, null, trusted))
-        assertEquals("2001:db8:0:0:0:0:0:1", ClientIp.resolve(proxy, "2001:db8::1", trusted))
+        assertEquals("v6:2001:0db8:0000:0000::/64", ClientIp.resolve(proxy, "2001:db8::1", trusted), "IPv6 : préfixe /64")
         assertFalse(trusted.any { it.contains(InetAddress.getByName("8.8.8.8")) })
     }
 
@@ -159,7 +159,7 @@ class LimitsTest {
         hub.onText(tv, PlayCodec.encode(ClientMsg.Create(null, "DUEL")))
         val code = (castbridge.core.quiz.Json.parse(log.first { it.startsWith("{\"t\":\"welcome\"") }) as Map<*, *>)["code"] as String
         val p = Full("p"); limits.acquire("198.51.100.1"); hub.register(p)
-        hub.onText(p, PlayCodec.encode(ClientMsg.Join(code, "Awa", null, null, false)))
+        hub.onText(p, PlayCodec.encode(ClientMsg.Join(code, "Awa", null, dev(), false)))
         assertEquals(1, hub.rooms().single().seatCount(), "joueur assis")
         p.full = true
         hub.onText(tv, PlayCodec.encode(ClientMsg.Act(null, "mode", null, "MILLIONAIRE", 1)))   // fait partir un état vers le joueur : sa file est pleine

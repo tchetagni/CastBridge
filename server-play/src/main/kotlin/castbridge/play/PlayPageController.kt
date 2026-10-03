@@ -32,7 +32,7 @@ class PlayPageController {
 
     companion object {
         val SECURITY_HEADERS = mapOf(
-            "Content-Security-Policy" to "default-src 'none'; script-src 'self'; style-src 'self'; connect-src 'self' ws: wss:; img-src 'self' data:; base-uri 'none'; form-action 'none'; frame-ancestors 'none'",
+            "Content-Security-Policy" to "default-src 'none'; script-src 'self'; style-src 'self'; connect-src 'self'; img-src 'self' data:; base-uri 'none'; form-action 'none'; frame-ancestors 'none'",
             "X-Content-Type-Options" to "nosniff", "Referrer-Policy" to "no-referrer", "X-Frame-Options" to "DENY")
     }
 }

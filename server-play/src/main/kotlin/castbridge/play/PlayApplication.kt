@@ -8,6 +8,7 @@ fun main(args: Array<String>) {
     val cfg = PlayConfig.fromEnv(args = args)
     val server = PlayServer(cfg).start()
     System.err.println("castbridge-play ${cfg.version} : écoute sur ${cfg.bind}:${server.port} (salles max ${cfg.maxRooms}, connexions max ${cfg.maxConnections})")
-    Runtime.getRuntime().addShutdownHook(Thread { server.close() })
+    // SIGTERM : maintenance annoncée aux salles, 25 s de grâce, puis arrêt (docker : stop_grace_period >= 30s ; déployer HORS PARTIE)
+    Runtime.getRuntime().addShutdownHook(Thread { server.drain(25_000) })
     Thread.currentThread().join()
 }

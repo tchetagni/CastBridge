@@ -17,7 +17,7 @@ class ControlFramesTest {
     private fun server(cfg: PlayConfig) = PlayServer(cfg).also { it.start(); servers += it }
     private fun raw(srv: PlayServer, autoPong: Boolean = true) = RawWs(srv.port, mapOf("Origin" to "https://bridge.sti-cm.com", "X-Forwarded-For" to "203.0.113.${raws.size + 1}"), autoPong = autoPong).also { raws += it }
     @AfterTest fun stop() { raws.forEach { it.close() }; servers.forEach { it.close() }; raws.clear(); servers.clear() }
-    private val fast = PlayConfig(port = 0, pingMs = 150, pongTimeoutMs = 600, tickMs = 50, ticketPubKeys = listOf(TestKeys.pub))
+    private val fast = PlayConfig(port = 0, trustedProxies = LOOPBACK, pingMs = 150, pongTimeoutMs = 600, tickMs = 50, ticketPubKeys = listOf(TestKeys.pub))
 
     @Test fun defaultsMatchTheRunbook() {
         val d = PlayConfig()
@@ -38,7 +38,7 @@ class ControlFramesTest {
         tv.sendText(PlayCodec.encode(ClientMsg.Hello(PlayProtocol.PROTO, PlayProtocol.CAPS, null, TestKeys.ticket()))); tv.sendText(PlayCodec.encode(ClientMsg.Create(null, "DUEL")))
         val w = tv.await("welcome")!!
         val awa = raw(srv, autoPong = false)
-        awa.sendText(PlayCodec.encode(ClientMsg.Join(w["code"] as String, "Awa", null, null, false)))
+        awa.sendText(PlayCodec.encode(ClientMsg.Join(w["code"] as String, "Awa", null, dev(), false)))
         val welcome = awa.await("welcome")!!
         val code = awa.closedWithin(4_000)
         assertNotNull(code, "sans pong ni message : fermé par le serveur")
@@ -50,7 +50,7 @@ class ControlFramesTest {
     }
 
     @Test fun clientCloseFrameIsAnsweredAndTheSlotFreed() {
-        val srv = server(PlayConfig(port = 0, maxPerIp = 1, ticketPubKeys = listOf(TestKeys.pub)))
+        val srv = server(PlayConfig(port = 0, trustedProxies = LOOPBACK, maxPerIp = 1, ticketPubKeys = listOf(TestKeys.pub)))
         val headers = mapOf("Origin" to "https://bridge.sti-cm.com", "X-Forwarded-For" to "203.0.113.99")
         RawWs(srv.port, headers).use { c -> c.send(8, byteArrayOf(0x03, 0xe8.toByte())); assertEquals(1000, c.closedWithin(2_000)) }
         Thread.sleep(300)
@@ -58,9 +58,9 @@ class ControlFramesTest {
     }
 
     @Test fun fragmentedTextMessageIsReassembled() {
-        val srv = server(PlayConfig(port = 0, ticketPubKeys = listOf(TestKeys.pub)))
+        val srv = server(PlayConfig(port = 0, trustedProxies = LOOPBACK, ticketPubKeys = listOf(TestKeys.pub)))
         val c = raw(srv)
-        val text = PlayCodec.encode(ClientMsg.Join("ZZZZZZZZ", "Awa", null, null, false)).toByteArray()
+        val text = PlayCodec.encode(ClientMsg.Join("ZZZZZZZZ", "Awa", null, dev(), false)).toByteArray()
         c.send(1, text.copyOfRange(0, 10), fin = false); c.send(0, text.copyOfRange(10, text.size), fin = true)
         assertEquals("PLAY_BAD_CODE", c.await("error")?.get("reason"))
     }

@@ -44,7 +44,7 @@ class NoAnswerLeakTest {
             // ---------------- Duel (INTERNET, avec son délai)
             val r = ServerRoom("r$seed", PlayScope.INTERNET, bank, java.util.Random(seed), createdAt = 0, settings = ServerRoom.Settings(duelCount = 4))
             r.handle("tv", ClientMsg.Create(null, "DUEL"), 0)
-            r.handle("a", ClientMsg.Join(r.code, "Awa", null, null, false), 0); r.handle("b", ClientMsg.Join(r.code, "Bello", null, null, false), 0)
+            r.handle("a", ClientMsg.Join(r.code, "Awa", null, dv(), false), 0); r.handle("b", ClientMsg.Join(r.code, "Bello", null, dv(), false), 0)
             r.handle("tv", ClientMsg.Act(null, "mode", null, "DUEL", 1), 0)
             var now = 0L
             var outs = r.handle("tv", ClientMsg.Act(null, "start", null, seed.toString(), 2), now)
@@ -67,7 +67,7 @@ class NoAnswerLeakTest {
             // ---------------- Millionnaire : 50:50 puis sélection et verrouillage (avant la révélation)
             val m = ServerRoom("m$seed", PlayScope.INTERNET, bank, java.util.Random(seed), createdAt = 0)
             m.handle("tv", ClientMsg.Create(null, "MILLIONAIRE"), 0)
-            m.handle("a", ClientMsg.Join(m.code, "Awa", null, null, false), 0)
+            m.handle("a", ClientMsg.Join(m.code, "Awa", null, dv(), false), 0)
             m.handle("tv", ClientMsg.Act(null, "mode", null, "MILLIONAIRE", 1), 0)
             var mo = m.handle("tv", ClientMsg.Act(null, "start", null, seed.toString(), 2), 0)
             val g = m.table(0).room.game!!

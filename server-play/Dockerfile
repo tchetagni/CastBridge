@@ -23,7 +23,9 @@ RUN mkdir .harness && cd .harness \
  && gradle --no-daemon -q -PquizReserved=exclude :server-play:fatJar
 
 # ---- runtime --------------------------------------------------------------------------------------
-FROM eclipse-temurin:21-jre
+# JDK 25 (JEP 491) : un fil virtuel qui attend sous synchronized n'épingle plus son porteur ; le code reste compilé pour JDK 21 (build ci-dessus), il tourne sur 21 comme sur 25.
+# Le tag eclipse-temurin:25-jre n'a pas pu être vérifié depuis ce poste (aucun accès au registre) : si le pull échoue, revenir à 21-jre (les verrous explicites suffisent déjà).
+FROM eclipse-temurin:25-jre
 ARG VCS_REF=unknown
 LABEL org.opencontainers.image.title="castbridge-play" \
       org.opencontainers.image.description="CastBridge : salles de Quiz en ligne (WebSocket, SSE, long-poll)" \

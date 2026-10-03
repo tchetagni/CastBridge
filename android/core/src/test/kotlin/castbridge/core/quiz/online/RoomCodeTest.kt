@@ -48,12 +48,12 @@ class RoomCodeTest {
         val r = room()
         r.handle("tv", ClientMsg.Create(null, null), 0)
         val old = r.code
-        repeat(49) { assertEquals(PlayReason.PLAY_BAD_CODE.name, err(r.handle("x$it", ClientMsg.Join("ZZZZZZZZ", "Awa", null, null, false), 1_000L))) }
+        repeat(49) { assertEquals(PlayReason.PLAY_BAD_CODE.name, err(r.handle("x$it", ClientMsg.Join("ZZZZZZZZ", "Awa", null, dv(), false), 1_000L))) }
         assertEquals(old, r.code)
-        r.handle("x50", ClientMsg.Join("ZZZZZZZZ", "Awa", null, null, false), 1_000)
+        r.handle("x50", ClientMsg.Join("ZZZZZZZZ", "Awa", null, dv(), false), 1_000)
         assertNotEquals(old, r.code, "50e essai faux : nouveau code")
         assertTrue(r.eventsSince(0)!!.any { it.kind == "codeRotated" })
-        assertEquals(PlayReason.PLAY_BAD_CODE.name, err(r.handle("late", ClientMsg.Join(old, "Awa", null, null, false), 2_000)), "l'ancien code ne marche plus")
+        assertEquals(PlayReason.PLAY_BAD_CODE.name, err(r.handle("late", ClientMsg.Join(old, "Awa", null, dv(), false), 2_000)), "l'ancien code ne marche plus")
     }
 
     @Test fun theHostIsToldTheNewCodeByAState() {
@@ -61,7 +61,7 @@ class RoomCodeTest {
         r.handle("tv", ClientMsg.Create(null, null), 0)
         val old = r.code
         var outs = emptyList<ServerRoom.Out>()
-        repeat(50) { outs = r.handle("x$it", ClientMsg.Join("ZZZZZZZZ", "Awa", null, null, false), 1_000L) }
+        repeat(50) { outs = r.handle("x$it", ClientMsg.Join("ZZZZZZZZ", "Awa", null, dv(), false), 1_000L) }
         val st = outs.filter { it.to == "tv" }.map { it.msg }.filterIsInstance<ServerMsg.State>().single()
         @Suppress("UNCHECKED_CAST") assertEquals(RoomCode.display(r.code), (st.view["room"] as Map<String, Any?>)["code"])
         assertNotEquals(RoomCode.display(old), RoomCode.display(r.code))
@@ -70,15 +70,15 @@ class RoomCodeTest {
     @Test fun perIpBlockStopsGuessingEvenWithTheRightRoom() {
         val r = room()
         r.handle("tv", ClientMsg.Create(null, null), 0)
-        repeat(10) { r.handle("x", ClientMsg.Join("ZZZZZZZZ", "Awa", null, null, false), 1_000L + it, ip = "9.9.9.9") }
-        assertEquals(PlayReason.PLAY_BAD_CODE.name, err(r.handle("x", ClientMsg.Join(r.code, "Awa", null, null, false), 2_000, ip = "9.9.9.9")), "IP bloquée même avec le bon code")
-        assertEquals("PLAYER", (r.handle("y", ClientMsg.Join(r.code, "Awa", null, null, false), 2_000, ip = "8.8.8.8").map { it.msg }.filterIsInstance<ServerMsg.Welcome>().single().role.name))
+        repeat(10) { r.handle("x", ClientMsg.Join("ZZZZZZZZ", "Awa", null, dv(), false), 1_000L + it, ip = "9.9.9.9") }
+        assertEquals(PlayReason.PLAY_BAD_CODE.name, err(r.handle("x", ClientMsg.Join(r.code, "Awa", null, dv(), false), 2_000, ip = "9.9.9.9")), "IP bloquée même avec le bon code")
+        assertEquals("PLAYER", (r.handle("y", ClientMsg.Join(r.code, "Awa", null, dv(), false), 2_000, ip = "8.8.8.8").map { it.msg }.filterIsInstance<ServerMsg.Welcome>().single().role.name))
     }
 
     @Test fun codeExpiresAfterTwoHoursRoomGone() {
         val r = room()
         r.handle("tv", ClientMsg.Create(null, null), 0)
-        assertEquals(PlayReason.PLAY_ROOM_GONE.name, err(r.handle("late", ClientMsg.Join(r.code, "Awa", null, null, false), RoomCode.TTL_MS)))
+        assertEquals(PlayReason.PLAY_ROOM_GONE.name, err(r.handle("late", ClientMsg.Join(r.code, "Awa", null, dv(), false), RoomCode.TTL_MS)))
         val gone = r.tick(RoomCode.TTL_MS)
         assertTrue(gone.any { it.msg is ServerMsg.RoomGone && it.to == "tv" })
         assertEquals(ServerRoom.State.GONE, r.phase())
