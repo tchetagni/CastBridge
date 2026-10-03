@@ -10,8 +10,15 @@ class PilotRegistryTest {
     @Test fun formatAndParseRoundTrip() {
         val r = PilotRegistry().append(e()).append(e(date = "2026-10-15", bundle = "classe-cp", period = 2000L, unit = "defaut", qty = 7, days = 7))
         val csv = r.format()
-        assertEquals("date,licence,code,bouquet,period,unite,quantite,jours,type", csv.lines().first())
-        assertEquals("2026-10-14,LIC-1,AB…89,classe-cm2,1000,heures,12,30,nouvelle", csv.lines()[1])
+        assertEquals("date,licence,code,bouquet,period,unite,quantite,jours,type,install", csv.lines().first())
+        assertEquals("2026-10-14,LIC-1,AB…89,classe-cm2,1000,heures,12,30,nouvelle,-", csv.lines()[1], "no installation fingerprint: a dash")
+        val withFp = PilotRegistry().append(PilotRegistry.Entry("2026-10-14", "L", "AB…89", "b", 1, "heures", 1, 1, "nouvelle", PilotRegistry.fingerprint("pub-A")))
+        assertEquals(withFp.entries, PilotRegistry.parse(withFp.format()).entries)
+        assertEquals(16, withFp.entries.single().installFp.length); assertTrue(withFp.entries.single().installFp.matches(Regex("[0-9a-f]{16}")), "a fingerprint, never the key")
+        assertNotEquals(PilotRegistry.fingerprint("pub-A"), PilotRegistry.fingerprint("pub-B")); assertEquals(PilotRegistry.fingerprint("pub-A"), PilotRegistry.fingerprint("pub-A"))
+        assertFalse(withFp.format().contains("pub-A"))
+        assertEquals(1, PilotRegistry.parse("date,licence,code,bouquet,period,unite,quantite,jours,type\n2026-10-14,L,AB…89,b,1,heures,1,1,nouvelle\n").entries.size, "a register written before the install column still reads")
+        assertFailsWith<IllegalArgumentException> { PilotRegistry.Entry("2026-10-14", "L", "AB…89", "b", 1, "heures", 1, 1, "nouvelle", "not-a-fingerprint") }
         assertEquals(r.entries, PilotRegistry.parse(csv).entries)
         assertEquals(r.entries, PilotRegistry.parse(csv.replace("\n", "\r\n") + "\r\n\r\n").entries, "CRLF and blank lines tolerated")
         assertEquals(emptyList(), PilotRegistry.parse("").entries)
@@ -73,14 +80,62 @@ class PilotRegistryTest {
         val t = r.append(e(lic = "LIC-3", date = "2026-10-11T09:30", qty = 4, period = 9L))
         assertEquals(4, t.hoursIssuedLast168h("LIC-3", at("2026-10-18", 9, 29)), "inside by one minute")
         assertEquals(0, t.hoursIssuedLast168h("LIC-3", at("2026-10-18", 9, 30)), "exactly 168 h later: out (the window is open at its start)")
-        assertEquals(0, t.hoursIssuedLast168h("LIC-3", at("2026-10-11", 9, 0)), "an entry in the future is not counted")
+        assertEquals(4, t.hoursIssuedLast168h("LIC-3", at("2026-10-11", 9, 0)), "an entry a little in the future (another issuer's clock ahead) counts, up to now + 168 h")
+        assertEquals(4, t.hoursIssuedLast168h("LIC-3", at("2026-10-04", 9, 30)), "exactly 168 h ahead: still counted")
+        assertEquals(0, t.hoursIssuedLast168h("LIC-3", at("2026-10-04", 9, 29)), "a minute further: not counted")
+        assertEquals(122, r.hoursIssuedLast168h("LIC-1", at("2026-10-14", 12)), "date-only entries unchanged")
+        assertEquals(122, r.hoursIssuedLast168h("LIC-1", at("2026-10-10", 12)), "date-only entries up to 168 h ahead count as well")
         assertEquals(t.entries, PilotRegistry.parse(t.format()).entries)
     }
 
-    @Test fun aReissueOfLessThanAnHourIsAcceptedOtherTypesNeedAnHour() {
-        assertEquals(1, PilotRegistry().append(e(qty = 3)).append(e(type = "reemission", qty = 0, date = "2026-10-15", period = 1000L)).entries.size - 1)
+    @Test fun everyQuantityIsAtLeastOne() {
         assertFailsWith<IllegalArgumentException> { e(qty = 0) }
         assertFailsWith<IllegalArgumentException> { e(qty = 0, type = "prolongation") }
+        assertFailsWith<IllegalArgumentException>("a reissue of less than an hour is recorded rounded UP: 1 at least, so it counts in the quota") { e(qty = 0, type = "reemission") }
+    }
+
+    @Test fun theTypeIsPartOfTheDuplicate() {
+        val r = PilotRegistry().append(e(qty = 3))
+        assertFalse(r.isDuplicate(e(qty = 3, type = "prolongation")), "a new rental of 3 h and an extension of 3 h on the same day are two orders")
+        assertEquals(2, r.append(e(qty = 3, type = "prolongation", period = 1000L)).entries.size)
+        assertTrue(r.isDuplicate(e(qty = 3, period = 55L)))
+    }
+
+    @Test fun summaryFollowsTheEnginesRule() {
+        val t0 = 1_800_000_000_000L; val D = 24L * 3600 * 1000
+        val fp = PilotRegistry.fingerprint("pub-A")
+        fun ent(date: String, bundle: String, period: Long, unit: String, q: Int, days: Int, type: String) = PilotRegistry.Entry(date, "LIC", "AB…89", bundle, period, unit, q, days, type, fp)
+        val r = PilotRegistry().append(ent("2026-10-12", "b1", t0, "heures", 12, 30, "nouvelle")).append(ent("2026-10-14", "b1", t0, "heures", 6, 1, "prolongation"))
+            .append(ent("2026-10-15", "b1", t0, "heures", 2, 1, "reemission"))
+            .append(ent("2026-10-12", "b2", t0, "jours", 7, 7, "nouvelle")).append(ent("2026-10-16", "b2", t0, "jours", 14, 14, "prolongation"))
+            .append(ent("2026-10-12", "b3", t0, "defaut", 30, 30, "nouvelle"))
+        val h = r.summary("LIC", "b1", t0 + 3 * D)!!
+        assertEquals(ContractSummary("loc-b1", t0, RentalUnit.HOURS, 20 * 60, t0 + 32 * D, reissues = 1, endedAt = null, installPub = fp), h)
+        val d = r.summary("LIC", "b2", t0)!!
+        assertEquals(RentalUnit.DAYS, d.unit); assertEquals(0, d.maxUsageMinutes); assertEquals(t0 + 21 * D, d.endsAt)
+        assertEquals(RentalUnit.DAYS, r.summary("LIC", "b3", t0)!!.unit); assertEquals(t0 + 30 * D, r.summary("LIC", "b3", t0)!!.endsAt)
+        assertNull(r.summary("LIC", "b4", t0)); assertNull(r.summary("OTHER", "b1", t0))
+        val big = PilotRegistry().append(ent("2026-10-12", "b1", t0, "heures", 90, 30, "nouvelle")).append(ent("2026-10-13", "b1", t0, "heures", 30, 1, "prolongation"))
+        assertEquals(96 * 60, big.summary("LIC", "b1", t0)!!.maxUsageMinutes, "clamped at 96 h like the engine")
+        val second = r.append(ent("2026-10-20", "b1", t0 + 8 * D, "heures", 3, 20, "nouvelle"))
+        assertEquals(t0 + 8 * D, second.summary("LIC", "b1", t0 + 9 * D)!!.period, "the rental in progress is the latest period")
+    }
+
+    @Test fun aReadFromTheBackupIsRefusedFailClosed() {
+        val dir = java.nio.file.Files.createTempDirectory("pilot-registry-bak").toFile()
+        try {
+            val f = java.io.File(dir, "r.csv")
+            PilotRegistry.update(f) { it.append(e(lic = "A1")) }
+            PilotRegistry.update(f) { it.append(e(lic = "A2", period = 2000L)) }      // main = 2 entries, .bak = 1 entry (the stale copy)
+            f.writeText("corrompu\n")
+            assertTrue(castbridge.core.owner.SafeFile.read(f) { runCatching { PilotRegistry.parse(it) }.isSuccess }!!.fromBackup, "it is the backup that answers")
+            val m = assertFailsWith<IllegalStateException> { PilotRegistry.load(f) }.message!!
+            assertTrue(m.contains("à vérifier"), m)
+            val before = f.readText()
+            assertFailsWith<IllegalStateException> { PilotRegistry.update(f) { it.append(e(lic = "A3", period = 3000L)) } }
+            assertEquals(before, f.readText(), "nothing is written from a stale copy")
+            assertEquals(1, java.io.File(dir, "r.csv.bak").readText().lines().count { it.startsWith("2026") }, "the .bak keeps its content (1 entry)")
+        } finally { dir.deleteRecursively() }
     }
 
     @Test fun theTvCodeMustBeMasked() {
@@ -108,8 +163,6 @@ class PilotRegistryTest {
             } finally { pool.shutdown() }
             assertEquals(25, PilotRegistry.load(f).entries.size, "24 simultaneous issuings plus the first: none lost")
             assertTrue(java.io.File(dir, "pilot-rentals.csv.bak").isFile, "the last good copy is kept (SafeFile)")
-            f.writeText("n'importe quoi\n")      // a corrupt main file falls back to the last good copy
-            assertTrue(PilotRegistry.load(f).entries.size >= 24)
         } finally { dir.deleteRecursively() }
     }
 }

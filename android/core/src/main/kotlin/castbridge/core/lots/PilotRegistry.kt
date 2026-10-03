@@ -20,7 +20,7 @@ class PilotRegistry(val entries: List<Entry> = emptyList()) {
      * days; 0 is accepted for a REISSUE of less than an hour: the caller then records the hours rounded up, 1 at least); [days] = days of validity written in the line;
      * [type]: `nouvelle`, `prolongation`, `reemission`; [maskedCode]: see [mask].
      */
-    data class Entry(val date: String, val license: String, val maskedCode: String, val bundle: String, val period: Long, val unit: String, val quantity: Int, val days: Int, val type: String) {
+    data class Entry(val date: String, val license: String, val maskedCode: String, val bundle: String, val period: Long, val unit: String, val quantity: Int, val days: Int, val type: String, val installFp: String = "") {
         init {
             try { if (date.contains('T')) LocalDateTime.parse(date) else LocalDate.parse(date) } catch (e: DateTimeParseException) { throw IllegalArgumentException("date « $date » : AAAA-MM-JJ ou AAAA-MM-JJTHH:MM attendu") }
             for ((n, v) in listOf("licence" to license, "code" to maskedCode, "bouquet" to bundle, "unité" to unit, "type" to type))
@@ -28,19 +28,26 @@ class PilotRegistry(val entries: List<Entry> = emptyList()) {
             if (!MASKED.matches(maskedCode)) throw IllegalArgumentException("code TV « $maskedCode » : le registre ne garde qu'un code MASQUÉ (2 caractères, « … », 2 caractères : PilotRegistry.mask)")
             if (unit !in UNITS) throw IllegalArgumentException("unité « $unit » : heures, jours ou defaut")
             if (type !in TYPES) throw IllegalArgumentException("type « $type » : nouvelle, prolongation ou reemission")
-            if (period <= 0 || days < 1 || quantity < (if (type == "reemission") 0 else 1)) throw IllegalArgumentException("period, quantité et jours : des nombres positifs (une réémission peut avoir 0 heure entière)")
+            if (period <= 0 || days < 1 || quantity < 1) throw IllegalArgumentException("period, quantité et jours : des nombres positifs (une réémission de moins d'une heure s'écrit 1 : arrondi supérieur)")
+            if (installFp.isNotEmpty() && !FP.matches(installFp)) throw IllegalArgumentException("empreinte d'installation « $installFp » : 16 caractères hexadécimaux attendus (jamais la clé elle-même)")
         }
         val day: String get() = date.take(10)
-        fun line() = listOf(date, license, maskedCode, bundle, period, unit, quantity, days, type).joinToString(",")
+        fun line() = listOf(date, license, maskedCode, bundle, period, unit, quantity, days, type, installFp.ifEmpty { "-" }).joinToString(",")
     }
 
     companion object {
         val UNITS = setOf("heures", "jours", "defaut")
         val TYPES = setOf("nouvelle", "prolongation", "reemission")
-        const val HEADER = "date,licence,code,bouquet,period,unite,quantite,jours,type"
+        const val HEADER = "date,licence,code,bouquet,period,unite,quantite,jours,type,install"
+        private const val OLD_HEADER = "date,licence,code,bouquet,period,unite,quantite,jours,type"
+        private val FP = Regex("^[0-9a-f]{16}$")
         private val MASKED = Regex("^[A-Za-z0-9]{1,3}…[A-Za-z0-9]{1,3}$")
         private const val WINDOW_MS = 168L * 3600 * 1000
         private val MONITOR = Any()
+
+        /** What the register keeps of an installation key: the first 16 hex characters of its SHA-256 (a fingerprint, never the key). */
+        fun fingerprint(installPub: String): String =
+            java.security.MessageDigest.getInstance("SHA-256").digest(installPub.toByteArray(Charsets.UTF_8)).take(8).joinToString("") { "%02x".format(it) }
 
         /** The only form of a TV code the register keeps: the first 2 and the last 2 characters of the code (8 or more letters and digits), joined by « … ». Idempotent. */
         fun mask(code: String): String {
@@ -51,12 +58,12 @@ class PilotRegistry(val entries: List<Entry> = emptyList()) {
         }
 
         /** Reads the file's text (CRLF, blank lines and the header line tolerated); a bad line = IllegalArgumentException « ligne N … » (French). */
-        fun parse(csv: String): PilotRegistry = PilotRegistry(csv.replace("\r", "").lines().withIndex().filter { (_, l) -> l.isNotBlank() && l.trim() != HEADER }.map { (i, l) ->
+        fun parse(csv: String): PilotRegistry = PilotRegistry(csv.replace("\r", "").lines().withIndex().filter { (_, l) -> l.isNotBlank() && l.trim() != HEADER && l.trim() != OLD_HEADER }.map { (i, l) ->
             val f = l.trim().split(',')
             try {
-                if (f.size != 9) throw IllegalArgumentException("9 champs attendus, ${f.size} trouvés")
+                if (f.size != 9 && f.size != 10) throw IllegalArgumentException("9 ou 10 champs attendus, ${f.size} trouvés")
                 Entry(f[0], f[1], f[2], f[3], f[4].toLongOrNull() ?: throw IllegalArgumentException("period : un nombre est attendu"), f[5], f[6].toIntOrNull() ?: throw IllegalArgumentException("quantité : un nombre est attendu"),
-                    f[7].toIntOrNull() ?: throw IllegalArgumentException("jours : un nombre est attendu"), f[8])
+                    f[7].toIntOrNull() ?: throw IllegalArgumentException("jours : un nombre est attendu"), f[8], f.getOrNull(9)?.let { if (it == "-") "" else it } ?: "")
             } catch (e: IllegalArgumentException) { throw IllegalArgumentException("Registre du pilote, ligne ${i + 1} illisible : ${e.message}") }
         })
 
@@ -67,6 +74,8 @@ class PilotRegistry(val entries: List<Entry> = emptyList()) {
                 if (file.exists() || SafeFile.bak(file).exists()) throw IllegalStateException("Registre du pilote illisible (ni ${file.name} ni sa copie .bak) : ne rien émettre avant de l'avoir réparé")
                 return PilotRegistry()
             }
+            // FAIL-CLOSED: the .bak is the state BEFORE the last write. Issuing from it would write a stale register over the real one (last issuing lost, quota undercounted, period in progress forgotten).
+            if (r.fromBackup) throw IllegalStateException("Registre à vérifier : ${file.name} est illisible et seule la copie précédente (.bak) répond ; rien n'est émis ni écrit tant que le registre n'a pas été contrôlé (copiez le .bak à la main après vérification)")
             return parse(r.text)
         }
 
@@ -88,13 +97,30 @@ class PilotRegistry(val entries: List<Entry> = emptyList()) {
 
     fun format(): String = (listOf(HEADER) + entries.map { it.line() }).joinToString("\n", postfix = "\n")
 
+    /**
+     * The contract in progress for (licence, bundle) as the TV engine will merge it ([RentalEngine.contracts], pinned by a test): the latest `period` not after [now]; `endsAt = period + Σ days`
+     * of the lines of that period (new, extensions, reissues: every line adds its days, a renewal always starts before the running end); budget = Σ hours × 60 of the lines of the SAME unit as
+     * the first one (the engine ignores the others), clamped at 96 h like the engine; `reissues` = number of `reemission` lines; `installPub` = the FINGERPRINT of the first line's installation
+     * (null when unknown). `endedAt` is unknown to the register (null). Null when there is no such contract.
+     */
+    fun summary(license: String, bundle: String, now: Long): ContractSummary? {
+        val mine = entries.filter { it.license == license && it.bundle == bundle }
+        val period = mine.map { it.period }.filter { it <= now }.maxOrNull() ?: return null
+        val all = mine.filter { it.period == period }
+        val first = all.first()
+        val hourly = first.unit == "heures"
+        val lines = all.filter { (it.unit == "heures") == hourly }
+        val budget = if (hourly) minOf(lines.sumOf { it.quantity.toLong() * 60 }, PilotParams.HARD_CAP_HOURS * 60L).toInt() else 0
+        return ContractSummary("loc-$bundle", period, if (hourly) RentalUnit.HOURS else RentalUnit.DAYS, budget, period + lines.sumOf { it.days.toLong() } * RentalLines.DAY_MS,
+            reissues = all.count { it.type == "reemission" }, endedAt = null, installPub = first.installFp.ifEmpty { null })
+    }
     fun find(license: String): List<Entry> = entries.filter { it.license == license }
 
     /** The `period` of the rental in progress for (licence, bundle): the highest one issued, or null. */
     fun latestPeriod(license: String, bundle: String): Long? = entries.filter { it.license == license && it.bundle == bundle }.maxOfOrNull { it.period }
 
-    /** Same licence, bundle, choice (unit and quantity) and day: the same order issued twice (the tool then asks for `--encore`). */
-    fun isDuplicate(e: Entry): Boolean = entries.any { it.license == e.license && it.bundle == e.bundle && it.unit == e.unit && it.quantity == e.quantity && it.day == e.day }
+    /** Same licence, bundle, choice (unit and quantity), day and TYPE (a new rental and an extension of the same size are two orders): the same order issued twice (the tool then asks for `--encore`). */
+    fun isDuplicate(e: Entry): Boolean = entries.any { it.license == e.license && it.bundle == e.bundle && it.unit == e.unit && it.quantity == e.quantity && it.day == e.day && it.type == e.type }
 
     /**
      * Hours of use issued to [license] over the 168 SLIDING hours ending at [nowMs] (the quota, `rental.hourly.weeklyQuotaHours`): new rentals, extensions AND reissues in hours (a reissue
@@ -102,10 +128,11 @@ class PilotRegistry(val entries: List<Entry> = emptyList()) {
      */
     fun hoursIssuedLast168h(license: String, nowMs: Long): Int {
         val lower = nowMs - WINDOW_MS
-        val today = PilotParams.dateOf(nowMs)
+        val upper = nowMs + WINDOW_MS      // an entry written by an issuer whose clock is ahead still counts, up to 168 h ahead
+        val lastDay = PilotParams.dateOf(upper)
         return entries.filter { it.license == license && it.unit == "heures" }.filter { e ->
-            if (e.date.contains('T')) LocalDateTime.parse(e.date).toInstant(PilotParams.DOUALA).toEpochMilli().let { it > lower && it <= nowMs }
-            else LocalDate.parse(e.date).let { !it.isAfter(today) && PilotParams.endOfDay(it) > lower }
+            if (e.date.contains('T')) LocalDateTime.parse(e.date).toInstant(PilotParams.DOUALA).toEpochMilli().let { it > lower && it <= upper }
+            else LocalDate.parse(e.date).let { !it.isAfter(lastDay) && PilotParams.endOfDay(it) > lower }
         }.sumOf { it.quantity }
     }
 

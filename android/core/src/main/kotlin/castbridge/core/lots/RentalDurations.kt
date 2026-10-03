@@ -48,6 +48,8 @@ object RentalDurations {
      * engine's clamp, never above) with 1 to `hourly.validityDays` days of safety; no grace; 1 to `maxConcurrent` simultaneous. State-dependent rules (quota, contracts, window) are [PilotRules].
      */
     fun checkChosen(spec: RentalSpec, catalog: BundleCatalog, params: PilotParams): String? {
+        // defence in depth: Langues / free bundles (type, id prefix, `freeBundles`) are refused here too, before any duration is looked at, in BOTH modes
+        spec.bundleIds.forEach { id -> catalog.find(id)?.let { PilotRules.languagesRefusal(it, params) }?.let { return it } }
         if (!params.userChosen) return check(spec, catalog) ?: if (spec.maxUsageMinutes != 0) "la durée est fixée par le serveur : pas de plafond d'usage choisi" else null
         if (spec.bundleIds.size != 1) return "une location par bouquet : ${spec.bundleIds.size} bouquets demandés"
         val b = catalog.find(spec.bundleIds.single()) ?: return "bouquet inconnu : ${spec.bundleIds.single()}"

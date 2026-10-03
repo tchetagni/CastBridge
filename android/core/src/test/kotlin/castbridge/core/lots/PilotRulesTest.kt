@@ -34,8 +34,11 @@ class PilotRulesTest {
         ContractSummary("loc-classe-cm2", period, RentalUnit.HOURS, h * 60, at(endsDay), reissues, installPub = "OLD")
     private fun daily(period: Long = at("2026-10-12"), endsDay: String = "2026-11-11", reissues: Int = 0) =
         ContractSummary("loc-classe-cm2", period, RentalUnit.DAYS, 0, at(endsDay), reissues, installPub = "OLD")
-    private fun reissue(c: ContractSummary, used: Int, now: Long = at("2026-10-20"), newPub: String? = "NEW", state: LicenseState = none, params: PilotParams = p, bundleCatalog: BundleCatalog = catalog) =
-        PilotRules.reissue(c, used, now, newPub, state, params, bundleCatalog, families)
+    private fun reissue(c: ContractSummary, used: Int, now: Long = at("2026-10-20"), newPub: String? = "NEW", state: LicenseState = none, params: PilotParams = p, bundleCatalog: BundleCatalog = catalog, open: Boolean = true): Result<RentalSpec> {
+        // `open = true` flips the internal flag for the rules of the future reissue (tranche 2); the default of the product is CLOSED (see reissueIsClosedInTheFirstTranche)
+        val before = PilotRules.allowReissue; PilotRules.allowReissue = open
+        try { return PilotRules.reissue(c, used, now, newPub, state, params, bundleCatalog, families) } finally { PilotRules.allowReissue = before }
+    }
 
     // ---- the three choices ------------------------------------------------------------------------------------------------------------------------------------------------
     @Test fun defaultChoiceIsThirtyDaysWithoutBudget() {
@@ -123,6 +126,40 @@ class PilotRulesTest {
         var c = hourly(1); var total = 1; var n = 0
         while (true) { val r = extend(Choice.Hours(1), c, day = "2026-10-14"); if (r.isFailure) break; n++; total++; c = c.copy(maxUsageMinutes = total * 60, endsAt = maxOf(c.endsAt, at("2026-10-14")) + DAY) }
         assertTrue(c.endsAt <= e16 && n in 1..96, "stopped by the 16/11 or by 96 h (n=$n)")
+    }
+
+    @Test fun fiveExtensionsInARowFromTheRegistryNeverPassTheSixteenth() {
+        // the summary comes from the REGISTER and follows the engine's rule: the 16/11 bound is then checked against the true merged end (audit I3)
+        val t0 = at("2026-10-12"); val e16 = at("2026-11-16", 23, 59, 59, 999)
+        val lic = "LIC-9"; val b = "classe-cm2"
+        var reg = PilotRegistry().append(PilotRegistry.Entry("2026-10-12", lic, "AB…89", b, t0, "heures", 12, 30, "nouvelle", PilotRegistry.fingerprint("OLD")))
+        val lines = arrayListOf(line(RentalSpec("loc-classe-cm2", listOf(b), 30, 720, 0, 3, null), t0))
+        for (i in 0 until 5) {
+            val day = "2026-10-${14 + i}"; val now = at(day)
+            val s = reg.summary(lic, b, now)!!
+            val ext = PilotRules.extend(Choice.Hours(1), s, b, catalog, now, LicenseState(listOf(s), reg.hoursIssuedLast168h(lic, now).toInt()), p, families).getOrThrow()
+            reg = reg.append(PilotRegistry.Entry(day, lic, "AB…89", b, t0, "heures", 1, ext.days, "prolongation", PilotRegistry.fingerprint("OLD")))
+            lines += line(ext, now)
+            val merged = RentalEngine.contracts(listOf(act(*lines.toTypedArray()))).single()
+            val after = reg.summary(lic, b, now)!!
+            assertEquals(merged.endsAt, after.endsAt, "register summary = engine end (extension ${i + 1})")
+            assertEquals(merged.maxUsageMinutes, after.maxUsageMinutes.toLong(), "register summary = engine budget (extension ${i + 1})")
+            assertTrue(merged.endsAt <= e16, "never past 16/11 23:59:59.999")
+        }
+        assertEquals(at("2026-11-16"), reg.summary(lic, b, at("2026-10-19"))!!.endsAt, "12/10 + 30 days + 5 renewal days")
+        val sixth = reg.summary(lic, b, at("2026-10-19"))!!
+        assertTrue(refusal(PilotRules.extend(Choice.Hours(1), sixth, b, catalog, at("2026-10-19"), LicenseState(listOf(sixth)), p, families)).contains("16/11"), "the sixth would end on the 17th")
+    }
+
+    @Test fun hugeHourCountsAreRefusedWithoutOverflow() {
+        val c = hourly(3)
+        for (h in listOf(97, 71582789, Int.MAX_VALUE)) {
+            assertTrue(spec(Choice.Hours(h)).isFailure, "spec $h")
+            assertTrue(extend(Choice.Hours(h), c, params = p.copy(weeklyQuotaHours = 0)).isFailure, "extend $h without quota")
+            assertTrue(extend(Choice.Hours(h), c).isFailure, "extend $h with quota")
+            assertTrue(extend(Choice.Hours(h), c, state = LicenseState(listOf(c), hoursIssuedLast7d = Int.MAX_VALUE)).isFailure, "extend $h, state at the limit")
+        }
+        assertTrue(spec(Choice.Hours(1), state = LicenseState(hoursIssuedLast7d = Int.MAX_VALUE)).isFailure, "a state at Int.MAX never wraps around the quota")
     }
 
     @Test fun initialHourlyIssueIsStillBoundedByTheFifteenth() {
@@ -234,7 +271,41 @@ class PilotRulesTest {
         assertTrue(reissue(daily(), 0, at("2026-10-14"), params = off).isFailure)
     }
 
-    // ---- reissue after a reinstall ------------------------------------------------------------------------------------------------------------------------------------------
+    // ---- reissue: CLOSED in the first tranche (audit B1) ---------------------------------------------------------------------------------------------------------------------
+    @Test fun reissueIsClosedInTheFirstTranche() {
+        assertFalse(PilotRules.allowReissue, "closed by default, never switched by a setting")
+        val msg = "Réémission indisponible pendant le pilote : la preuve d'installation n'est pas encore en place ; le contrat d'origine reste valable ; contactez le propriétaire"
+        for (c in listOf(hourly(12), daily(), hourly(12, reissues = 0).copy(installPub = null)))
+            assertEquals(msg, refusal(reissue(c, 300, open = false)), "whatever the contract and the key")
+        assertEquals(msg, refusal(reissue(hourly(12), 300, newPub = "NEW", open = false)))
+        assertTrue(PilotRules.allowReissue.not())
+        val m = assertFailsWith<IllegalArgumentException> { PilotParams.parse("""{"pilot.start":"2026-10-12","pilot.end":"2026-11-01","allowReissue":true}""") }.message!!
+        assertTrue(m.contains("allowReissue") && m.contains("inconnue"), "pilot.json cannot open it: $m")
+    }
+
+    @Test fun theEngineMergesAReissueWithTheOriginalLineSoTheReissueStaysClosed() {
+        // Why (audit B1): the engine groups by (product, period) and ignores the envelope; the rental key does not depend on the installation. A reissue imported on top of the
+        // original activation gives the end twice and the budget back. This test pins the ENGINE behaviour so that a future reissue (tranche 2: proof of installation W5 § 3.4 a, or a new
+        // period counted in the 3 active contracts with the old one marked ended) cannot regress silently: it must keep end <= original end and budget <= rest.
+        val t = at("2026-11-01")
+        val origin = line(RentalSpec("loc-classe-cm2", listOf("classe-cm2"), 14, 96 * 60, 0, 3, null), t)      // 96 h issued on 01/11 12:00: ends 15/11 12:00
+        val oc = ContractSummary("loc-classe-cm2", t, RentalUnit.HOURS, 96 * 60, t + 14 * DAY, installPub = "OLD")
+        val re = reissue(oc, 50 * 60, at("2026-11-02")).getOrThrow()      // 46 h, 13 days
+        assertEquals(46 * 60, re.maxUsageMinutes)
+        val merged = RentalEngine.contracts(listOf(act(origin), act(line(re, at("2026-11-02"))))).single()
+        assertTrue(merged.endsAt > oc.endsAt, "DEFECT of merging: the end goes past the original end (${merged.endsAt} > ${oc.endsAt})")
+        assertEquals(at("2026-11-28"), merged.endsAt)
+        assertTrue(merged.maxUsageMinutes > re.maxUsageMinutes, "DEFECT of merging: the budget given back (${merged.maxUsageMinutes} > ${re.maxUsageMinutes})")
+        // days
+        val dOrigin = line(RentalSpec("loc-classe-cm2", listOf("classe-cm2"), 30, 0, 0, 3, null), t)      // 30 days from 01/11 12:00: ends 01/12 12:00
+        val dc = ContractSummary("loc-classe-cm2", t, RentalUnit.DAYS, 0, t + 30 * DAY, installPub = "OLD")
+        val dre = reissue(dc, 0, at("2026-11-02")).getOrThrow()
+        assertEquals(29, dre.days)
+        val dm = RentalEngine.contracts(listOf(act(dOrigin), act(line(dre, at("2026-11-02"))))).single()
+        assertTrue(dm.endsAt > dc.endsAt, "DEFECT of merging: 30/12 after 01/12"); assertEquals(at("2026-12-30"), dm.endsAt)
+    }
+
+    // ---- reissue after a reinstall (rules kept behind the internal flag for the tranche 2) ------------------------------------------------------------------------------------------------------------------------------------------
     @Test fun reissueGivesTheRemainderAtMostThreeTimes() {
         val c = hourly(12)      // period 12/10, ends 11/11 12:00
         val r = reissue(c, 300).getOrThrow()
