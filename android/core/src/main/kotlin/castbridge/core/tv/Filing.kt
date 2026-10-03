@@ -51,7 +51,7 @@ object Filing {
 
     private val PACKAGES = listOf(".learn.zip", ".lot.zip", ".quiz.zip")
     private val APP_FAMILY = setOf("apk", "xapk", "apks", "apkm", "aab")
-    private val MIME_EXT = mapOf(
+    internal val MIME_EXT = mapOf(
         "video/mp4" to "mp4", "video/x-matroska" to "mkv", "video/webm" to "webm", "video/quicktime" to "mov", "video/x-msvideo" to "avi", "video/3gpp" to "3gp", "video/mpeg" to "mpg",
         "audio/mpeg" to "mp3", "audio/mp4" to "m4a", "audio/aac" to "aac", "audio/flac" to "flac", "audio/ogg" to "ogg", "audio/opus" to "opus", "audio/wav" to "wav", "audio/x-wav" to "wav",
         "image/jpeg" to "jpg", "image/png" to "png", "image/webp" to "webp", "image/heic" to "heic", "image/gif" to "gif",
@@ -186,12 +186,13 @@ object Filing {
      * The one-off « Ranger ma bibliothèque »: what each FLAT file would become. Nothing moves here (dry run). A protected, busy, installer or
      * oversized file is [Plan.skipped] with its reason; names are made unique against [taken] AND against the other moves of the plan.
      */
-    fun plan(files: List<PlanFile>, lang: String = "fr", currentYear: Int = java.time.LocalDate.now().year, taken: (String) -> Boolean): Plan {
+    fun plan(files: List<PlanFile>, lang: String = "fr", currentYear: Int = java.time.LocalDate.now().year,
+             classifier: (PlanFile) -> Result = { f -> classify(f.name, null, f.size, f.meta, lang, currentYear) }, taken: (String) -> Boolean): Plan {
         val moves = ArrayList<Move>(); val skipped = ArrayList<Pair<String, String>>()
         val reserved = HashSet<String>()           // lowercase final names already given by this plan
         fun one(f: PlanFile): String? {                      // null = planned, else why it is skipped
             f.skip?.let { return it }
-            val r = classify(f.name, null, f.size, f.meta, lang, currentYear)
+            val r = classifier(f)
             if (r.keepFlat && r.category != Category.APPS) return "reste où il est (utilisé par son nom)"
             val res = if (r.keepFlat) Result(Category.APPS, Labels(lang).apps, f.name, "app") else r
             sizeRefusal(f.size, f.fs)?.let { return it }

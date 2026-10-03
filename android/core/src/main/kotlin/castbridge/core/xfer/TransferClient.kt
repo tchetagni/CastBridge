@@ -23,7 +23,9 @@ interface TransferApi {
     fun abort(id: String)
 }
 
-class HttpTransferApi(private val baseOf: () -> String?, private val credential: () -> String?) : TransferApi {
+class HttpTransferApi(private val baseOf: () -> String?, private val credential: () -> String?,
+                      /** The phone's « classer dans des dossiers » option is off (R-13): `filing=0` on begin, the TV keeps the file flat. */
+                      private val noFiling: Boolean = false) : TransferApi {
     constructor(base: String, credential: () -> String?) : this({ base }, credential)
 
     private fun call(method: String, path: String): Pair<Int, String> {
@@ -45,7 +47,7 @@ class HttpTransferApi(private val baseOf: () -> String?, private val credential:
     }
 
     override fun begin(m: Manifest, target: String?, discard: Boolean): TransferApi.Begin {
-        val (code, body) = call("POST", "/api/transfer/begin?name=${TvClient.enc(m.name)}&size=${m.size}&blockSize=${m.blockSize}" + (target?.let { "&target=${TvClient.enc(it)}" } ?: "") + if (discard) "&discard=1" else "")
+        val (code, body) = call("POST", "/api/transfer/begin?name=${TvClient.enc(m.name)}&size=${m.size}&blockSize=${m.blockSize}" + (target?.let { "&target=${TvClient.enc(it)}" } ?: "") + (if (discard) "&discard=1" else "") + if (noFiling) "&filing=0" else "")
         if (code == 503 && "verifying" in body) throw TransferApi.Verifying(TvClient.num(body, "retryMs") ?: 2000)
         if (code in 500..599 && code != 507) throw IOException("TV : $code ${body.take(80)}")
         if (code != 200) throw TransferApi.Refused(code, TvClient.str(body, "message") ?: TvClient.str(body, "error") ?: "refusé par la TV ($code)")

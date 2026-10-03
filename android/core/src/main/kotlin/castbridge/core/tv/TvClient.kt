@@ -18,6 +18,9 @@ class TvClient(val base: String, val pin: String? = null) {
     fun part(name: String, size: Long? = null): Part = parsePart(call("GET", "/api/part?name=${enc(name)}" + (size?.let { "&size=$it" } ?: "")))
     fun reset(name: String) = call("POST", "/api/reset?name=${enc(name)}")
     fun info(): String = call("GET", "/api/info")
+    /** GET /api/have (R-12): a finished file of [size] bytes (and of that SHA-256) on the TV? An older TV answers 404 (HttpError): treat as unknown. */
+    fun have(size: Long, sha256: String? = null, fresh: Boolean = false): String =
+        call("GET", "/api/have?size=$size" + (sha256?.let { "&sha256=$it" } ?: "") + if (fresh) "&fresh=1" else "")
     fun play(name: String, posMs: Long = 0) = call("POST", "/api/play?name=${enc(name)}&pos=$posMs")
     /** Plays an http(s) link on the TV (nothing stored). 404 on a TV older than this route. */
     fun playUrl(url: String, title: String, posMs: Long = 0) = call("POST", "/api/playurl?url=${enc(url)}&title=${enc(title)}&pos=$posMs")
@@ -111,9 +114,10 @@ class TvClient(val base: String, val pin: String? = null) {
 
     /** Sends bytes [offset, total) read from [src]. Throws [Conflict] if the TV holds a different offset. */
     fun upload(name: String, offset: Long, total: Long, src: InputStream, maxBytesPerSec: Long = 0, target: String? = null,
-               bufferBytes: Int = UPLOAD_BUFFER, onBytes: (Long) -> Unit): Part {
+               bufferBytes: Int = UPLOAD_BUFFER, noFiling: Boolean = false, onBytes: (Long) -> Unit): Part {
         val throttle = if (maxBytesPerSec > 0) Throttle(maxBytesPerSec) else null
-        val c = open("PUT", "/upload/${enc(name)}?offset=$offset&total=$total" + (target?.let { "&target=${enc(it)}" } ?: ""))
+        // noFiling: the phone's « classer dans des dossiers » option is off (R-13): the TV keeps this file flat; an older TV ignores the parameter
+        val c = open("PUT", "/upload/${enc(name)}?offset=$offset&total=$total" + (target?.let { "&target=${enc(it)}" } ?: "") + if (noFiling) "&filing=0" else "")
         c.doOutput = true
         c.readTimeout = 60_000
         c.setFixedLengthStreamingMode(total - offset)          // one continuous stream, nothing buffered in RAM by HttpURLConnection
@@ -233,6 +237,8 @@ class ResumableUpload(
     private val giveUpAfter: Int = Int.MAX_VALUE,
     /** The credential to use NOW (a trusted phone's token is renewed while a long transfer waits); falls back to [pin]. A token the TV refused is never sent again. */
     private val credential: (() -> String?)? = null,
+    /** The phone's « classer dans des dossiers » option is off (R-13): the TV keeps this file flat (`filing=0`). */
+    private val noFiling: Boolean = false,
 ) {
     companion object {
         const val NAME_TAKEN_TEXT = "Un autre fichier du même nom est déjà sur la TV."
@@ -302,7 +308,7 @@ class ResumableUpload(
                 }
                 onState(State.Uploading(sent, total))
                 openAt(sent).use { src ->
-                    val r = tv.upload(name, sent, total, src, maxBytesPerSec, target) { n ->
+                    val r = tv.upload(name, sent, total, src, maxBytesPerSec, target, noFiling = noFiling) { n ->
                         sent += n; backoff = 500
                         onState(State.Uploading(sent, total))
                         if (cancelled()) throw java.io.InterruptedIOException("cancelled")

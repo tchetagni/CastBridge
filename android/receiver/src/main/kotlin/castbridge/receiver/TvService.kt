@@ -244,6 +244,15 @@ class TvService : Service(), Device {
         watchNetwork()
     }
 
+    /** 32 random bytes made at the first start, in the app's private files (never a volume): the HMAC key of the content index caches (R-12). */
+    private fun contentIndexKey(): ByteArray {
+        val f = java.io.File(filesDir, "content-index.key")
+        if (f.isFile && f.length() == 32L) return f.readBytes()
+        val k = ByteArray(32).also { java.security.SecureRandom().nextBytes(it) }
+        castbridge.core.tv.AtomicFile.write(f, k)
+        return k
+    }
+
     /** Starts the HTTP server once (only this service does: no second server fighting for port 8765); retries if the port is taken. */
     private fun startServer(attempt: Int = 0) {
         val s = ReceiverServer(registry, playerBridge, pin = pin, guard = guard, device = this,
@@ -271,7 +280,14 @@ class TvService : Service(), Device {
             filingLang = { if (prefs.getBool("file_on_receive", true)) "fr" else null },
             sourceName = { a -> trust.get(a)?.name },
             // « la lecture d'abord »: a copy's threads go to the background while a video plays (docs/agent-reports/fluid-playback-during-copy.md)
-            receivePriority = ReceivePriority)
+            receivePriority = ReceivePriority,
+            // « déjà sur la TV ? » par contenu (R-12) : empreintes calculées en tâche de fond, à basse priorité, jamais pendant une lecture ou une copie
+            contentIndexing = true,
+            // clé propre à cette TV (stockage privé de l'app, jamais sur la clé USB) : signe les caches .cbhash ; un cache forgé ou venu d'ailleurs est ignoré
+            contentIndexKey = runCatching { contentIndexKey() }.getOrNull(),
+            // pas d'empreintes pendant un téléchargement ni un import USB (R-06, R-11 : bus USB et Wi-Fi partagés)
+            indexBusy = { usb?.isRunning() == true || TvDownloads.get()?.manager?.views()?.any { v ->
+                v.state == castbridge.core.dl.DlState.DOWNLOADING || v.state == castbridge.core.dl.DlState.MOVING || v.state == castbridge.core.dl.DlState.CHECKING } == true })
         try {
             s.start(15_000, false); server = s
         } catch (e: Exception) {

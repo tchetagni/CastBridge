@@ -37,8 +37,7 @@ fun MoveHandler() {
             confirmButton = { TextButton({ UploadService.noteHandled() }) { Text("OK") } },
             title = { Text("Déplacement") }, text = { Text(n) })
     }
-    LaunchedEffect(req) {
-        val r = req ?: return@LaunchedEffect
+    fun proceed(r: UploadService.MoveRequest) {
         when (val out = deleteFromPhone(ctx, r.uri)) {
             null -> { Toast.makeText(ctx, "« ${r.name} » déplacé vers la TV", Toast.LENGTH_LONG).show(); UploadService.moveHandled() }
             is DeleteNeedsConfirmation -> confirm.launch(IntentSenderRequest.Builder(out.sender).build())
@@ -48,6 +47,25 @@ fun MoveHandler() {
             }
         }
     }
+    // R-12 audit: a path that deletes WITHOUT Android's own dialog (a document, Android 10 and older) is confirmed in the app first
+    var ask by remember { mutableStateOf<UploadService.MoveRequest?>(null) }
+    ask?.let { r ->
+        AlertDialog(onDismissRequest = { ask = null; Toast.makeText(ctx, "« ${r.name} » reste aussi sur le téléphone", Toast.LENGTH_LONG).show(); UploadService.moveHandled() },
+            confirmButton = { TextButton({ ask = null; proceed(r) }) { Text("Supprimer") } },
+            dismissButton = { TextButton({ ask = null; Toast.makeText(ctx, "« ${r.name} » reste aussi sur le téléphone", Toast.LENGTH_LONG).show(); UploadService.moveHandled() }) { Text("Garder") } },
+            title = { Text("Déplacement") }, text = { Text("Supprimer l'original de ce téléphone ? La TV en a une copie vérifiée.") })
+    }
+    LaunchedEffect(req) {
+        val r = req ?: return@LaunchedEffect
+        if (deletesWithoutSystemDialog(ctx, r.uri)) ask = r else proceed(r)
+    }
+}
+
+/** True when [deleteFromPhone] would delete [uri] directly (a document the picker let us write, Android 10 and older): the app must ask first. */
+private fun deletesWithoutSystemDialog(ctx: Context, uri: Uri): Boolean {
+    if (DocumentsContract.isDocumentUri(ctx, uri)) return true
+    if (Build.VERSION.SDK_INT < 30) return true
+    return uri.authority != MediaStore.AUTHORITY
 }
 
 private sealed interface DeleteOutcome

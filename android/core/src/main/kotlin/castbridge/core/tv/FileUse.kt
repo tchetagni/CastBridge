@@ -41,6 +41,9 @@ class StreamUse(private val now: () -> Long = System::currentTimeMillis, private
     fun openCount(name: String): Int = map[name]?.open ?: 0
 
     fun busy(name: String): Boolean = map[name]?.let { it.open > 0 && now() - it.last < idleMs } == true
+
+    /** Any reader of any file is active (a phone playing, a TV → phone download): the background content index waits (R-12). */
+    fun anyBusy(): Boolean = map.values.any { it.open > 0 && now() - it.last < idleMs }
 }
 
 /** One lock for "who owns this name" decisions (rename target, restore target): the check and the rename must not interleave. */

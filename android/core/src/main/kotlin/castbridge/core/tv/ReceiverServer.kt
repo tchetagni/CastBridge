@@ -90,6 +90,15 @@ class ReceiverServer(
     private val sourceName: (String) -> String? = { null },
     /** Lowers the receive/hash/write threads while a video plays (the TV app: Process.setThreadPriority); see [castbridge.core.xfer.PlaybackPriority]. */
     private val receivePriority: castbridge.core.xfer.ThreadPriorityPort = castbridge.core.xfer.ThreadPriorityPort.NONE,
+    /**
+     * Index of the CONTENT of the files the TV holds (size + SHA-256, R-12, docs/agent-reports/copy-dedup.md), read by GET /api/have. true = its background
+     * pass runs (the TV app); false = it is only filled on demand by [indexStep] (tests). Either way it never hashes while a video plays or a copy runs.
+     */
+    private val contentIndexing: Boolean = false,
+    /** This TV's own key for the signature of the `.cbhash` caches (the TV app's private storage, never a volume); null = no cache read or written. */
+    private val contentIndexKey: ByteArray? = null,
+    /** Other disk or network users that must not share the bus with the background hash (downloads, USB import): true = busy. */
+    private val indexBusy: () -> Boolean = { false },
 ) : NanoHTTPD(port) {
 
     /** The socket of the connection this thread serves (NanoHTTPD: one thread per connection), for [hungUp]. */
@@ -172,6 +181,7 @@ class ReceiverServer(
     /** The TV player changed state (started, paused, stopped): the policy is read again at once, off the caller's thread (it may run deferred fsyncs). */
     fun playbackChanged() {
         Thread({ runCatching { playback.refresh() } }, "cb-playback-policy").apply { isDaemon = true; start() }
+        fileDeferredAsync()                                   // R-13: a « Copier et lire » file is filed once it is no longer read
     }
     /** What is being received right now, from every path (PUT /upload, /api/transfer, and Bluetooth through the app): the TV screen and notification read it. */
     /** Address of the trusted phone whose token authenticated the request this thread is serving (NanoHTTPD: one thread per request), else null. */
@@ -181,6 +191,53 @@ class ReceiverServer(
         val addr = tokenPhone.get()                    // set by the authentication of this very request: the token is never verified twice
         if (addr != null) return sourceName(addr) ?: "téléphone de confiance"
         return s.remoteIpAddress?.takeIf { it.isNotEmpty() && it != "127.0.0.1" && it != "::1" }
+    }
+
+    /** « Déjà sur la TV ? » by content (R-12): the finished files of the real folders, hashed in the background while the TV is idle. */
+    private val contentIndex = ContentIndex(::heldFiles, ::indexIdle, contentIndexKey)
+
+    /**
+     * Finished files of the real folders (not the system picker's), with the path the index keys them by; with [size], only the files of that size (from the
+     * cached listing: a question never stats the whole library). Partial copies are never held files.
+     */
+    private fun heldFiles(size: Long?): List<HeldFile> = listing().entries.filter { it.complete && (size == null || it.size == size) }.mapNotNull { e ->
+        val fs = volumes.store(e.v) as? FileStore ?: return@mapNotNull null
+        val f = fs.fileOf(e.name)
+        val rel = f.relativeToOrNull(fs.dir)?.invariantSeparatorsPath ?: return@mapNotNull null
+        if (rel.startsWith("..")) return@mapNotNull null
+        HeldFile(e.v.id, fs.dir, rel, e.name, e.folder, e.size)
+    }
+
+    /** The background hash runs only when nothing plays or buffers and nothing is being received or moved (R-06: « la lecture d'abord »). */
+    private fun indexIdle(): Boolean {
+        val st = player.state().state
+        return st != "playing" && st != "buffering" && activeTransfers() == 0 && transfers.active() == 0 && progress.active().isEmpty() &&
+            !streamUse.anyBusy() && !runCatching(indexBusy).getOrDefault(true)        // /stream/ readers, downloads, USB import: not on the bus with them
+    }
+
+    /** Hashes one file of the index now if the TV is idle (tests; the TV app uses the background pass). */
+    internal fun indexStep(): Boolean = contentIndex.step()
+
+    /** GET /api/have?size=N[&sha256=H]: does the TV hold a finished file of that size (and of that content)? Never a name but the matching one. */
+    private fun have(p: Map<String, String>): Response {
+        val size = p["size"]?.toLongOrNull()?.takeIf { it > 0 } ?: return bad("size required")
+        val sha = p["sha256"]?.lowercase()
+        if (sha != null && !ContentHash.valid(sha)) return bad("bad sha256")
+        // fresh=1 (a « Déplacer »): only a hash this run computed from the file's bytes counts; the file is re-read first in the queue, « indexing » meanwhile
+        return when (val a = contentIndex.query(size, sha, fresh = p["fresh"] == "1")) {
+            ContentIndex.Answer.Absent -> ok("""{"state":"absent"}""")
+            is ContentIndex.Answer.Candidates -> ok("""{"state":"candidates","count":${a.count},"indexing":${a.indexing}}""")
+            is ContentIndex.Answer.Indexing -> ok("""{"state":"indexing","pending":${a.pending}}""")
+            is ContentIndex.Answer.Present ->
+                // a child profile is active: never the name nor the folder of a file (it may be protected); « present » without a place
+                if (contentFlags?.childActive() == true) ok("""{"state":"present","masked":true,"size":${a.size},"sha256":${q(a.sha256)},"complete":true,"fresh":${a.fresh}}""")
+                else ok("""{"state":"present","name":${q(a.file.name)},"folder":${q(a.file.folder)},"volume":${q(a.file.volumeId)},"size":${a.size},"sha256":${q(a.sha256)},"complete":true,"fresh":${a.fresh}}""")
+        }
+    }
+
+    override fun start(timeout: Int, daemon: Boolean) {
+        super.start(timeout, daemon)
+        if (contentIndexing) contentIndex.startWorker()
     }
 
     /** Uploads being received right now (the TV app keeps a partial wake lock only while this is above zero). */
@@ -221,7 +278,7 @@ class ReceiverServer(
         }
         val lang = filingLang()
         if (size != null && lang != null) {
-            val r = Filing.classify(name, null, size, lang = lang)
+            val r = FilingPlan.plan(FilingPlan.Input(name, size = size), lang)
             for ((v, fs) in stores) for (n in Filing.candidates(r, if (v.kind == VolumeKind.INTERNAL) Fs.EXT4 else v.fs)) {
                 if (!fs.filing.isFiled(n)) continue
                 val sz = fs.finalSize(n) ?: continue
@@ -245,20 +302,74 @@ class ReceiverServer(
      * right now, too big for the file system, any failure. Never fails the upload: a flat file is always valid.
      */
     private fun fileReceived(v: StorageVolume, st: VolumeStore, diskName: String, original: String, size: Long): Filing.Placement? {
+        val optedOut = noFiling.remove(original.lowercase())          // the phone said « filing=0 » for this send (its option is off)
         val lang = filingLang() ?: return null
+        if (optedOut) return null
         val fs = st as? FileStore ?: return null
         return try {
             // No NameSpace.lock here: the caller holds the lock of this name (the one /api/rename takes AFTER NameSpace.lock): taking it now could deadlock.
             // The final name is checked again, atomically, by FileStore.fileInto (never over an existing file).
-            if (streamUse.busy(diskName) || isPlaying(diskName)) return null          // a reader holds the flat name: filed later by « Ranger ma bibliothèque »
-            val r = Filing.classify(original, null, size, lang = lang)
+            // A reader holds the flat name (« Copier et lire » plays it while it arrives, R-08): filed as soon as nothing reads it any more (R-13; it used to stay flat for ever).
+            if (streamUse.busy(diskName) || isPlaying(diskName)) { addPending(diskName, PendingFiling(v.id, original, size)); return null }
+            dropPending(diskName)
+            // R-13: the category tree of a new copy (Films, Séries/Titre/Saison, Musique, Photos/AAAA-MM, Documents…), docs/agent-reports/filing-tree.md
+            val r = FilingPlan.plan(FilingPlan.Input(original, size = size), lang)
             if (r.keepFlat) return null
             val pl = Filing.place(r, effectiveFs(v), size, self = diskName, taken = ::nameTaken) ?: return null
             if (!fs.fileInto(diskName, pl.folder, pl.name, original)) return null
+            contentIndex.renamed(fs.dir, fs.diskName(diskName), pl.rel)      // same bytes: the hash follows the file
             folders?.set(pl.name, pl.folder)
             invalidate()
             pl
         } catch (e: Exception) { null }
+    }
+
+    /** A file received while the TV read it, to be filed once it is free: volume, the name the phone sent, size. Key = its flat disk name. */
+    private class PendingFiling(val volumeId: String, val original: String, val size: Long)
+    private val pendingFiling = java.util.concurrent.ConcurrentHashMap<String, PendingFiling>()
+    /** Names (lowercase) whose current send asked for no filing (`filing=0`, the phone's option is off): consumed at the commit. */
+    private val noFiling: MutableSet<String> = java.util.concurrent.ConcurrentHashMap.newKeySet()
+
+    // The pending list is kept on its volume (`.cbfiling-pending`, atomic): a restart during « Copier et lire » does not leave the file flat for ever.
+    private fun addPending(disk: String, p: PendingFiling) { pendingFiling[disk] = p; savePending(p.volumeId) }
+    private fun dropPending(disk: String) { pendingFiling.remove(disk)?.let { savePending(it.volumeId) } }
+    @Synchronized private fun savePending(volumeId: String) {
+        val v = volumes[volumeId] ?: return
+        val fs = volumes.store(v) as? FileStore ?: return
+        val f = File(fs.dir, PENDING_FILE)
+        val text = pendingFiling.entries.filter { it.value.volumeId == volumeId }
+            .joinToString("") { "${java.net.URLEncoder.encode(it.key, "UTF-8")}\t${java.net.URLEncoder.encode(it.value.original, "UTF-8")}\t${it.value.size}\n" }
+        runCatching { if (text.isEmpty()) f.delete() else AtomicFile.write(f, text.toByteArray(Charsets.UTF_8)) }
+    }
+    private fun loadPendingFiling(v: StorageVolume) {
+        val fs = volumes.store(v) as? FileStore ?: return
+        val f = File(fs.dir, PENDING_FILE)
+        if (!f.isFile) return
+        runCatching {
+            for (l in f.readLines()) {
+                val p = l.split('\t'); if (p.size != 3) continue
+                val disk = java.net.URLDecoder.decode(p[0], "UTF-8"); val size = p[2].toLongOrNull() ?: continue
+                if (disk.isEmpty() || disk.contains('/') || disk.contains('\\')) continue        // a flat name only, never a path
+                pendingFiling.putIfAbsent(disk, PendingFiling(v.id, java.net.URLDecoder.decode(p[1], "UTF-8"), size))
+            }
+        }
+    }
+
+    /**
+     * Files the receptions that waited for their reader (« Copier et lire »). Off the caller's thread (renames on a USB key are synced); under the per-name lock
+     * the uploads take, so nothing races a new send of that name. A file gone meanwhile (deleted after play, moved) is simply forgotten.
+     */
+    private fun fileDeferredAsync() {
+        if (pendingFiling.isEmpty()) return
+        Thread({
+            for ((disk, p) in pendingFiling.entries.toList()) runCatching {
+                val v = volumes[p.volumeId] ?: return@runCatching
+                val st = volumes.store(v)
+                if (st.finalSize(disk) != p.size) { dropPending(disk); return@runCatching }
+                if (streamUse.busy(disk) || isPlaying(disk) || playlist?.contains(disk) == true) return@runCatching          // still read: next playback change
+                synchronized(FileLocks.of(LOCK_ROOT, p.original)) { if (fileReceived(v, st, disk, p.original, p.size) != null) invalidate() }
+            }
+        }, "cb-deferred-filing").apply { isDaemon = true; start() }
     }
 
     private fun filedJson(v: StorageVolume, name: String): String {
@@ -313,9 +424,11 @@ class ReceiverServer(
     }
 
     init {
-        volumes.volumes().forEach { cleanOrphans(it); recoverMove(it); resyncFiling(it) }
+        volumes.volumes().forEach { cleanOrphans(it); recoverMove(it); resyncFiling(it); loadPendingFiling(it) }
         volumes.addListener { ev ->
             invalidate()
+            contentIndex.poke()                                         // a key came or went: the index reads the list again
+            if (ev.present) loadPendingFiling(ev.volume)
             if (!ev.present) {
                 if (playingVolume == ev.volume.id && player.state().state != "idle") {
                     runCatching { player.stop() }
@@ -328,6 +441,7 @@ class ReceiverServer(
             }
         }
         setAsyncRunner(BoundedRunner(cfg.maxHttpThreads + (publicRoutes?.extraThreads ?: 0)))
+        fileDeferredAsync()                                             // receptions left flat by a restart during « Copier et lire »
     }
 
     /** A move cut after its copy was verified (power, process killed, key pulled): finish removing the source. Never deletes anything unverified. */
@@ -354,6 +468,7 @@ class ReceiverServer(
      */
     fun onPlaybackEnded(name: String): Boolean {
         deleteAfterPlay(name)
+        if (playlist == null) fileDeferredAsync()            // never under a running playlist (it holds the flat names it will play next)
         val pl = playlist ?: return false
         if (pl.current != name && !pl.contains(name)) { playlist = null; return false }
         val next = pl.next(auto = true) ?: run { playlist = null; return false }
@@ -409,6 +524,7 @@ class ReceiverServer(
 
     override fun stop() {
         moveJob?.cancelled = true
+        contentIndex.stop()
         super.stop()
     }
 
@@ -453,6 +569,7 @@ class ReceiverServer(
             path == "/api/info" -> ok(info())
             path == "/api/storage" -> storage(s.method, p)
             path == "/api/storage/check" -> if (s.method == Method.GET) check(p) else json(Response.Status.METHOD_NOT_ALLOWED, """{"error":"use GET"}""")
+            path == "/api/have" -> if (s.method == Method.GET) have(p) else json(Response.Status.METHOD_NOT_ALLOWED, """{"error":"use GET"}""")
             path == "/api/part" -> named(p) { name ->
                 val size = p["size"]?.toLongOrNull()?.takeIf { it > 0 }
                 if (findFinalOrOrigin(name, size) == null && findPart(name) == null) volumes.missingOwner(name)?.let { return@named removed() }
@@ -666,6 +783,7 @@ class ReceiverServer(
         val len = s.headers["content-length"]?.toLongOrNull() ?: return bad("content-length required")
         val target = p["target"]?.takeIf { it.isNotEmpty() } ?: cfg.target
         if (!StoragePolicy.isValidTarget(target, volumes.volumes() + volumes.missingVolumes())) return bad("bad target")
+        if (p["filing"] == "0") noFiling += name.lowercase() else noFiling -= name.lowercase()     // R-13: the phone's « classer dans des dossiers » option, per send
         findFinalOrOrigin(name, total)?.let { if (it.size == total) return ok(sizeChecked(partJson(name, total))) }
         // A finished file of that very name but another size is another file: never "done", never replaced silently (the phone says so to the user).
         if (findFinal(name)?.let { it.size != total } == true) return nameTaken(name, total)
@@ -771,7 +889,7 @@ class ReceiverServer(
                         // committed: the copy IS received, whatever filing then does (an IOException there must not turn it into « reprise en attente »)
                         val filed = try { fileReceived(v, st, o.name, name, total) } catch (e: IOException) { null }
                         progress.finish(pid, filed?.name)
-                        onNotice(receivedNotice(name, filed))
+                        onNotice(receivedNotice(name, filed)); contentIndex.poke()
                     } else {
                         progress.interrupted(pid)             // the stream ended short (clean close): the phone resumes, the sweep does not have to wait for it
                     }
@@ -809,6 +927,7 @@ class ReceiverServer(
         val m = try { castbridge.core.xfer.Manifest(name, size, bs).also { require(bs <= 16 shl 20) } } catch (e: IllegalArgumentException) { return bad("bad blockSize") }
         val target = p["target"]?.takeIf { it.isNotEmpty() } ?: cfg.target
         if (!StoragePolicy.isValidTarget(target, volumes.volumes() + volumes.missingVolumes())) return bad("bad target")
+        if (p["discard"] != "1") { if (p["filing"] == "0") noFiling += name.lowercase() else noFiling -= name.lowercase() }      // R-13, per send
         // A finish of this name is reading the file back under the per-name lock (minutes for a big file): never park an HTTP thread behind it (8 of
         // them and /stream/ and /api/info starve). The phone treats 5xx of begin as « resume » and waits retryMs. Looked up by id AND by name.
         if (transfers.session(m.id)?.finishing == true || transfers.finishingName(name))
@@ -954,7 +1073,7 @@ class ReceiverServer(
                         }
                         val filed = try { fileReceived(v, st, sess.diskName, name, sess.manifest.size) } catch (e: IOException) { null }
                         progress.finish("x:" + sess.manifest.id, filed?.name)
-                        onNotice(receivedNotice(name, filed))
+                        onNotice(receivedNotice(name, filed)); contentIndex.poke()
                         invalidate()
                         ok("""{"done":true,"name":${q(name)},"volume":${q(v.id)}${if (filed != null) ",\"folder\":${q(filed.folder)},\"finalName\":${q(filed.name)}" else ""}}""")
                     }
@@ -1017,7 +1136,9 @@ class ReceiverServer(
             val busy = busyReason(e.name)
             files += Filing.PlanFile(e.v.id, e.name, e.size, effectiveFs(e.v), busy?.let { "occupé ($it)" })
         }
-        return OrgPlan(Filing.plan(files, lang, taken = ::nameTaken), flags?.childActive() == true, protectedCount, unsupported)
+        // the same tree as a new copy (R-13): FilingPlan, so « Ranger ma bibliothèque » and the reception never disagree
+        return OrgPlan(Filing.plan(files, lang, classifier = { f -> FilingPlan.plan(FilingPlan.Input(f.name, size = f.size, date = f.meta.mtimeDate, durationMs = f.meta.durationMs), lang) }, taken = ::nameTaken),
+            flags?.childActive() == true, protectedCount, unsupported)
     }
 
     private fun organizeJson(op: OrgPlan, result: String?): String {
@@ -1613,6 +1734,8 @@ class ReceiverServer(
 
     companion object {
         const val PORT = 8765
+        /** Receptions waiting for their reader before being filed (R-13), one per volume folder. */
+        const val PENDING_FILE = ".cbfiling-pending"
         const val VERSION = "0.7"
         const val MAX_EXT_BODY = 4 shl 20
         /** A partial copy written less than this long ago (or being written) is busy: /api/reset refuses to drop it. */

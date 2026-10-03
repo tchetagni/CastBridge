@@ -199,6 +199,7 @@ object CastSession {
             copy = castbridge.core.phone.CopyProgress(0, 0, 0, null, moovAtEnd = layout == Mp4Atoms.Layout.MOOV_AT_END)) }
         // the name the TV receives (« Rangement automatique » may have given a clean one), remembered once the upload states stop being this file's
         var sentName = item.name
+        var toldHeld = false
         while (currentCoroutineContextActive()) {
             var waiting: String? = null
             // the upload states describe this file only while the queue's last launch is this file (the next file of the queue may follow it)
@@ -206,6 +207,13 @@ object CastSession {
             val q = castbridge.sender.TransferQueue.item(ticket.id)
             if (q?.status == castbridge.core.tv.QueueStatus.FAILED) throw CastFailure("Échec de l'envoi : ${q.error ?: "envoi interrompu"}")
             if (q?.status == castbridge.core.tv.QueueStatus.CANCELLED) throw CastFailure("Envoi annulé : « ${item.name} » a été retiré de la file d'attente.")
+            // R-12: the TV already held the same content (nothing was copied): its own file is the one to play
+            q?.heldAs?.let { held ->
+                if (q.status == castbridge.core.tv.QueueStatus.DONE) {
+                    sentName = held
+                    if (!toldHeld) { toldHeld = true; q.note?.let { n -> _notices.tryEmit(n) } }
+                }
+            }
             when (val u = if (own) UploadService.state.value else null) {
                 is UploadService.State.Failed -> throw CastFailure("Échec de l'envoi : ${u.reason}")
                 is UploadService.State.Uploading -> { total = u.total; sentName = u.job.fileName }

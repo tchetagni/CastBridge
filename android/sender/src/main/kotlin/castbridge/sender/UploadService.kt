@@ -182,7 +182,7 @@ class UploadService : Service() {
         // la TV (.cbx) jusqu'à la fin ; une TV qui ne connaît pas le protocole (null) reçoit l'envoi classique.
         val fast = if (!progressiveNow && !job.ordered && FastTransfer.enabled(this)) runFast(uri, job, total, resolve, credential, onState) else null
         val result = fast ?: ResumableUpload(job.fileName, total, resolve, { off -> openAt(uri, off) }, { cancelled }, pin = job.pin,
-            target = job.target, onCheck = { _check.value = it }, credential = credential).run(onState)
+            target = job.target, onCheck = { _check.value = it }, credential = credential, noFiling = noFiling()).run(onState)
         run {
             val ms = System.currentTimeMillis() - castStart
             val ok = result == ResumableUpload.State.Done
@@ -220,7 +220,7 @@ class UploadService : Service() {
                 val u = Uri.parse(base)
                 HttpConn.tcp(u.host ?: throw IOException("adresse de la TV illisible"), if (u.port > 0) u.port else 8765)()
             }
-            val tc = TransferClient(HttpTransferApi(resolve, credential), FileBlockSource(ch, total), job.fileName,
+            val tc = TransferClient(HttpTransferApi(resolve, credential, noFiling()), FileBlockSource(ch, total), job.fileName,
                 lanes = { id, max -> listOf(WifiLane("wifi", resolve()?.removePrefix("http://") ?: "tv", id, connect, credential, maxStreams = max)) },
                 target = job.target, cancelled = { cancelled },
                 onProgress = { s, t -> sent = s; onState(ResumableUpload.State.Uploading(s, t)) },
@@ -259,6 +259,12 @@ class UploadService : Service() {
             }
         } else _moveNote.value = "« ${job.fileName} » est envoyé mais la TV n'a pas confirmé une copie complète : il reste sur le téléphone."
     }
+
+    /**
+     * R-13: « Classer les nouveaux envois dans des dossiers » (assistant's settings, ON by default). Off: the TV is told `filing=0` and keeps this file flat.
+     * Read at each send, so a change applies to the next file.
+     */
+    private fun noFiling(): Boolean = runCatching { castbridge.sender.agent.AgentStore.init(this); !castbridge.sender.agent.AgentStore.settings.fileTree }.getOrDefault(false)
 
     private fun openAt(uri: Uri, offset: Long): InputStream {
         val pfd = contentResolver.openFileDescriptor(uri, "r") ?: throw IOException("cannot open")
@@ -390,6 +396,11 @@ class UploadService : Service() {
         private val moves = castbridge.core.tv.MoveInbox<MoveRequest>()
         /** Several moves ending close together wait in turn (never overwritten). */
         private fun offerMove(r: MoveRequest) { moves.offer(r); _moveReady.value = moves.head() }
+        /**
+         * R-12: a MOVE whose content the TV ALREADY holds, proven by hash ([castbridge.core.tv.MoveProof.byContentHash], nothing was copied): the screen asks
+         * Android to delete the original exactly like after a verified copy ([MoveHandler], with Android's own confirmation). Never called on the TV's word alone.
+         */
+        fun offerVerifiedMove(r: MoveRequest) = offerMove(r)
         /** The current deletion request is handled: the next one (if any) is shown. */
         fun moveHandled() { _moveReady.value = moves.done() }
         fun noteHandled() { _moveNote.value = null }
@@ -418,7 +429,8 @@ class UploadService : Service() {
 
         private fun startReserved(ctx: Context, token: Long, uri: Uri, fileName: String, tvName: String, manualHost: String?, pin: String?,
                                   progressive: Boolean, autoPlay: Boolean, target: String?, move: Boolean, ordered: Boolean) {
-            val fileName = castbridge.sender.agent.AgentAuto.nameFor(ctx, fileName)       // a CANDIDATE: confirmed in the service once the TV has been asked
+            // R-13: a content id (« 1000023456 ») or a generic name (« video.mp4 ») is replaced by the media title before anything is sent (stable at every attempt)
+            val fileName = castbridge.sender.agent.AgentAuto.nameFor(ctx, sendableName(ctx, uri, fileName))       // a CANDIDATE: confirmed in the service once the TV has been asked
             val i = Intent(ctx, UploadService::class.java).setData(uri)
                 .addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION)
                 .putExtra(EXTRA_TV, tvName).putExtra(EXTRA_NAME, fileName).putExtra(EXTRA_HOST, manualHost).putExtra(EXTRA_PIN, pin?.takeIf { it.isNotEmpty() })
@@ -430,6 +442,21 @@ class UploadService : Service() {
 
         fun cancel(ctx: Context) {
             runCatching { ctx.startService(Intent(ctx, UploadService::class.java).setAction(ACTION_CANCEL)) }
+        }
+
+        /**
+         * R-13: the name sent to the TV ([castbridge.core.tv.FilingPlan.sendName]): the file's own name when it means something; the media title (MediaStore TITLE)
+         * when the phone only has a content id or a generic name; a content id without title stays stable (resume) and gets its extension. Read only in those cases.
+         */
+        private fun sendableName(ctx: Context, uri: Uri, name: String): String {
+            val plain = !castbridge.core.tv.FilingPlan.looksLikeId(name) && !castbridge.core.tv.FilingPlan.isGeneric(name) &&
+                castbridge.core.library.agent.NameParser.splitExt(name).second.isNotEmpty()
+            if (plain) return name
+            val mime = runCatching { ctx.contentResolver.getType(uri) }.getOrNull()
+            val title = runCatching {
+                ctx.contentResolver.query(uri, arrayOf(android.provider.MediaStore.MediaColumns.TITLE), null, null, null)?.use { c -> if (c.moveToFirst()) c.getString(0) else null }
+            }.getOrNull()
+            return castbridge.core.tv.FilingPlan.sendName(name, mime, title, java.time.LocalDate.now().toString())
         }
     }
 }

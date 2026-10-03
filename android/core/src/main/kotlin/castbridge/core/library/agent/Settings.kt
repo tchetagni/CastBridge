@@ -13,6 +13,14 @@ class AgentSettings(private val kv: KeyValueStore, private val now: () -> Long =
         get() = kv.get(K_AUTO) == "1"
         set(v) = kv.put(K_AUTO, if (v) "1" else null)
 
+    /**
+     * « Classer les nouveaux envois dans des dossiers » (R-13): ON by default — the owner expects a copy to land in Films, Séries/Titre/Saison, Musique,
+     * Photos/AAAA-MM, Documents on the TV and its USB key. Off: the phone asks the TV to keep the file flat (`filing=0`). Never renames on the phone.
+     */
+    var fileTree: Boolean
+        get() = kv.get(K_FILE_TREE) != "0"
+        set(v) = kv.put(K_FILE_TREE, if (v) null else "0")
+
     /** Consent to the optional AI layer, valid only for the wording version it was given for ([AiConsent.VERSION]). */
     val aiEnabled: Boolean get() = kv.get(K_AI) == AiConsent.VERSION
     fun grantAi() = kv.put(K_AI, AiConsent.VERSION)
@@ -52,7 +60,7 @@ class AgentSettings(private val kv: KeyValueStore, private val now: () -> Long =
     }
 
     /** "Effacer": everything the assistant remembers, except the journal (which has its own button). */
-    fun clearAll() { listOf(K_AUTO, K_AI, K_TREE, K_HIDE, K_PROACTIVE, K_NOTIFIED, K_LAST, LearnedRules.KEY).forEach { kv.put(it, null) } }
+    fun clearAll() { listOf(K_AUTO, K_AI, K_TREE, K_HIDE, K_PROACTIVE, K_NOTIFIED, K_LAST, K_FILE_TREE, LearnedRules.KEY).forEach { kv.put(it, null) } }
 
     companion object {
         const val K_AUTO = "agent.auto"
@@ -62,6 +70,7 @@ class AgentSettings(private val kv: KeyValueStore, private val now: () -> Long =
         const val K_PROACTIVE = "agent.proactive"
         const val K_NOTIFIED = "agent.notified"
         const val K_LAST = "agent.last"
+        const val K_FILE_TREE = "agent.filetree"
     }
 }
 
