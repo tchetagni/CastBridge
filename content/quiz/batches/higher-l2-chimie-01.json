@@ -1,0 +1,1943 @@
+{
+ "batch": "higher-l2-chimie-01",
+ "author": "Claude (rédacteur IA, à relire)",
+ "date": "2026-10-03",
+ "questions": [
+  {
+   "course": "l2-chim",
+   "category": "Thermodynamique chimique",
+   "difficulty": 1,
+   "question": "Parmi ces grandeurs, laquelle est une fonction d'état ?",
+   "choices": [
+    "Le travail échangé W",
+    "La chaleur échangée Q",
+    "La puissance fournie P",
+    "L'énergie interne U"
+   ],
+   "answer": "D",
+   "explanation": "Une fonction d'état ne dépend que de l'état initial et final ; U en est une, alors que W et Q dépendent du chemin suivi.",
+   "source": "Cours de chimie physique de licence, famille Atkins",
+   "verif": "import"
+  },
+  {
+   "course": "l2-chim",
+   "category": "Thermodynamique chimique",
+   "difficulty": 1,
+   "question": "Quelle est l'unité SI de l'entropie ?",
+   "choices": [
+    "J·mol⁻¹",
+    "J·K⁻¹",
+    "W·K",
+    "K·J⁻¹"
+   ],
+   "answer": "B",
+   "explanation": "L'entropie est une énergie divisée par une température, donc en joules par kelvin.",
+   "source": "Cours de chimie physique de licence, famille Atkins",
+   "verif": "import"
+  },
+  {
+   "course": "l2-chim",
+   "category": "Thermodynamique chimique",
+   "difficulty": 2,
+   "question": "Pour un système fermé, avec W le travail reçu, que dit le premier principe de la thermodynamique ?",
+   "choices": [
+    "La variation d'énergie interne est le produit de la chaleur par le travail reçus",
+    "La variation d'énergie interne est la différence entre le travail et la chaleur",
+    "La variation d'énergie interne est la somme de la chaleur et du travail reçus",
+    "La variation d'énergie interne est le rapport de la chaleur au travail reçus"
+   ],
+   "answer": "C",
+   "explanation": "Le premier principe traduit la conservation de l'énergie : la variation d'énergie interne est la somme de la chaleur et du travail reçus.",
+   "source": "Cours de chimie physique de licence, famille Atkins",
+   "verif": "import"
+  },
+  {
+   "course": "l2-chim",
+   "category": "Thermodynamique chimique",
+   "difficulty": 3,
+   "question": "Que dit le deuxième principe pour un système isolé qui subit une transformation spontanée ?",
+   "choices": [
+    "Son entropie augmente ou reste constante",
+    "Son entropie diminue toujours au cours du temps",
+    "Son entropie reste toujours nulle quelle que soit la transformation",
+    "Son énergie interne augmente nécessairement"
+   ],
+   "answer": "A",
+   "explanation": "Pour un système isolé, ΔS ≥ 0 : l'entropie croît lors d'une transformation irréversible et reste constante si elle est réversible.",
+   "source": "Cours de chimie physique de licence, famille Atkins",
+   "verif": "import"
+  },
+  {
+   "course": "l2-chim",
+   "category": "Thermodynamique chimique",
+   "difficulty": 5,
+   "question": "Pour N₂ + 3 H₂ → 2 NH₃ à 298 K (gaz parfaits, R = 8,314 J·mol⁻¹·K⁻¹), que vaut ΔH − ΔU pour l'équation écrite ?",
+   "choices": [
+    "+9,91 kJ·mol⁻¹",
+    "−2,48 kJ·mol⁻¹",
+    "−4,96 kJ·mol⁻¹",
+    "0 kJ·mol⁻¹, car les gaz sont parfaits"
+   ],
+   "answer": "C",
+   "explanation": "ΔH − ΔU = Δn(gaz)·RT avec Δn = 2 − 4 = −2, soit −2 × 8,314 × 298 ≈ −4 955 J, soit −4,96 kJ.",
+   "source": "Cours de chimie physique de licence, famille Atkins",
+   "verif": "import"
+  },
+  {
+   "course": "l2-chim",
+   "category": "Enthalpie libre et spontanéité",
+   "difficulty": 1,
+   "question": "Quelle est la définition de l'enthalpie libre G ?",
+   "choices": [
+    "G = H + pV",
+    "G = H − TS",
+    "G = U − TS",
+    "G = U + pV"
+   ],
+   "answer": "B",
+   "explanation": "L'enthalpie libre de Gibbs est définie par G = H − TS, où H est l'enthalpie, T la température et S l'entropie.",
+   "source": "Cours de chimie physique de licence, famille Atkins",
+   "verif": "import"
+  },
+  {
+   "course": "l2-chim",
+   "category": "Enthalpie libre et spontanéité",
+   "difficulty": 2,
+   "question": "À T et p constantes, quelle condition caractérise une transformation spontanée ?",
+   "choices": [
+    "Une diminution de l'enthalpie libre",
+    "Une augmentation de l'enthalpie libre",
+    "Une enthalpie libre rigoureusement nulle",
+    "Une diminution d'entropie du système"
+   ],
+   "answer": "A",
+   "explanation": "À T et p constantes, le critère de spontanéité est une diminution de l'enthalpie libre : ΔG < 0.",
+   "source": "Cours de chimie physique de licence, famille Atkins",
+   "verif": "import"
+  },
+  {
+   "course": "l2-chim",
+   "category": "Enthalpie libre et spontanéité",
+   "difficulty": 2,
+   "question": "À T et p constantes, que signifie ΔG = 0 pour un système chimique ?",
+   "choices": [
+    "La réaction est totale",
+    "La réaction est impossible",
+    "La réaction est endothermique",
+    "Le système est à l'équilibre"
+   ],
+   "answer": "D",
+   "explanation": "Quand ΔG = 0, il n'y a plus de force motrice : le système est à l'équilibre thermodynamique.",
+   "source": "Cours de chimie physique de licence, famille Atkins",
+   "verif": "import"
+  },
+  {
+   "course": "l2-chim",
+   "category": "Enthalpie libre et spontanéité",
+   "difficulty": 3,
+   "question": "Une réaction a ΔH > 0 et ΔS > 0. Dans quelles conditions est-elle spontanée ?",
+   "choices": [
+    "À haute température",
+    "À basse température",
+    "À toute température",
+    "À aucune température"
+   ],
+   "answer": "A",
+   "explanation": "ΔG = ΔH − TΔS devient négatif quand TΔS dépasse ΔH, donc à température suffisamment élevée.",
+   "source": "Cours de chimie physique de licence, famille Atkins",
+   "verif": "import"
+  },
+  {
+   "course": "l2-chim",
+   "category": "Enthalpie libre et spontanéité",
+   "difficulty": 5,
+   "question": "Une réaction a ΔH° = −40 kJ·mol⁻¹ et ΔS° = −100 J·mol⁻¹·K⁻¹ (indépendants de T). Au-dessus de quelle température n'est-elle plus spontanée en conditions standard ?",
+   "choices": [
+    "40 K",
+    "400 K",
+    "4 000 K",
+    "250 K"
+   ],
+   "answer": "B",
+   "explanation": "ΔG° = ΔH° − TΔS° s'annule pour T = ΔH°/ΔS° = (−40 000)/(−100) = 400 K ; au-delà, ΔG° > 0.",
+   "source": "Cours de chimie physique de licence, famille Atkins",
+   "verif": "import"
+  },
+  {
+   "course": "l2-chim",
+   "category": "Équilibres chimiques et constante K",
+   "difficulty": 1,
+   "question": "Quelle est l'expression de la constante d'équilibre de N₂ + 3 H₂ ⇌ 2 NH₃ ?",
+   "choices": [
+    "K = [NH₃] / ([N₂]·[H₂])",
+    "K = [N₂]·[H₂]³ / [NH₃]²",
+    "K = 2[NH₃] / ([N₂] + 3[H₂])",
+    "K = [NH₃]² / ([N₂]·[H₂]³)"
+   ],
+   "answer": "D",
+   "explanation": "K est le rapport des concentrations des produits sur celles des réactifs, chacune élevée à son coefficient stœchiométrique.",
+   "source": "Cours de chimie générale, famille Chang / Atkins",
+   "verif": "import"
+  },
+  {
+   "course": "l2-chim",
+   "category": "Équilibres chimiques et constante K",
+   "difficulty": 1,
+   "question": "Que signifie une constante d'équilibre K très supérieure à 1 ?",
+   "choices": [
+    "Les réactifs sont largement majoritaires à l'équilibre",
+    "La réaction atteint l'équilibre très rapidement",
+    "Les produits sont largement majoritaires à l'équilibre",
+    "La réaction est nécessairement endothermique"
+   ],
+   "answer": "C",
+   "explanation": "Un K élevé indique que, à l'équilibre, les produits sont largement majoritaires ; il ne renseigne pas sur la vitesse.",
+   "source": "Cours de chimie générale, famille Chang / Atkins",
+   "verif": "import"
+  },
+  {
+   "course": "l2-chim",
+   "category": "Équilibres chimiques et constante K",
+   "difficulty": 2,
+   "question": "De quel paramètre la constante d'équilibre K d'une réaction donnée dépend-elle uniquement ?",
+   "choices": [
+    "De la température",
+    "De la pression totale",
+    "Des concentrations initiales",
+    "De la présence d'un catalyseur"
+   ],
+   "answer": "A",
+   "explanation": "K est une grandeur thermodynamique qui ne varie qu'avec la température ; un catalyseur n'en modifie pas la valeur.",
+   "source": "Cours de chimie générale, famille Chang / Atkins",
+   "verif": "import"
+  },
+  {
+   "course": "l2-chim",
+   "category": "Équilibres chimiques et constante K",
+   "difficulty": 3,
+   "question": "Pour une réaction donnée, le quotient réactionnel vaut Q = 10 et la constante K = 100. Dans quel sens évolue le système ?",
+   "choices": [
+    "Dans le sens inverse (formation des réactifs)",
+    "Il est déjà à l'équilibre",
+    "Il n'évolue pas, faute de catalyseur",
+    "Dans le sens direct (formation des produits)"
+   ],
+   "answer": "D",
+   "explanation": "Si Q < K, le système n'est pas à l'équilibre et évolue dans le sens direct jusqu'à ce que Q atteigne K.",
+   "source": "Cours de chimie générale, famille Chang / Atkins",
+   "verif": "import"
+  },
+  {
+   "course": "l2-chim",
+   "category": "Équilibres chimiques et constante K",
+   "difficulty": 5,
+   "question": "À 298 K, une réaction a ΔG° = −5,7 kJ·mol⁻¹ (R = 8,314 J·mol⁻¹·K⁻¹). Quel est l'ordre de grandeur de sa constante K ?",
+   "choices": [
+    "K ≈ 0,1",
+    "K ≈ 10",
+    "K ≈ 100",
+    "K ≈ 2,3"
+   ],
+   "answer": "B",
+   "explanation": "K = exp(−ΔG°/RT) = exp(5 700 / (8,314 × 298)) = exp(2,30) ≈ 10.",
+   "source": "Cours de chimie physique de licence, famille Atkins",
+   "verif": "import"
+  },
+  {
+   "course": "l2-chim",
+   "category": "Acides, bases et tampons",
+   "difficulty": 2,
+   "question": "Lequel de ces mélanges constitue une solution tampon ?",
+   "choices": [
+    "Acide chlorhydrique et chlorure de sodium",
+    "Acide éthanoïque et éthanoate de sodium",
+    "Soude et chlorure de sodium",
+    "Acide nitrique et nitrate de potassium"
+   ],
+   "answer": "B",
+   "explanation": "Un tampon associe un acide faible et sa base conjuguée ; HCl, NaOH et HNO₃ sont des espèces fortes dont les sels sont indifférents.",
+   "source": "Cours de chimie analytique, famille Skoog",
+   "verif": "import"
+  },
+  {
+   "course": "l2-chim",
+   "category": "Acides, bases et tampons",
+   "difficulty": 3,
+   "question": "Un tampon acétate a un pKa de 4,8 et un rapport [CH₃COO⁻]/[CH₃COOH] égal à 10. Quel est son pH ?",
+   "choices": [
+    "5,8",
+    "3,8",
+    "4,8",
+    "6,8"
+   ],
+   "answer": "A",
+   "explanation": "pH = pKa + log([base]/[acide]) = 4,8 + log 10 = 5,8.",
+   "source": "Cours de chimie analytique, famille Skoog",
+   "verif": "import"
+  },
+  {
+   "course": "l2-chim",
+   "category": "Acides, bases et tampons",
+   "difficulty": 5,
+   "question": "Quel est le pH approximatif d'une solution à 0,10 mol·L⁻¹ d'un acide faible de pKa = 4,8 ?",
+   "choices": [
+    "1,0",
+    "4,8",
+    "5,8",
+    "2,9"
+   ],
+   "answer": "D",
+   "explanation": "Pour un acide faible peu dissocié, pH ≈ ½(pKa − log C) = ½(4,8 + 1) = 2,9.",
+   "source": "Cours de chimie analytique, famille Skoog",
+   "verif": "import"
+  },
+  {
+   "course": "l2-chim",
+   "category": "Courbes de dosage et indicateurs",
+   "difficulty": 1,
+   "question": "Qu'appelle-t-on point d'équivalence d'un dosage ?",
+   "choices": [
+    "Le point où le pH de la solution est toujours égal à 7",
+    "Le point où les réactifs sont en proportions stœchiométriques",
+    "Le point où l'indicateur coloré change de couleur, par définition",
+    "Le point où la burette est entièrement vidée"
+   ],
+   "answer": "B",
+   "explanation": "À l'équivalence, la quantité de réactif titrant versée correspond exactement à la quantité de réactif titré, selon l'équation de dosage.",
+   "source": "Cours de chimie analytique, famille Skoog",
+   "verif": "import"
+  },
+  {
+   "course": "l2-chim",
+   "category": "Courbes de dosage et indicateurs",
+   "difficulty": 1,
+   "question": "Quelle est la couleur de la phénolphtaléine en milieu basique ?",
+   "choices": [
+    "Incolore",
+    "Jaune",
+    "Bleue",
+    "Rose"
+   ],
+   "answer": "D",
+   "explanation": "La phénolphtaléine est incolore en milieu acide et rose en milieu basique (virage vers pH 8-10).",
+   "source": "Cours de chimie analytique, famille Skoog",
+   "verif": "import"
+  },
+  {
+   "course": "l2-chim",
+   "category": "Courbes de dosage et indicateurs",
+   "difficulty": 2,
+   "question": "Lors du dosage d'un acide faible HA par une base forte, que vaut le pH à la demi-équivalence ?",
+   "choices": [
+    "pH = 7",
+    "pH = 14 − pKa",
+    "pH = pKa",
+    "pH = ½ pKa"
+   ],
+   "answer": "C",
+   "explanation": "À la demi-équivalence, [HA] = [A⁻], donc pH = pKa + log 1 = pKa.",
+   "source": "Cours de chimie analytique, famille Skoog",
+   "verif": "import"
+  },
+  {
+   "course": "l2-chim",
+   "category": "Courbes de dosage et indicateurs",
+   "difficulty": 3,
+   "question": "Lors du dosage d'un acide faible par une base forte, que dire du pH à l'équivalence ?",
+   "choices": [
+    "Supérieur à 7",
+    "Égal à 7",
+    "Inférieur à 7",
+    "Égal au pKa"
+   ],
+   "answer": "A",
+   "explanation": "À l'équivalence, la base conjuguée A⁻ de l'acide faible est présente ; elle est basique, donc pH > 7.",
+   "source": "Cours de chimie analytique, famille Skoog",
+   "verif": "import"
+  },
+  {
+   "course": "l2-chim",
+   "category": "Courbes de dosage et indicateurs",
+   "difficulty": 5,
+   "question": "Pour doser l'ammoniac (base faible) par l'acide chlorhydrique, quel indicateur choisir ?",
+   "choices": [
+    "La phénolphtaléine (virage ≈ 8,2-10,0)",
+    "La thymolphtaléine (virage ≈ 9,3-10,5)",
+    "Le jaune d'alizarine R (virage ≈ 10-12)",
+    "Le rouge de méthyle (virage ≈ 4,4-6,2)"
+   ],
+   "answer": "D",
+   "explanation": "À l'équivalence, NH₄⁺ rend le milieu acide (pH ≈ 5) : il faut un indicateur dont la zone de virage contient ce pH.",
+   "source": "Cours de chimie analytique, famille Skoog",
+   "verif": "import"
+  },
+  {
+   "course": "l2-chim",
+   "category": "Diagrammes potentiel-pH",
+   "difficulty": 1,
+   "question": "Que représente un diagramme de Pourbaix ?",
+   "choices": [
+    "Les domaines de stabilité des espèces selon le potentiel et le pH",
+    "Les domaines de stabilité des espèces selon la température et la pression",
+    "La vitesse de corrosion d'un métal en fonction du temps écoulé",
+    "Les températures de fusion des oxydes en fonction du pH du milieu"
+   ],
+   "answer": "A",
+   "explanation": "Le diagramme potentiel-pH (E-pH) délimite les domaines de prédominance ou d'existence des espèces d'un élément.",
+   "source": "Cours de chimie générale, famille Chang / Atkins",
+   "verif": "import"
+  },
+  {
+   "course": "l2-chim",
+   "category": "Diagrammes potentiel-pH",
+   "difficulty": 2,
+   "question": "Dans un diagramme E-pH d'un métal, comment nomme-t-on le domaine où le métal solide est stable ?",
+   "choices": [
+    "Le domaine de corrosion",
+    "Le domaine de passivation",
+    "Le domaine d'immunité",
+    "Le domaine d'hydrolyse"
+   ],
+   "answer": "C",
+   "explanation": "Dans le domaine d'immunité, le métal est thermodynamiquement stable et ne se corrode pas.",
+   "source": "Cours de chimie générale, famille Chang / Atkins",
+   "verif": "import"
+  },
+  {
+   "course": "l2-chim",
+   "category": "Diagrammes potentiel-pH",
+   "difficulty": 2,
+   "question": "Que désigne le domaine de passivation d'un métal sur un diagramme E-pH ?",
+   "choices": [
+    "Une zone où le métal est entièrement dissous en ions en solution",
+    "Une zone où un oxyde ou hydroxyde solide recouvre le métal",
+    "Une zone où le métal est thermodynamiquement stable à l'état pur",
+    "Une zone où l'eau est réduite en dihydrogène gazeux"
+   ],
+   "answer": "B",
+   "explanation": "En passivation, la couche d'oxyde ou d'hydroxyde solide adhérente peut protéger le métal de la corrosion.",
+   "source": "Cours de chimie générale, famille Chang / Atkins",
+   "verif": "import"
+  },
+  {
+   "course": "l2-chim",
+   "category": "Diagrammes potentiel-pH",
+   "difficulty": 3,
+   "question": "Pour le couple Fe³⁺/Fe²⁺, dont la demi-équation ne fait pas intervenir H⁺, comment est la frontière sur un diagramme E-pH ?",
+   "choices": [
+    "Verticale (pH fixé à une valeur donnée)",
+    "Oblique, de pente négative en volts par unité de pH",
+    "Horizontale (E indépendant du pH)",
+    "Oblique, de pente positive en volts par unité de pH"
+   ],
+   "answer": "C",
+   "explanation": "Sans H⁺ dans la demi-équation, l'équation de Nernst ne contient pas le pH : la frontière est horizontale.",
+   "source": "Cours de chimie générale, famille Chang / Atkins",
+   "verif": "import"
+  },
+  {
+   "course": "l2-chim",
+   "category": "Diagrammes potentiel-pH",
+   "difficulty": 5,
+   "question": "Pour le couple H⁺/H₂ à 25 °C et pH₂ = 1 bar, quelle est l'équation de la frontière sur un diagramme E-pH (E en volts) ?",
+   "choices": [
+    "E = 1,23 − 0,059 pH",
+    "E = −0,118 pH",
+    "E = 0 quel que soit le pH",
+    "E = −0,059 pH"
+   ],
+   "answer": "D",
+   "explanation": "2 H⁺ + 2 e⁻ = H₂ donne E = E° + 0,059 log[H⁺] = −0,059 pH, avec E° = 0 V.",
+   "source": "Cours de chimie générale, famille Chang / Atkins",
+   "verif": "import"
+  },
+  {
+   "course": "l2-chim",
+   "category": "Potentiels d'électrode et Nernst",
+   "difficulty": 1,
+   "question": "Quel est le potentiel standard de l'électrode normale à hydrogène (ENH), prise comme référence ?",
+   "choices": [
+    "+1,00 V",
+    "0 V",
+    "−0,76 V",
+    "+0,34 V"
+   ],
+   "answer": "B",
+   "explanation": "Par convention, le potentiel standard du couple H⁺/H₂ est fixé à 0 V à toute température.",
+   "source": "Cours de chimie générale, famille Chang / Atkins",
+   "verif": "import"
+  },
+  {
+   "course": "l2-chim",
+   "category": "Potentiels d'électrode et Nernst",
+   "difficulty": 1,
+   "question": "Que se passe-t-il lors d'une oxydation ?",
+   "choices": [
+    "Une espèce perd des électrons",
+    "Une espèce gagne des électrons",
+    "Une espèce gagne des protons",
+    "Une espèce perd des neutrons"
+   ],
+   "answer": "A",
+   "explanation": "Une oxydation correspond à une perte d'électrons, donc à une augmentation du nombre d'oxydation.",
+   "source": "Cours de chimie générale, famille Chang / Atkins",
+   "verif": "import"
+  },
+  {
+   "course": "l2-chim",
+   "category": "Potentiels d'électrode et Nernst",
+   "difficulty": 2,
+   "question": "Dans une pile galvanique, quelle réaction a lieu à la cathode ?",
+   "choices": [
+    "Une réduction",
+    "Une oxydation",
+    "Une précipitation",
+    "Une neutralisation"
+   ],
+   "answer": "A",
+   "explanation": "La cathode est l'électrode où se produit la réduction ; l'anode est le siège de l'oxydation.",
+   "source": "Cours de chimie générale, famille Chang / Atkins",
+   "verif": "import"
+  },
+  {
+   "course": "l2-chim",
+   "category": "Potentiels d'électrode et Nernst",
+   "difficulty": 3,
+   "question": "À 25 °C, E°(Cu²⁺/Cu) = 0,34 V. Quel est le potentiel de l'électrode de cuivre dans une solution à [Cu²⁺] = 0,01 mol·L⁻¹ ?",
+   "choices": [
+    "0,40 V",
+    "0,34 V",
+    "0,16 V",
+    "0,28 V"
+   ],
+   "answer": "D",
+   "explanation": "E = E° + (0,059/2) log[Cu²⁺] = 0,34 + 0,0295 × (−2) ≈ 0,28 V.",
+   "source": "Cours de chimie physique de licence, famille Atkins",
+   "verif": "import"
+  },
+  {
+   "course": "l2-chim",
+   "category": "Potentiels d'électrode et Nernst",
+   "difficulty": 5,
+   "question": "La pile Daniell (n = 2, E° = 1,10 V) a une constante d'équilibre K liée à E° par log K = nE°/0,059 à 25 °C. Quel est l'ordre de grandeur de K ?",
+   "choices": [
+    "10¹⁸",
+    "10⁷⁴",
+    "10³⁷",
+    "10³"
+   ],
+   "answer": "C",
+   "explanation": "log K = 2 × 1,10 / 0,059 ≈ 37, donc K ≈ 10³⁷ : la réaction Zn + Cu²⁺ est quasi totale.",
+   "source": "Cours de chimie physique de licence, famille Atkins",
+   "verif": "import"
+  },
+  {
+   "course": "l2-chim",
+   "category": "Piles, accumulateurs et corrosion",
+   "difficulty": 1,
+   "question": "De quels métaux sont constituées les électrodes de la pile Daniell ?",
+   "choices": [
+    "Plomb et cuivre",
+    "Zinc et cuivre",
+    "Fer et zinc",
+    "Argent et plomb"
+   ],
+   "answer": "B",
+   "explanation": "La pile Daniell associe une électrode de zinc dans Zn²⁺ et une électrode de cuivre dans Cu²⁺.",
+   "source": "Cours de chimie générale, famille Chang / Atkins",
+   "verif": "import"
+  },
+  {
+   "course": "l2-chim",
+   "category": "Piles, accumulateurs et corrosion",
+   "difficulty": 2,
+   "question": "Quelle propriété distingue un accumulateur d'une pile saline usuelle ?",
+   "choices": [
+    "Il ne contient pas d'électrolyte",
+    "Il produit un courant alternatif",
+    "Il a toujours une tension plus faible",
+    "Il est rechargeable"
+   ],
+   "answer": "D",
+   "explanation": "Dans un accumulateur, les réactions peuvent être inversées par un courant extérieur, ce qui permet de le recharger.",
+   "source": "Cours de chimie générale, famille Chang / Atkins",
+   "verif": "import"
+  },
+  {
+   "course": "l2-chim",
+   "category": "Piles, accumulateurs et corrosion",
+   "difficulty": 3,
+   "question": "Pourquoi relie-t-on un bloc de zinc à la coque en fer d'un bateau ?",
+   "choices": [
+    "Le zinc, moins réducteur, s'oxyde à la place du fer",
+    "Le zinc catalyse la formation de rouille",
+    "Le zinc, plus réducteur, s'oxyde à la place du fer",
+    "Le zinc rend la coque plus lourde et plus stable"
+   ],
+   "answer": "C",
+   "explanation": "Le zinc a un potentiel plus bas que le fer : il joue le rôle d'anode sacrificielle et protège le fer.",
+   "source": "Cours de chimie générale, famille Chang / Atkins",
+   "verif": "import"
+  },
+  {
+   "course": "l2-chim",
+   "category": "Piles, accumulateurs et corrosion",
+   "difficulty": 5,
+   "question": "Lors de la décharge d'un accumulateur au plomb, que devient l'acide sulfurique de l'électrolyte ?",
+   "choices": [
+    "Il est produit et sa concentration augmente nettement",
+    "Il est consommé et sa concentration diminue",
+    "Il reste inchangé car c'est un simple catalyseur",
+    "Il se décompose en dioxyde de soufre gazeux et en eau"
+   ],
+   "answer": "B",
+   "explanation": "À la décharge, Pb et PbO₂ forment PbSO₄ en consommant H₂SO₄, ce qui fait baisser la densité de l'électrolyte.",
+   "source": "Cours de chimie générale, famille Chang / Atkins",
+   "verif": "import"
+  },
+  {
+   "course": "l2-chim",
+   "category": "Cinétique : ordres et loi d'Arrhenius",
+   "difficulty": 1,
+   "question": "Dans la loi de vitesse v = k[A]^a[B]^b, comment appelle-t-on la somme a + b ?",
+   "choices": [
+    "La molécularité de la réaction",
+    "L'ordre global de la réaction",
+    "L'énergie d'activation",
+    "Le facteur de fréquence"
+   ],
+   "answer": "B",
+   "explanation": "L'ordre global est la somme des ordres partiels ; il est déterminé expérimentalement.",
+   "source": "Cours de chimie physique de licence, famille Atkins",
+   "verif": "import"
+  },
+  {
+   "course": "l2-chim",
+   "category": "Cinétique : ordres et loi d'Arrhenius",
+   "difficulty": 1,
+   "question": "Quelle est l'unité de la constante de vitesse k pour une réaction d'ordre 1 ?",
+   "choices": [
+    "mol·L⁻¹·s⁻¹",
+    "L·mol⁻¹·s⁻¹",
+    "mol·L⁻¹",
+    "s⁻¹"
+   ],
+   "answer": "D",
+   "explanation": "Pour v = k[A] avec v en mol·L⁻¹·s⁻¹, k s'exprime en s⁻¹.",
+   "source": "Cours de chimie physique de licence, famille Atkins",
+   "verif": "import"
+  },
+  {
+   "course": "l2-chim",
+   "category": "Cinétique : ordres et loi d'Arrhenius",
+   "difficulty": 2,
+   "question": "D'après la loi d'Arrhenius, que représente la pente de la droite ln k en fonction de 1/T ?",
+   "choices": [
+    "ln A",
+    "Ea/(RT)",
+    "−Ea/R",
+    "−RT/Ea"
+   ],
+   "answer": "C",
+   "explanation": "ln k = ln A − Ea/(RT) : la pente vaut −Ea/R et l'ordonnée à l'origine ln A.",
+   "source": "Cours de chimie physique de licence, famille Atkins",
+   "verif": "import"
+  },
+  {
+   "course": "l2-chim",
+   "category": "Cinétique : ordres et loi d'Arrhenius",
+   "difficulty": 3,
+   "question": "Que peut-on dire du temps de demi-réaction d'une réaction d'ordre 1 ?",
+   "choices": [
+    "Il est indépendant de la concentration initiale",
+    "Il est proportionnel à la concentration initiale",
+    "Il est inversement proportionnel à la concentration initiale",
+    "Il est nul"
+   ],
+   "answer": "A",
+   "explanation": "Pour l'ordre 1, t½ = ln 2 / k ne dépend que de k, comme pour la désintégration radioactive.",
+   "source": "Cours de chimie physique de licence, famille Atkins",
+   "verif": "import"
+  },
+  {
+   "course": "l2-chim",
+   "category": "Cinétique : ordres et loi d'Arrhenius",
+   "difficulty": 5,
+   "question": "Pour une réaction A → produits d'ordre 0, comment varie le temps de demi-réaction avec la concentration initiale [A]₀ ?",
+   "choices": [
+    "Il est proportionnel à [A]₀",
+    "Il est indépendant de [A]₀",
+    "Il est inversement proportionnel à [A]₀",
+    "Il est proportionnel à [A]₀²"
+   ],
+   "answer": "A",
+   "explanation": "Pour l'ordre 0, [A] décroît linéairement et t½ = [A]₀ / (2k).",
+   "source": "Cours de chimie physique de licence, famille Atkins",
+   "verif": "import"
+  },
+  {
+   "course": "l2-chim",
+   "category": "Catalyse homogène et enzymatique",
+   "difficulty": 1,
+   "question": "Qu'est-ce qu'un catalyseur ?",
+   "choices": [
+    "Une espèce qui déplace l'équilibre vers les produits formés",
+    "Une espèce qui accélère une réaction sans être consommée au bilan",
+    "Une espèce qui augmente le rendement à l'équilibre de la réaction",
+    "Une espèce qui est entièrement consommée au cours de la réaction"
+   ],
+   "answer": "B",
+   "explanation": "Un catalyseur augmente la vitesse en offrant un chemin réactionnel d'énergie d'activation plus basse, et il est régénéré.",
+   "source": "Cours de chimie physique de licence, famille Atkins",
+   "verif": "import"
+  },
+  {
+   "course": "l2-chim",
+   "category": "Catalyse homogène et enzymatique",
+   "difficulty": 2,
+   "question": "Quel est l'effet d'un catalyseur sur l'énergie d'activation et sur la constante d'équilibre K ?",
+   "choices": [
+    "Il abaisse Ea et augmente K",
+    "Il augmente Ea et laisse K inchangée",
+    "Il abaisse Ea et laisse K inchangée",
+    "Il laisse Ea inchangée et augmente K"
+   ],
+   "answer": "C",
+   "explanation": "Le catalyseur accélère de même les réactions directe et inverse, sans modifier la thermodynamique : K reste la même.",
+   "source": "Cours de chimie physique de licence, famille Atkins",
+   "verif": "import"
+  },
+  {
+   "course": "l2-chim",
+   "category": "Catalyse homogène et enzymatique",
+   "difficulty": 2,
+   "question": "Que caractérise une catalyse homogène ?",
+   "choices": [
+    "Le catalyseur est toujours un solide finement divisé",
+    "Le catalyseur se trouve dans une phase différente de celle des réactifs",
+    "Le catalyseur est obligatoirement une enzyme",
+    "Le catalyseur est dans la même phase que les réactifs"
+   ],
+   "answer": "D",
+   "explanation": "En catalyse homogène, catalyseur et réactifs forment une seule phase, par exemple en solution ; en catalyse hétérogène, les phases diffèrent.",
+   "source": "Cours de chimie physique de licence, famille Atkins",
+   "verif": "import"
+  },
+  {
+   "course": "l2-chim",
+   "category": "Catalyse homogène et enzymatique",
+   "difficulty": 3,
+   "question": "Dans une enzyme, comment appelle-t-on la région où le substrat se fixe et est transformé ?",
+   "choices": [
+    "Le site allostérique",
+    "Le site anomérique",
+    "Le site actif",
+    "Le site conjugué"
+   ],
+   "answer": "C",
+   "explanation": "Le substrat se lie au site actif de l'enzyme, formant le complexe enzyme-substrat avant la transformation en produit.",
+   "source": "Cours de chimie physique de licence, famille Atkins",
+   "verif": "import"
+  },
+  {
+   "course": "l2-chim",
+   "category": "Catalyse homogène et enzymatique",
+   "difficulty": 4,
+   "question": "Dans le modèle de Michaelis-Menten, que représente la constante KM ?",
+   "choices": [
+    "La concentration en enzyme pour laquelle v = Vmax/2",
+    "La concentration en substrat pour laquelle v = Vmax/2",
+    "La vitesse maximale que la réaction peut atteindre",
+    "La concentration en substrat pour laquelle v = Vmax"
+   ],
+   "answer": "B",
+   "explanation": "KM est, par définition, la concentration de substrat à laquelle la vitesse initiale vaut la moitié de la vitesse maximale.",
+   "source": "Cours de chimie physique de licence, famille Atkins",
+   "verif": "import"
+  },
+  {
+   "course": "l2-chim",
+   "category": "Stéréochimie, isomérie, chiralité",
+   "difficulty": 1,
+   "question": "Qu'appelle-t-on carbone asymétrique ?",
+   "choices": [
+    "Un carbone lié à quatre substituants différents",
+    "Un carbone lié à deux atomes d'hydrogène et à deux méthyles",
+    "Un carbone engagé dans une double liaison avec un autre carbone",
+    "Un carbone lié à un atome d'oxygène par une liaison double"
+   ],
+   "answer": "A",
+   "explanation": "Un carbone tétraédrique portant quatre groupes différents est un centre stéréogène, source de chiralité.",
+   "source": "Cours de licence de chimie organique, famille des manuels Clayden / McMurry",
+   "verif": "import"
+  },
+  {
+   "course": "l2-chim",
+   "category": "Stéréochimie, isomérie, chiralité",
+   "difficulty": 1,
+   "question": "Comment qualifie-t-on deux stéréoisomères qui sont images l'un de l'autre dans un miroir sans être superposables ?",
+   "choices": [
+    "Des diastéréoisomères",
+    "Des isomères de constitution",
+    "Des conformères",
+    "Des énantiomères"
+   ],
+   "answer": "D",
+   "explanation": "Les énantiomères sont des molécules chirales images spéculaires l'une de l'autre, non superposables.",
+   "source": "Cours de licence de chimie organique, famille des manuels Clayden / McMurry",
+   "verif": "import"
+  },
+  {
+   "course": "l2-chim",
+   "category": "Stéréochimie, isomérie, chiralité",
+   "difficulty": 2,
+   "question": "Comment appelle-t-on des stéréoisomères qui ne sont pas images l'un de l'autre dans un miroir ?",
+   "choices": [
+    "Des diastéréoisomères",
+    "Des énantiomères",
+    "Des tautomères",
+    "Des anomères optiques"
+   ],
+   "answer": "A",
+   "explanation": "Les diastéréoisomères sont des stéréoisomères non énantiomères ; ils ont des propriétés physiques différentes.",
+   "source": "Cours de licence de chimie organique, famille des manuels Clayden / McMurry",
+   "verif": "import"
+  },
+  {
+   "course": "l2-chim",
+   "category": "Stéréochimie, isomérie, chiralité",
+   "difficulty": 3,
+   "question": "Qu'est-ce qu'un mélange racémique ?",
+   "choices": [
+    "Un mélange de deux diastéréoisomères en proportions égales, inactif",
+    "Un mélange équimolaire de deux énantiomères, optiquement inactif",
+    "Un énantiomère pur à fort pouvoir rotatoire spécifique",
+    "Un mélange équimolaire de deux isomères de constitution, actif"
+   ],
+   "answer": "B",
+   "explanation": "Les pouvoirs rotatoires des deux énantiomères se compensent exactement dans un racémique.",
+   "source": "Cours de licence de chimie organique, famille des manuels Clayden / McMurry",
+   "verif": "import"
+  },
+  {
+   "course": "l2-chim",
+   "category": "Stéréochimie, isomérie, chiralité",
+   "difficulty": 4,
+   "question": "Combien de stéréoisomères distincts le 2,3-dibromobutane possède-t-il ?",
+   "choices": [
+    "2",
+    "4",
+    "6",
+    "3"
+   ],
+   "answer": "D",
+   "explanation": "Il a deux centres stéréogènes identiques : une paire d'énantiomères (R,R) et (S,S) et un composé méso (R,S), soit 3.",
+   "source": "Cours de licence de chimie organique, famille des manuels Clayden / McMurry",
+   "verif": "import"
+  },
+  {
+   "course": "l2-chim",
+   "category": "Effets électroniques",
+   "difficulty": 1,
+   "question": "Qu'est-ce que l'effet inductif ?",
+   "choices": [
+    "La délocalisation des électrons π sur plusieurs atomes voisins",
+    "La rotation libre autour d'une liaison simple C-C",
+    "La polarisation des liaisons σ due aux différences d'électronégativité",
+    "La rupture homolytique d'une liaison covalente"
+   ],
+   "answer": "C",
+   "explanation": "L'effet inductif est la transmission, le long des liaisons σ, de la polarisation créée par un atome ou groupe plus ou moins électronégatif.",
+   "source": "Cours de licence de chimie organique, famille des manuels Clayden / McMurry",
+   "verif": "import"
+  },
+  {
+   "course": "l2-chim",
+   "category": "Effets électroniques",
+   "difficulty": 2,
+   "question": "Quel groupe exerce un effet inductif attracteur (−I) ?",
+   "choices": [
+    "Un groupe méthyle",
+    "Un groupe éthyle",
+    "Un atome de chlore",
+    "Un groupe tert-butyle"
+   ],
+   "answer": "C",
+   "explanation": "Le chlore, plus électronégatif que le carbone, attire les électrons de la liaison σ ; les groupes alkyles sont donneurs (+I).",
+   "source": "Cours de licence de chimie organique, famille des manuels Clayden / McMurry",
+   "verif": "import"
+  },
+  {
+   "course": "l2-chim",
+   "category": "Effets électroniques",
+   "difficulty": 2,
+   "question": "En quoi consiste l'effet mésomère ?",
+   "choices": [
+    "La polarisation des seules liaisons σ par un substituant voisin",
+    "Le déplacement d'un noyau atomique dans la molécule",
+    "La variation de géométrie d'un cycle à six chaînons",
+    "La délocalisation d'électrons π ou de doublets non liants"
+   ],
+   "answer": "D",
+   "explanation": "L'effet mésomère décrit la délocalisation des électrons π et des doublets libres, représentée par des formes limites.",
+   "source": "Cours de licence de chimie organique, famille des manuels Clayden / McMurry",
+   "verif": "import"
+  },
+  {
+   "course": "l2-chim",
+   "category": "Effets électroniques",
+   "difficulty": 3,
+   "question": "Quel est l'ordre de stabilité croissante des carbocations ?",
+   "choices": [
+    "Primaire < secondaire < tertiaire",
+    "Tertiaire < secondaire < primaire",
+    "Secondaire < primaire < tertiaire",
+    "Primaire < tertiaire < secondaire"
+   ],
+   "answer": "A",
+   "explanation": "Les groupes alkyles donneurs (+I) et l'hyperconjugaison stabilisent la charge positive : le carbocation tertiaire est le plus stable.",
+   "source": "Cours de licence de chimie organique, famille des manuels Clayden / McMurry",
+   "verif": "import"
+  },
+  {
+   "course": "l2-chim",
+   "category": "Effets électroniques",
+   "difficulty": 4,
+   "question": "Pourquoi le phénol est-il un acide plus fort que l'éthanol ?",
+   "choices": [
+    "L'ion éthanolate est stabilisé par délocalisation de la charge dans un cycle",
+    "L'ion phénolate est stabilisé par délocalisation de la charge dans le cycle",
+    "Le phénol possède une liaison O-H toujours plus faible que celle de l'éthanol",
+    "Le phénol est une molécule plus petite que l'éthanol, donc plus acide"
+   ],
+   "answer": "B",
+   "explanation": "La charge négative du phénolate est délocalisée sur le cycle aromatique (effet mésomère), ce qui stabilise la base conjuguée.",
+   "source": "Cours de licence de chimie organique, famille des manuels Clayden / McMurry",
+   "verif": "import"
+  },
+  {
+   "course": "l2-chim",
+   "category": "Substitution nucléophile SN1 et SN2",
+   "difficulty": 1,
+   "question": "Comment se déroule le mécanisme SN2 ?",
+   "choices": [
+    "En deux étapes avec un carbocation intermédiaire",
+    "En une seule étape concertée",
+    "En trois étapes avec un radical",
+    "En deux étapes avec un carbanion intermédiaire"
+   ],
+   "answer": "B",
+   "explanation": "En SN2, l'attaque du nucléophile et le départ du groupe partant ont lieu simultanément dans un seul état de transition.",
+   "source": "Cours de licence de chimie organique, famille des manuels Clayden / McMurry",
+   "verif": "import"
+  },
+  {
+   "course": "l2-chim",
+   "category": "Substitution nucléophile SN1 et SN2",
+   "difficulty": 1,
+   "question": "Quel intermédiaire réactionnel intervient dans un mécanisme SN1 ?",
+   "choices": [
+    "Un carbocation",
+    "Un carbanion",
+    "Un radical libre",
+    "Un carbène"
+   ],
+   "answer": "A",
+   "explanation": "En SN1, le groupe partant s'en va d'abord, ce qui forme un carbocation ensuite attaqué par le nucléophile.",
+   "source": "Cours de licence de chimie organique, famille des manuels Clayden / McMurry",
+   "verif": "import"
+  },
+  {
+   "course": "l2-chim",
+   "category": "Substitution nucléophile SN1 et SN2",
+   "difficulty": 2,
+   "question": "Quelle est la conséquence stéréochimique d'une SN2 sur un carbone stéréogène ?",
+   "choices": [
+    "Une rétention de configuration",
+    "Une racémisation complète",
+    "Une inversion de configuration",
+    "Une perte du groupe partant sans changement"
+   ],
+   "answer": "C",
+   "explanation": "Le nucléophile attaque du côté opposé au groupe partant, d'où l'inversion de Walden.",
+   "source": "Cours de licence de chimie organique, famille des manuels Clayden / McMurry",
+   "verif": "import"
+  },
+  {
+   "course": "l2-chim",
+   "category": "Substitution nucléophile SN1 et SN2",
+   "difficulty": 3,
+   "question": "Quelle est la loi de vitesse d'une réaction SN1 sur un halogénoalcane RX ?",
+   "choices": [
+    "v = k[RX][Nu⁻]",
+    "v = k[Nu⁻]",
+    "v = k[RX]²",
+    "v = k[RX]"
+   ],
+   "answer": "D",
+   "explanation": "L'étape lente est l'ionisation de RX seule : la vitesse est d'ordre 1 et indépendante de la concentration en nucléophile.",
+   "source": "Cours de licence de chimie organique, famille des manuels Clayden / McMurry",
+   "verif": "import"
+  },
+  {
+   "course": "l2-chim",
+   "category": "Substitution nucléophile SN1 et SN2",
+   "difficulty": 4,
+   "question": "Que donne une SN1 à partir d'un halogénoalcane chiral dont le carbone stéréogène forme un carbocation plan ?",
+   "choices": [
+    "Uniquement le produit d'inversion de configuration (Walden)",
+    "Uniquement le produit de rétention de configuration",
+    "Un mélange des produits de rétention et d'inversion",
+    "Un produit achiral formé exclusivement, sans stéréoisomère"
+   ],
+   "answer": "C",
+   "explanation": "Le nucléophile peut attaquer le carbocation plan par les deux faces : le produit est racémisé en totalité ou en partie.",
+   "source": "Cours de licence de chimie organique, famille des manuels Clayden / McMurry",
+   "verif": "import"
+  },
+  {
+   "course": "l2-chim",
+   "category": "Élimination E1 et E2",
+   "difficulty": 1,
+   "question": "Quel type de composé forme une réaction d'élimination à partir d'un halogénoalcane ?",
+   "choices": [
+    "Un alcène",
+    "Un alcool",
+    "Un acide carboxylique",
+    "Un éther"
+   ],
+   "answer": "A",
+   "explanation": "La perte de HX d'un halogénoalcane crée une double liaison C=C.",
+   "source": "Cours de licence de chimie organique, famille des manuels Clayden / McMurry",
+   "verif": "import"
+  },
+  {
+   "course": "l2-chim",
+   "category": "Élimination E1 et E2",
+   "difficulty": 2,
+   "question": "Que dit la règle de Zaïtsev ?",
+   "choices": [
+    "L'alcène le moins substitué est le produit majoritaire",
+    "L'alcène le plus substitué est le produit majoritaire",
+    "Le produit est toujours l'alcène terminal",
+    "L'alcool est le produit majoritaire"
+   ],
+   "answer": "B",
+   "explanation": "Dans les conditions usuelles d'élimination, l'alcène le plus substitué, donc le plus stable, est favorisé.",
+   "source": "Cours de licence de chimie organique, famille des manuels Clayden / McMurry",
+   "verif": "import"
+  },
+  {
+   "course": "l2-chim",
+   "category": "Élimination E1 et E2",
+   "difficulty": 2,
+   "question": "Quelles sont les caractéristiques du mécanisme E2 ?",
+   "choices": [
+    "Deux étapes avec un carbocation intermédiaire",
+    "Une étape radicalaire sous irradiation",
+    "Deux étapes avec un carbanion stable",
+    "Une étape concertée avec une base forte"
+   ],
+   "answer": "D",
+   "explanation": "En E2, la base arrache le H en même temps que le groupe partant quitte, avec une cinétique d'ordre 2.",
+   "source": "Cours de licence de chimie organique, famille des manuels Clayden / McMurry",
+   "verif": "import"
+  },
+  {
+   "course": "l2-chim",
+   "category": "Élimination E1 et E2",
+   "difficulty": 3,
+   "question": "Quel intermédiaire est commun aux mécanismes E1 et SN1 ?",
+   "choices": [
+    "Le carbanion",
+    "Le radical",
+    "Le carbocation",
+    "L'état de transition cyclique"
+   ],
+   "answer": "C",
+   "explanation": "E1 et SN1 débutent par la même ionisation lente ; le carbocation évolue ensuite par perte de H⁺ ou par attaque d'un nucléophile.",
+   "source": "Cours de licence de chimie organique, famille des manuels Clayden / McMurry",
+   "verif": "import"
+  },
+  {
+   "course": "l2-chim",
+   "category": "Élimination E1 et E2",
+   "difficulty": 4,
+   "question": "Quel alcène obtient-on majoritairement avec le tert-butylate de potassium, base volumineuse, à partir de 2-bromobutane ?",
+   "choices": [
+    "Le but-1-ène (produit de Hofmann)",
+    "Le but-2-ène (produit de Zaïtsev)",
+    "Le butan-2-ol (produit de substitution)",
+    "Le butane (produit de réduction)"
+   ],
+   "answer": "A",
+   "explanation": "Une base encombrée attaque le H le plus accessible : l'alcène le moins substitué (Hofmann) est favorisé.",
+   "source": "Cours de licence de chimie organique, famille des manuels Clayden / McMurry",
+   "verif": "import"
+  },
+  {
+   "course": "l2-chim",
+   "category": "Additions sur les alcènes",
+   "difficulty": 1,
+   "question": "Que constate-t-on quand on ajoute de l'eau de brome à un alcène ?",
+   "choices": [
+    "Elle devient rouge sang",
+    "Elle se décolore",
+    "Elle donne un précipité jaune",
+    "Elle ne change pas de couleur"
+   ],
+   "answer": "B",
+   "explanation": "Br₂ s'additionne sur la double liaison en formant un dérivé dibromé incolore : c'est un test d'insaturation.",
+   "source": "Cours de licence de chimie organique, famille des manuels Clayden / McMurry",
+   "verif": "import"
+  },
+  {
+   "course": "l2-chim",
+   "category": "Additions sur les alcènes",
+   "difficulty": 2,
+   "question": "Que dit la règle de Markovnikov pour l'addition de HX sur un alcène dissymétrique ?",
+   "choices": [
+    "H se fixe sur le carbone de la double liaison le moins hydrogéné",
+    "X se fixe toujours sur le carbone de la double liaison le plus hydrogéné",
+    "H et X se fixent tous les deux sur le même carbone",
+    "H se fixe sur le carbone de la double liaison le plus hydrogéné"
+   ],
+   "answer": "D",
+   "explanation": "L'addition passe par le carbocation le plus stable : H va sur le carbone qui porte déjà le plus d'hydrogènes.",
+   "source": "Cours de licence de chimie organique, famille des manuels Clayden / McMurry",
+   "verif": "import"
+  },
+  {
+   "course": "l2-chim",
+   "category": "Additions sur les alcènes",
+   "difficulty": 3,
+   "question": "Quelle est la stéréochimie de l'addition de Br₂ sur un alcène ?",
+   "choices": [
+    "Anti, via un ion bromonium",
+    "Syn, via un carbocation libre",
+    "Syn, via un ion bromonium",
+    "Anti, via un radical"
+   ],
+   "answer": "A",
+   "explanation": "L'ion bromonium cyclique est ouvert par Br⁻ du côté opposé, d'où une addition anti.",
+   "source": "Cours de licence de chimie organique, famille des manuels Clayden / McMurry",
+   "verif": "import"
+  },
+  {
+   "course": "l2-chim",
+   "category": "Additions sur les alcènes",
+   "difficulty": 4,
+   "question": "Quel est le produit majoritaire de l'addition de HBr sur le propène en présence de peroxydes ?",
+   "choices": [
+    "Le 2-bromopropane",
+    "Le 1,2-dibromopropane",
+    "Le 1-bromopropane",
+    "Le propan-2-ol"
+   ],
+   "answer": "C",
+   "explanation": "Avec des peroxydes, l'addition est radicalaire et anti-Markovnikov : Br se place sur le carbone le moins substitué.",
+   "source": "Cours de licence de chimie organique, famille des manuels Clayden / McMurry",
+   "verif": "import"
+  },
+  {
+   "course": "l2-chim",
+   "category": "Composés aromatiques et SEAr",
+   "difficulty": 1,
+   "question": "Quelle règle prédit l'aromaticité d'un cycle plan conjugué ?",
+   "choices": [
+    "La règle de Markovnikov (addition de HX)",
+    "La règle de Hückel (4n + 2 électrons π)",
+    "La règle de Zaïtsev (élimination)",
+    "La règle de l'octet de Lewis (valence)"
+   ],
+   "answer": "B",
+   "explanation": "Un système cyclique, plan et conjugué est aromatique s'il compte 4n + 2 électrons π : le benzène en a 6.",
+   "source": "Cours de licence de chimie organique, famille des manuels Clayden / McMurry",
+   "verif": "import"
+  },
+  {
+   "course": "l2-chim",
+   "category": "Composés aromatiques et SEAr",
+   "difficulty": 2,
+   "question": "Quel électrophile intervient dans la nitration du benzène par HNO₃/H₂SO₄ ?",
+   "choices": [
+    "L'ion nitronium NO₂⁺",
+    "L'ion nitrite NO₂⁻",
+    "L'ion nitrate NO₃⁻",
+    "Le radical NO₃•"
+   ],
+   "answer": "A",
+   "explanation": "L'acide sulfurique protone HNO₃ qui perd H₂O et forme NO₂⁺, l'électrophile attaquant le cycle.",
+   "source": "Cours de licence de chimie organique, famille des manuels Clayden / McMurry",
+   "verif": "import"
+  },
+  {
+   "course": "l2-chim",
+   "category": "Composés aromatiques et SEAr",
+   "difficulty": 2,
+   "question": "Comment nomme-t-on l'intermédiaire cationique d'une substitution électrophile aromatique ?",
+   "choices": [
+    "L'ion bromonium des additions de Br₂",
+    "Le complexe de Wheland (ion arénium)",
+    "L'ion oxonium des alcools protonés",
+    "Le complexe de Meisenheimer des SNAr"
+   ],
+   "answer": "B",
+   "explanation": "L'électrophile s'attache au cycle et forme un carbocation délocalisé, l'ion arénium, avant la perte de H⁺.",
+   "source": "Cours de licence de chimie organique, famille des manuels Clayden / McMurry",
+   "verif": "import"
+  },
+  {
+   "course": "l2-chim",
+   "category": "Composés aromatiques et SEAr",
+   "difficulty": 3,
+   "question": "Quel est l'effet d'un substituant hydroxyle (−OH) sur la substitution électrophile du benzène ?",
+   "choices": [
+    "Il désactive le cycle et oriente en méta",
+    "Il active le cycle et oriente en méta",
+    "Il désactive le cycle et oriente en ortho et para",
+    "Il active le cycle et oriente en ortho et para"
+   ],
+   "answer": "D",
+   "explanation": "Le doublet de l'oxygène est donneur par effet mésomère : il enrichit le cycle, surtout aux positions ortho et para.",
+   "source": "Cours de licence de chimie organique, famille des manuels Clayden / McMurry",
+   "verif": "import"
+  },
+  {
+   "course": "l2-chim",
+   "category": "Composés aromatiques et SEAr",
+   "difficulty": 4,
+   "question": "Pourquoi le nitrobenzène ne subit-il pas la réaction de Friedel-Crafts ?",
+   "choices": [
+    "Le groupe nitro active trop le cycle",
+    "Le nitrobenzène est trop volumineux pour AlCl₃",
+    "Le groupe nitro désactive fortement le cycle",
+    "Le nitrobenzène n'est pas aromatique"
+   ],
+   "answer": "C",
+   "explanation": "Le groupe −NO₂, fortement attracteur, appauvrit le cycle qui devient trop peu nucléophile pour la réaction.",
+   "source": "Cours de licence de chimie organique, famille des manuels Clayden / McMurry",
+   "verif": "import"
+  },
+  {
+   "course": "l2-chim",
+   "category": "Dérivés carbonylés : addition nucléophile",
+   "difficulty": 1,
+   "question": "Quel caractère présente le carbone d'un groupe carbonyle C=O ?",
+   "choices": [
+    "Nucléophile, car la liaison est polarisée vers C",
+    "Radicalaire, car la liaison est homolytique",
+    "Neutre, car la liaison C=O n'est pas polarisée",
+    "Électrophile, car la liaison est polarisée vers O"
+   ],
+   "answer": "D",
+   "explanation": "L'oxygène, plus électronégatif, attire les électrons : le carbone porte une charge partielle positive et subit l'attaque de nucléophiles.",
+   "source": "Cours de licence de chimie organique, famille des manuels Clayden / McMurry",
+   "verif": "import"
+  },
+  {
+   "course": "l2-chim",
+   "category": "Dérivés carbonylés : addition nucléophile",
+   "difficulty": 1,
+   "question": "Qu'est-ce qui distingue un aldéhyde d'une cétone ?",
+   "choices": [
+    "Le carbone carbonylique de la cétone porte toujours un hydrogène",
+    "Le carbone carbonylique de l'aldéhyde porte au moins un atome d'hydrogène",
+    "L'aldéhyde ne contient pas d'atome d'oxygène dans sa formule",
+    "La cétone contient obligatoirement un groupe hydroxyle libre"
+   ],
+   "answer": "B",
+   "explanation": "Dans un aldéhyde, le groupe C=O est en bout de chaîne, lié à un H ; dans une cétone, il est lié à deux carbones.",
+   "source": "Cours de licence de chimie organique, famille des manuels Clayden / McMurry",
+   "verif": "import"
+  },
+  {
+   "course": "l2-chim",
+   "category": "Dérivés carbonylés : addition nucléophile",
+   "difficulty": 2,
+   "question": "Quel alcool obtient-on par réduction d'un aldéhyde avec NaBH₄ ?",
+   "choices": [
+    "Un alcool secondaire",
+    "Un alcool tertiaire",
+    "Un alcool primaire",
+    "Un phénol"
+   ],
+   "answer": "C",
+   "explanation": "NaBH₄ apporte un ion hydrure sur C=O ; un aldéhyde donne un alcool primaire.",
+   "source": "Cours de licence de chimie organique, famille des manuels Clayden / McMurry",
+   "verif": "import"
+  },
+  {
+   "course": "l2-chim",
+   "category": "Dérivés carbonylés : addition nucléophile",
+   "difficulty": 3,
+   "question": "Quel type de produit forme un réactif de Grignard avec une cétone, après hydrolyse ?",
+   "choices": [
+    "Un alcool tertiaire",
+    "Un alcool primaire",
+    "Un alcool secondaire",
+    "Un acide carboxylique"
+   ],
+   "answer": "A",
+   "explanation": "Le groupe R de RMgX s'additionne sur C=O ; une cétone conduit à un alcool tertiaire.",
+   "source": "Cours de licence de chimie organique, famille des manuels Clayden / McMurry",
+   "verif": "import"
+  },
+  {
+   "course": "l2-chim",
+   "category": "Dérivés carbonylés : addition nucléophile",
+   "difficulty": 4,
+   "question": "Quel produit se forme par condensation d'un aldéhyde avec une amine primaire ?",
+   "choices": [
+    "Une amide",
+    "Un acétal",
+    "Un nitrile",
+    "Une imine"
+   ],
+   "answer": "D",
+   "explanation": "L'amine primaire s'additionne sur C=O puis l'eau est éliminée : on obtient une imine R-CH=N-R'.",
+   "source": "Cours de licence de chimie organique, famille des manuels Clayden / McMurry",
+   "verif": "import"
+  },
+  {
+   "course": "l2-chim",
+   "category": "Acides carboxyliques, esters et amides",
+   "difficulty": 1,
+   "question": "Quel groupe caractérise les acides carboxyliques ?",
+   "choices": [
+    "−CHO",
+    "−COOH",
+    "−CO−",
+    "−NH₂"
+   ],
+   "answer": "B",
+   "explanation": "Les acides carboxyliques portent le groupe carboxyle −COOH.",
+   "source": "Cours de licence de chimie organique, famille des manuels Clayden / McMurry",
+   "verif": "import"
+  },
+  {
+   "course": "l2-chim",
+   "category": "Acides carboxyliques, esters et amides",
+   "difficulty": 2,
+   "question": "Quelles sont les caractéristiques de l'estérification de Fischer ?",
+   "choices": [
+    "Une réaction limitée, catalysée par un acide, qui libère de l'eau",
+    "Une réaction totale, catalysée par une base, qui libère du dihydrogène",
+    "Une réaction irréversible sans catalyseur",
+    "Une réaction totale qui consomme de l'eau"
+   ],
+   "answer": "A",
+   "explanation": "Acide carboxylique et alcool forment ester et eau selon un équilibre, accéléré par un catalyseur acide.",
+   "source": "Cours de licence de chimie organique, famille des manuels Clayden / McMurry",
+   "verif": "import"
+  },
+  {
+   "course": "l2-chim",
+   "category": "Acides carboxyliques, esters et amides",
+   "difficulty": 2,
+   "question": "Que donne la saponification d'un ester par la soude ?",
+   "choices": [
+    "Un acide carboxylique et un alcool",
+    "Un amide et de l'eau",
+    "Un carboxylate et un alcool",
+    "Un aldéhyde et un alcool"
+   ],
+   "answer": "C",
+   "explanation": "L'hydrolyse basique d'un ester est totale ; elle forme le carboxylate de sodium (savon pour les esters d'acides gras) et l'alcool.",
+   "source": "Cours de licence de chimie organique, famille des manuels Clayden / McMurry",
+   "verif": "import"
+  },
+  {
+   "course": "l2-chim",
+   "category": "Acides carboxyliques, esters et amides",
+   "difficulty": 3,
+   "question": "Quel est l'ordre de réactivité décroissante envers les nucléophiles de ces dérivés d'acide ?",
+   "choices": [
+    "Amide > ester > anhydride > chlorure d'acyle",
+    "Ester > chlorure d'acyle > amide > anhydride",
+    "Chlorure d'acyle > anhydride > ester > amide",
+    "Anhydride > amide > chlorure d'acyle > ester"
+   ],
+   "answer": "C",
+   "explanation": "Plus le groupe partant est bon (Cl⁻ meilleur que RCOO⁻, RO⁻, puis NR₂⁻) et moins le carbonyle est stabilisé, plus la réactivité est grande.",
+   "source": "Cours de licence de chimie organique, famille des manuels Clayden / McMurry",
+   "verif": "import"
+  },
+  {
+   "course": "l2-chim",
+   "category": "Acides carboxyliques, esters et amides",
+   "difficulty": 4,
+   "question": "Pourquoi l'azote d'un amide est-il très peu basique ?",
+   "choices": [
+    "Son doublet est engagé dans une liaison double avec O",
+    "Son doublet est délocalisé vers le carbonyle",
+    "Il est chargé positivement dans l'amide",
+    "Il porte trois substituants électrodonneurs"
+   ],
+   "answer": "B",
+   "explanation": "Le doublet de l'azote est conjugué avec C=O (mésomérie), donc peu disponible pour capter un proton.",
+   "source": "Cours de licence de chimie organique, famille des manuels Clayden / McMurry",
+   "verif": "import"
+  },
+  {
+   "course": "l2-chim",
+   "category": "Amines et composés azotés",
+   "difficulty": 1,
+   "question": "Qu'est-ce qu'une amine ?",
+   "choices": [
+    "Un dérivé de l'eau dont un H est remplacé par un groupe carboné",
+    "Un composé organique contenant le groupe carboxyle −COOH",
+    "Un composé organique contenant une liaison triple C≡N",
+    "Un dérivé de l'ammoniac dont des H sont remplacés par des groupes carbonés"
+   ],
+   "answer": "D",
+   "explanation": "Les amines sont obtenues en remplaçant un, deux ou trois hydrogènes de NH₃ par des groupes alkyles ou aryles.",
+   "source": "Cours de licence de chimie organique, famille des manuels Clayden / McMurry",
+   "verif": "import"
+  },
+  {
+   "course": "l2-chim",
+   "category": "Amines et composés azotés",
+   "difficulty": 1,
+   "question": "Comment classe-t-on la diméthylamine (CH₃)₂NH ?",
+   "choices": [
+    "Amine secondaire",
+    "Amine primaire",
+    "Amine tertiaire",
+    "Ammonium quaternaire"
+   ],
+   "answer": "A",
+   "explanation": "La classe d'une amine dépend du nombre de groupes carbonés liés à l'azote : ici deux, donc amine secondaire.",
+   "source": "Cours de licence de chimie organique, famille des manuels Clayden / McMurry",
+   "verif": "import"
+  },
+  {
+   "course": "l2-chim",
+   "category": "Amines et composés azotés",
+   "difficulty": 2,
+   "question": "Quel est l'ordre de basicité en solution aqueuse ?",
+   "choices": [
+    "Éthylamine > ammoniac > aniline",
+    "Aniline > ammoniac > éthylamine en solution",
+    "Ammoniac > éthylamine > aniline en solution",
+    "Éthylamine > aniline > ammoniac en solution"
+   ],
+   "answer": "A",
+   "explanation": "Le groupe éthyle est donneur ; dans l'aniline, le doublet est délocalisé dans le cycle et donc moins disponible.",
+   "source": "Cours de licence de chimie organique, famille des manuels Clayden / McMurry",
+   "verif": "import"
+  },
+  {
+   "course": "l2-chim",
+   "category": "Amines et composés azotés",
+   "difficulty": 3,
+   "question": "Quels réactifs servent à préparer un sel de diazonium à partir d'une amine aromatique primaire ?",
+   "choices": [
+    "NaNO₃ et NaOH à 100 °C",
+    "NaNO₂ et HCl à 0-5 °C",
+    "NaNO₂ et NaOH à 100 °C",
+    "HNO₃ concentré à 25 °C"
+   ],
+   "answer": "B",
+   "explanation": "L'acide nitreux, formé in situ à froid à partir de NaNO₂ et HCl, diazote l'amine aromatique primaire.",
+   "source": "Cours de licence de chimie organique, famille des manuels Clayden / McMurry",
+   "verif": "import"
+  },
+  {
+   "course": "l2-chim",
+   "category": "Amines et composés azotés",
+   "difficulty": 4,
+   "question": "À quoi sert la copulation d'un sel de diazonium avec un phénol ou une amine aromatique ?",
+   "choices": [
+    "À obtenir des amides par acylation",
+    "À obtenir des polysaccharides naturels",
+    "À obtenir des colorants azoïques",
+    "À obtenir des alcanes par réduction"
+   ],
+   "answer": "C",
+   "explanation": "Le diazonium attaque le cycle activé et forme un composé azoïque Ar-N=N-Ar', coloré.",
+   "source": "Cours de licence de chimie organique, famille des manuels Clayden / McMurry",
+   "verif": "import"
+  },
+  {
+   "course": "l2-chim",
+   "category": "Polymères : polymérisation et propriétés",
+   "difficulty": 1,
+   "question": "Quel monomère donne le polyéthylène ?",
+   "choices": [
+    "Le propène",
+    "Le chloroéthène",
+    "Le styrène",
+    "L'éthène (éthylène)"
+   ],
+   "answer": "D",
+   "explanation": "Le polyéthylène résulte de la polymérisation par addition de l'éthène CH₂=CH₂.",
+   "source": "Cours de licence de chimie organique, famille des manuels Clayden / McMurry",
+   "verif": "import"
+  },
+  {
+   "course": "l2-chim",
+   "category": "Polymères : polymérisation et propriétés",
+   "difficulty": 2,
+   "question": "Quelle est la caractéristique d'une polymérisation par condensation ?",
+   "choices": [
+    "Elle ne libère aucune molécule lors de l'enchaînement",
+    "Elle ne concerne que les monomères de type alcène",
+    "Elle libère une petite molécule comme l'eau à chaque liaison",
+    "Elle se fait toujours par voie radicalaire en chaîne"
+   ],
+   "answer": "C",
+   "explanation": "La polycondensation relie des monomères bifonctionnels en éliminant une petite molécule (eau, HCl, etc.).",
+   "source": "Cours de licence de chimie organique, famille des manuels Clayden / McMurry",
+   "verif": "import"
+  },
+  {
+   "course": "l2-chim",
+   "category": "Polymères : polymérisation et propriétés",
+   "difficulty": 2,
+   "question": "Quelle fonction relie les unités du nylon 6,6 ?",
+   "choices": [
+    "La fonction ester",
+    "La fonction amide",
+    "La fonction éther",
+    "La fonction carbonate"
+   ],
+   "answer": "B",
+   "explanation": "Le nylon 6,6 est un polyamide issu d'un diacide (acide adipique) et d'une diamine (hexane-1,6-diamine).",
+   "source": "Cours de licence de chimie organique, famille des manuels Clayden / McMurry",
+   "verif": "import"
+  },
+  {
+   "course": "l2-chim",
+   "category": "Polymères : polymérisation et propriétés",
+   "difficulty": 3,
+   "question": "Que distingue un thermoplastique d'un thermodurcissable ?",
+   "choices": [
+    "Le thermodurcissable ramollit à chaud et peut être remis en forme",
+    "Le thermoplastique est réticulé de façon irréversible",
+    "Le thermodurcissable ne contient aucune liaison covalente",
+    "Le thermoplastique ramollit à chaud et peut être remis en forme"
+   ],
+   "answer": "D",
+   "explanation": "Les chaînes des thermoplastiques ne sont pas réticulées : on peut les refondre ; les thermodurcissables forment un réseau figé.",
+   "source": "Cours de licence de chimie organique, famille des manuels Clayden / McMurry",
+   "verif": "import"
+  },
+  {
+   "course": "l2-chim",
+   "category": "Polymères : polymérisation et propriétés",
+   "difficulty": 4,
+   "question": "Que vaut l'indice de polymolécularité Mw/Mn d'un échantillon de chaînes toutes de même masse ?",
+   "choices": [
+    "1",
+    "0",
+    "2",
+    "Une valeur inférieure à 1"
+   ],
+   "answer": "A",
+   "explanation": "Mw/Mn est toujours supérieur ou égal à 1 et vaut 1 pour un polymère strictement monodisperse.",
+   "source": "Cours de licence de chimie organique, famille des manuels Clayden / McMurry",
+   "verif": "import"
+  },
+  {
+   "course": "l2-chim",
+   "category": "Glucides, lipides, acides aminés",
+   "difficulty": 1,
+   "question": "À quelle famille appartient le glucose ?",
+   "choices": [
+    "Les lipides neutres (triglycérides)",
+    "Les protéines (polypeptides)",
+    "Les acides nucléiques (ADN, ARN)",
+    "Les oses (sucres simples)"
+   ],
+   "answer": "D",
+   "explanation": "Le glucose est un monosaccharide de formule C₆H₁₂O₆, un aldohexose.",
+   "source": "Cours de chimie générale, famille Chang / Atkins",
+   "verif": "import"
+  },
+  {
+   "course": "l2-chim",
+   "category": "Glucides, lipides, acides aminés",
+   "difficulty": 1,
+   "question": "Quels groupes portent les acides aminés sur leur carbone α ?",
+   "choices": [
+    "Deux groupes carboxyle",
+    "Un groupe hydroxyle et un groupe cétone",
+    "Un groupe amine et un groupe carboxyle",
+    "Deux groupes amine"
+   ],
+   "answer": "C",
+   "explanation": "Un α-aminoacide possède sur le même carbone α un groupe −NH₂, un groupe −COOH, un H et une chaîne latérale.",
+   "source": "Cours de chimie générale, famille Chang / Atkins",
+   "verif": "import"
+  },
+  {
+   "course": "l2-chim",
+   "category": "Glucides, lipides, acides aminés",
+   "difficulty": 2,
+   "question": "De quels oses le saccharose est-il formé ?",
+   "choices": [
+    "Glucose et fructose",
+    "Glucose et galactose",
+    "Glucose et glucose",
+    "Fructose et galactose"
+   ],
+   "answer": "A",
+   "explanation": "Le saccharose est un diholoside constitué d'une unité de glucose et d'une unité de fructose.",
+   "source": "Cours de chimie générale, famille Chang / Atkins",
+   "verif": "import"
+  },
+  {
+   "course": "l2-chim",
+   "category": "Glucides, lipides, acides aminés",
+   "difficulty": 3,
+   "question": "Quel type de liaison relie les unités de glucose dans la cellulose ?",
+   "choices": [
+    "Liaison glycosidique α(1→4)",
+    "Liaison glycosidique β(1→4)",
+    "Liaison peptidique (amide)",
+    "Liaison ester entre sucres"
+   ],
+   "answer": "B",
+   "explanation": "La cellulose est un polymère de glucose lié en β(1→4) ; l'amidon, lui, présente des liaisons α(1→4).",
+   "source": "Cours de chimie générale, famille Chang / Atkins",
+   "verif": "import"
+  },
+  {
+   "course": "l2-chim",
+   "category": "Glucides, lipides, acides aminés",
+   "difficulty": 4,
+   "question": "Que représente le point isoélectrique d'un acide aminé ?",
+   "choices": [
+    "Le pH où il est le plus soluble dans l'eau",
+    "Le pH où il est entièrement protoné",
+    "Le pH où il est entièrement déprotoné",
+    "Le pH où sa charge nette est nulle"
+   ],
+   "answer": "D",
+   "explanation": "Au point isoélectrique, l'acide aminé est sous forme de zwitterion, globalement neutre.",
+   "source": "Cours de chimie générale, famille Chang / Atkins",
+   "verif": "import"
+  },
+  {
+   "course": "l2-chim",
+   "category": "Spectroscopies : IR, RMN, masse",
+   "difficulty": 1,
+   "question": "Quelle information la spectroscopie infrarouge fournit-elle principalement ?",
+   "choices": [
+    "La masse moléculaire exacte du composé étudié",
+    "Les groupes fonctionnels, par les vibrations des liaisons",
+    "La configuration absolue de tous les centres stéréogènes",
+    "Le nombre de neutrons de chaque noyau"
+   ],
+   "answer": "B",
+   "explanation": "L'absorption IR correspond aux vibrations d'élongation et de déformation des liaisons, caractéristiques des groupes fonctionnels.",
+   "source": "Cours de licence de chimie organique, famille des manuels Clayden / McMurry",
+   "verif": "import"
+  },
+  {
+   "course": "l2-chim",
+   "category": "Spectroscopies : IR, RMN, masse",
+   "difficulty": 2,
+   "question": "Une bande intense vers 1 700 cm⁻¹ en IR indique la présence de quelle liaison ?",
+   "choices": [
+    "C≡N",
+    "O-H",
+    "C=O",
+    "C-H aromatique"
+   ],
+   "answer": "C",
+   "explanation": "L'élongation de la liaison C=O d'un carbonyle donne une bande intense vers 1 650-1 800 cm⁻¹.",
+   "source": "Cours de licence de chimie organique, famille des manuels Clayden / McMurry",
+   "verif": "import"
+  },
+  {
+   "course": "l2-chim",
+   "category": "Spectroscopies : IR, RMN, masse",
+   "difficulty": 2,
+   "question": "Que représente l'axe des abscisses d'un spectre de masse ?",
+   "choices": [
+    "Le rapport m/z",
+    "Le déplacement chimique δ",
+    "Le nombre d'onde en cm⁻¹",
+    "Le temps de rétention"
+   ],
+   "answer": "A",
+   "explanation": "Le spectromètre de masse sépare les ions selon leur rapport masse sur charge m/z.",
+   "source": "Cours de licence de chimie organique, famille des manuels Clayden / McMurry",
+   "verif": "import"
+  },
+  {
+   "course": "l2-chim",
+   "category": "Spectroscopies : IR, RMN, masse",
+   "difficulty": 3,
+   "question": "En RMN du proton, quelle multiplicité présente le signal des H du groupe CH₃ d'un groupe éthyle CH₃-CH₂-X ?",
+   "choices": [
+    "Un singulet",
+    "Un doublet",
+    "Un triplet",
+    "Un quadruplet"
+   ],
+   "answer": "C",
+   "explanation": "Les 3 H du méthyle ont deux voisins H sur CH₂ : selon la règle n + 1, ils donnent un triplet.",
+   "source": "Cours de licence de chimie organique, famille des manuels Clayden / McMurry",
+   "verif": "import"
+  },
+  {
+   "course": "l2-chim",
+   "category": "Spectroscopies : IR, RMN, masse",
+   "difficulty": 4,
+   "question": "Dans un spectre de masse, un pic moléculaire M et un pic M+2 d'intensités voisines de 3:1 révèlent la présence de quel élément ?",
+   "choices": [
+    "Un atome de chlore",
+    "Un atome de brome",
+    "Un atome de fluor",
+    "Un atome d'iode"
+   ],
+   "answer": "A",
+   "explanation": "Le chlore a deux isotopes ³⁵Cl et ³⁷Cl dans un rapport proche de 3:1 ; le brome donnerait environ 1:1.",
+   "source": "Cours de licence de chimie organique, famille des manuels Clayden / McMurry",
+   "verif": "import"
+  },
+  {
+   "course": "l2-chim",
+   "category": "Chimie des éléments : halogènes et alcalins",
+   "difficulty": 1,
+   "question": "Quelle est la configuration électronique de valence des métaux alcalins ?",
+   "choices": [
+    "ns²",
+    "ns¹",
+    "ns²np¹",
+    "ns²np⁵"
+   ],
+   "answer": "B",
+   "explanation": "Les métaux alcalins ont un unique électron de valence dans une sous-couche s.",
+   "source": "Chimie inorganique, famille Housecroft-Sharpe / Shriver-Atkins",
+   "verif": "import"
+  },
+  {
+   "course": "l2-chim",
+   "category": "Chimie des éléments : halogènes et alcalins",
+   "difficulty": 1,
+   "question": "Comment conserve-t-on le sodium au laboratoire ?",
+   "choices": [
+    "À l'air libre",
+    "Dans l'eau",
+    "Dans l'acide chlorhydrique",
+    "Sous huile minérale"
+   ],
+   "answer": "D",
+   "explanation": "Le sodium réagit avec l'eau et le dioxygène de l'air ; on le garde donc immergé dans une huile minérale.",
+   "source": "Chimie inorganique, famille Housecroft-Sharpe / Shriver-Atkins",
+   "verif": "import"
+  },
+  {
+   "course": "l2-chim",
+   "category": "Chimie des éléments : halogènes et alcalins",
+   "difficulty": 2,
+   "question": "Comment varie la réactivité des métaux alcalins dans le groupe 1 ?",
+   "choices": [
+    "Elle diminue du lithium vers le césium",
+    "Elle est identique pour tous les alcalins",
+    "Elle augmente du lithium au césium",
+    "Elle est maximale pour le sodium, puis diminue"
+   ],
+   "answer": "C",
+   "explanation": "L'énergie d'ionisation diminue vers le bas du groupe : le césium perd son électron le plus facilement.",
+   "source": "Chimie inorganique, famille Housecroft-Sharpe / Shriver-Atkins",
+   "verif": "import"
+  },
+  {
+   "course": "l2-chim",
+   "category": "Chimie des éléments : halogènes et alcalins",
+   "difficulty": 3,
+   "question": "Quel halogénure d'hydrogène est un acide faible en solution aqueuse ?",
+   "choices": [
+    "HCl",
+    "HF",
+    "HBr",
+    "HI"
+   ],
+   "answer": "B",
+   "explanation": "HF est un acide faible, car la liaison H-F est forte et il s'associe par liaison hydrogène ; HCl, HBr et HI sont des acides forts.",
+   "source": "Chimie inorganique, famille Housecroft-Sharpe / Shriver-Atkins",
+   "verif": "import"
+  },
+  {
+   "course": "l2-chim",
+   "category": "Chimie des éléments : halogènes et alcalins",
+   "difficulty": 4,
+   "question": "Quel alcalin réagit directement avec le diazote à température ambiante pour donner un nitrure ?",
+   "choices": [
+    "Le sodium",
+    "Le potassium",
+    "Le césium",
+    "Le lithium"
+   ],
+   "answer": "D",
+   "explanation": "Le lithium forme Li₃N avec N₂, comportement atypique du groupe 1.",
+   "source": "Chimie inorganique, famille Housecroft-Sharpe / Shriver-Atkins",
+   "verif": "import"
+  },
+  {
+   "course": "l2-chim",
+   "category": "Chimie de coordination",
+   "difficulty": 1,
+   "question": "Qu'est-ce qu'un ligand dans un complexe ?",
+   "choices": [
+    "Une espèce donneuse de doublet d'électrons liée au centre métallique",
+    "Une espèce acceptrice de doublet d'électrons du métal",
+    "L'ion métallique central du complexe",
+    "Le contre-ion extérieur au complexe"
+   ],
+   "answer": "A",
+   "explanation": "Le ligand donne un ou plusieurs doublets au métal central, acide de Lewis, par liaison de coordination.",
+   "source": "Chimie inorganique, famille Housecroft-Sharpe / Shriver-Atkins",
+   "verif": "import"
+  },
+  {
+   "course": "l2-chim",
+   "category": "Chimie de coordination",
+   "difficulty": 2,
+   "question": "Que désigne le nombre de coordination d'un complexe ?",
+   "choices": [
+    "Le nombre d'atomes donneurs liés au métal central",
+    "Le nombre de ligands, quel que soit leur dentisme",
+    "La charge électrique portée par le métal central",
+    "Le nombre d'électrons d du métal central"
+   ],
+   "answer": "A",
+   "explanation": "Le nombre de coordination est le nombre d'atomes donneurs directement liés au métal ; il vaut 6 dans [Fe(CN)₆]⁴⁻.",
+   "source": "Chimie inorganique, famille Housecroft-Sharpe / Shriver-Atkins",
+   "verif": "import"
+  },
+  {
+   "course": "l2-chim",
+   "category": "Chimie de coordination",
+   "difficulty": 2,
+   "question": "Quel ligand est bidentate parmi les suivants ?",
+   "choices": [
+    "L'ammoniac",
+    "L'éthylènediamine",
+    "L'ion chlorure",
+    "L'eau"
+   ],
+   "answer": "B",
+   "explanation": "L'éthylènediamine (en) possède deux atomes d'azote donneurs ; NH₃, Cl⁻ et H₂O sont monodentates.",
+   "source": "Chimie inorganique, famille Housecroft-Sharpe / Shriver-Atkins",
+   "verif": "import"
+  },
+  {
+   "course": "l2-chim",
+   "category": "Chimie de coordination",
+   "difficulty": 3,
+   "question": "Quel est le degré d'oxydation du fer dans [Fe(CN)₆]⁴⁻ ?",
+   "choices": [
+    "+3",
+    "+4",
+    "+2",
+    "+6"
+   ],
+   "answer": "C",
+   "explanation": "Chaque CN⁻ porte −1 : six ligands donnent −6, et la charge globale −4 impose Fe = +2.",
+   "source": "Chimie inorganique, famille Housecroft-Sharpe / Shriver-Atkins",
+   "verif": "import"
+  },
+  {
+   "course": "l2-chim",
+   "category": "Chimie de coordination",
+   "difficulty": 4,
+   "question": "Combien d'ions chlorure précipitent avec Ag⁺ en solution pour le composé [Co(NH₃)₅Cl]Cl₂ ?",
+   "choices": [
+    "3",
+    "1",
+    "0",
+    "2"
+   ],
+   "answer": "D",
+   "explanation": "Un chlorure est lié au cobalt comme ligand ; seuls les 2 chlorures contre-ions sont libres et précipitent.",
+   "source": "Chimie inorganique, famille Housecroft-Sharpe / Shriver-Atkins",
+   "verif": "import"
+  },
+  {
+   "course": "l2-chim",
+   "category": "Méthodes de séparation",
+   "difficulty": 1,
+   "question": "Sur quelle propriété repose la distillation ?",
+   "choices": [
+    "La différence de masse volumique uniquement",
+    "La différence de couleur",
+    "La différence de solubilité dans l'eau",
+    "La différence de température d'ébullition"
+   ],
+   "answer": "D",
+   "explanation": "On sépare par vaporisation puis condensation les constituants d'un mélange ayant des volatilités différentes.",
+   "source": "Cours de chimie analytique, famille Skoog",
+   "verif": "import"
+  },
+  {
+   "course": "l2-chim",
+   "category": "Méthodes de séparation",
+   "difficulty": 1,
+   "question": "Quelle méthode permet de séparer deux liquides non miscibles ?",
+   "choices": [
+    "La décantation",
+    "La filtration",
+    "La cristallisation",
+    "La sublimation"
+   ],
+   "answer": "A",
+   "explanation": "Deux liquides non miscibles forment deux phases superposées selon leur masse volumique, séparables à l'ampoule à décanter.",
+   "source": "Cours de chimie analytique, famille Skoog",
+   "verif": "import"
+  },
+  {
+   "course": "l2-chim",
+   "category": "Méthodes de séparation",
+   "difficulty": 2,
+   "question": "Sur quel principe repose l'extraction liquide-liquide ?",
+   "choices": [
+    "La différence de volatilité des deux solvants employés",
+    "La différence de solubilité du soluté dans deux solvants non miscibles",
+    "La différence de charge électrique des solutés présents",
+    "La différence de taille des pores d'un filtre utilisé"
+   ],
+   "answer": "B",
+   "explanation": "Le soluté se répartit entre les deux phases selon son coefficient de partage, ce qui permet de l'extraire.",
+   "source": "Cours de chimie analytique, famille Skoog",
+   "verif": "import"
+  },
+  {
+   "course": "l2-chim",
+   "category": "Méthodes de séparation",
+   "difficulty": 2,
+   "question": "Que contient toute chromatographie ?",
+   "choices": [
+    "Une phase gazeuse et une phase solide, toujours",
+    "Deux phases stationnaires",
+    "Une phase stationnaire et une phase mobile",
+    "Un seul solvant, sans support"
+   ],
+   "answer": "C",
+   "explanation": "Les composés sont séparés selon leurs affinités différentes pour la phase stationnaire fixe et la phase mobile qui les entraîne.",
+   "source": "Cours de chimie analytique, famille Skoog",
+   "verif": "import"
+  },
+  {
+   "course": "l2-chim",
+   "category": "Méthodes de séparation",
+   "difficulty": 3,
+   "question": "En chromatographie sur couche mince, comment définit-on le rapport frontal Rf d'une tache ?",
+   "choices": [
+    "Distance parcourue par le front du solvant divisée par celle de la tache",
+    "Distance entre la ligne de dépôt et le bord de la plaque en cm",
+    "Distance de la tache divisée par distance du front du solvant",
+    "Durée de migration de la tache divisée par la longueur de la plaque"
+   ],
+   "answer": "C",
+   "explanation": "Rf est le rapport de la distance parcourue par le composé à celle du front du solvant ; il est compris entre 0 et 1.",
+   "source": "Cours de chimie analytique, famille Skoog",
+   "verif": "import"
+  }
+ ]
+}
