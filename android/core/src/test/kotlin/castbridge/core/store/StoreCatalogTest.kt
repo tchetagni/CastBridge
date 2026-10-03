@@ -141,7 +141,7 @@ class StoreCatalogTest {
         val z = StoreCatalog.build(lots.reversed(), b, families)
         assertEquals(a.items.map { it.id }, z.items.map { it.id })
         assertEquals(listOf("Primaire", "Primaire", "Secondaire", "Supérieur", "Autres"), a.items.filter { it.shelf == Shelf.APPRENDRE }.map { it.section })
-        assertEquals(listOf("classe-cm2", "lot:learn:cp", "lot:learn:6e", "lot:learn:gce-ol", "lot:learn:zzz"), a.items.filter { it.shelf == Shelf.APPRENDRE }.map { it.id })
+        assertEquals(listOf("lot:learn:cp", "classe-cm2", "lot:learn:6e", "lot:learn:gce-ol", "lot:learn:zzz"), a.items.filter { it.shelf == Shelf.APPRENDRE }.map { it.id })
     }
 
     // (g)

@@ -11,3 +11,13 @@ CHOIX: (1) API : Store(items, catalogAtLots, catalogAtBundles, degraded, warning
 NON FAIT / À VALIDER SUR MATÉRIEL: rien sur matériel (cœur seul, aucun écran, rien dans sender/receiver). FUMÉE: à lancer par le coordinateur (tools/smoke/smoke.py --tv fake) — non requise ici, aucun fichier sender/receiver modifié.
 QUESTION: (BLOQUÉ, cahier) valeurs réelles de Bundle.type (hypothèse classe/langues/quiz) ; liste des sous-rayons à confirmer par le propriétaire (en particulier : 2nde/1ere sous Secondaire, droit-* et gce-* sous Supérieur).
 AUTOCONTRÔLE: [x] zone [x] porte [x] suite [x] secrets [x] dépendances [x] FR [x] diff ≤ plafond [x] un commit
+
+## Rayons par niveau (2026-10-03)
+
+Décision du propriétaire : sous-rayons confirmés, Langues et Quiz rangés par niveau. Cœur seul (`StoreCatalog`), `StoreView` regroupe déjà par (rayon, section) donc inchangé ; aucun libellé ajouté.
+- Apprendre et Quiz : Primaire (CP, CE1, CE2, CM1, CM2, Class 1 à 6), Secondaire (6e à 3e, 2nde, 1re, Tle, Form 1 à 5, Lower/Upper Sixth), Supérieur (L1 à L3, droit-*, gce-*). Quiz : en plus « Culture générale » (culture-*, geo-*, monde, afrique, general). Ordre par niveau (CP->CM2, 6e->Tle, L1->L3), puis portée.
+- Langues : un sous-rayon par niveau CEFR (A0, A1, A2, B1, B2, C1, C2, NATIF), niveau lu dans le 2e segment de la portée (`zh-a0-famille-fr`) ; bouquet = niveau le plus bas de ses lots. Toujours Gratuit.
+- Niveau inconnu : « Autres » + avertissement « niveau inconnu ».
+- Vrais lots (fixtures `store-quiz-real-lots.json` 93 lots, `store-langues-real-lots.json` 46 lots) : Quiz = Primaire 11, Secondaire 66, Supérieur 13, Culture générale 3 ; Langues = A0 38, B1 2, B2 2, C1 2, C2 2 (aucun lot A1, A2, NATIF publié).
+- Test existant adapté : `orderDoesNotDependOnInputOrder` (cp passe avant classe-cm2, tri par niveau et non plus par texte de portée).
+- Écart : les « Class 1-6 » sont rangés en Primaire (le catalogue quiz les marque `track: primary`), pas en Secondaire.
