@@ -362,6 +362,8 @@ class PackedQuestionSource(
     /** Rebuilt when the bundled/server bank, the installed packs or the files on the USB drive changed. */
     override fun bank(): QuizBank = current(base.bank(), { built }) { built = it }
 
+    override fun newGame(filter: QuestionFilter) = base.newGame(filter)
+
     /** The bundled level of [filter] (loaded on demand, one at a time) + packs + lots; an installed lot replaces the bundled questions of the same id. */
     override fun bankFor(filter: QuestionFilter): QuizBank {
         val b = base.bankFor(filter)

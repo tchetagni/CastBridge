@@ -43,6 +43,8 @@ class QuizRoom(
     val minGapGames: Int = histories.gap,
     /** Bank to draw from for a given filter (bundled levels are loaded on demand, one at a time); null = always [bank]. */
     private val bankFor: ((QuestionFilter) -> QuizBank)? = null,
+    /** Called when a game of the given filter begins, before its draw (the source moves on to the next slice of a bundled level). */
+    private val onNewGame: ((QuestionFilter) -> Unit)? = null,
 ) {
     enum class Mode(val label: String) { MILLIONAIRE("Millionnaire"), DUEL("Duel") }
     /** How the game is played: free competition, competition with a (virtual) stake, or practice without anything at stake. */
@@ -203,6 +205,7 @@ class QuizRoom(
      */
     fun startGame(seed: Long = random.nextLong()): String? = synchronized(lock) {
         if (stage != Stage.LOBBY && stage != Stage.FINISHED) return "Une partie est déjà en cours."
+        onNewGame?.invoke(filter)
         if (bankOf(filter).count(filter) < MIN_QUESTIONS) return "Pas encore assez de questions pour « ${filter.label} » (il en faut au moins $MIN_QUESTIONS)."
         val t = now()
         settle(refundOnly = true)

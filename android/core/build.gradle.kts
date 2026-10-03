@@ -36,6 +36,12 @@ val embedLearnPacks by tasks.registering(JavaExec::class) {
 sourceSets.main { resources.srcDir(learnEmbedded) }
 tasks.processResources { dependsOn(embedLearnPacks) }
 
+// ---- Quiz embarqué : questions RÉSERVABLES (docs/agent-reports/quiz-toutes-les-questions.md) ----
+// -PquizReserved=include (défaut, phase d'essai) : embedded-reserved/ est dans l'APK ; =exclude (version de production) : le dossier est retiré du build.
+val quizReserved = (project.findProperty("quizReserved") as String?) ?: "include"
+require(quizReserved == "include" || quizReserved == "exclude") { "quizReserved doit valoir include ou exclude (reçu : $quizReserved)" }
+tasks.processResources { if (quizReserved == "exclude") exclude("castbridge/quiz/embedded-reserved/**") }
+
 tasks.register<JavaExec>("buildLearnPacks") {
     group = "castbridge"
     description = "Builds every « Apprendre » pack zip + catalog.json into build/learn-packs (to copy to a USB drive or the server)"
