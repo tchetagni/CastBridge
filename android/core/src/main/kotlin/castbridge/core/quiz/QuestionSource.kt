@@ -38,11 +38,32 @@ class EmbeddedQuestionSource(
     @Volatile private var loaded: Loaded? = null
 
     override fun bankFor(filter: QuestionFilter): QuizBank {
+        QuizLevelAvailability.aliasFor(filter)?.let { return aliasBank(it) }
         val lv = levels?.levelFor(filter) ?: return bank
         loaded?.let { if (it.key == lv.key) return it.bank }
         return synchronized(this) {
             loaded?.takeIf { it.key == lv.key }?.bank
                 ?: bank.merge(levels.load(lv)).also { loaded = Loaded(lv.key, it) }   // replaces (not adds to) the previous level
+        }
+    }
+
+    /**
+     * « SIL » (the CP questions) and « Form 4 » (Form 3 + Form 5 interleaved): built from the source levels one after the other,
+     * so that only one bundled level is in memory at a time (R-11); the result replaces the level kept before.
+     */
+    private fun aliasBank(alias: QuizLevelAvailability.Alias): QuizBank {
+        val lv = levels ?: return bank
+        val key = "alias:" + alias.level
+        loaded?.let { if (it.key == key) return it.bank }
+        return synchronized(this) {
+            loaded?.takeIf { it.key == key }?.bank ?: run {
+                val composed = QuizLevelAvailability.compose(alias) { name ->
+                    val own = bank.all.filter { it.track == alias.track && it.level == name }
+                    val file = lv.levels.firstOrNull { it.level == name && it.track == alias.track }?.let { lv.load(it).all }.orEmpty()
+                    own.filter { o -> file.none { it.id == o.id } } + file
+                }
+                bank.merge(QuizBank(composed)).also { loaded = Loaded(key, it) }
+            }
         }
     }
 

@@ -9,6 +9,7 @@ import castbridge.core.lots.LotMeta
 import castbridge.core.quiz.CachedQuestionSource
 import castbridge.core.quiz.PackedQuestionSource
 import castbridge.core.quiz.QuestionFilter
+import castbridge.core.quiz.QuizEdition
 import castbridge.core.quiz.QuizLotConsumer
 import castbridge.core.quiz.QuizLotScopes
 import castbridge.core.quiz.QuizPackApi
@@ -126,7 +127,8 @@ object QuizHub {
     /** Opens a fresh room (new code), closing the previous one. */
     @Synchronized fun open(ctx: Context): QuizRoom {
         room?.close()
-        return QuizRoom(source(ctx).bank().forChannel(TvConnect.channel()), bankFor = { f -> source(ctx).bankFor(f).forChannel(TvConnect.channel()) }, asked = asked, wallet = wallet, histories = historyBook(ctx))
+        // review questions are played on the TV (owner decision, see QuizEdition): the server's channel only matters when that is turned off
+        return QuizRoom(source(ctx).bank().forChannel(QuizEdition.playChannel(TvConnect.channel())), bankFor = { f -> source(ctx).bankFor(f).forChannel(QuizEdition.playChannel(TvConnect.channel())) }, asked = asked, wallet = wallet, histories = historyBook(ctx))
             .also { it.feedback = TvConnect.feedback; room = it }
     }
 
