@@ -1,4 +1,5 @@
 # tvctx-01 — Identifiant stable de la TV dans `/api/hello` et fiche du téléphone par cet identifiant
+> **Amendement W19 (Fable, 2026-10-03)** : ce cahier n'a pas été exécuté (aucun rapport au 2026-10-03). Le cahier **w19-02** (`sonnet-w19-02-hello-caps-cache-nudges.md`) **absorbe** l'ajout de `id` dans `/api/hello` avec les autres champs additifs (`protocol`, `appVersion`, `versionCode`, `caps`…) par `HelloV2.body()`. Si tvctx-01 est lancé **avant** w19-02 : produire `id` par une fonction `HelloV2`-compatible (`C/sync/HelloV2.kt` minimal, nommé dans le rapport) et w19-02 se rebasera ; si w19-02 est fusionné d'abord : tvctx-01 ne refait **pas** `/api/hello` et ne garde que la partie « fiche du téléphone par identifiant ». Règle de symbiose : `SYMBIOSE: cap=— (champ additif public) · proto=inchangé · reason=— · deux écrans=—`.
 > **Modèle : sonnet** · escalade : audit Opus (route publique, identité)
 > **Groupe : TVCTX-A** (après le gel ou en correctif terrain) · prérequis : `claude/pin-persistence` fusionnée · porte : `:core:test --tests '*PinBook*' --tests '*HelloCompat*' --tests '*ReceiverServer*'`
 > **Jauge : ≈ 250 k jetons entrée / 12 k sortie** (effort S-M)

@@ -2,6 +2,14 @@
 
 Trois gabarits : **A** Haiku (mécanique), **B** Sonnet (par objectif), **C** Opus (audit). Règles d'emploi : `docs/coordination/ROUTAGE-AGENTS-EXECUTION-2026-10-02.md` (§ 3 tactiques, § 4 qualité, § 5 audit). Lancement : outil `Agent`, `model` **explicite** (`"haiku"`, `"sonnet"`, `"opus"`), `subagent_type: "general-purpose"`.
 
+> **Amendement W19 (Fable, 2026-10-03) — Règle de symbiose, à copier telle quelle dans le préfixe stable des gabarits A, B et C, juste après « PORTE W14 ».** Source : `docs/coordination/DESIGN-W19-SYMBIOSE-PHONE-TV-2026-10-03.md` § 5.
+>
+> ```
+> RÈGLE DE SYMBIOSE (W19) : tout changement qui touche un message téléphone↔TV (route HTTP, champ JSON, trame Bluetooth, en-tête, code de refus, format sur disque partagé par les deux applications) doit : (1) être ADDITIF : aucune clé retirée ni renommée, aucun sens changé ; un nouveau champ obligatoire = nouveau numéro `protocol` dans C/sync/Caps.kt + entrée dans docs/PROTOCOL-CHANGES.md ; (2) NOMMER LA CAPACITÉ dans C/sync/Caps.kt (constante, « depuis », repli) et gérer son absence côté téléphone (FeatureGate) ; (3) passer tout refus par C/sync/Reason.kt (code stable, message français, réessayable, retryAfterMs) et prouver qu'il est AFFICHÉ SUR LES DEUX APPLICATIONS (test de parcours ou capture) ; (4) mettre à jour les TESTS DE CONTRAT (CT/compat/, expect.json, persona courante si un échange canonique change) ; (5) écrire dans le rapport la ligne SYMBIOSE: cap=<nom> · proto=<inchangé|n> · reason=<codes> · deux écrans=<test>. Un cahier qui ne peut pas cocher les cinq points s'arrête avec QUESTION:. Jamais de réessai sans borne visible ; jamais un partiel présenté comme « Terminé » ; jamais une décision d'état dans un écran ou un service (tout dans C/).
+> ```
+>
+> Pour l'auditeur Opus (gabarit C), ajouter au point 3 « Correction » : *symbiose : le changement est-il additif ? la capacité est-elle nommée et son absence gérée ? le refus a-t-il un code `Reason` visible des deux côtés ? un réessai est-il borné ? un partiel peut-il être dit « Terminé » ?*
+
 **Principe de cache** : le **préfixe stable** (tout ce qui précède `=== CAHIER ===`) est identique, octet pour octet, pour tous les agents d'une même vague et d'un même gabarit ; **rien de variable avant le bloc cahier** (ni date, ni id, ni branche). Le bloc cahier est copié depuis `docs/agent-briefs/<id>.md` (en-tête de routage compris). Remplir les `{…}` **seulement** dans le bloc cahier.
 
 ---

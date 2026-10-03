@@ -1,6 +1,7 @@
 # w18-01 — Cœur : `WdCredentials` (secret de groupe Wi-Fi Direct persistant par TV, remis une fois par un canal authentifié), `BootstrapPlan` (chemin du premier contact)
 
 <!-- routage Fable 2026-10-03 -->
+> **Amendement W19 (Fable, 2026-10-03)** : la Règle de symbiose (`EXECUTOR-PROMPT-TEMPLATE.md`, DESIGN-W19 § 5) s'applique. Les lignes additives `wd.id`, `wd.name`, `wd.pass`, `wd.persist` de `LinkInfo` sont une **capacité** : la déclarer `wdpersist` dans `C/sync/Caps.kt` (si w19-02 n'est pas fusionné : constante locale `WD_PERSIST_CAP = "wdpersist"` nommée dans le rapport) ; une TV sans cette capacité ⇒ chemin R-14 (mot de passe frais par groupe) **dit** par `BootstrapPlan`. Les refus de jonction (`JOIN_DENIED`, `rotated`) passent par `Reason` (w19-01) dès qu'il existe : codes `WD_JOIN_DENIED`, `WD_ROTATED` à proposer dans le rapport. Rapport : ajouter la ligne `SYMBIOSE: cap=wdpersist · proto=inchangé · reason=WD_JOIN_DENIED,WD_ROTATED · deux écrans=<test>`.
 > **Modèle : sonnet** · escalade : **audit Opus obligatoire** (identifiants) · statut : PRÊT (pendant le gel : cœur seul)
 > **Groupe : W18a-1** (vague W18a, cœur) · prérequis : branche `claude/auto-wifi-direct` fusionnée ou rebasée dessus · porte : `cd android && tools/agents/gradle-lock.sh gradle --offline :core:test --tests 'castbridge.core.link.*' --tests 'castbridge.core.trust.PinBookTest' --tests 'castbridge.core.BtLinkTest'`
 > **Jauge : ≈ 400 k jetons entrée / 20 k sortie** (effort M, ≈ 1,5 j) · audit Opus : obligatoire

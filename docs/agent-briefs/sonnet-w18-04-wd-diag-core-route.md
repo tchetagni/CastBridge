@@ -1,6 +1,7 @@
 # w18-04 — Cœur + une ligne : `WdDiag` (faits de la puce et du groupe ⇒ phrases françaises ⇒ verdict de la table terrain), route `GET/POST /api/diag/wifi-direct`
 
 <!-- routage Fable 2026-10-03 -->
+> **Amendement W19 (Fable, 2026-10-03)** : la Règle de symbiose s'applique. La route `GET/POST /api/diag/wifi-direct` est une **capacité** `diagwd` (`C/sync/Caps.kt`, w19-02 ; sinon constante locale nommée) : le téléphone ne l'appelle que si la TV la déclare, sinon la carte dit « Diagnostic Wi-Fi Direct : TV à mettre à jour ». Ses refus (401/403/400) passent par `Reason.envelope` (w19-01) : ne pas écrire un `{"error":…}` nu. Ses faits (`WdFacts`) peuvent être repris dans `GET /api/sync/state` par w19-06 : exposer une fonction pure `WdFacts.summaryJson()` sans secret (nom de groupe masqué, jamais de mot de passe). Rapport : ligne `SYMBIOSE: cap=diagwd · proto=inchangé · reason=<codes> · deux écrans=<test>`.
 > **Modèle : sonnet** · escalade : aucune · statut : PRÊT (pendant le gel : cœur + une ligne de délégation)
 > **Groupe : W18a-2** (vague W18a, cœur) · prérequis : aucun · porte : `cd android && tools/agents/gradle-lock.sh gradle --offline :core:test --tests 'castbridge.core.link.WdDiagTest' --tests 'castbridge.core.tv.WdDiagRoutesTest' --tests 'castbridge.core.tv.*Routes*'`
 > **Jauge : ≈ 250 k jetons entrée / 12 k sortie** (effort S, ≈ 1 j) · audit Opus : non

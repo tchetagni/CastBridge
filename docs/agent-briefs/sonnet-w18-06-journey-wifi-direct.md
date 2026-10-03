@@ -1,6 +1,7 @@
 # w18-06 — Harnais W14 : `RadioSim` (P2P, Bluetooth, LAN factices) et 9 parcours J-WD de bout en bout sur la JVM
 
 <!-- routage Fable 2026-10-03 -->
+> **Amendement W19 (Fable, 2026-10-03)** : `RadioSim` de ce cahier et `RadioSim` de voie de w19-04 (`CT/compat/RadioSim.kt`) doivent être **un seul** fichier : si w19-04 est fusionné d'abord, l'étendre (P2P, Bluetooth, LAN) au lieu d'en créer un second ; sinon, écrire le vôtre de façon à ce que w19-04 l'étende (API `up(route)`, `down(route)`, `flip(seq)`, bases par route). Chaque parcours J-WD affirme désormais **l'état des deux côtés** (téléphone : `WdLine`/`XferState` ; TV : `TransferProgress`/registre des refus) avec `SymbiosisKit` (w19-08 ; sinon assertions locales équivalentes), et la perte du groupe pendant une copie (RS-02) ou un cast (RS-24) vérifie « aucun octet confirmé renvoyé » et « raison visible ». Rapport : ligne `SYMBIOSE: deux écrans=WdJourneyTest`.
 > **Modèle : sonnet** · escalade : aucune · statut : PRÊT (pendant le gel : tests seulement)
 > **Groupe : W18a-4** (vague W18a, harnais) · prérequis : w18-01…05 fusionnés · porte : `cd android && tools/agents/gradle-lock.sh gradle --offline :core:test --tests 'castbridge.core.journey.WdJourneyTest' --tests 'castbridge.core.journey.*'`
 > **Jauge : ≈ 450 k jetons entrée / 22 k sortie** (effort M, ≈ 2 j) · audit Opus : non
