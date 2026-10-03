@@ -80,11 +80,11 @@ Ordre des contrôles : salle en jeu et table active (sinon `CLOSED`) → questio
 
 | Mesure | Règle | Exemple vérifié |
 |---|---|---|
-| RTT | mesuré par le serveur (ping/pong), EWMA α = 0,3, borné [0, 2 000 ms] | `RttBookTest` |
-| Temps d'un joueur | `arrivée − opensAtServerMs − min(rtt/2, 400 ms)`, jamais négatif | RTT 600, arrivée à 10 000 ⇒ **9 700** ; RTT 2 000 (plafonné) ⇒ **9 600** |
-| Joueur relayé par la TV | `max(localElapsedMono, temps serveur − rttTV)` : la TV ne peut qu'**allonger** | local 9 900, RTT TV 300 ⇒ `max(9 900, 9 700) = 9 900` ; local 9 000 ⇒ 9 700 |
+| RTT | mesuré par le serveur (ping/pong) ; RTT retenu = MINIMUM des 8 derniers échantillons (un client qui retarde ses pongs ne gagne rien), chaque échantillon borné [0, 2 000 ms] | `RttBookTest`, `AuditCoreTest` |
+| Temps d'un joueur | `arrivée − opensAtServerMs − min(rtt, 200 ms)/2` (100 ms au plus), jamais négatif | RTT 600, arrivée à 10 000 ⇒ **9 900** ; RTT 2 000 ⇒ **9 900** |
+| Joueur relayé par la TV | `max(localElapsedMono, temps serveur − min(rttTV, 400 ms))` : la TV ne peut qu'**allonger** | local 9 900, RTT TV 300 ⇒ `max(9 900, 9 700) = 9 900` ; RTT TV 1 900 ⇒ terme 9 600 |
 | Grâce | la question n'est clôturée qu'après `min(rtt, 1 s)` du plus lent connecté ; une réponse en vol dont le temps compté tient dans la fenêtre est acceptée | — |
-| Borne d'équité | personne n'est compté plus vite que la vérité ; un joueur à RTT > 800 ms perd au plus `rtt/2 − 400 ms` | simulation `ServerRoomTimingTest` (RTT 0, 150, 600, 1 200) |
+| Borne d'équité | personne n'est compté plus vite que la vérité ; un joueur à RTT > 200 ms perd au plus `rtt/2 − 100 ms` | simulation `ServerRoomTimingTest` (RTT 0, 150, 600, 1 200) |
 | `LAN`, `TV_ONLY` | aucune compensation, aucune grâce, aucun délai (comportement actuel) | `ServerRoomTest` |
 
 ## Salle (`ServerRoom`)

@@ -51,7 +51,7 @@ abstract class Wire {
     }
 }
 
-private val http: HttpClient = HttpClient.newBuilder().version(HttpClient.Version.HTTP_1_1).connectTimeout(Duration.ofSeconds(5)).build()
+internal val http: HttpClient = HttpClient.newBuilder().version(HttpClient.Version.HTTP_1_1).connectTimeout(Duration.ofSeconds(5)).build()
 
 class WsWire(port: Int, origin: String? = "https://bridge.sti-cm.com", xff: String? = null, ticket: String? = null, path: String = "/play/ws") : Wire() {
     private val ws: WebSocket
@@ -88,83 +88,3 @@ class WsWire(port: Int, origin: String? = "https://bridge.sti-cm.com", xff: Stri
 
 class WsRefused(val status: Int?, msg: String) : RuntimeException(msg)
 
-/** Repli SSE : un POST pour parler, un flux `GET /play/events?token=` pour écouter. */
-class SseWire(private val port: Int, private val origin: String? = "https://bridge.sti-cm.com", private val xff: String? = null) : Wire() {
-    @Volatile var conn: String? = null
-    private val stopped = AtomicBoolean(false)
-    private var started = false
-    @Volatile var lastEventId: String? = null
-
-    @Synchronized override fun send(text: String) {
-        val r = post(port, text, conn, origin, xff)
-        if (r.statusCode() != 200) { failure = "POST ${r.statusCode()} ${r.body()}"; return }
-        if (conn == null) { conn = (Json.parse(r.body()) as Map<*, *>)["conn"] as String }
-        if (!started) { started = true; startStream() }
-    }
-
-    private fun startStream() {
-        val req = HttpRequest.newBuilder(URI("http://127.0.0.1:$port/play/events?token=$conn")).header("Accept", "text/event-stream")
-            .also { b -> origin?.let { b.header("Origin", it) }; xff?.let { b.header("X-Forwarded-For", it) } }.GET().build()
-        Thread {
-            try {
-                val resp = http.send(req, HttpResponse.BodyHandlers.ofLines())
-                if (resp.statusCode() != 200) { failure = "SSE ${resp.statusCode()}"; return@Thread }
-                val data = StringBuilder()
-                resp.body().use { lines ->
-                    lines.iterator().let { it ->
-                        while (it.hasNext() && !stopped.get()) {
-                            val l = it.next()
-                            when {
-                                l.startsWith("data:") -> data.append(l.removePrefix("data:").trimStart())
-                                l.startsWith("id:") -> lastEventId = l.removePrefix("id:").trim()
-                                l.isEmpty() -> if (data.isNotEmpty()) { inbox.add(data.toString()); data.setLength(0) }
-                            }
-                        }
-                    }
-                }
-            } catch (e: Exception) { if (!stopped.get()) failure = e.toString() }
-        }.also { it.isDaemon = true }.start()
-    }
-
-    override fun close() { stopped.set(true) }
-
-    companion object {
-        fun post(port: Int, text: String, conn: String?, origin: String?, xff: String?): HttpResponse<String> {
-            val b = HttpRequest.newBuilder(URI("http://127.0.0.1:$port/play/act")).header("Content-Type", "application/json")
-                .POST(HttpRequest.BodyPublishers.ofString(text)).timeout(Duration.ofSeconds(5))
-            conn?.let { b.header("X-Play-Conn", it) }; origin?.let { b.header("Origin", it) }; xff?.let { b.header("X-Forwarded-For", it) }
-            return http.send(b.build(), HttpResponse.BodyHandlers.ofString())
-        }
-    }
-}
-
-/** Repli long-poll : `GET /play/state?token=&since=` (25 s côté service), les messages sont accusés par `since`. */
-class PollWire(private val port: Int, private val origin: String? = "https://bridge.sti-cm.com", private val xff: String? = null) : Wire() {
-    @Volatile var conn: String? = null
-    private val stopped = AtomicBoolean(false)
-    private var started = false
-
-    @Synchronized override fun send(text: String) {
-        val r = SseWire.post(port, text, conn, origin, xff)
-        if (r.statusCode() != 200) { failure = "POST ${r.statusCode()} ${r.body()}"; return }
-        if (conn == null) { conn = (Json.parse(r.body()) as Map<*, *>)["conn"] as String }
-        if (!started) { started = true; Thread { loop() }.also { it.isDaemon = true }.start() }
-    }
-
-    private fun loop() {
-        var since = 0L
-        while (!stopped.get()) {
-            try {
-                val b = HttpRequest.newBuilder(URI("http://127.0.0.1:$port/play/state?token=$conn&since=$since")).timeout(Duration.ofSeconds(35)).GET()
-                origin?.let { b.header("Origin", it) }; xff?.let { b.header("X-Forwarded-For", it) }
-                val r = http.send(b.build(), HttpResponse.BodyHandlers.ofString())
-                if (r.statusCode() != 200) { failure = "GET ${r.statusCode()}"; return }
-                val o = Json.parse(r.body()) as Map<*, *>
-                for (m in o["msgs"] as List<*>) inbox.add(Json.write(m))
-                since = (o["next"] as Number).toLong()
-            } catch (e: Exception) { if (!stopped.get()) failure = e.toString(); return }
-        }
-    }
-
-    override fun close() { stopped.set(true) }
-}

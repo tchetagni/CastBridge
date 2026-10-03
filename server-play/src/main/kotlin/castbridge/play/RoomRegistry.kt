@@ -56,6 +56,7 @@ class PlayHub(
     private val rooms = ConcurrentHashMap<String, RoomEntry>()
     private val all = ConcurrentHashMap<String, PlayConn>()
     private val roomLock = Any()
+    @Volatile private var draining = false
     private val badCodes = BadCodeCounter()
     private val rnd = random()
 
@@ -96,6 +97,7 @@ class PlayHub(
     private fun create(c: PlayConn, m: ClientMsg.Create, now: Long) {
         // un ticket vit en temps RÉEL, même si les salles tournent sur une horloge de test
         if (!verifier.verify(c.ticket, System.currentTimeMillis())) { send(c, err(PlayReason.PLAY_TICKET_REFUSED)); return }
+        if (draining) { send(c, ServerMsg.Error(0, MAINTENANCE, "Le serveur de jeu est en maintenance : réessayez dans quelques minutes.", true)); return }
         val id = ByteArray(16).also { rnd.nextBytes(it) }.joinToString("") { "%02x".format(it) }
         val e = synchronized(roomLock) {
             if (rooms.size >= cfg.maxRooms) null
@@ -114,6 +116,7 @@ class PlayHub(
     }
 
     private fun resume(c: PlayConn, m: ClientMsg.Resume, now: Long) {
+        if (badCodes.synchronizedBlocked(c.ip, now)) { send(c, err(PlayReason.PLAY_BAD_CODE)); return }   // l'adresse bloquée ne reprend rien
         val e = rooms[m.roomId]
         if (e == null) { badCodes.synchronizedFail(c.ip, now); send(c, err(PlayReason.PLAY_BAD_CODE)); return }
         attachAndForward(e, c, m, now)
@@ -187,14 +190,29 @@ class PlayHub(
             }
             overflow.forEach { dropOverflow(it) }
         }
+        synchronized(badCodes) { badCodes.sweep(now) }
         for (c in ArrayList(all.values)) c.housekeeping(mono)
     }
+
+    /**
+     * Arrêt annoncé (SIGTERM, déploiement) : plus aucune salle neuve (`PLAY_MAINTENANCE`), et les salles ouvertes sont prévenues ; la partie en cours continue pendant le délai de grâce.
+     * À faire de préférence HORS PARTIE : le service ne migre pas les salles (docs/PLAY-OPS-REQUIREMENTS.md).
+     */
+    fun startDrain() {
+        if (draining) return
+        draining = true
+        val note = ServerMsg.Error(0, MAINTENANCE, "Le serveur de jeu va redémarrer pour maintenance : terminez la partie en cours, puis reconnectez-vous dans quelques minutes.", true)
+        val text = PlayCodec.encode(note)
+        for (e in ArrayList(rooms.values)) for (c in ArrayList(e.conns.values)) c.offer(text)
+    }
+
+    fun connectionsOpen(): Int = all.size
 
     fun closeAll() {
         for (c in ArrayList(all.values)) { c.close(1001, "arrêt du service"); onClosed(c) }
     }
 
-    companion object { const val BUSY = "PLAY_BUSY" }
+    companion object { const val BUSY = "PLAY_BUSY"; const val MAINTENANCE = "PLAY_MAINTENANCE" }
 }
 
 private fun BadCodeCounter.synchronizedBlocked(ip: String, now: Long) = synchronized(this) { ipBlocked(ip, now) }

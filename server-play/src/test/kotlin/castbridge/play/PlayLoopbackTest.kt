@@ -15,7 +15,7 @@ import kotlin.test.assertTrue
  */
 class PlayLoopbackTest {
     private val servers = ArrayList<PlayServer>()
-    private fun server(cfg: PlayConfig = PlayConfig(port = 0, ticketPubKeys = listOf(TestKeys.pub))) = PlayServer(cfg).also { it.start(); servers += it }
+    private fun server(cfg: PlayConfig = PlayConfig(port = 0, trustedProxies = LOOPBACK, ticketPubKeys = listOf(TestKeys.pub))) = PlayServer(cfg).also { it.start(); servers += it }
     @AfterTest fun stop() { servers.forEach { it.close() }; servers.clear() }
 
     @Test fun threeTransportsPlayTheSameDuelWithTheSameResult() {
@@ -65,9 +65,9 @@ class PlayLoopbackTest {
         val w = tv.await("welcome")!!
         assertEquals("HOST", w["role"]); assertEquals(1, srv.rooms().size)
         val p = WsWire(srv.port)
-        p.send(PlayCodec.encode(ClientMsg.Join("ZZZZZZZZ", "Awa", null, null, false)))
+        p.send(PlayCodec.encode(ClientMsg.Join("ZZZZZZZZ", "Awa", null, dev(), false)))
         assertEquals("PLAY_BAD_CODE", p.await("error")?.get("reason"))
-        p.send(PlayCodec.encode(ClientMsg.Join(w["code"] as String, "Awa", null, null, false)))
+        p.send(PlayCodec.encode(ClientMsg.Join(w["code"] as String, "Awa", null, dev(), false)))
         assertEquals("PLAYER", p.await("welcome")?.get("role"))
         assertNull(p.closeCode)
         tv.close(); p.close()

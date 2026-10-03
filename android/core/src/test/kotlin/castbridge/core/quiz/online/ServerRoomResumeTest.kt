@@ -15,7 +15,7 @@ class ServerRoomResumeTest {
     private fun game(players: Int = 2, count: Int = 10, seed: Long = 5): Game {
         val r = room(count, seed)
         val h = r.handle("tv", ClientMsg.Create(null, "DUEL"), 0).one<ServerMsg.Welcome>()
-        val toks = (0 until players).map { r.handle("c$it", ClientMsg.Join(r.code, "J$it", null, null, false), 0).one<ServerMsg.Welcome>().token }
+        val toks = (0 until players).map { r.handle("c$it", ClientMsg.Join(r.code, "J$it", null, dv(), false), 0).one<ServerMsg.Welcome>().token }
         r.handle("tv", ClientMsg.Act(null, "mode", null, "DUEL", 1), 0); r.handle("tv", ClientMsg.Act(null, "start", null, "5", 2), 0)
         return Game(r, h.token, toks)
     }
@@ -112,7 +112,7 @@ class ServerRoomResumeTest {
     @Test fun onlyLocalPlayersBehindTheTvPauseTheTableAndResumeKeepsTheClock() {
         val r = room()
         val h = r.handle("tv", ClientMsg.Create(null, "DUEL"), 0).one<ServerMsg.Welcome>()
-        r.handle("tv", ClientMsg.Join(r.code, "Voisin", null, null, false), 0)      // joueur local relayé par la TV
+        r.handle("tv", ClientMsg.Join(r.code, "Voisin", null, dv(), false), 0)      // joueur local relayé par la TV
         r.handle("tv", ClientMsg.Act(null, "mode", null, "DUEL", 1), 0); r.handle("tv", ClientMsg.Act(null, "start", null, "5", 2), 0)
         val q = r.table(0).room.duel!!.question
         r.disconnect("tv", 5_000)
@@ -130,7 +130,7 @@ class ServerRoomResumeTest {
 
     @Test fun pausedTableLongerThanSixtySecondsIsAbandoned() {
         val r = room()
-        r.handle("tv", ClientMsg.Create(null, "DUEL"), 0); r.handle("tv", ClientMsg.Join(r.code, "Voisin", null, null, false), 0)
+        r.handle("tv", ClientMsg.Create(null, "DUEL"), 0); r.handle("tv", ClientMsg.Join(r.code, "Voisin", null, dv(), false), 0)
         r.handle("tv", ClientMsg.Act(null, "mode", null, "DUEL", 1), 0); r.handle("tv", ClientMsg.Act(null, "start", null, "5", 2), 0)
         r.disconnect("tv", 1_000); r.tick(1_100)
         r.tick(1_000 + ServerRoom.HOST_LOST_MS)

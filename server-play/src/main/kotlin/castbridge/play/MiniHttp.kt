@@ -1,9 +1,12 @@
 package castbridge.play
 
+import java.io.BufferedInputStream
 import java.io.ByteArrayOutputStream
 import java.io.InputStream
 import java.io.OutputStream
 import java.net.InetAddress
+import java.net.Socket
+import java.net.SocketTimeoutException
 import java.net.URLDecoder
 
 /** Une requête HTTP/1.1 lue sur la socket (tête seulement ; le corps se lit avec [body]). */
@@ -17,39 +20,61 @@ class HttpReq(val method: String, val path: String, val query: Map<String, Strin
         if (n < 0 || n > max) return null
         return ByteArray(n).also { var o = 0; while (o < n) { val r = input.read(it, o, n - o); if (r < 0) return null; o += r } }
     }
+
+    /** Valeur du cookie [name] (en-tête `Cookie`) ; null s'il est absent. */
+    fun cookie(name: String): String? = header("cookie")?.split(';')?.map { it.trim() }?.firstOrNull { it.startsWith("$name=") }?.substringAfter('=')?.takeIf { it.isNotEmpty() }
 }
 
 /** Erreur de lecture de la tête : le service répond avec ce statut. */
 class HttpError(val status: Int, message: String) : Exception(message)
 
-/** HTTP/1.1 minimal : une requête par connexion (`Connection: close`), tête ≤ 8 Ko, ≤ 64 en-têtes. Pas de pipeline, pas de keep-alive. */
+/**
+ * HTTP/1.1 minimal : une requête par connexion (`Connection: close`), tête ≤ 8 Ko lue par tampon avec une échéance GLOBALE, ≤ 64 en-têtes, syntaxe stricte
+ * (nom sans espace, pas de continuation de ligne, `Transfer-Encoding` refusé : seule la longueur fixe est comprise). Pas de pipeline, pas de keep-alive.
+ */
 object MiniHttp {
     const val MAX_HEAD = 8 * 1024
+    private val TOKEN = Regex("^[!#$%&'*+.^_`|~0-9A-Za-z-]+$")
     private val REASONS = mapOf(200 to "OK", 101 to "Switching Protocols", 400 to "Bad Request", 403 to "Forbidden", 404 to "Not Found", 405 to "Method Not Allowed",
-        410 to "Gone", 411 to "Length Required", 413 to "Payload Too Large", 429 to "Too Many Requests", 431 to "Request Header Fields Too Large", 500 to "Internal Server Error",
-        503 to "Service Unavailable")
+        408 to "Request Timeout", 410 to "Gone", 411 to "Length Required", 413 to "Payload Too Large", 429 to "Too Many Requests", 431 to "Request Header Fields Too Large",
+        500 to "Internal Server Error", 503 to "Service Unavailable")
 
-    fun readRequest(input: InputStream, peer: InetAddress): HttpReq {
+    /** Lit la tête de la requête sur [socket] en moins de [deadlineMs] au total (sinon 408), puis rend la requête ; `input` est le flux tamponné à utiliser pour la suite. */
+    fun readRequest(socket: Socket, deadlineMs: Long): HttpReq {
+        val input = BufferedInputStream(socket.getInputStream(), 4096)
+        val end = System.currentTimeMillis() + deadlineMs
         val head = ByteArrayOutputStream()
         var last4 = 0
         while (true) {
-            val b = input.read()
+            val left = end - System.currentTimeMillis()
+            if (left <= 0) throw HttpError(408, "tête trop lente")
+            socket.soTimeout = left.coerceAtMost(Int.MAX_VALUE.toLong()).toInt()
+            val b = try { input.read() } catch (_: SocketTimeoutException) { throw HttpError(408, "tête trop lente") }
             if (b < 0) throw HttpError(400, "tête incomplète")
             head.write(b)
             last4 = (last4 shl 8) or b
             if (last4 == 0x0d0a0d0a) break
             if (head.size() > MAX_HEAD) throw HttpError(431, "tête trop grosse")
         }
-        val lines = head.toString(Charsets.ISO_8859_1).split("\r\n").filter { it.isNotEmpty() }
+        socket.soTimeout = 10_000   // le corps (≤ 4 Ko) : même délai par lecture
+        return parse(head.toString(Charsets.ISO_8859_1), socket.inetAddress, input)
+    }
+
+    private fun parse(text: String, peer: InetAddress, input: InputStream): HttpReq {
+        val lines = text.split("\r\n").filter { it.isNotEmpty() }
         val rl = lines.firstOrNull()?.split(' ') ?: throw HttpError(400, "requête vide")
         if (rl.size != 3 || !rl[2].startsWith("HTTP/1.")) throw HttpError(400, "ligne de requête invalide")
-        val headers = HashMap<String, String>()
         if (lines.size > 65) throw HttpError(431, "trop d'en-têtes")
+        val headers = HashMap<String, String>()
         for (l in lines.drop(1)) {
+            if (l[0] == ' ' || l[0] == '\t') throw HttpError(400, "continuation de ligne refusée")
             val i = l.indexOf(':'); if (i <= 0) throw HttpError(400, "en-tête invalide")
-            val k = l.substring(0, i).trim().lowercase(); val v = l.substring(i + 1).trim()
+            val name = l.substring(0, i)
+            if (!TOKEN.matches(name)) throw HttpError(400, "nom d'en-tête invalide")   // espace avant « : » compris
+            val k = name.lowercase(); val v = l.substring(i + 1).trim()
             headers[k] = headers[k]?.let { "$it,$v" } ?: v   // plusieurs lignes : fusionnées (X-Forwarded-For)
         }
+        if ("transfer-encoding" in headers) throw HttpError(400, "Transfer-Encoding refusé")
         val target = rl[1]
         if (!target.startsWith("/")) throw HttpError(400, "cible invalide")
         val path = target.substringBefore('?')

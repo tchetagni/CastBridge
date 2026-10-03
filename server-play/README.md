@@ -11,12 +11,12 @@ Protocole : `docs/PLAY-PROTOCOL.md` (`play-v1`). Conception : `docs/coordination
 |---|---|
 | `GET /play`, `GET /play/j/{code}` | page de jeu (statique, sans dépendance externe, ≤ 60 Ko) |
 | `WS /play/ws` | WebSocket : un message JSON `play-v1` par trame texte |
-| `POST /play/act` + `GET /play/events?token=` | repli SSE : un message client par POST (en-tête `X-Play-Conn` après le premier), flux `event: <type>` |
-| `POST /play/act` + `GET /play/state?token=&since=` | repli long-poll 25 s : `{"msgs":[…],"next":n}`, les messages sont retirés à l'accusé `since` |
+| `POST /play/act` + `GET /play/events` | repli SSE : un message client par POST, flux `event: <type>` ; la session est un cookie `cbp` (`HttpOnly; Secure; SameSite=Strict; Path=/play/`) posé à la première requête, en-tête `X-Play-Conn` pour les clients sans cookie |
+| `POST /play/act` + `GET /play/state?since=` | repli long-poll 25 s : `{"msgs":[…],"next":n}`, les messages sont retirés à l'accusé `since` |
 | `GET /play/health` | JSON sans secret : salles, connexions, mémoire, version (ni IP, ni code, ni jeton) |
 | `GET /play/.well-known/caps` | capacités (`play1`, `sse`, `longpoll`…) et limites |
 
-Ici `token` est le secret de la **connexion de repli** (128 bits, vie courte), jamais le jeton de siège. Les trois transports passent par le même `PlayHub` et le même `PlayCodec`.
+Le secret de la session de repli (128 bits, vie courte) n'est JAMAIS dans une adresse ni dans le corps d'une réponse ; ce n'est pas le jeton de siège. Un secret inconnu ou périmé : 410 et cookie effacé. Les trois transports passent par le même `PlayHub` et le même `PlayCodec`.
 
 ## Variables d'environnement (les seules lues ; aucune clé privée, aucun secret)
 
@@ -28,7 +28,7 @@ Ici `token` est le secret de la **connexion de repli** (128 bits, vie courte), j
 | `CASTBRIDGE_PLAY_MAX_CONNECTIONS` | 3000 | connexions ; au-delà : HTTP 503 |
 | `CASTBRIDGE_PLAY_MAX_PER_IP` | 8 | connexions par adresse cliente ; au-delà : HTTP 429 avant l'upgrade |
 | `CASTBRIDGE_PLAY_ORIGINS` | `https://bridge.sti-cm.com` | origines autorisées (liste séparée par des virgules) |
-| `CASTBRIDGE_PLAY_TRUSTED_PROXIES` | `127.0.0.0/8,::1/128,172.16.0.0/12` | réseaux dont `X-Forwarded-For` est cru (dernier saut seulement) |
+| `CASTBRIDGE_PLAY_TRUSTED_PROXIES` | (vide : AUCUN proxy de confiance) | réseaux dont `X-Forwarded-For` est cru (dernier saut seulement) : en production l'adresse exacte de nginx en /32 |
 | `CASTBRIDGE_PLAY_TICKET_PUBKEY`, `_2`, `_3` | (vide) | clés PUBLIQUES Ed25519 des tickets (Base64 : 32 octets bruts ou SPKI) ; vide = aucune salle ne peut s'ouvrir |
 | `CASTBRIDGE_PLAY_LOTS_DIR` | (vide) | dossier en lecture seule de lots `.quiz.zip` ; vide = questions libres intégrées seulement |
 
@@ -37,7 +37,9 @@ Ticket d'ouverture de salle : `v1.<charge>.<signature>` (Base64 URL), signature 
 ## Limites et délais
 
 - Messages : 10/s, rafale 30 (au-delà : fermeture 1008) ; ≤ 2 Ko par message (au-delà : `error BAD_REQUEST`) ; trame > 8 Ko : fermeture 1009 ; texte seulement (binaire : 1003).
-- File de sortie par connexion : 64 Ko (au-delà : fermeture 1008, le siège est gardé pour `resume`).
+- File de sortie par connexion : 64 Ko (au-delà : fermeture 1008, le siège est gardé pour `resume`). Trames de contrôle du client : ≈ 5/s (rafale 10), un seul pong en attente ; écriture bloquée > 10 s : connexion coupée.
+- Clé d'adresse des limites : IPv4 telle quelle, IPv6 réduite à son préfixe /64. Tête de requête : 10 s au total, ≤ 8 Ko, `Transfer-Encoding` refusé.
+- Arrêt (SIGTERM) : « maintenance » annoncée aux salles, plus de salle neuve (`PLAY_MAINTENANCE`), 25 s de grâce ; **déployer hors partie**. Exigences d'exploitation : `docs/PLAY-OPS-REQUIREMENTS.md`.
 - WebSocket : ping toutes les 25 s (nginx coupe un flux muet à 75 s), fermeture après 40 s sans aucune trame ; repli : session fermée après 40 s sans flux ni requête.
 - Salles : tick 200 ms ; purge après 10 min sans connexion, 2 h de vie au plus ; 50 codes faux sur une salle changent le code, 10 par adresse et par 5 min bloquent l'adresse.
 - Délai entre deux questions (exigence du propriétaire) : 1,5 s par défaut (1 à 2 s), `opensAtServerMs` sur l'horloge du serveur (`PlayTiming`) ; appliqué par `ServerRoom`, honoré par la boucle du service.

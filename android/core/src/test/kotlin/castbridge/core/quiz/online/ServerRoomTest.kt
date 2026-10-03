@@ -13,7 +13,7 @@ class ServerRoomTest {
     private fun List<ServerRoom.Out>.error(): String? = msgs().filterIsInstance<ServerMsg.Error>().firstOrNull()?.reason
     private fun List<ServerRoom.Out>.ack(): String = msgs().filterIsInstance<ServerMsg.Ack>().single().result
     private fun ServerRoom.host() = handle("tv", ClientMsg.Create(null, "DUEL"), 0).one<ServerMsg.Welcome>()
-    private fun ServerRoom.join(conn: String, name: String, now: Long = 0, spectate: Boolean = false, device: String? = null, ip: String? = null) =
+    private fun ServerRoom.join(conn: String, name: String, now: Long = 0, spectate: Boolean = false, device: String? = dv(), ip: String? = null) =
         handle(conn, ClientMsg.Join(code, name, null, device, spectate), now, ip)
     private fun ServerRoom.act(conn: String, action: String, qid: String? = null, choice: Int? = null, arg: String? = null, now: Long = 0, seq: Long = 1) =
         handle(conn, ClientMsg.Act(qid, action, choice, arg, seq), now)
@@ -27,8 +27,8 @@ class ServerRoomTest {
         assertEquals(PlayRole.HOST, h.role); assertEquals(r.code, h.code); assertEquals(PlayProtocol.PROTO, h.proto)
         val w = r.join("a", "Awa").one<ServerMsg.Welcome>()
         assertEquals(PlayRole.PLAYER, w.role); assertNotNull(w.playerId); assertEquals(32, w.token.length)
-        assertEquals(PlayReason.PLAY_BAD_CODE.name, r.handle("b", ClientMsg.Join("ZZZZZZZZ", "Bello", null, null, false), 0).error())
-        assertEquals("PLAYER", r.handle("c", ClientMsg.Join(RoomCode.display(r.code).lowercase(), "Carine", null, null, false), 0).one<ServerMsg.Welcome>().role.name, "code tapé en minuscules avec tiret")
+        assertEquals(PlayReason.PLAY_BAD_CODE.name, r.handle("b", ClientMsg.Join("ZZZZZZZZ", "Bello", null, dv(), false), 0).error())
+        assertEquals("PLAYER", r.handle("c", ClientMsg.Join(RoomCode.display(r.code).lowercase(), "Carine", null, dv(), false), 0).one<ServerMsg.Welcome>().role.name, "code tapé en minuscules avec tiret")
         assertEquals(2, r.seatCount())
     }
 
@@ -134,13 +134,13 @@ class ServerRoomTest {
             assertEquals("OK", r.act("c0", "answer", q.id, q.answer, now = 10_000).ack())
             return r.table(0).lastElapsedMs("c0")!!
         }
-        assertEquals(10_000, elapsedFor(0)); assertEquals(9_700, elapsedFor(600)); assertEquals(9_600, elapsedFor(2_000))
+        assertEquals(10_000, elapsedFor(0)); assertEquals(9_900, elapsedFor(600), "RTT plafonné à 200 ms : 100 ms rendus"); assertEquals(9_900, elapsedFor(2_000))
     }
 
     @Test fun tvRelayUsesMaxOfLocalAndServerMinusTvRtt() {
         fun run(local: Long, sender: String = "tv"): Pair<String, Long?> {
             val r = room(); r.host()
-            val j = r.handle("tv", ClientMsg.Join(r.code, "Voisin", null, null, false), 0).one<ServerMsg.Welcome>()
+            val j = r.handle("tv", ClientMsg.Join(r.code, "Voisin", null, dv(), false), 0).one<ServerMsg.Welcome>()
             r.join("c1", "Bello"); r.act("tv", "mode", arg = "DUEL"); r.act("tv", "start", arg = "5")
             r.rtt.sample("tv", 300)
             val q = r.table(0).room.duel!!.question

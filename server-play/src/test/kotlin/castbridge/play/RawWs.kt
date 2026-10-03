@@ -8,7 +8,7 @@ import java.security.SecureRandom
 import java.util.Base64
 
 /** Client WebSocket écrit à la main pour les tests qui doivent maîtriser les trames (pas de pong automatique, trames énormes, etc.). */
-class RawWs(port: Int, headers: Map<String, String> = mapOf("Origin" to "https://bridge.sti-cm.com"), path: String = "/play/ws", autoPong: Boolean = true) : AutoCloseable {
+class RawWs(port: Int, headers: Map<String, String> = mapOf("Origin" to "https://bridge.sti-cm.com"), path: String = "/play/ws", autoPong: Boolean = true, connection: String = "Upgrade", keyOverride: String? = null) : AutoCloseable {
     val socket = Socket("127.0.0.1", port).also { it.soTimeout = 10_000 }
     private val din = DataInputStream(socket.getInputStream())
     private val out = socket.getOutputStream()
@@ -18,8 +18,8 @@ class RawWs(port: Int, headers: Map<String, String> = mapOf("Origin" to "https:/
     @Volatile var eof = false
 
     init {
-        val key = Base64.getEncoder().encodeToString(ByteArray(16).also { SecureRandom().nextBytes(it) })
-        val sb = StringBuilder("GET $path HTTP/1.1\r\nHost: 127.0.0.1\r\nUpgrade: websocket\r\nConnection: Upgrade\r\nSec-WebSocket-Version: 13\r\nSec-WebSocket-Key: $key\r\n")
+        val key = keyOverride ?: Base64.getEncoder().encodeToString(ByteArray(16).also { SecureRandom().nextBytes(it) })
+        val sb = StringBuilder("GET $path HTTP/1.1\r\nHost: 127.0.0.1\r\nUpgrade: websocket\r\nConnection: $connection\r\nSec-WebSocket-Version: 13\r\nSec-WebSocket-Key: $key\r\n")
         headers.forEach { (k, v) -> sb.append("$k: $v\r\n") }
         out.write((sb.toString() + "\r\n").toByteArray()); out.flush()
         val head = StringBuilder()
@@ -44,6 +44,7 @@ class RawWs(port: Int, headers: Map<String, String> = mapOf("Origin" to "https:/
     }
 
     fun sendText(s: String) = send(1, s.toByteArray())
+    fun raw(bytes: ByteArray) { out.write(bytes); out.flush() }
 
     /** Prochaine trame (les pings sont comptés et, selon [autoPong], acquittés) ; null au bout du délai ou à la fermeture. */
     fun read(timeoutMs: Int = 3_000): F? {

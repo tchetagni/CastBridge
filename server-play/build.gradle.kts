@@ -40,4 +40,6 @@ tasks.test {
     // Les tests ouvrent de vraies sockets sur 127.0.0.1 (port aléatoire) : pas de réutilisation de connexions JDK entre serveurs de test.
     systemProperty("http.keepAlive", "false")
     maxHeapSize = "768m"
+    // JEP 444 : un fil virtuel qui attend sous `synchronized` épingle son porteur ; la trace dit où (tests de charge de l'audit)
+    jvmArgs("-Djdk.tracePinnedThreads=full")
 }

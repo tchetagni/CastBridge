@@ -32,10 +32,11 @@ object WsProtocol {
         val op = b0 and 0x0f
         if (b1 and 0x80 == 0) throw WsError(1002, "trame client non masquée")
         var len = (b1 and 0x7f).toLong()
-        if (len == 126L) len = din.readUnsignedShort().toLong()
-        else if (len == 127L) { len = din.readLong(); if (len < 0) throw WsError(1002, "longueur invalide") }
+        if (len == 126L) { len = din.readUnsignedShort().toLong(); if (len < 126) throw WsError(1002, "longueur non minimale") }
+        else if (len == 127L) { len = din.readLong(); if (len < 65_536) throw WsError(1002, "longueur invalide ou non minimale") }
         val control = op >= 8
         if (control && (!fin || len > 125)) throw WsError(1002, "trame de contrôle invalide")
+        if (op == OP_CLOSE && len == 1L) throw WsError(1002, "close d'un octet")
         if (op !in 0..2 && op !in 8..10) throw WsError(1002, "opcode inconnu")
         if (len > maxBytes) throw WsError(1009, "message trop gros")
         val mask = ByteArray(4); din.readFully(mask)
@@ -52,7 +53,7 @@ object WsProtocol {
             payload.size < 65_536 -> { h.write(126); h.write(payload.size ushr 8); h.write(payload.size and 0xff) }
             else -> { h.write(127); for (s in 56 downTo 0 step 8) h.write(((payload.size.toLong() ushr s) and 0xff).toInt()) }
         }
-        synchronized(out) { out.write(h.toByteArray()); out.write(payload); out.flush() }
+        out.write(h.toByteArray()); out.write(payload); out.flush()   // UN SEUL écrivain par connexion (WsConn tient le verrou d'écriture) : jamais de synchronized autour d'une écriture réseau
     }
 
     fun closePayload(code: Int, reason: String): ByteArray {

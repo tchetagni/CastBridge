@@ -41,6 +41,15 @@ class NoSecretsTest {
         assertFalse(Regex("ADMIN_TOKEN|PRIVATE_KEY|jdbc:|mysql", RegexOption.IGNORE_CASE).containsMatchIn(all), "aucune trace de secret ni de base dans les sources")
     }
 
+    @Test fun noSecretTravelsInAnUrlNorIsLoggedByTheServiceOrThePage() {
+        val js = File("src/main/resources/static/play/play.js").readText()
+        assertFalse(Regex("token=|X-Play-Conn|\\?token|[?&]conn=").containsMatchIn(js), "la page n'envoie aucun secret dans une adresse ni dans un en-tête : le cookie HttpOnly suffit")
+        assertFalse(js.contains("console."), "la page n'écrit rien dans la console")
+        val main = File("src/main/kotlin/castbridge/play").listFiles { f -> f.name.endsWith(".kt") }!!.joinToString("\n") { it.readText() }
+        assertFalse(Regex("println\\(|System\\.out|logger|Logger").containsMatchIn(main.replace("System.err.println(\"tick", "").replace("System.err.println(\"castbridge-play \${cfg.version}", "")), "le service ne journalise aucune requête (adresses, jetons)")
+        assertTrue(main.contains("HttpOnly") && main.contains("SameSite=Strict") && main.contains("Secure"), "cookie de session de repli")
+    }
+
     @Test fun ticketPublicKeysAcceptRawAndSpkiAndRejectGarbage() {
         val raw = java.util.Base64.getEncoder().encodeToString(TestKeys.pair.public.encoded.copyOfRange(12, 44))
         for (k in listOf(TestKeys.pub, raw)) assertTrue(TicketVerifier(listOf(k)).verify(TestKeys.ticket(), System.currentTimeMillis()), "clé $k")

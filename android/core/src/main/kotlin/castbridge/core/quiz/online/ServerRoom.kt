@@ -43,6 +43,8 @@ class ServerRoom(
         var conn: String? = null; internal set
         var lostAt: Long? = null; internal set
         var muted = false; internal set
+        /** Clé d'adresse du client (IPv4, ou préfixe /64 en IPv6) : sert au bannissement par adresse. */
+        var ip: String? = null; internal set
     }
 
     data class AnswerRecord(val questionIndex: Int, val conn: String, val playerId: String, val elapsedMs: Long, val arrivedAtServerMs: Long)
@@ -85,6 +87,7 @@ class ServerRoom(
     private val seats = LinkedHashMap<String, Seat>()      // by token
     private val byConn = HashMap<String, Seat>()
     private val bannedDevices = HashSet<String>()
+    private val bannedIps = HashSet<String>()
     private var host: Seat? = null
     private var autoHost = false
     private var scopeClosedAt: Long? = null
@@ -103,6 +106,7 @@ class ServerRoom(
     fun currentQuestionIndex(): Int = synchronized(lock) { table0.room.duel?.index ?: table0.room.game?.index ?: -1 }
     fun seatCount(): Int = synchronized(lock) { seats.values.count { it.role != PlayRole.SPECTATOR && it.quizToken != null } }
     fun reportCount(): Int = synchronized(lock) { reports.size }
+    fun spectatorCount(): Int = synchronized(lock) { seats.values.count { it.role == PlayRole.SPECTATOR } }
     fun eventsSince(lastSeq: Long): List<EventRing.Event>? = synchronized(lock) { ring.since(lastSeq) }
     fun seq(): Long = synchronized(lock) { seq }
 
@@ -155,6 +159,8 @@ class ServerRoom(
         if (state != State.PLAYING && RoomCode.expired(createdAt, now)) return gone("EXPIRED", out)
         scopeClosedAt?.let { if (now - it >= SPECTATOR_GRACE_MS) return gone("HOST_CLOSED_INTERNET", out) }
         abandonedAt?.let { if (now - it >= PURGE_MS) return gone("HOST_LOST", out) }
+        purgeSpectators(now)
+        badCodes.sweep(now)
         hostWatch(now)
         if ((state == State.OPEN || state == State.PLAYING) && now - lastPingAt >= PING_EVERY_MS) {
             lastPingAt = now
@@ -197,13 +203,14 @@ class ServerRoom(
         if (sender != null && sender === host && sender.conn == conn && typed == code) { relayJoin(conn, m, out); return }
         if (typed == null || typed != code) { badAttempt(conn, ip, now, out); return }
         m.token?.let { t -> seats[t]?.let { s -> reattach(s, conn, out, null); return } }
-        if (m.deviceHash != null && m.deviceHash in bannedDevices) { out += err(conn, PlayReason.PLAY_BANNED); return }
+        if (m.deviceHash != null && m.deviceHash in bannedDevices || ip != null && ip in bannedIps) { out += err(conn, PlayReason.PLAY_BANNED); return }
+        if (scope == PlayScope.INTERNET && (m.deviceHash == null || m.deviceHash.length < MIN_DEVICE_HASH)) { out += errp(conn, PlayProtocol.BAD_REQUEST, "Appareil non identifié : mettez CastBridge à jour."); return }
         val name = QuizRoom.cleanName(m.name) ?: run { out += errp(conn, PlayProtocol.BAD_REQUEST, "Choisissez un pseudonyme."); return }
         val dup = m.deviceHash != null && seats.values.any { it.deviceHash == m.deviceHash && it.role != PlayRole.SPECTATOR }
         val full = table0.room.players().size >= settings.seatsPerTable
         if (m.spectate || dup) {
             if (!settings.allowSpectators || seats.values.count { it.role == PlayRole.SPECTATOR } >= settings.maxSpectators) { out += err(conn, PlayReason.PLAY_ROOM_FULL); return }
-            val s = Seat(newToken(), PlayRole.SPECTATOR, name, m.deviceHash, false)
+            val s = Seat(newToken(), PlayRole.SPECTATOR, name, m.deviceHash, false).also { it.ip = ip }
             seats[s.token] = s; attach(s, conn); out += welcome(s, conn); announcement(now)?.let { out += Out(conn, it) }; pending += Ev("spectator"); return
         }
         if (full) { out += err(conn, PlayReason.PLAY_ROOM_FULL); return }
@@ -213,7 +220,7 @@ class ServerRoom(
             QuizRoom.Join.OK -> {}
             else -> { out += errp(conn, PlayProtocol.BAD_REQUEST, "Impossible de rejoindre."); return }
         }
-        val s = Seat(newToken(), PlayRole.PLAYER, j.player!!.name, m.deviceHash, false)
+        val s = Seat(newToken(), PlayRole.PLAYER, j.player!!.name, m.deviceHash, false).also { it.ip = ip }
         s.quizToken = j.player.token; s.playerId = j.player.id
         seats[s.token] = s; attach(s, conn); out += welcome(s, conn)
         announcement(now)?.let { out += Out(conn, it) }   // un retardataire reçoit l'annonce avec l'opensAt ABSOLU
@@ -234,9 +241,20 @@ class ServerRoom(
     }
 
     private fun resume(conn: String, m: ClientMsg.Resume, now: Long, ip: String?, out: MutableList<Out>) {
+        if (ip != null && badCodes.ipBlocked(ip, now)) { out += err(conn, PlayReason.PLAY_BAD_CODE); return }   // l'adresse bloquée ne reprend rien, même avec le bon jeton
         val s = seats[m.token]
-        if (m.roomId != roomId || s == null) { badAttempt(conn, ip, now, out); return }   // même réponse : n'apprend rien sur l'existence de la salle
+        if (m.roomId != roomId || s == null) {   // même réponse qu'un code faux : n'apprend rien sur l'existence de la salle ; MAIS jamais de rotation du code ici (un spectateur ne doit pas pouvoir la provoquer)
+            out += err(conn, PlayReason.PLAY_BAD_CODE)
+            if (ip != null) badCodes.ipFail(ip, now)
+            return
+        }
         reattach(s, conn, out, m.lastSeq)
+    }
+
+    /** Un spectateur déconnecté depuis [SPECTATOR_PURGE_MS] perd son siège (les joueurs gardent le leur pour la reprise). */
+    private fun purgeSpectators(now: Long) {
+        val gone = seats.values.filter { it.role == PlayRole.SPECTATOR && it.conn == null && (it.lostAt?.let { t -> now - t >= SPECTATOR_PURGE_MS } ?: false) }
+        for (s in gone) seats.remove(s.token)
     }
 
     private fun reattach(s: Seat, conn: String, out: MutableList<Out>, lastSeq: Long?) {
@@ -293,7 +311,8 @@ class ServerRoom(
                 else (runCatching { QuizRoom.Mode.valueOf(m.arg.orEmpty()) }.getOrNull()?.let { if (room.setMode(it)) { dirty(); ActResult.OK } else ActResult.FORBIDDEN } ?: ActResult.BAD_REQUEST)
             "start" -> {
                 if (state != State.OPEN && state != State.FINISHED) return ActResult.FORBIDDEN
-                val reason = room.startGame(m.arg?.toLongOrNull() ?: random.nextLong())
+                val seed = if (scope == PlayScope.INTERNET) random.nextLong() else m.arg?.toLongOrNull() ?: random.nextLong()   // Internet : la graine est tirée par le serveur seul
+                val reason = room.startGame(seed)
                 if (reason != null) { out += errp(conn, PlayProtocol.BAD_REQUEST, reason); ActResult.BAD_REQUEST }
                 else { table0.reset(); state = State.PLAYING; pending += Ev("started"); ActResult.OK }
             }
@@ -377,6 +396,7 @@ class ServerRoom(
         val s = seats.values.firstOrNull { it.playerId == playerId && it !== h } ?: return
         s.quizToken?.let { table0.room.leave(it) }
         s.deviceHash?.let { bannedDevices += it }
+        s.ip?.let { bannedIps += it }
         s.conn?.let { c -> out += err(c, PlayReason.PLAY_BANNED); byConn.remove(c) }
         seats.remove(s.token); pending += Ev("kicked", mapOf("playerId" to playerId))
     }
@@ -528,6 +548,9 @@ class ServerRoom(
         const val HOST_LOST_MS = 60_000L
         const val SPECTATOR_GRACE_MS = 30_000L
         const val PURGE_MS = 10 * 60_000L
+        const val SPECTATOR_PURGE_MS = 5 * 60_000L
+        /** Longueur minimale d'un identifiant d'appareil en Internet (la page en envoie 16 caractères). */
+        const val MIN_DEVICE_HASH = 8
         private val HOST_ACTIONS = setOf("mode", "start", "skip", "lobby", "end", "autohost", "candidate")
     }
 }

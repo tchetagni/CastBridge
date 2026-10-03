@@ -32,12 +32,22 @@ class ConnectionLimits(private val maxPerIp: Int, private val maxTotal: Int) {
 
 /** Adresse du client : celle de la socket, sauf derrière le proxy de confiance (le DERNIER saut de `X-Forwarded-For` que nginx a écrit). */
 object ClientIp {
+    /**
+     * Retourne la CLÉ de limite du client : IPv4 telle quelle ; IPv6 réduite à son préfixe /64 (un abonné reçoit au moins un /64 : sans cela, 2^64 adresses = 2^64 plafonds) ;
+     * une IPv4 inscrite en IPv6 redevient IPv4.
+     */
     fun resolve(peer: InetAddress, forwardedFor: String?, trusted: List<Cidr>): String {
         if (forwardedFor != null && trusted.any { it.contains(peer) }) {
             val last = forwardedFor.substringAfterLast(',').trim()
-            Cidr.literal(last)?.let { return it.hostAddress }
+            Cidr.literal(last)?.let { return key(it) }
         }
-        return peer.hostAddress
+        return key(peer)
+    }
+
+    fun key(a: InetAddress): String {
+        if (a !is java.net.Inet6Address) return a.hostAddress
+        val b = a.address
+        return "v6:" + (0 until 4).joinToString(":") { "%02x%02x".format(b[2 * it], b[2 * it + 1]) } + "::/64"
     }
 }
 

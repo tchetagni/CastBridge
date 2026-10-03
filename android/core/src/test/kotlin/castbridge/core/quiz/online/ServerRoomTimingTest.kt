@@ -18,7 +18,7 @@ class ServerRoomTimingTest {
 
     private fun ServerRoom.lobby(vararg names: String): ServerRoom {
         handle("tv", ClientMsg.Create(null, "DUEL"), 0)
-        names.forEachIndexed { i, n -> handle("c$i", ClientMsg.Join(code, n, null, null, false), 0) }
+        names.forEachIndexed { i, n -> handle("c$i", ClientMsg.Join(code, n, null, dv(), false), 0) }
         handle("tv", ClientMsg.Act(null, "mode", null, "DUEL", 1), 0)
         return this
     }
@@ -73,7 +73,7 @@ class ServerRoomTimingTest {
         val early = r.handle("c0", ClientMsg.Act(q2.questionId, "answer", 0, null, 3), reveal + 1_499).acks().single()
         assertEquals("TOO_EARLY", early.result)
         assertEquals(0, r.table(0).answeredCount(), "une réponse trop tôt n'est jamais comptée")
-        val late = r.handle("late", ClientMsg.Join(r.code, "Carine", null, null, false), reveal + 500)
+        val late = r.handle("late", ClientMsg.Join(r.code, "Carine", null, dv(), false), reveal + 500)
         assertEquals(q2.opensAtServerMs, late.filter { it.to == "late" }.questions().single().opensAtServerMs, "le retardataire reçoit l'opensAt ABSOLU")
         assertEquals("OK", r.handle("c0", ClientMsg.Act(q2.questionId, "answer", 0, null, 4), q2.opensAtServerMs + 1_000).acks().single().result)
         assertEquals(1_000L, r.table(0).lastElapsedMs("c0"), "temps compté depuis opensAtServerMs (RTT 0)")
@@ -140,7 +140,7 @@ class ServerRoomTimingTest {
         val r = room(PlayScope.INTERNET, 5)
         val s = Sim(r, rtts, thinks)
         r.handle("tv", ClientMsg.Create(null, "DUEL"), 0)
-        s.conns.forEachIndexed { i, c -> r.handle(c, ClientMsg.Join(r.code, "J$i", null, null, false), 0) }
+        s.conns.forEachIndexed { i, c -> r.handle(c, ClientMsg.Join(r.code, "J$i", null, dv(), false), 0) }
         r.handle("tv", ClientMsg.Act(null, "mode", null, "DUEL", 1), 0)
         s.tickLoop(50)
         s.at(31_000) { s.deliver(r.handle("tv", ClientMsg.Act(null, "start", null, "11", 5), s.now)) }   // 30 s de ping/pong d'abord (RttBook)
@@ -169,7 +169,7 @@ class ServerRoomTimingTest {
                 assertTrue(a.elapsedMs >= thinks[p], "q0 joueur $p : compté ${a.elapsedMs} < vrai ${thinks[p]} (gain par la latence)")
                 continue
             }
-            val bound = maxOf(0L, rtts[p] / 2L - RttBook.MAX_COMPENSATION_MS)
+            val bound = maxOf(0L, rtts[p] / 2L - minOf(rtts[p].toLong(), RttBook.MAX_COMPENSATION_RTT_MS) / 2L)   // audit I2 : compensation plafonnée à 100 ms
             assertTrue(a.elapsedMs >= thinks[p], "q${a.questionIndex} joueur $p : compté ${a.elapsedMs} < vrai ${thinks[p]} (gain par la latence)")
             assertTrue(a.elapsedMs <= thinks[p] + bound, "q${a.questionIndex} joueur $p : compté ${a.elapsedMs}, vrai ${thinks[p]}, perte permise $bound")
         }
@@ -178,8 +178,8 @@ class ServerRoomTimingTest {
             val byThink = log.filter { it.questionIndex == qi }.sortedBy { thinks[s.conns.indexOf(it.conn)] }
             val counted = byThink.map { it.elapsedMs }
             val trueOrder = byThink.map { thinks[s.conns.indexOf(it.conn)] }
-            // seul le joueur à 1 200 ms (perte 200 ms) peut se faire dépasser, et seulement par un écart < 200 ms
-            for (i in 1 until counted.size) if (counted[i] < counted[i - 1]) assertTrue(trueOrder[i] - trueOrder[i - 1] < 200, "q$qi : inversion par la latence plus grande que la borne")
+            // seuls les joueurs à fort RTT (perte jusqu'à 500 ms à 1 200 ms) peuvent se faire dépasser, et seulement par un écart < 500 ms
+            for (i in 1 until counted.size) if (counted[i] < counted[i - 1]) assertTrue(trueOrder[i] - trueOrder[i - 1] < 500, "q$qi : inversion par la latence plus grande que la borne")
         }
     }
 }

@@ -28,7 +28,7 @@ class GameRun(val srv: PlayServer, val tvWire: Wire, val seats: List<Seat>, val 
         val welcome = tvWait { tv.roomCode }
         players = seats.map { s ->
             val b = Bot(s.name, s.wire, bank, correct = { i -> i < 10 - s.rank }, delayMs = s.delayMs, cheatAtIndex = s.cheatAtIndex)
-            b.send(ClientMsg.Join(welcome, s.name, null, null, false))
+            b.send(ClientMsg.Join(welcome, s.name, null, dev(), false))
             b
         }
         for (p in players) tvWait("${p.name} sans siège") { p.token }

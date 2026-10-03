@@ -38,6 +38,8 @@
 - 1 000 salles sans droit ⇒ 0 question réservée ; 1 000 salles avec droit `cm2` ⇒ réservées `cm2` seulement.
 - `TrialPolicy` : si D-W20-5 = oui, ajout **additif** de `quiz` à `GAMES` et de `/api/quiz/*` à la liste blanche **n'est pas** dans ce cahier (zone `C/owner/`) : le rapport le demande au coordinateur (`QUESTION:`), et `PlayRules` traite l'essai comme au § 2.5 dès maintenant.
 
+- **EXIGENCE I1 (audit Opus de w20-03, 2026-10-03, reportée ici)** : le ticket est à **usage unique** (`jti` aléatoire de 128 bits, mémorisé par `play` jusqu'à `exp`, un second `create` avec le même `jti` ⇒ `PLAY_TICKET_REFUSED`), et le nombre de salles ouvertes par **sujet** (appareil attesté) est plafonné (par défaut 2) en plus du plafond global ; le vérificateur de `server-play` (`TicketVerifier`) accepte aujourd'hui un ticket rejouable pendant sa vie (≤ 15 min), c'est le trou que ce cahier ferme. Test : même ticket deux fois ⇒ une seule salle ; un appareil qui ouvre trois salles ⇒ la troisième refusée.
+
 ## Cas limites
 - Deux activations jointes (production + essai) ⇒ production gagne (`TvGate`). Location expirée hier ⇒ libres seulement, texte « Location terminée : questions libres ». Ticket valide mais `cbx1` absent ⇒ hôte `NONE` : peut **rejoindre** une salle comme téléphone ? **Non** (la TV n'est pas un joueur) ⇒ `PLAY_SCOPE_FORBIDDEN` « Activez la TV pour créer une partie Internet ».
 
