@@ -41,7 +41,7 @@ abstract class PlayConn(val id: String, val ip: String, rate: Int, burst: Int) {
 }
 
 /** Une salle hébergée : la logique est `ServerRoom` du cœur ; ici seulement les connexions et les dates d'activité. */
-class RoomEntry(val room: ServerRoom, /** Appareil attesté par le ticket qui a ouvert la salle (plafond de salles par sujet). */ val subject: String = "") {
+class RoomEntry(val room: ServerRoom, /** Appareil attesté par le ticket qui a ouvert la salle (plafond de salles par sujet). */ val subject: String = "", /** Identité d'activation (code d'appareil signé) de l'hôte : un 2e compte du plafond de salles, que les faux appareils API ne contournent pas. */ val identity: String? = null) {
     internal val conns = ConcurrentHashMap<String, PlayConn>()
     /** Horloge RÉELLE (ms) : la salle peut tourner sur l'horloge de test, la purge jamais. */
     val createdRealMs: Long = System.currentTimeMillis()
@@ -66,12 +66,16 @@ class PlayHub(
     private val reserved: ReservedBank? = null,
     /** Révocations courantes (liste signée relue toutes les 15 min par [castbridge.play.entitlement.RevocationsFeed]). */
     revocations: () -> RevocationState = { RevocationState() },
+    /** Faux tant que les révocations ne sont pas connues (aucune liste acceptée, ou plus de 24 h) : `create` est refusé (fermé). */
+    private val revocationsReady: () -> Boolean = { true },
 ) {
     private val rooms = ConcurrentHashMap<String, RoomEntry>()
     private val evaluator = HostRightsEvaluator(TrustedIssuers.parse(cfg.trustedKeys.joinToString(",")).ring, revocations)
     private val used = UsedTickets(cfg.maxUsedTickets)
     private val createRate = RateWindow(cfg.createsPerIpPerHour, 3_600_000L)
     private val trialDays = DayCounter()
+    private val identityDays = DayCounter()
+    private val create48 = RateWindow(cfg.createsPer48PerHour, 3_600_000L)
     @Volatile private var lastSweepMs = 0L
     private val all = ConcurrentHashMap<String, PlayConn>()
     private val roomLock = Any()
@@ -125,7 +129,9 @@ class PlayHub(
         val ticket = (verifier.check(c.ticket, real) as? TicketVerifier.Result.Ok)?.ticket
         if (ticket == null) { send(c, err(PlayReason.PLAY_TICKET_REFUSED)); return }
         if (draining) { send(c, ServerMsg.Error(0, MAINTENANCE, "Le serveur de jeu est en maintenance : réessayez dans quelques minutes.", true)); return }
-        if (!createRate.allow(c.ip, real)) { send(c, ServerMsg.Error(0, BUSY, "Trop de parties ouvertes depuis cette adresse : réessayez dans une heure.", true)); return }
+        // fermé : tant que les révocations ne sont pas connues (aucune liste acceptée, ou plus de 24 h), aucune salle ; le ticket n'est pas brûlé
+        if (!revocationsReady()) { send(c, ServerMsg.Error(0, MAINTENANCE, "Service indisponible : réessayez dans quelques minutes.", true)); return }
+        if (!createRate.allow(c.ip, real) || !create48.allow(ClientIp.group48(c.ip) ?: c.ip, real)) { send(c, ServerMsg.Error(0, BUSY, "Trop de parties ouvertes depuis cette adresse : réessayez dans une heure.", true)); return }
         when (used.use(ticket.jti, ticket.exp, real)) {
             UsedTickets.Use.REPLAY -> { send(c, err(PlayReason.PLAY_TICKET_REFUSED)); return }
             UsedTickets.Use.FULL -> { send(c, ServerMsg.Error(0, BUSY, "Le service de jeu est très sollicité. Réessayez dans une minute.", true)); return }
@@ -140,17 +146,23 @@ class PlayHub(
         }
         val subjectCap = if (trial) minOf(1, cfg.maxRoomsPerSubject) else cfg.maxRoomsPerSubject
         val subjectFull = ServerMsg.Error(0, BUSY, "Vous avez déjà $subjectCap partie${if (subjectCap > 1) "s" else ""} ouverte${if (subjectCap > 1) "s" else ""} : terminez-en une avant d'en ouvrir une autre.", true)
-        if (rooms.values.count { it.subject == ticket.deviceId } >= subjectCap) { send(c, subjectFull); return }
+        val identity = rights.identity
+        fun openRooms() = rooms.values.count { it.subject == ticket.deviceId || (identity != null && it.identity == identity) }   // l'appareil API se recrée à volonté : l'activation signée compte aussi
+        if (openRooms() >= subjectCap) { send(c, subjectFull); return }
         // le lot réservé se lit hors verrou (première lecture : un zip) ; sans droit : la banque libre PARTAGÉE
         val roomBank = if (rights.coveredScopes.isEmpty() || reserved == null) bank else reserved.bankFor(rights.coveredScopes)
         val id = ByteArray(16).also { rnd.nextBytes(it) }.joinToString("") { "%02x".format(it) }
+        // une salle d'essai : 8 joueurs au plus (PlayRules.TRIAL_MAX_PLAYERS)
+        val roomSettings = if (trial) settings.copy(seatsPerTable = minOf(settings.seatsPerTable, PlayRules.TRIAL_MAX_PLAYERS)) else settings
         var refusal: ServerMsg.Error? = null
         val e = synchronized(roomLock) {
             when {
                 rooms.size >= cfg.maxRooms -> { refusal = ServerMsg.Error(0, BUSY, "Le service de jeu est très sollicité. Réessayez dans une minute.", true); null }
-                rooms.values.count { it.subject == ticket.deviceId } >= subjectCap -> { refusal = subjectFull; null }
-                trial && !trialDays.record(rights.identity ?: "", real) -> { refusal = ServerMsg.Error(0, BUSY, "Le service de jeu est très sollicité. Réessayez dans une minute.", true); null }
-                else -> RoomEntry(ServerRoom(id, scope, roomBank, rnd, createdAt = now, settings = settings), ticket.deviceId).also { rooms[id] = it }
+                openRooms() >= subjectCap -> { refusal = subjectFull; null }
+                trial && !trialDays.record(identity ?: "", real) -> { refusal = ServerMsg.Error(0, BUSY, "Le service de jeu est très sollicité. Réessayez dans une minute.", true); null }
+                !trial && (identityDays.count(identity ?: "", real) >= cfg.createsPerIdentityPerDay || !identityDays.record(identity ?: "", real)) -> {
+                    refusal = ServerMsg.Error(0, BUSY, "Trop de parties ouvertes aujourd'hui avec cette activation : réessayez demain.", true); null }
+                else -> RoomEntry(ServerRoom(id, scope, roomBank, rnd, createdAt = now, settings = roomSettings), ticket.deviceId, identity).also { rooms[id] = it }
             }
         }
         if (e == null) { send(c, refusal!!); return }
@@ -159,7 +171,7 @@ class PlayHub(
 
     /** Nombre de `jti` mémorisés (tests, santé). */
     fun usedTicketCount(): Int = used.size()
-    fun sweepUsedTickets(realNow: Long) { used.sweep(realNow); createRate.sweep(realNow) }
+    fun sweepUsedTickets(realNow: Long) { used.sweep(realNow); createRate.sweep(realNow); create48.sweep(realNow) }
 
     private fun join(c: PlayConn, m: ClientMsg.Join, now: Long) {
         if (codesBlocked(c.ip, now)) { send(c, err(PlayReason.PLAY_BAD_CODE)); return }

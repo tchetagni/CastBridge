@@ -35,7 +35,7 @@ class Audit2Test {
         tv.send(PlayCodec.encode(ClientMsg.Hello(PlayProtocol.PROTO, PlayProtocol.CAPS, null, TestKeys.ticket()))); tv.send(PlayCodec.encode(TestRights.create()))
         return tv to tv.await("welcome")!!
     }
-    private fun env(vararg kv: Pair<String, String>): (String) -> String? = { k -> kv.toMap()[k] }
+    private fun env(vararg kv: Pair<String, String>): (String) -> String? = { k -> (mapOf("CASTBRIDGE_PLAY_REVOCATIONS_URL" to "https://bridge.sti-cm.com/api/v1/revocations") + kv.toMap())[k] }
 
     // ---- (1) pas de blocage collectif d'un resume ; seuil de 30 codes faux de join par adresse ----
 

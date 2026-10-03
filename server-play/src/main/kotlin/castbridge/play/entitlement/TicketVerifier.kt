@@ -39,6 +39,7 @@ class TicketVerifier(pubKeys: List<String>, private val audience: String = AUDIE
         val parts = ticket.split('.')
         if (parts.size != 3 || parts[0] != PREFIX) return Result.Refused(Refusal.MALFORMED)
         val dec = Base64.getUrlDecoder()
+        if (!B64URL.matches(parts[1]) || !B64URL.matches(parts[2])) return Result.Refused(Refusal.MALFORMED)   // alphabet base64url strict, sans bourrage ni espace
         val sig = runCatching { dec.decode(parts[2]) }.getOrNull() ?: return Result.Refused(Refusal.MALFORMED)
         val signed = (DOMAIN + parts[0] + "." + parts[1]).toByteArray(Charsets.US_ASCII)
         if (keys.none { k -> runCatching { Signature.getInstance("Ed25519").run { initVerify(k); update(signed); verify(sig) } }.getOrDefault(false) }) return Result.Refused(Refusal.BAD_SIGNATURE)
@@ -60,7 +61,7 @@ class TicketVerifier(pubKeys: List<String>, private val audience: String = AUDIE
     fun verify(ticket: String?, nowMs: Long): Boolean = check(ticket, nowMs) is Result.Ok
 
     private fun parse(text: String): PublicKey? = runCatching {
-        val raw = Base64.getMimeDecoder().decode(text.trim().replace('-', '+').replace('_', '/'))
+        val raw = Base64.getDecoder().decode(text.trim().replace('-', '+').replace('_', '/'))   // STRICT : un caractère étranger ou un saut de ligne au milieu est une erreur
         val spki = if (raw.size == 32) SPKI_PREFIX + raw else raw
         KeyFactory.getInstance("Ed25519").generatePublic(X509EncodedKeySpec(spki))
     }.getOrNull()
@@ -72,6 +73,7 @@ class TicketVerifier(pubKeys: List<String>, private val audience: String = AUDIE
         const val MAX_LENGTH = 1_200
         const val SKEW_MS = 60_000L
         const val MAX_LIFE_MS = 15 * 60_000L
+        private val B64URL = Regex("^[A-Za-z0-9_-]+$")
         private val JTI = Regex("^[0-9a-f]{32}$")
         private val SPKI_PREFIX = byteArrayOf(0x30, 0x2a, 0x30, 0x05, 0x06, 0x03, 0x2b, 0x65, 0x70, 0x03, 0x21, 0x00)
     }

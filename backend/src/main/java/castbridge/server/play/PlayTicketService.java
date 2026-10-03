@@ -6,6 +6,8 @@ import castbridge.server.web.ApiException;
 import java.nio.charset.StandardCharsets;
 import java.security.SecureRandom;
 import java.util.ArrayDeque;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Base64;
 import java.util.HashMap;
 import java.util.HexFormat;
@@ -34,16 +36,32 @@ public class PlayTicketService {
     private final PlayTicketKey key;
     private final int perDevicePerHour;
     private final SecureRandom random;
-    private final Map<String, ArrayDeque<Long>> issued = new HashMap<>();
+    private final int perAddressPerHour;
+    private final int maxDevices;
+    /** Per device: its tickets of the last hour. Access-ordered: when full, the LEAST recently used device is evicted (never a refusal for everybody, audit I2). */
+    private final Map<String, ArrayDeque<Long>> issued = new LinkedHashMap<>(16, 0.75f, true);
+    private final Map<String, ArrayDeque<Long>> perAddress = new LinkedHashMap<>(16, 0.75f, true);
+    /** Sticky link (audit B1): the first device code seen for a device, and the devices a code was seen with in the last 24 h. */
+    private final Map<String, String> firstCode = new LinkedHashMap<>(16, 0.75f, true);
+    private final Map<String, Map<String, Long>> codeDevices = new LinkedHashMap<>(16, 0.75f, true);
+    static final int MAX_DEVICES_PER_CODE = 2;
+    private static final long DAY_MS = 86_400_000L;
 
     @Autowired
-    public PlayTicketService(PlayTicketKey key, @Value("${castbridge.play.per-device-per-hour:20}") int perDevicePerHour) {
-        this(key, perDevicePerHour, new SecureRandom());
+    public PlayTicketService(PlayTicketKey key, @Value("${castbridge.play.per-device-per-hour:20}") int perDevicePerHour,
+                             @Value("${castbridge.play.per-address-per-hour:120}") int perAddressPerHour) {
+        this(key, perDevicePerHour, perAddressPerHour, new SecureRandom());
     }
 
     /** Test constructor: a seeded random makes the golden ticket reproducible. */
-    PlayTicketService(PlayTicketKey key, int perDevicePerHour, SecureRandom random) {
+    PlayTicketService(PlayTicketKey key, int perDevicePerHour, SecureRandom random) { this(key, perDevicePerHour, 1_000_000, random); }
+
+    PlayTicketService(PlayTicketKey key, int perDevicePerHour, int perAddressPerHour, SecureRandom random) { this(key, perDevicePerHour, perAddressPerHour, random, MAX_DEVICES); }
+
+    PlayTicketService(PlayTicketKey key, int perDevicePerHour, int perAddressPerHour, SecureRandom random, int maxDevices) {
+        this.maxDevices = maxDevices;
         this.key = key;
+        this.perAddressPerHour = Math.max(1, perAddressPerHour);
         this.perDevicePerHour = Math.max(1, perDevicePerHour);
         this.random = random;
     }
@@ -53,11 +71,17 @@ public class PlayTicketService {
     public record Issued(String ticket, long expiresAt, int ttlSeconds) {}
 
     /** [now] in ms. Throws {@link ApiException}: 503 no key, 403 blocked device, 400 bad device code, 429 over the hourly limit. */
-    public Issued issue(Device device, String deviceCode, long now) {
+    public Issued issue(Device device, String deviceCode, long now) { return issue(device, deviceCode, now, null); }
+
+    /** [address] = client address (null: no per-address limit). Also 403 for a non-TV device, 403 for a code already linked to more than 2 devices in 24 h or not the device's first code. */
+    public Issued issue(Device device, String deviceCode, long now, String address) {
         if (!key.enabled()) throw new ApiException(HttpStatus.SERVICE_UNAVAILABLE, "Ticket désactivé : le jeu en ligne n'est pas disponible sur ce serveur");
         if (device.blocked) throw new ApiException(HttpStatus.FORBIDDEN, "Cet appareil est bloqué par l'administrateur");
         String code = DeviceIdentity.parseCode(deviceCode);
         if (code == null) throw ApiException.badRequest("Code d'appareil invalide : 16 caractères au format XXXX-XXXX-XXXX-XXXX, avec son caractère de contrôle");
+        if (!"tv".equals(device.app)) throw new ApiException(HttpStatus.FORBIDDEN, "Seule une TV CastBridge-TV peut ouvrir une salle en ligne");
+        link(device.publicId, code, now);
+        if (address != null) count(perAddress, address, perAddressPerHour, now, "Trop de demandes de ticket depuis cette adresse : réessayez dans une heure");
         reserve(device.publicId, now);
 
         byte[] jti = new byte[16];
@@ -76,17 +100,33 @@ public class PlayTicketService {
         return new Issued(PREFIX + "." + b64 + "." + Base64.getUrlEncoder().withoutPadding().encodeToString(sig), now + LIFE_MS, (int) (LIFE_MS / 1000));
     }
 
-    /** Counts one ticket for the device; 429 when it already had [perDevicePerHour] in the last hour. Memory bounded: at most [MAX_DEVICES] devices (swept), full = refuse. */
-    private synchronized void reserve(String deviceId, long now) {
-        if (issued.size() >= MAX_DEVICES && !issued.containsKey(deviceId)) {
-            issued.values().forEach(q -> { while (!q.isEmpty() && now - q.peekFirst() >= WINDOW_MS) q.pollFirst(); });
-            issued.values().removeIf(ArrayDeque::isEmpty);
-            if (issued.size() >= MAX_DEVICES) throw new ApiException(HttpStatus.TOO_MANY_REQUESTS, "Trop de demandes de ticket : réessayez dans quelques minutes");
+    /** Counts one ticket for the device; 429 when it already had [perDevicePerHour] in the last hour. Bounded: at most [MAX_DEVICES] devices, the least recently used is evicted. */
+    private synchronized void reserve(String deviceId, long now) { count(issued, deviceId, perDevicePerHour, now, "Trop de parties ouvertes en une heure : réessayez dans un moment"); }
+
+    private void count(Map<String, ArrayDeque<Long>> table, String k, int max, long now, String message) {
+        synchronized (this) {
+            if (table.size() >= maxDevices && !table.containsKey(k)) {
+                table.values().forEach(q -> { while (!q.isEmpty() && now - q.peekFirst() >= WINDOW_MS) q.pollFirst(); });
+                table.values().removeIf(ArrayDeque::isEmpty);
+                if (table.size() >= maxDevices) table.remove(table.keySet().iterator().next());   // LRU: the oldest-used key leaves, nobody is refused for it
+            }
+            ArrayDeque<Long> q = table.computeIfAbsent(k, x -> new ArrayDeque<>());
+            while (!q.isEmpty() && now - q.peekFirst() >= WINDOW_MS) q.pollFirst();
+            if (q.size() >= max) throw new ApiException(HttpStatus.TOO_MANY_REQUESTS, message);
+            q.addLast(now);
         }
-        ArrayDeque<Long> q = issued.computeIfAbsent(deviceId, k -> new ArrayDeque<>());
-        while (!q.isEmpty() && now - q.peekFirst() >= WINDOW_MS) q.pollFirst();
-        if (q.size() >= perDevicePerHour) throw new ApiException(HttpStatus.TOO_MANY_REQUESTS, "Trop de parties ouvertes en une heure : réessayez dans un moment");
-        q.addLast(now);
+    }
+
+    /** Sticky link: a device keeps the first code it showed; a code is linked to at most [MAX_DEVICES_PER_CODE] devices per 24 h (a copied activation does not spread). */
+    private synchronized void link(String deviceId, String code, long now) {
+        String first = firstCode.get(deviceId);
+        if (first != null && !first.equals(code)) throw new ApiException(HttpStatus.FORBIDDEN, "Cet appareil a déjà annoncé un autre code d'appareil");
+        Map<String, Long> seen = codeDevices.computeIfAbsent(code, x -> new LinkedHashMap<>());
+        seen.values().removeIf(t -> now - t >= DAY_MS);
+        if (!seen.containsKey(deviceId) && seen.size() >= MAX_DEVICES_PER_CODE) throw new ApiException(HttpStatus.FORBIDDEN, "Ce code d'appareil est déjà utilisé par d'autres appareils : contactez l'assistance");
+        seen.put(deviceId, now);
+        if (first == null) firstCode.put(deviceId, code);
+        for (Map<String, ?> m : List.of(firstCode, codeDevices)) if (m.size() > maxDevices) m.remove(m.keySet().iterator().next());
     }
 
     /** Hand-written JSON of simple values (no library: field order is the signed order, and no user text is ever put in it). */

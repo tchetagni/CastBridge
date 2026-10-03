@@ -391,6 +391,8 @@ Le fichier est lu à chaque requête (du disque, avec cache en mémoire basé su
 - Le ticket est à **usage unique** côté service (`jti`), valable 600 s ; la clé publique correspondante est `CASTBRIDGE_PLAY_TICKET_PUBKEY` du service (jamais la privée). Génération de la paire : `tools/play/gen-ticket-keypair.sh` ; déclaration du secret : `backend/docker-compose.yml` (`play_ticket_key`, non monté tant que l'exploitant ne l'a pas décidé) ; étape d'exploitation : `docs/PLAY-OPS-REQUIREMENTS.md`.
 - Tests : `PlayTicketControllerTest`, `PlayTicketDisabledTest`, `PlayTicketGoldenTest` (le ticket Java est vérifié par le vérificateur Kotlin du service : `TicketGoldenTest`).
 
+Audit w20-04 : seule une TV (`app` = `tv`) obtient un ticket (403 sinon) ; un appareil garde le premier `deviceCode` annoncé et un code n'est lié qu'à 2 appareils par 24 h (403 ensuite ; en mémoire, remis à zéro au redémarrage) ; plafond par adresse cliente (`castbridge.play.per-address-per-hour`, 120) ; table pleine = le moins récemment utilisé est évincé (jamais de refus général).
+
 ## 5. Divers
 
 - `GET /admin` : interface d'administration web (connexion par identifiant/mot de passe, voir `backend/README.md`).

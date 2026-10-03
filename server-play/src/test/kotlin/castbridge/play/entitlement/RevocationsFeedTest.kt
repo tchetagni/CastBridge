@@ -4,6 +4,7 @@ import castbridge.core.owner.RevocationNotice
 import castbridge.core.owner.RevocationState
 import castbridge.core.quiz.online.HostEdition
 import castbridge.play.TestRights
+import java.io.File
 import kotlin.test.Test
 import kotlin.test.assertEquals
 import kotlin.test.assertFalse
@@ -55,5 +56,31 @@ class RevocationsFeedTest {
     @Test fun theFetcherRefusesPlainHttpToARemoteHost() {
         assertTrue(runCatching { RevocationsFeed.httpFetcher("http://bridge.sti-cm.com/api/v1/revocations") }.isFailure)
         assertTrue(runCatching { RevocationsFeed.httpFetcher("https://bridge.sti-cm.com/api/v1/revocations") }.isSuccess)
+    }
+
+    @Test fun theFeedIsNotUsableBeforeTheFirstListAndNotAfterTwentyFourHoursWithoutAFetch() {
+        assertFalse(feed.usable(), "aucune liste acceptée : le service ne juge pas les droits")
+        body = list(now); assertTrue(feed.refresh()); assertTrue(feed.usable())
+        clock = now + 23 * 3_600_000L; assertTrue(feed.usable())
+        clock = now + 25 * 3_600_000L; assertFalse(feed.usable(), "plus de 24 h sans liste réussie")
+        body = list(clock); assertTrue(feed.refresh()); assertTrue(feed.usable())
+    }
+
+    @Test fun theLastValidListIsPersistedAtomicallyAndReadAgainAtStartup() {
+        val dir = java.nio.file.Files.createTempDirectory("rev").toFile()
+        val file = File(dir, "revocations.txt")
+        val a = RevocationsFeed(ring, { body }, { clock }, file = file)
+        body = list(now, setOf("k-persisted")); assertTrue(a.refresh())
+        assertTrue(file.isFile); assertTrue(dir.list()!!.all { !it.endsWith(".tmp") }, "aucun fichier temporaire laissé")
+        val b = RevocationsFeed(ring, { null }, { clock }, file = file)
+        assertEquals(setOf("k-persisted"), b.current().keys, "relue au démarrage")
+        assertTrue(b.usable(), "la liste relue compte, tant qu'elle a moins de 24 h")
+        body = list(now - 5_000, emptySet())
+        val c = RevocationsFeed(ring, { body }, { clock }, file = file)
+        assertFalse(c.refresh(), "issuedAt monotone : une liste plus ancienne que celle relue est refusée")
+        // fichier falsifié ou signé par un inconnu : ignoré, jamais cru
+        file.writeText(list(now + 1, setOf("k-evil"), TestRights.rogue))
+        assertTrue(RevocationsFeed(ring, { null }, { clock }, file = file).current().keys.isEmpty())
+        assertFalse(RevocationsFeed(ring, { null }, { clock }, file = file).usable())
     }
 }

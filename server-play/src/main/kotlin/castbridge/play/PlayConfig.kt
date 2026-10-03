@@ -60,7 +60,13 @@ class PlayConfig(
     /** Créations de salle (tickets valides présentés) par adresse cliente (/64 en IPv6) et par heure. */
     val createsPerIpPerHour: Int = 20,
     /** `jti` mémorisés jusqu'à leur échéance (plafond dur, plein = refus). */
-    val maxUsedTickets: Int = 20_000,
+    val maxUsedTickets: Int = 200_000,
+    /** Créations de salle par identité d'activation (code d'appareil signé) et par jour UTC, production et grâce (l'essai a son propre plafond : 3). */
+    val createsPerIdentityPerDay: Int = 30,
+    /** Créations de salle par /48 (IPv4 : l'adresse) et par heure : un /48 IPv6 contient 65 536 /64. */
+    val createsPer48PerHour: Int = 200,
+    /** Fichier (volume) où la dernière liste de révocations valide est gardée, relue au démarrage ; absent = pas de persistance. */
+    val revocationsFile: File? = null,
     val tickMs: Long = 200,
     val pingMs: Long = 25_000,
     val pongTimeoutMs: Long = 40_000,
@@ -84,7 +90,8 @@ class PlayConfig(
         val ENV_NAMES = listOf("CASTBRIDGE_PLAY_PORT", "CASTBRIDGE_PLAY_BIND", "CASTBRIDGE_PLAY_MAX_ROOMS", "CASTBRIDGE_PLAY_MAX_CONNECTIONS", "CASTBRIDGE_PLAY_MAX_PER_IP",
             "CASTBRIDGE_PLAY_ORIGINS", "CASTBRIDGE_PLAY_TRUSTED_PROXIES", "CASTBRIDGE_PLAY_LOTS_DIR", "CASTBRIDGE_PLAY_TICKET_PUBKEY", "CASTBRIDGE_PLAY_TICKET_PUBKEY_2",
             "CASTBRIDGE_PLAY_TICKET_PUBKEY_3", "CASTBRIDGE_PLAY_TRUSTED_KEYS", "CASTBRIDGE_PLAY_RESERVED_DIR", "CASTBRIDGE_PLAY_RESERVED_IDS", "CASTBRIDGE_PLAY_REVOCATIONS_URL",
-            "CASTBRIDGE_PLAY_MAX_ROOMS_PER_SUBJECT", "CASTBRIDGE_PLAY_CREATES_PER_IP_HOUR", "CASTBRIDGE_PLAY_MAX_USED_TICKETS", "CASTBRIDGE_PLAY_DIRECT")
+            "CASTBRIDGE_PLAY_MAX_ROOMS_PER_SUBJECT", "CASTBRIDGE_PLAY_CREATES_PER_IP_HOUR", "CASTBRIDGE_PLAY_MAX_USED_TICKETS", "CASTBRIDGE_PLAY_DIRECT",
+            "CASTBRIDGE_PLAY_CREATES_PER_IDENTITY_DAY", "CASTBRIDGE_PLAY_CREATES_PER_48_HOUR", "CASTBRIDGE_PLAY_REVOCATIONS_FILE")
 
         /**
          * Les réseaux de confiance sont OBLIGATOIRES (adresse exacte de nginx en /32) : absents, le service refuse de démarrer, sauf `CASTBRIDGE_PLAY_DIRECT=1` (staging, tests :
@@ -109,7 +116,10 @@ class PlayConfig(
             fun e(k: String) = env(k)?.trim()?.takeIf { it.isNotEmpty() }
             fun arg(vararg names: String) = args.firstNotNullOfOrNull { a -> names.firstNotNullOfOrNull { n -> a.takeIf { it.startsWith("--$n=") }?.substringAfter('=') } }
             val d = PlayConfig()
-            val trusted = parseTrusted(e("CASTBRIDGE_PLAY_TRUSTED_PROXIES"), e("CASTBRIDGE_PLAY_DIRECT") == "1")
+            val direct = e("CASTBRIDGE_PLAY_DIRECT") == "1"
+            val trusted = parseTrusted(e("CASTBRIDGE_PLAY_TRUSTED_PROXIES"), direct)
+            // les révocations échouent FERMÉ : sans adresse de liste signée, aucune révocation ne serait jamais connue ; seul l'accès direct (staging, tests) s'en passe
+            if (e("CASTBRIDGE_PLAY_REVOCATIONS_URL") == null && !direct) throw IllegalStateException("CASTBRIDGE_PLAY_REVOCATIONS_URL est absent : indiquer l'adresse https de la liste signée des révocations (ou CASTBRIDGE_PLAY_DIRECT=1 en staging)")
             return PlayConfig(
                 port = (arg("server.port", "port") ?: e("CASTBRIDGE_PLAY_PORT"))?.toIntOrNull() ?: d.port,
                 bind = e("CASTBRIDGE_PLAY_BIND") ?: d.bind,
@@ -126,6 +136,9 @@ class PlayConfig(
                 revocationsUrl = e("CASTBRIDGE_PLAY_REVOCATIONS_URL"),
                 maxRoomsPerSubject = e("CASTBRIDGE_PLAY_MAX_ROOMS_PER_SUBJECT")?.toIntOrNull()?.coerceIn(1, 20) ?: d.maxRoomsPerSubject,
                 createsPerIpPerHour = e("CASTBRIDGE_PLAY_CREATES_PER_IP_HOUR")?.toIntOrNull()?.coerceIn(1, 10_000) ?: d.createsPerIpPerHour,
+                createsPerIdentityPerDay = e("CASTBRIDGE_PLAY_CREATES_PER_IDENTITY_DAY")?.toIntOrNull()?.coerceIn(1, 10_000) ?: d.createsPerIdentityPerDay,
+                createsPer48PerHour = e("CASTBRIDGE_PLAY_CREATES_PER_48_HOUR")?.toIntOrNull()?.coerceIn(1, 100_000) ?: d.createsPer48PerHour,
+                revocationsFile = e("CASTBRIDGE_PLAY_REVOCATIONS_FILE")?.let { File(it) },
                 maxUsedTickets = e("CASTBRIDGE_PLAY_MAX_USED_TICKETS")?.toIntOrNull()?.coerceIn(100, 500_000) ?: d.maxUsedTickets,
             )
         }

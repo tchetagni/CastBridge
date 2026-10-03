@@ -15,6 +15,7 @@ usage() { echo "Usage : $0 <dossier>   (le dossier est créé en 0700 s'il n'exi
 [ $# -eq 1 ] || usage
 dir="$1"
 [ -n "$dir" ] || usage
+case "$dir" in -*) dir="./$dir";; esac   # un nom commençant par « - » n'est jamais lu comme une option
 
 command -v openssl >/dev/null 2>&1 || { echo "openssl est introuvable : installez-le (Ed25519 requis : OpenSSL 1.1.1 ou plus récent, ou LibreSSL 3.7+)." >&2; exit 1; }
 
@@ -30,8 +31,8 @@ for f in "$priv" "$pubpem" "$pubb64"; do
 done
 
 umask 077
-mkdir -p "$dir"
-chmod 700 "$dir"
+# le dossier n'est durci (0700) que s'il est CRÉÉ ici : un dossier existant garde ses droits (le script n'a pas à les changer)
+if [ ! -d "$dir" ]; then mkdir -p -- "$dir"; chmod 700 "$dir"; fi
 
 tmp="$(mktemp -d "$dir/.gen.XXXXXX")"
 trap 'rm -rf "$tmp"' EXIT
@@ -45,11 +46,13 @@ printf '\n' >> "$tmp/p.b64"
 # fingerprint = SHA-256 of the SPKI DER, in hex
 fp="$(openssl dgst -sha256 -r "$tmp/p.der" | cut -d' ' -f1)"
 
-# move into place without overwriting (link fails if the target appeared meanwhile)
-for pair in "$tmp/k.pem:$priv" "$tmp/p.pem:$pubpem" "$tmp/p.b64:$pubb64"; do
-  src="${pair%%:*}"; dst="${pair#*:}"
-  if ! ln "$src" "$dst" 2>/dev/null; then echo "Refus : $dst est apparu pendant la génération. Rien n'a été écrasé." >&2; rm -f "$priv" "$pubpem" "$pubb64"; exit 1; fi
-done
+# move into place without overwriting: `ln` fails if the target appeared meanwhile ; on a race only the links THIS script created are removed
+made=()
+cleanup() { for f in "${made[@]:-}"; do [ -n "$f" ] && rm -f -- "$f"; done; }
+place() { if ln -- "$1" "$2" 2>/dev/null; then made+=("$2"); else echo "Refus : $2 est apparu pendant la génération. Rien n'a été écrasé." >&2; cleanup; exit 1; fi; }
+place "$tmp/k.pem" "$priv"
+place "$tmp/p.pem" "$pubpem"
+place "$tmp/p.b64" "$pubb64"
 chmod 600 "$priv"
 chmod 644 "$pubpem" "$pubb64"
 

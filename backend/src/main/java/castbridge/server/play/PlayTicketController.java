@@ -3,6 +3,7 @@ package castbridge.server.play;
 import castbridge.server.devices.Device;
 import castbridge.server.devices.DeviceService;
 import castbridge.server.web.ApiException;
+import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.http.CacheControl;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -31,8 +32,8 @@ public class PlayTicketController {
 
     @PostMapping("/ticket")
     public ResponseEntity<PlayTicketService.Issued> ticket(@RequestHeader(name = "Authorization", required = false) String authorization,
-                                                           @RequestBody(required = false) TicketRequest body) {
+                                                           @RequestBody(required = false) TicketRequest body, HttpServletRequest req) {
         Device d = devices.authenticate(authorization).orElseThrow(() -> new ApiException(HttpStatus.UNAUTHORIZED, "Jeton d'appareil inconnu"));
-        return ResponseEntity.ok().cacheControl(CacheControl.noStore()).body(tickets.issue(d, body == null ? null : body.deviceCode(), System.currentTimeMillis()));
+        return ResponseEntity.ok().cacheControl(CacheControl.noStore()).body(tickets.issue(d, body == null ? null : body.deviceCode(), System.currentTimeMillis(), req.getRemoteAddr()));
     }
 }
