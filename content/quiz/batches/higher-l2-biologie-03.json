@@ -1867,6 +1867,150 @@
    "explanation": "C'est un faux positif, dont le risque est fixé par le seuil alpha.",
    "source": "Biostatistiques, famille Sokal/Rohlf",
    "verif": "import"
+  },
+  {
+   "course": "l2-bio",
+   "category": "génétique mendélienne et croisements",
+   "difficulty": 3,
+   "question": "Deux parents AaBbCc (gènes indépendants, dominance complète) se croisent. Quelle proportion de leurs enfants est de phénotype récessif pour A, dominant pour B et C ?",
+   "choices": [
+    "27/64",
+    "3/64",
+    "9/64",
+    "1/16"
+   ],
+   "answer": "C",
+   "explanation": "Probabilités indépendantes : 1/4 x 3/4 x 3/4 = 9/64.",
+   "source": "Cours de génétique, famille Griffiths",
+   "verif": "import"
+  },
+  {
+   "course": "l2-bio",
+   "category": "hérédité liée au sexe",
+   "difficulty": 1,
+   "question": "Quel est le caryotype sexuel d'un garçon chez l'être humain ?",
+   "choices": [
+    "XY",
+    "XX",
+    "XO",
+    "YY"
+   ],
+   "answer": "A",
+   "explanation": "Chez l'être humain, le sexe masculin est défini par XY.",
+   "source": "Cours de génétique, famille Griffiths",
+   "verif": "import"
+  },
+  {
+   "course": "l2-bio",
+   "category": "ADN : structure, réplication",
+   "difficulty": 2,
+   "question": "Des bactéries cultivées plusieurs générations sur 15N sont transférées sur 14N pendant deux cycles de réplication. Combien des 4 molécules d'ADN issues d'une molécule initiale contiennent encore du 15N ?",
+   "choices": [
+    "4 molécules sur 4",
+    "1 molécule sur 4",
+    "2 molécules sur 4",
+    "Aucune"
+   ],
+   "answer": "C",
+   "explanation": "La réplication est semi-conservative : chaque brin 15N initial reste dans une molécule hybride, soit 2 molécules sur 4.",
+   "source": "Biochimie, famille Stryer/Lehninger",
+   "verif": "import"
+  },
+  {
+   "course": "l2-bio",
+   "category": "transcription et traduction : synthèse des protéines",
+   "difficulty": 1,
+   "question": "Quelle molécule apporte les acides aminés au ribosome ?",
+   "choices": [
+    "L'ARN ribosomique",
+    "L'ARN de transfert",
+    "L'ADN polymérase",
+    "Le promoteur"
+   ],
+   "answer": "B",
+   "explanation": "Chaque ARNt porte un acide aminé et reconnaît un codon par son anticodon.",
+   "source": "Biochimie, famille Stryer/Lehninger",
+   "verif": "import"
+  },
+  {
+   "course": "l2-bio",
+   "category": "mutations et maladies génétiques",
+   "difficulty": 2,
+   "question": "Une mutation qui remplace un codon d'acide aminé par un codon stop est dite de quel type ?",
+   "choices": [
+    "Non-sens",
+    "Faux-sens",
+    "Silencieuse",
+    "Décalage du cadre de lecture"
+   ],
+   "answer": "A",
+   "explanation": "Une mutation non-sens crée un codon stop prématuré.",
+   "source": "Cours de génétique, famille Griffiths",
+   "verif": "import"
+  },
+  {
+   "course": "l2-bio",
+   "category": "régulation de l'expression génétique",
+   "difficulty": 2,
+   "question": "Que fait un facteur de transcription activateur ?",
+   "choices": [
+    "Il traduit l'ARN en protéine",
+    "Il coupe l'ADN",
+    "Il se fixe à l'ADN et stimule la transcription",
+    "Il répare les cassures"
+   ],
+   "answer": "C",
+   "explanation": "Les facteurs de transcription activateurs se lient à des séquences régulatrices et favorisent la transcription.",
+   "source": "Cours de génétique, famille Griffiths",
+   "verif": "import"
+  },
+  {
+   "course": "l2-bio",
+   "category": "biotechnologies : PCR, clonage, OGM",
+   "difficulty": 1,
+   "question": "Quelle technique sépare des fragments d'ADN selon leur taille ?",
+   "choices": [
+    "La centrifugation différentielle",
+    "L'électrophorèse sur gel",
+    "La chromatographie gazeuse",
+    "La coloration de Gram"
+   ],
+   "answer": "B",
+   "explanation": "Dans un gel, les fragments migrent d'autant plus loin qu'ils sont courts.",
+   "source": "Cours de génétique, famille Griffiths",
+   "verif": "import"
+  },
+  {
+   "course": "l2-bio",
+   "category": "évolution : sélection naturelle et spéciation",
+   "difficulty": 2,
+   "question": "Les os du membre de la chauve-souris et de la nageoire de la baleine ont une même organisation de base. Comment qualifie-t-on ces structures ?",
+   "choices": [
+    "Analogues",
+    "Vestigiales",
+    "Homologues",
+    "Convergentes"
+   ],
+   "answer": "C",
+   "explanation": "Elles dérivent d'un ancêtre commun malgré des fonctions différentes : ce sont des structures homologues.",
+   "source": "Écologie, famille Ricklefs/Begon",
+   "verif": "import"
+  },
+  {
+   "course": "l2-bio",
+   "category": "virus : structure et cycle de réplication",
+   "difficulty": 1,
+   "question": "Quel nom porte un virus qui infecte les bactéries ?",
+   "choices": [
+    "Un prion",
+    "Un rétrovirus",
+    "Un viroïde",
+    "Un bactériophage"
+   ],
+   "answer": "D",
+   "explanation": "Un bactériophage est un virus spécifique des bactéries.",
+   "source": "Microbiologie, famille Madigan/Prescott",
+   "verif": "import"
   }
  ]
 }
