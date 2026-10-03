@@ -32,6 +32,7 @@ import org.videolan.libvlc.LibVLC
 import org.videolan.libvlc.Media
 import org.videolan.libvlc.MediaPlayer
 import org.videolan.libvlc.util.VLCVideoLayout
+import castbridge.core.xfer.CopyBadge
 import java.io.File
 import java.util.concurrent.CountDownLatch
 import java.util.concurrent.TimeUnit
@@ -90,6 +91,18 @@ class PlayerActivity : Activity(), TvService.Screen {
     private val health = castbridge.core.xfer.PlaybackHealth()
     private var current: File? = null
 
+    // R-16: the picture's health (libVLC counters), the decoder tuning of this file and the copy badge
+    private var badge: CopyBadgeView? = null
+    private var lastBadgeAt = 0L
+    private var tuneStage = 0                               // distress level the player was last lightened for (0 = not at all)
+    private var tuneReopens = 0                             // at most 2 re-openings per file
+    private var appliedTuning: castbridge.core.xfer.PlayerTuning.Tuning? = null
+    private var statsTickOn = false
+    private var cpuBaseMs = -1L; private var shownBase = -1  // CPU time of the app per displayed picture: a HINT of hardware vs software decoding
+    private var lastShown = 0; private var lastLost = 0
+    private var cpuPerFrame: Double? = null
+    private var decoderLogged = false
+
     override fun onCreate(savedInstanceState: Bundle?) {
         setTheme(R.style.Theme_CastBridge_Tv) // leaves the launch theme (splash) for the normal one
         super.onCreate(savedInstanceState)
@@ -113,7 +126,8 @@ class PlayerActivity : Activity(), TvService.Screen {
         if (home == null) home = HomeScreen(this, findViewById(R.id.home), t, homeApi())
         if (settingsPanel == null) settingsPanel = SettingsPanel(this, findViewById(R.id.settings))
         panel = PlayerPanel(this, panelApi())
-        if (!::bar.isInitialized) bar = ProgressOverlay(this, findViewById(android.R.id.content))
+        if (!::bar.isInitialized) bar = ProgressOverlay(this, findViewById(android.R.id.content)).also { b -> b.onChange = { refreshBadge(true) } }
+        if (badge == null) badge = CopyBadgeView(this, findViewById(android.R.id.content))
         refreshStatusBar()                                   // connections already known when the screen (re)opens
         s.attach(this)                                       // may run a play request that arrived while the screen was closed
         requestRuntimePermissions()
@@ -213,7 +227,7 @@ class PlayerActivity : Activity(), TvService.Screen {
     override val activity: Activity get() = this
     override fun notice(msg: String) { flash(msg) }
     override fun statusesChanged() { if (settingsPanel?.visible == true) showSettings(); refreshStatusBar() }
-    override fun transfersChanged() { home?.takeIf { it.visible }?.refreshStatus() }
+    override fun transfersChanged() { home?.takeIf { it.visible }?.refreshStatus(); refreshBadge() }
     override fun iconsChanged() { refreshStatusBar() }
     override fun thumbReady(name: String) { thumbs?.ready(name); libScreen?.onThumbReady(name); home?.onThumbReady(name) }
     override fun runPending(r: TvService.Pending) {
@@ -277,11 +291,12 @@ class PlayerActivity : Activity(), TvService.Screen {
     private fun ensurePlayer(spu: Boolean = false): MediaPlayer {
         mp?.let { if (playerSpu == spu) return it; releasePlayer() }
         val opts = arrayListOf(
-            "--no-drop-late-frames", "--no-skip-frames",
+            // R-16: libVLC drops late frames (its default) instead of waiting for each one: with the old --no-drop-late-frames --no-skip-frames a decoder
+            // short of CPU froze the picture while the audio went on. Per-file knobs (threads, loop filter...) come from PlayerTuning, see configure().
             "--file-caching=400",            // local file: 1500 ms of read-ahead only cost RAM
             "--no-audio-time-stretch",       // no resampling buffers for A/V drift
             "--no-sub-autodetect-file",      // subtitle files next to the video are found by the app (SubtitleFinder), not by scanning
-            "--no-osd", "--no-stats",
+            "--no-osd",                      // R-16: statistics stay ON (Media.getStats: displayed / lost pictures feed VideoStallDetector)
         )
         // The subtitle engine (freetype, fonts, blending) costs memory on this TV: only for files that need it.
         if (spu) opts += "--sub-text-scale=${extras.p.subScale}" else opts += "--no-spu"
@@ -291,7 +306,7 @@ class PlayerActivity : Activity(), TvService.Screen {
         p.attachViews(findViewById<VLCVideoLayout>(R.id.video), null, false, false)
         p.setEventListener { ev ->
             when (ev.type) {
-                MediaPlayer.Event.Playing -> { health.onPlaying(android.os.SystemClock.elapsedRealtime()); update("playing"); main.post { mp?.let { extras.onPlaying(it, playerSpu) }; playbackPlaying() } }
+                MediaPlayer.Event.Playing -> { health.onPlaying(android.os.SystemClock.elapsedRealtime()); update("playing"); main.post { mp?.let { extras.onPlaying(it, playerSpu) }; playbackPlaying(); startStats() } }
                 MediaPlayer.Event.Paused -> { health.onStopped(); update("paused") }
                 MediaPlayer.Event.TimeChanged -> { health.onTime(android.os.SystemClock.elapsedRealtime(), ev.timeChanged); snapshot = snapshot.copy(posMs = ev.timeChanged); main.post { updateLead() } }
                 MediaPlayer.Event.Buffering -> {
@@ -356,6 +371,8 @@ class PlayerActivity : Activity(), TvService.Screen {
     private fun releasePlayer() {
         val p = mp; val lv = libVlc
         mp = null; libVlc = null; streamingName = null
+        main.removeCallbacks(statsTick); statsTickOn = false; main.removeCallbacks(badgeTick); badge?.render(CopyBadge.of(emptyList()))
+        decoderLogged = false; cpuBaseMs = -1; shownBase = -1; cpuPerFrame = null; lastShown = 0; lastLost = 0
         if (::lead.isInitialized) lead.visibility = View.GONE
         runCatching { p?.setEventListener(null) }
         runCatching { p?.stop() }
@@ -866,12 +883,102 @@ class PlayerActivity : Activity(), TvService.Screen {
     /** Decoder (MediaCodec first: software decoding of HD video is what eats RAM/CPU on ARMv7) and start position. */
     private fun configure(m: Media, posMs: Long) {
         val (hw, force) = extras.hwFlags()
-        m.setHWDecoderEnabled(hw, force)
+        // R-16: the decision is pure (PlayerTuning.decide); hardware is forced only when the system's own probe says this TV can, and the app's software retry stays
+        val t = castbridge.core.xfer.PlayerTuning.decide(tuningFacts(tuneStage))
+        appliedTuning = t
+        m.setHWDecoderEnabled(hw && t.hw, force || (hw && t.forceHw))
+        if (t.dropLateFrames) m.addOption(":drop-late-frames")
+        if (t.skipFrames) m.addOption(":skip-frames")
+        if (t.threads > 0) m.addOption(":avcodec-threads=${t.threads}")
+        if (t.skipLoopFilter > 0) m.addOption(":avcodec-skiploopfilter=${t.skipLoopFilter}")
+        if (t.skipFrame > 0) m.addOption(":avcodec-skip-frame=${t.skipFrame}")
+        if (t.skipIdct > 0) m.addOption(":avcodec-skip-idct=${t.skipIdct}")
+        if (t.fileCachingMs > 0) m.addOption(":file-caching=${t.fileCachingMs}")
         if (posMs > 0) m.addOption(":start-time=${posMs / 1000.0}")
     }
 
+    /** Facts of PlayerTuning for the file being opened ([distress]: 0 none, 1 frozen / lost frames, 2 lasting). */
+    private fun tuningFacts(distress: Int): castbridge.core.xfer.PlayerTuning.Facts {
+        val codec = pbCodec
+        val (w, h) = videoSize()
+        return castbridge.core.xfer.PlayerTuning.Facts(codec, w, h, extras.hwMode() != "off", (server?.activeTransfers() ?: 0) > 0, distress,
+            Runtime.getRuntime().availableProcessors(), castbridge.core.xfer.CodecMime.hwCapable(codec) { mime -> CodecCapabilityProbe.hardware(mime, w, h) },
+            Runtime.getRuntime().maxMemory(), android.os.Build.SUPPORTED_64_BIT_ABIS.isNotEmpty())
+    }
+
+    private fun videoSize(): Pair<Int, Int> =
+        pbRes?.split('x')?.let { (it.getOrNull(0)?.toIntOrNull() ?: 0) to (it.getOrNull(1)?.toIntOrNull() ?: 0) } ?: (0 to 0)
+
+    // ---- R-16: the picture's health (libVLC statistics, 1 Hz) and the copy badge ----
+
+    private val statsTick = object : Runnable {
+        override fun run() {
+            if (mp == null || current == null) { statsTickOn = false; return }
+            pollVideoStats()
+            refreshBadge()
+            main.postDelayed(this, 1000)
+        }
+    }
+    private val badgeTick = Runnable { refreshBadge(true) }
+
+    private fun startStats() {
+        refreshBadge(true)
+        if (statsTickOn) return
+        statsTickOn = true; main.postDelayed(statsTick, 1000)
+    }
+
+    /** Feeds [health] with what libVLC counts (displayed / lost pictures), measures the CPU cost per picture and lightens the decoder once per distress level. */
+    private fun pollVideoStats() {
+        val p = mp ?: return
+        val now = android.os.SystemClock.elapsedRealtime()
+        val st = runCatching { p.media?.let { m -> try { m.stats } finally { runCatching { m.release() } } } }.getOrNull() ?: return
+        val hasVideo = runCatching { p.videoTracksCount > 0 }.getOrDefault(true)
+        if (p.isPlaying) health.onVideoStats(now, st.displayedPictures, st.lostPictures, hasVideo)
+        lastShown = st.displayedPictures; lastLost = st.lostPictures
+        val cpu = android.os.Process.getElapsedCpuTime()
+        if (cpuBaseMs < 0 || st.displayedPictures < shownBase) { cpuBaseMs = cpu; shownBase = st.displayedPictures }
+        else if (st.displayedPictures - shownBase >= 100) cpuPerFrame = (cpu - cpuBaseMs).toDouble() / (st.displayedPictures - shownBase)
+        if (!decoderLogged && cpuPerFrame != null) { decoderLogged = true; logDecoder("playing") }
+        val d = health.videoDistress(now)
+        if (d > tuneStage) { tuneStage = d; retune(d) }
+    }
+
+    /** The picture froze or drops frames (or keeps doing so): re-open the file at the same position with lighter decoder options, at most twice per file. */
+    private fun retune(distress: Int) {
+        val p = mp ?: return; val r = reopen ?: return
+        if (tuneReopens >= 2 || snapshot.state != "playing") return
+        val next = castbridge.core.xfer.PlayerTuning.decide(tuningFacts(distress))
+        if (next == appliedTuning) { logDecoder("distress=$distress, tuning unchanged"); return }
+        tuneReopens++
+        logDecoder("distress=$distress, reopening lighter")
+        flash("Lecture allégée pour rester fluide")
+        pbRetry = true
+        runCatching { r(p.time.coerceAtLeast(0)) }
+    }
+
+    private fun decoderLines(): List<String> {
+        val codec = pbCodec
+        val (w, h) = videoSize()
+        val capable = castbridge.core.xfer.CodecMime.hwCapable(codec) { mime -> CodecCapabilityProbe.hardware(mime, w, h) }
+        val lines = castbridge.core.xfer.DecoderReport.lines(codec, w, h, appliedTuning, capable, cpuPerFrame, lastShown, lastLost, tuneStage).toMutableList()
+        castbridge.core.xfer.CodecMime.mimeOf(codec)?.let { lines += CodecCapabilityProbe.describe(it) }
+        return lines
+    }
+
+    private fun logDecoder(why: String) { android.util.Log.i("TvPlayer", "décodeur ($why) : " + decoderLines().joinToString(" | ")) }
+
+    /** At most once a second (unless [force]d by a visible change): the badge shows the aggregate of every copy in progress, only over a playing video. */
+    private fun refreshBadge(force: Boolean = false) {
+        val b = badge ?: return
+        val now = android.os.SystemClock.uptimeMillis()
+        if (!force && now - lastBadgeAt < 1000) { main.removeCallbacks(badgeTick); main.postDelayed(badgeTick, 1000 - (now - lastBadgeAt)); return }
+        lastBadgeAt = now
+        val items = if (current != null && mp != null) svc?.reception?.active().orEmpty() else emptyList()
+        b.render(CopyBadge.of(items, overlayVisible = ::bar.isInitialized && bar.shown))
+    }
+
     private fun newFile(name: String, size: Long) {
-        if (current?.name != name || currentSize != size) swRetry = false
+        if (current?.name != name || currentSize != size) { swRetry = false; tuneStage = 0; tuneReopens = 0; appliedTuning = null }
     }
 
     override fun play(file: File, posMs: Long): Unit = onMain {
@@ -975,7 +1082,7 @@ class PlayerActivity : Activity(), TvService.Screen {
         if (wasPlaying || libScreen?.visible == true) afterPlayback() else showHome()
     }
     override fun state(): PlayerState = snapshot.let { s ->
-        if (s.state == "playing" || s.state == "buffering") s.copy(comfortSec = health.bufferSec(android.os.SystemClock.elapsedRealtime())) else s
+        if (s.state == "playing" || s.state == "buffering") s.copy(comfortSec = health.bufferSec(android.os.SystemClock.elapsedRealtime()), videoDistress = health.videoDistress(android.os.SystemClock.elapsedRealtime())) else s
     }
 
     override fun tracks(): PlayerTracks? = runCatching {
@@ -1037,6 +1144,7 @@ class PlayerActivity : Activity(), TvService.Screen {
                 if (it.bitrateBps > 0) append(", ${it.bitrateBps / 1000} kbit/s")
                 append("\nDécodage : ${it.decoder}\n")
             }
+            decoderLines().forEach { append(it).append('\n') }       // R-16: what was asked, what the TV can, what is only a hint
             t.audioCodec?.let { append("Audio : $it\n") }
             append("Pistes audio : ${t.audio.size}, sous-titres : ${t.subtitles.count { it.id >= 0 } + t.subtitleFiles.size}\n")
             if (t.chapters.isNotEmpty()) append("Chapitres : ${t.chapters.size}\n")

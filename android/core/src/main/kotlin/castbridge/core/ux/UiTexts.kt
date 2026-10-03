@@ -181,3 +181,12 @@ object TvHomeFocus {
         else -> fallback(toolCount, hasMediaRow)
     }
 }
+
+/** R-16 : mots de la petite icône de copie du lecteur de la TV (CopyBadge). Le texte accessible dit la même chose que l'icône. */
+object CopyBadgeTexts {
+    const val SLOWED = "Copie ralentie"
+    fun description(count: Int, percent: Int?, slowed: Boolean): String {
+        val lead = if (count >= 2) "$count copies en cours" else "Copie en cours"
+        return lead + (percent?.let { " : $it %" } ?: "") + if (slowed) " · $SLOWED" else ""
+    }
+}

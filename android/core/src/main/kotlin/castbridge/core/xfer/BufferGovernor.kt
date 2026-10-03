@@ -120,7 +120,7 @@ class BufferGovernor(private val clock: () -> Long = System::currentTimeMillis) 
  * from what libVLC does tell: the playhead (`TimeChanged`) against the wall clock and the `Buffering` events. NOT a measure of the player's
  * real buffer, a stutter detector expressed in the same unit: smooth playback earns 1 s of comfort per second (up to [CAP_SEC]), a playhead
  * that slips behind the wall clock costs [SLIP_K] s per second of slip, a `Buffering` < 100 % drops it to 1 s, silence from a playing
- * player decays it. Not verified against the real TV (docs/test-plans P-51).
+ * player decays it. Not verified against the real TV (docs/test-plans P-51). R-16 adds the picture: frozen video / lost frames ([VideoStallDetector], P-52).
  */
 class PlaybackHealth {
     private var margin = START_SEC
@@ -129,8 +129,10 @@ class PlaybackHealth {
     private var anchorNow = 0L
     private var anchorPos = -1L
     private var lastEventAt = 0L
+    private val video = VideoStallDetector()
 
     @Synchronized fun onPlaying(nowMs: Long) {
+        video.onPlaying(nowMs)
         if (!playing) { margin = START_SEC; seenTime = false }
         playing = true; anchorNow = nowMs; anchorPos = -1; lastEventAt = nowMs
     }
@@ -138,6 +140,7 @@ class PlaybackHealth {
     @Synchronized fun onTime(nowMs: Long, posMs: Long) {
         if (!playing) { playing = true; margin = START_SEC }
         seenTime = true; lastEventAt = nowMs
+        video.onAudioTime(nowMs, posMs)
         if (anchorPos < 0) { anchorNow = nowMs; anchorPos = posMs; return }
         val dt = (nowMs - anchorNow) / 1000.0
         if (dt < 0.2) return
@@ -152,12 +155,32 @@ class PlaybackHealth {
         if (percent < 100f) { margin = min(margin, 1.0); lastEventAt = nowMs }
     }
 
-    @Synchronized fun onStopped() { playing = false; seenTime = false; anchorPos = -1 }
+    @Synchronized fun onStopped() { playing = false; seenTime = false; anchorPos = -1; video.onPaused() }
+
+    /**
+     * R-16: libVLC's picture counters (`Media.getStats()`), about once a second. The playhead follows the AUDIO: a frozen picture with a
+     * smooth sound leaves it on time, which is why this second measure exists ([VideoStallDetector]).
+     */
+    fun onVideoStats(nowMs: Long, displayed: Int, lost: Int, hasVideo: Boolean = true) = video.onStats(nowMs, displayed, lost, hasVideo)
+
+    /** 0 = the picture is fine, 1 = it froze / drops frames / just did, 2 = it has been so for a while (R-16). */
+    fun videoDistress(nowMs: Long): Int = when {
+        video.level(nowMs) == VideoStallDetector.Level.OK -> 0
+        video.sustained(nowMs) -> 2
+        else -> 1
+    }
 
     @Synchronized fun bufferSec(nowMs: Long): Double? {
         if (!playing || !seenTime) return null
         val silent = nowMs - lastEventAt - SILENCE_MS
-        return if (silent > 0) max(0.0, margin - silent / 1000.0 * SILENCE_DECAY) else margin
+        val base = if (silent > 0) max(0.0, margin - silent / 1000.0 * SILENCE_DECAY) else margin
+        // R-16: a frozen picture is a buffer that ran dry whatever the playhead says (the copy pauses, bounded by MAX_HOLD_MS); lost frames or a
+        // distress that has just ended keep the copy at its floor (never above DISTRESS_FLOOR_SEC, which is inside the LOW band)
+        return when (video.level(nowMs)) {
+            VideoStallDetector.Level.FROZEN -> min(base, FROZEN_SEC)
+            VideoStallDetector.Level.DROPPING -> min(base, DISTRESS_FLOOR_SEC)
+            VideoStallDetector.Level.OK -> base
+        }
     }
 
     companion object {
@@ -167,5 +190,9 @@ class PlaybackHealth {
         const val SLIP_TOLERANCE = 0.05
         const val SILENCE_MS = 1_500L
         const val SILENCE_DECAY = 3.0
+        /** R-16: comfort reported for a frozen picture (inside the HOLD band, < [BufferGovernor.HOLD_SEC]). */
+        const val FROZEN_SEC = 1.0
+        /** R-16: comfort reported for lost frames (inside the LOW band: floor rate, no hold). */
+        const val DISTRESS_FLOOR_SEC = 4.0
     }
 }
