@@ -103,6 +103,8 @@ class ReceiverServer(
     private val contentIndexKey: ByteArray? = null,
     /** Other disk or network users that must not share the bus with the background hash (downloads, USB import): true = busy. */
     private val indexBusy: () -> Boolean = { false },
+    /** One diagnostic line per refused request (route, status, reason code; never a PIN, token or body): the TV app writes it to logcat at INFO (R-17). */
+    private val onLog: (String) -> Unit = {},
 ) : NanoHTTPD(port) {
 
     /** The socket of the connection this thread serves (NanoHTTPD: one thread per connection), for [hungUp]. */
@@ -535,13 +537,95 @@ class ReceiverServer(
         super.stop()
     }
 
-    override fun serve(s: IHTTPSession): Response = try {
-        route(s)
-    } catch (e: NeedsForeground) {
-        // The TV app runs in the background and could not bring its screen up by itself: someone must open it.
-        json(Response.Status.CONFLICT, """{"error":"needs foreground","needsForeground":true,"message":${q(e.message ?: "")}}""")
-    } catch (e: Exception) {
-        json(Response.Status.INTERNAL_ERROR, """{"error":${q(e.message ?: e.javaClass.simpleName)}}""")
+    override fun serve(session: IHTTPSession): Response {
+        val s = CountingSession(session)
+        earlyReject.remove(); rejectCode.remove()
+        val r = try {
+            route(s)
+        } catch (e: NeedsForeground) {
+            // The TV app runs in the background and could not bring its screen up by itself: someone must open it.
+            json(Response.Status.CONFLICT, """{"error":"needs foreground","needsForeground":true,"message":${q(e.message ?: "")}}""")
+        } catch (e: Exception) {
+            json(Response.Status.INTERNAL_ERROR, """{"error":${q(e.message ?: e.javaClass.simpleName)}}""")
+        }
+        return try { afterRoute(s, r) } finally { earlyReject.remove(); rejectCode.remove() }
+    }
+
+    // ---- R-17: a refused request must never leave its body unread (the phone would see a reset, « Broken pipe », not the status) ----
+
+    /** The session, counting the body bytes the handler really read (so what is left unread is exact). */
+    private class CountingSession(private val d: IHTTPSession) : IHTTPSession by d {
+        @Volatile var consumed = 0L
+        private val counting by lazy {
+            object : java.io.FilterInputStream(d.inputStream) {
+                override fun read(): Int = super.read().also { if (it >= 0) consumed++ }
+                override fun read(b: ByteArray, off: Int, len: Int): Int = super.read(b, off, len).also { if (it > 0) consumed += it }
+                override fun skip(n: Long): Long = super.skip(n).also { if (it > 0) consumed += it }
+            }
+        }
+        override fun getInputStream(): InputStream = counting
+    }
+
+    /** Set by the guards that answer before any handler runs (host, trial/locked edition, token, PIN). */
+    private val earlyReject = ThreadLocal<Boolean?>()
+    /** Short code of why the request was refused (no secret): the TV log and `/api/info` say it. */
+    private val rejectCode = ThreadLocal<String?>()
+    private fun early(code: String, r: Response): Response { earlyReject.set(true); rejectCode.set(code); return r }
+
+    private class Rejection(val atMs: Long, val route: String, val status: Int, val code: String)
+    private val recentRejections = ArrayDeque<Rejection>()
+
+    /** Last 5 refusals as JSON (additive `rejections` of `/api/info`): route without its query, status, code. Never a PIN, token or body. */
+    private fun rejectionsJson(): String = synchronized(recentRejections) {
+        recentRejections.joinToString(",", "[", "]") { """{"t":${it.atMs},"route":${q(it.route)},"status":${it.status},"code":${q(it.code)}}""" }
+    }
+
+    private fun afterRoute(s: CountingSession, r: Response): Response {
+        val st = r.status.requestStatus
+        val early = earlyReject.get() == true
+        val xfer = s.uri.startsWith("/api/transfer/")
+        if (st !in 200..299 && st != 429 && (early || xfer)) {
+            val rej = Rejection(System.currentTimeMillis(), "${s.method} ${s.uri}", st, rejectCode.get() ?: "refused")
+            synchronized(recentRejections) { recentRejections.addLast(rej); while (recentRejections.size > 5) recentRejections.removeFirst() }
+            runCatching { onLog("refus ${rej.route} ${rej.status} ${rej.code}") }
+        }
+        if ((s.method != Method.PUT && s.method != Method.POST) || !(early || xfer)) return r
+        val rest = (s.headers["content-length"]?.toLongOrNull() ?: 0L) - s.consumed
+        if (rest <= 0) return r
+        if (st in 200..299) {
+            // answered without reading the body (« already »): read it now so the connection stays usable
+            if (rest <= maxDrainBytes && drain(s, rest, maxDrainBytes, DRAIN_MS)) return r
+            r.addHeader("Connection", "close")
+            return r
+        }
+        r.addHeader("Connection", "close")
+        // The status goes out FIRST (NanoHTTPD closes the response data after flushing it); the unread body is then read and dropped, bounded, so that closing does not reset the connection.
+        val orig = r.data ?: return r
+        r.data = object : java.io.FilterInputStream(orig) {
+            override fun close() { try { super.close() } finally { drain(s, rest, LINGER_CAP, DRAIN_MS) } }
+        }
+        return r
+    }
+
+    /** Reads and drops up to min([n], [cap]) body bytes within [ms]; true = all [n] bytes were read. */
+    private fun drain(s: IHTTPSession, n: Long, cap: Long, ms: Long): Boolean {
+        val sock = connectionSocket.get()
+        val old = runCatching { sock?.soTimeout }.getOrNull()
+        val end = System.nanoTime() + ms * 1_000_000
+        var left = minOf(n, cap)
+        try {
+            val buf = ByteArray(64 * 1024)
+            while (left > 0) {
+                val rem = (end - System.nanoTime()) / 1_000_000
+                if (rem <= 0) break
+                runCatching { sock?.soTimeout = rem.toInt() }
+                val r = s.inputStream.read(buf, 0, minOf(buf.size.toLong(), left).toInt())
+                if (r < 0) break
+                left -= r
+            }
+        } catch (e: IOException) { /* the phone went away or stopped sending: nothing more to answer to */ }
+        finally { if (old != null) runCatching { sock?.soTimeout = old } }
+        return left == 0L && n <= cap
     }
 
     private fun route(s: IHTTPSession): Response {
@@ -549,14 +633,14 @@ class ReceiverServer(
         bodyDrained.remove()
         val p = s.parameters.mapValues { it.value.firstOrNull().orEmpty() }
         val path = s.uri
-        if (hostCheck && !HostGuard.allowed(s.headers["host"])) return json(Response.Status.FORBIDDEN, """{"error":"Hôte non autorisé"}""").also { it.addHeader("Connection", "close") }
+        if (hostCheck && !HostGuard.allowed(s.headers["host"])) return early("host", json(Response.Status.FORBIDDEN, """{"error":"Hôte non autorisé"}""")).also { it.addHeader("Connection", "close") }
         if (s.method == Method.GET && path == "/") return page()
         if (s.method == Method.GET && path == "/api/hello")
             return ok("""{"app":"castbridge-tv","v":${q(VERSION)},"pinRequired":${guard != null}}""")
         val isStream = (s.method == Method.GET || s.method == Method.HEAD) && path.startsWith("/stream/")
         val loopbackStream = isStream && p["t"] == streamToken && s.remoteIpAddress.let { it == "127.0.0.1" || it == "::1" || it == "0:0:0:0:0:0:0:1" }
         // The guard (trial allowlist) sees every route; only the TV's own player (loopback + run token) is let through on /stream/.
-        if (!loopbackStream) routeGuard?.invoke(path)?.let { return json(Response.Status.FORBIDDEN, """{"error":${q(it)},"trial":true}""").also { r -> if (s.method != Method.GET) r.addHeader("Connection", "close") } }   // an unread upload body must not corrupt the next request
+        if (!loopbackStream) routeGuard?.invoke(path)?.let { return early("trial", json(Response.Status.FORBIDDEN, """{"error":${q(it)},"trial":true}""")).also { r -> if (s.method != Method.GET) r.addHeader("Connection", "close") } }   // an unread upload body must not corrupt the next request
         publicRoutes?.serve(s)?.let { return it }
         if (!loopbackStream) denied(s, p)?.let { return it }
         if (isStream) return stream(s, path.removePrefix("/stream/"))
@@ -748,17 +832,17 @@ class ReceiverServer(
             val phone = tokenAuth.invoke(tok)
             if (phone != null) {
                 if (castbridge.core.trust.TvAuth.tokenMayCall(s.uri)) { tokenPhone.set(phone); return null }
-                return json(Response.Status.FORBIDDEN, """{"error":"pin required","message":"Cette action demande le code de la TV."}""").also { it.addHeader("Connection", "close") }
+                return early("pin-required", json(Response.Status.FORBIDDEN, """{"error":"pin required","message":"Cette action demande le code de la TV."}""")).also { it.addHeader("Connection", "close") }
             }
             // expired or revoked: the phone asks the TV again over Bluetooth (no PIN is tried, so no lockout is counted)
-            return json(Response.Status.UNAUTHORIZED, """{"error":"bad token"}""").also { it.addHeader("Connection", "close") }
+            return early("bad-token", json(Response.Status.UNAUTHORIZED, """{"error":"bad token"}""")).also { it.addHeader("Connection", "close") }
         }
         val given = s.headers["x-cb-pin"] ?: (if (legacyPinQuery) p["pin"] else null)
         return when (g.check(ip, given)) {
             PinGuard.Result.OK -> null
-            PinGuard.Result.BAD -> json(Response.Status.UNAUTHORIZED, """{"error":"bad pin"}""")
-            PinGuard.Result.LOCKED -> json(Response.Status.UNAUTHORIZED,
-                """{"error":"locked","retryAfter":${g.retryAfterSeconds(ip)}}""")
+            PinGuard.Result.BAD -> early("bad-pin", json(Response.Status.UNAUTHORIZED, """{"error":"bad pin"}"""))
+            PinGuard.Result.LOCKED -> early("pin-locked", json(Response.Status.UNAUTHORIZED,
+                """{"error":"locked","retryAfter":${g.retryAfterSeconds(ip)}}"""))
         }?.also { it.addHeader("Connection", "close") }
     }
 
@@ -982,9 +1066,9 @@ class ReceiverServer(
     }
 
     private fun transferChunk(s: IHTTPSession, p: Map<String, String>): Response {
-        val sess = transfers.session(p["id"].orEmpty()) ?: return json(Response.Status.NOT_FOUND, """{"error":"unknown transfer"}""")
+        val sess = transfers.session(p["id"].orEmpty()) ?: run { rejectCode.set("session-unknown"); return json(Response.Status.NOT_FOUND, """{"error":"unknown transfer"}""") }
         val v = if (sess.assembler.discard) null else volumes[sess.volumeId]?.takeIf { volumes.alive(it) }
-        if (v == null && !sess.assembler.discard) { transfers.remove(sess.manifest.id); sess.assembler.close(); progress.fail("x:" + sess.manifest.id, "support de stockage retiré"); return removed() }
+        if (v == null && !sess.assembler.discard) { transfers.remove(sess.manifest.id); sess.assembler.close(); progress.fail("x:" + sess.manifest.id, "support de stockage retiré"); rejectCode.set("volume-removed"); return removed() }
         val idx = p["idx"]?.toIntOrNull() ?: return bad("idx required")
         val len = s.headers["content-length"]?.toLongOrNull() ?: return bad("content-length required")
         val sha = s.headers["x-cb-sha256"].orEmpty().lowercase()
@@ -1021,6 +1105,9 @@ class ReceiverServer(
 
     /** Largest body read and dropped before a 429 (a gzip block of 16 MiB at most, see the manifest limit). */
     private val maxDrainBytes = 17L shl 20
+    /** R-17: unread body read and dropped after a refusal other than 429 (the status is already sent), and the time it may take. */
+    private val LINGER_CAP = 1L shl 20
+    private val DRAIN_MS = 2000L
     /** The request body of this thread's request was read to the end: the answer may keep the connection alive. */
     private val bodyDrained = ThreadLocal<Boolean?>()
 
@@ -1353,7 +1440,7 @@ class ReceiverServer(
         val quota = pv?.let { quotaOf(it, used) } ?: 0
         return """{"files":${l.filesJson},"free":$free,"used":$used,"quota":$quota,"target":${q(cfg.target)},"volumes":${volumesJson(l)},""" +
             """"player":{"state":${q(ps.state)},"name":${ps.name?.let(::q) ?: "null"},"pos":${ps.posMs},"dur":${ps.durMs}},"playlist":${playlistJson()},""" +
-            """"playbackPriority":${playback.json()}}"""
+            """"playbackPriority":${playback.json()},"rejections":${rejectionsJson()}}"""
     }
 
     private fun volumesJson(l: Listing = listing()): String {
