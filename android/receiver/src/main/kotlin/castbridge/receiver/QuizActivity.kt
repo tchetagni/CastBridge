@@ -25,11 +25,13 @@ import castbridge.core.quiz.Ladder
 import castbridge.core.quiz.QrCode
 import castbridge.core.quiz.QuestionFilter
 import castbridge.core.quiz.QuizCatalog
+import castbridge.core.quiz.QuizLevelAvailability
 import castbridge.core.quiz.QuizRoom
 import castbridge.core.quiz.Track
 
 /** One card of a setup screen. */
-private data class Choice(val title: String, val sub: String?, val enabled: Boolean = true, val action: () -> Unit)
+/** [why] = what the footer says when a card that cannot be chosen (enabled = false) is pressed; the card stays focusable. */
+private data class Choice(val title: String, val sub: String?, val enabled: Boolean = true, val why: String? = null, val action: () -> Unit)
 
 /**
  * « Quiz culture générale » on the TV screen, played with the remote (D-pad / OK / BACK) and the players' phones.
@@ -229,7 +231,18 @@ class QuizActivity : Activity() {
         if (room?.hostReport(r.key) == true) "Merci ! Votre signalement sera envoyé dès que possible." else "Signalement impossible, déjà envoyé, ou trop de signalements : réessayez plus tard."
 
     private fun goHome() { room?.backToLobby(); steps.clear(); steps += "home"; stage.calm = false; render() }
-    private fun count(f: QuestionFilter) = room?.bank?.count(f) ?: 0
+    /** Playable questions of [f], review ones included (loads the bundled level of [f], one at a time: only call it for a chosen level or the general one). */
+    private fun count(f: QuestionFilter) = room?.playableCount(f) ?: 0
+    /** The bundled index (a few KB), read once: the level picker counts from it and never opens a level file. */
+    private val levelIndex by lazy { QuizLevelAvailability.Index.bundled() }
+    private fun levelChoice(s: QuizLevelAvailability.State, pick: () -> Unit): Choice {
+        val ok = s.kind == QuizLevelAvailability.Kind.AVAILABLE
+        val why = when (s.kind) {
+            QuizLevelAvailability.Kind.RESERVED -> "« ${s.level.label} » est réservé : il s'ouvre avec un lot loué depuis votre téléphone CastBridge."
+            else -> "« ${s.level.label} » : pas encore de questions. Elles arriveront avec les prochaines mises à jour."
+        }
+        return Choice(s.level.label, QuizLevelAvailability.cardText(s, room?.minGapGames ?: 30), ok, why, pick)
+    }
     /** "240 questions, environ 16 parties sans repetition": the bank's size against the goal of 300 games without repeat (docs/QUIZ.md). */
     private fun bankNote(f: QuestionFilter): String {
         val n = count(f)
@@ -269,6 +282,7 @@ class QuizActivity : Activity() {
     private inner class SetupScreen(val step: String) : Screen("setup-$step") {
         private val footer = quizText(this@QuizActivity, "", 17f, QuizColors.MUTED).apply { gravity = Gravity.CENTER }
         private var first: View? = null
+        private var firstAny: View? = null   // every card of a level list can be reserved: the focus still lands on the first one
         override val view: View
 
         init {
@@ -288,11 +302,12 @@ class QuizActivity : Activity() {
                     if (i % perRow == 0) line = row(Gravity.CENTER).also { addView(it, lp(t = 6, b = 6)) }
                     val card = choiceCard(context, c.title, c.sub, c.enabled) {
                         if (c.enabled) { play(QuizSound.Clip.SELECT); c.action() }
-                        else { play(QuizSound.Clip.WRONG); footer.text = "« ${c.title} » : pas encore de questions. Elles arriveront avec les prochaines mises à jour." }
+                        else { play(QuizSound.Clip.WRONG); footer.text = c.why ?: "« ${c.title} » : pas encore de questions. Elles arriveront avec les prochaines mises à jour." }
                     }
                     if (compact) { card.minWidth = dpi(120); card.setTextSize(android.util.TypedValue.COMPLEX_UNIT_SP, 20f) }
                     line!!.addView(card, lp(l = 8, r = 8))
                     if (first == null && c.enabled) first = card
+                    if (firstAny == null) firstAny = card
                 }
                 addView(footer, lp(t = 14))
                 // cards slide in one after the other
@@ -316,14 +331,13 @@ class QuizActivity : Activity() {
                 Choice(Track.PRIMARY.label, "Du SIL au CM2 · Class 1 à 6") { pickTrack(Track.PRIMARY) },
                 Choice(Track.SECONDARY.label, "De la 6e à la Terminale · Form 1 à Upper Sixth") { pickTrack(Track.SECONDARY) },
                 Choice(Track.HIGHER.label, "Licence 1 à 3, par filière") { pickTrack(Track.HIGHER) }))
-            "level" -> Triple("Quel niveau ?", track.label, QuizCatalog.levels(track).map { l ->
-                val n = count(QuestionFilter(track, l.key))
-                Choice(l.label, if (n > 0) bankNote(QuestionFilter(track, l.key)) else "bientôt", n > 0) { level = l.key; if (track == Track.HIGHER) push("field") else afterFilter() }
+            "level" -> Triple("Quel niveau ?", track.label, QuizLevelAvailability.states(track, levelIndex, bank = { f -> room?.let { QuizLevelAvailability.countsOf(it.bank, f) } ?: QuizLevelAvailability.Counts(0, 0) }).map { s ->
+                levelChoice(s) { level = s.level.key; if (track == Track.HIGHER) push("field") else afterFilter() }
             })
-            "field" -> Triple("Quelle filière ?", "${track.label} · ${level ?: ""}", QuizCatalog.fields.map { f ->
-                val n = count(QuestionFilter(track, level, f.key))
-                Choice(f.label, if (n > 0) bankNote(QuestionFilter(track, level, f.key)) else "bientôt", n > 0) { field = f.key; afterFilter() }
-            })
+            "field" -> Triple("Quelle filière ?", "${track.label} · ${level ?: ""}", QuizLevelAvailability.fieldStates(track, level ?: "", levelIndex, count = { f ->
+                // the level is chosen: its bundled file may be read now (one level at a time)
+                QuizLevelAvailability.Counts(0, count(QuestionFilter(track, level, f)))
+            }).map { s -> levelChoice(s) { field = s.level.key; afterFilter() } })
             "stake" -> Triple("Quelle mise par joueur ?", "${QuizRoom.TOKENS_LABEL} : sans aucune valeur, rien à payer. La cagnotte est partagée selon le classement.",
                 listOf(50L, 100L, 200L).map { m -> Choice("$m jetons", if (m == 100L) "conseillé" else null) { stakeChosen = m; push("duel-format") } })
             "duel-format" -> Triple("Quel format de duel ?", "Réponse en 20 secondes au plus", castbridge.core.quiz.QuizDuel.Format.values().map { f ->
@@ -353,7 +367,7 @@ class QuizActivity : Activity() {
                 footer.text = QuizHub.joinUrl(r)?.let { "Les joueurs peuvent déjà rejoindre avec leur téléphone  ·  code ${r.code}" }
                     ?: "Pas de réseau : jeu à la télécommande seulement"
         }
-        override fun focusFirst() { first?.requestFocus() }
+        override fun focusFirst() { (first ?: firstAny)?.requestFocus() }
     }
 
     // ------------------------------------------------------------------ lobby

@@ -157,6 +157,9 @@ class QuizRoom(
     /** Playable questions for the current settings. */
     fun available(): Int = synchronized(lock) { bankOf(filter).count(filter) }
 
+    /** Playable questions of [f] (loads the bundled level of [f], one at a time: call it for a level the player already chose). */
+    fun playableCount(f: QuestionFilter): Int = synchronized(lock) { bankOf(f).count(f) }
+
     /** Profiles whose histories apply to a game with the current settings: identified phones, or empty = the TV's host. */
     private fun historyKeys(t: Long): List<String> {
         fun stable(p: Player) = p.walletKey.startsWith("dev:")

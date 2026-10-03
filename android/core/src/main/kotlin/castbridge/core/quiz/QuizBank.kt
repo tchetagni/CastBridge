@@ -110,8 +110,8 @@ class QuizBank(val all: List<Question>, val channel: castbridge.core.content.Cha
      */
     fun draw(count: Int = 15, seed: Long = System.nanoTime(), exclude: Set<String> = emptySet(),
              filter: QuestionFilter = QuestionFilter.GENERAL, includeReview: Boolean = false, shuffleChoices: Boolean = true,
-             history: QuestionHistory? = null, minGapGames: Int = DEFAULT_MIN_GAP_GAMES): List<Question> =
-        drawDetailed(count, seed, exclude, filter, includeReview, shuffleChoices, history, minGapGames).questions
+             history: QuestionHistory? = null, minGapGames: Int = DEFAULT_MIN_GAP_GAMES, approvedFirst: Boolean = true): List<Question> =
+        drawDetailed(count, seed, exclude, filter, includeReview, shuffleChoices, history, minGapGames, approvedFirst).questions
 
     /** What a draw had to do to cope with a bank too small for the history (repeats = 0 and quotaBroken = 0: a perfect draw). */
     data class DrawReport(
@@ -136,11 +136,13 @@ class QuizBank(val all: List<Question>, val channel: castbridge.core.content.Cha
      *   (general knowledge: the 70/20/10 quota is kept) remains that was not.
      * - Bank too small for that: the region's question that was asked the LONGEST ago is taken (never a random recent one),
      *   among those within 1 of the wanted difficulty when possible so that the climb holds; the [DrawReport] says so.
+     * - [approvedFirst]: while an approved question that is fresh remains, a question « en cours de relecture » is not drawn
+     *   (a pool of review questions only is drawn as usual).
      * - Positions get a target difficulty 1..5 rising with the position; the result is sorted by difficulty.
      */
     fun drawDetailed(count: Int = 15, seed: Long = System.nanoTime(), exclude: Set<String> = emptySet(),
                      filter: QuestionFilter = QuestionFilter.GENERAL, includeReview: Boolean = false, shuffleChoices: Boolean = true,
-                     history: QuestionHistory? = null, minGapGames: Int = DEFAULT_MIN_GAP_GAMES): Draw {
+                     history: QuestionHistory? = null, minGapGames: Int = DEFAULT_MIN_GAP_GAMES, approvedFirst: Boolean = true): Draw {
         require(count > 0)
         val rng = Random(seed)
         val pool = poolOf(filter, includeReview)
@@ -170,7 +172,9 @@ class QuizBank(val all: List<Question>, val channel: castbridge.core.content.Cha
             var cands = (if (region == null) pool else byRegion[region].orEmpty()).filter { it.id !in used }
             if (cands.isEmpty()) { cands = pool.filter { it.id !in used }; broke = region != null }   // region has nothing left at all
             if (cands.isEmpty()) break
-            val freshOnes = cands.filter(::fresh)
+            val freshOnes = cands.filter(::fresh).let { f ->
+                if (approvedFirst) f.filter { castbridge.core.content.PlayPolicy.stateOf(it) == castbridge.core.content.ContentState.VALIDATED }.ifEmpty { f } else f
+            }
             val q: Question
             if (freshOnes.isNotEmpty()) {
                 val best = freshOnes.minOf { Math.abs(it.difficulty - target) }
