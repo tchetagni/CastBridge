@@ -23,6 +23,7 @@ Source : `docs/coordination/DESIGN-W17-STORE-TELEPHONE-ET-TV-2026-10-03.md` (lir
 | w17-09 | `sonnet-w17-09-docs-store.md` | `docs/STORE.md`, renvois `LOTS.md`, `RENTAL-LOTS.md`, `HANDOFF.md` § 0 | 17b | S | haiku | non | 120 / 12 | PRÊT (après 17a) | w17-01…04 |
 | w17-10 | `sonnet-w17-10-store-test-plan-gate.md` | `docs/test-plans/STORE-PILOT.md` (10 points humains), `tools/agents/gate-w17.sh` | 17b | S | haiku | non | 100 / 10 | PRÊT (après w17-05) | w17-01…05 |
 | w17-11 | `sonnet-w17-11-desk-rent-request-tool.md` | `tools/pilot/rentreq.py` : lire/vérifier une demande (fichier ou code court), imprimer la commande `louer.py` W16 ; rejeu Python des vecteurs | 17b | S | sonnet | non | 150 / 8 | PRÊT (après w17-03) | w17-03 (w16-05 souhaité) |
+| w17-12 | `sonnet-w17-12-store-usb-catalog.md` | `StoreUsbImport` : catalogue signé et lots par clé USB (même vérifications), `store_usb_pack.py` (décision D-W17-9 = oui) | 17a | M | sonnet | échantillon | 350 / 18 | PRÊT (après w17-04) | w17-01, w17-04 |
 
 Coûts (prix 2026-09 : haiku 1/5, sonnet 2/10, opus 4/20 $/M ; jauges **estimées, non vérifiées**) : sonnet M 6 × ≈ 1,0 $ = 6 $ ; sonnet L 2 × ≈ 2,0 $ = 4 $ ; sonnet S 1 × ≈ 0,4 $ ; haiku S 2 × ≈ 0,1 $ ; audit Opus obligatoire 1 × ≈ 0,7 $ ; échantillons ≈ 1,5 $. **Total ≈ 12,5-13 $**, ≈ **16 agent·jours** (17a ≈ 7, 17b ≈ 1,1, 17c ≈ 6 ; marge ≈ 2). **Pendant le gel : 17a + 17b ≈ 8 j, ≈ 6 $.**
 
