@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 # Active le SSH de CastBridge-TV par Bluetooth, depuis ce Mac, via la passerelle du téléphone.
 #
-#   tools/remote/tv-ssh-deploy.sh [--minutes N] [--key FICHIER.pub] [--api URL] [--dry-run]
+#   tools/remote/tv-ssh-deploy.sh [--minutes N] [--key FICHIER.pub] [--api URL] [--ssh-port N] [--dry-run]
 #
 # Prérequis : le téléphone relié en USB (adb), la « Passerelle Bluetooth » démarrée sur le téléphone (API + SSH, boucle locale),
 # `tools/remote/tv-tunnel.sh up` (redirections adb 18765 et 2222), la TV allumée et appairée en Bluetooth.
@@ -9,13 +9,14 @@
 # argument de commande (il passe par l'entrée standard de curl) et jamais écrit sur le disque.
 # Étapes : 1) /api/hello  2) état du SSH  3) activation  4) autorisation de la clé publique de ce Mac  5) essai de connexion.
 set -u
-API="http://127.0.0.1:18765"; KEY="$HOME/.ssh/id_ed25519.pub"; MINUTES=""; DRY=0
+API="http://127.0.0.1:18765"; KEY="$HOME/.ssh/id_ed25519.pub"; MINUTES=""; DRY=0; SSHPORT=2222
 usage() { sed -n '2,11p' "$0" | sed 's/^# \{0,1\}//'; }
 while [ $# -gt 0 ]; do
   case "$1" in
     --minutes) MINUTES="${2:-}"; shift 2 ;;
     --key) KEY="${2:-}"; shift 2 ;;
     --api) API="${2:-}"; shift 2 ;;
+    --ssh-port) SSHPORT="${2:-}"; shift 2 ;;
     --dry-run) DRY=1; shift ;;
     -h|--help) usage; exit 0 ;;
     *) echo "Option inconnue : $1" >&2; usage >&2; exit 2 ;;
@@ -31,7 +32,7 @@ if [ "$DRY" = 1 ]; then
   echo "2. GET  $API/api/ssh                       (en-tête X-CB-Pin: ••••••)"
   echo "3. POST $API/api/ssh/enable${MINUTES:+?minutes=$MINUTES}   (en-tête X-CB-Pin: ••••••)"
   echo "4. POST $API/api/ssh/key?key=<$(cut -d' ' -f1 "$KEY") … $(awk '{print $3}' "$KEY")>   (en-tête X-CB-Pin: ••••••)"
-  echo "5. ssh -p 2222 tv@127.0.0.1 'echo ok'"
+  echo "5. ssh -p $SSHPORT tv@127.0.0.1 'echo ok'"
   exit 0
 fi
 command -v curl >/dev/null || { echo "curl est requis." >&2; exit 1; }
@@ -71,8 +72,8 @@ CODE="${R##*$'\n'}"; show "$R"; [ "$CODE" = 200 ] || { echo "Clé refusée (HTTP
 
 step "5. Essai de connexion SSH par Bluetooth"
 sleep 2
-if ssh -p 2222 -o BatchMode=yes -o ConnectTimeout=20 -o StrictHostKeyChecking=accept-new tv@127.0.0.1 'echo ssh-ok; cbdev status 2>/dev/null | head -4'; then
-  echo; echo "SSH actif. Connexion : ssh -p 2222 tv@127.0.0.1"
+if ssh -p "$SSHPORT" -o BatchMode=yes -o ConnectTimeout=20 -o StrictHostKeyChecking=accept-new tv@127.0.0.1 'echo ssh-ok; cbdev status 2>/dev/null | head -4'; then
+  echo; echo "SSH actif. Connexion : ssh -p $SSHPORT tv@127.0.0.1"
 else
   echo; echo "Le SSH est activé mais la connexion a échoué : relancez la passerelle sur le téléphone puis réessayez : ssh -p 2222 tv@127.0.0.1" >&2; exit 1
 fi
