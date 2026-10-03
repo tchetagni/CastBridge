@@ -123,6 +123,12 @@ class TransferClient(
     val perLane = LinkedHashMap<String, Long>()
     @Volatile var duplicates = 0L; private set
     @Volatile var rounds = 0; private set
+    /**
+     * [castbridge.core.tv.MoveProof.byFastTransfer]: the run ended with the TV verifying the root of the phone's own block hashes AND every block was sent by this
+     * run (the first `begin` held none). A `begin` answering « done » (the TV already had a file of that name and size) is never a proof.
+     */
+    @Volatile var verifiedWhole = false; private set
+    private var firstMapEmpty: Boolean? = null
 
     fun run(): Result {
         val m = manifest
@@ -136,6 +142,7 @@ class TransferClient(
             if (b.done) { onProgress(m.size, m.size); return Result.Done }
             val hashes = HashBook(m, source)
             val full = try { api.state(b.id, withHashes = true) } catch (e: IOException) { null } ?: b
+            if (firstMapEmpty == null) firstMapEmpty = full.map.count() == 0
             full.hashes.forEachIndexed { i, h -> if (i < m.blocks && full.map.has(i)) hashes.preload(i, h) }
             val ls = lanes(b.id, minOf(caps.maxStreams, b.maxStreams))
             val sched = Scheduler(m, full.map, ls, { c -> SendContext(m, source, hashes, c, compress) }, slowFromHead = full.ordered || b.ordered, listener = object : Scheduler.Listener() {
@@ -156,7 +163,7 @@ class TransferClient(
                 Scheduler.Result.Done -> {
                     val fin = try { api.finish(b.id, Manifest.root(hashes.all())) } catch (e: IOException) { onWaiting(castbridge.core.trust.LinkText.failure(e)); sleep(retryWait(e)); continue }
                     when (fin) {
-                        TransferApi.Finish.Done -> { onProgress(m.size, m.size); return Result.Done }
+                        TransferApi.Finish.Done -> { verifiedWhole = firstMapEmpty == true; onProgress(m.size, m.size); return Result.Done }
                         is TransferApi.Finish.Refused -> return Result.Failed(fin.message)
                         is TransferApi.Finish.Missing, is TransferApi.Finish.Corrupt -> { onEvent("vérification finale : des blocs sont renvoyés"); if (attempts > 6) return Result.Failed("la TV refuse la copie après ${attempts} essais"); continue }
                     }

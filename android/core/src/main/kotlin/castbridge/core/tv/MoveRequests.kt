@@ -53,6 +53,53 @@ object MoveProof {
      */
     fun mayDeleteWithoutCopy(hashProof: Boolean, edgesProof: Boolean): Boolean = hashProof && edgesProof
 
+    /** What the phone does with the original once an upload of a MOVE says « done » ([afterSend]). */
+    enum class AfterSend { DELETE, KEEP_SAME_NAME_UNVERIFIED, KEEP_NOT_CONFIRMED }
+
+    /**
+     * The usual MOVE (with a copy), and the MOVE that fell back to a copy: the original may go only if [sentWhole] (every byte sent by THIS job and the TV said done
+     * for that size: [byUpload], or a fast transfer whose root the TV verified with all blocks sent by this run: [byFastTransfer]) or [contentProof]
+     * ([mayDeleteWithoutCopy]); and the TV lists the finished file of that size. A « done » with no byte sent (the TV already had a file of that name and size)
+     * keeps the original: [SAME_NAME_UNVERIFIED_TEXT].
+     */
+    fun afterSend(sentWhole: Boolean, contentProof: Boolean, tvComplete: Boolean, tvSize: Long, localSize: Long): AfterSend = when {
+        localSize <= 0 || !tvComplete || tvSize != localSize -> AfterSend.KEEP_NOT_CONFIRMED
+        sentWhole || contentProof -> AfterSend.DELETE
+        else -> AfterSend.KEEP_SAME_NAME_UNVERIFIED
+    }
+
+    const val SAME_NAME_UNVERIFIED_TEXT = "La TV a déjà un fichier de même nom et de même taille : contenu non vérifié, l'original est conservé."
+    const val CHANGED_TEXT = "Le fichier a changé depuis la vérification (taille ou date) : l'original est conservé."
+
+    /** Up to this size the phone reads the WHOLE file of the TV (/stream/) and hashes it itself; above, edges + [MIDDLE_SAMPLES] blocks at random positions. */
+    const val WHOLE_LIMIT = 64L shl 20
+    const val MIDDLE_SAMPLES = 8
+
+    /**
+     * Where the phone reads the TV's file for its own, independent proof: the whole file (one range) up to [WHOLE_LIMIT]; else the head, the tail and
+     * [MIDDLE_SAMPLES] blocks of [EDGE] bytes at positions drawn by the PHONE ([rnd] = a SecureRandom: the TV cannot know them in advance).
+     */
+    fun samplePlan(size: Long, rnd: java.util.Random): List<Pair<Long, Int>> {
+        if (size <= 0) return emptyList()
+        if (size <= WHOLE_LIMIT) return listOf(0L to size.toInt())
+        val (h, t) = edges(size)
+        val span = size - EDGE
+        val mids = generateSequence { (rnd.nextDouble() * span).toLong().coerceIn(0, span) }.distinct().take(MIDDLE_SAMPLES).map { it to EDGE }.toList()
+        return listOf(h, t) + mids
+    }
+
+    /** Every planned range was read on both sides, completely, and is identical. */
+    fun bySamples(plan: List<Pair<Long, Int>>, local: List<ByteArray?>, tv: List<ByteArray?>): Boolean =
+        plan.isNotEmpty() && plan.size == local.size && plan.size == tv.size &&
+            plan.indices.all { i -> local[i]?.size == plan[i].second && tv[i]?.size == plan[i].second && local[i]!!.contentEquals(tv[i]) }
+
+    /**
+     * Just before a deletion: the original is still the file that was checked (same size, same modification date, both known). Anything else keeps it
+     * ([CHANGED_TEXT]): a photo edited in the Gallery after the check must never be deleted on the strength of the old check.
+     */
+    fun unchanged(sizeThen: Long, stampThen: Long, sizeNow: Long, stampNow: Long): Boolean =
+        sizeThen > 0 && sizeThen == sizeNow && stampThen > 0 && stampThen == stampNow
+
     /** Where to read the head and the tail of a file of [size] bytes: (offset, length) pairs. */
     fun edges(size: Long): Pair<Pair<Long, Int>, Pair<Long, Int>> {
         val n = minOf(size, EDGE.toLong()).toInt()

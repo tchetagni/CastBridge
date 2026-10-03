@@ -52,6 +52,18 @@ object DedupDecision {
     fun mustHash(sizeAnswer: Tv, sameSizeInQueue: Boolean, force: Boolean = false): Boolean =
         !force && (sizeAnswer is Tv.Candidates || sameSizeInQueue)
 
+    /**
+     * Same NAME and same size on the TV but a DIFFERENT content (the TV's fresh answer is « absent »): the phone sends under a unique name (« nom (2).ext »)
+     * instead of stopping on the TV's « done » (never an overwrite, never a silent skip of another file). [taken] = the TV holds that name.
+     */
+    fun uniqueName(name: String, taken: (String) -> Boolean): String {
+        if (!taken(name)) return name
+        val dot = name.lastIndexOf('.').takeIf { it > 0 && name.length - it <= 12 } ?: name.length
+        val stem = name.substring(0, dot); val ext = name.substring(dot)
+        for (i in 2..999) { val n = "$stem ($i)$ext"; if (!taken(n)) return n }
+        return "$stem (${System.currentTimeMillis()})$ext"
+    }
+
     /** A hash kept with the queue may be reused to recognise a twin for a copy, NEVER for a MOVE (the file may have changed since: recomputed at the decision). */
     fun mayReuseHash(action: Action, stored: String?): Boolean = action != Action.MOVE && ContentHash.valid(stored)
 

@@ -167,7 +167,25 @@ class ContentIndexServerTest {
         assertEquals(DedupDecision.Tv.Indexing(1), have(data.size.toLong(), sha(data), fresh = true))
         assertTrue(server.indexStep())
         assertEquals(DedupDecision.Tv.Absent, have(data.size.toLong(), sha(data), fresh = true), "le hash frais voit le vrai contenu : aucun « Déplacer » sans copie")
+        assertIs<DedupDecision.Tv.Present>(have(data.size.toLong(), sha(retouched)))
+        // each « fresh » question asks for its own re-read
+        assertEquals(DedupDecision.Tv.Indexing(1), have(data.size.toLong(), sha(retouched), fresh = true))
+        assertTrue(server.indexStep())
         assertIs<DedupDecision.Tv.Present>(have(data.size.toLong(), sha(retouched), fresh = true))
+    }
+
+    // relecture Opus de ff3cf199 : « empreinte déjà fraîche mais fichier modifié au milieu » — fresh=1 relit TOUJOURS le fichier
+    @Test fun aFreshQuestionAlwaysReReadsEvenAHashOfThisRun() {
+        send("film.mkv")
+        assertEquals(DedupDecision.Tv.Indexing(1), have(data.size.toLong(), sha(data), fresh = true))
+        assertTrue(server.indexStep())
+        assertIs<DedupDecision.Tv.Present>(have(data.size.toLong(), sha(data), fresh = true))
+        val f = File(dir, "film.mkv"); val mt = f.lastModified()
+        val corrupted = data.copyOf().also { it[150_000] = (it[150_000] + 1).toByte() }
+        f.writeBytes(corrupted); assertTrue(f.setLastModified(mt))          // the middle changed, size and date kept, AFTER a fresh hash
+        assertEquals(DedupDecision.Tv.Indexing(1), have(data.size.toLong(), sha(data), fresh = true), "une nouvelle question « fresh » exige une nouvelle lecture")
+        assertTrue(server.indexStep())
+        assertEquals(DedupDecision.Tv.Absent, have(data.size.toLong(), sha(data), fresh = true))
     }
 
     @Test fun underAChildProfileTheAnswerGivesNoNameNorFolder() {

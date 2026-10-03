@@ -211,6 +211,8 @@ object TransferQueue {
         if (!readable(app, uri)) { model.lost(item.id); publish(); return }
         val launch: () -> Unit
         var viaBt = false
+        // the name sent to the TV: the file's own, or a unique one when the TV holds another content under that very name (R-12, second audit)
+        var sendName = item.name
         var dedupe: (suspend () -> Boolean)? = null
         var afterBase: String? = null; var afterCred: String? = null
         // R-12: where to ask « is this content already on the TV? » (Wi-Fi only; a code-path TV found by discovery only is not asked: the copy goes)
@@ -227,8 +229,8 @@ object TransferQueue {
             // never copy the same file twice: same name, complete, same size already on the TV
             if (base != null) dedupe = { withContext(Dispatchers.IO) { runCatching { castbridge.core.tv.TvDedupe.alreadyThere(castbridge.core.tv.TvInfo.parse(castbridge.core.tv.TvClient(base, session.credential).info()).file(item.name), item.size) }.getOrDefault(false) } }
             launch = {
-                if (viaBt) BtUploadService.start(app, uri, item.name, session.tv.address, session.credential)
-                else UploadService.start(app, uri, item.name, session.tv.mdns ?: session.tv.name, base!!.removePrefix("http://"), session.credential,
+                if (viaBt) BtUploadService.start(app, uri, sendName, session.tv.address, session.credential)
+                else UploadService.start(app, uri, sendName, session.tv.mdns ?: session.tv.name, base!!.removePrefix("http://"), session.credential,
                     progressive = item.progressive, autoPlay = item.autoPlay, move = item.move, ordered = item.ordered, target = item.target)
             }
         } else {
@@ -238,22 +240,28 @@ object TransferQueue {
             dedupCred = cred
             dedupBase = item.host?.let { h -> if (':' in h) "http://$h" else "http://$h:8765" }
             launch = {
-                UploadService.start(app, uri, item.name, item.tvName!!, item.host, cred, progressive = item.progressive, autoPlay = item.autoPlay,
+                UploadService.start(app, uri, sendName, item.tvName!!, item.host, cred, progressive = item.progressive, autoPlay = item.autoPlay,
                     target = item.target, move = item.move, ordered = item.ordered)
             }
         }
-        if (dedupe?.invoke() == true) { model.finish(item.id, true); _note.value = null; publish(); return }
+        // same name, complete, same size already on the TV: no longer « already there » by itself (its CONTENT may differ, R-12 second audit)
+        val sameName = dedupe?.invoke() == true
         // R-12: the same CONTENT already on the TV (any name, any folder), or already sent by this queue, is not copied again
         val base0 = dedupBase
         if (!item.force && !viaBt && base0 != null) {
-            val d = runCatching { contentDedupe(app, item, base0, dedupCred) }.getOrDefault(Dedup.COPY)     // any doubt: the copy goes
+            val d = runCatching { contentDedupe(app, item, base0, dedupCred, sameName) }.getOrElse { DedupRun(if (sameName) Dedup.SAME_NAME_UNKNOWN else Dedup.COPY) }
             _note.value = null
-            when (d) {
+            when (d.kind) {
                 Dedup.SKIPPED -> { credentials.remove(item.id); publish(); return }
                 Dedup.CANCELLED -> { model.finishCancelled(item.id); publish(); return }
-                Dedup.COPY -> {}
+                // same name and size, content not verifiable: nothing sent; a MOVE keeps the original (the TV's « done » would prove nothing)
+                Dedup.SAME_NAME_UNKNOWN -> {
+                    if (item.move) model.finishSkipped(item.id, item.name, castbridge.core.tv.MoveProof.SAME_NAME_UNVERIFIED_TEXT) else model.finish(item.id, true)
+                    publish(); return
+                }
+                Dedup.COPY -> d.sendAs?.let { sendName = it }
             }
-        }
+        } else if (sameName && !item.move) { model.finish(item.id, true); _note.value = null; publish(); return }
         while (true) {
             // « Annuler » landed before the launch: nothing leaves the phone
             if (!QueueCancel.mayLaunch(model.cancelAsked(item.id))) { model.finishCancelled(item.id); publish(); return }
@@ -287,7 +295,9 @@ object TransferQueue {
         publish()
     }
 
-    private enum class Dedup { COPY, SKIPPED, CANCELLED }
+    private enum class Dedup { COPY, SKIPPED, CANCELLED, SAME_NAME_UNKNOWN }
+    /** [sendAs] = a unique name to send under (same name and size on the TV, different content). */
+    private data class DedupRun(val kind: Dedup, val sendAs: String? = null)
     private const val INDEX_WAIT_TRIES = 4
     private const val INDEX_WAIT_MS = 3_000L
     /** A MOVE waits up to 2 minutes for the TV to re-read its file (fresh hash); then the usual copy goes. */
@@ -299,11 +309,11 @@ object TransferQueue {
      * ⇒ nothing is copied (« Copier et lire » plays the TV's file; a MOVE offers the deletion of the original only when [castbridge.core.tv.MoveProof.byContentHash]
      * holds, and Android asks the user). Any doubt (old TV, index not ready, error) ⇒ COPY.
      */
-    private suspend fun contentDedupe(app: Context, item: QueueItem, base: String, cred: String?): Dedup = withContext(Dispatchers.IO) {
+    private suspend fun contentDedupe(app: Context, item: QueueItem, base: String, cred: String?, sameName: Boolean = false): DedupRun = withContext(Dispatchers.IO) {
         val client = castbridge.core.tv.TvClient(base, cred)
         val uri = Uri.parse(item.uri)
         val size = runCatching { app.contentResolver.openFileDescriptor(uri, "r")!!.use { it.statSize } }.getOrNull()?.takeIf { it > 0 } ?: item.size
-        if (size <= 0) return@withContext Dedup.COPY
+        if (size <= 0) return@withContext DedupRun(if (sameName) Dedup.SAME_NAME_UNKNOWN else Dedup.COPY)
         val action = when {
             item.move -> DedupDecision.Action.MOVE
             item.playOnTv || item.autoPlay -> DedupDecision.Action.COPY_AND_PLAY
@@ -314,16 +324,18 @@ object TransferQueue {
         fun ask(sha: String?): DedupDecision.Tv = runCatching { DedupDecision.parse(client.have(size, sha, fresh = move && sha != null)) }.getOrDefault(DedupDecision.Tv.Unsupported)
         val bySize = ask(null)
         val siblings = model.sameSize(item.id)
-        if (!DedupDecision.mustHash(bySize, siblings.isNotEmpty(), item.force)) return@withContext Dedup.COPY
+        // the original as it is now (size, date): checked again just before a deletion is offered (TOCTOU)
+        val stamp0 = if (move) fileStamp(app, uri) else null
+        if (!DedupDecision.mustHash(bySize, siblings.isNotEmpty() || sameName, item.force)) return@withContext DedupRun(if (sameName) Dedup.SAME_NAME_UNKNOWN else Dedup.COPY)
         val cancelled = { model.cancelAsked(item.id) }
         // a MOVE never reuses a hash kept from earlier (the file may have changed since: a photo rotated in the Gallery keeps its size)
         val sha = item.sha256?.takeIf { DedupDecision.mayReuseHash(action, it) } ?: hashUri(app, uri, item.name, size, cancelled)
-        if (sha == null) return@withContext if (cancelled()) Dedup.CANCELLED else Dedup.COPY
+        if (sha == null) return@withContext DedupRun(if (cancelled()) Dedup.CANCELLED else if (sameName) Dedup.SAME_NAME_UNKNOWN else Dedup.COPY)
         model.setHash(item.id, sha)
         // the same-size files this queue already SENT: their hash too (once, kept with the queue), to recognise the same content under another name
         for (s in siblings) if (s.sha256 == null && s.status == QueueStatus.DONE && !cancelled())
             hashUri(app, Uri.parse(s.uri), s.name, s.size, cancelled)?.let { model.setHash(s.id, it) }
-        if (cancelled()) return@withContext Dedup.CANCELLED
+        if (cancelled()) return@withContext DedupRun(Dedup.CANCELLED)
         var tv = if (bySize is DedupDecision.Tv.Unsupported) bySize else ask(sha)
         // the TV hashes a same-size candidate first when it is asked about it: a short wait (longer for a MOVE: the TV re-reads its file), never a block
         var tries = 0
@@ -332,38 +344,63 @@ object TransferQueue {
             delay(INDEX_WAIT_MS)
             tv = ask(sha)
         }
-        if (cancelled()) return@withContext Dedup.CANCELLED
+        if (cancelled()) return@withContext DedupRun(Dedup.CANCELLED)
         val twin = model.twinOf(item.id)?.let { t ->
             val f = runCatching { castbridge.core.tv.TvInfo.parse(client.info()).file(t.heldAs ?: t.name) }.getOrNull()
             DedupDecision.Twin(t.name, f?.name ?: t.heldAs ?: t.name, t.size, t.sha256!!, castbridge.core.tv.TvDedupe.alreadyThere(f, size))
         }
         when (val first = DedupDecision.decide(DedupDecision.Facts(action, size, sha, tv, twin, item.force))) {
-            is DedupDecision.Outcome.Copy -> { android.util.Log.i("TransferQueue", "copie de ${item.name} : ${first.why}"); Dedup.COPY }
+            is DedupDecision.Outcome.Copy -> {
+                android.util.Log.i("TransferQueue", "copie de ${item.name} : ${first.why}")
+                when {
+                    !sameName -> DedupRun(Dedup.COPY)
+                    // same name and size, the TV's answer says the content DIFFERS (every same-size file hashed, none equal): sent under a unique name
+                    tv is DedupDecision.Tv.Absent -> {
+                        val names = runCatching { castbridge.core.tv.TvInfo.parse(client.info()).files.flatMap { listOfNotNull(it.name, it.origin) }.map { it.lowercase() }.toSet() }.getOrNull()
+                        if (names == null) DedupRun(Dedup.SAME_NAME_UNKNOWN) else DedupRun(Dedup.COPY, DedupDecision.uniqueName(item.name) { it.lowercase() in names })
+                    }
+                    else -> DedupRun(Dedup.SAME_NAME_UNKNOWN)
+                }
+            }
             is DedupDecision.Outcome.Skip -> {
-                // MOVE: second proof, read by the phone itself: the first and last bytes of the TV's file (/stream/ Range) against its own
-                val out = if (first.deleteSource) DedupDecision.afterEdges(first, edgesMatch(app, client, uri, first.tvName, size)) else first
+                // MOVE: second proof, read by the phone itself (the whole TV file up to 64 MiB, else edges + 8 blocks at positions the TV cannot guess)
+                var out = if (first.deleteSource) DedupDecision.afterEdges(first, independentProof(app, client, uri, first.tvName, size, sha)) else first
+                // the original must still be the file that was hashed (size and date), right now
+                val now = if (out.deleteSource) fileStamp(app, uri) else null
+                if (out.deleteSource && (stamp0 == null || now == null || !castbridge.core.tv.MoveProof.unchanged(stamp0.first, stamp0.second, now.first, now.second)))
+                    out = out.copy(deleteSource = false, text = castbridge.core.tv.MoveProof.CHANGED_TEXT)
                 // « Copier sur la TV et lire » from the phone's player (playOnTv): CastSession starts the TV's file at the phone's position (heldAs);
                 // a plain « Copier et lire » (autoPlay) is started here
                 if (out.play && !item.playOnTv && out.tvName.isNotEmpty()) runCatching { client.play(out.tvName) }
                 // « Annuler » landed during the checks: nothing is offered for deletion (R-09)
-                if (cancelled()) return@withContext Dedup.CANCELLED
-                // MOVE: the original goes ONLY with both proofs (fresh hash + edges), and the user confirms (MoveHandler); otherwise it stays
-                if (out.deleteSource) UploadService.offerVerifiedMove(UploadService.MoveRequest(uri, out.tvName, size))
+                if (cancelled()) return@withContext DedupRun(Dedup.CANCELLED)
+                // MOVE: the original goes ONLY with both proofs (fresh hash + the phone's own reading), unchanged since, and the user confirms (MoveHandler)
+                if (out.deleteSource) UploadService.offerVerifiedMove(UploadService.MoveRequest(uri, out.tvName, size, now!!.second))
                 model.finishSkipped(item.id, out.tvName, out.text)
-                Dedup.SKIPPED
+                DedupRun(Dedup.SKIPPED)
             }
         }
     }
 
-    /** [castbridge.core.tv.MoveProof.byEdges]: the first and last 64 KiB of the TV's file, read by the phone over /stream/ Range, equal its own. Any error = false. */
-    private fun edgesMatch(app: Context, client: castbridge.core.tv.TvClient, uri: Uri, tvName: String, size: Long): Boolean = runCatching {
+    /**
+     * The phone's own proof, independent of what the TV says ([castbridge.core.tv.MoveProof.samplePlan]): up to 64 MiB it reads the WHOLE file of the TV (/stream/)
+     * and hashes it itself; above, the head, the tail and 8 blocks at positions drawn by a SecureRandom. Every range must come back as asked: 206 (or 200 for
+     * the whole file from 0), the start asked for, and the total size expected (a longer TV file fails). Any error = false.
+     */
+    private fun independentProof(app: Context, client: castbridge.core.tv.TvClient, uri: Uri, tvName: String, size: Long, sha: String): Boolean = runCatching {
         if (tvName.isEmpty()) return false
-        val (head, tail) = castbridge.core.tv.MoveProof.edges(size)
-        fun tvBytes(at: Pair<Long, Int>): ByteArray = client.openRange(tvName, at.first).input.use { readN(it, at.second) }
-        fun localBytes(at: Pair<Long, Int>): ByteArray = app.contentResolver.openFileDescriptor(uri, "r")!!.use { pfd ->
-            java.io.FileInputStream(pfd.fileDescriptor).use { s -> s.channel.position(at.first); readN(s, at.second) }
+        val plan = castbridge.core.tv.MoveProof.samplePlan(size, java.security.SecureRandom())
+        fun ranged(at: Long): castbridge.core.tv.TvClient.Ranged {
+            val r = client.openRange(tvName, at)
+            if (!((r.code == 206 || (r.code == 200 && at == 0L)) && r.start == at && r.total == size)) { r.input.close(); throw java.io.IOException("plage refusée") }
+            return r
         }
-        castbridge.core.tv.MoveProof.byEdges(size, size, localBytes(head), tvBytes(head), localBytes(tail), tvBytes(tail))
+        if (plan.size == 1 && plan[0].first == 0L && plan[0].second.toLong() == size)
+            return ranged(0).input.use { ContentHash.sha256(it, size) } == sha
+        val tvParts = plan.map { (at, n) -> ranged(at).input.use { readN(it, n) } }
+        val localParts = plan.map { (at, n) -> app.contentResolver.openFileDescriptor(uri, "r")!!.use { pfd ->
+            java.io.FileInputStream(pfd.fileDescriptor).use { s -> s.channel.position(at); readN(s, n) } } }
+        castbridge.core.tv.MoveProof.bySamples(plan, localParts, tvParts)
     }.getOrDefault(false)
 
     private fun readN(s: java.io.InputStream, n: Int): ByteArray {

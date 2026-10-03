@@ -55,19 +55,20 @@ l'adresse est connue) :
 Doublons **dans** la file : même fichier deux fois = un seul élément (règle R-09 inchangée) ; même contenu sous deux noms : l'élément suivant est
 haché (avec les éléments déjà envoyés de même taille, une seule fois, empreinte gardée avec la file) puis reconnu (`twinOf`), sans copie.
 
-## 3. Règle de suppression d'un DÉPLACEMENT sans copie (pour l'audit ; version après l'audit Opus, § 8)
+## 3. Règle finale de suppression d'un « Déplacer » (après les deux relectures Opus, §§ 8-9)
 
-`C/tv/MoveRequests.kt` `MoveProof.mayDeleteWithoutCopy(byContentHash, byEdges)` — l'original n'est proposé à la suppression **que** si TOUT est vrai :
-1. le téléphone a calculé lui-même l'empreinte de l'original **au moment de la décision** (jamais une empreinte gardée dans la file : `DedupDecision.mayReuseHash`) ;
-2. la TV a répondu `present` à `GET /api/have?…&fresh=1` pour un fichier **terminé** dont **cette exécution** de la TV a relu les octets (`fresh:true` ; une ligne du cache `.cbhash`, même signée, n'est jamais fraîche) ;
-3. tailles égales et > 0, SHA-256 égaux (`byContentHash`) ;
-4. le téléphone a lu **lui-même** les 64 premiers et 64 derniers Kio du fichier de la TV (`/stream/` en Range) et ils sont identiques aux siens (`byEdges`) ;
-5. « Annuler » n'a pas été demandé pendant ces contrôles (R-09) ;
-6. alors seulement `offerVerifiedMove` → `MoveHandler` : boîte système d'Android (MediaStore, Android 11+) **ou**, pour un document ou Android ≤ 10 (suppression directe), une
-   confirmation dans l'app : « Supprimer l'original de ce téléphone ? La TV en a une copie vérifiée. » (« Garder » ⇒ rien n'est supprimé).
-
-Tout le reste (un nom, une taille, « indexing », une empreinte en cache, un jumeau de la file, une TV ancienne, un profil enfant actif) n'est pas une preuve : l'original reste,
-le message le dit. Le déplacement normal (avec copie) garde son contrôle existant (`checkMoved`).
+L'original n'est proposé à la suppression que par l'un de ces deux chemins, puis une confirmation (boîte d'Android, ou celle de l'app pour une suppression directe) :
+1. **Avec copie** (`checkMoved`, y compris le repli d'un « Déplacer » en copie) : `MoveProof.afterSend` exige que **ce travail** ait envoyé chaque octet de 0 à la fin
+   et que la TV ait dit « done » (`ResumableUpload.sentWholeFile` → `byUpload`), ou un transfert rapide dont la TV a vérifié la racine avec tous les blocs envoyés par
+   ce passage (`TransferClient.verifiedWhole`) ; un « done » sans octet envoyé (même nom + même taille déjà sur la TV) **garde** l'original : « La TV a déjà un fichier
+   de même nom et de même taille : contenu non vérifié, l'original est conservé. »
+2. **Sans copie** (contenu déjà sur la TV) : empreinte locale recalculée à la décision ; `present` + `fresh` d'une relecture de la TV **commencée après la question** ;
+   tailles et SHA-256 égaux (`byContentHash`) ; **et** preuve indépendante lue par le téléphone : le fichier entier de la TV ≤ 64 Mio haché par le téléphone, sinon début,
+   fin et 8 blocs de 64 Kio à des positions tirées par `SecureRandom` (`samplePlan`/`bySamples`), chaque plage contrôlée (206, début demandé, taille totale exacte).
+3. Dans les deux cas : taille **et** date de modification de l'original inchangées depuis la vérification, revérifiées juste avant la suppression (`MoveProof.unchanged`,
+   `MoveRequest.stamp`) ; « Annuler » revérifié avant la proposition ; date illisible = original gardé.
+4. Même nom + même taille sur la TV mais contenu **différent** (relecture fraîche « absent ») : envoi sous un nom unique « nom (2).ext » (jamais d'écrasement), puis règle 1.
+   Contenu invérifiable (TV occupée, relecture trop longue) : rien n'est envoyé, l'original reste.
 
 ## 4. Preuves
 
@@ -114,7 +115,22 @@ ROUGE (ébauches : cache non signé accepté, `fresh` ignoré, bords ignorés, r
 `FilingTreeServerTest.aCopyAndPlayFileWaitingForItsReaderIsFiledAfterARestart` ; plus `aChangedModificationTimeOrContentInvalidatesTheHash`, qui comptait sur la
 repasse de 60 s : il pose maintenant la question du téléphone avant (la liste n'est relue que sur évènement, voulu).
 
+## 9. Seconde relecture Opus (commit 4)
+
+| # | Constat | Correctif |
+|---|---|---|
+| BLOQUANT | repli « Déplacer → copie » : `/api/part` « done » sans octet envoyé, puis `checkMoved` supprimait sur nom + taille | `MoveProof.afterSend` + `ResumableUpload.sentWholeFile` / `TransferClient.verifiedWhole` ; même nom + même taille : contenu vérifié par empreinte fraîche, sinon rien n'est envoyé (« Déplacer » garde l'original), contenu différent ⇒ nom unique |
+| (a) | `fresh` acceptait un hachage de ce processus vieux de plusieurs heures | chaque question `fresh` reçoit un numéro ; seule une relecture **commencée après** y répond ; preuve indépendante du téléphone (fichier entier ≤ 64 Mio, sinon bords + 8 blocs aléatoires) |
+| (b) | rien n'était revérifié entre la vérification et le clic | `MoveRequest.stamp` (date) ; taille et date recontrôlées juste avant la suppression, et avant la proposition |
+| mineurs | plages `/stream/` non contrôlées ; texte de confirmation sans nom ; fichier illisible relu toutes les 3 s | code 206 / début / taille totale exigés ; nom du fichier dans la confirmation ; attente croissante (30 s doublée, 1 h au plus) après un échec de lecture. Non fait, documenté : la ligne `.cbhash` n'est pas liée à l'identifiant du volume (elle l'est au dossier du volume et à la clé de la TV ; une même clé de TV déplacée d'un volume à l'autre garde des lignes valides tant que (chemin, taille, date) concordent — sans effet sur « Déplacer », qui exige une relecture fraîche) |
+
+ROUGE (ébauches : « done » vaut preuve, `verifiedWhole` vrai au begin, plan = bords seuls, date ignorée, pas de nom unique, fraîcheur sans numéro) : « 36 tests completed,
+9 failed », tous par assertion (`MoveFallbackServerTest` ×3, `DedupDecisionTest` ×4, `ContentIndexServerTest.aFreshQuestionAlwaysReReadsEvenAHashOfThisRun` et
+`contentChangedWithTheSameDateAndSizeIsCaughtByTheFreshHash`).
+
 ## 7. Vert
+
+Après la seconde relecture (commit 4) : une exécution complète → BUILD SUCCESSFUL, **3 085 tests, 0 échec**, 4 ignorés ; `test_routes.py` et `test_backup_rules.py` OK.
 
 Après l'audit (commit 3) : même commande, une exécution après la dernière modification → BUILD SUCCESSFUL, **3 076 tests, 0 échec**, 4 ignorés ; `test_routes.py` OK.
 

@@ -254,6 +254,16 @@ class ResumableUpload(
         data class Failed(val reason: String) : State()
     }
 
+    /** Offset of the first byte THIS job sent (-1 = it sent none: the TV said « done » for a file it already had). */
+    @Volatile var firstOffset = -1L; private set
+    /** This job's own bytes reached the last byte of the file. */
+    @Volatile var reachedEnd = false; private set
+    /**
+     * [MoveProof.byUpload]: every byte of the file was sent by THIS job (from 0 to the end) and the TV then said « done » for that size. A « done » for a file
+     * the TV already held (same name, same size, no byte sent) is NOT a proof: a « Déplacer » keeps the original (R-12, second audit).
+     */
+    fun sentWholeFile(done: Boolean): Boolean = MoveProof.byUpload(if (firstOffset == 0L && reachedEnd) total else 0L, total, tvCheckedSize = true, tvDone = done)
+
     /** Runs until done, cancelled or a non-retryable error. Returns the final state. */
     fun run(onState: (State) -> Unit): State {
         var sent = 0L
@@ -308,8 +318,10 @@ class ResumableUpload(
                 }
                 onState(State.Uploading(sent, total))
                 openAt(sent).use { src ->
+                    if (firstOffset < 0) firstOffset = sent
                     val r = tv.upload(name, sent, total, src, maxBytesPerSec, target, noFiling = noFiling) { n ->
                         sent += n; backoff = 500
+                        if (sent >= total) reachedEnd = true
                         onState(State.Uploading(sent, total))
                         if (cancelled()) throw java.io.InterruptedIOException("cancelled")
                     }

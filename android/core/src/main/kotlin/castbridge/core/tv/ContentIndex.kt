@@ -68,8 +68,11 @@ class ContentIndex(
     private val chunk: Int = 1 shl 20,
     private val maxEntries: Int = 100_000,
 ) {
-    /** [fresh] = computed by this process from the file's bytes (never true for a line read from `.cbhash`). */
-    data class Entry(val size: Long, val mtime: Long, val sha256: String, val fresh: Boolean = false)
+    /**
+     * [fresh] = computed by this process from the file's bytes (never true for a line read from `.cbhash`); [seq] = the question counter when that read STARTED:
+     * a `fresh` question is answered only by a read that started AFTER it (a hash of an hour ago is not a re-read).
+     */
+    data class Entry(val size: Long, val mtime: Long, val sha256: String, val fresh: Boolean = false, val seq: Long = 0)
 
     sealed interface Answer {
         /** No finished file of that size (or none of that content, every candidate being hashed). */
@@ -90,7 +93,9 @@ class ContentIndex(
 
     private val caches = HashMap<String, VolumeCache>()
     private val urgent = LinkedHashMap<String, HeldFile>()        // asked about by a phone: hashed first
-    private val needFresh = HashSet<String>()                     // asked with `fresh`: hashed again even if the cache knows it
+    private val needFresh = HashMap<String, Long>()               // asked with `fresh`: key -> question counter; only a read started after it answers
+    private val failures = HashMap<String, Pair<Int, Long>>()     // unreadable files: (count, not before) — growing backoff, never a hot loop
+    private var seq = 0L
     private val skipped = HashSet<String>()                       // over [maxEntries]: not hashed again by the background pass
     private val queue = ArrayDeque<HeldFile>()
     @Volatile private var listDirty = true
@@ -134,11 +139,14 @@ class ContentIndex(
         var unknown = 0
         for (c in cands) {
             val e = known(c)
-            if (e == null || (fresh && !e.fresh)) {
+            val k = key(c)
+            val asked = if (fresh) synchronized(this) { needFresh.getOrPut(k) { ++seq } } else 0L
+            if (e == null || (fresh && !(e.fresh && e.seq > asked))) {
                 unknown++
-                synchronized(this) { urgent[key(c)] = c; if (fresh) needFresh += key(c) }
+                synchronized(this) { urgent[k] = c }
                 continue
             }
+            if (fresh) synchronized(this) { needFresh.remove(k) }       // answered by a read made after this question; the next question asks again
             if (sha != null && e.sha256 == sha) return Answer.Present(c, size, e.sha256, e.fresh)
         }
         if (unknown > 0) wakeUp()
@@ -161,8 +169,11 @@ class ContentIndex(
 
     private fun wanted(f: HeldFile): Boolean {
         if (!fileOf(f).isFile) return false
-        val e = known(f) ?: return true
-        return synchronized(this) { key(f) in needFresh } && !e.fresh
+        if (synchronized(this) { failures[key(f)]?.let { clock() < it.second } } == true) return false      // backoff after a failed read
+        val e = known(f)
+        val asked = synchronized(this) { needFresh[key(f)] }
+        if (asked != null) return e == null || !(e.fresh && e.seq > asked)
+        return e == null
     }
 
     /**
@@ -180,12 +191,12 @@ class ContentIndex(
         val asked = synchronized(this) { urgent.values.toList() }
         for (f in asked) {
             if (wanted(f)) return f
-            synchronized(this) { urgent.remove(key(f)); needFresh.remove(key(f)) }
+            synchronized(this) { if (failures[key(f)]?.let { clock() < it.second } != true) urgent.remove(key(f)) }
         }
         val refill = synchronized(this) { val d = listDirty; listDirty = false; d && queue.isEmpty() }
         if (refill) {
             val all = runCatching { held(null) }.getOrDefault(emptyList())
-            val pending = all.filter { synchronized(this) { key(it) !in skipped } && known(it) == null && fileOf(it).isFile }
+            val pending = all.filter { synchronized(this) { key(it) !in skipped && failures[key(it)]?.let { f -> clock() < f.second } != true } && known(it) == null && fileOf(it).isFile }
             synchronized(this) { queue.addAll(pending.sortedBy { if (it.size >= 0) it.size else fileOf(it).length() }) }
         }
         while (true) {
@@ -195,6 +206,16 @@ class ContentIndex(
     }
 
     private fun hashOne(f: HeldFile): Boolean {
+        val ok = hashOnce(f)
+        synchronized(this) {
+            if (ok) failures.remove(key(f))
+            else { val n = (failures[key(f)]?.first ?: 0) + 1; failures[key(f)] = n to clock() + minOf(FAIL_BACKOFF_MS shl minOf(n - 1, 7), 3_600_000L) }
+        }
+        return ok
+    }
+
+    private fun hashOnce(f: HeldFile): Boolean {
+        val startSeq = synchronized(this) { ++seq }
         val file = fileOf(f)
         val size0 = file.length(); val mt0 = file.lastModified()
         val md = java.security.MessageDigest.getInstance("SHA-256")
@@ -221,12 +242,12 @@ class ContentIndex(
         if (off != size0 || !file.isFile || file.length() != size0 || file.lastModified() != mt0) return false
         val sha = ContentHash.hex(md.digest())
         synchronized(this) {
-            urgent.remove(key(f)); needFresh.remove(key(f))
+            urgent.remove(key(f))
             val c = cache(f.dir)
             if (c.map.size >= maxEntries && !c.map.containsKey(f.rel.lowercase())) {
                 skipped += key(f)                                  // full: kept out (never evicting, never hashing it again in the background)
             } else {
-                c.map[f.rel.lowercase()] = f.rel to Entry(size0, mt0, sha, fresh = true)
+                c.map[f.rel.lowercase()] = f.rel to Entry(size0, mt0, sha, fresh = true, seq = startSeq)
                 c.dirty = true; hashedSinceSave++
             }
         }
@@ -305,5 +326,7 @@ class ContentIndex(
         const val IDLE_SCAN_MS = 60_000L
         /** At most one `.cbhash` write per volume every 5 minutes while indexing (plus the end of a pass and a clean stop). */
         const val SAVE_EVERY_MS = 300_000L
+        /** First wait after a failed read (doubles at each failure, at most 1 h). */
+        const val FAIL_BACKOFF_MS = 30_000L
     }
 }

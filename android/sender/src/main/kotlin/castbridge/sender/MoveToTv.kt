@@ -38,6 +38,12 @@ fun MoveHandler() {
             title = { Text("Déplacement") }, text = { Text(n) })
     }
     fun proceed(r: UploadService.MoveRequest) {
+        // R-12 (second audit): just before the deletion, the original must still be the file that was checked (same size, same date); else it is kept
+        val now = fileStamp(ctx, r.uri)
+        if (!castbridge.core.tv.MoveProof.unchanged(r.size, r.stamp, now?.first ?: -1, now?.second ?: -1)) {
+            Toast.makeText(ctx, "« ${r.name} » : " + castbridge.core.tv.MoveProof.CHANGED_TEXT, Toast.LENGTH_LONG).show()
+            UploadService.moveHandled(); return
+        }
         when (val out = deleteFromPhone(ctx, r.uri)) {
             null -> { Toast.makeText(ctx, "« ${r.name} » déplacé vers la TV", Toast.LENGTH_LONG).show(); UploadService.moveHandled() }
             is DeleteNeedsConfirmation -> confirm.launch(IntentSenderRequest.Builder(out.sender).build())
@@ -53,13 +59,26 @@ fun MoveHandler() {
         AlertDialog(onDismissRequest = { ask = null; Toast.makeText(ctx, "« ${r.name} » reste aussi sur le téléphone", Toast.LENGTH_LONG).show(); UploadService.moveHandled() },
             confirmButton = { TextButton({ ask = null; proceed(r) }) { Text("Supprimer") } },
             dismissButton = { TextButton({ ask = null; Toast.makeText(ctx, "« ${r.name} » reste aussi sur le téléphone", Toast.LENGTH_LONG).show(); UploadService.moveHandled() }) { Text("Garder") } },
-            title = { Text("Déplacement") }, text = { Text("Supprimer l'original de ce téléphone ? La TV en a une copie vérifiée.") })
+            title = { Text("Déplacement") }, text = { Text("Supprimer l'original de « ${r.name} » de ce téléphone ? La TV en a une copie vérifiée.") })
     }
     LaunchedEffect(req) {
         val r = req ?: return@LaunchedEffect
         if (deletesWithoutSystemDialog(ctx, r.uri)) ask = r else proceed(r)
     }
 }
+
+/** (size, modification date in ms) of a phone file, from the provider (documents: COLUMN_LAST_MODIFIED; media: DATE_MODIFIED); date -1 if unknown; null if unreadable. */
+internal fun fileStamp(ctx: Context, uri: Uri): Pair<Long, Long>? = runCatching {
+    val size = ctx.contentResolver.openFileDescriptor(uri, "r")!!.use { it.statSize }
+    var date = -1L
+    ctx.contentResolver.query(uri, null, null, null, null)?.use { c ->
+        if (c.moveToFirst()) {
+            c.getColumnIndex(DocumentsContract.Document.COLUMN_LAST_MODIFIED).takeIf { it >= 0 && !c.isNull(it) }?.let { date = c.getLong(it) }
+            if (date <= 0) c.getColumnIndex(MediaStore.MediaColumns.DATE_MODIFIED).takeIf { it >= 0 && !c.isNull(it) }?.let { date = c.getLong(it) * 1000 }
+        }
+    }
+    size to date
+}.getOrNull()
 
 /** True when [deleteFromPhone] would delete [uri] directly (a document the picker let us write, Android 10 and older): the app must ask first. */
 private fun deletesWithoutSystemDialog(ctx: Context, uri: Uri): Boolean {

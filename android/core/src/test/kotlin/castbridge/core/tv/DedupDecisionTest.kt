@@ -147,6 +147,47 @@ class DedupDecisionTest {
         assertFalse(MoveProof.byContentHash(size, sha, size, null, tvComplete = true, tvFresh = true), "la parole de la TV sans hash")
     }
 
+    // relecture Opus de ff3cf199 : le repli en copie normale
+    @Test fun afterACopyTheOriginalGoesOnlyIfThisJobSentEveryByteOrWithTheContentProof() {
+        assertEquals(MoveProof.AfterSend.DELETE, MoveProof.afterSend(sentWhole = true, contentProof = false, tvComplete = true, tvSize = size, localSize = size))
+        assertEquals(MoveProof.AfterSend.DELETE, MoveProof.afterSend(sentWhole = false, contentProof = true, tvComplete = true, tvSize = size, localSize = size))
+        assertEquals(MoveProof.AfterSend.KEEP_SAME_NAME_UNVERIFIED, MoveProof.afterSend(false, false, true, size, size), "« done » sans octet envoyé : gardé")
+        assertEquals(MoveProof.AfterSend.KEEP_NOT_CONFIRMED, MoveProof.afterSend(true, false, false, size, size))
+        assertEquals(MoveProof.AfterSend.KEEP_NOT_CONFIRMED, MoveProof.afterSend(true, false, true, size + 1, size))
+        assertEquals("La TV a déjà un fichier de même nom et de même taille : contenu non vérifié, l'original est conservé.", MoveProof.SAME_NAME_UNVERIFIED_TEXT)
+        assertFalse(MoveProof.byUpload(0, size, tvCheckedSize = true, tvDone = true))
+    }
+
+    @Test fun thePhoneReadsTheWholeSmallFileAndRandomMiddleBlocksOfABigOne() {
+        assertEquals(listOf(0L to 1000), MoveProof.samplePlan(1000, java.security.SecureRandom()))
+        assertEquals(listOf(0L to (64 shl 20)), MoveProof.samplePlan(64L shl 20, java.security.SecureRandom()))
+        val big = 4L shl 30
+        val p1 = MoveProof.samplePlan(big, java.security.SecureRandom()); val p2 = MoveProof.samplePlan(big, java.security.SecureRandom())
+        assertEquals(10, p1.size, "début, fin et 8 blocs du milieu")
+        assertTrue(p1.contains(0L to MoveProof.EDGE) && p1.contains(big - MoveProof.EDGE to MoveProof.EDGE))
+        assertTrue(p1.all { (at, n) -> at >= 0 && at + n <= big && n == MoveProof.EDGE })
+        assertNotEquals(p1.drop(2).toSet(), p2.drop(2).toSet(), "positions tirées par le téléphone, imprévisibles pour la TV")
+        val a = ByteArray(4) { 1 }
+        assertTrue(MoveProof.bySamples(listOf(0L to 4), listOf(a), listOf(a.copyOf())))
+        assertFalse(MoveProof.bySamples(listOf(0L to 4), listOf(a), listOf(a.copyOf().also { it[2] = 5 })), "milieu différent")
+        assertFalse(MoveProof.bySamples(listOf(0L to 4), listOf(a), listOf(a.copyOf(3))), "lecture courte")
+        assertFalse(MoveProof.bySamples(emptyList(), emptyList(), emptyList()))
+    }
+
+    @Test fun justBeforeTheDeletionTheOriginalMustBeUnchanged() {
+        assertTrue(MoveProof.unchanged(size, 1_700_000_000_000, size, 1_700_000_000_000))
+        assertFalse(MoveProof.unchanged(size, 1_700_000_000_000, size, 1_700_000_005_000), "retouchée dans la Galerie après la vérification")
+        assertFalse(MoveProof.unchanged(size, 1_700_000_000_000, size + 1, 1_700_000_000_000))
+        assertFalse(MoveProof.unchanged(size, -1, size, -1), "date inconnue : gardé")
+    }
+
+    @Test fun aUniqueNameNeverReplacesAFileOfTheTv() {
+        assertEquals("photo.jpg", DedupDecision.uniqueName("photo.jpg") { false })
+        val taken = setOf("photo.jpg", "photo (2).jpg")
+        assertEquals("photo (3).jpg", DedupDecision.uniqueName("photo.jpg") { it in taken })
+        assertEquals("notes (2)", DedupDecision.uniqueName("notes") { it == "notes" })
+    }
+
     @Test fun streamingHashMatchesTheJdkAndCanBeCancelled() {
         val data = ByteArray(3_000_001) { (it * 31).toByte() }
         val expected = ContentHash.hex(java.security.MessageDigest.getInstance("SHA-256").digest(data))

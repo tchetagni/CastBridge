@@ -47,7 +47,8 @@ class UploadService : Service() {
                    val ordered: Boolean = false)
 
     /** A moved file that the TV now holds completely: the screen deletes it from the phone (with Android's confirmation). */
-    data class MoveRequest(val uri: Uri, val name: String, val size: Long)
+    /** [stamp] = modification date (ms) of the original when it was checked: the deletion re-checks size AND date just before ([MoveProof.unchanged]). */
+    data class MoveRequest(val uri: Uri, val name: String, val size: Long, val stamp: Long = -1)
 
     /** Thrown by [start] while another upload runs: nothing is started, nothing of the running upload is touched (R-09). */
     class Busy : IllegalStateException(BUSY_TEXT)
@@ -180,9 +181,14 @@ class UploadService : Service() {
         // « Transfert rapide » : plusieurs connexions en parallèle, fichier découpé en blocs (docs/TRANSFER.md). Jamais pendant « lire pendant l'envoi »
         // ni pour « Copier sur la TV et lire » d'une vidéo (job.ordered, R-08) : les blocs n'arrivent pas dans l'ordre et restent invisibles au lecteur de
         // la TV (.cbx) jusqu'à la fin ; une TV qui ne connaît pas le protocole (null) reçoit l'envoi classique.
+        // R-12 (second audit): what the original looked like BEFORE the copy (size, date): a « Déplacer » deletes only that very file
+        val stamp0 = if (job.move) fileStamp(this, uri) else null
+        sentWholeProof = false
         val fast = if (!progressiveNow && !job.ordered && FastTransfer.enabled(this)) runFast(uri, job, total, resolve, credential, onState) else null
         val result = fast ?: ResumableUpload(job.fileName, total, resolve, { off -> openAt(uri, off) }, { cancelled }, pin = job.pin,
-            target = job.target, onCheck = { _check.value = it }, credential = credential, noFiling = noFiling()).run(onState)
+            target = job.target, onCheck = { _check.value = it }, credential = credential, noFiling = noFiling()).let { ru ->
+                ru.run(onState).also { r -> sentWholeProof = ru.sentWholeFile(r == ResumableUpload.State.Done) }
+            }
         run {
             val ms = System.currentTimeMillis() - castStart
             val ok = result == ResumableUpload.State.Done
@@ -191,7 +197,7 @@ class UploadService : Service() {
             if (!ok && !cancelled) PhoneConnect.error("send", "upload", (result as? ResumableUpload.State.Failed)?.reason)
         }
         if (result == ResumableUpload.State.Done) castbridge.sender.agent.AgentAuto.completed(this, job.fileName)
-        if (result == ResumableUpload.State.Done && !cancelled) moveUri?.let { u -> checkMoved(job, u, resolve()) }
+        if (result == ResumableUpload.State.Done && !cancelled) moveUri?.let { u -> checkMoved(job, u, resolve(), stamp0) }
         if (result == ResumableUpload.State.Done) {
             if (started || !job.autoPlay) { finish(State.Done(job)); return }      // already playing (or the caller starts it)
             val base = resolve()
@@ -229,7 +235,7 @@ class UploadService : Service() {
                 // the TV's measured disk speed: said once, in French, when the disk (not the Wi-Fi) is what limits the copy
                 onDisk = { _, note -> if (note != null && _notice.value != note) _notice.value = note })
             return when (val r = tc.run()) {
-                TransferClient.Result.Done -> ResumableUpload.State.Done.also(onState)
+                TransferClient.Result.Done -> { sentWholeProof = tc.verifiedWhole; ResumableUpload.State.Done.also(onState) }
                 TransferClient.Result.Unsupported -> null
                 TransferClient.Result.Cancelled -> ResumableUpload.State.Failed("annulé").also(onState)
                 is TransferClient.Result.Failed -> ResumableUpload.State.Failed(r.reason).also(onState)
@@ -237,19 +243,23 @@ class UploadService : Service() {
         }
     }
 
+    /** Every byte of this upload was sent by this job and the TV confirmed it ([MoveProof.byUpload] / [MoveProof.byFastTransfer]). */
+    @Volatile private var sentWholeProof = false
+
     /**
-     * Move: never delete on faith. Ask the TV for its file list and require the complete file with exactly the local size;
-     * only then hand the deletion to the screen (Android shows its own "delete?" confirmation).
+     * Move: never delete on faith ([MoveProof.afterSend]). The original goes only if THIS job sent every byte and the TV confirmed (a « done » for a file the TV
+     * already had, same name and same size, is not a proof: the original is kept), the TV lists the finished file of that size, and the original has not changed
+     * since (size and date). Then the screen asks (MoveHandler: Android's dialog, or the app's own confirmation).
      */
-    private fun checkMoved(job: Job, uri: Uri, base: String?) {
-        val local = runCatching { contentResolver.openFileDescriptor(uri, "r")!!.use { it.statSize } }.getOrDefault(-1L)
-        val tvFile = base?.let { b ->
-            runCatching { castbridge.core.tv.TvInfo.parse(TvClient(b, job.pin).info()) }.getOrNull()
-                ?.files?.firstOrNull { it.name.equals(job.fileName, ignoreCase = true) }
-        }
+    private fun checkMoved(job: Job, uri: Uri, base: String?, stamp0: Pair<Long, Long>?) {
+        val now = fileStamp(this, uri)
+        val local = now?.first ?: -1L
+        val tvFile = base?.let { b -> runCatching { castbridge.core.tv.TvInfo.parse(TvClient(b, job.pin).info()) }.getOrNull()?.file(job.fileName) }
+        val verdict = castbridge.core.tv.MoveProof.afterSend(sentWholeProof, contentProof = false, tvComplete = tvFile?.complete == true, tvSize = tvFile?.size ?: -1, localSize = local)
+        val same = stamp0 != null && now != null && castbridge.core.tv.MoveProof.unchanged(stamp0.first, stamp0.second, now.first, now.second)
         // a cancelled move never asks for the deletion (R-09, audit 3)
-        if (castbridge.core.tv.QueueCancel.mayDeleteMoved(cancelled, local > 0 && tvFile != null && tvFile.complete && tvFile.size == local)) {
-            offerMove(MoveRequest(uri, job.fileName, local))
+        if (castbridge.core.tv.QueueCancel.mayDeleteMoved(cancelled, verdict == castbridge.core.tv.MoveProof.AfterSend.DELETE && same)) {
+            offerMove(MoveRequest(uri, tvFile?.name ?: job.fileName, local, now!!.second))
             runCatching {
                 val open = android.app.PendingIntent.getActivity(this, 2, Intent(this, MainActivity::class.java)
                     .addFlags(Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_SINGLE_TOP), android.app.PendingIntent.FLAG_IMMUTABLE)
@@ -257,7 +267,12 @@ class UploadService : Service() {
                     .setSmallIcon(R.drawable.ic_stat_castbridge).setContentTitle("« ${job.fileName} » est sur la TV")
                     .setContentText("Touchez pour le retirer du téléphone").setAutoCancel(true).setContentIntent(open).build())
             }
-        } else _moveNote.value = "« ${job.fileName} » est envoyé mais la TV n'a pas confirmé une copie complète : il reste sur le téléphone."
+        } else _moveNote.value = when {
+            cancelled -> null
+            verdict == castbridge.core.tv.MoveProof.AfterSend.KEEP_SAME_NAME_UNVERIFIED -> "« ${job.fileName} » : " + castbridge.core.tv.MoveProof.SAME_NAME_UNVERIFIED_TEXT
+            verdict == castbridge.core.tv.MoveProof.AfterSend.DELETE -> "« ${job.fileName} » : " + castbridge.core.tv.MoveProof.CHANGED_TEXT
+            else -> "« ${job.fileName} » est envoyé mais la TV n'a pas confirmé une copie complète : il reste sur le téléphone."
+        }
     }
 
     /**
