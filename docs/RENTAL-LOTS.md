@@ -141,6 +141,7 @@ Politique du propriétaire : la durée d'une location est **celle du bouquet** (
   2. **Comment la boutique du téléphone demande-t-elle une location ?** Authentification de la demande (TV appairée, licence, paiement), canal vers la TV (phone -> Bluetooth), idempotence d'un renouvellement (`period`), refus d'un lot libre (CC BY-SA, jamais louable).
   3. **Le plafond de 60 jours** : durée maximale d'une location servie par le serveur, à confirmer (le format admet 1 à 366 jours ; le catalogue fixe `rentalDays`, 30 jours par défaut) et son interaction avec le plafond d'usage et les locations simultanées.
   4. Où la licence et le poste sont-ils vérifiés (le serveur connaît le registre ; une licence générée par la console du téléphone n'y entre qu'à l'import du registre).
+- **Boutique** : voir `docs/STORE.md` pour la demande de location depuis la TV et le canal vers l'émetteur.
 
 ## 16. Cycle de vie de la clé d'installation de la TV (locations v2, 2026-10-02)
 

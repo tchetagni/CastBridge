@@ -16,6 +16,7 @@ serveur ──(signé, Internet du téléphone)──▶ téléphone (100 Mo max
 - **Lots autonomes et versionnés** : une TV absente pendant des semaines reçoit directement la **dernière** version de chaque lot (les versions intermédiaires ne sont jamais rejouées : la file garde une entrée par lot et la remplace).
 - **Aucune fonction n'est bloquée** parce que la TV est hors ligne : sans lot reçu, la TV utilise les données de démarrage livrées avec l'APK.
 - L'utilisateur voit toujours l'état en français : « Téléchargé sur le téléphone / En attente d'envoi à la TV (la TV n'est pas à portée) / Envoi en cours / Envoyé / À jour sur la TV / Refusé par la TV », avec l'âge des données et ce qui est en attente (`LotStatusText`).
+- **Boutique et demande de location** : le cadre des lots (ici) sert aussi au cœur de la Boutique, la vitrine des contenus en location. Voir `docs/STORE.md`.
 
 ## 2. Qu'est-ce qu'un lot
 
