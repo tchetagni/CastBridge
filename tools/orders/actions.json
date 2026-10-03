@@ -2,7 +2,7 @@
   "format": "castbridge-order-actions-v1",
   "note": "Liste fermée des actions d'ordres différés. Source de parité : le noyau Kotlin (PolicyActions) et le serveur Java (PolicyCatalog) sont testés contre ce fichier ; en ajouter une demande de mettre à jour les trois, la documentation (docs/ORDRES.md) et les tests.",
   "actions": ["license.activate", "license.suspend", "license.revoke", "license.extend", "revocation.add", "rights.refresh", "flag.set", "app.min_version", "update.channel", "catalog.available", "catalog.retire", "budget.set", "message.show", "message.clear"],
-  "flags": ["bt.tunnel", "learn.beta", "lots.autodownload", "quiz.beta", "telemetry.verbose", "ui.new-home"],
+  "flags": ["bt.tunnel", "learn.beta", "lots.autodownload", "quiz.beta", "telemetry.verbose", "ui.new-home", "store.enabled"],
   "channels": ["beta", "stable"],
   "budgets": {"lots_mb": [0, 100000], "quiz_daily": [0, 10000], "starter_mb": [0, 10000]},
   "levels": ["info", "notice"],

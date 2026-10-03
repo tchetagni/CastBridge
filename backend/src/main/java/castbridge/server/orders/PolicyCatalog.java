@@ -14,7 +14,7 @@ public final class PolicyCatalog {
 
     public static final Set<String> ACTIONS = Set.of("license.activate", "license.suspend", "license.revoke", "license.extend", "revocation.add", "rights.refresh",
             "flag.set", "app.min_version", "update.channel", "catalog.available", "catalog.retire", "budget.set", "message.show", "message.clear");
-    public static final Set<String> FLAGS = Set.of("learn.beta", "quiz.beta", "bt.tunnel", "lots.autodownload", "telemetry.verbose", "ui.new-home");
+    public static final Set<String> FLAGS = Set.of("learn.beta", "quiz.beta", "bt.tunnel", "lots.autodownload", "telemetry.verbose", "ui.new-home", "store.enabled");
     public static final Set<String> CHANNELS = Set.of("stable", "beta");
     public static final Map<String, long[]> BUDGETS = Map.of("lots_mb", new long[]{0, 100_000}, "starter_mb", new long[]{0, 10_000}, "quiz_daily", new long[]{0, 10_000});
     public static final Set<String> LEVELS = Set.of("info", "notice");

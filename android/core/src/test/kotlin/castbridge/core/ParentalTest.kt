@@ -206,6 +206,12 @@ class ParentalRulesTest {
         assertFalse(Category.LEARN in parsed.profiles[0].blocked); assertFalse(Category.NAVIGATION in parsed.profiles[0].blocked)
     }
 
+    @Test fun kidHomeKeepsTheStoreEvenWhenGamesAreBlocked() {
+        val all = listOf("Apprendre", "Boutique", "Administration", "Quiz")
+        assertEquals(listOf("Apprendre", "Boutique", "Quiz"), ParentalRules.kidHome(all, kid))
+        assertTrue("Boutique" in ParentalRules.kidHome(all, kid.copy(blocked = setOf(Category.GAMES))))
+    }
+
     @Test fun kidHomeKeepsLearningGamesAndTheParentalDoor() {
         val all = listOf("Bibliothèque", "Apprendre", "Quiz", "Échecs", "Téléchargements", "Télécommande", "Administration", "Connexion & réglages", "Options développeur", "Aide", "Contrôle parental")
         val shown = ParentalRules.kidHome(all, kid)

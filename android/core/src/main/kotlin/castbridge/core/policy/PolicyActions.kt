@@ -27,7 +27,7 @@ object PolicyActions {
     const val MESSAGE_CLEAR = "message.clear"
 
     /** Feature flags an order may flip. Closed too: nothing that guards security (signed updates, pairing, activation) is a flag. */
-    val FLAGS = setOf("learn.beta", "quiz.beta", "bt.tunnel", "lots.autodownload", "telemetry.verbose", "ui.new-home")
+    val FLAGS = setOf("learn.beta", "quiz.beta", "bt.tunnel", "lots.autodownload", "telemetry.verbose", "ui.new-home", "store.enabled")
     val CHANNELS = setOf("stable", "beta")
     val BUDGETS = mapOf("lots_mb" to 0L..100_000L, "starter_mb" to 0L..10_000L, "quiz_daily" to 0L..10_000L)
     val MESSAGE_LEVELS = setOf("info", "notice")
