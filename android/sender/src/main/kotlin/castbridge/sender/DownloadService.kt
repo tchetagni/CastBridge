@@ -95,16 +95,18 @@ class DownloadService : Service() {
     private fun sinkFor(job: Job): Sink {
         val prefs = getSharedPreferences("downloads", MODE_PRIVATE)
         val key = "${job.name}|${job.size}|${job.tree ?: "dl"}"          // not the TV address: it may change between attempts
-        job.tree?.let { tree -> return safSink(Uri.parse(tree), job.name, prefs, key) }
+        // R-13: the same category tree as on the TV (Films, Séries/Titre/Saison NN, Musique, Photos, Documents…), never a flat Download folder
+        val dir = runCatching { castbridge.core.tv.FilingPlan.phoneDir(job.name, job.size) }.getOrDefault(castbridge.core.tv.FilingPlan.ROOT)
+        job.tree?.let { tree -> return safSink(Uri.parse(tree), job.name, prefs, key, dir.removePrefix(castbridge.core.tv.FilingPlan.ROOT).trim('/')) }
         if (Build.VERSION.SDK_INT >= 29) {
             val known = prefs.getString(key, null)?.let(Uri::parse)?.takeIf { u -> runCatching { contentResolver.openFileDescriptor(u, "r")?.use { true } }.getOrNull() == true }
             val uri = known ?: contentResolver.insert(MediaStore.Downloads.EXTERNAL_CONTENT_URI, ContentValues().apply {
                 put(MediaStore.MediaColumns.DISPLAY_NAME, job.name)
-                put(MediaStore.MediaColumns.RELATIVE_PATH, Environment.DIRECTORY_DOWNLOADS + "/CastBridge")
+                put(MediaStore.MediaColumns.RELATIVE_PATH, Environment.DIRECTORY_DOWNLOADS + "/" + dir)
                 put(MediaStore.MediaColumns.IS_PENDING, 1)           // hidden from other apps until complete
             })?.also { prefs.edit().putString(key, it.toString()).apply() } ?: throw IOException("MediaStore refused")
             return object : Sink {
-                override val label = "Téléchargements/CastBridge/${job.name}"
+                override val label = "Téléchargements/$dir/${job.name}"
                 override fun length() = runCatching { contentResolver.openFileDescriptor(uri, "r")!!.use { it.statSize } }.getOrDefault(0)
                 override fun open(at: Long): OutputStream = positioned(contentResolver.openFileDescriptor(uri, "rw") ?: throw IOException("cannot open"), at)
                 override fun finish() {
@@ -114,7 +116,7 @@ class DownloadService : Service() {
             }
         }
         // API 26-28: the app's own Download folder (no storage permission needed).
-        val f = File(getExternalFilesDir(Environment.DIRECTORY_DOWNLOADS), "CastBridge/${job.name}").also { it.parentFile?.mkdirs() }
+        val f = File(getExternalFilesDir(Environment.DIRECTORY_DOWNLOADS), "$dir/${job.name}").also { it.parentFile?.mkdirs() }
         return object : Sink {
             override val label = f.absolutePath
             override fun length() = if (f.exists()) f.length() else 0
@@ -123,14 +125,17 @@ class DownloadService : Service() {
         }
     }
 
-    private fun safSink(tree: Uri, name: String, prefs: android.content.SharedPreferences, key: String): Sink {
+    private fun safSink(tree: Uri, name: String, prefs: android.content.SharedPreferences, key: String, sub: String): Sink {
         val known = prefs.getString(key, null)?.let(Uri::parse)?.takeIf { u -> runCatching { contentResolver.openFileDescriptor(u, "r")?.use { true } }.getOrNull() == true }
+        var where = ""
         val uri = known ?: run {
-            val parent = DocumentsContract.buildDocumentUriUsingTree(tree, DocumentsContract.getTreeDocumentId(tree))
+            val root = DocumentsContract.buildDocumentUriUsingTree(tree, DocumentsContract.getTreeDocumentId(tree))
+            // R-13: the category folders inside the chosen folder; any refusal of the provider keeps the file at the root of the chosen folder
+            val parent = runCatching { safDir(tree, root, sub) }.getOrNull()?.also { where = "$sub/" } ?: root
             DocumentsContract.createDocument(contentResolver, parent, "application/octet-stream", name)
         }?.also { prefs.edit().putString(key, it.toString()).apply() } ?: throw IOException("the folder refused the file")
         return object : Sink {
-            override val label = "dossier choisi/$name"
+            override val label = "dossier choisi/$where$name"
             override fun length() = runCatching { contentResolver.openFileDescriptor(uri, "r")!!.use { it.statSize } }.getOrDefault(0)
             override fun open(at: Long): OutputStream {
                 // "rw" + position when the provider allows it, else append ("wa"): both continue at the saved size.
@@ -139,6 +144,25 @@ class DownloadService : Service() {
             }
             override fun finish() { prefs.edit().remove(key).apply() }
         }
+    }
+
+    /** The folder [sub] ("Séries/Titre/Saison 01") under [root] of the picked [tree]: existing folders are reused (never a second one of the same name), missing ones created. */
+    private fun safDir(tree: Uri, root: Uri, sub: String): Uri? {
+        if (sub.isEmpty()) return null
+        var parent = root
+        for (seg in sub.split('/').filter { it.isNotEmpty() }) {
+            val parentId = DocumentsContract.getDocumentId(parent)
+            val children = DocumentsContract.buildChildDocumentsUriUsingTree(tree, parentId)
+            val found = contentResolver.query(children, arrayOf(DocumentsContract.Document.COLUMN_DOCUMENT_ID, DocumentsContract.Document.COLUMN_DISPLAY_NAME,
+                DocumentsContract.Document.COLUMN_MIME_TYPE), null, null, null)?.use { c ->
+                var id: String? = null
+                while (id == null && c.moveToNext()) if (c.getString(2) == DocumentsContract.Document.MIME_TYPE_DIR && c.getString(1).equals(seg, ignoreCase = true)) id = c.getString(0)
+                id
+            }
+            parent = found?.let { DocumentsContract.buildDocumentUriUsingTree(tree, it) }
+                ?: DocumentsContract.createDocument(contentResolver, parent, DocumentsContract.Document.MIME_TYPE_DIR, seg) ?: return null
+        }
+        return parent
     }
 
     private fun positioned(pfd: android.os.ParcelFileDescriptor, at: Long): OutputStream {

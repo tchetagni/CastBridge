@@ -393,6 +393,7 @@ private fun SettingsView(m: AssistantModel) {
     val ctx = LocalContext.current
     val s = AgentStore.settings
     var auto by remember { mutableStateOf(s.autoRename) }
+    var fileTree by remember { mutableStateOf(s.fileTree) }
     var ai by remember { mutableStateOf(s.aiEnabled) }
     var askAi by remember { mutableStateOf(false) }
     var proactive by remember { mutableStateOf(s.proactiveNotify) }
@@ -406,7 +407,9 @@ private fun SettingsView(m: AssistantModel) {
         if (granted) { proactive = true; s.proactiveNotify = true; AgentProactive.sync(ctx); noPerm = false } else { proactive = false; noPerm = true }
     }
     Column(Modifier.fillMaxSize().verticalScroll(rememberScrollState()).padding(16.dp), verticalArrangement = Arrangement.spacedBy(12.dp)) {
-        SettingSwitch("Ranger automatiquement les nouveaux envois", "Désactivé par défaut. Quand vous envoyez un fichier à la TV, il est renommé seulement si les règles sont sûres (séries, films, vidéos WhatsApp). Jamais de dossier, jamais de suppression. Chaque renommage est noté et annulable.", auto) { auto = it; s.autoRename = it }
+        // R-13: the category tree of new copies, ON by default (the owner expects Films/…, Séries/Titre/Saison… on the TV and its USB key)
+        SettingSwitch("Classer les nouveaux envois dans des dossiers", "Activé par défaut : chaque copie vers la TV (et sa clé USB) va dans Films, Séries/Titre/Saison, Musique, Photos/AAAA-MM ou Documents ; ce qui vient de la TV va dans Téléchargements/CastBridge, classé de même. Désactivez pour garder les nouveaux fichiers à la racine.", fileTree) { fileTree = it; s.fileTree = it }
+        SettingSwitch("Renommer automatiquement les nouveaux envois", "Désactivé par défaut. Quand vous envoyez un fichier à la TV, il est renommé dès le téléphone seulement si les règles sont sûres (séries, films, vidéos WhatsApp). Jamais de suppression. Chaque renommage est noté et annulable.", auto) { auto = it; s.autoRename = it }
         // what the option would do, without sending anything: a field to try a name
         OutlinedTextField(sample, { sample = it }, Modifier.fillMaxWidth(), label = { Text("Essayer un nom de fichier") }, singleLine = true,
             supportingText = {

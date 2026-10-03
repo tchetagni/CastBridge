@@ -147,9 +147,11 @@ class FilingServerTest {
         assertEquals(listOf("Applications/installer.apk", "pack.learn.zip"), allFiles(internalDir))
     }
 
-    @Test fun unknownNamesGoToATrierWithTheirOwnName() {
-        send("ma_video.mp4"); send("vacances.jpg"); send("facture.pdf")
-        assertEquals(setOf("Documents/facture.pdf", "Photos/vacances.jpg", "À trier/ma_video.mp4"), allFiles(internalDir).toSet())
+    // R-13 (docs/agent-reports/filing-tree.md): an unidentified VIDEO now goes to « Films » with its own name (it went to « À trier »: the owner saw no tree);
+    // « À trier » keeps what is truly unknown
+    @Test fun unknownNamesKeepTheirOwnNameAndVideosGoToFilms() {
+        send("ma_video.mp4"); send("vacances.jpg"); send("facture.pdf"); send("notes.xyz")
+        assertEquals(setOf("Documents/facture.pdf", "Photos/vacances.jpg", "Films/ma_video.mp4", "À trier/notes.xyz"), allFiles(internalDir).toSet())
     }
 
     @Test fun theSettingOffKeepsTheOldFlatBehaviour() {

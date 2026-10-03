@@ -93,4 +93,4 @@ FAT32/exFAT réelle (mtime à 2 s).
 
 ## 7. Vert
 
-(rempli après la suite complète, voir le rapport `filing-tree.md` § Vert : même exécution.)
+`gradle --offline :core:test :sender:compileDebugKotlin :receiver:compileDebugKotlin` (verrou `gradle-lock.sh`, une exécution après la dernière modification) → BUILD SUCCESSFUL : **3 067 tests, 0 échec**, 4 ignorés (préexistants) ; `DedupDecisionTest` 13/13, `ContentIndexServerTest` 6/6, `CopyDedupQueueTest` 4/4, `FilingPlanTest` 13/13, `FilingTreeServerTest` 7/7, `FilingServerTest` 17/17, `TrialRoutesTest` vert ; `python3 tools/tests/test_routes.py` → OK (routes.txt : + `/api/have`, + `/api/rental/usage` qui manquait déjà à HEAD).
