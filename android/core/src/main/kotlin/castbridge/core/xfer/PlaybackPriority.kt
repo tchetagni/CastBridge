@@ -35,6 +35,8 @@ data class PlaybackSignal(
     val playingVolumeId: String? = null,
     /** Seconds of comfort the player has in hand ([PlaybackHealth]); null = the player gives no measure (open-loop fallback). */
     val bufferSec: Double? = null,
+    /** R-16: 0 = picture fine, 1 = the picture froze or drops frames (the audio may run on), 2 = it lasts: libVLC is short of CPU (PlaybackHealth). */
+    val videoDistress: Int = 0,
 )
 
 /** One decision of the policy. Every field has its « TV at rest » value when [on] is false, so the receive paths behave exactly as before. */
@@ -58,6 +60,12 @@ data class PlaybackDecision(
     val statePersistMs: Long,
     /** `retryMs` of a 429 busy answer. */
     val busyRetryMs: Long,
+    /** R-16: the video is short of CPU: every copy thread (the one that feeds a growing playback too) goes to background priority and reads in small slices. */
+    val cpuRelief: Boolean = false,
+    /** R-16: largest single socket read while [cpuRelief] (bytes, 0 = no cap): fewer bytes per Wi-Fi softirq burst and per hash update. */
+    val readCapBytes: Int = 0,
+    /** R-16: short sleep after each slice while [cpuRelief] (ms, 0 = none). */
+    val sliceSleepMs: Long = 0,
 )
 
 /**
@@ -86,6 +94,11 @@ object PlaybackPriority {
     const val SYNC_DEFER_FACTOR = 4
     /** Final read-back while playing: 12 MB/s leaves the player its share of a USB 2 key (≈ 20-30 MB/s read) and keeps a 2 GB check under 3 min. */
     const val VERIFY_CAP_BPS = 12_000_000L
+    /** R-16: socket reads of at most 16 KiB and a 2 ms (4 ms when sustained) pause after each while the picture is in distress: less Wi-Fi softirq burst per slice. */
+    const val RELIEF_READ_BYTES = 16 * 1024
+    const val RELIEF_SLICE_SLEEP_MS = 2L
+    /** R-16: the final read-back (SHA-256 of the whole file) is paced to 4 MB/s while the picture is in distress: slowed, never skipped. */
+    const val RELIEF_VERIFY_BPS = 4_000_000L
     const val UNKNOWN_DISK_CAP_BPS = 3_000_000L
     const val MIN_CAP_BPS = 1_000_000L
     const val MAX_CAP_BPS = 6_000_000L
@@ -103,15 +116,20 @@ object PlaybackPriority {
         if (s.growing) reasons += "growing"
         val video = videoBps(s.fileBytes, s.durMs)
         if (s.growing && video > 0 && s.feedBps in 1 until video) reasons += "underrun-risk"
-        val spaced = rest.copy(on = true, reasons = reasons, progressEveryMs = PLAYING_PROGRESS_MS,
+        // R-16: the picture froze or drops frames (the audio may run on): the decoder is short of CPU, every copy thread helps, the feeding one included
+        val relief = s.videoDistress > 0
+        if (relief) reasons += if (s.videoDistress >= 2) "video-distress:sustained" else "video-distress"
+        var spaced = rest.copy(on = true, reasons = reasons, progressEveryMs = PLAYING_PROGRESS_MS,
             syncEveryBytes = normal.syncEveryBytes * SYNC_DEFER_FACTOR, statePersistMs = PLAYING_PERSIST_MS)
+        if (relief) spaced = spaced.copy(cpuRelief = true, readCapBytes = RELIEF_READ_BYTES, sliceSleepMs = if (s.videoDistress >= 2) RELIEF_SLICE_SLEEP_MS * 2 else RELIEF_SLICE_SLEEP_MS)
         if (feeds) return spaced.copy(reasons = reasons + "feeds-playback")
         reasons += "copy:background"
         // R-15: same disk as the player => paced disk; another disk => no disk pacing (CPU relief stays); unknown => R-06 values
         val same = PlaybackAwareCopyPolicy.sameVolume(s.playingVolumeId, targetVolumeId)
         reasons += when (same) { true -> "same-volume"; false -> "other-volume"; null -> "volume:unknown" }
         return spaced.copy(reasons = reasons, backgroundThreads = true, maxStreams = minOf(PLAYING_MAX_STREAMS, normal.maxStreams).coerceAtLeast(1),
-            receiveCapBps = PlaybackAwareCopyPolicy.receiveCap(s.writeBps, same), verifyReadBps = PlaybackAwareCopyPolicy.verifyCap(same),
+            receiveCapBps = PlaybackAwareCopyPolicy.receiveCap(s.writeBps, same),
+            verifyReadBps = PlaybackAwareCopyPolicy.verifyCap(same).let { v -> if (!relief) v else if (v <= 0) RELIEF_VERIFY_BPS else minOf(v, RELIEF_VERIFY_BPS) },
             syncEveryBytes = if (PlaybackAwareCopyPolicy.deferFsync(same)) spaced.syncEveryBytes else normal.syncEveryBytes, busyRetryMs = PLAYING_RETRY_MS)
     }
 
@@ -287,6 +305,9 @@ class PlaybackGovernor(
 
         private fun recheck() { val t = clock(); if (t - checked >= refreshMs) { checked = t; decision = forTransfer(name, volumeId); apply(decision) } }
 
+        /** R-16: the largest socket read the caller may issue now (small slices while the picture is in distress), [Int.MAX_VALUE] = no cap. */
+        fun readCap(): Int = if (decision.cpuRelief && decision.readCapBytes > 0) decision.readCapBytes else Int.MAX_VALUE
+
         fun onBytes(n: Int) {
             recheck()
             val governed = decision.backgroundThreads
@@ -300,11 +321,14 @@ class PlaybackGovernor(
                 else receivePacer.pace(n, if (decision.backgroundThreads) buffer.allowedBps(decision.receiveCapBps) else decision.receiveCapBps)
             if (slept >= MIN_SLOW_MS) lastPacedAt = clock()
             if (governed) buffer.passed()
+            // R-16: a short breath after each slice (the 4 cores are the decoder's before they are the copy's)
+            if (decision.cpuRelief && decision.sliceSleepMs > 0) { sleep(decision.sliceSleepMs); if (governed) lastPacedAt = clock() }
         }
 
         private fun apply(d: PlaybackDecision) {
-            if (d.backgroundThreads && !lowered) { runCatching { port.background() }; lowered = true }
-            else if (!d.backgroundThreads && lowered) { runCatching { port.normal() }; lowered = false }
+            val low = d.backgroundThreads || d.cpuRelief
+            if (low && !lowered) { runCatching { port.background() }; lowered = true }
+            else if (!low && lowered) { runCatching { port.normal() }; lowered = false }
         }
 
         override fun close() { if (lowered) { runCatching { port.normal() }; lowered = false } }

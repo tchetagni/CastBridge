@@ -91,7 +91,7 @@ class PartAssembler private constructor(
     private fun release(idx: Int) = synchronized(this) { busy.remove(idx) }
 
     /** A whole block in one request. [wireLen] is the body length; [gzip] means the body is a gzip stream of the block. */
-    fun writeBlock(idx: Int, sha: String, input: InputStream, wireLen: Long, gzip: Boolean, pace: (Int) -> Unit = {}): Block {
+    fun writeBlock(idx: Int, sha: String, input: InputStream, wireLen: Long, gzip: Boolean, pace: (Int) -> Unit = {}, readCap: () -> Int = { Int.MAX_VALUE }): Block {
         if (idx !in 0 until manifest.blocks) return Block.Bad("bad block index")
         if (!Hash.isHex64(sha)) return Block.Bad("bad hash")
         val len = manifest.length(idx)
@@ -107,7 +107,7 @@ class PartAssembler private constructor(
             var done = 0
             val pos0 = manifest.offset(idx)
             while (done < len) {
-                val r = try { src.read(buf, 0, minOf(buf.size, len - done)) } catch (e: IOException) { drain(counted); return if (gzip && e is java.util.zip.ZipException) Block.Bad("bad gzip") else Block.Interrupted(e) }
+                val r = try { src.read(buf, 0, minOf(buf.size, len - done, readCap().coerceAtLeast(1))) } catch (e: IOException) { drain(counted); return if (gzip && e is java.util.zip.ZipException) Block.Bad("bad gzip") else Block.Interrupted(e) }
                 if (r < 0) { return Block.Bad("short body") }
                 pace(r)
                 md.update(buf, 0, r)

@@ -27,7 +27,9 @@ interface Player {
 
 data class PlayerState(val state: String = "idle", val name: String? = null, val posMs: Long = 0, val durMs: Long = 0,
                        /** R-15: seconds of comfort of the player (PlaybackHealth), null = unknown (open-loop copy pacing). */
-                       val comfortSec: Double? = null)
+                       val comfortSec: Double? = null,
+                       /** R-16: 0/1/2, the picture froze or drops frames while the audio may run on (PlaybackHealth + VideoStallDetector). */
+                       val videoDistress: Int = 0)
 
 /**
  * CastBridge TV HTTP API (port 8765). Videos are uploaded whole, resumably, into one of the storage volumes of [volumes]
@@ -180,7 +182,7 @@ class ReceiverServer(
         val size = total ?: ps.name?.let { n -> findFinal(n)?.size } ?: 0L
         return castbridge.core.xfer.PlaybackSignal(ps.state, ps.name, growing = part != null, playheadMs = ps.posMs, durMs = ps.durMs, fileBytes = size,
             writeBps = transfers.stats.bytesPerSec(), feedBps = g?.let { meters[it]?.bytesPerSec() } ?: 0L, contiguousBytes = part?.size ?: 0L, copyBytes = transfers.stats.total(),
-            playingVolumeId = (ps.name?.let { findFinal(it) } ?: part)?.v?.id, bufferSec = ps.comfortSec)
+            playingVolumeId = (ps.name?.let { findFinal(it) } ?: part)?.v?.id, bufferSec = ps.comfortSec, videoDistress = ps.videoDistress)
     }
 
     /** The TV player changed state (started, paused, stopped): the policy is read again at once, off the caller's thread (it may run deferred fsyncs). */
@@ -864,7 +866,7 @@ class ReceiverServer(
                         try {
                             while (left > 0) {
                                 if (!volumes.alive(v)) throw DiskError(IOException("volume removed"))
-                                val r = input.read(buf, fill, minOf((buf.size - fill).toLong(), left).toInt())
+                                val r = input.read(buf, fill, minOf((buf.size - fill).toLong(), left, rx.readCap().toLong()).toInt())
                                 if (r < 0) break
                                 fill += r; left -= r
                                 meter.add(r.toLong())
@@ -996,7 +998,7 @@ class ReceiverServer(
             val a = sess.assembler
             val r = playback.receive(sess.manifest.name, v?.id).use { rx ->
                 p["slice"]?.let { k -> a.writeSlice(idx, k.toIntOrNull() ?: return bad("bad slice"), sha, s.inputStream, len) }
-                    ?: a.writeBlock(idx, sha, s.inputStream, len, s.headers["x-cb-enc"].equals("gzip", true), pace = rx::onBytes)
+                    ?: a.writeBlock(idx, sha, s.inputStream, len, s.headers["x-cb-enc"].equals("gzip", true), pace = rx::onBytes, readCap = rx::readCap)
             }
             return when (r) {
                 is castbridge.core.xfer.PartAssembler.Block.Ok -> {

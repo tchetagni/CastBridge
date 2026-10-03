@@ -282,7 +282,11 @@ class ProgressOverlay(private val act: Activity, parent: FrameLayout) {
         val pad = dp(24); setPadding(pad * 2, pad * 3, pad * 2, pad + dp(8))
         addView(title); addView(bar, LinearLayout.LayoutParams(-1, dp(4)).apply { topMargin = dp(10); bottomMargin = dp(8) }); addView(time)
     }
-    private val hide = Runnable { box.fadeTo(false, 400) }
+    private val hide = Runnable { box.fadeTo(false, 400); shown = false; onChange?.invoke() }
+
+    /** R-16: true while the bar is on screen (the copy badge steps aside so nothing overlaps the seek bar); [onChange] tells the badge. */
+    var shown = false; private set
+    var onChange: (() -> Unit)? = null
 
     init { parent.addView(box, FrameLayout.LayoutParams(-1, -2, Gravity.BOTTOM)) }
 
@@ -294,10 +298,11 @@ class ProgressOverlay(private val act: Activity, parent: FrameLayout) {
         time.text = LibraryLogic.clock(posMs) + (if (durMs > 0) "  /  ${LibraryLogic.clock(durMs)}   (-${LibraryLogic.clock(durMs - posMs)})" else "") +
             (if (extra.isNotEmpty()) "   ·   $extra" else "")
         box.fadeTo(true)
+        shown = true; onChange?.invoke()
         main.removeCallbacks(hide); main.postDelayed(hide, 4000)
     }
 
-    fun hideNow() { main.removeCallbacks(hide); box.animate().cancel(); box.visibility = View.GONE }
+    fun hideNow() { main.removeCallbacks(hide); box.animate().cancel(); box.visibility = View.GONE; shown = false; onChange?.invoke() }
 
     private fun dp(v: Int) = TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, v.toFloat(), act.resources.displayMetrics).toInt()
 }
