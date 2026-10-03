@@ -38,16 +38,19 @@ internal class ChunkClient(val host: String, val id: String, private val credent
     fun auth(): String? = castbridge.core.trust.TvCredential.headerLine(credential())
 
     /** Maps the TV's reply to an [Outcome]. */
-    fun outcome(r: HttpConn.Reply, bytes: Long): Outcome = when {
-        r.status == 200 -> if ("\"already\":true" in r.body) Outcome.Already else Outcome.Ok(bytes)
-        r.status == 422 -> Outcome.Corrupt("hash")
-        r.status == 429 -> Outcome.Busy(Regex("\"retryMs\":(\\d+)").find(r.body)?.groupValues?.get(1)?.toLongOrNull() ?: 200)
-        r.status == 404 -> Outcome.SessionLost
-        r.status == 401 || r.status == 403 -> Outcome.Failed("autorisation refusée par la TV (${r.status})", fatal = true)
-        r.status == 507 || r.status == 413 -> Outcome.Failed("la TV n'a plus de place (${r.status})", fatal = true)
-        r.status == 400 -> Outcome.Failed("requête refusée : ${r.body.take(120)}", fatal = true)
-        else -> Outcome.Failed("TV : ${r.status} ${r.body.take(80)}")
-    }
+    fun outcome(r: HttpConn.Reply, bytes: Long): Outcome = statusOutcome(r.status, r.body, bytes)
+}
+
+/** The one table that maps a status of the TV's `/api/transfer` to an [Outcome] (also used for a reply salvaged after a failed write, see [WriteFailureClassifier]). */
+internal fun statusOutcome(status: Int, body: String, bytes: Long): Outcome = when {
+    status == 200 -> if ("\"already\":true" in body) Outcome.Already else Outcome.Ok(bytes)
+    status == 422 -> Outcome.Corrupt("hash")
+    status == 429 -> Outcome.Busy(Regex("\"retryMs\":(\\d+)").find(body)?.groupValues?.get(1)?.toLongOrNull() ?: 200)
+    status == 404 -> Outcome.SessionLost
+    status == 401 || status == 403 -> Outcome.Failed("autorisation refusée par la TV ($status)", fatal = true)
+    status == 507 || status == 413 -> Outcome.Failed("la TV n'a plus de place ($status)", fatal = true)
+    status == 400 -> Outcome.Failed("requête refusée : ${body.take(120)}", fatal = true)
+    else -> Outcome.Failed("TV : $status ${body.take(80)}")
 }
 
 /**
@@ -115,7 +118,7 @@ open class WifiLane(
                 }
             }
         } catch (e: IOException) {
-            return if (ctx.cancelled()) Outcome.Cancelled else Outcome.Failed(e.message ?: "liaison coupée")
+            return if (ctx.cancelled()) Outcome.Cancelled else WriteFailureClassifier.classify(e, null)
         }
         val o = cc.outcome(r, len)
         if (o is Outcome.Ok) { sample(wire); this.wire.addAndGet(wire) }
@@ -176,7 +179,7 @@ class BluetoothLane(
                 c.request("PUT", "/api/transfer/chunk?id=$transferId&idx=$idx&slice=$k", host, headers, n.toLong()) { out ->
                     val bb = java.nio.ByteBuffer.wrap(buf, 0, n); while (bb.hasRemaining()) { if (ctx.cancelled()) throw IOException("cancelled"); out.write(bb); c.progress() }
                 }
-            } catch (e: IOException) { return if (ctx.cancelled()) Outcome.Cancelled else Outcome.Failed(e.message ?: "liaison coupée") }
+            } catch (e: IOException) { return if (ctx.cancelled()) Outcome.Cancelled else WriteFailureClassifier.classify(e, null) }
             last = cc.outcome(r, n.toLong())
             if (!r.keepAlive) { c.close(); conn = null }
             when (last) { is Outcome.Ok -> total += n; Outcome.Already -> return Outcome.Already; else -> return last }

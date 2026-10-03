@@ -45,9 +45,15 @@ class HttpConn(
             val head = StringBuilder("$method $path HTTP/1.1\r\nHost: $host\r\nConnection: keep-alive\r\nContent-Length: $bodyLen\r\n")
             headers.forEach { head.append(it).append("\r\n") }
             head.append("\r\n")
-            val bb = ByteBuffer.wrap(head.toString().toByteArray(Charsets.ISO_8859_1))
-            while (bb.hasRemaining()) c.write(bb)
-            body(c)
+            try {
+                val bb = ByteBuffer.wrap(head.toString().toByteArray(Charsets.ISO_8859_1))
+                while (bb.hasRemaining()) c.write(bb)
+                body(c)
+            } catch (e: IOException) {
+                // R-17: the TV may have answered (401/403/404/413/507...) and closed before the end of the body: its status is the real reason.
+                if (WriteFailureClassifier.isPeerClose(e)) salvageReply()?.let { dead = true; close(); return it }
+                throw e
+            }
             lastProgress = System.nanoTime()
             return readReply()
         } catch (e: IOException) { dead = true; close(); throw e }
@@ -58,11 +64,27 @@ class HttpConn(
     /** Called by body writers after each piece they push, so the watchdog sees progress. */
     fun progress() { lastProgress = System.nanoTime() }
 
-    private fun readReply(): Reply {
+    /** Bounded (1 s, 4 KiB) read of what the TV said before it closed; null = nothing readable. The connection is never reused after it. */
+    private fun salvageReply(): Reply? {
+        val sock = ch?.socket() ?: return null
+        return try {
+            val r = readReply(WriteFailureClassifier.SALVAGE_MAX_BYTES, System.nanoTime() + WriteFailureClassifier.SALVAGE_MAX_MS * 1_000_000, sock)
+            Reply(r.status, r.headers + ("connection" to "close"), r.body)
+        } catch (e: IOException) { null }
+    }
+
+    private fun readReply(bodyCap: Int = 1 shl 20, deadlineNs: Long = 0, sock: java.net.Socket? = null): Reply {
         val inp = input ?: throw IOException("closed")
+        fun tick() {
+            if (deadlineNs == 0L || sock == null) return
+            val rem = (deadlineNs - System.nanoTime()) / 1_000_000
+            if (rem <= 0) throw IOException("no reply")
+            sock.soTimeout = rem.toInt()
+        }
         fun line(): String {
             val sb = StringBuilder()
-            while (true) { val b = inp.read(); if (b < 0) throw IOException("connection closed"); if (b == '\n'.code) break; if (b != '\r'.code) sb.append(b.toChar()); if (sb.length > 16_384) throw IOException("header too long") }
+            while (true) {
+                tick(); val b = inp.read(); if (b < 0) throw IOException("connection closed"); if (b == '\n'.code) break; if (b != '\r'.code) sb.append(b.toChar()); if (sb.length > 16_384) throw IOException("header too long") }
             return sb.toString()
         }
         val status = line().split(' ').getOrNull(1)?.toIntOrNull() ?: throw IOException("bad reply")
@@ -70,7 +92,12 @@ class HttpConn(
         while (true) { val l = line(); if (l.isEmpty()) break; val i = l.indexOf(':'); if (i > 0) h[l.substring(0, i).trim().lowercase()] = l.substring(i + 1).trim() }
         val out = ByteArrayOutputStream()
         val len = h["content-length"]?.toLongOrNull()
-        if (len != null) { if (len > 1 shl 20) throw IOException("reply too large"); val buf = ByteArray(len.toInt()); var n = 0; while (n < buf.size) { val r = inp.read(buf, n, buf.size - n); if (r < 0) throw IOException("connection closed"); n += r }; out.write(buf) }
+        if (len != null) {
+            if (len > 1 shl 20 && deadlineNs == 0L) throw IOException("reply too large")
+            val buf = ByteArray(minOf(len, bodyCap.toLong()).toInt()); var n = 0
+            while (n < buf.size) { tick(); val r = inp.read(buf, n, buf.size - n); if (r < 0) { if (deadlineNs != 0L) break; throw IOException("connection closed") }; n += r }
+            out.write(buf, 0, n)
+        }
         else if (h["transfer-encoding"]?.contains("chunked", true) == true) {
             while (true) { val n = line().substringBefore(';').trim().toInt(16); if (n == 0) { line(); break }; val b = ByteArray(n); var k = 0; while (k < n) { val r = inp.read(b, k, n - k); if (r < 0) throw IOException("connection closed"); k += r }; out.write(b); line() }
         } else dead = true

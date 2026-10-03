@@ -23,7 +23,11 @@ class Scheduler(
     private val benchBaseMs: Long = 1500,
     /** The TV does not preallocate (FAT/exFAT): the slow lane takes from the front too (see [PlaybackPriority.headWindow]). */
     private val slowFromHead: Boolean = false,
+    /** R-17: the same transient reason this many times in a row on a lane, over [stuckSpanMs], with no progress anywhere = a visible failure (see [StuckDetector]). */
+    stuckRepeats: Int = StuckDetector.DEFAULT_REPEATS,
+    stuckSpanMs: Long = StuckDetector.DEFAULT_SPAN_MS,
 ) {
+    private val stuck = StuckDetector(stuckRepeats, stuckSpanMs)
     open class Listener {
         open fun progress(doneBytes: Long, total: Long) {}
         open fun waiting(reason: String) {}
@@ -123,7 +127,7 @@ class Scheduler(
             fun requeue() { if (!done.has(idx) && !stillRunning && idx !in pending) pending.addFirst(idx) }
             when (out) {
                 is Outcome.Ok, Outcome.Already -> {
-                    strikes[lane.id] = 0; benchCount[lane.id] = 0
+                    strikes[lane.id] = 0; benchCount[lane.id] = 0; stuck.onProgress()
                     if (out is Outcome.Ok) {
                         lane.sent.addAndGet(out.bytes)
                         val t = clock() - run.startedNs; avgNs[lane.id] = avgNs[lane.id]?.let { (it * 3 + t) / 4 } ?: t
@@ -147,6 +151,7 @@ class Scheduler(
                     else if (out.fatal) failure = out.reason
                     else {
                         requeue()
+                        if (stuck.onFailure(lane.id, out.reason, clock() / 1_000_000)) { failure = StuckDetector.message(out.reason); lock.notifyAll(); return }
                         val s = (strikes[lane.id] ?: 0) + 1; strikes[lane.id] = s
                         if (s >= strikesToBench) {
                             val n = (benchCount[lane.id] ?: 0) + 1; benchCount[lane.id] = n; strikes[lane.id] = 0

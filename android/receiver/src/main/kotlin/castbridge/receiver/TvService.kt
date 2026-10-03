@@ -283,6 +283,8 @@ class TvService : Service(), Device {
             receivePriority = ReceivePriority,
             // « déjà sur la TV ? » par contenu (R-12) : empreintes calculées en tâche de fond, à basse priorité, jamais pendant une lecture ou une copie
             contentIndexing = true,
+            // R-17 : une ligne INFO par requête refusée (route, statut, code ; jamais de code PIN, jeton ni corps) : `adb logcat -s CastBridgeTV` ou ssh logcat
+            onLog = { Log.i(TAG, it) },
             // clé propre à cette TV (stockage privé de l'app, jamais sur la clé USB) : signe les caches .cbhash ; un cache forgé ou venu d'ailleurs est ignoré
             contentIndexKey = runCatching { contentIndexKey() }.getOrNull(),
             // pas d'empreintes pendant un téléchargement ni un import USB (R-06, R-11 : bus USB et Wi-Fi partagés)
