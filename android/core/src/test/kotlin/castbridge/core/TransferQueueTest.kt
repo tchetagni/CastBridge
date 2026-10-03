@@ -30,7 +30,9 @@ class TransferQueueTest {
 
     @Test fun theSameFileIsNotQueuedTwiceWhileWaitingOrRunning() {
         val m = q(); val a = m.enqueue("u1", "a", 1, false)
-        assertEquals(a.id, m.enqueue("u1", "a", 1, true).id)
+        assertEquals(a.id, m.enqueue("u1", "a", 1, false).id)
+        // R-09 (audit) : la même entrée en DÉPLACEMENT est refusée avec sa raison, plus jamais confondue avec la copie
+        kotlin.test.assertFailsWith<castbridge.core.tv.QueueRefused> { m.enqueue("u1", "a", 1, true) }
         m.start(a.id); assertEquals(a.id, m.enqueue("u1", "a", 1, false).id)
         m.finish(a.id, true)
         assertTrue(m.enqueue("u1", "a", 1, false).id != a.id, "after it is done, it can be sent again")

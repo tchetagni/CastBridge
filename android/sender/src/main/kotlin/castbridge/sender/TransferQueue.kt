@@ -5,6 +5,7 @@ import android.content.Context
 import android.content.Intent
 import android.net.Uri
 import castbridge.core.lots.FileQueueStore
+import castbridge.core.tv.QueueCancel
 import castbridge.core.tv.QueueItem
 import castbridge.core.tv.QueueStatus
 import castbridge.core.tv.QueueTexts
@@ -41,7 +42,6 @@ object TransferQueue {
     /** Why the queue is not moving right now (another upload, Android refusing a background start), in French; null = it moves. */
     val note: StateFlow<String?> = _note
     @Volatile private var pumping = false
-    @Volatile private var cancelRunning = false
     /** The item whose upload this queue launched last: the upload states belong to it until the next launch. */
     @Volatile private var launchedId = -1L
     /** Set when Android refused to start the upload in the background: the queue waits for the app to come back to the front ([resume]). */
@@ -57,14 +57,18 @@ object TransferQueue {
     fun runningName(): String? = model.running()?.name
     /** True while the upload service states describe this item's upload. */
     fun owns(id: Long) = launchedId == id
+    /** The queue waits for the app to come back (Android refused a background start, or its time budget is used up). */
+    fun paused() = paused
 
-    /** Reads the saved queue once per process (files whose read permission was lost fail with their cause; a running one waits again). */
+    /**
+     * Reads the saved queue once per process (a running file waits again). Only one small file is read here; whether each queued file is still
+     * readable is checked by the runner, off the main thread, just before it is sent (a lost one fails with its cause).
+     */
     @Synchronized private fun ensure(ctx: Context) {
         if (loaded) return
         val app = ctx.applicationContext
         model = TransferQueueModel(store = FileQueueStore(File(app.filesDir, "transfer-queue.json")))
         loaded = true
-        for (q in model.items()) if (q.status == QueueStatus.WAITING && !readable(app, Uri.parse(q.uri))) model.lost(q.id)
         publish()
     }
 
@@ -77,9 +81,15 @@ object TransferQueue {
      */
     fun resume(ctx: Context) {
         val app = ctx.applicationContext
-        runCatching { ensure(app) }
         paused = false
-        if (model.busy() && !pumping) { model.items().firstOrNull { it.status == QueueStatus.WAITING }?.let { keepAlive(app, Uri.parse(it.uri)) }; pump(app) }
+        scope.launch(Dispatchers.IO) {                      // disk read off the main thread (audit, minor 7)
+            runCatching { ensure(app) }
+            if (model.busy() && !pumping) {
+                _note.value = null
+                withContext(Dispatchers.Main) { model.items().firstOrNull { it.status == QueueStatus.WAITING }?.let { keepAlive(app, Uri.parse(it.uri)) } }
+                pump(app)
+            }
+        }
     }
 
     /** What was queued, its place and the sentence for the user (« Ajouté à la file : n° 2 … » or « envoi en cours »). */
@@ -94,20 +104,25 @@ object TransferQueue {
             target: String? = null): Ticket {
         val app = ctx.applicationContext
         ensure(app)
-        val it = model.enqueue(uri.toString(), name, size, move, autoPlay, progressive, playOnTv, ordered, tvName, host, target)
+        // the trusted link: remember WHICH TV (its address, never a credential), so that a file is never sent to another TV after a reconnection
+        val linkTv = if (tvName == null) (TvLinkManager.state.value as? LinkUi.Connected)?.session?.tv?.address else null
+        // throws QueueRefused (French reason) when the same file is already queued for this TV with the other action
+        val it = model.enqueue(uri.toString(), name, size, move, autoPlay, progressive, playOnTv, ordered, tvName, host, target, linkTv)
         credential?.takeIf { c -> c.isNotEmpty() }?.let { c -> credentials[it.id] = c }
+        if (paused) { paused = false; _note.value = null }           // added from the app in front: the paused queue may go on (audit, minor 9)
         publish()
         keepAlive(app, uri)
         pump(app)
         return Ticket(it.id, model.position(it.id), model.admitted(it.id))
     }
 
+    /** « Annuler » ([QueueCancel]): a waiting file leaves; a running one not launched yet is marked (the runner never launches it); a launched one stops. */
     fun cancel(ctx: Context, id: Long) {
-        if (model.cancel(id)) {                       // the running one: stop the transfer, the runner records it
-            cancelRunning = true
-            // only the upload this queue launched (never another screen's upload the file is still waiting for)
-            if (launchedId == id) { UploadService.cancel(ctx); BtUploadService.cancel(ctx) }
-        }
+        val before = model.item(id)?.status ?: return
+        val launched = launchedId == id
+        model.cancel(id)
+        // only the upload this queue launched for THIS file (never another screen's upload the file is still waiting for)
+        if (QueueCancel.onCancel(before, launched) == QueueCancel.Action.STOP_UPLOAD) { UploadService.cancel(ctx); BtUploadService.cancel(ctx) }
         publish()
     }
 
@@ -152,7 +167,7 @@ object TransferQueue {
     private suspend fun waitForFreeTv(item: QueueItem): Boolean {
         while (UploadService.active() || BtUploadService.active()) {
             _note.value = QueueTexts.TV_BUSY
-            if (cancelRunning) { _note.value = null; model.finishCancelled(item.id); publish(); return false }
+            if (model.cancelAsked(item.id)) { _note.value = null; model.finishCancelled(item.id); publish(); return false }
             delay(1000)
         }
         _note.value = null
@@ -160,7 +175,8 @@ object TransferQueue {
     }
 
     private suspend fun runOne(app: Context, item: QueueItem) {
-        model.start(item.id); publish(); cancelRunning = false
+        if (!model.start(item.id)) { publish(); return }            // cancelled between next() and here: never started
+        publish()
         if (!waitForFreeTv(item)) return
         val uri = Uri.parse(item.uri)
         if (!readable(app, uri)) { model.lost(item.id); publish(); return }
@@ -172,6 +188,7 @@ object TransferQueue {
             // the trusted link: its session, waiting up to a minute for it to be (re)established
             val session = waitForTv()
             if (session == null) { model.finish(item.id, false, QueueTexts.NO_TV); publish(); return }
+            if (item.linkTv != null && session.tv.address != item.linkTv) { model.finish(item.id, false, QueueTexts.OTHER_TV); publish(); return }
             val base = session.base
             viaBt = base == null
             afterBase = base; afterCred = session.credential
@@ -193,17 +210,21 @@ object TransferQueue {
         }
         if (dedupe?.invoke() == true) { model.finish(item.id, true); _note.value = null; publish(); return }
         while (true) {
+            // « Annuler » landed before the launch: nothing leaves the phone
+            if (!QueueCancel.mayLaunch(model.cancelAsked(item.id))) { model.finishCancelled(item.id); publish(); return }
             val e = runCatching { launch() }.exceptionOrNull() ?: break
             when {
                 e is UploadService.Busy -> if (!waitForFreeTv(item)) return       // another screen started an upload meanwhile: it goes first, then this one
-                isBackgroundRefusal(e) -> { requeuePaused(item); return }
+                isBackgroundRefusal(e) -> { requeuePaused(item, QueueTexts.PAUSED_BACKGROUND); return }
                 else -> { model.finish(item.id, false, e.message ?: "L'envoi n'a pas pu démarrer"); publish(); return }
             }
         }
         launchedId = item.id
-        val outcome = watch(viaBt)
+        // « Annuler » landed between the launch and its record (cancel() could not know it was launched): stop it now
+        if (QueueCancel.afterLaunch(model.cancelAsked(item.id)) == QueueCancel.Action.STOP_UPLOAD) { UploadService.cancel(app); BtUploadService.cancel(app) }
+        val outcome = watch(viaBt, item.id)
         when {
-            cancelRunning -> model.finishCancelled(item.id)
+            model.cancelAsked(item.id) -> model.finishCancelled(item.id)
             outcome == null -> {
                 model.finish(item.id, true)
                 credentials.remove(item.id)
@@ -212,19 +233,23 @@ object TransferQueue {
                 val tvBase = afterBase
                 if (tvBase != null) runCatching { SeriesClassifying.afterSend(app, castbridge.core.tv.TvClient(tvBase, afterCred), held) }
             }
-            isBackgroundRefusal(Exception(outcome)) -> { requeuePaused(item); return }
+            outcome.startsWith(QueueTexts.TIME_LIMIT) -> { requeuePaused(item, QueueTexts.PAUSED_TIME_LIMIT); return }
+            isBackgroundRefusal(Exception(outcome)) -> { requeuePaused(item, QueueTexts.PAUSED_BACKGROUND); return }
             else -> model.finish(item.id, false, outcome)
         }
         publish()
     }
 
     /** Android refused the upload service in the background: the file waits, the queue resumes when CastBridge is opened (said in French). */
-    private fun requeuePaused(item: QueueItem) {
+    private fun requeuePaused(item: QueueItem, why: String) {
         model.release(item.id)
         paused = true
-        _note.value = "En pause : Android bloque les envois en arrière-plan. Ouvrez CastBridge pour continuer la file."
+        _note.value = why
         publish()
     }
+
+    /** Pauses the queue with [why] (the running file, if any, ends by itself; the next one waits for the app). */
+    internal fun pauseWith(why: String) { paused = true; _note.value = why; publish() }
 
     /** The TV link, waiting up to a minute for it to be (re)established. */
     private suspend fun waitForTv(): castbridge.core.trust.LinkSession? {
@@ -236,7 +261,7 @@ object TransferQueue {
     }
 
     /** Null when the file arrived, else the reason. Waits for the service to start (90 s at most), then for it to end. */
-    private suspend fun watch(viaBt: Boolean): String? {
+    private suspend fun watch(viaBt: Boolean, id: Long): String? {
         var started = false; var waited = 0
         while (true) {
             delay(500)
@@ -245,7 +270,7 @@ object TransferQueue {
                     is ResumableUpload.State.Done -> return null
                     is ResumableUpload.State.Failed -> return s.reason
                     is ResumableUpload.State.Uploading, is ResumableUpload.State.Waiting -> started = true
-                    null -> if (started) return if (cancelRunning) null else "Envoi interrompu"
+                    null -> if (started) return if (model.cancelAsked(id)) null else "Envoi interrompu"
                 }
                 if (!started && BtUploadService.active()) started = true
             } else {
@@ -253,7 +278,7 @@ object TransferQueue {
                     is UploadService.State.Done -> return null
                     is UploadService.State.Failed -> return s.reason
                     is UploadService.State.Uploading, is UploadService.State.Waiting -> started = true
-                    UploadService.State.Idle -> if (started && !UploadService.active()) return if (cancelRunning) null else "Envoi interrompu"
+                    UploadService.State.Idle -> if (started && !UploadService.active()) return if (model.cancelAsked(id)) null else "Envoi interrompu"
                 }
                 if (!started && UploadService.active()) started = true
             }
@@ -261,3 +286,6 @@ object TransferQueue {
         }
     }
 }
+
+/** Android's time budget for background transfers is used up ([TransferQueueService.onTimeout]): the queue pauses with that cause. */
+internal fun TransferQueue.pauseForTimeLimit() = pauseWith(castbridge.core.tv.QueueTexts.PAUSED_TIME_LIMIT)

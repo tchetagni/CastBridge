@@ -24,7 +24,14 @@ data class QueueItem(
     val enqueuedAt: Long = 0,
     /** « Réessayer » count. */
     val attempts: Int = 0,
+    /** Trusted link: the address of the TV the file was meant for (null = whichever TV the link reaches). Never a credential. */
+    val linkTv: String? = null,
+    /** « Annuler » asked while it runs: the runner must not launch it / must stop it ([QueueCancel]). Not saved. */
+    val cancelAsked: Boolean = false,
 )
+
+/** An add the queue refuses, with the reason in French (the same file already queued with the other action). */
+class QueueRefused(message: String) : IllegalStateException(message)
 
 enum class QueueStatus { WAITING, RUNNING, DONE, FAILED, CANCELLED }
 
@@ -36,6 +43,14 @@ object QueueTexts {
     const val NO_CREDENTIAL = "Code de la TV inconnu : reconnectez la TV dans CastBridge, puis touchez « Réessayer »."
     const val ALREADY_THERE = "Déjà sur la TV : non recopié"
     const val RESTORED = "Reprise après le redémarrage de CastBridge"
+    /** Android refused to start the upload while CastBridge was in the background. */
+    const val PAUSED_BACKGROUND = "En pause : Android bloque les envois quand CastBridge est en arrière-plan. Ouvrez CastBridge pour continuer la file."
+    /** Android's time budget for background transfers (dataSync, Android 15) is used up. */
+    const val TIME_LIMIT = "Android a limité les envois en arrière-plan (limite de durée)"
+    const val PAUSED_TIME_LIMIT = "En pause : $TIME_LIMIT. Ouvrez CastBridge pour continuer la file."
+    const val OTHER_TV = "La TV connectée n'est pas celle de cet envoi : reconnectez la bonne TV, puis touchez « Réessayer »."
+    fun alreadyQueued(name: String, asMove: Boolean) =
+        "« $name » est déjà dans la file en ${if (asMove) "déplacement" else "copie"} : retirez-le d'abord de la file (« Annuler »)."
 }
 
 /**
@@ -92,8 +107,11 @@ class TransferQueueModel(private val keepFinished: Int = 12, private val now: ()
 
     @Synchronized fun enqueue(uri: String, name: String, size: Long, move: Boolean, autoPlay: Boolean = false, progressive: Boolean = false,
                               playOnTv: Boolean = false, ordered: Boolean = false, tvName: String? = null, host: String? = null,
-                              target: String? = null): QueueItem {
-        val same = list.indexOfFirst { it.uri == uri && (it.status == QueueStatus.WAITING || it.status == QueueStatus.RUNNING) }
+                              target: String? = null, linkTv: String? = null): QueueItem {
+        // the same file to the SAME TV (name, address, trusted TV): never the item of another TV
+        val same = list.indexOfFirst { it.uri == uri && it.tvName == tvName && it.host == host && it.linkTv == linkTv &&
+            (it.status == QueueStatus.WAITING || it.status == QueueStatus.RUNNING) }
+        if (same >= 0 && list[same].move != move) throw QueueRefused(QueueTexts.alreadyQueued(list[same].name, list[same].move))
         if (same >= 0) {
             // « Copier et lire » of a file already waiting to be copied: it becomes the file someone waits to watch (it moves up, in order)
             val old = list[same]
@@ -101,7 +119,7 @@ class TransferQueueModel(private val keepFinished: Int = 12, private val now: ()
             return list[same]
         }
         val it = QueueItem(++seq, uri, name, size, move, autoPlay, progressive, playOnTv = playOnTv, ordered = ordered, tvName = tvName, host = host,
-            target = target, enqueuedAt = now())
+            target = target, enqueuedAt = now(), linkTv = linkTv)
         list += it
         save()
         return it
@@ -114,7 +132,14 @@ class TransferQueueModel(private val keepFinished: Int = 12, private val now: ()
     @Synchronized fun admitted(id: Long): String = QueueRules.admitted(list, id)
     @Synchronized fun item(id: Long): QueueItem? = list.firstOrNull { it.id == id }
 
-    @Synchronized fun start(id: Long) { update(id) { it.copy(status = QueueStatus.RUNNING, error = null) }; save() }
+    /** Marks the file running; false when it no longer waits (cancelled between [next] and here): the runner then skips it. */
+    @Synchronized fun start(id: Long): Boolean {
+        if (list.firstOrNull { it.id == id }?.status != QueueStatus.WAITING) return false
+        update(id) { it.copy(status = QueueStatus.RUNNING, error = null, cancelAsked = false) }; save(); return true
+    }
+
+    /** « Annuler » was asked for this running file. */
+    @Synchronized fun cancelAsked(id: Long): Boolean = list.firstOrNull { it.id == id }?.let { it.status == QueueStatus.RUNNING && it.cancelAsked } == true
 
     @Synchronized fun finish(id: Long, ok: Boolean, error: String? = null) {
         update(id) { it.copy(status = if (ok) QueueStatus.DONE else QueueStatus.FAILED, error = if (ok) null else error ?: "Échec de l'envoi") }
@@ -143,12 +168,12 @@ class TransferQueueModel(private val keepFinished: Int = 12, private val now: ()
         val it = list.firstOrNull { x -> x.id == id } ?: return false
         return when (it.status) {
             QueueStatus.WAITING -> { update(id) { x -> x.copy(status = QueueStatus.CANCELLED) }; trim(); save(); false }
-            QueueStatus.RUNNING -> true
+            QueueStatus.RUNNING -> { update(id) { x -> x.copy(cancelAsked = true) }; true }
             else -> false
         }
     }
 
-    @Synchronized fun finishCancelled(id: Long) { update(id) { it.copy(status = QueueStatus.CANCELLED) }; trim(); save() }
+    @Synchronized fun finishCancelled(id: Long) { update(id) { it.copy(status = QueueStatus.CANCELLED, cancelAsked = false) }; trim(); save() }
 
     @Synchronized fun cancelWaiting(): Int {
         var n = 0
@@ -170,7 +195,7 @@ class TransferQueueModel(private val keepFinished: Int = 12, private val now: ()
     @Synchronized fun encode(): String = JsonLite.write(mapOf("v" to 1, "seq" to seq, "items" to list.map { i ->
         mapOf("id" to i.id, "uri" to i.uri, "name" to i.name, "size" to i.size, "move" to i.move, "autoPlay" to i.autoPlay, "progressive" to i.progressive,
             "status" to i.status.name, "error" to i.error, "playOnTv" to i.playOnTv, "ordered" to i.ordered, "tvName" to i.tvName, "host" to i.host,
-            "target" to i.target, "enqueuedAt" to i.enqueuedAt, "attempts" to i.attempts)
+            "target" to i.target, "enqueuedAt" to i.enqueuedAt, "attempts" to i.attempts, "linkTv" to i.linkTv)
     }))
 
     init { store?.let { s -> runCatching { s.load()?.let(::decodeInto) }.onFailure { list.clear(); seq = 0 } } }
@@ -184,7 +209,8 @@ class TransferQueueModel(private val keepFinished: Int = 12, private val now: ()
             QueueItem(m.long("id") ?: return@mapNotNull null, m.str("uri") ?: return@mapNotNull null, m.str("name") ?: "fichier", m.long("size") ?: 0,
                 m.bool("move") ?: false, m.bool("autoPlay") ?: false, m.bool("progressive") ?: false,
                 if (st == QueueStatus.RUNNING) QueueStatus.WAITING else st, m.str("error"), playOnTv = false, ordered = m.bool("ordered") ?: false,
-                tvName = m.str("tvName"), host = m.str("host"), target = m.str("target"), enqueuedAt = m.long("enqueuedAt") ?: 0, attempts = (m.long("attempts") ?: 0).toInt())
+                tvName = m.str("tvName"), host = m.str("host"), target = m.str("target"), enqueuedAt = m.long("enqueuedAt") ?: 0, attempts = (m.long("attempts") ?: 0).toInt(),
+                linkTv = m.str("linkTv"))
         }
         list.clear(); list += read
         seq = maxOf(o.long("seq") ?: 0, read.maxOfOrNull { it.id } ?: 0)

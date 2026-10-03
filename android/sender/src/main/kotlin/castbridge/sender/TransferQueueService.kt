@@ -34,23 +34,30 @@ class TransferQueueService : Service() {
     override fun onStartCommand(intent: Intent?, flags: Int, startId: Int): Int {
         lastStartId = startId
         if (!startForegroundNow()) { stopSelfResult(startId); return START_NOT_STICKY }
-        // restarted by Android after the process died (null intent): read the saved queue back and go on
-        if (intent == null) TransferQueue.resume(this)
+        // restarted by Android after the process died (null intent): read the saved queue back and go on (unless it was paused: then it stops)
+        if (intent == null && !TransferQueue.paused()) TransferQueue.resume(this)
         if (watcher?.isActive != true) {
             watcher = scope.launch {
                 while (true) {
                     delay(2_000)
-                    while (TransferQueue.busy()) {
+                    // a paused queue (Android refused, or its time budget is used up) does not hold the foreground: resumed when the app is opened
+                    while (TransferQueue.busy() && !TransferQueue.paused()) {
                         runCatching { getSystemService(NotificationManager::class.java)?.notify(NOTIF, notification()) }
                         delay(2_000)
                     }
                     // ends only when no file was announced since the last look (stopSelfResult ignores an older start id); else keep watching
                     val id = lastStartId
-                    if (!TransferQueue.busy() && stopSelfResult(id)) break
+                    if ((!TransferQueue.busy() || TransferQueue.paused()) && stopSelfResult(id)) break
                 }
             }
         }
         return START_STICKY
+    }
+
+    /** Android 15: the dataSync time budget is used up: pause the queue with that cause (not the background-start text) and stop. */
+    override fun onTimeout(startId: Int, fgsType: Int) {
+        TransferQueue.pauseForTimeLimit()
+        stopSelf()
     }
 
     override fun onDestroy() { scope.cancel(); super.onDestroy() }

@@ -174,10 +174,12 @@ object CastSession {
         val route = CopyRoute.decide(CopyRoute.Facts(action, item.castSource, layout, fastEnabled = castbridge.sender.FastTransfer.enabled(ctx)))
         android.util.Log.i("CastSession", "copy ${item.name}: ${route.transport} (${route.why})")
         val plays = CastPlan.playsOnTv(action, item.castSource)
-        val ticket = withContext(Dispatchers.Main) {
-            castbridge.sender.TransferQueue.add(ctx, item.uri, item.name, size, move, playOnTv = plays, ordered = route.transport == CopyTransport.ORDERED,
-                tvName = target.tv.name, credential = target.pin)
-        }
+        val ticket = try {
+            withContext(Dispatchers.Main) {
+                castbridge.sender.TransferQueue.add(ctx, item.uri, item.name, size, move, playOnTv = plays, ordered = route.transport == CopyTransport.ORDERED,
+                    tvName = target.tv.name, credential = target.pin)
+            }
+        } catch (e: castbridge.core.tv.QueueRefused) { throw CastFailure(e.message ?: "Déjà dans la file d'attente") }
         if (!plays) {
             _notices.tryEmit(if (ticket.queued) "${ticket.text} (« ${item.name} »)."
                 else if (move) "Déplacement de « ${item.name} » vers ${target.name} : suivez l'envoi dans la notification."
