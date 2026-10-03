@@ -157,6 +157,14 @@ data class LicenseState(val active: List<ContractSummary> = emptyList(), val hou
 object PilotRules {
     private const val DAY = RentalLines.DAY_MS
     private const val MAX_REISSUES = 3
+    /**
+     * The reissue is CLOSED in the first tranche (audit B1): the engine groups lines by (product, period) without looking at the envelope and the rental key does not depend on the
+     * installation, so a reissue imported on top of the original activation gives the end twice and the budget back (pinned by a test on [RentalEngine.contracts]); the `install=` line of the
+     * device request is not authenticated either. INTERNAL (invisible outside this module) and never read from `pilot.json`: only tests flip it. Tranche 2 opens it with a proof of
+     * installation (W5 § 3.4 a), or by issuing a NEW period counted in the 3 active contracts with the old one marked ended, plus the usage-meter rules (I1) and `checkChosen` mode (I2).
+     */
+    internal var allowReissue = false
+    private const val REISSUE_CLOSED = "Réémission indisponible pendant le pilote : la preuve d'installation n'est pas encore en place ; le contrat d'origine reste valable ; contactez le propriétaire"
     private fun refuse(msg: String): Nothing = throw PilotRefusal(msg)
     private inline fun <T> rules(block: () -> T): Result<T> = try { Result.success(block()) } catch (e: PilotRefusal) { Result.failure(e) }
     private fun day(ms: Long) = PilotParams.dateOf(ms).format(DateTimeFormatter.ofPattern("dd/MM"))
@@ -187,12 +195,18 @@ object PilotRules {
         }
     }
 
+    /** Why [b] is a Langues / free bundle by its TYPE, its id PREFIX or the `freeBundles` setting (French), or null. Shared with [RentalDurations.checkChosen] (defence in depth). */
+    internal fun languagesRefusal(b: Bundle, params: PilotParams): String? = when {
+        b.type.trim().equals("langues", ignoreCase = true) || b.id.lowercase().startsWith("langues") -> "« ${name(b)} » est un bouquet de Langues (contenu libre, CC BY-SA) : il ne se loue jamais"
+        b.id in params.freeBundles -> "« ${name(b)} » est un bouquet libre (réglage freeBundles) : il reste libre et ne se loue jamais"
+        else -> null
+    }
+
     /** The bundle must exist, hold lots, and every lot must be RESERVED: a FREE lot (Langues, CC BY-SA) or a lot of unknown family is NEVER rented (fail closed). Returns the product id. */
     private fun bundleProduct(bundleId: String, catalog: BundleCatalog, families: LotFamilies, params: PilotParams): Pair<Bundle, String> {
         val b = catalog.find(bundleId) ?: refuse("bouquet inconnu : $bundleId")
         // Langues is NEVER rented, whatever LotFamilies says (a caller that derives « reserved = all - free » from a wrong free list would open it): by type, by prefix, by the `freeBundles` setting
-        if (b.type.trim().equals("langues", ignoreCase = true) || b.id.lowercase().startsWith("langues")) refuse("« ${name(b)} » est un bouquet de Langues (contenu libre, CC BY-SA) : il ne se loue jamais")
-        if (b.id in params.freeBundles) refuse("« ${name(b)} » est un bouquet libre (réglage freeBundles) : il reste libre et ne se loue jamais")
+        languagesRefusal(b, params)?.let { refuse(it) }
         if (b.lots.isEmpty()) refuse("« ${name(b)} » ne contient aucun lot : location refusée")
         for (k in b.lots.sorted()) when (LotNames.parseKey(k)?.let { families.of(it) }) {
             LotFamily.RESERVED -> {}
@@ -208,7 +222,7 @@ object PilotRules {
     }
 
     private fun quota(hours: Int, state: LicenseState, p: PilotParams) {
-        if (p.weeklyQuotaHours > 0 && state.hoursIssuedLast7d + hours > p.weeklyQuotaHours)
+        if (p.weeklyQuotaHours > 0 && state.hoursIssuedLast7d.toLong() + hours > p.weeklyQuotaHours)
             refuse("Quota atteint : ${p.weeklyQuotaHours} heures d'utilisation sur 168 heures glissantes par licence, il en reste ${maxOf(0, p.weeklyQuotaHours - state.hoursIssuedLast7d)}")
     }
 
@@ -270,12 +284,13 @@ object PilotRules {
         when (choice) {
             is Choice.Hours -> {
                 val cap = hoursCap(params); val capMin = cap * 60
-                if (choice.h < 1) refuse("Une prolongation compte au moins 1 heure d'utilisation")
+                if (choice.h !in 1..cap) refuse("Une prolongation va de 1 à $cap heures d'utilisation (${choice.h} demandées)")      // range first: no Int overflow below
                 if (existing.maxUsageMinutes + choice.h * 60 > capMin)
                     refuse("Cette location a déjà ${hoursText(existing.maxUsageMinutes)} d'utilisation : on ne dépasse pas $cap h par location" + (if (existing.maxUsageMinutes < capMin) " (au plus ${hoursText(capMin - existing.maxUsageMinutes)} de plus)" else ""))
                 quota(choice.h, state, params)
                 // The renewal line carries ONE day (the least a line can hold) and the engine adds it to the end: a rental issued from 16/10 on already ends on the 15th at its hour of issue,
-                // so the MERGED end of an extension may reach the 16th 23:59:59 (the 15th plus ONE day of tolerance, once per rental), never beyond. The screens then say « avant le 16/11 ».
+                // so the day of tolerance is granted to EACH extension, but the ABSOLUTE bound holds: the MERGED end never passes the 16th 23:59:59.999 (the 15th plus one day). Once the merged
+                // end is there, the next extension is refused. The screens then say « avant le 16/11 ». The merged end must be the real one: [PilotRegistry.summary] computes it like the engine.
                 checkEnd(newStart + DAY, true, params, slackMs = DAY)
                 RentalSpec(product, listOf(bundleId), 1, choice.h * 60, 0, params.maxConcurrent, existing.period)
             }
@@ -298,6 +313,7 @@ object PilotRules {
      * The caller records the reissue in the register (type `reemission`, hours rounded UP).
      */
     fun reissue(existing: ContractSummary, usedMinutes: Int, issuedAt: Long, newInstallPub: String?, state: LicenseState, params: PilotParams, catalog: BundleCatalog, families: LotFamilies): Result<RentalSpec> = rules {
+        if (!allowReissue) refuse(REISSUE_CLOSED)
         if (!params.userChosen) refuse("La réémission suit les règles du pilote : elle est fermée tant que la durée est fixée par le serveur")
         // No pilot window here: a reissue gives NO new right (same product, same period, never later than the original end), so it stays possible after the pilot, until that end.
         if (!existing.product.startsWith(RentalDurations.PREFIX) || existing.product.length == RentalDurations.PREFIX.length) refuse("Contrat illisible : ${existing.product}")
@@ -306,8 +322,9 @@ object PilotRules {
         if (existing.reissues >= MAX_REISSUES) refuse("Cette location a déjà été réémise $MAX_REISSUES fois : c'est le maximum")
         liveContract(existing, issuedAt)
         if (usedMinutes < 0) refuse("Relevé d'usage invalide")
-        // The engine groups lines by (product, period): on a TV that still holds the OLD activation the new line would be ADDED to it (end about doubled, usage given back).
-        // Only a DIFFERENT installation (the box of the new line is sealed for another installation key) cannot merge with the old one.
+        // WARNING (audit B1): comparing two installation keys does NOT prevent the merge. The engine groups lines by (product, period) whatever the envelope, the rental key does not depend on
+        // the installation and the `install=` line is not authenticated: a reissue imported on top of the original activation ADDS to it (end about doubled, budget given back).
+        // This code stays behind [allowReissue] (closed) until a proof of installation or a new period makes the merge impossible; the key comparison is only a sanity check.
         val old = existing.installPub?.takeIf { it.isNotBlank() } ?: refuse("La clé d'installation d'origine de cette location est inconnue : réémission refusée (on ne devine pas)")
         val new = newInstallPub?.takeIf { it.isNotBlank() } ?: refuse("La TV n'a pas fourni sa clé d'installation (mettez CastBridge-TV à jour) : réémission refusée")
         if (new == old) refuse("Même installation que la location d'origine : la TV garde déjà cette location, une réémission s'y ajouterait (fin doublée, heures rendues) ; prolongez-la plutôt")

@@ -57,6 +57,17 @@ class RentalDurationsTest {
         assertNotNull(RentalDurations.checkChosen(RentalSpec("loc-nope", listOf("nope"), 7, 0, 0, 3), catalog, pilot))
     }
 
+    @Test fun checkChosenRefusesLanguagesByTypePrefixAndFreeBundlesInDepth() {
+        val cat = BundleCatalog.parse("""{"bundles":[
+            {"id":"xx","type":"langues","lots":["learn:lg"]},{"id":"langues-bis","type":"classe","lots":["learn:lg"]},{"id":"liste","type":"classe","lots":["learn:lg"]},{"id":"classe-cm2","type":"classe","lots":["learn:cm2"]}]}""")
+        fun c(b: String, p: PilotParams) = RentalDurations.checkChosen(RentalSpec("loc-$b", listOf(b), 7, 0, 0, 3), cat, p)
+        val listed = pilot.copy(freeBundles = setOf("liste"))
+        for (p in listOf(pilot, listed, pilot.copy(userChosen = false))) {
+            assertTrue(c("xx", p)!!.contains("Langues"), "type"); assertTrue(c("langues-bis", p)!!.contains("Langues"), "prefix")
+        }
+        assertTrue(c("liste", listed)!!.contains("libre")); assertNull(c("liste", pilot)); assertNull(c("classe-cm2", listed))
+    }
+
     @Test fun checkChosenWithoutUserChoiceIsTheExactRule() {
         val off = pilot.copy(userChosen = false)
         assertNull(chosen(30, params = off, concurrent = 0)); assertNotNull(chosen(29, params = off)); assertNotNull(chosen(30, usage = 60, params = off))
