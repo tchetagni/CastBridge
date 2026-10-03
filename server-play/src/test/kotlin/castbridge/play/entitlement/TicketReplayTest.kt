@@ -7,6 +7,7 @@ import castbridge.play.HubFixture.hub
 import castbridge.play.HubFixture.open
 import castbridge.play.TestConn
 import castbridge.play.TestKeys
+import castbridge.play.TestRights
 import java.net.InetAddress
 import java.security.KeyPairGenerator
 import kotlin.test.Test
@@ -34,7 +35,7 @@ class TicketReplayTest {
         val a = (0 until 3).map { open(h, TestKeys.ticket(now = now, deviceId = "dev-same")) }
         assertEquals(listOf(true, true, false), a.map { it.welcomed() }, "deux salles ouvertes, la troisième refusée")
         assertEquals("PLAY_BUSY", a[2].errorReason()); assertTrue("2 parties" in a[2].errorMessage()!!, a[2].errorMessage())
-        val other = open(h, TestKeys.ticket(now = now, deviceId = "dev-other"))
+        val other = open(h, TestKeys.ticket(now = now, deviceId = "dev-other", deviceCode = TestRights.otherTv.code), TestRights.create(TestRights.activation(device = TestRights.otherTv)))
         assertTrue(other.welcomed(), "un autre appareil n'est pas touché")
         assertEquals(3, h.roomCount())
     }

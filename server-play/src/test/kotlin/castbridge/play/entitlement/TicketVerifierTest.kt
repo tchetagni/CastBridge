@@ -44,6 +44,22 @@ class TicketVerifierTest {
         assertEquals(TicketVerifier.Refusal.MALFORMED, why("v1." + t[1] + "." + t[2]), "l'ancien préfixe v1 n'est plus accepté")
     }
 
+    @Test fun theLifeLimitAndTheClockSkewAreExactToTheMillisecond() {
+        assertTrue(v.verify(TestKeys.ticket(now = now, lifeMs = 15 * 60_000L), now), "15 min exactes : accepté")
+        assertEquals(TicketVerifier.Refusal.TOO_LONG, why(TestKeys.ticket(now = now, lifeMs = 15 * 60_000L + 1)), "exp − iat > 15 min")
+        assertTrue(v.verify(TestKeys.ticket(now = now, iat = now + 60_000L, lifeMs = 60_000), now), "décalage de 60 s : accepté")
+        assertEquals(TicketVerifier.Refusal.NOT_YET_VALID, why(TestKeys.ticket(now = now, iat = now + 60_001L, lifeMs = 60_000)), "décalage de 60 s + 1 ms : refusé")
+    }
+
+    @Test fun base64IsDecodedStrictlyForTheSignatureAndForTheConfiguredKey() {
+        val good = TestKeys.ticket(now)
+        assertTrue(v.verify(good, now))
+        assertEquals(TicketVerifier.Refusal.MALFORMED, why(good + "="), "signature avec bourrage : refusée")
+        assertEquals(TicketVerifier.Refusal.MALFORMED, why(good.replaceFirst('.', '.') .let { it.dropLast(2) + "\n" + it.takeLast(2) }), "signature avec saut de ligne : refusée")
+        assertFalse(TicketVerifier(listOf(TestKeys.pub.substring(0, 20) + "!!" + TestKeys.pub.substring(20))).configured, "clé avec caractère étranger : ignorée (le décodeur MIME les sautait)")
+        assertTrue(TicketVerifier(listOf(TestKeys.pub + "\n")).configured, "un saut de ligne final de fichier reste toléré")
+    }
+
     @Test fun withoutAnyKeyNoTicketIsValid() {
         val none = TicketVerifier(emptyList())
         assertFalse(none.configured)

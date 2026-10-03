@@ -45,19 +45,20 @@ class PlayRulesTest {
     }
 
     @Test fun trialHostPlaysPrivateWithThreeGamesADayThenIsRefusedInFrench() {
-        val h = hub(config("perSubject" to 100))
+        val h = hub(config("idle" to 0L))
         val trial = TestRights.activation(ActivationKind.TRIAL, rights = TestRights.trialUsage(now))
-        val results = (0 until 4).map { open(h, t(), TestRights.create(trial)) }
+        // l'essai tient UNE salle ouverte à la fois : chaque partie est fermée (hôte parti, salle vide) avant la suivante
+        val results = (0 until 4).map { open(h, t(), TestRights.create(trial)).also { c -> h.onClosed(c); h.tick() } }
         assertEquals(listOf(true, true, true, false), results.map { it.welcomed() })
         assertEquals("PLAY_SCOPE_FORBIDDEN", results[3].errorReason()); assertTrue("3 parties" in results[3].errorMessage()!!, results[3].errorMessage())
-        assertEquals(3, h.roomCount())
+        assertEquals(0, h.roomCount(), "salles fermées")
     }
 
     @Test fun theTrialDailyCountFollowsTheActivationIdentityNotTheAttestedDevice() {
-        val h = hub(config("perSubject" to 100))
+        val h = hub(config("idle" to 0L))
         val trial = TestRights.activation(ActivationKind.TRIAL, rights = TestRights.trialUsage(now))
         // six appareils API frais avec LA MÊME activation d'essai : le compte du jour suit l'activation (signée), donc la 4e salle est refusée quand même
-        val results = (0 until 6).map { open(h, TestKeys.ticket(now = now, deviceId = "dev-fresh-$it"), TestRights.create(trial)) }
+        val results = (0 until 6).map { open(h, TestKeys.ticket(now = now, deviceId = "dev-fresh-$it"), TestRights.create(trial)).also { c -> h.onClosed(c); h.tick() } }
         assertEquals(3, results.count { it.welcomed() })
     }
 

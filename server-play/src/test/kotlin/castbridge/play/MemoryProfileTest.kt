@@ -33,7 +33,7 @@ class MemoryProfileTest {
     @Test fun hundredRoomsOfEightClientsFitInMemory() {
         val bank = EmbeddedQuestionSource(levels = null).bank()
         val limits = ConnectionLimits(100_000, 100_000)
-        val hub = PlayHub(PlayConfig(maxRooms = 400, ticketPubKeys = listOf(TestKeys.pub), trustedKeys = TestRights.trustedKeys, createsPerIpPerHour = 10_000), { 1_000L }, bank, TicketVerifier(listOf(TestKeys.pub)), limits = limits)
+        val hub = PlayHub(PlayConfig(maxRooms = 400, maxRoomsPerSubject = 1_000, createsPerIdentityPerDay = 100_000, ticketPubKeys = listOf(TestKeys.pub), trustedKeys = TestRights.trustedKeys, createsPerIpPerHour = 10_000), { 1_000L }, bank, TicketVerifier(listOf(TestKeys.pub)), limits = limits)
         val keep = ArrayList<PlayConn>()
         // échauffement : une salle jouée puis fermée charge les classes et remplit les caches avant la mesure
         val warm = PlayHub(PlayConfig(ticketPubKeys = listOf(TestKeys.pub), trustedKeys = TestRights.trustedKeys, createsPerIpPerHour = 10_000), { 1_000L }, bank, TicketVerifier(listOf(TestKeys.pub)), limits = limits)

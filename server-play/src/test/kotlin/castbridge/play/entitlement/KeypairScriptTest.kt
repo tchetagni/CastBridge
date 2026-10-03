@@ -58,4 +58,15 @@ class KeypairScriptTest {
         val out = p.inputStream.readBytes().toString(Charsets.UTF_8)
         assertEquals(2, p.waitFor()); assertTrue("Usage" in out)
     }
+
+    @Test fun anExistingDirectoryKeepsItsPermissionsAndAHostileNameIsNotParsedAsAnOption() {
+        org.junit.Assume.assumeTrue("openssl absent", runCatching { ProcessBuilder("openssl", "version").start().waitFor() == 0 }.getOrDefault(false))
+        val existing = Files.createTempDirectory("kp-existing").toFile()
+        Files.setPosixFilePermissions(existing.toPath(), setOf(PosixFilePermission.OWNER_READ, PosixFilePermission.OWNER_WRITE, PosixFilePermission.OWNER_EXECUTE, PosixFilePermission.GROUP_READ, PosixFilePermission.GROUP_EXECUTE))
+        val (code, out) = run(existing); assertEquals(0, code, out)
+        assertTrue(PosixFilePermission.GROUP_READ in Files.getPosixFilePermissions(existing.toPath()), "un dossier existant n'est pas chmodé")
+        val created = File(Files.createTempDirectory("kp-new").toFile(), "neuf")
+        run(created)
+        assertEquals(setOf(PosixFilePermission.OWNER_READ, PosixFilePermission.OWNER_WRITE, PosixFilePermission.OWNER_EXECUTE), Files.getPosixFilePermissions(created.toPath()), "un dossier créé par le script est en 0700")
+    }
 }

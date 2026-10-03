@@ -30,6 +30,7 @@ class PlayTicketGoldenTest {
         PlayTicketService service = new PlayTicketService(key, 20, random);
         Device d = new Device();
         d.publicId = "00000000-0000-4000-8000-000000000001";
+        d.app = "tv";
         d.country = "CM";
         d.blocked = false;
         String code = castbridge.server.licenses.DeviceIdentity.code(java.util.Map.of(castbridge.server.licenses.DeviceIdentity.Factor.FLASH, "a".repeat(32)));

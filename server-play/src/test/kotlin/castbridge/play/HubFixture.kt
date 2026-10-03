@@ -32,12 +32,14 @@ object HubFixture {
     fun config(vararg more: Pair<String, Any>): PlayConfig {
         val m = more.toMap()
         return PlayConfig(port = 0, ticketPubKeys = listOf(TestKeys.pub), trustedKeys = TestRights.trustedKeys,
-            maxRooms = m["maxRooms"] as Int? ?: 400, maxRoomsPerSubject = m["perSubject"] as Int? ?: 2, createsPerIpPerHour = m["perIp"] as Int? ?: 100_000,
-            maxUsedTickets = m["used"] as Int? ?: 20_000)
+            maxRooms = m["maxRooms"] as Int? ?: 400, maxRoomsPerSubject = m["perSubject"] as Int? ?: 1000, roomIdleMs = m["idle"] as Long? ?: 10 * 60_000L, createsPerIpPerHour = m["perIp"] as Int? ?: 100_000,
+            maxUsedTickets = m["used"] as Int? ?: 20_000,
+            createsPerIdentityPerDay = m["perIdentityDay"] as Int? ?: 100_000, createsPer48PerHour = m["per48"] as Int? ?: 1_000_000)
     }
 
-    fun hub(cfg: PlayConfig = config(), verifier: TicketVerifier = TicketVerifier(listOf(TestKeys.pub)), reserved: ReservedBank? = null, bank: QuizBank = this.bank): PlayHub =
-        PlayHub(cfg, System::currentTimeMillis, reserved?.freeBank ?: bank, verifier, limits = ConnectionLimits(100_000, 100_000), reserved = reserved)
+    fun hub(cfg: PlayConfig = config(), verifier: TicketVerifier = TicketVerifier(listOf(TestKeys.pub)), reserved: ReservedBank? = null, bank: QuizBank = this.bank,
+            settings: castbridge.core.quiz.online.ServerRoom.Settings = castbridge.core.quiz.online.ServerRoom.Settings(), ready: () -> Boolean = { true }): PlayHub =
+        PlayHub(cfg, System::currentTimeMillis, reserved?.freeBank ?: bank, verifier, settings = settings, limits = ConnectionLimits(100_000, 100_000), reserved = reserved, revocationsReady = ready)
 
     /** `hello` (ticket) puis `create` (activation) sur [c] ; rend la connexion. */
     fun open(hub: PlayHub, ticket: String?, create: ClientMsg.Create = TestRights.create(), c: TestConn = TestConn()): TestConn {

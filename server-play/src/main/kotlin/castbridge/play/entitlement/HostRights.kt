@@ -1,6 +1,8 @@
 package castbridge.play.entitlement
 
 import castbridge.core.lots.ClockDoubt
+import castbridge.core.lots.Right
+import castbridge.core.lots.RentalLines
 import castbridge.core.lots.RentalEngine
 import castbridge.core.lots.RentalInputs
 import castbridge.core.lots.JudgedTime
@@ -59,8 +61,10 @@ class HostRightsEvaluator(private val ring: KeyRing, private val revocations: ()
         if (accepted.isEmpty()) return HostRights.none(if (otherTv) "Cette activation n'est pas celle de cette TV." else PlayRules.MSG_ACTIVATE)
         if (accepted.any { it.issuedAt > nowMs + CLOCK_SKEW_MS }) return HostRights.none(TvAccess.CHECK_CLOCK_LABEL, clockDoubt = true)
 
-        val statuses = RentalEngine.evaluate(RentalEngine.contracts(accepted), RentalInputs(JudgedTime(nowMs, null), superUnlimited = RentalEngine.superUnlimited(accepted)))
-        val tv = TvGate.evaluate(accepted, emptyList(), nowMs, statuses)
+        // en ligne, le service ne compte pas les minutes d'usage : une location horaire (hors fenêtre d'essai) n'est PAS honorée (audit w20-04 I3) ; seules les lignes à la journée le sont
+        val online = accepted.map { a -> a.copy(rights = a.rights.filterNot { it is Right.Rental && it.maxUsageMinutes > 0 && it.productId != RentalLines.TRIAL_PRODUCT }) }
+        val statuses = RentalEngine.evaluate(RentalEngine.contracts(online), RentalInputs(JudgedTime(nowMs, null), superUnlimited = RentalEngine.superUnlimited(online)))
+        val tv = TvGate.evaluate(online, emptyList(), nowMs, statuses)
         if (!tv.keyInstalled) return HostRights.none(PlayRules.MSG_ACTIVATE)
         if (tv.suspended) return HostRights.none(TvAccess.CHECK_CLOCK_LABEL, clockDoubt = true)
         if (tv.trial) return HostRights(HostEdition.TRIAL, emptySet(), false, PlayRules.TRIAL_GAMES_PER_DAY, null, PlayRules.MSG_TRIAL_PRIVATE, code)

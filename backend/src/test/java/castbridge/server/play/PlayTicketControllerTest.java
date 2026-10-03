@@ -51,11 +51,11 @@ class PlayTicketControllerTest extends ApiTestBase {
     }
 
     @DynamicPropertySource
-    static void ticketKey(DynamicPropertyRegistry r) { r.add("castbridge.play.ticket-key-file", KEY_FILE::toString); }
+    static void ticketKey(DynamicPropertyRegistry r) { r.add("castbridge.play.ticket-key-file", KEY_FILE::toString); r.add("castbridge.play.per-address-per-hour", () -> "100000"); }
 
     /** A valid device code: any set of factors gives one. */
     static String code() {
-        return DeviceIdentity.code(Map.of(DeviceIdentity.Factor.FLASH, "a".repeat(32), DeviceIdentity.Factor.ETHERNET, "b".repeat(32)));
+        return DeviceIdentity.code(Map.of(DeviceIdentity.Factor.FLASH, UUID.randomUUID().toString().replace("-", ""), DeviceIdentity.Factor.ETHERNET, "b".repeat(32)));
     }
 
     private JsonNode register() throws Exception {
@@ -95,16 +95,18 @@ class PlayTicketControllerTest extends ApiTestBase {
     @Test
     void aBlockedDeviceGets403() throws Exception {
         JsonNode reg = register();
-        ticket(reg.get("deviceToken").asText(), bodyOf(code()), 200);
+        String c = code();
+        ticket(reg.get("deviceToken").asText(), bodyOf(c), 200);
         devices.setBlocked(reg.get("deviceId").asText(), true);
-        ticket(reg.get("deviceToken").asText(), bodyOf(code()), 403);
+        ticket(reg.get("deviceToken").asText(), bodyOf(c), 403);
     }
 
     @Test
     void theTicketIsSignedByTheDedicatedKeyAndCarriesOnlyTheAttestation() throws Exception {
         JsonNode reg = register();
         long before = System.currentTimeMillis();
-        String t = ticket(reg.get("deviceToken").asText(), bodyOf(code().toLowerCase().replace("-", " ")), 200).get("ticket").asText();
+        String mine = code();
+        String t = ticket(reg.get("deviceToken").asText(), bodyOf(mine.toLowerCase().replace("-", " ")), 200).get("ticket").asText();
         String[] parts = t.split("\\.");
         assertEquals(3, parts.length);
         assertEquals("cbp1", parts[0]);
@@ -119,7 +121,7 @@ class PlayTicketControllerTest extends ApiTestBase {
         assertEquals(reg.get("deviceId").asText(), p.get("deviceId").asText());
         assertFalse(p.get("blocked").asBoolean());
         assertEquals("CM", p.get("country").asText());
-        assertEquals(code(), p.get("deviceCode").asText(), "canonical code");
+        assertEquals(mine, p.get("deviceCode").asText(), "canonical code");
         assertEquals(600_000L, p.get("exp").asLong() - p.get("iat").asLong());
         assertTrue(p.get("iat").asLong() >= before && p.get("iat").asLong() <= System.currentTimeMillis());
         assertTrue(p.get("jti").asText().matches("[0-9a-f]{32}"), "128-bit random jti");
@@ -130,8 +132,9 @@ class PlayTicketControllerTest extends ApiTestBase {
     @Test
     void everyTicketHasItsOwnJtiAndAnAlteredPayloadFailsTheSignature() throws Exception {
         String token = register().get("deviceToken").asText();
-        String a = ticket(token, bodyOf(code()), 200).get("ticket").asText();
-        String b = ticket(token, bodyOf(code()), 200).get("ticket").asText();
+        String same = code();
+        String a = ticket(token, bodyOf(same), 200).get("ticket").asText();
+        String b = ticket(token, bodyOf(same), 200).get("ticket").asText();
         assertNotEquals(a, b);
         String[] parts = a.split("\\.");
         String forged = new String(Base64.getUrlDecoder().decode(parts[1]), StandardCharsets.UTF_8).replace("\"blocked\":false", "\"blocked\":true");
@@ -144,8 +147,30 @@ class PlayTicketControllerTest extends ApiTestBase {
     @Test
     void theTwentyFirstTicketOfTheHourIs429ButAnotherDeviceIsNotAffected() throws Exception {
         String token = register().get("deviceToken").asText();
-        for (int i = 0; i < 20; i++) ticket(token, bodyOf(code()), 200);
-        ticket(token, bodyOf(code()), 429);
+        String same = code();
+        for (int i = 0; i < 20; i++) ticket(token, bodyOf(same), 200);
+        ticket(token, bodyOf(same), 429);
         ticket(register().get("deviceToken").asText(), bodyOf(code()), 200);
+    }
+
+    @Test
+    void aCopiedActivationCodeSpreadsToAtMostTwoDevicesAndADeviceKeepsItsFirstCode() throws Exception {
+        String shared = code();
+        String t1 = register().get("deviceToken").asText(), t2 = register().get("deviceToken").asText(), t3 = register().get("deviceToken").asText();
+        ticket(t1, bodyOf(shared), 200);
+        ticket(t2, bodyOf(shared), 200);
+        ticket(t3, bodyOf(shared), 403);                 // a third device with the same code: refused
+        ticket(t1, bodyOf(shared), 200);                 // the known ones keep working
+        ticket(t1, bodyOf(code()), 403);                 // a device never changes its code
+    }
+
+    @Test
+    void onlyATvCanGetATicket() throws Exception {
+        String id = UUID.randomUUID().toString();
+        String report = """
+                {"installId":"%s","androidIdHash":"%s","app":"phone","versionCode":7,"versionName":"0.7","channel":"stable","abi":"arm64-v8a","supportedAbis":["arm64-v8a"],
+                 "sdk":34,"platform":"android","manufacturer":"X","model":"Y"}""".formatted(id, ("%064x".formatted(id.hashCode() & 0xffffffffL)));
+        String token = body(mvc.perform(post("/api/v1/devices/register").contentType(MediaType.APPLICATION_JSON).content(report)).andExpect(status().isCreated()).andReturn()).get("deviceToken").asText();
+        ticket(token, bodyOf(code()), 403);
     }
 }

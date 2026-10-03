@@ -37,10 +37,10 @@ class PlayServer(
     private val limits = ConnectionLimits(cfg.maxPerIp, cfg.maxConnections)
     private val verifier = TicketVerifier(cfg.ticketPubKeys)
     private val origin = OriginCheck(cfg.origins)
-    private val feed = RevocationsFeed(TrustedIssuers.parse(cfg.trustedKeys.joinToString(",")).ring, cfg.revocationsUrl?.let { runCatching { RevocationsFeed.httpFetcher(it) }.getOrNull() } ?: { null })
+    private val feed = RevocationsFeed(TrustedIssuers.parse(cfg.trustedKeys.joinToString(",")).ring, cfg.revocationsUrl?.let { runCatching { RevocationsFeed.httpFetcher(it) }.getOrNull() } ?: { null }, file = cfg.revocationsFile)
     /** La banque libre du service SANS les ids réservables, et les paquets réservés lus à la demande (w20-04). */
     private val reserved = ReservedBank(bank ?: loadBank(cfg.lotsDir), DirReservedSource(cfg.reservedDir), ReservedBank.readIds(cfg.reservedIdsFile))
-    val hub = PlayHub(cfg, clock, reserved.freeBank, verifier, random, roomScope, settings, limits, reserved, feed::current)
+    val hub = PlayHub(cfg, clock, reserved.freeBank, verifier, random, roomScope, settings, limits, reserved, feed::current, revocationsReady = { cfg.revocationsUrl == null || feed.usable() })
     private val fallback = PlayFallbackController(cfg, hub, limits, verifier, origin)
     private val pages = PlayPageController()
     private val health = HealthController(cfg, hub, limits, notice = feed::staleNotice)
