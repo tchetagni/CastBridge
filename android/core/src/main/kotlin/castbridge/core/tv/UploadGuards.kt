@@ -5,16 +5,26 @@ package castbridge.core.tv
  * and released by the upload's end, failure or the service's destruction. Two starts racing each other: exactly one gets a token, the other
  * is refused explicitly (never dropped in silence, never followed as if it were the other file).
  */
-class UploadSlot {
+class UploadSlot(private val now: () -> Long = System::currentTimeMillis, private val staleMs: Long = STALE_MS) {
     private var token = 0L
     private var holderToken = 0L
     private var label: String? = null
+    private var lastSeen = 0L
 
-    /** A token when the slot was free (now held by [what]); null when another upload holds it. */
+    /**
+     * A token when the slot was free (now held by [what]); null when another upload holds it. A reservation whose owner gave no sign of life
+     * ([touch]) for [staleMs] is stale (owner dead or stuck): it is taken over, and the old owner can neither release nor write any more.
+     */
     @Synchronized fun tryReserve(what: String): Long? {
-        if (holderToken != 0L) return null
-        holderToken = ++token; label = what
+        if (holderToken != 0L && now() - lastSeen <= staleMs) return null
+        holderToken = ++token; label = what; lastSeen = now()
         return holderToken
+    }
+
+    /** Sign of life of the owner (progress, waiting for the network): false when [t] no longer holds the slot. */
+    @Synchronized fun touch(t: Long): Boolean {
+        if (t == 0L || t != holderToken) return false
+        lastSeen = now(); return true
     }
 
     /** Frees the slot only for the token that holds it (a late release of an older upload never frees the current one). */
@@ -27,6 +37,29 @@ class UploadSlot {
     @Synchronized fun held(): Boolean = holderToken != 0L
     @Synchronized fun holder(): String? = label
     @Synchronized fun holds(t: Long): Boolean = t != 0L && holderToken == t
+
+    companion object { const val STALE_MS = 5 * 60_000L }
+}
+
+/**
+ * How the queue reads the end of a launched file (pure, R-09 second review): the cause set by the owner of the current upload generation
+ * (Android's time limit) is never overwritten by a late « annulé » of its worker; « the previous upload is still ending » puts the file back
+ * at its place instead of failing it.
+ */
+object QueueOutcome {
+    enum class Kind { DONE, CANCELLED, RETRY_SOON, PAUSE_TIME_LIMIT, PAUSE_BACKGROUND, FAILED }
+
+    fun of(outcome: String?, cancelAsked: Boolean, backgroundRefusal: Boolean): Kind = when {
+        cancelAsked -> Kind.CANCELLED
+        outcome == null -> Kind.DONE
+        outcome.startsWith(QueueTexts.TIME_LIMIT) -> Kind.PAUSE_TIME_LIMIT
+        outcome == QueueTexts.PREVIOUS_ENDING -> Kind.RETRY_SOON
+        backgroundRefusal -> Kind.PAUSE_BACKGROUND
+        else -> Kind.FAILED
+    }
+
+    /** The failure the service publishes: the owner's cause (time limit) wins over what its worker returns afterwards. */
+    fun finalCause(ownerCause: String?, workerResult: String): String = ownerCause ?: workerResult
 }
 
 /**
@@ -46,6 +79,10 @@ object QueueCancel {
     fun mayLaunch(cancelAsked: Boolean): Boolean = !cancelAsked
     fun afterLaunch(cancelAsked: Boolean): Action = if (cancelAsked) Action.STOP_UPLOAD else Action.NOTHING
     fun mayDeleteMoved(cancelled: Boolean, tvHoldsCompleteCopy: Boolean): Boolean = !cancelled && tvHoldsCompleteCopy
+
+    /** The upload launched for (id, attempts) belongs to [item] only if it is the same attempt: a retried file waiting its turn was never launched. */
+    fun isLaunched(launchedId: Long, launchedAttempt: Int, item: QueueItem): Boolean =
+        launchedId >= 0 && launchedId == item.id && launchedAttempt == item.attempts
 }
 
 /**

@@ -44,6 +44,8 @@ object TransferQueue {
     @Volatile private var pumping = false
     /** The item whose upload this queue launched last: the upload states belong to it until the next launch. */
     @Volatile private var launchedId = -1L
+    /** The attempt ([QueueItem.attempts]) launched: a retried file waiting its turn is another generation ([QueueCancel.isLaunched]). */
+    @Volatile private var launchedAttempt = -1
     /** Set when Android refused to start the upload in the background: the queue waits for the app to come back to the front ([resume]). */
     @Volatile private var paused = false
     /** Credentials of the code-path items of this process (never written to disk; looked up again after a restart). */
@@ -67,7 +69,9 @@ object TransferQueue {
     @Synchronized private fun ensure(ctx: Context) {
         if (loaded) return
         val app = ctx.applicationContext
-        model = TransferQueueModel(store = FileQueueStore(File(app.filesDir, "transfer-queue.json")))
+        // a store that cannot be opened never breaks the queue: it goes on in memory (review, minor 8)
+        runCatching { model = TransferQueueModel(store = FileQueueStore(File(app.filesDir, "transfer-queue.json"))) }
+            .onFailure { android.util.Log.w("TransferQueue", "file d'attente non relue", it) }
         loaded = true
         publish()
     }
@@ -118,8 +122,9 @@ object TransferQueue {
 
     /** « Annuler » ([QueueCancel]): a waiting file leaves; a running one not launched yet is marked (the runner never launches it); a launched one stops. */
     fun cancel(ctx: Context, id: Long) {
-        val before = model.item(id)?.status ?: return
-        val launched = launchedId == id
+        val it = model.item(id) ?: return
+        val before = it.status
+        val launched = QueueCancel.isLaunched(launchedId, launchedAttempt, it)
         model.cancel(id)
         // only the upload this queue launched for THIS file (never another screen's upload the file is still waiting for)
         if (QueueCancel.onCancel(before, launched) == QueueCancel.Action.STOP_UPLOAD) { UploadService.cancel(ctx); BtUploadService.cancel(ctx) }
@@ -174,7 +179,13 @@ object TransferQueue {
         return true
     }
 
+    /** One file; the record of what was launched is cleared before and after, so « Annuler » never targets another screen's upload. */
     private suspend fun runOne(app: Context, item: QueueItem) {
+        launchedId = -1; launchedAttempt = -1
+        try { runOneInner(app, item) } finally { launchedId = -1; launchedAttempt = -1 }
+    }
+
+    private suspend fun runOneInner(app: Context, item: QueueItem) {
         if (!model.start(item.id)) { publish(); return }            // cancelled between next() and here: never started
         publish()
         if (!waitForFreeTv(item)) return
@@ -219,13 +230,13 @@ object TransferQueue {
                 else -> { model.finish(item.id, false, e.message ?: "L'envoi n'a pas pu démarrer"); publish(); return }
             }
         }
-        launchedId = item.id
+        launchedAttempt = item.attempts; launchedId = item.id
         // « Annuler » landed between the launch and its record (cancel() could not know it was launched): stop it now
         if (QueueCancel.afterLaunch(model.cancelAsked(item.id)) == QueueCancel.Action.STOP_UPLOAD) { UploadService.cancel(app); BtUploadService.cancel(app) }
         val outcome = watch(viaBt, item.id)
-        when {
-            model.cancelAsked(item.id) -> model.finishCancelled(item.id)
-            outcome == null -> {
+        when (castbridge.core.tv.QueueOutcome.of(outcome, model.cancelAsked(item.id), isBackgroundRefusal(outcome?.let { Exception(it) }))) {
+            castbridge.core.tv.QueueOutcome.Kind.CANCELLED -> model.finishCancelled(item.id)
+            castbridge.core.tv.QueueOutcome.Kind.DONE -> {
                 model.finish(item.id, true)
                 credentials.remove(item.id)
                 // the name the TV holds (the assistant may have renamed it on the way), then « Titre / Saison » for a series
@@ -233,9 +244,11 @@ object TransferQueue {
                 val tvBase = afterBase
                 if (tvBase != null) runCatching { SeriesClassifying.afterSend(app, castbridge.core.tv.TvClient(tvBase, afterCred), held) }
             }
-            outcome.startsWith(QueueTexts.TIME_LIMIT) -> { requeuePaused(item, QueueTexts.PAUSED_TIME_LIMIT); return }
-            isBackgroundRefusal(Exception(outcome)) -> { requeuePaused(item, QueueTexts.PAUSED_BACKGROUND); return }
-            else -> model.finish(item.id, false, outcome)
+            castbridge.core.tv.QueueOutcome.Kind.PAUSE_TIME_LIMIT -> { requeuePaused(item, QueueTexts.PAUSED_TIME_LIMIT); return }
+            castbridge.core.tv.QueueOutcome.Kind.PAUSE_BACKGROUND -> { requeuePaused(item, QueueTexts.PAUSED_BACKGROUND); return }
+            // the previous upload was still ending: back to its place, again in a moment (never a failure)
+            castbridge.core.tv.QueueOutcome.Kind.RETRY_SOON -> { model.release(item.id); publish(); delay(2_000); return }
+            castbridge.core.tv.QueueOutcome.Kind.FAILED -> model.finish(item.id, false, outcome)
         }
         publish()
     }
@@ -270,7 +283,8 @@ object TransferQueue {
                     is ResumableUpload.State.Done -> return null
                     is ResumableUpload.State.Failed -> return s.reason
                     is ResumableUpload.State.Uploading, is ResumableUpload.State.Waiting -> started = true
-                    null -> if (started) return if (model.cancelAsked(id)) null else "Envoi interrompu"
+                    // no state yet during the Bluetooth negotiation: interrupted only once the upload no longer holds the slot
+                    null -> if (started && !BtUploadService.active()) return if (model.cancelAsked(id)) null else "Envoi interrompu"
                 }
                 if (!started && BtUploadService.active()) started = true
             } else {

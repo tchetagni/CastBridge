@@ -63,6 +63,8 @@ class UploadService : Service() {
     @Volatile private var cancelled = false
     /** This upload's reservation of the phone's single upload slot ([castbridge.core.tv.UploadSlot], taken by [start]). */
     @Volatile private var myToken = 0L
+    /** A cause set by this upload's owner (Android's time limit): never overwritten by what its worker returns afterwards. */
+    @Volatile private var endCause: String? = null
     @Volatile private var moveUri: Uri? = null
     @Volatile private var progressiveNow = false     // play as soon as enough has arrived (see switchToFullPreload)
     @Volatile private var started = false            // playback already launched during the upload
@@ -89,7 +91,8 @@ class UploadService : Service() {
                 if (Build.VERSION.SDK_INT >= 29) startForeground(NOTIF, n, ServiceInfo.FOREGROUND_SERVICE_TYPE_DATA_SYNC) else startForeground(NOTIF, n) }
             Log.w(TAG, "start refused while the previous upload ends: ${intent.getStringExtra(EXTRA_NAME)}")
             // the reservation of this start is given back and the refusal is said (the queue keeps the file and shows the cause)
-            if (slot.release(token)) _state.value = State.Failed(null, "L'envoi précédent se termine encore : réessayez dans un instant.")
+            // the queue puts the file back at its place and starts it again in a moment (never a failure)
+            if (slot.release(token)) _state.value = State.Failed(null, castbridge.core.tv.QueueTexts.PREVIOUS_ENDING)
             return START_NOT_STICKY
         }
         val name = intent.getStringExtra(EXTRA_NAME) ?: uri.lastPathSegment ?: "video"
@@ -165,6 +168,7 @@ class UploadService : Service() {
                 }
             }
             // a late write of an upload whose slot was released (cancelled, service destroyed) never overwrites the next upload's state
+            if (mine()) slot.touch(myToken)                      // sign of life: a silent owner's reservation becomes stale (UploadSlot)
             if (mine()) _state.value = when (s) {
                 is ResumableUpload.State.Uploading -> State.Uploading(job, s.sent, s.total)
                 is ResumableUpload.State.Waiting -> State.Waiting(job, s.sent, s.total, s.reason)
@@ -302,8 +306,12 @@ class UploadService : Service() {
 
     /** Android 15: the dataSync time budget is used up. The upload stops (the TV keeps its partial copy) and the queue pauses with this cause. */
     override fun onTimeout(startId: Int, fgsType: Int) {
+        // the owner of the current generation sets the cause; the worker (still running) keeps the reservation until its own end,
+        // and its late « annulé » cannot overwrite this cause ([finish], QueueOutcome.finalCause); the service stops at once as Android requires
+        endCause = castbridge.core.tv.QueueTexts.TIME_LIMIT
         cancelled = true
-        finish(State.Failed((_state.value as? State.Uploading)?.job ?: (_state.value as? State.Waiting)?.job, castbridge.core.tv.QueueTexts.TIME_LIMIT))
+        if (mine()) _state.value = State.Failed((_state.value as? State.Uploading)?.job ?: (_state.value as? State.Waiting)?.job, castbridge.core.tv.QueueTexts.TIME_LIMIT)
+        stopSelf()
     }
 
     private fun acquireLocks() {
@@ -323,9 +331,11 @@ class UploadService : Service() {
         }.getOrNull()
     }
 
-    private fun mine() = slot.holds(myToken) || !slot.held()
+    /** Only the owner of the current reservation writes the shared state (a released or taken-over generation never does). */
+    private fun mine() = slot.holds(myToken)
 
-    private fun finish(s: State) {
+    private fun finish(s0: State) {
+        val s = endCause?.let { c -> (s0 as? State.Failed)?.copy(reason = castbridge.core.tv.QueueOutcome.finalCause(c, s0.reason)) } ?: s0
         if (mine()) _state.value = s
         slot.release(myToken)
         stopSelf()
@@ -334,7 +344,8 @@ class UploadService : Service() {
     override fun onDestroy() {
         cancelled = true
         if (instance === this) instance = null
-        slot.release(myToken)
+        // released by the worker's own end ([finish]) when it still runs (cancelled): never before it, so no next upload overlaps it
+        if (worker?.isAlive != true) slot.release(myToken)
         discovery?.stop()
         netCallback?.let { cb -> runCatching { getSystemService(ConnectivityManager::class.java).unregisterNetworkCallback(cb) } }
         runCatching { wakeLock?.let { if (it.isHeld) it.release() } }

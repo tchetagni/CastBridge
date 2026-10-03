@@ -48,6 +48,8 @@ class BtUploadService : Service() {
             // R-09: never dropped in silence, never leaves Android waiting for startForeground
             runCatching { val n = notification("Envoi Bluetooth en cours…", 0)
                 if (Build.VERSION.SDK_INT >= 29) startForeground(NOTIF, n, ServiceInfo.FOREGROUND_SERVICE_TYPE_CONNECTED_DEVICE) else startForeground(NOTIF, n) }
+            // the reservation of this start is given back (review A: it used to be kept forever) and the queue starts the file again in a moment
+            if (UploadService.slot.release(token)) _state.value = ResumableUpload.State.Failed(castbridge.core.tv.QueueTexts.PREVIOUS_ENDING)
             return START_NOT_STICKY
         }
         try {
@@ -112,7 +114,7 @@ class BtUploadService : Service() {
             openAt = { off -> openAt(uri, off) },
             cancelled = { cancelled })
         val result = up.run { s ->
-            _state.value = s
+            pub(s)
             val now = System.currentTimeMillis()
             if (now - lastNotif > 1000) {
                 lastNotif = now
@@ -138,7 +140,7 @@ class BtUploadService : Service() {
     private fun httpUpload(uri: Uri, name: String, total: Long, base: String, pin: String, label: String): ResumableUpload.State {
         var lastNotif = 0L
         return ResumableUpload(name, total, { base }, { off -> openAt(uri, off) }, { cancelled }, pin = pin, giveUpAfter = 6).run { s ->
-            _state.value = s
+            pub(s)
             val now = System.currentTimeMillis()
             if (now - lastNotif > 1000 && s is ResumableUpload.State.Uploading) {
                 lastNotif = now
@@ -204,10 +206,18 @@ class BtUploadService : Service() {
                 when { ok -> null; cancelled -> "cancelled"; else -> "failed" })
             castStart = 0
         }
-        _state.value = s; UploadService.slot.release(myToken); stopSelf()
+        if (UploadService.slot.holds(myToken)) _state.value = s
+        UploadService.slot.release(myToken); stopSelf()
     }
 
-    override fun onDestroy() { cancelled = true; if (current === this) current = null; UploadService.slot.release(myToken); super.onDestroy() }
+    /** Only the owner of the current reservation writes the shared state; each write is a sign of life ([castbridge.core.tv.UploadSlot]). */
+    private fun pub(s: ResumableUpload.State) { if (UploadService.slot.touch(myToken)) _state.value = s }
+
+    override fun onDestroy() {
+        cancelled = true; if (current === this) current = null
+        if (worker?.isAlive != true) UploadService.slot.release(myToken)        // else the worker's own end releases it (same generation)
+        super.onDestroy()
+    }
 
     companion object {
         private const val TAG = "BtUploadService"
