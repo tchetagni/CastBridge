@@ -21,8 +21,19 @@
 
 ## Clés et configuration
 
-12. `CASTBRIDGE_PLAY_TICKET_PUBKEY` : clé **publique** Ed25519 du ticket (w20-04 produit l'émetteur) ; sans elle, aucune salle ne peut s'ouvrir (voulu). Aucune clé privée, aucune variable `*_KEY`/`*_TOKEN` dans l'environnement du conteneur.
-13. `CASTBRIDGE_PLAY_LOTS_DIR` : dossier monté en **lecture seule** ; le contenu réservable n'y est pas avant w20-04.
+12. `CASTBRIDGE_PLAY_TICKET_PUBKEY` : clé **publique** Ed25519 du ticket (`play-ticket.pub.b64` produit par `tools/play/gen-ticket-keypair.sh`) ; sans elle, aucune salle ne peut s'ouvrir (voulu). Aucune clé privée, aucune variable `*_KEY`/`*_TOKEN` dans l'environnement du conteneur.
+13. `CASTBRIDGE_PLAY_LOTS_DIR` (lots libres) et `CASTBRIDGE_PLAY_RESERVED_DIR` : dossiers montés en **lecture seule** ; les paquets réservés ne sont pas publiés tant que le gel `content/quiz/reserved-ids.json` n'est pas fait (`docs/agent-reports/quiz-toutes-les-questions.md`, ordre a-e) : sans `reserved-ids.json`, le service ne sert **aucune** question réservée.
+14. `CASTBRIDGE_PLAY_TRUSTED_KEYS` : clés **publiques** des émetteurs d'activations (même valeur que `CASTBRIDGE_LICENSES_TRUSTED_KEYS` de l'API, format `nom:clé:PORTÉES`) ; sans elle, aucune activation n'est valable, donc aucune salle. `CASTBRIDGE_PLAY_REVOCATIONS_URL=https://bridge.sti-cm.com/api/v1/revocations` (seul appel sortant du service, lecture publique) ; le réseau du conteneur ne doit joindre que l'API pour cela.
+
+## Clé des tickets (étape de l'exploitant, w20-04)
+
+À faire **par l'exploitant**, rien n'est fait depuis le dépôt :
+
+1. Sur un poste de confiance (jamais sur la VM de production), `tools/play/gen-ticket-keypair.sh <dossier-secret>` : écrit `play-ticket.key` (privée, mode 600), `play-ticket.pub` et `play-ticket.pub.b64` (publiques) ; **refuse d'écraser** ; n'affiche que le chemin de la clé publique et son empreinte (SHA-256 du SPKI).
+2. Noter l'**empreinte** hors ligne ; déposer la privée dans `backend/secrets/play-ticket.key` de la VM (`chmod 600`, jamais dans le dépôt, jamais dans une sauvegarde non chiffrée), puis dans `backend/docker-compose.yml` monter le secret `play_ticket_key` (déjà **déclaré**) sur `castbridge-api` et fixer `CASTBRIDGE_PLAY_TICKET_KEY_FILE=/run/secrets/play_ticket_key`. Tant que ce n'est pas fait, `POST /api/v1/play/ticket` répond 503.
+3. Mettre le **contenu** de `play-ticket.pub.b64` (une ligne) dans `CASTBRIDGE_PLAY_TICKET_PUBKEY` du conteneur `castbridge-play` ; ne jamais y copier la privée ni son chemin.
+4. **Rotation** : générer une nouvelle paire dans un **autre** dossier, mettre l'ancienne et la nouvelle publiques dans `CASTBRIDGE_PLAY_TICKET_PUBKEY` et `_2`, remplacer la privée de l'API, attendre 15 min (vie maximale d'un ticket), retirer l'ancienne publique.
+5. Vérifier : `docker inspect` du conteneur `castbridge-play` ne montre aucune clé privée ni `play_ticket_key` ; `GET /play/health` (depuis la VM) dit `"revocations":"ok"` après 15 min.
 
 ## Exploitation
 
@@ -31,7 +42,7 @@
 
 ## Ce qui reste hors de ce cahier
 
-- **I1** (ticket rejouable, `jti`, plafond de salles par sujet) : exigence du cahier w20-04.
+- **I1** (ticket rejouable, `jti`, plafond de salles par sujet) : **fermée par w20-04** (`jti` à usage unique, salles par appareil, créations par adresse) ; à auditer par Opus.
 - Le mode strictement « SSE/long-poll derrière un second proxy » et la limitation de débit globale (hors nginx) ne sont pas traités.
 
 ## Second audit Opus (2026-10-03) : points ajoutés

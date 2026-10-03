@@ -108,5 +108,5 @@ class Bot(val name: String?, val wire: Wire, private val bank: QuizBank, private
 /** Séquence attendue d'un hôte : `hello` avec ticket, `create`. */
 fun hostStart(b: Bot, ticket: String) {
     b.send(ClientMsg.Hello(PlayProtocol.PROTO, PlayProtocol.CAPS, null, ticket))
-    b.send(ClientMsg.Create(null, "DUEL"))
+    b.send(TestRights.create())
 }

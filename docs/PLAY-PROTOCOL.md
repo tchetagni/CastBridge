@@ -7,7 +7,7 @@
 | Élément | Valeur |
 |---|---|
 | Nom / numéro | `play-v1`, `PlayProtocol.PROTO = 1` |
-| Capacités (`caps`, additives) | `play1`, `sse`, `longpoll`, `relay`, `spectate` ; le serveur répond avec l'intersection |
+| Capacités (`caps`, additives) | `play1`, `sse`, `longpoll`, `relay`, `spectate`, `play-ticket` (w20-04 : `create` porte l'activation `cbx1`) ; le serveur répond avec l'intersection |
 | Règle d'évolution | additive : une clé inconnue est ignorée ; une clé retirée ou un champ obligatoire neuf = nouveau `PROTO` |
 | Forme | JSON UTF-8, un objet par message ; `t` = type ; `seq` = compteur du client (client → serveur) ou numéro d'évènement de la salle (serveur → client) |
 
@@ -39,12 +39,12 @@ Règles :
 
 ## Messages client → serveur
 
-Décodage **strict** (`PlayCodec.decodeClient`) : type inconnu ⇒ `error UNSUPPORTED` ; champ manquant, mal typé, hors borne, caractère de contrôle ou message de plus de 2 048 octets ⇒ `error BAD_REQUEST`. Taille mesurée : champs au maximum permis (test `PlayCodecTest`).
+Décodage **strict** (`PlayCodec.decodeClient`) : type inconnu ⇒ `error UNSUPPORTED` ; champ manquant, mal typé, hors borne, caractère de contrôle ou message de plus de 2 048 octets ⇒ `error BAD_REQUEST` (seul `create` peut atteindre 16 384 octets : il porte l'activation de la TV, w20-04). Taille mesurée : champs au maximum permis (test `PlayCodecTest`).
 
 | `t` | Champs | Bornes | Rôle | Octets max mesurés |
 |---|---|---|---|---|
 | `hello` | `proto`, `caps`, `deviceHash?`, `ticket?` | proto 1..1000 ; ≤ 12 capacités de ≤ 24 car. ; ticket ≤ 1 200 car. | ouverture, négociation | 1 650 |
-| `create` | `name?`, `mode?` | nom ≤ 16 ; `MILLIONAIRE` ou `DUEL` | l'hôte (TV) crée la salle ; sans nom la TV ne joue pas | 61 |
+| `create` | `name?`, `mode?`, `activation?`, `rentals?` | nom ≤ 16 ; `MILLIONAIRE` ou `DUEL` ; `activation` : un jeton `cbx1` ≤ 4 096 car. ASCII visibles ; `rentals` : ≤ 2 jetons `cbx1` (lignes de location signées) de ≤ 4 096 car. | l'hôte (TV) crée la salle ; sans nom la TV ne joue pas ; **sans `activation` valable pour le code d'appareil du ticket : `PLAY_SCOPE_FORBIDDEN`, aucune salle** (w20-04, additif : un ancien client qui ne les envoie pas est refusé de la même façon) | 61 (sans activation) |
 | `join` | `code`, `name?`, `token?`, `deviceHash?`, `spectate?` | code normalisé (casse, tiret, I/L→1, O→0) | entrer ; la TV (hôte) enregistre ainsi un joueur local relayé | 227 |
 | `resume` | `roomId`, `token`, `lastSeq` | `lastSeq` 0..2⁵³ | reprise après coupure | 192 |
 | `act` | `questionId?`, `action`, `choice?`, `arg?`, `seq` | action dans `answer vote suggest report select cancel confirm next walk fifty audience phone mode start skip lobby end autohost candidate` ; choix -1..3 ; `arg` ≤ 256 | jouer ; actions d'hôte : `mode start skip lobby end autohost candidate` | 410 |
@@ -117,3 +117,13 @@ Ordre des contrôles : salle en jeu et table active (sinon `CLOSED`) → questio
 ## Deux écrans et symbiose
 
 `ServerAuthority` (client) implémente la même interface `GameAuthority` que `LocalAuthority` : `AuthorityContractTest` version mémoire (`ServerAuthorityTest`) joue le même scénario à graine par les deux et exige les mêmes `stage`, `phase` et scores à chaque étape (périmètre `LAN`, sans délai). Capacité : `play1`. Refus : `PLAY_*` (`PlayReason`). La reprise dans `C/sync/Reason.kt` et `Caps.kt` reste à faire à la fusion de W19 (ces fichiers n'existent pas sur cette branche).
+
+
+## Ticket et droits (w20-04)
+
+- **Ticket `cbp1`** (émis par l'API principale, `POST /api/v1/play/ticket`, clé dédiée `play-ticket.key`) : `cbp1.<charge utile base64url>.<signature base64url>` ; signature Ed25519 sur `castbridge-play-ticket-v1\ncbp1.<charge utile>` ; charge `{"aud":"castbridge-play","deviceId","blocked":false,"country","deviceCode","iat","exp","jti"}` (ms ; vie 600 s ; `jti` = 128 bits aléatoires, hexadécimal). **Aucune édition, aucun droit.**
+- Le service ne garde que la clé **publique** (`CASTBRIDGE_PLAY_TICKET_PUBKEY*`). Il refuse (fermé) : signature fausse, mauvaise audience, appareil bloqué, expiré, pas encore valable, vie > 15 min, `jti` absent ou mal formé, ancien préfixe `v1`. Sans clé publique : aucune salle.
+- **Usage unique** : le `jti` est mémorisé jusqu'à `exp` (au plus `CASTBRIDGE_PLAY_MAX_USED_TICKETS`, plein = refus, jamais d'éviction d'un `jti` valable) ; un second `create` avec le même ticket ⇒ `PLAY_TICKET_REFUSED`. Un ticket refusé après ce pas (droits, plafonds) est brûlé : l'API en redonne 20 par heure et par appareil.
+- **Plafonds** : salles ouvertes par appareil attesté (`CASTBRIDGE_PLAY_MAX_ROOMS_PER_SUBJECT`, 2 ; l'essai : 1), créations par adresse cliente (/64 en IPv6) et par heure (`CASTBRIDGE_PLAY_CREATES_PER_IP_HOUR`, 20) ⇒ `error PLAY_BUSY` (réessayable) avec le texte.
+- **Droits** : `HostRights` = évaluation de l'activation `cbx1` et des lignes de location jointes à `create` par `TvGate`/`RentalEngine` du cœur avec l'horloge du **service**, clés publiques des émetteurs de confiance (`CASTBRIDGE_PLAY_TRUSTED_KEYS`), révocations signées relues toutes les 15 min ; le code d'appareil de l'activation doit être celui du ticket. Règles commerciales : `PlayRules` (cœur) ; refus par `PLAY_SCOPE_FORBIDDEN` (« Activez la TV pour créer une partie Internet », « Vérifiez l'heure de la TV », essai : privé, 3 parties par jour).
+- **Questions réservées** : servies seulement dans la salle d'un hôte titulaire, pour les lots qu'il couvre (`ReservedBank`), une question à la fois (inchangé : `ServerRoom`) ; sans le gel `reserved-ids.json`, aucune réservée n'est servie.

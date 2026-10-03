@@ -119,3 +119,9 @@ volumes:
 secrets:
   castbridge_signing_key:
     file: ${CASTBRIDGE_SIGNING_KEY_PATH:-./secrets/castbridge-signing.pem}
+  # Dedicated Ed25519 key of the play tickets (w20-04): DECLARED only. NOT mounted in castbridge-api by this change: the owner generates the pair with
+  # tools/play/gen-ticket-keypair.sh, puts the PRIVATE half in ./secrets/play-ticket.key (chmod 600, never committed) and, when ready, adds to the castbridge-api service
+  #   secrets: [castbridge_signing_key, play_ticket_key]   and   CASTBRIDGE_PLAY_TICKET_KEY_FILE: /run/secrets/play_ticket_key
+  # (docs/PLAY-OPS-REQUIREMENTS.md, step « Clé des tickets »). Without it the route /api/v1/play/ticket answers 503. Never the castbridge-play container.
+  play_ticket_key:
+    file: ${CASTBRIDGE_PLAY_TICKET_KEY_PATH:-./secrets/play-ticket.key}

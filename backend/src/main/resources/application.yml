@@ -84,6 +84,10 @@ castbridge:
   free-content:
     file: ${CASTBRIDGE_FREE_CONTENT_FILE:}
   public-base-url: ${CASTBRIDGE_PUBLIC_BASE_URL:}
+  # Online game tickets (w20-04, docs/API-SERVER.md « Ticket de jeu »): the key is a SECRET FILE (never a value here), empty = POST /api/v1/play/ticket answers 503
+  play:
+    ticket-key-file: ${CASTBRIDGE_PLAY_TICKET_KEY_FILE:}
+    per-device-per-hour: ${CASTBRIDGE_PLAY_TICKET_PER_DEVICE_PER_HOUR:20}
   rate-limit:
     per-minute: ${CASTBRIDGE_RATE_LIMIT_PER_MINUTE:120}
     burst: ${CASTBRIDGE_RATE_LIMIT_BURST:60}

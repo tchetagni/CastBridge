@@ -4,6 +4,7 @@ import castbridge.core.quiz.Json
 import castbridge.core.quiz.online.ClientMsg
 import castbridge.core.quiz.online.PlayCodec
 import castbridge.core.quiz.online.PlayProtocol
+import castbridge.play.entitlement.TicketVerifier
 import java.io.File
 import java.net.InetAddress
 import java.net.ServerSocket
@@ -25,13 +26,13 @@ import kotlin.test.assertTrue
 class Audit2Test {
     private val servers = ArrayList<PlayServer>()
     private val closeables = ArrayList<AutoCloseable>()
-    private fun cfg(vararg o: Pair<String, Any?>) = PlayConfig(port = 0, trustedProxies = LOOPBACK, ticketPubKeys = listOf(TestKeys.pub))
+    private fun cfg(vararg o: Pair<String, Any?>) = PlayConfig(port = 0, trustedProxies = LOOPBACK, ticketPubKeys = listOf(TestKeys.pub), trustedKeys = TestRights.trustedKeys, createsPerIpPerHour = 10_000)
     private fun server(c: PlayConfig = cfg()) = PlayServer(c).also { it.start(); servers += it }
     @AfterTest fun stop() { closeables.forEach { runCatching { it.close() } }; servers.forEach { it.close() }; closeables.clear(); servers.clear() }
     private fun ws(srv: PlayServer, ip: String) = WsWire(srv.port, xff = ip).also { w -> closeables += AutoCloseable { w.close() } }
     private fun host(srv: PlayServer, ip: String = "203.0.113.1"): Pair<WsWire, Map<*, *>> {
         val tv = ws(srv, ip)
-        tv.send(PlayCodec.encode(ClientMsg.Hello(PlayProtocol.PROTO, PlayProtocol.CAPS, null, TestKeys.ticket()))); tv.send(PlayCodec.encode(ClientMsg.Create(null, "DUEL")))
+        tv.send(PlayCodec.encode(ClientMsg.Hello(PlayProtocol.PROTO, PlayProtocol.CAPS, null, TestKeys.ticket()))); tv.send(PlayCodec.encode(TestRights.create()))
         return tv to tv.await("welcome")!!
     }
     private fun env(vararg kv: Pair<String, String>): (String) -> String? = { k -> kv.toMap()[k] }
@@ -171,7 +172,7 @@ class Audit2Test {
     }
 
     @Test fun aClientThatStopsReadingIsCutAfterTheWriteDeadline() {
-        val c = PlayConfig(port = 0, outboxMaxBytes = 200_000_000, writeTimeoutMs = 300, ticketPubKeys = listOf(TestKeys.pub))
+        val c = PlayConfig(port = 0, outboxMaxBytes = 200_000_000, writeTimeoutMs = 300, ticketPubKeys = listOf(TestKeys.pub), trustedKeys = TestRights.trustedKeys, createsPerIpPerHour = 10_000)
         val (conn, server, _) = wsConnOver(c)   // le client ne lit JAMAIS
         val runner = Thread { conn.run(server.getInputStream()) }.also { it.isDaemon = true; it.start() }
         val big = "x".repeat(100_000)
@@ -184,7 +185,7 @@ class Audit2Test {
     }
 
     @Test fun carriersStayFewAndLatencyLowUnderThreeHundredIdleStreams() {
-        val srv = server(PlayConfig(port = 0, trustedProxies = LOOPBACK, maxPerIp = 5_000, maxConnections = 5_000, ticketPubKeys = listOf(TestKeys.pub)))
+        val srv = server(PlayConfig(port = 0, trustedProxies = LOOPBACK, maxPerIp = 5_000, maxConnections = 5_000, ticketPubKeys = listOf(TestKeys.pub), trustedKeys = TestRights.trustedKeys, createsPerIpPerHour = 10_000))
         val hello = PlayCodec.encode(ClientMsg.Hello(PlayProtocol.PROTO, PlayProtocol.CAPS, null, null))
         repeat(300) { i ->
             val cred = Cred.of(SseWire.post(srv.port, hello, null, "https://bridge.sti-cm.com", "203.0.113.${i % 200 + 1}"))!!
@@ -213,7 +214,7 @@ class Audit2Test {
 
     @Test fun badCodesAreAlsoCappedPerSlash48() {
         val limits = ConnectionLimits(100_000, 100_000)
-        val hub = PlayHub(PlayConfig(trustedProxies = LOOPBACK, ticketPubKeys = listOf(TestKeys.pub)), { 1_000L }, castbridge.core.quiz.EmbeddedQuestionSource(levels = null).bank(), TicketVerifier(listOf(TestKeys.pub)), limits = limits)
+        val hub = PlayHub(PlayConfig(trustedProxies = LOOPBACK, ticketPubKeys = listOf(TestKeys.pub), trustedKeys = TestRights.trustedKeys, createsPerIpPerHour = 10_000), { 1_000L }, castbridge.core.quiz.EmbeddedQuestionSource(levels = null).bank(), TicketVerifier(listOf(TestKeys.pub)), limits = limits)
         class Fake(id: String, ip: String) : PlayConn(id, ip, 1_000_000, 1_000_000) {
             val got = ArrayList<String>()
             override fun offer(text: String): Boolean { got += text; return true }
@@ -222,7 +223,7 @@ class Audit2Test {
         val peer = InetAddress.getByName("127.0.0.1")
         fun key(i: Int, p48: String = "abcd") = ClientIp.resolve(peer, "2001:db8:$p48:" + Integer.toHexString(i) + "::1", LOOPBACK)
         val tv = Fake("tv", "203.0.113.1").also { it.ticket = TestKeys.ticket(); hub.register(it) }
-        hub.onText(tv, PlayCodec.encode(ClientMsg.Create(null, "DUEL")))
+        hub.onText(tv, PlayCodec.encode(TestRights.create()))
         val code = Regex("\"code\":\"([0-9A-Z]{8})\"").find(tv.got.first { it.startsWith("{\"t\":\"welcome\"") })!!.groupValues[1]
         repeat(PlayProtocol.MAX_BAD_CODES_PER_IP * 4) { i -> hub.onText(Fake("b$i", key(i)).also { hub.register(it) }, PlayCodec.encode(ClientMsg.Join("ZZZZ%04d".format(i), "X", null, dev(), false))) }
         val same48 = Fake("late1", key(5_000)).also { hub.register(it) }; hub.onText(same48, PlayCodec.encode(ClientMsg.Join(code, "Awa", null, dev(), false)))

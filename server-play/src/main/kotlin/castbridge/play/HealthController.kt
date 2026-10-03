@@ -3,13 +3,14 @@ package castbridge.play
 import castbridge.core.quiz.online.PlayProtocol
 
 /** `GET /play/health` et `GET /play/.well-known/caps` : JSON sans secret (ni adresse IP, ni code de salle, ni jeton). */
-class HealthController(private val cfg: PlayConfig, private val hub: PlayHub, private val limits: ConnectionLimits, private val startedAt: Long = System.currentTimeMillis()) {
+class HealthController(private val cfg: PlayConfig, private val hub: PlayHub, private val limits: ConnectionLimits, private val startedAt: Long = System.currentTimeMillis(),
+                       /** Texte du signe orange du service (révocations non rafraîchies) ; null = à jour. */ private val notice: () -> String? = { null }) {
     fun health(): String {
         val rt = Runtime.getRuntime()
         val used = (rt.totalMemory() - rt.freeMemory()) / (1024 * 1024)
         return """{"status":"ok","version":"${cfg.version}","proto":${PlayProtocol.PROTO},"rooms":${hub.roomCount()},"maxRooms":${cfg.maxRooms},""" +
             """"connections":${limits.total()},"maxConnections":${cfg.maxConnections},"memoryUsedMb":$used,"memoryMaxMb":${rt.maxMemory() / (1024 * 1024)},""" +
-            """"uptimeSec":${(System.currentTimeMillis() - startedAt) / 1000}}"""
+            """"uptimeSec":${(System.currentTimeMillis() - startedAt) / 1000},"usedTickets":${hub.usedTicketCount()},"revocations":"${if (notice() == null) "ok" else "stale"}"}"""
     }
 
     fun caps(): String = """{"name":"${PlayProtocol.NAME}","proto":${PlayProtocol.PROTO},"caps":[${PlayProtocol.CAPS.joinToString(",") { "\"$it\"" }}],""" +

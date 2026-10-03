@@ -20,7 +20,7 @@ object PlayCodec {
 
     fun encode(m: ClientMsg): String = Json.write(when (m) {
         is ClientMsg.Hello -> linkedMapOf("t" to m.type, "proto" to m.proto, "caps" to m.caps, "deviceHash" to m.deviceHash, "ticket" to m.ticket)
-        is ClientMsg.Create -> linkedMapOf("t" to m.type, "name" to m.name, "mode" to m.mode)
+        is ClientMsg.Create -> linkedMapOf("t" to m.type, "name" to m.name, "mode" to m.mode, "activation" to m.activation, "rentals" to m.rentals)
         is ClientMsg.Join -> linkedMapOf("t" to m.type, "code" to m.code, "name" to m.name, "token" to m.token, "deviceHash" to m.deviceHash, "spectate" to m.spectate)
         is ClientMsg.Resume -> linkedMapOf("t" to m.type, "roomId" to m.roomId, "token" to m.token, "lastSeq" to m.lastSeq)
         is ClientMsg.Act -> linkedMapOf("t" to m.type, "seq" to m.seq, "questionId" to m.questionId, "action" to m.action, "choice" to m.choice, "arg" to m.arg)
@@ -33,16 +33,18 @@ object PlayCodec {
     })
 
     fun decodeClient(text: String): Decoded {
-        if (text.toByteArray(Charsets.UTF_8).size > PlayProtocol.MAX_MESSAGE_BYTES) return Decoded.Bad(PlayProtocol.BAD_REQUEST, "message trop long")
+        val size = text.toByteArray(Charsets.UTF_8).size
+        if (size > PlayProtocol.MAX_CREATE_BYTES) return Decoded.Bad(PlayProtocol.BAD_REQUEST, "message trop long")
         val m = try { Json.parse(text) as? Map<*, *> ?: return Decoded.Bad(PlayProtocol.BAD_REQUEST, "objet attendu") } catch (e: Json.ParseError) {
             return Decoded.Bad(PlayProtocol.BAD_REQUEST, "JSON invalide")
         }
         val t = m["t"] as? String ?: return Decoded.Bad(PlayProtocol.BAD_REQUEST, "type manquant")
+        if (size > PlayProtocol.MAX_MESSAGE_BYTES && t != "create") return Decoded.Bad(PlayProtocol.BAD_REQUEST, "message trop long")   // seul `create` porte une activation
         val f = Fields(m)
         return try {
             Decoded.Ok(when (t) {
                 "hello" -> ClientMsg.Hello(f.int("proto", 1..1_000), f.strings("caps"), f.str("deviceHash", PlayProtocol.MAX_ID, false), f.str("ticket", PlayProtocol.MAX_TICKET, false))
-                "create" -> ClientMsg.Create(f.str("name", PlayProtocol.MAX_NAME, false), f.str("mode", 16, false))
+                "create" -> ClientMsg.Create(f.str("name", PlayProtocol.MAX_NAME, false), f.str("mode", 16, false), f.token("activation"), f.tokens("rentals"))
                 "join" -> ClientMsg.Join(f.str("code", 16, true)!!, f.str("name", PlayProtocol.MAX_NAME, false), f.str("token", PlayProtocol.MAX_TOKEN, false),
                     f.str("deviceHash", PlayProtocol.MAX_ID, false), f.boolOr("spectate", false))
                 "resume" -> ClientMsg.Resume(f.str("roomId", PlayProtocol.MAX_ID, true)!!, f.str("token", PlayProtocol.MAX_TOKEN, true)!!, f.long("lastSeq", 0L..(1L shl 53), true)!!)
@@ -77,6 +79,20 @@ object PlayCodec {
             val l = v as? List<*> ?: throw BadField("$k : liste attendue")
             if (l.size > PlayProtocol.MAX_CAPS) throw BadField("$k : trop d'éléments")
             return l.map { (it as? String)?.takeIf { s -> s.length <= 24 && s.none { c -> c.isISOControl() } } ?: throw BadField("$k : élément invalide") }
+        }
+        /** Un jeton signé (`cbx1.…`) : texte ASCII visible, borné ; absent ou `null` = aucun. */
+        fun token(k: String): String? {
+            val v = m[k] ?: return null
+            val s = v as? String ?: throw BadField("$k : texte attendu")
+            if (s.length > PlayProtocol.MAX_ACTIVATION) throw BadField("$k trop long")
+            if (s.any { it.code !in 33..126 }) throw BadField("$k : caractère interdit")
+            return s.ifEmpty { null }
+        }
+        fun tokens(k: String): List<String> {
+            val v = m[k] ?: return emptyList()
+            val l = v as? List<*> ?: throw BadField("$k : liste attendue")
+            if (l.size > PlayProtocol.MAX_RENTALS) throw BadField("$k : trop d'éléments")
+            return l.map { e -> (e as? String)?.takeIf { it.length in 1..PlayProtocol.MAX_ACTIVATION && it.all { c -> c.code in 33..126 } } ?: throw BadField("$k : élément invalide") }
         }
         fun long(k: String, r: LongRange, required: Boolean): Long? {
             val v = m[k] ?: if (required) throw BadField("$k manquant") else return null
