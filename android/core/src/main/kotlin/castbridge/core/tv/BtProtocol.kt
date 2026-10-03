@@ -41,6 +41,13 @@ object BtProtocol {
     const val NEGOTIATE = "CBTN"
     const val WANT_WIFI_DIRECT = 1
     /**
+     * Additive CBTN flags (an older TV ignores them; an older phone never sets them), docs/agent-reports/auto-wifi-direct.md:
+     * [WD_RELEASE] = "I am done with your automatic group: remove it"; [WD_LAN_UNREACHABLE] = "your Wi-Fi addresses do not answer from my side" (no common
+     * network, or a router that isolates its clients), so the TV may create its group even though it is on a Wi-Fi network itself.
+     */
+    const val WD_RELEASE = 2
+    const val WD_LAN_UNREACHABLE = 4
+    /**
      * "Who is this phone to you?": the control message of the plug-and-play link. Only over Android's paired (authenticated and
      * encrypted) RFCOMM link, the peer being identified by the Bluetooth address of the socket, never by anything it writes.
      *
@@ -133,6 +140,8 @@ object BtProtocol {
         onProgress: (name: String, done: Long, total: Long) -> Unit = { _, _, _ -> },
         /** Answers a CBTN request (null = this TV does not offer a faster link: ERR_MAGIC, as an old TV would). */
         negotiate: ((wantWifiDirect: Boolean) -> LinkInfo)? = null,
+        /** The same with the peer (address proven by the paired link) and every flag ([WD_RELEASE], [WD_LAN_UNREACHABLE]); preferred over [negotiate] when set. */
+        negotiateFlags: ((peer: String, flags: Int) -> LinkInfo)? = null,
         /** Phone remote over Bluetooth (CBTR, castbridge.core.remote.RemoteBt): runs until the phone closes the link. */
         remote: ((InputStream, OutputStream) -> Unit)? = null,
         /** Plug-and-play HELLO (CBTH); null = this TV does not offer it (ERR_MAGIC). Gets (peer address, phone asks to be trusted). */
@@ -173,11 +182,13 @@ object BtProtocol {
             }
         }
         if (m == PARENTAL && parental != null) return castbridge.core.parental.ParentalSyncProtocol.serve(din, dout, peer, parental)
-        if (m == NEGOTIATE && negotiate != null) {
+        if (m == NEGOTIATE && (negotiate != null || negotiateFlags != null)) {
             val pin = String(ByteArray(Pin.LENGTH).also { din.readFully(it) }, Charsets.US_ASCII)
             val flags = din.readUnsignedByte()
+            // the group's password goes only to a trusted phone or to the PIN holder, and only on the paired (encrypted) RFCOMM link
             pinProblem(pin)?.let { return fail(it) }
-            val text = negotiate(flags and WANT_WIFI_DIRECT != 0).encode().toByteArray(Charsets.UTF_8)
+            val info = negotiateFlags?.invoke(peer, flags) ?: negotiate!!(flags and WANT_WIFI_DIRECT != 0)
+            val text = info.encode().toByteArray(Charsets.UTF_8)
             dout.writeByte(OK); dout.writeShort(text.size); dout.write(text); dout.flush()
             return OK
         }
@@ -241,13 +252,17 @@ object BtProtocol {
      * Asks the TV for a faster link over an open Bluetooth connection. Throws [Refused] (ERR_MAGIC from a TV that does not
      * know CBTN, ERR_PIN...) or [IOException].
      */
-    fun negotiate(input: InputStream, output: OutputStream, pin: String, wantWifiDirect: Boolean): LinkInfo {
+    fun negotiate(input: InputStream, output: OutputStream, pin: String, wantWifiDirect: Boolean): LinkInfo =
+        negotiate(input, output, pin, if (wantWifiDirect) WANT_WIFI_DIRECT else 0)
+
+    /** CBTN with every flag ([WANT_WIFI_DIRECT], [WD_RELEASE], [WD_LAN_UNREACHABLE]). */
+    fun negotiate(input: InputStream, output: OutputStream, pin: String, flags: Int): LinkInfo {
         require(Pin.isValidFormat(pin) || pin == castbridge.core.trust.TvAuth.NO_PIN) { "PIN must be ${Pin.LENGTH} digits" }
         val din = DataInputStream(input)
         val dout = DataOutputStream(output)
         dout.write(NEGOTIATE.toByteArray(Charsets.US_ASCII))
         dout.write(pin.toByteArray(Charsets.US_ASCII))
-        dout.writeByte(if (wantWifiDirect) WANT_WIFI_DIRECT else 0)
+        dout.writeByte(flags and 0xFF)
         dout.flush()
         val st = din.readUnsignedByte()
         if (st != OK) throw Refused(st)
@@ -371,8 +386,15 @@ class ResumableBtUpload(
     }
 }
 
-/** What the TV tells the phone over Bluetooth about faster links: its HTTP port and addresses, and its Wi-Fi Direct group if on. */
-data class LinkInfo(val port: Int, val ips: List<String>, val wdSsid: String? = null, val wdPass: String? = null, val wdIp: String? = null) {
+/**
+ * What the TV tells the phone over Bluetooth about faster links: its HTTP port and addresses, and its Wi-Fi Direct group if on.
+ * Additive (docs/agent-reports/auto-wifi-direct.md): [wdCap] = this TV can create a group for a phone (`wd.cap=1|0`, null = an older TV that does not say);
+ * [wdErr] = why no group was given ([WifiDirect.Err], one known word). [toString] never shows the passphrase (a log line must not carry it).
+ */
+data class LinkInfo(val port: Int, val ips: List<String>, val wdSsid: String? = null, val wdPass: String? = null, val wdIp: String? = null,
+                    val wdCap: Boolean? = null, val wdErr: String? = null) {
+    override fun toString() = "LinkInfo(port=$port, ips=$ips, wdSsid=$wdSsid, wdPass=${if (wdPass == null) "null" else "••••••"}, wdIp=$wdIp, wdCap=$wdCap, wdErr=$wdErr)"
+
     fun encode(): String = buildString {
         append("port=").append(port).append('\n')
         ips.forEach { append("ip=").append(it).append('\n') }
@@ -381,6 +403,8 @@ data class LinkInfo(val port: Int, val ips: List<String>, val wdSsid: String? = 
             append("wd.pass=").append(wdPass.replace('\n', ' ')).append('\n')
             append("wd.ip=").append(wdIp ?: WifiDirect.GROUP_OWNER_IP).append('\n')
         }
+        if (wdCap != null) append("wd.cap=").append(if (wdCap) 1 else 0).append('\n')
+        if (wdErr != null && wdErr in WifiDirect.Err.ALL) append("wd.err=").append(wdErr).append('\n')
     }
 
     companion object {
@@ -390,7 +414,8 @@ data class LinkInfo(val port: Int, val ips: List<String>, val wdSsid: String? = 
             fun one(k: String) = kv.firstOrNull { it.first == k }?.second
             return LinkInfo(one("port")?.toIntOrNull()?.takeIf { it in 1..65535 } ?: ReceiverServer.PORT,
                 kv.filter { it.first == "ip" && IPV4.matches(it.second) }.map { it.second },   // literal IPv4 only: never a host name to resolve
-                one("wd.ssid"), one("wd.pass"), one("wd.ip")?.takeIf { IPV4.matches(it) })
+                one("wd.ssid"), one("wd.pass"), one("wd.ip")?.takeIf { IPV4.matches(it) },
+                when (one("wd.cap")) { "1" -> true; "0" -> false; else -> null }, one("wd.err")?.takeIf { it in WifiDirect.Err.ALL })
         }
     }
 }
@@ -411,10 +436,13 @@ object LinkPlanner {
     }
 
     /**
-     * May the TV create its Wi-Fi Direct group because a phone asked over Bluetooth? A group can disturb the TV's own Wi-Fi, so
-     * only if the owner switched Wi-Fi Direct on, or if the TV has no network at all (nothing to disturb).
+     * May the TV create its Wi-Fi Direct group because a phone asked over Bluetooth? A group can disturb the TV's own Wi-Fi (one radio: STA + P2P share it), so
+     * only if the owner switched Wi-Fi Direct on, if the TV has no network at all (nothing to disturb), or if the phone says the TV's network does not reach
+     * it ([BtProtocol.WD_LAN_UNREACHABLE]: no common network, or a router that isolates its clients: that network is of no use to this phone anyway).
+     * Never on the trial edition (FeatureGate.WIFI_DIRECT is locked there).
      */
-    fun mayStartWifiDirect(requested: Boolean, enabledByOwner: Boolean, tvHasNetwork: Boolean) = requested && (enabledByOwner || !tvHasNetwork)
+    fun mayStartWifiDirect(requested: Boolean, enabledByOwner: Boolean, tvHasNetwork: Boolean, phoneCannotReachLan: Boolean = false, trial: Boolean = false) =
+        requested && !trial && (enabledByOwner || !tvHasNetwork || phoneCannotReachLan)
 
     /**
      * [tunnelBase]: the phone's local end of the API tunnel (http://127.0.0.1:18765) when its Bluetooth gateway runs. It is a route
