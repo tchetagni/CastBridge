@@ -1194,6 +1194,302 @@ def run_store_vectors():
     return n, failures
 
 
+# ------------------------------------------------------------------ rental-pilot-vectors.json: the pilot's rules re-derived by this independent code (docs/coordination/DESIGN-W16-...-PILOTE § 2.5)
+# Everything below is a SECOND implementation written from the design, not a port of the Kotlin code: dates are Africa/Douala (UTC+1, no daylight saving).
+
+import datetime as _dt
+
+DOUALA_MS = HOUR
+EPOCH_ORDINAL = 719163                      # date(1970, 1, 1).toordinal()
+HARD_CAP_MIN = 96 * 60                      # the engine's ceiling of one hourly rental
+PILOT_USAGE_FIELDS = ("days", "usage", "concurrent", "line")
+
+
+def douala_label(ms):
+    t = _dt.datetime.fromtimestamp(ms // 1000, _dt.timezone(_dt.timedelta(hours=1)))
+    return t.strftime("%Y-%m-%dT%H:%M:%S.") + "%03d+01:00" % (ms % 1000)
+
+
+def douala_date(ms):
+    return _dt.date.fromordinal((ms + DOUALA_MS) // DAY + EPOCH_ORDINAL)
+
+
+def douala_start(d):
+    return (d.toordinal() - EPOCH_ORDINAL) * DAY - DOUALA_MS
+
+
+def douala_end(d):
+    return douala_start(d + _dt.timedelta(days=1)) - 1
+
+
+def parse_pilot_date(text, end):
+    d = _dt.date.fromisoformat(text)
+    return douala_end(d) if end else douala_start(d)
+
+
+class Refused(Exception):
+    pass
+
+
+def refuse_if(cond, why="refus"):
+    if cond:
+        raise Refused(why)
+
+
+def contract_active(c, now):
+    return (c["endedAt"] is None or c["endedAt"] > now) and c["endsAt"] > now
+
+
+def pilot_bounds(v):
+    start, end = parse_pilot_date(v["params"]["pilot.start"], False), parse_pilot_date(v["params"]["pilot.end"], True)
+    hours_limit = douala_end(douala_date(end) + _dt.timedelta(days=14))      # 15/11: hours are used before it
+    days_limit = douala_end(douala_date(end) + _dt.timedelta(days=30))       # 01/12: days and the default are honoured in full
+    return start, end, hours_limit, days_limit
+
+
+def pilot_bundle(v, bundle_id):
+    """The bundle's product, or a refusal: unknown, Langues (by type or prefix), no lot, a lot that is not RESERVED (free or of unknown family)."""
+    b = next((x for x in v["catalog"]["bundles"] if x["id"] == bundle_id), None)
+    refuse_if(b is None, "bouquet inconnu")
+    refuse_if(b["type"].strip().lower() == "langues" or bundle_id.lower().startswith("langues"), "Langues")
+    refuse_if(not b["lots"] or any(lot not in v["families"]["reserved"] for lot in b["lots"]), "bouquet libre ou famille inconnue")
+    product = "loc-" + bundle_id
+    refuse_if(not ID_RE.match(product), "identifiant")
+    return b, product
+
+
+def pilot_choice(text):
+    if text == "defaut":
+        return ("default", 0)
+    m = re.match(r"^(\d{1,4})([jh])$", text)
+    refuse_if(not m or int(m.group(1)) < 1, "choix illisible")
+    return ("days" if m.group(2) == "j" else "hours", int(m.group(1)))
+
+
+def pilot_line(product, bundle, issued, period, days, usage):
+    return "rental|%s|%s|%s|T|%d|0|%d|3|" % (product, bundle, "T" if issued == period else "T2", days, usage)
+
+
+def pilot_new(v, c):
+    start, end, hours_limit, days_limit = pilot_bounds(v)
+    b, product = pilot_bundle(v, c["bundle"])
+    issued, st = c["issuedAt"], c["state"]
+    refuse_if(not start <= issued <= end, "fenêtre du pilote")
+    refuse_if(any(a["product"] == product and contract_active(a, issued) for a in st["active"]), "déjà loué")
+    refuse_if(sum(1 for a in st["active"] if contract_active(a, issued)) >= 3, "3 contrats actifs")
+    kind, n = pilot_choice(c["choice"])
+    cap_days = min(30, b.get("rentalDays", 0) or 30)
+    if kind == "default":
+        days, usage = cap_days, 0
+        refuse_if(issued + days * DAY > days_limit, "fin au-delà du 01/12")
+    elif kind == "days":
+        refuse_if(not 1 <= n <= cap_days, "jours hors bornes")
+        days, usage = n, 0
+        refuse_if(issued + days * DAY > days_limit, "fin au-delà du 01/12")
+    else:
+        refuse_if(not 1 <= n <= 96, "heures hors bornes")
+        refuse_if(st["hoursLast168"] + n > 192, "quota 192 h / 168 h")
+        left = (douala_date(hours_limit) - douala_date(issued)).days
+        days, usage = max(1, min(30, left)), n * 60
+        refuse_if(issued + days * DAY > hours_limit, "fin au-delà du 15/11")
+    return {"ok": True, "days": days, "usage": usage, "concurrent": 3, "line": pilot_line(product, c["bundle"], issued, issued, days, usage)}
+
+
+def live_contract(ex, issued):
+    refuse_if((ex["unit"] == "hours") != (ex["usage"] > 0), "unité incohérente")
+    refuse_if(not contract_active(ex, issued), "contrat terminé")
+    refuse_if(ex["period"] > issued, "période future")
+
+
+def pilot_extend(v, c):
+    start, end, hours_limit, days_limit = pilot_bounds(v)
+    b, product = pilot_bundle(v, c["bundle"])
+    ex, issued, st = c["existing"], c["issuedAt"], c["state"]
+    refuse_if(ex["product"] != product, "autre bouquet")
+    refuse_if(not start <= issued <= end, "fenêtre du pilote")
+    live_contract(ex, issued)
+    kind, n = pilot_choice(c["choice"])
+    refuse_if((kind == "hours") != (ex["unit"] == "hours"), "on ne mélange pas les unités")
+    new_start = max(ex["endsAt"], issued)
+    if kind == "hours":
+        refuse_if(ex["usage"] + n * 60 > HARD_CAP_MIN, "plafond de 96 h")
+        refuse_if(st["hoursLast168"] + n > 192, "quota 192 h / 168 h")
+        refuse_if(new_start + DAY > hours_limit + DAY, "fin fusionnée au-delà du 16/11")      # one day of tolerance, once
+        days, usage = 1, n * 60
+    else:
+        cap_days = min(30, b.get("rentalDays", 0) or 30)
+        days = n if kind == "days" else cap_days
+        refuse_if(not 1 <= days <= cap_days, "jours hors bornes")
+        refuse_if(max(0, ex["endsAt"] - issued) + days * DAY > 30 * DAY, "plus de 30 jours cumulés")
+        refuse_if(new_start + days * DAY > days_limit, "fin au-delà du 01/12")
+        usage = 0
+    return {"ok": True, "days": days, "usage": usage, "concurrent": 3, "line": pilot_line(product, c["bundle"], issued, ex["period"], days, usage)}
+
+
+def pilot_reissue(v, c):
+    start, end, hours_limit, days_limit = pilot_bounds(v)
+    ex, issued, st = c["existing"], c["issuedAt"], c["state"]
+    refuse_if(not ex["product"].startswith("loc-") or len(ex["product"]) == 4, "contrat illisible")
+    bundle = ex["product"][4:]
+    pilot_bundle(v, bundle)
+    refuse_if(ex["reissues"] >= 3, "3 réémissions au plus")
+    live_contract(ex, issued)
+    refuse_if(c["usedMinutes"] < 0, "relevé invalide")
+    old, new = (ex["installPub"] or "").strip(), (c["newInstallPub"] or "").strip()
+    refuse_if(not old or not new or old == new, "clé d'installation absente ou identique")      # the same key would merge with the old line
+    whole_days = (ex["endsAt"] - issued) // DAY      # rounded DOWN
+    refuse_if(whole_days < 1, "moins d'un jour restant")
+    if ex["unit"] == "hours":
+        rest = min(ex["usage"], HARD_CAP_MIN) - c["usedMinutes"]
+        refuse_if(rest <= 0, "heures épuisées")
+        refuse_if(st["hoursLast168"] + (rest + 59) // 60 > 192, "quota 192 h / 168 h")
+        refuse_if(issued + whole_days * DAY > hours_limit + DAY, "fin au-delà du 16/11")
+        usage = rest
+    else:
+        refuse_if(issued + whole_days * DAY > days_limit, "fin au-delà du 01/12")
+        usage = 0
+    return {"ok": True, "days": whole_days, "usage": usage, "concurrent": 3, "line": pilot_line(ex["product"], bundle, issued, ex["period"], whole_days, usage)}
+
+
+def expand_line(template, issued_at, period):
+    f = template.split("|")
+    f[3] = str(issued_at if f[3] == "T2" else period)
+    f[4] = str(period)
+    return "|".join(f)
+
+
+def pilot_engine(c):
+    """Second implementation of the engine's contract merge (unit, 96 h ceiling, renewals, mixed units) and of the state order."""
+    lines = {}
+    for m in c["lines"]:
+        lines[json.dumps(m, sort_keys=True)] = m
+    rows = sorted(lines.values(), key=lambda m: (m["startsAt"], rental_line(m, "box")))
+    first = rows[0]
+    end = first["startsAt"] + first["days"] * DAY
+    used_rows, notes = [first], []
+    for r in rows[1:]:
+        grace = max(u["graceMs"] for u in used_rows)
+        if (r["usage"] > 0) != (first["usage"] > 0):
+            notes.append("mixte")
+        elif r["startsAt"] < end + grace:
+            end = max(end, r["startsAt"]) + r["days"] * DAY
+            used_rows.append(r)
+    total = sum(u["usage"] for u in used_rows) if first["usage"] > 0 else 0
+    usage = min(total, HARD_CAP_MIN)
+    if usage < total:
+        notes.append("plafond")
+    grace = max(u["graceMs"] for u in used_rows)
+    left = max(0, usage - c["used"]) if usage > 0 else None
+    now, begin = c["now"], min(first["period"], first["startsAt"])
+    if c.get("expired"):
+        state, reason = "EXPIRED", c["expired"]
+    elif left == 0:
+        state, reason = "EXPIRED", "USAGE"
+    elif now >= end + grace:
+        state, reason = "EXPIRED", "DATE"
+    elif now + DAY < begin:
+        state, reason = "NOT_STARTED", None
+    elif now >= end:
+        state, reason = "GRACE", None
+    else:
+        state, reason = "ACTIVE", None
+    return {"unit": "hours" if usage > 0 else "days", "maxUsageMinutes": usage, "endsAt": end, "notes": len(notes), "state": state, "reason": reason, "remainingUsageMinutes": left}
+
+
+USAGE_LINE = re.compile(r"^contract=([a-z0-9-]+)@(\d+)\|unit=(hours|days|unknown)\|used=(\d+)\|max=(\d+)\|state=([A-Z_]+)\|reason=(-|[A-Z]+)\|endsAt=(\d+)\|at=(\d+)$")
+
+
+def run_pilot_vectors():
+    v = load("rental-pilot-vectors.json")
+    assert v["format"] == "castbridge-rental-pilot-vectors-v1"
+    keys = {k["name"]: k for k in v["keys"]}
+    for k in keys.values():
+        pub = Ed25519PrivateKey.from_private_bytes(bytes.fromhex(k["seed"])).public_key().public_bytes_raw()
+        k["publicKey"] = base64.b64encode(pub).decode()
+        k["kid"] = hashlib.sha256(pub).digest()[:8].hex()
+    devices = {}
+    for d in v["devices"]:
+        fp = fingerprints(d["raw"])
+        devices[d["name"]] = {"name": d["name"], "fingerprints": fp, "code": device_code(fp)}
+    failures, n = [], 0
+
+    def check(cid, ok, detail=""):
+        nonlocal n
+        n += 1
+        if not ok:
+            failures.append("%s %s" % (cid, detail))
+
+    check("file/cases", len(v["cases"]) >= 20 and len({c["id"] for c in v["cases"]}) == len(v["cases"]), "au moins 20 cas aux identifiants distincts")
+    for c in v["cases"]:
+        cid, t, e = c["id"], c["type"], c["expect"]
+        for key, lab in (("issuedAt", "issuedAtLabel"), ("now", "nowLabel")):
+            if lab in c:
+                check(cid + "/" + lab, douala_label(c[key]) == c[lab], "%s ≠ %s" % (douala_label(c[key]), c[lab]))
+        if t in ("pilot-new", "pilot-extend", "pilot-reissue"):
+            try:
+                got = {"pilot-new": pilot_new, "pilot-extend": pilot_extend, "pilot-reissue": pilot_reissue}[t](v, c)
+            except Refused as r:
+                got = {"refused": True, "why": str(r)}
+            if e.get("refused"):
+                check(cid, got.get("refused") is True, "devait être refusé (réponse Python : %s)" % got.get("line"))
+            else:
+                check(cid, got.get("ok") is True and all(got[k] == e[k] for k in PILOT_USAGE_FIELDS), "attendu %s, obtenu %s" % ({k: e[k] for k in PILOT_USAGE_FIELDS}, got))
+                period = c["existing"]["period"] if t != "pilot-new" else c["issuedAt"]
+                f = expand_line(e["line"], c["issuedAt"], period).split("|")
+                check(cid + "/ten-fields", len(f) == 10 and rental_ok(f) and rental_bounds_ok("|".join(f)), "ligne illisible ou hors bornes : " + "|".join(f))
+                if f[7] != "0":      # an hourly line never promises more than the engine will give
+                    check(cid + "/cap", int(f[7]) <= HARD_CAP_MIN)
+                limit = pilot_bounds(v)[2] + (DAY if t != "pilot-new" else 0) if int(f[7]) > 0 else pilot_bounds(v)[3]
+                check(cid + "/ends-before-limit", max(int(f[3]), c["issuedAt"]) + int(f[5]) * DAY <= limit + (DAY if t == "pilot-extend" and int(f[7]) > 0 else 0), "fin au-delà de la borne")
+        elif t == "engine-contract":
+            got = pilot_engine(c)
+            check(cid, got["unit"] == e["unit"] and got["maxUsageMinutes"] == e["maxUsageMinutes"] and got["endsAt"] == e["endsAt"] and got["notes"] == len(e["notes"])
+                  and got["state"] == e["state"] and got["reason"] == e["reason"] and got["remainingUsageMinutes"] == e["remainingUsageMinutes"], "Python %s ≠ Kotlin %s" % (got, e))
+            check(cid + "/ceiling", e["maxUsageMinutes"] <= HARD_CAP_MIN and (e["unit"] == "hours") == (e["maxUsageMinutes"] > 0))
+        elif t == "line-parse":
+            f = c["line"].split("|")
+            ok = len(f) == 10 and rental_ok(f)
+            if e.get("refused"):
+                check(cid, not ok, "devait être illisible")
+            else:
+                check(cid, ok and f[1] == e["product"] and int(f[5]) == e["days"] and int(f[7]) == e["usage"] and int(f[8]) == e["concurrent"] and (e["bounds"] is None) == rental_bounds_ok(c["line"]) and "|".join(f) == e["line"], "ligne différente")
+        elif t == "usage-report":
+            rows = e["text"].split("\n")
+            check(cid + "/header", rows[0] == "castbridge-rental-usage-v1" and re.match(r"^install=[0-9a-f]{16}$", rows[1]) and rows[1] == "install=" + c["installId"] and rows[-1] == "", "en-tête")
+            body = rows[2:-1]
+            parsed = [USAGE_LINE.match(x) for x in body]
+            check(cid + "/lines", all(parsed) and len(body) == len(c["contracts"]) and body == sorted(body), "lignes de contrat")
+            if all(parsed):
+                for m, ct in zip(parsed, sorted(c["contracts"], key=lambda x: x["product"])):
+                    hours = ct["usage"] > 0
+                    check(cid + "/" + ct["product"], m.group(1) == ct["product"] and int(m.group(2)) == c["at"] and m.group(3) == ("hours" if hours else "days") and int(m.group(4)) == (min(ct["used"], ct["usage"]) if hours else ct["used"])
+                          and int(m.group(5)) == ct["usage"] and m.group(6) == "ACTIVE" and m.group(7) == "-" and int(m.group(8)) == c["at"] + ct["days"] * DAY and int(m.group(9)) == c["at"] + 3 * 60_000, "ligne " + m.group(0))
+            check(cid + "/no-personal-data", not any(w in e["text"].lower() for w in ("lic-", "seat", "box", "flashserial", "aa:bb", "profil", "enfant")))
+        elif t == "build-activation":
+            res_parse = parse_envelope(e["token"])
+            check(cid + "/envelope", res_parse is not None)
+            if res_parse is None:
+                continue
+            case = {"token": e["token"], "trustedKeys": list(keys), "revokedKeys": [], "revokedSeats": [], "lastSeq": {}, "expectSubject": "tv", "device": c["device"], "nowMs": c["issuedAt"]}
+            res = verify_activation(case, keys, devices)
+            check(cid + "/signature", res[0] == "accepted", str(res))
+            view = activation_view(res_parse[0])
+            rentals = [x for x in view["rights"] if x.startswith("rental|")]
+            check(cid + "/one-rental-line", len(rentals) == 1 and len(view["rights"]) == 1)
+            if len(rentals) == 1:
+                f = rentals[0].split("|")
+                want = expand_line(e["line"], c["issuedAt"], c["issuedAt"]).split("|")
+                check(cid + "/line", len(f) == 10 and f[:9] == want[:9] and f[9].startswith("v2:") and rental_ok(f) and rental_bounds_ok(rentals[0]), "ligne signée %s" % rentals[0][:80])
+            check(cid + "/window", res_parse[0]["expiresAt"] - res_parse[0]["notBefore"] == c["windowHours"] * HOUR and res_parse[0]["issuedAt"] == c["issuedAt"])
+        elif t == "meter":
+            check(cid, all(isinstance(x, int) and 0 <= x <= 1440 for x in e["minutes"]), "minutes hors bornes")      # the counter itself is replayed by Kotlin only
+            check(cid + "/never-above-elapsed", sum(e["minutes"]) * 60_000 <= max([op[-1] for op in c["ops"] if len(op) > 1 and isinstance(op[-1], int)] or [0]) + 1, "plus de minutes que de temps écoulé")
+        else:
+            check(cid, False, "type inconnu " + t)
+    return n, failures
+
+
+
 def main():
     if "--only" in sys.argv and sys.argv[sys.argv.index("--only") + 1:][:1] == ["store"]:
         n, failures = run_store_vectors()
@@ -1201,8 +1497,14 @@ def main():
         for f in failures:
             print("ÉCHEC :", f)
         return 1 if failures else 0
+    if "--pilot" in sys.argv:
+        n, failures = run_pilot_vectors()
+        print("%-36s %4d contrôles, %d échecs" % ("rental-pilot-vectors.json", n, len(failures)))
+        for f in failures:
+            print("ÉCHEC :", f)
+        return 1 if failures else 0
     total, bad = 0, 0
-    for name, run in (("test-vectors.json", run_test_vectors), ("rental-vectors.json", run_rental_vectors), ("server-issued.json", run_server_issued), ("implicit usage end (sans fichier)", run_implicit_usage_end)):
+    for name, run in (("test-vectors.json", run_test_vectors), ("rental-vectors.json", run_rental_vectors), ("server-issued.json", run_server_issued), ("implicit usage end (sans fichier)", run_implicit_usage_end), ("rental-pilot-vectors.json", run_pilot_vectors)):
         n, failures = run()
         print("%-36s %4d contrôles, %d échecs" % (name, n, len(failures)))
         for f in failures:

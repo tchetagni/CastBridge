@@ -1,0 +1,1659 @@
+{
+  "format": "castbridge-rental-pilot-vectors-v1",
+  "warning": "CLÉS, APPAREILS, INSTALLATIONS ET SECRET DE TEST dérivés de textes publics : ne protègent rien. Fuseau du pilote : Africa/Douala (UTC+1). Voir docs/coordination/DESIGN-W16-LOCATION-DUREE-CHOISIE-PILOTE-2026-10-02.md § 2.5.",
+  "master": "80831ae0b94302f30b4af422a5cb3779df4017f83820d8dd9ee609bafa90ea64",
+  "keys": [
+    {
+      "name": "desk",
+      "seed": "282562d9a2f66647a16e498fad69a8ee6ecdf4877988c39aa2cb3684c1fc84e5",
+      "scopes": ["COMMAND_OPEN_ALL", "COMMAND_SUPPORT", "COMMAND_UNLOCK", "ISSUE_PRODUCTION", "ISSUE_TRIAL", "POLICY", "REACTIVATE", "REGISTRY", "REVOKE", "SUPER_UNLIMITED", "TRANSFER"]
+    }
+  ],
+  "devices": [
+    {
+      "name": "tvA",
+      "raw": {
+        "flashSerial": "FLASHSERIAL-R1",
+        "flashCid": "cid-r1",
+        "ethernetMac": "AA:BB:CC:00:22:01",
+        "wifiMac": "10:20:30:40:60:01",
+        "wifiSysfsPath": "/sys/devices/platform/soc/ffe03000.sd/mmc_host/mmc1/mmc1:0001/net/wlan0",
+        "systemSerial": "SYSR0001",
+        "bluetoothAddress": "11:22:33:44:66:01"
+      }
+    }
+  ],
+  "installs": [
+    {
+      "name": "tvA-install-1",
+      "seed": "bf3b44eca07766f1857ef673625517cf65d0ef17eb189d0d84ce4c7d55cd6081"
+    },
+    {
+      "name": "tvA-install-2",
+      "seed": "72c2efc1eb502b583e5f733aa3b2fcb0bef4f58d69ae5066465f4f05bdfcf57a"
+    }
+  ],
+  "params": {
+    "pilot.start": "2026-10-12",
+    "pilot.end": "2026-11-01"
+  },
+  "catalog": {
+    "bundles": [
+      {
+        "id": "classe-cm2",
+        "type": "classe",
+        "lots": ["learn:cm2"],
+        "title": "CM2"
+      },
+      {
+        "id": "classe-cp",
+        "type": "classe",
+        "lots": ["learn:cp"],
+        "title": "CP",
+        "rentalDays": 7
+      },
+      {
+        "id": "classe-ce1",
+        "type": "classe",
+        "lots": ["learn:ce1"],
+        "title": "CE1"
+      },
+      {
+        "id": "classe-6e",
+        "type": "classe",
+        "lots": ["learn:6e"],
+        "title": "6e"
+      },
+      {
+        "id": "langues-fr",
+        "type": "langues",
+        "lots": ["learn:lang-fr"],
+        "title": "Français"
+      },
+      {
+        "id": "inconnu-famille",
+        "type": "classe",
+        "lots": ["learn:zzz"],
+        "title": "Sans famille"
+      }
+    ]
+  },
+  "families": {
+    "reserved": ["learn:cm2", "learn:cp", "learn:ce1", "learn:6e"],
+    "free": ["learn:lang-fr"]
+  },
+  "cases": [
+    {
+      "id": "line-default-30d",
+      "type": "pilot-new",
+      "choice": "defaut",
+      "bundle": "classe-cm2",
+      "issuedAt": 1791802800000,
+      "issuedAtLabel": "2026-10-12T12:00:00.000+01:00",
+      "state": {
+        "active": [],
+        "hoursLast168": 0
+      },
+      "expect": {
+        "ok": true,
+        "days": 30,
+        "usage": 0,
+        "concurrent": 3,
+        "line": "rental|loc-classe-cm2|classe-cm2|T|T|30|0|0|3|"
+      }
+    },
+    {
+      "id": "line-7d",
+      "type": "pilot-new",
+      "choice": "7j",
+      "bundle": "classe-cm2",
+      "issuedAt": 1791975600000,
+      "issuedAtLabel": "2026-10-14T12:00:00.000+01:00",
+      "state": {
+        "active": [],
+        "hoursLast168": 0
+      },
+      "expect": {
+        "ok": true,
+        "days": 7,
+        "usage": 0,
+        "concurrent": 3,
+        "line": "rental|loc-classe-cm2|classe-cm2|T|T|7|0|0|3|"
+      }
+    },
+    {
+      "id": "line-1h",
+      "type": "pilot-new",
+      "choice": "1h",
+      "bundle": "classe-cm2",
+      "issuedAt": 1791975600000,
+      "issuedAtLabel": "2026-10-14T12:00:00.000+01:00",
+      "state": {
+        "active": [],
+        "hoursLast168": 0
+      },
+      "expect": {
+        "ok": true,
+        "days": 30,
+        "usage": 60,
+        "concurrent": 3,
+        "line": "rental|loc-classe-cm2|classe-cm2|T|T|30|0|60|3|"
+      }
+    },
+    {
+      "id": "line-12h-bound-12oct-first-instant",
+      "type": "pilot-new",
+      "choice": "12h",
+      "bundle": "classe-cm2",
+      "issuedAt": 1791759600000,
+      "issuedAtLabel": "2026-10-12T00:00:00.000+01:00",
+      "state": {
+        "active": [],
+        "hoursLast168": 0
+      },
+      "expect": {
+        "ok": true,
+        "days": 30,
+        "usage": 720,
+        "concurrent": 3,
+        "line": "rental|loc-classe-cm2|classe-cm2|T|T|30|0|720|3|"
+      }
+    },
+    {
+      "id": "line-12h-bound-25oct",
+      "type": "pilot-new",
+      "choice": "12h",
+      "bundle": "classe-cm2",
+      "issuedAt": 1792926000000,
+      "issuedAtLabel": "2026-10-25T12:00:00.000+01:00",
+      "state": {
+        "active": [],
+        "hoursLast168": 0
+      },
+      "expect": {
+        "ok": true,
+        "days": 21,
+        "usage": 720,
+        "concurrent": 3,
+        "line": "rental|loc-classe-cm2|classe-cm2|T|T|21|0|720|3|"
+      }
+    },
+    {
+      "id": "line-1h-last-instant-of-pilot",
+      "type": "pilot-new",
+      "choice": "1h",
+      "bundle": "classe-cm2",
+      "issuedAt": 1793573999999,
+      "issuedAtLabel": "2026-11-01T23:59:59.999+01:00",
+      "state": {
+        "active": [],
+        "hoursLast168": 0
+      },
+      "expect": {
+        "ok": true,
+        "days": 14,
+        "usage": 60,
+        "concurrent": 3,
+        "line": "rental|loc-classe-cm2|classe-cm2|T|T|14|0|60|3|"
+      }
+    },
+    {
+      "id": "line-96h",
+      "type": "pilot-new",
+      "choice": "96h",
+      "bundle": "classe-cm2",
+      "issuedAt": 1792494000000,
+      "issuedAtLabel": "2026-10-20T12:00:00.000+01:00",
+      "state": {
+        "active": [],
+        "hoursLast168": 0
+      },
+      "expect": {
+        "ok": true,
+        "days": 26,
+        "usage": 5760,
+        "concurrent": 3,
+        "line": "rental|loc-classe-cm2|classe-cm2|T|T|26|0|5760|3|"
+      }
+    },
+    {
+      "id": "line-default-honoured-until-1dec",
+      "type": "pilot-new",
+      "choice": "defaut",
+      "bundle": "classe-cm2",
+      "issuedAt": 1793573999999,
+      "issuedAtLabel": "2026-11-01T23:59:59.999+01:00",
+      "state": {
+        "active": [],
+        "hoursLast168": 0
+      },
+      "expect": {
+        "ok": true,
+        "days": 30,
+        "usage": 0,
+        "concurrent": 3,
+        "line": "rental|loc-classe-cm2|classe-cm2|T|T|30|0|0|3|"
+      }
+    },
+    {
+      "id": "line-30d-last-instant-of-pilot",
+      "type": "pilot-new",
+      "choice": "30j",
+      "bundle": "classe-cm2",
+      "issuedAt": 1793573999999,
+      "issuedAtLabel": "2026-11-01T23:59:59.999+01:00",
+      "state": {
+        "active": [],
+        "hoursLast168": 0
+      },
+      "expect": {
+        "ok": true,
+        "days": 30,
+        "usage": 0,
+        "concurrent": 3,
+        "line": "rental|loc-classe-cm2|classe-cm2|T|T|30|0|0|3|"
+      }
+    },
+    {
+      "id": "line-default-bundle-rental-days",
+      "type": "pilot-new",
+      "choice": "defaut",
+      "bundle": "classe-cp",
+      "issuedAt": 1791975600000,
+      "issuedAtLabel": "2026-10-14T12:00:00.000+01:00",
+      "state": {
+        "active": [],
+        "hoursLast168": 0
+      },
+      "expect": {
+        "ok": true,
+        "days": 7,
+        "usage": 0,
+        "concurrent": 3,
+        "line": "rental|loc-classe-cp|classe-cp|T|T|7|0|0|3|"
+      }
+    },
+    {
+      "id": "before-pilot-refused",
+      "type": "pilot-new",
+      "choice": "defaut",
+      "bundle": "classe-cm2",
+      "issuedAt": 1791759599999,
+      "issuedAtLabel": "2026-10-11T23:59:59.999+01:00",
+      "state": {
+        "active": [],
+        "hoursLast168": 0
+      },
+      "expect": {
+        "refused": true,
+        "reason": "Le test gratuit n'a pas commencé : il débute le 12/10"
+      }
+    },
+    {
+      "id": "after-pilot-end-refused",
+      "type": "pilot-new",
+      "choice": "defaut",
+      "bundle": "classe-cm2",
+      "issuedAt": 1793574000000,
+      "issuedAtLabel": "2026-11-02T00:00:00.000+01:00",
+      "state": {
+        "active": [],
+        "hoursLast168": 0
+      },
+      "expect": {
+        "refused": true,
+        "reason": "Le test gratuit est terminé (fin le 01/11) : plus aucune location n'est émise"
+      }
+    },
+    {
+      "id": "hours-above-cap-refused",
+      "type": "pilot-new",
+      "choice": "97h",
+      "bundle": "classe-cm2",
+      "issuedAt": 1791975600000,
+      "issuedAtLabel": "2026-10-14T12:00:00.000+01:00",
+      "state": {
+        "active": [],
+        "hoursLast168": 0
+      },
+      "expect": {
+        "refused": true,
+        "reason": "Une location en heures d'utilisation va de 1 à 96 heures par location (97 demandées)"
+      }
+    },
+    {
+      "id": "days-above-max-refused",
+      "type": "pilot-new",
+      "choice": "31j",
+      "bundle": "classe-cm2",
+      "issuedAt": 1791975600000,
+      "issuedAtLabel": "2026-10-14T12:00:00.000+01:00",
+      "state": {
+        "active": [],
+        "hoursLast168": 0
+      },
+      "expect": {
+        "refused": true,
+        "reason": "Une location en jours va de 1 à 30 jours (31 demandés)"
+      }
+    },
+    {
+      "id": "fourth-contract-refused",
+      "type": "pilot-new",
+      "choice": "1h",
+      "bundle": "classe-6e",
+      "issuedAt": 1791975600000,
+      "issuedAtLabel": "2026-10-14T12:00:00.000+01:00",
+      "state": {
+        "active": [
+          {
+            "product": "loc-a",
+            "period": 1791802800000,
+            "unit": "days",
+            "usage": 0,
+            "endsAt": 1794394800000,
+            "reissues": 0,
+            "endedAt": null,
+            "installPub": "OLD"
+          },
+          {
+            "product": "loc-b",
+            "period": 1791802800000,
+            "unit": "days",
+            "usage": 0,
+            "endsAt": 1794394800000,
+            "reissues": 0,
+            "endedAt": null,
+            "installPub": "OLD"
+          },
+          {
+            "product": "loc-c",
+            "period": 1791802800000,
+            "unit": "days",
+            "usage": 0,
+            "endsAt": 1794394800000,
+            "reissues": 0,
+            "endedAt": null,
+            "installPub": "OLD"
+          }
+        ],
+        "hoursLast168": 0
+      },
+      "expect": {
+        "refused": true,
+        "reason": "Cette licence a déjà 3 locations en cours : au plus 3 à la fois"
+      }
+    },
+    {
+      "id": "third-contract-accepted",
+      "type": "pilot-new",
+      "choice": "1h",
+      "bundle": "classe-6e",
+      "issuedAt": 1791975600000,
+      "issuedAtLabel": "2026-10-14T12:00:00.000+01:00",
+      "state": {
+        "active": [
+          {
+            "product": "loc-a",
+            "period": 1791802800000,
+            "unit": "days",
+            "usage": 0,
+            "endsAt": 1794394800000,
+            "reissues": 0,
+            "endedAt": null,
+            "installPub": "OLD"
+          },
+          {
+            "product": "loc-b",
+            "period": 1791802800000,
+            "unit": "days",
+            "usage": 0,
+            "endsAt": 1794394800000,
+            "reissues": 0,
+            "endedAt": null,
+            "installPub": "OLD"
+          }
+        ],
+        "hoursLast168": 0
+      },
+      "expect": {
+        "ok": true,
+        "days": 30,
+        "usage": 60,
+        "concurrent": 3,
+        "line": "rental|loc-classe-6e|classe-6e|T|T|30|0|60|3|"
+      }
+    },
+    {
+      "id": "bundle-already-rented-refused",
+      "type": "pilot-new",
+      "choice": "1h",
+      "bundle": "classe-cm2",
+      "issuedAt": 1791975600000,
+      "issuedAtLabel": "2026-10-14T12:00:00.000+01:00",
+      "state": {
+        "active": [
+          {
+            "product": "loc-classe-cm2",
+            "period": 1791802800000,
+            "unit": "hours",
+            "usage": 720,
+            "endsAt": 1794394800000,
+            "reissues": 0,
+            "endedAt": null,
+            "installPub": "OLD"
+          }
+        ],
+        "hoursLast168": 0
+      },
+      "expect": {
+        "refused": true,
+        "reason": "« CM2 » est déjà loué : prolongez cette location, dans la même unité, au lieu d'en créer une autre"
+      }
+    },
+    {
+      "id": "langues-refused",
+      "type": "pilot-new",
+      "choice": "7j",
+      "bundle": "langues-fr",
+      "issuedAt": 1791975600000,
+      "issuedAtLabel": "2026-10-14T12:00:00.000+01:00",
+      "state": {
+        "active": [],
+        "hoursLast168": 0
+      },
+      "expect": {
+        "refused": true,
+        "reason": "« Français » est un bouquet de Langues (contenu libre, CC BY-SA) : il ne se loue jamais"
+      }
+    },
+    {
+      "id": "unknown-family-refused",
+      "type": "pilot-new",
+      "choice": "7j",
+      "bundle": "inconnu-famille",
+      "issuedAt": 1791975600000,
+      "issuedAtLabel": "2026-10-14T12:00:00.000+01:00",
+      "state": {
+        "active": [],
+        "hoursLast168": 0
+      },
+      "expect": {
+        "refused": true,
+        "reason": "« Sans famille » : famille du lot « learn:zzz » inconnue, location refusée par précaution"
+      }
+    },
+    {
+      "id": "quota-192h-168h-last-hour-accepted",
+      "type": "pilot-new",
+      "choice": "2h",
+      "bundle": "classe-cm2",
+      "issuedAt": 1791975600000,
+      "issuedAtLabel": "2026-10-14T12:00:00.000+01:00",
+      "state": {
+        "active": [],
+        "hoursLast168": 190
+      },
+      "expect": {
+        "ok": true,
+        "days": 30,
+        "usage": 120,
+        "concurrent": 3,
+        "line": "rental|loc-classe-cm2|classe-cm2|T|T|30|0|120|3|"
+      }
+    },
+    {
+      "id": "quota-192h-168h-refused",
+      "type": "pilot-new",
+      "choice": "3h",
+      "bundle": "classe-cm2",
+      "issuedAt": 1791975600000,
+      "issuedAtLabel": "2026-10-14T12:00:00.000+01:00",
+      "state": {
+        "active": [],
+        "hoursLast168": 190
+      },
+      "expect": {
+        "refused": true,
+        "reason": "Quota atteint : 192 heures d'utilisation sur 168 heures glissantes par licence, il en reste 2"
+      }
+    },
+    {
+      "id": "extend-6h-plus-6h",
+      "type": "pilot-extend",
+      "choice": "6h",
+      "bundle": "classe-cm2",
+      "issuedAt": 1791975600000,
+      "issuedAtLabel": "2026-10-14T12:00:00.000+01:00",
+      "existing": {
+        "product": "loc-classe-cm2",
+        "period": 1791802800000,
+        "unit": "hours",
+        "usage": 360,
+        "endsAt": 1794394800000,
+        "reissues": 0,
+        "endedAt": null,
+        "installPub": "OLD"
+      },
+      "state": {
+        "active": [
+          {
+            "product": "loc-classe-cm2",
+            "period": 1791802800000,
+            "unit": "hours",
+            "usage": 360,
+            "endsAt": 1794394800000,
+            "reissues": 0,
+            "endedAt": null,
+            "installPub": "OLD"
+          }
+        ],
+        "hoursLast168": 0
+      },
+      "expect": {
+        "ok": true,
+        "days": 1,
+        "usage": 360,
+        "concurrent": 3,
+        "line": "rental|loc-classe-cm2|classe-cm2|T2|T|1|0|360|3|"
+      }
+    },
+    {
+      "id": "extend-36h-after-60h",
+      "type": "pilot-extend",
+      "choice": "36h",
+      "bundle": "classe-cm2",
+      "issuedAt": 1791975600000,
+      "issuedAtLabel": "2026-10-14T12:00:00.000+01:00",
+      "existing": {
+        "product": "loc-classe-cm2",
+        "period": 1791802800000,
+        "unit": "hours",
+        "usage": 3600,
+        "endsAt": 1794394800000,
+        "reissues": 0,
+        "endedAt": null,
+        "installPub": "OLD"
+      },
+      "state": {
+        "active": [
+          {
+            "product": "loc-classe-cm2",
+            "period": 1791802800000,
+            "unit": "hours",
+            "usage": 3600,
+            "endsAt": 1794394800000,
+            "reissues": 0,
+            "endedAt": null,
+            "installPub": "OLD"
+          }
+        ],
+        "hoursLast168": 0
+      },
+      "expect": {
+        "ok": true,
+        "days": 1,
+        "usage": 2160,
+        "concurrent": 3,
+        "line": "rental|loc-classe-cm2|classe-cm2|T2|T|1|0|2160|3|"
+      }
+    },
+    {
+      "id": "extend-37h-after-60h-refused",
+      "type": "pilot-extend",
+      "choice": "37h",
+      "bundle": "classe-cm2",
+      "issuedAt": 1791975600000,
+      "issuedAtLabel": "2026-10-14T12:00:00.000+01:00",
+      "existing": {
+        "product": "loc-classe-cm2",
+        "period": 1791802800000,
+        "unit": "hours",
+        "usage": 3600,
+        "endsAt": 1794394800000,
+        "reissues": 0,
+        "endedAt": null,
+        "installPub": "OLD"
+      },
+      "state": {
+        "active": [
+          {
+            "product": "loc-classe-cm2",
+            "period": 1791802800000,
+            "unit": "hours",
+            "usage": 3600,
+            "endsAt": 1794394800000,
+            "reissues": 0,
+            "endedAt": null,
+            "installPub": "OLD"
+          }
+        ],
+        "hoursLast168": 0
+      },
+      "expect": {
+        "refused": true,
+        "reason": "Cette location a déjà 60 h d'utilisation : on ne dépasse pas 96 h par location (au plus 36 h de plus)"
+      }
+    },
+    {
+      "id": "extend-12h-after-90h-refused",
+      "type": "pilot-extend",
+      "choice": "12h",
+      "bundle": "classe-cm2",
+      "issuedAt": 1791975600000,
+      "issuedAtLabel": "2026-10-14T12:00:00.000+01:00",
+      "existing": {
+        "product": "loc-classe-cm2",
+        "period": 1791802800000,
+        "unit": "hours",
+        "usage": 5400,
+        "endsAt": 1794394800000,
+        "reissues": 0,
+        "endedAt": null,
+        "installPub": "OLD"
+      },
+      "state": {
+        "active": [
+          {
+            "product": "loc-classe-cm2",
+            "period": 1791802800000,
+            "unit": "hours",
+            "usage": 5400,
+            "endsAt": 1794394800000,
+            "reissues": 0,
+            "endedAt": null,
+            "installPub": "OLD"
+          }
+        ],
+        "hoursLast168": 0
+      },
+      "expect": {
+        "refused": true,
+        "reason": "Cette location a déjà 90 h d'utilisation : on ne dépasse pas 96 h par location (au plus 6 h de plus)"
+      }
+    },
+    {
+      "id": "extend-days-on-hourly-contract-refused",
+      "type": "pilot-extend",
+      "choice": "7j",
+      "bundle": "classe-cm2",
+      "issuedAt": 1791975600000,
+      "issuedAtLabel": "2026-10-14T12:00:00.000+01:00",
+      "existing": {
+        "product": "loc-classe-cm2",
+        "period": 1791802800000,
+        "unit": "hours",
+        "usage": 360,
+        "endsAt": 1794394800000,
+        "reissues": 0,
+        "endedAt": null,
+        "installPub": "OLD"
+      },
+      "state": {
+        "active": [
+          {
+            "product": "loc-classe-cm2",
+            "period": 1791802800000,
+            "unit": "hours",
+            "usage": 360,
+            "endsAt": 1794394800000,
+            "reissues": 0,
+            "endedAt": null,
+            "installPub": "OLD"
+          }
+        ],
+        "hoursLast168": 0
+      },
+      "expect": {
+        "refused": true,
+        "reason": "On ne mélange pas les heures et les jours : cette location est en heures d'utilisation"
+      }
+    },
+    {
+      "id": "extend-hours-on-day-contract-refused",
+      "type": "pilot-extend",
+      "choice": "6h",
+      "bundle": "classe-cm2",
+      "issuedAt": 1791975600000,
+      "issuedAtLabel": "2026-10-14T12:00:00.000+01:00",
+      "existing": {
+        "product": "loc-classe-cm2",
+        "period": 1791802800000,
+        "unit": "days",
+        "usage": 0,
+        "endsAt": 1794394800000,
+        "reissues": 0,
+        "endedAt": null,
+        "installPub": "OLD"
+      },
+      "state": {
+        "active": [
+          {
+            "product": "loc-classe-cm2",
+            "period": 1791802800000,
+            "unit": "days",
+            "usage": 0,
+            "endsAt": 1794394800000,
+            "reissues": 0,
+            "endedAt": null,
+            "installPub": "OLD"
+          }
+        ],
+        "hoursLast168": 0
+      },
+      "expect": {
+        "refused": true,
+        "reason": "On ne mélange pas les heures et les jours : cette location est en jours"
+      }
+    },
+    {
+      "id": "extend-hours-to-16nov-once",
+      "type": "pilot-extend",
+      "choice": "1h",
+      "bundle": "classe-cm2",
+      "issuedAt": 1793530800000,
+      "issuedAtLabel": "2026-11-01T12:00:00.000+01:00",
+      "existing": {
+        "product": "loc-classe-cm2",
+        "period": 1793530800000,
+        "unit": "hours",
+        "usage": 180,
+        "endsAt": 1794783599999,
+        "reissues": 0,
+        "endedAt": null,
+        "installPub": "OLD"
+      },
+      "state": {
+        "active": [
+          {
+            "product": "loc-classe-cm2",
+            "period": 1793530800000,
+            "unit": "hours",
+            "usage": 180,
+            "endsAt": 1794783599999,
+            "reissues": 0,
+            "endedAt": null,
+            "installPub": "OLD"
+          }
+        ],
+        "hoursLast168": 0
+      },
+      "expect": {
+        "ok": true,
+        "days": 1,
+        "usage": 60,
+        "concurrent": 3,
+        "line": "rental|loc-classe-cm2|classe-cm2|T|T|1|0|60|3|"
+      }
+    },
+    {
+      "id": "extend-hours-edge-plus-1ms-refused",
+      "type": "pilot-extend",
+      "choice": "1h",
+      "bundle": "classe-cm2",
+      "issuedAt": 1793530800000,
+      "issuedAtLabel": "2026-11-01T12:00:00.000+01:00",
+      "existing": {
+        "product": "loc-classe-cm2",
+        "period": 1793530800000,
+        "unit": "hours",
+        "usage": 180,
+        "endsAt": 1794783600000,
+        "reissues": 0,
+        "endedAt": null,
+        "installPub": "OLD"
+      },
+      "state": {
+        "active": [
+          {
+            "product": "loc-classe-cm2",
+            "period": 1793530800000,
+            "unit": "hours",
+            "usage": 180,
+            "endsAt": 1794783600000,
+            "reissues": 0,
+            "endedAt": null,
+            "installPub": "OLD"
+          }
+        ],
+        "hoursLast168": 0
+      },
+      "expect": {
+        "refused": true,
+        "reason": "Les heures doivent être utilisées avant le 16/11 (fin du test gratuit)"
+      }
+    },
+    {
+      "id": "extend-hours-after-16nov-limit-refused",
+      "type": "pilot-extend",
+      "choice": "1h",
+      "bundle": "classe-cm2",
+      "issuedAt": 1793530800000,
+      "issuedAtLabel": "2026-11-01T12:00:00.000+01:00",
+      "existing": {
+        "product": "loc-classe-cm2",
+        "period": 1793530800000,
+        "unit": "hours",
+        "usage": 240,
+        "endsAt": 1794869999999,
+        "reissues": 0,
+        "endedAt": null,
+        "installPub": "OLD"
+      },
+      "state": {
+        "active": [
+          {
+            "product": "loc-classe-cm2",
+            "period": 1793530800000,
+            "unit": "hours",
+            "usage": 240,
+            "endsAt": 1794869999999,
+            "reissues": 0,
+            "endedAt": null,
+            "installPub": "OLD"
+          }
+        ],
+        "hoursLast168": 0
+      },
+      "expect": {
+        "refused": true,
+        "reason": "Les heures doivent être utilisées avant le 16/11 (fin du test gratuit)"
+      }
+    },
+    {
+      "id": "extend-after-pilot-end-refused",
+      "type": "pilot-extend",
+      "choice": "1h",
+      "bundle": "classe-cm2",
+      "issuedAt": 1793574000000,
+      "issuedAtLabel": "2026-11-02T00:00:00.000+01:00",
+      "existing": {
+        "product": "loc-classe-cm2",
+        "period": 1791802800000,
+        "unit": "hours",
+        "usage": 180,
+        "endsAt": 1794394800000,
+        "reissues": 0,
+        "endedAt": null,
+        "installPub": "OLD"
+      },
+      "state": {
+        "active": [
+          {
+            "product": "loc-classe-cm2",
+            "period": 1791802800000,
+            "unit": "hours",
+            "usage": 180,
+            "endsAt": 1794394800000,
+            "reissues": 0,
+            "endedAt": null,
+            "installPub": "OLD"
+          }
+        ],
+        "hoursLast168": 0
+      },
+      "expect": {
+        "refused": true,
+        "reason": "Le test gratuit est terminé (fin le 01/11) : plus aucune location n'est émise"
+      }
+    },
+    {
+      "id": "extend-quota-168h-refused",
+      "type": "pilot-extend",
+      "choice": "5h",
+      "bundle": "classe-cm2",
+      "issuedAt": 1791975600000,
+      "issuedAtLabel": "2026-10-14T12:00:00.000+01:00",
+      "existing": {
+        "product": "loc-classe-cm2",
+        "period": 1791802800000,
+        "unit": "hours",
+        "usage": 360,
+        "endsAt": 1794394800000,
+        "reissues": 0,
+        "endedAt": null,
+        "installPub": "OLD"
+      },
+      "state": {
+        "active": [
+          {
+            "product": "loc-classe-cm2",
+            "period": 1791802800000,
+            "unit": "hours",
+            "usage": 360,
+            "endsAt": 1794394800000,
+            "reissues": 0,
+            "endedAt": null,
+            "installPub": "OLD"
+          }
+        ],
+        "hoursLast168": 190
+      },
+      "expect": {
+        "refused": true,
+        "reason": "Quota atteint : 192 heures d'utilisation sur 168 heures glissantes par licence, il en reste 2"
+      }
+    },
+    {
+      "id": "reissue-same-key-refused",
+      "type": "pilot-reissue",
+      "bundle": "classe-cm2",
+      "issuedAt": 1792494000000,
+      "issuedAtLabel": "2026-10-20T12:00:00.000+01:00",
+      "existing": {
+        "product": "loc-classe-cm2",
+        "period": 1791802800000,
+        "unit": "hours",
+        "usage": 1200,
+        "endsAt": 1794394800000,
+        "reissues": 0,
+        "endedAt": null,
+        "installPub": "OLD"
+      },
+      "usedMinutes": 300,
+      "newInstallPub": "OLD",
+      "state": {
+        "active": [
+          {
+            "product": "loc-classe-cm2",
+            "period": 1791802800000,
+            "unit": "hours",
+            "usage": 1200,
+            "endsAt": 1794394800000,
+            "reissues": 0,
+            "endedAt": null,
+            "installPub": "OLD"
+          }
+        ],
+        "hoursLast168": 0
+      },
+      "expect": {
+        "refused": true,
+        "reason": "Même installation que la location d'origine : la TV garde déjà cette location, une réémission s'y ajouterait (fin doublée, heures rendues) ; prolongez-la plutôt"
+      }
+    },
+    {
+      "id": "reissue-hours-other-key",
+      "type": "pilot-reissue",
+      "bundle": "classe-cm2",
+      "issuedAt": 1792494000000,
+      "issuedAtLabel": "2026-10-20T12:00:00.000+01:00",
+      "existing": {
+        "product": "loc-classe-cm2",
+        "period": 1791802800000,
+        "unit": "hours",
+        "usage": 1200,
+        "endsAt": 1794394800000,
+        "reissues": 0,
+        "endedAt": null,
+        "installPub": "OLD"
+      },
+      "usedMinutes": 300,
+      "newInstallPub": "NEW",
+      "state": {
+        "active": [
+          {
+            "product": "loc-classe-cm2",
+            "period": 1791802800000,
+            "unit": "hours",
+            "usage": 1200,
+            "endsAt": 1794394800000,
+            "reissues": 0,
+            "endedAt": null,
+            "installPub": "OLD"
+          }
+        ],
+        "hoursLast168": 0
+      },
+      "expect": {
+        "ok": true,
+        "days": 22,
+        "usage": 900,
+        "concurrent": 3,
+        "line": "rental|loc-classe-cm2|classe-cm2|T2|T|22|0|900|3|"
+      }
+    },
+    {
+      "id": "reissue-days-floor",
+      "type": "pilot-reissue",
+      "bundle": "classe-cm2",
+      "issuedAt": 1792515600000,
+      "issuedAtLabel": "2026-10-20T18:00:00.000+01:00",
+      "existing": {
+        "product": "loc-classe-cm2",
+        "period": 1791802800000,
+        "unit": "days",
+        "usage": 0,
+        "endsAt": 1794394800000,
+        "reissues": 0,
+        "endedAt": null,
+        "installPub": "OLD"
+      },
+      "usedMinutes": 0,
+      "newInstallPub": "NEW",
+      "state": {
+        "active": [
+          {
+            "product": "loc-classe-cm2",
+            "period": 1791802800000,
+            "unit": "days",
+            "usage": 0,
+            "endsAt": 1794394800000,
+            "reissues": 0,
+            "endedAt": null,
+            "installPub": "OLD"
+          }
+        ],
+        "hoursLast168": 0
+      },
+      "expect": {
+        "ok": true,
+        "days": 21,
+        "usage": 0,
+        "concurrent": 3,
+        "line": "rental|loc-classe-cm2|classe-cm2|T2|T|21|0|0|3|"
+      }
+    },
+    {
+      "id": "reissue-hours-exhausted-refused",
+      "type": "pilot-reissue",
+      "bundle": "classe-cm2",
+      "issuedAt": 1792494000000,
+      "issuedAtLabel": "2026-10-20T12:00:00.000+01:00",
+      "existing": {
+        "product": "loc-classe-cm2",
+        "period": 1791802800000,
+        "unit": "hours",
+        "usage": 600,
+        "endsAt": 1794394800000,
+        "reissues": 0,
+        "endedAt": null,
+        "installPub": "OLD"
+      },
+      "usedMinutes": 600,
+      "newInstallPub": "NEW",
+      "state": {
+        "active": [
+          {
+            "product": "loc-classe-cm2",
+            "period": 1791802800000,
+            "unit": "hours",
+            "usage": 600,
+            "endsAt": 1794394800000,
+            "reissues": 0,
+            "endedAt": null,
+            "installPub": "OLD"
+          }
+        ],
+        "hoursLast168": 0
+      },
+      "expect": {
+        "refused": true,
+        "reason": "Les heures d'utilisation de cette location sont épuisées : il n'y a rien à réémettre"
+      }
+    },
+    {
+      "id": "reissue-after-pilot-allowed-until-original-end",
+      "type": "pilot-reissue",
+      "bundle": "classe-cm2",
+      "issuedAt": 1793876400000,
+      "issuedAtLabel": "2026-11-05T12:00:00.000+01:00",
+      "existing": {
+        "product": "loc-classe-cm2",
+        "period": 1791802800000,
+        "unit": "days",
+        "usage": 0,
+        "endsAt": 1794394800000,
+        "reissues": 0,
+        "endedAt": null,
+        "installPub": "OLD"
+      },
+      "usedMinutes": 0,
+      "newInstallPub": "NEW",
+      "state": {
+        "active": [
+          {
+            "product": "loc-classe-cm2",
+            "period": 1791802800000,
+            "unit": "days",
+            "usage": 0,
+            "endsAt": 1794394800000,
+            "reissues": 0,
+            "endedAt": null,
+            "installPub": "OLD"
+          }
+        ],
+        "hoursLast168": 0
+      },
+      "expect": {
+        "ok": true,
+        "days": 6,
+        "usage": 0,
+        "concurrent": 3,
+        "line": "rental|loc-classe-cm2|classe-cm2|T2|T|6|0|0|3|"
+      }
+    },
+    {
+      "id": "clamp-60h-plus-36h-no-note",
+      "type": "engine-contract",
+      "lines": [
+        {
+          "product": "loc-classe-cm2",
+          "bundles": ["classe-cm2"],
+          "startsAt": 1791802800000,
+          "period": 1791802800000,
+          "days": 30,
+          "graceMs": 0,
+          "usage": 3600,
+          "concurrent": 3
+        },
+        {
+          "product": "loc-classe-cm2",
+          "bundles": ["classe-cm2"],
+          "startsAt": 1791975600000,
+          "period": 1791802800000,
+          "days": 1,
+          "graceMs": 0,
+          "usage": 2160,
+          "concurrent": 3
+        }
+      ],
+      "now": 1791975600000,
+      "nowLabel": "2026-10-14T12:00:00.000+01:00",
+      "used": 0,
+      "expired": null,
+      "expect": {
+        "unit": "hours",
+        "maxUsageMinutes": 5760,
+        "endsAt": 1794481200000,
+        "notes": [],
+        "state": "ACTIVE",
+        "reason": null,
+        "remainingUsageMinutes": 5760,
+        "warning": "NONE",
+        "message": "Il vous reste 96 h d'utilisation · à utiliser avant le 12/11"
+      }
+    },
+    {
+      "id": "clamp-sum-above-96h",
+      "type": "engine-contract",
+      "lines": [
+        {
+          "product": "loc-classe-cm2",
+          "bundles": ["classe-cm2"],
+          "startsAt": 1791802800000,
+          "period": 1791802800000,
+          "days": 30,
+          "graceMs": 0,
+          "usage": 3600,
+          "concurrent": 3
+        },
+        {
+          "product": "loc-classe-cm2",
+          "bundles": ["classe-cm2"],
+          "startsAt": 1791975600000,
+          "period": 1791802800000,
+          "days": 1,
+          "graceMs": 0,
+          "usage": 3600,
+          "concurrent": 3
+        }
+      ],
+      "now": 1791975600000,
+      "nowLabel": "2026-10-14T12:00:00.000+01:00",
+      "used": 0,
+      "expired": null,
+      "expect": {
+        "unit": "hours",
+        "maxUsageMinutes": 5760,
+        "endsAt": 1794481200000,
+        "notes": ["24 h non applicables : plafond de 96 h par location"],
+        "state": "ACTIVE",
+        "reason": null,
+        "remainingUsageMinutes": 5760,
+        "warning": "NONE",
+        "message": "Il vous reste 96 h d'utilisation · à utiliser avant le 12/11"
+      }
+    },
+    {
+      "id": "clamp-90h-plus-12h",
+      "type": "engine-contract",
+      "lines": [
+        {
+          "product": "loc-classe-cm2",
+          "bundles": ["classe-cm2"],
+          "startsAt": 1791802800000,
+          "period": 1791802800000,
+          "days": 30,
+          "graceMs": 0,
+          "usage": 5400,
+          "concurrent": 3
+        },
+        {
+          "product": "loc-classe-cm2",
+          "bundles": ["classe-cm2"],
+          "startsAt": 1791975600000,
+          "period": 1791802800000,
+          "days": 1,
+          "graceMs": 0,
+          "usage": 720,
+          "concurrent": 3
+        }
+      ],
+      "now": 1791975600000,
+      "nowLabel": "2026-10-14T12:00:00.000+01:00",
+      "used": 0,
+      "expired": null,
+      "expect": {
+        "unit": "hours",
+        "maxUsageMinutes": 5760,
+        "endsAt": 1794481200000,
+        "notes": ["6 h non applicables : plafond de 96 h par location"],
+        "state": "ACTIVE",
+        "reason": null,
+        "remainingUsageMinutes": 5760,
+        "warning": "NONE",
+        "message": "Il vous reste 96 h d'utilisation · à utiliser avant le 12/11"
+      }
+    },
+    {
+      "id": "mixed-units-engine-no-budget",
+      "type": "engine-contract",
+      "lines": [
+        {
+          "product": "loc-classe-cm2",
+          "bundles": ["classe-cm2"],
+          "startsAt": 1791802800000,
+          "period": 1791802800000,
+          "days": 30,
+          "graceMs": 0,
+          "usage": 720,
+          "concurrent": 3
+        },
+        {
+          "product": "loc-classe-cm2",
+          "bundles": ["classe-cm2"],
+          "startsAt": 1791975600000,
+          "period": 1791802800000,
+          "days": 5,
+          "graceMs": 0,
+          "usage": 0,
+          "concurrent": 3
+        }
+      ],
+      "now": 1791975600000,
+      "nowLabel": "2026-10-14T12:00:00.000+01:00",
+      "used": 0,
+      "expired": null,
+      "expect": {
+        "unit": "hours",
+        "maxUsageMinutes": 720,
+        "endsAt": 1794394800000,
+        "notes": ["Une ligne de renouvellement en jours a été ignorée : on ne mélange pas les heures et les jours"],
+        "state": "ACTIVE",
+        "reason": null,
+        "remainingUsageMinutes": 720,
+        "warning": "NONE",
+        "message": "Il vous reste 12 h d'utilisation · à utiliser avant le 11/11"
+      }
+    },
+    {
+      "id": "mixed-units-engine-days-first",
+      "type": "engine-contract",
+      "lines": [
+        {
+          "product": "loc-classe-cm2",
+          "bundles": ["classe-cm2"],
+          "startsAt": 1791802800000,
+          "period": 1791802800000,
+          "days": 7,
+          "graceMs": 0,
+          "usage": 0,
+          "concurrent": 3
+        },
+        {
+          "product": "loc-classe-cm2",
+          "bundles": ["classe-cm2"],
+          "startsAt": 1791975600000,
+          "period": 1791802800000,
+          "days": 1,
+          "graceMs": 0,
+          "usage": 360,
+          "concurrent": 3
+        }
+      ],
+      "now": 1791975600000,
+      "nowLabel": "2026-10-14T12:00:00.000+01:00",
+      "used": 0,
+      "expired": null,
+      "expect": {
+        "unit": "days",
+        "maxUsageMinutes": 0,
+        "endsAt": 1792407600000,
+        "notes": ["Une ligne de renouvellement en heures a été ignorée : on ne mélange pas les heures et les jours"],
+        "state": "ACTIVE",
+        "reason": null,
+        "remainingUsageMinutes": null,
+        "warning": "NONE",
+        "message": "Il vous reste 5 jours"
+      }
+    },
+    {
+      "id": "status-strings-hours-active",
+      "type": "engine-contract",
+      "lines": [
+        {
+          "product": "loc-classe-cm2",
+          "bundles": ["classe-cm2"],
+          "startsAt": 1792926000000,
+          "period": 1792926000000,
+          "days": 21,
+          "graceMs": 0,
+          "usage": 720,
+          "concurrent": 3
+        }
+      ],
+      "now": 1793012400000,
+      "nowLabel": "2026-10-26T12:00:00.000+01:00",
+      "used": 100,
+      "expired": null,
+      "expect": {
+        "unit": "hours",
+        "maxUsageMinutes": 720,
+        "endsAt": 1794740400000,
+        "notes": [],
+        "state": "ACTIVE",
+        "reason": null,
+        "remainingUsageMinutes": 620,
+        "warning": "NONE",
+        "message": "Il vous reste 10 h 20 d'utilisation · à utiliser avant le 15/11"
+      }
+    },
+    {
+      "id": "status-strings-hours-expired-usage",
+      "type": "engine-contract",
+      "lines": [
+        {
+          "product": "loc-classe-cm2",
+          "bundles": ["classe-cm2"],
+          "startsAt": 1792926000000,
+          "period": 1792926000000,
+          "days": 21,
+          "graceMs": 0,
+          "usage": 720,
+          "concurrent": 3
+        }
+      ],
+      "now": 1793098800000,
+      "nowLabel": "2026-10-27T12:00:00.000+01:00",
+      "used": 720,
+      "expired": null,
+      "expect": {
+        "unit": "hours",
+        "maxUsageMinutes": 720,
+        "endsAt": 1794740400000,
+        "notes": [],
+        "state": "EXPIRED",
+        "reason": "USAGE",
+        "remainingUsageMinutes": 0,
+        "warning": "NONE",
+        "message": "Vos 12 heures d'utilisation sont épuisées : ce contenu n'est plus disponible. Relouer ?"
+      }
+    },
+    {
+      "id": "status-strings-hours-expired-date",
+      "type": "engine-contract",
+      "lines": [
+        {
+          "product": "loc-classe-cm2",
+          "bundles": ["classe-cm2"],
+          "startsAt": 1792926000000,
+          "period": 1792926000000,
+          "days": 21,
+          "graceMs": 0,
+          "usage": 720,
+          "concurrent": 3
+        }
+      ],
+      "now": 1794826800000,
+      "nowLabel": "2026-11-16T12:00:00.000+01:00",
+      "used": 100,
+      "expired": null,
+      "expect": {
+        "unit": "hours",
+        "maxUsageMinutes": 720,
+        "endsAt": 1794740400000,
+        "notes": [],
+        "state": "EXPIRED",
+        "reason": "DATE",
+        "remainingUsageMinutes": 620,
+        "warning": "NONE",
+        "message": "Vos heures non utilisées ont expiré le 15/11. Relouer ?"
+      }
+    },
+    {
+      "id": "status-strings-days",
+      "type": "engine-contract",
+      "lines": [
+        {
+          "product": "loc-classe-cm2",
+          "bundles": ["classe-cm2"],
+          "startsAt": 1791802800000,
+          "period": 1791802800000,
+          "days": 7,
+          "graceMs": 0,
+          "usage": 0,
+          "concurrent": 3
+        }
+      ],
+      "now": 1792062000000,
+      "nowLabel": "2026-10-15T12:00:00.000+01:00",
+      "used": 0,
+      "expired": null,
+      "expect": {
+        "unit": "days",
+        "maxUsageMinutes": 0,
+        "endsAt": 1792407600000,
+        "notes": [],
+        "state": "ACTIVE",
+        "reason": null,
+        "remainingUsageMinutes": null,
+        "warning": "NONE",
+        "message": "Il vous reste 4 jours"
+      }
+    },
+    {
+      "id": "status-strings-days-ended",
+      "type": "engine-contract",
+      "lines": [
+        {
+          "product": "loc-classe-cm2",
+          "bundles": ["classe-cm2"],
+          "startsAt": 1791802800000,
+          "period": 1791802800000,
+          "days": 7,
+          "graceMs": 0,
+          "usage": 0,
+          "concurrent": 3
+        }
+      ],
+      "now": 1792494000000,
+      "nowLabel": "2026-10-20T12:00:00.000+01:00",
+      "used": 0,
+      "expired": null,
+      "expect": {
+        "unit": "days",
+        "maxUsageMinutes": 0,
+        "endsAt": 1792407600000,
+        "notes": [],
+        "state": "EXPIRED",
+        "reason": "DATE",
+        "remainingUsageMinutes": null,
+        "warning": "NONE",
+        "message": "Location terminée (7 jours, jusqu'au 19/10) : ce contenu n'est plus disponible. Relouer ?"
+      }
+    },
+    {
+      "id": "meter-59s-59s-58s",
+      "type": "meter",
+      "ops": [
+        ["open", "learn:cm2", 0],
+        ["tick", 59000],
+        ["tick", 118000],
+        ["tick", 176000]
+      ],
+      "expect": {
+        "minutes": [0, 0, 1, 1]
+      }
+    },
+    {
+      "id": "meter-close-after-30s",
+      "type": "meter",
+      "ops": [
+        ["open", "learn:cm2", 0],
+        ["close", 30000],
+        ["open", "learn:cm2", 100000],
+        ["close", 130000]
+      ],
+      "expect": {
+        "minutes": [0, 0, 0, 1]
+      }
+    },
+    {
+      "id": "meter-pause-6min",
+      "type": "meter",
+      "ops": [
+        ["open", "learn:cm2", 0],
+        ["tick", 60000],
+        ["pause", 60000],
+        ["tick", 420000],
+        ["resume", 420000],
+        ["tick", 480000]
+      ],
+      "expect": {
+        "minutes": [0, 1, 5, 1]
+      }
+    },
+    {
+      "id": "meter-idle-31min",
+      "type": "meter",
+      "ops": [
+        ["open", "learn:cm2", 0],
+        ["tick", 1860000],
+        ["input", 1860000],
+        ["tick", 1920000]
+      ],
+      "expect": {
+        "minutes": [0, 30, 1]
+      }
+    },
+    {
+      "id": "meter-reboot",
+      "type": "meter",
+      "ops": [
+        ["open", "learn:cm2", 0],
+        ["tick", 50000],
+        ["reboot"],
+        ["open", "learn:cm2", 100000],
+        ["tick", 150000]
+      ],
+      "expect": {
+        "minutes": [0, 0, 0, 0]
+      }
+    },
+    {
+      "id": "usage-report-two-contracts",
+      "type": "usage-report",
+      "installId": "0123456789abcdef",
+      "at": 1791975600000,
+      "contracts": [
+        {
+          "product": "loc-cm2",
+          "lot": "learn:cm2",
+          "usage": 600,
+          "days": 30,
+          "used": 90
+        },
+        {
+          "product": "loc-cm1",
+          "lot": "learn:cm1",
+          "usage": 0,
+          "days": 7,
+          "used": 5
+        }
+      ],
+      "expect": {
+        "text": "castbridge-rental-usage-v1\ninstall=0123456789abcdef\ncontract=loc-cm1@1791975600000|unit=days|used=5|max=0|state=ACTIVE|reason=-|endsAt=1792580400000|at=1791975780000\ncontract=loc-cm2@1791975600000|unit=hours|used=90|max=600|state=ACTIVE|reason=-|endsAt=1794567600000|at=1791975780000\n"
+      }
+    },
+    {
+      "id": "build-activation-12h",
+      "type": "build-activation",
+      "signer": "desk",
+      "device": "tvA",
+      "install": "tvA-install-1",
+      "license": "lic-pilot-1",
+      "bundle": "classe-cm2",
+      "choice": "12h",
+      "issuedAt": 1792926000000,
+      "issuedAtLabel": "2026-10-25T12:00:00.000+01:00",
+      "windowHours": 48,
+      "nonce": "00112233445566778899aabbccddeeff",
+      "ephSeed": "9c60e7e5fcf85fd2d2db18b1d33f17357af26a669d858320b0e0c4f117f125f5",
+      "expect": {
+        "line": "rental|loc-classe-cm2|classe-cm2|T|T|21|0|720|3|",
+        "token": "cbx1.Y2FzdGJyaWRnZS1lbnZlbG9wZS12MQp0eXBlPWFjdGl2YXRpb24Ka2lkPWU3YTM3Mzc0ODA1Y2VlMzIKc2VxPTE3OTI5MjYwMDAwMDAKbm9uY2U9MDAxMTIyMzM0NDU1NjY3Nzg4OTlhYWJiY2NkZGVlZmYKaXNzdWVkQXQ9MTc5MjkyNjAwMDAwMApub3RCZWZvcmU9MTc5MjkyNjAwMDAwMApleHBpcmVzQXQ9MTc5MzA5ODgwMDAwMAp0YXJnZXQ9ZGV2aWNlCms9NApmYWN0b3I9RkxBU0h8OWRjNzk0OGM0ODc0NDgwZWIzNzJkMWFjZTM1MDdkM2QKZmFjdG9yPUVUSEVSTkVUfDQwNGUzNTcyYzk5YzRiNGFlMzYzNGEyNDNkZTk0MGI2CmZhY3Rvcj1XSUZJfGNlZWNjOGIzMzI4NmVhMjJjYmU3N2JjYzBiZTMwMzE3CmZhY3Rvcj1TWVNURU1fU0VSSUFMfGUwZTJjMGFlNTg4M2U1ZDU5NTZhNjY5OWNkNWU4ZTg1CmZhY3Rvcj1CTFVFVE9PVEh8YmJjMzI5ZTJhMWUzOGZiOWMxY2JlMDYzMjY1MGI0ZmEKLS0Ka2luZD1wcm9kdWN0aW9uCnN1YmplY3Q9dHYKbGljZW5zZT1saWMtcGlsb3QtMQpzZWF0PTM0NmJjYWNiZmI3ZTAxNWQKcmlnaHQ9cmVudGFsfGxvYy1jbGFzc2UtY20yfGNsYXNzZS1jbTJ8MTc5MjkyNjAwMDAwMHwxNzkyOTI2MDAwMDAwfDIxfDB8NzIwfDN8djI6XzJEdGJrd1BWU1h1dl9YbjNNa2gyNk5teEFhY0d6MXMwUEtwTmh3Q0R4YzotM190OXV0WlZvTFlOeVc1UVNmS2NDczlQNHNIeXJVZTZZdDB0YmFwSS0xWW83NzlTLTYxRUVYQUJKU0w1SENWcjRyNFVfWUpfc3BqUHNvMw.yerZi9jl3J5DlmBNHrLVwdQWo515qVlC6r8tTRNob+mBcpOSMoQd+fEcehvQLH1NGt0RJiBYVRqBlgpJqMVHBw=="
+      }
+    },
+    {
+      "id": "line-ten-fields-empty-box",
+      "type": "line-parse",
+      "line": "rental|loc-classe-cm2|classe-cm2|1800000000000|1800000000000|30|0|720|3|",
+      "expect": {
+        "ok": true,
+        "product": "loc-classe-cm2",
+        "days": 30,
+        "usage": 720,
+        "concurrent": 3,
+        "bounds": null,
+        "line": "rental|loc-classe-cm2|classe-cm2|1800000000000|1800000000000|30|0|720|3|"
+      }
+    },
+    {
+      "id": "line-ten-fields-96h",
+      "type": "line-parse",
+      "line": "rental|loc-classe-cm2|classe-cm2|1800000000000|1790000000000|1|0|5760|3|v2:AAAA:BBBB",
+      "expect": {
+        "ok": true,
+        "product": "loc-classe-cm2",
+        "days": 1,
+        "usage": 5760,
+        "concurrent": 3,
+        "bounds": null,
+        "line": "rental|loc-classe-cm2|classe-cm2|1800000000000|1790000000000|1|0|5760|3|v2:AAAA:BBBB"
+      }
+    },
+    {
+      "id": "line-ten-fields-days-no-budget",
+      "type": "line-parse",
+      "line": "rental|loc-classe-cm2|classe-cm2|1800000000000|1800000000000|7|0|0|3|",
+      "expect": {
+        "ok": true,
+        "product": "loc-classe-cm2",
+        "days": 7,
+        "usage": 0,
+        "concurrent": 3,
+        "bounds": null,
+        "line": "rental|loc-classe-cm2|classe-cm2|1800000000000|1800000000000|7|0|0|3|"
+      }
+    },
+    {
+      "id": "line-nine-fields-refused",
+      "type": "line-parse",
+      "line": "rental|loc-classe-cm2|classe-cm2|1800000000000|1800000000000|30|0|720|3",
+      "expect": {
+        "refused": true
+      }
+    }
+  ]
+}
