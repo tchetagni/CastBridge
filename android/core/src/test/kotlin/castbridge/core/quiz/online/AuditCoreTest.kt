@@ -32,7 +32,7 @@ class AuditCoreTest {
         assertEquals(100, c.size(), "interroger ne crée rien")
         c.sweep(PlayProtocol.BAD_CODE_WINDOW_MS + 1)
         assertEquals(0, c.size(), "après la fenêtre de 5 min, le balayage retire les files vides")
-        repeat(10) { c.ipFail("x", 0) }
+        repeat(PlayProtocol.MAX_BAD_CODES_PER_IP) { c.ipFail("x", 0) }
         assertTrue(c.ipBlocked("x", 1)); assertFalse(c.ipBlocked("x", PlayProtocol.BAD_CODE_WINDOW_MS + 1)); assertEquals(0, c.size(), "une file vidée par le temps est retirée")
     }
 
@@ -85,12 +85,30 @@ class AuditCoreTest {
         assertEquals(before, r.code, "seuls des `join` ratés font tourner le code, jamais des `resume` ratés")
     }
 
-    @Test fun blockedAddressCannotResumeEvenWithTheRightToken() {
+    @Test fun aPlayerAlreadyInGameResumesWithItsTokenEvenIfItsAddressHasManyBadCodes() {
         val r = room(); val h = r.host()
-        val w = r.join("a", "Awa", ip = "198.51.100.1").one<ServerMsg.Welcome>()
-        repeat(10) { r.handle("z$it", ClientMsg.Join("ZZZZZZZZ", "X", null, "dev-z-$it-aaaa", false), 10, "198.51.100.9") }
-        assertEquals(PlayReason.PLAY_BAD_CODE.name, r.handle("n", ClientMsg.Resume(h.roomId, w.token, 0), 20, "198.51.100.9").error(), "adresse bloquée : même le bon jeton est refusé")
-        assertNotNull(r.handle("n2", ClientMsg.Resume(h.roomId, w.token, 0), 20, "198.51.100.1").map { it.msg }.filterIsInstance<ServerMsg.Welcome>().firstOrNull(), "une autre adresse reprend")
+        val w = r.join("a", "Awa", ip = "198.51.100.9").one<ServerMsg.Welcome>()
+        assertEquals(30, PlayProtocol.MAX_BAD_CODES_PER_IP, "seuil derrière un NAT collectif : ≈ 30 codes faux par adresse et par 5 min")
+        repeat(30) { r.handle("z$it", ClientMsg.Join("ZZZZZZZZ", "X", null, "dev-z-$it-aaaa", false), 10, "198.51.100.9") }
+        assertEquals(PlayReason.PLAY_BAD_CODE.name, r.join("late", "Neuf", ip = "198.51.100.9", now = 20).error(), "les CODES faux de join bloquent l'adresse")
+        assertNotNull(r.handle("n", ClientMsg.Resume(h.roomId, w.token, 0), 20, "198.51.100.9").map { it.msg }.filterIsInstance<ServerMsg.Welcome>().firstOrNull(), "mais un joueur assis reprend avec son jeton : jamais de blocage collectif d'un resume")
+    }
+
+    @Test fun wrongResumesAreNeverCountedAgainstTheAddress() {
+        val r = room(); val h = r.host()
+        repeat(200) { r.handle("x$it", ClientMsg.Resume(h.roomId, "token-faux-%020d".format(it), 0), 10, "198.51.100.7") }
+        assertNotNull(r.join("ok", "Awa", ip = "198.51.100.7", now = 20).map { it.msg }.filterIsInstance<ServerMsg.Welcome>().firstOrNull(), "200 resume faux n'empêchent pas un join avec le bon code")
+    }
+
+    @Test fun aSeatedConnectionSendingWrongJoinsNeverRotatesTheCode() {
+        val r = room(); r.host(); r.join("s", "Voyeur", spectate = true)
+        val before = r.code
+        repeat(60) { i -> assertEquals(PlayProtocol.FORBIDDEN, r.handle("s", ClientMsg.Join("ZZZZ%04d".format(i), "X", null, dv(), false), 100L + i, "10.1.1.1").error(), "déjà assis : refus sans compter") }
+        assertEquals(before, r.code, "le code de salle ne tourne pas")
+        r.join("p", "Awa").one<ServerMsg.Welcome>()
+        repeat(60) { i -> r.handle("p", ClientMsg.Join("ZZZZ%04d".format(i), "X", null, dv(), false), 200L + i, "10.1.1.2") }
+        assertEquals(before, r.code, "un joueur assis non plus")
+        assertNotNull(r.handle("tv", ClientMsg.Join(r.code, "Voisin", null, dv(), false), 300).map { it.msg }.filterIsInstance<ServerMsg.Welcome>().firstOrNull(), "l'hôte enregistre toujours un joueur local relayé")
     }
 
     // ---- I5 : appareil obligatoire, bannissement par appareil ET adresse, purge des spectateurs ----

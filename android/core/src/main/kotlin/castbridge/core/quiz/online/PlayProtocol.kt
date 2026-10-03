@@ -22,7 +22,7 @@ object PlayProtocol {
     const val MAX_STREAMS = 12
     const val BURST = 30
     const val RATE_PER_SEC = 10
-    const val MAX_BAD_CODES_PER_IP = 10
+    const val MAX_BAD_CODES_PER_IP = 30
     const val BAD_CODE_WINDOW_MS = 5 * 60_000L
 
     /** Actions permises dans `act` (la liste ferme le champ). */

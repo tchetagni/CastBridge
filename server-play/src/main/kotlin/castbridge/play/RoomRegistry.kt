@@ -58,6 +58,7 @@ class PlayHub(
     private val roomLock = Any()
     @Volatile private var draining = false
     private val badCodes = BadCodeCounter()
+    private val badCodes48 = BadCodeCounter(perIpMax = MAX_BAD_CODES_PER_48)   // un /48 IPv6 contient 65 536 /64
     private val rnd = random()
 
     fun rooms(): List<ServerRoom> = rooms.values.map { it.room }
@@ -108,17 +109,17 @@ class PlayHub(
     }
 
     private fun join(c: PlayConn, m: ClientMsg.Join, now: Long) {
-        if (badCodes.synchronizedBlocked(c.ip, now)) { send(c, err(PlayReason.PLAY_BAD_CODE)); return }
+        if (codesBlocked(c.ip, now)) { send(c, err(PlayReason.PLAY_BAD_CODE)); return }
         val typed = RoomCode.normalize(m.code)
         val e = typed?.let { t -> rooms.values.firstOrNull { it.room.code == t } }
-        if (e == null) { badCodes.synchronizedFail(c.ip, now); send(c, err(PlayReason.PLAY_BAD_CODE)); return }
+        if (e == null) { codeFailed(c.ip, now); send(c, err(PlayReason.PLAY_BAD_CODE)); return }
         attachAndForward(e, c, m, now)
     }
 
     private fun resume(c: PlayConn, m: ClientMsg.Resume, now: Long) {
-        if (badCodes.synchronizedBlocked(c.ip, now)) { send(c, err(PlayReason.PLAY_BAD_CODE)); return }   // l'adresse bloquée ne reprend rien
+        // jamais de blocage ni de compte d'échecs par adresse sur un resume (NAT collectif) : le seau de débit suffit, le jeton fait 128 bits
         val e = rooms[m.roomId]
-        if (e == null) { badCodes.synchronizedFail(c.ip, now); send(c, err(PlayReason.PLAY_BAD_CODE)); return }
+        if (e == null) { send(c, err(PlayReason.PLAY_BAD_CODE)); return }
         attachAndForward(e, c, m, now)
     }
 
@@ -129,11 +130,11 @@ class PlayHub(
             e.conns[c.id] = c; c.entry = e
             val outs = e.room.handle(c.id, m, now, c.ip)
             e.lastActiveRealMs = System.currentTimeMillis()
+            deliver(e, outs, overflow)   // d'abord les réponses (un refus doit atteindre la connexion), puis détachement si elle n'est pas entrée
             if (outs.none { it.to == c.id && it.msg is ServerMsg.Welcome }) {
                 e.conns.remove(c.id); c.entry = null
                 if (m is ClientMsg.Create) rooms.remove(e.room.roomId)
             }
-            deliver(e, outs, overflow)
         }
         overflow.forEach { dropOverflow(it) }
     }
@@ -190,7 +191,7 @@ class PlayHub(
             }
             overflow.forEach { dropOverflow(it) }
         }
-        synchronized(badCodes) { badCodes.sweep(now) }
+        synchronized(badCodes) { badCodes.sweep(now) }; synchronized(badCodes48) { badCodes48.sweep(now) }
         for (c in ArrayList(all.values)) c.housekeeping(mono)
     }
 
@@ -212,7 +213,10 @@ class PlayHub(
         for (c in ArrayList(all.values)) { c.close(1001, "arrêt du service"); onClosed(c) }
     }
 
-    companion object { const val BUSY = "PLAY_BUSY"; const val MAINTENANCE = "PLAY_MAINTENANCE" }
+    private fun codesBlocked(ip: String, now: Long) = badCodes.synchronizedBlocked(ip, now) || (ClientIp.group48(ip)?.let { badCodes48.synchronizedBlocked(it, now) } ?: false)
+    private fun codeFailed(ip: String, now: Long) { badCodes.synchronizedFail(ip, now); ClientIp.group48(ip)?.let { badCodes48.synchronizedFail(it, now) } }
+
+    companion object { const val BUSY = "PLAY_BUSY"; const val MAINTENANCE = "PLAY_MAINTENANCE"; const val MAX_BAD_CODES_PER_48 = 120 }
 }
 
 private fun BadCodeCounter.synchronizedBlocked(ip: String, now: Long) = synchronized(this) { ipBlocked(ip, now) }

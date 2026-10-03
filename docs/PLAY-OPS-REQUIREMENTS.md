@@ -33,3 +33,32 @@
 
 - **I1** (ticket rejouable, `jti`, plafond de salles par sujet) : exigence du cahier w20-04.
 - Le mode strictement « SSE/long-poll derrière un second proxy » et la limitation de débit globale (hors nginx) ne sont pas traités.
+
+## Second audit Opus (2026-10-03) : points ajoutés
+
+- **`CASTBRIDGE_PLAY_TRUSTED_PROXIES` est OBLIGATOIRE** : le service refuse de démarrer s'il est absent ou contient une entrée invalide (message sur `System.err`, code de sortie 2). Seule exception : `CASTBRIDGE_PLAY_DIRECT=1` (staging et tests, accès direct sans proxy, avertissement au démarrage) ; elle n'excuse pas une entrée invalide. Un `X-Forwarded-For` illisible venant du proxy de confiance est refusé (400).
+- **Compose (écrit par w20-08)** : `stop_grace_period: 30s` obligatoire (le service annonce la maintenance et attend jusqu'à 25 s ; Docker tue à 10 s par défaut). Extrait attendu :
+  ```
+  castbridge-play:
+    read_only: true
+    tmpfs: [/tmp]
+    stop_grace_period: 30s
+    mem_limit: 384m
+    ports: ["127.0.0.1:7091:8080"]
+    environment:
+      CASTBRIDGE_PLAY_TRUSTED_PROXIES: "<adresse exacte de nginx>/32"
+  ```
+- **Pas de blocage collectif** : un `resume` n'est jamais bloqué ni compté par adresse ; seuls les CODES faux de `join` comptent (30 par adresse IPv4 et par 5 min, 120 par /48 IPv6). Plafonds de connexions : 8 par adresse IPv4 ou /64, 64 par /48 IPv6.
+- **Cookies de repli par onglet** : `__Host-cbp-<nonce>` (`Secure`, `Path=/`, `HttpOnly`, `SameSite=Strict`) : ne pas réécrire ni retirer le `Set-Cookie` dans nginx ; le cookie ne passe qu'en HTTPS (`Secure`).
+- **Image** : `RUNTIME_IMAGE` (défaut `eclipse-temurin:25-jre`) se construit par digest : `docker pull eclipse-temurin:25-jre`, puis `docker inspect --format '{{index .RepoDigests 0}}' eclipse-temurin:25-jre`, puis `--build-arg RUNTIME_IMAGE=eclipse-temurin:25-jre@sha256:<digest>`. Le digest lu est à noter ici par l'exploitant (aucun digest n'est inventé dans le dépôt) : _digest : à renseigner_.
+
+## Staging NON public (autorisé par le second audit ; la route nginx `/play/` publique reste interdite)
+
+- `CASTBRIDGE_PLAY_DIRECT=1`, `CASTBRIDGE_PLAY_ORIGINS=http://localhost:7091`, `CASTBRIDGE_PLAY_MAX_PER_IP=64` (tous les testeurs partagent l'adresse du tunnel), `CASTBRIDGE_PLAY_TICKET_PUBKEY=<clé publique de test>`, port publié sur `127.0.0.1:7091` seulement, `stop_grace_period: 30s`.
+- Accès par tunnel SSH vers `localhost:7091` (jamais d'ouverture du pare-feu).
+- **Cookies `Secure` sur `http://localhost`** : Chrome et Firefox les acceptent (contexte sûr) ; **Safari les refuse** : la page de repli (SSE, long-poll) ne tient donc pas sous Safari en staging ; le WebSocket n'en a pas besoin, et en production (HTTPS) le problème n'existe pas.
+- Pas de clé de production, pas de lots réservés, aucune route publique.
+
+## Conditions avant la route nginx `/play/` publique
+
+1. `CASTBRIDGE_PLAY_TRUSTED_PROXIES` posé à l'adresse exacte de nginx (/32) ; 2. règles nginx des points 5 à 10 ci-dessus ; 3. `stop_grace_period: 30s` dans le compose réel ; 4. image construite et son digest noté ; puis w20-04 pour le ticket à usage unique (I1).

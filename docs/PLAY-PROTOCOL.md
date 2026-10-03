@@ -70,7 +70,7 @@ Décodage **strict** (`PlayCodec.decodeClient`) : type inconnu ⇒ `error UNSUPP
 | `replay` | `events` | évènements manqués (anneau de 50) avant le `state` d'une reprise | non mesuré |
 | `ack` | `ref`, `result` | accusé d'un `act` / `relayAct` : `OK SAME CLOSED UNKNOWN_QUESTION TOO_EARLY FORBIDDEN BAD_REQUEST UNKNOWN_PLAYER IGNORED` | 42 |
 
-Limites reprises de `QuizHttp` (constantes de `PlayProtocol`) : 12 flux, rafale 30, 10 requêtes/s, 10 codes faux par IP et par 5 minutes. Le service les applique.
+Limites reprises de `QuizHttp` (constantes de `PlayProtocol`) : 12 flux, rafale 30, 10 requêtes/s, 30 codes faux de `join` par adresse et par 5 minutes (jamais de blocage ni de compte sur un `resume`). Le service les applique.
 
 ## Réponses d'un `act` (`answer`)
 

@@ -115,10 +115,10 @@ class LimitsTest {
         val srv = server()
         val tv = ws(srv, xff = "203.0.113.50"); tv.send(PlayCodec.encode(ClientMsg.Hello(PlayProtocol.PROTO, PlayProtocol.CAPS, null, TestKeys.ticket()))); tv.send(PlayCodec.encode(ClientMsg.Create(null, "DUEL")))
         val code = tv.await("welcome")!!["code"] as String
+        repeat(3) { n -> val c = ws(srv, xff = "203.0.113.51"); repeat(10) { i -> c.send(PlayCodec.encode(ClientMsg.Join("ZZZZ%04d".format(n * 10 + i), "Awa", null, dev(), false))); assertEquals("PLAY_BAD_CODE", c.await("error")?.get("reason")) } }
         val p = ws(srv, xff = "203.0.113.51")
-        repeat(10) { p.send(PlayCodec.encode(ClientMsg.Join("ZZZZ000$it", "Awa", null, dev(), false))); assertEquals("PLAY_BAD_CODE", p.await("error")?.get("reason")) }
         p.send(PlayCodec.encode(ClientMsg.Join(code, "Awa", null, dev(), false)))
-        assertEquals("PLAY_BAD_CODE", p.await("error")?.get("reason"), "10 codes faux en 5 min : l'adresse est bloquée, même pour le bon code")
+        assertEquals("PLAY_BAD_CODE", p.await("error")?.get("reason"), "30 codes faux en 5 min : l'adresse est bloquée, même pour le bon code")
         val q = ws(srv, xff = "203.0.113.52")
         q.send(PlayCodec.encode(ClientMsg.Join(code, "Bello", null, dev(), false)))
         assertEquals("PLAYER", q.await("welcome")?.get("role"), "une autre adresse n'est pas touchée")
@@ -132,8 +132,8 @@ class LimitsTest {
         assertEquals("203.0.113.9", ClientIp.resolve(proxy, "1.2.3.4, 203.0.113.9", trusted), "le dernier saut (celui que nginx a écrit)")
         assertEquals("203.0.113.9", ClientIp.resolve(InetAddress.getByName("127.0.0.1"), "203.0.113.9", trusted))
         assertEquals("198.51.100.77", ClientIp.resolve(stranger, "203.0.113.9", trusted), "pair non fiable : l'en-tête est ignoré")
-        assertEquals("172.18.0.5", ClientIp.resolve(proxy, "pas-une-ip", trusted), "saut invalide : l'adresse de la socket")
-        assertEquals("172.18.0.5", ClientIp.resolve(proxy, "evil.example", trusted), "jamais de résolution DNS")
+        assertFailsWith<ForwardedForError>("saut invalide du proxy de confiance : refus (400)") { ClientIp.resolve(proxy, "pas-une-ip", trusted) }
+        assertFailsWith<ForwardedForError>("jamais de résolution DNS") { ClientIp.resolve(proxy, "evil.example", trusted) }
         assertEquals("172.18.0.5", ClientIp.resolve(proxy, null, trusted))
         assertEquals("v6:2001:0db8:0000:0000::/64", ClientIp.resolve(proxy, "2001:db8::1", trusted), "IPv6 : préfixe /64")
         assertFalse(trusted.any { it.contains(InetAddress.getByName("8.8.8.8")) })

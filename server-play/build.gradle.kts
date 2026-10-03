@@ -12,6 +12,10 @@ dependencies {
     testImplementation(kotlin("test"))
 }
 
+// Cible JVM 21 EXPLICITE (le runtime peut être 21 ou 25) : bytecode 21 et --release 21, quel que soit le JDK qui compile.
+kotlin { compilerOptions { jvmTarget.set(org.jetbrains.kotlin.gradle.dsl.JvmTarget.JVM_21) } }
+tasks.withType<JavaCompile>().configureEach { options.release.set(21) }
+
 application {
     mainClass.set("castbridge.play.PlayApplicationKt")
     applicationName = "castbridge-play"

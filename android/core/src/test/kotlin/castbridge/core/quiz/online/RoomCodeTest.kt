@@ -36,10 +36,10 @@ class RoomCodeTest {
 
     @Test fun badCodeCounterPerIpAndPerRoom() {
         val c = BadCodeCounter()
-        for (i in 1..9) assertFalse(c.ipFail("1.2.3.4", i * 1_000L), "essai $i")
-        assertTrue(c.ipFail("1.2.3.4", 10_000)); assertTrue(c.ipBlocked("1.2.3.4", 11_000))
+        for (i in 1..29) assertFalse(c.ipFail("1.2.3.4", i * 1_000L), "essai $i")
+        assertTrue(c.ipFail("1.2.3.4", 30_000)); assertTrue(c.ipBlocked("1.2.3.4", 31_000))
         assertFalse(c.ipBlocked("5.6.7.8", 11_000), "une autre IP n'est pas touchée")
-        assertFalse(c.ipBlocked("1.2.3.4", 10_000 + 5 * 60_000L), "fenêtre de 5 minutes")
+        assertFalse(c.ipBlocked("1.2.3.4", 30_000 + 5 * 60_000L), "fenêtre de 5 minutes")
         var rotated = 0; repeat(100) { if (c.roomFail()) rotated++ }
         assertEquals(2, rotated, "50 essais faux sur la salle ⇒ nouveau code, puis le compteur repart")
     }
@@ -70,7 +70,7 @@ class RoomCodeTest {
     @Test fun perIpBlockStopsGuessingEvenWithTheRightRoom() {
         val r = room()
         r.handle("tv", ClientMsg.Create(null, null), 0)
-        repeat(10) { r.handle("x", ClientMsg.Join("ZZZZZZZZ", "Awa", null, dv(), false), 1_000L + it, ip = "9.9.9.9") }
+        repeat(PlayProtocol.MAX_BAD_CODES_PER_IP) { r.handle("x", ClientMsg.Join("ZZZZZZZZ", "Awa", null, dv(), false), 1_000L + it, ip = "9.9.9.9") }
         assertEquals(PlayReason.PLAY_BAD_CODE.name, err(r.handle("x", ClientMsg.Join(r.code, "Awa", null, dv(), false), 2_000, ip = "9.9.9.9")), "IP bloquée même avec le bon code")
         assertEquals("PLAYER", (r.handle("y", ClientMsg.Join(r.code, "Awa", null, dv(), false), 2_000, ip = "8.8.8.8").map { it.msg }.filterIsInstance<ServerMsg.Welcome>().single().role.name))
     }

@@ -91,7 +91,7 @@ class FallbackTransportTest {
         val welcome = sse.await("welcome")!!
         sse.close()   // plus de flux ni de requête
         Thread.sleep(1_500)
-        val gone = SseWire.post(srv.port, PlayCodec.encode(ClientMsg.Pong("x")), sse.conn, "https://bridge.sti-cm.com", "203.0.113.2")
+        val gone = SseWire.post(srv.port, PlayCodec.encode(ClientMsg.Pong("x")), sse.conn, "https://bridge.sti-cm.com", "203.0.113.2", sse.tab)
         assertEquals(410, gone.statusCode(), "session de repli terminée")
         assertEquals(1, srv.rooms().single().seatCount())
         val again = PollWire(srv.port, xff = "203.0.113.2").keep()

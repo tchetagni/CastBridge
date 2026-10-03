@@ -70,13 +70,32 @@ class PlayConfig(
         /** Les SEULES variables d'environnement lues par le service. */
         val ENV_NAMES = listOf("CASTBRIDGE_PLAY_PORT", "CASTBRIDGE_PLAY_BIND", "CASTBRIDGE_PLAY_MAX_ROOMS", "CASTBRIDGE_PLAY_MAX_CONNECTIONS", "CASTBRIDGE_PLAY_MAX_PER_IP",
             "CASTBRIDGE_PLAY_ORIGINS", "CASTBRIDGE_PLAY_TRUSTED_PROXIES", "CASTBRIDGE_PLAY_LOTS_DIR", "CASTBRIDGE_PLAY_TICKET_PUBKEY", "CASTBRIDGE_PLAY_TICKET_PUBKEY_2",
-            "CASTBRIDGE_PLAY_TICKET_PUBKEY_3")
+            "CASTBRIDGE_PLAY_TICKET_PUBKEY_3", "CASTBRIDGE_PLAY_DIRECT")
+
+        /**
+         * Les réseaux de confiance sont OBLIGATOIRES (adresse exacte de nginx en /32) : absents, le service refuse de démarrer, sauf `CASTBRIDGE_PLAY_DIRECT=1` (staging, tests :
+         * accès direct, aucun proxy). Une entrée invalide est une erreur, jamais ignorée en silence (même en accès direct).
+         */
+        internal fun parseTrusted(raw: String?, direct: Boolean): List<Cidr> {
+            if (raw == null) {
+                if (direct) {
+                    System.err.println("ATTENTION : CASTBRIDGE_PLAY_DIRECT=1 : aucun proxy de confiance, accès direct (staging ou tests seulement, jamais en production)")
+                    return emptyList()
+                }
+                throw IllegalStateException("CASTBRIDGE_PLAY_TRUSTED_PROXIES est absent : indiquer l'adresse exacte de nginx en /32 (ou CASTBRIDGE_PLAY_DIRECT=1 en staging)")
+            }
+            val parts = raw.split(',').map { it.trim() }
+            val bad = parts.filter { Cidr.parse(it) == null }
+            if (bad.isNotEmpty()) throw IllegalStateException("CASTBRIDGE_PLAY_TRUSTED_PROXIES contient une entrée invalide : « ${bad.first().take(40)} »")
+            return parts.map { Cidr.parse(it)!! }
+        }
 
         /** `args` accepte `--server.port=8090` et `--port=8090` (même sens). */
         fun fromEnv(env: (String) -> String? = System::getenv, args: Array<String> = emptyArray()): PlayConfig {
             fun e(k: String) = env(k)?.trim()?.takeIf { it.isNotEmpty() }
             fun arg(vararg names: String) = args.firstNotNullOfOrNull { a -> names.firstNotNullOfOrNull { n -> a.takeIf { it.startsWith("--$n=") }?.substringAfter('=') } }
             val d = PlayConfig()
+            val trusted = parseTrusted(e("CASTBRIDGE_PLAY_TRUSTED_PROXIES"), e("CASTBRIDGE_PLAY_DIRECT") == "1")
             return PlayConfig(
                 port = (arg("server.port", "port") ?: e("CASTBRIDGE_PLAY_PORT"))?.toIntOrNull() ?: d.port,
                 bind = e("CASTBRIDGE_PLAY_BIND") ?: d.bind,
@@ -84,7 +103,7 @@ class PlayConfig(
                 maxConnections = e("CASTBRIDGE_PLAY_MAX_CONNECTIONS")?.toIntOrNull() ?: d.maxConnections,
                 maxPerIp = e("CASTBRIDGE_PLAY_MAX_PER_IP")?.toIntOrNull() ?: d.maxPerIp,
                 origins = e("CASTBRIDGE_PLAY_ORIGINS")?.split(',')?.map { it.trim().lowercase() }?.filter { it.isNotEmpty() }?.toSet() ?: d.origins,
-                trustedProxies = e("CASTBRIDGE_PLAY_TRUSTED_PROXIES")?.split(',')?.mapNotNull { Cidr.parse(it) } ?: d.trustedProxies,
+                trustedProxies = trusted,
                 ticketPubKeys = listOf("CASTBRIDGE_PLAY_TICKET_PUBKEY", "CASTBRIDGE_PLAY_TICKET_PUBKEY_2", "CASTBRIDGE_PLAY_TICKET_PUBKEY_3").mapNotNull { e(it) },
                 lotsDir = e("CASTBRIDGE_PLAY_LOTS_DIR")?.let { File(it) },
             )

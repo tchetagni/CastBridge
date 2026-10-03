@@ -44,6 +44,7 @@ class PlayServer(
 
     val port: Int get() = server.localPort
     fun rooms(): List<ServerRoom> = hub.rooms()
+    fun tickerStopped(): Boolean = ticker.isStopped()
 
     fun start(): PlayServer {
         server = ServerSocket().apply { reuseAddress = true; bind(InetSocketAddress(InetAddress.getByName(cfg.bind), cfg.port), 256) }
@@ -71,7 +72,9 @@ class PlayServer(
             runCatching { socket.shutdownOutput(); socket.soTimeout = 200; socket.getInputStream().readNBytes(65_536) }
             return
         } catch (_: IOException) { return }
-        val ip = ClientIp.resolve(socket.inetAddress, req.header("x-forwarded-for"), cfg.trustedProxies)
+        val ip = try { ClientIp.resolve(socket.inetAddress, req.header("x-forwarded-for"), cfg.trustedProxies) } catch (_: ForwardedForError) {
+            MiniHttp.json(out, 400, """{"error":"X-Forwarded-For illisible"}"""); return   // le proxy de confiance a écrit un en-tête illisible : refus
+        }
         val head = req.method == "HEAD"
         val p = req.path
         when {
