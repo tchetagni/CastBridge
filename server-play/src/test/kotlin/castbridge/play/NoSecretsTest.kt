@@ -12,7 +12,7 @@ class NoSecretsTest {
 
     @Test fun configurationReadsOnlyTheDocumentedVariables() {
         val read = ArrayList<String>()
-        val cfg = PlayConfig.fromEnv({ k -> read += k; null })
+        val cfg = PlayConfig.fromEnv({ k -> read += k; if (k == "CASTBRIDGE_PLAY_DIRECT") "1" else null })
         assertTrue(read.isNotEmpty())
         assertEquals(PlayConfig.ENV_NAMES.toSet(), read.toSet(), "exactement les variables documentées (README)")
         for (n in read) {
@@ -24,7 +24,7 @@ class NoSecretsTest {
     }
 
     @Test fun serviceStartsWithAnEmptyEnvironmentAndRefusesToCreateRooms() {
-        val srv = PlayServer(PlayConfig.fromEnv({ null }, arrayOf("--server.port=0"))).start()
+        val srv = PlayServer(PlayConfig.fromEnv({ k -> if (k == "CASTBRIDGE_PLAY_DIRECT") "1" else null }, arrayOf("--server.port=0"))).start()
         try {
             val r = SseWire.post(srv.port, """{"t":"create","mode":"DUEL"}""", null, "https://bridge.sti-cm.com", null)
             assertEquals(200, r.statusCode())
@@ -46,7 +46,8 @@ class NoSecretsTest {
         assertFalse(Regex("token=|X-Play-Conn|\\?token|[?&]conn=").containsMatchIn(js), "la page n'envoie aucun secret dans une adresse ni dans un en-tête : le cookie HttpOnly suffit")
         assertFalse(js.contains("console."), "la page n'écrit rien dans la console")
         val main = File("src/main/kotlin/castbridge/play").listFiles { f -> f.name.endsWith(".kt") }!!.joinToString("\n") { it.readText() }
-        assertFalse(Regex("println\\(|System\\.out|logger|Logger").containsMatchIn(main.replace("System.err.println(\"tick", "").replace("System.err.println(\"castbridge-play \${cfg.version}", "")), "le service ne journalise aucune requête (adresses, jetons)")
+        assertFalse(Regex("(?<!err\\.)println\\(|System\\.out|logger|Logger").containsMatchIn(main), "le service ne journalise aucune requête (adresses, jetons) : seulement des lignes de démarrage et d'avertissement sur System.err")
+        assertFalse(Regex("System\\.err\\.println\\([^\\n]*(ip|IP|token|ticket|cookie|code)\\b").containsMatchIn(main.replace("tick : ", "")), "aucune ligne de journal ne mentionne une adresse, un jeton, un ticket ou un code")
         assertTrue(main.contains("HttpOnly") && main.contains("SameSite=Strict") && main.contains("Secure"), "cookie de session de repli")
     }
 

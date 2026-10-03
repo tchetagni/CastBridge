@@ -137,11 +137,13 @@ class AuditFixesTest {
 
     @Test fun cookieAttributesAndRefusalOfTheQueryToken() {
         val srv = server()
-        val r = SseWire.post(srv.port, PlayCodec.encode(ClientMsg.Pong("x")), null, "https://bridge.sti-cm.com", "203.0.113.4")
+        val r = SseWire.post(srv.port, PlayCodec.encode(ClientMsg.Pong("x")), null, "https://bridge.sti-cm.com", "203.0.113.4", "abcdef012345")
         val sc = r.headers().firstValue("set-cookie").orElse("")
-        for (a in listOf("HttpOnly", "Secure", "SameSite=Strict", "Path=/play/")) assertTrue(sc.contains(a), "attribut $a absent de « $sc »")
+        for (a in listOf("HttpOnly", "Secure", "SameSite=Strict", "Path=/")) assertTrue(sc.contains(a), "attribut $a absent de « $sc »")
+        assertTrue(sc.startsWith("__Host-cbp-abcdef012345="), "un cookie PAR ONGLET, préfixe __Host- : $sc")
+        assertFalse(sc.contains("Path=/play") || sc.contains("Domain"), "préfixe __Host- : Path=/ et pas de Domain")
         assertFalse(r.body().contains(sc.substringAfter('=').substringBefore(';')), "le corps de la réponse ne répète pas le secret")
-        val secret = sc.substringAfter("cbp=").substringBefore(';').ifEmpty { Cred.of(r)!! }
+        val secret = sc.substringAfter("=").substringBefore(';').ifEmpty { Cred.of(r)!! }
         for (path in listOf("/play/events", "/play/state?since=0")) {
             val q = if ('?' in path) "$path&token=$secret" else "$path?token=$secret"
             val resp = http.send(HttpRequest.newBuilder(URI("http://127.0.0.1:${srv.port}$q")).timeout(Duration.ofSeconds(3)).build(), HttpResponse.BodyHandlers.ofInputStream())
@@ -223,7 +225,7 @@ class AuditFixesTest {
 
     @Test fun defaultsTrustNoProxyAndTheConnectionSlotNeverLeaks() {
         assertTrue(PlayConfig().trustedProxies.isEmpty(), "aucun proxy de confiance par défaut")
-        assertTrue(PlayConfig.fromEnv({ null }).trustedProxies.isEmpty())
+        assertTrue(PlayConfig.fromEnv({ k -> if (k == "CASTBRIDGE_PLAY_DIRECT") "1" else null }).trustedProxies.isEmpty())
         val srv = server(PlayConfig(port = 0, trustedProxies = LOOPBACK, maxPerIp = 2, ticketPubKeys = listOf(TestKeys.pub)))
         repeat(20) { runCatching { RawWs(srv.port, mapOf("Origin" to "https://evil.example")).close() } }   // refusées avant l'acquisition
         repeat(20) { Socket("127.0.0.1", srv.port).use { s -> s.getOutputStream().write("GET /play/ws HTTP/1.1\r\nHost: x\r\nUpgrade: websocket\r\nConnection: Upgrade\r\nSec-WebSocket-Version: 13\r\nSec-WebSocket-Key: AAAA\r\nOrigin: https://bridge.sti-cm.com\r\n\r\n".toByteArray()); s.getInputStream().readNBytes(20) } }

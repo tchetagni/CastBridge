@@ -75,7 +75,7 @@ class FbConn(id: String, ip: String, private val cfg: PlayConfig, private val ow
  * `event:` = type du message), `GET /play/state?since=<n>` (long-poll 25 s).
  *
  * Audit Opus de w20-03 (B5) : le secret de la session de repli (128 bits) n'est JAMAIS dans une adresse ni dans le corps d'une réponse : le service le pose dans un cookie
- * `cbp` (`HttpOnly; Secure; SameSite=Strict; Path=/play/`) à la création de la session ; les clients sans cookie (CastBridge-TV, CastBridge) le renvoient dans l'en-tête
+ * `__Host-cbp-<nonce>` (un cookie PAR ONGLET, `HttpOnly; Secure; SameSite=Strict; Path=/`) à la création de la session ; les clients sans cookie (CastBridge-TV, CastBridge) le renvoient dans l'en-tête
  * `X-Play-Conn`. Un secret inconnu ou périmé : 410 et cookie effacé.
  */
 class PlayFallbackController(private val cfg: PlayConfig, val hub: PlayHub, private val limits: ConnectionLimits, private val verifier: TicketVerifier,
@@ -86,9 +86,11 @@ class PlayFallbackController(private val cfg: PlayConfig, val hub: PlayHub, priv
     fun forget(c: FbConn) { conns.remove(c.id) }
     fun count() = conns.size
 
-    private fun cred(req: HttpReq): String? = req.cookie(COOKIE) ?: req.header("x-play-conn")?.trim()?.takeIf { it.isNotEmpty() }
+    /** Nom du cookie de CET onglet : `__Host-cbp-<nonce>` (nonce non secret choisi par la page, paramètre `tab`) ; sans nonce valide, `__Host-cbp`. Préfixe `__Host-` : Secure, Path=/, sans Domain. */
+    private fun cookieName(req: HttpReq): String = req.query["tab"]?.takeIf { NONCE.matches(it) }?.let { "$COOKIE-$it" } ?: COOKIE
+    private fun cred(req: HttpReq): String? = req.cookie(cookieName(req)) ?: req.header("x-play-conn")?.trim()?.takeIf { it.isNotEmpty() }
     private fun find(req: HttpReq): FbConn? = cred(req)?.let { conns[it] }?.takeIf { !it.isDeadNow() }
-    private fun gone(out: OutputStream, msg: String) = MiniHttp.json(out, 410, """{"error":"$msg"}""", mapOf("Set-Cookie" to "$COOKIE=; Max-Age=0; HttpOnly; Secure; SameSite=Strict; Path=/play/"))
+    private fun gone(req: HttpReq, out: OutputStream, msg: String) = MiniHttp.json(out, 410, """{"error":"$msg"}""", mapOf("Set-Cookie" to "${cookieName(req)}=; Max-Age=0; HttpOnly; Secure; SameSite=Strict; Path=/"))
 
     /** `POST /play/act` */
     fun act(req: HttpReq, out: OutputStream, ip: String) {
@@ -99,7 +101,7 @@ class PlayFallbackController(private val cfg: PlayConfig, val hub: PlayHub, priv
         var c = find(req)
         var created = false
         if (c == null) {
-            if (cred(req) != null) return gone(out, "connexion terminée : reprenez avec resume")
+            if (cred(req) != null) return gone(req, out, "connexion terminée : reprenez avec resume")
             when (limits.acquire(ip)) {
                 ConnectionLimits.Verdict.IP_FULL -> return MiniHttp.json(out, 429, """{"error":"trop de connexions depuis cette adresse"}""", mapOf("Retry-After" to "10"))
                 ConnectionLimits.Verdict.TOTAL_FULL -> return MiniHttp.json(out, 503, """{"error":"service complet"}""", mapOf("Retry-After" to "30"))
@@ -113,14 +115,14 @@ class PlayFallbackController(private val cfg: PlayConfig, val hub: PlayHub, priv
             } finally { if (!registered) { c?.let { conns.remove(it.id) }; limits.release(ip) } }
         }
         c!!.touch()
-        if (!hub.onText(c, String(body, Charsets.UTF_8))) return MiniHttp.json(out, 429, """{"error":"trop de messages"}""", mapOf("Set-Cookie" to "$COOKIE=; Max-Age=0; HttpOnly; Secure; SameSite=Strict; Path=/play/"))
-        MiniHttp.json(out, 200, """{"ok":true}""", if (created) mapOf("Set-Cookie" to "$COOKIE=${c.id}; HttpOnly; Secure; SameSite=Strict; Path=/play/") else emptyMap())
+        if (!hub.onText(c, String(body, Charsets.UTF_8))) return MiniHttp.json(out, 429, """{"error":"trop de messages"}""", mapOf("Set-Cookie" to "${cookieName(req)}=; Max-Age=0; HttpOnly; Secure; SameSite=Strict; Path=/"))
+        MiniHttp.json(out, 200, """{"ok":true}""", if (created) mapOf("Set-Cookie" to "${cookieName(req)}=${c.id}; HttpOnly; Secure; SameSite=Strict; Path=/") else emptyMap())
     }
 
     /** `GET /play/events` : flux SSE jusqu'à la fin de la session ou le départ du client. */
     fun events(req: HttpReq, socket: Socket, out: OutputStream) {
         if (!origin.allowsRead(req.header("origin"))) return MiniHttp.json(out, 403, """{"error":"origine refusée"}""")
-        val c = find(req) ?: return gone(out, "connexion inconnue ou terminée")
+        val c = find(req) ?: return gone(req, out, "connexion inconnue ou terminée")
         socket.soTimeout = 0
         val gen = c.attachStream(socket)
         out.write(("HTTP/1.1 200 OK\r\nContent-Type: text/event-stream; charset=utf-8\r\nCache-Control: no-store\r\nX-Accel-Buffering: no\r\nConnection: close\r\n" +
@@ -141,10 +143,10 @@ class PlayFallbackController(private val cfg: PlayConfig, val hub: PlayHub, priv
     /** `GET /play/state?since=` : long-poll de 25 s ; `{"msgs":[…],"next":n}`. */
     fun state(req: HttpReq, out: OutputStream) {
         if (!origin.allowsRead(req.header("origin"))) return MiniHttp.json(out, 403, """{"error":"origine refusée"}""")
-        val c = find(req) ?: return gone(out, "connexion inconnue ou terminée")
+        val c = find(req) ?: return gone(req, out, "connexion inconnue ou terminée")
         val since = req.query["since"]?.toLongOrNull() ?: 0L
         c.touch()
-        val items = c.poll(since, cfg.pollMs) ?: return gone(out, "connexion terminée")
+        val items = c.poll(since, cfg.pollMs) ?: return gone(req, out, "connexion terminée")
         c.touch()
         val next = items.lastOrNull()?.idx ?: since
         MiniHttp.json(out, 200, """{"msgs":[${items.joinToString(",") { it.text }}],"next":$next}""")
@@ -153,7 +155,8 @@ class PlayFallbackController(private val cfg: PlayConfig, val hub: PlayHub, priv
     private fun typeOf(json: String): String = TYPE.find(json)?.groupValues?.get(1) ?: "message"
 
     companion object {
-        const val COOKIE = "cbp"
+        const val COOKIE = "__Host-cbp"
+        private val NONCE = Regex("^[0-9a-f]{8,32}$")
         private val TYPE = Regex("^\\{\"t\":\"([a-zA-Z]{1,16})\"")
     }
 }

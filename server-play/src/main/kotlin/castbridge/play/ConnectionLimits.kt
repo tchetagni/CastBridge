@@ -8,23 +8,32 @@ import java.util.concurrent.atomic.AtomicInteger
  * Plafonds de connexions : par adresse IP cliente et au total. S'applique AVANT l'ouverture d'une connexion de jeu (avant l'upgrade WebSocket :
  * le refus est une réponse HTTP 429 ou 503). Une « connexion » = une session WebSocket ou une session de repli (SSE / long-poll).
  */
-class ConnectionLimits(private val maxPerIp: Int, private val maxTotal: Int) {
+class ConnectionLimits(private val maxPerIp: Int, private val maxTotal: Int, private val maxPerPrefix48: Int = 64) {
     enum class Verdict { OK, IP_FULL, TOTAL_FULL }
 
     private val perIp = ConcurrentHashMap<String, AtomicInteger>()
+    private val per48 = ConcurrentHashMap<String, AtomicInteger>()
     private val total = AtomicInteger()
 
+    /** Prend une place : plafond total, plafond par clé d'adresse (IPv4, ou /64), et pour l'IPv6 un second plafond par /48 (65 536 /64 dans un /48). */
     fun acquire(ip: String): Verdict {
         if (total.incrementAndGet() > maxTotal) { total.decrementAndGet(); return Verdict.TOTAL_FULL }
         val n = perIp.computeIfAbsent(ip) { AtomicInteger() }
-        if (n.incrementAndGet() > maxPerIp) { n.decrementAndGet(); total.decrementAndGet(); return Verdict.IP_FULL }
+        if (n.incrementAndGet() > maxPerIp) { decrement(perIp, ip); total.decrementAndGet(); return Verdict.IP_FULL }
+        ClientIp.group48(ip)?.let { g ->
+            val m = per48.computeIfAbsent(g) { AtomicInteger() }
+            if (m.incrementAndGet() > maxPerPrefix48) { decrement(per48, g); decrement(perIp, ip); total.decrementAndGet(); return Verdict.IP_FULL }
+        }
         return Verdict.OK
     }
 
     fun release(ip: String) {
         total.decrementAndGet()
-        perIp.computeIfPresent(ip) { _, n -> if (n.decrementAndGet() <= 0) null else n }
+        decrement(perIp, ip)
+        ClientIp.group48(ip)?.let { decrement(per48, it) }
     }
+
+    private fun decrement(map: ConcurrentHashMap<String, AtomicInteger>, k: String) { map.computeIfPresent(k) { _, v -> if (v.decrementAndGet() <= 0) null else v } }
 
     fun total(): Int = total.get()
     fun of(ip: String): Int = perIp[ip]?.get() ?: 0
@@ -39,10 +48,14 @@ object ClientIp {
     fun resolve(peer: InetAddress, forwardedFor: String?, trusted: List<Cidr>): String {
         if (forwardedFor != null && trusted.any { it.contains(peer) }) {
             val last = forwardedFor.substringAfterLast(',').trim()
-            Cidr.literal(last)?.let { return key(it) }
+            val a = Cidr.literal(last) ?: throw ForwardedForError("X-Forwarded-For illisible du proxy de confiance")   // le proxy écrit toujours une adresse : sinon la requête est refusée (400)
+            return key(a)
         }
         return key(peer)
     }
+
+    /** Clé du /48 qui contient cette clé /64 (IPv6 seulement) ; null pour une IPv4. */
+    fun group48(key: String): String? = if (key.startsWith("v6:")) "v6:" + key.removePrefix("v6:").split(":").take(3).joinToString(":") + "::/48" else null
 
     fun key(a: InetAddress): String {
         if (a !is java.net.Inet6Address) return a.hostAddress
@@ -64,3 +77,6 @@ class TokenBucket(private val rate: Int, private val burst: Int, private val clo
         return true
     }
 }
+
+/** `X-Forwarded-For` illisible venant du proxy de confiance : la requête est refusée (400). */
+class ForwardedForError(message: String) : Exception(message)

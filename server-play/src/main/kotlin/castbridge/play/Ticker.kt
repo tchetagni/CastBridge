@@ -13,4 +13,7 @@ class Ticker(private val periodMs: Long, private val task: () -> Unit) : AutoClo
     }
 
     override fun close() { exec.shutdownNow() }
+
+    /** Vrai quand le fil du tick est arrêté (après [close]). */
+    fun isStopped(): Boolean = exec.isShutdown && exec.awaitTermination(2, TimeUnit.SECONDS)
 }

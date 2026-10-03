@@ -34,37 +34,40 @@ class WsConn(id: String, ip: String, private val socket: Socket, private val cfg
     @Volatile private var writeStartedMs = 0L
     private val out = socket.getOutputStream()
     @Volatile private var lastPingMs = System.currentTimeMillis()
-    @Volatile private var closing = false
+    private val closing = AtomicBoolean(false)
+    private val killer = AtomicReference<java.util.concurrent.ScheduledFuture<*>?>(null)
 
     /** Octets en attente de sortie (messages et pong) : doit rester sous `outboxMaxBytes`. */
     fun queuedBytes(): Int = queued.get()
 
+    /** Nombre de pongs en attente d'écriture : 0 ou 1, jamais plus. */
+    internal fun pendingPongs(): Int = if (pendingPong.get() != null) 1 else 0
+
     override fun offer(text: String): Boolean {
-        if (closing) return true
+        if (closing.get()) return true
         val b = text.toByteArray(Charsets.UTF_8)
         if (queued.addAndGet(b.size) > cfg.outboxMaxBytes) return false
         queue.add(Item(WsProtocol.OP_TEXT, b)); return true
     }
 
     override fun close(code: Int, reason: String) {
-        if (closing) return
-        closing = true
+        if (!closing.compareAndSet(false, true)) return
         queue.clear(); queued.set(0)
         queue.add(Item(WsProtocol.OP_CLOSE, WsProtocol.closePayload(code, reason)))
         // si l'écrivain est bloqué (client qui ne lit plus), la socket est fermée de force par un ordonnanceur de PLATEFORME (jamais un fil virtuel)
-        KILLER.schedule({ runCatching { socket.close() } }, 2, TimeUnit.SECONDS)
+        killer.set(KILLER.schedule({ runCatching { socket.close() } }, 2, TimeUnit.SECONDS))
     }
 
     override fun housekeeping(nowMs: Long) {
-        if (closing) return
+        if (closing.get()) return
         val w = writeStartedMs
-        if (w != 0L && nowMs - w >= cfg.writeTimeoutMs) { closing = true; runCatching { socket.close() }; return }   // écriture bloquée : le client ne lit plus
+        if (w != 0L && nowMs - w >= cfg.writeTimeoutMs) { closing.set(true); runCatching { socket.close() }; return }   // écriture bloquée : le client ne lit plus
         if (nowMs - lastInboundMs >= cfg.pongTimeoutMs) { close(1001, "pas de réponse"); return }
         if (nowMs - lastPingMs >= cfg.pingMs && pingPending.compareAndSet(false, true)) { lastPingMs = nowMs; queue.add(Item(WsProtocol.OP_PING, ByteArray(0))) }
     }
 
     /** Un ping du client : UN SEUL pong en attente, le dernier ; ses octets sont comptés dans la file. */
-    private fun onClientPing(payload: ByteArray) {
+    internal fun onClientPing(payload: ByteArray) {
         val old = pendingPong.getAndSet(payload)
         if (old == null) { queued.addAndGet(payload.size + CONTROL_OVERHEAD); queue.add(Item(PONG_WAKE, ByteArray(0))) } else queued.addAndGet(payload.size - old.size)
     }
@@ -125,8 +128,9 @@ class WsConn(id: String, ip: String, private val socket: Socket, private val cfg
         catch (_: IOException) {}
         finally {
             hub.onClosed(this)
-            if (!closing) { closing = true; queue.clear(); queue.add(Item(WsProtocol.OP_CLOSE, WsProtocol.closePayload(1001, "fin"))) }
+            if (closing.compareAndSet(false, true)) { queue.clear(); queue.add(Item(WsProtocol.OP_CLOSE, WsProtocol.closePayload(1001, "fin"))) }
             runCatching { writer.join(2_000) }
+            killer.get()?.cancel(false)   // le tueur n'a plus rien à tuer : la tâche ne reste pas dans l'ordonnanceur
             runCatching { socket.close() }
         }
     }

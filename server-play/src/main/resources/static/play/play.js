@@ -15,6 +15,9 @@ const keep = { get(k) { try { return localStorage.getItem(k); } catch (e) { retu
 let dev = keep.get("playDev");
 if (!dev) { dev = Array.from(crypto.getRandomValues(new Uint8Array(8)), b => b.toString(16).padStart(2, "0")).join(""); keep.set("playDev", dev); }
 
+// Un cookie de session de repli PAR ONGLET : le nonce (non secret) nomme le cookie `__Host-cbp-<nonce>` ; sessionStorage est propre à l'onglet
+let tab = store.get("playTab");
+if (!tab) { tab = Array.from(crypto.getRandomValues(new Uint8Array(8)), b => b.toString(16).padStart(2, "0")).join(""); store.set("playTab", tab); }
 let session = null; try { session = JSON.parse(store.get("playSession") || "null"); } catch (e) {}   // { roomId, token, code, name } : le jeton reste en sessionStorage, jamais dans une adresse
 let S = { view: null, role: null, opensAtLocal: 0, deadline: 0, timerTotal: 0, err: "", gone: null, myTooEarly: false };
 let kind = 0, gen = 0, seq = 0, lastSeq = 0, conn = false, since = 0, link = null, pendingJoin = null, leaving = false, shortLives = 0, retries = 0;
@@ -59,7 +62,7 @@ let chain = Promise.resolve();
 const post = (g, m) => { chain = chain.then(() => doPost(g, m)); return chain; };   // un message à la fois : le premier crée la session de repli
 async function doPost(g, m) {
   try {
-    const r = await fetch("/play/act", { method: "POST", cache: "no-store", headers: { "Content-Type": "application/json" }, credentials: "same-origin", body: JSON.stringify(m) });
+    const r = await fetch("/play/act?tab=" + tab, { method: "POST", cache: "no-store", headers: { "Content-Type": "application/json" }, credentials: "same-origin", body: JSON.stringify(m) });
     if (g !== gen) return;
     if (r.status === 410) { conn = false; since = 0; if (session) { await sleep(300); if (g === gen) { ready(); } } return; }   // session de repli terminée : reprise avec le jeton
     if (r.status === 429) { S.err = "Trop de messages ou de connexions : patientez un instant."; render(); return; }
@@ -72,7 +75,7 @@ function openFallback(g, k) {
   ready();
 }
 function openStream(g) {
-  const es = new EventSource("/play/events");
+  const es = new EventSource("/play/events?tab=" + tab);
   link.es = es;
   for (const t of ["welcome", "state", "question", "reveal", "safety", "ping", "error", "roomGone", "replay", "ack"]) es.addEventListener(t, ev => { if (g === gen) handle(JSON.parse(ev.data)); });
   es.onerror = () => { if (g !== gen) return; es.close(); conn = false; note("Flux interrompu, reprise…"); setTimeout(() => { if (g === gen && !leaving) ready(); }, 1000); };
@@ -81,7 +84,7 @@ async function pollLoop(g) {
   let fails = 0;
   while (g === gen && conn) {
     try {
-      const r = await fetch("/play/state?since=" + since, { cache: "no-store", credentials: "same-origin" });
+      const r = await fetch("/play/state?tab=" + tab + "&since=" + since, { cache: "no-store", credentials: "same-origin" });
       if (g !== gen) return;
       if (r.status === 410) { conn = false; since = 0; await sleep(300); if (g === gen) ready(); return; }
       if (r.status !== 200) throw new Error("http " + r.status);

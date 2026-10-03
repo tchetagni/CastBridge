@@ -195,12 +195,16 @@ class ServerRoom(
 
     private fun join(conn: String, m: ClientMsg.Join, now: Long, ip: String?, out: MutableList<Out>) {
         if (RoomCode.expired(createdAt, now)) { out += err(conn, PlayReason.PLAY_ROOM_GONE); return }
+        val typed = RoomCode.normalize(m.code)
+        // Une connexion déjà assise n'essaie pas de deviner un code : refus sans compter (sinon un spectateur ferait tourner le code de la salle).
+        // Seule la TV hôte enregistre ainsi un joueur local : siège relayé, sans connexion propre.
+        val sender = byConn[conn]
+        if (sender != null) {
+            if (sender === host && sender.conn == conn && typed == code) relayJoin(conn, m, out) else out += errp(conn, PlayProtocol.FORBIDDEN, "Vous êtes déjà dans la salle.")
+            return
+        }
         if (ip != null && badCodes.ipBlocked(ip, now)) { out += err(conn, PlayReason.PLAY_BAD_CODE); return }
         if (scopeClosedAt != null) { out += err(conn, PlayReason.PLAY_SCOPE_FORBIDDEN); return }
-        val typed = RoomCode.normalize(m.code)
-        // La TV (hôte) enregistre un joueur local : siège relayé, sans connexion propre.
-        val sender = byConn[conn]
-        if (sender != null && sender === host && sender.conn == conn && typed == code) { relayJoin(conn, m, out); return }
         if (typed == null || typed != code) { badAttempt(conn, ip, now, out); return }
         m.token?.let { t -> seats[t]?.let { s -> reattach(s, conn, out, null); return } }
         if (m.deviceHash != null && m.deviceHash in bannedDevices || ip != null && ip in bannedIps) { out += err(conn, PlayReason.PLAY_BANNED); return }
@@ -241,13 +245,10 @@ class ServerRoom(
     }
 
     private fun resume(conn: String, m: ClientMsg.Resume, now: Long, ip: String?, out: MutableList<Out>) {
-        if (ip != null && badCodes.ipBlocked(ip, now)) { out += err(conn, PlayReason.PLAY_BAD_CODE); return }   // l'adresse bloquée ne reprend rien, même avec le bon jeton
+        // Jamais de blocage par adresse ni de compte des échecs ici : derrière un NAT collectif, une adresse partagée ne doit pas empêcher un joueur déjà assis de reprendre ;
+        // deviner un jeton de 128 bits est impossible, le seau de débit du service suffit. Jeton inconnu ou autre salle : même réponse qu'un code faux, sans rotation du code.
         val s = seats[m.token]
-        if (m.roomId != roomId || s == null) {   // même réponse qu'un code faux : n'apprend rien sur l'existence de la salle ; MAIS jamais de rotation du code ici (un spectateur ne doit pas pouvoir la provoquer)
-            out += err(conn, PlayReason.PLAY_BAD_CODE)
-            if (ip != null) badCodes.ipFail(ip, now)
-            return
-        }
+        if (m.roomId != roomId || s == null) { out += err(conn, PlayReason.PLAY_BAD_CODE); return }
         reattach(s, conn, out, m.lastSeq)
     }
 
