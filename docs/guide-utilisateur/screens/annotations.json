@@ -1,0 +1,1974 @@
+{
+ "note": "Bornes en pixels de l'image (issues de uiautomator dump). step = numéro d'étape du guide, ajouté par build_guide.py.",
+ "screens": [
+  {
+   "id": "s01",
+   "name": "telephone-donnees-et-consentement",
+   "file": "s01-telephone-donnees-et-consentement.png",
+   "kind": "phone",
+   "size": [
+    1080,
+    2400
+   ],
+   "shows": "Premier lancement : « CastBridge et vos données », deux choix",
+   "source_capture": "p01_donnees",
+   "annotations": [
+    {
+     "key": "essentiel",
+     "label": "Seulement l'essentiel",
+     "bounds": [
+      345,
+      2248,
+      735,
+      2321
+     ]
+    },
+    {
+     "key": "stats",
+     "label": "Accepter les statistiques d'usage",
+     "bounds": [
+      240,
+      2106,
+      840,
+      2179
+     ]
+    }
+   ],
+   "steps": [
+    {
+     "step": "2.2",
+     "keys": [
+      "essentiel",
+      "stats"
+     ]
+    },
+    {
+     "step": "8.2",
+     "keys": [
+      "essentiel",
+      "stats"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "s02",
+   "name": "telephone-onglet-castbridge-tv",
+   "file": "s02-telephone-onglet-castbridge-tv.png",
+   "kind": "phone",
+   "size": [
+    1080,
+    2400
+   ],
+   "shows": "Premier écran : onglet « CastBridge TV » (« Trouvons votre TV »)",
+   "source_capture": "p02",
+   "annotations": [
+    {
+     "key": "ajouter",
+     "label": "Ajouter ma TV (Bluetooth, sans code)",
+     "bounds": [
+      244,
+      792,
+      921,
+      873
+     ]
+    },
+    {
+     "key": "chercher",
+     "label": "Chercher à nouveau",
+     "bounds": [
+      355,
+      1603,
+      726,
+      1676
+     ]
+    },
+    {
+     "key": "manuel",
+     "label": "Ma TV n'apparaît pas",
+     "bounds": [
+      87,
+      1757,
+      993,
+      1879
+     ]
+    },
+    {
+     "key": "activer",
+     "label": "Activer la TV",
+     "bounds": [
+      318,
+      111,
+      560,
+      184
+     ]
+    },
+    {
+     "key": "locations",
+     "label": "Locations",
+     "bounds": [
+      604,
+      111,
+      795,
+      184
+     ]
+    },
+    {
+     "key": "onglet",
+     "label": "CastBridge TV",
+     "bounds": [
+      422,
+      258,
+      696,
+      331
+     ]
+    }
+   ],
+   "steps": [
+    {
+     "step": "3.1",
+     "keys": [
+      "onglet",
+      "ajouter"
+     ]
+    },
+    {
+     "step": "3.8",
+     "keys": [
+      "ajouter"
+     ]
+    },
+    {
+     "step": "3.11",
+     "keys": [
+      "manuel"
+     ]
+    },
+    {
+     "step": "7.1",
+     "keys": [
+      "chercher",
+      "manuel"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "s03",
+   "name": "telephone-onglets-suite",
+   "file": "s03-telephone-onglets-suite.png",
+   "kind": "phone",
+   "size": [
+    1080,
+    2400
+   ],
+   "shows": "La rangée d'onglets, glissée vers la gauche",
+   "source_capture": "p08_tabs",
+   "annotations": [
+    {
+     "key": "surtel",
+     "label": "Sur le téléphone",
+     "bounds": [
+      105,
+      258,
+      405,
+      331
+     ]
+    },
+    {
+     "key": "apprendre",
+     "label": "Apprendre",
+     "bounds": [
+      543,
+      258,
+      746,
+      331
+     ]
+    },
+    {
+     "key": "parental",
+     "label": "Parental",
+     "bounds": [
+      884,
+      258,
+      1048,
+      331
+     ]
+    }
+   ],
+   "steps": [
+    {
+     "step": "3.2",
+     "keys": [
+      "surtel",
+      "apprendre",
+      "parental"
+     ]
+    },
+    {
+     "step": "6.6",
+     "keys": [
+      "parental"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "s04",
+   "name": "telephone-adresse-manuelle",
+   "file": "s04-telephone-adresse-manuelle.png",
+   "kind": "phone",
+   "size": [
+    1080,
+    2400
+   ],
+   "shows": "« Ma TV n'apparaît pas » : saisie manuelle (Wi-Fi), champs vides",
+   "source_capture": "p03",
+   "annotations": [
+    {
+     "key": "case",
+     "label": "case à cocher de l'adresse manuelle",
+     "bounds": [
+      79,
+      1178,
+      132,
+      1230
+     ]
+    },
+    {
+     "key": "ip",
+     "label": "IP de la TV (manuelle)",
+     "bounds": [
+      217,
+      1169,
+      680,
+      1258
+     ]
+    },
+    {
+     "key": "pin",
+     "label": "PIN de la TV (affiché sur son écran)",
+     "bounds": [
+      70,
+      1348,
+      808,
+      1437
+     ]
+    }
+   ],
+   "steps": [
+    {
+     "step": "3.12",
+     "keys": [
+      "case",
+      "ip",
+      "pin"
+     ]
+    },
+    {
+     "step": "7.2",
+     "keys": [
+      "pin"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "s05",
+   "name": "telephone-code-saisi-masque",
+   "file": "s05-telephone-code-saisi-masque.png",
+   "kind": "phone",
+   "size": [
+    1080,
+    2400
+   ],
+   "shows": "Adresse et code saisis : le code est masqué par des points",
+   "source_capture": "p20_connecte",
+   "annotations": [
+    {
+     "key": "ip",
+     "label": "IP de la TV (manuelle)",
+     "bounds": [
+      190,
+      1038,
+      1038,
+      1182
+     ]
+    },
+    {
+     "key": "pin",
+     "label": "PIN de la TV (affiché sur son écran)",
+     "bounds": [
+      43,
+      1218,
+      1037,
+      1362
+     ]
+    }
+   ],
+   "steps": [
+    {
+     "step": "3.13",
+     "keys": [
+      "ip",
+      "pin"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "s06",
+   "name": "telephone-tv-jointe",
+   "file": "s06-telephone-tv-jointe.png",
+   "kind": "phone",
+   "size": [
+    1080,
+    2400
+   ],
+   "shows": "Connecté : « SUR LA TV » liste les fichiers de la TV",
+   "source_capture": "p23_joint",
+   "annotations": [
+    {
+     "key": "surlatv",
+     "label": "SUR LA TV",
+     "bounds": [
+      32,
+      2076,
+      1069,
+      2135
+     ]
+    },
+    {
+     "key": "envoyer",
+     "label": "Envoyer et lire",
+     "bounds": [
+      179,
+      1913,
+      444,
+      1986
+     ]
+    },
+    {
+     "key": "fichier",
+     "label": "Toucher pour choisir un fichier",
+     "bounds": [
+      137,
+      1534,
+      682,
+      1607
+     ]
+    }
+   ],
+   "steps": [
+    {
+     "step": "3.14",
+     "keys": [
+      "surlatv"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "s07",
+   "name": "telephone-sur-le-telephone",
+   "file": "s07-telephone-sur-le-telephone.png",
+   "kind": "phone",
+   "size": [
+    1080,
+    2400
+   ],
+   "shows": "Onglet « Sur le téléphone » : la vidéo de test",
+   "source_capture": "p14_surtel",
+   "annotations": [
+    {
+     "key": "videos",
+     "label": "Vidéos",
+     "bounds": [
+      305,
+      562,
+      445,
+      635
+     ]
+    },
+    {
+     "key": "video",
+     "label": "Video_de_test.mp4",
+     "bounds": [
+      15,
+      1006,
+      327,
+      1073
+     ]
+    }
+   ],
+   "steps": [
+    {
+     "step": "4.1",
+     "keys": [
+      "videos",
+      "video"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "s08",
+   "name": "telephone-lecteur",
+   "file": "s08-telephone-lecteur.png",
+   "kind": "phoneland",
+   "size": [
+    2400,
+    1080
+   ],
+   "shows": "Lecteur du téléphone : bouton « Lire sur la TV »",
+   "source_capture": "p15_player",
+   "annotations": [
+    {
+     "key": "lire",
+     "label": "Lire sur la TV",
+     "bounds": [
+      2033,
+      96,
+      2116,
+      179
+     ]
+    }
+   ],
+   "steps": [
+    {
+     "step": "4.3",
+     "keys": [
+      "lire"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "s09",
+   "name": "telephone-feuille-lire-sur-la-tv",
+   "file": "s09-telephone-feuille-lire-sur-la-tv.png",
+   "kind": "phoneland",
+   "size": [
+    2400,
+    1080
+   ],
+   "shows": "Feuille « Lire sur la TV » (aucune TV trouvée sur l'émulateur)",
+   "source_capture": "p16_lire_sur_tv",
+   "annotations": [
+    {
+     "key": "titre",
+     "label": "Lire sur la TV",
+     "bounds": [
+      498,
+      514,
+      858,
+      604
+     ]
+    },
+    {
+     "key": "tv",
+     "label": "TV CASTBRIDGE",
+     "bounds": [
+      392,
+      655,
+      2029,
+      714
+     ]
+    },
+    {
+     "key": "rech",
+     "label": "Rechercher",
+     "bounds": [
+      1915,
+      839,
+      1998,
+      922
+     ]
+    }
+   ],
+   "steps": [
+    {
+     "step": "4.4",
+     "keys": [
+      "titre",
+      "tv"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "s10",
+   "name": "telephone-ouvrir-avec-castbridge",
+   "file": "s10-telephone-ouvrir-avec-castbridge.png",
+   "kind": "phone",
+   "size": [
+    1080,
+    2400
+   ],
+   "shows": "« Ouvrir avec CastBridge » : les façons d'envoyer, avec leur explication",
+   "source_capture": "p07",
+   "annotations": [
+    {
+     "key": "copierlire",
+     "label": "Copier sur la TV et lire",
+     "bounds": [
+      337,
+      998,
+      744,
+      1075
+     ]
+    },
+    {
+     "key": "copier",
+     "label": "Copier sur la TV",
+     "bounds": [
+      389,
+      1237,
+      691,
+      1314
+     ]
+    },
+    {
+     "key": "deplacer",
+     "label": "Déplacer vers la TV",
+     "bounds": [
+      359,
+      1518,
+      721,
+      1595
+     ]
+    },
+    {
+     "key": "lireici",
+     "label": "Lire ici",
+     "bounds": [
+      743,
+      1806,
+      875,
+      1879
+     ]
+    }
+   ],
+   "steps": [
+    {
+     "step": "4.2",
+     "keys": [
+      "copierlire",
+      "copier",
+      "deplacer",
+      "lireici"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "s11",
+   "name": "telephone-apprendre",
+   "file": "s11-telephone-apprendre.png",
+   "kind": "phone",
+   "size": [
+    1080,
+    2400
+   ],
+   "shows": "Onglet « Apprendre » : classes, « Données hors ligne »",
+   "source_capture": "p09_apprendre",
+   "annotations": [
+    {
+     "key": "lots",
+     "label": "Données hors ligne",
+     "bounds": [
+      652,
+      521,
+      1006,
+      594
+     ]
+    },
+    {
+     "key": "lecons",
+     "label": "Leçons",
+     "bounds": [
+      107,
+      646,
+      253,
+      719
+     ]
+    },
+    {
+     "key": "piloter",
+     "label": "Piloter la TV",
+     "bounds": [
+      426,
+      646,
+      655,
+      719
+     ]
+    },
+    {
+     "key": "parents",
+     "label": "Parents",
+     "bounds": [
+      824,
+      646,
+      977,
+      719
+     ]
+    }
+   ],
+   "steps": [
+    {
+     "step": "5.1",
+     "keys": [
+      "lecons",
+      "piloter",
+      "parents",
+      "lots"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "s12",
+   "name": "telephone-donnees-hors-ligne",
+   "file": "s12-telephone-donnees-hors-ligne.png",
+   "kind": "phone",
+   "size": [
+    1080,
+    2400
+   ],
+   "shows": "« Données hors ligne » : Wi-Fi uniquement, mise à jour, envoi, langues",
+   "source_capture": "p10_lots",
+   "annotations": [
+    {
+     "key": "wifi",
+     "label": "Wi-Fi uniquement",
+     "bounds": [
+      32,
+      712,
+      404,
+      783
+     ]
+    },
+    {
+     "key": "maj",
+     "label": "Tout mettre à jour",
+     "bounds": [
+      93,
+      887,
+      424,
+      964
+     ]
+    },
+    {
+     "key": "envoyer",
+     "label": "Envoyer à la TV",
+     "bounds": [
+      547,
+      887,
+      840,
+      964
+     ]
+    },
+    {
+     "key": "langue",
+     "label": "Langue à apprendre",
+     "bounds": [
+      32,
+      1799,
+      787,
+      1864
+     ]
+    },
+    {
+     "key": "telecharger",
+     "label": "Télécharger mes leçons de langue",
+     "bounds": [
+      93,
+      2267,
+      710,
+      2344
+     ]
+    }
+   ],
+   "steps": [
+    {
+     "step": "5.8",
+     "keys": [
+      "wifi",
+      "maj",
+      "envoyer"
+     ]
+    },
+    {
+     "step": "5.9",
+     "keys": [
+      "langue",
+      "telecharger"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "s13",
+   "name": "telephone-donnees-hors-ligne-suite",
+   "file": "s13-telephone-donnees-hors-ligne-suite.png",
+   "kind": "phone",
+   "size": [
+    1080,
+    2400
+   ],
+   "shows": "« Données hors ligne » (suite) : langues, « Sur la TV »",
+   "source_capture": "p11_lots2",
+   "annotations": [
+    {
+     "key": "actualiser",
+     "label": "Actualiser la liste",
+     "bounds": [
+      95,
+      580,
+      411,
+      653
+     ]
+    },
+    {
+     "key": "langues",
+     "label": "Langues",
+     "bounds": [
+      32,
+      736,
+      234,
+      810
+     ]
+    },
+    {
+     "key": "voir",
+     "label": "Voir les leçons disponibles sur le serveur",
+     "bounds": [
+      95,
+      1646,
+      820,
+      1719
+     ]
+    },
+    {
+     "key": "surlatv",
+     "label": "Sur la TV",
+     "bounds": [
+      32,
+      2166,
+      245,
+      2240
+     ]
+    }
+   ],
+   "steps": [
+    {
+     "step": "5.10",
+     "keys": [
+      "actualiser",
+      "voir",
+      "surlatv"
+     ]
+    },
+    {
+     "step": "8.1",
+     "keys": [
+      "surlatv"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "s14",
+   "name": "telephone-jeux",
+   "file": "s14-telephone-jeux.png",
+   "kind": "phone",
+   "size": [
+    1080,
+    2400
+   ],
+   "shows": "Onglet « Jeux » : Quiz des Millions, Échecs, Sudoku",
+   "source_capture": "p13_jeux",
+   "annotations": [
+    {
+     "key": "quiz",
+     "label": "Quiz des Millions",
+     "bounds": [
+      259,
+      612,
+      652,
+      694
+     ]
+    },
+    {
+     "key": "echecs",
+     "label": "Échecs",
+     "bounds": [
+      259,
+      902,
+      444,
+      984
+     ]
+    },
+    {
+     "key": "sudoku",
+     "label": "Sudoku",
+     "bounds": [
+      259,
+      1192,
+      451,
+      1274
+     ]
+    }
+   ],
+   "steps": [
+    {
+     "step": "5.2",
+     "keys": [
+      "quiz",
+      "echecs",
+      "sudoku"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "s15",
+   "name": "telephone-activer-la-tv",
+   "file": "s15-telephone-activer-la-tv.png",
+   "kind": "phone",
+   "size": [
+    1080,
+    2400
+   ],
+   "shows": "« Activer la TV » : conditions d'usage puis clé d'activation",
+   "source_capture": "p17_activer",
+   "annotations": [
+    {
+     "key": "titre",
+     "label": "Activer la TV",
+     "bounds": [
+      32,
+      32,
+      419,
+      128
+     ]
+    },
+    {
+     "key": "conditions",
+     "label": "Conditions d'usage de CastBridge",
+     "bounds": [
+      32,
+      492,
+      1048,
+      610
+     ]
+    },
+    {
+     "key": "etapes",
+     "label": "1. Copiez la clé d'activation…",
+     "bounds": [
+      32,
+      2192,
+      1048,
+      2310
+     ]
+    }
+   ],
+   "steps": [
+    {
+     "step": "2.3",
+     "keys": [
+      "conditions",
+      "etapes"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "s16",
+   "name": "telephone-locations",
+   "file": "s16-telephone-locations.png",
+   "kind": "phone",
+   "size": [
+    1080,
+    2400
+   ],
+   "shows": "« Locations sur la TV » (pour une location remise par un agent)",
+   "source_capture": "p18_locations",
+   "annotations": [
+    {
+     "key": "choisir",
+     "label": "Choisir les fichiers",
+     "bounds": [
+      367,
+      652,
+      713,
+      729
+     ]
+    },
+    {
+     "key": "loc",
+     "label": "Location (produit@période)",
+     "bounds": [
+      70,
+      835,
+      645,
+      924
+     ]
+    },
+    {
+     "key": "envoyer",
+     "label": "2. Envoyer à la TV",
+     "bounds": [
+      373,
+      1010,
+      708,
+      1087
+     ]
+    }
+   ],
+   "steps": [
+    {
+     "step": "2.4",
+     "keys": [
+      "choisir",
+      "loc",
+      "envoyer"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "s17",
+   "name": "telephone-reglages",
+   "file": "s17-telephone-reglages.png",
+   "kind": "phone",
+   "size": [
+    1080,
+    2400
+   ],
+   "shows": "Réglages : choix des statistiques, « Mes données », mises à jour",
+   "source_capture": "p19_reglages",
+   "annotations": [
+    {
+     "key": "stats",
+     "label": "Statistiques d'usage",
+     "bounds": [
+      32,
+      974,
+      457,
+      1045
+     ]
+    },
+    {
+     "key": "mesdonnees",
+     "label": "Mes données",
+     "bounds": [
+      93,
+      1319,
+      350,
+      1396
+     ]
+    },
+    {
+     "key": "effacer",
+     "label": "Effacer mes données",
+     "bounds": [
+      473,
+      1319,
+      863,
+      1396
+     ]
+    },
+    {
+     "key": "verifier",
+     "label": "Vérifier maintenant",
+     "bounds": [
+      93,
+      1871,
+      448,
+      1948
+     ]
+    }
+   ],
+   "steps": [
+    {
+     "step": "8.3",
+     "keys": [
+      "stats",
+      "mesdonnees",
+      "effacer"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "s18",
+   "name": "tv-accueil-avec-videos",
+   "file": "s18-tv-accueil-avec-videos.png",
+   "kind": "tvshot",
+   "size": [
+    1280,
+    720
+   ],
+   "shows": "Accueil de CastBridge-TV : tuiles et vidéos récentes",
+   "source_capture": "tv24_home",
+   "annotations": [
+    {
+     "key": "biblio",
+     "label": "Bibliothèque",
+     "bounds": [
+      78,
+      271,
+      248,
+      438
+     ]
+    },
+    {
+     "key": "ajouter",
+     "label": "Ajouter un téléphone",
+     "bounds": [
+      268,
+      271,
+      438,
+      438
+     ]
+    },
+    {
+     "key": "apprendre",
+     "label": "Apprendre",
+     "bounds": [
+      458,
+      271,
+      628,
+      438
+     ]
+    },
+    {
+     "key": "langues",
+     "label": "Langues",
+     "bounds": [
+      648,
+      271,
+      818,
+      438
+     ]
+    },
+    {
+     "key": "jeux",
+     "label": "Jeux",
+     "bounds": [
+      838,
+      271,
+      1008,
+      438
+     ]
+    },
+    {
+     "key": "telech",
+     "label": "Téléchargements",
+     "bounds": [
+      1028,
+      271,
+      1198,
+      438
+     ]
+    },
+    {
+     "key": "etat",
+     "label": "● Prêt à recevoir · code 81••••",
+     "bounds": [
+      851,
+      28,
+      1151,
+      79
+     ]
+    }
+   ],
+   "steps": [
+    {
+     "step": "3.3",
+     "keys": [
+      "biblio",
+      "ajouter",
+      "apprendre",
+      "langues",
+      "jeux",
+      "telech"
+     ]
+    },
+    {
+     "step": "3.5",
+     "keys": [
+      "ajouter"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "s19",
+   "name": "tv-tuile-recevoir-du-telephone",
+   "file": "s19-tv-tuile-recevoir-du-telephone.png",
+   "kind": "tvshot",
+   "size": [
+    1280,
+    720
+   ],
+   "shows": "Tuile « Recevoir du téléphone » et les tuiles suivantes",
+   "source_capture": "tv03_home_more",
+   "annotations": [
+    {
+     "key": "recevoir",
+     "label": "Recevoir du téléphone",
+     "bounds": [
+      64,
+      271,
+      234,
+      438
+     ]
+    },
+    {
+     "key": "usb",
+     "label": "Clé USB",
+     "bounds": [
+      254,
+      271,
+      424,
+      438
+     ]
+    },
+    {
+     "key": "bt",
+     "label": "Bluetooth",
+     "bounds": [
+      444,
+      271,
+      614,
+      438
+     ]
+    },
+    {
+     "key": "internet",
+     "label": "Internet",
+     "bounds": [
+      634,
+      271,
+      804,
+      438
+     ]
+    },
+    {
+     "key": "wd",
+     "label": "Wi-Fi Direct",
+     "bounds": [
+      824,
+      271,
+      994,
+      438
+     ]
+    }
+   ],
+   "steps": [
+    {
+     "step": "3.4",
+     "keys": [
+      "recevoir",
+      "usb",
+      "bt",
+      "internet",
+      "wd"
+     ]
+    },
+    {
+     "step": "3.9",
+     "keys": [
+      "recevoir"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "s20",
+   "name": "tv-aide-recevoir-du-telephone",
+   "file": "s20-tv-aide-recevoir-du-telephone.png",
+   "kind": "tvshot",
+   "size": [
+    1280,
+    720
+   ],
+   "shows": "Aide « Copier une vidéo sur la TV » (code masqué)",
+   "source_capture": "tv04_recevoir",
+   "annotations": [
+    {
+     "key": "titre",
+     "label": "Copier une vidéo sur la TV",
+     "bounds": [
+      366,
+      229,
+      914,
+      270
+     ]
+    },
+    {
+     "key": "compris",
+     "label": "Compris",
+     "bounds": [
+      831,
+      402,
+      926,
+      472
+     ]
+    }
+   ],
+   "steps": [
+    {
+     "step": "3.10",
+     "keys": [
+      "titre",
+      "compris"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "s21",
+   "name": "tv-bluetooth-visible",
+   "file": "s21-tv-bluetooth-visible.png",
+   "kind": "tvshot",
+   "size": [
+    1280,
+    720
+   ],
+   "shows": "Fenêtre Android : rendre la TV visible en Bluetooth",
+   "source_capture": "tv05a_btdialog",
+   "annotations": [
+    {
+     "key": "allow",
+     "label": "Allow (Autoriser)",
+     "bounds": [
+      832,
+      352,
+      908,
+      418
+     ]
+    },
+    {
+     "key": "deny",
+     "label": "Deny (Refuser)",
+     "bounds": [
+      768,
+      352,
+      844,
+      418
+     ]
+    }
+   ],
+   "steps": [
+    {
+     "step": "3.6",
+     "keys": [
+      "allow"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "s22",
+   "name": "tv-ajouter-un-telephone",
+   "file": "s22-tv-ajouter-un-telephone.png",
+   "kind": "tvshot",
+   "size": [
+    1280,
+    720
+   ],
+   "shows": "Écran « Ajouter un téléphone » de la TV",
+   "source_capture": "tv05_ajouter",
+   "annotations": [
+    {
+     "key": "consigne",
+     "label": "Sur votre téléphone, ouvrez CastBridge",
+     "bounds": [
+      54,
+      163,
+      616,
+      231
+     ]
+    },
+    {
+     "key": "visible",
+     "label": "Visible encore",
+     "bounds": [
+      54,
+      229,
+      616,
+      281
+     ]
+    },
+    {
+     "key": "prolonger",
+     "label": "Prolonger de 2 minutes",
+     "bounds": [
+      36,
+      650,
+      639,
+      706
+     ]
+    },
+    {
+     "key": "fermer",
+     "label": "Fermer",
+     "bounds": [
+      641,
+      650,
+      1244,
+      706
+     ]
+    },
+    {
+     "key": "confiance",
+     "label": "Téléphones de confiance (0)",
+     "bounds": [
+      664,
+      81,
+      1226,
+      130
+     ]
+    }
+   ],
+   "steps": [
+    {
+     "step": "3.7",
+     "keys": [
+      "consigne",
+      "visible",
+      "prolonger"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "s23",
+   "name": "tv-apprendre",
+   "file": "s23-tv-apprendre.png",
+   "kind": "tvshot",
+   "size": [
+    1280,
+    720
+   ],
+   "shows": "Apprendre sur la TV : élèves, mode classe, contenus",
+   "source_capture": "tv06_apprendre",
+   "annotations": [
+    {
+     "key": "eleve",
+     "label": "Ajouter un élève",
+     "bounds": [
+      60,
+      222,
+      333,
+      450
+     ]
+    },
+    {
+     "key": "classe",
+     "label": "Mode classe",
+     "bounds": [
+      356,
+      222,
+      629,
+      450
+     ]
+    },
+    {
+     "key": "contenus",
+     "label": "Contenus",
+     "bounds": [
+      652,
+      222,
+      925,
+      450
+     ]
+    }
+   ],
+   "steps": [
+    {
+     "step": "5.3",
+     "keys": [
+      "eleve",
+      "classe",
+      "contenus"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "s24",
+   "name": "tv-langues",
+   "file": "s24-tv-langues.png",
+   "kind": "tvshot",
+   "size": [
+    1280,
+    720
+   ],
+   "shows": "Langues sur la TV : une ligne par langue (7 langues au total)",
+   "source_capture": "tv07_langues",
+   "annotations": [
+    {
+     "key": "chinois",
+     "label": "Chinois (mandarin)",
+     "bounds": [
+      64,
+      125,
+      1216,
+      178
+     ]
+    },
+    {
+     "key": "japonais",
+     "label": "Japonais",
+     "bounds": [
+      64,
+      187,
+      1216,
+      240
+     ]
+    },
+    {
+     "key": "maj",
+     "label": "Mettre à jour les lots Langues",
+     "bounds": [
+      64,
+      249,
+      1216,
+      302
+     ]
+    }
+   ],
+   "steps": [
+    {
+     "step": "5.6",
+     "keys": [
+      "chinois",
+      "japonais",
+      "maj"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "s25",
+   "name": "tv-langue-niveaux",
+   "file": "s25-tv-langue-niveaux.png",
+   "kind": "tvshot",
+   "size": [
+    1280,
+    720
+   ],
+   "shows": "Une langue : choisir un niveau",
+   "source_capture": "tv08_langue_lots",
+   "annotations": [
+    {
+     "key": "niveau",
+     "label": "A0  (pré-A1)",
+     "bounds": [
+      64,
+      125,
+      1216,
+      178
+     ]
+    },
+    {
+     "key": "titre",
+     "label": "Choisissez un niveau",
+     "bounds": [
+      56,
+      84,
+      1224,
+      124
+     ]
+    }
+   ],
+   "steps": [
+    {
+     "step": "5.7",
+     "keys": [
+      "niveau"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "s26",
+   "name": "tv-jeux",
+   "file": "s26-tv-jeux.png",
+   "kind": "tvshot",
+   "size": [
+    1280,
+    720
+   ],
+   "shows": "Jeux sur la TV : Quiz des Millions, Échecs, Sudoku",
+   "source_capture": "tv09_jeux",
+   "annotations": [
+    {
+     "key": "quiz",
+     "label": "Quiz des Millions",
+     "bounds": [
+      76,
+      280,
+      440,
+      570
+     ]
+    },
+    {
+     "key": "echecs",
+     "label": "Échecs",
+     "bounds": [
+      475,
+      280,
+      827,
+      570
+     ]
+    },
+    {
+     "key": "sudoku",
+     "label": "Sudoku",
+     "bounds": [
+      868,
+      280,
+      1220,
+      570
+     ]
+    }
+   ],
+   "steps": [
+    {
+     "step": "5.4",
+     "keys": [
+      "quiz",
+      "echecs",
+      "sudoku"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "s27",
+   "name": "tv-quiz-des-millions",
+   "file": "s27-tv-quiz-des-millions.png",
+   "kind": "tvshot",
+   "size": [
+    1280,
+    720
+   ],
+   "shows": "Quiz des Millions : menu de départ",
+   "source_capture": "tv10_quiz",
+   "annotations": [
+    {
+     "key": "amis",
+     "label": "Compétition entre amis",
+     "bounds": [
+      231,
+      296,
+      600,
+      372
+     ]
+    },
+    {
+     "key": "entrainement",
+     "label": "Entraînement",
+     "bounds": [
+      280,
+      384,
+      684,
+      460
+     ]
+    },
+    {
+     "key": "scores",
+     "label": "Meilleurs scores",
+     "bounds": [
+      700,
+      384,
+      1000,
+      460
+     ]
+    },
+    {
+     "key": "quitter",
+     "label": "Quitter",
+     "bounds": [
+      490,
+      472,
+      790,
+      527
+     ]
+    }
+   ],
+   "steps": [
+    {
+     "step": "5.5",
+     "keys": [
+      "amis",
+      "entrainement",
+      "scores"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "s28",
+   "name": "tv-bibliotheque",
+   "file": "s28-tv-bibliotheque.png",
+   "kind": "tvshot",
+   "size": [
+    1280,
+    720
+   ],
+   "shows": "Bibliothèque de la TV avec les vidéos de test",
+   "source_capture": "tv21_bibliotheque",
+   "annotations": [
+    {
+     "key": "toutes",
+     "label": "Toutes",
+     "bounds": [
+      40,
+      94,
+      1240,
+      161
+     ]
+    },
+    {
+     "key": "carte1",
+     "label": "Film de test",
+     "bounds": [
+      50,
+      160,
+      345,
+      395
+     ]
+    },
+    {
+     "key": "carte2",
+     "label": "Video de test",
+     "bounds": [
+      350,
+      160,
+      640,
+      395
+     ]
+    }
+   ],
+   "steps": [
+    {
+     "step": "4.6",
+     "keys": [
+      "toutes",
+      "carte1",
+      "carte2"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "s29",
+   "name": "tv-lecture",
+   "file": "s29-tv-lecture.png",
+   "kind": "tvshot",
+   "size": [
+    1280,
+    720
+   ],
+   "shows": "Lecture d'une vidéo de test sur la TV",
+   "source_capture": "tv22_lecture",
+   "annotations": [],
+   "steps": [
+    {
+     "step": "4.7",
+     "keys": []
+    }
+   ]
+  },
+  {
+   "id": "s30",
+   "name": "tv-cle-usb",
+   "file": "s30-tv-cle-usb.png",
+   "kind": "tvshot",
+   "size": [
+    1280,
+    720
+   ],
+   "shows": "Tuile « Clé USB » : importer ou ranger les fichiers",
+   "source_capture": "tv13_cle_usb",
+   "annotations": [
+    {
+     "key": "importer",
+     "label": "Importer les vidéos des clés détectées",
+     "bounds": [
+      346,
+      214,
+      934,
+      270
+     ]
+    },
+    {
+     "key": "dossier",
+     "label": "Choisir un dossier de la clé…",
+     "bounds": [
+      346,
+      262,
+      934,
+      318
+     ]
+    },
+    {
+     "key": "ranger",
+     "label": "Où ranger les nouveaux fichiers",
+     "bounds": [
+      346,
+      310,
+      934,
+      366
+     ]
+    }
+   ],
+   "steps": [
+    {
+     "step": "7.4",
+     "keys": [
+      "ranger"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "s31",
+   "name": "tv-tuile-controle-parental",
+   "file": "s31-tv-tuile-controle-parental.png",
+   "kind": "tvshot",
+   "size": [
+    1280,
+    720
+   ],
+   "shows": "Tuile « Contrôle parental » : « À configurer »",
+   "source_capture": "tv15_home_fin",
+   "annotations": [
+    {
+     "key": "parental",
+     "label": "Contrôle parental",
+     "bounds": [
+      1062,
+      271,
+      1232,
+      438
+     ]
+    },
+    {
+     "key": "maj",
+     "label": "Mises à jour",
+     "bounds": [
+      492,
+      271,
+      662,
+      438
+     ]
+    },
+    {
+     "key": "reglages",
+     "label": "Connexion & réglages",
+     "bounds": [
+      682,
+      271,
+      852,
+      438
+     ]
+    }
+   ],
+   "steps": [
+    {
+     "step": "6.1",
+     "keys": [
+      "parental"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "s32",
+   "name": "tv-parental-accueil",
+   "file": "s32-tv-parental-accueil.png",
+   "kind": "tvshot",
+   "size": [
+    1280,
+    720
+   ],
+   "shows": "Contrôle parental : « Créer le code parental »",
+   "source_capture": "tv16_parental",
+   "annotations": [
+    {
+     "key": "creer",
+     "label": "Créer le code parental",
+     "bounds": [
+      36,
+      153,
+      1244,
+      203
+     ]
+    },
+    {
+     "key": "retour",
+     "label": "Retour à l'accueil",
+     "bounds": [
+      36,
+      304,
+      1244,
+      354
+     ]
+    }
+   ],
+   "steps": [
+    {
+     "step": "6.2",
+     "keys": [
+      "creer"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "s33",
+   "name": "tv-parental-clavier-code",
+   "file": "s33-tv-parental-clavier-code.png",
+   "kind": "tvshot",
+   "size": [
+    1280,
+    720
+   ],
+   "shows": "Clavier du code parental (aucun chiffre saisi)",
+   "source_capture": "tv16b_code",
+   "annotations": [
+    {
+     "key": "valider",
+     "label": "Valider",
+     "bounds": [
+      704,
+      462,
+      832,
+      530
+     ]
+    },
+    {
+     "key": "effacer",
+     "label": "Effacer",
+     "bounds": [
+      448,
+      462,
+      576,
+      530
+     ]
+    },
+    {
+     "key": "annuler",
+     "label": "Annuler",
+     "bounds": [
+      536,
+      530,
+      744,
+      590
+     ]
+    }
+   ],
+   "steps": [
+    {
+     "step": "6.3",
+     "keys": [
+      "valider"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "s34",
+   "name": "tv-parental-reglages",
+   "file": "s34-tv-parental-reglages.png",
+   "kind": "tvshot",
+   "size": [
+    1280,
+    720
+   ],
+   "shows": "Réglages des parents : profils, vidéos",
+   "source_capture": "tv17_parental_reglages",
+   "annotations": [
+    {
+     "key": "etat",
+     "label": "Contrôle parental : désactivé",
+     "bounds": [
+      36,
+      137,
+      1244,
+      187
+     ]
+    },
+    {
+     "key": "profils",
+     "label": "Profils des enfants",
+     "bounds": [
+      36,
+      363,
+      1244,
+      413
+     ]
+    },
+    {
+     "key": "classer",
+     "label": "Classer les vidéos",
+     "bounds": [
+      36,
+      498,
+      1244,
+      548
+     ]
+    }
+   ],
+   "steps": [
+    {
+     "step": "6.4",
+     "keys": [
+      "etat",
+      "profils"
+     ]
+    }
+   ]
+  },
+  {
+   "id": "s35",
+   "name": "tv-parental-profils",
+   "file": "s35-tv-parental-profils.png",
+   "kind": "tvshot",
+   "size": [
+    1280,
+    720
+   ],
+   "shows": "Profils des enfants : « + Ajouter un profil »",
+   "source_capture": "tv18_parental_profils",
+   "annotations": [
+    {
+     "key": "ajouter",
+     "label": "+ Ajouter un profil",
+     "bounds": [
+      36,
+      93,
+      1244,
+      143
+     ]
+    }
+   ],
+   "steps": [
+    {
+     "step": "6.5",
+     "keys": [
+      "ajouter"
+     ]
+    }
+   ]
+  }
+ ]
+}
