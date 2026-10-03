@@ -74,6 +74,8 @@ interface Lane {
     fun close() {}
     /** Bytes confirmed through this lane, for the fairness report. */
     val sent: AtomicLong
+    /** Bytes the TV acknowledged through this lane (blocks, or slices on a slow lane): any change is progress for the stuck detector. */
+    fun bytesMoved(): Long = sent.get()
 }
 
 /** Wi-Fi Direct: experimental, off by default (see docs/TRANSFER.md). */

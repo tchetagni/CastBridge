@@ -22,7 +22,7 @@ class WriteFailureClassifierTest {
     @Test fun aReplyReadAfterTheFailureIsClassifiedWithTheSameTableAsTheLanes() {
         val e = SocketException("Broken pipe")
         fun fatal(o: Outcome) = (o as Outcome.Failed).also { assertTrue(it.fatal, it.reason) }.reason
-        assertTrue(fatal(WriteFailureClassifier.classify(e, 401)).contains("autorisation refusée par la TV (401)"))
+        assertTrue(fatal(WriteFailureClassifier.classify(e, 401)).contains("Autorisation de la TV expirée : reconnectez le téléphone à la TV"))
         assertTrue(fatal(WriteFailureClassifier.classify(e, 403)).contains("autorisation refusée par la TV (403)"))
         assertTrue(fatal(WriteFailureClassifier.classify(e, 413)).contains("la TV n'a plus de place (413)"))
         assertTrue(fatal(WriteFailureClassifier.classify(e, 507)).contains("la TV n'a plus de place (507)"))
@@ -35,6 +35,26 @@ class WriteFailureClassifierTest {
         assertEquals(5L, (WriteFailureClassifier.classify(e, 200, "{}", 5) as Outcome.Ok).bytes)
         val other = WriteFailureClassifier.classify(e, 503) as Outcome.Failed
         assertFalse(other.fatal)
+    }
+
+    @Test fun an400ThatMeansInterruptedIsNeverFatalButAPlain400StaysFatal() {
+        val e = SocketException("Broken pipe")
+        assertFalse((WriteFailureClassifier.classify(e, 400, "{\"error\":\"interrupted\"}") as Outcome.Failed).fatal)
+        assertFalse((WriteFailureClassifier.classify(e, 400, "{\"error\":\"x\",\"retry\":true}") as Outcome.Failed).fatal)
+        assertTrue((WriteFailureClassifier.classify(e, 400, "{\"error\":\"bad hash\"}") as Outcome.Failed).fatal)
+        assertFalse((WriteFailureClassifier.classify(e, 503, "{\"error\":\"interrupted\",\"retry\":true,\"retryMs\":1000}") as Outcome.Failed).fatal)
+    }
+
+    @Test fun reasonsAreComparedByCategory() {
+        val c = WriteFailureClassifier::category
+        assertEquals("peer-close", c("Broken pipe (SocketException)"))
+        assertEquals("peer-close", c("Connection reset (SocketException)"))
+        assertEquals("peer-close", c("Software caused connection abort (SocketException)"))
+        assertEquals("timeout", c("Read timed out (SocketTimeoutException)"))
+        assertEquals("refused", c("Connection refused (ConnectException)"))
+        assertEquals("http-503", c("TV : 503 {\"error\":\"verifying\"}"))
+        assertEquals("http-500", c("TV : 500 boom"))
+        assertEquals("autre chose", c("autre chose"))
     }
 
     @Test fun noReplyStaysTransientAndKeepsTheExactExceptionClass() {
@@ -80,6 +100,23 @@ class StuckDetectorTest {
         for (i in 0 until 10) assertFalse(d.onFailure("bluetooth", "z$i", 300_000L + i), "raisons toutes différentes : jamais")
         val e = StuckDetector(maxRepeats = 2, minSpanMs = 1000)
         assertFalse(e.onFailure("wifi", "a", 0)); assertFalse(e.onFailure("bluetooth", "a", 5000)); assertTrue(e.onFailure("wifi", "a", 6000))
+    }
+
+    @Test fun alternatingPeerCloseTextsStillFormOneStreak() {
+        val d = StuckDetector(maxRepeats = 4, minSpanMs = 1000)
+        val texts = listOf("Broken pipe (SocketException)", "Connection reset (SocketException)")
+        var tripped = false
+        for (i in 0 until 4) tripped = d.onFailure("wifi", texts[i % 2], i * 1000L) || tripped
+        assertTrue(tripped)
+    }
+
+    @Test fun bytesAcknowledgedAnywhereResetTheStreak() {
+        val d = StuckDetector(maxRepeats = 3, minSpanMs = 1000)
+        assertFalse(d.onFailure("wifi", "Broken pipe (SocketException)", 0, moved = 0))
+        assertFalse(d.onFailure("wifi", "Broken pipe (SocketException)", 2000, moved = 0))
+        assertFalse(d.onFailure("wifi", "Broken pipe (SocketException)", 4000, moved = 256 * 1024), "des octets ont passé (voie lente) : série recommencée")
+        assertFalse(d.onFailure("wifi", "Broken pipe (SocketException)", 6000, moved = 256 * 1024))
+        assertTrue(d.onFailure("wifi", "Broken pipe (SocketException)", 8000, moved = 256 * 1024))
     }
 
     @Test fun theFrenchMessage() {
@@ -141,6 +178,49 @@ class HttpConnSalvageTest {
         val reply = "HTTP/1.1 200 OK\r\nContent-Length: 2\r\n\r\n{}".toByteArray()
         serve(reply) { port ->
             assertFailsWith<IOException> { conn(port).request("PUT", "/x", "127.0.0.1", emptyList(), 100, { throw IOException("cancelled") }) }
+        }
+    }
+
+    @Test fun aHugeChunkedReplyNeverAllocatesItsDeclaredSize() {
+        val reply = "HTTP/1.1 400 Bad Request\r\nTransfer-Encoding: chunked\r\n\r\n7fffffff\r\nxxxx".toByteArray()
+        serve(reply) { port ->
+            val r = conn(port).request("PUT", "/x", "127.0.0.1", emptyList(), 100, brokenBody)
+            assertEquals(400, r.status); assertTrue(r.body.length <= 4096)
+        }
+    }
+
+    /** A TV that answers at once, then resets the connection (SO_LINGER 0 after a pause: the RST of a close with unread bytes). */
+    private fun serveThenReset(reply: ByteArray, resetAfterMs: Long, block: (Int) -> Unit) {
+        val ss = ServerSocket(0)
+        Thread {
+            ss.use { srv ->
+                val s = srv.accept()
+                val inp = s.getInputStream()
+                var tail = 0
+                while (true) { val b = inp.read(); if (b < 0) break; tail = (tail shl 8) or b; if (tail == 0x0d0a0d0a) break }
+                s.getOutputStream().write(reply); s.getOutputStream().flush()
+                Thread.sleep(resetAfterMs)
+                s.setSoLinger(true, 0); s.close()
+            }
+        }.apply { isDaemon = true; start() }
+        block(ss.localPort)
+    }
+
+    @Test fun theClientStopsWritingWhenAnAnswerIsAlreadyThereAndReadsIt() {
+        val reply = "HTTP/1.1 403 Forbidden\r\nContent-Length: 2\r\nConnection: close\r\n\r\n{}".toByteArray()
+        serveThenReset(reply, resetAfterMs = 1500) { port ->
+            var written = 0L
+            val piece = ByteArray(256 * 1024)
+            val c = conn(port)
+            val r = c.request("PUT", "/api/transfer/chunk?id=a&idx=0", "127.0.0.1", emptyList(), 8L shl 20) { out ->
+                while (written < (8L shl 20)) {
+                    out.write(java.nio.ByteBuffer.wrap(piece)); written += piece.size
+                    c.progress(piece.size.toLong())
+                    Thread.sleep(5)
+                }
+            }
+            assertEquals(403, r.status)
+            assertTrue(written <= (2L shl 20), "writing stopped as soon as the status was there ($written)")
         }
     }
 

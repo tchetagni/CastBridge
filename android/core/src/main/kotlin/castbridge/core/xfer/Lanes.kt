@@ -47,9 +47,11 @@ internal fun statusOutcome(status: Int, body: String, bytes: Long): Outcome = wh
     status == 422 -> Outcome.Corrupt("hash")
     status == 429 -> Outcome.Busy(Regex("\"retryMs\":(\\d+)").find(body)?.groupValues?.get(1)?.toLongOrNull() ?: 200)
     status == 404 -> Outcome.SessionLost
-    status == 401 || status == 403 -> Outcome.Failed("autorisation refusée par la TV ($status)", fatal = true)
+    status == 401 -> Outcome.Failed("Autorisation de la TV expirée : reconnectez le téléphone à la TV (401)", fatal = true)
+    status == 403 -> Outcome.Failed("autorisation refusée par la TV (403)", fatal = true)
     status == 507 || status == 413 -> Outcome.Failed("la TV n'a plus de place ($status)", fatal = true)
-    status == 400 -> Outcome.Failed("requête refusée : ${body.take(120)}", fatal = true)
+    // a 400 that says « interrupted » / retry (TV 0.14.25-26 answered it for a stalled read) is a link problem, not a refusal
+    status == 400 -> Outcome.Failed("requête refusée : ${body.take(120)}", fatal = !("interrupted" in body || "\"retry\":true" in body))
     else -> Outcome.Failed("TV : $status ${body.take(80)}")
 }
 
@@ -74,6 +76,7 @@ open class WifiLane(
     override val sent = AtomicLong()
     /** Bytes that really crossed the link (after compression) for confirmed blocks. */
     val wire = AtomicLong()
+    override fun bytesMoved(): Long = wire.get()
     private val ctl = KController(1, maxWorkers, startStreams.coerceAtMost(maxWorkers))
     private val cc = ChunkClient(host, transferId, credential)
     private val conns = arrayOfNulls<HttpConn>(8)
@@ -106,14 +109,14 @@ open class WifiLane(
         val r = try {
             conn.request("PUT", "/api/transfer/chunk?id=$transferId&idx=$idx", host, headers, wire) { out ->
                 if (gz != null) {
-                    var o = 0; while (o < gz.size) { if (ctx.cancelled()) throw IOException("cancelled"); val n = minOf(256 * 1024, gz.size - o); val bb = java.nio.ByteBuffer.wrap(gz, o, n); while (bb.hasRemaining()) out.write(bb); o += n; conn.progress() }
+                    var o = 0; while (o < gz.size) { if (ctx.cancelled()) throw IOException("cancelled"); val n = minOf(256 * 1024, gz.size - o); val bb = java.nio.ByteBuffer.wrap(gz, o, n); while (bb.hasRemaining()) out.write(bb); o += n; conn.progress(n.toLong()) }
                 } else {
                     var pos = m.offset(idx); var left = len
                     while (left > 0) {
                         if (ctx.cancelled()) throw IOException("cancelled")
                         val n = ctx.source.transferTo(pos, minOf(left, 1L shl 20), out)
                         if (n <= 0) throw IOException("source ended early")
-                        pos += n; left -= n; conn.progress()
+                        pos += n; left -= n; conn.progress(n)
                     }
                 }
             }
@@ -161,6 +164,9 @@ class BluetoothLane(
     override val sent = AtomicLong()
     private val cc = ChunkClient(host, transferId, credential)
     private var conn: HttpConn? = null
+    /** Slice bytes the TV acknowledged: a slow link moves bytes long before a whole block is confirmed (R-17: not « stuck »). */
+    private val moved = AtomicLong()
+    override fun bytesMoved(): Long = moved.get()
 
     override fun send(worker: Int, idx: Int, ctx: SendContext): Outcome {
         val m = ctx.manifest
@@ -177,12 +183,12 @@ class BluetoothLane(
             val headers = ArrayList<String>().apply { add("Content-Type: application/octet-stream"); add("X-CB-Sha256: $sha"); cc.auth()?.let { add(it) } }
             val r = try {
                 c.request("PUT", "/api/transfer/chunk?id=$transferId&idx=$idx&slice=$k", host, headers, n.toLong()) { out ->
-                    val bb = java.nio.ByteBuffer.wrap(buf, 0, n); while (bb.hasRemaining()) { if (ctx.cancelled()) throw IOException("cancelled"); out.write(bb); c.progress() }
+                    val bb = java.nio.ByteBuffer.wrap(buf, 0, n); while (bb.hasRemaining()) { if (ctx.cancelled()) throw IOException("cancelled"); out.write(bb); c.progress(n.toLong()) }
                 }
             } catch (e: IOException) { return if (ctx.cancelled()) Outcome.Cancelled else WriteFailureClassifier.classify(e, null) }
             last = cc.outcome(r, n.toLong())
             if (!r.keepAlive) { c.close(); conn = null }
-            when (last) { is Outcome.Ok -> total += n; Outcome.Already -> return Outcome.Already; else -> return last }
+            when (last) { is Outcome.Ok -> { total += n; moved.addAndGet(n.toLong()) }; Outcome.Already -> return Outcome.Already; else -> return last }
         }
         return Outcome.Ok(total)
     }

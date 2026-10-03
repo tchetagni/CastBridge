@@ -151,7 +151,8 @@ class Scheduler(
                     else if (out.fatal) failure = out.reason
                     else {
                         requeue()
-                        if (stuck.onFailure(lane.id, out.reason, clock() / 1_000_000)) { failure = StuckDetector.message(out.reason); lock.notifyAll(); return }
+                        val nowMs = clock() / 1_000_000; val moved = lanes.sumOf { it.bytesMoved() }       // clock first: a lane that moves bytes then advances time is seen moving
+                        if (stuck.onFailure(lane.id, out.reason, nowMs, moved)) { failure = StuckDetector.message(out.reason); lock.notifyAll(); return }
                         val s = (strikes[lane.id] ?: 0) + 1; strikes[lane.id] = s
                         if (s >= strikesToBench) {
                             val n = (benchCount[lane.id] ?: 0) + 1; benchCount[lane.id] = n; strikes[lane.id] = 0
