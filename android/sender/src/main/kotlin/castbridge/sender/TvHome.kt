@@ -397,6 +397,10 @@ fun TvHome(onAdvanced: () -> Unit, onBluetooth: () -> Unit = onAdvanced) {
             }
         }
 
+        // R-14 (owner 2026-10-03): the explicit « Wi-Fi Direct » button, with its cause when it cannot start (castbridge.core.link.WdManualView)
+        WdManualCard(tv = session?.tv ?: TvLinkManager.savedFor(tvName), session = session, credential = session?.credential ?: pin,
+            onPair = { adding = true }, onEnterCode = { wizard = true })
+
         // TV reachable but bonded in Bluetooth: the gateway stays at hand (for the Mac), lower down
         if (reachable && fallback.signal == null) BtGatewayCard(tvReachable = true, onAddTv = { adding = true }, onChoose = onBluetooth)
 

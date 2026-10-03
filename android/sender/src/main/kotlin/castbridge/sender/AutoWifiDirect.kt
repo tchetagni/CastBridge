@@ -41,6 +41,12 @@ import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.withTimeoutOrNull
 import castbridge.core.link.HelloIps
+import castbridge.core.link.WdDiagnostic
+import castbridge.core.link.WdManualLease
+import castbridge.core.link.WdManualView
+import castbridge.core.trust.SavedTv
+import castbridge.core.trust.TvAuth
+import castbridge.core.tunnel.TunnelJournal
 import java.util.concurrent.Executors
 import java.util.concurrent.TimeUnit
 
@@ -78,6 +84,22 @@ object AutoWifiDirect {
     private val _ask = MutableStateFlow<BulkRoute.Ask?>(null)
     /** Une demande à l'usager, juste à temps, une fois : [AutoWifiDirectAsker] la présente (l'app est devant). */
     val ask: StateFlow<BulkRoute.Ask?> = _ask
+
+    private val _manual = MutableStateFlow(false)
+    /** La session en cours est celle du bouton « Wi-Fi Direct » (manuelle) : elle reste jusqu'à l'arrêt ou 10 minutes hors de l'écran ([WdManualLease]). */
+    val manual: StateFlow<Boolean> = _manual
+    private val _report = MutableStateFlow<String?>(null)
+    /** Le relevé de terrain de la dernière session manuelle ([WdDiagnostic.format]) : ni mot de passe ni code. null = pas encore. */
+    val report: StateFlow<String?> = _report
+    private val _measuring = MutableStateFlow(false)
+    val measuring: StateFlow<Boolean> = _measuring
+    @Volatile private var lease = WdManualLease()
+    @Volatile private var screenOn = false
+    @Volatile private var manualStartedAt = 0L
+    @Volatile private var hadLanBefore: Boolean? = null
+    @Volatile private var diagSsid: String? = null
+    @Volatile private var diagDone = false
+    private var journal: TunnelJournal? = null
 
     private lateinit var app: Context
     /** Le fil de l'automate : chaque événement est réduit ici, dans l'ordre. */
@@ -225,12 +247,108 @@ object AutoWifiDirect {
     /** Plus rien à envoyer : efface la ligne d'état (le groupe part tout seul après 30 s de file vide). */
     fun queueIdle() { if (_state.value !is WdClient.State.Up) { _line.value = null; lastDecision = null } }
 
+    // ------------------------------------------------------------------ le bouton « Wi-Fi Direct » (démarrage explicite)
+
+    /** L'écran de la TV est-il devant l'usager ? (la session manuelle tient 10 minutes hors de lui) */
+    fun screenVisible(on: Boolean) { screenOn = on }
+
+    /**
+     * Ce que le téléphone sait de [tv] pour le bouton ([WdManualView.of], pur). Lecture seule : [credential] n'est testé qu'utilisable, jamais affiché ni copié.
+     * La liaison appairée est tenue pour acquise quand une session existe (le HELLO Bluetooth a répondu).
+     */
+    fun manualFacts(ctx: Context, tv: SavedTv?, session: LinkSession?, credential: String?): WdManualView.Facts {
+        val a = ctx.applicationContext
+        return WdManualView.Facts(
+            hasTv = tv != null,
+            btBonded = tv != null && (session != null || bonded(a, tv.address)),
+            btLinked = session != null,
+            credentialValid = TvAuth.isUsable(credential),
+            tvOffersWd = session?.info?.link?.wdCap,
+            api = Build.VERSION.SDK_INT,
+            permission = permission(a),
+            phoneWifiOn = wifiOn(a),
+            tvWdError = tvErr?.takeIf { now() - tvErrAt < TV_ERR_MS },
+            lanAlive = session != null && BulkRoute.lanRoute(session.route),
+            state = _state.value,
+            manual = _manual.value,
+        )
+    }
+
+    private fun bonded(ctx: Context, address: String): Boolean = runCatching {
+        ctx.getSystemService(android.bluetooth.BluetoothManager::class.java)?.adapter?.bondedDevices.orEmpty().any { it.address.equals(address, true) }
+    }.getOrDefault(false)
+
+    /**
+     * Le toucher sur « Wi-Fi Direct » : même mécanique que la voie automatique (CBTN sur le lien Bluetooth appairé, jonction, sonde) mais SANS le seuil de
+     * 5 Mo, SANS la pause de 10 minutes, SANS le réglage automatique ; JAMAIS sans lien, sans code valide, sans capacité de la TV ([WdManualView.start]).
+     * [userAsked] faux : aucun réseau commun n'est jamais remplacé. [lanConfirmed] : l'usager a répondu oui à « Un réseau commun fonctionne déjà… ».
+     * Renvoie ce qu'il faut montrer : [WdManualView.Start.ConfirmLan] = poser la question puis rappeler avec [lanConfirmed] vrai.
+     */
+    suspend fun startNow(ctx: Context, tv: SavedTv, credential: String, session: LinkSession?, userAsked: Boolean, lanConfirmed: Boolean = false): WdManualView.Start {
+        app = ctx.applicationContext
+        tvErr = null                                                        // l'usager réessaie à la main : une cause retenue par la voie automatique ne le bloque pas
+        fun decide() = WdManualView.start(manualFacts(app, tv, session, credential), lanConfirmed = userAsked && lanConfirmed)
+        var d = decide()
+        if (d == WdManualView.Start.AskPermission) {
+            askingPermission = true; _ask.value = BulkRoute.Ask.PERMISSION
+            withTimeoutOrNull(ASK_WAIT_MS) { _ask.first { it == null } }
+            if (_ask.value != null) { _ask.value = null; askingPermission = false }
+            d = decide().let { if (it == WdManualView.Start.AskPermission) WdManualView.Start.Refuse(WdManualView.Cause.PERMISSION_DENIED) else it }
+        }
+        if (d != WdManualView.Start.Go) return d
+        target = tv.address to credential
+        method = WdJoin.method(Build.VERSION.SDK_INT)
+        hadLanBefore = session?.let { HelloIps.lanOnly(it.info.link.ips).isNotEmpty() }
+        manualStartedAt = now(); lease = WdManualLease().seen(now(), screenOn); diagDone = false
+        _report.value = null; lastDecision = null
+        _manual.value = true
+        log("Wi-Fi Direct manuel : demandé (Android ${Build.VERSION.SDK_INT}, jonction $method)")
+        machine.submit { step(WdClient.Event.Start(now(), method)) }.get()
+        ensureTicking()
+        return d
+    }
+
+    /** « Arrêter » (ou « Annuler » pendant la mise en place) : le groupe est rendu tout de suite. */
+    fun stopManual() { log("Wi-Fi Direct manuel : arrêté par l'usager"); _manual.value = false; release() }
+
+    /** Une ligne dans le journal local du Wi-Fi Direct (jamais un mot de passe, un code ni un jeton). */
+    private fun log(text: String) {
+        Log.i(TAG, text)
+        runCatching {
+            val j = journal ?: TunnelJournal(java.io.File(app.filesDir, "wifi-direct-journal.log")).also { journal = it }
+            j.add(castbridge.core.trust.Redact.scrub(text))
+        }
+    }
+
+    /** Après la jonction d'une session manuelle : latence ×20, petit transfert, clé USB, Wi-Fi de la TV ; le relevé va à l'écran et au journal. */
+    private fun startDiagnostic(up: WdClient.State.Up) {
+        val cred = target?.second ?: return
+        val ssid = diagSsid
+        val joined = (up.since - manualStartedAt).coerceAtLeast(0)
+        val hadLan = hadLanBefore
+        _measuring.value = true
+        io.execute {
+            val text = runCatching {
+                val m = WdDiagnostic.measure(WdFieldProbe(up.base, cred), { now() })
+                WdDiagnostic.format(WdDiagnostic.report(ssid, up.base.removePrefix("http://").substringBefore(':'), joined, hadLan, m))
+            }.getOrElse { "Relevé impossible : ${it.javaClass.simpleName}" }
+            _report.value = text
+            log("Relevé Wi-Fi Direct : " + text.replace('\n', ' '))
+            _measuring.value = false
+        }
+    }
+
     // ------------------------------------------------------------------ l'automate et ses effets
 
     private fun step(e: WdClient.Event) {
         val r = WdClient.reduce(_state.value, e)
         if (r.state != _state.value) Log.i(TAG, "${_state.value} -> ${r.state}")
         _state.value = r.state
+        if (r.state == WdClient.State.Off || r.state is WdClient.State.Failed) {
+            if (_manual.value) log("Wi-Fi Direct manuel : " + ((r.state as? WdClient.State.Failed)?.let { "échec · " + WdClient.explain(it.fail, it.detail) } ?: "arrêté"))
+            _manual.value = false
+        }
+        (r.state as? WdClient.State.Up)?.let { if (_manual.value && !diagDone) { diagDone = true; startDiagnostic(it) } }
         publishLine()
         r.effects.forEach(::run)
     }
@@ -244,7 +362,12 @@ object AutoWifiDirect {
             override fun run() {
                 val s = _state.value
                 if (s == WdClient.State.Off || s is WdClient.State.Failed) { ticking = false; return }
-                val busy = TransferQueue.busy() || UploadService.active()
+                val transfers = TransferQueue.busy() || UploadService.active()
+                if (_manual.value) {                                 // session manuelle : jamais rendue pour « file vide », seulement par l'usager ou 10 min hors écran
+                    lease = lease.seen(now(), screenOn)
+                    if (lease.expired(now(), transfers)) { log("Wi-Fi Direct manuel : arrêté (10 minutes hors de l'écran de la TV)"); _manual.value = false; step(WdClient.Event.Release(now())) }
+                }
+                val busy = transfers || _manual.value
                 step(WdClient.Event.Tick(now(), busy))
                 if (_state.value is WdClient.State.Up) checkStillJoined()
                 machine.schedule(this, TICK_MS, TimeUnit.MILLISECONDS)
@@ -282,7 +405,7 @@ object AutoWifiDirect {
         when {
             info == null -> post(WdClient.Event.TvRefused(now()))
             ssid != null && pass != null && WifiDirect.isValidNetworkName(ssid) && WifiDirect.isValidPassphrase(pass) ->
-                post(WdClient.Event.Creds(ssid, pass, info.wdIp, info.port, now(), method))
+            { diagSsid = ssid; post(WdClient.Event.Creds(ssid, pass, info.wdIp, info.port, now(), method)) }   // le nom seulement est gardé pour le relevé, jamais le mot de passe
             else -> {
                 info.wdErr?.let { tvErr = it; tvErrAt = now() }
                 post(WdClient.Event.NoGroup(info.wdErr, now()))
