@@ -56,12 +56,12 @@ class EarlyRejectionServerTest {
     @Test fun trialEditionRefusalIsReadableAfterA4MiBBody() {
         trial = true
         assertEquals(403, rawPut(chunk, listOf(pin, "X-CB-Sha256: ${"0".repeat(64)}"), body4))
-        assertEquals(403, rawPut(chunk, listOf(pin), 900_000, strictClose = true), "under the drain cap the TV also closes gracefully")
+        assertEquals(403, rawPut(chunk, listOf(pin), 50_000, strictClose = true), "under the anonymous drain cap (64 KiB) the TV also closes gracefully")
         assertTrue(File(dir, "tv").walkTopDown().none { it.isFile && it.length() > 0 }, "a refused request writes nothing")
     }
 
     @Test fun badPinIsReadableAfterA4MiBBody() {
-        assertEquals(401, rawPut(chunk, listOf("X-CB-Pin: 000000"), 900_000, strictClose = true))
+        assertEquals(401, rawPut(chunk, listOf("X-CB-Pin: 000000"), 50_000, strictClose = true))
     }
 
     @Test fun badTokenIsReadableAfterA4MiBBody() {
@@ -73,7 +73,18 @@ class EarlyRejectionServerTest {
     }
 
     @Test fun unknownSessionIsAn404TheClientCanRead() {
-        assertEquals(404, rawPut(chunk, listOf(pin, "X-CB-Sha256: ${"0".repeat(64)}"), 900_000, strictClose = true))
+        assertEquals(404, rawPut(chunk, listOf(pin, "X-CB-Sha256: ${"0".repeat(64)}"), 8 shl 20, strictClose = true), "authenticated refusal: the TV reads up to 17 MiB, a block is at most 8")
+    }
+
+    private fun noWrites() = assertTrue(File(dir, "tv").walkTopDown().none { it.isFile }, "a refused request writes nothing (no .part, no hash, no index)")
+
+    @Test fun aRefusalWritesNothingForEveryCause() {
+        trial = true; rawPut(chunk, listOf(pin), body4); noWrites()
+        trial = false
+        rawPut(chunk, listOf("X-CB-Pin: 000000"), body4); noWrites()
+        rawPut(chunk, listOf("X-CB-Token: nope"), body4); noWrites()
+        rawPut(chunk, listOf(pin), body4, host = "evil.example.com"); noWrites()
+        rawPut(chunk, listOf(pin, "X-CB-Sha256: ${"0".repeat(64)}"), body4); noWrites()
     }
 
     @Test fun everyEarlyRejectionIsLoggedWithoutSecretsAndTheLastFiveAreInInfo() {

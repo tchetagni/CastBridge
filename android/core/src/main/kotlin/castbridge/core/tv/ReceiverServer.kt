@@ -584,12 +584,14 @@ class ReceiverServer(
         val st = r.status.requestStatus
         val early = earlyReject.get() == true
         val xfer = s.uri.startsWith("/api/transfer/")
-        if (st !in 200..299 && st != 429 && (early || xfer)) {
-            val rej = Rejection(System.currentTimeMillis(), "${s.method} ${s.uri}", st, rejectCode.get() ?: "refused")
+        val withBody = s.method == Method.PUT || s.method == Method.POST
+        // only requests that carry a body count (scanners' GETs must not fill the ring), and the logged route is cut and filtered (no file name, no line injection)
+        if (withBody && st !in 200..299 && st != 429 && (early || xfer)) {
+            val rej = Rejection(System.currentTimeMillis(), safeRoute(s.method.name, s.uri), st, rejectCode.get() ?: "refused")
             synchronized(recentRejections) { recentRejections.addLast(rej); while (recentRejections.size > 5) recentRejections.removeFirst() }
             runCatching { onLog("refus ${rej.route} ${rej.status} ${rej.code}") }
         }
-        if ((s.method != Method.PUT && s.method != Method.POST) || !(early || xfer)) return r
+        if (!withBody || !(early || xfer)) return r
         val rest = (s.headers["content-length"]?.toLongOrNull() ?: 0L) - s.consumed
         if (rest <= 0) return r
         if (st in 200..299) {
@@ -600,11 +602,35 @@ class ReceiverServer(
         }
         r.addHeader("Connection", "close")
         // The status goes out FIRST (NanoHTTPD closes the response data after flushing it); the unread body is then read and dropped, bounded, so that closing does not reset the connection.
+        val code = rejectCode.get()
+        // A peer that has not proved who it is (host, trial, token, PIN) gets a short read (64 Kio, 500 ms), nothing at all once locked out, and one at a time per address:
+        // it must not hold one of the few HTTP threads. A proven peer (unknown session, volume, 413/507/409...) gets up to a whole block (17 Mio, 2 s).
+        val anonymous = early && code != "pin-required"
+        if (anonymous && code == "pin-locked") return r
+        val ip = s.remoteIpAddress ?: "?"
+        val cap = if (anonymous) ANON_DRAIN_CAP else maxDrainBytes
+        val ms = if (anonymous) ANON_DRAIN_MS else DRAIN_MS
         val orig = r.data ?: return r
+        val once = java.util.concurrent.atomic.AtomicBoolean()        // NanoHTTPD closes the data twice (after the send, then with the response)
         r.data = object : java.io.FilterInputStream(orig) {
-            override fun close() { try { super.close() } finally { drain(s, rest, LINGER_CAP, DRAIN_MS) } }
+            override fun close() {
+                try { super.close() } finally {
+                    if (!once.compareAndSet(false, true)) return
+                    if (!anonymous) drain(s, rest, cap, ms)
+                    else if (draining.add(ip)) try { drain(s, rest, cap, ms) } finally { draining.remove(ip) }
+                }
+            }
         }
         return r
+    }
+
+    private val draining = java.util.concurrent.ConcurrentHashMap.newKeySet<String>()
+
+    /** `PUT /api/transfer/chunk`: the first two path segments (three under /api/transfer/), letters, digits, `_` and `-` only, 64 characters at most. Never the query. */
+    private fun safeRoute(method: String, uri: String): String {
+        val segs = uri.split('/').filter { it.isNotEmpty() }.take(if (uri.startsWith("/api/transfer/")) 3 else 2)
+        val path = segs.joinToString("/", "/") { seg -> seg.map { c -> if ((c in 'a'..'z') || (c in 'A'..'Z') || (c in '0'..'9') || c == '_' || c == '-') c else '_' }.joinToString("") }
+        return "$method ${path.take(64)}"
     }
 
     /** Reads and drops up to min([n], [cap]) body bytes within [ms]; true = all [n] bytes were read. */
@@ -1097,7 +1123,7 @@ class ReceiverServer(
                 is castbridge.core.xfer.PartAssembler.Block.Already -> ok("""{"already":true}""")
                 is castbridge.core.xfer.PartAssembler.Block.Corrupt -> json(status(422), """{"error":"corrupt block","idx":$idx}""")
                 is castbridge.core.xfer.PartAssembler.Block.Bad -> bad(r.reason)
-                is castbridge.core.xfer.PartAssembler.Block.Interrupted -> bad("interrupted")
+                is castbridge.core.xfer.PartAssembler.Block.Interrupted -> { rejectCode.set("interrupted"); json(SERVICE_UNAVAILABLE, """{"error":"interrupted","retry":true,"retryMs":1000}""") }   // a stalled read is a retry, never a refusal (a 400 stopped the copy)
                 is castbridge.core.xfer.PartAssembler.Block.DiskFail -> try { progress.fail("x:" + sess.manifest.id, diskReason(v!!, DiskError(r.cause))); diskFailure(v, DiskError(r.cause)) } finally { if (!volumes.alive(v!!)) { transfers.remove(sess.manifest.id); a.close() } }
             }
         } finally { chunking.decrementAndGet() }
@@ -1106,7 +1132,8 @@ class ReceiverServer(
     /** Largest body read and dropped before a 429 (a gzip block of 16 MiB at most, see the manifest limit). */
     private val maxDrainBytes = 17L shl 20
     /** R-17: unread body read and dropped after a refusal other than 429 (the status is already sent), and the time it may take. */
-    private val LINGER_CAP = 1L shl 20
+    private val ANON_DRAIN_CAP = 64L shl 10
+    private val ANON_DRAIN_MS = 500L
     private val DRAIN_MS = 2000L
     /** The request body of this thread's request was read to the end: the answer may keep the connection alive. */
     private val bodyDrained = ThreadLocal<Boolean?>()

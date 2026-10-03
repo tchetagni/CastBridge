@@ -62,7 +62,14 @@ class HttpConn(
     }
 
     /** Called by body writers after each piece they push, so the watchdog sees progress. */
-    fun progress() { lastProgress = System.nanoTime() }
+    fun progress(bytes: Long = 0) {
+        lastProgress = System.nanoTime()
+        // R-17: every ~512 Kio, look (without blocking) whether the TV has already answered; if so stop writing, the answer is the real reason
+        sinceProbe += bytes
+        if (sinceProbe >= PROBE_EVERY) { sinceProbe = 0; if (replyWaiting()) throw EarlyReply() }
+    }
+    private var sinceProbe = 0L
+    private fun replyWaiting(): Boolean = try { (input?.available() ?: 0) > 0 } catch (e: Exception) { false }
 
     /** Bounded (1 s, 4 KiB) read of what the TV said before it closed; null = nothing readable. The connection is never reused after it. */
     private fun salvageReply(): Reply? {
@@ -99,7 +106,15 @@ class HttpConn(
             out.write(buf, 0, n)
         }
         else if (h["transfer-encoding"]?.contains("chunked", true) == true) {
-            while (true) { val n = line().substringBefore(';').trim().toInt(16); if (n == 0) { line(); break }; val b = ByteArray(n); var k = 0; while (k < n) { val r = inp.read(b, k, n - k); if (r < 0) throw IOException("connection closed"); k += r }; out.write(b); line() }
+            while (true) {
+                val n = line().substringBefore(';').trim().toInt(16)
+                if (n == 0) { line(); break }
+                // the declared size is the TV's word: never allocate it (a salvaged reply keeps 4 KiB at most, a normal one 1 MiB)
+                if (n < 0 || out.size() + n.toLong() > (if (deadlineNs != 0L) bodyCap else 1 shl 20)) { if (deadlineNs != 0L) break; throw IOException("reply too large") }
+                val b = ByteArray(n); var k = 0
+                while (k < n) { tick(); val r = inp.read(b, k, n - k); if (r < 0) throw IOException("connection closed"); k += r }
+                out.write(b); line()
+            }
         } else dead = true
         if (h["connection"]?.equals("close", true) == true) dead = true
         return Reply(status, h, out.toString("UTF-8"))
@@ -123,6 +138,7 @@ class HttpConn(
     companion object {
         /** No progress for this long and the phone closes the connection (see PlaybackAwareCopyPolicy.worstProgressGapMs). */
         const val DEFAULT_STALL_MS = 20_000L
+        private const val PROBE_EVERY = 512L * 1024
         fun tcp(host: String, port: Int, connectTimeoutMs: Int = 4000): () -> SocketChannel = {
             // a Wi-Fi Direct group joined by WifiNetworkSpecifier: only this socket goes through its network (castbridge.core.net.BoundRoute, R-14)
             SocketChannel.open().also { ch -> try { castbridge.core.net.BoundRoute.bind(host, ch.socket()); ch.socket().connect(InetSocketAddress(host, port), connectTimeoutMs) } catch (e: Throwable) { ch.close(); throw e } }
