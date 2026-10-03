@@ -1,0 +1,183 @@
+{
+ "batch": "higher-l3-chimie-05",
+ "author": "Claude (rédacteur IA, à relire)",
+ "date": "2026-10-03",
+ "questions": [
+  {
+   "course": "l3-chim",
+   "category": "Complexes et champ cristallin",
+   "difficulty": 1,
+   "question": "Lequel de ces ions subit, en complexe octaédrique, une forte distorsion de Jahn-Teller ?",
+   "choices": [
+    "Cu²⁺ (d⁹)",
+    "Zn²⁺ (d¹⁰)",
+    "Cr³⁺ (d³)",
+    "Fe³⁺ haut spin (d⁵)"
+   ],
+   "answer": "A",
+   "explanation": "Un ion d⁹ a un niveau eg occupé de façon dissymétrique (eg³), ce qui abaisse l'énergie par distorsion ; d¹⁰, d³ et d⁵ haut spin ont une occupation symétrique.",
+   "source": "Chimie inorganique, famille Housecroft-Sharpe / Shriver-Atkins",
+   "verif": "import"
+  },
+  {
+   "course": "l3-chim",
+   "category": "Chimie des polymères",
+   "difficulty": 1,
+   "question": "Quel type de polymère se ramollit à chaud et peut être remis en forme plusieurs fois ?",
+   "choices": [
+    "Un thermodurcissable",
+    "Un élastomère vulcanisé",
+    "Une résine réticulée",
+    "Un thermoplastique"
+   ],
+   "answer": "D",
+   "explanation": "Les thermoplastiques ont des chaînes non réticulées qui glissent à chaud ; les thermodurcissables sont réticulés de façon irréversible.",
+   "source": "Cours de licence de chimie organique, famille des manuels Clayden/McMurry",
+   "verif": "import"
+  },
+  {
+   "course": "l3-chim",
+   "category": "Électrochimie avancée et batteries",
+   "difficulty": 1,
+   "question": "Quel est le seul produit de la réaction globale d'une pile à combustible H₂/O₂ ?",
+   "choices": [
+    "Le peroxyde d'hydrogène",
+    "L'ozone",
+    "L'eau",
+    "Le méthanol"
+   ],
+   "answer": "C",
+   "explanation": "À l'anode H₂ est oxydé en H⁺, à la cathode O₂ est réduit ; le bilan 2 H₂ + O₂ → 2 H₂O ne rejette que de l'eau.",
+   "source": "Cours de chimie générale, famille Chang / Atkins",
+   "verif": "import"
+  },
+  {
+   "course": "l3-chim",
+   "category": "Spectrométrie de masse",
+   "difficulty": 2,
+   "question": "Dans un analyseur à temps de vol (TOF), quels ions, accélérés avec la même énergie, atteignent le détecteur en premier ?",
+   "choices": [
+    "Les ions de plus grand rapport m/z",
+    "Les ions de plus petit rapport m/z",
+    "Les ions de plus grande charge seulement",
+    "Les ions de plus faible énergie cinétique"
+   ],
+   "answer": "B",
+   "explanation": "Avec Ec = zeU identique, v = √(2zeU/m) : les ions légers vont plus vite et arrivent les premiers.",
+   "source": "Cours de chimie analytique, famille Skoog",
+   "verif": "import"
+  },
+  {
+   "course": "l3-chim",
+   "category": "Spectroscopies moléculaires",
+   "difficulty": 2,
+   "question": "Pourquoi le tétraméthylsilane (TMS) sert-il de référence en RMN du proton ?",
+   "choices": [
+    "Ses protons, très déblindés, résonnent à δ = 10 ppm",
+    "Ses 12 H équivalents, très blindés, donnent un singulet à δ = 0 ; il est inerte",
+    "Il donne un multiplet complexe qui sert d'étalon de couplage",
+    "Il absorbe fortement dans l'infrarouge comme étalon de nombre d'onde"
+   ],
+   "answer": "B",
+   "explanation": "Le silicium peu électronégatif blinde les H du TMS, d'où un signal unique à 0 ppm, à gauche duquel se placent presque tous les autres signaux.",
+   "source": "Cours de licence de chimie organique, famille des manuels Clayden/McMurry",
+   "verif": "import"
+  },
+  {
+   "course": "l3-chim",
+   "category": "Chimie des solides",
+   "difficulty": 2,
+   "question": "Dans la structure type CsCl, quelle est la coordinence de Cs⁺ et combien de motifs CsCl contient la maille ?",
+   "choices": [
+    "Coordinence 8 et 1 motif par maille",
+    "Coordinence 6 et 4 motifs par maille",
+    "Coordinence 8 et 4 motifs par maille",
+    "Coordinence 4 et 2 motifs par maille"
+   ],
+   "answer": "A",
+   "explanation": "Cl⁻ occupe les sommets d'un cube (8 × 1/8 = 1) et Cs⁺ son centre, entouré de 8 Cl⁻ ; la structure est un réseau cubique simple à deux ions.",
+   "source": "Chimie inorganique, famille Housecroft-Sharpe / Shriver-Atkins",
+   "verif": "import"
+  },
+  {
+   "course": "l3-chim",
+   "category": "Chimie des hétérocycles",
+   "difficulty": 3,
+   "question": "Lequel de ces hétérocycles aromatiques peut jouer le rôle de diène dans une réaction de Diels-Alder avec l'anhydride maléique ?",
+   "choices": [
+    "La pyridine",
+    "La pyrimidine",
+    "Le benzène",
+    "Le furane"
+   ],
+   "answer": "D",
+   "explanation": "L'aromaticité du furane est faible : son système diénique réagit en [4+2] pour donner un adduit oxabicyclique, ce que ne font ni la pyridine ni le benzène.",
+   "source": "Cours de licence de chimie organique, famille des manuels Clayden/McMurry",
+   "verif": "import"
+  },
+  {
+   "course": "l3-chim",
+   "category": "Chimie des polymères",
+   "difficulty": 3,
+   "question": "Quelle technique donne directement la masse molaire moyenne en nombre Mn d'un polymère, par une propriété colligative ?",
+   "choices": [
+    "La diffusion statique de la lumière",
+    "L'ultracentrifugation à l'équilibre de sédimentation",
+    "L'osmométrie membranaire",
+    "La viscosimétrie capillaire"
+   ],
+   "answer": "C",
+   "explanation": "La pression osmotique dépend du nombre de chaînes dissoutes, donc de Mn ; la diffusion de lumière donne Mw et la viscosimétrie une masse moyenne viscosimétrique Mv.",
+   "source": "Cours de chimie physique de licence, famille Atkins",
+   "verif": "import"
+  },
+  {
+   "course": "l3-chim",
+   "category": "Cinétique complexe et AEQS",
+   "difficulty": 4,
+   "question": "Pour 2 NO + O₂ → 2 NO₂ : 2 NO ⇌ N₂O₂ (rapide, constante K), puis N₂O₂ + O₂ → 2 NO₂ (lente, k₂). Quelle est la loi de vitesse de formation de NO₂ ?",
+   "choices": [
+    "v = 2 k₂ [NO][O₂], d'ordre global 2",
+    "v = 2 k₂ K [NO][O₂]², d'ordre global 3",
+    "v = 2 k₂ K [NO]²[O₂], d'ordre global 3",
+    "v = 2 k₂ K [NO]²[O₂]², d'ordre global 4"
+   ],
+   "answer": "C",
+   "explanation": "Le pré-équilibre rapide impose [N₂O₂] = K[NO]² ; la vitesse de l'étape lente est k₂[N₂O₂][O₂], et chaque événement produit 2 NO₂.",
+   "source": "Cours de chimie physique de licence, famille Atkins",
+   "verif": "import"
+  },
+  {
+   "course": "l3-chim",
+   "category": "Électrochimie avancée et batteries",
+   "difficulty": 4,
+   "question": "Pour Zn + Cu²⁺ ⇌ Zn²⁺ + Cu (n = 2, E° = 1,10 V à 25 °C, avec 0,0592 V pour RT ln10/F), quelle est la constante d'équilibre K ?",
+   "choices": [
+    "Environ 3,8 × 10¹⁸",
+    "Environ 2,1 × 10⁷⁴",
+    "Environ 1,4 × 10¹⁶",
+    "Environ 1,5 × 10³⁷"
+   ],
+   "answer": "D",
+   "explanation": "log K = nE°/0,0592 = 2 × 1,10 / 0,0592 ≈ 37,2, soit K ≈ 1,5 × 10³⁷ ; la réaction est quasi totale.",
+   "source": "Cours de chimie générale, famille Chang / Atkins",
+   "verif": "import"
+  },
+  {
+   "course": "l3-chim",
+   "category": "Thermodynamique statistique",
+   "difficulty": 5,
+   "question": "Deux niveaux séparés de ΔE = 5,0 kJ/mol ont des dégénérescences g₁ = 1 (fondamental) et g₂ = 3. Quel est le rapport N₂/N₁ à 298 K (R = 8,314 J/(mol·K)) ?",
+   "choices": [
+    "Environ 0,40",
+    "Environ 0,13",
+    "Environ 0,044",
+    "Environ 0,87"
+   ],
+   "answer": "A",
+   "explanation": "N₂/N₁ = (g₂/g₁) exp(−ΔE/RT) = 3 × exp(−5000/(8,314 × 298)) = 3 × 0,133 ≈ 0,40.",
+   "source": "Cours de chimie physique de licence, famille Atkins",
+   "verif": "import"
+  }
+ ]
+}
