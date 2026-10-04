@@ -267,7 +267,7 @@ class TvService : Service(), Device {
     private fun startServer(attempt: Int = 0) {
         val s = ReceiverServer(registry, playerBridge, pin = pin, guard = guard, device = this,
             // downloads (aria2, docs/DOWNLOADS.md): its own manager, independent of any screen
-            extension = ApiExtension(::extraApi).then(RemoteHub.api.also { RemoteHub.install(this) }).then(TvDownloads.start(this, registry) { server?.target ?: "auto" }.manager.apiExtension).then(ParentalHub.api)
+            extension = ApiExtension(::extraApi).then(RemoteHub.api.also { RemoteHub.install(this) }).then(TvDownloads.start(this, registry) { server?.target ?: "auto" }.manager.apiExtension).then(ParentalHub.api).then(castbridge.core.tv.TvDeviceRequestApi { ActivationCenter.init(this); ActivationCenter.requestText() })
                 .then(LearnHub.also { it.attach(this) }.api(this))   // « Apprendre » (docs/LEARN.md)
                 // « Corbeille CastBridge » of the phone's library assistant (docs/LIBRARY-AGENT.md): recoverable for 30 days, behind the PIN
                 .then(castbridge.core.library.agent.TrashApi(registry, playing = { playerBridge.state().takeIf { it.state != "idle" }?.name }, library = library,

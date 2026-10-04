@@ -130,6 +130,14 @@ Protocole et règles de sécurité vérifiés en JVM (`CT/cast/dial/DialRulesTes
 |---|---|---|---|---|---|---|---|---|
 | **P-61** | **Diffuser une vidéo YouTube vers la TV** | TV de référence avec YouTube TV installée, réglage « Diffusion YouTube vers cette TV (DIAL) » sur oui ; téléphone et TV sur le même Wi-Fi, avec Internet | YouTube sur le téléphone, vidéo, icône de diffusion, choisir « CastBridge-TV xxxx » ; changer de vidéo ; déconnecter ; désactiver le réglage | la TV est listée ; la vidéo se connecte ; après désactivation elle n'est plus listée | YouTube TV s'ouvre et joue ; déconnexion : retour à CastBridge-TV ; un navigateur du LAN (`Origin` quelconque) ou un hôte extérieur ne peut rien lancer ; plus de 6 lancements par minute : refusés | S3 | JVM (`DialRulesTest`, `DialHttpServerTest`, `SsdpServerTest`), H (découverte et lancement réels) | — |
 
+## J. Demande d'appareil de la TV lue depuis le téléphone (2026-10-04, `docs/TV-DEMANDE-APPAREIL.md`)
+
+Lecture seule, le strict nécessaire à la génération d'une clé : code, k, empreintes des facteurs, clé publique d'installation. Analyse, textes, porte d'autorisation et route de la TV vérifiés en JVM (`CT/trust/TvDeviceRequestTest.kt`, `CT/tv/TvDeviceRequestServerTest.kt`) ; l'écran Android n'est vérifié que par compilation.
+
+| id | Parcours | Préconditions | Étapes | Attendu — téléphone | Attendu — TV | Gravité | Où | Régression |
+|---|---|---|---|---|---|---|---|---|
+| **P-62** | **Lire et copier la demande d'appareil de la TV** | CastBridge-TV avec la route `GET /api/tv/device-request` ; un téléphone de confiance (ou le code de la TV déjà saisi) et un téléphone sans autorisation | accueil > « Demande d'appareil » ; « Copier la demande complète » ; « Copier pour le serveur » ; « Partager la demande complète » ; refaire avec le téléphone sans autorisation, puis avec un mauvais code | le code d'appareil est celui de l'écran d'activation ; la copie complète est identique octet pour octet au texte de la TV (avec `install=x25519|…`) ; la copie serveur n'a pas la ligne `install=` ; sans autorisation : explication, aucune requête ; aucun code ni jeton affiché ni copié | la route répond 401 sans PIN ni jeton, ne renvoie que cinq clés, 404 sur une TV ancienne | S3 | JVM (`TvDeviceRequestTest`, `TvDeviceRequestServerTest`), H (téléphone et TV réels) | — |
+
 ## Répartition
 
 | Où | Parcours couverts (au moins une colonne) | Nombre |
