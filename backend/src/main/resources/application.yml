@@ -88,6 +88,19 @@ castbridge:
   play:
     ticket-key-file: ${CASTBRIDGE_PLAY_TICKET_KEY_FILE:}
     per-device-per-hour: ${CASTBRIDGE_PLAY_TICKET_PER_DEVICE_PER_HOUR:20}
+  # Wallet module (W22: NDEM / MBOKO tokens, double-entry ledger, docs/coordination/DESIGN-W22-JETONS-NDEM-MBOKO-2026-10-04.md): OFF by default IN THE CODE (routes answer 404), turned on at
+  # delivery by CASTBRIDGE_WALLET_ENABLED=1. The wallet key is a SECRET FILE (never a value here); empty or absent = the device routes answer 503 "Portefeuille indisponible".
+  # The operating switches (stakes, transfer, convert, vouchers) live in the wallet_policy table and are ON by default.
+  wallet:
+    enabled: ${CASTBRIDGE_WALLET_ENABLED:false}
+    key-file: ${CASTBRIDGE_WALLET_KEY_FILE:}
+    previous-key-file: ${CASTBRIDGE_WALLET_PREVIOUS_KEY_FILE:}
+    # public keys of the issuers of the cbx1 activations, same format as castbridge.licenses.trusted-keys: "name:<base64 raw public key>:ISSUE_TRIAL+ISSUE_PRODUCTION+…"
+    trusted-keys: ${CASTBRIDGE_WALLET_TRUSTED_KEYS:}
+    # optional signed revocation list (one cbx1 revocation token per line)
+    revocations-file: ${CASTBRIDGE_WALLET_REVOCATIONS_FILE:}
+    writes-per-minute-per-identity: ${CASTBRIDGE_WALLET_WRITES_PER_MINUTE_PER_IDENTITY:30}
+    writes-per-minute-global: ${CASTBRIDGE_WALLET_WRITES_PER_MINUTE_GLOBAL:600}
   rate-limit:
     per-minute: ${CASTBRIDGE_RATE_LIMIT_PER_MINUTE:120}
     burst: ${CASTBRIDGE_RATE_LIMIT_BURST:60}
