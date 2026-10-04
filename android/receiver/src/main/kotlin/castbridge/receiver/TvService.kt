@@ -135,6 +135,8 @@ class TvService : Service(), Device {
     private var nsd: NsdManager? = null
     private var nsdListener: NsdManager.RegistrationListener? = null
     private var multicastLock: WifiManager.MulticastLock? = null
+    /** « Diffusion YouTube vers cette TV (DIAL) » (docs/TV-CAST-DIAL.md) : réglage `cast.dial`, actif par défaut. */
+    private var dial: DialHost? = null
     private var wake: PowerManager.WakeLock? = null
     private var wifiLock: WifiManager.WifiLock? = null
 
@@ -1096,9 +1098,19 @@ class TvService : Service(), Device {
         }
         nsd = getSystemService(NsdManager::class.java)
         runCatching { nsd?.registerService(info, NsdManager.PROTOCOL_DNS_SD, l); nsdListener = l }
+        applyDial()
     }
 
+    /** Démarre ou arrête le récepteur DIAL selon le réglage ; sans effet sur le reste du service. */
+    fun applyDial() {
+        val on = DialHost.enabled(prefs)
+        if (on) { if (dial == null) dial = DialHost(this, prefs); runCatching { dial?.start() } }
+        else { runCatching { dial?.stop() }; dial = null }
+    }
+    fun dialStatus(): String = dial?.status() ?: "DIAL arrêté"
+
     private fun stopCore() {
+        runCatching { dial?.stop() }; dial = null
         runCatching { nsdListener?.let { nsd?.unregisterService(it) } }; nsdListener = null
         runCatching { multicastLock?.release() }
         runCatching { storageReceiver?.let { unregisterReceiver(it) } }; storageReceiver = null
