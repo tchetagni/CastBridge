@@ -74,6 +74,13 @@ object VideoFit {
         return "Affichage : ${DisplayTexts.label(r.mode)} ($from) · $src · dalle ${panelW}×$panelH · $img"
     }
 
+    /** Ligne courte, sans touche, en haut à gauche pendant 6 s : « Affichage : <mode> · source WxH · dalle WxH · image WxH ». */
+    fun overlayLine(r: Resolved, p: Plan?, videoW: Int, videoH: Int, panelW: Int, panelH: Int): String {
+        val src = if (p == null || videoW <= 0) "source inconnue" else "source ${videoW}×$videoH"
+        val img = if (p == null || p.shownW <= 0) "image non appliquée" else "image ${p.shownW}×${p.shownH}"
+        return "Affichage : ${DisplayTexts.label(r.mode)} · $src · dalle ${panelW}×$panelH · $img"
+    }
+
     fun decide(videoW: Int, videoH: Int, sarNum: Int, sarDen: Int, rotation: Int, panelW: Int, panelH: Int, mode: Mode): Plan {
         if (videoW <= 0 || videoH <= 0 || panelW <= 0 || panelH <= 0) {
             // Taille encore inconnue : on laisse libVLC ajuster, sans rien inventer.

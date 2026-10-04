@@ -32,3 +32,43 @@ La taille réelle de la dalle (surface vidéo, sinon `DisplayMetrics`) est lue �
 
 ## Diagnostic (0.14.29)
 La touche INFO du lecteur affiche : « Affichage : <mode> (par défaut) · source WxH SAR n:d · dalle WxH · image WxH », avec l'origine du mode (défaut, réglage global ou réglage du fichier) ; « image non appliquée » si aucune mise à l'échelle n'a été faite. L'ajustement est réessayé aux événements ESAdded, ESSelected et TimeChanged tant que la piste vidéo n'est pas connue.
+
+## Télécommande de base : toutes les options sans touche MENU ni INFO (0.14.30)
+Décision pure : `C/tv/PlayerRemote.decide` (testée) ; vues : `PlayerControls`. Une télécommande à 5 touches (haut, bas, gauche, droite, OK) + RETOUR suffit.
+
+| Touche | Barre cachée | Barre visible |
+|---|---|---|
+| OK (appui court) | affiche la barre de commandes (le focus est sur « Pause ») | le bouton qui a le focus agit |
+| OK tenu (appui long) | ouvre les réglages de lecture | (le bouton agit) |
+| GAUCHE / DROITE | recul / avance de 10 s | déplacent le focus entre les boutons |
+| HAUT | avance de 60 s | avance de 60 s |
+| BAS | recul de 60 s | ouvre les réglages de lecture |
+| RETOUR | arrête la lecture | cache la barre (n'arrête pas) |
+| MENU, INFO, CAPTIONS, AUDIO, lecture/pause, suivant/précédent | inchangés quand la télécommande les a | idem |
+
+Pour mettre en pause : OK (la barre apparaît), OK (« Pause » a le focus). Barre : « Pause/Lecture », « Audio », « Sous-titres », « Affichage », « Infos », chacun avec son icône et son libellé (28 sp, icône 40 dp), plus la ligne de progression et le temps. La barre se cache seule après 5 s sans touche, et reste affichée tant que la vidéo est en pause. Les boutons ouvrent les mêmes choix que le panneau MENU (`PlayerPanel`, aucune logique en double) ; « Affichage » : Remplir l'écran / Ajusté à l'écran / Étirer / Natif. Un fichier n'ayant qu'une piste audio dit « Une seule piste audio ». Le défaut d'affichage reste « Remplir l'écran ».
+
+Remarque : sur la barre cachée, GAUCHE/DROITE/HAUT/BAS cherchent comme avant et montrent la ligne de progression ; seul OK fait apparaître la barre.
+
+### Diagnostic sans aucune touche
+Pendant 6 s après le début de la lecture, et à chaque changement d'affichage, une ligne discrète en haut à gauche (sous l'icône de copie) dit : « Affichage : <mode> · source WxH · dalle WxH · image WxH » (« image non appliquée » si aucune mise à l'échelle n'a eu lieu, « source inconnue » avant la piste vidéo ; `VideoFit.overlayLine`). La ligne se met à jour toute seule le temps qu'elle est visible. Le bouton « Infos » (ou la touche INFO) la ramène 6 s et ouvre la « Légende des icônes » ; « Infos techniques » ouvre l'ancienne fenêtre.
+
+## Icônes du lecteur
+Règle (propriétaire, 2026-10-04) : jamais d'icône sans libellé texte en français ; texte >= 28 sp, icône >= 40 dp, pastille sombre à 80 % d'opacité (contraste du texte blanc >= 4,5:1 même sur une image blanche : testé, `PlayerIcons.contrastOverWhite`), marges de sécurité de 5 % de la dalle (`PlayerIcons.safe` : 64 x 36 dp sur 720p). Rien n'a été supprimé.
+
+| Élément | Fichier | Quand | Sens | Taille / contraste / zone de sécurité |
+|---|---|---|---|---|
+| Pastilles de la barre d'état (13 types : Internet, Téléphone, Télécommande, SSH, Internet du téléphone, Diffusion, Clé USB, Wi-Fi Direct, Quiz, Échecs, Téléchargement, Mode enfant, Mise à jour) | `StatusBarView`, `core/status/StatusIcons` | haut à droite ; AVANT : toujours visibles, libellé seulement 4 s ou au focus (cause du retour du propriétaire : pastilles bleues sans nom) | voir la légende | AVANT : glyphe 26 dp, libellé 14 sp, marge 24 dp (coupée par le surbalayage). MAINTENANT en lecture : libellé toujours écrit, 28 sp, glyphe 40 dp, marge 5 % ; la zone apparaît avec la barre de commandes, ou sur erreur/reconnexion, ou 4 s après un changement |
+| Petite marque technique (Wi-Fi, Bluetooth, Ethernet, Wi-Fi Direct, USB) | `StatusBarView` | bas droite de la pastille | par où passe la liaison | 14 dp : trop petite pour être lue seule, d'où le libellé « Wi-Fi · ... » et la légende |
+| « +N » | `StatusBarView` | plus de pastilles que de place | N autres connexions | libellé « +N » |
+| Étiquette de licence « PRODUCTION · Clé illimitée » | `KeyBadgeOverlay` | haut centre, tous les écrans | édition et durée de la clé | AVANT 14 sp, marge 6 px (coupée) ; MAINTENANT 20 sp, marge 5 % |
+| Copie en cours | `CopyBadgeView`, `core/xfer/CopyBadge` | haut gauche, sur la vidéo seulement (cachée quand la barre de progression est affichée) | un fichier arrive sur la TV | AVANT 14 sp, ⬇ + « 42 % » ; MAINTENANT « Copie en cours 42 % », 28 sp, marge 5 % |
+| Envoi progressif | `activity_player.xml` (`lead`) | haut droite | « Envoi N % - encore ... de lecture sans réseau » | AVANT 16 sp, marge 24 dp ; MAINTENANT 20 sp, marge 64 x 36 dp |
+| Bandeau de message | `Banner` | haut centre, 3 s | messages (« Pause », « Audio : ... ») | 19 sp ; marge haute portée à 5 % |
+| Progression (titre, barre, temps) | `ProgressOverlay` | bas, 4 s (maintenant tant que la barre de commandes est visible) | position et durée | 24 sp ; marge basse de sécurité ajoutée |
+| Barre de commandes | `PlayerControls` | OK | voir plus haut | 28 sp, icônes 40 dp |
+| Ligne de diagnostic | `PlayerControls` | 6 s | voir plus haut | 22 sp, pastille sombre |
+| Icône dorée en bas à droite (photo du propriétaire) | NON IDENTIFIÉE dans ce code | inconnu | inconnu | à identifier sur la TV (P-54, étape de la légende) ; ce n'est pas la barre d'état ni la copie |
+
+Deux zones : en haut à droite, les connexions (avec libellés) ; en haut à gauche, copie et diagnostic. Une seule zone n'a pas été faite (la copie reste à gauche pour ne pas chevaucher la colonne des pastilles, de hauteur variable). Le dessin n'est vérifié que par compilation ; la lisibilité réelle à 3 m, le surbalayage et la superposition avec la barre de progression ne peuvent être jugés que sur la TV.
+

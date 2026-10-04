@@ -298,7 +298,7 @@ class Banner(private val parent: FrameLayout) {
         view.animate().alpha(0f).translationY(-TvStyle.dp(ctx, 30).toFloat()).setDuration(250).withEndAction { view.visibility = View.GONE }.start()
     }
 
-    init { parent.addView(view, FrameLayout.LayoutParams(-2, -2, Gravity.TOP or Gravity.CENTER_HORIZONTAL).apply { topMargin = TvStyle.dp(ctx, 28) }) }
+    init { parent.addView(view, FrameLayout.LayoutParams(-2, -2, Gravity.TOP or Gravity.CENTER_HORIZONTAL).apply { topMargin = maxOf(TvStyle.dp(ctx, 28), castbridge.core.tv.PlayerIcons.safe(ctx.resources.displayMetrics.widthPixels, ctx.resources.displayMetrics.heightPixels).vertical) }) }
 
     fun show(text: String, ms: Long = 3000) {
         view.text = text
