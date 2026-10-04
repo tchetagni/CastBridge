@@ -130,6 +130,14 @@ Protocole et règles de sécurité vérifiés en JVM (`CT/cast/dial/DialRulesTes
 |---|---|---|---|---|---|---|---|---|
 | **P-61** | **Diffuser une vidéo YouTube vers la TV** | TV de référence avec YouTube TV installée, réglage « Diffusion YouTube vers cette TV (DIAL) » sur oui ; téléphone et TV sur le même Wi-Fi, avec Internet | YouTube sur le téléphone, vidéo, icône de diffusion, choisir « CastBridge-TV xxxx » ; changer de vidéo ; déconnecter ; désactiver le réglage | la TV est listée ; la vidéo se connecte ; après désactivation elle n'est plus listée | YouTube TV s'ouvre et joue ; déconnexion : retour à CastBridge-TV ; un navigateur du LAN (`Origin` quelconque) ou un hôte extérieur ne peut rien lancer ; plus de 6 lancements par minute : refusés | S3 | JVM (`DialRulesTest`, `DialHttpServerTest`, `SsdpServerTest`), H (découverte et lancement réels) | — |
 
+## J. La TV ne reconnaît plus le téléphone (2026-10-04, `docs/agent-reports/`, plainte « je copie une vidéo sur la TV sans succès »)
+
+Cœur vérifié en JVM (`LinkRefusalTextsTest`, `LinkRefusalsTest`, `SendChoiceTest`) ; le bandeau, la notification et la saisie du code PIN dans la boite ne sont vérifiés que par compilation : seuls un vrai téléphone et une vraie TV confirment l'enchaînement.
+
+| id | Parcours | Préconditions | Étapes | Attendu — téléphone | Attendu — TV | Gravité | Où | Régression |
+|---|---|---|---|---|---|---|---|---|
+| **P-62** | **La TV ne reconnaît plus le téléphone (refus code 8)** | téléphone qui se croit de confiance (TV enregistrée) ; la TV a oublié ce téléphone (retiré de sa liste, réinstallée, données effacées) ou ne le voit plus apparié en Bluetooth ; la TV répond en Wi-Fi (`pinRequired`) | « Ouvrir avec CastBridge » sur une vidéo ; toucher « Copier » ; attendre ; toucher la notification d'échec ; saisir le code PIN affiché sur la TV | jamais de file muette : bandeau « La TV ne reconnaît plus ce téléphone (code 8) : saisissez le code PIN affiché sur la TV pour le ré-associer » ; si la copie était déjà en file : échec immédiat (pas une minute d'attente) avec la notification « Échec : la TV ne reconnaît plus ce téléphone. Touchez pour saisir le code PIN » ; toucher rouvre la boite sur le champ du code (Valider = une seule vérification) ; après le bon code, « Copier » part ; 10 minutes plus tard sans nouveau refus, le choix redevient celui de la file | HELLO refusé (`ERR_UNTRUSTED`), aucun envoi reçu ; la TV n'affiche aucun code PIN dans ses journaux | S2 | JVM (`SendChoiceTest`, `LinkRefusalTextsTest`, `LinkRefusalsTest`), H (téléphone et TV réels) | — |
+
 ## Répartition
 
 | Où | Parcours couverts (au moins une colonne) | Nombre |

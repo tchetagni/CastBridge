@@ -220,8 +220,13 @@ object TransferQueue {
         var dedupBase: String? = null; var dedupCred: String? = null
         if (item.tvName == null) {
             // the trusted link: its session, waiting up to a minute for it to be (re)established
-            val session = waitForTv()
-            if (session == null) { model.finish(item.id, false, QueueTexts.NO_TV); publish(); return }
+            val (session, refused) = waitForTv()
+            if (session == null) {
+                // the TV said no (code 8 « je ne vous reconnais plus »…): fail at once, with its cause and the PIN to type, never a silent minute
+                model.finish(item.id, false, refused?.second ?: QueueTexts.NO_TV); publish()
+                if (refused != null) RefusalNotice.show(app, item, refused.first)
+                return
+            }
             if (item.linkTv != null && session.tv.address != item.linkTv) { model.finish(item.id, false, QueueTexts.OTHER_TV); publish(); return }
             // « Seul le Bluetooth » (R-14): no common network that answers ⇒ the phone and the TV set up Wi-Fi Direct by themselves (core BulkRoute decides,
             // AutoWifiDirect joins); the same upload then runs over it, ordered path and « Copier et lire » included. Never instead of a working LAN.
@@ -451,13 +456,20 @@ object TransferQueue {
     /** Pauses the queue with [why] (the running file, if any, ends by itself; the next one waits for the app). */
     internal fun pauseWith(why: String) { paused = true; _note.value = why; publish() }
 
-    /** The TV link, waiting up to a minute for it to be (re)established. */
-    private suspend fun waitForTv(): castbridge.core.trust.LinkSession? {
+    /**
+     * The TV link, waiting up to a minute for it to be (re)established. Leaves at once, with the explained refusal (code, text), when the TV
+     * refuses this phone ([castbridge.core.trust.LinkRefusalTexts.failureFor]): no point waiting for a link that will not come by itself.
+     */
+    private suspend fun waitForTv(): Pair<castbridge.core.trust.LinkSession?, Pair<Int, String>?> {
         repeat(120) {
-            (TvLinkManager.state.value as? LinkUi.Connected)?.session?.let { return it }
+            val st = TvLinkManager.state.value
+            (st as? LinkUi.Connected)?.session?.let { return it to null }
+            val state = when (st) { is LinkUi.Status -> st.view.state; else -> null }
+            val code = state?.let { castbridge.core.trust.LinkRefusalTexts.codeOf(it) }
+            if (code != null) return null to (code to castbridge.core.trust.LinkRefusalTexts.ticket(code))
             delay(500)
         }
-        return null
+        return null to null
     }
 
     /** Null when the file arrived, else the reason. Waits for the service to start (90 s at most), then for it to end. */

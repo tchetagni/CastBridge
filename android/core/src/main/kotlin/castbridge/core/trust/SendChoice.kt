@@ -1,5 +1,7 @@
 package castbridge.core.trust
 
+import castbridge.core.tv.BtProtocol
+
 /**
  * What the phone may claim about « its TV » before (and between) real observations, and what « Ouvrir avec CastBridge » offers.
  * Pure: the screens only feed facts in and draw what comes out (table-tested in `SendChoiceTest`).
@@ -49,10 +51,11 @@ data class SendFacts(
     val savedCount: Int = 0, val defaultName: String? = null, val stepView: LinkView? = null,
     val session: Boolean = false, val sessionName: String? = null, val btOnly: Boolean = false,
     val pinTvName: String? = null, val pinStored: Boolean = false, val pinCheck: PinCheck = PinCheck.UNKNOWN,
+    val refusal: RefusalRecord? = null, val nowMs: Long = 0,
 )
 
 /** What the dialog draws. [note]: the one explanation line (why « Déplacer » waits, what is wrong), or null. */
-data class SendChoice(val route: SendRoute, val status: String, val copyEnabled: Boolean, val moveEnabled: Boolean, val note: String?, val action: SendAction)
+data class SendChoice(val route: SendRoute, val status: String, val copyEnabled: Boolean, val moveEnabled: Boolean, val note: String?, val action: SendAction, val banner: String? = null)
 
 object SendChoices {
     const val NO_TV = "Aucune TV ajoutée : ouvrez CastBridge pour ajouter votre TV."
@@ -63,9 +66,22 @@ object SendChoices {
     private fun transient(s: LinkState) = s is LinkState.Connecting || s is LinkState.Reconnecting || s is LinkState.TvUnreachable ||
         s is LinkState.CredentialExpired || s is LinkState.Bonding || s.isGood
 
+    /** A refusal « téléphone non autorisé » (code 8) younger than this makes the phone stop believing it is trusted by that TV. */
+    const val UNTRUSTED_WINDOW_MS = 10 * 60_000L
+
+    /** The TV said « je ne vous reconnais plus » in the last 10 minutes: every trusted route (session, queue) is off until a PIN or a link succeeds. */
+    fun untrusted(f: SendFacts): Boolean = f.refusal != null && f.refusal.code == BtProtocol.ERR_UNTRUSTED && f.nowMs - f.refusal.atMs in 0..UNTRUSTED_WINDOW_MS
+
     fun decide(f: SendFacts): SendChoice {
+        val c = decideRoutes(f)
+        // the explanation is shown whenever nothing can leave because of that refusal
+        return if (untrusted(f) && c.route == SendRoute.NONE) c.copy(banner = LinkRefusalTexts.banner(f.refusal!!.code)) else c
+    }
+
+    private fun decideRoutes(f: SendFacts): SendChoice {
+        val forgotten = untrusted(f)
         // 1) a real trusted session: the queue, at once
-        if (f.session) {
+        if (f.session && !forgotten) {
             val name = f.sessionName ?: f.defaultName ?: "TV"
             return if (f.btOnly) SendChoice(SendRoute.QUEUE, "TV : $name (par Bluetooth : plus lent)", true, false, MOVE_NO_BT, SendAction.NONE)
             else SendChoice(SendRoute.QUEUE, "TV : $name", true, true, null, SendAction.NONE)
@@ -74,7 +90,7 @@ object SendChoices {
         if (f.pinTvName != null && f.pinStored && f.pinCheck == PinCheck.OK)
             return SendChoice(SendRoute.PIN_UPLOAD, "TV : ${display(f.pinTvName)}", true, true, null, SendAction.NONE)
         // 3) a trusted TV saved but not joined yet
-        val view = LinkStart.view(f.savedCount, f.defaultName, f.stepView)
+        val view = if (forgotten) null else LinkStart.view(f.savedCount, f.defaultName, f.stepView)
         if (view != null) {
             if (f.defaultName == null) return SendChoice(SendRoute.NONE, view.title + " : " + view.detail, false, false, null, SendAction.OPEN_APP)
             if (transient(view.state)) return SendChoice(SendRoute.QUEUE, view.title, true, false, MOVE_WAITS, SendAction.NONE)
@@ -83,7 +99,7 @@ object SendChoices {
                 return SendChoice(SendRoute.NONE, view.title + " : " + view.detail, false, false, null, SendAction.OPEN_APP)
         }
         // 4) the code (PIN) path
-        val pinTv = f.pinTvName ?: return SendChoice(SendRoute.NONE, NO_TV, false, false, null, SendAction.ADD_TV)
+        val pinTv = f.pinTvName ?: return SendChoice(SendRoute.NONE, if (forgotten) "TV : ${f.defaultName ?: "TV"}" else NO_TV, false, false, null, SendAction.ADD_TV)
         val name = display(pinTv)
         if (!f.pinStored) return SendChoice(SendRoute.NONE, "$name demande son code PIN, que ce téléphone n'a pas : saisissez le code affiché sur la TV.", false, false, null, SendAction.ENTER_PIN)
         return when (f.pinCheck) {
