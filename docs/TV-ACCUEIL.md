@@ -7,7 +7,8 @@ Demande du propriétaire : les outils et fonctions (Jetons, Téléchargements, A
 L'accueil garde ses rangées de vidéos (« Reprendre », « Récemment ajoutés »…). Sous « Outils et fonctions », une ligne de grandes tuiles :
 
 1. **Bibliothèque** (accès rapide, la plus utilisée) ; en version d'essai, « Passer à la version complète » la précède.
-2. Cinq **boutons de groupe** : icône, nom (28 sp) et résumé (« 4 outils · 2 actifs », « · à vérifier » si un outil a un avertissement).
+2. **Code PIN** (accès rapide, à côté de Bibliothèque) : le code de connexion de la TV en grand, groupé par 3 chiffres (« Code PIN · 482 913 »), masqué « •••••• » sous un profil enfant ; jamais caché par un réglage.
+3. Cinq **boutons de groupe** : icône, nom (28 sp) et résumé (« 4 outils · 2 actifs », « · à vérifier » si un outil a un avertissement).
 
 OK sur un groupe ouvre une **grille** plein écran : titre du groupe, 3 colonnes, autant de lignes que nécessaire, chaque tuile avec grande icône ET nom (28 sp) et son badge (« Activé », « Code 12•••• », « 3 fichier(s) »…), la description de la tuile focalisée en bas. Zone de sécurité de 5 %.
 
@@ -17,7 +18,7 @@ Le rattachement se fait par **identifiant de tuile** (le premier argument de `ti
 
 | Groupe | Tuiles (ordre de la grille) |
 |---|---|
-| (accès rapide) | `upgrade` (essai), `library` Bibliothèque |
+| (accès rapide) | `upgrade` (essai), `library` Bibliothèque, `pin` Code PIN |
 | Médias | `library` Bibliothèque, `downloads` Téléchargements, `usb` Clé USB, `receive` Recevoir du téléphone |
 | Apprendre | `learn` Apprendre, `langues` Langues |
 | Jeux et jetons | `games` Jeux, `online_game` Partie Internet, `wallet` ◎ Jetons |
@@ -79,3 +80,10 @@ Régression corrigée (retour du propriétaire : « je préfère encore l'ancien
 - Télécommande : GAUCHE/DROITE restent dans la ligne (pas de bouclage), HAUT/BAS changent de ligne en gardant la colonne la plus proche.
 - Les autres étapes du Quiz (parcours, niveaux, scores, mise, duel) ont au plus 4 cartes sauf niveaux/filières (déjà en grille `LevelGridLayout`) : même cause absente.
 - Dessin Android vérifié par compilation seulement ; l'aspect réel se confirme sur une TV (GaiaOS 720p).
+## Tuile « Code PIN » et nouveau PIN
+
+OK sur la tuile ouvre « Code PIN de la TV » (`PinActivity`) : le code en très grand, « Saisissez ce code sur le téléphone, dans CastBridge, une seule fois », les téléphones de confiance Bluetooth (n / 8, noms ; **non touchés**), « Générer un nouveau PIN » et « Retour ».
+
+« Générer un nouveau PIN » : code parental d'abord s'il existe (session fermée) ; confirmation (« Annuler » présélectionné) ; nouveau code (`Pin.generate`, différent de l'actuel et des deux précédents, dont seules les empreintes SHA-256 tronquées sont gardées) ; écriture atomique (`TvPrefs.pinStore`, `commit`) ; ensuite seulement : `PinGuard.rotate` (l'ancien code est refusé « PIN faux » code 2, les compteurs et blocages d'essais de TOUTES les adresses sont effacés, car ils comptaient des essais contre l'ancien code), `TvService.pin` et les badges. Si l'écriture échoue : l'ancien code reste actif, l'écran le dit. Les jetons des téléphones de confiance ne dérivent pas du code : rien à invalider.
+
+Refus : profil enfant actif (code masqué), copie en cours (« Une copie est en cours »), plus de 3 régénérations par heure glissante. Le journal ne reçoit que « PIN régénéré » (jamais la valeur). Règles pures : `castbridge.core.tv.pin` (`PinRules`, `PinRegenerator`, `PinFlow`, `PinDisplay`).
