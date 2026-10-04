@@ -143,6 +143,25 @@ class RegistrarWalletPathTest extends RegistrarTestBase {
     }
 
     @Test
+    void aRenewalLicenceOfTheSameTvNeverPaysTheUnlimitedOpeningTwice() throws Exception {
+        Registered dev = registerApp("tv");
+        KeyPair install = pair();
+        Acts.Tv tv = tv();
+        String first = licenseId(), second = licenseId();
+        String t1 = production(ISSUER, tv, first, null, NOW - 2 * HOUR, null);
+        ok(sync(dev, install, tv, t1));
+        assertEquals(5000, balance(tv.code(), "NDEM"));
+        // le propriétaire renouvelle : un NOUVEL identifiant de licence pour la même TV (permis, aucune alerte), même plafond illimité
+        String t2 = production(ISSUER, tv, second, null, NOW - HOUR, null);
+        JsonNode s = ok(sync(dev, install, tv, t2, t1));
+        assertEquals(1, count("SELECT COUNT(*) FROM lic_license WHERE license_id = ?", second), "la seconde licence est enregistrée");
+        assertEquals(5000, balance(tv.code(), "NDEM"), "l'ouverture illimitée n'est versée qu'une fois par identité : " + s);
+        assertEquals(50, balance(tv.code(), "MBOKO"));
+        ok(sync(dev, install, tv, t2, t1));
+        assertEquals(5000, balance(tv.code(), "NDEM"));
+    }
+
+    @Test
     void aSyncWithoutProofOfPossessionRegistersNothing() throws Exception {
         Registered dev = registerApp("tv");
         Acts.Tv tv = tv();

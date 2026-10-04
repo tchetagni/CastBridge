@@ -144,7 +144,7 @@ days=<entier>
 
 ### 5.2 Trames du canal Bluetooth propriétaire
 Après la **poignée** `CBTO` (4 octets ASCII), des trames `[type : 1 octet][longueur : 2 octets grand-boutiste][charge utile, ≤ 4096]` : `1` CHALLENGE_REQUEST (vide), `2` CHALLENGE (32 hex), `3` COMMAND (jeton `cbx1…` de type `command`), `4` RESULT (`[ok : 1]` + message UTF-8), `5` DEVICE_INFO_REQUEST (vide), `6` DEVICE_INFO, `7` PAIR (code à 6 chiffres), `8` ACTIVATION (jeton `cbx1…` de type `activation`).
-`DEVICE_INFO` = le texte `code=<code d'appareil>` LF `k=<k>` LF puis une ligne `factor=<TYPE>|<empreinte>` par facteur : la **demande d'appareil**, dont l'émetteur a besoin (le code seul ne suffit pas à construire l'activation ni les clés de lots).
+`DEVICE_INFO` = le texte `code=<code d'appareil>` LF `k=<k>` LF puis une ligne `factor=<TYPE>|<empreinte>` par facteur : la **demande d'appareil**, dont l'émetteur a besoin (le code seul ne suffit pas à construire l'activation ni les clés de lots). La demande peut porter une ligne `install=<clé d'installation de la TV>` (preuve de possession) : les analyseurs la **tolèrent et l'ignorent** (le code, k et les facteurs n'en dépendent pas ; le serveur l'accepte depuis w23-05), toute autre ligne inconnue reste refusée.
 
 ## 6. Temps sur la TV (rappel pour les émetteurs)
 La TV retient `max(horloge, dernier instant vu, plancher signé)` ; un retour en arrière ne change rien ; un saut en avant de plus de **400 jours** n'est pas cru tant qu'un message signé ne le confirme pas (`TvClock`). Un émetteur choisit donc **`issuedAt` = l'heure réelle de l'émission** (jamais dans le futur) et une fenêtre `notBefore` ≤ `issuedAt`.
