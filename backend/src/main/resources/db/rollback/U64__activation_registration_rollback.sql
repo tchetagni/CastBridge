@@ -2,5 +2,6 @@
 -- et APRÈS U65 (V65 ajoute une colonne à cette table). Aucune autre table ne référence lic_registration.
 -- ATTENTION : revenir au code 1.2.0 ou 1.2.1 garde les licences « report: » déjà créées et supprime toute limite de rattrapage : l'ancien code verserait les tranches RETENUES sans limite.
 -- Avant de revenir au code, lister : SELECT license_id, created_by, state FROM lic_license WHERE created_by LIKE 'report:%';
--- Ensuite : DELETE FROM flyway_schema_history WHERE version = '64';
+-- REJOUABLE (second audit LOW-C) : DROP TABLE IF EXISTS, et la ligne Flyway (succès OU échec à mi-chemin) est effacée par le script lui-même.
 DROP TABLE IF EXISTS lic_registration;
+DELETE FROM flyway_schema_history WHERE version = '64';

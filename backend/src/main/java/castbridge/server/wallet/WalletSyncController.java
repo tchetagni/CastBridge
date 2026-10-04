@@ -3,6 +3,7 @@ package castbridge.server.wallet;
 import castbridge.server.devices.Device;
 import castbridge.server.devices.DeviceService;
 import castbridge.server.licenses.DeviceIdentity;
+import castbridge.server.licenses.InstallKeyFingerprint;
 import castbridge.server.licenses.ReportedActivationRegistrar;
 import castbridge.server.licenses.WireActivation;
 import castbridge.server.wallet.core.AccountRef;
@@ -45,6 +46,7 @@ public class WalletSyncController {
     static final String REGISTRATION_REVIEW_TEXT = "Activation en vérification au serveur : jetons de production à venir";
     static final String SEAT_OVER_QUOTA_TEXT = "Licence déjà utilisée sur une autre TV : contactez votre point focal";
     static final String NO_INSTALL_KEY_TEXT = "Activation sans clé d'installation : décision du propriétaire";
+    static final String BINDING_TAKEN_OVER = "BINDING_TAKEN_OVER";
     static final String CATCHUP_HELD_TEXT = "Jetons de votre activation en vérification";
 
     private final DeviceService devices;
@@ -57,11 +59,12 @@ public class WalletSyncController {
     private final WalletModuleConfig.WalletClock clock;
     private final ObjectProvider<SyncContributor> contributors;
     private final ObjectProvider<ReportedActivationRegistrar> registrar;
+    private final AdminAccess access;
     @Value("${castbridge.wallet.require-bind-proof:true}") private boolean requireBindProof;
 
     public WalletSyncController(DeviceService devices, EditionReader reader, GrantService grants, JdbcLedger ledger, WalletRepository repo, WalletPolicyService policies,
                                 SnapshotSigner signer, WalletModuleConfig.WalletClock clock, ObjectProvider<SyncContributor> contributors,
-                                ObjectProvider<ReportedActivationRegistrar> registrar) {
+                                ObjectProvider<ReportedActivationRegistrar> registrar, AdminAccess access) {
         this.devices = devices;
         this.reader = reader;
         this.grants = grants;
@@ -72,6 +75,7 @@ public class WalletSyncController {
         this.clock = clock;
         this.contributors = contributors;
         this.registrar = registrar;
+        this.access = access;
     }
 
     /** Authentifie l'appareil (401), exige la clé « portefeuille » (503) : partagé par les routes de l'appareil. */
@@ -108,13 +112,26 @@ public class WalletSyncController {
         if (accepted) {
             // liaison à l'appareil : preuve de possession de la clé d'installation (audit M5) ; une identité libérée par l'administrateur se lie au premier appareil qui prouve
             WalletRepository.Identity known = repo.identity(code).orElse(null);
+            // une activation signée avec `ik`, PROUVÉE par la TV qui détient cette clé, l'emporte sur une liaison prise par un autre appareil ou une autre clé (voleur avec un jeton sans `ik`) :
+            // l'identité revient à la vraie TV, auditée, alerte douce au propriétaire, aucun paiement perdu (second audit w23-05, HIGH-A)
+            if (known != null && proven && reading.installKeys().contains(proof.key()) && repo.takeOver(code, d.id, proof.key())) {
+                access.system("WALLET_REBIND_BY_IK", code, "activation signée avec la clé d'installation de cette TV, prouvée", Map.of("fromDevice", known.apiDeviceId(), "toDevice", d.id));
+                access.system("REGISTRATION_ALERT", code, BINDING_TAKEN_OVER, Map.of("level", "soft", "device", DeviceIdentity.masked(code)));
+                log.warn("wallet : liaison reprise par l'activation signée de la vraie TV ({})", DeviceIdentity.masked(code));
+                known = repo.identity(code).orElse(null);
+            }
             if (known == null || known.apiDeviceId() == 0) {
                 if (requireBindProof && !proven) throw bindProofRequired();
+                // identité réaffectée par le propriétaire : elle n'accepte QUE la clé d'installation dont il a saisi l'empreinte (lue sur l'écran de la TV) ; ni le premier appareil venu, ni un voleur
+                if (known != null && known.expectedInstallFp() != null && !(proven && known.expectedInstallFp().equals(InstallKeyFingerprint.canonicalOf(proof.key())))) throw bindKeyExpected();
             } else if (known.apiDeviceId() == d.id) {
                 if (known.installPub() != null ? !proven || !proof.key().equals(known.installPub()) : requireBindProof && !proven) throw bindProofRequired();
             }
             policies.checkWrite(code);
             if (known != null && known.apiDeviceId() == 0 && (proven || !requireBindProof)) repo.bindIfFree(code, d.id);
+            // la clé d'installation est retenue AVANT le calcul des tranches : une licence enregistrée avec `ik` ne paie que l'identité dont la clé est celle-ci
+            if (known == null && (proven || !requireBindProof)) repo.openIdentity(code, d.id, now);
+            if (proven) repo.adoptInstallKey(code, d.id, proof.key());
             // une activation de production vérifiée, présentée avec la preuve de possession, ouvre (ou rattache) la licence et le poste AVANT le calcul des tranches (W23-05a) ; jamais sans preuve
             ReportedActivationRegistrar reg = registrar.getIfAvailable();
             if (reg != null && reading.productionKey()) {
@@ -123,7 +140,6 @@ public class WalletSyncController {
                 registrations = reg.registerAll(items, ReportedActivationRegistrar.Via.WALLET, now);
             }
             GrantService.Outcome o = grants.sync(code, d.id, reading, now);
-            if (proven) repo.adoptInstallKey(code, d.id, proof.key());
             st = o.standing();
             boundOther = o.boundOther();
             held = o.held();
@@ -231,6 +247,10 @@ public class WalletSyncController {
             out.add(a);
         }
         return out;
+    }
+
+    private static ApiException bindKeyExpected() {
+        return new ApiException(HttpStatus.CONFLICT, "Compte réaffecté : seule la TV dont l'empreinte de clé d'installation a été saisie par le propriétaire peut le reprendre", List.of("BIND_EXPECTED"));
     }
 
     private static ApiException bindProofRequired() {

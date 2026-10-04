@@ -32,6 +32,11 @@ public class AdminAccess {
     /** L'administrateur nommé, ou 403 : compte inconnu, rôle autre que propriétaire, TOTP non activé, code faux ou déjà utilisé. Le code accepté est consommé. */
     public Actor verify(String user, String totp) { return accounts.verifyNamedAdmin(user, totp); }   // même mécanisme que la décision sur une activation notifiée (module des licences)
 
+    private static final Actor SYSTEM = new Actor("wallet-sync", Role.OWNER, "system", true);
+
+    /** Inscrit une action du SERVEUR (aucun administrateur : liaison reprise par une activation prouvée, alerte douce) au journal d'audit chaîné, sous l'acteur « wallet-sync ». */
+    public void system(String action, String identity, String reason, Map<String, ?> details) { record(SYSTEM, action, identity, reason, details); }
+
     /** Inscrit l'action au journal d'audit chaîné (aucune clé, aucun jeton : identité, monnaie, montant, motif). */
     public void record(Actor actor, String action, String identity, String reason, Map<String, ?> details) {
         tx.executeWithoutResult(s -> audit.record(actor, action, "WALLET", identity, reason, details));

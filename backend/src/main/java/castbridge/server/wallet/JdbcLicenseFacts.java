@@ -80,6 +80,18 @@ public class JdbcLicenseFacts implements LicenseFacts {
     }
 
     @Override
+    public Set<String> installKeys(String licenseId) {
+        if (!licensesEnabled) return Set.of();
+        try {
+            return new HashSet<>(jdbc.queryForList("SELECT DISTINCT install_pub FROM lic_registration WHERE license_id = ? AND ik_signed = TRUE AND status IN ('REGISTERED', 'ATTACHED') AND install_pub IS NOT NULL",
+                    String.class, licenseId));
+        } catch (DataAccessException e) {
+            log.warn("wallet : clés d'installation de licence illisibles ({}) : aucune restriction appliquée", e.getClass().getSimpleName());
+            return Set.of();
+        }
+    }
+
+    @Override
     public List<Window> windows(String licenseId) {
         if (!licensesEnabled) return null;
         try {

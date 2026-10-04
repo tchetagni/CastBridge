@@ -562,17 +562,7 @@ public class ReportedActivationRegistrar {
     }
 
     /** L'empreinte lisible d'une clé publique d'installation (base64 brute) : SHA-256, 16 premiers octets, 8 groupes de 4 hexadécimaux séparés par « - » (celle de l'écran de la TV). */
-    public static String installKeyFingerprint(String publicKeyBase64) {
-        if (publicKeyBase64 == null) return null;
-        try {
-            String hex = java.util.HexFormat.of().formatHex(Hashing.sha256(Base64.getDecoder().decode(publicKeyBase64.trim())), 0, 16);
-            StringBuilder b = new StringBuilder();
-            for (int i = 0; i < hex.length(); i += 4) b.append(i == 0 ? "" : "-").append(hex, i, i + 4);
-            return b.toString();
-        } catch (IllegalArgumentException e) {
-            return null;
-        }
-    }
+    public static String installKeyFingerprint(String publicKeyBase64) { return InstallKeyFingerprint.ofBase64(publicKeyBase64); }
 
     /**
      * Décision du propriétaire (compte nommé, TOTP, motif) sur une ligne en attente : accepter DÉCLARE l'émission (lève la fenêtre d'installation, le plafond journalier, les retenues de

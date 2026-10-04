@@ -23,7 +23,7 @@ public class WalletRepository {
 
     // ---- identités ----
 
-    public record Identity(String holder, long apiDeviceId, Instant anchorAt, boolean openedUnlimited, String edition, Instant lastSyncAt, boolean frozen, String frozenReason, String installPub, boolean superKey, Instant trialEndAt) {}
+    public record Identity(String holder, long apiDeviceId, Instant anchorAt, boolean openedUnlimited, String edition, Instant lastSyncAt, boolean frozen, String frozenReason, String installPub, boolean superKey, Instant trialEndAt, String expectedInstallFp) {}
 
     private static Instant instant(java.sql.ResultSet rs, String col) throws java.sql.SQLException {
         Timestamp t = rs.getTimestamp(col);
@@ -31,9 +31,9 @@ public class WalletRepository {
     }
 
     public Optional<Identity> identity(String holder) {
-        return jdbc.query("SELECT holder, api_device_id, anchor_at, opened_unlimited, edition, last_sync_at, frozen, frozen_reason, install_pub, super_key, trial_end_at FROM wallet_identity WHERE holder = ?",
+        return jdbc.query("SELECT holder, api_device_id, anchor_at, opened_unlimited, edition, last_sync_at, frozen, frozen_reason, install_pub, super_key, trial_end_at, expected_install_fp FROM wallet_identity WHERE holder = ?",
                 (rs, i) -> new Identity(rs.getString("holder"), rs.getLong("api_device_id"), instant(rs, "anchor_at"), rs.getBoolean("opened_unlimited"), rs.getString("edition"),
-                        instant(rs, "last_sync_at"), rs.getBoolean("frozen"), rs.getString("frozen_reason"), rs.getString("install_pub"), rs.getBoolean("super_key"), instant(rs, "trial_end_at")), holder).stream().findFirst();
+                        instant(rs, "last_sync_at"), rs.getBoolean("frozen"), rs.getString("frozen_reason"), rs.getString("install_pub"), rs.getBoolean("super_key"), instant(rs, "trial_end_at"), rs.getString("expected_install_fp")), holder).stream().findFirst();
     }
 
     /** L'identité (la plus récemment ouverte) liée à cet appareil API, s'il en a une. */
@@ -78,14 +78,31 @@ public class WalletRepository {
      * Réaffectation (administrateur) : l'identité n'est plus liée à aucun appareil ({@code api_device_id = 0}) et perd sa clé d'installation ; le prochain appareil qui prouve la possession la lie.
      * Rend vrai si l'identité existe.
      */
-    public boolean clearBinding(String holder) { return jdbc.update("UPDATE wallet_identity SET api_device_id = 0, install_pub = NULL WHERE holder = ?", holder) == 1; }
+    public boolean clearBinding(String holder) { return jdbc.update("UPDATE wallet_identity SET api_device_id = 0, install_pub = NULL, expected_install_fp = NULL WHERE holder = ?", holder) == 1; }
+
+    /**
+     * Réaffectation par le propriétaire (second audit w23-05, HIGH-A) : l'identité est libérée ET n'accepte plus que la clé d'installation dont l'EMPREINTE canonique (32 hexadécimaux, lue sur l'écran de la
+     * TV) est {@code expectedFp} ; le premier appareil qui arrive avec une autre clé est refusé. Rend vrai si l'identité existe.
+     */
+    public boolean rebindExpecting(String holder, String expectedFp) {
+        return jdbc.update("UPDATE wallet_identity SET api_device_id = 0, install_pub = NULL, expected_install_fp = ? WHERE holder = ?", expectedFp, holder) == 1;
+    }
+
+    /**
+     * Une activation signée avec {@code ik}, PROUVÉE par la TV qui détient cette clé, l'emporte sur une liaison prise par un autre appareil ou une autre clé : l'identité est liée à cet appareil et à cette clé
+     * (l'attente de la réaffectation, devenue sans objet, est levée). Rend vrai si CET appel a changé la liaison (une seule fois, même sous concurrence).
+     */
+    public boolean takeOver(String holder, long apiDeviceId, String installPub) {
+        return jdbc.update("UPDATE wallet_identity SET api_device_id = ?, install_pub = ?, expected_install_fp = NULL WHERE holder = ? AND api_device_id <> 0 "
+                + "AND (api_device_id <> ? OR install_pub IS NULL OR install_pub <> ?)", apiDeviceId, installPub, holder, apiDeviceId, installPub) == 1;
+    }
 
     /** Lie une identité libérée ({@code api_device_id = 0}) à cet appareil : le premier qui arrive l'emporte ; vrai si CET appel a lié. */
     public boolean bindIfFree(String holder, long apiDeviceId) { return jdbc.update("UPDATE wallet_identity SET api_device_id = ? WHERE holder = ? AND api_device_id = 0", apiDeviceId, holder) == 1; }
 
     /** Retient la clé d'installation de la TV liée à CET appareil si elle n'en a pas encore (jamais remplacée sans réaffectation). */
     public void adoptInstallKey(String holder, long apiDeviceId, String installPub) {
-        jdbc.update("UPDATE wallet_identity SET install_pub = ? WHERE holder = ? AND api_device_id = ? AND install_pub IS NULL", installPub, holder, apiDeviceId);
+        jdbc.update("UPDATE wallet_identity SET install_pub = ?, expected_install_fp = NULL WHERE holder = ? AND api_device_id = ? AND install_pub IS NULL", installPub, holder, apiDeviceId);
     }
 
     /**

@@ -58,7 +58,10 @@ class ActivationsOffTest extends ApiTestBase {
             // changed with the w23-05 audit corrections: V65 (registration_hardening: licences and wallet tables, columns of lic_registration) is the next number; this module adds nothing above V63 itself
             assertEquals(1, names.stream().filter(n -> n.startsWith("V65__")).count());
             assertTrue(names.contains("V65__registration_hardening.sql"));
-            assertEquals(0, names.stream().filter(n -> n.matches("V6[6-9]__.*")).count(), "V66 and above are not this module's");
+            // changed with the second w23-05 audit (HIGH-A): V66 (install_key_binding: wallet_identity.expected_install_fp) is the next number; nothing above it
+            assertEquals(1, names.stream().filter(n -> n.startsWith("V66__")).count());
+            assertTrue(names.contains("V66__install_key_binding.sql"));
+            assertEquals(0, names.stream().filter(n -> n.matches("V6[7-9]__.*")).count(), "V67 and above are not this module's");
         }
     }
 }

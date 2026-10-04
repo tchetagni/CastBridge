@@ -142,17 +142,17 @@ public class LicenseAccounts {
 
     /**
      * Login check, called by the authentication provider after the password: true when no TOTP is enrolled, or when the code is
-     * right and not yet used (replay refused). Each accepted code is single-use.
+     * right and not yet used (replay refused). Each accepted code is single-use, ATOMICALLY: the last used step is advanced by one conditional
+     * {@code UPDATE ... WHERE totp_last_step IS NULL OR totp_last_step < ?} and the code is accepted only when that statement changed the row. This does not depend on a
+     * Spring proxy, on a surrounding transaction or on a row lock (second audit w23-05 MEDIUM-B: a self-invocation had dropped the lock, one code was accepted 7 times in 8).
      */
-    @Transactional
     public boolean checkLoginCode(String username, String code) {
-        List<Map<String, Object>> r = jdbc.queryForList("SELECT totp_enabled, totp_secret_enc, totp_last_step FROM admin_user WHERE username = ? FOR UPDATE", username);
+        List<Map<String, Object>> r = jdbc.queryForList("SELECT totp_enabled, totp_secret_enc, totp_last_step FROM admin_user WHERE username = ?", username);
         if (r.isEmpty() || !Boolean.TRUE.equals(r.get(0).get("totp_enabled"))) return true;
         if (!vault.available() || r.get(0).get("totp_secret_enc") == null) return false; // enrolled but unreadable: closed, not open
         Number last = (Number) r.get(0).get("totp_last_step");
         long step = Totp.verify(vault.open((String) r.get(0).get("totp_secret_enc")), code, Totp.stepAt(Instant.now().getEpochSecond()), last == null ? null : last.longValue());
         if (step < 0) return false;
-        jdbc.update("UPDATE admin_user SET totp_last_step = ? WHERE username = ?", step, username);
-        return true;
+        return jdbc.update("UPDATE admin_user SET totp_last_step = ? WHERE username = ? AND (totp_last_step IS NULL OR totp_last_step < ?)", step, username, step) == 1;
     }
 }
