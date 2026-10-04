@@ -130,6 +130,15 @@ Protocole et règles de sécurité vérifiés en JVM (`CT/cast/dial/DialRulesTes
 |---|---|---|---|---|---|---|---|---|
 | **P-61** | **Diffuser une vidéo YouTube vers la TV** | TV de référence avec YouTube TV installée, réglage « Diffusion YouTube vers cette TV (DIAL) » sur oui ; téléphone et TV sur le même Wi-Fi, avec Internet | YouTube sur le téléphone, vidéo, icône de diffusion, choisir « CastBridge-TV xxxx » ; changer de vidéo ; déconnecter ; désactiver le réglage | la TV est listée ; la vidéo se connecte ; après désactivation elle n'est plus listée | YouTube TV s'ouvre et joue ; déconnexion : retour à CastBridge-TV ; un navigateur du LAN (`Origin` quelconque) ou un hôte extérieur ne peut rien lancer ; plus de 6 lancements par minute : refusés | S3 | JVM (`DialRulesTest`, `DialHttpServerTest`, `SsdpServerTest`), H (découverte et lancement réels) | — |
 
+## J. Accueil en groupes de CastBridge-TV (2026-10-04, `docs/TV-ACCUEIL.md`)
+
+Logique vérifiée en JVM (`CT/tv/home/HomeGroupsTest.kt` : groupes, rattachement des tuiles par identifiant (dont un test qui relit les `tile("…")` de `R/PlayerActivity.kt`), tuiles masquées, raccourci d'un seul outil, grille 3 colonnes, bords, machine ouvrir / fermer). Le dessin (`R/HomeGroupViews.kt`, `R/HomeScreen.kt`) n'est vérifié que par compilation : seule une vraie TV confirme lisibilité à 3 m, focus et RETOUR.
+
+| id | Parcours | Préconditions | Étapes | Attendu — téléphone | Attendu — TV | Gravité | Où | Régression |
+|---|---|---|---|---|---|---|---|---|
+| **P-62** | **Accueil en groupes : ouvrir une grille, lancer un outil, revenir** | TV activée, accueil affiché | Sélectionner « Médias » (OK) ; flèches dans la grille ; OK sur « Téléchargements » ; RETOUR (écran de l'outil) ; RETOUR (grille) | — | l'accueil montre « Bibliothèque » puis 5 boutons de groupe (Médias, Apprendre, Jeux et jetons, Téléphones et réseau, Administration) avec nom, icône et résumé ; la grille a 3 colonnes, chaque tuile a icône ET nom, texte lisible à 3 m ; le focus ne sort jamais de la grille ; l'outil se lance comme avant ; RETOUR de la grille rend le focus au bouton « Médias » | S2 | JVM (`HomeGroupsTest`), H (dessin, focus, lisibilité) | — |
+| **P-63** | **Accueil en groupes : tuiles masquées et profil enfant** | profil enfant actif (`ParentalHub`), ou version d'essai | Ouvrir l'accueil ; ouvrir chaque groupe visible | — | seules les tuiles autorisées existent ; un groupe sans tuile visible n'apparaît pas ; un groupe à une seule tuile ouvre cette tuile directement | S2 | JVM (`HomeGroupsTest`), H | — |
+
 ## Répartition
 
 | Où | Parcours couverts (au moins une colonne) | Nombre |

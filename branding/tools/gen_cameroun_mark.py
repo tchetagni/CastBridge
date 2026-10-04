@@ -223,7 +223,17 @@ def write_logos():
         svg = apply_wordmark(svg, name, mode)
         svg = fix_viewbox(svg, name)
         open(p, "w", encoding="utf-8").write(svg)
+    write_tv_compact()
     write_admin_assets()
+
+
+def write_tv_compact():
+    """Variante SANS sous-titre du logo TV horizontal, pour l'accueil de la TV (hauteur <= 60 dp, vue à 3 m) :
+    le sous-titre MBOKO y serait de ~6 dp, illisible. Le mot-symbole descend pour rester centré sur la marque."""
+    src = open(os.path.join(LOGO, "castbridge-tv-horizontal.svg"), encoding="utf-8").read()
+    svg = re.sub(r'\n[ \t]*<text[^>]*letter-spacing[^>]*>[^<]*</text>', "", src, count=1)     # le sous-titre est la seule ligne interlettrée
+    svg = svg.replace('<text x="188" y="84"', '<text x="188" y="96"').replace("CastBridge TV horizontal", "CastBridge TV horizontal compact")
+    open(os.path.join(LOGO, "castbridge-tv-horizontal-compact.svg"), "w", encoding="utf-8").write(svg)
 
 
 def write_admin_assets():
