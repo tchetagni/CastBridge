@@ -7,13 +7,13 @@ La taille réelle de la dalle (surface vidéo, sinon `DisplayMetrics`) est lue �
 
 | Mode | Libellé | Effet |
 |---|---|---|
-| FIT (défaut) | Ajusté à l'écran | le plus grand possible, proportions vraies ; 16:9 sur 16:9 = plein écran sans bande ni rognage ; 4:3 = bandes à gauche et à droite ; 2,39:1 = bandes fines en haut et en bas |
-| FILL | Remplir l'écran | couvre la dalle, rogne le surplus au centre, jamais étiré |
+| FILL (défaut depuis la 0.14.29) | Remplir l'écran | couvre toute la dalle, rogne le surplus au centre, jamais étiré ; 16:9 sur 16:9 = plein écran sans rognage ; 4:3 = rogné en haut et en bas (25 % de la hauteur) ; 2,39:1 = rogné sur les côtés (décision du propriétaire du 2026-10-04 : « écran entièrement rempli ») |
+| FIT | Ajusté à l'écran | le plus grand possible, proportions vraies, image entière : 4:3 = bandes à gauche et à droite ; 2,39:1 = bandes fines en haut et en bas (c'était le défaut de la 0.14.28, identique au comportement natif de libVLC : rien de visible hors 16:9 exact) |
 | STRETCH | Étirer | remplit la dalle sans respecter le format : déforme (dit à l'écran) |
 | NATIVE | Natif | taille native 1:1 centrée, sans mise à l'échelle ; plus grande que la dalle : réduite seulement pour tenir ; aucun filtre |
 
 - Le format de pixel de la piste (SAR) et la rotation sont honorés (AVI anamorphique non écrasé, vidéo de téléphone en portrait). Deux formats à moins de 0,5 % l'un de l'autre sont tenus pour identiques (853x480 remplit 16:9 sans bande d'un pixel).
-- Réglages : `MENU > Affichage` (par fichier : « Comme le réglage par défaut » ou un mode, mémorisé comme les pistes et les décalages, clé `fm=`) et `Affichage par défaut` (global, préférence `video_fit`, « Ajusté à l'écran » au départ). L'ancien menu « Format d'image » (16:9, 4:3, rogner...) reste et, tant qu'il n'est pas sur « Automatique », reste prioritaire ; choisir un mode d'Affichage le remet sur « Automatique ».
+- Réglages : `MENU > Affichage` (par fichier : « Comme le réglage par défaut » ou un mode, mémorisé comme les pistes et les décalages, clé `fm=`) et `Affichage par défaut` (global, préférence `video_fit`, « Remplir l'écran » au départ ; le réglage global n'est mémorisé qu'après un choix explicite, marque `video_fit_set=1` : sans marque, une valeur « fit » écrite par une ancienne version suit le nouveau défaut). L'ancien menu « Format d'image » (16:9, 4:3, rogner...) reste et, tant qu'il n'est pas sur « Automatique », reste prioritaire ; choisir un mode d'Affichage le remet sur « Automatique ».
 - Effet immédiat (appels libVLC `setVideoScale`/`setAspectRatio`), rejoué à chaque événement `Vout` et à chaque changement de taille de la surface. Seul le passage vers ou depuis « Natif » relit le fichier à la même position (les options de qualité sont des options de média).
 - INFO : « Affichage : Ajusté à l'écran 1920×1080 → 1280×720 ».
 
@@ -28,3 +28,7 @@ La taille réelle de la dalle (surface vidéo, sinon `DisplayMetrics`) est lue �
 - Que `:deinterlace=` / `:deinterlace-mode=` / `:swscale-mode=` soient pris en compte comme options de média, et que le désentrelacement s'applique sur une surface MediaCodec opaque (probablement pas : indiqué dans INFO).
 - 10 bits / HDR : libVLC 3.6 pour Android n'a pas de tone mapping ; l'image dépend du décodeur et de la TV (dit dans INFO si connu ; l'indicateur n'est pas lisible, donc jamais affirmé).
 - Aucune amélioration « magique » (netteté, réduction de bruit) : ajouter un filtre coûte du processeur sur les TV faibles et fausse le « natif ».
+
+
+## Diagnostic (0.14.29)
+La touche INFO du lecteur affiche : « Affichage : <mode> (par défaut) · source WxH SAR n:d · dalle WxH · image WxH », avec l'origine du mode (défaut, réglage global ou réglage du fichier) ; « image non appliquée » si aucune mise à l'échelle n'a été faite. L'ajustement est réessayé aux événements ESAdded, ESSelected et TimeChanged tant que la piste vidéo n'est pas connue.
