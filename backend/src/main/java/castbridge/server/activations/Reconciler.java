@@ -75,9 +75,11 @@ public class Reconciler {
     private final TrustedKeys trusted;
     private final LicenseKeyring keyring;
     private final ActivationsProperties props;
+    private final org.springframework.transaction.support.TransactionTemplate tx;
 
     public Reconciler(JdbcTemplate jdbc, ActClock clock, ActivationsPolicy policy, AlertService alerts, Inventory inventory, EventLog eventLog, TrustedKeys trusted, LicenseKeyring keyring,
-                      ActivationsProperties props) {
+                      ActivationsProperties props, org.springframework.transaction.support.TransactionTemplate tx) {
+        this.tx = tx;
         this.jdbc = jdbc;
         this.clock = clock;
         this.policy = policy;
@@ -100,23 +102,63 @@ public class Reconciler {
         }
     }
 
-    /** Everything: states first (time passes: a window closes, a usage ceiling ends), then the conditions. */
-    @Transactional
+    /** Rows per transaction in the nightly job (audit M2): the head lock of the chain, taken by the first event of a transaction, is held until it ends. */
+    static final int BATCH = 200;
+
+    /**
+     * Everything: states first (what time changed: a window closed, a usage ceiling ended), then the conditions. Audit M2: NOT one long transaction (its first event would take
+     * the head lock of the chain for the whole job, and every report and journal would wait with a pooled connection open): one transaction per batch of {@link #BATCH}, the
+     * states found by targeted indexed queries. Idempotent: a run interrupted half way is finished by the next one.
+     */
     public Summary reconcileAll() {
+        Instant now = clock.now();
+        refreshWhere("state = 'EMISE' AND expires_at < ?", Timestamp.from(now));          // window closed: EXPIRED_UNUSED (or seen meanwhile)
+        refreshWhere("state = 'ACTIVATED' AND usage_to < ?", Timestamp.from(now));        // usage ceiling over: ENDED
+        Summary s = syncInBatches();
+        tx.executeWithoutResult(st -> {
+            jdbc.update("UPDATE act_tv SET alerts_open = (SELECT COUNT(*) FROM act_alert a WHERE a.tv_ref = act_tv.tv_ref AND a.state <> 'CLOSED')");
+            jdbc.update("UPDATE act_tv SET reco = CASE WHEN last_report_at IS NULL AND last_bt_at IS NULL THEN 'NEVER' WHEN alerts_open > 0 THEN 'GAP' ELSE 'OK' END");
+            eventLog.append(new EventLog.NewEvent("RECONCILED", now.toEpochMilli(), null, null, null, null, "JOB", "reconciler", "RECONCILE", null,
+                    "{\"conditions\":" + s.conditions() + ",\"closed\":" + s.closed() + "}", "R:" + now.atZone(ZoneOffset.UTC).toLocalDate()));
+        });
+        return s;
+    }
+
+    private void refreshWhere(String where, Object arg) {
         String after = "";
         while (true) {
-            List<String> fps = jdbc.queryForList("SELECT fp FROM act_key WHERE state IN ('EMISE','EXPIRED_UNUSED','ACTIVATED') AND fp > ? ORDER BY fp LIMIT 1000", String.class, after);
+            final String from = after;
+            List<String> fps = jdbc.queryForList("SELECT fp FROM act_key WHERE " + where + " AND fp > ? ORDER BY fp LIMIT " + BATCH, String.class, arg, from);
             if (fps.isEmpty()) break;
-            for (String fp : fps) inventory.refreshState(fp);
+            tx.executeWithoutResult(st -> fps.forEach(inventory::refreshState));
             after = fps.get(fps.size() - 1);
         }
-        Summary s = sync(Scope.all());
-        jdbc.update("UPDATE act_tv SET alerts_open = (SELECT COUNT(*) FROM act_alert a WHERE a.tv_ref = act_tv.tv_ref AND a.state <> 'CLOSED')");
-        jdbc.update("UPDATE act_tv SET reco = CASE WHEN last_report_at IS NULL AND last_bt_at IS NULL THEN 'NEVER' WHEN alerts_open > 0 THEN 'GAP' ELSE 'OK' END");
+    }
+
+    /** The conditions are computed once, then raised and the stale alerts closed batch by batch (each batch its own transaction). */
+    private Summary syncInBatches() {
         Instant now = clock.now();
-        eventLog.append(new EventLog.NewEvent("RECONCILED", now.toEpochMilli(), null, null, null, null, "JOB", "reconciler", "RECONCILE", null,
-                "{\"conditions\":" + s.conditions() + ",\"closed\":" + s.closed() + "}", "R:" + now.atZone(ZoneOffset.UTC).toLocalDate()));
-        return s;
+        List<Cond> conds = conditions(Scope.all(), now);
+        Set<String> keys = new HashSet<>();
+        for (int i = 0; i < conds.size(); i += BATCH) {
+            List<Cond> part = conds.subList(i, Math.min(conds.size(), i + BATCH));
+            tx.executeWithoutResult(st -> part.forEach(c -> alerts.raise(c.type(), c.fp(), c.tvRef(), c.kid(), c.license(), c.detail(), c.evidence())));
+        }
+        conds.forEach(c -> keys.add(c.key()));
+        int[] closed = {0};
+        for (Type t : DIMS.keySet()) {
+            List<Long> stale = new ArrayList<>();
+            for (Map<String, Object> a : jdbc.queryForList("SELECT * FROM act_alert WHERE state <> 'CLOSED' AND type = ?", t.name())) {
+                String k = AlertService.openKey(t, (String) a.get("fp"), (String) a.get("tv_ref"), (String) a.get("kid"), (String) a.get("license_id"));
+                if (!keys.contains(k)) stale.add(((Number) a.get("id")).longValue());
+            }
+            for (int i = 0; i < stale.size(); i += BATCH) {
+                List<Long> part = stale.subList(i, Math.min(stale.size(), i + BATCH));
+                tx.executeWithoutResult(st -> part.forEach(id -> alerts.closeAuto(id, "La condition n'est plus réunie")));
+                closed[0] += part.size();
+            }
+        }
+        return new Summary(conds.size(), closed[0]);
     }
 
     /** The objects an arrival touched. */

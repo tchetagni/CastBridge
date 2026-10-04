@@ -86,6 +86,9 @@ CREATE TABLE act_key (
     revoked_at       DATETIME(6) NULL
 );
 CREATE INDEX ix_act_key_state ON act_key (state, issued_at);
+-- la réconciliation nocturne ne cherche que ce que le temps a fait changer (audit M2) : fenêtres closes, plafonds d'usage échus
+CREATE INDEX ix_act_key_state_exp ON act_key (state, expires_at);
+CREATE INDEX ix_act_key_state_usage ON act_key (state, usage_to);
 CREATE INDEX ix_act_key_issued ON act_key (issued_at, fp);
 CREATE INDEX ix_act_key_seen ON act_key (last_seen_tv_at, fp);
 CREATE INDEX ix_act_key_tv ON act_key (tv_ref);
