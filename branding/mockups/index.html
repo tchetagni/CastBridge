@@ -10,7 +10,7 @@
   :root {
     --bg:#0A0F1E; --surface:#151D37; --surface2:#1B2542; --gold:#F5B025; --goldL:#FFE1A6;
     --green:#2E9E6B; --orange:#FF8A3D; --txt:#F4F6FB; --txt2:#B7C0D4; --txt3:#6E7A93;
-    --ok:#35C08A; --warn:#F5B025; --err:#FF6B6B; --info:#6CB6FF; --coral:#FF5C39; --amber:#FFB020;
+    --ok:#35C08A; --warn:#F5B025; --err:#FF6B6B; --info:#6CB6FF; --off:#000000; --offRing:#B7C0D4; --unknown:#9AA5BD; --coral:#FF5C39; --amber:#FFB020;
   }
   * { box-sizing: border-box; }
   body { margin:0; background:#070B16; color:var(--txt); font-family:"Inter",system-ui,sans-serif; }
@@ -38,6 +38,13 @@
   .chip { background:var(--surface2); border-radius:999px; color:var(--txt); }
   .ico { display:inline-flex; width:40px; height:40px; border-radius:10px; background:var(--surface2); align-items:center; justify-content:center; font-size:20px; }
   .label { color:var(--txt2); }
+  /* pastilles d'état à couleurs signalétiques (charte v1.2) : anneau 3 dp ; noir = fond noir + anneau clair + icône à 60 % ; jamais la couleur seule */
+  .sig { display:inline-flex; align-items:center; gap:14px; border-radius:999px; background:var(--surface); border:3px solid var(--ring); padding:10px 22px; font-size:26px; color:var(--txt); }
+  .sig b { font-weight:700; } .sig i { width:14px; height:14px; border-radius:50%; background:var(--ring); display:inline-block; }
+  .sig.off { background:var(--off); --ring:var(--offRing); } .sig.off .gl { opacity:.6; }
+  .sig.ok { --ring:var(--ok); } .sig.warn { --ring:var(--warn); } .sig.err { --ring:var(--err); } .sig.busy { --ring:var(--info); } .sig.unk { --ring:var(--unknown); }
+  .grp { background:var(--surface); border-radius:16px; padding:22px 26px; width:340px; } .grp b { display:block; font-size:30px; } .grp span { color:var(--txt2); font-size:24px; }
+  .tile { background:var(--surface); border-radius:16px; width:300px; height:210px; display:flex; flex-direction:column; align-items:center; justify-content:center; gap:14px; font-size:28px; font-weight:700; } .tile .gl { font-size:64px; }
 </style>
 </head>
 <body>
@@ -49,24 +56,23 @@
 
   <div class="group">TV — Accueil (lanceur multimédia)</div>
   <div class="row">
-    <div class="cell"><span class="cap">Accueil — rangée d'outils + rangées de vidéos, focus visible</span>
+    <div class="cell"><span class="cap">Accueil — logo compact (sans MBOKO), pastilles d'état, 5 boutons de groupe, focus visible</span>
       <div class="frame tvframe"><div class="tv" style="padding:48px 72px;">
         <div style="display:flex;align-items:center;gap:28px;">
-          <div style="font-family:'Bricolage Grotesque';font-size:44px;">CastBridge</div>
-          <div style="color:var(--txt3);font-size:26px;">20:42 · Connexion OK</div>
-          <div style="margin-left:auto;display:flex;gap:18px;">
-            <span class="chip" style="padding:12px 24px;font-size:24px;">🔍 Rechercher</span>
-            <span class="chip" style="padding:12px 24px;font-size:24px;">⚙ Réglages</span>
+          <img src="../logo/castbridge-tv-horizontal-compact.svg" alt="CastBridge TV" style="height:56px;">
+          <div style="color:var(--txt3);font-size:26px;">20:42</div>
+          <div style="margin-left:auto;display:flex;gap:14px;">
+            <span class="sig ok" style="padding:6px 18px;font-size:24px;"><span class="gl">📶</span><b>Wi-Fi</b> · connecté<i></i></span>
+            <span class="sig warn" style="padding:6px 18px;font-size:24px;"><span class="gl">🔌</span><b>Stockage</b> · 12 % libre<i></i></span>
+            <span class="sig off" style="padding:6px 18px;font-size:24px;"><span class="gl">🅱</span><b>Bluetooth</b> · désactivé<i></i></span>
           </div>
         </div>
         <div style="display:flex;gap:20px;margin:34px 0 34px;">
-          <div class="chip" style="padding:20px 30px;font-size:26px;">📺 CastBridge TV</div>
-          <div class="chip" style="padding:20px 30px;font-size:26px;">❓ Quiz</div>
-          <div class="chip" style="padding:20px 30px;font-size:26px;">♞ Échecs</div>
-          <div class="chip focus" style="padding:20px 30px;font-size:26px;">📂 Bibliothèque</div>
-          <div class="chip" style="padding:20px 30px;font-size:26px;">📡 Tester Internet</div>
-          <div class="chip" style="padding:20px 30px;font-size:26px;">🔌 Clé USB</div>
-          <div class="chip" style="padding:20px 30px;font-size:26px;">🅱 Bluetooth</div>
+          <div class="grp focus"><b>📂 Médias</b><span>4 outils</span></div>
+          <div class="grp"><b>🎓 Apprendre</b><span>2 outils</span></div>
+          <div class="grp"><b>❓ Jeux et jetons</b><span>3 outils · 1 actif</span></div>
+          <div class="grp"><b>📡 Téléphones et réseau</b><span>6 outils · à vérifier</span></div>
+          <div class="grp"><b>⚙ Administration</b><span>6 outils</span></div>
         </div>
         <div style="font-family:'Bricolage Grotesque';font-size:32px;margin-bottom:18px;">Reprendre la lecture</div>
         <div style="display:flex;gap:24px;">
@@ -199,6 +205,30 @@
             <div style="height:70px;background:#0C1B14"></div><div style="height:70px;background:#2FA96B"></div><div style="height:70px;background:#0C1B14"></div><div style="height:70px;background:#2FA96B"></div><div style="height:70px;background:#0C1B14"></div><div style="height:70px;background:#2FA96B"></div><div style="height:70px;background:#0C1B14"></div><div style="height:70px;background:#2FA96B"></div>
           </div>
           <div style="font-size:26px;color:var(--txt2);line-height:2;">Tour : Blancs<br>Chrono : 09:41<br>Coups : 12</div>
+        </div>
+      </div></div>
+    </div>
+    <div class="cell"><span class="cap">Grille du groupe « Médias » — 3 colonnes, grande icône + nom, focus #FFE1A6 3 dp, échelle 1,04</span>
+      <div class="frame tvframe"><div class="tv" style="padding:60px 90px;">
+        <div style="font-family:'Bricolage Grotesque';font-size:44px;margin-bottom:34px;">Médias</div>
+        <div style="display:flex;flex-wrap:wrap;gap:30px;width:1000px;">
+          <div class="tile"><span class="gl">📚</span>Bibliothèque</div>
+          <div class="tile focus"><span class="gl">⬇</span>Téléchargements</div>
+          <div class="tile"><span class="gl">🔌</span>Clé USB</div>
+          <div class="tile"><span class="gl">📲</span>Recevoir du téléphone</div>
+        </div>
+      </div></div>
+    </div>
+    <div class="cell"><span class="cap">Pastilles d'état : noir, vert, orange, rouge, bleu, gris (icône + libellé + mot d'état)</span>
+      <div class="frame tvframe"><div class="tv" style="padding:70px;">
+        <div style="font-family:'Bricolage Grotesque';font-size:40px;margin-bottom:30px;">Légende des couleurs</div>
+        <div style="display:flex;flex-direction:column;gap:22px;align-items:flex-start;">
+          <span class="sig off"><span class="gl">📶</span><b>Wi-Fi</b> · désactivé<i></i></span>
+          <span class="sig ok"><span class="gl">📶</span><b>Wi-Fi</b> · connecté<i></i></span>
+          <span class="sig warn"><span class="gl">📶</span><b>Wi-Fi</b> · signal faible<i></i></span>
+          <span class="sig err"><span class="gl">📶</span><b>Wi-Fi</b> · non connecté<i></i></span>
+          <span class="sig busy"><span class="gl">📶</span><b>Wi-Fi</b> · connexion…<i></i></span>
+          <span class="sig unk"><span class="gl">📡</span><b>Internet</b> · non testé<i></i></span>
         </div>
       </div></div>
     </div>
