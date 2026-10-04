@@ -88,7 +88,6 @@ public class ReportedActivationRegistrar {
     private final LicenseProperties props;
     private final TrustedKeys trusted;
     private final TransactionTemplate tx;
-    private final TransactionTemplate txNew;
 
     public ReportedActivationRegistrar(JdbcTemplate jdbc, LicenseService licenses, AuditLog audit, LicenseProperties props, TrustedKeys trusted, PlatformTransactionManager manager) {
         this.jdbc = jdbc;
@@ -98,9 +97,6 @@ public class ReportedActivationRegistrar {
         this.trusted = trusted;
         this.tx = new TransactionTemplate(manager);
         this.tx.setIsolationLevel(TransactionDefinition.ISOLATION_READ_COMMITTED);
-        this.txNew = new TransactionTemplate(manager);
-        this.txNew.setIsolationLevel(TransactionDefinition.ISOLATION_READ_COMMITTED);
-        this.txNew.setPropagationBehavior(TransactionDefinition.PROPAGATION_REQUIRES_NEW);
     }
 
     // ------------------------------------------------------------------ entrée
@@ -124,6 +120,7 @@ public class ReportedActivationRegistrar {
         Object checked = check(p, now);
         if (checked instanceof Registration early) return early;
         Claims c = (Claims) checked;
+        ensureAnonymousClient(now);   // AVANT la transaction de la licence : jamais une seconde connexion tenue pendant qu'on en détient déjà une (épuisement du pool sous charge)
         RuntimeException last = null;
         for (int attempt = 0; attempt < 6; attempt++) {
             try {
@@ -301,7 +298,8 @@ public class ReportedActivationRegistrar {
             alert("KEY_RATE", c.license(), c.fp(), c.code());
             return Outcome.of(Status.PENDING_DECISION, capped, c.license(), c.seat());
         }
-        long clientId = anonymousClient(now);
+        long clientId = jdbc.queryForList("SELECT id FROM lic_client WHERE name = ? AND erased_at IS NULL ORDER BY id LIMIT 1", Long.class, CLIENT_NAME).stream().findFirst()
+                .orElseGet(() -> ensureAnonymousClient(now));
         String createdBy = AuditLog.clip(CREATED_BY_PREFIX + trusted.nameOf(c.kid()) + ":" + c.kid().substring(0, 8), 64);
         Instant start = c.usageFrom() != null ? c.usageFrom() : c.issuedAt();
         GeneratedKeyHolder keys = new GeneratedKeyHolder();
@@ -336,12 +334,12 @@ public class ReportedActivationRegistrar {
         return null;
     }
 
-    private long anonymousClient(Instant now) {
+    /** Le client technique, créé une fois (verrou de processus + relecture ; plusieurs instances : au pire un doublon, la lecture prend toujours le plus petit identifiant). */
+    private long ensureAnonymousClient(Instant now) {
         List<Long> ids = jdbc.queryForList("SELECT id FROM lic_client WHERE name = ? AND erased_at IS NULL ORDER BY id LIMIT 1", Long.class, CLIENT_NAME);
         if (!ids.isEmpty()) return ids.get(0);
         synchronized (ReportedActivationRegistrar.class) {
-            // transaction à part : le verrou de la tête d'audit n'est jamais tenu pendant qu'on attend l'insertion d'une licence
-            return txNew.execute(st -> {
+            return tx.execute(st -> {
                 List<Long> again = jdbc.queryForList("SELECT id FROM lic_client WHERE name = ? AND erased_at IS NULL ORDER BY id LIMIT 1", Long.class, CLIENT_NAME);
                 if (!again.isEmpty()) return again.get(0);
                 GeneratedKeyHolder keys = new GeneratedKeyHolder();
@@ -394,20 +392,32 @@ public class ReportedActivationRegistrar {
     }
 
     /**
-     * Correction de {@code end_at} d'après le droit signé {@code usage} (audit R-1, D-W23B-3) : une licence importée du registre n'a aucune durée (fin inconnue = NULL) ; la première clé vérifiée
-     * à durée la fixe tant qu'aucune clé illimitée n'est connue pour elle. Une licence ouverte ici s'allonge si une clé plus longue du même poste arrive ; jamais raccourcie, jamais rendue illimitée.
+     * Correction de {@code start_at} / {@code end_at} d'après le droit signé {@code usage} (audit R-1, D-W23B-3), pour les seules licences que ni le propriétaire ni le serveur n'ont datées :
+     * celles du registre ({@code import:}, l'événement {@code license} ne porte aucune durée : fin inconnue = NULL) et celles ouvertes ici ({@code report:}). Règle SYMÉTRIQUE (même état final
+     * quel que soit l'ordre des jetons et du registre) : une clé illimitée connue pour la licence la rend sans fin ; sinon la fin est le plus grand {@code to} des clés vérifiées (une licence
+     * importée sans fin reçoit aussi le début du droit : le jeton signé fait foi). Jamais raccourcie. Si le propriétaire a prolongé la licence ({@code LICENSE_EXTEND}), sa décision prime.
      */
     private void alignEnd(LicenseService.LicenseRow l, Claims c) {
-        if (c.unlimited() || c.usageTo() == null) return;
+        boolean imported = l.createdBy().startsWith("import:");
+        if (!imported && !l.createdBy().startsWith(CREATED_BY_PREFIX)) return;
+        if (count("SELECT COUNT(*) FROM lic_audit WHERE action = 'LICENSE_EXTEND' AND target_type = 'LICENSE' AND target_id = ?", l.licenseId()) > 0) return;
+        boolean unlimited = c.unlimited() || count("SELECT COUNT(*) FROM lic_registration WHERE license_id = ? AND unlimited = TRUE AND status IN ('REGISTERED', 'ATTACHED')", l.licenseId()) > 0;
+        if (unlimited) {
+            if (l.endAt() != null) {
+                jdbc.update("UPDATE lic_license SET end_at = NULL, updated_at = ?, version = version + 1 WHERE id = ?", Times.ts(Instant.now()), l.id());
+                audit.record(REGISTRAR, "LICENSE_END_FROM_TOKEN", "LICENSE", l.licenseId(), null, Map.of("from", l.endAt().toString(), "to", "null", "fp", c.fp()));
+            }
+            return;
+        }
         Instant to = c.usageTo();
-        if (l.createdBy().startsWith("import:") && l.endAt() == null) {
-            long unlimited = count("SELECT COUNT(*) FROM lic_registration WHERE license_id = ? AND unlimited = TRUE AND status IN ('REGISTERED', 'ATTACHED')", l.licenseId());
-            if (unlimited > 0) return;
+        if (to == null) return;
+        if (l.endAt() == null) {
+            if (!imported) return;
             // le jeton signé fait foi pour le début comme pour la fin (l'événement `license` du registre ne porte que l'heure d'écriture de l'outil)
             Instant from = c.usageFrom() != null ? c.usageFrom() : l.startAt();
             jdbc.update("UPDATE lic_license SET start_at = ?, end_at = ?, updated_at = ?, version = version + 1 WHERE id = ?", Times.ts(from), Times.ts(to), Times.ts(Instant.now()), l.id());
             audit.record(REGISTRAR, "LICENSE_END_FROM_TOKEN", "LICENSE", l.licenseId(), null, Map.of("from", "null", "to", to.toString(), "start", from.toString(), "fp", c.fp()));
-        } else if (l.createdBy().startsWith(CREATED_BY_PREFIX) && l.endAt() != null && to.isAfter(l.endAt())) {
+        } else if (to.isAfter(l.endAt())) {
             jdbc.update("UPDATE lic_license SET end_at = ?, updated_at = ?, version = version + 1 WHERE id = ?", Times.ts(to), Times.ts(Instant.now()), l.id());
             audit.record(REGISTRAR, "LICENSE_END_FROM_TOKEN", "LICENSE", l.licenseId(), null, Map.of("from", l.endAt().toString(), "to", to.toString(), "fp", c.fp()));
         }

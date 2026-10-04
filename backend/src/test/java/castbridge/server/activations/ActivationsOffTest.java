@@ -52,7 +52,10 @@ class ActivationsOffTest extends ApiTestBase {
             assertTrue(names.contains("V63__activation_tracking.sql"));
             // « plus haut + 1, jamais de trou » (db/migration/README.md): V63 follows V62 (wallet), no hole before it, nothing of this module above it
             assertTrue(names.stream().anyMatch(n -> n.startsWith("V62__")), "V62 (wallet) exists: V63 is highest + 1");
-            assertEquals(0, names.stream().filter(n -> n.matches("V6[4-9]__.*")).count(), "V64 and above are not this module's");
+            // changed with w23-05: V64 (activation_registration, licences module: table lic_registration) is the next number, « plus haut + 1 » ; this module adds nothing above V63 itself
+            assertEquals(1, names.stream().filter(n -> n.startsWith("V64__")).count());
+            assertTrue(names.contains("V64__activation_registration.sql"));
+            assertEquals(0, names.stream().filter(n -> n.matches("V6[5-9]__.*")).count(), "V65 and above are not this module's");
         }
     }
 }

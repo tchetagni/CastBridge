@@ -146,23 +146,29 @@ public abstract class RegistrarTestBase extends WalletTestBase {
 
     // ------------------------------------------------------------------ registre de l'outil (docs/ACTIVATION-FORMAT.md § 8-9)
 
-    protected static RegistryEvent registryEvent(String type, long at, List<String> fields, java.util.Map<DeviceIdentity.Factor, String> factors) {
-        String kid = LicenseKeyring.kidOf(rawPublicBytes(TOOL));
+    protected static RegistryEvent registryEvent(String type, long at, List<String> fields, java.util.Map<DeviceIdentity.Factor, String> factors) { return registryEvent(TOOL, type, at, fields, factors); }
+
+    protected static RegistryEvent registryEvent(KeyPair signer, String type, long at, List<String> fields, java.util.Map<DeviceIdentity.Factor, String> factors) {
+        String kid = LicenseKeyring.kidOf(rawPublicBytes(signer));
         List<String> lines = new ArrayList<>(List.of(RegistryEvent.FORMAT, "type=" + type, "kid=" + kid, "at=" + at));
         lines.addAll(fields);
         java.util.EnumMap<DeviceIdentity.Factor, String> sorted = new java.util.EnumMap<>(DeviceIdentity.Factor.class);
         sorted.putAll(factors);
         sorted.forEach((f, h) -> lines.add("factor=" + f.name() + "|" + h));
         String text = String.join("\n", lines);
-        return new RegistryEvent(kid, text, Base64.getEncoder().encodeToString(Acts.sign(TOOL, text)));
+        return new RegistryEvent(kid, text, Base64.getEncoder().encodeToString(Acts.sign(signer, text)));
     }
 
-    protected static RegistryEvent licenseEvent(long at, String license, int seats) {
-        return registryEvent("license", at, List.of("license=" + license, "seats=" + seats, "maxTransfersPerYear=0"), java.util.Map.of());
+    protected static RegistryEvent licenseEvent(long at, String license, int seats) { return licenseEvent(TOOL, at, license, seats); }
+
+    protected static RegistryEvent licenseEvent(KeyPair signer, long at, String license, int seats) {
+        return registryEvent(signer, "license", at, List.of("license=" + license, "seats=" + seats, "maxTransfersPerYear=0"), java.util.Map.of());
     }
 
-    protected static RegistryEvent issueEvent(long at, String license, String seat, Acts.Tv tv, String nonce) {
-        return registryEvent("issue", at, List.of("license=" + license, "seat=" + seat, "subject=tv", "kind=production", "nonce=" + nonce, "notAfter=" + (at + 48 * HOUR),
+    protected static RegistryEvent issueEvent(long at, String license, String seat, Acts.Tv tv, String nonce) { return issueEvent(TOOL, at, license, seat, tv, nonce); }
+
+    protected static RegistryEvent issueEvent(KeyPair signer, long at, String license, String seat, Acts.Tv tv, String nonce) {
+        return registryEvent(signer, "issue", at, List.of("license=" + license, "seat=" + seat, "subject=tv", "kind=production", "nonce=" + nonce, "notAfter=" + (at + 48 * HOUR),
                 "k=" + DeviceIdentity.kFor(tv.factors().size())), tv.factors());
     }
 

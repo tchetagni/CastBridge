@@ -2,6 +2,8 @@ package castbridge.server.activations;
 
 import castbridge.server.devices.Device;
 import castbridge.server.devices.DeviceService;
+import castbridge.server.licenses.ReportedActivationRegistrar;
+import castbridge.server.wallet.BindProof;
 import castbridge.server.web.ApiException;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -13,6 +15,7 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
+import org.springframework.beans.factory.ObjectProvider;
 import org.springframework.http.CacheControl;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -38,12 +41,14 @@ public class ReportController {
     private final ActivationObserver observer;
     private final ActivationsPolicy policy;
     private final ActClock clock;
+    private final ObjectProvider<ReportedActivationRegistrar> registrar;
 
-    public ReportController(DeviceService devices, ActivationObserver observer, ActivationsPolicy policy, ActClock clock) {
+    public ReportController(DeviceService devices, ActivationObserver observer, ActivationsPolicy policy, ActClock clock, ObjectProvider<ReportedActivationRegistrar> registrar) {
         this.devices = devices;
         this.observer = observer;
         this.policy = policy;
         this.clock = clock;
+        this.registrar = registrar;
     }
 
     /** Anything the TV says about a date outside [2026-01-01, now + 400 days] is not a date (audit L3: it would also make MySQL refuse the row). */
@@ -102,6 +107,25 @@ public class ReportController {
         out.put("next", policy.get(ActivationsPolicy.REPORT_NEXT_HOURS));
         out.put("accepted", o.accepted());
         out.put("ignored", o.ignored());
+        // une activation de production vérifiée ouvre (ou rattache) la licence et le poste (W23-05) : la preuve de possession de la TV (celle du portefeuille, domaine castbridge-wallet-bind-v1)
+        // est EXIGÉE ; ce module n'écrit rien dans lic_* : il appelle le service du module des licences
+        ReportedActivationRegistrar reg = registrar.getIfAvailable();
+        if (reg != null && !tokens.isEmpty()) {
+            java.time.Instant now = java.time.Instant.ofEpochMilli(clock.nowMs());
+            BindProof.Proof bind = BindProof.parse(n.path("bind"));
+            boolean proven = BindProof.valid(bind, TvRef.canonical(code), d.publicId, now);
+            List<ReportedActivationRegistrar.Presented> items = new ArrayList<>();
+            for (String t : tokens) items.add(new ReportedActivationRegistrar.Presented(t, code, proven ? bind.key() : null, proven));
+            List<Map<String, Object>> regs = new ArrayList<>();
+            for (ReportedActivationRegistrar.Registration r : reg.registerAll(items, ReportedActivationRegistrar.Via.REPORT, now)) {
+                if (r.status() == ReportedActivationRegistrar.Status.IGNORED) continue;
+                Map<String, Object> m = new LinkedHashMap<>();
+                m.put("status", r.status().name());
+                m.put("reason", r.reason());
+                regs.add(m);
+            }
+            if (!regs.isEmpty()) out.put("registration", regs);
+        }
         return ResponseEntity.ok().cacheControl(CacheControl.noStore()).body(out);
     }
 
