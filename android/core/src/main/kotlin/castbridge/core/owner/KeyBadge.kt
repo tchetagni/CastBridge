@@ -35,16 +35,23 @@ object KeyBadge {
         return out
     }
 
+    /** The activations whose usage right has not ended yet (shared with the status badge: one calculation). */
+    fun counting(activations: List<Activation>, nowMs: Long): List<Activation> =
+        activations.filter { a -> a.rights.filterIsInstance<Right.Usage>().none { nowMs >= it.endsAt } && TvGate.implicitUsageEnd(a).let { it == null || nowMs < it } }
+
+    /** End of each activation's usage right (null = no ceiling). */
+    fun ends(list: List<Activation>): List<Long?> = list.map { a -> a.rights.filterIsInstance<Right.Usage>().maxOfOrNull { it.endsAt } ?: TvGate.implicitUsageEnd(a) }
+
     /** [activations]: every verified activation installed; [rentals]: their rental statuses (the trial window is one of them). */
     fun of(activations: List<Activation>, nowMs: Long, rentals: List<RentalStatus> = emptyList(), zone: ZoneId = ZoneId.systemDefault()): Badge {
         if (activations.isEmpty()) return Badge("SANS CLÉ", listOf("Entrez un code d'activation"), ended = true)
-        val counting = activations.filter { a -> a.rights.filterIsInstance<Right.Usage>().none { nowMs >= it.endsAt } && TvGate.implicitUsageEnd(a).let { it == null || nowMs < it } }
+        val counting = counting(activations, nowMs)
         if (counting.isEmpty()) return Badge("ACTIVATION TERMINÉE", listOf("Entrez un nouveau code valide"), ended = true)
         val rights = counting.flatMap { it.rights }
         val production = counting.filter { it.kind == ActivationKind.PRODUCTION }
         val lines = ArrayList<String>()
         // the key's duration: the latest end among the counting activations, or unlimited when one has no ceiling
-        val ends = (production.ifEmpty { counting }).map { a -> a.rights.filterIsInstance<Right.Usage>().maxOfOrNull { it.endsAt } ?: TvGate.implicitUsageEnd(a) }
+        val ends = ends(production.ifEmpty { counting })
         lines += if (ends.any { it == null }) "Clé illimitée" else ends.filterNotNull().maxOrNull()!!.let { "Clé valable jusqu'au ${date(it, zone)} (${left(it - nowMs)})" }
         return when {
             rights.any { it is Right.Super } -> Badge("SUPER ILLIMITÉ", listOf("Tous les droits", "Clé permanente"))

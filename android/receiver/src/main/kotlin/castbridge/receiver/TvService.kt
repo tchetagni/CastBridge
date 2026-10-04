@@ -121,6 +121,8 @@ class TvService : Service(), Device {
     lateinit var capacity: castbridge.core.trust.PairCapacityFlow; private set
     /** The permanent status bar of the screen (docs/ADMIN.md, « Barre d'icônes ») : fed here from what the service already knows. */
     val icons = castbridge.core.status.StatusIconModel({ System.currentTimeMillis() })
+    /** The measured status badges (core [castbridge.core.tv.status.StatusSnapshot] read by [StatusFeed]); grey until measured, grey « périmé » when not refreshed. */
+    val statusBoard = castbridge.core.tv.status.StatusBoard { System.currentTimeMillis() }
     private val lanSeen = ConcurrentHashMap<String, Long>()
     private val iconsPosted = java.util.concurrent.atomic.AtomicBoolean(false)
     var wd: WifiDirectGroup? = null; private set
@@ -451,6 +453,7 @@ class TvService : Service(), Device {
             syncRoom(IconKind.QUIZ_PLAYER, qr?.players()?.map { Triple(it.id, it.name, qr.isConnected(it)) })
             syncRoom(IconKind.CHESS_PLAYER, cr?.players()?.map { Triple(it.id, it.name, cr.isConnected(it)) })
         }
+        runCatching { statusBoard.update(StatusFeed.snapshot(this)) }      // measured badges (Wi-Fi, Bluetooth, Stockage...): same 5 s tick, local reads only
         iconsChanged()
     }
 
@@ -536,7 +539,7 @@ class TvService : Service(), Device {
                             delay = if (probe) netTracker.nextDelayMs() else NetStateTracker.STEADY_MS   // 60 s while Internet works, 10-30 s while it does not (probing only)
                         }
                         icons.setInternet(netState)
-                        main.post { screen?.statusesChanged() }; iconsChanged()
+                        main.post { screen?.statusesChanged() }; iconsChanged(); syncIconsAsync()      // the network just changed: re-read the badges now (no extra loop)
                         TunnelHub.poke()                                   // the path to the Internet (own network / phone gateway / none) may have changed
                         // connectivity_check: at start and when the state changes (not every minute)
                         if (first || wasDirect != (netDirectMs != null)) connectivityEvent(null, netDirectMs?.takeIf { it > 0 }, netDirectMs != null)

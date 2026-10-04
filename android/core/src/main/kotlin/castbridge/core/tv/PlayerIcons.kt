@@ -42,7 +42,16 @@ object PlayerIcons {
             Entry("level-${it.wire}", "${it.colour} : ${it.meaning.substringBefore(" (")}",
                 "Anneau et point ${it.colour.lowercase()} : ${it.meaning}. Le mot écrit à côté de l'icône dit la même chose : la couleur n'est jamais seule.")
         }
-        return kinds + levels + extra + marks + states
+        val badges = listOf(
+            Entry("badge-internet", "Pastille : Internet", "Vert : accès direct. Orange : lent ou seulement par le téléphone. Rouge : aucun accès alors qu'un réseau est branché. Gris : non testé."),
+            Entry("badge-wifi", "Pastille : Wi-Fi", "Noir : désactivé. Vert : connecté. Orange : signal faible ou réseau sans Internet. Rouge : activé mais non connecté. Bleu : connexion."),
+            Entry("badge-bluetooth", "Pastille : Bluetooth", "Noir : désactivé. Vert : prêt ou téléphone relié. Orange : passerelle sur un réseau lent. Rouge : erreur ou téléphone refusé."),
+            Entry("badge-storage", "Pastille : Stockage", "Vert : 20 % libre ou plus. Orange : de 5 à 20 %. Rouge : moins de 5 %, lecture seule ou erreur. Noir : absent."),
+            Entry("badge-phones", "Pastille : Téléphones", "Nombre de téléphones reliés sur 8 : vert de 1 à 7, orange quand c'est complet, noir quand il n'y en a aucun."),
+            Entry("badge-licence", "Pastille : Licence", "Vert : valide ou illimitée. Orange : la moitié du temps est écoulée, en attente de notification, ou essai. Rouge : 7 jours ou moins, expirée ou invalide."),
+            Entry("badge-tokens", "Pastille : Jetons", "Gris : jamais synchronisé. Vert : synchronisé. Orange : serveur hors ligne ou 5 jetons ou moins. Rouge : plus aucun jeton."),
+        )
+        return kinds + levels + badges + extra + marks + states
     }
 
     private fun meaning(k: IconKind) = when (k) {
