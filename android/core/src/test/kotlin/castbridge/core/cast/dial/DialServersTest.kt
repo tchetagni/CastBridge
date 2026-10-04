@@ -121,6 +121,7 @@ class DialHttpServerTest {
         assertEquals(413, req("POST", "/apps/YouTube", body = "a=" + "x".repeat(4100)).status)
         // Content-Length annoncé énorme : refusé sans lire le corps.
         assertEquals(413, send("POST /apps/YouTube HTTP/1.1\r\nHost: 127.0.0.1:$port\r\nContent-Type: text/plain\r\nContent-Length: 99999999\r\n\r\n").status)
+        assertEquals(413, send("POST /apps/YouTube HTTP/1.1\r\nHost: 127.0.0.1:$port\r\nContent-Type: text/plain\r\nContent-Length: 4097\r\n\r\n", 1500).status, "4097 octets annoncés : refus avant lecture")
         assertEquals(413, req("POST", "/apps/YouTube", body = "a=" + "x".repeat(1100)).status, "plus de 1 Ko de paramètres")
         assertTrue(launcher.launched.isEmpty())
     }
