@@ -46,7 +46,7 @@
 
 | id | Cahier | Objet | Niveau | Effort | Modèle | Audit Opus | Jauge | Statut | Dépend de |
 |---|---|---|---|---|---|---|---|---|---|
-| w22-15 | `sonnet-w22-15-defi-10000-coeur.md` | cœur pur : échelle, état de partie, paliers, 50:50, pack `cbk1`, journal `cbm1`, disponible hors ligne, simulateur de rendement | 1 (parallèle, hors chemin critique) | M | sonnet | **oui** | 350 / 20 | ATTEND 03 | 03 |
+| w22-15 | `sonnet-w22-15-defi-10000-coeur.md` | cœur pur : échelle, état de partie, paliers, 50:50, pack `cbk1`, journal `cbm1`, disponible hors ligne, simulateur de rendement | 1 (parallèle, hors chemin critique) | M | sonnet | **oui** | 350 / 20 | **FAIT, audit Opus à lancer** (`worktree-agent-a9f9fa3119f875ea1`, rapport `docs/agent-reports/sonnet-w22-15.md`) | 03 |
 | w22-16 | `sonnet-w22-16-defi-10000-serveur.md` | pool « défi », packs par identité, vérification des journaux, `MILLIONS_*`, plafonds, anomalies, rendement, recalage | 2 | L | sonnet | **oui** | 600 / 30 | ATTEND 02, 05, 15 + D-W22-16, 19, 24 (17, 18, 20, 22, 23 DÉCIDÉES) | 02, 05, 15 |
 | w22-17 | `sonnet-w22-17-defi-10000-tv.md` | écran TV, moteur local, reprise, gains en attente (exception de gel) | 2 | M | sonnet | **oui** | 400 / 20 | ATTEND 07, 15, 16 | 07, 15, 16 |
 
