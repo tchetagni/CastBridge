@@ -15,15 +15,21 @@ object PhoneRoster {
 
     data class Row(val address: String, val name: String, val addedText: String, val seenText: String, val state: PhoneState, val suggested: Boolean) {
         /** Lu par le lecteur d'écran (contentDescription) : tout ce que la ligne dit. */
-        val description: String get() = listOf(name, addedText, seenText, state.label, if (suggested) PhonesTexts.SUGGESTION else null).filterNotNull().joinToString(" · ")
+        val label: String get() = PhonesTexts.labeled(name, address)
+        val description: String get() = listOf(label, addedText, seenText, state.label, if (suggested) PhonesTexts.SUGGESTION else null).filterNotNull().joinToString(" · ")
     }
 
     data class View(val rows: List<Row>, val count: Int, val max: Int) {
         /** « 7 / 8 ». */
         val counter: String get() = PhonesTexts.counter(count, max)
         val full: Boolean get() = count >= max
+        /** More phones than the cap (a file restored from before the cap): how many to remove. */
+        val overBy: Int get() = (count - max).coerceAtLeast(0)
         val suggestedAddress: String? get() = rows.firstOrNull { it.suggested }?.address
     }
+
+    /** The name (cleaned, case-insensitive) is already used by a synchronized phone. */
+    fun sameName(name: String, phones: List<TrustedPhone>) = phones.any { it.name.equals(PhoneName.sanitize(name), ignoreCase = true) }
 
     private val DATE = DateTimeFormatter.ofPattern("dd/MM/yyyy")
 

@@ -417,7 +417,7 @@ curl / app téléphone --TCP--> 127.0.0.1:18765 --RFCOMM « CastBridge API »-->
    utilise son jeton, qui n'ouvre toujours pas `/api/ssh*`, `/api/apk/install`, `/api/update/install` : PIN seulement).
 
 ### Téléphones synchronisés : 8 au plus
-Une TV se synchronise avec **8 téléphones au plus** (`TrustRegistry.MAX_PHONES`). Un 9e téléphone n'entre qu'après le retrait d'un existant, choisi par le propriétaire sur l'écran « Téléphones synchronisés » de la TV (menu de la TV, ou « Connexions »). Ce n'est pas l'administration : le PIN d'administration, ses jetons et ses routes ne changent pas (un téléphone de confiance ne peut toujours pas ouvrir `/api/ssh`, l'installation d'APK ni l'activation). Retirer un téléphone lui coupe ses jetons aussitôt. Détails, protocole et tests : `docs/BT-PLUG-AND-PLAY.md`.
+Une TV se synchronise avec **8 téléphones au plus** (`TrustRegistry.MAX_PHONES`). Un 9e téléphone n'entre qu'après le retrait d'un existant, choisi par le propriétaire sur l'écran « Téléphones synchronisés » de la TV (menu de la TV, ou « Connexions »). Ce n'est pas l'administration : le PIN d'administration, ses jetons et ses routes ne changent pas (un téléphone de confiance ne peut toujours pas ouvrir `/api/ssh`, l'installation d'APK ni l'activation). Retirer un téléphone lui coupe ses jetons aussitôt. Un téléphone bloqué (3 refus ou annulations) ne peut pas rouvrir l'écran de remplacement pendant 10 minutes. Détails, protocole et tests : `docs/BT-PLUG-AND-PLAY.md`.
 
 ### Verrouillage par appareil
 Toutes les liaisons arrivent de `127.0.0.1` ; sans précaution, 5 codes faux d'un appareil verrouilleraient le Wi-Fi et tous les autres appareils. Le tunnel inscrit « port local

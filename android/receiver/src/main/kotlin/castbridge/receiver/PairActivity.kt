@@ -224,7 +224,7 @@ class PairActivity : Activity() {
     private fun confirmRemove(p: TrustedPhone) {
         val svc = bound ?: return
         confirm("Retirer ${p.name} ?", "Ce téléphone ne pourra plus piloter la TV sans le code. Il pourra être ajouté à nouveau.", "Retirer") {
-            svc.trust.revoke(p.address); message = "${p.name} a été retiré."; refresh()
+            svc.removePhone(p.address); message = "${p.name} a été retiré."; refresh()
         }
     }
 

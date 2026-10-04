@@ -45,6 +45,7 @@ class HelloHandler(
             PairingSession.Decision.TIMEOUT -> HelloReply.Err(BtProtocol.ERR_TIMEOUT)
             PairingSession.Decision.NOT_OPEN -> HelloReply.Err(BtProtocol.ERR_NOT_OPEN)
             PairingSession.Decision.BUSY, PairingSession.Decision.BLOCKED -> HelloReply.Err(BtProtocol.ERR_BUSY)
+            PairingSession.Decision.WRITE_FAILED -> HelloReply.Err(BtProtocol.ERR_IO)
             PairingSession.Decision.FULL -> {   // approved at the same time as another phone: the cap won; the owner decides who goes
                 capacity?.ask(peer, peerName.orEmpty(), windowOpen = true)
                 HelloReply.Err(BtProtocol.ERR_FULL)
@@ -58,6 +59,7 @@ class HelloHandler(
         if (!registry.isTrusted(peer)) {
             if (!requestTrust) return untrusted(true)
             // The 8-phone cap: a ninth phone never reaches the approval dialog; the owner first chooses which phone to remove (PairCapacityFlow).
+            if (capacity != null && pairing.isBlocked(peer)) return HelloReply.Err(BtProtocol.ERR_BUSY)   // refused / cancelled too often: never reopens the owner's screen
             capacity?.let { c ->
                 when (c.ask(peer, peerName.orEmpty(), pairing.isOpen)) {
                     PairCapacityFlow.Answer.Pending -> return HelloReply.Err(BtProtocol.ERR_FULL)

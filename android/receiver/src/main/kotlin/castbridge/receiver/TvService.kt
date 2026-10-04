@@ -211,7 +211,7 @@ class TvService : Service(), Device {
         guard = PinGuard(pin)
         trust = castbridge.core.trust.TrustRegistry(TrustFile(File(filesDir, "trusted_phones.txt")))
         pairing = castbridge.core.trust.PairingSession(trust)
-        capacity = castbridge.core.trust.PairCapacityFlow(trust, active = { presence.statuses().filter { it.state != castbridge.core.trust.PhonePresence.State.DISCONNECTED }.map { it.address }.toSet() })
+        capacity = castbridge.core.trust.PairCapacityFlow(trust, onDenied = { pairing.recordDenial(it) }, active = { presence.statuses().filter { it.state != castbridge.core.trust.PhonePresence.State.DISCONNECTED }.map { it.address }.toSet() })
         // never silent: what happens to a ninth phone is said on the TV (the same reason is given to the phone, see HelloHandler)
         capacity.addListener { e ->
             e.removedAddress?.let { presence.forget(it); icons.remove(castbridge.core.status.IconKind.PHONE, it); iconsChanged() }

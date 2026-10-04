@@ -39,7 +39,7 @@ class FakeTv(val clock: FakeClock, val phone: String = "AA:BB:CC:DD:EE:01", val 
 
     fun useLimiter(l: AttemptLimiter) { limiterRef = l; handler = newHandler() }
     /** Turns the 8-phone flow on (the registry's own cap is always on). */
-    fun useCapacity(timeoutMs: Long = 120_000): PairCapacityFlow = PairCapacityFlow(reg, clock::now, timeoutMs).also { capacity = it; handler = newHandler() }
+    fun useCapacity(timeoutMs: Long = 120_000): PairCapacityFlow = PairCapacityFlow(reg, clock::now, timeoutMs, onDenied = { pairing.recordDenial(it) }).also { capacity = it; handler = newHandler() }
     /** The app is killed and started again: the registry file survives. */
     fun restartApp() { reg = TrustRegistry(persistence, clock::now, tokenTtlMs = ttlMs); pairing = PairingSession(reg, clock::now); capacity = null; handler = newHandler() }
     /** Uninstalled and installed again: no registry, a new install id. */

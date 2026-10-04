@@ -63,6 +63,7 @@ object TvRefusals {
         PairingSession.Decision.BLOCKED -> "$name est ignoré 10 minutes : trois refus de suite."
         PairingSession.Decision.BUSY -> "$name doit patienter : une autre demande est en cours."
         PairingSession.Decision.FULL -> "$name ne peut pas être ajouté : cette TV a déjà ${TrustRegistry.MAX_PHONES} téléphones."
+        PairingSession.Decision.WRITE_FAILED -> "$name n'a pas pu être enregistré : la liste des téléphones n'est pas inscriptible. Réessayez."
         PairingSession.Decision.APPROVED, PairingSession.Decision.NOT_OPEN -> null
     }
 }
