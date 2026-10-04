@@ -120,7 +120,8 @@ class TapsTest extends ActTestBase {
         assertEquals(1, jdbc.queryForObject("select count(*) from act_event where type = 'ISSUED' and fp is null and license_id = ?", Integer.class, license), "an imported issuance has no token, hence no fp");
         assertEquals(1, jdbc.queryForObject("select count(*) from act_event where type = 'TRANSFERRED' and license_id = ?", Integer.class, license));
         assertEquals(1, jdbc.queryForObject("select count(*) from act_reg_issue where kid = ? and nonce = ?", Integer.class, kid(DESK), nonce));
-        assertEquals(0, jdbc.queryForObject("select count(*) from act_key where license_id = ?", Integer.class, license), "no token yet: nothing to put in the inventory");
+        // changed with the audit M8 fix (it asserted 0 « no token yet: nothing to put in the inventory »): the emission now has an inventory row under a substitute fingerprint, merged later
+        assertEquals(1, jdbc.queryForObject("select count(*) from act_key where license_id = ? and form = 'REGISTRY'", Integer.class, license), "no token yet: one substitute row");
 
         // the TV now reports the token: declared by the registry (kid + nonce), so not "undeclared"
         WireActivation.Fields f = new WireActivation.Fields("production", "tv", kid(DESK), at, nonce, at, at, at + 48 * 3_600_000L, license, seat, d.k(), d.fp(), List.of());

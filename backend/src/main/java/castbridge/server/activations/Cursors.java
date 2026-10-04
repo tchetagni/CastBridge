@@ -7,6 +7,13 @@ import org.springframework.jdbc.core.JdbcTemplate;
 final class Cursors {
     private Cursors() {}
 
+    /** True when the row is too recent to be final: the tap stops there and leaves it, and every row after it, to the next turn (audit M7). */
+    static boolean recent(ActClock clock, Object ts) {
+        if (clock.tapLag().isZero()) return false;
+        java.time.Instant t = castbridge.server.common.Times.instant(ts);
+        return t != null && t.isAfter(clock.now().minus(clock.tapLag()));
+    }
+
     static long get(JdbcTemplate jdbc, String name) {
         List<Long> r = jdbc.queryForList("SELECT val FROM act_cursor WHERE name = ?", Long.class, name);
         return r.isEmpty() ? 0L : r.get(0);

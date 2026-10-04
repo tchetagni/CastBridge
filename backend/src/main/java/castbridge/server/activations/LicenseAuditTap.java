@@ -31,8 +31,10 @@ public class LicenseAuditTap {
     private final TvRef tvRef;
     private final Reconciler reconciler;
     private final ActivationsProperties props;
+    private final ActClock clock;
 
-    public LicenseAuditTap(JdbcTemplate jdbc, TransactionTemplate tx, EventLog eventLog, Inventory inventory, TvRef tvRef, Reconciler reconciler, ActivationsProperties props) {
+    public LicenseAuditTap(JdbcTemplate jdbc, TransactionTemplate tx, EventLog eventLog, Inventory inventory, TvRef tvRef, Reconciler reconciler, ActivationsProperties props, ActClock clock) {
+        this.clock = clock;
         this.jdbc = jdbc;
         this.tx = tx;
         this.eventLog = eventLog;
@@ -70,20 +72,26 @@ public class LicenseAuditTap {
     private int imports() {
         long cursor = Cursors.get(jdbc, "lic_ledger_import");
         List<Map<String, Object>> rows = jdbc.queryForList("SELECT * FROM lic_ledger_import WHERE id > ? ORDER BY id LIMIT 200", cursor);
+        int taken = 0;
         for (Map<String, Object> r : rows) {
+            if (Cursors.recent(clock, r.get("imported_at"))) break;   // audit M7: not final yet
+            taken++;
             long id = ((Number) r.get("id")).longValue();
             eventLog.append(new EventLog.NewEvent("REGISTRY_IMPORT", Times.ms(r.get("imported_at")), null, null, null, null, "ADMIN", (String) r.get("imported_by"), "REGISTRY", null,
                     "{\"entries\":" + r.get("entries") + ",\"applied\":" + r.get("applied") + ",\"duplicates\":" + r.get("duplicates") + ",\"rejected\":" + r.get("rejected") + ",\"conflicts\":" + r.get("conflicts")
                             + ",\"sha\":\"" + ((String) r.get("sha256")).substring(0, 8) + "\"}", "RI:" + id));
             Cursors.set(jdbc, "lic_ledger_import", id);
         }
-        return rows.size();
+        return taken;
     }
 
     private int transfers() {
         long cursor = Cursors.get(jdbc, "lic_transfer");
         List<Map<String, Object>> rows = jdbc.queryForList("SELECT t.*, l.license_id AS wire FROM lic_transfer t JOIN lic_license l ON l.id = t.license_pk WHERE t.id > ? ORDER BY t.id LIMIT 200", cursor);
+        int taken = 0;
         for (Map<String, Object> r : rows) {
+            if (Cursors.recent(clock, r.get("at"))) break;   // audit M7
+            taken++;
             long id = ((Number) r.get("id")).longValue();
             String from = tvRef.ofOrNull((String) r.get("from_device_code")), to = tvRef.ofOrNull((String) r.get("to_device_code"));
             String kid = (String) r.get("signed_by");
@@ -92,14 +100,17 @@ public class LicenseAuditTap {
                     "{\"seat\":\"" + r.get("seat_id") + "\",\"from\":" + (from == null ? "null" : "\"" + from + "\"") + ",\"to\":" + (to == null ? "null" : "\"" + to + "\"") + ",\"accepted\":" + r.get("accepted") + "}", "TF:" + id));
             Cursors.set(jdbc, "lic_transfer", id);
         }
-        return rows.size();
+        return taken;
     }
 
     private int revocations() {
         long cursor = Cursors.get(jdbc, "lic_revocation");
         List<Map<String, Object>> rows = jdbc.queryForList("SELECT * FROM lic_revocation WHERE id > ? ORDER BY id LIMIT 200", cursor);
         Set<String> fps = new TreeSet<>(), tvs = new TreeSet<>(), kids = new TreeSet<>(), licenses = new TreeSet<>();
+        int taken = 0;
         for (Map<String, Object> r : rows) {
+            if (Cursors.recent(clock, r.get("revoked_at"))) break;   // audit M7
+            taken++;
             long id = ((Number) r.get("id")).longValue();
             Timestamp at = Times.ts(r.get("revoked_at"));
             String by = (String) r.get("revoked_by"), kid = (String) r.get("kid"), license = (String) r.get("license_id"), seat = (String) r.get("seat_id");
@@ -122,14 +133,17 @@ public class LicenseAuditTap {
             }
             Cursors.set(jdbc, "lic_revocation", id);
         }
-        if (!rows.isEmpty()) reconciler.reconcile(Reconciler.Scope.of(fps, tvs, kids, licenses));
-        return rows.size();
+        if (taken > 0) reconciler.reconcile(Reconciler.Scope.of(fps, tvs, kids, licenses));
+        return taken;
     }
 
     private int audit() {
         long cursor = Cursors.get(jdbc, "lic_audit");
         List<Map<String, Object>> rows = jdbc.queryForList("SELECT * FROM lic_audit WHERE id > ? ORDER BY id LIMIT 200", cursor);
+        int taken = 0;
         for (Map<String, Object> r : rows) {
+            if (Cursors.recent(clock, r.get("at"))) break;   // audit M7 (the audit chain serialises its inserts, the lag costs nothing here)
+            taken++;
             long id = ((Number) r.get("id")).longValue();
             String action = (String) r.get("action"), license = (String) r.get("target_id"), actor = (String) r.get("actor");
             long at = Times.ms(r.get("at"));
@@ -151,6 +165,6 @@ public class LicenseAuditTap {
             }
             Cursors.set(jdbc, "lic_audit", id);
         }
-        return rows.size();
+        return taken;
     }
 }

@@ -74,7 +74,10 @@ public class IssuanceTap {
                 + " FROM lic_issuance i JOIN lic_license l ON l.id = i.license_pk WHERE i.id > ? ORDER BY i.id LIMIT 200", cursor);
         Set<String> fps = new TreeSet<>(), tvs = new TreeSet<>(), licenses = new TreeSet<>();
         long last = cursor;
+        int taken = 0;
         for (Map<String, Object> r : rows) {
+            if (Cursors.recent(clock, r.get("issued_at"))) break;   // audit M7: not final yet
+            taken++;
             long id = ((Number) r.get("id")).longValue();
             last = id;
             String kid = (String) r.get("kid"), license = (String) r.get("license_id"), kind = ((String) r.get("kind")).toUpperCase(Locale.ROOT);
@@ -93,19 +96,28 @@ public class IssuanceTap {
                 jdbc.update("INSERT INTO act_reg_issue (kid, nonce, license_id, seat_id, kind, tv_ref, issued_at, not_after) VALUES (?,?,?,?,?,?,?,?)", kid, r.get("nonce"), license, r.get("seat_id"), kind, ref, issued, notAfter);
                 eventLog.append(new EventLog.NewEvent("ISSUED", issued.getTime(), null, ref, license, kid, "TOOL", kid, "REGISTRY", null, "{\"kind\":\"" + kind.toLowerCase(Locale.ROOT) + "\",\"seat\":\"" + r.get("seat_id") + "\"}",
                         "I:imp:" + id));
-                for (String fp : jdbc.queryForList("SELECT fp FROM act_key WHERE kid = ? AND nonce = ?", String.class, kid, r.get("nonce"))) {
+                List<String> known = jdbc.queryForList("SELECT fp FROM act_key WHERE kid = ? AND nonce = ?", String.class, kid, r.get("nonce"));
+                for (String fp : known) {
                     inventory.addFlags(fp, Set.of(Inventory.DECLARED_REGISTRY));
                     fps.add(fp);
+                }
+                if (known.isEmpty()) {
+                    // audit M8: no token yet. The emission still gets an inventory row, under a SUBSTITUTE fingerprint, so that « never seen 48 h after the emission » (EXPIRED_UNUSED) applies;
+                    // the row is merged into the real one when a token with this (kid, nonce) arrives (Inventory.upsertKey)
+                    String sub = castbridge.server.licenses.Hashing.sha256Hex(("registry:" + kid + ":" + r.get("nonce")).getBytes(java.nio.charset.StandardCharsets.UTF_8));
+                    inventory.upsertKey(new Inventory.KeyFacts(sub, "REGISTRY", kid, kind, (String) r.get("subject"), license, (String) r.get("seat_id"), ref, null, null, (String) r.get("nonce"),
+                            issued.toInstant(), notBefore == null ? issued.toInstant() : notBefore.toInstant(), notAfter == null ? null : notAfter.toInstant(), null, null, null, null), Set.of(Inventory.DECLARED_REGISTRY));
+                    fps.add(sub);
                 }
             }
             if (ref != null) tvs.add(ref);
             licenses.add(license);
         }
-        if (!rows.isEmpty()) {
+        if (taken > 0) {
             Cursors.set(jdbc, CURSOR, last);
             reconciler.reconcile(Reconciler.Scope.of(fps, tvs, null, licenses));
         }
-        return rows.size();
+        return taken;
     }
 
     static List<String> list(Set<String> s) { return new ArrayList<>(s); }

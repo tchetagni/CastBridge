@@ -240,5 +240,6 @@ public abstract class ActTestBase extends ApiTestBase {
         }
         jdbc.update("update act_event_head set last_id = 0, last_hash = ?", "0".repeat(64));
         policy.resetLimits();
+        clock.setTapLag(java.time.Duration.ZERO);   // the taps read a row at once (audit M7: the lag is exercised by CursorLagTest)
     }
 }

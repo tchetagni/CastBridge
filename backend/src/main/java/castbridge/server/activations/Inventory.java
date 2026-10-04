@@ -93,6 +93,10 @@ public class Inventory {
         if (existing.isEmpty()) {
             Set<String> flags = new TreeSet<>(addFlags);
             addRegistryFlag(f, flags);
+            // audit M8: the substitute row of an emission known only by the registry is merged into the real activation (same kid and nonce), never duplicated
+            if (f.kid() != null && f.nonce() != null && !"REGISTRY".equals(f.form())) {
+                jdbc.update("DELETE FROM act_key WHERE form = 'REGISTRY' AND kid = ? AND nonce = ?", f.kid(), f.nonce());
+            }
             // issued_at is never null (a row known only by a delivery is placed at the moment it was first heard of): the lists sort on it
             jdbc.update("INSERT INTO act_key (fp, tag, form, kid, kind, subject, license_id, seat_id, tv_ref, k, aseq, nonce, issued_at, not_before, expires_at, usage_to, unlimited, super, rights, state, state_at, flags)"
                             + " VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)",
