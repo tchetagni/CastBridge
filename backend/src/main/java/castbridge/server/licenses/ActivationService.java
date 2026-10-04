@@ -143,9 +143,11 @@ public class ActivationService {
         if (auto) {
             // a production key without a licence id: the licence is created first, in the same transaction (a refusal below rolls it back)
             actor.require(Role.Permission.ISSUE_NEW, props.requireTotp());
-            parseDuration(false, req.usageDays());
+            KeyDuration autoDuration = parseDuration(false, req.usageDays());
             if (req.kind() != null && !req.kind().isBlank() && parseKind(req.kind()) != IssueKind.PRODUCTION) throw ApiException.badRequest("Une licence générée ne délivre que des activations de production");
-            licenseId = licenses.createAuto(actor).licenseId();
+            // start and end of the licence = usage right of the key (audit R-1); the exact issue date is pinned in doIssue
+            Instant now = Instant.now().truncatedTo(ChronoUnit.SECONDS);
+            licenseId = licenses.createAuto(actor, now, usageEnd(autoDuration, now)).licenseId();
         }
         return doIssue(actor, licenseId, subject, device, req.kind(), req.productIds(), req.windowHours(), req.usageDays(), channel, reissueOnly, auto);
     }
@@ -218,6 +220,8 @@ public class ActivationService {
         if (lastIssued != null && lastIssued.toInstant().isAfter(issuedAt)) issuedAt = lastIssued.toInstant();
         String nonce = HexOf(Hashing.sha256(("nonce|" + idem + "|" + issuedAt.toEpochMilli()).getBytes(StandardCharsets.UTF_8)), 16);
         List<String> rights = withUsage(baseRights, duration, issuedAt.toEpochMilli());
+        // a licence generated for this very key follows the usage right actually signed (start = issue date, end = start + duration, none if the key is unlimited)
+        if (autoLicense) licenses.alignToKey(l.id(), issuedAt, usageEnd(duration, issuedAt));
         SignedActivation s = signer.sign(new ActivationRequest(kind, subject, l.wireId(), seatId, device, rights, issuedAt.toEpochMilli(), issuedAt.toEpochMilli(), window, nonce));
         jdbc.update("INSERT INTO lic_issuance (license_pk, seat_pk, seat_id, device_code, kind, subject, kid, nonce, issued_at, not_before, not_after, issuer, channel, token_fingerprint, source, idem_key)"
                         + " VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,'SERVER',?)", l.id(), seat.seat().id(), seatId, device.code(), kind.name(), subject, s.kid(), s.nonce(), Timestamp.from(issuedAt),

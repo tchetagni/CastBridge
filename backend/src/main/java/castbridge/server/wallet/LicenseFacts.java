@@ -31,6 +31,15 @@ public interface LicenseFacts {
      */
     List<LicenseView> forDevice(String deviceCode);
 
+    /**
+     * Ce que le serveur sait de la NOTIFICATION d'une licence ouverte par une activation rapportée (registrar de W23-05) : l'instant de la première notification qui l'a ouverte ou rattachée
+     * ({@code firstNotifiedAt}) et si l'émission est DÉCLARÉE (journal, registre, émission du serveur) ou acceptée par le propriétaire. Origine de la limite de rattrapage ({@link CatchUpPolicy}).
+     */
+    record Notification(Instant firstNotifiedAt, boolean declared) {}
+
+    /** La notification d'une licence, ou {@code null} : licence créée par le propriétaire, le registre ou l'émission du serveur (aucune limite de rattrapage, comme avant). */
+    default Notification notification(String licenseId) { return null; }
+
     /** Historique des changements d'état d'une licence (journal d'audit chaîné du module des licences), du plus ancien au plus récent ; vide si illisible. */
     default List<StateEvent> history(String licenseId) { return List.of(); }
 

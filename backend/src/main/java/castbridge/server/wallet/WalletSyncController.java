@@ -3,6 +3,7 @@ package castbridge.server.wallet;
 import castbridge.server.devices.Device;
 import castbridge.server.devices.DeviceService;
 import castbridge.server.licenses.DeviceIdentity;
+import castbridge.server.licenses.ReportedActivationRegistrar;
 import castbridge.server.wallet.core.AccountRef;
 import castbridge.server.wallet.core.Currency;
 import castbridge.server.wallet.core.LedgerException;
@@ -40,6 +41,9 @@ import org.springframework.web.bind.annotation.RestController;
 public class WalletSyncController {
     private static final Logger log = LoggerFactory.getLogger(WalletSyncController.class);
     static final String LICENSE_PENDING_TEXT = "Licence en attente d'enregistrement";
+    static final String REGISTRATION_REVIEW_TEXT = "Activation en vérification au serveur : jetons de production à venir";
+    static final String SEAT_OVER_QUOTA_TEXT = "Licence déjà utilisée sur une autre TV : contactez votre point focal";
+    static final String CATCHUP_HELD_TEXT = "Jetons de votre activation en vérification";
 
     private final DeviceService devices;
     private final EditionReader reader;
@@ -50,10 +54,12 @@ public class WalletSyncController {
     private final SnapshotSigner signer;
     private final WalletModuleConfig.WalletClock clock;
     private final ObjectProvider<SyncContributor> contributors;
+    private final ObjectProvider<ReportedActivationRegistrar> registrar;
     @Value("${castbridge.wallet.require-bind-proof:true}") private boolean requireBindProof;
 
     public WalletSyncController(DeviceService devices, EditionReader reader, GrantService grants, JdbcLedger ledger, WalletRepository repo, WalletPolicyService policies,
-                                SnapshotSigner signer, WalletModuleConfig.WalletClock clock, ObjectProvider<SyncContributor> contributors) {
+                                SnapshotSigner signer, WalletModuleConfig.WalletClock clock, ObjectProvider<SyncContributor> contributors,
+                                ObjectProvider<ReportedActivationRegistrar> registrar) {
         this.devices = devices;
         this.reader = reader;
         this.grants = grants;
@@ -63,6 +69,7 @@ public class WalletSyncController {
         this.signer = signer;
         this.clock = clock;
         this.contributors = contributors;
+        this.registrar = registrar;
     }
 
     /** Authentifie l'appareil (401), exige la clé « portefeuille » (503) : partagé par les routes de l'appareil. */
@@ -89,6 +96,8 @@ public class WalletSyncController {
         List<Map<String, String>> notices = new ArrayList<>();
         GrantService.Standing st;
         boolean boundOther;
+        int held = 0;
+        List<ReportedActivationRegistrar.Registration> registrations = List.of();
         boolean accepted = reading.accepted();
         if (accepted) {
             // liaison à l'appareil : preuve de possession de la clé d'installation (audit M5) ; une identité libérée par l'administrateur se lie au premier appareil qui prouve
@@ -102,10 +111,18 @@ public class WalletSyncController {
             }
             policies.checkWrite(code);
             if (known != null && known.apiDeviceId() == 0 && (proven || !requireBindProof)) repo.bindIfFree(code, d.id);
+            // une activation de production vérifiée, présentée avec la preuve de possession, ouvre (ou rattache) la licence et le poste AVANT le calcul des tranches (W23-05a) ; jamais sans preuve
+            ReportedActivationRegistrar reg = registrar.getIfAvailable();
+            if (reg != null && reading.productionKey()) {
+                List<ReportedActivationRegistrar.Presented> items = new ArrayList<>();
+                for (String a : activations) items.add(new ReportedActivationRegistrar.Presented(a, code, proven ? proof.key() : null, proven));
+                registrations = reg.registerAll(items, ReportedActivationRegistrar.Via.WALLET, now);
+            }
             GrantService.Outcome o = grants.sync(code, d.id, reading, now);
             if (proven) repo.adoptInstallKey(code, d.id, proof.key());
             st = o.standing();
             boundOther = o.boundOther();
+            held = o.held();
         } else {
             // aucune activation acceptée à CE contact : on n'ouvre rien, on n'inscrit rien ; l'identité n'est lue que par l'appareil API qui la porte (audit H3), jamais par un autre
             WalletReason why = reading.clockDoubt() ? WalletReason.CLOCK : WalletReason.ACTIVATE;
@@ -116,6 +133,8 @@ public class WalletSyncController {
             notices.add(notice(why.name(), why.text()));
         }
         if (st.licensePending()) notices.add(notice("LICENSE_PENDING", LICENSE_PENDING_TEXT));
+        notices.addAll(registrationNotices(registrations));
+        if (held > 0) notices.add(notice("CATCHUP_HELD", CATCHUP_HELD_TEXT));
         if (boundOther) notices.add(notice(WalletReason.BOUND_OTHER_TV.name(), WalletReason.BOUND_OTHER_TV.text()));
 
         WalletRepository.Identity row = repo.identity(code).orElseThrow();
@@ -152,7 +171,33 @@ public class WalletSyncController {
         ed.put("grace", st.grace());
         ed.put("boundOther", boundOther);
         out.put("edition", ed);
+        List<Map<String, Object>> regs = new ArrayList<>();
+        for (ReportedActivationRegistrar.Registration r : registrations) {
+            if (r.status() == ReportedActivationRegistrar.Status.IGNORED) continue;
+            Map<String, Object> m = new LinkedHashMap<>();
+            m.put("status", r.status().name());
+            m.put("reason", r.reason());
+            m.put("installTimeUnproven", r.installTimeUnproven());
+            regs.add(m);
+        }
+        if (!regs.isEmpty()) out.put("registration", regs);
         return ResponseEntity.ok().cacheControl(CacheControl.noStore()).body(out);
+    }
+
+    /** Jamais de refus silencieux : chaque activation de production qui n'a pas ouvert de licence dit pourquoi (motif fermé de {@link ReportedActivationRegistrar}, texte de la conception § 5.4). */
+    static List<Map<String, String>> registrationNotices(List<ReportedActivationRegistrar.Registration> registrations) {
+        List<Map<String, String>> out = new ArrayList<>();
+        java.util.Set<String> seen = new java.util.HashSet<>();
+        for (ReportedActivationRegistrar.Registration r : registrations) {
+            if (r.registered() || r.status() == ReportedActivationRegistrar.Status.IGNORED || r.reason() == null) continue;
+            boolean quota = "OVER_QUOTA".equals(r.reason()) || "TRANSFER_CAP".equals(r.reason());
+            String reason = quota ? "SEAT_OVER_QUOTA" : "REGISTRATION_REVIEW";
+            if (!seen.add(reason + "|" + r.reason())) continue;
+            Map<String, String> n = notice(reason, quota ? SEAT_OVER_QUOTA_TEXT : REGISTRATION_REVIEW_TEXT);
+            n.put("detail", r.reason());
+            out.add(n);
+        }
+        return out;
     }
 
     private static ApiException bindProofRequired() {

@@ -280,10 +280,12 @@ public class LicenseService {
 
     /**
      * Creates, in the caller's transaction, the licence of a production key issued without a licence id: {@code lic-} + 10 lowercase hex digits
-     * (SecureRandom, not already used), 1 seat, the default transfer cap, no bundle, no end. Audited (licence created); nothing secret in the log.
+     * (SecureRandom, not already used), 1 seat, the default transfer cap, no bundle. Audited (licence created); nothing secret in the log.
+     * {@code startAt} / {@code endAt} come from the SIGNED {@code usage} right of the key (docs/ACTIVATION-FORMAT.md, usage ceiling): {@code endAt} is null ONLY for a key that is really
+     * unlimited (audit R-1: a licence without end is paid by the wallet as UNLIMITED, whatever the duration of the key).
      */
     @Transactional(isolation = Isolation.READ_COMMITTED)
-    public LicenseRow createAuto(Actor actor) {
+    public LicenseRow createAuto(Actor actor, Instant startAt, Instant endAt) {
         actor.require(Role.Permission.LICENSE_WRITE, props.requireTotp());
         List<Long> ids = jdbc.queryForList("SELECT id FROM lic_client WHERE name = ? AND erased_at IS NULL ORDER BY id LIMIT 1", Long.class, AUTO_CLIENT);
         long clientId;
@@ -309,9 +311,14 @@ public class LicenseService {
             AUTO_RANDOM.nextBytes(b);
             String id = "lic-" + java.util.HexFormat.of().formatHex(b);
             Integer n = jdbc.queryForObject("SELECT COUNT(*) FROM lic_license WHERE license_id = ?", Integer.class, id);
-            if (n != null && n == 0) return create(actor, new NewLicense(id, clientId, "PAID", 1, null, null, null, null, null));
+            if (n != null && n == 0) return create(actor, new NewLicense(id, clientId, "PAID", 1, startAt, endAt, null, null, null));
         }
         throw new IllegalStateException("no free licence id");
+    }
+
+    /** Pins the start and the end of a licence to the usage right of the key just issued (same transaction as its creation: the exact issue date is only known there). */
+    void alignToKey(long licensePk, Instant startAt, Instant endAt) {
+        jdbc.update("UPDATE lic_license SET start_at = ?, end_at = ?, updated_at = ?, version = version + 1 WHERE id = ?", ts(startAt), ts(endAt), ts(Instant.now()), licensePk);
     }
 
     String newLicenseId(String prefix) {
