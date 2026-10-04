@@ -154,6 +154,8 @@ class PlayerActivity : Activity(), TvService.Screen {
         TvConnect.screens.enter(screenId)
         if (::extras.isInitialized) svc?.takePending()?.let { runPending(it) }
         serverScreens()
+        // portefeuille (W22-07a) : le créer à partir de l'activation, puis le mettre à jour auprès du serveur selon le calendrier (première fois tout de suite, ensuite toutes les 15 min)
+        runCatching { castbridge.receiver.wallet.WalletHub.init(this); castbridge.receiver.wallet.WalletHub.refresh(castbridge.core.wallet.ui.WalletSyncSchedule.Trigger.TICK) }
     }
 
     override fun onStart() { super.onStart(); TvConnect.addListener(serverListener); home?.resume() }
@@ -589,7 +591,16 @@ class PlayerActivity : Activity(), TvService.Screen {
             tile(castbridge.core.owner.TrialPolicy.UPGRADE_TILE, R.drawable.ic_cb_cle_usb, castbridge.core.owner.TrialPolicy.UPGRADE_LABEL, "Version d'essai : demandez la clé de production avec le code de cette TV.", "Essai", true) {
                 startActivity(Intent(this, ActivationActivity::class.java).putExtra(ActivationActivity.EXTRA_UPGRADE, true))
             }) else emptyList()
-        return ParentalHub.filterHome(upgrade + listOf(
+        // « ◎ Jetons » (W22-07a) : la carte du portefeuille de cette TV ; elle existe dès l'activation (même avant la première synchronisation : « en attente »), cachée si le service est indisponible
+        // ou si le réglage local « wallet.enabled » est éteint. Aucun solde n'est calculé ici : le texte vient de l'instantané signé (castbridge.core.wallet.ui.WalletStatus).
+        val wallet = if (castbridge.receiver.wallet.WalletHub.cardVisible()) {
+            val v = castbridge.receiver.wallet.WalletHub.statusView()
+            listOf(HomeTool(R.drawable.ic_cb_jetons, "◎ Jetons", "Vos jetons NDEM et MBOKO : convertir, envoyer, recevoir, historique. La mise à jour vient du serveur ; hors ligne, le dernier solde signé reste affiché.",
+                castbridge.receiver.wallet.WalletHub.cardStatus(), v.showBalances, warn = v.state == castbridge.core.wallet.ui.WalletStatus.State.STALE) {
+                startActivity(Intent(this, castbridge.receiver.wallet.WalletActivity::class.java))
+            })
+        } else emptyList()
+        return ParentalHub.filterHome(upgrade + wallet + listOf(
             tile("library", R.drawable.ic_cb_bibliotheque, "Bibliothèque", "Toutes vos vidéos et vos fichiers, en grille.", "${homeItemCount.takeIf { it >= 0 } ?: ParentalHub.filterItems(server?.libraryItems().orEmpty()).size} fichier(s)", false) { showLibrary() },
             tile("bluetooth", R.drawable.ic_cb_bluetooth, "Ajouter un téléphone", "Le téléphone trouve et pilote la TV par Bluetooth, sans code à saisir : une seule validation ici.",
                 (svc?.trust?.list()?.size ?: 0).let { if (it == 0) "Aucun" else "$it de confiance" }, (svc?.trust?.list()?.size ?: 0) > 0) { PairActivity.open(this) },
@@ -771,6 +782,9 @@ class PlayerActivity : Activity(), TvService.Screen {
             flash(if (on) "Quiz en ligne activé" else "Quiz en ligne désactivé")
         }
         items += "Téléchargements" to { startActivity(Intent(this, DownloadsActivity::class.java)) }
+        if (castbridge.receiver.wallet.WalletHub.activated()) items += (if (castbridge.receiver.wallet.WalletHub.flag()) "Jetons : masquer la carte et l'écran (réglage wallet.enabled)" else "Jetons : afficher la carte et l'écran (réglage wallet.enabled)") to {
+            val on = !castbridge.receiver.wallet.WalletHub.flag(); castbridge.receiver.wallet.WalletHub.setFlag(on); flash(if (on) "Jetons affichés" else "Jetons masqués")
+        }
         items += "Ajouter un téléphone / téléphones de confiance (${s.trust.list().size})…" to { PairActivity.open(this) }
         items += castbridge.core.trust.PhonesTexts.menuEntry(s.trust.list().size) to { PhonesActivity.open(this) }
         items += "Bluetooth : rendre la TV visible (2 min)" to { makeDiscoverable() }

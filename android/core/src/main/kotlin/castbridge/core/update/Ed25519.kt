@@ -58,6 +58,37 @@ object Ed25519 {
         return out
     }
 
+    /**
+     * Signature RFC 8032 section 5.1.6 of [message] by the key of the 32-byte [seed] (deterministic: the same bytes as the JDK). Added for the TV, whose Android has no Ed25519 in java.security
+     * before version 13 (the wallet proof of possession, `castbridge-wallet-bind-v1`). Not constant time: the key never leaves the TV and nobody measures its timings.
+     */
+    fun sign(seed: ByteArray, message: ByteArray): ByteArray {
+        require(seed.size == 32) { "graine de 32 octets attendue" }
+        val h = sha512(seed)
+        val a = h.copyOfRange(0, 32).also { it[0] = (it[0].toInt() and 248).toByte(); it[31] = (it[31].toInt() and 127).toByte(); it[31] = (it[31].toInt() or 64).toByte() }
+        val pub = encode(mul(leInt(a), B))
+        val r = leInt(sha512(h.copyOfRange(32, 64), message)).mod(L)
+        val rEnc = encode(mul(r, B))
+        val k = leInt(sha512(rEnc, pub, message)).mod(L)
+        val s = r.add(k.multiply(leInt(a))).mod(L)
+        return rEnc + leBytes(s)
+    }
+
+    private fun sha512(vararg parts: ByteArray): ByteArray = MessageDigest.getInstance("SHA-512").run { parts.forEach { update(it) }; digest() }
+
+    private fun leBytes(v: BigInteger): ByteArray {
+        val be = v.toByteArray().reversedArray()
+        val out = ByteArray(32)
+        for (i in 0 until minOf(32, be.size)) out[i] = be[i]
+        return out
+    }
+
+    private fun encode(p: Pt): ByteArray {
+        val zi = inv(p.z)
+        val x = p.x.multiply(zi).mod(P); val y = p.y.multiply(zi).mod(P)
+        return leBytes(y).also { if (x.testBit(0)) it[31] = (it[31].toInt() or 0x80).toByte() }
+    }
+
     private fun inv(x: BigInteger): BigInteger = x.modPow(P.subtract(TWO), P)
 
     private fun leInt(b: ByteArray): BigInteger = BigInteger(1, b.reversedArray())

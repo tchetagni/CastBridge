@@ -19,11 +19,16 @@ interface Signer {
 
 /** Ed25519 from a 32-byte seed with the JDK (Java 17+, deterministic RFC 8032 signatures: the same input always gives the same bytes, which the test vectors rely on). */
 class Ed25519Signer(seed: ByteArray) : Signer {
-    private val privateKey = KeyFactory.getInstance("Ed25519").generatePrivate(PKCS8EncodedKeySpec(PKCS8_PREFIX + seed))
+    private val seedCopy = seed.copyOf()
+    /** The JDK key, or null where java.security has no Ed25519 (Android before 13: the TV): [sign] then uses the pure Kotlin [Ed25519.sign], which gives the very same bytes. */
+    private val privateKey = runCatching { KeyFactory.getInstance("Ed25519").generatePrivate(PKCS8EncodedKeySpec(PKCS8_PREFIX + seedCopy)) }.getOrNull()
     val publicKey: ByteArray = Ed25519.publicKey(seed)
     val publicKeyBase64: String = Base64.getEncoder().encodeToString(publicKey)
     override val keyId: String = KeyRing.idOf(publicKeyBase64)
-    override fun sign(message: ByteArray): ByteArray = Signature.getInstance("Ed25519").run { initSign(privateKey); update(message); sign() }
+    override fun sign(message: ByteArray): ByteArray {
+        val k = privateKey ?: return Ed25519.sign(seedCopy, message)
+        return runCatching { Signature.getInstance("Ed25519").run { initSign(k); update(message); sign() } }.getOrElse { Ed25519.sign(seedCopy, message) }
+    }
     fun trusted(scopes: Set<KeyScope> = KeyScope.ALL) = TrustedKey(keyId, publicKeyBase64, scopes)
 
     companion object {
