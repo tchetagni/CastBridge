@@ -24,7 +24,7 @@ class TvPrefs(ctx: Context) {
         override fun fingerprints() = (sp.getString("pin_prev", "") ?: "").split(',').filter { it.isNotEmpty() }
         override fun times() = (sp.getString("pin_regen_times", "") ?: "").split(',').mapNotNull { it.toLongOrNull() }
         override fun commit(pin: String, fingerprints: List<String>, times: List<Long>): Boolean {
-            if (!Pin.isValidFormat(pin)) return false
+            if (pin.length != Pin.LENGTH || !pin.all { it in '0'..'9' }) return false      // never write an invalid code
             return runCatching {
                 sp.edit().putString("pin", pin).putString("pin_prev", fingerprints.joinToString(",")).putString("pin_regen_times", times.joinToString(",")).commit()
             }.getOrDefault(false)
