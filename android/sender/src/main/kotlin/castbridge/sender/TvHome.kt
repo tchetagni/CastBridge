@@ -295,6 +295,7 @@ fun TvHome(onAdvanced: () -> Unit, onBluetooth: () -> Unit = onAdvanced) {
 
         // Queue of the files waiting to be sent (several files, « Ouvrir avec », « Copier et lire », …): one at a time, cancel one by one, retry a failure.
         TransferQueueCard()
+        TextButton(onClick = { RecentCopiesActivity.open(ctx) }) { Text("Dernières copies") }
 
         // Series in « Titre / Saison » folders (virtual: nothing moves), automatic after each send, or on demand with a confirmation and an undo
         var autoClass by remember { mutableStateOf(SeriesClassifying.auto(ctx)) }
@@ -561,7 +562,7 @@ fun TransferQueueCard() {
                                 castbridge.core.tv.QueueStatus.RUNNING -> "En cours$kind"
                                 castbridge.core.tv.QueueStatus.WAITING -> "En attente$kind" + if (q.size > 0) " · ${formatSize(q.size)}" else ""
                                 castbridge.core.tv.QueueStatus.DONE -> q.note ?: "Terminé"
-                                else -> "Échec : ${q.error ?: "envoi interrompu"}"
+                                else -> q.error?.let { if (it.startsWith("Échec") || it.startsWith("Copie ")) it else "Échec : $it" } ?: "Échec : envoi interrompu"
                             }, style = MaterialTheme.typography.bodySmall, color = if (q.status == castbridge.core.tv.QueueStatus.FAILED) cs.error else cs.onSurfaceVariant)
                         }
                         if (q.status == castbridge.core.tv.QueueStatus.FAILED) TextButton(onClick = { TransferQueue.retry(ctx, q.id) }) { Text("Réessayer") }

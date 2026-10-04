@@ -317,6 +317,7 @@ class UploadService : Service() {
     }
 
     private fun notifyProgress(s: ResumableUpload.State) {
+        if (destroyed) return          // a late progress line of a worker that outlived its service re-posted an ongoing notification nobody could dismiss
         val now = System.currentTimeMillis()
         if (now - lastNotified < 1000 && s is ResumableUpload.State.Uploading) return
         lastNotified = now
@@ -381,8 +382,12 @@ class UploadService : Service() {
         stopSelf()
     }
 
+    @Volatile private var destroyed = false
+
     override fun onDestroy() {
+        destroyed = true
         cancelled = true
+        runCatching { getSystemService(NotificationManager::class.java).cancel(NOTIF) }
         if (instance === this) instance = null
         // released by the worker's own end ([finish]) when it still runs (cancelled): never before it, so no next upload overlaps it
         if (worker?.isAlive != true) slot.release(myToken)

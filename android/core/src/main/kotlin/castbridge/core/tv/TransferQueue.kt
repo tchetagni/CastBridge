@@ -150,6 +150,17 @@ class TransferQueueModel(private val keepFinished: Int = 12, private val now: ()
         update(id) { it.copy(status = QueueStatus.RUNNING, error = null, cancelAsked = false) }; save(); return true
     }
 
+    /**
+     * The runner crashed (or ended) while a file was RUNNING: that file would stay RUNNING for ever and, because [QueueRules.next] never starts anything while
+     * a file runs, every later copy would wait behind it without a word. Fails it with [text].
+     */
+    @Synchronized fun abandonRunning(text: String): List<QueueItem> {
+        val ids = list.filter { it.status == QueueStatus.RUNNING }.map { it.id }
+        if (ids.isEmpty()) return emptyList()
+        ids.forEach { finish(it, false, text) }
+        return ids.mapNotNull { id -> list.firstOrNull { it.id == id } }
+    }
+
     /** « Annuler » was asked for this running file. */
     @Synchronized fun cancelAsked(id: Long): Boolean = list.firstOrNull { it.id == id }?.let { it.status == QueueStatus.RUNNING && it.cancelAsked } == true
 

@@ -95,6 +95,8 @@ class OpenWithActivity : ComponentActivity() {
         val pinCheck = MutableStateFlow(PinCheck.UNKNOWN)
         // the TV said « je ne vous reconnais plus » a moment ago: the code path is verified too (it is what can still work)
         if (pinTv != null && (TvLinkManager.saved.list().isEmpty() || SendChoices.untrusted(refusalFacts())) && TvAuth.isUsable(pins.get(pinTv))) checkPinTv(pinTv, pins.get(pinTv), pinCheck)
+        // the last attempt to copy THIS file failed a moment ago: its cause and what to do, again on the next opening (never lost with the notification)
+        val lastFailure = runCatching { CopyReport.journal(this).lastFailureFor(name, 30 * 60_000L)?.text }.getOrNull()
         setContent {
             CastTheme {
                 val link by TvLinkManager.state.collectAsState()
@@ -120,6 +122,7 @@ class OpenWithActivity : ComponentActivity() {
                             if (size > 0) Text(formatSize(size), style = MaterialTheme.typography.bodyMedium)
                             // the TV refused this phone: the cause and what to do, ON the phone (never only a Toast)
                             choice.banner?.let { Text(it, style = MaterialTheme.typography.bodyMedium, color = MaterialTheme.colorScheme.error) }
+                            if (choice.banner == null) lastFailure?.let { Text("Dernière tentative : $it", style = MaterialTheme.typography.bodyMedium, color = MaterialTheme.colorScheme.error) }
                             Text(choice.status, style = MaterialTheme.typography.bodyMedium)
                             choice.note?.let { Text(it, style = MaterialTheme.typography.bodySmall) }
                             androidx.compose.foundation.layout.Spacer(Modifier.height(8.dp))
