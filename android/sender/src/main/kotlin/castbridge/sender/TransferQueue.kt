@@ -5,6 +5,7 @@ import android.content.Context
 import android.content.Intent
 import android.net.Uri
 import castbridge.core.lots.FileQueueStore
+import castbridge.core.trust.CopyStep
 import castbridge.core.tv.ContentHash
 import castbridge.core.tv.DedupDecision
 import castbridge.core.tv.DedupTexts
@@ -200,7 +201,14 @@ object TransferQueue {
     /** One file; the record of what was launched is cleared before and after, so « Annuler » never targets another screen's upload. */
     private suspend fun runOne(app: Context, item: QueueItem) {
         launchedId = -1; launchedAttempt = -1
-        try { runOneInner(app, item) } finally { launchedId = -1; launchedAttempt = -1 }
+        try { runOneInner(app, item) }
+        catch (e: kotlinx.coroutines.CancellationException) { throw e }
+        catch (e: Throwable) {
+            // never a file left RUNNING for ever (nothing else would start behind it, without a word): it fails with its cause
+            android.util.Log.e("TransferQueue", "l'envoi a planté", e)
+            model.abandonRunning(CopyReport.failed(app, item, lastStep, lastPercent.takeIf { it > 0 }, e = e)); publish()
+        }
+        finally { launchedId = -1; launchedAttempt = -1 }
     }
 
     private suspend fun runOneInner(app: Context, item: QueueItem) {
@@ -208,7 +216,7 @@ object TransferQueue {
         publish()
         if (!waitForFreeTv(item)) return
         val uri = Uri.parse(item.uri)
-        if (!readable(app, uri)) { model.lost(item.id); publish(); return }
+        if (!readable(app, uri)) { model.finish(item.id, false, CopyReport.failed(app, item, CopyStep.START, null, reason = QueueTexts.SOURCE_LOST)); publish(); return }
         val launch: () -> Unit
         var viaBt = false
         var viaWd = false; var wdSince = 0L
@@ -220,10 +228,12 @@ object TransferQueue {
         var dedupBase: String? = null; var dedupCred: String? = null
         if (item.tvName == null) {
             // the trusted link: its session, waiting up to a minute for it to be (re)established
+            CopyReport.step(app, CopyStep.SEARCH, "recherche de la TV de confiance")
             val (session, refused) = waitForTv()
             if (session == null) {
                 // the TV said no (code 8 « je ne vous reconnais plus »…): fail at once, with its cause and the PIN to type, never a silent minute
-                model.finish(item.id, false, refused?.second ?: QueueTexts.NO_TV); publish()
+                val why = refused?.second ?: CopyReport.failed(app, item, CopyStep.SEARCH, null, reason = QueueTexts.NO_TV)
+                model.finish(item.id, false, why); publish()
                 if (refused != null) RefusalNotice.show(app, item, refused.first)
                 return
             }
@@ -248,7 +258,7 @@ object TransferQueue {
         } else {
             // the TV of that name (code path, cast target): found by discovery (or its manual address) inside the upload service
             val cred = credentials[item.id] ?: PinStore(app).get(item.tvName).takeIf { it.isNotEmpty() }
-            if (cred == null) { model.finish(item.id, false, QueueTexts.NO_CREDENTIAL); publish(); return }
+            if (cred == null) { model.finish(item.id, false, CopyReport.failed(app, item, CopyStep.CONNECT, null, reason = QueueTexts.NO_CREDENTIAL, text = "Copie impossible : le code PIN de la TV n'est pas gardé sur ce téléphone. Touchez pour saisir le code PIN")); publish(); return }
             dedupCred = cred
             dedupBase = item.host?.let { h -> if (':' in h) "http://$h" else "http://$h:8765" }
             launch = {
@@ -264,7 +274,7 @@ object TransferQueue {
             val d = runCatching { contentDedupe(app, item, base0, dedupCred, sameName) }.getOrElse { DedupRun(if (sameName) Dedup.SAME_NAME_UNKNOWN else Dedup.COPY) }
             _note.value = null
             when (d.kind) {
-                Dedup.SKIPPED -> { credentials.remove(item.id); publish(); return }
+                Dedup.SKIPPED -> { credentials.remove(item.id); CopyReport.succeeded(app, item, QueueTexts.ALREADY_THERE); publish(); return }
                 Dedup.CANCELLED -> { model.finishCancelled(item.id); publish(); return }
                 // same name and size, content not verifiable: nothing sent; a MOVE keeps the original (the TV's « done » would prove nothing)
                 Dedup.SAME_NAME_UNKNOWN -> {
@@ -281,10 +291,13 @@ object TransferQueue {
             when {
                 e is UploadService.Busy -> if (!waitForFreeTv(item)) return       // another screen started an upload meanwhile: it goes first, then this one
                 isBackgroundRefusal(e) -> { requeuePaused(item, QueueTexts.PAUSED_BACKGROUND); return }
-                else -> { model.finish(item.id, false, e.message ?: "L'envoi n'a pas pu démarrer"); publish(); return }
+                else -> { model.finish(item.id, false, CopyReport.failed(app, item, CopyStep.START, null, e = e)); publish(); return }
             }
         }
         launchedAttempt = item.attempts; launchedId = item.id
+        lastPercent = 0; lastStep = CopyStep.CONNECT; lastWaitReason = null
+        appForJournal = app
+        CopyReport.step(app, CopyStep.SEND, "envoi lancé (${if (viaBt) "Bluetooth" else "Wi-Fi"})")
         // « Annuler » landed between the launch and its record (cancel() could not know it was launched): stop it now
         if (QueueCancel.afterLaunch(model.cancelAsked(item.id)) == QueueCancel.Action.STOP_UPLOAD) { UploadService.cancel(app); BtUploadService.cancel(app) }
         val outcome = watch(viaBt, item.id)
@@ -292,6 +305,7 @@ object TransferQueue {
             castbridge.core.tv.QueueOutcome.Kind.CANCELLED -> model.finishCancelled(item.id)
             castbridge.core.tv.QueueOutcome.Kind.DONE -> {
                 model.finish(item.id, true)
+                CopyReport.succeeded(app, item)
                 credentials.remove(item.id)
                 // the name the TV holds (the assistant may have renamed it on the way), then « Titre / Saison » for a series
                 val held = (UploadService.state.value as? UploadService.State.Done)?.job?.fileName ?: item.name
@@ -310,12 +324,16 @@ object TransferQueue {
                     model.release(item.id); publish(); delay(2_000); return
                 }
                 wdReroutes.remove(item.id)
-                model.finish(item.id, false, outcome)
+                model.finish(item.id, false, CopyReport.failed(app, item, lastStep, lastPercent.takeIf { it > 0 }, reason = outcome))
             }
         }
         if (!model.busy()) AutoWifiDirect.queueIdle()
         publish()
     }
+
+    @Volatile private var lastPercent = 0
+    @Volatile private var lastStep = CopyStep.CONNECT
+    @Volatile private var lastWaitReason: String? = null
 
     /** Reroutes of a file after the loss of the Wi-Fi Direct group ([castbridge.core.link.BulkRoute.MAX_REROUTES]), in memory. */
     private val wdReroutes = ConcurrentHashMap<Long, Int>()
@@ -473,6 +491,17 @@ object TransferQueue {
     }
 
     /** Null when the file arrived, else the reason. Waits for the service to start (90 s at most), then for it to end. */
+    /** Where the copy is (percent, step), and each new reason it waits for, in the internal journal (« où en est la copie » when it stops later). */
+    private fun progress(sent: Long, total: Long, waitReason: String?) {
+        if (total > 0) lastPercent = (sent * 100 / total).toInt()
+        lastStep = if (sent > 0) CopyStep.SEND else CopyStep.CONNECT
+        if (waitReason != null && waitReason != lastWaitReason) {
+            lastWaitReason = waitReason
+            runCatching { appForJournal?.let { CopyReport.step(it, lastStep, "attente à $lastPercent % : $waitReason") } }
+        } else if (waitReason == null) lastWaitReason = null
+    }
+    @Volatile private var appForJournal: Context? = null
+
     private suspend fun watch(viaBt: Boolean, id: Long): String? {
         var started = false; var waited = 0
         while (true) {
@@ -481,7 +510,8 @@ object TransferQueue {
                 when (val s = BtUploadService.state.value) {
                     is ResumableUpload.State.Done -> return null
                     is ResumableUpload.State.Failed -> return s.reason
-                    is ResumableUpload.State.Uploading, is ResumableUpload.State.Waiting -> started = true
+                    is ResumableUpload.State.Uploading -> { started = true; progress(s.sent, s.total, null) }
+                    is ResumableUpload.State.Waiting -> { started = true; progress(s.sent, s.total, s.reason) }
                     // no state yet during the Bluetooth negotiation: interrupted only once the upload no longer holds the slot
                     null -> if (started && !BtUploadService.active()) return if (model.cancelAsked(id)) null else "Envoi interrompu"
                 }
@@ -490,7 +520,8 @@ object TransferQueue {
                 when (val s = UploadService.state.value) {
                     is UploadService.State.Done -> return null
                     is UploadService.State.Failed -> return s.reason
-                    is UploadService.State.Uploading, is UploadService.State.Waiting -> started = true
+                    is UploadService.State.Uploading -> { started = true; progress(s.sent, s.total, null) }
+                    is UploadService.State.Waiting -> { started = true; progress(s.sent, s.total, s.reason) }
                     UploadService.State.Idle -> if (started && !UploadService.active()) return if (model.cancelAsked(id)) null else "Envoi interrompu"
                 }
                 if (!started && UploadService.active()) started = true

@@ -57,4 +57,17 @@ class TransferQueueTest {
         m.enqueue("w2", "w", 1, false); assertEquals("2 fichiers en attente", m.waitingText())
         m.clearFinished(); assertEquals(2, m.items().size)
     }
+
+    @Test fun aRunnerThatCrashedLeavesNoFileRunningForever() {
+        val m = TransferQueueModel()
+        val a = m.enqueue("u1", "a.mp4", 1, false); val b = m.enqueue("u2", "b.mp4", 1, false)
+        assertTrue(m.start(a.id))
+        assertNull(m.next(), "while a runs, nothing else starts: the wedge")
+        val gone = m.abandonRunning("Copie impossible : erreur inattendue")
+        assertEquals(listOf(a.id), gone.map { it.id })
+        assertEquals(QueueStatus.FAILED, m.item(a.id)?.status); assertEquals("Copie impossible : erreur inattendue", m.item(a.id)?.error)
+        assertEquals(b.id, m.next()?.id, "the next file goes")
+        assertEquals(QueueStatus.WAITING, m.item(b.id)?.status)
+        assertTrue(m.abandonRunning("x").isEmpty())
+    }
 }

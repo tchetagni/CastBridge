@@ -92,6 +92,8 @@
              optional Quick Settings tile -->
         <activity android:name=".RemoteActivity" android:exported="false" android:label="Télécommande TV"
             android:theme="@android:style/Theme.Material.NoActionBar" android:windowSoftInputMode="adjustResize" />
+        <activity android:name=".RecentCopiesActivity" android:exported="false" android:label="Dernières copies"
+            android:theme="@android:style/Theme.Material.NoActionBar" />
         <activity android:name=".MyTvActivity" android:exported="false" android:label="Ma TV"
             android:theme="@android:style/Theme.Material.NoActionBar" android:windowSoftInputMode="adjustResize" />
         <service android:name=".RemoteTileService" android:exported="true" android:label="Télécommande TV"
