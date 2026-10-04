@@ -160,6 +160,9 @@ open class ConsoleActivity : ComponentActivity() {
                 field = if (t == v.text) v else androidx.compose.ui.text.input.TextFieldValue(t, androidx.compose.ui.text.TextRange(t.length)); input = t; token = null; error = null }, label = { Text("Code d'appareil (XXXX-XXXX-XXXX-XXXX) ou demande d'appareil complète") },
                 modifier = Modifier.fillMaxWidth().heightIn(min = 90.dp))
             val production = form.production
+            ConsoleInstallKey.before(OwnerFrames.parseDeviceInfo(input.trim().replace("\r", "")), production)?.let { n ->
+                Text(n.text, style = MaterialTheme.typography.bodySmall, color = if (n.warning) MaterialTheme.colorScheme.error else MaterialTheme.colorScheme.primary)
+            }
             Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
                 FilterChip(!production, { form = ProductionForm.withProduction(form, false); token = null }, { Text("Essai") }); FilterChip(production, { form = ProductionForm.withProduction(form, true); token = null }, { Text("Production") })
             }
@@ -202,9 +205,9 @@ open class ConsoleActivity : ComponentActivity() {
                             rights += RentalIssuing.right(RentalSpec(RentalLines.TRIAL_PRODUCT, listOf(Right.ALL_BUNDLE), RentalLines.TRIAL_DAYS, RentalLines.TRIAL_USAGE_MINUTES),
                                 now, Activation.TRIAL_LICENSE, SeatIds.of(Activation.TRIAL_LICENSE, full.fp), full.fp, RentalKeys.masterFrom(signer), full.installPub, null, boxV1)
                         }
-                        val issued = issuer.issue(ActivationIssuer.Request(kind, full.code, full.fp, issuedAt = now, rights = rights, license = lic))
+                        val issued = issuer.issue(ActivationIssuer.Request(kind, full.code, full.fp, issuedAt = now, rights = rights, license = lic, installKey = if (production) full.installSig else null))
                         token = issued.token; fileContent = issued.fileContent
-                        if (production) info = "Licence $lic (générée)"
+                        if (production) info = listOfNotNull("Licence $lic (générée)", ConsoleInstallKey.after(issued)).joinToString("\n")
                         store.journal(if (form.superUnlimited && production) "super" else "activation", full.code, kind.name + (if (production) "" else if (v1) "+v1" else "+v2"), lic, ActivationPolicy.CODE_VALIDITY_HOURS)
                     } else {
                         val code = DeviceCode.parse(input.trim()) ?: throw IssueException("Code d'appareil mal formé (16 caractères, contrôle compris) et demande complète illisible")
