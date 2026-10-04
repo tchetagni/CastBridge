@@ -12,7 +12,6 @@ import castbridge.play.PlayConfig
 import castbridge.play.PlayServer
 import castbridge.play.TestKeys
 import castbridge.play.TestRights
-import org.junit.Assume.assumeTrue
 import java.io.File
 import java.net.InetSocketAddress
 import kotlin.test.*
@@ -38,10 +37,10 @@ class EdgeFluidityTest {
 
     @AfterTest fun stop() { tvs.forEach { it.stop() }; proxies.forEach { it.close() }; fronts.forEach { it.close() }; servers.forEach { it.close() } }
 
-    private fun server(): PlayServer {
+    private fun server(webPlay: Boolean = true): PlayServer {
         val cfg = PlayConfig(port = 0, trustedProxies = LOOPBACK, ticketPubKeys = listOf(TestKeys.pub), trustedKeys = TestRights.trustedKeys, createsPerIpPerHour = 10_000,
             createsPerIdentityPerDay = 10_000, createsPer48PerHour = 100_000, maxPerIp = 200, maxPerIpShared = 200, connPerMinute = 100_000, connPerSecond = 10_000,
-            revocationsMode = castbridge.play.RevocationsMode.OFF, webPlay = true)
+            revocationsMode = castbridge.play.RevocationsMode.OFF, webPlay = webPlay)   // WEB=0 (production) : la TV entre par tvJoin (ticket + activation), seul chemin qui accorde le siège relais ; WEB=1 : joueurs distants (WebSocket sans TV)
         return PlayServer(cfg, settings = ServerRoom.Settings(duelCount = 10, duelQuestionMs = 20_000)).also { it.start(); servers += it }
     }
 
@@ -166,7 +165,7 @@ class EdgeFluidityTest {
     }
 
     @Test fun twoTvsEachWithFourRelayedPlayersBothBehindTheSimulator() {
-        val srv = server(); val gwA = edge(srv, true); val gwB = edge(srv, true)
+        val srv = server(webPlay = false); val gwA = edge(srv, true); val gwB = edge(srv, true)
         val a = SimTv("TV A", srv.port, bank, gwA.port, autoSkip = true).also { tvs += it }; val b = SimTv("TV B", srv.port, bank, gwB.port).also { tvs += it }
         a.session.start("dev-tv-a-000201", TestRights.PROD, PlayTvSession.Intent.Create(null, "DUEL"))
         waitFor("TV A assise", 60_000) { a.session.seated }
@@ -175,7 +174,7 @@ class EdgeFluidityTest {
         waitFor("TV B assise", 60_000) { b.session.seated }
         val pa = (0 until 4).map { a.addPhone("A${it + 1}", 200L + 150 * it) }; val pb = (0 until 4).map { b.addPhone("B${it + 1}", 250L + 150 * it) }
         pb[0].join(code)
-        assumeTrue("w20-04b absent : le service n'accorde pas le siège relais à une TV invitée (la TV B ne peut pas relayer)", pb[0].joinStatus == 200)
+        assertEquals(200, pb[0].joinStatus, "une TV invitée reçoit le siège relais (w20-04b)")
         pa.forEach { it.join(code) }; pb.drop(1).forEach { it.join(code) }
         val started = System.currentTimeMillis()
         a.session.authority.act(null, "start", null, null, "5")

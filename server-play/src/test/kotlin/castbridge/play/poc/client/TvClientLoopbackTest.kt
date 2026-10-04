@@ -12,7 +12,6 @@ import castbridge.play.PlayServer
 import castbridge.play.TestKeys
 import castbridge.play.TestRights
 import java.net.InetSocketAddress
-import org.junit.Assume.assumeTrue
 import kotlin.test.*
 
 /**
@@ -20,8 +19,7 @@ import kotlin.test.*
  * et des téléphones simulés qui ne parlent qu'à `/quiz` de leur TV. La TV derrière la « passerelle Bluetooth » est un [SlowSocksProxy] (+300 ms par sens) précédé d'une
  * [KeepAliveFront] (le rôle de nginx : la TV garde sa connexion ouverte, le service répond `Connection: close`).
  *
- * w20-04b n'est pas fusionné : le service d'aujourd'hui n'accorde le relais qu'à l'HÔTE ; les tests de deux TV (TV invitée qui relaie ses téléphones) sont écrits et
- * s'arrêtent proprement (`assumeTrue`) tant que le service refuse le siège relais d'une TV invitée.
+ * w20-04b est fusionné : une TV invitée reçoit le siège relais et les tests de deux TV tournent pour de bon.
  */
 class TvClientLoopbackTest {
     private val servers = ArrayList<PlayServer>(); private val proxies = ArrayList<SlowSocksProxy>(); private val fronts = ArrayList<KeepAliveFront>(); private val tvs = ArrayList<SimTv>()
@@ -29,10 +27,10 @@ class TvClientLoopbackTest {
 
     @AfterTest fun stop() { tvs.forEach { it.stop() }; proxies.forEach { it.close() }; fronts.forEach { it.close() }; servers.forEach { it.close() } }
 
-    private fun server(duelCount: Int = 3, questionMs: Long = 8_000, fallbackIdleMs: Long = 40_000): PlayServer {
+    private fun server(duelCount: Int = 3, questionMs: Long = 8_000, fallbackIdleMs: Long = 40_000, webPlay: Boolean = true): PlayServer {
         val cfg = PlayConfig(port = 0, trustedProxies = LOOPBACK, ticketPubKeys = listOf(TestKeys.pub), trustedKeys = TestRights.trustedKeys, createsPerIpPerHour = 10_000,
             createsPerIdentityPerDay = 10_000, createsPer48PerHour = 100_000, maxPerIp = 200, maxPerIpShared = 200, connPerMinute = 100_000, connPerSecond = 10_000, fallbackIdleMs = fallbackIdleMs,
-            revocationsMode = castbridge.play.RevocationsMode.OFF, webPlay = true)
+            revocationsMode = castbridge.play.RevocationsMode.OFF, webPlay = webPlay)   // WEB=0 (production) : la TV entre par tvJoin (ticket + activation), seul chemin qui accorde le siège relais ; WEB=1 : joueurs distants (WebSocket sans TV)
         return PlayServer(cfg, settings = ServerRoom.Settings(duelCount = duelCount, duelQuestionMs = questionMs)).also { it.start(); servers += it }
     }
 
@@ -135,14 +133,14 @@ class TvClientLoopbackTest {
     }
 
     @Test fun twoTvsEachWithTwoRelayedPhonesPlayADuelAndTvBSurvivesACutBehindTheGateway() {
-        val srv = server(); val gw = gateway(srv)
+        val srv = server(webPlay = false); val gw = gateway(srv)
         val a = tv("TV A", srv, autoSkip = true); val b = tv("TV B", srv, gw)
         val code = create(a, "dev-tv-a-000004")
         b.session.start("dev-tv-b-000004", TestRights.PROD, PlayTvSession.Intent.Join(code, "TV B"))
         waitFor("TV B assise") { b.session.seated }
         val a1 = a.addPhone("Awa", 150); val a2 = a.addPhone("Aïcha", 250); val b1 = b.addPhone("Bello", 200); val b2 = b.addPhone("Bintou", 300) { it != 1 }
         a1.join(code); a2.join(code); b1.join(code)
-        assumeTrue("w20-04b absent : le service n'accorde pas le siège relais à une TV invitée (la TV B ne peut pas relayer)", b1.joinStatus == 200)
+        assertEquals(200, b1.joinStatus, "une TV invitée reçoit le siège relais (w20-04b)")
         b2.join(code)
         a.session.authority.act(null, "start", null, null, "5")
         waitFor("question 2 ouverte", 30_000) { b1.lastView?.let { v -> ((v["duel"] as? Map<*, *>)?.get("index") as? Number)?.toInt() == 1 } == true }
