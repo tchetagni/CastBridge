@@ -79,6 +79,8 @@ class PlayerExtras(private val db: () -> LibraryDb?, private val prefs: TvPrefs,
     fun onPlaying(mp: MediaPlayer, spu: Boolean) {
         if (applied) return
         applied = true
+        // L'affichage d'abord et à part : un échec d'un autre réglage (piste audio, sous-titres...) ne doit jamais l'empêcher.
+        if (p.aspect != "auto") runCatching { aspect(mp, p.aspect) } else applyFit(mp)
         runCatching {
             p.audio?.let { mp.setAudioTrack(it) }
             if (spu) {
@@ -89,7 +91,6 @@ class PlayerExtras(private val db: () -> LibraryDb?, private val prefs: TvPrefs,
             if (p.subDelayMs != 0L) mp.setSpuDelay(p.subDelayMs * 1000)
             if (p.audioDelayMs != 0L) mp.setAudioDelay(p.audioDelayMs * 1000)
             if (p.rate != 1f) mp.setRate(p.rate)
-            if (p.aspect != "auto") aspect(mp, p.aspect) else applyFit(mp)
             if (eqPreset >= 0) mp.setEqualizer(MediaPlayer.Equalizer.createFromPreset(eqPreset))
         }
     }
@@ -100,9 +101,15 @@ class PlayerExtras(private val db: () -> LibraryDb?, private val prefs: TvPrefs,
     var panel: () -> Pair<Int, Int> = { 0 to 0 }
     var lastPlan: VideoFit.Plan? = null; private set
     private var lastVideo = 0 to 0
+    private var lastSar = 0 to 0
+    /** Vrai tant que l'affichage n'a pas pu être appliqué faute de piste vidéo connue (libVLC ne la donne parfois qu'après Vout/Playing) : l'activité réessaie. */
+    var fitPending = false; private set
 
-    fun fitDefaultKey(): String = VideoFit.parse(prefs.getString("video_fit"))?.key ?: VideoFit.DEFAULT.key
-    fun fitMode(): VideoFit.Mode = VideoFit.effective(p.fit, prefs.getString("video_fit"))
+    /** « video_fit_set » : marque écrite seulement quand l'utilisateur choisit lui-même l'affichage par défaut (une ancienne valeur « fit » sans marque suit le nouveau défaut). */
+    private fun globalChosen() = prefs.getString("video_fit_set") == "1"
+    fun fitResolved(): VideoFit.Resolved = VideoFit.resolve(p.fit, prefs.getString("video_fit"), globalChosen())
+    fun fitDefaultKey(): String = VideoFit.resolve(null, prefs.getString("video_fit"), globalChosen()).mode.key
+    fun fitMode(): VideoFit.Mode = fitResolved().mode
 
     /**
      * Applique l'affichage choisi à la sortie vidéo qui tourne, sans rouvrir le flux. Rejoué à chaque événement Vout et à chaque changement de taille.
@@ -110,11 +117,13 @@ class PlayerExtras(private val db: () -> LibraryDb?, private val prefs: TvPrefs,
      */
     fun applyFit(mp: MediaPlayer) {
         runCatching {
-            if (p.aspect != "auto") { aspect(mp, p.aspect); lastPlan = null; return }
-            val vt = mp.currentVideoTrack ?: return
+            if (p.aspect != "auto") { aspect(mp, p.aspect); lastPlan = null; fitPending = false; return }
+            val vt = mp.currentVideoTrack
+            if (vt == null || vt.width <= 0 || vt.height <= 0) { fitPending = true; return }     // pas encore de piste : l'activité réessaie (TimeChanged, ESAdded)
+            fitPending = false
             val (pw, ph) = panel()
             val plan = VideoFit.decide(vt.width, vt.height, vt.sarNum, vt.sarDen, VideoFit.rotationOf(vt.orientation), pw, ph, fitMode())
-            lastPlan = plan; lastVideo = vt.width to vt.height
+            lastPlan = plan; lastVideo = vt.width to vt.height; lastSar = vt.sarNum to vt.sarDen
             mp.aspectRatio = plan.aspectRatio                                   // null: libVLC reads the track's own pixel aspect ratio
             mp.videoScale = when (plan.scale) {
                 VideoFit.Scale.BEST_FIT -> MediaPlayer.ScaleType.SURFACE_BEST_FIT
@@ -126,7 +135,11 @@ class PlayerExtras(private val db: () -> LibraryDb?, private val prefs: TvPrefs,
     }
 
     /** « Affichage : Ajusté à l'écran 1920×1080 → 1280×720 » for the INFO screen; null before the picture is known. */
-    fun fitInfo(): String? = lastPlan?.let { VideoFit.infoLine(it, lastVideo.first, lastVideo.second, panel().first, panel().second) }
+    fun fitInfo(): String {
+        val (pw, ph) = panel()
+        val line = VideoFit.diagnosticLine(fitResolved(), lastPlan, lastVideo.first, lastVideo.second, lastSar.first, lastSar.second, pw, ph)
+        return if (p.aspect != "auto") "$line\nFormat d'image forcé à la main (menu « Format d'image ») : il passe avant l'Affichage" else line
+    }
 
     fun aspect(mp: MediaPlayer, mode: String) {
         when (mode) {
@@ -162,7 +175,7 @@ class PlayerExtras(private val db: () -> LibraryDb?, private val prefs: TvPrefs,
                 val was = fitMode(); update { it.copy(aspect = "auto", fit = VideoFit.parse(c.mode)?.key) }; applyAfterFitChange(mp, was)
             }
             is PlayerCommand.FitDefault -> {
-                val was = fitMode(); prefs.putString("video_fit", (VideoFit.parse(c.mode) ?: VideoFit.DEFAULT).key); applyAfterFitChange(mp, was)
+                val was = fitMode(); prefs.putString("video_fit", (VideoFit.parse(c.mode) ?: VideoFit.DEFAULT).key); prefs.putString("video_fit_set", "1"); applyAfterFitChange(mp, was)
             }
             is PlayerCommand.Chapter -> {
                 val n = mp.getChapters(-1)?.size ?: 0
@@ -265,14 +278,15 @@ class PlayerPanel(private val act: Activity, private val api: Api) {
             pick("Format d'image", PlayerParams.ASPECTS.map(PlayerParams::aspectLabel), PlayerParams.ASPECTS.indexOf(t.aspect)) { i -> api.command(PlayerCommand.Aspect(PlayerParams.ASPECTS[i])) }
         }
         val modes = VideoFit.Mode.values().toList()
-        val fitLine = DisplayTexts.label(VideoFit.parse(t.fit) ?: VideoFit.DEFAULT) + if (t.fitFile == null) " (par défaut)" else ""
+        fun choice(m: VideoFit.Mode) = "${DisplayTexts.label(m)}${if (m == VideoFit.DEFAULT) " (par défaut)" else ""} : ${DisplayTexts.hint(m)}"
+        val fitLine = DisplayTexts.label(VideoFit.parse(t.fit) ?: VideoFit.DEFAULT) + if (t.fitFile == null) " (réglage par défaut)" else ""
         items += "${DisplayTexts.ROW} : $fitLine" to {
             val def = DisplayTexts.label(VideoFit.parse(t.fitDefault) ?: VideoFit.DEFAULT)
-            pick(DisplayTexts.ROW, listOf("${DisplayTexts.FOLLOW_DEFAULT} ($def)") + modes.map { "${DisplayTexts.label(it)} : ${DisplayTexts.hint(it)}" },
+            pick(DisplayTexts.ROW, listOf("${DisplayTexts.FOLLOW_DEFAULT} ($def)") + modes.map(::choice),
                 if (t.fitFile == null) 0 else modes.indexOfFirst { it.key == t.fitFile } + 1) { i -> api.command(PlayerCommand.Fit(if (i == 0) null else modes[i - 1].key)) }
         }
         items += "${DisplayTexts.ROW_DEFAULT} : ${DisplayTexts.label(VideoFit.parse(t.fitDefault) ?: VideoFit.DEFAULT)}" to {
-            pick(DisplayTexts.ROW_DEFAULT, modes.map { "${DisplayTexts.label(it)} : ${DisplayTexts.hint(it)}" }, modes.indexOfFirst { it.key == t.fitDefault }) { i -> api.command(PlayerCommand.FitDefault(modes[i].key)) }
+            pick(DisplayTexts.ROW_DEFAULT, modes.map(::choice), modes.indexOfFirst { it.key == t.fitDefault }) { i -> api.command(PlayerCommand.FitDefault(modes[i].key)) }
         }
         if (t.chapters.size > 1) items += "Chapitre : ${t.chapter + 1} / ${t.chapters.size}" to {
             pick("Chapitres", t.chapters.mapIndexed { i, c -> "${i + 1}. ${c.name.ifEmpty { "Chapitre ${i + 1}" }}  (${LibraryLogic.clock(c.timeMs)})" }, t.chapter) { i -> api.command(PlayerCommand.Chapter(i)) }
