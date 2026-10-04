@@ -31,7 +31,8 @@ class TvClientLoopbackTest {
 
     private fun server(duelCount: Int = 3, questionMs: Long = 8_000, fallbackIdleMs: Long = 40_000): PlayServer {
         val cfg = PlayConfig(port = 0, trustedProxies = LOOPBACK, ticketPubKeys = listOf(TestKeys.pub), trustedKeys = TestRights.trustedKeys, createsPerIpPerHour = 10_000,
-            createsPerIdentityPerDay = 10_000, createsPer48PerHour = 100_000, maxPerIp = 200, maxPerIpShared = 200, connPerMinute = 100_000, connPerSecond = 10_000, fallbackIdleMs = fallbackIdleMs)
+            createsPerIdentityPerDay = 10_000, createsPer48PerHour = 100_000, maxPerIp = 200, maxPerIpShared = 200, connPerMinute = 100_000, connPerSecond = 10_000, fallbackIdleMs = fallbackIdleMs,
+            revocationsMode = castbridge.play.RevocationsMode.OFF, webPlay = true)
         return PlayServer(cfg, settings = ServerRoom.Settings(duelCount = duelCount, duelQuestionMs = questionMs)).also { it.start(); servers += it }
     }
 

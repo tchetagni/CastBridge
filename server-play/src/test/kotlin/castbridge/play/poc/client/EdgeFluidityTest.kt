@@ -40,7 +40,8 @@ class EdgeFluidityTest {
 
     private fun server(): PlayServer {
         val cfg = PlayConfig(port = 0, trustedProxies = LOOPBACK, ticketPubKeys = listOf(TestKeys.pub), trustedKeys = TestRights.trustedKeys, createsPerIpPerHour = 10_000,
-            createsPerIdentityPerDay = 10_000, createsPer48PerHour = 100_000, maxPerIp = 200, maxPerIpShared = 200, connPerMinute = 100_000, connPerSecond = 10_000)
+            createsPerIdentityPerDay = 10_000, createsPer48PerHour = 100_000, maxPerIp = 200, maxPerIpShared = 200, connPerMinute = 100_000, connPerSecond = 10_000,
+            revocationsMode = castbridge.play.RevocationsMode.OFF, webPlay = true)
         return PlayServer(cfg, settings = ServerRoom.Settings(duelCount = 10, duelQuestionMs = 20_000)).also { it.start(); servers += it }
     }
 
