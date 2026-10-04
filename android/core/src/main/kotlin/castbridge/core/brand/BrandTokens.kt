@@ -45,6 +45,12 @@ object BrandTokens {
         const val ERROR_LIGHT = 0xFFC5343A.toInt()
         const val INFO_DARK = 0xFF6CB6FF.toInt()
         const val INFO_LIGHT = 0xFF1668C7.toInt()
+        const val OFF_DARK = 0xFF000000.toInt()
+        const val OFF_LIGHT = 0xFF1B1F2A.toInt()
+        const val OFF_RING_DARK = 0xFFB7C0D4.toInt()
+        const val OFF_RING_LIGHT = 0xFF656D7F.toInt()
+        const val UNKNOWN_DARK = 0xFF9AA5BD.toInt()
+        const val UNKNOWN_LIGHT = 0xFF656D7F.toInt()
     }
     object Castbridge {
         const val PRIMARY = 0xFFF5B025.toInt()
