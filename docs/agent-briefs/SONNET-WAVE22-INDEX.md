@@ -13,7 +13,7 @@
 | id | Cahier | Objet | Gel | Effort | Modèle | Audit Opus | Jauge (k entrée / sortie) | Statut | Dépend de |
 |---|---|---|---|---|---|---|---|---|---|
 | w22-01 | `sonnet-w22-01-grand-livre-coeur-java.md` | cœur pur Java : transactions à double entrée, attributions, conversion deux sens, transfert, blocage/règlement, invariants (propriétés) | serveur | M | sonnet | **oui** | 400 / 20 | **PRÊT (ordre 1)** | — |
-| w22-03 | `sonnet-w22-03-formats-signes-cache-tv.md` | cœur Kotlin : `cbw1`, `cbe1`, `cbr1`, `cbv1`, cache TV, vecteurs | cœur | M | sonnet | **oui** | 400 / 20 | **PRÊT (ordre 1 bis)** | — |
+| w22-03 | `sonnet-w22-03-formats-signes-cache-tv.md` | cœur Kotlin : `cbw1`, `cbe1`, `cbr1`, `cbv1`, cache TV, vecteurs | cœur | M | sonnet | **oui** | 400 / 20 | **FAIT, audit Opus à lancer** (`claude/w22-03-formats-signes`, rapport `docs/agent-reports/sonnet-w22-03.md`) | — |
 | w22-02 | `sonnet-w22-02-serveur-grand-livre-v63-attributions.md` | migration V63, `JdbcLedger`, édition lue dans `cbx1`, tranches paresseuses, `sync`, historique, `cbw1`, politique | serveur | L | sonnet | **oui** | 600 / 30 | ATTEND 01 (ordre 2) | 01 |
 | w22-04 | `sonnet-w22-04-service-jeu-mises-resultat-signe.md` | salles misées, `cbe1` vérifié, `Pot.split` par siège, `cbr1` signé, dépôt, drain ⇒ ABORT | cœur + service | M | sonnet | **oui** | 450 / 25 | ATTEND 03 + w20-04b (ordre 2 bis) | 03, w20-04b |
 | w22-05 | `sonnet-w22-05-api-blocage-reglement-conversion-transfert.md` | blocage, règlement, rendus échus, conversion deux sens, codes de réception, transfert, collecteur | serveur | M | sonnet | **oui** | 450 / 25 | ATTEND 02, 03 (ordre 3) | 02, 03 (04 pour les fixtures réelles) |
