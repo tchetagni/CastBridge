@@ -121,7 +121,7 @@ object ActivationCenter {
     }
 
     // ---- activation channels (file, typed text): one verification path ----
-    private fun receiver() = ActivationReceiver(ring, trusted, fp, Subject.TV)
+    private fun receiver() = ActivationReceiver(ring, trusted, fp, Subject.TV, ownInstallKey = runCatching { castbridge.receiver.wallet.WalletHub.installSigner()?.publicKey }.getOrNull())
 
     /** A key pushed by the owner's phone over Bluetooth: verified (nothing installed) and kept here for the activation screen to paste in its field; the owner confirms with « Valider ». */
     @Volatile var pending: String? = null

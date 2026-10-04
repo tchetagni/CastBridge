@@ -131,6 +131,7 @@ class ActivationActivity : Activity() {
         col.addView(tv(LockedTexts.REQUEST, 22f, bold = true))
         col.addView(tv("Code d'appareil", 18f, 0xFFB8C0D6.toInt()))
         col.addView(tv(ActivationCenter.deviceCode, 54f, 0xFFF5B027.toInt(), bold = true, mono = true))
+        runCatching { castbridge.receiver.wallet.WalletHub.installSigner()?.fingerprintText() }.getOrNull()?.let { col.addView(tv("Empreinte de la clé d'installation : " + it, 16f, 0xFF7B849C.toInt(), mono = true)) }
         if (upgrade) { col.addView(tv("Demande d'appareil complète (à donner à CastBridge) :", 16f, 0xFFB8C0D6.toInt())); col.addView(tv(ActivationCenter.requestText(), 13f, 0xFF7B849C.toInt(), mono = true)) }
         col.addView(tv(LockedTexts.WAYS, 18f, 0xFFB8C0D6.toInt()))
         LockedTexts.KEY_WAYS.forEach { col.addView(tv(it, 18f)) }
