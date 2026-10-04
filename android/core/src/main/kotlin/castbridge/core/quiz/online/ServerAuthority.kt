@@ -110,10 +110,11 @@ class ServerAuthority(transport: PlayTransport, override val scope: PlayScope = 
 
     /**
      * Entrée d'une TV NON assise dans la salle d'un autre hôte (fire-and-forget : la réponse arrive par [token]/[role]/[lastErrorOrNull]).
+     * Une TV invitée entre en SPECTATRICE par défaut : elle relaie les téléphones de SON salon (sièges relayés) et ne prend pas elle-même de siège de table (sinon son nom figure au classement).
      * L'activation `cbx1` est jointe au `join` (w20-04b : le service l'exige quand le jeu hors TV est fermé).
      */
     @Suppress("UNUSED_PARAMETER")
-    fun joinRoom(code: String, name: String?, deviceHash: String?, activation: String?) { synchronized(lock) { welcome = null; lastError = null }; send(ClientMsg.Join(code, name, null, deviceHash, false, activation)) }
+    fun joinRoom(code: String, name: String?, deviceHash: String?, activation: String?, spectate: Boolean = true) { synchronized(lock) { welcome = null; lastError = null }; send(ClientMsg.Join(code, name, null, deviceHash, spectate, activation)) }
 
     /** Réveille [awaitChanges] (changement local sans message serveur). */
     fun poke() = synchronized(lock) { changes++; lock.notifyAll() }
