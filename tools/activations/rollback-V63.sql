@@ -1,9 +1,14 @@
--- Retour arrière de V63__activation_tracking.sql (suivi des activations, w23-01).
+-- Retour arrière de V63__activation_tracking.sql (suivi des activations, w23-01) : 23 tables (19 de la conception + act_tv_key, act_erased, act_journal_entry, act_key_check).
 -- ATTENTION : supprime l'historique des activations, qui par décision n'est jamais purgé.
 -- Faire d'abord un mysqldump des tables act_* et adm_read_audit (voir docs/ACTIVATION-TRACKING.md).
 -- Idempotent : peut être rejoué sans erreur. La migration ne crée aucune clé étrangère ;
 -- l'ordre ci-dessous (inverse de la création) reste celui à respecter si une contrainte venait à être ajoutée.
 -- Avant : arrêter le serveur ou positionner CASTBRIDGE_ACTIVATIONS_ENABLED=0.
+-- tables ajoutées par les correctifs de l'audit (H1, M3, M4) : 19 d'origine + 4
+DROP TABLE IF EXISTS act_key_check;
+DROP TABLE IF EXISTS act_journal_entry;
+DROP TABLE IF EXISTS act_erased;
+DROP TABLE IF EXISTS act_tv_key;
 DROP TABLE IF EXISTS act_cursor;
 DROP TABLE IF EXISTS act_policy;
 DROP TABLE IF EXISTS act_archive;
