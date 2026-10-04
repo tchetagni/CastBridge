@@ -70,3 +70,6 @@ D-W22-2 (tranches mensuelles), D-W22-3 (« sans enjeu » = cagnotte NDEM, jeu sa
 - Migrations fusionnées jusqu'à V61 ; V62 réservée par W21.
 - Tests serveur : H2 en mode MySQL (`backend/src/test/resources/application-test.yml`) et MySQL 8.4 par Testcontainers (`MySqlContainerTest.java`).
 - `Pot.split` existe (`android/core/src/main/kotlin/castbridge/core/quiz/Wallet.kt:54-85`) ; échecs en ligne sans serveur (`docs/CHESS.md` § 6).
+
+## Lien avec la vague 23
+Suivi des **codes d'activation** (demande du propriétaire du 2026-10-04, précisée « codes d'activation d'essai et de production ») : `SONNET-WAVE23-INDEX.md`, conception `DESIGN-W23-SUIVI-ACTIVATIONS-CONSOLE-2026-10-04.md` ; aucun suivi de soldes. Migration **V65** prise par w23-01 : w22-10 et w22-16 (« plus haut + 1 ») partent de **V66**.
