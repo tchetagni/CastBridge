@@ -423,11 +423,15 @@ private fun screenName(s: String) = when (s) {
 
 @Composable
 private fun LinkBadge(s: RemoteSession.Status, rtt: Long?) {
-    val (color, text) = when (s.link) {
-        RemoteSession.Link.CONNECTED -> Cb.success to "${s.via ?: ""}${(s.rttMs ?: rtt)?.let { " · $it ms" } ?: ""}"
-        RemoteSession.Link.CONNECTING -> Cb.warning to "connexion…"
-        RemoteSession.Link.OFFLINE -> Cb.error to "hors ligne"
-        RemoteSession.Link.BAD_PIN -> Cb.error to "code ?"
+    // signal colour from the shared core rules (green / blue / orange when slow / red); the word stays in the text
+    val verdict = castbridge.core.tv.status.StatusRules.phoneLink(s.link == RemoteSession.Link.CONNECTED, s.link == RemoteSession.Link.CONNECTING,
+        s.link == RemoteSession.Link.OFFLINE, s.rttMs ?: rtt)
+    val color = androidx.compose.ui.graphics.Color(castbridge.core.tv.status.StatusPalette.dotLight(verdict.level))
+    val text = when (s.link) {
+        RemoteSession.Link.CONNECTED -> "${s.via ?: ""}${(s.rttMs ?: rtt)?.let { " · $it ms" } ?: ""}".ifBlank { verdict.word } + if (verdict.level == castbridge.core.tv.status.StatusLevel.WARN) " · ${verdict.word}" else ""
+        RemoteSession.Link.CONNECTING -> "connexion…"
+        RemoteSession.Link.OFFLINE -> "hors ligne"
+        RemoteSession.Link.BAD_PIN -> "code ?"
     }
     Row(verticalAlignment = Alignment.CenterVertically, modifier = Modifier.padding(end = 4.dp).semantics { contentDescription = "Liaison : $text" }) {
         Box(Modifier.size(10.dp).clip(CircleShape).background(color))

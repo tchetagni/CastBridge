@@ -20,6 +20,9 @@ import castbridge.core.status.IconState
 import castbridge.core.status.StatusBar
 import castbridge.core.status.StatusIcon
 import castbridge.core.status.Tech
+import castbridge.core.tv.status.StatusLevel
+import castbridge.core.tv.status.StatusPalette
+import castbridge.core.tv.status.StatusRules
 
 /**
  * The permanent status bar: a column at the top right (under the clock, over every screen including a playing video) with one
@@ -31,7 +34,7 @@ import castbridge.core.status.Tech
 class StatusBarView(private val act: Activity, private val box: LinearLayout, private val onOpen: () -> Unit, private val leaveFocus: () -> Unit) {
     private val main = Handler(Looper.getMainLooper())
     private class Chip(val view: LinearLayout, val label: TextView, val glyph: ImageView, val mark: ImageView, val second: ImageView, val dot: View, val holder: View) {
-        var sig = ""; var changedAt = 0L; var errBg: Boolean? = null
+        var sig = ""; var changedAt = 0L; var errBg: Boolean? = null; var level: StatusLevel? = null
     }
     private val chips = LinkedHashMap<String, Chip>()
     private val more = TextView(act)
@@ -144,18 +147,27 @@ class StatusBarView(private val act: Activity, private val box: LinearLayout, pr
         val degraded = i.state == IconState.DEGRADED; val error = i.state == IconState.ERROR
         c.glyph.setImageResource(glyphOf(i))
         tech(c.mark, if (i.kind == IconKind.INTERNET) null else i.tech); tech(c.second, i.secondary)
-        c.dot.visibility = if (degraded || error || i.state == IconState.CONNECTING) View.VISIBLE else View.GONE
-        (c.dot.background as GradientDrawable).setColor(if (error) TvStyle.ERROR else TvStyle.ACCENT)
+        // signal colour (core StatusRules): ring + dot carry the level, the glyph keeps its shape and the French text carries the state word
+        val verdict = StatusRules.icon(i); val level = verdict.level
+        if (c.level != level) {
+            c.level = level
+            c.holder.background = GradientDrawable().apply { shape = GradientDrawable.RECTANGLE; cornerRadius = dp(24).toFloat()
+                setColor(StatusPalette.fill(level)); setStroke(dp(3), StatusPalette.ring(level)) }
+            (c.dot.background as GradientDrawable).apply { setColor(StatusPalette.dot(level))
+                setStroke(dp(1), if (level == StatusLevel.OFF) StatusPalette.ring(level) else Color.BLACK) }
+            c.glyph.alpha = StatusPalette.glyphAlpha(level)
+        }
+        c.dot.visibility = View.VISIBLE
         if (c.errBg != error) { c.errBg = error; c.view.background = if (error) act.getDrawable(R.drawable.badge_warn_bg) else TvStyle.focusable(act, 0xCC0B3D5C.toInt(), TvStyle.R_XL) }
-        c.view.alpha = if (degraded || i.state == IconState.CONNECTING) 0.65f else 1f
-        c.view.contentDescription = i.text()
+        c.view.alpha = 1f
+        c.view.contentDescription = "${StatusRules.chipText(i)} (${level.colour.lowercase()})"
         c.view.isFocusable = interactive
         val big = playerMode
         c.label.textSize = if (big) castbridge.core.tv.PlayerIcons.TEXT_SP.toFloat() else TvStyle.Type.CAPTION
         (c.holder.layoutParams as? LinearLayout.LayoutParams)?.let { it.width = dp(if (big) 56 else 38); it.height = dp(if (big) 48 else 34); c.holder.layoutParams = it }
         (c.glyph.layoutParams as? FrameLayout.LayoutParams)?.let { it.width = dp(if (big) castbridge.core.tv.PlayerIcons.ICON_DP else 26); it.height = it.width; c.glyph.layoutParams = it }
-        val show = big || c.view.hasFocus() || bigBar || now - c.changedAt < SHOW_MS || degraded || error
-        c.label.text = i.text(); c.label.visibility = if (show) View.VISIBLE else View.GONE
+        val show = big || c.view.hasFocus() || bigBar || now - c.changedAt < SHOW_MS || degraded || error || level == StatusLevel.WARN || level == StatusLevel.ERROR
+        c.label.text = StatusRules.chipText(i);c.label.visibility = if (show) View.VISIBLE else View.GONE
     }
     /** OK on the home expands every label for a while (see [openPanel]). */
     private var bigBar = false
@@ -191,7 +203,7 @@ class StatusBarView(private val act: Activity, private val box: LinearLayout, pr
                 addView(text(if (i.kind == IconKind.INTERNET) i.label else "${i.kind.label} · ${i.label}".takeIf { i.label != i.kind.label } ?: i.kind.label, TvStyle.Type.BODY, TvStyle.TEXT)) }
             list.addView(head, LinearLayout.LayoutParams(-1, -2).apply { topMargin = dp(14) })
             val detail = listOfNotNull(i.tech.label.ifEmpty { null }, i.secondary?.let { "aussi : ${it.label}" }, i.sinceText(now),
-                i.latencyMs?.let { "$it ms" }, i.state.label.ifEmpty { null }, if (i.count > 1) "${i.count} sessions" else null).joinToString(" · ")
+                i.latencyMs?.let { "$it ms" }, StatusRules.icon(i).let { "${it.level.colour.lowercase()} : ${it.word}" }, if (i.count > 1) "${i.count} sessions" else null).joinToString(" · ")
             list.addView(text(detail, TvStyle.Type.CAPTION, TvStyle.TEXT2), LinearLayout.LayoutParams(-1, -2).apply { leftMargin = dp(42) })
             if (i.kind == IconKind.PHONE && i.ref.isNotEmpty()) list.addView(action("Retirer ce téléphone") {
                 confirm("Retirer ${i.label} ?", "Ce téléphone ne pourra plus piloter la TV sans le code. Il pourra être ajouté à nouveau.", "Retirer") {

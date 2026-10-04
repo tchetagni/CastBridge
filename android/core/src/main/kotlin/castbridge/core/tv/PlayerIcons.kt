@@ -38,7 +38,11 @@ object PlayerIcons {
             Entry("state-degraded", "Point : reconnexion", "Pastille pâle avec un point : la liaison est perdue, elle se rétablit seule."),
             Entry("state-error", "Fond rouge : erreur", "Pastille à fond rouge : la liaison est en erreur, ouvrez Connexions pour agir."),
         )
-        return kinds + extra + marks + states
+        val levels = castbridge.core.tv.status.StatusLevel.values().map {
+            Entry("level-${it.wire}", "${it.colour} : ${it.meaning.substringBefore(" (")}",
+                "Anneau et point ${it.colour.lowercase()} : ${it.meaning}. Le mot écrit à côté de l'icône dit la même chose : la couleur n'est jamais seule.")
+        }
+        return kinds + levels + extra + marks + states
     }
 
     private fun meaning(k: IconKind) = when (k) {

@@ -141,7 +141,11 @@ object IconLegend {
         for (e in PlayerIcons.legend()) {
             val glyph = android.widget.ImageView(act)
             val kind = e.kind
-            if (kind != null) glyph.setImageResource(statusGlyph(kind, castbridge.core.status.Tech.WIFI_LAN))
+            val level = if (e.id.startsWith("level-")) castbridge.core.tv.status.StatusLevel.fromWire(e.id.removePrefix("level-")) else null
+            if (level != null) glyph.setImageDrawable(android.graphics.drawable.GradientDrawable().apply {
+                shape = android.graphics.drawable.GradientDrawable.OVAL
+                setColor(castbridge.core.tv.status.StatusPalette.fill(level)); setStroke(dp(4), castbridge.core.tv.status.StatusPalette.ring(level)) })
+            else if (kind != null) glyph.setImageResource(statusGlyph(kind, castbridge.core.status.Tech.WIFI_LAN))
             else when {
                 e.id.startsWith("tech-") -> glyph.setImageResource(when (e.id) {
                     "tech-bluetooth" -> R.drawable.ic_cb_bluetooth; "tech-ethernet" -> R.drawable.ic_cb_ethernet

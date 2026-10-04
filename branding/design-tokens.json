@@ -126,6 +126,30 @@
         "light": {
           "value": "#1668C7"
         }
+      },
+      "off": {
+        "dark": {
+          "value": "#000000"
+        },
+        "light": {
+          "value": "#1B1F2A"
+        }
+      },
+      "offRing": {
+        "dark": {
+          "value": "#B7C0D4"
+        },
+        "light": {
+          "value": "#656D7F"
+        }
+      },
+      "unknown": {
+        "dark": {
+          "value": "#9AA5BD"
+        },
+        "light": {
+          "value": "#656D7F"
+        }
       }
     },
     "brand": {
@@ -448,6 +472,61 @@
     "$description": "Paires texte/fond vérifiées par le test JVM core/src/test/.../BrandContrastTest (WCAG 2.x). kind=text : >= 4,5 ; kind=large (grands éléments, icônes, anneaux de focus, >= 24 px gras) : >= 3,0.",
     "note": "v1.1 : corrections de contraste (le guide v1.0 annonçait WCAG AA mais ces paires échouaient en texte courant). Clair : primary #B7791F -> #946219 (3,6 -> 5,2 sur blanc), accent #E4692E -> #B05123 (3,3 -> 5,2), secondary et success #1F8A5C -> #1C7C53 (4,3 -> 5,2 ; blanc dessus), textLow #6B7487 -> #656D7F. Les teintes de marque d'origine restent disponibles pour les grands éléments et icônes : light.primaryBrand #B7791F, light.accentBrand #E4692E. Sombre : textLow #6E7A93 -> #828DA2 (4,4/3,9 -> 5,7/5,0 sur fond/surface), onSecondary #FFFFFF -> #0A0F1E (3,4 -> 5,7 sur #2E9E6B).",
     "pairs": [
+      {
+        "fg": "semantic.offRing.dark",
+        "bg": "dark.background",
+        "kind": "large"
+      },
+      {
+        "fg": "semantic.offRing.dark",
+        "bg": "semantic.off.dark",
+        "kind": "large"
+      },
+      {
+        "fg": "semantic.unknown.dark",
+        "bg": "dark.background",
+        "kind": "large"
+      },
+      {
+        "fg": "semantic.unknown.dark",
+        "bg": "semantic.off.dark",
+        "kind": "large"
+      },
+      {
+        "fg": "semantic.success.dark",
+        "bg": "semantic.off.dark",
+        "kind": "large"
+      },
+      {
+        "fg": "semantic.warning.dark",
+        "bg": "semantic.off.dark",
+        "kind": "large"
+      },
+      {
+        "fg": "semantic.error.dark",
+        "bg": "semantic.off.dark",
+        "kind": "large"
+      },
+      {
+        "fg": "semantic.info.dark",
+        "bg": "semantic.off.dark",
+        "kind": "large"
+      },
+      {
+        "fg": "semantic.off.light",
+        "bg": "light.surface",
+        "kind": "text"
+      },
+      {
+        "fg": "semantic.offRing.light",
+        "bg": "light.surface",
+        "kind": "text"
+      },
+      {
+        "fg": "semantic.unknown.light",
+        "bg": "light.surface",
+        "kind": "text"
+      },
       {
         "fg": "dark.textHigh",
         "bg": "dark.background",

@@ -108,3 +108,33 @@ Règle (propriétaire, 2026-10-04) : jamais d'icône sans libellé texte en fran
 
 Deux zones : en haut à droite, les connexions (avec libellés) ; en haut à gauche, copie et diagnostic. Une seule zone n'a pas été faite (la copie reste à gauche pour ne pas chevaucher la colonne des pastilles, de hauteur variable). Le dessin n'est vérifié que par compilation ; la lisibilité réelle à 3 m, le surbalayage et la superposition avec la barre de progression ne peuvent être jugés que sur la TV.
 
+
+## Pastilles d'état (couleurs signalétiques, 2026-10-04)
+
+Demande du propriétaire : « les pastilles d'état Wifi, Bluetooth, Internet, Stockage,… doivent avoir au moins 4 couleurs signalétiques (noir, vert, orange, rouge) ». Règles pures dans `core/tv/status/StatusLevel.kt` (`StatusRules`, seuils dans `StatusThresholds`), couleurs dans les tokens de la charte (`branding/design-tokens.json`, `semantic.*`). Valable à l'accueil (barre en haut à droite) et pendant la lecture (même `StatusBarView`). Aucun accueil TV n'a son propre document : `docs/TV-ACCUEIL.md` n'existe pas, cette section fait foi.
+
+**Niveaux.** Noir `OFF` (désactivé volontairement ou absent) ; Vert `OK` (fonctionne, `success` #35C08A) ; Orange `WARN` (dégradé ou à surveiller, `warning` #F5B025) ; Rouge `ERROR` (panne ou critique, `error` #FF6B6B) ; Bleu `BUSY` (en cours, `info` #6CB6FF) ; Gris `UNKNOWN` (pas encore mesuré, `unknown` #9AA5BD). Un « inconnu » n'est jamais vert.
+
+**Dessin.** Chaque pastille garde son icône, son libellé français et un mot d'état (« Wi-Fi · connecté », « Stockage · 12 % libre », « Internet · lent ») : la couleur n'est jamais le seul signal. Anneau de 3 dp et point de la couleur du niveau. Le NOIR reste visible : remplissage noir pur (`semantic.off`), anneau CLAIR `semantic.offRing` #B7C0D4 (contraste au moins 3:1 sur le fond #0A0F1E et sur le noir, vérifié par `BrandContrastTest`), icône à 60 % d'opacité (jamais invisible). Le libellé complet reste affiché en permanence pour l'orange et le rouge ; pour les autres niveaux, selon la règle existante (nouveau, focus, OK sur l'accueil, lecteur).
+
+**Règles par pastille** (seuils : stockage 20 % / 5 %, Wi-Fi faible à -70 dBm, lent à 1,5 s, licence 7 jours, 8 téléphones, jetons 5).
+
+| Pastille | Noir | Vert | Orange | Rouge | Bleu | Gris |
+|---|---|---|---|---|---|---|
+| Wi-Fi | désactivé | connecté, signal bon | signal faible, ou réseau sans Internet | activé mais non connecté | en connexion | |
+| Wi-Fi Direct | désactivé ou inactif | groupe actif | | échec | en cours | |
+| Bluetooth | désactivé | prêt, téléphone relié, passerelle | passerelle sur réseau lent | erreur adaptateur, téléphone refusé | en connexion | |
+| Internet | hors ligne non attendu | direct | via la passerelle du téléphone, ou latence de 1,5 s et plus | aucun accès alors qu'attendu | vérification | non testé |
+| Stockage | absent | 20 % libre ou plus | de 5 % à moins de 20 % | moins de 5 %, lecture seule, erreur | | non mesuré |
+| Téléphones n/8 | aucun | 1 à 7 | 8/8 complet | | | |
+| Copie en cours | aucune | | ralentie | échec | en cours (pourcentage) | |
+| Licence | non requise (build non verrouillé) | valide | expire sous 7 jours, en attente de notification, ESSAI (édition limitée, à surveiller : choix à confirmer par le propriétaire) | expirée, invalide, essai terminé | | |
+| Quiz en ligne | hors partie | en ligne | liaison lente | TV non activée, serveur injoignable | connexion | |
+| Jetons / serveur | | solde au-dessus de 5 | 5 restants ou moins, serveur hors ligne | plus de jeton | | non testé, solde inconnu |
+| Barre : Téléphone, Télécommande, Clé USB, Wi-Fi Direct (groupe), Quiz joueur, Échecs joueur, Mode enfant | | état connecté | reconnexion | erreur | connexion | |
+| Barre : Passerelle téléphone | | actif | lent (1,5 s et plus), reconnexion | erreur | connexion | |
+| Barre : SSH | | | ouvert (administration à distance : à surveiller) | erreur | | |
+| Barre : Mise à jour | | | disponible | erreur | | |
+| Barre : Diffusion, Téléchargement | | | reconnexion | erreur | en cours | |
+
+Aujourd'hui `StatusBarView` dessine les pastilles de la barre (les lignes « Barre » et Internet) ; les règles Wi-Fi, Bluetooth, Stockage, Téléphones n/8, Copie, Licence, Quiz et Jetons sont prêtes et testées, mais leurs pastilles propres ne sont pas encore ajoutées à la barre (il faut les alimenter depuis `TvService`, hors périmètre de cette tâche). La « Légende des icônes » liste les six couleurs. Téléphone : la pastille de liaison de la télécommande (`RemoteScreen.LinkBadge`) utilise `StatusRules.phoneLink` ; aucun autre voyant d'état n'existe côté téléphone. Dessin Android vérifié par compilation seulement ; seule une vraie TV (GaiaOS 32 bits, 720p) confirme la lisibilité des anneaux et du noir.
