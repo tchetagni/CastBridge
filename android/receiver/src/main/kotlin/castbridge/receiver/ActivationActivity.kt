@@ -23,7 +23,12 @@ import castbridge.core.owner.FeatureGate
 import castbridge.core.owner.GateState
 import castbridge.core.owner.LockedTexts
 import castbridge.core.owner.TrialPolicy
+import castbridge.core.tv.activation.PickInput
+import castbridge.core.tv.activation.PickResult
+import castbridge.core.tv.activation.PickerPlan
 import castbridge.core.tunnel.TunnelTerms
+import android.net.Uri
+import java.io.File
 import java.text.DateFormat
 import java.util.Date
 
@@ -48,10 +53,40 @@ class ActivationActivity : Activity() {
                     validate.requestFocus()
                 }
             }
-            // a key is read from the USB drive only once the terms of use are accepted on this TV
-            if (TunnelHub.termsAccepted(this@ActivationActivity)) { val r = Thread { val res = ActivationCenter.scanFiles(); h.post { if (res != null) show(res, "la clé USB") } }; r.start() }
             h.postDelayed(this, 2_000)
         }
+    }
+    /** USB lookup every 15 s while the screen is open (and at once when a volume is mounted): a key is read only once the terms of use are accepted on this TV. */
+    private val scanTick = object : Runnable {
+        override fun run() { if (done) return; scanNow(manual = false); h.postDelayed(this, SCAN_EVERY_MS) }
+    }
+    private val mountReceiver = object : android.content.BroadcastReceiver() {
+        override fun onReceive(c: android.content.Context, i: Intent) { h.removeCallbacks(scanSoon); h.postDelayed(scanSoon, 1_500) }       // the volume needs a moment to settle
+    }
+    private val scanSoon = Runnable { if (!done) scanNow(manual = false) }
+    private var mountRegistered = false
+
+    /** One lookup in a thread, then the report lines under the button. [manual] = the button: says « Recherche… » and refuses before the terms are accepted. */
+    private fun scanNow(manual: Boolean) {
+        if (!(if (manual) termsOk() else TunnelHub.termsAccepted(this))) {
+            if (manual) { status.setTextColor(0xFFFF8A80.toInt()); status.text = TunnelTerms.MUST_ACCEPT; termsBox.requestFocus() }
+            return
+        }
+        if (manual) { status.setTextColor(0xFFB8C0D6.toInt()); status.text = LockedTexts.SEARCHING; report.text = LockedTexts.SEARCHING }
+        Thread {
+            val res = ActivationCenter.scanFiles()
+            val lines = ActivationCenter.lastReport
+            h.post {
+                if (isFinishing || done) return@post
+                if (res == null) { if (lines.isNotEmpty() || manual) report.text = lines.joinToString("\n"); if (manual) { status.setTextColor(0xFFFF8A80.toInt()); status.text = "Aucune clé trouvée sur la clé USB." } }
+                else {
+                    report.text = lines.joinToString("\n")
+                    status.setTextColor(0xFFB8C0D6.toInt()); status.text = LockedTexts.KEY_FOUND
+                    if (res is ActivationResult.Accepted) done = true
+                    h.postDelayed({ show(res, "la clé USB") }, 600)
+                }
+            }
+        }.start()
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -98,7 +133,7 @@ class ActivationActivity : Activity() {
         col.addView(tv(ActivationCenter.deviceCode, 54f, 0xFFF5B027.toInt(), bold = true, mono = true))
         if (upgrade) { col.addView(tv("Demande d'appareil complète (à donner à CastBridge) :", 16f, 0xFFB8C0D6.toInt())); col.addView(tv(ActivationCenter.requestText(), 13f, 0xFF7B849C.toInt(), mono = true)) }
         col.addView(tv(LockedTexts.WAYS, 18f, 0xFFB8C0D6.toInt()))
-        col.addView(tv("Recevoir la clé : copiez le fichier « activation » reçu dans le dossier Download/CastBridge d'une clé USB branchée sur la TV (lu automatiquement), ou saisissez la clé ci-dessous.", 18f))
+        LockedTexts.KEY_WAYS.forEach { col.addView(tv(it, 18f)) }
         val where = tv("", 15f, 0xFF7B849C.toInt())
         col.addView(where)
         Thread { val w = ActivationCenter.exportRequest(); h.post { if (w.isNotEmpty()) where.text = "Demande d'appareil complète écrite dans : " + w.joinToString(" · ") { it.substringAfter("/storage/").substringAfter("emulated/0/").take(70) } } }.start()
@@ -111,8 +146,11 @@ class ActivationActivity : Activity() {
         col.addView(input, LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT))
         validate = Button(this).apply { text = "Valider la clé"; textSize = 20f; setOnClickListener { enter() } }
         col.addView(validate)
-        col.addView(Button(this).apply { text = "Chercher la clé sur la clé USB"; textSize = 20f; setOnClickListener { if (!termsOk()) { status.setTextColor(0xFFFF8A80.toInt()); status.text = TunnelTerms.MUST_ACCEPT; termsBox.requestFocus(); return@setOnClickListener }; Thread { val r = ActivationCenter.scanFiles(); h.post { if (r != null) show(r, "la clé USB") else status.text = "Aucun fichier « activation » trouvé sur la clé USB." } }.start() } })
-        col.addView(tv("Plus simple : sur le téléphone, ouvrez CastBridge > « Activer la TV », collez la clé : le téléphone trouve cette TV par Bluetooth et l'envoie.", 18f, 0xFFB8C0D6.toInt()))
+        col.addView(Button(this).apply { text = "Choisir le fichier d'activation (explorateur)"; textSize = 20f; setOnClickListener { pickBuiltIn() } })
+        if (PickerPlan.Chooser.SYSTEM in PickerPlan.choosers(systemPickerIntent().resolveActivity(packageManager) != null))
+            col.addView(Button(this).apply { text = "Explorateur du système"; textSize = 20f; setOnClickListener { pickSystem() } })
+        col.addView(Button(this).apply { text = "Chercher la clé sur la clé USB"; textSize = 20f; setOnClickListener { scanNow(manual = true) } })
+        report = tv("", 15f, 0xFF7B849C.toInt()); col.addView(report)
         col.addView(Button(this).apply { text = "Rendre la TV visible pour le téléphone (Bluetooth)"; textSize = 20f; setOnClickListener { makeVisible() } })
         // Free contents (CC BY-SA): a ZIP written by the TV itself, usable without an activation key, offline (no HTTP route, no PIN)
         col.addView(tv("Archive ZIP des contenus sous licence CC BY-SA, utilisable sans clé d'activation", 16f, 0xFFB8C0D6.toInt()))
@@ -123,7 +161,45 @@ class ActivationActivity : Activity() {
         setContentView(ScrollView(this).apply { setBackgroundColor(0xFF0A0F1E.toInt()); addView(col) })
     }
 
-    companion object { const val EXTRA_UPGRADE = "upgrade" }
+    companion object { const val EXTRA_UPGRADE = "upgrade"; const val SCAN_EVERY_MS = 15_000L; private const val REQ_BUILT_IN = 81; private const val REQ_SYSTEM = 82 }
+    private lateinit var report: TextView
+
+    // ---- choosing the file by hand: the built-in explorer first (a poor box has no system picker), the system one if it exists; the file name does not matter ----
+    private fun systemPickerIntent() = Intent(Intent.ACTION_OPEN_DOCUMENT).addCategory(Intent.CATEGORY_OPENABLE).setType("*/*").also { i ->
+        PickerPlan.initialUri(ActivationCenter.volumeIds().firstOrNull())?.let { i.putExtra(android.provider.DocumentsContract.EXTRA_INITIAL_URI, Uri.parse(it)) }
+    }
+    private fun pickBuiltIn() {
+        if (!termsOk()) { status.setTextColor(0xFFFF8A80.toInt()); status.text = TunnelTerms.MUST_ACCEPT; termsBox.requestFocus(); return }
+        startActivityForResult(Intent(this, FilePickActivity::class.java), REQ_BUILT_IN)
+    }
+    private fun pickSystem() {
+        if (!termsOk()) { status.setTextColor(0xFFFF8A80.toInt()); status.text = TunnelTerms.MUST_ACCEPT; termsBox.requestFocus(); return }
+        try { startActivityForResult(systemPickerIntent(), REQ_SYSTEM) }
+        catch (e: android.content.ActivityNotFoundException) { status.setTextColor(0xFFFF8A80.toInt()); status.text = PickerPlan.systemPickerMissing(); scanNow(manual = false) }       // no silent failure: say it, then the automatic lookup
+    }
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        if (requestCode != REQ_BUILT_IN && requestCode != REQ_SYSTEM) return
+        if (resultCode != RESULT_OK || data == null) { handlePick(PickInput.Cancelled); return }
+        status.setTextColor(0xFFB8C0D6.toInt()); status.text = LockedTexts.SEARCHING
+        Thread {
+            val input: PickInput = try {
+                val stream = if (requestCode == REQ_BUILT_IN) data.getStringExtra(FilePickActivity.EXTRA_PATH)?.let { java.io.FileInputStream(File(it)) }
+                             else data.data?.let { contentResolver.openInputStream(it) }              // read once, the URI is not kept (no persistable permission)
+                if (stream == null) PickInput.Nothing else stream.use { PickInput.Bytes(castbridge.core.util.BoundedRead.readAll(it, PickerPlan.MAX_BYTES + 1)) }
+            } catch (e: java.io.IOException) { PickInput.Unreadable } catch (e: SecurityException) { PickInput.Unreadable }
+            h.post { handlePick(input) }
+        }.start()
+    }
+    private fun handlePick(input: PickInput) {
+        when (val d = PickerPlan.decide(input)) {
+            is PickResult.Key -> {
+                status.setTextColor(0xFFB8C0D6.toInt()); status.text = d.message
+                Thread { val r = ActivationCenter.accept(Channel.MANUAL, d.line.toByteArray(Charsets.UTF_8)); h.post { show(r, "le fichier choisi") } }.start()
+            }
+            else -> { status.setTextColor(if (d is PickResult.Cancelled || d is PickResult.Nothing) 0xFFB8C0D6.toInt() else 0xFFFF8A80.toInt()); status.text = d.message }
+        }
+    }
     private lateinit var freeButton: Button
     private lateinit var freeStatus: TextView
     private fun exportFree() {
@@ -176,7 +252,12 @@ class ActivationActivity : Activity() {
 
     private val btTick = object : Runnable { override fun run() { btLine.text = "Bluetooth d'activation : " + (TvService.running?.ownerStatus() ?: "service non démarré"); h.postDelayed(this, 2_000) } }
     override fun onResume() {
-        super.onResume(); h.post(poll); h.post(btTick)
+        super.onResume(); h.post(poll); h.post(btTick); h.post(scanTick)
+        if (!mountRegistered) runCatching {
+            val f = android.content.IntentFilter(Intent.ACTION_MEDIA_MOUNTED).apply { addDataScheme("file") }
+            if (android.os.Build.VERSION.SDK_INT >= 33) registerReceiver(mountReceiver, f, android.content.Context.RECEIVER_EXPORTED) else registerReceiver(mountReceiver, f)
+            mountRegistered = true
+        }
         // Bluetooth permissions: the lock screen comes BEFORE the player screen that normally asks for them, and without BLUETOOTH_ADVERTISE the TV opens none of its
         // Bluetooth services (pairing, remote control, activation). Asked here, then the services are (re)started.
         val wanted = buildList {
@@ -190,7 +271,10 @@ class ActivationActivity : Activity() {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults)
         if (requestCode == 77) { TvService.running?.onActivationPermissions(); if (!askedVisible) { askedVisible = true; makeVisible() } }
     }
-    override fun onPause() { super.onPause(); h.removeCallbacks(poll); h.removeCallbacks(btTick) }
+    override fun onPause() {
+        super.onPause(); h.removeCallbacks(poll); h.removeCallbacks(btTick); h.removeCallbacks(scanTick); h.removeCallbacks(scanSoon)
+        if (mountRegistered) { runCatching { unregisterReceiver(mountReceiver) }; mountRegistered = false }
+    }
     override fun onKeyDown(keyCode: Int, event: KeyEvent?): Boolean =
         if (keyCode == KeyEvent.KEYCODE_BACK && ActivationCenter.state() is GateState.Locked) true else super.onKeyDown(keyCode, event)      // no way out while locked
 }
