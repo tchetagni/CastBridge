@@ -770,6 +770,11 @@ class PlayerActivity : Activity(), TvService.Screen {
         items += castbridge.core.trust.PhonesTexts.menuEntry(s.trust.list().size) to { PhonesActivity.open(this) }
         items += "Bluetooth : rendre la TV visible (2 min)" to { makeDiscoverable() }
         items += (if (prefs.getBool("wd_enabled", false)) "Wi-Fi Direct : désactiver" else "Wi-Fi Direct : activer (crée un réseau TV<->téléphone)") to { toggleWifiDirect() }
+        val dialOn = DialHost.enabled(prefs)
+        items += "Diffusion YouTube vers cette TV (DIAL) : " + (if (dialOn) "oui (désactiver)" else "non (activer)") to {
+            prefs.putBool(DialHost.PREF, !dialOn); s.applyDial()
+            flash(if (!dialOn) "L'appli YouTube du téléphone peut maintenant diffuser vers cette TV (même Wi-Fi, avec Internet). Cela lance YouTube TV, qui doit être installée." else "Diffusion YouTube vers cette TV désactivée")
+        }
         items += "USB : importer les vidéos des clés détectées" to { usbMessage(usb?.importFromVolumes()) }
         items += "USB : choisir un dossier de la clé…" to { usbMessage(usb?.launchPicker(this, REQ_TREE)) }
         if (usb?.isRunning() == true) items += "USB : annuler l'import en cours" to { usb.cancel() }

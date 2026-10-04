@@ -122,6 +122,14 @@ Règles pures vérifiées en JVM (`CT/tv/PlayerOptionsTest.kt` : reprise, minute
 |---|---|---|---|---|---|---|---|---|
 | **P-60** | **Réglages du lecteur à la télécommande à 5 touches** | TV de référence, un dossier de 3 épisodes (`Ep1`, `Ep2`, `Ep10`) avec sous-titres `.srt` | lire `Ep1` 1 min, RETOUR ; le rouvrir depuis la bibliothèque ; OK maintenu > « Réglages du lecteur » ; Image : Luminosité ▶ ; Son : Mode nuit ; Sous-titres : Couleur ; Lecture : Minuteur 15 min, Boucle A-B (A puis B), Marque-page ; laisser finir `Ep1` | — | « Reprendre à 1:00 / Recommencer » (reprendre par défaut) ; chaque ligne dit son libellé, sa valeur et « (par défaut) » ; le changement d'image rouvre la vidéo à la même seconde ; si la TV perd des images : « Filtres d'image coupés… » ; « Arrêt dans 14:59 » discret sur la barre ; la boucle revient en A ; `Ep2` démarre après le compte à rebours de 8 s (RETOUR l'annule) ; `Ep10` suit `Ep2`, jamais un fichier d'un autre dossier ; chaque vidéo garde ses réglages (aucune fuite de l'une à l'autre) | S2 | JVM (`PlayerOptionsTest`), H (TV réelle : fluidité avec filtres, désentrelacement, mode nuit, fondu du minuteur) | — |
 
+## I. Diffusion YouTube vers CastBridge-TV par DIAL (2026-10-04, `docs/TV-CAST-DIAL.md`)
+
+Protocole et règles de sécurité vérifiés en JVM (`CT/cast/dial/DialRulesTest.kt`, `DialServersTest.kt` : serveur HTTP réel sur 127.0.0.1, répondeur SSDP réel sur la boucle locale, 12 mutations détectées) ; le câblage Android (service, `MulticastLock`, Intent de lancement, réglage) n'est vérifié que par compilation : seuls la TV réelle et l'application YouTube d'un téléphone confirment la découverte et l'acceptation de l'Intent par YouTube TV.
+
+| id | Parcours | Préconditions | Étapes | Attendu — téléphone | Attendu — TV | Gravité | Où | Régression |
+|---|---|---|---|---|---|---|---|---|
+| **P-61** | **Diffuser une vidéo YouTube vers la TV** | TV de référence avec YouTube TV installée, réglage « Diffusion YouTube vers cette TV (DIAL) » sur oui ; téléphone et TV sur le même Wi-Fi, avec Internet | YouTube sur le téléphone, vidéo, icône de diffusion, choisir « CastBridge-TV xxxx » ; changer de vidéo ; déconnecter ; désactiver le réglage | la TV est listée ; la vidéo se connecte ; après désactivation elle n'est plus listée | YouTube TV s'ouvre et joue ; déconnexion : retour à CastBridge-TV ; un navigateur du LAN (`Origin` quelconque) ou un hôte extérieur ne peut rien lancer ; plus de 6 lancements par minute : refusés | S3 | JVM (`DialRulesTest`, `DialHttpServerTest`, `SsdpServerTest`), H (découverte et lancement réels) | — |
+
 ## Répartition
 
 | Où | Parcours couverts (au moins une colonne) | Nombre |
