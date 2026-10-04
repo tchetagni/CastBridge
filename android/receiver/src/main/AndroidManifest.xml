@@ -137,6 +137,10 @@
         <activity android:name=".PairActivity" android:exported="false" android:screenOrientation="landscape"
             android:launchMode="singleTop"
             android:theme="@style/Theme.CastBridge.Tv.Screen" />
+        <!-- « Téléphones synchronisés » (docs/BT-PLUG-AND-PLAY.md, 8 au plus): the whole list with « Retirer », and the replacement mode of a full TV. Not exported. -->
+        <activity android:name=".PhonesActivity" android:exported="false" android:screenOrientation="landscape"
+            android:launchMode="singleTop"
+            android:theme="@style/Theme.CastBridge.Tv.Screen" />
         <activity android:name=".DownloadsActivity" android:exported="false" android:screenOrientation="landscape"
             android:theme="@style/Theme.CastBridge.Tv.Screen" />
         <!-- Contrôle parental (docs/PARENTAL.md): settings screen and lock screen, both internal (not exported) -->

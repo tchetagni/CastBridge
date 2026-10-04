@@ -45,13 +45,14 @@ enum class AbsentKind {
 object LinkText {
     /** The ERR_* codes that have their own wording (the others get [generic]). */
     val explicitCodes: Set<Int> = setOf(BtProtocol.ERR_MAGIC, BtProtocol.ERR_PIN, BtProtocol.ERR_NAME, BtProtocol.ERR_SPACE, BtProtocol.ERR_LOCKED, BtProtocol.ERR_IO,
-        BtProtocol.ERR_SIZE, BtProtocol.ERR_UNTRUSTED, BtProtocol.ERR_DENIED, BtProtocol.ERR_TIMEOUT, BtProtocol.ERR_NOT_OPEN, BtProtocol.ERR_BUSY)
+        BtProtocol.ERR_SIZE, BtProtocol.ERR_UNTRUSTED, BtProtocol.ERR_DENIED, BtProtocol.ERR_TIMEOUT, BtProtocol.ERR_NOT_OPEN, BtProtocol.ERR_BUSY,
+        BtProtocol.ERR_FULL, BtProtocol.ERR_FULL_CANCELED, BtProtocol.ERR_FULL_TIMEOUT)
 
     fun untrusted(hint: Int) = untrustedAdvice(hint).detail
 
     fun untrustedAdvice(hint: Int) = when (hint) {
         BtProtocol.HINT_OTHER_INSTALL -> Advice("TV réinitialisée", "La TV a été réinitialisée ou réinstallée : elle ne vous reconnaît plus.", LinkAction.REASSOCIATE)
-        BtProtocol.HINT_SAME_INSTALL -> Advice("Téléphone retiré de la TV", "Ce téléphone a été retiré de la liste des téléphones de la TV.", LinkAction.REASSOCIATE)
+        BtProtocol.HINT_SAME_INSTALL -> Advice("Cette TV vous a retiré", "Ajoutez-la à nouveau : ce téléphone a été retiré de la liste des téléphones de la TV.", LinkAction.REASSOCIATE)
         else -> Advice("La TV ne vous reconnaît plus", "La TV a été réinitialisée ou réinstallée, ou ce téléphone a été retiré de sa liste.", LinkAction.REASSOCIATE)
     }
 
@@ -61,6 +62,9 @@ object LinkText {
         BtProtocol.ERR_TIMEOUT -> Advice("Personne n'a répondu sur la TV", "Sur la TV, choisissez « Autoriser » avec la télécommande dans la minute qui suit.", LinkAction.RETRY)
         BtProtocol.ERR_NOT_OPEN -> Advice("« Ajouter un téléphone » est fermé", "Sur la TV, ouvrez CastBridge-TV puis « Ajouter un téléphone ».", LinkAction.RETRY)
         BtProtocol.ERR_BUSY -> Advice("La TV est occupée", "La TV traite déjà une demande, ou reçoit trop d'essais. Patientez quelques secondes.", LinkAction.RETRY)
+        BtProtocol.ERR_FULL -> Advice("Cette TV a déjà ${TrustRegistry.MAX_PHONES} téléphones", "Sur la TV, choisissez le téléphone à retirer, puis réessayez.", LinkAction.RETRY)
+        BtProtocol.ERR_FULL_CANCELED -> Advice("Ajout annulé sur la TV", "Le propriétaire a annulé : la TV garde ses ${TrustRegistry.MAX_PHONES} téléphones. Sur la TV, retirez-en un, puis réessayez.", LinkAction.RETRY)
+        BtProtocol.ERR_FULL_TIMEOUT -> Advice("Personne n'a répondu sur la TV", "Aucun téléphone n'a été choisi à retirer dans les 2 minutes. Réessayez quand vous êtes devant la TV.", LinkAction.RETRY)
         BtProtocol.ERR_MAGIC -> Advice("CastBridge-TV à mettre à jour", "Cette TV n'a pas la dernière version de CastBridge-TV : installez la mise à jour sur la TV.", LinkAction.RETRY)
         BtProtocol.ERR_PIN -> Advice("Code incorrect", "Le code de la TV n'est pas le bon. Ce téléphone n'essaiera pas de nouveau tout seul.", LinkAction.ENTER_CODE)
         BtProtocol.ERR_LOCKED -> Advice("TV verrouillée un moment", "Trop d'essais avec un mauvais code : la TV se rouvre dans une minute.", LinkAction.RETRY)
@@ -70,6 +74,10 @@ object LinkText {
         BtProtocol.ERR_IO -> Advice("Erreur d'écriture sur la TV", "La TV n'a pas pu enregistrer le fichier (disque plein ou retiré).", LinkAction.RETRY)
         else -> generic(code)
     }
+
+    /** The TV is full and its owner is choosing (the phone waits, bounded): the live state of the pairing screen. */
+    fun fullPending(secondsLeft: Long) = Advice("En attente de la TV…",
+        "Cette TV a déjà ${TrustRegistry.MAX_PHONES} téléphones. Sur la TV, choisissez le téléphone à retirer, puis réessayez. Nouvel essai automatique ($secondsLeft s).")
 
     private fun generic(code: Int) = Advice("La TV a répondu par une erreur", "Réponse inattendue de la TV (code $code). Mettez à jour CastBridge et CastBridge-TV, puis réessayez.", LinkAction.RETRY)
 

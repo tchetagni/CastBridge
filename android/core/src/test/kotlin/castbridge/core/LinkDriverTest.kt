@@ -90,7 +90,7 @@ class LinkDriverTest {
         connect(); tv.reg.revoke(tv.phone)
         phone.run(5 * 60_000)
         assertEquals("forgot:${BtProtocol.HINT_SAME_INSTALL}", shown().key)
-        assertEquals("Téléphone retiré de la TV", phone.driver.step(Trigger.USER).view.title)
+        assertEquals("Cette TV vous a retiré", phone.driver.step(Trigger.USER).view.title)
     }
 
     // ------------------------------------------------------------------------------------------------ (b) bonded, accepted then closed

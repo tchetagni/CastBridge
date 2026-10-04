@@ -751,6 +751,7 @@ class PlayerActivity : Activity(), TvService.Screen {
         items += "Quiz culture générale (jouer avec les téléphones)" to { startActivity(Intent(this, QuizActivity::class.java)) }
         items += "Téléchargements" to { startActivity(Intent(this, DownloadsActivity::class.java)) }
         items += "Ajouter un téléphone / téléphones de confiance (${s.trust.list().size})…" to { PairActivity.open(this) }
+        items += castbridge.core.trust.PhonesTexts.menuEntry(s.trust.list().size) to { PhonesActivity.open(this) }
         items += "Bluetooth : rendre la TV visible (2 min)" to { makeDiscoverable() }
         items += (if (prefs.getBool("wd_enabled", false)) "Wi-Fi Direct : désactiver" else "Wi-Fi Direct : activer (crée un réseau TV<->téléphone)") to { toggleWifiDirect() }
         items += "USB : importer les vidéos des clés détectées" to { usbMessage(usb?.importFromVolumes()) }

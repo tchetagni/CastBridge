@@ -257,6 +257,14 @@ private fun PairProgress(step: PairStep, tv: TvCandidate?, onRetry: () -> Unit, 
                 Text(step.advice.detail, textAlign = TextAlign.Center, color = cs.onSurfaceVariant)
                 TextButton(onClick = onCancel) { Text("Annuler") }
             }
+            is PairStep.WaitingReplace -> {
+                // « Cette TV a déjà 8 téléphones » : attente BORNÉE (jauge qui se vide, jamais un cercle sans fin), même texte que la notification (R-18)
+                Icon(Icons.Filled.Tv, null, Modifier.size(48.dp), tint = WARN)
+                Text(step.advice.title, style = MaterialTheme.typography.titleMedium, textAlign = TextAlign.Center)
+                Text(step.advice.detail, textAlign = TextAlign.Center, color = cs.onSurfaceVariant)
+                LinearProgressIndicator(progress = { (step.secondsLeft / 125f).coerceIn(0f, 1f) }, Modifier.fillMaxWidth())
+                TextButton(onClick = onCancel) { Text("Annuler") }
+            }
             PairStep.WaitingOwner -> {
                 CircularProgressIndicator()
                 Text(step.advice.title, style = MaterialTheme.typography.titleMedium)

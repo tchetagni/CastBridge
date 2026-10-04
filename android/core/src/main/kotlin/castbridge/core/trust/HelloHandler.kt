@@ -28,28 +28,49 @@ class HelloHandler(
     private val limiter: AttemptLimiter? = null,
     /** The owner's window refused a phone that asked (denied, timed out, blocked, busy...): for a clear message on the TV. */
     private val onRefused: (name: String, decision: PairingSession.Decision) -> Unit = { _, _ -> },
+    /** The 8-phone cap (see [TrustRegistry.MAX_PHONES]): a ninth phone waits for the owner to choose which one to remove. */
+    private val capacity: PairCapacityFlow? = null,
 ) {
     /** What an unknown phone is told: nothing but "no", plus (only when it is paired and gave the install id it remembers) whether the TV is another installation. */
     private fun untrusted(paired: Boolean) = HelloReply.Err(BtProtocol.ERR_UNTRUSTED,
         if (!paired) null else { claimed -> if (claimed == registry.installId) BtProtocol.HINT_SAME_INSTALL else BtProtocol.HINT_OTHER_INSTALL })
+
+    /** The owner's window: null = approved (the phone is trusted now), else what the phone is told. */
+    private fun askOwner(peer: String, peerName: String?): HelloReply.Err? {
+        val decision = pairing.ask(peer, peerName.orEmpty())
+        if (decision != PairingSession.Decision.APPROVED && decision != PairingSession.Decision.NOT_OPEN) runCatching { onRefused(PhoneName.sanitize(peerName), decision) }
+        return when (decision) {
+            PairingSession.Decision.APPROVED -> null
+            PairingSession.Decision.DENIED -> HelloReply.Err(BtProtocol.ERR_DENIED)
+            PairingSession.Decision.TIMEOUT -> HelloReply.Err(BtProtocol.ERR_TIMEOUT)
+            PairingSession.Decision.NOT_OPEN -> HelloReply.Err(BtProtocol.ERR_NOT_OPEN)
+            PairingSession.Decision.BUSY, PairingSession.Decision.BLOCKED -> HelloReply.Err(BtProtocol.ERR_BUSY)
+            PairingSession.Decision.FULL -> {   // approved at the same time as another phone: the cap won; the owner decides who goes
+                capacity?.ask(peer, peerName.orEmpty(), windowOpen = true)
+                HelloReply.Err(BtProtocol.ERR_FULL)
+            }
+        }
+    }
 
     fun handle(peer: String, peerName: String?, requestTrust: Boolean): HelloReply {
         if (!TrustRegistry.isAddress(peer) || !isBonded(peer)) return untrusted(false)
         if (!requestTrust && limiter != null && limiter.tryAcquire(TrustRegistry.norm(peer)) > 0) return HelloReply.Err(BtProtocol.ERR_BUSY)
         if (!registry.isTrusted(peer)) {
             if (!requestTrust) return untrusted(true)
-            val decision = pairing.ask(peer, peerName.orEmpty())
-            if (decision != PairingSession.Decision.APPROVED && decision != PairingSession.Decision.NOT_OPEN) runCatching { onRefused(PhoneName.sanitize(peerName), decision) }
-            when (decision) {
-                PairingSession.Decision.APPROVED -> {}
-                PairingSession.Decision.DENIED -> return HelloReply.Err(BtProtocol.ERR_DENIED)
-                PairingSession.Decision.TIMEOUT -> return HelloReply.Err(BtProtocol.ERR_TIMEOUT)
-                PairingSession.Decision.NOT_OPEN -> return HelloReply.Err(BtProtocol.ERR_NOT_OPEN)
-                PairingSession.Decision.BUSY, PairingSession.Decision.BLOCKED -> return HelloReply.Err(BtProtocol.ERR_BUSY)
+            // The 8-phone cap: a ninth phone never reaches the approval dialog; the owner first chooses which phone to remove (PairCapacityFlow).
+            capacity?.let { c ->
+                when (c.ask(peer, peerName.orEmpty(), pairing.isOpen)) {
+                    PairCapacityFlow.Answer.Pending -> return HelloReply.Err(BtProtocol.ERR_FULL)
+                    PairCapacityFlow.Answer.Busy -> return HelloReply.Err(BtProtocol.ERR_BUSY)
+                    PairCapacityFlow.Answer.Cancelled -> return HelloReply.Err(BtProtocol.ERR_FULL_CANCELED)
+                    PairCapacityFlow.Answer.TimedOut -> return HelloReply.Err(BtProtocol.ERR_FULL_TIMEOUT)
+                    PairCapacityFlow.Answer.Room, PairCapacityFlow.Answer.Trusted -> {}
+                }
             }
+            if (!registry.isTrusted(peer)) askOwner(peer, peerName)?.let { return it }
         }
         val t = registry.issueToken(peer) ?: return untrusted(true)   // revoked while we waited
         registry.get(peer)?.let(onConnected)
-        return HelloReply.Ok(HelloInfo(tvName(), version, mdnsName(), t.token, registry.tokenTtlMs / 1000, link(), registry.installId))
+        return HelloReply.Ok(HelloInfo(tvName(), version, mdnsName(), t.token, registry.tokenTtlMs / 1000, link(), registry.installId, TrustRegistry.MAX_PHONES))
     }
 }

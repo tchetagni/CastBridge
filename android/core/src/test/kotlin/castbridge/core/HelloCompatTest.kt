@@ -155,8 +155,8 @@ class RegistryRobustnessTest {
 
     @Test fun manySavesKeepTheFileIntact() {
         val a = reg()
-        repeat(60) { a.trust("AA:BB:CC:DD:EE:%02X".format(it % 10), "P$it"); a.issueToken("AA:BB:CC:DD:EE:%02X".format(it % 10)) }
-        val b = reg(); assertEquals(10, b.list().size); assertNull(b.recoveredFromBackup)
+        repeat(60) { a.trust("AA:BB:CC:DD:EE:%02X".format(it % TrustRegistry.MAX_PHONES), "P$it"); a.issueToken("AA:BB:CC:DD:EE:%02X".format(it % TrustRegistry.MAX_PHONES)) }
+        val b = reg(); assertEquals(TrustRegistry.MAX_PHONES, b.list().size); assertNull(b.recoveredFromBackup)
         assertTrue(TrustRegistry.intact(file.readText()) && TrustRegistry.intact(File(file.path + ".bak").readText()))
     }
 }

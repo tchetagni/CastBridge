@@ -32,12 +32,16 @@ class FakeTv(val clock: FakeClock, val phone: String = "AA:BB:CC:DD:EE:01", val 
     var dropWriteAfter: Int? = null
     val limiter get() = limiterRef
     private var limiterRef: AttemptLimiter? = null
+    /** The 8-phone cap flow of this TV (null = a TV that predates it, or a test that does not use it). */
+    var capacity: PairCapacityFlow? = null
     var handler = newHandler()
-    private fun newHandler() = HelloHandler(reg, pairing, { it in bonded }, { name }, "0.13", { "CastBridge TV Test" }, { LinkInfo(8765, lan) }, {}, limiterRef)
+    private fun newHandler() = HelloHandler(reg, pairing, { it in bonded }, { name }, "0.13", { "CastBridge TV Test" }, { LinkInfo(8765, lan) }, {}, limiterRef, capacity = capacity)
 
     fun useLimiter(l: AttemptLimiter) { limiterRef = l; handler = newHandler() }
+    /** Turns the 8-phone flow on (the registry's own cap is always on). */
+    fun useCapacity(timeoutMs: Long = 120_000): PairCapacityFlow = PairCapacityFlow(reg, clock::now, timeoutMs).also { capacity = it; handler = newHandler() }
     /** The app is killed and started again: the registry file survives. */
-    fun restartApp() { reg = TrustRegistry(persistence, clock::now, tokenTtlMs = ttlMs); pairing = PairingSession(reg, clock::now); handler = newHandler() }
+    fun restartApp() { reg = TrustRegistry(persistence, clock::now, tokenTtlMs = ttlMs); pairing = PairingSession(reg, clock::now); capacity = null; handler = newHandler() }
     /** Uninstalled and installed again: no registry, a new install id. */
     fun reinstall() { persistence = MemoryTrustPersistence(); restartApp() }
 

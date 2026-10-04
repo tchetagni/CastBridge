@@ -174,6 +174,7 @@ class StatusBarView(private val act: Activity, private val box: LinearLayout, pr
         val bar = svc.icons.snapshot(); val now = System.currentTimeMillis()
         val list = LinearLayout(act).apply { orientation = LinearLayout.VERTICAL; setPadding(dp(24), dp(16), dp(24), dp(8)) }
         var dialog: AlertDialog? = null
+        list.addView(action(castbridge.core.trust.PhonesTexts.menuEntry(svc.trust.list().size)) { dialog?.dismiss(); PhonesActivity.open(act) })
         if (bar.all.isEmpty()) list.addView(text("Aucune connexion active.", TvStyle.Type.BODY, TvStyle.TEXT2))
         for (i in bar.all) {
             val g = ImageView(act).apply { setImageResource(glyphOf(i)) }
