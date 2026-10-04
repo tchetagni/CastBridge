@@ -145,6 +145,7 @@ object IconLegend {
             if (level != null) glyph.setImageDrawable(android.graphics.drawable.GradientDrawable().apply {
                 shape = android.graphics.drawable.GradientDrawable.OVAL
                 setColor(castbridge.core.tv.status.StatusPalette.fill(level)); setStroke(dp(4), castbridge.core.tv.status.StatusPalette.ring(level)) })
+            else if (e.id.startsWith("badge-")) glyph.setImageResource(badgeDrawable(e.id.removePrefix("badge-")))
             else if (kind != null) glyph.setImageResource(statusGlyph(kind, castbridge.core.status.Tech.WIFI_LAN))
             else when {
                 e.id.startsWith("tech-") -> glyph.setImageResource(when (e.id) {

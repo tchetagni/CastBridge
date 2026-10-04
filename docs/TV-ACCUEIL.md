@@ -70,3 +70,7 @@ L'accueil et l'écran Serveur utilisent `logo_castbridge_tv_horizontal_compact` 
 4. « Administration » : « Aide », « Mises à jour »… OK ouvre l'écran, RETOUR de cet écran revient à la grille, RETOUR ferme la grille.
 5. Profil enfant (Contrôle parental) : seuls les outils autorisés restent, les groupes vides disparaissent.
 6. Lisibilité à 3 m : noms et icônes lus sans effort ; le focus ne sort jamais de la grille avec les flèches.
+
+## Pastilles (état de la TV)
+
+En haut à droite de l'accueil, sous l'horloge : des pastilles rondes à anneau de couleur, avec l'icône, le libellé et un mot d'état (« Wi-Fi · connecté », « Stockage · 12 % libre », « Internet · lent », « Téléphones · 3/8 », « Licence · 45 j restants », « Jetons · jamais synchronisé »). Couleurs : noir (désactivé ou absent), vert (fonctionne), orange (à surveiller), rouge (panne), bleu (en cours), gris (pas encore mesuré). L'orange et le rouge sont toujours étiquetés et jamais cachés ; les autres montrent leur libellé quand on les sélectionne ou 4 secondes après un changement. Au-delà de 8 pastilles, les moins urgentes passent derrière « + n » ; OK dessus ouvre la liste complète en grille (panneau Connexions). L'accueil en groupes n'est pas modifié : la barre est la même vue que pendant la lecture (`StatusBarView`). Règles, seuils et décisions du propriétaire (essai orange, licence orange à la moitié du temps et rouge à 7 jours) : `docs/TV-PLAYER.md`, § « Pastilles d'état ».

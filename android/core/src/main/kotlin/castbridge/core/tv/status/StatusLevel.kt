@@ -36,8 +36,10 @@ object StatusThresholds {
     const val WIFI_WEAK_DBM = -70
     /** Liaison lente (Internet, passerelle, Quiz, téléphone) : latence mesurée de 1,5 s ou plus. */
     const val SLOW_LATENCY_MS = 1500L
-    /** Licence : orange pendant les 7 derniers jours. */
-    const val LICENCE_WARN_DAYS = 7
+    /** Licence (règle du propriétaire, 2026-10-04) : ORANGE dès que la moitié de la durée totale est écoulée ; ROUGE dès qu'il reste 7 jours ou moins ; le rouge prime. */
+    const val LICENCE_ORANGE_FRACTION = 0.5
+    const val LICENCE_RED_DAYS = 7
+    const val DAY_MS = 24L * 3600 * 1000
     /** Téléphones synchronisés : 8 au plus par TV ; complet = orange. */
     const val PHONES_MAX = 8
     /** Jetons : orange à 5 restants ou moins. */
@@ -47,7 +49,10 @@ object StatusThresholds {
 enum class DirectPhase { IDLE, STARTING, GROUP_ACTIVE, FAILED }
 enum class BtPhase { IDLE, CONNECTING, PHONE_LINKED, GATEWAY_ONLY, ADAPTER_ERROR, PHONE_REFUSED }
 enum class InternetPath { UNTESTED, CHECKING, DIRECT, VIA_PHONE, NONE }
-enum class LicenceState { NOT_REQUIRED, VALID, TRIAL, PENDING_NOTIFICATION, EXPIRED, INVALID }
+/** [NO_KEY] : aucune clé installée. */
+enum class LicenceState { NOT_REQUIRED, NO_KEY, VALID, TRIAL, PENDING_NOTIFICATION, EXPIRED, INVALID }
+/** Durée d'une clé : de [fromMs] à [toMs] (null = illimitée). */
+data class LicenceTiming(val fromMs: Long, val toMs: Long?)
 enum class QuizLink { IDLE, CONNECTING, CONNECTED, NOT_ACTIVATED, SERVER_UNREACHABLE }
 
 /** Les règles : l'état MESURÉ de chaque indicateur donne un niveau. Fonctions pures, sans Android. */
@@ -122,15 +127,43 @@ object StatusRules {
         else -> v(StatusLevel.BUSY, percent?.let { "$it %" } ?: "en cours")
     }
 
-    /** Valide = vert (orange pendant les 7 derniers jours) ; essai = orange (édition limitée, à surveiller) ; en attente de notification = orange ; expirée ou invalide = rouge. */
-    fun licence(state: LicenceState, daysLeft: Int?): Verdict = when (state) {
+    /**
+     * Règle du propriétaire (2026-10-04), pour une clé à durée limitée de D jours, t = temps écoulé depuis le début : VERT tant que t < D/2 ; ORANGE dès t >= D/2 ;
+     * ROUGE dès qu'il reste 7 jours ou moins (le rouge prime : sous 14 jours la période orange est vide, jamais négative) ; ROUGE aussi expirée, invalide ou sans clé ;
+     * clé illimitée = VERT ; durée inconnue = GRIS ; en attente de notification = ORANGE ; ESSAI = ORANGE (décidé par le propriétaire), ROUGE dans la dernière semaine et une fois terminé.
+     */
+    fun licence(state: LicenceState, timing: LicenceTiming?, nowMs: Long): Verdict = when (state) {
         LicenceState.NOT_REQUIRED -> v(StatusLevel.OFF, "non requise")
+        LicenceState.NO_KEY -> v(StatusLevel.ERROR, "sans clé")
         LicenceState.INVALID -> v(StatusLevel.ERROR, "invalide")
         LicenceState.EXPIRED -> v(StatusLevel.ERROR, "expirée")
         LicenceState.PENDING_NOTIFICATION -> v(StatusLevel.WARN, "en attente")
-        LicenceState.TRIAL -> if (daysLeft != null && daysLeft <= 0) v(StatusLevel.ERROR, "essai terminé") else v(StatusLevel.WARN, "essai")
-        LicenceState.VALID -> if (daysLeft != null && daysLeft <= StatusThresholds.LICENCE_WARN_DAYS) v(StatusLevel.WARN, "expire dans $daysLeft j") else v(StatusLevel.OK, "valide")
+        LicenceState.TRIAL -> {
+            val left = timing?.toMs?.minus(nowMs)
+            when {
+                left == null -> v(StatusLevel.WARN, "essai")
+                left <= 0 -> v(StatusLevel.ERROR, "essai terminé")
+                left <= StatusThresholds.LICENCE_RED_DAYS * StatusThresholds.DAY_MS -> v(StatusLevel.ERROR, "essai : ${daysCeil(left)} j")
+                else -> v(StatusLevel.WARN, "essai")
+            }
+        }
+        LicenceState.VALID -> when {
+            timing == null -> v(StatusLevel.UNKNOWN, "durée inconnue")
+            timing.toMs == null -> v(StatusLevel.OK, "illimitée")
+            else -> {
+                val left = timing.toMs - nowMs
+                val total = (timing.toMs - timing.fromMs).coerceAtLeast(0)
+                val elapsed = (nowMs - timing.fromMs).coerceAtLeast(0)
+                when {
+                    left <= 0 -> v(StatusLevel.ERROR, "expirée")
+                    left <= StatusThresholds.LICENCE_RED_DAYS * StatusThresholds.DAY_MS -> v(StatusLevel.ERROR, "expire dans ${daysCeil(left)} j")
+                    elapsed >= total * StatusThresholds.LICENCE_ORANGE_FRACTION -> v(StatusLevel.WARN, "${daysCeil(left)} j restants")
+                    else -> v(StatusLevel.OK, "${daysCeil(left)} j restants")
+                }
+            }
+        }
     }
+    private fun daysCeil(ms: Long) = ((ms + StatusThresholds.DAY_MS - 1) / StatusThresholds.DAY_MS).coerceAtLeast(1)
 
     fun quiz(link: QuizLink, latencyMs: Long? = null): Verdict = when (link) {
         QuizLink.IDLE -> v(StatusLevel.OFF, "hors partie")

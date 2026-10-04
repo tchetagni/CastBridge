@@ -20,6 +20,8 @@ import castbridge.core.status.IconState
 import castbridge.core.status.StatusBar
 import castbridge.core.status.StatusIcon
 import castbridge.core.status.Tech
+import castbridge.core.tv.status.Badge
+import castbridge.core.tv.status.StatusBadges
 import castbridge.core.tv.status.StatusLevel
 import castbridge.core.tv.status.StatusPalette
 import castbridge.core.tv.status.StatusRules
@@ -76,16 +78,26 @@ class StatusBarView(private val act: Activity, private val box: LinearLayout, pr
 
     fun hasFocus() = box.findFocus() != null
 
+    /**
+     * Draws the badges: the measured ones of [TvService.statusBoard] (Wi-Fi, Bluetooth, Internet, Stockage, Téléphones, Licence...) then the connections of [bar].
+     * Orange and red badges are never hidden behind « +n » ([StatusBadges.split]); the rest fill the readable maximum in display order.
+     */
     fun render(bar: StatusBar) {
         last = bar
         val now = System.currentTimeMillis()
-        val ids = bar.icons.map { it.id }
-        for (i in bar.icons) {
-            val c = chips.getOrPut(i.id) { newChip(i.id).also { it.changedAt = now; it.view.alpha = 0f; it.view.scaleX = 1.25f; it.view.scaleY = 1.25f
+        val measured = TvService.running?.statusBoard?.current().orEmpty()
+        val iconsById = bar.all.associateBy { it.id }
+        val all = StatusBadges.merge(measured, bar.all)
+        val split = StatusBadges.split(all, if (playerMode) StatusBadges.MAX_VISIBLE_PLAYER else StatusBadges.MAX_VISIBLE_HOME)
+        allBadges = all
+        val ids = split.visible.map { it.id }
+        for (b in split.visible) {
+            val i = iconsById[b.id]
+            val c = chips.getOrPut(b.id) { newChip(b.id).also { it.changedAt = now; it.view.alpha = 0f; it.view.scaleX = 1.25f; it.view.scaleY = 1.25f
                 it.view.animate().alpha(1f).scaleX(1f).scaleY(1f).setDuration(TvStyle.SLOW.toLong()).start() } }   // brief highlight, no banner
-            val sig = i.tech.wire + i.secondary?.wire + i.state.wire + i.count + i.label
+            val sig = b.level.wire + b.stateWord + b.label + i?.tech?.wire + i?.secondary?.wire + i?.count
             if (sig != c.sig) { if (c.sig.isNotEmpty()) c.changedAt = now; c.sig = sig }
-            bind(c, i, now)
+            bind(c, b, i, now)
         }
         for (id in chips.keys.filter { it !in ids }) chips.remove(id)?.let { c -> c.view.animate().alpha(0f).setDuration(300).withEndAction { box.removeView(c.view) }.start() }
         if (ids != order) {                                   // arrival/removal only: the order itself is stable (core)
@@ -93,15 +105,19 @@ class StatusBarView(private val act: Activity, private val box: LinearLayout, pr
             box.removeAllViews(); ids.forEach { box.addView(chips[it]!!.view, params()) }
             box.addView(more, params())
         }
-        more.visibility = if (bar.hidden > 0) View.VISIBLE else View.GONE
-        more.isFocusable = interactive && bar.hidden > 0
-        more.text = "+${bar.hidden}"; more.contentDescription = "${bar.hidden} autres connexions"
-        val alert = bar.icons.any { it.state == IconState.DEGRADED || it.state == IconState.ERROR }
+        val hidden = split.hidden.size
+        more.visibility = if (hidden > 0) View.VISIBLE else View.GONE
+        more.isFocusable = interactive && hidden > 0
+        more.text = "+$hidden"; more.contentDescription = "$hidden autres pastilles : ${split.hidden.joinToString(", ") { it.text }}"
+        val alert = split.visible.any { it.level == StatusLevel.ERROR } || bar.icons.any { it.state == IconState.DEGRADED }
         val fresh = chips.values.any { now - it.changedAt < SHOW_MS }
-        box.visibility = if (bar.icons.isEmpty() || (playerMode && !castbridge.core.tv.PlayerIcons.zoneVisible(zoneShown, alert, fresh))) View.GONE else View.VISIBLE
+        box.visibility = if (all.isEmpty() || (playerMode && !castbridge.core.tv.PlayerIcons.zoneVisible(zoneShown, alert, fresh))) View.GONE else View.VISIBLE
         main.removeCallbacks(collapse)
         if (chips.values.any { now - it.changedAt < SHOW_MS }) main.postDelayed(collapse, SHOW_MS)
     }
+
+    /** Every badge of the last draw (visible or behind « +n »), for the grid of the « Connexions » panel. */
+    private var allBadges = emptyList<Badge>()
 
     private val collapse = Runnable { last?.let { render(it) } }
 
@@ -143,12 +159,12 @@ class StatusBarView(private val act: Activity, private val box: LinearLayout, pr
         }
     }
 
-    private fun bind(c: Chip, i: StatusIcon, now: Long) {
-        val degraded = i.state == IconState.DEGRADED; val error = i.state == IconState.ERROR
-        c.glyph.setImageResource(glyphOf(i))
-        tech(c.mark, if (i.kind == IconKind.INTERNET) null else i.tech); tech(c.second, i.secondary)
+    private fun bind(c: Chip, b: Badge, i: StatusIcon?, now: Long) {
+        val degraded = i?.state == IconState.DEGRADED; val error = b.level == StatusLevel.ERROR
+        c.glyph.setImageResource(if (i != null) glyphOf(i) else badgeGlyph(b))
+        if (i != null) { tech(c.mark, if (i.kind == IconKind.INTERNET) null else i.tech); tech(c.second, i.secondary) } else { c.mark.visibility = View.GONE; c.second.visibility = View.GONE }
         // signal colour (core StatusRules): ring + dot carry the level, the glyph keeps its shape and the French text carries the state word
-        val verdict = StatusRules.icon(i); val level = verdict.level
+        val level = b.level
         if (c.level != level) {
             c.level = level
             c.holder.background = GradientDrawable().apply { shape = GradientDrawable.RECTANGLE; cornerRadius = dp(24).toFloat()
@@ -160,14 +176,31 @@ class StatusBarView(private val act: Activity, private val box: LinearLayout, pr
         c.dot.visibility = View.VISIBLE
         if (c.errBg != error) { c.errBg = error; c.view.background = if (error) act.getDrawable(R.drawable.badge_warn_bg) else TvStyle.focusable(act, 0xCC0B3D5C.toInt(), TvStyle.R_XL) }
         c.view.alpha = 1f
-        c.view.contentDescription = "${StatusRules.chipText(i)} (${level.colour.lowercase()})"
+        c.view.contentDescription = "${b.text} (${level.colour.lowercase()})"
         c.view.isFocusable = interactive
         val big = playerMode
         c.label.textSize = if (big) castbridge.core.tv.PlayerIcons.TEXT_SP.toFloat() else TvStyle.Type.CAPTION
         (c.holder.layoutParams as? LinearLayout.LayoutParams)?.let { it.width = dp(if (big) 56 else 38); it.height = dp(if (big) 48 else 34); c.holder.layoutParams = it }
         (c.glyph.layoutParams as? FrameLayout.LayoutParams)?.let { it.width = dp(if (big) castbridge.core.tv.PlayerIcons.ICON_DP else 26); it.height = it.width; c.glyph.layoutParams = it }
-        val show = big || c.view.hasFocus() || bigBar || now - c.changedAt < SHOW_MS || degraded || error || level == StatusLevel.WARN || level == StatusLevel.ERROR
-        c.label.text = StatusRules.chipText(i);c.label.visibility = if (show) View.VISIBLE else View.GONE
+        // orange and red are always labelled; the others show their label when new / focused / expanded / in the player
+        val show = big || c.view.hasFocus() || bigBar || now - c.changedAt < SHOW_MS || degraded || b.urgent
+        c.label.text = b.text; c.label.visibility = if (show) View.VISIBLE else View.GONE
+    }
+
+    private fun badgeGlyph(b: Badge): Int = badgeDrawable(b.id, b.stateWord)
+
+    /** One cell of the grid: ring + dot of the level colour and the full text (label · state word). */
+    private fun badgeCell(b: Badge): View {
+        val disc = ImageView(act).apply {
+            setImageResource(badgeGlyph(b)); alpha = StatusPalette.glyphAlpha(b.level); setPadding(dp(6), dp(6), dp(6), dp(6))
+            background = GradientDrawable().apply { shape = GradientDrawable.OVAL; setColor(StatusPalette.fill(b.level)); setStroke(dp(3), StatusPalette.ring(b.level)) }
+        }
+        return LinearLayout(act).apply {
+            orientation = LinearLayout.HORIZONTAL; gravity = Gravity.CENTER_VERTICAL; setPadding(dp(4), dp(6), dp(12), dp(6))
+            addView(disc, LinearLayout.LayoutParams(dp(44), dp(44)).apply { rightMargin = dp(10) })
+            addView(text(b.text, TvStyle.Type.BODY, TvStyle.TEXT))
+            contentDescription = "${b.text} (${b.level.colour.lowercase()})"
+        }
     }
     /** OK on the home expands every label for a while (see [openPanel]). */
     private var bigBar = false
@@ -195,6 +228,11 @@ class StatusBarView(private val act: Activity, private val box: LinearLayout, pr
         val list = LinearLayout(act).apply { orientation = LinearLayout.VERTICAL; setPadding(dp(24), dp(16), dp(24), dp(8)) }
         var dialog: AlertDialog? = null
         list.addView(action(castbridge.core.trust.PhonesTexts.menuEntry(svc.trust.list().size)) { dialog?.dismiss(); PhonesActivity.open(act) })
+        if (allBadges.isNotEmpty()) {                       // every badge, readable from the sofa, two columns (urgent ones first)
+            val grid = android.widget.GridLayout(act).apply { columnCount = 2 }
+            for (b in allBadges.sortedBy { if (it.urgent) 0 else 1 }) grid.addView(badgeCell(b), android.widget.GridLayout.LayoutParams().apply { width = 0; columnSpec = android.widget.GridLayout.spec(android.widget.GridLayout.UNDEFINED, 1f) })
+            list.addView(grid, LinearLayout.LayoutParams(-1, -2).apply { topMargin = dp(12) })
+        }
         if (bar.all.isEmpty()) list.addView(text("Aucune connexion active.", TvStyle.Type.BODY, TvStyle.TEXT2))
         for (i in bar.all) {
             val g = ImageView(act).apply { setImageResource(glyphOf(i)) }
@@ -259,3 +297,23 @@ internal fun statusGlyph(kind: IconKind, tech: Tech): Int = when (kind) {
         IconKind.PARENTAL_MODE -> R.drawable.ic_t_parental
         IconKind.UPDATE -> R.drawable.ic_cb_mises_a_jour
     }
+
+/** The drawable of a measured badge by id (shared with the « Légende des icônes »); the connection icons keep [statusGlyph]. */
+internal fun badgeDrawable(id: String, stateWord: String = ""): Int = when (id) {
+    "internet" -> when {
+        stateWord == "aucun accès" -> R.drawable.ic_cb_sans_internet
+        TvService.running?.netState == castbridge.core.net.NetState.INTERNET_ETHERNET -> R.drawable.ic_cb_ethernet
+        TvService.running?.netState == castbridge.core.net.NetState.INTERNET_VIA_PHONE -> R.drawable.ic_cb_passerelle_bluetooth
+        else -> R.drawable.ic_cb_test_internet
+    }
+    "wifi" -> R.drawable.ic_cb_wifi
+    "wifi_direct" -> R.drawable.ic_cb_wifi_direct
+    "bluetooth" -> R.drawable.ic_cb_bluetooth
+    "storage" -> R.drawable.ic_cb_bibliotheque
+    "phones" -> R.drawable.ic_cb_sur_le_telephone
+    "copy" -> R.drawable.ic_cb_copier
+    "licence" -> R.drawable.ic_cb_aide
+    "quiz" -> R.drawable.ic_cb_quiz
+    "tokens" -> R.drawable.ic_cb_jetons
+    else -> R.drawable.ic_cb_reglages
+}
