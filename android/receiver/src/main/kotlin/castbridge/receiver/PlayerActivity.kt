@@ -765,6 +765,11 @@ class PlayerActivity : Activity(), TvService.Screen {
         val items = mutableListOf<Pair<String, () -> Unit>>()
         if (current == null) items += "Toute la bibliothèque" to { showLibrary() }
         items += "Quiz culture générale (jouer avec les téléphones)" to { startActivity(Intent(this, QuizActivity::class.java)) }
+        items += (if (castbridge.receiver.quiz.PlayHub.flagOn(this)) "Quiz en ligne : activé (désactiver)" else "Quiz en ligne : désactivé (activer)") to {
+            val on = !castbridge.receiver.quiz.PlayHub.flagOn(this)
+            castbridge.receiver.quiz.PlayHub.setSetting(this, on); if (!on) castbridge.receiver.quiz.PlayHub.stop()
+            flash(if (on) "Quiz en ligne activé" else "Quiz en ligne désactivé")
+        }
         items += "Téléchargements" to { startActivity(Intent(this, DownloadsActivity::class.java)) }
         items += "Ajouter un téléphone / téléphones de confiance (${s.trust.list().size})…" to { PairActivity.open(this) }
         items += castbridge.core.trust.PhonesTexts.menuEntry(s.trust.list().size) to { PhonesActivity.open(this) }

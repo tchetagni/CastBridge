@@ -121,8 +121,16 @@ object QuizHub {
                 ?: QuizPackManager.Report("-", 0, 0, emptyList(), emptyList(), null, "Assez de questions pour 60 parties sans répétition sur chaque parcours joué")
         }
     }
-    /** Public routes (no PIN) for the TV's HTTP server. */
-    val http = QuizHttp({ room })
+    /**
+     * Public routes (no PIN) for the TV's HTTP server. While an Internet game runs (w20-05), the phones of the home are served by the TV's relay
+     * ([castbridge.receiver.quiz.PlayHub.relayHttp]: same routes, same JSON, the phone never talks to the service); otherwise by the local room, unchanged.
+     */
+    private val localHttp = QuizHttp({ room })
+    val http: castbridge.core.tv.PublicRoutes = object : castbridge.core.tv.PublicRoutes {
+        override val extraThreads: Int get() = localHttp.extraThreads + castbridge.receiver.quiz.PlayHub.relayHttp.extraThreads
+        override fun serve(s: fi.iki.elonen.NanoHTTPD.IHTTPSession): fi.iki.elonen.NanoHTTPD.Response? =
+            if (castbridge.receiver.quiz.PlayHub.active()) castbridge.receiver.quiz.PlayHub.relayHttp.serve(s) else localHttp.serve(s)
+    }
 
     /** Opens a fresh room (new code), closing the previous one. */
     @Synchronized fun open(ctx: Context): QuizRoom {
@@ -143,6 +151,9 @@ object QuizHub {
      */
     /** [activity] = the visible TV screen, or null when it is closed (opening the quiz then needs the screen). */
     fun api(activity: Activity?, path: String, method: String): ApiReply? = when {
+        path == "/api/quiz" && method == "GET" && castbridge.receiver.quiz.PlayHub.active() -> ApiReply(200, onlineStatusJson())
+        // an Internet game is running: the phone is told about it, no local room is opened over it
+        path == "/api/quiz/open" && method == "POST" && castbridge.receiver.quiz.PlayHub.active() -> ApiReply(200, onlineStatusJson())
         path == "/api/quiz" && method == "GET" -> ApiReply(200, statusJson())
         path == "/api/quiz/open" && method == "POST" && activity == null ->
             ApiReply(409, "{\"error\":\"Ouvrez CastBridge TV sur la TV, puis réessayez\",\"needsForeground\":true}")
@@ -158,6 +169,8 @@ object QuizHub {
         }
         else -> null
     }
+
+    private fun onlineStatusJson(): String = castbridge.receiver.quiz.PlayHub.statusJson(TvService.localIp()?.let { "http://$it:${ReceiverServer.PORT}/quiz" } ?: "")
 
     private fun statusJson(): String {
         val r = room?.takeIf { it.stage != QuizRoom.Stage.CLOSED }

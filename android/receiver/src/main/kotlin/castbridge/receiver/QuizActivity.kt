@@ -63,6 +63,7 @@ class QuizActivity : Activity() {
             addView(root, FrameLayout.LayoutParams(MATCH, MATCH))
         })
         sound = QuizSound(this)
+        castbridge.receiver.quiz.PlayHub.probe()   // is the play service answering? (the « Partie Internet » card gives the reason when it is not)
         openRoom()
         main.post(clock)
     }
@@ -352,8 +353,8 @@ class QuizActivity : Activity() {
                 Choice("Compétition entre amis", "Gratuit, pour le plaisir") { play = QuizRoom.Play.FRIENDS; push("track") },
                 Choice("Compétition avec mise", "${QuizRoom.TOKENS_LABEL} : aucun argent réel") { play = QuizRoom.Play.STAKE; push("track") },
                 Choice("Entraînement", "Sans enjeu ni chrono, avec les explications") { play = QuizRoom.Play.PRACTICE; push("track") },
-                Choice("Meilleurs scores", "Vos records sur cette TV") { push("scores") },
-                Choice("Quitter", null) { finish() }))
+                Choice("Meilleurs scores", "Vos records sur cette TV") { push("scores") }) +
+                onlineChoice() + listOf(Choice("Quitter", null) { finish() }))
             "scores" -> Triple("Meilleurs scores", "Sur cette TV, en solo comme à plusieurs", scores.boards().take(4).map { b ->
                 val t = scores.top(b, 3)
                 Choice(b, t.mapIndexed { i, e -> "${i + 1}. ${e.name}  ${e.detail}" }.joinToString("\n")) { }
@@ -386,6 +387,14 @@ class QuizActivity : Activity() {
                     else "15 questions, jokers simulés : battez votre record") { launchSolo() },
                 Choice("Millionnaire avec le public", "Un candidat ; les autres aident depuis leur téléphone") { launch(QuizRoom.Mode.MILLIONAIRE) },
                 Choice("Duel", "Tout le monde répond sur son téléphone : au plus rapide, 20 s maximum") { push("duel-format") }))
+        }
+
+        /** w20-05: the « Partie Internet » card, decided by the core gate (nothing when the setting is off; the reason when blocked: never an empty card). */
+        private fun onlineChoice(): List<Choice> = when (val t = castbridge.receiver.quiz.PlayHub.tile(this@QuizActivity)) {
+            castbridge.core.quiz.online.PlayTile.Hidden -> emptyList()
+            castbridge.core.quiz.online.PlayTile.Available -> listOf(Choice("Partie Internet", "Jouez avec d'autres TV ; vos téléphones jouent par la TV") {
+                startActivity(android.content.Intent(this@QuizActivity, castbridge.receiver.quiz.PlayOnlineActivity::class.java)) })
+            is castbridge.core.quiz.online.PlayTile.Blocked -> listOf(Choice("Partie Internet", t.reason, enabled = false, why = t.reason) {})
         }
 
         private fun pickTrack(t: Track) {
