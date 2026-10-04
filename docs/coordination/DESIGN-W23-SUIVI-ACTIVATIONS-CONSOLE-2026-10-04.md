@@ -19,7 +19,7 @@
 5. **Console** : pages web `/admin/activations/**` (adaptées au téléphone) ; application propriétaire : **export du journal** (fichier, partage, QR) et bouton « Ouvrir le suivi » (navigateur) **sans permission réseau** pendant la phase hors ligne (recommandé, D-W23-3) ; variante en ligne (hôte unique épinglé, lecture seule) **sur décision**.
 6. **Historique** : table d'évènements **immuable chaînée** (`act_event`), journal d'audit **des lectures** (`adm_read_audit`), lots de journal **conservés signés** (`act_journal_batch`), instantanés quotidiens (comptes) et mensuels (par TV), **point de contrôle quotidien signé** (tête de chaîne) ; **jamais purgé**, archive froide au-delà de 24 mois ; rapports bruts des TV bornés à 90 j. ≈ **0,5 Go / an pour 10 000 TV** (estimé).
 7. **Sécurité** : permissions `ACT_READ` / `ACT_EXPORT` / `ACT_ALERT_DECIDE` ; **toute lecture auditée** (jeton d'API compris) ; actions destructrices (révoquer, libérer, réémettre) **restent** dans le module des licences, sous TOTP et motif ; jamais un jeton ni une clé compacte en clair (empreinte SHA-256 + étiquette de 8 hex) ; dans l'historique, la TV est désignée par une **référence HMAC** (`tv_ref`), effaçable par le droit à l'effacement sans casser la chaîne.
-8. **Cahiers** (vague **W23**, indépendante du grand livre W22) : w23-01 API serveur + **V65** (L), w23-02 pages web (M), w23-03 outils du propriétaire (journal signé, téléphone et bureau) (M), w23-04 rapport de la TV (S) ; ordre 01 → (02 ∥ 03 ∥ 04) ; **≈ 8 $**, ≈ 6,5 agent·jours, ≈ 4 jours ouvrés (estimé).
+8. **Cahiers** (vague **W23**, indépendante du grand livre W22) : w23-01 API serveur + **V63** (L), w23-02 pages web (M), w23-03 outils du propriétaire (journal signé, téléphone et bureau) (M), w23-04 rapport de la TV (S) ; ordre 01 → (02 ∥ 03 ∥ 04) ; **≈ 8 $**, ≈ 6,5 agent·jours, ≈ 4 jours ouvrés (estimé).
 9. **Prérequis** : module des licences **allumé** (`CASTBRIDGE_LICENSES_ENABLED`, éteint par défaut) et clés publiques des outils dans `castbridge.licenses.trusted-keys` ; sans cela, le suivi ne voit que les rapports des TV.
 10. Décisions : 14, chacune avec recommandation (§ 10) ; aucune ne bloque w23-01.
 
@@ -245,9 +245,9 @@ Une **divergence** = deux sources qui ne disent pas la même chose (journal ↔ 
 
 ## 5. Historique au serveur
 
-### 5.1 Tables (migration **`V65__activation_tracking.sql`**)
+### 5.1 Tables (migration **`V63__activation_tracking.sql`**)
 
-**Numéro** : AUCUN numéro n'est réservé (règle unique, 2026-10-04) : w23-01 prend « plus haut numéro existant + 1 » AU MOMENT DE SA FUSION et le dit au rapport (V65 n'est qu'une indication de rédaction ; V62 = grand livre W22, W21 prendra aussi le suivant à sa fusion). Les cahiers W22 « plus haut + 1 » (w22-10, w22-16) font de même. Toutes les tables sont **nouvelles** ; **aucune table existante n'est modifiée** (le module des licences est lu, jamais écrit).
+**Numéro** : AUCUN numéro n'est réservé (règle unique, 2026-10-04) : w23-01 prend « plus haut numéro existant + 1 » AU MOMENT DE SA FUSION et le dit au rapport (V63 retenu à la fusion ; V62 = grand livre W22, W21 prendra aussi le suivant à sa fusion). Les cahiers W22 « plus haut + 1 » (w22-10, w22-16) font de même. Toutes les tables sont **nouvelles** ; **aucune table existante n'est modifiée** (le module des licences est lu, jamais écrit).
 
 ```
 act_tool        (kid CHAR(16) PK, tool ENUM('DESK','PHONE','SERVER','AGENT','UNKNOWN'), label VARCHAR(64), scopes VARCHAR(200),
@@ -412,7 +412,7 @@ Le gel (W15, R3/R5) protège ce qui est **livré aux consommateurs** ; exception
 
 | Ordre | Cahier | Objet | Effort | Modèle | Audit Opus | Dépend |
 |---|---|---|---|---|---|---|
-| 1 | `sonnet-w23-01-suivi-activations-api-serveur-v65.md` | module `B/activations/**`, V65, journal `cbx1 type=journal` (vérification Java + vecteurs), route de rapport TV, réconciliation et alertes, API en lecture, flux de changements, audit des lectures, instantanés, points de contrôle, export, effacement | L | sonnet (4.6) | **obligatoire** (contrôle d'accès, audit, vérification de signatures) | V50-V52, V2 fusionnées |
+| 1 | `sonnet-w23-01-suivi-activations-api-serveur-v63.md` | module `B/activations/**`, V63, journal `cbx1 type=journal` (vérification Java + vecteurs), route de rapport TV, réconciliation et alertes, API en lecture, flux de changements, audit des lectures, instantanés, points de contrôle, export, effacement | L | sonnet (4.6) | **obligatoire** (contrôle d'accès, audit, vérification de signatures) | V50-V52, V2 fusionnées |
 | 2 | `sonnet-w23-02-suivi-activations-pages-admin.md` | pages `/admin/activations/**` (liste, fiche TV, tableau de bord, alertes, outils, intégrité, lectures), interrogation longue, adaptées au téléphone | M | sonnet (4.6) | **obligatoire** (contrôle d'accès des routes web, CSRF, TOTP, rien sans audit) | 01 |
 | 2 bis | `sonnet-w23-03-suivi-activations-telephone-proprietaire.md` | journal d'émission signé côté outils (`C/owner/ToolJournal.kt`), console du téléphone (export, QR, « Ouvrir le suivi » ; option A en annexe), bureau (`journal-exporter`) | M | sonnet (4.6) | **obligatoire** (signature, chaîne, aucune permission ajoutée en B) | 01 (vecteurs) |
 | 2 ter | `sonnet-w23-04-suivi-activations-rapport-tv.md` | rapport d'activation de la TV (direct, puis coursier W21 si fusionné), cadence, coupure par le serveur | S | sonnet (4.6) | échantillon | 01 ; exception de gel (D-W23-7) ; coursier : w21-01b/w21-07 si fusionnés |
@@ -433,7 +433,7 @@ Le gel (W15, R3/R5) protège ce qui est **livré aux consommateurs** ; exception
 | R-6 | Croissance de `adm_read_audit` (interrogation longue) | moyenne | faible | l'interrogation longue n'est **pas** auditée à chaque tour : une ligne par ouverture de session de suivi + une par lecture de fiche ou d'export |
 | R-7 | Verrou de tête de chaîne sous charge | faible | faible | < 1 écriture / s ; rapports sans changement n'écrivent pas d'évènement |
 | R-8 | `seq` des activations non dense (outil qui utilise `issuedAt`) | moyenne | faible | la détection de trous repose sur le `n` **du journal**, pas sur le `seq` des activations |
-| R-9 | Collision de numéro de migration (V65) | moyenne | faible | « plus haut + 1 » à la fusion, dit au rapport |
+| R-9 | Collision de numéro de migration (V63) | moyenne | faible | « plus haut + 1 » à la fusion, dit au rapport |
 | R-10 | Exception de gel refusée pour la TV | moyenne | moyen | w23-01/02/03 livrent seuls de la valeur (journal + registre + remise Bluetooth) ; w23-04 attend |
 | R-11 | Module des licences éteint en production | certaine aujourd'hui | élevé | prérequis écrit ; le tableau de bord affiche « module des licences éteint : suivi partiel » |
 | R-12 | Ajout du réseau à l'application qui détient la clé de signature (option A) | — | élevé si mal fait | défaut B (aucun réseau) ; A seulement sur décision, hôte unique épinglé, lecture seule |

@@ -1,5 +1,6 @@
 package castbridge.server.orders;
 
+import castbridge.server.common.Times;
 import castbridge.server.web.ApiException;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.core.type.TypeReference;
@@ -113,7 +114,7 @@ public class OrderService {
             seq++;
             long id = ((Number) q.get("id")).longValue();
             Instant issued = now();
-            Instant expires = ((Timestamp) q.get("expires_at")).toInstant();
+            Instant expires = Times.instant(q.get("expires_at"));
             Map<String, String> params = readParams((String) q.get("params"));
             OrderEnvelope.Target t = target((String) q.get("target_kind"), (String) q.get("target_value"));
             String nonce = HexFormat.of().formatHex(randomBytes(8));
@@ -269,18 +270,18 @@ public class OrderService {
         List<OrderView> out = new ArrayList<>();
         for (Map<String, Object> r : jdbc.queryForList(sql, args)) {
             long id = ((Number) r.get("id")).longValue();
-            Instant exp = ((Timestamp) r.get("expires_at")).toInstant();
+            Instant exp = Times.instant(r.get("expires_at"));
             List<DeliveryView> ds = new ArrayList<>();
             for (Map<String, Object> d : jdbc.queryForList("select * from order_delivery where order_id = ? order by tv_code", id)) {
                 String st = (String) d.get("state");
                 if (st.equals("HANDED") && exp.isBefore(n)) st = "EXPIRED";
                 ds.add(new DeliveryView((String) d.get("tv_code"), st, (String) d.get("reason"), d.get("policy_version") == null ? null : ((Number) d.get("policy_version")).longValue(),
-                        d.get("handed_at") == null ? null : ((Timestamp) d.get("handed_at")).toInstant(), d.get("acked_at") == null ? null : ((Timestamp) d.get("acked_at")).toInstant()));
+                        d.get("handed_at") == null ? null : Times.instant(d.get("handed_at")), d.get("acked_at") == null ? null : Times.instant(d.get("acked_at"))));
             }
             String state = (String) r.get("state");
             if (state.equals("RELEASED") && exp.isBefore(n) && ds.stream().noneMatch(x -> x.state().equals("APPLIED") || x.state().equals("REFUSED"))) state = "EXPIRED";
             out.add(new OrderView(id, state, (String) r.get("action"), readParams((String) r.get("params")), (String) r.get("target_kind"), (String) r.get("target_value"), ((Number) r.get("priority")).intValue(),
-                    r.get("seq") == null ? null : ((Number) r.get("seq")).longValue(), (String) r.get("kid"), ((Timestamp) r.get("created_at")).toInstant(), exp, (String) r.get("created_by"), ds));
+                    r.get("seq") == null ? null : ((Number) r.get("seq")).longValue(), (String) r.get("kid"), Times.instant(r.get("created_at")), exp, (String) r.get("created_by"), ds));
         }
         return out;
     }
@@ -309,7 +310,7 @@ public class OrderService {
     public long verifyAudit() {
         String prev = GENESIS;
         for (Map<String, Object> r : jdbc.queryForList("select * from order_audit order by id")) {
-            Instant at = ((Timestamp) r.get("at")).toInstant();
+            Instant at = Times.instant(r.get("at"));
             String expect = chain(prev, at, (String) r.get("event"), r.get("order_id") == null ? null : ((Number) r.get("order_id")).longValue(), (String) r.get("tv_code"), (String) r.get("actor"), (String) r.get("detail"));
             if (!prev.equals(r.get("prev_hash")) || !expect.equals(r.get("hash"))) return ((Number) r.get("id")).longValue();
             prev = (String) r.get("hash");

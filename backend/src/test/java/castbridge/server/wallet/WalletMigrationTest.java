@@ -37,7 +37,9 @@ class WalletMigrationTest {
         Flyway.configure().dataSource(ds).locations("classpath:db/migration").load().migrate();
         JdbcTemplate j = new JdbcTemplate(ds);
         assertEquals(TABLES.size(), tables(j));
-        assertEquals(62, j.queryForObject("SELECT MAX(CAST(\"version\" AS INT)) FROM \"flyway_schema_history\" WHERE \"version\" IS NOT NULL", Integer.class));
+        // changed with the renumbering of w23-01 (V63 now exists above V62): V62 is applied, no longer necessarily the latest
+        assertEquals(1, j.queryForObject("SELECT COUNT(*) FROM \"flyway_schema_history\" WHERE \"version\" = '62'", Integer.class));
+        assertTrue(j.queryForObject("SELECT MAX(CAST(\"version\" AS INT)) FROM \"flyway_schema_history\" WHERE \"version\" IS NOT NULL", Integer.class) >= 62);
         assertTrue(j.queryForObject("SELECT COUNT(*) FROM wallet_policy", Long.class) >= 20, "la politique est semée par la migration");
     }
 
@@ -56,7 +58,8 @@ class WalletMigrationTest {
     @Test
     void rollbackScriptRemovesEverythingAndLeavesTheRestIntact() throws IOException {
         DriverManagerDataSource ds = db();
-        Flyway.configure().dataSource(ds).locations("classpath:db/migration").load().migrate();
+        // changed with the renumbering of w23-01: the rollback of V62 is played on a database at V62 (a later V63 would make Flyway refuse the hole, as it should)
+        Flyway.configure().dataSource(ds).locations("classpath:db/migration").target("62").load().migrate();
         JdbcTemplate j = new JdbcTemplate(ds);
         String script = Files.readString(Path.of("..", "tools", "wallet", "rollback-V62.sql"));
         assertTrue(script.contains("seulement si aucune écriture réelle"), "en-tête d'avertissement");
