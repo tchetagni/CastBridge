@@ -101,6 +101,8 @@ castbridge:
     revocations-file: ${CASTBRIDGE_WALLET_REVOCATIONS_FILE:}
     writes-per-minute-per-identity: ${CASTBRIDGE_WALLET_WRITES_PER_MINUTE_PER_IDENTITY:30}
     writes-per-minute-global: ${CASTBRIDGE_WALLET_WRITES_PER_MINUTE_GLOBAL:600}
+    # first binding of an identity to a device requires the TV's proof of possession (Ed25519 install key, body field "bind"); false = legacy "first comer" binding (demo TVs that do not sign yet)
+    require-bind-proof: ${CASTBRIDGE_WALLET_REQUIRE_BIND_PROOF:true}
   rate-limit:
     per-minute: ${CASTBRIDGE_RATE_LIMIT_PER_MINUTE:120}
     burst: ${CASTBRIDGE_RATE_LIMIT_BURST:60}

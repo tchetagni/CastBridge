@@ -45,8 +45,8 @@ class WalletApiTest extends WalletTestBase {
     private static long n(Map<String, Object> s, String k) { return ((Number) s.get(k)).longValue(); }
 
     private void adminGrant(String id, String cur, long amount, String reason) throws Exception {
-        mvc.perform(post("/api/v1/admin/wallet/grant").header("Authorization", ADMIN).contentType(MediaType.APPLICATION_JSON)
-                .content("{\"identity\":\"" + id + "\",\"currency\":\"" + cur + "\",\"amount\":" + amount + ",\"reason\":\"" + reason + "\"}")).andExpect(status().isOk());
+        mvc.perform(newAdmin().sign(post("/api/v1/admin/wallet/grant").header("Authorization", ADMIN).contentType(MediaType.APPLICATION_JSON)
+                .content("{\"identity\":\"" + id + "\",\"currency\":\"" + cur + "\",\"amount\":" + amount + ",\"reason\":\"" + reason + "\"}"))).andExpect(status().isOk());
     }
 
     @Test
@@ -172,7 +172,7 @@ class WalletApiTest extends WalletTestBase {
         String auth = registerTv();
         Acts.Tv tv = Acts.Tv.random(), friend = Acts.Tv.random();
         sync(auth, tv, Acts.trialDays(ISSUER, tv, NOW, 30));
-        for (int i = 0; i < 60; i++) adminGrant(tv.code(), "NDEM", 1 + i, "Ligne " + i);
+        for (int i = 0; i < 60; i++) ledger.post(castbridge.server.wallet.core.Txn.adjust(tv.code(), castbridge.server.wallet.core.Currency.NDEM, 1 + i, "adj:admin:hist-" + i + "-" + tv.code()), "admin:test", tv.code(), "Ligne " + i);
         JsonNode p1 = body(mvc.perform(get("/api/v1/wallet/history").header("Authorization", auth)).andExpect(status().isOk()).andReturn());
         assertEquals(50, p1.get("lines").size());
         long lastId = p1.get("lines").get(49).get("id").asLong();
@@ -226,17 +226,17 @@ class WalletApiTest extends WalletTestBase {
         String ok = "{\"identity\":\"" + tv.code() + "\",\"currency\":\"MBOKO\",\"amount\":3,\"reason\":\"Remboursement du lot\",\"idem\":\"adm-1\"}";
         mvc.perform(post("/api/v1/admin/wallet/grant").contentType(MediaType.APPLICATION_JSON).content(ok)).andExpect(status().isUnauthorized());
         mvc.perform(post("/api/v1/admin/wallet/grant").header("Authorization", auth).contentType(MediaType.APPLICATION_JSON).content(ok)).andExpect(status().isUnauthorized());
-        mvc.perform(post("/api/v1/admin/wallet/grant").header("Authorization", ADMIN).contentType(MediaType.APPLICATION_JSON).content(ok.replace("Remboursement du lot", "  "))).andExpect(status().isBadRequest());
-        mvc.perform(post("/api/v1/admin/wallet/grant").header("Authorization", ADMIN).contentType(MediaType.APPLICATION_JSON).content(ok.replace("\"amount\":3", "\"amount\":0"))).andExpect(status().isBadRequest());
-        mvc.perform(post("/api/v1/admin/wallet/grant").header("Authorization", ADMIN).contentType(MediaType.APPLICATION_JSON).content(ok.replace("MBOKO", "EURO"))).andExpect(status().isBadRequest());
-        mvc.perform(post("/api/v1/admin/wallet/grant").header("Authorization", ADMIN).contentType(MediaType.APPLICATION_JSON).content(ok.replace(tv.code(), Acts.Tv.random().code()))).andExpect(status().isNotFound());
-        JsonNode done = body(mvc.perform(post("/api/v1/admin/wallet/grant").header("Authorization", ADMIN).contentType(MediaType.APPLICATION_JSON).content(ok)).andExpect(status().isOk()).andReturn());
+        mvc.perform(newAdmin().sign(post("/api/v1/admin/wallet/grant").header("Authorization", ADMIN).contentType(MediaType.APPLICATION_JSON).content(ok.replace("Remboursement du lot", "  ")))).andExpect(status().isBadRequest());
+        mvc.perform(newAdmin().sign(post("/api/v1/admin/wallet/grant").header("Authorization", ADMIN).contentType(MediaType.APPLICATION_JSON).content(ok.replace("\"amount\":3", "\"amount\":0")))).andExpect(status().isBadRequest());
+        mvc.perform(newAdmin().sign(post("/api/v1/admin/wallet/grant").header("Authorization", ADMIN).contentType(MediaType.APPLICATION_JSON).content(ok.replace("MBOKO", "EURO")))).andExpect(status().isBadRequest());
+        mvc.perform(newAdmin().sign(post("/api/v1/admin/wallet/grant").header("Authorization", ADMIN).contentType(MediaType.APPLICATION_JSON).content(ok.replace(tv.code(), Acts.Tv.random().code())))).andExpect(status().isNotFound());
+        JsonNode done = body(mvc.perform(newAdmin().sign(post("/api/v1/admin/wallet/grant").header("Authorization", ADMIN).contentType(MediaType.APPLICATION_JSON).content(ok))).andExpect(status().isOk()).andReturn());
         assertFalse(done.get("replayed").asBoolean());
         assertEquals(3, done.get("balance").asLong());
         // même clé, même contenu : rejeu ; même clé, autre montant : refus
-        assertTrue(body(mvc.perform(post("/api/v1/admin/wallet/grant").header("Authorization", ADMIN).contentType(MediaType.APPLICATION_JSON).content(ok)).andReturn()).get("replayed").asBoolean());
-        mvc.perform(post("/api/v1/admin/wallet/grant").header("Authorization", ADMIN).contentType(MediaType.APPLICATION_JSON).content(ok.replace("\"amount\":3", "\"amount\":4"))).andExpect(status().isConflict());
-        assertEquals("admin-token", jdbc.queryForObject("SELECT actor FROM wallet_txn WHERE idem_key = 'adj:admin:adm-1'", String.class).replaceFirst("^admin:", ""));
+        assertTrue(body(mvc.perform(newAdmin().sign(post("/api/v1/admin/wallet/grant").header("Authorization", ADMIN).contentType(MediaType.APPLICATION_JSON).content(ok))).andReturn()).get("replayed").asBoolean());
+        mvc.perform(newAdmin().sign(post("/api/v1/admin/wallet/grant").header("Authorization", ADMIN).contentType(MediaType.APPLICATION_JSON).content(ok.replace("\"amount\":3", "\"amount\":4")))).andExpect(status().isConflict());
+        assertTrue(jdbc.queryForObject("SELECT actor FROM wallet_txn WHERE idem_key = 'adj:admin:adm-1'", String.class).startsWith("admin:admin-test-"), "l'acteur est l'administrateur NOMMÉ (audit H2), plus « admin-token »");
         assertEquals("Remboursement du lot", jdbc.queryForObject("SELECT reason FROM wallet_txn WHERE idem_key = 'adj:admin:adm-1'", String.class));
     }
 

@@ -51,5 +51,5 @@ public class WalletModuleConfig {
     SnapshotSigner snapshotSigner(WalletProperties props) { return new SnapshotSigner(WalletKey.fromFile(props.keyFile()), WalletKey.fromFile(props.previousKeyFile())); }
 
     @Bean
-    EditionReader editionReader(WalletProperties props) { return EditionReader.of(props); }
+    EditionReader editionReader(WalletProperties props, LicenseFacts licenseFacts) { return EditionReader.of(props, licenseFacts::revocations); }
 }

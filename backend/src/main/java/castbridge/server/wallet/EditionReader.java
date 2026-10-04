@@ -64,7 +64,10 @@ public class EditionReader {
     }
 
     /** Clés de {@code castbridge.wallet.trusted-keys} (format des licences) et fichier de révocations facultatif. */
-    public static EditionReader of(WalletProperties props) {
+    public static EditionReader of(WalletProperties props) { return of(props, EnvelopeVerifier.Revocations::none); }
+
+    /** Idem, avec une source de révocations supplémentaire (celles du module des licences, {@code lic_revocation}) : l'union des deux listes s'applique. */
+    public static EditionReader of(WalletProperties props, Supplier<EnvelopeVerifier.Revocations> extra) {
         Map<String, EnvelopeVerifier.TrustedKey> keys = new HashMap<>();
         for (String entry : props.trustedKeys()) {
             try {
@@ -80,7 +83,8 @@ public class EditionReader {
                 log.warn("wallet : une entrée de castbridge.wallet.trusted-keys est ignorée (attendu nom:clé publique base64:PORTEE+PORTEE)");
             }
         }
-        return new EditionReader(keys, new RevocationFile(props.revocationsFile(), keys));
+        RevocationFile file = new RevocationFile(props.revocationsFile(), keys);
+        return new EditionReader(keys, () -> file.get().merge(extra.get()));
     }
 
     /** Liste de révocations lue d'un fichier (un jeton {@code cbx1} de révocation par ligne, chacun vérifié par une clé de confiance portant REVOKE) ; relue quand le fichier change. */
