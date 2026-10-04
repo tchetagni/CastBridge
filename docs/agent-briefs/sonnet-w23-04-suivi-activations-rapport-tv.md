@@ -27,3 +27,8 @@ Que le serveur sache **quelle TV porte quelle activation**, quelles commandes du
 
 ## À ne pas faire
 - Ajouter un écran ; envoyer pendant une partie ; passer par la porte de consentement W21 ; envoyer quoi que ce soit d'autre que l'état d'activation et la version.
+
+## Contrat du serveur après l'audit de w23-01 (à respecter, 2026-10-04)
+
+Le serveur ne croit un rapport que s'il **prouve l'appareil** (audit H1, `docs/ACTIVATION-TRACKING.md` § 5) : soit au moins un jeton d'activation (ou une clé compacte) de CETTE TV (ses facteurs donnent le code rapporté), soit un objet `"proof":{"key":<clé publique Ed25519 brute, base64>,"at":<ms>,"sig":<base64>}` : signature, par la clé d'installation de la TV (créée une fois, jamais quittée), de `castbridge-activation-report-v1\n<code>\n<identifiant public de l'installation API (deviceId)>\n<at>` (UTF-8, ± 5 minutes de l'heure du serveur). Un rapport sans l'un ni l'autre répond **403** et ne change rien ; une TV neuve sans activation doit donc envoyer la preuve par clé. Seule une installation `app=tv` peut rapporter. Les dates envoyées doivent être comprises entre 2026-01-01 et maintenant + 400 jours. Une réponse 429 vient d'abord de la limite par appareil (1 par 10 min).
+
