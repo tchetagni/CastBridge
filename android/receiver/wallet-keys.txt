@@ -1,6 +1,2 @@
-# Clé(s) PUBLIQUE(S) du portefeuille de l'API CastBridge (celle qui signe les instantanés `cbw1`), une ligne par clé :
-#   kid=<16 caractères hexadécimaux> pub=<clé publique brute de 32 octets, en base64>
-# Rien de secret ici : la clé privée reste un fichier du serveur (CASTBRIDGE_WALLET_KEY_FILE). Vide = la TV ne peut vérifier aucun instantané (l'écran « Mes jetons » le dit).
-# Obtenir la ligne depuis le fichier de clé du serveur (PEM PKCS#8 Ed25519) :
-#   pub=$(openssl pkey -in <fichier> -pubout -outform DER | tail -c 32 | base64)
-#   kid=$(printf '%s' "$pub" | base64 -d | shasum -a 256 | cut -c1-16)
+# Clés PUBLIQUES de l'API du portefeuille (celle qui signe les instantanés cbw1). Publiques : sans danger ici. La clé privée est un secret du serveur et n'est JAMAIS dans le dépôt.
+kid=5f70298e4efc3c84 pub=DQJM8TtNOiZicGMbPZ6lVx/SwqLuPG8lL4KU9rlHAvY=
