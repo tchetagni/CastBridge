@@ -8,8 +8,9 @@ Dossier complet de la charte graphique CastBridge (écosystème TV + smartphone)
 - `icons/` - 24 pictogrammes SVG (trait 1,8 dp, `currentColor`), grille 24 x 24.
 - `fonts/` - polices Google Fonts libres (licence OFL) : Bricolage Grotesque, Inter, Sora, Manrope.
 - `design-tokens.json` - tokens exportables (couleurs, typo, espacements, rayons, élévation, focus, animations, grille). Importable dans Figma (plugin Tokens Studio).
-- `guide/CastBridge-charte-graphique.pdf` - guide PDF de la charte (11 pages).
-- `mockups/index.html` - maquettes clés TV (1920 x 1080) et mobile (360 x 800).
+- `guide/CastBridge-charte-graphique.pdf` - guide PDF de la charte v1.2 (24 pages : logo avec le Cameroun, construction et dégagements, MBOKO, couleurs signalétiques d'état, accueil TV en groupes et règles UX, à faire / à ne pas faire, sources et licence).
+- `mockups/index.html` - maquettes clés TV (1920 x 1080) et mobile (360 x 800) ; l'accueil TV montre le logo compact, les pastilles d'état et les boutons de groupe, plus la grille « Médias » et la légende des six couleurs.
+- `CHANGELOG.md` - historique de la charte (v1.2 du 2026-10-04).
 - `export/` - exports PNG et formats Android.
 - `tools/` - scripts reproductibles (`gen_cameroun_mark.py`, `svg2vd.py`, `gen_app_assets.py`, `gen_tokens.py`, `subset_fonts.py`, `gen_android_icons.py`) ; le guide PDF se régénère avec `tools/build-branding-guide` (racine du dépôt).
 
@@ -53,6 +54,19 @@ Dossier complet de la charte graphique CastBridge (écosystème TV + smartphone)
 - Petites tailles (<= 96 px : symbole, lanceur, notification, favicon) : contour allégé (36 points) et joint plus épais ; lisible à 48 px, simple forme à 32 px.
 - Régénérer : `python3 branding/tools/gen_cameroun_mark.py` (SVG + PNG/ICO, copies /admin du serveur), puis `gen_android_icons.py` et `gen_app_assets.py` (ressources Android). Dépendances : `fonttools`, `pillow`, `rsvg-convert`.
 
+## Couleurs signalétiques des pastilles d'état (2026-10-04)
+
+- Six niveaux : noir (`semantic.off`, anneau clair `semantic.offRing`, contraste >= 3:1), vert (`success`), orange (`warning`), rouge (`error`), bleu (`info`, en cours), gris (`unknown`, pas encore mesuré). Toujours avec l'icône, le libellé français et un mot d'état : la couleur n'est jamais seule. Règles par pastille et seuils : `android/core/.../tv/status/StatusLevel.kt` et `docs/TV-PLAYER.md` ; paires de contraste : `design-tokens.json` (`contrast.pairs`) vérifiées par `BrandContrastTest`.
+
+## Accueil TV et règles UX
+
+- L'accueil de CastBridge-TV est en 5 boutons de groupe (Médias, Apprendre, Jeux et jetons, Téléphones et réseau, Administration) qui ouvrent une grille de 3 colonnes (grande icône + nom) ; source : `docs/TV-ACCUEIL.md`, `HomeGroups.kt`. Règles : libellé français sur toute icône, contraste >= 4,5:1, zone de sécurité de 5 %, texte >= 28 sp et icônes >= 40 dp sur la TV, focus `#FFE1A6` 3 dp échelle 1,04, télécommande à 5 touches ; barre du lecteur : Pause, Audio, Sous-titres, Affichage, Infos.
+
+## Régénérer le guide PDF
+
+- `python3 -m venv venv && venv/bin/pip install reportlab fonttools pillow`, puis `venv/bin/python tools/build-branding-guide` depuis la racine du dépôt (`rsvg-convert` requis : `brew install librsvg` ; polices Inter et Bricolage Grotesque installées pour les textes des SVG). Le guide lit `design-tokens.json`, `logo/`, `icons/` et `tools/gen_cameroun_mark.py` (dégagements mesurés).
+
 ## Sources
 
 - Contour du Cameroun : Natural Earth (domaine public), via github.com/datasets/geo-countries (ODC-PDDL), polygone CMR, simplifié (Douglas-Peucker 0,08 degré, 92 points) dans `tools/cameroun-contour.json` ; lissage Visvalingam-Whyatt dans `gen_cameroun_mark.py`. Mention reprise en commentaire dans chaque SVG concerné.
+- Licence : Natural Earth est dans le domaine public ; le jeu `geo-countries` est publié sous ODC-PDDL (Open Data Commons Public Domain Dedication and Licence). Aucune attribution n'est exigée ; la source est citée par courtoisie (README, guide PDF chapitre 17, commentaire des SVG). Le contour sert l'identité visuelle, pas la cartographie.

@@ -5,11 +5,14 @@
 
 Reproductible : tout vient de branding/ (design-tokens.json, logo/*.svg, icons/*.svg, fonts/, guide/screens/*.jpg, export, ressources
 des apps). Les logos sont rastérisés avec leurs proportions d'origine (largeur imposée, hauteur déduite : plus de logos étirés).
-Dépendances : reportlab, fonttools (pip install reportlab fonttools) et rsvg-convert (brew install librsvg ; apt install librsvg2-bin).
+Version 1.2 (2026-10-04) : logo avec le Cameroun, sous-titre MBOKO, couleurs signalétiques, accueil TV en groupes, règles UX.
+Dépendances : reportlab, fonttools, pillow (python3 -m venv v && v/bin/pip install reportlab fonttools pillow ; v/bin/python tools/build-branding-guide) et rsvg-convert (brew install librsvg ; apt install librsvg2-bin).
 Les polices Inter / Bricolage Grotesque / Sora / Manrope doivent être installées pour que rsvg dessine les textes des SVG.
 """
+import importlib.util
 import io
 import json
+import math
 import os
 import re
 import subprocess
@@ -97,6 +100,7 @@ ST = {
     "toc": ParagraphStyle("toc", fontName=BODY, fontSize=11, leading=19, textColor=TXT),
     "cover": ParagraphStyle("cover", fontName=HEAD, fontSize=40, leading=44, textColor=col(hexv("dark.textHigh")), alignment=TA_CENTER),
     "coversub": ParagraphStyle("coversub", fontName=BODY, fontSize=14, leading=19, textColor=GOLD, alignment=TA_CENTER),
+    "covermbk": ParagraphStyle("covermbk", fontName=HEAD_B, fontSize=13, leading=17, textColor=col("#2E9E6B"), alignment=TA_CENTER),
     "covermini": ParagraphStyle("covermini", fontName=BODY, fontSize=9, leading=12, textColor=col(hexv("dark.textMedium")), alignment=TA_CENTER),
 }
 W = A4[0] - 36 * mm
@@ -175,10 +179,10 @@ story = []
 
 def cover():
     sym = pic(raster(os.path.join(BR, "logo", "castbridge-symbol.svg"), 600), 44)
-    cells = [[Spacer(1, 30 * mm)], [sym], [Spacer(1, 9 * mm)], [P("CastBridge", "cover")], [Spacer(1, 3 * mm)],
+    cells = [[Spacer(1, 30 * mm)], [sym], [Spacer(1, 9 * mm)], [P("CastBridge", "cover")], [P("M B O K O", "covermbk")], [Spacer(1, 3 * mm)],
              [P("Charte graphique - Le pont simple entre vos écrans", "coversub")], [Spacer(1, 6 * mm)],
              [P("Écosystème TV + smartphone - Cameroun &amp; Afrique francophone", "covermini")],
-             [Spacer(1, 6 * mm)], [P("Version 1.1 - contrastes WCAG AA corrigés, icônes complétées, application aux apps et au serveur", "covermini")],
+             [Spacer(1, 6 * mm)], [P("Version 1.2 (2026-10-04) - logo avec le Cameroun, sous-titre MBOKO, couleurs signalétiques d'état, accueil TV en groupes, règles UX", "covermini")],
              [Spacer(1, 30 * mm)]]
     t = Table(cells, colWidths=[W])
     t.setStyle(TableStyle([("ALIGN", (0, 0), (-1, -1), "CENTER"), ("BACKGROUND", (0, 0), (-1, -1), INK),
@@ -188,9 +192,11 @@ def cover():
 
 def toc():
     story.append(H1("Sommaire"))
-    for l in ["1. Plateforme de marque", "2. Architecture de marque", "3. Logo et symbolique", "4. Couleurs et contrastes", "5. Typographie",
-              "6. Grille, espacements, rayons, élévation", "7. États de focus et animations", "8. Iconographie", "9. Sous-marques",
-              "10. Spécifications Android", "11. Les apps habillées (captures)", "12. Livrables et fichiers"]:
+    for l in ["1. Plateforme de marque", "2. Architecture de marque", "3. Logo : le casque et le Cameroun", "4. Construction, dégagements, petites tailles",
+              "5. Mot-symbole et sous-titre MBOKO", "6. Couleurs et contrastes", "7. Couleurs signalétiques des pastilles d'état",
+              "8. Typographie", "9. Grille, espacements, rayons, élévation", "10. États de focus et animations", "11. Iconographie",
+              "12. Accueil TV en groupes, lecteur et règles UX", "13. Sous-marques", "14. Spécifications Android", "15. Les apps habillées (captures)",
+              "16. À faire / à ne pas faire", "17. Sources, licence du contour et régénération", "18. Livrables et fichiers"]:
         story.append(P(l, "toc"))
     story.append(PageBreak())
 
@@ -204,7 +210,7 @@ def brand():
         story.append(P(f"<font name='{BODY_B}'>{k}</font> : {v}"))
     story.append(Spacer(1, 4 * mm))
     story.append(H1("2. Architecture de marque"))
-    story.append(P("Les trois pistes créatives forment l'ADN de l'écosystème. Chaque marque garde les proportions de son logo : jamais d'étirement."))
+    story.append(P("Les trois pistes créatives forment l'ADN de l'écosystème. Chaque marque garde les proportions de son logo : jamais d'étirement. La marque mère et CastBridge-TV portent le sous-titre MBOKO (chapitre 5) ; les sous-marques gardent leur propre palette."))
     rows = []
     for n, nm, d in [("castbridge-logo-horizontal", "CastBridge (marque mère)", "Piste 1 « Le Pont » - or / indigo"),
                      ("castbridge-tv-horizontal", "CastBridge TV", "Le pont, icône et en-têtes de l'app TV"),
@@ -216,18 +222,98 @@ def brand():
     story.append(PageBreak())
 
 
+def _load_mark():
+    spec = importlib.util.spec_from_file_location("gen_cameroun_mark", os.path.join(BR, "tools", "gen_cameroun_mark.py"))
+    m = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(m)
+    return m
+
+
+MARK = _load_mark()
+
+
+def svgpic(svg_text, width_mm, bg=None):
+    return pic(raster(svg_text, int(width_mm * 14), bg=bg), width_mm)
+
+
+def construction_svg():
+    """Le symbole en construction : zone de dégagement minimale (6 unités) et dégagements mesurés (11 / 11 / 10)."""
+    m = MARK
+    poly = m.placed("full")
+    join = m.DETAIL["full"][1]
+    pts = " ".join(f"{x:.2f},{y:.2f}" for x, y in poly)
+    l, r, a = m.clearances(poly, join)
+    # points les plus proches : écouteur gauche / droit / arc (échantillonnage, mêmes formules que gen_cameroun_mark.clearances)
+    samples = []
+    for i in range(len(poly)):
+        p0, p1 = poly[i], poly[(i + 1) % len(poly)]
+        samples += [(p0[0] + (p1[0] - p0[0]) * t / 20, p0[1] + (p1[1] - p0[1]) * t / 20) for t in range(20)]
+
+    def nearest_rect(p, rc):
+        x, y, w, h = rc
+        return (min(max(p[0], x), x + w), min(max(p[1], y), y + h))
+    arcpts = [((1 - t) ** 2 * m.ARC[0][0] + 2 * t * (1 - t) * m.ARC[1][0] + t * t * m.ARC[2][0],
+               (1 - t) ** 2 * m.ARC[0][1] + 2 * t * (1 - t) * m.ARC[1][1] + t * t * m.ARC[2][1]) for t in [i / 200 for i in range(201)]]
+    pl = min(samples, key=lambda p: math.hypot(p[0] - nearest_rect(p, m.LEFT_EAR)[0], p[1] - nearest_rect(p, m.LEFT_EAR)[1]))
+    pr = min(samples, key=lambda p: math.hypot(p[0] - nearest_rect(p, m.RIGHT_EAR)[0], p[1] - nearest_rect(p, m.RIGHT_EAR)[1]))
+    pa, qa = min(((p, q) for p in samples[::3] for q in arcpts[::2]), key=lambda t: math.hypot(t[0][0] - t[1][0], t[0][1] - t[1][1]))
+    el, er = nearest_rect(pl, m.LEFT_EAR), nearest_rect(pr, m.RIGHT_EAR)
+
+    def dim(p, q, label, dx=0, dy=-4):
+        mx, my = (p[0] + q[0]) / 2 + dx, (p[1] + q[1]) / 2 + dy
+        return (f'<line x1="{p[0]:.1f}" y1="{p[1]:.1f}" x2="{q[0]:.1f}" y2="{q[1]:.1f}" stroke="#FF8A3D" stroke-width="1.4"/>'
+                f'<text x="{mx:.1f}" y="{my:.1f}" font-family="Inter" font-weight="700" font-size="9" fill="#FFE1A6" text-anchor="middle">{label}</text>')
+    ear_l, ear_r = m.LEFT_EAR, m.RIGHT_EAR
+    return f'''<svg xmlns="http://www.w3.org/2000/svg" viewBox="30 50 190 170" width="760" height="680">
+  <rect x="30" y="50" width="190" height="170" fill="#0A0F1E"/>
+  <path d="M70 148 Q120 78 172 142" fill="none" stroke="#F5B025" stroke-width="14" stroke-linecap="round"/>
+  <rect x="{ear_l[0]}" y="{ear_l[1]}" width="{ear_l[2]}" height="{ear_l[3]}" rx="8" fill="#F5B025"/>
+  <rect x="{ear_r[0]}" y="{ear_r[1]}" width="{ear_r[2]}" height="{ear_r[3]}" rx="10" fill="#F5B025"/>
+  <polygon points="{pts}" fill="#6CB6FF" fill-opacity="0.22" stroke="#6CB6FF" stroke-opacity="0.35" stroke-width="{join + 2 * m.MIN_CLEAR}" stroke-linejoin="round"/>
+  <polygon points="{pts}" fill="#F5B025" stroke="#F5B025" stroke-width="{join}" stroke-linejoin="round"/>
+  {dim(pl, el, f"{l:.0f}".replace(".", ","), dy=-5)}{dim(pr, er, f"{r:.0f}", dy=-5)}{dim(pa, qa, f"{a:.0f}", dx=16, dy=0)}
+  <line x1="{m.CMR_CX}" y1="62" x2="{m.CMR_CX}" y2="214" stroke="#FFFFFF" stroke-opacity="0.35" stroke-dasharray="3 3" stroke-width="0.8"/>
+  <line x1="40" y1="{m.CMR_BOTTOM}" x2="210" y2="{m.CMR_BOTTOM}" stroke="#FFFFFF" stroke-opacity="0.35" stroke-dasharray="3 3" stroke-width="0.8"/>
+  <text x="206" y="{m.CMR_BOTTOM + 11}" font-family="Inter" font-size="7.5" fill="#B7C0D4" text-anchor="end">bas des écouteurs (y = 194)</text>
+  <text x="{m.CMR_CX + 3}" y="64" font-family="Inter" font-size="7.5" fill="#B7C0D4">axe (x = 117)</text>
+  </svg>'''
+
+
+def pixel_row():
+    """Contour complet (70 points) et contour allégé (36 points) à 96, 48 et 32 px réels, agrandis 4x sans lissage."""
+    from PIL import Image as PI
+    cells = []
+    for name, lab in (("castbridge-icon-512", "contour complet (70 points) - grand format"), ("castbridge-symbol", "contour allégé (36 points) - petites tailles")):
+        row = []
+        for px in (96, 48, 32):
+            png = raster(os.path.join(BR, "logo", name + ".svg"), px)
+            im = PI.open(png).convert("RGBA")
+            big = im.resize((im.width * 4, im.height * 4), PI.NEAREST)
+            out = os.path.join(TMP, f"px{name}{px}.png")
+            canvas = PI.new("RGBA", (96 * 4, 96 * 4), (255, 255, 255, 255))
+            canvas.paste(big, ((96 * 4 - big.width) // 2, (96 * 4 - big.height) // 2), big)
+            canvas.save(out)
+            row.append(Table([[pic(out, 24)], [P(f"{px} px", "cap")]], colWidths=[30 * mm], style=[("ALIGN", (0, 0), (-1, -1), "CENTER")]))
+        cells.append([P(lab, "cellb")] + row)
+    t = Table(cells, colWidths=[W - 3 * 32 * mm] + [32 * mm] * 3)
+    t.setStyle(TableStyle([("VALIGN", (0, 0), (-1, -1), "MIDDLE"), ("LINEBELOW", (0, 0), (-1, -1), 0.3, LINE)]))
+    return t
+
+
 def logos():
-    story.append(H1("3. Logo et symbolique"))
-    story.append(P("Le symbole : un pont-arc entre deux écrans (téléphone et télé), une lueur qui transite. Lisible dès la petite taille."))
+    story.append(H1("3. Logo : le casque et le Cameroun"))
+    story.append(P("Le symbole : un casque jaune, le son qui voyage de la télé au téléphone. Entre les deux écouteurs, sous l'arc, la <b>silhouette du Cameroun</b> (nord en haut) "
+                   "dit d'où vient la marque. Au sommet de l'arc, la lueur dorée reste le signe du « cast ». Décision du propriétaire du 2026-10-04 : elle figure dans toutes les variantes, "
+                   "du téléphone comme de la TV (les anciens logos sans silhouette sont retirés)."))
     story.append(H2("Symbole (fond sombre / fond clair)"))
     a = panel(pic(raster(os.path.join(BR, "logo", "castbridge-symbol.svg"), 500), 38), None, pad=0, width=80 * mm)
     b = panel(pic(raster(os.path.join(BR, "logo", "castbridge-symbol-light.svg"), 500), 38), None, pad=0, width=80 * mm)
     story.append(Table([[a, b]], colWidths=[W / 2, W / 2]))
-    story.append(H2("Verrouillage horizontal (sombre / clair)"))
+    story.append(P("Jaune #F5B025 sur fond sombre ; #946219 (primaire clair) sur fond clair ; une seule couleur sur les monochromes.", "small"))
+    story.append(H2("Verrouillage horizontal (sombre / clair) avec le sous-titre MBOKO"))
     story.append(panel(logo("castbridge-logo-horizontal", 110), INK, pad=8))
     story.append(Spacer(1, 3 * mm))
     story.append(panel(logo("castbridge-logo-horizontal-light", 110), PAPER, pad=8))
-    story.append(PageBreak())
     story.append(H2("Verrouillage vertical (sombre / clair)"))
     a = panel(logo("castbridge-logo-vertical", 62), INK, pad=8, width=80 * mm)
     b = panel(logo("castbridge-logo-vertical-light", 62), PAPER, pad=8, width=80 * mm)
@@ -236,18 +322,324 @@ def logos():
     a = panel(logo("castbridge-logo-monochrome-white", 80), INK, pad=8, width=80 * mm)
     b = panel(logo("castbridge-logo-monochrome-ink", 80), PAPER, pad=8, width=80 * mm)
     story.append(Table([[a, b]], colWidths=[W / 2, W / 2]))
+    story.append(H2("CastBridge-TV : verrouillage complet, variante compacte, bannière"))
+    story.append(panel(logo("castbridge-tv-horizontal", 100), INK, pad=6))
+    story.append(Spacer(1, 2 * mm))
+    story.append(Table([[panel(logo("castbridge-tv-horizontal-compact", 70), INK, pad=6, width=84 * mm),
+                         panel(pic(raster(os.path.join(BR, "logo", "tv-banner-320x180.svg"), 640), 56), None, pad=0, width=84 * mm)]],
+                       colWidths=[W / 2, W / 2]))
+    story.append(P("À gauche, la variante compacte (<font name='%s'>logo_castbridge_tv_horizontal_compact</font>) de l'en-tête de l'accueil TV, sans sous-titre ; à droite, la bannière Android TV 320 x 180." % BODY_B, "small"))
     story.append(H2("Règles"))
-    for t in ["Zone de protection : au minimum la hauteur du téléphone (pilier gauche) tout autour du logo.",
-              "Taille minimale : 24 px pour le symbole seul, 96 px de large pour le verrouillage horizontal.",
-              "Ne jamais étirer, pivoter, recolorier hors des variantes ci-dessus, ni ajouter d'ombre ou de flou.",
-              "Sur fond photo ou vidéo : utiliser la variante monochrome blanche, sur une surface sombre."]:
+    for t in ["Ne jamais étirer, pivoter, recolorier hors des variantes ci-dessus, ni ajouter d'ombre ou de flou. Ne jamais redessiner la silhouette : elle vient du fichier de contour (section 17).",
+              "Sur fond photo ou vidéo : utiliser la variante monochrome blanche, sur une surface sombre.",
+              "Le nom de l'application sur le lanceur et les identifiants d'application Android ne changent pas : seule l'image change."]:
         story.append(P("• " + t))
     story.append(PageBreak())
 
 
+def construction():
+    story.append(H1("4. Construction, dégagements, petites tailles"))
+    story.append(P("La silhouette est posée au centre de l'intervalle entre les écouteurs (axe x = 117 dans le repère 240 x 240 du symbole), son bas aligné sur le bas des écouteurs (y = 194). "
+                   "Le script <font name='%s'>gen_cameroun_mark.py --check</font> mesure les dégagements, joint arrondi compris, et refuse tout dessin sous 6 unités." % BODY_B))
+    story.append(Table([[svgpic(construction_svg(), 80), [
+        P("<font name='%s'>Dégagements mesurés (unités du symbole)</font>" % BODY_B, "body"),
+        table([[P("", "cellb"), P("complet", "cellb"), P("allégé", "cellb")]] +
+              [[P(k, "cell"), P(a, "cell"), P(b, "cell")] for k, a, b in [("Écouteur gauche", "11,0", "10,1"), ("Écouteur droit", "11,0", "10,1"),
+                                                                           ("Arc jaune", "10,2", "7,5"), ("Minimum exigé", "6,0", "6,0")]], [32 * mm, 18 * mm, 18 * mm]),
+        Spacer(1, 3 * mm),
+        P("Zone bleue : bande interdite de 6 unités autour de la silhouette ; ni l'arc ni un écouteur ne doit y entrer. "
+          "Les chiffres orange sont les trois plus petits écarts du contour complet.", "small")]]],
+                       colWidths=[84 * mm, None], style=[("VALIGN", (0, 0), (-1, -1), "TOP")]))
+    story.append(H2("Règle des petites tailles"))
+    story.append(P("Au lanceur, à la notification et au favicon (96 px et moins), le contour complet charge trop l'image : on utilise le <b>contour allégé de 36 points</b>, "
+                   "avec un joint plus épais (2,4 au lieu de 1,3) et une silhouette un peu plus grande. Résultat : reconnaissable à 48 px, une forme distincte à 32 px."))
+    story.append(pixel_row())
+    story.append(P("Agrandissements 4x sans lissage de PNG réels : on voit les pixels tels que la TV ou le téléphone les affiche.", "small"))
+    story.append(H2("Zones et tailles"))
+    story.append(table([[P(a, "cellb"), P(b, "cell")] for a, b in [
+        ("Zone de protection", "au minimum la largeur d'un écouteur gauche (28 unités, soit 12 % du symbole) tout autour du logo."),
+        ("Tailles minimales", "32 px : forme distincte (contour allégé) ; 48 px : Cameroun reconnaissable ; en dessous, ne pas utiliser le logo."),
+        ("Icône adaptative Android", "canevas 108 dp, zone sûre 66 dp ; avant-plan, arrière-plan et monochrome (Android 13+) ; contour allégé."),
+        ("Variantes livrées", "horizontal et vertical (clair / sombre), monochrome blanc et encre, icône 512, adaptatif avant-plan / arrière-plan / monochrome (téléphone et TV), "
+                              "bannière 320 x 180, favicon, notification.")]], [42 * mm, None], head=False))
+    story.append(PageBreak())
+
+
+def wordmark():
+    story.append(H1("5. Mot-symbole et sous-titre MBOKO"))
+    story.append(P("Le nom écrit est « CastBridge » sur le téléphone et « CastBridge-TV » sur la TV (jamais « sender » ni « receiver » dans un texte visible). "
+                   "Sous le nom, une seconde ligne, le <b>sous-titre « MBOKO »</b>, rattache la marque à son pays."))
+    rows = [("Libellé", "MBOKO, en capitales (configurable en tête de gen_cameroun_mark.py : WORDMARK)"), ("Graisse", "700"),
+            ("Interlettrage", "environ 0,18 em"), ("Taille", "environ 38 % de la première ligne (47 % sur la bannière TV, plus étroite)"),
+            ("Couleur sur fond sombre", "vert #2E9E6B"), ("Couleur sur fond clair", "vert #1C7C53"),
+            ("Monochrome", "une seule couleur, la même que le reste du logo"), ("Position", "juste sous « CastBridge » (ou « CastBridge-TV »), alignée à gauche du nom")]
+    story.append(table([[P(a, "cellb"), P(b, "cell")] for a, b in rows], [48 * mm, None], head=False))
+    story.append(H2("Avec le sous-titre"))
+    story.append(Table([[panel(logo("castbridge-logo-horizontal", 70), INK, pad=6, width=84 * mm), panel(logo("castbridge-logo-horizontal-light", 70), PAPER, pad=6, width=84 * mm)],
+                        [panel(logo("castbridge-logo-vertical", 44), INK, pad=6, width=84 * mm), panel(logo("castbridge-logo-monochrome-white", 70), INK, pad=6, width=84 * mm)]],
+                       colWidths=[W / 2, W / 2], style=[("VALIGN", (0, 0), (-1, -1), "MIDDLE")]))
+    story.append(P(f"Contraste du sous-titre : #2E9E6B sur le fond TV {hexv('dark.background')} = {ratio('#2E9E6B', hexv('dark.background')):.1f}:1 ; #1C7C53 sur blanc = {ratio('#1C7C53', '#FFFFFF'):.1f}:1 (grands caractères gras, seuil 3:1).", "small"))
+    story.append(H2("Sans le sous-titre : là où il serait illisible"))
+    ic = Table([[pic(raster(os.path.join(BR, "logo", "castbridge-symbol.svg"), 300), 17), pic(raster(os.path.join(BR, "logo", "castbridge-notification.svg"), 200, bg="#0A0F1E"), 17),
+                 pic(os.path.join(BR, "export", "png", "playstore-512.png"), 17),
+                 panel(logo("castbridge-tv-horizontal-compact", 52), INK, pad=4, width=62 * mm)],
+                [P("Lanceur", "cap"), P("Notification", "cap"), P("Play Store", "cap"), P("En-tête de l'accueil TV, 56 dp (variante compacte)", "cap")]],
+               colWidths=[24 * mm, 24 * mm, 24 * mm, None], style=[("ALIGN", (0, 0), (-1, -1), "CENTER"), ("VALIGN", (0, 0), (-1, -1), "MIDDLE")])
+    story.append(ic)
+    story.append(P("Le favicon est dans le même cas (symbole seul). Règle : le sous-titre n'apparaît que là où il reste lisible ; ailleurs, le symbole suffit. "
+                   "Le nom du lanceur Android et les identifiants d'application ne changent pas.", "small"))
+    story.append(PageBreak())
+
+
+# ---------------- couleurs signalétiques ----------------
+LEVELS = [("OFF", "Noir", "off", "désactivé volontairement ou absent"), ("OK", "Vert", "success", "fonctionne"),
+          ("WARN", "Orange", "warning", "dégradé ou à surveiller"), ("ERROR", "Rouge", "error", "panne ou état critique"),
+          ("BUSY", "Bleu", "info", "en cours ou transitoire"), ("UNKNOWN", "Gris", "unknown", "pas encore mesuré (jamais vert)")]
+
+
+def sem(key, mode="dark"):
+    return C["semantic"][key][mode]["value"]
+
+
+def icon_inner(name):
+    t = open(os.path.join(BR, "icons", name + ".svg"), encoding="utf-8").read()
+    inner = t.split(">", 1)[1].rsplit("</svg>", 1)[0]
+    return '<g fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">' + inner + "</g>"
+
+
+def badge_svg(level_key, icon, label, word, width=300):
+    """Pastille d'état sur fond TV : anneau 3 dp de la couleur du niveau, icône, libellé + mot d'état ; le noir = fond noir + anneau clair + icône à 60 %."""
+    off = level_key == "off"
+    ring = sem("offRing") if off else sem(level_key)
+    fill = sem("off") if off else hexv("dark.surface")
+    ic = hexv("dark.textHigh")
+    return f'''<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 {width} 50" width="{width * 3}" height="150">
+  <rect x="1.5" y="1.5" width="{width - 3}" height="47" rx="23.5" fill="{fill}" stroke="{ring}" stroke-width="3"/>
+  <g transform="translate(14 11) scale(1.17)" color="{ic}" opacity="{0.6 if off else 1}">{icon_inner(icon).replace("currentColor", ic)}</g>
+  <text x="50" y="31" font-family="Inter" font-size="15" fill="{hexv("dark.textHigh")}"><tspan font-weight="700">{label}</tspan> · {word}</text>
+  <circle cx="{width - 20}" cy="25" r="6" fill="{ring}"/>
+  </svg>'''
+
+
+def signals():
+    story.append(H1("7. Couleurs signalétiques des pastilles d'état"))
+    story.append(P("Demande du propriétaire (2026-10-04) : les pastilles d'état (Wi-Fi, Wi-Fi Direct, Bluetooth, Internet, Stockage, téléphones, copie, licence, quiz en ligne, jetons et serveur) "
+                   "disent leur état par quatre couleurs de feu tricolore, <b>noir, vert, orange, rouge</b>, plus le bleu (en cours) et le gris (pas encore mesuré). "
+                   "<b>La couleur n'est jamais seule</b> : chaque pastille garde son icône, son libellé français et un mot d'état (« Wi-Fi · connecté », « Stockage · 12 % libre »)."))
+    rows = [[P("Niveau", "cellb"), P("", "cellb"), P("Sombre (TV)", "cellb"), P("Clair (téléphone)", "cellb"), P("Sens", "cellb")]]
+    st = []
+    for i, (code, nm, key, mean) in enumerate(LEVELS, start=1):
+        rows.append([P(f"<b>{nm}</b> ({code})", "cell"), "", P(sem(key), "cell"), P(sem(key, "light"), "cell"), P(mean, "small")])
+        st.append(("BACKGROUND", (1, i), (1, i), col(sem(key))))
+        st.append(("BOX", (1, i), (1, i), 0.5, col("#B9C2D4")))
+    story.append(table(rows, [32 * mm, 11 * mm, 24 * mm, 30 * mm, None], extra=st))
+    story.append(H2("Le noir reste visible"))
+    bg, off_, ring_ = hexv("dark.background"), sem("off"), sem("offRing")
+    story.append(P(f"Noir pur {off_} avec un anneau <b>clair</b> {ring_} (jamais noir sur noir) et l'icône à 60 % d'opacité. Contraste de l'anneau : "
+                   f"<b>{ratio(ring_, bg):.1f}:1</b> sur le fond TV {bg} et <b>{ratio(ring_, off_):.1f}:1</b> sur le noir (minimum 3:1). "
+                   f"Les cinq autres couleurs sur le noir : " + ", ".join(f"{nm} {ratio(sem(key), off_):.1f}:1" for _, nm, key, _ in LEVELS[1:]) +
+                   ". Toutes ces paires sont vérifiées par le test BrandContrastTest (module :core)."))
+    ex = [("off", "wifi", "Wi-Fi", "désactivé"), ("success", "wifi", "Wi-Fi", "connecté"), ("warning", "wifi", "Wi-Fi", "signal faible"),
+          ("error", "wifi", "Wi-Fi", "non connecté"), ("info", "wifi", "Wi-Fi", "connexion…"), ("unknown", "test-internet", "Internet", "non testé")]
+    cells = [[svgpic(badge_svg(k, ic, lab, w), 54)] for k, ic, lab, w in ex]
+    grid_ = Table([[cells[0][0], cells[1][0], cells[2][0]], [cells[3][0], cells[4][0], cells[5][0]]], colWidths=[W / 3] * 3)
+    grid_.setStyle(TableStyle([("BACKGROUND", (0, 0), (-1, -1), INK), ("TOPPADDING", (0, 0), (-1, -1), 6), ("BOTTOMPADDING", (0, 0), (-1, -1), 6), ("ALIGN", (0, 0), (-1, -1), "CENTER")]))
+    story.append(grid_)
+    story.append(P("Rendu schématique des six niveaux sur fond TV (anneau 3 dp, point de couleur à droite).", "small"))
+    story.append(H2("Exemples de mots d'état (formats du code, écrits sur la pastille)"))
+    ex2 = [("success", "cle-usb", "Stockage", "74 % libre"), ("warning", "cle-usb", "Stockage", "12 % libre"), ("error", "cle-usb", "Stockage", "3 % libre"),
+           ("off", "cle-usb", "Stockage", "absent"), ("info", "copier", "Copie", "42 %"), ("success", "wifi-direct", "Wi-Fi Direct", "groupe actif")]
+    g2 = Table([[svgpic(badge_svg(*e), 54) for e in ex2[:3]], [svgpic(badge_svg(*e), 54) for e in ex2[3:]]], colWidths=[W / 3] * 3)
+    g2.setStyle(TableStyle([("BACKGROUND", (0, 0), (-1, -1), INK), ("TOPPADDING", (0, 0), (-1, -1), 6), ("BOTTOMPADDING", (0, 0), (-1, -1), 6), ("ALIGN", (0, 0), (-1, -1), "CENTER")]))
+    story.append(g2)
+    story.append(PageBreak())
+    story.append(H2("Règle de chaque pastille (seuils : stockage 20 % / 5 %, Wi-Fi faible à -70 dBm, lent à 1,5 s, licence 7 jours, 8 téléphones, jetons 5)"))
+    R = [("Wi-Fi", "désactivé", "connecté, signal bon", "signal faible ou sans Internet", "activé, non connecté", "connexion…", ""),
+         ("Wi-Fi Direct", "désactivé ou inactif", "groupe actif", "", "échec", "en cours", ""),
+         ("Bluetooth", "désactivé", "prêt, téléphone relié, passerelle", "passerelle sur réseau lent", "erreur adaptateur, téléphone refusé", "connexion", ""),
+         ("Internet", "hors ligne, non attendu", "direct", "via le téléphone, ou 1,5 s et plus", "aucun accès alors qu'attendu", "vérification", "non testé"),
+         ("Stockage", "absent", "20 % libre ou plus", "5 % à moins de 20 %", "moins de 5 %, lecture seule, erreur", "", "non mesuré"),
+         ("Téléphones n/8", "aucun", "1 à 7", "8/8 complet", "", "", ""),
+         ("Copie", "aucune", "", "ralentie", "échec", "en cours (%)", ""),
+         ("Licence", "non requise", "valide", "expire sous 7 jours, en attente, essai", "expirée, invalide, essai terminé", "", ""),
+         ("Quiz en ligne", "hors partie", "en ligne", "liaison lente", "TV non activée, serveur injoignable", "connexion", ""),
+         ("Jetons / serveur", "", "solde au-dessus de 5", "5 restants ou moins, serveur hors ligne", "plus de jeton", "", "non testé, solde inconnu")]
+    small = ParagraphStyle("t", parent=ST["cell"], fontSize=7.3, leading=9)
+    smallb = ParagraphStyle("tb", parent=ST["cellb"], fontSize=7.3, leading=9)
+    rows = [[Paragraph(h, smallb) for h in ("Pastille", "Noir", "Vert", "Orange", "Rouge", "Bleu", "Gris")]]
+    for r in R:
+        rows.append([Paragraph(r[0], smallb)] + [Paragraph(x, small) for x in r[1:]])
+    story.append(table(rows, [24 * mm, 22 * mm, 26 * mm, 28 * mm, 28 * mm, 22 * mm, None]))
+    story.append(P("Le libellé complet reste affiché en permanence pour l'orange et le rouge. Barre d'état : Téléphone, Télécommande, Clé USB, Wi-Fi Direct, Quiz, Échecs et Mode enfant suivent l'état de leur liaison "
+                   "(vert connecté, orange reconnexion, rouge erreur, bleu connexion) ; la passerelle du téléphone passe à l'orange à 1,5 s ; SSH ouvert est orange (à surveiller) ; mise à jour disponible est orange.", "small"))
+    story.append(P("État de la mise en oeuvre : les règles sont écrites et testées (core/tv/status/StatusLevel.kt) ; la barre d'état dessine déjà les pastilles de liaison et Internet ; "
+                   "les pastilles propres Wi-Fi, Bluetooth, Stockage, Téléphones, Copie, Licence, Quiz et Jetons attendent d'être alimentées depuis le service TV. "
+                   "La lisibilité des anneaux et du noir n'est confirmée que sur une vraie TV.", "small"))
+    story.append(PageBreak())
+
+
+# ---------------- accueil TV, lecteur, règles UX ----------------
+def home_svg():
+    """Accueil en groupes (à gauche) et grille 3 colonnes du groupe Médias (à droite) - schéma."""
+    D, S2, T1, T2, F = hexv("dark.background"), hexv("dark.surface"), hexv("dark.textHigh"), hexv("dark.textMedium"), hexv("dark.focusRing")
+    groups = [("Médias", "4 outils", "bibliotheque"), ("Apprendre", "2 outils", "apprendre"), ("Jeux et jetons", "3 outils", "quiz"),
+              ("Téléphones et réseau", "6 outils", "wifi"), ("Administration", "6 outils", "administration")]
+    out = [f'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 270" width="2880" height="810">',
+           f'<rect width="480" height="270" rx="10" fill="{D}"/><rect x="480" width="480" height="270" rx="10" fill="{D}"/><rect x="478" width="4" height="270" fill="#FFFFFF" opacity="0.5"/>',
+           f'<text x="20" y="28" font-family="Bricolage Grotesque" font-weight="800" font-size="18" fill="{T1}">CastBridge</text>',
+           f'<text x="500" y="28" font-family="Bricolage Grotesque" font-weight="800" font-size="18" fill="{T1}">Médias</text>']
+    # accueil : bibliothèque + 5 boutons de groupe
+    x, y = 20, 44
+    out.append(f'<rect x="{x}" y="{y}" width="440" height="40" rx="10" fill="{S2}"/><g transform="translate({x + 10} {y + 8}) scale(1)" color="{T1}">{icon_inner("bibliotheque").replace("currentColor", T1)}</g>'
+               f'<text x="{x + 44}" y="{y + 26}" font-family="Inter" font-weight="700" font-size="15" fill="{T1}">Bibliothèque</text><text x="{x + 340}" y="{y + 26}" font-family="Inter" font-size="11" fill="{T2}">accès rapide</text>')
+    for i, (nm, sm, ic) in enumerate(groups):
+        cx, cy = 20 + (i % 3) * 148, 96 + (i // 3) * 82
+        foc = i == 0
+        out.append(f'<rect x="{cx}" y="{cy}" width="140" height="74" rx="10" fill="{hexv("dark.surfaceHigh") if foc else S2}"' + (f' stroke="{F}" stroke-width="3"' if foc else "") + '/>' +
+                   f'<g transform="translate({cx + 10} {cy + 8}) scale(1.2)" color="{T1}">{icon_inner(ic).replace("currentColor", T1)}</g>' +
+                   f'<text x="{cx + 10}" y="{cy + 54}" font-family="Inter" font-weight="700" font-size="{12 if len(nm) > 14 else 13}" fill="{T1}">{nm}</text>' +
+                   f'<text x="{cx + 10}" y="{cy + 67}" font-family="Inter" font-size="10" fill="{T2}">{sm}</text>')
+    # grille Médias
+    tiles = [("Bibliothèque", "bibliotheque"), ("Téléchargements", "telechargements"), ("Clé USB", "cle-usb"), ("Recevoir du téléphone", "recevoir-du-telephone")]
+    for i, (nm, ic) in enumerate(tiles):
+        tx, ty = 500 + (i % 3) * 148, 44 + (i // 3) * 112
+        foc = i == 1
+        sc = 1.04 if foc else 1
+        out.append(f'<g transform="translate({tx + 70} {ty + 50}) scale({sc}) translate(-70 -50)"><rect width="140" height="100" rx="10" fill="{hexv("dark.surfaceHigh") if foc else S2}"' +
+                   (f' stroke="{F}" stroke-width="3"' if foc else "") + '/>' +
+                   f'<g transform="translate(48 12) scale(1.9)" color="{T1}">{icon_inner(ic).replace("currentColor", T1)}</g>' +
+                   f'<text x="70" y="86" text-anchor="middle" font-family="Inter" font-weight="700" font-size="{11 if len(nm) > 14 else 13}" fill="{T1}">{nm}</text></g>')
+    out.append(f'<text x="500" y="262" font-family="Inter" font-size="11" fill="{T2}">3 colonnes - grande icône + nom - focus #FFE1A6 3 dp, échelle 1,04</text>')
+    out.append(f'<text x="20" y="262" font-family="Inter" font-size="11" fill="{T2}">5 boutons de groupe (icône, nom, résumé) - OK ouvre la grille</text>')
+    out.append("</svg>")
+    return "".join(out)
+
+
+def controlbar_svg():
+    D, S2, T1, F = hexv("dark.background"), hexv("dark.surface"), hexv("dark.textHigh"), hexv("dark.focusRing")
+    items = [("Pause", "pause"), ("Audio", "pistes-audio"), ("Sous-titres", "sous-titres"), ("Affichage", "reglages"), ("Infos", "aide")]
+    out = [f'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 74" width="2560" height="296"><rect width="640" height="74" rx="10" fill="{D}"/>']
+    for i, (nm, ic) in enumerate(items):
+        x = 12 + i * 125
+        foc = i == 0
+        out.append(f'<rect x="{x}" y="12" width="117" height="50" rx="12" fill="{S2}"' + (f' stroke="{F}" stroke-width="3"' if foc else "") + '/>' +
+                   f'<g transform="translate({x + 8} {25 - 0}) scale(1.0)" color="{T1}">{icon_inner(ic).replace("currentColor", T1)}</g>' +
+                   f'<text x="{x + 38}" y="43" font-family="Inter" font-weight="700" font-size="13" fill="{T1}">{nm}</text>')
+    out.append("</svg>")
+    return "".join(out)
+
+
+def ux():
+    story.append(H1("12. Accueil TV en groupes, lecteur et règles UX"))
+    story.append(P("Depuis la version 0.14.33-beta, l'accueil de CastBridge-TV ne montre plus toutes les tuiles à la fois : <b>cinq boutons de groupe</b> (icône, nom, résumé « 4 outils · 2 actifs », "
+                   "ou « · à vérifier » si un outil a un avertissement) ouvrent une <b>grille de 3 colonnes</b> où chaque tuile porte une grande icône et son nom. "
+                   "« Bibliothèque » (et la mise à niveau pendant l'essai) reste en accès rapide, avant les groupes."))
+    story.append(svgpic(home_svg(), W / mm))
+    story.append(P("Schéma d'après docs/TV-ACCUEIL.md et android/core/.../tv/home/HomeGroups.kt (les icônes de groupe sont indicatives).", "small"))
+    story.append(H2("Les groupes et leurs tuiles (ordre de la grille)"))
+    G = [("Médias", "Bibliothèque, Téléchargements, Clé USB, Recevoir du téléphone"), ("Apprendre", "Apprendre, Langues"),
+         ("Jeux et jetons", "Jeux, Partie Internet, Jetons"), ("Téléphones et réseau", "Ajouter un téléphone, Télécommande, Bluetooth, Wi-Fi Direct, Internet, Téléphones synchronisés"),
+         ("Administration", "Administration, Mises à jour, Connexion &amp; réglages, Options développeur, Contrôle parental, Aide")]
+    story.append(table([[P(a, "cellb"), P(b, "cell")] for a, b in G], [42 * mm, None], head=False))
+    story.append(P("Un groupe sans tuile visible disparaît ; un groupe à une seule tuile ouvre cette tuile directement ; une tuile inconnue des groupes n'est jamais perdue (elle s'affiche après les groupes). "
+                   "« Partie Internet » et « Téléphones synchronisés » ont leur place réservée mais pas encore de tuile d'accueil.", "small"))
+    story.append(PageBreak())
+    story.append(H2("Règles UX (propriétaire, 2026-10-04)"))
+    rules = [("Libellé", "toute icône a son libellé en français, toujours écrit à côté ; jamais d'icône seule."),
+             ("Contraste", "au moins 4,5:1 pour le texte ; 3:1 pour les grands éléments, icônes et anneaux (vérifié par BrandContrastTest ; texte du lecteur sur image blanche : pastille sombre à 80 %)."),
+             ("Zone de sécurité", "5 % de la dalle sur chaque bord (64 x 36 dp sur une dalle 1280 x 720) : le surbalayage des TV ne coupe rien."),
+             ("Taille sur TV", "texte de 28 sp au minimum pour les libellés (icônes, pastilles, barre de commandes) ; icônes de 40 dp au minimum."),
+             ("Couleur", "jamais seule : toujours avec l'icône, le libellé et, pour les pastilles d'état, le mot d'état."),
+             ("Focus", "anneau #FFE1A6 de 3 dp, mise à l'échelle 1,04, visible à 3 m."),
+             ("Télécommande", "5 touches (haut, bas, gauche, droite, OK) plus RETOUR suffisent : tout est atteignable sans MENU ni INFO."),
+             ("Grille", "3 colonnes ; les flèches s'arrêtent aux bords (pas de bouclage) ; RETOUR ferme la grille et rend le focus au groupe.")]
+    story.append(table([[P(a, "cellb"), P(b, "cell")] for a, b in rules], [34 * mm, None], head=False))
+    story.append(H2("Télécommande à 5 touches, sur l'accueil"))
+    story.append(table([[P("Touche", "cellb"), P("Sur un bouton de groupe", "cellb"), P("Dans la grille", "cellb")]] +
+                       [[P(a, "cell"), P(b, "cell"), P(c, "cell")] for a, b, c in [
+                           ("OK", "ouvre la grille, focus sur la première tuile", "lance l'outil"),
+                           ("Gauche / Droite", "bouton voisin", "tuile voisine, arrêt au bord de la ligne"),
+                           ("Haut / Bas", "ligne voisine", "ligne voisine ; Bas vers une dernière ligne incomplète tombe sur la dernière tuile"),
+                           ("RETOUR", "quitte l'accueil comme avant", "ferme la grille, focus rendu au bouton du groupe")]], [30 * mm, 65 * mm, None]))
+    story.append(H2("Barre de commandes du lecteur"))
+    story.append(svgpic(controlbar_svg(), W / mm))
+    story.append(P("Pause · Audio · Sous-titres · Affichage · Infos, chacun avec son icône (Pause, Pistes audio, Sous-titres, Réglages, Aide) ET son libellé ; 28 sp, icônes 40 dp. "
+                   "OK affiche la barre (le focus est sur « Pause ») ; elle se cache seule après 5 s sans touche et reste affichée en pause. Gauche / Droite avancent ou reculent de 10 s quand la barre est cachée.", "small"))
+    story.append(PageBreak())
+
+
+def dos_donts():
+    story.append(H1("16. À faire / à ne pas faire"))
+    base = open(os.path.join(BR, "logo", "castbridge-symbol.svg"), encoding="utf-8").read()
+    poly = re.search(r'<polygon [^>]*/>', base).group(0)
+
+    def variant(mod):
+        return raster(mod, 400)
+    big = base.replace(poly, f'<g transform="translate(117 194) scale(1.55) translate(-117 -194)">{poly}</g>')
+    green = base.replace(poly, poly.replace("#F5B025", "#2E9E6B"))
+    nocam = re.sub(r'<polygon [^>]*/>', "", base)
+    good = pic(raster(os.path.join(BR, "logo", "castbridge-symbol.svg"), 400), 24)
+    stretched = panel(Image(raster(os.path.join(BR, "logo", "castbridge-logo-horizontal.svg"), 600), width=44 * mm, height=17 * mm), INK, pad=3, width=50 * mm)
+    good_h = panel(logo("castbridge-logo-horizontal", 44), INK, pad=3, width=50 * mm)
+    bad_badge = svgpic(f'''<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 50"><rect width="120" height="50" fill="#0A0F1E"/><circle cx="25" cy="25" r="14" fill="{sem("success")}"/><circle cx="70" cy="25" r="14" fill="{sem("error")}"/></svg>''', 30)
+    good_badge = panel(svgpic(badge_svg("success", "wifi", "Wi-Fi", "connecté"), 44), INK, pad=3, width=50 * mm)
+    bad_label = svgpic(f'''<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 60"><rect width="120" height="60" fill="#0A0F1E"/><g transform="translate(48 18) scale(1.2)" color="#fff">{icon_inner("wifi").replace("currentColor", "#fff")}</g></svg>''', 30)
+    rows = [("FAIRE", good, "Le symbole avec la silhouette du Cameroun entre les écouteurs, sous l'arc, jaune sur fond sombre ou #946219 sur fond clair."),
+            ("NE PAS FAIRE", svgpic(big, 24), "Agrandir ou déplacer la silhouette : elle toucherait l'arc et les écouteurs (dégagement minimal 6 unités)."),
+            ("NE PAS FAIRE", svgpic(green, 24), "Recolorier la silhouette (vert, blanc sur fond clair…) hors des variantes de la charte."),
+            ("NE PAS FAIRE", svgpic(nocam, 24), "Utiliser l'ancien logo, sans silhouette."),
+            ("FAIRE", good_h, "Garder les proportions : largeur imposée, hauteur déduite ; MBOKO juste sous le nom, en vert."),
+            ("NE PAS FAIRE", stretched, "Étirer ou écraser le logo ; mettre MBOKO dans le lanceur, la notification, le favicon ou l'icône Play Store."),
+            ("FAIRE", good_badge, "Pastille d'état : icône + libellé français + mot d'état ; couleur du niveau en anneau."),
+            ("NE PAS FAIRE", bad_badge, "Une pastille qui ne se distingue que par sa couleur (daltonisme, TV mal réglée)."),
+            ("NE PAS FAIRE", bad_label, "Une icône sans libellé français, ou un texte de moins de 28 sp sur la TV.")]
+    data = []
+    st = []
+    for i, (kind, im, txt) in enumerate(rows):
+        okc = kind == "FAIRE"
+        data.append([P(f"<font color='{'#1C7C53' if okc else '#C5343A'}'><b>{kind}</b></font>", "cell"), im, P(txt, "cell")])
+    story.append(table(data, [28 * mm, 52 * mm, None], head=False, extra=[("TOPPADDING", (0, 0), (-1, -1), 7), ("BOTTOMPADDING", (0, 0), (-1, -1), 7), ("ALIGN", (1, 0), (1, -1), "CENTER")]))
+    story.append(P("Les exemples « ne pas faire » sont produits à partir des vrais fichiers, modifiés exprès pour l'illustration ; aucun n'est livré dans l'application.", "small"))
+    story.append(PageBreak())
+
+
+def sources():
+    story.append(H1("17. Sources, licence du contour et régénération"))
+    story.append(H2("Contour du Cameroun"))
+    story.append(table([[P(a, "cellb"), P(b, "cell")] for a, b in [
+        ("Donnée", "polygone « CMR » de Natural Earth (domaine public), repris par github.com/datasets/geo-countries."),
+        ("Licence", "Natural Earth : domaine public. Le jeu geo-countries : Open Data Commons Public Domain Dedication and Licence (ODC-PDDL). Aucune attribution n'est exigée ; la source est néanmoins citée en commentaire dans chaque SVG concerné et ici."),
+        ("Simplification", "Douglas-Peucker, tolérance 0,08 degré : 92 points (branding/tools/cameroun-contour.json) ; projection équirectangulaire corrigée de cos(7,4°), nord en haut, hauteur 1, largeur 0,6685."),
+        ("Mise en forme", "dans gen_cameroun_mark.py : lissage Visvalingam-Whyatt (70 points en grand format, 36 en petites tailles), remplissage avec joint arrondi. Rien n'est redessiné à la main."),
+        ("Neutralité", "le contour est un outil d'identité visuelle ; il ne prend pas position sur des frontières contestées et n'a pas de valeur cartographique.")]],
+        [30 * mm, None], head=False))
+    story.append(H2("Régénérer le logo, les ressources Android et ce guide"))
+    cmds = ["python3 branding/tools/gen_cameroun_mark.py # logos SVG + PNG/ICO (--check : dégagements)",
+            "python3 branding/tools/gen_android_icons.py # icônes adaptatives",
+            "python3 branding/tools/gen_app_assets.py # ressources res/ des deux apps",
+            "python3 branding/tools/gen_tokens.py # seulement si design-tokens.json change",
+            "python3 -m venv venv && venv/bin/pip install reportlab fonttools pillow",
+            "venv/bin/python tools/build-branding-guide # ce PDF (rsvg-convert requis : brew install librsvg)"]
+    story.append(Table([[Paragraph("<br/>".join(c.replace("&", "&amp;") for c in cmds), ParagraphStyle("code", fontName="Courier", fontSize=7.6, leading=11, textColor=TXT))]], colWidths=[W],
+                       style=[("BACKGROUND", (0, 0), (-1, -1), col("#F1F3F9")), ("BOX", (0, 0), (-1, -1), 0.4, LINE), ("TOPPADDING", (0, 0), (-1, -1), 6), ("BOTTOMPADDING", (0, 0), (-1, -1), 6)]))
+    story.append(H2("Historique de la charte"))
+    story.append(table([[P(a, "cellb"), P(b, "cell")] for a, b in [
+        ("1.0", "palette, typographie, logo (pont), icônes, sous-marques."),
+        ("1.1 (2026-10-01)", "contrastes WCAG AA corrigés, icônes complétées, application aux apps et au serveur."),
+        ("1.2 (2026-10-04)", "logo avec la silhouette du Cameroun, sous-titre MBOKO, couleurs signalétiques d'état, accueil TV en groupes, règles UX, pages à faire / à ne pas faire.")]], [34 * mm, None], head=False))
+    story.append(H2("Non couvert par cette version"))
+    story.append(P("Les captures du chapitre 15 datent d'avant le 2026-10-04 (ancien logo, ancien accueil) ; la lisibilité réelle des pastilles et de l'accueil à 3 m reste à confirmer sur une vraie TV ; "
+                   "la maquette HTML ne montre pas encore l'accueil en grille (voir branding/mockups). Le volet juridique de la marque est reporté au 31/12/2026."))
+    story.append(PageBreak())
+
+
+SEM_ROWS = [("success", "Succès (vert)"), ("warning", "Alerte (orange)"), ("error", "Erreur (rouge)"), ("info", "Info / en cours (bleu)"),
+            ("off", "Éteint (noir)"), ("unknown", "Inconnu (gris)")]
+
+
 def colours():
-    story.append(H1("4. Couleurs et contrastes"))
-    story.append(P("Le thème sombre est premier (TV), le thème clair sert au téléphone. <b>Version 1.1</b> : toutes les paires texte / fond ci-dessous atteignent "
+    story.append(H1("6. Couleurs et contrastes"))
+    story.append(P("Le thème sombre est premier (TV), le thème clair sert au téléphone. Les couleurs d'état (noir, vert, orange, rouge, bleu, gris) sont au chapitre 7 ; le vert de MBOKO est #2E9E6B sur sombre, #1C7C53 sur clair. <b>Version 1.1</b> : toutes les paires texte / fond ci-dessous atteignent "
                    "WCAG AA (4,5:1 en texte courant, 3:1 pour les grands éléments et icônes) ; elles sont vérifiées par un test automatique."))
     story.append(H2("Thème sombre (TV)"))
     story.append(swatches([("Fond", "dark.background", "arrière-plan principal"), ("Surface", "dark.surface", "cartes, rangs"),
@@ -266,14 +658,14 @@ def colours():
     story.append(PageBreak())
     story.append(H2("Couleurs sémantiques (sombre / clair)"))
     sem = []
-    for k, lab in [("success", "Succès"), ("warning", "Alerte"), ("error", "Erreur"), ("info", "Info")]:
+    for k, lab in SEM_ROWS:
         sem.append([P(lab, "cellb"), "", P(C["semantic"][k]["dark"]["value"], "cell"), "", P(C["semantic"][k]["light"]["value"], "cell")])
     st = []
-    for i, k in enumerate(["success", "warning", "error", "info"]):
+    for i, k in enumerate([k for k, _ in SEM_ROWS]):
         st += [("BACKGROUND", (1, i), (1, i), col(C["semantic"][k]["dark"]["value"])), ("BACKGROUND", (3, i), (3, i), col(C["semantic"][k]["light"]["value"]))]
     story.append(table([[P("", "cell"), P("sombre", "cellb"), "", P("clair", "cellb"), ""]] + sem, [34 * mm, 11 * mm, 30 * mm, 11 * mm, None],
-                       extra=[("SPAN", (1, 0), (2, 0)), ("SPAN", (3, 0), (4, 0))] + [("BACKGROUND", (1, i + 1), (1, i + 1), col(C["semantic"][k]["dark"]["value"])) for i, k in enumerate(["success", "warning", "error", "info"])] +
-                             [("BACKGROUND", (3, i + 1), (3, i + 1), col(C["semantic"][k]["light"]["value"])) for i, k in enumerate(["success", "warning", "error", "info"])]))
+                       extra=[("SPAN", (1, 0), (2, 0)), ("SPAN", (3, 0), (4, 0))] + [("BACKGROUND", (1, i + 1), (1, i + 1), col(C["semantic"][k]["dark"]["value"])) for i, k in enumerate([k for k, _ in SEM_ROWS])] +
+                             [("BACKGROUND", (3, i + 1), (3, i + 1), col(C["semantic"][k]["light"]["value"])) for i, k in enumerate([k for k, _ in SEM_ROWS])]))
     story.append(H2("Palettes des sous-marques"))
     rows = []
     ABBR = {"background": "fond", "primary": "primaire", "secondary": "secondaire", "accent": "accent", "surface": "surface"}
@@ -312,7 +704,7 @@ def colours():
 
 
 def typo():
-    story.append(H1("5. Typographie"))
+    story.append(H1("8. Typographie"))
     story.append(P("Polices Google Fonts libres (licence OFL), embarquées dans les apps en sous-ensemble latin (français) : Bricolage Grotesque (titres), Inter (texte), Sora (Quiz), Manrope (Échecs)."))
     spec = Table([[P("Bricolage Grotesque - titres", "cell"), P("Inter - texte courant", "cell")],
                   [Paragraph("Le pont simple", ParagraphStyle("a", fontName=HEAD, fontSize=24, leading=28, textColor=INK)),
@@ -323,7 +715,7 @@ def typo():
                  colWidths=[W / 2, W / 2])
     spec.setStyle(TableStyle([("TOPPADDING", (0, 0), (-1, -1), 3), ("BOTTOMPADDING", (0, 0), (-1, -1), 3), ("LINEBELOW", (0, 1), (-1, 1), 0.3, LINE)]))
     story.append(spec)
-    story.append(H2("Hiérarchie TV (canevas 1080p, lecture à 3 m - minimum 24 px)"))
+    story.append(H2("Hiérarchie TV (canevas 1080p, lecture à 3 m)"))
     tv = TOK["typography"]["scale"]["tv"]
     names = {"display": "Display", "headline": "Titre de page", "title": "Titre de rangée", "subtitle": "Sous-titre", "body": "Corps", "button": "Bouton", "caption": "Légende"}
     rows = [[P("Rôle", "cellb"), P("Guide (px / graisse)", "cellb"), P("Dans l'app TV (canevas 1280 dp)", "cellb")]]
@@ -333,7 +725,7 @@ def typo():
         px = int(re.match(r"\d+", v["value"]).group(0))
         rows.append([P(names[k], "cell"), P(f"{px} px / {v['weight']}", "cell"), P(f"{round(px * 2 / 3)} sp (x 2/3)", "cell")])
     story.append(table(rows, [45 * mm, 45 * mm, None]))
-    story.append(P("L'interface TV est dessinée sur 1280 x 720 dp (la TV d'Esaie) : un pixel du guide vaut 2/3 sp. Le minimum de 24 px devient 16 sp ; aucun texte TV n'est plus petit.", "small"))
+    story.append(P("L'interface TV est dessinée sur 1280 x 720 dp (la TV de référence : GaiaOS 32 bits, 720p) : un pixel du guide vaut 2/3 sp. Cette échelle règle la mise en page. <b>Règle du 2026-10-04</b> : tout libellé d'icône, de pastille ou de barre de commandes sur la TV fait 28 sp au minimum, et les icônes 40 dp au minimum (chapitre 12).", "small"))
     story.append(H2("Hiérarchie mobile (sp)"))
     rows = [[P("Rôle", "cellb"), P("Taille / graisse", "cellb")]]
     for k, v in TOK["typography"]["scale"]["mobile"].items():
@@ -343,7 +735,7 @@ def typo():
 
 
 def grid():
-    story.append(H1("6. Grille, espacements, rayons, élévation"))
+    story.append(H1("9. Grille, espacements, rayons, élévation"))
     g = TOK["grid"]
     story.append(P(f"Grille TV : {g['tvColumns']['value']} colonnes, gouttière {g['tvGutter']['value']}, marge {g['tvMargin']['value']}, carte {g['tvCardWidth']['value']} en 16:9. "
                    f"Mobile : {g['mobileColumns']['value']} colonnes, gouttière et marge {g['mobileMargin']['value']}."))
@@ -398,7 +790,7 @@ def grid():
 
 
 def focus():
-    story.append(H1("7. États de focus et animations"))
+    story.append(H1("10. États de focus et animations"))
     f = TOK["focus"]["tv"]
 
     class FocusDemo(Flowable):
@@ -444,7 +836,7 @@ def focus():
 
 
 def icons():
-    story.append(H1("8. Iconographie"))
+    story.append(H1("11. Iconographie"))
     story.append(P("Pictogrammes en trait 1,8 dp, coins et extrémités arrondis, couleur currentColor (thématisables). Grille 24 x 24. "
                    "Les icônes marquées d'un point doré ont été créées en v1.1 dans le même style (SVG source dans branding/icons/)."))
     new = {"telecommande": "Télécommande", "sur-le-telephone": "Sur le téléphone", "passerelle-bluetooth": "Passerelle Bluetooth", "options-developpeur": "Options développeur"}
@@ -476,10 +868,10 @@ def icons():
 
 
 def subs():
-    story.append(H1("9. Sous-marques"))
+    story.append(H1("13. Sous-marques"))
     story.append(P("Chaque sous-marque reprend la géométrie de la marque mère avec son propre accent, pour rester cohérente. Le pictogramme (carré arrondi) sert d'icône, le verrouillage horizontal d'en-tête."))
     rows = []
-    for sym, hor, nm, note in [("castbridge-tv", "castbridge-tv-horizontal", "CastBridge TV", "pont / or ; pastille TV"),
+    for sym, hor, nm, note in [("castbridge-tv", "castbridge-tv-horizontal", "CastBridge TV", "casque jaune avec le Cameroun, pastille TV, sous-titre MBOKO ; or / indigo"),
                                ("quiz-des-millions", "quiz-des-millions-horizontal", "Quiz des Millions", "corail #FF5C39 et ambre #FFB020 sur vert d'eau #0B1B1E ; Sora"),
                                ("echecs", "echecs-horizontal", "Échecs", "vert #2FA96B et or #F2C14E sur vert forêt #0C1B14 ; Manrope"),
                                ("apprendre", "apprendre-horizontal", "Apprendre", "bleu #3B82F6, ambre #F59E0B, cyan #06B6D4 sur #070D1E")]:
@@ -489,7 +881,7 @@ def subs():
 
 
 def android():
-    story.append(H1("10. Spécifications Android"))
+    story.append(H1("14. Spécifications Android"))
     story.append(P("Les éléments ci-dessous sont ceux réellement embarqués dans les apps (captures des ressources, pas des maquettes)."))
     story.append(H2("Icône de lanceur (adaptative : fond + avant-plan + monochrome Android 13+)"))
     ic = []
@@ -512,8 +904,8 @@ def android():
 
 
 def screens():
-    story.append(H1("11. Les apps habillées (captures)"))
-    story.append(P("Captures d'émulateur des apps réellement habillées (Android TV 1920x1080 @ 320 dpi et 1280x720 @ 160 dpi ; téléphone 1080x2400)."))
+    story.append(H1("15. Les apps habillées (captures)"))
+    story.append(P("<b>Attention : ces captures datent d'avant le 2026-10-04</b> (ancien logo sans silhouette, ancien accueil en tuiles) ; elles illustrent surtout palette et typographie et seront refaites avec l'APK TV 0.14.33. Captures d'émulateur des apps habillées (Android TV 1920x1080 @ 320 dpi et 1280x720 @ 160 dpi ; téléphone 1080x2400)."))
     d = os.path.join(BR, "guide", "screens")
 
     def shot(n, w, cap):
@@ -536,13 +928,15 @@ def screens():
 
 
 def files():
-    story.append(H1("12. Livrables et fichiers"))
-    rows = [("branding/design-tokens.json", "source de vérité (couleurs v1.1, typo, espacements, rayons, élévation, focus, animations, paires de contraste)"),
-            ("branding/logo/", "SVG du logo, des sous-marques (Quiz, Échecs, Apprendre, TV), calques adaptatifs, icône de notification"),
+    story.append(H1("18. Livrables et fichiers"))
+    rows = [("branding/design-tokens.json", "source de vérité (couleurs et états, typo, espacements, rayons, élévation, focus, animations, paires de contraste)"),
+            ("branding/logo/", "SVG du logo avec le Cameroun et MBOKO (horizontal, vertical, compact, monochromes, bannière), des sous-marques, calques adaptatifs, icône de notification"),
             ("branding/icons/", "29 SVG (25 d'origine + télécommande, sur le téléphone, passerelle Bluetooth, options développeur)"),
             ("branding/fonts/", "polices OFL complètes ; fonts/subset/ : sous-ensembles latin embarqués dans les apps"),
             ("branding/export/", "PNG, favicon, drawables et manifestes de l'icône adaptative"),
-            ("branding/tools/", "svg2vd.py, gen_app_assets.py, gen_tokens.py, subset_fonts.py"),
+            ("branding/tools/", "gen_cameroun_mark.py (logo, sous-titre), cameroun-contour.json (92 points), gen_android_icons.py, gen_app_assets.py, gen_tokens.py, svg2vd.py, subset_fonts.py"),
+            ("branding/CHANGELOG.md", "historique de la charte (v1.2 du 2026-10-04)"),
+            ("docs/TV-ACCUEIL.md, docs/TV-PLAYER.md", "accueil en groupes, icônes du lecteur, pastilles d'état"),
             ("tools/build-branding-guide", "ce guide (régénérable)"),
             ("android/core/.../brand/BrandTokens.kt", "tokens Kotlin générés ; test BrandContrastTest (WCAG)"),
             ("backend/.../static/admin/assets/", "cb-tokens.css (variables CSS générées), favicon, logo, polices du /admin")]
@@ -554,7 +948,7 @@ def footer(canvas, doc):
     if doc.page > 1:
         canvas.setFillColor(TXT3)
         canvas.setFont(BODY, 7.5)
-        canvas.drawString(18 * mm, 10 * mm, "CastBridge - Charte graphique v1.1")
+        canvas.drawString(18 * mm, 10 * mm, "CastBridge - Charte graphique v1.2")
         canvas.drawRightString(A4[0] - 18 * mm, 10 * mm, f"Page {doc.page}")
         canvas.setStrokeColor(LINE)
         canvas.line(18 * mm, 14 * mm, A4[0] - 18 * mm, 14 * mm)
@@ -567,7 +961,7 @@ def main():
                           title="CastBridge - Charte graphique", author="CastBridge")
     frame = Frame(18 * mm, 18 * mm, W, A4[1] - 36 * mm, id="f", leftPadding=0, rightPadding=0, topPadding=0, bottomPadding=0)
     doc.addPageTemplates([PageTemplate(id="main", frames=[frame], onPage=footer)])
-    for f in (cover, toc, brand, logos, colours, typo, grid, focus, icons, subs, android, screens, files):
+    for f in (cover, toc, brand, logos, construction, wordmark, colours, signals, typo, grid, focus, icons, ux, subs, android, screens, dos_donts, sources, files):
         f()
     doc.build(story)
     print("écrit", out)
