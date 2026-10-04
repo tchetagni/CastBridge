@@ -1,6 +1,7 @@
 package castbridge.server.activations;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
@@ -48,7 +49,10 @@ class ActivationsOffTest extends ApiTestBase {
         try (var files = Files.list(dir)) {
             var names = files.map(f -> f.getFileName().toString()).toList();
             assertEquals(1, names.stream().filter(n -> n.startsWith("V63__")).count());
-            assertEquals(0, names.stream().filter(n -> n.startsWith("V62__") || n.startsWith("V63__") || n.startsWith("V64__")).count(), "V62-V64 belong to other work");
+            assertTrue(names.contains("V63__activation_tracking.sql"));
+            // « plus haut + 1, jamais de trou » (db/migration/README.md): V63 follows V62 (wallet), no hole before it, nothing of this module above it
+            assertTrue(names.stream().anyMatch(n -> n.startsWith("V62__")), "V62 (wallet) exists: V63 is highest + 1");
+            assertEquals(0, names.stream().filter(n -> n.matches("V6[4-9]__.*")).count(), "V64 and above are not this module's");
         }
     }
 }

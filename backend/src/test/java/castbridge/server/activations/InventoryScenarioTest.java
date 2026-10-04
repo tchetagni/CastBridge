@@ -182,11 +182,13 @@ class InventoryScenarioTest extends ActTestBase {
         Set<String> expected = new TreeSet<>(List.of("UNDECLARED|" + fpOf(u8) + "|" + tvRef.of(d8.code()), "CLONE|" + fpOf(t1) + "|" + tvRef.of(d9.code())));
         assertEquals(expected, alerts, "exactly the expected alerts and no other");
 
-        assertEquals(9, jdbc.queryForObject("select count(*) from act_tv", Integer.class));
+        // changed with the audit H1 fix: d9 only carried d1's token, which proves nothing about d9, so d9 is NOT recorded as a TV (it was, before) ; the clone alert on the token stays
+        assertEquals(8, jdbc.queryForObject("select count(*) from act_tv", Integer.class));
+        assertEquals(0, jdbc.queryForObject("select count(*) from act_tv where tv_ref = ?", Integer.class, tvRef.of(d9.code())));
         assertEquals("NEVER", jdbc.queryForObject("select reco from act_tv where tv_ref = ?", String.class, tvRef.of(d3.code())));
         assertEquals("OK", jdbc.queryForObject("select reco from act_tv where tv_ref = ?", String.class, tvRef.of(d1.code())));
         assertEquals("GAP", jdbc.queryForObject("select reco from act_tv where tv_ref = ?", String.class, tvRef.of(d8.code())));
-        assertEquals(1, jdbc.queryForObject("select alerts_open from act_tv where tv_ref = ?", Integer.class, tvRef.of(d9.code())));
+        assertEquals(1, jdbc.queryForObject("select count(*) from act_alert where type = 'CLONE' and tv_ref = ?", Integer.class, tvRef.of(d9.code())));
         assertTrue(jdbc.queryForObject("select open_all_until from act_tv where tv_ref = ?", java.sql.Timestamp.class, tvRef.of(d5.code())) != null);
 
         assertTrue(eventLog.verify().ok());

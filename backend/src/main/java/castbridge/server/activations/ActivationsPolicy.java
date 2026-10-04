@@ -27,6 +27,8 @@ public class ActivationsPolicy {
     private final ActClock clock;
     private final EventLog log;
     private final Map<String, ArrayDeque<Long>> hits = new HashMap<>();
+    private final Map<String, Long> windows = new HashMap<>();
+    private long lastSweep;
 
     public ActivationsPolicy(JdbcTemplate jdbc, ActClock clock, EventLog log) {
         this.jdbc = jdbc;
@@ -58,13 +60,32 @@ public class ActivationsPolicy {
     /** True and counted if fewer than {@code max} events happened in the last {@code window}; false (nothing counted) otherwise. */
     public synchronized boolean tryAcquire(String bucket, int max, Duration window) {
         long now = clock.nowMs();
+        sweep(now);
         ArrayDeque<Long> q = hits.computeIfAbsent(bucket, k -> new ArrayDeque<>());
+        windows.put(bucket, window.toMillis());
         q.removeIf(t -> t <= now - window.toMillis());
         long counted = q.stream().filter(t -> t <= now).count();
         if (counted >= max) return false;
         q.add(now);
         return true;
     }
+
+    /** Audit M5: counters of idle devices, actors and keys are dropped (at most once a minute), so the map never grows with the history. */
+    private void sweep(long now) {
+        if (now - lastSweep < 60_000 && hits.size() < 50_000) return;
+        lastSweep = now;
+        hits.entrySet().removeIf(e -> e.getValue().isEmpty() || e.getValue().peekLast() <= now - windows.getOrDefault(e.getKey(), 3_600_000L));
+        windows.keySet().retainAll(hits.keySet());
+    }
+
+    /** Gives back the last slot taken in a bucket (a request that turned out to cost nothing). */
+    public synchronized void refund(String bucket) {
+        ArrayDeque<Long> q = hits.get(bucket);
+        if (q != null) q.pollLast();
+    }
+
+    /** Number of live counters (test seam). */
+    public synchronized int counters() { return hits.size(); }
 
     /** 429 when the bucket is full. */
     public void limit(String bucket, int max, Duration window, String what) {
@@ -74,5 +95,5 @@ public class ActivationsPolicy {
     private static String describe(Duration d) { return d.toHours() >= 1 ? d.toHours() + " h" : d.toMinutes() + " min"; }
 
     /** Test seam: forgets every counter. */
-    public synchronized void resetLimits() { hits.clear(); }
+    public synchronized void resetLimits() { hits.clear(); windows.clear(); }
 }

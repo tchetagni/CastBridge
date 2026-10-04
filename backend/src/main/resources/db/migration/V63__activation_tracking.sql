@@ -130,6 +130,14 @@ CREATE TABLE act_tv_device (
     PRIMARY KEY (tv_ref, device_id)
 );
 
+-- clé d'installation de la TV (Ed25519, publique seulement), liée au code au premier contact qui la prouve (audit H1) ; un rapport sans jeton vérifié n'est cru que signé par cette clé
+CREATE TABLE act_tv_key (
+    tv_ref    CHAR(16)    NOT NULL PRIMARY KEY,
+    pub_key   VARCHAR(64) NOT NULL,
+    device_id BIGINT      NOT NULL,
+    bound_at  DATETIME(6) NOT NULL
+);
+
 -- commandes du propriétaire vues dans un journal (declared) ou rapportées par une TV (reported), rapprochées par le défi tronqué (8 hex)
 CREATE TABLE act_command (
     tv_ref       CHAR(16)    NOT NULL,

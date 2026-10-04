@@ -45,7 +45,36 @@ public class ActivationObserver {
     public record ReportState(String deviceCode, Integer appCode, String appName, String edition, Long usageTo, boolean superFlag, long openAllUntil, long unlockUntil, int trialResets,
                               Map<String, Long> installedAt, List<Cmd> commands, long atMs, List<String> compact) {}
 
-    public record Observation(int accepted, int ignored) {}
+    /** @param verified false: the report proved nothing about the device, so NOTHING was recorded from it (only evidence about the tokens it carried, see {@link #unverified}) */
+    public record Observation(int accepted, int ignored, boolean verified) {}
+
+    /** The install key of the TV (Ed25519), signing {@code castbridge-activation-report-v1 \n code \n public id of the API installation \n time(ms)}: bound to the code at first contact. */
+    public record KeyProof(String key, long at, String sig) {
+        public static final String DOMAIN = "castbridge-activation-report-v1";
+        static final long WINDOW_MS = 5 * 60_000L;
+
+        public static KeyProof parse(com.fasterxml.jackson.databind.JsonNode n) {
+            if (n == null || !n.isObject()) return null;
+            var key = n.path("key"); var at = n.path("at"); var sig = n.path("sig");
+            if (!key.isTextual() || !sig.isTextual() || !at.isIntegralNumber() || !at.canConvertToLong()) return null;
+            try {
+                return new KeyProof(Base64.getEncoder().encodeToString(Base64.getDecoder().decode(key.asText())), at.asLong(), sig.asText());
+            } catch (IllegalArgumentException e) {
+                return null;
+            }
+        }
+
+        boolean valid(String code, String devicePublicId, Instant now) {
+            if (devicePublicId == null || Math.abs(now.toEpochMilli() - at) > WINDOW_MS) return false;
+            try {
+                byte[] pub = Base64.getDecoder().decode(key), signature = Base64.getDecoder().decode(sig);
+                return pub.length == 32 && signature.length == 64
+                        && LicenseKeyring.verify(pub, (DOMAIN + "\n" + code + "\n" + devicePublicId + "\n" + at).getBytes(StandardCharsets.UTF_8), signature);
+            } catch (RuntimeException e) {
+                return false;
+            }
+        }
+    }
 
     private final JdbcTemplate jdbc;
     private final ActClock clock;
@@ -73,12 +102,31 @@ public class ActivationObserver {
      * @param via      direct, courier or gateway
      */
     @Transactional
-    public Observation observe(long deviceId, List<String> tokens, ReportState state, String via) {
+    public Observation observe(long deviceId, String devicePublicId, List<String> tokens, ReportState state, String via, KeyProof proof) {
         String code = TvRef.canonical(state.deviceCode());
         if (code == null) throw ApiException.badRequest("Code d'appareil invalide : 16 caractères au format XXXX-XXXX-XXXX-XXXX, avec son caractère de contrôle");
         String ref = tvRef.of(code);
         String route = via.equals("courier") ? "COURIER" : "REPORT";
         Instant now = clock.now();
+        // audit H1: the report must PROVE the device before anything is recorded: a verified token whose factors give this code, or the install key bound to the code at first contact
+        boolean tokenProof = tokens.stream().anyMatch(t -> provesDevice(t, code)) || (state.compact() != null && state.compact().stream().anyMatch(c -> provesCompact(c, code)));
+        boolean keyValid = proof != null && proof.valid(code, devicePublicId, now), keyOk = false;
+        if (keyValid) {
+            List<String> bound = jdbc.queryForList("SELECT pub_key FROM act_tv_key WHERE tv_ref = ?", String.class, ref);
+            keyOk = bound.isEmpty() || bound.get(0).equals(proof.key());
+        }
+        if (!tokenProof && !keyOk) return unverified(tokens, code, ref);
+        if (keyValid) {
+            // first proof binds the key; another key replaces it only when a token proves the TV (it was reinstalled)
+            Timestamp bt = Timestamp.from(now);
+            if (jdbc.queryForObject("SELECT COUNT(*) FROM act_tv_key WHERE tv_ref = ?", Integer.class, ref) == 0) {
+                try {
+                    jdbc.update("INSERT INTO act_tv_key (tv_ref, pub_key, device_id, bound_at) VALUES (?,?,?,?)", ref, proof.key(), deviceId, bt);
+                } catch (org.springframework.dao.DuplicateKeyException e) { /* another report of the same TV bound it first */ }
+            } else if (tokenProof && !keyOk) {
+                jdbc.update("UPDATE act_tv_key SET pub_key = ?, device_id = ?, bound_at = ? WHERE tv_ref = ?", proof.key(), deviceId, bt, ref);
+            }
+        }
         inventory.ensureTv(ref, code);
         List<String> fps = new ArrayList<>(), licenses = new ArrayList<>();
         List<String> acceptedFps = new ArrayList<>();
@@ -112,7 +160,77 @@ public class ActivationObserver {
         jdbc.update("INSERT INTO act_report (device_id, tv_ref, received_at, via, sha, app_code, n_activations) VALUES (?,?,?,?,?,?,?)", deviceId, ref, Timestamp.from(now), via, reportHash(state, fps),
                 state.appCode(), acceptedFps.size());
         reconciler.reconcile(Reconciler.Scope.of(fps, List.of(ref), null, licenses));
-        return new Observation(acceptedFps.size(), ignored);
+        return new Observation(acceptedFps.size(), ignored, true);
+    }
+
+    /** True when the token is signed by a key of the ring AND its factors give exactly this device code. No write, no alert. */
+    private boolean provesDevice(String token, String code) {
+        try {
+            Envelope env = Envelope.decode(token);
+            WireActivation.Fields f = env == null ? null : WireActivation.fieldsOf(env);
+            if (f == null) return false;
+            TrustedKeys.Key key = trusted.find(f.kid());
+            return key != null && LicenseKeyring.verify(key.publicKey(), env.payload().getBytes(StandardCharsets.UTF_8), Base64.getDecoder().decode(env.signature())) && DeviceIdentity.code(f.factors()).equals(code);
+        } catch (RuntimeException e) {
+            return false;
+        }
+    }
+
+    /** True when the compact key (82 bytes) is signed by a key of the ring and carries the binding of this code. */
+    private boolean provesCompact(String b64, String code) {
+        try {
+            byte[] b = Base64.getDecoder().decode(b64);
+            if (b.length != 82 || (b[0] != 1 && b[0] != 2)) return false;
+            byte[] bind = java.util.Arrays.copyOfRange(Hashing.sha256(("castbridge-bind|" + code).getBytes(StandardCharsets.UTF_8)), 0, 8);
+            if (!java.util.Arrays.equals(bind, java.util.Arrays.copyOfRange(b, 10, 18))) return false;
+            byte[] header = java.util.Arrays.copyOfRange(b, 0, 18), sig = java.util.Arrays.copyOfRange(b, 18, 82);
+            for (TrustedKeys.Key k : trusted.all()) {
+                byte[] tag = java.util.Arrays.copyOfRange(Hashing.sha256(k.kid().getBytes(StandardCharsets.US_ASCII)), 0, 2);
+                if (tag[0] == b[2] && tag[1] == b[3] && LicenseKeyring.verify(k.publicKey(), ("castbridge-activation-compact-v1\n" + HexFormat.of().formatHex(header)).getBytes(StandardCharsets.US_ASCII), sig)) return true;
+            }
+            return false;
+        } catch (RuntimeException e) {
+            return false;
+        }
+    }
+
+    /**
+     * A report that proves nothing about the device: NOTHING is recorded about the TV (no act_tv row, no link, no edition, no reset, no command, no report line). The only thing kept
+     * is evidence about the TOKENS it carried, which cost the sender a real token: a token that is signed but belongs to another device (clone evidence, flagged on the token itself),
+     * and a malformed or unknown-key token (an alert without any TV).
+     */
+    private Observation unverified(List<String> tokens, String code, String ref) {
+        int ignored = 0;
+        for (String token : tokens) {
+            ignored++;
+            String fp = Hashing.sha256Hex(token.getBytes(StandardCharsets.UTF_8));
+            Envelope env = Envelope.decode(token);
+            WireActivation.Fields f = env == null ? null : WireActivation.fieldsOf(env);
+            if (f == null) {
+                alerts.raise(AlertService.Type.BAD_TOKEN, null, null, null, null, "Jeton d'activation malformé rapporté par une installation non prouvée (ignoré)", fp.substring(0, 8));
+                continue;
+            }
+            TrustedKeys.Key key = trusted.find(f.kid());
+            if (key == null) {
+                alerts.raise(AlertService.Type.UNKNOWN_KEY, fp, null, f.kid(), null, "Activation signée par une clé hors de l'anneau du serveur (ignorée)", fp.substring(0, 8));
+                continue;
+            }
+            boolean signed;
+            try {
+                signed = LicenseKeyring.verify(key.publicKey(), env.payload().getBytes(StandardCharsets.UTF_8), Base64.getDecoder().decode(env.signature()));
+            } catch (RuntimeException e) {
+                signed = false;
+            }
+            if (!signed) {
+                alerts.raise(AlertService.Type.BAD_TOKEN, fp, null, f.kid(), null, "Signature fausse sur une activation rapportée par une installation non prouvée (ignorée)", fp.substring(0, 8));
+                continue;
+            }
+            if (!DeviceIdentity.code(f.factors()).equals(code)) {
+                alerts.raise(AlertService.Type.CLONE, fp, ref, f.kid(), null, "Activation d'un autre appareil rapportée sous ce code (non prouvé) : copie probable (ignorée)", "dev:" + ref.substring(0, 8));
+                inventory.addFlags(fp, Set.of(Inventory.CLONE));
+            }
+        }
+        return new Observation(0, ignored, false);
     }
 
     // ------------------------------------------------------------------ the device link and the clones
