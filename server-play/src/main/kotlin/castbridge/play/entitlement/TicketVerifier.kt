@@ -24,7 +24,7 @@ class TicketVerifier(pubKeys: List<String>, private val audience: String = AUDIE
     enum class Refusal { NO_KEY, MALFORMED, BAD_SIGNATURE, WRONG_AUDIENCE, BLOCKED, EXPIRED, NOT_YET_VALID, TOO_LONG }
 
     /** L'attestation d'un ticket valide. `toString` ne montre rien (jamais de jti ni d'appareil dans un journal). */
-    class Ticket(val deviceId: String, val deviceCode: String?, val country: String?, val iat: Long, val exp: Long, val jti: String) {
+    class Ticket(val deviceId: String, val deviceCode: String?, val country: String?, val iat: Long, val exp: Long, val jti: String, /** Empreinte SHA-256 (64 hex) de la clé d'installation de la TV épinglée par l'API (H-3) ; null = ticket sans clé. */ val installHash: String? = null) {
         override fun toString() = "Ticket(***)"
     }
 
@@ -55,7 +55,8 @@ class TicketVerifier(pubKeys: List<String>, private val audience: String = AUDIE
         if (exp - iat > MAX_LIFE_MS || exp <= iat) return Result.Refused(Refusal.TOO_LONG)
         if (nowMs >= exp) return Result.Refused(Refusal.EXPIRED)
         if (iat > nowMs + SKEW_MS) return Result.Refused(Refusal.NOT_YET_VALID)
-        return Result.Ok(Ticket(deviceId, code, country, iat, exp, jti))
+        val ik = (body["ik"] as? String)?.takeIf { IK.matches(it) }   // absent ou mal formé = ticket sans clé épinglée
+        return Result.Ok(Ticket(deviceId, code, country, iat, exp, jti, ik))
     }
 
     fun verify(ticket: String?, nowMs: Long): Boolean = check(ticket, nowMs) is Result.Ok
@@ -75,6 +76,7 @@ class TicketVerifier(pubKeys: List<String>, private val audience: String = AUDIE
         const val MAX_LIFE_MS = 15 * 60_000L
         private val B64URL = Regex("^[A-Za-z0-9_-]+$")
         private val JTI = Regex("^[0-9a-f]{32}$")
+        private val IK = Regex("^[0-9a-f]{64}$")
         private val SPKI_PREFIX = byteArrayOf(0x30, 0x2a, 0x30, 0x05, 0x06, 0x03, 0x2b, 0x65, 0x70, 0x03, 0x21, 0x00)
     }
 }
@@ -95,6 +97,13 @@ class UsedTickets(private val cap: Int = 20_000) {
         if (seen == null && used.size >= cap) return Use.FULL
         used[jti] = exp
         return Use.OK
+    }
+
+    /** Ce `jti` pourrait-il être pris maintenant (pas servi, place disponible) ? Lecture seule : rien n'est brûlé (une entrée refusée par la salle ne consomme rien). */
+    @Synchronized fun admits(jti: String, now: Long): Boolean {
+        if ((used[jti] ?: 0L) > now) return false
+        if (used.containsKey(jti) || used.size < cap) return true
+        sweepLocked(now); return used.size < cap
     }
 
     /** Ce `jti` a-t-il déjà servi (et n'est pas échu) ? Lecture seule : rien n'est brûlé. */
@@ -138,6 +147,9 @@ class DayCounter(private val cap: Int = 50_000) {
     private fun roll(now: Long) { val d = Math.floorDiv(now, 86_400_000L); if (d != day) { counts.clear(); day = d } }
 
     @Synchronized fun count(key: String, now: Long): Int { roll(now); return counts[key] ?: 0 }
+
+    /** [record] réussirait-il (table non pleine) ? Lecture seule. */
+    @Synchronized fun canRecord(key: String, now: Long): Boolean { roll(now); return key in counts || counts.size < cap }
 
     /** Compte une partie de plus ; faux = table pleine (refus : l'essai échoue fermé). */
     @Synchronized fun record(key: String, now: Long): Boolean {

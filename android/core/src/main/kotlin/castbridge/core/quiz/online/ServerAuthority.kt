@@ -53,8 +53,18 @@ class ServerAuthority(transport: PlayTransport, override val scope: PlayScope = 
             when (m) {
                 is ServerMsg.State -> state = m
                 is ServerMsg.Safety -> safety = m.view
-                is ServerMsg.Welcome -> if (pendingRelayJoin) { relayWelcome = m; pendingRelayJoin = false } else welcome = m
-                is ServerMsg.Error -> { lastError = m; if (pendingRelayJoin) { relayError = m; pendingRelayJoin = false } }
+                is ServerMsg.Welcome -> {
+                    val own = welcome
+                    when {
+                        own != null && m.token == own.token -> welcome = m                       // reprise de la TV : son propre siège, jamais celui d'un téléphone (H-2)
+                        own == null -> welcome = m                                               // la TV n'est pas encore assise : c'est le sien
+                        pendingRelayJoin || (m.role == PlayRole.PLAYER && own.role != PlayRole.PLAYER) -> {
+                            if (pendingRelayJoin) { relayWelcome = m; pendingRelayJoin = false }   // siège d'un téléphone ; en retard (entrée expirée) : ignoré, jamais `welcome = m`
+                        }
+                        else -> welcome = m
+                    }
+                }
+                is ServerMsg.Error -> { lastError = m; if (pendingRelayJoin && isJoinRefusal(m.reason)) { relayError = m; pendingRelayJoin = false } }
                 is ServerMsg.Ack -> if (relayRefs.remove(m.ref)) relayAck = m.ref to m.result else acks[m.ref] = m.result
                 is ServerMsg.Question -> lastQuestion = m
                 is ServerMsg.Reveal -> lastReveal = m
@@ -67,6 +77,9 @@ class ServerAuthority(transport: PlayTransport, override val scope: PlayScope = 
         onServerMessage?.invoke(m)
         if (m is ServerMsg.Ping) send(ClientMsg.Pong(m.id))
     }
+
+    /** Un refus propre à une entrée (nom, salle pleine, code…) : les avis de débit ou de maintenance n'ont rien à voir avec l'entrée d'un téléphone (H-2). */
+    private fun isJoinRefusal(reason: String) = reason != PlayReason.PLAY_BUSY.name && reason != "PLAY_MAINTENANCE"
 
     private fun send(m: ClientMsg): Boolean {
         val text = PlayCodec.encode(m)
@@ -84,7 +97,7 @@ class ServerAuthority(transport: PlayTransport, override val scope: PlayScope = 
     }
 
     fun hello(deviceHash: String? = null, ticket: String? = null) { send(ClientMsg.Hello(PlayProtocol.PROTO, PlayProtocol.CAPS, deviceHash, ticket)) }
-    fun create(name: String?, mode: String?, activation: String? = null, rentals: List<String> = emptyList()) { send(ClientMsg.Create(name, mode, activation, rentals)) }
+    fun create(name: String?, mode: String?, activation: String? = null, rentals: List<String> = emptyList(), proof: String? = null) { send(ClientMsg.Create(name, mode, activation, rentals, proof)) }
     fun resume(roomId: String, token: String, lastSeq: Long) { send(ClientMsg.Resume(roomId, token, lastSeq)) }
     fun setScope(open: Boolean) { send(ClientMsg.Scope(open)) }
     /** Relaie la réponse d'un téléphone local ; rend la référence (`seq`) dont l'accusé arrive à [onRelayAck]. */
@@ -114,7 +127,7 @@ class ServerAuthority(transport: PlayTransport, override val scope: PlayScope = 
      * L'activation `cbx1` est jointe au `join` (w20-04b : le service l'exige quand le jeu hors TV est fermé).
      */
     @Suppress("UNUSED_PARAMETER")
-    fun joinRoom(code: String, name: String?, deviceHash: String?, activation: String?, spectate: Boolean = true) { synchronized(lock) { welcome = null; lastError = null }; send(ClientMsg.Join(code, name, null, deviceHash, spectate, activation)) }
+    fun joinRoom(code: String, name: String?, deviceHash: String?, activation: String?, spectate: Boolean = true, proof: String? = null) { synchronized(lock) { welcome = null; lastError = null }; send(ClientMsg.Join(code, name, null, deviceHash, spectate, activation, proof)) }
 
     /** Réveille [awaitChanges] (changement local sans message serveur). */
     fun poke() = synchronized(lock) { changes++; lock.notifyAll() }
@@ -135,7 +148,7 @@ class ServerAuthority(transport: PlayTransport, override val scope: PlayScope = 
     }
 
     override fun act(token: String?, action: String, questionId: String?, choice: Int?, arg: String?): QuizRoom.Act {
-        val ref = ++clientSeq
+        val ref = synchronized(lock) { ++clientSeq }   // B-2 : même verrou que `relay`
         val sent = send(ClientMsg.Act(questionId, action, choice, arg, ref))
         if (!sent) return if (transport.state == PlayTransport.Status.CLOSED) QuizRoom.Act.CLOSED else QuizRoom.Act.IGNORED
         val r = synchronized(lock) { acks.remove(ref) } ?: return QuizRoom.Act.OK   // transport asynchrone : l'accusé viendra plus tard

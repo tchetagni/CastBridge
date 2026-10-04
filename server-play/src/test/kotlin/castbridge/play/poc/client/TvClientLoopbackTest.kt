@@ -28,7 +28,7 @@ class TvClientLoopbackTest {
     @AfterTest fun stop() { tvs.forEach { it.stop() }; proxies.forEach { it.close() }; fronts.forEach { it.close() }; servers.forEach { it.close() } }
 
     private fun server(duelCount: Int = 3, questionMs: Long = 8_000, fallbackIdleMs: Long = 40_000, webPlay: Boolean = true): PlayServer {
-        val cfg = PlayConfig(port = 0, trustedProxies = LOOPBACK, ticketPubKeys = listOf(TestKeys.pub), trustedKeys = TestRights.trustedKeys, createsPerIpPerHour = 10_000,
+        val cfg = PlayConfig(requireProof = false, port = 0, trustedProxies = LOOPBACK, ticketPubKeys = listOf(TestKeys.pub), trustedKeys = TestRights.trustedKeys, createsPerIpPerHour = 10_000,
             createsPerIdentityPerDay = 10_000, createsPer48PerHour = 100_000, maxPerIp = 200, maxPerIpShared = 200, connPerMinute = 100_000, connPerSecond = 10_000, fallbackIdleMs = fallbackIdleMs,
             revocationsMode = castbridge.play.RevocationsMode.OFF, webPlay = webPlay)   // WEB=0 (production) : la TV entre par tvJoin (ticket + activation), seul chemin qui accorde le siège relais ; WEB=1 : joueurs distants (WebSocket sans TV)
         return PlayServer(cfg, settings = ServerRoom.Settings(duelCount = duelCount, duelQuestionMs = questionMs)).also { it.start(); servers += it }

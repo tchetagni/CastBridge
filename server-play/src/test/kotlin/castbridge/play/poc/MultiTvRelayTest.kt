@@ -40,7 +40,7 @@ class MultiTvRelayTest {
         PlayServer(cfg, settings = ServerRoom.Settings(duelCount = duel, seatsPerTable = 16)).start().also { servers += it }
 
     /** [idleMs] : une session de repli sans nouvelle depuis ce délai est fermée (pour détecter vite une TV perdue) ; sans, les réglages de production. */
-    private fun config(idleMs: Long? = null) = PlayConfig(port = 0, trustedProxies = LOOPBACK, ticketPubKeys = listOf(TestKeys.pub), trustedKeys = TestRights.trustedKeys, createsPerIpPerHour = 10_000,
+    private fun config(idleMs: Long? = null) = PlayConfig(requireProof = false, port = 0, trustedProxies = LOOPBACK, ticketPubKeys = listOf(TestKeys.pub), trustedKeys = TestRights.trustedKeys, createsPerIpPerHour = 10_000,
         webPlay = false, revocationsMode = RevocationsMode.OFF, maxRoomsPerSubject = 5, pollMs = if (idleMs == null) 25_000 else 300, fallbackIdleMs = idleMs ?: 40_000, tickMs = if (idleMs == null) 200 else 50)
 
     private fun ticket(tv: TestRights.Tv) = TestKeys.ticket(deviceCode = tv.code, lifeMs = 10 * 60_000L)

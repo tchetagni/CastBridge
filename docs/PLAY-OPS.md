@@ -111,6 +111,8 @@ $ cd "$REL" && sudo docker build -f server-play/Dockerfile --progress=plain \
 
 ### 3.3 Fichier d'environnement de staging et clé publique de TEST
 
+**Audit Opus (B-7) : ce profil STAGING (`DIRECT=1`, clé de test) n'est PAS celui des clients innovants.** Le staging qu'ils utilisent doit être **identique à la production** (même `.env.play` du § 4.2, mêmes clés de confiance, vraies tickets, `REQUIRE_PROOF=1`) ; l'unique écart toléré est `CASTBRIDGE_PLAY_REVOCATIONS=off` du POC (dit par la santé, par le sondage de la TV et par le menu), à lever par la bascule du § 4.2 bis. Le profil ci-dessous ne sert qu'à vérifier que le service démarre.
+
 **Lire d'abord :** `backend/.env.play.example` (bloc STAGING). La clé de test n'est utilisée par aucun émetteur : elle ne sert qu'à vérifier que le service démarre ; aucune salle ne s'ouvrira sans ticket valide (voulu).
 
 ```bash
@@ -189,7 +191,7 @@ La clé publique du SERVEUR, **exactement où la lire** (code : `backend/src/mai
 
 - La clé privée est le fichier `license-signing.key` du dossier des secrets (`CASTBRIDGE_LICENSES_SECRETS_DIR`, `/run/secrets` par défaut ; `LicenseKeyring`). Au démarrage de l'API, le journal dit `licence module: server signing key <kid> loaded`.
 - La clé **publique** (Base64 de 32 octets bruts) est le champ `publicKey` de `GET /api/v1/admin/licenses/signing` (`LicenseApiController.signing()`, route d'administration : jeton d'administrateur, droit `LICENSE_READ`) ; le même appel donne `scopes` (portées fixes du serveur : `ISSUE_TRIAL`, `ISSUE_PRODUCTION`, `REACTIVATE`, `REVOKE`, `REGISTRY`, `POLICY`). Ce n'est **pas** `GET /api/v1/updates/public-key` (clé des mises à jour, autre clé) ni la clé des tickets.
-- Valeur à poser : `CASTBRIDGE_PLAY_TRUSTED_KEYS=server:<publicKey>:REVOKE+ISSUE_TRIAL+ISSUE_PRODUCTION` (même format `nom:clé:PORTÉES` que la liste de confiance de la TV ; `REVOKE` pour la liste de révocations, `ISSUE_*` pour les activations émises par le serveur). Une entrée mal formée est **ignorée** et dite au démarrage (journal `play.config.warning`).
+- Valeur à poser : `CASTBRIDGE_PLAY_TRUSTED_KEYS` = **exactement la liste des clés de confiance livrées dans les builds TV, avec leurs portées** (dont `SUPER_UNLIMITED` et `COMMAND_OPEN_ALL`), **plus** la clé du serveur `server:<publicKey>:REVOKE+ISSUE_TRIAL+ISSUE_PRODUCTION` (audit Opus H-5). Format `nom:clé:PORTÉES` (portées séparées par `+`). **Ne jamais la composer à la main** : `tools/play/trusted-keys-from-tv.py --server-pub "$SERVER_PUB"` (sur le Mac) lit **seulement les lignes publiques** `kid=… pub=… scopes=…` du fichier des clés de confiance des builds TV (`~/.castbridge-signing/activation-trusted-keys.txt`, `trustedKeysFile` de `android/receiver/build.gradle.kts`) et imprime la valeur en une ligne ; il n'affiche ni ne garde rien d'autre, écarte une ligne sans `scopes=` (la TV ne lui accorderait rien) et refuse une liste vide. Avec la seule clé du serveur (ancienne valeur documentée), les TV activées par l'outil de bureau (fichier USB, canal principal), les TV « super » et « tout ouvert » étaient refusées en `PLAY_SCOPE_FORBIDDEN`, ticket brûlé, alors que la tuile disait « disponible ». Une entrée mal formée est **ignorée** et dite au démarrage (journal `play.config.warning`). **À refaire à chaque rotation de la liste des builds TV** : la valeur du service et celle des TV doivent rester identiques.
 - `CASTBRIDGE_LICENSES_TRUSTED_KEYS` de l'API n'est **pas** cette valeur : elle liste les clés des outils hors ligne (bureau, téléphone) que l'API accepte à l'import du registre.
 
 ### 4.1 Paire de clés du ticket (privée pour l'API, publique pour `castbridge-play`)
@@ -229,11 +231,13 @@ secrets:
 ```bash
 $ SUBNET=$(sudo docker network inspect infra-net -f '{{range .IPAM.Config}}{{.Subnet}}{{end}}'); echo "$SUBNET"      # à relever ; attendu : un /16 ou /24 privé, jamais 172.16.0.0/12
 # variante stricte (au choix) :  SUBNET=$(sudo docker inspect infra-nginx -f '{{(index .NetworkSettings.Networks "infra-net").IPAddress}}')/32
+# la liste de confiance du service = celle des builds TV + la clé du serveur (H-5) ; à calculer SUR LE MAC (le fichier des clés y est), puis à poser sur l'hôte :
+Mac$ TRUSTED=$(python3 tools/play/trusted-keys-from-tv.py --server-pub "$SERVER_PUB"); echo "$TRUSTED"      # une ligne nom:clé:PORTÉES,… ; que des clés PUBLIQUES
 $ cp "$ROOT/services/play/.env.play" "$ROOT/services/play/.env.play.staging.$(date -u +%Y%m%d)"       # sauvegarde du profil de staging
 $ ( umask 077; cat > "$ROOT/services/play/.env.play" <<EOF
 CASTBRIDGE_PLAY_TRUSTED_PROXIES=$SUBNET
 CASTBRIDGE_PLAY_TICKET_PUBKEY=$PUB
-CASTBRIDGE_PLAY_TRUSTED_KEYS=server:$SERVER_PUB:REVOKE+ISSUE_TRIAL+ISSUE_PRODUCTION
+CASTBRIDGE_PLAY_TRUSTED_KEYS=$TRUSTED
 CASTBRIDGE_PLAY_REVOCATIONS_URL=https://bridge.sti-cm.com/api/v1/revocations
 CASTBRIDGE_PLAY_REVOCATIONS_FILE=/var/lib/castbridge-play/revocations.txt
 CASTBRIDGE_PLAY_ORIGINS=https://bridge.sti-cm.com
@@ -244,6 +248,8 @@ CASTBRIDGE_PLAY_MAX_PER_IP_SHARED=64
 CASTBRIDGE_PLAY_CREATES_PER_IP_HOUR=20
 CASTBRIDGE_PLAY_CREATES_PER_IDENTITY_DAY=30
 CASTBRIDGE_PLAY_CREATES_PER_48_HOUR=200
+CASTBRIDGE_PLAY_MAX_HELD_PER_ADDR=48
+CASTBRIDGE_PLAY_REQUIRE_PROOF=1
 EOF
   )
 ```
@@ -253,6 +259,18 @@ EOF
 **POC « TV à TV avec relais » (w20-04b), variables du service.** Seule une CastBridge-TV activée entre dans une salle (ticket `cbp1` + activation `cbx1` pour créer **et** rejoindre) ; aucune page web de jeu. Valeurs par défaut, à ne poser que pour les changer : `CASTBRIDGE_PLAY_WEB=0` (`1` n'est accepté qu'avec `CASTBRIDGE_PLAY_DIRECT=1`, staging ; refusé en production), `CASTBRIDGE_PLAY_MAX_RELAYED_PER_TV=8` (téléphones relayés par TV, 1 à 8), `CASTBRIDGE_PLAY_REVOCATIONS=on` (`off` : POC seulement, refusé si `CASTBRIDGE_PLAY_MAX_ROOMS` > 20 ; le service l'écrit au démarrage et la santé dit `"revocations":"disabled"` : tant que `GET /api/v1/revocations` répond 503, c'est le seul moyen d'ouvrir une salle, et une TV révoquée n'est alors pas refusée). `CASTBRIDGE_PLAY_DIRECT=1` est refusé quand `CASTBRIDGE_PLAY_TRUSTED_PROXIES` est posé. Avec `off`, la vérification ci-dessous attend `"revocations":"disabled"` au lieu de `"ok"`.
 
 **Vérifier :** `curl -fsS http://127.0.0.1:7091/play/health` donne **`"revocations":"ok"`** (et non `none` ni `stale` : 4.0) ; `grep -E 'DIRECT|PRIVATE|_KEY|_TOKEN' "$ROOT/services/play/.env.play"` ne renvoie **rien** ; `stat -c '%a'` = `600` ; `$PUB` est bien la clé de 4.1 (pas celle de test de 3.3). **Revenir en arrière :** `cp` de la sauvegarde `.env.play.staging.<date>` sur `.env.play`.
+
+### 4.2 bis Audit Opus du Quiz en ligne : ce qui change dans l'exploitation
+
+**Preuve de possession de la clé d'installation (H-3).** `create` et `join` portent `proof` (`<clé publique>.<signature>`), liée au `jti` du ticket, au code d'appareil et à l'activation présentée ; le ticket porte `ik` (empreinte SHA-256 de la clé d'installation de la TV). `CASTBRIDGE_PLAY_REQUIRE_PROOF=1` (défaut) : une activation copiée (téléphone apparié, clé USB) ne fait plus entrer un script ou un téléphone « comme une TV ». `0` = migration d'une flotte mixte **seulement** (la santé dit `"proof":"optional"` ; ne jamais le laisser en production). Une **TV déjà installée en 0.14.32 ne présente pas de preuve** et n'ouvre donc plus de partie Internet tant qu'elle n'est pas mise à jour (le cœur Quiz en ligne de 0.14.32 n'avait de toute façon pas de « Rejoindre » fonctionnel : C-1). Côté API : `POST /api/v1/play/ticket` accepte `{"deviceCode":…,"installKey":<clé publique brute Ed25519, base64>}` ; la première demande épingle `code ↔ clé` **en mémoire** (comme le lien « 2 appareils par code ») : après un redémarrage de l'API, la première TV qui redemande un ticket re-épingle, un faussaire qui passerait avant elle est un risque résiduel (un épinglage persistant demande une table SQL : non fait). Plafonds de l'API : `CASTBRIDGE_PLAY_TICKET_PER_DEVICE_PER_HOUR` (20) et `CASTBRIDGE_PLAY_TICKET_PER_ADDRESS_PER_HOUR` (**120 par défaut, maintenant réglable** ; derrière un CGNAT d'opérateur plusieurs TV EDGE se la partagent : le monter si les journaux montrent des 429).
+
+**Révocations `off` : le dire, puis basculer.** Tant que `CASTBRIDGE_PLAY_REVOCATIONS=off`, `GET /play/health` (127.0.0.1:7091) donne `"revocations":"disabled"` **et** `"revocationsEnforced":false`, `GET /play/.well-known/caps` ajoute `"revocations":"off"` (la TV le lit au sondage et le dit à l'écran du menu), le journal écrit l'avertissement au démarrage : une TV révoquée, remboursée ou transférée continue de créer et rejoindre, une clé d'émetteur révoquée (fuite) reste acceptée (son détenteur fabrique autant d'« identités de TV » qu'il veut) et dix activations copiées (2 salles chacune) remplissent les 20 salles du POC. **Bascule exacte vers la liste signée** (dans cet ordre, hors partie) :
+
+1. Choisir la source : module des licences actif (`CASTBRIDGE_LICENSES_ENABLED=true`, `license-signing.key` monté) **ou** liste signée statique ré-émise par l'outil de bureau (clé de portée `REVOKE`) toutes les **12 h** (le service refuse à 24 h) et servie en https par nginx.
+2. `.env.play` : retirer `CASTBRIDGE_PLAY_REVOCATIONS=off` ; poser `CASTBRIDGE_PLAY_REVOCATIONS_URL=http://castbridge-api:8080/api/v1/revocations` (réseau interne, liste signée) ou l'adresse https de la liste statique ; `CASTBRIDGE_PLAY_REVOCATIONS_FILE=/var/lib/castbridge-play/revocations.txt` (volume `play-state`) ; la clé `REVOKE` doit figurer dans `CASTBRIDGE_PLAY_TRUSTED_KEYS` (la clé du serveur, ou la clé du bureau) ; retirer `CASTBRIDGE_PLAY_MAX_ROOMS=20`.
+3. Vérifier `/play/health` : `"revocations":"ok"` et `"revocationsEnforced":true` (jamais `none`, `stale`, `disabled`) ; alerte si `stale`.
+
+**Essai à blanc la veille (H-5).** Avant toute ouverture aux innovants, sur **chaque TV de démonstration** : créer **puis** rejoindre une salle (la création ne prouve rien de l'entrée), avec une TV d'essai, une TV de production, la TV « super » du propriétaire et une TV « tout ouvert » ; lire `/play/health` et le journal (`play.config.warning` doit être vide : aucune clé de confiance ignorée).
 
 ### 4.3 Déployer l'image et le service (hors partie)
 
@@ -268,7 +286,7 @@ Mac$ bash tools/release/deploy-server.sh --status --service play --apply        
 
 ### 4.4 Route nginx `/play/` (le seul acte qui expose le service)
 
-**Lire d'abord :** 2.2 (contenu réel de `castbridge.conf`), 2.3 (`/opt/infra` géré par git ? alors faire la même modification **dans ce dépôt-là**), et le choix 4.5 sur `worker_connections`. Les directives `limit_conn_zone` et `log_format` sont de niveau `http` : le fichier `conf.d/castbridge.conf` contient déjà un bloc `server`, donc il est inclus **dans** `http` par `nginx.conf` et ces deux lignes peuvent se placer **en tête du même fichier, avant `server {`** (aucun `map` n'est nécessaire : la forme `Upgrade`/`Connection "upgrade"` n'est posée que pour `/play/ws`). Un dossier `snippets/` inclus par `nginx.conf` **n'a pas pu être vérifié** (non relevé) : ce runbook n'en dépend pas. Si `nginx -t` refuse l'une des deux lignes en tête de fichier (nom déjà pris, contexte refusé), repli : supprimer la ligne `access_log` des quatre blocs et la remplacer par `access_log off;` (les journaux du service lui-même ne contiennent aucune requête), et retirer les `limit_conn` (le service plafonne déjà 8 connexions par adresse).
+**Lire d'abord :** 2.2 (contenu réel de `castbridge.conf`), 2.3 (`/opt/infra` géré par git ? alors faire la même modification **dans ce dépôt-là**), et le choix 4.5 sur `worker_connections`. Les directives `limit_conn_zone` et `log_format` sont de niveau `http` : le fichier `conf.d/castbridge.conf` contient déjà un bloc `server`, donc il est inclus **dans** `http` par `nginx.conf` et ces deux lignes peuvent se placer **en tête du même fichier, avant `server {`** (un seul `map`, pour la clé IPv6 /64 ci-dessous ; la forme `Upgrade`/`Connection "upgrade"` n'est posée que pour `/play/ws`). Un dossier `snippets/` inclus par `nginx.conf` **n'a pas pu être vérifié** (non relevé) : ce runbook n'en dépend pas. Si `nginx -t` refuse l'une des deux lignes en tête de fichier (nom déjà pris, contexte refusé), repli : supprimer la ligne `access_log` des quatre blocs et la remplacer par `access_log off;` (les journaux du service lui-même ne contiennent aucune requête), et retirer les `limit_conn` (le service plafonne déjà 24 connexions et 48 sockets tenues par adresse).
 
 **1. Sauvegarde datée (obligatoire) :**
 
@@ -284,10 +302,18 @@ $ sudo cp -p "$CONF" "$BAK" && ls -l "$BAK"        # -p conserve le propriétair
 
 ```nginx
 # --- castbridge-play (w20-08) : niveau http ; conf.d/*.conf est inclus dans http ---
-limit_conn_zone $binary_remote_addr zone=cbplay_addr:10m;
+# clé = l'adresse IPv4, ou le /64 d'une adresse IPv6 (un abonné IPv6 a au moins un /64 : sinon chaque /128 est une clé distincte et la limite ne protège rien).
+# Limite : une adresse IPv6 écrite avec « :: » dans ses 64 premiers bits ne correspond pas à l'expression et retombe sur sa clé /128 ; le plafond du service par /64 (CASTBRIDGE_PLAY_MAX_HELD_PER_ADDR) reste la garantie.
+map $remote_addr $cbplay_key {
+    default $binary_remote_addr;
+    "~^(?<p64>[0-9a-f]{1,4}:[0-9a-f]{1,4}:[0-9a-f]{1,4}:[0-9a-f]{1,4}):" $p64;
+}
+limit_conn_zone $cbplay_key zone=cbplay_addr:10m;
 # journal de /play/ SANS query string ($uri au lieu de $request) : aucun secret, aucune adresse complète de requête
 log_format cbplay '$remote_addr [$time_local] "$request_method $uri" $status $body_bytes_sent rt=$request_time "$http_user_agent"';
 ```
+
+**Valeur de `limit_conn` (audit Opus M-7, H-4).** Une TV tient **1 flux SSE + jusqu'à 8 POST en parallèle** (`PlayHttpTransport.MAX_PARALLEL = 8`) + le sondage de la boîte : 10 connexions au pire. Une adresse d'opérateur (CGNAT) peut en abriter plusieurs : la limite **doit être ≥ 40 par adresse**, marge CGNAT comprise ; ce runbook pose **48**, égal à `CASTBRIDGE_PLAY_MAX_HELD_PER_ADDR` du service (sockets tenues par adresse, /64 en IPv6). Avec 20 (ancienne valeur), deux TV EDGE derrière la même adresse saturaient la limite en rafale : 429, attente, réponses en retard. La clé du `map` regroupe l'IPv6 par /64 comme le service (`ClientIp`) ; sans elle, un seul abonné IPv6 contournait la limite en changeant d'adresse /128.
 
 (ii) **dans le bloc `server { … }` de `bridge.sti-cm.com`, juste avant `location / {`** :
 
@@ -311,7 +337,7 @@ log_format cbplay '$remote_addr [$time_local] "$request_method $uri" $status $bo
 
     # WebSocket : SEUL endroit où l'Upgrade est transmis
     location = /play/ws {
-        limit_conn cbplay_addr 20;
+        limit_conn cbplay_addr 48;
         limit_conn_status 429;
         client_max_body_size 64k;
         set $cb_play http://castbridge-play:8080;
@@ -331,7 +357,7 @@ log_format cbplay '$remote_addr [$time_local] "$request_method $uri" $status $bo
 
     # repli SSE/long-poll : le POST est lu en entier par nginx avant d'être passé (un client lent ne tient pas un fil du service)
     location = /play/act {
-        limit_conn cbplay_addr 20;
+        limit_conn cbplay_addr 48;
         limit_conn_status 429;
         client_max_body_size 64k;
         client_body_timeout 10s;
@@ -351,7 +377,7 @@ log_format cbplay '$remote_addr [$time_local] "$request_method $uri" $status $bo
 
     # « /play » sans barre finale : la page de jeu (sinon nginx répondrait 301 vers /play/, que le service ne sert pas)
     location = /play {
-        limit_conn cbplay_addr 20;
+        limit_conn cbplay_addr 48;
         limit_conn_status 429;
         set $cb_play http://castbridge-play:8080;
         resolver 127.0.0.11 valid=30s;
@@ -369,7 +395,7 @@ log_format cbplay '$remote_addr [$time_local] "$request_method $uri" $status $bo
     # tout le reste de /play/ : page /play/j/<code>, flux SSE /play/events, long-poll /play/state, /play/.well-known/caps
     # ^~ : aucune expression régulière ailleurs dans le fichier ne peut capter ces adresses
     location ^~ /play/ {
-        limit_conn cbplay_addr 20;
+        limit_conn cbplay_addr 48;
         limit_conn_status 429;
         client_max_body_size 64k;
         set $cb_play http://castbridge-play:8080;           # variable + resolver : nginx démarre même si castbridge-play est arrêté
@@ -404,16 +430,17 @@ $ sudo docker logs --tail 5 infra-nginx
 Mac$ curl -sS -o /dev/null -w '%{http_code}\n' https://bridge.sti-cm.com/api/v1/updates/public-key            # 200
 # 2. la santé n'est PAS publique : 403 attendu (la lecture se fait par 127.0.0.1:7091, § 9)
 Mac$ curl -sS -o /dev/null -w '%{http_code}\n' https://bridge.sti-cm.com/play/health                         # 403
-# 3. la page de jeu : 200 et du HTML, avec et sans barre finale
+# 3. avec CASTBRIDGE_PLAY_WEB=0 (défaut) : /play est une PAGE D'INFORMATION statique (200, HTML, sans script ni formulaire), jamais une page de jeu ; play.js et play.css : 404
 Mac$ curl -sS -o /dev/null -w '%{http_code} %{content_type}\n' https://bridge.sti-cm.com/play                  # 200 text/html…
 Mac$ curl -sS -o /dev/null -w '%{http_code}\n' https://bridge.sti-cm.com/play/.well-known/caps               # 200
-# 4. la poignée de main WebSocket : 101 attendu (curl attend ensuite : -m 5 l'arrête, code de sortie 28 normal)
+# 4. aucun navigateur n'atteint le jeu : la poignée de main WebSocket AVEC un en-tête Origin est refusée (403, jamais 101) ; SANS Origin et sans ticket valide, 403 aussi (le 101 ne s'obtient qu'avec un vrai ticket cbp1, d'une TV)
 Mac$ curl --http1.1 -i -N -m 5 \
         -H 'Connection: Upgrade' -H 'Upgrade: websocket' -H 'Sec-WebSocket-Version: 13' \
         -H 'Sec-WebSocket-Key: dGhlIHNhbXBsZSBub25jZQ==' -H 'Origin: https://bridge.sti-cm.com' \
         https://bridge.sti-cm.com/play/ws
-#    attendu : HTTP/1.1 101 Switching Protocols … Sec-WebSocket-Accept: s3pPLMBiTxaQ9kYGzzhZRbK+xOo=
-# 5. une origine étrangère est refusée (code 4xx, jamais 101)
+#    attendu : HTTP/1.1 403 Forbidden (corps {"error":"origine refusée"})
+# 5. une origine étrangère est refusée (403, jamais 101) ; un POST de repli sans ticket l'est aussi (aucune session ne se crée sans ticket valide)
+Mac$ curl -sS -o /dev/null -w '%{http_code}\n' -X POST -H 'Content-Type: application/json' -d '{"t":"pong","id":"x"}' https://bridge.sti-cm.com/play/act      # 403
 Mac$ curl --http1.1 -i -m 5 -H 'Connection: Upgrade' -H 'Upgrade: websocket' -H 'Sec-WebSocket-Version: 13' \
         -H 'Sec-WebSocket-Key: dGhlIHNhbXBsZSBub25jZQ==' -H 'Origin: https://exemple.invalid' https://bridge.sti-cm.com/play/ws | head -n 1
 # 6. le journal ne contient pas la query string

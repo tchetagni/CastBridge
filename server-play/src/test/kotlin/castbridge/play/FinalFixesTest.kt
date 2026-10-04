@@ -48,7 +48,7 @@ class FinalFixesTest {
     // ---- R2 : un refus APRÈS le contrôle des droits ne brûle ni le jti ni le quota d'adresse ----
 
     @Test fun aRefusalAfterTheRightsCheckBurnsNeitherTheTicketNorTheAddressQuota() {
-        val cfg = PlayConfig(webPlay = true, revocationsMode = castbridge.play.RevocationsMode.OFF, maxRooms = 1, trustedProxies = LOOPBACK, ticketPubKeys = listOf(TestKeys.pub), trustedKeys = TestRights.trustedKeys, createsPerIpPerHour = 2, createsPerIdentityPerDay = 1_000)
+        val cfg = PlayConfig(requireProof = false, webPlay = true, revocationsMode = castbridge.play.RevocationsMode.OFF, maxRooms = 1, trustedProxies = LOOPBACK, ticketPubKeys = listOf(TestKeys.pub), trustedKeys = TestRights.trustedKeys, createsPerIpPerHour = 2, createsPerIdentityPerDay = 1_000)
         val hub = PlayHub(cfg, { 1_000L }, GuardHarness.bank, TicketVerifier(listOf(TestKeys.pub)), limits = ConnectionLimits(1_000, 1_000_000))
         GuardHarness.host(hub, id = "tvA", ip = "198.51.100.1")
         val before = hub.usedTicketCount()
@@ -101,7 +101,7 @@ class FinalFixesTest {
     private val ring = TrustedIssuers.parse(TestRights.trustedSpec).ring
 
     @Test fun healthNeverSaysOkBeforeAListHasBeenAccepted() {
-        val srv = PlayServer(PlayConfig(webPlay = true, port = 0, trustedProxies = LOOPBACK, ticketPubKeys = listOf(TestKeys.pub), trustedKeys = TestRights.trustedKeys, revocationsUrl = "http://127.0.0.1:9/revocations")).also { it.start(); servers += it }
+        val srv = PlayServer(PlayConfig(requireProof = false, webPlay = true, port = 0, trustedProxies = LOOPBACK, ticketPubKeys = listOf(TestKeys.pub), trustedKeys = TestRights.trustedKeys, revocationsUrl = "http://127.0.0.1:9/revocations")).also { it.start(); servers += it }
         val body = http.send(java.net.http.HttpRequest.newBuilder(java.net.URI("http://127.0.0.1:${srv.port}/play/health")).GET().build(), java.net.http.HttpResponse.BodyHandlers.ofString()).body()
         assertTrue(body.contains("\"revocations\":\"none\""), body)
     }

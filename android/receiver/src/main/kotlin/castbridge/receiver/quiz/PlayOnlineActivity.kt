@@ -193,6 +193,7 @@ class PlayOnlineActivity : Activity() {
                 val c = column().apply { gravity = Gravity.CENTER }
                 c.addView(text("Partie Internet", 40f, QuizColors.GOLD, true), lp())
                 c.addView(text("Votre TV joue en ligne ; les téléphones de la maison jouent par la TV."), lp(4))
+                if (PlayHub.revocationsOff) c.addView(text(castbridge.core.quiz.online.PlayGate.NOTE_REVOCATIONS_OFF, 28f, QuizColors.GOLD, false), lp(4))
                 val create = button("Créer une partie") { send(PlayEvent.ChooseCreate) }
                 c.addView(create, lp(24))
                 c.addView(button("Rejoindre avec un code") { send(PlayEvent.ChooseJoin) }, lp())

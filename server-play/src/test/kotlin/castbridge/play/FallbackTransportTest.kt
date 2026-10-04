@@ -20,7 +20,7 @@ import kotlin.test.assertTrue
 class FallbackTransportTest {
     private val servers = ArrayList<PlayServer>()
     private val wires = ArrayList<Wire>()
-    private fun server(cfg: PlayConfig = PlayConfig(webPlay = true, revocationsMode = castbridge.play.RevocationsMode.OFF, port = 0, trustedProxies = LOOPBACK, ticketPubKeys = listOf(TestKeys.pub), trustedKeys = TestRights.trustedKeys, createsPerIpPerHour = 10_000)) = PlayServer(cfg).also { it.start(); servers += it }
+    private fun server(cfg: PlayConfig = PlayConfig(requireProof = false, webPlay = true, revocationsMode = castbridge.play.RevocationsMode.OFF, port = 0, trustedProxies = LOOPBACK, ticketPubKeys = listOf(TestKeys.pub), trustedKeys = TestRights.trustedKeys, createsPerIpPerHour = 10_000)) = PlayServer(cfg).also { it.start(); servers += it }
     @AfterTest fun stop() { wires.forEach { it.close() }; servers.forEach { it.close() }; wires.clear(); servers.clear() }
     private fun <W : Wire> W.keep(): W { wires += this; return this }
     private val http = HttpClient.newBuilder().connectTimeout(Duration.ofSeconds(5)).build()
@@ -67,7 +67,7 @@ class FallbackTransportTest {
     }
 
     @Test fun longPollKeepsMessagesUntilAcknowledgedAndAnswersEmptyAfterTheDelay() {
-        val srv = server(PlayConfig(webPlay = true, revocationsMode = castbridge.play.RevocationsMode.OFF, port = 0, trustedProxies = LOOPBACK, pollMs = 400, ticketPubKeys = listOf(TestKeys.pub), trustedKeys = TestRights.trustedKeys, createsPerIpPerHour = 10_000))
+        val srv = server(PlayConfig(requireProof = false, webPlay = true, revocationsMode = castbridge.play.RevocationsMode.OFF, port = 0, trustedProxies = LOOPBACK, pollMs = 400, ticketPubKeys = listOf(TestKeys.pub), trustedKeys = TestRights.trustedKeys, createsPerIpPerHour = 10_000))
         val (_, w) = host(srv)
         val post = SseWire.post(srv.port, PlayCodec.encode(ClientMsg.Join(w["code"] as String, "Awa", null, dev(), false)), null, "https://bridge.sti-cm.com", "203.0.113.2")
         val conn = Cred.of(post)!!
@@ -84,7 +84,7 @@ class FallbackTransportTest {
     }
 
     @Test fun idleFallbackSessionIsClosedButTheSeatSurvivesForResume() {
-        val srv = server(PlayConfig(webPlay = true, revocationsMode = castbridge.play.RevocationsMode.OFF, port = 0, trustedProxies = LOOPBACK, fallbackIdleMs = 600, tickMs = 50, ticketPubKeys = listOf(TestKeys.pub), trustedKeys = TestRights.trustedKeys, createsPerIpPerHour = 10_000))
+        val srv = server(PlayConfig(requireProof = false, webPlay = true, revocationsMode = castbridge.play.RevocationsMode.OFF, port = 0, trustedProxies = LOOPBACK, fallbackIdleMs = 600, tickMs = 50, ticketPubKeys = listOf(TestKeys.pub), trustedKeys = TestRights.trustedKeys, createsPerIpPerHour = 10_000))
         val (_, w) = host(srv)
         val sse = SseWire(srv.port, xff = "203.0.113.2").keep()
         sse.send(PlayCodec.encode(ClientMsg.Join(w["code"] as String, "Awa", null, dev(), false)))
@@ -104,7 +104,7 @@ class FallbackTransportTest {
         fun raw(req: String): String = Socket("127.0.0.1", srv.port).use { s -> s.getOutputStream().write(req.toByteArray()); s.getInputStream().readNBytes(400).toString(Charsets.UTF_8).lineSequence().first() }
         val h = "Host: x\r\nOrigin: https://bridge.sti-cm.com\r\n"
         assertEquals("HTTP/1.1 411 Length Required", raw("POST /play/act HTTP/1.1\r\n$h\r\n"))
-        assertEquals("HTTP/1.1 413 Payload Too Large", raw("POST /play/act HTTP/1.1\r\n${h}Content-Length: 5000\r\n\r\n" + "x".repeat(10)))
+        assertEquals("HTTP/1.1 413 Payload Too Large", raw("POST /play/act HTTP/1.1\r\n${h}Content-Length: 9000\r\n\r\n" + "x".repeat(10)))
         assertEquals("HTTP/1.1 405 Method Not Allowed", raw("GET /play/act HTTP/1.1\r\n$h\r\n"))
         assertEquals("HTTP/1.1 405 Method Not Allowed", raw("POST /play/health HTTP/1.1\r\n${h}Content-Length: 0\r\n\r\n"))
         assertEquals("HTTP/1.1 410 Gone", raw("GET /play/events?token=inconnu HTTP/1.1\r\n$h\r\n"))

@@ -47,7 +47,12 @@ abstract class PlayConn(val id: String, val ip: String, rate: Int, burst: Int) {
 }
 
 /** Une salle hébergée : la logique est `ServerRoom` du cœur ; ici seulement les connexions et les dates d'activité. */
-class RoomEntry(val room: ServerRoom, /** Appareil attesté par le ticket qui a ouvert la salle (plafond de salles par sujet). */ val subject: String = "", /** Identité d'activation (code d'appareil signé) de l'hôte : un 2e compte du plafond de salles, que les faux appareils API ne contournent pas. */ val identity: String? = null) {
+class RoomEntry(val room: ServerRoom, /** Appareil attesté par le ticket qui a ouvert la salle (plafond de salles par sujet). */ val subject: String = "", /** Identité d'activation (code d'appareil signé) de l'hôte : un 2e compte du plafond de salles, que les faux appareils API ne contournent pas. */ val identity: String? = null, /** Salle d'essai : chaque `start` compte une partie du jour (M-3). */ val trial: Boolean = false) {
+    /** Parties démarrées dans cette salle (la première est comptée à la création, les suivantes une à une : M-3). */
+    internal val starts = java.util.concurrent.atomic.AtomicInteger()
+    /** L'hôte a été assis au moins une fois : avant, la salle compte (course de création) ; après, seulement tant qu'il est connecté (M-2). */
+    @Volatile internal var hostSeen = false
+    internal fun counts(): Boolean = !hostSeen || room.hostConnected()
     internal val conns = ConcurrentHashMap<String, PlayConn>()
     /** Horloge RÉELLE (ms) : la salle peut tourner sur l'horloge de test, la purge jamais. */
     val createdRealMs: Long = System.currentTimeMillis()
@@ -99,6 +104,9 @@ class PlayHub(
     private val rnd = random()
     /** Gardes anti-abus (w20-07) : le service y met ses seaux et son journal ; par défaut, ceux d'un hub autonome. */
     @Volatile var guard = PlayGuard()
+
+    /** Essais seulement : appelé entre le contrôle bon marché et le verrou de [tvJoin] (course du compteur d'essai). */
+    @Volatile internal var afterJoinPrecheck: (() -> Unit)? = null
 
     fun rooms(): List<ServerRoom> = rooms.values.map { it.room }
     fun roomCount() = rooms.size
@@ -155,6 +163,7 @@ class PlayHub(
         // la consommation a lieu au moment de créer la salle, ou quand la preuve de droits est fausse (alors le ticket est brûlé : on ne tâtonne pas avec un ticket).
         val ip48 = ClientIp.group48(c.ip) ?: c.ip
         if (used.seen(ticket.jti, real)) { send(c, err(PlayReason.PLAY_TICKET_REFUSED)); return }
+        if (proofRefused(ticket, m.activation, m.proof)) { refuseProof(ticket, real, c); return }   // H-3 : une activation copiée sans la clé d'installation de la TV
         val tooMany = ServerMsg.Error(0, BUSY, "Trop de parties ouvertes depuis cette adresse : réessayez dans une heure.", true)
         if (!createRate.peek(c.ip, real) || !create48.peek(ip48, real)) { send(c, tooMany); return }
         val rights = evaluator.evaluate(ticket.deviceCode, listOfNotNull(m.activation) + m.rentals, real)
@@ -168,7 +177,8 @@ class PlayHub(
         val subjectCap = if (trial) minOf(1, cfg.maxRoomsPerSubject) else cfg.maxRoomsPerSubject
         val subjectFull = ServerMsg.Error(0, BUSY, "Vous avez déjà $subjectCap partie${if (subjectCap > 1) "s" else ""} ouverte${if (subjectCap > 1) "s" else ""} : terminez-en une avant d'en ouvrir une autre.", true)
         val identity = rights.identity
-        fun openRooms() = rooms.values.count { it.subject == ticket.deviceId || (identity != null && it.identity == identity) }   // l'appareil API se recrée à volonté : l'activation signée compte aussi
+        // M-2 : une salle dont l'hôte est parti (« Quitter ») ne bloque plus son créateur ; elle vit encore pour ses invités
+        fun openRooms() = rooms.values.count { it.counts() && (it.subject == ticket.deviceId || (identity != null && it.identity == identity)) }   // l'appareil API se recrée à volonté : l'activation signée compte aussi
         if (openRooms() >= subjectCap) { send(c, subjectFull); return }
         // le lot réservé se lit hors verrou (première lecture : un zip) ; sans droit : la banque libre PARTAGÉE
         val roomBank = if (rights.coveredScopes.isEmpty() || reserved == null) bank else reserved.bankFor(rights.coveredScopes)
@@ -191,13 +201,26 @@ class PlayHub(
                     UsedTickets.Use.OK -> when {
                         trial && !trialDays.record(identity ?: "", real) -> { refusal = err(PlayReason.PLAY_BUSY); null }
                         !trial && !identityDays.record(identity ?: "", real) -> { refusal = err(PlayReason.PLAY_BUSY); null }
-                        else -> RoomEntry(ServerRoom(id, scope, roomBank, rnd, createdAt = now, settings = roomSettings), ticket.deviceId, identity).also { rooms[id] = it }
+                        else -> RoomEntry(ServerRoom(id, scope, roomBank, rnd, createdAt = now, settings = roomSettings), ticket.deviceId, identity, trial).also { rooms[id] = it }
                     }
                 }
             }
         }
         if (e == null) { send(c, refusal!!); return }
-        attachAndForward(e, c, m, now)
+        if (attachAndForward(e, c, m, now)) e.hostSeen = true
+    }
+
+    /** H-3 : la preuve de possession manque ou est fausse. Un ticket qui porte l'empreinte `ik` l'exige toujours ; sans `ik`, seul `requireProof` (défaut) la rend obligatoire. */
+    private fun proofRefused(ticket: TicketVerifier.Ticket, activation: String?, proof: String?): Boolean {
+        val ik = ticket.installHash
+        if (ik == null) return cfg.requireProof
+        val code = ticket.deviceCode ?: return true
+        return activation == null || !castbridge.core.quiz.online.PlayProof.verify(proof, ticket.jti, code, activation, ik)
+    }
+
+    private fun refuseProof(ticket: TicketVerifier.Ticket, real: Long, c: PlayConn) {
+        used.use(ticket.jti, ticket.exp, real)   // comme une preuve de droits fausse : le ticket est brûlé
+        send(c, ServerMsg.Error(0, PlayReason.PLAY_SCOPE_FORBIDDEN.code, "Mettez CastBridge-TV à jour : cette TV ne prouve pas qu'elle est bien celle de l'activation.", false))
     }
 
     /** Nombre de `jti` mémorisés (tests, santé). */
@@ -235,6 +258,7 @@ class PlayHub(
             used.use(ticket.jti, ticket.exp, real)   // preuve de droits fausse, absente ou d'une autre TV : le ticket est brûlé, comme à `create`
             send(c, ServerMsg.Error(0, PlayReason.PLAY_SCOPE_FORBIDDEN.code, rights.note, false)); return
         }
+        if (proofRefused(ticket, m.activation, m.proof)) { refuseProof(ticket, real, c); return }   // H-3
         // à partir d'ici l'appelant est une TV authentifiée : la recherche du code est permise
         val typed = RoomCode.normalize(m.code)
         val e = typed?.let { t -> rooms.values.firstOrNull { it.room.code == t } }
@@ -252,26 +276,30 @@ class PlayHub(
         }
         val cap = if (trial) minOf(1, cfg.maxRoomsPerSubject) else cfg.maxRoomsPerSubject
         val ownRoom = e.identity == identity   // rejoindre sa propre salle (spectateur) ne compte pas deux fois
-        fun liveOf(who: String) = rooms.values.count { it.identity == who } + rooms.values.filter { it.identity != who }.sumOf { r -> r.joined.entries.count { (cid, idn) -> idn == who && r.conns.containsKey(cid) } }
+        // M-2 : seules comptent les salles dont l'hôte est encore là ; une entrée vivante compte tant que sa connexion l'est
+        fun liveOf(who: String) = rooms.values.count { it.identity == who && it.counts() } + rooms.values.filter { it.identity != who }.sumOf { r -> r.joined.entries.count { (cid, idn) -> idn == who && r.conns.containsKey(cid) } }
         val full = ServerMsg.Error(0, BUSY, "Vous avez déjà $cap partie${if (cap > 1) "s" else ""} ouverte${if (cap > 1) "s" else ""} : terminez-en une avant d'en rejoindre une autre.", true)
+        afterJoinPrecheck?.invoke()
         var refusal: ServerMsg.Error? = null
+        // C-1 : la salle JUGE l'admission (nom, appareil banni, salle pleine, code échu…) avant toute consommation ; le `jti` et la partie d'essai ne sont pris qu'APRÈS son `welcome`.
+        // Tout se passe sous le verrou des salles (les entrées sont sérialisées : un rejeu ou une course ne passe pas entre le contrôle et la consommation).
         synchronized(roomLock) {
             when {
                 rooms[e.room.roomId] !== e -> refusal = err(PlayReason.PLAY_BAD_CODE)
                 !ownRoom && liveOf(identity) >= cap -> refusal = full
-                trial && trialDays.count(identity, real) >= PlayRules.TRIAL_GAMES_PER_DAY -> refusal = ServerMsg.Error(0, PlayReason.PLAY_SCOPE_FORBIDDEN.code, PlayRules.MSG_TRIAL_DAILY, false)
-                else -> when (used.use(ticket.jti, ticket.exp, real)) {
-                    UsedTickets.Use.REPLAY -> refusal = err(PlayReason.PLAY_TICKET_REFUSED)
-                    UsedTickets.Use.FULL -> refusal = err(PlayReason.PLAY_BUSY)
-                    UsedTickets.Use.OK -> when {
-                        trial && !trialDays.record(identity, real) -> refusal = err(PlayReason.PLAY_BUSY)
-                        else -> e.joined[c.id] = identity
-                    }
+                trial && trialDays.count(identity, real) >= PlayRules.TRIAL_GAMES_PER_DAY -> refusal = ServerMsg.Error(0, PlayReason.PLAY_SCOPE_FORBIDDEN.code, PlayRules.MSG_TRIAL_DAILY, false)   // recontrôle sous verrou (course)
+                !used.admits(ticket.jti, real) -> refusal = err(PlayReason.PLAY_TICKET_REFUSED)
+                trial && !trialDays.canRecord(identity, real) -> refusal = err(PlayReason.PLAY_BUSY)
+                else -> {
+                    e.joined[c.id] = identity
+                    if (attachAndForward(e, c, m, now, grantRelay = true)) {
+                        used.use(ticket.jti, ticket.exp, real)
+                        if (trial) trialDays.record(identity, real)
+                    } else e.joined.remove(c.id)   // refus de la salle : rien n'est consommé, le ticket reste utilisable
                 }
             }
         }
-        refusal?.let { send(c, it); return }
-        if (!attachAndForward(e, c, m, now, grantRelay = true)) e.joined.remove(c.id)
+        refusal?.let { send(c, it) }
     }
 
     private fun resume(c: PlayConn, m: ClientMsg.Resume, now: Long) {
@@ -291,7 +319,7 @@ class PlayHub(
             e.lastActiveRealMs = System.currentTimeMillis()
             val welcome = outs.firstOrNull { it.to == c.id && it.msg is ServerMsg.Welcome }?.msg as? ServerMsg.Welcome
             seatedRole = welcome?.role
-            if (grantRelay && welcome != null) {
+            if (grantRelay && welcome != null) {   // (grantRelay : voir tvJoin)
                 e.room.grantRelay(c.id)   // une TV authentifiée qui entre devient siège relais (avant toute livraison : aucun message d'elle ne passe entre les deux)
                 e.joined[c.id]?.let { e.joinedTokens[welcome.token] = it }
             }
@@ -310,10 +338,18 @@ class PlayHub(
 
     private fun forward(e: RoomEntry, c: PlayConn, m: ClientMsg, now: Long) {
         guard.filter.room(c, e.room.roomId)?.let { send(c, it); return }   // débit de messages de la salle
+        // M-3 : « Nouvelle partie » ne contourne pas les 3 parties par jour d'une salle d'essai : la 1re partie est comptée à la création, chaque `start` suivant en compte une
+        val trialStart = e.trial && e.identity != null && m is ClientMsg.Act && m.action == "start"
+        val real = System.currentTimeMillis()
+        if (trialStart && e.starts.get() >= 1 && trialDays.count(e.identity!!, real) >= PlayRules.TRIAL_GAMES_PER_DAY) {
+            send(c, ServerMsg.Error(0, PlayReason.PLAY_SCOPE_FORBIDDEN.code, PlayRules.MSG_TRIAL_DAILY, false)); return
+        }
         val overflow = ArrayList<PlayConn>()
         synchronized(e) {
-            e.lastActiveRealMs = System.currentTimeMillis()
+            e.lastActiveRealMs = real
+            val before = e.room.phase()
             deliver(e, e.room.handle(c.id, m, now, c.ip), overflow)
+            if (trialStart && before != ServerRoom.State.PLAYING && e.room.phase() == ServerRoom.State.PLAYING && e.starts.incrementAndGet() > 1) trialDays.record(e.identity!!, real)
         }
         overflow.forEach { dropOverflow(it) }
     }

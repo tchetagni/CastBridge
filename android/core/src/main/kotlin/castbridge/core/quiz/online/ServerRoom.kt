@@ -117,6 +117,8 @@ class ServerRoom(
     fun spectatorCount(): Int = synchronized(lock) { seats.values.count { it.role == PlayRole.SPECTATOR } }
     fun eventsSince(lastSeq: Long): List<EventRing.Event>? = synchronized(lock) { ring.since(lastSeq) }
     fun seq(): Long = synchronized(lock) { seq }
+    /** Le siège hôte a une connexion vivante (M-2 : une salle dont l'hôte est parti ne compte plus dans les salles ouvertes de son créateur). */
+    fun hostConnected(): Boolean = synchronized(lock) { host?.conn != null }
 
     /** Identifiant d'appareil du siège de ce jeton (null : inconnu, ou siège relayé sans appareil). Sert au plafond partagé du service à la REPRISE. */
     fun deviceOfToken(token: String): String? = synchronized(lock) { seats[token]?.deviceHash }
@@ -271,7 +273,7 @@ class ServerRoom(
         m.token?.let { t -> seats[t]?.takeIf { !it.viaTv }?.let { s -> reattach(s, conn, out, null); return } }   // un siège relayé ne se reprend que par sa TV (relayJoin)
         if (m.deviceHash != null && m.deviceHash in bannedDevices || ip != null && ip in bannedIps) { out += err(conn, PlayReason.PLAY_BANNED); return }
         if (scope == PlayScope.INTERNET && (m.deviceHash == null || m.deviceHash.length < MIN_DEVICE_HASH)) { out += errp(conn, PlayProtocol.BAD_REQUEST, "Appareil non identifié : mettez CastBridge à jour."); return }
-        val name = QuizRoom.cleanName(m.name) ?: run { out += errp(conn, PlayProtocol.BAD_REQUEST, "Choisissez un pseudonyme."); return }
+        val name = QuizRoom.cleanName(m.name) ?: if (m.spectate) "TV" else run { out += errp(conn, PlayProtocol.BAD_REQUEST, "Choisissez un pseudonyme."); return }   // audit C-1 : une TV qui regarde n'a pas de pseudonyme
         val dup = m.deviceHash != null && seats.values.any { it.deviceHash == m.deviceHash && it.role != PlayRole.SPECTATOR }
         val full = table0.room.players().size >= settings.seatsPerTable
         if (m.spectate || dup) {
@@ -312,7 +314,7 @@ class ServerRoom(
         // Jamais de blocage par adresse ni de compte des échecs ici : derrière un NAT collectif, une adresse partagée ne doit pas empêcher un joueur déjà assis de reprendre ;
         // deviner un jeton de 128 bits est impossible, le seau de débit du service suffit. Jeton inconnu ou autre salle : même réponse qu'un code faux, sans rotation du code.
         val s = seats[m.token]
-        if (m.roomId != roomId || s == null) { out += err(conn, PlayReason.PLAY_BAD_CODE); return }
+        if (m.roomId != roomId || s == null || s.viaTv) { out += err(conn, PlayReason.PLAY_BAD_CODE); return }   // B-6 : un siège relayé ne se reprend que par sa TV (join à jeton)
         reattach(s, conn, out, m.lastSeq)
     }
 
@@ -464,7 +466,7 @@ class ServerRoom(
         for (r in relayedOf(s)) { r.quizToken?.let { table0.room.leave(it) }; seats.remove(r.token); pending += Ev("kicked", mapOf("playerId" to r.playerId)) }
         s.quizToken?.let { table0.room.leave(it) }
         s.deviceHash?.let { bannedDevices += it }
-        s.ip?.let { bannedIps += it }
+        if (!s.relayer) s.ip?.let { bannedIps += it }   // B-5 : l'adresse d'une TV (CGNAT) n'est pas bannie, son appareil l'est
         s.conn?.let { c -> out += err(c, PlayReason.PLAY_BANNED); byConn.remove(c) }
         seats.remove(s.token); pending += Ev("kicked", mapOf("playerId" to playerId))
     }
@@ -488,7 +490,7 @@ class ServerRoom(
         }
     }
 
-    private fun maxGrace(): Long = if (scope != PlayScope.INTERNET) 0L else byConn.entries.filter { it.value.role != PlayRole.SPECTATOR }.maxOfOrNull { rtt.graceMs(it.key) } ?: 0L
+    private fun maxGrace(): Long = if (scope != PlayScope.INTERNET) 0L else byConn.entries.filter { it.value.role != PlayRole.SPECTATOR || it.value.relayer }.maxOfOrNull { rtt.graceMs(it.key) } ?: 0L
 
     private fun Table.resume(now: Long) {
         val p = pausedAt ?: return
@@ -506,7 +508,7 @@ class ServerRoom(
         if (d != null) {
             if (d.phase == QuizDuel.Phase.QUESTION && d.index != t.announcedIndex) {
                 t.announcedIndex = d.index
-                val a = if (d.index == 0) PlayTiming.Announcement(d.question.id, now) else PlayTiming.announce(d.question.id, now, scope, gapRequestedMs)
+                val a = PlayTiming.announce(d.question.id, now, scope, gapRequestedMs)   // M-9 : la question 1 aussi s'ouvre après le délai (horloge serveur)
                 t.clock.shift += a.opensAtServerMs - now
                 t.opensAtServerMs = a.opensAtServerMs
                 evs += Ev("question", mapOf("index" to d.index, "opensAtServerMs" to a.opensAtServerMs))

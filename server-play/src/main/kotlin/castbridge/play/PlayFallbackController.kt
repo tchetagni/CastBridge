@@ -70,11 +70,16 @@ class FbConn(id: String, ip: String, private val cfg: PlayConfig, private val ow
     }
 
     /** Long-poll : accuse `since`, attend jusqu'à [waitMs] des messages d'indice > since, les rend SANS les retirer (retirés à l'accusé suivant). Null = session morte. */
+    /** Numéro du long-poll en cours : un NOUVEAU long-poll termine l'ancien (comme `attachStream` pour le flux), une session n'en tient jamais qu'un (H-4). */
+    private var pollGen = 0
+
     fun poll(since: Long, waitMs: Long): List<Item>? = lock.withLock {
+        val g = ++pollGen; changed.signalAll()
         while (backlog.isNotEmpty() && backlog.first().idx <= since) { bytes -= backlog.removeFirst().bytes }
         var left = TimeUnit.MILLISECONDS.toNanos(waitMs)
-        while (!dead && backlog.isEmpty() && left > 0) left = changed.awaitNanos(left)
+        while (!dead && backlog.isEmpty() && pollGen == g && left > 0) left = changed.awaitNanos(left)
         if (dead) return null
+        if (pollGen != g) return emptyList()   // remplacé par un long-poll plus récent
         backlog.toList()
     }
 
@@ -93,6 +98,11 @@ class PlayFallbackController(private val cfg: PlayConfig, val hub: PlayHub, priv
                              private val origin: OriginCheck) {
     private val conns = ConcurrentHashMap<String, FbConn>()
     private val rnd = SecureRandom()
+    /** Sockets TENUES (flux SSE et long-polls) par adresse (/64 en IPv6) : plafond `maxHeldPerAddress` (H-4). */
+    private val held = ConcurrentHashMap<String, java.util.concurrent.atomic.AtomicInteger>()
+    private fun holdTake(ip: String): Boolean { val n = held.computeIfAbsent(ip) { java.util.concurrent.atomic.AtomicInteger() }; if (n.incrementAndGet() > cfg.maxHeldPerAddress) { holdDrop(ip); return false }; return true }
+    private fun holdDrop(ip: String) { held.computeIfPresent(ip) { _, v -> if (v.decrementAndGet() <= 0) null else v } }
+    private fun tooManyHeld(out: OutputStream) = MiniHttp.json(out, 429, """{"error":"trop de connexions tenues depuis cette adresse"}""", mapOf("Retry-After" to "5"))
 
     fun forget(c: FbConn) { conns.remove(c.id) }
     fun count() = conns.size
@@ -106,10 +116,13 @@ class PlayFallbackController(private val cfg: PlayConfig, val hub: PlayHub, priv
     /** `POST /play/act` */
     fun act(req: HttpReq, out: OutputStream, ip: String) {
         val ticketHdr = req.header("x-play-ticket")
-        if (!origin.allows(req.header("origin"), verifier.verify(ticketHdr, System.currentTimeMillis()))) return MiniHttp.json(out, 403, """{"error":"origine refusée"}""")
+        // M-6 : le ticket est jugé à la CRÉATION de la session ; ensuite son secret de 128 bits fait foi (un ticket échu en cours de partie ne la coupe pas)
+        val existing = find(req)
+        val allowed = if (existing != null) origin.allowsRead(req.header("origin")) else origin.allows(req.header("origin"), verifier.verify(ticketHdr, System.currentTimeMillis()))
+        if (!allowed) return MiniHttp.json(out, 403, """{"error":"origine refusée"}""")
         val body = req.body(PlayProtocolLimits.MAX_BODY)
             ?: return MiniHttp.json(out, if (req.header("content-length") == null) 411 else 413, """{"error":"corps absent ou trop gros"}""")
-        var c = find(req)
+        var c = existing
         var created = false
         if (c == null) {
             if (cred(req) != null) return gone(req, out, "connexion terminée : reprenez avec resume")
@@ -133,15 +146,16 @@ class PlayFallbackController(private val cfg: PlayConfig, val hub: PlayHub, priv
     }
 
     /** `GET /play/events` : flux SSE jusqu'à la fin de la session ou le départ du client. */
-    fun events(req: HttpReq, socket: Socket, out: OutputStream) {
+    fun events(req: HttpReq, socket: Socket, out: OutputStream, ip: String) {
         if (!origin.allowsRead(req.header("origin"))) return MiniHttp.json(out, 403, """{"error":"origine refusée"}""")
         val c = find(req) ?: return gone(req, out, "connexion inconnue ou terminée")
         socket.soTimeout = 0
+        if (!holdTake(ip)) return tooManyHeld(out)
         val gen = c.attachStream(socket)
+        try {
         out.write(("HTTP/1.1 200 OK\r\nContent-Type: text/event-stream; charset=utf-8\r\nCache-Control: no-store\r\nX-Accel-Buffering: no\r\nConnection: close\r\n" +
             "X-Content-Type-Options: nosniff\r\nReferrer-Policy: no-referrer\r\n\r\nretry: 2000\n\n").toByteArray(Charsets.ISO_8859_1))
         out.flush()
-        try {
             while (c.streamGen == gen && !c.isDeadNow()) {
                 c.touch()
                 val batch = c.drain(gen, cfg.pollMs)
@@ -150,16 +164,17 @@ class PlayFallbackController(private val cfg: PlayConfig, val hub: PlayHub, priv
                 for (m in batch) sb.append("id: ").append(m.idx).append("\nevent: ").append(typeOf(m.text)).append("\ndata: ").append(m.text).append("\n\n")
                 out.write(sb.toString().toByteArray(Charsets.UTF_8)); out.flush()
             }
-        } catch (_: IOException) {}
+        } catch (_: IOException) {} finally { holdDrop(ip) }
     }
 
     /** `GET /play/state?since=` : long-poll de 25 s ; `{"msgs":[…],"next":n}`. */
-    fun state(req: HttpReq, out: OutputStream) {
+    fun state(req: HttpReq, out: OutputStream, ip: String) {
         if (!origin.allowsRead(req.header("origin"))) return MiniHttp.json(out, 403, """{"error":"origine refusée"}""")
         val c = find(req) ?: return gone(req, out, "connexion inconnue ou terminée")
         val since = req.query["since"]?.toLongOrNull() ?: 0L
         c.touch()
-        val items = c.poll(since, cfg.pollMs) ?: return gone(req, out, "connexion terminée")
+        if (!holdTake(ip)) return tooManyHeld(out)
+        val items = try { c.poll(since, cfg.pollMs) } finally { holdDrop(ip) } ?: return gone(req, out, "connexion terminée")
         c.touch()
         val next = items.lastOrNull()?.idx ?: since
         MiniHttp.json(out, 200, """{"msgs":[${items.joinToString(",") { it.text }}],"next":$next}""")
@@ -177,4 +192,4 @@ class PlayFallbackController(private val cfg: PlayConfig, val hub: PlayHub, priv
 }
 
 /** Limites propres au repli HTTP. */
-object PlayProtocolLimits { const val MAX_BODY = 4_096 }
+object PlayProtocolLimits { const val MAX_BODY = castbridge.core.quiz.online.PlayProtocol.MAX_CREATE_BYTES + 512 }   // M-1 : un create de la TV (activation) passe par ce POST

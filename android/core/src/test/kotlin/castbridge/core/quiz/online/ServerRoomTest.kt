@@ -107,22 +107,23 @@ class ServerRoomTest {
         }
     }
 
+    // audit Opus M-9 : la question 1 s'ouvre 1,5 s après le départ (toutes les heures de ce test sont décalées de 1 500 ms)
     @Test fun repeatedActIsOneEffectClosedAndFutureQuestionsAreRefused() {
         val r = room(); r.host(); r.join("c0", "Awa"); r.join("c1", "Bello"); r.act("tv", "mode", arg = "DUEL"); r.act("tv", "start", arg = "5")
         val d = r.table(0).room.duel!!
         val q0 = d.question
-        assertEquals("OK", r.act("c0", "answer", q0.id, 1, now = 1_000).ack())
-        assertEquals("SAME", r.act("c0", "answer", q0.id, 1, now = 1_100).ack()); assertEquals("SAME", r.act("c0", "answer", q0.id, 1, now = 1_200).ack())
+        assertEquals("OK", r.act("c0", "answer", q0.id, 1, now = 2_500).ack())
+        assertEquals("SAME", r.act("c0", "answer", q0.id, 1, now = 2_600).ack()); assertEquals("SAME", r.act("c0", "answer", q0.id, 1, now = 2_700).ack())
         assertEquals(1, r.table(0).answeredCount(), "rejoué ×3 ⇒ un seul effet")
-        assertEquals("FORBIDDEN", r.act("c0", "answer", q0.id, 2, now = 1_300).ack(), "une seule réponse définitive")
+        assertEquals("FORBIDDEN", r.act("c0", "answer", q0.id, 2, now = 2_800).ack(), "une seule réponse définitive")
         val future = d.questions[1].id
-        assertEquals("UNKNOWN_QUESTION", r.act("c1", "answer", future, 0, now = 1_400).ack(), "question future : jamais acceptée")
-        assertEquals("UNKNOWN_QUESTION", r.act("c1", "answer", "q-inconnue", 0, now = 1_400).ack())
+        assertEquals("UNKNOWN_QUESTION", r.act("c1", "answer", future, 0, now = 2_900).ack(), "question future : jamais acceptée")
+        assertEquals("UNKNOWN_QUESTION", r.act("c1", "answer", "q-inconnue", 0, now = 2_900).ack())
         assertEquals(1, r.table(0).answeredCount())
-        r.act("c1", "answer", q0.id, 0, now = 2_000)         // tout le monde a répondu ⇒ clôture
+        r.act("c1", "answer", q0.id, 0, now = 3_500)         // tout le monde a répondu ⇒ clôture
         assertEquals(QuizDuel.Phase.REVEAL, d.phase)
-        assertEquals("CLOSED", r.act("c1", "answer", q0.id, 0, now = 2_100).ack(), "question fermée")
-        var now = 2_100L; while (r.table(0).room.duel!!.index == 0 && now < 60_000) { now += 50; r.tick(now) }
+        assertEquals("CLOSED", r.act("c1", "answer", q0.id, 0, now = 3_600).ack(), "question fermée")
+        var now = 3_600L; while (r.table(0).room.duel!!.index == 0 && now < 60_000) { now += 50; r.tick(now) }
         assertEquals("CLOSED", r.act("c1", "answer", q0.id, 0, now = now).ack(), "question passée : fermée")
     }
 
@@ -131,7 +132,7 @@ class ServerRoomTest {
             val r = room(); r.host(); r.join("c0", "Awa"); r.join("c1", "Bello"); r.act("tv", "mode", arg = "DUEL"); r.act("tv", "start", arg = "5")
             r.rtt.sample("c0", rtt)
             val q = r.table(0).room.duel!!.question
-            assertEquals("OK", r.act("c0", "answer", q.id, q.answer, now = 10_000).ack())
+            assertEquals("OK", r.act("c0", "answer", q.id, q.answer, now = 11_500).ack())   // ouverture à 1 500 (M-9) : 10 000 ms après l'ouverture
             return r.table(0).lastElapsedMs("c0")!!
         }
         assertEquals(10_000, elapsedFor(0)); assertEquals(9_900, elapsedFor(600), "RTT plafonné à 200 ms : 100 ms rendus"); assertEquals(9_900, elapsedFor(2_000))
@@ -144,7 +145,7 @@ class ServerRoomTest {
             r.join("c1", "Bello"); r.act("tv", "mode", arg = "DUEL"); r.act("tv", "start", arg = "5")
             r.rtt.sample("tv", 300)
             val q = r.table(0).room.duel!!.question
-            val ack = r.handle(sender, ClientMsg.RelayAct(j.token, q.id, q.answer, local, 5), 10_000).ack()
+            val ack = r.handle(sender, ClientMsg.RelayAct(j.token, q.id, q.answer, local, 5), 11_500).ack()   // 10 000 ms après l'ouverture (1 500, M-9)
             return ack to r.table(0).lastElapsedMs("tv")
         }
         assertEquals("OK" to 9_900L, run(9_900), "max(9 900, 9 700)")

@@ -74,13 +74,22 @@ public class PlayTicketService {
     public Issued issue(Device device, String deviceCode, long now) { return issue(device, deviceCode, now, null); }
 
     /** [address] = client address (null: no per-address limit). Also 403 for a non-TV device, 403 for a code already linked to more than 2 devices in 24 h or not the device's first code. */
-    public Issued issue(Device device, String deviceCode, long now, String address) {
+    public Issued issue(Device device, String deviceCode, long now, String address) { return issue(device, deviceCode, now, address, null); }
+
+    /**
+     * [installKey] = the TV install key (raw Ed25519 public key, 32 bytes, base64; audit Opus H-3). The first request for a code PINS code to key (in memory, like the device link); another key, or no key once pinned,
+     * is a 403; the ticket then carries {@code ik} = SHA-256 (hex) of the key, and the play service requires a proof of possession bound to the ticket. A malformed key is a 400. Null: legacy TV (no pin, no {@code ik}).
+     */
+    public Issued issue(Device device, String deviceCode, long now, String address, String installKey) {
         if (!key.enabled()) throw new ApiException(HttpStatus.SERVICE_UNAVAILABLE, "Ticket désactivé : le jeu en ligne n'est pas disponible sur ce serveur");
         if (device.blocked) throw new ApiException(HttpStatus.FORBIDDEN, "Cet appareil est bloqué par l'administrateur");
         String code = DeviceIdentity.parseCode(deviceCode);
         if (code == null) throw ApiException.badRequest("Code d'appareil invalide : 16 caractères au format XXXX-XXXX-XXXX-XXXX, avec son caractère de contrôle");
         if (!"tv".equals(device.app)) throw new ApiException(HttpStatus.FORBIDDEN, "Seule une TV CastBridge-TV peut ouvrir une salle en ligne");
+        String ik = installKey == null ? null : installHash(installKey);
+        checkPin(code, ik);                 // a refused key never uses up one of the code's two device slots
         link(device.publicId, code, now);
+        commitPin(code, ik);                // pinned only once the request is otherwise accepted
         if (address != null) count(perAddress, addressKey(address), perAddressPerHour, now, "Trop de demandes de ticket depuis cette adresse : réessayez dans une heure");
         reserve(device.publicId, now);
 
@@ -92,6 +101,7 @@ public class PlayTicketService {
         payload.put("blocked", false);
         payload.put("country", device.country == null ? "" : device.country);
         payload.put("deviceCode", code);
+        if (ik != null) payload.put("ik", ik);
         payload.put("iat", now);
         payload.put("exp", now + LIFE_MS);
         payload.put("jti", HexFormat.of().formatHex(jti));
@@ -136,6 +146,27 @@ public class PlayTicketService {
         seen.put(deviceId, now);
         if (first == null) firstCode.put(deviceId, code);
         for (Map<String, ?> m : List.of(firstCode, codeDevices)) if (m.size() > maxDevices) m.remove(m.keySet().iterator().next());
+    }
+
+    /** Pinned install-key fingerprint per device code (audit Opus H-3). Bounded, least recently used leaves first; lost at restart (documented). */
+    private final Map<String, String> pinned = new LinkedHashMap<>(16, 0.75f, true);
+
+    /** SHA-256 (hex) of a raw 32-byte Ed25519 key given in base64; 400 for anything else. */
+    static String installHash(String installKey) {
+        byte[] raw;
+        try { raw = Base64.getDecoder().decode(installKey.trim()); } catch (IllegalArgumentException e) { raw = null; }
+        if (raw == null || raw.length != 32) throw ApiException.badRequest("Clé d'installation invalide : 32 octets en base64 attendus");
+        try { return HexFormat.of().formatHex(java.security.MessageDigest.getInstance("SHA-256").digest(raw)); } catch (java.security.NoSuchAlgorithmException e) { throw new IllegalStateException(e); }
+    }
+
+    private synchronized void checkPin(String code, String ik) {
+        String have = pinned.get(code);
+        if (have != null && ik == null) throw new ApiException(HttpStatus.FORBIDDEN, "Cette TV a déjà une clé d'installation : mettez CastBridge-TV à jour");
+        if (have != null && !have.equals(ik)) throw new ApiException(HttpStatus.FORBIDDEN, "Ce code d'appareil est lié à une autre clé d'installation");
+    }
+
+    private synchronized void commitPin(String code, String ik) {
+        if (ik != null && !pinned.containsKey(code)) { pinned.put(code, ik); if (pinned.size() > maxDevices) pinned.remove(pinned.keySet().iterator().next()); }
     }
 
     /** Hand-written JSON of simple values (no library: field order is the signed order, and no user text is ever put in it). */

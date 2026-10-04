@@ -25,7 +25,7 @@ class WebClosedTest {
     private val servers = ArrayList<PlayServer>()
     @AfterTest fun stop() { servers.forEach { it.close() } }
 
-    private fun server(web: Boolean = false) = PlayServer(PlayConfig(port = 0, trustedProxies = LOOPBACK, ticketPubKeys = listOf(TestKeys.pub), trustedKeys = TestRights.trustedKeys,
+    private fun server(web: Boolean = false) = PlayServer(PlayConfig(requireProof = false, port = 0, trustedProxies = LOOPBACK, ticketPubKeys = listOf(TestKeys.pub), trustedKeys = TestRights.trustedKeys,
         createsPerIpPerHour = 10_000, webPlay = web, revocationsMode = RevocationsMode.OFF)).also { it.start(); servers += it }
 
     private fun get(srv: PlayServer, path: String, vararg headers: Pair<String, String>): HttpResponse<String> =

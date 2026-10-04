@@ -32,10 +32,14 @@ sealed class PlayTile {
 object PlayGate {
     const val MSG_NO_INTERNET = "Connexion Internet requise"
     const val MSG_SERVICE_DOWN = "Quiz en ligne : service indisponible"
+    const val MSG_ACTIVATION_FILE = "Partie Internet : activez la TV avec le fichier d'activation"
+    /** Dite au menu quand le service tourne avec `CASTBRIDGE_PLAY_REVOCATIONS=off` (POC) : une TV révoquée y joue encore. */
+    const val NOTE_REVOCATIONS_OFF = "Service d'essai : les activations révoquées ne sont pas encore vérifiées."
 
-    fun tile(flagOn: Boolean, edition: HostEdition, hasInternet: Boolean, childProfile: Boolean, clockDoubt: Boolean = false, serviceUp: Boolean? = null): PlayTile = when {
+    fun tile(flagOn: Boolean, edition: HostEdition, hasInternet: Boolean, childProfile: Boolean, clockDoubt: Boolean = false, serviceUp: Boolean? = null, verifiableActivation: Boolean = true): PlayTile = when {
         !flagOn -> PlayTile.Hidden
         edition == HostEdition.NONE -> PlayTile.Blocked(PlayRules.MSG_ACTIVATE)
+        !verifiableActivation -> PlayTile.Blocked(MSG_ACTIVATION_FILE)   // M-4 : même règle que le service (clé courte invérifiable)
         clockDoubt -> PlayTile.Blocked(TvAccess.CHECK_CLOCK_LABEL)
         childProfile -> PlayTile.Blocked(PlayRules.MSG_CHILD)
         !hasInternet -> PlayTile.Blocked(MSG_NO_INTERNET)

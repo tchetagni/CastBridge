@@ -14,7 +14,7 @@
 #   CASTBRIDGE_PLAY_REVOCATIONS_URL      OBLIGATOIRE en production : https://bridge.sti-cm.com/api/v1/revocations (ou http://castbridge-api:8080/... sur le réseau interne : la liste est signée)
 #   CASTBRIDGE_PLAY_REVOCATIONS_FILE     /var/lib/castbridge-play/revocations.txt : dans le volume inscriptible play-state ci-dessous (le conteneur est en lecture seule)
 #   CASTBRIDGE_PLAY_TICKET_PUBKEY        clé PUBLIQUE des tickets (sans elle, aucune salle)
-#   CASTBRIDGE_PLAY_TRUSTED_KEYS         clé PUBLIQUE du SERVEUR (celle qui signe la liste de révocations : portée REVOKE) : voir docs/PLAY-OPS.md § 4.2
+#   CASTBRIDGE_PLAY_TRUSTED_KEYS         = la liste des clés de confiance des BUILDS TV (avec leurs portées) + la clé PUBLIQUE du serveur (REVOKE) : tools/play/trusted-keys-from-tv.py ; docs/PLAY-OPS.md § 4.0
 #   CASTBRIDGE_PLAY_ORIGINS              https://bridge.sti-cm.com
 #   CASTBRIDGE_PLAY_CREATES_PER_IP_HOUR / CASTBRIDGE_PLAY_CREATES_PER_IDENTITY_DAY / CASTBRIDGE_PLAY_CREATES_PER_48_HOUR   créations de salle (20 / 30 / 200 par défaut)
 #   CASTBRIDGE_PLAY_MAX_PER_IP (24) / CASTBRIDGE_PLAY_MAX_PER_48 (512) / CASTBRIDGE_PLAY_MAX_PER_IP_SHARED (64)             connexions ouvertes par adresse, par /48, adresse partagée (classe)

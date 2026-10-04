@@ -53,7 +53,7 @@ class RelayAuthority(
         val (welcome, error) = a.relayJoin(roomCode, clean, device)
         if (welcome == null) return QuizRoom.JoinResult(when (error?.reason) {
             PlayReason.PLAY_ROOM_FULL.name -> QuizRoom.Join.FULL
-            PlayProtocol.BAD_REQUEST -> QuizRoom.Join.BAD_NAME
+            PlayProtocol.BAD_REQUEST, PlayReason.BAD_NAME.name -> QuizRoom.Join.BAD_NAME   // B-1 : un pseudonyme refusé par le service se dit « choisissez un autre nom »
             else -> QuizRoom.Join.CLOSED
         })
         synchronized(lock) {

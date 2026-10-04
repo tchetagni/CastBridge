@@ -15,7 +15,9 @@ object MessageSchema {
 
     /** Décode un message client ; jamais d'exception. */
     fun decode(text: String): PlayCodec.Decoded {
-        if (text.length > PlayProtocol.MAX_MESSAGE_BYTES) return bad("message trop long")
+        // M-1 : un `create` ou le `join` d'une TV porte une activation `cbx1` (737 à 2 300 caractères mesurés) : plafond explicite de 8 192 ; tous les autres messages gardent 2 048
+        val cap = if (text.startsWith("{\"t\":\"create\"") || text.startsWith("{\"t\":\"join\"")) PlayProtocol.MAX_CREATE_BYTES else PlayProtocol.MAX_MESSAGE_BYTES
+        if (text.length > cap) return bad("message trop long")
         shape(text)?.let { return bad(it) }
         return try { PlayCodec.decodeClient(text) } catch (_: Throwable) { bad("message illisible") }
     }

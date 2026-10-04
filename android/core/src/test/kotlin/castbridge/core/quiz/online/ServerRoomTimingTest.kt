@@ -46,8 +46,8 @@ class ServerRoomTimingTest {
         for ((scope, expectedGap) in listOf(PlayScope.INTERNET to 1_500L, PlayScope.LAN to 0L, PlayScope.TV_ONLY to 0L)) {
             val a = announcements(scope, 4)
             assertEquals(4, a.size, "$scope : une annonce par question, aucune après la dernière")
-            assertEquals(0L, a[0].second - a[0].first, "$scope : la première question n'a pas de délai")
-            for (i in 1 until a.size) assertEquals(expectedGap, a[i].second - a[i].first, "$scope : délai avant la question ${i + 1}")
+            // audit Opus M-9 : la première question a le même délai que les autres
+            for (i in 0 until a.size) assertEquals(expectedGap, a[i].second - a[i].first, "$scope : délai avant la question ${i + 1}")
         }
     }
 
@@ -154,7 +154,7 @@ class ServerRoomTimingTest {
         for ((idx, byConn) in s.seenOpens) {
             assertEquals(8, byConn.size, "question $idx : annonce reçue par les 8 clients")
             assertEquals(1, byConn.values.toSet().size, "question $idx : un seul opensAt pour tous : $byConn")
-            val expectedGap = if (idx == 0) 0L else PlayTiming.INTER_QUESTION_GAP_MS
+            val expectedGap = PlayTiming.INTER_QUESTION_GAP_MS   // M-9 : la première question aussi
             assertEquals(s.announcedAt[idx]!! + expectedGap, byConn.values.first(), "question $idx : opensAt = annonce + délai")
         }
         // 2) aucune réponse acceptée avant opensAt ; le temps compté part de opensAt
@@ -164,11 +164,6 @@ class ServerRoomTimingTest {
         // 3) équité : jamais compté plus rapide que la vérité ; perte bornée (0 si rtt/2 ≤ 400 ms, sinon rtt/2 − 400) dès que le délai a permis de se synchroniser
         for (a in log) {
             val p = s.conns.indexOf(a.conn)
-            if (a.questionIndex == 0) {
-                // pas de délai avant la première : on voit la question rtt/2 plus tard (c'est justement ce que le délai évite ensuite)
-                assertTrue(a.elapsedMs >= thinks[p], "q0 joueur $p : compté ${a.elapsedMs} < vrai ${thinks[p]} (gain par la latence)")
-                continue
-            }
             val bound = maxOf(0L, rtts[p] / 2L - minOf(rtts[p].toLong(), RttBook.MAX_COMPENSATION_RTT_MS) / 2L)   // audit I2 : compensation plafonnée à 100 ms
             assertTrue(a.elapsedMs >= thinks[p], "q${a.questionIndex} joueur $p : compté ${a.elapsedMs} < vrai ${thinks[p]} (gain par la latence)")
             assertTrue(a.elapsedMs <= thinks[p] + bound, "q${a.questionIndex} joueur $p : compté ${a.elapsedMs}, vrai ${thinks[p]}, perte permise $bound")
