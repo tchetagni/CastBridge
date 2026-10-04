@@ -154,6 +154,9 @@ public final class DeviceIdentity {
                 String h = p[1].trim().toLowerCase(java.util.Locale.ROOT);
                 if (!FP.matcher(h).matches()) throw ApiException.badRequest("Demande d'appareil : empreinte invalide pour " + f.name() + " (32 chiffres hexadécimaux)");
                 if (fp.put(f, h) != null) throw ApiException.badRequest("Demande d'appareil : facteur " + f.name() + " en double");
+            } else if (line.startsWith("install=")) {
+                // la TV joint sa clé d'installation (preuve de possession) : tolérée et IGNORÉE, l'identité ne dépend ni de son contenu ni de sa présence (constat du 2026-10-04, additif)
+                continue;
             } else {
                 throw ApiException.badRequest("Demande d'appareil : ligne inattendue « " + AuditLog.clip(line, 30) + " »");
             }

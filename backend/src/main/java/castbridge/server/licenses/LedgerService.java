@@ -276,12 +276,27 @@ public class LedgerService {
     private Result applyLicense(RegistryEvent e) {
         Map<String, String> f = e.fields();
         Integer n = jdbc.queryForObject("SELECT COUNT(*) FROM lic_license WHERE license_id = ?", Integer.class, f.get("license"));
-        if (n != null && n > 0) return Result.noop(); // the first event of a licence wins
+        if (n != null && n > 0) return amendReported(e, f); // the first event of a licence wins
         long client = placeholderClient();
         Instant now = Instant.now();
         jdbc.update("INSERT INTO lic_license (license_id, client_id, kind, state, seats_allowed, start_at, end_at, grace_days, transfer_cap, created_by, created_at, updated_at)"
                         + " VALUES (?,?,'PAID','ACTIVE',?,?,NULL,?,?,?,?,?)", f.get("license"), client, Integer.parseInt(f.get("seats")), LicenseService.ts(Instant.ofEpochMilli(e.at())), props.defaultGraceDays(),
                 Integer.parseInt(f.getOrDefault("maxTransfersPerYear", Integer.toString(props.defaultTransferCap()))), "import:" + trusted.nameOf(e.kid()), LicenseService.ts(now), LicenseService.ts(now));
+        return Result.applied();
+    }
+
+    /**
+     * The licence already exists. When it was opened by a notified activation ({@code created_by = report:…}, one seat because the token does not say more) and the event is signed by a
+     * trusted tool, the registry RAISES the seat count to the tool's (never lowers it): avis puis registre et registre puis avis donnent le même état (W23-B § 3.6). Anything else: the
+     * first event wins, nothing changes.
+     */
+    private Result amendReported(RegistryEvent e, Map<String, String> f) {
+        List<Map<String, Object>> rows = jdbc.queryForList("SELECT id, license_id, seats_allowed, created_by FROM lic_license WHERE license_id = ? FOR UPDATE", f.get("license"));
+        if (rows.isEmpty() || !String.valueOf(rows.get(0).get("created_by")).startsWith(ReportedActivationRegistrar.CREATED_BY_PREFIX) || trusted.find(e.kid()) == null) return Result.noop();
+        int wanted = Integer.parseInt(f.get("seats")), current = ((Number) rows.get(0).get("seats_allowed")).intValue();
+        if (wanted <= current) return Result.noop();
+        jdbc.update("UPDATE lic_license SET seats_allowed = ?, updated_at = ?, version = version + 1 WHERE id = ?", wanted, LicenseService.ts(Instant.now()), ((Number) rows.get(0).get("id")).longValue());
+        audit.record(new Actor("registry-import", Role.OWNER, "system", true), "LICENSE_SEATS_FROM_REGISTRY", "LICENSE", f.get("license"), null, Map.of("from", current, "to", wanted, "kid", e.kid()));
         return Result.applied();
     }
 
@@ -390,6 +405,8 @@ public class LedgerService {
     }
 
     private void recordIssuance(LicenseService.LicenseRow l, Long seatPk, String seatId, String deviceCode, RegistryEvent e, Map<String, String> f, Instant at) {
+        // the same emission already known through a notified activation (source REPORT): the tool's registry DECLARES it (lifts the catch-up retention, W23-B § 3.6)
+        jdbc.update("UPDATE lic_issuance SET source = 'IMPORT' WHERE license_pk = ? AND nonce = ? AND kid = ? AND source = 'REPORT'", l.id(), f.get("nonce"), e.kid());
         try {
             jdbc.update("INSERT INTO lic_issuance (license_pk, seat_pk, seat_id, device_code, kind, subject, kid, nonce, issued_at, not_before, not_after, issuer, channel, token_fingerprint, source)"
                             + " VALUES (?,?,?,?,?,?,?,?,?,NULL,?,?,?,?,'IMPORT')", l.id(), seatPk, seatId, deviceCode, f.get("kind").toUpperCase(java.util.Locale.ROOT), f.get("subject"), e.kid(), f.get("nonce"),

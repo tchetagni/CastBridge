@@ -64,7 +64,9 @@ public class GrantService {
     }
 
     /** @param granted nombre de tranches NOUVELLES inscrites par cet appel ; @param boundOther l'identité est liée à un autre appareil API (lecture permise, sorties refusées plus tard) */
-    public record Outcome(String identity, Standing standing, int granted, boolean boundOther) {}
+    public record Outcome(String identity, Standing standing, int granted, boolean boundOther, int held) {
+        public Outcome(String identity, Standing standing, int granted, boolean boundOther) { this(identity, standing, granted, boundOther, 0); }
+    }
 
     /** Une licence lue, avec ses intervalles ACTIFS figés. */
     record Resolved(LicenseView view, List<EditionSpan> active) {}
@@ -139,7 +141,7 @@ public class GrantService {
             repo.setAnchorIfAbsent(identity, st.anchor());
             anchor = repo.identity(identity).orElseThrow().anchorAt();
         }
-        int granted = 0;
+        int granted = 0, held = 0;
         WalletPolicy policy = policies.get();
         List<EditionSpan> superSpans = reading.spans().stream().filter(s -> s.edition() == Edition.SUPER).toList();
         // essai : grille d'identité, jamais une période qu'une licence de cette identité couvre déjà
@@ -157,8 +159,12 @@ public class GrantService {
             List<EditionSpan> spans = new ArrayList<>(r.active());
             spans.addAll(superSpans);
             Set<String> already = repo.grantKeysWithPrefix("grant:lic:" + id + ":");
+            // licence connue seulement par la notification d'une activation hors ligne : limite de rattrapage (W23-B § 5.2) ; les autres licences n'ont aucune limite, comme avant
+            LicenseFacts.Notification note = licenses.notification(id);
+            Set<String> heldPeriods = new java.util.HashSet<>();
             for (GrantSchedule.Due due : GrantSchedule.due("lic:" + id, policy, r.view().startAt(), spans, already, now)) {
                 boolean open = due.key().endsWith(OPEN_SUFFIX);
+                Instant periodStart = r.view().startAt();
                 if (open) {
                     if (repo.identity(identity).orElseThrow().openedUnlimited()) continue;   // une seule ouverture par identité, quelle que soit la licence
                 } else {
@@ -166,16 +172,24 @@ public class GrantService {
                     if (!m.find()) continue;
                     int k = Integer.parseInt(m.group(1));
                     if (k == 0 && r.view().endAt() == null) continue;                            // « 5000 et 50 d'abord » : la première tranche d'une illimitée est due à ancre + 1 période
-                    Instant start = r.view().startAt().plus(Duration.ofDays(policy.periodDays()).multipliedBy(k));
-                    if (coveredByEarlierLicence(mine, i, start)) continue;                      // deux licences superposées de la même TV : une seule tranche par période
+                    periodStart = r.view().startAt().plus(Duration.ofDays(policy.periodDays()).multipliedBy(k));
+                    if (coveredByEarlierLicence(mine, i, periodStart)) continue;                // deux licences superposées de la même TV : une seule tranche par période
+                }
+                if (note != null) {
+                    CatchUpPolicy.Verdict verdict = CatchUpPolicy.judge(periodStart, note.firstNotifiedAt(), note.declared());
+                    if (verdict != CatchUpPolicy.Verdict.PAY) {
+                        if (verdict == CatchUpPolicy.Verdict.HELD) heldPeriods.add(open ? "open" : "p" + periodStart.toEpochMilli());
+                        continue;
+                    }
                 }
                 if (!ledger.post(due.toTxn(identity), "system", identity, null).replayed()) granted++;
                 if (open) repo.markOpenedUnlimited(identity);
             }
+            held += heldPeriods.size();
         }
         Instant trialEnd = reading.spans().stream().filter(sp -> sp.edition() == Edition.TRIAL && sp.endExclusive() != null).map(EditionSpan::endExclusive).max(Instant::compareTo).orElse(null);
         repo.touchSync(identity, st.ed(), reading.superKey(), trialEnd, now);
-        return new Outcome(identity, st.withAnchor(anchor), granted, row.apiDeviceId() != apiDeviceId);
+        return new Outcome(identity, st.withAnchor(anchor), granted, row.apiDeviceId() != apiDeviceId, held);
     }
 
     private static Instant periodStart(String key, Instant anchor, WalletPolicy policy) {

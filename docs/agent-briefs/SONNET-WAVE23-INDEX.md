@@ -22,7 +22,7 @@ Source : `docs/coordination/DESIGN-W23B-NOTIFICATION-ACTIVATION-LICENCE-PORTEFEU
 
 | id | Cahier | Objet | Gel | Effort | Modèle | Audit Opus | Statut | Dépend de |
 |---|---|---|---|---|---|---|---|---|
-| w23-05 | `sonnet-w23-05-enregistrement-licence-par-notification-et-rattrapage.md` | avis vérifié ⇒ licence + poste ; correctif `end_at` ; identité de portefeuille à la notification ; rattrapage borné ; w23-05a (appel depuis `wallet/sync`) | serveur | L | sonnet 4.6 | **oui** | ATTEND w23-01 corrigé et fusionné | 01 |
+| w23-05 | `sonnet-w23-05-enregistrement-licence-par-notification-et-rattrapage.md` | avis vérifié ⇒ licence + poste ; correctif `end_at` ; identité de portefeuille à la notification ; rattrapage borné ; w23-05a (appel depuis `wallet/sync`) | serveur | L | sonnet 4.6 | **oui** | **FAIT en worktree (rapport `docs/agent-reports/sonnet-w23-05.md`, V64, MySQL 8.4 vert), audit Opus à faire ; reste : identité de portefeuille par avis, page de décision, journal signé w23-03** | 01 |
 | w23-06 | `sonnet-w23-06-avis-activation-scelle-recu-signe.md` | types `actnotice`, `receipt`, boîte à clé publique, route `/api/v1/activations/relay`, rapport v2, vecteurs | serveur + cœur | M | sonnet 4.6 | **oui** | ATTEND 05 (faux possibles) | 05 |
 | w23-04 | (amendé) | avis signé, voie directe v2, file `act`, reçus, états | **exception de gel** | S → M | sonnet 4.6 | **oui** | ATTEND 06 | 06 |
 | w21-07 | (amendé) | relais `act` montant, budget, remise des objets descendants à `OrdersRuntime` | — | +0,3 j | sonnet | échantillon | ATTEND w21-01b, 06 | 06 |

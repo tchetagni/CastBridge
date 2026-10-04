@@ -61,6 +61,25 @@ public class JdbcLicenseFacts implements LicenseFacts {
     }
 
     @Override
+    public Notification notification(String licenseId) {
+        if (!licensesEnabled) return null;
+        try {
+            Timestamp first = jdbc.queryForObject("SELECT MIN(r.registered_at) FROM lic_registration r JOIN lic_license l ON l.license_id = r.license_id WHERE r.license_id = ? AND l.created_by LIKE 'report:%' "
+                    + "AND r.status IN ('REGISTERED', 'ATTACHED') AND r.registered_at IS NOT NULL", Timestamp.class, licenseId);
+            if (first == null) return null;   // licence du propriétaire, du registre ou du serveur : aucune limite (comportement d'avant)
+            Long declared = jdbc.queryForObject("SELECT COUNT(*) FROM lic_registration WHERE license_id = ? AND declared = TRUE", Long.class, licenseId);
+            if (declared == null || declared == 0) {
+                declared = jdbc.queryForObject("SELECT COUNT(*) FROM lic_issuance i JOIN lic_license l ON l.id = i.license_pk JOIN lic_registration r ON r.license_id = l.license_id AND r.nonce = i.nonce AND r.kid = i.kid "
+                        + "WHERE l.license_id = ? AND i.source <> 'REPORT'", Long.class, licenseId);
+            }
+            return new Notification(first.toInstant(), declared != null && declared > 0);
+        } catch (DataAccessException e) {
+            log.warn("wallet : notification de licence illisible ({}) : aucune limite appliquée", e.getClass().getSimpleName());
+            return null;
+        }
+    }
+
+    @Override
     public List<StateEvent> history(String licenseId) {
         try {
             return jdbc.query("SELECT action, at FROM lic_audit WHERE target_type = 'LICENSE' AND target_id = ? AND action IN ('LICENSE_SUSPEND', 'LICENSE_RESUME', 'LICENSE_REVOKE', 'LICENSE_EXPIRE', 'LICENSE_EXTEND') "

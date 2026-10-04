@@ -1,6 +1,8 @@
 -- Retour arrière du module « licences » (V50..V52). Hors chemin Flyway : à lancer à la main, APRÈS une sauvegarde
 -- (backend/backup.sh), serveur arrêté. Perd toutes les données des licences ; n'affecte aucune table d'avant V50
 -- sauf les 4 colonnes ajoutées à admin_user. Ensuite : DELETE FROM flyway_schema_history WHERE version IN ('50','51','52');
+-- V64 (enregistrement des activations notifiées, W23-05) : sa table ne dépend d'aucune autre ; Ensuite aussi : DELETE FROM flyway_schema_history WHERE version = '64';
+DROP TABLE IF EXISTS lic_registration;
 ALTER TABLE admin_user DROP COLUMN totp_last_step;
 ALTER TABLE admin_user DROP COLUMN totp_secret_enc;
 ALTER TABLE admin_user DROP COLUMN totp_enabled;

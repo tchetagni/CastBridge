@@ -483,23 +483,23 @@ class ProductionUpgradeRehearsalTest {
             syncBound(port, auth, pubId, trialTv, install, Acts.trialDays(server, trialTv, now, 30));
             assertEquals(100, balanceOf(j, trialTv.code(), "NDEM"), "un second contact ne recrédite pas (idempotence)");
 
-            // TV de production : clé de production mais licence PAS encore enregistrée => « en attente », rien crédité ; licence enregistrée => crédit rétroactif
+            // TV de production : clé de production, AUCUNE licence enregistrée à la main. Changé avec w23-05 (constat du 2026-10-04) : avant, « licence en attente » et rien de crédité tant que le
+            // propriétaire n'avait pas saisi la licence ; maintenant la synchronisation avec la preuve de liaison ouvre elle-même la licence et le poste (clé du serveur, ce matériel) : illimitée,
+            // 5 000 NDEM + 50 MBOKO dès le premier contact, rejeu sans double versement
             Acts.Tv prodTv = Acts.Tv.random();
             JsonNode reg2 = JSON.readTree(post(port, "/api/v1/devices/register", null, "{\"installId\":\"" + UUID.randomUUID() + "\",\"app\":\"tv\",\"versionCode\":88,\"androidIdHash\":\"" + sha256("prod") + "\"}").body());
             String auth2 = "Bearer " + reg2.get("deviceToken").asText(), pubId2 = reg2.get("deviceId").asText();
             java.security.KeyPair install2 = WalletTestBase.pair();
             String act = Acts.production(server, prodTv, now, List.of());
             JsonNode pending = syncBound(port, auth2, pubId2, prodTv, install2, act);
-            assertTrue(pending.get("notices").toString().contains("LICENSE_PENDING"), pending.toString());
-            assertEquals(0, balanceOf(j, prodTv.code(), "NDEM"));
-            Timestamp start = Timestamp.from(Instant.now().minusSeconds(40L * 86_400));
-            j.update("INSERT INTO lic_license (license_id, client_id, kind, state, seats_allowed, start_at, end_at, grace_days, transfer_cap, created_by, created_at, updated_at) "
-                    + "VALUES ('lic-test', (SELECT id FROM lic_client LIMIT 1), 'PAID', 'ACTIVE', 1, ?, NULL, 14, 0, 'proprietaire-essai', NOW(6), NOW(6))", start);
-            j.update("INSERT INTO lic_seat (license_pk, seat_id, subject, device_code, factors, k, slot_no, state, first_seen, last_seen) VALUES ((SELECT id FROM lic_license WHERE license_id = 'lic-test'), ?, 'tv', ?, 'x', 1, 1, 'ACTIVE', NOW(6), NOW(6))",
-                    castbridge.server.licenses.WireActivation.defaultSeat("lic-test", prodTv.factors()), prodTv.code());
+            assertFalse(pending.get("notices").toString().contains("LICENSE_PENDING"), pending.toString());
+            assertEquals(1, j.queryForObject("SELECT COUNT(*) FROM lic_license WHERE license_id = 'lic-test' AND created_by LIKE 'report:%'", Long.class), "licence ouverte par la notification");
+            assertEquals(1, j.queryForObject("SELECT COUNT(*) FROM lic_seat WHERE device_code = ? AND state = 'ACTIVE'", Long.class, prodTv.code()));
+            assertEquals(5000, balanceOf(j, prodTv.code(), "NDEM"));
+            assertEquals(50, balanceOf(j, prodTv.code(), "MBOKO"));
             JsonNode paid = syncBound(port, auth2, pubId2, prodTv, install2, act);
             assertFalse(paid.get("notices").toString().contains("LICENSE_PENDING"), paid.toString());
-            assertTrue(balanceOf(j, prodTv.code(), "NDEM") >= 1000 && balanceOf(j, prodTv.code(), "MBOKO") >= 10, "tranches de production créditées après l'enregistrement de la licence");
+            assertEquals(5000, balanceOf(j, prodTv.code(), "NDEM"), "rejeu : aucun double versement");
 
             HttpResponse<String> rec = get(port, "/api/v1/admin/wallet/reconcile", admin);
             assertEquals(200, rec.statusCode());
