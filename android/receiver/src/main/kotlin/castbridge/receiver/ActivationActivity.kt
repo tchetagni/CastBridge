@@ -76,9 +76,10 @@ class ActivationActivity : Activity() {
         Thread {
             val res = ActivationCenter.scanFiles()
             val lines = ActivationCenter.lastReport
+            refreshDrop()
             h.post {
                 if (isFinishing || done) return@post
-                if (res == null) { if (lines.isNotEmpty() || manual) report.text = lines.joinToString("\n"); if (manual) { status.setTextColor(0xFFFF8A80.toInt()); status.text = "Aucune clé trouvée sur la clé USB." } }
+                if (res == null) { if (lines.isNotEmpty() || manual) report.text = lines.joinToString("\n"); if (manual) { status.setTextColor(0xFFFF8A80.toInt()); status.text = castbridge.core.tv.activation.ActivationLookupReport.noKeyHeadline(ActivationCenter.storageAccess(), ActivationCenter.ownPath()) } }
                 else {
                     report.text = lines.joinToString("\n")
                     status.setTextColor(0xFFB8C0D6.toInt()); status.text = LockedTexts.KEY_FOUND
@@ -135,6 +136,7 @@ class ActivationActivity : Activity() {
         if (upgrade) { col.addView(tv("Demande d'appareil complète (à donner à CastBridge) :", 16f, 0xFFB8C0D6.toInt())); col.addView(tv(ActivationCenter.requestText(), 13f, 0xFF7B849C.toInt(), mono = true)) }
         col.addView(tv(LockedTexts.WAYS, 18f, 0xFFB8C0D6.toInt()))
         LockedTexts.KEY_WAYS.forEach { col.addView(tv(it, 18f)) }
+        dropView = tv("", 16f, 0xFFF5B027.toInt()); col.addView(dropView); refreshDrop()
         val where = tv("", 15f, 0xFF7B849C.toInt())
         col.addView(where)
         Thread { val w = ActivationCenter.exportRequest(); h.post { if (w.isNotEmpty()) where.text = "Demande d'appareil complète écrite dans : " + w.joinToString(" · ") { it.substringAfter("/storage/").substringAfter("emulated/0/").take(70) } } }.start()
@@ -164,6 +166,11 @@ class ActivationActivity : Activity() {
 
     companion object { const val EXTRA_UPGRADE = "upgrade"; const val SCAN_EVERY_MS = 15_000L; private const val REQ_BUILT_IN = 81; private const val REQ_SYSTEM = 82 }
     private lateinit var report: TextView
+    private lateinit var dropView: TextView
+    /** The exact readable drop folder of every volume and the file names the app sees there (thread: lists folders). */
+    private fun refreshDrop() {
+        Thread { val l = castbridge.core.tv.activation.DropFolders.lines(ActivationCenter.dropFolders()); h.post { if (!isFinishing) dropView.text = l.joinToString("\n") } }.start()
+    }
 
     // ---- choosing the file by hand: the built-in explorer first (a poor box has no system picker), the system one if it exists; the file name does not matter ----
     private fun systemPickerIntent() = Intent(Intent.ACTION_OPEN_DOCUMENT).addCategory(Intent.CATEGORY_OPENABLE).setType("*/*").also { i ->

@@ -171,19 +171,20 @@ class ActivationLookupTest {
     }
 
     @Test fun `a different file name is never taken for the key`() {
-        // exact name only: a candidate list never contains activation.txt, and a folder holding only that file yields ABSENT plus a hint
+        // outside the own folder only the exact name is read; in the own folder activation.txt and activation_*.txt are (ActivationAccessTest), other names never
         assertTrue(cands().none { it.file.name != "activation" })
-        val fs = FakeFs(files = mapOf("${own.path}/activation.txt" to text("TOKEN")), dirs = mapOf(own.path to listOf("activation.txt")))
+        val fs = FakeFs(files = mapOf("${dl.path}/activation.txt" to text("TOKEN"), "${own.path}/notes.txt" to text("TOKEN")),
+            dirs = mapOf(dl.path to listOf("activation.txt"), own.path to listOf("notes.txt")))
         val o = run(fs)
-        assertFalse(o.accepted); assertFalse(fs.reads.any { it.endsWith("activation.txt") })
+        assertFalse(o.accepted); assertFalse(fs.reads.any { it.endsWith("activation.txt") || it.endsWith("notes.txt") })
         assertTrue(ActivationLookupReport.lines(o.facts).any { "renommez-le" in it })
     }
 
     @Test fun `screen text gives the three real ways`() {
         val w = castbridge.core.owner.LockedTexts.KEY_WAYS
         assertEquals(3, w.size)
-        assertTrue("Activer la TV" in w[0] && "Bluetooth" in w[0])
-        assertTrue("Choisir le fichier d'activation" in w[1] && "« activation »" in w[1] && "Download/CastBridge" in w[1] && ActivationLookup.OWN_DIR_TEXT in w[1])
+        assertTrue("Activer la TV" in w[0] && "Bluetooth" in w[0] && "tous les boîtiers" in w[0])
+        assertTrue("« activation »" in w[1] && "activation.txt" in w[1] && ActivationLookup.OWN_DIR_TEXT in w[1] && "Accès à tous les fichiers" in w[1])
         assertTrue("champ" in w[2])
     }
 }
