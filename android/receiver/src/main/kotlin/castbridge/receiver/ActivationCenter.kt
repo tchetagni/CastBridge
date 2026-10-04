@@ -5,6 +5,7 @@ import android.content.pm.PackageManager
 import android.os.Environment
 import android.util.Log
 import castbridge.core.owner.*
+import castbridge.core.tv.activation.*
 import castbridge.receiver.BuildConfig
 import java.io.File
 
@@ -147,17 +148,54 @@ object ActivationCenter {
         return r
     }
 
-    /** Looks for the `activation` file of the USB drive (Download/CastBridge/activation, Download/activation) and of the internal Download folder. */
+    /** Lines for the activation screen explaining what the last [scanFiles] saw (volumes, folders, file state); built by the pure `ActivationLookupReport`, never carries the key. */
+    @Volatile var lastReport: List<String> = emptyList()
+    private val scanning = java.util.concurrent.atomic.AtomicBoolean(false)
+
+    /**
+     * Looks for the `activation` file: `Download/CastBridge/activation` and `Download/activation` of every volume and of the public Download folder, then (always readable under scoped
+     * storage) `<Android/data/castbridge.receiver/files>/activation` and `.../CastBridge/activation` of every mounted volume. Read-only; the first accepted file wins; sets [lastReport].
+     */
     fun scanFiles(): ActivationResult? {
-        for (f in candidateFiles()) {
-            val bytes = runCatching { if (f.isFile && f.length() in 1..16_384) f.readBytes() else null }.getOrNull() ?: continue
-            // one line (CRLF, BOM, final newline tolerated); full token, grouped text or compact key: one verification path
-            val line = String(bytes, Charsets.UTF_8).removePrefix("\uFEFF").lineSequence().map { it.trim() }.firstOrNull { it.isNotEmpty() } ?: continue
-            val r = accept(Channel.MANUAL, line.toByteArray(Charsets.UTF_8))
-            if (r is ActivationResult.Accepted) return r
-            return r                      // a file was there but refused: say why
+        if (!scanning.compareAndSet(false, true)) return null            // one scan at a time (timer, mount event, button)
+        try {
+            val own = ownDirs()
+            val downloads = downloadDirs(own)
+            val volumes = own.mapNotNull { (d, id) -> id?.let { VolumeFact(it, readOnly(d)) } }.distinctBy { it.id }
+            var accepted: ActivationResult? = null; var refused: ActivationResult? = null
+            val o = ActivationLookup.run(ActivationLookup.candidates(downloads, own), ActivationLookup.dirsToList(downloads, own), volumes) { line ->
+                val r = accept(Channel.MANUAL, line.toByteArray(Charsets.UTF_8))
+                if (r is ActivationResult.Accepted) { if (accepted == null) accepted = r; Verdict.ACCEPTED }
+                else {
+                    if (refused == null) refused = r
+                    val reason = (r as ActivationResult.Rejected).reason
+                    when (reason) {
+                        Rejection.WRONG_DEVICE -> Verdict.WRONG_DEVICE
+                        Rejection.WINDOW_CLOSED, Rejection.NOT_YET_VALID -> Verdict.EXPIRED
+                        else -> Verdict.NOT_VALID
+                    }
+                }
+            }
+            lastReport = ActivationLookupReport.lines(o.facts)
+            return accepted ?: refused
+        } finally { scanning.set(false) }
+    }
+
+    private fun readOnly(d: File) = runCatching { Environment.getExternalStorageState(d) == Environment.MEDIA_MOUNTED_READ_ONLY }.getOrDefault(false)
+
+    /** The app's own folder on every volume (id = volume id such as A379-E209; null for the primary storage). */
+    private fun ownDirs(): List<Pair<File, String?>> =
+        app.getExternalFilesDirs(null).filterNotNull().map { d ->
+            val root = Regex("^/storage/([^/]+)/Android/").find(d.path)?.groupValues?.get(1)
+            d to (if (root == null || root == "emulated" || root == "self") null else root)
         }
-        return null
+
+    private fun downloadDirs(own: List<Pair<File, String?>>): List<Pair<File, String?>> {
+        val out = LinkedHashMap<String, Pair<File, String?>>()
+        Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS).let { out[it.path] = it to null }
+        own.forEach { (d, id) -> d.path.substringBefore("/Android/", "").takeIf { it.isNotEmpty() }?.let { out.putIfAbsent("$it/Download", File(it, "Download") to id) } }
+        runCatching { File("/storage").listFiles()?.filter { it.name != "emulated" && it.name != "self" }?.forEach { out.putIfAbsent("${it.path}/Download", File(it, "Download") to it.name) } }
+        return out.values.toList()
     }
 
     /**
@@ -167,18 +205,10 @@ object ActivationCenter {
     fun exportRequest(): List<String> {
         val text = requestText() + "\n"; val out = ArrayList<String>()
         val dirs = LinkedHashSet<File>()
-        candidateFiles().mapNotNull { it.parentFile }.forEach { d -> dirs += if (d.name == "CastBridge") d else File(d, "CastBridge") }
+        downloadDirs(ownDirs()).forEach { (d, _) -> dirs += File(d, "CastBridge") }
         app.getExternalFilesDirs(null).filterNotNull().forEach { dirs += it }
         for (d in dirs) { if (runCatching { d.mkdirs(); File(d, "device-request.txt").writeText(text); true }.getOrDefault(false)) out += File(d, "device-request.txt").path }
         return out
-    }
-
-    private fun candidateFiles(): List<File> {
-        val roots = LinkedHashSet<File>()
-        roots += Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS)
-        app.getExternalFilesDirs(null).forEach { d -> d?.path?.substringBefore("/Android/", "")?.takeIf { it.isNotEmpty() }?.let { roots += File(it, "Download") } }
-        runCatching { File("/storage").listFiles()?.forEach { roots += File(it, "Download") } }
-        return roots.flatMap { listOf(File(it, "CastBridge/${Activation.FILE_NAME}"), File(it, Activation.FILE_NAME)) }
     }
 
     // ---- persistence (private files; the activation is verified AS OF the day it was installed: its install window is not a validity limit) ----
