@@ -66,6 +66,9 @@ class PinStore(ctx: Context) {
     /** The TV answered « locked » for [sec] seconds: every code field of this TV says so until it ends. */
     fun locked(key: String?, sec: Long) { book.tvId(key, TvLinkManager.pinScope())?.let { locks.locked(it, sec) } }
 
+    /** Seconds left of the TV's lockout for [key] (every code field shares it), or null. */
+    fun lockLeft(key: String?): Long? = locks.left(book.tvId(key, TvLinkManager.pinScope()))
+
     /** What a screen should do for [key] right now ([CredentialDecision]): token, kept code, wait (trusted link renewing, lockout), or ask the code with its cause. Pure: no write. */
     fun decide(key: String?): CredentialDecision.Choice {
         val scope = TvLinkManager.pinScope()

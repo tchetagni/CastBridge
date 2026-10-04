@@ -15,7 +15,25 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.material3.AlertDialog
 import androidx.compose.material3.Button
 import androidx.compose.material3.MaterialTheme
+import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material3.OutlinedButton
+import androidx.compose.material3.OutlinedTextField
+import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.rememberCoroutineScope
+import androidx.compose.runtime.setValue
+import androidx.compose.ui.focus.FocusRequester
+import androidx.compose.ui.focus.focusRequester
+import androidx.compose.ui.platform.LocalSoftwareKeyboardController
+import androidx.compose.ui.semantics.contentDescription
+import androidx.compose.ui.semantics.semantics
+import androidx.compose.ui.text.input.KeyboardType
+import androidx.compose.ui.text.input.PasswordVisualTransformation
+import castbridge.core.trust.PinEntry
+import castbridge.core.trust.PinEntryState
+import castbridge.core.trust.PinVerdict
+import castbridge.core.trust.TvAuthReply
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
@@ -56,6 +74,11 @@ import kotlinx.coroutines.withContext
 class OpenWithActivity : ComponentActivity() {
     /** The TV of the code (PIN) path as found on the network by the single check (its address, for the streaming part of « Copier et lire »). */
     @Volatile private var pinTvFound: Tv? = null
+    /** Bumped when a code was just kept (the dialog recomputes its choice) / when the window leaves the screen (the typed digits are wiped). */
+    private val pinRev = MutableStateFlow(0)
+    private val wipeTick = MutableStateFlow(0)
+
+    override fun onStop() { wipeTick.value++; super.onStop() }       // the typed code never survives the background
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -75,12 +98,14 @@ class OpenWithActivity : ComponentActivity() {
             CastTheme {
                 val link by TvLinkManager.state.collectAsState()
                 val check by pinCheck.collectAsState()
+                val rev by pinRev.collectAsState()
+                val wipe by wipeTick.collectAsState()
                 val session = (link as? LinkUi.Connected)?.session
                 val facts = SendFacts(
                     savedCount = TvLinkManager.saved.list().size, defaultName = TvLinkManager.saved.default()?.name,
                     stepView = when (val l = link) { is LinkUi.Connected -> l.view; is LinkUi.Status -> l.view; else -> null },
                     session = session != null, sessionName = session?.tv?.name, btOnly = session != null && session.base == null,
-                    pinTvName = pinTv, pinStored = pinTv != null && TvAuth.isUsable(pins.get(pinTv)), pinCheck = check)
+                    pinTvName = pinTv, pinStored = rev >= 0 && pinTv != null && TvAuth.isUsable(pins.get(pinTv)), pinCheck = check)
                 val choice = SendChoices.decide(facts)
                 // « Copier sur la TV et lire »: every state decision is CopyAndPlay's (this build does not learn the TV edition: UNKNOWN, the TV judges the copy)
                 val both = CopyAndPlay.decide(CopyAndPlay.Facts(CopyAndPlay.linkOf(facts, choice), ipRoute = session == null || session.base != null,
@@ -94,7 +119,13 @@ class OpenWithActivity : ComponentActivity() {
                             Text(choice.status, style = MaterialTheme.typography.bodyMedium)
                             choice.note?.let { Text(it, style = MaterialTheme.typography.bodySmall) }
                             androidx.compose.foundation.layout.Spacer(Modifier.height(8.dp))
-                            if (choice.action != SendAction.NONE)
+                            // the code is typed right here (never an extra step); the button of the old path stays for the other actions
+                            if (PinEntry.showsField(choice.action) && pinTv != null)
+                                PinEntryBox(pinTv, pins, wipe, verify = { code -> verifyPin(pinTv, code) }, onAccepted = { code ->
+                                    if (pins.put(pinTv, code)) { pinCheck.value = PinCheck.OK; pinRev.value++ }
+                                    else Toast.makeText(this@OpenWithActivity, "Le code n'a pas pu être gardé sur ce téléphone.", Toast.LENGTH_LONG).show()
+                                })
+                            else if (choice.action != SendAction.NONE)
                                 Button({ openApp(choice.action) }, Modifier.fillMaxWidth()) { Text(choice.action.label) }
                             // the three ways, most wanted first, each with its one-line explanation (castbridge.core.ux.SendWay: same words everywhere)
                             Button({ copyAndPlay(uri, name, size, both, session, pinTv, pins) }, Modifier.fillMaxWidth(), enabled = both !is CopyAndPlay.Decision.Disabled) { Text(both.label) }
@@ -147,6 +178,27 @@ class OpenWithActivity : ComponentActivity() {
                 }
             } finally { discovery.stop() }
         }
+    }
+
+    /**
+     * The one check of a typed code: the TV of the code path is found by its name, then the same authenticated request as the home screen
+     * ([TvClient.info]); sent once per call, the lock-out and the counters stay the TV's ([TvAuthReply]). Never logs the code.
+     */
+    private suspend fun verifyPin(tvName: String, code: String): PinVerdict {
+        val discovery = TvDiscovery(this)
+        discovery.start()
+        try {
+            val tv = withTimeoutOrNull(8000) { discovery.tvs.first { l -> l.any { it.name == tvName } } }?.firstOrNull { it.name == tvName } ?: return PinVerdict.Unreachable
+            pinTvFound = tv
+            val r = withContext(Dispatchers.IO) { runCatching { TvClient(tv.base, code).info() } }
+            if (r.isSuccess) return PinVerdict.Ok
+            val e = r.exceptionOrNull() as? TvClient.HttpError ?: return PinVerdict.Unreachable
+            return when (val k = TvAuthReply.of(e.code, e.message)) {
+                is TvAuthReply.Kind.Locked -> PinVerdict.Locked(k.retryAfterSec)
+                TvAuthReply.Kind.BadPin -> PinVerdict.BadPin
+                else -> PinVerdict.Unreachable
+            }
+        } finally { discovery.stop() }
     }
 
     /** Opens CastBridge on the CastBridge TV tab, on « Ajouter ma TV » or on the code entry (existing assistant). */
@@ -236,5 +288,50 @@ class OpenWithActivity : ComponentActivity() {
                 c.getColumnIndex(OpenableColumns.SIZE).takeIf { it >= 0 }?.let { size = c.getLong(it) } } } }
             return name to size
         }
+    }
+}
+
+/**
+ * The code (PIN) field of « Ouvrir avec CastBridge »: masked, numeric keyboard at once, checked on the last digit or « Valider ».
+ * Every decision is [PinEntry]'s (pure, tested); the typed digits live only in this composition (not saved, wiped on [wipe] = the window left the screen).
+ */
+@Composable
+private fun PinEntryBox(tv: String, pins: PinStore, wipe: Int, verify: suspend (String) -> PinVerdict, onAccepted: (String) -> Unit) {
+    val scope = rememberCoroutineScope()
+    var state by remember { mutableStateOf(PinEntry.start(pins.lockLeft(tv))) }
+    var typed by remember { mutableStateOf("") }
+    val focus = remember { FocusRequester() }
+    val keyboard = LocalSoftwareKeyboardController.current
+    val cs = MaterialTheme.colorScheme
+    val busy = state is PinEntryState.Checking || state is PinEntryState.Accepted
+    val locked = state is PinEntryState.Locked
+    LaunchedEffect(wipe) { typed = ""; state = PinEntry.clear(state) }
+    LaunchedEffect(Unit) { runCatching { focus.requestFocus(); keyboard?.show() } }
+    // a lock counts down with the TV's own memo; it ends when the TV says so
+    LaunchedEffect(locked) { while (locked) { delay(1000); state = PinEntry.tick(state, pins.lockLeft(tv)) } }
+    fun go() {
+        val next = PinEntry.submit(state)
+        if (next !is PinEntryState.Checking) return
+        state = next
+        val code = typed
+        scope.launch {
+            val v = verify(code)
+            typed = ""
+            state = PinEntry.result(state, v)
+            (state as? PinEntryState.Locked)?.let { pins.locked(tv, it.seconds) }
+            if (state is PinEntryState.Accepted) onAccepted(code)
+        }
+    }
+    Column(verticalArrangement = Arrangement.spacedBy(6.dp)) {
+        OutlinedTextField(typed, { v ->
+            val next = PinEntry.input(state, v)
+            typed = PinEntry.digitsOf(next); state = next
+            if (PinEntry.readyToCheck(next)) go()
+        }, Modifier.fillMaxWidth().focusRequester(focus).semantics { contentDescription = PinEntry.FIELD_DESCRIPTION },
+            singleLine = true, enabled = !busy && !locked, label = { Text(PinEntry.FIELD_LABEL) },
+            isError = state is PinEntryState.Wrong, visualTransformation = PasswordVisualTransformation(),
+            keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.NumberPassword))
+        PinEntry.message(state)?.let { Text(it, style = MaterialTheme.typography.bodySmall, color = if (state is PinEntryState.Checking) cs.onSurfaceVariant else cs.error) }
+        Button({ go() }, Modifier.fillMaxWidth(), enabled = PinEntry.readyToCheck(state)) { Text(PinEntry.SUBMIT_LABEL) }
     }
 }
