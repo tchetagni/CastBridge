@@ -53,6 +53,42 @@ Remarque : sur la barre cachée, GAUCHE/DROITE/HAUT/BAS cherchent comme avant et
 ### Diagnostic sans aucune touche
 Pendant 6 s après le début de la lecture, et à chaque changement d'affichage, une ligne discrète en haut à gauche (sous l'icône de copie) dit : « Affichage : <mode> · source WxH · dalle WxH · image WxH » (« image non appliquée » si aucune mise à l'échelle n'a eu lieu, « source inconnue » avant la piste vidéo ; `VideoFit.overlayLine`). La ligne se met à jour toute seule le temps qu'elle est visible. Le bouton « Infos » (ou la touche INFO) la ramène 6 s et ouvre la « Légende des icônes » ; « Infos techniques » ouvre l'ancienne fenêtre.
 
+## Options multimédia (wtv-01, 0.14.31)
+Règles pures : `C/tv/` (`ResumePolicy`, `SleepTimer`, `LoopAB`, `Bookmarks`, `PictureTuning` + `PerformanceGuard`, `AudioTuning`, `SubtitleStyle`, `NextEpisode`, `PlayerSeek`, `PlayerSettings`, `PlayerPrefs`), toutes testées (`PlayerOptionsTest`). Câblage : `PlayerExtras`, `PlayerPanel`, `PlayerActivity` (vérifié par compilation seulement). Réglages stockés localement, par fichier, avec la même clé `taille:nom` que l'affichage (`fm=`) : nouvelles clés `pc=` (image), `at=` (son), `st=` (sous-titres), `bm=` (marque-pages) ; les anciennes données se lisent inchangées. Aucun réseau, aucune télémétrie.
+
+### Touche → action, télécommande à 5 touches (haut, bas, gauche, droite, OK) + RETOUR
+| Touche | Barre cachée | Barre visible | Dans « Réglages du lecteur » |
+|---|---|---|---|
+| OK court | affiche la barre | le bouton actif agit | (valeur : change vers la droite ; action : s'exécute) |
+| OK long | ouvre le panneau « Réglages de lecture », dont la 1re ligne est **Réglages du lecteur** | — | — |
+| GAUCHE / DROITE | saut du pas choisi (10 s par défaut) ; appui long ou deux appuis rapides : trois fois le pas (30 s) | déplacent le focus | changent la valeur de la ligne (◀ ▶) |
+| HAUT / BAS | +60 s / -60 s | HAUT : +60 s ; BAS : ouvre le panneau | se déplacent dans la liste (tourne aux extrémités) |
+| RETOUR | arrête la lecture | cache la barre | ferme l'écran |
+| RETOUR ou OK pendant « Épisode suivant dans N s » | annule le compte à rebours | idem | — |
+
+Un appui tenu sur GAUCHE/DROITE ne fait plus qu'un seul grand saut (avant : un saut de 10 s à chaque répétition). Toujours disponibles quand la télécommande les a : MENU (panneau), INFO, CAPTIONS, AUDIO, suivant/précédent.
+
+### Les 10 fonctions et où les trouver (écran « Réglages du lecteur », par rubriques)
+1. **Reprise** : bibliothèque > OK sur une vidéo > « Reprendre à 55:04 » (par défaut) / « Recommencer » ; rien sous 30 s ni au-delà de 95 %.
+2. **Sauts** : Lecture > « Saut des flèches » 10/20/30 s ; « Vidéo suivante / précédente de la liste ».
+3. **Minuteur d'arrêt** : Lecture > 15, 30, 60, 90 min ou fin de la vidéo ; « Arrêt dans 14:59 » sur la barre ; fondu du son de 10 s puis PAUSE (la TV ne s'éteint jamais ; le minuteur « fin de la vidéo » coupe aussi la liste et l'épisode suivant).
+4. **Boucle A-B** (1er appui A, 2e appui B, 3e efface ; B avant A : échangés) et **marque-pages** (20 au plus par fichier, ajouter ici / aller à / supprimer).
+5. **Image** (tout à zéro par défaut, jamais de filtre au repos) : luminosité 50-150 %, contraste 50-150 %, saturation 0-200 %, gamma 50-300 % et désentrelacement forcé = filtres libVLC (la vidéo se rouvre à la même seconde) ; zoom 1x-3x, déplacement, rotation 90° = transformations de la vue (aucun coût de décodage) ; « Réinitialiser l'image ». **Garde de performance** : un filtre actif et plus de 10 % d'images perdues (au moins 120 images jugées) : les filtres se coupent seuls, « Filtres d'image coupés : la TV perdait des images ».
+6. **Son** : mode nuit (compresseur libVLC), amplification 100-200 % (avertissement au-delà de 100 %), « Vitesse sans changer la voix » (correction de hauteur, désactivée par défaut).
+7. **Sous-titres** : couleur, contour/ombre, position (0-40 % depuis le bas), encodage (automatique, UTF-8, Latin-1, Windows-1252, Latin-9, UTF-16), police ; aperçu. Un style non modifié n'ajoute aucune option libVLC.
+8. **Épisode suivant automatique** : à la fin d'une vidéo hors liste, la suivante du MÊME dossier (ordre naturel : Ep2 avant Ep10) démarre après 8 s, annulable ; réglage « Épisode suivant automatique » (oui par défaut).
+9. **Sous-titres du dossier** (déjà en place : `SubtitleFinder`) et **mémoire par fichier** de tous les réglages ; « comme le réglage par défaut » (efface le choix du fichier) et « enregistrer comme réglage par défaut » par rubrique (Image, Son, Sous-titres).
+10. **Écran « Réglages du lecteur »** : une liste par rubriques (Lecture, Image, Son, Sous-titres, Affichage), libellé français + valeur + « (par défaut) ».
+
+Contrôle à distance (additif, anciens téléphones non cassés) : `POST /api/player/<sleep|loop|mark|picture|night|gain|pitch|substyle|autonext|skipstep>` ; `GET /api/player/tracks` gagne les clés `sleep, loopA, loopB, bookmarks, picture, night, gain, keepPitch, subStyle, autoNext, skipStep`.
+
+### Ce que seule une vraie TV (GaiaOS 32 bits, 720p) peut confirmer
+- La **performance** des filtres d'image (la garde est une sécurité, pas une preuve) et le fait que le filtre « adjust » s'applique avec le décodage matériel (MediaCodec) ; sinon l'effet est nul.
+- Le **désentrelacement** forcé (aucun fichier entrelacé testé ici).
+- La **normalisation** (mode nuit) : réglages du compresseur choisis sans écoute.
+- Zoom/déplacement/rotation sur la vue vidéo (SurfaceView) et le fondu du minuteur ; la correction de hauteur (coût processeur).
+- Le défilement de la liste de réglages à la télécommande et la lisibilité à 3 m.
+
 ## Icônes du lecteur
 Règle (propriétaire, 2026-10-04) : jamais d'icône sans libellé texte en français ; texte >= 28 sp, icône >= 40 dp, pastille sombre à 80 % d'opacité (contraste du texte blanc >= 4,5:1 même sur une image blanche : testé, `PlayerIcons.contrastOverWhite`), marges de sécurité de 5 % de la dalle (`PlayerIcons.safe` : 64 x 36 dp sur 720p). Rien n'a été supprimé.
 
