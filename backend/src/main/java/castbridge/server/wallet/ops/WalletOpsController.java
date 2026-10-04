@@ -142,7 +142,7 @@ public class WalletOpsController {
         if (b.path("activations").isArray()) for (JsonNode a : b.get("activations")) if (a.isTextual() && acts.size() < 4) acts.add(a.asText());
         long k = integer(b, "k");
         if (k < 1 || k > 8) throw new LedgerException(WalletReason.BAD_TXN, "Blocage : 1 à 8 sièges");
-        EscrowService.Issued i = escrows.lock(w.code(), w.row(), currency(b), integer(b, "per"), (int) k, text(b, "idem"), acts);
+        EscrowService.Issued i = escrows.lock(w.code(), w.row(), currency(b), integer(b, "per"), (int) k, text(b, "idem"), acts, text(b, "room"));
         Map<String, Object> out = new LinkedHashMap<>();
         out.put("cbe1", i.cbe1());
         out.put("eid", i.eid());
@@ -176,7 +176,7 @@ public class WalletOpsController {
             ArrayDeque<Long> q = settleWindows.computeIfAbsent(address == null ? "?" : address, k -> new ArrayDeque<>());
             while (!q.isEmpty() && now - q.peekFirst() >= 60_000L) q.pollFirst();
             if (settleWindows.size() > 20_000) settleWindows.values().removeIf(d -> d.isEmpty() || now - d.peekLast() >= 60_000L);
-            if (q.size() >= settlePerMinute) throw new ApiException(HttpStatus.TOO_MANY_REQUESTS, "Trop de règlements en une minute depuis cette adresse : réessayez dans un instant");
+            if (q.size() >= settlePerMinute) throw new ApiException(HttpStatus.TOO_MANY_REQUESTS, "Trop de règlements en une minute depuis cette adresse : réessayez dans un instant", java.util.List.of("RATE_LIMIT"));
             q.addLast(now);
         }
     }
@@ -197,8 +197,8 @@ public class WalletOpsController {
         Map<String, Object> out = new LinkedHashMap<>();
         out.put("dir", dir.name());
         out.put("q", d.quote().mboko());
-        out.put("rate", d.policy().rate());
-        out.put("reverseFeeBp", d.policy().reverseFeeBp());
+        out.put("rate", d.rate());
+        out.put("reverseFeeBp", d.reverseFeeBp());
         out.put("ndemGross", d.quote().ndemGross());
         out.put("fee", d.quote().fee());
         out.put("ndemNet", d.quote().ndemNet());

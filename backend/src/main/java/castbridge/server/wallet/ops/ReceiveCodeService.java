@@ -33,6 +33,7 @@ public class ReceiveCodeService {
     static final String ALPHABET = "0123456789ABCDEFGHJKMNPQRSTVWXYZ";
     public static final Duration TTL = Duration.ofMinutes(10);
     public static final int MAX_ACTIVE = 3;
+    static final Duration PURGE_AFTER = Duration.ofDays(7);
     static final int LOOKUPS_PER_HOUR = 10, LOOKUPS_PER_HOUR_GLOBAL = 1_000;
     private static final long HOUR_MS = 3_600_000L;
 
@@ -89,6 +90,7 @@ public class ReceiveCodeService {
     public Created create(String holder) {
         synchronized (lock(holder)) {
             Instant now = clock.now();
+            jdbc.update("DELETE FROM wallet_recv_code WHERE exp_at < ?", Timestamp.from(now.minus(PURGE_AFTER)));   // F6 : les codes échus depuis plus de 7 jours sont oubliés
             long active = jdbc.queryForObject("SELECT COUNT(*) FROM wallet_recv_code WHERE holder = ? AND used_at IS NULL AND exp_at > ?", Long.class, holder, Timestamp.from(now));
             if (active >= MAX_ACTIVE) throw new ApiException(HttpStatus.TOO_MANY_REQUESTS, "Trois codes de réception sont déjà actifs : attendez l'expiration de l'un d'eux", List.of("CODE_LIMIT"));
             Instant exp = now.plus(TTL);
@@ -157,17 +159,5 @@ public class ReceiveCodeService {
         return "TV · …" + tail;
     }
 
-    // ---- consommation (usage unique) ----
-
-    /** Prend le code (UPDATE conditionnel, atomique) ; faux si un autre l'a pris ou s'il a expiré. */
-    public boolean claim(String canonical, Instant now) {
-        return jdbc.update("UPDATE wallet_recv_code SET used_at = ? WHERE code = ? AND used_at IS NULL AND exp_at > ?", Timestamp.from(now.truncatedTo(java.time.temporal.ChronoUnit.MICROS)), canonical, Timestamp.from(now)) == 1;
-    }
-
-    /** Rend le code quand le grand livre a refusé le transfert (solde insuffisant, etc.) : seul celui qui l'avait pris peut le rendre (même instant). */
-    public void release(String canonical, Instant claimedAt) {
-        jdbc.update("UPDATE wallet_recv_code SET used_at = NULL WHERE code = ? AND used_at = ?", canonical, Timestamp.from(claimedAt.truncatedTo(java.time.temporal.ChronoUnit.MICROS)));
-    }
-
-    public Object stripeFor(String holder) { return lock(holder); }
+    // La consommation (usage unique) se fait dans la transaction du transfert : voir TransferService (audit w22-05, M2).
 }

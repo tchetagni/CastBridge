@@ -27,7 +27,7 @@ public class WalletPolicyService {
     }
 
     /** Interrupteurs d'exploitation (actifs par défaut : une valeur absente ou différente de 0 est « actif » ; seul 0 coupe). */
-    public record Switches(boolean stakesNdem, boolean stakesMboko, boolean transfer, boolean convert, boolean vouchers) {}
+    public record Switches(boolean stakesNdem, boolean stakesMboko, boolean transfer, boolean convert, boolean vouchers, boolean settle) {}
 
     public WalletPolicy get() {
         Map<String, WalletRepository.PolicyRow> r = repo.policyRows();
@@ -41,7 +41,7 @@ public class WalletPolicyService {
 
     public Switches switches() {
         Map<String, WalletRepository.PolicyRow> r = repo.policyRows();
-        return new Switches(on(r, "switch.stakes.NDEM"), on(r, "switch.stakes.MBOKO"), on(r, "switch.transfer"), on(r, "switch.convert"), on(r, "switch.vouchers"));
+        return new Switches(on(r, "switch.stakes.NDEM"), on(r, "switch.stakes.MBOKO"), on(r, "switch.transfer"), on(r, "switch.convert"), on(r, "switch.vouchers"), on(r, "switch.settle"));
     }
 
     /**
@@ -54,6 +54,24 @@ public class WalletPolicyService {
         Map<String, WalletRepository.PolicyRow> r = repo.policyRows();
         boolean n = cur == castbridge.server.wallet.core.Currency.NDEM;
         return new AdminCaps(v(r, "admin.grantMax." + cur.name(), n ? 10_000 : 100), v(r, "admin.dailyMax." + cur.name(), n ? 100_000 : 1_000), (int) v(r, "admin.grantsPerHour", 10));
+    }
+
+    /** Limites des transferts d'un compte d'ESSAI (audit w22-05, M5) : plafond du jour par monnaie, âge minimal du compte, donateurs distincts par destinataire et par 24 h, plafond du couple émetteur-destinataire. */
+    public record TrialLimits(long dailyNdem, long dailyMboko, int minAgeHours, int maxDonors, long pairNdem, long pairMboko) {}
+
+    public TrialLimits trialLimits() {
+        Map<String, WalletRepository.PolicyRow> r = repo.policyRows();
+        return new TrialLimits(v(r, "transfer.trial.dailyCap.NDEM", 1_000), v(r, "transfer.trial.dailyCap.MBOKO", 0), (int) v(r, "transfer.trial.minAgeHours", 72), (int) v(r, "transfer.trial.maxDonors", 3),
+                v(r, "transfer.trial.pairCap.NDEM", 5_000), v(r, "transfer.trial.pairCap.MBOKO", 50));
+    }
+
+    /** Plafonds du règlement (audit w22-05, M3) : par règlement, par 24 h glissantes, seuil d'alerte d'un gain ; par monnaie. */
+    public record SettleCaps(long perSettle, long perDay, long alert) {}
+
+    public SettleCaps settleCaps(castbridge.server.wallet.core.Currency cur) {
+        Map<String, WalletRepository.PolicyRow> r = repo.policyRows();
+        boolean n = cur == castbridge.server.wallet.core.Currency.NDEM;
+        return new SettleCaps(v(r, "settle.maxPerSettle." + cur.name(), n ? 20_000 : 1_000), v(r, "settle.dailyMax." + cur.name(), n ? 5_000_000 : 50_000), v(r, "settle.alert." + cur.name(), n ? 200_000 : 200));
     }
 
     private static long v(Map<String, WalletRepository.PolicyRow> r, String name, long fallback) {
@@ -106,8 +124,8 @@ public class WalletPolicyService {
             }
             ArrayDeque<Long> q = byIdentity.computeIfAbsent(identity, k -> new ArrayDeque<>());
             while (!q.isEmpty() && now - q.peekFirst() >= WINDOW_MS) q.pollFirst();
-            if (q.size() >= perIdentity) throw new ApiException(HttpStatus.TOO_MANY_REQUESTS, "Trop d'opérations de portefeuille en une minute : réessayez dans un instant");
-            if (all.size() >= global) throw new ApiException(HttpStatus.TOO_MANY_REQUESTS, "Le portefeuille est très sollicité : réessayez dans un instant");
+            if (q.size() >= perIdentity) throw new ApiException(HttpStatus.TOO_MANY_REQUESTS, "Trop d'opérations de portefeuille en une minute : réessayez dans un instant", java.util.List.of("RATE_LIMIT"));
+            if (all.size() >= global) throw new ApiException(HttpStatus.TOO_MANY_REQUESTS, "Le portefeuille est très sollicité : réessayez dans un instant", java.util.List.of("RATE_LIMIT"));
             q.addLast(now);
             all.addLast(now);
         }

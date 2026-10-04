@@ -11,6 +11,7 @@ import castbridge.server.wallet.WalletProperties;
 import castbridge.server.wallet.WalletRepository;
 import castbridge.server.wallet.core.Currency;
 import castbridge.server.wallet.core.Edition;
+import castbridge.server.wallet.core.EditionSpan;
 import castbridge.server.wallet.core.Ledger;
 import castbridge.server.wallet.core.LedgerException;
 import castbridge.server.wallet.core.StakeRules;
@@ -23,6 +24,7 @@ import java.security.NoSuchAlgorithmException;
 import java.sql.Timestamp;
 import java.time.Duration;
 import java.time.Instant;
+import java.util.ArrayList;
 import java.util.Base64;
 import java.util.List;
 import java.util.regex.Pattern;
@@ -42,6 +44,7 @@ public class EscrowService {
     public static final Duration TTL = Duration.ofMinutes(30);
     public static final Duration REFUND_AFTER_EXP = Duration.ofHours(6);
     static final Pattern IDEM = Pattern.compile("^[A-Za-z0-9._:-]{3,64}$");
+    static final Pattern ROOM = Pattern.compile("^[A-Za-z0-9._:-]{1,32}$");
     private static final String DOMAIN = "castbridge-wallet-escrow-v1";
 
     private final JdbcLedger ledger;
@@ -51,9 +54,11 @@ public class EscrowService {
     private final WalletModuleConfig.WalletClock clock;
     private final JdbcTemplate jdbc;
     private final WalletKey key;
+    private final GrantService grants;
 
     public EscrowService(JdbcLedger ledger, WalletPolicyService policies, LicenseFacts licenses, EditionReader reader, WalletModuleConfig.WalletClock clock,
-                         JdbcTemplate jdbc, WalletProperties props) {
+                         JdbcTemplate jdbc, WalletProperties props, GrantService grants, PlayResultKeys playKeys) {
+        this.grants = grants;
         this.ledger = ledger;
         this.policies = policies;
         this.licenses = licenses;
@@ -61,6 +66,7 @@ public class EscrowService {
         this.clock = clock;
         this.jdbc = jdbc;
         this.key = WalletKey.fromFile(props.keyFile());
+        if (key != null) playKeys.assertNotWalletKey(key.kid());   // F10 : trois clés distinctes
     }
 
     /** Ce que le serveur sait de l'édition de la TV À CET INSTANT ({@code ed} = étiquette de {@code cbw1}). */
@@ -70,33 +76,28 @@ public class EscrowService {
     public record Issued(String cbe1, String eid, long iat, long exp, boolean replayed) {}
 
     /**
-     * L'édition effective : si la TV joint ses activations {@code cbx1} (comme à la synchronisation) on rejoue exactement le calcul de la synchronisation ; sinon on part de la dernière édition
-     * connue (essai) et de la LICENCE lue maintenant. Limite documentée : une fin d'essai n'est vue qu'à la synchronisation suivante.
+     * L'édition effective à cet instant. Si la TV joint ses activations {@code cbx1} on rejoue exactement le calcul de la synchronisation. Sinon (cbw1 signé à chaque écriture) on part de ce que
+     * la synchronisation a MÉMORISÉ comme faits, jamais d'une étiquette d'édition : la clé « super » ({@code super_key}) et la fin de l'essai ({@code trial_end_at}) ; la LICENCE est relue maintenant
+     * (licence révoquée, suspendue, poste libéré ou parti : plus aucun droit de production).
      */
     public Eff effective(String code, WalletRepository.Identity row, List<String> activations, Instant now) {
-        List<LicenseFacts.LicenseView> ls = licenses.forDevice(code);
         if (!activations.isEmpty()) {
             EditionReader.Reading reading = reader.read(code, activations, now);
             if (reading.accepted()) {
-                GrantService.Standing st = GrantService.standing(reading, ls, now);
+                GrantService.Standing st = grants.readOnly(code, reading, now);
                 return new Eff(st.edition(), st.grace(), st.licensePending(), st.ed());
             }
         }
-        boolean grace = false;
-        for (LicenseFacts.LicenseView l : ls) {
-            if (l.state() == LicenseFacts.State.ACTIVE && (l.endAt() == null || now.isBefore(l.endAt()))) {
-                return l.endAt() == null ? new Eff(Edition.UNLIMITED, false, false, "UNLIMITED") : new Eff(Edition.PRODUCTION, false, false, "PROD");
-            }
-            if ((l.state() == LicenseFacts.State.ACTIVE || l.state() == LicenseFacts.State.EXPIRED) && l.endAt() != null && !now.isBefore(l.endAt())
-                    && now.isBefore(l.endAt().plusSeconds(l.graceDays() * 86_400L))) grace = true;
-        }
-        if (grace) return new Eff(Edition.NONE, true, false, "PROD");
-        String stored = row.edition() == null ? "NONE" : row.edition();
-        return switch (stored) {
-            case "TRIAL" -> new Eff(Edition.TRIAL, false, false, "TRIAL");
-            case "UNLIMITED" -> ls.isEmpty() ? new Eff(Edition.UNLIMITED, false, false, "UNLIMITED") : new Eff(Edition.NONE, false, false, "NONE");   // sans licence : droit « super »
-            default -> new Eff(Edition.NONE, false, false, "NONE");
-        };
+        return stored(code, row, now);
+    }
+
+    private Eff stored(String code, WalletRepository.Identity row, Instant now) {
+        List<EditionSpan> spans = new ArrayList<>();
+        if (row.superKey()) spans.add(new EditionSpan(Edition.SUPER, Instant.EPOCH.plusSeconds(1), null));
+        if (row.trialEndAt() != null && row.trialEndAt().isAfter(Instant.EPOCH.plusSeconds(1))) spans.add(new EditionSpan(Edition.TRIAL, Instant.EPOCH.plusSeconds(1), row.trialEndAt()));
+        EditionReader.Reading memory = new EditionReader.Reading(code, List.copyOf(spans), false, row.superKey(), false, null, List.of());
+        GrantService.Standing st = grants.readOnly(code, memory, now);
+        return new Eff(st.edition(), st.grace(), false, st.ed());
     }
 
     /** Identifiant du blocage : 22 caractères base64url (128 bits) dérivés de l'identité et de la clé d'idempotence. */
@@ -109,10 +110,11 @@ public class EscrowService {
         }
     }
 
-    public Issued lock(String code, WalletRepository.Identity row, Currency cur, long per, int k, String idem, List<String> activations) {
+    public Issued lock(String code, WalletRepository.Identity row, Currency cur, long per, int k, String idem, List<String> activations, String room) {
         if (key == null) throw new ApiException(HttpStatus.SERVICE_UNAVAILABLE, "Portefeuille indisponible");
         if (idem == null || !IDEM.matcher(idem).matches()) throw ApiException.badRequest("Clé d'idempotence invalide : 3 à 64 caractères parmi A-Z a-z 0-9 . _ : -");
         if (per < 1 || per > 1_000_000_000L) throw new LedgerException(WalletReason.BAD_TXN, "Mise hors bornes");
+        if (room != null && !ROOM.matcher(room).matches()) throw ApiException.badRequest("Salle invalide : 1 à 32 caractères parmi A-Z a-z 0-9 . _ : -");
         String eid = eidOf(code, idem);
         Txn txn = Txn.lock(code, cur, per, k, eid);
         boolean known = !jdbc.queryForList("SELECT eid FROM wallet_escrow WHERE eid = ?", String.class, eid).isEmpty();
@@ -122,6 +124,8 @@ public class EscrowService {
             WalletPolicyService.Switches sw = policies.switches();
             if (!(cur == Currency.NDEM ? sw.stakesNdem() : sw.stakesMboko())) throw new LedgerException(WalletReason.STAKES_SUSPENDED);
             policies.get().checkStake(cur, per);
+            // E1 : une mise exige les activations de la TV (comme la synchronisation) : les droits viennent de la licence VIVANTE et des activations, jamais d'une édition mémorisée
+            if (activations.isEmpty() || !reader.read(code, activations, now).accepted()) throw new LedgerException(WalletReason.ACTIVATE);
             Eff eff = effective(code, row, activations, now);
             if (eff.pending() && eff.edition() == Edition.NONE && !eff.grace()) {
                 throw new ApiException(HttpStatus.CONFLICT, "Licence en attente d'enregistrement", List.of("LICENSE_PENDING"));
@@ -131,19 +135,28 @@ public class EscrowService {
             });
         }
         Ledger.Posted posted = ledger.post(txn, "tv", code, null);
-        long[] times = readAndFill(eid, per, k);
-        return new Issued(sign(eid, code, cur, per, k, times[0], times[1]), eid, times[0], times[1], posted.replayed());
+        Stored st = readAndFill(eid, per, k, room);
+        return new Issued(sign(eid, code, cur, st.per(), st.k(), st.iat(), st.exp()), eid, st.iat(), st.exp(), posted.replayed());
     }
 
-    /** Renseigne per, k et l'échéance du blocage (une seule fois) et rend {iat, exp} en ms, calculés sur la date de création : un rejeu rend les mêmes valeurs. */
-    private long[] readAndFill(String eid, long per, int k) {
-        List<long[]> r = jdbc.query("SELECT created_at, exp_at FROM wallet_escrow WHERE eid = ?", (rs, i) -> {
-            Timestamp created = rs.getTimestamp("created_at"), exp = rs.getTimestamp("exp_at");
-            return new long[] {created.toInstant().toEpochMilli(), exp == null ? created.toInstant().plus(TTL).toEpochMilli() : exp.toInstant().toEpochMilli()};
-        }, eid);
-        long[] t = r.get(0);
-        jdbc.update("UPDATE wallet_escrow SET per = ?, k = ?, exp_at = ? WHERE eid = ? AND per IS NULL", per, k, Timestamp.from(Instant.ofEpochMilli(t[1])), eid);
-        return t;
+    private record Stored(long per, int k, long iat, long exp) {}
+
+    /**
+     * Renseigne per, k, salle et échéance du blocage (une seule fois) puis RELIT la base : le {@code cbe1} est toujours signé depuis ce que la base contient (M1) ; une requête qui diffère de
+     * ce qui est inscrit (autre mise, autres sièges, autre salle) est un {@code IDEM_CONFLICT}, jamais un second {@code cbe1} qui contredirait le blocage (M4 : la salle ne se change pas).
+     */
+    private Stored readAndFill(String eid, long per, int k, String room) {
+        List<Object[]> r = jdbc.query("SELECT created_at, exp_at FROM wallet_escrow WHERE eid = ?", (rs, i) -> new Object[] {rs.getTimestamp("created_at"), rs.getTimestamp("exp_at")}, eid);
+        Timestamp created = (Timestamp) r.get(0)[0], exp = (Timestamp) r.get(0)[1];
+        long iat = created.toInstant().toEpochMilli();
+        long expMs = exp == null ? created.toInstant().plus(TTL).toEpochMilli() : exp.toInstant().toEpochMilli();
+        jdbc.update("UPDATE wallet_escrow SET per = ?, k = ?, room = ?, exp_at = ? WHERE eid = ? AND per IS NULL", per, k, room, Timestamp.from(Instant.ofEpochMilli(expMs)), eid);
+        Object[] now = jdbc.query("SELECT per, k, room, amount FROM wallet_escrow WHERE eid = ?", (rs, i) -> new Object[] {rs.getLong("per"), rs.getInt("k"), rs.getString("room"), rs.getLong("amount")}, eid).get(0);
+        long dbPer = (Long) now[0];
+        int dbK = (Integer) now[1];
+        String dbRoom = (String) now[2];
+        if (dbPer != per || dbK != k || !java.util.Objects.equals(dbRoom, room) || dbPer * dbK != (Long) now[3]) throw new LedgerException(WalletReason.IDEM_CONFLICT);
+        return new Stored(dbPer, dbK, iat, expMs);
     }
 
     private String sign(String eid, String id, Currency cur, long per, int k, long iat, long exp) {

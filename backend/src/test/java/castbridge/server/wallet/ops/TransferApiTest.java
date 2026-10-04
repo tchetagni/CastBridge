@@ -92,7 +92,7 @@ class TransferApiTest extends OpsTestBase {
 
     @Test
     void aValidTransferMovesTokensOnceAndConsumesTheCodeWithIt() throws Exception {
-        Tv to = trialTv(), from = trialTv();
+        Tv to = trialTv(), from = agedTrialTv();
         adminGrant(from.code(), "NDEM", 400);   // 500
         String code = receiveCode(to).json().get("code").asText();
         Reply r = transfer(from, code, "NDEM", 200, "xfer-0001");
@@ -126,7 +126,7 @@ class TransferApiTest extends OpsTestBase {
 
     @Test
     void refusals_expiredOwnCodeCapOtherDeviceSwitchAndInsufficient() throws Exception {
-        Tv to = trialTv(), from = trialTv();
+        Tv to = trialTv(), from = agedTrialTv();
         adminGrant(from.code(), "NDEM", 20_000);
         // code expiré
         String old = receiveCode(to).json().get("code").asText();
@@ -156,7 +156,7 @@ class TransferApiTest extends OpsTestBase {
         Reply big = transfer(from, code, "NDEM", 9_999_999, "xfer-0017");
         assertEquals("DAILY_CAP", big.reason());
         // solde insuffisant : le code n'est PAS consommé
-        Tv poor = trialTv();   // 100 NDEM
+        Tv poor = agedTrialTv();   // 100 NDEM
         Reply short_ = transfer(poor, code, "NDEM", 500, "xfer-0018");
         assertEquals(409, short_.status());
         assertEquals("INSUFFICIENT", short_.reason());
@@ -169,7 +169,7 @@ class TransferApiTest extends OpsTestBase {
 
     @Test
     void theDailyCapIsPerSenderPerCurrencyAndRolls() throws Exception {
-        Tv to = trialTv(), from = trialTv();
+        Tv to = trialTv(), from = productionTv();
         adminGrant(from.code(), "NDEM", 20_000);
         assertEquals(200, transfer(from, receiveCode(to).json().get("code").asText(), "NDEM", 6_000, "cap-0001").status());
         Reply over = transfer(from, receiveCode(to).json().get("code").asText(), "NDEM", 4_001, "cap-0002");
@@ -189,7 +189,7 @@ class TransferApiTest extends OpsTestBase {
         clock.freezeAt(T0.plus(Duration.ofDays(1)));
         assertEquals(200, transfer(from, receiveCode(to).json().get("code").asText(), "NDEM", 1_000, "cap-0008").status());
         // un autre émetteur n'est pas concerné
-        Tv other = trialTv();
+        Tv other = productionTv();
         adminGrant(other.code(), "NDEM", 5_000);
         assertEquals(200, transfer(other, receiveCode(to).json().get("code").asText(), "NDEM", 5_000, "cap-0009").status());
         assertReconciled();

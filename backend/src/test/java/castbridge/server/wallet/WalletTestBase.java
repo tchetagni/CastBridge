@@ -72,7 +72,7 @@ public abstract class WalletTestBase extends ApiTestBase {
             return castbridge.server.licenses.Totp.code(secret, step);
         }
 
-        MockHttpServletRequestBuilder sign(MockHttpServletRequestBuilder b) { return b.header("X-Admin-User", name).header("X-Totp", code()); }
+        public MockHttpServletRequestBuilder sign(MockHttpServletRequestBuilder b) { return b.header("X-Admin-User", name).header("X-Totp", code()); }
     }
 
     private static final java.util.concurrent.atomic.AtomicInteger ADMINS = new java.util.concurrent.atomic.AtomicInteger();
