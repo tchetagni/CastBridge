@@ -107,6 +107,8 @@ class WireFormatVectorsTest {
             ScopedActivationSigner signer = new ScopedActivationSigner(new Ed25519ActivationSigner(ring(c.get("signer").asText())), scopes(c.get("signer").asText()));
             List<String> rights = new ArrayList<>();
             r.get("rights").forEach(x -> rights.add(x.asText()));
+            // the TV's signing key (W23-05 audit HIGH-1): the server signs it as the right `ik|<hex>` exactly as the other issuers do (a trial key refuses it: not a trial right)
+            if (r.hasNonNull("installKey")) rights.add(WireActivation.installKeyLine(java.util.HexFormat.of().parseHex(r.get("installKey").asText())));
             boolean refused = c.get("expect").path("refused").asBoolean(false);
             try {
                 String code = r.hasNonNull("deviceCodeOverride") ? r.get("deviceCodeOverride").asText() : dev.get("code").asText();
@@ -126,7 +128,8 @@ class WireFormatVectorsTest {
                 assertThat(refused).as(id + " refus inattendu : " + e.getMessage()).isTrue();
             }
         }
-        assertThat(n).isEqualTo(14);
+        // changed with the w23-05 audit corrections (HIGH-1): three vectors added (production with `ik`, `ik` alone, a trial refusing it) ; the 14 older ones are unchanged
+        assertThat(n).isEqualTo(17);
     }
 
     @Test

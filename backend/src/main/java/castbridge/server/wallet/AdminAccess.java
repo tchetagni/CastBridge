@@ -30,17 +30,7 @@ public class AdminAccess {
     }
 
     /** L'administrateur nommé, ou 403 : compte inconnu, rôle autre que propriétaire, TOTP non activé, code faux ou déjà utilisé. Le code accepté est consommé. */
-    public Actor verify(String user, String totp) {
-        if (user == null || user.isBlank() || totp == null || totp.isBlank()) {
-            throw new ApiException(HttpStatus.FORBIDDEN, "Double authentification requise : en-têtes X-Admin-User (compte) et X-Totp (code à usage unique)");
-        }
-        String name = user.trim();
-        Role role = accounts.roleOf(name);
-        if (role != Role.OWNER) throw new ApiException(HttpStatus.FORBIDDEN, "Seul un compte propriétaire peut faire cette action");
-        if (!accounts.totpEnabled(name)) throw new ApiException(HttpStatus.FORBIDDEN, "Activez d'abord la double authentification (TOTP) de votre compte : Licences > Sécurité");
-        if (!accounts.checkLoginCode(name, totp.trim())) throw new ApiException(HttpStatus.FORBIDDEN, "Code TOTP incorrect ou déjà utilisé");
-        return new Actor(name, Role.OWNER, "api", true);
-    }
+    public Actor verify(String user, String totp) { return accounts.verifyNamedAdmin(user, totp); }   // même mécanisme que la décision sur une activation notifiée (module des licences)
 
     /** Inscrit l'action au journal d'audit chaîné (aucune clé, aucun jeton : identité, monnaie, montant, motif). */
     public void record(Actor actor, String action, String identity, String reason, Map<String, ?> details) {

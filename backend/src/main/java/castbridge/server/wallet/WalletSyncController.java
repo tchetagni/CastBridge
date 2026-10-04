@@ -4,6 +4,7 @@ import castbridge.server.devices.Device;
 import castbridge.server.devices.DeviceService;
 import castbridge.server.licenses.DeviceIdentity;
 import castbridge.server.licenses.ReportedActivationRegistrar;
+import castbridge.server.licenses.WireActivation;
 import castbridge.server.wallet.core.AccountRef;
 import castbridge.server.wallet.core.Currency;
 import castbridge.server.wallet.core.LedgerException;
@@ -43,6 +44,7 @@ public class WalletSyncController {
     static final String LICENSE_PENDING_TEXT = "Licence en attente d'enregistrement";
     static final String REGISTRATION_REVIEW_TEXT = "Activation en vérification au serveur : jetons de production à venir";
     static final String SEAT_OVER_QUOTA_TEXT = "Licence déjà utilisée sur une autre TV : contactez votre point focal";
+    static final String NO_INSTALL_KEY_TEXT = "Activation sans clé d'installation : décision du propriétaire";
     static final String CATCHUP_HELD_TEXT = "Jetons de votre activation en vérification";
 
     private final DeviceService devices;
@@ -92,7 +94,11 @@ public class WalletSyncController {
         if (arr.isArray()) for (JsonNode a : arr) if (a.isTextual()) activations.add(a.asText());
 
         Instant now = clock.now();
-        EditionReader.Reading reading = reader.read(code, activations, now);
+        // preuve de possession de la clé d'installation (audit M5) : calculée AVANT la lecture des activations, car une activation qui porte SA clé d'installation (droit « ik », audit w23-05 HIGH-1) n'est
+        // lue QUE pour la TV qui la détient : la copie d'un jeton ne donne ni identité de portefeuille ni licence à un autre appareil
+        BindProof.Proof proof = BindProof.parse(body.path("bind"));
+        boolean proven = BindProof.valid(proof, code, d.publicId, now);
+        EditionReader.Reading reading = reader.read(code, proven ? withoutForeignInstallKeys(activations, proof.key()) : activations, now);
         List<Map<String, String>> notices = new ArrayList<>();
         GrantService.Standing st;
         boolean boundOther;
@@ -101,8 +107,6 @@ public class WalletSyncController {
         boolean accepted = reading.accepted();
         if (accepted) {
             // liaison à l'appareil : preuve de possession de la clé d'installation (audit M5) ; une identité libérée par l'administrateur se lie au premier appareil qui prouve
-            BindProof.Proof proof = BindProof.parse(body.path("bind"));
-            boolean proven = BindProof.valid(proof, code, d.publicId, now);
             WalletRepository.Identity known = repo.identity(code).orElse(null);
             if (known == null || known.apiDeviceId() == 0) {
                 if (requireBindProof && !proven) throw bindProofRequired();
@@ -133,7 +137,7 @@ public class WalletSyncController {
             notices.add(notice(why.name(), why.text()));
         }
         if (st.licensePending()) notices.add(notice("LICENSE_PENDING", LICENSE_PENDING_TEXT));
-        notices.addAll(registrationNotices(registrations));
+        notices.addAll(registrationNotices(registrations, hasLicence(st)));
         if (held > 0) notices.add(notice("CATCHUP_HELD", CATCHUP_HELD_TEXT));
         if (boundOther) notices.add(notice(WalletReason.BOUND_OTHER_TV.name(), WalletReason.BOUND_OTHER_TV.text()));
 
@@ -185,17 +189,46 @@ public class WalletSyncController {
     }
 
     /** Jamais de refus silencieux : chaque activation de production qui n'a pas ouvert de licence dit pourquoi (motif fermé de {@link ReportedActivationRegistrar}, texte de la conception § 5.4). */
-    static List<Map<String, String>> registrationNotices(List<ReportedActivationRegistrar.Registration> registrations) {
+    static List<Map<String, String>> registrationNotices(List<ReportedActivationRegistrar.Registration> registrations, boolean tvHasLicence) {
         List<Map<String, String>> out = new ArrayList<>();
         java.util.Set<String> seen = new java.util.HashSet<>();
         for (ReportedActivationRegistrar.Registration r : registrations) {
             if (r.registered() || r.status() == ReportedActivationRegistrar.Status.IGNORED || r.reason() == null) continue;
+            // un refus DÉFINITIF (clé inconnue, clone, licence révoquée, refus du propriétaire…) n'annonce aucun jeton à venir : son motif est dans « registration » (audit LOW-4)
+            if (r.status() == ReportedActivationRegistrar.Status.REFUSED) continue;
             boolean quota = "OVER_QUOTA".equals(r.reason()) || "TRANSFER_CAP".equals(r.reason());
+            boolean noKey = ReportedActivationRegistrar.NO_INSTALL_KEY.equals(r.reason());
+            // une TV déjà payée par une autre licence n'attend pas de jetons : seul l'avis « sans clé d'installation » (décision du propriétaire) reste visible
+            if (tvHasLicence && !quota && !noKey) continue;
             String reason = quota ? "SEAT_OVER_QUOTA" : "REGISTRATION_REVIEW";
             if (!seen.add(reason + "|" + r.reason())) continue;
-            Map<String, String> n = notice(reason, quota ? SEAT_OVER_QUOTA_TEXT : REGISTRATION_REVIEW_TEXT);
+            Map<String, String> n = notice(reason, quota ? SEAT_OVER_QUOTA_TEXT : noKey ? NO_INSTALL_KEY_TEXT : REGISTRATION_REVIEW_TEXT);
             n.put("detail", r.reason());
             out.add(n);
+        }
+        return out;
+    }
+
+    private static boolean hasLicence(GrantService.Standing st) { return st.licenseState() != null && java.util.Set.of("ACTIVE", "SUSPENDED", "EXPIRED", "REVOKED").contains(st.licenseState()); }
+
+    /**
+     * Retire des activations lues celles de PRODUCTION qui portent une clé d'installation (droit {@code ik}) autre que celle prouvée à ce contact : c'est le jeton d'une autre TV. Une activation sans
+     * {@code ik} (toutes celles d'avant le correctif), un essai ou un jeton illisible sont laissés tels quels (le lecteur décide).
+     */
+    static List<String> withoutForeignInstallKeys(List<String> activations, String provenKey) {
+        List<String> out = new ArrayList<>();
+        for (String a : activations) {
+            WireActivation.Decoded dec = a.length() > EditionReader.MAX_TOKEN_LENGTH ? null : WireActivation.decode(a.trim());
+            if (dec != null && dec.fields().kind().equals("production")) {
+                String ik;
+                try {
+                    ik = WireActivation.installKeyOf(dec.fields().rights());
+                } catch (IllegalArgumentException e) {
+                    continue;
+                }
+                if (ik != null && !ik.equals(provenKey)) continue;
+            }
+            out.add(a);
         }
         return out;
     }

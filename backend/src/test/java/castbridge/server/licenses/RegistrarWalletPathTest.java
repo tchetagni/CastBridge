@@ -27,11 +27,10 @@ class RegistrarWalletPathTest extends RegistrarTestBase {
     @Test
     void anUnlimitedProductionKeyOnTheFirstSyncCreatesTheLicenceAndTheSeatAndPays5000And50() throws Exception {
         Registered dev = registerApp("tv");
-        KeyPair install = pair();
         Acts.Tv tv = tv();
         String lic = licenseId();
         String token = production(ISSUER, tv, lic, null, NOW - HOUR, null);
-        JsonNode s = ok(sync(dev, install, tv, token));
+        JsonNode s = ok(sync(dev, tv, token));
         assertEquals("UNLIMITED", s.path("edition").path("ed").asText(), s.toString());
         assertEquals(1, count("SELECT COUNT(*) FROM lic_license WHERE license_id = ?", lic), "la licence est créée");
         Map<String, Object> l = licence(lic);
@@ -51,11 +50,10 @@ class RegistrarWalletPathTest extends RegistrarTestBase {
     @Test
     void replayingTheSameSyncThreeTimesChangesNothingAndNeverPaysTwice() throws Exception {
         Registered dev = registerApp("tv");
-        KeyPair install = pair();
         Acts.Tv tv = tv();
         String lic = licenseId();
         String token = production(ISSUER, tv, lic, null, NOW - HOUR, null);
-        for (int i = 0; i < 3; i++) ok(sync(dev, install, tv, token));
+        for (int i = 0; i < 3; i++) ok(sync(dev, tv, token));
         assertEquals(1, count("SELECT COUNT(*) FROM lic_license WHERE license_id = ?", lic));
         assertEquals(1, count("SELECT COUNT(*) FROM lic_seat s JOIN lic_license l ON l.id = s.license_pk WHERE l.license_id = ?", lic));
         assertEquals(1, count("SELECT COUNT(*) FROM lic_issuance i JOIN lic_license l ON l.id = i.license_pk WHERE l.license_id = ?", lic));
@@ -67,12 +65,11 @@ class RegistrarWalletPathTest extends RegistrarTestBase {
     @Test
     void aNinetyDayKeyIsPaidAsNinetyDaysNeverAsUnlimited() throws Exception {
         Registered dev = registerApp("tv");
-        KeyPair install = pair();
         Acts.Tv tv = tv();
         String lic = licenseId();
         long issued = NOW - HOUR;
         String token = production(ISSUER, tv, lic, null, issued, 90);
-        JsonNode s = ok(sync(dev, install, tv, token));
+        JsonNode s = ok(sync(dev, tv, token));
         assertEquals("PROD", s.path("edition").path("ed").asText(), "une clé de 90 jours n'est pas illimitée : " + s);
         Map<String, Object> l = licence(lic);
         assertEquals(Instant.ofEpochMilli(issued), at(l.get("start_at")));
@@ -81,11 +78,11 @@ class RegistrarWalletPathTest extends RegistrarTestBase {
         assertEquals(10, balance(tv.code(), "MBOKO"));
         // au bout de 61 jours (périodes 0, 30 et 60) : trois tranches de 1 000 + 10, rien au-delà de la fin de la clé même 200 jours plus tard
         clock.freezeAt(T0.plusSeconds(61 * 86_400L));
-        ok(sync(dev, install, tv, token));
+        ok(sync(dev, tv, token));
         assertEquals(3000, balance(tv.code(), "NDEM"));
         assertEquals(30, balance(tv.code(), "MBOKO"));
         clock.freezeAt(T0.plusSeconds(200 * 86_400L));
-        ok(sync(dev, install, tv, token));
+        ok(sync(dev, tv, token));
         assertEquals(3000, balance(tv.code(), "NDEM"), "la clé est finie : plus aucune tranche");
         assertEquals(30, balance(tv.code(), "MBOKO"));
     }
@@ -93,11 +90,10 @@ class RegistrarWalletPathTest extends RegistrarTestBase {
     @Test
     void aTokenPresentedAfterItsInstallationWindowAndNotDeclaredWaitsForTheOwner() throws Exception {
         Registered dev = registerApp("tv");
-        KeyPair install = pair();
         Acts.Tv tv = tv();
         String lic = licenseId();
         String token = production(ISSUER, tv, lic, null, NOW - 5 * DAY, null);
-        JsonNode s = ok(sync(dev, install, tv, token));
+        JsonNode s = ok(sync(dev, tv, token));
         assertEquals("NONE", s.path("edition").path("ed").asText(), s.toString());
         assertTrue(noticeReasons(s).contains("REGISTRATION_REVIEW"), "jamais de refus silencieux : " + s);
         assertEquals(0, count("SELECT COUNT(*) FROM lic_license WHERE license_id = ?", lic), "aucune licence tant que le propriétaire n'a pas décidé");
@@ -110,8 +106,8 @@ class RegistrarWalletPathTest extends RegistrarTestBase {
         String lic = licenseId();
         Registered devA = registerApp("tv"), devB = registerApp("tv");
         Acts.Tv a = tv(), b = tv();
-        ok(sync(devA, pair(), a, production(ISSUER, a, lic, null, NOW - HOUR, null)));
-        JsonNode s = ok(sync(devB, pair(), b, production(ISSUER, b, lic, null, NOW - HOUR, null)));
+        ok(sync(devA, a, production(ISSUER, a, lic, null, NOW - HOUR, null)));
+        JsonNode s = ok(sync(devB, b, production(ISSUER, b, lic, null, NOW - HOUR, null)));
         assertEquals("NONE", s.path("edition").path("ed").asText(), s.toString());
         assertTrue(noticeReasons(s).contains("SEAT_OVER_QUOTA"), s.toString());
         assertEquals(1, count("SELECT COUNT(*) FROM lic_seat s JOIN lic_license l ON l.id = s.license_pk WHERE l.license_id = ?", lic), "un seul poste");
@@ -126,9 +122,9 @@ class RegistrarWalletPathTest extends RegistrarTestBase {
         Registered devA = registerApp("tv"), devB = registerApp("tv");
         Acts.Tv a = tv(), b = tv();
         String seatA = WireActivationSeat.of(lic, a);
-        ok(sync(devA, pair(), a, production(ISSUER, a, lic, seatA, NOW - HOUR, null)));
+        ok(sync(devA, a, production(ISSUER, a, lic, seatA, NOW - HOUR, null)));
         // un outil mal réglé (ou un faussaire disposant de la clé) signe le MÊME poste pour un autre matériel : une licence ne se transfère pas
-        JsonNode s = ok(sync(devB, pair(), b, production(ISSUER, b, lic, seatA, NOW - HOUR, null)));
+        JsonNode s = ok(sync(devB, b, production(ISSUER, b, lic, seatA, NOW - HOUR, null)));
         assertEquals("NONE", s.path("edition").path("ed").asText(), s.toString());
         assertEquals(0, balance(b.code(), "NDEM"));
         assertEquals(1, count("SELECT COUNT(*) FROM lic_seat s JOIN lic_license l ON l.id = s.license_pk WHERE l.license_id = ? AND s.device_code = ?", lic, a.code()));
@@ -145,19 +141,18 @@ class RegistrarWalletPathTest extends RegistrarTestBase {
     @Test
     void aRenewalLicenceOfTheSameTvNeverPaysTheUnlimitedOpeningTwice() throws Exception {
         Registered dev = registerApp("tv");
-        KeyPair install = pair();
         Acts.Tv tv = tv();
         String first = licenseId(), second = licenseId();
         String t1 = production(ISSUER, tv, first, null, NOW - 2 * HOUR, null);
-        ok(sync(dev, install, tv, t1));
+        ok(sync(dev, tv, t1));
         assertEquals(5000, balance(tv.code(), "NDEM"));
         // le propriétaire renouvelle : un NOUVEL identifiant de licence pour la même TV (permis, aucune alerte), même plafond illimité
         String t2 = production(ISSUER, tv, second, null, NOW - HOUR, null);
-        JsonNode s = ok(sync(dev, install, tv, t2, t1));
+        JsonNode s = ok(sync(dev, tv, t2, t1));
         assertEquals(1, count("SELECT COUNT(*) FROM lic_license WHERE license_id = ?", second), "la seconde licence est enregistrée");
         assertEquals(5000, balance(tv.code(), "NDEM"), "l'ouverture illimitée n'est versée qu'une fois par identité : " + s);
         assertEquals(50, balance(tv.code(), "MBOKO"));
-        ok(sync(dev, install, tv, t2, t1));
+        ok(sync(dev, tv, t2, t1));
         assertEquals(5000, balance(tv.code(), "NDEM"));
     }
 
@@ -177,7 +172,7 @@ class RegistrarWalletPathTest extends RegistrarTestBase {
         Acts.Tv tv = tv();
         String lic = licenseId();
         String token = production(ISSUER, tv, lic, null, NOW - HOUR, 90);
-        ok(sync(dev, pair(), tv, token));
+        ok(sync(dev, tv, token));
         String payload = token.split("\\.")[1];
         for (String table : List.of("lic_registration", "lic_issuance", "lic_audit", "lic_seat", "lic_license")) {
             for (Map<String, Object> row : jdbc.queryForList("SELECT * FROM " + table)) {

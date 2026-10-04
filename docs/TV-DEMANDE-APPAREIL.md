@@ -10,6 +10,7 @@ Décision du propriétaire (2026-10-04) : « le phone ne pourra lire que les inf
 | `k` | seuil de reconnaissance (k facteurs sur n) |
 | `factors` | une ligne par facteur : type (`FLASH`, `ETHERNET`, `WIFI`, `SYSTEM_SERIAL`, `BLUETOOTH`) et empreinte salée de 32 caractères hexadécimaux |
 | `install` | clé publique d'installation X25519 (64 hexadécimaux), absente sur une TV ancienne |
+| `install_sig` | clé publique Ed25519 (64 hexadécimaux) avec laquelle la TV signe sa preuve de possession du portefeuille (`bind`) : ligne `install_sig=ed25519\|…`, additive, que l'émetteur **signe dans l'activation de production** (droit `ik`, correctif de l'audit w23-05) ; absente sur une TV plus ancienne que ce correctif |
 
 Les empreintes sont des hachés salés, jamais une valeur matérielle brute. La clé d'installation est publique : elle n'est pas secrète, mais seuls les outils du propriétaire s'en servent (clés de location).
 
@@ -22,7 +23,7 @@ Nom ou modèle de la TV, version, édition et durée, état d'activation ou de n
 `GET /api/tv/device-request` (CastBridge-TV, additive, lecture seule).
 
 - Même authentification que toutes les routes : en-tête `X-CB-Pin` (code de la TV) ou `X-CB-Token` (téléphone de confiance). Sans l'un des deux : 401. Autre méthode que GET : 405.
-- Réponse : exactement `{"code":…,"k":…,"factors":[{"type":…,"fingerprint":…}],"install":…|null}`. La TV relit sa propre demande et ne réémet que ces cinq clés : une ligne inconnue (TV plus récente, erreur) ne sort jamais. Chaînes passées par l'assistant JSON.
+- Réponse : exactement `{"code":…,"k":…,"factors":[{"type":…,"fingerprint":…}],"install":…|null,"installSig":…|null}` (la sixième clé est additive : un lecteur plus ancien ignore un champ inconnu). La TV relit sa propre demande et ne réémet que ces cinq clés : une ligne inconnue (TV plus récente, erreur) ne sort jamais. Chaînes passées par l'assistant JSON.
 - Taille : moins de 1 Kio en pratique ; le téléphone refuse toute réponse de plus de 4096 caractères.
 - Ouverte à l'édition d'essai (une TV d'essai est précisément celle qu'on active).
 - Une TV plus ancienne répond 404 : le téléphone dit de mettre CastBridge-TV à jour.
@@ -39,7 +40,7 @@ Actions, dans l'ordre du focus :
 
 1. **Copier la demande complète** (action principale) : `code=`, `k=`, `factor=…`, `install=x25519|…`. C'est le format que lisent les outils du propriétaire (`DeviceRequest.parse`).
 2. **Partager la demande complète** : même texte, par la feuille de partage Android.
-3. **Copier pour le serveur** (secondaire) : sans la ligne `install=`. Le serveur de licences refuse la ligne `install=` dans l'API d'émission de l'administration (« Demande d'appareil : ligne inattendue »), d'où cette copie.
+3. **Copier pour le serveur** (secondaire) : sans la ligne `install=` mais **avec** `install_sig=` (le serveur la signe dans l'activation qu'il émet). Un serveur d'avant le correctif refuse toute ligne autre que `code`, `k` et `factor` (« Demande d'appareil : ligne inattendue ») : mettez le serveur à jour avant la TV.
 
 ## Fichiers
 

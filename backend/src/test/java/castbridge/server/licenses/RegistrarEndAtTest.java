@@ -24,7 +24,7 @@ class RegistrarEndAtTest extends RegistrarTestBase {
 
     private Map<String, Object> licence(String id) { return jdbc.queryForMap("SELECT start_at, end_at, created_by FROM lic_license WHERE license_id = ?", id); }
 
-    private Status present(String token, Acts.Tv tv) { return registrar.register(new Presented(token, tv.code(), KEY, true), Via.WALLET, T0).status(); }
+    private Status present(String token, Acts.Tv tv) { return registrar.register(new Presented(token, tv.code(), rawPublic(installOf(tv)), true), Via.WALLET, T0).status(); }
 
     @Test
     void aLicenceOpenedByANoticeEndsWithTheKey() {
@@ -94,7 +94,6 @@ class RegistrarEndAtTest extends RegistrarTestBase {
     void ninetyDaysPaidAsThreeSlicesNeverAsTheUnlimitedOpeningWhateverTheRoute() throws Exception {
         // voie du registre : licence importée sans durée, TV notifiée ensuite, puis trois périodes écoulées
         Registered dev = registerApp("tv");
-        KeyPair install = pair();
         Acts.Tv tv = tv();
         String lic = licenseId();
         long issued = NOW - HOUR;
@@ -102,14 +101,14 @@ class RegistrarEndAtTest extends RegistrarTestBase {
         String seat = WireActivation.defaultSeat(lic, tv.factors());
         importRegistry(List.of(licenseEvent(ISSUER, issued - 1000, lic, 1), issueEvent(ISSUER, issued, lic, seat, tv, nonce)));
         String token = production(ISSUER, tv, lic, null, issued, List.of("usage|duree|" + issued + "|" + (issued + 90 * DAY)), nonce);
-        ok(sync(dev, install, tv, token));
+        ok(sync(dev, tv, token));
         assertEquals(1000, balance(tv.code(), "NDEM"), "première tranche : jamais 5 000");
         clock.freezeAt(T0.plusSeconds(61 * 86_400L));
-        ok(sync(dev, install, tv, token));
+        ok(sync(dev, tv, token));
         assertEquals(3000, balance(tv.code(), "NDEM"));
         assertEquals(30, balance(tv.code(), "MBOKO"));
         clock.freezeAt(T0.plusSeconds(300 * 86_400L));
-        ok(sync(dev, install, tv, token));
+        ok(sync(dev, tv, token));
         assertEquals(3000, balance(tv.code(), "NDEM"), "rien après la fin de la clé");
     }
 

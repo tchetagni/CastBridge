@@ -80,6 +80,44 @@ public class JdbcLicenseFacts implements LicenseFacts {
     }
 
     @Override
+    public List<Window> windows(String licenseId) {
+        if (!licensesEnabled) return null;
+        try {
+            Integer grace = jdbc.query("SELECT grace_days FROM lic_license WHERE license_id = ? AND created_by LIKE 'report:%'", rs -> rs.next() ? rs.getInt(1) : null, licenseId);
+            if (grace == null) return null;
+            List<Window> raw = new ArrayList<>();
+            jdbc.query("SELECT issued_at, usage_from, usage_to, unlimited FROM lic_registration WHERE license_id = ? AND status IN ('REGISTERED', 'ATTACHED') AND signer_creates = TRUE "
+                    + "ORDER BY COALESCE(usage_from, issued_at)", rs -> {
+                Timestamp from = rs.getTimestamp("usage_from") != null ? rs.getTimestamp("usage_from") : rs.getTimestamp("issued_at");
+                Timestamp to = rs.getBoolean("unlimited") || rs.getTimestamp("usage_to") == null ? null : rs.getTimestamp("usage_to");
+                raw.add(new Window(from.toInstant(), to == null ? null : to.toInstant()));
+            }, licenseId);
+            if (raw.isEmpty()) return null;
+            List<Window> merged = new ArrayList<>();
+            Window cur = null;
+            for (Window w : raw) {
+                if (cur == null) {
+                    cur = w;
+                    continue;
+                }
+                boolean bridged = cur.toExclusive() == null || !w.from().isAfter(cur.toExclusive().plusSeconds(grace * 86_400L));
+                if (!bridged) {
+                    merged.add(cur);
+                    cur = w;
+                    continue;
+                }
+                Instant end = cur.toExclusive() == null || w.toExclusive() == null ? null : (w.toExclusive().isAfter(cur.toExclusive()) ? w.toExclusive() : cur.toExclusive());
+                cur = new Window(cur.from(), end);
+            }
+            merged.add(cur);
+            return merged;
+        } catch (DataAccessException e) {
+            log.warn("wallet : fenêtres de licence illisibles ({}) : aucune restriction appliquée", e.getClass().getSimpleName());
+            return null;
+        }
+    }
+
+    @Override
     public List<StateEvent> history(String licenseId) {
         try {
             return jdbc.query("SELECT action, at FROM lic_audit WHERE target_type = 'LICENSE' AND target_id = ? AND action IN ('LICENSE_SUSPEND', 'LICENSE_RESUME', 'LICENSE_REVOKE', 'LICENSE_EXPIRE', 'LICENSE_EXTEND') "

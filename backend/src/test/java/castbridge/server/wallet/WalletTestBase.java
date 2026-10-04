@@ -53,7 +53,7 @@ public abstract class WalletTestBase extends ApiTestBase {
 
     /** Un administrateur de test : compte OWNER avec TOTP activé (secret chiffré par le coffre des licences). Un code n'est valable qu'une fois : chaque administrateur n'en a que quelques-uns par fenêtre. */
     protected final class Admin {
-        final String name;
+        public final String name;
         final byte[] secret = castbridge.server.licenses.Totp.newSecret();
         private long last = -1;
 

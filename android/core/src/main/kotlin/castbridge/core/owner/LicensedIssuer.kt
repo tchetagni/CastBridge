@@ -4,16 +4,18 @@ import castbridge.core.lots.Right
 
 /**
  * What a TV tells the owner (the « demande d'appareil », frame DEVICE_INFO): its code, k, the fingerprints of its factors and, from a TV that has one, the public key of its
- * installation ([installPub], X25519: the rental keys are boxed for it). Null = a request from an old TV.
+ * installation ([installPub], X25519: the rental keys are boxed for it). Null = a request from an old TV. [installSig] = the Ed25519 key the TV signs its wallet `bind` proofs with (line
+ * `install_sig=ed25519|…`, W23-05 audit HIGH-1): a PRODUCTION activation issued for this request carries it signed (right `ik`), so only that TV can have the licence registered and paid
+ * automatically. Null = a TV that does not send it yet: the activation binds no key and the server waits for the owner's decision.
  */
-class DeviceRequest(val code: String, val k: Int, val factors: Fingerprints, val installPub: ByteArray? = null) {
+class DeviceRequest(val code: String, val k: Int, val factors: Fingerprints, val installPub: ByteArray? = null, val installSig: ByteArray? = null) {
     companion object {
         /** From the TV's text (`code=…` / `k=…` / `factor=TYPE|hash` lines). Tolerates CRLF and blank lines. */
         fun parse(text: String): DeviceRequest {
             val clean = text.replace("\r", "").lines().map { it.trim() }.filter { it.isNotEmpty() }.joinToString("\n")
             val info = OwnerFrames.parseDeviceInfo(clean) ?: throw IssueException("Demande d'appareil illisible : attendu « code=… », « k=… » puis des lignes « factor=TYPE|empreinte » (et « install=x25519|… » pour une CastBridge-TV récente)")
             if (info.code != DeviceCode.of(info.fp)) throw IssueException("Le code d'appareil ne correspond pas aux empreintes : demande corrompue ou modifiée")
-            return DeviceRequest(info.code, info.k, info.fp, info.installPub)
+            return DeviceRequest(info.code, info.k, info.fp, info.installPub, info.installSig)
         }
     }
 }
@@ -169,7 +171,7 @@ class LicensedIssuer(
         if (days != null && rights.any { it is Right.Super }) throw IssueException("SUPER_UNLIMITED est permanent : pas de durée d'usage")
         val withUsage = if (days == null) rights else rights + Right.Usage(issuedAt, issuedAt + days * 24L * 3600 * 1000)
         val issued = issuer.issue(ActivationIssuer.Request(spec.kind, device.code, device.factors, issuedAt, spec.subject, withUsage, spec.license, seat,
-            spec.notBefore ?: issuedAt, spec.windowHours, spec.nonce, null))
+            spec.notBefore ?: issuedAt, spec.windowHours, spec.nonce, null, null, if (spec.kind == ActivationKind.PRODUCTION && spec.subject == Subject.TV) device.installSig else null))
         save(LicenseBook.merge(current, listOf(LicenseEvent.issue(signer, issued.activation))))
         return Delivered(issued, issued.activation.seat, reused, left)
     }

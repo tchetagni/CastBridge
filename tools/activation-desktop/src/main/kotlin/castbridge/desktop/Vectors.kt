@@ -89,7 +89,7 @@ object Vectors {
         val expect = c["expect"] as Map<String, Any?>
         val req = ActivationIssuer.Request(
             ActivationKind.valueOf(r.str("kind")!!.uppercase()), r.str("deviceCodeOverride") ?: d.code, d.fp, r.long("issuedAt")!!, Subject.valueOf(r.str("subject")!!.uppercase()),
-            rightsOf(r), r.str("license")!!, r.str("seat"), r.long("notBefore")!!, (r["windowHours"] as Number).toInt(), r.str("nonce"), null)
+            rightsOf(r), r.str("license")!!, r.str("seat"), r.long("notBefore")!!, (r["windowHours"] as Number).toInt(), r.str("nonce"), null, null, r.str("installKey")?.let(::hex))
         val out = try { ActivationIssuer(k.signer, k.scopes).issue(req).token } catch (e: castbridge.core.owner.IssueException) { null }
         return if (expect["refused"] == true) { if (out != null) "devait être refusé" else null }
         else if (out == null) "refusé à tort" else if (out != expect.str("token")) "jeton différent (octets)" else null

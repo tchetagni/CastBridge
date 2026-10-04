@@ -30,10 +30,13 @@ public final class DeviceIdentity {
     }
 
     /** The factor fingerprints of a device, in canonical order, with its device code and k. */
-    public record Request(Map<Factor, String> factors, String code, int k) {
+    public record Request(Map<Factor, String> factors, String code, int k, String installSig) {
         public Request {
             factors = java.util.Collections.unmodifiableMap(new EnumMap<>(factors));
         }
+
+        /** A request without the TV's signing key (every request of a TV older than the W23-05 correction). */
+        public Request(Map<Factor, String> factors, String code, int k) { this(factors, code, k, null); }
 
         public String factorsText() {
             List<String> l = new ArrayList<>();
@@ -43,6 +46,8 @@ public final class DeviceIdentity {
 
         public String setHashHex() { return java.util.HexFormat.of().formatHex(setHash(factors)); }
     }
+
+    private static final java.util.regex.Pattern INSTALL_SIG_HEX = java.util.regex.Pattern.compile("^[0-9a-f]{64}$");
 
     private DeviceIdentity() {}
 
@@ -130,6 +135,7 @@ public final class DeviceIdentity {
         Map<Factor, String> fp = new EnumMap<>(Factor.class);
         String code = null;
         Integer k = null;
+        String installSig = null;
         for (String raw : text.split("\\R")) {
             String line = raw.trim();
             if (line.isEmpty()) continue;
@@ -155,8 +161,15 @@ public final class DeviceIdentity {
                 if (!FP.matcher(h).matches()) throw ApiException.badRequest("Demande d'appareil : empreinte invalide pour " + f.name() + " (32 chiffres hexadécimaux)");
                 if (fp.put(f, h) != null) throw ApiException.badRequest("Demande d'appareil : facteur " + f.name() + " en double");
             } else if (line.startsWith("install=")) {
-                // la TV joint sa clé d'installation (preuve de possession) : tolérée et IGNORÉE, l'identité ne dépend ni de son contenu ni de sa présence (constat du 2026-10-04, additif)
+                // la TV joint sa clé d'installation X25519 (clés de location) : tolérée et IGNORÉE, l'identité ne dépend ni de son contenu ni de sa présence (constat du 2026-10-04, additif)
                 continue;
+            } else if (line.startsWith("install_sig=")) {
+                // la clé Ed25519 avec laquelle la TV signe sa preuve de possession `bind` (correctif HIGH-1 de l'audit w23-05, additif) : l'émetteur la SIGNE dans l'activation (droit « ik »).
+                // Une ligne malformée est refusée (jamais ignorée : l'activation lierait une clé fausse) ; l'identité du matériel n'en dépend pas.
+                if (installSig != null) throw ApiException.badRequest("Demande d'appareil : « install_sig » en double");
+                String v = line.substring(12).trim().toLowerCase(java.util.Locale.ROOT);
+                if (!v.startsWith("ed25519|") || !INSTALL_SIG_HEX.matcher(v.substring(8)).matches()) throw ApiException.badRequest("Demande d'appareil : « install_sig=ed25519|<64 chiffres hexadécimaux> » attendu");
+                installSig = v.substring(8);
             } else {
                 throw ApiException.badRequest("Demande d'appareil : ligne inattendue « " + AuditLog.clip(line, 30) + " »");
             }
@@ -169,6 +182,6 @@ public final class DeviceIdentity {
         if (!parsed.equals(derived)) throw ApiException.badRequest("Le code d'appareil ne correspond pas aux facteurs fournis : demande altérée ou incomplète");
         int expectedK = kFor(fp.size());
         if (k != null && k != expectedK) throw ApiException.badRequest("Demande d'appareil : k=" + k + " ne correspond pas aux " + fp.size() + " facteurs (k attendu : " + expectedK + ")");
-        return new Request(fp, derived, expectedK);
+        return new Request(fp, derived, expectedK, installSig);
     }
 }

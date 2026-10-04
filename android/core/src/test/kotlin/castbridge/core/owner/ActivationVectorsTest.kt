@@ -64,7 +64,11 @@ class ActivationVectorsTest {
             if (kind == ActivationKind.TRIAL) Activation.TRIAL_LICENSE else license, seat, notBefore, window, nonce)
 
     private fun reqJson(r: ActivationIssuer.Request, dev: String) = J("kind" to r.kind.name.lowercase(), "device" to dev, "issuedAt" to r.issuedAt, "subject" to r.subject.name.lowercase(),
-        "rights" to r.rights.map { Activation.rightLine(it) }, "license" to r.license, "seat" to r.seat, "notBefore" to r.notBefore, "windowHours" to r.windowHours, "nonce" to r.nonce)
+        "rights" to r.rights.map { Activation.rightLine(it) }, "license" to r.license, "seat" to r.seat, "notBefore" to r.notBefore, "windowHours" to r.windowHours, "nonce" to r.nonce) +
+        (r.installKey?.let { mapOf("installKey" to hex(it)) } ?: emptyMap())
+
+    /** The TV's signing key of the vectors (W23-05 audit HIGH-1): a public key derived from a public string, worth nothing. */
+    private val tvInstallKey: ByteArray by lazy { Ed25519Signer(java.security.MessageDigest.getInstance("SHA-256").digest("castbridge-vector-tv-install-key".toByteArray())).publicKey }
 
     private fun raw(k: String, d: String, kind: ActivationKind = ActivationKind.PRODUCTION, rights: List<Right> = listOf(purchase), issued: Long = t0, from: Long = t0 - hour, to: Long = t0 + 47 * hour,
                     subject: Subject = Subject.TV, license: String = "lic-0001", seat: String? = null, nonce: String = "00112233445566778899aabbccddeeff", kk: Int? = null): String {
@@ -118,6 +122,8 @@ class ActivationVectorsTest {
         cases += activationCase("act-production-usage", "production : achat + plafond d'usage", issuer("desk").issue(req("tvA", rights = listOf(purchase, usage))).token, "tvA")
         cases += activationCase("act-production-no-rights", "production sans aucun droit : valide (version complète, durée illimitée)", issuer("desk").issue(req("tvA", rights = emptyList())).token, "tvA")
         cases += activationCase("act-production-usage-only", "production avec le seul droit d'usage (durée) : valide", issuer("desk").issue(req("tvA", rights = listOf(usage))).token, "tvA")
+        cases += activationCase("act-production-ik", "production avec plafond d'usage et clé d'installation signée (ik) : acceptée, le droit ik n'accorde rien", issuer("desk").issue(req("tvA", rights = listOf(usage)).copy(installKey = tvInstallKey)).token, "tvA")
+        cases += activationCase("act-production-ik-only", "production dont le seul droit est ik : acceptée (version complète)", issuer("desk").issue(req("tvA", rights = emptyList()).copy(installKey = tvInstallKey)).token, "tvA")
         cases += activationCase("act-production-rental", "production : achat + location de 30 jours", issuer("desk").issue(req("tvA", rights = listOf(purchase, otherRental))).token, "tvA")
         cases += activationCase("act-production", "production : achat + abonnement", prodTok, "tvA")
         cases += activationCase("act-open-all", "« tout ouvert » de 10 jours porté par la clé bureau", openTok, "tvA")
@@ -224,6 +230,9 @@ class ActivationVectorsTest {
         cases += refuse("build-refuse-open-all-long", "« tout ouvert » de 31 jours", "desk", req("tvA", rights = listOf(Right.OpenAll("ouvert", t0, t0 + 31 * day))), "tvA")
         cases += build("build-production-no-rights", "construire une clé de production SANS aucun droit (version complète, durée illimitée)", "desk", req("tvA", rights = emptyList()), "tvA")
         cases += build("build-production-usage-only", "construire une clé de production avec le seul droit d'usage (durée)", "desk", req("tvA", rights = listOf(usage)), "tvA")
+        cases += build("build-production-ik", "production avec plafond d'usage ET la clé d'installation de la TV signée (droit ik|<64 hex>, correctif w23-05)", "desk", req("tvA", rights = listOf(usage)).copy(installKey = tvInstallKey), "tvA")
+        cases += build("build-production-ik-only", "production dont le seul droit est la clé d'installation signée (ik) : version complète liée à la TV", "desk", req("tvA", rights = emptyList()).copy(installKey = tvInstallKey), "tvA")
+        cases += refuse("build-refuse-ik-trial", "une clé d'essai ne porte jamais la clé d'installation (refusée)", "desk", req("tvA", ActivationKind.TRIAL).copy(installKey = tvInstallKey), "tvA")
         cases += J("type" to "build-activation", "id" to "build-refuse-bad-code", "description" to "code d'appareil mal formé", "signer" to "desk",
             "request" to reqJson(req("tvA"), "tvA") + mapOf("deviceCodeOverride" to "ABCD-EFGH-JKMN-PQRZ"), "expect" to J("refused" to true))
         // 5b. envelope: sequence numbers, unknown type
@@ -473,7 +482,8 @@ class ActivationVectorsTest {
                     val rights = (rq["rights"] as List<*>).map { Activation.parseRight(it as String) }
                     val issuer = ActivationIssuer(signerOf(c["signer"] as String), trusted(listOf(c["signer"])).single().scopes)
                     val request = ActivationIssuer.Request(ActivationKind.valueOf((rq["kind"] as String).uppercase()), (rq["deviceCodeOverride"] as String?) ?: ds.getValue(dv)["code"] as String, fp(dv), (rq["issuedAt"] as Number).toLong(),
-                        Subject.valueOf((rq["subject"] as String).uppercase()), rights, rq["license"] as String, rq["seat"] as String?, (rq["notBefore"] as Number).toLong(), (rq["windowHours"] as Number).toInt(), rq["nonce"] as String?)
+                        Subject.valueOf((rq["subject"] as String).uppercase()), rights, rq["license"] as String, rq["seat"] as String?, (rq["notBefore"] as Number).toLong(), (rq["windowHours"] as Number).toInt(), rq["nonce"] as String?,
+                        installKey = (rq["installKey"] as String?)?.chunked(2)?.map { it.toInt(16).toByte() }?.toByteArray())
                     if (expect!!["refused"] == true) assertFailsWith<IssueException>(id) { issuer.issue(request) } else assertEquals(expect["token"], issuer.issue(request).token, id)
                 }
                 "build-compact" -> {

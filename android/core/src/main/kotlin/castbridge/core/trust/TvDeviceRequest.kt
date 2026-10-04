@@ -14,15 +14,19 @@ import java.io.IOException
  * Nothing else is ever read from the TV by this path. The texts are rebuilt by [OwnerFrames.deviceInfo], the very function the TV uses, so the main copy is identical
  * to `ActivationCenter.requestText()` byte for byte.
  */
-data class TvDeviceRequest(val code: String, val k: Int, val factors: List<Pair<FactorKind, String>>, val installHex: String?) {
+data class TvDeviceRequest(val code: String, val k: Int, val factors: List<Pair<FactorKind, String>>, val installHex: String?, val installSigHex: String? = null) {
     private fun fingerprints() = Fingerprints(factors.toMap())
     private fun pub(): ByteArray? = installHex?.chunked(2)?.map { it.toInt(16).toByte() }?.toByteArray()
+    private fun sigPub(): ByteArray? = installSigHex?.chunked(2)?.map { it.toInt(16).toByte() }?.toByteArray()
 
     /** The main copy: `code=…`, `k=…`, `factor=TYPE|empreinte` lines and `install=x25519|…`; what the owner's tools read. */
-    fun fullText(): String = OwnerFrames.deviceInfo(code, fingerprints(), pub())
+    fun fullText(): String = OwnerFrames.deviceInfo(code, fingerprints(), pub(), sigPub())
 
-    /** The same without the `install=` line: the licence server's admin API refuses any line but code, k and factor (« ligne inattendue »). */
-    fun serverText(): String = OwnerFrames.deviceInfo(code, fingerprints(), null)
+    /**
+     * The same without the `install=` line (the licence server's admin API refuses any line but code, k, factor and `install_sig` since the W23-05 audit corrections: « ligne inattendue »). The
+     * `install_sig=` line stays: the server signs that key into the production activation it issues, so only this TV gets its licence registered and paid automatically.
+     */
+    fun serverText(): String = OwnerFrames.deviceInfo(code, fingerprints(), null, sigPub())
 
     /** Screen lines (French labels), fingerprints whole: to be drawn in a monospace font, scrolling if needed. */
     fun viewLines(): List<String> = buildList {
@@ -30,6 +34,7 @@ data class TvDeviceRequest(val code: String, val k: Int, val factors: List<Pair<
         add("Seuil de reconnaissance : $k facteur${if (k > 1) "s" else ""} sur ${factors.size}")
         factors.forEach { (kind, h) -> add("Facteur ${label(kind)} : $h") }
         add(if (installHex != null) "Clé d'installation (publique, non secrète) : $installHex" else "Clé d'installation : absente (CastBridge-TV ancienne)")
+        if (installSigHex != null) add("Clé de signature de la TV (publique, non secrète) : $installSigHex")
     }
 
     private fun label(k: FactorKind) = when (k) {
@@ -68,7 +73,8 @@ object TvDeviceRequestParser {
             }
             if (factors.map { it.first }.toSet().size != factors.size || k !in 1..factors.size) return DeviceRequestParse.Refused(BAD)
             val install = when (val i = o["install"]) { null -> null; is String -> i.takeIf { HEX64.matches(it) } ?: return DeviceRequestParse.Refused(BAD); else -> return DeviceRequestParse.Refused(BAD) }
-            val req = TvDeviceRequest(code, k, factors.sortedBy { it.first }, install)
+            val installSig = when (val i = o["installSig"]) { null -> null; is String -> i.takeIf { HEX64.matches(it) } ?: return DeviceRequestParse.Refused(BAD); else -> return DeviceRequestParse.Refused(BAD) }
+            val req = TvDeviceRequest(code, k, factors.sortedBy { it.first }, install, installSig)
             // the same check the owner's tools make: the code must match the fingerprints
             runCatching { DeviceRequest.parse(req.fullText()) }.getOrNull() ?: return DeviceRequestParse.Refused("Le code d'appareil ne correspond pas aux empreintes : réponse de la TV corrompue ou modifiée.")
             DeviceRequestParse.Ok(req)

@@ -149,6 +149,24 @@ public class WalletRepository {
         return out;
     }
 
+    // ---- périodes payées : (identité, monnaie, case) UNIQUE, indépendante de la licence (audit w23-05 HIGH-3) ----
+
+    /** Les cases déjà payées de l'identité, sous la forme {@code <monnaie>|<case>} ({@code OPEN|0} = l'ouverture illimitée). */
+    public Set<String> periodClaims(String holder) {
+        Set<String> out = new HashSet<>();
+        jdbc.query("SELECT cur, slot FROM wallet_period_claim WHERE holder = ?", rs -> { out.add(rs.getString("cur") + "|" + rs.getLong("slot")); }, holder);
+        return out;
+    }
+
+    /** Inscrit une case payée (rejeu et course : un doublon est ignoré). Sert à rattraper les paiements d'avant la table (clés {@code grant:lic:…} déjà posées). */
+    public void backfillPeriodClaim(String holder, String cur, long slot, Instant periodStart, String idemKey, Instant now) {
+        try {
+            jdbc.update("INSERT INTO wallet_period_claim (holder, cur, slot, period_start, idem_key, claimed_at) VALUES (?,?,?,?,?,?)", holder, cur, slot, Timestamp.from(periodStart), idemKey, Timestamp.from(now));
+        } catch (DuplicateKeyException e) {
+            // déjà réclamée
+        }
+    }
+
     public record SpanRow(Instant start, Instant end) {}
 
     public List<SpanRow> licenseSpans(String licenseId) {

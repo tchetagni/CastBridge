@@ -67,6 +67,8 @@ class ActivationIssuer(private val signer: Signer, private val scopes: Set<KeySc
         const val MAX_GRACE_DAYS = 30
         private const val DAY = 24L * 3600 * 1000
         private const val HOUR = ActivationPolicy.HOUR_MS
+        /** The installation-key claim of a production activation: `ik|<64 lowercase hex>` (docs/ACTIVATION-FORMAT.md). */
+        const val INSTALL_KEY_RIGHT = "ik|"
     }
 
     data class Request(
@@ -76,6 +78,11 @@ class ActivationIssuer(private val signer: Signer, private val scopes: Set<KeySc
         val notBefore: Long = issuedAt, val windowHours: Int = MAX_WINDOW_HOURS, val nonce: String? = null, val k: Int? = null,
         /** The key's sequence number (a persistent counter per tool is best); defaults to [issuedAt]. */
         val seq: Long? = null,
+        /**
+         * The Ed25519 public key (32 bytes) the TV signs its wallet `bind` proofs with, taken from its device request (`install_sig=`): signed into a PRODUCTION activation as the right `ik|<hex>`
+         * (W23-05 audit HIGH-1). The right grants nothing; a reader that does not know it keeps it verbatim and ignores it. Null = none (a TV that does not send it yet).
+         */
+        val installKey: ByteArray? = null,
     )
 
     /** An issued activation with every encoding the three channels need. */
@@ -107,6 +114,12 @@ class ActivationIssuer(private val signer: Signer, private val scopes: Set<KeySc
             // a production activation may carry NO right at all: kind=production means « version complète » (docs/ACTIVATION-FORMAT.md)
         }
         r.rights.forEach(::checkRight)
+        if (r.installKey != null) {
+            need(r.kind == ActivationKind.PRODUCTION && r.subject == Subject.TV, "La clé d'installation ne se joint qu'à une activation de production pour une TV")
+            need(r.installKey.size == 32, "Clé d'installation de 32 octets attendue")
+            need(r.rights.none { it is Right.Unknown && it.raw.startsWith(INSTALL_KEY_RIGHT) }, "Droit « ik » en double")
+        }
+        val rights = if (r.installKey != null) r.rights + Right.Unknown(INSTALL_KEY_RIGHT + r.installKey.joinToString("") { "%02x".format(it) }) else r.rights
         val nonce = r.nonce ?: ByteArray(16).also(random::nextBytes).joinToString("") { "%02x".format(it) }
         need(Activation.HEX.matches(nonce), "Nonce invalide")
         val k = r.k ?: DeviceIdentity.kFor(r.factors.n)
@@ -114,7 +127,7 @@ class ActivationIssuer(private val signer: Signer, private val scopes: Set<KeySc
         val seat = r.seat ?: SeatIds.of(r.license, r.factors)
         need(Activation.HEX.matches(seat), "Identifiant de poste invalide")
         val notAfter = r.notBefore + r.windowHours * HOUR
-        val unsigned = Activation(r.kind, r.subject, signer.keyId, r.seq ?: r.issuedAt, nonce, r.issuedAt, r.notBefore, notAfter, r.license, seat, k, r.factors.byKind, r.rights, "")
+        val unsigned = Activation(r.kind, r.subject, signer.keyId, r.seq ?: r.issuedAt, nonce, r.issuedAt, r.notBefore, notAfter, r.license, seat, k, r.factors.byKind, rights, "")
         val sig = Base64.getEncoder().encodeToString(signer.sign(unsigned.canonicalPayload().toByteArray(Charsets.UTF_8)))
         return Issued(unsigned.copy(signature = sig))
     }

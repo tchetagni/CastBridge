@@ -158,4 +158,32 @@ class TvDeviceRequestTest {
         assertTrue(seenMessages.size >= 4, "distinct explanations: $seenMessages")
         assertIs<DeviceRequestResult.Refused>(TvDeviceRequestReader.read("http://192.168.1.20:8765", pin) { _, _ -> "n'importe quoi" })
     }
+
+    // ---- W23-05 audit HIGH-1: the TV's signing key travels in the request (`install_sig=ed25519|…`) so the issuers can sign it into the activation ----
+
+    private val sig = ByteArray(32) { (it * 5 + 3).toByte() }
+    private val sigHex = sig.joinToString("") { "%02x".format(it) }
+
+    @Test fun theSigningKeyTravelsInTheJsonAndInBothTexts() {
+        val text = OwnerFrames.deviceInfo(code, fp, pub, sig)
+        val json = TvDeviceRequestApi.json(text)!!
+        assertTrue("\"installSig\":\"$sigHex\"" in json, json)
+        val r = parsed(json)
+        assertEquals(sigHex, r.installSigHex)
+        assertEquals(text, r.fullText(), "the main copy stays byte for byte what the TV produces")
+        val server = r.serverText()
+        assertFalse("install=" in server, "no X25519 line for the server")
+        assertTrue("install_sig=ed25519|$sigHex" in server, "the server signs this key into the activation it issues")
+        assertTrue(server.lines().all { it.startsWith("code=") || it.startsWith("k=") || it.startsWith("factor=") || it.startsWith("install_sig=") }, server)
+        val d = DeviceRequest.parse(server)
+        assertContentEquals(sig, d.installSig); assertNull(d.installPub)
+        assertTrue(r.viewLines().any { it.contains(sigHex) })
+    }
+
+    @Test fun aTvWithoutTheSigningKeyOrWithAMalformedOneIsHandledStrictly() {
+        assertNull(parsed().installSigHex, "the TV text of this fixture has none")
+        assertTrue(TvDeviceRequestApi.json(tvText)!!.contains("\"installSig\":null"))
+        val bad = TvDeviceRequestApi.json(OwnerFrames.deviceInfo(code, fp, pub, sig))!!.replace(sigHex, "zz" + sigHex.drop(2))
+        assertTrue(TvDeviceRequestParser.parse(bad) is DeviceRequestParse.Refused, "a malformed key never reaches a text")
+    }
 }

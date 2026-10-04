@@ -94,7 +94,28 @@ public abstract class RegistrarTestBase extends WalletTestBase {
         return production(issuer, tv, license, seat, issuedAt, rights, UUID.randomUUID().toString().replace("-", "").substring(0, 16));
     }
 
+    private static final java.util.concurrent.ConcurrentHashMap<String, KeyPair> INSTALLS = new java.util.concurrent.ConcurrentHashMap<>();
+
+    /** La clé d'installation (Ed25519, celle qui signe la preuve {@code bind}) de CETTE TV de test : une seule par matériel, fabriquée ici au hasard. */
+    protected static KeyPair installOf(Acts.Tv tv) { return INSTALLS.computeIfAbsent(tv.code(), c -> pair()); }
+
+    /** La ligne de droit {@code ik|<64 hexadécimaux>} : la clé d'installation de la TV, signée dans l'activation (W23-05 correctif HIGH-1). */
+    protected static String ikLine(KeyPair install) { return "ik|" + java.util.HexFormat.of().formatHex(rawPublicBytes(install)); }
+
+    /** Une production telle que l'outil du propriétaire la délivre à une TV qui a joint sa clé d'installation : la clé est SIGNÉE dans l'activation. */
     protected static String production(KeyPair issuer, Acts.Tv tv, String license, String seat, long issuedAt, List<String> rights, String nonce) {
+        List<String> withIk = new ArrayList<>(rights);
+        withIk.add(ikLine(installOf(tv)));
+        return productionRaw(issuer, tv, license, seat, issuedAt, withIk, nonce);
+    }
+
+    /** Une production d'une TV ANCIENNE (0.14.32/0.14.33) : aucune clé d'installation signée (les activations déjà émises). */
+    protected static String productionLegacy(KeyPair issuer, Acts.Tv tv, String license, String seat, long issuedAt, Integer days) {
+        List<String> rights = days == null ? List.of() : List.of("usage|duree|" + issuedAt + "|" + (issuedAt + days * DAY));
+        return productionRaw(issuer, tv, license, seat, issuedAt, rights, nonce16());
+    }
+
+    protected static String productionRaw(KeyPair issuer, Acts.Tv tv, String license, String seat, long issuedAt, List<String> rights, String nonce) {
         String kid = LicenseKeyring.kidOf(rawPublicBytes(issuer));
         WireActivation.Fields f = new WireActivation.Fields("production", "tv", kid, 1, nonce, issuedAt, issuedAt, issuedAt + 48 * HOUR, license,
                 seat != null ? seat : WireActivation.defaultSeat(license, tv.factors()), DeviceIdentity.kFor(tv.factors().size()), tv.factors(), rights);
@@ -113,6 +134,9 @@ public abstract class RegistrarTestBase extends WalletTestBase {
     }
 
     // ------------------------------------------------------------------ appels HTTP
+
+    /** La synchronisation de la TV avec SA clé d'installation. */
+    protected MvcResult sync(Registered dev, Acts.Tv tv, String... activations) throws Exception { return sync(dev, installOf(tv), tv, activations); }
 
     /** {@code POST /api/v1/wallet/sync} exactement comme la TV 0.14.32 : code, activations, preuve de possession. */
     protected MvcResult sync(Registered dev, KeyPair install, Acts.Tv tv, String... activations) throws Exception {

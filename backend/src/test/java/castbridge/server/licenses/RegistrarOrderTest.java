@@ -66,8 +66,8 @@ class RegistrarOrderTest extends RegistrarTestBase {
             orders.add(String.join("", ops));
             for (String op : ops) {
                 switch (op) {
-                    case "A" -> assertNotNull(registrar.register(new Presented(tokA, tv.code(), KEY, true), Via.WALLET, T0));
-                    case "B" -> assertNotNull(registrar.register(new Presented(tokB, tv.code(), KEY, true), Via.REPORT, T0));
+                    case "A" -> assertNotNull(registrar.register(new Presented(tokA, tv.code(), rawPublic(installOf(tv)), true), Via.WALLET, T0));
+                    case "B" -> assertNotNull(registrar.register(new Presented(tokB, tv.code(), rawPublic(installOf(tv)), true), Via.REPORT, T0));
                     default -> importRegistry(events);
                 }
             }
@@ -97,7 +97,7 @@ class RegistrarOrderTest extends RegistrarTestBase {
             String tokB = production(ISSUER, tv, lic, null, issued, List.of(), nonceB);   // illimitée, même début
             List<String> ops = new ArrayList<>(List.of("A", "B", "A", "B"));
             Collections.shuffle(ops, rnd);
-            for (String op : ops) registrar.register(new Presented(op.equals("A") ? tokA : tokB, tv.code(), KEY, true), Via.WALLET, T0);
+            for (String op : ops) registrar.register(new Presented(op.equals("A") ? tokA : tokB, tv.code(), rawPublic(installOf(tv)), true), Via.WALLET, T0);
             String state = canonical(lic, tv, nonceA, nonceB);
             if (expected == null) expected = state;
             assertEquals(expected, state, "ordre " + ops);

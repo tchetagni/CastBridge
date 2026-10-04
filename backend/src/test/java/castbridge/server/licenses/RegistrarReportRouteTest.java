@@ -38,17 +38,19 @@ class RegistrarReportRouteTest extends RegistrarTestBase {
     void noLicenceThenSyncNoneThenReportThenUnlimitedWith5000And50AndReplaysPayOnce() throws Exception {
         clock.unfreeze();
         Registered dev = registerApp("tv");
-        KeyPair install = pair();
         Acts.Tv tv = tv();
+        KeyPair install = installOf(tv);
         String lic = licenseId();
         long issued = System.currentTimeMillis() - HOUR;
         // 1. aucune licence : la TV présente une activation que le portefeuille reconnaît (clé de confiance, ce matériel) mais que le serveur ne sait pas enregistrer (identifiant de licence
         //    réservé) : même état qu'au 2026-10-04, ni licence ni poste, le portefeuille dit « licence en attente »
-        JsonNode first = ok(sync(dev, install, tv, production(ISSUER, tv, "list", null, issued, null)));
+        JsonNode first = ok(sync(dev, tv, production(ISSUER, tv, "list", null, issued, null)));
         assertEquals("NONE", first.path("edition").path("ed").asText(), first.toString());
         assertEquals("PENDING", first.path("edition").path("license").asText());
         assertTrue(noticeReasons(first).contains("LICENSE_PENDING"), first.toString());
-        assertTrue(noticeReasons(first).contains("REGISTRATION_REVIEW"), "jamais de refus silencieux : " + first);
+        // changed with the w23-05 audit (LOW-4): a DEFINITIVE refusal (reserved licence id) no longer announces « tokens to come » ; its reason stays visible in `registration`
+        assertEquals("MALFORMED", first.path("registration").get(0).path("reason").asText(), "jamais de refus silencieux : " + first);
+        assertFalse(noticeReasons(first).contains("REGISTRATION_REVIEW"), first.toString());
         assertEquals(0, count("SELECT COUNT(*) FROM lic_license WHERE license_id = ?", lic));
         assertEquals(0, balance(tv.code(), "NDEM"));
         // 2. l'activation vérifiée (clé de confiance, ce matériel, preuve de possession) est notifiée
@@ -60,13 +62,13 @@ class RegistrarReportRouteTest extends RegistrarTestBase {
         assertEquals(1, count("SELECT COUNT(*) FROM lic_license WHERE license_id = ? AND end_at IS NULL AND created_by LIKE 'report:%'", lic));
         assertEquals(1, count("SELECT COUNT(*) FROM lic_seat s JOIN lic_license l ON l.id = s.license_pk WHERE l.license_id = ? AND s.device_code = ? AND s.state = 'ACTIVE'", lic, tv.code()));
         // 3. la synchronisation suivante : illimitée, 5 000 + 50
-        JsonNode next = ok(sync(dev, install, tv, token));
+        JsonNode next = ok(sync(dev, tv, token));
         assertEquals("UNLIMITED", next.path("edition").path("ed").asText(), next.toString());
         assertEquals(5000, balance(tv.code(), "NDEM"));
         assertEquals(50, balance(tv.code(), "MBOKO"));
         // 4. rejeux : ni une seconde licence, ni un second poste, ni un second versement
-        ok(sync(dev, install, tv, token));
-        ok(sync(dev, install, tv, token));
+        ok(sync(dev, tv, token));
+        ok(sync(dev, tv, token));
         assertEquals(1, count("SELECT COUNT(*) FROM lic_license WHERE license_id = ?", lic));
         assertEquals(1, count("SELECT COUNT(*) FROM lic_seat s JOIN lic_license l ON l.id = s.license_pk WHERE l.license_id = ?", lic));
         assertEquals(1, count("SELECT COUNT(*) FROM lic_issuance i JOIN lic_license l ON l.id = i.license_pk WHERE l.license_id = ?", lic));
@@ -94,11 +96,11 @@ class RegistrarReportRouteTest extends RegistrarTestBase {
     void theOwnerListsAndDecidesPendingRegistrationsThroughTheAdminApi() throws Exception {
         clock.unfreeze();
         Registered dev = registerApp("tv");
-        KeyPair install = pair();
         Acts.Tv tv = tv();
+        KeyPair install = installOf(tv);
         String lic = licenseId();
         String token = production(ISSUER, tv, lic, null, System.currentTimeMillis() - 5 * DAY, null);   // hors fenêtre : attend le propriétaire
-        JsonNode s = ok(sync(dev, install, tv, token));
+        JsonNode s = ok(sync(dev, tv, token));
         assertTrue(noticeReasons(s).contains("REGISTRATION_REVIEW"), s.toString());
         String fp = Hashing.sha256Hex(token);
         mvc.perform(get("/api/v1/admin/licenses/registrations")).andExpect(org.springframework.test.web.servlet.result.MockMvcResultMatchers.status().isUnauthorized());
@@ -112,34 +114,34 @@ class RegistrarReportRouteTest extends RegistrarTestBase {
             }
         }
         assertTrue(found, list.toString());
-        // motif obligatoire
-        assertEquals(400, mvc.perform(post("/api/v1/admin/licenses/registrations/" + fp + "/decision").header("Authorization", ADMIN).contentType(MediaType.APPLICATION_JSON)
-                .content("{\"accept\":true,\"reason\":\"\"}")).andReturn().getResponse().getStatus());
-        assertEquals(400, mvc.perform(post("/api/v1/admin/licenses/registrations/zz/decision").header("Authorization", ADMIN).contentType(MediaType.APPLICATION_JSON)
-                .content("{\"accept\":true,\"reason\":\"x\"}")).andReturn().getResponse().getStatus());
-        MvcResult d = mvc.perform(post("/api/v1/admin/licenses/registrations/" + fp + "/decision").header("Authorization", ADMIN).contentType(MediaType.APPLICATION_JSON)
-                .content("{\"accept\":true,\"reason\":\"TV vue chez le client\"}")).andReturn();
+        // la décision exige le compte nommé et un code TOTP (audit LOW-6) ; motif obligatoire
+        assertEquals(400, mvc.perform(newAdmin().sign(post("/api/v1/admin/licenses/registrations/" + fp + "/decision").header("Authorization", ADMIN).contentType(MediaType.APPLICATION_JSON)
+                .content("{\"accept\":true,\"reason\":\"\"}"))).andReturn().getResponse().getStatus());
+        assertEquals(400, mvc.perform(newAdmin().sign(post("/api/v1/admin/licenses/registrations/zz/decision").header("Authorization", ADMIN).contentType(MediaType.APPLICATION_JSON)
+                .content("{\"accept\":true,\"reason\":\"x\"}"))).andReturn().getResponse().getStatus());
+        MvcResult d = mvc.perform(newAdmin().sign(post("/api/v1/admin/licenses/registrations/" + fp + "/decision").header("Authorization", ADMIN).contentType(MediaType.APPLICATION_JSON)
+                .content("{\"accept\":true,\"reason\":\"TV vue chez le client\"}"))).andReturn();
         assertEquals(200, d.getResponse().getStatus(), d.getResponse().getContentAsString());
         assertEquals("REGISTERED", body(d).path("status").asText(), body(d).toString());
-        JsonNode after = ok(sync(dev, install, tv, token));
+        JsonNode after = ok(sync(dev, tv, token));
         assertEquals("UNLIMITED", after.path("edition").path("ed").asText(), after.toString());
         // une décision ne se rejoue pas
-        assertEquals(409, mvc.perform(post("/api/v1/admin/licenses/registrations/" + fp + "/decision").header("Authorization", ADMIN).contentType(MediaType.APPLICATION_JSON)
-                .content("{\"accept\":true,\"reason\":\"encore\"}")).andReturn().getResponse().getStatus());
+        assertEquals(409, mvc.perform(newAdmin().sign(post("/api/v1/admin/licenses/registrations/" + fp + "/decision").header("Authorization", ADMIN).contentType(MediaType.APPLICATION_JSON)
+                .content("{\"accept\":true,\"reason\":\"encore\"}"))).andReturn().getResponse().getStatus());
     }
 
     @Test
     void noTokenAndNoFullDeviceCodeInTheLogs(CapturedOutput out) throws Exception {
         clock.unfreeze();
         Registered dev = registerApp("tv");
-        KeyPair install = pair();
         Acts.Tv tv = tv();
+        KeyPair install = installOf(tv);
         String lic = licenseId();
         long issued = System.currentTimeMillis() - HOUR;
         String token = production(ISSUER, tv, lic, null, issued, 90);
-        ok(sync(dev, install, tv, token));
-        ok(sync(dev, install, tv, production(ISSUER, tv, "list", null, issued, null)));
-        ok(sync(dev, install, tv, production(ISSUER, tv, licenseId(), null, issued - 5 * DAY, null)));
+        ok(sync(dev, tv, token));
+        ok(sync(dev, tv, production(ISSUER, tv, "list", null, issued, null)));
+        ok(sync(dev, tv, production(ISSUER, tv, licenseId(), null, issued - 5 * DAY, null)));
         // une alerte et un refus ont eu lieu : leurs lignes de journal ne portent ni jeton ni code d'appareil entier
         String all = out.getAll();
         assertFalse(all.contains(token), "le jeton complet n'est jamais journalisé");
