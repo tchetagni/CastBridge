@@ -29,9 +29,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 /**
- * Administration du portefeuille sous {@code /api/v1/admin/wallet/**} (jeton d'administration, comme toutes les routes d'administration existantes : le jeton est le facteur fort
- * des actions sensibles, voir {@code Actor.token()}) : don d'un administrateur (écriture {@code ADJUST} positive, motif OBLIGATOIRE, clé d'idempotence facultative) et réconciliation
- * des invariants I-1, I-3 et I-8 (rapport JSON). Rien ici ne signe : ces routes restent disponibles sans clé « portefeuille ».
+ * Administration du portefeuille sous {@code /api/v1/admin/wallet/**} (jeton d'administration pour atteindre la route, PUIS compte propriétaire nommé et TOTP à usage unique pour toute action
+ * sensible : {@link AdminAccess}) : don d'un administrateur ({@code ADJUST} positive, motif OBLIGATOIRE, plafonds, double approbation au-delà), réaffectation de liaison, et réconciliation
+ * des invariants I-1, I-3 et I-8 (rapport JSON, lecture). Rien ici ne signe : ces routes restent disponibles sans clé « portefeuille ».
  */
 @RestController
 @RequestMapping("/api/v1/admin/wallet")

@@ -29,6 +29,8 @@
 
 ## Ordre (preuves tôt)
 
+**Numéro de migration** : V62 n'est PLUS réservé à W21 : le grand livre W22 (w22-02) a pris V62 (renumérotée depuis V63, audit H4). w21-02 prend « plus haut numéro existant + 1 » AU MOMENT DE SA FUSION (V63 si le grand livre est déjà fusionné), nomme son fichier `V<n>__tech_metrics.sql` et le dit au rapport ; les « V62 » ci-dessous sont des indications de rédaction.
+
 1. **w21-01 ∥ w21-02 ∥ w21-03** (w21-03 dès que w20-04b est fusionné), puis **w21-01b**.
 2. **w21-02b ∥ w21-03b** ⇒ le propriétaire livre **server-1.1.2** (API, V62) et l'image `castbridge-play` **server-play-0.2.x**, génère la clé d'ingestion, pose le cron : **premières preuves du service dès la première partie du POC**, sans aucune TV à livrer (RTT par transport et classe déclarée, octets par message, taille d'un `state`, refus, plafonds, file de sortie, `CLOSED` tardifs).
 3. **w21-04 ∥ w21-05 ∥ w21-06 ∥ w21-07** : preuves TV (elles arrivent avec **retard** : jusqu'à 12 h en direct, 4 h + attente du téléphone sinon ; rapport hebdomadaire arrêté à J−3) (marge des annonces, révélation, `ack`, coupures, ouverture décomposée, classe cellulaire), rapports et page.
