@@ -64,11 +64,15 @@ public class Inventory {
             try {
                 jdbc.update("INSERT INTO act_tv (tv_ref, device_code, first_seen_at, reco) VALUES (?,?,?,'NEVER')", tvRef, deviceCode, Timestamp.from(clock.now()));
             } catch (org.springframework.dao.DuplicateKeyException e) {
-                // already there (a concurrent writer)
+                // a concurrent writer inserted the same tv_ref: fine. If NOT, the code is already held under ANOTHER reference: act-ref.key is not the key of the history (audit M4)
+                if (jdbc.queryForObject("SELECT COUNT(*) FROM act_tv WHERE tv_ref = ?", Integer.class, tvRef) == 0) {
+                    throw new castbridge.server.web.ApiException(org.springframework.http.HttpStatus.SERVICE_UNAVAILABLE,
+                            "Suivi des activations suspendu : la clé de référence act-ref.key n'est plus celle de l'historique (ce code d'appareil est connu sous une autre référence)");
+                }
             }
         }
-        // an erased code is never put back by a later source: the right to erasure wins (the code stays NULL once an ERASED event exists)
-        if (deviceCode != null && jdbc.queryForList("SELECT id FROM act_event WHERE idem_key = ? LIMIT 1", Long.class, "E:" + tvRef).isEmpty()) {
+        // an erased code is never put back by a later source: the right to erasure wins (the tombstone act_erased is never archived, unlike the ERASED line of the history; audit M3)
+        if (deviceCode != null && jdbc.queryForList("SELECT tv_ref FROM act_erased WHERE tv_ref = ?", String.class, tvRef).isEmpty()) {
             jdbc.update("UPDATE act_tv SET device_code = ? WHERE tv_ref = ? AND device_code IS NULL", deviceCode, tvRef);
         }
     }

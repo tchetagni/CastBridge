@@ -19,10 +19,17 @@ final class Chains {
 
     private Chains() {}
 
-    /** The HMAC key of the chains (SHA-256 of the file act-audit.key), or null: then the chains are plain SHA-256 (weaker, still tamper evident). */
+    /**
+     * The key of a secret file: SHA-256 of its content WITHOUT the trailing line ends (audit M4: an editor that adds a final newline must not change the key and with it every
+     * reference and every hash of the history), or null when the file is absent: then the chains are plain SHA-256 (weaker, still tamper evident).
+     */
     static byte[] readKey(Path file) {
         try {
-            return Files.isReadable(file) ? Hashing.sha256(Files.readAllBytes(file)) : null;
+            if (!Files.isReadable(file)) return null;
+            byte[] raw = Files.readAllBytes(file);
+            int end = raw.length;
+            while (end > 0 && (raw[end - 1] == '\n' || raw[end - 1] == '\r')) end--;
+            return Hashing.sha256(java.util.Arrays.copyOf(raw, end));
         } catch (IOException e) {
             return null;
         }

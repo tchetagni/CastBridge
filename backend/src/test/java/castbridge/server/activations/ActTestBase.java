@@ -235,7 +235,7 @@ public abstract class ActTestBase extends ApiTestBase {
     /** Wipes the module's own tables (never the licence tables), to replay sources into an empty module. */
     protected void resetModule() {
         for (String t : List.of("act_command", "act_reg_issue", "act_journal_gap", "act_report", "act_tv_device", "act_alert", "act_journal_batch", "act_key", "act_tv", "act_tool", "act_event", "adm_read_audit",
-                "act_daily", "act_tv_monthly", "act_checkpoint", "act_archive", "act_cursor")) {
+                "act_daily", "act_tv_monthly", "act_checkpoint", "act_archive", "act_cursor", "act_journal_entry", "act_erased", "act_tv_key")) {
             jdbc.update("delete from " + t);
         }
         jdbc.update("update act_event_head set last_id = 0, last_hash = ?", "0".repeat(64));

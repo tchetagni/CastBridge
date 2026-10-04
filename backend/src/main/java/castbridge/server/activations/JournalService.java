@@ -70,21 +70,20 @@ public class JournalService {
         public long maxEntry(String kid) { return first("SELECT last_entry_n FROM act_tool WHERE kid = ?", kid); }
 
         @Override
-        public String entryHash(String kid, long n) { return find(H, kid, n); }
+        public String entryHash(String kid, long n) { return find("h", kid, n); }
 
         @Override
-        public String entryPrev(String kid, long n) { return find(P, kid, n); }
+        public String entryPrev(String kid, long n) { return find("prev", kid, n); }
 
         private long first(String sql, String kid) {
             List<Long> r = jdbc.queryForList(sql, Long.class, kid);
             return r.isEmpty() || r.get(0) == null ? 0L : r.get(0);
         }
 
-        private String find(Pattern p, String kid, long n) {
-            List<String> r = jdbc.queryForList("SELECT after_json FROM act_event WHERE idem_key = ?", String.class, "J:" + kid + ":" + n);
-            if (r.isEmpty() || r.get(0) == null) return null;
-            Matcher m = p.matcher(r.get(0));
-            return m.find() ? m.group(1) : null;
+        /** From act_journal_entry (never archived), not from the history lines, which the cold archive may remove (audit M3). */
+        private String find(String col, String kid, long n) {
+            List<String> r = jdbc.queryForList("SELECT " + col + " FROM act_journal_entry WHERE kid = ? AND n = ?", String.class, kid, n);
+            return r.isEmpty() ? null : r.get(0);
         }
     }
 
@@ -104,7 +103,11 @@ public class JournalService {
         access.require(actor, ActPermissions.Perm.ACT_JOURNAL_UPLOAD);
         String channel = Set.of("web", "api", "phone").contains(via) ? via : "api";
         Envelope env = token == null ? null : Envelope.decode(token);
-        policy.limit("journal:" + (env == null ? "?" : env.kid()), 30, Duration.ofHours(1), "journaux téléversés par outil");
+        // audit M6: the uploads of ONE tool chain are serialised (the row of the tool is locked first): the second of two contradictory journals is judged against the first
+        TrustedKeys.Key ringKey = env == null ? null : trusted.find(env.kid());
+        if (ringKey != null) lockTool(env.kid(), ringKey);
+        // audit M5: the counter is per KNOWN key (a kid read before any signature check would let anybody create counters)
+        policy.limit("journal:" + (ringKey == null ? "?" : env.kid()), 30, Duration.ofHours(1), "journaux téléversés par outil");
         JournalVerifier verifier = new JournalVerifier(this::keyOf, this::revoked);
         JournalVerifier.Verdict v = verifier.verify(token, new DbState());
         JournalVerifier.Batch b = v.batch();
@@ -157,6 +160,17 @@ public class JournalService {
         jdbc.update("INSERT INTO act_journal_batch (kid, seq, sha256, text, from_n, to_n, received_at, via, accepted, duplicate, rejected, status, reason) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?)",
                 b.kid(), b.seq(), b.sha256(), token, b.from(), b.to(), Timestamp.from(now), via, accepted, duplicate, rejected, status, reason);
         return true;
+    }
+
+    /** Creates the row of the tool if it is missing, then locks it until the end of the transaction. */
+    private void lockTool(String kid, TrustedKeys.Key key) {
+        if (jdbc.queryForObject("SELECT COUNT(*) FROM act_tool WHERE kid = ?", Integer.class, kid) == 0) {
+            try {
+                jdbc.update("INSERT INTO act_tool (kid, tool, label, scopes, last_entry_n, last_batch_seq, chain_ok) VALUES (?,?,?,?,0,0,TRUE)", kid, toolType(key, null), Chains.clip(key.name(), 64),
+                        String.join("+", new TreeSet<>(key.scopes().stream().map(Enum::name).toList())));
+            } catch (org.springframework.dao.DuplicateKeyException e) { /* a concurrent upload created it: locked below */ }
+        }
+        jdbc.queryForList("SELECT kid FROM act_tool WHERE kid = ? FOR UPDATE", String.class, kid);
     }
 
     private void touchTool(String kid, TrustedKeys.Key key, JournalVerifier.Batch b, boolean ok, Long lastN, String lastHash, Instant now) {
@@ -238,7 +252,13 @@ public class JournalService {
     private String json(Entry e, String extra) { return "{\"h\":\"" + e.hash() + "\",\"p\":\"" + e.prev() + "\",\"t\":\"" + e.type() + "\"" + (extra == null ? "" : "," + extra) + "}"; }
 
     private boolean ev(JournalVerifier.Batch b, Entry e, String type, String fp, String tv, String license, String extra) {
-        return log.append(new EventLog.NewEvent(type, e.atMs(), fp, tv, license, b.kid(), "TOOL", b.kid(), "JOURNAL", null, json(e, extra), "J:" + b.kid() + ":" + e.n()));
+        boolean appended = log.append(new EventLog.NewEvent(type, e.atMs(), fp, tv, license, b.kid(), "TOOL", b.kid(), "JOURNAL", null, json(e, extra), "J:" + b.kid() + ":" + e.n()));
+        try {
+            jdbc.update("INSERT INTO act_journal_entry (kid, n, h, prev) VALUES (?,?,?,?)", b.kid(), e.n(), e.hash(), e.prev());
+        } catch (org.springframework.dao.DuplicateKeyException dup) { /* already known */ }
+        // an entry judged NEW whose line already exists: another upload of the same tool got there first (audit M6): nothing of this one is applied, the sender retries and is judged against the first
+        if (!appended) throw new ApiException(org.springframework.http.HttpStatus.CONFLICT, "Entrée " + e.n() + " déjà enregistrée par un autre téléversement du même outil : réessayez");
+        return true;
     }
 
     /** @return false when the entry was recorded as refused because its fields were wrong */

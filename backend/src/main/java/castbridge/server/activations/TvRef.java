@@ -4,10 +4,7 @@ import castbridge.server.licenses.DeviceIdentity;
 import castbridge.server.licenses.Hashing;
 import castbridge.server.licenses.LicenseProperties;
 import castbridge.server.web.ApiException;
-import java.io.IOException;
 import java.nio.charset.StandardCharsets;
-import java.nio.file.Files;
-import java.nio.file.Path;
 import java.util.HexFormat;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Component;
@@ -21,16 +18,11 @@ public class TvRef {
     private final byte[] key;
 
     public TvRef(LicenseProperties props) {
-        this.key = read(props.secretsDir().resolve("act-ref.key"));
+        this.key = Chains.readKey(props.secretsDir().resolve("act-ref.key"));
     }
 
-    private static byte[] read(Path p) {
-        try {
-            return Files.isReadable(p) ? Hashing.sha256(Files.readAllBytes(p)) : null;
-        } catch (IOException e) {
-            return null;
-        }
-    }
+    /** Value that identifies the key without revealing it (audit M4): kept at first use, compared at every start. */
+    String checkValue() { return key == null ? null : HexFormat.of().formatHex(Hashing.hmac("HmacSHA256", key, "castbridge-act-ref-check-v1".getBytes(StandardCharsets.UTF_8))); }
 
     public boolean available() { return key != null; }
 

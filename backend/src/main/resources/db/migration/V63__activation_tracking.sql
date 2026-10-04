@@ -340,3 +340,25 @@ CREATE TABLE act_cursor (
     name VARCHAR(40) NOT NULL PRIMARY KEY,
     val  BIGINT      NOT NULL
 );
+
+-- droit à l'effacement : une TV dont le code lisible a été effacé ne le retrouve jamais, même si la ligne d'historique ERASED part en archive froide (audit M3). Jamais archivée.
+CREATE TABLE act_erased (
+    tv_ref    CHAR(16)    NOT NULL PRIMARY KEY,
+    erased_at DATETIME(6) NOT NULL
+);
+
+-- empreinte et précédent de chaque entrée de journal déjà reçue : l'idempotence et la détection de réécriture ne dépendent pas de act_event, qui peut partir en archive froide (audit M3). Jamais archivée.
+CREATE TABLE act_journal_entry (
+    kid   VARCHAR(64) NOT NULL,
+    n     BIGINT      NOT NULL,
+    h     CHAR(64)    NOT NULL,
+    prev  CHAR(64)    NOT NULL,
+    PRIMARY KEY (kid, n)
+);
+
+-- valeur de contrôle des clés act-ref.key et act-audit.key, enregistrée au premier usage : une clé changée fait refuser le démarrage (audit M4)
+CREATE TABLE act_key_check (
+    name        VARCHAR(16) NOT NULL PRIMARY KEY,
+    check_value CHAR(64)    NOT NULL,
+    created_at  DATETIME(6) NOT NULL
+);

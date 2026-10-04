@@ -57,6 +57,7 @@ public class ErasureHook {
                 String ref = (String) t.get("tv_ref"), code = (String) t.get("device_code");
                 scrubJournals(code);
                 jdbc.update("UPDATE act_tv SET device_code = NULL WHERE tv_ref = ?", ref);
+                if (jdbc.queryForObject("SELECT COUNT(*) FROM act_erased WHERE tv_ref = ?", Integer.class, ref) == 0) jdbc.update("INSERT INTO act_erased (tv_ref, erased_at) VALUES (?,?)", ref, java.sql.Timestamp.from(clock.now()));
                 eventLog.append(new EventLog.NewEvent("ERASED", clock.nowMs(), null, ref, null, null, "JOB", "erasure-hook", "LICENSE", null, "{\"reason\":\"right-to-erasure\"}", "E:" + ref));
             }
             return tvs.size();
