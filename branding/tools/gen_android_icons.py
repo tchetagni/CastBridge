@@ -60,21 +60,12 @@ def vector(width, height, viewport, children):
 background = vector(108, 108, 108,
                     '    <path android:fillColor="#0A0F1E" android:pathData="M0,0h108v108h-108z"/>')
 
-foreground = vector(108, 108, 240,
-                    f'    <path android:strokeColor="#F5B025" android:strokeWidth="{stroke:.2f}"\n'
-                    f'        android:strokeLineCap="round" android:fillColor="#00000000"\n'
-                    f'        android:pathData="{arc_path}"/>\n'
-                    f'    <path android:fillColor="#F5B025" android:pathData="{phone_path}"/>\n'
-                    f'    <path android:fillColor="#F5B025" android:pathData="{tv_path}"/>\n'
-                    f'    <path android:fillColor="#FFE1A6" android:pathData="{dot_path}"/>')
-
-monochrome = vector(108, 108, 240,
-                    f'    <path android:strokeColor="#FFFFFF" android:strokeWidth="{stroke:.2f}"\n'
-                    f'        android:strokeLineCap="round" android:fillColor="#00000000"\n'
-                    f'        android:pathData="{arc_path}"/>\n'
-                    f'    <path android:fillColor="#FFFFFF" android:pathData="{phone_path}"/>\n'
-                    f'    <path android:fillColor="#FFFFFF" android:pathData="{tv_path}"/>\n'
-                    f'    <path android:fillColor="#FFFFFF" android:pathData="{dot_path}"/>')
+# Avant-plan et monochrome : convertis depuis les SVG de logo (casque + contour du Cameroun, voir gen_cameroun_mark.py)
+import sys  # noqa: E402
+sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+import svg2vd  # noqa: E402
+foreground = svg2vd.convert(os.path.join(ROOT, "logo", "adaptive-foreground.svg"), 108)
+monochrome = svg2vd.convert(os.path.join(ROOT, "logo", "adaptive-monochrome.svg"), 108)
 
 adaptive = (
     '<?xml version="1.0" encoding="utf-8"?>\n'
