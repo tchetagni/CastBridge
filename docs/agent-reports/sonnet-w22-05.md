@@ -1,0 +1,69 @@
+STATUT: TERMINÉ (audit Opus obligatoire à lancer : règlement unique, conservation, liaison d'appareil, codes de réception)
+CAHIER: sonnet-w22-05 · MODÈLE: sonnet · BRANCHE: worktree-agent-a96099f0d35ece410 (remise sur integration/agents 8e8b652d avant tout ; `ls wallet` montrait JdbcLedger etc.) · COMMIT: voir `git log -1`
+JETONS: inconnu
+
+## Rouge d'abord (R1)
+1. Les 9 classes de test écrites avant toute classe de production (`OpsTestBase`, `EscrowApiTest`, `SettleFixturesTest`, `SettleRaceTest`, `EscrowExpiryTest`, `ConvertApiTest`, `TransferApiTest`, `OpsConservationTest`, `OpsLimitsTest`). Elles ne dépendent que de MockMvc, du grand livre de w22-02 et d'aides de test : elles compilent sans pièce provisoire, et le rouge est donc PAR ASSERTION (aucune route n'existait) :
+```
+mvn -o test -Dtest='castbridge.server.wallet.ops.*Test' → Tests run: 40, Failures: 20, Errors: 20
+EscrowApiTest.trialTvStakesNdemAndGetsAVerifiableCbe1 : expected: <200> but was: <404>   (/api/v1/wallet/escrow : « Cette adresse n'existe pas »)
+EscrowApiTest.trialTvCannotStakeMboko : expected: <409> but was: <404>
+EscrowApiTest.anotherDevicesTokenIsRefusedBoundOtherTv : expected: <403> but was: <404>
+ConvertApiTest (6/6) : 6 × Failure, TransferApiTest.receiveCodeHasTheAnnouncedShape… : expected: <200> but was: <404>
+OpsLimitsTest : les 4 premières sont traitées (et refusées : illisibles) ==> expected: <400> but was: <404>
+EscrowExpiryTest.theAdminRouteIsReservedToTheAdministrator : expected: <true> but was: <false>
+```
+(les 20 « Errors » sont des NullPointerException en lisant le corps d'une réponse 404 : même cause.)
+2. VERT ensuite, sans défaut de production attrapé par les tests lors de la mise au vert, mais deux défauts DE TEST corrigés avant : (a) la base est partagée par les tests d'une classe, donc les compteurs de transactions sont comptés en variation (`newTxns`) ; (b) un `@DynamicPropertySource` de sous-classe ne l'emporte pas sur celui de la classe mère : les débits relevés des tests passent par `@TestPropertySource` (moins prioritaire) et `OpsLimitsTest` les rabaisse par `@DynamicPropertySource`.
+
+## Ce qui a tourné (hors ligne, H2 en mode MySQL, mêmes migrations Flyway)
+- `cd backend && mvn -o test -Dtest='castbridge.server.wallet.ops.*Test'` : **41 tests, 0 échec** (≈ 25 s). `mvn -o test` complet : **368 tests, 0 échec, 4 ignorés** (327 de w22-02 + 41 d'ici ; non instable).
+- `bash tools/wallet/collect-results.sh --self-test` : `AUTO-TEST OK` (serveur HTTP factice local sur 127.0.0.1, aucun réseau public, aucun secret).
+- Tests : EscrowApiTest 10, SettleFixturesTest 11, SettleRaceTest 1 (8 fils sur le même `cbr1` : une seule transaction `SETTLE`, même réponse pour tous), EscrowExpiryTest 4, ConvertApiTest 6, TransferApiTest 7, OpsConservationTest 1 (160 opérations aléatoires, graine fixe : blocages, règlements valides/truqués/rejoués/abandons, échéances, conversions, transferts, rejeux ; I-1, I-3, I-8 tenus toutes les 20 étapes, aucun solde négatif, un règlement conserve la somme de ses participants, plus aucun blocage ouvert à la fin), OpsLimitsTest 1.
+- Critères du cahier couverts : règlement sur des `cbr1` signés (clé de test) pour des blocages créés par `EscrowService` ; reposter 5 fois ⇒ inchangé et même réponse ; Σ pay ≠ Σ used ⇒ refus ; clé inconnue (et clé « portefeuille ») ⇒ refus, seconde clé de rotation acceptée ; `eid` inconnu ⇒ refus total ; échéance à `exp + 6 h` (6 h 29 min 59 s : rien ; 6 h 31 : rendu) puis résultat tardif ⇒ `RESULT_AFTER_REFUND` sans rien régler (tout ou rien, B reste ouvert puis rendu par la route d'administration) ; conversion N→M→N ⇒ soldes de départ, `reverseFeeBp` 200 ⇒ M→N de 5 MBOKO = 4 900 NDEM et `SYS:FEE` +100, même clé autre sens ⇒ `IDEM_CONFLICT` ; transfert : code expiré / déjà utilisé / propre code / plafond / autre appareil refusés, rejeu ⇒ une seule écriture ; essai : mise MBOKO refusée (`TRIAL_NO_MBOKO`), mise NDEM acceptée, conversion et réception de MBOKO acceptées ; `reconcile` ⇒ ok après chaque série.
+- Licence ≠ clé d'activation : une licence SUSPENDED/REVOKED ou grâce épuisée refuse la mise MBOKO malgré une activation de production valide ; une licence suspendue APRÈS la dernière synchronisation arrête les mises tout de suite (la licence est relue à chaque mise) ; en grâce la mise passe ; production sans licence (activations jointes) ⇒ `LICENSE_PENDING`.
+
+## Mutations tentées (appliquées puis retirées, fichiers restaurés)
+| Mutation | Résultat |
+|---|---|
+| `eid` inconnu ignoré (règlement partiel des autres lignes) | **TUÉE** : `anUnknownEid…:104 expected 409 but was 200` |
+| rendu à `exp + 5 h` au lieu de 6 h | **TUÉE** : `à 6 h 29 min 59 s : trop tôt expected 80 but was 100` |
+| conversion qui n'utilise plus `wallet_policy` (défauts codés) | **TUÉE** : `expected 200 but was 0` (frais) |
+| code de réception jamais pris (usage unique retiré) | **TUÉE** par 2 tests (dont la course : `expected 1 but was 2`) |
+| code non rendu quand le grand livre refuse | **TUÉE** : `le code reste utilisable expected 0 but was 1` |
+| plafond de transfert retiré | **TUÉE** par 2 tests |
+| mise MBOKO lue sur la dernière édition connue, plus sur la licence vivante | **TUÉE** : `aLicenseSuspendedAfterTheLastSync… expected 409 but was 200` (échappait avant l'ajout de ce test) |
+| liaison à l'appareil (`BOUND_OTHER_TV`) retirée | **TUÉE** par 3 tests (escrow, convert, transfer) |
+| rejeu de règlement refusé (résultat déjà réglé traité comme fermé) | **TUÉE** : `repostingFiveTimes… expected 200 but was 409` ; **la course à 8 fils ne la tue pas seule** (le grand livre rattrape le rejeu par son idempotence) |
+| 4 codes actifs au lieu de 3 | **TUÉE** |
+| domaine du `cbe1` modifié | **TUÉE** (échappait d'abord : le motif n'avait remplacé que le commentaire ; refait avec `/g`) |
+| `eid` dérivé sans l'identité | **TUÉE** : deux TV avec la même clé se heurtaient (409) |
+| ABORT autorisé à déplacer de la valeur | **TUÉE** : `expected 400 but was 200` |
+| `Settlement.check` retiré | **TUÉE** : `expected UNBALANCED but was BAD_TXN` (le grand livre refuse quand même, mais sans le bon motif) |
+Non tentées : atomicité réelle sous MySQL (voir ci-dessous) ; l'arrondi des frais (cœur de w22-01, interdit ici).
+
+## Fichiers
+Nouveaux : `backend/src/main/java/castbridge/server/wallet/ops/{PlayResultKeys,EscrowService,SettleService,EscrowExpiryContributor,ConvertService,ReceiveCodeService,TransferService,WalletOpsController}.java` ; `backend/src/test/java/castbridge/server/wallet/ops/{OpsTestBase,EscrowApiTest,SettleFixturesTest,SettleRaceTest,EscrowExpiryTest,ConvertApiTest,TransferApiTest,OpsConservationTest,OpsLimitsTest}.java` ; `tools/wallet/collect-results.sh` ; ce rapport. Modifiés : `backend/src/main/resources/application.yml` (zone additive : `castbridge.wallet.play-result-pubkeys` et `settle-per-minute`) ; ma ligne de l'index. **Aucune migration** (V63 de w22-02 contient déjà `wallet_result`, `wallet_recv_code`, `wallet_escrow.per/k/exp_at/settled_rid`). Rien dans `wallet/core`, ni dans les classes de w22-02, ni `server-play`, ni Android.
+Écart de liste : `PlayResultKeys` lit sa propriété par `@Value` (`WalletProperties` est à w22-02, non modifiée).
+
+## Choix et écarts à relire à l'audit
+1. **Routes** : `POST /api/v1/wallet/{escrow,convert,receive-code,transfer}` et `GET /receive-code/{code}?deviceCode=` : jeton d'appareil + `deviceCode` dans le corps (comme `sync`) ; c'est ce qui permet `BOUND_OTHER_TV`. `POST /settle` : corps = `cbr1` en texte brut (ou `{"cbr1":"…"}`), aucune authentification, 60 requêtes / min / adresse (`getRemoteAddr()` : derrière un proxy, c'est l'adresse du proxy, donc une limite globale ; la route est inoffensive sans signature valide). Ajout : `POST /api/v1/admin/wallet/escrow-expiry` (jeton d'administration) qui rend les blocages échus de TOUTES les TV, parce que `WalletAdminController` (w22-02, interdit) ne peut pas appeler `EscrowExpiryContributor` : **à brancher dans `reconcile` par l'architecte** si l'appel automatique est voulu (`EscrowExpiryContributor.refundDue(null, now)`).
+2. **Usage unique du code et transfert** : le cahier demande « code marqué utilisé dans la **même** transaction SQL ». `JdbcLedger.post` ne se compose pas dans une transaction extérieure (son réessai borné serait faux : après un interblocage MySQL la transaction est déjà annulée côté base, et une relance dans la même transaction extérieure validerait la pose SANS le marquage du code). J'ai donc choisi : (1) prendre le code par un `UPDATE … WHERE used_at IS NULL AND exp_at > now` atomique ; (2) poser le transfert ; (3) si le grand livre refuse, rendre le code. Les opérations d'un même émetteur sont sérialisées (plafond exact). Garanties : aucune valeur ne bouge avant la prise ; deux émetteurs en course ⇒ un seul gagne (testé) ; un arrêt entre (1) et (2) brûle le code sans bouger de jeton. Pour la lettre du cahier il faudrait une méthode de `JdbcLedger` qui accepte un rappel dans sa transaction : **à demander à w22-02/architecte**.
+3. **Édition pour la mise** : si le corps joint `activations` (≤ 4 `cbx1`), le calcul est celui de `sync` (`GrantService.standing`) ; sinon : licence vivante lue MAINTENANT (`LicenseFacts`), puis grâce, puis dernière édition connue (`wallet_identity.edition`, essai). **Limite** : une fin d'essai n'est vue qu'à la synchronisation suivante. Sans activations jointes, « production sans licence » donne `ACTIVATE` et non `LICENSE_PENDING` (la base ne retient pas ce détail ; avec activations : `LICENSE_PENDING`). Le droit « super » (ILLIMITÉE sans licence) est reconnu à l'étiquette `UNLIMITED` mémorisée.
+4. **Motifs ajoutés côté serveur** (comme `LICENSE_PENDING` de w22-02, absents de `WalletReason` qui est au cœur, interdit) : `LICENSE_PENDING`, `CONVERT_SUSPENDED`, `TRANSFER_SUSPENDED`, `RESULT_AFTER_REFUND`, `CODE_LIMIT`, `LOOKUP_LIMIT`, `RESULT_BAD`, `RESULT_FORGED`, en `details[0]` avec un texte français. À ajouter à `WalletReason` et au Kotlin (w22-03) si la TV doit les reconnaître.
+5. **ABORT** règle par une transaction `SETTLE` (lignes `used = pay = 0`), pas par `ESCROW_REFUND` : un seul chemin de règlement, blocages passés à `SETTLED`. `REFUNDED` ne vient que de l'échéance. `RESULT_AFTER_REFUND` est noté dans `wallet_result` (outcome `AFTER_REFUND`) ; un résultat refusé pour une autre raison n'est PAS noté (le même `rid` bien formé passe ensuite).
+6. **Blocage** : `eid` = 22 caractères base64url de SHA-256(identité, clé d'idempotence) ; `iat` = `created_at` et `exp` = `exp_at` (créé + 30 min) lus de la base, donc un rejeu rend le MÊME `cbe1` octet pour octet ; `per`, `k`, `exp_at` renseignés par un `UPDATE` juste après la pose (si l'arrêt survient entre les deux, `exp_at` NULL ⇒ calculé `created_at + 30 min`, et le règlement vérifie alors `amount` multiple de `per`). `per`, `k`, mise dans les bornes de `wallet_policy` relues à chaque appel.
+7. **Débits** : les écritures de l'identité (escrow, convert, receive-code, transfer) passent par `WalletPolicyService.checkWrite` (30 / min / identité, 600 / min global) ; les consultations de codes ont leur débit propre (10 / h / identité, alerte au journal au-delà de 1 000 / h global, sans blocage).
+8. **Gel** : un compte `frozen` ne peut ni bloquer, ni convertir, ni transférer (il peut recevoir et consulter).
+9. Le `cbw1` rendu par les écritures est signé avec l'étiquette d'édition et les drapeaux calculés par le même calcul que `sync` (sans activations).
+
+## NON VÉRIFIÉ / À FAIRE
+- **Rien n'a tourné contre MySQL** (pas de Docker ici) : `FOR UPDATE`, `ascii_bin`, `DATETIME(6)` (comparaison `used_at = ?` après troncature à la microseconde), `GROUP BY` de l'historique. La course de règlement et la prise du code sont prouvées sur H2 seulement.
+- Fixtures réelles de w22-04 : absentes ; les `cbr1` de test sont signés par une clé de test aléatoire avec le format des vecteurs communs (clé de résultat `wallet-vectors.json` non reprise : un test de parité d'octets Kotlin ↔ Java sur ses `cbr1` dorés reste à faire quand w22-04 est fusionné ; mon vérificateur applique les mêmes règles strictes que le Kotlin : clés exactes, base64url canonique, réécriture compacte identique, entiers seulement).
+- Collecteur : testé avec un serveur factice et un dossier local ; `docker cp` réel et cron à installer par le propriétaire.
+- `castbridge.wallet.play-result-pubkeys` vide ⇒ `POST /settle` répond 503 ; la clé publique de test n'est dans aucun fichier de configuration.
+- Pas de déploiement, pas d'accès serveur, pas de push, aucune clé réelle.
+
+FICHIERS: voir ci-dessus
+SYMBIOSE: cap=aucune · proto=routes `/api/v1/wallet/{escrow,settle,convert,receive-code,transfer}` + `/api/v1/admin/wallet/escrow-expiry`, contributeur `escrow-expiry` dans `sync` (`contributions["escrow-expiry"].refunded`) · reason=motifs de `WalletReason` + motifs serveur du point 4 · deux écrans=sans objet
+AUTOCONTRÔLE: [x] zone [x] porte (suite complète verte + `--self-test`) [x] secrets [x] dépendances (aucune) [x] FR [x] un commit

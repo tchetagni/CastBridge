@@ -101,6 +101,10 @@ castbridge:
     revocations-file: ${CASTBRIDGE_WALLET_REVOCATIONS_FILE:}
     writes-per-minute-per-identity: ${CASTBRIDGE_WALLET_WRITES_PER_MINUTE_PER_IDENTITY:30}
     writes-per-minute-global: ${CASTBRIDGE_WALLET_WRITES_PER_MINUTE_GLOBAL:600}
+    # w22-05: PUBLIC key(s) of the play service that verify the cbr1 results (one or two raw 32-byte base64 keys separated by commas, rotation like TICKET_PUBKEY_2); empty = POST /wallet/settle answers 503.
+    # No private key here, ever. settle-per-minute = requests per minute per address on the unauthenticated settle route.
+    play-result-pubkeys: ${CASTBRIDGE_WALLET_PLAY_RESULT_PUBKEYS:}
+    settle-per-minute: ${CASTBRIDGE_WALLET_SETTLE_PER_MINUTE:60}
   rate-limit:
     per-minute: ${CASTBRIDGE_RATE_LIMIT_PER_MINUTE:120}
     burst: ${CASTBRIDGE_RATE_LIMIT_BURST:60}
