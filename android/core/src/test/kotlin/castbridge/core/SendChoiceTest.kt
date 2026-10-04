@@ -85,4 +85,57 @@ class SendChoiceTest {
         assertEquals("Ma TV", SendChoices.display("CastBridge TV "))
         assertEquals("Salon", SendChoices.display("Salon"))
     }
+
+    // ---- le téléphone se croit de confiance, mais la TV l'a refusé (code 8) : jamais de file d'attente muette
+    private val gone = RefusalRecord(BtProtocol.ERR_UNTRUSTED, 1_000_000)
+    private val soon = 1_000_000L + 60_000
+
+    @Test fun recentUntrustedRefusalTurnsTheQueueIntoEnterPin() {
+        val c = SendChoices.decide(SendFacts(1, "Salon", stepView(LinkState.Connecting), pinTvName = "CastBridge TV Salon", pinStored = false, refusal = gone, nowMs = soon))
+        assertEquals(SendRoute.NONE, c.route); assertEquals(SendAction.ENTER_PIN, c.action); assertFalse(c.copyEnabled)
+        assertEquals(LinkRefusalTexts.banner(BtProtocol.ERR_UNTRUSTED), c.banner)
+    }
+
+    @Test fun recentUntrustedRefusalWithNoPinTvOffersAddTv() {
+        val c = SendChoices.decide(SendFacts(1, "Salon", stepView(LinkState.Connecting), refusal = gone, nowMs = soon))
+        assertEquals(SendRoute.NONE, c.route); assertEquals(SendAction.ADD_TV, c.action); assertNotNull(c.banner)
+    }
+
+    @Test fun aSessionBelievedTrustedIsNotTrustedAfterTheRefusal() {
+        val c = SendChoices.decide(SendFacts(1, "Salon", stepView(LinkState.Connected(RouteKind.LAN, "Salon")), session = true, sessionName = "Salon", refusal = gone, nowMs = soon))
+        assertNotEquals(SendRoute.QUEUE, c.route)
+    }
+
+    @Test fun refusalOlderThanTenMinutesIsForgotten() {
+        val c = SendChoices.decide(SendFacts(1, "Salon", stepView(LinkState.Connecting), refusal = gone, nowMs = 1_000_000L + 10 * 60_000 + 1))
+        assertEquals(SendRoute.QUEUE, c.route); assertNull(c.banner)
+    }
+
+    @Test fun otherRefusalCodesDoNotChangeTheChoice() {
+        val c = SendChoices.decide(SendFacts(1, "Salon", stepView(LinkState.Connecting), refusal = RefusalRecord(BtProtocol.ERR_BUSY, 1_000_000), nowMs = soon))
+        assertEquals(SendRoute.QUEUE, c.route)
+    }
+
+    @Test fun aWorkingPinPathStaysUsableAndShowsNoBanner() {
+        val c = SendChoices.decide(SendFacts(0, null, null, pinTvName = "CastBridge TV Salon", pinStored = true, pinCheck = PinCheck.OK, refusal = gone, nowMs = soon))
+        assertEquals(SendRoute.PIN_UPLOAD, c.route); assertNull(c.banner)
+    }
+
+    @Test fun noRefusalNoBanner() { assertNull(SendChoices.decide(SendFacts()).banner) }
+
+    // ---- une copie en attente de la liaison échoue tout de suite quand la TV refuse (jamais une minute de silence)
+    @Test fun queuedCopyFailsAtOnceOnlyForRefusalStates() {
+        assertEquals(LinkRefusalTexts.ticket(BtProtocol.ERR_UNTRUSTED), LinkRefusalTexts.failureFor(LinkState.TvForgotMe(BtProtocol.HINT_OTHER_INSTALL)))
+        assertEquals(LinkRefusalTexts.ticket(BtProtocol.ERR_DENIED), LinkRefusalTexts.failureFor(LinkState.Denied))
+        assertEquals(LinkRefusalTexts.ticket(BtProtocol.ERR_MAGIC), LinkRefusalTexts.failureFor(LinkState.TvTooOld))
+        assertEquals(LinkRefusalTexts.ticket(42), LinkRefusalTexts.failureFor(LinkState.TvError(42)))
+        for (s in listOf(LinkState.Connecting, LinkState.CredentialExpired, LinkState.NoTv, LinkState.TvUnreachable(AbsentKind.NO_ANSWER),
+            LinkState.WaitingOwner(BtProtocol.ERR_BUSY), LinkState.Connected(RouteKind.LAN, "Salon"))) assertNull(LinkRefusalTexts.failureFor(s), s.key)
+    }
+
+    @Test fun refusalStatesRecordTheirCode() {
+        assertEquals(BtProtocol.ERR_UNTRUSTED, LinkRefusalTexts.codeOf(LinkState.TvForgotMe(0)))
+        assertEquals(BtProtocol.ERR_DENIED, LinkRefusalTexts.codeOf(LinkState.Denied))
+        assertNull(LinkRefusalTexts.codeOf(LinkState.Connecting))
+    }
 }

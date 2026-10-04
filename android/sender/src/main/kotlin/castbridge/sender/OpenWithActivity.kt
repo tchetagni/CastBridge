@@ -93,7 +93,8 @@ class OpenWithActivity : ComponentActivity() {
         val pins = PinStore(this)
         val pinTv = HomeTv(this).name
         val pinCheck = MutableStateFlow(PinCheck.UNKNOWN)
-        if (pinTv != null && TvLinkManager.saved.list().isEmpty() && TvAuth.isUsable(pins.get(pinTv))) checkPinTv(pinTv, pins.get(pinTv), pinCheck)
+        // the TV said « je ne vous reconnais plus » a moment ago: the code path is verified too (it is what can still work)
+        if (pinTv != null && (TvLinkManager.saved.list().isEmpty() || SendChoices.untrusted(refusalFacts())) && TvAuth.isUsable(pins.get(pinTv))) checkPinTv(pinTv, pins.get(pinTv), pinCheck)
         setContent {
             CastTheme {
                 val link by TvLinkManager.state.collectAsState()
@@ -105,7 +106,8 @@ class OpenWithActivity : ComponentActivity() {
                     savedCount = TvLinkManager.saved.list().size, defaultName = TvLinkManager.saved.default()?.name,
                     stepView = when (val l = link) { is LinkUi.Connected -> l.view; is LinkUi.Status -> l.view; else -> null },
                     session = session != null, sessionName = session?.tv?.name, btOnly = session != null && session.base == null,
-                    pinTvName = pinTv, pinStored = rev >= 0 && pinTv != null && TvAuth.isUsable(pins.get(pinTv)), pinCheck = check)
+                    pinTvName = pinTv, pinStored = rev >= 0 && pinTv != null && TvAuth.isUsable(pins.get(pinTv)), pinCheck = check,
+                    refusal = rev.let { latestRefusal() }, nowMs = System.currentTimeMillis())
                 val choice = SendChoices.decide(facts)
                 // « Copier sur la TV et lire »: every state decision is CopyAndPlay's (this build does not learn the TV edition: UNKNOWN, the TV judges the copy)
                 val both = CopyAndPlay.decide(CopyAndPlay.Facts(CopyAndPlay.linkOf(facts, choice), ipRoute = session == null || session.base != null,
@@ -116,13 +118,15 @@ class OpenWithActivity : ComponentActivity() {
                     text = {
                         Column(verticalArrangement = Arrangement.spacedBy(6.dp)) {
                             if (size > 0) Text(formatSize(size), style = MaterialTheme.typography.bodyMedium)
+                            // the TV refused this phone: the cause and what to do, ON the phone (never only a Toast)
+                            choice.banner?.let { Text(it, style = MaterialTheme.typography.bodyMedium, color = MaterialTheme.colorScheme.error) }
                             Text(choice.status, style = MaterialTheme.typography.bodyMedium)
                             choice.note?.let { Text(it, style = MaterialTheme.typography.bodySmall) }
                             androidx.compose.foundation.layout.Spacer(Modifier.height(8.dp))
                             // the code is typed right here (never an extra step); the button of the old path stays for the other actions
                             if (PinEntry.showsField(choice.action) && pinTv != null)
                                 PinEntryBox(pinTv, pins, wipe, verify = { code -> verifyPin(pinTv, code) }, onAccepted = { code ->
-                                    if (pins.put(pinTv, code)) { pinCheck.value = PinCheck.OK; pinRev.value++ }
+                                    if (pins.put(pinTv, code)) { TvLinkManager.refusals.clearAll(); pinCheck.value = PinCheck.OK; pinRev.value++ }
                                     else Toast.makeText(this@OpenWithActivity, "Le code n'a pas pu être gardé sur ce téléphone.", Toast.LENGTH_LONG).show()
                                 })
                             else if (choice.action != SendAction.NONE)
@@ -145,6 +149,12 @@ class OpenWithActivity : ComponentActivity() {
             }
         }
     }
+
+    /** The last refusal of the default TV (else of any TV when none is saved): what « Ouvrir avec » must not contradict. */
+    private fun latestRefusal(): castbridge.core.trust.RefusalRecord? =
+        TvLinkManager.saved.default()?.let { TvLinkManager.refusals.latest(it.address) } ?: if (TvLinkManager.saved.list().isEmpty()) TvLinkManager.refusals.latestAny() else null
+
+    private fun refusalFacts() = SendFacts(refusal = latestRefusal(), nowMs = System.currentTimeMillis())
 
     /**
      * The same check as the home screen's green dot ([TvHome]: `/api/info` with the code), made ONCE per address found: a refusal is never

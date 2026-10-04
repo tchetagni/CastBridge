@@ -101,6 +101,8 @@ object TvLinkManager {
     private lateinit var app: Context
     private lateinit var creds: SharedPreferences
     lateinit var saved: SavedTvs; private set
+    /** The last refusal of each TV (code + time, never a PIN): « Ouvrir avec » stops promising a copy the TV refused. */
+    lateinit var refusals: castbridge.core.trust.LinkRefusals; private set
     lateinit var driver: LinkDriver; private set
     private lateinit var linkEnv: AndroidLinkEnv
     private val _state = MutableStateFlow<LinkUi>(LinkUi.NoTv)
@@ -117,6 +119,7 @@ object TvLinkManager {
         app = ctx.applicationContext
         creds = app.getSharedPreferences("castbridge_trust", Context.MODE_PRIVATE)
         saved = SavedTvs(PrefsPersistence(creds, "tvs"))
+        refusals = castbridge.core.trust.LinkRefusals(PrefsPersistence(creds, "refusals"))
         linkEnv = AndroidLinkEnv(app) { foreground }
         // R-14: the control route never picks a Wi-Fi Direct group it has not joined (its address would not answer); the bulk plane joins it when it is
         // worth it (AutoWifiDirect, core BulkRoute) and the control stays on Bluetooth meanwhile
@@ -166,6 +169,7 @@ object TvLinkManager {
                     if (saved.list().isNotEmpty()) break
                     val tv = SavedTv(TrustRegistry.norm(c.address), c.name.ifBlank { "Ma TV" }, addedAt = System.currentTimeMillis())
                     val r = runCatching { link.connect(tv, requestTrust = false) }.getOrNull()
+                    (r as? PhoneLink.Result.Refused)?.let { refusals.record(tv.address, it.code) }
                     Log.i(TAG, "reprise de ${c.name}: ${r?.javaClass?.simpleName}" + ((r as? PhoneLink.Result.Refused)?.let { " code ${it.code} (${castbridge.core.tv.BtProtocol.describe(it.code)}) indice ${it.hint}" } ?: ""))
                     if (r is PhoneLink.Result.Connected) {
                         saved.upsert(r.session.tv, makeDefault = true)
@@ -262,6 +266,12 @@ object TvLinkManager {
         val tv = saved.default()
         val s = step?.session
         val v = LinkStart.view(list.size, tv?.name, step?.view)
+        // the TV's answer, remembered: a refusal (code 8…) is what the next « Ouvrir avec » must know; a good link wipes it
+        if (tv != null && ::refusals.isInitialized) {
+            val st = step?.view?.state
+            val code = st?.let { castbridge.core.trust.LinkRefusalTexts.codeOf(it) }
+            if (code != null) refusals.record(tv.address, code) else if (st != null && st.isGood) refusals.clear(tv.address)
+        }
         _state.value = when {
             v == null -> LinkUi.NoTv
             tv == null -> LinkUi.Status(v, list.first())
