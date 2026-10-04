@@ -137,6 +137,13 @@ class JournalVectorsTest {
         cases.add(caze("gap-filled-later", "the missing batch arrives afterwards and fills the hole",
                 step(f1.build(), "OK", null, 2, 0, null, null, 2), step(f3.build(), "OK", null, 1, 0, 3L, 4L, 5), step(f2.build(), "OK", null, 2, 0, null, null, 5)));
 
+        // audit w23-01 (mutation M10): the batch that FILLS a hole must also fit the batch AFTER it (its last hash is the prev of the next one)
+        var n1 = b("gap-fill-next", 1, desk, 1, 1).entry(T0, "deliver", "fp=" + FP1, "way=bt", "tv=ok").entry(T0 + 1, "deliver", "fp=" + FP2, "way=bt", "tv=ok");
+        var n3 = b("gap-fill-next", 3, desk, 3, 5).prev("d".repeat(64)).entry(T0 + 4, "deliver", "fp=" + FP3, "way=bt", "tv=ok").entry(T0 + 5, "refused", "reason=x", "device=" + DEV);
+        var n2 = b("gap-fill-next", 2, desk, 2, 3).prev(n1.lastHash()).entry(T0 + 2, "deliver", "fp=" + FP3, "way=bt", "tv=ok").entry(T0 + 3, "refused", "reason=x", "device=" + DEV);
+        cases.add(caze("gap-fill-next-mismatch", "the batch that fills the hole 3-4 does not end on the hash the next batch (5-6) says it follows: quarantine",
+                step(n1.build(), "OK", null, 2, 0, null, null, 2), step(n3.build(), "OK", null, 2, 0, 3L, 4L, 6), step(n2.build(), "QUARANTINE", "PREV_MISMATCH", 0, 0, null, null, 6)));
+
         var w1 = b("rewrite", 1, desk, 1, 1).entry(T0, "deliver", "fp=" + FP1, "way=bt", "tv=ok").entry(T0 + 1, "deliver", "fp=" + FP2, "way=bt", "tv=ok").entry(T0 + 2, "deliver", "fp=" + FP3, "way=bt", "tv=ok");
         var w2 = b("rewrite", 2, desk, 2, 3).prev(w1.hashAt(1)).entry(T0 + 2, "deliver", "fp=" + FP3, "way=bt", "tv=-");
         cases.add(caze("rewritten-entry", "same entry number, different content: the batch goes to quarantine",

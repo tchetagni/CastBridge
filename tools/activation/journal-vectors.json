@@ -155,6 +155,43 @@
       }
     } ]
   }, {
+    "name" : "gap-fill-next-mismatch",
+    "why" : "the batch that fills the hole 3-4 does not end on the hash the next batch (5-6) says it follows: quarantine",
+    "steps" : [ {
+      "token" : "cbx1.Y2FzdGJyaWRnZS1lbnZlbG9wZS12MQp0eXBlPWpvdXJuYWwKa2lkPWIzNzRhOTIyNTg4Njg2MzQKc2VxPTEKbm9uY2U9YWM0ODY0ODdmNTQ4ZDM0ZQppc3N1ZWRBdD0xNzU5NjAwMDAxMDAwCm5vdEJlZm9yZT0xNzU5NjAwMDAxMDAwCmV4cGlyZXNBdD0xNzkxMTM2MDAxMDAwCnRhcmdldD1hbnkKLS0KdG9vbD1kZXNrCmFwcD0wLjE0LjEyCmZyb209MQp0bz0yCnByZXY9MDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMAplPTF8MTc1OTYwMDAwMDAwMHxkZWxpdmVyfGZwPWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWF8d2F5PWJ0fHR2PW9rCmU9MnwxNzU5NjAwMDAwMDAxfGRlbGl2ZXJ8ZnA9YmJiYmJiYmJiYmJiYmJiYmJiYmJiYmJiYmJiYmJiYmJiYmJiYmJiYmJiYmJiYmJiYmJiYmJiYmJiYmJiYmJiYnx3YXk9YnR8dHY9b2s.l7dEvsh0Bmx3hLo354SQJWZqrwmIsVmFPLqwUXDaKA/zy0dWxrdfCKA53ucUUcp3WMn4ILD14aNfx6C7fwUOAg==",
+      "expect" : {
+        "status" : "OK",
+        "reason" : null,
+        "accepted" : 2,
+        "duplicate" : 0,
+        "gapFrom" : null,
+        "gapTo" : null,
+        "maxN" : 2
+      }
+    }, {
+      "token" : "cbx1.Y2FzdGJyaWRnZS1lbnZlbG9wZS12MQp0eXBlPWpvdXJuYWwKa2lkPWIzNzRhOTIyNTg4Njg2MzQKc2VxPTMKbm9uY2U9ODQ4MWYwZjE5MjA4ZWEyYQppc3N1ZWRBdD0xNzU5NjAwMDAzMDAwCm5vdEJlZm9yZT0xNzU5NjAwMDAzMDAwCmV4cGlyZXNBdD0xNzkxMTM2MDAzMDAwCnRhcmdldD1hbnkKLS0KdG9vbD1kZXNrCmFwcD0wLjE0LjEyCmZyb209NQp0bz02CnByZXY9ZGRkZGRkZGRkZGRkZGRkZGRkZGRkZGRkZGRkZGRkZGRkZGRkZGRkZGRkZGRkZGRkZGRkZGRkZGRkZGRkZGRkZAplPTV8MTc1OTYwMDAwMDAwNHxkZWxpdmVyfGZwPWNjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2N8d2F5PWJ0fHR2PW9rCmU9NnwxNzU5NjAwMDAwMDA1fHJlZnVzZWR8cmVhc29uPXh8ZGV2aWNlPVpZREEtQlpSVi1NVDhILUJTUTc.fEzlAxvDMmbdAODqvq+E3cVdROxEDLodJbV8l6eJZtOIy1ryGMP1p3B5iIG84NBCONXcAaOFITVObIIeN8mWBA==",
+      "expect" : {
+        "status" : "OK",
+        "reason" : null,
+        "accepted" : 2,
+        "duplicate" : 0,
+        "gapFrom" : 3,
+        "gapTo" : 4,
+        "maxN" : 6
+      }
+    }, {
+      "token" : "cbx1.Y2FzdGJyaWRnZS1lbnZlbG9wZS12MQp0eXBlPWpvdXJuYWwKa2lkPWIzNzRhOTIyNTg4Njg2MzQKc2VxPTIKbm9uY2U9ODZhNDY0MWI4ODE0NGI5YQppc3N1ZWRBdD0xNzU5NjAwMDAyMDAwCm5vdEJlZm9yZT0xNzU5NjAwMDAyMDAwCmV4cGlyZXNBdD0xNzkxMTM2MDAyMDAwCnRhcmdldD1hbnkKLS0KdG9vbD1kZXNrCmFwcD0wLjE0LjEyCmZyb209Mwp0bz00CnByZXY9ZGViNDE1ODE1NTIzZGY4ODIwNzFlYjI4NTUyYWYxZTViMzY0OGY2NjhkZDNkMmVhY2VlMTczYjNmMDEwZGMyNwplPTN8MTc1OTYwMDAwMDAwMnxkZWxpdmVyfGZwPWNjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2N8d2F5PWJ0fHR2PW9rCmU9NHwxNzU5NjAwMDAwMDAzfHJlZnVzZWR8cmVhc29uPXh8ZGV2aWNlPVpZREEtQlpSVi1NVDhILUJTUTc./ZqmrVjxVHry6xYGiJmolLS7oxQTbyVJ+9THRDpAyXiIuKxk+fUwlFmDPZ0S0UgWdl1WVKj6PzDCFCvBWKXiCA==",
+      "expect" : {
+        "status" : "QUARANTINE",
+        "reason" : "PREV_MISMATCH",
+        "accepted" : 0,
+        "duplicate" : 0,
+        "gapFrom" : null,
+        "gapTo" : null,
+        "maxN" : 6
+      }
+    } ]
+  }, {
     "name" : "rewritten-entry",
     "why" : "same entry number, different content: the batch goes to quarantine",
     "steps" : [ {
