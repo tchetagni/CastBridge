@@ -37,6 +37,11 @@ android {
         // ABSOLUTE start of the grace (version.properties « lock.graceStartMs »): only an install whose firstInstallTime is EARLIER gets the grace, which ends at start + graceDays and never restarts.
         buildConfigField("long", "LOCK_GRACE_START_MS", "${(project.findProperty("castbridge.lockGraceStartMs") as String?) ?: ver("lock.graceStartMs")}L")
         buildConfigField("String", "TRUSTED_KEYS", "\"$trustedKeys\"")
+        // W22-07a: the PUBLIC key(s) of the wallet API (the key that signs the `cbw1` balance snapshots), one « kid=… pub=… » line each: file android/receiver/wallet-keys.txt (public keys only, safe to commit),
+        // or -PwalletKeysFile=… for a throw-away key. Empty => the TV cannot verify any snapshot (the wallet screen says so). The key itself is a server secret and is NEVER here.
+        val walletFile = (project.findProperty("walletKeysFile") as String?)?.let { File(it) } ?: File(projectDir, "wallet-keys.txt")
+        val walletKeys = if (walletFile.isFile) walletFile.readLines().map { it.trim() }.filter { it.startsWith("kid=") && " pub=" in it }.joinToString("\\n") else ""
+        buildConfigField("String", "WALLET_KEYS", "\"$walletKeys\"")
         buildConfigField("String", "DEFAULT_SERVER", "\"${(project.findProperty("castbridge.serverUrl") as String?) ?: ""}\"")
     }
     buildFeatures { buildConfig = true }

@@ -121,6 +121,12 @@
             android:configChanges="orientation|screenSize|screenLayout|keyboard|keyboardHidden|navigation" />
         <!-- Langues (docs/LANGUES.md): lessons and exercises of the « langues » lots pushed by the phone; closed in the trial edition -->
         <activity
+            android:name=".wallet.WalletActivity"
+            android:exported="false"
+            android:launchMode="singleTop"
+            android:screenOrientation="landscape"
+            android:configChanges="orientation|screenSize|screenLayout|keyboard|keyboardHidden|navigation" />
+        <activity
             android:name=".LanguesActivity"
             android:exported="false"
             android:launchMode="singleTop"

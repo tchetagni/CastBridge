@@ -1,0 +1,32 @@
+{
+  "format": "castbridge-wallet-bind-vector-v1",
+  "note": "Vecteur dore de la preuve de possession (domaine castbridge-wallet-bind-v1) : produit par une implementation independante (Python cryptography), lu par le test Kotlin BindProofVectorTest ; verifie aussi par tools/wallet/BindProofCheck.java (logique de BindProof.valid). Le test Java du serveur doit le lire aussi (a ajouter par l'architecte : backend interdit ici). Cle de TEST sans valeur.",
+  "seedHex": "5555555555555555555555555555555555555555555555555555555555555555",
+  "keyBase64": "xoImN8fTEOxXYnvgC6JZ0lN0n0qvZERwz/vlOjX3MkI=",
+  "deviceCode": "7K3M-9PQ2-XH4T-V8RM",
+  "apiDeviceId": "0b7d1c52-8f3a-4e19-9c60-5a2f7d3e8b14",
+  "at": 1790000000000,
+  "message": "castbridge-wallet-bind-v1\n7K3M-9PQ2-XH4T-V8RM\n0b7d1c52-8f3a-4e19-9c60-5a2f7d3e8b14\n1790000000000",
+  "sigBase64": "WFOyU9KZ+3Ns17DUDO9UZuFuTSalxooc2LE2Cm1kuM+FDJtgqG1/IaDVom0fXhf7ScRvGLrnALzhQf7JFtmoBw==",
+  "valid": {
+    "serverNowMs": 1790000299000,
+    "expect": true
+  },
+  "refused": [
+    {
+      "name": "autre code",
+      "code": "2B5D-8FGH-1JKM-NPQ5",
+      "expect": false
+    },
+    {
+      "name": "autre appareil API",
+      "apiDeviceId": "00000000-0000-4000-8000-000000000000",
+      "expect": false
+    },
+    {
+      "name": "hors fenetre (+5 min 1 ms)",
+      "serverNowMs": 1790000300001,
+      "expect": false
+    }
+  ]
+}
