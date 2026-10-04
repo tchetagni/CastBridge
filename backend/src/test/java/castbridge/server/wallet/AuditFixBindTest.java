@@ -99,14 +99,15 @@ class AuditFixBindTest extends WalletTestBase {
         Acts.Tv tv = Acts.Tv.random();
         String act = Acts.trialDays(ISSUER, tv, NOW, 30);
         assertEquals(200, sync(first, tv, bindJson(pair(), tv.code(), first.publicId(), NOW), act).getResponse().getStatus());
-        String body = "{\"identity\":\"" + tv.code() + "\",\"reason\":\"TV d'origine reconnue par le support\"}";
+        KeyPair secondKey = pair();   // la clé de la TV d'origine : le propriétaire en a lu l'empreinte sur son écran (second audit w23-05, HIGH-A)
+        String body = "{\"identity\":\"" + tv.code() + "\",\"reason\":\"TV d'origine reconnue par le support\",\"installKeyFingerprint\":\"" + castbridge.server.licenses.InstallKeyFingerprint.ofBase64(rawPublic(secondKey)) + "\"}";
         assertEquals(403, mvc.perform(post("/api/v1/admin/wallet/rebind").header("Authorization", ADMIN).contentType(MediaType.APPLICATION_JSON).content(body)).andReturn().getResponse().getStatus(),
                 "le jeton seul ne réaffecte pas");
         Admin a = newAdmin();
         assertEquals(200, mvc.perform(a.sign(post("/api/v1/admin/wallet/rebind").header("Authorization", ADMIN).contentType(MediaType.APPLICATION_JSON).content(body))).andReturn().getResponse().getStatus());
         assertEquals(1, jdbc.queryForObject("SELECT COUNT(*) FROM lic_audit WHERE action = 'WALLET_REBIND' AND actor = ? AND target_id = ?", Long.class, a.name, tv.code()));
         assertNull(jdbc.queryForObject("SELECT install_pub FROM wallet_identity WHERE holder = ?", String.class, tv.code()));
-        assertEquals(200, sync(second, tv, bindJson(pair(), tv.code(), second.publicId(), NOW), act).getResponse().getStatus());
+        assertEquals(200, sync(second, tv, bindJson(secondKey, tv.code(), second.publicId(), NOW), act).getResponse().getStatus());
         assertEquals(jdbc.queryForObject("SELECT id FROM device WHERE public_id = ?", Long.class, second.publicId()),
                 jdbc.queryForObject("SELECT api_device_id FROM wallet_identity WHERE holder = ?", Long.class, tv.code()));
     }

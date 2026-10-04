@@ -33,6 +33,7 @@
     <section class="card" th:if="${act != null}">
         <h2 th:text="${act.reused} ? 'Activation (réémise à l\'identique)' : 'Activation émise'"></h2>
         <p id="act-license">Licence <b class="mono" th:text="${act.licenseId}"></b> · sorte <b th:text="${act.kind}"></b> · poste <b class="mono" th:text="${act.seatId}"></b> <span th:if="${act.newSeat}">(nouveau)</span> · installable jusqu'au <b th:text="${@fmt.date(act.notAfter)}"></b> · empreinte <span class="mono" th:text="${#strings.substring(act.fingerprint, 0, 12)}"></span></p>
+        <p id="act-fp" th:if="${act.installKeyFingerprint != null}">Clé d'installation de la TV liée à cette activation : empreinte <b class="mono" th:text="${act.installKeyFingerprint}"></b> · comparez-la avec l'écran d'activation de la TV avant de la remettre.</p>
         <p id="act-props">Propriétés de la clé : édition <b th:text="${act.kind == 'TRIAL'} ? 'essai' : 'production'"></b> · durée <b th:text="${act.usageDays == null} ? 'illimitée' : ${act.usageDays} + ' jours'"></b><span th:if="${act.usageEnd != null}"> · fin le <b th:text="${@fmt.date(act.usageEnd)}"></b></span></p>
         <textarea id="act-text" class="act" readonly rows="6" th:text="${act.text}"></textarea>
         <p>

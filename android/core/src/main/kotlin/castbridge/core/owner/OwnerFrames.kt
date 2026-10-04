@@ -50,10 +50,12 @@ object OwnerFrames {
     }.getOrNull()
 
     /** The text of the "device request" the TV gives for activation: its code and the full fingerprint set (the console needs them to build an activation and the lot keys). */
-    fun deviceInfo(code: String, fp: Fingerprints, installPub: ByteArray? = null, installSig: ByteArray? = null): String =
+    fun deviceInfo(code: String, fp: Fingerprints, installPub: ByteArray? = null, installSig: ByteArray? = null, withFingerprint: Boolean = false): String =
         (listOf("code=$code", "k=${DeviceIdentity.kFor(fp.n)}") + fp.byKind.map { "factor=${it.key.name}|${it.value}" } +
             listOfNotNull(installPub?.also { require(it.size == 32) { "clé d'installation de 32 octets attendue" } }?.let { "install=x25519|" + it.joinToString("") { b -> "%02x".format(b) } }) +
-            listOfNotNull(installSig?.also { require(it.size == 32) { "clé de signature de 32 octets attendue" } }?.let { "install_sig=ed25519|" + it.joinToString("") { b -> "%02x".format(b) } })).joinToString("\n")
+            listOfNotNull(installSig?.also { require(it.size == 32) { "clé de signature de 32 octets attendue" } }?.let { "install_sig=ed25519|" + it.joinToString("") { b -> "%02x".format(b) } }) +
+            // OPTIONAL human-readable fingerprint of install_sig (second audit w23-05, MEDIUM-C): off by default so a TV talking to a server that does not know the line keeps working; readers check it against install_sig
+            listOfNotNull(installSig?.takeIf { withFingerprint }?.let { "install_fp=" + ActivationBinding.fingerprint(it) })).joinToString("\n")
 
     /**
      * The device request: [code], [k], the factors [fp], the installation's public key [installPub] (null for a request from an old TV) and the `key=value` lines this version does not
@@ -76,7 +78,7 @@ object OwnerFrames {
         val code = DeviceCode.parse(lines[0].removePrefix("code=").takeIf { lines[0].startsWith("code=") } ?: return null) ?: return null
         if (!lines[1].startsWith("k=")) return null
         val k = lines[1].removePrefix("k=").toInt()
-        val factors = LinkedHashMap<FactorKind, String>(); var installPub: ByteArray? = null; var installSig: ByteArray? = null; val unknown = ArrayList<String>()
+        val factors = LinkedHashMap<FactorKind, String>(); var installPub: ByteArray? = null; var installSig: ByteArray? = null; var installFp: String? = null; val unknown = ArrayList<String>()
         for (l in lines.drop(2)) {
             val eq = l.indexOf('='); if (eq <= 0) return null
             val key = l.substring(0, eq); val value = l.substring(eq + 1)
@@ -93,9 +95,15 @@ object OwnerFrames {
                     if (installSig != null || h.length != 64 || !h.all { it in '0'..'9' || it in 'a'..'f' }) return null
                     installSig = h.chunked(2).map { it.toInt(16).toByte() }.toByteArray()
                 }
+                key == "install_fp" -> {
+                    // optional readable fingerprint of install_sig: malformed or doubled = unreadable; present with an install_sig that does not match = altered request = unreadable
+                    if (installFp != null) return null
+                    installFp = ActivationBinding.normalizeFingerprint(value) ?: return null
+                }
                 else -> unknown += l
             }
         }
+        if (installFp != null && installSig != null && installFp != ActivationBinding.fingerprint(installSig).replace("-", "")) return null
         DeviceInfo(code, k, Fingerprints(factors), installPub, unknown, installSig)
     }.getOrNull()
 

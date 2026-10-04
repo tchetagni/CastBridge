@@ -64,7 +64,7 @@ public abstract class WalletTestBase extends ApiTestBase {
         }
 
         /** Le prochain code valable (pas de recul : un code déjà accepté est refusé). */
-        String code() {
+        public String code() {
             long now = castbridge.server.licenses.Totp.stepAt(java.time.Instant.now().getEpochSecond());
             long step = Math.max(last + 1, now - 1);
             if (step > now + 1) throw new IllegalStateException("plus de code TOTP disponible dans cette fenêtre pour " + name);

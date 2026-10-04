@@ -9,6 +9,9 @@ import castbridge.core.lots.Right
  * automatically. Null = a TV that does not send it yet: the activation binds no key and the server waits for the owner's decision.
  */
 class DeviceRequest(val code: String, val k: Int, val factors: Fingerprints, val installPub: ByteArray? = null, val installSig: ByteArray? = null) {
+    /** The readable fingerprint of [installSig] (8 groups of 4): what the owner compares with the TV's activation screen BEFORE signing it into an activation; null when the TV sent no key. */
+    val installFingerprint: String? get() = installSig?.let { ActivationBinding.fingerprint(it) }
+
     companion object {
         /** From the TV's text (`code=…` / `k=…` / `factor=TYPE|hash` lines). Tolerates CRLF and blank lines. */
         fun parse(text: String): DeviceRequest {
@@ -68,7 +71,10 @@ object RentalIssuing {
 }
 
 /** Result of one issuing: every encoding of the token plus where the registry stands. */
-class Delivered(val issued: ActivationIssuer.Issued, val seat: String, val reused: Boolean, val seatsLeft: Int?)
+class Delivered(val issued: ActivationIssuer.Issued, val seat: String, val reused: Boolean, val seatsLeft: Int?) {
+    /** The fingerprint of the installation key SIGNED into this activation (null when it carries none): to compare with the TV's screen before handing it over. */
+    val installKeyFingerprint: String? get() = ActivationBinding.installKeyOf(issued.activation)?.let { ActivationBinding.fingerprint(it) }
+}
 
 /** The owner's short syntax for rights (CLI options and the GUI's rights box). Errors are French sentences for the screen. */
 object RightsSyntax {

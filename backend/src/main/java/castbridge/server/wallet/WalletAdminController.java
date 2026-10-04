@@ -58,7 +58,7 @@ public class WalletAdminController {
 
     public record GrantBody(String identity, String currency, Long amount, String reason, String idem) {}
 
-    public record RebindBody(String identity, String reason) {}
+    public record RebindBody(String identity, String reason, String installKeyFingerprint) {}
 
     private static Map<String, Object> done(boolean replayed, long balance, long id) {
         Map<String, Object> out = new LinkedHashMap<>();
@@ -185,8 +185,10 @@ public class WalletAdminController {
         Actor actor = access.verify(user, totp);
         if (b == null || b.identity() == null || !AccountRef.IDENTITY.matcher(b.identity()).matches()) throw ApiException.badRequest("Identité invalide : XXXX-XXXX-XXXX-XXXX");
         if (b.reason() == null || b.reason().isBlank() || b.reason().length() > 200) throw ApiException.badRequest("Motif obligatoire (200 caractères au plus)");
-        if (!repo.clearBinding(b.identity())) throw ApiException.notFound("Identité inconnue : aucune synchronisation de cette TV");
-        access.record(actor, "WALLET_REBIND", b.identity(), b.reason().trim(), Map.of());
+        String fp = castbridge.server.licenses.InstallKeyFingerprint.normalize(b.installKeyFingerprint());
+        if (fp == null) throw ApiException.badRequest("Empreinte de la clé d'installation obligatoire : les 32 caractères lus sur l'écran d'activation de la TV (8 groupes de 4, par exemple 1a2b-3c4d-…)");
+        if (!repo.rebindExpecting(b.identity(), fp)) throw ApiException.notFound("Identité inconnue : aucune synchronisation de cette TV");
+        access.record(actor, "WALLET_REBIND", b.identity(), b.reason().trim(), Map.of("expectedInstallKey", fp));
         log.info("wallet : liaison d'une identité réaffectée par {}", actor.name());
         Map<String, Object> out = new LinkedHashMap<>();
         out.put("ok", true);

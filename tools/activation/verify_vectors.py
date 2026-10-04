@@ -1497,6 +1497,39 @@ def run_pilot_vectors():
 
 
 
+# ------------------------------------------------------------------ empreinte de la clé d'installation (install-key-fingerprint-vectors.json), second audit w23-05
+
+def install_key_fingerprint(raw):
+    """8 groupes de 4 hexadécimaux minuscules : les 16 premiers octets de SHA-256 de la clé brute (32 octets) ; None si ce n'est pas une clé de 32 octets."""
+    if len(raw) != 32:
+        return None
+    h = hashlib.sha256(raw).digest()[:16].hex()
+    return "-".join(h[i:i + 4] for i in range(0, 32, 4))
+
+
+def normalize_fingerprint(typed):
+    s = "".join(ch for ch in typed if not ch.isspace() and ch != "-").lower()
+    return s if re.fullmatch("[0-9a-f]{32}", s) else None
+
+
+def run_install_key_fingerprint_vectors():
+    doc = load("install-key-fingerprint-vectors.json")
+    n, failures = 0, []
+
+    def check(cid, ok, why=""):
+        nonlocal n
+        n += 1
+        if not ok:
+            failures.append("%s %s" % (cid, why))
+
+    for c in doc["cases"]:
+        check(c["id"], install_key_fingerprint(bytes.fromhex(c["publicKeyHex"])) == c["fingerprint"], "empreinte différente")
+    check("short-key", install_key_fingerprint(bytes(31)) is None)
+    for x in doc["normalize"]:
+        check("normalize " + x["typed"], normalize_fingerprint(x["typed"]) == x["canonical"])
+    return n, failures
+
+
 def main():
     if "--only" in sys.argv and sys.argv[sys.argv.index("--only") + 1:][:1] == ["store"]:
         n, failures = run_store_vectors()
@@ -1511,7 +1544,7 @@ def main():
             print("ÉCHEC :", f)
         return 1 if failures else 0
     total, bad = 0, 0
-    for name, run in (("test-vectors.json", run_test_vectors), ("rental-vectors.json", run_rental_vectors), ("server-issued.json", run_server_issued), ("implicit usage end (sans fichier)", run_implicit_usage_end), ("rental-pilot-vectors.json", run_pilot_vectors)):
+    for name, run in (("test-vectors.json", run_test_vectors), ("rental-vectors.json", run_rental_vectors), ("server-issued.json", run_server_issued), ("implicit usage end (sans fichier)", run_implicit_usage_end), ("rental-pilot-vectors.json", run_pilot_vectors), ("install-key-fingerprint-vectors.json", run_install_key_fingerprint_vectors)):
         n, failures = run()
         print("%-36s %4d contrôles, %d échecs" % (name, n, len(failures)))
         for f in failures:

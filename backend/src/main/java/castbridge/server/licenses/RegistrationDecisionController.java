@@ -39,6 +39,7 @@ public class RegistrationDecisionController {
         List<ReportedActivationRegistrar.Pending> items = registrar.pending(limit == null ? 100 : limit);
         Map<String, Object> out = new LinkedHashMap<>();
         out.put("items", items);
+        out.put("alerts", registrar.recentAlerts(50));
         return out;
     }
 

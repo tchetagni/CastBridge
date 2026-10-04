@@ -50,8 +50,13 @@ public class EditionReader {
      * @param clockDoubt      une activation datée de plus de 24 h dans le futur
      * @param firstTrialStart début de la plus ancienne clé d'essai acceptée, sinon null
      * @param rejected        un motif par activation écartée
+     * @param installKeys     les clés d'installation (base64 brute) SIGNÉES (droit {@code ik}) dans les activations de production acceptées : une activation prouvée par cette clé lie l'identité à la TV qui la détient
      */
-    public record Reading(String identity, List<EditionSpan> spans, boolean productionKey, boolean superKey, boolean clockDoubt, Instant firstTrialStart, List<Rejection> rejected) {
+    public record Reading(String identity, List<EditionSpan> spans, boolean productionKey, boolean superKey, boolean clockDoubt, Instant firstTrialStart, List<Rejection> rejected, Set<String> installKeys) {
+        public Reading(String identity, List<EditionSpan> spans, boolean productionKey, boolean superKey, boolean clockDoubt, Instant firstTrialStart, List<Rejection> rejected) {
+            this(identity, spans, productionKey, superKey, clockDoubt, firstTrialStart, rejected, Set.of());
+        }
+
         public boolean accepted() { return identity != null; }
     }
 
@@ -132,15 +137,16 @@ public class EditionReader {
         String code = DeviceIdentity.parseCode(deviceCode);
         if (code == null) throw new IllegalArgumentException("Code d'appareil invalide");
         List<Rejection> rejected = new ArrayList<>();
-        if (tokens == null || tokens.isEmpty()) return new Reading(null, List.of(), false, false, false, null, rejected);
+        if (tokens == null || tokens.isEmpty()) return new Reading(null, List.of(), false, false, false, null, rejected, Set.of());
         if (tokens.size() > MAX_TOKENS) {
             rejected.add(Rejection.TOO_MANY);
-            return new Reading(null, List.of(), false, false, false, null, rejected);
+            return new Reading(null, List.of(), false, false, false, null, rejected, Set.of());
         }
         EnvelopeVerifier.Revocations rev = revocations.get();
         List<EditionSpan> spans = new ArrayList<>();
         boolean production = false, superKey = false, clock = false;
         Instant firstTrial = null;
+        Set<String> installKeys = new java.util.LinkedHashSet<>();
         for (String token : tokens) {
             Rejection why = null;
             WireActivation.Fields f = null;
@@ -172,12 +178,18 @@ public class EditionReader {
                 if (firstTrial == null || s.start().isBefore(firstTrial)) firstTrial = s.start();
             } else {
                 production = true;
+                try {
+                    String ik = WireActivation.installKeyOf(f.rights());
+                    if (ik != null) installKeys.add(ik);
+                } catch (IllegalArgumentException e) {
+                    // un droit ik illisible n'apporte aucune clé
+                }
             }
         }
         // l'identité est prouvée dès qu'une activation (essai ou production) a été acceptée ; horloge douteuse : rien n'est accordé, tout est refusé
-        if (clock) return new Reading(null, List.of(), false, false, true, null, List.copyOf(rejected));
+        if (clock) return new Reading(null, List.of(), false, false, true, null, List.copyOf(rejected), Set.of());
         boolean accepted = production || firstTrial != null;
-        return new Reading(accepted ? code : null, List.copyOf(spans), production, superKey, false, firstTrial, List.copyOf(rejected));
+        return new Reading(accepted ? code : null, List.copyOf(spans), production, superKey, false, firstTrial, List.copyOf(rejected), Set.copyOf(installKeys));
     }
 
     private Rejection check(Envelope env, WireActivation.Fields a, String code, EnvelopeVerifier.Revocations rev) {

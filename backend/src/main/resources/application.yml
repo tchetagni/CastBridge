@@ -142,6 +142,10 @@ castbridge:
     totp-key: ${CASTBRIDGE_LICENSES_TOTP_KEY:}
     require-totp: ${CASTBRIDGE_LICENSES_REQUIRE_TOTP:true}
     default-grace-days: ${CASTBRIDGE_LICENSES_DEFAULT_GRACE_DAYS:14}
+    # automatic registration of production activations presented by the TV (W23-05): ON by default; set CASTBRIDGE_LICENSES_REGISTRAR_ENABLED=false to switch it off
+    # without redeploying (no licence or seat is then created by a presented activation; the owner's manual issue and the rest of the module are untouched)
+    registrar:
+      enabled: ${CASTBRIDGE_LICENSES_REGISTRAR_ENABLED:true}
     default-transfer-cap: ${CASTBRIDGE_LICENSES_DEFAULT_TRANSFER_CAP:0}
     # public keys of the offline tools trusted to sign registry events, WITH their scopes (docs/ACTIVATION-FORMAT.md § 2):
     # "desktop:<base64 raw public key>:ISSUE_TRIAL+ISSUE_PRODUCTION+TRANSFER+REVOKE+REGISTRY,phone:<base64>:…"; an entry without scopes is ignored

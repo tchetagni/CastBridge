@@ -233,6 +233,7 @@ class ActivationVectorsTest {
         cases += build("build-production-ik", "production avec plafond d'usage ET la clé d'installation de la TV signée (droit ik|<64 hex>, correctif w23-05)", "desk", req("tvA", rights = listOf(usage)).copy(installKey = tvInstallKey), "tvA")
         cases += build("build-production-ik-only", "production dont le seul droit est la clé d'installation signée (ik) : version complète liée à la TV", "desk", req("tvA", rights = emptyList()).copy(installKey = tvInstallKey), "tvA")
         cases += refuse("build-refuse-ik-trial", "une clé d'essai ne porte jamais la clé d'installation (refusée)", "desk", req("tvA", ActivationKind.TRIAL).copy(installKey = tvInstallKey), "tvA")
+        cases += refuse("build-refuse-ik-phone", "la clé d'installation n'est JAMAIS signée pour un téléphone (second audit w23-05, LOW-E : parité Java, Kotlin, Python)", "desk", req("phoneP", rights = listOf(purchase), subject = Subject.PHONE).copy(installKey = tvInstallKey), "phoneP")
         cases += J("type" to "build-activation", "id" to "build-refuse-bad-code", "description" to "code d'appareil mal formé", "signer" to "desk",
             "request" to reqJson(req("tvA"), "tvA") + mapOf("deviceCodeOverride" to "ABCD-EFGH-JKMN-PQRZ"), "expect" to J("refused" to true))
         // 5b. envelope: sequence numbers, unknown type

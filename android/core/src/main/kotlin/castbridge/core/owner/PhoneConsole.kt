@@ -18,6 +18,8 @@ class PhoneIssue(val delivered: Delivered) {
     val bluetoothFrame: ByteArray get() = delivered.issued.bluetoothFrame
     /** Content of the `activation` file (USB drive) and the QR payload (the token itself). */
     val fileContent: String get() = delivered.issued.fileContent
+    /** Fingerprint of the TV installation key signed into the token (null: none): shown next to the token to compare with the TV's screen. */
+    val installKeyFingerprint: String? get() = delivered.installKeyFingerprint
 }
 
 sealed class PhoneUnlock {

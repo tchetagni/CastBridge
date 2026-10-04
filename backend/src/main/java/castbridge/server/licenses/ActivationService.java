@@ -98,7 +98,12 @@ public class ActivationService {
     public static String usageLine(long fromMs, int days) { return "usage|duree|" + fromMs + "|" + (fromMs + days * DAY); }
 
     public record Activation(String text, String kid, String nonce, String fingerprint, String kind, String subject, Instant issuedAt, Instant notAfter, String licenseId,
-                             String seatId, String deviceCode, boolean reused, boolean newSeat, String format, Integer usageDays, Instant usageEnd) {
+                             String seatId, String deviceCode, boolean reused, boolean newSeat, String format, Integer usageDays, Instant usageEnd, String installKeyFingerprint) {
+        public Activation(String text, String kid, String nonce, String fingerprint, String kind, String subject, Instant issuedAt, Instant notAfter, String licenseId,
+                          String seatId, String deviceCode, boolean reused, boolean newSeat, String format, Integer usageDays, Instant usageEnd) {
+            this(text, kid, nonce, fingerprint, kind, subject, issuedAt, notAfter, licenseId, seatId, deviceCode, reused, newSeat, format, usageDays, usageEnd, null);
+        }
+
         /** Human summary of the key (edition, duration, end date): no secret. */
         public String properties() {
             return "édition " + (kind.equals("TRIAL") ? "essai" : "production") + " · durée " + (usageDays == null ? "illimitée" : usageDays + " jours") + (usageEnd == null ? "" : " · fin le " + usageEnd.toString().substring(0, 10));
@@ -185,7 +190,10 @@ public class ActivationService {
         KeyDuration duration = parseDuration(trial, usageDays);
         List<String> baseRights = trial ? List.of() : rightsOf(l, nowI, productIds);
         // W23-05 audit HIGH-1 : une demande qui porte la clé de signature de la TV (`install_sig=`) la fait SIGNER dans l'activation (droit « ik ») ; sans elle (TV ancienne) le jeton ne lie aucune clé
-        if (!trial && device.installSig() != null) {
+        // la clé d'installation n'est signée QUE pour une TV (parité Kotlin et Python : un téléphone n'a pas de clé d'installation à lier ; second audit w23-05, LOW-E)
+        String boundFingerprint = null;
+        if (device.installSig() != null && WireActivation.mayCarryInstallKey(!trial, subject)) {
+            boundFingerprint = InstallKeyFingerprint.ofRaw(java.util.HexFormat.of().parseHex(device.installSig()));
             baseRights = new ArrayList<>(baseRights);
             baseRights.add(WireActivation.installKeyLine(java.util.HexFormat.of().parseHex(device.installSig())));
         }
@@ -210,7 +218,7 @@ public class ActivationService {
             }
             licenses.allocateSeat(l, subject, device, nowI);
             audit.record(actor, "ACTIVATION_REISSUE", "LICENSE", licenseId, null, Map.of("seat", seatId, "fp", s.fingerprint().substring(0, 12), "channel", channel, "edition", editionOf(kind), "duration", durationText(duration), "end", endText(duration, p.issuedAt())));
-            return new Activation(s.text(), s.kid(), s.nonce(), s.fingerprint(), kind.name(), subject, p.issuedAt(), p.notAfter(), licenseId, seatId, device.code(), true, false, format(), duration.days(), usageEnd(duration, p.issuedAt()));
+            return new Activation(s.text(), s.kid(), s.nonce(), s.fingerprint(), kind.name(), subject, p.issuedAt(), p.notAfter(), licenseId, seatId, device.code(), true, false, format(), duration.days(), usageEnd(duration, p.issuedAt()), boundFingerprint);
         }
 
         // 3. new activation: seat first (under the lock), then signature; a failure rolls everything back
@@ -237,7 +245,7 @@ public class ActivationService {
                 Map.of("seat", seatId, "kind", kind.name(), "outcome", seat.outcome().name(), "kid", s.kid(), "fp", s.fingerprint().substring(0, 12), "channel", channel,
                         "edition", editionOf(kind), "duration", durationText(duration), "end", endText(duration, issuedAt), "licenseAuto", autoLicense));
         return new Activation(s.text(), s.kid(), s.nonce(), s.fingerprint(), kind.name(), subject, issuedAt, Instant.ofEpochMilli(s.notAfter()), licenseId, seatId, device.code(), false,
-                seat.outcome() != LicenseService.SeatOutcome.REUSED, format(), duration.days(), usageEnd(duration, issuedAt));
+                seat.outcome() != LicenseService.SeatOutcome.REUSED, format(), duration.days(), usageEnd(duration, issuedAt), boundFingerprint);
     }
 
     /** The rights (none for a licence without bundle: the full version) plus the usage ceiling line (none for « illimitée »). The server never adds `super` nor the trial rental window (owner tools only). */

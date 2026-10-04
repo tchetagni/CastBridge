@@ -49,6 +49,12 @@ public interface LicenseFacts {
      */
     default List<Window> windows(String licenseId) { return null; }
 
+    /**
+     * Les clés d'installation (base64 brute) SIGNÉES dans les activations enregistrées pour cette licence (droit {@code ik}) : une licence qui en porte ne paie QUE l'identité dont la clé d'installation est
+     * l'une d'elles (second audit w23-05, HIGH-A). Vide : licence sans clé signée (propriétaire, registre, serveur, activations d'avant le correctif) : aucune restriction, comme avant.
+     */
+    default java.util.Set<String> installKeys(String licenseId) { return java.util.Set.of(); }
+
     /** Historique des changements d'état d'une licence (journal d'audit chaîné du module des licences), du plus ancien au plus récent ; vide si illisible. */
     default List<StateEvent> history(String licenseId) { return List.of(); }
 

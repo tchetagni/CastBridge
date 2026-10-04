@@ -220,6 +220,7 @@ class Cli(private val env: Env) {
         val d = DeviceRequest.parse(readSource(a.positional.firstOrNull() ?: "-"))
         env.out.println("Code d'appareil : ${d.code}"); env.out.println("k = ${d.k} sur n = ${d.factors.n}")
         env.out.println("Clé d'installation : ${if (d.installPub != null) "présente" else "absente (CastBridge-TV ancienne : location refusée sans --enveloppe-v1)"}")
+        env.out.println("Clé de signature de la TV : ${d.installFingerprint?.let { "empreinte $it (à comparer avec l'écran d'activation de la TV avant d'émettre)" } ?: "absente (activation sans clé liée : le serveur attend le propriétaire)"}")
         d.factors.byKind.forEach { (kind, fp) -> env.out.println("  ${kind.name.padEnd(14)} $fp${if (kind.strong) "  (soudé)" else ""}") }
         if (castbridge.core.owner.DeviceIdentity.isWeak(d.factors)) env.out.println("Identité FAIBLE : aucun facteur soudé ; l'activation reste possible, signalée sur la TV.")
         return 0
@@ -272,6 +273,7 @@ class Cli(private val env: Env) {
         if (kind == ActivationKind.PRODUCTION) env.out.println("Licence ${r.issued.activation.license}${if (a.get("licence") == null) " (générée)" else ""}")
         env.out.println("Poste : ${r.seat}${if (r.reused) " (ré-activation : aucun poste consommé)" else ""}${r.seatsLeft?.let { " ; postes restants : $it" } ?: ""}")
         env.out.println("Valable à l'installation jusqu'au ${date(r.issued.activation.notAfter)}")
+        r.installKeyFingerprint?.let { env.out.println("Clé d'installation de la TV liée à cette activation : empreinte $it (à comparer avec l'écran d'activation de la TV avant de la remettre)") }
         env.out.println("Fichier pour la clé USB de la TV : ${fileOut.path}  (à copier dans Download/CastBridge/)")
         env.out.println("Jeton :"); env.out.println(r.issued.token)
         r.issued.activation.rights.filterIsInstance<Right.Rental>().forEach { l ->

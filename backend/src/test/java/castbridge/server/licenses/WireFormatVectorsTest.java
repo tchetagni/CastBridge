@@ -110,7 +110,9 @@ class WireFormatVectorsTest {
             // the TV's signing key (W23-05 audit HIGH-1): the server signs it as the right `ik|<hex>` exactly as the other issuers do (a trial key refuses it: not a trial right)
             if (r.hasNonNull("installKey")) rights.add(WireActivation.installKeyLine(java.util.HexFormat.of().parseHex(r.get("installKey").asText())));
             boolean refused = c.get("expect").path("refused").asBoolean(false);
+            boolean ikRefused = r.hasNonNull("installKey") && !WireActivation.mayCarryInstallKey(r.get("kind").asText().equals("production"), r.get("subject").asText());   // la clé d'installation : production pour une TV seulement
             try {
+                if (ikRefused) throw ApiException.badRequest("La clé d'installation ne se joint qu'à une activation de production pour une TV");
                 String code = r.hasNonNull("deviceCodeOverride") ? r.get("deviceCodeOverride").asText() : dev.get("code").asText();
                 var device = DeviceIdentity.parseRequest(requestText(code, fp(dev)));
                 IssueKind kind = r.get("kind").asText().equals("trial") ? IssueKind.TRIAL : IssueKind.PRODUCTION;
@@ -128,8 +130,8 @@ class WireFormatVectorsTest {
                 assertThat(refused).as(id + " refus inattendu : " + e.getMessage()).isTrue();
             }
         }
-        // changed with the w23-05 audit corrections (HIGH-1): three vectors added (production with `ik`, `ik` alone, a trial refusing it) ; the 14 older ones are unchanged
-        assertThat(n).isEqualTo(17);
+        // changed with the w23-05 audit corrections (HIGH-1): three vectors added (production with `ik`, `ik` alone, a trial refusing it) ; second audit (LOW-E): a phone refusing it ; the 14 older ones are unchanged
+        assertThat(n).isEqualTo(18);
     }
 
     @Test

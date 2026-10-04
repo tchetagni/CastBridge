@@ -113,8 +113,13 @@ public class GrantService {
         List<LicenseView> raw = licenses.forDevice(identity);
         List<Resolved> mine = new ArrayList<>();
         boolean foreign = false;
+        String installPub = repo.identity(identity).map(WalletRepository.Identity::installPub).orElse(null);
         for (LicenseView v : raw) {
             String holder = repo.licenseHolder(v.licenseId()).orElse(identity);
+            if (!keyMayBeNeeded(v.licenseId(), installPub)) {
+                foreign = true;
+                continue;
+            }
             if (holder.equals(identity)) mine.add(new Resolved(v, clip(spanBook.active(v, now, false), licenses.windows(v.licenseId()))));
             else foreign = true;
         }
@@ -131,6 +136,10 @@ public class GrantService {
         List<Resolved> mine = new ArrayList<>();
         boolean foreign = false;
         for (LicenseView v : licenses.forDevice(identity)) {
+            if (!keyMayBeNeeded(v.licenseId(), row.installPub())) {
+                foreign = true;   // licence enregistrée avec la clé d'installation d'une autre TV : jamais réclamée ni payée à cette identité (second audit w23-05, HIGH-A)
+                continue;
+            }
             if (repo.claimLicense(v.licenseId(), identity, now).equals(identity)) mine.add(new Resolved(v, clip(spanBook.active(v, now, true), licenses.windows(v.licenseId()))));
             else foreign = true;   // la licence de ce poste paie une autre TV : rien pour celle-ci
         }
@@ -207,6 +216,15 @@ public class GrantService {
         Instant trialEnd = reading.spans().stream().filter(sp -> sp.edition() == Edition.TRIAL && sp.endExclusive() != null).map(EditionSpan::endExclusive).max(Instant::compareTo).orElse(null);
         repo.touchSync(identity, st.ed(), reading.superKey(), trialEnd, now);
         return new Outcome(identity, st.withAnchor(anchor), granted, row.apiDeviceId() != apiDeviceId, held);
+    }
+
+    /**
+     * Une licence enregistrée avec la clé d'installation SIGNÉE de sa TV ({@code ik}) ne paie que l'identité dont la clé d'installation est cette clé ; sans clé signée connue, aucune restriction.
+     * Faux : l'identité est liée à une autre clé (un voleur avec un jeton sans {@code ik}) : rien n'est versé, la licence n'est pas réclamée.
+     */
+    private boolean keyMayBeNeeded(String licenseId, String identityInstallPub) {
+        Set<String> signed = licenses.installKeys(licenseId);
+        return signed.isEmpty() || (identityInstallPub != null && signed.contains(identityInstallPub));
     }
 
     private static Instant periodStart(String key, Instant anchor, WalletPolicy policy) {
