@@ -22,7 +22,7 @@ class LogRedactor(private val sink: (String) -> Unit = { System.err.println(it) 
 
     private fun sampled(action: String, fields: Map<String, Any?>): Long? = synchronized(last) {
         val now = clock()
-        val k = action + "|" + (fields["ip"] ?: "")
+        val k = action + "|" + (fields["ip"] ?: "") + "|" + (fields["roomId"] ?: "")
         val e = last.getOrPut(k) { longArrayOf(Long.MIN_VALUE / 2, 0L) }
         if (now - e[0] < 1_000L) { e[1]++; return null }
         e[0] = now

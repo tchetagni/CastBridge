@@ -44,17 +44,20 @@ RUN set -eux; \
     fi; \
     groupadd --system --gid 10002 castbridge-play; \
     useradd --system --uid 10002 --gid castbridge-play --home-dir /app --shell /usr/sbin/nologin castbridge-play; \
-    mkdir -p /app /lots
+    mkdir -p /app /lots /var/lib/castbridge-play; \
+    chown 10002:10002 /var/lib/castbridge-play
 
 WORKDIR /app
 COPY --from=build /repo/server-play/build/libs/castbridge-play.jar /app/castbridge-play.jar
 
 ENV TZ=Africa/Douala \
     CASTBRIDGE_PLAY_PORT=8080 \
-    CASTBRIDGE_PLAY_LOTS_DIR=/lots
+    CASTBRIDGE_PLAY_LOTS_DIR=/lots \
+    CASTBRIDGE_PLAY_REVOCATIONS_FILE=/var/lib/castbridge-play/revocations.txt
 
 USER 10002:10002
 EXPOSE 8080
+# /var/lib/castbridge-play : seul dossier inscriptible (volume `play-state` du compose) ; créé et donné à 10002 AVANT « USER », sinon le volume nommé serait créé pour root.
 # À lancer avec : read_only: true, tmpfs /tmp, cap_drop ALL, mem_limit 384m, port publié sur 127.0.0.1:7091 SEULEMENT (docker-compose : w20-08).
 HEALTHCHECK --interval=30s --timeout=5s --start-period=40s --retries=3 \
     CMD curl -fsS http://127.0.0.1:8080/play/health >/dev/null || exit 1

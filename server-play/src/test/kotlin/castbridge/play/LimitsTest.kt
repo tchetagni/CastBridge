@@ -16,7 +16,7 @@ import kotlin.test.assertTrue
 class LimitsTest {
     private val servers = ArrayList<PlayServer>()
     private val closeables = ArrayList<AutoCloseable>()
-    private fun server(cfg: PlayConfig = PlayConfig(port = 0, trustedProxies = LOOPBACK, ticketPubKeys = listOf(TestKeys.pub), trustedKeys = TestRights.trustedKeys, createsPerIpPerHour = 10_000)) = PlayServer(cfg).also { it.start(); servers += it }
+    private fun server(cfg: PlayConfig = PlayConfig(port = 0, trustedProxies = LOOPBACK, maxPerIp = 8, ticketPubKeys = listOf(TestKeys.pub), trustedKeys = TestRights.trustedKeys, createsPerIpPerHour = 10_000)) = PlayServer(cfg).also { it.start(); servers += it }
     @AfterTest fun stop() { closeables.forEach { runCatching { it.close() } }; servers.forEach { it.close() }; servers.clear(); closeables.clear() }
     private fun ws(srv: PlayServer, xff: String? = "203.0.113.7", origin: String? = "https://bridge.sti-cm.com", ticket: String? = null) = WsWire(srv.port, origin, xff, ticket).also { closeables += AutoCloseable { it.close() } }
 

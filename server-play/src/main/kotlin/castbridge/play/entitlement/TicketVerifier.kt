@@ -97,6 +97,9 @@ class UsedTickets(private val cap: Int = 20_000) {
         return Use.OK
     }
 
+    /** Ce `jti` a-t-il déjà servi (et n'est pas échu) ? Lecture seule : rien n'est brûlé. */
+    @Synchronized fun seen(jti: String, now: Long): Boolean = (used[jti] ?: 0L) > now
+
     @Synchronized fun sweep(now: Long) = sweepLocked(now)
     @Synchronized fun size(): Int = used.size
     private fun sweepLocked(now: Long) { used.values.removeIf { it <= now } }
@@ -114,6 +117,12 @@ class RateWindow(private val max: Int, private val windowMs: Long, private val c
         if (q.size >= max) return false
         q.addLast(now)
         return true
+    }
+
+    /** Un événement de plus serait-il permis ? Lecture seule : rien n'est compté. */
+    @Synchronized fun peek(key: String, now: Long): Boolean {
+        val q = events[key] ?: return events.size < cap
+        return q.count { now - it < windowMs } < max
     }
 
     @Synchronized fun sweep(now: Long) = sweepLocked(now)

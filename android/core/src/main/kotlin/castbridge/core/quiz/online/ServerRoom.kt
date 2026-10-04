@@ -112,6 +112,9 @@ class ServerRoom(
     fun eventsSince(lastSeq: Long): List<EventRing.Event>? = synchronized(lock) { ring.since(lastSeq) }
     fun seq(): Long = synchronized(lock) { seq }
 
+    /** Identifiant d'appareil du siège de ce jeton (null : inconnu, ou siège relayé sans appareil). Sert au plafond partagé du service à la REPRISE. */
+    fun deviceOfToken(token: String): String? = synchronized(lock) { seats[token]?.deviceHash }
+
     // ------------------------------------------------------------------ anti-triche (w20-07) : actions DOUCES seulement
 
     private var botCache: Pair<Int, Map<String, BotScore.Result>>? = null

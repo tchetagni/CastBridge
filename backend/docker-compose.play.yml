@@ -6,8 +6,19 @@
 #   docker compose -f backend/docker-compose.play.yml up -d --no-build   # l'image castbridge-play:current doit déjà exister (deploy-server.sh --service play)
 #
 # Port : publié sur 127.0.0.1:7091 SEULEMENT (jamais 0.0.0.0) ; seul nginx (443, TLS) joint le service, par son nom Docker sur « infra-net ».
-# Aucun secret ici : le service ne lit que des CLÉS PUBLIQUES de tickets (voir .env.play.example). Aucun accès à castbridge-internal (base) :
+# Aucun secret ici : le service ne lit que des CLÉS PUBLIQUES (voir .env.play.example). Aucun accès à castbridge-internal (base) :
 # le service n'utilise pas de base tant que w20-09 n'est pas déployé.
+#
+# VARIABLES DE PRODUCTION (toutes dans .env.play, jamais ici ; mêmes noms dans .env.play.example, docs/PLAY-OPS.md § 4.2 et server-play/README.md) :
+#   CASTBRIDGE_PLAY_TRUSTED_PROXIES      OBLIGATOIRE : adresse exacte de nginx en /32 (le service refuse de démarrer sans elle)
+#   CASTBRIDGE_PLAY_REVOCATIONS_URL      OBLIGATOIRE en production : https://bridge.sti-cm.com/api/v1/revocations (ou http://castbridge-api:8080/... sur le réseau interne : la liste est signée)
+#   CASTBRIDGE_PLAY_REVOCATIONS_FILE     /var/lib/castbridge-play/revocations.txt : dans le volume inscriptible play-state ci-dessous (le conteneur est en lecture seule)
+#   CASTBRIDGE_PLAY_TICKET_PUBKEY        clé PUBLIQUE des tickets (sans elle, aucune salle)
+#   CASTBRIDGE_PLAY_TRUSTED_KEYS         clé PUBLIQUE du SERVEUR (celle qui signe la liste de révocations : portée REVOKE) : voir docs/PLAY-OPS.md § 4.2
+#   CASTBRIDGE_PLAY_ORIGINS              https://bridge.sti-cm.com
+#   CASTBRIDGE_PLAY_CREATES_PER_IP_HOUR / CASTBRIDGE_PLAY_CREATES_PER_IDENTITY_DAY / CASTBRIDGE_PLAY_CREATES_PER_48_HOUR   créations de salle (20 / 30 / 200 par défaut)
+#   CASTBRIDGE_PLAY_MAX_PER_IP (24) / CASTBRIDGE_PLAY_MAX_PER_48 (512) / CASTBRIDGE_PLAY_MAX_PER_IP_SHARED (64)             connexions ouvertes par adresse, par /48, adresse partagée (classe)
+#   CASTBRIDGE_PLAY_RESERVED_DIR=/reserved et CASTBRIDGE_PLAY_RESERVED_IDS=/reserved/reserved-ids.json   lots RÉSERVÉS (volume monté ci-dessous, jamais sur LOTS_DIR)
 name: castbridge-play
 
 x-logging: &logging
@@ -49,10 +60,19 @@ services:
       timeout: 5s
       retries: 3
       start_period: 40s
-    # lots de questions réservés (lecture seule), inutile avant w20-04 : décommenter avec CASTBRIDGE_PLAY_LOTS_DIR=/lots dans .env.play
-    # volumes:
-    #   - /home/ubuntu/castbridge/services/play/lots:/lots:ro      # chemin proposé : à confirmer sur la machine
+    volumes:
+      # SEUL dossier inscriptible du conteneur (read_only: true) : la dernière liste de révocations valide y est écrite (CASTBRIDGE_PLAY_REVOCATIONS_FILE) et relue au démarrage.
+      # Sans lui, la persistance échoue EN SILENCE et un redémarrage perd la liste. Dossier créé dans l'image (propriétaire 10002), donc le volume nommé l'hérite.
+      - play-state:/var/lib/castbridge-play
+      # Lots de questions LIBRES (facultatif, lecture seule) : décommenter avec CASTBRIDGE_PLAY_LOTS_DIR=/lots dans .env.play
+      #   - /home/ubuntu/castbridge/services/play/lots:/lots:ro            # chemin proposé : à confirmer sur la machine
+      # Lots RÉSERVÉS (facultatif, lecture seule, avec reserved-ids.json) : se montent sur RESERVED_DIR, JAMAIS sur LOTS_DIR (un lot « -reserved- » posé dans LOTS_DIR est ignoré,
+      # et le service refuse de démarrer si LOTS_DIR et RESERVED_DIR sont le même dossier). Décommenter avec CASTBRIDGE_PLAY_RESERVED_DIR=/reserved dans .env.play
+      #   - /home/ubuntu/castbridge/services/play/reserved:/reserved:ro    # chemin proposé : à confirmer sur la machine
     logging: *logging
+
+volumes:
+  play-state:
 
 # réseau de nginx (infra-nginx) : créé et possédé par le compose d'infrastructure, qui n'est pas dans ce dépôt ; ne jamais le créer ni le supprimer d'ici
 networks:

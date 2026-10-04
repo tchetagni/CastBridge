@@ -33,6 +33,17 @@ class PlayTicketLimitsTest {
     }
 
     @Test
+    void anIpv6SubscriberHasOneAddressCapForItsWholeSlash64() throws Exception {
+        PlayTicketService s = service(20, 3, 1_000);
+        for (int i = 0; i < 3; i++) s.issue(tv("v" + i), code(30 + i), NOW, "2001:db8:abcd:1::" + (i + 1));   // trois adresses d'un même /64
+        assertEquals(429, assertThrows(ApiException.class, () -> s.issue(tv("v9"), code(39), NOW + 1, "2001:db8:abcd:1:ffff::9")).status().value(),
+                "un abonné IPv6 ne contourne pas le plafond en changeant d'adresse dans son /64");
+        assertDoesNotThrow(() -> s.issue(tv("w0"), code(40), NOW + 1, "2001:db8:abcd:2::1"), "un autre /64 n'est pas touché");
+        assertEquals("203.0.113.9", PlayTicketService.addressKey("203.0.113.9"));
+        assertEquals("203.0.113.9", PlayTicketService.addressKey("::ffff:203.0.113.9"), "IPv4 inscrite en IPv6");
+    }
+
+    @Test
     void aClientAddressHasItsOwnHourlyCapAcrossDevices() throws Exception {
         PlayTicketService s = service(20, 3, 1_000);
         for (int i = 0; i < 3; i++) s.issue(tv("a" + i), code(10 + i), NOW, "203.0.113.9");

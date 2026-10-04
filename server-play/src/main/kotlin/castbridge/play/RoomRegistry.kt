@@ -146,16 +146,17 @@ class PlayHub(
         if (draining) { send(c, ServerMsg.Error(0, MAINTENANCE, "Le serveur de jeu est en maintenance : réessayez dans quelques minutes.", true)); return }
         // fermé : tant que les révocations ne sont pas connues (aucune liste acceptée, ou plus de 24 h), aucune salle ; le ticket n'est pas brûlé
         if (!revocationsReady()) { send(c, ServerMsg.Error(0, MAINTENANCE, "Service indisponible : réessayez dans quelques minutes.", true)); return }
-        if (!createRate.allow(c.ip, real) || !create48.allow(ClientIp.group48(c.ip) ?: c.ip, real)) { send(c, ServerMsg.Error(0, BUSY, "Trop de parties ouvertes depuis cette adresse : réessayez dans une heure.", true)); return }
-        when (used.use(ticket.jti, ticket.exp, real)) {
-            UsedTickets.Use.REPLAY -> { send(c, err(PlayReason.PLAY_TICKET_REFUSED)); return }
-            UsedTickets.Use.FULL -> { send(c, ServerMsg.Error(0, BUSY, "Le service de jeu est très sollicité. Réessayez dans une minute.", true)); return }
-            UsedTickets.Use.OK -> {}
-        }
+        // Rien n'est CONSOMMÉ avant la fin des contrôles (audit final) : ni le quota de l'adresse (partagée par une classe d'élèves honnêtes), ni le `jti`. Lectures seules ici ;
+        // la consommation a lieu au moment de créer la salle, ou quand la preuve de droits est fausse (alors le ticket est brûlé : on ne tâtonne pas avec un ticket).
+        val ip48 = ClientIp.group48(c.ip) ?: c.ip
+        if (used.seen(ticket.jti, real)) { send(c, err(PlayReason.PLAY_TICKET_REFUSED)); return }
+        val tooMany = ServerMsg.Error(0, BUSY, "Trop de parties ouvertes depuis cette adresse : réessayez dans une heure.", true)
+        if (!createRate.peek(c.ip, real) || !create48.peek(ip48, real)) { send(c, tooMany); return }
         val rights = evaluator.evaluate(ticket.deviceCode, listOfNotNull(m.activation) + m.rentals, real)
         val trial = rights.edition == HostEdition.TRIAL
         val verdict = PlayRules.canCreate(rights.actor, publicRoom = false, gamesToday = if (trial) trialDays.count(rights.identity ?: "", real) else 0)
         if (!verdict.allowed) {
+            used.use(ticket.jti, ticket.exp, real)   // preuve de droits fausse ou refusée : le ticket est brûlé
             val why = verdict.reason ?: PlayReason.PLAY_SCOPE_FORBIDDEN
             send(c, ServerMsg.Error(0, why.code, if (rights.edition == HostEdition.NONE) rights.note else verdict.message, why.retryable)); return
         }
@@ -174,10 +175,19 @@ class PlayHub(
             when {
                 rooms.size >= cfg.maxRooms -> { refusal = err(PlayReason.PLAY_BUSY); null }
                 openRooms() >= subjectCap -> { refusal = subjectFull; null }
-                trial && !trialDays.record(identity ?: "", real) -> { refusal = err(PlayReason.PLAY_BUSY); null }
-                !trial && (identityDays.count(identity ?: "", real) >= cfg.createsPerIdentityPerDay || !identityDays.record(identity ?: "", real)) -> {
+                !trial && identityDays.count(identity ?: "", real) >= cfg.createsPerIdentityPerDay -> {
                     refusal = ServerMsg.Error(0, BUSY, "Trop de parties ouvertes aujourd'hui avec cette activation : réessayez demain.", true); null }
-                else -> RoomEntry(ServerRoom(id, scope, roomBank, rnd, createdAt = now, settings = roomSettings), ticket.deviceId, identity).also { rooms[id] = it }
+                // les contrôles sont passés : on consomme maintenant (quota de l'adresse, `jti`, compteur du jour), puis on crée
+                !createRate.allow(c.ip, real) || !create48.allow(ip48, real) -> { refusal = tooMany; null }
+                else -> when (used.use(ticket.jti, ticket.exp, real)) {
+                    UsedTickets.Use.REPLAY -> { refusal = err(PlayReason.PLAY_TICKET_REFUSED); null }
+                    UsedTickets.Use.FULL -> { refusal = err(PlayReason.PLAY_BUSY); null }
+                    UsedTickets.Use.OK -> when {
+                        trial && !trialDays.record(identity ?: "", real) -> { refusal = err(PlayReason.PLAY_BUSY); null }
+                        !trial && !identityDays.record(identity ?: "", real) -> { refusal = err(PlayReason.PLAY_BUSY); null }
+                        else -> RoomEntry(ServerRoom(id, scope, roomBank, rnd, createdAt = now, settings = roomSettings), ticket.deviceId, identity).also { rooms[id] = it }
+                    }
+                }
             }
         }
         if (e == null) { send(c, refusal!!); return }
@@ -221,7 +231,7 @@ class PlayHub(
             }
         }
         overflow.forEach { dropOverflow(it) }
-        seatedRole?.let { guard.seated(c, m, e.room.roomId, it) }   // journal et plafond relevé : hors du verrou de la salle
+        seatedRole?.let { guard.seated(c, m, e.room.roomId, it, (m as? ClientMsg.Resume)?.let { r -> e.room.deviceOfToken(r.token) }) }   // journal et plafond relevé : hors du verrou de la salle
     }
 
     private fun forward(e: RoomEntry, c: PlayConn, m: ClientMsg, now: Long) {
