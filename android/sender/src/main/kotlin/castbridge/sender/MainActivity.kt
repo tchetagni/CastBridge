@@ -120,6 +120,7 @@ class MainActivity : ComponentActivity() {
                         },
                         actions = {
                             TextButton({ ActivateTvActivity.open(this@MainActivity) }) { Text("Activer la TV") }
+                            TextButton({ TvDeviceRequestActivity.open(this@MainActivity) }) { Text("Demande d'appareil") }
                             TextButton({ RentalDeliveryActivity.open(this@MainActivity) }) { Text("Locations") }
                             IconButton({ ParentalActivity.open(this@MainActivity) }) { Icon(Icons.Filled.Lock, "Contrôle parental") }
                             IconButton({ settings = true }) { CbIcon(R.drawable.ic_cb_reglages, "Réglages") }

@@ -101,6 +101,9 @@
         <!-- « Activer la TV » : paste the activation key, send it to the paired TV by Bluetooth (open to everyone; the key is signed) -->
         <activity android:name=".ActivateTvActivity" android:exported="false" android:label="Activer la TV"
             android:theme="@style/Theme.CastBridge" android:windowSoftInputMode="adjustResize" />
+        <!-- « Demande d'appareil de la TV » : read-only, what the TV gives for an activation key to be generated (trusted phone or code kept) -->
+        <activity android:name=".TvDeviceRequestActivity" android:exported="false" android:label="Demande d'appareil de la TV"
+            android:theme="@style/Theme.CastBridge" />
         <!-- « Locations sur la TV » : the phone carries the rented (sealed) lots to CastBridge-TV -->
         <activity android:name=".RentalDeliveryActivity" android:exported="false" android:label="Locations sur la TV"
             android:theme="@style/Theme.CastBridge" />

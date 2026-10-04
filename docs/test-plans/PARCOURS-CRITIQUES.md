@@ -145,6 +145,13 @@ Logique vérifiée en JVM (`CT/tv/home/HomeGroupsTest.kt` : groupes, rattachemen
 |---|---|---|---|---|---|---|---|---|
 | **P-62** | **Accueil en groupes : ouvrir une grille, lancer un outil, revenir** | TV activée, accueil affiché | Sélectionner « Médias » (OK) ; flèches dans la grille ; OK sur « Téléchargements » ; RETOUR (écran de l'outil) ; RETOUR (grille) | — | l'accueil montre « Bibliothèque » puis 5 boutons de groupe (Médias, Apprendre, Jeux et jetons, Téléphones et réseau, Administration) avec nom, icône et résumé ; la grille a 3 colonnes, chaque tuile a icône ET nom, texte lisible à 3 m ; le focus ne sort jamais de la grille ; l'outil se lance comme avant ; RETOUR de la grille rend le focus au bouton « Médias » | S2 | JVM (`HomeGroupsTest`), H (dessin, focus, lisibilité) | — |
 | **P-63** | **Accueil en groupes : tuiles masquées et profil enfant** | profil enfant actif (`ParentalHub`), ou version d'essai | Ouvrir l'accueil ; ouvrir chaque groupe visible | — | seules les tuiles autorisées existent ; un groupe sans tuile visible n'apparaît pas ; un groupe à une seule tuile ouvre cette tuile directement | S2 | JVM (`HomeGroupsTest`), H | — |
+## J. Demande d'appareil de la TV lue depuis le téléphone (2026-10-04, `docs/TV-DEMANDE-APPAREIL.md`)
+
+Lecture seule, le strict nécessaire à la génération d'une clé : code, k, empreintes des facteurs, clé publique d'installation. Analyse, textes, porte d'autorisation et route de la TV vérifiés en JVM (`CT/trust/TvDeviceRequestTest.kt`, `CT/tv/TvDeviceRequestServerTest.kt`) ; l'écran Android n'est vérifié que par compilation.
+
+| id | Parcours | Préconditions | Étapes | Attendu — téléphone | Attendu — TV | Gravité | Où | Régression |
+|---|---|---|---|---|---|---|---|---|
+| **P-62** | **Lire et copier la demande d'appareil de la TV** | CastBridge-TV avec la route `GET /api/tv/device-request` ; un téléphone de confiance (ou le code de la TV déjà saisi) et un téléphone sans autorisation | accueil > « Demande d'appareil » ; « Copier la demande complète » ; « Copier pour le serveur » ; « Partager la demande complète » ; refaire avec le téléphone sans autorisation, puis avec un mauvais code | le code d'appareil est celui de l'écran d'activation ; la copie complète est identique octet pour octet au texte de la TV (avec `install=x25519|…`) ; la copie serveur n'a pas la ligne `install=` ; sans autorisation : explication, aucune requête ; aucun code ni jeton affiché ni copié | la route répond 401 sans PIN ni jeton, ne renvoie que cinq clés, 404 sur une TV ancienne | S3 | JVM (`TvDeviceRequestTest`, `TvDeviceRequestServerTest`), H (téléphone et TV réels) | — |
 
 ## Répartition
 

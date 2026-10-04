@@ -30,7 +30,7 @@ object TrialPolicy {
      */
     private val EXACT = setOf("/", "/api/hello", "/api/info", "/api/sysinfo", "/api/playurl", "/api/pause", "/api/resume", "/api/stop", "/api/seek", "/api/volume", "/api/restart",
         "/api/connections", "/api/net", "/api/background", "/api/autostart", "/api/overlay-permission", "/api/bluetooth", "/api/bluetooth/discoverable",
-        "/api/activation", "/api/rental", "/api/lots", "/api/store", "/api/store/catalog", "/api/learn", "/api/sudoku", "/api/games", "/api/games/open", "/api/parental",
+        "/api/activation", "/api/tv/device-request", "/api/rental", "/api/lots", "/api/store", "/api/store/catalog", "/api/learn", "/api/sudoku", "/api/games", "/api/games/open", "/api/parental",
         "/api/server", "/api/server/me", "/api/server/url", "/api/server/contact")
     private val PREFIXES = listOf("/api/activation", "/api/rental", "/api/lots", "/api/store", "/api/learn", "/api/sudoku", "/api/player", "/api/remote", "/api/bluetooth/tunnel", "/api/gateway",
         "/api/parental", "/api/content/reports")

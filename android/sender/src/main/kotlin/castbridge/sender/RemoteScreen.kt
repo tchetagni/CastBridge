@@ -322,6 +322,7 @@ fun RemoteScreen(onClose: () -> Unit) {
                             trailingIcon = { Checkbox(haptics, null) })
                         DropdownMenuItem(text = { Text("Ma TV · voies Bluetooth…") }, onClick = { menu = false; routes = true })
                         DropdownMenuItem(text = { Text("Ma TV : autres marques, stratégies, test…") }, onClick = { menu = false; MyTvActivity.open(ctx) })
+                        DropdownMenuItem(text = { Text(castbridge.core.trust.TvDeviceRequestTexts.TITLE) }, onClick = { menu = false; TvDeviceRequestActivity.open(ctx) })
                         DropdownMenuItem(text = { Text("Aide « toute la TV » sur la TV") }, onClick = { menu = false; RemoteController.setup() })
                     }
                 },
