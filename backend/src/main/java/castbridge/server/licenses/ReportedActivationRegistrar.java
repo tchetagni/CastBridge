@@ -60,6 +60,8 @@ public class ReportedActivationRegistrar {
     static final int MAX_TOKEN_CHARS = 8_192;
     /** Motif : l'activation ne porte aucune clé d'installation signée (émise avant le correctif de l'audit) ; la ligne attend la décision du propriétaire. */
     public static final String NO_INSTALL_KEY = "NO_INSTALL_KEY";
+    /** Motif : la TV a prouvé une AUTRE clé d'installation que celle signée dans l'activation (jeton d'une autre TV, ou demande d'appareil altérée en route). */
+    public static final String INSTALL_KEY_MISMATCH = "INSTALL_KEY_MISMATCH";
     static final Actor REGISTRAR = new Actor("registrar", Role.OWNER, "system", true);
 
     public enum Via {
@@ -79,7 +81,13 @@ public class ReportedActivationRegistrar {
      */
     public record Presented(String token, String deviceCode, String installPub, boolean bindProven) {}
 
-    public record Registration(Status status, String reason, String licenseId, String seatId, String fp, boolean installTimeUnproven) {
+    /**
+     * @param expectedFp  seulement pour {@code INSTALL_KEY_MISMATCH} : empreinte de la clé d'installation SIGNÉE dans l'activation
+     * @param presentedFp seulement pour {@code INSTALL_KEY_MISMATCH} : empreinte de la clé d'installation que la TV a prouvée
+     */
+    public record Registration(Status status, String reason, String licenseId, String seatId, String fp, boolean installTimeUnproven, String expectedFp, String presentedFp) {
+        public Registration(Status status, String reason, String licenseId, String seatId, String fp, boolean installTimeUnproven) { this(status, reason, licenseId, seatId, fp, installTimeUnproven, null, null); }
+
         public boolean registered() { return status == Status.REGISTERED || status == Status.ATTACHED; }
     }
 
@@ -87,7 +95,7 @@ public class ReportedActivationRegistrar {
     private record Claims(String fp, String kid, String nonce, String license, String seat, String code, DeviceIdentity.Request device, Instant issuedAt, Instant expiresAt,
                           Instant usageFrom, Instant usageTo, boolean unlimited, String ik) {}
 
-    private record Row(String fp, String status, String reason, boolean declared, String installPub, String licenseId, String seatId, Instant registeredAt) {}
+    private record Row(String fp, String status, String reason, boolean declared, String installPub, String licenseId, String seatId, Instant registeredAt, Instant firstServerAt) {}
 
     private final JdbcTemplate jdbc;
     private final LicenseService licenses;
@@ -95,6 +103,10 @@ public class ReportedActivationRegistrar {
     private final LicenseProperties props;
     private final TrustedKeys trusted;
     private final TransactionTemplate tx;
+    /** Interrupteur propre au registrar (second audit w23-05, MEDIUM-D) : {@code castbridge.licenses.registrar.enabled}, ALLUMÉ par défaut ; éteint, aucune activation présentée n'ouvre de licence ni de poste. */
+    @org.springframework.beans.factory.annotation.Value("${castbridge.licenses.registrar.enabled:true}") private boolean registrarEnabled = true;
+
+    public boolean enabled() { return props.enabled() && registrarEnabled; }
 
     public ReportedActivationRegistrar(JdbcTemplate jdbc, LicenseService licenses, AuditLog audit, LicenseProperties props, TrustedKeys trusted, PlatformTransactionManager manager) {
         this.jdbc = jdbc;
@@ -124,8 +136,12 @@ public class ReportedActivationRegistrar {
 
     public Registration register(Presented p, Via via, Instant now) {
         if (!props.enabled()) return new Registration(Status.IGNORED, "MODULE_OFF", null, null, null, false);
+        if (!registrarEnabled) return new Registration(Status.IGNORED, "REGISTRAR_OFF", null, null, null, false);
         Object checked = check(p, now);
-        if (checked instanceof Registration early) return early;
+        if (checked instanceof Registration early) {
+            if (INSTALL_KEY_MISMATCH.equals(early.reason())) recordMismatch(early, p);   // jamais un refus silencieux : alerte douce pour le propriétaire, une seule fois par activation
+            return early;
+        }
         Claims c = (Claims) checked;
         ensureAnonymousClient(now);   // AVANT la transaction de la licence : jamais une seconde connexion tenue pendant qu'on en détient déjà une (épuisement du pool sous charge)
         RuntimeException last = null;
@@ -187,8 +203,8 @@ public class ReportedActivationRegistrar {
             return refused("BAD_RIGHTS", fp);
         }
         if (ik != null && !ik.equals(p.installPub())) {
-            log.warn("registrar : la clé d'installation de la TV n'est pas celle de l'activation (empreinte {}) : rien n'est écrit", fp.substring(0, 8));
-            return refused("INSTALL_KEY_MISMATCH", fp);
+            log.warn("registrar : la clé d'installation de la TV n'est pas celle de l'activation (empreinte {}) : aucune licence ni poste n'est écrit", fp.substring(0, 8));
+            return new Registration(Status.REFUSED, INSTALL_KEY_MISMATCH, a.license(), null, fp, false, InstallKeyFingerprint.ofBase64(ik), InstallKeyFingerprint.ofBase64(p.installPub()));
         }
         Instant usageFrom = null, usageTo = null;
         List<String> usage = a.rights().stream().filter(WireActivation::isUsage).toList();
@@ -202,6 +218,15 @@ public class ReportedActivationRegistrar {
         }
         DeviceIdentity.Request device = new DeviceIdentity.Request(a.factors(), code, a.k());
         return new Claims(fp, a.kid(), a.nonce(), a.license(), a.seat(), code, device, Instant.ofEpochMilli(a.issuedAt()), Instant.ofEpochMilli(a.notAfter()), usageFrom, usageTo, usage.isEmpty(), ik);
+    }
+
+    /** L'alerte douce d'un refus de clé d'installation : aucune licence, aucun poste, aucune ligne d'enregistrement n'est écrit (la vraie TV n'est pas bloquée) ; les DEUX empreintes pour que le propriétaire compare à l'écran de la TV. */
+    private void recordMismatch(Registration r, Presented p) {
+        try {
+            tx.executeWithoutResult(st -> alert("INSTALL_KEY_MISMATCH", r.licenseId(), r.fp(), p.deviceCode(), Map.of("expectedFp", String.valueOf(r.expectedFp()), "presentedFp", String.valueOf(r.presentedFp()))));
+        } catch (RuntimeException e) {
+            log.warn("registrar : alerte de clé d'installation non écrite ({})", e.getClass().getSimpleName());
+        }
     }
 
     private static Registration refused(String reason, String fp) { return new Registration(Status.REFUSED, reason, null, null, fp, false); }
@@ -232,7 +257,7 @@ public class ReportedActivationRegistrar {
         }
         boolean declared = force || (row != null && row.declared()) || count("SELECT COUNT(*) FROM lic_issuance WHERE kid = ? AND nonce = ? AND source <> 'REPORT'", c.kid(), c.nonce()) > 0;
         boolean unproven = true;   // la TV 0.14.32 n'envoie aucune preuve d'heure d'installation (la note scellée de w23-06 l'apportera)
-        Outcome o = evaluate(c, p, now, declared, force);
+        Outcome o = evaluate(c, p, now, declared, force, row != null ? row.firstServerAt() : null);
         if (o.status() == Status.REGISTERED || o.status() == Status.ATTACHED) {
             if (unproven && (row == null || !row.status().equals(o.status().name()))) alert("INSTALL_TIME_UNPROVEN", c.license(), c.fp(), c.code());
         }
@@ -244,13 +269,16 @@ public class ReportedActivationRegistrar {
         static Outcome of(Status s, String reason, String lic, String seat) { return new Outcome(s, reason, lic, seat); }
     }
 
-    private Outcome evaluate(Claims c, Presented p, Instant now, boolean declared, boolean force) {
+    private Outcome evaluate(Claims c, Presented p, Instant now, boolean declared, boolean force, Instant firstSeenAt) {
         // révocations du poste et de la licence
         Instant seatRevokedAt = jdbc.query("SELECT MAX(revoked_at) FROM lic_revocation WHERE license_id = ? AND seat_id = ?", rs -> rs.next() && rs.getTimestamp(1) != null ? rs.getTimestamp(1).toInstant() : null,
                 c.license(), c.seat());
         if (seatRevokedAt != null && c.issuedAt().toEpochMilli() <= seatRevokedAt.toEpochMilli()) return Outcome.of(Status.REFUSED, "REVOKED_SEAT", c.license(), c.seat());
         // fenêtre d'installation (heure du serveur) puis délai maximal de notification
-        boolean inWindow = now.toEpochMilli() <= c.expiresAt().toEpochMilli() + WINDOW_SLACK_MS;
+        // la PREMIÈRE vue par le serveur fait foi de l'heure d'installation : une TV vue dans sa fenêtre pendant une suspension, un quota plein ou un plafond garde sa fenêtre quand la ligne est rejugée plus tard
+        // (second audit w23-05, LOW-A) ; une TV jamais vue dans sa fenêtre attend toujours le propriétaire
+        boolean inWindow = now.toEpochMilli() <= c.expiresAt().toEpochMilli() + WINDOW_SLACK_MS
+                || (firstSeenAt != null && firstSeenAt.toEpochMilli() <= c.expiresAt().toEpochMilli() + WINDOW_SLACK_MS);
         if (!force && now.isAfter(c.issuedAt().plus(Duration.ofDays(LATE_NOTICE_DAYS)))) return Outcome.of(Status.PENDING_DECISION, "LATE_NOTICE", c.license(), c.seat());
         if (!inWindow && !declared) return Outcome.of(Status.PENDING_DECISION, "INSTALL_TIME_UNKNOWN", c.license(), c.seat());
 
@@ -486,9 +514,10 @@ public class ReportedActivationRegistrar {
     // ------------------------------------------------------------------ journal de l'enregistrement
 
     private Row row(String fp) {
-        List<Row> r = jdbc.query("SELECT fp, status, reason, declared, install_pub, license_id, seat_id, registered_at FROM lic_registration WHERE fp = ? FOR UPDATE",
+        List<Row> r = jdbc.query("SELECT fp, status, reason, declared, install_pub, license_id, seat_id, registered_at, first_server_at FROM lic_registration WHERE fp = ? FOR UPDATE",
                 (rs, i) -> new Row(rs.getString("fp"), rs.getString("status"), rs.getString("reason"), rs.getBoolean("declared"), rs.getString("install_pub"), rs.getString("license_id"),
-                        rs.getString("seat_id"), rs.getTimestamp("registered_at") == null ? null : rs.getTimestamp("registered_at").toInstant()), fp);
+                        rs.getString("seat_id"), rs.getTimestamp("registered_at") == null ? null : rs.getTimestamp("registered_at").toInstant(),
+                        rs.getTimestamp("first_server_at") == null ? null : rs.getTimestamp("first_server_at").toInstant()), fp);
         return r.isEmpty() ? null : r.get(0);
     }
 
@@ -517,12 +546,19 @@ public class ReportedActivationRegistrar {
         audit.record(REGISTRAR, "REGISTRATION_PENDING", "LICENSE", c.license(), o.reason(), details(c, "status", o.status().name()));
     }
 
-    private void alert(String kind, String licenseId, String fp, String code) {
+    private void alert(String kind, String licenseId, String fp, String code) { alert(kind, licenseId, fp, code, Map.of()); }
+
+    private void alert(String kind, String licenseId, String fp, String code, Map<String, String> extra) {
         // alerte DOUCE, une seule fois par (jeton, nature) : une ligne du journal d'audit chaîné et une ligne de journal sans donnée sensible (jamais le code entier, jamais le jeton) ;
         // aucune révocation automatique
         // (audit LOW-9) bornée par l'index (type, cible) : le coût ne croît plus avec tout le journal
         if (count("SELECT COUNT(*) FROM lic_audit WHERE target_type = 'LICENSE' AND target_id = ? AND action = 'REGISTRATION_ALERT' AND reason = ? AND details LIKE ?", licenseId, kind, "%fp=" + fp + "%") > 0) return;
-        audit.record(REGISTRAR, "REGISTRATION_ALERT", "LICENSE", licenseId, kind, Map.of("level", "soft", "fp", fp, "device", DeviceIdentity.masked(code)));
+        Map<String, Object> det = new LinkedHashMap<>();
+        det.put("level", "soft");
+        det.put("fp", fp);
+        det.put("device", DeviceIdentity.masked(code));
+        det.putAll(extra);
+        audit.record(REGISTRAR, "REGISTRATION_ALERT", "LICENSE", licenseId, kind, det);
         log.warn("registrar : alerte douce {} (empreinte {})", kind, fp.substring(0, 8));
     }
 
@@ -545,6 +581,26 @@ public class ReportedActivationRegistrar {
      */
     public record Pending(String fp, String tokenFingerprint, String kid, String licenseId, String seatId, String deviceCode, String factors, String installKeyFingerprint, boolean installKeySigned,
                           String reason, Instant issuedAt, Instant firstServerAt, String via) {}
+
+    /** Une alerte douce pour le propriétaire (jamais un jeton) : nature, licence, date, empreintes (clé d'installation attendue / présentée) quand il y en a. */
+    public record AlertView(Instant at, String kind, String licenseId, String tokenFingerprint, String device, String expectedFingerprint, String presentedFingerprint) {}
+
+    /** Les dernières alertes douces (REGISTRATION_ALERT) du journal d'audit chaîné, de la plus récente à la plus ancienne. */
+    public List<AlertView> recentAlerts(int limit) {
+        return jdbc.query("SELECT at, reason, target_id, details FROM lic_audit WHERE action = 'REGISTRATION_ALERT' ORDER BY id DESC LIMIT ?", (rs, i) -> {
+            String d = rs.getString("details");
+            return new AlertView(rs.getTimestamp("at").toInstant(), rs.getString("reason"), rs.getString("target_id"), detail(d, "fp"), detail(d, "device"), detail(d, "expectedFp"), detail(d, "presentedFp"));
+        }, Math.max(1, Math.min(limit, 200)));
+    }
+
+    private static String detail(String flat, String key) {
+        if (flat == null) return null;
+        for (String part : flat.split("[,;\\n]")) {
+            String t = part.trim();
+            if (t.startsWith(key + "=")) return t.substring(key.length() + 1);
+        }
+        return null;
+    }
 
     public List<Pending> pending(int limit) {
         return jdbc.query("SELECT fp, kid, license_id, seat_id, device_code, factors, k, install_pub, ik_signed, reason, issued_at, first_server_at, via FROM lic_registration WHERE status = 'PENDING_DECISION' "

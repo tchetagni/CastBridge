@@ -109,6 +109,15 @@ public class WalletSyncController {
         int held = 0;
         List<ReportedActivationRegistrar.Registration> registrations = List.of();
         boolean accepted = reading.accepted();
+        // une activation de production qui porte la clé d'installation D'UNE AUTRE TV (jeton copié, ou demande d'appareil altérée en route) n'est pas lue pour celle-ci, mais son refus n'est jamais silencieux :
+        // le serveur vérifie la signature, écrit une alerte douce avec les deux empreintes pour le propriétaire et dit à la TV l'empreinte attendue (second audit w23-05, MEDIUM-C)
+        ReportedActivationRegistrar reg = registrar.getIfAvailable();
+        List<ReportedActivationRegistrar.Registration> mismatches = List.of();
+        if (proven && reg != null) {
+            List<ReportedActivationRegistrar.Presented> foreign = new ArrayList<>();
+            for (String a : foreignInstallKeyTokens(activations, proof.key())) foreign.add(new ReportedActivationRegistrar.Presented(a, code, proof.key(), true));
+            if (!foreign.isEmpty()) mismatches = reg.registerAll(foreign, ReportedActivationRegistrar.Via.WALLET, now);
+        }
         if (accepted) {
             // liaison à l'appareil : preuve de possession de la clé d'installation (audit M5) ; une identité libérée par l'administrateur se lie au premier appareil qui prouve
             WalletRepository.Identity known = repo.identity(code).orElse(null);
@@ -133,7 +142,6 @@ public class WalletSyncController {
             if (known == null && (proven || !requireBindProof)) repo.openIdentity(code, d.id, now);
             if (proven) repo.adoptInstallKey(code, d.id, proof.key());
             // une activation de production vérifiée, présentée avec la preuve de possession, ouvre (ou rattache) la licence et le poste AVANT le calcul des tranches (W23-05a) ; jamais sans preuve
-            ReportedActivationRegistrar reg = registrar.getIfAvailable();
             if (reg != null && reading.productionKey()) {
                 List<ReportedActivationRegistrar.Presented> items = new ArrayList<>();
                 for (String a : activations) items.add(new ReportedActivationRegistrar.Presented(a, code, proven ? proof.key() : null, proven));
@@ -146,6 +154,9 @@ public class WalletSyncController {
         } else {
             // aucune activation acceptée à CE contact : on n'ouvre rien, on n'inscrit rien ; l'identité n'est lue que par l'appareil API qui la porte (audit H3), jamais par un autre
             WalletReason why = reading.clockDoubt() ? WalletReason.CLOCK : WalletReason.ACTIVATE;
+            for (ReportedActivationRegistrar.Registration m : mismatches) {
+                if (ReportedActivationRegistrar.INSTALL_KEY_MISMATCH.equals(m.reason())) throw new ApiException(HttpStatus.CONFLICT, mismatchText(m), List.of(why.name(), ReportedActivationRegistrar.INSTALL_KEY_MISMATCH));
+            }
             WalletRepository.Identity known = repo.identity(code).orElseThrow(() -> new LedgerException(why));
             if (known.apiDeviceId() != d.id) throw new LedgerException(why);
             st = grants.readOnly(code, reading, now);
@@ -153,7 +164,10 @@ public class WalletSyncController {
             notices.add(notice(why.name(), why.text()));
         }
         if (st.licensePending()) notices.add(notice("LICENSE_PENDING", LICENSE_PENDING_TEXT));
-        notices.addAll(registrationNotices(registrations, hasLicence(st)));
+        List<ReportedActivationRegistrar.Registration> shown = new ArrayList<>(registrations);
+        shown.addAll(mismatches);
+        registrations = shown;
+        notices.addAll(registrationNotices(registrations, hasLicence(st) && !boundOther));
         if (held > 0) notices.add(notice("CATCHUP_HELD", CATCHUP_HELD_TEXT));
         if (boundOther) notices.add(notice(WalletReason.BOUND_OTHER_TV.name(), WalletReason.BOUND_OTHER_TV.text()));
 
@@ -209,13 +223,21 @@ public class WalletSyncController {
         List<Map<String, String>> out = new ArrayList<>();
         java.util.Set<String> seen = new java.util.HashSet<>();
         for (ReportedActivationRegistrar.Registration r : registrations) {
+            if (ReportedActivationRegistrar.INSTALL_KEY_MISMATCH.equals(r.reason())) {
+                if (seen.add("MISMATCH|" + r.fp())) {
+                    Map<String, String> n = notice("REGISTRATION_REVIEW", mismatchText(r));
+                    n.put("detail", ReportedActivationRegistrar.INSTALL_KEY_MISMATCH);
+                    out.add(n);
+                }
+                continue;
+            }
             if (r.registered() || r.status() == ReportedActivationRegistrar.Status.IGNORED || r.reason() == null) continue;
             // un refus DÉFINITIF (clé inconnue, clone, licence révoquée, refus du propriétaire…) n'annonce aucun jeton à venir : son motif est dans « registration » (audit LOW-4)
             if (r.status() == ReportedActivationRegistrar.Status.REFUSED) continue;
             boolean quota = "OVER_QUOTA".equals(r.reason()) || "TRANSFER_CAP".equals(r.reason());
             boolean noKey = ReportedActivationRegistrar.NO_INSTALL_KEY.equals(r.reason());
-            // une TV déjà payée par une autre licence n'attend pas de jetons : seul l'avis « sans clé d'installation » (décision du propriétaire) reste visible
-            if (tvHasLicence && !quota && !noKey) continue;
+            // une TV déjà payée par une licence et liée à cet appareil n'attend pas de jetons : aucun avis permanent, pas même « sans clé d'installation » (la ligne reste dans la liste du propriétaire ; audit LOW-D)
+            if (tvHasLicence && !quota) continue;
             String reason = quota ? "SEAT_OVER_QUOTA" : "REGISTRATION_REVIEW";
             if (!seen.add(reason + "|" + r.reason())) continue;
             Map<String, String> n = notice(reason, quota ? SEAT_OVER_QUOTA_TEXT : noKey ? NO_INSTALL_KEY_TEXT : REGISTRATION_REVIEW_TEXT);
@@ -223,6 +245,11 @@ public class WalletSyncController {
             out.add(n);
         }
         return out;
+    }
+
+    /** « Activation non reconnue » : la clé d'installation signée dans l'activation n'est pas celle de cette TV ; les deux empreintes à comparer avec l'écran d'activation de la TV. */
+    static String mismatchText(ReportedActivationRegistrar.Registration r) {
+        return "Activation non reconnue : empreinte attendue " + r.expectedFp() + ", empreinte de cette TV " + r.presentedFp() + ". Demandez une nouvelle activation en comparant cette empreinte avec celle de l'écran de la TV";
     }
 
     private static boolean hasLicence(GrantService.Standing st) { return st.licenseState() != null && java.util.Set.of("ACTIVE", "SUSPENDED", "EXPIRED", "REVOKED").contains(st.licenseState()); }
@@ -245,6 +272,23 @@ public class WalletSyncController {
                 if (ik != null && !ik.equals(provenKey)) continue;
             }
             out.add(a);
+        }
+        return out;
+    }
+
+    /** Les activations de PRODUCTION qui portent une clé d'installation autre que celle prouvée (le complément de {@link #withoutForeignInstallKeys}). */
+    static List<String> foreignInstallKeyTokens(List<String> activations, String provenKey) {
+        List<String> kept = withoutForeignInstallKeys(activations, provenKey);
+        List<String> out = new ArrayList<>();
+        for (String a : activations) {
+            if (kept.contains(a)) continue;
+            WireActivation.Decoded dec = a.length() > EditionReader.MAX_TOKEN_LENGTH ? null : WireActivation.decode(a.trim());
+            if (dec == null) continue;
+            try {
+                if (WireActivation.installKeyOf(dec.fields().rights()) != null) out.add(a);
+            } catch (IllegalArgumentException e) {
+                // droit ik illisible : ignoré
+            }
         }
         return out;
     }

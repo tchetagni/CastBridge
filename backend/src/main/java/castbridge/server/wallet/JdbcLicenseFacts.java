@@ -97,6 +97,8 @@ public class JdbcLicenseFacts implements LicenseFacts {
         try {
             Integer grace = jdbc.query("SELECT grace_days FROM lic_license WHERE license_id = ? AND created_by LIKE 'report:%'", rs -> rs.next() ? rs.getInt(1) : null, licenseId);
             if (grace == null) return null;
+            Timestamp licenceEnd = jdbc.queryForObject("SELECT end_at FROM lic_license WHERE license_id = ?", Timestamp.class, licenseId);
+            Long extended = jdbc.queryForObject("SELECT COUNT(*) FROM lic_audit WHERE action = 'LICENSE_EXTEND' AND target_type = 'LICENSE' AND target_id = ?", Long.class, licenseId);
             List<Window> raw = new ArrayList<>();
             jdbc.query("SELECT issued_at, usage_from, usage_to, unlimited FROM lic_registration WHERE license_id = ? AND status IN ('REGISTERED', 'ATTACHED') AND signer_creates = TRUE "
                     + "ORDER BY COALESCE(usage_from, issued_at)", rs -> {
@@ -120,6 +122,12 @@ public class JdbcLicenseFacts implements LicenseFacts {
                 }
                 Instant end = cur.toExclusive() == null || w.toExclusive() == null ? null : (w.toExclusive().isAfter(cur.toExclusive()) ? w.toExclusive() : cur.toExclusive());
                 cur = new Window(cur.from(), end);
+            }
+            // la prolongation du PROPRIÉTAIRE (LICENSE_EXTEND) prime sur les clés signées : la dernière fenêtre suit les dates PROPRES de la licence (second audit w23-05, MEDIUM-A) ; sans elle, le service
+            // payé s'arrêtait à la fin du dernier jeton alors que la licence restait ACTIVE jusqu'à la date décidée
+            if (extended != null && extended > 0) {
+                Instant end = licenceEnd == null ? null : licenceEnd.toInstant();
+                if (cur.toExclusive() != null && (end == null || end.isAfter(cur.toExclusive()))) cur = new Window(cur.from(), end);
             }
             merged.add(cur);
             return merged;
