@@ -41,6 +41,9 @@ Le secret de la session de repli (128 bits, vie courte) n'est JAMAIS dans une ad
 | `CASTBRIDGE_PLAY_REVOCATIONS_FILE` | `/var/lib/castbridge-play/revocations.txt` (image) | dernière liste valide, dans le volume inscriptible `play-state` (le conteneur est en lecture seule), relue au démarrage |
 | `CASTBRIDGE_PLAY_CREATES_PER_IDENTITY_DAY` | 30 | créations de salle par activation signée et par jour UTC |
 | `CASTBRIDGE_PLAY_CREATES_PER_48_HOUR` | 200 | créations de salle par /48 IPv6 et par heure |
+| `CASTBRIDGE_PLAY_WEB` | 0 | w20-04b : `0` = seule une CastBridge-TV activée entre (ticket + activation à `create` et à `join`), aucun navigateur (en-tête `Origin` ⇒ 403), `/play` = page d'information ; `1` = staging seulement (exige `CASTBRIDGE_PLAY_DIRECT=1`) |
+| `CASTBRIDGE_PLAY_MAX_RELAYED_PER_TV` | 8 | w20-04b : téléphones (joueurs locaux) qu'une TV peut relayer, 1 à 8 |
+| `CASTBRIDGE_PLAY_REVOCATIONS` | on | w20-04b : `on` = fermé tant qu'aucune liste signée récente n'est acceptée ; `off` = POC seulement (refusé si `MAX_ROOMS` > 20), visible : journal au démarrage et santé `"revocations":"disabled"` |
 | `CASTBRIDGE_PLAY_RESERVED_DIR` | (vide) | dossier en lecture seule des paquets réservés `quiz-<lot>-reserved-pN-vN.quiz.zip` (lus à la demande) |
 | `CASTBRIDGE_PLAY_RESERVED_IDS` | `<RESERVED_DIR>/reserved-ids.json` | gel des ids réservables ; absent = aucune question réservée servie |
 | `CASTBRIDGE_PLAY_MAX_ROOMS_PER_SUBJECT` | 2 | salles ouvertes en même temps par appareil attesté (l'essai : 1) |

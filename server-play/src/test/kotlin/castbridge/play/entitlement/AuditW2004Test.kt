@@ -70,7 +70,9 @@ class AuditW2004Test {
         assertFailsWith<IllegalStateException> { PlayConfig.fromEnv({ base[it] }) }
         val ok = PlayConfig.fromEnv({ (base + ("CASTBRIDGE_PLAY_REVOCATIONS_URL" to "https://bridge.sti-cm.com/api/v1/revocations"))[it] })
         assertEquals("https://bridge.sti-cm.com/api/v1/revocations", ok.revocationsUrl)
-        PlayConfig.fromEnv({ (base + ("CASTBRIDGE_PLAY_DIRECT" to "1"))[it] })
+        // w20-04b : `DIRECT=1` ne dispense plus de rien quand un proxy de confiance est posé (trou fermé) ; il reste permis SANS proxy de confiance
+        assertFailsWith<IllegalStateException> { PlayConfig.fromEnv({ (base + ("CASTBRIDGE_PLAY_DIRECT" to "1"))[it] }) }
+        PlayConfig.fromEnv({ mapOf("CASTBRIDGE_PLAY_DIRECT" to "1")[it] })
     }
 
     // ---- I1 : un /48 ne peut pas brûler la table des jti ----

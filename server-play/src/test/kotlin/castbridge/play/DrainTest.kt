@@ -24,7 +24,7 @@ class DrainTest {
     }
 
     @Test fun drainingRefusesNewRoomsTellsTheExistingOnesAndClosesAfterTheGrace() {
-        val srv = PlayServer(PlayConfig(port = 0, trustedProxies = LOOPBACK, ticketPubKeys = listOf(TestKeys.pub), trustedKeys = TestRights.trustedKeys, createsPerIpPerHour = 10_000)).start().also { servers += it }
+        val srv = PlayServer(PlayConfig(webPlay = true, revocationsMode = castbridge.play.RevocationsMode.OFF, port = 0, trustedProxies = LOOPBACK, ticketPubKeys = listOf(TestKeys.pub), trustedKeys = TestRights.trustedKeys, createsPerIpPerHour = 10_000)).start().also { servers += it }
         val (tv, w) = host(srv, "203.0.113.1")
         val p = WsWire(srv.port, xff = "203.0.113.2").also { wires += it }
         p.send(PlayCodec.encode(ClientMsg.Join(w["code"] as String, "Awa", null, dev(), false))); assertNotNull(p.await("welcome"))

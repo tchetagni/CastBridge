@@ -33,10 +33,10 @@ class MemoryProfileTest {
     @Test fun hundredRoomsOfEightClientsFitInMemory() {
         val bank = EmbeddedQuestionSource(levels = null).bank()
         val limits = ConnectionLimits(100_000, 100_000)
-        val hub = PlayHub(PlayConfig(maxRooms = 400, maxRoomsPerSubject = 1_000, createsPerIdentityPerDay = 100_000, ticketPubKeys = listOf(TestKeys.pub), trustedKeys = TestRights.trustedKeys, createsPerIpPerHour = 10_000), { 1_000L }, bank, TicketVerifier(listOf(TestKeys.pub)), limits = limits)
+        val hub = PlayHub(PlayConfig(webPlay = true, revocationsMode = castbridge.play.RevocationsMode.OFF, maxRooms = 400, maxRoomsPerSubject = 1_000, createsPerIdentityPerDay = 100_000, ticketPubKeys = listOf(TestKeys.pub), trustedKeys = TestRights.trustedKeys, createsPerIpPerHour = 10_000), { 1_000L }, bank, TicketVerifier(listOf(TestKeys.pub)), limits = limits)
         val keep = ArrayList<PlayConn>()
         // échauffement : une salle jouée puis fermée charge les classes et remplit les caches avant la mesure
-        val warm = PlayHub(PlayConfig(ticketPubKeys = listOf(TestKeys.pub), trustedKeys = TestRights.trustedKeys, createsPerIpPerHour = 10_000), { 1_000L }, bank, TicketVerifier(listOf(TestKeys.pub)), limits = limits)
+        val warm = PlayHub(PlayConfig(webPlay = true, revocationsMode = castbridge.play.RevocationsMode.OFF, ticketPubKeys = listOf(TestKeys.pub), trustedKeys = TestRights.trustedKeys, createsPerIpPerHour = 10_000), { 1_000L }, bank, TicketVerifier(listOf(TestKeys.pub)), limits = limits)
         Sink("warm").also { it.ticket = TestKeys.ticket(); warm.register(it); warm.onText(it, PlayCodec.encode(TestRights.create())); warm.onText(it, PlayCodec.encode(ClientMsg.Act(null, "start", null, "7", 1))); warm.closeAll() }
         val before = used()
         repeat(100) { r ->

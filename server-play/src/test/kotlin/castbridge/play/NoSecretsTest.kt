@@ -25,7 +25,7 @@ class NoSecretsTest {
     }
 
     @Test fun serviceStartsWithAnEmptyEnvironmentAndRefusesToCreateRooms() {
-        val srv = PlayServer(PlayConfig.fromEnv({ k -> if (k == "CASTBRIDGE_PLAY_DIRECT") "1" else null }, arrayOf("--server.port=0"))).start()
+        val srv = PlayServer(PlayConfig.fromEnv({ k -> if (k == "CASTBRIDGE_PLAY_DIRECT" || k == "CASTBRIDGE_PLAY_WEB") "1" else null }, arrayOf("--server.port=0"))).start()
         try {
             val r = SseWire.post(srv.port, """{"t":"create","mode":"DUEL"}""", null, "https://bridge.sti-cm.com", null)
             assertEquals(200, r.statusCode())

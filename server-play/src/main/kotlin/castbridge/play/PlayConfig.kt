@@ -32,6 +32,12 @@ class Cidr private constructor(private val net: ByteArray, private val bits: Int
 }
 
 /**
+ * Liste des révocations (w20-04b) : `ON` (défaut) = fermé tant qu'aucune liste signée récente n'est acceptée ; `OFF` = POC explicite, VISIBLE (santé `"revocations":"disabled"`,
+ * avertissement au démarrage), jamais un effet de bord d'un réglage de staging.
+ */
+enum class RevocationsMode { ON, OFF }
+
+/**
  * Réglages du service castbridge-play. Valeurs de production par défaut ; [fromEnv] lit les variables `CASTBRIDGE_PLAY_*` (la seule lecture
  * d'environnement du service : aucune clé privée, aucun jeton d'administration, aucun secret de licence : `NoSecretsTest`).
  */
@@ -92,15 +98,27 @@ class PlayConfig(
     val roomIdleMs: Long = 10 * 60_000L,
     val roomMaxMs: Long = 2 * 60 * 60_000L,
     val version: String = VERSION,
+    /**
+     * Page de jeu web (w20-04b) : FAUX par défaut. Faux = seule une CastBridge-TV activée entre dans une salle (ticket `cbp1` + activation `cbx1`, à `create` comme à `join`),
+     * aucun navigateur n'atteint le jeu, `/play` sert une page d'information. `CASTBRIDGE_PLAY_WEB=1` n'est accepté que de pair avec `CASTBRIDGE_PLAY_DIRECT=1` (staging).
+     */
+    val webPlay: Boolean = false,
+    /** Joueurs locaux qu'une TV peut relayer (1..8) ; `CASTBRIDGE_PLAY_MAX_RELAYED_PER_TV`. */
+    val maxRelayedPerTv: Int = 8,
+    /** `CASTBRIDGE_PLAY_REVOCATIONS` = `on` | `off` ; voir [RevocationsMode]. */
+    val revocationsMode: RevocationsMode = RevocationsMode.ON,
 ) {
     companion object {
         const val VERSION = "w20-04"
+        /** `CASTBRIDGE_PLAY_REVOCATIONS=off` (POC) n'est permis qu'avec un petit service. */
+        const val MAX_ROOMS_REVOCATIONS_OFF = 20
         /** Les SEULES variables d'environnement lues par le service. */
         val ENV_NAMES = listOf("CASTBRIDGE_PLAY_PORT", "CASTBRIDGE_PLAY_BIND", "CASTBRIDGE_PLAY_MAX_ROOMS", "CASTBRIDGE_PLAY_MAX_CONNECTIONS", "CASTBRIDGE_PLAY_MAX_PER_IP", "CASTBRIDGE_PLAY_MAX_PER_48", "CASTBRIDGE_PLAY_MAX_PER_IP_SHARED", "CASTBRIDGE_PLAY_CONN_PER_MIN", "CASTBRIDGE_PLAY_CONN_PER_SEC",
             "CASTBRIDGE_PLAY_ORIGINS", "CASTBRIDGE_PLAY_TRUSTED_PROXIES", "CASTBRIDGE_PLAY_LOTS_DIR", "CASTBRIDGE_PLAY_TICKET_PUBKEY", "CASTBRIDGE_PLAY_TICKET_PUBKEY_2",
             "CASTBRIDGE_PLAY_TICKET_PUBKEY_3", "CASTBRIDGE_PLAY_TRUSTED_KEYS", "CASTBRIDGE_PLAY_RESERVED_DIR", "CASTBRIDGE_PLAY_RESERVED_IDS", "CASTBRIDGE_PLAY_REVOCATIONS_URL",
             "CASTBRIDGE_PLAY_MAX_ROOMS_PER_SUBJECT", "CASTBRIDGE_PLAY_CREATES_PER_IP_HOUR", "CASTBRIDGE_PLAY_MAX_USED_TICKETS", "CASTBRIDGE_PLAY_DIRECT",
-            "CASTBRIDGE_PLAY_CREATES_PER_IDENTITY_DAY", "CASTBRIDGE_PLAY_CREATES_PER_48_HOUR", "CASTBRIDGE_PLAY_REVOCATIONS_FILE")
+            "CASTBRIDGE_PLAY_CREATES_PER_IDENTITY_DAY", "CASTBRIDGE_PLAY_CREATES_PER_48_HOUR", "CASTBRIDGE_PLAY_REVOCATIONS_FILE",
+            "CASTBRIDGE_PLAY_WEB", "CASTBRIDGE_PLAY_MAX_RELAYED_PER_TV", "CASTBRIDGE_PLAY_REVOCATIONS")
 
         /**
          * Les réseaux de confiance sont OBLIGATOIRES (adresse exacte de nginx en /32) : absents, le service refuse de démarrer, sauf `CASTBRIDGE_PLAY_DIRECT=1` (staging, tests :
@@ -126,9 +144,16 @@ class PlayConfig(
             fun arg(vararg names: String) = args.firstNotNullOfOrNull { a -> names.firstNotNullOfOrNull { n -> a.takeIf { it.startsWith("--$n=") }?.substringAfter('=') } }
             val d = PlayConfig()
             val direct = e("CASTBRIDGE_PLAY_DIRECT") == "1"
+            // trou fermé (w20-04b) : l'accès direct dispensait de la liste de révocations ET rendait les proxys de confiance inutiles ; les deux ensemble sont une erreur de déploiement
+            if (direct && e("CASTBRIDGE_PLAY_TRUSTED_PROXIES") != null) throw IllegalStateException("CASTBRIDGE_PLAY_DIRECT=1 est refusé quand CASTBRIDGE_PLAY_TRUSTED_PROXIES est posé : ou bien un proxy de confiance (production), ou bien l'accès direct (staging), jamais les deux")
             val trusted = parseTrusted(e("CASTBRIDGE_PLAY_TRUSTED_PROXIES"), direct)
-            // les révocations échouent FERMÉ : sans adresse de liste signée, aucune révocation ne serait jamais connue ; seul l'accès direct (staging, tests) s'en passe
-            if (e("CASTBRIDGE_PLAY_REVOCATIONS_URL") == null && !direct) throw IllegalStateException("CASTBRIDGE_PLAY_REVOCATIONS_URL est absent : indiquer l'adresse https de la liste signée des révocations (ou CASTBRIDGE_PLAY_DIRECT=1 en staging)")
+            val webPlay = when (e("CASTBRIDGE_PLAY_WEB")) { null, "0" -> false; "1" -> true; else -> throw IllegalStateException("CASTBRIDGE_PLAY_WEB vaut 0 ou 1") }
+            if (webPlay && !direct) throw IllegalStateException("CASTBRIDGE_PLAY_WEB=1 est refusé hors staging : seule une CastBridge-TV activée joue en ligne (ajouter CASTBRIDGE_PLAY_DIRECT=1 en staging)")
+            val revocationsMode = when (e("CASTBRIDGE_PLAY_REVOCATIONS")?.lowercase()) { null, "on" -> RevocationsMode.ON; "off" -> RevocationsMode.OFF; else -> throw IllegalStateException("CASTBRIDGE_PLAY_REVOCATIONS vaut on ou off") }
+            if (revocationsMode == RevocationsMode.OFF && (e("CASTBRIDGE_PLAY_MAX_ROOMS")?.toIntOrNull() ?: d.maxRooms) > MAX_ROOMS_REVOCATIONS_OFF)
+                throw IllegalStateException("CASTBRIDGE_PLAY_REVOCATIONS=off est réservé au POC : CASTBRIDGE_PLAY_MAX_ROOMS doit être ≤ $MAX_ROOMS_REVOCATIONS_OFF")
+            // les révocations échouent FERMÉ : sans adresse de liste signée, aucune révocation ne serait jamais connue ; seul l'accès direct (staging, tests) ou le mode `off` explicite s'en passe
+            if (e("CASTBRIDGE_PLAY_REVOCATIONS_URL") == null && !direct && revocationsMode == RevocationsMode.ON) throw IllegalStateException("CASTBRIDGE_PLAY_REVOCATIONS_URL est absent : indiquer l'adresse https de la liste signée des révocations (ou CASTBRIDGE_PLAY_REVOCATIONS=off pour le POC)")
             e("CASTBRIDGE_PLAY_REVOCATIONS_URL")?.let { u -> castbridge.play.entitlement.RevocationsFeed.urlProblem(u)?.let { throw IllegalStateException("CASTBRIDGE_PLAY_REVOCATIONS_URL refusée : $it") } }
             // les lots RÉSERVÉS ne se montent JAMAIS sur le dossier des lots libres (sinon ils seraient servis à tout le monde)
             val lots = e("CASTBRIDGE_PLAY_LOTS_DIR"); val reservedDir = e("CASTBRIDGE_PLAY_RESERVED_DIR")
@@ -158,6 +183,9 @@ class PlayConfig(
                 createsPer48PerHour = e("CASTBRIDGE_PLAY_CREATES_PER_48_HOUR")?.toIntOrNull()?.coerceIn(1, 100_000) ?: d.createsPer48PerHour,
                 revocationsFile = e("CASTBRIDGE_PLAY_REVOCATIONS_FILE")?.let { File(it) },
                 maxUsedTickets = e("CASTBRIDGE_PLAY_MAX_USED_TICKETS")?.toIntOrNull()?.coerceIn(100, 500_000) ?: d.maxUsedTickets,
+                webPlay = webPlay,
+                maxRelayedPerTv = e("CASTBRIDGE_PLAY_MAX_RELAYED_PER_TV")?.toIntOrNull()?.coerceIn(1, 8) ?: d.maxRelayedPerTv,
+                revocationsMode = revocationsMode,
             )
         }
     }

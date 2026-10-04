@@ -28,10 +28,20 @@ class FbConn(id: String, ip: String, private val cfg: PlayConfig, private val ow
     @Volatile private var stream: Socket? = null
     @Volatile var streamGen = 0; private set
 
+    /** Le `state` encore en file (jamais livré ou pas encore accusé) : le prochain `state` le REMPLACE (coalescence « dernier état seulement », w20-04b). */
+    private var pendingState: Item? = null
+
     override fun offer(text: String): Boolean = lock.withLock {
         if (dead) return true
         val n = text.toByteArray(Charsets.UTF_8).size
-        backlog.addLast(Item(nextIdx++, text, n)); bytes += n
+        // Coalescence : une vue `state` est COMPLÈTE, un seul état en file suffit (liaison EDGE à 40 kbps : une rafale de réponses ne doit pas mettre en file 8 états devant la révélation).
+        // Seul `state` est remplaçable (question, reveal, ack, ping, error, roomGone, replay, welcome, safety : jamais retirés ni réordonnés) ; le nouveau prend la place EN FIN de file,
+        // les indices restent croissants (un trou est permis).
+        val isState = text.startsWith(PlayFallbackController.STATE_PREFIX)
+        if (isState) pendingState?.let { old -> if (backlog.remove(old)) bytes -= old.bytes }
+        val item = Item(nextIdx++, text, n)
+        backlog.addLast(item); bytes += n
+        pendingState = if (isState) item else pendingState
         if (bytes > cfg.outboxMaxBytes) return false
         changed.signalAll(); true
     }
@@ -159,6 +169,8 @@ class PlayFallbackController(private val cfg: PlayConfig, val hub: PlayHub, priv
 
     companion object {
         const val COOKIE = "__Host-cbp"
+        /** Préfixe d'un message `state` (le type se lit sans analyser le JSON). */
+        internal const val STATE_PREFIX = "{\"t\":\"state\""
         private val NONCE = Regex("^[0-9a-f]{8,32}$")
         private val TYPE = Regex("^\\{\"t\":\"([a-zA-Z]{1,16})\"")
     }

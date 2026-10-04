@@ -60,9 +60,10 @@ sealed class ClientMsg {
         override val type get() = "create"
         override fun toString() = "Create(name=${PlayRedact.pseudo(name)}, mode=$mode, activation=${if (activation == null) "-" else PlayRedact.REDACTED}, rentals=${rentals.size})"   // jamais l'activation `cbx1` (T-18)
     }
-    data class Join(val code: String, val name: String?, val token: String?, val deviceHash: String?, val spectate: Boolean) : ClientMsg() {
+    /** `activation` (w20-04b, additif) : l'activation `cbx1` de la TV qui rejoint ; le service l'exige de toute connexion non assise quand `CASTBRIDGE_PLAY_WEB=0` (seule une TV activée entre). */
+    data class Join(val code: String, val name: String?, val token: String?, val deviceHash: String?, val spectate: Boolean, val activation: String? = null) : ClientMsg() {
         override val type get() = "join"
-        override fun toString() = "Join(code=${PlayRedact.code(code)}, name=${PlayRedact.pseudo(name)}, token=${if (token == null) "-" else PlayRedact.REDACTED}, device=${PlayRedact.device(deviceHash)}, spectate=$spectate)"
+        override fun toString() = "Join(code=${PlayRedact.code(code)}, name=${PlayRedact.pseudo(name)}, token=${if (token == null) "-" else PlayRedact.REDACTED}, device=${PlayRedact.device(deviceHash)}, spectate=$spectate, activation=${if (activation == null) "-" else PlayRedact.REDACTED})"
     }
     data class Resume(val roomId: String, val token: String, val lastSeq: Long) : ClientMsg() {
         override val type get() = "resume"

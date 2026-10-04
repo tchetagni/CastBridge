@@ -25,6 +25,9 @@ import kotlin.concurrent.withLock
 class WsConn(id: String, ip: String, private val socket: Socket, private val cfg: PlayConfig, private val hub: PlayHub) : PlayConn(id, ip, cfg.ratePerSec, cfg.burst) {
     private class Item(val opcode: Int, val payload: ByteArray)
 
+    /** Le `state` encore en file : le prochain `state` le REMPLACE (coalescence « dernier état seulement », w20-04b). */
+    private val pendingState = AtomicReference<Item?>(null)
+
     private val queue = LinkedBlockingQueue<Item>()
     private val queued = AtomicInteger()
     private val pendingPong = AtomicReference<ByteArray?>(null)
@@ -43,11 +46,19 @@ class WsConn(id: String, ip: String, private val socket: Socket, private val cfg
     /** Nombre de pongs en attente d'écriture : 0 ou 1, jamais plus. */
     internal fun pendingPongs(): Int = if (pendingPong.get() != null) 1 else 0
 
+    /** Les messages texte encore en file, dans l'ordre (tests et diagnostic). */
+    internal fun queuedTexts(): List<String> = queue.filter { it.opcode == WsProtocol.OP_TEXT }.map { String(it.payload, Charsets.UTF_8) }
+
     override fun offer(text: String): Boolean {
         if (closing.get()) return true
         val b = text.toByteArray(Charsets.UTF_8)
+        // Coalescence : une vue `state` est COMPLÈTE ; le `state` pas encore écrit est retiré, le nouveau prend sa place EN FIN de file. Aucun autre type n'est jamais retiré ni réordonné.
+        val isState = text.startsWith(PlayFallbackController.STATE_PREFIX)
+        if (isState) pendingState.getAndSet(null)?.let { old -> if (queue.remove(old)) queued.addAndGet(-old.payload.size) }   // faux : l'écrivain l'a déjà pris, il décompte lui-même
         if (queued.addAndGet(b.size) > cfg.outboxMaxBytes) return false
-        queue.add(Item(WsProtocol.OP_TEXT, b)); return true
+        val item = Item(WsProtocol.OP_TEXT, b)
+        if (isState) pendingState.set(item)
+        queue.add(item); return true
     }
 
     override fun close(code: Int, reason: String) {
