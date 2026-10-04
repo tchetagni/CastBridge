@@ -1,0 +1,35 @@
+# w21-07 — CastBridge (téléphone) **coursier** des statistiques de ses TV : retrait des lots scellés par tous les canaux locaux, file par TV, envoi au serveur dès qu'il a Internet, accusés rapportés ; classe cellulaire de la passerelle (sans permission) ; `sync.pair`, `sync.xfer`, `sync.courier`
+<!-- routage architecte 2026-10-04 (W21 ; remplace « sonnet-w21-07-phone-gateway-class-sync.md » après l'amendement du propriétaire sur l'envoi) -->
+> **Modèle : sonnet** · escalade : audit Opus **échantillon** (le téléphone ne lit ni ne modifie aucun lot, aucune permission nouvelle, champ additif de la passerelle) · statut : **ATTEND w21-01b** (`CourierQueue`, `ChunkCodec`) ; contrats de w21-02b (route `/api/v1/events/relay`) et de w21-04 (routes `/api/tele/*` de la TV) — tests contre des faux conformes aux contrats si non fusionnés
+> **Groupe : W21-B** (ordre 3) · porte : `:core:test --tests 'castbridge.core.telemetry.*' --tests 'castbridge.core.gateway.*'` + `:sender:testDebugUnitTest` (par `tools/agents/gradle-lock.sh`)
+> **Jauge : ≈ 400 k jetons entrée / 20 k sortie** (effort M, ≈ 1,5 j) · exécutant le moins cher compétent : sonnet
+
+**Conception** : `docs/coordination/DESIGN-W21-DONNEES-TECHNIQUES-POC-2026-10-04.md` § 3.4 (politique d'envoi : « C'est le phone qui une fois connecté enverra au serveur »), § 3.4 bis (file du téléphone), § 3.4 ter (canaux), § 3.4 quater (enveloppe opaque, accusés, téléphones multiples), § 3.6 (classe cellulaire), M-24, M-25, M-28, M-29, M-32, M-45, M-55. Branche `claude/w21-07-phone-courier`. Rapport : `docs/agent-reports/sonnet-w21-07.md`.
+
+## Objectif (autonome)
+(1) **Coursier** : à chaque contact avec une TV de confiance, le téléphone **tire** les lots scellés de la TV (`GET /api/tele/outbox`, puis morceaux de 4 Ko reprenables par offset) par la route que `LinkPlanner` (`android/core/src/main/kotlin/castbridge/core/tv/BtProtocol.kt:436`) lui donne : réseau commun, groupe Wi-Fi Direct **déjà existant**, tunnel Bluetooth (et les trames `CBTO` 22-26 si w21-04 les a construites) ; il les range **opaques** dans `CourierQueue` (par TV) ; dès qu'il a Internet **et** qu'aucune session de passerelle n'est active pour une TV, il les envoie à `POST /api/v1/events/relay` avec **son** jeton (au plus un envoi / 15 min, 16 enveloppes par requête) ; il rapporte ensuite les accusés du serveur à la TV (`POST /api/tele/receipts`) au contact suivant. Il ne lit, ne déchiffre, ne modifie rien. (2) **Classe cellulaire** de la passerelle, sans permission. (3) Évènements téléphone `sync.pair`, `sync.xfer`, `link.wd`, `sync.courier`, mêmes portes (consentement usage du téléphone + `pocMetrics` de sa directive) ; **le coursier, lui, transporte les lots de la TV même si le téléphone n'a pas consenti pour lui-même** (ce sont les données de la TV, sous la porte de la TV) — à confirmer par D-W21-1 (signalé dans le rapport).
+
+## Fichiers possédés
+- **Nouveaux** : `android/sender/src/main/kotlin/castbridge/sender/TeleCourier.kt` (retrait par canal, file, envoi, accusés ; `JobScheduler` : tentative de retrait toutes les 30 min quand une TV est liée — même rythme que la livraison des ordres, `docs/ORDRES.md` § 7 —, envoi sur contrainte « réseau disponible ») ; `android/core/src/main/kotlin/castbridge/core/gateway/CellClass.kt` ; `android/sender/src/main/kotlin/castbridge/sender/PhoneTech.kt` ; tests `android/core/src/test/kotlin/castbridge/core/gateway/CellClassTest.kt`, `android/sender/src/test/kotlin/castbridge/sender/{TeleCourierTest,PhoneTechTest}.kt`.
+- **Zone additive** : `BtGatewayService.kt` (classe `cell` à l'attache et sur `onCapabilitiesChanged`, champ additif de l'attache ; fournit aussi « passerelle active » au coursier) ; `PinStore.kt` / point d'association (`sync.pair`) ; `TransferQueue.kt` / état final (`sync.xfer`) ; point Wi-Fi Direct (`link.wd`) ; point où le téléphone ouvre la route vers une TV (pour réutiliser la route courante, jamais en créer une pour le coursier).
+- **Interdit** : écrans et textes affichés, `AndroidManifest.xml` (**aucune** permission), `R/`, `backend/`, `server-play/`, `TelemetryUploader.kt` (les statistiques propres du téléphone gardent leur chemin ; D-W21-12).
+
+## Étapes
+1. **Rouge** (sortie collée) : `TeleCourierTest.courierNeverSeesClearText`.
+2. `CellClass` (2g < 150 kbps, 3g < 2 000, 4g < 50 000, 5g au-delà, `unk`) ; champ additif `cell`.
+3. `TeleCourier` : retrait (plus basse priorité ; abandon propre si la TV répond 503 `Retry-After` : copie, lecture ou partie en cours) ; reprise à l'offset ; empreinte vérifiée ; file par TV (bornes de `CourierQueue`) ; envoi groupé ; résultats `accepted`/`duplicate` ⇒ lot retiré, accusé gardé pour la TV ; `rejected` ⇒ lot retiré, accusé gardé (la TV saura) ; erreur réseau ⇒ lot gardé ; aucun envoi pendant une session de passerelle active ; accusés remis à la TV au contact suivant.
+4. `PhoneTech` (objet nul hors porte) ; `sync.courier` quotidien (TV suivies, octets, lots, évincés, expirés, envois réussis/échoués, attente réception → envoi).
+5. **Vert**.
+
+## Critères d'acceptation (JVM ; mutations appliquées puis retirées)
+- `TeleCourierTest.courierNeverSeesClearText` : sur un lot scellé (vecteurs de w21-01b), aucune méthode du coursier ne renvoie d'octet décompressé ou déchiffré ; le lot transmis au serveur est identique octet pour octet au lot reçu (mutation : recompression ⇒ échec).
+- `TeleCourierTest.allChannels` : faux `LinkPlanner` donnant `Lan`, puis `Direct`, puis `BluetoothTunnel` ⇒ même lot retiré ; coupure au morceau 3 ⇒ reprise ; TV en copie (503) ⇒ abandon et nouvelle tentative 30 min plus tard ; **aucun** groupe Wi-Fi Direct créé par le coursier.
+- `TeleCourierTest.sendsWhenOnline` : hors ligne 3 jours puis en ligne ⇒ un envoi groupé ; passerelle active ⇒ aucun envoi (mutation ⇒ échec) ; 3 TV, bornes par TV respectées ; TTL 14 j ; accusés remis à la bonne TV seulement.
+- `TeleCourierTest.twoPhonesOneTv` (avec un faux serveur qui dédoublonne) : deux téléphones remettent le même lot ⇒ un seul jeu d'évènements côté serveur ; l'accusé rapporté par l'un purge la TV.
+- `CellClassTest` (bornes) ; manifeste sans permission ajoutée ; aucun identifiant de téléphone (opérateur, IMEI, cellule, nom de réseau) dans aucun évènement.
+
+## Interdits
+`READ_PHONE_STATE`, `TelephonyManager`, nom d'opérateur ; aucun déchiffrement ; aucun envoi pendant une session de passerelle active ; aucun texte affiché.
+
+## Rapport
+Rouge, vert, mutations, canaux réellement exercés, comportement sur une TV ancienne (routes `/api/tele/*` absentes ⇒ 404 ⇒ coursier inactif pour elle), question ouverte sur le consentement du téléphone coursier.
