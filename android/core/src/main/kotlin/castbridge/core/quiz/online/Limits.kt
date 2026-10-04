@@ -87,27 +87,46 @@ class Limits(private val clock: () -> Long = System::currentTimeMillis, val conf
 
     // ------------------------------------------------------------------ plafond de connexions OUVERTES par adresse
 
-    private class Seat(val room: String, val device: String, val since: Long)
+    private class Seat(val room: String, val device: String, val since: Long, var connected: Boolean, var lastSeen: Long)
     private val seats = HashMap<String, ArrayDeque<Seat>>()   // clé d'adresse -> sièges de JOUEURS récents
 
+    private fun prune(q: ArrayDeque<Seat>, now: Long) { q.removeAll { if (it.connected) now - it.since >= SEAT_MEMORY_MS else now - it.lastSeen >= SEAT_GRACE_MS } }
+
     /**
-     * Note qu'un JOUEUR (jamais un spectateur : n'importe qui en devient un avec un identifiant inventé) s'est assis dans une salle depuis cette adresse. Borné : 128 sièges par
-     * adresse, 2 h. Un même (salle, appareil) ne compte qu'une fois.
+     * Note qu'un JOUEUR (jamais un spectateur : n'importe qui en devient un avec un identifiant inventé) est assis dans une salle depuis cette adresse : à l'entrée (`join`) comme à la
+     * REPRISE (`resume`), qui garde la date `since` d'origine (un siège repris compte tout de suite comme assis depuis l'origine). Borné : 128 sièges par adresse. Un même
+     * (salle, appareil) ne compte qu'une fois.
      */
     @Synchronized fun noteSeat(ipKey: String, roomId: String, deviceHash: String) {
         val now = clock()
         val q = seats.getOrPut(ipKey) { ArrayDeque() }
-        while (q.isNotEmpty() && now - q.first().since >= SEAT_MEMORY_MS) q.removeFirst()
-        if (q.none { it.room == roomId && it.device == deviceHash }) q.addLast(Seat(roomId, deviceHash, now))
+        prune(q, now)
+        val old = q.firstOrNull { it.room == roomId && it.device == deviceHash }
+        if (old != null) { old.connected = true; old.lastSeen = now } else q.addLast(Seat(roomId, deviceHash, now, true, now))
         while (q.size > MAX_SEATS_PER_IP) q.removeFirst()
         if (seats.size > maxKeys) seats.remove(seats.keys.first())
     }
 
-    /** Le joueur est parti (connexion fermée) : son siège ne compte plus. */
+    /**
+     * La connexion du joueur est tombée : son siège est GARDÉ pour la reprise ([SEAT_GRACE_MS], 10 min comme le siège de la salle). Une coupure du Wi-Fi d'une classe ne doit pas
+     * faire retomber le plafond de l'adresse : les élèves se reconnectent par `resume`, tous en même temps.
+     */
+    @Synchronized fun seatLeft(ipKey: String, roomId: String, deviceHash: String) {
+        val s = seats[ipKey]?.firstOrNull { it.room == roomId && it.device == deviceHash } ?: return
+        s.connected = false; s.lastSeen = clock()
+    }
+
+    /** Siège réellement libéré (expulsion, départ définitif) : il ne compte plus. */
     @Synchronized fun dropSeat(ipKey: String, roomId: String, deviceHash: String) {
         val q = seats[ipKey] ?: return
         q.removeAll { it.room == roomId && it.device == deviceHash }
         if (q.isEmpty()) seats.remove(ipKey)
+    }
+
+    /** La salle a disparu : tous ses sièges partent. */
+    @Synchronized fun dropRoom(roomId: String) {
+        val it = seats.entries.iterator()
+        while (it.hasNext()) { val q = it.next().value; q.removeAll { s -> s.room == roomId }; if (q.isEmpty()) it.remove() }
     }
 
     /**
@@ -117,7 +136,7 @@ class Limits(private val clock: () -> Long = System::currentTimeMillis, val conf
     @Synchronized fun seatedDevices(ipKey: String): Int {
         val q = seats[ipKey] ?: return 0
         val now = clock()
-        while (q.isNotEmpty() && now - q.first().since >= SEAT_MEMORY_MS) q.removeFirst()
+        prune(q, now)
         if (q.isEmpty()) { seats.remove(ipKey); return 0 }
         return q.filter { now - it.since >= SEAT_MIN_AGE_MS }.groupBy { it.room }.values.maxOfOrNull { room -> room.map { it.device }.toSet().size } ?: 0
     }
@@ -139,5 +158,7 @@ class Limits(private val clock: () -> Long = System::currentTimeMillis, val conf
         const val SEAT_MEMORY_MS = 2 * 60 * 60_000L
         /** Un siège ne compte pour le plafond relevé qu'après 30 s de présence. */
         const val SEAT_MIN_AGE_MS = 30_000L
+        /** Un siège dont la connexion est tombée est gardé 10 minutes (la reprise de la salle). */
+        const val SEAT_GRACE_MS = 10 * 60_000L
     }
 }

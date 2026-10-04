@@ -40,7 +40,10 @@ class PlayConfig(
     val bind: String = "0.0.0.0",
     val maxRooms: Int = 400,
     val maxConnections: Int = 3_000,
-    val maxPerIp: Int = 8,
+    /** Connexions ouvertes par adresse (IPv4, /64 en IPv6) : 24 (une famille, une box ; une classe passe par le plafond relevé de `MAX_PER_IP_SHARED`). */
+    val maxPerIp: Int = 24,
+    /** Connexions ouvertes par /48 IPv6 (65 536 /64) ; `CASTBRIDGE_PLAY_MAX_PER_48`. */
+    val maxPer48: Int = 512,
     /** Plafond de connexions ouvertes d'une adresse PARTAGÉE (≥ 8 appareils distincts dans une même salle : classe, famille) ; `CASTBRIDGE_PLAY_MAX_PER_IP_SHARED`. */
     val maxPerIpShared: Int = 64,
     /** Nouvelles connexions par minute et par adresse (60 : CGNAT, école) ; `CASTBRIDGE_PLAY_CONN_PER_MIN`. */
@@ -93,7 +96,7 @@ class PlayConfig(
     companion object {
         const val VERSION = "w20-04"
         /** Les SEULES variables d'environnement lues par le service. */
-        val ENV_NAMES = listOf("CASTBRIDGE_PLAY_PORT", "CASTBRIDGE_PLAY_BIND", "CASTBRIDGE_PLAY_MAX_ROOMS", "CASTBRIDGE_PLAY_MAX_CONNECTIONS", "CASTBRIDGE_PLAY_MAX_PER_IP", "CASTBRIDGE_PLAY_MAX_PER_IP_SHARED", "CASTBRIDGE_PLAY_CONN_PER_MIN", "CASTBRIDGE_PLAY_CONN_PER_SEC",
+        val ENV_NAMES = listOf("CASTBRIDGE_PLAY_PORT", "CASTBRIDGE_PLAY_BIND", "CASTBRIDGE_PLAY_MAX_ROOMS", "CASTBRIDGE_PLAY_MAX_CONNECTIONS", "CASTBRIDGE_PLAY_MAX_PER_IP", "CASTBRIDGE_PLAY_MAX_PER_48", "CASTBRIDGE_PLAY_MAX_PER_IP_SHARED", "CASTBRIDGE_PLAY_CONN_PER_MIN", "CASTBRIDGE_PLAY_CONN_PER_SEC",
             "CASTBRIDGE_PLAY_ORIGINS", "CASTBRIDGE_PLAY_TRUSTED_PROXIES", "CASTBRIDGE_PLAY_LOTS_DIR", "CASTBRIDGE_PLAY_TICKET_PUBKEY", "CASTBRIDGE_PLAY_TICKET_PUBKEY_2",
             "CASTBRIDGE_PLAY_TICKET_PUBKEY_3", "CASTBRIDGE_PLAY_TRUSTED_KEYS", "CASTBRIDGE_PLAY_RESERVED_DIR", "CASTBRIDGE_PLAY_RESERVED_IDS", "CASTBRIDGE_PLAY_REVOCATIONS_URL",
             "CASTBRIDGE_PLAY_MAX_ROOMS_PER_SUBJECT", "CASTBRIDGE_PLAY_CREATES_PER_IP_HOUR", "CASTBRIDGE_PLAY_MAX_USED_TICKETS", "CASTBRIDGE_PLAY_DIRECT",
@@ -126,12 +129,18 @@ class PlayConfig(
             val trusted = parseTrusted(e("CASTBRIDGE_PLAY_TRUSTED_PROXIES"), direct)
             // les révocations échouent FERMÉ : sans adresse de liste signée, aucune révocation ne serait jamais connue ; seul l'accès direct (staging, tests) s'en passe
             if (e("CASTBRIDGE_PLAY_REVOCATIONS_URL") == null && !direct) throw IllegalStateException("CASTBRIDGE_PLAY_REVOCATIONS_URL est absent : indiquer l'adresse https de la liste signée des révocations (ou CASTBRIDGE_PLAY_DIRECT=1 en staging)")
+            e("CASTBRIDGE_PLAY_REVOCATIONS_URL")?.let { u -> castbridge.play.entitlement.RevocationsFeed.urlProblem(u)?.let { throw IllegalStateException("CASTBRIDGE_PLAY_REVOCATIONS_URL refusée : $it") } }
+            // les lots RÉSERVÉS ne se montent JAMAIS sur le dossier des lots libres (sinon ils seraient servis à tout le monde)
+            val lots = e("CASTBRIDGE_PLAY_LOTS_DIR"); val reservedDir = e("CASTBRIDGE_PLAY_RESERVED_DIR")
+            if (lots != null && reservedDir != null && File(lots).canonicalFile == File(reservedDir).canonicalFile)
+                throw IllegalStateException("CASTBRIDGE_PLAY_LOTS_DIR et CASTBRIDGE_PLAY_RESERVED_DIR désignent le même dossier : les lots réservés ne se montent jamais sur LOTS_DIR")
             return PlayConfig(
                 port = (arg("server.port", "port") ?: e("CASTBRIDGE_PLAY_PORT"))?.toIntOrNull() ?: d.port,
                 bind = e("CASTBRIDGE_PLAY_BIND") ?: d.bind,
                 maxRooms = e("CASTBRIDGE_PLAY_MAX_ROOMS")?.toIntOrNull() ?: d.maxRooms,
                 maxConnections = e("CASTBRIDGE_PLAY_MAX_CONNECTIONS")?.toIntOrNull() ?: d.maxConnections,
                 maxPerIp = e("CASTBRIDGE_PLAY_MAX_PER_IP")?.toIntOrNull() ?: d.maxPerIp,
+                maxPer48 = e("CASTBRIDGE_PLAY_MAX_PER_48")?.toIntOrNull()?.coerceAtLeast(1) ?: d.maxPer48,
                 maxPerIpShared = e("CASTBRIDGE_PLAY_MAX_PER_IP_SHARED")?.toIntOrNull()?.coerceAtLeast(1) ?: d.maxPerIpShared,
                 connPerMinute = e("CASTBRIDGE_PLAY_CONN_PER_MIN")?.toIntOrNull()?.coerceAtLeast(1) ?: d.connPerMinute,
                 connPerSecond = e("CASTBRIDGE_PLAY_CONN_PER_SEC")?.toIntOrNull()?.coerceAtLeast(1) ?: d.connPerSecond,

@@ -31,7 +31,7 @@ class RevocationsFeed(private val ring: KeyRing, private val fetch: () -> String
         val env = Envelope.decode(text) ?: return
         val st = RevocationNotice.verify(text, ring) ?: return
         state = st; lastIssuedAt = env.issuedAt
-        lastOkMs = minOf(clock(), f.lastModified()).coerceAtLeast(1L)   // date de la dernière liste prise, jamais dans le futur
+        lastOkMs = minOf(clock(), f.lastModified(), env.issuedAt).coerceAtLeast(1L)   // l'âge de la LISTE (pas celui du fichier : un volume recopié rajeunirait une vieille liste), jamais dans le futur
     }
 
     /** Écriture atomique (fichier temporaire du même dossier puis renommage) : un arrêt en plein écrit ne laisse jamais une liste coupée. */
@@ -65,6 +65,16 @@ class RevocationsFeed(private val ring: KeyRing, private val fetch: () -> String
     /** Le service peut juger des droits : une liste valide a été prise (ou relue du volume) il y a moins de [MAX_AGE_MS]. */
     fun usable(): Boolean = lastOkMs > 0 && clock() - lastOkMs <= MAX_AGE_MS
 
+    /**
+     * L'état RÉEL, tel que `/play/health` le dit : `none` = aucune liste n'a encore été acceptée (ni relue du volume) ; `stale` = la dernière a plus d'une heure (le service
+     * refuse d'ouvrir des salles passé 24 h) ; `ok` = à jour. Jamais « ok » tant qu'aucune liste n'a été acceptée.
+     */
+    fun status(): String = when {
+        lastOkMs == 0L -> "none"
+        !usable() || clock() - lastOkMs > STALE_MS -> "stale"
+        else -> "ok"
+    }
+
     /** Texte du signe orange quand la liste est vieille (ou jamais reçue depuis plus d'une heure de service) ; null = à jour. */
     fun staleNotice(): String? {
         val ref = if (lastOkMs > 0) lastOkMs else started
@@ -78,10 +88,24 @@ class RevocationsFeed(private val ring: KeyRing, private val fetch: () -> String
         const val MAX_AGE_MS = 24 * 3_600_000L
 
         /** Lecteur HTTP(S) du service, borné : 10 s, corps ≤ [MAX_BYTES], aucune redirection suivie. Jamais appelé dans les tests (lecteur injecté). */
+        /** Hôtes autorisés en `http` : la boucle locale et l'API sur le réseau interne de Docker (la liste est signée : son transport n'a pas besoin d'être secret). */
+        val PLAIN_HTTP_HOSTS = setOf("127.0.0.1", "localhost", "castbridge-api")
+
+        /** Pourquoi cette adresse est refusée (texte pour l'exploitant), ou null si elle est acceptable. */
+        fun urlProblem(url: String): String? {
+            val uri = runCatching { URI.create(url) }.getOrNull() ?: return "adresse illisible"
+            return when {
+                uri.scheme == "https" && !uri.host.isNullOrEmpty() -> null
+                uri.scheme == "http" && uri.host in PLAIN_HTTP_HOSTS -> null
+                uri.scheme == "http" -> "https obligatoire vers un hôte distant (http n'est permis que vers ${PLAIN_HTTP_HOSTS.joinToString(", ")})"
+                else -> "https attendu"
+            }
+        }
+
         fun httpFetcher(url: String): () -> String? {
             val client = HttpClient.newBuilder().connectTimeout(Duration.ofSeconds(10)).followRedirects(HttpClient.Redirect.NEVER).build()
             val uri = URI.create(url)
-            require(uri.scheme == "https" || uri.host == "127.0.0.1" || uri.host == "localhost") { "révocations : https obligatoire" }
+            urlProblem(url)?.let { throw IllegalArgumentException("révocations : $it") }
             return {
                 val r = client.send(HttpRequest.newBuilder(uri).timeout(Duration.ofSeconds(10)).header("Accept", "text/plain").GET().build(), HttpResponse.BodyHandlers.ofInputStream())
                 r.body().use { body ->

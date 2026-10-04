@@ -119,7 +119,7 @@ class PlayFallbackController(private val cfg: PlayConfig, val hub: PlayHub, priv
         }
         c!!.touch()
         if (!hub.onText(c, String(body, Charsets.UTF_8))) return MiniHttp.json(out, 429, """{"error":"trop de messages"}""", mapOf("Set-Cookie" to "${cookieName(req)}=; Max-Age=0; HttpOnly; Secure; SameSite=Strict; Path=/"))
-        MiniHttp.json(out, 200, """{"ok":true}""", if (created) mapOf("Set-Cookie" to "${cookieName(req)}=${c.id}; HttpOnly; Secure; SameSite=Strict; Path=/") else emptyMap())
+        MiniHttp.json(out, 200, """{"ok":true}""", if (created) mapOf("Set-Cookie" to "${cookieName(req)}=${c.id}; Max-Age=7200; HttpOnly; Secure; SameSite=Strict; Path=/") else emptyMap())
     }
 
     /** `GET /play/events` : flux SSE jusqu'à la fin de la session ou le départ du client. */

@@ -93,4 +93,21 @@ class LimitsTest {
         assertEquals(Limits.Scope.PREFIX48, results.first { !it.allowed }.scope)
         assertTrue(l2.admitConnection("v6:2001:0db8:ffff:0001::/64").allowed, "un autre /48 n'est pas touché")
     }
+
+    @Test fun aSeatWhoseConnectionDroppedIsKeptForTheResumeGraceThenFreed() {
+        val l = limits()
+        repeat(10) { l.noteSeat("s", "room", "d$it") }
+        now += Limits.SEAT_MIN_AGE_MS
+        assertEquals(18, l.openCeiling("s"))
+        repeat(10) { l.seatLeft("s", "room", "d$it") }
+        now += Limits.SEAT_GRACE_MS - 1
+        assertEquals(18, l.openCeiling("s"), "gardés pendant la grâce de reprise (10 minutes)")
+        l.noteSeat("s", "room", "d0")   // une reprise : le siège revient avec sa date d'origine
+        now += 2
+        assertEquals(1, l.seatedDevices("s"), "les neuf autres, laissés plus de 10 minutes, sont libérés ; le repris reste")
+        repeat(10) { l.noteSeat("t", "room2", "d$it") }
+        now += Limits.SEAT_MIN_AGE_MS
+        l.dropRoom("room2")
+        assertEquals(8, l.openCeiling("t"), "salle disparue : ses sièges partent")
+    }
 }

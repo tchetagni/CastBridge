@@ -178,6 +178,20 @@ $ sudo docker ps --filter name=castbridge-api --format '{{.Names}} {{.Status}}' 
 
 **Lire d'abord :** les 15 exigences et les « Conditions avant la route nginx `/play/` publique » de `docs/PLAY-OPS-REQUIREMENTS.md`. Les sections 4.1 à 4.3 préparent le service ; **la 4.4 est le seul acte qui expose le service à Internet.** Ne la faire qu'à une heure creuse, après la 4.3.
 
+### 4.0 PRÉREQUIS de production : le module des licences (décision du propriétaire, rien n'est fait ici)
+
+**À lire avant tout le reste de la partie 4.** Le service refuse d'ouvrir une salle tant qu'il n'a pas accepté une liste de révocations signée (échec fermé, voulu), et `CASTBRIDGE_PLAY_REVOCATIONS_URL` n'est pas facultative en production. Or :
+
+- `GET /api/v1/revocations` répond **503** tant que le **module des licences** n'est pas actif avec sa clé de signature `license-signing.key` ; ce module est **ÉTEINT par défaut en production** (`CASTBRIDGE_LICENSES_ENABLED=false`, et la route publique `CASTBRIDGE_LICENSES_PUBLIC_ROUTES=false` répond 404). Sans décision, `/play/health` dira `"revocations":"none"` et **aucune salle ne s'ouvrira**.
+- Le propriétaire doit donc **décider** : soit **activer le module des licences** (`docs/LICENSE-ADMIN.md` : `CASTBRIDGE_LICENSES_ENABLED=true`, `CASTBRIDGE_LICENSES_PUBLIC_ROUTES=true`, fichier `license-signing.key` dans le dossier des secrets), soit **fournir une liste de révocations signée statique** (une liste `cbx1` émise hors ligne avec une clé de portée `REVOKE`, servie en https à l'adresse de `REVOCATIONS_URL`) ; la liste n'est crue que si elle a moins de 24 h, il faut donc la ré-émettre au moins chaque jour (le service garde la dernière valide dans `play-state`). **Aucun cahier ne le déclenche** : rien n'a été activé, rien n'a été émis.
+
+La clé publique du SERVEUR, **exactement où la lire** (code : `backend/src/main/java/castbridge/server/licenses/`) :
+
+- La clé privée est le fichier `license-signing.key` du dossier des secrets (`CASTBRIDGE_LICENSES_SECRETS_DIR`, `/run/secrets` par défaut ; `LicenseKeyring`). Au démarrage de l'API, le journal dit `licence module: server signing key <kid> loaded`.
+- La clé **publique** (Base64 de 32 octets bruts) est le champ `publicKey` de `GET /api/v1/admin/licenses/signing` (`LicenseApiController.signing()`, route d'administration : jeton d'administrateur, droit `LICENSE_READ`) ; le même appel donne `scopes` (portées fixes du serveur : `ISSUE_TRIAL`, `ISSUE_PRODUCTION`, `REACTIVATE`, `REVOKE`, `REGISTRY`, `POLICY`). Ce n'est **pas** `GET /api/v1/updates/public-key` (clé des mises à jour, autre clé) ni la clé des tickets.
+- Valeur à poser : `CASTBRIDGE_PLAY_TRUSTED_KEYS=server:<publicKey>:REVOKE+ISSUE_TRIAL+ISSUE_PRODUCTION` (même format `nom:clé:PORTÉES` que la liste de confiance de la TV ; `REVOKE` pour la liste de révocations, `ISSUE_*` pour les activations émises par le serveur). Une entrée mal formée est **ignorée** et dite au démarrage (journal `play.config.warning`).
+- `CASTBRIDGE_LICENSES_TRUSTED_KEYS` de l'API n'est **pas** cette valeur : elle liste les clés des outils hors ligne (bureau, téléphone) que l'API accepte à l'import du registre.
+
 ### 4.1 Paire de clés du ticket (privée pour l'API, publique pour `castbridge-play`)
 
 **Lire d'abord :** DESIGN-W20 O-6. L'émetteur de tickets est livré par **w20-04** : tant que ce cahier n'est pas fusionné et déployé dans `castbridge-api`, aucune salle ne peut s'ouvrir en production (voulu : service sûr mais inerte). `tools/play/gen-ticket-keypair.sh` (w20-04) **n'existe pas encore** à la date de ce document ; s'il existe au moment de l'exécution, le préférer (`bash tools/play/gen-ticket-keypair.sh`, lire sa sortie) ; sinon, les commandes `openssl` ci-dessous sont équivalentes.
@@ -219,15 +233,24 @@ $ cp "$ROOT/services/play/.env.play" "$ROOT/services/play/.env.play.staging.$(da
 $ ( umask 077; cat > "$ROOT/services/play/.env.play" <<EOF
 CASTBRIDGE_PLAY_TRUSTED_PROXIES=$SUBNET
 CASTBRIDGE_PLAY_TICKET_PUBKEY=$PUB
+CASTBRIDGE_PLAY_TRUSTED_KEYS=server:$SERVER_PUB:REVOKE+ISSUE_TRIAL+ISSUE_PRODUCTION
+CASTBRIDGE_PLAY_REVOCATIONS_URL=https://bridge.sti-cm.com/api/v1/revocations
+CASTBRIDGE_PLAY_REVOCATIONS_FILE=/var/lib/castbridge-play/revocations.txt
 CASTBRIDGE_PLAY_ORIGINS=https://bridge.sti-cm.com
 CASTBRIDGE_PLAY_MAX_CONNECTIONS=1500
+CASTBRIDGE_PLAY_MAX_PER_IP=24
+CASTBRIDGE_PLAY_MAX_PER_48=512
+CASTBRIDGE_PLAY_MAX_PER_IP_SHARED=64
+CASTBRIDGE_PLAY_CREATES_PER_IP_HOUR=20
+CASTBRIDGE_PLAY_CREATES_PER_IDENTITY_DAY=30
+CASTBRIDGE_PLAY_CREATES_PER_48_HOUR=200
 EOF
   )
 ```
 
-`CASTBRIDGE_PLAY_MAX_CONNECTIONS=1500` : voir 4.5 (nginx à 1 024 connexions par worker). Pas de `CASTBRIDGE_PLAY_DIRECT`.
+`$SERVER_PUB` = champ `publicKey` de `GET /api/v1/admin/licenses/signing` (4.0 ; à relever avant d'écrire le fichier ; ce n'est pas la valeur de `CASTBRIDGE_LICENSES_TRUSTED_KEYS`). `CASTBRIDGE_PLAY_MAX_CONNECTIONS=1500` : voir 4.5 (nginx à 1 024 connexions par worker). Pas de `CASTBRIDGE_PLAY_DIRECT`. Lots de questions : `CASTBRIDGE_PLAY_LOTS_DIR` (lots libres) et `CASTBRIDGE_PLAY_RESERVED_DIR` + `CASTBRIDGE_PLAY_RESERVED_IDS` (réservés, volume distinct : le service refuse de démarrer si c'est le même dossier) ; le compose les monte à la demande (§ 5).
 
-**Vérifier :** `grep -E 'DIRECT|PRIVATE|_KEY|_TOKEN' "$ROOT/services/play/.env.play"` ne renvoie **rien** ; `stat -c '%a'` = `600` ; `$PUB` est bien la clé de 4.1 (pas celle de test de 3.3). **Revenir en arrière :** `cp` de la sauvegarde `.env.play.staging.<date>` sur `.env.play`.
+**Vérifier :** `curl -fsS http://127.0.0.1:7091/play/health` donne **`"revocations":"ok"`** (et non `none` ni `stale` : 4.0) ; `grep -E 'DIRECT|PRIVATE|_KEY|_TOKEN' "$ROOT/services/play/.env.play"` ne renvoie **rien** ; `stat -c '%a'` = `600` ; `$PUB` est bien la clé de 4.1 (pas celle de test de 3.3). **Revenir en arrière :** `cp` de la sauvegarde `.env.play.staging.<date>` sur `.env.play`.
 
 ### 4.3 Déployer l'image et le service (hors partie)
 
@@ -432,6 +455,8 @@ Un retour arrière de nginx n'arrête pas le conteneur `castbridge-play` : il re
 | Durcissement | `read_only: true`, `tmpfs: /tmp:size=32m`, `user: 10002:10002`, `cap_drop: [ALL]`, `no-new-privileges`, `mem_limit: 384m`, `ulimits nofile 16384` |
 | Arrêt | `stop_grace_period: 30s` (le service annonce la maintenance et attend 25 s) |
 | Santé | `curl -fsS http://127.0.0.1:8080/play/health` toutes les 30 s |
+| État inscriptible | volume nommé `play-state:/var/lib/castbridge-play` (le conteneur est `read_only` : sans lui, la persistance des révocations échoue en silence) ; dossier créé et donné à l'uid 10002 par le `Dockerfile` |
+| Lots | `/lots:ro` (libres, `CASTBRIDGE_PLAY_LOTS_DIR`) et `/reserved:ro` (réservés, `CASTBRIDGE_PLAY_RESERVED_DIR`), tous deux facultatifs ; jamais les réservés sur `LOTS_DIR` |
 | Environnement | `env_file: .env.play` (modèle documenté variable par variable : `backend/.env.play.example`) ; aucune clé privée, aucun `CASTBRIDGE_ADMIN_TOKEN` |
 | Confiance du proxy | `CASTBRIDGE_PLAY_TRUSTED_PROXIES` = sous-réseau d'`infra-net` **à relever** (variante `/32` : 4.2) ; le service refuse de démarrer sans elle (sauf `DIRECT=1`, staging) |
 
@@ -492,6 +517,7 @@ curl -fsS --max-time 5 http://127.0.0.1:7091/play/health | python3 -c '
 import json, sys
 h = json.load(sys.stdin); bad = []
 if h["status"] != "ok": bad.append("status=" + h["status"])
+if h.get("revocations") != "ok": bad.append("revocations=" + str(h.get("revocations")) + " (aucune salle ne s'ouvre : 4.0)")
 if h["connections"] > 0.8 * h["maxConnections"]: bad.append("connexions %d/%d (>80 %%)" % (h["connections"], h["maxConnections"]))
 if h["rooms"] > 0.8 * h["maxRooms"]: bad.append("salles %d/%d (>80 %%)" % (h["rooms"], h["maxRooms"]))
 if h["memoryUsedMb"] > 0.85 * h["memoryMaxMb"]: bad.append("tas %d/%d Mo (>85 %%)" % (h["memoryUsedMb"], h["memoryMaxMb"]))
@@ -499,7 +525,7 @@ print("ALERTE " + "; ".join(bad) if bad else "OK rooms=%d connexions=%d tas=%dMo
 sys.exit(1 if bad else 0)' || echo "ALERTE : /play/health injoignable ou illisible"
 ```
 
-À brancher comme la sonde existante (`ops/monitoring/`, toutes les 5 minutes, `docs`/`backend/README.md` § « Supervision et astreinte ») : exemple de cron à ajouter par le propriétaire : `*/5 * * * * <la commande ci-dessus> | logger -t castbridge-play-check`. Seuils : 400 salles, 3 000 connexions (1 500 tant que 4.5 n'est pas fait), 8 par adresse (plafonds du service). Alerte supplémentaire (DESIGN-W20 O-10) : plus de 1 000 codes faux par heure (le service ne journalise pas les requêtes : à approximer par le nombre de 4xx de `/play/ws` dans les journaux nginx).
+À brancher comme la sonde existante (`ops/monitoring/`, toutes les 5 minutes, `docs`/`backend/README.md` § « Supervision et astreinte ») : exemple de cron à ajouter par le propriétaire : `*/5 * * * * <la commande ci-dessus> | logger -t castbridge-play-check`. Seuils : 400 salles, 3 000 connexions (1 500 tant que 4.5 n'est pas fait), 24 par adresse, 512 par /48 (plafonds du service). Alerte supplémentaire (DESIGN-W20 O-10) : plus de 1 000 codes faux par heure (le service ne journalise pas les requêtes : à approximer par le nombre de 4xx de `/play/ws` dans les journaux nginx).
 
 | Quoi | Où | Commande |
 |---|---|---|
@@ -529,7 +555,7 @@ Les 5 commandes d'astreinte : `sudo docker ps`, `/play/health` (ci-dessus), `sud
 | Sous-réseau et adresse de `infra-net` / nginx | 2.4 | à relever |
 | Taille de l'image construite, mémoire au repos, durée de la première construction | 3.2, 3.4 | à relever (jamais construite avant) |
 | Contenu de `docker-compose.override.yml` de l'API | 2.6 | à relever avant 4.1 |
-| Variable de clé privée côté API (`CASTBRIDGE_PLAY_TICKET_KEY_FILE`) | w20-04 | à confirmer à sa fusion |
+| Variable de clé privée côté API | `CASTBRIDGE_PLAY_TICKET_KEY_FILE` (`application.yml` : `castbridge.play.ticket-key-file`, fichier secret `play-ticket.key`, vide = la route de ticket répond 503) | confirmée à la fusion de w20-04 |
 | Pare-feu du fournisseur (hors `ufw`) | panneau du fournisseur | non vérifié : sans effet ici (443 déjà ouvert, 7091 local) |
 
 **Non fait par ce cahier :** aucune exécution sur le serveur ; pas d'émetteur de tickets (w20-04) ; pas de base utilisée (w20-09) ; pas de `map $http_upgrade` (impossible sans modifier `nginx.conf`) ; pas de 7443, pas de DNS `play.` ; l'empreinte `assetlinks.json` n'est pas écrite.

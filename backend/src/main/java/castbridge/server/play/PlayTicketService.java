@@ -81,7 +81,7 @@ public class PlayTicketService {
         if (code == null) throw ApiException.badRequest("Code d'appareil invalide : 16 caractères au format XXXX-XXXX-XXXX-XXXX, avec son caractère de contrôle");
         if (!"tv".equals(device.app)) throw new ApiException(HttpStatus.FORBIDDEN, "Seule une TV CastBridge-TV peut ouvrir une salle en ligne");
         link(device.publicId, code, now);
-        if (address != null) count(perAddress, address, perAddressPerHour, now, "Trop de demandes de ticket depuis cette adresse : réessayez dans une heure");
+        if (address != null) count(perAddress, addressKey(address), perAddressPerHour, now, "Trop de demandes de ticket depuis cette adresse : réessayez dans une heure");
         reserve(device.publicId, now);
 
         byte[] jti = new byte[16];
@@ -98,6 +98,15 @@ public class PlayTicketService {
         String b64 = Base64.getUrlEncoder().withoutPadding().encodeToString(json(payload).getBytes(StandardCharsets.UTF_8));
         byte[] sig = key.sign((DOMAIN + PREFIX + "." + b64).getBytes(StandardCharsets.US_ASCII));
         return new Issued(PREFIX + "." + b64 + "." + Base64.getUrlEncoder().withoutPadding().encodeToString(sig), now + LIFE_MS, (int) (LIFE_MS / 1000));
+    }
+
+    /** Limit key of a client address: IPv4 as is, IPv6 reduced to its /64 (a subscriber gets at least a /64: otherwise one subscriber has 2^64 caps). A literal only: no DNS lookup. */
+    static String addressKey(String address) {
+        if (address == null || address.indexOf(':') < 0) return address;
+        try {
+            byte[] b = java.net.InetAddress.getByName(address).getAddress();
+            return b.length == 4 ? java.net.InetAddress.getByAddress(b).getHostAddress() : "v6:" + HexFormat.of().formatHex(b, 0, 8);
+        } catch (java.net.UnknownHostException | RuntimeException e) { return address; }
     }
 
     /** Counts one ticket for the device; 429 when it already had [perDevicePerHour] in the last hour. Bounded: at most [MAX_DEVICES] devices, the least recently used is evicted. */

@@ -40,16 +40,16 @@ class PlayGuard(val limits: Limits = Limits(), log: LogRedactor = LogRedactor())
     }
 
     /** Un siège vient d'être pris (ou la salle créée) : journalise ; un JOUEUR (pas un spectateur) est mémorisé pour le plafond relevé des adresses partagées. */
-    fun seated(c: PlayConn, msg: ClientMsg, roomId: String, role: castbridge.core.quiz.online.PlayRole) {
-        if (msg is ClientMsg.Join && msg.deviceHash != null && role == castbridge.core.quiz.online.PlayRole.PLAYER) {
-            limits.noteSeat(c.ip, roomId, msg.deviceHash!!); c.seatKey = roomId to msg.deviceHash!!
-        }
+    fun seated(c: PlayConn, msg: ClientMsg, roomId: String, role: castbridge.core.quiz.online.PlayRole, resumedDevice: String? = null) {
+        // à l'entrée (`join`) comme à la REPRISE (`resume` : l'appareil est celui du siège) : une classe qui se reconnecte par `resume` garde son plafond
+        val device = (msg as? ClientMsg.Join)?.deviceHash ?: resumedDevice
+        if (device != null && role == castbridge.core.quiz.online.PlayRole.PLAYER) { limits.noteSeat(c.ip, roomId, device); c.seatKey = roomId to device }
         log.event(if (msg is ClientMsg.Create) "play.room.created" else "play.room.seated", "", mapOf("roomId" to roomId, "ip" to c.ip))
     }
 
-    /** La connexion est tombée : son siège ne compte plus pour le plafond relevé. */
-    fun unseated(c: PlayConn) { c.seatKey?.let { limits.dropSeat(c.ip, it.first, it.second) } }
+    /** La connexion est tombée : son siège est gardé 10 minutes pour la reprise, puis ne compte plus. */
+    fun unseated(c: PlayConn) { c.seatKey?.let { limits.seatLeft(c.ip, it.first, it.second) } }
 
     /** La salle est fermée : son seau part. */
-    fun forget(roomId: String) = limits.forgetRoom(roomId)
+    fun forget(roomId: String) { limits.forgetRoom(roomId); limits.dropRoom(roomId) }
 }

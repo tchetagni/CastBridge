@@ -26,21 +26,25 @@ Le secret de la session de repli (128 bits, vie courte) n'est JAMAIS dans une ad
 | `CASTBRIDGE_PLAY_BIND` | 0.0.0.0 | adresse d'écoute (en production : réseau Docker, port publié en 127.0.0.1) |
 | `CASTBRIDGE_PLAY_MAX_ROOMS` | 400 | salles ; au-delà : `error PLAY_BUSY` |
 | `CASTBRIDGE_PLAY_MAX_CONNECTIONS` | 3000 | connexions ; au-delà : HTTP 503 |
-| `CASTBRIDGE_PLAY_MAX_PER_IP` | 8 | connexions par adresse cliente ; au-delà : HTTP 429 avant l'upgrade |
-| `CASTBRIDGE_PLAY_MAX_PER_IP_SHARED` | 64 | idem pour une adresse partagée (≥ 8 appareils distincts dans une même salle : classe) |
+| `CASTBRIDGE_PLAY_MAX_PER_IP` | 24 | connexions ouvertes par adresse cliente (IPv4, /64 en IPv6) ; au-delà : HTTP 429 avant l'upgrade |
+| `CASTBRIDGE_PLAY_MAX_PER_48` | 512 | connexions ouvertes par /48 IPv6 |
+| `CASTBRIDGE_PLAY_MAX_PER_IP_SHARED` | 64 | plafond relevé d'une adresse partagée : `8 + joueurs assis` (≥ 8 joueurs distincts connectés depuis 30 s dans une même salle : classe), au plus cette valeur ; les sièges coupés sont gardés 10 min pour la reprise |
 | `CASTBRIDGE_PLAY_CONN_PER_MIN` | 60 | nouvelles connexions par minute et par adresse (HTTP 429 + `Retry-After`) |
 | `CASTBRIDGE_PLAY_CONN_PER_SEC` | 60 | nouvelles connexions par seconde, toutes adresses |
 | `CASTBRIDGE_PLAY_ORIGINS` | `https://bridge.sti-cm.com` | origines autorisées (liste séparée par des virgules) |
 | `CASTBRIDGE_PLAY_TRUSTED_PROXIES` | OBLIGATOIRE | réseaux dont `X-Forwarded-For` est cru (dernier saut seulement) : en production l'adresse exacte de nginx en /32. Absent ou entrée invalide : le service REFUSE de démarrer. Un `X-Forwarded-For` illisible venant de ce proxy : 400 |
 | `CASTBRIDGE_PLAY_DIRECT` | (vide) | `1` : staging et tests seulement (accès direct, aucun proxy, avertissement au démarrage) ; n'excuse pas une entrée invalide |
 | `CASTBRIDGE_PLAY_TICKET_PUBKEY`, `_2`, `_3` | (vide) | clés PUBLIQUES Ed25519 des tickets (Base64 : 32 octets bruts ou SPKI) ; vide = aucune salle ne peut s'ouvrir |
-| `CASTBRIDGE_PLAY_LOTS_DIR` | (vide) | dossier en lecture seule de lots `.quiz.zip` ; vide = questions libres intégrées seulement |
-| `CASTBRIDGE_PLAY_TRUSTED_KEYS` | (vide) | clés PUBLIQUES des émetteurs d'activations de confiance, `nom:clé Base64:PORTÉES` séparées par des virgules (format de `CASTBRIDGE_LICENSES_TRUSTED_KEYS`) ; vide = aucune activation valable, donc aucune salle |
-| `CASTBRIDGE_PLAY_REVOCATIONS_URL` | (vide) | liste signée des révocations (lecture publique, https), relue toutes les 15 min ; vide = aucune relecture (signe orange « Révocations non rafraîchies » dans `/play/health`) |
+| `CASTBRIDGE_PLAY_LOTS_DIR` | (vide) | dossier en lecture seule de lots LIBRES `.quiz.zip` ; vide = questions libres intégrées seulement ; un lot `-reserved-` y est ignoré, et le service refuse de démarrer si ce dossier est `CASTBRIDGE_PLAY_RESERVED_DIR` |
+| `CASTBRIDGE_PLAY_TRUSTED_KEYS` | (vide) | clés PUBLIQUES de confiance, `nom:clé Base64 brute:PORTÉES` séparées par des virgules (format de la liste de confiance de la TV) : en production la clé publique du SERVEUR, `server:<publicKey>:REVOKE+ISSUE_TRIAL+ISSUE_PRODUCTION`, lue sur `GET /api/v1/admin/licenses/signing` (`docs/PLAY-OPS.md` § 4.0 ; ce n'est PAS `CASTBRIDGE_LICENSES_TRUSTED_KEYS`) ; vide = aucune activation valable, donc aucune salle |
+| `CASTBRIDGE_PLAY_REVOCATIONS_URL` | OBLIGATOIRE en production | liste signée des révocations, relue toutes les 15 min ; **n'est pas facultative** (absente, le service refuse de démarrer, sauf `DIRECT=1`). https vers un hôte distant ; `http` seulement vers `localhost`, `127.0.0.1`, `castbridge-api` ; toute autre adresse = erreur de démarrage. `/play/health` dit `"revocations":"ok"`, `"none"` (aucune liste acceptée) ou `"stale"` ; prérequis : le module des licences actif ou une liste statique signée (`docs/PLAY-OPS.md` § 4.0) |
+| `CASTBRIDGE_PLAY_REVOCATIONS_FILE` | `/var/lib/castbridge-play/revocations.txt` (image) | dernière liste valide, dans le volume inscriptible `play-state` (le conteneur est en lecture seule), relue au démarrage |
+| `CASTBRIDGE_PLAY_CREATES_PER_IDENTITY_DAY` | 30 | créations de salle par activation signée et par jour UTC |
+| `CASTBRIDGE_PLAY_CREATES_PER_48_HOUR` | 200 | créations de salle par /48 IPv6 et par heure |
 | `CASTBRIDGE_PLAY_RESERVED_DIR` | (vide) | dossier en lecture seule des paquets réservés `quiz-<lot>-reserved-pN-vN.quiz.zip` (lus à la demande) |
 | `CASTBRIDGE_PLAY_RESERVED_IDS` | `<RESERVED_DIR>/reserved-ids.json` | gel des ids réservables ; absent = aucune question réservée servie |
 | `CASTBRIDGE_PLAY_MAX_ROOMS_PER_SUBJECT` | 2 | salles ouvertes en même temps par appareil attesté (l'essai : 1) |
-| `CASTBRIDGE_PLAY_CREATES_PER_IP_HOUR` | 20 | créations de salle par adresse cliente (/64 en IPv6) et par heure |
+| `CASTBRIDGE_PLAY_CREATES_PER_IP_HOUR` | 20 | créations de salle par adresse cliente (/64 en IPv6) et par heure ; consommé seulement par une création réussie ou une preuve de droits fausse (jamais par un échec d'authentification ni un refus de capacité) |
 | `CASTBRIDGE_PLAY_MAX_USED_TICKETS` | 20000 | `jti` mémorisés jusqu'à leur échéance (plein = refus) |
 
 Ticket d'ouverture de salle : `cbp1.<charge>.<signature>` (voir `docs/PLAY-PROTOCOL.md`, « Ticket et droits ») : Ed25519 avec préfixe de domaine, `aud`, `exp` ≤ 15 min, `jti` à USAGE UNIQUE ; envoyé dans `hello.ticket` ou l'en-tête `X-Play-Ticket`. Les droits viennent de l'activation `cbx1` jointe à `create` (jamais du ticket), évaluée avec les clés publiques de `CASTBRIDGE_PLAY_TRUSTED_KEYS`. Rejouer, fabriquer ou périmer un ticket : `PLAY_TICKET_REFUSED`, aucune salle.
@@ -80,4 +84,4 @@ java -jar ../server-play/build/libs/castbridge-play.jar --server.port=8090     #
 
 `tools/core-harness/run.sh` n'inclut que `:core` : pour `:server-play` sans le plugin Android, créer une racine Gradle `.core-harness/` avec `include(":core", ":server-play")` (voir le `Dockerfile`).
 
-Image : `docker build -f server-play/Dockerfile -t castbridge-play .` depuis la racine du dépôt (base `eclipse-temurin:21-jre`, uid 10002). Lancement attendu : `read_only`, `tmpfs /tmp`, `cap_drop: ALL`, `mem_limit: 384m`, port `127.0.0.1:7091:8080`, réseau `infra-net`, aucun accès aux secrets de licence ni d'activation, aucune base dans ce cahier (schéma `castbridge_play` : w20-09).
+Image : `docker build -f server-play/Dockerfile -t castbridge-play .` depuis la racine du dépôt (base `eclipse-temurin:25-jre` par défaut, `RUNTIME_IMAGE` pour un digest ou `21-jre` si le tag 25 manque ; uid 10002 ; dossier d'état `/var/lib/castbridge-play` pour le volume `play-state`). Lancement attendu : `read_only`, `tmpfs /tmp`, `cap_drop: ALL`, `mem_limit: 384m`, port `127.0.0.1:7091:8080`, réseau `infra-net`, aucun accès aux secrets de licence ni d'activation, aucune base dans ce cahier (schéma `castbridge_play` : w20-09).

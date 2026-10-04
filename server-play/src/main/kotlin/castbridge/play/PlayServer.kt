@@ -38,16 +38,18 @@ class PlayServer(
 ) : AutoCloseable {
     /** Gardes anti-abus : seaux de débit (CGNAT-friendly, voir `Limits`), plafond relevé des adresses partagées, journal sans secret. */
     private val guard = PlayGuard(Limits(config = Limits.Config(connPerMinute = cfg.connPerMinute, connPerSecondGlobal = cfg.connPerSecond, maxOpenPerIp = cfg.maxPerIp, maxOpenPerIpShared = cfg.maxPerIpShared)))
-    private val limits = ConnectionLimits(cfg.maxPerIp, cfg.maxConnections, gate = guard.limits, maxPerIpShared = cfg.maxPerIpShared)
+    private val limits = ConnectionLimits(cfg.maxPerIp, cfg.maxConnections, cfg.maxPer48, gate = guard.limits, maxPerIpShared = cfg.maxPerIpShared)
     private val verifier = TicketVerifier(cfg.ticketPubKeys)
     private val origin = OriginCheck(cfg.origins)
-    private val feed = RevocationsFeed(TrustedIssuers.parse(cfg.trustedKeys.joinToString(",")).ring, cfg.revocationsUrl?.let { runCatching { RevocationsFeed.httpFetcher(it) }.getOrNull() } ?: { null }, file = cfg.revocationsFile)
+    private val trusted = TrustedIssuers.parse(cfg.trustedKeys.joinToString(","))
+    // une adresse de révocations refusée est une ERREUR de démarrage (jamais un échec silencieux)
+    private val feed = RevocationsFeed(trusted.ring, cfg.revocationsUrl?.let { RevocationsFeed.httpFetcher(it) } ?: { null }, file = cfg.revocationsFile)
     /** La banque libre du service SANS les ids réservables, et les paquets réservés lus à la demande (w20-04). */
     private val reserved = ReservedBank(bank ?: loadBank(cfg.lotsDir), DirReservedSource(cfg.reservedDir), ReservedBank.readIds(cfg.reservedIdsFile))
     val hub = PlayHub(cfg, clock, reserved.freeBank, verifier, random, roomScope, settings, limits, reserved, feed::current, revocationsReady = { cfg.revocationsUrl == null || feed.usable() }).also { it.guard = guard }
     private val fallback = PlayFallbackController(cfg, hub, limits, verifier, origin)
     private val pages = PlayPageController()
-    private val health = HealthController(cfg, hub, limits, notice = feed::staleNotice)
+    private val health = HealthController(cfg, hub, limits, revocations = feed::status)
     private val ticker = Ticker(cfg.tickMs) { hub.tick() }
     private val sockets = ConcurrentHashMap.newKeySet<Socket>()
     private val raw = Semaphore(cfg.maxConnections * 2)
@@ -61,6 +63,8 @@ class PlayServer(
     fun start(): PlayServer {
         server = ServerSocket().apply { reuseAddress = true; bind(InetSocketAddress(InetAddress.getByName(cfg.bind), cfg.port), 256) }
         running = true
+        // les clés de confiance ignorées (format, portées) sont DITES au démarrage, jamais perdues en silence
+        trusted.warnings.forEachIndexed { i, w -> guard.log.event("play.config.warning.$i", w, level = "warn") }
         ticker.start()
         if (cfg.revocationsUrl != null) Thread.ofPlatform().name("play-revocations").daemon(true).start { refreshRevocations() }
         Thread.ofPlatform().name("play-accept").daemon(true).start { acceptLoop() }
@@ -160,10 +164,10 @@ class PlayServer(
     }
 
     companion object {
-        /** Banque du service : les questions LIBRES intégrées + les lots `.quiz.zip` du dossier en lecture seule (les réservées : w20-04). Un lot illisible est ignoré. */
+        /** Banque du service : les questions LIBRES intégrées + les lots LIBRES `.quiz.zip` du dossier en lecture seule. Un lot `-reserved-` n'est JAMAIS lu ici (les réservées passent par `ReservedBank` et `CASTBRIDGE_PLAY_RESERVED_DIR`, gelées par `reserved-ids.json`). Un lot illisible est ignoré. */
         fun loadBank(dir: File?): QuizBank {
             var bank = EmbeddedQuestionSource(levels = null).bank()
-            val files = dir?.takeIf { it.isDirectory }?.listFiles { f -> f.isFile && f.name.endsWith(QUIZ_PACK_SUFFIX) }?.sortedBy { it.name }.orEmpty()
+            val files = dir?.takeIf { it.isDirectory }?.listFiles { f -> f.isFile && f.name.endsWith(QUIZ_PACK_SUFFIX) && !f.name.contains("-reserved-") }?.sortedBy { it.name }.orEmpty()
             for (f in files) runCatching { bank = bank.merge(QuizLotFormat.read(f).bank) }
             return bank
         }
