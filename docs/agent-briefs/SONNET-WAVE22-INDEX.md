@@ -72,4 +72,4 @@ D-W22-2 (tranches mensuelles), D-W22-3 (« sans enjeu » = cagnotte NDEM, jeu sa
 - `Pot.split` existe (`android/core/src/main/kotlin/castbridge/core/quiz/Wallet.kt:54-85`) ; échecs en ligne sans serveur (`docs/CHESS.md` § 6).
 
 ## Lien avec la vague 23
-Suivi des **codes d'activation** (demande du propriétaire du 2026-10-04, précisée « codes d'activation d'essai et de production ») : `SONNET-WAVE23-INDEX.md`, conception `DESIGN-W23-SUIVI-ACTIVATIONS-CONSOLE-2026-10-04.md` ; aucun suivi de soldes. Migration de w23-01 (rédigée V65) : w22-10, w22-16 et w23-01 prennent chacun « plus haut + 1 » à la fusion (aucun numéro réservé).
+Suivi des **codes d'activation** (demande du propriétaire du 2026-10-04, précisée « codes d'activation d'essai et de production ») : `SONNET-WAVE23-INDEX.md`, conception `DESIGN-W23-SUIVI-ACTIVATIONS-CONSOLE-2026-10-04.md` ; aucun suivi de soldes. Migration de w23-01 (rédigée V63) : w22-10, w22-16 et w23-01 prennent chacun « plus haut + 1 » à la fusion (aucun numéro réservé).

@@ -1,6 +1,6 @@
 -- Module « suivi des activations » (W23) : inventaire des codes d'activation d'essai et de production, des TV qui les portent, historique immuable chaîné,
 -- journal d'audit des lectures, alertes douces. Toutes les tables sont NOUVELLES : aucune table existante n'est modifiée (le module des licences est lu, jamais écrit).
--- Numérotation : V62 = télémétrie W21, V63 = grand livre W22, V64 = audit anti-triche W21 (réservés, non créés ici) ; V65 est pris par ce module.
+-- Numérotation : production à V61, V62 = grand livre W22 (déjà sur integration/agents) ; V63 est pris par ce module (« plus haut + 1 » à la fusion).
 -- Jamais un jeton cbx1, une clé compacte, un défi complet ni un jeton d'appareil : empreinte SHA-256 + étiquette de 8 hex seulement. La TV est désignée par tv_ref (HMAC) dans
 -- l'historique ; act_tv.device_code est la seule correspondance lisible et peut être effacée sans casser la chaîne.
 

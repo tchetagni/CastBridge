@@ -43,11 +43,11 @@ class ActivationsOffTest extends ApiTestBase {
     }
 
     @Test
-    void onlyV65IsAddedByThisModule() throws Exception {
+    void onlyV63IsAddedByThisModule() throws Exception {
         Path dir = Path.of("src", "main", "resources", "db", "migration");
         try (var files = Files.list(dir)) {
             var names = files.map(f -> f.getFileName().toString()).toList();
-            assertEquals(1, names.stream().filter(n -> n.startsWith("V65__")).count());
+            assertEquals(1, names.stream().filter(n -> n.startsWith("V63__")).count());
             assertEquals(0, names.stream().filter(n -> n.startsWith("V62__") || n.startsWith("V63__") || n.startsWith("V64__")).count(), "V62-V64 belong to other work");
         }
     }

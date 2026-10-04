@@ -61,10 +61,10 @@ class SourceRulesTest {
     }
 
     @Test
-    void theMigrationIsV65AndTouchesNoExistingTable() throws IOException {
-        Path v65 = Files.list(Path.of("src", "main", "resources", "db", "migration")).filter(p -> p.getFileName().toString().startsWith("V65__")).findFirst().orElseThrow();
-        String sql = Files.readString(v65);
-        assertFalse(Pattern.compile("(?i)alter\\s+table\\s+(?!act_|adm_)").matcher(sql).find(), "V65 only creates its own tables");
+    void theMigrationIsV63AndTouchesNoExistingTable() throws IOException {
+        Path v63 = Files.list(Path.of("src", "main", "resources", "db", "migration")).filter(p -> p.getFileName().toString().startsWith("V63__")).findFirst().orElseThrow();
+        String sql = Files.readString(v63);
+        assertFalse(Pattern.compile("(?i)alter\\s+table\\s+(?!act_|adm_)").matcher(sql).find(), "V63 only creates its own tables");
         for (var m = Pattern.compile("(?i)create\\s+table\\s+(\\w+)").matcher(sql); m.find(); ) {
             assertTrue(m.group(1).startsWith("act_") || m.group(1).equals("adm_read_audit"), m.group(1));
         }

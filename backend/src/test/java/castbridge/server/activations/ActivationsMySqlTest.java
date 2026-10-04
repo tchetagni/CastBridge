@@ -21,7 +21,7 @@ import org.testcontainers.junit.jupiter.Container;
 import org.testcontainers.junit.jupiter.Testcontainers;
 
 /**
- * The module against the real MySQL 8.4 of production, when Docker is available (skipped otherwise: the H2 tests still run). What H2 cannot show: the V65 migration on
+ * The module against the real MySQL 8.4 of production, when Docker is available (skipped otherwise: the H2 tests still run). What H2 cannot show: the V63 migration on
  * MySQL, the head lock of the chains under 16 concurrent writers (InnoDB row lock), a journal and a report end to end. NOT run in the session that wrote it (no Docker daemon).
  */
 @Testcontainers(disabledWithoutDocker = true)
