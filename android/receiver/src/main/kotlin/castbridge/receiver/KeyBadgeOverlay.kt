@@ -27,8 +27,8 @@ object KeyBadgeOverlay : Application.ActivityLifecycleCallbacks {
         if (!BuildConfig.REQUIRE_ACTIVATION) return
         val root = a.window?.decorView as? ViewGroup ?: return
         val view = (root.findViewWithTag<TextView>(TAG)) ?: TextView(a).apply {
-            tag = TAG; textSize = 14f; typeface = Typeface.DEFAULT_BOLD; setPadding(26, 8, 26, 8); isFocusable = false; isClickable = false; importantForAccessibility = View.IMPORTANT_FOR_ACCESSIBILITY_NO
-            root.addView(this, FrameLayout.LayoutParams(-2, -2, Gravity.TOP or Gravity.CENTER_HORIZONTAL).apply { topMargin = 6 })
+            tag = TAG; textSize = 20f; typeface = Typeface.DEFAULT_BOLD; setPadding(26, 8, 26, 8); isFocusable = false; isClickable = false; importantForAccessibility = View.IMPORTANT_FOR_ACCESSIBILITY_NO
+            root.addView(this, FrameLayout.LayoutParams(-2, -2, Gravity.TOP or Gravity.CENTER_HORIZONTAL).apply { topMargin = castbridge.core.tv.PlayerIcons.safe(a.resources.displayMetrics.widthPixels, a.resources.displayMetrics.heightPixels).vertical })
         }
         refresh(view)
         val tick = object : Runnable { override fun run() { refresh(view); handler.postDelayed(this, 30_000L) } }

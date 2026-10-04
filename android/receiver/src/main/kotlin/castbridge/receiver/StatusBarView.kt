@@ -30,13 +30,30 @@ import castbridge.core.status.Tech
  */
 class StatusBarView(private val act: Activity, private val box: LinearLayout, private val onOpen: () -> Unit, private val leaveFocus: () -> Unit) {
     private val main = Handler(Looper.getMainLooper())
-    private class Chip(val view: LinearLayout, val label: TextView, val glyph: ImageView, val mark: ImageView, val second: ImageView, val dot: View) {
+    private class Chip(val view: LinearLayout, val label: TextView, val glyph: ImageView, val mark: ImageView, val second: ImageView, val dot: View, val holder: View) {
         var sig = ""; var changedAt = 0L; var errBg: Boolean? = null
     }
     private val chips = LinkedHashMap<String, Chip>()
     private val more = TextView(act)
     private var order = emptyList<String>()
     private var last: StatusBar? = null
+    /**
+     * During a video (owner's rule of 2026-10-04): every chip carries its French label, in 28 sp with a 40 dp glyph on a dark pill, inside the 5 % safe margins, and the whole
+     * zone follows the player's control bar ([zoneShown]); an error / reconnection or a change of the last 4 s keeps it on screen (core `PlayerIcons.zoneVisible`).
+     */
+    var playerMode = false
+        set(v) { if (field != v) { field = v; relayout(); last?.let { render(it) } } }
+    var zoneShown = true
+        set(v) { if (field != v) { field = v; last?.let { render(it) } } }
+
+    private fun relayout() {
+        val lp = box.layoutParams as? FrameLayout.LayoutParams ?: return
+        val m = act.resources.displayMetrics
+        val s = castbridge.core.tv.PlayerIcons.safe(m.widthPixels, m.heightPixels)
+        if (playerMode) lp.setMargins(0, s.vertical + dp(48), s.horizontal, 0) else lp.setMargins(dp(24), dp(84), dp(24), 0)
+        box.layoutParams = lp
+    }
+
     var interactive = false
         set(v) { field = v; chips.values.forEach { it.view.isFocusable = v }; more.isFocusable = v && more.visibility == View.VISIBLE }
 
@@ -76,7 +93,9 @@ class StatusBarView(private val act: Activity, private val box: LinearLayout, pr
         more.visibility = if (bar.hidden > 0) View.VISIBLE else View.GONE
         more.isFocusable = interactive && bar.hidden > 0
         more.text = "+${bar.hidden}"; more.contentDescription = "${bar.hidden} autres connexions"
-        box.visibility = if (bar.icons.isEmpty()) View.GONE else View.VISIBLE
+        val alert = bar.icons.any { it.state == IconState.DEGRADED || it.state == IconState.ERROR }
+        val fresh = chips.values.any { now - it.changedAt < SHOW_MS }
+        box.visibility = if (bar.icons.isEmpty() || (playerMode && !castbridge.core.tv.PlayerIcons.zoneVisible(zoneShown, alert, fresh))) View.GONE else View.VISIBLE
         main.removeCallbacks(collapse)
         if (chips.values.any { now - it.changedAt < SHOW_MS }) main.postDelayed(collapse, SHOW_MS)
     }
@@ -101,7 +120,7 @@ class StatusBarView(private val act: Activity, private val box: LinearLayout, pr
             addView(label); addView(g, LinearLayout.LayoutParams(dp(38), dp(34)))
             isFocusable = interactive; isFocusableInTouchMode = false; isClickable = true
         }
-        val c = Chip(row, label, glyph, mark, second, dot)
+        val c = Chip(row, label, glyph, mark, second, dot, g)
         row.setOnClickListener { onOpen() }
         row.setOnKeyListener(keys(false))
         TvStyle.focusZoom(row) { last?.let { render(it) } }
@@ -131,7 +150,11 @@ class StatusBarView(private val act: Activity, private val box: LinearLayout, pr
         c.view.alpha = if (degraded || i.state == IconState.CONNECTING) 0.65f else 1f
         c.view.contentDescription = i.text()
         c.view.isFocusable = interactive
-        val show = c.view.hasFocus() || bigBar || now - c.changedAt < SHOW_MS || degraded || error
+        val big = playerMode
+        c.label.textSize = if (big) castbridge.core.tv.PlayerIcons.TEXT_SP.toFloat() else TvStyle.Type.CAPTION
+        (c.holder.layoutParams as? LinearLayout.LayoutParams)?.let { it.width = dp(if (big) 56 else 38); it.height = dp(if (big) 48 else 34); c.holder.layoutParams = it }
+        (c.glyph.layoutParams as? FrameLayout.LayoutParams)?.let { it.width = dp(if (big) castbridge.core.tv.PlayerIcons.ICON_DP else 26); it.height = it.width; c.glyph.layoutParams = it }
+        val show = big || c.view.hasFocus() || bigBar || now - c.changedAt < SHOW_MS || degraded || error
         c.label.text = i.text(); c.label.visibility = if (show) View.VISIBLE else View.GONE
     }
     /** OK on the home expands every label for a while (see [openPanel]). */
@@ -152,22 +175,7 @@ class StatusBarView(private val act: Activity, private val box: LinearLayout, pr
         v.setPadding(dp(1), dp(1), dp(1), dp(1))
     }
 
-    private fun glyphOf(i: StatusIcon) = when (i.kind) {
-        IconKind.INTERNET -> when (i.tech) { Tech.ETHERNET -> R.drawable.ic_cb_ethernet; Tech.NONE -> R.drawable.ic_cb_sans_internet
-            Tech.BLUETOOTH -> R.drawable.ic_cb_passerelle_bluetooth; else -> R.drawable.ic_cb_wifi }
-        IconKind.PHONE -> R.drawable.ic_cb_sur_le_telephone
-        IconKind.REMOTE_CONTROL -> R.drawable.ic_cb_telecommande
-        IconKind.SSH -> R.drawable.ic_cb_administration
-        IconKind.GATEWAY -> R.drawable.ic_cb_passerelle_bluetooth
-        IconKind.CAST -> R.drawable.ic_cb_caster
-        IconKind.USB_DRIVE -> R.drawable.ic_cb_cle_usb
-        IconKind.WIFI_DIRECT_GROUP -> R.drawable.ic_cb_wifi_direct
-        IconKind.QUIZ_PLAYER -> R.drawable.ic_cb_quiz
-        IconKind.CHESS_PLAYER -> R.drawable.ic_cb_echecs
-        IconKind.DOWNLOAD -> R.drawable.ic_cb_telechargements
-        IconKind.PARENTAL_MODE -> R.drawable.ic_t_parental
-        IconKind.UPDATE -> R.drawable.ic_cb_mises_a_jour
-    }
+    private fun glyphOf(i: StatusIcon) = statusGlyph(i.kind, i.tech)
 
     /** The « Connexions » panel: every active connection, readable from the sofa, with the actions that make sense. */
     fun openPanel(svc: TvService) {
@@ -221,3 +229,21 @@ class StatusBarView(private val act: Activity, private val box: LinearLayout, pr
 
     private companion object { const val SHOW_MS = 4_000L }
 }
+
+/** The drawable of a status icon kind (shared with the player's « Légende des icônes »). */
+internal fun statusGlyph(kind: IconKind, tech: Tech): Int = when (kind) {
+        IconKind.INTERNET -> when (tech) { Tech.ETHERNET -> R.drawable.ic_cb_ethernet; Tech.NONE -> R.drawable.ic_cb_sans_internet
+            Tech.BLUETOOTH -> R.drawable.ic_cb_passerelle_bluetooth; else -> R.drawable.ic_cb_wifi }
+        IconKind.PHONE -> R.drawable.ic_cb_sur_le_telephone
+        IconKind.REMOTE_CONTROL -> R.drawable.ic_cb_telecommande
+        IconKind.SSH -> R.drawable.ic_cb_administration
+        IconKind.GATEWAY -> R.drawable.ic_cb_passerelle_bluetooth
+        IconKind.CAST -> R.drawable.ic_cb_caster
+        IconKind.USB_DRIVE -> R.drawable.ic_cb_cle_usb
+        IconKind.WIFI_DIRECT_GROUP -> R.drawable.ic_cb_wifi_direct
+        IconKind.QUIZ_PLAYER -> R.drawable.ic_cb_quiz
+        IconKind.CHESS_PLAYER -> R.drawable.ic_cb_echecs
+        IconKind.DOWNLOAD -> R.drawable.ic_cb_telechargements
+        IconKind.PARENTAL_MODE -> R.drawable.ic_t_parental
+        IconKind.UPDATE -> R.drawable.ic_cb_mises_a_jour
+    }

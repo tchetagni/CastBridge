@@ -141,6 +141,12 @@ class PlayerExtras(private val db: () -> LibraryDb?, private val prefs: TvPrefs,
         return if (p.aspect != "auto") "$line\nFormat d'image forcé à la main (menu « Format d'image ») : il passe avant l'Affichage" else line
     }
 
+    /** La ligne courte du diagnostic sans touche (6 s en haut à gauche) : « Affichage : <mode> · source WxH · dalle WxH · image WxH ». */
+    fun fitOverlay(): String {
+        val (pw, ph) = panel()
+        return VideoFit.overlayLine(fitResolved(), lastPlan, lastVideo.first, lastVideo.second, pw, ph)
+    }
+
     fun aspect(mp: MediaPlayer, mode: String) {
         when (mode) {
             "16:9", "4:3" -> { mp.videoScale = MediaPlayer.ScaleType.SURFACE_BEST_FIT; mp.aspectRatio = mode }
@@ -263,7 +269,7 @@ class PlayerPanel(private val act: Activity, private val api: Api) {
         val t = api.tracks() ?: return
         val items = ArrayList<Pair<String, () -> Unit>>()
         val audioName = t.audio.firstOrNull { it.id == t.audioId }?.name ?: "—"
-        if (t.audio.size > 1) items += "Piste audio : $audioName" to { pick("Piste audio", t.audio.map { it.name }, t.audio.indexOfFirst { it.id == t.audioId }) { i -> api.command(PlayerCommand.Audio(t.audio[i].id)) } }
+        if (t.audio.size > 1) items += "Piste audio : $audioName" to { audioPick(t) }
         val subName = t.subtitles.firstOrNull { it.id == t.subtitleId && it.id >= 0 }?.name ?: "Désactivés"
         items += "Sous-titres : $subName" to { subtitles(t) }
         items += "Décalage des sous-titres : ${PlayerParams.delayLabel(t.subDelayMs)}" to { delay("Décalage des sous-titres", t.subDelayMs) { PlayerCommand.SubDelay(it) } }
@@ -280,11 +286,7 @@ class PlayerPanel(private val act: Activity, private val api: Api) {
         val modes = VideoFit.Mode.values().toList()
         fun choice(m: VideoFit.Mode) = "${DisplayTexts.label(m)}${if (m == VideoFit.DEFAULT) " (par défaut)" else ""} : ${DisplayTexts.hint(m)}"
         val fitLine = DisplayTexts.label(VideoFit.parse(t.fit) ?: VideoFit.DEFAULT) + if (t.fitFile == null) " (réglage par défaut)" else ""
-        items += "${DisplayTexts.ROW} : $fitLine" to {
-            val def = DisplayTexts.label(VideoFit.parse(t.fitDefault) ?: VideoFit.DEFAULT)
-            pick(DisplayTexts.ROW, listOf("${DisplayTexts.FOLLOW_DEFAULT} ($def)") + modes.map(::choice),
-                if (t.fitFile == null) 0 else modes.indexOfFirst { it.key == t.fitFile } + 1) { i -> api.command(PlayerCommand.Fit(if (i == 0) null else modes[i - 1].key)) }
-        }
+        items += "${DisplayTexts.ROW} : $fitLine" to { displayPick(t) }
         items += "${DisplayTexts.ROW_DEFAULT} : ${DisplayTexts.label(VideoFit.parse(t.fitDefault) ?: VideoFit.DEFAULT)}" to {
             pick(DisplayTexts.ROW_DEFAULT, modes.map(::choice), modes.indexOfFirst { it.key == t.fitDefault }) { i -> api.command(PlayerCommand.FitDefault(modes[i].key)) }
         }
@@ -309,6 +311,22 @@ class PlayerPanel(private val act: Activity, private val api: Api) {
         AlertDialog.Builder(act).setTitle("Réglages de lecture")
             .setItems(items.map { it.first }.toTypedArray()) { _, w -> items[w].second() }
             .setNegativeButton("Fermer", null).show()
+    }
+
+    // Entrées directes de la barre de commandes à l'écran (mêmes choix que le panneau, aucune logique en double).
+    fun audio() { val t = api.tracks() ?: return; if (t.audio.size < 2) api.flash("Une seule piste audio") else audioPick(t) }
+    fun subtitles() { val t = api.tracks() ?: return; subtitles(t) }
+    fun display() { val t = api.tracks() ?: return; displayPick(t) }
+
+    private fun audioPick(t: PlayerTracks) =
+        pick("Piste audio", t.audio.map { it.name }, t.audio.indexOfFirst { it.id == t.audioId }) { i -> api.command(PlayerCommand.Audio(t.audio[i].id)) }
+
+    private fun displayPick(t: PlayerTracks) {
+        val modes = VideoFit.Mode.values().toList()
+        fun choice(m: VideoFit.Mode) = "${DisplayTexts.label(m)}${if (m == VideoFit.DEFAULT) " (par défaut)" else ""} : ${DisplayTexts.hint(m)}"
+        val def = DisplayTexts.label(VideoFit.parse(t.fitDefault) ?: VideoFit.DEFAULT)
+        pick(DisplayTexts.ROW, listOf("${DisplayTexts.FOLLOW_DEFAULT} ($def)") + modes.map(::choice),
+            if (t.fitFile == null) 0 else modes.indexOfFirst { it.key == t.fitFile } + 1) { i -> api.command(PlayerCommand.Fit(if (i == 0) null else modes[i - 1].key)) }
     }
 
     private fun repeatLabel(m: String) = when (m) { "all" -> "toute la liste"; "one" -> "ce fichier"; else -> "non" }
@@ -353,7 +371,8 @@ class ProgressOverlay(private val act: Activity, parent: FrameLayout) {
         orientation = LinearLayout.VERTICAL; visibility = View.GONE
         // A soft shadow rising from the bottom, a thin line of progress: modern and out of the way.
         background = android.graphics.drawable.GradientDrawable(android.graphics.drawable.GradientDrawable.Orientation.BOTTOM_TOP, intArrayOf(0xE6000000.toInt(), 0x99000000.toInt(), 0x00000000))
-        val pad = dp(24); setPadding(pad * 2, pad * 3, pad * 2, pad + dp(8))
+        val pad = dp(24); val safe = castbridge.core.tv.PlayerIcons.safe(act.resources.displayMetrics.widthPixels, act.resources.displayMetrics.heightPixels)
+        setPadding(maxOf(pad * 2, safe.horizontal), pad * 3, maxOf(pad * 2, safe.horizontal), safe.vertical + dp(8))       // marges de sécurité de 5 % (surbalayage)
         addView(title); addView(bar, LinearLayout.LayoutParams(-1, dp(4)).apply { topMargin = dp(10); bottomMargin = dp(8) }); addView(time)
     }
     private val hide = Runnable { box.fadeTo(false, 400); shown = false; onChange?.invoke() }

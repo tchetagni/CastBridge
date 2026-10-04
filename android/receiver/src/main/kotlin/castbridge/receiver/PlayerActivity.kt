@@ -33,6 +33,7 @@ import org.videolan.libvlc.Media
 import org.videolan.libvlc.MediaPlayer
 import org.videolan.libvlc.util.VLCVideoLayout
 import castbridge.core.xfer.CopyBadge
+import castbridge.core.tv.PlayerRemote
 import java.io.File
 import java.util.concurrent.CountDownLatch
 import java.util.concurrent.TimeUnit
@@ -57,6 +58,7 @@ class PlayerActivity : Activity(), TvService.Screen {
     private lateinit var extras: PlayerExtras               // per-file player settings, tracks, decoder (docs/ADMIN.md, "Lecteur")
     private lateinit var panel: PlayerPanel
     private lateinit var bar: ProgressOverlay
+    private var controls: PlayerControls? = null            // barre de commandes à l'écran + ligne de diagnostic (télécommande de base)
     private var playerSpu = false                           // libVLC was created with its subtitle engine
     private var reopen: ((Long) -> Unit)? = null             // re-opens the current file at a position (subtitle engine, decoder change)
     private var swRetry = false                             // the software-decoding retry was already made for this file
@@ -128,6 +130,7 @@ class PlayerActivity : Activity(), TvService.Screen {
         panel = PlayerPanel(this, panelApi())
         if (!::bar.isInitialized) bar = ProgressOverlay(this, findViewById(android.R.id.content)).also { b -> b.onChange = { refreshBadge(true) } }
         if (badge == null) badge = CopyBadgeView(this, findViewById(android.R.id.content))
+        if (controls == null) controls = PlayerControls(this, findViewById(android.R.id.content), controlsApi())
         refreshStatusBar()                                   // connections already known when the screen (re)opens
         s.attach(this)                                       // may run a play request that arrived while the screen was closed
         requestRuntimePermissions()
@@ -314,7 +317,7 @@ class PlayerActivity : Activity(), TvService.Screen {
                 MediaPlayer.Event.Vout, MediaPlayer.Event.ESAdded, MediaPlayer.Event.ESSelected -> main.post { mp?.let { extras.applyFit(it) } }
                 MediaPlayer.Event.Playing -> { health.onPlaying(android.os.SystemClock.elapsedRealtime()); update("playing"); main.post { mp?.let { extras.onPlaying(it, playerSpu) }; playbackPlaying(); startStats() } }
                 MediaPlayer.Event.Paused -> { health.onStopped(); update("paused") }
-                MediaPlayer.Event.TimeChanged -> { health.onTime(android.os.SystemClock.elapsedRealtime(), ev.timeChanged); snapshot = snapshot.copy(posMs = ev.timeChanged); main.post { updateLead(); if (extras.fitPending) mp?.let { extras.applyFit(it) } } }
+                MediaPlayer.Event.TimeChanged -> { health.onTime(android.os.SystemClock.elapsedRealtime(), ev.timeChanged); snapshot = snapshot.copy(posMs = ev.timeChanged); main.post { updateLead(); if (extras.fitPending) mp?.let { extras.applyFit(it) }; controls?.refreshDiag(extras.fitOverlay()) } }
                 MediaPlayer.Event.Buffering -> {
                     // libVLC pauses by itself when the data runs out (playback caught up with the upload) and resumes alone.
                     val st = snapshot.state
@@ -683,6 +686,8 @@ class PlayerActivity : Activity(), TvService.Screen {
 
     private fun startedPlaying(name: String, size: Long) {
         currentSize = size
+        controls?.let { it.hide(); it.showDiag(extras.fitOverlay()) }
+        statusBar?.zoneShown = false; refreshStatusBar()                  // pendant la vidéo : zone d'icônes avec libellés, qui suit la barre de commandes       // 6 s, sans aucune touche : mode, source, dalle, image
         bgRun { library?.db?.onPlayStarted(name, size) }
     }
 
@@ -823,6 +828,7 @@ class PlayerActivity : Activity(), TvService.Screen {
     private fun refreshStatusBar() {
         val bar = ensureStatusBar() ?: return
         val s = svc ?: return
+        bar.playerMode = current != null
         bar.interactive = current == null && home?.visible == true && libScreen?.visible != true && settingsPanel?.visible != true
         bar.render(s.icons.snapshot())
     }
@@ -1110,6 +1116,7 @@ class PlayerActivity : Activity(), TvService.Screen {
         current = null; snapshot = PlayerState(); releasePlayer(); reopen = null
         if (::extras.isInitialized) extras.forget()
         if (::bar.isInitialized) bar.hideNow()
+        controls?.release(); statusBar?.zoneShown = true; refreshStatusBar()
         if (wasPlaying || libScreen?.visible == true) afterPlayback() else showHome()
     }
     override fun state(): PlayerState = snapshot.let { s ->
@@ -1155,6 +1162,7 @@ class PlayerActivity : Activity(), TvService.Screen {
         is PlayerCommand.Hw -> "Décodage : ${PlayerParams.hwLabel(c.mode)}"
         is PlayerCommand.Fit, is PlayerCommand.FitDefault -> {
             val m = extras.fitMode()
+            controls?.showDiag(extras.fitOverlay())
             "Affichage : ${castbridge.core.ux.DisplayTexts.label(m)}" + if (m == castbridge.core.tv.VideoFit.Mode.STRETCH) " (déforme l'image)" else ""
         }
         is PlayerCommand.Eq -> if (c.preset < 0) "Égaliseur désactivé" else "Égaliseur : ${runCatching { MediaPlayer.Equalizer.getPresetName(c.preset) }.getOrDefault("")}"
@@ -1166,6 +1174,23 @@ class PlayerActivity : Activity(), TvService.Screen {
         val prog = streamingName?.let { server?.progress(it) }
         val reach = if (prog != null && prog.first < prog.second) Progressive.reachableMs(s.durMs, prog.first, prog.second) else -1
         bar.show(n, mp?.time ?: s.posMs, s.durMs, extra, reach)
+    }
+
+    private fun controlsApi() = object : PlayerControls.Api {
+        override fun playing() = mp?.isPlaying == true
+        override fun togglePause() { if (mp?.isPlaying == true) pause() else resume() }
+        override fun audio() = panel.audio()
+        override fun subtitles() = panel.subtitles()
+        override fun display() = panel.display()
+        override fun infos() = showInfosAndLegend()
+        override fun refreshProgress() = showBar(if (mp?.isPlaying == true) "" else "Pause")
+        override fun zoneChanged(visible: Boolean) { statusBar?.zoneShown = visible }
+    }
+
+    /** « Infos » : la ligne de diagnostic revient 6 s, et la fenêtre dit ce que signifie chaque icône (règle : jamais d'icône sans libellé). */
+    private fun showInfosAndLegend() {
+        controls?.showDiag(extras.fitOverlay())
+        IconLegend.show(this, extras.fitOverlay()) { AlertDialog.Builder(this).setTitle("Informations").setMessage(infoText()).setPositiveButton("Fermer", null).show() }
     }
 
     private fun infoText(): String {
@@ -1233,29 +1258,69 @@ class PlayerActivity : Activity(), TvService.Screen {
         }
         if (keyCode == KeyEvent.KEYCODE_MENU) { if (current != null && mp != null) panel.show() else showMenu(); return true }
         if (current == null) return super.onKeyDown(keyCode, event)
+        controls?.touch()                                    // toute touche repousse la disparition de la barre
+        val remote = when (keyCode) {
+            KeyEvent.KEYCODE_DPAD_CENTER, KeyEvent.KEYCODE_ENTER -> PlayerRemote.Key.OK
+            KeyEvent.KEYCODE_DPAD_LEFT -> PlayerRemote.Key.LEFT
+            KeyEvent.KEYCODE_DPAD_RIGHT -> PlayerRemote.Key.RIGHT
+            KeyEvent.KEYCODE_DPAD_UP -> PlayerRemote.Key.UP
+            KeyEvent.KEYCODE_DPAD_DOWN -> PlayerRemote.Key.DOWN
+            KeyEvent.KEYCODE_BACK -> PlayerRemote.Key.BACK
+            else -> PlayerRemote.Key.OTHER
+        }
+        if (remote != PlayerRemote.Key.OTHER) {
+            val barOn = controls?.visible == true
+            // OK barre cachée : on attend la fin de la pression (appui long = réglages, appui court = barre) ; barre visible : le bouton qui a le focus agit (PASS).
+            if (remote == PlayerRemote.Key.OK && !barOn) { if (event.repeatCount == 0) event.startTracking(); return true }
+            when (PlayerRemote.decide(remote, false, barOn)) {
+                PlayerRemote.Act.SEEK_FWD_10 -> seek((mp?.time ?: 0) + 10_000)
+                PlayerRemote.Act.SEEK_BACK_10 -> seek(maxOf(0, (mp?.time ?: 0) - 10_000))
+                PlayerRemote.Act.SEEK_FWD_60 -> seek((mp?.time ?: 0) + 60_000)
+                PlayerRemote.Act.SEEK_BACK_60 -> seek(maxOf(0, (mp?.time ?: 0) - 60_000))
+                PlayerRemote.Act.OPEN_PANEL -> { controls?.hide(); if (mp != null) panel.show() else showMenu() }
+                PlayerRemote.Act.HIDE_BAR -> controls?.hide()
+                PlayerRemote.Act.STOP -> stop()
+                PlayerRemote.Act.SHOW_BAR, PlayerRemote.Act.SHOW_INFO, PlayerRemote.Act.PASS -> return super.onKeyDown(keyCode, event)
+            }
+            return true
+        }
         when (keyCode) {
-            KeyEvent.KEYCODE_INFO -> { showBar(); AlertDialog.Builder(this).setTitle("Informations").setMessage(infoText()).setPositiveButton("Fermer", null).show() }
+            KeyEvent.KEYCODE_INFO -> showInfosAndLegend()
             KeyEvent.KEYCODE_CAPTIONS -> cycle(audio = false)
             KeyEvent.KEYCODE_MEDIA_AUDIO_TRACK -> cycle(audio = true)
             KeyEvent.KEYCODE_MEDIA_NEXT, KeyEvent.KEYCODE_CHANNEL_UP -> if (!command(PlayerCommand.ChapterStep(1))) flash("Pas de chapitre ni de fichier suivant")
             KeyEvent.KEYCODE_MEDIA_PREVIOUS, KeyEvent.KEYCODE_CHANNEL_DOWN -> if (!command(PlayerCommand.ChapterStep(-1))) flash("Pas de chapitre ni de fichier précédent")
-            KeyEvent.KEYCODE_DPAD_CENTER, KeyEvent.KEYCODE_ENTER, KeyEvent.KEYCODE_MEDIA_PLAY_PAUSE ->
-                if (mp?.isPlaying == true) pause() else resume()
+            KeyEvent.KEYCODE_MEDIA_PLAY_PAUSE -> if (mp?.isPlaying == true) pause() else resume()
             KeyEvent.KEYCODE_MEDIA_PLAY -> resume()
             KeyEvent.KEYCODE_MEDIA_PAUSE -> pause()
-            KeyEvent.KEYCODE_DPAD_RIGHT, KeyEvent.KEYCODE_MEDIA_FAST_FORWARD -> seek((mp?.time ?: 0) + 10_000)
-            KeyEvent.KEYCODE_DPAD_LEFT, KeyEvent.KEYCODE_MEDIA_REWIND -> seek(maxOf(0, (mp?.time ?: 0) - 10_000))
-            KeyEvent.KEYCODE_DPAD_UP -> seek((mp?.time ?: 0) + 60_000)
-            KeyEvent.KEYCODE_DPAD_DOWN -> seek(maxOf(0, (mp?.time ?: 0) - 60_000))
+            KeyEvent.KEYCODE_MEDIA_FAST_FORWARD -> seek((mp?.time ?: 0) + 10_000)
+            KeyEvent.KEYCODE_MEDIA_REWIND -> seek(maxOf(0, (mp?.time ?: 0) - 10_000))
             KeyEvent.KEYCODE_MEDIA_STOP -> stop()
-            KeyEvent.KEYCODE_BACK -> { stop(); return true }
             else -> return super.onKeyDown(keyCode, event)
         }
         return true
     }
 
+    /** OK (ou ENTRÉE) tenu : les réglages de lecture s'ouvrent, même avec une télécommande sans touche MENU. */
+    override fun onKeyLongPress(keyCode: Int, event: KeyEvent): Boolean {
+        if (current != null && controls?.visible != true && (keyCode == KeyEvent.KEYCODE_DPAD_CENTER || keyCode == KeyEvent.KEYCODE_ENTER)) {
+            if (mp != null) panel.show() else showMenu()
+            return true
+        }
+        return super.onKeyLongPress(keyCode, event)
+    }
+
+    /** OK relâché (appui court, barre cachée) : la barre de commandes apparaît. */
+    override fun onKeyUp(keyCode: Int, event: KeyEvent): Boolean {
+        if (current != null && controls?.visible != true && (keyCode == KeyEvent.KEYCODE_DPAD_CENTER || keyCode == KeyEvent.KEYCODE_ENTER) && event.isTracking && !event.isCanceled) {
+            controls?.show(); showBar(if (mp?.isPlaying == true) "" else "Pause")
+            return true
+        }
+        return super.onKeyUp(keyCode, event)
+    }
+
     override fun onDestroy() {
-        libScreen?.release(); home?.release(); thumbs?.release()
+        libScreen?.release(); home?.release(); thumbs?.release(); controls?.release()
         svc?.detach(this)
         runCatching { unbindService(conn) }                  // the service keeps running (started, foreground)
         main.removeCallbacksAndMessages(null)                 // no Handler callback may outlive the activity
