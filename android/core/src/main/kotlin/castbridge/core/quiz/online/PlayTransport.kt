@@ -11,6 +11,15 @@ interface PlayTransport {
     fun onMessage(listener: (String) -> Unit)
 }
 
+/** w20-05a : un transport qui mesure lui-même l'aller-retour de ses envois (ms) ; la TV s'en sert pour la règle 11 (rtt/2 à l'annonce). */
+interface RttSource { fun onRtt(listener: (Long) -> Unit) }
+
+/** w20-05a : un transport qui sait dire qu'il a échoué sur un certificat non valide (jamais de contournement : l'état devient rouge). */
+interface TransportHealth { val certificateInvalid: Boolean }
+
+/** Fabrique de transports de la TV : [ticket] n'est donné qu'au premier envoi d'une session neuve (création ou entrée) ; null pour une reprise. */
+fun interface TransportFactory { fun open(ticket: String?): PlayTransport }
+
 /**
  * Transport EN MÉMOIRE branché directement sur une [ServerRoom] : même codec, même ordre des messages qu'avec une vraie socket, mais synchrone
  * (preuve « un seul cœur » du contrat des deux autorités ; w20-03 rejouera la même chose sur socket). [now] est l'horloge du serveur.

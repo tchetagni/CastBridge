@@ -1,5 +1,6 @@
 package castbridge.core.quiz
 
+import castbridge.core.quiz.online.GameAuthority
 import castbridge.core.tv.PublicRoutes
 import fi.iki.elonen.NanoHTTPD
 import fi.iki.elonen.NanoHTTPD.Response
@@ -19,14 +20,95 @@ import java.util.concurrent.atomic.AtomicInteger
  * - POST /quiz/api/leave?token=
  *
  * Limits: requests per IP (token bucket), wrong room codes per IP, event streams per player and in total.
+ *
+ * w20-05a: the same routes, codes and JSON work over a [GameAuthority] too (the TV relaying its phones into an Internet game): see [AuthoritySource].
  */
-class QuizHttp(
-    private val room: () -> QuizRoom?,
-    private val clock: () -> Long = { System.nanoTime() / 1_000_000 },
+class QuizHttp private constructor(
+    private val backend: () -> Backend?,
+    private val clock: () -> Long,
     /** Longest a single event stream stays open (the browser reconnects by itself). */
-    private val streamMaxMs: Long = 10 * 60_000L,
-    private val pingMs: Long = 15_000,
+    private val streamMaxMs: Long,
+    private val pingMs: Long,
+    @Suppress("UNUSED_PARAMETER") marker: Unit,
 ) : PublicRoutes {
+    /** The room of today (behaviour unchanged). */
+    constructor(
+        room: () -> QuizRoom?,
+        clock: () -> Long = { System.nanoTime() / 1_000_000 },
+        /** Longest a single event stream stays open (the browser reconnects by itself). */
+        streamMaxMs: Long = 10 * 60_000L,
+        pingMs: Long = 15_000,
+    ) : this({ room()?.let { RoomBackend(it) } }, clock, streamMaxMs, pingMs, Unit)
+
+    /** The current authority, or null when no game is open (a distinct type: `() -> QuizRoom?` and `() -> GameAuthority?` have the same JVM signature). */
+    fun interface AuthoritySource { fun current(): GameAuthority? }
+
+    /** w20-05a: the same routes over a [GameAuthority] (a [castbridge.core.quiz.online.RelayAuthority] on the TV, or a `LocalAuthority`). */
+    constructor(
+        authority: AuthoritySource,
+        clock: () -> Long = { System.nanoTime() / 1_000_000 },
+        streamMaxMs: Long = 10 * 60_000L,
+        pingMs: Long = 15_000,
+    ) : this({ authority.current()?.let { AuthorityBackend(it) } }, clock, streamMaxMs, pingMs, Unit)
+
+    /** What the routes need from a game: implemented over a [QuizRoom] (as always) or over a [GameAuthority]. */
+    internal interface Backend {
+        val closed: Boolean
+        fun helloJson(): String
+        fun maxPlayers(): Int
+        fun join(code: String?, name: String?, token: String?, device: String?): QuizRoom.JoinResult
+        fun knows(token: String?): Boolean
+        fun touch(token: String?)
+        fun act(token: String?, action: String, q: String?, choice: Int?, arg: String?): QuizRoom.Act
+        fun viewJson(token: String?): String
+        fun awaitChange(since: Long, timeoutMs: Long): Long
+        fun version(): Long
+        fun leave(token: String?)
+        fun streams(token: String?): Int
+        fun streamOpened(token: String?)
+        fun streamClosed(token: String?)
+    }
+
+    private class RoomBackend(val r: QuizRoom) : Backend {
+        override val closed get() = r.stage == QuizRoom.Stage.CLOSED
+        override fun helloJson() = if (closed) """{"open":false}""" else
+            """{"open":true,"stage":"${r.stage}","mode":"${r.mode}","players":${r.players().size},"max":${r.maxPlayers}}"""
+        override fun maxPlayers() = r.maxPlayers
+        override fun join(code: String?, name: String?, token: String?, device: String?) = r.join(code, name, token, device)
+        override fun knows(token: String?) = r.player(token) != null
+        override fun touch(token: String?) { r.player(token)?.let { r.touch(it) } }
+        override fun act(token: String?, action: String, q: String?, choice: Int?, arg: String?) = r.act(token, action, q, choice, arg)
+        override fun viewJson(token: String?) = r.viewJson(token)
+        override fun awaitChange(since: Long, timeoutMs: Long) = r.awaitChange(since, timeoutMs)
+        override fun version() = r.version
+        override fun leave(token: String?) { r.leave(token) }
+        override fun streams(token: String?) = r.player(token)?.streams ?: 0
+        override fun streamOpened(token: String?) { r.player(token)?.let { r.streamOpened(it) } }
+        override fun streamClosed(token: String?) { r.player(token)?.let { r.streamClosed(it) } }
+    }
+
+    private class AuthorityBackend(val a: GameAuthority) : Backend {
+        private val open = ConcurrentHashMap<String, AtomicInteger>()
+        override val closed get() = a.closed()
+        override fun helloJson(): String {
+            if (closed) return """{"open":false}"""
+            val v = a.view(null)
+            return """{"open":true,"stage":"${v["stage"]}","mode":"${v["mode"]}","players":${(v["players"] as? List<*>)?.size ?: 0},"max":${maxPlayers()}}"""
+        }
+        override fun maxPlayers() = (a.view(null)["maxPlayers"] as? Number)?.toInt() ?: 8
+        override fun join(code: String?, name: String?, token: String?, device: String?) = a.join(code, name, token, device)
+        override fun knows(token: String?) = a.knows(token)
+        override fun touch(token: String?) = a.touch(token)
+        override fun act(token: String?, action: String, q: String?, choice: Int?, arg: String?) = a.act(token, action, q, choice, arg)
+        override fun viewJson(token: String?) = Json.write(a.view(token))
+        override fun awaitChange(since: Long, timeoutMs: Long) = a.awaitChange(since, timeoutMs)
+        override fun version() = a.awaitChange(-1L, 0L)
+        override fun leave(token: String?) { a.leave(token) }
+        override fun streams(token: String?) = token?.let { open[it]?.get() } ?: 0
+        override fun streamOpened(token: String?) { token?.let { open.getOrPut(it) { AtomicInteger() }.incrementAndGet() }; a.touch(token) }
+        override fun streamClosed(token: String?) { token?.let { open[it]?.decrementAndGet() }; a.touch(token) }
+    }
+
     override val extraThreads: Int = MAX_STREAMS + 2
 
     private class Bucket(var tokens: Double, var at: Long)
@@ -50,20 +132,18 @@ class QuizHttp(
             "/quiz/api/events" -> if (get) events(p["token"]) else json(405, """{"error":"use GET"}""")
             "/quiz/api/state" -> if (get) state(p) else json(405, """{"error":"use GET"}""")
             "/quiz/api/act" -> if (post) act(p) else json(405, """{"error":"use POST"}""")
-            "/quiz/api/leave" -> if (post) { room()?.leave(p["token"]); json(200, """{"ok":true}""") } else json(405, """{"error":"use POST"}""")
+            "/quiz/api/leave" -> if (post) { backend()?.leave(p["token"]); json(200, """{"ok":true}""") } else json(405, """{"error":"use POST"}""")
             else -> json(404, """{"error":"not found"}""")
         }
     }
 
     private fun hello(): Response {
-        val r = room()
-        val open = r != null && r.stage != QuizRoom.Stage.CLOSED
-        return json(200, if (!open) """{"open":false}""" else
-            """{"open":true,"stage":"${r!!.stage}","mode":"${r.mode}","players":${r.players().size},"max":${r.maxPlayers}}""")
+        val b = backend()
+        return json(200, if (b == null || b.closed) """{"open":false}""" else b.helloJson())
     }
 
     private fun join(ip: String, p: Map<String, String>): Response {
-        val r = openRoom() ?: return json(410, """{"error":"no room","message":"Aucune partie ouverte sur la TV."}""")
+        val r = openBackend() ?: return json(410, """{"error":"no room","message":"Aucune partie ouverte sur la TV."}""")
         badCodes[ip]?.let { f ->
             if (clock() - f.since > CODE_WINDOW_MS) badCodes.remove(ip)
             else if (f.count >= MAX_BAD_CODES) return json(429, """{"error":"locked","message":"Trop de codes erronés : réessayez dans quelques minutes."}""")
@@ -77,27 +157,27 @@ class QuizHttp(
                 synchronized(f) { f.count++ }
                 json(403, """{"error":"bad code","message":"Code de salle incorrect."}""")
             }
-            QuizRoom.Join.FULL -> json(409, """{"error":"full","message":"La salle est complète (${r.maxPlayers} joueurs)."}""")
+            QuizRoom.Join.FULL -> json(409, """{"error":"full","message":"La salle est complète (${r.maxPlayers()} joueurs)."}""")
             QuizRoom.Join.BAD_NAME -> json(400, """{"error":"bad name","message":"Choisissez un pseudo."}""")
             QuizRoom.Join.CLOSED -> json(410, """{"error":"closed","message":"La partie est terminée."}""")
         }
     }
 
-    private fun openRoom(): QuizRoom? = room()?.takeIf { it.stage != QuizRoom.Stage.CLOSED }
+    private fun openBackend(): Backend? = backend()?.takeIf { !it.closed }
 
     private fun state(p: Map<String, String>): Response {
-        val r = openRoom() ?: return json(410, """{"error":"closed"}""")
-        val pl = r.player(p["token"]) ?: return json(401, """{"error":"unknown player"}""")
-        r.touch(pl)
+        val r = openBackend() ?: return json(410, """{"error":"closed"}""")
+        if (!r.knows(p["token"])) return json(401, """{"error":"unknown player"}""")
+        r.touch(p["token"])
         val since = p["since"]?.toLongOrNull() ?: 0
         val wait = (p["wait"]?.toLongOrNull() ?: 0).coerceIn(0, 25)
         if (wait > 0) r.awaitChange(since, wait * 1000)
-        r.touch(pl)
-        return json(200, r.viewJson(pl.token))
+        r.touch(p["token"])
+        return json(200, r.viewJson(p["token"]))
     }
 
     private fun act(p: Map<String, String>): Response {
-        val r = openRoom() ?: return json(410, """{"error":"closed"}""")
+        val r = openBackend() ?: return json(410, """{"error":"closed"}""")
         val res = r.act(p["token"], p["action"].orEmpty(), p["q"], p["choice"]?.toIntOrNull(), p["arg"])
         val code = when (res) {
             QuizRoom.Act.OK, QuizRoom.Act.IGNORED -> 200
@@ -112,13 +192,13 @@ class QuizHttp(
     }
 
     private fun events(token: String?): Response {
-        val r = openRoom() ?: return json(410, """{"error":"closed"}""")
-        val pl = r.player(token) ?: return json(401, """{"error":"unknown player"}""")
-        if (pl.streams >= 2 || streams.get() >= MAX_STREAMS) return json(429, """{"error":"too many streams"}""")
+        val r = openBackend() ?: return json(410, """{"error":"closed"}""")
+        if (!r.knows(token)) return json(401, """{"error":"unknown player"}""")
+        if (r.streams(token) >= 2 || streams.get() >= MAX_STREAMS) return json(429, """{"error":"too many streams"}""")
         streams.incrementAndGet()
-        r.streamOpened(pl)
+        r.streamOpened(token)
         // mime type null + explicit header: NanoHTTPD would gzip any "text/" body (buffering the events).
-        val res = NanoHTTPD.newChunkedResponse(Response.Status.OK, null, SseStream(r, pl))
+        val res = NanoHTTPD.newChunkedResponse(Response.Status.OK, null, SseStream(r, token))
         res.addHeader("Content-Type", "text/event-stream; charset=utf-8")
         res.addHeader("Cache-Control", "no-store")
         res.addHeader("X-Accel-Buffering", "no")
@@ -126,7 +206,7 @@ class QuizHttp(
     }
 
     /** Emits the player's view as an SSE "state" event at every room change, a comment line as keep-alive. */
-    private inner class SseStream(private val r: QuizRoom, private val pl: QuizRoom.Player) : InputStream() {
+    private inner class SseStream(private val r: Backend, private val token: String?) : InputStream() {
         private var buf = ByteArray(0)
         private var pos = 0
         private var sent = -1L
@@ -149,28 +229,28 @@ class QuizHttp(
         private fun fill(): Boolean {
             if (done || closed) return false
             val text = if (sent < 0) {
-                sent = r.version
+                sent = r.version()
                 "retry: 2000\n" + event()
             } else {
                 val v = r.awaitChange(sent, pingMs)
                 when {
-                    r.stage == QuizRoom.Stage.CLOSED -> { done = true; event() }
+                    r.closed -> { done = true; event() }
                     clock() - started > streamMaxMs -> { done = true; ": bye\n\n" }
-                    v > sent -> { sent = v; r.touch(pl); event() }
-                    else -> { r.touch(pl); ": ping\n\n" }
+                    v > sent -> { sent = v; r.touch(token); event() }
+                    else -> { r.touch(token); ": ping\n\n" }
                 }
             }
             buf = text.toByteArray(Charsets.UTF_8); pos = 0
             return true
         }
 
-        private fun event(): String = "event: state\ndata: " + r.viewJson(pl.token) + "\n\n"
+        private fun event(): String = "event: state\ndata: " + r.viewJson(token) + "\n\n"
 
         override fun close() {
             if (closed) return
             closed = true
             streams.decrementAndGet()
-            r.streamClosed(pl)
+            r.streamClosed(token)
         }
     }
 
