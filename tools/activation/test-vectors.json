@@ -608,6 +608,48 @@
     },
     {
       "type": "activation",
+      "id": "act-production-ik",
+      "description": "production avec plafond d'usage et clé d'installation signée (ik) : acceptée, le droit ik n'accorde rien",
+      "token": "cbx1.Y2FzdGJyaWRnZS1lbnZlbG9wZS12MQp0eXBlPWFjdGl2YXRpb24Ka2lkPWIyZTViNDE4NjBkMWQ4YmUKc2VxPTE4MDAwMDAwMDAwMDAKbm9uY2U9MDAxMTIyMzM0NDU1NjY3Nzg4OTlhYWJiY2NkZGVlZmYKaXNzdWVkQXQ9MTgwMDAwMDAwMDAwMApub3RCZWZvcmU9MTc5OTk5NjQwMDAwMApleHBpcmVzQXQ9MTgwMDE2OTIwMDAwMAp0YXJnZXQ9ZGV2aWNlCms9NApmYWN0b3I9RkxBU0h8YzQ4Y2FjZDgxYjk2NjNkMGJhOTdjMjIxY2JkMTdmNGYKZmFjdG9yPUVUSEVSTkVUfGY5MWVmZDg5ZTAwMjVjMjI2MmRhMTJjZmJlZDQzNjMyCmZhY3Rvcj1XSUZJfGVhOGI1NTJlMjI0MGJiZGQ4Yzg4YzQyMzEzYzRkZWFiCmZhY3Rvcj1TWVNURU1fU0VSSUFMfDc3NGJlYWNiZjM1MWIwZDIwNWY5MTY2NjY5ZTRkM2M3CmZhY3Rvcj1CTFVFVE9PVEh8ZDM2NWVhNjdlMDA1ODVlZGFmOGJlZjRkNzM3ODg1MGQKLS0Ka2luZD1wcm9kdWN0aW9uCnN1YmplY3Q9dHYKbGljZW5zZT1saWMtMDAwMQpzZWF0PWYzNjc1N2MyMjZkZDJlZTQKcmlnaHQ9aWt8MGNjNGRlZjU0YWZlZjAxZjliNjgyMTM3NGNjZjY2NTQ4ZDhmNDlmNTEyYzZhM2FhNzlhYTlkNjBiMWY2Y2Q4OApyaWdodD11c2FnZXxkdXJlZXwxNzk5OTk2NDAwMDAwfDE4MDI1OTIwMDAwMDA.TpulA8QC5DhL8/G2ECYPW1nojXjDELQgc1xX2Uu6IN+cJ/SjprfWVthQgmMkqUqBwYNniWaso7KEkDMHnXQhAw==",
+      "device": "tvA",
+      "nowMs": 1800000000000,
+      "trustedKeys": ["desk", "phone", "server", "support"],
+      "revokedKeys": [],
+      "revokedSeats": [],
+      "expectSubject": "tv",
+      "lastSeq": {},
+      "expect": {
+        "result": "accepted",
+        "kind": "production",
+        "subject": "tv",
+        "license": "lic-0001",
+        "seat": "f36757c226dd2ee4",
+        "weakIdentity": false
+      }
+    },
+    {
+      "type": "activation",
+      "id": "act-production-ik-only",
+      "description": "production dont le seul droit est ik : acceptée (version complète)",
+      "token": "cbx1.Y2FzdGJyaWRnZS1lbnZlbG9wZS12MQp0eXBlPWFjdGl2YXRpb24Ka2lkPWIyZTViNDE4NjBkMWQ4YmUKc2VxPTE4MDAwMDAwMDAwMDAKbm9uY2U9MDAxMTIyMzM0NDU1NjY3Nzg4OTlhYWJiY2NkZGVlZmYKaXNzdWVkQXQ9MTgwMDAwMDAwMDAwMApub3RCZWZvcmU9MTc5OTk5NjQwMDAwMApleHBpcmVzQXQ9MTgwMDE2OTIwMDAwMAp0YXJnZXQ9ZGV2aWNlCms9NApmYWN0b3I9RkxBU0h8YzQ4Y2FjZDgxYjk2NjNkMGJhOTdjMjIxY2JkMTdmNGYKZmFjdG9yPUVUSEVSTkVUfGY5MWVmZDg5ZTAwMjVjMjI2MmRhMTJjZmJlZDQzNjMyCmZhY3Rvcj1XSUZJfGVhOGI1NTJlMjI0MGJiZGQ4Yzg4YzQyMzEzYzRkZWFiCmZhY3Rvcj1TWVNURU1fU0VSSUFMfDc3NGJlYWNiZjM1MWIwZDIwNWY5MTY2NjY5ZTRkM2M3CmZhY3Rvcj1CTFVFVE9PVEh8ZDM2NWVhNjdlMDA1ODVlZGFmOGJlZjRkNzM3ODg1MGQKLS0Ka2luZD1wcm9kdWN0aW9uCnN1YmplY3Q9dHYKbGljZW5zZT1saWMtMDAwMQpzZWF0PWYzNjc1N2MyMjZkZDJlZTQKcmlnaHQ9aWt8MGNjNGRlZjU0YWZlZjAxZjliNjgyMTM3NGNjZjY2NTQ4ZDhmNDlmNTEyYzZhM2FhNzlhYTlkNjBiMWY2Y2Q4OA.a1QIc/dqZYNTOC/GDKuA9fx/aYIDQ782a2nSTl34HWfrUTVzflH/duRacZZc5ruJ65sRw7oXNGmzPAC4YneeCA==",
+      "device": "tvA",
+      "nowMs": 1800000000000,
+      "trustedKeys": ["desk", "phone", "server", "support"],
+      "revokedKeys": [],
+      "revokedSeats": [],
+      "expectSubject": "tv",
+      "lastSeq": {},
+      "expect": {
+        "result": "accepted",
+        "kind": "production",
+        "subject": "tv",
+        "license": "lic-0001",
+        "seat": "f36757c226dd2ee4",
+        "weakIdentity": false
+      }
+    },
+    {
+      "type": "activation",
       "id": "act-production-rental",
       "description": "production : achat + location de 30 jours",
       "token": "cbx1.Y2FzdGJyaWRnZS1lbnZlbG9wZS12MQp0eXBlPWFjdGl2YXRpb24Ka2lkPWIyZTViNDE4NjBkMWQ4YmUKc2VxPTE4MDAwMDAwMDAwMDAKbm9uY2U9MDAxMTIyMzM0NDU1NjY3Nzg4OTlhYWJiY2NkZGVlZmYKaXNzdWVkQXQ9MTgwMDAwMDAwMDAwMApub3RCZWZvcmU9MTc5OTk5NjQwMDAwMApleHBpcmVzQXQ9MTgwMDE2OTIwMDAwMAp0YXJnZXQ9ZGV2aWNlCms9NApmYWN0b3I9RkxBU0h8YzQ4Y2FjZDgxYjk2NjNkMGJhOTdjMjIxY2JkMTdmNGYKZmFjdG9yPUVUSEVSTkVUfGY5MWVmZDg5ZTAwMjVjMjI2MmRhMTJjZmJlZDQzNjMyCmZhY3Rvcj1XSUZJfGVhOGI1NTJlMjI0MGJiZGQ4Yzg4YzQyMzEzYzRkZWFiCmZhY3Rvcj1TWVNURU1fU0VSSUFMfDc3NGJlYWNiZjM1MWIwZDIwNWY5MTY2NjY5ZTRkM2M3CmZhY3Rvcj1CTFVFVE9PVEh8ZDM2NWVhNjdlMDA1ODVlZGFmOGJlZjRkNzM3ODg1MGQKLS0Ka2luZD1wcm9kdWN0aW9uCnN1YmplY3Q9dHYKbGljZW5zZT1saWMtMDAwMQpzZWF0PWYzNjc1N2MyMjZkZDJlZTQKcmlnaHQ9cHVyY2hhc2V8cC1jbGFzc2UtY20yfGNsYXNzZS1jbTJ8MTc5OTEzNjAwMDAwMApyaWdodD1yZW50YWx8bG9jLWF8Y2xhc3NlLWNtMnwxNzk5OTk2NDAwMDAwfDE3OTk5OTY0MDAwMDB8MzB8MHwwfDB8QUFBQV9ib3gtMA.NJBaLNIUfB/lo6XVHYmkdtILWwicg2gx/jpmsIjrPRqmKsr1Y8x+hE90fz5+FHN7EBiECaso/bKwBqlHUMAsDw==",
@@ -1919,6 +1961,72 @@
       },
       "expect": {
         "token": "cbx1.Y2FzdGJyaWRnZS1lbnZlbG9wZS12MQp0eXBlPWFjdGl2YXRpb24Ka2lkPWIyZTViNDE4NjBkMWQ4YmUKc2VxPTE4MDAwMDAwMDAwMDAKbm9uY2U9MDAxMTIyMzM0NDU1NjY3Nzg4OTlhYWJiY2NkZGVlZmYKaXNzdWVkQXQ9MTgwMDAwMDAwMDAwMApub3RCZWZvcmU9MTc5OTk5NjQwMDAwMApleHBpcmVzQXQ9MTgwMDE2OTIwMDAwMAp0YXJnZXQ9ZGV2aWNlCms9NApmYWN0b3I9RkxBU0h8YzQ4Y2FjZDgxYjk2NjNkMGJhOTdjMjIxY2JkMTdmNGYKZmFjdG9yPUVUSEVSTkVUfGY5MWVmZDg5ZTAwMjVjMjI2MmRhMTJjZmJlZDQzNjMyCmZhY3Rvcj1XSUZJfGVhOGI1NTJlMjI0MGJiZGQ4Yzg4YzQyMzEzYzRkZWFiCmZhY3Rvcj1TWVNURU1fU0VSSUFMfDc3NGJlYWNiZjM1MWIwZDIwNWY5MTY2NjY5ZTRkM2M3CmZhY3Rvcj1CTFVFVE9PVEh8ZDM2NWVhNjdlMDA1ODVlZGFmOGJlZjRkNzM3ODg1MGQKLS0Ka2luZD1wcm9kdWN0aW9uCnN1YmplY3Q9dHYKbGljZW5zZT1saWMtMDAwMQpzZWF0PWYzNjc1N2MyMjZkZDJlZTQKcmlnaHQ9dXNhZ2V8ZHVyZWV8MTc5OTk5NjQwMDAwMHwxODAyNTkyMDAwMDAw.bVBMxuBJALkwAH80X6wzhjgn29vItzM/lo8WzMrllzPq9ExKBLrbDTyzdnLTZRbPUBIt647O0gaWqkNU4XcBDg=="
+      }
+    },
+    {
+      "type": "build-activation",
+      "id": "build-production-ik",
+      "description": "production avec plafond d'usage ET la clé d'installation de la TV signée (droit ik|<64 hex>, correctif w23-05)",
+      "signer": "desk",
+      "request": {
+        "kind": "production",
+        "device": "tvA",
+        "issuedAt": 1800000000000,
+        "subject": "tv",
+        "rights": ["usage|duree|1799996400000|1802592000000"],
+        "license": "lic-0001",
+        "seat": null,
+        "notBefore": 1799996400000,
+        "windowHours": 48,
+        "nonce": "00112233445566778899aabbccddeeff",
+        "installKey": "0cc4def54afef01f9b6821374ccf66548d8f49f512c6a3aa79aa9d60b1f6cd88"
+      },
+      "expect": {
+        "token": "cbx1.Y2FzdGJyaWRnZS1lbnZlbG9wZS12MQp0eXBlPWFjdGl2YXRpb24Ka2lkPWIyZTViNDE4NjBkMWQ4YmUKc2VxPTE4MDAwMDAwMDAwMDAKbm9uY2U9MDAxMTIyMzM0NDU1NjY3Nzg4OTlhYWJiY2NkZGVlZmYKaXNzdWVkQXQ9MTgwMDAwMDAwMDAwMApub3RCZWZvcmU9MTc5OTk5NjQwMDAwMApleHBpcmVzQXQ9MTgwMDE2OTIwMDAwMAp0YXJnZXQ9ZGV2aWNlCms9NApmYWN0b3I9RkxBU0h8YzQ4Y2FjZDgxYjk2NjNkMGJhOTdjMjIxY2JkMTdmNGYKZmFjdG9yPUVUSEVSTkVUfGY5MWVmZDg5ZTAwMjVjMjI2MmRhMTJjZmJlZDQzNjMyCmZhY3Rvcj1XSUZJfGVhOGI1NTJlMjI0MGJiZGQ4Yzg4YzQyMzEzYzRkZWFiCmZhY3Rvcj1TWVNURU1fU0VSSUFMfDc3NGJlYWNiZjM1MWIwZDIwNWY5MTY2NjY5ZTRkM2M3CmZhY3Rvcj1CTFVFVE9PVEh8ZDM2NWVhNjdlMDA1ODVlZGFmOGJlZjRkNzM3ODg1MGQKLS0Ka2luZD1wcm9kdWN0aW9uCnN1YmplY3Q9dHYKbGljZW5zZT1saWMtMDAwMQpzZWF0PWYzNjc1N2MyMjZkZDJlZTQKcmlnaHQ9aWt8MGNjNGRlZjU0YWZlZjAxZjliNjgyMTM3NGNjZjY2NTQ4ZDhmNDlmNTEyYzZhM2FhNzlhYTlkNjBiMWY2Y2Q4OApyaWdodD11c2FnZXxkdXJlZXwxNzk5OTk2NDAwMDAwfDE4MDI1OTIwMDAwMDA.TpulA8QC5DhL8/G2ECYPW1nojXjDELQgc1xX2Uu6IN+cJ/SjprfWVthQgmMkqUqBwYNniWaso7KEkDMHnXQhAw=="
+      }
+    },
+    {
+      "type": "build-activation",
+      "id": "build-production-ik-only",
+      "description": "production dont le seul droit est la clé d'installation signée (ik) : version complète liée à la TV",
+      "signer": "desk",
+      "request": {
+        "kind": "production",
+        "device": "tvA",
+        "issuedAt": 1800000000000,
+        "subject": "tv",
+        "rights": [],
+        "license": "lic-0001",
+        "seat": null,
+        "notBefore": 1799996400000,
+        "windowHours": 48,
+        "nonce": "00112233445566778899aabbccddeeff",
+        "installKey": "0cc4def54afef01f9b6821374ccf66548d8f49f512c6a3aa79aa9d60b1f6cd88"
+      },
+      "expect": {
+        "token": "cbx1.Y2FzdGJyaWRnZS1lbnZlbG9wZS12MQp0eXBlPWFjdGl2YXRpb24Ka2lkPWIyZTViNDE4NjBkMWQ4YmUKc2VxPTE4MDAwMDAwMDAwMDAKbm9uY2U9MDAxMTIyMzM0NDU1NjY3Nzg4OTlhYWJiY2NkZGVlZmYKaXNzdWVkQXQ9MTgwMDAwMDAwMDAwMApub3RCZWZvcmU9MTc5OTk5NjQwMDAwMApleHBpcmVzQXQ9MTgwMDE2OTIwMDAwMAp0YXJnZXQ9ZGV2aWNlCms9NApmYWN0b3I9RkxBU0h8YzQ4Y2FjZDgxYjk2NjNkMGJhOTdjMjIxY2JkMTdmNGYKZmFjdG9yPUVUSEVSTkVUfGY5MWVmZDg5ZTAwMjVjMjI2MmRhMTJjZmJlZDQzNjMyCmZhY3Rvcj1XSUZJfGVhOGI1NTJlMjI0MGJiZGQ4Yzg4YzQyMzEzYzRkZWFiCmZhY3Rvcj1TWVNURU1fU0VSSUFMfDc3NGJlYWNiZjM1MWIwZDIwNWY5MTY2NjY5ZTRkM2M3CmZhY3Rvcj1CTFVFVE9PVEh8ZDM2NWVhNjdlMDA1ODVlZGFmOGJlZjRkNzM3ODg1MGQKLS0Ka2luZD1wcm9kdWN0aW9uCnN1YmplY3Q9dHYKbGljZW5zZT1saWMtMDAwMQpzZWF0PWYzNjc1N2MyMjZkZDJlZTQKcmlnaHQ9aWt8MGNjNGRlZjU0YWZlZjAxZjliNjgyMTM3NGNjZjY2NTQ4ZDhmNDlmNTEyYzZhM2FhNzlhYTlkNjBiMWY2Y2Q4OA.a1QIc/dqZYNTOC/GDKuA9fx/aYIDQ782a2nSTl34HWfrUTVzflH/duRacZZc5ruJ65sRw7oXNGmzPAC4YneeCA=="
+      }
+    },
+    {
+      "type": "build-activation",
+      "id": "build-refuse-ik-trial",
+      "description": "une clé d'essai ne porte jamais la clé d'installation (refusée)",
+      "signer": "desk",
+      "request": {
+        "kind": "trial",
+        "device": "tvA",
+        "issuedAt": 1800000000000,
+        "subject": "tv",
+        "rights": [],
+        "license": "trial",
+        "seat": null,
+        "notBefore": 1799996400000,
+        "windowHours": 48,
+        "nonce": "00112233445566778899aabbccddeeff",
+        "installKey": "0cc4def54afef01f9b6821374ccf66548d8f49f512c6a3aa79aa9d60b1f6cd88"
+      },
+      "expect": {
+        "refused": true
       }
     },
     {

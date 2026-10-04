@@ -80,7 +80,8 @@ object ActivationCenter {
     }
 
     /** The « demande d'appareil » (code + full fingerprint set): what the owner's tools need for a complete activation. */
-    fun requestText(): String = OwnerFrames.deviceInfo(deviceCode, fp, RentalHub.installPubOrNull(app))      // never blocks the main thread on the Keystore
+    fun requestText(): String = OwnerFrames.deviceInfo(deviceCode, fp, RentalHub.installPubOrNull(app),      // never blocks the main thread on the Keystore
+        castbridge.receiver.wallet.WalletHub.installSigner()?.publicKey)      // the Ed25519 key of the wallet `bind` proof (file, no Keystore): the issuer signs it into the activation (W23-05 audit HIGH-1)
 
     /** What the last accepted activation said about its rentals (« enveloppée pour une autre installation… »), for the activation screen; empty when all went well. */
     @Volatile var lastRentalNotes: List<String> = emptyList(); private set

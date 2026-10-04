@@ -414,11 +414,16 @@ def issue_activation(c, keys, devices):
             return None
         if f[0] == "openall" and ("COMMAND_OPEN_ALL" not in scopes or int(f[3]) - int(f[2]) > MAX_OPEN_ALL or int(f[3]) <= int(f[2])):
             return None
+    rights = list(r["rights"])
+    if r.get("installKey"):            # the TV's signing key (W23-05 audit HIGH-1): signed as the right `ik|<64 hex>`, production for a TV only
+        if r["kind"] != "production" or r["subject"] != "tv" or not re.fullmatch("[0-9a-f]{64}", r["installKey"]) or any(x.split("|")[0] == "ik" for x in rights):
+            return None
+        rights.append("ik|" + r["installKey"])
     fp = dev["fingerprints"]
     seat = r["seat"] or hashlib.sha256(("castbridge-seat|%s|%s" % (r["license"], set_hash(fp).hex())).encode()).digest()[:8].hex()
     env = {"type": "activation", "kid": key["kid"], "seq": r["seq"] if r.get("seq") is not None else r["issuedAt"], "nonce": r["nonce"], "issuedAt": r["issuedAt"], "notBefore": r["notBefore"],
            "expiresAt": r["notBefore"] + r["windowHours"] * HOUR, "target": {"kind": "device", "k": k_for(len(fp)), "factors": fp},
-           "body": activation_body(r["kind"], r["subject"], r["license"], seat, r["rights"])}
+           "body": activation_body(r["kind"], r["subject"], r["license"], seat, rights)}
     return finish(env, key)
 
 

@@ -184,6 +184,11 @@ public class ActivationService {
         if (asked != null && asked != kind) throw ApiException.badRequest(trial ? "Une licence d'essai ne délivre que des clés d'essai" : "Une licence payante ne délivre que des activations de production");
         KeyDuration duration = parseDuration(trial, usageDays);
         List<String> baseRights = trial ? List.of() : rightsOf(l, nowI, productIds);
+        // W23-05 audit HIGH-1 : une demande qui porte la clé de signature de la TV (`install_sig=`) la fait SIGNER dans l'activation (droit « ik ») ; sans elle (TV ancienne) le jeton ne lie aucune clé
+        if (!trial && device.installSig() != null) {
+            baseRights = new ArrayList<>(baseRights);
+            baseRights.add(WireActivation.installKeyLine(java.util.HexFormat.of().parseHex(device.installSig())));
+        }
         int window = windowHours == null ? props.windowHours() : Validate.range(windowHours, "Fenêtre d'installation (heures)", 1, WireActivation.MAX_WINDOW_HOURS);
 
         // the seat the activation is for (the id of a new seat is deterministic)

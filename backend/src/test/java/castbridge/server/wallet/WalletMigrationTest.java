@@ -28,7 +28,7 @@ class WalletMigrationTest {
     }
 
     private static long olderColumns(JdbcTemplate j) {
-        return j.queryForObject("SELECT COUNT(*) FROM information_schema.columns WHERE (table_name LIKE 'lic_%' AND table_name <> 'lic_registration') OR table_name = 'device'", Long.class);
+        return j.queryForObject("SELECT COUNT(*) FROM information_schema.columns WHERE (table_name LIKE 'lic_%' AND table_name NOT IN ('lic_registration', 'lic_key_gate')) OR table_name = 'device'", Long.class);
     }
 
     @Test

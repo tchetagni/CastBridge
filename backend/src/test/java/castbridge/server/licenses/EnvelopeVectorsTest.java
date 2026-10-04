@@ -93,7 +93,8 @@ class EnvelopeVectorsTest {
                 assertThat(r.suspect()).as(id + " suspect").isEqualTo(e.get("suspect").asBoolean());
             }
         }
-        assertThat(n).isEqualTo(46);
+        // changed with the w23-05 audit corrections (HIGH-1): two vectors added (act-production-ik, act-production-ik-only), the 46 older ones are unchanged
+        assertThat(n).isEqualTo(48);
     }
 
     @Test

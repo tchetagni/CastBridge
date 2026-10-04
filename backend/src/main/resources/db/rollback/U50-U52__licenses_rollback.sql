@@ -3,6 +3,7 @@
 -- sauf les 4 colonnes ajoutées à admin_user. Ensuite : DELETE FROM flyway_schema_history WHERE version IN ('50','51','52');
 -- V64 (enregistrement des activations notifiées, W23-05) : sa table ne dépend d'aucune autre ; Ensuite aussi : DELETE FROM flyway_schema_history WHERE version = '64';
 DROP TABLE IF EXISTS lic_registration;
+DROP TABLE IF EXISTS lic_key_gate;
 ALTER TABLE admin_user DROP COLUMN totp_last_step;
 ALTER TABLE admin_user DROP COLUMN totp_secret_enc;
 ALTER TABLE admin_user DROP COLUMN totp_enabled;

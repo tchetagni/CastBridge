@@ -140,7 +140,7 @@ Le code de déverrouillage est demandé au clavier (jamais en argument) ; en scr
     }
 
     private fun activation(o: Opts, io: Io, now: () -> Long): Int {
-        val (code, _, fp) = parseRequest(File(o.need("--request")))
+        val req = readRequest(File(o.need("--request"))); val code = req.code; val fp = req.fp
         val kind = kindOf(o); val signer = open(o, io)
         val t = now(); val start = startOf(o, t)
         val rights = ArrayList<Right>()
@@ -155,7 +155,7 @@ Le code de déverrouillage est demandé au clavier (jamais en argument) ; en scr
             rights += Right.Super("super-illimite", t)
         }
         val license = o.opt("--license") ?: if (kind == ActivationKind.TRIAL) Activation.TRIAL_LICENSE else LicenseIds.generate().also { io.err("Licence $it (générée)") }
-        val issued = ActivationIssuer(signer).issue(ActivationIssuer.Request(kind, code, fp, issuedAt = t, rights = rights, license = license))
+        val issued = ActivationIssuer(signer).issue(ActivationIssuer.Request(kind, code, fp, issuedAt = t, rights = rights, license = license, installKey = if (kind == ActivationKind.PRODUCTION) req.installSig else null))
         io.out(issued.token)
         o.opt("--out-file")?.let {
             val dir = File(it).also { d -> d.mkdirs() }; File(dir, issued.fileName).writeText(issued.fileContent)
@@ -179,7 +179,7 @@ Le code de déverrouillage est demandé au clavier (jamais en argument) ; en scr
 
     private fun inspect(o: Opts, io: Io): Int {
         val r = readRequest(File(o.need("--request"))); val code = r.code; val k = r.k; val fp = r.fp
-        io.out("Code d'appareil : $code · k=$k sur n=${fp.n} · identité ${if (fp.byKind.keys.any { it.strong }) "solide" else "FAIBLE (aucun facteur soudé)"} · clé d'installation : ${if (r.installPub != null) "présente" else "absente"}")
+        io.out("Code d'appareil : $code · k=$k sur n=${fp.n} · identité ${if (fp.byKind.keys.any { it.strong }) "solide" else "FAIBLE (aucun facteur soudé)"} · clé d'installation : ${if (r.installPub != null) "présente" else "absente"} · clé de signature (ik) : ${if (r.installSig != null) "présente" else "absente (activation sans clé liée : le serveur attend le propriétaire)"}")
         fp.byKind.forEach { (kind, h) -> io.out("  ${kind.name.padEnd(14)} $h") }
         return 0
     }

@@ -62,11 +62,11 @@ class RegistrationMySqlTest extends RegistrarTestBase {
     void theFullPathOnMySqlNoLicenceThenSyncNoneThenReportThenUnlimitedAndReplaysPayOnce() throws Exception {
         clock.unfreeze();
         Registered dev = registerApp("tv");
-        KeyPair install = pair();
         Acts.Tv tv = tv();
+        KeyPair install = installOf(tv);
         String lic = licenseId();
         long issued = System.currentTimeMillis() - HOUR;
-        JsonNode first = ok(sync(dev, install, tv, production(ISSUER, tv, "list", null, issued, null)));
+        JsonNode first = ok(sync(dev, tv, production(ISSUER, tv, "list", null, issued, null)));
         assertEquals("NONE", first.path("edition").path("ed").asText(), first.toString());
         assertTrue(noticeReasons(first).contains("LICENSE_PENDING"));
         assertEquals(0, count("SELECT COUNT(*) FROM lic_license WHERE license_id = ?", lic));
@@ -74,12 +74,12 @@ class RegistrationMySqlTest extends RegistrarTestBase {
         MvcResult r = report(dev, tv, install, token);
         assertEquals(200, r.getResponse().getStatus(), r.getResponse().getContentAsString());
         assertEquals("REGISTERED", body(r).path("registration").get(0).path("status").asText(), body(r).toString());
-        JsonNode next = ok(sync(dev, install, tv, token));
+        JsonNode next = ok(sync(dev, tv, token));
         assertEquals("UNLIMITED", next.path("edition").path("ed").asText(), next.toString());
         assertEquals(5000, balance(tv.code(), "NDEM"));
         assertEquals(50, balance(tv.code(), "MBOKO"));
-        ok(sync(dev, install, tv, token));
-        ok(sync(dev, install, tv, token));
+        ok(sync(dev, tv, token));
+        ok(sync(dev, tv, token));
         assertEquals(5000, balance(tv.code(), "NDEM"), "rejeu : aucun double versement");
         assertEquals(50, balance(tv.code(), "MBOKO"));
         assertEquals(1, count("SELECT COUNT(*) FROM lic_license WHERE license_id = ?", lic));
@@ -104,7 +104,7 @@ class RegistrationMySqlTest extends RegistrarTestBase {
             final int k = i;
             Callable<Registration> c = () -> {
                 go.await();
-                return registrar.register(new Presented(tokens.get(k), tvs.get(k).code(), KEY, true), Via.WALLET, T0);
+                return registrar.register(new Presented(tokens.get(k), tvs.get(k).code(), rawPublic(installOf(tvs.get(k))), true), Via.WALLET, T0);
             };
             fs.add(pool.submit(c));
         }
@@ -136,7 +136,7 @@ class RegistrationMySqlTest extends RegistrarTestBase {
         for (int i = 0; i < n; i++) {
             Callable<Registration> c = () -> {
                 go.await();
-                return registrar.register(new Presented(token, tv.code(), KEY, true), Via.WALLET, T0);
+                return registrar.register(new Presented(token, tv.code(), rawPublic(installOf(tv)), true), Via.WALLET, T0);
             };
             fs.add(pool.submit(c));
         }
@@ -161,7 +161,7 @@ class RegistrationMySqlTest extends RegistrarTestBase {
         Acts.Tv tv = tv();
         String lic = licenseId();
         String token = production(ISSUER, tv, lic, null, NOW - 5 * DAY, null);
-        Registration pending = registrar.register(new Presented(token, tv.code(), KEY, true), Via.WALLET, T0);
+        Registration pending = registrar.register(new Presented(token, tv.code(), rawPublic(installOf(tv)), true), Via.WALLET, T0);
         assertEquals("INSTALL_TIME_UNKNOWN", pending.reason());
         assertTrue(registrar.pending(50).stream().anyMatch(p -> p.fp().equals(pending.fp()) && p.firstServerAt() != null));
         Registration done = registrar.decide(OWNER, pending.fp(), true, "TV vue chez le client", T0);
@@ -185,8 +185,8 @@ class RegistrationMySqlTest extends RegistrarTestBase {
             List<String> ops = new ArrayList<>(List.of("A", "B", "REG"));
             Collections.shuffle(ops, rnd);
             for (String op : ops) {
-                if (op.equals("A")) registrar.register(new Presented(tokA, tv.code(), KEY, true), Via.WALLET, T0);
-                else if (op.equals("B")) registrar.register(new Presented(tokB, tv.code(), KEY, true), Via.WALLET, T0);
+                if (op.equals("A")) registrar.register(new Presented(tokA, tv.code(), rawPublic(installOf(tv)), true), Via.WALLET, T0);
+                else if (op.equals("B")) registrar.register(new Presented(tokB, tv.code(), rawPublic(installOf(tv)), true), Via.WALLET, T0);
                 else importRegistry(events);
             }
             String state = jdbc.queryForObject("SELECT CONCAT(seats_allowed, '|', state, '|', transfer_cap, '|', DATE_FORMAT(start_at, '%Y%m%d%H%i%s'), '|', DATE_FORMAT(end_at, '%Y%m%d%H%i%s')) FROM lic_license WHERE license_id = ?", String.class, lic)

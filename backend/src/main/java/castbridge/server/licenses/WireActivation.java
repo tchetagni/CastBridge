@@ -72,6 +72,33 @@ public final class WireActivation {
     public static boolean isSuper(String rightLine) {
         return rightLine.startsWith("super|");
     }
+
+    /** The installation-key claim (`ik|<64 lowercase hex>`): the Ed25519 public key the TV signs its `bind` proofs with, SIGNED inside the activation (W23-05 audit HIGH-1). It grants nothing; a reader that does not know it ignores it. */
+    public static boolean isInstallKey(String rightLine) {
+        return rightLine.startsWith("ik|");
+    }
+
+    private static final Pattern IK_HEX = Pattern.compile("^[0-9a-f]{64}$");
+
+    public static String installKeyLine(byte[] ed25519PublicKey) {
+        if (ed25519PublicKey == null || ed25519PublicKey.length != 32) throw new IllegalArgumentException("clé d'installation de 32 octets attendue");
+        return "ik|" + java.util.HexFormat.of().formatHex(ed25519PublicKey);
+    }
+
+    /**
+     * The installation key claimed by the activation, as canonical base64 of the 32 raw bytes (the form of the `bind` proof and of {@code wallet_identity.install_pub}), or null when the
+     * activation carries none (every activation issued before W23-05 correction). Throws {@link IllegalArgumentException} when the claim is malformed or repeated.
+     */
+    public static String installKeyOf(List<String> rights) {
+        String found = null;
+        for (String r : rights) {
+            if (!isInstallKey(r)) continue;
+            String[] f = r.split("\\|", -1);
+            if (f.length != 2 || !IK_HEX.matcher(f[1]).matches() || found != null) throw new IllegalArgumentException("ik");
+            found = Base64.getEncoder().encodeToString(java.util.HexFormat.of().parseHex(f[1]));
+        }
+        return found;
+    }
     public static final long MAX_OPEN_ALL_MS = 30 * DAY_MS;
     public static final Pattern ID = Envelope.ID;
     public static final Pattern HEX = Envelope.HEX;
@@ -147,6 +174,9 @@ public final class WireActivation {
                     Integer.parseInt(f[7]);
                     Integer.parseInt(f[8]);
                     return true;
+                }
+                case "ik" -> {        // installation key claim: ik|<64 hex>
+                    return f.length == 2 && IK_HEX.matcher(f[1]).matches();
                 }
                 case "super" -> {     // SUPER_UNLIMITED: super|<produit>|<date ms> (only the super administrator's key signs it)
                     if (f.length != 3 || !ID.matcher(f[1]).matches()) return false;

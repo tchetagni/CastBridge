@@ -15,6 +15,8 @@ class InstallSigner(seed: ByteArray) {
 
     val keyId: String get() = key.keyId
     val publicKeyBase64: String get() = key.publicKeyBase64
+    /** The raw 32-byte public key (what the device request carries as `install_sig=ed25519|…`). */
+    val publicKey: ByteArray get() = key.publicKey.copyOf()
 
     /** Signature of [text] (UTF-8), base64 with padding. */
     fun sign(text: String): String = Base64.getEncoder().encodeToString(key.sign(text.toByteArray(Charsets.UTF_8)))

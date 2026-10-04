@@ -47,7 +47,8 @@ class TvDeviceRequestServerTest {
         val (st, body) = call()
         assertEquals(200, st)
         val j = JsonLite.obj(body)
-        assertEquals(setOf("code", "k", "factors", "install"), j.keys, "strict whitelist")
+        // changed with the w23-05 audit corrections (HIGH-1): the sixth key `installSig` (the Ed25519 key of the wallet `bind` proof, additive; null when the TV has none)
+        assertEquals(setOf("code", "k", "factors", "install", "installSig"), j.keys, "strict whitelist")
         assertEquals(DeviceCode.of(fp), j["code"]); assertEquals(2, (j["k"] as Number).toInt())
         @Suppress("UNCHECKED_CAST") val factors = j["factors"] as List<Map<String, Any?>>
         assertEquals(2, factors.size)

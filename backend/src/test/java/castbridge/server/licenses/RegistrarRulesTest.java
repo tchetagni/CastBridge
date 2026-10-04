@@ -26,7 +26,7 @@ class RegistrarRulesTest extends RegistrarTestBase {
 
     private static final String KEY = rawPublic(pair());
 
-    private Registration reg(String token, Acts.Tv tv) { return reg(token, tv, KEY, T0); }
+    private Registration reg(String token, Acts.Tv tv) { return reg(token, tv, rawPublic(installOf(tv)), T0); }
 
     private Registration reg(String token, Acts.Tv tv, String installPub, Instant now) { return registrar.register(new Presented(token, tv.code(), installPub, installPub != null), Via.WALLET, now); }
 
@@ -161,10 +161,10 @@ class RegistrarRulesTest extends RegistrarTestBase {
         String lic = licenseId();
         long issued = NOW - 48 * HOUR;   // la fenêtre se ferme à NOW, plus 5 minutes de tolérance
         String token = production(ISSUER, tv, lic, null, issued, null);
-        assertEquals(Status.REGISTERED, reg(token, tv, KEY, T0.plusSeconds(5 * 60)).status(), "à la fermeture + 5 minutes : accepté");
+        assertEquals(Status.REGISTERED, reg(token, tv, rawPublic(installOf(tv)), T0.plusSeconds(5 * 60)).status(), "à la fermeture + 5 minutes : accepté");
         Acts.Tv late = tv();
         String lic2 = licenseId();
-        Registration r = reg(production(ISSUER, late, lic2, null, issued, null), late, KEY, T0.plusSeconds(5 * 60 + 1));
+        Registration r = reg(production(ISSUER, late, lic2, null, issued, null), late, rawPublic(installOf(late)), T0.plusSeconds(5 * 60 + 1));
         assertEquals(Status.PENDING_DECISION, r.status());
         assertEquals("INSTALL_TIME_UNKNOWN", r.reason());
         assertEquals(0, count("SELECT COUNT(*) FROM lic_license WHERE license_id = ?", lic2));
@@ -257,13 +257,13 @@ class RegistrarRulesTest extends RegistrarTestBase {
                 Acts.Tv tv = tv();
                 Instant at = T0.plusSeconds(day * (86_400L + 900L) + 60L * i);
                 long issued = at.toEpochMilli() - HOUR;
-                Registration x = reg(production(RATE, tv, licenseId(), null, issued, null), tv, KEY, at);
+                Registration x = reg(production(RATE, tv, licenseId(), null, issued, null), tv, rawPublic(installOf(tv)), at);
                 assertEquals(Status.REGISTERED, x.status(), "jour " + day + " licence " + i + " : " + x.reason());
             }
         }
         Acts.Tv last = tv();
         Instant at = T0.plusSeconds(5 * (86_400L + 900L));
-        Registration m = reg(production(RATE, last, licenseId(), null, at.toEpochMilli() - HOUR, null), last, KEY, at);
+        Registration m = reg(production(RATE, last, licenseId(), null, at.toEpochMilli() - HOUR, null), last, rawPublic(installOf(last)), at);
         assertEquals("KEY_RATE", m.reason(), "plafond mensuel");
         assertNotEquals(tomorrow, at);
     }
@@ -328,7 +328,7 @@ class RegistrarRulesTest extends RegistrarTestBase {
         licenses.releaseSeat(OWNER, lic, first.seatId(), "TV remplacée");
         // un nouveau jeton émis après la libération (la ligne de révocation est antérieure à son émission) : le même matériel attend la décision du propriétaire
         jdbc.update("DELETE FROM lic_revocation WHERE license_id = ?", lic);
-        Registration r = reg(production(ISSUER, tv, lic, null, NOW + 60_000, null), tv, KEY, T0.plusSeconds(120));
+        Registration r = reg(production(ISSUER, tv, lic, null, NOW + 60_000, null), tv, rawPublic(installOf(tv)), T0.plusSeconds(120));
         assertEquals(Status.PENDING_DECISION, r.status());
         assertEquals("SEAT_RELEASED", r.reason());
         assertEquals(0, seats(lic));
@@ -344,7 +344,8 @@ class RegistrarRulesTest extends RegistrarTestBase {
         assertEquals(Status.ATTACHED, same.status());
         assertEquals("LICENSE_SUSPENDED", same.reason());
         Registration newcomer = reg(production(ISSUER, b, lic, null, NOW - HOUR, null), b);
-        assertEquals(Status.ATTACHED, newcomer.status());
+        // changed with the w23-05 audit (MEDIUM-4): a TV seen during a suspension waits (rejudged at each presentation) instead of being « ATTACHED » for good without a seat
+        assertEquals(Status.PENDING_DECISION, newcomer.status());
         assertEquals("LICENSE_SUSPENDED", newcomer.reason());
         assertEquals(1, seats(lic), "aucun poste de plus");
     }
@@ -381,16 +382,19 @@ class RegistrarRulesTest extends RegistrarTestBase {
     }
 
     @Test
-    void theSameTokenWithAnotherInstallationKeyChangesNothingAndRaisesASoftAlert() {
+    void theSameLegacyTokenWithAnotherInstallationKeyChangesNothingAndRaisesASoftAlert() {
         Acts.Tv tv = tv();
         String lic = licenseId();
-        String token = production(ISSUER, tv, lic, null, NOW - HOUR, null);
-        assertEquals(Status.REGISTERED, reg(token, tv, KEY, T0).status());
+        // une activation sans clé d'installation signée : la première clé vue fait foi (« premier gagne »)
+        String token = productionLegacy(ISSUER, tv, lic, null, NOW - HOUR, null);
+        Registration first = reg(token, tv, rawPublic(installOf(tv)), T0);
+        assertEquals(Status.PENDING_DECISION, first.status());
+        assertEquals("NO_INSTALL_KEY", first.reason());
         Registration r = reg(token, tv, rawPublic(pair()), T0);
         assertEquals(Status.PENDING_DECISION, r.status());
         assertEquals("BIND_MISMATCH", r.reason());
-        assertEquals("REGISTERED", jdbc.queryForObject("SELECT status FROM lic_registration WHERE license_id = ?", String.class, lic), "la ligne d'origine ne bouge pas");
-        assertEquals(KEY, jdbc.queryForObject("SELECT install_pub FROM lic_registration WHERE license_id = ?", String.class, lic));
+        assertEquals("PENDING_DECISION", jdbc.queryForObject("SELECT status FROM lic_registration WHERE license_id = ?", String.class, lic), "la ligne d'origine ne bouge pas");
+        assertEquals(rawPublic(installOf(tv)), jdbc.queryForObject("SELECT install_pub FROM lic_registration WHERE license_id = ?", String.class, lic));
         reg(token, tv, rawPublic(pair()), T0);
         assertEquals(1, count("SELECT COUNT(*) FROM lic_audit WHERE action = 'REGISTRATION_ALERT' AND reason = 'BIND_MISMATCH' AND target_id = ?", lic), "une seule alerte par jeton");
     }

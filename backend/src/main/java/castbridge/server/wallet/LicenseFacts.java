@@ -40,6 +40,15 @@ public interface LicenseFacts {
     /** La notification d'une licence, ou {@code null} : licence créée par le propriétaire, le registre ou l'émission du serveur (aucune limite de rattrapage, comme avant). */
     default Notification notification(String licenseId) { return null; }
 
+    /** Une fenêtre pendant laquelle une clé de production signée couvrait la licence ({@code toExclusive} null = sans fin). */
+    record Window(Instant from, Instant toExclusive) {}
+
+    /**
+     * Les fenêtres de service d'une licence ouverte par notification (une par clé de production enregistrée, fusionnées quand l'écart ne dépasse pas la grâce), ou {@code null} : licence du propriétaire,
+     * du registre ou du serveur, ou aucune clé connue (aucune restriction, comme avant). Un renouvellement sous le même identifiant après une interruption ne paie pas l'interruption (audit MEDIUM-2).
+     */
+    default List<Window> windows(String licenseId) { return null; }
+
     /** Historique des changements d'état d'une licence (journal d'audit chaîné du module des licences), du plus ancien au plus récent ; vide si illisible. */
     default List<StateEvent> history(String licenseId) { return List.of(); }
 

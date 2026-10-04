@@ -51,8 +51,15 @@ public class ReportedActivationRegistrar {
     /** D-W23B-7 : plafond d'auto-créations par clé d'outil (réglable plus tard par la table de politique). */
     public static final int MAX_PER_DAY = 10, MAX_PER_MONTH = 50;
     public static final long WINDOW_SLACK_MS = 5 * 60_000L;
-    public static final long LATE_NOTICE_DAYS = 400;
+    /** Au-delà, l'activation attend le propriétaire : même durée que {@code CatchUpPolicy.MAXIMUM} (366 j ; l'audit w23-05 LOW-8 : 400 j contre 366 j laissait une clé illimitée sans son ouverture). */
+    public static final long LATE_NOTICE_DAYS = 366;
+    /** Une date d'émission dans le futur de plus d'une heure est refusée (marge d'horloge d'un outil) : sinon la fenêtre de 48 h pouvait s'ouvrir 24 h plus tard. */
+    public static final long MAX_FUTURE_ISSUE_MS = WireActivation.HOUR_MS;
+    /** Fenêtre d'installation maximale d'une activation enregistrée automatiquement : 48 h depuis l'émission (règle du propriétaire), vérifiée par le serveur et non plus seulement par l'outil. */
+    public static final long MAX_WINDOW_MS = WireActivation.MAX_WINDOW_HOURS * WireActivation.HOUR_MS;
     static final int MAX_TOKEN_CHARS = 8_192;
+    /** Motif : l'activation ne porte aucune clé d'installation signée (émise avant le correctif de l'audit) ; la ligne attend la décision du propriétaire. */
+    public static final String NO_INSTALL_KEY = "NO_INSTALL_KEY";
     static final Actor REGISTRAR = new Actor("registrar", Role.OWNER, "system", true);
 
     public enum Via {
@@ -78,7 +85,7 @@ public class ReportedActivationRegistrar {
 
     /** Ce que la présentation affirme, lu dans le jeton SIGNÉ. */
     private record Claims(String fp, String kid, String nonce, String license, String seat, String code, DeviceIdentity.Request device, Instant issuedAt, Instant expiresAt,
-                          Instant usageFrom, Instant usageTo, boolean unlimited) {}
+                          Instant usageFrom, Instant usageTo, boolean unlimited, String ik) {}
 
     private record Row(String fp, String status, String reason, boolean declared, String installPub, String licenseId, String seatId, Instant registeredAt) {}
 
@@ -170,7 +177,19 @@ public class ReportedActivationRegistrar {
         } catch (castbridge.server.web.ApiException e) {
             return refused("MALFORMED", fp);
         }
-        if (a.issuedAt() > now.toEpochMilli() + WireActivation.DAY_MS) return refused("CLOCK", fp);
+        if (a.issuedAt() > now.toEpochMilli() + MAX_FUTURE_ISSUE_MS) return refused("CLOCK", fp);
+        if (a.notAfter() - a.issuedAt() > MAX_WINDOW_MS || a.notAfter() < a.issuedAt()) return refused("WINDOW_TOO_LONG", fp);   // règle du propriétaire : 48 h depuis l'émission, vérifiée ICI aussi
+        // clé d'installation SIGNÉE dans l'activation : seule la TV qui la détient (preuve `bind`) enregistre et touche quoi que ce soit (audit HIGH-1)
+        String ik;
+        try {
+            ik = WireActivation.installKeyOf(a.rights());
+        } catch (IllegalArgumentException e) {
+            return refused("BAD_RIGHTS", fp);
+        }
+        if (ik != null && !ik.equals(p.installPub())) {
+            log.warn("registrar : la clé d'installation de la TV n'est pas celle de l'activation (empreinte {}) : rien n'est écrit", fp.substring(0, 8));
+            return refused("INSTALL_KEY_MISMATCH", fp);
+        }
         Instant usageFrom = null, usageTo = null;
         List<String> usage = a.rights().stream().filter(WireActivation::isUsage).toList();
         if (usage.size() > 1) return refused("BAD_RIGHTS", fp);
@@ -182,7 +201,7 @@ public class ReportedActivationRegistrar {
             usageTo = Instant.ofEpochMilli(to);
         }
         DeviceIdentity.Request device = new DeviceIdentity.Request(a.factors(), code, a.k());
-        return new Claims(fp, a.kid(), a.nonce(), a.license(), a.seat(), code, device, Instant.ofEpochMilli(a.issuedAt()), Instant.ofEpochMilli(a.notAfter()), usageFrom, usageTo, usage.isEmpty());
+        return new Claims(fp, a.kid(), a.nonce(), a.license(), a.seat(), code, device, Instant.ofEpochMilli(a.issuedAt()), Instant.ofEpochMilli(a.notAfter()), usageFrom, usageTo, usage.isEmpty(), ik);
     }
 
     private static Registration refused(String reason, String fp) { return new Registration(Status.REFUSED, reason, null, null, fp, false); }
@@ -199,8 +218,11 @@ public class ReportedActivationRegistrar {
     /** @param force {@code true} : le propriétaire a décidé (la fenêtre, le plafond journalier et l'heure d'installation inconnue ne bloquent plus). */
     private Registration apply(Claims c, Presented p, Via via, Instant now, boolean force) {
         Row row = row(c.fp());
-        if (row != null && row.installPub() != null && p.installPub() != null && !row.installPub().equals(p.installPub())) {
-            // même jeton, autre clé d'installation : la première vue fait foi (« premier gagne »), rien ne change, alerte douce
+        // le refus du propriétaire est DÉFINITIF (audit MEDIUM-1) : ni une présentation ultérieure, ni une place libérée, ni un quota relevé ne rouvrent la ligne ; aucune écriture
+        if (row != null && row.status().equals("REFUSED") && "OWNER_REFUSED".equals(row.reason())) return new Registration(Status.REFUSED, "OWNER_REFUSED", row.licenseId(), row.seatId(), c.fp(), true);
+        if (c.ik() == null && row != null && row.installPub() != null && p.installPub() != null && !row.installPub().equals(p.installPub())) {
+            // activation SANS clé signée : même jeton, autre clé d'installation : la première vue fait foi (« premier gagne »), rien ne change, alerte douce. Avec une clé signée (ik), la clé de la
+            // TV est celle du jeton : aucune ligne ne peut être « empoisonnée » par une autre clé (le contrôle est sans état, `check`).
             alert("BIND_MISMATCH", c.license(), c.fp(), c.code());
             return new Registration(Status.PENDING_DECISION, "BIND_MISMATCH", c.license(), c.seat(), c.fp(), true);
         }
@@ -234,8 +256,11 @@ public class ReportedActivationRegistrar {
 
         List<Long> pks = jdbc.queryForList("SELECT id FROM lic_license WHERE license_id = ? FOR UPDATE", Long.class, c.license());
         TrustedKeys.Key key = trusted.find(c.kid());
+        // seule une clé qui CRÉE (ISSUE_PRODUCTION) crée, élargit ou fait varier la durée d'une licence ; REACTIVATE rattache seulement le poste existant (audit HIGH-2)
         boolean mayCreate = key != null && key.allows(SignerScope.ISSUE_PRODUCTION);
-        if (pks.isEmpty()) return create(c, p, now, declared, force, mayCreate);
+        // une activation sans clé d'installation signée (toutes celles émises avant le correctif HIGH-1) ne crée ni ne modifie rien seule : le propriétaire décide
+        boolean legacy = c.ik() == null && !force;
+        if (pks.isEmpty()) return create(c, p, now, declared, force, mayCreate, legacy);
 
         LicenseService.LicenseRow l = licenses.get(c.license());
         if (l.kind().equals("TRIAL")) return Outcome.of(Status.PENDING_DECISION, "KIND_MISMATCH", c.license(), c.seat());
@@ -250,12 +275,15 @@ public class ReportedActivationRegistrar {
                 return Outcome.of(Status.PENDING_DECISION, "TRANSFER_CAP", c.license(), c.seat());
             }
             if (seat.state().equals("RELEASED")) return Outcome.of(Status.PENDING_DECISION, "SEAT_RELEASED", c.license(), c.seat());
+            if (legacy && mayCreate && alignEnd(l, c, false)) return Outcome.of(Status.PENDING_DECISION, NO_INSTALL_KEY, c.license(), c.seat());   // elle ferait varier la durée de la licence
             record(l, seat.id(), c, now);
-            alignEnd(l, c);
+            if (mayCreate) alignEnd(l, c, true);
             return Outcome.of(Status.ATTACHED, l.state().equals("SUSPENDED") ? "LICENSE_SUSPENDED" : null, c.license(), seat.seatId());
         }
         LicenseService.SeatRow same = licenses.findMatchingSeat(l, "tv", c.device());
         if (same != null) {
+            if (!mayCreate) return Outcome.of(Status.REFUSED, "KEY_NOT_ALLOWED", c.license(), c.seat());   // l'alias est une écriture : réservé à une clé qui crée
+            if (legacy) return Outcome.of(Status.PENDING_DECISION, NO_INSTALL_KEY, c.license(), c.seat());
             // le même matériel sous un autre identifiant de poste (deux outils) : alias, compté une fois
             try {
                 jdbc.update("INSERT INTO lic_seat_alias (license_pk, alias_seat_id, seat_pk) VALUES (?,?,?)", l.id(), c.seat(), same.id());
@@ -263,17 +291,16 @@ public class ReportedActivationRegistrar {
                 // déjà fusionné
             }
             record(l, same.id(), c, now);
-            alignEnd(l, c);
+            alignEnd(l, c, true);
             return Outcome.of(Status.ATTACHED, null, c.license(), same.seatId());
         }
-        if (l.state().equals("SUSPENDED")) {
-            record(l, null, c, now);
-            return Outcome.of(Status.ATTACHED, "LICENSE_SUSPENDED", c.license(), null);
-        }
+        // une TV vue pendant une suspension n'a PAS de poste : la ligne attend (rejugée à chaque présentation) et l'obtient après la reprise (audit MEDIUM-4)
+        if (l.state().equals("SUSPENDED")) return Outcome.of(Status.PENDING_DECISION, "LICENSE_SUSPENDED", c.license(), c.seat());
         if (!eff.equals("ACTIVE") && !eff.equals("GRACE")) return Outcome.of(Status.REFUSED, "EXPIRED", c.license(), c.seat());
         if (eff.equals("GRACE")) return Outcome.of(Status.PENDING_DECISION, "EXPIRED", c.license(), c.seat());
         if (!mayCreate) return Outcome.of(Status.REFUSED, "KEY_NOT_ALLOWED", c.license(), c.seat());
-        String capped = rateCapped(c.kid(), now, declared);
+        if (legacy) return Outcome.of(Status.PENDING_DECISION, NO_INSTALL_KEY, c.license(), c.seat());
+        String capped = rateCapped(c.kid(), now, declared, force);
         if (capped != null) {
             alert("KEY_RATE", c.license(), c.fp(), c.code());
             return Outcome.of(Status.PENDING_DECISION, capped, c.license(), c.seat());
@@ -284,16 +311,17 @@ public class ReportedActivationRegistrar {
         }
         long seatPk = insertSeat(l, c, now);
         record(l, seatPk, c, now);
-        alignEnd(l, c);
+        alignEnd(l, c, true);
         audit.record(REGISTRAR, "SEAT_ATTACH_FROM_REPORT", "LICENSE", c.license(), null, details(c, "seat", c.seat()));
         return Outcome.of(Status.REGISTERED, null, c.license(), c.seat());
     }
 
     /** Licence inconnue : création depuis les revendications signées (§ 3.3). */
-    private Outcome create(Claims c, Presented p, Instant now, boolean declared, boolean force, boolean mayCreate) {
+    private Outcome create(Claims c, Presented p, Instant now, boolean declared, boolean force, boolean mayCreate, boolean legacy) {
         if (!mayCreate) return Outcome.of(Status.REFUSED, "KEY_NOT_ALLOWED", c.license(), c.seat());
         if (c.usageTo() != null && now.isAfter(c.usageTo().plus(Duration.ofDays(props.defaultGraceDays())))) return Outcome.of(Status.REFUSED, "EXPIRED", c.license(), c.seat());
-        String capped = rateCapped(c.kid(), now, declared);
+        if (legacy) return Outcome.of(Status.PENDING_DECISION, NO_INSTALL_KEY, c.license(), c.seat());   // aucune clé d'installation signée : jamais de licence ni de versement sans le propriétaire
+        String capped = rateCapped(c.kid(), now, declared, force);
         if (capped != null) {
             alert("KEY_RATE", c.license(), c.fp(), c.code());
             return Outcome.of(Status.PENDING_DECISION, capped, c.license(), c.seat());
@@ -325,13 +353,27 @@ public class ReportedActivationRegistrar {
         return Outcome.of(Status.REGISTERED, null, c.license(), c.seat());
     }
 
-    /** Plafond par clé : {@code null} si rien ne bloque, sinon le motif. L'émission déclarée n'est limitée que par le plafond mensuel. */
-    private String rateCapped(String kid, Instant now, boolean declared) {
+    /**
+     * Plafond par clé : {@code null} si rien ne bloque, sinon le motif. L'émission déclarée n'est limitée que par le plafond mensuel ; la décision du propriétaire ({@code force}) lève les deux
+     * (audit LOW-2). Le comptage est EXACT sous concurrence (audit MEDIUM-3) : la transaction verrouille d'abord la ligne de la clé ({@code lic_key_gate}) et la garde jusqu'à son commit, donc
+     * deux créations de la même clé se suivent ; le comptage lit alors la création validée de la précédente.
+     */
+    private String rateCapped(String kid, Instant now, boolean declared, boolean force) {
+        if (force) return null;
+        lockKey(kid, now);
         long day = count("SELECT COUNT(*) FROM lic_registration WHERE kid = ? AND status = 'REGISTERED' AND registered_at >= ?", kid, Times.ts(now.minus(Duration.ofDays(1))));
         long month = count("SELECT COUNT(*) FROM lic_registration WHERE kid = ? AND status = 'REGISTERED' AND registered_at >= ?", kid, Times.ts(now.minus(Duration.ofDays(30))));
         if (month >= MAX_PER_MONTH) return "KEY_RATE";
         if (!declared && day >= MAX_PER_DAY) return "KEY_RATE";
         return null;
+    }
+
+    /**
+     * Verrou de ligne par clé d'outil, tenu jusqu'à la fin de la transaction : l'UPDATE prend le verrou d'une ligne existante ; la première fois, l'INSERT crée la ligne (et la verrouille) ;
+     * si deux transactions l'insèrent ensemble, la perdante reçoit un doublon, la transaction est annulée et {@link #register} la rejoue (la ligne existe alors).
+     */
+    private void lockKey(String kid, Instant now) {
+        if (jdbc.update("UPDATE lic_key_gate SET touched_at = ? WHERE kid = ?", Times.ts(now), kid) == 0) jdbc.update("INSERT INTO lic_key_gate (kid, touched_at) VALUES (?, ?)", kid, Times.ts(now));
     }
 
     /** Le client technique, créé une fois (verrou de processus + relecture ; plusieurs instances : au pire un doublon, la lecture prend toujours le plus petit identifiant). */
@@ -397,30 +439,48 @@ public class ReportedActivationRegistrar {
      * quel que soit l'ordre des jetons et du registre) : une clé illimitée connue pour la licence la rend sans fin ; sinon la fin est le plus grand {@code to} des clés vérifiées (une licence
      * importée sans fin reçoit aussi le début du droit : le jeton signé fait foi). Jamais raccourcie. Si le propriétaire a prolongé la licence ({@code LICENSE_EXTEND}), sa décision prime.
      */
-    private void alignEnd(LicenseService.LicenseRow l, Claims c) {
+    private boolean alignEnd(LicenseService.LicenseRow l, Claims c, boolean apply) {
         boolean imported = l.createdBy().startsWith("import:");
-        if (!imported && !l.createdBy().startsWith(CREATED_BY_PREFIX)) return;
-        if (count("SELECT COUNT(*) FROM lic_audit WHERE action = 'LICENSE_EXTEND' AND target_type = 'LICENSE' AND target_id = ?", l.licenseId()) > 0) return;
-        boolean unlimited = c.unlimited() || count("SELECT COUNT(*) FROM lic_registration WHERE license_id = ? AND unlimited = TRUE AND status IN ('REGISTERED', 'ATTACHED')", l.licenseId()) > 0;
+        if (!imported && !l.createdBy().startsWith(CREATED_BY_PREFIX)) return false;
+        if (count("SELECT COUNT(*) FROM lic_audit WHERE action = 'LICENSE_EXTEND' AND target_type = 'LICENSE' AND target_id = ?", l.licenseId()) > 0) return false;
+        // une clé illimitée ne compte que si elle a été signée par une clé qui CRÉE : jamais par une clé de réactivation (audit HIGH-2)
+        boolean unlimited = c.unlimited() || unlimitedByCreatorKey(l.licenseId());
         if (unlimited) {
-            if (l.endAt() != null) {
+            if (l.endAt() == null) return false;
+            if (apply) {
                 jdbc.update("UPDATE lic_license SET end_at = NULL, updated_at = ?, version = version + 1 WHERE id = ?", Times.ts(Instant.now()), l.id());
                 audit.record(REGISTRAR, "LICENSE_END_FROM_TOKEN", "LICENSE", l.licenseId(), null, Map.of("from", l.endAt().toString(), "to", "null", "fp", c.fp()));
             }
-            return;
+            return true;
         }
         Instant to = c.usageTo();
-        if (to == null) return;
+        if (to == null) return false;
         if (l.endAt() == null) {
-            if (!imported) return;
+            if (!imported) return false;
             // le jeton signé fait foi pour le début comme pour la fin (l'événement `license` du registre ne porte que l'heure d'écriture de l'outil)
             Instant from = c.usageFrom() != null ? c.usageFrom() : l.startAt();
-            jdbc.update("UPDATE lic_license SET start_at = ?, end_at = ?, updated_at = ?, version = version + 1 WHERE id = ?", Times.ts(from), Times.ts(to), Times.ts(Instant.now()), l.id());
-            audit.record(REGISTRAR, "LICENSE_END_FROM_TOKEN", "LICENSE", l.licenseId(), null, Map.of("from", "null", "to", to.toString(), "start", from.toString(), "fp", c.fp()));
+            if (apply) {
+                jdbc.update("UPDATE lic_license SET start_at = ?, end_at = ?, updated_at = ?, version = version + 1 WHERE id = ?", Times.ts(from), Times.ts(to), Times.ts(Instant.now()), l.id());
+                audit.record(REGISTRAR, "LICENSE_END_FROM_TOKEN", "LICENSE", l.licenseId(), null, Map.of("from", "null", "to", to.toString(), "start", from.toString(), "fp", c.fp()));
+            }
+            return true;
         } else if (to.isAfter(l.endAt())) {
-            jdbc.update("UPDATE lic_license SET end_at = ?, updated_at = ?, version = version + 1 WHERE id = ?", Times.ts(to), Times.ts(Instant.now()), l.id());
-            audit.record(REGISTRAR, "LICENSE_END_FROM_TOKEN", "LICENSE", l.licenseId(), null, Map.of("from", l.endAt().toString(), "to", to.toString(), "fp", c.fp()));
+            if (apply) {
+                jdbc.update("UPDATE lic_license SET end_at = ?, updated_at = ?, version = version + 1 WHERE id = ?", Times.ts(to), Times.ts(Instant.now()), l.id());
+                audit.record(REGISTRAR, "LICENSE_END_FROM_TOKEN", "LICENSE", l.licenseId(), null, Map.of("from", l.endAt().toString(), "to", to.toString(), "fp", c.fp()));
+            }
+            return true;
         }
+        return false;
+    }
+
+    /** Vrai si une clé qui CRÉE (ISSUE_PRODUCTION) a signé un jeton illimité enregistré pour cette licence. */
+    private boolean unlimitedByCreatorKey(String licenseId) {
+        for (String kid : jdbc.queryForList("SELECT DISTINCT kid FROM lic_registration WHERE license_id = ? AND unlimited = TRUE AND status IN ('REGISTERED', 'ATTACHED')", String.class, licenseId)) {
+            TrustedKeys.Key k = trusted.find(kid);
+            if (k != null && k.allows(SignerScope.ISSUE_PRODUCTION)) return true;
+        }
+        return false;
     }
 
     // ------------------------------------------------------------------ journal de l'enregistrement
@@ -437,15 +497,20 @@ public class ReportedActivationRegistrar {
         String status = o.status().name();
         if (existing == null) {
             jdbc.update("INSERT INTO lic_registration (fp, kid, nonce, license_id, seat_id, device_code, factors, k, issued_at, expires_at, usage_from, usage_to, unlimited, install_pub,"
-                            + " install_time_unproven, first_server_at, last_server_at, registered_at, via, status, reason, declared) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,TRUE,?,?,?,?,?,?,?)",
+                            + " install_time_unproven, first_server_at, last_server_at, registered_at, via, status, reason, declared, ik_signed, signer_creates) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,TRUE,?,?,?,?,?,?,?,?,?)",
                     c.fp(), c.kid(), c.nonce(), c.license(), c.seat(), c.code(), c.device().factorsText(), c.device().k(), Times.ts(c.issuedAt()), Times.ts(c.expiresAt()), Times.ts(c.usageFrom()),
-                    Times.ts(c.usageTo()), c.unlimited(), p.installPub(), Times.ts(now), Times.ts(now), ok ? Times.ts(now) : null, via.code(), status, o.reason(), declared);
+                    Times.ts(c.usageTo()), c.unlimited(), p.installPub(), Times.ts(now), Times.ts(now), ok ? Times.ts(now) : null, via.code(), status, o.reason(), declared, c.ik() != null, signerCreates(c.kid()));
             if (o.status() == Status.PENDING_DECISION || o.status() == Status.REFUSED) pendingAudit(c, o);
         } else {
             jdbc.update("UPDATE lic_registration SET last_server_at = ?, registered_at = ?, status = ?, reason = ?, declared = ?, install_pub = COALESCE(install_pub, ?) WHERE fp = ?",
                     Times.ts(now), ok ? Times.ts(existing.registeredAt() != null ? existing.registeredAt() : now) : null, status, o.reason(), declared, p.installPub(), c.fp());
             if ((o.status() == Status.PENDING_DECISION || o.status() == Status.REFUSED) && (!status.equals(existing.status()) || !java.util.Objects.equals(o.reason(), existing.reason()))) pendingAudit(c, o);
         }
+    }
+
+    private boolean signerCreates(String kid) {
+        TrustedKeys.Key k = trusted.find(kid);
+        return k != null && k.allows(SignerScope.ISSUE_PRODUCTION);
     }
 
     private void pendingAudit(Claims c, Outcome o) {
@@ -455,7 +520,8 @@ public class ReportedActivationRegistrar {
     private void alert(String kind, String licenseId, String fp, String code) {
         // alerte DOUCE, une seule fois par (jeton, nature) : une ligne du journal d'audit chaîné et une ligne de journal sans donnée sensible (jamais le code entier, jamais le jeton) ;
         // aucune révocation automatique
-        if (count("SELECT COUNT(*) FROM lic_audit WHERE action = 'REGISTRATION_ALERT' AND reason = ? AND details LIKE ?", kind, "%fp=" + fp + "%") > 0) return;
+        // (audit LOW-9) bornée par l'index (type, cible) : le coût ne croît plus avec tout le journal
+        if (count("SELECT COUNT(*) FROM lic_audit WHERE target_type = 'LICENSE' AND target_id = ? AND action = 'REGISTRATION_ALERT' AND reason = ? AND details LIKE ?", licenseId, kind, "%fp=" + fp + "%") > 0) return;
         audit.record(REGISTRAR, "REGISTRATION_ALERT", "LICENSE", licenseId, kind, Map.of("level", "soft", "fp", fp, "device", DeviceIdentity.masked(code)));
         log.warn("registrar : alerte douce {} (empreinte {})", kind, fp.substring(0, 8));
     }
@@ -472,12 +538,40 @@ public class ReportedActivationRegistrar {
     // ------------------------------------------------------------------ décision du propriétaire
 
     /** Une ligne en attente de décision (jamais le jeton). */
-    public record Pending(String fp, String kid, String licenseId, String seatId, String deviceCode, String reason, Instant firstServerAt, String via) {}
+    /**
+     * Ce que le propriétaire voit pour décider (jamais le jeton) : de quoi distinguer la vraie TV d'un voleur. {@code installKeyFingerprint} = empreinte lisible de la clé d'installation de la TV qui a
+     * présenté le jeton (même forme que l'écran de la TV : 8 groupes de 4 hexadécimaux), {@code installKeySigned} = cette clé est celle que l'activation porte SIGNÉE (sinon : la clé du premier
+     * présentateur, à comparer à l'écran de la TV), {@code deviceCode} masqué, {@code factors} = résumé des facteurs matériels, {@code tokenFingerprint} = empreinte SHA-256 du jeton.
+     */
+    public record Pending(String fp, String tokenFingerprint, String kid, String licenseId, String seatId, String deviceCode, String factors, String installKeyFingerprint, boolean installKeySigned,
+                          String reason, Instant issuedAt, Instant firstServerAt, String via) {}
 
     public List<Pending> pending(int limit) {
-        return jdbc.query("SELECT fp, kid, license_id, seat_id, device_code, reason, first_server_at, via FROM lic_registration WHERE status = 'PENDING_DECISION' ORDER BY first_server_at LIMIT ?",
-                (rs, i) -> new Pending(rs.getString("fp"), rs.getString("kid"), rs.getString("license_id"), rs.getString("seat_id"), DeviceIdentity.masked(rs.getString("device_code")),
-                        rs.getString("reason"), rs.getTimestamp("first_server_at").toInstant(), rs.getString("via")), Math.max(1, Math.min(limit, 500)));
+        return jdbc.query("SELECT fp, kid, license_id, seat_id, device_code, factors, k, install_pub, ik_signed, reason, issued_at, first_server_at, via FROM lic_registration WHERE status = 'PENDING_DECISION' "
+                        + "ORDER BY first_server_at LIMIT ?",
+                (rs, i) -> new Pending(rs.getString("fp"), rs.getString("fp"), rs.getString("kid"), rs.getString("license_id"), rs.getString("seat_id"), DeviceIdentity.masked(rs.getString("device_code")),
+                        factorsSummary(rs.getString("factors"), rs.getInt("k")), installKeyFingerprint(rs.getString("install_pub")), rs.getBoolean("ik_signed"), rs.getString("reason"),
+                        Times.instant(rs.getTimestamp("issued_at")), rs.getTimestamp("first_server_at").toInstant(), rs.getString("via")), Math.max(1, Math.min(limit, 500)));
+    }
+
+    /** « FLASH, ETHERNET : 2 facteurs, k=2 » : les types seulement, jamais une empreinte. */
+    static String factorsSummary(String stored, int k) {
+        List<String> types = new ArrayList<>();
+        for (String f : stored == null ? new String[0] : stored.split(",")) types.add(f.split("\\|")[0]);
+        return String.join(", ", types) + " : " + types.size() + (types.size() > 1 ? " facteurs" : " facteur") + ", k=" + k;
+    }
+
+    /** L'empreinte lisible d'une clé publique d'installation (base64 brute) : SHA-256, 16 premiers octets, 8 groupes de 4 hexadécimaux séparés par « - » (celle de l'écran de la TV). */
+    public static String installKeyFingerprint(String publicKeyBase64) {
+        if (publicKeyBase64 == null) return null;
+        try {
+            String hex = java.util.HexFormat.of().formatHex(Hashing.sha256(Base64.getDecoder().decode(publicKeyBase64.trim())), 0, 16);
+            StringBuilder b = new StringBuilder();
+            for (int i = 0; i < hex.length(); i += 4) b.append(i == 0 ? "" : "-").append(hex, i, i + 4);
+            return b.toString();
+        } catch (IllegalArgumentException e) {
+            return null;
+        }
     }
 
     /**
@@ -488,7 +582,9 @@ public class ReportedActivationRegistrar {
         actor.require(Role.Permission.LICENSE_WRITE, props.requireTotp());
         String why = Validate.reason(reason);
         return tx.execute(st -> {
-            Map<String, Object> m = jdbc.queryForMap("SELECT * FROM lic_registration WHERE fp = ? FOR UPDATE", fp);
+            List<Map<String, Object>> found = jdbc.queryForList("SELECT * FROM lic_registration WHERE fp = ? FOR UPDATE", fp);
+            if (found.isEmpty()) throw castbridge.server.web.ApiException.notFound("Aucune activation notifiée avec cette empreinte");   // jamais une 500 (audit LOW-5)
+            Map<String, Object> m = found.get(0);
             if (!"PENDING_DECISION".equals(m.get("status"))) throw castbridge.server.web.ApiException.conflict("Cette ligne n'attend aucune décision (état : " + m.get("status") + ")");
             String license = (String) m.get("license_id");
             if (!accept) {
@@ -499,7 +595,7 @@ public class ReportedActivationRegistrar {
             DeviceIdentity.Request dev = new DeviceIdentity.Request(DeviceIdentity.parseStored((String) m.get("factors")), (String) m.get("device_code"), ((Number) m.get("k")).intValue());
             Instant from = Times.instant(m.get("usage_from")), to = Times.instant(m.get("usage_to"));
             Claims c = new Claims(fp, (String) m.get("kid"), (String) m.get("nonce"), license, (String) m.get("seat_id"), (String) m.get("device_code"), dev, Times.instant(m.get("issued_at")),
-                    Times.instant(m.get("expires_at")), from, to, bool(m.get("unlimited")));
+                    Times.instant(m.get("expires_at")), from, to, bool(m.get("unlimited")), bool(m.get("ik_signed")) ? (String) m.get("install_pub") : null);
             Presented p = new Presented(null, c.code(), (String) m.get("install_pub"), true);
             jdbc.update("UPDATE lic_registration SET declared = TRUE, decided_by = ?, decided_at = ?, decision_reason = ? WHERE fp = ?", AuditLog.clip(actor.name(), 64), Times.ts(now), why, fp);
             Registration r = apply(c, p, Via.ADMIN, now, true);

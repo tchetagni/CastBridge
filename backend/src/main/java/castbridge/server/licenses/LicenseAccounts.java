@@ -42,6 +42,22 @@ public class LicenseAccounts {
                         LicenseService.inst(rs, "last_login"), LicenseService.inst(rs, "locked_until")));
     }
 
+    /**
+     * L'administrateur NOMMÉ d'une action sensible par l'API (dons du portefeuille, décision sur une activation notifiée) : en-têtes {@code X-Admin-User} (compte) et {@code X-Totp} (code à usage
+     * unique, même coffre et même vérificateur que la connexion web). Compte inconnu, rôle autre que propriétaire, TOTP non activé, code faux ou déjà utilisé : 403. Le code accepté est consommé.
+     */
+    public Actor verifyNamedAdmin(String user, String totp) {
+        if (user == null || user.isBlank() || totp == null || totp.isBlank()) {
+            throw new ApiException(HttpStatus.FORBIDDEN, "Double authentification requise : en-têtes X-Admin-User (compte) et X-Totp (code à usage unique)");
+        }
+        String name = user.trim();
+        Role role = roleOf(name);
+        if (role != Role.OWNER) throw new ApiException(HttpStatus.FORBIDDEN, "Seul un compte propriétaire peut faire cette action");
+        if (!totpEnabled(name)) throw new ApiException(HttpStatus.FORBIDDEN, "Activez d'abord la double authentification (TOTP) de votre compte : Licences > Sécurité");
+        if (!checkLoginCode(name, totp.trim())) throw new ApiException(HttpStatus.FORBIDDEN, "Code TOTP incorrect ou déjà utilisé");
+        return new Actor(name, Role.OWNER, "api", true);
+    }
+
     public Role roleOf(String username) {
         List<String> r = jdbc.queryForList("SELECT role FROM admin_user WHERE username = ?", String.class, username);
         return r.isEmpty() ? null : Role.parse(r.get(0));

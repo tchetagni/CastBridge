@@ -115,7 +115,7 @@ public class GrantService {
         boolean foreign = false;
         for (LicenseView v : raw) {
             String holder = repo.licenseHolder(v.licenseId()).orElse(identity);
-            if (holder.equals(identity)) mine.add(new Resolved(v, spanBook.active(v, now, false)));
+            if (holder.equals(identity)) mine.add(new Resolved(v, clip(spanBook.active(v, now, false), licenses.windows(v.licenseId()))));
             else foreign = true;
         }
         Standing st = standing(reading, mine, now);
@@ -131,7 +131,7 @@ public class GrantService {
         List<Resolved> mine = new ArrayList<>();
         boolean foreign = false;
         for (LicenseView v : licenses.forDevice(identity)) {
-            if (repo.claimLicense(v.licenseId(), identity, now).equals(identity)) mine.add(new Resolved(v, spanBook.active(v, now, true)));
+            if (repo.claimLicense(v.licenseId(), identity, now).equals(identity)) mine.add(new Resolved(v, clip(spanBook.active(v, now, true), licenses.windows(v.licenseId()))));
             else foreign = true;   // la licence de ce poste paie une autre TV : rien pour celle-ci
         }
         Standing st = standing(reading, mine, now);
@@ -152,7 +152,10 @@ public class GrantService {
                 if (!ledger.post(due.toTxn(identity), "system", identity, null).replayed()) granted++;
             }
         }
-        // licences : grille (licence, période) ancrée à start_at, une identité par licence
+        // licences : grille (licence, période) ancrée à start_at, une identité par licence ; une période d'une TV n'est payée qu'UNE fois par monnaie, quelle que soit la licence (audit HIGH-3)
+        final long periodMs = Duration.ofDays(policy.periodDays()).toMillis();
+        Set<String> claimed = new java.util.HashSet<>(repo.periodClaims(identity));
+        if (anchor != null) backfillClaims(identity, mine, anchor, periodMs, claimed, now);
         for (int i = 0; i < mine.size(); i++) {
             Resolved r = mine.get(i);
             String id = r.view().licenseId();
@@ -165,6 +168,8 @@ public class GrantService {
             for (GrantSchedule.Due due : GrantSchedule.due("lic:" + id, policy, r.view().startAt(), spans, already, now)) {
                 boolean open = due.key().endsWith(OPEN_SUFFIX);
                 Instant periodStart = r.view().startAt();
+                String cur = "OPEN";
+                long slot = 0;
                 if (open) {
                     if (repo.identity(identity).orElseThrow().openedUnlimited()) continue;   // une seule ouverture par identité, quelle que soit la licence
                 } else {
@@ -173,8 +178,10 @@ public class GrantService {
                     int k = Integer.parseInt(m.group(1));
                     if (k == 0 && r.view().endAt() == null) continue;                            // « 5000 et 50 d'abord » : la première tranche d'une illimitée est due à ancre + 1 période
                     periodStart = r.view().startAt().plus(Duration.ofDays(policy.periodDays()).multipliedBy(k));
-                    if (coveredByEarlierLicence(mine, i, periodStart)) continue;                // deux licences superposées de la même TV : une seule tranche par période
+                    cur = due.amounts().get(0).currency().name();
+                    slot = slotOf(periodStart, anchor, periodMs);
                 }
+                if (claimed.contains(cur + "|" + slot)) continue;                                // déjà payée à cette TV (par cette licence ou une autre) : jamais deux fois
                 if (note != null) {
                     CatchUpPolicy.Verdict verdict = CatchUpPolicy.judge(periodStart, note.firstNotifiedAt(), note.declared());
                     if (verdict != CatchUpPolicy.Verdict.PAY) {
@@ -182,7 +189,17 @@ public class GrantService {
                         continue;
                     }
                 }
-                if (!ledger.post(due.toTxn(identity), "system", identity, null).replayed()) granted++;
+                final String claimCur = cur;
+                final long claimSlot = slot;
+                final Instant claimStart = periodStart;
+                try {
+                    // la case (identité, monnaie, période) est réclamée DANS la transaction de la pose : un second versement de la même période, sous une autre licence, est refusé même en parallèle
+                    if (!ledger.post(due.toTxn(identity), "system", identity, null, j -> claimInTx(j, identity, claimCur, claimSlot, claimStart, due.key(), now)).replayed()) granted++;
+                } catch (PeriodAlreadyPaid e) {
+                    claimed.add(cur + "|" + slot);
+                    continue;
+                }
+                claimed.add(cur + "|" + slot);
                 if (open) repo.markOpenedUnlimited(identity);
             }
             held += heldPeriods.size();
@@ -203,8 +220,57 @@ public class GrantService {
         return false;
     }
 
-    private static boolean coveredByEarlierLicence(List<Resolved> licences, int index, Instant t) {
-        for (int j = 0; j < index; j++) for (EditionSpan s : licences.get(j).active()) if (s.covers(t)) return true;
-        return false;
+    /** Levée quand la case (identité, monnaie, période) a déjà été payée : la pose est annulée, rien n'est écrit. */
+    static final class PeriodAlreadyPaid extends RuntimeException {
+        PeriodAlreadyPaid() { super("période déjà payée", null, false, false); }
+    }
+
+    /** La case de la période : l'entier le plus proche de (début - ancre de l'identité) / durée d'une période. Deux licences décalées de moins d'une demi-période partagent la même case. */
+    static long slotOf(Instant periodStart, Instant anchor, long periodMs) {
+        long delta = periodStart.toEpochMilli() - anchor.toEpochMilli();
+        return Math.floorDiv(2 * delta + periodMs, 2 * periodMs);
+    }
+
+    /** Dans la transaction de la pose, après les verrous et avant toute écriture : réclame la case, ou refuse si une autre pose l'a déjà réclamée. */
+    private static void claimInTx(org.springframework.jdbc.core.JdbcTemplate j, String identity, String cur, long slot, Instant periodStart, String key, Instant now) {
+        List<String> held = j.queryForList("SELECT idem_key FROM wallet_period_claim WHERE holder = ? AND cur = ? AND slot = ? FOR UPDATE", String.class, identity, cur, slot);
+        if (!held.isEmpty()) {
+            if (held.get(0).equals(key)) return;
+            throw new PeriodAlreadyPaid();
+        }
+        j.update("INSERT INTO wallet_period_claim (holder, cur, slot, period_start, idem_key, claimed_at) VALUES (?,?,?,?,?,?)", identity, cur, slot, java.sql.Timestamp.from(periodStart), key, java.sql.Timestamp.from(now));
+    }
+
+    /** Les versements d'avant la table (clés {@code grant:lic:<licence>:<monnaie>:p<k>} et ouverture déjà posées) deviennent des cases : une seule fois, sans effet sur le grand livre. */
+    private void backfillClaims(String identity, List<Resolved> mine, Instant anchor, long periodMs, Set<String> claimed, Instant now) {
+        for (Resolved r : mine) {
+            String prefix = "grant:lic:" + r.view().licenseId() + ":";
+            for (String key : repo.grantKeysWithPrefix(prefix)) {
+                String tail = key.substring(prefix.length());
+                if (tail.equals("open-unlimited")) {
+                    if (claimed.add("OPEN|0")) repo.backfillPeriodClaim(identity, "OPEN", 0, r.view().startAt(), key, now);
+                    continue;
+                }
+                Matcher m = Pattern.compile("^(NDEM|MBOKO):p(\\d+)$").matcher(tail);
+                if (!m.matches()) continue;
+                Instant start = r.view().startAt().plusMillis(periodMs * Long.parseLong(m.group(2)));
+                long slot = slotOf(start, anchor, periodMs);
+                if (claimed.add(m.group(1) + "|" + slot)) repo.backfillPeriodClaim(identity, m.group(1), slot, start, key, now);
+            }
+        }
+    }
+
+    /** Restreint les intervalles actifs d'une licence aux fenêtres de ses clés signées ({@code windows} null = aucune restriction). */
+    static List<EditionSpan> clip(List<EditionSpan> spans, List<LicenseFacts.Window> windows) {
+        if (windows == null) return spans;
+        List<EditionSpan> out = new ArrayList<>();
+        for (EditionSpan s : spans) {
+            for (LicenseFacts.Window w : windows) {
+                Instant start = s.start().isAfter(w.from()) ? s.start() : w.from();
+                Instant end = s.endExclusive() == null ? w.toExclusive() : (w.toExclusive() == null ? s.endExclusive() : (s.endExclusive().isBefore(w.toExclusive()) ? s.endExclusive() : w.toExclusive()));
+                if (end == null || end.isAfter(start)) out.add(new EditionSpan(s.edition(), start, end));
+            }
+        }
+        return out;
     }
 }

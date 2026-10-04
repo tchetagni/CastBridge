@@ -490,7 +490,9 @@ class ProductionUpgradeRehearsalTest {
             JsonNode reg2 = JSON.readTree(post(port, "/api/v1/devices/register", null, "{\"installId\":\"" + UUID.randomUUID() + "\",\"app\":\"tv\",\"versionCode\":88,\"androidIdHash\":\"" + sha256("prod") + "\"}").body());
             String auth2 = "Bearer " + reg2.get("deviceToken").asText(), pubId2 = reg2.get("deviceId").asText();
             java.security.KeyPair install2 = WalletTestBase.pair();
-            String act = Acts.production(server, prodTv, now, List.of());
+            // changed with the w23-05 audit corrections (HIGH-1): the production activation carries the TV's installation key SIGNED (`ik`), as every activation issued after the correction does ; an activation
+            // without it (all those already issued) opens nothing by itself, the owner decides
+            String act = Acts.production(server, prodTv, now, List.of("ik|" + java.util.HexFormat.of().formatHex(WalletTestBase.rawPublicBytes(install2))));
             JsonNode pending = syncBound(port, auth2, pubId2, prodTv, install2, act);
             assertFalse(pending.get("notices").toString().contains("LICENSE_PENDING"), pending.toString());
             assertEquals(1, j.queryForObject("SELECT COUNT(*) FROM lic_license WHERE license_id = 'lic-test' AND created_by LIKE 'report:%'", Long.class), "licence ouverte par la notification");
