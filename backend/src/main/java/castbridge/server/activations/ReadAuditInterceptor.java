@@ -16,7 +16,9 @@ import org.springframework.web.servlet.HandlerMapping;
  * for the whole prefix by {@link ActivationsModuleConfig}, so that a new read route is audited without anyone thinking of it (the test that lists the routes by reflection
  * fails otherwise). The long poll {@code /changes} is audited once per tracking session by its controller, not by turn. Also the limit of 120 reads a minute per actor.
  *
- * <p>A read that ended in 404 is a line too (rows 0): somebody probing for codes must show. Written after the response; a failure to write is logged (no data in the message).
+ * <p>Audit H2: the services write the line of a read THEMSELVES, before returning data, and fail closed (see {@link ReadAudit#recordRead}). This interceptor is only the safety
+ * net: a read that ended without any line from its service (a new route that forgot to audit) gets one here, with an ERROR in the log that says so; a refusal (403) or a 404 of
+ * a handler that did not audit leaves a line too. Written after the response, so a failure here is only logged (no data in the message).
  */
 @Component
 public class ReadAuditInterceptor implements HandlerInterceptor {
@@ -46,16 +48,19 @@ public class ReadAuditInterceptor implements HandlerInterceptor {
 
     @Override
     public void afterCompletion(HttpServletRequest req, HttpServletResponse res, Object handler, Exception ex) {
-        if (!applies(req) || ex != null) return;
+        if (!applies(req)) return;
+        if (ReadAudit.audited(req)) return;
         int status = res.getStatus();
-        if (!((status >= 200 && status < 300) || status == 404)) return;
+        if (!((status >= 200 && status < 300) || status == 404 || status == 403) || (ex != null && status < 400)) return;
         Object pattern = req.getAttribute(HandlerMapping.BEST_MATCHING_PATTERN_ATTRIBUTE);
         String route = pattern == null ? req.getRequestURI() : pattern.toString();
         if (route.equals(CHANGES)) return;
         try {
             Actor actor = access.actorOf(SecurityContextHolder.getContext().getAuthentication());
+            if (status >= 200 && status < 300) log.error("read route {} did not audit itself: line written by the safety net", route);
             AuditNote note = AuditNote.of(req);
-            audit.record(actor.name(), actor.role() == null ? "-" : actor.role().name(), actor.channel(), route, ReadAudit.normalize(req.getParameterMap()), note.target(), status == 404 ? 0 : note.rows(), note.export());
+            audit.record(actor.name(), actor.role() == null ? "-" : actor.role().name(), actor.channel(), route,
+                    ReadAudit.normalize(req.getParameterMap()) + (status == 403 ? "&denied=403" : ""), note.target(), status >= 400 ? 0 : note.rows(), note.export());
         } catch (RuntimeException e) {
             log.error("read audit line not written ({})", e.getClass().getSimpleName());
         }

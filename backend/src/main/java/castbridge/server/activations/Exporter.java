@@ -45,19 +45,31 @@ public class Exporter {
     private final ActAccess access;
     private final ActivationsPolicy policy;
     private final ActivationsProperties props;
+    private final ReadAudit readAudit;
 
-    public Exporter(ActivationsAdminService admin, ActAccess access, ActivationsPolicy policy, ActivationsProperties props) {
+    public Exporter(ActivationsAdminService admin, ActAccess access, ActivationsPolicy policy, ActivationsProperties props, ReadAudit readAudit) {
+        this.readAudit = readAudit;
         this.admin = admin;
         this.access = access;
         this.policy = policy;
         this.props = props;
     }
 
+    static final String EXPORT_ROUTE = ActivationsModuleConfig.ADMIN_API + "/export";
+
     public static String contentType(String format) { return format.equals("csv") ? "text/csv;charset=UTF-8" : "application/x-ndjson;charset=UTF-8"; }
 
     /** @return the number of rows written */
     public int export(Actor actor, String what, String format, Map<String, String> filters, OutputStream out) throws IOException {
-        access.require(actor, ActPermissions.Perm.ACT_EXPORT);
+        Map<String, String> ap = new java.util.TreeMap<>(filters == null ? Map.of() : filters);
+        if (what != null) ap.put("what", what);
+        if (format != null) ap.put("format", format);
+        try {
+            access.require(actor, ActPermissions.Perm.ACT_EXPORT);
+        } catch (ApiException e) {
+            if (e.status() == org.springframework.http.HttpStatus.FORBIDDEN) readAudit.recordDenied(actor, EXPORT_ROUTE, ap);
+            throw e;
+        }
         if (what == null || !WHAT.contains(what)) throw ApiException.badRequest("what : activations, tvs, events, alerts ou reads");
         if (format == null || !(format.equals("csv") || format.equals("jsonl"))) throw ApiException.badRequest("format : csv ou jsonl");
         policy.limit("export:" + actor.name(), 10, Duration.ofHours(1), "exports");
@@ -65,6 +77,8 @@ public class Exporter {
         if (bound > props.exportMaxRows()) {
             throw ApiException.badRequest("Trop de lignes pour un seul export (" + bound + ", maximum " + props.exportMaxRows() + ") : affinez les filtres (période, état, outil)");
         }
+        // audit H2: the line is written BEFORE the first byte leaves (fail closed: no line, no export), with the bound of the export; a download cut by the client is a line too
+        readAudit.recordRead(actor, EXPORT_ROUTE, ap, null, (int) Math.min(bound, Integer.MAX_VALUE), true);
         BufferedOutputStream o = new BufferedOutputStream(out);
         int[] n = {0};
         List<String[]> columns = COLUMNS.get(what);

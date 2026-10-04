@@ -70,14 +70,12 @@ public class ActivationsAdminController {
     public ActivationsAdminService.CursorPage activations(@RequestParam Map<String, String> params, @RequestParam(required = false) String cursor, @RequestParam(required = false) Integer limit,
                                                           Authentication auth, HttpServletRequest req) {
         ActivationsAdminService.CursorPage p = admin.activations(actor(auth), filters(params), cursor, limit);
-        AuditNote.set(req, null, p.items().size(), false);
         return p;
     }
 
     @GetMapping("/activations/{fp}")
     public Map<String, Object> activation(@PathVariable String fp, Authentication auth, HttpServletRequest req) {
         Map<String, Object> r = admin.activation(actor(auth), fp);
-        AuditNote.set(req, fp.substring(0, 8), ((java.util.List<?>) r.get("events")).size() + 1, false);
         return r;
     }
 
@@ -85,7 +83,6 @@ public class ActivationsAdminController {
     public ActivationsAdminService.CursorPage tvs(@RequestParam Map<String, String> params, @RequestParam(required = false) String cursor, @RequestParam(required = false) Integer limit,
                                                   Authentication auth, HttpServletRequest req) {
         ActivationsAdminService.CursorPage p = admin.tvs(actor(auth), filters(params), cursor, limit);
-        AuditNote.set(req, null, p.items().size(), false);
         return p;
     }
 
@@ -94,14 +91,12 @@ public class ActivationsAdminController {
         Map<String, Object> r = admin.tv(actor(auth), deviceCode);
         @SuppressWarnings("unchecked")
         Map<String, Object> tv = (Map<String, Object>) r.get("tv");
-        AuditNote.set(req, (String) tv.get("tvRef"), ((java.util.List<?>) r.get("timeline")).size() + 1, false);
         return r;
     }
 
     @GetMapping("/dashboard")
     public Map<String, Object> dashboard(@RequestParam(required = false) String day, Authentication auth, HttpServletRequest req) {
         Map<String, Object> r = admin.dashboard(actor(auth), day);
-        AuditNote.set(req, null, 1, false);
         return r;
     }
 
@@ -109,35 +104,30 @@ public class ActivationsAdminController {
     public ActivationsAdminService.CursorPage alerts(@RequestParam Map<String, String> params, @RequestParam(required = false) String cursor, @RequestParam(required = false) Integer limit,
                                                      Authentication auth, HttpServletRequest req) {
         ActivationsAdminService.CursorPage p = admin.alerts(actor(auth), filters(params), cursor, limit);
-        AuditNote.set(req, null, p.items().size(), false);
         return p;
     }
 
     @GetMapping("/tools")
     public java.util.List<Map<String, Object>> tools(Authentication auth, HttpServletRequest req) {
         java.util.List<Map<String, Object>> r = admin.tools(actor(auth));
-        AuditNote.set(req, null, r.size(), false);
         return r;
     }
 
     @GetMapping("/integrity")
     public Map<String, Object> integrity(Authentication auth, HttpServletRequest req) {
         Map<String, Object> r = admin.integrity(actor(auth));
-        AuditNote.set(req, null, 2, false);
         return r;
     }
 
     @GetMapping("/checkpoints")
     public Map<String, Object> checkpoints(@RequestParam(required = false) String from, @RequestParam(required = false) String to, Authentication auth, HttpServletRequest req) {
         Map<String, Object> r = admin.checkpoints(actor(auth), from, to);
-        AuditNote.set(req, null, ((java.util.List<?>) r.get("items")).size(), true);
         return r;
     }
 
     @GetMapping("/read-audit")
     public ActivationsAdminService.CursorPage readAudit(@RequestParam(required = false) String cursor, @RequestParam(required = false) Integer limit, Authentication auth, HttpServletRequest req) {
         ActivationsAdminService.CursorPage p = admin.readAudit(actor(auth), cursor, limit);
-        AuditNote.set(req, null, p.items().size(), false);
         return p;
     }
 
@@ -185,7 +175,6 @@ public class ActivationsAdminController {
             res.setContentType(Exporter.contentType(ext));
             res.setHeader("Content-Disposition", "attachment; filename=\"" + what + "." + ext + "\"");
         }
-        AuditNote.set(req, null, rows, true);
     }
 
     // ------------------------------------------------------------------ long poll
@@ -208,7 +197,7 @@ public class ActivationsAdminController {
         Long last = lastPoll.put(session, now);
         if (lastPoll.size() > 5000) lastPoll.values().removeIf(t -> t < now - 600_000);
         if (last == null || now - last > 60_000) {
-            readAudit.record(actor.name(), actor.role() == null ? "-" : actor.role().name(), actor.channel(), ReadAuditInterceptor.CHANGES, "after=" + after, null, 0, false);
+            readAudit.recordRead(actor, ReadAuditInterceptor.CHANGES, Map.of("after", Long.toString(after)), null, 0, false);   // before the answer, and fail closed
         }
         int w = Math.max(0, Math.min(wait, 25));
         if (w > 0 && ((java.util.List<?>) answer.get("events")).isEmpty()) {

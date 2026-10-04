@@ -36,6 +36,34 @@ public class ActivationsAdminService {
     private static final Set<String> FLAGS = Set.of("declared_journal", "declared_registry", "server_issued", "seen_on_tv", "delivered_bt", "undeclared", "clone", "out_of_window");
     private static final Set<String> STATES = Set.of("EMISE", "ACTIVATED", "EXPIRED_UNUSED", "REPLACED", "ENDED", "REVOKED");
 
+    static final String P = ActivationsModuleConfig.ADMIN_API;
+    static final String R_ACTIVATIONS = P + "/activations", R_ACTIVATION = P + "/activations/{fp}", R_TVS = P + "/tvs", R_TV = P + "/tvs/{deviceCode}", R_DASHBOARD = P + "/dashboard",
+            R_ALERTS = P + "/alerts", R_TOOLS = P + "/tools", R_INTEGRITY = P + "/integrity", R_CHECKPOINTS = P + "/checkpoints", R_READ_AUDIT = P + "/read-audit", R_CHANGES = P + "/changes";
+
+    /**
+     * Audit H2: a read audits ITSELF, here, BEFORE its data is returned, so that the web pages (w23-02) that call this service directly are covered like the JSON API and a read
+     * whose audit line cannot be written fails closed (503, no data): see {@link ReadAudit#recordRead}. A refusal leaves a line too.
+     */
+    private void requireRead(Actor actor, ActPermissions.Perm perm, String route, Map<String, String> params) {
+        try {
+            access.require(actor, perm);
+        } catch (ApiException e) {
+            if (e.status() == org.springframework.http.HttpStatus.FORBIDDEN) readAudit.recordDenied(actor, route, params);
+            throw e;
+        }
+    }
+
+    private <T> T audited(Actor actor, String route, Map<String, String> params, String target, int rows, boolean export, T data) {
+        readAudit.recordRead(actor, route, params, target, rows, export);
+        return data;
+    }
+
+    private static Map<String, String> params(Map<String, String> f, Integer limit) {
+        Map<String, String> m = new TreeMap<>(f == null ? Map.of() : f);
+        if (limit != null) m.put("limit", limit.toString());
+        return m;
+    }
+
     /** A page: the rows, the cursor of the next page (null at the end), the limit applied. */
     public record CursorPage(List<?> items, String nextCursor, int limit) {}
 
@@ -159,8 +187,9 @@ public class ActivationsAdminService {
     }
 
     public CursorPage activations(Actor actor, Map<String, String> f, String cursor, Integer limit) {
-        access.require(actor, ActPermissions.Perm.ACT_READ);
-        return queryActivations(f, cursor, limitOf(limit), false);
+        requireRead(actor, ActPermissions.Perm.ACT_READ, R_ACTIVATIONS, params(f, limit));
+        CursorPage p = queryActivations(f, cursor, limitOf(limit), false);
+        return audited(actor, R_ACTIVATIONS, params(f, limit), null, p.items().size(), false, p);
     }
 
     /** " WHERE ..." of the activation filters (state, kind, tool, license, device, from, to, flag, q), its parameters appended to {@code args}. */
@@ -280,15 +309,18 @@ public class ActivationsAdminService {
     }
 
     public Map<String, Object> activation(Actor actor, String fp) {
-        access.require(actor, ActPermissions.Perm.ACT_READ);
+        requireRead(actor, ActPermissions.Perm.ACT_READ, R_ACTIVATION, Map.of());
         if (fp == null || !fp.matches("[0-9a-f]{64}")) throw ApiException.badRequest("Empreinte invalide (64 chiffres hexadécimaux)");
         List<Map<String, Object>> rows = jdbc.queryForList("SELECT k.*, t.device_code AS tv_code FROM act_key k LEFT JOIN act_tv t ON t.tv_ref = k.tv_ref WHERE k.fp = ?", fp);
-        if (rows.isEmpty()) throw ApiException.notFound("Activation inconnue");
+        if (rows.isEmpty()) {
+            readAudit.recordRead(actor, R_ACTIVATION, Map.of(), null, 0, false);   // somebody probing for fingerprints must show
+            throw ApiException.notFound("Activation inconnue");
+        }
         Map<String, Object> out = new LinkedHashMap<>();
         out.put("activation", activationRow(rows.get(0), new java.util.HashMap<>(), false));
         out.put("events", events("fp = ?", fp, 200));
         out.put("alerts", jdbc.queryForList("SELECT id, type, severity, state, opened_at FROM act_alert WHERE fp = ? ORDER BY id DESC LIMIT 50", fp).stream().map(this::alertRow).toList());
-        return out;
+        return audited(actor, R_ACTIVATION, Map.of(), fp.substring(0, 8), ((List<?>) out.get("events")).size() + 1, false, out);
     }
 
     private List<Map<String, Object>> events(String where, Object arg, int max) {
@@ -346,8 +378,9 @@ public class ActivationsAdminService {
     }
 
     public CursorPage tvs(Actor actor, Map<String, String> f, String cursor, Integer limit) {
-        access.require(actor, ActPermissions.Perm.ACT_READ);
-        return queryTvs(f, cursor, limitOf(limit), false);
+        requireRead(actor, ActPermissions.Perm.ACT_READ, R_TVS, params(f, limit));
+        CursorPage p = queryTvs(f, cursor, limitOf(limit), false);
+        return audited(actor, R_TVS, params(f, limit), null, p.items().size(), false, p);
     }
 
     private StringBuilder tvWhere(Map<String, String> f, List<Object> args) {
@@ -424,12 +457,15 @@ public class ActivationsAdminService {
 
     /** The fiche of a TV: its state, its activations, its alerts, and the whole chronology (issued, delivered, activated, commands, versions, licence changes, alerts). */
     public Map<String, Object> tv(Actor actor, String code) {
-        access.require(actor, ActPermissions.Perm.ACT_READ);
+        requireRead(actor, ActPermissions.Perm.ACT_READ, R_TV, Map.of());
         String canonical = DeviceIdentity.parseCode(code);
         if (canonical == null) throw ApiException.badRequest("Code d'appareil invalide : 16 caractères au format XXXX-XXXX-XXXX-XXXX, avec son caractère de contrôle");
         String ref = tvRef.of(canonical);
         List<Map<String, Object>> rows = jdbc.queryForList("SELECT * FROM act_tv WHERE tv_ref = ? AND device_code = ?", ref, canonical);
-        if (rows.isEmpty()) throw ApiException.notFound("TV inconnue du suivi");
+        if (rows.isEmpty()) {
+            readAudit.recordRead(actor, R_TV, Map.of(), null, 0, false);   // somebody probing for codes must show
+            throw ApiException.notFound("TV inconnue du suivi");
+        }
         Map<String, Object> out = new LinkedHashMap<>();
         Map<String, Object> tv = tvRow(rows.get(0), true, false);
         out.put("tv", tv);
@@ -447,7 +483,7 @@ public class ActivationsAdminService {
             List<Map<String, Object>> l = jdbc.queryForList("SELECT l.license_id, l.kind, l.state, l.start_at, l.end_at, l.grace_days, l.seats_allowed FROM lic_license l WHERE l.license_id = ?", lic);
             if (!l.isEmpty()) out.put("license", Times.normalized(l.get(0)));
         }
-        return out;
+        return audited(actor, R_TV, Map.of(), ref, ((List<?>) out.get("timeline")).size() + 1, false, out);
     }
 
     // ================================================================== alerts
@@ -480,8 +516,9 @@ public class ActivationsAdminService {
     }
 
     public CursorPage alerts(Actor actor, Map<String, String> f, String cursor, Integer limit) {
-        access.require(actor, ActPermissions.Perm.ACT_READ);
-        return queryAlerts(f, cursor, limitOf(limit));
+        requireRead(actor, ActPermissions.Perm.ACT_READ, R_ALERTS, params(f, limit));
+        CursorPage p = queryAlerts(f, cursor, limitOf(limit));
+        return audited(actor, R_ALERTS, params(f, limit), null, p.items().size(), false, p);
     }
 
     CursorPage queryAlerts(Map<String, String> f, String cursor, int limit) {
@@ -528,8 +565,9 @@ public class ActivationsAdminService {
     // ================================================================== tools, dashboard, integrity, checkpoints, reads, changes
 
     public List<Map<String, Object>> tools(Actor actor) {
-        access.require(actor, ActPermissions.Perm.ACT_READ);
-        return toolRows();
+        requireRead(actor, ActPermissions.Perm.ACT_READ, R_TOOLS, Map.of());
+        List<Map<String, Object>> r = toolRows();
+        return audited(actor, R_TOOLS, Map.of(), null, r.size(), false, r);
     }
 
     List<Map<String, Object>> toolRows() {
@@ -571,7 +609,7 @@ public class ActivationsAdminService {
     }
 
     public Map<String, Object> dashboard(Actor actor, String day) {
-        access.require(actor, ActPermissions.Perm.ACT_READ);
+        requireRead(actor, ActPermissions.Perm.ACT_READ, R_DASHBOARD, day == null ? Map.of() : Map.of("day", day));
         Map<String, Object> out = new LinkedHashMap<>();
         out.put("generatedAt", clock.now());
         out.put("licensesModule", licenseProps.enabled());
@@ -614,12 +652,12 @@ public class ActivationsAdminService {
         out.put("tools", toolRows());
         Timestamp since = Timestamp.from(now.minus(Duration.ofDays(30)));
         out.put("daily", jdbc.queryForList("SELECT snap_day AS snapday, kind, tool, state, n FROM act_daily WHERE snap_day >= ? ORDER BY snap_day", java.sql.Date.valueOf(since.toInstant().atZone(ZoneOffset.UTC).toLocalDate())).stream().map(Times::normalized).toList());
-        return out;
+        return audited(actor, R_DASHBOARD, day == null ? Map.of() : Map.of("day", day), null, 1, false, out);
     }
 
     /** The verification of the two chains and of the cold archive. */
     public Map<String, Object> integrity(Actor actor) {
-        access.require(actor, ActPermissions.Perm.ACT_READ);
+        requireRead(actor, ActPermissions.Perm.ACT_READ, R_INTEGRITY, Map.of());
         Map<String, Object> out = new LinkedHashMap<>();
         out.put("events", eventLog.verify());
         out.put("reads", readAudit.verify());
@@ -630,11 +668,14 @@ public class ActivationsAdminService {
             archives.add(m);
         }
         out.put("archives", archives);
-        return out;
+        return audited(actor, R_INTEGRITY, Map.of(), null, 2, false, out);
     }
 
     public Map<String, Object> checkpoints(Actor actor, String from, String to) {
-        access.require(actor, ActPermissions.Perm.ACT_EXPORT);
+        Map<String, String> ap = new TreeMap<>();
+        if (from != null && !from.isBlank()) ap.put("from", from);
+        if (to != null && !to.isBlank()) ap.put("to", to);
+        requireRead(actor, ActPermissions.Perm.ACT_EXPORT, R_CHECKPOINTS, ap);
         LocalDate f = from == null || from.isBlank() ? null : date(from), t = to == null || to.isBlank() ? null : date(to);
         List<Map<String, Object>> items = new ArrayList<>();
         for (Checkpoints.Checkpoint c : checkpoints.list(f, t)) {
@@ -649,7 +690,7 @@ public class ActivationsAdminService {
             m.put("signature", c.signature());
             items.add(m);
         }
-        return Map.of("items", items);
+        return audited(actor, R_CHECKPOINTS, ap, null, items.size(), true, Map.of("items", items));
     }
 
     private static LocalDate date(String s) {
@@ -662,7 +703,7 @@ public class ActivationsAdminService {
 
     /** The audit of the reads, newest first (OWNER with the second factor: it tells who looked at what). */
     public CursorPage readAudit(Actor actor, String cursor, Integer limit) {
-        access.require(actor, ActPermissions.Perm.ACT_EXPORT);
+        requireRead(actor, ActPermissions.Perm.ACT_EXPORT, R_READ_AUDIT, params(null, limit));
         int lim = limitOf(limit);
         List<Object> args = new ArrayList<>();
         String w = "";
@@ -688,12 +729,12 @@ public class ActivationsAdminService {
             m.put("rows", m.remove("rows_rendered"));
             items.add(m);
         }
-        return new CursorPage(items, next, lim);
+        return audited(actor, R_READ_AUDIT, params(null, limit), null, items.size(), false, new CursorPage(items, next, lim));
     }
 
     /** Events after an id (at most 200), for the long poll of the controller. */
     public Map<String, Object> changes(Actor actor, long after) {
-        access.require(actor, ActPermissions.Perm.ACT_READ);
+        requireRead(actor, ActPermissions.Perm.ACT_READ, R_CHANGES, Map.of("after", Long.toString(after)));
         return changesSince(after);
     }
 
