@@ -25,12 +25,21 @@ object Pin {
  * While locked, even the right PIN is refused (otherwise the lock would not slow brute force).
  */
 class PinGuard(
-    private val pin: String,
+    pin: String,
     private val maxFailures: Int = 5,
     private val lockMs: Long = 60_000,
     private val now: () -> Long = System::currentTimeMillis,
 ) {
     enum class Result { OK, BAD, LOCKED }
+
+    @Volatile private var pin: String = pin
+
+    /**
+     * Nouveau code de la TV (régénération) : l'ancien est refusé aussitôt (le guard est partagé par le serveur HTTP, Bluetooth et la
+     * passerelle). Les compteurs et blocages d'essais (par adresse) sont tous effacés : ils comptaient des essais contre l'ANCIEN code ;
+     * un téléphone bloqué pour avoir mal saisi l'ancien code peut saisir le nouveau sans attendre. Aucune valeur n'est journalisée.
+     */
+    @Synchronized fun rotate(newPin: String) { pin = newPin; entries.clear() }
 
     private class Entry(var failures: Int = 0, var lockedUntil: Long = 0)
     private val entries = ConcurrentHashMap<String, Entry>()

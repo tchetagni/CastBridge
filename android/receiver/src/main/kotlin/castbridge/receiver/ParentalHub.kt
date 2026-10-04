@@ -282,6 +282,9 @@ object ParentalHub {
     /** The TV's connection code is not shown on screen while a child profile is active (it is the TV administrator's secret). */
     fun shownPin(pin: String): String = if (engineOrNull?.active() == true) "••••••" else pin
 
+    /** True while a child profile is active: the connection code is masked and cannot be regenerated. */
+    fun pinMasked(): Boolean = engineOrNull?.active() == true
+
     /** Status line of the "Contrôle parental" home tile. */
     fun tileStatus(): String {
         val e = engineOrNull ?: return ""

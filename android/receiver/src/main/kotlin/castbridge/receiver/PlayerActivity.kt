@@ -602,6 +602,9 @@ class PlayerActivity : Activity(), TvService.Screen {
         } else emptyList()
         return ParentalHub.filterHome(upgrade + wallet + listOf(
             tile("library", R.drawable.ic_cb_bibliotheque, "Bibliothèque", "Toutes vos vidéos et vos fichiers, en grille.", "${homeItemCount.takeIf { it >= 0 } ?: ParentalHub.filterItems(server?.libraryItems().orEmpty()).size} fichier(s)", false) { showLibrary() },
+            // « Code PIN » (accès rapide) : le code de la TV en grand ; OK ouvre l'écran qui permet de générer un nouveau PIN (PinActivity)
+            tile("pin", R.drawable.ic_cb_recevoir_du_telephone, "Code PIN", "Le code de connexion de la TV, à saisir une fois sur le téléphone ; on peut en générer un nouveau.",
+                castbridge.core.tv.pin.PinDisplay.tileStatus(pin, ParentalHub.pinMasked()), true) { PinActivity.open(this) },
             tile("bluetooth", R.drawable.ic_cb_bluetooth, "Ajouter un téléphone", "Le téléphone trouve et pilote la TV par Bluetooth, sans code à saisir : une seule validation ici.",
                 (svc?.trust?.list()?.size ?: 0).let { if (it == 0) "Aucun" else "$it de confiance" }, (svc?.trust?.list()?.size ?: 0) > 0, homeId = "pair") { PairActivity.open(this) },
             tile("learn", R.drawable.ic_cb_apprendre, "Apprendre", "Leçons de la maternelle à la licence, exercices corrigés, préparer le CEP, le BEPC, le GCE, le Bac.", "Élèves", true) {

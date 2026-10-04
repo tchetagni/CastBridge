@@ -14,6 +14,23 @@ class TvPrefs(ctx: Context) {
         return Pin.generate().also { sp.edit().putString("pin", it).apply() }
     }
 
+    /**
+     * Stockage de la régénération du code (castbridge.core.tv.pin.PinRegenerator) : le nouveau code, les empreintes (SHA-256 tronquées, jamais le code)
+     * des deux anciens et les heures des dernières régénérations s'écrivent en UNE seule opération synchrone (commit) : si elle échoue,
+     * l'ancien code reste en place et la TV n'est jamais sans code valide.
+     */
+    fun pinStore(): castbridge.core.tv.pin.PinStore = object : castbridge.core.tv.pin.PinStore {
+        override fun current() = pin()
+        override fun fingerprints() = (sp.getString("pin_prev", "") ?: "").split(',').filter { it.isNotEmpty() }
+        override fun times() = (sp.getString("pin_regen_times", "") ?: "").split(',').mapNotNull { it.toLongOrNull() }
+        override fun commit(pin: String, fingerprints: List<String>, times: List<Long>): Boolean {
+            if (!Pin.isValidFormat(pin)) return false
+            return runCatching {
+                sp.edit().putString("pin", pin).putString("pin_prev", fingerprints.joinToString(",")).putString("pin_regen_times", times.joinToString(",")).commit()
+            }.getOrDefault(false)
+        }
+    }
+
     /** Storage/memory profile: defaults for a modest TV, overridable through /api/storage. */
     fun profile(): TvProfile = TvProfile(
         quotaBytes = getLong("quota_bytes", 0),

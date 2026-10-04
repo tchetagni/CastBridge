@@ -28,8 +28,8 @@ object HomeGroups {
     const val NETWORK = "network"
     const val ADMIN = "admin"
     const val PAIR = "pair"
-    /** Tuiles toujours directement sur l'accueil, avant les groupes (« Bibliothèque » : la plus utilisée ; la mise à niveau de l'essai). */
-    val QUICK_ACCESS = listOf("upgrade", "library")
+    /** Tuiles toujours directement sur l'accueil, avant les groupes (« Bibliothèque » : la plus utilisée ; la mise à niveau de l'essai ; « Code PIN » : le code de la TV, visible sans ouvrir de groupe). */
+    val QUICK_ACCESS = listOf("upgrade", "library", "pin")
 
     val GROUPS = listOf(
         HomeGroupDef(MEDIA, "Médias", listOf("library", "downloads", "usb", "receive")),
