@@ -1,5 +1,6 @@
 package castbridge.server.activations;
 
+import castbridge.server.common.Times;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Timestamp;
@@ -158,10 +159,10 @@ public class Inventory {
         Set<String> flags = flagsOf((String) k.get("flags"));
         boolean seen = flags.contains(SEEN_ON_TV) || flags.contains(DELIVERED_BT);
         if (seen && replaced) return REPLACED;
-        Timestamp usageTo = (Timestamp) k.get("usage_to");
+        Timestamp usageTo = Times.ts(k.get("usage_to"));
         if (seen && usageTo != null && now.isAfter(usageTo.toInstant())) return ENDED;
         if (seen) return ACTIVATED;
-        Timestamp exp = (Timestamp) k.get("expires_at");
+        Timestamp exp = Times.ts(k.get("expires_at"));
         if (exp != null && now.isAfter(exp.toInstant())) return EXPIRED_UNUSED;
         return EMISE;
     }
@@ -183,7 +184,7 @@ public class Inventory {
         }
         boolean replaced = false;
         String tv = (String) k.get("tv_ref");
-        Timestamp issued = (Timestamp) k.get("issued_at");
+        Timestamp issued = Times.ts(k.get("issued_at"));
         Set<String> flags = flagsOf((String) k.get("flags"));
         if (tv != null && issued != null && (flags.contains(SEEN_ON_TV) || flags.contains(DELIVERED_BT))) {
             Integer newer = jdbc.queryForObject("SELECT COUNT(*) FROM act_key WHERE tv_ref = ? AND fp <> ? AND (flags LIKE '%,seen_on_tv,%' OR flags LIKE '%,delivered_bt,%') AND revoked_at IS NULL"
@@ -201,7 +202,7 @@ public class Inventory {
             default -> null;   // EMISE, EXPIRED_UNUSED, REVOKED: derived states, the cause has its own event
         };
         if (type != null) {
-            long at = ((Timestamp) (k.get("first_seen_tv_at") != null ? k.get("first_seen_tv_at") : k.get("delivered_bt_at") != null ? k.get("delivered_bt_at") : Timestamp.from(now))).getTime();
+            long at = Times.ms(k.get("first_seen_tv_at") != null ? k.get("first_seen_tv_at") : k.get("delivered_bt_at") != null ? k.get("delivered_bt_at") : now);
             log.append(new EventLog.NewEvent(type, type.equals("ACTIVATED") ? at : now.toEpochMilli(), fp, tv, (String) k.get("license_id"), (String) k.get("kid"), "JOB", "inventory", "RECONCILE", old,
                     "{\"state\":\"" + next + "\"}", "S:" + fp + ":" + type.charAt(0)));
         }

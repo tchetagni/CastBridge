@@ -1,5 +1,6 @@
 package castbridge.server.activations;
 
+import castbridge.server.common.Times;
 import castbridge.server.licenses.Actor;
 import castbridge.server.licenses.Hashing;
 import castbridge.server.web.ApiException;
@@ -104,7 +105,7 @@ public class Archiver {
                 List<Map<String, Object>> batch = jdbc.queryForList("SELECT * FROM " + table + " WHERE id > ? AND id <= ? ORDER BY id LIMIT 1000", after, maxOld);
                 if (batch.isEmpty()) break;
                 for (Map<String, Object> r : batch) {
-                    Timestamp at = (Timestamp) r.get(timeCol);
+                    Timestamp at = Times.ts(r.get(timeCol));
                     YearMonth m = YearMonth.from(at.toInstant().atZone(ZoneOffset.UTC));
                     if (month != null && !m.equals(month)) {
                         files.add(finish(table, month, bytes, gz, fromId, toId, fromAt, toAt, count, lastHash, remove));

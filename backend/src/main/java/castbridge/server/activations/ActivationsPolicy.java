@@ -40,7 +40,7 @@ public class ActivationsPolicy {
         return v;
     }
 
-    public List<Map<String, Object>> all() { return jdbc.queryForList("SELECT name, val, min_val, max_val, updated_at, updated_by FROM act_policy ORDER BY name"); }
+    public List<Map<String, Object>> all() { return jdbc.queryForList("SELECT name, val, min_val, max_val, updated_at, updated_by FROM act_policy ORDER BY name").stream().map(castbridge.server.common.Times::normalized).toList(); }
 
     @Transactional
     public void set(Actor actor, String name, int value) {

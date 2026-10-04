@@ -1,5 +1,6 @@
 package castbridge.server.activations;
 
+import castbridge.server.common.Times;
 import castbridge.server.licenses.DeviceIdentity;
 import castbridge.server.licenses.Envelope;
 import castbridge.server.licenses.Hashing;
@@ -270,7 +271,7 @@ public class ActivationObserver {
         boolean firstReport = old.get("last_report_at") == null;
         String edition = s.edition() == null || !EDITIONS.contains(s.edition()) ? "NONE" : s.edition();
         Timestamp usageTo = s.usageTo() == null ? null : new Timestamp(s.usageTo());
-        Timestamp openAll = maxTs((Timestamp) old.get("open_all_until"), s.openAllUntil()), unlock = maxTs((Timestamp) old.get("unlock_until"), s.unlockUntil());
+        Timestamp openAll = maxTs(Times.ts(old.get("open_all_until")), s.openAllUntil()), unlock = maxTs(Times.ts(old.get("unlock_until")), s.unlockUntil());
         int oldResets = ((Number) old.get("trial_resets")).intValue();
         int resets = Math.max(oldResets, Math.max(0, s.trialResets()));
         Integer oldCode = old.get("app_code") == null ? null : ((Number) old.get("app_code")).intValue();
@@ -285,8 +286,8 @@ public class ActivationObserver {
         }
         String after = "{\"edition\":\"" + edition + "\",\"usageTo\":" + (usageTo == null ? "null" : usageTo.getTime()) + ",\"super\":" + s.superFlag() + ",\"openAll\":" + (openAll == null ? "null" : openAll.getTime())
                 + ",\"unlock\":" + (unlock == null ? "null" : unlock.getTime()) + "}";
-        String before = "{\"edition\":\"" + old.get("edition") + "\",\"usageTo\":" + (old.get("usage_to") == null ? "null" : ((Timestamp) old.get("usage_to")).getTime()) + ",\"super\":false,\"openAll\":"
-                + (old.get("open_all_until") == null ? "null" : ((Timestamp) old.get("open_all_until")).getTime()) + ",\"unlock\":" + (old.get("unlock_until") == null ? "null" : ((Timestamp) old.get("unlock_until")).getTime()) + "}";
+        String before = "{\"edition\":\"" + old.get("edition") + "\",\"usageTo\":" + (old.get("usage_to") == null ? "null" : Times.ms(old.get("usage_to"))) + ",\"super\":false,\"openAll\":"
+                + (old.get("open_all_until") == null ? "null" : Times.ms(old.get("open_all_until"))) + ",\"unlock\":" + (old.get("unlock_until") == null ? "null" : Times.ms(old.get("unlock_until"))) + "}";
         boolean changed = !edition.equals(old.get("edition")) || !java.util.Objects.equals(usageTo, old.get("usage_to")) || !java.util.Objects.equals(openAll, old.get("open_all_until"))
                 || !java.util.Objects.equals(unlock, old.get("unlock_until"));
         if (!firstReport && changed) {

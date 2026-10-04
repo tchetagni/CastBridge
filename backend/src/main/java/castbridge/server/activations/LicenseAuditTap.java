@@ -1,5 +1,6 @@
 package castbridge.server.activations;
 
+import castbridge.server.common.Times;
 import java.sql.Timestamp;
 import java.util.List;
 import java.util.Map;
@@ -71,7 +72,7 @@ public class LicenseAuditTap {
         List<Map<String, Object>> rows = jdbc.queryForList("SELECT * FROM lic_ledger_import WHERE id > ? ORDER BY id LIMIT 200", cursor);
         for (Map<String, Object> r : rows) {
             long id = ((Number) r.get("id")).longValue();
-            eventLog.append(new EventLog.NewEvent("REGISTRY_IMPORT", ((Timestamp) r.get("imported_at")).getTime(), null, null, null, null, "ADMIN", (String) r.get("imported_by"), "REGISTRY", null,
+            eventLog.append(new EventLog.NewEvent("REGISTRY_IMPORT", Times.ms(r.get("imported_at")), null, null, null, null, "ADMIN", (String) r.get("imported_by"), "REGISTRY", null,
                     "{\"entries\":" + r.get("entries") + ",\"applied\":" + r.get("applied") + ",\"duplicates\":" + r.get("duplicates") + ",\"rejected\":" + r.get("rejected") + ",\"conflicts\":" + r.get("conflicts")
                             + ",\"sha\":\"" + ((String) r.get("sha256")).substring(0, 8) + "\"}", "RI:" + id));
             Cursors.set(jdbc, "lic_ledger_import", id);
@@ -87,7 +88,7 @@ public class LicenseAuditTap {
             String from = tvRef.ofOrNull((String) r.get("from_device_code")), to = tvRef.ofOrNull((String) r.get("to_device_code"));
             String kid = (String) r.get("signed_by");
             boolean imported = r.get("ledger_import_id") != null;
-            eventLog.append(new EventLog.NewEvent("TRANSFERRED", ((Timestamp) r.get("at")).getTime(), null, to, (String) r.get("wire"), kid, "TOOL", kid, imported ? "REGISTRY" : "LICENSE", null,
+            eventLog.append(new EventLog.NewEvent("TRANSFERRED", Times.ms(r.get("at")), null, to, (String) r.get("wire"), kid, "TOOL", kid, imported ? "REGISTRY" : "LICENSE", null,
                     "{\"seat\":\"" + r.get("seat_id") + "\",\"from\":" + (from == null ? "null" : "\"" + from + "\"") + ",\"to\":" + (to == null ? "null" : "\"" + to + "\"") + ",\"accepted\":" + r.get("accepted") + "}", "TF:" + id));
             Cursors.set(jdbc, "lic_transfer", id);
         }
@@ -100,7 +101,7 @@ public class LicenseAuditTap {
         Set<String> fps = new TreeSet<>(), tvs = new TreeSet<>(), kids = new TreeSet<>(), licenses = new TreeSet<>();
         for (Map<String, Object> r : rows) {
             long id = ((Number) r.get("id")).longValue();
-            Timestamp at = (Timestamp) r.get("revoked_at");
+            Timestamp at = Times.ts(r.get("revoked_at"));
             String by = (String) r.get("revoked_by"), kid = (String) r.get("kid"), license = (String) r.get("license_id"), seat = (String) r.get("seat_id");
             List<Map<String, Object>> hit;
             if (kid != null) {
@@ -131,7 +132,7 @@ public class LicenseAuditTap {
         for (Map<String, Object> r : rows) {
             long id = ((Number) r.get("id")).longValue();
             String action = (String) r.get("action"), license = (String) r.get("target_id"), actor = (String) r.get("actor");
-            long at = ((Timestamp) r.get("at")).getTime();
+            long at = Times.ms(r.get("at"));
             String details = (String) r.get("details");
             if (CHANGES.contains(action)) {
                 String state = switch (action) {

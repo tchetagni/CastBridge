@@ -1,5 +1,6 @@
 package castbridge.server.activations;
 
+import castbridge.server.common.Times;
 import castbridge.server.licenses.Actor;
 import castbridge.server.licenses.DeviceIdentity;
 import castbridge.server.licenses.LicenseProperties;
@@ -83,7 +84,7 @@ public class ActivationsAdminService {
         }
     }
 
-    private static Instant inst(Object t) { return t == null ? null : ((Timestamp) t).toInstant(); }
+    private static Instant inst(Object t) { return t == null ? null : Times.instant(t); }
 
     private static Timestamp ts(String ms) {
         try {
@@ -109,7 +110,7 @@ public class ActivationsAdminService {
 
     public String freshness(Object lastTs) {
         if (lastTs == null) return "never";
-        long age = clock.nowMs() - ((Timestamp) lastTs).getTime();
+        long age = clock.nowMs() - Times.ms(lastTs);
         return age < Duration.ofHours(26).toMillis() ? "fresh" : age < Duration.ofDays(7).toMillis() ? "stale" : "old";
     }
 
@@ -227,7 +228,7 @@ public class ActivationsAdminService {
             rows = rows.subList(0, limit);
             Map<String, Object> last = rows.get(limit - 1);
             Object sv = seen && last.get("last_seen_tv_at") != null ? last.get("last_seen_tv_at") : last.get("issued_at");
-            next = encode(Long.toString(sv == null ? 0 : ((Timestamp) sv).getTime()), (String) last.get("fp"));
+            next = encode(Long.toString(sv == null ? 0 : Times.ms(sv)), (String) last.get("fp"));
         }
         Map<String, String> memo = new java.util.HashMap<>();
         List<Map<String, Object>> items = new ArrayList<>();
@@ -340,7 +341,7 @@ public class ActivationsAdminService {
         m.put("freshness", freshness(r.get("last_report_at")));
         Object last = r.get("last_report_at");
         long silentDays = "PRODUCTION".equals(r.get("edition")) ? policy.get(ActivationsPolicy.SILENT_PRODUCTION_DAYS) : policy.get(ActivationsPolicy.SILENT_TRIAL_DAYS);
-        m.put("silent", last != null && clock.nowMs() - ((Timestamp) last).getTime() > Duration.ofDays(silentDays).toMillis());
+        m.put("silent", last != null && clock.nowMs() - Times.ms(last) > Duration.ofDays(silentDays).toMillis());
         return m;
     }
 
@@ -414,7 +415,7 @@ public class ActivationsAdminService {
         if (rows.size() > limit) {
             rows = rows.subList(0, limit);
             Map<String, Object> last = rows.get(limit - 1);
-            next = encode(last.get("last_report_at") == null ? "-" : Long.toString(((Timestamp) last.get("last_report_at")).getTime()), (String) last.get("tv_ref"));
+            next = encode(last.get("last_report_at") == null ? "-" : Long.toString(Times.ms(last.get("last_report_at"))), (String) last.get("tv_ref"));
         }
         List<Map<String, Object>> items = new ArrayList<>();
         for (Map<String, Object> r : rows) items.add(tvRow(r, false, forExport));
@@ -444,7 +445,7 @@ public class ActivationsAdminService {
         Object lic = keys.isEmpty() ? null : keys.get(0).get("license");
         if (lic != null) {
             List<Map<String, Object>> l = jdbc.queryForList("SELECT l.license_id, l.kind, l.state, l.start_at, l.end_at, l.grace_days, l.seats_allowed FROM lic_license l WHERE l.license_id = ?", lic);
-            if (!l.isEmpty()) out.put("license", l.get(0));
+            if (!l.isEmpty()) out.put("license", Times.normalized(l.get(0)));
         }
         return out;
     }
@@ -557,7 +558,7 @@ public class ActivationsAdminService {
             m.put("lastBatchSeq", t.get("last_batch_seq"));
             m.put("chainOk", t.get("chain_ok"));
             Object up = t.get("last_upload_at");
-            long age = up == null ? Long.MAX_VALUE : clock.nowMs() - ((Timestamp) up).getTime();
+            long age = up == null ? Long.MAX_VALUE : clock.nowMs() - Times.ms(up);
             m.put("freshness", up == null ? "none" : age < Duration.ofDays(7).toMillis() ? "fresh" : age < Duration.ofDays(14).toMillis() ? "stale" : "old");
         }
         for (Map<String, Object> m : byKid.values()) {
@@ -612,7 +613,7 @@ public class ActivationsAdminService {
         out.put("tvs", tvs);
         out.put("tools", toolRows());
         Timestamp since = Timestamp.from(now.minus(Duration.ofDays(30)));
-        out.put("daily", jdbc.queryForList("SELECT snap_day AS snapday, kind, tool, state, n FROM act_daily WHERE snap_day >= ? ORDER BY snap_day", new java.sql.Date(since.getTime())));
+        out.put("daily", jdbc.queryForList("SELECT snap_day AS snapday, kind, tool, state, n FROM act_daily WHERE snap_day >= ? ORDER BY snap_day", java.sql.Date.valueOf(since.toInstant().atZone(ZoneOffset.UTC).toLocalDate())).stream().map(Times::normalized).toList());
         return out;
     }
 
@@ -622,7 +623,13 @@ public class ActivationsAdminService {
         Map<String, Object> out = new LinkedHashMap<>();
         out.put("events", eventLog.verify());
         out.put("reads", readAudit.verify());
-        out.put("archives", jdbc.queryForList("SELECT table_name, file, sha256, row_count, removed, created_at FROM act_archive ORDER BY id DESC LIMIT 100"));
+        List<Map<String, Object>> archives = new ArrayList<>();
+        for (Map<String, Object> r : jdbc.queryForList("SELECT table_name, file, sha256, row_count, removed, created_at FROM act_archive ORDER BY id DESC LIMIT 100")) {
+            Map<String, Object> m = new LinkedHashMap<>(r);
+            m.put("created_at", inst(r.get("created_at")));
+            archives.add(m);
+        }
+        out.put("archives", archives);
         return out;
     }
 

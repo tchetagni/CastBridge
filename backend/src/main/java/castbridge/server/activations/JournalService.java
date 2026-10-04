@@ -1,5 +1,6 @@
 package castbridge.server.activations;
 
+import castbridge.server.common.Times;
 import castbridge.server.activations.JournalVerifier.Entry;
 import castbridge.server.activations.JournalVerifier.Status;
 import castbridge.server.licenses.Actor;
@@ -195,7 +196,7 @@ public class JournalService {
     private void closeGaps(String kid, long from, long to) {
         for (Map<String, Object> g : jdbc.queryForList("SELECT from_n, to_n, opened_at FROM act_journal_gap WHERE kid = ? AND from_n <= ? AND to_n >= ?", kid, to, from)) {
             long gf = ((Number) g.get("from_n")).longValue(), gt = ((Number) g.get("to_n")).longValue();
-            Timestamp opened = (Timestamp) g.get("opened_at");
+            Timestamp opened = Times.ts(g.get("opened_at"));
             jdbc.update("DELETE FROM act_journal_gap WHERE kid = ? AND from_n = ?", kid, gf);
             if (gf < from) jdbc.update("INSERT INTO act_journal_gap (kid, from_n, to_n, opened_at) VALUES (?,?,?,?)", kid, gf, from - 1, opened);
             if (gt > to) jdbc.update("INSERT INTO act_journal_gap (kid, from_n, to_n, opened_at) VALUES (?,?,?,?)", kid, to + 1, gt, opened);

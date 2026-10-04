@@ -1,5 +1,6 @@
 package castbridge.server.activations;
 
+import castbridge.server.common.Times;
 import java.sql.Timestamp;
 import java.time.Instant;
 import java.util.ArrayList;
@@ -78,7 +79,7 @@ public class IssuanceTap {
             last = id;
             String kid = (String) r.get("kid"), license = (String) r.get("license_id"), kind = ((String) r.get("kind")).toUpperCase(Locale.ROOT);
             String ref = tvRef.ofOrNull((String) r.get("device_code"));
-            Timestamp issued = (Timestamp) r.get("issued_at"), notAfter = (Timestamp) r.get("not_after"), notBefore = (Timestamp) r.get("not_before");
+            Timestamp issued = Times.ts(r.get("issued_at")), notAfter = Times.ts(r.get("not_after")), notBefore = Times.ts(r.get("not_before"));
             if (ref != null) inventory.ensureTv(ref, TvRef.canonical((String) r.get("device_code")));
             if ("SERVER".equals(r.get("source"))) {
                 String fp = (String) r.get("token_fingerprint");

@@ -1,5 +1,6 @@
 package castbridge.server.activations;
 
+import castbridge.server.common.Times;
 import java.sql.Timestamp;
 import java.util.LinkedHashMap;
 import java.util.Map;
@@ -12,8 +13,8 @@ final class Jsonl {
         Map<String, Object> m = new LinkedHashMap<>();
         if (table.equals("act_event")) {
             m.put("id", ((Number) r.get("id")).longValue());
-            m.put("atMs", ((Timestamp) r.get("at")).getTime());
-            m.put("recordedMs", ((Timestamp) r.get("recorded_at")).getTime());
+            m.put("atMs", Times.ms(r.get("at")));
+            m.put("recordedMs", Times.ms(r.get("recorded_at")));
             m.put("type", r.get("type"));
             m.put("fp", r.get("fp"));
             m.put("tvRef", r.get("tv_ref"));
@@ -27,7 +28,7 @@ final class Jsonl {
             m.put("idemKey", r.get("idem_key"));
         } else {
             m.put("id", ((Number) r.get("id")).longValue());
-            m.put("atMs", ((Timestamp) r.get("at")).getTime());
+            m.put("atMs", Times.ms(r.get("at")));
             m.put("actor", r.get("actor"));
             m.put("role", r.get("role"));
             m.put("channel", r.get("channel"));
