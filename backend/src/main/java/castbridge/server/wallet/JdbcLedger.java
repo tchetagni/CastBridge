@@ -64,16 +64,26 @@ public class JdbcLedger implements Ledger {
     @Override public Posted post(Txn txn) { return post(txn, "system", null, null); }
 
     /** {@code actor} : tv | play | admin:&lt;nom&gt; | system ; {@code holder} et {@code reason} sont de simples étiquettes d'audit (reason : motif de l'administrateur). */
-    public Posted post(Txn txn, String actor, String holder, String reason) { return attempt(txn, actor, holder, reason, true); }
+    public Posted post(Txn txn, String actor, String holder, String reason) { return attempt(txn, actor, holder, reason, true, null); }
+
+    /**
+     * Garde exécutée DANS la transaction de la pose, après les verrous, l'idempotence et le contrôle de découvert, avant toute écriture, JAMAIS sur un rejeu (audit w22-05, M2). Une exception
+     * ({@link castbridge.server.wallet.core.LedgerException}) annule TOUT, les écritures de la garde comprises ; un interblocage annule la transaction entière et la relance rejoue la garde.
+     * Elle sert à lier l'opération à un autre fait de la même base (code de réception consommé, plafond du jour relu sous le verrou du compte) sans second « commit ».
+     */
+    @FunctionalInterface
+    public interface InTx { void run(JdbcTemplate jdbc); }
+
+    public Posted post(Txn txn, String actor, String holder, String reason, InTx guard) { return attempt(txn, actor, holder, reason, true, guard); }
 
     /** Ceinture et bretelles : saute le contrôle de découvert du cœur pour prouver que le CHECK de la base refuse aussi, et que tout s'annule. Tests seulement. */
-    Posted postWithoutBalanceCheck(Txn txn) { return attempt(txn, "system", null, null, false); }
+    Posted postWithoutBalanceCheck(Txn txn) { return attempt(txn, "system", null, null, false, null); }
 
-    private Posted attempt(Txn txn, String actor, String holder, String reason, boolean checkBalances) {
+    private Posted attempt(Txn txn, String actor, String holder, String reason, boolean checkBalances, InTx guard) {
         RuntimeException last = null;
         for (int i = 0; i < MAX_ATTEMPTS; i++) {
             try {
-                return postOnce(txn, actor, holder, reason, checkBalances);
+                return postOnce(txn, actor, holder, reason, checkBalances, guard);
             } catch (ConcurrencyFailureException | DuplicateKeyException e) {
                 retries.incrementAndGet();
                 last = e;   // interblocage, délai de verrou ou course sur une clé unique : on recommence (la relecture voit le gagnant : rejeu ou conflit)
@@ -82,7 +92,7 @@ public class JdbcLedger implements Ledger {
         throw last;
     }
 
-    private Posted postOnce(Txn txn, String actor, String holder, String reason, boolean checkBalances) {
+    private Posted postOnce(Txn txn, String actor, String holder, String reason, boolean checkBalances, InTx guard) {
         TreeMap<AccountRef, Long> net = new TreeMap<>();
         for (Entry e : txn.entries()) net.merge(e.account(), e.amount(), Long::sum);
         Map<AccountRef, Long> ids = ensureAccounts(net.keySet());
@@ -110,6 +120,7 @@ public class JdbcLedger implements Ledger {
                     }
                 }
             }
+            if (guard != null) guard.run(jdbc);
             // 4. écritures : transaction, écritures immuables, soldes, blocages
             Timestamp now = Timestamp.from(clock.now());
             GeneratedKeyHolder key = new GeneratedKeyHolder();

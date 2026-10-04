@@ -2,6 +2,7 @@ package castbridge.server.wallet.ops;
 
 import castbridge.server.wallet.JdbcLedger;
 import castbridge.server.wallet.WalletModuleConfig;
+import castbridge.server.wallet.WalletPolicyService;
 import castbridge.server.wallet.core.Currency;
 import castbridge.server.wallet.core.LedgerException;
 import castbridge.server.wallet.core.Settlement;
@@ -36,18 +37,22 @@ public class SettleService {
     private final JdbcLedger ledger;
     private final JdbcTemplate jdbc;
     private final WalletModuleConfig.WalletClock clock;
+    private final WalletPolicyService policies;
 
-    public SettleService(PlayResultKeys keys, JdbcLedger ledger, JdbcTemplate jdbc, WalletModuleConfig.WalletClock clock) {
+    public SettleService(PlayResultKeys keys, JdbcLedger ledger, JdbcTemplate jdbc, WalletModuleConfig.WalletClock clock, WalletPolicyService policies) {
+        this.policies = policies;
         this.keys = keys;
         this.ledger = ledger;
         this.jdbc = jdbc;
         this.clock = clock;
     }
 
-    private record Row(String eid, String holder, Currency cur, Long per, Long k, long amount, String state, String settledRid) {}
+    private record Row(String eid, String holder, Currency cur, Long per, Long k, long amount, String state, String settledRid, String room) {}
 
     public Map<String, Object> settle(String token) {
         if (!keys.configured()) throw new ApiException(HttpStatus.SERVICE_UNAVAILABLE, "Règlement indisponible : aucune clé de service de jeu configurée");
+        // M3 : interrupteur à chaud (lu à chaque appel) : coupé, rien n'est réglé et le collecteur réessaie (503)
+        if (!policies.switches().settle()) throw new ApiException(HttpStatus.SERVICE_UNAVAILABLE, "Règlement suspendu pour maintenance : le résultat sera réessayé");
         PlayResultKeys.Result r = keys.verify(token);
         // 1. rejeu : même rid et même contenu = même réponse ; même rid et autre contenu = conflit
         List<String[]> prior = jdbc.query("SELECT sha, outcome FROM wallet_result WHERE rid = ?", (rs, i) -> new String[] {rs.getString("sha"), rs.getString("outcome")}, r.rid());
@@ -68,6 +73,7 @@ public class SettleService {
         for (Settlement.Line l : r.lines()) {
             Row row = rows.get(l.eid());
             if (row.cur() != r.cur()) throw new LedgerException(WalletReason.BAD_TXN, "Monnaie différente de celle du blocage : " + l.eid());
+            if (row.room() != null && !row.room().equals(r.room())) throw new LedgerException(WalletReason.BAD_TXN, "Salle différente de celle du blocage : " + l.eid());
             if (!row.holder().equals(l.id())) throw new LedgerException(WalletReason.BAD_TXN, "Titulaire différent de celui du blocage : " + l.eid());
             if (row.per() != null ? row.per() != r.per() : row.amount() % r.per() != 0) throw new LedgerException(WalletReason.BAD_TXN, "Mise par siège différente de celle du blocage : " + l.eid());
             long k = row.amount() / r.per();
@@ -85,10 +91,19 @@ public class SettleService {
             Row row = rows.get(l.eid());
             if (r.kind() == Settlement.Kind.ABORT && (l.used() != 0 || l.pay() != 0)) throw new LedgerException(WalletReason.BAD_TXN, "Un abandon ne déplace aucune valeur : " + l.eid());
             if (l.used() % r.per() != 0) throw new LedgerException(WalletReason.BAD_TXN, "Montant utilisé : un nombre entier de mises : " + l.eid());
+            if (l.pay() > 0 && l.used() == 0) throw new LedgerException(WalletReason.BAD_TXN, "Aucun siège de ce blocage n'a joué : rien à gagner : " + l.eid());   // F1
             escrows.add(new Settlement.Escrow(l.eid(), row.holder(), (int) (row.amount() / r.per()), row.amount()));
             lines.add(new Settlement.Line(l.eid(), l.id(), row.amount(), l.used(), l.pay()));
         }
         Settlement.check(lines, escrows);
+        // M3 : plafonds du règlement (une clé « résultat » compromise ne vide pas le serveur) ; le refus laisse une alerte, le collecteur réessaie ou l'administrateur tranche
+        long totalPay = 0;
+        for (Settlement.Line l : lines) totalPay += l.pay();
+        WalletPolicyService.SettleCaps caps = policies.settleCaps(r.cur());
+        if (totalPay > caps.perSettle()) throw capRefusal(r, "règlement de " + totalPay + " " + r.cur() + " au-dessus du plafond par règlement (" + caps.perSettle() + ")");
+        long paidToday = jdbc.queryForObject("SELECT COALESCE(SUM(paid), 0) FROM wallet_result WHERE cur = ? AND outcome = 'SETTLED' AND received_at >= ?", Long.class, r.cur().name(),
+                Timestamp.from(clock.now().minus(java.time.Duration.ofHours(24))));
+        if (paidToday + totalPay > caps.perDay()) throw capRefusal(r, "règlement de " + totalPay + " " + r.cur() + " : le plafond des dernières 24 h (" + caps.perDay() + ", déjà payé " + paidToday + ") serait dépassé");
         // 5. UNE transaction : le grand livre revérifie tout sous verrou (blocages ouverts, conservation) ; un rejeu concurrent y devient « replayed »
         try {
             ledger.post(Txn.settle(r.rid(), lines, r.cur()), "play", null, null);
@@ -101,14 +116,19 @@ public class SettleService {
             }
             throw e;
         }
-        remember(r, r.kind() == Settlement.Kind.ABORT ? "ABORT" : "SETTLED");
+        remember(r, r.kind() == Settlement.Kind.ABORT ? "ABORT" : "SETTLED", totalPay);
+        for (Settlement.Line l : lines) {
+            if (l.pay() > 2 * l.used() && l.pay() > caps.alert()) {
+                alert("SETTLE_GAIN", r.rid(), "gain anormal : " + l.id() + " gagne " + l.pay() + " " + r.cur() + " pour une mise utilisée de " + l.used() + " (partie " + r.room() + ")");
+            }
+        }
         return response(r);
     }
 
     private Row load(String eid) {
-        List<Row> l = jdbc.query("SELECT eid, holder, cur, per, k, amount, state, settled_rid FROM wallet_escrow WHERE eid = ?",
+        List<Row> l = jdbc.query("SELECT eid, holder, cur, per, k, amount, state, settled_rid, room FROM wallet_escrow WHERE eid = ?",
                 (rs, i) -> new Row(rs.getString("eid"), rs.getString("holder"), Currency.valueOf(rs.getString("cur")), nullableLong(rs, "per"), nullableLong(rs, "k"),
-                        rs.getLong("amount"), rs.getString("state"), rs.getString("settled_rid")), eid);
+                        rs.getLong("amount"), rs.getString("state"), rs.getString("settled_rid"), rs.getString("room")), eid);
         return l.isEmpty() ? null : l.get(0);
     }
 
@@ -117,9 +137,28 @@ public class SettleService {
         return rs.wasNull() ? null : v;
     }
 
-    private void remember(PlayResultKeys.Result r, String outcome) {
+    private ApiException capRefusal(PlayResultKeys.Result r, String detail) {
+        alert("SETTLE_CAP", r.rid(), detail + " (partie " + r.room() + ")");
+        return new ApiException(HttpStatus.CONFLICT, "Règlement refusé : plafond atteint, vérification de l'administrateur requise", List.of("SETTLE_CAP"));
+    }
+
+    /** Une entrée d'alerte pour l'administrateur (une seule par genre et par résultat : le collecteur peut réessayer sans la dupliquer) et une ligne de journal. */
+    private void alert(String kind, String rid, String detail) {
+        log.warn("wallet : ALERTE {} rid={} : {}", kind, rid, detail);
         try {
-            jdbc.update("INSERT INTO wallet_result (rid, sha, kind, received_at, outcome) VALUES (?, ?, ?, ?, ?)", r.rid(), r.sha(), r.kind().name(), Timestamp.from(clock.now()), outcome);
+            if (jdbc.queryForObject("SELECT COUNT(*) FROM wallet_alert WHERE kind = ? AND ref = ?", Long.class, kind, rid) > 0) return;
+            jdbc.update("INSERT INTO wallet_alert (at, kind, ref, detail) VALUES (?, ?, ?, ?)", Timestamp.from(clock.now()), kind, rid, detail.length() > 400 ? detail.substring(0, 400) : detail);
+        } catch (RuntimeException e) {
+            log.error("wallet : alerte non inscrite ({})", e.toString());   // une alerte perdue ne doit pas défaire un règlement exact
+        }
+    }
+
+    private void remember(PlayResultKeys.Result r, String outcome) { remember(r, outcome, 0); }
+
+    private void remember(PlayResultKeys.Result r, String outcome, long paid) {
+        try {
+            jdbc.update("INSERT INTO wallet_result (rid, sha, kind, received_at, outcome, cur, paid) VALUES (?, ?, ?, ?, ?, ?, ?)", r.rid(), r.sha(), r.kind().name(), Timestamp.from(clock.now()), outcome,
+                    r.cur().name(), paid);
         } catch (DuplicateKeyException e) {
             // un autre fil l'a déjà noté : même résultat
         }

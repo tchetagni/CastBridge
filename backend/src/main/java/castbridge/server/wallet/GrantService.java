@@ -173,7 +173,8 @@ public class GrantService {
                 if (open) repo.markOpenedUnlimited(identity);
             }
         }
-        repo.touchSync(identity, st.ed(), now);
+        Instant trialEnd = reading.spans().stream().filter(sp -> sp.edition() == Edition.TRIAL && sp.endExclusive() != null).map(EditionSpan::endExclusive).max(Instant::compareTo).orElse(null);
+        repo.touchSync(identity, st.ed(), reading.superKey(), trialEnd, now);
         return new Outcome(identity, st.withAnchor(anchor), granted, row.apiDeviceId() != apiDeviceId);
     }
 

@@ -69,7 +69,10 @@ CREATE TABLE wallet_identity (
     install_pub      VARCHAR(64)  CHARACTER SET ascii COLLATE ascii_bin NULL,
     -- seq de cbw1 = dernière écriture + snap_bump ; snap_bump croît à chaque changement d'un champ signé hors écritures (fin d'essai, gel, interrupteurs de mise) ; snap_digest = condensé des champs signés (M4)
     snap_bump        BIGINT       NOT NULL DEFAULT 0,
-    snap_digest      CHAR(64)     CHARACTER SET ascii COLLATE ascii_bin NULL
+    snap_digest      CHAR(64)     CHARACTER SET ascii COLLATE ascii_bin NULL,
+    -- droits de mise : jamais déduits de `edition` (étiquette d'affichage). super_key = clé « super » lue à la dernière synchronisation ; trial_end_at = fin du dernier intervalle d'essai lu dans cbx1 (audit w22-05, E1)
+    super_key        BOOLEAN      NOT NULL DEFAULT FALSE,
+    trial_end_at     DATETIME(6)  NULL
 );
 CREATE INDEX ix_wallet_identity_device ON wallet_identity (api_device_id);
 
@@ -116,6 +119,8 @@ CREATE TABLE wallet_escrow (
     cur         VARCHAR(5)   CHARACTER SET ascii COLLATE ascii_bin NOT NULL,
     per         BIGINT       NULL,
     k           INT          NULL,
+    -- salle déclarée au blocage (hors format signé cbe1) : le règlement doit citer la même (audit w22-05, M3/M4)
+    room        VARCHAR(32)  CHARACTER SET ascii COLLATE ascii_bin NULL,
     amount      BIGINT       NOT NULL,
     state       VARCHAR(8)   NOT NULL DEFAULT 'OPEN',
     exp_at      DATETIME(6)  NULL,
@@ -134,16 +139,34 @@ CREATE TABLE wallet_result (
     sha         CHAR(64)    NOT NULL,
     kind        VARCHAR(8)  NOT NULL,
     received_at DATETIME(6) NOT NULL,
-    outcome     VARCHAR(24) NULL
+    outcome     VARCHAR(24) NULL,
+    -- monnaie et total payé du règlement : plafond du jour et alerte de gain anormal (audit w22-05, M3)
+    cur         VARCHAR(5)  NULL,
+    paid        BIGINT      NULL
 );
+CREATE INDEX ix_wallet_result_received ON wallet_result (received_at);
+
+-- alertes d'exploitation du portefeuille (gain anormal au règlement, etc.) : lues par l'administrateur, jamais effacées par l'API
+CREATE TABLE wallet_alert (
+    id         BIGINT AUTO_INCREMENT PRIMARY KEY,
+    at         DATETIME(6)  NOT NULL,
+    kind       VARCHAR(24)  NOT NULL,
+    ref        VARCHAR(64)  NULL,
+    detail     VARCHAR(400) NOT NULL
+);
+CREATE INDEX ix_wallet_alert_at ON wallet_alert (at);
 
 -- codes de réception de transfert (w22-05)
 CREATE TABLE wallet_recv_code (
     code    VARCHAR(12) CHARACTER SET ascii COLLATE ascii_bin NOT NULL PRIMARY KEY,
     holder  VARCHAR(24) CHARACTER SET ascii COLLATE ascii_bin NOT NULL,
     exp_at  DATETIME(6) NOT NULL,
-    used_at DATETIME(6) NULL
+    used_at DATETIME(6) NULL,
+    -- clé du transfert qui a consommé le code (lien code <-> transfert, audit) ; posée dans la transaction du transfert (audit w22-05, M2)
+    used_key VARCHAR(200) CHARACTER SET ascii COLLATE ascii_bin NULL
 );
+CREATE INDEX ix_wallet_recv_code_holder ON wallet_recv_code (holder, used_at, exp_at);
+CREATE INDEX ix_wallet_recv_code_exp ON wallet_recv_code (exp_at);
 
 -- politique d'exploitation : toutes les valeurs ont des bornes vérifiées à l'écriture (jamais dans le code)
 CREATE TABLE wallet_policy (
@@ -203,6 +226,19 @@ INSERT INTO wallet_policy (name, val, min_value, max_value, updated_at, updated_
     ('switch.transfer', 1, 0, 1, CURRENT_TIMESTAMP(6), 'migration'),
     ('switch.convert', 1, 0, 1, CURRENT_TIMESTAMP(6), 'migration'),
     ('switch.vouchers', 1, 0, 1, CURRENT_TIMESTAMP(6), 'migration'),
+    ('switch.settle', 1, 0, 1, CURRENT_TIMESTAMP(6), 'migration'),
+    ('settle.maxPerSettle.NDEM', 20000, 1, 1000000000000, CURRENT_TIMESTAMP(6), 'migration'),
+    ('settle.maxPerSettle.MBOKO', 1000, 1, 1000000000000, CURRENT_TIMESTAMP(6), 'migration'),
+    ('settle.dailyMax.NDEM', 5000000, 1, 1000000000000, CURRENT_TIMESTAMP(6), 'migration'),
+    ('settle.dailyMax.MBOKO', 50000, 1, 1000000000000, CURRENT_TIMESTAMP(6), 'migration'),
+    ('settle.alert.NDEM', 200000, 1, 1000000000000, CURRENT_TIMESTAMP(6), 'migration'),
+    ('settle.alert.MBOKO', 200, 1, 1000000000000, CURRENT_TIMESTAMP(6), 'migration'),
+    ('transfer.trial.dailyCap.NDEM', 1000, 0, 1000000000, CURRENT_TIMESTAMP(6), 'migration'),
+    ('transfer.trial.dailyCap.MBOKO', 0, 0, 1000000000, CURRENT_TIMESTAMP(6), 'migration'),
+    ('transfer.trial.minAgeHours', 72, 0, 8760, CURRENT_TIMESTAMP(6), 'migration'),
+    ('transfer.trial.maxDonors', 3, 1, 1000, CURRENT_TIMESTAMP(6), 'migration'),
+    ('transfer.trial.pairCap.NDEM', 5000, 0, 1000000000, CURRENT_TIMESTAMP(6), 'migration'),
+    ('transfer.trial.pairCap.MBOKO', 50, 0, 1000000000, CURRENT_TIMESTAMP(6), 'migration'),
     ('admin.grantMax.NDEM', 10000, 1, 1000000000, CURRENT_TIMESTAMP(6), 'migration'),
     ('admin.grantMax.MBOKO', 100, 1, 1000000000, CURRENT_TIMESTAMP(6), 'migration'),
     ('admin.dailyMax.NDEM', 100000, 1, 1000000000, CURRENT_TIMESTAMP(6), 'migration'),

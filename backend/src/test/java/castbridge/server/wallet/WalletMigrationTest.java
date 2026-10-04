@@ -15,7 +15,7 @@ import org.springframework.jdbc.datasource.DriverManagerDataSource;
 
 /** V62 (renumérotée depuis V63 avant tout déploiement : « plus haut existant + 1 », aucun numéro réservé) s'applique sur une base vide ET sur une base au niveau V61 ; {@code rollback-V62.sql} la retire. */
 class WalletMigrationTest {
-    static final List<String> TABLES = List.of("wallet_account", "wallet_balance", "wallet_txn", "wallet_entry", "wallet_identity", "wallet_escrow", "wallet_result", "wallet_recv_code",
+    static final List<String> TABLES = List.of("wallet_account", "wallet_balance", "wallet_txn", "wallet_entry", "wallet_identity", "wallet_escrow", "wallet_result", "wallet_recv_code", "wallet_alert",
             "wallet_policy", "wallet_voucher_batch", "wallet_voucher", "wallet_license_claim", "wallet_license_span", "wallet_admin_grant");
 
     private static DriverManagerDataSource db() {

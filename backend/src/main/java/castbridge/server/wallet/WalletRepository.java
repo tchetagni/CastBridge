@@ -23,7 +23,7 @@ public class WalletRepository {
 
     // ---- identités ----
 
-    public record Identity(String holder, long apiDeviceId, Instant anchorAt, boolean openedUnlimited, String edition, Instant lastSyncAt, boolean frozen, String frozenReason, String installPub) {}
+    public record Identity(String holder, long apiDeviceId, Instant anchorAt, boolean openedUnlimited, String edition, Instant lastSyncAt, boolean frozen, String frozenReason, String installPub, boolean superKey, Instant trialEndAt) {}
 
     private static Instant instant(java.sql.ResultSet rs, String col) throws java.sql.SQLException {
         Timestamp t = rs.getTimestamp(col);
@@ -31,9 +31,9 @@ public class WalletRepository {
     }
 
     public Optional<Identity> identity(String holder) {
-        return jdbc.query("SELECT holder, api_device_id, anchor_at, opened_unlimited, edition, last_sync_at, frozen, frozen_reason, install_pub FROM wallet_identity WHERE holder = ?",
+        return jdbc.query("SELECT holder, api_device_id, anchor_at, opened_unlimited, edition, last_sync_at, frozen, frozen_reason, install_pub, super_key, trial_end_at FROM wallet_identity WHERE holder = ?",
                 (rs, i) -> new Identity(rs.getString("holder"), rs.getLong("api_device_id"), instant(rs, "anchor_at"), rs.getBoolean("opened_unlimited"), rs.getString("edition"),
-                        instant(rs, "last_sync_at"), rs.getBoolean("frozen"), rs.getString("frozen_reason"), rs.getString("install_pub")), holder).stream().findFirst();
+                        instant(rs, "last_sync_at"), rs.getBoolean("frozen"), rs.getString("frozen_reason"), rs.getString("install_pub"), rs.getBoolean("super_key"), instant(rs, "trial_end_at")), holder).stream().findFirst();
     }
 
     /** L'identité (la plus récemment ouverte) liée à cet appareil API, s'il en a une. */
@@ -59,8 +59,10 @@ public class WalletRepository {
 
     public void markOpenedUnlimited(String holder) { jdbc.update("UPDATE wallet_identity SET opened_unlimited = TRUE WHERE holder = ?", holder); }
 
-    public void touchSync(String holder, String edition, Instant now) {
-        jdbc.update("UPDATE wallet_identity SET edition = ?, last_sync_at = ? WHERE holder = ?", edition, Timestamp.from(now), holder);
+    /** {@code edition} n'est qu'une étiquette d'affichage ; les DROITS de mise viennent de {@code superKey} et {@code trialEnd} (fin du dernier essai lu, ou null), jamais de l'étiquette (audit w22-05, E1). */
+    public void touchSync(String holder, String edition, boolean superKey, Instant trialEnd, Instant now) {
+        jdbc.update("UPDATE wallet_identity SET edition = ?, super_key = ?, trial_end_at = ?, last_sync_at = ? WHERE holder = ?", edition, superKey, trialEnd == null ? null : Timestamp.from(trialEnd),
+                Timestamp.from(now), holder);
     }
 
     /** Clés d'idempotence des attributions déjà inscrites pour cette identité (le calcul paresseux n'en inscrit jamais deux fois). */

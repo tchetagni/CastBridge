@@ -14,12 +14,19 @@ import org.springframework.web.filter.OncePerRequestFilter;
 
 /**
  * One log line per request: method, path (never the query string, which carries device ids), status, duration.
- * No headers (the admin token), no IP address.
+ * No headers (the admin token), no IP address. Paths that carry a secret-ish value are redacted ({@link #redact}): the wallet receive code (audit w22-05, F4).
  */
 @Component
 @Order(Ordered.HIGHEST_PRECEDENCE)
 public class AccessLogFilter extends OncePerRequestFilter {
     private static final Logger log = LoggerFactory.getLogger("castbridge.access");
+
+    private static final String RECEIVE_CODE = "/api/v1/wallet/receive-code/";
+
+    /** Le code de réception est dans le chemin de la consultation : il ne doit figurer dans aucun journal. */
+    static String redact(String uri) {
+        return uri != null && uri.startsWith(RECEIVE_CODE) && uri.length() > RECEIVE_CODE.length() ? RECEIVE_CODE + "{code}" : uri;
+    }
 
     @Override
     protected boolean shouldNotFilter(HttpServletRequest req) {
@@ -33,7 +40,7 @@ public class AccessLogFilter extends OncePerRequestFilter {
         try {
             chain.doFilter(req, res);
         } finally {
-            log.info("{} {} {} {}ms", req.getMethod(), req.getRequestURI(), res.getStatus(), (System.nanoTime() - start) / 1_000_000);
+            log.info("{} {} {} {}ms", req.getMethod(), redact(req.getRequestURI()), res.getStatus(), (System.nanoTime() - start) / 1_000_000);
         }
     }
 }

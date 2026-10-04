@@ -62,6 +62,11 @@ public class PlayResultKeys {
 
     public boolean configured() { return !keys.isEmpty(); }
 
+    /** Erreur d'exploitation (audit w22-05, F10) : la clé « résultat » ne doit jamais être la clé « portefeuille » (la séparation de domaine protège, mais on le détecte au démarrage). */
+    public void assertNotWalletKey(String walletKid) {
+        if (walletKid != null && keys.containsKey(walletKid)) throw new IllegalStateException("castbridge.wallet.play-result-pubkeys contient la clé « portefeuille » : trois clés distinctes sont exigées");
+    }
+
     public Set<String> kids() { return keys.keySet(); }
 
     private static ApiException bad(String why) { return new ApiException(HttpStatus.BAD_REQUEST, "Résultat illisible : " + why, List.of("RESULT_BAD")); }

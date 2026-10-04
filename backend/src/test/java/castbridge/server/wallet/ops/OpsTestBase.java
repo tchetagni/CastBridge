@@ -78,6 +78,13 @@ public abstract class OpsTestBase extends WalletTestBase {
         return tv;
     }
 
+    /** TV d'essai dont le compte est ouvert depuis plus de 72 h (les transferts d'un essai s'ouvrent après 72 h, audit w22-05 M5). */
+    protected Tv agedTrialTv() throws Exception {
+        Tv tv = trialTv();
+        jdbc.update("UPDATE wallet_identity SET created_at = ? WHERE holder = ?", Timestamp.from(T0.minusSeconds(100L * 3600)), tv.code());
+        return tv;
+    }
+
     /** TV de production : activation de production (identité seulement) + LICENCE du serveur (sans fin si {@code end} est null). */
     protected Tv productionTv(Instant end, int graceDays, String state) throws Exception {
         String auth = registerTv();
@@ -144,7 +151,10 @@ public abstract class OpsTestBase extends WalletTestBase {
     protected Reply escrow(Tv tv, String cur, long per, int k, String idem) throws Exception { return escrowAs(tv, tv.auth(), cur, per, k, idem); }
 
     protected Reply escrowAs(Tv tv, String auth, String cur, long per, int k, String idem) throws Exception {
-        return postJson(auth, "/api/v1/wallet/escrow", req(tv).put("cur", cur).put("per", per).put("k", k).put("idem", idem));
+        ObjectNode body = req(tv).put("cur", cur).put("per", per).put("k", k).put("idem", idem);
+        ArrayNode acts = body.putArray("activations");
+        tv.activations().forEach(acts::add);
+        return postJson(auth, "/api/v1/wallet/escrow", body);
     }
 
     protected Reply convert(Tv tv, String dir, long q, String idem) throws Exception {
