@@ -14,7 +14,16 @@ import android.widget.FrameLayout
 import android.widget.LinearLayout
 import android.widget.ProgressBar
 import android.widget.TextView
+import castbridge.core.tv.AudioTuning
+import castbridge.core.tv.Bookmarks
 import castbridge.core.tv.Chapter
+import castbridge.core.tv.LoopAB
+import castbridge.core.tv.PerformanceGuard
+import castbridge.core.tv.PictureTuning
+import castbridge.core.tv.PlayerSeek
+import castbridge.core.tv.PlayerSettings
+import castbridge.core.tv.SleepTimer
+import castbridge.core.tv.SubtitleStyle
 import castbridge.core.tv.LibraryDb
 import castbridge.core.tv.LibraryLogic
 import castbridge.core.tv.PlayerCommand
@@ -48,18 +57,49 @@ class PlayerExtras(private val db: () -> LibraryDb?, private val prefs: TvPrefs,
     var eqPreset = -1; private set
     private var applied = false
 
+    // ---- wtv-01 : options multimédia (règles pures dans core/tv ; ici seulement les appels libVLC et la mémoire locale) ----
+    /** Réglages par défaut (image, son, sous-titres) : ce que suit tout fichier qui n'a pas son propre réglage. */
+    var defaults = PlayerPrefs(); private set
+    val eff: PlayerPrefs get() = p.resolved(defaults)
+    var loop = LoopAB(); private set
+    var sleep: SleepTimer? = null; private set
+    val guard = PerformanceGuard()
+    /** La garde de performance a coupé les filtres d'image de CE fichier (le réglage enregistré reste, le fichier se rouvre sans filtre). */
+    var filtersCut = false; private set
+    /** Vrai tant que la garde n'a pas pris ses compteurs de départ (l'activité les lui donne au prochain relevé de statistiques). */
+    var guardPending = true
+    /** Applique zoom / déplacement / rotation à la vue vidéo (donné par l'activité). */
+    var viewApply: (PictureTuning.ViewTransform) -> Unit = {}
+    val autoNext: Boolean get() = prefs.getBool("auto_next", true)
+    val skipStepSec: Int get() = PlayerSeek.step(prefs.getString("skip_step", null)?.toIntOrNull() ?: PlayerSeek.DEFAULT_STEP_S)
+
+    fun picture(): PictureTuning = (eff.picture ?: PictureTuning()).let { if (filtersCut) it.withoutFilters() else it }
+    fun audioTuning(): AudioTuning = eff.audioTuning ?: AudioTuning()
+    fun subStyle(): SubtitleStyle = eff.subStyle ?: SubtitleStyle()
+    /** Options libVLC de ce fichier : filtres d'image (aucun par défaut) et mode nuit. */
+    fun mediaOptions(): List<String> = picture().mediaOptions() + audioTuning().filterOptions()
+    /** Options du moteur de sous-titres (créé avec le lecteur) ; vides pour le style d'origine. */
+    fun subtitleOptions(panelHeightPx: Int): List<String> = subStyle().options(panelHeightPx)
+    fun applyView() { runCatching { val (w, h) = panel(); viewApply(picture().viewTransform(w, h)) } }
+    fun cutFilters() { filtersCut = true }
+    fun clearSleep() { sleep = null }
+    fun settingsState(posMs: Long, durMs: Long, nowMs: Long) = PlayerSettings.State(p, defaults, skipStepSec, autoNext, sleep?.countdown(nowMs, posMs, durMs), loop, fitDefaultKey())
+    fun setDefaults(d: PlayerPrefs) { defaults = d; prefs.putString("player_defaults", d.encode()) }
+
     /** A new file starts (or the same one re-opens: its in-memory choices are kept). [dir] = its folder, for subtitle files. */
     fun load(fileName: String, fileSize: Long, dir: File?) {
-        val k = "$fileSize:$fileName"
+        val k = PlayerPrefs.fileKey(fileName, fileSize)
         if (k != key) {
             key = k; name = fileName; size = fileSize; hwOverride = null
             p = PlayerPrefs.decode(db()?.get(fileName, fileSize)?.prefs)
+            loop = LoopAB(); filtersCut = false; guardPending = true; viewApply(PictureTuning().viewTransform(1, 1))
         }
+        defaults = PlayerPrefs.decode(prefs.getString("player_defaults"))
         extSubs = dir?.list()?.let { SubtitleFinder.find(fileName, it.toList()).map { n -> File(dir, n) } }.orEmpty()
         applied = false
     }
 
-    fun forget() { key = null; extSubs = emptyList() }
+    fun forget() { key = null; extSubs = emptyList(); loop = LoopAB(); runCatching { viewApply(PictureTuning().viewTransform(1, 1)) } }
 
     fun hwMode(): String = hwOverride ?: prefs.getString("hw_mode", "auto") ?: "auto"
     /** (enabled, force) for Media.setHWDecoderEnabled. */
@@ -92,7 +132,10 @@ class PlayerExtras(private val db: () -> LibraryDb?, private val prefs: TvPrefs,
             if (p.audioDelayMs != 0L) mp.setAudioDelay(p.audioDelayMs * 1000)
             if (p.rate != 1f) mp.setRate(p.rate)
             if (eqPreset >= 0) mp.setEqualizer(MediaPlayer.Equalizer.createFromPreset(eqPreset))
+            val g = audioTuning().gainPercent
+            if (g != 100) mp.setVolume(g)
         }
+        applyView()
     }
 
     // ---- Affichage (VideoFit): « Ajusté à l'écran » par défaut, réglage par fichier ou global ; calcul pur dans core, ici seulement les appels libVLC ----
@@ -204,6 +247,43 @@ class PlayerExtras(private val db: () -> LibraryDb?, private val prefs: TvPrefs,
                     mp.setEqualizer(if (c.preset < 0) null else MediaPlayer.Equalizer.createFromPreset(c.preset)); Result.Done
                 }
             }
+            else -> applyOptions(mp, c, android.os.SystemClock.elapsedRealtime())
+        }
+    }
+
+    /** Les groupes d'image / son / sous-titres de CE fichier : toujours enregistrés comme choix explicite (null = « comme le réglage par défaut »). */
+    private fun pictureNow() = eff.picture ?: PictureTuning()
+
+    private fun applyOptions(mp: MediaPlayer, c: PlayerCommand, now: Long): Result = when (c) {
+        is PlayerCommand.Sleep -> { sleep = if (c.choice < 0) null else SleepTimer.choice(c.choice, now); Result.Done }
+        is PlayerCommand.LoopAb -> { loop = if (c.clear) LoopAB() else loop.press(mp.time); Result.Done }
+        is PlayerCommand.BookmarkAdd -> { val b = p.bookmarks.add(mp.time); if (b == p.bookmarks) Result.Failed else { update { it.copy(bookmarks = b) }; Result.Done } }
+        is PlayerCommand.BookmarkGo -> p.bookmarks.marksMs.getOrNull(c.index)?.let { mp.setTime(it); Result.Done } ?: Result.Failed
+        is PlayerCommand.BookmarkDelete -> { update { it.copy(bookmarks = it.bookmarks.remove(c.index)) }; Result.Done }
+        is PlayerCommand.PictureField -> {
+            val was = pictureNow(); val n = PictureTuning.set(was, c.field, c.value)
+            update { it.copy(picture = n) }; filtersCut = false; guardPending = true
+            if (n.mediaOptions() != was.mediaOptions()) Result.Reopen else { applyView(); Result.Done }
+        }
+        is PlayerCommand.PictureDeinterlace -> { update { it.copy(picture = pictureNow().copy(deinterlace = c.on)) }; filtersCut = false; guardPending = true; Result.Reopen }
+        is PlayerCommand.PictureRotation -> { update { it.copy(picture = PictureTuning.withRotation(pictureNow(), c.degrees)) }; applyView(); Result.Done }
+        is PlayerCommand.PictureReset -> { update { it.copy(picture = PictureTuning()) }; filtersCut = false; Result.Reopen }
+        is PlayerCommand.AudioNight -> { update { it.copy(audioTuning = audioTuning().copy(night = c.on)) }; Result.Reopen }
+        is PlayerCommand.AudioGain -> { val n = audioTuning().copy(gainPercent = AudioTuning.clampGain(c.percent)); update { it.copy(audioTuning = n) }; mp.setVolume(n.volume()); Result.Done }
+        is PlayerCommand.AudioKeepPitch -> { update { it.copy(audioTuning = audioTuning().copy(keepPitch = c.on)) }; Result.Reopen }
+        is PlayerCommand.SubStyleSet -> { update { it.copy(subStyle = c.style) }; if (wantsSpu()) Result.Reopen else Result.Done }
+        is PlayerCommand.AutoNext -> { prefs.putBool("auto_next", c.on); Result.Done }
+        is PlayerCommand.SkipStep -> { prefs.putString("skip_step", PlayerSeek.step(c.seconds).toString()); Result.Done }
+        else -> Result.Failed
+    }
+
+    /** Actions de l'écran « Réglages du lecteur » qui touchent à la mémoire des groupes (« comme le réglage par défaut », « enregistrer comme défaut »). */
+    fun settingsAction(id: String, posMs: Long, durMs: Long, nowMs: Long): Result? {
+        val st = settingsState(posMs, durMs, nowMs)
+        return when (id) {
+            "pic_default", "au_default", "st_default" -> { p = PlayerSettings.reset(st, id).file; persist(); filtersCut = false; Result.Reopen }
+            "pic_save", "au_save", "st_save" -> { setDefaults(PlayerSettings.saveDefault(st, id).defaults); Result.Done }
+            else -> null
         }
     }
 
@@ -247,7 +327,9 @@ class PlayerExtras(private val db: () -> LibraryDb?, private val prefs: TvPrefs,
         return PlayerTracks(audio, mp.audioTrack, subs, if (spu) mp.spuTrack else -1, extSubs.map { it.name },
             mp.spuDelay / 1000, mp.audioDelay / 1000, p.subScale, mp.rate, p.aspect, chapters, runCatching { mp.chapter }.getOrDefault(-1),
             runCatching { mp.titles?.size ?: 0 }.getOrDefault(0), runCatching { mp.title }.getOrDefault(-1), hwMode(), video, audioCodec, eqPreset, presets,
-            fit = fitMode().key, fitFile = p.fit, fitDefault = fitDefaultKey())
+            fit = fitMode().key, fitFile = p.fit, fitDefault = fitDefaultKey(),
+            sleep = sleep?.countdown(android.os.SystemClock.elapsedRealtime(), mp.time, durMs), loopA = loop.aMs ?: -1, loopB = loop.bMs ?: -1,
+            bookmarks = p.bookmarks.marksMs, picture = eff.picture ?: PictureTuning(), audioTuning = audioTuning(), subStyle = subStyle(), autoNext = autoNext, skipStep = skipStepSec)
     }
 }
 
@@ -263,11 +345,15 @@ class PlayerPanel(private val act: Activity, private val api: Api) {
         fun repeat(mode: String): Boolean
         fun info(): String
         fun flash(msg: String)
+        /** wtv-01 : l'état de l'écran « Réglages du lecteur » et l'exécution de ses lignes d'action. */
+        fun settingsState(): PlayerSettings.State
+        fun settingsAction(id: String)
     }
 
     fun show() {
         val t = api.tracks() ?: return
         val items = ArrayList<Pair<String, () -> Unit>>()
+        items += "Réglages du lecteur : image, son, sous-titres, minuteur…" to { settings() }
         val audioName = t.audio.firstOrNull { it.id == t.audioId }?.name ?: "—"
         if (t.audio.size > 1) items += "Piste audio : $audioName" to { audioPick(t) }
         val subName = t.subtitles.firstOrNull { it.id == t.subtitleId && it.id >= 0 }?.name ?: "Désactivés"
@@ -311,6 +397,82 @@ class PlayerPanel(private val act: Activity, private val api: Api) {
         AlertDialog.Builder(act).setTitle("Réglages de lecture")
             .setItems(items.map { it.first }.toTypedArray()) { _, w -> items[w].second() }
             .setNegativeButton("Fermer", null).show()
+    }
+
+    /**
+     * « Réglages du lecteur » (wtv-01 n°10) : une seule liste par rubriques (Lecture, Image, Son, Sous-titres, Affichage), HAUT/BAS pour se déplacer,
+     * GAUCHE/DROITE pour changer la valeur (OK change aussi, vers la droite), OK sur une action l'exécute. Le modèle est pur (`PlayerSettings`) ; ici seulement la vue.
+     */
+    fun settings(selected: Int = 1) {
+        class Item(val row: PlayerSettings.Row?, val header: String?)
+        fun build(): List<Item> {
+            val out = ArrayList<Item>(); var last: PlayerSettings.Section? = null
+            for (r in PlayerSettings.rows(api.settingsState())) { if (r.section != last) { out += Item(null, r.section.label.uppercase()); last = r.section }; out += Item(r, null) }
+            return out
+        }
+        var items = build()
+        val adapter = object : android.widget.ArrayAdapter<String>(act, android.R.layout.simple_list_item_1, ArrayList<String>()) {
+            override fun getCount() = items.size
+            override fun getItem(position: Int): String = items[position].let { it.header ?: it.row!!.text() }
+            override fun isEnabled(position: Int) = items[position].row != null
+            override fun areAllItemsEnabled() = false
+            override fun getView(position: Int, convertView: View?, parent: android.view.ViewGroup): View =
+                (super.getView(position, convertView, parent) as TextView).also { v ->
+                    v.text = getItem(position); v.textSize = if (items[position].row == null) 22f else 24f
+                    v.typeface = if (items[position].row == null) Typeface.DEFAULT_BOLD else Typeface.DEFAULT
+                    v.alpha = if (items[position].row == null) 0.7f else 1f
+                }
+        }
+        val lv = android.widget.ListView(act)
+        lv.adapter = adapter
+        val dlg = AlertDialog.Builder(act).setTitle("Réglages du lecteur  (◀ ▶ : changer · OK : valider)").setView(lv).setNegativeButton("Fermer", null).create()
+        fun change(position: Int, dir: Int) {
+            val row = items.getOrNull(position)?.row ?: return
+            if (row.kind != PlayerSettings.Kind.VALUE) return
+            val n = PlayerSettings.change(api.settingsState(), row.id, dir)
+            PlayerSettings.commandFor(row.id, n)?.let { c -> if (!api.command(c)) api.flash("Impossible pour ce fichier") }
+            items = build(); adapter.notifyDataSetChanged()
+        }
+        lv.setOnItemClickListener { _, _, position, _ ->
+            val row = items.getOrNull(position)?.row ?: return@setOnItemClickListener
+            if (row.kind == PlayerSettings.Kind.VALUE) change(position, 1) else { dlg.dismiss(); api.settingsAction(row.id) }
+        }
+        lv.setOnKeyListener { _, code, ev ->
+            if (ev.action == android.view.KeyEvent.ACTION_DOWN && (code == android.view.KeyEvent.KEYCODE_DPAD_LEFT || code == android.view.KeyEvent.KEYCODE_DPAD_RIGHT)) {
+                change(lv.selectedItemPosition, if (code == android.view.KeyEvent.KEYCODE_DPAD_LEFT) -1 else 1); true
+            } else false
+        }
+        dlg.show()
+        lv.setSelection(selected.coerceIn(0, (items.size - 1).coerceAtLeast(0)))
+    }
+
+    /** Minuteur d'arrêt : 15, 30, 60, 90 min, fin de la vidéo, ou annuler. */
+    fun sleepPick() {
+        val labels = SleepTimer.LABELS + "Annuler le minuteur"
+        pick("Minuteur d'arrêt (la lecture se met en pause, la TV reste allumée)", labels, -1) { i -> api.command(PlayerCommand.Sleep(if (i >= SleepTimer.LABELS.size) -1 else i)) }
+    }
+
+    /** Marque-pages du fichier : choisir, puis « Aller à » ou « Supprimer ». */
+    fun bookmarkPick() {
+        val b = api.settingsState().file.bookmarks
+        if (b.marksMs.isEmpty()) { api.flash("Aucun marque-page : utilisez « Marque-page : ajouter ici »"); return }
+        pick("Marque-pages", b.labels(), -1) { i ->
+            AlertDialog.Builder(act).setTitle(b.labels()[i])
+                .setItems(arrayOf("Aller à ${LibraryLogic.clock(b.marksMs[i])}", "Supprimer ce marque-page")) { _, w -> api.command(if (w == 0) PlayerCommand.BookmarkGo(i) else PlayerCommand.BookmarkDelete(i)) }
+                .setNegativeButton("Fermer", null).show()
+            true
+        }
+    }
+
+    /** Aperçu du style des sous-titres (couleur, contour) sur fond sombre. */
+    fun previewSubtitle(style: SubtitleStyle) {
+        val tv = TextView(act).apply {
+            text = SubtitleStyle.PREVIEW; textSize = 28f; setPadding(32, 48, 32, 48); gravity = Gravity.CENTER
+            setTextColor(0xFF000000.toInt() or style.color.rgb); setBackgroundColor(0xFF202020.toInt())
+            typeface = when (style.font) { "serif" -> Typeface.SERIF; "monospace" -> Typeface.MONOSPACE; "sans-serif" -> Typeface.SANS_SERIF; else -> Typeface.DEFAULT }
+            if (style.outline != SubtitleStyle.Outline.NONE) setShadowLayer(if (style.outline == SubtitleStyle.Outline.THICK) 8f else 4f, 0f, 0f, Color.BLACK)
+        }
+        AlertDialog.Builder(act).setTitle("Aperçu des sous-titres").setView(tv).setPositiveButton("Fermer", null).show()
     }
 
     // Entrées directes de la barre de commandes à l'écran (mêmes choix que le panneau, aucune logique en double).

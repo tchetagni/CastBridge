@@ -1872,7 +1872,7 @@ class ReceiverServer(
                 ?: "<!doctype html><meta charset=utf-8><title>CastBridge TV</title><h1>CastBridge TV</h1><p>Page d'administration indisponible.</p>"
         }
         const val SERVICE_TYPE = "_castbridge._tcp."
-        private val PLAYER_ROUTES = setOf("audio", "subtitle", "subdelay", "audiodelay", "subsize", "rate", "aspect", "chapter", "title", "hw", "eq")
+        private val PLAYER_ROUTES = setOf("audio", "subtitle", "subdelay", "audiodelay", "subsize", "rate", "aspect", "chapter", "title", "hw", "eq", "sleep", "loop", "mark", "picture", "night", "gain", "pitch", "substyle", "autonext", "skipstep")
         private val LOCK_ROOT = File("/castbridge-locks")      // never touched on disk: only a namespace for per-name locks
         private val NOT_IMPLEMENTED = Response.Status.NOT_IMPLEMENTED
         private val SERVICE_UNAVAILABLE = object : Response.IStatus {

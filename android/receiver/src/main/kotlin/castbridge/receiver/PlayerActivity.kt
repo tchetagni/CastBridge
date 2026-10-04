@@ -34,6 +34,7 @@ import org.videolan.libvlc.MediaPlayer
 import org.videolan.libvlc.util.VLCVideoLayout
 import castbridge.core.xfer.CopyBadge
 import castbridge.core.tv.PlayerRemote
+import castbridge.core.tv.SleepTimer
 import java.io.File
 import java.util.concurrent.CountDownLatch
 import java.util.concurrent.TimeUnit
@@ -62,6 +63,9 @@ class PlayerActivity : Activity(), TvService.Screen {
     private var playerSpu = false                           // libVLC was created with its subtitle engine
     private var reopen: ((Long) -> Unit)? = null             // re-opens the current file at a position (subtitle engine, decoder change)
     private var swRetry = false                             // the software-decoding retry was already made for this file
+    private var autoNextPending: Pair<castbridge.core.tv.AutoNextCountdown, File>? = null   // wtv-01 : « Épisode suivant dans 8 s », annulable
+    private val doublePress = castbridge.core.tv.DoublePress()
+    private var sleepFaded = false                          // le fondu du minuteur d'arrêt a baissé le volume : le rétablir si on annule
     private lateinit var lead: TextView
     @Volatile private var streamingName: String? = null    // set while playing a file that may still be arriving
     private var lastLeadUpdate = 0L
@@ -127,6 +131,7 @@ class PlayerActivity : Activity(), TvService.Screen {
         if (libScreen == null) libScreen = LibraryScreen(this, findViewById(R.id.library), t, libraryApi())
         if (home == null) home = HomeScreen(this, findViewById(R.id.home), t, homeApi())
         if (settingsPanel == null) settingsPanel = SettingsPanel(this, findViewById(R.id.settings))
+        extras.viewApply = { t -> applyViewTransform(t) }
         panel = PlayerPanel(this, panelApi())
         if (!::bar.isInitialized) bar = ProgressOverlay(this, findViewById(android.R.id.content)).also { b -> b.onChange = { refreshBadge(true) } }
         if (badge == null) badge = CopyBadgeView(this, findViewById(android.R.id.content))
@@ -297,12 +302,13 @@ class PlayerActivity : Activity(), TvService.Screen {
             // R-16: libVLC drops late frames (its default) instead of waiting for each one: with the old --no-drop-late-frames --no-skip-frames a decoder
             // short of CPU froze the picture while the audio went on. Per-file knobs (threads, loop filter...) come from PlayerTuning, see configure().
             "--file-caching=400",            // local file: 1500 ms of read-ahead only cost RAM
-            "--no-audio-time-stretch",       // no resampling buffers for A/V drift
             "--no-sub-autodetect-file",      // subtitle files next to the video are found by the app (SubtitleFinder), not by scanning
             "--no-osd",                      // R-16: statistics stay ON (Media.getStats: displayed / lost pictures feed VideoStallDetector)
         )
         // The subtitle engine (freetype, fonts, blending) costs memory on this TV: only for files that need it.
-        if (spu) opts += "--sub-text-scale=${extras.p.subScale}" else opts += "--no-spu"
+        // wtv-01 : « vitesse sans changer la voix » demande la correction de hauteur (désactivée par défaut : elle coûte du processeur sur une TV 32 bits)
+        if (!extras.audioTuning().keepPitch) opts += "--no-audio-time-stretch"       // no resampling buffers for A/V drift
+        if (spu) { opts += "--sub-text-scale=${extras.p.subScale}"; opts += extras.subtitleOptions(panelSize().second) } else opts += "--no-spu"
         val lv = LibVLC(this, opts)
         playerSpu = spu
         val p = MediaPlayer(lv)
@@ -317,7 +323,7 @@ class PlayerActivity : Activity(), TvService.Screen {
                 MediaPlayer.Event.Vout, MediaPlayer.Event.ESAdded, MediaPlayer.Event.ESSelected -> main.post { mp?.let { extras.applyFit(it) } }
                 MediaPlayer.Event.Playing -> { health.onPlaying(android.os.SystemClock.elapsedRealtime()); update("playing"); main.post { mp?.let { extras.onPlaying(it, playerSpu) }; playbackPlaying(); startStats() } }
                 MediaPlayer.Event.Paused -> { health.onStopped(); update("paused") }
-                MediaPlayer.Event.TimeChanged -> { health.onTime(android.os.SystemClock.elapsedRealtime(), ev.timeChanged); snapshot = snapshot.copy(posMs = ev.timeChanged); main.post { updateLead(); if (extras.fitPending) mp?.let { extras.applyFit(it) }; controls?.refreshDiag(extras.fitOverlay()) } }
+                MediaPlayer.Event.TimeChanged -> { health.onTime(android.os.SystemClock.elapsedRealtime(), ev.timeChanged); snapshot = snapshot.copy(posMs = ev.timeChanged); main.post { tick(ev.timeChanged); updateLead(); if (extras.fitPending) mp?.let { extras.applyFit(it) }; controls?.refreshDiag(extras.fitOverlay()) } }
                 MediaPlayer.Event.Buffering -> {
                     // libVLC pauses by itself when the data runs out (playback caught up with the upload) and resumes alone.
                     val st = snapshot.state
@@ -329,12 +335,17 @@ class PlayerActivity : Activity(), TvService.Screen {
                 // Never release from inside libVLC's own event thread: hop to the main thread.
                 MediaPlayer.Event.EndReached -> {
                     health.onStopped(); update("ended"); val n = current?.name; val size = currentSize; val dur = snapshot.durMs
+                    val curFile = current; val wasStream = streamingName != null
                     main.post {
                         playbackEnd(abandoned = false, complete = true)
                         current = null; streamingName = null; releasePlayer()
                         n?.let { name -> bgRun { library?.db?.onEnded(name, size, dur) } }
+                        if (extras.sleep?.endOfVideo == true) {     // minuteur « fin de la vidéo » : on s'arrête ici, ni liste ni épisode suivant
+                            extras.clearSleep()
+                            afterPlayback("Minuteur d'arrêt : fin de la vidéo"); return@post
+                        }
                         val next = n?.let { name -> runCatching { server?.onPlaybackEnded(name) == true }.getOrDefault(false) } == true
-                        if (!next) afterPlayback()                  // a playlist goes on with its next file
+                        if (!next) { afterPlayback(); maybeAutoNext(curFile, wasStream) }                  // a playlist goes on with its next file
                     }
                 }
                 MediaPlayer.Event.EncounteredError -> {
@@ -909,6 +920,9 @@ class PlayerActivity : Activity(), TvService.Screen {
         if (t.fileCachingMs > 0) m.addOption(":file-caching=${t.fileCachingMs}")
         // Picture quality (PictureQuality, pure): composed AFTER the tuning, distress wins; Natif adds no filter at all.
         pictureQuality = castbridge.core.tv.PictureQuality.decide(qualityFacts(tuneStage)).also { q -> q.options.forEach { m.addOption(it) } }
+        // wtv-01 : filtres d'image (aucun par défaut) et mode nuit, choisis par le spectateur pour ce fichier
+        extras.mediaOptions().forEach { m.addOption(it) }
+        extras.guardPending = true                       // la garde de performance reprend ses compteurs sur ce nouveau média
         if (posMs > 0) m.addOption(":start-time=${posMs / 1000.0}")
     }
 
@@ -978,6 +992,14 @@ class PlayerActivity : Activity(), TvService.Screen {
         if (!decoderLogged && cpuPerFrame != null) { decoderLogged = true; logDecoder("playing") }
         val d = health.videoDistress(now)
         if (d > tuneStage) { tuneStage = d; retune(d) }
+        // wtv-01 : si un filtre d'image est actif et que la TV perd des images, il se coupe seul et le dit
+        if (extras.picture().filtersActive) {
+            if (extras.guardPending) { extras.guard.arm(st.displayedPictures, st.lostPictures); extras.guardPending = false }
+            else if (p.isPlaying && extras.guard.check(st.displayedPictures, st.lostPictures, true)) {
+                extras.cutFilters(); flash(castbridge.core.tv.PerformanceGuard.MESSAGE)
+                reopen?.let { r -> runCatching { r(p.time.coerceAtLeast(0)) } }
+            }
+        }
     }
 
     /** The picture froze or drops frames (or keeps doing so): re-open the file at the same position with lighter decoder options, at most twice per file. */
@@ -1015,6 +1037,7 @@ class PlayerActivity : Activity(), TvService.Screen {
     }
 
     private fun newFile(name: String, size: Long) {
+        autoNextPending = null                               // un autre fichier démarre : le compte à rebours de l'épisode suivant n'a plus lieu d'être
         if (current?.name != name || currentSize != size) { swRetry = false; tuneStage = 0; tuneReopens = 0; appliedTuning = null }
     }
 
@@ -1138,13 +1161,15 @@ class PlayerActivity : Activity(), TvService.Screen {
     }
 
     /** Applies what a setting change needs: nothing more, or re-opening the file at the same position (subtitles, decoder). */
-    private fun outcome(r: PlayerExtras.Result, c: PlayerCommand): Boolean = when (r) {
+    private fun outcome(r: PlayerExtras.Result, c: PlayerCommand): Boolean = outcome(r) { describe(c) }
+
+    private fun outcome(r: PlayerExtras.Result, text: () -> String): Boolean = when (r) {
         PlayerExtras.Result.Failed -> false
-        PlayerExtras.Result.Done -> { flash(describe(c)); true }
+        PlayerExtras.Result.Done -> { flash(text()); true }
         PlayerExtras.Result.Reopen -> {
             val pos = mp?.time ?: snapshot.posMs
             val again = reopen
-            if (again == null) false else { releasePlayer(); again(pos); flash(describe(c)); true }
+            if (again == null) false else { releasePlayer(); again(pos); flash(text()); true }
         }
     }
 
@@ -1165,6 +1190,21 @@ class PlayerActivity : Activity(), TvService.Screen {
             controls?.showDiag(extras.fitOverlay())
             "Affichage : ${castbridge.core.ux.DisplayTexts.label(m)}" + if (m == castbridge.core.tv.VideoFit.Mode.STRETCH) " (déforme l'image)" else ""
         }
+        is PlayerCommand.Sleep -> "Minuteur d'arrêt : " + (SleepTimer.LABELS.getOrNull(c.choice) ?: "annulé")
+        is PlayerCommand.LoopAb -> extras.loop.label()
+        is PlayerCommand.BookmarkAdd -> "Marque-page ajouté (${extras.p.bookmarks.marksMs.size}/${castbridge.core.tv.Bookmarks.MAX})"
+        is PlayerCommand.BookmarkGo -> "Marque-page ${c.index + 1}"
+        is PlayerCommand.BookmarkDelete -> "Marque-page supprimé"
+        is PlayerCommand.PictureField -> "${c.field.label} : ${c.value}" + if (c.field == castbridge.core.tv.PictureTuning.Field.PAN_X || c.field == castbridge.core.tv.PictureTuning.Field.PAN_Y) "" else " %"
+        is PlayerCommand.PictureDeinterlace -> "Désentrelacement : " + if (c.on) "forcé" else "réglage d'origine"
+        is PlayerCommand.PictureRotation -> "Rotation : ${c.degrees}°"
+        is PlayerCommand.PictureReset -> "Image réinitialisée"
+        is PlayerCommand.AudioNight -> "Mode nuit : " + if (c.on) "oui" else "non"
+        is PlayerCommand.AudioGain -> "Amplification : ${c.percent} %" + (castbridge.core.tv.AudioTuning(gainPercent = c.percent).warning?.let { " : $it" } ?: "")
+        is PlayerCommand.AudioKeepPitch -> "Vitesse sans changer la voix : " + if (c.on) "oui" else "non"
+        is PlayerCommand.SubStyleSet -> "Style des sous-titres modifié"
+        is PlayerCommand.AutoNext -> "Épisode suivant automatique : " + if (c.on) "oui" else "non"
+        is PlayerCommand.SkipStep -> "Saut des flèches : ${c.seconds} s"
         is PlayerCommand.Eq -> if (c.preset < 0) "Égaliseur désactivé" else "Égaliseur : ${runCatching { MediaPlayer.Equalizer.getPresetName(c.preset) }.getOrDefault("")}"
     }
 
@@ -1173,7 +1213,8 @@ class PlayerActivity : Activity(), TvService.Screen {
         val s = snapshot
         val prog = streamingName?.let { server?.progress(it) }
         val reach = if (prog != null && prog.first < prog.second) Progressive.reachableMs(s.durMs, prog.first, prog.second) else -1
-        bar.show(n, mp?.time ?: s.posMs, s.durMs, extra, reach)
+        val sleepText = extras.sleep?.countdown(android.os.SystemClock.elapsedRealtime(), mp?.time ?: s.posMs, s.durMs)
+        bar.show(n, mp?.time ?: s.posMs, s.durMs, listOfNotNull(extra.ifEmpty { null }, sleepText).joinToString("   ·   "), reach)
     }
 
     private fun controlsApi() = object : PlayerControls.Api {
@@ -1222,6 +1263,63 @@ class PlayerActivity : Activity(), TvService.Screen {
         override fun repeat(mode: String) = castbridge.core.tv.Playlist.Repeat.of(mode)?.let { server?.setRepeat(it) } == true
         override fun info() = infoText()
         override fun flash(msg: String) = this@PlayerActivity.flash(msg)
+        override fun settingsState() = extras.settingsState(mp?.time ?: snapshot.posMs, snapshot.durMs, android.os.SystemClock.elapsedRealtime())
+        override fun settingsAction(id: String) = this@PlayerActivity.settingsAction(id)
+    }
+
+    /** Lignes d'action de « Réglages du lecteur » (minuteur, boucle A-B, marque-pages, vidéo suivante, réinitialisations). */
+    private fun settingsAction(id: String) {
+        when (id) {
+            "sleep" -> panel.sleepPick()
+            "mark_go" -> panel.bookmarkPick()
+            "st_preview" -> panel.previewSubtitle(extras.subStyle())
+            "loop" -> command(PlayerCommand.LoopAb(extras.loop.active))
+            "mark_add" -> if (!command(PlayerCommand.BookmarkAdd)) flash("Marque-page déjà présent ici, ou liste pleine (20)")
+            "next" -> if (server?.playlistStep(1) != true) flash("Pas de vidéo suivante dans la liste")
+            "prev" -> if (server?.playlistStep(-1) != true) flash("Pas de vidéo précédente dans la liste")
+            "pic_reset" -> command(PlayerCommand.PictureReset)
+            else -> mp?.let { extras.settingsAction(id, it.time, snapshot.durMs, android.os.SystemClock.elapsedRealtime()) }
+                ?.let { r -> outcome(r) { if (id.endsWith("_save")) "Enregistré comme réglage par défaut" else "Réglage : comme le réglage par défaut" } }
+        }
+    }
+
+    /** Zoom, déplacement et rotation de l'image : simples transformations de la vue vidéo (aucun filtre, aucun coût de décodage). */
+    private fun applyViewTransform(t: castbridge.core.tv.PictureTuning.ViewTransform) {
+        val v = findViewById<View>(R.id.video) ?: return
+        v.scaleX = t.scale; v.scaleY = t.scale; v.translationX = t.translateX; v.translationY = t.translateY; v.rotation = t.rotation
+    }
+
+    /** À chaque position de lecture (TimeChanged) : boucle A-B, minuteur d'arrêt (fondu du son puis pause). */
+    private fun tick(posMs: Long) {
+        val p = mp ?: return
+        extras.loop.jumpBack(posMs)?.let { p.setTime(it) }
+        val t = extras.sleep ?: return
+        val now = android.os.SystemClock.elapsedRealtime(); val dur = snapshot.durMs
+        when (t.phase(now, posMs, dur)) {
+            SleepTimer.Phase.RUNNING -> if (sleepFaded) { sleepFaded = false; p.setVolume(extras.audioTuning().volume()) }
+            SleepTimer.Phase.FADING -> { sleepFaded = true; p.setVolume(extras.audioTuning().volume(t.volumeFactor(now, posMs, dur))) }
+            SleepTimer.Phase.EXPIRED -> {
+                sleepFaded = false; command(PlayerCommand.Sleep(-1)); pause()
+                p.setVolume(extras.audioTuning().volume()); flash("Minuteur d'arrêt : lecture mise en pause (la TV reste allumée)")
+            }
+        }
+    }
+
+    /** Fin d'une vidéo sans liste : l'épisode suivant du MÊME dossier démarre après 8 s, sauf annulation (RETOUR ou OK) ou réglage désactivé. */
+    private fun maybeAutoNext(cur: File?, wasStream: Boolean) {
+        if (cur == null || wasStream || !extras.autoNext || !cur.isFile) return
+        val dir = cur.parentFile ?: return
+        val nx = castbridge.core.tv.NextEpisode.next(cur.path, dir.list().orEmpty().map { File(dir, it).path }) ?: return
+        val file = File(nx); val cd = castbridge.core.tv.AutoNextCountdown(android.os.SystemClock.elapsedRealtime())
+        autoNextPending = cd to file
+        fun step() {
+            val a = autoNextPending ?: return
+            if (a.first !== cd) return
+            val now = android.os.SystemClock.elapsedRealtime()
+            if (cd.due(now)) { autoNextPending = null; bgRun { runCatching { server?.playAll(listOf(file.name), 0) } } }
+            else { flash(cd.label(now, castbridge.core.tv.LibraryLogic.title(file.name))); main.postDelayed({ step() }, 1000) }
+        }
+        step()
     }
 
     /** Cycles through the tracks of one kind (remote keys AUDIO / SUBTITLE). */
@@ -1244,6 +1342,11 @@ class PlayerActivity : Activity(), TvService.Screen {
     // ---- Remote control ----
 
     override fun onKeyDown(keyCode: Int, event: KeyEvent): Boolean {
+        autoNextPending?.let { a ->
+            if (keyCode == KeyEvent.KEYCODE_BACK || keyCode == KeyEvent.KEYCODE_DPAD_CENTER || keyCode == KeyEvent.KEYCODE_ENTER) {
+                a.first.cancel(); autoNextPending = null; flash("Épisode suivant annulé"); return true
+            }
+        }
         if (current == null) {
             if (keyCode == KeyEvent.KEYCODE_BACK) {
                 when {
@@ -1273,8 +1376,8 @@ class PlayerActivity : Activity(), TvService.Screen {
             // OK barre cachée : on attend la fin de la pression (appui long = réglages, appui court = barre) ; barre visible : le bouton qui a le focus agit (PASS).
             if (remote == PlayerRemote.Key.OK && !barOn) { if (event.repeatCount == 0) event.startTracking(); return true }
             when (PlayerRemote.decide(remote, false, barOn)) {
-                PlayerRemote.Act.SEEK_FWD_10 -> seek((mp?.time ?: 0) + 10_000)
-                PlayerRemote.Act.SEEK_BACK_10 -> seek(maxOf(0, (mp?.time ?: 0) - 10_000))
+                PlayerRemote.Act.SEEK_FWD_10 -> hop(1, event, keyCode)
+                PlayerRemote.Act.SEEK_BACK_10 -> hop(-1, event, keyCode)
                 PlayerRemote.Act.SEEK_FWD_60 -> seek((mp?.time ?: 0) + 60_000)
                 PlayerRemote.Act.SEEK_BACK_60 -> seek(maxOf(0, (mp?.time ?: 0) - 60_000))
                 PlayerRemote.Act.OPEN_PANEL -> { controls?.hide(); if (mp != null) panel.show() else showMenu() }
@@ -1299,6 +1402,17 @@ class PlayerActivity : Activity(), TvService.Screen {
             else -> return super.onKeyDown(keyCode, event)
         }
         return true
+    }
+
+    /** GAUCHE/DROITE : le pas choisi (10 s par défaut) ; appui long ou deux appuis rapides : trois fois le pas (30 s). Un appui tenu ne fait qu'un seul grand saut. */
+    private fun hop(dir: Int, event: KeyEvent, keyCode: Int) {
+        if (event.repeatCount > 1) return
+        val step = extras.skipStepSec
+        val dbl = event.repeatCount == 0 && doublePress.register(keyCode, android.os.SystemClock.uptimeMillis())
+        val big = event.repeatCount == 1 || dbl
+        // le premier appui a déjà sauté un petit pas : le grand saut ne fait que compléter jusqu'au total
+        val amount = if (big) castbridge.core.tv.PlayerSeek.followUpMs(step) else castbridge.core.tv.PlayerSeek.smallMs(step)
+        seek(castbridge.core.tv.PlayerSeek.target(mp?.time ?: 0, dir * amount, snapshot.durMs))
     }
 
     /** OK (ou ENTRÉE) tenu : les réglages de lecture s'ouvrent, même avec une télécommande sans touche MENU. */

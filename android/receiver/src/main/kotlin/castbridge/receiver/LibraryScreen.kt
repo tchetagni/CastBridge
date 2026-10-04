@@ -150,9 +150,9 @@ class LibraryScreen(
     /** OK on a card: play, offering to resume where the viewer stopped; other files open their actions. */
     fun open(i: LibraryItem, section: List<LibraryItem>, index: Int) {
         if (i.type == MediaType.OTHER) { actions(i, section, index); return }
-        if (i.meta.resumeMs > 0 && !i.meta.watched) {
+        if (castbridge.core.tv.ResumePolicy.offer(i.meta.resumeMs, i.meta.durationMs) && !i.meta.watched) {
             AlertDialog.Builder(act).setTitle(i.title)
-                .setItems(arrayOf("Reprendre à ${LibraryLogic.clock(i.meta.resumeMs)}", "Depuis le début")) { _, w ->
+                .setItems(arrayOf(castbridge.core.tv.ResumePolicy.label(i.meta.resumeMs), castbridge.core.tv.ResumePolicy.RESTART_LABEL)) { _, w ->
                     play(i, if (w == 0) i.meta.resumeMs else 0)
                 }.setNegativeButton("Annuler", null).show()
         } else play(i, 0)
