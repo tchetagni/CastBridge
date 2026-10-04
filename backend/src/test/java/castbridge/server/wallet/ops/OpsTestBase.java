@@ -111,8 +111,11 @@ public abstract class OpsTestBase extends WalletTestBase {
                 .andExpect(status().isOk()).andReturn());
     }
 
+    /** Don de fonds de test : compte OWNER + TOTP (audit w22-02 H2), plafonds relevés pour que le don soit appliqué sans second administrateur. */
     protected void adminGrant(String id, String cur, long amount) throws Exception {
-        mvc.perform(post("/api/v1/admin/wallet/grant").header("Authorization", ADMIN).contentType(MediaType.APPLICATION_JSON)
+        jdbc.update("UPDATE wallet_policy SET val = 1000000000 WHERE name IN ('admin.grantMax.NDEM','admin.grantMax.MBOKO','admin.dailyMax.NDEM','admin.dailyMax.MBOKO')");
+        jdbc.update("UPDATE wallet_policy SET val = 1000 WHERE name = 'admin.grantsPerHour'");
+        mvc.perform(newAdmin().sign(post("/api/v1/admin/wallet/grant")).header("Authorization", ADMIN).contentType(MediaType.APPLICATION_JSON)
                 .content("{\"identity\":\"" + id + "\",\"currency\":\"" + cur + "\",\"amount\":" + amount + ",\"reason\":\"Fonds de test\"}")).andExpect(status().isOk());
     }
 

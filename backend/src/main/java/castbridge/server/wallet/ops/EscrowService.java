@@ -51,9 +51,11 @@ public class EscrowService {
     private final WalletModuleConfig.WalletClock clock;
     private final JdbcTemplate jdbc;
     private final WalletKey key;
+    private final GrantService grants;
 
     public EscrowService(JdbcLedger ledger, WalletPolicyService policies, LicenseFacts licenses, EditionReader reader, WalletModuleConfig.WalletClock clock,
-                         JdbcTemplate jdbc, WalletProperties props) {
+                         JdbcTemplate jdbc, WalletProperties props, GrantService grants) {
+        this.grants = grants;
         this.ledger = ledger;
         this.policies = policies;
         this.licenses = licenses;
@@ -78,7 +80,7 @@ public class EscrowService {
         if (!activations.isEmpty()) {
             EditionReader.Reading reading = reader.read(code, activations, now);
             if (reading.accepted()) {
-                GrantService.Standing st = GrantService.standing(reading, ls, now);
+                GrantService.Standing st = grants.readOnly(code, reading, now);
                 return new Eff(st.edition(), st.grace(), st.licensePending(), st.ed());
             }
         }
