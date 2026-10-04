@@ -658,6 +658,7 @@ public class ActivationsAdminService {
     /** The verification of the two chains and of the cold archive. */
     public Map<String, Object> integrity(Actor actor) {
         requireRead(actor, ActPermissions.Perm.ACT_READ, R_INTEGRITY, Map.of());
+        readAudit.recordRead(actor, R_INTEGRITY, Map.of(), null, 2, false);   // first: the verification itself reads the audit chain
         Map<String, Object> out = new LinkedHashMap<>();
         out.put("events", eventLog.verify());
         out.put("reads", readAudit.verify());
@@ -668,7 +669,7 @@ public class ActivationsAdminService {
             archives.add(m);
         }
         out.put("archives", archives);
-        return audited(actor, R_INTEGRITY, Map.of(), null, 2, false, out);
+        return out;
     }
 
     public Map<String, Object> checkpoints(Actor actor, String from, String to) {
@@ -705,6 +706,7 @@ public class ActivationsAdminService {
     public CursorPage readAudit(Actor actor, String cursor, Integer limit) {
         requireRead(actor, ActPermissions.Perm.ACT_EXPORT, R_READ_AUDIT, params(null, limit));
         int lim = limitOf(limit);
+        readAudit.recordRead(actor, R_READ_AUDIT, params(null, limit), null, lim, false);   // first: listing the audit reads the audit table (rows = the page size asked)
         List<Object> args = new ArrayList<>();
         String w = "";
         if (cursor != null && !cursor.isBlank()) {
@@ -729,7 +731,7 @@ public class ActivationsAdminService {
             m.put("rows", m.remove("rows_rendered"));
             items.add(m);
         }
-        return audited(actor, R_READ_AUDIT, params(null, limit), null, items.size(), false, new CursorPage(items, next, lim));
+        return new CursorPage(items, next, lim);
     }
 
     /** Events after an id (at most 200), for the long poll of the controller. */
