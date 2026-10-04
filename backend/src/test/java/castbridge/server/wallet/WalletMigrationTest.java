@@ -13,10 +13,10 @@ import org.junit.jupiter.api.Test;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.datasource.DriverManagerDataSource;
 
-/** V63 s'applique sur une base vide ET sur une base au niveau V61 (V62 est réservée à la télémétrie W21) ; {@code rollback-V63.sql} la retire. */
+/** V62 (renumérotée depuis V63 avant tout déploiement : « plus haut existant + 1 », aucun numéro réservé) s'applique sur une base vide ET sur une base au niveau V61 ; {@code rollback-V62.sql} la retire. */
 class WalletMigrationTest {
     static final List<String> TABLES = List.of("wallet_account", "wallet_balance", "wallet_txn", "wallet_entry", "wallet_identity", "wallet_escrow", "wallet_result", "wallet_recv_code",
-            "wallet_policy", "wallet_voucher_batch", "wallet_voucher");
+            "wallet_policy", "wallet_voucher_batch", "wallet_voucher", "wallet_license_claim", "wallet_license_span", "wallet_admin_grant");
 
     private static DriverManagerDataSource db() {
         return new DriverManagerDataSource("jdbc:h2:mem:mig-" + UUID.randomUUID() + ";MODE=MySQL;DATABASE_TO_LOWER=TRUE;DB_CLOSE_DELAY=-1", "sa", "");
@@ -32,17 +32,17 @@ class WalletMigrationTest {
     }
 
     @Test
-    void v63AppliesOnAnEmptyDatabase() {
+    void v62AppliesOnAnEmptyDatabase() {
         DriverManagerDataSource ds = db();
         Flyway.configure().dataSource(ds).locations("classpath:db/migration").load().migrate();
         JdbcTemplate j = new JdbcTemplate(ds);
         assertEquals(TABLES.size(), tables(j));
-        assertEquals(63, j.queryForObject("SELECT MAX(CAST(\"version\" AS INT)) FROM \"flyway_schema_history\" WHERE \"version\" IS NOT NULL", Integer.class));
+        assertEquals(62, j.queryForObject("SELECT MAX(CAST(\"version\" AS INT)) FROM \"flyway_schema_history\" WHERE \"version\" IS NOT NULL", Integer.class));
         assertTrue(j.queryForObject("SELECT COUNT(*) FROM wallet_policy", Long.class) >= 20, "la politique est semée par la migration");
     }
 
     @Test
-    void v63AppliesOnADatabaseAtLevelV61AndTheOlderTablesAreUntouched() {
+    void v62AppliesOnADatabaseAtLevelV61AndTheOlderTablesAreUntouched() {
         DriverManagerDataSource ds = db();
         Flyway.configure().dataSource(ds).locations("classpath:db/migration").target("61").load().migrate();
         JdbcTemplate j = new JdbcTemplate(ds);
@@ -58,13 +58,13 @@ class WalletMigrationTest {
         DriverManagerDataSource ds = db();
         Flyway.configure().dataSource(ds).locations("classpath:db/migration").load().migrate();
         JdbcTemplate j = new JdbcTemplate(ds);
-        String script = Files.readString(Path.of("..", "tools", "wallet", "rollback-V63.sql"));
+        String script = Files.readString(Path.of("..", "tools", "wallet", "rollback-V62.sql"));
         assertTrue(script.contains("seulement si aucune écriture réelle"), "en-tête d'avertissement");
         String sql = String.join("\n", script.lines().filter(l -> !l.isBlank() && !l.trim().startsWith("--")).toList());
         for (String stmt : sql.split(";")) if (!stmt.isBlank()) j.execute(stmt.trim());
         assertEquals(0, tables(j));
         assertEquals(1, j.queryForObject("SELECT COUNT(*) FROM information_schema.tables WHERE table_name = 'lic_license'", Long.class), "le reste du schéma est intact");
-        // la ligne de V63 a quitté l'historique de Flyway : la migration peut être rejouée plus tard
+        // la ligne de V62 a quitté l'historique de Flyway : la migration peut être rejouée plus tard
         Flyway.configure().dataSource(ds).locations("classpath:db/migration").load().migrate();
         assertEquals(TABLES.size(), tables(j));
     }

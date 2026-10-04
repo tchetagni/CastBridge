@@ -23,7 +23,7 @@ public class WalletRepository {
 
     // ---- identités ----
 
-    public record Identity(String holder, long apiDeviceId, Instant anchorAt, boolean openedUnlimited, String edition, Instant lastSyncAt, boolean frozen, String frozenReason) {}
+    public record Identity(String holder, long apiDeviceId, Instant anchorAt, boolean openedUnlimited, String edition, Instant lastSyncAt, boolean frozen, String frozenReason, String installPub) {}
 
     private static Instant instant(java.sql.ResultSet rs, String col) throws java.sql.SQLException {
         Timestamp t = rs.getTimestamp(col);
@@ -31,9 +31,9 @@ public class WalletRepository {
     }
 
     public Optional<Identity> identity(String holder) {
-        return jdbc.query("SELECT holder, api_device_id, anchor_at, opened_unlimited, edition, last_sync_at, frozen, frozen_reason FROM wallet_identity WHERE holder = ?",
+        return jdbc.query("SELECT holder, api_device_id, anchor_at, opened_unlimited, edition, last_sync_at, frozen, frozen_reason, install_pub FROM wallet_identity WHERE holder = ?",
                 (rs, i) -> new Identity(rs.getString("holder"), rs.getLong("api_device_id"), instant(rs, "anchor_at"), rs.getBoolean("opened_unlimited"), rs.getString("edition"),
-                        instant(rs, "last_sync_at"), rs.getBoolean("frozen"), rs.getString("frozen_reason")), holder).stream().findFirst();
+                        instant(rs, "last_sync_at"), rs.getBoolean("frozen"), rs.getString("frozen_reason"), rs.getString("install_pub")), holder).stream().findFirst();
     }
 
     /** L'identité (la plus récemment ouverte) liée à cet appareil API, s'il en a une. */
@@ -70,6 +70,132 @@ public class WalletRepository {
         Set<String> out = new HashSet<>();
         for (String k : jdbc.queryForList("SELECT idem_key FROM wallet_txn WHERE kind = 'GRANT' AND idem_key LIKE ?", String.class, prefix + "%")) if (k.startsWith(prefix)) out.add(k);
         return out;
+    }
+
+    /**
+     * Réaffectation (administrateur) : l'identité n'est plus liée à aucun appareil ({@code api_device_id = 0}) et perd sa clé d'installation ; le prochain appareil qui prouve la possession la lie.
+     * Rend vrai si l'identité existe.
+     */
+    public boolean clearBinding(String holder) { return jdbc.update("UPDATE wallet_identity SET api_device_id = 0, install_pub = NULL WHERE holder = ?", holder) == 1; }
+
+    /** Lie une identité libérée ({@code api_device_id = 0}) à cet appareil : le premier qui arrive l'emporte ; vrai si CET appel a lié. */
+    public boolean bindIfFree(String holder, long apiDeviceId) { return jdbc.update("UPDATE wallet_identity SET api_device_id = ? WHERE holder = ? AND api_device_id = 0", apiDeviceId, holder) == 1; }
+
+    /** Retient la clé d'installation de la TV liée à CET appareil si elle n'en a pas encore (jamais remplacée sans réaffectation). */
+    public void adoptInstallKey(String holder, long apiDeviceId, String installPub) {
+        jdbc.update("UPDATE wallet_identity SET install_pub = ? WHERE holder = ? AND api_device_id = ? AND install_pub IS NULL", installPub, holder, apiDeviceId);
+    }
+
+    /**
+     * Le {@code seq} de {@code cbw1} doit changer quand N'IMPORTE QUOI de signé change (audit M4) : {@code seq = Σ des versions des comptes de l'identité + snap_bump}. Chaque écriture d'une
+     * transaction du grand livre incrémente la {@code version} des soldes qu'elle touche (même ligne, même transaction que le solde) ; {@code snap_bump} compte les changements des champs signés
+     * hors soldes. {@code digest} = condensé de ces champs (édition, gel, mises permises) ; un condensé différent du dernier émis incrémente {@code snap_bump} (comparaison et mise à jour en UNE
+     * instruction : sûr en concurrence). Seules les écritures de CETTE identité font bouger son seq.
+     */
+    public void bumpIfChanged(String holder, String digest) {
+        jdbc.update("UPDATE wallet_identity SET snap_digest = ?, snap_bump = snap_bump + (CASE WHEN snap_digest IS NULL THEN 0 ELSE 1 END) WHERE holder = ? AND (snap_digest IS NULL OR snap_digest <> ?)",
+                digest, holder, digest);
+    }
+
+    /** Les quatre soldes et le {@code seq} d'une identité. */
+    public record SnapshotRead(long ndem, long ndemLocked, long mboko, long mbokoLocked, long seq) {}
+
+    /**
+     * Soldes ET {@code seq} lus par UNE SEULE instruction SQL (l'audit M4 a relevé cinq lectures séparées qui pouvaient « verrouiller » un seq incohérent) : le seq vient des {@code version} des
+     * MÊMES lignes que les soldes, donc chaque solde est toujours lu avec la version qui lui correspond (même ligne, validée avec lui), quelle que soit l'isolation de la base.
+     */
+    public SnapshotRead snapshotRead(String holder) {
+        long[] v = new long[4];
+        long[] seq = new long[] {0};
+        boolean[] any = new boolean[1];
+        jdbc.query("SELECT a.cur, a.pocket, b.balance, b.version, (SELECT COALESCE(MAX(i.snap_bump), 0) FROM wallet_identity i WHERE i.holder = ?) AS bump FROM wallet_account a "
+                + "JOIN wallet_balance b ON b.account_id = a.id WHERE a.holder = ? AND a.pocket IN ('DISPO', 'BLOQUE') ORDER BY a.id", rs -> {
+            boolean n = "NDEM".equals(rs.getString("cur")), locked = "BLOQUE".equals(rs.getString("pocket"));
+            v[(n ? 0 : 2) + (locked ? 1 : 0)] = rs.getLong("balance");
+            if (!any[0]) seq[0] = rs.getLong("bump");
+            any[0] = true;
+            seq[0] += rs.getLong("version");
+        }, holder, holder);
+        if (!any[0]) {   // aucun compte : seulement le compteur (identité sans écriture)
+            Long bump = jdbc.queryForObject("SELECT COALESCE(MAX(snap_bump), 0) FROM wallet_identity WHERE holder = ?", Long.class, holder);
+            seq[0] = bump == null ? 0 : bump;
+        }
+        return new SnapshotRead(v[0], v[1], v[2], v[3], seq[0]);
+    }
+
+    // ---- licences : réclamation et intervalles figés ----
+
+    /** Réclame la licence pour cette identité si personne ne l'a réclamée, puis rend l'identité qui la détient (une licence ne paie qu'UNE identité, pour toujours). */
+    public String claimLicense(String licenseId, String holder, Instant now) {
+        try {
+            jdbc.update("INSERT INTO wallet_license_claim (license_id, holder, claimed_at) VALUES (?, ?, ?)", licenseId, holder, Timestamp.from(now));
+        } catch (DuplicateKeyException e) {
+            // déjà réclamée
+        }
+        return jdbc.queryForObject("SELECT holder FROM wallet_license_claim WHERE license_id = ?", String.class, licenseId);
+    }
+
+    /** L'identité qui détient la licence, s'il y en a une (lecture seule). */
+    public Optional<String> licenseHolder(String licenseId) {
+        return jdbc.queryForList("SELECT holder FROM wallet_license_claim WHERE license_id = ?", String.class, licenseId).stream().findFirst();
+    }
+
+    /** Clés d'idempotence de tranches déjà inscrites sous ce préfixe exact (clés de licence : {@code grant:lic:<licence>:} ; un identifiant de licence ne contient ni « % » ni « _ »). */
+    public Set<String> grantKeysWithPrefix(String prefix) {
+        Set<String> out = new HashSet<>();
+        for (String k : jdbc.queryForList("SELECT idem_key FROM wallet_txn WHERE kind = 'GRANT' AND idem_key LIKE ?", String.class, prefix + "%")) if (k.startsWith(prefix)) out.add(k);
+        return out;
+    }
+
+    public record SpanRow(Instant start, Instant end) {}
+
+    public List<SpanRow> licenseSpans(String licenseId) {
+        return jdbc.query("SELECT start_at, end_at FROM wallet_license_span WHERE license_id = ? ORDER BY start_at", (rs, i) -> new SpanRow(instant(rs, "start_at"), instant(rs, "end_at")), licenseId);
+    }
+
+    public void insertLicenseSpan(String licenseId, Instant start, Instant end) {
+        try {
+            jdbc.update("INSERT INTO wallet_license_span (license_id, start_at, end_at) VALUES (?, ?, ?)", licenseId, Timestamp.from(start), end == null ? null : Timestamp.from(end));
+        } catch (DuplicateKeyException e) {
+            // un autre contact l'a déjà figé
+        }
+    }
+
+    /** Ferme un intervalle encore ouvert ; la première fermeture est définitive (jamais déplacée). */
+    public void closeLicenseSpan(String licenseId, Instant start, Instant end) {
+        jdbc.update("UPDATE wallet_license_span SET end_at = ? WHERE license_id = ? AND start_at = ? AND end_at IS NULL", Timestamp.from(end), licenseId, Timestamp.from(start));
+    }
+
+    // ---- dons de l'administration (H2) ----
+
+    public record AdminGrant(long id, String idemKey, String requestedBy, String identity, String currency, long amount, String reason, String state, String approvedBy, Instant createdAt) {}
+
+    private static AdminGrant adminGrant(java.sql.ResultSet rs) throws java.sql.SQLException {
+        return new AdminGrant(rs.getLong("id"), rs.getString("idem_key"), rs.getString("requested_by"), rs.getString("identity"), rs.getString("cur"), rs.getLong("amount"), rs.getString("reason"),
+                rs.getString("state"), rs.getString("approved_by"), instant(rs, "created_at"));
+    }
+
+    private static final String ADMIN_GRANT_COLS = "SELECT id, idem_key, requested_by, identity, cur, amount, reason, state, approved_by, created_at FROM wallet_admin_grant ";
+
+    public Optional<AdminGrant> adminGrantByKey(String idemKey) { return jdbc.query(ADMIN_GRANT_COLS + "WHERE idem_key = ?", (rs, i) -> adminGrant(rs), idemKey).stream().findFirst(); }
+
+    public Optional<AdminGrant> adminGrantById(long id) { return jdbc.query(ADMIN_GRANT_COLS + "WHERE id = ?", (rs, i) -> adminGrant(rs), id).stream().findFirst(); }
+
+    public long insertAdminGrant(String idemKey, String by, String identity, String cur, long amount, String reason, String state, Instant now) {
+        jdbc.update("INSERT INTO wallet_admin_grant (idem_key, requested_by, identity, cur, amount, reason, state, created_at) VALUES (?, ?, ?, ?, ?, ?, ?, ?)", idemKey, by, identity, cur, amount, reason, state,
+                Timestamp.from(now));
+        return jdbc.queryForObject("SELECT id FROM wallet_admin_grant WHERE idem_key = ?", Long.class, idemKey);
+    }
+
+    /** Passe la demande de PENDING à {@code state} (une seule fois) ; vrai si CET appel a décidé. */
+    public boolean decideAdminGrant(long id, String state, String approvedBy, Instant now) {
+        return jdbc.update("UPDATE wallet_admin_grant SET state = ?, approved_by = ?, decided_at = ? WHERE id = ? AND state = 'PENDING'", state, approvedBy, Timestamp.from(now), id) == 1;
+    }
+
+    public long adminGrantsSince(Instant since) { return jdbc.queryForObject("SELECT COUNT(*) FROM wallet_admin_grant WHERE created_at > ?", Long.class, Timestamp.from(since)); }
+
+    public long adminAppliedSince(String cur, Instant since) {
+        return jdbc.queryForObject("SELECT COALESCE(SUM(amount), 0) FROM wallet_admin_grant WHERE cur = ? AND state = 'APPLIED' AND created_at > ?", Long.class, cur, Timestamp.from(since));
     }
 
     // ---- historique ----

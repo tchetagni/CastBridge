@@ -18,6 +18,7 @@ import java.util.Map;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.ObjectProvider;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.CacheControl;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -49,6 +50,7 @@ public class WalletSyncController {
     private final SnapshotSigner signer;
     private final WalletModuleConfig.WalletClock clock;
     private final ObjectProvider<SyncContributor> contributors;
+    @Value("${castbridge.wallet.require-bind-proof:true}") private boolean requireBindProof;
 
     public WalletSyncController(DeviceService devices, EditionReader reader, GrantService grants, JdbcLedger ledger, WalletRepository repo, WalletPolicyService policies,
                                 SnapshotSigner signer, WalletModuleConfig.WalletClock clock, ObjectProvider<SyncContributor> contributors) {
@@ -87,17 +89,30 @@ public class WalletSyncController {
         List<Map<String, String>> notices = new ArrayList<>();
         GrantService.Standing st;
         boolean boundOther;
-        if (reading.accepted()) {
+        boolean accepted = reading.accepted();
+        if (accepted) {
+            // liaison à l'appareil : preuve de possession de la clé d'installation (audit M5) ; une identité libérée par l'administrateur se lie au premier appareil qui prouve
+            BindProof.Proof proof = BindProof.parse(body.path("bind"));
+            boolean proven = BindProof.valid(proof, code, d.publicId, now);
+            WalletRepository.Identity known = repo.identity(code).orElse(null);
+            if (known == null || known.apiDeviceId() == 0) {
+                if (requireBindProof && !proven) throw bindProofRequired();
+            } else if (known.apiDeviceId() == d.id) {
+                if (known.installPub() != null ? !proven || !proof.key().equals(known.installPub()) : requireBindProof && !proven) throw bindProofRequired();
+            }
             policies.checkWrite(code);
+            if (known != null && known.apiDeviceId() == 0 && (proven || !requireBindProof)) repo.bindIfFree(code, d.id);
             GrantService.Outcome o = grants.sync(code, d.id, reading, now);
+            if (proven) repo.adoptInstallKey(code, d.id, proof.key());
             st = o.standing();
             boundOther = o.boundOther();
         } else {
-            // aucune activation acceptée : on n'ouvre rien et on n'inscrit rien ; une identité déjà ouverte peut seulement être LUE
-            WalletRepository.Identity known = repo.identity(code).orElseThrow(() -> new LedgerException(reading.clockDoubt() ? WalletReason.CLOCK : WalletReason.ACTIVATE));
-            st = grants.readOnly(code, reading, now);
-            boundOther = known.apiDeviceId() != d.id;
+            // aucune activation acceptée à CE contact : on n'ouvre rien, on n'inscrit rien ; l'identité n'est lue que par l'appareil API qui la porte (audit H3), jamais par un autre
             WalletReason why = reading.clockDoubt() ? WalletReason.CLOCK : WalletReason.ACTIVATE;
+            WalletRepository.Identity known = repo.identity(code).orElseThrow(() -> new LedgerException(why));
+            if (known.apiDeviceId() != d.id) throw new LedgerException(why);
+            st = grants.readOnly(code, reading, now);
+            boundOther = false;
             notices.add(notice(why.name(), why.text()));
         }
         if (st.licensePending()) notices.add(notice("LICENSE_PENDING", LICENSE_PENDING_TEXT));
@@ -105,15 +120,19 @@ public class WalletSyncController {
 
         WalletRepository.Identity row = repo.identity(code).orElseThrow();
         WalletPolicyService.Switches sw = policies.switches();
-        boolean stakesN = sw.stakesNdem() && !row.frozen() && StakeRules.mayStake(st.edition(), Currency.NDEM, st.grace());
-        boolean stakesM = sw.stakesMboko() && !row.frozen() && StakeRules.mayStake(st.edition(), Currency.MBOKO, st.grace());
-        String snapshot = signer.sign(new SnapshotSigner.Snapshot(code, st.ed(), ledger.balance(AccountRef.dispo(code, Currency.NDEM)), ledger.balance(AccountRef.bloque(code, Currency.NDEM)),
-                ledger.balance(AccountRef.dispo(code, Currency.MBOKO)), ledger.balance(AccountRef.bloque(code, Currency.MBOKO)), ledger.lastEntryId(code), now.toEpochMilli(),
-                row.frozen(), stakesN, stakesM));
+        // une mise exige une activation acceptée à CE contact, par l'appareil lié, sur une identité non gelée
+        boolean live = accepted && !boundOther && !row.frozen();
+        boolean stakesN = live && sw.stakesNdem() && StakeRules.mayStake(st.edition(), Currency.NDEM, st.grace());
+        boolean stakesM = live && sw.stakesMboko() && StakeRules.mayStake(st.edition(), Currency.MBOKO, st.grace());
+        // seq (audit M4) : change quand une écriture OU un champ signé change ; soldes et seq lus par UNE instruction
+        repo.bumpIfChanged(code, digest(st.ed(), row.frozen(), stakesN, stakesM));
+        WalletRepository.SnapshotRead bal = repo.snapshotRead(code);
+        String snapshot = signer.sign(new SnapshotSigner.Snapshot(code, st.ed(), bal.ndem(), bal.ndemLocked(), bal.mboko(), bal.mbokoLocked(), bal.seq(), now.toEpochMilli(), row.frozen(), stakesN, stakesM));
 
+        // les contributeurs ne servent que sur une identité prouvée par une activation de ce contact (contrat de SyncContributor)
         Map<String, Object> contributions = new LinkedHashMap<>();
         SyncContributor.SyncContext ctx = new SyncContributor.SyncContext(code, now, body, st);
-        contributors.orderedStream().forEach(c -> {
+        if (accepted) contributors.orderedStream().forEach(c -> {
             try {
                 contributions.put(c.name(), c.contribute(ctx));
             } catch (RuntimeException e) {
@@ -134,6 +153,18 @@ public class WalletSyncController {
         ed.put("boundOther", boundOther);
         out.put("edition", ed);
         return ResponseEntity.ok().cacheControl(CacheControl.noStore()).body(out);
+    }
+
+    private static ApiException bindProofRequired() {
+        return new ApiException(HttpStatus.CONFLICT, "Preuve de possession de la TV manquante ou invalide : signez le contact avec la clé d'installation de la TV", List.of("BIND_PROOF"));
+    }
+
+    private static String digest(String ed, boolean frozen, boolean stakesN, boolean stakesM) {
+        try {
+            return java.util.HexFormat.of().formatHex(java.security.MessageDigest.getInstance("SHA-256").digest((ed + "|" + frozen + "|" + stakesN + "|" + stakesM).getBytes(java.nio.charset.StandardCharsets.UTF_8)));
+        } catch (java.security.NoSuchAlgorithmException e) {
+            throw new IllegalStateException(e);
+        }
     }
 
     private static Map<String, String> notice(String reason, String text) {

@@ -44,6 +44,18 @@ public class WalletPolicyService {
         return new Switches(on(r, "switch.stakes.NDEM"), on(r, "switch.stakes.MBOKO"), on(r, "switch.transfer"), on(r, "switch.convert"), on(r, "switch.vouchers"));
     }
 
+    /**
+     * Plafonds des dons de l'administration (audit H2) : par don, par jour glissant et par heure (toutes monnaies, tous administrateurs) ; au-delà d'un plafond de montant, un SECOND
+     * administrateur doit approuver. Valeurs absentes = les valeurs de lancement.
+     */
+    public record AdminCaps(long grantMax, long dailyMax, int perHour) {}
+
+    public AdminCaps adminCaps(castbridge.server.wallet.core.Currency cur) {
+        Map<String, WalletRepository.PolicyRow> r = repo.policyRows();
+        boolean n = cur == castbridge.server.wallet.core.Currency.NDEM;
+        return new AdminCaps(v(r, "admin.grantMax." + cur.name(), n ? 10_000 : 100), v(r, "admin.dailyMax." + cur.name(), n ? 100_000 : 1_000), (int) v(r, "admin.grantsPerHour", 10));
+    }
+
     private static long v(Map<String, WalletRepository.PolicyRow> r, String name, long fallback) {
         WalletRepository.PolicyRow row = r.get(name);
         return row == null ? fallback : row.value();

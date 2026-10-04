@@ -247,7 +247,7 @@ Une **divergence** = deux sources qui ne disent pas la même chose (journal ↔ 
 
 ### 5.1 Tables (migration **`V65__activation_tracking.sql`**)
 
-**Numéro** : V62 = télémétrie W21 (w21-02), V63 = grand livre W22 (w22-02), **V64 réservé** à la table d'audit anti-triche W21 ; **V65 est pris par w23-01** (à revérifier au moment de la fusion : prendre « plus haut + 1 » si V65 est pris, et le dire). Les cahiers W22 qui prennent « plus haut + 1 » (w22-10, w22-16) partiront de V66. Toutes les tables sont **nouvelles** ; **aucune table existante n'est modifiée** (le module des licences est lu, jamais écrit).
+**Numéro** : AUCUN numéro n'est réservé (règle unique, 2026-10-04) : w23-01 prend « plus haut numéro existant + 1 » AU MOMENT DE SA FUSION et le dit au rapport (V65 n'est qu'une indication de rédaction ; V62 = grand livre W22, W21 prendra aussi le suivant à sa fusion). Les cahiers W22 « plus haut + 1 » (w22-10, w22-16) font de même. Toutes les tables sont **nouvelles** ; **aucune table existante n'est modifiée** (le module des licences est lu, jamais écrit).
 
 ```
 act_tool        (kid CHAR(16) PK, tool ENUM('DESK','PHONE','SERVER','AGENT','UNKNOWN'), label VARCHAR(64), scopes VARCHAR(200),

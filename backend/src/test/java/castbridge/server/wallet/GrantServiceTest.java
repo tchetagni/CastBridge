@@ -107,17 +107,23 @@ class GrantServiceTest extends WalletTestBase {
         assertEquals(2_000, bal(tv, Currency.NDEM), "p0 (jour 0) et p1 (jour 30) précèdent la révocation du jour 40 ; p2 (jour 60) non");
     }
 
+    /**
+     * RÉÉCRIT par la correction de l'audit (H1) : w22-02 figeait le RATTRAPAGE des périodes suspendues après une reprise, ce qui contredit la conception § 1.2 (« une tranche est due si, au début de sa
+     * période, une licence ACTIVE couvrait cet instant » ; aucun rattrapage des périodes suspendues). Une reprise ouvre un NOUVEL intervalle ACTIF.
+     */
     @Test
-    void suspendedLicenseGivesNothingMoreAndResumesRetroactivelyWithoutLoss() {
+    void suspendedLicenseGivesNothingMoreAndResumesWithoutCatchUpOfTheSuspendedPeriods() {
         Acts.Tv tv = Acts.Tv.random();
         long pk = license(tv, "lic-s-" + tv.code().toLowerCase(), "ACTIVE", T0, null, 14, T0);
         service().sync(tv.code(), 1, prod(tv), T0.plusSeconds(5 * 86_400));            // ouverture + p0
         jdbc.update("UPDATE lic_license SET state = 'SUSPENDED', updated_at = ? WHERE id = ?", Timestamp.from(T0.plusSeconds(10 * 86_400)), pk);
         service().sync(tv.code(), 1, prod(tv), T0.plusSeconds(100 * 86_400));
-        assertEquals(6_000, bal(tv, Currency.NDEM), "ouverture 5 000 + p0 : la suspension du jour 10 arrête les suivantes");
+        assertEquals(5_000, bal(tv, Currency.NDEM), "ouverture 5 000 seule (5000 et 50 d'abord) : la suspension du jour 10 arrête les suivantes");
         jdbc.update("UPDATE lic_license SET state = 'ACTIVE', updated_at = ? WHERE id = ?", Timestamp.from(T0.plusSeconds(101 * 86_400)), pk);
         service().sync(tv.code(), 1, prod(tv), T0.plusSeconds(100 * 86_400));
-        assertEquals(5_000 + 4 * 1_000, bal(tv, Currency.NDEM), "reprise : les périodes manquées sont inscrites (p1, p2, p3), jamais deux fois");
+        assertEquals(5_000, bal(tv, Currency.NDEM), "reprise : p1, p2, p3 (périodes suspendues) ne sont JAMAIS rattrapées");
+        service().sync(tv.code(), 1, prod(tv), T0.plusSeconds(125 * 86_400));
+        assertEquals(5_000 + 1_000, bal(tv, Currency.NDEM), "p4 (jour 120) commence dans le nouvel intervalle actif : une tranche, une seule fois");
     }
 
     @Test
@@ -143,17 +149,17 @@ class GrantServiceTest extends WalletTestBase {
         Acts.Tv tv = Acts.Tv.random();
         license(tv, "lic-u-" + tv.code().toLowerCase(), "ACTIVE", T0, null, 14, T0);
         GrantService.Outcome o = service().sync(tv.code(), 1, prod(tv), T0.plusSeconds(5 * 86_400));
-        assertEquals(5_000 + 1_000, bal(tv, Currency.NDEM));
-        assertEquals(50 + 10, bal(tv, Currency.MBOKO));
+        assertEquals(5_000, bal(tv, Currency.NDEM), "5000 et 50 d'abord (décision du propriétaire du 2026-10-04) : pas de tranche mensuelle le premier jour");
+        assertEquals(50, bal(tv, Currency.MBOKO));
         assertEquals("UNLIMITED", o.standing().ed());
         assertTrue(repo.identity(tv.code()).orElseThrow().openedUnlimited());
         service().sync(tv.code(), 1, prod(tv), T0.plusSeconds(5 * 86_400));
-        assertEquals(6_000, bal(tv, Currency.NDEM));
+        assertEquals(5_000, bal(tv, Currency.NDEM));
         // une nouvelle licence illimitée (nouvelle clé, nouvelle licence) ne redonne pas l'ouverture
         license(tv, "lic-u2-" + tv.code().toLowerCase(), "ACTIVE", T0.plusSeconds(1 * 86_400), null, 14, T0);
         service().sync(tv.code(), 1, prod(tv), T0.plusSeconds(65 * 86_400));
-        assertEquals(5_000 + 3 * 1_000, bal(tv, Currency.NDEM), "ouverture une fois ; p0, p1, p2 une fois chacune malgré deux licences superposées");
-        assertEquals(50 + 3 * 10, bal(tv, Currency.MBOKO));
+        assertEquals(5_000 + 2 * 1_000, bal(tv, Currency.NDEM), "ouverture une fois ; p1, p2 une fois chacune malgré deux licences superposées");
+        assertEquals(50 + 2 * 10, bal(tv, Currency.MBOKO));
     }
 
     @Test
@@ -234,8 +240,8 @@ class GrantServiceTest extends WalletTestBase {
         for (Future<?> f : fs) f.get(120, TimeUnit.SECONDS);
         pool.shutdown();
         assertTrue(pool.awaitTermination(10, TimeUnit.SECONDS));
-        assertEquals(5_000 + 3 * 1_000, bal(tv, Currency.NDEM));
-        assertEquals(50 + 3 * 10, bal(tv, Currency.MBOKO));
+        assertEquals(5_000 + 2 * 1_000, bal(tv, Currency.NDEM));
+        assertEquals(50 + 2 * 10, bal(tv, Currency.MBOKO));
     }
 
     @Test

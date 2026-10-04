@@ -1,5 +1,6 @@
 package castbridge.server.wallet;
 
+import castbridge.server.licenses.EnvelopeVerifier;
 import java.time.Instant;
 import java.util.List;
 
@@ -13,11 +14,26 @@ public interface LicenseFacts {
     enum State { ACTIVE, SUSPENDED, REVOKED, EXPIRED }
 
     /**
-     * @param endAt     {@code null} = licence sans fin (ILLIMITÉE)
-     * @param updatedAt dernière modification de la ligne : sert de date de suspension ou de révocation (approximation documentée)
+     * @param endAt          {@code null} = licence sans fin (ILLIMITÉE)
+     * @param updatedAt      dernière modification de la ligne : JAMAIS une date d'état fiable (n'importe quelle modification la fait glisser) ; dernier recours, après le journal d'audit et la date figée
+     * @param seatReleasedAt date de libération du poste de cette TV (révocation, libération par l'administrateur), sinon {@code null} : borne la fin de l'intervalle de CE poste
      */
-    record LicenseView(String licenseId, State state, Instant startAt, Instant endAt, int graceDays, Instant updatedAt) {}
+    record LicenseView(String licenseId, State state, Instant startAt, Instant endAt, int graceDays, Instant updatedAt, Instant seatReleasedAt) {
+        public LicenseView(String licenseId, State state, Instant startAt, Instant endAt, int graceDays, Instant updatedAt) { this(licenseId, state, startAt, endAt, graceDays, updatedAt, null); }
+    }
 
-    /** Licences PAYANTES dont un poste {@code tv} ACTIVE porte ce code d'appareil, de la plus ancienne à la plus récente ; vide si le module des licences est éteint ou si aucune n'existe. */
+    /** Une ligne du journal d'audit des licences concernant une licence : {@code action} = LICENSE_SUSPEND, LICENSE_RESUME, LICENSE_REVOKE, LICENSE_EXPIRE, LICENSE_EXTEND… */
+    record StateEvent(String action, Instant at) {}
+
+    /**
+     * Licences PAYANTES dont un poste {@code tv} porte ce code d'appareil, de la plus ancienne à la plus récente : poste ACTIVE, ou poste libéré PAR UNE RÉVOCATION (une révocation libère tous les
+     * postes : la licence reste lisible pour que les tranches passées non versées suivent la règle de la conception). Vide si le module des licences est éteint ou si aucune n'existe.
+     */
     List<LicenseView> forDevice(String deviceCode);
+
+    /** Historique des changements d'état d'une licence (journal d'audit chaîné du module des licences), du plus ancien au plus récent ; vide si illisible. */
+    default List<StateEvent> history(String licenseId) { return List.of(); }
+
+    /** Révocations (clés et postes) enregistrées par le module des licences ({@code lic_revocation}) : s'ajoutent au fichier facultatif de révocations. */
+    default EnvelopeVerifier.Revocations revocations() { return EnvelopeVerifier.Revocations.none(); }
 }

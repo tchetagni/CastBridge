@@ -105,6 +105,8 @@ castbridge:
     # No private key here, ever. settle-per-minute = requests per minute per address on the unauthenticated settle route.
     play-result-pubkeys: ${CASTBRIDGE_WALLET_PLAY_RESULT_PUBKEYS:}
     settle-per-minute: ${CASTBRIDGE_WALLET_SETTLE_PER_MINUTE:60}
+    # first binding of an identity to a device requires the TV's proof of possession (Ed25519 install key, body field "bind"); false = legacy "first comer" binding (demo TVs that do not sign yet)
+    require-bind-proof: ${CASTBRIDGE_WALLET_REQUIRE_BIND_PROOF:true}
   rate-limit:
     per-minute: ${CASTBRIDGE_RATE_LIMIT_PER_MINUTE:120}
     burst: ${CASTBRIDGE_RATE_LIMIT_BURST:60}

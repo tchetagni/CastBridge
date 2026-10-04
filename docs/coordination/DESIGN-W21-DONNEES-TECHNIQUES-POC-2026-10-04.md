@@ -319,7 +319,7 @@ Détails de (d) :
 
 ## 6. Stockage : migration V62 dans `castbridge-db`
 
-Numéro vérifié : aucune migration ≥ V62 sur aucune branche (`git log --all -- backend/src/main/resources/db/migration`), règle « plus haut + 1 » (`backend/src/main/resources/db/migration/README.md`). Une seule migration, additive, livrée par **server-1.1.2** (le `pom.xml` est en 1.1.1 ; étiquettes `server-1.1.0`, `server-1.1.1` existantes).
+**Numéro de migration** : V62 n'est PLUS réservé à W21 : le grand livre W22 (w22-02) a pris V62 (renumérotée depuis V63, audit H4). w21-02 prend « plus haut numéro existant + 1 » AU MOMENT DE SA FUSION (V63 si le grand livre est déjà fusionné), nomme son fichier `V<n>__tech_metrics.sql` et le dit au rapport ; les « V62 » ci-dessous sont des indications de rédaction. Numéro vérifié à la rédaction : aucune migration ≥ V62 sur aucune branche (`git log --all -- backend/src/main/resources/db/migration`), règle « plus haut + 1 » (`backend/src/main/resources/db/migration/README.md`). Une seule migration, additive, livrée par **server-1.1.2** (le `pom.xml` est en 1.1.1 ; étiquettes `server-1.1.0`, `server-1.1.1` existantes).
 
 ```sql
 -- V62__tech_metrics.sql (proposition ; l'exécutant w21-02 l'écrit et la teste)
