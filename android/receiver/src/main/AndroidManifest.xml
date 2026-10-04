@@ -33,6 +33,10 @@
     <!-- Supervision of the whole TV (docs/PARENTAL.md): special access « données d'utilisation » (the user grants it in Settings or with adb) to
          know which app is in front. Nothing is sent anywhere. -->
     <uses-permission android:name="android.permission.PACKAGE_USAGE_STATS" tools:ignore="ProtectedPermissions" />
+    <!-- Built-in file explorer of the activation screen (docs/TV-ACTIVATION-CLE-USB.md): read only, asked at first use, never blocking; the app's own folder needs none.
+         MANAGE_EXTERNAL_STORAGE is only OFFERED (button, Android 11+, if the system screen exists): the APK is distributed outside any store. -->
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" android:maxSdkVersion="32" />
+    <uses-permission android:name="android.permission.MANAGE_EXTERNAL_STORAGE" tools:ignore="ScopedStorage" />
     <!-- Android 11+ package visibility: only the apps with a launcher icon, the home launcher and the Settings screens are looked up -->
     <queries>
         <package android:name="com.google.android.youtube.tv" />
@@ -40,6 +44,8 @@
         <intent><action android:name="android.intent.action.MAIN" /><category android:name="android.intent.category.LEANBACK_LAUNCHER" /></intent>
         <intent><action android:name="android.intent.action.MAIN" /><category android:name="android.intent.category.HOME" /></intent>
         <intent><action android:name="android.settings.SETTINGS" /></intent>
+        <intent><action android:name="android.intent.action.OPEN_DOCUMENT" /><category android:name="android.intent.category.OPENABLE" /><data android:mimeType="*/*" /></intent>
+        <intent><action android:name="android.settings.MANAGE_APP_ALL_FILES_ACCESS_PERMISSION" /></intent>
         <intent><action android:name="android.settings.WIFI_SETTINGS" /></intent>
         <intent><action android:name="android.settings.USAGE_ACCESS_SETTINGS" /></intent>
         <intent><action android:name="android.settings.action.MANAGE_OVERLAY_PERMISSION" /></intent>
@@ -144,6 +150,8 @@
         <!-- Start screen of a TV that needs an activation: device code, usage notice, USB file / typed key (docs/TRIAL-EDITION.md) -->
         <activity android:name=".ActivationActivity" android:exported="false" android:screenOrientation="landscape"
             android:theme="@android:style/Theme.Material.NoActionBar" android:windowSoftInputMode="adjustResize|stateHidden" />
+        <activity android:name=".FilePickActivity" android:exported="false" android:screenOrientation="landscape"
+            android:theme="@android:style/Theme.Material.NoActionBar" />
         <activity android:name=".ServerActivity" android:exported="false" android:screenOrientation="landscape"
             android:launchMode="singleTop" android:windowSoftInputMode="adjustPan"
             android:theme="@style/Theme.CastBridge.Tv.Screen" />

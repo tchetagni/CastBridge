@@ -183,7 +183,7 @@ object LockedTexts {
     /** The three real ways to give the key to the TV (activation screen), short on purpose; see docs/TV-ACTIVATION-CLE-USB.md. */
     val KEY_WAYS = listOf(
         "1. Le plus simple : sur le téléphone, CastBridge > « Activer la TV » (Bluetooth).",
-        "2. Ou un fichier nommé exactement « activation » (sans extension) dans Download/CastBridge ou dans Android/data/castbridge.receiver/files de la clé USB.",
+        "2. Ou le fichier de la clé USB : bouton « Choisir le fichier d'activation » (n'importe quel nom), ou nommé exactement « activation » dans Download/CastBridge ou Android/data/castbridge.receiver/files.",
         "3. Ou collez la clé dans le champ ci-dessous.")
     const val SEARCHING = "Recherche…"
     const val KEY_FOUND = "Clé trouvée : vérification…"

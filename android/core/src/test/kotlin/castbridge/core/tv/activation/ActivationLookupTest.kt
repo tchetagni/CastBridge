@@ -183,7 +183,7 @@ class ActivationLookupTest {
         val w = castbridge.core.owner.LockedTexts.KEY_WAYS
         assertEquals(3, w.size)
         assertTrue("Activer la TV" in w[0] && "Bluetooth" in w[0])
-        assertTrue("« activation »" in w[1] && "Download/CastBridge" in w[1] && ActivationLookup.OWN_DIR_TEXT in w[1])
+        assertTrue("Choisir le fichier d'activation" in w[1] && "« activation »" in w[1] && "Download/CastBridge" in w[1] && ActivationLookup.OWN_DIR_TEXT in w[1])
         assertTrue("champ" in w[2])
     }
 }

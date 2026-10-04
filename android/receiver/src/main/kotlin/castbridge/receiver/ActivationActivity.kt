@@ -23,7 +23,12 @@ import castbridge.core.owner.FeatureGate
 import castbridge.core.owner.GateState
 import castbridge.core.owner.LockedTexts
 import castbridge.core.owner.TrialPolicy
+import castbridge.core.tv.activation.PickInput
+import castbridge.core.tv.activation.PickResult
+import castbridge.core.tv.activation.PickerPlan
 import castbridge.core.tunnel.TunnelTerms
+import android.net.Uri
+import java.io.File
 import java.text.DateFormat
 import java.util.Date
 
@@ -141,6 +146,9 @@ class ActivationActivity : Activity() {
         col.addView(input, LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT))
         validate = Button(this).apply { text = "Valider la clé"; textSize = 20f; setOnClickListener { enter() } }
         col.addView(validate)
+        col.addView(Button(this).apply { text = "Choisir le fichier d'activation (explorateur)"; textSize = 20f; setOnClickListener { pickBuiltIn() } })
+        if (PickerPlan.Chooser.SYSTEM in PickerPlan.choosers(systemPickerIntent().resolveActivity(packageManager) != null))
+            col.addView(Button(this).apply { text = "Explorateur du système"; textSize = 20f; setOnClickListener { pickSystem() } })
         col.addView(Button(this).apply { text = "Chercher la clé sur la clé USB"; textSize = 20f; setOnClickListener { scanNow(manual = true) } })
         report = tv("", 15f, 0xFF7B849C.toInt()); col.addView(report)
         col.addView(Button(this).apply { text = "Rendre la TV visible pour le téléphone (Bluetooth)"; textSize = 20f; setOnClickListener { makeVisible() } })
@@ -153,8 +161,45 @@ class ActivationActivity : Activity() {
         setContentView(ScrollView(this).apply { setBackgroundColor(0xFF0A0F1E.toInt()); addView(col) })
     }
 
-    companion object { const val EXTRA_UPGRADE = "upgrade"; const val SCAN_EVERY_MS = 15_000L }
+    companion object { const val EXTRA_UPGRADE = "upgrade"; const val SCAN_EVERY_MS = 15_000L; private const val REQ_BUILT_IN = 81; private const val REQ_SYSTEM = 82 }
     private lateinit var report: TextView
+
+    // ---- choosing the file by hand: the built-in explorer first (a poor box has no system picker), the system one if it exists; the file name does not matter ----
+    private fun systemPickerIntent() = Intent(Intent.ACTION_OPEN_DOCUMENT).addCategory(Intent.CATEGORY_OPENABLE).setType("*/*").also { i ->
+        PickerPlan.initialUri(ActivationCenter.volumeIds().firstOrNull())?.let { i.putExtra(android.provider.DocumentsContract.EXTRA_INITIAL_URI, Uri.parse(it)) }
+    }
+    private fun pickBuiltIn() {
+        if (!termsOk()) { status.setTextColor(0xFFFF8A80.toInt()); status.text = TunnelTerms.MUST_ACCEPT; termsBox.requestFocus(); return }
+        startActivityForResult(Intent(this, FilePickActivity::class.java), REQ_BUILT_IN)
+    }
+    private fun pickSystem() {
+        if (!termsOk()) { status.setTextColor(0xFFFF8A80.toInt()); status.text = TunnelTerms.MUST_ACCEPT; termsBox.requestFocus(); return }
+        try { startActivityForResult(systemPickerIntent(), REQ_SYSTEM) }
+        catch (e: android.content.ActivityNotFoundException) { status.setTextColor(0xFFFF8A80.toInt()); status.text = PickerPlan.systemPickerMissing(); scanNow(manual = false) }       // no silent failure: say it, then the automatic lookup
+    }
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        if (requestCode != REQ_BUILT_IN && requestCode != REQ_SYSTEM) return
+        if (resultCode != RESULT_OK || data == null) { handlePick(PickInput.Cancelled); return }
+        status.setTextColor(0xFFB8C0D6.toInt()); status.text = LockedTexts.SEARCHING
+        Thread {
+            val input: PickInput = try {
+                val stream = if (requestCode == REQ_BUILT_IN) data.getStringExtra(FilePickActivity.EXTRA_PATH)?.let { java.io.FileInputStream(File(it)) }
+                             else data.data?.let { contentResolver.openInputStream(it) }              // read once, the URI is not kept (no persistable permission)
+                if (stream == null) PickInput.Nothing else stream.use { PickInput.Bytes(castbridge.core.util.BoundedRead.readAll(it, PickerPlan.MAX_BYTES + 1)) }
+            } catch (e: java.io.IOException) { PickInput.Unreadable } catch (e: SecurityException) { PickInput.Unreadable }
+            h.post { handlePick(input) }
+        }.start()
+    }
+    private fun handlePick(input: PickInput) {
+        when (val d = PickerPlan.decide(input)) {
+            is PickResult.Key -> {
+                status.setTextColor(0xFFB8C0D6.toInt()); status.text = d.message
+                Thread { val r = ActivationCenter.accept(Channel.MANUAL, d.line.toByteArray(Charsets.UTF_8)); h.post { show(r, "le fichier choisi") } }.start()
+            }
+            else -> { status.setTextColor(if (d is PickResult.Cancelled || d is PickResult.Nothing) 0xFFB8C0D6.toInt() else 0xFFFF8A80.toInt()); status.text = d.message }
+        }
+    }
     private lateinit var freeButton: Button
     private lateinit var freeStatus: TextView
     private fun exportFree() {

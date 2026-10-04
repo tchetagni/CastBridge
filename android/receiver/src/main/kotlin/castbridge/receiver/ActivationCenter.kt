@@ -181,6 +181,9 @@ object ActivationCenter {
         } finally { scanning.set(false) }
     }
 
+    /** Ids of the removable volumes seen right now (for the initial folder of the system picker). */
+    fun volumeIds(): List<String> = runCatching { ownDirs().mapNotNull { it.second }.distinct() }.getOrDefault(emptyList())
+
     private fun readOnly(d: File) = runCatching { Environment.getExternalStorageState(d) == Environment.MEDIA_MOUNTED_READ_ONLY }.getOrDefault(false)
 
     /** The app's own folder on every volume (id = volume id such as A379-E209; null for the primary storage). */
