@@ -54,9 +54,7 @@ class GameRun(val srv: PlayServer, val tvWire: Wire, val seats: List<Seat>, val 
         // 2. délai entre questions : 10 annonces, la première sans délai, les suivantes 1 à 2 s avant l'ouverture, sur l'horloge du serveur
         for (p in players) {
             assertEquals((0..9).toList(), p.seen.keys.sorted(), "${p.name} a vu les 10 questions")
-            val first = p.seen.getValue(0)
-            assertTrue(Math.abs(first.opensAtServerMs - first.serverNowMs) <= 300, "question 0 sans délai")
-            for (i in 1..9) {
+            for (i in 0..9) {   // audit Opus M-9 : la question 1 s'ouvre aussi 1 à 2 s après son annonce (avant : sans délai)
                 val q = p.seen.getValue(i)
                 val gap = q.opensAtServerMs - q.serverNowMs
                 assertTrue(gap in PlayTiming.MIN_GAP_MS..PlayTiming.MAX_GAP_MS, "${p.name} question $i : délai $gap ms hors de 1000..2000")

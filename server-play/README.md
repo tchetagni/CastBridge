@@ -44,6 +44,8 @@ Le secret de la session de repli (128 bits, vie courte) n'est JAMAIS dans une ad
 | `CASTBRIDGE_PLAY_WEB` | 0 | w20-04b : `0` = seule une CastBridge-TV activée entre (ticket + activation à `create` et à `join`), aucun navigateur (en-tête `Origin` ⇒ 403), `/play` = page d'information ; `1` = staging seulement (exige `CASTBRIDGE_PLAY_DIRECT=1`) |
 | `CASTBRIDGE_PLAY_MAX_RELAYED_PER_TV` | 8 | w20-04b : téléphones (joueurs locaux) qu'une TV peut relayer, 1 à 8 |
 | `CASTBRIDGE_PLAY_REVOCATIONS` | on | w20-04b : `on` = fermé tant qu'aucune liste signée récente n'est acceptée ; `off` = POC seulement (refusé si `MAX_ROOMS` > 20), visible : journal au démarrage et santé `"revocations":"disabled"` |
+| `CASTBRIDGE_PLAY_REQUIRE_PROOF` | 1 | audit Opus H-3 : `create` et `join` exigent la preuve de possession de la clé d'installation de la TV, liée au ticket ; `0` = migration d'une flotte mixte seulement (santé `"proof":"optional"`) |
+| `CASTBRIDGE_PLAY_MAX_HELD_PER_ADDR` | 48 | audit Opus H-4 : sockets tenues (flux SSE + long-polls) par adresse (/64 en IPv6) ; un seul long-poll par session |
 | `CASTBRIDGE_PLAY_RESERVED_DIR` | (vide) | dossier en lecture seule des paquets réservés `quiz-<lot>-reserved-pN-vN.quiz.zip` (lus à la demande) |
 | `CASTBRIDGE_PLAY_RESERVED_IDS` | `<RESERVED_DIR>/reserved-ids.json` | gel des ids réservables ; absent = aucune question réservée servie |
 | `CASTBRIDGE_PLAY_MAX_ROOMS_PER_SUBJECT` | 2 | salles ouvertes en même temps par appareil attesté (l'essai : 1) |

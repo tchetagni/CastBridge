@@ -29,7 +29,7 @@ class RevocationsModeTest {
     private val wires = ArrayList<WsWire>()
     @AfterTest fun stop() { wires.forEach { it.close() }; servers.forEach { it.close() } }
 
-    private fun server(mode: RevocationsMode, url: String? = null) = PlayServer(PlayConfig(port = 0, trustedProxies = LOOPBACK, ticketPubKeys = listOf(TestKeys.pub), trustedKeys = TestRights.trustedKeys,
+    private fun server(mode: RevocationsMode, url: String? = null) = PlayServer(PlayConfig(requireProof = false, port = 0, trustedProxies = LOOPBACK, ticketPubKeys = listOf(TestKeys.pub), trustedKeys = TestRights.trustedKeys,
         createsPerIpPerHour = 10_000, webPlay = false, revocationsMode = mode, revocationsUrl = url)).also { it.start(); servers += it }
 
     private fun tv(srv: PlayServer, tv: TestRights.Tv): WsWire = WsWire(srv.port, origin = null, ticket = TestKeys.ticket(deviceCode = tv.code)).also { wires += it }

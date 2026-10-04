@@ -12,7 +12,7 @@ class EightClientGameTest {
     @AfterTest fun stop() { servers.forEach { it.close() } }
 
     @Test fun eightClientsOverWebSocketSseAndLongPollPlayOneFairDuel() {
-        val srv = PlayServer(PlayConfig(webPlay = true, revocationsMode = castbridge.play.RevocationsMode.OFF, port = 0, trustedProxies = LOOPBACK, ticketPubKeys = listOf(TestKeys.pub), trustedKeys = TestRights.trustedKeys, createsPerIpPerHour = 10_000)).start().also { servers += it }
+        val srv = PlayServer(PlayConfig(requireProof = false, webPlay = true, revocationsMode = castbridge.play.RevocationsMode.OFF, port = 0, trustedProxies = LOOPBACK, ticketPubKeys = listOf(TestKeys.pub), trustedKeys = TestRights.trustedKeys, createsPerIpPerHour = 10_000)).start().also { servers += it }
         fun ip(n: Int) = "203.0.113.$n"
         val seats = (0 until 8).map { k ->
             val wire: Wire = when {

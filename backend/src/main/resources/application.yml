@@ -88,6 +88,7 @@ castbridge:
   play:
     ticket-key-file: ${CASTBRIDGE_PLAY_TICKET_KEY_FILE:}
     per-device-per-hour: ${CASTBRIDGE_PLAY_TICKET_PER_DEVICE_PER_HOUR:20}
+    per-address-per-hour: ${CASTBRIDGE_PLAY_TICKET_PER_ADDRESS_PER_HOUR:120}
   # Wallet module (W22: NDEM / MBOKO tokens, double-entry ledger, docs/coordination/DESIGN-W22-JETONS-NDEM-MBOKO-2026-10-04.md): OFF by default IN THE CODE (routes answer 404), turned on at
   # delivery by CASTBRIDGE_WALLET_ENABLED=1. The wallet key is a SECRET FILE (never a value here); empty or absent = the device routes answer 503 "Portefeuille indisponible".
   # The operating switches (stakes, transfer, convert, vouchers) live in the wallet_policy table and are ON by default.

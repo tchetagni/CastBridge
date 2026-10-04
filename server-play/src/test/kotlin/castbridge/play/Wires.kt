@@ -28,10 +28,11 @@ object TestKeys {
 
     /** Un ticket `cbp1` : appareil attesté frais par défaut (un sujet par ticket), `jti` de 128 bits frais, code d'appareil de la TV de test. */
     fun ticket(now: Long = System.currentTimeMillis(), lifeMs: Long = 60_000, iat: Long = now, pair: KeyPair = this.pair, deviceId: String = "dev-" + hex(8),
-               deviceCode: String? = TestRights.CODE, aud: String = "castbridge-play", blocked: Boolean = false, jti: String? = hex(16)): String {
+               deviceCode: String? = TestRights.CODE, aud: String = "castbridge-play", blocked: Boolean = false, jti: String? = hex(16), ik: String? = null): String {
         val fields = ArrayList<String>()
         fields += "\"aud\":\"$aud\""; fields += "\"deviceId\":\"$deviceId\""; fields += "\"blocked\":$blocked"; fields += "\"country\":\"CM\""
         if (deviceCode != null) fields += "\"deviceCode\":\"$deviceCode\""
+        if (ik != null) fields += "\"ik\":\"$ik\""
         fields += "\"iat\":$iat"; fields += "\"exp\":${iat + lifeMs}"
         if (jti != null) fields += "\"jti\":\"$jti\""
         val payload = b64.encodeToString(("{" + fields.joinToString(",") + "}").toByteArray())

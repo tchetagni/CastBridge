@@ -30,7 +30,7 @@ class LimitFilterTest {
     private val servers = ArrayList<PlayServer>()
     @AfterTest fun stop() { servers.forEach { it.close() }; servers.clear() }
     private fun server(cfg: PlayConfig) = PlayServer(cfg).also { it.start(); servers += it }
-    private fun cfg(connPerMinute: Int = 60, maxPerIp: Int = 8, shared: Int = 64) = PlayConfig(webPlay = true, revocationsMode = castbridge.play.RevocationsMode.OFF, port = 0, trustedProxies = LOOPBACK, ticketPubKeys = listOf(TestKeys.pub), connPerMinute = connPerMinute, maxPerIp = maxPerIp, maxPerIpShared = shared)
+    private fun cfg(connPerMinute: Int = 60, maxPerIp: Int = 8, shared: Int = 64) = PlayConfig(requireProof = false, webPlay = true, revocationsMode = castbridge.play.RevocationsMode.OFF, port = 0, trustedProxies = LOOPBACK, ticketPubKeys = listOf(TestKeys.pub), connPerMinute = connPerMinute, maxPerIp = maxPerIp, maxPerIpShared = shared)
 
     /** Poignée de main brute : (statut, en-têtes en minuscules). Aucune trame n'est lue après. */
     private fun handshake(port: Int, xff: String): Pair<Int, Map<String, String>> {
@@ -107,7 +107,7 @@ class LimitFilterTest {
     }
 
     @Test fun busyServiceAnswersPlayBusyWithRetryAfterMs() {
-        val hub = castbridge.play.PlayHub(PlayConfig(webPlay = true, revocationsMode = castbridge.play.RevocationsMode.OFF, maxRooms = 1, trustedProxies = LOOPBACK, ticketPubKeys = listOf(TestKeys.pub), trustedKeys = TestRights.trustedKeys, createsPerIpPerHour = 100_000), { 1_000L }, GuardHarness.bank,
+        val hub = castbridge.play.PlayHub(PlayConfig(requireProof = false, webPlay = true, revocationsMode = castbridge.play.RevocationsMode.OFF, maxRooms = 1, trustedProxies = LOOPBACK, ticketPubKeys = listOf(TestKeys.pub), trustedKeys = TestRights.trustedKeys, createsPerIpPerHour = 100_000), { 1_000L }, GuardHarness.bank,
             castbridge.play.entitlement.TicketVerifier(listOf(TestKeys.pub)), limits = ConnectionLimits(1_000, 1_000_000))
         GuardHarness.host(hub)
         val tv2 = FakeConn("tv2", "198.51.100.10").also { it.ticket = TestKeys.ticket(); hub.register(it) }

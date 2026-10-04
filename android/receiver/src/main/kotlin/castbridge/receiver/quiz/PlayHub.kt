@@ -9,7 +9,12 @@ import castbridge.core.net.HttpLite
 import castbridge.core.owner.GateState
 import castbridge.core.quiz.QuizHttp
 import castbridge.core.quiz.online.HostEdition
+import castbridge.core.quiz.online.OpenGate
+import castbridge.core.quiz.online.PlayActivation
 import castbridge.core.quiz.online.PlayErrors
+import castbridge.core.quiz.online.PlayProof
+import castbridge.core.quiz.online.PlayTvName
+import castbridge.core.quiz.online.TicketCache
 import castbridge.core.quiz.online.PlayGate
 import castbridge.core.quiz.online.PlayHttpTransport
 import castbridge.core.quiz.online.PlayIntent
@@ -26,6 +31,7 @@ import castbridge.receiver.ActivationCenter
 import castbridge.receiver.ParentalHub
 import castbridge.receiver.TvConnect
 import castbridge.receiver.TvService
+import castbridge.receiver.wallet.WalletHub
 import java.io.IOException
 import java.util.concurrent.Executors
 import java.util.concurrent.ScheduledFuture
@@ -63,13 +69,17 @@ object PlayHub {
     private fun edition(): HostEdition = PlayGate.editionOf(ActivationCenter.locked(), ActivationCenter.trial(), ActivationCenter.state() is GateState.Grace)
 
     /** La tuile « Partie Internet » : rien, une raison, ou disponible (toute la décision est dans [PlayGate]). */
-    fun tile(ctx: Context): PlayTile = PlayGate.tile(flagOn(ctx), edition(), hasInternet(ctx), ParentalHub.kidHomeActive(), ActivationCenter.clockSuspended(), serviceUp())
+    fun tile(ctx: Context): PlayTile = PlayGate.tile(flagOn(ctx), edition(), hasInternet(ctx), ParentalHub.kidHomeActive(), ActivationCenter.clockSuspended(), serviceUp(),
+        verifiableActivation = PlayActivation.pick(ActivationCenter.allActivations(), ActivationCenter.now()) != null)   // M-4 : la même règle que le service
 
     // ------------------------------------------------------------------ le service répond-il ?
 
     @Volatile private var probeUp: Boolean? = null
     @Volatile private var probeAt = 0L
     @Volatile private var probing = false
+
+    /** Le sondage a appris que le service n'applique pas encore les révocations (`"revocations":"off"`) : le menu le dit (audit Opus, honnêteté). */
+    @Volatile var revocationsOff = false; private set
 
     /** Dernier sondage du service (null : pas encore sondé ⇒ on essaie). */
     fun serviceUp(): Boolean? = probeUp
@@ -83,7 +93,7 @@ object PlayHub {
                 val link = TvConnect.link
                 val base = link?.state?.baseUrl?.takeIf { it.isNotBlank() }
                 probeUp = if (link == null || base == null) null else try {
-                    link.routes.call { p -> HttpLite(p, connectTimeoutMs = 8_000, readTimeoutMs = 8_000, userAgent = "CastBridge-TV").request("GET", "$base/play/.well-known/caps").code in 200..299 }
+                    link.routes.call { p -> HttpLite(p, connectTimeoutMs = 8_000, readTimeoutMs = 8_000, userAgent = "CastBridge-TV").request("GET", "$base/play/.well-known/caps").let { r -> revocationsOff = r.body.contains("\"revocations\":\"off\""); r.code in 200..299 } }
                 } catch (e: IOException) { false }
                 probeAt = SystemClock.elapsedRealtime()
             } finally { probing = false }
@@ -92,6 +102,9 @@ object PlayHub {
     }
 
     // ------------------------------------------------------------------ ticket `cbp1` (jamais journalisé)
+
+    /** H-3 : la clé d'installation de la TV (publique) est donnée à l'API, qui l'épingle ; la TV prouvera ensuite qu'elle la détient. Jamais la clé privée, qui ne quitte pas l'appareil. */
+    private fun installKeyJson(): String = WalletHub.installSigner()?.let { ""","installKey":"${it.publicKeyBase64}"""" } ?: ""
 
     /** Un ticket frais, par la route réseau de la TV puis par la passerelle du téléphone ([Routes]). Bloquant : jamais sur le fil principal. */
     fun fetchTicket(): PlayTicketReply {
@@ -102,7 +115,7 @@ object PlayHub {
         return try {
             val r = link.routes.call { p ->
                 HttpLite(p, connectTimeoutMs = 10_000, readTimeoutMs = 15_000, userAgent = "CastBridge-TV")
-                    .request("POST", "$base/api/v1/play/ticket", """{"deviceCode":"$deviceCode"}""", mapOf("Authorization" to "Bearer $token"))
+                    .request("POST", "$base/api/v1/play/ticket", """{"deviceCode":"$deviceCode"${installKeyJson()}}""", mapOf("Authorization" to "Bearer $token"))
             }
             PlayTicketReply.parse(r.code, r.body)
         } catch (e: IOException) { PlayTicketReply.Refused(PlayErrors.NO_INTERNET) }
@@ -126,29 +139,38 @@ object PlayHub {
      * Ouvre la partie (créer ou rejoindre). Tout se passe en arrière-plan ; [onResult] reçoit null si la session est partie (l'écran suit ensuite `session`), ou le texte du refus.
      * Le premier ticket est demandé ici pour que son refus soit dit clairement ; la session en redemande un à chaque NOUVELLE session de service.
      */
+    private val gate = OpenGate()
+
     fun start(ctx: Context, intent: PlayIntent, onResult: (String?) -> Unit) {
-        stop()
+        stop()   // annule aussi toute ouverture encore en cours (génération)
+        val gen = gate.begin()
         worker.execute {
             try {
                 val first = fetchTicket()
+                if (!gate.isCurrent(gen)) return@execute   // M-5 : « Retour » pendant l'attente du ticket : rien n'est ouvert, aucune salle fantôme
                 if (first !is PlayTicketReply.Ok) { onResult((first as PlayTicketReply.Refused).text); return@execute }
-                val activation = TunnelEnroll.pickActivation(ActivationCenter.allActivations(), ActivationCenter.now())?.encode()
+                val activation = PlayActivation.pick(ActivationCenter.allActivations(), ActivationCenter.now())?.encode()   // M-4 : une activation que le service sait vérifier
                 if (activation == null) { onResult(PlayRules.MSG_ACTIVATE); return@execute }
                 val link = TvConnect.link ?: run { onResult(PlayErrors.NO_INTERNET); return@execute }
                 val routes = link.routes
                 val base = link.state.baseUrl
                 var pending: String? = first.ticket
-                val ticket = { synchronized(this) { pending?.also { pending = null } } ?: (fetchTicket() as? PlayTicketReply.Ok)?.ticket }
+                val cache = TicketCache(mono) { (fetchTicket() as? PlayTicketReply.Ok)?.ticket }.also { it.adopt(first.ticket) }
+                val ticket = { synchronized(this) { pending?.also { pending = null } } ?: cache.fresh() }   // création / entrée : toujours un ticket neuf (usage unique)
+                val signer = WalletHub.installSigner()
+                // M-6 : le service juge le ticket à la création de la session seulement : il part au premier POST, plus à chaque envoi (aucun renouvellement, aucun appel d'API en cours de partie)
                 val factory = TransportFactory { t ->
-                    PlayHttpTransport(base, t, proxy = { if (routes.lastVia == Routes.Via.GATEWAY) gatewayProxy() else null }, clock = mono,
-                        refreshTicket = { (fetchTicket() as? PlayTicketReply.Ok)?.ticket })
+                    PlayHttpTransport(base, t, proxy = { if (routes.lastVia == Routes.Via.GATEWAY) gatewayProxy() else null }, clock = mono, ticketOnEveryPost = false)
                 }
-                val s = PlayTvSession(clock = mono, transports = factory, ticket = ticket, via = { routes.lastVia }, tvHasNetwork = { hasInternet(ctx) })
+                val s = PlayTvSession(clock = mono, transports = factory, ticket = ticket, via = { routes.lastVia }, tvHasNetwork = { hasInternet(ctx) },
+                    resumeTicket = { cache.reusable() },   // une reprise réutilise le ticket courant (< 9 min)
+                    prover = { t, a -> signer?.let { PlayProof.build(it::sign, it.publicKeyBase64, t, a) } })   // H-3 : preuve de possession de la clé d'installation
                 val deviceHash = TvConnect.hash(ActivationCenter.deviceCode)
                 s.start(deviceHash, activation, when (intent) {
                     PlayIntent.Create -> PlayTvSession.Intent.Create(name = null, mode = "DUEL")   // la TV ne joue pas : elle héberge ; ses téléphones jouent par elle
-                    is PlayIntent.Join -> PlayTvSession.Intent.Join(RoomCode.normalize(intent.code) ?: intent.code, null)
+                    is PlayIntent.Join -> PlayTvSession.Intent.Join(RoomCode.normalize(intent.code) ?: intent.code, PlayTvName.of(android.os.Build.MODEL))   // C-1 : la TV envoie un nom
                 })
+                if (!gate.isCurrent(gen)) { runCatching { s.stop() }; return@execute }   // annulée pendant l'ouverture : on ferme ce qu'on vient d'ouvrir
                 session = s
                 relay = RelayAuthority(s, mono)
                 ticking?.cancel(false)
@@ -156,7 +178,7 @@ object PlayHub {
                 TvConnect.feature("quiz_online", "menu")
                 onResult(null)
             } catch (e: Exception) {
-                onResult(PlayErrors.GENERIC)
+                if (gate.isCurrent(gen)) onResult(PlayErrors.GENERIC)
             }
         }
     }
@@ -169,6 +191,7 @@ object PlayHub {
 
     /** Arrêt volontaire : retour au menu. */
     fun stop() {
+        gate.cancel()
         ticking?.cancel(false); ticking = null
         runCatching { session?.stop() }
         session = null; relay = null

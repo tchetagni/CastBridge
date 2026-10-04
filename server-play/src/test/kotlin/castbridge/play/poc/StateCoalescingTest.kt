@@ -48,7 +48,7 @@ class StateCoalescingTest {
     private val bots = ArrayList<Bot>()
     @AfterTest fun stop() { bots.forEach { it.stop() }; servers.forEach { it.close() }; closeables.forEach { runCatching { it.close() } } }
 
-    private val cfg = PlayConfig(port = 0, ticketPubKeys = listOf(TestKeys.pub), trustedKeys = TestRights.trustedKeys, webPlay = true, revocationsMode = RevocationsMode.OFF)
+    private val cfg = PlayConfig(requireProof = false, port = 0, ticketPubKeys = listOf(TestKeys.pub), trustedKeys = TestRights.trustedKeys, webPlay = true, revocationsMode = RevocationsMode.OFF)
 
     /** Une vue d'environ 5 Ko (huit joueurs). */
     private fun state(seq: Int) = PlayCodec.encode(ServerMsg.State(seq.toLong(), linkedMapOf("pad" to "x".repeat(5_000), "n" to seq), false))
@@ -144,7 +144,7 @@ class StateCoalescingTest {
     }
 
     @Test fun aSlowTvInARealRoomKeepsOneStateBehindTheRevealAfterAnEightAnswerBurst() {
-        val srv = PlayServer(PlayConfig(port = 0, trustedProxies = LOOPBACK, ticketPubKeys = listOf(TestKeys.pub), trustedKeys = TestRights.trustedKeys, createsPerIpPerHour = 10_000,
+        val srv = PlayServer(PlayConfig(requireProof = false, port = 0, trustedProxies = LOOPBACK, ticketPubKeys = listOf(TestKeys.pub), trustedKeys = TestRights.trustedKeys, createsPerIpPerHour = 10_000,
             webPlay = false, revocationsMode = RevocationsMode.OFF), settings = ServerRoom.Settings(duelCount = 3, seatsPerTable = 16)).start().also { servers += it }
         val bank = EmbeddedQuestionSource().bank()
         val ta = TestKeys.ticket(deviceCode = TestRights.tv.code, lifeMs = 600_000)

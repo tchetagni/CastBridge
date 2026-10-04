@@ -16,10 +16,12 @@ object PlayProtocol {
     const val MAX_TOKEN = 64
     const val MAX_ARG = 256
     const val MAX_TICKET = 1_200
-    /** w20-04 : un jeton `cbx1` joint à `create` ; au plus [MAX_RENTALS] jetons de location ; `create` seul peut dépasser [MAX_MESSAGE_BYTES] (jusqu'à [MAX_CREATE_BYTES]). */
+    /** w20-04 : un jeton `cbx1` joint à `create` ; au plus [MAX_RENTALS] jetons de location ; `create` et le `join` d'une TV peuvent dépasser [MAX_MESSAGE_BYTES] (jusqu'à [MAX_CREATE_BYTES], 8 192 : audit M-1). */
     const val MAX_ACTIVATION = 4_096
     const val MAX_RENTALS = 2
-    const val MAX_CREATE_BYTES = 16_384
+    const val MAX_CREATE_BYTES = 8_192
+    /** H-3 : preuve de possession `<clé publique base64>.<signature base64>` (≈ 133 caractères). */
+    const val MAX_PROOF = 200
     const val MAX_CAPS = 12
     const val MAX_REASON = 64
     const val MAX_ELAPSED_MS = 60_000L
@@ -56,12 +58,14 @@ sealed class ClientMsg {
     /** Premier message de l'hôte (TV) : crée la salle ; `mode` = MILLIONAIRE | DUEL (facultatif). `name` null = la TV ne joue pas. */
     data class Create(val name: String?, val mode: String?,
                       /** w20-04 (additif, capacité `play-ticket`) : l'activation `cbx1` de la TV (preuve d'édition, évaluée par le SERVICE avec son horloge) et, au plus [PlayProtocol.MAX_RENTALS], ses lignes de location signées (autres activations `cbx1`). */
-                      val activation: String? = null, val rentals: List<String> = emptyList()) : ClientMsg() {
+                      val activation: String? = null, val rentals: List<String> = emptyList(),
+                      /** Audit Opus H-3 (additif) : preuve de possession de la clé d'installation de la TV, liée au ticket ([PlayProof]). */
+                      val proof: String? = null) : ClientMsg() {
         override val type get() = "create"
         override fun toString() = "Create(name=${PlayRedact.pseudo(name)}, mode=$mode, activation=${if (activation == null) "-" else PlayRedact.REDACTED}, rentals=${rentals.size})"   // jamais l'activation `cbx1` (T-18)
     }
     /** `activation` (w20-04b, additif) : l'activation `cbx1` de la TV qui rejoint ; le service l'exige de toute connexion non assise quand `CASTBRIDGE_PLAY_WEB=0` (seule une TV activée entre). */
-    data class Join(val code: String, val name: String?, val token: String?, val deviceHash: String?, val spectate: Boolean, val activation: String? = null) : ClientMsg() {
+    data class Join(val code: String, val name: String?, val token: String?, val deviceHash: String?, val spectate: Boolean, val activation: String? = null, /** H-3 (additif) : voir [Create.proof]. */ val proof: String? = null) : ClientMsg() {
         override val type get() = "join"
         override fun toString() = "Join(code=${PlayRedact.code(code)}, name=${PlayRedact.pseudo(name)}, token=${if (token == null) "-" else PlayRedact.REDACTED}, device=${PlayRedact.device(deviceHash)}, spectate=$spectate, activation=${if (activation == null) "-" else PlayRedact.REDACTED})"
     }

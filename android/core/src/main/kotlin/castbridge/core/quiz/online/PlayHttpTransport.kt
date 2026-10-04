@@ -93,7 +93,8 @@ class PlayHttpTransport(
                     val run = ArrayList<String>()
                     while (i < batch.size && isRelay(batch[i])) run += batch[i++]
                     sendParallel(coalesce(run))
-                } else deliverOne(batch[i++])
+                } else if (secret != null && batch[i].startsWith("{\"t\":\"pong\"")) sendParallel(listOf(batch[i++]))   // M-8 : un pong lent (3 essais, attentes ≤ 5 s) ne retient jamais la réponse d'un joueur derrière lui
+                else deliverOne(batch[i++])
             }
         }
     }

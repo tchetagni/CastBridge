@@ -208,7 +208,7 @@ object WalletHub {
      * Choix assumé : fichier privé (PlainWrapper) et non le coffre Android : un changement de coffre ferait changer d'identité et le serveur refuserait la TV (BIND_PROOF) jusqu'à une
      * réaffectation par l'administrateur ; la preuve vise la copie d'une clé d'activation, pas un accès root à la TV.
      */
-    @Synchronized private fun installSigner(): InstallSigner? {
+    @Synchronized fun installSigner(): InstallSigner? {
         signer?.let { return it }
         return runCatching { InstallSigner.loadOrCreate(FileInstallSignerStore(File(dir(), "install-signer.b64")), PlainWrapper()).signer }
             .onFailure { Log.w(TAG, "clé d'installation indisponible (${it.javaClass.simpleName})") }.getOrNull()?.also { signer = it }

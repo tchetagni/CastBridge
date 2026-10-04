@@ -21,6 +21,10 @@ class PlayTvSession(
     private val via: () -> Routes.Via? = { null },
     private val tvHasNetwork: () -> Boolean = { true },
     private val curveSec: IntArray = CURVE_SEC,
+    /** M-6 : ticket pour rouvrir une session par `resume` (un ticket encore valable suffit : rien n'est consommé) ; null = [ticket]. */
+    private val resumeTicket: (() -> String?)? = null,
+    /** H-3 : fabrique la preuve de possession de la clé d'installation pour (ticket, activation) ; null = pas de preuve (anciens montages, tests). */
+    private val prover: ((String?, String) -> String?)? = null,
 ) {
     sealed class Intent {
         data class Create(val name: String?, val mode: String?, val rentals: List<String> = emptyList()) : Intent()
@@ -77,11 +81,13 @@ class PlayTvSession(
         }
     }
 
+    private fun proofFor(tkt: String?): String? = activation?.let { a -> prover?.invoke(tkt, a) }
+
     private fun sendOpening(tkt: String?) {
         authority.hello(deviceHash, tkt)
         when (val i = intent!!) {
-            is Intent.Create -> authority.create(i.name, i.mode, activation, i.rentals)
-            is Intent.Join -> authority.joinRoom(i.code, i.name, deviceHash, activation)
+            is Intent.Create -> authority.create(i.name, i.mode, activation, i.rentals, proofFor(tkt))
+            is Intent.Join -> authority.joinRoom(i.code, i.name, deviceHash, activation, proof = proofFor(tkt))
         }
     }
 
@@ -103,6 +109,8 @@ class PlayTvSession(
                 questionClock = QuestionClock(m.questionId, now + (m.opensAtServerMs - seenAt), m.windowMs, now, st.startNow, st.waitMs, st.remainingMs)
             }
             is ServerMsg.Welcome, is ServerMsg.State, is ServerMsg.Replay -> if (awaitingResume) { awaitingResume = false; refreshHealth() }
+            // B-3 : une reprise refusée (salle disparue, siège purgé) ne se retente pas pendant 60 s
+            is ServerMsg.Error -> if (awaitingResume && (m.reason == PlayReason.PLAY_BAD_CODE.name || m.reason == PlayReason.PLAY_ROOM_GONE.name)) fatal("salle perdue")
             else -> {}
         }
         onChange?.invoke()
@@ -139,7 +147,7 @@ class PlayTvSession(
         val seatToken = authority.token
         // Un ticket frais à chaque NOUVELLE session de service : jamais assise = nouvelle création ou entrée (un ticket sert une fois) ; assise = reprise, mais le service
         // exige un ticket valide sur chaque POST d'un client sans `Origin` (OriginCheck) ; la fonction injectée peut mettre le dernier en cache quelques dizaines de secondes.
-        val tkt = ticket()
+        val tkt = if (seatToken != null) (resumeTicket ?: ticket)() else ticket()   // M-6 : une reprise réutilise le ticket courant (rien n'est consommé)
         val tr = open(tkt)
         authority.rebind(tr)
         if (seatToken == null) { sendOpening(tkt); return }

@@ -33,7 +33,7 @@ object HubFixture {
         val m = more.toMap()
         return PlayConfig(webPlay = m["webPlay"] as Boolean? ?: true, revocationsMode = castbridge.play.RevocationsMode.OFF, port = 0, ticketPubKeys = listOf(TestKeys.pub), trustedKeys = TestRights.trustedKeys,
             maxRooms = m["maxRooms"] as Int? ?: 400, maxRoomsPerSubject = m["perSubject"] as Int? ?: 1000, roomIdleMs = m["idle"] as Long? ?: 10 * 60_000L, createsPerIpPerHour = m["perIp"] as Int? ?: 100_000,
-            maxUsedTickets = m["used"] as Int? ?: 20_000,
+            maxUsedTickets = m["used"] as Int? ?: 20_000, requireProof = m["requireProof"] as Boolean? ?: false,
             createsPerIdentityPerDay = m["perIdentityDay"] as Int? ?: 100_000, createsPer48PerHour = m["per48"] as Int? ?: 1_000_000)
     }
 

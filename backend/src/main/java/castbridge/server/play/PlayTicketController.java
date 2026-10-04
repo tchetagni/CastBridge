@@ -28,12 +28,12 @@ public class PlayTicketController {
         this.tickets = tickets;
     }
 
-    public record TicketRequest(String deviceCode) {}
+    public record TicketRequest(String deviceCode, String installKey) {}
 
     @PostMapping("/ticket")
     public ResponseEntity<PlayTicketService.Issued> ticket(@RequestHeader(name = "Authorization", required = false) String authorization,
                                                            @RequestBody(required = false) TicketRequest body, HttpServletRequest req) {
         Device d = devices.authenticate(authorization).orElseThrow(() -> new ApiException(HttpStatus.UNAUTHORIZED, "Jeton d'appareil inconnu"));
-        return ResponseEntity.ok().cacheControl(CacheControl.noStore()).body(tickets.issue(d, body == null ? null : body.deviceCode(), System.currentTimeMillis(), req.getRemoteAddr()));
+        return ResponseEntity.ok().cacheControl(CacheControl.noStore()).body(tickets.issue(d, body == null ? null : body.deviceCode(), System.currentTimeMillis(), req.getRemoteAddr(), body == null ? null : body.installKey()));
     }
 }

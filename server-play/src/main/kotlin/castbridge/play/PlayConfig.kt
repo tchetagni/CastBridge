@@ -107,6 +107,10 @@ class PlayConfig(
     val maxRelayedPerTv: Int = 8,
     /** `CASTBRIDGE_PLAY_REVOCATIONS` = `on` | `off` ; voir [RevocationsMode]. */
     val revocationsMode: RevocationsMode = RevocationsMode.ON,
+    /** H-3 : `create` et `join` exigent la preuve de possession de la clé d'installation de la TV, liée au ticket ([castbridge.core.quiz.online.PlayProof]) ; `CASTBRIDGE_PLAY_REQUIRE_PROOF=0` : migration d'une flotte mixte SEULEMENT (visible en santé et au journal). */
+    val requireProof: Boolean = true,
+    /** H-4 : sockets tenues (flux SSE + long-polls) par adresse (/64 en IPv6) ; `CASTBRIDGE_PLAY_MAX_HELD_PER_ADDR`. */
+    val maxHeldPerAddress: Int = 48,
 ) {
     companion object {
         const val VERSION = "w20-04"
@@ -118,7 +122,7 @@ class PlayConfig(
             "CASTBRIDGE_PLAY_TICKET_PUBKEY_3", "CASTBRIDGE_PLAY_TRUSTED_KEYS", "CASTBRIDGE_PLAY_RESERVED_DIR", "CASTBRIDGE_PLAY_RESERVED_IDS", "CASTBRIDGE_PLAY_REVOCATIONS_URL",
             "CASTBRIDGE_PLAY_MAX_ROOMS_PER_SUBJECT", "CASTBRIDGE_PLAY_CREATES_PER_IP_HOUR", "CASTBRIDGE_PLAY_MAX_USED_TICKETS", "CASTBRIDGE_PLAY_DIRECT",
             "CASTBRIDGE_PLAY_CREATES_PER_IDENTITY_DAY", "CASTBRIDGE_PLAY_CREATES_PER_48_HOUR", "CASTBRIDGE_PLAY_REVOCATIONS_FILE",
-            "CASTBRIDGE_PLAY_WEB", "CASTBRIDGE_PLAY_MAX_RELAYED_PER_TV", "CASTBRIDGE_PLAY_REVOCATIONS")
+            "CASTBRIDGE_PLAY_WEB", "CASTBRIDGE_PLAY_MAX_RELAYED_PER_TV", "CASTBRIDGE_PLAY_REVOCATIONS", "CASTBRIDGE_PLAY_REQUIRE_PROOF", "CASTBRIDGE_PLAY_MAX_HELD_PER_ADDR")
 
         /**
          * Les réseaux de confiance sont OBLIGATOIRES (adresse exacte de nginx en /32) : absents, le service refuse de démarrer, sauf `CASTBRIDGE_PLAY_DIRECT=1` (staging, tests :
@@ -186,6 +190,8 @@ class PlayConfig(
                 webPlay = webPlay,
                 maxRelayedPerTv = e("CASTBRIDGE_PLAY_MAX_RELAYED_PER_TV")?.toIntOrNull()?.coerceIn(1, 8) ?: d.maxRelayedPerTv,
                 revocationsMode = revocationsMode,
+                requireProof = when (e("CASTBRIDGE_PLAY_REQUIRE_PROOF")) { null, "1" -> true; "0" -> false; else -> throw IllegalStateException("CASTBRIDGE_PLAY_REQUIRE_PROOF vaut 0 ou 1") },
+                maxHeldPerAddress = e("CASTBRIDGE_PLAY_MAX_HELD_PER_ADDR")?.toIntOrNull()?.coerceIn(2, 1_000) ?: d.maxHeldPerAddress,
             )
         }
     }

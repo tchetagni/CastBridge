@@ -20,9 +20,10 @@ object PlayCodec {
 
     fun encode(m: ClientMsg): String = Json.write(when (m) {
         is ClientMsg.Hello -> linkedMapOf("t" to m.type, "proto" to m.proto, "caps" to m.caps, "deviceHash" to m.deviceHash, "ticket" to m.ticket)
-        is ClientMsg.Create -> linkedMapOf("t" to m.type, "name" to m.name, "mode" to m.mode, "activation" to m.activation, "rentals" to m.rentals)
+        is ClientMsg.Create -> linkedMapOf<String, Any?>("t" to m.type, "name" to m.name, "mode" to m.mode, "activation" to m.activation, "rentals" to m.rentals)
+            .also { if (m.proof != null) it["proof"] = m.proof }   // additif : absent du fil quand il n'y en a pas
         is ClientMsg.Join -> linkedMapOf<String, Any?>("t" to m.type, "code" to m.code, "name" to m.name, "token" to m.token, "deviceHash" to m.deviceHash, "spectate" to m.spectate)
-            .also { if (m.activation != null) it["activation"] = m.activation }   // additif : absent du fil quand il n'y en a pas
+            .also { if (m.activation != null) it["activation"] = m.activation; if (m.proof != null) it["proof"] = m.proof }   // additif : absent du fil quand il n'y en a pas
         is ClientMsg.Resume -> linkedMapOf("t" to m.type, "roomId" to m.roomId, "token" to m.token, "lastSeq" to m.lastSeq)
         is ClientMsg.Act -> linkedMapOf("t" to m.type, "seq" to m.seq, "questionId" to m.questionId, "action" to m.action, "choice" to m.choice, "arg" to m.arg)
         is ClientMsg.RelayAct -> linkedMapOf("t" to m.type, "seq" to m.seq, "token" to m.token, "questionId" to m.questionId, "choice" to m.choice, "localElapsedMono" to m.localElapsedMono)
@@ -45,9 +46,9 @@ object PlayCodec {
         return try {
             Decoded.Ok(when (t) {
                 "hello" -> ClientMsg.Hello(f.int("proto", 1..1_000), f.strings("caps"), f.str("deviceHash", PlayProtocol.MAX_ID, false), f.str("ticket", PlayProtocol.MAX_TICKET, false))
-                "create" -> ClientMsg.Create(f.str("name", PlayProtocol.MAX_NAME_WIRE, false), f.str("mode", 16, false), f.token("activation"), f.tokens("rentals"))
+                "create" -> ClientMsg.Create(f.str("name", PlayProtocol.MAX_NAME_WIRE, false), f.str("mode", 16, false), f.token("activation"), f.tokens("rentals"), f.str("proof", PlayProtocol.MAX_PROOF, false))
                 "join" -> ClientMsg.Join(f.str("code", 16, true)!!, f.str("name", PlayProtocol.MAX_NAME_WIRE, false), f.str("token", PlayProtocol.MAX_TOKEN, false),
-                    f.str("deviceHash", PlayProtocol.MAX_ID, false), f.boolOr("spectate", false), f.token("activation"))
+                    f.str("deviceHash", PlayProtocol.MAX_ID, false), f.boolOr("spectate", false), f.token("activation"), f.str("proof", PlayProtocol.MAX_PROOF, false))
                 "resume" -> ClientMsg.Resume(f.str("roomId", PlayProtocol.MAX_ID, true)!!, f.str("token", PlayProtocol.MAX_TOKEN, true)!!, f.long("lastSeq", 0L..(1L shl 53), true)!!)
                 "act" -> {
                     val action = f.str("action", 16, true)!!
