@@ -138,7 +138,7 @@ def load_font(family, weight, size):
     return f
 
 
-def text_paths(runs, x, y, anchor, family, weight, size, tint):
+def text_paths(runs, x, y, anchor, family, weight, size, tint, spacing=0.0):
     """runs = [(texte, fill)] -> [(pathData, fill)] ; y = ligne de base, comme en SVG."""
     from fontTools.pens.svgPathPen import SVGPathPen
     from fontTools.pens.transformPen import TransformPen
@@ -146,6 +146,7 @@ def text_paths(runs, x, y, anchor, family, weight, size, tint):
     cmap, hmtx, gs = font.getBestCmap(), font["hmtx"], font.getGlyphSet()
     scale = size / font["head"].unitsPerEm
     total = sum(hmtx[cmap[ord(ch)]][0] for t, _ in runs for ch in t) * scale
+    total += spacing * (sum(len(t) for t, _ in runs) if anchor != "start" else 0)  # comme SVG : l'interlettrage suit aussi la dernière lettre
     cx = x - (total / 2 if anchor == "middle" else total if anchor == "end" else 0)
     out = []
     for text, fill in runs:
@@ -153,7 +154,7 @@ def text_paths(runs, x, y, anchor, family, weight, size, tint):
         for ch in text:
             g = cmap[ord(ch)]
             gs[g].draw(TransformPen(pen, (scale, 0, 0, -scale, cx, y)))
-            cx += hmtx[g][0] * scale
+            cx += hmtx[g][0] * scale + spacing
         d = pen.getCommands()
         if d:
             out.append((d, fill))
@@ -181,7 +182,7 @@ class Conv:
     def style(self, el, inh):
         s = dict(inh)
         for k in ("fill", "stroke", "stroke-width", "stroke-linecap", "stroke-linejoin", "opacity", "fill-opacity", "font-family",
-                  "font-weight", "font-size", "text-anchor"):
+                  "font-weight", "font-size", "text-anchor", "letter-spacing"):
             if el.get(k) is not None:
                 s[k] = el.get(k)
         return s
@@ -301,7 +302,7 @@ class Conv:
                     runs.append((ts.tail, base))
             size = num(st.get("font-size"), 16)
             paths = text_paths(runs, num(el.get("x")), num(el.get("y")), st.get("text-anchor", "start"), st.get("font-family", "Inter").split(",")[0].strip("'\" "),
-                               int(num(st.get("font-weight"), 400)), size, self.tint)
+                               int(num(st.get("font-weight"), 400)), size, self.tint, num(st.get("letter-spacing"), 0.0))
             tst = {k: v for k, v in st.items() if k in ("opacity",)}
             for d, fill in paths:
                 self.emit_path(d, tst, None, ind2, fill_override=fill)

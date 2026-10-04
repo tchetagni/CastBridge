@@ -113,7 +113,7 @@ class ServerActivity : Activity() {
     }
 
     private fun title(s: String) {
-        if (leftCol.childCount == 0) leftCol.addView(TvStyle.logo(this, R.drawable.logo_castbridge_tv_horizontal, 44).apply {
+        if (leftCol.childCount == 0) leftCol.addView(TvStyle.logo(this, R.drawable.logo_castbridge_tv_horizontal_compact, 56).apply {
             contentDescription = "CastBridge TV"; (layoutParams as LinearLayout.LayoutParams).bottomMargin = dp(8) })
         leftCol.addView(TextView(this).apply { text = s; textSize = 28f; typeface = TvFonts.bold; setTextColor(Color.WHITE) })
     }

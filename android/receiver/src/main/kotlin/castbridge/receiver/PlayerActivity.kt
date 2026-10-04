@@ -559,8 +559,8 @@ class PlayerActivity : Activity(), TvService.Screen {
 
     /** Every feature of the app as a home icon, with its live state. */
     /** A home tile that also counts its use (feature_used, docs/TELEMETRY.md: closed list of ids). */
-    private fun tile(feature: String, icon: Int, label: String, description: String, status: String?, on: Boolean, warn: Boolean = false, action: () -> Unit) =
-        HomeTool(icon, label, description, status, on, warn) { TvConnect.feature(feature, "tile"); ParentalHub.guardTile(this, feature, action) }
+    private fun tile(feature: String, icon: Int, label: String, description: String, status: String?, on: Boolean, warn: Boolean = false, homeId: String = feature, action: () -> Unit) =
+        HomeTool(icon, label, description, status, on, warn, homeId) { TvConnect.feature(feature, "tile"); ParentalHub.guardTile(this, feature, action) }
 
     /** Status line of the "Mises à jour" tile: what the server link knows right now. */
     private fun updateStatus(): String {
@@ -588,7 +588,7 @@ class PlayerActivity : Activity(), TvService.Screen {
         val wdOn = prefs.getBool("wd_enabled", false)
         val sshOn = ssh?.running == true
         val upgrade = if (ActivationCenter.trial()) listOf(
-            tile(castbridge.core.owner.TrialPolicy.UPGRADE_TILE, R.drawable.ic_cb_cle_usb, castbridge.core.owner.TrialPolicy.UPGRADE_LABEL, "Version d'essai : demandez la clé de production avec le code de cette TV.", "Essai", true) {
+            tile(castbridge.core.owner.TrialPolicy.UPGRADE_TILE, R.drawable.ic_cb_cle_usb, castbridge.core.owner.TrialPolicy.UPGRADE_LABEL, "Version d'essai : demandez la clé de production avec le code de cette TV.", "Essai", true, homeId = castbridge.core.owner.TrialPolicy.UPGRADE_TILE) {
                 startActivity(Intent(this, ActivationActivity::class.java).putExtra(ActivationActivity.EXTRA_UPGRADE, true))
             }) else emptyList()
         // « ◎ Jetons » (W22-07a) : la carte du portefeuille de cette TV ; elle existe dès l'activation (même avant la première synchronisation : « en attente »), cachée si le service est indisponible
@@ -596,14 +596,14 @@ class PlayerActivity : Activity(), TvService.Screen {
         val wallet = if (castbridge.receiver.wallet.WalletHub.cardVisible()) {
             val v = castbridge.receiver.wallet.WalletHub.statusView()
             listOf(HomeTool(R.drawable.ic_cb_jetons, "◎ Jetons", "Vos jetons NDEM et MBOKO : convertir, envoyer, recevoir, historique. La mise à jour vient du serveur ; hors ligne, le dernier solde signé reste affiché.",
-                castbridge.receiver.wallet.WalletHub.cardStatus(), v.showBalances, warn = v.state == castbridge.core.wallet.ui.WalletStatus.State.STALE) {
+                castbridge.receiver.wallet.WalletHub.cardStatus(), v.showBalances, warn = v.state == castbridge.core.wallet.ui.WalletStatus.State.STALE, id = "wallet") {
                 startActivity(Intent(this, castbridge.receiver.wallet.WalletActivity::class.java))
             })
         } else emptyList()
         return ParentalHub.filterHome(upgrade + wallet + listOf(
             tile("library", R.drawable.ic_cb_bibliotheque, "Bibliothèque", "Toutes vos vidéos et vos fichiers, en grille.", "${homeItemCount.takeIf { it >= 0 } ?: ParentalHub.filterItems(server?.libraryItems().orEmpty()).size} fichier(s)", false) { showLibrary() },
             tile("bluetooth", R.drawable.ic_cb_bluetooth, "Ajouter un téléphone", "Le téléphone trouve et pilote la TV par Bluetooth, sans code à saisir : une seule validation ici.",
-                (svc?.trust?.list()?.size ?: 0).let { if (it == 0) "Aucun" else "$it de confiance" }, (svc?.trust?.list()?.size ?: 0) > 0) { PairActivity.open(this) },
+                (svc?.trust?.list()?.size ?: 0).let { if (it == 0) "Aucun" else "$it de confiance" }, (svc?.trust?.list()?.size ?: 0) > 0, homeId = "pair") { PairActivity.open(this) },
             tile("learn", R.drawable.ic_cb_apprendre, "Apprendre", "Leçons de la maternelle à la licence, exercices corrigés, préparer le CEP, le BEPC, le GCE, le Bac.", "Élèves", true) {
                 startActivity(Intent(this, LearnActivity::class.java))
             },
@@ -663,7 +663,7 @@ class PlayerActivity : Activity(), TvService.Screen {
             tile("dev_options", R.drawable.ic_cb_options_developpeur, "Options développeur", "Débogage USB / Wi-Fi de la TV.", null, false) { flash(openDevSettings()) },
             // Parental control (docs/PARENTAL.md): always reachable, even in kid mode; no usage event is sent for it
             HomeTool(R.drawable.ic_t_parental, "Contrôle parental", "Code parental, profils des enfants, horaires, vidéos adaptées à l'âge.",
-                ParentalHub.tileStatus(), ParentalHub.engine.config().enabled) { startActivity(Intent(this, ParentalActivity::class.java)) },
+                ParentalHub.tileStatus(), ParentalHub.engine.config().enabled, id = "parental") { startActivity(Intent(this, ParentalActivity::class.java)) },
             tile("help", R.drawable.ic_cb_aide, "Aide", "Comment envoyer une vidéo depuis le téléphone.", null, false) { homeApi().openHelp() },
         ))
     }
@@ -1374,6 +1374,7 @@ class PlayerActivity : Activity(), TvService.Screen {
         if (current == null) {
             if (keyCode == KeyEvent.KEYCODE_BACK) {
                 when {
+                    home?.takeIf { it.visible && settingsPanel?.visible != true && libScreen?.visible != true }?.closeGrid() == true -> Unit   // RETOUR ferme la grille d'un groupe, le focus revient sur son bouton
                     settingsPanel?.visible == true -> { settingsPanel?.hide(); if (libScreen?.visible != true) showHome() }
                     libScreen?.visible == true -> showHome()
                     else -> moveTaskToBack(true)              // leave the home: the service keeps running

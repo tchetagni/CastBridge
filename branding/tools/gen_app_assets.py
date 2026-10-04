@@ -26,7 +26,7 @@ RES = {app: os.path.join(REPO, "android", app, "src", "main", "res") for app in 
 LOGOS = {
     "sender": ["castbridge-logo-horizontal", "castbridge-logo-horizontal-light", "castbridge-symbol", "castbridge-mark",
                "quiz-des-millions", "quiz-des-millions-horizontal", "echecs", "echecs-horizontal", "apprendre", "apprendre-horizontal"],
-    "receiver": ["castbridge-tv-horizontal", "castbridge-tv", "castbridge-mark", "castbridge-logo-horizontal",
+    "receiver": ["castbridge-tv-horizontal", "castbridge-tv-horizontal-compact", "castbridge-tv", "castbridge-mark", "castbridge-logo-horizontal",
                  "quiz-des-millions", "quiz-des-millions-horizontal", "echecs", "echecs-horizontal", "apprendre", "apprendre-horizontal"],
 }
 DENS = {"mdpi": 1, "hdpi": 1.5, "xhdpi": 2, "xxhdpi": 3, "xxxhdpi": 4}

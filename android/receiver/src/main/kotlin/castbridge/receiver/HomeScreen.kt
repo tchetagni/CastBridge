@@ -83,6 +83,13 @@ class HomeScreen(private val act: Activity, private val container: FrameLayout, 
     // D-pad focus memory (castbridge.core.ux.TvHomeFocus): what was opened last from the home, so BACK lands on the tile it came from
     private var opened = castbridge.core.ux.TvHomeFocus.Opened.NOTHING
     private var openedTool = 0
+    // Accueil en groupes (castbridge.core.tv.home) : les entrées affichées, l'état ouvert/fermé de la grille, et la grille elle-même
+    private var entries: List<castbridge.core.tv.home.HomeEntry> = emptyList()
+    private var toolsById: Map<String, HomeTool> = emptyMap()
+    private var nav: castbridge.core.tv.home.HomeNavState = castbridge.core.tv.home.HomeNavState.Closed()
+    private val gridBox = FrameLayout(act).apply { visibility = View.GONE }
+    private val grid = GridPanel(act, gridBox)
+    private lateinit var contentBox: LinearLayout
     val visible get() = container.visibility == View.VISIBLE
     /** The « ready · code » chip of the header: the status bar is reached with UP from it. */
     val headerChip: View get() = chip
@@ -97,7 +104,7 @@ class HomeScreen(private val act: Activity, private val container: FrameLayout, 
         // scroll area drew its scrolled-out rows over the title (texts piled up while scrolling on 720p TVs).
         val content = LinearLayout(act).apply { orientation = LinearLayout.VERTICAL; setPadding(dp(56), dp(28), dp(40), 0); clipChildren = true }
         val top = LinearLayout(act).apply { orientation = LinearLayout.HORIZONTAL; gravity = Gravity.CENTER_VERTICAL }
-        top.addView(TvStyle.logo(act, R.drawable.logo_castbridge_tv_horizontal, 52).apply { contentDescription = "CastBridge TV" })
+        top.addView(TvStyle.logo(act, R.drawable.logo_castbridge_tv_horizontal_compact, 56).apply { contentDescription = "CastBridge TV" })
         top.addView(View(act), LinearLayout.LayoutParams(0, 1, 1f))
         top.addView(chip, LinearLayout.LayoutParams(-2, -2).apply { rightMargin = dp(20) })
         top.addView(TextClock(act).apply { format24Hour = "HH:mm"; format12Hour = "HH:mm"; textSize = 30f; setTextColor(Color.WHITE) })
@@ -109,6 +116,8 @@ class HomeScreen(private val act: Activity, private val container: FrameLayout, 
         content.addView(heroSub, LinearLayout.LayoutParams(-1, -2).apply { topMargin = dp(4); bottomMargin = dp(6) })
         content.addView(scroll, LinearLayout.LayoutParams(-1, 0, 1f))
         root.addView(content, FrameLayout.LayoutParams(-1, -1))
+        contentBox = content
+        root.addView(gridBox, FrameLayout.LayoutParams(-1, -1))                       // la grille d'un groupe recouvre l'accueil
         container.addView(root, FrameLayout.LayoutParams(-1, -1))
         // OK on the chip: the cause and the action are the first lines of « Connexion & réglages »; the code is revealed for 10 s
         chip.setOnClickListener { revealUntil = System.currentTimeMillis() + 10_000; refreshStatus(force = true); if (signal != null) api.openSettings() }
@@ -227,6 +236,7 @@ class HomeScreen(private val act: Activity, private val container: FrameLayout, 
     private fun focus(target: castbridge.core.ux.TvHomeFocus.Target) {
         val firstRow = (0 until rowsBox.childCount).map { rowsBox.getChildAt(it) }.firstOrNull { it is RecyclerView } as? RecyclerView
         val tools = toolsRow?.tag as? ViewGroup
+        if (nav is castbridge.core.tv.home.HomeNavState.Open) return                      // a grid is open: the focus stays on its tile
         val v = when (target) {
             is castbridge.core.ux.TvHomeFocus.Target.Tool -> tools?.getChildAt(minOf(target.index, (tools.childCount - 1).coerceAtLeast(0))) ?: firstRow?.getChildAt(0)
             castbridge.core.ux.TvHomeFocus.Target.FirstCard -> firstRow?.getChildAt(0) ?: tools?.getChildAt(0)
@@ -253,21 +263,78 @@ class HomeScreen(private val act: Activity, private val container: FrameLayout, 
     private fun fillTools(box: LinearLayout) {
         val w = dp(170)
         val list = api.tools().ifEmpty {
-            listOf(HomeTool(R.drawable.ic_cb_bibliotheque, "Bibliothèque", "Toutes vos vidéos et vos fichiers, en grille.", null, false) { api.openLibrary() },
-                HomeTool(R.drawable.ic_cb_reglages, "Connexion & réglages", "Code, adresse, Bluetooth, stockage…", null, false) { api.openSettings() },
-                HomeTool(R.drawable.ic_cb_aide, "Aide", "Comment envoyer une vidéo depuis le téléphone.", null, false) { api.openHelp() })
+            listOf(HomeTool(R.drawable.ic_cb_bibliotheque, "Bibliothèque", "Toutes vos vidéos et vos fichiers, en grille.", null, false, id = "library") { api.openLibrary() },
+                HomeTool(R.drawable.ic_cb_reglages, "Connexion & réglages", "Code, adresse, Bluetooth, stockage…", null, false, id = "settings") { api.openSettings() },
+                HomeTool(R.drawable.ic_cb_aide, "Aide", "Comment envoyer une vidéo depuis le téléphone.", null, false, id = "help") { api.openHelp() })
         }
         toolsSig = list.joinToString("|") { "${it.label}:${it.status}:${it.on}" }
         val focusedIndex = (0 until box.childCount).firstOrNull { box.getChildAt(it).hasFocus() }
+        // the tools are grouped (castbridge.core.tv.home.HomeGroups): one big button per group, the quick-access tiles stay direct
+        toolsById = list.associateBy { it.id.ifEmpty { it.label } }
+        entries = castbridge.core.tv.home.HomeGroups.layout(list.map { castbridge.core.tv.home.HomeTileInfo(it.id.ifEmpty { it.label }, it.label, it.status, it.on, it.warn) })
         box.removeAllViews()
-        list.forEachIndexed { index, t ->
-            box.addView(IconTile(act, t, w).also { v ->
-                v.setOnClickListener { opened = castbridge.core.ux.TvHomeFocus.Opened.TOOL; openedTool = index; t.action() }
-                v.setOnFocusChangeListener { _, has -> if (has) { heroTitle.text = t.label; heroSub.text = t.description + (t.status?.let { "  —  $it" } ?: "") } }
-            })
+        entries.forEachIndexed { index, e ->
+            val v: View = when (e) {
+                is castbridge.core.tv.home.HomeEntry.Direct -> {
+                    val t = toolsById.getValue(e.id)
+                    IconTile(act, t, w).also { v ->
+                        v.setOnClickListener { opened = castbridge.core.ux.TvHomeFocus.Opened.TOOL; openedTool = index; t.action() }
+                        v.setOnFocusChangeListener { _, has -> if (has) { heroTitle.text = t.label; heroSub.text = t.description + (t.status?.let { "  —  $it" } ?: "") } }
+                    }
+                }
+                is castbridge.core.tv.home.HomeEntry.Group -> GroupTile(act, e).also { v ->
+                    v.setOnClickListener { opened = castbridge.core.ux.TvHomeFocus.Opened.TOOL; openedTool = index; openGrid(e.id) }
+                    v.setOnFocusChangeListener { _, has -> if (has) { heroTitle.text = e.label; heroSub.text = e.tiles.joinToString(" · ") { it.label } + "  —  " + e.summary } }
+                }
+            }
+            box.addView(v)
         }
         focusedIndex?.let { i -> box.getChildAt(minOf(i, box.childCount - 1))?.requestFocus() }
+        // statuses changed under an open grid: redraw it on the same tile; a group that vanished closes it
+        nav = castbridge.core.tv.home.HomeNav.reconcile(nav, entries, grid.focusedTileId)
+        if (nav is castbridge.core.tv.home.HomeNavState.Open) showGrid() else if (grid.visible) hideGrid()
     }
+
+    private fun toolOf(id: String): HomeTool? = toolsById[id]
+
+    private fun openGrid(groupId: String) {
+        val s = castbridge.core.tv.home.HomeNav.press(castbridge.core.tv.home.HomeNavState.Closed(groupId), entries, castbridge.core.tv.home.HomeKey.OK, groupId)
+        nav = s.state
+        if (nav is castbridge.core.tv.home.HomeNavState.Open) showGrid()
+    }
+
+    private fun showGrid() {
+        val st = nav as? castbridge.core.tv.home.HomeNavState.Open ?: return
+        val g = entries.firstOrNull { it.id == st.groupId } as? castbridge.core.tv.home.HomeEntry.Group ?: return
+        contentBox.descendantFocusability = ViewGroup.FOCUS_BLOCK_DESCENDANTS               // behind the grid, nothing can take the D-pad focus
+        grid.show(g.label, g.tiles.mapNotNull { toolOf(it.id) }, st.focusIndex, { _, key -> press(key) }, { index ->
+            nav = (nav as? castbridge.core.tv.home.HomeNavState.Open)?.copy(focusIndex = index) ?: nav
+            press(castbridge.core.tv.home.HomeKey.OK)
+        })
+    }
+
+    private fun hideGrid() { grid.hide(); contentBox.descendantFocusability = ViewGroup.FOCUS_AFTER_DESCENDANTS }
+
+    /** One key through the core state machine; the screen only applies the action it returns. */
+    private fun press(key: castbridge.core.tv.home.HomeKey): Boolean {
+        val s = castbridge.core.tv.home.HomeNav.press(nav, entries, key)
+        nav = s.state
+        when (val a = s.action) {
+            is castbridge.core.tv.home.HomeAction.FocusGrid -> grid.focus(a.index)
+            is castbridge.core.tv.home.HomeAction.FocusHome -> { hideGrid(); focusEntry(a.id) }
+            is castbridge.core.tv.home.HomeAction.Launch -> toolOf(a.tileId)?.let { opened = castbridge.core.ux.TvHomeFocus.Opened.TOOL; it.action() }
+            null -> Unit
+        }
+        return s.consumed
+    }
+
+    private fun focusEntry(id: String) {
+        val box = toolsRow?.tag as? ViewGroup ?: return
+        entries.indexOfFirst { it.id == id }.takeIf { it >= 0 }?.let { box.getChildAt(minOf(it, box.childCount - 1))?.requestFocus() }
+    }
+
+    /** RETOUR : ferme la grille ouverte et rend le focus à son bouton de groupe. false = aucune grille (l'activité traite RETOUR comme avant). */
+    fun closeGrid(): Boolean = nav is castbridge.core.tv.home.HomeNavState.Open && press(castbridge.core.tv.home.HomeKey.BACK)
 
     /** Statuses change (Bluetooth ready, Internet via the phone, SSH on…): refresh the tiles in place. */
     private fun refreshTools() {
@@ -341,7 +408,7 @@ class SettingsPanel(private val act: Activity, private val container: FrameLayou
             orientation = LinearLayout.HORIZONTAL; setBackgroundColor(TvStyle.BG); setPadding(dp(56), dp(40), dp(56), dp(30))
         }
         val left = LinearLayout(act).apply { orientation = LinearLayout.VERTICAL }
-        left.addView(TvStyle.logo(act, R.drawable.logo_castbridge_tv_horizontal, 48).apply { contentDescription = "CastBridge TV"
+        left.addView(TvStyle.logo(act, R.drawable.logo_castbridge_tv_horizontal_compact, 56).apply { contentDescription = "CastBridge TV"
             (layoutParams as LinearLayout.LayoutParams).bottomMargin = dp(4) })
         left.addView(TextView(act).apply { text = "À propos · version ${BuildConfig.VERSION_NAME} · code ${BuildConfig.VERSION_CODE}"; textSize = TvStyle.Type.CAPTION; setTextColor(TvStyle.MUTED); setPadding(0, 0, 0, dp(8)) })
         left.addView(TextView(act).apply { text = "Connexion & réglages"; textSize = 30f; typeface = TvFonts.bold; setTextColor(Color.WHITE) })

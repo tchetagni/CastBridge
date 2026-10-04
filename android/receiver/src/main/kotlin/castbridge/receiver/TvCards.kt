@@ -255,28 +255,29 @@ class ToolTile(ctx: Context, glyph: String, label: String, widthPx: Int) : Linea
 }
 
 /** One feature of the home "Fonctions" row: vector icon, name, live status (e.g. "Prêt", "Actif"), and what OK does. */
-data class HomeTool(val icon: Int, val label: String, val description: String, val status: String?, val on: Boolean, val warn: Boolean = false, val action: () -> Unit)
+/** [id] : identifiant d'accueil (castbridge.core.tv.home.HomeGroups) ; vide = tuile inconnue des groupes, montrée telle quelle sur l'accueil. */
+data class HomeTool(val icon: Int, val label: String, val description: String, val status: String?, val on: Boolean, val warn: Boolean = false, val id: String = "", val action: () -> Unit)
 
 /** Icon tile for [HomeTool]: the icon lights up (accent) when the feature is active, and a small status line sits under the name. */
-class IconTile(ctx: Context, tool: HomeTool, widthPx: Int) : LinearLayout(ctx) {
+open class IconTile(ctx: Context, tool: HomeTool, widthPx: Int, labelSp: Float = 16f, statusSp: Float = TvStyle.Type.CAPTION, iconDp: Int = 46, heightPx: Int = 0, ringIdle: Boolean = false) : LinearLayout(ctx) {
     init {
         orientation = VERTICAL; gravity = Gravity.CENTER
         isFocusable = true; isFocusableInTouchMode = true; isClickable = true
         val m = TvStyle.dp(ctx, 10)
-        layoutParams = ViewGroup.MarginLayoutParams(widthPx, widthPx * 3 / 4 + TvStyle.dp(ctx, 40)).apply { setMargins(m, m, m, m) }
+        layoutParams = ViewGroup.MarginLayoutParams(widthPx, if (heightPx > 0) heightPx else widthPx * 3 / 4 + TvStyle.dp(ctx, 40)).apply { setMargins(m, m, m, m) }
         background = StateListDrawable().apply {
             addState(intArrayOf(android.R.attr.state_focused), TvStyle.rounded(ctx, TvStyle.CARD_FOCUS, TvStyle.R_LG, TvStyle.RING, 3))
-            addState(intArrayOf(), TvStyle.rounded(ctx, 0xCC151D37.toInt(), TvStyle.R_LG))
+            addState(intArrayOf(), if (ringIdle) TvStyle.rounded(ctx, 0xCC1B2547.toInt(), TvStyle.R_LG, 0x66FFE1A6, 2) else TvStyle.rounded(ctx, 0xCC151D37.toInt(), TvStyle.R_LG))
         }
-        val size = TvStyle.dp(ctx, 46)
+        val size = TvStyle.dp(ctx, iconDp)
         addView(android.widget.ImageView(ctx).apply {
             setImageResource(tool.icon)
             imageTintList = android.content.res.ColorStateList.valueOf(if (tool.on) TvStyle.ACCENT else TvStyle.TEXT2)
         }, LayoutParams(size, size))
-        addView(TextView(ctx).apply { text = tool.label; textSize = 16f; setTextColor(Color.WHITE); gravity = Gravity.CENTER; maxLines = 2; setPadding(m, m / 2, m, 0) })
+        addView(TextView(ctx).apply { text = tool.label; textSize = labelSp; setTextColor(Color.WHITE); gravity = Gravity.CENTER; maxLines = 2; setPadding(m, m / 2, m, 0) })
         tool.status?.let { st ->
             addView(TextView(ctx).apply {
-                text = (if (tool.warn) "▲ " else if (tool.on) "● " else "") + st; textSize = TvStyle.Type.CAPTION; gravity = Gravity.CENTER; maxLines = 1
+                text = (if (tool.warn) "▲ " else if (tool.on) "● " else "") + st; textSize = statusSp; gravity = Gravity.CENTER; maxLines = 1; ellipsize = android.text.TextUtils.TruncateAt.END
                 setTextColor(if (tool.warn) castbridge.core.ux.SignalColors.ORANGE else if (tool.on) TvStyle.GOOD_TEXT else TvStyle.TEXT3)
             })
         }

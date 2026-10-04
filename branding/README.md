@@ -11,7 +11,7 @@ Dossier complet de la charte graphique CastBridge (écosystème TV + smartphone)
 - `guide/CastBridge-charte-graphique.pdf` - guide PDF de la charte (11 pages).
 - `mockups/index.html` - maquettes clés TV (1920 x 1080) et mobile (360 x 800).
 - `export/` - exports PNG et formats Android.
-- `tools/` - scripts reproductibles (`svg2vd.py`, `gen_app_assets.py`, `gen_tokens.py`, `subset_fonts.py`, `gen_android_icons.py`) ; le guide PDF se régénère avec `tools/build-branding-guide` (racine du dépôt).
+- `tools/` - scripts reproductibles (`gen_cameroun_mark.py`, `svg2vd.py`, `gen_app_assets.py`, `gen_tokens.py`, `subset_fonts.py`, `gen_android_icons.py`) ; le guide PDF se régénère avec `tools/build-branding-guide` (racine du dépôt).
 
 ## Exports Android
 
@@ -45,3 +45,14 @@ Dossier complet de la charte graphique CastBridge (écosystème TV + smartphone)
 - `python3 branding/tools/gen_app_assets.py` génère les ressources Android (icônes `ic_cb_*`, logos `logo_*`, lanceur, bannière TV, notification, polices).
 - `fonts/subset/` : sous-ensembles latin des polices (embarqués dans les apps) ; `tools/build-branding-guide` régénère le PDF.
 - Icônes créées : télécommande, sur le téléphone, passerelle Bluetooth, options développeur.
+
+## Marque : casque + Cameroun, sous-titre MBOKO
+
+- Le casque jaune porte la silhouette du Cameroun (nord en haut) entre les écouteurs, sous l'arc ; dégagement >= 6 unités vérifié par le script (`--check`). Jaune `#F5B025` sur fond sombre, `#946219` sur fond clair, une seule couleur sur les monochromes.
+- Sous-titre MBOKO : une ligne « MBOKO » (capitales, graisse 700, interlettrage 0,18 em, ~38 % de la ligne 1 ; 47 % sur la bannière TV) juste sous « CastBridge », vert `#2E9E6B` (fond sombre) / `#1C7C53` (fond clair). Absent des icônes (lanceur, notification, favicon, Play Store) : le symbole seul y suffit. Le libellé et la mise en page sont dans la configuration en tête de `tools/gen_cameroun_mark.py` (`WORDMARK`, `LAYOUTS`).
+- Petites tailles (<= 96 px : symbole, lanceur, notification, favicon) : contour allégé (36 points) et joint plus épais ; lisible à 48 px, simple forme à 32 px.
+- Régénérer : `python3 branding/tools/gen_cameroun_mark.py` (SVG + PNG/ICO, copies /admin du serveur), puis `gen_android_icons.py` et `gen_app_assets.py` (ressources Android). Dépendances : `fonttools`, `pillow`, `rsvg-convert`.
+
+## Sources
+
+- Contour du Cameroun : Natural Earth (domaine public), via github.com/datasets/geo-countries (ODC-PDDL), polygone CMR, simplifié (Douglas-Peucker 0,08 degré, 92 points) dans `tools/cameroun-contour.json` ; lissage Visvalingam-Whyatt dans `gen_cameroun_mark.py`. Mention reprise en commentaire dans chaque SVG concerné.
