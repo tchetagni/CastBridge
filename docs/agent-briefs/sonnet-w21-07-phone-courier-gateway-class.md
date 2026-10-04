@@ -35,3 +35,12 @@
 
 ## Rapport
 Rouge, vert, mutations, canaux réellement exercés, comportement sur une TV ancienne (routes `/api/tele/*` absentes ⇒ 404 ⇒ coursier inactif pour elle), taille des envois propres à 12 h (typique, maximale).
+
+## AMENDEMENT W23-B (2026-10-04) — relais des avis d'activation (montant) et des objets du serveur (descendant)
+Source : `docs/coordination/DESIGN-W23B-NOTIFICATION-ACTIVATION-LICENCE-PORTEFEUILLE-2026-10-04.md` § 6 et § 9.4. Effort **+0,3 j** ; attend aussi **w23-06** (route `POST /api/v1/activations/relay`, vecteurs de boîte).
+1. Genre d'objet **`act`** (avis scellé à clé publique, opaque) retiré par `GET /api/tele/outbox?kinds=tele,act` ; rangé dans `CourierQueue` avec une **priorité au-dessus** de la télémétrie (jamais évincé au profit d'un lot de télémétrie) ; envoyé à `POST /api/v1/activations/relay` (≤ 16 objets) ; reçus remis à la TV par `POST /api/tele/receipts` (`kind=act`).
+2. **Hors** porte de consentement des statistiques (fonction de licence, D-W23-5) : le relais `act` fonctionne même si le consentement d'usage est refusé.
+3. **Budget** : jamais en itinérance ; Wi-Fi d'abord ; forfait mobile compté : objets `act` et reçus seulement, 32 Ko / jour (D-W23B-8) ; aucune notification, aucun écran.
+4. **Descendant** : les objets que la réponse du serveur range dans `down` sont confiés à `OrdersRuntime` (file de w23-07), pas à ce cahier.
+5. **Interdits rappelés** : ne jamais toucher `ownerlib` ni la clé de l'outil du propriétaire ; aucun code d'appareil complet ni objet en clair dans les journaux.
+**Test ajouté** : `TeleCourierTest.activationNoticeIsRelayedFirstAndOpaque` (avis `act` + 10 lots de télémétrie, file pleine ⇒ l'avis part le premier, octets identiques au serveur ; consentement refusé ⇒ l'avis part quand même, la télémétrie non).

@@ -17,6 +17,21 @@
 | w23-03 | `sonnet-w23-03-suivi-activations-telephone-proprietaire.md` | journal signé des outils (cœur, application propriétaire, bureau), export fichier/partage/QR, « Ouvrir le suivi » ; option en ligne en annexe | hors gel (application non publiée, D-W23-7) ; `ownerlib` : crochet neutre | M (+0,5 j si option A) | sonnet 4.6 | **oui** | 400 / 20 | ATTEND 01 (vecteurs) (ordre 2 bis) | 01 |
 | w23-04 | `sonnet-w23-04-suivi-activations-rapport-tv.md` | rapport d'activation de la TV (direct, puis coursier W21) | **exception de gel** demandée (aucun écran, D-W23-7) | S | sonnet 4.6 | échantillon | 300 / 15 | ATTEND 01 + D-W23-7 (ordre 2 ter) ; coursier : w21-01b, w21-07 | 01 |
 
+### W23-B — notification des activations, enregistrement licence/poste, portefeuille à l'activation, voie descendante (ajout du 2026-10-04)
+Source : `docs/coordination/DESIGN-W23B-NOTIFICATION-ACTIVATION-LICENCE-PORTEFEUILLE-2026-10-04.md`. Règles en plus de A1-A9 : **B1** seul le module des licences écrit `lic_*` (`ReportedActivationRegistrar`) ; **B2** préproduction identique à la production (aucun drapeau de test) ; **B3** aucun montant calculé par la TV ; **B4** liste blanche fermée pour tout objet descendant, interrupteurs serveur et TV, transparence écrite.
+
+| id | Cahier | Objet | Gel | Effort | Modèle | Audit Opus | Statut | Dépend de |
+|---|---|---|---|---|---|---|---|---|
+| w23-05 | `sonnet-w23-05-enregistrement-licence-par-notification-et-rattrapage.md` | avis vérifié ⇒ licence + poste ; correctif `end_at` ; identité de portefeuille à la notification ; rattrapage borné ; w23-05a (appel depuis `wallet/sync`) | serveur | L | sonnet 4.6 | **oui** | ATTEND w23-01 corrigé et fusionné | 01 |
+| w23-06 | `sonnet-w23-06-avis-activation-scelle-recu-signe.md` | types `actnotice`, `receipt`, boîte à clé publique, route `/api/v1/activations/relay`, rapport v2, vecteurs | serveur + cœur | M | sonnet 4.6 | **oui** | ATTEND 05 (faux possibles) | 05 |
+| w23-04 | (amendé) | avis signé, voie directe v2, file `act`, reçus, états | **exception de gel** | S → M | sonnet 4.6 | **oui** | ATTEND 06 | 06 |
+| w21-07 | (amendé) | relais `act` montant, budget, remise des objets descendants à `OrdersRuntime` | — | +0,3 j | sonnet | échantillon | ATTEND w21-01b, 06 | 06 |
+| w23-07 | `sonnet-w23-07-voie-descendante-relais-par-historique.md` | clé des ordres distincte, relais par historique, objets descendants, accusés signés, actions nouvelles, interrupteur | serveur + téléphone | M | sonnet 4.6 | **oui** | ATTEND 06 | 06 |
+| w23-08 | `sonnet-w23-08-tv-ordres-accuses-portefeuille-attente.md` | câblage `PolicyHub`, accusés signés, `downlink.pause`, états du portefeuille | exception (D-W22-13 + insigne) | M | sonnet 4.6 | **oui** | ATTEND 07, w22-07 | 07 |
+| w23-09 | `haiku-w23-09-textes-transparence-relais.md` | lignes de transparence versionnées TV et téléphone | textes | S | haiku | — | ATTEND D-W23B-12, 07 | 07 |
+
+**Ordre W23-B** : 05 → 06 → (04 ∥ w21-07 ∥ 07) → 08 → 09 ; **≈ 13-17 $**, ≈ 9 agent·jours, ≈ 6-7 jours ouvrés (estimé, prix non vérifiés). **Sans code, tout de suite** : procédure provisoire du § 8 de la conception (licences des TV actuelles par l'API d'administration). Décisions D-W23B-1 à 13 : § 12 de la conception.
+
 **Chemin critique** : `w23-01` → `w23-02 ∥ w23-03 ∥ w23-04` → actes du propriétaire (module des licences allumé, clés publiques des outils dans `CASTBRIDGE_LICENSES_TRUSTED_KEYS`, `act-ref.key` créée, `server-1.x` avec `CASTBRIDGE_ACTIVATIONS_ENABLED=1`, premier import du registre et des journaux, APK TV verrouillés copiés dans le `Download` de la clé USB) ⇒ **≈ 4 jours ouvrés** (estimé).
 
 **Première valeur** : après w23-01 + w23-02 (≈ 4 j), le propriétaire voit au serveur tout ce que le registre, les émissions du serveur et les journaux téléversés à la main disent, avec historique et alertes ; w23-03 rend les journaux du téléphone et du bureau complets (clés compactes, commandes, remises) ; w23-04 ajoute le constat « sur quelle TV ».

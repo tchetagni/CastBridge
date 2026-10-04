@@ -27,3 +27,12 @@ Que le serveur sache **quelle TV porte quelle activation**, quelles commandes du
 
 ## À ne pas faire
 - Ajouter un écran ; envoyer pendant une partie ; passer par la porte de consentement W21 ; envoyer quoi que ce soit d'autre que l'état d'activation et la version.
+
+## AMENDEMENT W23-B (2026-10-04) — avis signé, voie asynchrone par le téléphone, reçu
+Source : `docs/coordination/DESIGN-W23B-NOTIFICATION-ACTIVATION-LICENCE-PORTEFEUILLE-2026-10-04.md` § 2, § 6. **Remplace** le corps JSON v1 comme voie d'enregistrement (la v1 reste pour le suivi seulement). Effort **S → M** (≈ 1,2 j) ; audit Opus **obligatoire** (clé d'installation) ; **attend w23-06** (cœur `ActivationNotice`/`NoticeSeal`/`Receipt`).
+1. À chaque activation acceptée (`R/ActivationCenter.accept`), construire l'**avis** `cbx1` type `actnotice` signé par `InstallSigner` (corps § 2.3 : `act=<fp>|<installedAt>|<uptimeAtInstall>` lus dans `activations.txt`, `clock=<uptime>|<bootId>|<doute>`) ; jamais le jeton d'appareil.
+2. **Voie synchrone** : `POST /api/v1/activations/report` `{"v":2,"notice":…}` si la TV a Internet (hors passerelle Bluetooth pendant une partie et 30 s après) ; appliquer le **reçu** de la réponse.
+3. **Voie asynchrone** : sinon sceller l'avis pour la clé publique « relais » compilée (deux clés, rotation) et le placer dans la file `act` (`SealedOutbox` de w21-01b, ou file dédiée bornée : 32 avis, 256 Ko, 400 j), exposée par `GET /api/tele/outbox?kinds=tele,act` aux **seuls** téléphones de confiance ; ouvrir les reçus rapportés par `POST /api/tele/receipts` ; garder l'avis jusqu'à un reçu valide ; réoffre après 24 h à un autre téléphone.
+4. **Réémission** : nouvel avis toutes les 24 h sans reçu, puis tous les 7 jours.
+5. **États** exposés (sans écran nouveau ; texte de l'insigne/écran d'activation sous exception de gel) : « Activation notifiée au serveur le JJ/MM », « Activation en vérification au serveur », « En attente de notification · par Internet ou par un téléphone synchronisé ».
+**Tests ajoutés** : avis conforme aux vecteurs de w23-06 ; aucun envoi pendant une partie ; reçu d'un autre avis refusé ; avis gardé tant qu'aucun reçu ; TV ancienne côté téléphone (`kinds` ignoré) sans plantage.
