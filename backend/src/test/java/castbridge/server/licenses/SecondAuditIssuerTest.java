@@ -1,6 +1,7 @@
 package castbridge.server.licenses;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 import java.time.Duration;
 import java.time.Instant;
@@ -53,5 +54,15 @@ class SecondAuditIssuerTest extends LicenseTestBase {
         assertThat(v.get("cases").size()).isGreaterThanOrEqualTo(4);
         for (var c : v.get("cases")) assertThat(InstallKeyFingerprint.ofRaw(java.util.HexFormat.of().parseHex(c.get("publicKeyHex").asText()))).as(c.get("id").asText()).isEqualTo(c.get("fingerprint").asText());
         for (var n : v.get("normalize")) assertThat(InstallKeyFingerprint.normalize(n.get("typed").asText())).isEqualTo(n.get("canonical").isNull() ? null : n.get("canonical").asText());
+    }
+
+    @Test
+    void anOptionalInstallFpLineIsCheckedAgainstInstallSigAndAMismatchIsRefused() {
+        String fp = InstallKeyFingerprint.ofRaw(java.util.HexFormat.of().parseHex(SIG));
+        var ok = issue(newLicense(), "tv", "\ninstall_sig=ed25519|" + SIG + "\ninstall_fp=" + fp.toUpperCase());
+        assertThat(ok.installKeyFingerprint()).isEqualTo(fp);
+        assertThatThrownBy(() -> issue(newLicense(), "tv", "\ninstall_sig=ed25519|" + SIG + "\ninstall_fp=0000-0000-0000-0000-0000-0000-0000-0000")).hasMessageContaining("install_fp");
+        assertThatThrownBy(() -> issue(newLicense(), "tv", "\ninstall_sig=ed25519|" + SIG + "\ninstall_fp=zz")).hasMessageContaining("install_fp");
+        assertThat(issue(newLicense(), "tv", "\ninstall_fp=" + fp).installKeyFingerprint()).as("sans install_sig, la ligne est tolérée et ignorée").isNull();
     }
 }

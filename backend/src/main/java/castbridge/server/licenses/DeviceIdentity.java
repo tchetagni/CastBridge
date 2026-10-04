@@ -136,6 +136,7 @@ public final class DeviceIdentity {
         String code = null;
         Integer k = null;
         String installSig = null;
+        String installFp = null;
         for (String raw : text.split("\\R")) {
             String line = raw.trim();
             if (line.isEmpty()) continue;
@@ -170,6 +171,11 @@ public final class DeviceIdentity {
                 String v = line.substring(12).trim().toLowerCase(java.util.Locale.ROOT);
                 if (!v.startsWith("ed25519|") || !INSTALL_SIG_HEX.matcher(v.substring(8)).matches()) throw ApiException.badRequest("Demande d'appareil : « install_sig=ed25519|<64 chiffres hexadécimaux> » attendu");
                 installSig = v.substring(8);
+            } else if (line.startsWith("install_fp=")) {
+                // l'empreinte lisible de install_sig, facultative (second audit w23-05, MEDIUM-C) : la TV peut la joindre pour que l'émetteur la montre ; si elle est là elle doit être celle de install_sig
+                if (installFp != null) throw ApiException.badRequest("Demande d'appareil : « install_fp » en double");
+                installFp = InstallKeyFingerprint.normalize(line.substring(11));
+                if (installFp == null) throw ApiException.badRequest("Demande d'appareil : « install_fp » attendu sous la forme de 8 groupes de 4 chiffres hexadécimaux");
             } else {
                 throw ApiException.badRequest("Demande d'appareil : ligne inattendue « " + AuditLog.clip(line, 30) + " »");
             }
@@ -180,6 +186,9 @@ public final class DeviceIdentity {
         String parsed = parseCode(code);
         if (parsed == null) throw ApiException.badRequest("Code d'appareil invalide (caractère de contrôle ou longueur)");
         if (!parsed.equals(derived)) throw ApiException.badRequest("Le code d'appareil ne correspond pas aux facteurs fournis : demande altérée ou incomplète");
+        if (installSig != null && installFp != null && !installFp.equals(InstallKeyFingerprint.normalize(InstallKeyFingerprint.ofRaw(java.util.HexFormat.of().parseHex(installSig))))) {
+            throw ApiException.badRequest("Demande d'appareil : « install_fp » ne correspond pas à « install_sig » : demande altérée en route");
+        }
         int expectedK = kFor(fp.size());
         if (k != null && k != expectedK) throw ApiException.badRequest("Demande d'appareil : k=" + k + " ne correspond pas aux " + fp.size() + " facteurs (k attendu : " + expectedK + ")");
         return new Request(fp, derived, expectedK, installSig);

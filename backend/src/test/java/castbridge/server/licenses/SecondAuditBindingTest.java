@@ -13,6 +13,7 @@ import castbridge.server.licenses.ReportedActivationRegistrar.Via;
 import castbridge.server.wallet.Acts;
 import com.fasterxml.jackson.databind.JsonNode;
 import java.security.KeyPair;
+import java.util.List;
 import org.junit.jupiter.api.Test;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MvcResult;
@@ -141,5 +142,29 @@ class SecondAuditBindingTest extends RegistrarTestBase {
         assertEquals(0, boundTo(tv));
         ok(sync(real, other, tv, legacy));
         assertEquals(deviceId(real), boundTo(tv));
+    }
+
+    /** LOW-J de l'auditeur : une TV qui régénère sa clé d'installation (données effacées) retrouve son portefeuille avec une nouvelle activation signée avec la nouvelle clé, sans réaffectation. */
+    @Test
+    void r1c_aTvThatRegeneratedItsInstallKeyIsBoundAgainByANewIkActivationWithoutARebind() throws Exception {
+        Acts.Tv tv = tv();
+        String lic = licenseId();
+        Registered dev = registerApp("tv");
+        KeyPair oldKey = installOf(tv), newKey = pair();
+        String first = production(ISSUER, tv, lic, null, NOW - HOUR, null);
+        ok(sync(dev, tv, first));
+        assertEquals(5000, balance(tv.code(), "NDEM"));
+        // la TV a une nouvelle clé : l'ancien jeton (ik = ancienne clé) est refusé avec un message clair, jamais en silence
+        MvcResult refused = sync(dev, newKey, tv, first);
+        assertEquals(409, refused.getResponse().getStatus(), refused.getResponse().getContentAsString());
+        assertTrue(body(refused).path("message").asText().contains("Activation non reconnue"), refused.getResponse().getContentAsString());
+        // une nouvelle activation signée avec la nouvelle clé reprend la liaison (même appareil API, nouvelle clé), sans paiement en double
+        String renewed = productionRaw(ISSUER, tv, lic, null, NOW - HOUR + 1, List.of(ikLine(newKey)), nonce16());
+        JsonNode s = ok(sync(dev, newKey, tv, renewed));
+        assertFalse(s.path("edition").path("boundOther").asBoolean(), s.toString());
+        assertEquals(rawPublic(newKey), jdbc.queryForObject("SELECT install_pub FROM wallet_identity WHERE holder = ?", String.class, tv.code()));
+        assertEquals(5000, balance(tv.code(), "NDEM"), "rien n'est versé deux fois");
+        assertEquals(1, count("SELECT COUNT(*) FROM lic_audit WHERE action = 'WALLET_REBIND_BY_IK' AND target_id = ?", tv.code()));
+        assertTrue(!rawPublic(oldKey).equals(rawPublic(newKey)));
     }
 }

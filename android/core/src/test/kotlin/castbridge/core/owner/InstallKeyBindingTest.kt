@@ -117,6 +117,20 @@ class InstallKeyBindingTest {
         assertFalse(none.out.joinToString("\n").lowercase().contains("empreinte de la clé de signature"), "sans clé, aucune empreinte")
     }
 
+    @Test fun theOptionalFingerprintLineRoundTripsAndAnAlteredRequestIsUnreadable() {
+        val plain = OwnerFrames.deviceInfo(code, fp, null, tvKey)
+        assertFalse("install_fp=" in plain, "par défaut le texte de la TV ne change pas (un serveur qui ne connaît pas la ligne la refuserait)")
+        val withFp = OwnerFrames.deviceInfo(code, fp, null, tvKey, withFingerprint = true)
+        assertTrue("install_fp=${fpOf(tvKey)}" in withFp)
+        val info = assertNotNull(OwnerFrames.parseDeviceInfo(withFp))
+        assertContentEquals(tvKey, info.installSig)
+        assertTrue(info.unknown.isEmpty())
+        assertNull(OwnerFrames.parseDeviceInfo(plain + "\ninstall_fp=${fpOf(middleman)}"), "une empreinte qui n'est pas celle de install_sig : demande altérée")
+        assertNull(OwnerFrames.parseDeviceInfo(withFp + "\ninstall_fp=${fpOf(tvKey)}"), "deux lignes install_fp")
+        assertNull(OwnerFrames.parseDeviceInfo(plain + "\ninstall_fp=zz"))
+        assertEquals(fpOf(tvKey), DeviceRequest.parse(withFp).installFingerprint)
+    }
+
     // ------------------------------------------------------------------ parité des empreintes (vecteurs partagés avec Java et Python)
 
     @Test fun theFingerprintMatchesTheSharedVectors() {
