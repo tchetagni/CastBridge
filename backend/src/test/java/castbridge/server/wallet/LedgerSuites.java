@@ -264,7 +264,13 @@ final class LedgerSuites {
                                     String ea = "lock:" + a + ":" + k + "a", eb = "lock:" + b + ":" + k + "b";
                                     if (a.equals(b)) break;
                                     l.post(Txn.lock(a, c, 5, 1, ea));
-                                    l.post(Txn.lock(b, c, 5, 1, eb));
+                                    try {
+                                        l.post(Txn.lock(b, c, 5, 1, eb));
+                                    } catch (LedgerException refusal) {
+                                        // le second blocage refusé (solde insuffisant) : le premier, déjà posé, doit être rendu, sinon des fonds restent bloqués
+                                        l.post(Txn.refund(ea, a, c, 5));
+                                        throw refusal;
+                                    }
                                     List<Settlement.Line> lines = Settlement.compute(c, 5, List.of(new Settlement.Escrow(ea, a, 1, 5), new Settlement.Escrow(eb, b, 1, 5)),
                                             List.of(new Settlement.Seat(ea, 0, 3), new Settlement.Seat(eb, 0, 1)), Settlement.Kind.END);
                                     l.post(Txn.settle("r" + k, lines, c));
