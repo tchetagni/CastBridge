@@ -151,6 +151,15 @@ castbridge:
     max-import-entries: ${CASTBRIDGE_LICENSES_MAX_IMPORT_ENTRIES:5000}
     burst-per10-min: ${CASTBRIDGE_LICENSES_BURST_PER_10_MIN:10}
 
+  # Activation tracking module (W23, docs/ACTIVATION-TRACKING.md): OFF by default (every route answers 404). Secrets are FILES in the secrets folder of the licence module
+  # (castbridge.licenses.secrets-dir): act-ref.key (required: without it the module answers 503), act-audit.key and act-checkpoint.key (optional, they strengthen the chains).
+  activations:
+    enabled: ${CASTBRIDGE_ACTIVATIONS_ENABLED:false}
+    # option A of D-W23-3 (phone console online, session signed by the phone key, read-only 15 min): OFF
+    console-sessions: ${CASTBRIDGE_ACTIVATIONS_CONSOLE_SESSIONS:false}
+    archive-dir: ${CASTBRIDGE_ACTIVATIONS_ARCHIVE_DIR:/var/lib/castbridge/act-archive}
+    export-max-rows: ${CASTBRIDGE_ACTIVATIONS_EXPORT_MAX_ROWS:200000}
+
   # Optional AI layer of the phone's library assistant (POST /api/v1/library/suggest, docs/LIBRARY-AGENT.md).
   # No key = no model: the endpoint answers available:false and calls nothing. NEVER put a key in this file.
   library:
