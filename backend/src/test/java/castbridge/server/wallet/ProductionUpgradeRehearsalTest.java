@@ -175,7 +175,7 @@ class ProductionUpgradeRehearsalTest {
         assertTrue(count(j, "device") == 2 && count(j, "lic_seat") == 1);
 
         long t0 = System.nanoTime();
-        flyway(ds, null).migrate();
+        flyway(ds, "62").migrate();
         long ms = (System.nanoTime() - t0) / 1_000_000;
         System.out.println("REHEARSAL migration V61 -> V62 (base réaliste) : " + ms + " ms");
 
@@ -297,7 +297,7 @@ class ProductionUpgradeRehearsalTest {
         JdbcTemplate j = new JdbcTemplate(ds);
         flyway(ds, "61").migrate();
         seedOlderRows(j);
-        flyway(ds, null).migrate();
+        flyway(ds, "62").migrate();
         seedWallet(j);
         assertTrue(count(j, "wallet_entry") > 0 && count(j, "wallet_voucher") > 0);
         Map<String, String> before = fingerprint(j);
@@ -311,7 +311,7 @@ class ProductionUpgradeRehearsalTest {
         // le script est rejouable (DROP IF EXISTS) : un deuxième passage ne casse rien
         runRollbackScript(db);
 
-        flyway(ds, null).migrate();
+        flyway(ds, "62").migrate();
         assertEquals(WALLET_TABLES.size(), walletTables(j), "V62 se rejoue proprement après le retour arrière");
         assertTrue(count(j, "wallet_policy") == 39);
         assertEquals(0, count(j, "wallet_txn"), "le grand livre repart vide : le retour arrière efface bien les écritures");
@@ -324,16 +324,16 @@ class ProductionUpgradeRehearsalTest {
         String db = newDb("rehearsal_noclean");
         DataSource ds = ds(db);
         JdbcTemplate j = new JdbcTemplate(ds);
-        flyway(ds, null).migrate();
+        flyway(ds, "62").migrate();
         String script = Files.readString(Path.of("..", "tools", "wallet", "rollback-V62.sql"));
         assertTrue(script.contains("DELETE FROM flyway_schema_history WHERE version = '62'"), "le script retire la ligne de V62");
         for (String t : WALLET_TABLES.reversed()) j.execute("DROP TABLE IF EXISTS " + t);   // l'erreur à ne pas faire : tables retirées, historique laissé
-        flyway(ds, null).migrate();
+        flyway(ds, "62").migrate();
         assertEquals(0, walletTables(j), "Flyway croit V62 appliquée : il ne recrée rien");
         assertNotEquals(WALLET_TABLES.size(), walletTables(j));
         // et le module allumé échouerait au premier appel : la procédure de réparation du runbook est donc la seule sortie
         j.update("DELETE FROM flyway_schema_history WHERE version = '62'");
-        flyway(ds, null).migrate();
+        flyway(ds, "62").migrate();
         assertEquals(WALLET_TABLES.size(), walletTables(j), "réparation documentée : supprimer la ligne puis migrer");
     }
 
@@ -342,7 +342,7 @@ class ProductionUpgradeRehearsalTest {
     void theOldCodeFlywayAcceptsADatabaseThatAlreadyHasV62() throws Exception {
         String db = newDb("rehearsal_oldcode");
         DataSource ds = ds(db);
-        flyway(ds, null).migrate();
+        flyway(ds, "62").migrate();
         Path old = Files.createTempDirectory("migrations-1.1.0");
         try (Stream<Path> files = Files.list(Path.of("src", "main", "resources", "db", "migration"))) {
             for (Path f : files.filter(p -> p.getFileName().toString().endsWith(".sql")).toList()) {
@@ -376,7 +376,7 @@ class ProductionUpgradeRehearsalTest {
             Map<String, String> before = fingerprint(j);
 
             long t0 = System.nanoTime();
-            flyway(ds, null).migrate();
+            flyway(ds, "62").migrate();
             long ms = (System.nanoTime() - t0) / 1_000_000;
             System.out.println("REHEARSAL migration V62 avec 100 000 appareils (+100 000 installations) : " + ms + " ms");
 
@@ -431,7 +431,7 @@ class ProductionUpgradeRehearsalTest {
         Path walletKey = WalletTestBase.writeKey(WalletTestBase.pair());
         String trusted = "serveur:" + WalletTestBase.rawPublic(server) + ":ISSUE_TRIAL+ISSUE_PRODUCTION+REACTIVATE";   // jamais SUPER_UNLIMITED, TRANSFER ni COMMAND_OPEN_ALL
 
-        flyway(ds, null).migrate();   // V62 appliquée AVANT l'allumage pour mesurer ce que l'allumage seul écrit
+        flyway(ds, "62").migrate();   // V62 appliquée AVANT l'allumage pour mesurer ce que l'allumage seul écrit
         List<String> watched = List.of("lic_client", "lic_license", "lic_seat", "lic_issuance", "lic_revocation", "lic_audit", "lic_event", "admin_user", "device");
         Map<String, Long> licBefore = new LinkedHashMap<>();
         watched.forEach(t -> licBefore.put(t, count(j, t)));
