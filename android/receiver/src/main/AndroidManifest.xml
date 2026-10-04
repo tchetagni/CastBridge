@@ -91,6 +91,13 @@
             android:launchMode="singleTop"
             android:screenOrientation="landscape"
             android:configChanges="orientation|screenSize|screenLayout|keyboard|keyboardHidden|navigation" />
+        <!-- Partie Internet du Quiz (w20-05, DESIGN-W20-AMENDEMENT): opened from the Quiz home, only when the gate (PlayGate) allows it -->
+        <activity
+            android:name=".quiz.PlayOnlineActivity"
+            android:exported="false"
+            android:launchMode="singleTop"
+            android:screenOrientation="landscape"
+            android:configChanges="orientation|screenSize|screenLayout|keyboard|keyboardHidden|navigation" />
         <!-- Échecs (docs/CHESS.md): opened from the home tile or from the phone -->
         <activity
             android:name=".ChessActivity"
