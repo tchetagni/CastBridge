@@ -70,3 +70,12 @@ L'accueil et l'écran Serveur utilisent `logo_castbridge_tv_horizontal_compact` 
 4. « Administration » : « Aide », « Mises à jour »… OK ouvre l'écran, RETOUR de cet écran revient à la grille, RETOUR ferme la grille.
 5. Profil enfant (Contrôle parental) : seuls les outils autorisés restent, les groupes vides disparaissent.
 6. Lisibilité à 3 m : noms et icônes lus sans effort ; le focus ne sort jamais de la grille avec les flèches.
+
+## Accueil du Quiz
+
+Régression corrigée (retour du propriétaire : « je préfère encore l'ancien ») : l'ajout de la carte « Partie Internet » portait l'accueil du Quiz à 6 choix, ce qui déclenchait le mode « compact » (une seule ligne de 6, cartes de 120 dp) : « Meilleurs scores » était écrasé et « Partie Internet » / « Quitter » sortaient de l'écran.
+- Aspect d'origine (tv-0.14.28-beta) rétabli : cartes de 300 dp, 2 par ligne (2 + 2 + 1 ; avec « Partie Internet » : 2 + 2 + 2), même en-tête et mêmes espacements. Ordre : Amis, Mise / Entraînement, Meilleurs scores / Partie Internet (si non masquée), Quitter.
+- Le cœur pur `QuizHomeLayout` (`rows`, `cardWidthDp`, `move`) décide du nombre de cartes par ligne selon la largeur en dp (zone sûre de 90 %, carte jamais sous 220 dp) : sur un écran étroit les cartes passent à la ligne au lieu de déborder ; l'accueil défile si besoin.
+- Télécommande : GAUCHE/DROITE restent dans la ligne (pas de bouclage), HAUT/BAS changent de ligne en gardant la colonne la plus proche.
+- Les autres étapes du Quiz (parcours, niveaux, scores, mise, duel) ont au plus 4 cartes sauf niveaux/filières (déjà en grille `LevelGridLayout`) : même cause absente.
+- Dessin Android vérifié par compilation seulement ; l'aspect réel se confirme sur une TV (GaiaOS 720p).

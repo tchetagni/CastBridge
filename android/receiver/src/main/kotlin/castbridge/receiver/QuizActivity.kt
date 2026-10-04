@@ -25,6 +25,7 @@ import castbridge.core.quiz.Ladder
 import castbridge.core.quiz.QrCode
 import castbridge.core.quiz.QuestionFilter
 import castbridge.core.quiz.LevelGridLayout
+import castbridge.core.quiz.QuizHomeLayout
 import castbridge.core.quiz.QuizCatalog
 import castbridge.core.quiz.QuizLevelAvailability
 import castbridge.core.quiz.QuizRoom
@@ -291,7 +292,11 @@ class QuizActivity : Activity() {
 
         init {
             val (title, sub, choices) = content()
-            val compact = choices.size > 5
+            // home: the old 2-per-row look; the pure core (QuizHomeLayout) wraps instead of overflowing when the « Partie Internet » card joins
+            val home = step == "home"
+            val widthDp = resources.displayMetrics.let { (it.widthPixels / it.density).toInt() }
+            val homeRows = if (home) QuizHomeLayout.rows(widthDp, QuizHomeLayout.CARD_DP, choices.size) else emptyList()
+            val homeCard = if (home) QuizHomeLayout.cardWidthDp(widthDp, homeRows.maxOrNull() ?: 1) else 0
             // levels and fields: fixed compact cards in a wrapped grid (LevelGridLayout), the long text under the grid follows the focus
             val grid = step == "level" || step == "field"
             val cols = if (grid) LevelGridLayout.columns(resources.displayMetrics.let { (it.widthPixels / it.density).toInt() }) else 0
@@ -304,10 +309,11 @@ class QuizActivity : Activity() {
                         lp(h = dpi(84)))
                 } else addView(quizText(context, title, 36f, QuizColors.GOLD, true).apply { gravity = Gravity.CENTER }, lp())
                 if (sub != null) addView(quizText(context, sub, 21f, QuizColors.TEXT).apply { gravity = Gravity.CENTER }, lp(t = 6, b = 18))
-                val perRow = if (grid) cols else if (compact) 6 else if (step == "home" || choices.size == 4) 2 else 1
+                val perRow = if (grid) cols else if (choices.size == 4) 2 else 1
                 var line: LinearLayout? = null
+                val homeStarts = homeRows.runningFold(0) { a, n -> a + n }
                 choices.forEachIndexed { i, c ->
-                    if (i % perRow == 0) line = row(Gravity.CENTER).also { addView(it, lp(t = 6, b = 6)) }
+                    if (if (home) i in homeStarts else i % perRow == 0) line = row(Gravity.CENTER).also { addView(it, lp(t = 6, b = 6)) }
                     val card = choiceCard(context, c.title, c.sub, c.enabled) {
                         if (c.enabled) { play(QuizSound.Clip.SELECT); c.action() }
                         else { play(QuizSound.Clip.WRONG); footer.text = c.why ?: "« ${c.title} » : pas encore de questions. Elles arriveront avec les prochaines mises à jour." }
@@ -331,7 +337,23 @@ class QuizActivity : Activity() {
                             else { if (ev.action == android.view.KeyEvent.ACTION_DOWN) LevelGridLayout.move(at, dir, cards.size, cols)?.let { cards[it].requestFocus() }; true }
                         }
                         cards += card
-                    } else if (compact) { card.minWidth = dpi(120); card.setTextSize(android.util.TypedValue.COMPLEX_UNIT_SP, 20f) }
+                    } else if (home) {
+                        card.minWidth = dpi(homeCard)
+                        if (homeCard < QuizHomeLayout.CARD_DP) card.maxWidth = dpi(homeCard)   // narrow panel: fixed width, text wraps by words
+                        val at = cards.size
+                        card.setOnKeyListener { _, code, ev ->
+                            val dir = when (code) {
+                                android.view.KeyEvent.KEYCODE_DPAD_LEFT -> LevelGridLayout.Dir.LEFT
+                                android.view.KeyEvent.KEYCODE_DPAD_RIGHT -> LevelGridLayout.Dir.RIGHT
+                                android.view.KeyEvent.KEYCODE_DPAD_UP -> LevelGridLayout.Dir.UP
+                                android.view.KeyEvent.KEYCODE_DPAD_DOWN -> LevelGridLayout.Dir.DOWN
+                                else -> null
+                            }
+                            if (dir == null) false
+                            else { if (ev.action == android.view.KeyEvent.ACTION_DOWN) QuizHomeLayout.move(at, dir, homeRows)?.let { cards[it].requestFocus() }; true }
+                        }
+                        cards += card
+                    }
                     line!!.addView(card, if (grid) lp(w = dpi(LevelGridLayout.CARD_DP), l = 8, r = 8) else lp(l = 8, r = 8))
                     if (first == null && c.enabled) first = card
                     if (firstAny == null) firstAny = card
@@ -342,7 +364,7 @@ class QuizActivity : Activity() {
                 for (k in 0 until childCount) getChildAt(k).apply { alpha = 0f; translationY = dp(24f); animate().alpha(1f).translationY(0f).setStartDelay(60L * k).setDuration(300).start() }
             }
             // a tall grid scrolls so that the focused card stays visible (the focus already walks every card)
-            view = if (grid) android.widget.ScrollView(this@QuizActivity).apply {
+            view = if (grid || home) android.widget.ScrollView(this@QuizActivity).apply {
                 isFillViewport = true; isVerticalScrollBarEnabled = false
                 addView(body, FrameLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT))
             } else body
