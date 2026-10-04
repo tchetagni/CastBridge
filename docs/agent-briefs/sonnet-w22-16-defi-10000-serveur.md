@@ -1,0 +1,24 @@
+# w22-16 — Défi des 10 000 : serveur (pool « défi », packs par identité signés, distribution à `sync`, vérification des journaux, écritures `MILLIONS_*`, plafonds, anomalies, rendement observé, recalage des niveaux)
+<!-- routage architecte 2026-10-04 (W22, niveau 2) -->
+> **Modèle : sonnet** · escalade : audit Opus **obligatoire** (crédit après vérification seulement, rejeux, plafonds, conservation) · statut : **ATTEND w22-02, w22-05, w22-15 et D-W22-16…20**
+> **Groupe : W22-DEFI** · porte : `cd backend && ./mvnw -q test -Dtest='castbridge.server.wallet.millions.**'`
+> **Jauge : ≈ 600 k jetons entrée / 30 k sortie** (effort L, ≈ 2,5 j) · exécutant le moins cher compétent : sonnet
+
+**Conception** : `docs/coordination/DESIGN-W22-JETONS-NDEM-MBOKO-2026-10-04.md` § 13.3 (M-1…M-7), § 13.4 (vérification, grand livre), § 13.5 (pool, packs, distribution). Branche `claude/w22-16-defi-serveur`. Rapport : `docs/agent-reports/sonnet-w22-16.md`.
+
+## Fichiers possédés
+- **Nouveaux** : `backend/src/main/java/castbridge/server/wallet/millions/{MillionsPool,MillionsPackBuilder,MillionsPackSigner,MillionsSyncContributor,MillionsJournalVerifier,MillionsSettlement,MillionsCaps,MillionsAnomalies,MillionsRtpMonitor,MillionsLevelCalibrator,MillionsAdminController}.java` ; migration additive « plus haut + 1 » (`wallet_millions_pack(pack_id, holder, from, until, ladder_version, revoked)`, `wallet_millions_served(holder, qid, served_at)`, `wallet_millions_game(game_id PK, holder, pack_id, end_kind, k, gain, outcome, received_at)`, `wallet_millions_qstat(qid, shown, correct, level)`, lignes de politique `millions.*`, colonne ou table « défi » pour marquer les questions du pool) ; tests.
+- **Zone additive** : `wallet/core/{TxnKind,…}` (types `MILLIONS_STAKE`, `MILLIONS_WIN`, `MILLIONS_REFUND`, compte `SYS:MILLIONS`) ; `B/quiz/Question*` (marque « défi » seulement si une colonne additive suffit ; sinon table séparée).
+- **Interdit** : Android, `server-play/**`.
+
+## Spécification
+1. Pool : questions validées marquées « défi », **jamais** dans les paquets libres servis (`QuizPackService` : exclusion testée) ; niveaux initiaux = difficulté 1-5 × 3 sous-niveaux ; stock rapporté au rapport (par niveau) **avant** tout le reste ; s'il manque des questions, le dire et proposer `maxGamesPerDay = 2`.
+2. Pack par identité de **production** (édition lue par `EditionReader` de w22-02 ; essai ⇒ aucun pack, motif `MILLIONS_PRODUCTION_ONLY`) : 15 × 20 questions non servies à cette identité depuis 90 j, ordre tiré par identité, échelle et mise lues dans `wallet_policy` (`millions.ladder`, validée comme `MillionsLadder.validate`), validité 14 j ; renouvelé dans `sync` quand < 30 % de questions neuves ou < 3 j restants ; révocation d'un pack ⇒ `MILLIONS_REFUND` des parties non terminées.
+3. Journaux reçus dans `sync` (≤ 20) : signature d'installation, `gameId` neuf, `MillionsJournalVerifier` (port Java des motifs de `MillionsJournal.impossible`, vecteurs `tools/wallet/millions-vectors.json`), réponses vérifiées contre le pack **conservé au serveur** ; transaction `MILLIONS_STAKE` **toujours** ; `MILLIONS_WIN` seulement si valide et sous plafonds M-4 (au-delà : gain en attente de revue, jamais perdu sans revue) et sans anomalie M-5 (anomalie ⇒ attente de revue + alerte) ; solde insuffisant ⇒ mise jusqu'à 0, gain refusé.
+4. `MillionsRtpMonitor` : rendement 7 j glissants ; > cible + 0,10 deux semaines ⇒ alerte ; > 1,2 ⇒ `switch.millions = 0` automatique.
+5. `MillionsLevelCalibrator` (nocturne) : taux de réussite par question ; changement de niveau si écart > 10 points sur ≥ 50 réponses ; rapport des taux par niveau pour régler l'échelle (`MillionsRtpSimulator` porté ou appelé sur les taux observés).
+
+## Critères d'acceptation (mutations au rapport)
+- Journal valide ⇒ mise et gain une fois ; rejoué ⇒ inchangé ; chaque journal impossible des vecteurs ⇒ mise débitée, gain refusé (mutation : ne pas vérifier les réponses contre le pack ⇒ échec) ; 4e partie du jour ⇒ gain refusé ; 2e victoire à Q15 en 30 j ⇒ attente de revue ; essai ⇒ aucun pack.
+- Conservation : `SYS:MILLIONS` = Σ mises − Σ gains − Σ remboursements ; I-1…I-9 tenus.
+- Aucune question du pool dans un paquet libre (test).

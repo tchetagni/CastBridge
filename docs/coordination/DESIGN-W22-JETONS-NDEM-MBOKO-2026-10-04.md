@@ -29,6 +29,7 @@ Contraintes permanentes reprises (non rediscutées) : seule une **TV activée co
 11. **Niveau 1 (POC de faisabilité)** : 8 cahiers, ≈ **15 $**, ≈ **12 agent·jours**, ≈ **7 jours ouvrés** en parallèle (estimé). Il prouve : grand livre et invariants (tests de propriétés), attributions par édition, solde sur la TV, partie TV à TV avec mise NDEM puis MBOKO réglée par résultat signé, conversion **dans les deux sens**, **un** transfert, **un** bon hors ligne. **Échecs avec mise : niveau 2** (aucune salle d'échecs en ligne n'existe côté serveur : `docs/CHESS.md` § 6, relais « à implémenter »).
 12. **Niveau 2** : 6 cahiers (anti-abus complet, console de gel/reprise et réconciliation nocturne, bons au détail à code court, échecs en ligne avec mise, télémétrie et politique de rémunération, liaison forte du compte à la clé d'installation).
 13. **Juridique** : reporté au 2027-01-01 (§ 6, dix lignes).
+14. **Défi des 10 000** (spécification ajoutée, § 13) : mode solo hors ligne, production seulement, mise 500 NDEM, 15 questions, erreur = gain 0, 50:50 seul, retrait aux questions 5/8/10/13, 10 000 NDEM au maximum ; échelle **B** recommandée (rendement ≈ 0,92× sur des taux de réussite **supposés**, très sensible : +5 points ⇒ ≈ 1,35×) ; la TV ne crédite rien : journal signé, vérifié et crédité par le serveur, mise toujours débitée, plafonds 3 parties et 10 000 NDEM de gains par jour, détection statistique (une TV rootée lit les réponses : perte bornée, pas empêchée) ; échelle et mise dans la politique signée dans les packs (aucun APK à livrer pour les changer). Niveau 2 (cœur pur w22-15 au niveau 1 en parallèle) : 3 cahiers, ≈ 7 $.
 
 ## 1. Règles du propriétaire, restituées précisément (niveau 1 sauf mention)
 
@@ -472,6 +473,11 @@ Index : `docs/agent-briefs/SONNET-WAVE22-INDEX.md`. Coûts aux prix des index pr
 | 7 | w22-12 échecs en ligne TV à TV avec mise | 2 | L | sonnet | **obligatoire** | niveau 1 |
 | 8 | w22-13 télémétrie portefeuille et politique de rémunération | 2 | S | sonnet | échantillon | 09 |
 | 8 | w22-14 liaison forte du compte à la clé d'installation de la TV | 2 | M | sonnet | **obligatoire** | 02 |
+| 1 ter | w22-15 Défi des 10 000 : cœur pur (échelle, état, journal `cbm1`, pack, simulateur de rendement) | 1 (parallèle, hors chemin critique) | M | sonnet | **obligatoire** | 03 |
+| 9 | w22-16 Défi : serveur (pool, packs signés, vérification des journaux, `MILLIONS_*`, plafonds, anomalies, rendement) | 2 | L | sonnet | **obligatoire** | 02, 05, 15 |
+| 10 | w22-17 Défi : écran TV, moteur local, reprise, gains en attente | 2 | M | sonnet | **obligatoire** | 07, 15, 16 |
+
+**Défi des 10 000** (§ 13.7) : w22-15 (niveau 1, parallèle) ≈ 1,8 $ avec audit ; w22-16 + w22-17 (niveau 2) ≈ 5 $ ; total ≈ 7 $, ≈ 5,5 agent·jours. Les totaux ci-dessous ne l'incluent pas.
 
 **Coût du niveau 1** (estimé) : sonnet 6 × M (1,0 $) + 1 × L (1,6 $) = 7,6 $ ; haiku S ≈ 0,15 $ ; audits Opus 6 × 0,8 $ + 1 échantillon 0,4 $ = 5,2 $ ; reprises 15 % ≈ 1,9 $ ⇒ **≈ 15 $**, ≈ **12 agent·jours** ; chemin critique 01 → 02 → 05 → 07 → 08 ≈ **7 jours ouvrés** si 01 ∥ 03, 02 ∥ 04, 05 ∥ 06. **Niveau 2** : 4 × M + 1 × L + 1 × S ≈ 6,1 $ + audits ≈ 4,4 $ + reprises ≈ 1,6 $ ⇒ **≈ 12 $**, ≈ 11 agent·jours.
 
@@ -497,6 +503,8 @@ Index : `docs/agent-briefs/SONNET-WAVE22-INDEX.md`. Coûts aux prix des index pr
 | D-W22-15 | Une identité d'**essai** peut **détenir** et **recevoir** des MBOKO (conversion, transfert entrant) et les reconvertir en NDEM, sans pouvoir les miser ni (niveau 2) les retransférer ? | **Oui** (§ 1.3 : la règle porte sur l'attribution et l'enjeu) | refuser MBOKO aux essais : bloque un cadeau d'une TV de production sans rien protéger |
 | D-W22-13 | Exception de gel pour l'écran « Mes jetons » et le choix de mise, derrière `quiz.online` (comme D-AM-1) ? | **Oui** | la démonstration TV attend la sortie du gel |
 
+Décisions du Défi des 10 000 : **D-W22-16 à D-W22-21**, § 13.8.
+
 **BLOQUÉ (faits non lisibles ici)** : aucun pour concevoir. À relever avant la démonstration : la présence d'un lecteur de QR dans l'application CastBridge ; l'utilisabilité de `EnvelopeVerifier` sans le module des licences ; la clé publique de l'émetteur des activations des TV de démonstration (déjà B-7 de l'amendement).
 
 ## 11. Risques
@@ -521,3 +529,125 @@ Index : `docs/agent-briefs/SONNET-WAVE22-INDEX.md`. Coûts aux prix des index pr
 **Lu** : `DESIGN-W20-AMENDEMENT-TV-SEULEMENT-2026-10-04.md` (entier) ; `DESIGN-W20-QUIZ-EN-LIGNE-2026-10-03.md` (passages mises, juridique) ; `DESIGN-W21-DONNEES-TECHNIQUES-POC-2026-10-04.md` (§ 0, § 1) ; `DESIGN-W5-BOUTIQUE-LOCATIONS-JETONS.md` (§ 0-3, § 5-14) ; `DESIGN-W16-…` (§ 0, § 1.4) ; `docs/QUIZ.md` § 5 ; `docs/CHESS.md` (plan) ; `docs/RELEASES.md` (tags serveur) ; code : `C/quiz/Wallet.kt`, `C/quiz/QuizRoom.kt` (mise), `C/tokens/{TokenPolicy,TokenGrant,TokenSync,WalletMark}.kt`, `TokenWallet.kt` (en-tête), `C/lots/{EditionPolicy,PilotRules,RentalDurations}.kt` (en-têtes), `C/owner/Activation.kt` (édition, illimité), `C/owner/{KeyBadge,ProductionForm,DelegatedVerifier}.kt` (passages), `C/chess/{ChessRoom,ChessTransport}.kt` (en-têtes), `SP/entitlement/HostRights.kt`, `SP/PlayConfig.kt` (variables), `B/play/PlayTicketService.java`, `B/licenses/{ActivationService,EnvelopeVerifier}.java` (passages), `V51__licenses_core.sql`, `backend/application.yml` (drapeaux), `backend/docker-compose*.yml` (mémoire), `backend/pom.xml` (le serveur Java **ne dépend pas** du cœur Kotlin), liste des migrations (V61 la plus haute fusionnée ; V62 réservée par W21).
 
 **Non lu ou non vérifié** : `ServerRoom.kt` ligne à ligne (l'extension « salle misée » est spécifiée à partir de l'amendement et de `QuizRoom`) ; `TvGate`, `Entitlements`, `RentalLines` ligne à ligne ; l'instanciation de `EnvelopeVerifier` hors module des licences ; la présence d'un lecteur de QR dans l'application ; (vérifié en fin de rédaction : le serveur teste sur H2 en mode MySQL et, si Docker est présent, sur MySQL 8.4 par Testcontainers) ; le prix d'une clé d'essai et d'une licence (pour chiffrer la rentabilité d'une ferme en XAF) ; aucun chiffre de coût, de taille ou de délai n'a été mesuré.
+
+## 13. Mode solo « Défi des 10 000 » (spécification du 2026-10-04, ajoutée)
+
+**Spécification du propriétaire (verbatim)** : « Il existe aussi un quiz à la logique de « Qui veut gagner des millions » pour encaisser 10 000 NDEM, pour exclusivement remporter des jetons en mode solo. La mise est de 500 NDEM. Il est chargé et géré en offline par le serveur à toutes les TV en production. Pour rappel, l'erreur vaut fin de la partie. 15 questions pour rafler la mise maximale, seul joker le 50:50. Possibilité de ne plus continuer après 5 questions, 8, 10, 13 et emporter les gains affichés. Tu me donneras l'échelle de rémunération croissante non constante par palier. »
+
+**Nouveau mode, distinct** du Millionnaire existant (`C/quiz/QuizRoom.kt`, `Mode.MILLIONAIRE` : échelle FCFA **fictive**, 3 jokers, paliers de sécurité 5/10, commodités W5) : aucun code commun hormis la banque de questions. Nom d'écran proposé : **« Défi des 10 000 »** (D-W22-21).
+
+### 13.1 Règles restituées
+
+| Point | Règle |
+|---|---|
+| Qui | TV **de production** (production, grâce, illimitée), lue dans `cbx1` au serveur et dans `TvGate` sur la TV ; essai : tuile visible, grisée « Version complète » |
+| Mode | **solo**, à la télécommande, sur la TV ; **hors ligne** (pack chargé d'avance) |
+| Mise | **500 NDEM**, prise au début (avant la 1re question) |
+| Questions | 15, difficulté croissante (niveau 1 à 15) |
+| Erreur | **fin de partie, gain 0** (aucun palier de sécurité : la seule protection est de se retirer) — lecture retenue (D-W22-17) |
+| Joker | un seul : **50:50**, une fois par partie |
+| Retrait | possible **seulement** juste après une bonne réponse aux questions **5, 8, 10, 13** : on emporte le gain affiché ; ailleurs : continuer ou abandonner (abandon = gain 0) |
+| Gain maximal | **10 000 NDEM** après la question 15 |
+| Monnaie des gains | **NDEM seulement**, jamais MBOKO |
+| Temps de réponse | 30 s par question (comme le Millionnaire local ; réglable dans le pack) ; dépassé = erreur |
+
+### 13.2 Échelle (gain total affiché après réussite de la question)
+
+| Q | 1 | 2 | 3 | 4 | **5** | 6 | 7 | **8** | 9 | **10** | 11 | 12 | **13** | 14 | 15 |
+|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|
+| **B (recommandée)** | 50 | 100 | 200 | 300 | **500** | 700 | 900 | **1 200** | 1 600 | **2 000** | 2 700 | 3 600 | **5 000** | 7 000 | 10 000 |
+| incrément | 50 | 50 | 100 | 100 | 200 | 200 | 200 | 300 | 400 | 400 | 700 | 900 | 1 400 | 2 000 | 3 000 |
+| A (généreuse) | 100 | 200 | 400 | 600 | **1 000** | 1 400 | 1 800 | **2 400** | 3 100 | **3 900** | 5 000 | 6 300 | **8 000** | 9 000 | 10 000 |
+| C (avantage plateforme) | 40 | 90 | 170 | 260 | **430** | 600 | 770 | **1 030** | 1 380 | **1 720** | 2 320 | 3 100 | **4 300** | 6 000 | 10 000 |
+
+Le palier 5 de B rend exactement la mise ; les incréments croissent (non constants), plus vite après 10.
+
+**Rendement d'un joueur qui joue au mieux** (programmation dynamique, script de l'architecte, **probabilités de réussite SUPPOSÉES** : 97, 95, 93, 90, 87, 83, 79, 75, 70, 65, 60, 55, 50, 45, 40 % ; 50:50 = moitié de l'erreur retirée ; **rien n'est mesuré**) :
+
+| Échelle | Gain moyen pour 500 misés | Rendement | Stratégie optimale |
+|---|---|---|---|
+| A | ≈ 900 NDEM | ≈ **1,8×** | robinet : déconseillée |
+| **B** | ≈ 460 NDEM (≈ 400 sans 50:50) | ≈ **0,92×** | continuer après 5 ; **s'arrêter à 8** (1 200) le plus souvent |
+| C | ≈ 400 NDEM | ≈ **0,8×** | idem |
+| B si chaque question est réussie **5 points plus souvent** | ≈ 680 NDEM | ≈ 1,35× | — |
+| B **+ 10 points** | ≈ 940 NDEM | ≈ 1,9× | — |
+
+**Conclusion** : le rendement est **très sensible** au taux réel de réussite (+5 points ⇒ +45 %) ; tout ce qui l'élève (questions déjà vues, réponses partagées entre foyers, TV trafiquée) transforme le mode en robinet. D'où les règles suivantes.
+
+### 13.3 Économie : une SOURCE de NDEM pilotée
+
+Les gains sont créés par la plateforme ; avec la conversion libre (1 000 NDEM = 1 MBOKO), un rendement > 1 fabrique des MBOKO.
+
+| # | Règle | Valeur proposée |
+|---|---|---|
+| M-1 | **Rendement cible ≤ 1** : `millions.targetRtpBp` (défaut 9 000 = 0,90) ; rendement observé (Σ gains / Σ mises confirmés, 7 jours glissants, toutes TV) publié dans `/admin/wallet` | 0,90 |
+| M-2 | **Échelle hors du code** : `millions.ladder` (15 valeurs) et `millions.stake` dans `wallet_policy`, **recopiés et signés dans chaque pack** : changer l'échelle = changer la politique ; les TV la reçoivent au prochain pack, **sans livrer d'APK** ; validation à l'écriture : croissante, incréments croissants, Q15 = 10 000, palier 5 ≤ mise × 1 | — |
+| M-3 | **Pilotage** : si le rendement observé dépasse la cible + 0,10 deux semaines de suite ⇒ alerte ; l'administrateur réduit l'échelle (jamais automatique au niveau 2 ; un abaissement automatique borné est une option de niveau 3) ; si > 1,2 ⇒ interrupteur `switch.millions` coupé automatiquement (les parties en cours se finissent, les gains confirmés restent) | — |
+| M-4 | **Plafonds par identité** | **3 parties / jour**, **10 000 NDEM de gains confirmés / jour**, 30 000 / semaine (au-delà : gain mis en attente de revue, jamais perdu sans revue) |
+| M-5 | **Anomalies** (mise en attente de revue, pas de refus automatique) : ≥ 2 parties gagnées à Q15 en 30 j (probabilité honnête supposée ≈ 0,5 % par partie) ; réponses trop rapides (médiane < 1,5 s sur une partie ≥ 8 questions) ; taux de réussite d'une identité > taux moyen + 3 écarts-types sur ≥ 20 parties ; journal impossible (§ 13.4) ⇒ refus | — |
+| M-6 | **Anti-répétition** : une question servie à une identité ne lui est pas resservie avant 90 jours ; packs **différents d'une TV à l'autre** (tirage par identité), pour qu'une réponse partagée entre foyers serve peu | — |
+| M-7 | **Questions réservées** : le pool du Défi ne doit **pas** venir de la banque libre embarquée (consultable sur toute TV) : pool dédié, non publié, comme les questions réservées du service de jeu (`SP/entitlement/ReservedBank.kt`) | — |
+
+### 13.4 Hors ligne : la TV joue, le serveur crédite (point dur)
+
+**Fait à dire** : pour corriger hors ligne, la TV **doit** connaître les bonnes réponses ; une TV rootée peut donc les lire et gagner à coup sûr. **Aucun chiffrement n'empêche cela hors ligne** (la clé serait sur la TV). La défense est donc **économique et statistique** : rien n'est crédité par la TV, le serveur crédite après vérification, sous plafonds (M-4) et détection (M-5) ; la perte maximale d'une TV trafiquée est bornée par M-4 (≈ 10 000 NDEM / jour = 10 MBOKO / jour, avant détection par M-5, qui met les gains en attente de revue dès la 2e victoire à Q15).
+
+```
+Serveur (sync, TV de production)              CastBridge-TV (hors ligne)                          Serveur (sync suivant)
+pack « Défi » signé (clé portefeuille) ──────► vérifie signature, identité, validité
+ id, identité, validité 14 j, échelle,        mise : 500 « bloqués localement »
+ mise, 15 niveaux × 20 questions,              (disponible affiché = confirmé − mises en cours)
+ bonnes réponses, maxParties/jour              15 questions, 50:50, retrait aux paliers
+                                               journal signé par la clé d'installation ───────► vérifie : pack attribué à CETTE identité,
+                                               gain affiché « en attente »                        questions du pack dans l'ordre des niveaux,
+                                                                                                  réponses contre SA clé, retrait à un palier,
+                                                                                                  gain = échelle du pack, gameId neuf, délais
+                                                                                                  plausibles, plafonds ⇒ MILLIONS_STAKE (toujours)
+                                                                                                  + MILLIONS_WIN (si valide) ; sinon motif
+```
+
+- **Journal de partie** (`cbm1`, signé par la clé d'installation de la TV, `C/owner/InstallSigner.kt`, qui **atteste l'origine**, pas l'honnêteté) : `gameId` (128 bits), `packId`, `ladderVersion`, liste ordonnée `(questionId, choix, joker50, msDepuisAffichage)`, fin `WRONG@k | TIMEOUT@k | WITHDRAW@k | WON | FORFEIT@k`, début et fin (horloge monotone + `TvClock`), chaîne d'empreintes ; ≈ 1 Ko.
+- **Vérification serveur** (dans `sync`, `SyncContributor`) : rejet des **rejeux** (`gameId` unique, clé `mil:<gameId>`), journal **impossible** (question absente du pack de cette identité, niveaux dans le désordre, retrait hors palier, gain ≠ échelle, 50:50 deux fois, réponses après l'erreur, délai < 300 ms, partie au-delà de `maxParties/jour`) ⇒ mise débitée, gain refusé (`MILLIONS_INVALID`), alerte.
+- **La mise est toujours débitée** dès que le journal arrive, même si la partie est invalide ; un journal **qui n'arrive jamais** : la mise n'est jamais débitée au serveur **mais** reste perdue pour le joueur côté TV (aucun remboursement local ; la TV garde le journal jusqu'à confirmation, ≤ 30 j, puis l'envoie même en retard) : la plateforme ne perd rien, le joueur n'y gagne rien à couper le réseau.
+- **Pas de solde négatif** : la TV ne mise que sur le **disponible hors ligne** = NDEM confirmés du dernier `cbw1` − mises des journaux non confirmés (seule cette TV dépense ce compte, et toujours après avoir envoyé ses journaux : le solde serveur ne peut pas être inférieur) ; si malgré tout le solde serveur manque (cas pathologique), la mise est débitée jusqu'à 0 et le gain refusé (`INSUFFICIENT`).
+- **Partie abandonnée** : coupure de courant ou plantage ⇒ la TV **reprend** la partie à la même question au redémarrage (état persisté à chaque réponse) ; « Quitter » hors palier = abandon, gain 0 ; pack **révoqué** par le serveur (erreur de questions) ⇒ `MILLIONS_REFUND` de la mise des parties de ce pack non terminées.
+- **Ce que voit le joueur hors ligne** : « Disponible : 2 300 NDEM (au 04/10 18:42, dont 500 en jeu) · Gains en attente : 1 200 NDEM, confirmés à la prochaine connexion » ; après confirmation : « 1 200 NDEM confirmés » ; refus : motif (« Partie non validée : … »).
+
+**Grand livre** : nouveau compte système `SYS:MILLIONS` (NDEM) et trois types : `MILLIONS_STAKE` (`id:DISPO −500`, `SYS:MILLIONS +500`, clé `milstake:<gameId>`), `MILLIONS_WIN` (`SYS:MILLIONS −g`, `id:DISPO +g`, clé `milwin:<gameId>`), `MILLIONS_REFUND` (inverse de la mise, clé `milref:<gameId>`). Solde de `SYS:MILLIONS` = mises − gains − remboursements ⇒ **création nette du mode** (I-3 étendu ; rendement = gains / mises). Gains en `DISPO` (D-W22-20 : en `BONUS` si le propriétaire veut les rendre non transférables).
+
+### 13.5 Gestion par le serveur
+
+- **Pool** : questions validées du module serveur (`B/quiz/{Question,QuestionRepository,QuizPackService}.java`), marquées « défi », **hors banque libre** ; difficulté actuelle 1-5 (`C/quiz/QuizBank.kt:22-23`) ⇒ 15 niveaux initiaux = 3 sous-niveaux par difficulté, puis **recalage empirique** : chaque question reçoit son taux de réussite mesuré depuis les journaux confirmés (le serveur a les journaux : la télémétrie W21 n'est pas nécessaire pour cela ; elle sert au suivi agrégé) et change de niveau quand l'écart dépasse 10 points sur ≥ 50 réponses. **Stock** : ≥ 15 × 200 = 3 000 questions pour tenir 90 jours d'anti-répétition à 3 parties/jour (estimé : 3 × 90 × ≤ 15 = 4 050 questions servies au plus par identité ; en pratique ≈ 8 questions par partie ⇒ ≈ 2 200) ; **à vérifier** : le stock réel de questions validées par difficulté.
+- **Pack** par identité : 15 niveaux × 20 questions (≈ 300 questions, ≈ 75 Ko, ≈ 30 Ko compressé ⇒ ≈ 6 s à 40 kbps, une fois), validité 14 j, renouvelé à la synchronisation quand il reste < 30 % de questions neuves ou < 3 j ; versions ; un seul pack actif ; révocable.
+- **Distribution** : par la route `sync` (production seulement, édition vérifiée dans `cbx1`), par le chemin réseau de la TV (direct ou passerelle Bluetooth) ; jamais par le téléphone en direct au service de jeu.
+- **Télémétrie** (sans donnée personnelle, agrégats `kpi_wallet_daily`) : parties, rendement observé, distribution des fins (erreur à k, retrait à 5/8/10/13, victoires), usage du 50:50, taux de réussite par niveau, alertes M-5.
+- **Signe de sécurité** : le Défi est hors ligne : pas de « Partie sûre » ; bandeau « Hors ligne · gains confirmés à la prochaine connexion » (en ligne : « Gains confirmés immédiatement après la partie », la TV synchronise à la fin).
+
+### 13.6 Écran TV
+
+Colonne droite : l'échelle des 15 gains, paliers 5, 8, 10, 13 marqués (« palier »), question courante en surbrillance ; centre : question, 4 réponses (D-pad), 30 s ; bouton **50:50** (une fois) ; après une bonne réponse à un palier : écran de choix « Emporter 1 200 NDEM » / « Continuer vers 1 600 NDEM » (« Emporter » n'existe qu'aux paliers) ; erreur : « Mauvaise réponse : fin de la partie · gain 0 » ; confirmation de la mise au début : « Miser 500 NDEM (cinq cents) ? » ; le téléphone n'intervient pas (sa page `/quiz` affiche « La TV joue au Défi des 10 000 »).
+
+### 13.7 Niveau et cahiers
+
+**Décision de l'architecte : niveau 2**, sauf le cœur pur (**w22-15**, bon marché, ≈ 1,5 j, aucun effet sur le chemin critique du niveau 1, à lancer en parallèle). Raison : le mode complet ajoute ≈ 5 agent·jours et un audit difficile (crédit hors ligne) ; il ne conditionne pas la preuve de faisabilité du grand livre. Le propriétaire peut le tirer au niveau 1 pour ≈ +6 $ et ≈ +2 jours ouvrés (D-W22-16).
+
+| Cahier | Objet | Niveau | Effort | Modèle | Audit Opus | Dépend |
+|---|---|---|---|---|---|---|
+| w22-15 | cœur pur (Kotlin) : échelle et validation, état de partie, retrait aux paliers, 50:50, journal `cbm1`, pack (format, vérification), vecteurs ; simulateur de rendement | 1 (parallèle) | M | sonnet | **oui** | w22-03 |
+| w22-16 | serveur : pool « défi », packs par identité signés, distribution à `sync`, vérification des journaux (port Java + vecteurs), écritures `MILLIONS_*`, plafonds M-4, anomalies M-5, rendement M-1/M-3, recalage des niveaux | 2 | L | sonnet | **oui** | w22-02, w22-05, w22-15 |
+| w22-17 | TV : écran du Défi derrière `quiz.online` (exception de gel), moteur local, persistance et reprise, disponible hors ligne, gains en attente | 2 | M | sonnet | **oui** (crédit hors ligne affiché) | w22-07, w22-15, w22-16 |
+
+Coût (estimé, prix non vérifiés) : 2 × M + 1 × L ≈ 3,6 $ ; 3 audits ≈ 2,4 $ ; reprises ≈ 0,9 $ ⇒ **≈ 7 $**, ≈ 5,5 agent·jours.
+
+### 13.8 Décisions du propriétaire (Défi des 10 000)
+
+| id | Question | Recommandation | Si non |
+|---|---|---|---|
+| D-W22-16 | Défi au **niveau 2** (cœur w22-15 seulement au niveau 1) ? | **Oui** | niveau 1 : ≈ +6 $, ≈ +2 jours ouvrés |
+| D-W22-17 | « L'erreur vaut fin de partie » = **gain 0** (aucun palier de sécurité ; retrait seulement aux questions 5, 8, 10, 13) ? | **Oui** | erreur = repli sur le dernier palier franchi : rendement nettement plus haut, échelle à refaire |
+| D-W22-18 | Échelle **B** (≈ 0,92× supposé), cible de rendement **≤ 0,90**, échelle et mise dans la politique signée dans les packs, ajustée sur les journaux réels ? | **Oui (B)** ; C si l'on veut une marge dès le départ ; **pas A** (≈ 1,8× : robinet à MBOKO) | A : création nette ≈ 400 NDEM par partie et par TV |
+| D-W22-19 | Crédit **en attente** : la TV débite localement, le serveur vérifie le journal et crédite ; mise toujours débitée ; journal jamais arrivé = mise perdue ; reprise après coupure ? | **Oui** | crédit local immédiat : une TV trafiquée crée des jetons sans limite |
+| D-W22-20 | Plafonds : **3 parties / jour**, **10 000 NDEM de gains confirmés / jour**, 30 000 / semaine ; gains en `DISPO` (transférables) ou en `BONUS` ? | **Oui aux plafonds ; gains en `DISPO`** (ce sont des gains de jeu ; M-4 et M-5 bornent l'abus) | plafonds plus hauts : perte bornée plus grande par TV trafiquée |
+| D-W22-21 | Nom d'écran neutre **« Défi des 10 000 »**, distinct du Millionnaire existant ? | **Oui** | confusion avec le Millionnaire local (FCFA fictifs, 3 jokers) |
+
+**Risques ajoutés** : R-13 TV rootée qui lit les réponses (certain à terme) ⇒ M-4 + M-5, perte bornée ; R-14 stock de questions insuffisant pour l'anti-répétition ⇒ mesure du stock avant w22-16, réduire à 2 parties/jour si nécessaire ; R-15 taux de réussite réel plus haut que supposé ⇒ rendement > 1 ⇒ M-1/M-3 et échelle C prête ; R-16 partage de réponses entre foyers ⇒ packs par identité, anti-répétition.
