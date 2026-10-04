@@ -106,6 +106,22 @@ class VerifyExport(unittest.TestCase):
         code, out = run("--events", write(rows), "--audit-key-file", keyfile(), "--checkpoints", path2.name)
         self.assertEqual(code, 1, out)
 
+    def test_an_export_shorter_than_a_signed_checkpoint_is_an_anomaly_not_unverified(self):
+        """Audit w23-01 H3: a tail cut off the history is a TRUNCATION, reported as ANOMALIE (code 1), never as « NON VÉRIFIÉ » (code 2)."""
+        rows = build(8)
+        payload = "|".join([v.FORMAT, "2026-10-10", "8", rows[7]["hash"], "0", v.GENESIS, "{}"])
+        import hmac as h
+        cp = [{"day": "2026-10-10", "eventLastId": 8, "eventHead": rows[7]["hash"], "readLastId": 0, "readHead": v.GENESIS, "countsJson": "{}", "sigKid": "hmac",
+               "signature": h.new(KEY, payload.encode(), hashlib.sha256).hexdigest()}]
+        path = tempfile.NamedTemporaryFile("w", suffix=".json", delete=False)
+        json.dump({"items": cp}, path)
+        path.close()
+        code, out = run("--events", write(rows[:5]), "--audit-key-file", keyfile(), "--checkpoints", path.name)
+        self.assertEqual(code, 1, out)
+        self.assertIn("ANOMALIE", out)
+        self.assertNotIn("NON VÉRIFIÉ", out)
+        self.assertIn("plus court", out)
+
 
 if __name__ == "__main__":
     unittest.main()

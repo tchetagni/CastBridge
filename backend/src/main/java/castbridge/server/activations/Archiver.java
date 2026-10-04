@@ -47,8 +47,10 @@ public class Archiver {
     private final ActivationsProperties props;
     private final ActAccess access;
     private final EventLog eventLog;
+    private final Checkpoints checkpoints;
 
-    public Archiver(JdbcTemplate jdbc, ActClock clock, ActivationsProperties props, ActAccess access, EventLog eventLog) {
+    public Archiver(JdbcTemplate jdbc, ActClock clock, ActivationsProperties props, ActAccess access, EventLog eventLog, Checkpoints checkpoints) {
+        this.checkpoints = checkpoints;
         this.jdbc = jdbc;
         this.clock = clock;
         this.props = props;
@@ -154,8 +156,10 @@ public class Archiver {
         Path tmp = Files.createTempFile(dir, "act-archive", ".tmp");
         Files.write(tmp, data);
         Files.move(tmp, dir.resolve(name), StandardCopyOption.REPLACE_EXISTING);
-        jdbc.update("INSERT INTO act_archive (table_name, from_id, to_id, from_at, to_at, file, sha256, row_count, last_hash, removed, created_at) VALUES (?,?,?,?,?,?,?,?,?,?,?)", table, fromId, toId, fromAt, toAt, name,
-                Hashing.sha256Hex(data), count, lastHash, remove, Timestamp.from(clock.now()));
+        String sha = Hashing.sha256Hex(data);
+        Checkpoints.Sig sig = checkpoints.sign(Checkpoints.archivePayload(table, toId, lastHash, sha, count));   // audit H3: the anchor is signed, an unsigned one is not believed
+        jdbc.update("INSERT INTO act_archive (table_name, from_id, to_id, from_at, to_at, file, sha256, row_count, last_hash, removed, created_at, sig_kid, signature) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?)", table, fromId, toId,
+                fromAt, toAt, name, sha, count, lastHash, remove, Timestamp.from(clock.now()), sig.kid(), sig.signature());
         return name;
     }
 }

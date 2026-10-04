@@ -51,8 +51,10 @@ public class EventLog {
     private final JdbcTemplate jdbc;
     private final ActClock clock;
     private final byte[] key;
+    private final Checkpoints checkpoints;
 
-    public EventLog(JdbcTemplate jdbc, LicenseProperties props, ActClock clock) {
+    public EventLog(JdbcTemplate jdbc, LicenseProperties props, ActClock clock, @org.springframework.context.annotation.Lazy Checkpoints checkpoints) {
+        this.checkpoints = checkpoints;
         this.jdbc = jdbc;
         this.clock = clock;
         this.key = Chains.readKey(props.secretsDir().resolve("act-audit.key"));
@@ -123,6 +125,8 @@ public class EventLog {
         if (((Number) head.get("last_id")).longValue() != lastId || !head.get("last_hash").equals(prev)) {
             return new Verification(false, count, lastId + 1, "La fin de l'historique ne correspond pas à la tête de chaîne (lignes retirées en fin d'historique)", null);
         }
+        String cross = checkpoints.crossCheck("act_event", lastId);   // audit H3: the head is in the same database as the rows: the signed checkpoints and anchors say the rest
+        if (cross != null) return new Verification(false, count, null, cross, null);
         return new Verification(true, count, null, null, prev);
     }
 

@@ -307,7 +307,10 @@ CREATE TABLE act_archive (
     row_count  BIGINT       NOT NULL,
     last_hash  CHAR(64)     NULL,
     removed    BOOLEAN      NOT NULL DEFAULT FALSE,
-    created_at DATETIME(6)  NOT NULL
+    created_at DATETIME(6)  NOT NULL,
+    -- signature de l'ancre (table, to_id, last_hash, sha256, row_count) par la clé des points de contrôle (audit H3) : une ancre non signée n'est pas crue
+    sig_kid    VARCHAR(16)  NULL,
+    signature  VARCHAR(100) NULL
 );
 CREATE INDEX ix_act_archive_table ON act_archive (table_name, to_id);
 

@@ -40,8 +40,10 @@ public class ReadAudit {
     private final JdbcTemplate jdbc;
     private final ActClock clock;
     private final byte[] key;
+    private final Checkpoints checkpoints;
 
-    public ReadAudit(JdbcTemplate jdbc, LicenseProperties props, ActClock clock) {
+    public ReadAudit(JdbcTemplate jdbc, LicenseProperties props, ActClock clock, @org.springframework.context.annotation.Lazy Checkpoints checkpoints) {
+        this.checkpoints = checkpoints;
         this.jdbc = jdbc;
         this.clock = clock;
         this.key = Chains.readKey(props.secretsDir().resolve("act-audit.key"));
@@ -152,6 +154,8 @@ public class ReadAudit {
         if (((Number) head.get("last_id")).longValue() != lastId || !head.get("last_hash").equals(prev)) {
             return new EventLog.Verification(false, count, lastId + 1, "La fin du journal des lectures ne correspond pas à la tête de chaîne", null);
         }
+        String cross = checkpoints.crossCheck("adm_read_audit", lastId);   // audit H3
+        if (cross != null) return new EventLog.Verification(false, count, null, cross, null);
         return new EventLog.Verification(true, count, null, null, prev);
     }
 

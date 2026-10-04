@@ -691,7 +691,10 @@ public class ActivationsAdminService {
             m.put("signature", c.signature());
             items.add(m);
         }
-        return audited(actor, R_CHECKPOINTS, ap, null, items.size(), true, Map.of("items", items));
+        Map<String, Object> out = new LinkedHashMap<>();
+        out.put("items", items);
+        if (checkpoints.publicKey() != null) out.put("publicKey", checkpoints.publicKey());   // to keep OUTSIDE the server
+        return audited(actor, R_CHECKPOINTS, ap, null, items.size(), true, out);
     }
 
     private static LocalDate date(String s) {

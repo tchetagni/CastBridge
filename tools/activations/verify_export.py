@@ -6,7 +6,7 @@ Ce que l'outil contrôle, sans le serveur ni sa base :
     déplacée est désignée par son numéro ; les identifiants se suivent sans trou ;
   * la chaîne du journal d'audit des lectures (export « what=reads »), si elle est donnée ;
   * les POINTS DE CONTRÔLE signés (GET /checkpoints) : la signature (Ed25519 avec la clé publique, ou HMAC avec le fichier act-audit.key) et la tête de chaîne qu'ils
-    annoncent, comparée à la ligne correspondante de l'export.
+    annoncent, comparée à la ligne correspondante de l'export. Un export qui s'arrête AVANT la ligne d'un point de contrôle signé est une ANOMALIE (troncature), code 1.
 
 Le hash est HMAC-SHA-256 avec la clé SHA-256(contenu du fichier act-audit.key) quand ce fichier existe sur le serveur (donner --audit-key-file), sinon SHA-256 simple.
 Une chaîne recalculée par quelqu'un qui n'a pas la clé ne se vérifie donc pas ici.
@@ -70,7 +70,7 @@ def kid_of(public_key_raw):
     return hashlib.sha256(public_key_raw).hexdigest()[:16]
 
 
-def verify_checkpoints(path, key, public_key_b64, event_hashes, first_event_id):
+def verify_checkpoints(path, key, public_key_b64, event_hashes, first_event_id, last_event_id=0):
     """Returns (problems, not_done)."""
     problems, not_done = [], []
     with open(path, encoding="utf-8") as f:
@@ -113,8 +113,12 @@ def verify_checkpoints(path, key, public_key_b64, event_hashes, first_event_id):
             continue
         n = c["eventLastId"]
         if n and event_hashes is not None and n >= first_event_id:
-            if n not in event_hashes:
-                not_done.append("point de contrôle %s : la ligne %d n'est pas dans l'export (export plus court)" % (c["day"], n))
+            if n > last_event_id:
+                # a signed checkpoint says the history went at least to n, the export stops before: a tail was cut off (or the export is older than the checkpoint: redo it)
+                problems.append("point de contrôle %s : l'export s'arrête à la ligne %d, avant la ligne %d que ce point de contrôle signé atteste : export plus court que l'historique signé, "
+                                "troncature probable (ou export plus ancien que le point de contrôle : refaire l'export)" % (c["day"], last_event_id, n))
+            elif n not in event_hashes:
+                not_done.append("point de contrôle %s : la ligne %d n'est pas dans l'export" % (c["day"], n))
             elif event_hashes[n] != c["eventHead"]:
                 problems.append("point de contrôle %s : la tête annoncée (ligne %d) ne correspond pas à l'historique exporté : réécriture" % (c["day"], n))
     return problems, not_done
@@ -147,7 +151,7 @@ def main(argv=None):
     not_done = []
     if a.checkpoints:
         first = min(hashes) if hashes else 0
-        problems, not_done = verify_checkpoints(a.checkpoints, key, a.public_key, hashes, first)
+        problems, not_done = verify_checkpoints(a.checkpoints, key, a.public_key, hashes, first, last)
         for p in problems:
             print("ANOMALIE : " + p)
         if problems:

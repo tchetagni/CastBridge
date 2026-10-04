@@ -78,6 +78,79 @@ public class Checkpoints {
         }
     }
 
+    /** A signature of the module's checkpoint key: {@code kid} says how (an Ed25519 key id, "hmac", or "sha256" without any key). */
+    public record Sig(String kid, String signature) {}
+
+    public Sig sign(String payload) {
+        byte[] bytes = payload.getBytes(StandardCharsets.UTF_8);
+        if (signer != null) {
+            Ed25519Signer s = new Ed25519Signer();
+            s.init(true, signer);
+            s.update(bytes, 0, bytes.length);
+            return new Sig(LicenseKeyring.kidOf(signer.generatePublicKey().getEncoded()), Base64.getEncoder().encodeToString(s.generateSignature()));
+        }
+        if (hmacKey != null) return new Sig("hmac", HexFormat.of().formatHex(Hashing.hmac("HmacSHA256", hmacKey, bytes)));
+        return new Sig("sha256", Hashing.sha256Hex(bytes));
+    }
+
+    /** True when {@code signature} is the signature of {@code payload} by the key of this server (a signature by an unknown key id is false). */
+    public boolean verifySig(String kid, String payload, String signature) {
+        if (kid == null || signature == null) return false;
+        byte[] bytes = payload.getBytes(StandardCharsets.UTF_8);
+        try {
+            if (kid.equals("sha256")) return Hashing.sha256Hex(bytes).equals(signature);
+            if (kid.equals("hmac")) return hmacKey != null && HexFormat.of().formatHex(Hashing.hmac("HmacSHA256", hmacKey, bytes)).equals(signature);
+            return signer != null && kid.equals(LicenseKeyring.kidOf(signer.generatePublicKey().getEncoded()))
+                    && LicenseKeyring.verify(signer.generatePublicKey().getEncoded(), bytes, Base64.getDecoder().decode(signature));
+        } catch (RuntimeException e) {
+            return false;
+        }
+    }
+
+    /** The public key of the checkpoints (base64, 32 bytes), or null without Ed25519 key: the owner keeps it OUTSIDE the server to verify the signed lines offline. */
+    public String publicKey() { return signer == null ? null : Base64.getEncoder().encodeToString(signer.generatePublicKey().getEncoded()); }
+
+    static String archivePayload(String table, long toId, String lastHash, String sha256, long rows) {
+        return String.join("|", "castbridge-act-archive-v1", table, Long.toString(toId), String.valueOf(lastHash), sha256, Long.toString(rows));
+    }
+
+    /**
+     * Audit H3: what the chain alone cannot say, because its head lives in the same database as its rows. (1) every archive anchor that removed lines must carry a valid
+     * signature of this server; (2) every signed checkpoint must be genuine and consistent with the live chain: a checkpoint that attests a line beyond the live head is a
+     * TRUNCATION, a checkpoint whose head differs from the line it names is a rewrite. Returns the first problem, or null.
+     *
+     * @param table act_event or adm_read_audit
+     */
+    public String crossCheck(String table, long liveLastId) {
+        boolean events = table.equals("act_event");
+        for (Map<String, Object> a : jdbc.queryForList("SELECT id, to_id, last_hash, sha256, row_count, sig_kid, signature FROM act_archive WHERE table_name = ? AND removed = TRUE", table)) {
+            String payload = archivePayload(table, ((Number) a.get("to_id")).longValue(), (String) a.get("last_hash"), (String) a.get("sha256"), ((Number) a.get("row_count")).longValue());
+            if (!verifySig((String) a.get("sig_kid"), payload, (String) a.get("signature"))) {
+                return "Ancre d'archive " + a.get("id") + " non signée ou falsifiée : l'historique ne peut pas être cru en deçà (aucune ancre n'est acceptée sans la signature du serveur)";
+            }
+        }
+        Object[] anchor = Chains.anchor(jdbc, table);
+        long anchorId = (Long) anchor[0];
+        for (Checkpoint c : list(null, null)) {
+            if (!verifySig(c.sigKid(), c.payload(), c.signature())) return "Point de contrôle " + c.day() + " : signature fausse (point de contrôle réécrit)";
+            long id = events ? c.eventLastId() : c.readLastId();
+            String head = events ? c.eventHead() : c.readHead();
+            if (id == 0) continue;
+            if (id > liveLastId) return "Troncature : le point de contrôle signé du " + c.day() + " atteste la ligne " + id + ", l'historique s'arrête à la ligne " + liveLastId;
+            if (id < anchorId) continue;   // covered by a signed archive
+            String have;
+            if (id == anchorId) {
+                have = (String) anchor[1];
+            } else {
+                List<String> h = jdbc.queryForList("SELECT hash FROM " + table + " WHERE id = ?", String.class, id);
+                if (h.isEmpty()) return "Point de contrôle " + c.day() + " : la ligne " + id + " qu'il atteste n'existe plus dans l'historique";
+                have = h.get(0);
+            }
+            if (!have.equals(head)) return "Point de contrôle " + c.day() + " : la tête annoncée (ligne " + id + ") ne correspond pas à l'historique : réécriture";
+        }
+        return null;
+    }
+
     public static String payload(LocalDate day, long eventLastId, String eventHead, long readLastId, String readHead, String countsJson) {
         return String.join("|", FORMAT, day.toString(), Long.toString(eventLastId), eventHead, Long.toString(readLastId), readHead, countsJson);
     }
@@ -94,21 +167,8 @@ public class Checkpoints {
         long evId = ((Number) ev.get("last_id")).longValue(), rdId = ((Number) rd.get("last_id")).longValue();
         String evHead = (String) ev.get("last_hash"), rdHead = (String) rd.get("last_hash");
         String payload = payload(day, evId, evHead, rdId, rdHead, counts);
-        String kid, sig;
-        byte[] bytes = payload.getBytes(StandardCharsets.UTF_8);
-        if (signer != null) {
-            Ed25519Signer s = new Ed25519Signer();
-            s.init(true, signer);
-            s.update(bytes, 0, bytes.length);
-            kid = LicenseKeyring.kidOf(signer.generatePublicKey().getEncoded());
-            sig = Base64.getEncoder().encodeToString(s.generateSignature());
-        } else if (hmacKey != null) {
-            kid = "hmac";
-            sig = HexFormat.of().formatHex(Hashing.hmac("HmacSHA256", hmacKey, bytes));
-        } else {
-            kid = "sha256";
-            sig = Hashing.sha256Hex(bytes);
-        }
+        Sig made = sign(payload);
+        String kid = made.kid(), sig = made.signature();
         jdbc.update("INSERT INTO act_checkpoint (cp_day, event_last_id, event_head, read_last_id, read_head, counts_json, sig_kid, signature, created_at) VALUES (?,?,?,?,?,?,?,?,?)", Date.valueOf(day), evId, evHead,
                 rdId, rdHead, counts, kid, sig, Timestamp.from(clock.now()));
         return new Checkpoint(day, evId, evHead, rdId, rdHead, counts, kid, sig, payload);
