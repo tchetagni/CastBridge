@@ -190,7 +190,7 @@ JSON ; listes paginées `{"items":[…],"page":0,"size":50,"total":n}` (taille �
 - **Conflits en attente** : là où le format applique ou rejette automatiquement (licence inconnue, dépassement de postes, doublon de matériel, plafond de transferts), le serveur met l'événement en attente de décision du propriétaire (le brief l'exige). L'événement est gardé et exporté (c'est un fait signé) mais **sans effet** sur les postes tant qu'il n'est pas accepté. La politique `auto` redonne le comportement exact du format (vérifié par les vecteurs).
 - **Une licence d'essai** est un objet du serveur (1 poste, sous contrôle du propriétaire) mais s'écrit `license=trial` dans l'activation, et ses événements `issue` ne sont jamais comptés comme poste dans les outils (format § 8.2).
 - **Quota et plafond** modifiés sur le serveur ne se propagent pas par le registre (premier événement `license` gagnant).
-- **Fenêtre d'installation** de 30 jours par défaut (le format autorise jusqu'à 366 jours pour la phase hors ligne).
+- **Fenêtre d'installation** de **48 h** à partir de l'émission, pour tout code d'activation d'essai ou de production (décision du propriétaire, 2026-10-04) ; passé ce délai le code expire. Une activation déjà installée reste valable pour sa propre durée.
 - **Le serveur n'émet ni clé compacte, ni commande `cbo1`, ni « tout ouvert », ni transfert.**
 - Le droit « abonnement » est émis avec renouvellement automatique `0` ; la tolérance est `min(grâce de la licence, 30 jours)`.
 
