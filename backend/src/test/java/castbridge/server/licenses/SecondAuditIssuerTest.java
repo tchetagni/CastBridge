@@ -46,4 +46,12 @@ class SecondAuditIssuerTest extends LicenseTestBase {
         assertThat(InstallKeyFingerprint.normalize("1234")).isNull();
         assertThat(InstallKeyFingerprint.ofRaw(new byte[31])).isNull();
     }
+
+    @Test
+    void theFingerprintMatchesTheVectorsSharedWithKotlinAndPython() throws Exception {
+        var v = new com.fasterxml.jackson.databind.ObjectMapper().readTree(java.nio.file.Files.readString(java.nio.file.Path.of("..", "tools", "activation", "install-key-fingerprint-vectors.json")));
+        assertThat(v.get("cases").size()).isGreaterThanOrEqualTo(4);
+        for (var c : v.get("cases")) assertThat(InstallKeyFingerprint.ofRaw(java.util.HexFormat.of().parseHex(c.get("publicKeyHex").asText()))).as(c.get("id").asText()).isEqualTo(c.get("fingerprint").asText());
+        for (var n : v.get("normalize")) assertThat(InstallKeyFingerprint.normalize(n.get("typed").asText())).isEqualTo(n.get("canonical").isNull() ? null : n.get("canonical").asText());
+    }
 }

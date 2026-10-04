@@ -162,6 +162,7 @@ Le code de déverrouillage est demandé au clavier (jamais en argument) ; en scr
             io.err("Fichier écrit : ${File(dir, issued.fileName).path} (à copier dans Download/CastBridge de la clé USB de la TV)")
         }
         journal(o, "activation", code, kind.name, license, ActivationIssuer.MAX_WINDOW_HOURS, t)
+        if (kind == ActivationKind.PRODUCTION) req.installSig?.let { io.err("Clé d'installation de la TV liée à cette activation : empreinte ${ActivationBinding.fingerprint(it)} (à comparer avec l'écran d'activation de la TV avant de la remettre).") }
         io.err("Activation émise pour $code (${kind.name.lowercase()}, licence $license, ${rights.size} droit(s), " + (if (superOf(o)) "SUPER_UNLIMITED, " else "") + "à installer dans les ${ActivationIssuer.MAX_WINDOW_HOURS} h).")
         return 0
     }
@@ -180,6 +181,7 @@ Le code de déverrouillage est demandé au clavier (jamais en argument) ; en scr
     private fun inspect(o: Opts, io: Io): Int {
         val r = readRequest(File(o.need("--request"))); val code = r.code; val k = r.k; val fp = r.fp
         io.out("Code d'appareil : $code · k=$k sur n=${fp.n} · identité ${if (fp.byKind.keys.any { it.strong }) "solide" else "FAIBLE (aucun facteur soudé)"} · clé d'installation : ${if (r.installPub != null) "présente" else "absente"} · clé de signature (ik) : ${if (r.installSig != null) "présente" else "absente (activation sans clé liée : le serveur attend le propriétaire)"}")
+        r.installSig?.let { io.out("Empreinte de la clé de signature (à comparer avec l'écran d'activation de la TV avant d'émettre) : ${ActivationBinding.fingerprint(it)}") }
         fp.byKind.forEach { (kind, h) -> io.out("  ${kind.name.padEnd(14)} $h") }
         return 0
     }

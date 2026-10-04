@@ -192,7 +192,7 @@ public class ActivationService {
         // W23-05 audit HIGH-1 : une demande qui porte la clé de signature de la TV (`install_sig=`) la fait SIGNER dans l'activation (droit « ik ») ; sans elle (TV ancienne) le jeton ne lie aucune clé
         // la clé d'installation n'est signée QUE pour une TV (parité Kotlin et Python : un téléphone n'a pas de clé d'installation à lier ; second audit w23-05, LOW-E)
         String boundFingerprint = null;
-        if (!trial && device.installSig() != null && subject.equals("tv")) {
+        if (device.installSig() != null && WireActivation.mayCarryInstallKey(!trial, subject)) {
             boundFingerprint = InstallKeyFingerprint.ofRaw(java.util.HexFormat.of().parseHex(device.installSig()));
             baseRights = new ArrayList<>(baseRights);
             baseRights.add(WireActivation.installKeyLine(java.util.HexFormat.of().parseHex(device.installSig())));

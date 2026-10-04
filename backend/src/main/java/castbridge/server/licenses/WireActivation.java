@@ -99,6 +99,9 @@ public final class WireActivation {
         }
         return found;
     }
+    /** Seule une activation de PRODUCTION pour une TV porte la clé d'installation signée (droit {@code ik}) : jamais un essai, jamais un téléphone (parité Java, Kotlin, Python ; second audit w23-05, LOW-E). */
+    public static boolean mayCarryInstallKey(boolean production, String subject) { return production && "tv".equals(subject); }
+
     public static final long MAX_OPEN_ALL_MS = 30 * DAY_MS;
     public static final Pattern ID = Envelope.ID;
     public static final Pattern HEX = Envelope.HEX;

@@ -181,4 +181,20 @@ class CliTest {
         val ok = issue("r2", *common, "--location", "x=classe-cm2:14"); assertEquals(0, ok.code, ok.err)
         assertTrue(ok.out.contains("Location x (classe-cm2) : 14 jour(s)"), ok.out)
     }
+
+    /** Second audit w23-05, MEDIUM-C : le bureau montre l'empreinte de la clé de signature qu'il lie, pour la comparer avec l'écran de la TV. */
+    @Test fun theDeskShowsTheFingerprintOfTheInstallationKeyItBinds() {
+        val tvKey = castbridge.core.owner.Ed25519Signer(ByteArray(32) { (it + 77).toByte() }).publicKey
+        val withKey = File(dir, "demande-ik.txt").also { it.writeText(OwnerFrames.deviceInfo(DeviceCode.of(fp), fp, null, tvKey)) }
+        val expected = castbridge.core.owner.ActivationBinding.fingerprint(tvKey)
+        assertEquals(0, cli("cle-creer").code)
+        val seen = cli("appareil", withKey.path); assertEquals(0, seen.code, seen.err)
+        assertTrue(seen.out.contains(expected), "l'inspection affiche l'empreinte : ${seen.out}")
+        assertEquals(0, cli("licence", "lic-0009", "--postes", "1").code)
+        val issued = cli("emettre", "--appareil", withKey.path, "--production", "--licence", "lic-0009", "--sortie", File(dir, "usb-ik").path)
+        assertEquals(0, issued.code, issued.err)
+        assertTrue(issued.out.contains(expected), "l'émission rappelle l'empreinte de la clé liée : ${issued.out}")
+        val without = cli("appareil", request.path)
+        assertTrue(without.out.contains("absente (activation sans clé liée"), without.out)
+    }
 }

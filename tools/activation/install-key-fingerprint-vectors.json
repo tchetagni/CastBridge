@@ -1,0 +1,40 @@
+{
+  "format": "castbridge-install-key-fingerprint-vectors-v1",
+  "description": "Empreinte lisible d'une clé d'installation Ed25519 : SHA-256 de la clé brute (32 octets), 16 premiers octets, 8 groupes de 4 hexadécimaux minuscules séparés par « - ». Identique sur la TV (InstallSigner.fingerprintOf), dans les émetteurs (bureau, console, ligne de commande, serveur) et dans la réaffectation du propriétaire (second audit w23-05).",
+  "cases": [
+    {
+      "id": "zeros",
+      "publicKeyHex": "0000000000000000000000000000000000000000000000000000000000000000",
+      "fingerprint": "6668-7aad-f862-bd77-6c8f-c18b-8e9f-8e20"
+    },
+    {
+      "id": "ascending",
+      "publicKeyHex": "000102030405060708090a0b0c0d0e0f101112131415161718191a1b1c1d1e1f",
+      "fingerprint": "630d-cd29-66c4-3366-9112-5448-bbb2-5b4f"
+    },
+    {
+      "id": "test-tv-key",
+      "publicKeyHex": "4d4e4f505152535455565758595a5b5c5d5e5f606162636465666768696a6b6c",
+      "fingerprint": "5cb3-f897-d9d8-20ce-5f5b-2846-9dec-1dec"
+    },
+    {
+      "id": "ff",
+      "publicKeyHex": "ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff",
+      "fingerprint": "af96-1376-0f72-635f-bdb4-4a5a-0a63-c39f"
+    }
+  ],
+  "normalize": [
+    {
+      "typed": "630D-CD29-66C4-3366-9112-5448-BBB2-5B4F",
+      "canonical": "630dcd2966c4336691125448bbb25b4f"
+    },
+    {
+      "typed": "630d cd29 66c4 3366 9112 5448 bbb2 5b4f",
+      "canonical": "630dcd2966c4336691125448bbb25b4f"
+    },
+    {
+      "typed": "1234-5678",
+      "canonical": null
+    }
+  ]
+}

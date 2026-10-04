@@ -2031,6 +2031,28 @@
     },
     {
       "type": "build-activation",
+      "id": "build-refuse-ik-phone",
+      "description": "la clé d'installation n'est JAMAIS signée pour un téléphone (second audit w23-05, LOW-E : parité Java, Kotlin, Python)",
+      "signer": "desk",
+      "request": {
+        "kind": "production",
+        "device": "phoneP",
+        "issuedAt": 1800000000000,
+        "subject": "phone",
+        "rights": ["purchase|p-classe-cm2|classe-cm2|1799136000000"],
+        "license": "lic-0001",
+        "seat": null,
+        "notBefore": 1799996400000,
+        "windowHours": 48,
+        "nonce": "00112233445566778899aabbccddeeff",
+        "installKey": "0cc4def54afef01f9b6821374ccf66548d8f49f512c6a3aa79aa9d60b1f6cd88"
+      },
+      "expect": {
+        "refused": true
+      }
+    },
+    {
+      "type": "build-activation",
       "id": "build-refuse-bad-code",
       "description": "code d'appareil mal formé",
       "signer": "desk",

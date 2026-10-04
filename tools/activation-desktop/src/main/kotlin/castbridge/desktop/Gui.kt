@@ -107,7 +107,7 @@ object Gui {
             val boxV1 = JCheckBox("Enveloppe v1 (TV ancienne) : seulement si la demande n'a pas de ligne « install= » ; refusée après le 1er janvier 2027")
             val requestState = JLabel(" ")
             fun syncRequest() {
-                requestState.text = try { if (request.text.isBlank()) " " else DeviceRequest.parse(request.text).let { if (it.installPub != null) "Demande lue : clé d'installation présente (enveloppe v2)" else "Demande lue : clé d'installation absente (CastBridge-TV ancienne : activez « Enveloppe v1 » pour émettre l'essai)" } }
+                requestState.text = try { if (request.text.isBlank()) " " else DeviceRequest.parse(request.text).let { if (it.installPub != null) "Demande lue : clé d'installation présente (enveloppe v2)" else "Demande lue : clé d'installation absente (CastBridge-TV ancienne : activez « Enveloppe v1 » pour émettre l'essai)" }.plus(DeviceRequest.parse(request.text).installFingerprint?.let { " — empreinte de la clé de signature $it : comparez-la avec l'écran de la TV" } ?: "") }
                 catch (e: IssueException) { e.message ?: "Demande illisible" }
             }
             request.document.addDocumentListener(object : javax.swing.event.DocumentListener {
@@ -137,7 +137,7 @@ object Gui {
                         val r = d.issue(device, spec)
                         last = r; token.text = r.issued.token
                         qr.icon = ImageIcon(Qr.image(r.issued.token, 4))
-                        info("Activation émise pour ${device.code} — licence ${r.issued.activation.license}${if (k == ActivationKind.PRODUCTION && license.text.isBlank()) " (générée)" else ""} — poste ${r.seat}${if (r.reused) " (ré-activation, aucun poste consommé)" else ""} — installable jusqu'au ${fmt(r.issued.activation.notAfter)}")
+                        info("Activation émise pour ${device.code} — licence ${r.issued.activation.license}${if (k == ActivationKind.PRODUCTION && license.text.isBlank()) " (générée)" else ""} — poste ${r.seat}${if (r.reused) " (ré-activation, aucun poste consommé)" else ""} — installable jusqu'au ${fmt(r.issued.activation.notAfter)}${r.installKeyFingerprint?.let { " — clé d'installation liée, empreinte $it (à comparer avec l'écran de la TV)" } ?: ""}")
                         refreshJournal(d)
                     } catch (e: IssueException) { error(e.message ?: "Refusé") }
                     catch (e: IllegalArgumentException) { error(e.message ?: "Refusé") }

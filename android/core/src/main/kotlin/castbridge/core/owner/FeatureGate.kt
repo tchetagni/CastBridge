@@ -89,11 +89,17 @@ enum class Channel { BLUETOOTH, FILE, MANUAL }
  * and what a person types or pastes (a full token, the grouped text, or the compact key). One verification path ([ActivationVerifier] / [CompactActivation]).
  */
 class ActivationReceiver(private val ring: KeyRing, private val trusted: List<TrustedKey>, private val device: Fingerprints, private val subject: Subject = Subject.TV,
-                         private val revocations: RevocationState = RevocationState()) {
+                         private val revocations: RevocationState = RevocationState(),
+                         /** The TV's OWN installation key (Ed25519, 32 bytes): an activation that carries another `ik` is refused ([ActivationBinding]). Null = not checked (a phone, an old call site). */
+                         private val ownInstallKey: ByteArray? = null) {
     private val deviceCode = DeviceCode.of(device)
     private val verifier = ActivationVerifier(ring, revocations = revocations, expect = subject)
 
-    fun receive(channel: Channel, payload: ByteArray, nowMs: Long): ActivationResult = when (channel) {
+    fun receive(channel: Channel, payload: ByteArray, nowMs: Long): ActivationResult = receiveChecked(channel, payload, nowMs).let { r ->
+        if (r is ActivationResult.Accepted) ActivationBinding.check(r.activation, ownInstallKey) ?: r else r
+    }
+
+    private fun receiveChecked(channel: Channel, payload: ByteArray, nowMs: Long): ActivationResult = when (channel) {
         Channel.BLUETOOTH -> {
             val f = OwnerFrames.read(payload.inputStream())
             if (f == null || f.type != OwnerFrames.ACTIVATION) ActivationResult.Rejected(Rejection.MALFORMED, "Trame d'activation illisible")
