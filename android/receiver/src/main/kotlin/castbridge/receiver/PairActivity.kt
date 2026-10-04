@@ -56,6 +56,7 @@ class PairActivity : Activity() {
     private lateinit var visibleBtn: TextView
     private lateinit var btSettingsBtn: TextView
     private lateinit var forgetAll: TextView
+    private lateinit var phonesBtn: TextView
     private var dialog: AlertDialog? = null
     private var message: String? = null
     private var listSig = ""
@@ -65,6 +66,10 @@ class PairActivity : Activity() {
 
     private val onPairing: (PairingSession.State) -> Unit = { main.post { refresh() } }
     private val onTrust: () -> Unit = { main.post { refresh() } }
+    /** A ninth phone asked while the TV has 8: the owner chooses which one to remove, on the « Téléphones synchronisés » screen in replacement mode. */
+    private val onCapacity: (castbridge.core.trust.PairCapacityFlow.Event) -> Unit = { e ->
+        if (e.kind == castbridge.core.trust.PairCapacityFlow.Kind.REQUESTED) main.post { PhonesActivity.open(this, replace = true) }
+    }
     private val closeWindow = Runnable { bound?.pairing?.close() }
     private val tick = object : Runnable { override fun run() { refresh(); main.postDelayed(this, 500) } }
 
@@ -136,7 +141,9 @@ class PairActivity : Activity() {
         btSettingsBtn = button("Réglages Bluetooth") { runCatching { startActivity(Intent(Settings.ACTION_BLUETOOTH_SETTINGS)) } }
         forgetAll = button("Oublier tous les téléphones", danger = true) { confirmForgetAll() }
         val lp = { LinearLayout.LayoutParams(0, -2, 1f).apply { rightMargin = dp(10) } }
-        bar.addView(visibleBtn, lp()); bar.addView(btSettingsBtn, lp()); bar.addView(forgetAll, lp())
+        bar.addView(visibleBtn, lp()); bar.addView(btSettingsBtn, lp())
+        phonesBtn = button(castbridge.core.trust.PhonesTexts.TITLE) { PhonesActivity.open(this) }
+        bar.addView(phonesBtn, lp()); bar.addView(forgetAll, lp())
         bar.addView(button("Fermer") { finish() }, LinearLayout.LayoutParams(0, -2, 1f))
         root.addView(bar, LinearLayout.LayoutParams(-1, -2).apply { topMargin = dp(12) })
         return root
@@ -148,7 +155,7 @@ class PairActivity : Activity() {
         super.onStart()
         main.removeCallbacks(closeWindow)
         bound = TvService.running ?: run { TvService.start(this); null }
-        bound?.let { s -> s.pairing.addListener(onPairing); s.trust.addListener(onTrust) }
+        bound?.let { s -> s.pairing.addListener(onPairing); s.trust.addListener(onTrust); s.capacity.addListener(onCapacity) }
         ensurePermissions()
         opened = false
         main.post(tick)
@@ -156,7 +163,7 @@ class PairActivity : Activity() {
 
     override fun onStop() {
         main.removeCallbacks(tick)
-        bound?.let { it.pairing.removeListener(onPairing); it.trust.removeListener(onTrust) }
+        bound?.let { it.pairing.removeListener(onPairing); it.trust.removeListener(onTrust); it.capacity.removeListener(onCapacity) }
         // leaving the screen ends the window (after a short grace: the system's "visible" dialog and pairing dialogs briefly cover this screen)
         main.postDelayed(closeWindow, 8_000)
         super.onStop()
@@ -234,7 +241,7 @@ class PairActivity : Activity() {
     private fun mmss(sec: Long) = "%d:%02d".format(sec / 60, sec % 60)
 
     private fun refresh() {
-        val svc = bound ?: TvService.running.also { bound = it; it?.let { s -> s.pairing.addListener(onPairing); s.trust.addListener(onTrust) } }
+        val svc = bound ?: TvService.running.also { bound = it; it?.let { s -> s.pairing.addListener(onPairing); s.trust.addListener(onTrust); s.capacity.addListener(onCapacity) } }
         if (svc == null) { status.text = "Démarrage de CastBridge TV…"; return }
         if (!opened) { opened = true; if (!svc.pairing.isOpen && hasBt()) { openWindow(); return } }
         tvName.text = svc.tvName().also { tvName.textSize = if (it.length > 18) 26f else 34f }
@@ -276,7 +283,8 @@ class PairActivity : Activity() {
     private fun renderList(phones: List<TrustedPhone>) {
         val presence = bound?.presence?.statuses().orEmpty().associateBy { it.address }
         val sig = phones.joinToString("|") { "${it.address}:${it.name}:${it.lastSeen}:${presence[it.address]?.state}" }
-        listTitle.text = "Téléphones de confiance (${phones.size})"
+        listTitle.text = "Téléphones de confiance (${castbridge.core.trust.PhonesTexts.counter(phones.size)})"
+        phonesBtn.text = castbridge.core.trust.PhonesTexts.menuEntry(phones.size).removeSuffix("…")
         forgetAll.visibility = if (phones.isEmpty()) View.GONE else View.VISIBLE
         if (sig == listSig) return
         listSig = sig

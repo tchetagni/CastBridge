@@ -27,6 +27,8 @@ sealed class PairStep {
             else "Sur la TV : CastBridge-TV › « Ajouter un téléphone ». Nouvel essai automatique ($secondsLeft s).")
     }
     object WaitingOwner : PairStep() { override val advice = Advice("Validez sur la TV", "La TV demande « Autoriser ce téléphone à piloter cette TV ? ». Choisissez « Autoriser » avec la télécommande.") }
+    /** The TV has 8 phones: its owner is choosing which one to remove; polled until [secondsLeft] runs out. */
+    data class WaitingReplace(val secondsLeft: Long) : PairStep() { override val advice get() = LinkText.fullPending(secondsLeft) }
     data class Done(val session: LinkSession) : PairStep() { override val advice = Advice("${session.tv.name} est ajoutée", "Elle se connectera toute seule dès que vous ouvrirez l'app, sans code.") }
     data class Failed(override val advice: Advice, val canRetry: Boolean) : PairStep()
 }
@@ -49,6 +51,9 @@ class PairFlow(
     private val bondTimeoutMs: Long = 90_000,
     private val staleBondWaitMs: Long = 5 * 60_000,
     private val busyRetries: Int = 4,
+    /** Longest wait for the owner of a full TV to choose the phone to remove (a little more than the TV's own 2 minutes, so the TV's reason arrives first). */
+    private val fullWaitMs: Long = 125_000,
+    private val fullPollMs: Long = 4_000,
 ) {
     fun run(tv: SavedTv, onStep: (PairStep) -> Unit): PairStep {
         fun end(s: PairStep): PairStep { onStep(s); return s }
@@ -57,6 +62,7 @@ class PairFlow(
         if (env.bond(address) != BondState.BONDED) bond(address, onStep)?.let { return end(it) }
         var deadline = env.now() + windowMs
         var instant = 0; var busy = 0; var repairs = 0
+        var fullDeadline = 0L
         /** Stale bond: guide the user, wait for the bond to go, pair again, restart the poll. Null = go on, else the final failure. */
         fun repair(): PairStep? {
             if (++repairs > 1) return end(PairStep.Failed(LinkText.staleBond, canRetry = true))   // removed and paired again, still refused: say so, do not loop
@@ -65,13 +71,20 @@ class PairFlow(
             return failed?.let { end(it) }
         }
         while (true) {
-            onStep(PairStep.WaitingOwner)
+            if (fullDeadline == 0L) onStep(PairStep.WaitingOwner)      // not while waiting for the owner of a full TV: no flicker between two messages
             when (val r = link.connect(tv, requestTrust = true)) {
                 is PhoneLink.Result.Connected -> return end(PairStep.Done(r.session))
                 is PhoneLink.Result.BluetoothProblem -> return end(PairStep.Failed(LinkText.bluetooth(r.reason), canRetry = r.reason != BtUnavailable.Reason.NO_ADAPTER))
                 is PhoneLink.Result.Refused -> when (r.code) {
                     BtProtocol.ERR_NOT_OPEN -> if (!wait(deadline, BtProtocol.ERR_NOT_OPEN, onStep)) return end(PairStep.Failed(LinkText.refused(BtProtocol.ERR_NOT_OPEN), canRetry = true))
                     BtProtocol.ERR_BUSY -> if (++busy > busyRetries || !wait(deadline, BtProtocol.ERR_BUSY, onStep, 5_000)) return end(PairStep.Failed(LinkText.refused(BtProtocol.ERR_BUSY), canRetry = true))
+                    BtProtocol.ERR_FULL -> {   // 8 phones on the TV: the owner chooses which one to remove; asked again every few seconds, never forever
+                        if (fullDeadline == 0L) fullDeadline = env.now() + fullWaitMs
+                        val left = fullDeadline - env.now()
+                        if (left <= 0) return end(PairStep.Failed(LinkText.refused(BtProtocol.ERR_FULL), canRetry = true))
+                        onStep(PairStep.WaitingReplace(left / 1000)); env.sleep(minOf(fullPollMs, left))
+                    }
+                    BtProtocol.ERR_FULL_CANCELED, BtProtocol.ERR_FULL_TIMEOUT -> return end(PairStep.Failed(LinkText.refused(r.code), canRetry = true))
                     BtProtocol.ERR_TIMEOUT -> return end(PairStep.Failed(LinkText.refused(BtProtocol.ERR_TIMEOUT), canRetry = true))
                     BtProtocol.ERR_DENIED -> return end(PairStep.Failed(LinkText.refused(BtProtocol.ERR_DENIED), canRetry = false))
                     BtProtocol.ERR_MAGIC -> return end(PairStep.Failed(LinkText.refused(BtProtocol.ERR_MAGIC), canRetry = true))

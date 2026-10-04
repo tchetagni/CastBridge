@@ -62,6 +62,7 @@ object TvRefusals {
         PairingSession.Decision.TIMEOUT -> "$name attendait votre réponse : trop tard, la demande est annulée."
         PairingSession.Decision.BLOCKED -> "$name est ignoré 10 minutes : trois refus de suite."
         PairingSession.Decision.BUSY -> "$name doit patienter : une autre demande est en cours."
+        PairingSession.Decision.FULL -> "$name ne peut pas être ajouté : cette TV a déjà ${TrustRegistry.MAX_PHONES} téléphones."
         PairingSession.Decision.APPROVED, PairingSession.Decision.NOT_OPEN -> null
     }
 }

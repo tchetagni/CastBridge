@@ -113,6 +113,8 @@ class TvService : Service(), Device {
     /** « Téléphones de confiance » (docs/BT-PLUG-AND-PLAY.md): who may use the TV without the PIN, and the pairing window. */
     lateinit var trust: castbridge.core.trust.TrustRegistry; private set
     lateinit var pairing: castbridge.core.trust.PairingSession; private set
+    /** A TV synchronizes with at most 8 phones: the ninth waits for its owner to choose the one to remove (docs/BT-PLUG-AND-PLAY.md, « Téléphones synchronisés : 8 au plus »). */
+    lateinit var capacity: castbridge.core.trust.PairCapacityFlow; private set
     /** The permanent status bar of the screen (docs/ADMIN.md, « Barre d'icônes ») : fed here from what the service already knows. */
     val icons = castbridge.core.status.StatusIconModel({ System.currentTimeMillis() })
     private val lanSeen = ConcurrentHashMap<String, Long>()
@@ -209,6 +211,12 @@ class TvService : Service(), Device {
         guard = PinGuard(pin)
         trust = castbridge.core.trust.TrustRegistry(TrustFile(File(filesDir, "trusted_phones.txt")))
         pairing = castbridge.core.trust.PairingSession(trust)
+        capacity = castbridge.core.trust.PairCapacityFlow(trust, active = { presence.statuses().filter { it.state != castbridge.core.trust.PhonePresence.State.DISCONNECTED }.map { it.address }.toSet() })
+        // never silent: what happens to a ninth phone is said on the TV (the same reason is given to the phone, see HelloHandler)
+        capacity.addListener { e ->
+            e.removedAddress?.let { presence.forget(it); icons.remove(castbridge.core.status.IconKind.PHONE, it); iconsChanged() }
+            castbridge.core.trust.PhonesTexts.tvMessage(e).let { notice(it); setStatus("1-phone", it) }
+        }
         val profile = prefs.profile()
         logResources(videosDir, profile)
         // Thumbnails only while nothing plays (one decode at a time on this TV).
@@ -351,7 +359,14 @@ class TvService : Service(), Device {
     private val helloHandler by lazy {
         castbridge.core.trust.HelloHandler(trust, pairing, ::btBonded, ::tvName, runCatching { packageManager.getPackageInfo(packageName, 0).versionName }.getOrNull() ?: "?",
             { "CastBridge TV " + (Build.MODEL ?: "") }, { linkInfo(null, 0) }, { p -> phoneConnected(p) }, castbridge.core.trust.AttemptLimiter(global = 40, perPeer = 10),
-            { name, d -> castbridge.core.trust.TvRefusals.message(name, d)?.let { notice(it); setStatus("1-phone", it) } })
+            { name, d -> castbridge.core.trust.TvRefusals.message(name, d)?.let { notice(it); setStatus("1-phone", it) } }, capacity)
+    }
+
+    /** « Retirer » on the TV (any screen): the phone loses its access and its tokens at once, and disappears from the status bar. */
+    fun removePhone(address: String): Boolean {
+        val had = trust.revoke(address)
+        presence.forget(address); icons.remove(castbridge.core.status.IconKind.PHONE, address); iconsChanged()
+        return had
     }
 
     fun btHello(peer: String, peerName: String?, requestTrust: Boolean) = helloHandler.handle(peer, peerName, requestTrust)

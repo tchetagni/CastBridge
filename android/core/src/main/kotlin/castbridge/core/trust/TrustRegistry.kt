@@ -21,6 +21,18 @@ class MemoryTrustPersistence(var text: String? = null) : TrustPersistence {
     override fun save(text: String) { this.text = text }
 }
 
+/** Result of adding (or replacing) a phone: never silent, never more than [TrustRegistry.MAX_PHONES]. */
+sealed class TrustResult {
+    data class Added(val phone: TrustedPhone) : TrustResult()
+    data class Refreshed(val phone: TrustedPhone) : TrustResult()
+    /** The TV already has [TrustRegistry.MAX_PHONES] phones: nothing was changed; the owner must remove one first. */
+    data class Full(val phones: List<TrustedPhone>) : TrustResult()
+    /** [TrustRegistry.replace] asked to remove a phone the TV does not know (nothing was changed). */
+    object NotFound : TrustResult()
+    /** The registry file could not be written: nothing was changed (the owner keeps the phone he wanted to replace). */
+    object WriteFailed : TrustResult()
+}
+
 /** Device token as it travels: only the phone and the TV's hash of it ever exist. */
 data class IssuedToken(val token: String, val expiresAt: Long)
 
@@ -60,15 +72,53 @@ class TrustRegistry(
     @Synchronized fun isTrusted(address: String?): Boolean = address != null && phones.containsKey(norm(address))
     @Synchronized fun get(address: String): TrustedPhone? = phones[norm(address)]
 
-    /** Records an approval (the caller checked the approval: see [PairingSession]). */
-    fun trust(address: String, name: String) {
-        synchronized(this) {
-            val a = norm(address)
+    /**
+     * Records an approval (the caller checked the approval: see [PairingSession]). A NEW phone is refused with [TrustResult.Full] when
+     * [MAX_PHONES] are already trusted: nothing is evicted, nothing is written, the owner must choose a phone to remove ([replace]).
+     * The check and the add happen under the registry lock, so concurrent adds never exceed the cap. A phone already trusted just refreshes.
+     */
+    fun trust(address: String, name: String): TrustResult {
+        val a = norm(address)
+        val r = synchronized(this) {
+            val known = phones[a]
+            if (known == null && phones.size >= MAX_PHONES) return@synchronized TrustResult.Full(list())
             val t = now()
-            phones[a] = TrustedPhone(a, PhoneName.sanitize(name), phones[a]?.addedAt ?: t, t)
+            val p = TrustedPhone(a, PhoneName.sanitize(name), known?.addedAt ?: t, t)
+            phones[a] = p
             save()
+            if (known == null) TrustResult.Added(p) else TrustResult.Refreshed(p)
         }
-        changed()
+        if (r !is TrustResult.Full) changed()
+        return r
+    }
+
+    /**
+     * Removes [removeAddress] (and its tokens) and trusts [newAddress] in ONE persisted write: the file never holds nine phones, and when the
+     * write fails nothing changes (the owner keeps the phone he wanted to replace and the new one is not trusted). A [newAddress] that is
+     * already trusted only refreshes (nobody is removed).
+     */
+    fun replace(removeAddress: String, newAddress: String, newName: String): TrustResult {
+        val rm = norm(removeAddress); val a = norm(newAddress)
+        val r = synchronized(this) {
+            if (phones.containsKey(a)) return@synchronized trustLocked(a, newName)
+            if (rm == a || !phones.containsKey(rm)) return@synchronized TrustResult.NotFound
+            val phonesBefore = LinkedHashMap(phones); val tokensBefore = HashMap(tokens)
+            phones.remove(rm); tokens.values.removeAll { it.address == rm }
+            val t = now()
+            val p = TrustedPhone(a, PhoneName.sanitize(newName), t, t)
+            phones[a] = p
+            if (save()) TrustResult.Added(p)
+            else { phones.clear(); phones.putAll(phonesBefore); tokens.clear(); tokens.putAll(tokensBefore); TrustResult.WriteFailed }
+        }
+        if (r is TrustResult.Added || r is TrustResult.Refreshed) changed()
+        return r
+    }
+
+    private fun trustLocked(a: String, name: String): TrustResult {
+        val known = phones.getValue(a); val t = now()
+        val p = TrustedPhone(a, PhoneName.sanitize(name), known.addedAt, t)
+        phones[a] = p; save()
+        return TrustResult.Refreshed(p)
     }
 
     /** Forgets one phone and every token it holds. */
@@ -120,7 +170,8 @@ class TrustRegistry(
     private fun purge() { val t = now(); tokens.values.removeAll { it.expiresAt <= t } }
 
     // ---- persistence: one line per record, tab separated, names URL-encoded (never trusted to be free of separators)
-    private fun save() {
+    /** False when the file could not be written. */
+    private fun save(): Boolean {
         purge()
         val sb = StringBuilder()
         sb.append("I\t").append(installId).append('\n')
@@ -128,7 +179,7 @@ class TrustRegistry(
         tokens.forEach { (h, t) -> sb.append("T\t").append(t.address).append('\t').append(h).append('\t').append(t.expiresAt).append('\n') }
         val sum = digest(sb.toString())
         sb.append(CHECK).append('\t').append(sum).append('\n')   // a truncated or edited file is detected, not half-believed
-        runCatching { persistence.save(sb.toString()) }
+        return runCatching { persistence.save(sb.toString()) }.isSuccess
     }
 
     private fun load() {
@@ -150,6 +201,8 @@ class TrustRegistry(
     }
 
     companion object {
+        /** A TV is synchronized with at most this many phones (owner rule 2026-10-04); also the bound of the 8 local relayed players of online play. */
+        const val MAX_PHONES = 8
         const val TOKEN_PREFIX = "cbk_"
         private const val CHECK = "C"
         private val INSTALL = Regex("^[0-9a-f]{32}$")

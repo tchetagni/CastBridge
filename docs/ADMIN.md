@@ -416,6 +416,9 @@ curl / app téléphone --TCP--> 127.0.0.1:18765 --RFCOMM « CastBridge API »-->
 3. Puis le serveur HTTP demande, comme en Wi-Fi, le **code de la TV** (installation fraîche : un appareil appairé avec le bon code fonctionne ; un téléphone de confiance
    utilise son jeton, qui n'ouvre toujours pas `/api/ssh*`, `/api/apk/install`, `/api/update/install` : PIN seulement).
 
+### Téléphones synchronisés : 8 au plus
+Une TV se synchronise avec **8 téléphones au plus** (`TrustRegistry.MAX_PHONES`). Un 9e téléphone n'entre qu'après le retrait d'un existant, choisi par le propriétaire sur l'écran « Téléphones synchronisés » de la TV (menu de la TV, ou « Connexions »). Ce n'est pas l'administration : le PIN d'administration, ses jetons et ses routes ne changent pas (un téléphone de confiance ne peut toujours pas ouvrir `/api/ssh`, l'installation d'APK ni l'activation). Retirer un téléphone lui coupe ses jetons aussitôt. Détails, protocole et tests : `docs/BT-PLUG-AND-PLAY.md`.
+
 ### Verrouillage par appareil
 Toutes les liaisons arrivent de `127.0.0.1` ; sans précaution, 5 codes faux d'un appareil verrouilleraient le Wi-Fi et tous les autres appareils. Le tunnel inscrit « port local
 -> `bt:<adresse>` » **avant** de se connecter ; le serveur HTTP (`ReceiverServer`, paramètre `peers`) voit alors cette connexion venir d'une adresse virtuelle stable par appareil

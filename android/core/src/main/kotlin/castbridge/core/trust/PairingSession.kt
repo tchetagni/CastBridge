@@ -18,7 +18,9 @@ class PairingSession(
     private val maxDenials: Int = 3,
     private val blockMs: Long = 10 * 60_000,
 ) {
-    enum class Decision { APPROVED, DENIED, TIMEOUT, NOT_OPEN, BUSY, BLOCKED }
+    enum class Decision { APPROVED, DENIED, TIMEOUT, NOT_OPEN, BUSY, BLOCKED,
+        /** The owner approved but the TV already has [TrustRegistry.MAX_PHONES] phones (a race with another approval): nothing was added. */
+        FULL }
 
     sealed class State {
         object Closed : State()
@@ -111,8 +113,9 @@ class PairingSession(
             }
         }
         // Approved: the trust is recorded BEFORE the answer leaves, so the very next request of the phone finds it.
-        if (result == true) registry.trust(a, name)
+        val full = result == true && registry.trust(a, name) is TrustResult.Full
         publish()
+        if (full) return Decision.FULL
         return when (result) { true -> Decision.APPROVED; false -> Decision.DENIED; else -> Decision.TIMEOUT }
     }
 

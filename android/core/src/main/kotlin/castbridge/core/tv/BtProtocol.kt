@@ -103,6 +103,12 @@ object BtProtocol {
     const val ERR_BUSY = 12
     /** The trial edition does not receive files by Bluetooth (a lot and its proof excepted). */
     const val ERR_TRIAL = 13
+    /** HELLO: the TV already has 8 phones; its owner is choosing which one to remove (the phone waits and asks again). */
+    const val ERR_FULL = 14
+    /** HELLO: the owner of a full TV cancelled the replacement of a phone. */
+    const val ERR_FULL_CANCELED = 15
+    /** HELLO: nobody chose the phone to remove in time on a full TV. */
+    const val ERR_FULL_TIMEOUT = 16
     private const val MAX_NAME = 400
     private const val MAX_INSTALL_ID = 64
 
@@ -123,6 +129,9 @@ object BtProtocol {
         ERR_NOT_OPEN -> "la TV n'attend pas de nouveau téléphone"
         ERR_BUSY -> "la TV traite déjà une demande"
         ERR_TRIAL -> "Version d'essai : la TV ne reçoit pas de fichiers par Bluetooth"
+        ERR_FULL -> "la TV a déjà 8 téléphones : son propriétaire choisit lequel retirer"
+        ERR_FULL_CANCELED -> "le propriétaire de la TV n'a retiré aucun téléphone"
+        ERR_FULL_TIMEOUT -> "personne n'a choisi de téléphone à retirer sur la TV"
         else -> "erreur TV ($code)"
     }
 
@@ -463,7 +472,9 @@ object LinkPlanner {
 /** What a TV's answer to a trusted phone's HELLO holds. [token] is that phone's credential for the Wi-Fi API ([ttlSec] seconds). */
 data class HelloInfo(val tvName: String, val version: String, val mdns: String?, val token: String, val ttlSec: Long, val link: LinkInfo,
     /** Random id of this installation of CastBridge-TV (changes when the TV forgets its phones); null = a TV that predates it. */
-    val installId: String? = null) {
+    val installId: String? = null,
+    /** How many phones this TV synchronizes with at most ([castbridge.core.trust.TrustRegistry.MAX_PHONES]); null = a TV that predates the cap (no limit known). Additive key, ignored by older phones. */
+    val maxPhones: Int? = null) {
     fun encode(): String = buildString {
         append("tv=").append(line(tvName)).append('\n')
         append("v=").append(line(version)).append('\n')
@@ -471,6 +482,7 @@ data class HelloInfo(val tvName: String, val version: String, val mdns: String?,
         append("ttl=").append(ttlSec).append('\n')
         append("token=").append(token).append('\n')
         if (installId != null) append("id=").append(installId).append('\n')
+        if (maxPhones != null) append("maxphones=").append(maxPhones).append('\n')
         append(link.encode())
     }
 
@@ -486,7 +498,7 @@ data class HelloInfo(val tvName: String, val version: String, val mdns: String?,
             val name = if (kv["tv"].isNullOrBlank()) "TV" else castbridge.core.trust.PhoneName.sanitize(kv["tv"], 60)
             return HelloInfo(name, kv["v"].orEmpty().take(40), kv["mdns"]?.take(120), token,
                 kv["ttl"]?.toLongOrNull()?.coerceIn(60, 7 * 24 * 3600L) ?: 3600, LinkInfo.decode(s),
-                kv["id"]?.takeIf { INSTALL_ID.matches(it) })
+                kv["id"]?.takeIf { INSTALL_ID.matches(it) }, kv["maxphones"]?.toIntOrNull()?.takeIf { it in 1..99 })
         }
     }
 }
