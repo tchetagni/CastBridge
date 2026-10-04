@@ -139,17 +139,77 @@ class VideoFitTest {
     }
 
     @Test fun labelsAndTheInfoLine() {
-        assertEquals(listOf("Ajusté à l'écran", "Remplir l'écran", "Étirer", "Natif"), Mode.values().map { DisplayTexts.label(it) })
+        assertEquals(listOf("Remplir l'écran", "Ajusté à l'écran", "Étirer", "Natif"), Mode.values().map { DisplayTexts.label(it) })
         assertEquals("Affichage : Ajusté à l'écran 1920×1080 → 1280×720", VideoFit.infoLine(d(1920, 1080, 1280, 720, Mode.FIT), 1920, 1080, 1280, 720))
         assertEquals("Affichage : Natif 320×240 → 320×240", VideoFit.infoLine(d(320, 240, 1280, 720, Mode.NATIVE), 320, 240, 1280, 720))
         assertTrue(VideoFit.infoLine(d(640, 480, 1280, 720, Mode.STRETCH), 640, 480, 1280, 720).contains("déformée"))
     }
 
+    // ---- défaut FILL : la vidéo remplit TOUTE la dalle, rognée au centre, jamais déformée ----
+
+    private val panels = listOf(1280 to 720, 1920 to 1080, 3840 to 2160)
+    // (largeur, hauteur, SAR num, SAR den, rotation)
+    private val files = listOf(listOf(853, 480, 1, 1, 0), listOf(720, 576, 64, 45, 0), listOf(720, 576, 16, 15, 0), listOf(640, 480, 1, 1, 0),
+        listOf(1920, 800, 1, 1, 0), listOf(2560, 1080, 1, 1, 0), listOf(1920, 1080, 1, 1, 90), listOf(1920, 1080, 1, 1, 0), listOf(1080, 1920, 1, 1, 0))
+
+    @Test fun fillNeverLeavesBarsNeverDistortsAndCoversThePanelOnBothAxes() {
+        for ((pw, ph) in panels) for (f in files) {
+            val p = d(f[0], f[1], pw, ph, VideoFit.DEFAULT, f[2], f[3], f[4])
+            val tag = "$f sur ${pw}x$ph"
+            assertEquals(Mode.FILL, p.mode, tag); assertTrue(p.noBars, tag); assertFalse(p.distorts, tag)
+            assertTrue(p.shownW >= pw && p.shownH >= ph, tag)
+            val want = p.naturalW.toDouble() / p.naturalH
+            assertTrue(Math.abs(p.shownW.toDouble() / p.shownH - want) <= 0.01 * want + 2.0 / p.shownH, tag)   // proportions vraies, à l'arrondi près
+            assertTrue(Math.abs(p.x * 2 + p.shownW - pw) <= 1 && Math.abs(p.y * 2 + p.shownH - ph) <= 1, tag)   // rognage centré
+            assertTrue(p.shownW == pw || p.shownH == ph, tag)                                                     // rognage minimal
+        }
+    }
+
+    @Test fun fillDoesNotCropAVideoAlreadyInThePanelFormat() {
+        for ((pw, ph) in panels) for (f in listOf(listOf(853, 480, 1, 1, 0), listOf(720, 576, 64, 45, 0), listOf(1280, 720, 1, 1, 0), listOf(3840, 2160, 1, 1, 0))) {
+            val p = d(f[0], f[1], pw, ph, Mode.FILL, f[2], f[3])
+            assertEquals(pw to ph, p.shownW to p.shownH, "$f sur ${pw}x$ph"); assertEquals(0, p.cropX + p.cropY)
+        }
+    }
+
+    @Test fun fillOfFourThreeOnSixteenNineCropsOnlyTopAndBottom() {
+        val p = d(640, 480, 1280, 720, Mode.FILL)
+        assertEquals(1280 to 960, p.shownW to p.shownH); assertEquals(240, p.cropY); assertEquals(0, p.cropX); assertEquals(Scale.FIT_SCREEN, p.scale)
+    }
+
+    // ---- réglage jamais choisi : suit le défaut ; choisi : respecté ----
+
+    @Test fun aSettingNeverChosenFollowsTheNewDefaultEvenIfAnOldVersionLeftFitBehind() {
+        assertEquals(VideoFit.Resolved(Mode.FILL, VideoFit.Source.DEFAULT), VideoFit.resolve(null, null, false))
+        assertEquals(VideoFit.Resolved(Mode.FILL, VideoFit.Source.DEFAULT), VideoFit.resolve(null, "fit", false), "« fit » sans marque de choix = ancien défaut écrit")
+    }
+
+    @Test fun anExplicitChoiceIsNeverOverwritten() {
+        assertEquals(VideoFit.Resolved(Mode.FIT, VideoFit.Source.GLOBAL), VideoFit.resolve(null, "fit", true))
+        assertEquals(VideoFit.Resolved(Mode.NATIVE, VideoFit.Source.GLOBAL), VideoFit.resolve(null, "native", true))
+        assertEquals(VideoFit.Resolved(Mode.STRETCH, VideoFit.Source.GLOBAL), VideoFit.resolve(null, "stretch", false), "ancienne valeur non « fit » : c'était un vrai choix")
+        assertEquals(VideoFit.Resolved(Mode.FIT, VideoFit.Source.FILE), VideoFit.resolve("fit", "native", true))
+        assertEquals(VideoFit.Resolved(Mode.FILL, VideoFit.Source.DEFAULT), VideoFit.resolve("???", "???", true))
+    }
+
+    // ---- filet de sécurité : la ligne INFO ----
+
+    @Test fun theDiagnosticLineSaysModeOriginSourcePanelAndPicture() {
+        val p = d(720, 576, 1280, 720, Mode.FILL, 64, 45)
+        assertEquals("Affichage : Remplir l'écran (par défaut) · source 720×576 SAR 64:45 · dalle 1280×720 · image 1280×720",
+            VideoFit.diagnosticLine(VideoFit.Resolved(Mode.FILL, VideoFit.Source.DEFAULT), p, 720, 576, 64, 45, 1280, 720))
+        val q = d(640, 480, 1920, 1080, Mode.FIT)
+        assertEquals("Affichage : Ajusté à l'écran (réglage global) · source 640×480 SAR 1:1 · dalle 1920×1080 · image 1440×1080",
+            VideoFit.diagnosticLine(VideoFit.Resolved(Mode.FIT, VideoFit.Source.GLOBAL), q, 640, 480, 0, 0, 1920, 1080))
+        val none = VideoFit.diagnosticLine(VideoFit.Resolved(Mode.NATIVE, VideoFit.Source.FILE), null, 0, 0, 0, 0, 1280, 720)
+        assertTrue(none.contains("réglage du fichier") && none.contains("non appliqué"), none)
+    }
+
     // ---- choice and persistence ----
 
-    @Test fun theDefaultIsFitAndTheFileOverridesTheGlobalChoice() {
-        assertEquals(Mode.FIT, VideoFit.DEFAULT)
-        assertEquals(Mode.FIT, VideoFit.effective(null, null)); assertEquals(Mode.FIT, VideoFit.effective("garbage", "?"))
+    @Test fun theDefaultIsFillAndTheFileOverridesTheGlobalChoice() {
+        assertEquals(Mode.FILL, VideoFit.DEFAULT)
+        assertEquals(Mode.FILL, VideoFit.effective(null, null)); assertEquals(Mode.FILL, VideoFit.effective("garbage", "?"))
         assertEquals(Mode.NATIVE, VideoFit.effective(null, "native")); assertEquals(Mode.FILL, VideoFit.effective("fill", "native"))
         assertEquals(Mode.NATIVE, VideoFit.effective("???", "native"), "an unreadable per-file value falls back to the global one")
         assertEquals(Mode.STRETCH, VideoFit.parse(" STRETCH "))

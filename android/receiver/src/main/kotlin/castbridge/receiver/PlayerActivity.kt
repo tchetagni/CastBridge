@@ -311,10 +311,10 @@ class PlayerActivity : Activity(), TvService.Screen {
         }
         p.setEventListener { ev ->
             when (ev.type) {
-                MediaPlayer.Event.Vout -> main.post { mp?.let { extras.applyFit(it) } }
+                MediaPlayer.Event.Vout, MediaPlayer.Event.ESAdded, MediaPlayer.Event.ESSelected -> main.post { mp?.let { extras.applyFit(it) } }
                 MediaPlayer.Event.Playing -> { health.onPlaying(android.os.SystemClock.elapsedRealtime()); update("playing"); main.post { mp?.let { extras.onPlaying(it, playerSpu) }; playbackPlaying(); startStats() } }
                 MediaPlayer.Event.Paused -> { health.onStopped(); update("paused") }
-                MediaPlayer.Event.TimeChanged -> { health.onTime(android.os.SystemClock.elapsedRealtime(), ev.timeChanged); snapshot = snapshot.copy(posMs = ev.timeChanged); main.post { updateLead() } }
+                MediaPlayer.Event.TimeChanged -> { health.onTime(android.os.SystemClock.elapsedRealtime(), ev.timeChanged); snapshot = snapshot.copy(posMs = ev.timeChanged); main.post { updateLead(); if (extras.fitPending) mp?.let { extras.applyFit(it) } } }
                 MediaPlayer.Event.Buffering -> {
                     // libVLC pauses by itself when the data runs out (playback caught up with the upload) and resumes alone.
                     val st = snapshot.state
@@ -1180,7 +1180,7 @@ class PlayerActivity : Activity(), TvService.Screen {
                 append("\nDécodage : ${it.decoder}\n")
             }
             decoderLines().forEach { append(it).append('\n') }       // R-16: what was asked, what the TV can, what is only a hint
-            extras.fitInfo()?.let { append(it).append('\n') }
+            append(extras.fitInfo()).append('\n')
             pictureQuality?.notes?.forEach { append(it).append('\n') }
             t.audioCodec?.let { append("Audio : $it\n") }
             append("Pistes audio : ${t.audio.size}, sous-titres : ${t.subtitles.count { it.id >= 0 } + t.subtitleFiles.size}\n")

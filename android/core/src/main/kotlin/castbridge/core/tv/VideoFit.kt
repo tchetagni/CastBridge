@@ -12,16 +12,17 @@ import kotlin.math.roundToInt
  * `setVideoScale`, rejoués à chaque événement `Vout` et à chaque changement de taille). Aucun modèle de TV ici : la taille réelle de la dalle
  * (720p, 1080p, 4K, 21:9...) arrive en paramètre, lue à l'exécution par l'activité.
  *
- * Modes (défaut [Mode.FIT]) :
+ * Modes (défaut [Mode.FILL]) :
+ *  - FILL « Remplir l'écran » (défaut) : couvre toute la dalle, le surplus est rogné au centre, jamais étiré ;
  *  - FIT « Ajusté à l'écran » : le plus grand possible, proportions vraies (ni déformation ni rognage) ; des bandes seulement si le format diffère de celui de la dalle ;
- *  - FILL « Remplir l'écran » : couvre toute la dalle, le surplus est rogné au centre, jamais étiré ;
  *  - STRETCH « Étirer » : remplit la dalle sans respecter le format (déforme : l'écran le dit) ;
  *  - NATIVE « Natif » : taille native 1:1, centrée, sans mise à l'échelle ; réduite (et seulement réduite) si plus grande que la dalle.
  * Le format de pixel du fichier (SAR) et la rotation sont toujours honorés : un AVI anamorphique ne paraît pas écrasé.
  */
 object VideoFit {
-    enum class Mode(val key: String) { FIT("fit"), FILL("fill"), STRETCH("stretch"), NATIVE("native") }
-    val DEFAULT = Mode.FIT
+    enum class Mode(val key: String) { FILL("fill"), FIT("fit"), STRETCH("stretch"), NATIVE("native") }
+    /** Décision du propriétaire (2026-10-04) : par défaut la vidéo remplit TOUT l'écran de la TV (rognée au centre, jamais déformée). */
+    val DEFAULT = Mode.FILL
 
     /** Les gestes libVLC (`MediaPlayer.ScaleType`) : meilleur ajustement, remplissage rogné, étirement, taille d'origine. */
     enum class Scale { BEST_FIT, FIT_SCREEN, FILL, ORIGINAL }
@@ -47,6 +48,31 @@ object VideoFit {
 
     /** Réglage du fichier d'abord, puis celui de l'utilisateur, puis [DEFAULT]. */
     fun effective(fileOverride: String?, global: String?): Mode = parse(fileOverride) ?: parse(global) ?: DEFAULT
+
+    /** D'où vient le mode effectif. */
+    enum class Source { FILE, GLOBAL, DEFAULT }
+    data class Resolved(val mode: Mode, val source: Source)
+
+    /**
+     * Mode effectif et son origine. [globalChosen] : l'utilisateur a choisi lui-même l'affichage par défaut (marque écrite par cette version). Sans marque,
+     * « fit » est l'ancien défaut d'une version précédente (il suit le défaut actuel) ; toute autre valeur sans marque (fill, stretch, native) ne pouvait
+     * venir que d'un choix : elle est respectée.
+     */
+    fun resolve(fileOverride: String?, global: String?, globalChosen: Boolean): Resolved {
+        parse(fileOverride)?.let { return Resolved(it, Source.FILE) }
+        val g = parse(global)
+        if (g != null && (globalChosen || g != Mode.FIT)) return Resolved(g, Source.GLOBAL)
+        return Resolved(DEFAULT, Source.DEFAULT)
+    }
+
+    /** Ligne de diagnostic (touche INFO) : mode, origine, taille et SAR de la source, dalle, image à l'écran. Aucune donnée personnelle. */
+    fun diagnosticLine(r: Resolved, p: Plan?, videoW: Int, videoH: Int, sarNum: Int, sarDen: Int, panelW: Int, panelH: Int): String {
+        val from = when (r.source) { Source.DEFAULT -> "par défaut"; Source.GLOBAL -> "réglage global"; Source.FILE -> "réglage du fichier" }
+        val sar = if (sarNum > 0 && sarDen > 0) "$sarNum:$sarDen" else "1:1"
+        val src = if (p == null || videoW <= 0) "source inconnue" else "source ${videoW}×$videoH SAR $sar"
+        val img = if (p == null || p.shownW <= 0) "image non appliquée" else "image ${p.shownW}×${p.shownH}"
+        return "Affichage : ${DisplayTexts.label(r.mode)} ($from) · $src · dalle ${panelW}×$panelH · $img"
+    }
 
     fun decide(videoW: Int, videoH: Int, sarNum: Int, sarDen: Int, rotation: Int, panelW: Int, panelH: Int, mode: Mode): Plan {
         if (videoW <= 0 || videoH <= 0 || panelW <= 0 || panelH <= 0) {
