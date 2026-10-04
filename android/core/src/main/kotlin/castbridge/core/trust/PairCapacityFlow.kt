@@ -18,12 +18,14 @@ class PairCapacityFlow(
     val timeoutMs: Long = 120_000,
     /** Bluetooth addresses of the phones in touch with the TV right now (for « actif »). */
     private val active: () -> Set<String> = { emptySet() },
+    /** An owner's cancellation counts like a refusal (see [PairingSession.recordDenial]). */
+    private val onDenied: (String) -> Unit = {},
 ) {
     data class Request(val address: String, val name: String, val deadline: Long)
 
     sealed class State {
         object Idle : State()
-        data class AwaitingRemoval(val request: Request, val roster: PhoneRoster.View) : State()
+        data class AwaitingRemoval(val request: Request, val roster: PhoneRoster.View, val sameName: Boolean = false) : State()
     }
 
     /** What the HELLO of the asking phone is told. */
@@ -49,7 +51,7 @@ class PairCapacityFlow(
 
     enum class Kind { REQUESTED, REPLACED, CANCELLED, TIMED_OUT }
     /** What the TV tells its owner (see [PhonesTexts.tvMessage]). */
-    data class Event(val kind: Kind, val name: String, val removedName: String? = null, val removedAddress: String? = null)
+    data class Event(val kind: Kind, val name: String, val removedName: String? = null, val removedAddress: String? = null, val address: String? = null)
 
     private enum class Outcome { CANCELLED, TIMED_OUT }
     private class Told(val outcome: Outcome, val at: Long)
@@ -69,7 +71,7 @@ class PairCapacityFlow(
         val p = pending
         if (p != null) {
             if (p.deadline <= t) { told[p.address] = Told(Outcome.TIMED_OUT, t); pending = null; events += Event(Kind.TIMED_OUT, p.name) }
-            else if (registry.list().size < TrustRegistry.MAX_PHONES) pending = null      // a phone was removed elsewhere: the normal path takes over
+            // a phone removed elsewhere frees a seat: the request is KEPT (never erased silently); that phone's next HELLO takes the normal approval path
         }
         told.values.removeAll { t - it.at > FORGET_MS }
     }
@@ -78,7 +80,7 @@ class PairCapacityFlow(
         val ev = ArrayList<Event>()
         val s = synchronized(lock) {
             expire(ev)
-            pending?.let { State.AwaitingRemoval(it, PhoneRoster.build(registry.list(), active(), now())) } ?: State.Idle
+            pending?.let { State.AwaitingRemoval(it, PhoneRoster.build(registry.list(), active(), now()), PhoneRoster.sameName(it.name, registry.list())) } ?: State.Idle
         }
         publish(ev)
         return s
@@ -100,19 +102,20 @@ class PairCapacityFlow(
             when {
                 p != null -> if (p.address == a) Answer.Pending else Answer.Busy
                 !windowOpen -> Answer.Room
-                else -> { val r = Request(a, PhoneName.sanitize(name), now() + timeoutMs); pending = r; ev += Event(Kind.REQUESTED, r.name); Answer.Pending }
+                else -> { val r = Request(a, PhoneName.sanitize(name), now() + timeoutMs); pending = r; ev += Event(Kind.REQUESTED, r.name, address = r.address); Answer.Pending }
             }
         }
         publish(ev)
         return answer
     }
 
-    /** The owner chose which phone to remove for the waiting one. */
-    fun choose(removeAddress: String): Choice {
+    /** The owner chose which phone to remove for the waiting one. [expectedNew] is the phone the owner SAW: a request replaced meanwhile admits nobody. */
+    fun choose(removeAddress: String, expectedNew: String): Choice {
         val ev = ArrayList<Event>()
         val res = synchronized(lock) {
             expire(ev)
             val p = pending ?: return@synchronized Choice.NotPending
+            if (p.address != TrustRegistry.norm(expectedNew)) return@synchronized Choice.NotPending
             val old = registry.get(removeAddress) ?: return@synchronized Choice.NotFound
             when (val r = registry.replace(removeAddress, p.address, p.name)) {
                 is TrustResult.Added -> { pending = null; ev += Event(Kind.REPLACED, r.phone.name, old.name, old.address); Choice.Replaced(old, r.phone) }
@@ -127,12 +130,13 @@ class PairCapacityFlow(
 
     /** The owner gives up: the TV keeps its 8 phones. */
     fun cancel(): Boolean {
-        val ev = ArrayList<Event>()
+        val ev = ArrayList<Event>(); var denied: String? = null
         val r = synchronized(lock) {
             expire(ev)
             val p = pending ?: return@synchronized false
-            told[p.address] = Told(Outcome.CANCELLED, now()); pending = null; ev += Event(Kind.CANCELLED, p.name); true
+            told[p.address] = Told(Outcome.CANCELLED, now()); pending = null; ev += Event(Kind.CANCELLED, p.name); denied = p.address; true
         }
+        denied?.let { runCatching { onDenied(it) } }
         publish(ev)
         return r
     }

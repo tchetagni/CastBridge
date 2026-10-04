@@ -187,7 +187,7 @@ class StatusBarView(private val act: Activity, private val box: LinearLayout, pr
             list.addView(text(detail, TvStyle.Type.CAPTION, TvStyle.TEXT2), LinearLayout.LayoutParams(-1, -2).apply { leftMargin = dp(42) })
             if (i.kind == IconKind.PHONE && i.ref.isNotEmpty()) list.addView(action("Retirer ce téléphone") {
                 confirm("Retirer ${i.label} ?", "Ce téléphone ne pourra plus piloter la TV sans le code. Il pourra être ajouté à nouveau.", "Retirer") {
-                    svc.trust.revoke(i.ref); svc.icons.remove(IconKind.PHONE, i.ref); svc.iconsChanged(); dialog?.dismiss()
+                    svc.removePhone(i.ref); dialog?.dismiss()
                 }
             })
             if (i.kind == IconKind.SSH) list.addView(action("Arrêter SSH") {

@@ -20,7 +20,9 @@ class PairingSession(
 ) {
     enum class Decision { APPROVED, DENIED, TIMEOUT, NOT_OPEN, BUSY, BLOCKED,
         /** The owner approved but the TV already has [TrustRegistry.MAX_PHONES] phones (a race with another approval): nothing was added. */
-        FULL }
+        FULL,
+        /** The owner approved but the registry file could not be written: nothing was added. */
+        WRITE_FAILED }
 
     sealed class State {
         object Closed : State()
@@ -55,6 +57,17 @@ class PairingSession(
     fun open() { synchronized(lock) { if (state !is State.Asking) state = State.Open(now() + windowMs) }; publish() }
 
     fun close() { synchronized(lock) { if (state is State.Asking) { decision = false; lock.notifyAll() }; state = State.Closed }; publish() }
+
+    /** The phone was refused (or its replacement request cancelled) too often: ignored until its block ends. */
+    fun isBlocked(address: String): Boolean = synchronized(lock) { (denials[TrustRegistry.norm(address)]?.second ?: 0L) > now() }
+
+    /** Counts one refusal for this phone; the [maxDenials]-th blocks it for [blockMs]. */
+    fun recordDenial(address: String) { synchronized(lock) { countDenial(TrustRegistry.norm(address)) } }
+
+    private fun countDenial(a: String) {
+        val n = (denials[a]?.first ?: 0) + 1
+        denials[a] = n to (if (n >= maxDenials) now() + blockMs else 0L)
+    }
 
     /** What the dialog shows, if a phone is waiting for the owner. */
     fun asking(): State.Asking? = state() as? State.Asking
@@ -107,15 +120,13 @@ class PairingSession(
             decision = null
             state = if (result == true) State.Closed else if (until > now()) State.Open(until) else State.Closed
             if (result == true) denials.remove(a)
-            else if (result == false) {
-                val n = (denials[a]?.first ?: 0) + 1
-                denials[a] = n to (if (n >= maxDenials) now() + blockMs else 0L)
-            }
+            else if (result == false) countDenial(a)
         }
         // Approved: the trust is recorded BEFORE the answer leaves, so the very next request of the phone finds it.
-        val full = result == true && registry.trust(a, name) is TrustResult.Full
+        val trusted = if (result == true) registry.trust(a, name) else null
         publish()
-        if (full) return Decision.FULL
+        if (trusted is TrustResult.Full) return Decision.FULL
+        if (trusted == TrustResult.WriteFailed) return Decision.WRITE_FAILED
         return when (result) { true -> Decision.APPROVED; false -> Decision.DENIED; else -> Decision.TIMEOUT }
     }
 

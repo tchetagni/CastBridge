@@ -33,7 +33,7 @@ class PairCapacityPhoneTest {
 
     @Test fun theNinthPhoneSeesTheMessageThenWaitsThenIsAddedWhenTheOwnerReplacesOne() {
         fullTv()
-        val r = run(Env { n -> if (n == 3) assertIs<PairCapacityFlow.Choice.Replaced>(capacity.choose(other(0))) })
+        val r = run(Env { n -> if (n == 3) assertIs<PairCapacityFlow.Choice.Replaced>(capacity.choose(other(0), tv.phone)) })
         val done = assertIs<PairStep.Done>(r)
         val waits = steps.filterIsInstance<PairStep.WaitingReplace>()
         assertTrue(waits.size >= 2, "a live « en attente » state, not a frozen screen: $steps")

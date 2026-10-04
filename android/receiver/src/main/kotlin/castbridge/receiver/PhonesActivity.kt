@@ -41,6 +41,8 @@ class PhonesActivity : Activity() {
     private var message: String? = null
     private var sig = ""
     private var svc: TvService? = null
+    /** The request whose suggested candidate already got the focus: the focus jumps only once per request, never on a refresh. */
+    private var focusedFor: String? = null
 
     private val onChange: () -> Unit = { main.post { refresh() } }
     private val onEvent: (PairCapacityFlow.Event) -> Unit = { e -> main.post { message = PhonesTexts.tvMessage(e); refresh() } }
@@ -78,7 +80,7 @@ class PhonesActivity : Activity() {
         bar.addView(button(PhonesTexts.ADD) { PairActivity.open(this) }, lp())
         cancelBtn = button(PhonesTexts.CANCEL, danger = true) { svc?.capacity?.cancel() }
         bar.addView(cancelBtn, lp())
-        bar.addView(button(PhonesTexts.CLOSE) { finish() }, LinearLayout.LayoutParams(0, -2, 1f))
+        bar.addView(button(PhonesTexts.CLOSE) { svc?.capacity?.cancel(); finish() }, LinearLayout.LayoutParams(0, -2, 1f))
         root.addView(bar, LinearLayout.LayoutParams(-1, -2).apply { topMargin = dp(12) })
         return root
     }
@@ -106,13 +108,15 @@ class PhonesActivity : Activity() {
         val state = s.capacity.state()
         val awaiting = state as? PairCapacityFlow.State.AwaitingRemoval
         val roster = awaiting?.roster ?: PhoneRoster.build(s.trust.list(), activeAddresses(s), System.currentTimeMillis())
-        title.text = awaiting?.let { PhonesTexts.replaceTitle(it.request.name) } ?: PhonesTexts.TITLE
+        title.text = awaiting?.let { PhonesTexts.replaceTitle(it.request.name, it.request.address) } ?: PhonesTexts.TITLE
         title.contentDescription = title.text
         counter.text = roster.counter + " téléphones"
         counter.contentDescription = "${roster.count} téléphones sur ${roster.max}"
-        info.text = message ?: if (awaiting != null) "Le téléphone attend : ${awaiting.request.let { ((it.deadline - System.currentTimeMillis()) / 1000).coerceAtLeast(0) }} s avant l'annulation. ${PhonesTexts.HINT}" else PhonesTexts.HINT
+        val wait = awaiting?.let { "Le téléphone attend : ${((it.request.deadline - System.currentTimeMillis()) / 1000).coerceAtLeast(0)} s avant l'annulation." }
+        info.text = listOfNotNull(message, wait, awaiting?.takeIf { it.sameName }?.let { PhonesTexts.SAME_NAME_WARNING }, roster.overBy.takeIf { it > 0 }?.let { PhonesTexts.overText(it) },
+            PhonesTexts.HINT.takeIf { message == null && wait == null }).joinToString("\n")
         cancelBtn.visibility = if (awaiting != null) View.VISIBLE else View.GONE
-        val newSig = roster.rows.joinToString("|") { "${it.address}:${it.name}:${it.seenText}:${it.state}:${it.suggested}" } + "#" + awaiting?.request?.address
+        val newSig = roster.rows.joinToString("|") { "${it.address}:${it.name}:${it.seenText}:${it.state}:${it.suggested}" } + "#" + awaiting?.request?.address + awaiting?.sameName
         if (newSig == sig) return
         sig = newSig
         render(s, roster, awaiting)
@@ -131,7 +135,7 @@ class PhonesActivity : Activity() {
                 background = TvStyle.rounded(this@PhonesActivity, TvStyle.CARD, TvStyle.R_MD, TvStyle.OUTLINE, 1)
             }
             val col = LinearLayout(this).apply { orientation = LinearLayout.VERTICAL }
-            col.addView(label(r.name, TvStyle.Type.SUBTITLE, TvStyle.TEXT, true).apply { maxLines = 1; ellipsize = TextUtils.TruncateAt.END })
+            col.addView(label(r.label, TvStyle.Type.SUBTITLE, TvStyle.TEXT, true).apply { maxLines = 1; ellipsize = TextUtils.TruncateAt.END })
             col.addView(label("${r.state.label} · ${r.seenText.takeIf { r.state != PhoneRoster.PhoneState.ACTIVE } ?: "en ce moment"} · ${r.addedText}", TvStyle.Type.CAPTION,
                 if (r.state == PhoneRoster.PhoneState.ACTIVE) TvStyle.GOOD_TEXT else TvStyle.TEXT2).apply { maxLines = 2; ellipsize = TextUtils.TruncateAt.END })
             if (r.suggested && awaiting != null) col.addView(label(PhonesTexts.SUGGESTION, TvStyle.Type.CAPTION, TvStyle.ACCENT, true))
@@ -142,22 +146,25 @@ class PhonesActivity : Activity() {
             if (awaiting != null && r.suggested) toFocus = remove
             if (toFocus == null && roster.rows.first() === r) toFocus = remove
         }
-        if (awaiting != null || hadFocus || !list.hasFocus()) toFocus?.requestFocus()
+        val req = awaiting?.request?.address
+        if (req != null) { if (focusedFor != req) { focusedFor = req; toFocus?.requestFocus() } }       // M1: the suggestion gets the focus once per request
+        else { focusedFor = null; if (hadFocus || !list.hasFocus()) toFocus?.requestFocus() }
     }
 
     private fun confirmRemove(s: TvService, r: PhoneRoster.Row, awaiting: PairCapacityFlow.State.AwaitingRemoval?) {
-        val text = if (awaiting != null) PhonesTexts.confirmReplaceText(r.name, awaiting.request.name) else PhonesTexts.CONFIRM_REMOVE_TEXT
-        AlertDialog.Builder(this).setTitle(PhonesTexts.confirmRemoveTitle(r.name)).setMessage(text)
-            .setPositiveButton(PhonesTexts.REMOVE) { _, _ -> remove(s, r, awaiting != null) }
+        val text = if (awaiting != null) PhonesTexts.confirmReplaceText(r.name, r.address, awaiting.request.name, awaiting.request.address) else PhonesTexts.CONFIRM_REMOVE_TEXT
+        AlertDialog.Builder(this).setTitle(PhonesTexts.confirmRemoveTitle(r.name, r.address)).setMessage(text)
+            .setPositiveButton(PhonesTexts.REMOVE) { _, _ -> remove(s, r, awaiting?.request?.address) }
             .setNegativeButton("Annuler", null).create().also { d ->
                 d.setOnShowListener { d.getButton(AlertDialog.BUTTON_NEGATIVE)?.requestFocus() }     // the harmless answer is the selected one
                 dialog = d
             }.show()
     }
 
-    private fun remove(s: TvService, r: PhoneRoster.Row, replacing: Boolean) {
-        if (replacing) {
-            message = when (val c = s.capacity.choose(r.address)) {
+    private fun remove(s: TvService, r: PhoneRoster.Row, replacingFor: String?) {
+        if (replacingFor != null) {
+            // the phone the owner SAW in the dialog: a request replaced meanwhile admits nobody (NotPending)
+            message = when (val c = s.capacity.choose(r.address, replacingFor)) {
                 is PairCapacityFlow.Choice.Replaced -> PhonesTexts.tvMessage(PairCapacityFlow.Event(PairCapacityFlow.Kind.REPLACED, c.added.name, c.removed.name))
                 PairCapacityFlow.Choice.WriteFailed -> PhonesTexts.WRITE_FAILED
                 PairCapacityFlow.Choice.NotPending -> PhonesTexts.NOT_PENDING

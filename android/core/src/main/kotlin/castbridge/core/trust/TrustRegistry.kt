@@ -85,10 +85,10 @@ class TrustRegistry(
             val t = now()
             val p = TrustedPhone(a, PhoneName.sanitize(name), known?.addedAt ?: t, t)
             phones[a] = p
-            save()
-            if (known == null) TrustResult.Added(p) else TrustResult.Refreshed(p)
+            if (save()) { if (known == null) TrustResult.Added(p) else TrustResult.Refreshed(p) }
+            else { if (known == null) phones.remove(a) else phones[a] = known; TrustResult.WriteFailed }   // not written = not trusted
         }
-        if (r !is TrustResult.Full) changed()
+        if (r is TrustResult.Added || r is TrustResult.Refreshed) changed()
         return r
     }
 
@@ -201,7 +201,10 @@ class TrustRegistry(
     }
 
     companion object {
-        /** A TV is synchronized with at most this many phones (owner rule 2026-10-04); also the bound of the 8 local relayed players of online play. */
+        /**
+         * A TV is synchronized with at most this many phones (owner rule 2026-10-04); also the bound of the 8 local relayed players of online play.
+         * A file restored from before the cap may hold MORE: [list] is never cut, so no caller may assume `list().size <= MAX_PHONES` (bound with `min(MAX_PHONES, ...)`).
+         */
         const val MAX_PHONES = 8
         const val TOKEN_PREFIX = "cbk_"
         private const val CHECK = "C"

@@ -77,7 +77,7 @@ class PhoneRosterTest {
     }
 
     @Test fun textsMentionTheNewPhoneAndTheCap() {
-        assertEquals("Cette TV a déjà 8 téléphones : choisissez celui à retirer pour ajouter Galaxy de Paul", PhonesTexts.replaceTitle("Galaxy de Paul"))
+        assertEquals("Cette TV a déjà 8 téléphones : choisissez celui à retirer pour ajouter Galaxy de Paul (…:3F:A1)", PhonesTexts.replaceTitle("Galaxy de Paul", "AA:BB:CC:DD:3F:A1") + "")
         assertEquals("Téléphones synchronisés (7 / 8)…", PhonesTexts.menuEntry(7))
         assertTrue("code de la TV" in PhonesTexts.CONFIRM_REMOVE_TEXT && "approuvé de nouveau" in PhonesTexts.CONFIRM_REMOVE_TEXT)
     }

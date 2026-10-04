@@ -61,7 +61,7 @@ class PairCapacityFlowTest {
     @Test fun theOwnerPicksAPhoneAndTheNewOneIsTrustedAtomically() {
         fill(8)
         flow.ask(addr(50), "Nouveau", true)
-        val res = flow.choose(addr(2))
+        val res = flow.choose(addr(2), addr(50))
         val ok = assertIs<PairCapacityFlow.Choice.Replaced>(res)
         assertEquals("Tel 2", ok.removed.name); assertEquals("Nouveau", ok.added.name)
         assertEquals(8, reg.list().size); assertFalse(reg.isTrusted(addr(2))); assertTrue(reg.isTrusted(addr(50)))
@@ -72,9 +72,9 @@ class PairCapacityFlowTest {
 
     @Test fun chooseWithoutARequestOrWithAnUnknownPhoneChangesNothing() {
         fill(8)
-        assertEquals(PairCapacityFlow.Choice.NotPending, flow.choose(addr(2)))
+        assertEquals(PairCapacityFlow.Choice.NotPending, flow.choose(addr(2), addr(50)))
         flow.ask(addr(50), "Nouveau", true)
-        assertEquals(PairCapacityFlow.Choice.NotFound, flow.choose(addr(99)))
+        assertEquals(PairCapacityFlow.Choice.NotFound, flow.choose(addr(99), addr(50)))
         assertEquals(8, reg.list().size); assertTrue(reg.isTrusted(addr(2)))
         assertIs<PairCapacityFlow.State.AwaitingRemoval>(flow.state(), "still waiting: the owner may choose again")
     }
@@ -83,11 +83,11 @@ class PairCapacityFlowTest {
         fill(8)
         flow.ask(addr(50), "Nouveau", true)
         disk.fail = true
-        assertEquals(PairCapacityFlow.Choice.WriteFailed, flow.choose(addr(2)))
+        assertEquals(PairCapacityFlow.Choice.WriteFailed, flow.choose(addr(2), addr(50)))
         assertTrue(reg.isTrusted(addr(2))); assertFalse(reg.isTrusted(addr(50))); assertEquals(8, reg.list().size)
         assertIs<PairCapacityFlow.State.AwaitingRemoval>(flow.state())
         disk.fail = false
-        assertIs<PairCapacityFlow.Choice.Replaced>(flow.choose(addr(2)))
+        assertIs<PairCapacityFlow.Choice.Replaced>(flow.choose(addr(2), addr(50)))
     }
 
     @Test fun cancelEndsTheRequestWithAVisibleReasonSeenOnceByThePhone() {
@@ -110,7 +110,7 @@ class PairCapacityFlowTest {
         clock.advance(2_000)
         assertEquals(PairCapacityFlow.State.Idle, flow.state())
         assertEquals(PairCapacityFlow.Kind.TIMED_OUT, events.last().kind)
-        assertEquals(PairCapacityFlow.Choice.NotPending, flow.choose(addr(2)), "too late: the owner cannot replace after the timeout")
+        assertEquals(PairCapacityFlow.Choice.NotPending, flow.choose(addr(2), addr(50)), "too late: the owner cannot replace after the timeout")
         assertEquals(PairCapacityFlow.Answer.TimedOut, flow.ask(addr(50), "Nouveau", true))
         assertEquals(8, reg.list().size); assertFalse(reg.isTrusted(addr(50)))
     }

@@ -22,14 +22,20 @@ object PhonesTexts {
 
     fun counter(count: Int, max: Int = MAX) = "$count / $max"
     fun menuEntry(count: Int, max: Int = MAX) = "$TITLE (${counter(count, max)})…"
-    fun replaceTitle(newName: String) = "Cette TV a déjà $MAX téléphones : choisissez celui à retirer pour ajouter $newName"
-    fun confirmRemoveTitle(name: String) = "Retirer $name ?"
-    fun confirmReplaceText(removed: String, added: String) = "$removed sera retiré et $added sera ajouté. $CONFIRM_REMOVE_TEXT"
+    /** « …:3F:A1 » : les deux derniers octets de l'adresse Bluetooth, pour distinguer deux téléphones qui portent le même nom (un nom vient du téléphone, il ne prouve rien). */
+    fun shortAddress(address: String) = "…:" + TrustRegistry.norm(address).split(':').takeLast(2).joinToString(":")
+    fun labeled(name: String, address: String) = "$name (${shortAddress(address)})"
+    const val SAME_NAME_WARNING = "Même nom qu'un téléphone déjà synchronisé : comparez les adresses entre parenthèses avant de choisir."
+    fun overText(over: Int) = "Cette TV garde plus de $MAX téléphones : retirez-en $over pour revenir à $MAX."
+    fun replaceTitle(newName: String, newAddress: String) = "Cette TV a déjà $MAX téléphones : choisissez celui à retirer pour ajouter ${labeled(newName, newAddress)}"
+    fun confirmRemoveTitle(name: String, address: String) = "Retirer ${labeled(name, address)} ?"
+    fun confirmReplaceText(removed: String, removedAddress: String, added: String, addedAddress: String) =
+        "${labeled(removed, removedAddress)} sera retiré et ${labeled(added, addedAddress)} sera ajouté. $CONFIRM_REMOVE_TEXT"
     fun removed(name: String) = "$name a été retiré."
 
     /** Ce que la TV dit à son propriétaire (bandeau, état), jamais en silence : même raison que celle donnée au téléphone. */
     fun tvMessage(e: PairCapacityFlow.Event): String = when (e.kind) {
-        PairCapacityFlow.Kind.REQUESTED -> replaceTitle(e.name)
+        PairCapacityFlow.Kind.REQUESTED -> e.address?.let { replaceTitle(e.name, it) } ?: "Cette TV a déjà $MAX téléphones : choisissez celui à retirer pour ajouter ${e.name}"
         PairCapacityFlow.Kind.REPLACED -> "${e.removedName ?: "Un téléphone"} a été retiré, ${e.name} est ajouté."
         PairCapacityFlow.Kind.CANCELLED -> "L'ajout de ${e.name} est annulé : aucun téléphone n'a été retiré."
         PairCapacityFlow.Kind.TIMED_OUT -> "L'ajout de ${e.name} est annulé : personne n'a choisi de téléphone à retirer à temps."
