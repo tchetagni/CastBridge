@@ -16,7 +16,7 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
  * @param totpKey          optional base64 AES-256 key protecting the TOTP secrets at rest (else file license-totp.key in secretsDir)
  * @param requireTotp      true = an OWNER account without TOTP can read but not change anything
  * @param defaultGraceDays grace period after the end date of a new licence
- * @param defaultTransferCap transfers allowed per licence and year, for a new licence
+ * @param defaultTransferCap transfers allowed per licence and year, for a new licence (0 by default: licences are not transferable, owner decision 2026-10-04)
  * @param trustedKeys      public keys of the offline tools trusted to sign registry events: "name:base64(raw 32-byte public key):SCOPE+SCOPE"
  *                         (scopes of docs/ACTIVATION-FORMAT.md § 2; an entry without explicit scopes is ignored)
  * @param windowHours      installation window of an activation issued by the server, in hours (1 to 48, default 48)
@@ -47,7 +47,7 @@ public record LicenseProperties(
         if (signingKeyFile == null || signingKeyFile.isBlank()) signingKeyFile = "license-signing.key";
         if (requireTotp == null) requireTotp = true;
         if (defaultGraceDays == null) defaultGraceDays = 14;
-        if (defaultTransferCap == null) defaultTransferCap = 2;
+        if (defaultTransferCap == null) defaultTransferCap = 0;
         if (trustedKeys == null) trustedKeys = List.of();
         if (maxImportBytes == null) maxImportBytes = 5_000_000;
         if (maxImportEntries == null) maxImportEntries = 5000;
