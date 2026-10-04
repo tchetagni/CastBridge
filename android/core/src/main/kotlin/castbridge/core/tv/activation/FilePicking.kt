@@ -95,13 +95,16 @@ object RealBrowseFs : BrowseFs {
     } catch (e: SecurityException) { null }
 }
 
-data class BrowseRow(val label: String, val isDir: Boolean, val selectable: Boolean, val size: Long = 0)
+/** [action] = the « allow all files » row; [info] = an explanation row (not selectable). */
+data class BrowseRow(val label: String, val isDir: Boolean, val selectable: Boolean, val size: Long = 0, val action: Boolean = false, val info: Boolean = false)
 data class BrowseView(val title: String, val rows: List<BrowseRow>, val notice: String?)
 
 sealed class BrowseAction {
     object Redraw : BrowseAction()
     class Picked(val file: File) : BrowseAction()
     class Refused(val message: String) : BrowseAction()
+    /** The owner chose the first row: open the settings screen « all files access ». */
+    object AskAccess : BrowseAction()
     object Quit : BrowseAction()
 }
 
@@ -109,7 +112,16 @@ sealed class BrowseAction {
  * Navigation of the built-in explorer. State = stack of folders; empty stack = the list of volumes (the top). BACK goes to the parent folder, then to the volume list,
  * then quits: it never climbs above a volume root. Folders first, then files up to [MAX_PICK] bytes, then bigger files (shown, refused). Nothing is ever written.
  */
-class FileBrowser(private val roots: List<BrowseRoot>, private val fs: BrowseFs = RealBrowseFs, private val maxPick: Long = PickerPlan.MAX_BYTES.toLong()) {
+class FileBrowser(
+    private val roots: List<BrowseRoot>, private val fs: BrowseFs = RealBrowseFs, private val maxPick: Long = PickerPlan.MAX_BYTES.toLong(),
+    private val access: StorageAccess = StorageAccess.GRANTED, private val settingsScreen: Boolean = true, private val ownPath: String? = null,
+) {
+    /** The permission row (or its explanation) shown first while the permission is missing. */
+    private val top: List<BrowseRow> = when {
+        access == StorageAccess.GRANTED -> emptyList()
+        settingsScreen -> listOf(BrowseRow(AccessTexts.ASK_ALL, false, true, action = true))
+        else -> listOf(BrowseRow(AccessTexts.NO_SCREEN, false, false, info = true))
+    }
     private val stack = ArrayList<File>()
     private var rows: List<BrowseEntry> = emptyList()
     private var denied = false
@@ -137,26 +149,30 @@ class FileBrowser(private val roots: List<BrowseRoot>, private val fs: BrowseFs 
         rows = if (d == null) emptyList() else {
             val l = try { fs.list(d) } catch (e: SecurityException) { null }
             if (l == null) { denied = true; emptyList() }
-            else l.sortedWith(compareBy<BrowseEntry>({ !it.isDir }, { !it.isDir && it.size > maxPick }, { it.name.lowercase() }, { it.name })).take(MAX_ROWS)
+            else l.sortedWith(compareBy<BrowseEntry>({ it.isDir || !ActivationNames.isOffered(it.name, it.size, maxPick) }, { !it.isDir }, { !it.isDir && it.size > maxPick }, { it.name.lowercase() }, { it.name })).take(MAX_ROWS)
         }
     }
 
     fun view(): BrowseView {
         val d = stack.lastOrNull()
-        if (d == null) return BrowseView("Choisir un emplacement", roots.map { BrowseRow(label(it), true, true) }, if (roots.isEmpty()) "Aucun stockage monté : branchez la clé USB" else null)
+        if (d == null) return BrowseView("Choisir un emplacement", top + roots.map { BrowseRow(label(it), true, true) }, if (roots.isEmpty()) "Aucun stockage monté : branchez la clé USB" else null)
         val notice = when {
             denied -> "Android refuse de lister ce dossier (permission de stockage) : autorisez l'accès aux fichiers, ou ouvrez Android/data/castbridge.receiver/files"
+            rows.isEmpty() && access == StorageAccess.MISSING && !inOwnDir(d) -> ActivationLookupReport.missingAccess(ownPath)
             rows.isEmpty() -> "Dossier vide"
             else -> null
         }
-        return BrowseView(title(d), rows.map { BrowseRow(if (it.isDir) it.name + "/" else it.name, it.isDir, it.isDir || it.size <= maxPick, it.size) }, notice)
+        return BrowseView(title(d), top + rows.map { BrowseRow(if (it.isDir) it.name + "/" else it.name, it.isDir, it.isDir || it.size <= maxPick, it.size) }, notice)
     }
 
+    private fun inOwnDir(d: File) = ownPath != null && (d.path == ownPath || d.path.startsWith("$ownPath/"))
     private fun label(r: BrowseRoot) = if (r.id == null) r.label else "${r.label} ${r.id}"
     private fun title(d: File): String { val r = roots.filter { d.path == it.dir.path || d.path.startsWith(it.dir.path + "/") }.maxByOrNull { it.dir.path.length }; return if (r == null) d.path else label(r) + d.path.removePrefix(r.dir.path).ifEmpty { "/" } }
 
     /** OK on row [index]: enters a folder, picks a file, or refuses a file too big. */
     fun open(index: Int): BrowseAction {
+        if (index < top.size) return if (top[index].action) BrowseAction.AskAccess else BrowseAction.Redraw
+        val index = index - top.size
         if (stack.isEmpty()) { val r = roots.getOrNull(index) ?: return BrowseAction.Redraw; stack += r.dir; load(); return BrowseAction.Redraw }
         val e = rows.getOrNull(index) ?: return BrowseAction.Redraw
         val f = File(stack.last(), e.name)

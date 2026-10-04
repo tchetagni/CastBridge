@@ -20,7 +20,8 @@ data class ProbeFact(val place: Place, val volumeId: String?, val probe: Probe)
 /** [names] null = listing denied; [exists] false = the folder is not there. */
 data class DirFact(val place: Place, val volumeId: String?, val exists: Boolean, val names: List<String>?)
 
-data class LookupFacts(val volumes: List<VolumeFact>, val probes: List<ProbeFact>, val dirs: List<DirFact>)
+/** [access] = can the app read the shared Download folder; [ownPaths] = real paths of its own readable folders. */
+data class LookupFacts(val volumes: List<VolumeFact>, val probes: List<ProbeFact>, val dirs: List<DirFact>, val access: StorageAccess = StorageAccess.GRANTED, val ownPaths: List<String> = emptyList())
 
 /** The only door to the file system of the lookup: read-only by construction (no write method exists). Tests replace it. */
 interface LookupFs {
@@ -75,6 +76,7 @@ object ActivationLookup {
             if (len > MAX_BYTES) return Probe.TOO_BIG to null
             val bytes = fs.read(f, MAX_BYTES + 1)
             if (bytes.size > MAX_BYTES) return Probe.TOO_BIG to null
+            if (!PickerPlan.isText(bytes)) return Probe.NOT_VALID to null          // binary: never handed to the verifier
             val line = firstLine(bytes) ?: return Probe.EMPTY to null
             return Probe.NOT_VALID to line         // placeholder: replaced by the verdict
         } catch (e: FileNotFoundException) { return (if (denied(e)) Probe.UNREADABLE else Probe.ABSENT) to null
@@ -90,10 +92,13 @@ object ActivationLookup {
      */
     fun run(
         candidates: List<Candidate>, dirs: List<Triple<File, String?, Place>>, volumes: List<VolumeFact>,
-        fs: LookupFs = RealLookupFs, verify: (String) -> Verdict,
+        fs: LookupFs = RealLookupFs, access: StorageAccess = StorageAccess.GRANTED, verify: (String) -> Verdict,
     ): Outcome {
         val probes = ArrayList<ProbeFact>(); var accepted = false; var decided = false
-        for (c in candidates) {
+        val allDirs = dirs.map { (d, v, pl) -> if (!fs.isDir(d)) DirFact(pl, v, false, null) else DirFact(pl, v, true, fs.list(d)) }
+        val all = LinkedHashMap<String, Candidate>()
+        (candidates + ActivationNames.autoCandidates(dirs, allDirs)).forEach { all.putIfAbsent(it.file.path, it) }
+        for (c in all.values) {
             val (p, line) = read(fs, c.file)
             val probe = if (line == null) p else when (verify(line)) {
                 Verdict.ACCEPTED -> Probe.ACCEPTED; Verdict.WRONG_DEVICE -> Probe.WRONG_DEVICE; Verdict.EXPIRED -> Probe.EXPIRED; Verdict.NOT_VALID -> Probe.NOT_VALID
@@ -102,10 +107,8 @@ object ActivationLookup {
             if (probe == Probe.ACCEPTED) { accepted = true; decided = true; break }
             if (probe in setOf(Probe.NOT_VALID, Probe.WRONG_DEVICE, Probe.EXPIRED)) decided = true
         }
-        val dirFacts = if (accepted) emptyList() else dirs.map { (d, v, pl) ->
-            if (!fs.isDir(d)) DirFact(pl, v, false, null) else DirFact(pl, v, true, fs.list(d))
-        }
-        return Outcome(LookupFacts(volumes, probes, dirFacts), accepted, decided)
+        val ownPaths = dirs.filter { it.third == Place.OWN_DIR && it.first.name != "CastBridge" }.map { it.first.path }
+        return Outcome(LookupFacts(volumes, probes, if (accepted) emptyList() else allDirs, access, ownPaths), accepted, decided)
     }
 }
 
@@ -122,6 +125,7 @@ object ActivationLookupReport {
         val out = ArrayList<String>(); var odd = false
         for (n in names.sorted()) {
             if (n == ActivationLookup.FILE_NAME || !n.startsWith(ActivationLookup.FILE_NAME, ignoreCase = true)) continue
+            if (ActivationNames.isAutoName(n)) { out += "Fichier trouvé sous le nom « $n » : renommez-le « activation », ou mettez-le dans ${ActivationLookup.OWN_DIR_TEXT} (lu tel quel, extension .txt admise)"; continue }
             if (!MISNAMED.matches(n)) { odd = true; continue }
             out += if (n.lowercase().endsWith(".zip")) "Fichier « $n » : décompressez-le, puis nommez le fichier obtenu « activation »"
             else "Fichier trouvé sous le nom « $n » : renommez-le « activation »"
@@ -129,6 +133,17 @@ object ActivationLookupReport {
         if (odd) out += "Un fichier dont le nom commence par « activation » n'a pas le nom exact : nommez-le « activation » (sans extension)"
         return out
     }
+
+    /** The REAL cause when the app cannot see Download: the permission is missing. [ownPath] = the readable folder. */
+    fun missingAccess(ownPath: String?): String =
+        "Android n'autorise pas CastBridge-TV à lire Download : donnez « Accès à tous les fichiers » (Réglages), ou déposez le fichier dans le dossier de l'application : " +
+            (ownPath ?: ActivationLookup.OWN_DIR_TEXT)
+
+    /** Headline after a manual search that found nothing: never « aucune clé trouvée » alone when the permission is missing. */
+    fun noKeyHeadline(access: StorageAccess, ownPath: String?): String =
+        if (access == StorageAccess.MISSING) missingAccess(ownPath) else "Aucune clé trouvée sur la clé USB."
+
+    private val READ = setOf(Probe.ACCEPTED, Probe.NOT_VALID, Probe.WRONG_DEVICE, Probe.EXPIRED, Probe.EMPTY, Probe.TOO_BIG)
 
     fun lines(f: LookupFacts): List<String> {
         val out = ArrayList<String>()
@@ -146,7 +161,8 @@ object ActivationLookupReport {
             if (own.isNotEmpty()) out += "dossier ${ActivationLookup.OWN_DIR_TEXT} : " + count(own)
         }
         if (!seen) f.dirs.filter { it.names != null }.flatMap { misnamed(it.names!!) }.distinct().take(2).forEach { out += it }
-        out += result(f.probes.map { it.probe })
+        val states = f.probes.map { it.probe }
+        out += if (f.access == StorageAccess.MISSING && states.none { it in READ }) missingAccess(f.ownPaths.firstOrNull()) else result(states)
         return out.take(MAX_LINES)
     }
 

@@ -163,7 +163,7 @@ object ActivationCenter {
             val downloads = downloadDirs(own)
             val volumes = own.mapNotNull { (d, id) -> id?.let { VolumeFact(it, readOnly(d)) } }.distinctBy { it.id }
             var accepted: ActivationResult? = null; var refused: ActivationResult? = null
-            val o = ActivationLookup.run(ActivationLookup.candidates(downloads, own), ActivationLookup.dirsToList(downloads, own), volumes) { line ->
+            val o = ActivationLookup.run(ActivationLookup.candidates(downloads, own), ActivationLookup.dirsToList(downloads, own), volumes, access = storageAccess()) { line ->
                 val r = accept(Channel.MANUAL, line.toByteArray(Charsets.UTF_8))
                 if (r is ActivationResult.Accepted) { if (accepted == null) accepted = r; Verdict.ACCEPTED }
                 else {
@@ -180,6 +180,21 @@ object ActivationCenter {
             return accepted ?: refused
         } finally { scanning.set(false) }
     }
+
+    /** Can the app read the shared Download folder? (all files access on API 30+, READ_EXTERNAL_STORAGE below 33.) */
+    fun storageAccess(): StorageAccess = runCatching {
+        val manager = android.os.Build.VERSION.SDK_INT >= 30 && Environment.isExternalStorageManager()
+        val read = app.checkSelfPermission(android.Manifest.permission.READ_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED
+        StoragePermission.decide(android.os.Build.VERSION.SDK_INT, manager, read)
+    }.getOrDefault(StorageAccess.MISSING)
+
+    /** Real path of the first readable drop folder (the app's own folder of a removable volume first). */
+    fun ownPath(): String? = runCatching { ownDirs().let { l -> (l.firstOrNull { it.second != null } ?: l.firstOrNull())?.first?.path } }.getOrNull()
+
+    /** Each mounted volume's drop folder with the names the app sees in it (names only), for the activation screen. */
+    fun dropFolders(): List<DropFolder> = runCatching {
+        ownDirs().map { (d, id) -> DropFolder(id, d.path, try { d.list()?.toList() } catch (e: SecurityException) { null }) }.sortedBy { it.volumeId == null }
+    }.getOrDefault(emptyList())
 
     /** Ids of the removable volumes seen right now (for the initial folder of the system picker). */
     fun volumeIds(): List<String> = runCatching { ownDirs().mapNotNull { it.second }.distinct() }.getOrDefault(emptyList())

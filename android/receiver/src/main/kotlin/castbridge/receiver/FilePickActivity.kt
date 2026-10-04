@@ -19,6 +19,7 @@ import android.widget.LinearLayout
 import android.widget.ListView
 import android.widget.TextView
 import castbridge.core.tv.activation.BrowseAction
+import castbridge.core.tv.activation.ExplorerStart
 import castbridge.core.tv.activation.BrowseRoot
 import castbridge.core.tv.activation.FileBrowser
 import java.io.File
@@ -33,7 +34,6 @@ class FilePickActivity : Activity() {
     private lateinit var title: TextView
     private lateinit var notice: TextView
     private lateinit var list: ListView
-    private lateinit var access: Button
     private val adapter by lazy { ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, ArrayList()) }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -43,7 +43,6 @@ class FilePickActivity : Activity() {
         col.addView(TextView(this).apply { text = "Choisir le fichier d'activation"; textSize = 26f; setTextColor(0xFFF5B027.toInt()); setTypeface(typeface, Typeface.BOLD) })
         title = TextView(this).apply { textSize = 20f; setTextColor(Color.WHITE); setPadding(0, 8, 0, 8) }; col.addView(title)
         notice = TextView(this).apply { textSize = 18f; setTextColor(0xFFFF8A80.toInt()); visibility = View.GONE }; col.addView(notice)
-        access = Button(this).apply { text = "Autoriser l'accès aux fichiers (facultatif)"; textSize = 18f; visibility = View.GONE; setOnClickListener { askAccess() } }; col.addView(access)
         list = ListView(this).apply {
             this.adapter = this@FilePickActivity.adapter; isFocusable = true; isFocusableInTouchMode = true; divider = null
             setSelector(android.R.drawable.list_selector_background)
@@ -68,8 +67,10 @@ class FilePickActivity : Activity() {
         roots.sortBy { it.id == null }                                       // keys first
         for (r in roots) { places += File(r.dir, "Download/CastBridge"); places += File(r.dir, "Download") }
         places += own                                                         // always readable: the app's own folder of each volume
-        browser = FileBrowser(roots)
-        browser.startAt(places)
+        val access = ActivationCenter.storageAccess()
+        // without the permission Download looks empty to the app: its own folder (the only readable one) comes first
+        browser = FileBrowser(roots, access = access, settingsScreen = canAskAll(), ownPath = own.firstOrNull { it.path.contains("/storage/") && !it.path.contains("/emulated/") }?.path ?: own.firstOrNull()?.path)
+        browser.startAt(ExplorerStart.places(roots, own, access))
         draw()
     }
 
@@ -77,10 +78,9 @@ class FilePickActivity : Activity() {
         val v = browser.view()
         title.text = v.title
         adapter.clear()
-        adapter.addAll(v.rows.map { r -> if (r.isDir) r.label else if (r.selectable) "${r.label}   (${r.size} o)" else "${r.label}   (${r.size / 1024} Kio : trop gros)" })
+        adapter.addAll(v.rows.map { r -> if (r.action) "▶ " + r.label else if (r.info) r.label else if (r.isDir) r.label else if (r.selectable) "${r.label}   (${r.size} o)" else "${r.label}   (${r.size / 1024} Kio : trop gros)" })
         adapter.notifyDataSetChanged()
         notice.visibility = if (v.notice == null) View.GONE else View.VISIBLE; notice.text = v.notice.orEmpty()
-        access.visibility = if (v.notice != null && v.notice!!.contains("permission") && canAskAll()) View.VISIBLE else View.GONE
         list.requestFocus(); if (adapter.count > 0) list.setSelection(0)
     }
 
@@ -88,6 +88,7 @@ class FilePickActivity : Activity() {
         when (a) {
             is BrowseAction.Redraw -> draw()
             is BrowseAction.Picked -> { setResult(RESULT_OK, Intent().putExtra(EXTRA_PATH, a.file.path)); finish() }
+            BrowseAction.AskAccess -> askAccess()
             is BrowseAction.Refused -> { notice.visibility = View.VISIBLE; notice.text = a.message }
             BrowseAction.Quit -> { setResult(RESULT_CANCELED); finish() }
         }
@@ -109,7 +110,8 @@ class FilePickActivity : Activity() {
     }
 
     private fun allFilesIntent() = Intent(Settings.ACTION_MANAGE_APP_ALL_FILES_ACCESS_PERMISSION, Uri.parse("package:$packageName"))
-    private fun canAskAll(): Boolean = Build.VERSION.SDK_INT >= 30 && !Environment.isExternalStorageManager() && allFilesIntent().resolveActivity(packageManager) != null
+    /** True when the settings screen exists on this box (no dead button otherwise). */
+    private fun canAskAll(): Boolean = Build.VERSION.SDK_INT >= 30 && allFilesIntent().resolveActivity(packageManager) != null
     private fun askAccess() { if (canAskAll()) runCatching { startActivity(allFilesIntent()) } }
     override fun onResume() { super.onResume(); if (::browser.isInitialized) build() }
 
