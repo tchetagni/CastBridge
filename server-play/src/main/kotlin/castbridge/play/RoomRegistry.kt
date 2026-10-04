@@ -54,6 +54,10 @@ class RoomEntry(val room: ServerRoom, /** Appareil attesté par le ticket qui a 
     @Volatile var lastActiveRealMs: Long = createdRealMs
     /** Le journal a déjà dit que la partie n'est pas classée (une seule fois, w20-07). */
     @Volatile internal var unrankedLogged = false
+    /** w20-04b : identités de TV (code d'appareil de l'activation) entrées par `join`, par connexion ; sert au plafond de connexions vivantes d'une identité. */
+    internal val joined = ConcurrentHashMap<String, String>()
+    /** Même identité, par jeton de siège : une reprise (`resume`) la rend à sa nouvelle connexion. */
+    internal val joinedTokens = ConcurrentHashMap<String, String>()
 }
 
 /**
@@ -91,6 +95,7 @@ class PlayHub(
     private val badCodes = BadCodeCounter(perIpDayMax = MAX_BAD_CODES_PER_IP_PER_DAY)       // une adresse seule : 5 000 par jour (école, CGNAT)
     private val badPairs = BadCodeCounter()                                                  // la PAIRE adresse + appareil : 30 / 5 min, 300 / jour
     private val badCodes48 = BadCodeCounter(perIpMax = MAX_BAD_CODES_PER_48, perIpDayMax = Int.MAX_VALUE)   // un /48 IPv6 contient 65 536 /64
+    private val badCodesIdentity = BadCodeCounter()                                          // une identité de TV : 30 / 5 min, 300 / jour (w20-04b)
     private val rnd = random()
     /** Gardes anti-abus (w20-07) : le service y met ses seaux et son journal ; par défaut, ceux d'un hub autonome. */
     @Volatile var guard = PlayGuard()
@@ -169,7 +174,8 @@ class PlayHub(
         val roomBank = if (rights.coveredScopes.isEmpty() || reserved == null) bank else reserved.bankFor(rights.coveredScopes)
         val id = ByteArray(16).also { rnd.nextBytes(it) }.joinToString("") { "%02x".format(it) }
         // une salle d'essai : 8 joueurs au plus (PlayRules.TRIAL_MAX_PLAYERS)
-        val roomSettings = if (trial) settings.copy(seatsPerTable = minOf(settings.seatsPerTable, PlayRules.TRIAL_MAX_PLAYERS)) else settings
+        val baseSettings = settings.copy(maxRelayedPerTv = minOf(settings.maxRelayedPerTv, cfg.maxRelayedPerTv))
+        val roomSettings = if (trial) baseSettings.copy(seatsPerTable = minOf(baseSettings.seatsPerTable, PlayRules.TRIAL_MAX_PLAYERS)) else baseSettings
         var refusal: ServerMsg.Error? = null
         val e = synchronized(roomLock) {
             when {
@@ -199,6 +205,7 @@ class PlayHub(
     fun sweepUsedTickets(realNow: Long) { used.sweep(realNow); createRate.sweep(realNow); create48.sweep(realNow) }
 
     private fun join(c: PlayConn, m: ClientMsg.Join, now: Long) {
+        if (!cfg.webPlay) { tvJoin(c, m, now); return }
         val typed = RoomCode.normalize(m.code)
         val e = typed?.let { t -> rooms.values.firstOrNull { it.room.code == t } }
         // Un code VALIDE n'est jamais refusé par un compteur de mauvais codes : derrière une adresse partagée (école, CGNAT), un élève malveillant ne doit pas fermer la porte aux autres.
@@ -206,6 +213,65 @@ class PlayHub(
         val pair = c.ip + "|" + (m.deviceHash ?: "-")
         if (codesBlocked(c.ip, pair, now)) { send(c, err(PlayReason.PLAY_BAD_CODE, codesRetryAfterMs(c.ip, pair, now))); return }   // bloqué : réponse identique, rien n'est compté
         codeFailed(c.ip, pair, now); typed?.let { nearMiss(it, now) }; send(c, err(PlayReason.PLAY_BAD_CODE))
+    }
+
+    /**
+     * Entrer dans une salle d'une CastBridge-TV (w20-04b, `webPlay` faux : le SEUL chemin d'entrée). Même chaîne que [create], FERMÉE à chaque pas, rien consommé avant la fin :
+     * ticket `cbp1` ⇒ maintenance ⇒ révocations connues ⇒ `jti` pas encore servi (UNE table pour `create` et `join`) ⇒ activation `cbx1` de CETTE TV (édition ≠ NONE ; sinon le ticket est
+     * brûlé) ⇒ ALORS SEULEMENT la recherche du code (un inconnu n'atteint jamais ni les compteurs de codes faux ni la rotation des codes ; la réponse sans ticket est la même
+     * pour un code vivant et un code faux) ⇒ code faux : compteurs d'adresse existants PLUS un compteur par identité de TV ⇒ essai : créations et entrées dans le MÊME compteur du jour
+     * ⇒ connexions vivantes de l'identité (créées + rejointes) ⇒ consommation (`jti`, compteur d'essai) ⇒ entrée ; la TV qui entre devient siège RELAIS (elle relaie SES téléphones).
+     */
+    private fun tvJoin(c: PlayConn, m: ClientMsg.Join, now: Long) {
+        val real = System.currentTimeMillis()
+        val ticket = (verifier.check(c.ticket, real) as? TicketVerifier.Result.Ok)?.ticket
+        if (ticket == null) { send(c, err(PlayReason.PLAY_TICKET_REFUSED)); return }
+        if (draining) { send(c, ServerMsg.Error(0, MAINTENANCE, "Le serveur de jeu est en maintenance : réessayez dans quelques minutes.", true)); return }
+        if (!revocationsReady()) { send(c, ServerMsg.Error(0, MAINTENANCE, "Service indisponible : réessayez dans quelques minutes.", true)); return }
+        if (used.seen(ticket.jti, real)) { send(c, err(PlayReason.PLAY_TICKET_REFUSED)); return }
+        val rights = evaluator.evaluate(ticket.deviceCode, listOfNotNull(m.activation), real)
+        val identity = rights.identity
+        if (rights.edition == HostEdition.NONE || identity == null) {
+            used.use(ticket.jti, ticket.exp, real)   // preuve de droits fausse, absente ou d'une autre TV : le ticket est brûlé, comme à `create`
+            send(c, ServerMsg.Error(0, PlayReason.PLAY_SCOPE_FORBIDDEN.code, rights.note, false)); return
+        }
+        // à partir d'ici l'appelant est une TV authentifiée : la recherche du code est permise
+        val typed = RoomCode.normalize(m.code)
+        val e = typed?.let { t -> rooms.values.firstOrNull { it.room.code == t } }
+        if (e == null) {
+            val pair = c.ip + "|" + (m.deviceHash ?: "-")
+            if (codesBlocked(c.ip, pair, now) || identityBlocked(identity, now)) { send(c, err(PlayReason.PLAY_BAD_CODE, maxOf(codesRetryAfterMs(c.ip, pair, now), identityRetryAfterMs(identity, now)))); return }
+            codeFailed(c.ip, pair, now); identityFailed(identity, now); typed?.let { nearMiss(it, now) }; send(c, err(PlayReason.PLAY_BAD_CODE)); return
+        }
+        val trial = rights.edition == HostEdition.TRIAL
+        val verdict = PlayRules.canCreate(rights.actor, publicRoom = false, gamesToday = if (trial) trialDays.count(identity, real) else 0)
+        if (!verdict.allowed) {
+            used.use(ticket.jti, ticket.exp, real)
+            val why = verdict.reason ?: PlayReason.PLAY_SCOPE_FORBIDDEN
+            send(c, ServerMsg.Error(0, why.code, verdict.message, why.retryable)); return
+        }
+        val cap = if (trial) minOf(1, cfg.maxRoomsPerSubject) else cfg.maxRoomsPerSubject
+        val ownRoom = e.identity == identity   // rejoindre sa propre salle (spectateur) ne compte pas deux fois
+        fun liveOf(who: String) = rooms.values.count { it.identity == who } + rooms.values.filter { it.identity != who }.sumOf { r -> r.joined.entries.count { (cid, idn) -> idn == who && r.conns.containsKey(cid) } }
+        val full = ServerMsg.Error(0, BUSY, "Vous avez déjà $cap partie${if (cap > 1) "s" else ""} ouverte${if (cap > 1) "s" else ""} : terminez-en une avant d'en rejoindre une autre.", true)
+        var refusal: ServerMsg.Error? = null
+        synchronized(roomLock) {
+            when {
+                rooms[e.room.roomId] !== e -> refusal = err(PlayReason.PLAY_BAD_CODE)
+                !ownRoom && liveOf(identity) >= cap -> refusal = full
+                trial && trialDays.count(identity, real) >= PlayRules.TRIAL_GAMES_PER_DAY -> refusal = ServerMsg.Error(0, PlayReason.PLAY_SCOPE_FORBIDDEN.code, PlayRules.MSG_TRIAL_DAILY, false)
+                else -> when (used.use(ticket.jti, ticket.exp, real)) {
+                    UsedTickets.Use.REPLAY -> refusal = err(PlayReason.PLAY_TICKET_REFUSED)
+                    UsedTickets.Use.FULL -> refusal = err(PlayReason.PLAY_BUSY)
+                    UsedTickets.Use.OK -> when {
+                        trial && !trialDays.record(identity, real) -> refusal = err(PlayReason.PLAY_BUSY)
+                        else -> e.joined[c.id] = identity
+                    }
+                }
+            }
+        }
+        refusal?.let { send(c, it); return }
+        if (!attachAndForward(e, c, m, now, grantRelay = true)) e.joined.remove(c.id)
     }
 
     private fun resume(c: PlayConn, m: ClientMsg.Resume, now: Long) {
@@ -216,14 +282,21 @@ class PlayHub(
     }
 
     /** Attache la connexion à la salle le temps d'un message d'entrée ; sans `welcome` en retour, elle est détachée (et la salle neuve supprimée). */
-    private fun attachAndForward(e: RoomEntry, c: PlayConn, m: ClientMsg, now: Long) {
+    private fun attachAndForward(e: RoomEntry, c: PlayConn, m: ClientMsg, now: Long, grantRelay: Boolean = false): Boolean {
         val overflow = ArrayList<PlayConn>()
         var seatedRole: castbridge.core.quiz.online.PlayRole? = null
         synchronized(e) {
             e.conns[c.id] = c; c.entry = e
             val outs = e.room.handle(c.id, m, now, c.ip)
             e.lastActiveRealMs = System.currentTimeMillis()
-            seatedRole = (outs.firstOrNull { it.to == c.id && it.msg is ServerMsg.Welcome }?.msg as? ServerMsg.Welcome)?.role
+            val welcome = outs.firstOrNull { it.to == c.id && it.msg is ServerMsg.Welcome }?.msg as? ServerMsg.Welcome
+            seatedRole = welcome?.role
+            if (grantRelay && welcome != null) {
+                e.room.grantRelay(c.id)   // une TV authentifiée qui entre devient siège relais (avant toute livraison : aucun message d'elle ne passe entre les deux)
+                e.joined[c.id]?.let { e.joinedTokens[welcome.token] = it }
+            }
+            // la reprise d'une TV entrée par `join` : sa nouvelle connexion porte la même identité (le plafond de connexions vivantes ne s'évade pas par un `resume`)
+            if (m is ClientMsg.Resume && welcome != null) e.joinedTokens[m.token]?.let { e.joined[c.id] = it }
             deliver(e, outs, overflow)   // d'abord les réponses (un refus doit atteindre la connexion), puis détachement si elle n'est pas entrée
             if (outs.none { it.to == c.id && it.msg is ServerMsg.Welcome }) {
                 e.conns.remove(c.id); c.entry = null
@@ -232,6 +305,7 @@ class PlayHub(
         }
         overflow.forEach { dropOverflow(it) }
         seatedRole?.let { guard.seated(c, m, e.room.roomId, it, (m as? ClientMsg.Resume)?.let { r -> e.room.deviceOfToken(r.token) }) }   // journal et plafond relevé : hors du verrou de la salle
+        return seatedRole != null
     }
 
     private fun forward(e: RoomEntry, c: PlayConn, m: ClientMsg, now: Long) {
@@ -295,7 +369,7 @@ class PlayHub(
             overflow.forEach { dropOverflow(it) }
             unranked?.let { guard.log.event("play.game.unranked", "sièges hors classement", it) }   // jamais d'écriture de journal sous le verrou de la salle
         }
-        synchronized(badCodes) { badCodes.sweep(now) }; synchronized(badCodes48) { badCodes48.sweep(now) }; synchronized(badPairs) { badPairs.sweep(now) }
+        synchronized(badCodes) { badCodes.sweep(now) }; synchronized(badCodes48) { badCodes48.sweep(now) }; synchronized(badPairs) { badPairs.sweep(now) }; synchronized(badCodesIdentity) { badCodesIdentity.sweep(now) }
         if (mono - lastSweepMs >= 5_000L) { lastSweepMs = mono; sweepUsedTickets(mono) }
         for (c in ArrayList(all.values)) c.housekeeping(mono)
     }
@@ -334,6 +408,11 @@ class PlayHub(
             if (rotated) guard.log.event("play.room.code_rotated", "code de salle renouvelé après des frappes proches", mapOf("roomId" to e.room.roomId))
         }
     }
+
+    // compteur de codes faux PAR IDENTITÉ de TV (w20-04b) : en plus des compteurs d'adresse, car une TV authentifiée change d'adresse et d'appareil API à volonté, pas d'activation signée
+    private fun identityBlocked(identity: String, now: Long) = badCodesIdentity.synchronizedBlocked(identity, now)
+    private fun identityRetryAfterMs(identity: String, now: Long): Long = synchronized(badCodesIdentity) { badCodesIdentity.retryAfterMs(identity, now) }
+    private fun identityFailed(identity: String, now: Long) { badCodesIdentity.synchronizedFail(identity, now) }
 
     private fun codeFailed(ip: String, pair: String, now: Long) { badCodes.synchronizedFail(ip, now); badPairs.synchronizedFail(pair, now); ClientIp.group48(ip)?.let { badCodes48.synchronizedFail(it, now) } }
 

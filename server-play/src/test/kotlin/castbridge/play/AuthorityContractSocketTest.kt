@@ -82,7 +82,7 @@ class AuthorityContractSocketTest {
     }
 
     private inner class SocketHarness : Harness {
-        val srv = PlayServer(PlayConfig(port = 0, trustedProxies = LOOPBACK, ticketPubKeys = listOf(TestKeys.pub), trustedKeys = TestRights.trustedKeys, createsPerIpPerHour = 10_000), clock = { now }, random = { java.util.Random(42) }, roomScope = PlayScope.LAN,
+        val srv = PlayServer(PlayConfig(webPlay = true, revocationsMode = castbridge.play.RevocationsMode.OFF, port = 0, trustedProxies = LOOPBACK, ticketPubKeys = listOf(TestKeys.pub), trustedKeys = TestRights.trustedKeys, createsPerIpPerHour = 10_000), clock = { now }, random = { java.util.Random(42) }, roomScope = PlayScope.LAN,
             settings = ServerRoom.Settings(duelCount = 10), bank = bank).start().also { servers += it }
         private fun transport(n: Int) = SyncSocketTransport(srv.port, "203.0.113.$n").also { transports += it }
         val host = ServerAuthority(transport(1), PlayScope.LAN).also { it.hello(null, TestKeys.ticket()); it.create(null, "DUEL", TestRights.PROD) }

@@ -26,7 +26,7 @@ import kotlin.test.assertTrue
 class Audit2Test {
     private val servers = ArrayList<PlayServer>()
     private val closeables = ArrayList<AutoCloseable>()
-    private fun cfg(vararg o: Pair<String, Any?>) = PlayConfig(port = 0, trustedProxies = LOOPBACK, ticketPubKeys = listOf(TestKeys.pub), trustedKeys = TestRights.trustedKeys, createsPerIpPerHour = 10_000)
+    private fun cfg(vararg o: Pair<String, Any?>) = PlayConfig(webPlay = true, revocationsMode = castbridge.play.RevocationsMode.OFF, port = 0, trustedProxies = LOOPBACK, ticketPubKeys = listOf(TestKeys.pub), trustedKeys = TestRights.trustedKeys, createsPerIpPerHour = 10_000)
     private fun server(c: PlayConfig = cfg()) = PlayServer(c).also { it.start(); servers += it }
     @AfterTest fun stop() { closeables.forEach { runCatching { it.close() } }; servers.forEach { it.close() }; closeables.clear(); servers.clear() }
     private fun ws(srv: PlayServer, ip: String) = WsWire(srv.port, xff = ip).also { w -> closeables += AutoCloseable { w.close() } }
@@ -175,7 +175,7 @@ class Audit2Test {
     }
 
     @Test fun aClientThatStopsReadingIsCutAfterTheWriteDeadline() {
-        val c = PlayConfig(port = 0, outboxMaxBytes = 200_000_000, writeTimeoutMs = 300, ticketPubKeys = listOf(TestKeys.pub), trustedKeys = TestRights.trustedKeys, createsPerIpPerHour = 10_000)
+        val c = PlayConfig(webPlay = true, revocationsMode = castbridge.play.RevocationsMode.OFF, port = 0, outboxMaxBytes = 200_000_000, writeTimeoutMs = 300, ticketPubKeys = listOf(TestKeys.pub), trustedKeys = TestRights.trustedKeys, createsPerIpPerHour = 10_000)
         val (conn, server, _) = wsConnOver(c)   // le client ne lit JAMAIS
         val runner = Thread { conn.run(server.getInputStream()) }.also { it.isDaemon = true; it.start() }
         val big = "x".repeat(100_000)
@@ -188,7 +188,7 @@ class Audit2Test {
     }
 
     @Test fun carriersStayFewAndLatencyLowUnderThreeHundredIdleStreams() {
-        val srv = server(PlayConfig(port = 0, trustedProxies = LOOPBACK, maxPerIp = 5_000, maxConnections = 5_000, connPerMinute = 100_000, connPerSecond = 100_000, ticketPubKeys = listOf(TestKeys.pub), trustedKeys = TestRights.trustedKeys, createsPerIpPerHour = 10_000))
+        val srv = server(PlayConfig(webPlay = true, revocationsMode = castbridge.play.RevocationsMode.OFF, port = 0, trustedProxies = LOOPBACK, maxPerIp = 5_000, maxConnections = 5_000, connPerMinute = 100_000, connPerSecond = 100_000, ticketPubKeys = listOf(TestKeys.pub), trustedKeys = TestRights.trustedKeys, createsPerIpPerHour = 10_000))
         val hello = PlayCodec.encode(ClientMsg.Hello(PlayProtocol.PROTO, PlayProtocol.CAPS, null, null))
         repeat(300) { i ->
             val cred = Cred.of(SseWire.post(srv.port, hello, null, "https://bridge.sti-cm.com", "203.0.113.${i % 200 + 1}"))!!
@@ -217,7 +217,7 @@ class Audit2Test {
 
     @Test fun badCodesAreAlsoCappedPerSlash48() {
         val limits = ConnectionLimits(100_000, 100_000)
-        val hub = PlayHub(PlayConfig(trustedProxies = LOOPBACK, ticketPubKeys = listOf(TestKeys.pub), trustedKeys = TestRights.trustedKeys, createsPerIpPerHour = 10_000), { 1_000L }, castbridge.core.quiz.EmbeddedQuestionSource(levels = null).bank(), TicketVerifier(listOf(TestKeys.pub)), limits = limits)
+        val hub = PlayHub(PlayConfig(webPlay = true, revocationsMode = castbridge.play.RevocationsMode.OFF, trustedProxies = LOOPBACK, ticketPubKeys = listOf(TestKeys.pub), trustedKeys = TestRights.trustedKeys, createsPerIpPerHour = 10_000), { 1_000L }, castbridge.core.quiz.EmbeddedQuestionSource(levels = null).bank(), TicketVerifier(listOf(TestKeys.pub)), limits = limits)
         class Fake(id: String, ip: String) : PlayConn(id, ip, 1_000_000, 1_000_000) {
             val got = ArrayList<String>()
             override fun offer(text: String): Boolean { got += text; return true }

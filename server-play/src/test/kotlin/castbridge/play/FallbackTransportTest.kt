@@ -20,7 +20,7 @@ import kotlin.test.assertTrue
 class FallbackTransportTest {
     private val servers = ArrayList<PlayServer>()
     private val wires = ArrayList<Wire>()
-    private fun server(cfg: PlayConfig = PlayConfig(port = 0, trustedProxies = LOOPBACK, ticketPubKeys = listOf(TestKeys.pub), trustedKeys = TestRights.trustedKeys, createsPerIpPerHour = 10_000)) = PlayServer(cfg).also { it.start(); servers += it }
+    private fun server(cfg: PlayConfig = PlayConfig(webPlay = true, revocationsMode = castbridge.play.RevocationsMode.OFF, port = 0, trustedProxies = LOOPBACK, ticketPubKeys = listOf(TestKeys.pub), trustedKeys = TestRights.trustedKeys, createsPerIpPerHour = 10_000)) = PlayServer(cfg).also { it.start(); servers += it }
     @AfterTest fun stop() { wires.forEach { it.close() }; servers.forEach { it.close() }; wires.clear(); servers.clear() }
     private fun <W : Wire> W.keep(): W { wires += this; return this }
     private val http = HttpClient.newBuilder().connectTimeout(Duration.ofSeconds(5)).build()
@@ -67,7 +67,7 @@ class FallbackTransportTest {
     }
 
     @Test fun longPollKeepsMessagesUntilAcknowledgedAndAnswersEmptyAfterTheDelay() {
-        val srv = server(PlayConfig(port = 0, trustedProxies = LOOPBACK, pollMs = 400, ticketPubKeys = listOf(TestKeys.pub), trustedKeys = TestRights.trustedKeys, createsPerIpPerHour = 10_000))
+        val srv = server(PlayConfig(webPlay = true, revocationsMode = castbridge.play.RevocationsMode.OFF, port = 0, trustedProxies = LOOPBACK, pollMs = 400, ticketPubKeys = listOf(TestKeys.pub), trustedKeys = TestRights.trustedKeys, createsPerIpPerHour = 10_000))
         val (_, w) = host(srv)
         val post = SseWire.post(srv.port, PlayCodec.encode(ClientMsg.Join(w["code"] as String, "Awa", null, dev(), false)), null, "https://bridge.sti-cm.com", "203.0.113.2")
         val conn = Cred.of(post)!!
@@ -84,7 +84,7 @@ class FallbackTransportTest {
     }
 
     @Test fun idleFallbackSessionIsClosedButTheSeatSurvivesForResume() {
-        val srv = server(PlayConfig(port = 0, trustedProxies = LOOPBACK, fallbackIdleMs = 600, tickMs = 50, ticketPubKeys = listOf(TestKeys.pub), trustedKeys = TestRights.trustedKeys, createsPerIpPerHour = 10_000))
+        val srv = server(PlayConfig(webPlay = true, revocationsMode = castbridge.play.RevocationsMode.OFF, port = 0, trustedProxies = LOOPBACK, fallbackIdleMs = 600, tickMs = 50, ticketPubKeys = listOf(TestKeys.pub), trustedKeys = TestRights.trustedKeys, createsPerIpPerHour = 10_000))
         val (_, w) = host(srv)
         val sse = SseWire(srv.port, xff = "203.0.113.2").keep()
         sse.send(PlayCodec.encode(ClientMsg.Join(w["code"] as String, "Awa", null, dev(), false)))

@@ -16,7 +16,7 @@ import kotlin.test.assertTrue
 class LimitsTest {
     private val servers = ArrayList<PlayServer>()
     private val closeables = ArrayList<AutoCloseable>()
-    private fun server(cfg: PlayConfig = PlayConfig(port = 0, trustedProxies = LOOPBACK, maxPerIp = 8, ticketPubKeys = listOf(TestKeys.pub), trustedKeys = TestRights.trustedKeys, createsPerIpPerHour = 10_000)) = PlayServer(cfg).also { it.start(); servers += it }
+    private fun server(cfg: PlayConfig = PlayConfig(webPlay = true, revocationsMode = castbridge.play.RevocationsMode.OFF, port = 0, trustedProxies = LOOPBACK, maxPerIp = 8, ticketPubKeys = listOf(TestKeys.pub), trustedKeys = TestRights.trustedKeys, createsPerIpPerHour = 10_000)) = PlayServer(cfg).also { it.start(); servers += it }
     @AfterTest fun stop() { closeables.forEach { runCatching { it.close() } }; servers.forEach { it.close() }; servers.clear(); closeables.clear() }
     private fun ws(srv: PlayServer, xff: String? = "203.0.113.7", origin: String? = "https://bridge.sti-cm.com", ticket: String? = null) = WsWire(srv.port, origin, xff, ticket).also { closeables += AutoCloseable { it.close() } }
 
@@ -36,14 +36,14 @@ class LimitsTest {
     }
 
     @Test fun slotIsFreedWhenAConnectionCloses() {
-        val srv = server(PlayConfig(port = 0, trustedProxies = LOOPBACK, maxPerIp = 1, ticketPubKeys = listOf(TestKeys.pub), trustedKeys = TestRights.trustedKeys, createsPerIpPerHour = 10_000))
+        val srv = server(PlayConfig(webPlay = true, revocationsMode = castbridge.play.RevocationsMode.OFF, port = 0, trustedProxies = LOOPBACK, maxPerIp = 1, ticketPubKeys = listOf(TestKeys.pub), trustedKeys = TestRights.trustedKeys, createsPerIpPerHour = 10_000))
         val a = ws(srv); assertFailsWith<WsRefused> { ws(srv) }
         a.close(); Thread.sleep(300)
         ws(srv)
     }
 
     @Test fun totalConnectionCapAnswers503() {
-        val srv = server(PlayConfig(port = 0, trustedProxies = LOOPBACK, maxConnections = 2, ticketPubKeys = listOf(TestKeys.pub), trustedKeys = TestRights.trustedKeys, createsPerIpPerHour = 10_000))
+        val srv = server(PlayConfig(webPlay = true, revocationsMode = castbridge.play.RevocationsMode.OFF, port = 0, trustedProxies = LOOPBACK, maxConnections = 2, ticketPubKeys = listOf(TestKeys.pub), trustedKeys = TestRights.trustedKeys, createsPerIpPerHour = 10_000))
         ws(srv, xff = "198.51.100.1"); ws(srv, xff = "198.51.100.2")
         assertEquals(503, assertFailsWith<WsRefused> { ws(srv, xff = "198.51.100.3") }.status)
     }
@@ -104,7 +104,7 @@ class LimitsTest {
     }
 
     @Test fun roomCapAnswersPlayBusyAndKeepsTheOtherRoom() {
-        val srv = server(PlayConfig(port = 0, trustedProxies = LOOPBACK, maxRooms = 1, ticketPubKeys = listOf(TestKeys.pub), trustedKeys = TestRights.trustedKeys, createsPerIpPerHour = 10_000))
+        val srv = server(PlayConfig(webPlay = true, revocationsMode = castbridge.play.RevocationsMode.OFF, port = 0, trustedProxies = LOOPBACK, maxRooms = 1, ticketPubKeys = listOf(TestKeys.pub), trustedKeys = TestRights.trustedKeys, createsPerIpPerHour = 10_000))
         val a = ws(srv); a.send(PlayCodec.encode(ClientMsg.Hello(PlayProtocol.PROTO, PlayProtocol.CAPS, null, TestKeys.ticket()))); a.send(PlayCodec.encode(TestRights.create()))
         assertEquals("HOST", a.await("welcome")?.get("role"))
         val b = ws(srv, xff = "203.0.113.9"); b.send(PlayCodec.encode(ClientMsg.Hello(PlayProtocol.PROTO, PlayProtocol.CAPS, null, TestKeys.ticket()))); b.send(PlayCodec.encode(TestRights.create()))
@@ -147,14 +147,14 @@ class LimitsTest {
 
     @Test fun forwardedForIsIgnoredWhenTheSocketPeerIsNotTrusted() {
         // le pair de test est 127.0.0.1 : sans réseau de confiance, tout le monde partage la même adresse, quel que soit X-Forwarded-For
-        val srv = server(PlayConfig(port = 0, trustedProxies = emptyList(), maxPerIp = 2, ticketPubKeys = listOf(TestKeys.pub), trustedKeys = TestRights.trustedKeys, createsPerIpPerHour = 10_000))
+        val srv = server(PlayConfig(webPlay = true, revocationsMode = castbridge.play.RevocationsMode.OFF, port = 0, trustedProxies = emptyList(), maxPerIp = 2, ticketPubKeys = listOf(TestKeys.pub), trustedKeys = TestRights.trustedKeys, createsPerIpPerHour = 10_000))
         ws(srv, xff = "203.0.113.1"); ws(srv, xff = "203.0.113.2")
         assertEquals(429, assertFailsWith<WsRefused> { ws(srv, xff = "203.0.113.3") }.status, "un en-tête forgé ne donne pas une IP neuve")
     }
 
     @Test fun overflowingOutboxClosesTheConnectionAndKeepsTheSeat() {
         val limits = ConnectionLimits(8, 100)
-        val hub = PlayHub(PlayConfig(ticketPubKeys = listOf(TestKeys.pub), trustedKeys = TestRights.trustedKeys, createsPerIpPerHour = 10_000), { 1_000L }, castbridge.core.quiz.EmbeddedQuestionSource(levels = null).bank(), TicketVerifier(listOf(TestKeys.pub)), limits = limits)
+        val hub = PlayHub(PlayConfig(webPlay = true, revocationsMode = castbridge.play.RevocationsMode.OFF, ticketPubKeys = listOf(TestKeys.pub), trustedKeys = TestRights.trustedKeys, createsPerIpPerHour = 10_000), { 1_000L }, castbridge.core.quiz.EmbeddedQuestionSource(levels = null).bank(), TicketVerifier(listOf(TestKeys.pub)), limits = limits)
         val log = ArrayList<String>()
         class Full(id: String) : PlayConn(id, "198.51.100.1", 10, 30) {
             var full = false; var closedWith: Int? = null

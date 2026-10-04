@@ -98,4 +98,27 @@ class PlayCodecTest {
         java.io.File("build").mkdirs()
         java.io.File("build/play-message-sizes.txt").writeText(lines.joinToString("\n") + "\n")
     }
+
+    // ---- w20-04b : `join.activation` (additif) ----
+
+    @Test fun joinCarriesAnOptionalActivationAndStaysIdenticalWithoutIt() {
+        val act = "cbx1." + "A".repeat(3_000)
+        val withAct = ClientMsg.Join("K7M2QX4T", "TV Chambre", null, "dev-0123456789", true, act)
+        val wire = PlayCodec.encode(withAct)
+        assertTrue(wire.length > PlayProtocol.MAX_MESSAGE_BYTES, "un join de TV dépasse 2 048 octets")
+        assertEquals(PlayCodec.Decoded.Ok(withAct), PlayCodec.decodeClient(wire), "un join qui porte `activation` passe le décodage (jusqu'à MAX_CREATE_BYTES)")
+        // sans activation : le fil est celui d'avant (aucune clé nouvelle) et la limite reste 2 048
+        val plain = ClientMsg.Join("K7M2QX4T", "Awa", null, "dev-0123456789", false)
+        assertFalse(PlayCodec.encode(plain).contains("activation"))
+        assertEquals(null, (PlayCodec.decodeClient(PlayCodec.encode(plain)) as PlayCodec.Decoded.Ok).msg.let { (it as ClientMsg.Join).activation })
+        val longName = """{"t":"join","code":"K7M2QX4T","name":"${"n".repeat(2_100)}"}"""
+        assertTrue(PlayCodec.decodeClient(longName) is PlayCodec.Decoded.Bad, "sans activation : 2 048 octets au plus")
+        // bornes : ASCII visible seulement, ≤ MAX_ACTIVATION, jamais plus de MAX_CREATE_BYTES
+        assertTrue(PlayCodec.decodeClient(PlayCodec.encode(plain).replace("}", ""","activation":"${"A".repeat(PlayProtocol.MAX_ACTIVATION + 1)}"}""")) is PlayCodec.Decoded.Bad)
+        assertTrue(PlayCodec.decodeClient(PlayCodec.encode(plain).replace("}", ""","activation":"cbx1 espace"}""")) is PlayCodec.Decoded.Bad)
+        assertTrue(PlayCodec.decodeClient(PlayCodec.encode(plain).replace("}", ""","activation":12}""")) is PlayCodec.Decoded.Bad)
+        assertTrue(PlayCodec.decodeClient("""{"t":"join","code":"K7M2QX4T","activation":"x","pad":"${"p".repeat(PlayProtocol.MAX_CREATE_BYTES)}"}""") is PlayCodec.Decoded.Bad)
+        // l'activation n'apparaît jamais dans le texte d'un message journalisé
+        assertFalse(withAct.toString().contains("AAAA"), withAct.toString())
+    }
 }

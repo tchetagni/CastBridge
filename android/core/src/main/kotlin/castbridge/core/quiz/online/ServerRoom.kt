@@ -28,7 +28,9 @@ class ServerRoom(
     private val gapRequestedMs: Long = PlayTiming.INTER_QUESTION_GAP_MS,
     histories: QuizHistoryBook = QuizHistoryBook(null),
 ) {
-    data class Settings(val allowSpectators: Boolean = true, val maxSpectators: Int = 50, val seatsPerTable: Int = 8, val duelCount: Int = 10, val duelQuestionMs: Long = 20_000)
+    data class Settings(val allowSpectators: Boolean = true, val maxSpectators: Int = 50, val seatsPerTable: Int = 8, val duelCount: Int = 10, val duelQuestionMs: Long = 20_000,
+                        /** w20-04b : joueurs locaux qu'une TV (hôte ou invitée) peut relayer, 8 au plus. */
+                        val maxRelayedPerTv: Int = 8)
 
     enum class State { OPEN, PLAYING, FINISHED, GONE }
     enum class ActResult { OK, SAME, CLOSED, UNKNOWN_QUESTION, TOO_EARLY, FORBIDDEN, BAD_REQUEST, UNKNOWN_PLAYER, IGNORED }
@@ -43,6 +45,10 @@ class ServerRoom(
         var conn: String? = null; internal set
         var lostAt: Long? = null; internal set
         var muted = false; internal set
+        /** w20-04b : cette connexion est une TV qui peut relayer SES joueurs locaux (accordé par le service seul, [grantRelay]) ; l'hôte relaie toujours. */
+        var relayer = false; internal set
+        /** w20-04b : pour un siège relayé, la TV (siège) qui le relaie ; null pour tout autre siège. */
+        var relayedBy: Seat? = null; internal set
         /** Clé d'adresse du client (IPv4, ou préfixe /64 en IPv6) : sert au bannissement par adresse. */
         var ip: String? = null; internal set
     }
@@ -191,11 +197,21 @@ class ServerRoom(
         seat.conn = null; seat.lostAt = now
         rtt.forget(conn); pendingPings.remove(conn)
         presence(seat, false)
-        if (seat === host) seats.values.filter { it.viaTv }.forEach { presence(it, false) }
+        relayedOf(seat).forEach { presence(it, false) }   // seulement les joueurs de CETTE TV : ceux des autres TV restent présents
         pending += Ev("lost", mapOf("role" to seat.role.name, "playerId" to seat.playerId))
         flush(now, out)
         out
     }
+
+    /**
+     * w20-04b : le SERVICE accorde le droit de relayer à la connexion [conn] (une TV invitée, authentifiée par ticket + activation à l'entrée). Jamais appelée depuis un
+     * message client. Rend faux si la connexion n'a pas de siège.
+     */
+    fun grantRelay(conn: String): Boolean = synchronized(lock) { byConn[conn]?.let { it.relayer = true; true } ?: false }
+
+    /** Les sièges relayés par la TV [tv] (et par elle seule). */
+    private fun relayedOf(tv: Seat): List<Seat> = seats.values.filter { it.viaTv && it.relayedBy === tv }
+    private fun canRelay(s: Seat?): Boolean = s != null && (s === host || s.relayer)
 
     /** Horloge : délais, pauses, abandon, pings, fermeture. Appelé par le service (toutes les 50-200 ms). */
     fun tick(now: Long): List<Out> = synchronized(lock) {
@@ -243,16 +259,16 @@ class ServerRoom(
         if (RoomCode.expired(createdAt, now)) { out += err(conn, PlayReason.PLAY_ROOM_GONE); return }
         val typed = RoomCode.normalize(m.code)
         // Une connexion déjà assise n'essaie pas de deviner un code : refus sans compter (sinon un spectateur ferait tourner le code de la salle).
-        // Seule la TV hôte enregistre ainsi un joueur local : siège relayé, sans connexion propre.
+        // Seule une TV (l'hôte, ou une TV invitée à qui le service a accordé le relais, w20-04b) enregistre ainsi un joueur local : siège relayé, sans connexion propre.
         val sender = byConn[conn]
         if (sender != null) {
-            if (sender === host && sender.conn == conn && typed == code) relayJoin(conn, m, out) else out += errp(conn, PlayProtocol.FORBIDDEN, "Vous êtes déjà dans la salle.")
+            if (canRelay(sender) && sender.conn == conn && typed == code) relayJoin(sender, conn, m, out) else out += errp(conn, PlayProtocol.FORBIDDEN, "Vous êtes déjà dans la salle.")
             return
         }
         if (ip != null && badCodes.ipBlocked(ip, now)) { out += err(conn, PlayReason.PLAY_BAD_CODE); return }
         if (scopeClosedAt != null) { out += err(conn, PlayReason.PLAY_SCOPE_FORBIDDEN); return }
         if (typed == null || typed != code) { badAttempt(conn, ip, now, out); return }
-        m.token?.let { t -> seats[t]?.let { s -> reattach(s, conn, out, null); return } }
+        m.token?.let { t -> seats[t]?.takeIf { !it.viaTv }?.let { s -> reattach(s, conn, out, null); return } }   // un siège relayé ne se reprend que par sa TV (relayJoin)
         if (m.deviceHash != null && m.deviceHash in bannedDevices || ip != null && ip in bannedIps) { out += err(conn, PlayReason.PLAY_BANNED); return }
         if (scope == PlayScope.INTERNET && (m.deviceHash == null || m.deviceHash.length < MIN_DEVICE_HASH)) { out += errp(conn, PlayProtocol.BAD_REQUEST, "Appareil non identifié : mettez CastBridge à jour."); return }
         val name = QuizRoom.cleanName(m.name) ?: run { out += errp(conn, PlayProtocol.BAD_REQUEST, "Choisissez un pseudonyme."); return }
@@ -277,13 +293,15 @@ class ServerRoom(
         pending += Ev("joined", mapOf("playerId" to s.playerId))
     }
 
-    private fun relayJoin(conn: String, m: ClientMsg.Join, out: MutableList<Out>) {
-        m.token?.let { t -> seats[t]?.takeIf { it.viaTv }?.let { out += welcome(it, conn); return } }
+    private fun relayJoin(tv: Seat, conn: String, m: ClientMsg.Join, out: MutableList<Out>) {
+        // reprise d'un siège relayé : seulement par la TV qui le relaie (le jeton d'une autre TV n'ouvre rien)
+        m.token?.let { t -> seats[t]?.takeIf { it.viaTv && it.relayedBy === tv }?.let { out += welcome(it, conn); return } }
         val name = QuizRoom.cleanName(m.name) ?: run { out += errp(conn, PlayProtocol.BAD_REQUEST, "Choisissez un pseudonyme."); return }
-        if (table0.room.players().size >= settings.seatsPerTable) { out += err(conn, PlayReason.PLAY_ROOM_FULL); return }
+        if (table0.room.players().size >= settings.seatsPerTable || relayedOf(tv).size >= settings.maxRelayedPerTv.coerceIn(1, 8)) { out += err(conn, PlayReason.PLAY_ROOM_FULL); return }
         val j = table0.room.join(table0.room.code, name, null, m.deviceHash)
         if (j.status != QuizRoom.Join.OK) { out += errp(conn, PlayProtocol.BAD_REQUEST, "Impossible de rejoindre."); return }
         val s = Seat(newToken(), PlayRole.PLAYER, j.player!!.name, m.deviceHash, true)
+        s.relayedBy = tv
         s.quizToken = j.player.token; s.playerId = j.player.id
         seats[s.token] = s; presence(s, true)
         out += welcome(s, conn)
@@ -300,17 +318,16 @@ class ServerRoom(
 
     /** Un spectateur déconnecté depuis [SPECTATOR_PURGE_MS] perd son siège (les joueurs gardent le leur pour la reprise). */
     private fun purgeSpectators(now: Long) {
-        val gone = seats.values.filter { it.role == PlayRole.SPECTATOR && it.conn == null && (it.lostAt?.let { t -> now - t >= SPECTATOR_PURGE_MS } ?: false) }
+        // un spectateur relais (TV invitée) n'est pas purgé tant qu'il porte des sièges : ses joueurs locaux perdraient leur TV
+        val gone = seats.values.filter { it.role == PlayRole.SPECTATOR && it.conn == null && (it.lostAt?.let { t -> now - t >= SPECTATOR_PURGE_MS } ?: false) && relayedOf(it).isEmpty() }
         for (s in gone) seats.remove(s.token)
     }
 
     private fun reattach(s: Seat, conn: String, out: MutableList<Out>, lastSeq: Long?) {
         s.conn?.takeIf { it != conn }?.let { old -> byConn.remove(old); rtt.forget(old) }
         attach(s, conn)
-        if (s === host) {
-            seats.values.filter { it.viaTv }.forEach { presence(it, true) }
-            table0.pausedAt?.let { table0.resume(clock.now); pending += Ev("resumed") }
-        }
+        relayedOf(s).forEach { presence(it, true) }   // les joueurs de CETTE TV seulement
+        if (s === host) table0.pausedAt?.let { table0.resume(clock.now); pending += Ev("resumed") }
         out += welcome(s, conn)
         val missed = lastSeq?.let { ring.since(it) }
         if (lastSeq != null && missed != null && missed.isNotEmpty()) out += Out(conn, ServerMsg.Replay(seq, missed))
@@ -390,8 +407,9 @@ class ServerRoom(
 
     private fun relay(conn: String, m: ClientMsg.RelayAct, now: Long): ActResult {
         val sender = byConn[conn]
-        if (sender == null || sender !== host) return ActResult.FORBIDDEN
+        if (!canRelay(sender)) return ActResult.FORBIDDEN
         val s = seats[m.token]?.takeIf { it.viaTv && it.role == PlayRole.PLAYER } ?: return ActResult.UNKNOWN_PLAYER
+        if (s.relayedBy !== sender) return ActResult.FORBIDDEN   // une TV ne répond que pour SES joueurs locaux
         return answer(s, conn, m.questionId, m.choice, now, m.localElapsedMono)
     }
 
@@ -431,7 +449,8 @@ class ServerRoom(
         if (!open) {
             if (state == State.PLAYING) { out += errp(conn, PlayProtocol.FORBIDDEN, "Fermer Internet : seulement en salle d'attente."); return@hostOnly }
             scopeClosedAt = now
-            for (s in seats.values.filter { it.role == PlayRole.PLAYER && !it.viaTv && it !== host }) {
+            // les sièges relayés par une AUTRE TV sont des joueurs distants : ils passent spectateurs comme les joueurs directs ; seuls ceux de l'hôte restent
+            for (s in seats.values.filter { it.role == PlayRole.PLAYER && !(it.viaTv && it.relayedBy === host) && it !== host }) {
                 s.quizToken?.let { table0.room.leave(it) }
                 s.role = PlayRole.SPECTATOR; s.quizToken = null; s.playerId = null
             }
@@ -441,6 +460,8 @@ class ServerRoom(
 
     private fun kick(h: Seat, playerId: String, out: MutableList<Out>) {
         val s = seats.values.firstOrNull { it.playerId == playerId && it !== h } ?: return
+        // retirer une TV relais retire aussi les joueurs locaux qu'elle relaie (sans TV, ils n'ont plus de voie vers le service)
+        for (r in relayedOf(s)) { r.quizToken?.let { table0.room.leave(it) }; seats.remove(r.token); pending += Ev("kicked", mapOf("playerId" to r.playerId)) }
         s.quizToken?.let { table0.room.leave(it) }
         s.deviceHash?.let { bannedDevices += it }
         s.ip?.let { bannedIps += it }
@@ -457,7 +478,8 @@ class ServerRoom(
         val t = table0
         val lost = h.conn == null && h.lostAt != null
         if (!lost || state != State.PLAYING || autoHost || t.abandoned != null) return
-        val remote = seats.values.any { it.role == PlayRole.PLAYER && !it.viaTv && it !== h }
+        // « derrière l'hôte » = relayé par l'hôte ; les joueurs d'une autre TV (et cette TV) sont distants : la table continue sans l'hôte
+        val remote = seats.values.any { it.role == PlayRole.PLAYER && !(it.viaTv && it.relayedBy === h) && it !== h }
         if (!remote && t.pausedAt == null) { t.pausedAt = now; pending += Ev("paused") }
         if (now - h.lostAt!! >= HOST_LOST_MS) {
             t.pausedAt?.let { t.resume(now) }
@@ -570,13 +592,16 @@ class ServerRoom(
     }
 
     /** Le signe « Partie sûre » de la salle (mêmes faits que sur la TV). */
-    fun safety(): SafetyView {
+    fun safety(): SafetyView = SafetySign.of(safetyFacts())
+
+    /** Les faits du signe (w20-04b : « local » = relayé par l'hôte ; les joueurs d'une autre TV, et cette TV, sont distants). */
+    internal fun safetyFacts(): SafetyFacts {
         val h = host
         val lostSec = if (h?.conn == null && h?.lostAt != null) ((clock.now - h.lostAt!!) / 1_000).toInt().coerceAtLeast(0) else 0
         val link = when { h == null || h.conn != null -> Link3.OK; lostSec >= SafetySign.LOST_AFTER_SEC -> Link3.LOST; else -> Link3.RESUMING }
-        return SafetySign.of(SafetyFacts(scope = scope, serverLink = link, serverLostSec = lostSec,
-            remotePlayers = seats.values.count { it.role != PlayRole.HOST && !it.viaTv }, localPlayers = seats.values.count { it.viaTv },
-            rttMs = (byConn.keys.maxOfOrNull { rtt.rtt(it) } ?: 0L).toInt()))
+        return SafetyFacts(scope = scope, serverLink = link, serverLostSec = lostSec,
+            remotePlayers = seats.values.count { it.role != PlayRole.HOST && !(it.viaTv && it.relayedBy === h) }, localPlayers = seats.values.count { it.viaTv && it.relayedBy === h },
+            rttMs = (byConn.keys.maxOfOrNull { rtt.rtt(it) } ?: 0L).toInt())
     }
 
     private fun gone(reason: String, out: MutableList<Out>): List<Out> {

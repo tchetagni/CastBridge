@@ -31,7 +31,7 @@ object GuardHarness {
     val bank = EmbeddedQuestionSource(levels = null).bank()
 
     fun hub(settings: ServerRoom.Settings = ServerRoom.Settings(), clock: () -> Long = { 1_000L }, limits: ConnectionLimits = ConnectionLimits(1_000_000, 1_000_000, 1_000_000)): PlayHub =
-        PlayHub(PlayConfig(trustedProxies = listOf(Cidr.parse("127.0.0.1/32")!!), ticketPubKeys = listOf(TestKeys.pub), trustedKeys = TestRights.trustedKeys, createsPerIpPerHour = 100_000), clock, bank, TicketVerifier(listOf(TestKeys.pub)), settings = settings, limits = limits)
+        PlayHub(PlayConfig(webPlay = true, revocationsMode = castbridge.play.RevocationsMode.OFF, trustedProxies = listOf(Cidr.parse("127.0.0.1/32")!!), ticketPubKeys = listOf(TestKeys.pub), trustedKeys = TestRights.trustedKeys, createsPerIpPerHour = 100_000), clock, bank, TicketVerifier(listOf(TestKeys.pub)), settings = settings, limits = limits)
 
     /** Une TV qui crée la salle : (connexion, code de la salle). */
     fun host(hub: PlayHub, id: String = "tv", ip: String = "198.51.100.9"): Pair<FakeConn, String> {

@@ -46,10 +46,10 @@ class PlayServer(
     private val feed = RevocationsFeed(trusted.ring, cfg.revocationsUrl?.let { RevocationsFeed.httpFetcher(it) } ?: { null }, file = cfg.revocationsFile)
     /** La banque libre du service SANS les ids réservables, et les paquets réservés lus à la demande (w20-04). */
     private val reserved = ReservedBank(bank ?: loadBank(cfg.lotsDir), DirReservedSource(cfg.reservedDir), ReservedBank.readIds(cfg.reservedIdsFile))
-    val hub = PlayHub(cfg, clock, reserved.freeBank, verifier, random, roomScope, settings, limits, reserved, feed::current, revocationsReady = { cfg.revocationsUrl == null || feed.usable() }).also { it.guard = guard }
+    val hub = PlayHub(cfg, clock, reserved.freeBank, verifier, random, roomScope, settings, limits, reserved, feed::current, revocationsReady = { cfg.revocationsMode == RevocationsMode.OFF || feed.usable() }).also { it.guard = guard }   // fermé : plus de « adresse absente ⇒ prêt » (w20-04b)
     private val fallback = PlayFallbackController(cfg, hub, limits, verifier, origin)
-    private val pages = PlayPageController()
-    private val health = HealthController(cfg, hub, limits, revocations = feed::status)
+    private val pages = PlayPageController(cfg.webPlay)
+    private val health = HealthController(cfg, hub, limits, revocations = { if (cfg.revocationsMode == RevocationsMode.OFF) "disabled" else feed.status() })
     private val ticker = Ticker(cfg.tickMs) { hub.tick() }
     private val sockets = ConcurrentHashMap.newKeySet<Socket>()
     private val raw = Semaphore(cfg.maxConnections * 2)
@@ -65,6 +65,8 @@ class PlayServer(
         running = true
         // les clés de confiance ignorées (format, portées) sont DITES au démarrage, jamais perdues en silence
         trusted.warnings.forEachIndexed { i, w -> guard.log.event("play.config.warning.$i", w, level = "warn") }
+        // le mode `off` des révocations est VISIBLE : journal au démarrage, santé « disabled » (une TV révoquée peut encore créer et rejoindre)
+        if (cfg.revocationsMode == RevocationsMode.OFF) guard.log.event("play.config.revocations_off", "ATTENTION : révocations désactivées (CASTBRIDGE_PLAY_REVOCATIONS=off) : POC seulement, une TV révoquée n'est pas refusée", level = "warn")
         ticker.start()
         if (cfg.revocationsUrl != null) Thread.ofPlatform().name("play-revocations").daemon(true).start { refreshRevocations() }
         Thread.ofPlatform().name("play-accept").daemon(true).start { acceptLoop() }
@@ -102,7 +104,10 @@ class PlayServer(
         }
         val head = req.method == "HEAD"
         val p = req.path
+        // Aucun navigateur n'atteint le jeu (w20-04b) : une requête de jeu portant un `Origin` est refusée avant toute autre chose, quelle que soit la liste d'origines
+        val browser = !cfg.webPlay && p in GAME_PATHS && !req.header("origin").isNullOrBlank()
         when {
+            browser -> MiniHttp.json(out, 403, """{"error":"origine refusée"}""")
             p == "/play/ws" -> ws(req, socket, out, ip)
             p == "/play/act" -> if (req.method == "POST") fallback.act(req, out, ip) else notAllowed(out)
             p == "/play/events" -> if (req.method == "GET") fallback.events(req, socket, out) else notAllowed(out)
@@ -164,6 +169,8 @@ class PlayServer(
     }
 
     companion object {
+        private val GAME_PATHS = setOf("/play/ws", "/play/act", "/play/events", "/play/state")
+
         /** Banque du service : les questions LIBRES intégrées + les lots LIBRES `.quiz.zip` du dossier en lecture seule. Un lot `-reserved-` n'est JAMAIS lu ici (les réservées passent par `ReservedBank` et `CASTBRIDGE_PLAY_RESERVED_DIR`, gelées par `reserved-ids.json`). Un lot illisible est ignoré. */
         fun loadBank(dir: File?): QuizBank {
             var bank = EmbeddedQuestionSource(levels = null).bank()
