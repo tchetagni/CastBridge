@@ -1,0 +1,48 @@
+{
+ "format": "castbridge-ledger-vectors-v1",
+ "comment": "Vecteurs communs : potSplit (Java PotSplit et Kotlin Pot.split, ordre des joueurs = ordre d'insertion), grantSchedule (Java GrantSchedule, ancre J0 = 2026-01-01T00:00:00Z, jours entiers), conversion (Java Conversion). Une ligne par cas.",
+ "potSplit": [
+  {"name":"un seul joueur","pot":100,"scores":[["a",10]],"expect":[["a",100]]},
+  {"name":"deux joueurs 70/30","pot":100,"scores":[["a",10],["b",5]],"expect":[["a",70],["b",30]]},
+  {"name":"trois joueurs 60/30/10","pot":100,"scores":[["a",10],["b",5],["c",1]],"expect":[["a",60],["b",30],["c",10]]},
+  {"name":"ex aequo à deux","pot":100,"scores":[["a",5],["b",5]],"expect":[["a",50],["b",50]]},
+  {"name":"ex aequo à trois, reste au premier","pot":100,"scores":[["a",5],["b",5],["c",5]],"expect":[["a",34],["b",33],["c",33]]},
+  {"name":"ex aequo à trois, premier dans l'ordre d'insertion","pot":100,"scores":[["b",5],["a",5],["c",5]],"expect":[["b",34],["a",33],["c",33]]},
+  {"name":"gagnant puis ex aequo pour la 2e place","pot":100,"scores":[["a",9],["b",5],["c",5]],"expect":[["a",60],["b",20],["c",20]]},
+  {"name":"ex aequo en tête","pot":100,"scores":[["a",9],["b",9],["c",1]],"expect":[["a",45],["b",45],["c",10]]},
+  {"name":"personne n'a marqué","pot":100,"scores":[["a",0],["b",0]],"expect":[["a",0],["b",0]]},
+  {"name":"un seul marqueur sur deux","pot":100,"scores":[["a",7],["b",0]],"expect":[["a",100],["b",0]]},
+  {"name":"zéro écarté du partage","pot":100,"scores":[["a",7],["b",3],["c",0]],"expect":[["a",70],["b",30],["c",0]]},
+  {"name":"cagnotte nulle","pot":0,"scores":[["a",1],["b",2]],"expect":[["a",0],["b",0]]},
+  {"name":"reste d'arrondi au meilleur (101)","pot":101,"scores":[["a",3],["b",2],["c",1]],"expect":[["a",61],["b",30],["c",10]]},
+  {"name":"cagnotte de 1 : tout au meilleur","pot":1,"scores":[["a",3],["b",2]],"expect":[["a",1],["b",0]]},
+  {"name":"quatre joueurs, 4e sans part","pot":7,"scores":[["a",4],["b",4],["c",2],["d",1]],"expect":[["a",4],["b",3],["c",0],["d",0]]},
+  {"name":"score négatif traité comme zéro","pot":100,"scores":[["a",-3],["b",2]],"expect":[["a",0],["b",100]]},
+  {"name":"quatre joueurs distincts","pot":1000,"scores":[["a",100],["b",90],["c",80],["d",70]],"expect":[["a",600],["b",300],["c",100],["d",0]]}
+ ],
+ "grantSchedule": [
+  {"name":"essai 7 jours : une tranche","spans":[["TRIAL",0,7]],"now":7,"already":[],"expect":["NDEM:p0|NDEM=100"]},
+  {"name":"production 90 jours, à la fin : trois tranches","spans":[["PRODUCTION",0,90]],"now":90,"already":[],"expect":["NDEM:p0|NDEM=1000","MBOKO:p0|MBOKO=10","NDEM:p1|NDEM=1000","MBOKO:p1|MBOKO=10","NDEM:p2|NDEM=1000","MBOKO:p2|MBOKO=10"]},
+  {"name":"production 90 jours, au 45e jour : deux tranches","spans":[["PRODUCTION",0,90]],"now":45,"already":[],"expect":["NDEM:p0|NDEM=1000","MBOKO:p0|MBOKO=10","NDEM:p1|NDEM=1000","MBOKO:p1|MBOKO=10"]},
+  {"name":"production 365 jours : 13 tranches de 2 monnaies","spans":[["PRODUCTION",0,365]],"now":400,"already":[],"expectCount":26},
+  {"name":"illimitée : ouverture puis une tranche par période","spans":[["UNLIMITED",0,null]],"now":65,"already":[],"expect":["open-unlimited|NDEM=5000,MBOKO=50","NDEM:p0|NDEM=1000","MBOKO:p0|MBOKO=10","NDEM:p1|NDEM=1000","MBOKO:p1|MBOKO=10","NDEM:p2|NDEM=1000","MBOKO:p2|MBOKO=10"]},
+  {"name":"illimitée : tranches déjà inscrites jamais redonnées","spans":[["UNLIMITED",0,null]],"now":65,"already":["open-unlimited","NDEM:p0","MBOKO:p0"],"expect":["NDEM:p1|NDEM=1000","MBOKO:p1|MBOKO=10","NDEM:p2|NDEM=1000","MBOKO:p2|MBOKO=10"]},
+  {"name":"essai puis production : montants de production dès la première période couverte","spans":[["TRIAL",0,30],["PRODUCTION",30,120]],"now":95,"already":[],"expect":["NDEM:p0|NDEM=100","NDEM:p1|NDEM=1000","MBOKO:p1|MBOKO=10","NDEM:p2|NDEM=1000","MBOKO:p2|MBOKO=10","NDEM:p3|NDEM=1000","MBOKO:p3|MBOKO=10"]},
+  {"name":"clés superposées : une seule tranche par période","spans":[["TRIAL",0,90],["PRODUCTION",30,90]],"now":70,"already":[],"expect":["NDEM:p0|NDEM=100","NDEM:p1|NDEM=1000","MBOKO:p1|MBOKO=10","NDEM:p2|NDEM=1000","MBOKO:p2|MBOKO=10"]},
+  {"name":"TV synchronisée après trois mois hors ligne : toutes les tranches dues","spans":[["PRODUCTION",0,365]],"now":100,"already":[],"expect":["NDEM:p0|NDEM=1000","MBOKO:p0|MBOKO=10","NDEM:p1|NDEM=1000","MBOKO:p1|MBOKO=10","NDEM:p2|NDEM=1000","MBOKO:p2|MBOKO=10","NDEM:p3|NDEM=1000","MBOKO:p3|MBOKO=10"]},
+  {"name":"super administrateur : rien","spans":[["SUPER",0,null]],"now":100,"already":[],"expect":[]},
+  {"name":"aucune activation : rien","spans":[],"now":100,"already":[],"expect":[]},
+  {"name":"révocation au 45e jour : aucune tranche dont la période commence ensuite","spans":[["PRODUCTION",0,45]],"now":200,"already":[],"expect":["NDEM:p0|NDEM=1000","MBOKO:p0|MBOKO=10","NDEM:p1|NDEM=1000","MBOKO:p1|MBOKO=10"]},
+  {"name":"essai puis illimitée : ouverture une fois, meilleure édition par période","spans":[["TRIAL",0,100],["UNLIMITED",40,null]],"now":70,"already":[],"expect":["open-unlimited|NDEM=5000,MBOKO=50","NDEM:p0|NDEM=100","NDEM:p1|NDEM=100","NDEM:p2|NDEM=1000","MBOKO:p2|MBOKO=10"]}
+ ],
+ "conversion": [
+  {"name":"N vers M, taux 1000, sans frais","dir":"N2M","q":1,"rate":1000,"feeBp":0,"gross":1000,"fee":0,"net":1000},
+  {"name":"N vers M : jamais de frais dans ce sens","dir":"N2M","q":3,"rate":1000,"feeBp":150,"gross":3000,"fee":0,"net":3000},
+  {"name":"M vers N, taux 1000, sans frais (symétrie)","dir":"M2N","q":1,"rate":1000,"feeBp":0,"gross":1000,"fee":0,"net":1000},
+  {"name":"M vers N, frais 150 pb","dir":"M2N","q":1,"rate":1000,"feeBp":150,"gross":1000,"fee":15,"net":985},
+  {"name":"M vers N, frais maximal 2000 pb","dir":"M2N","q":7,"rate":1000,"feeBp":2000,"gross":7000,"fee":1400,"net":5600},
+  {"name":"M vers N, frais arrondi vers le haut (contre le joueur)","dir":"M2N","q":1,"rate":999,"feeBp":1,"gross":999,"fee":1,"net":998},
+  {"name":"M vers N, 14,985 arrondi à 15","dir":"M2N","q":3,"rate":333,"feeBp":150,"gross":999,"fee":15,"net":984},
+  {"name":"N vers M, taux 1","dir":"N2M","q":2,"rate":1,"feeBp":0,"gross":2,"fee":0,"net":2}
+ ]
+}
