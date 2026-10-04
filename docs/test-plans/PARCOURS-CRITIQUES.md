@@ -165,6 +165,7 @@ Lecture seule, le strict nécessaire à la génération d'une clé : code, k, em
 | **H** (humain) | P-01, P-02, P-03, P-04, P-06, P-07, P-11, P-12, P-13, P-16, P-18, P-20, P-25, P-26, P-27, P-28, P-31, P-33, P-34, P-35 | 20 (dont **12** retenus dans la liste humaine de 15 min) |
 
 **Ce que le JVM ne prouve jamais** (et qui reste humain) : le Bluetooth RFCOMM réel du S21+, GaiaOS 32 bits (libVLC, `startForeground`, économie d'énergie au boot), la clé USB exFAT/FAT32 réelle, les dialogues de permission de Samsung, la lisibilité à 3 m. **Ce que l'émulateur ne prouve pas** : le 32 bits (AVD arm64 ⇒ tranche `arm64-v8a` de l'APK), le Bluetooth (absent de l'émulateur : le harnais rejoue le HELLO par TCP sur `FakeTvMain`), la vraie box avec isolation des clients.
+| **P-64** | **Accueil du Quiz** : l'accueil garde l'ancien aspect (cartes de 300 dp, 2 par ligne) avec ou sans la carte « Partie Internet » | TV GaiaOS 720p ; réglage « Partie Internet » masqué, puis actif | (a) ouvrir le Quiz ; (b) activer « Partie Internet » et rouvrir ; (c) parcourir avec les flèches | aucun mot coupé en lettres, aucune carte hors écran ; masquée : 2 + 2 + 1 ; active : 2 + 2 + 2 avec « Partie Internet » puis « Quitter » ; GAUCHE/DROITE ne bouclent pas, HAUT/BAS gardent la colonne | focus sur la même carte au retour d'un sous-écran | S2 | JVM (`QuizHomeLayoutTest`), TV réelle | - |
 
 ## Limites connues du harnais JVM (audit Opus de 06c4150, corrigé par `fix-journey-harness`)
 
