@@ -165,6 +165,47 @@ class OrdersApiTest extends ApiTestBase {
         assertEquals(0, jdbc.queryForObject("select count(*) from order_msg where state = 'QUEUED'", Integer.class));
     }
 
+    @Autowired castbridge.server.orders.OrderService orders;
+
+    /** Service-level race: many threads release the same held orders at once, from an EMPTY counter table. Each order is signed exactly once, numbers are exactly 1..N (none burned). */
+    @Test
+    void concurrentReleasesSignEachHeldOrderOnceWithContiguousNumbers() throws Exception {
+        int n = 12, threads = 8;
+        for (int i = 0; i < n; i++) create("any", null, "rights.refresh", "{\"reason\":\"c%d\"}".formatted(i), true, i % 3);
+        var start = new java.util.concurrent.CountDownLatch(1);
+        var pool = java.util.concurrent.Executors.newFixedThreadPool(threads);
+        var futures = new java.util.ArrayList<java.util.concurrent.Future<Integer>>();
+        for (int i = 0; i < threads; i++) futures.add(pool.submit(() -> { start.await(); return orders.release("test"); }));
+        start.countDown();
+        int released = 0;
+        for (var f : futures) released += f.get(60, java.util.concurrent.TimeUnit.SECONDS);
+        pool.shutdown();
+        assertEquals(n, released, "each held order is released by exactly one call");
+        assertEquals(0, jdbc.queryForObject("select count(*) from order_msg where state = 'QUEUED'", Integer.class));
+        assertEquals(java.util.List.of(), jdbc.queryForList("select seq from order_msg group by seq having count(*) > 1", Long.class));
+        assertEquals(1L, jdbc.queryForObject("select min(seq) from order_msg", Long.class));
+        assertEquals((long) n, jdbc.queryForObject("select max(seq) from order_msg", Long.class), "no number burned");
+        assertEquals((long) n, jdbc.queryForObject("select last_seq from order_key_seq", Long.class));
+        assertEquals(n, jdbc.queryForObject("select count(*) from order_audit where event = 'ORDER_RELEASED'", Integer.class));
+    }
+
+    /** Creation with immediate release from several threads: all committed, all released, numbers 1..N without duplicate. */
+    @Test
+    void concurrentCreateAndReleaseNeverDuplicateNumbers() throws Exception {
+        int n = 10;
+        var start = new java.util.concurrent.CountDownLatch(1);
+        var pool = java.util.concurrent.Executors.newFixedThreadPool(5);
+        var futures = new java.util.ArrayList<java.util.concurrent.Future<?>>();
+        for (int i = 0; i < n; i++) { int k = i; futures.add(pool.submit(() -> { start.await(); return create("any", null, "rights.refresh", "{\"reason\":\"d%d\"}".formatted(k), false, 0); })); }
+        start.countDown();
+        for (var f : futures) f.get(60, java.util.concurrent.TimeUnit.SECONDS);
+        pool.shutdown();
+        assertEquals(0, jdbc.queryForObject("select count(*) from order_msg where state = 'QUEUED'", Integer.class));
+        assertEquals(java.util.List.of(), jdbc.queryForList("select seq from order_msg group by seq having count(*) > 1", Long.class));
+        assertEquals((long) n, jdbc.queryForObject("select max(seq) from order_msg", Long.class));
+        assertEquals((long) n, jdbc.queryForObject("select last_seq from order_key_seq", Long.class));
+    }
+
     @Test
     void groupAndLicenceTargetsUseMembershipAndExpiredOrdersAreNotHanded() throws Exception {
         String p = phone("phone"); pair(p, INFO_A);

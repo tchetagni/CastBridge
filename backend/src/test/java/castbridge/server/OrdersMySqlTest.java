@@ -23,13 +23,5 @@ class OrdersMySqlTest extends OrdersApiTest {
         r.add("spring.datasource.username", MYSQL::getUsername);
         r.add("spring.datasource.password", MYSQL::getPassword);
     }
-
-    /**
-     * NOT part of this fix, reported: on MySQL two concurrent releases deadlock (InnoDB: "insert ... select ... where not exists" on order_key_seq takes a gap lock, then
-     * "select ... for update"), the loser answers 500 and a retry works. H2 does not show it. To be fixed in OrderService.release by its owner.
-     */
-    @Override
-    @org.junit.jupiter.api.Disabled("known MySQL deadlock in OrderService.release, outside w23-01 (see docs/agent-reports/sonnet-w23-01.md)")
-    @org.junit.jupiter.api.Test
-    void sequenceNumbersNeverRepeatEvenUnderConcurrentReleases() throws Exception { /* disabled */ }
+    // The concurrent-release tests inherited from OrdersApiTest now run here too (OrderService.release: counter row created before the transaction, locked first, bounded retry).
 }

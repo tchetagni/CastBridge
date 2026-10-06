@@ -22,7 +22,10 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.PlatformTransactionManager;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.transaction.support.TransactionSynchronizationManager;
+import org.springframework.transaction.support.TransactionTemplate;
 
 /**
  * The server's queue of deferred orders (docs/ORDRES.md § Serveur): targeted, signed (envelope cbx1, type `order`, key scope `policy`), handed to the phone that carries them to the TV,
@@ -45,14 +48,17 @@ public class OrderService {
     private final java.time.Clock clock;
     private final SecureRandom random = new SecureRandom();
     private final Object auditLock = new Object();
+    private final TransactionTemplate tx;
+    /** Bounded retries of a release that lost a lock race (InnoDB deadlock victim / lock wait timeout). */
+    static final int RELEASE_ATTEMPTS = 3;
 
     @org.springframework.beans.factory.annotation.Autowired
-    public OrderService(JdbcTemplate jdbc, OrderSigner signer, ObjectMapper json, @Value("${castbridge.orders.enabled:false}") boolean enabled) {
-        this(jdbc, signer, json, enabled, java.time.Clock.systemUTC());
+    public OrderService(JdbcTemplate jdbc, OrderSigner signer, ObjectMapper json, @Value("${castbridge.orders.enabled:false}") boolean enabled, PlatformTransactionManager tm) {
+        this(jdbc, signer, json, enabled, java.time.Clock.systemUTC(), tm);
     }
 
-    public OrderService(JdbcTemplate jdbc, OrderSigner signer, ObjectMapper json, boolean enabled, java.time.Clock clock) {
-        this.jdbc = jdbc; this.signer = signer; this.json = json; this.enabled = enabled; this.clock = clock;
+    public OrderService(JdbcTemplate jdbc, OrderSigner signer, ObjectMapper json, boolean enabled, java.time.Clock clock, PlatformTransactionManager tm) {
+        this.jdbc = jdbc; this.signer = signer; this.json = json; this.enabled = enabled; this.clock = clock; this.tx = new TransactionTemplate(tm);
     }
 
     /** Feature switch: off by default (docs/ORDRES.md § Déploiement). Off = device routes answer 404 and nothing is created or signed. */
@@ -66,9 +72,15 @@ public class OrderService {
 
     public record NewOrder(String targetKind, String targetValue, String action, Map<String, String> params, int priority, Integer expiresInHours, boolean hold) {}
 
-    @Transactional
+    /** The order is committed first (own short transaction), then released outside it so the release can be retried on a lock conflict. */
     public long create(NewOrder o, String actor) {
         requireOn();
+        Long id = tx.execute(st -> insertOrder(o, actor));
+        if (!o.hold()) release(actor);
+        return id;
+    }
+
+    private long insertOrder(NewOrder o, String actor) {
         Map<String, String> params = o.params() == null ? Map.of() : new TreeMap<>(o.params());
         String why = PolicyCatalog.check(o.action(), params, now().toEpochMilli());
         if (why != null) throw ApiException.badRequest(why);
@@ -93,23 +105,44 @@ public class OrderService {
                 kind, value, o.action(), paramsJson, o.priority(), ts(n), actor, ts(n.plusSeconds(hours * 3600)));
         long id = jdbc.queryForObject("select max(id) from order_msg", Long.class);
         audit("ORDER_CREATED", id, null, actor, o.action() + " → " + kind + (value == null ? "" : ":" + value));
-        if (!o.hold()) release(actor);
         return id;
     }
 
     /**
      * Signs every held order, highest priority first then oldest, giving each the next sequence number of the key (the TV demands STRICTLY increasing numbers per key: the order of
-     * signing IS the order of application). The sequence counter row is locked for the whole release, so two releases never hand out the same number.
+     * signing IS the order of application). All or nothing, one transaction. Lock protocol (deadlock-free on InnoDB): (1) the counter row is guaranteed to exist BEFORE the
+     * transaction, in its own autocommit statement, so the gap lock of an insert is never held while waiting for another lock; (2) inside the transaction the ONLY lock taken
+     * first is "select ... for update" on that existing row (a record lock, no gap); (3) the queue is read AFTER that lock, so a release that waited sees what the previous one
+     * committed and never signs an order twice nor burns numbers. A release that still loses a lock race is retried (at most {@link #RELEASE_ATTEMPTS} attempts).
+     * Called inside an outer transaction no retry is possible (that transaction would be doomed): it is joined as is.
      */
-    @Transactional
     public int release(String actor) {
         requireOn();
+        String kid = signer.keyId();
+        boolean outer = TransactionSynchronizationManager.isActualTransactionActive();
+        for (int attempt = 1; ; attempt++) {
+            try {
+                ensureSeqRow(kid);
+                Integer n = tx.execute(st -> releaseLocked(actor, kid));
+                return n == null ? 0 : n;
+            } catch (org.springframework.dao.CannotAcquireLockException | org.springframework.dao.DeadlockLoserDataAccessException e) {
+                if (outer || attempt >= RELEASE_ATTEMPTS) throw e;
+                try { Thread.sleep(20L * attempt + random.nextInt(30)); } catch (InterruptedException ie) { Thread.currentThread().interrupt(); throw e; }
+            }
+        }
+    }
+
+    /** Idempotent: makes sure the counter row of the key exists. Plain read first (no lock); insert only when missing, a lost race on the primary key is fine. */
+    private void ensureSeqRow(String kid) {
+        if (jdbc.queryForObject("select count(*) from order_key_seq where kid = ?", Integer.class, kid) > 0) return;
+        try { jdbc.update("insert into order_key_seq (kid, last_seq) values (?, 0)", kid); }
+        catch (org.springframework.dao.DuplicateKeyException e) { /* another release created it first */ }
+    }
+
+    private int releaseLocked(String actor, String kid) {
+        long seq = jdbc.queryForObject("select last_seq from order_key_seq where kid = ? for update", Long.class, kid);
         List<Map<String, Object>> queued = jdbc.queryForList("select * from order_msg where state = 'QUEUED' order by priority desc, id asc");
         if (queued.isEmpty()) return 0;
-        String kid = signer.keyId();
-        try { jdbc.update("insert into order_key_seq (kid, last_seq) select ?, 0 where not exists (select 1 from order_key_seq where kid = ?)", kid, kid); }
-        catch (org.springframework.dao.DuplicateKeyException e) { /* another release created the row first: it is locked below */ }
-        long seq = jdbc.queryForObject("select last_seq from order_key_seq where kid = ? for update", Long.class, kid);
         for (Map<String, Object> q : queued) {
             seq++;
             long id = ((Number) q.get("id")).longValue();
