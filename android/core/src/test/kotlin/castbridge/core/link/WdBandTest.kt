@@ -9,6 +9,13 @@ class WdBandTest {
         assertEquals(WdBand.Band.AUTO, WdBand.first(28))
     }
 
+    @Test fun aTvWithoutA5GhzRadioOrARememberedFailureNeverTries5Ghz() {
+        assertEquals(WdBand.Band.AUTO, WdBand.first(34, radio5GHz = false))
+        assertEquals(WdBand.Band.AUTO, WdBand.first(34, radio5GHz = true, failedBefore = true))
+        assertEquals(WdBand.Band.GHZ5, WdBand.first(34, radio5GHz = null), "unknown radio: try, the fallback covers a refusal")
+        assertEquals(WdBand.Band.GHZ5, WdBand.first(34, radio5GHz = true))
+    }
+
     @Test fun aRefused5GhzGroupIsRetriedOnTheAutomaticBandOnce() {
         assertEquals(WdBand.Band.AUTO, WdBand.retry(WdBand.Band.GHZ5, 0))
         assertEquals(WdBand.Band.AUTO, WdBand.retry(WdBand.Band.GHZ5, 3))

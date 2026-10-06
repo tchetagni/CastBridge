@@ -12,8 +12,13 @@ object WdBand {
     const val REASON_UNSUPPORTED = 1
     const val REASON_BUSY = 2
 
-    /** `setGroupOperatingBand` exists from API 29; below that only the automatic band is possible. */
-    fun first(sdk: Int): Band = if (sdk >= 29) Band.GHZ5 else Band.AUTO
+    /**
+     * `setGroupOperatingBand` exists from API 29; below that only the automatic band is possible. Not every TV has a 5 GHz radio
+     * (owner, 2026-10-06): [radio5GHz] = what Android says of the Wi-Fi card (null = unknown, treated as possible), [failedBefore] = a
+     * 5 GHz group was already refused on this TV (remembered): then no attempt at all, the automatic band at once.
+     */
+    fun first(sdk: Int, radio5GHz: Boolean? = null, failedBefore: Boolean = false): Band =
+        if (sdk >= 29 && radio5GHz != false && !failedBefore) Band.GHZ5 else Band.AUTO
 
     /**
      * After a failed createGroup with [tried]: the band to retry with, or null to give up. Only a 5 GHz attempt is retried, and
