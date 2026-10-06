@@ -28,6 +28,8 @@ class LicenceVectorsTest extends LicenseTestBase {
         }
     }
 
+    private static final java.util.Set<String> CLOSED_TRANSFER_VECTORS = java.util.Set.of("lic-transfer-ok", "lic-transfer-cap", "lic-transfer-next-year");
+
     private static Map<DeviceIdentity.Factor, String> fp(JsonNode device) {
         Map<DeviceIdentity.Factor, String> m = new EnumMap<>(DeviceIdentity.Factor.class);
         device.get("fingerprints").fields().forEachRemaining(e -> m.put(DeviceIdentity.Factor.valueOf(e.getKey()), e.getValue().asText()));
@@ -44,6 +46,9 @@ class LicenceVectorsTest extends LicenseTestBase {
             if (!c.get("type").asText().equals("licence")) continue;
             n++;
             String id = c.get("id").asText();
+            // DELIBERATE deviation from the shared format (owner decision 2026-10-06): the server closes every transfer to other hardware (TRANSFER_CLOSED), so these three
+            // vectors (a transfer to another device is applied) do not hold on the server; the closed outcome is tested in LedgerTest. The vectors stay untouched (shared with the Android tools).
+            if (CLOSED_TRANSFER_VECTORS.contains(id)) continue;
             reset();
             ObjectNode root = json.createObjectNode();
             root.put("format", LedgerService.FORMAT);

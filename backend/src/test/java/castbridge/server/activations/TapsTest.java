@@ -101,7 +101,7 @@ class TapsTest extends ActTestBase {
 
     @Test
     void aRegistryImportBecomesEventsAndDeclaresTheActivationWhenItsTokenArrives() throws Exception {
-        Dev d = dev(), moved = dev();
+        Dev d = dev(), moved = d; // transfers to other hardware are closed (2026-10-06): the registry transfer targets the same hardware
         String license = "lic-regimp0001";
         long at = System.currentTimeMillis() - 3_600_000L;
         String nonce = rnd32().substring(0, 16);

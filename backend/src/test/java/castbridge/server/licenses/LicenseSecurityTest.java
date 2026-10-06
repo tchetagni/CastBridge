@@ -160,7 +160,7 @@ class LicenseSecurityTest extends LicenseTestBase {
         Dev t1 = dev(), t2 = dev(), t3 = dev();
         String seat = seatOf(tr, t1);
         importReview(List.of(licenseEvent(DESKTOP, now - 6 * 86_400_000L, tr, 2, 2), issueEvent(DESKTOP, now - 5 * 86_400_000L, tr, seat, "tv", "production", t1, nonce()),
-                transferEvent(DESKTOP, now - 4 * 86_400_000L, tr, seat, t2, nonce()), transferEvent(PHONE, now - 3 * 86_400_000L, tr, seat, t3, nonce())));
+                transferEvent(DESKTOP, now - 4 * 86_400_000L, tr, seat, t1, nonce()), transferEvent(PHONE, now - 3 * 86_400_000L, tr, seat, t1, nonce())));
         // 5. a quota overflow waiting for a decision
         String over = "lic-" + Long.toString(RND.nextLong() & 0xffffffL, 36);
         importReview(List.of(licenseEvent(DESKTOP, now - 3 * 86_400_000L, over, 1, 2), issueEvent(DESKTOP, now - 2 * 86_400_000L, over, "1111111111111111", "tv", "production", dev(), nonce()),

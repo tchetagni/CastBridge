@@ -335,6 +335,8 @@ public class LedgerService {
         var factors = e.factors();
         String deviceCode = DeviceIdentity.code(factors);
         LicenseService.SeatRow seat = seatOf(l.id(), seatId);
+        // a seat never changes TV (owner decision 2026-10-06): an event naming an existing seat (active or released) for other hardware is refused, even forced
+        if (seat != null && !sameHardware(seat, factors, deviceCode)) return Result.rejected("SEAT_BOUND_TO_OTHER_DEVICE");
         if (seat != null && seat.state().equals("ACTIVE")) {
             jdbc.update("UPDATE lic_seat SET last_seen = ? WHERE id = ? AND last_seen < ?", LicenseService.ts(at), seat.id(), LicenseService.ts(at));
             recordIssuance(l, seat.id(), seatId, deviceCode, e, f, at);
@@ -417,6 +419,12 @@ public class LedgerService {
         }
     }
 
+    /** True when the hardware presented is the one the seat is bound to: same device code, or at least k of its n factors (docs/ACTIVATION-FORMAT.md § 8.3). */
+    private static boolean sameHardware(LicenseService.SeatRow seat, Map<DeviceIdentity.Factor, String> factors, String code) {
+        if (code.equals(seat.deviceCode())) return true;
+        return DeviceIdentity.matches(DeviceIdentity.parseStored(seat.factorsText()), seat.k(), factors);
+    }
+
     private Result applyTransfer(RegistryEvent e, long importId, boolean force, boolean auto) {
         Map<String, String> f = e.fields();
         String lic = f.get("license"), seatId = f.get("seat");
@@ -429,6 +437,8 @@ public class LedgerService {
         LicenseService.SeatRow seat = seatOf(l.id(), seatId);
         if (seat == null) return auto ? Result.rejected("UNKNOWN_LICENSE") : Result.conflict("UNKNOWN_LICENSE", "Poste inconnu dans la licence " + lic + " : « " + seatId + " »", null);
         long at = e.at();
+        // closed (owner decision 2026-10-06): no seat changes TV. Only a transfer to the SAME hardware (k of n factors, e.g. a replaced module) can pass, and then the cap applies; never forced
+        if (!sameHardware(seat, e.factors(), DeviceIdentity.code(e.factors()))) return Result.rejected("TRANSFER_CLOSED");
         if (!force) {
             int count = jdbc.queryForObject("SELECT COUNT(*) FROM lic_transfer WHERE license_pk = ? AND accepted = TRUE AND at > ? AND at <= ?", Integer.class, l.id(),
                     LicenseService.ts(Instant.ofEpochMilli(at - YEAR_MS)), LicenseService.ts(Instant.ofEpochMilli(at)));

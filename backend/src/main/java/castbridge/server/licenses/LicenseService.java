@@ -524,7 +524,10 @@ public class LicenseService {
                         l.id(), seatId, subject, device.code(), device.factorsText(), device.k(), slot, ts(seenAt), ts(seenAt));
                 return new SeatResult(jdbc.query("SELECT * FROM lic_seat WHERE license_pk = ? AND seat_id = ?", (rs, i) -> seat(rs), l.id(), seatId).get(0), SeatOutcome.CREATED);
             }
-            // a released seat of the same hardware comes back (it takes a free slot again)
+            // a released seat of the same hardware comes back (it takes a free slot again); never on another device (owner decision 2026-10-06: no seat changes TV)
+            if (!device.code().equals(same.get(0).deviceCode())) {
+                throw ApiException.conflict("Ce poste libéré est lié à un autre appareil : il ne peut être réactivé que sur le même appareil (un poste ne change pas de téléviseur)");
+            }
             jdbc.update("UPDATE lic_seat SET state = 'ACTIVE', slot_no = ?, released_at = NULL, released_reason = NULL, last_seen = ?, device_code = ?, factors = ?, k = ?, anonymized = FALSE WHERE id = ?",
                     slot, ts(seenAt), device.code(), device.factorsText(), device.k(), same.get(0).id());
             return new SeatResult(jdbc.query("SELECT * FROM lic_seat WHERE id = ?", (rs, i) -> seat(rs), same.get(0).id()).get(0), SeatOutcome.REACTIVATED);
