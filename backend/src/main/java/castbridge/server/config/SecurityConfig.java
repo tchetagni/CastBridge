@@ -83,6 +83,28 @@ public class SecurityConfig {
         return http.build();
     }
 
+    /** Public user guide ({@code /guide/**}): read-only, no authentication, stateless, no cookie; the controller sets the cache headers. */
+    @Bean
+    @Order(0)
+    SecurityFilterChain guideChain(HttpSecurity http) throws Exception {
+        http
+                .securityMatcher("/guide", "/guide/**")
+                .csrf(AbstractHttpConfigurer::disable)
+                .httpBasic(AbstractHttpConfigurer::disable)
+                .formLogin(AbstractHttpConfigurer::disable)
+                .logout(AbstractHttpConfigurer::disable)
+                .requestCache(AbstractHttpConfigurer::disable)
+                .sessionManagement(s -> s.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
+                .cors(c -> c.configurationSource(closedCors()))
+                .authorizeHttpRequests(a -> a.anyRequest().permitAll())
+                .headers(h -> h
+                        .cacheControl(c -> c.disable())
+                        .contentSecurityPolicy(csp -> csp.policyDirectives(castbridge.server.guide.GuideController.CSP))
+                        .referrerPolicy(r -> r.policy(ReferrerPolicyHeaderWriter.ReferrerPolicy.NO_REFERRER))
+                        .frameOptions(f -> f.deny()));
+        return http.build();
+    }
+
     @Bean
     @Order(2)
     SecurityFilterChain webChain(HttpSecurity http) throws Exception {

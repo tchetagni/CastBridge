@@ -375,3 +375,7 @@ Démarrage automatique après redémarrage de la TV (signal de démarrage sur Ga
 - **Conceptions** : W18 (Wi-Fi Direct principal), W19 (symbiose/reprise), W20 (en ligne), W21 (`docs/coordination/DESIGN-W21-DONNEES-TECHNIQUES-POC-2026-10-04.md`, collecte/analyse des données techniques du POC, 10 cahiers), W22 (jetons NDEM/MBOKO : en cours ; conversion libre à la demande du joueur ; juridique ignoré jusqu'au 2027-01-01 ; test de faisabilité technique d'abord).
 - **Chantiers en cours** : 8 téléphones max par TV (branche claude/tv-phones-max8, audit Opus à suivre).
 - **Politique modèles** : Fable = tâches les plus complexes ; Opus privilégié conception/audit ; Sonnet 5.5 rare ; Haiku mécanique (voir mémoire feedback-model-roles).
+
+## Guide utilisateur en ligne (2026-10-07)
+
+- Le serveur sert le guide en page libre `https://bridge.sti-cm.com/guide/` (`GuideController`, chaîne de sécurité publique `/guide/**`, dossier `/data/apk/guide`). Code prêt, **à déployer** (`deploy-server.sh`) puis à publier à la main : `docs/GUIDE-PUBLICATION.md`. Aucune route existante modifiée.
