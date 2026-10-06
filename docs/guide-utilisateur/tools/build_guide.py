@@ -153,6 +153,81 @@ def svg_activation():
                                               for i, (s, c) in enumerate(zip([p1, p2, p3], caps))) + '</div>')
 
 
+def trio(items, cls="quad tri"):
+    return ('<div class="%s">' % cls + "".join('<div class="q"><span class="qn">%d</span>%s<p>%s</p></div>' % (i + 1, sv, esc(c))
+                                              for i, (sv, c) in enumerate(items)) + '</div>')
+
+
+def svg_activation_wifi():
+    p1 = svg(150, 100, tv(14, 8, 122, 66) + txt(75, 28, "Par le Wi-Fi", 10) + txt(75, 44, "code de connexion", 9) +
+             txt(75, 62, "482915 · TV 192.168.1.20", 8, "middle", "tx b"), "La TV verrouillée affiche son code de connexion")
+    p2 = svg(150, 100, phone(14, 8, 40, 80) + wifi(75, 40, 16) + tv(88, 18, 56, 36) +
+             '<rect x="90" y="62" width="52" height="16" rx="8" class="fa"/>' + txt(116, 74, "Ma TV", 9), "Le téléphone trouve la TV sur le Wi-Fi")
+    p3 = svg(150, 100, phone(14, 8, 40, 80) + tv(76, 14, 64, 40) + arrow(56, 40, 74, 36) +
+             '<rect x="26" y="30" width="16" height="12" rx="3" class="fa"/>' + '<path d="M92 34 l6 6 l12 -14" class="ln ok"/>' + txt(108, 80, "Activée", 11),
+             "Le code de connexion active la TV")
+    return trio([(p1, "La TV affiche « Par le Wi-Fi : code de connexion »."),
+                 (p2, "Sur le téléphone, « Activer la TV » : touchez votre TV."),
+                 (p3, "Tapez le code de connexion : la TV s'active.")])
+
+
+def svg_usb_picker():
+    p1 = svg(150, 100, '<rect x="14" y="8" width="122" height="84" rx="6" class="st"/><rect x="14" y="8" width="122" height="14" rx="6" class="fl"/>'
+             + '<rect x="22" y="30" width="12" height="12" rx="2" class="fa"/>' + txt(40, 40, "notes.txt", 10, "start")
+             + '<rect x="22" y="50" width="12" height="12" rx="2" class="fa"/>' + txt(40, 60, "activation", 10, "start")
+             + '<rect x="22" y="70" width="12" height="12" rx="2" class="fa"/>' + txt(40, 80, "photo.jpg", 10, "start"),
+             "L'explorateur de la TV liste tous les fichiers")
+    p2 = svg(150, 100, '<rect x="14" y="8" width="122" height="84" rx="6" class="st"/><rect x="22" y="30" width="106" height="16" rx="4" class="st" style="stroke:var(--hl)"/>'
+             + txt(32, 42, "activation", 10, "start") + txt(75, 70, "La clé est cherchée", 10) + txt(75, 84, "dans le fichier", 10), "La clé est cherchée dans le fichier choisi")
+    return trio([(p1, "L'explorateur de la TV liste tous les fichiers."),
+                 (p2, "Touchez votre fichier : la clé peut être n'importe où.")], "quad")
+
+
+def svg_code_box():
+    b = ('<rect x="10" y="6" width="180" height="108" rx="10" class="st"/>' + txt(100, 26, "La TV ne reconnaît plus ce téléphone", 9, "middle", "tx b")
+         + '<rect x="24" y="36" width="152" height="26" rx="6" class="st"/>' + txt(32, 53, "Code affiché sur la TV", 10, "start")
+         + '<text x="168" y="54" font-size="14" text-anchor="end" class="tx">••••••</text>'
+         + '<rect x="40" y="74" width="120" height="28" rx="14" class="fa"/>'
+         + '<text x="100" y="92" font-size="12" text-anchor="middle" fill="#1b2540" font-weight="700">Valider et envoyer</text>')
+    return svg(200, 120, b, "Boîte d'envoi avec le champ Code affiché sur la TV")
+
+
+def svg_progress():
+    b = ('<rect x="10" y="8" width="200" height="90" rx="10" class="st"/>' + txt(110, 28, "Film.mp4", 11, "middle", "tx b")
+         + '<rect x="24" y="38" width="172" height="10" rx="5" class="st"/><rect x="24" y="38" width="124" height="10" rx="5" class="fa"/>'
+         + '<rect x="24" y="38" width="104" height="10" rx="5" class="fl"/>'
+         + txt(24, 66, "74 % envoyés · 60 % confirmés", 10, "start") + txt(24, 84, "Wi-Fi de la TV lent : ~300 Ko/s · ~20 min restantes", 8, "start", "tx b"))
+    return svg(220, 106, b, "Copie : envoyés, confirmés et Wi-Fi de la TV lent")
+
+
+def svg_stop_cause():
+    b = (tv(20, 10, 80, 52) + '<path d="M50 28 l20 20 M70 28 l-20 20" class="ln er"/>' + phone(116, 12, 32, 60)
+         + txt(75, 100, "Copie arrêtée : la cause est dite", 10))
+    return svg(160, 108, b, "Une copie impossible s'arrête avec sa cause")
+
+
+def svg_remote():
+    b = ('<rect x="50" y="4" width="60" height="132" rx="18" class="st"/><circle cx="80" cy="46" r="20" class="st"/>'
+         '<circle cx="80" cy="46" r="8" class="fa"/>' + txt(80, 50, "OK", 8, "middle", "tx b") +
+         '<path d="M80 22 l-5 6 h10 z M80 70 l-5 -6 h10 z M56 46 l6 -5 v10 z M104 46 l-6 -5 v10 z" class="fl"/>'
+         '<rect x="58" y="80" width="20" height="14" rx="6" class="st"/><text x="68" y="91" font-size="8" text-anchor="middle" class="tx">|◀◀</text>'
+         '<rect x="82" y="80" width="20" height="14" rx="6" class="st"/><text x="92" y="91" font-size="8" text-anchor="middle" class="tx">▶▶|</text>'
+         '<rect x="58" y="102" width="44" height="14" rx="7" class="st"/>' + txt(80, 112, "Retour", 8))
+    return svg(160, 140, b, "Télécommande : pavé, OK, retour, boutons de saut")
+
+
+def svg_wd5():
+    b = tv(20, 14, 70, 44) + phone(112, 10, 30, 56) + wifi(80, 84, 20) + txt(80, 106, "Wi-Fi Direct : 5 GHz", 11, "middle", "tx b")
+    return svg(160, 114, b, "Wi-Fi Direct entre la TV et le téléphone")
+
+
+def svg_menu_bg():
+    b = ('<rect x="14" y="8" width="132" height="84" rx="8" class="st"/>' + txt(80, 26, "MENU", 10, "middle", "tx b")
+         + '<rect x="24" y="36" width="112" height="30" rx="6" class="st" style="stroke:var(--hl)"/>'
+         + txt(80, 48, "Autoriser CastBridge-TV", 8) + txt(80, 60, "à rester actif en arrière-plan", 8))
+    return svg(160, 100, b, "Ligne du MENU pour rester actif en arrière-plan")
+
+
 def svg_decision():
     cards = [
         ("Copier sur la TV et lire", "Je regarde tout de suite et je garde le fichier.",
@@ -194,6 +269,20 @@ def svg_case(kind):
     if kind == "help":
         b = '<circle cx="75" cy="44" r="32" class="st"/><text x="75" y="58" font-size="40" text-anchor="middle" class="tx b">?</text>'
         return svg(150, 90, b, "Demander de l'aide")
+    if kind == "code":
+        return svg_code_box()
+    if kind == "slow":
+        return svg_progress()
+    if kind == "stop":
+        return svg_stop_cause()
+    if kind == "reboot":
+        b = tv(20, 10, 80, 52) + '<path d="M60 26 a12 12 0 1 1 -10 6" class="ln ac"/><path d="M46 24 l4 10 l-10 0" class="ln ac"/>' + txt(75, 96, "La TV repart seule", 10)
+        return svg(150, 104, b, "La TV redémarre")
+    if kind == "bg":
+        return svg_menu_bg()
+    if kind == "telegram":
+        b = phone(50, 6, 50, 88) + '<path d="M62 30 l26 10 l-26 10 l6 -10 z" class="fa"/>' + txt(75, 104, "Repartagez le fichier", 10)
+        return svg(150, 110, b, "Partager à nouveau le fichier")
     raise KeyError(kind)
 
 
@@ -238,11 +327,15 @@ def build_body():
     B.append('<section id="installer"><h2><span>2</span>Installer et activer</h2>'
              '<h3>Sur le téléphone</h3>' + grid(s2, "ph") +
              '<h3>Sur la TV : installer depuis une clé USB</h3>' + svg_tv_install() +
-             '<h3>Activer la TV</h3>' + svg_activation() +
+             '<h3>Activer la TV : par le Wi-Fi, en premier</h3>' + svg_activation_wifi() +
+             '<p class="note c">Pas de Wi-Fi commun ? Le Bluetooth prend le relais.</p>' +
+             '<h3>Activer la TV : avec un code d\'appareil</h3>' + svg_activation() +
              grid([step("2.3", "telephone-activer-la-tv", ["conditions", "etapes"],
                         "Lisez les conditions, puis collez la clé d'activation reçue.",
                         "Écran Activer la TV du téléphone",
-                        note="Autre voie : copier le fichier « activation » dans Download/CastBridge d'une clé USB branchée sur la TV.")], "ph") +
+                        note="Autre voie : le fichier « activation » sur une clé USB branchée sur la TV.")], "ph") +
+             '<h3>Activer la TV : avec une clé USB</h3>' + svg_usb_picker() +
+             '<p class="note c">La clé peut être n\'importe où dans le fichier.</p>' +
              '<aside class="box"><h4>Si votre agent vous a remis une location…</h4>'
              '<p>Ouvrez « Activer la TV », puis « Locations ».</p>' +
              grid([step("2.4", "telephone-locations", ["choisir", "loc", "envoyer"],
@@ -277,7 +370,8 @@ def build_body():
     ]
     B.append('<section id="relier"><h2><span>3</span>Relier le téléphone à la TV</h2>' + grid(intro[:2], "ph") + grid(intro[2:], "tv") +
              '<h3>Voie A : Bluetooth, sans code</h3>' + grid(wayA[:3], "tv") + grid(wayA[3:], "ph") +
-             '<h3>Voie B : avec le code de la TV</h3>' + grid(wayB[:2], "tv") + grid(wayB[2:], "ph") + '</section>')
+             '<h3>Voie B : avec le code de la TV</h3>' + grid(wayB[:2], "tv") + grid(wayB[2:], "ph") +
+             '<h3>Wi-Fi Direct</h3>' + grid([drawn("3.15", svg_wd5(), "En Wi-Fi Direct, la TV demande la 5 GHz si possible.")], "ph") + '</section>')
     # 4 -------------------------------------------------------------------
     s4 = [
         step("4.1", "telephone-sur-le-telephone", ["videos", "video"], "Dans « Sur le téléphone », touchez la vidéo à envoyer.", "Onglet Sur le téléphone"),
@@ -293,7 +387,15 @@ def build_body():
         step("4.7", "tv-lecture", [], "Touchez OK sur une vidéo : elle se lit.", "Une vidéo se lit sur la TV", cls="wide"),
     ]
     B.append('<section id="envoyer"><h2><span>4</span>Envoyer une vidéo</h2>' + grid(s4[:2], "ph") + grid(s4[2:], "land") +
-             '<h3>Quelle façon choisir ?</h3>' + svg_decision() + '<h3>Suivre l\'envoi</h3>' + grid(s4b, "tv") + '</section>')
+             '<h3>Quelle façon choisir ?</h3>' + svg_decision() + '<h3>Suivre l\'envoi</h3>' + grid(s4b, "tv") +
+             grid([drawn("4.8", svg_progress(), "La copie montre « envoyés » et « confirmés ».",
+                         note="Sur un Wi-Fi lent, la ligne le dit : débit et temps restant."),
+                   drawn("4.9", svg_stop_cause(), "Une copie impossible s'arrête, avec sa cause.")], "ph") +
+             '<h3>Quand la TV demande le code</h3>' +
+             grid([drawn("4.10", svg_code_box(), "Si la TV ne vous reconnaît plus, tapez son code.",
+                         note="Touchez « Valider et envoyer » : le code est gardé ensuite.")], "ph") +
+             '<h3>Télécommande</h3>' +
+             grid([drawn("4.11", svg_remote(), "Pavé et OK pour choisir, Retour pour revenir.", note="Pendant une vidéo : ▶▶| avance, |◀◀ recule.")], "ph") + '</section>')
     # 5 -------------------------------------------------------------------
     langs = "".join('<span class="chip">%s</span>' % t for t in ["Chinois", "anglais", "allemand", "français", "italien", "espagnol", "japonais"])
     s5a = [
@@ -337,7 +439,14 @@ def build_body():
                   "Allumez la TV, ouvrez CastBridge-TV, puis « Chercher à nouveau ».", "Boutons de recherche de la TV"),
         case_real(2, "« Le code de la TV a changé »", "telephone-adresse-manuelle", ["pin"],
                   "Saisissez à nouveau le code affiché sur la TV.", "Champ du code de la TV"),
+        case(9, "La TV ne reconnaît plus le téléphone", svg_case("code"),
+             "Tapez le code de la TV, puis « Valider et envoyer »."),
         case(3, "La copie n'avance pas", svg_case("tvoff"), "TV éteinte : les fichiers attendent, puis repartent."),
+        case(10, "La copie est lente", svg_case("slow"), "« Wi-Fi de la TV lent » : rapprochez la TV de la box."),
+        case(11, "La copie s'est arrêtée", svg_case("stop"), "Lisez la cause affichée, puis relancez la copie."),
+        case(12, "La TV ne répond plus", svg_case("reboot"), "Redémarrez-la : CastBridge-TV repart seule."),
+        case(13, "La TV s'endort en arrière-plan", svg_case("bg"), "Dans MENU : « Autoriser CastBridge-TV à rester actif en arrière-plan »."),
+        case(14, "Fichier partagé depuis Telegram", svg_case("telegram"), "Si CastBridge ne peut plus le lire, repartagez-le."),
         case_real(4, "La TV est pleine", "tv-cle-usb", ["ranger"], "Libérez de la place ou rangez sur une clé USB.", "Menu Clé USB de la TV"),
         case(5, "Pas de son", svg_case("mute"), "Montez le volume de la TV, puis du téléphone."),
         case(6, "Le téléphone s'endort", svg_case("sleep"), "Gardez l'écran allumé pendant « Lire en direct »."),
@@ -448,7 +557,7 @@ def main():
             '<title>Guide CastBridge</title><meta name="color-scheme" content="light dark"><style>%s%s</style></head><body>%s'
             '<div class="wrap"><header class="top"><h1>Guide CastBridge</h1><p class="sub">Envoyer vos vidéos du téléphone vers la TV. CastBridge sur le téléphone, CastBridge-TV sur la TV.</p></header>'
             '<nav class="toc" aria-label="Sommaire">%s</nav>%s'
-            '<footer>Les captures viennent d\'un émulateur avec des vidéos de test et des codes masqués. Les dessins sont signalés.</footer></div></body></html>'
+            '<footer>Les captures viennent d\'un émulateur avec des vidéos de test et des codes masqués. Les dessins sont signalés.<br>Version du guide : 2026-10-07 · CastBridge 1.2.50 · CastBridge-TV 0.14.43</footer></div></body></html>'
             % (CSS, "".join(css_imgs), DEFS, nav, body))
     open(OUTFILE, "w", encoding="utf-8").write(html)
     # numéros d'étapes dans annotations.json
