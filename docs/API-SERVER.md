@@ -116,6 +116,10 @@ curl -s $CB/api/v1/updates/public-key
 # {"algorithm":"Ed25519","format":"raw-32-bytes-base64","publicKey":"…","keyId":"9f86d081884c7d65","manifestFormat":"castbridge-update-manifest-v1"}
 ```
 
+### Guide utilisateur (page libre)
+
+`GET /guide/` sert `<castbridge.guide.dir>/index.html` (défaut `/data/apk/guide`), `GET /guide/{fichier}` un fichier à plat du dossier (html, css, js, png, jpg, webp, svg, json, txt) ; `/guide` → 301 `/guide/` ; absent → 404 texte « Guide non publié ». Sans authentification ni cookie ; `ETag`/`Last-Modified` + 304, `Cache-Control: public, max-age=300` (index) ou `86400`, CSP stricte. Publication : `docs/GUIDE-PUBLICATION.md`.
+
 ### Télécharger l'APK
 
 `GET|HEAD /dl/{app}/{fichier}` : `Accept-Ranges: bytes`, `ETag: "<sha256>"`, `Content-Length`,
