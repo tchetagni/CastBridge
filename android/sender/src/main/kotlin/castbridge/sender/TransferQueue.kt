@@ -314,6 +314,21 @@ object TransferQueue {
             }
             castbridge.core.tv.QueueOutcome.Kind.PAUSE_TIME_LIMIT -> { requeuePaused(item, QueueTexts.PAUSED_TIME_LIMIT); return }
             castbridge.core.tv.QueueOutcome.Kind.PAUSE_BACKGROUND -> { requeuePaused(item, QueueTexts.PAUSED_BACKGROUND); return }
+            // R-19: the upload stopped because the TV did not answer: never a frozen 0 %, never a dead end; the file keeps its place and is relaunched
+            // (it resumes where the TV's copy stopped) as soon as an address of the TV answers again, tries spaced 1 s, 2 s, 5 s, 10 s, then every 15 s
+            castbridge.core.tv.QueueOutcome.Kind.WAIT_FOR_TV -> {
+                _note.value = QueueTexts.WAITING_TV; publish()
+                val r = withContext(Dispatchers.IO) {
+                    castbridge.core.tv.ResumeWait.until({ tvAnswers(item) }, { paused || model.cancelAsked(item.id) }, { Thread.sleep(it) }, { System.currentTimeMillis() })
+                }
+                _note.value = null
+                when {
+                    model.cancelAsked(item.id) -> model.finishCancelled(item.id)
+                    r == castbridge.core.tv.ResumeWait.Result.GAVE_UP ->
+                        model.finish(item.id, false, CopyReport.failed(app, item, lastStep, lastPercent.takeIf { it > 0 }, reason = QueueTexts.TV_GONE))
+                    else -> { model.release(item.id); publish(); return }           // reachable again (or paused): back to its place, the runner relaunches it
+                }
+            }
             // the previous upload was still ending: back to its place, again in a moment (never a failure)
             castbridge.core.tv.QueueOutcome.Kind.RETRY_SOON -> { model.release(item.id); publish(); delay(2_000); return }
             castbridge.core.tv.QueueOutcome.Kind.FAILED -> {
@@ -462,6 +477,24 @@ object TransferQueue {
             }
         }
     }.getOrNull()
+
+    /**
+     * R-19: does an address of the file's TV answer again? The trusted link: its session (Bluetooth only counts: the relaunch goes over it) or a Wi-Fi
+     * address that answers a « hello ». A TV of that name: its typed address, the address a screen reaches it at, the last address that answered (10 min);
+     * none known: true (the upload's own discovery searches again).
+     */
+    private fun tvAnswers(item: QueueItem): Boolean {
+        val tvName = item.tvName
+        if (tvName == null) {
+            val s = (TvLinkManager.state.value as? LinkUi.Connected)?.session ?: return false
+            if (item.linkTv != null && s.tv.address != item.linkTv) return false
+            return s.base == null || UploadService.helloOk(s.base!!) || UploadService.trustedBases(s.tv.mdns ?: s.tv.name).any { UploadService.helloOk(it) }
+        }
+        val app = appForJournal ?: return true
+        val bases = (listOfNotNull(item.host?.let { h -> if (':' in h) "http://$h" else "http://$h:8765" }, UploadService.addressMemory(app).recall(tvName), UploadService.hintFor(tvName)) +
+            UploadService.trustedBases(tvName)).distinct()
+        return bases.isEmpty() || bases.any { UploadService.helloOk(it) }
+    }
 
     /** Android refused the upload service in the background: the file waits, the queue resumes when CastBridge is opened (said in French). */
     private fun requeuePaused(item: QueueItem, why: String) {

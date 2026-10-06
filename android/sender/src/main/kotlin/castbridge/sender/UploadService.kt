@@ -113,7 +113,8 @@ class UploadService : Service() {
             stopSelf(); return START_NOT_STICKY
         }
         acquireLocks()
-        val disc = if (job.manualHost == null) TvDiscovery(this).also { it.start(); discovery = it } else null
+        // R-19: always a discovery, also next to a known address (the trusted link's address at launch may change: DHCP, Wi-Fi Direct then LAN)
+        val disc = TvDiscovery(this).also { it.start(); discovery = it }
         watchNetwork(disc)
         cancelled = false
         instance = this
@@ -125,15 +126,28 @@ class UploadService : Service() {
     private fun runJob(uri: Uri, job0: Job, disc: TvDiscovery?) {
         val total = runCatching { contentResolver.openFileDescriptor(uri, "r")!!.use { it.statSize } }.getOrDefault(-1)
         if (total <= 0) { finish(State.Failed(job0, "Fichier illisible")); return }
+        runCatching { TvLinkManager.init(this) }               // R-19: the trusted link's addresses and saved TVs are read by the resolver below
         // R-18: ONE resolver (core TvEndpointResolver): manual/known address, discovery, Bluetooth gateway; the last address that answered stays valid 30 s,
         // so a discovery emptied by a network change or a lost mDNS announcement no longer turns a progressing copy into « TV introuvable »
-        val endpoints = castbridge.core.tv.TvEndpointResolver({ System.currentTimeMillis() }) {
-            // a fresh discovery first (a TV that changed address), then the typed address, the Bluetooth gateway, and the address the cast screen already talks to
-            listOf(disc?.find(job0.tvName)?.base, job0.manualHost?.let { h -> if (':' in h) "http://$h" else "http://$h:8765" },
-                disc?.find("${job0.tvName} (Bluetooth)")?.base, hints[job0.tvName])
+        // R-19: the name is matched tolerantly (Android's « (2) », the « CastBridge TV » prefix, the only TV of the network), never a TV known as another one;
+        // when no live address answers, the trusted link's Wi-Fi address (where the screen sees the TV « Connectée ») and the last address that answered
+        // (kept 10 min) are tried, each validated by a short « hello », before anything says « TV introuvable »
+        val memory = addressMemory(this)
+        val mine = TvLinkManager.savedFor(job0.tvName)
+        val otherTv: (String) -> Boolean = { n -> TvLinkManager.savedFor(n)?.let { it.address != mine?.address } == true }
+        val endpoints = castbridge.core.tv.TvEndpointResolver({ System.currentTimeMillis() },
+            fallbacks = {
+                val found = disc?.findTolerant(job0.tvName, otherTv)
+                trustedBases(job0.tvName) + listOfNotNull(found?.otherHost?.let { "http://$it" }, memory.recall(job0.tvName))
+            },
+            probe = ::helloOk) {
+            // a fresh discovery first (a TV that changed address), then the typed address, the Bluetooth gateway, and the address the screens already talk to
+            listOf(disc?.findTolerant(job0.tvName, otherTv)?.base, job0.manualHost?.let { h -> if (':' in h) "http://$h" else "http://$h:8765" },
+                disc?.find("${job0.tvName} (Bluetooth)")?.base, hintFor(job0.tvName))
         }
         val gate = castbridge.core.tv.MissingTvGate({ System.currentTimeMillis() })
-        val resolve: () -> String? = { endpoints.current()?.also { _route.value = routeOf(it.kind) }?.base }
+        val usedBase = java.util.concurrent.atomic.AtomicReference<String?>()
+        val resolve: () -> String? = { endpoints.current()?.also { _route.value = routeOf(it.kind); usedBase.set(it.base) }?.base }
         // « Rangement automatique » : the clean name is only kept if the TV is reachable and has no file of that name (never resume into another file)
         val job = castbridge.sender.agent.AgentAuto.settle(job0, resolve)
         progressiveNow = job.progressive
@@ -158,6 +172,7 @@ class UploadService : Service() {
         val onState: (ResumableUpload.State) -> Unit = { s ->
             if (s is ResumableUpload.State.Uploading) {
                 gate.progress(); endpoints.answered()            // R-18: bytes moved = the TV answers at this address
+                usedBase.get()?.let { memory.remember(job0.tvName, it) }     // R-19: kept 10 min for a queue that resumes by itself (written at most every 15 s)
                 if (first < 0) first = s.sent
                 val dt = (System.nanoTime() - t0) / 1_000_000
                 if (dt > 500) _average.value = (s.sent - first) * 1000 / dt
@@ -226,7 +241,8 @@ class UploadService : Service() {
         // R-18: a miss is retried silently (bounded), « TV introuvable » only after a real silence (no lane progressed for 10 s), and the wait ends visibly
         var gaveUp = false
         castbridge.core.tv.TvWait.until(resolve, gate, { cancelled }, { Thread.sleep(it) }, { why -> onState(ResumableUpload.State.Waiting(sent, total, why)) }, { gaveUp = true })
-        if (gaveUp) return ResumableUpload.State.Failed("La TV reste introuvable : vérifiez qu'elle est allumée, sur le même Wi-Fi, puis réessayez").also(onState)
+        // R-19: the queue puts the file back and relaunches it as soon as the TV answers again (QueueOutcome.Kind.WAIT_FOR_TV)
+        if (gaveUp) return ResumableUpload.State.Failed(castbridge.core.tv.TvWait.GAVE_UP_TEXT).also(onState)
         if (cancelled) return ResumableUpload.State.Failed("annulé")
         val pfd = runCatching { contentResolver.openFileDescriptor(uri, "r") }.getOrNull() ?: return null
         pfd.use {
@@ -307,13 +323,32 @@ class UploadService : Service() {
         override fun close() { try { super.close() } finally { pfd.close() } }
     }
 
-    /** On any network change, rediscover the TV (it may have a new address) so the upload resumes fast. */
+    /**
+     * On a network change, rediscover the TV (it may have a new address) so the upload resumes fast. R-19: the events are grouped (2 s), the call at
+     * registration restarts nothing, and the list of TVs is emptied only when the phone's address really changed ([castbridge.core.tv.NetworkChangeFilter]);
+     * the restart itself is serialized ([castbridge.core.tv.DiscoverySupervisor]).
+     */
     private fun watchNetwork(disc: TvDiscovery?) {
         val cm = getSystemService(ConnectivityManager::class.java) ?: return
+        val filter = castbridge.core.tv.NetworkChangeFilter(runCatching { netKey(cm.getLinkProperties(cm.activeNetwork)) }.getOrNull())
+        val handler = android.os.Handler(android.os.Looper.getMainLooper())
+        fun event(key: String?) {
+            filter.onEvent(System.currentTimeMillis(), key)
+            handler.postDelayed({ filter.poll(System.currentTimeMillis())?.let { d -> if (d.restart && !destroyed) disc?.restart(clear = d.clear) } }, 2_050)
+        }
         val cb = object : ConnectivityManager.NetworkCallback() {
-            override fun onAvailable(network: Network) { disc?.restart() }
+            override fun onAvailable(network: Network) { event(runCatching { netKey(cm.getLinkProperties(network)) }.getOrNull()) }
+            override fun onLinkPropertiesChanged(network: Network, lp: android.net.LinkProperties) { event(netKey(lp)) }
+            override fun onLost(network: Network) { event(null) }
         }
         runCatching { cm.registerDefaultNetworkCallback(cb); netCallback = cb }
+    }
+
+    /** The phone's identity on a network: its interface and IPv4 addresses (a new DHCP lease, another network = another key). */
+    private fun netKey(lp: android.net.LinkProperties?): String? {
+        lp ?: return null
+        val v4 = lp.linkAddresses.mapNotNull { (it.address as? java.net.Inet4Address)?.hostAddress }.sorted()
+        return "${lp.interfaceName}/${v4.joinToString(",")}"
     }
 
     private fun notifyProgress(s: ResumableUpload.State) {
@@ -420,7 +455,45 @@ class UploadService : Service() {
         @Volatile private var instance: UploadService? = null
         private val hints = java.util.concurrent.ConcurrentHashMap<String, String>()
         /** R-18: the address the cast screen already reaches the TV at (its info polls work) is a source for the upload of the same TV (memory only). */
-        fun hintBase(tvName: String, base: String) { hints[tvName] = base }
+        fun hintBase(tvName: String, base: String) { hints[castbridge.core.tv.TvNameMatch.base(tvName)] = base }
+        /** R-19: by base name, so « SMART_TV » and « SMART_TV (2) » share the address the screen reaches. */
+        fun hintFor(tvName: String): String? = hints[castbridge.core.tv.TvNameMatch.base(tvName)]
+
+        /**
+         * R-19: a screen reached the TV [tvName] at [base] (its info poll answered): the upload of that TV uses it as a source ([hintBase]) and the
+         * address is kept 10 min on disk ([castbridge.core.tv.TvAddressMemory]) for a queue that resumes by itself after the process was killed.
+         */
+        fun tvSeenAt(ctx: Context, tvName: String, base: String) {
+            hintBase(tvName, base)
+            runCatching { addressMemory(ctx).remember(tvName, base) }
+        }
+
+        @Volatile private var memoryInstance: castbridge.core.tv.TvAddressMemory? = null
+        @Synchronized fun addressMemory(ctx: Context): castbridge.core.tv.TvAddressMemory = memoryInstance ?: castbridge.core.tv.TvAddressMemory(
+            PrefsPersistence(ctx.applicationContext.getSharedPreferences("castbridge_tv_addr", Context.MODE_PRIVATE), "last"), { System.currentTimeMillis() })
+            .also { memoryInstance = it }
+
+        /** A short « hello » (GET /api/hello, 1.5 s; 10 s through the Bluetooth gateway): does a CastBridge-TV answer at [base]? Never on the main thread. */
+        fun helloOk(base: String): Boolean = runCatching {
+            val c = java.net.URL("$base/api/hello").openConnection() as java.net.HttpURLConnection
+            try {
+                val t = if (base.startsWith("http://127.0.0.1")) 10_000 else 1_500
+                c.connectTimeout = t; c.readTimeout = t
+                c.responseCode == 200 && c.inputStream.use { it.readBytes() }.decodeToString().contains("castbridge-tv")
+            } finally { c.disconnect() }
+        }.getOrDefault(false)
+
+        /**
+         * R-19: the Wi-Fi addresses of the trusted link's session when it designates the TV [tvName] (the address where the home screen shows
+         * « Connectée »), then the TV's last known addresses ([castbridge.core.trust.SavedTv.lastIps]). Empty for another TV or without a session.
+         */
+        fun trustedBases(tvName: String): List<String> {
+            val s = (TvLinkManager.state.value as? LinkUi.Connected)?.session ?: return emptyList()
+            val same = TvLinkManager.savedFor(tvName)?.address?.let { it == s.tv.address }
+                ?: (castbridge.core.tv.TvNameMatch.base(tvName) == castbridge.core.tv.TvNameMatch.base(s.tv.mdns ?: s.tv.name))
+            if (!same) return emptyList()
+            return (listOfNotNull(s.base) + s.tv.lastIps.map { "http://$it:${s.tv.port}" }).distinct()
+        }
         private val _route = MutableStateFlow<castbridge.core.ux.CopyRouteKind?>(null)
         /** R-18: the route the current upload really uses (resolver kind), for the one status line of the screen and the notification. */
         val route: StateFlow<castbridge.core.ux.CopyRouteKind?> = _route

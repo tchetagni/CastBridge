@@ -50,6 +50,10 @@ object QueueTexts {
     const val NO_TV = "TV non connectée : l'envoi n'a pas pu démarrer. Touchez « Réessayer » quand la TV est allumée."
     const val NO_CREDENTIAL = "Code de la TV inconnu : reconnectez la TV dans CastBridge, puis touchez « Réessayer »."
     const val ALREADY_THERE = "Déjà sur la TV : non recopié"
+    /** R-19: the upload stopped because the TV did not answer; the queue relaunches it by itself as soon as the TV answers ([ResumeWait]). */
+    const val WAITING_TV = "La TV ne répond pas : la copie reprendra d'elle-même dès qu'elle répond."
+    /** R-19: [ResumeWait] reached its bound (2 h) without an answer from the TV. */
+    const val TV_GONE = "La TV n'a pas répondu pendant 2 heures : touchez « Réessayer » quand elle est allumée et sur le même Wi-Fi."
     const val RESTORED = "Reprise après le redémarrage de CastBridge"
     /** Android refused to start the upload while CastBridge was in the background. */
     const val PAUSED_BACKGROUND = "En pause : Android bloque les envois quand CastBridge est en arrière-plan. Ouvrez CastBridge pour continuer la file."

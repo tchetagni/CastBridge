@@ -158,7 +158,10 @@ fun TvHome(onAdvanced: () -> Unit, onBluetooth: () -> Unit = onAdvanced) {
         var n = 0
         var linked = false
         while (client != null) {
-            val r = withContext(Dispatchers.IO) { runCatching { castbridge.core.tv.TvInfo.parse(client.info()) } }
+            val seenAs = session?.tv?.let { it.mdns ?: it.name } ?: tvName
+            val r = withContext(Dispatchers.IO) { runCatching { castbridge.core.tv.TvInfo.parse(client.info()) }
+                // R-19: where this screen shows « Connectée » is where the upload looks too (the screen and the upload say the same thing)
+                .also { if (it.isSuccess && seenAs != null) UploadService.tvSeenAt(ctx, seenAs, client.base) } }
             reachable = r.isSuccess; info = r.getOrNull() ?: info
             if (r.isSuccess && msg == castbridge.core.ux.HomeNotices.info("Reconnexion à la TV…")) msg = null      // reconnected: the line goes away by itself
             // R-10: the code was accepted at this address: every screen key of this TV (its address, a « (2) » name) finds the same code next time

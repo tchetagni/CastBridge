@@ -130,6 +130,71 @@ class TvEndpointResolverTest {
         assertTrue(reports.all { it == TvWait.WAITING_REASON })
     }
 
+    // ---- R-19 : adresses de repli (liaison de confiance, dernière adresse persistée), validées par un « hello » ----
+
+    private val session = "http://192.168.1.77:8765"
+    private val remembered = "http://192.168.1.20:8765"
+
+    @Test fun theTrustedLinkAddressIsTriedBeforeSayingMissing() {
+        val asked = ArrayList<String>()
+        val r = TvEndpointResolver({ now }, 30_000, sources = { listOf(null) }, fallbacks = { listOf(session, remembered) }, probe = { asked += it; it == session })
+        assertEquals(session, r.current()?.base, "the screen says « Connectée » at this address: the upload uses it, never « TV introuvable »")
+        assertEquals(listOf(session), asked)
+    }
+
+    @Test fun aFallbackIsUsedOnlyIfItAnswersTheHello() {
+        val asked = ArrayList<String>()
+        val r = TvEndpointResolver({ now }, 30_000, sources = { emptyList() }, fallbacks = { listOf(session, remembered) }, probe = { asked += it; false })
+        assertNull(r.current(), "nothing answers: then (only then) missing")
+        assertEquals(listOf(session, remembered), asked, "every fallback was tried first")
+    }
+
+    @Test fun freshDiscoveryComesBeforeTheFallbacks() {
+        val r = TvEndpointResolver({ now }, 30_000, sources = { listOf(lan) }, fallbacks = { listOf(session) }, probe = { true })
+        assertEquals(lan, r.current()?.base)
+    }
+
+    @Test fun aStaleLiveAddressGivesWayToAFallbackThatAnswers() {
+        // a manual/hint address from before the DHCP change no longer answers: the trusted link's new address does
+        val r = TvEndpointResolver({ now }, 30_000, sources = { listOf(lan) }, fallbacks = { listOf(session) }, probe = { it == session })
+        assertEquals(session, r.current()?.base)
+    }
+
+    @Test fun aLiveAddressThatDoesNotAnswerIsStillTriedWhenNothingElseAnswers() {
+        val r = TvEndpointResolver({ now }, 30_000, sources = { listOf(lan) }, fallbacks = { listOf(session) }, probe = { false })
+        assertEquals(lan, r.current()?.base, "the copy's own retries say why (never null while an address exists)")
+    }
+
+    @Test fun probesAreCachedAndNotRepeatedWhileTheTvAnswers() {
+        var probes = 0
+        val r = TvEndpointResolver({ now }, 30_000, sources = { listOf(lan) }, probe = { probes++; true }, probeCacheMs = 5_000)
+        repeat(50) { r.current() }
+        assertEquals(1, probes, "one hello for 50 resolutions within the cache")
+        r.answered()
+        now += 20_000
+        repeat(50) { r.current() }
+        assertEquals(1, probes, "the address that just answered needs no hello")
+        now += 31_000
+        r.current()
+        assertEquals(2, probes)
+    }
+
+    @Test fun aFailedProbeIsRetriedAfterItsCache() {
+        var up = false; var probes = 0
+        val r = TvEndpointResolver({ now }, 30_000, sources = { emptyList() }, fallbacks = { listOf(session) }, probe = { probes++; up }, probeCacheMs = 5_000)
+        assertNull(r.current())
+        up = true
+        now += 1_000; assertNull(r.current(), "cached refusal")
+        now += 4_500; assertEquals(session, r.current()?.base, "the TV answers again: the address comes back by itself")
+        assertTrue(probes <= 3)
+    }
+
+    @Test fun withoutProbeFallbacksAreTakenAsIs() {
+        val r = TvEndpointResolver({ now }, 30_000, sources = { emptyList() }, fallbacks = { listOf(null, session) })
+        assertEquals(session, r.current()?.base)
+        assertEquals(EndpointKind.LAN, r.current()?.kind)
+    }
+
     @Test fun runFastLoopStopsOnCancel() {
         var n = 0
         val out = TvWait.until({ null }, MissingTvGate({ now }), { ++n > 3 }, { now += it }, { }, { })
