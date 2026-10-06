@@ -16,6 +16,10 @@ object KeyScan {
     /** At most this many candidates are verified for one file (a verification costs one signature check). */
     const val MAX_CANDIDATES = 32
     const val MIN_GROUPS = 5
+    /** A wrapped key is joined over at most this many consecutive lines (audit L2): a long column of groups never builds one huge candidate. */
+    const val MAX_WRAPPED_LINES = 40
+
+    private val WS = Regex("\\s+")
 
     private val TOKEN = Regex("^cbx1\\.[A-Za-z0-9_-]+\\.[A-Za-z0-9+/=_-]+$")
     /** One word of a grouped key: groups of 5, joined by `-`, possibly ending with `-` (a wrapped line). */
@@ -29,18 +33,24 @@ object KeyScan {
     fun candidates(text: String): List<String> {
         val out = LinkedHashSet<String>()
         fun add(c: String) { if (out.size < MAX_CANDIDATES) out += c }
-        val block = ArrayList<String>()                    // consecutive lines made only of groups
+        val block = StringBuilder()                        // consecutive lines made only of groups, joined as they come (linear, audit L2)
+        var blockLines = 0
         fun flushBlock() {
-            if (block.size >= 2) {
-                val joined = block.drop(1).fold(block[0]) { acc, l -> if (acc.endsWith("-")) acc + l else "$acc-$l" }
+            if (blockLines >= 2) {
+                val joined = block.toString()
                 if (joined.count { it != '-' } % 5 == 0 && groups(listOf(joined)) >= MIN_GROUPS && joined.any(Char::isDigit)) add(joined)
             }
-            block.clear()
+            block.setLength(0); blockLines = 0
+        }
+        fun addToBlock(l: String) {
+            if (blockLines > 0 && !block.endsWith("-")) block.append('-')
+            block.append(l); blockLines++
+            if (blockLines >= MAX_WRAPPED_LINES) flushBlock()             // a candidate never spans more than MAX_WRAPPED_LINES lines
         }
         for (raw in text.removePrefix("﻿").lineSequence()) {
             if (out.size >= MAX_CANDIDATES) break
             val line = raw.trim()
-            val words = line.split(Regex("\\s+")).filter { it.isNotEmpty() }
+            val words = line.split(WS).filter { it.isNotEmpty() }
             // full tokens, wherever they are on the line
             for (w in words) strip(w).let { if (TOKEN.matches(it)) add(it) }
             // runs of group-shaped words
@@ -52,7 +62,7 @@ object KeyScan {
             for (w in words) { val s = strip(w); if (GROUPS_WORD.matches(s)) run += s else flushRun() }
             flushRun()
             // a line made only of groups may be one piece of a wrapped key
-            if (words.isNotEmpty() && words.all { GROUPS_WORD.matches(it) }) block += words.joinToString("-").replace("--", "-") else flushBlock()
+            if (words.isNotEmpty() && words.all { GROUPS_WORD.matches(it) }) addToBlock(words.joinToString("-").replace("--", "-")) else flushBlock()
         }
         flushBlock()
         return out.toList()

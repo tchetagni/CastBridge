@@ -16,8 +16,11 @@ import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.flow.StateFlow
 import java.util.ArrayDeque
 
-/** [locked]: the TV announces `locked=1` (not activated yet: its only open route is the activation, docs/TV-ACTIVATION-CLE-USB.md). */
-data class Tv(val name: String, val host: String, val port: Int, val locked: Boolean = false) {
+/**
+ * [locked]: the TV announces `locked=1` (not activated yet: its only open route is the activation, docs/TV-ACTIVATION-CLE-USB.md).
+ * [otherHost]: another address announced the SAME name after this one (audit M2): the first address is kept, the screen says there are two.
+ */
+data class Tv(val name: String, val host: String, val port: Int, val locked: Boolean = false, val otherHost: String? = null) {
     val base get() = "http://$host:$port"
 }
 
@@ -89,7 +92,8 @@ class TvDiscovery(ctx: Context) {
                     val host = s.host?.hostAddress
                     if (role == "receiver" && host != null) {
                         val tv = Tv(s.serviceName, host, s.port, locked = s.attributes["locked"]?.let { String(it) } == "1")
-                        _tvs.value = _tvs.value.filterNot { it.name == tv.name } + tv
+                        // never replaced silently by a same-name announce from another address (audit M2): the oldest is kept, the other one flagged
+                        _tvs.value = castbridge.core.owner.ActivationSend.mergeAnnounce(_tvs.value, tv, { it.name }, { "${it.host}:${it.port}" }, { it.otherHost }, { t, o -> t.copy(otherHost = o) })
                     }
                     next()
                 }

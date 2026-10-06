@@ -77,9 +77,10 @@ class ActivateTvActivity : ComponentActivity() {
         val disc = remember { TvDiscovery(this@ActivateTvActivity) }
         DisposableEffect(Unit) { disc.start(); onDispose { disc.stop() } }
         val wifiTvs by disc.tvs.collectAsState()
-        var wifiName by remember { mutableStateOf<String?>(null) }
+        // audit M2: no TV is chosen automatically when the phone is not linked; the customer touches the chip of the TV whose address he sees
+        var wifiBase by remember { mutableStateOf<String?>(null) }
         val found = wifiTvs.map { ActivationSend.Found(it.name, it.base, it.locked) }
-        val lanTarget = ActivationSend.lanTarget(lanBase, found, wifiName)
+        val lanTarget = ActivationSend.lanTarget(lanBase, found, wifiBase)
         fun clean(t: String) = t.replace("\r", "").lineSequence().map { it.trim() }.firstOrNull { it.isNotEmpty() }.orEmpty()
         var pinText by remember { mutableStateOf("") }; var askPin by remember { mutableStateOf(false) }
         fun sendBluetooth(tv: TvBluetooth.Tv, k: String, prefix: String) {
@@ -139,12 +140,17 @@ class ActivateTvActivity : ComponentActivity() {
                 if (t.isBlank()) msg = "Le presse-papiers est vide : copiez d'abord la clé." else { key = clean(t); msg = null }
             }, modifier = Modifier.fillMaxWidth()) { Text("Coller la clé") }
 
-            Text("2. Votre TV (allumée, CastBridge-TV ouvert, à proximité) est cherchée automatiquement : sur le Wi-Fi d'abord, sinon par Bluetooth.", style = MaterialTheme.typography.bodyMedium)
-            val lanFound = found.filterNot { it.base.startsWith("http://127.") }
+            Text("2. Votre TV (allumée, CastBridge-TV ouvert, à proximité) est cherchée automatiquement : sur le Wi-Fi (touchez-la pour l'activer par le Wi-Fi), sinon par Bluetooth.",style = MaterialTheme.typography.bodyMedium)
+            val lanFound = wifiTvs.filter { ActivationSend.isLanTv(it.base) }
             if (lanBase == null && lanFound.isNotEmpty()) {
-                Text("Sur le Wi-Fi :", style = MaterialTheme.typography.bodySmall)
+                Text("Sur le Wi-Fi : touchez votre TV (vérifiez son adresse, affichée sur l'écran d'activation de la TV).", style = MaterialTheme.typography.bodySmall)
                 FlowRow(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
-                    lanFound.forEach { f -> FilterChip(lanTarget?.first == f.base, { wifiName = f.name; msg = null }, { Text(f.name + if (f.locked) " (à activer)" else "") }) }
+                    lanFound.forEach { f ->
+                        FilterChip(lanTarget?.first == f.base, { wifiBase = f.base; msg = null }, { Text(f.name + " · " + f.host + if (f.locked) " (à activer)" else "") })
+                    }
+                }
+                lanFound.filter { it.otherHost != null }.forEach { f ->
+                    Text("Attention : une autre annonce « ${f.name} » vient de ${f.otherHost}. Vérifiez l'adresse affichée sur la TV avant d'envoyer la clé.", color = MaterialTheme.colorScheme.error, style = MaterialTheme.typography.bodySmall)
                 }
             }
             if (!granted) {
@@ -161,7 +167,9 @@ class ActivateTvActivity : ComponentActivity() {
                 }
             }
             if (askPin) {
-                OutlinedTextField(pinText, { pinText = it.filter(Char::isDigit).take(6); msg = null }, label = { Text("Code de connexion de la TV (6 chiffres)") }, singleLine = true,
+                // audit M2: the address that will receive the key and the code, next to the code field
+                ActivationSend.targetLabel(lanTarget?.first)?.let { Text("Envoi par le Wi-Fi à : $it", style = MaterialTheme.typography.titleSmall) }
+                OutlinedTextField(pinText, { pinText = it.filter(Char::isDigit).take(6); msg = null }, label = { Text("Code de connexion de la TV (6 chiffres)" + (ActivationSend.targetLabel(lanTarget?.first)?.let { " · $it" } ?: "")) }, singleLine = true,
                     keyboardOptions = androidx.compose.foundation.text.KeyboardOptions(keyboardType = androidx.compose.ui.text.input.KeyboardType.NumberPassword),
                     visualTransformation = androidx.compose.ui.text.input.PasswordVisualTransformation(), modifier = Modifier.fillMaxWidth())
             }
