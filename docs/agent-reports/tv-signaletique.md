@@ -7,7 +7,7 @@ Livré
 - Cœur : `C/ux/TvSignal.kt` (`TvSignal.of(TvFacts)` → niveau, texte, action, 5 indicateurs ; `SignalColors` ; `phoneLevel(LinkState)`). Test : `CT/ux/TvSignalTest.kt` (8 tests, table de 19 situations + balayage exhaustif « jamais plus vert que le pire indicateur »).
 - TV : `TvSignalViews.kt` (pastilles dessinées, rangée, relevé des faits), puce + rangée dans `HomeScreen.kt`, `signal()` + légende dans l'aide + lignes de tête dans « Connexion & réglages » + tuile Téléchargements orange « Internet requis » (`PlayerActivity.kt`, `TvCards.kt`).
 - Téléphone : la pastille de la fiche TV (`TvPairScreen.kt`) utilise `phoneLevel` ; aucun texte changé.
-- Docs : section « Signalétique de la TV » (DESIGN-UX-ERGONOMIE…), parcours P-45.
+- Docs : section « Signalétique de la TV » (DESIGN-UX-ERGONOMIE…), parcours P-71.
 
 Preuves
 - ROUGE par assertion avant la fonction réelle (comportement ancien « toujours vert » simulé) : 3 échecs sur 8 ; puis VERT.

@@ -59,7 +59,7 @@ Lire `docs/DEPLOIEMENT-SERVEUR-1.2.1.md` (réécrit : V63→V66 en un démarrage
 3. Construire la console téléphone 1.2.44 (empreinte de la clé d'installation) ; installer le téléphone 1.2.43/1.2.44 seulement sur le go du propriétaire.
 4. Pousser `integration/agents`, créer `server-1.2.1`, déployer (§4), puis `tv-0.14.37-beta` / `phone-…`.
 5. Rédiger la demande de partenariat VIDAA (si le propriétaire confirme) ; décision DLNA (envoi depuis le téléphone).
-6. Dettes avant 2027 : révocations `off`, service de jeu de production (clé de ticket, route nginx `/play/`), fermeture des 4 chemins de transfert de licence, `OrderService.release` (interblocage MySQL), parcours P-37/P-45 en double, décisions iOS D-IOS-2/6/7/8.
+6. Dettes avant 2027 : révocations `off`, service de jeu de production (clé de ticket, route nginx `/play/`), fermeture des 4 chemins de transfert de licence, `OrderService.release` (interblocage MySQL), ~~parcours P-37/P-45 en double~~ (soldé 2026-10-06 : « Ouvrir avec » = P-70, « puce réseau » = P-71), ~~décisions iOS~~ (iOS ARRÊTÉ le 2026-10-06 par le propriétaire : développement gelé, D-IOS closes sans suite).
 
 ### 2026-10-04 : Serveur 1.2.0 prêt à déployer (portefeuille NDEM/MBOKO, V62) : PRÉPARÉ, NON DÉPLOYÉ, aucun tag créé
 - Version serveur `1.2.0` (code 4) dans `backend/pom.xml` et `version.properties` (`check_versions.py` : 0 erreur, la montée du code supprime les 2 erreurs « server-play-0.1.x : code 3 >= 3 »). Le coordinateur crée le tag `server-1.2.0` après fusion et `git fetch`.

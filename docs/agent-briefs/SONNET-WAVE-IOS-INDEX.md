@@ -1,5 +1,7 @@
 # Vague iOS — CastBridge sur iPhone (compagnon Wi-Fi de CastBridge-TV)
 
+> **GELÉ le 2026-10-06 : le propriétaire a arrêté le développement iOS.** Aucune tâche de cette vague ne doit être lancée.
+
 <!-- routage architecte 2026-10-04 -->
 
 **Source** : `docs/coordination/DESIGN-IOS-TELEPHONE-2026-10-04.md`. Branche de référence `integration/agents` (HEAD `3484fbb1`). Exécution sur ordre du coordinateur seulement.
