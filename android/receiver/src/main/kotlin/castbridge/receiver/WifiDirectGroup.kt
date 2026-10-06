@@ -65,27 +65,40 @@ class WifiDirectGroup(private val ctx: Context, private val prefs: TvPrefs, priv
         val ch = channel ?: m.initialize(ctx, Looper.getMainLooper(), null).also { channel = it }
         val name = if (forPhone) WifiDirect.groupNetworkName() else WifiDirect.networkName()
         val pass = if (forPhone) WifiDirect.groupPassphrase() else ownerPassphrase()
-        val cfg = try { WifiP2pConfig.Builder().setNetworkName(name).setPassphrase(pass).enablePersistentMode(false).build() }
-        catch (e: Exception) { Log.w(TAG, "config: ${e.javaClass.simpleName}"); lastError = WifiDirect.Err.FAILED; status("Wi-Fi Direct : configuration refusée"); return }
+        // owner decision 2026-10-06: ask for 5 GHz first (core WdBand), fall back to Android's automatic band if the radio refuses
+        val band = castbridge.core.link.WdBand.first(Build.VERSION.SDK_INT)
+        val cfg = config(name, pass, band) ?: return
         // A stale group from a previous run would make createGroup fail with BUSY: remove it first.
         m.removeGroup(ch, object : WifiP2pManager.ActionListener {
-            override fun onSuccess() = create(m, ch, cfg, name, pass, forPhone)
-            override fun onFailure(reason: Int) = create(m, ch, cfg, name, pass, forPhone)
+            override fun onSuccess() = create(m, ch, cfg, name, pass, forPhone, band)
+            override fun onFailure(reason: Int) = create(m, ch, cfg, name, pass, forPhone, band)
         })
     }
 
-    private fun create(m: WifiP2pManager, ch: WifiP2pManager.Channel, cfg: WifiP2pConfig, name: String, pass: String, forPhone: Boolean) {
+    private fun config(name: String, pass: String, band: castbridge.core.link.WdBand.Band): WifiP2pConfig? = try {
+        WifiP2pConfig.Builder().setNetworkName(name).setPassphrase(pass).enablePersistentMode(false)
+            .setGroupOperatingBand(if (band == castbridge.core.link.WdBand.Band.GHZ5) WifiP2pConfig.GROUP_OWNER_BAND_5GHZ else WifiP2pConfig.GROUP_OWNER_BAND_AUTO)
+            .build()
+    } catch (e: Exception) { Log.w(TAG, "config: ${e.javaClass.simpleName}"); lastError = WifiDirect.Err.FAILED; status("Wi-Fi Direct : configuration refusée"); null }
+
+    private fun create(m: WifiP2pManager, ch: WifiP2pManager.Channel, cfg: WifiP2pConfig, name: String, pass: String, forPhone: Boolean, band: castbridge.core.link.WdBand.Band) {
         m.createGroup(ch, cfg, object : WifiP2pManager.ActionListener {
             override fun onSuccess() {
                 auto = forPhone; lastError = null
                 createdAt = System.currentTimeMillis()
                 active = name to pass
                 // the owner's group shows its password (it is typed on the phone); an automatic one never does
-                status(if (forPhone) "Wi-Fi Direct automatique : liaison rapide avec un téléphone (${WifiDirect.GROUP_OWNER_IP})"
-                    else "Wi-Fi Direct : réseau « $name »  mot de passe : $pass  (${WifiDirect.GROUP_OWNER_IP}:8765)")
+                status(if (forPhone) "Wi-Fi Direct automatique : liaison rapide avec un téléphone (${WifiDirect.GROUP_OWNER_IP}, ${castbridge.core.link.WdBand.label(band)})"
+                    else "Wi-Fi Direct : réseau « $name »  mot de passe : $pass  (${WifiDirect.GROUP_OWNER_IP}:8765, ${castbridge.core.link.WdBand.label(band)})")
+                // the band really obtained (AUTO may land on 2.4 GHz): one log line, read on the TV with logcat
+                runCatching { m.requestGroupInfo(ch) { g -> castbridge.core.link.WdBand.frequencyLabel(g?.frequency ?: 0)?.let { Log.i(TAG, "groupe Wi-Fi Direct : $it") } } }
             }
             override fun onFailure(reason: Int) {
-                Log.w(TAG, "createGroup failed: $reason")
+                Log.w(TAG, "createGroup failed: $reason (${castbridge.core.link.WdBand.label(band)})")
+                castbridge.core.link.WdBand.retry(band, reason)?.let { next ->
+                    val again = config(name, pass, next) ?: return
+                    create(m, ch, again, name, pass, forPhone, next); return
+                }
                 lastError = if (reason == WifiP2pManager.P2P_UNSUPPORTED) WifiDirect.Err.UNSUPPORTED else WifiDirect.Err.FAILED
                 status("Wi-Fi Direct : échec de création du groupe (" + when (reason) {
                     WifiP2pManager.P2P_UNSUPPORTED -> "non pris en charge"

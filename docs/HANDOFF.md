@@ -14,6 +14,9 @@
 
 ## 0. Journal en direct (le plus récent en haut)
 
+### 2026-10-06 : Wi-Fi Direct en 5 GHz (TV 0.14.42, NON MESURÉ sur TV)
+- Décision du propriétaire : la TV demande la bande 5 GHz quand elle crée un groupe Wi-Fi Direct (menu ou automatique W18), repli sur la bande automatique si la radio refuse (`core/link/WdBand.kt`, 4 tests ; `receiver/WifiDirectGroup.kt`). La ligne d'état dit la bande demandée ; la fréquence réellement obtenue est journalisée (`groupe Wi-Fi Direct : 5 GHz (5180 MHz)`). À vérifier sur la TV : sa clé Wi-Fi USB sait-elle faire du 5 GHz (sinon repli silencieux en 2,4).
+
 ### 2026-10-06 : CastBridge-TV pour boîtiers faibles en ressources, 512 Mo / 32 bits (branche d'agent, non construit, NON MESURÉ sur TV)
 
 - `core/.../device/ResourceProfile.kt` (pur) : profil ÉCONOME / NORMAL (RAM <= 768 Mo, memoryClass <= 96, low RAM, 32 bits 1-2 coeurs <= 1 Go) ; bornes : 2 flux (6), 5 fils HTTP (8), tampons 32/128 Ko, vignettes 1/8 du heap (1-3 Mo ; 4 Mo), 500 fiches, 20 000 empreintes, lecteur léger, accueil sans animation, 1 pack ouvert. NORMAL = valeurs d'avant.
