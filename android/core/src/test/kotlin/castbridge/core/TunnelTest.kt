@@ -15,6 +15,27 @@ import kotlin.concurrent.thread
 import kotlin.random.Random
 import kotlin.test.*
 
+class ByteRelayInterruptTest {
+    /** R-19 (2026-10-06 15:44, FATAL EXCEPTION gw-api-b2a): a read that waits on a monitor (MuxStream) throws InterruptedException when close() interrupts the pump; it must never escape the thread. */
+    @Test fun anInterruptedPumpDoesNotEscapeAsAnUncaughtException() {
+        val escaped = java.util.concurrent.CopyOnWriteArrayList<Throwable>()
+        val previous = Thread.getDefaultUncaughtExceptionHandler()
+        Thread.setDefaultUncaughtExceptionHandler { _, e -> escaped += e }
+        try {
+            val lock = Object()
+            val waiting = object : java.io.InputStream() {            // like MuxStream.input: Object.wait in read
+                override fun read(): Int = synchronized(lock) { lock.wait(); -1 }
+                override fun read(b: ByteArray, off: Int, len: Int): Int = synchronized(lock) { lock.wait(); -1 }
+            }
+            val ended = java.io.ByteArrayInputStream(ByteArray(0))        // the other direction ends at once: close() interrupts the waiting pump
+            val r = ByteRelay(ended, java.io.ByteArrayOutputStream(), waiting, java.io.ByteArrayOutputStream(), {}, {}, bufferBytes = 1024).start()
+            assertTrue(r.join(3000), "both pumps end")
+            Thread.sleep(200)
+            assertTrue(escaped.isEmpty(), "uncaught: $escaped")
+        } finally { Thread.setDefaultUncaughtExceptionHandler(previous) }
+    }
+}
+
 class ByteRelayTest {
     /** A pipe pair: (what the relay reads, what the test writes into it). */
     private fun pipe(): Pair<PipedInputStream, PipedOutputStream> { val i = PipedInputStream(1 shl 20); return i to PipedOutputStream(i) }

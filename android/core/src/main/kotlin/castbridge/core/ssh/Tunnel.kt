@@ -45,6 +45,9 @@ class ByteRelay(
                 count.addAndGet(n.toLong()); lastActivity = System.currentTimeMillis()
             }
         } catch (_: IOException) {
+        } catch (_: InterruptedException) {
+            // close() interrupts the other pump on purpose; a MuxStream read waits on a monitor and throws this when interrupted. Uncaught in a thread it
+            // KILLS THE WHOLE APP on Android (R-19, 2026-10-06 15:44: « FATAL EXCEPTION: gw-api-b2a » took the phone down in the middle of a copy)
         } finally { close() }
     }, tn).apply { isDaemon = true; start() }
 
