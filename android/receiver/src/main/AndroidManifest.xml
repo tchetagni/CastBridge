@@ -7,6 +7,8 @@
     <uses-permission android:name="android.permission.WAKE_LOCK" />
     <!-- Background service started with the TV (docs/ADMIN.md, "Démarrage avec la TV") -->
     <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
+    <!-- Une seule ligne du MENU, proposée une fois : « Autoriser CastBridge-TV à rester actif en arrière-plan » (exemption d'optimisation de batterie, docs/TV-SERVICE-DEMARRAGE.md) -->
+    <uses-permission android:name="android.permission.REQUEST_IGNORE_BATTERY_OPTIMIZATIONS" />
     <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
     <uses-permission android:name="android.permission.FOREGROUND_SERVICE_CONNECTED_DEVICE" />
     <uses-permission android:name="android.permission.POST_NOTIFICATIONS" />
@@ -81,6 +83,9 @@
             android:name=".TvService"
             android:exported="false"
             android:foregroundServiceType="connectedDevice" />
+        <!-- Chien de garde (ServiceKeepAlive) : tâche périodique persistante + réveil d'alarme de repli ; ni l'un ni l'autre n'est exporté -->
+        <service android:name=".KeepAliveJob" android:exported="false" android:permission="android.permission.BIND_JOB_SERVICE" />
+        <receiver android:name=".KeepAliveReceiver" android:exported="false" />
         <receiver
             android:name=".BootReceiver"
             android:exported="true">

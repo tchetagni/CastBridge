@@ -690,6 +690,7 @@ class PlayerActivity : Activity(), TvService.Screen {
             add("Téléphones de confiance (Bluetooth, sans code)" to s.trust.list().let { l -> if (l.isEmpty()) "aucun : menu « Ajouter un téléphone »" else l.joinToString(", ") { it.name } })
             add("Adresse de la TV" to (ip?.let { "$it:${ReceiverServer.PORT}   ·   page web : http://$it:${ReceiverServer.PORT}" } ?: "pas de réseau (Bluetooth ou Wi-Fi Direct possibles)"))
             add("Démarrage avec la TV" to if (prefs.getBool("autostart", true)) "oui" else "non")
+            add("Service" to TvService.infoLine().substringAfter(" : "))
             add("Lecture lancée depuis le téléphone" to if (s.overlayAllowed()) "s'ouvre toute seule" else "demande d'ouvrir l'app (autorisation « afficher par-dessus » non accordée)")
             statuses.toSortedMap().forEach { (k, v) -> add((labels[k] ?: k) to v.substringAfter(" : ", v)) }
             // « Assistance à distance : connectée / hors ligne / en attente d'acceptation des conditions » (silent in daily use, readable here; journal under the menu « À propos »)
@@ -811,6 +812,9 @@ class PlayerActivity : Activity(), TvService.Screen {
         val auto = prefs.getBool("autostart", true)
         items += (if (auto) "Démarrer avec la TV : oui (désactiver)" else "Démarrer avec la TV : non (activer)") to {
             prefs.putBool("autostart", !auto); flash(if (!auto) "CastBridge TV démarrera avec la TV" else "Démarrage automatique désactivé")
+        }
+        BatteryExemption.offerIntent(this, prefs)?.let { i ->
+            items += castbridge.core.tv.BatteryExemptionPolicy.LINE to { BatteryExemption.markAsked(prefs); runCatching { startActivity(i) }.onFailure { flash("Réglage indisponible sur cette TV") } }
         }
         items += "Lecture à distance : autoriser l'affichage par-dessus les autres apps" + (if (s.overlayAllowed()) " (autorisé)" else "") to {
             s.openOverlaySettings(this)?.let { flash(it) }

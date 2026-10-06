@@ -27,6 +27,7 @@ import android.os.Handler
 import android.os.IBinder
 import android.os.Looper
 import android.os.PowerManager
+import android.os.SystemClock
 import android.provider.Settings
 import android.util.Log
 import castbridge.core.status.IconKind
@@ -152,10 +153,19 @@ class TvService : Service(), Device {
         super.onCreate()
         hookCapture()                      // before any screen resumes, so /api/screenshot always knows the front screen
         running = this
+        aliveSince = SystemClock.elapsedRealtime(); startReason = pendingReason; pendingReason = null
+        // Android exige startForeground ≤ 5 s après startForegroundService : c'est la PREMIÈRE chose faite ici, avant tout travail lourd (startCore)
+        startInForeground()
         runCatching { getSystemService(NotificationManager::class.java).createNotificationChannel(NotificationChannel(CH_TRANSFER, "Réceptions en cours", NotificationManager.IMPORTANCE_LOW)) }
         reception.addListener(receptionNotifier)
-        startInForeground()
+        ServiceKeepAlive.arm(this)                                // chien de garde : relance ≤ 15 min si Android tue le service
         startCore()
+    }
+
+    /** L'utilisateur a balayé l'app des récentes : sur les boîtiers qui tuent alors le service, il revient 3 s plus tard. */
+    override fun onTaskRemoved(rootIntent: Intent?) {
+        super.onTaskRemoved(rootIntent)
+        if (TvPrefs(this).getBool("autostart", true)) ServiceKeepAlive.scheduleTaskRemovedRestart(this)
     }
 
     override fun onStartCommand(intent: Intent?, flags: Int, startId: Int): Int {
@@ -1215,7 +1225,17 @@ class TvService : Service(), Device {
         private const val NOTIF_LAUNCH = 2
         @Volatile var running: TvService? = null; private set
 
-        fun start(ctx: Context) {
+        /** Heure (elapsedRealtime) de création du service vivant, et pourquoi il a démarré (BOOT, REPLACED, WATCHDOG, TASK_REMOVED ; null = ouverture normale). */
+        @Volatile private var aliveSince = 0L
+        @Volatile private var startReason: String? = null
+        @Volatile private var pendingReason: String? = null
+
+        /** « Service : vivant depuis 1 h 12 · démarré au boot » (texte pur : [castbridge.core.tv.ServiceInfoText]). */
+        fun infoLine(): String = castbridge.core.tv.ServiceInfoText.line(
+            if (running != null) aliveSince else null, SystemClock.elapsedRealtime(), startReason)
+
+        fun start(ctx: Context, reason: String? = null) {
+            if (running == null) pendingReason = reason
             val i = Intent(ctx, TvService::class.java)
             runCatching { if (Build.VERSION.SDK_INT >= 26) ctx.startForegroundService(i) else ctx.startService(i) }
                 .onFailure { Log.w(TAG, "start: ${it.javaClass.simpleName}") }
@@ -1235,6 +1255,12 @@ class TvService : Service(), Device {
 class BootReceiver : BroadcastReceiver() {
     override fun onReceive(c: Context, i: Intent) {
         val on = TvPrefs(c).getBool("autostart", true)
-        if (castbridge.core.tv.BootPolicy.shouldStart(i.action, on)) TvService.start(c)
+        if (!castbridge.core.tv.BootPolicy.shouldStart(i.action, on)) return
+        val reason = castbridge.core.tv.ServiceInfoText.reasonOf(i.action)
+        // Wake lock court (≤ 30 s, relâché tout seul) : le boîtier ne se rendort pas avant que le service ait pris le relais
+        runCatching { c.getSystemService(PowerManager::class.java).newWakeLock(PowerManager.PARTIAL_WAKE_LOCK, "castbridge:boot").acquire(castbridge.core.tv.KeepAlivePolicy.BOOT_WAKE_MS) }
+        if (reason == "BOOT") Log.i("CastBridgeTV", "démarré au boot (raison : ${i.action?.substringAfterLast('.')})")
+        TvService.start(c, reason)
+        ServiceKeepAlive.arm(c)
     }
 }

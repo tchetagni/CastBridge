@@ -14,6 +14,9 @@
 
 ## 0. Journal en direct (le plus récent en haut)
 
+### 2026-10-06 : CastBridge-TV en service et au démarrage (branche d'agent, non construit, NON MESURÉ sur TV)
+- Chien de garde `ServiceKeepAlive` (JobScheduler 15 min persistant + alarme inexacte), relance 3 s après balayage (`onTaskRemoved`), wake lock de 30 s au boot, ligne INFO « Service : vivant depuis … », ligne MENU d'exemption de batterie (permission `REQUEST_IGNORE_BATTERY_OPTIMIZATIONS`). Règles pures `core/tv/KeepAlivePolicy.kt`. `LOCKED_BOOT_COMPLETED` volontairement non ajouté (stockage chiffré). Détail et vérifications : `docs/TV-SERVICE-DEMARRAGE.md`, P-31.
+
 ### 2026-10-06 : Wi-Fi Direct en 5 GHz (TV 0.14.42, NON MESURÉ sur TV)
 - Décision du propriétaire : la TV demande la bande 5 GHz quand elle crée un groupe Wi-Fi Direct (menu ou automatique W18), repli sur la bande automatique si la radio refuse (`core/link/WdBand.kt`, 4 tests ; `receiver/WifiDirectGroup.kt`). La ligne d'état dit la bande demandée ; la fréquence réellement obtenue est journalisée (`groupe Wi-Fi Direct : 5 GHz (5180 MHz)`). À vérifier sur la TV : sa clé Wi-Fi USB sait-elle faire du 5 GHz (sinon repli silencieux en 2,4).
 
