@@ -14,6 +14,11 @@
 
 ## 0. Journal en direct (le plus récent en haut)
 
+### 2026-10-06 : optimisation de la copie téléphone vers TV (R-20) (branche d'agent, non construit, NON MESURÉ sur appareil)
+
+- Notification de la file bornée (`NotificationGate`), reprise Bluetooth limitée aux appareils CastBridge, code 8 en 30 s / 1 min / 5 min, liaison en panne bornée à 10 min puis rendue à la file, attente croissante par flux, fsync périodique côté TV, compression bornée en tas, `blockSize`/`maxStreams` lus dans les caps (optionnels : TV 0.14.37 inchangée). Le code PIN se demande dans la boite d'envoi (« Valider et envoyer »). Chiffres du banc et réglages : `docs/TRANSFER.md` §9 ; ligne R-20 de `docs/REGRESSIONS.md` ; parcours P-62 mis à jour.
+- À mesurer sur appareil : débit réel Wi-Fi 2,4 GHz, fsync périodique sur la clé USB, notifications réelles ; la boucle de 13 s du code 8 n'a pas été retrouvée dans le code.
+
 ### 2026-10-06 : reprise automatique figée à 0 % alors que la TV est « Connectée » (R-19) (branche d'agent, non construit, NON MESURÉ sur appareil)
 
 - Cause établie par LECTURE du code (aucun appareil en ADB) : découverte mDNS tuée par un seul échec et redémarrée sans attendre l'arrêt à chaque événement réseau, résolution sans délai de garde, nom exact seulement (« SMART_TV (2) » raté) alors que l'accueil le trouve, adresse de la liaison de confiance jamais utilisée par l'envoi, file qui abandonne après 10 min. Détail : `docs/REGRESSIONS.md` R-19.

@@ -153,6 +153,9 @@ object TvLinkManager {
     fun setForeground(on: Boolean) { foreground = on; if (on) { start(); poke(); recoverKnownTv() } }
 
     @Volatile private var recovering = false
+    private val untrustedBackoff = castbridge.core.trust.UntrustedBackoff(System::currentTimeMillis)
+    /** The user typed the TV's code (or the TV answers again): its refusals are forgotten. */
+    fun codeAccepted(address: String) { untrustedBackoff.clear(address) }
     /**
      * Reinstalled phone app, TV already paired: the phone forgot its TVs, but Android still keeps the Bluetooth bond and the TV still trusts this phone's address.
      * So, with no TV saved, each paired device that is (or may be) a CastBridge-TV is asked for a HELLO WITHOUT the owner window: a TV that knows this phone answers
@@ -165,11 +168,20 @@ object TvLinkManager {
             try {
                 if (!castbridge.owner.TvBluetooth.permitted(app)) return@launch
                 val link = PhoneLink(AndroidBtTransport(app), linkEnv::probe, { false })
-                for (c in castbridge.owner.TvBluetooth.pairedTvs(app)) {
+                // R-20: only devices that declare the CastBridge service (or are already saved as a TV): never headphones, a speaker or a car
+                for (c in castbridge.owner.TvBluetooth.pairedTvs(app).filter { castbridge.core.trust.RecoveryCandidates.eligible(it.sure, saved.get(it.address) != null) }) {
                     if (saved.list().isNotEmpty()) break
                     val tv = SavedTv(TrustRegistry.norm(c.address), c.name.ifBlank { "Ma TV" }, addedAt = System.currentTimeMillis())
+                    // R-20: a TV that said « code 8 » is asked again after 30 s, 1 min, then every 5 min (and not at all once the user types its code)
+                    if (!untrustedBackoff.mayTry(tv.address)) continue
                     val r = runCatching { link.connect(tv, requestTrust = false) }.getOrNull()
-                    (r as? PhoneLink.Result.Refused)?.let { refusals.record(tv.address, it.code) }
+                    (r as? PhoneLink.Result.Refused)?.let {
+                        refusals.record(tv.address, it.code)
+                        // one message only: the card « La TV ne reconnaît plus ce téléphone » with the code field (P-62) comes from the record above
+                        if (untrustedBackoff.onRefused(tv.address, it.code)) Log.i(TAG, "reprise de ${c.name}: code ${it.code} (${castbridge.core.tv.BtProtocol.describe(it.code)}), prochain essai dans 30 s")
+                        return@let
+                    }
+                    if (r is PhoneLink.Result.Refused && r.code == castbridge.core.tv.BtProtocol.ERR_UNTRUSTED) continue
                     Log.i(TAG, "reprise de ${c.name}: ${r?.javaClass?.simpleName}" + ((r as? PhoneLink.Result.Refused)?.let { " code ${it.code} (${castbridge.core.tv.BtProtocol.describe(it.code)}) indice ${it.hint}" } ?: ""))
                     if (r is PhoneLink.Result.Connected) {
                         saved.upsert(r.session.tv, makeDefault = true)

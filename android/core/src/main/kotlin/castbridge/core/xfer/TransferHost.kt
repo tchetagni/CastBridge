@@ -59,7 +59,7 @@ class TransferHost(
         if (a is Allocation.Refused) return Begin.Refused(a.http, a.message)
         a as Allocation.At
         return try {
-            val asm = PartAssembler.open(a.dir, m, stats, now, preallocate = a.preallocate, persistEveryMs = { persistEveryMs() })
+            val asm = PartAssembler.open(a.dir, m, stats, now, preallocate = a.preallocate, persistEveryMs = { persistEveryMs() }, syncEveryBytes = { syncEveryBytes() })
             val s = Session(m, asm, a.diskName, a.volumeId, a.dir)
             val prev = sessions.putIfAbsent(m.id, s)
             if (prev != null) { asm.close(); Begin.Ok(prev, true) } else Begin.Ok(s, asm.map.count() > 0)
@@ -71,6 +71,8 @@ class TransferHost(
     fun allowedStreams(): Int = runCatching(streamLimit).getOrDefault(maxStreams).coerceIn(1, maxStreams)
     /** Interval between two saves of a block map ([PlaybackGovernor]: spaced out while a video plays). */
     @Volatile var persistEveryMs: () -> Long = { 1000L }
+    /** R-20: bytes between two periodic fsyncs of a copy's data file ([PlaybackPriority]: 4x while a video plays); 0 = none (the final force alone). */
+    @Volatile var syncEveryBytes: () -> Long = { 0L }
 
     fun session(id: String): Session? = sessions[id]
 

@@ -33,6 +33,7 @@ class TransferQueueService : Service() {
 
     override fun onStartCommand(intent: Intent?, flags: Int, startId: Int): Int {
         lastStartId = startId
+        gate.reset()
         if (!startForegroundNow()) { stopSelfResult(startId); return START_NOT_STICKY }
         // restarted by Android after the process died (null intent): read the saved queue back and go on (unless it was paused: then it stops)
         if (intent == null && !TransferQueue.paused()) TransferQueue.resume(this)
@@ -42,8 +43,11 @@ class TransferQueueService : Service() {
                     delay(2_000)
                     // a paused queue (Android refused, or its time budget is used up) does not hold the foreground: resumed when the app is opened
                     while (TransferQueue.busy() && !TransferQueue.paused()) {
-                        runCatching { getSystemService(NotificationManager::class.java)?.notify(NOTIF, notification()) }
-                        delay(2_000)
+                        // R-20: looked at every second, posted only when the text or the percentage changed (and at most once a second): it used to be
+                        // a notify(9) every 2 s even with no progress (CPU, battery, SystemUI)
+                        val (text, pct) = notificationFacts()
+                        if (gate.shouldPost(text, pct, System.currentTimeMillis())) runCatching { getSystemService(NotificationManager::class.java)?.notify(NOTIF, notification()) }
+                        delay(1_000)
                     }
                     // ends only when no file was announced since the last look (stopSelfResult ignores an older start id); else keep watching
                     val id = lastStartId
@@ -70,11 +74,19 @@ class TransferQueueService : Service() {
         true
     } catch (e: Exception) { Log.w("TransferQueueService", "startForeground refused", e); false }
 
-    private fun notification(): Notification {
+    private val gate = castbridge.core.xfer.NotificationGate()
+
+    /** The text and the percentage the notification shows now (what [notification] draws; the gate compares them). */
+    private fun notificationFacts(): Pair<String, Int?> {
         // the percentage of the file being sent (Wi-Fi upload state; over Bluetooth its own notification carries it)
         val pct = (UploadService.state.value as? UploadService.State.Uploading)?.let { if (it.total > 0) (it.sent * 100 / it.total).toInt() else null }
         val running = TransferQueue.runningName()
         val text = TransferQueue.note.value ?: listOfNotNull(running?.let { "« $it »" }, TransferQueue.waitingText()).joinToString(" · ").ifEmpty { "Envoi en cours" }
+        return text to pct
+    }
+
+    private fun notification(): Notification {
+        val (text, pct) = notificationFacts()
         // touching the notification opens the « CastBridge TV » tab, where the queue card is (it used to open whatever tab was last shown)
         val open = PendingIntent.getActivity(this, 9, Intent(this, MainActivity::class.java).putExtra(TvHomeRequest.EXTRA, TvHomeRequest.TV)
             .addFlags(Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_SINGLE_TOP), PendingIntent.FLAG_IMMUTABLE or PendingIntent.FLAG_UPDATE_CURRENT)

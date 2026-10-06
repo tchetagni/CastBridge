@@ -92,22 +92,31 @@ object TransferBench {
         try {
             val api = HttpTransferApi("http://127.0.0.1:$port") { null }
             val wifiPipe = Bucket(wifiTotal); val diskPipe = Bucket(diskBps)
-            fun run(label: String, k: Int, bt: Boolean, discard: Boolean = false): Row {
+            val lowCap = if ("low" in a) 2 else 8      // « ressources faibles » of the TV: maxStreams 2 announced in the caps (R-20)
+            fun run(label: String, k: Int?, bt: Boolean, discard: Boolean = false): Row {
                 val name = "sim-${label.hashCode()}.bin"
                 val ch = FileChannel.open(f.toPath(), StandardOpenOption.READ)
+                val inflight = java.util.concurrent.atomic.AtomicInteger(); val peak = java.util.concurrent.atomic.AtomicInteger()
+                val stamps = ArrayList<Pair<Long, Long>>()      // (ms since start, bytes done): what the queue service would see every second
+                var wifi: WifiLane? = null
                 val t0 = System.nanoTime()
-                val tc = TransferClient(api, FileBlockSource(ch), name, { id, _ ->
+                val tc = TransferClient(api, FileBlockSource(ch), name, { id, max ->
                     buildList<Lane> {
-                        add(Shaped(WifiLane("wifi", "127.0.0.1:$port", id, HttpConn.tcp("127.0.0.1", port), { null }, maxStreams = 8, fixedK = k), perConn, if (discard) listOf(wifiPipe) else listOf(wifiPipe, diskPipe)))
-                        if (bt) add(Shaped(BluetoothLane("bluetooth", "127.0.0.1:$port", id, HttpConn.tcp("127.0.0.1", port), { null }), btBps, emptyList(), slowLane = true))
+                        val w = WifiLane("wifi", "127.0.0.1:$port", id, HttpConn.tcp("127.0.0.1", port), { null }, maxStreams = minOf(8, max, lowCap), fixedK = k?.let { minOf(it, lowCap) }).also { wifi = it }
+                        add(Shaped(w, perConn, if (discard) listOf(wifiPipe) else listOf(wifiPipe, diskPipe), inflight = inflight, peak = peak))
+                        if (bt) add(Shaped(BluetoothLane("bluetooth", "127.0.0.1:$port", id, HttpConn.tcp("127.0.0.1", port), { null }), btBps, emptyList(), slowLane = true, inflight = inflight, peak = peak))
                     }
-                }, compress = false, discard = discard)
+                }, compress = false, discard = discard, onProgress = { d, _ -> synchronized(stamps) { stamps += (System.nanoTime() - t0) / 1_000_000 to d } })
                 tc.run(); ch.close()
                 val s = (System.nanoTime() - t0) / 1e9
-                return Row(label, s, size, diskBps.toLong(), tc.perLane.entries.joinToString(" ") { "${it.key}=${fmt(it.value)}" })
+                val bs = tc.manifest.blockSize.toLong()
+                val (oldN, newN) = notifications(stamps, s, size)
+                val extra = tc.perLane.entries.joinToString(" ") { "${it.key}=${fmt(it.value)}" } + " | K final=${wifi?.streams} | en vol max ${peak.get()} bloc(s) = ${fmt(peak.get() * bs)} | notif ancienne ${oldN} / nouvelle ${newN}"
+                return Row(label, s, size, diskBps.toLong(), extra)
             }
             for (k in ks) rows += run("réseau seul K=$k", k, false, discard = true)
             for (k in ks) rows += run("réseau + disque K=$k", k, false)
+            rows += run("réseau + disque K auto", null, false)
             rows += run("réseau + disque K=${ks.max()} + Bluetooth", ks.max(), true)
         } finally { server.stop(); dir.deleteRecursively() }
         return rows
@@ -118,9 +127,30 @@ object TransferBench {
         private var free = System.nanoTime()
         @Synchronized fun take(bytes: Long): Long { val now = System.nanoTime(); val start = maxOf(now, free); free = start + (bytes / bps * 1e9).toLong(); return free - now }
     }
-    private class Shaped(val inner: Lane, val perConn: Double, val pipes: List<Bucket>, val slowLane: Boolean = false) : Lane by inner {
+    /**
+     * Notifications the queue service would post during the run: OLD = one every 2 s whatever happens (the 2 s tick of before R-20);
+     * NEW = a 1 s look through [NotificationGate] (text/percentage changed, spaced).
+     */
+    fun notifications(stamps: List<Pair<Long, Long>>, seconds: Double, size: Long): Pair<Int, Int> {
+        val old = (seconds / 2).toInt() + 1
+        val gate = NotificationGate()
+        var t = 0L; val end = (seconds * 1000).toLong()
+        while (t <= end) {
+            val done = synchronized(stamps) { stamps.lastOrNull { it.first <= t }?.second ?: 0L }
+            gate.shouldPost("« sim.avi »", if (size > 0) (done * 100 / size).toInt() else null, t)
+            t += 1000
+        }
+        return old to gate.posted
+    }
+
+    private class Shaped(val inner: Lane, val perConn: Double, val pipes: List<Bucket>, val slowLane: Boolean = false,
+                         val inflight: java.util.concurrent.atomic.AtomicInteger = java.util.concurrent.atomic.AtomicInteger(), val peak: java.util.concurrent.atomic.AtomicInteger = java.util.concurrent.atomic.AtomicInteger()) : Lane by inner {
         override val slow get() = slowLane || inner.slow
         override fun send(worker: Int, idx: Int, ctx: SendContext): Outcome {
+            val n = inflight.incrementAndGet(); peak.updateAndGet { maxOf(it, n) }
+            try { return sendShaped(worker, idx, ctx) } finally { inflight.decrementAndGet() }
+        }
+        private fun sendShaped(worker: Int, idx: Int, ctx: SendContext): Outcome {
             val t0 = System.nanoTime(); val o = inner.send(worker, idx, ctx)
             if (o is Outcome.Ok) {
                 val len = o.bytes
@@ -172,5 +202,6 @@ object TransferBench {
   --k 1,2,4,8             nombres de connexions à essayer
   --no-legacy             ne mesure pas l'envoi classique (1 flux)
   (chaque réglage est mesuré deux fois : « réseau seul » = la TV jette les octets après les avoir vérifiés ; « réseau + disque » = la vraie copie)
-  --simulate              sans TV : modèle à vitesses scriptées (--conn 3M --wifi 20M --disk 6M --bt 150K)"""
+  --simulate              sans TV : modèle à vitesses scriptées (--conn 3M --wifi 20M --disk 6M --bt 150K)
+  --low                   (avec --simulate) la TV annonce un profil « ressources faibles » : 2 flux au plus (R-20)"""
 }

@@ -52,10 +52,14 @@ data class SendFacts(
     val session: Boolean = false, val sessionName: String? = null, val btOnly: Boolean = false,
     val pinTvName: String? = null, val pinStored: Boolean = false, val pinCheck: PinCheck = PinCheck.UNKNOWN,
     val refusal: RefusalRecord? = null, val nowMs: Long = 0,
+    /** The name the code path finds the saved default TV by (mDNS name, else its name): where a code typed in the dialog goes when no code-path TV is known. */
+    val defaultPinKey: String? = null,
 )
 
 /** What the dialog draws. [note]: the one explanation line (why « Déplacer » waits, what is wrong), or null. */
-data class SendChoice(val route: SendRoute, val status: String, val copyEnabled: Boolean, val moveEnabled: Boolean, val note: String?, val action: SendAction, val banner: String? = null)
+data class SendChoice(val route: SendRoute, val status: String, val copyEnabled: Boolean, val moveEnabled: Boolean, val note: String?, val action: SendAction, val banner: String? = null,
+                      /** The TV a code typed in the dialog belongs to when [action] is ENTER_PIN (its mDNS name, what the code path finds it by). */
+                      val pinKey: String? = null)
 
 object SendChoices {
     const val NO_TV = "Aucune TV ajoutée : ouvrez CastBridge pour ajouter votre TV."
@@ -73,7 +77,7 @@ object SendChoices {
     fun untrusted(f: SendFacts): Boolean = f.refusal != null && f.refusal.code == BtProtocol.ERR_UNTRUSTED && f.nowMs - f.refusal.atMs in 0..UNTRUSTED_WINDOW_MS
 
     fun decide(f: SendFacts): SendChoice {
-        val c = decideRoutes(f)
+        val c = decideRoutes(f).let { if (it.action == SendAction.ENTER_PIN && it.pinKey == null) it.copy(pinKey = f.pinTvName ?: f.defaultPinKey ?: f.defaultName) else it }
         // the explanation is shown whenever nothing can leave because of that refusal
         return if (untrusted(f) && c.route == SendRoute.NONE) c.copy(banner = LinkRefusalTexts.banner(f.refusal!!.code)) else c
     }
@@ -99,7 +103,10 @@ object SendChoices {
                 return SendChoice(SendRoute.NONE, view.title + " : " + view.detail, false, false, null, SendAction.OPEN_APP)
         }
         // 4) the code (PIN) path
-        val pinTv = f.pinTvName ?: return SendChoice(SendRoute.NONE, if (forgotten) "TV : ${f.defaultName ?: "TV"}" else NO_TV, false, false, null, SendAction.ADD_TV)
+        // R-20: the saved TV forgot this phone and no code-path TV is known: the code is asked right in the dialog, for that TV (never a dead end)
+        val pinTv = f.pinTvName ?: if (forgotten && f.defaultName != null)
+            return SendChoice(SendRoute.NONE, "TV : ${f.defaultName}", false, false, null, SendAction.ENTER_PIN, pinKey = f.defaultPinKey ?: f.defaultName)
+        else return SendChoice(SendRoute.NONE, if (forgotten) "TV : ${f.defaultName ?: "TV"}" else NO_TV, false, false, null, SendAction.ADD_TV)
         val name = display(pinTv)
         if (!f.pinStored) return SendChoice(SendRoute.NONE, "$name demande son code PIN, que ce téléphone n'a pas : saisissez le code affiché sur la TV.", false, false, null, SendAction.ENTER_PIN)
         return when (f.pinCheck) {
@@ -111,6 +118,9 @@ object SendChoices {
         }
     }
 
-    /** "CastBridge TV SMART_TV" (mDNS name of the code path) → "SMART_TV", as the home screen shows it. */
+    /** R-20: the choice right after the code was accepted in the dialog (« Valider et envoyer »): the copy leaves at once through the code path. */
+    fun afterCode(tvKey: String): SendChoice = SendChoice(SendRoute.PIN_UPLOAD, "TV : ${display(tvKey)}", true, true, null, SendAction.NONE, pinKey = tvKey)
+
+    /** "CastBridge TV SMART_TV"(mDNS name of the code path) → "SMART_TV", as the home screen shows it. */
     fun display(name: String) = name.removePrefix("CastBridge TV ").ifBlank { "Ma TV" }
 }
