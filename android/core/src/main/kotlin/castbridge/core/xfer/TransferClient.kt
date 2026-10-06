@@ -7,7 +7,8 @@ import java.net.URL
 
 /** The small calls of the protocol (begin, state, finish). Chunks travel on the lanes. */
 interface TransferApi {
-    class Caps(val version: Int, val maxStreams: Int)
+    /** [blockSize] : OPTIONNEL (R-20), un profil « ressources faibles » de la TV ; null = la TV ne le dit pas (0.14.37), le téléphone garde sa politique. */
+    class Caps(val version: Int, val maxStreams: Int, val blockSize: Int? = null)
     class Begin(val done: Boolean, val id: String, val map: BlockMap, val hashes: List<String>, val writeBps: Long, val maxStreams: Int, val volume: String, val note: String? = null, val ordered: Boolean = false)
     sealed class Finish { object Done : Finish(); class Missing(val map: BlockMap) : Finish(); class Corrupt(val map: BlockMap) : Finish(); class Refused(val message: String) : Finish() }
     /** A refusal that no retry fixes (no room, name refused, bad credential...); [message] is for the user. */
@@ -31,7 +32,9 @@ class HttpTransferApi(private val baseOf: () -> String?, private val credential:
     private fun call(method: String, path: String): Pair<Int, String> {
         val base = baseOf() ?: throw IOException("TV introuvable")
         val c = castbridge.core.net.BoundRoute.open(URL(base + path)) as HttpURLConnection
-        c.requestMethod = method; c.connectTimeout = 4000; c.readTimeout = 60_000   // finish re-reads the file on the TV
+        // R-20: connection 5 s, reading 15 s; only `finish` (the TV re-reads the whole file) keeps a long read
+        c.requestMethod = method; c.connectTimeout = CopyTuning.CONNECT_TIMEOUT_MS
+        c.readTimeout = if (path.startsWith("/api/transfer/finish")) CopyTuning.FINISH_READ_TIMEOUT_MS else CopyTuning.READ_TIMEOUT_MS
         castbridge.core.trust.TvCredential.apply(c, credential())
         if (method == "POST") { c.doOutput = true; c.setFixedLengthStreamingMode(0); c.outputStream.close() }
         val code = c.responseCode
@@ -43,7 +46,7 @@ class HttpTransferApi(private val baseOf: () -> String?, private val credential:
         val (code, body) = try { call("GET", "/api/transfer/caps") } catch (e: IOException) { throw e }
         if (code == 401 || code == 403) throw TransferApi.Refused(code, TvClient.str(body, "message") ?: "autorisation refusée par la TV")
         if (code != 200 || TvClient.num(body, "version") == null) return null
-        return TransferApi.Caps(TvClient.num(body, "version")!!.toInt(), (TvClient.num(body, "maxStreams") ?: 4).toInt())
+        return TransferApi.Caps(TvClient.num(body, "version")!!.toInt(), (TvClient.num(body, "maxStreams") ?: 4).toInt(), TvClient.num(body, "blockSize")?.toInt())
     }
 
     override fun begin(m: Manifest, target: String?, discard: Boolean): TransferApi.Begin {
@@ -106,6 +109,8 @@ class TransferClient(
     private val onEvent: (String) -> Unit = {},
     private val sleep: (Long) -> Unit = Thread::sleep,
     private val retryDelayMs: Long = 2000,
+    /** Wall clock (ms) for the bound on a link that stays down ([CopyTuning.MAX_UNREACHABLE_MS]); tests move it with their fake sleep. */
+    private val clock: () -> Long = System::currentTimeMillis,
     /** Bench: "network alone" (the TV drops the bytes after hashing them). */
     private val discard: Boolean = false,
     /** The TV's measured disk speed (bytes/s, re-measured all along: a drive slows down when its cache is full) and its French hint when the disk is the limit. */
@@ -131,20 +136,39 @@ class TransferClient(
     private var firstMapEmpty: Boolean? = null
 
     fun run(): Result {
-        val m = manifest
-        val caps = try { api.caps() } catch (e: TransferApi.Refused) { return Result.Failed(e.message ?: "refusé") } catch (e: IOException) { return waitThen { run() } } ?: return Result.Unsupported
+        // R-20: caps are asked in a loop (no recursion), spaced by an exponential wait, and the count of link failures in a row is bounded
+        var linkFails = 0
+        var caps: TransferApi.Caps? = null
+        while (caps == null) {
+            if (cancelled()) return Result.Cancelled
+            try { caps = api.caps() ?: return Result.Unsupported }
+            catch (e: TransferApi.Refused) { return Result.Failed(e.message ?: "refusé") }
+            catch (e: IOException) {
+                onWaiting("TV injoignable")
+                if (gaveUp(++linkFails)) return Result.Failed(castbridge.core.tv.TvWait.GAVE_UP_TEXT)
+                sleep(Backoff.delayMs(linkFails - 1, retryDelayMs))
+            }
+        }
+        // the TV's own profile (caps.blockSize, optional) can only make the blocks smaller than the phone's policy
+        val m = Manifest(name, source.size, CopyTuning.blockSize(source.size, caps.blockSize)).also { manifest = it }
         var attempts = 0
+        linkFails = 0
         while (!cancelled()) {
             attempts++
             val b = try { api.begin(m, target, discard) }
                 catch (e: TransferApi.Refused) { return if (e.http == 501) Result.Unsupported else Result.Failed(e.message ?: "refusé") }
-                catch (e: IOException) { onWaiting(castbridge.core.trust.LinkText.failure(e)); sleep(retryWait(e)); continue }
+                catch (e: IOException) {
+                    onWaiting(castbridge.core.trust.LinkText.failure(e))
+                    if (e !is TransferApi.Verifying && gaveUp(++linkFails)) return Result.Failed(castbridge.core.tv.TvWait.GAVE_UP_TEXT)
+                    sleep(retryWait(e, linkFails)); continue
+                }
+            linkFails = 0
             if (b.done) { onProgress(m.size, m.size); return Result.Done }
             val hashes = HashBook(m, source)
             val full = try { api.state(b.id, withHashes = true) } catch (e: IOException) { null } ?: b
             if (firstMapEmpty == null) firstMapEmpty = full.map.count() == 0
             full.hashes.forEachIndexed { i, h -> if (i < m.blocks && full.map.has(i)) hashes.preload(i, h) }
-            val ls = lanes(b.id, minOf(caps.maxStreams, b.maxStreams))
+            val ls = lanes(b.id, CopyTuning.streams(caps.maxStreams, b.maxStreams))
             val sched = Scheduler(m, full.map, ls, { c -> SendContext(m, source, hashes, c, compress) }, slowFromHead = full.ordered || b.ordered, listener = object : Scheduler.Listener() {
                 override fun progress(doneBytes: Long, total: Long) { onProgress(doneBytes, total) }
                 override fun waiting(reason: String) { onWaiting(reason) }
@@ -161,7 +185,11 @@ class TransferClient(
                 is Scheduler.Result.Failed -> return Result.Failed(r.reason)
                 Scheduler.Result.SessionLost -> { onEvent("la TV a perdu le transfert : reprise"); if (attempts > 6) return Result.Failed("la TV ne garde pas le transfert"); continue }
                 Scheduler.Result.Done -> {
-                    val fin = try { api.finish(b.id, Manifest.root(hashes.all())) } catch (e: IOException) { onWaiting(castbridge.core.trust.LinkText.failure(e)); sleep(retryWait(e)); continue }
+                    val fin = try { api.finish(b.id, Manifest.root(hashes.all())) } catch (e: IOException) {
+                        onWaiting(castbridge.core.trust.LinkText.failure(e))
+                        if (e !is TransferApi.Verifying && gaveUp(++linkFails)) return Result.Failed(castbridge.core.tv.TvWait.GAVE_UP_TEXT)
+                        sleep(retryWait(e, linkFails)); continue
+                    }
                     when (fin) {
                         TransferApi.Finish.Done -> { verifiedWhole = firstMapEmpty == true; onProgress(m.size, m.size); return Result.Done }
                         is TransferApi.Finish.Refused -> return Result.Failed(fin.message)
@@ -174,7 +202,13 @@ class TransferClient(
     }
 
     /** A 503 `verifying` says when to come back (the TV is reading the file back): wait that long, never hammer. */
-    private fun retryWait(e: IOException): Long = (e as? TransferApi.Verifying)?.retryMs?.coerceIn(200, 30_000) ?: retryDelayMs
+    /** R-20: true once the link has been failing for [CopyTuning.MAX_UNREACHABLE_MS] with no success in between ([failsInARow] 1 = the first failure starts the count). */
+    private fun gaveUp(failsInARow: Int): Boolean {
+        val now = clock()
+        if (failsInARow <= 1 || failingSince == 0L) failingSince = now
+        return now - failingSince >= CopyTuning.MAX_UNREACHABLE_MS
+    }
+    private var failingSince = 0L
 
-    private fun waitThen(again: () -> Result): Result { onWaiting("TV injoignable"); if (cancelled()) return Result.Cancelled; sleep(retryDelayMs); return again() }
+    private fun retryWait(e: IOException, failsInARow: Int): Long = (e as? TransferApi.Verifying)?.retryMs?.coerceIn(200, 30_000) ?: Backoff.delayMs(failsInARow - 1, retryDelayMs)
 }

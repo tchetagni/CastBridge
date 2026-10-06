@@ -171,6 +171,7 @@ class ReceiverServer(
         onChange = { d -> progress.emitEveryMs = d.progressEveryMs }).also { g ->
         transfers.streamLimit = { g.current().maxStreams }
         transfers.persistEveryMs = { g.current().statePersistMs }
+        transfers.syncEveryBytes = { g.current().syncEveryBytes }                                                           // R-20: periodic fsync, never per block
         transfers.slowedNote = { if (g.slowedNow()) castbridge.core.xfer.PlaybackAwareCopyPolicy.SLOWED_TEXT else null }   // R-15: the phone shows it
         progress.slowedNow = g::slowedNow                                                                                 // R-15: so does the TV card
     }

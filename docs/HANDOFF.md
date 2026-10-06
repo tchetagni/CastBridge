@@ -18,6 +18,10 @@
 
 - `core/.../device/ResourceProfile.kt` (pur) : profil ÉCONOME / NORMAL (RAM <= 768 Mo, memoryClass <= 96, low RAM, 32 bits 1-2 coeurs <= 1 Go) ; bornes : 2 flux (6), 5 fils HTTP (8), tampons 32/128 Ko, vignettes 1/8 du heap (1-3 Mo ; 4 Mo), 500 fiches, 20 000 empreintes, lecteur léger, accueil sans animation, 1 pack ouvert. NORMAL = valeurs d'avant.
 - Branché par `TvPrefs.profile()` -> `TvProfile` ; `/api/transfer/caps` : champ optionnel `profile` (low/normal) ; `onTrimMemory` ; journal « profil ressources : … » ; ligne dans « Infos techniques ». `TransferHost.kt` non modifié. Détail : `docs/TV-RESSOURCES-FAIBLES.md`. **À faire : P-74 sur une TV de 512 Mo.**
+### 2026-10-06 : optimisation de la copie téléphone vers TV (R-20) (branche d'agent, non construit, NON MESURÉ sur appareil)
+
+- Notification de la file bornée (`NotificationGate`), reprise Bluetooth limitée aux appareils CastBridge, code 8 en 30 s / 1 min / 5 min, liaison en panne bornée à 10 min puis rendue à la file, attente croissante par flux, fsync périodique côté TV, compression bornée en tas, `blockSize`/`maxStreams` lus dans les caps (optionnels : TV 0.14.37 inchangée). Le code PIN se demande dans la boite d'envoi (« Valider et envoyer »). Chiffres du banc et réglages : `docs/TRANSFER.md` §9 ; ligne R-20 de `docs/REGRESSIONS.md` ; parcours P-62 mis à jour.
+- À mesurer sur appareil : débit réel Wi-Fi 2,4 GHz, fsync périodique sur la clé USB, notifications réelles ; la boucle de 13 s du code 8 n'a pas été retrouvée dans le code.
 
 ### 2026-10-06 : reprise automatique figée à 0 % alors que la TV est « Connectée » (R-19) (branche d'agent, non construit, NON MESURÉ sur appareil)
 

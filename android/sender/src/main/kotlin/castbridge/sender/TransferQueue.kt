@@ -339,7 +339,9 @@ object TransferQueue {
                     model.release(item.id); publish(); delay(2_000); return
                 }
                 wdReroutes.remove(item.id)
-                model.finish(item.id, false, CopyReport.failed(app, item, lastStep, lastPercent.takeIf { it > 0 }, reason = outcome))
+                // R-20: the TV needs its code: state « code requis » (one line, one action: the dialog asks the code), never « TV introuvable », no automatic retry
+                val reason = if (castbridge.core.trust.LinkRefusalTexts.isCodeRequired(outcome)) castbridge.core.trust.LinkRefusalTexts.CODE_REQUIRED_LINE else outcome
+                model.finish(item.id, false, CopyReport.failed(app, item, lastStep, lastPercent.takeIf { it > 0 }, reason = reason))
             }
         }
         if (!model.busy()) AutoWifiDirect.queueIdle()

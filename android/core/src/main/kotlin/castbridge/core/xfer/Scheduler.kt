@@ -85,6 +85,7 @@ class Scheduler(
     private fun finished(cancelled: () -> Boolean) = done.complete() || failure != null || sessionLost || cancelled()
 
     private fun worker(lane: Lane, w: Int, cancelled: () -> Boolean) {
+        var failsInARow = 0
         while (true) {
             synchronized(lock) { if (finished(cancelled)) return }
             val benched = synchronized(lock) { (benchedUntil[lane.id] ?: 0L) > clock() / 1_000_000 }
@@ -96,7 +97,9 @@ class Scheduler(
             val out = try { lane.send(w, idx, c) } catch (e: Exception) { Outcome.Failed(e.message ?: e.javaClass.simpleName) }
             report(lane, idx, run, out, cancelled)
             if (out is Outcome.Busy) sleepMs(out.retryMs.coerceIn(20, 2000))
-            else if (out is Outcome.Failed && !out.fatal) sleepMs(100)
+            // R-20: a block that fails again and again on this worker waits 100 ms, 200 ms, ... up to 3 s (was a fixed 100 ms: ten requests a second at a dead TV)
+            else if (out is Outcome.Failed && !out.fatal) { sleepMs(Backoff.delayMs(failsInARow, 100, 3_000)); failsInARow++ }
+            else failsInARow = 0
         }
     }
 

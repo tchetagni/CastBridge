@@ -109,7 +109,8 @@ class OpenWithActivity : ComponentActivity() {
                     stepView = when (val l = link) { is LinkUi.Connected -> l.view; is LinkUi.Status -> l.view; else -> null },
                     session = session != null, sessionName = session?.tv?.name, btOnly = session != null && session.base == null,
                     pinTvName = pinTv, pinStored = rev >= 0 && pinTv != null && TvAuth.isUsable(pins.get(pinTv)), pinCheck = check,
-                    refusal = rev.let { latestRefusal() }, nowMs = System.currentTimeMillis())
+                    refusal = rev.let { latestRefusal() }, nowMs = System.currentTimeMillis(),
+                    defaultPinKey = TvLinkManager.saved.default()?.let { it.mdns ?: it.name })
                 val choice = SendChoices.decide(facts)
                 // « Copier sur la TV et lire »: every state decision is CopyAndPlay's (this build does not learn the TV edition: UNKNOWN, the TV judges the copy)
                 val both = CopyAndPlay.decide(CopyAndPlay.Facts(CopyAndPlay.linkOf(facts, choice), ipRoute = session == null || session.base != null,
@@ -127,9 +128,16 @@ class OpenWithActivity : ComponentActivity() {
                             choice.note?.let { Text(it, style = MaterialTheme.typography.bodySmall) }
                             androidx.compose.foundation.layout.Spacer(Modifier.height(8.dp))
                             // the code is typed right here (never an extra step); the button of the old path stays for the other actions
-                            if (PinEntry.showsField(choice.action) && pinTv != null)
-                                PinEntryBox(pinTv, pins, wipe, verify = { code -> verifyPin(pinTv, code) }, onAccepted = { code ->
-                                    if (pins.put(pinTv, code)) { TvLinkManager.refusals.clearAll(); pinCheck.value = PinCheck.OK; pinRev.value++ }
+                            val codeTv = choice.pinKey ?: pinTv
+                            if (PinEntry.showsField(choice.action) && codeTv != null)
+                                // R-20: the code is asked right here when the TV needs it; « Valider et envoyer » = one check, then the copy leaves at once (the
+                                // code is kept by PinStore/PinBook, so the whole queue goes on without asking again)
+                                PinEntryBox(codeTv, pins, wipe, verify = { code -> verifyPin(codeTv, code) }, label = PinEntry.submitLabel(true), onAccepted = { code ->
+                                    if (pins.put(codeTv, code)) {
+                                        TvLinkManager.refusals.clearAll(); pinCheck.value = PinCheck.OK; pinRev.value++
+                                        TvLinkManager.saved.default()?.let { TvLinkManager.codeAccepted(it.address) }
+                                        send(uri, name, move = false, SendChoices.afterCode(codeTv), codeTv, pins)
+                                    }
                                     else Toast.makeText(this@OpenWithActivity, "Le code n'a pas pu être gardé sur ce téléphone.", Toast.LENGTH_LONG).show()
                                 })
                             else if (choice.action != SendAction.NONE)
@@ -309,7 +317,7 @@ class OpenWithActivity : ComponentActivity() {
  * Every decision is [PinEntry]'s (pure, tested); the typed digits live only in this composition (not saved, wiped on [wipe] = the window left the screen).
  */
 @Composable
-private fun PinEntryBox(tv: String, pins: PinStore, wipe: Int, verify: suspend (String) -> PinVerdict, onAccepted: (String) -> Unit) {
+private fun PinEntryBox(tv: String, pins: PinStore, wipe: Int, verify: suspend (String) -> PinVerdict, label: String = PinEntry.SUBMIT_LABEL, onAccepted: (String) -> Unit) {
     val scope = rememberCoroutineScope()
     var state by remember { mutableStateOf(PinEntry.start(pins.lockLeft(tv))) }
     var typed by remember { mutableStateOf("") }
@@ -345,6 +353,6 @@ private fun PinEntryBox(tv: String, pins: PinStore, wipe: Int, verify: suspend (
             isError = state is PinEntryState.Wrong, visualTransformation = PasswordVisualTransformation(),
             keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.NumberPassword))
         PinEntry.message(state)?.let { Text(it, style = MaterialTheme.typography.bodySmall, color = if (state is PinEntryState.Checking) cs.onSurfaceVariant else cs.error) }
-        Button({ go() }, Modifier.fillMaxWidth(), enabled = PinEntry.readyToCheck(state)) { Text(PinEntry.SUBMIT_LABEL) }
+        Button({ go() }, Modifier.fillMaxWidth(), enabled = PinEntry.readyToCheck(state)) { Text(label) }
     }
 }

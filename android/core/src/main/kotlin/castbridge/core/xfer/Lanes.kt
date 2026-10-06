@@ -81,6 +81,7 @@ open class WifiLane(
     private val cc = ChunkClient(host, transferId, credential)
     private val conns = arrayOfNulls<HttpConn>(8)
     private var winStart = 0L; private var winBytes = 0L
+    private val gzSlots = java.util.concurrent.Semaphore(2)
 
     override fun allowedWorkers(): Int = fixedK ?: ctl.k
     val streams: Int get() = allowedWorkers()
@@ -99,7 +100,8 @@ open class WifiLane(
         val len = m.length(idx).toLong()
         val sha = ctx.hashes.get(idx)
         var gz: ByteArray? = null
-        if (ctx.compress && Compression.worthTrying(m.name)) gz = compressed(ctx, idx, len.toInt())
+        // R-20: a compressed block lives in the heap twice (raw + gzip); at most 2 blocks at a time, whatever the number of streams
+        if (ctx.compress && Compression.worthTrying(m.name)) { gzSlots.acquire(); try { gz = compressed(ctx, idx, len.toInt()) } finally { gzSlots.release() } }
         val headers = ArrayList<String>().apply {
             add("Content-Type: application/octet-stream"); add("X-CB-Sha256: $sha")
             if (gz != null) add("X-CB-Enc: gzip")

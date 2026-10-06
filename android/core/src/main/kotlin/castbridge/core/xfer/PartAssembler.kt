@@ -50,7 +50,17 @@ class PartAssembler private constructor(
     val discard: Boolean = false,
     /** Interval between two saves of the block map (spaced out while a video plays: an older map only means blocks sent again). */
     private val persistEveryMs: () -> Long = { 1000L },
+    /**
+     * R-20: a periodic fsync of the data file every this many bytes written (0 = none), done OFF the request threads (a short-lived daemon; one at a time)
+     * and never per block: the final `force` at the end then has little left to flush (on a USB key it used to be the whole file at once).
+     * [PlaybackPriority] spaces it out while a video plays (4x).
+     */
+    private val syncEveryBytes: () -> Long = { 0L },
 ) {
+    /** Number of periodic fsyncs done so far (tests, bench). */
+    val syncs = java.util.concurrent.atomic.AtomicInteger()
+    private val unsynced = java.util.concurrent.atomic.AtomicLong()
+    private val syncing = java.util.concurrent.atomic.AtomicBoolean(false)
     sealed class Block {
         object Ok : Block()
         /** Already stored (or being stored by another connection): the body was not read. */
@@ -203,6 +213,12 @@ class PartAssembler private constructor(
         val t0 = System.nanoTime()
         while (bb.hasRemaining()) p += c.write(bb, p)
         stats.record(n, System.nanoTime() - t0)
+        val every = syncEveryBytes()
+        if (every > 0 && unsynced.addAndGet(n.toLong()) >= every && syncing.compareAndSet(false, true)) {
+            unsynced.set(0)
+            val run = Runnable { try { if (!closed) { c.force(false); syncs.incrementAndGet() } } catch (_: IOException) { } finally { syncing.set(false) } }
+            try { Thread(run, "cb-part-sync").apply { isDaemon = true; start() } } catch (_: Throwable) { syncing.set(false) }
+        }
     }
 
     private fun readBlock(idx: Int, sink: (ByteArray, Int) -> Unit) {
@@ -249,14 +265,14 @@ class PartAssembler private constructor(
 
         /** Opens (resuming what a previous run left) or creates the transfer's files in [dir]. Throws [IOException] if the disk refuses. */
         fun open(dir: File, manifest: Manifest, stats: WriteStats = WriteStats(), now: () -> Long = System::currentTimeMillis, discard: Boolean = false,
-                 preallocate: Boolean = true, persistEveryMs: () -> Long = { 1000L }): PartAssembler {
+                 preallocate: Boolean = true, persistEveryMs: () -> Long = { 1000L }, syncEveryBytes: () -> Long = { 0L }): PartAssembler {
             if (discard) return PartAssembler(dir, manifest, File(dir, ".discard"), File(dir, ".discard"), stats, now, discard = true)
             val sub = File(dir, SUB).apply { mkdirs() }
             val data = File(sub, manifest.id + ".data"); val st = File(sub, manifest.id + ".state")
             // without preallocation the data file grows as blocks land (it may be shorter than the manifest until the last one)
             val reuse = data.isFile && st.isFile && (data.length() == manifest.size || (!preallocate && data.length() < manifest.size))
             if (!reuse) { data.delete(); st.delete() }
-            val a = PartAssembler(dir, manifest, data, st, stats, now, persistEveryMs = persistEveryMs)
+            val a = PartAssembler(dir, manifest, data, st, stats, now, persistEveryMs = persistEveryMs, syncEveryBytes = syncEveryBytes)
             a.preallocated = preallocate
             if (reuse) a.restore() else { if (preallocate) a.raf!!.setLength(manifest.size); a.persist() }
             return a

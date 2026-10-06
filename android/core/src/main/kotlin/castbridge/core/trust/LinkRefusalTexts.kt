@@ -62,4 +62,18 @@ object LinkRefusalTexts {
 
     /** La copie en attente de la liaison doit échouer tout de suite avec ce texte ([ticket]) ; null = la boucle réessaie seule, on attend. */
     fun failureFor(s: LinkState): String? = codeOf(s)?.let { ticket(it) }
+
+    /** R-20 : l'état « code requis » de la file : une ligne, une action. Remplace « TV introuvable » tant que le code manque. */
+    const val CODE_REQUIRED_LINE = "Code requis : la TV ne reconnaît plus ce téléphone. Touchez pour saisir le code affiché sur la TV"
+
+    /**
+     * Cet échec d'envoi se règle-t-il en saisissant le code de la TV ? (ticket d'un refus qui demande le code, jeton expiré ou refusé, 401/403.)
+     * Alors la file est en « code requis », sans nouvel essai automatique, et la boite d'envoi demande le code elle-même.
+     */
+    fun isCodeRequired(reason: String?): Boolean {
+        if (reason == null) return false
+        if (KNOWN_CODES.any { asksPin(it) && reason == ticket(it) }) return true
+        val r = reason.lowercase()
+        return "autorisation de la tv" in r || "code pin" in r || "pinrequired" in r || "(401)" in r || "(403)" in r || "jeton" in r && "refus" in r
+    }
 }

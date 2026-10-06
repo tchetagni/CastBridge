@@ -104,7 +104,10 @@ object PinEntry {
 
     fun showsField(a: SendAction) = a == SendAction.ENTER_PIN
 
-    const val FIELD_LABEL = "Code PIN de la TV (${Pin.LENGTH} chiffres)"
+    const val FIELD_LABEL = "Code affiché sur la TV (${Pin.LENGTH} chiffres)"
     const val SUBMIT_LABEL = "Valider"
+    /** R-20: in the send dialog one check, then the copy leaves at once. */
+    const val SUBMIT_AND_SEND_LABEL = "Valider et envoyer"
+    fun submitLabel(sendsAfter: Boolean) = if (sendsAfter) SUBMIT_AND_SEND_LABEL else SUBMIT_LABEL
     const val FIELD_DESCRIPTION = "Saisie du code PIN de la TV, ${Pin.LENGTH} chiffres, masqué"
 }

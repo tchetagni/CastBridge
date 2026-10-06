@@ -96,9 +96,15 @@ class SendChoiceTest {
         assertEquals(LinkRefusalTexts.banner(BtProtocol.ERR_UNTRUSTED), c.banner)
     }
 
-    @Test fun recentUntrustedRefusalWithNoPinTvOffersAddTv() {
+    // R-20 : plus d'impasse « Ajouter ma TV » : la TV enregistrée a oublié le téléphone, le code est demandé dans la boite elle-même
+    @Test fun recentUntrustedRefusalWithNoPinTvAsksTheCodeForTheSavedTv() {
         val c = SendChoices.decide(SendFacts(1, "Salon", stepView(LinkState.Connecting), refusal = gone, nowMs = soon))
-        assertEquals(SendRoute.NONE, c.route); assertEquals(SendAction.ADD_TV, c.action); assertNotNull(c.banner)
+        assertEquals(SendRoute.NONE, c.route); assertEquals(SendAction.ENTER_PIN, c.action); assertNotNull(c.banner); assertEquals("Salon", c.pinKey)
+    }
+
+    @Test fun refusalWithNoTvAtAllStillOffersAddTv() {
+        val c = SendChoices.decide(SendFacts(0, null, null, refusal = gone, nowMs = soon))
+        assertEquals(SendAction.ADD_TV, c.action)
     }
 
     @Test fun aSessionBelievedTrustedIsNotTrustedAfterTheRefusal() {
