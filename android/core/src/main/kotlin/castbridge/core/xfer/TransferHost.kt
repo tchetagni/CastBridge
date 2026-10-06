@@ -112,6 +112,18 @@ class TransferHost(
         return n
     }
 
+    /**
+     * R-21 : une session sans activité depuis [maxIdleMs] (10 min) est FERMÉE (fichier et fil rendus) mais son état reste sur disque : au retour du
+     * téléphone, `begin` la rouvre et reprend où elle en était. Différent de [sweep], qui efface les fichiers d'une session abandonnée depuis des jours.
+     */
+    fun closeIdle(maxIdleMs: Long = IDLE_SESSION_MS): Int {
+        var n = 0
+        for ((id, s) in sessions) if (!s.finishing && now() - s.assembler.touched > maxIdleMs) { if (sessions.remove(id, s)) { s.assembler.close(); n++ } }
+        return n
+    }
+    /** Des octets attendent le disque depuis ce nombre de ms sans qu'une écriture aboutisse (0 = rien de bloqué). */
+    fun diskStalledMs(): Long = stats.stalledMs()
+
     fun active(): Int = sessions.size
     /** Bytes of [s] already on the TV (whole blocks; at most one block too many when the short last block is among them). */
     fun receivedBytes(s: Session): Long = minOf(s.assembler.map.count().toLong() * s.manifest.blockSize, s.manifest.size)
@@ -141,6 +153,9 @@ class TransferHost(
     companion object {
         const val API_VERSION = 1
         const val SLOW_DISK_BPS = 3_000_000L
+        const val IDLE_SESSION_MS = 10 * 60_000L
+        /** Une écriture qui n'aboutit plus depuis ce temps : le disque est bloqué, la TV le dit (cause `stalled`) au lieu de faire renvoyer les blocs. */
+        const val DISK_STALL_MS = 15_000L
         fun q(s: String) = "\"" + s.replace("\\", "\\\\").replace("\"", "\\\"").replace("\n", "\\n").replace("\r", "\\r").replace("\t", "\\t") + "\""
     }
 }

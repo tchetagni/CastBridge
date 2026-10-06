@@ -239,7 +239,7 @@ object CastSession {
             val copying = (own && u0 is UploadService.State.Uploading) || (nowMs - lastGrowthAt <= 10_000 && lastGrowthAt > 0)
             val statusLine = castbridge.core.ux.TransferStatusLine.of(castbridge.core.ux.TransferFacts(
                 if (f != null && total > 0) (f.received * 100 / total).toInt() else null, if (own) UploadService.route.value else null,
-                copying, UploadService.notice.value == castbridge.core.xfer.PlaybackAwareCopyPolicy.SLOWED_TEXT, waitingNow, null))
+                copying, UploadService.notice.value == castbridge.core.xfer.PlaybackAwareCopyPolicy.SLOWED_TEXT, waitingNow, null, link = if (own) UploadService.link.value else null))
             val waiting: String? = if (waitingNow || copying && statusLine.level != castbridge.core.ux.SignalLevel.GREEN) statusLine.text else null
             val waitingLevel = if (waiting != null) statusLine.level else null
             if (waiting != null) update { it.copy(message = waiting, messageLevel = waitingLevel) }

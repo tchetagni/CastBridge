@@ -43,6 +43,10 @@ internal class ChunkClient(val host: String, val id: String, private val credent
 
 /** The one table that maps a status of the TV's `/api/transfer` to an [Outcome] (also used for a reply salvaged after a failed write, see [WriteFailureClassifier]). */
 internal fun statusOutcome(status: Int, body: String, bytes: Long): Outcome = when {
+    // R-21 : la TV dit que son écriture échoue (champ optionnel `cause`, une TV 0.14.39 ne l'envoie pas) : on s'arrête avec la raison, on ne renvoie pas
+    status != 200 && "\"cause\":\"readonly\"" in body -> Outcome.Failed(CopyCauses.READONLY, fatal = true)
+    status != 200 && "\"cause\":\"io\"" in body -> Outcome.Failed(CopyCauses.IO, fatal = true)
+    status == 429 && "\"cause\":\"stalled\"" in body -> Outcome.Busy(Regex("\"retryMs\":(\\d+)").find(body)?.groupValues?.get(1)?.toLongOrNull() ?: 2000, "stalled")
     status == 200 -> if ("\"already\":true" in body) Outcome.Already else Outcome.Ok(bytes)
     status == 422 -> Outcome.Corrupt("hash")
     status == 429 -> Outcome.Busy(Regex("\"retryMs\":(\\d+)").find(body)?.groupValues?.get(1)?.toLongOrNull() ?: 200)
@@ -76,7 +80,6 @@ open class WifiLane(
     override val sent = AtomicLong()
     /** Bytes that really crossed the link (after compression) for confirmed blocks. */
     val wire = AtomicLong()
-    override fun bytesMoved(): Long = wire.get()
     private val ctl = KController(1, maxWorkers, startStreams.coerceAtMost(maxWorkers))
     private val cc = ChunkClient(host, transferId, credential)
     private val conns = arrayOfNulls<HttpConn>(8)
@@ -94,11 +97,33 @@ open class WifiLane(
         if (dt >= 1_500_000_000L) { if (fixedK == null) ctl.onSample(winBytes * 1e9 / dt); winStart = now; winBytes = 0 }
     }
 
+    /** R-21 : débit utile mesuré de chaque connexion (octets/s, 0 = pas encore mesuré) ; sous [SLICE_BELOW_BLOCK_SECONDS] s par bloc, la voie envoie le bloc par tranches. */
+    private val connBps = LongArray(8)
+    /** Octets de tranches acquittés par la TV (un lien lent avance bien avant qu'un bloc entier soit confirmé). */
+    private val sliceMoved = AtomicLong()
+    override fun bytesMoved(): Long = wire.get() + sliceMoved.get()
+    /** Tests : cette connexion passe en tranches. */
+    fun slicing(worker: Int, blockLen: Long): Boolean = connBps[worker.coerceIn(0, 7)].let { it in 1 until blockLen / SLICE_BELOW_BLOCK_SECONDS }
+
     override fun send(worker: Int, idx: Int, ctx: SendContext): Outcome {
+        val t0 = System.nanoTime(); val written = AtomicLong()
+        val counted = ctx.withCounters({ n -> written.addAndGet(n); ctx.onBytes(n) }, ctx.onAcked)
+        try { return sendOne(worker, idx, counted) }
+        finally {
+            val dt = System.nanoTime() - t0
+            if (dt > 500_000_000L && written.get() > 0) {          // un rythme mesuré sur au moins une demi-seconde d'envoi
+                val bps = (written.get() * 1e9 / dt).toLong().coerceAtLeast(1)
+                connBps[worker] = if (connBps[worker] == 0L) bps else (connBps[worker] * 2 + bps) / 3
+            }
+        }
+    }
+
+    private fun sendOne(worker: Int, idx: Int, ctx: SendContext): Outcome {
         val m = ctx.manifest
-        val conn = conns[worker] ?: HttpConn(connect).also { conns[worker] = it }
+        val conn = conns[worker] ?: HttpConn(connect, stallMs = CopyTuning.READ_TIMEOUT_MS.toLong()).also { conns[worker] = it }
         val len = m.length(idx).toLong()
         val sha = ctx.hashes.get(idx)
+        if (slicing(worker, len)) return sendSliced(worker, idx, ctx, conn, sha)
         var gz: ByteArray? = null
         // R-20: a compressed block lives in the heap twice (raw + gzip); at most 2 blocks at a time, whatever the number of streams
         if (ctx.compress && Compression.worthTrying(m.name)) { gzSlots.acquire(); try { gz = compressed(ctx, idx, len.toInt()) } finally { gzSlots.release() } }
@@ -111,14 +136,15 @@ open class WifiLane(
         val r = try {
             conn.request("PUT", "/api/transfer/chunk?id=$transferId&idx=$idx", host, headers, wire) { out ->
                 if (gz != null) {
-                    var o = 0; while (o < gz.size) { if (ctx.cancelled()) throw IOException("cancelled"); val n = minOf(256 * 1024, gz.size - o); val bb = java.nio.ByteBuffer.wrap(gz, o, n); while (bb.hasRemaining()) out.write(bb); o += n; conn.progress(n.toLong()) }
+                    var o = 0; while (o < gz.size) { if (ctx.cancelled()) throw IOException("cancelled"); val n = minOf(PIECE, gz.size - o); val bb = java.nio.ByteBuffer.wrap(gz, o, n); while (bb.hasRemaining()) out.write(bb); o += n; ctx.onBytes(n.toLong()); conn.progress(n.toLong()) }
                 } else {
                     var pos = m.offset(idx); var left = len
                     while (left > 0) {
                         if (ctx.cancelled()) throw IOException("cancelled")
-                        val n = ctx.source.transferTo(pos, minOf(left, 1L shl 20), out)
+                        // R-21 : des morceaux de 128 Kio (et non 1 Mo) : sur un lien à 100 Ko/s, le chien de garde et la progression voient du mouvement toutes les ~1 s
+                        val n = ctx.source.transferTo(pos, minOf(left, PIECE.toLong()), out)
                         if (n <= 0) throw IOException("source ended early")
-                        pos += n; left -= n; conn.progress(n)
+                        pos += n; left -= n; ctx.onBytes(n); conn.progress(n)
                     }
                 }
             }
@@ -132,6 +158,44 @@ open class WifiLane(
         return o
     }
 
+    /**
+     * R-21 : lien lent. Le bloc part en tranches de 256 Kio (le protocole des voies lentes, que la TV sait déjà recevoir : aucun changement de fil) : chaque tranche
+     * acquittée est une progression confirmée, un incident n'en renvoie qu'une, et la TV vérifie le hachage du bloc à la dernière. Le bloc entier reste l'unité de reprise.
+     */
+    private fun sendSliced(worker: Int, idx: Int, ctx: SendContext, conn: HttpConn, sha: String): Outcome {
+        val m = ctx.manifest
+        val buf = ByteArray(Manifest.SLICE)
+        var total = 0L
+        for (k in 0 until m.slices(idx)) {
+            if (ctx.cancelled()) return Outcome.Cancelled
+            val n = m.sliceLength(idx, k)
+            var o = 0
+            while (o < n) { val r = ctx.source.read(m.offset(idx) + k.toLong() * Manifest.SLICE + o, buf, o, n - o); if (r <= 0) return Outcome.Failed("source ended early"); o += r }
+            val headers = ArrayList<String>().apply { add("Content-Type: application/octet-stream"); add("X-CB-Sha256: $sha"); cc.auth()?.let { add(it) } }
+            val r = try {
+                conn.request("PUT", "/api/transfer/chunk?id=$transferId&idx=$idx&slice=$k", host, headers, n.toLong()) { out ->
+                    var p = 0
+                    while (p < n) {
+                        if (ctx.cancelled()) throw IOException("cancelled")
+                        val w = minOf(PIECE, n - p); val bb = java.nio.ByteBuffer.wrap(buf, p, w); while (bb.hasRemaining()) out.write(bb)
+                        p += w; ctx.onBytes(w.toLong()); conn.progress(w.toLong())
+                    }
+                }
+            } catch (e: IOException) { return if (ctx.cancelled()) Outcome.Cancelled else WriteFailureClassifier.classify(e, null) }
+            val res = cc.outcome(r, n.toLong())
+            if (!r.keepAlive) { conn.close(); conns[worker] = null }
+            when (res) {
+                is Outcome.Ok -> { total += n; sliceMoved.addAndGet(n.toLong()); ctx.onAcked(n.toLong()) }
+                Outcome.Already -> return Outcome.Already
+                is Outcome.Busy -> { ctl.onBusy(); onBusy(); return res }
+                else -> return res
+            }
+        }
+        wire.addAndGet(total); sliceMoved.addAndGet(-total)       // le bloc est confirmé : ses tranches ne comptent qu'une fois
+        sample(total)
+        return Outcome.Ok(total)
+    }
+
     /** gzip of the block, or null when it would not shrink by at least 10 % (then the block is sent as it is). */
     private fun compressed(ctx: SendContext, idx: Int, len: Int): ByteArray? {
         val raw = ByteArray(len); var n = 0
@@ -142,6 +206,13 @@ open class WifiLane(
     }
 
     override fun close() { conns.forEach { it?.close() } }
+
+    companion object {
+        /** Morceau écrit sur le socket entre deux comptes de progression. */
+        const val PIECE = 128 * 1024
+        /** Un bloc qui prendrait plus que cela à la vitesse mesurée de la connexion part en tranches. */
+        const val SLICE_BELOW_BLOCK_SECONDS = 8L
+    }
 }
 
 /** Wi-Fi Direct: the same lane over the group-owner address. Experimental: no worker runs unless [LaneSwitches.wifiDirect] is on. */

@@ -56,8 +56,8 @@ class HttpConn(
             }
             lastProgress = System.nanoTime()
             return readReply()
-        } catch (e: IOException) { dead = true; close(); throw e }
-        catch (e: RuntimeException) { dead = true; close(); throw IOException(e.message, e) }
+        } catch (e: IOException) { dead = true; abort(); throw e }
+        catch (e: RuntimeException) { dead = true; abort(); throw IOException(e.message, e) }
         finally { busy = false }
     }
 
@@ -121,6 +121,8 @@ class HttpConn(
     }
 
     override fun close() { runCatching { ch?.close() }; ch = null; input = null }
+    /** R-21 : fermeture d'une connexion en échec (muette, coupée) : RST tout de suite (linger 0), jamais de FIN-WAIT avec des octets non envoyés qui traîne des minutes. */
+    private fun abort() { runCatching { ch?.socket()?.setSoLinger(true, 0) }; close() }
     internal fun stalled(now: Long) = busy && (now - lastProgress) / 1_000_000 > stallMs
 
     private object Watchdog {
@@ -129,7 +131,7 @@ class HttpConn(
             while (true) {
                 try { Thread.sleep(2000) } catch (_: InterruptedException) { return@Thread }
                 val now = System.nanoTime()
-                for (c in conns) { if (c.ch?.isOpen != true) conns.remove(c) else if (c.stalled(now)) { c.dead = true; runCatching { c.ch?.close() } } }
+                for (c in conns) { if (c.ch?.isOpen != true) conns.remove(c) else if (c.stalled(now)) { c.dead = true; runCatching { c.ch?.socket()?.setSoLinger(true, 0) }; runCatching { c.ch?.close() } } }
             }
         }, "xfer-watchdog").apply { isDaemon = true }
         @Synchronized fun watch(c: HttpConn) { conns.add(c); if (!t.isAlive) runCatching { t.start() } }

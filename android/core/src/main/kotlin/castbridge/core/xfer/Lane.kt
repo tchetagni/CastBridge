@@ -45,7 +45,13 @@ class HashBook(private val manifest: Manifest, private val source: BlockSource) 
     fun all(): List<String> = (0 until manifest.blocks).map { get(it) }
 }
 
-class SendContext(val manifest: Manifest, val source: BlockSource, val hashes: HashBook, val cancelled: () -> Boolean, val compress: Boolean)
+class SendContext(val manifest: Manifest, val source: BlockSource, val hashes: HashBook, val cancelled: () -> Boolean, val compress: Boolean,
+                  /** R-21 : octets du bloc écrits sur le socket (appelé à chaque morceau) : la progression « envoyé » n'attend plus la fin du bloc. */
+                  val onBytes: (Long) -> Unit = {},
+                  /** R-21 : octets que la TV a confirmés dans un bloc encore ouvert (tranches acquittées d'une voie lente). */
+                  val onAcked: (Long) -> Unit = {}) {
+    fun withCounters(onBytes: (Long) -> Unit, onAcked: (Long) -> Unit) = SendContext(manifest, source, hashes, cancelled, compress, onBytes, onAcked)
+}
 
 sealed class Outcome {
     class Ok(val bytes: Long) : Outcome()
@@ -54,7 +60,7 @@ sealed class Outcome {
     /** The TV's hash check failed: the block is sent again. */
     class Corrupt(val reason: String) : Outcome()
     /** The TV's disk is behind: slow down, retry later. */
-    class Busy(val retryMs: Long) : Outcome()
+    class Busy(val retryMs: Long, /** R-21 : la TV dit POURQUOI (`stalled` = son disque ne rend plus la main), null = simple régulation. */ val cause: String? = null) : Outcome()
     /** The TV no longer knows the transfer (restart, sweep): begin again. */
     object SessionLost : Outcome()
     /** Link problem: retry elsewhere; [fatal] = nothing will fix it (bad credential, no space). */

@@ -118,7 +118,7 @@ class UploadService : Service() {
         watchNetwork(disc)
         cancelled = false
         instance = this
-        _notice.value = null; _speed.value = 0; _route.value = null
+        _notice.value = null; _speed.value = 0; _route.value = null; _link.value = null
         worker = thread(name = "upload") { runJob(uri, job, disc) }
         return START_NOT_STICKY
     }
@@ -255,7 +255,14 @@ class UploadService : Service() {
             val tc = TransferClient(HttpTransferApi(resolve, credential, noFiling()), FileBlockSource(ch, total), job.fileName,
                 lanes = { id, max -> listOf(WifiLane("wifi", resolve()?.removePrefix("http://") ?: "tv", id, connect, credential, maxStreams = max)) },
                 target = job.target, cancelled = { cancelled },
-                onProgress = { s, t -> sent = s; onState(ResumableUpload.State.Uploading(s, t)) },
+                // R-21: the screen and the notification follow the bytes WRITTEN on the socket (from the first block, every second), never only the confirmed blocks:
+                // on a slow link a block takes tens of seconds and the old 0 % lasted minutes. The confirmed figure travels beside it (the status line says both).
+                onProgress = { s, t -> if (s > sent) sent = s; onState(ResumableUpload.State.Uploading(sent, t)) },
+                onDetail = { d ->
+                    if (d.sent > sent) sent = d.sent
+                    _link.value = castbridge.core.ux.LinkFacts(d.sentPercent, d.confirmedPercent, d.sentBps, d.confirmedBps, (d.total - d.confirmed).coerceAtLeast(0))
+                    onState(ResumableUpload.State.Uploading(sent, d.total))
+                },
                 // R-18: a lane that moved bytes in the last 10 s means the transfer is alive: a lane's passing failure is not shown as a wait
                 onWaiting = { why -> if (!gate.recentProgress()) onState(ResumableUpload.State.Waiting(sent, total, why)) },
                 onEvent = { Log.i(TAG, it) },
@@ -360,7 +367,7 @@ class UploadService : Service() {
         val pct: Int
         val facts = when (s) {
             is ResumableUpload.State.Uploading -> { pct = (s.sent * 100 / s.total).toInt()
-                castbridge.core.ux.TransferFacts(pct, _route.value, copying = true, slowed = _notice.value == castbridge.core.xfer.PlaybackAwareCopyPolicy.SLOWED_TEXT, waiting = false, failure = null) }
+                castbridge.core.ux.TransferFacts(pct, _route.value, copying = true, slowed = _notice.value == castbridge.core.xfer.PlaybackAwareCopyPolicy.SLOWED_TEXT, waiting = false, failure = null, link = _link.value) }
             is ResumableUpload.State.Waiting -> { pct = (s.sent * 100 / s.total).toInt()
                 castbridge.core.ux.TransferFacts(pct, _route.value, copying = false, slowed = false, waiting = true, failure = null) }
             else -> return
@@ -503,6 +510,9 @@ class UploadService : Service() {
             castbridge.core.tv.EndpointKind.BLUETOOTH -> castbridge.core.ux.CopyRouteKind.BLUETOOTH
             castbridge.core.tv.EndpointKind.LAST_GOOD -> _route.value
         }
+        private val _link = MutableStateFlow<castbridge.core.ux.LinkFacts?>(null)
+        /** R-21: what the copy engine measures (sent / confirmed, 10 s rates) for the one status line (slow Wi-Fi, slow TV disk, two percentages). */
+        val link: StateFlow<castbridge.core.ux.LinkFacts?> = _link
         private val _notice = MutableStateFlow<String?>(null)
         /** Explains automatic fallbacks (e.g. MP4 index at the end of the file). */
         val notice: StateFlow<String?> = _notice

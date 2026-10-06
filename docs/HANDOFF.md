@@ -14,6 +14,9 @@
 
 ## 0. Journal en direct (le plus récent en haut)
 
+### 2026-10-06 : copie figée à 0 %, blocs renvoyés sans fin, voies TV abandonnées (R-21) (branche d'agent, non construit, NON MESURÉ sur appareil depuis le correctif)
+- Mesure terrain : lien Wi-Fi TV à 300 Ko/s, la TV a reçu 2,7 fois le fichier sans rien écrire, téléphone à 0 %. Causes (banc + code) : progression publiée seulement à la fin d'un bloc de 4 Mo ; TV « occupée » (écriture USB bloquée) qui lit et jette chaque bloc en répondant 429, que le téléphone renvoyait sans fin ; voies TV jamais fermées. Correctifs : progression « envoyé / confirmé » toutes les secondes, tranches de 256 Ko sur lien lent, arrêt après 3 renvois sans confirmation avec la cause en français, causes TV optionnelles (`stalled`/`readonly`/`io`), `LaneRegistry` (voies muettes fermées à 30 s, bornées à `maxStreams`), sessions inactives 10 min fermées (état gardé), ligne d'état « Wi-Fi de la TV lent : ~300 Ko/s · ~20 min restantes ». Détail : `docs/TRANSFER.md` §10, ligne R-21 de `docs/REGRESSIONS.md`, parcours P-75 (à faire sur appareil, `ss -tn` par SSH Dev). Le blocage du disque USB de la TV n'est pas réparé, seulement dit.
+
 ### 2026-10-06 : Wi-Fi Direct en 5 GHz (TV 0.14.42, NON MESURÉ sur TV)
 - Décision du propriétaire : la TV demande la bande 5 GHz quand elle crée un groupe Wi-Fi Direct (menu ou automatique W18), repli sur la bande automatique si la radio refuse (`core/link/WdBand.kt`, 4 tests ; `receiver/WifiDirectGroup.kt`). La ligne d'état dit la bande demandée ; la fréquence réellement obtenue est journalisée (`groupe Wi-Fi Direct : 5 GHz (5180 MHz)`). À vérifier sur la TV : sa clé Wi-Fi USB sait-elle faire du 5 GHz (sinon repli silencieux en 2,4).
 

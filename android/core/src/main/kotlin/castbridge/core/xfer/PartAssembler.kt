@@ -23,15 +23,19 @@ class WriteStats(private val now: () -> Long = System::nanoTime) {
     fun total(): Long = written.get()
     fun record(bytes: Int, nanos: Long) {
         if (bytes <= 0) return
-        written.addAndGet(bytes.toLong())
+        written.addAndGet(bytes.toLong()); lastActivity = now()
         if (nanos <= 0) return
         val sample = bytes * 1e9 / nanos
         synchronized(this) { bps = if (bps == 0.0) sample else bps * 0.85 + sample * 0.15 }
     }
     fun bytesPerSec(): Long = bps.toLong()
+    /** R-21 : dernier mouvement du disque (octets mis en file ou écrits) ; sert à voir une écriture BLOQUÉE (file non vide, plus aucune écriture aboutie depuis des secondes). */
+    @Volatile private var lastActivity = now()
+    /** Millisecondes pendant lesquelles des octets attendent le disque sans qu'une écriture ait abouti ; 0 si la file est vide. */
+    fun stalledMs(): Long = if (inflight > 0) ((now() - lastActivity) / 1_000_000).coerceAtLeast(0) else 0L
     /** Bytes accepted from the network and not yet on disk (a lower bound: what the TV holds in flight). */
     fun queued(): Long = inflight
-    @Synchronized fun queue(delta: Long) { inflight += delta }
+    @Synchronized fun queue(delta: Long) { if (inflight <= 0 && delta > 0) lastActivity = now(); inflight += delta }
 }
 
 /**

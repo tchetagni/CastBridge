@@ -115,7 +115,14 @@ class TransferClient(
     private val discard: Boolean = false,
     /** The TV's measured disk speed (bytes/s, re-measured all along: a drive slows down when its cache is full) and its French hint when the disk is the limit. */
     private val onDisk: (bps: Long, note: String?) -> Unit = { _, _ -> },
+    /** R-21 : « envoyé » (écrit sur le socket) et « confirmé » (la TV l'a gardé), deux chiffres et deux débits sur 10 s, au moins une fois par seconde quand ça bouge, dès le premier octet. */
+    private val onDetail: (Detail) -> Unit = {},
 ) {
+    class Detail(val sent: Long, val confirmed: Long, val total: Long, val sentBps: Long, val confirmedBps: Long) {
+        val sentPercent: Int get() = if (total > 0) (sent * 100 / total).toInt().coerceIn(0, 100) else 0
+        val confirmedPercent: Int get() = if (total > 0) (confirmed * 100 / total).toInt().coerceIn(0, 100) else 0
+    }
+    private val sentSpeed = LinkSpeed(); private val confirmedSpeed = LinkSpeed()
     sealed class Result {
         object Done : Result()
         /** The TV has no multi-lane protocol: use [castbridge.core.tv.ResumableUpload]. */
@@ -171,6 +178,11 @@ class TransferClient(
             val ls = lanes(b.id, CopyTuning.streams(caps.maxStreams, b.maxStreams))
             val sched = Scheduler(m, full.map, ls, { c -> SendContext(m, source, hashes, c, compress) }, slowFromHead = full.ordered || b.ordered, listener = object : Scheduler.Listener() {
                 override fun progress(doneBytes: Long, total: Long) { onProgress(doneBytes, total) }
+                override fun sent(sentBytes: Long, confirmedBytes: Long, total: Long) {
+                    val t = clock()
+                    sentSpeed.add(t, sentBytes); confirmedSpeed.add(t, confirmedBytes)
+                    onDetail(Detail(sentBytes, confirmedBytes, total, sentSpeed.bytesPerSec(), confirmedSpeed.bytesPerSec()))
+                }
                 override fun waiting(reason: String) { onWaiting(reason) }
                 override fun laneEvent(lane: String, what: String) { onEvent("$lane : $what") }
             })

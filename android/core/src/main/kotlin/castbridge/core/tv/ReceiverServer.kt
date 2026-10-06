@@ -113,8 +113,30 @@ class ReceiverServer(
     override fun createClientHandler(finalAccept: java.net.Socket, inputStream: java.io.InputStream): NanoHTTPD.ClientHandler {
         val sock = castbridge.core.tunnel.AttributedSocket.of(finalAccept, peers)
         return object : NanoHTTPD.ClientHandler(inputStream, sock) {
-            override fun run() { connectionSocket.set(sock); try { super.run() } finally { connectionSocket.remove() } }
+            override fun run() { connectionSocket.set(sock); try { super.run() } finally { connectionSocket.remove(); laneHandles.remove(sock)?.forget() } }
         }
+    }
+
+    /** R-21 (B) : les connexions de voie des transferts multivoies, surveillées (fermées si le pair est parti ou muet depuis 30 s, bornées au nombre de flux annoncé). */
+    private val lanes = castbridge.core.xfer.LaneRegistry(maxStreams = { transfers.maxStreams })
+    private val laneHandles = java.util.concurrent.ConcurrentHashMap<java.net.Socket, castbridge.core.xfer.LaneRegistry.Handle>()
+    @Volatile private var janitor: Thread? = null
+    private fun laneHandle(session: String): castbridge.core.xfer.LaneRegistry.Handle? {
+        val sock = connectionSocket.get() ?: return null
+        laneHandles[sock]?.let { if (it.session == session && !it.wasClosed) return it; it.forget() }
+        return lanes.register(session) { runCatching { sock.close() } }.also { laneHandles[sock] = it }
+    }
+    private fun startJanitor() {
+        if (janitor != null) return
+        janitor = Thread({
+            try {
+                while (!Thread.currentThread().isInterrupted) {
+                    Thread.sleep(5_000)
+                    runCatching { val n = lanes.sweep(); if (n > 0) onLog("transfert : $n voie(s) inactive(s) fermée(s)") }
+                    runCatching { val n = transfers.closeIdle(); if (n > 0) onLog("transfert : $n session(s) sans activité fermée(s) (état gardé pour la reprise)") }
+                }
+            } catch (_: InterruptedException) { }
+        }, "cb-lane-janitor").apply { isDaemon = true; start() }
     }
 
     /**
@@ -247,6 +269,7 @@ class ReceiverServer(
 
     override fun start(timeout: Int, daemon: Boolean) {
         super.start(timeout, daemon)
+        startJanitor()
         if (contentIndexing) contentIndex.startWorker()
     }
 
@@ -535,6 +558,7 @@ class ReceiverServer(
     override fun stop() {
         moveJob?.cancelled = true
         contentIndex.stop()
+        janitor?.interrupt(); janitor = null
         super.stop()
     }
 
@@ -1105,11 +1129,12 @@ class ReceiverServer(
         if (chunking.get() >= transfers.allowedStreams() || !transfers.mayAccept(sess.manifest.length(idx).toLong()) || !transfers.admitAhead(sess, idx))
             return busy(s, len)
         chunking.incrementAndGet()
+        val lane = laneHandle(sess.manifest.id)
         try {
             val a = sess.assembler
             val r = playback.receive(sess.manifest.name, v?.id).use { rx ->
                 p["slice"]?.let { k -> a.writeSlice(idx, k.toIntOrNull() ?: return bad("bad slice"), sha, s.inputStream, len) }
-                    ?: a.writeBlock(idx, sha, s.inputStream, len, s.headers["x-cb-enc"].equals("gzip", true), pace = rx::onBytes, readCap = rx::readCap)
+                    ?: a.writeBlock(idx, sha, s.inputStream, len, s.headers["x-cb-enc"].equals("gzip", true), pace = { n -> lane?.touch(); rx.onBytes(n) }, readCap = rx::readCap)
             }
             return when (r) {
                 is castbridge.core.xfer.PartAssembler.Block.Ok -> {
@@ -1127,7 +1152,7 @@ class ReceiverServer(
                 is castbridge.core.xfer.PartAssembler.Block.Interrupted -> { rejectCode.set("interrupted"); json(SERVICE_UNAVAILABLE, """{"error":"interrupted","retry":true,"retryMs":1000}""") }   // a stalled read is a retry, never a refusal (a 400 stopped the copy)
                 is castbridge.core.xfer.PartAssembler.Block.DiskFail -> try { progress.fail("x:" + sess.manifest.id, diskReason(v!!, DiskError(r.cause))); diskFailure(v, DiskError(r.cause)) } finally { if (!volumes.alive(v!!)) { transfers.remove(sess.manifest.id); a.close() } }
             }
-        } finally { chunking.decrementAndGet() }
+        } finally { chunking.decrementAndGet(); lane?.idle() }
     }
 
     /** Largest body read and dropped before a 429 (a gzip block of 16 MiB at most, see the manifest limit). */
@@ -1145,6 +1170,13 @@ class ReceiverServer(
      * connection stays usable.
      */
     private fun busy(s: IHTTPSession, bodyLen: Long): Response {
+        // R-21 : le disque ne rend plus la main (des octets attendent, aucune écriture n'aboutit depuis 15 s) : lire et jeter 4 Mo à chaque renvoi (le téléphone en
+        // renvoyait 2,7 fois le fichier) ne sert à rien. Réponse tout de suite, avec la cause, connexion fermée (le téléphone lit la réponse en cours d'envoi).
+        val stalled = transfers.diskStalledMs()
+        if (stalled >= castbridge.core.xfer.TransferHost.DISK_STALL_MS) {
+            rejectCode.set("disk-stalled")
+            return json(status(429), """{"error":"busy","cause":"stalled","stalledMs":$stalled,"retryMs":2000,"writeBps":${transfers.stats.bytesPerSec()}}""")
+        }
         if (bodyLen in 0..maxDrainBytes) {
             try {
                 val buf = ByteArray(cfg.ioBufferBytes); var left = bodyLen
@@ -1221,11 +1253,13 @@ class ReceiverServer(
             volumes.markRemoved(v.id); return removed()
         }
         return when {
-            v.kind != VolumeKind.SAF && !v.dir.canWrite() -> json(SERVICE_UNAVAILABLE, """{"error":"volume read-only"}""")
+            v.kind != VolumeKind.SAF && !v.dir.canWrite() -> json(SERVICE_UNAVAILABLE, """{"error":"volume read-only","cause":"readonly"}""")
             msg.contains("too large", true) || msg.contains("EFBIG") ->
                 json(PAYLOAD_TOO_LARGE, """{"error":"file too large for this volume","message":${q(humanRefusal("file too large for ${v.fs.label}"))}}""")
             msg.contains("No space", true) || msg.contains("ENOSPC") -> json(INSUFFICIENT_STORAGE, spaceJson("not enough space", v))
-            else -> throw e
+            msg.contains("Read-only", true) || msg.contains("EROFS") -> json(SERVICE_UNAVAILABLE, """{"error":"volume read-only","cause":"readonly"}""")
+            // R-21 : une autre erreur d'écriture (E/S, support défaillant) remontait en 500 anonyme que le téléphone renvoyait sans fin : la cause est dite, il s'arrête
+            else -> json(Response.Status.INTERNAL_ERROR, """{"error":"write failed","cause":"io","detail":${q(msg.take(120))}}""")
         }
     }
 

@@ -67,3 +67,17 @@ Banc : `tools/transfer-bench/run.sh --simulate --size 348M --k 2,6 --conn 6M --w
 | Code demandé dans la boite | champ masqué « Code affiché sur la TV », bouton « Valider et envoyer » (une vérification, puis la copie part), code rangé par `PinStore`/`PinBook` ; file « Code requis » | parcours P-62 |
 
 Non mesuré sur appareil : débit réel du Wi-Fi 2,4 GHz, coût CPU/batterie réel des notifications, effet du fsync périodique sur la clé USB de la TV, profil « ressources faibles » (fourni par la TV, autre chantier), source exacte de la boucle de 13 s du code 8 (non retrouvée dans le code : seule la reprise `recoverKnownTv` est bornée).
+
+## 10. Lien lent, progression honnête, renvoi sans fin impossible (R-21, 2026-10-06)
+Mesuré sur le terrain (S21+ 1.2.49, TV 0.14.39, AVI 348 Mo, Wi-Fi TV à 300 Ko/s) : « 0 % » pendant 13 min, la TV reçoit 2,7 fois le fichier sans rien écrire. Détail et cause : ligne R-21 de `docs/REGRESSIONS.md`. Aucun changement de protocole : champs OPTIONNELS seulement (une TV 0.14.39/0.14.42 et un téléphone 1.2.49 restent compatibles).
+
+| Sujet | Règle |
+|---|---|
+| Progression | deux chiffres : « envoyé » (octets écrits sur le socket, morceaux de 128 Ko, y compris le bloc en vol) et « confirmé » (blocs vérifiés par la TV + tranches acquittées). `Scheduler.Listener.sent`, publié toutes les secondes quand quelque chose bouge, jamais en recul ; `TransferClient.onDetail` ajoute les débits sur 10 s (`LinkSpeed`) |
+| Blocs sur lien lent | une connexion dont le débit mesuré ferait durer un bloc plus de 8 s envoie le bloc en TRANCHES de 256 Ko (le protocole des voies lentes, déjà connu de la TV) : chaque tranche acquittée est une progression confirmée et un incident ne renvoie qu'une tranche ; la taille de bloc annoncée ne change pas (l'identifiant du transfert en dépend) |
+| Délai de lecture | 15 s sans réponse ni octet (`CopyTuning.READ_TIMEOUT_MS`) : la voie est fermée en RST (linger 0, jamais de FIN-WAIT avec des données) et recréée |
+| Renvoi sans fin | un bloc répondu « occupé » 3 fois sans qu'un seul octet soit confirmé nulle part pendant 90 s : la copie s'arrête avec la cause (`CopyCauses`) ; la TV dit sa cause en champ optionnel : `cause: stalled` (429, disque qui ne rend plus la main depuis 15 s : le corps n'est plus lu ni jeté), `readonly` et `io` (arrêt tout de suite : « La TV ne peut pas écrire… ») |
+| TV : voies | `LaneRegistry` : une voie muette depuis 30 s (2 min au repos entre deux requêtes) est fermée, au plus `maxStreams` voies par session (les plus anciennes en trop sont fermées), balayage toutes les 5 s ; session sans activité depuis 10 min fermée, état gardé sur disque (`TransferHost.closeIdle`) |
+| Ligne d'état | sous 1 Mo/s : « Wi-Fi de la TV lent : ~300 Ko/s · ~20 min restantes » (débit arrondi à 10 Ko/s, estimation absente au-delà de 48 h) ; bon débit mais confirmations en retard : « La TV écrit lentement (disque) » ; sinon « 74 % envoyés · 60 % confirmés » seulement si l'écart est d'au moins 2 points |
+
+Où la TV écrit les blocs partiels : dans `<dossier du volume cible>/.cbx/<id>.data` (le volume choisi par `StoragePolicy`, même volume que le fichier final : pas de stockage interne intermédiaire), dimensionné d'un coup sur ext4/f2fs (fichier creux : l'espace n'est PAS réservé, un disque qui se remplit en cours de copie répond « plus de place » 507, arrêt net) ; sur FAT/exFAT il grandit avec les blocs. L'espace libre n'est vérifié qu'au début (`ensureRoom`). Non mesuré sur appareil.
