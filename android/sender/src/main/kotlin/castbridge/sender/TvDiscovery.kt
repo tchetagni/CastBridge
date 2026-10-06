@@ -16,7 +16,8 @@ import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.flow.StateFlow
 import java.util.ArrayDeque
 
-data class Tv(val name: String, val host: String, val port: Int) {
+/** [locked]: the TV announces `locked=1` (not activated yet: its only open route is the activation, docs/TV-ACTIVATION-CLE-USB.md). */
+data class Tv(val name: String, val host: String, val port: Int, val locked: Boolean = false) {
     val base get() = "http://$host:$port"
 }
 
@@ -87,7 +88,7 @@ class TvDiscovery(ctx: Context) {
                     val role = s.attributes["role"]?.let { String(it) }
                     val host = s.host?.hostAddress
                     if (role == "receiver" && host != null) {
-                        val tv = Tv(s.serviceName, host, s.port)
+                        val tv = Tv(s.serviceName, host, s.port, locked = s.attributes["locked"]?.let { String(it) } == "1")
                         _tvs.value = _tvs.value.filterNot { it.name == tv.name } + tv
                     }
                     next()

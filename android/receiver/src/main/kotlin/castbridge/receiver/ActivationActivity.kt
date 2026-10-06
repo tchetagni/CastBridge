@@ -23,6 +23,8 @@ import castbridge.core.owner.FeatureGate
 import castbridge.core.owner.GateState
 import castbridge.core.owner.LockedTexts
 import castbridge.core.owner.TrialPolicy
+import castbridge.core.tv.activation.KeyScan
+import castbridge.core.tv.activation.LockedWifiTexts
 import castbridge.core.tv.activation.PickInput
 import castbridge.core.tv.activation.PickResult
 import castbridge.core.tv.activation.PickerPlan
@@ -46,6 +48,9 @@ class ActivationActivity : Activity() {
     private val poll = object : Runnable {
         override fun run() {
             if (done) return
+            // a key sent by the phone over the Wi-Fi was verified and installed by the locked TV's only route: open the TV
+            ActivationCenter.takeWifiAccepted()?.let { r -> show(r, "le Wi-Fi"); return }
+            refreshWifi()
             ActivationCenter.pending?.let { k ->
                 if (input.text.toString().trim() != k) {
                     input.setText(k)
@@ -136,6 +141,8 @@ class ActivationActivity : Activity() {
         if (upgrade) { col.addView(tv("Demande d'appareil complète (à donner à CastBridge) :", 16f, 0xFFB8C0D6.toInt())); col.addView(tv(ActivationCenter.requestText(), 13f, 0xFF7B849C.toInt(), mono = true)) }
         col.addView(tv(LockedTexts.WAYS, 18f, 0xFFB8C0D6.toInt()))
         LockedTexts.KEY_WAYS.forEach { col.addView(tv(it, 18f)) }
+        // « Activer par le Wi-Fi »: the connection code the phone asks for, in large type (only while the locked TV's single route is open)
+        wifiView = tv("", 22f, 0xFF6FE0A0.toInt(), bold = true).apply { visibility = View.GONE }; col.addView(wifiView); refreshWifi()
         dropView = tv("", 16f, 0xFFF5B027.toInt()); col.addView(dropView); refreshDrop()
         val where = tv("", 15f, 0xFF7B849C.toInt())
         col.addView(where)
@@ -167,6 +174,14 @@ class ActivationActivity : Activity() {
     companion object { const val EXTRA_UPGRADE = "upgrade"; const val SCAN_EVERY_MS = 15_000L; private const val REQ_BUILT_IN = 81; private const val REQ_SYSTEM = 82 }
     private lateinit var report: TextView
     private lateinit var dropView: TextView
+    private lateinit var wifiView: TextView
+    private fun refreshWifi() {
+        if (!::wifiView.isInitialized) return
+        val info = TvService.running?.lockedWifiInfo()
+        if (info == null) { wifiView.visibility = View.GONE; return }
+        wifiView.visibility = View.VISIBLE
+        wifiView.text = LockedWifiTexts.line(info.first, info.second)
+    }
     /** The exact readable drop folder of every volume and the file names the app sees there (thread: lists folders). */
     private fun refreshDrop() {
         Thread { val l = castbridge.core.tv.activation.DropFolders.lines(ActivationCenter.dropFolders()); h.post { if (!isFinishing) dropView.text = l.joinToString("\n") } }.start()
@@ -178,7 +193,7 @@ class ActivationActivity : Activity() {
     }
     private fun pickBuiltIn() {
         if (!termsOk()) { status.setTextColor(0xFFFF8A80.toInt()); status.text = TunnelTerms.MUST_ACCEPT; termsBox.requestFocus(); return }
-        startActivityForResult(Intent(this, FilePickActivity::class.java), REQ_BUILT_IN)
+        startActivityForResult(Intent(this, FilePickActivity::class.java).putExtra(FilePickActivity.EXTRA_SYSTEM_AVAILABLE, systemPickerIntent().resolveActivity(packageManager) != null), REQ_BUILT_IN)
     }
     private fun pickSystem() {
         if (!termsOk()) { status.setTextColor(0xFFFF8A80.toInt()); status.text = TunnelTerms.MUST_ACCEPT; termsBox.requestFocus(); return }
@@ -189,21 +204,34 @@ class ActivationActivity : Activity() {
         super.onActivityResult(requestCode, resultCode, data)
         if (requestCode != REQ_BUILT_IN && requestCode != REQ_SYSTEM) return
         if (resultCode != RESULT_OK || data == null) { handlePick(PickInput.Cancelled); return }
+        // the built-in explorer's « Ouvrir l'explorateur du système » row (Android hides files from the app): open it now
+        if (requestCode == REQ_BUILT_IN && data.getBooleanExtra(FilePickActivity.EXTRA_SYSTEM, false)) { pickSystem(); return }
         status.setTextColor(0xFFB8C0D6.toInt()); status.text = LockedTexts.SEARCHING
         Thread {
             val input: PickInput = try {
                 val stream = if (requestCode == REQ_BUILT_IN) data.getStringExtra(FilePickActivity.EXTRA_PATH)?.let { java.io.FileInputStream(File(it)) }
                              else data.data?.let { contentResolver.openInputStream(it) }              // read once, the URI is not kept (no persistable permission)
-                if (stream == null) PickInput.Nothing else stream.use { PickInput.Bytes(castbridge.core.util.BoundedRead.readAll(it, PickerPlan.MAX_BYTES + 1)) }
+                // MAX + 1 bytes at most: a bigger file is said « trop gros » (never read whole)
+                if (stream == null) PickInput.Nothing else stream.use { PickInput.Bytes(castbridge.core.util.BoundedRead.readUpTo(it, PickerPlan.MAX_BYTES + 1)) }
             } catch (e: java.io.IOException) { PickInput.Unreadable } catch (e: SecurityException) { PickInput.Unreadable }
             h.post { handlePick(input) }
         }.start()
     }
     private fun handlePick(input: PickInput) {
         when (val d = PickerPlan.decide(input)) {
-            is PickResult.Key -> {
+            is PickResult.Keys -> {
                 status.setTextColor(0xFFB8C0D6.toInt()); status.text = d.message
-                Thread { val r = ActivationCenter.accept(Channel.MANUAL, d.line.toByteArray(Charsets.UTF_8)); h.post { show(r, "le fichier choisi") } }.start()
+                // every key-shaped piece of the file, in reading order, through the same verification as a pasted key; the first one valid for THIS TV is installed
+                Thread {
+                    val results = ArrayList<ActivationResult>()
+                    val o = KeyScan.pick(d.candidates) { c -> ActivationCenter.accept(Channel.MANUAL, c.toByteArray(Charsets.UTF_8)).also { results += it }.let(ActivationCenter::verdictOf) }
+                    h.post {
+                        val r = results.getOrNull(o.index)
+                        if (r == null) { status.setTextColor(0xFFFF8A80.toInt()); status.text = KeyScan.NO_KEY; return@post }
+                        show(r, "le fichier choisi")
+                        KeyScan.summary(o)?.let { if (r !is ActivationResult.Accepted) status.text = it + "\n" + status.text }
+                    }
+                }.start()
             }
             else -> { status.setTextColor(if (d is PickResult.Cancelled || d is PickResult.Nothing) 0xFFB8C0D6.toInt() else 0xFFFF8A80.toInt()); status.text = d.message }
         }

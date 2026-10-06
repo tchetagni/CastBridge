@@ -183,8 +183,8 @@ class ActivationLookupTest {
     @Test fun `screen text gives the three real ways`() {
         val w = castbridge.core.owner.LockedTexts.KEY_WAYS
         assertEquals(3, w.size)
-        assertTrue("Activer la TV" in w[0] && "Bluetooth" in w[0] && "tous les boîtiers" in w[0])
-        assertTrue("« activation »" in w[1] && "activation.txt" in w[1] && ActivationLookup.OWN_DIR_TEXT in w[1] && "Accès à tous les fichiers" in w[1])
+        assertTrue("Activer la TV" in w[0] && "Bluetooth" in w[0] && "tous les boîtiers" in w[0] && "Wi-Fi" in w[0] && "code de connexion" in w[0])
+        assertTrue("« activation »" in w[1] && "activation.txt" in w[1] && ActivationLookup.OWN_DIR_TEXT in w[1] && "Accès à tous les fichiers" in w[1] && "n'importe quelle ligne" in w[1])
         assertTrue("champ" in w[2])
     }
 }

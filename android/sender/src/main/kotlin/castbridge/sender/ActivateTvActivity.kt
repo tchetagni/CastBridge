@@ -73,6 +73,13 @@ class ActivateTvActivity : ComponentActivity() {
                 kotlinx.coroutines.delay(4_000)
             }
         }
+        // « Activer par le Wi-Fi » a TV the phone is not linked to (a locked TV starts only its activation route and announces itself with locked=1): found by mDNS
+        val disc = remember { TvDiscovery(this@ActivateTvActivity) }
+        DisposableEffect(Unit) { disc.start(); onDispose { disc.stop() } }
+        val wifiTvs by disc.tvs.collectAsState()
+        var wifiName by remember { mutableStateOf<String?>(null) }
+        val found = wifiTvs.map { ActivationSend.Found(it.name, it.base, it.locked) }
+        val lanTarget = ActivationSend.lanTarget(lanBase, found, wifiName)
         fun clean(t: String) = t.replace("\r", "").lineSequence().map { it.trim() }.firstOrNull { it.isNotEmpty() }.orEmpty()
         var pinText by remember { mutableStateOf("") }; var askPin by remember { mutableStateOf(false) }
         fun sendBluetooth(tv: TvBluetooth.Tv, k: String, prefix: String) {
@@ -89,7 +96,7 @@ class ActivateTvActivity : ComponentActivity() {
         fun send(forceBluetooth: Boolean) {
             val k = clean(key); val tv = chosen
             if (forceBluetooth) { if (tv != null) { askPin = false; sendBluetooth(tv, k, "") }; return }
-            val lan = lanBase
+            val lan = lanTarget                                                   // Wi-Fi first when the TV is reachable on it; Bluetooth is the fallback
             val choice = ActivationSend.choose(lan?.first, lan?.second, pinText)
             when (choice.channel) {
                 ActivationSend.Channel.BLUETOOTH -> if (tv != null) sendBluetooth(tv, k, choice.explanation?.plus(" ").orEmpty()) else { ok = false; msg = "Aucune TV trouvée : allumez la TV et ouvrez CastBridge-TV." }
@@ -132,7 +139,14 @@ class ActivateTvActivity : ComponentActivity() {
                 if (t.isBlank()) msg = "Le presse-papiers est vide : copiez d'abord la clé." else { key = clean(t); msg = null }
             }, modifier = Modifier.fillMaxWidth()) { Text("Coller la clé") }
 
-            Text("2. Votre TV (allumée, CastBridge-TV ouvert, à proximité) est cherchée automatiquement.", style = MaterialTheme.typography.bodyMedium)
+            Text("2. Votre TV (allumée, CastBridge-TV ouvert, à proximité) est cherchée automatiquement : sur le Wi-Fi d'abord, sinon par Bluetooth.", style = MaterialTheme.typography.bodyMedium)
+            val lanFound = found.filterNot { it.base.startsWith("http://127.") }
+            if (lanBase == null && lanFound.isNotEmpty()) {
+                Text("Sur le Wi-Fi :", style = MaterialTheme.typography.bodySmall)
+                FlowRow(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
+                    lanFound.forEach { f -> FilterChip(lanTarget?.first == f.base, { wifiName = f.name; msg = null }, { Text(f.name + if (f.locked) " (à activer)" else "") }) }
+                }
+            }
             if (!granted) {
                 Text("Autorisez « Appareils à proximité » pour que le téléphone trouve la TV.", style = MaterialTheme.typography.bodySmall)
                 Button({ ask.launch(TvBluetooth.missingPermissions(this@ActivateTvActivity)) }) { Text("Autoriser le Bluetooth") }
@@ -151,7 +165,7 @@ class ActivateTvActivity : ComponentActivity() {
                     keyboardOptions = androidx.compose.foundation.text.KeyboardOptions(keyboardType = androidx.compose.ui.text.input.KeyboardType.NumberPassword),
                     visualTransformation = androidx.compose.ui.text.input.PasswordVisualTransformation(), modifier = Modifier.fillMaxWidth())
             }
-            Button({ send(false) }, enabled = (lanBase != null || chosen != null) && clean(key).length >= 20 && !busy, modifier = Modifier.fillMaxWidth()) { Text(if (busy) "En cours…" else if (askPin) "3. Envoyer par le Wi-Fi avec ce code" else "3. Envoyer à la TV") }
+            Button({ send(false) }, enabled = (lanTarget != null || chosen != null) && clean(key).length >= 20 && !busy, modifier = Modifier.fillMaxWidth()) { Text(if (busy) "En cours…" else if (askPin) "3. Envoyer par le Wi-Fi avec ce code" else "3. Envoyer à la TV") }
             if (askPin && chosen != null) OutlinedButton({ send(true) }, enabled = !busy && clean(key).length >= 20, modifier = Modifier.fillMaxWidth()) { Text("Envoyer par Bluetooth à la place") }
             msg?.let { Text(it, color = if (ok) MaterialTheme.colorScheme.primary else if (busy) MaterialTheme.colorScheme.onSurface else MaterialTheme.colorScheme.error) }
             Text("Pour recevoir une clé (ou passer de l'essai à la production) : touchez « Demander la clé de production » et envoyez la demande au propriétaire de CastBridge.", style = MaterialTheme.typography.bodySmall)

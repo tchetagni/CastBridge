@@ -24,7 +24,7 @@ class FilePickingTest {
 
     @Test fun `decision table on a chosen file`() {
         val big = PickInput.Bytes(ByteArray(PickerPlan.MAX_BYTES + 1) { 'a'.code.toByte() })
-        val exact = PickInput.Bytes(ByteArray(PickerPlan.MAX_BYTES) { 'a'.code.toByte() })
+        val exact = PickInput.Bytes(("cbx1.A.B\n" + "a".repeat(PickerPlan.MAX_BYTES - 9)).toByteArray())
         val cases: List<Triple<String, PickInput, Class<*>>> = listOf(
             Triple("cancelled", PickInput.Cancelled, PickResult.Cancelled::class.java),
             Triple("nothing", PickInput.Nothing, PickResult.Nothing::class.java),
@@ -32,21 +32,30 @@ class FilePickingTest {
             Triple("empty", PickInput.Bytes(ByteArray(0)), PickResult.Empty::class.java),
             Triple("blank", bytes(" \r\n \n"), PickResult.Empty::class.java),
             Triple("too big", big, PickResult.TooBig::class.java),
-            Triple("exact limit is text", exact, PickResult.Key::class.java),
+            Triple("exact limit is text", exact, PickResult.Keys::class.java),
             Triple("binary NUL", PickInput.Bytes(byteArrayOf(0x50, 0x4b, 0, 3, 4)), PickResult.NotText::class.java),
             Triple("invalid utf8", PickInput.Bytes(byteArrayOf(0xff.toByte(), 0xfe.toByte(), 0x41)), PickResult.NotText::class.java),
             Triple("control chars", PickInput.Bytes(byteArrayOf(0x41, 0x07, 0x42)), PickResult.NotText::class.java),
-            Triple("key", bytes("cbx1.AAAA.BBBB\n"), PickResult.Key::class.java),
-            Triple("bom crlf", PickInput.Bytes("﻿cbx1.AAAA\r\nsecond".toByteArray()), PickResult.Key::class.java),
+            Triple("key", bytes("cbx1.AAAA.BBBB\n"), PickResult.Keys::class.java),
+            Triple("bom crlf", PickInput.Bytes("\uFEFFcbx1.AAAA.C\r\nsecond".toByteArray()), PickResult.Keys::class.java),
+            Triple("text without a key", bytes("Bonjour\nvoici la liste des courses\n"), PickResult.NoKey::class.java),
         )
         for ((n, i, c) in cases) assertEquals(c, PickerPlan.decide(i)::class.java, n)
-        assertEquals("cbx1.AAAA", (PickerPlan.decide(PickInput.Bytes("﻿cbx1.AAAA\r\nsecond".toByteArray())) as PickResult.Key).line)
+        assertEquals(listOf("cbx1.AAAA.C"), (PickerPlan.decide(PickInput.Bytes("\uFEFFcbx1.AAAA.C\r\nsecond".toByteArray())) as PickResult.Keys).candidates)
         assertEquals("Aucun fichier choisi", PickerPlan.decide(PickInput.Cancelled).message)
+        assertTrue("Aucune clé d'activation" in PickerPlan.decide(bytes("Bonjour")).message)
+        assertTrue("256 Kio" in PickerPlan.decide(big).message)
+    }
+
+    @Test fun `the key is searched in the whole file, not only on its first line`() {
+        val text = "Objet : votre clé CastBridge\nBonjour,\n\nla voici :\n    cbx1.PAYLOAD.SIG==\n\nCordialement\n"
+        val d = PickerPlan.decide(bytes(text))
+        assertEquals(listOf("cbx1.PAYLOAD.SIG=="), (d as PickResult.Keys).candidates)
     }
 
     @Test fun `file name never matters for a chosen file`() {
         // the decision only sees bytes: a file called activation.txt or activation (1) is as good as activation
-        assertTrue(PickerPlan.decide(bytes("cbx1.KEY")) is PickResult.Key)
+        assertTrue(PickerPlan.decide(bytes("cbx1.KEY.S")) is PickResult.Keys)
     }
 
     @Test fun `verdict texts name the cause`() {
@@ -70,7 +79,7 @@ class FilePickingTest {
     private val tree = mapOf<String, List<BrowseEntry>?>(
         "/storage/emulated/0" to listOf(d("Download")),
         "/storage/emulated/0/Download" to listOf(f("a.txt")),
-        usb to listOf(f("zeta.txt"), d("Download"), d("Android"), f("big.bin", 50_000), f("Alpha.txt", 10)),
+        usb to listOf(f("zeta.txt"), d("Download"), d("Android"), f("big.txt", 300_000), f("Alpha.txt", 10), f("film.mp4", 10), f("vide.txt", 0), f(".cle", 10)),
         "$usb/Download" to listOf(d("CastBridge"), f("activation (1)")),
         "$usb/Download/CastBridge" to emptyList(),
         "$usb/Android" to listOf(d("data")),
@@ -84,10 +93,19 @@ class FilePickingTest {
         assertTrue(v.rows.all { it.isDir && it.selectable })
     }
 
-    @Test fun `sorting puts folders first then small files then too big ones`() {
+    @Test fun `every file is listed - folders, then choosable files, then greyed ones with their reason`() {
         val b = browser(); b.startAt(emptyList()); b.open(1)
-        assertEquals(listOf("Android/", "Download/", "Alpha.txt", "zeta.txt", "big.bin"), b.view().rows.map { it.label })
-        assertEquals(listOf(true, true, true, true, false), b.view().rows.map { it.selectable })
+        val rows = b.view().rows
+        assertEquals(listOf("Android/", "Download/", ".cle", "Alpha.txt", "zeta.txt", "big.txt", "film.mp4", "vide.txt"), rows.map { it.label })
+        assertEquals(listOf(true, true, true, true, true, false, false, false), rows.map { it.selectable })
+        assertEquals(listOf(null, null, null, null, null, "trop gros", "pas du texte", "vide"), rows.map { it.reason })
+    }
+
+    @Test fun `a file is greyed only for a real reason`() {
+        assertNull(FileKinds.refusal("note", 10, 1000)); assertNull(FileKinds.refusal("cle.TXT", 1000, 1000)); assertNull(FileKinds.refusal("mail.eml", 10, 1000))
+        assertEquals("trop gros", FileKinds.refusal("cle.txt", 1001, 1000))
+        assertEquals("vide", FileKinds.refusal("cle.txt", 0, 1000))
+        for (n in listOf("a.MP4", "b.jpg", "c.apk", "d.zip", "e.pdf", "f.mkv", "g.png", "h.mp3", "i.7z", "j.docx")) assertEquals("pas du texte", FileKinds.refusal(n, 10, 1000), n)
     }
 
     @Test fun `start at the first useful place that exists`() {
@@ -121,8 +139,10 @@ class FilePickingTest {
         val rows = b.view().rows.map { it.label }
         val picked = b.open(rows.indexOf("Alpha.txt")) as BrowseAction.Picked
         assertEquals("$usb/Alpha.txt", picked.file.path)
-        val refused = b.open(rows.indexOf("big.bin")) as BrowseAction.Refused
-        assertTrue("trop gros" in refused.message && "16 Kio" in refused.message)
+        val refused = b.open(rows.indexOf("big.txt")) as BrowseAction.Refused
+        assertTrue("trop gros" in refused.message && "256 Kio" in refused.message, refused.message)
+        assertTrue("pas du texte" in (b.open(rows.indexOf("film.mp4")) as BrowseAction.Refused).message)
+        assertTrue("vide" in (b.open(rows.indexOf("vide.txt")) as BrowseAction.Refused).message)
         assertTrue(b.open(99) is BrowseAction.Redraw)
         // a folder is never returned as a chosen file
         for (i in rows.indices) if (rows[i].endsWith("/")) assertTrue(b.open(i) !is BrowseAction.Picked)
@@ -159,5 +179,32 @@ class FilePickingTest {
         assertTrue(files.any { it.name == "ActivationActivity.kt" }, "sources not found from ${File(".").absolutePath}")
         for (f in files.filter { it.name in setOf("ActivationActivity.kt", "FilePickActivity.kt", "ActivationCenter.kt") }) assertFalse("takePersistableUriPermission" in f.readText(), f.name)
         for (f in files.filter { it.name in setOf("ActivationActivity.kt", "FilePickActivity.kt") }) assertFalse(Regex("FileOutputStream|writeText|writeBytes|delete\\(").containsMatchIn(f.readText().replace(Regex("//.*"), "")) && f.name == "FilePickActivity.kt", f.name)
+    }
+
+    @Test fun `a folder with more entries than the screen holds says how many are left`() {
+        val many = (1..FileBrowser.MAX_ROWS + 7).map { f("f%05d.txt".format(it)) }
+        val b = FileBrowser(roots, Fs(mapOf(usb to many)))
+        b.startAt(listOf(File(usb)))
+        val rows = b.view().rows
+        assertEquals(FileBrowser.MAX_ROWS + 1, rows.size)
+        assertTrue(rows.last().info && !rows.last().selectable && "7 autres" in rows.last().label, rows.last().label)
+    }
+
+    @Test fun `where Android hides files the explorer says so on top and offers both ways out`() {
+        val b = FileBrowser(roots, Fs(tree), access = StorageAccess.MISSING, settingsScreen = true, systemPicker = true, ownPath = "$usb/Android/data/castbridge.receiver/files")
+        b.startAt(listOf(File("$usb/Download")))
+        val v = b.view()
+        assertTrue("cache" in v.notice.orEmpty() && "tous les fichiers" in v.notice.orEmpty() && "explorateur du système" in v.notice.orEmpty(), v.notice)
+        assertEquals(listOf(AccessTexts.ASK_ALL, AccessTexts.SYSTEM), v.rows.take(2).map { it.label })
+        assertTrue(b.open(0) is BrowseAction.AskAccess)
+        assertTrue(b.open(1) is BrowseAction.SystemPicker)
+        assertTrue(v.rows.drop(2).any { it.label == "activation (1)" }, "the files Android does show are still listed")
+        // with the permission: no notice, no extra row
+        val g = FileBrowser(roots, Fs(tree), access = StorageAccess.GRANTED, systemPicker = true); g.startAt(listOf(File("$usb/Download")))
+        assertNull(g.view().notice); assertTrue(g.view().rows.none { it.action })
+        // no system picker on this box: never a dead row
+        val n = FileBrowser(roots, Fs(tree), access = StorageAccess.MISSING, settingsScreen = true, systemPicker = false); n.startAt(listOf(File("$usb/Download")))
+        assertTrue(n.view().rows.none { it.label == AccessTexts.SYSTEM })
+        assertTrue("explorateur du système" !in n.view().notice.orEmpty())
     }
 }

@@ -190,7 +190,7 @@ class ActivationAccessTest {
         val b = browser(StorageAccess.MISSING); b.startAt(listOf(own))
         val labels = b.view().rows.drop(1).map { it.label }
         assertEquals("activation_2026_unlimited.txt", labels[0])
-        assertEquals(listOf("CastBridge/", "activation.apk", "device-request.txt", "zz.txt"), labels.drop(1))
+        assertEquals(listOf("CastBridge/", "device-request.txt", "zz.txt", "activation.apk"), labels.drop(1), "every file is listed; a binary is greyed at the end")
     }
 
     @Test fun `an empty Download with the permission missing explains the permission`() {

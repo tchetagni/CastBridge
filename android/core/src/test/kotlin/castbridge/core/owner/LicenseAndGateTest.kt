@@ -165,7 +165,9 @@ class FeatureGateTest {
 
     @Test fun theLockedSurfaceIsExactlyTheActivationSurface_andANewFeatureIsLockedByDefault() {
         val expected = setOf(Feature.USAGE_NOTICE, Feature.DEVICE_CODE, Feature.ACTIVATION_BLUETOOTH, Feature.ACTIVATION_FILE, Feature.ACTIVATION_MANUAL_ENTRY, Feature.OWNER_CHANNEL,
-            Feature.DISPLAY_LANGUAGE, Feature.MINIMAL_BLUETOOTH_LINK, Feature.SHARE_DEVICE_CODE, Feature.CARRY_ACTIVATION_FOR_TV)
+            Feature.DISPLAY_LANGUAGE, Feature.MINIMAL_BLUETOOTH_LINK, Feature.SHARE_DEVICE_CODE, Feature.CARRY_ACTIVATION_FOR_TV,
+            // added ON PURPOSE (owner's decision 2026-10-06, « activer la clé en exploitant le WIFI »): one PIN-guarded route, see LockedActivationApiTest
+            Feature.ACTIVATION_WIFI)
         val locked = FeatureGate.state(required, access(), NOW)
         assertIs<GateState.Locked>(locked)
         assertEquals(expected, Feature.values().filter { FeatureGate.canUse(it, locked) }.toSet(), "the whitelist is pinned: a feature reachable while locked must be added here on purpose")

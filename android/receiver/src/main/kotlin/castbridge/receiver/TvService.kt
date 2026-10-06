@@ -199,7 +199,47 @@ class TvService : Service(), Device {
 
     private fun watchForActivation() {
         setStatus("0-storage", "Usage soumis à autorisation : activation requise")
+        startLockedHttp()
         main.removeCallbacks(activationWatch); main.postDelayed(activationWatch, 5_000)
+    }
+
+    // ------------------------------------------------------------------ « Activer par le Wi-Fi » while locked (docs/TV-ACTIVATION-CLE-USB.md)
+    /** The ONLY HTTP surface of a locked TV: POST /api/activation/install behind the connection code ([castbridge.core.tv.activation.LockedActivationApi]). */
+    private var lockedHttp: castbridge.core.tv.activation.LockedActivationServer? = null
+    @Volatile private var lockedPin: String? = null
+
+    /** What the activation screen shows for the Wi-Fi way: the connection code and the TV's addresses; null when the route is not open. */
+    fun lockedWifiInfo(): Pair<String, List<String>>? {
+        val p = lockedPin ?: return null
+        if (lockedHttp == null) return null
+        val ips = runCatching {
+            NetworkInterface.getNetworkInterfaces().toList().filter { it.isUp && !it.isLoopback }
+                .flatMap { it.inetAddresses.toList() }.filterIsInstance<Inet4Address>().filter { it.isSiteLocalAddress }.mapNotNull { it.hostAddress }
+        }.getOrDefault(emptyList())
+        return p to ips
+    }
+
+    private fun startLockedHttp(attempt: Int = 0) {
+        if (lockedHttp != null || started) return
+        val pin = TvPrefs(this).pin()
+        val api = castbridge.core.tv.activation.LockedActivationApi(PinGuard(pin), { key -> ActivationCenter.installFromWifi(key) },
+            { TunnelHub.termsAccepted(this) }, BuildConfig.VERSION_NAME)
+        val s = castbridge.core.tv.activation.LockedActivationServer(api)
+        try { s.start(15_000, false) } catch (e: Exception) {
+            Log.w(TAG, "activation Wi-Fi : port ${ReceiverServer.PORT} indisponible (${e.javaClass.simpleName}), nouvel essai")
+            if (attempt < 20) main.postDelayed({ if (!started) startLockedHttp(attempt + 1) }, 3_000)
+            return
+        }
+        lockedHttp = s; lockedPin = pin
+        register(locked = true)
+    }
+
+    private fun stopLockedHttp() {
+        val s = lockedHttp ?: return
+        lockedHttp = null; lockedPin = null
+        runCatching { s.stop() }
+        runCatching { nsdListener?.let { nsd?.unregisterService(it) } }; nsdListener = null
+        runCatching { multicastLock?.release() }
     }
 
     // ------------------------------------------------------------------ core
@@ -210,6 +250,7 @@ class TvService : Service(), Device {
         ActivationCenter.init(this)
         startOwnerChannel()                                      // the owner's phone can push the activation by Bluetooth, locked or not
         if (ActivationCenter.locked()) { watchForActivation(); return }
+        stopLockedHttp()                                         // frees port 8765 and the locked mDNS announce for the full server
         started = true
         prefs = TvPrefs(this)
         volProvider = AndroidVolumeProvider(this, prefs)
@@ -1086,7 +1127,8 @@ class TvService : Service(), Device {
 
     // ------------------------------------------------------------------ mDNS announce: _castbridge._tcp with role=receiver
 
-    private fun register() {
+    /** [locked]: the announce of a locked TV (attribute `locked=1`), so the phone's « Activer la TV » finds it on the Wi-Fi; no DIAL. */
+    private fun register(locked: Boolean = false) {
         multicastLock = runCatching {
             (applicationContext.getSystemService(Context.WIFI_SERVICE) as WifiManager).createMulticastLock("castbridge-tv").apply { setReferenceCounted(false); acquire() }
         }.getOrNull()
@@ -1096,6 +1138,7 @@ class TvService : Service(), Device {
             port = ReceiverServer.PORT
             setAttribute("role", "receiver")
             setAttribute("v", "0.2")
+            if (locked) setAttribute("locked", "1")
         }
         val l = object : NsdManager.RegistrationListener {
             override fun onServiceRegistered(i: NsdServiceInfo) { Log.i(TAG, "mDNS ${i.serviceName}") }
@@ -1105,7 +1148,7 @@ class TvService : Service(), Device {
         }
         nsd = getSystemService(NsdManager::class.java)
         runCatching { nsd?.registerService(info, NsdManager.PROTOCOL_DNS_SD, l); nsdListener = l }
-        applyDial()
+        if (!locked) applyDial()
     }
 
     /** Démarre ou arrête le récepteur DIAL selon le réglage ; sans effet sur le reste du service. */
@@ -1138,6 +1181,7 @@ class TvService : Service(), Device {
     }
 
     override fun onDestroy() {
+        stopLockedHttp()
         stopCore()
         unwatchNetwork()
         reception.removeListener(receptionNotifier)

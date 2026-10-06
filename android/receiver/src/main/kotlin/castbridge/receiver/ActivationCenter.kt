@@ -148,6 +148,32 @@ object ActivationCenter {
         return r
     }
 
+    /** The verdict the pure lookup / file scan needs from a verification result (never the key). */
+    fun verdictOf(r: ActivationResult): Verdict = when (r) {
+        is ActivationResult.Accepted -> Verdict.ACCEPTED
+        is ActivationResult.Rejected -> when (r.reason) {
+            Rejection.WRONG_DEVICE -> Verdict.WRONG_DEVICE
+            Rejection.WINDOW_CLOSED, Rejection.NOT_YET_VALID -> Verdict.EXPIRED
+            else -> Verdict.NOT_VALID
+        }
+    }
+
+    /** An activation accepted over the Wi-Fi while the activation screen is open: that screen takes it ([takeWifiAccepted]) and opens the TV. */
+    @Volatile private var wifiAccepted: ActivationResult? = null
+    fun takeWifiAccepted(): ActivationResult? = wifiAccepted.also { wifiAccepted = null }
+
+    /**
+     * POST /api/activation/install of a LOCKED TV ([LockedActivationApi], docs/TV-ACTIVATION-CLE-USB.md): the same verification as a pasted key ([accept], MANUAL channel).
+     * A key spread over several lines is joined on one line (the parsers ignore spaces), so that the line kept in `activations.txt` is the whole key.
+     */
+    fun installFromWifi(text: String): LockedActivationApi.Install {
+        val one = text.lineSequence().map { it.trim() }.filter { it.isNotEmpty() }.joinToString(" ")
+        return when (val r = accept(Channel.MANUAL, one.toByteArray(Charsets.UTF_8))) {
+            is ActivationResult.Accepted -> { wifiAccepted = r; LockedActivationApi.Install.Accepted(label()) }
+            is ActivationResult.Rejected -> LockedActivationApi.Install.Rejected(r.message)
+        }
+    }
+
     /** Lines for the activation screen explaining what the last [scanFiles] saw (volumes, folders, file state); built by the pure `ActivationLookupReport`, never carries the key. */
     @Volatile var lastReport: List<String> = emptyList()
     private val scanning = java.util.concurrent.atomic.AtomicBoolean(false)
@@ -165,16 +191,8 @@ object ActivationCenter {
             var accepted: ActivationResult? = null; var refused: ActivationResult? = null
             val o = ActivationLookup.run(ActivationLookup.candidates(downloads, own), ActivationLookup.dirsToList(downloads, own), volumes, access = storageAccess()) { line ->
                 val r = accept(Channel.MANUAL, line.toByteArray(Charsets.UTF_8))
-                if (r is ActivationResult.Accepted) { if (accepted == null) accepted = r; Verdict.ACCEPTED }
-                else {
-                    if (refused == null) refused = r
-                    val reason = (r as ActivationResult.Rejected).reason
-                    when (reason) {
-                        Rejection.WRONG_DEVICE -> Verdict.WRONG_DEVICE
-                        Rejection.WINDOW_CLOSED, Rejection.NOT_YET_VALID -> Verdict.EXPIRED
-                        else -> Verdict.NOT_VALID
-                    }
-                }
+                if (r is ActivationResult.Accepted) { if (accepted == null) accepted = r } else if (refused == null) refused = r
+                verdictOf(r)
             }
             lastReport = ActivationLookupReport.lines(o.facts)
             return accepted ?: refused

@@ -1,6 +1,6 @@
 # wios-tv-05 — TV (v2, sur décision du propriétaire) : recevoir une activation `cbx1` par HTTP en état verrouillé, pour le mode porteur d'un iPhone
 <!-- routage architecte 2026-10-04 (vague iOS, v2) -->
-> **Modèle : sonnet** · escalade : audit Opus **obligatoire** (surface de l'état verrouillé, liste blanche testée) · statut : **BLOQUÉ : décision du propriétaire** (élargir la surface verrouillée de la TV au réseau local)
+> **Modèle : sonnet** · escalade : audit Opus **obligatoire** (surface de l'état verrouillé, liste blanche testée) · statut : **FAIT AUTREMENT (2026-10-06)** : le propriétaire a demandé l'activation par le Wi-Fi ; réalisée **avec** le code de connexion (pas sans PIN comme ci-dessous), corps 16 Kio : `C/tv/activation/LockedActivationApi.kt`, `Feature.ACTIVATION_WIFI`, `CT/tv/activation/LockedActivationApiTest.kt`, docs/TV-ACTIVATION-CLE-USB.md. Audit Opus encore à faire.
 > **Groupe : WIOS-TV v2** · porte : `tools/agents/gradle-lock.sh gradle --offline :core:test --tests 'castbridge.core.owner.*' --tests '*Locked*'`
 > **Jauge : ≈ 250 k jetons entrée / 12 k sortie** (effort S, ≈ 0,5 j) · exécutant le moins cher compétent : sonnet
 

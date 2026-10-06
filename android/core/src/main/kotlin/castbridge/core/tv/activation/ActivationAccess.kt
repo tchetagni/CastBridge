@@ -82,4 +82,12 @@ object ExplorerStart {
 object AccessTexts {
     const val ASK_ALL = "Autoriser l'accès à tous les fichiers"
     const val NO_SCREEN = "Ce boîtier n'a pas l'écran d'autorisation : utilisez le téléphone (Bluetooth) ou le dossier de l'application"
+    const val SYSTEM = "Ouvrir l'explorateur du système"
+
+    /** On top of the list while Android (11 and later, without « all files access ») hides from the app the files other apps or a computer put on the drive. */
+    fun hidden(settingsScreen: Boolean, systemPicker: Boolean): String {
+        val ways = listOfNotNull(if (settingsScreen) "« $ASK_ALL »" else null, if (systemPicker) "l'explorateur du système" else null)
+        return "Android cache ici une partie des fichiers à CastBridge-TV. " +
+            (if (ways.isEmpty()) "Utilisez le téléphone ou le dossier de l'application." else "Pour tout voir : " + ways.joinToString(" ou ") + ".")
+    }
 }

@@ -14,6 +14,13 @@
 
 ## 0. Journal en direct (le plus récent en haut)
 
+### 2026-10-06 : activation par le Wi-Fi, explorateur qui liste tout, clé cherchée dans le fichier (branche d'agent, non construit)
+
+- **Wi-Fi** : une TV verrouillée ouvre UNE route, `POST /api/activation/install`, derrière le code de connexion (affiché sur l'écran d'activation), réseau local, 16 Kio, 10 essais/10 min (`LockedActivationApi`, `Feature.ACTIVATION_WIFI`, annonce mDNS `locked=1`) ; le téléphone (« Activer la TV ») trouve la TV sur le Wi-Fi même sans l'avoir ajoutée, Bluetooth en repli.
+- **Explorateur TV** : tous les fichiers listés, non choisissables grisés avec la raison ; « Android cache ici… » en tête + « Ouvrir l'explorateur du système ».
+- **Fichier choisi** : 256 Kio, clé cherchée à n'importe quelle ligne (`KeyScan`), première valable pour cette TV installée.
+- `:core:test` vert, `:receiver`/`:sender` compilent ; **rien d'essayé sur une vraie TV** ; parcours P-72 ; audit Opus de la surface verrouillée à faire.
+
 ### 2026-10-04 (soir) : PASSATION DE SESSION : activation TV par clé USB, enregistrement automatique des licences (w23-05, 2 audits), TV 0.14.37, serveur 1.2.1 NON déployé
 
 **État en une phrase.** Branche `integration/agents` (locale, NON poussée sur GitHub, non fusionnée dans `main`, aucun tag créé depuis `tv-0.14.34-beta`). Serveur de production = **1.2.0** (V62, licences + portefeuille allumés). TV de test du propriétaire : 0.14.35 verrouillée (code 97) installée, puis 0.14.36 déverrouillée (code 98) copiée sur la clé, installation à confirmer ; **la 0.14.37 (codes 100 déverrouillée / 101 verrouillée) est construite et signée mais PAS encore copiée sur la clé** (le téléphone s'est débranché du Mac, le relais est tombé).

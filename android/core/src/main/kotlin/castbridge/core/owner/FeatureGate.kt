@@ -12,6 +12,11 @@ enum class Feature(val lockedAllowed: Boolean = false) {
     MINIMAL_BLUETOOTH_LINK(true),
     /** Phone: share the device code (WhatsApp, SMS, e-mail) and carry an activation for a TV ([CarrierMode]). */
     SHARE_DEVICE_CODE(true), CARRY_ACTIVATION_FOR_TV(true),
+    /**
+     * TV: receive the key over the local Wi-Fi (owner's decision 2026-10-06, wios-tv-05 with the connection code kept): ONE HTTP route, POST /api/activation/install, behind the
+     * TV's connection code, 16 Kio, local network only ([castbridge.core.tv.activation.LockedActivationApi]); every other route answers « locked ».
+     */
+    ACTIVATION_WIFI(true),
 
     // ---- everything else is locked ----
     PLAYER, LIBRARY, REMOTE_CONTROL, FILE_TRANSFER, USB_IMPORT, DOWNLOADS, LEARN, QUIZ, GAMES, CHESS, SUDOKU, PARENTAL, LOTS_SYNC, UPDATES, SSH, ADMIN_API, WIFI_DIRECT, DLNA, SCREEN_CAPTURE, TELEMETRY, TV_PAIRING_FULL
@@ -188,8 +193,8 @@ object LockedTexts {
     const val WAYS = "Envoyer le code : le lire à voix haute, le copier, ou le partager par WhatsApp, SMS ou e-mail depuis le téléphone."
     /** The three real ways to give the key to the TV (activation screen), short on purpose; see docs/TV-ACTIVATION-CLE-USB.md. */
     val KEY_WAYS = listOf(
-        "1. Le plus simple, et la seule voie qui marche sur tous les boîtiers : sur le téléphone, CastBridge > « Activer la TV » (Bluetooth).",
-        "2. Ou le fichier « activation » (ou activation.txt) déposé dans Android/data/castbridge.receiver/files de la clé : toujours lisible. Dans Download, seulement si « Accès à tous les fichiers » est donné à CastBridge-TV.",
+        "1. Le plus simple : sur le téléphone, CastBridge > « Activer la TV ». Par le Wi-Fi si la TV et le téléphone sont sur le même réseau (code de connexion ci-dessous), sinon par Bluetooth, qui marche sur tous les boîtiers.",
+        "2. Ou « Choisir le fichier d'activation » : n'importe quel fichier texte qui contient la clé, à n'importe quelle ligne. Le fichier « activation » (ou activation.txt) déposé dans Android/data/castbridge.receiver/files de la clé est lu tout seul. Dans Download, seulement si « Accès à tous les fichiers » est donné à CastBridge-TV.",
         "3. Ou collez la clé dans le champ ci-dessous.")
     const val SEARCHING = "Recherche…"
     const val KEY_FOUND = "Clé trouvée : vérification…"

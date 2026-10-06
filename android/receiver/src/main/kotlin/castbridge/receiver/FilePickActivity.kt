@@ -34,7 +34,17 @@ class FilePickActivity : Activity() {
     private lateinit var title: TextView
     private lateinit var notice: TextView
     private lateinit var list: ListView
-    private val adapter by lazy { ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, ArrayList()) }
+    /** Rows as drawn: large type for a 720p TV seen from the sofa; a file that cannot be chosen stays listed, greyed, with its reason. */
+    private var shown: List<castbridge.core.tv.activation.BrowseRow> = emptyList()
+    private val adapter by lazy {
+        object : ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, ArrayList()) {
+            override fun getView(position: Int, convertView: View?, parent: ViewGroup): View = (super.getView(position, convertView, parent) as TextView).apply {
+                val r = shown.getOrNull(position)
+                textSize = 22f; setPadding(16, 14, 16, 14)
+                setTextColor(when { r == null -> Color.WHITE; r.action -> 0xFFF5B027.toInt(); r.info || !r.selectable -> 0xFF7B849C.toInt(); else -> Color.WHITE })
+            }
+        }
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -42,7 +52,7 @@ class FilePickActivity : Activity() {
         val col = LinearLayout(this).apply { orientation = LinearLayout.VERTICAL; setPadding(60, 30, 60, 30) }
         col.addView(TextView(this).apply { text = "Choisir le fichier d'activation"; textSize = 26f; setTextColor(0xFFF5B027.toInt()); setTypeface(typeface, Typeface.BOLD) })
         title = TextView(this).apply { textSize = 20f; setTextColor(Color.WHITE); setPadding(0, 8, 0, 8) }; col.addView(title)
-        notice = TextView(this).apply { textSize = 18f; setTextColor(0xFFFF8A80.toInt()); visibility = View.GONE }; col.addView(notice)
+        notice = TextView(this).apply { textSize = 20f; setTextColor(0xFFFF8A80.toInt()); visibility = View.GONE }; col.addView(notice)
         list = ListView(this).apply {
             this.adapter = this@FilePickActivity.adapter; isFocusable = true; isFocusableInTouchMode = true; divider = null
             setSelector(android.R.drawable.list_selector_background)
@@ -69,7 +79,7 @@ class FilePickActivity : Activity() {
         places += own                                                         // always readable: the app's own folder of each volume
         val access = ActivationCenter.storageAccess()
         // without the permission Download looks empty to the app: its own folder (the only readable one) comes first
-        browser = FileBrowser(roots, access = access, settingsScreen = canAskAll(), ownPath = own.firstOrNull { it.path.contains("/storage/") && !it.path.contains("/emulated/") }?.path ?: own.firstOrNull()?.path)
+        browser = FileBrowser(roots, access = access, settingsScreen = canAskAll(), systemPicker = intent.getBooleanExtra(EXTRA_SYSTEM_AVAILABLE, false), ownPath = own.firstOrNull { it.path.contains("/storage/") && !it.path.contains("/emulated/") }?.path ?: own.firstOrNull()?.path)
         browser.startAt(ExplorerStart.places(roots, own, access))
         draw()
     }
@@ -77,8 +87,8 @@ class FilePickActivity : Activity() {
     private fun draw() {
         val v = browser.view()
         title.text = v.title
-        adapter.clear()
-        adapter.addAll(v.rows.map { r -> if (r.action) "▶ " + r.label else if (r.info) r.label else if (r.isDir) r.label else if (r.selectable) "${r.label}   (${r.size} o)" else "${r.label}   (${r.size / 1024} Kio : trop gros)" })
+        adapter.clear(); shown = v.rows
+        adapter.addAll(v.rows.map { r -> if (r.action) "▶ " + r.label else if (r.info) r.label else if (r.isDir) r.label else if (r.reason == null) "${r.label}   (${size(r.size)})" else "${r.label}   (${size(r.size)} : ${r.reason})" })
         adapter.notifyDataSetChanged()
         notice.visibility = if (v.notice == null) View.GONE else View.VISIBLE; notice.text = v.notice.orEmpty()
         list.requestFocus(); if (adapter.count > 0) list.setSelection(0)
@@ -89,6 +99,7 @@ class FilePickActivity : Activity() {
             is BrowseAction.Redraw -> draw()
             is BrowseAction.Picked -> { setResult(RESULT_OK, Intent().putExtra(EXTRA_PATH, a.file.path)); finish() }
             BrowseAction.AskAccess -> askAccess()
+            BrowseAction.SystemPicker -> { setResult(RESULT_OK, Intent().putExtra(EXTRA_SYSTEM, true)); finish() }
             is BrowseAction.Refused -> { notice.visibility = View.VISIBLE; notice.text = a.message }
             BrowseAction.Quit -> { setResult(RESULT_CANCELED); finish() }
         }
@@ -115,5 +126,13 @@ class FilePickActivity : Activity() {
     private fun askAccess() { if (canAskAll()) runCatching { startActivity(allFilesIntent()) } }
     override fun onResume() { super.onResume(); if (::browser.isInitialized) build() }
 
-    companion object { const val EXTRA_PATH = "path" }
+    private fun size(b: Long) = when { b < 1024 -> "$b o"; b < 1024 * 1024 -> "${b / 1024} Kio"; else -> "${b / (1024 * 1024)} Mio" }
+
+    companion object {
+        const val EXTRA_PATH = "path"
+        /** Result: the owner chose « Ouvrir l'explorateur du système » (the activation screen opens it). */
+        const val EXTRA_SYSTEM = "system"
+        /** Input: an app answers ACTION_OPEN_DOCUMENT on this box. */
+        const val EXTRA_SYSTEM_AVAILABLE = "systemAvailable"
+    }
 }

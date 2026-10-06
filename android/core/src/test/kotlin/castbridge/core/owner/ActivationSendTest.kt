@@ -38,4 +38,22 @@ class ActivationSendTest {
         assertTrue(ActivationSend.sendLan(fake(404, "{}"), "k").linkDown)
         assertTrue(ActivationSend.sendLan({ _, _, _, _ -> throw IOException("down") }, "k").linkDown)
     }
+
+    // ---- « Activer par le Wi-Fi » a TV the phone has never been linked to (a locked TV announces itself on the Wi-Fi) ----
+    private val found = listOf(ActivationSend.Found("CastBridge TV salon", "http://192.168.1.21:8765", locked = true), ActivationSend.Found("CastBridge TV chambre", "http://192.168.1.22:8765", locked = false))
+
+    @Test fun theLinkedTvComesFirstThenTheTvFoundOnTheWifi() {
+        assertEquals(base to "812345", ActivationSend.lanTarget(base to "812345", found, null))
+        assertEquals("http://192.168.1.21:8765" to null, ActivationSend.lanTarget(null, found, null), "a locked TV first: it is the one waiting for a key")
+        assertEquals("http://192.168.1.22:8765" to null, ActivationSend.lanTarget(null, found, "CastBridge TV chambre"))
+        assertNull(ActivationSend.lanTarget(null, emptyList(), null))
+        // the phone's own Bluetooth gateway (127.0.0.1) is not the Wi-Fi
+        assertNull(ActivationSend.lanTarget(null, listOf(ActivationSend.Found("TV (Bluetooth)", "http://127.0.0.1:8766", false)), null))
+        // a TV found but no code known: the code is asked, Bluetooth stays offered
+        assertEquals(Channel.LAN_ASKS_PIN, ActivationSend.choose(ActivationSend.lanTarget(null, found, null)!!.first, null, null).channel)
+    }
+
+    @Test fun theCodeIsSaidToBeOnTheTvActivationScreen() {
+        assertTrue("écran d'activation" in ActivationSend.ASK_PIN_TEXT && "6 chiffres" in ActivationSend.ASK_PIN_TEXT && "Bluetooth" in ActivationSend.ASK_PIN_TEXT)
+    }
 }

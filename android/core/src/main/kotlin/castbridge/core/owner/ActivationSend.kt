@@ -26,8 +26,22 @@ object ActivationSend {
         return Choice(Channel.LAN_ASKS_PIN, null, why ?: ASK_PIN_TEXT)
     }
 
-    const val ASK_PIN_TEXT = "Pour envoyer la clé par le Wi-Fi, saisissez le code de connexion de la TV (6 chiffres, écran « Connexion & réglages » de CastBridge-TV). Il n'est utilisé que pour cet envoi et n'est pas enregistré. Sinon, l'envoi par Bluetooth reste possible."
-    const val WRONG_PIN_TEXT = "Code de connexion refusé par la TV. Vérifiez-le dans « Connexion & réglages » de CastBridge-TV, ou envoyez par Bluetooth."
+    const val ASK_PIN_TEXT = "Pour envoyer la clé par le Wi-Fi, saisissez le code de connexion de la TV (6 chiffres, affiché sur l'écran d'activation de CastBridge-TV, ou dans « Connexion & réglages »). Il n'est utilisé que pour cet envoi et n'est pas enregistré. Sinon, l'envoi par Bluetooth reste possible."
+    const val WRONG_PIN_TEXT = "Code de connexion refusé par la TV. Vérifiez-le sur l'écran d'activation de CastBridge-TV (ou « Connexion & réglages »), ou envoyez par Bluetooth."
+
+    /** A CastBridge-TV announced on the Wi-Fi (mDNS); [locked] = it announces `locked=1` (waiting for its key). */
+    data class Found(val name: String, val base: String, val locked: Boolean)
+
+    /**
+     * Where to send the key over the Wi-Fi: the TV the phone is linked to ([linked] = base and credential), otherwise the TV found on the Wi-Fi named [chosenName], otherwise the
+     * first locked one found (the one waiting for a key), otherwise the first found; never the phone's own Bluetooth gateway (loopback). No code is known for a found TV: it is asked.
+     */
+    fun lanTarget(linked: Pair<String, String?>?, found: List<Found>, chosenName: String?): Pair<String, String?>? {
+        if (linked != null) return linked
+        val lan = found.filter { f -> listOf("127.", "localhost", "[::1]").none { f.base.removePrefix("http://").startsWith(it) } }
+        val pick = lan.firstOrNull { it.name == chosenName } ?: lan.firstOrNull { it.locked } ?: lan.firstOrNull() ?: return null
+        return pick.base to null
+    }
 
     /** Result of the LAN call: [pinRefused] true when the TV did not accept the connection code (the screen asks again / offers Bluetooth). */
     data class Result(val ok: Boolean, val message: String, val pinRefused: Boolean = false, val linkDown: Boolean = false)

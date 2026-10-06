@@ -15,20 +15,22 @@ sealed class PickInput {
     class Bytes(val bytes: ByteArray) : PickInput()
 }
 
-/** Decision on a chosen file; a [Key] is the first line, still to be verified by the activation parser. */
+/** Decision on a chosen file; [Keys] are the key-shaped pieces of the whole text ([KeyScan.candidates]), in reading order, still to be verified one by one by the activation parser. */
 sealed class PickResult(val message: String) {
     object Cancelled : PickResult("Aucun fichier choisi")
     object Nothing : PickResult("Aucun fichier choisi")
     object Unreadable : PickResult("Impossible de lire ce fichier : Android refuse l'accès (autorisez l'accès aux fichiers) ou la clé a été retirée")
     object Empty : PickResult("Ce fichier est vide : ce n'est pas une activation")
-    object TooBig : PickResult("Ce fichier est trop gros (16 Kio au plus) : ce n'est pas une activation")
+    object TooBig : PickResult("Ce fichier est trop gros (${KeyScan.MAX_FILE_BYTES / 1024} Kio au plus) : ce n'est pas une activation")
     object NotText : PickResult("Ce fichier n'est pas du texte : ce n'est pas une activation")
-    class Key(val line: String) : PickResult("Clé trouvée : vérification…")
+    object NoKey : PickResult(KeyScan.NO_KEY)
+    class Keys(val candidates: List<String>) : PickResult("Clé trouvée : vérification…")
 }
 
 /** Which chooser buttons the activation screen shows, and what a chosen file means. Pure: the Android side only feeds it facts. */
 object PickerPlan {
-    const val MAX_BYTES = 16_384
+    /** A chosen text file is read up to 256 Kio and searched line by line for the key ([KeyScan]). */
+    const val MAX_BYTES = KeyScan.MAX_FILE_BYTES
     const val NO_SYSTEM_PICKER = "Cet appareil n'a pas d'explorateur de fichiers système : utilisez l'explorateur de CastBridge-TV, le téléphone (Bluetooth) ou collez la clé"
 
     enum class Chooser { BUILT_IN, SYSTEM }
@@ -53,7 +55,8 @@ object PickerPlan {
                 b.size > MAX_BYTES -> PickResult.TooBig
                 b.isEmpty() -> PickResult.Empty
                 !isText(b) -> PickResult.NotText
-                else -> ActivationLookup.firstLine(b)?.let { PickResult.Key(it) } ?: PickResult.Empty
+                ActivationLookup.firstLine(b) == null -> PickResult.Empty
+                else -> KeyScan.candidates(String(b, Charsets.UTF_8)).let { if (it.isEmpty()) PickResult.NoKey else PickResult.Keys(it) }
             }
         }
     }
@@ -95,8 +98,40 @@ object RealBrowseFs : BrowseFs {
     } catch (e: SecurityException) { null }
 }
 
-/** [action] = the « allow all files » row; [info] = an explanation row (not selectable). */
-data class BrowseRow(val label: String, val isDir: Boolean, val selectable: Boolean, val size: Long = 0, val action: Boolean = false, val info: Boolean = false)
+/** [action] = a row that opens something (« allow all files », system explorer); [info] = an explanation row (not selectable); [reason] = why a listed file cannot be chosen (shown greyed). */
+data class BrowseRow(val label: String, val isDir: Boolean, val selectable: Boolean, val size: Long = 0, val action: Boolean = false, val info: Boolean = false, val reason: String? = null)
+
+/** Why a listed file cannot be chosen as an activation, from its name and size only (the content is checked once chosen): null = choosable. */
+object FileKinds {
+    const val NOT_TEXT = "pas du texte"
+    const val TOO_BIG = "trop gros"
+    const val EMPTY = "vide"
+
+    /** Extensions that are never text (video, image, sound, archive, application, office document). */
+    private val BINARY = setOf(
+        "mp4", "mkv", "avi", "mov", "m4v", "webm", "ts", "mpg", "mpeg", "3gp", "wmv", "flv",
+        "jpg", "jpeg", "png", "gif", "webp", "bmp", "heic", "heif", "tif", "tiff", "ico",
+        "mp3", "wav", "aac", "flac", "ogg", "opus", "m4a", "wma", "amr",
+        "zip", "rar", "7z", "gz", "tgz", "bz2", "xz", "tar", "iso", "img", "bin", "dmg",
+        "apk", "apks", "xapk", "aab", "exe", "msi", "dex", "so", "jar", "class", "obb",
+        "pdf", "doc", "docx", "xls", "xlsx", "ppt", "pptx", "odt", "ods", "odp", "epub",
+        "db", "sqlite", "learn", "cbhash", "torrent",
+    )
+
+    fun refusal(name: String, size: Long, maxPick: Long): String? = when {
+        name.lastIndexOf('.') > 0 && name.substringAfterLast('.').lowercase() in BINARY -> NOT_TEXT
+        size > maxPick -> TOO_BIG
+        size <= 0 -> EMPTY
+        else -> null
+    }
+
+    /** The owner-facing refusal when such a file is chosen anyway. */
+    fun message(reason: String, maxPick: Long): String = when (reason) {
+        TOO_BIG -> "Ce fichier est trop gros (${maxPick / 1024} Kio au plus) : ce n'est pas une activation"
+        EMPTY -> "Ce fichier est vide : ce n'est pas une activation"
+        else -> "Ce fichier n'est pas du texte (vidéo, image, archive…) : ce n'est pas une activation"
+    }
+}
 data class BrowseView(val title: String, val rows: List<BrowseRow>, val notice: String?)
 
 sealed class BrowseAction {
@@ -105,23 +140,30 @@ sealed class BrowseAction {
     class Refused(val message: String) : BrowseAction()
     /** The owner chose the first row: open the settings screen « all files access ». */
     object AskAccess : BrowseAction()
+    /** The owner chose « Explorateur du système »: the activation screen opens the system picker (it shows what Android hides from the app). */
+    object SystemPicker : BrowseAction()
     object Quit : BrowseAction()
 }
 
 /**
  * Navigation of the built-in explorer. State = stack of folders; empty stack = the list of volumes (the top). BACK goes to the parent folder, then to the volume list,
- * then quits: it never climbs above a volume root. Folders first, then files up to [MAX_PICK] bytes, then bigger files (shown, refused). Nothing is ever written.
+ * then quits: it never climbs above a volume root. EVERY entry of the folder is listed (hidden ones too, up to [MAX_ROWS]): files named like an activation first, then folders,
+ * then the files that can be chosen, then the others greyed with their reason ([FileKinds]: not text, too big, empty). Nothing is ever written.
  */
 class FileBrowser(
     private val roots: List<BrowseRoot>, private val fs: BrowseFs = RealBrowseFs, private val maxPick: Long = PickerPlan.MAX_BYTES.toLong(),
     private val access: StorageAccess = StorageAccess.GRANTED, private val settingsScreen: Boolean = true, private val ownPath: String? = null,
+    /** An app answers ACTION_OPEN_DOCUMENT on this box: a « Explorateur du système » row is offered while Android hides files. */
+    private val systemPicker: Boolean = false,
 ) {
-    /** The permission row (or its explanation) shown first while the permission is missing. */
+    /** The permission row (or its explanation), then the system explorer, shown first while the permission is missing. */
     private val top: List<BrowseRow> = when {
         access == StorageAccess.GRANTED -> emptyList()
         settingsScreen -> listOf(BrowseRow(AccessTexts.ASK_ALL, false, true, action = true))
         else -> listOf(BrowseRow(AccessTexts.NO_SCREEN, false, false, info = true))
-    }
+    } + if (access == StorageAccess.MISSING && systemPicker) listOf(BrowseRow(AccessTexts.SYSTEM, false, true, action = true)) else emptyList()
+    /** Entries beyond [MAX_ROWS] in the current folder (said in a last row, never silently dropped). */
+    private var moreRows = 0
     private val stack = ArrayList<File>()
     private var rows: List<BrowseEntry> = emptyList()
     private var denied = false
@@ -144,25 +186,32 @@ class FileBrowser(
     }
 
     private fun load() {
-        denied = false
+        denied = false; moreRows = 0
         val d = stack.lastOrNull()
         rows = if (d == null) emptyList() else {
             val l = try { fs.list(d) } catch (e: SecurityException) { null }
             if (l == null) { denied = true; emptyList() }
-            else l.sortedWith(compareBy<BrowseEntry>({ it.isDir || !ActivationNames.isOffered(it.name, it.size, maxPick) }, { !it.isDir }, { !it.isDir && it.size > maxPick }, { it.name.lowercase() }, { it.name })).take(MAX_ROWS)
+            else l.sortedWith(compareBy<BrowseEntry>({ it.isDir || !ActivationNames.isOffered(it.name, it.size, maxPick) }, { !it.isDir }, { refusal(it) != null }, { it.name.lowercase() }, { it.name }))
+                .also { moreRows = (it.size - MAX_ROWS).coerceAtLeast(0) }.take(MAX_ROWS)
         }
     }
 
+    private fun refusal(e: BrowseEntry): String? = if (e.isDir) null else FileKinds.refusal(e.name, e.size, maxPick)
+
     fun view(): BrowseView {
         val d = stack.lastOrNull()
-        if (d == null) return BrowseView("Choisir un emplacement", top + roots.map { BrowseRow(label(it), true, true) }, if (roots.isEmpty()) "Aucun stockage monté : branchez la clé USB" else null)
+        // where Android hides files from the app (no « all files access »): said on top of the list, with the ways out
+        val hidden = if (access == StorageAccess.MISSING) AccessTexts.hidden(settingsScreen, systemPicker) else null
+        if (d == null) return BrowseView("Choisir un emplacement", top + roots.map { BrowseRow(label(it), true, true) }, if (roots.isEmpty()) "Aucun stockage monté : branchez la clé USB" else hidden)
         val notice = when {
             denied -> "Android refuse de lister ce dossier (permission de stockage) : autorisez l'accès aux fichiers, ou ouvrez Android/data/castbridge.receiver/files"
             rows.isEmpty() && access == StorageAccess.MISSING && !inOwnDir(d) -> ActivationLookupReport.missingAccess(ownPath)
             rows.isEmpty() -> "Dossier vide"
+            !inOwnDir(d) -> hidden
             else -> null
         }
-        return BrowseView(title(d), top + rows.map { BrowseRow(if (it.isDir) it.name + "/" else it.name, it.isDir, it.isDir || it.size <= maxPick, it.size) }, notice)
+        val more = if (moreRows > 0) listOf(BrowseRow("… et $moreRows autres éléments non affichés (dossier trop rempli)", false, false, info = true)) else emptyList()
+        return BrowseView(title(d), top + rows.map { e -> refusal(e).let { r -> BrowseRow(if (e.isDir) e.name + "/" else e.name, e.isDir, r == null, e.size, reason = r) } } + more, notice)
     }
 
     private fun inOwnDir(d: File) = ownPath != null && (d.path == ownPath || d.path.startsWith("$ownPath/"))
@@ -171,13 +220,13 @@ class FileBrowser(
 
     /** OK on row [index]: enters a folder, picks a file, or refuses a file too big. */
     fun open(index: Int): BrowseAction {
-        if (index < top.size) return if (top[index].action) BrowseAction.AskAccess else BrowseAction.Redraw
+        if (index < top.size) return when { !top[index].action -> BrowseAction.Redraw; top[index].label == AccessTexts.SYSTEM -> BrowseAction.SystemPicker; else -> BrowseAction.AskAccess }
         val index = index - top.size
         if (stack.isEmpty()) { val r = roots.getOrNull(index) ?: return BrowseAction.Redraw; stack += r.dir; load(); return BrowseAction.Redraw }
         val e = rows.getOrNull(index) ?: return BrowseAction.Redraw
         val f = File(stack.last(), e.name)
         if (e.isDir) { stack += f; load(); return BrowseAction.Redraw }
-        if (e.size > maxPick) return BrowseAction.Refused("Ce fichier est trop gros (${maxPick / 1024} Kio au plus) : ce n'est pas une activation")
+        refusal(e)?.let { return BrowseAction.Refused(FileKinds.message(it, maxPick)) }
         return BrowseAction.Picked(f)
     }
 
@@ -190,5 +239,5 @@ class FileBrowser(
         load(); return BrowseAction.Redraw
     }
 
-    companion object { const val MAX_ROWS = 300 }
+    companion object { const val MAX_ROWS = 2000 }
 }

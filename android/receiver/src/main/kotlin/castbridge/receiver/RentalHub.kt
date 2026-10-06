@@ -187,6 +187,8 @@ private class ActivationInstallApi(private val ctx: Context) : ApiExtension {
     }
     override fun handleBody(path: String, method: String, params: Map<String, String>, body: ByteArray): ApiReply? {
         if (path != "/api/activation/install" || method != "POST") return null
+        // an activation is a few Kio at most: same 16 Kio bound as the locked TV's Wi-Fi route (castbridge.core.tv.activation.LockedActivationApi)
+        if (body.size > castbridge.core.tv.activation.LockedActivationApi.MAX_BODY) return ApiReply(413, """{"error":"body too large","max":${castbridge.core.tv.activation.LockedActivationApi.MAX_BODY}}""")
         ActivationCenter.init(ctx)
         val text = String(body, Charsets.UTF_8).trim()
         // A key sent from the phone over the Wi-Fi opens a locked or trial TV only after the terms of use were accepted ON the TV (activation screen), like a key typed or read from a USB drive.
