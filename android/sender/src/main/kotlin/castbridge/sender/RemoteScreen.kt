@@ -301,7 +301,7 @@ fun RemoteScreen(onClose: () -> Unit) {
             TopAppBar(
                 title = {
                     Column(Modifier.clickable { chooser = true }) {
-                        Text("Télécommande", maxLines = 1)
+                        Text("Télécommande", maxLines = 1, style = MaterialTheme.typography.titleMedium)
                         Text(tv?.label ?: "Choisir la TV ▾", style = MaterialTheme.typography.bodySmall, color = cs.onSurfaceVariant, maxLines = 1, overflow = TextOverflow.Ellipsis)
                     }
                 },
@@ -382,14 +382,18 @@ fun RemoteScreen(onClose: () -> Unit) {
                 }
             }
 
-            // Playback
-            Row(Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.SpaceEvenly, verticalAlignment = Alignment.CenterVertically) {
-                RemoteKeyButton(RemoteKey.PREVIOUS, Icons.Filled.SkipPrevious, size = 48)
-                RemoteKeyButton(RemoteKey.REWIND, cbv(R.drawable.ic_cb_recul_10s), size = 52)
-                RemoteKeyButton(RemoteKey.PLAY_PAUSE, cbv(R.drawable.ic_cb_lecture), size = 64, accent = true)
-                RemoteKeyButton(RemoteKey.FAST_FORWARD, cbv(R.drawable.ic_cb_avance_10s), size = 52)
-                RemoteKeyButton(RemoteKey.NEXT, Icons.Filled.SkipNext, size = 48)
-                RemoteKeyButton(RemoteKey.STOP, Icons.Filled.Stop, size = 48)
+            // Playback: six keys must never touch each other, so their sizes follow the width (gaps stay >= 8 dp on a 320 dp phone)
+            BoxWithConstraints(Modifier.fillMaxWidth()) {
+                val f = ((maxWidth.value - 8f * 7) / 288f).coerceIn(0.7f, 1f)
+                fun d(v: Int) = (v * f).toInt()
+                Row(Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.SpaceEvenly, verticalAlignment = Alignment.CenterVertically) {
+                    RemoteKeyButton(RemoteKey.PREVIOUS, Icons.Filled.SkipPrevious, size = d(44))
+                    RemoteKeyButton(RemoteKey.REWIND, cbv(R.drawable.ic_cb_recul_10s), size = d(48))
+                    RemoteKeyButton(RemoteKey.PLAY_PAUSE, cbv(R.drawable.ic_cb_lecture), size = d(60), accent = true)
+                    RemoteKeyButton(RemoteKey.FAST_FORWARD, cbv(R.drawable.ic_cb_avance_10s), size = d(48))
+                    RemoteKeyButton(RemoteKey.NEXT, Icons.Filled.SkipNext, size = d(44))
+                    RemoteKeyButton(RemoteKey.STOP, Icons.Filled.Stop, size = d(44))
+                }
             }
             // Volume and channels
             Row(Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.SpaceEvenly, verticalAlignment = Alignment.CenterVertically) {
