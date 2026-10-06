@@ -31,6 +31,19 @@ class TvPrefs(ctx: Context) {
         }
     }
 
+    /**
+     * Audit M1 d (docs/TV-ACTIVATION-CLE-USB.md): the code shown while the TV was LOCKED (its Wi-Fi activation route) is marked « exposé »; at the activation it is
+     * replaced once ([castbridge.core.tv.activation.LockedPinRotation]). The new code and the cleared mark are written in ONE synchronous commit. Never logged.
+     */
+    fun lockedPinStore(): castbridge.core.tv.activation.LockedPinRotation.Store = object : castbridge.core.tv.activation.LockedPinRotation.Store {
+        override fun exposed() = sp.getBoolean("pin_exposed_locked", false)
+        override fun markExposed() { runCatching { sp.edit().putBoolean("pin_exposed_locked", true).commit() } }
+        override fun replace(newPin: String): Boolean = synchronized(this@TvPrefs) {
+            if (!Pin.isValidFormat(newPin)) return false
+            runCatching { sp.edit().putString("pin", newPin).putBoolean("pin_exposed_locked", false).commit() }.getOrDefault(false)
+        }
+    }
+
     /** Storage/memory profile: defaults for a modest TV, overridable through /api/storage. */
     fun profile(): TvProfile = TvProfile(
         quotaBytes = getLong("quota_bytes", 0),

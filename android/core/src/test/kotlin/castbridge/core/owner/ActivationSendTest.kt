@@ -42,15 +42,57 @@ class ActivationSendTest {
     // ---- « Activer par le Wi-Fi » a TV the phone has never been linked to (a locked TV announces itself on the Wi-Fi) ----
     private val found = listOf(ActivationSend.Found("CastBridge TV salon", "http://192.168.1.21:8765", locked = true), ActivationSend.Found("CastBridge TV chambre", "http://192.168.1.22:8765", locked = false))
 
-    @Test fun theLinkedTvComesFirstThenTheTvFoundOnTheWifi() {
+    @Test fun theLinkedTvComesFirstThenTheTvTheCustomerTouched() {
         assertEquals(base to "812345", ActivationSend.lanTarget(base to "812345", found, null))
-        assertEquals("http://192.168.1.21:8765" to null, ActivationSend.lanTarget(null, found, null), "a locked TV first: it is the one waiting for a key")
-        assertEquals("http://192.168.1.22:8765" to null, ActivationSend.lanTarget(null, found, "CastBridge TV chambre"))
+        assertEquals("http://192.168.1.22:8765" to null, ActivationSend.lanTarget(null, found, "http://192.168.1.22:8765"))
+        assertEquals("http://192.168.1.21:8765" to null, ActivationSend.lanTarget(null, found, "http://192.168.1.21:8765"))
         assertNull(ActivationSend.lanTarget(null, emptyList(), null))
         // the phone's own Bluetooth gateway (127.0.0.1) is not the Wi-Fi
-        assertNull(ActivationSend.lanTarget(null, listOf(ActivationSend.Found("TV (Bluetooth)", "http://127.0.0.1:8766", false)), null))
+        assertNull(ActivationSend.lanTarget(null, listOf(ActivationSend.Found("TV (Bluetooth)", "http://127.0.0.1:8766", false)), "http://127.0.0.1:8766"))
         // a TV found but no code known: the code is asked, Bluetooth stays offered
-        assertEquals(Channel.LAN_ASKS_PIN, ActivationSend.choose(ActivationSend.lanTarget(null, found, null)!!.first, null, null).channel)
+        assertEquals(Channel.LAN_ASKS_PIN, ActivationSend.choose(ActivationSend.lanTarget(null, found, "http://192.168.1.21:8765")!!.first, null, null).channel)
+    }
+
+    // ---- audit M2: never an automatic choice, never a public address ----
+
+    @Test fun noTvIsChosenAutomaticallyWhenThePhoneIsNotLinked() {
+        assertNull(ActivationSend.lanTarget(null, found, null), "even a TV announcing locked=1 must be touched by the customer")
+        assertNull(ActivationSend.lanTarget(null, listOf(found.first()), null), "even a single one")
+        assertNull(ActivationSend.lanTarget(null, found, "http://192.168.1.99:8765"), "a TV that is no longer announced")
+    }
+
+    @Test fun onlyPrivateAddressesAreTargets() {
+        for (b in listOf("http://8.8.8.8:8765", "http://100.64.1.2:8765", "http://evil.example.com:8765", "http://192.168.1.21.evil.com:8765", "https://192.168.1.21:8765", "192.168.1.21:8765"))
+            assertNull(ActivationSend.lanTarget(null, listOf(ActivationSend.Found("TV", b, true)), b), b)
+        for (b in listOf("http://10.0.0.5:8765", "http://172.20.1.1:8765", "http://[fe80::1%wlan0]:8765", "http://fd12::5:8765"))
+            assertEquals(b to null, ActivationSend.lanTarget(null, listOf(ActivationSend.Found("TV", b, true)), b), b)
+        // a linked TV with a public address is refused too
+        assertNull(ActivationSend.lanTarget("http://8.8.8.8:8765" to "812345", found, null))
+        assertEquals("192.168.1.21", ActivationSend.hostOf("http://192.168.1.21:8765"))
+        assertEquals("fe80::1%wlan0", ActivationSend.hostOf("http://[fe80::1%wlan0]:8765"))
+        assertEquals("fd12::5", ActivationSend.hostOf("http://fd12::5:8765"))
+        assertNull(ActivationSend.hostOf("ftp://192.168.1.21:8765"))
+    }
+
+    @Test fun theScreenShowsTheTargetAddressNextToTheCode() {
+        assertEquals("TV 192.168.1.21", ActivationSend.targetLabel("http://192.168.1.21:8765"))
+        assertNull(ActivationSend.targetLabel(null))
+    }
+
+    // ---- audit M2: an announce with the same name from another address does not replace the TV silently ----
+
+    private data class Ann(val name: String, val host: String, val locked: Boolean = false, val other: String? = null)
+    private fun merge(cur: List<Ann>, n: Ann) = ActivationSend.mergeAnnounce(cur, n, { it.name }, { it.host }, { it.other }, { a, other -> a.copy(other = other) })
+
+    @Test fun aSameNameAnnounceFromAnotherAddressKeepsTheOldestAndIsFlagged() {
+        val first = merge(emptyList(), Ann("Salon", "192.168.1.21", locked = true))
+        assertEquals(listOf(Ann("Salon", "192.168.1.21", true)), first)
+        val again = merge(first, Ann("Salon", "192.168.1.21", locked = false))
+        assertEquals(listOf(Ann("Salon", "192.168.1.21", false)), again, "the same TV re-announced: updated")
+        val spoof = merge(again, Ann("Salon", "192.168.1.66", locked = true))
+        assertEquals(listOf(Ann("Salon", "192.168.1.21", false, other = "192.168.1.66")), spoof, "the oldest address kept, the other one signalled")
+        assertEquals(listOf(Ann("Salon", "192.168.1.21", true, other = "192.168.1.66")), merge(spoof, Ann("Salon", "192.168.1.21", true)), "the flag stays")
+        assertEquals(2, merge(spoof, Ann("Chambre", "192.168.1.22")).size)
     }
 
     @Test fun theCodeIsSaidToBeOnTheTvActivationScreen() {

@@ -1,6 +1,9 @@
 package castbridge.core.tv.activation
 
 import castbridge.core.net.JsonLite
+import castbridge.core.owner.Feature
+import castbridge.core.owner.FeatureGate
+import castbridge.core.owner.GateState
 import castbridge.core.ssh.Lan
 import castbridge.core.tunnel.TunnelTerms
 import castbridge.core.tv.ApiReply
@@ -8,7 +11,6 @@ import castbridge.core.tv.HostGuard
 import castbridge.core.tv.PinGuard
 import fi.iki.elonen.NanoHTTPD
 import java.io.IOException
-import java.util.concurrent.ConcurrentHashMap
 
 /**
  * « Activer par le Wi-Fi » a LOCKED TV (docs/TV-ACTIVATION-CLE-USB.md; wios-tv-05, decided by the owner on 2026-10-06 with the connection code KEPT).
@@ -17,7 +19,8 @@ import java.util.concurrent.ConcurrentHashMap
  *  - `GET /api/hello`: who answers (`locked:true`, `pinRequired:true`), nothing else, never the code;
  *  - `POST /api/activation/install`: body = the key (full token, grouped text or compact key), behind the TV's connection code (`X-CB-Pin`, the same [PinGuard] lockout as the
  *    full API; a trusted-phone token never opens it, [castbridge.core.trust.TvAuth.tokenMayCall]), from the local network only (and a local `Host`, anti DNS-rebinding),
- *    [MAX_BODY] bytes at most, [MAX_TRIES] verifications per address per [WINDOW_MS]; the terms of use must have been accepted on the TV; the key goes to [install], i.e. the
+ *    [MAX_BODY] bytes at most, [MAX_TRIES] verifications per address per [WINDOW_MS]; the terms of use must have been accepted on the TV (checked BEFORE the code, audit M1 b);
+ *    at most [GLOBAL_MAX_WRONG] wrong codes per [WINDOW_MS] from every address together, then 429 for everyone (audit M1 a); the key goes to [install], i.e. the
  *    SAME verifier as a pasted key (signature by a trusted key, binding to this TV's device code, window). The key is never logged nor echoed.
  *  - anything else: 403 `locked`.
  * Pure but for [LockedActivationServer], the thin NanoHTTPD shell.
@@ -37,7 +40,14 @@ class LockedActivationApi(
     /** What the guard needs from an HTTP request (headers already lower-cased by the server). */
     data class Request(val method: String, val path: String, val remoteIp: String?, val host: String?, val pin: String?, val token: String?, val contentLength: Long?)
 
-    private val tries = ConcurrentHashMap<String, ArrayDeque<Long>>()
+    /** Verifications per address (access-ordered, at most [MAX_ADDRESSES] addresses: the least recently seen is forgotten first, audit M1 c). */
+    private val tries = object : LinkedHashMap<String, ArrayDeque<Long>>(64, 0.75f, true) {
+        override fun removeEldestEntry(eldest: MutableMap.MutableEntry<String, ArrayDeque<Long>>?) = size > MAX_ADDRESSES
+    }
+    /** Times of the wrong codes, every address together (audit M1 a): at most [GLOBAL_MAX_WRONG] per [WINDOW_MS], then 429 for everyone. */
+    private val wrong = ArrayDeque<Long>()
+
+    fun trackedAddresses(): Int = synchronized(tries) { tries.size }
 
     /** [readBody] reads exactly n bytes of the body (null if the peer sent fewer); it is called only once the request passed every check. */
     fun handle(r: Request, readBody: (Int) -> ByteArray?): ApiReply {
@@ -47,17 +57,20 @@ class LockedActivationApi(
         if (r.path != PATH) return reply(403, """{"error":${JsonLite.quote(LOCKED)},"locked":true}""")
         if (r.method != "POST") return reply(405, """{"error":"use POST"}""")
         if (r.pin == null && r.token != null) return reply(403, """{"error":"pin required","message":"Cette action demande le code de la TV."}""")
+        // the terms BEFORE the code (audit M1 b): a TV whose terms are not accepted never says whether a code is right
+        if (!termsAccepted()) return reply(409, """{"error":${JsonLite.quote(TunnelTerms.MUST_ACCEPT_ON_TV)}}""")
+        // the global cap BEFORE the code (audit M1 a): once reached, no code is compared any more, from any address
+        if (globalClosed()) return reply(429, """{"error":${JsonLite.quote(GLOBAL_CLOSED)}}""")
         when (guard.check(ip, r.pin)) {
             PinGuard.Result.OK -> {}
-            PinGuard.Result.BAD -> return reply(401, """{"error":"bad pin"}""")
-            PinGuard.Result.LOCKED -> return reply(401, """{"error":"locked","retryAfter":${guard.retryAfterSeconds(ip)}}""")
+            PinGuard.Result.BAD -> { countWrong(); return reply(401, """{"error":"bad pin"}""") }
+            PinGuard.Result.LOCKED -> { countWrong(); return reply(401, """{"error":"locked","retryAfter":${guard.retryAfterSeconds(ip)}}""") }
         }
         val len = r.contentLength ?: return reply(400, """{"error":"body missing"}""")
         if (len <= 0) return reply(400, """{"error":"body missing"}""")
         if (len > MAX_BODY) return reply(413, """{"error":"body too large","max":$MAX_BODY}""")
         if (!take(ip)) return reply(429, """{"error":"trop d'essais : réessayez dans 10 minutes"}""")
         val body = readBody(len.toInt()) ?: return reply(400, """{"error":"body incomplete"}""")
-        if (!termsAccepted()) return reply(409, """{"error":${JsonLite.quote(TunnelTerms.MUST_ACCEPT_ON_TV)}}""")
         return when (val res = install(String(body, Charsets.UTF_8).removePrefix("﻿").trim())) {
             is Install.Accepted -> reply(200, """{"installed":true,"label":${JsonLite.quote(res.label)},"notes":[]}""")
             is Install.Rejected -> reply(422, """{"error":${JsonLite.quote(res.message)}}""")
@@ -65,15 +78,17 @@ class LockedActivationApi(
     }
 
     /** One verification for [ip] if fewer than [MAX_TRIES] were made in the last [WINDOW_MS]. */
-    private fun take(ip: String): Boolean {
+    private fun take(ip: String): Boolean = synchronized(tries) {
         val q = tries.getOrPut(ip) { ArrayDeque() }
-        synchronized(q) {
-            val t = now()
-            while (q.isNotEmpty() && t - q.first() > WINDOW_MS) q.removeFirst()
-            if (q.size >= MAX_TRIES) return false
-            q.addLast(t); return true
-        }
+        val t = now()
+        prune(q, t)
+        if (q.size >= MAX_TRIES) return false
+        q.addLast(t); true
     }
+
+    private fun prune(q: ArrayDeque<Long>, t: Long) { while (q.isNotEmpty() && t - q.first() > WINDOW_MS) q.removeFirst() }
+    private fun globalClosed(): Boolean = synchronized(wrong) { prune(wrong, now()); wrong.size >= GLOBAL_MAX_WRONG }
+    private fun countWrong() { synchronized(wrong) { val t = now(); prune(wrong, t); wrong.addLast(t) } }
 
     private fun reply(status: Int, json: String) = ApiReply(status, json)
 
@@ -82,6 +97,14 @@ class LockedActivationApi(
         const val MAX_BODY = 16_384
         const val MAX_TRIES = 10
         const val WINDOW_MS = 10 * 60_000L
+        /** Wrong codes accepted per [WINDOW_MS] from every address together (audit M1 a), then the route answers 429 to everyone until the window slides. */
+        const val GLOBAL_MAX_WRONG = 20
+        /** Addresses tracked by the per-address limiter (audit M1 c). */
+        const val MAX_ADDRESSES = 1_000
+        const val GLOBAL_CLOSED = "Trop de codes faux reçus par cette TV : l'activation par le Wi-Fi est fermée pour 10 minutes. Utilisez le Bluetooth (CastBridge > « Activer la TV »), le fichier d'activation ou collez la clé sur la TV."
+
+        /** L3: the locked route opens only on a LOCKED TV and only while the gate lets [Feature.ACTIVATION_WIFI] through (an activated TV runs its full server instead). */
+        fun mayOpen(state: GateState): Boolean = state is GateState.Locked && FeatureGate.canUse(Feature.ACTIVATION_WIFI, state)
         const val LOCKED = "Usage soumis à autorisation : seule l'activation est ouverte sur cette TV"
     }
 }
@@ -94,7 +117,17 @@ object LockedWifiTexts {
 
 /** The NanoHTTPD shell of [LockedActivationApi] on the TV's usual port (only while the TV is locked; the full server takes the port once it is activated). */
 class LockedActivationServer(private val api: LockedActivationApi, port: Int = castbridge.core.tv.ReceiverServer.PORT) : NanoHTTPD(port) {
-    init { setAsyncRunner(castbridge.core.tv.BoundedRunner(4)) }
+    private val gate = ConnectionGate()
+    init { setAsyncRunner(LocalOnlyRunner(gate, 4)) }
+
+    /** Carries the peer's address to [LocalOnlyRunner], which decides BEFORE the first header byte is read (audit L1). */
+    inner class Tagged(val ip: String?, input: java.io.InputStream, sock: java.net.Socket) : ClientHandler(input, sock)
+
+    override fun createClientHandler(finalAccept: java.net.Socket, inputStream: java.io.InputStream): ClientHandler {
+        val ip = finalAccept.inetAddress?.hostAddress
+        if (ip == null || !Lan.isLocal(ip)) runCatching { finalAccept.close() }           // never read a byte from a non-local peer
+        return Tagged(ip, inputStream, finalAccept)
+    }
 
     override fun serve(session: IHTTPSession): Response {
         val h = session.headers

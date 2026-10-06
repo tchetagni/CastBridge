@@ -51,6 +51,22 @@ class KeyScanTest {
         assertEquals("cbx1.K1.S", c.first())
     }
 
+    @Test fun `a wrapped key joins at most forty lines`() {
+        val line = "ABCDE-FGHJK-MNPQR-STVW1-"                                       // 4 groups, wrapped
+        val c = KeyScan.candidates(List(100) { line }.joinToString("\n"))
+        val joined = c.filter { it.count { ch -> ch != '-' } > 20 }
+        assertTrue(joined.isNotEmpty(), c.toString())
+        assertTrue(joined.all { it.count { ch -> ch != '-' } <= KeyScan.MAX_WRAPPED_LINES * 20 }, "no candidate longer than ${KeyScan.MAX_WRAPPED_LINES} lines")
+        assertEquals(KeyScan.MAX_WRAPPED_LINES * 20, joined.first().count { ch -> ch != '-' }, "the first forty lines are tried joined")
+    }
+
+    @Test fun `a large file of wrapped groups is scanned quickly`() {
+        val text = List(KeyScan.MAX_FILE_BYTES / 25) { "ABCDE-FGHJK-MNPQR-STVW1-" }.joinToString("\n")
+        val t0 = System.nanoTime()
+        KeyScan.candidates(text)
+        assertTrue((System.nanoTime() - t0) / 1_000_000 < 2_000, "linear, not quadratic")
+    }
+
     @Test fun `bom and crlf are tolerated`() {
         assertEquals(listOf("cbx1.A.B"), KeyScan.candidates("﻿cbx1.A.B\r\nsuite\r\n"))
     }

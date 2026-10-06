@@ -14,6 +14,15 @@
 
 ## 0. Journal en direct (le plus récent en haut)
 
+### 2026-10-06 : audit adversarial de l'activation Wi-Fi (24c766e1) rendu, M1, M2, L1, L2, L3, L7 corrigés (branche d'agent, non construit)
+
+- **Audit** : corriger d'abord M1 (force brute du code), M2 (choix de la cible côté téléphone) ; L1, L2, L3, L7 dans la même passe ; L4-L6, L8-L10 hors périmètre.
+- **M1 (TV)** : plafond GLOBAL de 20 codes faux / 10 min toutes adresses, puis 429 pour tous ; conditions d'usage vérifiées AVANT le code (409 sans comparer) ; `PinGuard` et limiteur bornés à 1 000 adresses (LRU) ; code de connexion régénéré une fois à l'activation si la route verrouillée a été ouverte (`LockedPinRotation`, `TvPrefs.lockedPinStore`).
+- **M2 (téléphone)** : `ActivationSend.lanTarget` n'accepte que des adresses privées et plus aucun choix automatique sans lien (le client touche une puce « nom · adresse ») ; adresse de la cible affichée près du champ du code ; une annonce de même nom d'une autre adresse ne remplace plus la TV (la plus ancienne gardée, avertissement).
+- **L1** : connexion non locale fermée avant lecture des en-têtes, 2 connexions simultanées par adresse (`ConnectionGate`, `LocalOnlyRunner`) ; **L2** : `KeyScan` en `StringBuilder`, `Regex` constante, 40 lignes au plus par clé repliée ; **L3** : `LockedActivationApi.mayOpen` (FeatureGate) avant d'ouvrir le serveur ; **L7** : `takeWifiAccepted` atomique.
+- Tests JVM écrits d'abord (rouge puis vert), une mutation par garde (toutes tuées) ; `:core:test` vert, `:receiver`/`:sender` compilent. **Rien d'essayé sur une vraie TV.**
+- **Limites restantes** (docs/TV-ACTIVATION-CLE-USB.md) : code à 6 chiffres (attaque lente possible sur des semaines), déni de service volontaire de la voie Wi-Fi par un voisin du réseau (Bluetooth en repli), TV non authentifiée par le téléphone (pas de TLS), compteurs en mémoire remis à zéro au redémarrage de CastBridge-TV.
+
 ### 2026-10-06 : activation par le Wi-Fi, explorateur qui liste tout, clé cherchée dans le fichier (branche d'agent, non construit)
 
 - **Wi-Fi** : une TV verrouillée ouvre UNE route, `POST /api/activation/install`, derrière le code de connexion (affiché sur l'écran d'activation), réseau local, 16 Kio, 10 essais/10 min (`LockedActivationApi`, `Feature.ACTIVATION_WIFI`, annonce mDNS `locked=1`) ; le téléphone (« Activer la TV ») trouve la TV sur le Wi-Fi même sans l'avoir ajoutée, Bluetooth en repli.

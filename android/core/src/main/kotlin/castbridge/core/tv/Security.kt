@@ -24,11 +24,13 @@ object Pin {
  * Checks PINs and locks a client (by IP) for [lockMs] after [maxFailures] wrong attempts.
  * While locked, even the right PIN is refused (otherwise the lock would not slow brute force).
  */
-class PinGuard(
+open class PinGuard(
     pin: String,
     private val maxFailures: Int = 5,
     private val lockMs: Long = 60_000,
     private val now: () -> Long = System::currentTimeMillis,
+    /** At most this many addresses are tracked (audit M1 c): the least recently used one is forgotten first, so the table never grows without bound. */
+    private val maxEntries: Int = MAX_ENTRIES,
 ) {
     enum class Result { OK, BAD, LOCKED }
 
@@ -39,13 +41,19 @@ class PinGuard(
      * passerelle). Les compteurs et blocages d'essais (par adresse) sont tous effacés : ils comptaient des essais contre l'ANCIEN code ;
      * un téléphone bloqué pour avoir mal saisi l'ancien code peut saisir le nouveau sans attendre. Aucune valeur n'est journalisée.
      */
-    @Synchronized fun rotate(newPin: String) { pin = newPin; entries.clear() }
+    @Synchronized fun rotate(newPin: String) { pin = newPin; synchronized(entries) { entries.clear() } }
 
     private class Entry(var failures: Int = 0, var lockedUntil: Long = 0)
-    private val entries = ConcurrentHashMap<String, Entry>()
+    /** Access-ordered: the eldest entry is the least recently checked address. Every access holds the map's lock. */
+    private val entries = object : LinkedHashMap<String, Entry>(64, 0.75f, true) {
+        override fun removeEldestEntry(eldest: MutableMap.MutableEntry<String, Entry>?) = size > maxEntries
+    }
 
-    fun check(ip: String, given: String?): Result {
-        val e = entries.getOrPut(ip) { Entry() }
+    /** How many addresses are tracked (tests, audit M1 c). */
+    fun trackedAddresses(): Int = synchronized(entries) { entries.size }
+
+    open fun check(ip: String, given: String?): Result {
+        val e = synchronized(entries) { entries.getOrPut(ip) { Entry() } }
         synchronized(e) {
             val t = now()
             if (e.lockedUntil > t) return Result.LOCKED
@@ -58,7 +66,9 @@ class PinGuard(
     }
 
     fun retryAfterSeconds(ip: String): Long =
-        ((entries[ip]?.lockedUntil ?: 0) - now()).coerceAtLeast(0).let { (it + 999) / 1000 }
+        ((synchronized(entries) { entries[ip] }?.lockedUntil ?: 0) - now()).coerceAtLeast(0).let { (it + 999) / 1000 }
+
+    companion object { const val MAX_ENTRIES = 1_000 }
 }
 
 /**

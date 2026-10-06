@@ -159,8 +159,9 @@ object ActivationCenter {
     }
 
     /** An activation accepted over the Wi-Fi while the activation screen is open: that screen takes it ([takeWifiAccepted]) and opens the TV. */
-    @Volatile private var wifiAccepted: ActivationResult? = null
-    fun takeWifiAccepted(): ActivationResult? = wifiAccepted.also { wifiAccepted = null }
+    private val wifiAccepted = java.util.concurrent.atomic.AtomicReference<ActivationResult?>(null)
+    /** Atomic (audit L7): the activation is taken exactly once, even if the screen and the HTTP thread race. */
+    fun takeWifiAccepted(): ActivationResult? = wifiAccepted.getAndSet(null)
 
     /**
      * POST /api/activation/install of a LOCKED TV ([LockedActivationApi], docs/TV-ACTIVATION-CLE-USB.md): the same verification as a pasted key ([accept], MANUAL channel).
@@ -169,7 +170,7 @@ object ActivationCenter {
     fun installFromWifi(text: String): LockedActivationApi.Install {
         val one = text.lineSequence().map { it.trim() }.filter { it.isNotEmpty() }.joinToString(" ")
         return when (val r = accept(Channel.MANUAL, one.toByteArray(Charsets.UTF_8))) {
-            is ActivationResult.Accepted -> { wifiAccepted = r; LockedActivationApi.Install.Accepted(label()) }
+            is ActivationResult.Accepted -> { wifiAccepted.set(r); LockedActivationApi.Install.Accepted(label()) }
             is ActivationResult.Rejected -> LockedActivationApi.Install.Rejected(r.message)
         }
     }

@@ -221,7 +221,10 @@ class TvService : Service(), Device {
 
     private fun startLockedHttp(attempt: Int = 0) {
         if (lockedHttp != null || started) return
-        val pin = TvPrefs(this).pin()
+        // L3: only while the gate lets ACTIVATION_WIFI through on a LOCKED TV
+        if (!castbridge.core.tv.activation.LockedActivationApi.mayOpen(ActivationCenter.state())) return
+        val tvPrefs = TvPrefs(this)
+        val pin = tvPrefs.pin()
         val api = castbridge.core.tv.activation.LockedActivationApi(PinGuard(pin), { key -> ActivationCenter.installFromWifi(key) },
             { TunnelHub.termsAccepted(this) }, BuildConfig.VERSION_NAME)
         val s = castbridge.core.tv.activation.LockedActivationServer(api)
@@ -231,6 +234,7 @@ class TvService : Service(), Device {
             return
         }
         lockedHttp = s; lockedPin = pin
+        castbridge.core.tv.activation.LockedPinRotation.onLockedRouteOpened(tvPrefs.lockedPinStore())   // M1 d: this code is replaced at the activation
         register(locked = true)
     }
 
@@ -253,6 +257,8 @@ class TvService : Service(), Device {
         stopLockedHttp()                                         // frees port 8765 and the locked mDNS announce for the full server
         started = true
         prefs = TvPrefs(this)
+        // M1 d: the code shown while locked is replaced once, before the full API takes it (never logged)
+        if (castbridge.core.tv.activation.LockedPinRotation.onActivated(prefs.lockedPinStore()) != null) Log.i(TAG, "code de connexion régénéré après l'activation")
         volProvider = AndroidVolumeProvider(this, prefs)
         registry = VolumeRegistry(volProvider).also { it.refresh() }        // fast scan, no speed test on the main thread
         videosDir = registry.volumes().first().dir                         // internal storage is always first
