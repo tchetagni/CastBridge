@@ -395,7 +395,7 @@ def build_body():
              grid([drawn("4.10", svg_code_box(), "Si la TV ne vous reconnaît plus, tapez son code.",
                          note="Touchez « Valider et envoyer » : le code est gardé ensuite.")], "ph") +
              '<h3>Télécommande</h3>' +
-             grid([drawn("4.11", svg_remote(), "Pavé et OK pour choisir, Retour pour revenir.", note="Pendant une vidéo : ▶▶| avance, |◀◀ recule.")], "ph") + '</section>')
+             grid([drawn("4.11", svg_remote(), "Pavé et OK pour choisir, Retour pour revenir.", note="Avancer ou reculer de 10 secondes : ▶▶| avance, |◀◀ recule.")], "ph") + '</section>')
     # 5 -------------------------------------------------------------------
     langs = "".join('<span class="chip">%s</span>' % t for t in ["Chinois", "anglais", "allemand", "français", "italien", "espagnol", "japonais"])
     s5a = [
@@ -451,7 +451,7 @@ def build_body():
         case(5, "Pas de son", svg_case("mute"), "Montez le volume de la TV, puis du téléphone."),
         case(6, "Le téléphone s'endort", svg_case("sleep"), "Gardez l'écran allumé pendant « Lire en direct »."),
         case(7, "Mauvais Wi-Fi", svg_case("wifi2"), "Mettez le téléphone sur le même Wi-Fi que la TV."),
-        case(8, "Demander de l'aide", svg_case("help"), "Écrivez au support : voir « Aide » ci-dessous."),
+        case(8, "Demander de l'aide", svg_case("help"), "Écrivez au support : +237 686 03 10 70."),
     ]
     B.append('<section id="probleme"><h2><span>7</span>Si ça ne marche pas</h2><div class="steps cases">%s</div>'
              '<p class="note c">« Déplacer vers la TV » libère la place du téléphone, pas celle de la TV.</p></section>' % "".join(cases))
@@ -470,8 +470,10 @@ def build_body():
              "".join('<li>%s<span>%s</span></li>' % (ic, esc(t)) for t, ic in lines) + grid(s8, "ph") + '</section>')
     # 9 -------------------------------------------------------------------
     B.append('<section id="aide"><h2><span>9</span>Aide</h2>'
-             '<div class="help" role="note"><b>À compléter par CastBridge : numéro WhatsApp / téléphone du support</b>'
-             '<p>Ce cadre est volontairement vide : aucun numéro n\'a été inventé.</p></div></section>')
+             '<div class="help" role="note"><p class="hp">Écrivez-nous sur WhatsApp ou appelez :</p>'
+             '<p class="num" id="tel">+237 686 03 10 70</p>'
+             '<button type="button" class="cp" onclick="var t=document.getElementById(\'tel\').textContent,b=this;try{navigator.clipboard.writeText(t).then(function(){b.textContent=\'Copié\'})}catch(e){var r=document.createRange();r.selectNode(document.getElementById(\'tel\'));getSelection().removeAllRanges();getSelection().addRange(r)}">Copier</button>'
+             '</div></section>')
     return "".join(B)
 
 
@@ -528,7 +530,7 @@ svg .st[fill="#f5b025"]{fill:#f5b025}
 .case h4{margin:4px 0 0}
 .three{list-style:none;margin:0;padding:0;display:grid;gap:10px}.three li{display:flex;gap:12px;align-items:center;background:var(--card);border:1px solid var(--line);border-radius:14px;padding:10px 14px;font-weight:700}
 .three svg{width:38px;height:38px;flex:none}
-.help{border:3px dashed var(--er);border-radius:18px;padding:24px;text-align:center;font-size:1.2rem;background:var(--card)}.help p{font-weight:400;font-size:.9rem;color:var(--mut);margin:8px 0 0}
+.help{border:3px dashed var(--er);border-radius:18px;padding:24px;text-align:center;font-size:1.2rem;background:var(--card)}.help p{margin:0}.help .num{font-size:1.8rem;font-weight:700;margin:8px 0;user-select:all;-webkit-user-select:all}.help .cp{min-height:44px;padding:0 20px;border-radius:22px;border:2px solid var(--ac2);background:var(--chip);color:var(--fg);font:600 1rem system-ui,sans-serif}
 footer{margin-top:36px;color:var(--mut);font-size:.82rem;text-align:center}
 @media (min-width:700px){.step.wide{grid-column:auto}}
 """
