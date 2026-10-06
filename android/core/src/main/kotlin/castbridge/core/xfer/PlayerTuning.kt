@@ -25,7 +25,9 @@ object PlayerTuning {
      * [maxMemoryBytes] : `Runtime.maxMemory()`. [is64Bit] : informatif (la logique ne dépend que des coeurs et de la mémoire).
      */
     data class Facts(val codec: String?, val width: Int, val height: Int, val hwAvailable: Boolean, val copyRunning: Boolean, val distress: Int, val cores: Int,
-                     val hwCapable: Boolean? = null, val maxMemoryBytes: Long = 192L shl 20, val is64Bit: Boolean = false)
+                     val hwCapable: Boolean? = null, val maxMemoryBytes: Long = 192L shl 20, val is64Bit: Boolean = false,
+                     /** Profil économe (ResourceProfile.lightPlayer) : cache de lecture borné à [cachingCapMs]. */
+                     val lightPlayer: Boolean = false, val cachingCapMs: Int = 4_000)
 
     /**
      * 0 = « ne pas toucher » pour les entiers (le défaut de libVLC), [fileCachingMs] 0 = laisser la valeur de [PlaybackPriority].
@@ -56,7 +58,7 @@ object PlayerTuning {
             skipFrame = if (sustained && libavcodec) 1 else 0,
             skipIdct = if (sustained && libavcodec && heavy) 1 else 0,
             threads = if (active && libavcodec) (f.cores - 1).coerceIn(1, MAX_THREADS) else 0,
-            fileCachingMs = if (sustained) PlaybackPriority.fileCachingMs(true, f.maxMemoryBytes).toInt() else 0,
+            fileCachingMs = if (sustained) PlaybackPriority.fileCachingMs(true, f.maxMemoryBytes).toInt().let { if (f.lightPlayer) minOf(it, f.cachingCapMs) else it } else 0,
         )
     }
 }

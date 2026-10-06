@@ -14,6 +14,11 @@
 
 ## 0. Journal en direct (le plus récent en haut)
 
+### 2026-10-06 : CastBridge-TV pour boîtiers faibles en ressources, 512 Mo / 32 bits (branche d'agent, non construit, NON MESURÉ sur TV)
+
+- `core/.../device/ResourceProfile.kt` (pur) : profil ÉCONOME / NORMAL (RAM <= 768 Mo, memoryClass <= 96, low RAM, 32 bits 1-2 coeurs <= 1 Go) ; bornes : 2 flux (6), 5 fils HTTP (8), tampons 32/128 Ko, vignettes 1/8 du heap (1-3 Mo ; 4 Mo), 500 fiches, 20 000 empreintes, lecteur léger, accueil sans animation, 1 pack ouvert. NORMAL = valeurs d'avant.
+- Branché par `TvPrefs.profile()` -> `TvProfile` ; `/api/transfer/caps` : champ optionnel `profile` (low/normal) ; `onTrimMemory` ; journal « profil ressources : … » ; ligne dans « Infos techniques ». `TransferHost.kt` non modifié. Détail : `docs/TV-RESSOURCES-FAIBLES.md`. **À faire : P-74 sur une TV de 512 Mo.**
+
 ### 2026-10-06 : reprise automatique figée à 0 % alors que la TV est « Connectée » (R-19) (branche d'agent, non construit, NON MESURÉ sur appareil)
 
 - Cause établie par LECTURE du code (aucun appareil en ADB) : découverte mDNS tuée par un seul échec et redémarrée sans attendre l'arrêt à chaque événement réseau, résolution sans délai de garde, nom exact seulement (« SMART_TV (2) » raté) alors que l'accueil le trouve, adresse de la liaison de confiance jamais utilisée par l'envoi, file qui abandonne après 10 min. Détail : `docs/REGRESSIONS.md` R-19.

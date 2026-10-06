@@ -961,6 +961,7 @@ class TvService : Service(), Device {
     }
 
     private fun logResources(dir: File, p: castbridge.core.tv.TvProfile) {
+        Log.i(TAG, ResourceProfiles.of(this).logLine())          // one line, once: « profil ressources : économe (RAM 512 Mo, heap 96 Mo) »
         val am = getSystemService(android.app.ActivityManager::class.java)
         Log.i(TAG, "profile: videos used=${Storage.used(dir) shr 20}MB free=${dir.usableSpace shr 20}MB quota=${Storage.quota(dir, p) shr 20}MB " +
             "heap=${Runtime.getRuntime().maxMemory() shr 20}MB memClass=${am.memoryClass}MB lowRam=${am.isLowRamDevice} pss=${android.os.Debug.getPss() / 1024}MB")
@@ -1183,7 +1184,11 @@ class TvService : Service(), Device {
 
     override fun onTrimMemory(level: Int) {
         super.onTrimMemory(level)
-        if (level >= TRIM_MEMORY_RUNNING_LOW) System.gc()      // nothing big is cached here (thumbnails are on disk)
+        // Thumbnails are on disk; what RAM holds here is the parsed lesson packs: dropped when the system asks (all of them on a low-resource TV from MODERATE).
+        if (level >= TRIM_MEMORY_RUNNING_LOW || (level >= TRIM_MEMORY_RUNNING_MODERATE && ResourceProfiles.peek().economy)) {
+            runCatching { LearnHub.trimMemory() }
+            System.gc()
+        }
     }
 
     override fun onDestroy() {

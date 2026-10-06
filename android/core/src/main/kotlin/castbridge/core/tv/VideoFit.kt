@@ -138,7 +138,9 @@ object PictureQuality {
      */
     data class Facts(val mode: VideoFit.Mode, val codec: String?, val width: Int, val height: Int, val interlaced: Boolean?, val hwDecoder: Boolean?,
                      val softwareScaler: Boolean?, val cores: Int, val copyRunning: Boolean, val distress: Int, val panelW: Int, val panelH: Int,
-                     val highDynamic: Boolean? = null)
+                     val highDynamic: Boolean? = null,
+                     /** Profil de ressources économe (castbridge.core.device.ResourceProfile.lightPlayer) : qualité légère par défaut. */
+                     val lightPlayer: Boolean = false)
 
     /** [deinterlace] : null = ne rien demander, 0 coupé, 1 forcé, -1 automatique (libVLC ne filtre que ce que le décodeur marque entrelacé). */
     data class Quality(val deinterlace: Int?, val deinterlaceMode: String?, val swscaleMode: Int?, val notes: List<String>) {
@@ -158,16 +160,16 @@ object PictureQuality {
         if (f.highDynamic == true) notes += "10 bits / HDR : pas de tone mapping dans libVLC 3.6 pour Android ; l'image dépend du décodeur et de la TV"
         if (f.distress > 0) return Quality(0, null, null, notes + "Lecture allégée : aucun filtre d'image")
         val native = f.mode == VideoFit.Mode.NATIVE
-        val weak = cpuClass(f.cores) == Cpu.LOW || f.copyRunning
+        val weak = cpuClass(f.cores) == Cpu.LOW || f.copyRunning || f.lightPlayer
         val di: Int; var diMode: String? = null
         when {
             f.interlaced == true -> { di = 1; diMode = if (weak) "blend" else "yadif" }
-            f.interlaced == null && !native -> { di = -1; diMode = if (weak) "blend" else "yadif" }
+            f.interlaced == null && !native && !f.lightPlayer -> { di = -1; diMode = if (weak) "blend" else "yadif" }   // économe : pas de désentrelacement « au cas où »
             else -> di = 0
         }
         if (di != 0 && f.hwDecoder == true) notes += "Désentrelacement non garanti sur une surface matérielle (non vérifié)"
         // Mise à l'échelle logicielle de meilleure qualité : jamais sur un petit processeur, jamais pendant une copie, jamais en Natif, jamais sur le chemin matériel.
-        val sw = if (!native && f.softwareScaler == true && !weak) SWSCALE_LANCZOS else null
+        val sw = if (!native && f.softwareScaler == true && !weak && !f.lightPlayer) SWSCALE_LANCZOS else null
         return Quality(di, diMode, sw, notes)
     }
 }

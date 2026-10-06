@@ -98,7 +98,10 @@ object LearnHub {
     /** Content hash of a lesson in the installed lots (null = starter/loose pack): detects « mise à jour » after a lot update. */
     fun lessonHash(lesson: String): String? = runCatching { lots().lessonHash(lesson) }.getOrNull()
 
-    @Synchronized fun library(): LearnLibrary = lib ?: LearnLibrary(listOf(LearnLotSource(lots()), DirectoryLessonSource(::packDirs), EmbeddedLessonSource())).also { lib = it }
+    @Synchronized fun library(): LearnLibrary = lib ?: LearnLibrary(listOf(LearnLotSource(lots()), DirectoryLessonSource(::packDirs), EmbeddedLessonSource()), keep = app?.let { ResourceProfiles.of(it).packsOpenAtOnce } ?: 3).also { lib = it }
+
+    /** onTrimMemory: parsed packs dropped (low-resource TVs keep one at a time). */
+    @Synchronized fun trimMemory() { lib?.trim() }
 
     /** Where a new pack can be written, with the free space (USB drive first, then the TV). */
     fun installTargets(): List<PackInstaller.Target> = packDirs().filter { !it.second.absolutePath.contains("(racine)") }

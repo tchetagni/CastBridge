@@ -120,6 +120,9 @@ class LearnLibrary(private val sources: List<LessonSource>, private val keep: In
         return shown.firstOrNull { it.id == id } ?: BaseContent.fullIdOf(id)?.let { full -> shown.firstOrNull { it.id == full } }
     }
 
+    /** The system wants memory back (onTrimMemory): the parsed packs are dropped, they are read again from their zip when asked (never all at once). */
+    @Synchronized fun trim() { opened.clear() }
+
     @Synchronized fun pack(id: String): Pack? = verified(id)?.pack
 
     @Synchronized fun verified(id: String): VerifiedPack? {

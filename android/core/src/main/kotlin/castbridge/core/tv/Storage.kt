@@ -50,6 +50,12 @@ data class TvProfile(
     val heavyOnUsb: Boolean = true,
     /** Drive chosen by the user when several are plugged in ("" = automatic: the emptiest). */
     val heavyDriveId: String = "",
+    /** Flux de réception simultanés (profil de ressources) ; 0 = automatique (fils HTTP - 2, comme avant). */
+    val maxTransferStreams: Int = 0,
+    /** Empreintes de l'index de contenu gardées en mémoire (profil de ressources ; 100 000 = valeur d'avant). */
+    val indexEntries: Int = 100_000,
+    /** « low » / « normal » annoncé au téléphone par `/api/transfer/caps` (champ optionnel `profile`) ; "" = non annoncé. */
+    val resourceProfile: String = "",
 )
 
 /** The "keep 1 GB free after the transfer" rule and its human explanation. Pure. */

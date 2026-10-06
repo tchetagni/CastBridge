@@ -127,7 +127,7 @@ class PlayerActivity : Activity(), TvService.Screen {
 
     private fun onBound(s: TvService) {
         extras = PlayerExtras({ library?.db }, s.prefs) { r -> runCatching { s.bg.execute(r) } }
-        val t = thumbs ?: TvThumbs { n, v -> server?.thumbnail(n, v) }.also { thumbs = it }
+        val t = thumbs ?: TvThumbs(ResourceProfiles.of(this).thumbCacheBytes.toInt()) { n, v -> server?.thumbnail(n, v) }.also { thumbs = it }
         if (libScreen == null) libScreen = LibraryScreen(this, findViewById(R.id.library), t, libraryApi())
         if (home == null) home = HomeScreen(this, findViewById(R.id.home), t, homeApi())
         if (settingsPanel == null) settingsPanel = SettingsPanel(this, findViewById(R.id.settings))
@@ -220,6 +220,7 @@ class PlayerActivity : Activity(), TvService.Screen {
     override fun onStop() {
         super.onStop()
         TvConnect.removeListener(serverListener)
+        if (ResourceProfiles.of(this).economy) thumbs?.trim()   // low-resource TV: no bitmap kept while the screen is hidden
         home?.pause()                                       // Quiz, Apprendre… on top: the hidden home stops its zoom and its 4 s reload (R-11)
         consentShown = false; mandatoryShown = false
         // The screen is gone: give libVLC back (the service keeps serving). Back in front = the library.
@@ -406,6 +407,8 @@ class PlayerActivity : Activity(), TvService.Screen {
 
     override fun onTrimMemory(level: Int) {
         super.onTrimMemory(level)
+        // The decoded bitmaps of the screens are cheap to decode again: dropped as soon as the system is a little short (always when the TV is low on resources).
+        if (level >= TRIM_MEMORY_RUNNING_LOW || (level >= TRIM_MEMORY_UI_HIDDEN && ResourceProfiles.of(this).releasePlayerInBackground)) thumbs?.trim()
         // Not playing (paused/ended/idle) and the system wants memory back: give the whole player back.
         if (level >= TRIM_MEMORY_UI_HIDDEN && snapshot.state != "playing" && mp != null) {
             current = null; snapshot = PlayerState(); releasePlayer(); policyChanged()
@@ -964,7 +967,8 @@ class PlayerActivity : Activity(), TvService.Screen {
         val (pw, ph) = panelSize()
         return castbridge.core.tv.PictureQuality.Facts(extras.fitMode(), codec, w, h, null, if (hwOn && capable == true) true else if (!hwOn || capable == false) false else null,
             if (!hwOn || capable == false) true else if (capable == true) false else null,
-            Runtime.getRuntime().availableProcessors(), (server?.activeTransfers() ?: 0) > 0, distress, pw, ph)
+            Runtime.getRuntime().availableProcessors(), (server?.activeTransfers() ?: 0) > 0, distress, pw, ph,
+            lightPlayer = ResourceProfiles.of(this).lightPlayer)
     }
 
     /** The real size of the video surface (the panel as the app sees it); the display size while the layout is not measured yet. */
@@ -981,7 +985,8 @@ class PlayerActivity : Activity(), TvService.Screen {
         val (w, h) = videoSize()
         return castbridge.core.xfer.PlayerTuning.Facts(codec, w, h, extras.hwMode() != "off", (server?.activeTransfers() ?: 0) > 0, distress,
             Runtime.getRuntime().availableProcessors(), castbridge.core.xfer.CodecMime.hwCapable(codec) { mime -> CodecCapabilityProbe.hardware(mime, w, h) },
-            Runtime.getRuntime().maxMemory(), android.os.Build.SUPPORTED_64_BIT_ABIS.isNotEmpty())
+            Runtime.getRuntime().maxMemory(), android.os.Build.SUPPORTED_64_BIT_ABIS.isNotEmpty(),
+            ResourceProfiles.of(this).lightPlayer, ResourceProfiles.of(this).playerCachingCapMs)
     }
 
     private fun videoSize(): Pair<Int, Int> =
@@ -1048,6 +1053,7 @@ class PlayerActivity : Activity(), TvService.Screen {
         val capable = castbridge.core.xfer.CodecMime.hwCapable(codec) { mime -> CodecCapabilityProbe.hardware(mime, w, h) }
         val lines = castbridge.core.xfer.DecoderReport.lines(codec, w, h, appliedTuning, capable, cpuPerFrame, lastShown, lastLost, tuneStage).toMutableList()
         castbridge.core.xfer.CodecMime.mimeOf(codec)?.let { lines += CodecCapabilityProbe.describe(it) }
+        lines += "Profil ressources : " + ResourceProfiles.of(this).infoLine()          // CastBridge-TV : économe / normal
         return lines
     }
 

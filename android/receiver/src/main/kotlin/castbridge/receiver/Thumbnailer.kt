@@ -115,7 +115,7 @@ class Thumbnailer(private val ctx: Context) {
         /** The TV library backend: saved positions in the app's files, thumbnails in its cache (20 MB at most). */
         fun provider(ctx: Context, canRun: () -> Boolean, onThumb: (String) -> Unit): LibraryProvider {
             val t = Thumbnailer(ctx.applicationContext)
-            return LibraryProvider(LibraryDb(File(ctx.filesDir, "library.db")), ThumbCache(File(ctx.cacheDir, "thumbs"), 20L shl 20)) { p ->
+            return LibraryProvider(LibraryDb(File(ctx.filesDir, "library.db"), ResourceProfiles.of(ctx).libraryEntries), ThumbCache(File(ctx.cacheDir, "thumbs"), 20L shl 20)) { p ->
                 ThumbWorker(p.cache, t::generate, canRun, onDone = { j, r -> p.onGenerated(j, r); onThumb(j.name) })
             }
         }

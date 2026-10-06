@@ -118,6 +118,7 @@ object TvStyle {
     /** Scale 1.04 + lift when a focusable view gets the D-pad focus (GPU property animations only, 120 ms, standard curve). */
     fun focusZoom(v: View, scale: Float = T.FOCUS_SCALE, onFocus: (Boolean) -> Unit = {}) {
         v.setOnFocusChangeListener { view, has ->
+            if (!ResourceProfiles.peek().homeAnimations) { onFocus(has); return@setOnFocusChangeListener }   // TV à faibles ressources : le cadre bleu suffit, ni zoom ni animation
             view.animate().scaleX(if (has) scale else 1f).scaleY(if (has) scale else 1f).translationZ(if (has) dp(view.context, 12).toFloat() else 0f)
                 .setDuration(FAST.toLong()).setInterpolator(easing()).start()
             onFocus(has)
@@ -126,13 +127,13 @@ object TvStyle {
 }
 
 /**
- * Thumbnails for the TV screens: ~320 px JPEGs from the service's disk cache, decoded as RGB_565 (115 kB each), at most 4 MB in
+ * Thumbnails for the TV screens: ~320 px JPEGs from the service's disk cache, decoded as RGB_565 (115 kB each), at most 4 MB (1 to 3 MB on a low-resource TV, ResourceProfile.thumbCacheBytes) in
  * RAM (LRU), one decode at a time. A thumbnail that is not made yet is asked again when the service says it is ready.
  */
-class TvThumbs(private val fetch: (name: String, volume: String) -> ByteArray?) {
+class TvThumbs(private val cacheBytes: Int = 4 * 1024 * 1024, private val fetch: (name: String, volume: String) -> ByteArray?) {
     private val main = Handler(Looper.getMainLooper())
     private val io = Executors.newSingleThreadExecutor { r -> Thread(r, "cb-thumbs-ui").apply { isDaemon = true } }
-    private val cache = object : LruCache<String, Bitmap>(4 * 1024 * 1024) { override fun sizeOf(key: String, value: Bitmap) = value.byteCount }
+    private val cache = object : LruCache<String, Bitmap>(cacheBytes) { override fun sizeOf(key: String, value: Bitmap) = value.byteCount }
     private val asked = HashSet<String>()
 
     fun key(i: LibraryItem) = "${i.volumeId}\u0000${i.name}\u0000${i.size}"
@@ -220,7 +221,7 @@ class MediaCard(ctx: Context, private val widthPx: Int = ViewGroup.LayoutParams.
         placeholder.text = when (i.type) { MediaType.VIDEO -> "▶"; MediaType.AUDIO -> "♪"; MediaType.OTHER -> i.name.substringAfterLast('.', "?").uppercase().take(4) }
         val bmp = thumbs.cached(i)
         image.setImageBitmap(bmp); placeholder.visibility = if (bmp == null) View.VISIBLE else View.GONE
-        if (bmp == null) thumbs.load(i) { b -> if (item == i) { image.alpha = 0f; image.setImageBitmap(b); placeholder.visibility = View.GONE; image.animate().alpha(1f).setDuration(200).start() } }
+        if (bmp == null) thumbs.load(i) { b -> if (item == i) { image.setImageBitmap(b); placeholder.visibility = View.GONE; if (ResourceProfiles.peek().homeAnimations) { image.alpha = 0f; image.animate().alpha(1f).setDuration(200).start() } else image.alpha = 1f } }
     }
 
     private fun badge(color: Int) = TextView(context).apply {

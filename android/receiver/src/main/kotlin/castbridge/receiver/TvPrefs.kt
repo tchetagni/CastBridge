@@ -6,7 +6,8 @@ import castbridge.core.tv.TvProfile
 
 /** TV-side persistent settings (private SharedPreferences). */
 class TvPrefs(ctx: Context) {
-    private val sp = ctx.applicationContext.getSharedPreferences("castbridge_tv", Context.MODE_PRIVATE)
+    private val app = ctx.applicationContext
+    private val sp = app.getSharedPreferences("castbridge_tv", Context.MODE_PRIVATE)
 
     /** 6-digit PIN, generated on first launch and kept. Never logged. */
     @Synchronized fun pin(): String {
@@ -45,7 +46,11 @@ class TvPrefs(ctx: Context) {
     }
 
     /** Storage/memory profile: defaults for a modest TV, overridable through /api/storage. */
-    fun profile(): TvProfile = TvProfile(
+    fun profile(): TvProfile {
+        val rp = ResourceProfiles.of(app)          // économe / normal (docs/TV-RESSOURCES-FAIBLES.md) ; normal = les valeurs d'avant
+        return TvProfile(
+            maxHttpThreads = rp.httpThreads, maxTransferStreams = rp.maxStreams, ioBufferBytes = rp.receiveBufferBytes, uploadBufferBytes = rp.writeBufferBytes,
+            indexEntries = rp.indexEntries, resourceProfile = rp.capsName,
         quotaBytes = getLong("quota_bytes", 0),
         deleteAfterPlay = getBool("delete_after_play", false),
         evictPlayed = getBool("evict_played", false),
@@ -53,7 +58,8 @@ class TvPrefs(ctx: Context) {
         minFreeAfterTransfer = getLong("min_free_after", 1L shl 30),
         heavyOnUsb = getBool("heavy_on_usb", true),
         heavyDriveId = getString("heavy_drive", "") ?: "",
-    )
+        )
+    }
 
     fun saveProfile(p: TvProfile) {
         putLong("quota_bytes", p.quotaBytes); putBool("delete_after_play", p.deleteAfterPlay); putBool("evict_played", p.evictPlayed)

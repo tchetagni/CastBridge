@@ -151,7 +151,7 @@ class ReceiverServer(
     @Volatile private var moveJob: MoveJob? = null
     private val uploading = java.util.concurrent.atomic.AtomicInteger()
     /** Multi-connection transfers (/api/transfer/..., see docs/TRANSFER.md); old phones never call it. */
-    private val transfers = castbridge.core.xfer.TransferHost(maxStreams = maxOf(2, cfg.maxHttpThreads - 2)).also { h ->
+    private val transfers = castbridge.core.xfer.TransferHost(maxStreams = cfg.maxTransferStreams.takeIf { it > 0 } ?: maxOf(2, cfg.maxHttpThreads - 2)).also { h ->
         h.finalSizeOf = { n, sz -> findFinalOrOrigin(n, sz)?.size }
     }
     private val chunking = java.util.concurrent.atomic.AtomicInteger()
@@ -203,7 +203,7 @@ class ReceiverServer(
     }
 
     /** « Déjà sur la TV ? » by content (R-12): the finished files of the real folders, hashed in the background while the TV is idle. */
-    private val contentIndex = ContentIndex(::heldFiles, ::indexIdle, contentIndexKey)
+    private val contentIndex = ContentIndex(::heldFiles, ::indexIdle, contentIndexKey, maxEntries = cfg.indexEntries)
 
     /**
      * Finished files of the real folders (not the system picker's), with the path the index keys them by; with [size], only the files of that size (from the
@@ -640,7 +640,7 @@ class ReceiverServer(
         val end = System.nanoTime() + ms * 1_000_000
         var left = minOf(n, cap)
         try {
-            val buf = ByteArray(64 * 1024)
+            val buf = ByteArray(cfg.ioBufferBytes)
             while (left > 0) {
                 val rem = (end - System.nanoTime()) / 1_000_000
                 if (rem <= 0) break
@@ -1027,7 +1027,7 @@ class ReceiverServer(
 
     private fun transfer(s: IHTTPSession, op: String, p: Map<String, String>): Response = when {
         op == "caps" && s.method == Method.GET ->
-            ok("""{"version":${castbridge.core.xfer.TransferHost.API_VERSION},"maxStreams":${transfers.allowedStreams()},"slice":${castbridge.core.xfer.Manifest.SLICE}}""")
+            ok("""{"version":${castbridge.core.xfer.TransferHost.API_VERSION},"maxStreams":${transfers.allowedStreams()},"slice":${castbridge.core.xfer.Manifest.SLICE}${cfg.resourceProfile.takeIf { it == "low" || it == "normal" }?.let { ""","profile":"$it"""" } ?: ""}}""")
         op == "begin" && s.method == Method.POST -> transferBegin(s, p)
         op == "chunk" && s.method == Method.PUT -> transferChunk(s, p)
         op == "state" && s.method == Method.GET -> transfers.session(p["id"].orEmpty())?.let { ok(transfers.stateJson(it, p["hashes"] == "1")) }
@@ -1146,7 +1146,7 @@ class ReceiverServer(
     private fun busy(s: IHTTPSession, bodyLen: Long): Response {
         if (bodyLen in 0..maxDrainBytes) {
             try {
-                val buf = ByteArray(64 * 1024); var left = bodyLen
+                val buf = ByteArray(cfg.ioBufferBytes); var left = bodyLen
                 while (left > 0) { val r = s.inputStream.read(buf, 0, minOf(buf.size.toLong(), left).toInt()); if (r < 0) break; left -= r }
                 if (left == 0L) bodyDrained.set(true)
             } catch (e: IOException) { /* the phone went away: nothing to answer to */ }

@@ -360,6 +360,7 @@ class HomeScreen(private val act: Activity, private val container: FrameLayout, 
     private fun crossfade(b: Bitmap) {
         val soft = blurred(b)
         bg.animate().cancel()
+        if (!ResourceProfiles.peek().homeAnimations) { bg.setImageBitmap(soft); bg.alpha = 0.5f; return }   // économe : pas de fondu enchaîné
         bg.animate().alpha(0.15f).setDuration(150).withEndAction { bg.setImageBitmap(soft); bg.animate().alpha(0.5f).setDuration(350).start() }.start()
     }
 
