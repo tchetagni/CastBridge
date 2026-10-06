@@ -49,7 +49,8 @@ class LicenseLifecycleTest extends LicenseTestBase {
         issue(l.licenseId(), dev());
         issue(l.licenseId(), dev());
         assertThatThrownBy(() -> licenses.setSeats(OWNER, l.licenseId(), 1, "réduction")).hasMessageContaining("utilisés");
-        assertThat(licenses.setSeats(OWNER, l.licenseId(), 5, null).seatsAllowed()).isEqualTo(5);
+        assertThatThrownBy(() -> licenses.setSeats(OWNER, l.licenseId(), 5, null)).isInstanceOf(ApiException.class).hasMessageContaining("Quota fermé");
+        assertThat(licenses.setSeats(OWNER, l.licenseId(), 2, null).seatsAllowed()).isEqualTo(2); // same value: not an increase
 
         // revoke: final, seats freed, every seat in the signed revocation list, nothing issued any more
         var r = licenses.revoke(OWNER, l.licenseId(), "fraude avérée");
@@ -168,17 +169,34 @@ class LicenseLifecycleTest extends LicenseTestBase {
         // revocation list: the seat is revoked at a date >= the first activation's issue date
         Timestamp revoked = jdbc.queryForObject("select max(revoked_at) from lic_revocation where license_id = ? and seat_id = ?", Timestamp.class, l.licenseId(), a1.seatId());
         assertThat(revoked.toInstant()).isAfterOrEqualTo(a1.issuedAt());
-        // another device takes the seat; the first can come back only when there is room, and then with an activation issued AFTER the revocation
+        // quotas are closed: a released seat is never given to another device, only the same device gets it back (with an activation issued AFTER the revocation)
         Dev other = dev();
-        issue(l.licenseId(), other);
-        assertThatThrownBy(() -> issue(l.licenseId(), d)).hasMessageContaining("Plus de poste");
-        licenses.releaseSeat(OWNER, l.licenseId(), seatOf(l.licenseId(), other), "retour du premier");
+        assertThatThrownBy(() -> issue(l.licenseId(), other)).hasMessageContaining("Quota fermé");
         var back = issue(l.licenseId(), d);
         assertThat(back.seatId()).isEqualTo(a1.seatId());
         assertThat(back.reused()).isFalse(); // a fresh activation: the previous one is revoked
         Timestamp lastRevoked = jdbc.queryForObject("select max(revoked_at) from lic_revocation where license_id = ? and seat_id = ?", Timestamp.class, l.licenseId(), a1.seatId());
         assertThat(back.issuedAt()).as("issuedAt doit dépasser la date de révocation du poste (sinon l'activation serait révoquée dès l'installation)").isAfter(lastRevoked.toInstant());
         assertThat(licenses.get(l.licenseId()).seatsUsed()).isEqualTo(1);
+    }
+
+    @Test
+    void seatsCanNeverBeIncreasedButCanBeLowered() {
+        var l = license(3);
+        assertThatThrownBy(() -> licenses.setSeats(OWNER, l.licenseId(), 4, "deuxième TV")).isInstanceOf(ApiException.class).hasMessageContaining("Quota fermé");
+        assertThat(licenses.get(l.licenseId()).seatsAllowed()).isEqualTo(3);
+        assertThat(licenses.setSeats(OWNER, l.licenseId(), 2, "réduction").seatsAllowed()).isEqualTo(2);
+    }
+
+    @Test
+    void aNewHardwareIsRefusedOnAReleasedSeat() {
+        var l = license(1);
+        Dev d = dev();
+        var a1 = issue(l.licenseId(), d);
+        licenses.releaseSeat(OWNER, l.licenseId(), a1.seatId(), "poste libéré");
+        assertThatThrownBy(() -> issue(l.licenseId(), dev())).isInstanceOf(ApiException.class).hasMessageContaining("Quota fermé");
+        assertThat(jdbc.queryForObject("select count(*) from lic_seat where license_pk = (select id from lic_license where license_id = ?)", Integer.class, l.licenseId())).isEqualTo(1);
+        assertThat(issue(l.licenseId(), d).seatId()).isEqualTo(a1.seatId()); // the same device gets its seat back
     }
 
     @Test

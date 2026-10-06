@@ -312,11 +312,11 @@ class RegistrarRulesTest extends RegistrarTestBase {
         assertEquals("OVER_QUOTA", r.reason());
         assertEquals(1, seats(lic));
         assertEquals(0, count("SELECT COUNT(*) FROM lic_seat WHERE device_code = ?", b.code()));
-        // le propriétaire relève le quota : le même jeton, présenté de nouveau, obtient son poste
-        licenses.setSeats(OWNER, lic, 2, "deuxième TV du client");
+        // quota fermé : le propriétaire ne peut pas le relever, la TV reste en attente
+        assertThrows(ApiException.class, () -> licenses.setSeats(OWNER, lic, 2, "deuxième TV du client"));
         Registration later = reg(production(ISSUER, b, lic, null, NOW - HOUR, null), b);
-        assertEquals(Status.REGISTERED, later.status(), later.reason());
-        assertEquals(2, seats(lic));
+        assertEquals(Status.PENDING_DECISION, later.status());
+        assertEquals(1, seats(lic));
     }
 
     @Test

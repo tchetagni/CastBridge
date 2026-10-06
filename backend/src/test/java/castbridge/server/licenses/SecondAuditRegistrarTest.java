@@ -49,9 +49,8 @@ class SecondAuditRegistrarTest extends RegistrarTestBase {
     @Test
     void r3_aTvFirstSeenInsideItsWindowDuringASuspensionGetsItsSeatAtTheResumeEvenFiveDaysLater() {
         Acts.Tv a = tv(), b = tv();
-        String lic = licenseId();
+        String lic = licenseWithSeats(2);
         assertEquals(Status.REGISTERED, reg(production(ISSUER, a, lic, null, NOW - HOUR, 90), a, T0).status());
-        licenses.setSeats(OWNER, lic, 2, "deuxième poste");
         licenses.suspend(OWNER, lic, "impayé");
         String tokenB = production(ISSUER, b, lic, null, NOW - HOUR, 90);
         Registration during = reg(tokenB, b, T0);
@@ -65,9 +64,8 @@ class SecondAuditRegistrarTest extends RegistrarTestBase {
     @Test
     void r3b_aTvFirstSeenAfterItsWindowIsStillLeftToTheOwner() {
         Acts.Tv a = tv(), b = tv();
-        String lic = licenseId();
+        String lic = licenseWithSeats(2);
         assertEquals(Status.REGISTERED, reg(production(ISSUER, a, lic, null, NOW - HOUR, 90), a, T0).status());
-        licenses.setSeats(OWNER, lic, 2, "deuxième poste");
         String tokenB = production(ISSUER, b, lic, null, NOW - HOUR, 90);
         Registration late = reg(tokenB, b, after(5));
         assertEquals(Status.PENDING_DECISION, late.status());

@@ -217,5 +217,12 @@ public abstract class RegistrarTestBase extends WalletTestBase {
 
     protected static String nonce16() { return UUID.randomUUID().toString().replace("-", "").substring(0, 16); }
 
+    /** Creates (before any TV is seen) a licence whose quota is fixed from the start: quotas are closed, they never go up afterwards. */
+    protected String licenseWithSeats(int seats) {
+        String lic = licenseId();
+        licenses.create(OWNER, new LicenseService.NewLicense(lic, clients.create(OWNER, "Client " + lic, null, null).id(), "PAID", seats, T0.minusSeconds(3600), null, null, null, null));
+        return lic;
+    }
+
     protected static String licenseId() { return "lic-" + UUID.randomUUID().toString().replace("-", "").substring(0, 10); }
 }

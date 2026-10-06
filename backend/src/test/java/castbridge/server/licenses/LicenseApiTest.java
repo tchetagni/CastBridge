@@ -87,7 +87,8 @@ class LicenseApiTest extends LicenseTestBase {
         api(post("/api/v1/admin/licenses/" + first + "/revoke").content("{}"), 400);
         api(post("/api/v1/admin/licenses/" + first + "/seats/release").content("{\"seatId\":\"" + seat + "\"}"), 400);
         api(post("/api/v1/admin/licenses/" + first + "/seats/release").content("{\"seatId\":\"" + seat + "\",\"reason\":\"poste remplacé\"}"), 200);
-        api(post("/api/v1/admin/licenses/" + first + "/seats").content("{\"seats\":4}"), 200);
+        api(post("/api/v1/admin/licenses/" + first + "/seats").content("{\"seats\":4}"), 409); // closed quota: no increase
+        api(post("/api/v1/admin/licenses/" + first + "/seats").content("{\"seats\":1,\"reason\":\"réduction\"}"), 200); // a decrease is allowed
         api(post("/api/v1/admin/licenses/" + first + "/extend").content("{\"endAt\":\"2100-06-30\"}"), 200);
         api(post("/api/v1/admin/licenses/" + first + "/settings").content("{\"graceDays\":30,\"transferCap\":3}"), 200);
         api(post("/api/v1/admin/licenses/" + first + "/suspend").content("{\"reason\":\"vérification\"}"), 200);

@@ -418,6 +418,10 @@ public class LicenseService {
         if (n < l.seatsUsed()) {
             throw ApiException.conflict("Impossible de descendre à " + n + " poste(s) : " + l.seatsUsed() + " sont utilisés. Libérez d'abord des postes.");
         }
+        // owner decision 2026-10-06: quotas are closed, a licence never gains a seat after creation (a second TV needs its own licence)
+        if (n > l.seatsAllowed()) {
+            throw ApiException.conflict("Quota fermé : une licence ne gagne jamais de poste (" + l.seatsAllowed() + " poste(s)). Créez une nouvelle licence pour une autre télévision.");
+        }
         String why = n < l.seatsAllowed() ? Validate.reason(reason) : Validate.text(reason, "Motif", 500, false);
         jdbc.update("UPDATE lic_license SET seats_allowed = ?, updated_at = ?, version = version + 1 WHERE id = ?", n, ts(Instant.now()), l.id());
         audit.record(actor, "LICENSE_SEATS", "LICENSE", licenseId, why, Map.of("from", l.seatsAllowed(), "to", n));
@@ -520,6 +524,11 @@ public class LicenseService {
         int slot = freeSlot(l);
         try {
             if (same.isEmpty()) {
+                // owner decision 2026-10-06: a released seat is not given to another device; every seat ever created counts against the quota
+                int ever = jdbc.queryForObject("SELECT COUNT(*) FROM lic_seat WHERE license_pk = ?", Integer.class, l.id());
+                if (ever >= l.seatsAllowed()) {
+                    throw ApiException.conflict("Quota fermé : les " + l.seatsAllowed() + " poste(s) de cette licence sont déjà attribués à des appareils (un poste libéré ne passe pas à un autre appareil)");
+                }
                 jdbc.update("INSERT INTO lic_seat (license_pk, seat_id, subject, device_code, factors, k, slot_no, state, first_seen, last_seen) VALUES (?,?,?,?,?,?,?,'ACTIVE',?,?)",
                         l.id(), seatId, subject, device.code(), device.factorsText(), device.k(), slot, ts(seenAt), ts(seenAt));
                 return new SeatResult(jdbc.query("SELECT * FROM lic_seat WHERE license_pk = ? AND seat_id = ?", (rs, i) -> seat(rs), l.id(), seatId).get(0), SeatOutcome.CREATED);

@@ -276,9 +276,8 @@ class AuditW2305FixTest extends RegistrarTestBase {
     @Test
     void f5_aTvSeenDuringASuspensionGetsItsSeatAfterTheResume() {
         Acts.Tv a = tv(), b = tv();
-        String lic = licenseId();
+        String lic = licenseWithSeats(2);
         assertEquals(Status.REGISTERED, reg(production(ISSUER, a, lic, null, NOW - HOUR, 90), a).status());
-        licenses.setSeats(OWNER, lic, 2, "deuxième poste");
         licenses.suspend(OWNER, lic, "impayé");
         String tokenB = production(ISSUER, b, lic, null, NOW - HOUR, 90);
         Registration during = reg(tokenB, b);

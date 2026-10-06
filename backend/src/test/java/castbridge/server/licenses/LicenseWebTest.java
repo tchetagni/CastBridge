@@ -101,7 +101,7 @@ class LicenseWebTest extends LicenseTestBase {
             }
         });
         row("prolonger", 302, 403, 403, 403, c(HttpMethod.POST, base + "/" + l.licenseId() + "/extend", "endAt", "2099-01-01"));
-        row("changer les postes", 302, 403, 403, 403, c(HttpMethod.POST, base + "/" + l.licenseId() + "/seats", "seats", "6"));
+        row("changer les postes", 302, 403, 403, 403, c(HttpMethod.POST, base + "/" + l.licenseId() + "/seats", "seats", "4", "reason", "réduction"));
         row("suspendre", 302, 403, 403, 403, who -> {
             try {
                 return call(who, HttpMethod.POST, base + "/" + license(1).licenseId() + "/do/suspend", "reason", "motif de test", "confirm", "on");
@@ -147,7 +147,7 @@ class LicenseWebTest extends LicenseTestBase {
                     .andReturn().getResponse().getStatus()).as("import " + who).isEqualTo(403);
         }
         // a refused role never changed anything
-        assertThat(licenses.get(l.licenseId()).seatsAllowed()).isEqualTo(6); // only the boss's change went through
+        assertThat(licenses.get(l.licenseId()).seatsAllowed()).isEqualTo(4); // only the boss's change went through (a decrease: quotas are closed)
     }
 
     @Test
