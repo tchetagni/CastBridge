@@ -10,17 +10,50 @@ data class Endpoint(val kind: EndpointKind, val base: String)
  * priorité gagne (réseau local > Wi-Fi Direct > Bluetooth). Si aucune n'est vivante (découverte vidée par un changement de réseau, annonce mDNS
  * perdue un instant), l'adresse qui a répondu il y a moins de [staleMs] reste valable : une TV qui répond n'est pas « introuvable ».
  * Pure : l'horloge et les sources sont données.
+ *
+ * R-19 : quand aucune source vivante ne répond, les [fallbacks] (adresse Wi-Fi de la liaison de confiance — celle où l'écran voit la TV « Connectée » —,
+ * puis la dernière adresse qui a répondu pour ce nom, persistée 10 min) sont essayés AVANT de rendre null : l'envoi ne dit plus « TV introuvable » tant
+ * que l'écran voit la TV. Avec un [probe] (« hello » HTTP court), une adresse n'est retenue que si elle répond (résultat gardé [probeCacheMs]) ; une
+ * adresse vivante qui ne répond plus (bail DHCP changé) cède la place à un repli qui répond, et reste essayée en dernier si rien ne répond.
+ * Sans [probe], tout est pris tel quel (comportement R-18).
  */
-class TvEndpointResolver(private val clock: () -> Long, private val staleMs: Long = 30_000, private val sources: () -> List<String?>) {
+class TvEndpointResolver(
+    private val clock: () -> Long,
+    private val staleMs: Long = 30_000,
+    private val fallbacks: () -> List<String?> = { emptyList() },
+    private val probe: ((String) -> Boolean)? = null,
+    private val probeCacheMs: Long = 5_000,
+    private val sources: () -> List<String?>,
+) {
     @Volatile private var picked: Endpoint? = null
     @Volatile private var good: String? = null
     @Volatile private var goodAt = 0L
+    private val probed = HashMap<String, Pair<Boolean, Long>>()
 
-    fun current(): Endpoint? {
-        val live = sources().filterNotNull().distinct().map { Endpoint(kindOf(it), it) }.minByOrNull { it.kind.ordinal }
-        val e = live ?: good?.takeIf { clock() - goodAt <= staleMs }?.let { Endpoint(EndpointKind.LAST_GOOD, it) }
+    @Synchronized fun current(): Endpoint? {
+        val live = sources().filterNotNull().distinct().map { Endpoint(kindOf(it), it) }.sortedBy { it.kind.ordinal }
+        val lastGood = good?.takeIf { clock() - goodAt <= staleMs }
+        val e = if (probe == null) {
+            live.firstOrNull() ?: lastGood?.let { Endpoint(EndpointKind.LAST_GOOD, it) }
+                ?: fallbacks().firstOrNull { it != null }?.let { Endpoint(kindOf(it), it) }
+        } else {
+            live.firstOrNull { answers(it.base, lastGood) }
+                ?: lastGood?.let { Endpoint(EndpointKind.LAST_GOOD, it) }
+                ?: fallbacks().filterNotNull().distinct().filter { b -> live.none { it.base == b } }.firstOrNull { answers(it, lastGood) }?.let { Endpoint(kindOf(it), it) }
+                ?: live.firstOrNull()
+        }
         picked = e
         return e
+    }
+
+    /** The address answered a moment ago (bytes confirmed, or a « hello » kept [probeCacheMs]); else one « hello » now. */
+    private fun answers(base: String, lastGood: String?): Boolean {
+        if (base == lastGood) return true
+        val now = clock()
+        probed[base]?.let { (ok, at) -> if (now - at < probeCacheMs) return ok }
+        val ok = runCatching { probe!!(base) }.getOrDefault(false)
+        probed[base] = ok to now
+        return ok
     }
 
     fun base(): String? = current()?.base
@@ -70,6 +103,8 @@ class MissingTvGate(private val clock: () -> Long, private val progressWindowMs:
 object TvWait {
     enum class Outcome { FOUND, CANCELLED, GAVE_UP }
     const val WAITING_REASON = "TV introuvable"
+    /** The visible end of the wait (R-18); the queue ([ResumeWait]) puts the file back and relaunches it as soon as the TV answers again (R-19). */
+    const val GAVE_UP_TEXT = "La TV reste introuvable : vérifiez qu'elle est allumée, sur le même Wi-Fi, puis réessayez"
 
     fun until(resolve: () -> String?, gate: MissingTvGate, cancelled: () -> Boolean, sleep: (Long) -> Unit, onReport: (String) -> Unit, onGiveUp: () -> Unit): Outcome {
         while (!cancelled()) {

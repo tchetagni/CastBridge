@@ -47,7 +47,8 @@ class UploadSlot(private val now: () -> Long = System::currentTimeMillis, privat
  * at its place instead of failing it.
  */
 object QueueOutcome {
-    enum class Kind { DONE, CANCELLED, RETRY_SOON, PAUSE_TIME_LIMIT, PAUSE_BACKGROUND, FAILED }
+    /** [WAIT_FOR_TV] (R-19): the upload stopped because the TV stayed unreachable; the file goes back to its place and is relaunched as soon as the TV answers ([ResumeWait]). */
+    enum class Kind { DONE, CANCELLED, RETRY_SOON, PAUSE_TIME_LIMIT, PAUSE_BACKGROUND, WAIT_FOR_TV, FAILED }
 
     fun of(outcome: String?, cancelAsked: Boolean, backgroundRefusal: Boolean): Kind = when {
         cancelAsked -> Kind.CANCELLED
@@ -55,6 +56,7 @@ object QueueOutcome {
         outcome.startsWith(QueueTexts.TIME_LIMIT) -> Kind.PAUSE_TIME_LIMIT
         outcome == QueueTexts.PREVIOUS_ENDING -> Kind.RETRY_SOON
         backgroundRefusal -> Kind.PAUSE_BACKGROUND
+        ResumeWait.isUnreachable(outcome) -> Kind.WAIT_FOR_TV
         else -> Kind.FAILED
     }
 

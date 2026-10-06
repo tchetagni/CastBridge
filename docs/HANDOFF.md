@@ -14,6 +14,12 @@
 
 ## 0. Journal en direct (le plus récent en haut)
 
+### 2026-10-06 : reprise automatique figée à 0 % alors que la TV est « Connectée » (R-19) (branche d'agent, non construit, NON MESURÉ sur appareil)
+
+- Cause établie par LECTURE du code (aucun appareil en ADB) : découverte mDNS tuée par un seul échec et redémarrée sans attendre l'arrêt à chaque événement réseau, résolution sans délai de garde, nom exact seulement (« SMART_TV (2) » raté) alors que l'accueil le trouve, adresse de la liaison de confiance jamais utilisée par l'envoi, file qui abandonne après 10 min. Détail : `docs/REGRESSIONS.md` R-19.
+- Correctif : cœur `C/tv/TvReach.kt` (`DiscoverySupervisor`, `NetworkChangeFilter`, `SerialResolveQueue`, `TvNameMatch`, `TvAddressMemory`, `ResumeWait`, `RetryBackoff`) + replis validés par « hello » dans `TvEndpointResolver` ; Android mince : `TvDiscovery`, `UploadService`, `TransferQueue` (`WAIT_FOR_TV`), `TvHome` (`tvSeenAt`).
+- Tests JVM d'abord (rouge puis vert), mutations tuées ; `:core:test` vert ; `:sender`/`:receiver` compilent. **À faire : P-73 sur appareils réels, audit Opus.**
+
 ### 2026-10-06 : audit adversarial de l'activation Wi-Fi (24c766e1) rendu, M1, M2, L1, L2, L3, L7 corrigés (branche d'agent, non construit)
 
 - **Audit** : corriger d'abord M1 (force brute du code), M2 (choix de la cible côté téléphone) ; L1, L2, L3, L7 dans la même passe ; L4-L6, L8-L10 hors périmètre.
