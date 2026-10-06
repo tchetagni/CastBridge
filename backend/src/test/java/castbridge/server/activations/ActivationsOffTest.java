@@ -61,7 +61,10 @@ class ActivationsOffTest extends ApiTestBase {
             // changed with the second w23-05 audit (HIGH-A): V66 (install_key_binding: wallet_identity.expected_install_fp) is the next number; nothing above it
             assertEquals(1, names.stream().filter(n -> n.startsWith("V66__")).count());
             assertTrue(names.contains("V66__install_key_binding.sql"));
-            assertEquals(0, names.stream().filter(n -> n.matches("V6[7-9]__.*")).count(), "V67 and above are not this module's");
+            // changed with the closure of the transfer paths: V67 (transfer_cap_zero, licences module) is the next number; nothing above it
+            assertEquals(1, names.stream().filter(n -> n.startsWith("V67__")).count());
+            assertTrue(names.contains("V67__transfer_cap_zero.sql"));
+            assertEquals(0, names.stream().filter(n -> n.matches("V6[8-9]__.*")).count(), "V68 and above are not this module's");
         }
     }
 }

@@ -182,6 +182,24 @@ class LicenseLifecycleTest extends LicenseTestBase {
     }
 
     @Test
+    void aReleasedSeatComesBackOnlyOnTheSameDevice() {
+        var l = license(1);
+        Dev d = dev();
+        var a1 = issue(l.licenseId(), d);
+        licenses.releaseSeat(OWNER, l.licenseId(), a1.seatId(), "poste libéré");
+        // the released seat row is bound to another device code (as after a hand edit): reviving it for this device is refused, the seat is not re-bound
+        jdbc.update("update lic_seat set device_code = 'autre-appareil' where license_pk = (select id from lic_license where license_id = ?)", l.licenseId());
+        assertThatThrownBy(() -> issue(l.licenseId(), d)).hasMessageContaining("même appareil");
+        assertThat(jdbc.queryForObject("select state from lic_seat where license_pk = (select id from lic_license where license_id = ?)", String.class, l.licenseId())).isEqualTo("RELEASED");
+        assertThat(jdbc.queryForObject("select device_code from lic_seat where license_pk = (select id from lic_license where license_id = ?)", String.class, l.licenseId())).isEqualTo("autre-appareil");
+    }
+
+    @Test
+    void newLicencesGetATransferCapOfZeroByDefault() {
+        assertThat(license(1).transferCap()).isZero();
+    }
+
+    @Test
     void expiryAndGracePeriod() {
         var l = license(2);
         Dev d = dev();

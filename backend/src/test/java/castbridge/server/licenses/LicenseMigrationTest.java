@@ -34,6 +34,26 @@ class LicenseMigrationTest extends LicenseTestBase {
     }
 
     @Test
+    void v67SetsTheTransferCapOfExistingLicencesToZeroAndKeepsTheOldValues() {
+        var ds = h2("mig67-" + UUID.randomUUID());
+        var db = new JdbcTemplate(ds);
+        flyway(ds, "66").migrate();
+        Timestamp now = Timestamp.from(Instant.now());
+        db.update("insert into lic_client (name, created_at, updated_at) values ('c', ?, ?)", now, now);
+        long client = db.queryForObject("select id from lic_client", Long.class);
+        for (int cap : new int[] {2, 5, 0}) {
+            db.update("insert into lic_license (license_id, client_id, seats_allowed, start_at, transfer_cap, created_by, created_at, updated_at) values (?,?,1,?,?,'t',?,?)", "lic-" + cap, client, now, cap, now, now);
+        }
+        flyway(ds, "67").migrate();
+        assertThat(db.queryForList("select transfer_cap from lic_license", Integer.class)).containsOnly(0);
+        // the previous values are kept (only the licences that changed), for the rollback script
+        assertThat(db.queryForObject("select count(*) from bak_transfer_cap_v67", Integer.class)).isEqualTo(2);
+        assertThat(db.queryForObject("select sum(transfer_cap) from bak_transfer_cap_v67", Integer.class)).isEqualTo(7);
+        db.update("insert into lic_license (license_id, client_id, seats_allowed, start_at, created_by, created_at, updated_at) values ('lic-new', ?, 1, ?, 't', ?, ?)", client, now, now, now);
+        assertThat(db.queryForObject("select transfer_cap from lic_license where license_id = 'lic-new'", Integer.class)).isZero();
+    }
+
+    @Test
     void migrateFromTheExistingSchemaKeepsEveryRowAndIsReversible() throws Exception {
         var ds = h2("mig-" + UUID.randomUUID());
         var db = new JdbcTemplate(ds);

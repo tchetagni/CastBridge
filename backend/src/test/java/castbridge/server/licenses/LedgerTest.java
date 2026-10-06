@@ -160,25 +160,25 @@ class LedgerTest extends LicenseTestBase {
     @Test
     void transfersAreRecordedCountedCappedAndNeverSignedByTheServer() throws Exception {
         String lic = lic();
-        Dev a = dev(), b = dev(), c = dev(), d = dev();
+        Dev a = dev();
         String seat = seatOf(lic, a);
         importReview(List.of(licenseEvent(DESKTOP, t0, lic, 2, 2), issueEvent(DESKTOP, t0 + 1000, lic, seat, "tv", "production", a, nonce())));
-        var r = importReview(List.of(transferEvent(PHONE, t0 + DAY, lic, seat, b, nonce()), transferEvent(DESKTOP, t0 + 2 * DAY, lic, seat, c, nonce()), transferEvent(PHONE, t0 + 3 * DAY, lic, seat, d, nonce())));
+        var r = importReview(List.of(transferEvent(PHONE, t0 + DAY, lic, seat, a, nonce()), transferEvent(DESKTOP, t0 + 2 * DAY, lic, seat, a, nonce()), transferEvent(PHONE, t0 + 3 * DAY, lic, seat, a, nonce())));
         assertThat(r.applied()).isEqualTo(2);
         assertThat(r.conflicts()).extracting(LedgerService.ConflictRow::type).containsExactly("TRANSFER_CAP");
-        // the seat follows the new hardware (same seat id), nothing else is consumed; the old activation is revoked at the transfer date
+        // only transfers to the SAME hardware pass now (owner decision 2026-10-06); the seat keeps its id, nothing else is consumed; the old activation is revoked at the transfer date
         var l = licenses.get(lic);
         assertThat(l.seatsUsed()).isEqualTo(1);
         var seatRow = licenses.detail(lic).seats().get(0);
         assertThat(seatRow.seatId()).isEqualTo(seat);
-        assertThat(seatRow.deviceCode()).isEqualTo(c.code());
+        assertThat(seatRow.deviceCode()).isEqualTo(a.code());
         assertThat(jdbc.queryForObject("select count(*) from lic_revocation where license_id = ? and seat_id = ?", Integer.class, lic, seat)).isEqualTo(2);
         assertThat(jdbc.queryForObject("select signed_by from lic_transfer where license_pk = ? order by at limit 1", String.class, l.id())).isEqualTo(kid(PHONE));
         assertThat(licenses.detail(lic).transfersLastYear()).isEqualTo(2);
-        // the activation re-issued for the NEW hardware is issued after the transfer revocation (the owner tools do the same)
+        // the activation re-issued for the same hardware is issued after the transfer revocation (the owner tools do the same)
         ensureProducts();
         licenses.addProduct(OWNER, lic, "p-test", null);
-        var reissued = activations.issue(OWNER, new ActivationService.IssueRequest(lic, "tv", c.text(), null, null, null), "server-api");
+        var reissued = activations.issue(OWNER, new ActivationService.IssueRequest(lic, "tv", a.text(), null, null, null), "server-api");
         assertThat(reissued.seatId()).isEqualTo(seat);
         // rejected = kept out and recorded as a refused transfer; the cap is adjustable per licence
         var cap = ledger.conflicts("OPEN", 0, 50).items().stream().filter(x -> x.type().equals("TRANSFER_CAP") && lic.equals(x.licenseId())).findFirst().orElseThrow();
@@ -187,11 +187,38 @@ class LedgerTest extends LicenseTestBase {
         licenses.update(OWNER, lic, null, 5, null);
         assertThat(licenses.get(lic).transferCap()).isEqualTo(5);
         // a year later the cap counts again from zero
-        var next = importReview(List.of(transferEvent(DESKTOP, t0 + 400 * DAY, lic, seat, dev(), nonce())));
+        var next = importReview(List.of(transferEvent(DESKTOP, t0 + 400 * DAY, lic, seat, a, nonce())));
         assertThat(next.applied()).isEqualTo(1);
         // a transfer for an unknown seat or licence is a conflict (UNKNOWN_LICENSE), never silently dropped
         var unknown = importReview(List.of(transferEvent(DESKTOP, t0 + 5 * DAY, lic, "dddddddddddddddd", dev(), nonce()), transferEvent(DESKTOP, t0 + 6 * DAY, lic(), seat, dev(), nonce())));
         assertThat(unknown.conflicts()).extracting(LedgerService.ConflictRow::type).containsExactly("UNKNOWN_LICENSE", "UNKNOWN_LICENSE");
+    }
+
+    @Test
+    void aTransferToOtherHardwareIsRefusedEvenForcedAndTheSeatKeepsItsTv() throws Exception {
+        String lic = lic();
+        Dev a = dev(), other = dev();
+        String seat = seatOf(lic, a);
+        importReview(List.of(licenseEvent(DESKTOP, t0, lic, 2, 5), issueEvent(DESKTOP, t0 + 1000, lic, seat, "tv", "production", a, nonce())));
+        var ev = transferEvent(PHONE, t0 + DAY, lic, seat, other, nonce());
+        var r = importAuto(List.of(ev));
+        assertThat(r.rejections()).extracting(LedgerService.Rejection::reason).containsExactly("TRANSFER_CLOSED");
+        var r2 = importReview(List.of(transferEvent(DESKTOP, t0 + 2 * DAY, lic, seat, other, nonce())));
+        assertThat(r2.applied()).isZero();
+        assertThat(r2.rejections()).extracting(LedgerService.Rejection::reason).containsExactly("TRANSFER_CLOSED");
+        assertThat(licenses.detail(lic).seats().get(0).deviceCode()).isEqualTo(a.code());
+        assertThat(count("select count(*) from lic_transfer where license_pk = (select id from lic_license where license_id = ?) and accepted = TRUE", lic)).isZero();
+    }
+
+    @Test
+    void anIssueEventNamingAnExistingSeatForOtherHardwareIsRefused() throws Exception {
+        String lic = lic();
+        Dev a = dev(), other = dev();
+        String seat = seatOf(lic, a);
+        importReview(List.of(licenseEvent(DESKTOP, t0, lic, 2, 0), issueEvent(DESKTOP, t0 + 1000, lic, seat, "tv", "production", a, nonce())));
+        var r = importAuto(List.of(issueEvent(DESKTOP, t0 + 2000, lic, seat, "tv", "production", other, nonce())));
+        assertThat(r.rejections()).extracting(LedgerService.Rejection::reason).containsExactly("SEAT_BOUND_TO_OTHER_DEVICE");
+        assertThat(licenses.detail(lic).seats().get(0).deviceCode()).isEqualTo(a.code());
     }
 
     @Test
