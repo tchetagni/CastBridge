@@ -14,12 +14,34 @@ Quand l'autorisation manque, l'écran le dit en une ligne, au lieu de « aucune 
    - **Par le Wi-Fi d'abord** (2026-10-06, décision du propriétaire) : si la TV et le téléphone sont sur le même réseau, le téléphone trouve la TV (mDNS, même s'il ne l'a jamais ajoutée) et lui envoie la clé par HTTP. Il demande le **code de connexion** de la TV (6 chiffres, affiché en gros sur l'écran d'activation : « Par le Wi-Fi : code de connexion 482915 · TV 192.168.1.20 ») ; le code n'est pas enregistré. Voir « Activation par le Wi-Fi » ci-dessous.
    - **Sinon par Bluetooth** (repli automatique si la TV ne répond pas par le Wi-Fi, ou bouton « Envoyer par Bluetooth à la place ») : c'est la seule voie qui marche sur tous les boîtiers.
 2. Un fichier texte qui contient la clé :
+   - **le plus simple, rien à manipuler chez le client : une clé préparée par l'agent** (voie C, section suivante) : l'outil de bureau écrit le fichier aux bons endroits et le relit ;
    - toujours lisible : le déposer dans `Android/data/castbridge.receiver/files/` de la clé (ou son sous-dossier `CastBridge/`). La recherche automatique y prend `activation`, `activation.txt` et `activation_*.txt` (texte, 16 Kio au plus ; pas d'autre nom, pas ailleurs ; première ligne) ;
    - dans `Download/` : seulement si « Accès à tous les fichiers » est donné à CastBridge-TV (première ligne de l'explorateur, quand l'écran de réglages existe sur le boîtier) ;
    - ou, à la télécommande, « Choisir le fichier d'activation (explorateur) » : **n'importe quel fichier texte, quel que soit son nom, la clé à n'importe quelle ligne** (voir « Chercher la clé dans le fichier »).
 3. Coller la clé dans le champ de l'écran d'activation, puis « Valider la clé ».
 
 Quelle que soit la voie, la clé est vérifiée **de la même façon** (signature par une clé de confiance, liaison au code d'appareil de CETTE TV, fenêtre de 48 h) ; elle n'est jamais exécutée, jamais écrite dans un journal, jamais renvoyée dans une réponse.
+
+## Voie C : la clé USB préparée par l'agent (outil de bureau)
+
+Conception : `docs/coordination/DESIGN-ACTIVATION-SIMPLE-2026-10-07.md` (voie C ; exigence ACT-F6). Le client n'a **ni fichier à copier, ni dossier à chercher, ni autorisation Android à donner** : l'agent branche la clé USB du client sur son ordinateur, et l'outil de bureau l'écrit (détail, contrôles et refus : `docs/ACTIVATION-TOOLS.md` § 10) :
+
+`castbridge-activation emettre --appareil demande.txt --usage-jours 30 --cle-usb /Volumes/NOM_DE_LA_CLE` (Mac ; `E:` sous Windows, `/media/vous/NOM` sous Linux), ou `castbridge-activation cle-usb --activation activation --cle-usb /Volumes/NOM_DE_LA_CLE` pour une activation déjà émise.
+
+Quatre fichiers sont écrits, les dossiers manquants créés, puis **chacun est relu** (même taille, même SHA-256, 16 Kio au plus) :
+| Sur la clé | Pourquoi là |
+|---|---|
+| `Android/data/castbridge.receiver/files/activation` | le dossier propre de CastBridge-TV : lisible sur **Android 9 à 14, avec ou sans** « Accès à tous les fichiers » ; écrit en premier |
+| `Download/CastBridge/activation` | chemin historique, lu seulement quand « Accès à tous les fichiers » est donné |
+| `activation` (racine de la clé) | visible dès qu'on ouvre la clé dans l'explorateur de CastBridge-TV (où il est proposé en première ligne) et dans le sélecteur du système |
+| `LISEZMOI-CASTBRIDGE.txt` | trois lignes pour le client : brancher la clé sur la TV, l'écran d'activation reconnaît la clé, sinon « Chercher la clé USB » |
+
+**Ce que fait le client** : brancher la clé sur la TV (n'importe quelle prise USB), ouvrir l'écran d'activation et accepter les conditions d'usage (rien n'est lu avant). Avec CastBridge-TV 0.14.44, la recherche automatique décrite plus bas trouve la clé (écran ouvert : au plus 15 s, ou 1,5 s après le montage de la clé) et l'active. Le bandeau « Clé USB : activation trouvée pour cette TV › Activer » dès le branchement et les raisons exactes (autre TV, périmée) sont l'objet du chantier **act-tv** (fonction F5) : ils ne sont pas dans cette version. Sinon, « Chercher la clé sur la clé USB » ou « Choisir le fichier d'activation (explorateur) » (en ouvrant la clé, le fichier `activation` de la racine est proposé en première ligne).
+
+**Garde-fous de l'outil** (côté agent) : la clé est contrôlée **avant** l'émission (aucun poste consommé en cas de refus) ; il refuse un volume non inscriptible ou qui n'est pas un volume monté (disque du système, simple dossier), et **n'écrase jamais l'activation d'une autre TV** sans `--force` (il nomme le code d'appareil trouvé sur la clé). La clé n'est valable que **48 h** à l'installation : l'agent la prépare juste avant de la remettre. Une clé préparée pour la TV A, branchée sur la TV B, donne « celle d'une autre TV » (P-79) : refaire `emettre … --cle-usb` avec la demande d'appareil de la TV B.
+
+**Essai par le propriétaire (P-79)** : (1) sur le Mac, préparer une clé avec `emettre … --cle-usb`, lire `4 fichiers écrits sur … pour la TV …` et vérifier que ce code est celui de l'écran d'activation de la TV ; (2) éjecter la clé, la brancher sur la TV, ouvrir l'écran d'activation et cocher les conditions : attendu « Clé trouvée : vérification… » puis « Activée » en quelques secondes, **sans** « Accès à tous les fichiers » ; (3) refaire avec la demande d'une autre TV pour la même clé : l'outil refuse (code nommé), `--force` l'écrase ; (4) la même clé sur une autre TV : « celle d'une autre TV ».
+**Vérifié en JVM** (2026-10-07, `UsbKeyTest`) : les chemins écrits sont ceux que `ActivationLookup` (le vrai code de la TV) parcourt, et la clé écrite y est acceptée dans le dossier propre comme dans `Download/CastBridge` ; sur un vrai volume FAT32 et exFAT monté sous macOS : écriture, relecture, lecture seule refusée. **Non essayé** : une vraie TV, Windows, Linux (à confirmer avec le parcours ci-dessus).
 
 ## Activation par le Wi-Fi
 
