@@ -9,7 +9,8 @@ import castbridge.core.tv.pin.PinDisplay
  * The guided activation screen of CastBridge-TV (F6, docs/coordination/DESIGN-ACTIVATION-SIMPLE-2026-10-07.md): the ways to activate are NUMBERED in the order of what the TV
  * DETECTS, one status line each, large type, five keys (up, down, left, right, OK) are enough:
  *
- *  - A, the phone (code + QR; the TV's own Wi-Fi Direct group, the local network or Bluetooth),
+ *  - A, the phone (the code; the QR and the TV's own Wi-Fi Direct group when the TV has no Wi-Fi network, or a cable, or when the person asks for it ([ActivationGroupPolicy]); else the
+ *    phone on the same Wi-Fi; Bluetooth),
  *  - C, the USB key (banner at plug-in),
  *  - E, typing or pasting the key with the remote: the LAST RESORT, always last.
  *
@@ -23,6 +24,11 @@ object ActivationScreenPlan {
     sealed class Group {
         /** Not asked (not a locked TV, or the screen has not asked yet). */
         object NotTried : Group()
+        /**
+         * The TV is on a Wi-Fi network (no cable): its own group is NOT made, the screen offers it instead ([ActivationGroupPolicy]; a TV with a single Wi-Fi radio may lose its link
+         * to the box while the group exists). The phone is expected on the same Wi-Fi.
+         */
+        object Offered : Group()
         object Starting : Group()
         object Ready : Group()
         /** [err] = a [WifiDirect.Err] word (null = unknown). */
@@ -64,6 +70,7 @@ object ActivationScreenPlan {
             Group.Ready -> ("Réseau direct prêt" + (lan?.let { " · ou même Wi-Fi : TV $it" } ?: "") + " · en attente du téléphone") to LineTone.INFO
             Group.Starting -> ("Réseau direct en préparation…" + (lan?.let { " · même Wi-Fi : TV $it" } ?: "")) to LineTone.INFO
             is Group.Failed -> (ActivationGroupTexts.failed(g.err) + (if (lan != null) " Le téléphone peut aussi utiliser le même Wi-Fi : TV $lan." else " Le Bluetooth reste possible.")) to LineTone.WARN
+            Group.Offered -> ("En attente du téléphone sur le même Wi-Fi" + (lan?.let { " · TV $it" } ?: "")) to LineTone.INFO
             Group.NotTried -> (if (lan != null) "En attente du téléphone sur le même Wi-Fi · TV $lan" else "En attente du téléphone (Bluetooth possible)") to LineTone.INFO
         }
     }
@@ -71,10 +78,36 @@ object ActivationScreenPlan {
     /** « 482 913 »: the connection code, three and three, as the phone's own screen says it. */
     fun groupedCode(code: String): String = PinDisplay.grouped(code)
 
-    /** The sentence under the code of the phone way; [qrShown] false = the TV has no group to put in a QR. */
-    fun phoneInstruction(code: String, qrShown: Boolean): String =
-        if (qrShown) "Scannez avec l'appareil photo du téléphone, ou tapez le code ${groupedCode(code)} dans CastBridge › Activer la TV"
-        else "Sur votre téléphone, ouvrez CastBridge › Activer la TV et tapez le code ${groupedCode(code)}"
+    /**
+     * The sentence under the code of the phone way; [qrShown] false = the TV has no group to put in a QR; [sameWifi] = that is because the group is only OFFERED (the TV is on a Wi-Fi
+     * network): the phone is expected on that same Wi-Fi ([ActivationGroupPolicy.SAME_WIFI_INSTRUCTION]). A QR on screen always wins.
+     */
+    fun phoneInstruction(code: String, qrShown: Boolean, sameWifi: Boolean = false): String = when {
+        qrShown -> "Scannez avec l'appareil photo du téléphone, ou tapez le code ${groupedCode(code)} dans CastBridge › Activer la TV"
+        sameWifi -> ActivationGroupPolicy.SAME_WIFI_INSTRUCTION
+        else -> "Sur votre téléphone, ouvrez CastBridge › Activer la TV et tapez le code ${groupedCode(code)}"
+    }
+
+    /** The « réseau direct » line the screen offers while the group is kept for later, and the warning said under it BEFORE the person presses it. */
+    data class DirectOffer(val line: String, val warning: String)
+
+    fun directOffer(g: Group): DirectOffer? =
+        if (g is Group.Offered) DirectOffer(ActivationGroupPolicy.OFFER_LINE, ActivationGroupPolicy.OFFER_WARNING) else null
+
+    /**
+     * What the phone way draws under its title (the Android screen only draws it). [code] = the connection code grouped 3+3 (null = the locked route is not open yet: nothing to
+     * show); [qr] = the QR of the group, drawn ONLY while the group exists (without one the code stands alone, a QR would describe a network that is not there); [instruction] = the
+     * sentence under the code; [offer] = the « réseau direct » line, only while the group is kept for later; [retry] = « Réessayer le réseau direct », only when the group failed.
+     */
+    data class PhoneView(val code: String?, val qr: Boolean, val instruction: String, val offer: DirectOffer?, val retry: Boolean)
+
+    const val NO_ROUTE_INSTRUCTION = "Sur votre téléphone, ouvrez CastBridge › Activer la TV."
+
+    fun phoneView(code: String?, group: Group): PhoneView {
+        if (code == null) return PhoneView(null, false, NO_ROUTE_INSTRUCTION, null, false)
+        val qr = group is Group.Ready && WdCode.isValid(code)
+        return PhoneView(groupedCode(code), qr, phoneInstruction(code, qrShown = qr, sameWifi = group is Group.Offered), directOffer(group), group is Group.Failed)
+    }
 
     /** A phone presented the right code this recently, or is in the group, counts as « relié ». */
     const val LINK_WINDOW_MS = 120_000L

@@ -295,19 +295,34 @@ class TvService : Service(), Device {
     private var activationWd: WifiDirectGroup? = null
     @Volatile private var activationGroupWanted = false
     @Volatile private var activationClients: Int? = null
+    /** act-tv-2 ([castbridge.core.tv.activation.ActivationGroupPolicy]): the person asked for the direct network on this opening of the screen; kept until the group is given back. */
+    @Volatile private var activationDirectAsked = false
+    /** What the policy last decided on this opening (null = nothing asked yet): logged when it changes, never with a code. WIFI_PRESENT = the group is only offered on the screen. */
+    @Volatile private var activationDecision: castbridge.core.tv.activation.ActivationGroupPolicy.Decision? = null
 
-    /** The activation screen is in front: ask for the group (idempotent for the same code; a group that failed is tried again, which is what the « Réessayer » button and a return from the settings use). Main thread. */
+    /** The activation screen is in front: ask for the group, as the policy allows (idempotent for the same code; a group that failed is tried again, which is what the « Réessayer » button and a return from the settings use). Main thread. */
     fun startActivationGroup() { activationGroupWanted = true; tryStartActivationGroup() }
+
+    /** « Le téléphone n'est pas sur ce Wi-Fi ? OK : réseau direct » and « Réessayer le réseau direct »: the person asks for the group, whatever the TV's network. Main thread. */
+    fun requestActivationDirect() { activationDirectAsked = true; startActivationGroup() }
+
+    /** The 2 s tick of the activation screen: a group kept for later is made as soon as the TV loses its Wi-Fi network (nothing left to cut). Main thread. */
+    fun activationTick() { if (activationDecision == castbridge.core.tv.activation.ActivationGroupPolicy.Decision.WIFI_PRESENT) tryStartActivationGroup() }
 
     private fun tryStartActivationGroup() {
         if (!activationGroupWanted || started || !ActivationCenter.locked()) return
         val code = lockedPin ?: return                                       // the locked route is open: its code is the one on the screen
+        // act-tv-2: on a Wi-Fi network (no cable) the group is made only on request: a TV with a single Wi-Fi radio may lose its link to the box while the group exists
+        val d = castbridge.core.tv.activation.ActivationGroupPolicy.decide(ActivationNet.read(this), activationDirectAsked)
+        if (d != activationDecision) { activationDecision = d; Log.i(TAG, "groupe d'activation : ${d.log}") }
+        if (!d.create) return
         val g = activationWd ?: WifiDirectGroup(this, TvPrefs(this)) { /* no line: the screen reads activationGroupState(); the password is the QR's and goes nowhere else */ }.also { activationWd = it }
         g.startActivation(code)
     }
 
     fun stopActivationGroup() {
         activationGroupWanted = false; activationClients = null
+        activationDirectAsked = false; activationDecision = null             // the next opening decides again
         main.removeCallbacks(stopActivationGroupLater)
         val g = activationWd ?: return
         activationWd = null
@@ -324,7 +339,10 @@ class TvService : Service(), Device {
         if (finishing) stopActivationGroup() else { main.removeCallbacks(stopActivationGroupLater); main.postDelayed(stopActivationGroupLater, ACTIVATION_GROUP_GRACE_MS) }
     }
 
-    fun activationGroupState(): castbridge.core.tv.activation.ActivationScreenPlan.Group = activationWd?.activationState() ?: castbridge.core.tv.activation.ActivationScreenPlan.Group.NotTried
+    /** The group's state for the screen; with no group made, « Offered » when the policy kept it for the person's request (the TV is on a Wi-Fi network), else « NotTried ». */
+    fun activationGroupState(): castbridge.core.tv.activation.ActivationScreenPlan.Group = activationWd?.activationState()
+        ?: if (activationDecision == castbridge.core.tv.activation.ActivationGroupPolicy.Decision.WIFI_PRESENT) castbridge.core.tv.activation.ActivationScreenPlan.Group.Offered
+        else castbridge.core.tv.activation.ActivationScreenPlan.Group.NotTried
 
     /** A phone is « reliée »: in the group, or it presented the right connection code a moment ago (Wi-Fi network, group or any other local way). */
     fun activationPhoneLinked(): Boolean {

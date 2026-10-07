@@ -53,7 +53,7 @@ class ActivationScreenPlanTest {
 
     @Test fun `typing is always last and every way appears exactly once, whatever is detected`() {
         val usbs = listOf(idle, noKey, keyUnusable, keyUsable, U.searching(), U.termsPending(), usb(Probe.ABSENT), usb(Probe.ABSENT, volumes = vol))
-        val groups = listOf(P.Group.NotTried, P.Group.Starting, P.Group.Ready, P.Group.Failed(WifiDirect.Err.WIFI_OFF), P.Group.Failed(null))
+        val groups = listOf(P.Group.NotTried, P.Group.Offered, P.Group.Starting, P.Group.Ready, P.Group.Failed(WifiDirect.Err.WIFI_OFF), P.Group.Failed(null))
         for (linked in listOf(false, true)) for (u in usbs) for (g in groups) for (ips in listOf(emptyList(), listOf("192.168.1.20"))) {
             val plan = P.plan(P.Facts(phoneLinked = linked, usb = u, group = g, lanIps = ips))
             assertEquals(3, plan.size)
@@ -113,8 +113,76 @@ class ActivationScreenPlanTest {
 
     @Test fun `no way's text mentions sender or receiver, only the product names`() {
         val all = P.plan(P.Facts(phoneLinked = true, usb = keyUnusable, group = P.Group.Failed(WifiDirect.Err.UNSUPPORTED), lanIps = lan)).flatMap { listOf(it.title, it.status) } +
-            listOf(P.phoneInstruction("482913", true), P.phoneInstruction("482913", false))
+            P.plan(P.Facts(group = P.Group.Offered, lanIps = lan)).flatMap { listOf(it.title, it.status) } +
+            listOf(P.phoneInstruction("482913", true), P.phoneInstruction("482913", false), P.phoneInstruction("482913", false, sameWifi = true))
         for (t in all) assertFalse("sender" in t.lowercase() || "receiver" in t.lowercase(), t)
+    }
+
+    // ---- a TV on a Wi-Fi network (act-tv-2): the group is offered, not made ----
+
+    @Test fun `a group kept for later says the TV waits for a phone on the same Wi-Fi, with the TV's address`() {
+        val s = phoneStatus(P.Facts(group = P.Group.Offered, lanIps = lan))
+        assertTrue("même Wi-Fi" in s.status && "192.168.1.20" in s.status, s.status)
+        assertFalse("Réseau direct" in s.status, "no group exists yet: the line does not claim one")
+        assertEquals(LineTone.INFO, s.tone)
+        assertTrue("même Wi-Fi" in phoneStatus(P.Facts(group = P.Group.Offered)).status, "the sentence holds without an address too")
+        assertFalse("Bluetooth" in phoneStatus(P.Facts(group = P.Group.Offered, lanIps = lan)).status)
+    }
+
+    @Test fun `the sentence under the code says same Wi-Fi when there is no QR because the group is offered, and the QR sentence wins when a QR is drawn`() {
+        assertEquals("Téléphone sur le même Wi-Fi : tapez le code dans CastBridge › Activer la TV", P.phoneInstruction("482913", qrShown = false, sameWifi = true))
+        assertTrue("Scannez" in P.phoneInstruction("482913", qrShown = true, sameWifi = true), "a QR on screen: the QR sentence")
+        assertEquals(P.phoneInstruction("482913", qrShown = false), P.phoneInstruction("482913", qrShown = false, sameWifi = false))
+        assertTrue("Scannez" !in P.phoneInstruction("482913", qrShown = false, sameWifi = true))
+    }
+
+    private val code = "482913"
+    private val everyGroup = listOf(P.Group.NotTried, P.Group.Offered, P.Group.Starting, P.Group.Ready, P.Group.Failed(WifiDirect.Err.FAILED), P.Group.Failed(null))
+
+    @Test fun `the QR is drawn only while the group exists, the code alone otherwise`() {
+        for (g in everyGroup) {
+            val v = P.phoneView(code, g)
+            assertEquals(g is P.Group.Ready, v.qr, "$g")
+            assertEquals("482 913", v.code, "the code stays, large, whatever the group: $g")
+        }
+        assertFalse(P.phoneView("12345", P.Group.Ready).qr, "no valid code, no group to describe")
+        assertFalse(P.phoneView("48291a", P.Group.Ready).qr)
+        assertTrue(P.phoneView("007042", P.Group.Ready).qr)
+    }
+
+    @Test fun `the direct network is offered with its warning only while the group is kept for later`() {
+        val offer = P.DirectOffer("Le téléphone n'est pas sur ce Wi-Fi ? OK : réseau direct", "Le Wi-Fi de la TV peut se couper le temps de l'activation.")
+        assertEquals(offer, P.phoneView(code, P.Group.Offered).offer)
+        assertEquals(offer, P.directOffer(P.Group.Offered))
+        for (g in everyGroup.filter { it != P.Group.Offered }) {
+            assertEquals(null, P.phoneView(code, g).offer, "$g")
+            assertEquals(null, P.directOffer(g), "$g")
+        }
+    }
+
+    @Test fun `each state of the group has its sentence`() {
+        assertEquals("Téléphone sur le même Wi-Fi : tapez le code dans CastBridge › Activer la TV", P.phoneView(code, P.Group.Offered).instruction)
+        assertEquals(P.phoneInstruction(code, qrShown = true), P.phoneView(code, P.Group.Ready).instruction)
+        for (g in listOf(P.Group.NotTried, P.Group.Starting, P.Group.Failed(WifiDirect.Err.WIFI_OFF))) {
+            val i = P.phoneView(code, g).instruction
+            assertEquals(P.phoneInstruction(code, qrShown = false), i, "$g")
+            assertTrue("Scannez" !in i && "même Wi-Fi" !in i, i)
+        }
+    }
+
+    @Test fun `the retry button shows only when the group failed`() {
+        for (g in everyGroup) assertEquals(g is P.Group.Failed, P.phoneView(code, g).retry, "$g")
+    }
+
+    @Test fun `without a code (the locked route is not open yet) the phone way draws nothing but the plain sentence`() {
+        for (g in everyGroup) {
+            val v = P.phoneView(null, g)
+            assertEquals(null, v.code, "$g")
+            assertFalse(v.qr, "$g")
+            assertEquals(null, v.offer, "an offer would ask for a group nothing can make yet: $g")
+            assertFalse(v.retry, "$g")
+            assertEquals("Sur votre téléphone, ouvrez CastBridge › Activer la TV.", v.instruction, "$g")
+        }
     }
 
     @Test fun `the Wi-Fi line does not call the TV network-less while its own group is up, and never shows the group's address as the LAN one`() {
