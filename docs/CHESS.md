@@ -86,6 +86,13 @@ La TV héberge la salle (`ChessRoom`, comme le quiz) : **code à 4 chiffres + QR
 personnes max dans la salle). Le premier téléphone arrivé prend la couleur libre (Blancs d'abord) ; avant la partie on peut
 changer de place (« Jouer les Blancs / les Noirs / Regarder ») ou échanger les couleurs depuis la TV.
 
+Depuis la plateforme de jeux (docs/GAMES.md § 3, chantier games-G1) la salle (code, jetons, places, spectateurs, présence,
+notification des changements) est la classe générique `GameRoom` dont `ChessRoom` hérite, et les routes `/chess/*` sont servies
+par le `RoomHttp` commun à tous les jeux (`ChessHttp` n'en dit que ce qui est propre aux échecs : préfixe, page, paramètre `ply`,
+messages). **Rien ne change pour les échecs** : mêmes réponses octet pour octet (`ChessGoldenTest`), mêmes tests (`ChessRoomTest`,
+`ChessHttpTest`, `ChessRelayTest` non modifiés). Le moteur, l'ordinateur, la pendule et les nulles restent ceux d'ici ; les
+échecs en `GameRules` (pour la salle `game:chess` du serveur) viennent avec le chantier G2.
+
 **Anti-triche de base** : la TV vérifie chaque coup avec le moteur (coup illégal → refusé, rien ne change), seul le joueur
 dont c'est le tour peut jouer, un spectateur ne peut rien jouer, chaque coup porte le numéro du demi-coup auquel il répond
 (un doublon ou un coup en retard est refusé, `STALE`), et l'horloge est celle de la TV.
@@ -179,8 +186,9 @@ Obligations du serveur (mêmes que la TV, cf. `ChessGame`, `ChessRoom` et le fau
 ## 8. Fichiers
 
 `core/chess/` : `Position.kt` (échiquier 0x88, coups légaux, FEN, hachage Zobrist), `Notation.kt` (SAN, PGN, règles de
-fin), `ChessAi.kt` (IA + bibliothèque d'ouvertures), `ChessGame.kt` (partie + compte à rebours), `ChessRoom.kt` (salle TV),
-`ChessHttp.kt` (routes `/chess`), `ChessTransport.kt` (LAN + relais), `ChessPieces.kt`, `ChessTvLayout.kt` ;
+fin), `ChessAi.kt` (IA + bibliothèque d'ouvertures), `ChessGame.kt` (partie + compte à rebours), `ChessRoom.kt` (salle TV,
+héritière de `core/games/GameRoom`), `ChessHttp.kt` (routes `/chess`, sur `core/games/RoomHttp`), `ChessTransport.kt` (LAN +
+relais), `ChessPieces.kt`, `ChessTvLayout.kt` ;
 `core/tv/CombinedRoutes.kt` ; `resources/castbridge/chess/play.html`. TV : `ChessActivity.kt`, `ChessTvView.kt`,
 `ChessHub.kt`, `ic_t_chess.xml`. Téléphone : `ChessScreen.kt`. Tests : `ChessEngineTest` (perft), `ChessAiTest`,
 `ChessRoomTest` (horloge, salle, HTTP), `ChessRelayTest` (faux relais), `ChessLayoutTest`.
