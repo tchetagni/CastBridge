@@ -132,6 +132,13 @@
             android:launchMode="singleTop"
             android:screenOrientation="landscape"
             android:configChanges="orientation|screenSize|screenLayout|keyboard|keyboardHidden|navigation" />
+        <!-- Jeux de cartes sur la plateforme commune (docs/GAMES.md): the Bataille (démonstration); the phones join through the TV's web page /jeux/<id>, no permission, no outgoing network -->
+        <activity
+            android:name=".GameActivity"
+            android:exported="false"
+            android:launchMode="singleTop"
+            android:screenOrientation="landscape"
+            android:configChanges="orientation|screenSize|screenLayout|keyboard|keyboardHidden|navigation" />
         <!-- Apprendre (docs/LEARN.md): opened from the home tile or from the phone -->
         <activity
             android:name=".LearnActivity"

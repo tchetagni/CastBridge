@@ -632,7 +632,7 @@ class PlayerActivity : Activity(), TvService.Screen {
                 startActivity(Intent(this, LanguesActivity::class.java))
             },
             // Quiz, Échecs and Sudoku live in the « Jeux » hub (docs/GAMES.md); their public URLs (/quiz, /chess) are unchanged.
-            tile("games", R.drawable.ic_t_games, "Jeux", "Quiz des Millions, Échecs et Sudoku, en solo ou avec les téléphones.", Games.visible().size.let { n -> if (n > 1) "$n jeux" else "$n jeu" }, true) {
+            tile("games", R.drawable.ic_t_games, "Jeux", "Quiz des Millions, Échecs et Sudoku, en solo ou avec les téléphones.", Games.playableCount().let { n -> if (n > 1) "$n jeux" else "$n jeu" }, true) {
                 startActivity(Intent(this, GamesActivity::class.java))
             },
             tile("downloads", R.drawable.ic_cb_telechargements, "Téléchargements", "Télécharger sur la TV (liens, magnet, torrent) : les fichiers rejoignent la bibliothèque.",

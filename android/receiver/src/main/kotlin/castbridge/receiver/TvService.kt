@@ -442,7 +442,7 @@ class TvService : Service(), Device {
             profile = prefs.profile(), onSettings = { prefs.saveProfile(it); updateStorageStatus() },
             onNotice = { n -> notice(n); setStatus("5-notice", n) },
             safPicker = ::launchSafPicker, settingsOpener = ::openStorageSettings, library = library, readoptJson = { readoptState },
-            publicRoutes = castbridge.core.tv.CombinedRoutes(QuizHub.http, ChessHub.http),
+            publicRoutes = castbridge.core.tv.CombinedRoutes(QuizHub.http, ChessHub.http, GameRoomHost.http),
             routeGuard = { path -> if (ActivationCenter.trial() && castbridge.core.owner.TrialPolicy.routeBlocked(path)) castbridge.core.owner.TrialPolicy.MESSAGE else null },
             tokenAuth = { t -> trust.verifyToken(t)?.also { a -> phoneSeen(a); presence.seen(a) } }, peers = btApi?.peers,
             // the phone's library assistant never touches what the parental control protects (docs/LIBRARY-AGENT.md)

@@ -28,6 +28,7 @@ object GamesColors {
     const val QUIZ = 0xFFFF5C39.toInt()          // brand.quizDesMillions.primary
     const val CHESS = 0xFF2FA96B.toInt()         // brand.echecs.primary
     const val SUDOKU = 0xFF6CB6FF.toInt()        // no brand entry yet: semantic.info
+    const val CARDS = 0xFFB48CFF.toInt()         // card games (Bataille, Fap-Fap, Agraham Tia): no brand entry yet, a violet apart from the three above
 }
 
 /**
