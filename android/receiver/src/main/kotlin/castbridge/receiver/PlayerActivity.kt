@@ -158,7 +158,10 @@ class PlayerActivity : Activity(), TvService.Screen {
         runCatching { castbridge.receiver.wallet.WalletHub.init(this); castbridge.receiver.wallet.WalletHub.refresh(castbridge.core.wallet.ui.WalletSyncSchedule.Trigger.TICK) }
     }
 
-    override fun onStart() { super.onStart(); TvConnect.addListener(serverListener); home?.resume() }
+    override fun onStart() { super.onStart(); TvConnect.addListener(serverListener); UsbVolumeWatch.addListener(usbWatchListener); home?.resume() }
+
+    /** A key changed state (Android checks it, it is ready, unreadable, pulled): the chip and the pastille say it at once instead of at the next 4 s refresh. */
+    private val usbWatchListener: () -> Unit = { if (resumed) { home?.takeIf { it.visible }?.refreshStatus(force = true); refreshStatusBar() } }
 
     private val serverListener: () -> Unit = { if (resumed) serverScreens() }
 
@@ -220,6 +223,7 @@ class PlayerActivity : Activity(), TvService.Screen {
     override fun onStop() {
         super.onStop()
         TvConnect.removeListener(serverListener)
+        UsbVolumeWatch.removeListener(usbWatchListener)
         if (ResourceProfiles.of(this).economy) thumbs?.trim()   // low-resource TV: no bitmap kept while the screen is hidden
         home?.pause()                                       // Quiz, Apprendre… on top: the hidden home stops its zoom and its 4 s reload (R-11)
         consentShown = false; mandatoryShown = false
@@ -265,6 +269,19 @@ class PlayerActivity : Activity(), TvService.Screen {
             "Cette TV n'a pas de sélecteur de fichiers Android : impossible de choisir un dossier. Utilisez le dossier de l'app sur la clé " +
                 "(getExternalFilesDirs, rempli depuis un ordinateur) ou la mémoire interne."
         } catch (e: Exception) { "Sélecteur indisponible : ${e.message}" }
+    }
+
+    /**
+     * « Que faire de la clé ? » (tuile « Clé USB ») : le guide ENTIER d'une clé qu'Android vérifie ou n'a pas pu monter (la ligne d'état de l'accueil n'en garde que deux lignes),
+     * avec le bouton des réglages de stockage quand la clé est illisible (une application ne peut ni réparer ni formater : docs/STORAGE.md § 11).
+     */
+    private fun showUsbGuide() {
+        val e = UsbVolumeWatch.attention()
+        if (e == null) { flash("La clé n'a rien à signaler."); return }
+        val b = AlertDialog.Builder(this).setTitle("Clé USB").setMessage(e.verdict.line).setNegativeButton("Fermer", null)
+        if (e.verdict.action == castbridge.core.tv.UsbAction.OPEN_STORAGE_SETTINGS)
+            b.setPositiveButton(e.verdict.actionLabel ?: castbridge.core.tv.UsbVolumeState.SETTINGS_LABEL) { _, _ -> svc?.openStorageSettings()?.let { m -> flash(m) } }
+        b.show()
     }
 
     private fun chooseTarget() {
@@ -493,7 +510,8 @@ class PlayerActivity : Activity(), TvService.Screen {
             // ONE source for every path (Wi-Fi, Wi-Fi multivoie, Bluetooth), held by the service (independent of the HTTP server): castbridge.core.xfer.ReceiveCards
             val cards = castbridge.core.xfer.ReceiveCards.of(svc?.reception?.shown().orEmpty(), s?.receiving().orEmpty(), s != null)
             // a transfer in progress tells more than anything; otherwise, on a trial / grace TV, the line of a USB key that carries an activation (UsbActivationWatch: only when a file « activation » was really seen)
-            return Triple(castbridge.core.xfer.ReceiveCards.ready(s != null), ParentalHub.shownPin(pin), castbridge.core.xfer.ReceiveCards.headline(cards) ?: UsbActivationWatch.homeLine())
+            // + the state of the USB keys as Android says it (docs/STORAGE.md): « Ne retirez pas la clé : copie en cours » in front of a reception to a key, « vérification par Android… patientez », the guide of an unreadable key
+            return Triple(castbridge.core.xfer.ReceiveCards.ready(s != null), ParentalHub.shownPin(pin), UsbVolumeWatch.chipLine(castbridge.core.xfer.ReceiveCards.headline(cards), UsbActivationWatch.homeLine()))
         }
         override fun signal() = castbridge.core.ux.TvSignal.of(TvSignalViews.facts(this@PlayerActivity, svc, server != null))
         override fun open(i: castbridge.core.tv.LibraryItem, row: List<castbridge.core.tv.LibraryItem>, index: Int) { libScreen?.open(i, row, index) }
@@ -632,12 +650,13 @@ class PlayerActivity : Activity(), TvService.Screen {
             },
             tile("receive", R.drawable.ic_cb_recevoir_du_telephone, "Recevoir du téléphone", "Envoyer une vidéo depuis l'app CastBridge du téléphone.", "Code ${ParentalHub.shownPin(pin)}", true) { homeApi().openHelp() },
             tile("usb", R.drawable.ic_cb_cle_usb, "Clé USB", "Importer des vidéos d'une clé, ou y ranger les nouvelles.",
-                if (drives.isEmpty()) "Aucune clé" else drives.joinToString { "${it.label} · ${it.free / (1L shl 30)} Go libres" }, drives.isNotEmpty()) {
-                choose("Clé USB", listOf<Pair<String, () -> Unit>>(
+                if (drives.isEmpty()) UsbVolumeWatch.tileStatus() ?: "Aucune clé" else drives.joinToString { "${it.label} · ${it.free / (1L shl 30)} Go libres" }, drives.isNotEmpty()) {
+                choose("Clé USB", (if (UsbVolumeWatch.attention() != null) listOf<Pair<String, () -> Unit>>(castbridge.core.tv.UsbVolumeState.GUIDE_LABEL to { showUsbGuide() }) else emptyList()) + listOf<Pair<String, () -> Unit>>(
                     "Importer les vidéos des clés détectées" to { usbMessage(usb?.importFromVolumes()) },
                     "Choisir un dossier de la clé…" to { usbMessage(usb?.launchPicker(this, REQ_TREE)) },
                     "Où ranger les nouveaux fichiers (${server?.target ?: "auto"})…" to { chooseTarget() },
                     "Re-détecter la clé (test de vitesse)" to { s?.rescanAsync(remeasure = true); flash("Détection de la clé en cours…") },
+                    castbridge.core.tv.UsbVolumeState.PREPARE_LABEL to { UsbRemovalActivity.open(this) },
                     "Réglages de stockage de la TV" to { s?.openStorageSettings()?.let { flash(it) } },
                 ) + (if (usb?.isRunning() == true) listOf<Pair<String, () -> Unit>>("Annuler l'import en cours" to { usb.cancel() }) else emptyList()))
             },
@@ -682,7 +701,7 @@ class PlayerActivity : Activity(), TvService.Screen {
         val ip = TvService.localIp()
         val labels = mapOf("0-storage" to "Stockage", "1-bt" to "Bluetooth", "2-wd" to "Wi-Fi Direct (sans box)", "3-usb" to "Import depuis une clé",
             "4-ssh" to "Administration à distance (SSH)", "4-ssh-bt" to "SSH par Bluetooth", "4-api-bt" to "API par Bluetooth", "5-update" to "Installation d'applications",
-            "5-notice" to "Dernier événement", "9-server" to "Serveur", "1-phone" to "Téléphone connecté")
+            "5-notice" to "Dernier événement", "9-server" to "Serveur", "1-phone" to "Téléphone connecté", "0-usbnote" to "État de la clé USB")
         val sig = castbridge.core.ux.TvSignal.of(TvSignalViews.facts(this, s, server != null))
         val info = buildList {
             add("Signalétique : " + sig.text to (sig.action ?: castbridge.core.ux.TvSignal.LEGEND))
@@ -725,7 +744,10 @@ class PlayerActivity : Activity(), TvService.Screen {
     private fun libraryApi() = object : LibraryScreen.Api {
         override fun items() = ParentalHub.filterItems(server?.libraryItems().orEmpty())
         override fun volumes() = svc?.registry?.volumes().orEmpty().filter { it.writable }.map { it.id to it.label }
-        override fun header() = "OK : lire   ·   MENU (ou OK maintenu) : actions   ·   RETOUR : accueil"
+        override fun header() = listOfNotNull(UsbVolumeWatch.libraryLine(), "OK : lire   ·   MENU (ou OK maintenu) : actions   ·   RETOUR : accueil").joinToString("\n")
+        override fun volumeNote() = UsbVolumeWatch.libraryLine()
+        override fun volumeAction(): Pair<String, () -> Unit>? = UsbVolumeWatch.attention()?.takeIf { it.verdict.action == castbridge.core.tv.UsbAction.OPEN_STORAGE_SETTINGS }
+            ?.let { (it.verdict.actionLabel ?: castbridge.core.tv.UsbVolumeState.SETTINGS_LABEL) to { svc?.openStorageSettings()?.let { m -> flash(m) }; Unit } }
         override fun call(block: (castbridge.core.tv.TvClient) -> Unit): String? = try {
             block(castbridge.core.tv.TvClient("http://127.0.0.1:${ReceiverServer.PORT}", pin)); null
         } catch (e: castbridge.core.tv.TvClient.HttpError) {
@@ -773,8 +795,10 @@ class PlayerActivity : Activity(), TvService.Screen {
     private fun showMenu() {
         if (current == null) { showSettings(); return }
         if (!ParentalHub.allow(this, castbridge.core.parental.Category.SETTINGS)) return
+        // the list is built ONCE: a line that comes and goes by itself (a key that ends its check, a copy that ends) must not shift the lines under the finger
+        val items = menuItems()
         AlertDialog.Builder(this).setTitle("CastBridge TV")
-            .setItems(menuItems().map { it.first }.toTypedArray()) { _, i -> menuItems()[i].second() }
+            .setItems(items.map { it.first }.toTypedArray()) { _, i -> items.getOrNull(i)?.second?.invoke() }
             .setNegativeButton("Fermer", null).show()
     }
 
@@ -802,6 +826,8 @@ class PlayerActivity : Activity(), TvService.Screen {
             prefs.putBool(DialHost.PREF, !dialOn); s.applyDial()
             flash(if (!dialOn) "L'appli YouTube du téléphone peut maintenant diffuser vers cette TV (même Wi-Fi, avec Internet). Cela lance YouTube TV, qui doit être installée." else "Diffusion YouTube vers cette TV désactivée")
         }
+        if (UsbVolumeWatch.attention() != null) items += castbridge.core.tv.UsbVolumeState.GUIDE_LABEL to { showUsbGuide() }          // seulement quand une clé vérifie ou est illisible : « MENU > Clé USB » des avis
+        items += castbridge.core.tv.UsbVolumeState.PREPARE_LABEL to { UsbRemovalActivity.open(this) }          // « Retrait sûr » (docs/STORAGE.md)
         items += "USB : importer les vidéos des clés détectées" to { usbMessage(usb?.importFromVolumes()) }
         items += "USB : choisir un dossier de la clé…" to { usbMessage(usb?.launchPicker(this, REQ_TREE)) }
         if (usb?.isRunning() == true) items += "USB : annuler l'import en cours" to { usb.cancel() }

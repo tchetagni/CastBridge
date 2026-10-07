@@ -279,7 +279,11 @@ object ActivationCenter {
         val dirs = LinkedHashSet<File>()
         downloadDirs(ownDirs()).forEach { (d, _) -> dirs += File(d, "CastBridge") }
         app.getExternalFilesDirs(null).filterNotNull().forEach { dirs += it }
-        for (d in dirs) { if (runCatching { d.mkdirs(); File(d, "device-request.txt").writeText(text); true }.getOrDefault(false)) out += File(d, "device-request.txt").path }
+        // written AND fsync'd (the key may be pulled right after: the owner takes the file to his tool), then one best-effort system `sync` for the directory entries (docs/STORAGE.md « Clé USB mal éjectée »)
+        for (d in dirs) {
+            if (runCatching { d.mkdirs(); java.io.FileOutputStream(File(d, "device-request.txt")).use { it.write(text.toByteArray(Charsets.UTF_8)); it.fd.sync() }; true }.getOrDefault(false)) out += File(d, "device-request.txt").path
+        }
+        if (out.isNotEmpty()) castbridge.core.tv.ShellSync.shared.soon()
         return out
     }
 

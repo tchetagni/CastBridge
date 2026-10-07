@@ -114,7 +114,7 @@ class ActivationActivity : Activity() {
     private fun onUsbChanged() {
         val v = UsbActivationWatch.view
         if (v.state != UsbActivationBanner.State.SEARCHING) report.text = ActivationCenter.lastReport.joinToString("\n")
-        if (manualSearch && v.state != UsbActivationBanner.State.SEARCHING && v.state != UsbActivationBanner.State.IDLE) {
+        if (manualSearch && v.state != UsbActivationBanner.State.SEARCHING && v.state != UsbActivationBanner.State.IDLE && v.state != UsbActivationBanner.State.WAITING_CHECK) {      // Android still checks the key: the search goes on at its mount
             manualSearch = false
             status.setTextColor(color(v.tone))
             status.text = if (v.canActivate) "Clé trouvée : appuyez sur « Activer » dans le bandeau en haut." else v.text

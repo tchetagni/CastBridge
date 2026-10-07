@@ -206,6 +206,22 @@ class PartAssembler private constructor(
     /** Forgets everything (cancel, or an abandoned transfer swept away). */
     fun discard() { close(); if (!discard) { data.delete(); stateFile.delete() } }
 
+    /** Waits until no block is being written (at most [timeoutMs]); true = idle. A block in flight ends by itself: it is at most one block of data. */
+    fun settle(timeoutMs: Long): Boolean {
+        val end = System.nanoTime() + timeoutMs * 1_000_000
+        while (true) {
+            if (synchronized(this) { busy.isEmpty() }) return true
+            if (System.nanoTime() > end) return false
+            try { Thread.sleep(10) } catch (e: InterruptedException) { Thread.currentThread().interrupt(); return false }
+        }
+    }
+
+    /**
+     * Forces the data file onto the medium, then closes (the block map is saved: a restarted phone resumes from it). « Préparer le retrait de la clé USB »: what arrived is on the key before the TV
+     * says it may be pulled. The `force` is at the END of the work on this file, never per block.
+     */
+    fun syncAndClose() { runCatching { ch?.force(true) }; close() }
+
     fun close() { closed = true; runCatching { persist() }; runCatching { raf?.close() } }
 
     fun hashesJoined(): String = synchronized(this) { hashes.joinToString(",") { it ?: "" } }

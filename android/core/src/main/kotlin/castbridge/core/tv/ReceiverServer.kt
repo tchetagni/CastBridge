@@ -172,6 +172,17 @@ class ReceiverServer(
     private val meters = java.util.concurrent.ConcurrentHashMap<String, RateMeter>()
     @Volatile private var moveJob: MoveJob? = null
     private val uploading = java.util.concurrent.atomic.AtomicInteger()
+
+    // ---- « Préparer le retrait de la clé USB » (docs/STORAGE.md § « Clé USB mal éjectée : ce que la TV peut et ne peut pas faire », « Retrait sûr ») ----
+    /** A single-stream upload that writes to a volume right now; [received] = bytes of the file there, this request included. */
+    private class PutInfo(val volumeId: String, val name: String, val total: Long, val received: java.util.concurrent.atomic.AtomicLong)
+    private val puts = java.util.concurrent.ConcurrentHashMap<String, PutInfo>()
+    /** Volumes being prepared for removal: true = the copies running are cut at their next block (STOP), false = they finish, nothing new starts (DRAIN). */
+    private val fences = java.util.concurrent.ConcurrentHashMap<String, Boolean>()
+    private class Cut(val name: String, val atMs: Long)
+    /** The last copy cut by the removal of each volume (the file's name, for the TV's « Clé retirée pendant une copie » line). */
+    private val cuts = java.util.concurrent.ConcurrentHashMap<String, Cut>()
+    private fun noteCut(volumeId: String, name: String) { cuts[volumeId] = Cut(name, System.currentTimeMillis()) }
     /** Multi-connection transfers (/api/transfer/..., see docs/TRANSFER.md); old phones never call it. */
     private val transfers = castbridge.core.xfer.TransferHost(maxStreams = cfg.maxTransferStreams.takeIf { it > 0 } ?: maxOf(2, cfg.maxHttpThreads - 2)).also { h ->
         h.finalSizeOf = { n, sz -> findFinalOrOrigin(n, sz)?.size }
@@ -275,6 +286,83 @@ class ReceiverServer(
 
     /** Uploads being received right now (the TV app keeps a partial wake lock only while this is above zero). */
     fun activeTransfers(): Int = uploading.get() + chunking.get() + (if (moveJob?.state == "running") 1 else 0)
+
+    /**
+     * The copies writing to [volumeId] right now (one entry per file, the TV's title, never a path): single-stream uploads, multi-connection transfers heard in the last [ACTIVE_WRITE_MS] (a copy
+     * the phone left idle holds nothing open that matters), a move that ends there. What « Ne retirez pas la clé : copie en cours » and « Préparer le retrait » read.
+     */
+    fun writesOn(volumeId: String): List<WriteInfo> {
+        val out = ArrayList<WriteInfo>()
+        for (p in puts.values) if (p.volumeId == volumeId) out += WriteInfo(LibraryLogic.title(p.name), if (p.total > 0) (p.received.get() * 100 / p.total).toInt().coerceIn(0, 100) else -1)
+        val now = System.currentTimeMillis()
+        for (sess in transfers.sessionsOn(volumeId)) {
+            if (sess.assembler.discard || (now - sess.assembler.touched >= activeWriteMs && !sess.finishing)) continue
+            out += WriteInfo(LibraryLogic.title(sess.manifest.name), transfers.receivedBytes(sess).let { if (sess.manifest.size > 0) (it * 100 / sess.manifest.size).toInt().coerceIn(0, 100) else -1 })
+        }
+        moveJob?.takeIf { it.state == "running" && it.to.id == volumeId }?.let { out += WriteInfo(LibraryLogic.title(it.name), if (it.total > 0) (it.done * 100 / it.total).toInt().coerceIn(0, 100) else -1) }
+        return out
+    }
+
+    /**
+     * « Préparer le retrait » : no new copy starts on [volumeId] (answered 503 « volume removed », which the phone waits out like a pulled key, nothing is redirected elsewhere and nothing is lost).
+     * [stop] false = the copies running end by themselves (DRAIN); true = they are cut at their next block: what arrived is kept and fsync'd, the phone resumes it when the key is back (STOP). A STOP
+     * is never weakened by a later DRAIN. Idempotent.
+     */
+    fun fenceVolume(volumeId: String, stop: Boolean) {
+        fences.merge(volumeId, stop) { old, new -> old || new }
+        if (!stop) return
+        moveJob?.takeIf { it.state == "running" && (it.from.id == volumeId || it.to.id == volumeId) }?.cancelled = true      // the partial copy is kept for the next time
+        onFenceStop()                                  // (tests) a request can meet the fence here, its session still open
+        pauseSessions(volumeId)
+    }
+
+    /** (tests) Called between the moment a stop fence is set and the moment the sessions are closed: where a request can meet the fence before its session is gone. */
+    @Volatile internal var onFenceStop: () -> Unit = {}
+
+    /** (tests) How long a multi-connection copy may stay silent and still count as writing. */
+    @Volatile internal var activeWriteMs: Long = ACTIVE_WRITE_MS
+
+    /** The volume serves again (the key stays, or it came back): copies are accepted on it as before. */
+    fun unfenceVolume(volumeId: String) { fences.remove(volumeId) }
+
+    fun volumeFenced(volumeId: String): Boolean = fences.containsKey(volumeId)
+
+    /** (tests) Closes the assembler of a transfer WITHOUT forgetting the session: what a request meets when a session is closed under its feet (idle sweep, preparation for removal). */
+    internal fun closeAssemblerOnly(id: String) { transfers.session(id)?.assembler?.close() }
+
+    /** (tests) Marks a transfer as being verified at its end, like a `finish` that reads the whole file back does. */
+    internal fun markFinishingForTest(id: String, on: Boolean) { transfers.session(id)?.finishing = on }
+
+    /**
+     * Multi-connection transfers writing to [volumeId]: the block being written ends, the data file is forced to the medium, the session is closed (its block map is saved, a restarted phone resumes it)
+     * and forgotten by the host. A chunk that arrives meanwhile is answered « retry », never refused.
+     */
+    private fun pauseSessions(volumeId: String) {
+        for (sess in transfers.sessionsOn(volumeId)) {
+            // a copy whose final verification (the whole file read back, minutes on a key) is running is never cut: it ends, commits, and only then does it stop holding the key
+            if (sess.assembler.discard || sess.finishing) continue
+            sess.assembler.settle(SETTLE_MS)
+            sess.assembler.syncAndClose()
+            transfers.remove(sess.manifest.id)
+            progress.interrupted("x:" + sess.manifest.id, "clé en cours de retrait : la copie reprendra au retour de la clé")
+        }
+    }
+
+    /**
+     * Forces everything written to [volumeId] onto the medium: the multi-connection sessions are closed (after their block), then every partial file is fsync'd and the system is asked to `sync`
+     * ([VolumeStore.flushAll]). True only when each partial file reached the medium. Blocks (seconds on a slow key): never call it from a request thread.
+     */
+    fun flushVolume(volumeId: String): Boolean {
+        val v = volumes[volumeId] ?: return false
+        pauseSessions(volumeId)
+        return volumes.store(v).flushAll()
+    }
+
+    /** The file whose copy the removal of [volumeId] cut (still writing, or cut in the last minute); null = none. Names only, never a path. */
+    fun interruptedOn(volumeId: String): String? =
+        puts.values.firstOrNull { it.volumeId == volumeId }?.name
+            ?: transfers.sessionsOn(volumeId).firstOrNull { !it.assembler.discard && System.currentTimeMillis() - it.assembler.touched < activeWriteMs }?.manifest?.name
+            ?: cuts[volumeId]?.takeIf { System.currentTimeMillis() - it.atMs < CUT_MEMORY_MS }?.name
     @Volatile private var playingVolume: String? = null
     /** "Play one after the other" (library section, selection); null = single file. */
     @Volatile private var playlist: Playlist? = null
@@ -907,6 +995,12 @@ class ReceiverServer(
     /** 503: the drive holding this upload is gone; the phone retries like after a network cut and resumes when it is back. */
     private fun removed(): Response = json(SERVICE_UNAVAILABLE, """{"error":"volume removed"}""")
 
+    /**
+     * 503 for a volume that is being PREPARED for removal (« Préparer le retrait de la clé USB »): the same error as a pulled key (the phone waits like after a network cut and resumes when the key is
+     * back), plus the reason and when to ask again. Nothing is lost: the partial copy stays on the key.
+     */
+    private fun held(): Response = json(SERVICE_UNAVAILABLE, """{"error":"volume removed","cause":"held","retry":true,"retryMs":5000}""")
+
     private fun refusal(r: StoragePolicy.Refusal): Response = when (r.http) {
         503 -> json(SERVICE_UNAVAILABLE, """{"error":${q(r.message)}}""")
         413 -> json(PAYLOAD_TOO_LARGE, """{"error":${q(r.message)},"message":${q(humanRefusal(r.message))}}""")
@@ -954,6 +1048,7 @@ class ReceiverServer(
                     break
                 }
                 val o = owner ?: return spaceRefusal(why ?: "no storage available", target, total)
+                if (fences.containsKey(o.v.id)) return held()                // the key is being prepared for removal: the copy waits for it (nothing is redirected elsewhere)
                 // No stale empty partial copy elsewhere (a failed earlier attempt).
                 volumes.volumes().filter { it.id != o.v.id }.forEach { v ->
                     val st = volumes.store(v); val n = v.storedName(name)
@@ -961,6 +1056,7 @@ class ReceiverServer(
                 }
                 (o.st as? FileStore)?.let { Meta.delete(it.dir, o.name) }      // a fresh upload: forget any stale size
             } else {
+                if (fences.containsKey(owner.v.id)) return held()            // its partial copy stays on the key being prepared for removal: resumed when the key is back
                 ensureRoom(owner.v, total - cur, xferCfg)?.let { why -> return json(INSUFFICIENT_STORAGE, spaceJson(why, owner.v, total - cur)) }
             }
             val o = owner!!
@@ -971,7 +1067,8 @@ class ReceiverServer(
             val lock = if (fileStore != null) FileLocks.of(fileStore.dir, o.name) else Any()
             val pid = "put:" + name.lowercase()
             progress.begin(pid, name, total, castbridge.core.xfer.TransferProgress.Transport.WIFI, if (progress.isRunning(pid)) null else sourceOf(s), cur)
-            synchronized(lock) {
+            val put = PutInfo(v.id, name, total, java.util.concurrent.atomic.AtomicLong(cur)).also { puts[pid] = it }
+            try { synchronized(lock) {
                 // Append as bytes arrive: whatever reached the disk before a network cut or a pulled drive is kept for resume.
                 try {
                     fileStore?.let { Meta.write(it.dir, o.name, total) }   // lets /stream/ announce the final size before the last byte arrives
@@ -991,6 +1088,7 @@ class ReceiverServer(
                             try { out.write(buf, 0, fill) } catch (e: IOException) { throw DiskError(e) }
                             transfers.stats.record(fill, System.nanoTime() - t0)      // the disk speed the policy caps against, measured on this path too
                             sinceSync += fill; fill = 0
+                            put.received.set(len - left + cur)
                             progress.advance(pid, len - left + cur)
                             // while a video plays the periodic fsync is spaced out (bounded: SYNC_DEFER_FACTOR x); the fsync before the commit never changes
                             val syncEvery = if (rx.decision.on) maxOf(rx.decision.syncEveryBytes, cfg.removableSyncBytes) else cfg.removableSyncBytes
@@ -1001,6 +1099,7 @@ class ReceiverServer(
                         try {
                             while (left > 0) {
                                 if (!volumes.alive(v)) throw DiskError(IOException("volume removed"))
+                                if (fences[v.id] == true) { flush(); throw DiskError(IOException(HELD)) }          // « Préparer le retrait » : what arrived is kept, the phone resumes when the key is back
                                 val r = input.read(buf, fill, minOf((buf.size - fill).toLong(), left, rx.readCap().toLong()).toInt())
                                 if (r < 0) break
                                 fill += r; left -= r
@@ -1036,13 +1135,15 @@ class ReceiverServer(
                         progress.interrupted(pid)             // the stream ended short (clean close): the phone resumes, the sweep does not have to wait for it
                     }
                 } catch (e: DiskError) {
+                    if (e.message == HELD) { progress.interrupted(pid, "clé en cours de retrait : la copie reprendra au retour de la clé"); return held() }
+                    if (!volumes.alive(v)) noteCut(v.id, name)
                     progress.fail(pid, diskReason(v, e))
                     return diskFailure(v, e)
                 } catch (e: IOException) {
                     progress.interrupted(pid)                 // the network dropped: the phone resumes from what arrived
                     throw e
                 }
-            }
+            } } finally { puts.remove(pid) }
             invalidate()
             return ok(partJson(name))
         }
@@ -1096,12 +1197,19 @@ class ReceiverServer(
         } finally { uploading.decrementAndGet() }
     }
 
+    /** A partial multi-connection copy of [m] sits on a volume being prepared for removal: it is resumed there when the key is back. */
+    private fun fencedHolds(m: castbridge.core.xfer.Manifest): Boolean = fences.keys.any { id ->
+        volumes[id]?.let { v -> (volumes.store(v) as? FileStore)?.let { File(File(it.dir, castbridge.core.xfer.PartAssembler.SUB), m.id + ".data").isFile } } == true
+    }
+
     /** Picks the volume like an upload does (policy, quota, "free space after the transfer" rule); folders only (not the system picker's). */
     private fun allocateTransfer(m: castbridge.core.xfer.Manifest, target: String): castbridge.core.xfer.Allocation {
         findPart(m.name)?.let { return castbridge.core.xfer.Allocation.Refused(409, "upload in progress") }
         if (volumes.missingOwner(m.name) != null) return castbridge.core.xfer.Allocation.Refused(503, "volume removed")
+        if (fencedHolds(m)) return castbridge.core.xfer.Allocation.Refused(503, "volume removed")         // its partial copy is on the key being prepared for removal: resumed there, never started again elsewhere
         val plan = StoragePolicy.plan(volumes.snapshot(), target, m.size, TransferRule.minFree(cfg), reclaimable = ::reclaimable)
         plan.refusal?.let { r -> return castbridge.core.xfer.Allocation.Refused(r.http, if (r.http == 507) spaceMessage(r.message, target, m.size).second else r.message) }
+        if (plan.candidates.firstOrNull()?.volume?.id?.let { fences.containsKey(it) } == true) return castbridge.core.xfer.Allocation.Refused(503, "volume removed")      // the key is being prepared for removal: the copy waits for it
         var why: String? = null
         for (c in plan.candidates) {
             val st = volumes.store(c.volume) as? FileStore
@@ -1119,11 +1227,12 @@ class ReceiverServer(
     private fun transferChunk(s: IHTTPSession, p: Map<String, String>): Response {
         val sess = transfers.session(p["id"].orEmpty()) ?: run { rejectCode.set("session-unknown"); return json(Response.Status.NOT_FOUND, """{"error":"unknown transfer"}""") }
         val v = if (sess.assembler.discard) null else volumes[sess.volumeId]?.takeIf { volumes.alive(it) }
-        if (v == null && !sess.assembler.discard) { transfers.remove(sess.manifest.id); sess.assembler.close(); progress.fail("x:" + sess.manifest.id, "support de stockage retiré"); rejectCode.set("volume-removed"); return removed() }
+        if (v == null && !sess.assembler.discard) { noteCut(sess.volumeId, sess.manifest.name); transfers.remove(sess.manifest.id); sess.assembler.close(); progress.fail("x:" + sess.manifest.id, "support de stockage retiré"); rejectCode.set("volume-removed"); return removed() }
         val idx = p["idx"]?.toIntOrNull() ?: return bad("idx required")
         val len = s.headers["content-length"]?.toLongOrNull() ?: return bad("content-length required")
         val sha = s.headers["x-cb-sha256"].orEmpty().lowercase()
         if (idx !in 0 until sess.manifest.blocks) return bad("bad block index")
+        if (v != null && fences[v.id] == true) { rejectCode.set("volume-held"); drainBody(s, len); return held() }          // « Préparer le retrait » : no more block is written to the key
         // fewer connections while a video plays (PlaybackPriority): the extra ones are told « busy », the phone's controller backs off.
         // A block beyond the head window of a file that is not preallocated waits too (the kernel would zero-fill the gap): same answer.
         if (chunking.get() >= transfers.allowedStreams() || !transfers.mayAccept(sess.manifest.length(idx).toLong()) || !transfers.admitAhead(sess, idx))
@@ -1148,9 +1257,10 @@ class ReceiverServer(
                 }
                 is castbridge.core.xfer.PartAssembler.Block.Already -> ok("""{"already":true}""")
                 is castbridge.core.xfer.PartAssembler.Block.Corrupt -> json(status(422), """{"error":"corrupt block","idx":$idx}""")
-                is castbridge.core.xfer.PartAssembler.Block.Bad -> bad(r.reason)
+                // a session closed under the feet of a request (idle sweep, preparation for removal): the phone retries, a 400 would stop the copy
+                is castbridge.core.xfer.PartAssembler.Block.Bad -> if (r.reason == "transfer closed") json(SERVICE_UNAVAILABLE, """{"error":"interrupted","cause":"interrupted","retry":true,"retryMs":1000}""") else bad(r.reason)
                 is castbridge.core.xfer.PartAssembler.Block.Interrupted -> { rejectCode.set("interrupted"); json(SERVICE_UNAVAILABLE, """{"error":"interrupted","retry":true,"retryMs":1000}""") }   // a stalled read is a retry, never a refusal (a 400 stopped the copy)
-                is castbridge.core.xfer.PartAssembler.Block.DiskFail -> try { progress.fail("x:" + sess.manifest.id, diskReason(v!!, DiskError(r.cause))); diskFailure(v, DiskError(r.cause)) } finally { if (!volumes.alive(v!!)) { transfers.remove(sess.manifest.id); a.close() } }
+                is castbridge.core.xfer.PartAssembler.Block.DiskFail -> try { progress.fail("x:" + sess.manifest.id, diskReason(v!!, DiskError(r.cause))); diskFailure(v, DiskError(r.cause)) } finally { if (!volumes.alive(v!!)) { noteCut(v.id, sess.manifest.name); transfers.remove(sess.manifest.id); a.close() } }
             }
         } finally { chunking.decrementAndGet(); lane?.idle() }
     }
@@ -1163,6 +1273,17 @@ class ReceiverServer(
     private val DRAIN_MS = 2000L
     /** The request body of this thread's request was read to the end: the answer may keep the connection alive. */
     private val bodyDrained = ThreadLocal<Boolean?>()
+
+    /** Reads and drops the unread body of this request (a refusal answered before it is read would reset the connection: the phone books a failure). Bounded by [maxDrainBytes]. */
+    private fun drainBody(s: IHTTPSession, bodyLen: Long) {
+        if (bodyLen in 0..maxDrainBytes) {
+            try {
+                val buf = ByteArray(cfg.ioBufferBytes); var left = bodyLen
+                while (left > 0) { val r = s.inputStream.read(buf, 0, minOf(buf.size.toLong(), left).toInt()); if (r < 0) break; left -= r }
+                if (left == 0L) bodyDrained.set(true)
+            } catch (e: IOException) { /* the phone went away: nothing to answer to */ }
+        }
+    }
 
     /**
      * 429 « busy ». The phone sends the WHOLE block before it reads the answer: answering and closing with that body unread resets the connection
@@ -1177,13 +1298,7 @@ class ReceiverServer(
             rejectCode.set("disk-stalled")
             return json(status(429), """{"error":"busy","cause":"stalled","stalledMs":$stalled,"retryMs":2000,"writeBps":${transfers.stats.bytesPerSec()}}""")
         }
-        if (bodyLen in 0..maxDrainBytes) {
-            try {
-                val buf = ByteArray(cfg.ioBufferBytes); var left = bodyLen
-                while (left > 0) { val r = s.inputStream.read(buf, 0, minOf(buf.size.toLong(), left).toInt()); if (r < 0) break; left -= r }
-                if (left == 0L) bodyDrained.set(true)
-            } catch (e: IOException) { /* the phone went away: nothing to answer to */ }
-        }
+        drainBody(s, bodyLen)
         return json(status(429), """{"error":"busy","retryMs":${playback.current().busyRetryMs},"writeBps":${transfers.stats.bytesPerSec()}}""")
     }
 
@@ -1742,6 +1857,7 @@ class ReceiverServer(
             if (all.any { it.v.id == to.id }) return json(Response.Status.CONFLICT, """{"error":"target exists"}""")
             if (isPlaying(name)) return json(Response.Status.CONFLICT, """{"error":"playing"}""")
             if (moveJob?.state == "running") return json(Response.Status.CONFLICT, """{"error":"another move is running"}""")
+            if (fences.containsKey(to.id) || fences.containsKey(src.v.id)) return held()
             if (findPart(name) != null && findPart(name)!!.v.id != to.id) return json(Response.Status.CONFLICT, """{"error":"upload in progress"}""")
             if (streamUse.busy(src.name) || streamUse.busy(name)) return json(Response.Status.CONFLICT, """{"error":"streaming"}""")
             val toName = to.storedName(name)
@@ -1931,6 +2047,14 @@ class ReceiverServer(
         }
 
         /** Human (French) text for the refusal codes of [StoragePolicy], shown on the phone and the web page. */
+        /** A multi-connection copy the phone left silent for this long writes nothing: it is not « en cours » for the removal of the key. */
+        const val ACTIVE_WRITE_MS = 15_000L
+        /** « Préparer le retrait » waits this long for the block being written to end before it closes a session. */
+        private const val SETTLE_MS = 10_000L
+        /** The cut copy of a removed key is remembered this long, for the line « Clé retirée pendant une copie ». */
+        private const val CUT_MEMORY_MS = 60_000L
+        private const val HELD = "volume held"
+
         fun humanRefusal(code: String): String = when {
             code.startsWith("file too large") ->
                 "Fichier trop gros pour ce volume (${code.removePrefix("file too large for ").substringBefore(" (")} : 4 Go - 1 octet maximum). " +

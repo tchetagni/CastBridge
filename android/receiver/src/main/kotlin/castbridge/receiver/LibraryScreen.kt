@@ -48,6 +48,10 @@ class LibraryScreen(
         fun playAll(names: List<String>, start: Int)
         /** Something changed (played, renamed...): screens showing the library reload. */
         fun changed() {}
+        /** A USB key Android is checking (« patientez ») or cannot read (the guide): said in the header and in the empty library, never silently. null = nothing to say. */
+        fun volumeNote(): String? = null
+        /** The button that goes with [volumeNote] when the key is unreadable (« Ouvrir les réglages de stockage »); null = no button. */
+        fun volumeAction(): Pair<String, () -> Unit>? = null
     }
 
     private val main = Handler(Looper.getMainLooper())
@@ -55,6 +59,15 @@ class LibraryScreen(
     private val rows = ArrayList<Row>()
     private var signature = 0
     private val header: TextView
+    /** « Ouvrir les réglages de stockage », only while a key is unreadable: a focusable line, OK opens the storage settings of the TV. */
+    private val keyAction = TextView(act).apply {
+        setTextColor(TvStyle.ACCENT); textSize = TvStyle.Type.BODY; typeface = TvFonts.bold; isFocusable = true; isClickable = true; visibility = View.GONE
+        setPadding(TvStyle.dp(act, 12), TvStyle.dp(act, 8), TvStyle.dp(act, 12), TvStyle.dp(act, 8))
+        background = android.graphics.drawable.StateListDrawable().apply {
+            addState(intArrayOf(android.R.attr.state_focused), TvStyle.rounded(act, TvStyle.CARD_FOCUS, TvStyle.R_MD, TvStyle.RING, 3))
+            addState(intArrayOf(), TvStyle.rounded(act, 0x00000000, TvStyle.R_MD))
+        }
+    }
     private val list: RecyclerView
     private val adapter = Adapter()
     val visible get() = container.visibility == View.VISIBLE
@@ -77,6 +90,7 @@ class LibraryScreen(
         root.addView(TextView(act).apply { text = "Bibliothèque"; setTextColor(Color.WHITE); textSize = 30f; typeface = TvFonts.bold })
         header = TextView(act).apply { setTextColor(TvStyle.MUTED); textSize = TvStyle.Type.CAPTION; setPadding(0, TvStyle.dp(act, 4), 0, TvStyle.dp(act, 8)) }
         root.addView(header)
+        root.addView(keyAction)
         list = RecyclerView(act).apply {
             layoutManager = GridLayoutManager(act, COLS).apply {
                 spanSizeLookup = object : GridLayoutManager.SpanSizeLookup() {
@@ -128,12 +142,18 @@ class LibraryScreen(
 
     private fun apply(items: List<LibraryItem>, h: String, focusFirst: Boolean) {
         header.text = h
-        val sig = items.hashCode()
+        // a key under check or unreadable: the button of the guide (the header already says why the videos of the key are missing)
+        val act0 = runCatching { api.volumeAction() }.getOrNull()
+        keyAction.visibility = if (act0 == null) View.GONE else View.VISIBLE
+        keyAction.text = act0?.first.orEmpty()
+        keyAction.setOnClickListener { act0?.second?.invoke() }
+        val note = runCatching { api.volumeNote() }.getOrNull()
+        val sig = items.hashCode() * 31 + (note?.hashCode() ?: 0)
         if (sig == signature && rows.isNotEmpty() && !focusFirst) return
         signature = sig
         rows.clear()
         val sections = LibrarySections.build(items)
-        if (sections.isEmpty()) rows += Row.Empty("Aucun fichier sur la TV.\nEnvoyez des vidéos depuis l'app CastBridge du téléphone : elles apparaîtront ici.")
+        if (sections.isEmpty()) rows += Row.Empty((note?.let { "$it\n\n" }.orEmpty()) + "Aucun fichier sur la TV.\nEnvoyez des vidéos depuis l'app CastBridge du téléphone : elles apparaîtront ici.")
         for (s in sections) {
             rows += Row.Header(s.title, s.items.size)
             s.items.forEachIndexed { i, it -> rows += Row.Card(s.id, it, i, s.items) }

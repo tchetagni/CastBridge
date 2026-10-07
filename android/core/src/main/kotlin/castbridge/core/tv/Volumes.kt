@@ -204,6 +204,11 @@ interface VolumeStore {
      * guarantee it answers false (the default): the Mover then refuses to delete its source.
      */
     fun syncPart(name: String): Boolean = false
+    /**
+     * Forces everything this store wrote onto the medium (« Préparer le retrait de la clé USB », docs/STORAGE.md): the fsync of every partial file, then the best-effort `sync` of the system.
+     * True only when each partial file reached the medium (the system `sync` is best effort and does not count). A store that cannot guarantee it answers false (the default).
+     */
+    fun flushAll(): Boolean = false
     fun open(name: String, from: Long = 0): InputStream
     fun deleteFinal(name: String): Boolean
     fun deletePart(name: String)
@@ -215,8 +220,11 @@ interface VolumeStore {
     fun reachable(): Boolean = true
 }
 
-/** [VolumeStore] over a plain folder (internal storage or a removable volume's app folder). */
-open class FileStore(override val volume: StorageVolume, private val free: () -> Long = { volume.dir.usableSpace }) : VolumeStore {
+/**
+ * [VolumeStore] over a plain folder (internal storage or a removable volume's app folder). [sync] = the system `sync` asked ONCE after the final commit of a file on a removable volume (best
+ * effort, coalesced: see [SystemSync]); the TV app gives it the real one, tests and internal storage the none.
+ */
+open class FileStore(override val volume: StorageVolume, private val free: () -> Long = { volume.dir.usableSpace }, private val sync: SystemSync = SystemSync.NONE) : VolumeStore {
     val dir: File get() = volume.dir
     override val progressive get() = true
 
@@ -262,6 +270,16 @@ open class FileStore(override val volume: StorageVolume, private val free: () ->
         val fin = File(dir, diskName(name))
         if (fin.exists()) fin.delete()
         if (!part.renameTo(fin)) throw IOException("rename failed")
+        // the end of a file written to a removable volume: its directory entry and the allocation table go to the medium too (best effort, never per block: R-20)
+        if (volume.kind != VolumeKind.INTERNAL) sync.soon()
+    }
+
+    /** Every partial file of the folder is fsync'd, then the system is asked to flush (waited for, best effort). False = the folder is gone or a partial file did not reach the medium. */
+    override fun flushAll(): Boolean {
+        if (!dir.isDirectory) return false
+        val partials = DiskFlush.partials(dir)
+        sync.now()
+        return partials.allOk
     }
 
     /**

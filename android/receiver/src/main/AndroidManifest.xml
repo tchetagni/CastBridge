@@ -172,6 +172,9 @@
             android:theme="@style/Theme.CastBridge.Tv.Screen" />
         <activity android:name=".DownloadsActivity" android:exported="false" android:screenOrientation="landscape"
             android:theme="@style/Theme.CastBridge.Tv.Screen" />
+        <!-- « Préparer le retrait de la clé USB » (docs/STORAGE.md, « Retrait sûr »): copies attendues ou mises en pause, clé vidée, puis « Vous pouvez retirer la clé ». Interne, aucune permission. -->
+        <activity android:name=".UsbRemovalActivity" android:exported="false" android:screenOrientation="landscape"
+            android:launchMode="singleTop" android:theme="@style/Theme.CastBridge.Tv.Screen" />
         <!-- Contrôle parental (docs/PARENTAL.md): settings screen and lock screen, both internal (not exported) -->
         <activity android:name=".ParentalActivity" android:exported="false" android:screenOrientation="landscape"
             android:windowSoftInputMode="adjustPan" android:theme="@style/Theme.CastBridge.Tv.Screen" />

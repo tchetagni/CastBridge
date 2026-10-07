@@ -111,6 +111,7 @@ object TvSignalViews {
             storage = TvSignal.storageOf(free), freeText = freeText,
             usbKey = runCatching { svc?.registry?.volumes().orEmpty().any { it.kind == VolumeKind.REMOVABLE } }.getOrDefault(false),
             internet = svc?.let { it.netDirectMs != null || it.netGatewayMs != null } == true,
+            usbNote = runCatching { UsbVolumeWatch.signalNote() }.getOrNull(),          // a key Android is checking, cannot read, or that was pulled (docs/STORAGE.md)
         )
     }
 }
