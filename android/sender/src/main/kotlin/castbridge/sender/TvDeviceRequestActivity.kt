@@ -21,6 +21,7 @@ import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import castbridge.core.owner.ShareRequestPlan
 import castbridge.core.trust.DeviceRequestResult
 import castbridge.core.trust.PinKeys
 import castbridge.core.trust.TvDeviceRequestReader
@@ -99,8 +100,9 @@ fun DeviceRequestScreen(onClose: () -> Unit) {
                     Button(onClick = { copy("Demande d'appareil CastBridge", req.fullText()) }, modifier = Modifier.fillMaxWidth()) { Text(TvDeviceRequestTexts.COPY_FULL) }
                     Text(TvDeviceRequestTexts.EXPLAIN_FULL, style = MaterialTheme.typography.bodySmall, color = cs.onSurfaceVariant)
                     OutlinedButton(onClick = {
-                        val send = Intent(Intent.ACTION_SEND).setType("text/plain").putExtra(Intent.EXTRA_SUBJECT, TvDeviceRequestTexts.TITLE).putExtra(Intent.EXTRA_TEXT, req.fullText())
-                        ctx.startActivity(Intent.createChooser(send, TvDeviceRequestTexts.SHARE).addFlags(Intent.FLAG_ACTIVITY_NEW_TASK))
+                        // R-50 : le texte part seul (jamais de flux), par la même règle que « Activer la TV » ; le sujet et le titre de cet écran sont inchangés
+                        val plan = ShareRequestPlan.request(TvDeviceRequestTexts.TITLE, req.fullText(), TvDeviceRequestTexts.SHARE)
+                        ctx.startActivity(ShareRequestIntents.chooser(plan).addFlags(Intent.FLAG_ACTIVITY_NEW_TASK))
                     }, modifier = Modifier.fillMaxWidth()) { Text(TvDeviceRequestTexts.SHARE) }
                     OutlinedButton(onClick = { copy("Demande d'appareil CastBridge (serveur)", req.serverText()) }, modifier = Modifier.fillMaxWidth()) { Text(TvDeviceRequestTexts.COPY_SERVER) }
                     Text(TvDeviceRequestTexts.EXPLAIN_SERVER, style = MaterialTheme.typography.bodySmall, color = cs.onSurfaceVariant)
