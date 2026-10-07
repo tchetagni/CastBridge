@@ -64,7 +64,10 @@ class ActivationsOffTest extends ApiTestBase {
             // changed with the closure of the transfer paths: V67 (transfer_cap_zero, licences module) is the next number; nothing above it
             assertEquals(1, names.stream().filter(n -> n.startsWith("V67__")).count());
             assertTrue(names.contains("V67__transfer_cap_zero.sql"));
-            assertEquals(0, names.stream().filter(n -> n.matches("V6[8-9]__.*")).count(), "V68 and above are not this module's");
+            // changed with games-G2: V68 (chess_stakes, wallet module: `game` column of the escrows, staked-games journal, game policy) is the next number; nothing above it
+            assertEquals(1, names.stream().filter(n -> n.startsWith("V68__")).count());
+            assertTrue(names.contains("V68__chess_stakes.sql"));
+            assertEquals(0, names.stream().filter(n -> n.matches("V(69|[7-9][0-9])__.*")).count(), "V69 and above are not this module's");
         }
     }
 }

@@ -1,6 +1,7 @@
 package castbridge.core.chess.online
 
 import castbridge.core.quiz.online.HostEdition
+import castbridge.core.quiz.online.PlayRelay
 import castbridge.core.quiz.online.StakeSpec
 import castbridge.core.wallet.ui.GamePolicyView
 import kotlin.test.Test
@@ -50,6 +51,19 @@ class ChessOnlineScreensTest {
         assertEquals(ChessOnlineGate.MSG_SERVICE_DOWN, reason(tile(reachable = false)))
         assertEquals(ChessOnlineGate.MSG_NOT_OPEN, reason(tile(c = ChessServiceCaps(chess = false, stakes = false))))
         assertNotNull(reason(tile(clock = true)))
+    }
+
+    @Test fun withoutInternetTheEntryStaysOpenWhenASyncedPhoneCanGiveAPipeAndSaysWhyOtherwise() {
+        // relay-R1 : une TV sans Internet reste « en ligne » dès qu'un téléphone synchronisé peut lui ouvrir un tuyau ; l'interrupteur et l'activation passent toujours avant
+        fun t(relay: PlayRelay, internet: Boolean = false, edition: HostEdition = HostEdition.PROD, flag: Boolean = true) =
+            ChessOnlineGate.tile(flag, edition, internet, childProfile = false, clockDoubt = false, caps = null, serviceReachable = null, relay = relay)
+        assertEquals(ChessOnlineTile.Available, t(PlayRelay.POSSIBLE))
+        assertEquals(ChessOnlineTile.Blocked(castbridge.core.relay.RelayText.NO_PHONE), t(PlayRelay.NO_PHONE))
+        assertEquals(ChessOnlineTile.Blocked(castbridge.core.relay.RelayText.OLD_PHONE), t(PlayRelay.OLD_PHONE))
+        assertEquals(ChessOnlineTile.Blocked(ChessOnlineGate.MSG_NO_INTERNET), t(PlayRelay.UNKNOWN))
+        assertEquals(ChessOnlineTile.Available, t(PlayRelay.NO_PHONE, internet = true), "avec Internet le fait du relais ne compte pas")
+        assertEquals(ChessOnlineTile.Hidden, t(PlayRelay.POSSIBLE, flag = false), "interrupteur éteint : rien")
+        assertTrue(t(PlayRelay.POSSIBLE, edition = HostEdition.NONE) is ChessOnlineTile.Blocked, "TV non activée : jamais un tuyau")
     }
 
     @Test fun aBlockedTileNeverOpensTheNetwork() {
