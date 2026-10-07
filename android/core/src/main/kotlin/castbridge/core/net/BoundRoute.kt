@@ -22,6 +22,8 @@ object BoundRoute {
 
     @Synchronized fun set(hostPrefix: String, b: Binding) { prefix = hostPrefix; binding = b }
     @Synchronized fun clear() { binding = null; prefix = null }
+    /** Rend la liaison SEULEMENT si [b] est encore la liaison courante : l'activation ne retire pas la liaison d'un autre groupe Wi-Fi Direct de CastBridge. */
+    @Synchronized fun clearIf(b: Binding) { if (binding === b) { binding = null; prefix = null } }
 
     fun applies(host: String?): Boolean {
         val p = prefix ?: return false

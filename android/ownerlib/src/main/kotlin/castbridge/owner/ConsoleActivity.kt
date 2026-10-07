@@ -119,7 +119,9 @@ open class ConsoleActivity : ComponentActivity() {
     }
 
     @Composable private fun Issue(signer: Ed25519Signer) {
-        var input by remember { mutableStateOf("") }
+        // « Émettre et installer » (écran « Activer la TV » du téléphone) : la demande lue sur la TV est déjà dans le champ, et la clé générée peut être rendue à cet écran pour l'installation
+        val returnKey = remember { intent?.getBooleanExtra(SuperAdmin.EXTRA_RETURN_KEY, false) == true }
+        var input by remember { mutableStateOf(intent?.getStringExtra(SuperAdmin.EXTRA_DEVICE_REQUEST).orEmpty()) }
         var field by remember { mutableStateOf(androidx.compose.ui.text.input.TextFieldValue("")) }
         if (field.text != input) field = androidx.compose.ui.text.input.TextFieldValue(input, androidx.compose.ui.text.TextRange(input.length))      // set from outside (Bluetooth read)
         var form by remember { mutableStateOf(ProductionForm()) }
@@ -201,7 +203,8 @@ open class ConsoleActivity : ComponentActivity() {
                         // the box is v2 (for the TV's installation key) unless the owner forces v1 for an old TV (refused without the switch, and after the v1 sunset)
                         val v1 = !production && boxV1 && full.installPub == null
                         if (!production) {
-                            if (full.installPub == null && !boxV1) throw IssueException("Cette TV n'a pas fourni sa clé d'installation (CastBridge-TV trop ancien) : mettez-la à jour, ou activez « Enveloppe v1 (TV ancienne) »")
+                            if (full.installPub == null && !boxV1) throw IssueException("Cette TV n'a pas fourni sa clé d'installation (CastBridge-TV trop ancien) : mettez-la à jour, ou activez « Enveloppe v1 (TV ancienne) »" +
+                                if (returnKey) ". La lecture par le code ne donne pas cette clé : pour un essai en enveloppe v2, lisez la demande complète par Bluetooth (« 1. Lire le code de la TV »)." else "")
                             rights += RentalIssuing.right(RentalSpec(RentalLines.TRIAL_PRODUCT, listOf(Right.ALL_BUNDLE), RentalLines.TRIAL_DAYS, RentalLines.TRIAL_USAGE_MINUTES),
                                 now, Activation.TRIAL_LICENSE, SeatIds.of(Activation.TRIAL_LICENSE, full.fp), full.fp, RentalKeys.masterFrom(signer), full.installPub, null, boxV1)
                         }
@@ -231,6 +234,8 @@ open class ConsoleActivity : ComponentActivity() {
                         OutlinedButton({ startActivity(Intent.createChooser(Intent(Intent.ACTION_SEND).setType("text/plain").putExtra(Intent.EXTRA_TEXT, t), "Envoyer")) }) { Text("Partager") }
                         if (fileContent != null) OutlinedButton({ save.launch("activation") }) { Text("Fichier") }
                     }
+                    // opened by « Activer la TV »: one touch hands the key back, the phone installs it on the TV it has just joined
+                    if (returnKey) Button({ setResult(RESULT_OK, Intent().putExtra(SuperAdmin.RESULT_KEY, t)); finish() }, modifier = Modifier.fillMaxWidth()) { Text("Installer sur la TV") }
                 } }
             }
         }

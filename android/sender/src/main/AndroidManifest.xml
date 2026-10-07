@@ -118,6 +118,10 @@
         <provider android:name="androidx.core.content.FileProvider" android:authorities="${applicationId}.freeshare" android:exported="false" android:grantUriPermissions="true">
             <meta-data android:name="android.support.FILE_PROVIDER_PATHS" android:resource="@xml/free_share_paths" />
         </provider>
+        <!-- « Activer la TV » > « Partager la demande » : the QR of the device request (PNG in the cache) handed to the share sheet with its text; not exported, one file, read only -->
+        <provider android:name="androidx.core.content.FileProvider" android:authorities="${applicationId}.activationshare" android:exported="false" android:grantUriPermissions="true">
+            <meta-data android:name="android.support.FILE_PROVIDER_PATHS" android:resource="@xml/activation_share_paths" />
+        </provider>
         <!-- Sharing of the PDF / CSV of the Parental tab through the share sheet (not exported: only the app hands out URIs, one file, read only) -->
         <provider android:name="androidx.core.content.FileProvider" android:authorities="${applicationId}.parentalshare" android:exported="false" android:grantUriPermissions="true">
             <meta-data android:name="android.support.FILE_PROVIDER_PATHS" android:resource="@xml/parental_share_paths" />
