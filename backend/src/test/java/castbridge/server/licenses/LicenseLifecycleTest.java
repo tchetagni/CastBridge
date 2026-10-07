@@ -168,7 +168,8 @@ class LicenseLifecycleTest extends LicenseTestBase {
         licenses.releaseSeat(OWNER, l.licenseId(), a1.seatId(), "poste remplacé");
         // revocation list: the seat is revoked at a date >= the first activation's issue date
         Timestamp revoked = jdbc.queryForObject("select max(revoked_at) from lic_revocation where license_id = ? and seat_id = ?", Timestamp.class, l.licenseId(), a1.seatId());
-        assertThat(revoked.toInstant()).isAfterOrEqualTo(a1.issuedAt());
+        // revoked_at is stored at second precision: compare at that granularity (an issue at hh:mm:22.9 and a revocation at hh:mm:22 are the same second)
+        assertThat(revoked.toInstant()).isAfterOrEqualTo(a1.issuedAt().truncatedTo(java.time.temporal.ChronoUnit.SECONDS));
         // quotas are closed: a released seat is never given to another device, only the same device gets it back (with an activation issued AFTER the revocation)
         Dev other = dev();
         assertThatThrownBy(() -> issue(l.licenseId(), other)).hasMessageContaining("Quota fermé");
