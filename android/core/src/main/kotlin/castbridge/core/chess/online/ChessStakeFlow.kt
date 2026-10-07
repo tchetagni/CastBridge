@@ -21,7 +21,10 @@ interface ChessWallet {
 }
 
 /** Un blocage obtenu et pas encore employé par une salle : il reste valable jusqu'à [expMs] ; une TV qui échoue à ouvrir sa partie le réutilise au lieu d'en bloquer un second. */
-data class PendingEscrow(val cur: String, val per: Long, val cbe1: String, val eid: String, val expMs: Long)
+data class PendingEscrow(val cur: String, val per: Long, val cbe1: String, val eid: String, val expMs: Long) {
+    /** Jamais le blocage signé dans un journal ni dans un message d'échec de test. */
+    override fun toString() = "PendingEscrow(cur=$cur, per=$per, eid=$eid, expMs=$expMs)"
+}
 
 /** La mémoire de la TV pour les parties misées : blocage en attente, clé d'idempotence d'un essai en cours, résultats signés pas encore réglés. Persistée (préférences) côté TV, en mémoire dans les tests. */
 interface ChessStakeStore {

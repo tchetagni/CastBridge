@@ -114,6 +114,26 @@ class ChessOnlineGameTest {
         assertTrue(sa.aborted); assertEquals(0L, sa.net); assertTrue(sa.text.startsWith("Partie interrompue : mise rendue"), sa.text)
     }
 
+    @Test fun aStakedCancelOrResignWaitsForTheSignedResultSoTheRefundIsNotLeftToTheCollector() {
+        loop.delayResultMs = 300      // le résultat suit l'accusé : sans attente, la TV qui s'en va aussitôt fermerait la liaison avant de l'avoir reçu
+        seated(a.create(stake = NDEM20))
+        val t0 = System.currentTimeMillis()
+        ok(a.game.cancel())
+        assertTrue(System.currentTimeMillis() - t0 >= 250, "l'annulation attend le résultat signé")
+        assertEquals(1, a.results.size, "le résultat est arrivé avant que l'appel rende la main")
+        val end = System.currentTimeMillis() + 3_000
+        while (a.game.settlement !is ChessOnlineGame.Settlement.Done && System.currentTimeMillis() < end) Thread.sleep(10)
+        assertTrue((a.game.settlement as ChessOnlineGame.Settlement.Done).aborted)
+        // une partie LIBRE n'attend rien (et n'a aucun résultat à attendre)
+        val loop2 = ChessLoopback(); loop2.delayResultMs = 5_000
+        val e = TestTv("E", "EEEE-EEEE-EEEE-EEEE", loop2)
+        seated(e.create())
+        val t1 = System.currentTimeMillis()
+        ok(e.game.cancel())
+        assertTrue(System.currentTimeMillis() - t1 < 1_000, "pas de mise : aucune attente")
+        assertTrue(e.results.isEmpty())
+    }
+
     @Test fun anAbsentTvForfeitsAfterSixtySecondsAndTheOtherSettlesTheWin() {
         val s = seated(a.create(stake = NDEM20, seconds = 60)).session
         b.game.join(s.code, "TV B"); b.game.joinWithStake(s.code, "TV B", NDEM20)

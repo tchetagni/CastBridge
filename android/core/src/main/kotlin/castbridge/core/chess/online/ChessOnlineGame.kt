@@ -149,20 +149,27 @@ class ChessOnlineGame(
         val ply = (client.latest()["ply"] as? Number)?.toInt() ?: 0
         return client.move(session ?: throw ChessTransportException(410, "La partie n'existe plus."), uci, ply)
     }
-    fun resign(): ChessAct = client.resign(session ?: throw ChessTransportException(410, "La partie n'existe plus."))
+    fun resign(): ChessAct = client.resign(session ?: throw ChessTransportException(410, "La partie n'existe plus.")).also { if (it.ok) awaitResultIfStaked() }
     fun draw(action: String): ChessAct = client.draw(session ?: throw ChessTransportException(410, "La partie n'existe plus."), action)
     /** L'hôte renonce avant l'arrivée de l'adversaire : le service rend la mise (résultat ABORT, réglé par [handleResult]). */
-    fun cancel(): ChessAct = client.cancel()
+    fun cancel(): ChessAct = client.cancel().also { if (it.ok) awaitResultIfStaked() }
+
+    /**
+     * Le résultat signé suit l'accusé dans le même envoi (accusé, dernière position, résultat) : une TV qui s'en va aussitôt pourrait fermer la liaison avant de l'avoir reçu. Une partie MISÉE l'attend donc
+     * quelques secondes ; le service en garde de toute façon une copie pour le collecteur de l'hôte (c'est la voie de secours, plus lente).
+     */
+    private fun awaitResultIfStaked() {
+        if (stake == null) return
+        val end = System.currentTimeMillis() + RESULT_WAIT_MS
+        while (client.resultToken == null && System.currentTimeMillis() < end) Thread.sleep(50)
+    }
 
     /**
      * Quitte la partie : le siège gardé est effacé SAUF si une mise attend son résultat (le règlement ne doit pas se perdre). Une partie misée tout juste finie dont le résultat signé n'est pas encore
      * arrivé l'attend quelques secondes avant de fermer la liaison (il suit la dernière position dans le même envoi) ; le service en garde de toute façon une copie pour son collecteur.
      */
     fun leave() {
-        if (stake != null && settlement == Settlement.None && client.latest()["stage"] == "FINISHED") {
-            val end = System.currentTimeMillis() + RESULT_WAIT_MS
-            while (client.resultToken == null && System.currentTimeMillis() < end) Thread.sleep(50)
-        }
+        if (settlement == Settlement.None && client.latest()["stage"] == "FINISHED") awaitResultIfStaked()
         val s = session
         if (stake == null || settlement is Settlement.Done || settlement is Settlement.Refused) store.saveSeat(null)
         if (s != null) client.leave(s) else client.cancelOpening()

@@ -41,6 +41,10 @@ import kotlin.test.assertTrue
  * les blocages `cbe1` avec la clé de test du portefeuille et lit les `cbr1` avec la clé publique du service, comme l'API. Le forfait à 60 s a son horloge injectée dans `ChessHubTest`.
  */
 class ChessSocketsTest {
+    // Les réglages de maintien des connexions HTTP du JDK (http.keepAlive, http.maxConnections) se figent au PREMIER usage de HttpURLConnection dans la JVM des tests : on pose ceux du simulateur du POC
+    // (EdgeFluidityTest, qui compte les connexions) AVANT notre premier appel, sinon l'ordre d'exécution des classes changerait leur résultat.
+    init { check(castbridge.play.poc.client.KeepAlive.effective) }
+
     private val servers = ArrayList<PlayServer>()
     private val tvs = ArrayList<Tv>()
     private val resultsDir = StakeKit.tempDir()

@@ -48,8 +48,16 @@ internal class ChessLoopback(var now: Long = 1_000_000L) {
 
     fun tick(advanceMs: Long = 0L) { now += advanceMs; room?.tick(now)?.let(::push) }
 
+    /** Retarde l'arrivée du résultat signé (ms) : dans le vrai service il suit l'accusé et la dernière position, une TV qui s'en va aussitôt ne doit pas le perdre. */
+    @Volatile var delayResultMs = 0L
+
     private fun push(outs: List<ChessServerRoom.Out>) {
-        for (o in outs) { sentTo.getOrPut(o.to) { ArrayList() } += o.msg; conns[o.to]?.push(o.msg) }
+        for (o in outs) {
+            sentTo.getOrPut(o.to) { ArrayList() } += o.msg
+            val target = conns[o.to]
+            if (o.msg is castbridge.core.quiz.online.ServerMsg.Result && delayResultMs > 0) { val d = delayResultMs; Thread { Thread.sleep(d); target?.push(o.msg) }.apply { isDaemon = true }.start() }
+            else target?.push(o.msg)
+        }
     }
 
     private fun deliver(conn: String, m: ClientMsg) {

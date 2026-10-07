@@ -11,7 +11,10 @@ data class PolicyView(val rate: Long, val reverseFeeBp: Long, val convert: Boole
 data class GamePolicyView(val enabled: Boolean, val stakesNdem: List<Long>, val stakesMboko: List<Long>, val feeBp: Int, val capDay: Int, val capWeek: Int, val capMonth: Int)
 
 /** Réponse de `POST /escrow` : le blocage `cbe1` signé par l'API (à porter au service de jeu), son identifiant, sa validité ; l'instantané `cbw1` neuf est donné au cache signé. */
-data class EscrowDone(val cbe1: String, val eid: String, val iat: Long, val exp: Long, val replayed: Boolean, val snapshotToken: String?)
+data class EscrowDone(val cbe1: String, val eid: String, val iat: Long, val exp: Long, val replayed: Boolean, val snapshotToken: String?) {
+    /** Jamais le blocage signé ni l'instantané dans un journal ni dans un message d'échec de test. */
+    override fun toString() = "EscrowDone(eid=$eid, iat=$iat, exp=$exp, replayed=$replayed)"
+}
 
 /** Une ligne d'un règlement : ce que le service a attribué (`pay`, avant frais) et les frais de plateforme prélevés (`fee`) ; ce que la TV reçoit vraiment est `pay − fee`. */
 data class SettleLine(val eid: String, val id: String, val used: Long, val pay: Long, val fee: Long)

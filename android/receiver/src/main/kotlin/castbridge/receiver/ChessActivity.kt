@@ -341,7 +341,7 @@ class ChessActivity : Activity() {
 
     private fun onOpened(g: ChessOnlineGame, code: String, r: ChessOnlineGame.Opened) {
         when (r) {
-            is ChessOnlineGame.Opened.Seated -> { TvConnect.feature("chess_online", "menu"); attachOnline(g) }
+            is ChessOnlineGame.Opened.Seated -> { TvConnect.feature("chess", "menu"); attachOnline(g) }      // la fonction « chess » du catalogue de télémétrie (jamais de nom de joueur, ni de mise)
             is ChessOnlineGame.Opened.NeedsStake -> askJoinStake(g, code, r.spec)
             is ChessOnlineGame.Opened.Failed -> { ChessOnlineHub.closeGame(g); showSetup(); flash(r.text) }
         }
