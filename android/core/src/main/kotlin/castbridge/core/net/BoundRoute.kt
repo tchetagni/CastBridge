@@ -9,6 +9,9 @@ import java.net.URLConnection
  * défaut). Avant (audit R-14, I-3), `bindProcessToNetwork` coupait tout l'Internet de l'app le temps de l'envoi. Le téléphone installe une liaison
  * (`Network.openConnection` / `Network.bindSocket`) pour le préfixe du groupe ; [castbridge.core.tv.TvClient], [castbridge.core.xfer.TransferClient] et
  * [castbridge.core.xfer.HttpConn.tcp] passent par ici ; toute autre adresse s'ouvre comme d'habitude.
+ *
+ * Une seule méthode de liaison dans toute l'app (R-29, inventaire I-6) : la voie automatique (`AutoWifiDirect`) comme les écrans manuels (envoi Bluetooth
+ * `BtUploadService`, `WifiDirectScreen`) passent ici ; plus aucun `bindProcessToNetwork` (test `NoProcessBindingTest`).
  */
 object BoundRoute {
     interface Binding {
@@ -22,6 +25,8 @@ object BoundRoute {
 
     @Synchronized fun set(hostPrefix: String, b: Binding) { prefix = hostPrefix; binding = b }
     @Synchronized fun clear() { binding = null; prefix = null }
+    /** Retire la liaison [b] seulement si c'est encore celle qui est installée (une jonction plus récente peut l'avoir remplacée : on ne retire pas la sienne). */
+    @Synchronized fun release(b: Binding) { if (binding === b) { binding = null; prefix = null } }
 
     fun applies(host: String?): Boolean {
         val p = prefix ?: return false

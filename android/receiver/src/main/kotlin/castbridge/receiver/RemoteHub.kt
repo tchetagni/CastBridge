@@ -32,6 +32,8 @@ import castbridge.core.remote.vendor.Route
 import castbridge.core.remote.vendor.VendorBridge
 import castbridge.core.remote.vendor.VendorRelay
 import castbridge.core.remote.vendor.VendorState
+import castbridge.core.tv.OpenTvReply
+import castbridge.core.tv.OpenTvScreen
 import castbridge.core.tv.ReceiverServer.Companion.q
 import java.io.InputStream
 import java.io.OutputStream
@@ -343,6 +345,9 @@ object RemoteHub {
             val why = s.launchScreen(i, "Le téléphone propose d'activer la télécommande « toute la TV »")
             return if (why == null) Outcome.done("app") else Outcome.refused(why)
         }
+
+        /** « Ouvrir CastBridge-TV » du téléphone (POST /api/tv/open, ou `open` sur le canal Bluetooth) : [TvForeground]. */
+        override fun openTv(screen: OpenTvScreen?): OpenTvReply? = TvForeground.bringToFront(screen)
 
         override fun stateJson(): String {
             val s = svc

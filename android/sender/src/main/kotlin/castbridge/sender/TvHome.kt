@@ -228,6 +228,8 @@ fun TvHome(onAdvanced: () -> Unit, onBluetooth: () -> Unit = onAdvanced) {
 
     val cs = MaterialTheme.colorScheme
     Column(Modifier.fillMaxSize().verticalScroll(rememberScrollState()).padding(16.dp).animateContentSize(), verticalArrangement = Arrangement.spacedBy(14.dp)) {
+        // « Ouvrir sur la TV » (OpenTv.kt) : CastBridge-TV passe devant l'application qui est à l'écran de la TV ; déjà devant, le bouton ouvre la télécommande
+        OpenTvButton(onAlready = { RemoteActivity.open(ctx) })
         // The TV
         if (TvLinkManager.saved.list().isNotEmpty()) {
             TvLinkStatus(link, onAdd = { adding = true }, onManage = { managing = true })

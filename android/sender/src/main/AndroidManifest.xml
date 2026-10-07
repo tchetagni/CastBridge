@@ -59,6 +59,14 @@
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+            <!-- « Ouvrir CastBridge-TV » (docs/REMOTE.md) : le lien castbridge://open-tv. Volontairement SANS BROWSABLE : une page web ne peut pas faire apparaître la TV. -->
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <data android:scheme="castbridge" android:host="open-tv" />
+            </intent-filter>
+            <!-- raccourci statique de l'icône (appui long) : « Ouvrir CastBridge-TV » -->
+            <meta-data android:name="android.app.shortcuts" android:resource="@xml/shortcuts" />
         </activity>
         <!-- "Share > CastBridge" of a link, magnet: links and .torrent files: the TV downloads them (docs/DOWNLOADS.md) -->
         <activity android:name=".ShareToTvActivity" android:exported="true" android:label="Télécharger sur la TV"
@@ -118,6 +126,10 @@
         <provider android:name="androidx.core.content.FileProvider" android:authorities="${applicationId}.freeshare" android:exported="false" android:grantUriPermissions="true">
             <meta-data android:name="android.support.FILE_PROVIDER_PATHS" android:resource="@xml/free_share_paths" />
         </provider>
+        <!-- « Activer la TV » > « Partager la demande » : the QR of the device request (PNG in the cache) handed to the share sheet with its text; not exported, one file, read only -->
+        <provider android:name="androidx.core.content.FileProvider" android:authorities="${applicationId}.activationshare" android:exported="false" android:grantUriPermissions="true">
+            <meta-data android:name="android.support.FILE_PROVIDER_PATHS" android:resource="@xml/activation_share_paths" />
+        </provider>
         <!-- Sharing of the PDF / CSV of the Parental tab through the share sheet (not exported: only the app hands out URIs, one file, read only) -->
         <provider android:name="androidx.core.content.FileProvider" android:authorities="${applicationId}.parentalshare" android:exported="false" android:grantUriPermissions="true">
             <meta-data android:name="android.support.FILE_PROVIDER_PATHS" android:resource="@xml/parental_share_paths" />
@@ -145,6 +157,12 @@
                 <action android:name="android.bluetooth.device.action.ACL_CONNECTED" />
                 <action android:name="android.bluetooth.device.action.BOND_STATE_CHANGED" />
                 <action android:name="android.bluetooth.adapter.action.STATE_CHANGED" />
+            </intent-filter>
+        </receiver>
+        <!-- Relay (docs/coordination/DESIGN-RELAIS-TELEPHONE-2026-10-07.md): a TV that wants an Internet pipe knocks at the phone's door over Bluetooth ("device connected"); the saved TV's request is read and the pipe opens silently. Not exported: only the system sends it. -->
+        <receiver android:name=".RelayWakeReceiver" android:exported="false">
+            <intent-filter>
+                <action android:name="android.bluetooth.device.action.ACL_CONNECTED" />
             </intent-filter>
         </receiver>
         <activity android:name=".agent.AssistantActivity" android:exported="false" android:label="Ranger ma bibliothèque"

@@ -25,6 +25,9 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import android.content.Intent
+import android.net.Uri
+import castbridge.core.games.GameCatalog
 import castbridge.core.quiz.Json
 import castbridge.core.tv.TvClient
 import kotlinx.coroutines.Dispatchers
@@ -32,13 +35,22 @@ import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 
-/** One game of the « Jeux » tab (docs/GAMES.md): add a line to [PHONE_GAMES] and a branch in [GamesScreen] to add a game. */
-private class PhoneGame(val id: String, val icon: ImageVector, val name: String, val modes: String, val blurb: String, val accent: Color)
+/**
+ * One game of the « Jeux » tab (docs/GAMES.md): add a line to [PHONE_GAMES] and a branch in [GamesScreen] to add a game. [soon] = the rules are still to be given by the owner:
+ * the line is shown, says so, and opens nothing.
+ */
+private class PhoneGame(val id: String, val icon: ImageVector, val name: String, val modes: String, val blurb: String, val accent: Color, val soon: Boolean = false)
+
+private val CARDS_ACCENT = Color(0xFFB48CFF)
 
 private val PHONE_GAMES = listOf(
     PhoneGame("quiz", Icons.Filled.EmojiEvents, "Quiz des Millions", "Solo · Multijoueur", "Culture générale et niveaux scolaires : jouez sur la TV, répondez sur votre téléphone.", Color(0xFFFF5C39)),
     PhoneGame("chess", Icons.Filled.Extension, "Échecs", "Solo · À deux · En ligne", "Contre l'ordinateur, à deux ou en ligne, avec compte à rebours.", Color(0xFF2FA96B)),
     PhoneGame("sudoku", Icons.Filled.GridOn, "Sudoku", "Solo · sur la TV", "Grilles de Facile à Expert. Jouez sur la TV, pilotez depuis le téléphone.", Color(0xFF6CB6FF)),
+    // jeux de cartes de la plateforme commune : la Bataille est une démonstration ; Fap-Fap et Agraham Tia attendent leurs règles (rien n'est inventé)
+    PhoneGame(GameCatalog.BATAILLE.id, Icons.Filled.Style, GameCatalog.BATAILLE.name, GameCatalog.BATAILLE.modes, "Démonstration : la TV affiche la table, chaque téléphone retourne sa carte.", CARDS_ACCENT),
+    PhoneGame(GameCatalog.FAP_FAP.id, Icons.Filled.Style, GameCatalog.FAP_FAP.name, GameCatalog.FAP_FAP.modes, GameCatalog.SOON, CARDS_ACCENT, soon = true),
+    PhoneGame(GameCatalog.AGRAHAM_TIA.id, Icons.Filled.Style, GameCatalog.AGRAHAM_TIA.name, GameCatalog.AGRAHAM_TIA.modes, GameCatalog.SOON, CARDS_ACCENT, soon = true),
 )
 
 /**
@@ -62,7 +74,7 @@ fun GamesScreen() {
             Text("  ›  ${game.name}", maxLines = 1, overflow = TextOverflow.Ellipsis)
         }
         Box(Modifier.weight(1f).fillMaxWidth()) {
-            when (game.id) { "quiz" -> QuizScreen(); "chess" -> ChessScreen(); else -> SudokuRemote() }
+            when (game.id) { "quiz" -> QuizScreen(); "chess" -> ChessScreen(); "sudoku" -> SudokuRemote(); else -> CardGameRemote(game.id, game.name) }
         }
     }
 }
@@ -73,11 +85,11 @@ private fun GamesList(onOpen: (String) -> Unit) {
         Text("Jeux", style = MaterialTheme.typography.headlineSmall, fontWeight = FontWeight.Bold)
         Text("Jouez sur la TV, avec vos amis ou en solo.", style = MaterialTheme.typography.bodyMedium, color = MaterialTheme.colorScheme.onSurfaceVariant)
         PHONE_GAMES.forEach { g ->
-            Card(Modifier.fillMaxWidth().clickable { onOpen(g.id) }, border = BorderStroke(1.dp, MaterialTheme.colorScheme.outlineVariant),
+            Card(Modifier.fillMaxWidth().then(if (g.soon) Modifier else Modifier.clickable { onOpen(g.id) }), border = BorderStroke(1.dp, MaterialTheme.colorScheme.outlineVariant),
                 colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surfaceVariant)) {
                 Row(Modifier.padding(16.dp), verticalAlignment = Alignment.CenterVertically) {
-                    Box(Modifier.size(56.dp).background(g.accent.copy(alpha = 0.2f), RoundedCornerShape(16.dp)), contentAlignment = Alignment.Center) {
-                        Icon(g.icon, null, tint = g.accent, modifier = Modifier.size(32.dp))
+                    Box(Modifier.size(56.dp).background(g.accent.copy(alpha = if (g.soon) 0.1f else 0.2f), RoundedCornerShape(16.dp)), contentAlignment = Alignment.Center) {
+                        Icon(g.icon, null, tint = g.accent.copy(alpha = if (g.soon) 0.6f else 1f), modifier = Modifier.size(32.dp))
                     }
                     Spacer(Modifier.width(16.dp))
                     Column(Modifier.weight(1f)) {
@@ -85,7 +97,7 @@ private fun GamesList(onOpen: (String) -> Unit) {
                         Text(g.modes, color = g.accent, style = MaterialTheme.typography.labelMedium, fontWeight = FontWeight.Bold, maxLines = 1, overflow = TextOverflow.Ellipsis)
                         Text(g.blurb, style = MaterialTheme.typography.bodySmall, color = MaterialTheme.colorScheme.onSurfaceVariant, maxLines = 3, overflow = TextOverflow.Ellipsis)
                     }
-                    Icon(Icons.Filled.ChevronRight, null, tint = MaterialTheme.colorScheme.onSurfaceVariant)
+                    if (!g.soon) Icon(Icons.Filled.ChevronRight, null, tint = MaterialTheme.colorScheme.onSurfaceVariant)
                 }
             }
         }
@@ -158,6 +170,79 @@ private fun SudokuRemote() {
             }) { Icon(Icons.Filled.Tv, null); Spacer(Modifier.width(8.dp)); Text("Jouer sur la TV", fontSize = 18.sp) }
         }
         if (s != null && s.open) SudokuPad(s, ::cmd, onNew = { lv -> cmd("new&level=$lv") })
+        if (message.isNotEmpty()) Text(message, color = MaterialTheme.colorScheme.error)
+    }
+}
+
+/** What the TV says about the room of a card game (`GET /api/games/room`): its code and the address of the web page the phones open. */
+private class CardRoom(val open: Boolean, val code: String, val url: String)
+
+private fun parseCardRoom(json: String): CardRoom? = runCatching {
+    val j = Json.obj(json)
+    CardRoom(j["open"] == true, j["code"] as? String ?: "", j["url"] as? String ?: "")
+}.getOrNull()
+
+/**
+ * A card game of the shared platform (docs/GAMES.md) from the phone app: « Ouvrir sur la TV » (the TV hosts the table), then « Rejoindre avec ce téléphone », which opens the TV's web
+ * page in the phone's browser with the room code already filled in. The other phones scan the QR code shown by the TV. Nothing to install: the page is served by CastBridge-TV.
+ */
+@Composable
+private fun CardGameRemote(gameId: String, gameName: String) {
+    val ctx = LocalContext.current
+    val scope = rememberCoroutineScope()
+    val discovery = remember { TvDiscovery(ctx) }
+    DisposableEffect(Unit) { discovery.start(); onDispose { discovery.stop() } }
+    val tvs by discovery.tvs.collectAsState()
+    val pins = remember { PinStore(ctx) }
+    var selected by rememberSaveable { mutableStateOf<String?>(null) }
+    var room by remember { mutableStateOf<CardRoom?>(null) }
+    var message by remember { mutableStateOf("") }
+    var busy by remember { mutableStateOf(false) }
+
+    LaunchedEffect(tvs) { if (selected == null || tvs.none { it.name == selected }) selected = tvs.firstOrNull()?.name }
+    val tv = tvs.firstOrNull { it.name == selected }
+    val pin = pins.get(selected)
+    val client = remember(tv?.base, pin) { tv?.let { TvClient(it.base, pin) } }
+
+    LaunchedEffect(client) {
+        while (client != null && pin.isNotEmpty()) {
+            withContext(Dispatchers.IO) { runCatching { client.raw("GET", "/api/games/room?game=$gameId") }.getOrNull() }?.let { parseCardRoom(it) }?.let { room = it }
+            delay(2000)
+        }
+    }
+
+    Column(Modifier.fillMaxSize().verticalScroll(rememberScrollState()).padding(16.dp), verticalArrangement = Arrangement.spacedBy(12.dp)) {
+        Text(gameName, style = MaterialTheme.typography.headlineSmall, fontWeight = FontWeight.Bold)
+        Text("La TV affiche la table et chaque joueur retourne sa carte sur son téléphone : rien à installer, la page est servie par CastBridge-TV.",
+            style = MaterialTheme.typography.bodyMedium, color = MaterialTheme.colorScheme.onSurfaceVariant)
+        if (tvs.isEmpty()) {
+            Row(verticalAlignment = Alignment.CenterVertically) {
+                CircularProgressIndicator(Modifier.size(20.dp), strokeWidth = 2.dp); Spacer(Modifier.width(12.dp)); Text("Recherche de la TV sur le Wi-Fi…")
+            }
+        } else tvs.forEach { t -> DeviceRow(t.name, t.host, t.name == selected) { selected = t.name } }
+        if (tv != null && pin.isEmpty()) Text("Entrez d'abord le PIN de la TV dans l'onglet « CastBridge TV ».", color = MaterialTheme.colorScheme.error)
+        val r = room
+        if (tv != null && pin.isNotEmpty()) {
+            if (r != null && r.open) {
+                Text("Salle ouverte · code ${r.code}", fontWeight = FontWeight.Bold, color = MaterialTheme.colorScheme.primary)
+                Button(modifier = Modifier.fillMaxWidth().height(56.dp), onClick = {
+                    runCatching { ctx.startActivity(Intent(Intent.ACTION_VIEW, Uri.parse(r.url)).addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)) }
+                        .onFailure { message = "Aucun navigateur pour ouvrir la page : saisissez ${r.url.substringBefore("?")} dans votre navigateur." }
+                }) { Icon(Icons.Filled.OpenInBrowser, null); Spacer(Modifier.width(8.dp)); Text("Rejoindre avec ce téléphone", fontSize = 18.sp) }
+                Text("Les autres téléphones scannent le code affiché sur la TV, ou ouvrent ${r.url.substringBefore("?")} et saisissent le code ${r.code}.",
+                    style = MaterialTheme.typography.bodyMedium, color = MaterialTheme.colorScheme.onSurfaceVariant)
+            } else {
+                Text("Ouvrez le jeu sur la TV, choisissez « Avec les téléphones », puis « Commencer la partie ».", style = MaterialTheme.typography.bodyMedium, color = MaterialTheme.colorScheme.onSurfaceVariant)
+                Button(enabled = !busy, modifier = Modifier.fillMaxWidth().height(56.dp), onClick = {
+                    busy = true; message = ""
+                    scope.launch {
+                        val ok = withContext(Dispatchers.IO) { runCatching { client?.raw("POST", "/api/games/open?game=$gameId") }.getOrNull() }
+                        busy = false
+                        if (ok == null) message = "La TV n'a pas pu ouvrir le jeu : ouvrez CastBridge-TV sur la TV (écran d'accueil ou « Jeux »), puis réessayez."
+                    }
+                }) { Icon(Icons.Filled.Tv, null); Spacer(Modifier.width(8.dp)); Text("Ouvrir sur la TV", fontSize = 18.sp) }
+            }
+        }
         if (message.isNotEmpty()) Text(message, color = MaterialTheme.colorScheme.error)
     }
 }

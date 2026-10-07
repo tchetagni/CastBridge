@@ -70,7 +70,9 @@ Les noms de fichiers sont sans `/`, `\`, ni `.part` final, 200 caractères max. 
 | `GET /api/background` | service d'arrière-plan : démarrage avec la TV, autorisations utiles à la lecture à distance | `{"autostart","overlay","fullScreenIntent","notifications","screenVisible","sdk"}` |
 | `POST /api/autostart?enabled=1\|0` | « Démarrer avec la TV » | comme `background` |
 | `POST /api/overlay-permission` | ouvre sur la TV le réglage « Afficher par-dessus les autres apps » (seulement si l'écran CastBridge est affiché) | `{"opened","message"}` |
+| `POST /api/tv/open[?screen=home\|library\|player\|games\|quiz]` (corps JSON facultatif `{"screen":…}`) | **ouvre CastBridge-TV devant l'application affichée** (YouTube…) : direct, sinon notification « Demandes du téléphone », sinon accessibilité ; chaque essai est vérifié (`docs/REMOTE.md`, « Ouvrir CastBridge-TV depuis le téléphone ») | `{"opened","how":"direct\|fullscreen\|accessibility\|already\|none","needs":"overlay"\|null}` (+ `"already":true`) |
 | `GET /api/net` | **Internet de la TV** (même état que le badge en haut à droite de l'écran) : par quel chemin la TV atteint réellement Internet, d'après le test 204 (jamais « un lien est actif ») | `{"state":"checking\|wifi\|ethernet\|phone\|none","label","working","link":"wifi\|ethernet\|other\|none","direct":{"ok","ms"},"gateway":{"connected","ok","ms","alsoAvailable"},"checkedAt"}` |
+| `GET /api/relay` | **Tuyau Internet à la demande** (relay-R1, `docs/REMOTE-TUNNEL-TV.md` § 5) : la vérité réseau unique de la TV, la demande de tuyau en cours, les téléphones synchronisés (comptes seulement, jamais un nom ni une adresse), la liaison mesurée (PING) et la dernière vérification de bout en bout | `{"net":"direct\|via_relay\|none","checked","pipeWanted","request","phones":{"synchronized","relayCapable","old"},"link":{"rttMs","kbps","samples"},"check":{"ok","ms"},"socksAuth","phoneMetered"}` |
 | `GET /api/connections` | **Connexions de la TV** (la barre d'icônes de l'écran) : une entrée par appareil ou mode actif, étiquettes seulement (jamais de jeton, PIN ni adresse Bluetooth) | `{"connections":[{"kind","technology","secondary","label","state","since","count","latencyMs"}],"visible","hidden","now"}` (`kind` : internet, phone, remote, ssh, gateway, cast, usb, wifi_direct, quiz, chess, download, parental, update ; `technology` : ethernet, wifi_lan, wifi_direct, usb, ssh_lan, bluetooth_tunnel, ssh_bluetooth, bluetooth, none ; `state` : connected, connecting, degraded, error ; `since` en ms epoch) |
 | `GET /api/usb` | état de l'import USB et volumes détectés | `{"running","message","volumes":[chemins]}` |
 | `POST /api/usb/import` | copie les vidéos des clés détectées (dossier de l'app sur la clé) | comme `usb` |
@@ -244,7 +246,7 @@ Les connexions et les modes de CastBridge-TV ne sont plus annoncés par des band
 L'icône Internet de la barre (anciennement un badge à part) dit **par où** la TV a vraiment Internet :
 « Internet : Wi-Fi », « Internet : Ethernet », « Internet : via le téléphone » (passerelle Bluetooth, voir ci-dessous) ou, en rouge, « Pas d'Internet ». Au démarrage : « vérification… » (estompée).
 - Le badge se fonde sur le test 204 existant (`connectivitycheck.gstatic.com`), pas sur l'état du lien : un Wi-Fi « connecté » sans Internet n'est jamais affiché comme connecté.
-- **Sonde coupée par défaut** (réglage `netProbe`, désactivé) : la TV n'envoie plus périodiquement ce test 204 à un tiers. L'état vient alors des rappels système (`ConnectivityManager`, capacité `NET_CAPABILITY_VALIDATED`) et de l'état de la passerelle, sans trafic sortant : « Internet : Wi-Fi » si le système a validé le réseau ; sans validation, le badge reste « vérification… » (« Wi-Fi connecté · Internet non vérifié » dans le résumé), jamais « Pas d'Internet » en rouge ; « Pas d'Internet » seulement s'il n'y a aucun réseau. La latence n'est plus mesurée (`direct.ms` = 0 dans `/api/net`). Le vrai test 204 ne part que sur action manuelle (écran « Tests Internet »), si `netProbe` est activé, ou tant que l'assistance à distance est activée (conditions acceptées) : elle a besoin de savoir si Internet est joignable.
+- **Sonde coupée par défaut** (réglage `netProbe`, désactivé) : la TV n'envoie plus périodiquement ce test 204 à un tiers. L'état vient alors des rappels système (`ConnectivityManager`, capacité `NET_CAPABILITY_VALIDATED`) et de l'état de la passerelle, sans trafic sortant : « Internet : Wi-Fi » si le système a validé le réseau ; sans validation, le badge reste « vérification… » (« Wi-Fi connecté · Internet non vérifié » dans le résumé), jamais « Pas d'Internet » en rouge ; « Pas d'Internet » seulement s'il n'y a aucun réseau. La latence n'est plus mesurée (`direct.ms` = 0 dans `/api/net`). Le vrai test 204 ne part que sur action manuelle (écran « Tests Internet »), si `netProbe` est activé, ou tant que l'assistance à distance est activée (conditions acceptées) : elle a besoin de savoir si Internet est joignable. Dans ces deux derniers cas il ne part plus que **toutes les 5 minutes** (ou tout de suite quand le réseau change ou qu'un appel direct échoue : `NetProbePlan`) et **jamais à travers le téléphone** (relay-R1 : il coûtait environ 1 Mo par jour de données mobiles et un réveil radio par minute) ; la vie du tuyau se lit sur ses trames PING, avec une seule vérification de bout en bout vers le serveur du projet par nouveau tuyau.
 - Règle : réseau de la TV d'abord s'il répond, sinon passerelle du téléphone si elle répond, sinon « Pas d'Internet ». Quand les deux répondent, le badge montre le réseau de la TV ; la passerelle disponible reste visible dans « Internet » (réglages) et dans `/api/net` (`gateway.alsoAvailable`).
 - Anti-clignotement (Wi-Fi instable) : 1 succès = en ligne tout de suite, 2 échecs de suite = hors ligne ; un changement de chemin attend 8 s d'affichage minimum (sauf la sortie de « Pas d'Internet »).
 - Cadence : 60 s tant qu'Internet marche ; 10 s, puis 15 s, puis 30 s (plafond) tant qu'il n'y en a pas ; nouveau test aussitôt (1,5 s) après une perte/retour de réseau Android ou la connexion/déconnexion du téléphone-passerelle. Aucune télémétrie nouvelle : l'évènement `connectivity_check` est inchangé.
@@ -363,7 +365,7 @@ Termux / ordinateur --TCP--> téléphone 127.0.0.1:2222 --RFCOMM « CastBridge S
 ordinateur Linux (ProxyCommand) --------------RFCOMM « CastBridge SSH »--> TV --TCP--> 127.0.0.1:2222
 ```
 
-- **TV** : quand SSH est activé, un **second service RFCOMM** « CastBridge SSH » (UUID `7c5e3b9a-4d2f-4c61-9b0e-cb0000000002`, distinct du service fichiers `…0001`)
+- **TV** : quand SSH est activé, un **second service RFCOMM** « CastBridge SSH » (UUID `7c5e3b9a-4d2f-4c61-9b0e-cb0000000002`, distinct du service fichiers `…0001` ; **le SSH seul** y est servi depuis R-28 : la passerelle Internet l'avait en commun, elle est passée sur `…0007`, voir § 11)
   accepte les appareils **appairés** ; chaque connexion ouvre une connexion TCP vers `127.0.0.1:2222` et relaie dans les deux sens (tampons de 32 Ko, deux fils,
   fermeture des deux côtés dès que l'un se termine), **2 connexions simultanées au plus**. Le service s'arrête avec SSH (désactivation ou délai d'inactivité).
   Bandeau sur l'écran d'attente : « SSH par Bluetooth : prêt » / « connecté (nom de l'appareil) » ; `GET /api/ssh` -> `bluetooth: {listening, active:[noms]}`.
@@ -400,9 +402,29 @@ curl / app téléphone --TCP--> 127.0.0.1:18765 --RFCOMM « CastBridge API »-->
                               (téléphone : passerelle ; Mac : cbt-rfcomm proxy ; Linux : bt-ssh-bridge.py --service api)
 ```
 
-**Services RFCOMM de la TV** (sockets sécurisés, appareils appairés seulement) : `…0001` fichiers (CBT1/CBTN/CBTH/CBTR/passerelle), `…0002` SSH (octets SSH bruts),
-`…0003` **API** (UUID `7c5e3b9a-4d2f-4c61-9b0e-cb0000000003`, nom SDP « CastBridge API »). Le service API répond d'abord **1 octet d'état** (0 = ok, 1 trop de liaisons,
-2 appareil non autorisé, 3 serveur local arrêté, 4 erreur interne), puis relaie du HTTP brut. Le service SSH reste sans octet d'état (compatibilité avec `ssh`, `bt-ssh-bridge.py`).
+**Services RFCOMM de la TV** (sockets sécurisés, appareils appairés seulement). Tous ont l'UUID `7c5e3b9a-4d2f-4c61-9b0e-cb00000000` + deux chiffres. **La table unique est
+`BtProtocol.SERVICES`** (`C/tv/BtProtocol.kt`) ; le test `BtServicesTest` interdit deux services sur un même UUID, un UUID du préfixe écrit ailleurs que dans la table et le canal
+propriétaire, et un service absent de la table.
+
+| UUID | Nom SDP | Usage |
+|---|---|---|
+| `…0001` | CastBridge TV | fichiers et contrôle : CBT1, CBTN, CBTH, CBTP, CBTR |
+| `…0002` | CastBridge SSH | SSH (octets SSH bruts) : **le SSH seul** depuis R-28 |
+| `…0003` | CastBridge API | tunnel de l'API HTTP, une liaison par connexion |
+| `…0004` | CastBridge API v2 | le même tunnel sur UNE liaison partagée (trames) |
+| `…0005` | CastBridge Owner | canal propriétaire CBTO (activation, ordres signés) |
+| `…0006` | (aucun) | **réservé** : canal de synchronisation de W7 (conçu, pas codé) |
+| `…0007` | CastBridge Internet | passerelle Internet CBG1 (« Partager l'Internet du téléphone ») |
+
+Le service API (`…0003`, UUID `7c5e3b9a-4d2f-4c61-9b0e-cb0000000003`) répond d'abord **1 octet d'état** (0 = ok, 1 trop de liaisons, 2 appareil non autorisé, 3 serveur local arrêté,
+4 erreur interne), puis relaie du HTTP brut. Le service SSH reste sans octet d'état (compatibilité avec `ssh`, `bt-ssh-bridge.py`).
+
+**R-28 : la passerelle Internet n'est plus sur `…0002`.** Elle partageait cet UUID avec le SSH : la TV écoutait sur les deux (la passerelle à chaque démarrage, le SSH quand il était
+activé) et un téléphone qui demandait l'un pouvait tomber sur l'autre. Elle a maintenant le sien, `…0007`. Compatibilité : côté TV pendant **deux versions** de CastBridge-TV (repères
+`R-28-LEGACY-TV` dans le code, à retirer ensuite) : la TV écoute sur `…0007` toujours, et sur l'ancien `…0002` **seulement tant que son SSH par Bluetooth est éteint** (elle le ferme
+avant d'ouvrir celui du SSH et le rouvre quand le SSH s'arrête) ; côté téléphone (repères `R-28-OLD-TV`, à garder tant qu'il reste des TV anciennes) il demande `…0007` d'abord et n'essaie `…0002` que si la TV
+n'annonce pas `…0007` (TV ancienne, mémorisée 10 min). Limite : un ancien téléphone ne partage pas son Internet avec une TV neuve dont le SSH par Bluetooth est allumé. Détail : `docs/BT-PLUG-AND-PLAY.md`,
+« Service CastBridge Internet ».
 
 **Ports locaux sur le téléphone** : SSH `127.0.0.1:2222`, API `127.0.0.1:18765`. L'API n'est **jamais** exposée sur le réseau (seul le SSH offre l'option « réseau local »).
 

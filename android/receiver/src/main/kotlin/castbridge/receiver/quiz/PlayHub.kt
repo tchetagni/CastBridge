@@ -14,7 +14,11 @@ import castbridge.core.quiz.online.OpenGate
 import castbridge.core.quiz.online.PlayActivation
 import castbridge.core.quiz.online.PlayErrors
 import castbridge.core.quiz.online.PlayProof
+import castbridge.core.quiz.online.PlayRelay
 import castbridge.core.quiz.online.PlayTvName
+import castbridge.core.relay.PipeNeed
+import castbridge.core.relay.PipeOutcome
+import castbridge.receiver.TvNet
 import castbridge.core.quiz.online.TicketCache
 import castbridge.core.quiz.online.PlayGate
 import castbridge.core.quiz.online.PlayHttpTransport
@@ -58,21 +62,28 @@ object PlayHub {
     /** L'ordre signé `flag.set` n'existe pas pour ce drapeau (liste close partagée avec le serveur, hors périmètre) : null. */
     fun flagOn(ctx: Context): Boolean = QuizOnlineFlag.enabled(setting(ctx), null, QuizOnlineFlag.COMPILED_DEFAULT)
 
-    fun gatewayProxy() = TvService.running?.gateway?.proxy()
+    fun gatewayProxy() = TvNet.gatewayProxy()
 
-    /** La TV voit Internet par son réseau ou par la passerelle Bluetooth d'un téléphone. */
-    fun hasInternet(ctx: Context): Boolean {
-        if (gatewayProxy() != null) return true
-        val cm = ctx.getSystemService(ConnectivityManager::class.java) ?: return false
-        return runCatching { cm.getNetworkCapabilities(cm.activeNetwork)?.hasCapability(NetworkCapabilities.NET_CAPABILITY_INTERNET) == true }.getOrDefault(false)
-    }
+    /**
+     * La TV voit Internet par son réseau ou par le tuyau d'un téléphone : la vérité réseau UNIQUE de la TV ([TvNet.state], relay-R1), plus de définition propre au jeu (inventaire I-3).
+     * Avant la première mesure la TV ne se dit pas hors ligne.
+     */
+    @Suppress("UNUSED_PARAMETER")
+    fun hasInternet(ctx: Context): Boolean = TvNet.reachable()
 
     /** L'édition que la TV connaît d'elle-même (jamais une preuve : le service et l'API la relisent) ; partagée avec les échecs en ligne. */
     fun edition(): HostEdition = PlayGate.editionOf(ActivationCenter.locked(), ActivationCenter.trial(), ActivationCenter.state() is GateState.Grace)
 
-    /** La tuile « Partie Internet » : rien, une raison, ou disponible (toute la décision est dans [PlayGate]). */
+    /** La tuile « Partie Internet » : rien, une raison, ou disponible (toute la décision est dans [PlayGate]) ; sans Internet elle reste proposée si un téléphone synchronisé peut en donner (relay-R1). */
     fun tile(ctx: Context): PlayTile = PlayGate.tile(flagOn(ctx), edition(), hasInternet(ctx), ParentalHub.kidHomeActive(), ActivationCenter.clockSuspended(), serviceUp(),
-        verifiableActivation = PlayActivation.pick(ActivationCenter.allActivations(), ActivationCenter.now()) != null)   // M-4 : la même règle que le service
+        verifiableActivation = PlayActivation.pick(ActivationCenter.allActivations(), ActivationCenter.now()) != null,   // M-4 : la même règle que le service
+        relay = if (hasInternet(ctx)) PlayRelay.UNKNOWN else TvNet.relayAvailability())
+
+    /** « Partie par relais : liaison lente » (informatif, sans alarme) quand la TV n'a Internet que par le tuyau d'un téléphone, sinon null. */
+    fun relayLine(): String? = TvNet.playRules().line
+
+    /** La ligne de la demande de tuyau en cours (« Demande d'Internet au téléphone… », ou pourquoi aucun téléphone ne peut), sinon null. */
+    fun requestLine(): String? = TvNet.requestLine()
 
     // ------------------------------------------------------------------ le service répond-il ?
 
@@ -95,12 +106,15 @@ object PlayHub {
         probing = true
         Thread({
             try {
+                // relay-R1 (J-R4) : l'utilisateur entre dans « Partie Internet » sans Internet et un téléphone synchronisé peut en donner : la TV lui demande un tuyau et l'attend avant de sonder
+                // le service. Le Quiz qui s'ouvre seulement (force = false) ne demande rien : il n'y a pas encore d'intention de jouer en ligne.
+                if (force && !TvNet.state().up && TvNet.relayAvailability() == PlayRelay.POSSIBLE) TvNet.ensure(PipeNeed.PLAY, force = true)
                 val link = TvConnect.link
                 val base = link?.state?.baseUrl?.takeIf { it.isNotBlank() }
-                probeUp = if (link == null || base == null) null else try {
+                probeUp = if (link == null || base == null || !TvNet.state().up) null else try {      // sans réseau le service ne peut pas être jugé : « pas encore sondé », jamais « indisponible »
                     link.routes.call { p -> HttpLite(p, connectTimeoutMs = 8_000, readTimeoutMs = 8_000, userAgent = "CastBridge-TV").request("GET", "$base/play/.well-known/caps").let { r ->
                         revocationsOff = r.body.contains("\"revocations\":\"off\"")
-                        chessCaps = if (r.code in 200..299) ChessServiceCaps.parse(r.body) else null
+                        chessCaps = if (r.code in 200..299) ChessServiceCaps.parse(r.body) else null     // ce que le service dit de ses jeux (échecs, mises)
                         r.code in 200..299
                     } }
                 } catch (e: IOException) { false }
@@ -139,12 +153,18 @@ object PlayHub {
     fun deviceHash(): String? = runCatching { TvConnect.hash(ActivationCenter.deviceCode) }.getOrNull()
 
     /**
-     * Une session de liaison NEUVE pour un jeu à tour de rôle (échecs, games-G2) : même ticket `cbp1` (un par création ou entrée), même transport `PlayHttpTransport` (réseau direct, puis passerelle du
-     * téléphone), même preuve de possession de la clé d'installation que le Quiz en ligne, même reprise ; seul l'appelant ([castbridge.core.chess.ChessRelayClient]) choisit le message d'ouverture.
-     * BLOQUANT (premier ticket demandé ici pour que son refus soit dit clairement) : jamais sur le fil principal. Lève [castbridge.core.chess.ChessTransportException] avec le texte français du refus.
-     * Même câblage que [start], qui n'est pas touché.
+     * Une session de liaison NEUVE pour un jeu à tour de rôle (échecs, games-G2) : même ticket `cbp1` (un par création ou entrée), même transport `PlayHttpTransport` (le chemin vient de la vérité réseau
+     * unique de la TV, [TvNet] : réseau direct, ou tuyau d'un téléphone avec les délais et la courbe de réouverture du mode relais, relay-R1), même preuve de possession de la clé d'installation que le Quiz
+     * en ligne, même reprise ; seul l'appelant ([castbridge.core.chess.ChessRelayClient]) choisit le message d'ouverture.
+     * BLOQUANT (la demande de tuyau et le premier ticket sont attendus ici pour que leur refus soit dit clairement) : jamais sur le fil principal. Lève [castbridge.core.chess.ChessTransportException]
+     * avec le texte français du refus. Même câblage que [start], qui n'est pas touché.
      */
     fun newGameSession(ctx: Context): PlayTvSession {
+        // relay-R1 : sans Internet, la TV demande un tuyau au téléphone synchronisé et l'attend (borné) ; elle dit pourquoi si personne ne peut
+        if (!TvNet.state().up) {
+            val o = TvNet.ensure(PipeNeed.PLAY, force = true)      // l'utilisateur vient d'appuyer : une demande tout de suite
+            if (o is PipeOutcome.Failed) throw castbridge.core.chess.ChessTransportException(503, o.text)
+        }
         val first = fetchTicket()
         if (first !is PlayTicketReply.Ok) throw castbridge.core.chess.ChessTransportException(403, (first as PlayTicketReply.Refused).text)
         val link = TvConnect.link ?: throw castbridge.core.chess.ChessTransportException(503, PlayErrors.NO_INTERNET)
@@ -155,12 +175,18 @@ object PlayHub {
         val ticket = { synchronized(this) { pending?.also { pending = null } } ?: cache.fresh() }
         val signer = WalletHub.installSigner()
         val factory = TransportFactory { t ->
-            PlayHttpTransport(base, t, proxy = { if (routes.lastVia == Routes.Via.GATEWAY) gatewayProxy() else null }, clock = mono, ticketOnEveryPost = false)
+            val rules = TvNet.playRules()
+            PlayHttpTransport(base, t, proxy = { pipeProxy(routes) }, clock = mono, connectTimeoutMs = rules.connectTimeoutMs, postReadTimeoutMs = rules.postReadTimeoutMs,
+                ticketOnEveryPost = false, viaRelay = { TvNet.viaRelay() })
         }
-        return PlayTvSession(clock = mono, transports = factory, ticket = ticket, via = { routes.lastVia }, tvHasNetwork = { hasInternet(ctx) },
+        return PlayTvSession(clock = mono, transports = factory, ticket = ticket, via = { if (TvNet.viaRelay()) null else routes.lastVia }, tvHasNetwork = { hasInternet(ctx) },
+            curveSec = TvNet.playRules().curveSec,
             resumeTicket = { cache.reusable() },
             prover = { t, a -> signer?.let { PlayProof.build(it::sign, it.publicKeyBase64, t, a) } })
     }
+
+    /** Tient la demande de tuyau vivante pendant une partie sans Internet (bail renouvelé, redemandé au rythme de la règle de [TvNet]) ; sans effet quand la TV a Internet. À appeler toutes les quelques secondes. */
+    fun keepPipeAlive() { runCatching { if (!TvNet.state().up) TvNet.need(PipeNeed.PLAY) } }
 
     // ------------------------------------------------------------------ la session
 
@@ -187,6 +213,12 @@ object PlayHub {
         val gen = gate.begin()
         worker.execute {
             try {
+                // relay-R1 (J-R4) : sans Internet, la TV demande un tuyau au téléphone synchronisé et l'attend (borné) ; elle dit pourquoi si personne ne peut
+                if (!TvNet.state().up) {
+                    val o = TvNet.ensure(PipeNeed.PLAY, force = true)      // l'utilisateur vient d'appuyer : une demande tout de suite
+                    if (!gate.isCurrent(gen)) return@execute
+                    if (o is PipeOutcome.Failed) { onResult(o.text); return@execute }
+                }
                 val first = fetchTicket()
                 if (!gate.isCurrent(gen)) return@execute   // M-5 : « Retour » pendant l'attente du ticket : rien n'est ouvert, aucune salle fantôme
                 if (first !is PlayTicketReply.Ok) { onResult((first as PlayTicketReply.Refused).text); return@execute }
@@ -200,10 +232,16 @@ object PlayHub {
                 val ticket = { synchronized(this) { pending?.also { pending = null } } ?: cache.fresh() }   // création / entrée : toujours un ticket neuf (usage unique)
                 val signer = WalletHub.installSigner()
                 // M-6 : le service juge le ticket à la création de la session seulement : il part au premier POST, plus à chaque envoi (aucun renouvellement, aucun appel d'API en cours de partie)
+                // relay-R1 (§ 2.5) : le chemin vient de la vérité réseau unique (direct : le réseau de la TV ; via_relay : le tuyau du téléphone) ; en mode relais les délais du transport suivent la
+                // latence mesurée, chaque requête porte l'en-tête informatif `X-CB-Via: relay`, la courbe de réouverture est plus espacée et les téléphones de la maison gardent la fenêtre de réponse
+                // du service plus la latence (bornée). Rien ne change au protocole du service.
                 val factory = TransportFactory { t ->
-                    PlayHttpTransport(base, t, proxy = { if (routes.lastVia == Routes.Via.GATEWAY) gatewayProxy() else null }, clock = mono, ticketOnEveryPost = false)
+                    val rules = TvNet.playRules()
+                    PlayHttpTransport(base, t, proxy = { pipeProxy(routes) }, clock = mono, connectTimeoutMs = rules.connectTimeoutMs, postReadTimeoutMs = rules.postReadTimeoutMs,
+                        ticketOnEveryPost = false, viaRelay = { TvNet.viaRelay() })
                 }
-                val s = PlayTvSession(clock = mono, transports = factory, ticket = ticket, via = { routes.lastVia }, tvHasNetwork = { hasInternet(ctx) },
+                val s = PlayTvSession(clock = mono, transports = factory, ticket = ticket, via = { if (TvNet.viaRelay()) null else routes.lastVia }, tvHasNetwork = { hasInternet(ctx) },
+                    curveSec = TvNet.playRules().curveSec,
                     resumeTicket = { cache.reusable() },   // une reprise réutilise le ticket courant (< 9 min)
                     prover = { t, a -> signer?.let { PlayProof.build(it::sign, it.publicKeyBase64, t, a) } })   // H-3 : preuve de possession de la clé d'installation
                 val deviceHash = TvConnect.hash(ActivationCenter.deviceCode)
@@ -213,15 +251,27 @@ object PlayHub {
                 })
                 if (!gate.isCurrent(gen)) { runCatching { s.stop() }; return@execute }   // annulée pendant l'ouverture : on ferme ce qu'on vient d'ouvrir
                 session = s
-                relay = RelayAuthority(s, mono)
+                relay = RelayAuthority(s, mono, extraWindowMs = { TvNet.playRules().answerExtraMs })
                 ticking?.cancel(false)
-                ticking = worker.scheduleWithFixedDelay({ runCatching { session?.tick() } }, 300, 300, TimeUnit.MILLISECONDS)
+                var beat = 0
+                ticking = worker.scheduleWithFixedDelay({
+                    runCatching { session?.tick() }
+                    // la partie tient la demande de tuyau vivante tant que la TV est sans Internet (bail renouvelé, redemandé au rythme de la règle de TvNet), jamais plus d'une fois toutes les 5 s
+                    if (++beat % 16 == 0) runCatching { if (!TvNet.state().up) TvNet.need(PipeNeed.PLAY) }
+                }, 300, 300, TimeUnit.MILLISECONDS)
                 TvConnect.feature("quiz_online", "menu")
                 onResult(null)
             } catch (e: Exception) {
                 if (gate.isCurrent(gen)) onResult(PlayErrors.GENERIC)
             }
         }
+    }
+
+    /** Le chemin du transport : la vérité réseau unique décide (direct : null ; via_relay : le tuyau) ; sans Internet un instant, le dernier chemin qui a marché. */
+    private fun pipeProxy(routes: Routes): java.net.Proxy? = when (TvNet.state()) {
+        castbridge.core.connect.NetState.DIRECT -> null
+        castbridge.core.connect.NetState.VIA_RELAY -> gatewayProxy()
+        castbridge.core.connect.NetState.NONE -> if (routes.lastVia == Routes.Via.GATEWAY) gatewayProxy() else null
     }
 
     /** Commandes de l'hôte : « Commencer » = duel, hôte automatique (le service enchaîne les questions), départ. */

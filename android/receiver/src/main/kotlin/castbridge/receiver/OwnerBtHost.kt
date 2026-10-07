@@ -31,6 +31,8 @@ class OwnerBtHost(private val ctx: Context, private val status: (String?) -> Uni
         // NOT activated here: the key is verified, placed in the field of the activation screen, and the owner confirms on the TV
         activate = { token -> ActivationCenter.stage(token).also { if (it is ActivationResult.Accepted) showActivationScreen() } },
         acceptedText = "Clé reçue et valide : sur la TV, appuyez sur « Valider la clé »",
+        // relay-R1: a synchronized phone says its relay state here and learns whether the TV wants an Internet pipe (RELAY_STATE / RELAY_ASK_PIPE); anybody else is told « not supported »
+        relay = TvNet.channelHost,
     )
 
     private fun showActivationScreen() { runCatching { ctx.startActivity(android.content.Intent(ctx, ActivationActivity::class.java).addFlags(android.content.Intent.FLAG_ACTIVITY_NEW_TASK).putExtra(ActivationActivity.EXTRA_UPGRADE, ActivationCenter.trial())) } }
@@ -46,8 +48,9 @@ class OwnerBtHost(private val ctx: Context, private val status: (String?) -> Uni
             while (running) {
                 val sock = try { ss.accept() } catch (e: IOException) { break }
                 if (!slots.tryAcquire()) { runCatching { sock.close() }; continue }
+                val peer = runCatching { sock.remoteDevice.address }.getOrNull()      // the paired device of the socket, never something the peer wrote
                 Thread({
-                    try { sock.use { channel.serve(it.inputStream, it.outputStream) } }
+                    try { sock.use { channel.serve(it.inputStream, it.outputStream, peer) } }
                     catch (e: Exception) { Log.w(TAG, "link: ${e.message}") }
                     finally { slots.release() }
                 }, "owner-bt-link").apply { isDaemon = true; start() }

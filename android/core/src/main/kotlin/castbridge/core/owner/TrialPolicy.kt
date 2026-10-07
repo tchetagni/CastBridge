@@ -25,12 +25,12 @@ object TrialPolicy {
 
     /**
      * ALLOWLIST of what the trial opens (default deny: a route added tomorrow is closed until it is listed here). Exact paths, and prefixes (a path under "<prefix>/").
-     * Streaming with no copy (the phone's « Lire en direct » = /api/playurl, control of the cast), pairing / remote control, activation, rental, lots and « Apprendre »,
+     * Streaming with no copy (the phone's « Lire en direct » = /api/playurl, control of the cast), pairing / remote control (« Ouvrir sur la TV » = /api/tv/open), activation, rental, lots and « Apprendre »,
      * the Sudoku, and the connection helpers. Never: files, library, storage, folders, trash, downloads, uploads, transfers, USB, SSH, APK installs, screenshots, quiz, chess.
      */
     private val EXACT = setOf("/", "/api/hello", "/api/info", "/api/sysinfo", "/api/playurl", "/api/pause", "/api/resume", "/api/stop", "/api/seek", "/api/volume", "/api/restart",
         "/api/connections", "/api/net", "/api/background", "/api/autostart", "/api/overlay-permission", "/api/bluetooth", "/api/bluetooth/discoverable",
-        "/api/activation", "/api/tv/device-request", "/api/rental", "/api/lots", "/api/store", "/api/store/catalog", "/api/learn", "/api/sudoku", "/api/games", "/api/games/open", "/api/parental",
+        "/api/activation", "/api/tv/device-request", "/api/tv/open", "/api/rental", "/api/lots", "/api/store", "/api/store/catalog", "/api/learn", "/api/sudoku", "/api/games", "/api/games/open", "/api/parental",
         "/api/server", "/api/server/me", "/api/server/url", "/api/server/contact")
     private val PREFIXES = listOf("/api/activation", "/api/rental", "/api/lots", "/api/store", "/api/learn", "/api/sudoku", "/api/player", "/api/remote", "/api/bluetooth/tunnel", "/api/gateway",
         "/api/parental", "/api/content/reports")

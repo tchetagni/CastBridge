@@ -32,6 +32,8 @@ class ChessRelayClient(
     private val openTimeoutMs: Long = 30_000L,
     private val ackTimeoutMs: Long = 12_000L,
     private val tickMs: Long = 250L,
+    /** Appelé environ toutes les 4 s tant que la liaison vit (la TV y tient vivante sa demande de tuyau quand elle n'a Internet que par un téléphone) ; sans effet par défaut. */
+    private val beat: () -> Unit = {},
 ) : ChessTransport, AutoCloseable {
     override val label = "Internet"
 
@@ -215,8 +217,11 @@ class ChessRelayClient(
     private fun startTicker() {
         ticker?.interrupt()
         ticker = Thread({
+            var n = 0L
+            val every = (4_000L / tickMs.coerceAtLeast(1L)).coerceAtLeast(1L)
             while (!closed && session?.stopped == false) {
                 runCatching { session?.tick() }
+                if (++n % every == 0L) runCatching { beat() }
                 try { Thread.sleep(tickMs) } catch (_: InterruptedException) { return@Thread }
             }
         }, "chess-online-link").apply { isDaemon = true; start() }

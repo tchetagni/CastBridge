@@ -100,7 +100,7 @@ class LanguesActivity : Activity() {
             button("${l.fr}   ·   $n lot(s)") { go { levels(l) } }
         }
         // only when the system says this TV has Internet, and only when pressed: the TV never fetches by itself (docs/LOTS.md)
-        if (LanguesHub.hasInternet(this)) button("Mettre à jour les lots Langues", primary = all.isEmpty()) { go { update() } }
+        if (LanguesHub.canUpdate(this)) button("Mettre à jour les lots Langues", primary = all.isEmpty()) { go { update() } }
         focusFirst()
     }
 
@@ -112,7 +112,7 @@ class LanguesActivity : Activity() {
             label("L'adresse du serveur n'est pas sécurisée (HTTPS obligatoire) : utilisez le téléphone pour envoyer les leçons.", 34, GamesColors.ERROR, top = 40)
             button("Retour") { onBackPressed() }; focusFirst(); return
         }
-        val status = label("Connexion au serveur…", 36, GamesColors.TEXT_HIGH, top = 40)
+        val status = label(if (LanguesHub.hasInternet(this)) "Connexion au serveur…" else "Demande d'Internet au téléphone…", 36, GamesColors.TEXT_HIGH, top = 40)   // relay-R1 : sans Internet, un téléphone synchronisé est sollicité
         val cancel = button("Annuler") { cancelUpdate = true; status.text = "Interruption…" }
         focusFirst()
         updating = true; cancelUpdate = false; reloadLater = false

@@ -29,6 +29,8 @@ class Env(
     val getenv: (String) -> String? = System::getenv, val console: () -> CharArray? = { System.console()?.readPassword("Code de déverrouillage : ") },
     val clock: () -> Long = System::currentTimeMillis, val kdf: castbridge.core.owner.Kdf = ScryptKdf(),
     val httpGet: ((String) -> castbridge.core.net.HttpLite.Response)? = null,
+    /** What a USB volume is and how the pending writes are flushed (« --cle-usb », « cle-usb »): the real machine by default, replaced by the tests. */
+    val usb: UsbPlatform = UsbPlatform(),
 )
 
 class UsageException(message: String) : Exception(message)
@@ -53,7 +55,7 @@ class Cli(private val env: Env) {
         fun get(k: String) = opts[k]?.last()
         fun all(k: String) = opts[k] ?: emptyList()
         fun need(k: String) = get(k) ?: throw UsageException("Option obligatoire : --$k")
-        companion object { val FLAGS = setOf("qr", "production", "essai", "sans-confirmation", "json", "super", "sans-lots-essai", "sans-controle-catalogue", "enveloppe-v1") }
+        companion object { val FLAGS = setOf("qr", "production", "essai", "sans-confirmation", "json", "super", "sans-lots-essai", "sans-controle-catalogue", "enveloppe-v1", "force") }
     }
 
     private fun home(a: Args) = File(a.get("dossier") ?: env.getenv("CASTBRIDGE_ACTIVATION_HOME") ?: (System.getProperty("user.home") + "/.castbridge-activation"))
@@ -75,6 +77,7 @@ class Cli(private val env: Env) {
         catch (e: WrongCode) { 3 }
         catch (e: IssueException) { env.err.println("Refusé : ${e.message}"); 1 }
         catch (e: castbridge.core.lots.SignedBundleCatalog.Refused) { env.err.println("Refusé : ${e.message}"); 1 }
+        catch (e: UsbKeyException) { env.err.println("${if (e.refusal) "Refusé" else "Échec"} : ${e.message}"); 1 }
         catch (e: IllegalArgumentException) { env.err.println("Refusé : ${e.message}"); if (env.getenv("CASTBRIDGE_DEBUG") != null) e.printStackTrace(env.err); 1 }
     }
 
@@ -86,6 +89,7 @@ class Cli(private val env: Env) {
         "licence", "license" -> license(a)
         "emettre", "issue" -> issue(a)
         "cle-saisissable", "compact" -> compact(a)
+        "cle-usb", "usb-key" -> usbKey(a)
         "lot-chiffrer", "seal-lot" -> sealLot(a)
         "commande", "command" -> command(a)
         "verifier", "verify" -> verify(a)
@@ -246,6 +250,12 @@ class Cli(private val env: Env) {
 
     private fun issue(a: Args): Int {
         val device = DeviceRequest.parse(readSource(a.need("appareil")))
+        val force = a.flags.contains("force")
+        // The USB key is looked at BEFORE the unlock code and the signature: a refusal (not a volume, a locked key, the activation of another TV already there) must not use a seat nor leave a line in the journal.
+        val usb = a.get("cle-usb")?.let { v ->
+            if (a.get("sujet") == "phone") throw UsageException("--cle-usb : la clé USB est lue par la TV ; l'activation d'un téléphone (--sujet phone) n'y a pas sa place")
+            UsbKey.open(UsbKey.volumeArg(v), env.usb).also { it.check(DeviceCode.of(device.factors), force) }
+        }
         val d = desk(a)
         val kind = if (a.flags.contains("production")) ActivationKind.PRODUCTION else ActivationKind.TRIAL
         val now = env.clock()
@@ -274,7 +284,7 @@ class Cli(private val env: Env) {
         env.out.println("Poste : ${r.seat}${if (r.reused) " (ré-activation : aucun poste consommé)" else ""}${r.seatsLeft?.let { " ; postes restants : $it" } ?: ""}")
         env.out.println("Valable à l'installation jusqu'au ${date(r.issued.activation.notAfter)}")
         r.installKeyFingerprint?.let { env.out.println("Clé d'installation de la TV liée à cette activation : empreinte $it (à comparer avec l'écran d'activation de la TV avant de la remettre)") }
-        env.out.println("Fichier pour la clé USB de la TV : ${fileOut.path}  (à copier dans Download/CastBridge/)")
+        env.out.println(if (usb == null) "Fichier pour la clé USB de la TV : ${fileOut.path}  (à copier dans Download/CastBridge/)" else "Copie locale du fichier émis : ${fileOut.path}")
         env.out.println("Jeton :"); env.out.println(r.issued.token)
         r.issued.activation.rights.filterIsInstance<Right.Rental>().forEach { l ->
             if (l.productId == castbridge.core.lots.RentalLines.TRIAL_PRODUCT) { env.out.println("Fenêtre de lots d'essai (usage unique) : ${l.maxUsageMinutes} min d'usage, dans les ${l.durationDays} jours"); return@forEach }
@@ -283,6 +293,44 @@ class Cli(private val env: Env) {
         }
         if (rentals.isNotEmpty() && a.get("catalogue") == null) env.out.println("ATTENTION : durées de location NON vérifiées (--sans-controle-catalogue) et lots libres (CC BY-SA) NON vérifiés (--catalogue et --lots-libres absents) : un lot libre ne doit jamais être loué.")
         if (a.flags.contains("qr")) { val png = File(dir, "activation.png"); Qr.png(r.issued.token, png); env.out.println("Code QR : ${png.path}") }
+        if (usb != null) {
+            // everything the owner may need is printed above: if the key fails now, the activation still exists (journal, local copy) and the message says how to finish without issuing again
+            val report = try { usb.write(UsbKey.parse(r.issued.fileContent.toByteArray(Charsets.UTF_8)), force) } catch (e: UsbKeyException) {
+                throw UsbKeyException("L'activation est émise (copie locale : ${fileOut.path}) mais la clé USB n'est pas prête : ${e.message} Une fois la cause corrigée, sans émettre de nouveau : cle-usb --activation ${typed(fileOut.path)} --cle-usb ${typed(a.get("cle-usb")!!)}", e.refusal)
+            }
+            printUsb(report, r.issued.activation.notAfter)
+        }
+        return 0
+    }
+
+    /** A path as the owner has to type it back in a terminal: between quotes when it holds a space (« /Volumes/MA CLE »). */
+    private fun typed(path: String) = if (path.any { it.isWhitespace() }) "\"$path\"" else path
+
+    /** What was written on the key, file by file, then the summary line, then what to do with the key. */
+    private fun printUsb(r: UsbKey.Report, notAfter: Long) {
+        r.replaced.forEach { env.out.println("ATTENTION (--force) : ${it.relative} écrasé : ${it.deviceCode?.let { c -> "activation de la TV $c" } ?: "contenu non reconnu"}") }
+        r.files.forEach { env.out.println("  ${it.relative}  (${it.size} octets, relu : sha256 ${it.sha256.take(16)}…)") }
+        env.out.println(r.summary)
+        env.out.println("Valable à l'installation jusqu'au ${date(notAfter)} : branchez la clé sur la TV avant. Éjectez la clé avant de la débrancher (Mac : Finder ; Windows : « Retirer le périphérique en toute sécurité » ; Linux : « Éjecter »).")
+    }
+
+    /**
+     * `cle-usb --activation FICHIER|DOSSIER --cle-usb VOLUME [--force]`: writes an activation that was ALREADY issued on a client's USB key, same files and same checks as `emettre --cle-usb`. Nothing is
+     * signed here, so no unlock code is asked. FICHIER is the `activation` file written by « emettre » (or the `--sortie` folder that holds it, or `-` for the standard input).
+     */
+    private fun usbKey(a: Args): Int {
+        val source = a.need("activation"); val volume = a.need("cle-usb")
+        val bytes = if (source == "-") env.stdin.readNBytes(UsbKey.MAX_BYTES + 1) else {
+            val f = File(source).let { if (it.isDirectory) File(it, Activation.FILE_NAME) else it }
+            if (!f.isFile) throw UsageException("Fichier d'activation introuvable : ${f.path} (le fichier « activation » écrit par « emettre », ou son dossier --sortie)")
+            f.inputStream().use { it.readNBytes(UsbKey.MAX_BYTES + 1) }
+        }
+        val parsed = UsbKey.parse(bytes)
+        if (env.clock() > parsed.activation.notAfter) throw UsbKeyException("Cette activation n'est plus installable (valable jusqu'au ${date(parsed.activation.notAfter)}) : émettez-en une nouvelle avec « emettre ».")
+        val usb = UsbKey.open(UsbKey.volumeArg(volume), env.usb)
+        val report = usb.write(parsed, a.flags.contains("force"))
+        env.out.println("Activation ${if (parsed.activation.kind == ActivationKind.TRIAL) "d'essai" else "de production"} pour ${parsed.deviceCode}")
+        printUsb(report, parsed.activation.notAfter)
         return 0
     }
 
@@ -395,7 +443,7 @@ class Cli(private val env: Env) {
         const val GUI_RUNNING = -1
         val HELP = """CastBridge — outil d'activation de bureau (Mac, Windows, Linux ; Java 17+)
 
-Commandes (français ; alias anglais : keygen key trust device license issue compact command verify registry selftest) :
+Commandes (français ; alias anglais : keygen key trust device license issue compact usb-key command verify registry selftest) :
   cle-creer          crée la clé du bureau (code de déverrouillage ≥ 10 caractères ; scrypt, 32 Mio par essai)
   cle [--json]       affiche le kid, la clé publique et les portées (JAMAIS la clé privée)
   faire-confiance F  ajoute la clé publique d'un autre outil (téléphone propriétaire, serveur) à l'anneau
@@ -412,6 +460,11 @@ Commandes (français ; alias anglais : keygen key trust device license issue com
           [--periode MS]  prolonge la location commencée à cet instant (même clé, pas de doublon) au lieu d'en commencer une nouvelle
           [--catalogue serveur|TRIAL-MANIFEST.json --lots-libres FICHIER]   durée exacte du serveur (« serveur » = la copie de catalogue-serveur) ; refuse la location d'un lot libre (CC BY-SA)
           [--sortie DOSSIER] [--qr]       jeton, fichier « activation » (clé USB de la TV) et code QR
+          [--cle-usb VOLUME [--force]]    écrit AUSSI l'activation sur la clé USB du client, branchée sur cet ordinateur (voir « cle-usb » ci-dessous) ; la clé est contrôlée AVANT l'émission : un refus ne consomme aucun poste
+  cle-usb --activation F|DOSSIER --cle-usb VOLUME [--force]   écrit sur la clé USB du client une activation DÉJÀ émise (sans code de déverrouillage) : « activation » (racine), Download/CastBridge/activation,
+          Android/data/castbridge.receiver/files/activation (dossier propre de CastBridge-TV, lisible partout) et LISEZMOI-CASTBRIDGE.txt (3 lignes) ; crée les dossiers, relit et compare le SHA-256 (16 Kio au plus) ;
+          VOLUME = la RACINE de la clé montée (Mac : /Volumes/NOM, Windows : E:\, Linux : /media/vous/NOM) ; refuse un volume non inscriptible ou qui n'est pas un volume monté ;
+          --force écrase l'activation d'une AUTRE TV (sinon refus, avec son code d'appareil) ; éjectez la clé avant de la débrancher
   lot-chiffrer --activation F --produit P --lot FICHIER.lot [--sortie DOSSIER]   chiffre un lot pour la TV d'une location émise
   catalogue-serveur [--serveur URL] [--cle-publique B64]   importe le catalogue des bouquets DEPUIS LE SERVEUR (HTTPS, signature vérifiée avant d'être gardée dans le dossier) ; ensuite --catalogue serveur
   cle-saisissable --code XXXX-XXXX-XXXX-XXXX [--production --ensemble N]   dernier recours : 165 caractères à taper

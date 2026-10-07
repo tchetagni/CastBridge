@@ -105,6 +105,8 @@ class ReceiverServer(
     private val indexBusy: () -> Boolean = { false },
     /** One diagnostic line per refused request (route, status, reason code; never a PIN, token or body): the TV app writes it to logcat at INFO (R-17). */
     private val onLog: (String) -> Unit = {},
+    /** relay-R1: does the TV want an Internet pipe right now? When true, `GET /api/info` (authenticated, polled by the trusted phone's keep-alive) carries the header `X-CB-Pipe: 1`: the phone then opens the pipe by itself. */
+    private val pipeHint: () -> Boolean = { false },
 ) : NanoHTTPD(port) {
 
     /** The socket of the connection this thread serves (NanoHTTPD: one thread per connection), for [hungUp]. */
@@ -696,8 +698,10 @@ class ReceiverServer(
         if (!loopbackStream) denied(s, p)?.let { return it }
         if (isStream) return stream(s, path.removePrefix("/stream/"))
         val ext = if (!path.startsWith("/api/")) null
-            else if (s.method == Method.POST && extension?.wantsBody(path) == true) extBody(s)?.let { extension.handleBody(path, s.method.name, p, it) }
-                ?: ApiReply(413, """{"error":"body missing or too large"}""")
+            else if (s.method == Method.POST && extension?.wantsBody(path) == true)
+                // « corps facultatif » (BODY_OPTIONAL) : un POST qui n'annonce aucun corps est un appel simple ; un corps annoncé est lu comme avant (borné)
+                (if (noBody(s) && path in BODY_OPTIONAL) extension.handle(path, s.method.name, p)
+                else extBody(s)?.let { extension.handleBody(path, s.method.name, p, it) } ?: ApiReply(413, """{"error":"body missing or too large"}"""))
             else extension?.handle(path, s.method.name, p)
         return when {
             // NanoHTTPD already percent-decoded the URI. A rejected upload leaves its body unread on the
@@ -708,7 +712,7 @@ class ReceiverServer(
             path.startsWith("/api/transfer/") -> transfer(s, path.removePrefix("/api/transfer/"), p).also {
                 if (it.status != Response.Status.OK && !(it.status.requestStatus == 429 && bodyDrained.get() == true)) it.addHeader("Connection", "close")
             }
-            path == "/api/info" -> ok(info())
+            path == "/api/info" -> ok(info()).also { r -> if (runCatching { pipeHint() }.getOrDefault(false)) r.addHeader("X-CB-Pipe", "1") }
             path == "/api/storage" -> storage(s.method, p)
             path == "/api/storage/check" -> if (s.method == Method.GET) check(p) else json(Response.Status.METHOD_NOT_ALLOWED, """{"error":"use GET"}""")
             path == "/api/have" -> if (s.method == Method.GET) have(p) else json(Response.Status.METHOD_NOT_ALLOWED, """{"error":"use GET"}""")
@@ -859,6 +863,9 @@ class ReceiverServer(
             else -> json(Response.Status.NOT_FOUND, """{"error":"not found"}""")
         }
     }
+
+    /** The request announces no body at all (no Content-Length, or 0, and no chunked encoding): nothing is left unread on the connection. */
+    private fun noBody(s: IHTTPSession): Boolean = (s.headers["content-length"]?.toLongOrNull() ?: 0L) <= 0L && s.headers["transfer-encoding"] == null
 
     /** Body of a POST for an extension route (a .torrent...), null if absent or larger than [MAX_EXT_BODY]. */
     private fun extBody(s: IHTTPSession): ByteArray? {
@@ -1896,6 +1903,12 @@ class ReceiverServer(
         const val PENDING_FILE = ".cbfiling-pending"
         const val VERSION = "0.7"
         const val MAX_EXT_BODY = 4 shl 20
+        /**
+         * POST routes of an extension that wants a body ([ApiExtension.wantsBody]) but works WITHOUT one (« corps facultatif ») : a POST that announces no body at all is an ordinary call,
+         * not a 413. Today only `POST /api/tv/open` (« Ouvrir CastBridge-TV », body `{"screen":"library"}` optional). A constant here, not a new method of the interface: adding a default method to
+         * [ApiExtension] would force every implementor (and every incremental build) to be recompiled for its bridge, and a stale one fails at run time.
+         */
+        val BODY_OPTIONAL: Set<String> = setOf("/api/tv/open")
         /** A partial copy written less than this long ago (or being written) is busy: /api/reset refuses to drop it. */
         const val PART_BUSY_MS = 60_000L
         /** Longest a /stream/ reader waits for a byte while the copy is still alive (then the player's http-reconnect takes over). */

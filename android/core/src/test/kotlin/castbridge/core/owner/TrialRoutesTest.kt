@@ -27,7 +27,7 @@ class TrialRoutesTest {
         "/api/player/chapter", "/api/player/title", "/api/player/hw", "/api/player/eq",
         "/api/learn/cmd", "/api/learn/dashboard", "/api/learn/events", "/api/learn/packs", "/api/learn/packs/remove", "/api/sudoku/cmd",
         "/api/server", "/api/server/url", "/api/server/contact",
-        "/api/remote/text", "/api/remote/pointer", "/api/remote/global", "/api/remote/ping", "/api/remote/system/setup",
+        "/api/remote/text", "/api/remote/pointer", "/api/remote/global", "/api/remote/ping", "/api/remote/system/setup", "/api/remote/open", "/api/tv/open",
         "/api/parental", "/api/parental/supervision", "/api/parental/disable", "/api/parental/reset", "/api/parental/lock", "/api/parental/pin/create", "/api/parental/pin/change",
         "/api/parental/unlock", "/api/parental/config/get", "/api/parental/config/set", "/api/parental/report", "/api/parental/history/clear", "/api/parental/apps/list",
         "/api/parental/apps/rules/set", "/api/parental/reports/config/get", "/api/parental/reports/config/set", "/api/parental/reports/recipients/add",

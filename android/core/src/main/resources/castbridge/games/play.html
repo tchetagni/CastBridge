@@ -1,0 +1,258 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+<meta name="theme-color" content="#121212">
+<title>/*GAME_TITLE*/ — CastBridge-TV</title>
+<style>
+  :root { --bg:#121212; --panel:#1f1f1f; --line:#343434; --text:#ededed; --muted:#a8a8a8; --accent:#33b5e5; --warn:#ffb74d; --bad:#ff6b6b; --good:#5fd38d; }
+  * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+  html, body { margin:0; background:var(--bg); color:var(--text); font:16px/1.35 system-ui, -apple-system, Roboto, sans-serif; }
+  body { min-height:100vh; }
+  main { max-width:560px; margin:0 auto; padding:10px 8px 24px; }
+  h1 { font-size:24px; margin:8px 0 4px; }
+  p.sub { color:var(--muted); margin:0 0 14px; }
+  label { display:block; color:var(--muted); font-size:14px; margin:12px 0 4px; }
+  input { width:100%; padding:12px; font-size:20px; border-radius:10px; border:1px solid var(--line); background:var(--panel); color:var(--text); }
+  input#code { letter-spacing:6px; font-weight:700; text-align:center; }
+  button { font:inherit; font-weight:600; border:0; border-radius:10px; padding:12px 14px; background:var(--panel); color:var(--text); border:1px solid var(--line); cursor:pointer; }
+  button.primary { background:var(--accent); color:#00212d; border-color:var(--accent); width:100%; margin-top:16px; font-size:18px; }
+  button.big { background:var(--accent); color:#00212d; border-color:var(--accent); width:100%; font-size:20px; padding:16px 14px; margin-top:12px; }
+  button:disabled { opacity:.45; }
+  .err { color:var(--bad); min-height:22px; margin-top:8px; }
+  .hidden { display:none !important; }
+  #bar { display:flex; align-items:center; gap:8px; margin:4px 0 6px; }
+  #bar b { flex:1; font-size:18px; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+  .pill { flex:none; font-size:13px; padding:3px 9px; border-radius:99px; background:#3a2a10; color:var(--warn); border:1px solid #6b4a14; }
+  .card { display:flex; align-items:center; gap:10px; background:var(--panel); border:1px solid var(--line); border-radius:12px; padding:8px 10px; margin:6px 0; }
+  .card.turn { border-color:var(--accent); box-shadow:0 0 0 1px var(--accent) inset; }
+  .card .num { flex:none; width:28px; height:28px; border-radius:50%; background:#2b2b2b; color:var(--muted); display:flex; align-items:center; justify-content:center; font-weight:700; }
+  .card.turn .num { background:var(--accent); color:#00212d; }
+  .who { flex:1; min-width:0; }
+  .who b { display:block; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+  .who small { color:var(--muted); display:block; }
+  .who small.warn { color:var(--warn); }
+  .secs { flex:none; font-size:22px; font-weight:800; font-variant-numeric:tabular-nums; }
+  .secs.low { color:var(--bad); }
+  #status { text-align:center; min-height:24px; margin:8px 0 2px; font-weight:700; font-size:18px; }
+  #notice { text-align:center; color:var(--warn); min-height:20px; font-size:14px; }
+  #table { margin:8px 0; }
+  .row { display:flex; gap:8px; margin-top:8px; flex-wrap:wrap; }
+  .row button { flex:1; }
+  .overlay { position:fixed; inset:0; background:rgba(0,0,0,.72); display:flex; align-items:center; justify-content:center; padding:16px; z-index:5; }
+  .dialog { background:#1c1c1c; border:1px solid var(--line); border-radius:14px; padding:18px; width:100%; max-width:420px; text-align:center; }
+  .dialog h2 { margin:0 0 8px; font-size:22px; }
+  .muted { color:var(--muted); font-size:14px; }
+  /* cartes à jouer (partagées par les jeux de cartes) */
+  .pc { display:inline-flex; flex-direction:column; align-items:center; justify-content:center; width:46px; height:66px; border-radius:7px; background:#f7f2e4; color:#161616; border:1px solid #bdb59f; font-weight:800; font-size:19px; line-height:1.05; margin:3px; user-select:none; }
+  .pc.red { color:#c4262e; }
+  .pc.back { background:repeating-linear-gradient(45deg,#1d4f7a 0 6px,#173f62 6px 12px); border-color:#0e2a44; color:transparent; }
+  .pc.small { width:34px; height:49px; font-size:14px; border-radius:5px; }
+</style>
+</head>
+<body>
+<main>
+  <section id="joinView">
+    <h1 id="gameTitle"></h1>
+    <p class="sub">Entrez le code affiché sur la TV et votre pseudo pour jouer ou regarder la partie.</p>
+    <label for="name">Votre pseudo</label>
+    <input id="name" maxlength="16" autocomplete="nickname">
+    <label for="code">Code de la salle</label>
+    <input id="code" inputmode="numeric" maxlength="4" autocomplete="off">
+    <button class="primary" id="joinBtn">Rejoindre la partie</button>
+    <div class="err" id="joinErr"></div>
+  </section>
+
+  <section id="gameView" class="hidden">
+    <div id="bar"><b id="roomTitle"></b><span class="pill hidden" id="conn">Connexion perdue…</span></div>
+    <div id="seats"></div>
+    <div id="status"></div>
+    <div id="notice"></div>
+    <div id="table"></div>
+    <div id="lobbyBox" class="row hidden"><span id="sitBtns" class="row" style="margin:0;flex:3"></span><button id="standBtn">Regarder</button></div>
+    <div id="actions" class="row hidden"><button id="resignBtn">Abandonner</button></div>
+    <div class="row"><button id="leaveBtn">Quitter</button></div>
+  </section>
+</main>
+
+<div class="overlay hidden" id="confirmDlg"><div class="dialog"><h2 id="confirmTitle"></h2><p id="confirmText" class="muted"></p>
+  <div class="row"><button id="confirmNo">Non</button><button id="confirmYes" style="background:var(--bad);color:#200">Oui</button></div></div></div>
+<div class="overlay hidden" id="endDlg"><div class="dialog"><h2 id="endTitle"></h2><p id="endText"></p>
+  <div class="row"><button id="endClose">Fermer</button></div></div></div>
+
+<script>
+"use strict";
+const GAME=/*GAME*/null;
+const $=id=>document.getElementById(id);
+const base="/jeux/"+GAME.id;
+const qs=new URLSearchParams(location.search);
+const store={ get(k){ try{ return localStorage.getItem(k); }catch(e){ return null; } }, set(k,v){ try{ localStorage.setItem(k,v); }catch(e){} }, del(k){ try{ localStorage.removeItem(k); }catch(e){} } };
+let token=null, code=null, st=null, stAt=0, es=null, polling=false, gotEvent=false, lostSince=null, retryTimer=null, shownEnd=null;
+
+$("gameTitle").textContent=GAME.name;
+$("name").value=qs.get("name")||store.get("cb-name")||"";
+$("code").value=qs.get("code")||"";
+$("joinBtn").onclick=()=>join();
+if(qs.get("auto")==="1" && $("name").value && $("code").value) join();
+else if($("code").value && store.get("cb-token-"+GAME.id+"-"+$("code").value)) join();
+
+async function post(path){ const r=await fetch(path,{method:"POST",cache:"no-store"}); let j=null; try{ j=await r.json(); }catch(e){} return {status:r.status, j}; }
+
+// ---------------------------------------------------------------- entrée (ou retour à sa place avec le jeton)
+async function join(){
+  const name=$("name").value.trim(), c=$("code").value.trim();
+  if(!name){ $("joinErr").textContent="Choisissez un pseudo."; return; }
+  if(!/^\d{4}$/.test(c)){ $("joinErr").textContent="Le code a 4 chiffres (il est affiché sur la TV)."; return; }
+  $("joinBtn").disabled=true; $("joinErr").textContent="";
+  try{
+    const old=store.get("cb-token-"+GAME.id+"-"+c)||"";
+    const r=await post(`${base}/api/join?code=${encodeURIComponent(c)}&name=${encodeURIComponent(name)}&token=${encodeURIComponent(old)}`);
+    if(r.status!==200){ $("joinErr").textContent=(r.j&&r.j.message)||"Impossible de rejoindre."; return; }
+    token=r.j.token; code=c;
+    store.set("cb-token-"+GAME.id+"-"+c, token); store.set("cb-name", name);
+    $("joinView").classList.add("hidden"); $("gameView").classList.remove("hidden");
+    $("roomTitle").textContent=GAME.name+" · salle "+c;
+    connect();
+  }catch(e){ $("joinErr").textContent="La TV ne répond pas. Êtes-vous sur le même Wi-Fi ?"; }
+  finally{ $("joinBtn").disabled=false; }
+}
+
+// ---------------------------------------------------------------- l'état en direct : Server-Sent Events, long-poll en secours, reprise après coupure
+function closeStream(){ if(es){ es.onerror=null; es.close(); es=null; } }
+function connect(){
+  if(!token) return;
+  closeStream(); clearTimeout(retryTimer);
+  if(window.EventSource){
+    es=new EventSource(`${base}/api/events?token=${encodeURIComponent(token)}`);
+    es.addEventListener("state",e=>{ gotEvent=true; lostSince=null; showConn(); apply(JSON.parse(e.data)); });
+    es.onopen=()=>{ lostSince=null; showConn(); };
+    es.onerror=()=>{
+      if(lostSince===null) lostSince=Date.now();
+      showConn();
+      if(!gotEvent){ closeStream(); poll(); return; }            // le flux n'a jamais marché sur ce réseau : long-poll
+      if(es && es.readyState===2){ closeStream(); resync(); }     // le serveur a refusé : voir pourquoi (salle fermée, jeton inconnu) ou réessayer
+    };
+  } else poll();
+}
+async function resync(){
+  if(!token) return;
+  try{
+    const r=await fetch(`${base}/api/state?token=${encodeURIComponent(token)}`,{cache:"no-store"});
+    if(r.status===401||r.status===410){ ended(r.status===410?"La TV a fermé la partie.":"Votre place n'est plus gardée : rejoignez avec le code."); return; }
+    apply(await r.json()); lostSince=null; showConn(); connect();
+  }catch(e){ retryTimer=setTimeout(resync,2000); }
+}
+async function poll(){
+  if(polling) return; polling=true;
+  let since=0;
+  while(token){
+    try{
+      const r=await fetch(`${base}/api/state?token=${encodeURIComponent(token)}&since=${since}&wait=20`,{cache:"no-store"});
+      if(r.status===401||r.status===410){ polling=false; ended(r.status===410?"La TV a fermé la partie.":"Votre place n'est plus gardée : rejoignez avec le code."); return; }
+      const j=await r.json(); since=j.v; lostSince=null; showConn(); apply(j);
+    }catch(e){ if(lostSince===null) lostSince=Date.now(); showConn(); await new Promise(ok=>setTimeout(ok,2000)); }
+  }
+  polling=false;
+}
+function ended(msg){ $("status").textContent=msg; $("table").textContent=""; closeStream(); if(token) store.del("cb-token-"+GAME.id+"-"+code); token=null; }
+function showConn(){ $("conn").classList.toggle("hidden", !(lostSince!==null && Date.now()-lostSince>2500)); }
+document.addEventListener("visibilitychange",()=>{ if(!document.hidden && token && !polling && (!es || es.readyState===2)) connect(); });
+setInterval(()=>{ showConn(); if(st) renderSeats(); },500);
+
+function apply(s){
+  if(!s) return;
+  if(s.stage==="CLOSED"){ ended("La TV a fermé la partie."); return; }
+  st=s; stAt=performance.now();
+  render();
+}
+
+// ---------------------------------------------------------------- commandes
+function flash(t){ $("notice").textContent=t; setTimeout(()=>{ if($("notice").textContent===t) $("notice").textContent=(st&&st.notice)||""; },2500); }
+async function act(action,arg,seq){
+  if(!token) return;
+  let u=`${base}/api/act?token=${encodeURIComponent(token)}&action=${action}`;
+  if(arg!=null) u+=`&arg=${encodeURIComponent(arg)}`; if(seq!=null) u+=`&seq=${seq}`;
+  try{
+    const r=await post(u);
+    if(r.j&&r.j.state) apply(r.j.state);
+    if(r.j&&r.j.result==="ILLEGAL") flash("Coup refusé.");
+    else if(r.j&&r.j.result==="NOT_YOUR_TURN") flash("Ce n'est pas votre tour.");
+    else if(r.j&&r.j.result==="FORBIDDEN") flash("Impossible pour l'instant.");
+  }catch(e){ flash("Connexion perdue avec la TV…"); }
+}
+
+// ---------------------------------------------------------------- affichage
+function seatName(id){ const x=st&&st.seats.find(q=>q.id===id); return x?x.name:id; }
+function mySeat(){ return st&&st.me&&st.me.seat||null; }
+function kindLabel(k){ return k==="PHONE"?"Téléphone":k==="REMOTE"?"Télécommande":"Ordinateur"; }
+
+function renderSeats(){
+  const box=$("seats"); if(!st) return; box.textContent="";
+  const el=(performance.now()-stAt);
+  for(const q of st.seats){
+    const c=document.createElement("div"); c.className="card"+(q.toMove&&st.stage==="PLAYING"?" turn":"");
+    const n=document.createElement("span"); n.className="num"; n.textContent=String(q.index+1);
+    const w=document.createElement("div"); w.className="who";
+    const b=document.createElement("b"); b.textContent=q.name;
+    const sm=document.createElement("small");
+    let line=kindLabel(q.kind)+(q.me?" · vous":"");
+    if(q.kind==="PHONE"&&!q.connected&&q.playerId){
+      sm.className="warn"; line+=" · déconnecté";
+      if(q.graceLeftMs!=null&&st.stage==="PLAYING") line+=" · reprise possible encore "+Math.max(0,Math.ceil((q.graceLeftMs-el)/1000))+" s";
+    } else if(q.kind==="PHONE"&&!q.playerId){ line+=" · place libre"; }
+    sm.textContent=line;
+    w.appendChild(b); w.appendChild(sm); c.appendChild(n); c.appendChild(w);
+    if(q.toMove&&st.stage==="PLAYING"&&q.remainingMs!=null&&st.clock&&st.clock.perMoveMs){
+      const left=Math.max(0,q.remainingMs-(st.clock.running?el:0));
+      const s=document.createElement("span"); s.className="secs"+(left<10000?" low":""); s.textContent=Math.ceil(left/1000)+" s"; c.appendChild(s);
+    }
+    box.appendChild(c);
+  }
+}
+
+function render(){
+  const s=st; if(!s) return;
+  const me=mySeat();
+  renderSeats();
+  let status="";
+  if(s.stage==="LOBBY") status="En attente du lancement sur la TV…";
+  else if(s.stage==="PLAYING") status=(me&&s.toMove.indexOf(me)>=0)?"À vous de jouer":(s.toMove.length?("C'est à "+seatName(s.toMove[0])):"");
+  else if(s.result) status=s.result.text;
+  $("status").textContent=status;
+  $("notice").textContent=s.notice||"";
+  // avant la partie : choisir sa place
+  $("lobbyBox").classList.toggle("hidden", s.stage==="PLAYING");
+  const sit=$("sitBtns"); sit.textContent="";
+  for(const q of s.seats){ if(q.kind!=="PHONE") continue;
+    const b=document.createElement("button"); b.textContent="Place "+(q.index+1); b.disabled=q.me; b.onclick=()=>act("sit",String(q.index+1)); sit.appendChild(b); }
+  $("standBtn").disabled=!me;
+  $("actions").classList.toggle("hidden", !(s.stage==="PLAYING"&&me));
+  // la table : dessinée par le jeu (voir le script du jeu)
+  try{ GameUI.render(s,{ el:$("table"), me:me, toMove:s.toMove, legal:s.legal, seatName:seatName, send:m=>act("move",m,s.moveNo), flash:flash }); }catch(e){ $("table").textContent=""; }
+  if(s.result&&s.stage==="FINISHED"&&shownEnd!==s.code+":"+s.moveNo){
+    shownEnd=s.code+":"+s.moveNo;
+    const w=s.result.winners||[];
+    $("endTitle").textContent=s.result.kind==="DRAW"?"Partie nulle":(me?(w.indexOf(me)>=0?"Vous avez gagné !":"Vous avez perdu"):(w.length?seatName(w[0])+" gagne":"Partie terminée"));
+    $("endText").textContent=s.result.text;
+    $("endDlg").classList.remove("hidden");
+  }
+  if(s.stage!=="FINISHED") shownEnd=null;
+}
+
+// ---------------------------------------------------------------- boutons
+$("standBtn").onclick=()=>act("stand");
+$("resignBtn").onclick=()=>confirmBox("Abandonner ?","La partie sera perdue.",()=>act("resign"));
+$("leaveBtn").onclick=()=>confirmBox("Quitter ?","Vous pourrez revenir avec le même code tant que la salle est ouverte.",async()=>{ const t=token; closeStream(); token=null; try{ await post(`${base}/api/leave?token=${encodeURIComponent(t)}`); }catch(e){} location.href=base; });
+$("endClose").onclick=()=>$("endDlg").classList.add("hidden");
+function confirmBox(title,text,yes){
+  $("confirmTitle").textContent=title; $("confirmText").textContent=text; $("confirmDlg").classList.remove("hidden");
+  $("confirmYes").onclick=()=>{ $("confirmDlg").classList.add("hidden"); yes(); };
+  $("confirmNo").onclick=()=>$("confirmDlg").classList.add("hidden");
+}
+</script>
+<script>
+/*GAME_JS*/
+</script>
+</body>
+</html>

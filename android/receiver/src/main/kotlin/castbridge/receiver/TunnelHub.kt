@@ -46,8 +46,11 @@ import java.net.Socket
  */
 object TunnelHub {
     private const val TAG = "CastBridgeTunnel"
-    /** Where the tunnel-only sshd of the TV listens (loopback). NOT 2222: that is the user's SSH feature ([TvSshServer.DEFAULT_PORT]) and both can run at once. The server only knows the REMOTE port. */
-    const val LOCAL_PORT = 2223
+    /**
+     * Where the tunnel-only sshd of the TV listens (loopback). NOT 2222: that is the user's SSH feature ([TvSshServer.DEFAULT_PORT]) and both can run at once. NOT 2223 either (R-28, inventory I-8):
+     * that is the SSH of the development app « CastBridge Dev » (DevService.PORT, all interfaces) on the same device, whichever started second could not listen. The server only knows the REMOTE port.
+     */
+    const val LOCAL_PORT = 2224
 
     private lateinit var app: Context
     @Volatile private var ready = false
@@ -138,10 +141,9 @@ object TunnelHub {
         override fun locked() = ActivationCenter.locked()
         override fun activation(): String? = TunnelEnroll.pickActivation(ActivationCenter.allActivations(), ActivationCenter.now())?.encode()
         override fun connectivity(): TunnelPath {
-            val svc = TvService.running ?: return TunnelPath.OFFLINE
-            if (svc.netCheckedAt == 0L) return TunnelPath.OFFLINE                 // not probed yet: a few seconds after the start
-            val gw = svc.gateway
-            return TunnelConnectivity.choose(svc.netDirectMs != null, gw?.connected == true, svc.netGatewayMs != null).also { lastPath = it }
+            if (TvService.running == null || !TvNet.checked()) return TunnelPath.OFFLINE   // not measured yet: a few seconds after the start
+            // relay-R1: the path is read from the single truth of the TV (direct / via_relay / none), like every other consumer; no definition of its own
+            return TunnelConnectivity.path(TvNet.state()).also { lastPath = it }
         }
         override fun keyId() = client.keyId()
     }

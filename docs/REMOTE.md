@@ -2,7 +2,7 @@
 
 Le téléphone pilote CastBridge TV comme sa télécommande : pavé directionnel, OK, Retour, Accueil, Menu, Info, lecture/pause/stop, ±10 s, précédent/suivant, volume/muet, CH±, chiffres, clavier (texte tapé dans le champ sélectionné de la TV), pavé tactile (glisser = flèches, toucher = OK, appui long = OK long).
 
-- **Téléphone** : onglet « CastBridge TV » › tuile **Télécommande**, bouton télécommande de la carte « Sur la TV » et de la feuille de lecture, tuile Paramètres rapides « Télécommande TV » (facultatif, à ajouter soi-même au panneau). Pendant que l'écran est ouvert, les **boutons de volume du téléphone** règlent la TV (option du menu ⋮). Vibration à chaque touche (option).
+- **Téléphone** : onglet « CastBridge TV » › tuile **Télécommande**, bouton télécommande de la carte « Sur la TV » et de la feuille de lecture, tuile Paramètres rapides « Télécommande TV » (facultatif, à ajouter soi-même au panneau). Pendant que l'écran est ouvert, les **boutons de volume du téléphone** règlent la TV (option du menu ⋮). Vibration à chaque touche (option). Bouton **« Ouvrir sur la TV »**, touche **« TV »** et raccourci de l'icône : voir « Ouvrir CastBridge-TV depuis le téléphone » plus bas.
 - **TV** : tuile d'accueil « Télécommande » = écran d'aide, avec l'activation pas à pas du mode « toute la TV ».
 
 ## Ce qu'Android permet, et ce qu'il ne permet pas
@@ -35,6 +35,8 @@ Une application normale **ne peut pas injecter de touches dans les autres applic
 | `GET /api/remote/state` | écran au premier plan, champ de saisie sélectionné, accessibilité activée/connectée, volume, muet |
 | `POST /api/remote/ping` | maintien de la liaison / mesure de latence |
 | `POST /api/remote/system/setup` | affiche l'aide « toute la TV » sur la TV |
+| `POST /api/tv/open[?screen=home\|library\|player\|games\|quiz]` (corps facultatif `{"screen":"library"}`) | **ouvre CastBridge-TV devant les autres applications** (section ci-dessous) ; PIN ou jeton de téléphone de confiance ; ouverte aussi à l'édition d'essai |
+| `POST open[?screen=…]` sur le canal Bluetooth CBTR (= `POST /api/remote/open`) | la même action sans réseau commun |
 
 Liste blanche (`castbridge.core.remote.RemoteKey`) : `DPAD_UP/DOWN/LEFT/RIGHT/CENTER` (alias `UP`, `OK`…), `BACK`, `MENU`, `HOME`, `PLAY_PAUSE`, `PLAY`, `PAUSE`, `STOP`, `NEXT`, `PREVIOUS`, `REWIND`, `FAST_FORWARD`, `VOLUME_UP/DOWN/MUTE`, `CHANNEL_UP/DOWN`, `INFO`, `CAPTIONS`, `AUDIO_TRACK`, `GUIDE`, `ENTER`, `DEL`, `0`–`9`. Tout le reste (POWER, SLEEP, codes numériques…) : 400.
 
@@ -42,6 +44,60 @@ Liste blanche (`castbridge.core.remote.RemoteKey`) : `DPAD_UP/DOWN/LEFT/RIGHT/CE
 - **Pas de doublon, pas de perte** : chaque événement porte `sid` (session du téléphone) et `seq` ; le téléphone renvoie après une reconnexion ce qui n'a pas reçu de réponse, la TV ignore un numéro déjà appliqué. Un appui vieux de plus de 3 s n'est pas rejoué (un « OK » en retard serait une surprise) ; un relâchement l'est toujours.
 - **Latence** : une seule connexion TCP ouverte (HTTP/1.1 keep-alive, `TCP_NODELAY`), un ping toutes les 3 s la garde chaude (la TV ferme les connexions inactives après 15 s). Côté TV, la touche passe devant le travail d'affichage en file (dans l'ordre) et la réponse n'attend pas plus de 150 ms un écran occupé.
 - **Sans réseau commun** : secours **Bluetooth** (TV appairée, choisi dans « Choisir la TV »). Le service Bluetooth de fichiers de la TV accepte `"CBTR" + code`, puis une requête par ligne (`POST key?code=…\n` → `200 {…}\n`), mêmes routes. Pendant une session Bluetooth de télécommande, les envois de fichiers par Bluetooth attendent. Sans Wi-Fi ni secours choisi, le téléphone affiche « Télécommande indisponible : la TV ne répond pas sur le réseau… ».
+
+## Ouvrir CastBridge-TV depuis le téléphone
+
+Comme la touche YouTube ou Netflix d'une télécommande : **un geste sur le téléphone fait apparaître CastBridge-TV au premier plan de la TV**, même si une autre application (YouTube…) est devant, et la ligne affichée dit clairement quoi faire si la TV ne répond pas. Code : cœur pur et testé `core/…/tv/OpenTv.kt` (`OpenTvPlan`, `OpenTvReply`, `OverlayOfferPolicy`) et `core/…/remote/OpenTvFlow.kt` (`OpenTvFlow`, `OpenTvHttpLink`, `OpenTvTexts`) ; branchement Android `receiver/…/TvForeground.kt` (TV) et `sender/…/OpenTv.kt`, `OpenTvUi.kt` (téléphone).
+
+### Les gestes (téléphone CastBridge)
+
+- **Bouton « Ouvrir sur la TV »** (icône TV) en tête de l'onglet « CastBridge TV ». Si CastBridge-TV est déjà au premier plan, le bouton **ouvre la télécommande** (rien n'est touché sur la TV : une vidéo qui joue n'est jamais interrompue).
+- **Touche « TV »** dans la rangée système de la télécommande (Retour, Accueil, Menu, Info, Clavier, TV), ronde comme les autres ; elle n'existe pas quand « Ma TV » pilote une autre marque que CastBridge-TV.
+- **Raccourci d'application** : appui long sur l'icône de CastBridge › « Ouvrir CastBridge-TV » (`res/xml/shortcuts.xml`).
+- **Lien** `castbridge://open-tv[?screen=library]`, traité par `MainActivity` (même action ; un message court dit le résultat). Il n'est volontairement **pas** « BROWSABLE » (une page web ne peut pas faire apparaître la TV) et une seconde demande dans les 2 s est ignorée.
+
+### Ce que dit le téléphone : une ligne, 10 s d'attente au plus, aucun réessai sans fin
+
+Le téléphone cherche la TV (téléphone de confiance, sinon TV connue par son code), essaie les voies **Wi-Fi, puis Bluetooth, puis tunnel de l'API** (une seule tentative par voie, la TV qui répond a le dernier mot), et rend UNE ligne (`OpenTvFlow`, testé avec de fausses liaisons et une fausse horloge : au plus 10 s en tout, chaque voie reçoit ce qui reste).
+
+| Situation | Ligne |
+|---|---|
+| CastBridge-TV est devant (ouvert ou déjà là) | « CastBridge-TV est à l'écran » |
+| la TV a besoin de l'autorisation « par-dessus » | « La TV demande une autorisation : MENU › Afficher par-dessus » |
+| une notification attend sur la TV | « La TV affiche une notification « CastBridge-TV » : validez-la avec la télécommande de la TV » |
+| aucune voie ne répond | « La TV ne répond pas : allumez-la (le Wi-Fi ou le Bluetooth de la TV est éteint) » |
+| aucune TV associée | « Aucune TV n'est associée : touchez « Ajouter ma TV »… » |
+| le téléphone n'a aucune voie (Bluetooth éteint, autorisation refusée) | la raison, côté téléphone |
+| la TV ne reconnaît pas le téléphone (jeton expiré, code inconnu) | « La TV ne reconnaît pas ce téléphone : réassociez-la… ou saisissez son code » (jamais un code inutilisable envoyé : la TV le compterait comme faux) |
+| TV plus ancienne que la route | « Cette TV ne connaît pas encore ce raccourci : mettez CastBridge-TV à jour » |
+
+### Côté TV : `POST /api/tv/open`
+
+PIN ou jeton, comme les autres routes de la télécommande. Corps facultatif (`Content-Type: application/json`, 1 Kio au plus) ou paramètre `?screen=` (le paramètre l'emporte) : `home` (accueil, quitte la vidéo), `library`, `player` (l'écran tel qu'il est), `games`, `quiz` ; sans écran, CastBridge-TV revient tel qu'il était. Écran inconnu : 400. Sur l'édition d'essai, `library` devient `home` et `quiz` devient `games` (leurs tuiles sont fermées). Réponse **200 dans tous les cas où la TV a répondu** :
+
+```json
+{"opened":true,"how":"direct|fullscreen|accessibility","needs":null}
+{"opened":true,"already":true,"how":"already","needs":null}
+{"opened":false,"how":"fullscreen|none","needs":"overlay"}
+```
+
+`already` : un écran de CastBridge-TV est déjà devant, **rien n'est touché**. Sinon la TV essaie, dans l'ordre (règle pure `OpenTvPlan`), en **vérifiant après chaque essai** que l'écran est vraiment là (sous Android 10+, un démarrage bloqué ne lève aucune erreur) :
+
+1. **direct** (`direct`) : `startActivity` NEW_TASK | CLEAR_TOP, possible avec l'autorisation « Afficher par-dessus les autres applications » (`SYSTEM_ALERT_WINDOW`, déjà déclarée côté TV) ou avant Android 10 ; attend 2 s au plus ;
+2. **notification** (`fullscreen`) : la notification du canal « Demandes du téléphone » (celui de la lecture demandée à distance), avec l'intention plein écran si Android l'autorise (`canUseFullScreenIntent`), sinon une notification qu'on ouvre avec la télécommande ; attend 0,8 s ; retirée si l'écran est venu par une autre voie ;
+3. **accessibilité** (`accessibility`) : le service « CastBridge Télécommande » s'il est actif (Android l'autorise à démarrer un écran depuis l'arrière-plan) ; attend 2 s au plus.
+
+Au pire 4,8 s côté TV. `needs:"overlay"` : rien n'a ouvert l'écran **et** l'autorisation « par-dessus » règlerait le problème **et** l'écran de réglage existe sur ce boîtier. Alors la TV propose **UNE fois**, dans son MENU, la ligne « **Autoriser CastBridge-TV à s'afficher par-dessus les autres applications** » (ouvre `ACTION_MANAGE_OVERLAY_PERMISSION` depuis l'écran visible, comme la ligne d'exemption de batterie) ; choisie (accord ou refus), elle ne revient plus : le refus est mémorisé, aucune boucle. La ligne permanente « Lecture à distance : autoriser l'affichage par-dessus les autres apps » reste. Sur un boîtier sans cet écran (GaiaOS, à confirmer), la TV ne promet rien : `needs` reste vide et le téléphone dit d'ouvrir CastBridge-TV avec la télécommande de la TV (ou d'activer le mode « toute la TV » une fois, qui permet l'ouverture directe par l'accessibilité).
+
+### Limites
+
+- **Aucun allumage de la TV.** Une TV éteinte ne répond ni en Wi-Fi ni en Bluetooth : la ligne dit de l'allumer. Ni HDMI-CEC (la commande « One Touch Play » passe par la permission système `HDMI_CEC`, réservée aux applications du fabricant : impossible sans droits système), ni **Wake-on-LAN** (l'adresse MAC d'un autre appareil n'est plus lisible depuis Android 10, et beaucoup de TV n'écoutent rien en veille).
+- Une TV en veille profonde n'a plus de service qui tourne (voir `docs/ADMIN.md`) : même ligne.
+- Sans l'autorisation « par-dessus » ni l'accessibilité, Android 10+ ne laisse qu'une notification à ouvrir avec la télécommande de la TV : le téléphone le dit.
+- Android durcit peu à peu les démarrages d'écran depuis l'arrière-plan (d'après la documentation d'Android 15, l'autorisation « par-dessus » seule ne suffirait plus sans fenêtre visible : à confirmer sur une TV) : c'est pourquoi **chaque essai est vérifié** avant de passer au suivant, au lieu de supposer qu'une voie marche parce qu'elle est autorisée.
+- À vérifier sur la TV : le démarrage d'écran par le service d'accessibilité (voie 3) n'a pas été essayé ; la TV de référence (GaiaOS, Android 14) dira laquelle des trois voies ouvre réellement CastBridge-TV devant YouTube.
+- Le téléphone ne demande **aucune permission de plus** (le Bluetooth est celui du reste de l'application) ; `SYSTEM_ALERT_WINDOW` n'est déclarée que côté TV et proposée une seule fois.
+- Pas encore mesuré sur une vraie TV : voir le parcours P-89 (`docs/test-plans/PARCOURS-CRITIQUES.md`).
 
 ## Télécommande en arrière-plan (téléphone)
 `RemoteService` (service de premier plan `connectedDevice`) garde le lien de `RemoteController` quand l'application n'est plus au premier plan ou que l'écran est éteint :

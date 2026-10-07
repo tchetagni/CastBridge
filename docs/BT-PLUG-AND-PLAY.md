@@ -70,6 +70,12 @@ Chaque état a un titre et une explication stables, **une** action, et une règl
 - HELLO réponse d'erreur à un pair appairé qui a envoyé un id : un octet d'indice de plus (`0` inconnu, `1` autre installation → « TV réinitialisée », `2` même installation → « Téléphone retiré »). Un pair non appairé n'apprend rien (indice 0). Une ancienne TV ferme après l'octet d'état : le téléphone n'attend pas l'indice.
 - « Réassocier » (un seul toucher) : oublie la TV localement, ouvre « Ajouter ma TV » qui lance seul tout le parcours (association Android si besoin, attente que le propriétaire ouvre « Ajouter un téléphone », nouveau HELLO avec demande de confiance). Les codes `ERR_*` et CBT1/CBTN/CBTR sont inchangés.
 
+## Tuyau Internet à la demande (additif, relay-R1, `docs/REMOTE-TUNNEL-TV.md` § 5)
+- **Capacité du téléphone** : bit 4 des drapeaux du HELLO requête (`HELLO_RELAY`). Une ancienne TV ne lit que les bits 0 et 1 ; une TV à jour garde, en mémoire, « ce téléphone sait / ne sait pas » (un téléphone qui n'a jamais le bit est « ancien » : « Mettez CastBridge à jour pour l'Internet par relais »).
+- **Demande de la TV** : ligne `pipe=1` dans la réponse OK du HELLO (absente quand la TV ne demande rien : les octets d'avant) ; en-tête `X-CB-Pipe: 1` de `GET /api/info` pour le garde-vivant du Wi-Fi ; le drapeau retombe dès qu'un téléphone est attaché.
+- **Canal propriétaire** (service `…0005`, types libres 11-15) : le téléphone envoie `RELAY_STATE` (12 : `v=1`, `state=idle|opening|open|refused`, `why`, `metered`, `left`), la TV répond `RELAY_ASK_PIPE` (11 : `v=1`, `need=play,wallet,update,assist`, `ttl`) ou `RESULT(1)`. Seul un téléphone synchronisé et toujours appairé est écouté (adresse de la liaison appairée) ; une TV ancienne, une TV sans relais ou un pair inconnu répondent la même chose (« Non pris en charge par cette TV »).
+- **Réveil** : la TV ne peut pas parler à un CastBridge qui n'écoute pas ; elle frappe à sa porte (tentative de connexion Bluetooth vers le service du canal propriétaire, qui échoue après la recherche de service mais ouvre la liaison de base), ce qui déclenche chez le téléphone la diffusion « appareil connecté » que CastBridge reçoit même fermé ; il vient alors lire la demande. Non vérifié sur appareil.
+
 ## Association Bluetooth périmée
 - Détection : liaison fermée presque aussitôt (< 3 s) après acceptation, 3 fois de suite sur un téléphone appairé (une TV éteinte, elle, fait attendre ~10 s), ou « inconnu » sur une association que la TV n'a plus.
 - Pas de `removeBond()` (peu fiable sous Android 14) : lien vers les réglages Bluetooth (`ACTION_BLUETOOTH_SETTINGS`) avec la consigne « Oublier / Dissocier ». L'app suit les diffusions `BOND_STATE_CHANGED` (et sonde), voit l'association disparaître, la recrée seule (`createBond`), attend la validation, puis reprend le parcours. Si l'association est supprimée puis recréée et que la TV refuse encore, le parcours s'arrête avec la même action unique (pas de boucle).
@@ -135,6 +141,30 @@ Défaut mesuré (S21+ Android 15 ↔ TV 0.13.3, Wi-Fi du téléphone coupé) : u
 - **Diagnostic** (« Passerelle Bluetooth » du téléphone) : liaisons ouvertes, ouvertures depuis le début, « liaison partagée » / « TV ancienne », dernière fermeture (motif en français). Côté TV : `GET /api/bluetooth/tunnel` gagne `sharedLinks`, `sharedListening`, `lastClose`.
 - Tests JVM : `BtMuxTunnelTest` (faux transport RFCOMM : ouverture lente, `already opened`, 3 échecs puis pause, coupure en pleine réponse, 4 requêtes simultanées, TV qui ferme à 30 s (mise à l'échelle), garde-vivant, TV ancienne, téléphone ancien, gros fichier + petite requête en parallèle).
 - **À valider sur matériel** : que le S21+ ouvre bien le service v2 sans « already opened » ; la durée réelle de libération d'une liaison (1,5 s suffit-il ?) ; que 15 s de PING évite la fermeture à 30 s ; la télécommande sur Bluetooth seul (latence, reprise). Résultat dans le cloud : `BtMuxTunnelTest` 12/12 et `BtApiTunnelTest` 12/12 verts (le `gradle :core:test` complet n'a pas pu être lancé : `kotlin-test` non téléchargeable (429) ; tests compilés avec le compilateur Kotlin et un mini-shim `kotlin.test`). Code Android (`BtSshGateway.kt`, `BtApiControl.kt`, `RemoteController.kt`) non compilé dans le cloud.
+
+
+## Service « CastBridge Internet » (passerelle) et numéros de services (R-28)
+Constat de l'inventaire du relais (I-1) : la passerelle Internet (« Partager l'Internet du téléphone », protocole CBG1) et le tunnel SSH étaient sur le **même UUID `…0002`**. La TV
+démarrait les deux (la passerelle à chaque démarrage, le SSH quand il est activé) : un téléphone qui demandait l'un pouvait tomber sur l'autre. La documentation plaçait même la
+passerelle sur `…0001`. Désormais **une seule table** (`BtProtocol.SERVICES`, `C/tv/BtProtocol.kt`) : `…0001` fichiers et contrôle, `…0002` SSH, `…0003` API, `…0004` API v2, `…0005`
+propriétaire, `…0006` réservé (synchronisation W7, non codée), `…0007` **passerelle Internet** (nom SDP « CastBridge Internet »). Un nouveau service prend le numéro libre suivant **dans la
+table d'abord**.
+- **TV (`BtGatewayHost`).** Écoute toujours sur `…0007`. Elle écoute aussi sur l'ancien `…0002` (nom SDP « CastBridge Internet (ancien) »), **mais seulement tant que son SSH par
+  Bluetooth n'est pas voulu** : `SshControl` prévient la passerelle AVANT d'ouvrir son écoute (la passerelle ferme alors l'ancien service) et APRÈS l'avoir fermée (elle le rouvre) ; l'UUID
+  `…0002` n'a donc jamais deux propriétaires. Une liaison déjà acceptée n'est pas coupée. Règle pure : `GatewayService.tvListens`.
+- **Téléphone (`BtGatewayService`).** Demande `…0007` d'abord. Si cela échoue et que la TV n'annonce pas ce service (cache SDP d'Android), il attend **1,5 s** (la pile Bluetooth peut
+  tenir encore la tentative ratée) puis essaie l'ancien `…0002` ; si celui-ci répond, il retient « TV ancienne » **10 min** (même règle que le tunnel API v2) et va droit à `…0002`, puis
+  redemande `…0007` (une TV mise à jour a pu apparaître). Une TV qui annonce `…0007` n'est **jamais** interrogée sur `…0002` : sur une TV à jour, ce serait son SSH, qui recevrait le HELLO
+  et le PIN du téléphone. Règle pure : `GatewayService.PhoneChoice`.
+- **Limite connue.** Ancien téléphone + TV neuve + SSH par Bluetooth allumé : l'ancien téléphone tombe sur le tunnel SSH et échoue (« Liaison perdue… nouvel essai »). Il faut éteindre le SSH
+  ou mettre le téléphone à jour. Téléphone neuf + TV ancienne : comme avant (l'ancienne TV avait déjà la collision).
+- **Retrait.** Côté TV : après **deux versions publiées** de CastBridge-TV portant `…0007`, retirer les repères `R-28-LEGACY-TV` (l'écoute de l'ancien `…0002` dans `BtGatewayHost`, le crochet
+  `SshControl.onBluetoothBridge`, la branche héritée de `GatewayService.tvListens`). Côté téléphone : les repères `R-28-OLD-TV` (le repli de `GatewayService.PhoneChoice`) restent tant qu'il y a
+  des TV anciennes sur le terrain (les TV se mettent à jour à la main) ; le propriétaire décide.
+- Tests JVM : `BtServicesTest` (aucun doublon d'UUID ni de numéro, préfixe + numéro, constantes du code = table, aucun UUID écrit hors de la table, noms SDP présents dans le receiver),
+  `GatewayServiceTest` (TV : l'ancien UUID seulement SSH éteint ; téléphone : ordre, pause, mémoire, jamais l'ancien UUID pour une TV à jour, arrêt demandé).
+- **À valider sur matériel** : un téléphone neuf avec une TV ancienne (repli sur `…0002`, durée de l'échec de `…0007`) ; un ancien téléphone avec une TV neuve, SSH éteint puis allumé ; que
+  la pile du S21+ n'enregistre pas deux fois le même UUID pendant la bascule.
 
 ## Limites connues
 - API par Bluetooth active par défaut : un appareil appairé (donc approuvé à l'appairage sur la TV) qui connaît le PIN peut tout faire par ce canal, comme par le Wi-Fi ; couper l'interrupteur pour ne garder que les téléphones de confiance.

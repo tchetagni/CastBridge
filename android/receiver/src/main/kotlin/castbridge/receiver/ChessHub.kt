@@ -5,8 +5,11 @@ import android.content.Context
 import android.content.Intent
 import castbridge.core.chess.ChessHttp
 import castbridge.core.chess.ChessRoom
+import castbridge.core.games.RoomHttp
 import castbridge.core.tv.ApiReply
+import castbridge.core.tv.PublicRoutes
 import castbridge.core.tv.ReceiverServer
+import fi.iki.elonen.NanoHTTPD
 
 /**
  * The chess room of this TV (at most one), shared by [ChessActivity] (which opens and closes it) and the HTTP server
@@ -18,8 +21,17 @@ object ChessHub {
     @Volatile var room: ChessRoom? = null
         private set
 
-    /** Public routes (no PIN) for the TV's HTTP server: the online showcase while an Internet game is on, else the room of the house. */
-    val http = ChessHttp({ ChessOnlineHub.activeHost() ?: room })
+    /**
+     * Public routes (no PIN) for the TV's HTTP server: the online showcase while an Internet game is on, else the room of the house. Both are the games platform's [RoomHttp] (the home room through
+     * [ChessHttp], which only says what is chess); the showcase is served on the same `/chess` prefix with the same `ply` move parameter, and its `hello` says `"online":true`.
+     */
+    val http: PublicRoutes = object : PublicRoutes {
+        private val home = ChessHttp({ room })
+        private val online = RoomHttp("/chess", { ChessOnlineHub.activeHost() }, { ChessHttp.PAGE }, ChessRoom.PROTOCOL, "Aucune partie d'échecs ouverte sur la TV.",
+            helloExtra = ",\"online\":true", seqParam = "ply")
+        override val extraThreads: Int get() = home.extraThreads + online.extraThreads
+        override fun serve(s: NanoHTTPD.IHTTPSession): NanoHTTPD.Response? = if (ChessOnlineHub.activeHost() != null) online.serve(s) else home.serve(s)
+    }
 
     @Synchronized fun open(): ChessRoom {
         room?.close()
@@ -62,7 +74,7 @@ object ChessHub {
      */
     private fun statusJson(): String {
         val host = ChessOnlineHub.activeHost()
-        if (host != null) return """{"open":true,"code":"${host.code}","stage":"${host.stage}","players":${host.players().size},"online":false,"onlineGame":true,""" +
+        if (host != null) return """{"open":true,"code":"${host.code}","stage":"${host.roomStage}","players":${host.players().size},"online":false,"onlineGame":true,""" +
             """"url":${ReceiverServer.q(joinUrl(host.code) ?: "")}}"""
         val r = room?.takeIf { it.stage != ChessRoom.Stage.CLOSED } ?: return """{"open":false,"online":false,"onlineGame":false}"""
         return """{"open":true,"code":"${r.code}","stage":"${r.stage}","players":${r.players().size},"online":false,"onlineGame":false,""" +

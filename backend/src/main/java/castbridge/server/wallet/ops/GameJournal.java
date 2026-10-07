@@ -10,9 +10,9 @@ import org.springframework.stereotype.Service;
 
 /**
  * Le journal des parties avec mise (W22 § 5, games-G2) : une ligne par TV et par résultat réglé, écrite DANS la transaction du règlement (la garde de {@code JdbcLedger.post}) : jamais un règlement
- * sans sa ligne, jamais une ligne sans règlement. Il sert (1) aux plafonds de parties GAGNÉES par identité, relus au blocage d'une mise ; (2) à la surveillance des gains entre deux mêmes identités
- * (R-E9 : alerte, jamais de blocage automatique) ; (3) à l'audit (qui a joué qui, pour quelle mise, avec quelle issue). Il ne garde ni coup ni partie : le service de jeu les a, pas l'API. Aucune
- * écriture ailleurs que dans {@code wallet_game_log}.
+ * sans sa ligne, jamais une ligne sans règlement. Il sert (1) aux plafonds de parties GAGNÉES par identité, relus au blocage d'une mise ; (2) à la surveillance des gains répétés entre deux mêmes
+ * identités (R-E9) : la lecture {@code GET /api/v1/admin/wallet/games} la permet, une alerte AUTOMATIQUE n'est pas faite (jamais de blocage automatique) ; (3) à l'audit (qui a joué qui, pour quelle
+ * mise, avec quelle issue). Il ne garde ni coup ni partie : le service de jeu les a, pas l'API. Aucune écriture ailleurs que dans {@code wallet_game_log}.
  */
 @Service
 @WalletModuleConfig.Enabled

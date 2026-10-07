@@ -85,6 +85,21 @@ façon de jouer et parcours (10 par tableau). « Nouveau record » est célébr�
   2 par joueur. La salle se ferme en quittant le quiz ou après 10 min sans activité.
 - Côté PIN (app téléphone) : `GET /api/quiz` (salle ouverte ? code) et `POST /api/quiz/open` (ouvre le quiz sur la TV).
 
+## 4 bis. Partie Internet par le téléphone (relais, relay-R1)
+
+Une TV **sans Internet** peut jouer une « Partie Internet » si un téléphone **synchronisé** (PIN donné une fois : c'est le consentement) lui ouvre un tuyau Bluetooth (`docs/REMOTE-TUNNEL-TV.md` § 5). La TV compte comme **en ligne** dès que sa vérité réseau est `via_relay` (`castbridge.receiver.TvNet`, `core/connect/NetState.kt`) ; le téléphone n'est qu'un tuyau (la règle « aucun téléphone ne parle au service » tient : les joueurs de la maison jouent par leur TV, comme avant).
+
+- **Parcours** (P-83) : l'utilisateur ouvre « Partie Internet » ; sans Internet, la tuile reste proposée si un téléphone synchronisé existe ; la TV lui demande le tuyau (« Demande d'Internet au téléphone… »), le téléphone l'ouvre **sans question** (une seule notification neutre « CastBridge relaie pour <TV> »), la partie se joue (ticket `cbp1`, activation `cbx1` et preuve : inchangés), le tuyau se ferme 10 min après la fin. Aucun téléphone synchronisé : « Aucun téléphone n'est synchronisé avec la TV… » ; un CastBridge ancien : « Mettez CastBridge à jour pour l'Internet par relais » ; sur données mobiles : plafond de 5 Mo par jour, dit en clair quand il est atteint.
+- **Ce que la TV adapte** (règles pures `core/quiz/online/PlayRelayProfile.kt`, **aucune modification du protocole du service** : seulement l'en-tête informatif `X-CB-Via: relay` sur ses requêtes, sans autorité) :
+  - la **liaison est mesurée** par les trames PING de la passerelle et les compteurs d'octets (`RelayLinkMeter` : médiane des derniers PING, meilleur débit récent) ;
+  - la **fenêtre de réponse** des téléphones de la maison est allongée de la latence mesurée, **bornée à 1 s** : c'est exactement la grâce que le service accorde lui-même (`min(rtt, 1 s)`, `docs/PLAY-PROTOCOL.md` § Équité et latence) ; sans mesure, une latence supposée de 400 ms ;
+  - les **délais du transport** (connexion 10 s, réponse 20 s) grandissent avec la latence (`+4 × rtt` et `+8 × rtt`), bornés à 25 s et 45 s ;
+  - les **horodatages** restent ceux du serveur (règle 11 : jamais l'horloge de la TV) ; la **reprise** `resume{roomId, token, lastSeq}` d'une coupure de moins de 60 s ne coûte rien (la limite de 60 s est celle du service, `PlayTvSession.LOST_AFTER_MS`), avec une courbe de réouverture plus espacée (0, 3, 6, 12, 20, 30 s) ; pendant la coupure la TV continue de demander le tuyau ;
+  - **préchargement** : la connexion au service est ouverte (sondage `/play/.well-known/caps`) avant que l'utilisateur choisisse « Créer » ou « Rejoindre » ; la question suivante reste annoncée dans l'intervalle de 1 à 2 s du service ;
+  - la ligne « **Partie par relais : liaison lente** » est dite dans le bandeau, **sans alarme** (le bandeau reste « Partie sûre » ; une vraie coupure garde son orange ou son rouge) ; **aucune pénalité de classement** n'est liée au relais.
+- Les tâches de fond volumineuses de la TV (mise à jour de l'application, questions, lots de questions) **attendent** pendant une partie par relais (REL-F7).
+- Testé en JVM : `PlayRelayProfileTest` (règles et mesure), `RelayAuthorityWindowTest` (fenêtre des téléphones), `PlayHttpTransportViaRelayTest` (en-tête), `PlayGateRelayTest` (tuile), `ServerLinkBulkGateTest` (tâches de fond). **Non vérifié sur appareil** : la qualité réelle d'une partie par une liaison Bluetooth de référence (EDGE, 40 kbit/s), le temps d'ouverture du tuyau.
+
 ## 5. « Mise payante » : jetons virtuels seulement
 
 **Dans ce POC il n'y a aucun paiement ni argent réel** : pas d'intégration de paiement, aucune donnée bancaire ni Mobile

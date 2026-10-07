@@ -11,9 +11,15 @@ import java.net.Proxy
  * shared over Bluetooth (local SOCKS proxy 127.0.0.1:1080 of BtGatewayHost), only when the first path does not answer.
  * The path that worked through the gateway is tried first for [stickyMs] (no repeated time-outs on a TV without Wi-Fi).
  * Certificates are checked as usual on both paths (plain HttpURLConnection, no custom trust).
+ * relay-R1: [preferred] is the path the single truth ([NetState]) says works (null = no opinion: the order above applies): it goes first, whatever the sticky timer says;
+ * [onGatewayFailure] is told when a real call through the pipe fails (not an answer of the server), so that the TV can confirm the pipe once (no periodic probe through the phone);
+ * [onDirectFailure] the same for the TV's own network, so that it checks that network at once instead of waiting for the next probe (which is only every 5 minutes now).
  */
 class Routes(private val gateway: () -> Proxy? = { null }, private val clock: () -> Long = { System.currentTimeMillis() },
-             private val stickyMs: Long = 10 * 60_000L) {
+             private val stickyMs: Long = 10 * 60_000L,
+             private val preferred: () -> Via? = { null },
+             private val onGatewayFailure: () -> Unit = {},
+             private val onDirectFailure: () -> Unit = {}) {
     enum class Via(val key: String, val label: String) {
         DIRECT("direct", "réseau de l'appareil"), GATEWAY("passerelle", "passerelle Bluetooth du téléphone")
     }
@@ -30,26 +36,31 @@ class Routes(private val gateway: () -> Proxy? = { null }, private val clock: ()
      */
     fun <T> call(networkFailure: (T) -> Boolean = { false }, block: (Proxy?) -> T): T {
         val gw = runCatching { gateway() }.getOrNull()
-        val order = if (gw != null && clock() < gatewayUntil) listOf(Via.GATEWAY, Via.DIRECT) else listOf(Via.DIRECT, Via.GATEWAY)
+        val pref = runCatching { preferred() }.getOrNull()
+        val first = when { gw == null -> Via.DIRECT; pref != null -> pref; clock() < gatewayUntil -> Via.GATEWAY; else -> Via.DIRECT }
+        val order = if (first == Via.GATEWAY) listOf(Via.GATEWAY, Via.DIRECT) else listOf(Via.DIRECT, Via.GATEWAY)
         var error: IOException? = null
         var failed: Any? = NONE
         for (via in order) {
             val proxy = if (via == Via.GATEWAY) gw ?: continue else null
             try {
                 val r = block(proxy)
-                if (networkFailure(r)) { failed = r; continue }
+                if (networkFailure(r)) { failed = r; pathFailed(via); continue }
                 lastVia = via
                 gatewayUntil = if (via == Via.GATEWAY) clock() + stickyMs else 0
                 return r
             } catch (e: IOException) {
                 if (answered(e)) { lastVia = via; throw e }
                 error = e
+                pathFailed(via)
             }
         }
         @Suppress("UNCHECKED_CAST")
         if (failed !== NONE) return failed as T
         throw error ?: IOException("aucun réseau")
     }
+
+    private fun pathFailed(via: Via) { runCatching { if (via == Via.GATEWAY) onGatewayFailure() else onDirectFailure() } }
 
     private object NONE
 }

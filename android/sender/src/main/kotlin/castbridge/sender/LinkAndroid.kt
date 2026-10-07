@@ -88,6 +88,7 @@ class AndroidLinkEnv(private val ctx: Context, private val foregroundNow: () -> 
             c.connectTimeout = 1500; c.readTimeout = 1500
             TvCredential.apply(c, token)
             val code = c.responseCode
+            if (c.getHeaderField("X-CB-Pipe") == "1") RelayRuntime.onHintForBase(ctx, base)        // relay-R1: the TV wants an Internet pipe: go and read its request, the policy decides
             if (code == 401 && "bad token" in (c.errorStream?.use { it.readBytes() }?.decodeToString().orEmpty())) TokenCheck.TOKEN_REJECTED else TokenCheck.OK
         } finally { c.disconnect() }
     } catch (e: IOException) { TokenCheck.UNREACHABLE }

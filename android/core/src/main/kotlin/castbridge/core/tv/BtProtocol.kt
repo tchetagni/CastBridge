@@ -72,17 +72,60 @@ object BtProtocol {
      * reinstalled" from "this phone was removed from the TV"; only for a peer Android says is paired, and it only compares two random ids.
      */
     const val HELLO_HAS_INSTALL_ID = 2
+    /**
+     * Additive (relay-R1; older TVs read bits 0 and 1 only and ignore this one): "this phone understands the pipe on demand" (the TV asks for an Internet pipe through
+     * [HelloInfo.pipeWanted] and the owner channel, and the phone opens it by itself). A TV that sees synchronized phones WITHOUT this bit tells its owner to update CastBridge.
+     */
+    const val HELLO_RELAY = 4
     const val HINT_NONE = 0
     const val HINT_OTHER_INSTALL = 1
     const val HINT_SAME_INSTALL = 2
+    // ---------------------------------------------------------------- RFCOMM services: THE table
+    //
+    // A service = the CastBridge prefix + a two-digit number. A number is given ONCE, here ([SERVICES]); the test BtServicesTest forbids two services on one UUID (R-28: the
+    // SSH tunnel and the Internet gateway were both on …0002, so a phone asking for one could reach the other), a literal UUID of the prefix anywhere in the apps other than
+    // this file and OwnerFrames, and a service that is missing from the table. Documents: docs/ADMIN.md § 11, docs/BT-PLUG-AND-PLAY.md.
+    //
+    //   0001 files and control (CBT1, CBTN, CBTH, CBTP, CBTR)                  "CastBridge TV"       SERVICE_UUID
+    //   0002 SSH tunnel (raw SSH bytes)                                         "CastBridge SSH"      SSH_SERVICE_UUID
+    //   0003 HTTP API tunnel, one link per connection                           "CastBridge API"      API_SERVICE_UUID
+    //   0004 HTTP API tunnel, ONE shared link per phone (frames)                "CastBridge API v2"   API_MUX_SERVICE_UUID
+    //   0005 owner channel (CBTO: activation, signed orders)                    "CastBridge Owner"    castbridge.core.owner.OwnerFrames.SERVICE_UUID
+    //   0006 RESERVED: the synchronisation channel of W7 (designed, not built)  ([RESERVED_NUMBERS])
+    //   0007 Internet gateway (CBG1: SOCKS5 on the TV, exit on the phone)       "CastBridge Internet" GATEWAY_SERVICE_UUID (R-28: it used to share …0002 with the SSH tunnel)
+    //   0008 and up: free
+
     /** RFCOMM service UUID shared by the TV and the phone app. */
     const val SERVICE_UUID = "7c5e3b9a-4d2f-4c61-9b0e-cb0000000001"
-    /** Second RFCOMM service: a plain byte tunnel to the TV's SSH server (see castbridge.core.ssh.SshTunnel). */
+    /** Second RFCOMM service: a plain byte tunnel to the TV's SSH server (see castbridge.core.ssh.SshTunnel). Since R-28 it carries nothing else. */
     const val SSH_SERVICE_UUID = "7c5e3b9a-4d2f-4c61-9b0e-cb0000000002"
     /** Third RFCOMM service: a byte tunnel to the TV's own HTTP API (127.0.0.1:8765), see castbridge.core.tunnel.TcpTunnel and docs/ADMIN.md. */
     const val API_SERVICE_UUID = "7c5e3b9a-4d2f-4c61-9b0e-cb0000000003"
     /** Fourth RFCOMM service: the same HTTP API over ONE shared link per phone (frames, see castbridge.core.tunnel.MuxSession). The third service stays for old phones/TVs. */
     const val API_MUX_SERVICE_UUID = "7c5e3b9a-4d2f-4c61-9b0e-cb0000000004"
+    /**
+     * Seventh RFCOMM service: the Internet gateway (castbridge.core.gateway.Gw: the phone shares its connection with the TV). Until R-28 it was on [SSH_SERVICE_UUID]; see
+     * [castbridge.core.gateway.GatewayService] for how an old TV or an old phone still meets it there for two versions.
+     */
+    const val GATEWAY_SERVICE_UUID = "7c5e3b9a-4d2f-4c61-9b0e-cb0000000007"
+
+    /** One entry of [SERVICES]: [number] = the last two digits of the UUID, [sdpName] = the service name the TV registers with its UUID. */
+    class Service(val number: Int, val uuid: String, val sdpName: String, val use: String) {
+        override fun toString() = "…%04d %s (%s)".format(number, sdpName, use)
+    }
+
+    /** Every RFCOMM service that CastBridge-TV offers. A new service takes the next free number HERE first. */
+    val SERVICES: List<Service> = listOf(
+        Service(1, SERVICE_UUID, "CastBridge TV", "files and control CBT1/CBTN/CBTH/CBTP/CBTR"),
+        Service(2, SSH_SERVICE_UUID, "CastBridge SSH", "SSH tunnel"),
+        Service(3, API_SERVICE_UUID, "CastBridge API", "HTTP API tunnel, one link per connection"),
+        Service(4, API_MUX_SERVICE_UUID, "CastBridge API v2", "HTTP API tunnel, one shared link"),
+        Service(5, castbridge.core.owner.OwnerFrames.SERVICE_UUID, "CastBridge Owner", "owner channel CBTO"),
+        Service(7, GATEWAY_SERVICE_UUID, "CastBridge Internet", "Internet gateway CBG1"),
+    )
+
+    /** Numbers kept free on purpose (a design uses them, no code yet): 6 = the synchronisation channel of W7 (docs/coordination/DESIGN-W7-PLUG-AND-PLAY-SYNC.md). */
+    val RESERVED_NUMBERS: Set<Int> = setOf(6)
     const val OK = 0
     const val ERR_MAGIC = 1
     const val ERR_PIN = 2
@@ -155,6 +198,8 @@ object BtProtocol {
         remote: ((InputStream, OutputStream) -> Unit)? = null,
         /** Plug-and-play HELLO (CBTH); null = this TV does not offer it (ERR_MAGIC). Gets (peer address, phone asks to be trusted). */
         hello: ((peer: String, requestTrust: Boolean) -> HelloReply)? = null,
+        /** relay-R1: the whole flags byte of a HELLO with its peer (which capabilities the phone advertises, [HELLO_RELAY]); called before [hello]. */
+        helloFlags: ((peer: String, flags: Int) -> Unit)? = null,
         /** Is this peer (address proven by the paired link) a trusted phone? Then the PIN field is not checked. */
         trusted: ((String) -> Boolean)? = null,
         /** Reports of the parental control for a designated phone (CBTP); null = this TV does not offer it (ERR_MAGIC). */
@@ -178,6 +223,7 @@ object BtProtocol {
         if (m == HELLO && hello != null) {
             val flags = din.readUnsignedByte()
             val claimed = if (flags and HELLO_HAS_INSTALL_ID != 0) String(ByteArray(din.readUnsignedByte().coerceAtMost(MAX_INSTALL_ID)).also { din.readFully(it) }, Charsets.US_ASCII) else null
+            helloFlags?.let { runCatching { it(peer, flags) } }
             return when (val r = hello(peer, flags and HELLO_REQUEST_TRUST != 0)) {
                 is HelloReply.Err -> {
                     dout.writeByte(r.code)
@@ -289,7 +335,7 @@ object BtProtocol {
         val dout = DataOutputStream(output)
         val id = installId?.takeIf { it.isNotEmpty() && it.length <= MAX_INSTALL_ID && it.all { c -> c.code in 33..126 } }
         dout.write(HELLO.toByteArray(Charsets.US_ASCII))
-        dout.writeByte((if (requestTrust) HELLO_REQUEST_TRUST else 0) or (if (id != null) HELLO_HAS_INSTALL_ID else 0))
+        dout.writeByte((if (requestTrust) HELLO_REQUEST_TRUST else 0) or (if (id != null) HELLO_HAS_INSTALL_ID else 0) or HELLO_RELAY)
         if (id != null) { dout.writeByte(id.length); dout.write(id.toByteArray(Charsets.US_ASCII)) }
         dout.flush()
         val st = din.readUnsignedByte()
@@ -474,7 +520,9 @@ data class HelloInfo(val tvName: String, val version: String, val mdns: String?,
     /** Random id of this installation of CastBridge-TV (changes when the TV forgets its phones); null = a TV that predates it. */
     val installId: String? = null,
     /** How many phones this TV synchronizes with at most ([castbridge.core.trust.TrustRegistry.MAX_PHONES]); null = a TV that predates the cap (no limit known). Additive key, ignored by older phones. */
-    val maxPhones: Int? = null) {
+    val maxPhones: Int? = null,
+    /** relay-R1: the TV wants an Internet pipe right now (a live operation waits for Internet); the synchronized phone opens it by itself. Additive key `pipe=1`, absent when false, ignored by older phones. */
+    val pipeWanted: Boolean = false) {
     fun encode(): String = buildString {
         append("tv=").append(line(tvName)).append('\n')
         append("v=").append(line(version)).append('\n')
@@ -483,6 +531,7 @@ data class HelloInfo(val tvName: String, val version: String, val mdns: String?,
         append("token=").append(token).append('\n')
         if (installId != null) append("id=").append(installId).append('\n')
         if (maxPhones != null) append("maxphones=").append(maxPhones).append('\n')
+        if (pipeWanted) append("pipe=1\n")
         append(link.encode())
     }
 
@@ -498,7 +547,7 @@ data class HelloInfo(val tvName: String, val version: String, val mdns: String?,
             val name = if (kv["tv"].isNullOrBlank()) "TV" else castbridge.core.trust.PhoneName.sanitize(kv["tv"], 60)
             return HelloInfo(name, kv["v"].orEmpty().take(40), kv["mdns"]?.take(120), token,
                 kv["ttl"]?.toLongOrNull()?.coerceIn(60, 7 * 24 * 3600L) ?: 3600, LinkInfo.decode(s),
-                kv["id"]?.takeIf { INSTALL_ID.matches(it) }, kv["maxphones"]?.toIntOrNull()?.takeIf { it in 1..99 })
+                kv["id"]?.takeIf { INSTALL_ID.matches(it) }, kv["maxphones"]?.toIntOrNull()?.takeIf { it in 1..99 }, kv["pipe"] == "1")
         }
     }
 }

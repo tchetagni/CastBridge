@@ -45,6 +45,11 @@ object StakeKit {
 
     fun tempDir(): File = Files.createTempDirectory("castbridge-results-").toFile().also { it.deleteOnExit() }
 
+    /** Un fichier de clé « résultat » comme celui que le service monte en secret : la graine de [resultSigner] en Base64 (format lu par `ResultKey`). Pour les tests qui démarrent un VRAI [castbridge.play.PlayServer]. */
+    fun resultKeyFile(): File = Files.createTempFile("castbridge-result-key-", ".b64").toFile().also {
+        it.deleteOnExit(); it.writeText(Base64.getEncoder().encodeToString(seed("result")) + "\n")
+    }
+
     /** Les services de mise d'un hub de test : porte (clé publique de test), clé « résultat » de test, dépôt dans [dir]. */
     fun services(dir: File = tempDir(), maxNdem: Long = 1_000, maxMboko: Long = 100): StakeServices = StakeServices(EscrowGate(listOf(walletPub), maxNdem, maxMboko), resultSigner, ResultSpool(dir))
 }

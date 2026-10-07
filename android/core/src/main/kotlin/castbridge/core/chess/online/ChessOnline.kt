@@ -2,6 +2,7 @@ package castbridge.core.chess.online
 
 import castbridge.core.net.JsonLite
 import castbridge.core.quiz.online.HostEdition
+import castbridge.core.quiz.online.PlayRelay
 import castbridge.core.quiz.online.PlayRules
 import castbridge.core.quiz.online.StakeSpec
 import castbridge.core.wallet.WalletCurrency
@@ -42,12 +43,17 @@ object ChessOnlineGate {
     const val MSG_ACTIVATION_FILE = "Échecs en ligne : activez la TV avec le fichier d'activation"
     const val MSG_CHILD = "Profil enfant : les parties sur Internet sont fermées par le contrôle parental."
 
-    fun tile(flagOn: Boolean, edition: HostEdition, hasInternet: Boolean, childProfile: Boolean, clockDoubt: Boolean, caps: ChessServiceCaps?, serviceReachable: Boolean?, verifiableActivation: Boolean = true): ChessOnlineTile = when {
+    fun tile(flagOn: Boolean, edition: HostEdition, hasInternet: Boolean, childProfile: Boolean, clockDoubt: Boolean, caps: ChessServiceCaps?, serviceReachable: Boolean?, verifiableActivation: Boolean = true,
+             relay: PlayRelay = PlayRelay.UNKNOWN): ChessOnlineTile = when {
         !flagOn -> ChessOnlineTile.Hidden
         edition == HostEdition.NONE -> ChessOnlineTile.Blocked(PlayRules.MSG_ACTIVATE)
         !verifiableActivation -> ChessOnlineTile.Blocked(MSG_ACTIVATION_FILE)
         clockDoubt -> ChessOnlineTile.Blocked(castbridge.core.owner.TvAccess.CHECK_CLOCK_LABEL)
         childProfile -> ChessOnlineTile.Blocked(MSG_CHILD)
+        // relay-R1 : sans Internet, l'entrée reste proposée si un téléphone synchronisé peut ouvrir un tuyau (la TV le lui demandera à l'appui) ; sinon la raison est dite avec les mots du relais, comme le Quiz
+        !hasInternet && relay == PlayRelay.POSSIBLE -> ChessOnlineTile.Available
+        !hasInternet && relay == PlayRelay.NO_PHONE -> ChessOnlineTile.Blocked(castbridge.core.relay.RelayText.NO_PHONE)
+        !hasInternet && relay == PlayRelay.OLD_PHONE -> ChessOnlineTile.Blocked(castbridge.core.relay.RelayText.OLD_PHONE)
         !hasInternet -> ChessOnlineTile.Blocked(MSG_NO_INTERNET)
         serviceReachable == false -> ChessOnlineTile.Blocked(MSG_SERVICE_DOWN)
         caps != null && !caps.chess -> ChessOnlineTile.Blocked(MSG_NOT_OPEN)

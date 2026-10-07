@@ -15,6 +15,8 @@ import android.widget.HorizontalScrollView
 import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.TextView
+import castbridge.core.games.GameCatalog
+import castbridge.core.games.RoomStage
 import castbridge.core.quiz.HighScores
 import castbridge.core.tv.ApiReply
 import castbridge.core.tv.ReceiverServer
@@ -36,6 +38,8 @@ class GameDef(
     /** State line ("Meilleur score : 120", "Partie en cours"), read each time the hub is shown. */
     val status: (Context) -> String,
     val launch: (Activity) -> Unit,
+    /** « Bientôt » : the rules are still to be given by the owner (docs/GAMES.md). Shown in the hub, never launched, not counted in the home tile. */
+    val soon: Boolean = false,
 )
 
 object Games {
@@ -55,7 +59,20 @@ object Games {
             "Grilles à solution unique, de Facile à Expert.", GamesColors.SUDOKU,
             { c -> SudokuStore(c).statusLine() },
             { a -> a.startActivity(Intent(a, SudokuActivity::class.java)) }),
+        // Jeux de cartes sur la plateforme commune (docs/GAMES.md) : la Bataille est une démonstration ; Fap-Fap et Agraham Tia attendent leurs règles (rien n'est inventé, rien ne se lance)
+        cardGame(GameCatalog.BATAILLE),
+        cardGame(GameCatalog.FAP_FAP),
+        cardGame(GameCatalog.AGRAHAM_TIA),
     )
+
+    /** The hub card of a game of the shared catalog: playable ones open [GameActivity], the others are « bientôt » (not launchable). */
+    private fun cardGame(e: GameCatalog.Entry) = GameDef(e.id, R.drawable.ic_t_cards, e.name, e.modes, e.blurb, GamesColors.CARDS,
+        { _ -> if (e.playable && GameRoomHost.room?.takeIf { it.rules.id == e.id }?.roomStage.let { it != null && it != RoomStage.CLOSED }) "Partie en cours" else e.status },
+        { a -> if (e.playable) a.startActivity(Intent(a, GameActivity::class.java).putExtra(GameActivity.EXTRA_GAME, e.id)) },
+        soon = !e.playable)
+
+    /** How many games the home tile counts (« 4 jeux »): the playable ones; the « bientôt » cards are on the hub but are not yet games. */
+    fun playableCount(): Int = visible().count { !it.soon }
 
     fun byId(id: String?) = all.firstOrNull { it.id == id }
 
@@ -67,6 +84,7 @@ object Games {
 
     /** Launches [game] from a foreground [activity], counting it in the usage statistics (only with the user's consent). */
     fun open(activity: Activity, game: GameDef, source: String) {
+        if (game.soon) return                       // « bientôt » : pas de règles, rien à lancer (et rien à compter)
         TvConnect.feature(game.id, source)
         game.launch(activity)
     }
@@ -79,11 +97,15 @@ object GamesHub {
 
     fun api(activity: Activity?, ctx: Context, path: String, method: String, params: Map<String, String>): ApiReply? = when {
         path == "/api/games" && method == "GET" -> ApiReply(200, json(ctx))
+        // the room of a card game (code + the address of its web page), for the phone app: PIN protected like the rest of /api
+        path == "/api/games/room" && method == "GET" -> ApiReply(200, GameRoomHost.roomJson(params["game"]))
+        // the last signed game journals (bounded, in memory, no hand in them): docs/GAMES.md
+        path == "/api/games/journals" && method == "GET" -> ApiReply(200, GameRoomHost.journalsJson(params["id"]))
         path == "/api/games/open" && method == "POST" -> {
             val a = activity ?: foreground
             if (a == null) ApiReply(409, "{\"error\":\"Ouvrez CastBridge TV sur la TV, puis réessayez\",\"needsForeground\":true}")
             else {
-                val g = Games.byId(params["game"])?.takeIf { it in Games.visible() }   // the trial opens the Sudoku only
+                val g = Games.byId(params["game"])?.takeIf { it in Games.visible() && !it.soon }   // the trial opens the Sudoku only; « bientôt » games open nothing
                 TvConnect.feature(g?.id ?: "games", "phone")
                 a.runOnUiThread {
                     runCatching { if (g != null) g.launch(a) else a.startActivity(Intent(a, GamesActivity::class.java).addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)) }
@@ -95,7 +117,7 @@ object GamesHub {
     }
 
     private fun json(ctx: Context): String = "{\"games\":[" + Games.visible().joinToString(",") { g ->
-        "{\"id\":${ReceiverServer.q(g.id)},\"name\":${ReceiverServer.q(g.name)},\"status\":${ReceiverServer.q(g.status(ctx))}}"
+        "{\"id\":${ReceiverServer.q(g.id)},\"name\":${ReceiverServer.q(g.name)},\"status\":${ReceiverServer.q(g.status(ctx))},\"soon\":${g.soon}}"
     } + "]}"
 }
 
@@ -150,7 +172,9 @@ class GamesActivity : Activity() {
             setPadding(pad, pad, pad, pad)
             background = dx.focusable(GamesColors.SURFACE, GamesColors.SURFACE_HIGH, 32)
             gravity = Gravity.START
+            if (g.soon) alpha = 0.7f                       // « bientôt » : visible mais pas jouable
             setOnClickListener {
+                if (g.soon) { android.widget.Toast.makeText(this@GamesActivity, GameCatalog.SOON, android.widget.Toast.LENGTH_LONG).show(); return@setOnClickListener }
                 getSharedPreferences("castbridge_games", MODE_PRIVATE).edit().putString("last", g.id).apply()
                 Games.open(this@GamesActivity, g, "menu")
             }

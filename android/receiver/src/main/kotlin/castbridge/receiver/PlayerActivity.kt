@@ -140,6 +140,7 @@ class PlayerActivity : Activity(), TvService.Screen {
         s.attach(this)                                       // may run a play request that arrived while the screen was closed
         requestRuntimePermissions()
         if (current == null && libScreen?.visible != true) showHome()
+        openLibraryIfAsked(intent)
     }
 
     /** « Accueil » of the phone remote (RemoteHub): leave the video / library / other screen for the home. */
@@ -147,6 +148,15 @@ class PlayerActivity : Activity(), TvService.Screen {
         super.onNewIntent(intent)
         setIntent(intent)
         if (intent.getBooleanExtra(RemoteHub.EXTRA_HOME, false)) { if (current != null) stop() else showHome() }
+        openLibraryIfAsked(intent)
+    }
+
+    /** « Ouvrir CastBridge-TV » du téléphone avec l'écran « library » (TvForeground) : la bibliothèque, à l'arrivée de l'intention comme à la création de l'écran. */
+    private fun openLibraryIfAsked(i: Intent) {
+        if (!i.getBooleanExtra(TvForeground.EXTRA_LIBRARY, false)) return
+        i.removeExtra(TvForeground.EXTRA_LIBRARY)
+        if (current != null) stop()
+        showLibrary()
     }
 
     override fun onResume() {
@@ -208,6 +218,9 @@ class PlayerActivity : Activity(), TvService.Screen {
             .setView(android.widget.ScrollView(this).apply { addView(tv); setBackgroundColor(TvStyle.BG_ELEVATED) })
             .setPositiveButton("Fermer", null)
             .setNeutralButton("Lire les conditions…") { _, _ -> showTermsDialog() }
+        // relay-R1 : une demande EXPLICITE d'assistance sans Internet : un téléphone synchronisé ouvre un tuyau (jamais en tâche de fond : le tunnel permanent ne réveille aucun téléphone)
+        if (TunnelHub.termsAccepted(this) && TunnelHub.state() != castbridge.core.tunnel.TunnelState.UP && !TvNet.state().up)
+            b.setNegativeButton("Se connecter maintenant") { _, _ -> TvNet.need(castbridge.core.relay.PipeNeed.ASSIST, force = true); TunnelHub.poke(); flash(castbridge.core.relay.RelayText.ASKING) }
         b.show()
     }
 
@@ -492,7 +505,8 @@ class PlayerActivity : Activity(), TvService.Screen {
             val s = server
             // ONE source for every path (Wi-Fi, Wi-Fi multivoie, Bluetooth), held by the service (independent of the HTTP server): castbridge.core.xfer.ReceiveCards
             val cards = castbridge.core.xfer.ReceiveCards.of(svc?.reception?.shown().orEmpty(), s?.receiving().orEmpty(), s != null)
-            return Triple(castbridge.core.xfer.ReceiveCards.ready(s != null), ParentalHub.shownPin(pin), castbridge.core.xfer.ReceiveCards.headline(cards))
+            // a transfer in progress tells more than anything; otherwise, on a trial / grace TV, the line of a USB key that carries an activation (UsbActivationWatch: only when a file « activation » was really seen)
+            return Triple(castbridge.core.xfer.ReceiveCards.ready(s != null), ParentalHub.shownPin(pin), castbridge.core.xfer.ReceiveCards.headline(cards) ?: UsbActivationWatch.homeLine())
         }
         override fun signal() = castbridge.core.ux.TvSignal.of(TvSignalViews.facts(this@PlayerActivity, svc, server != null))
         override fun open(i: castbridge.core.tv.LibraryItem, row: List<castbridge.core.tv.LibraryItem>, index: Int) { libScreen?.open(i, row, index) }
@@ -587,7 +601,7 @@ class PlayerActivity : Activity(), TvService.Screen {
         val drives = s?.registry?.let { r -> runCatching { r.volumes().filter { it.kind == castbridge.core.tv.VolumeKind.REMOVABLE } }.getOrNull() }.orEmpty()
         val btOk = st["1-bt"]?.contains("prêt") == true || st["1-bt"]?.contains("réception") == true
         val net = st["6-gw"]
-        val internetUp = s?.let { it.netDirectMs != null || it.netGatewayMs != null || it.netCheckedAt == 0L } != false
+        val internetUp = TvNet.reachable()      // relay-R1 : la vérité réseau unique de la TV (castbridge.receiver.TvNet), la même que le portefeuille, le jeu, « Langues » et le tunnel
         val wdOn = prefs.getBool("wd_enabled", false)
         val sshOn = ssh?.running == true
         val upgrade = if (ActivationCenter.trial()) listOf(
@@ -618,7 +632,7 @@ class PlayerActivity : Activity(), TvService.Screen {
                 startActivity(Intent(this, LanguesActivity::class.java))
             },
             // Quiz, Échecs and Sudoku live in the « Jeux » hub (docs/GAMES.md); their public URLs (/quiz, /chess) are unchanged.
-            tile("games", R.drawable.ic_t_games, "Jeux", "Quiz des Millions, Échecs et Sudoku, en solo ou avec les téléphones.", Games.visible().size.let { n -> if (n > 1) "$n jeux" else "$n jeu" }, true) {
+            tile("games", R.drawable.ic_t_games, "Jeux", "Quiz des Millions, Échecs et Sudoku, en solo ou avec les téléphones.", Games.playableCount().let { n -> if (n > 1) "$n jeux" else "$n jeu" }, true) {
                 startActivity(Intent(this, GamesActivity::class.java))
             },
             tile("downloads", R.drawable.ic_cb_telechargements, "Téléchargements", "Télécharger sur la TV (liens, magnet, torrent) : les fichiers rejoignent la bibliothèque.",
@@ -648,7 +662,7 @@ class PlayerActivity : Activity(), TvService.Screen {
             },
             tile("internet", R.drawable.ic_cb_test_internet, "Internet", "Connectivité de la TV (Wi-Fi/Ethernet) et de la passerelle Bluetooth du téléphone : état et tests.",
                 s?.takeIf { it.netCheckedAt > 0 }?.netSummary()?.take(34) ?: "Vérification…",
-                s?.netDirectMs != null || s?.netGatewayMs != null) { internetMenu() },
+                TvNet.state().up) { internetMenu() },
             tile("wifi_direct", R.drawable.ic_cb_wifi_direct, "Wi-Fi Direct", "Un réseau direct TV ↔ téléphone, sans box.", if (wdOn) "Activé" else "Désactivé", wdOn) { toggleWifiDirect() },
             tile("admin", R.drawable.ic_cb_administration, "Administration", "Page web et SSH pour gérer la TV à distance.",
                 if (sshOn) "SSH actif" else "SSH arrêté", sshOn) {
@@ -681,7 +695,7 @@ class PlayerActivity : Activity(), TvService.Screen {
         val ip = TvService.localIp()
         val labels = mapOf("0-storage" to "Stockage", "1-bt" to "Bluetooth", "2-wd" to "Wi-Fi Direct (sans box)", "3-usb" to "Import depuis une clé",
             "4-ssh" to "Administration à distance (SSH)", "4-ssh-bt" to "SSH par Bluetooth", "4-api-bt" to "API par Bluetooth", "5-update" to "Installation d'applications",
-            "5-notice" to "Dernier événement", "9-server" to "Serveur", "1-phone" to "Téléphone connecté")
+            "5-notice" to "Dernier événement", "9-server" to "Serveur", "1-phone" to "Téléphone connecté", "6-relay" to "Internet par le téléphone")
         val sig = castbridge.core.ux.TvSignal.of(TvSignalViews.facts(this, s, server != null))
         val info = buildList {
             add("Signalétique : " + sig.text to (sig.action ?: castbridge.core.ux.TvSignal.LEGEND))
@@ -815,6 +829,10 @@ class PlayerActivity : Activity(), TvService.Screen {
         }
         BatteryExemption.offerIntent(this, prefs)?.let { i ->
             items += castbridge.core.tv.BatteryExemptionPolicy.LINE to { BatteryExemption.markAsked(prefs); runCatching { startActivity(i) }.onFailure { flash("Réglage indisponible sur cette TV") } }
+        }
+        // « Ouvrir CastBridge-TV » du téléphone n'a rien pu faire seul : cette ligne est proposée UNE fois (jamais de boucle ; refus mémorisé), l'écran de réglage est ouvert d'ici (GaiaOS ignore un lancement venu d'un fil HTTP)
+        TvForeground.overlayOffer(this, prefs)?.let { i ->
+            items += castbridge.core.tv.OverlayOfferPolicy.LINE to { TvForeground.markOverlayAsked(prefs); runCatching { startActivity(i) }.onFailure { flash("Réglage indisponible sur cette TV") } }
         }
         items += "Lecture à distance : autoriser l'affichage par-dessus les autres apps" + (if (s.overlayAllowed()) " (autorisé)" else "") to {
             s.openOverlaySettings(this)?.let { flash(it) }

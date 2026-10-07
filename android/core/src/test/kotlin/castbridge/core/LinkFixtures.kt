@@ -34,8 +34,11 @@ class FakeTv(val clock: FakeClock, val phone: String = "AA:BB:CC:DD:EE:01", val 
     private var limiterRef: AttemptLimiter? = null
     /** The 8-phone cap flow of this TV (null = a TV that predates it, or a test that does not use it). */
     var capacity: PairCapacityFlow? = null
+    /** relay-R1: the TV wants an Internet pipe (the flag of its HELLO answers); the flags byte of every HELLO it received. */
+    @Volatile var pipeWanted = false
+    val helloFlags = java.util.concurrent.CopyOnWriteArrayList<Int>()
     var handler = newHandler()
-    private fun newHandler() = HelloHandler(reg, pairing, { it in bonded }, { name }, "0.13", { "CastBridge TV Test" }, { LinkInfo(8765, lan) }, {}, limiterRef, capacity = capacity)
+    private fun newHandler() = HelloHandler(reg, pairing, { it in bonded }, { name }, "0.13", { "CastBridge TV Test" }, { LinkInfo(8765, lan) }, {}, limiterRef, capacity = capacity, pipeWanted = { pipeWanted })
 
     fun useLimiter(l: AttemptLimiter) { limiterRef = l; handler = newHandler() }
     /** Turns the 8-phone flow on (the registry's own cap is always on). */
@@ -61,7 +64,7 @@ class FakeTv(val clock: FakeClock, val phone: String = "AA:BB:CC:DD:EE:01", val 
         val dir = kotlin.io.path.createTempDirectory("faketv").toFile().also { it.deleteOnExit() }
         val h = handler; val r = reg; val b = bonded
         thread(isDaemon = true) {
-            try { BtProtocol.serve(dir, tvIn, s2c, PinGuard("482913"), peer, 0, hello = { p, req -> hellos++; h.handle(p, "Galaxy de test", req) }, trusted = { r.isTrusted(it) && it in b }) }
+            try { BtProtocol.serve(dir, tvIn, s2c, PinGuard("482913"), peer, 0, hello = { p, req -> hellos++; h.handle(p, "Galaxy de test", req) }, helloFlags = { _, f -> helloFlags += f }, trusted = { r.isTrusted(it) && it in b }) }
             catch (_: Exception) {} finally { runCatching { s2c.close() } }
         }
         return object : Link { override val input = clIn; override val output = c2s; override fun close() { runCatching { c2s.close() }; runCatching { clIn.close() } } }

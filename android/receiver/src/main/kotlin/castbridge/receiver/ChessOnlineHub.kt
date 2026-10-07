@@ -3,7 +3,7 @@ package castbridge.receiver
 import android.content.Context
 import android.content.SharedPreferences
 import castbridge.core.chess.ChessRelayClient
-import castbridge.core.chess.ChessRoom
+import castbridge.core.games.RoomStage
 import castbridge.core.chess.online.ChessOnlineGame
 import castbridge.core.chess.online.ChessOnlineGate
 import castbridge.core.chess.online.ChessOnlineTile
@@ -15,7 +15,7 @@ import castbridge.core.chess.online.PendingEscrow
 import castbridge.core.chess.online.SavedSeat
 import castbridge.core.chess.online.StakeAvailability
 import castbridge.core.net.JsonLite
-import castbridge.core.net.NetState
+import castbridge.core.quiz.online.PlayRelay
 import castbridge.core.quiz.online.StakeSpec
 import castbridge.core.wallet.WalletCurrency
 import castbridge.core.wallet.ui.EscrowDone
@@ -40,14 +40,18 @@ object ChessOnlineHub {
     @Volatile var game: ChessOnlineGame? = null; private set
 
     /** La vitrine des téléphones du foyer pendant la partie : les routes `/chess` de la TV la servent à la place de la salle maison. */
-    fun activeHost(): OnlineChessHost? = game?.host?.takeIf { it.stage != ChessRoom.Stage.CLOSED }
+    fun activeHost(): OnlineChessHost? = game?.host?.takeIf { it.roomStage != RoomStage.CLOSED }
 
     // ------------------------------------------------------------------ la porte et les mises permises
 
-    /** La tuile « En ligne » : l'interrupteur est celui du Quiz en ligne (réglages de la TV), la capacité vient du service lui-même ([PlayHub.chessCaps]). */
+    /**
+     * La tuile « En ligne » : l'interrupteur est celui du Quiz en ligne (réglages de la TV), la capacité vient du service lui-même ([PlayHub.chessCaps]) ; sans Internet elle reste proposée si un
+     * téléphone synchronisé peut en donner (relay-R1 : la TV compte comme EN LIGNE dès que son réseau est `via_relay`, le téléphone n'est qu'un tuyau).
+     */
     fun tile(ctx: Context): ChessOnlineTile = ChessOnlineGate.tile(
         flagOn = PlayHub.flagOn(ctx), edition = PlayHub.edition(), hasInternet = PlayHub.hasInternet(ctx), childProfile = ParentalHub.kidHomeActive(),
-        clockDoubt = ActivationCenter.clockSuspended(), caps = PlayHub.chessCaps, serviceReachable = PlayHub.serviceUp(), verifiableActivation = PlayHub.activationText() != null)
+        clockDoubt = ActivationCenter.clockSuspended(), caps = PlayHub.chessCaps, serviceReachable = PlayHub.serviceUp(), verifiableActivation = PlayHub.activationText() != null,
+        relay = if (PlayHub.hasInternet(ctx)) PlayRelay.UNKNOWN else TvNet.relayAvailability())
 
     /** Le portefeuille et la politique du jeu, relus à l'ouverture de l'écran (l'API reste l'autorité de chaque blocage). */
     fun prepare(ctx: Context) {
@@ -64,8 +68,11 @@ object ChessOnlineHub {
     fun balanceNdem(): Long? = WalletHub.snapshot()?.n
     fun balanceMboko(): Long? = WalletHub.snapshot()?.m
 
-    /** Si la TV est en ligne PAR LE TÉLÉPHONE (passerelle), une ligne le dit : la liaison est lente mais la partie reste jouable (1 à 2 Ko par coup). */
-    fun networkLine(): String? = TvService.running?.netState?.takeIf { it == NetState.INTERNET_VIA_PHONE }?.let { "${it.label} : liaison lente, la partie reste jouable" }
+    /**
+     * Une ligne d'information, sans alarme, sur ce que fait la TV pour avoir Internet : « Partie par relais : liaison lente » quand elle ne l'a que par le tuyau d'un téléphone (une position d'échecs
+     * tient en 1 à 2 Ko : la partie reste jouable), ou la demande de tuyau en cours (« Demande d'Internet au téléphone… », ou pourquoi aucun téléphone ne peut) ; null sinon.
+     */
+    fun networkLine(): String? = PlayHub.relayLine() ?: PlayHub.requestLine()
 
     // ------------------------------------------------------------------ la partie
 
@@ -76,7 +83,8 @@ object ChessOnlineHub {
         PlayHub.probe()    // le service est sondé en arrière-plan : la porte d'une partie suivante le saura
         val store = PrefsStore(app.getSharedPreferences(PREFS, Context.MODE_PRIVATE))
         val flow = ChessStakeFlow(Bridge, store, newKey = { WalletIdem.newKey() })
-        val client = ChessRelayClient(newSession = { PlayHub.newGameSession(app) }, activation = { PlayHub.activationText() }, deviceHash = { PlayHub.deviceHash() })
+        val client = ChessRelayClient(newSession = { PlayHub.newGameSession(app) }, activation = { PlayHub.activationText() }, deviceHash = { PlayHub.deviceHash() },
+            beat = { PlayHub.keepPipeAlive() })      // relay-R1 : la partie tient la demande de tuyau vivante tant que la TV est sans Internet
         return ChessOnlineGame(client, flow, store, OnlineChessHost(), clock = { ActivationCenter.now() }).also { game = it }
     }
 

@@ -239,7 +239,7 @@ class ChessOnlineGameTest {
     @Test fun householdPhonesWatchThroughTheTvAndNeverSeeASecretOrCommand() {
         val s = seated(a.create(stake = NDEM20)).session
         b.game.join(s.code, "TV B"); b.game.joinWithStake(s.code, "TV B", NDEM20)
-        val p = a.host.join(a.host.code, "Papa", null).player!!
+        val p = a.host.joinRoom(a.host.code, "Papa", null).player!!
         ok(a.game.move("e2e4"))
         val v = a.host.view(p.token)
         assertEquals("PLAYING", v["stage"]); assertEquals(1, (v["ply"] as Number).toInt())
@@ -247,7 +247,7 @@ class ChessOnlineGameTest {
         assertFalse(v.containsKey("room"), "aucun identifiant de salle sur un téléphone")
         val json = a.host.viewJson(p.token)
         for (secret in listOf("cbe1", "cbr1", "token", s.token, a.store.savedSeat()!!.token)) assertFalse(json.contains(secret), "« $secret » ne doit pas paraître dans la vue d'un téléphone")
-        assertEquals(castbridge.core.chess.ChessRoom.Act.FORBIDDEN, a.host.act(p.token, "move", "e7e5", 1))
+        assertEquals(castbridge.core.games.ActResult.FORBIDDEN, a.host.httpAct(p.token, "move", "e7e5", 1))
         assertEquals("NDEM", ((v["stake"] as Map<*, *>)["cur"]))
     }
 }

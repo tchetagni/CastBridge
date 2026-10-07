@@ -194,10 +194,13 @@ class TvService : Service(), Device {
     }
 
     // ------------------------------------------------------------------ activation
+    /**
+     * Waits for the end of the lock (a key accepted by any channel: Bluetooth, Wi-Fi, USB button, typed) to start the core. It no longer looks for a USB file by itself: that silent search
+     * is replaced by the one at plug-in, at the opening of the activation screen and on its button ([UsbActivationWatch]), and a key found there is installed by an explicit « Activer ».
+     */
     private val activationWatch = object : Runnable {
         override fun run() {
             if (started) return
-            if (TunnelHub.termsAccepted(this@TvService)) ActivationCenter.scanFiles()      // a key is read only after the terms of use were accepted on this TV (activation screen)
             if (!ActivationCenter.locked()) { startCore(); return }
             main.postDelayed(this, 5_000)
         }
@@ -210,15 +213,38 @@ class TvService : Service(), Device {
     private fun watchForActivation() {
         setStatus("0-storage", "Usage soumis à autorisation : activation requise")
         startLockedHttp()
+        registerUsbEvents()
         main.removeCallbacks(activationWatch); main.postDelayed(activationWatch, 5_000)
     }
 
+    // ------------------------------------------------------------------ the USB key at plug-in while locked (docs/TV-ACTIVATION-CLE-USB.md)
+    /** A locked TV starts no storage events of its own: this receiver only tells [UsbActivationWatch] that a key came or went (the banner of the activation screen, the line of the home). */
+    private var usbEventsReceiver: BroadcastReceiver? = null
+
+    private fun registerUsbEvents() {
+        if (usbEventsReceiver != null) return
+        val f = IntentFilter().apply {
+            listOf(Intent.ACTION_MEDIA_MOUNTED, Intent.ACTION_MEDIA_UNMOUNTED, Intent.ACTION_MEDIA_EJECT, Intent.ACTION_MEDIA_REMOVED, Intent.ACTION_MEDIA_BAD_REMOVAL).forEach { addAction(it) }
+            addDataScheme("file")
+        }
+        val r = object : BroadcastReceiver() { override fun onReceive(c: Context, i: Intent) { UsbActivationWatch.onStorageEvent(c, i.action) } }
+        runCatching {
+            if (Build.VERSION.SDK_INT >= 33) registerReceiver(r, f, Context.RECEIVER_EXPORTED) else registerReceiver(r, f)
+            usbEventsReceiver = r
+        }.onFailure { Log.w(TAG, "usb activation receiver: ${it.javaClass.simpleName}") }
+    }
+
+    private fun unregisterUsbEvents() { usbEventsReceiver?.let { runCatching { unregisterReceiver(it) } }; usbEventsReceiver = null }
+
     // ------------------------------------------------------------------ « Activer par le Wi-Fi » while locked (docs/TV-ACTIVATION-CLE-USB.md)
-    /** The ONLY HTTP surface of a locked TV: POST /api/activation/install behind the connection code ([castbridge.core.tv.activation.LockedActivationApi]). */
+    /**
+     * The ONLY HTTP surface of a locked TV: `POST /api/activation/install` and `GET /api/activation/device-request`, both behind the connection code
+     * ([castbridge.core.tv.activation.LockedActivationApi]). It listens on every interface (NanoHTTPD without a host name), so the activation group's address (192.168.49.1) is served too.
+     */
     private var lockedHttp: castbridge.core.tv.activation.LockedActivationServer? = null
     @Volatile private var lockedPin: String? = null
 
-    /** What the activation screen shows for the Wi-Fi way: the connection code and the TV's addresses; null when the route is not open. */
+    /** What the activation screen shows for the Wi-Fi way: the connection code and the TV's addresses on a LOCAL NETWORK (never the group's own 192.168.49.x); null when the route is not open. */
     fun lockedWifiInfo(): Pair<String, List<String>>? {
         val p = lockedPin ?: return null
         if (lockedHttp == null) return null
@@ -226,7 +252,7 @@ class TvService : Service(), Device {
             NetworkInterface.getNetworkInterfaces().toList().filter { it.isUp && !it.isLoopback }
                 .flatMap { it.inetAddresses.toList() }.filterIsInstance<Inet4Address>().filter { it.isSiteLocalAddress }.mapNotNull { it.hostAddress }
         }.getOrDefault(emptyList())
-        return p to ips
+        return p to castbridge.core.link.HelloIps.lanOnly(ips)
     }
 
     private fun startLockedHttp(attempt: Int = 0) {
@@ -236,7 +262,9 @@ class TvService : Service(), Device {
         val tvPrefs = TvPrefs(this)
         val pin = tvPrefs.pin()
         val api = castbridge.core.tv.activation.LockedActivationApi(PinGuard(pin), { key -> ActivationCenter.installFromWifi(key) },
-            { TunnelHub.termsAccepted(this) }, BuildConfig.VERSION_NAME)
+            { TunnelHub.termsAccepted(this) }, BuildConfig.VERSION_NAME,
+            deviceRequest = { ActivationCenter.serverRequestText() },          // the server form: never the private install= line (and never logged)
+            onAuthorized = { ActivationCenter.phoneAuthorized() })              // « téléphone relié » on the activation screen (no address kept)
         val s = castbridge.core.tv.activation.LockedActivationServer(api)
         try { s.start(15_000, false) } catch (e: Exception) {
             Log.w(TAG, "activation Wi-Fi : port ${ReceiverServer.PORT} indisponible (${e.javaClass.simpleName}), nouvel essai")
@@ -246,6 +274,7 @@ class TvService : Service(), Device {
         lockedHttp = s; lockedPin = pin
         castbridge.core.tv.activation.LockedPinRotation.onLockedRouteOpened(tvPrefs.lockedPinStore())   // M1 d: this code is replaced at the activation
         register(locked = true)
+        tryStartActivationGroup()                                            // the activation screen was already open and waiting for the code
     }
 
     private fun stopLockedHttp() {
@@ -254,6 +283,71 @@ class TvService : Service(), Device {
         runCatching { s.stop() }
         runCatching { nsdListener?.let { nsd?.unregisterService(it) } }; nsdListener = null
         runCatching { multicastLock?.release() }
+    }
+
+    // ------------------------------------------------------------------ the ACTIVATION group: the TV hosts its own Wi-Fi Direct network (docs/TV-ACTIVATION-CLE-USB.md)
+    /**
+     * While the activation screen of a LOCKED TV is open, the TV creates a Wi-Fi Direct group whose name and password DERIVE from the 6-digit connection code the screen shows
+     * ([castbridge.core.tv.WdCode]): a phone that read the code (or the QR) joins it by itself, with no box, no Bluetooth pairing, no USB key. It exists only for that screen: given back
+     * when the screen closes (after [ACTIVATION_GROUP_GRACE_MS] if it is only hidden behind a picker of its own) or as soon as the TV is activated. If it cannot exist, the screen says why
+     * ([WifiDirectGroup.activationState]) and the local-network way stays open.
+     */
+    private var activationWd: WifiDirectGroup? = null
+    @Volatile private var activationGroupWanted = false
+    @Volatile private var activationClients: Int? = null
+    /** act-tv-2 ([castbridge.core.tv.activation.ActivationGroupPolicy]): the person asked for the direct network on this opening of the screen; kept until the group is given back. */
+    @Volatile private var activationDirectAsked = false
+    /** What the policy last decided on this opening (null = nothing asked yet): logged when it changes, never with a code. WIFI_PRESENT = the group is only offered on the screen. */
+    @Volatile private var activationDecision: castbridge.core.tv.activation.ActivationGroupPolicy.Decision? = null
+
+    /** The activation screen is in front: ask for the group, as the policy allows (idempotent for the same code; a group that failed is tried again, which is what the « Réessayer » button and a return from the settings use). Main thread. */
+    fun startActivationGroup() { activationGroupWanted = true; tryStartActivationGroup() }
+
+    /** « Le téléphone n'est pas sur ce Wi-Fi ? OK : réseau direct » and « Réessayer le réseau direct »: the person asks for the group, whatever the TV's network. Main thread. */
+    fun requestActivationDirect() { activationDirectAsked = true; startActivationGroup() }
+
+    /** The 2 s tick of the activation screen: a group kept for later is made as soon as the TV loses its Wi-Fi network (nothing left to cut). Main thread. */
+    fun activationTick() { if (activationDecision == castbridge.core.tv.activation.ActivationGroupPolicy.Decision.WIFI_PRESENT) tryStartActivationGroup() }
+
+    private fun tryStartActivationGroup() {
+        if (!activationGroupWanted || started || !ActivationCenter.locked()) return
+        val code = lockedPin ?: return                                       // the locked route is open: its code is the one on the screen
+        // act-tv-2: on a Wi-Fi network (no cable) the group is made only on request: a TV with a single Wi-Fi radio may lose its link to the box while the group exists
+        val d = castbridge.core.tv.activation.ActivationGroupPolicy.decide(ActivationNet.read(this), activationDirectAsked)
+        if (d != activationDecision) { activationDecision = d; Log.i(TAG, "groupe d'activation : ${d.log}") }
+        if (!d.create) return
+        val g = activationWd ?: WifiDirectGroup(this, TvPrefs(this)) { /* no line: the screen reads activationGroupState(); the password is the QR's and goes nowhere else */ }.also { activationWd = it }
+        g.startActivation(code)
+    }
+
+    fun stopActivationGroup() {
+        activationGroupWanted = false; activationClients = null
+        activationDirectAsked = false; activationDecision = null             // the next opening decides again
+        main.removeCallbacks(stopActivationGroupLater)
+        val g = activationWd ?: return
+        activationWd = null
+        runCatching { g.stop() }
+    }
+
+    private val stopActivationGroupLater = Runnable { stopActivationGroup() }
+
+    /** The activation screen came back (or opened): cancel a pending release and ask for the group. */
+    fun activationScreenResumed() { main.removeCallbacks(stopActivationGroupLater); startActivationGroup() }
+
+    /** The activation screen left: given back at once when it closed for good, else after a short delay (a file picker of its own, the Bluetooth dialog, a screen rotation). */
+    fun activationScreenPaused(finishing: Boolean) {
+        if (finishing) stopActivationGroup() else { main.removeCallbacks(stopActivationGroupLater); main.postDelayed(stopActivationGroupLater, ACTIVATION_GROUP_GRACE_MS) }
+    }
+
+    /** The group's state for the screen; with no group made, « Offered » when the policy kept it for the person's request (the TV is on a Wi-Fi network), else « NotTried ». */
+    fun activationGroupState(): castbridge.core.tv.activation.ActivationScreenPlan.Group = activationWd?.activationState()
+        ?: if (activationDecision == castbridge.core.tv.activation.ActivationGroupPolicy.Decision.WIFI_PRESENT) castbridge.core.tv.activation.ActivationScreenPlan.Group.Offered
+        else castbridge.core.tv.activation.ActivationScreenPlan.Group.NotTried
+
+    /** A phone is « reliée »: in the group, or it presented the right connection code a moment ago (Wi-Fi network, group or any other local way). */
+    fun activationPhoneLinked(): Boolean {
+        activationWd?.clients { activationClients = it }                     // answered later on the main looper: read at the next call
+        return castbridge.core.tv.activation.ActivationScreenPlan.phoneLinked(SystemClock.elapsedRealtime(), ActivationCenter.phoneAuthorizedAt, activationClients)
     }
 
     // ------------------------------------------------------------------ core
@@ -265,6 +359,8 @@ class TvService : Service(), Device {
         startOwnerChannel()                                      // the owner's phone can push the activation by Bluetooth, locked or not
         if (ActivationCenter.locked()) { watchForActivation(); return }
         stopLockedHttp()                                         // frees port 8765 and the locked mDNS announce for the full server
+        stopActivationGroup()                                    // the TV is activated: the activation group is given back at once
+        unregisterUsbEvents()                                    // the storage events below take over (the home still hears about a key on a trial TV)
         started = true
         prefs = TvPrefs(this)
         // M1 d: the code shown while locked is replaced once, before the full API takes it (never logged)
@@ -293,19 +389,21 @@ class TvService : Service(), Device {
         LotsHub.startup(this, videosDir)
         Thread { RentalHub.sweep(this, castbridge.core.lots.SweepTrigger.APP_START).forEach { notice(it) }; main.postDelayed(rentalTick, 15 * 60_000L) }.start()   // the autonomous deletion of ended rentals
         bt = BtServer(this, videosDir, guard, negotiate = ::linkInfo, hello = ::btHello, trusted = ::btTrusted, parental = ParentalHub.syncHost,
-            progress = { reception }) { setStatus("1-bt", it) }
+            progress = { reception }, helloFlags = TvNet::onHelloFlags) { setStatus("1-bt", it) }
         wd = WifiDirectGroup(this, prefs) { setStatus("2-wd", it); syncIconsAsync() }
         usb = UsbImporter(this, videosDir) { setStatus("3-usb", it) }
         ssh = SshControl(this, { setStatus("4-ssh", it) }, { setStatus("4-ssh-bt", it) },
             onSessions = { n ->
                 setStatus("4-ssh-n", if (n > 0) (if (n == 1) "SSH : 1 connexion active" else "SSH : $n connexions actives") else null)
                 icons.setSsh(n, ssh?.btSessions() ?: 0); iconsChanged()
-            })
+            },
+            onBluetoothBridge = { wanted -> gateway?.sshBluetoothChanged(wanted) })      // R-28: the UUID …0002 is the SSH tunnel's while it is on
         updater = UpdateInstaller(this, { registry.volumes().filter { it.kind != VolumeKind.SAF }.map { it.dir } },
             launch = { i, what -> launchScreen(i, what) }) { m -> setStatus("5-update", m); notice(m) }
         onPermissionsReady()                                    // Bluetooth starts if its permission was granted earlier
         // server link (docs/API-SERVER.md): registration, heartbeat every 15 min, updates, usage events, quiz questions
         TvConnect.start(this)
+        TvNet.start()                                            // relay-R1: the single Internet truth and the request for a phone's pipe (castbridge.receiver.TvNet)
         TunnelHub.start(this)                                    // remote administration of the editor (docs/REMOTE-TUNNEL-TV.md): waits for the terms, a key and Internet
         bg.execute { cleanUpdateFiles() }
         registerStorageEvents()
@@ -344,7 +442,7 @@ class TvService : Service(), Device {
             profile = prefs.profile(), onSettings = { prefs.saveProfile(it); updateStorageStatus() },
             onNotice = { n -> notice(n); setStatus("5-notice", n) },
             safPicker = ::launchSafPicker, settingsOpener = ::openStorageSettings, library = library, readoptJson = { readoptState },
-            publicRoutes = castbridge.core.tv.CombinedRoutes(QuizHub.http, ChessHub.http),
+            publicRoutes = castbridge.core.tv.CombinedRoutes(QuizHub.http, ChessHub.http, GameRoomHost.http),
             routeGuard = { path -> if (ActivationCenter.trial() && castbridge.core.owner.TrialPolicy.routeBlocked(path)) castbridge.core.owner.TrialPolicy.MESSAGE else null },
             tokenAuth = { t -> trust.verifyToken(t)?.also { a -> phoneSeen(a); presence.seen(a) } }, peers = btApi?.peers,
             // the phone's library assistant never touches what the parental control protects (docs/LIBRARY-AGENT.md)
@@ -358,6 +456,8 @@ class TvService : Service(), Device {
             contentIndexing = true,
             // R-17 : une ligne INFO par requête refusée (route, statut, code ; jamais de code PIN, jeton ni corps) : `adb logcat -s CastBridgeTV` ou ssh logcat
             onLog = { Log.i(TAG, it) },
+            // relay-R1: while the TV wants an Internet pipe, the trusted phone's keep-alive (GET /api/info) learns it from the header X-CB-Pipe and opens the pipe by itself
+            pipeHint = TvNet::pipeWanted,
             // clé propre à cette TV (stockage privé de l'app, jamais sur la clé USB) : signe les caches .cbhash ; un cache forgé ou venu d'ailleurs est ignoré
             contentIndexKey = runCatching { contentIndexKey() }.getOrNull(),
             // pas d'empreintes pendant un téléchargement ni un import USB (R-06, R-11 : bus USB et Wi-Fi partagés)
@@ -424,7 +524,8 @@ class TvService : Service(), Device {
     private val helloHandler by lazy {
         castbridge.core.trust.HelloHandler(trust, pairing, ::btBonded, ::tvName, runCatching { packageManager.getPackageInfo(packageName, 0).versionName }.getOrNull() ?: "?",
             { "CastBridge TV " + (Build.MODEL ?: "") }, { linkInfo(null, 0) }, { p -> phoneConnected(p) }, castbridge.core.trust.AttemptLimiter(global = 40, perPeer = 10),
-            { name, d -> castbridge.core.trust.TvRefusals.message(name, d)?.let { notice(it); setStatus("1-phone", it) } }, capacity)
+            { name, d -> castbridge.core.trust.TvRefusals.message(name, d)?.let { notice(it); setStatus("1-phone", it) } }, capacity,
+            pipeWanted = TvNet::pipeWanted)       // relay-R1: the trusted phone learns from its HELLO answer that the TV wants an Internet pipe
     }
 
     /** « Retirer » on the TV (any screen): the phone loses its access and its tokens at once, and disappears from the status bar. */
@@ -542,7 +643,7 @@ class TvService : Service(), Device {
         startOwnerChannel()
         bt?.start()
         btApi?.start()
-        gateway = gateway ?: BtGatewayHost(this, guard, ::btTrusted, ::gatewayStatus)
+        gateway = gateway ?: BtGatewayHost(this, guard, ::btTrusted, ::gatewayStatus) { ssh?.bluetoothWanted == true }
         gateway?.start()
         // Wi-Fi Direct is opt-in (MENU): creating a group can disturb the TV's own Wi-Fi connection.
         if (prefs.getBool("wd_enabled", false) && wd?.hasPermission() == true) wd?.start()
@@ -572,28 +673,26 @@ class TvService : Service(), Device {
                 bg.execute {
                     try {
                         val wasDirect = netDirectMs != null; val wasGateway = netGatewayMs != null; val first = netCheckedAt == 0L
-                        // The probe (a request to a third party) is never periodic by default: only on a manual test, when the user turned « netProbe » on,
-                        // or when the remote-assistance tunnel is enabled (terms accepted) and needs to know whether Internet is reachable.
+                        // The probe (a request to a third party) is not sent by default: only on a manual test, when the user turned « netProbe » on,
+                        // or once the remote-assistance tunnel's terms are accepted (it needs to know whether Internet is reachable). Even then (relay-R1, castbridge.receiver.TvNet.measure):
+                        // on the TV's own network only, every 5 minutes or at once when the network changes; NEVER through the phone's gateway, whose life is read from its own PING frames
+                        // (one check towards the project's server per new pipe): it cost mobile data and a radio wake-up every minute.
                         val manual = netManual; netManual = false
                         val probe = manual || prefs.netProbe || runCatching { TunnelHub.termsAccepted(this@TvService) }.getOrDefault(false)
                         val link = TvNetDiag.linkKind(this@TvService)
-                        if (probe) {
-                            netDirectMs = TvNetDiag.probe(null)
-                            netGatewayMs = gateway?.proxy()?.let { TvNetDiag.probe(it) }
-                        } else {
-                            // No traffic: the system's own validation (NET_CAPABILITY_VALIDATED) and the gateway state.
-                            netDirectMs = if (systemValidated()) 0L else null
-                            netGatewayMs = if (gateway?.connected == true) 0L else null
-                        }
-                        netMeasured = probe
+                        val m = TvNet.measure(probe, manual, systemValidated())
+                        netDirectMs = m.directMs
+                        netGatewayMs = m.gatewayMs
+                        netMeasured = m.measured
                         netCheckedAt = System.currentTimeMillis()
                         setStatus("7-net", netSummary())
                         synchronized(netTracker) {
                             // Without a probe, a link that the system did not validate is « not verified » (CHECKING), never a red « Pas d'Internet »: only « no link at all » is NONE.
-                            if (probe || netDirectMs != null || netGatewayMs != null || link == castbridge.core.net.LinkKind.NONE)
+                            // a round without a new probe adds no evidence of a failure (the last answer is carried): the badge is only fed by a real probe, a validated link or « no link at all »
+                            if (m.probed || netDirectMs != null || netGatewayMs != null || link == castbridge.core.net.LinkKind.NONE)
                                 netState = netTracker.update(link, netDirectMs, gateway?.connected == true, netGatewayMs, android.os.SystemClock.elapsedRealtime())
                             netGatewayAlso = netTracker.gatewayAlsoAvailable
-                            delay = if (probe) netTracker.nextDelayMs() else NetStateTracker.STEADY_MS   // 60 s while Internet works, 10-30 s while it does not (probing only)
+                            delay = NetStateTracker.STEADY_MS      // 60 s: the rounds themselves cost nothing (local reads); a network change or a failed call re-runs one at once (netChanged)
                         }
                         icons.setInternet(netState)
                         main.post { screen?.statusesChanged() }; iconsChanged(); syncIconsAsync()      // the network just changed: re-read the badges now (no extra loop)
@@ -617,8 +716,10 @@ class TvService : Service(), Device {
     private var netGwUp = false
 
     /** Network lost/available (and gateway connect/disconnect): probe again soon instead of waiting for the next tick. */
-    private fun netChanged() { main.removeCallbacks(netKick); main.postDelayed(netKick, 1500) }
+    private fun netChanged() { TvNet.markChanged(); netRecheck() }
     private val netKick = Runnable { if (netCheckedAt > 0) netTick.run() }
+    /** relay-R1: castbridge.receiver.TvNet just learnt something about the pipe (end-to-end check done): the badge and the screens read the state again soon (no new probe of the TV's own network). */
+    fun netRecheck() { main.removeCallbacks(netKick); main.postDelayed(netKick, 1500) }
 
     private fun watchNetwork() {
         if (netCallback != null) return
@@ -641,7 +742,7 @@ class TvService : Service(), Device {
     /** Gateway status callback: re-probe when a phone connects or disconnects. */
     private fun gatewayStatus(st: String?) {
         setStatus("6-gw", st); syncIconsAsync()
-        if ((st != null) != netGwUp) { netGwUp = st != null; netChanged() }
+        if ((st != null) != netGwUp) { netGwUp = st != null; netChanged(); TvNet.gatewayChanged(st != null) }
     }
 
     /** « connectivity_check » event: [via] null = the TV's own link (Wi-Fi / Ethernet). */
@@ -925,6 +1026,7 @@ class TvService : Service(), Device {
         }
         val r = object : BroadcastReceiver() {
             override fun onReceive(c: Context, i: Intent) {
+                UsbActivationWatch.onStorageEvent(c, i.action)            // a key plugged in while an activation is still useful (trial / grace): the home says what it found
                 val path = i.data?.path
                 if (i.action != Intent.ACTION_MEDIA_MOUNTED && path != null)
                     registry.volumes().filter { it.kind == VolumeKind.REMOVABLE && it.dir.absolutePath.startsWith(path) }.forEach { registry.markRemoved(it.id) }
@@ -1005,12 +1107,14 @@ class TvService : Service(), Device {
         path == "/api/connections" && method == "GET" -> ApiReply(200, castbridge.core.status.StatusIconModel.json(icons.snapshot(), System.currentTimeMillis()))
         path == "/api/net" && method == "GET" -> ApiReply(200, synchronized(netTracker) {
             netJson(netTracker, TvNetDiag.linkKind(this), netDirectMs, gateway?.connected == true, netGatewayMs, netCheckedAt) })
+        // relay-R1: the single Internet truth (direct / via_relay / none), the request for a phone's pipe and the measured link: counts only, never a name or an address
+        path == "/api/relay" && method == "GET" -> ApiReply(200, TvNet.json())
         path == "/api/gateway" && method == "GET" -> ApiReply(200, gateway?.json() ?: """{"listening":false,"connected":false}""")
         path == "/api/gateway/test" && method == "GET" -> gateway?.test() ?: ApiReply(409, """{"error":"passerelle non démarrée"}""")
         path == "/api/gateway/speed" && method == "GET" -> gateway?.speed(params["bytes"]?.toLongOrNull() ?: 2_000_000)
             ?: ApiReply(409, """{"error":"passerelle non démarrée"}""")
         path == "/api/gateway/diag" && method == "GET" -> gateway?.let { g ->
-            val host = params["host"]?.takeIf { it.isNotBlank() } ?: "8.8.8.8"
+            val host = params["host"]?.takeIf { it.isNotBlank() } ?: castbridge.core.relay.RelayScope.SERVER_HOST      // the phone's relay only serves the project's server
             val lines = java.util.Collections.synchronizedList(mutableListOf<String>())
             val act = screen?.takeIf { it.shown }?.activity as? PlayerActivity
             act?.let { a -> main.post { a.showDiag(host) } }                 // also shown on the TV when the screen is up
@@ -1203,6 +1307,8 @@ class TvService : Service(), Device {
 
     override fun onDestroy() {
         stopLockedHttp()
+        stopActivationGroup()
+        unregisterUsbEvents()
         stopCore()
         unwatchNetwork()
         reception.removeListener(receptionNotifier)
@@ -1222,6 +1328,8 @@ class TvService : Service(), Device {
         private const val NOTIF = 1
         /** A phone that said hello (or used its token) is shown connected this long without news; each sign of life renews it. */
         private const val PHONE_LEASE_MS = 10 * 60_000L
+        /** The activation group outlives a short absence of the activation screen (a file picker of its own, the Bluetooth dialog, a rotation) by this long, then is given back. */
+        private const val ACTIVATION_GROUP_GRACE_MS = 20_000L
         private const val NOTIF_LAUNCH = 2
         @Volatile var running: TvService? = null; private set
 

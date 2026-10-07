@@ -6,7 +6,8 @@
 ALTER TABLE wallet_escrow ADD COLUMN game VARCHAR(32) CHARACTER SET ascii COLLATE ascii_bin NULL;
 
 -- journal des parties avec mise : une ligne par TV et par résultat réglé (écrite dans la MÊME transaction que le règlement : jamais l'un sans l'autre). Sert aux plafonds de parties GAGNÉES par
--- identité (jour, semaine, mois civil d'Africa/Douala), à la surveillance des gains entre deux mêmes identités (R-E9) et à l'audit ; aucun coup ici (le service garde la partie, pas l'API).
+-- identité (jour, semaine, mois civil d'Africa/Douala), à la lecture des gains répétés entre deux mêmes identités (R-E9, par GET /api/v1/admin/wallet/games : pas d'alerte automatique) et à l'audit ;
+-- aucun coup ici (le service garde la partie, pas l'API).
 CREATE TABLE wallet_game_log (
     id         BIGINT      NOT NULL AUTO_INCREMENT PRIMARY KEY,
     rid        VARCHAR(64) CHARACTER SET ascii COLLATE ascii_bin NOT NULL,
