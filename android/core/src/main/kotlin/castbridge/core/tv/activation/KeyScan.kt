@@ -71,7 +71,7 @@ object KeyScan {
     /** [verdict] null = no candidate in the file; [index] = the accepted candidate, or the first of the most useful refusals; [tried] = verifications made. */
     data class Outcome(val verdict: Verdict?, val index: Int, val tried: Int)
 
-    private fun rank(v: Verdict) = when (v) { Verdict.ACCEPTED -> 4; Verdict.WRONG_DEVICE -> 3; Verdict.EXPIRED -> 2; Verdict.NOT_VALID -> 1 }
+    private fun rank(v: Verdict) = when (v) { Verdict.ACCEPTED -> 5; Verdict.WRONG_DEVICE -> 4; Verdict.EXPIRED -> 3; Verdict.NOT_VALID -> 2; Verdict.INSTALLED -> 1 }
 
     /** Verifies [candidates] in order and stops at the first ACCEPTED (installed by [verify] itself); otherwise reports the most telling refusal. */
     fun pick(candidates: List<String>, verify: (String) -> Verdict): Outcome {

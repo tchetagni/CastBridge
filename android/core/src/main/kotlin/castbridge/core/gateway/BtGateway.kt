@@ -35,6 +35,11 @@ object Gw {
     /** Network diagnostics run by the phone (ICMP cannot cross a TCP tunnel): DIAG "ping host"/"trace host" ->
      *  DIAG_OUT lines -> DIAG_END. */
     const val DIAG = 12; const val DIAG_OUT = 13; const val DIAG_END = 14
+    /**
+     * HELLO_ERR text of a TV that already serves ANOTHER phone (R-43, audit 2026-10-07 b, I-11): the TV serves one phone at a time and never cuts a healthy link for a second one
+     * (a phone whose link was closed reconnects by itself: two phones would take the pipe from each other for ever). The phone reads it as [GatewayRefused.busy].
+     */
+    const val BUSY = "occupée"
 
     private val HOST = Regex("^[A-Za-z0-9](?:[A-Za-z0-9.:-]{0,252})$")
     /** Only a host name or an IP literal: the phone runs a fixed command, never text from the TV. */
@@ -70,6 +75,9 @@ class Mux(input: InputStream, output: OutputStream) {
         dout.flush()
         sent.addAndGet(7L + f.payload.size)
     }
+
+    /** Closes the link under the frames (the socket of the Bluetooth link): a reader blocked in [read] fails at once. */
+    fun close() { runCatching { din.close() }; runCatching { dout.close() } }
 
     fun read(): Frame {
         val t = din.readUnsignedByte(); val s = din.readUnsignedShort(); val n = din.readInt()
@@ -163,6 +171,14 @@ data class GwTarget(val host: String, val port: Int) {
     }
 }
 
+/**
+ * The TV answered the phone's HELLO with HELLO_ERR: the PIN is wrong (message « PIN incorrect », which the phone's service tests for) or the TV already serves another phone ([busy],
+ * [Gw.BUSY]). Still an [IOException] with the TV's own words as its message, so that every existing caller behaves as before.
+ */
+class GatewayRefused(message: String) : IOException(message) {
+    val busy: Boolean get() = message == Gw.BUSY
+}
+
 // ------------------------------------------------------------------------------------------------ phone side
 
 /**
@@ -184,7 +200,7 @@ class Exit(
     fun run() {
         mux.write(Frame(Gw.HELLO, 0, (Gw.MAGIC + pin).toByteArray(Charsets.US_ASCII)))
         val first = mux.read()
-        if (first.type != Gw.HELLO_OK) throw IOException(if (first.type == Gw.HELLO_ERR) String(first.payload) else "réponse inattendue")
+        if (first.type != Gw.HELLO_OK) throw if (first.type == Gw.HELLO_ERR) GatewayRefused(String(first.payload, Charsets.UTF_8)) else IOException("réponse inattendue")
         log("passerelle active")
         try {
             while (true) {
@@ -232,6 +248,11 @@ class Exit(
 /**
  * TV side: accepts one phone link at a time ([attach]) and serves SOCKS5 (CONNECT, no auth) on 127.0.0.1:[port]
  * for the TV app's own traffic. Without a phone attached, SOCKS requests fail fast (network unreachable).
+ *
+ * R-43 (audit anti-régression 2026-10-07 b, I-11): everything that lives on a link (streams, open requests, measurements) belongs to ITS [Session]; the end of a link never touches
+ * another's. The TV serves ONE phone at a time and never cuts a healthy link for a second one: a phone whose link is closed reconnects by itself, two phones would take the pipe from
+ * each other for ever. A second phone is answered HELLO_ERR [Gw.BUSY]; the SAME phone coming back (same [attach] `peerId`: its Bluetooth address, proven by the paired socket) replaces its
+ * own stale link, which is closed properly.
  */
 class Entry(
     private val checkPin: (String) -> Boolean, val port: Int = 1080,
@@ -239,20 +260,37 @@ class Entry(
     private val socksToken: (() -> String?)? = null,
     private val log: (String) -> Unit = {},
 ) {
-    @Volatile private var mux: Mux? = null
-    private val relays = ConcurrentHashMap<Int, Relay>()
-    private val pending = ConcurrentHashMap<Int, java.util.concurrent.CompletableFuture<Int>>()
-    private val diags = ConcurrentHashMap<Int, Pair<(String) -> Unit, java.util.concurrent.CountDownLatch>>()
+    /** One phone link and everything that lives on it. */
+    private class Session(val link: Mux, val peerId: String?) {
+        val relays = ConcurrentHashMap<Int, Relay>()
+        val pending = ConcurrentHashMap<Int, java.util.concurrent.CompletableFuture<Int>>()
+        val diags = ConcurrentHashMap<Int, Pair<(String) -> Unit, java.util.concurrent.CountDownLatch>>()
+        /** relay-R1: PING frames waiting for the phone's echo (one measurement at a time, see [Entry.ping]). */
+        val pings = java.util.concurrent.LinkedBlockingQueue<java.util.concurrent.CompletableFuture<Unit>>()
+
+        /** Ends everything that lives on THIS link, never anything of another (idempotent). */
+        fun endAll() {
+            relays.values.toList().forEach { it.finish(sendClose = false) }
+            pending.values.forEach { it.complete(Gw.SOCKS_NET) }; pending.clear()
+            diags.values.forEach { (l, d) -> l("lien Bluetooth coupé"); d.countDown() }; diags.clear()
+            pings.forEach { it.cancel(false) }; pings.clear()
+        }
+
+        /** The link is replaced by a newer one of the same phone: its streams end and its socket is closed (the reader blocked on it fails at once). */
+        fun retire() { endAll(); link.close() }
+    }
+
+    @Volatile private var session: Session? = null
+    /** Guards the choice of the current [session] (two phones attaching at once). */
+    private val slot = Any()
     private val nextId = AtomicInteger(1)
-    /** relay-R1: PING frames waiting for the phone's echo (one measurement at a time, see [ping]). */
-    private val pings = java.util.concurrent.LinkedBlockingQueue<java.util.concurrent.CompletableFuture<Unit>>()
     private var server: ServerSocket? = null
     @Volatile var peerName: String? = null; private set
     /** relay-R1: how many phone links this Entry accepted (changes when a phone attaches, even when it replaces another): the identity of « the current pipe ». */
     @Volatile var attaches = 0; private set
-    val connected get() = mux != null
-    val openStreams get() = relays.size
-    fun stats(): Pair<Long, Long> = mux?.let { it.received.get() to it.sent.get() } ?: (0L to 0L)
+    val connected get() = session != null
+    val openStreams get() = session?.relays?.size ?: 0
+    fun stats(): Pair<Long, Long> = session?.link?.let { it.received.get() to it.sent.get() } ?: (0L to 0L)
 
     fun startSocks(): Int {
         val ss = ServerSocket(port, 50, InetAddress.getByName("127.0.0.1"))
@@ -268,54 +306,69 @@ class Entry(
 
     fun stop() { runCatching { server?.close() } }
 
-    /** Serves one phone link until it breaks. Returns normally when the link ends. */
-    fun attach(link: Mux, peer: String) {
+    /**
+     * Serves one phone link until it breaks. Returns normally when the link ends. [peerId] identifies the phone (its Bluetooth address, proven by the paired socket; null = unknown, never
+     * taken for the current phone): a different phone while a link lives is refused with [Gw.BUSY] (after the PIN check: nothing is said to a phone that did not give the right PIN).
+     */
+    fun attach(link: Mux, peer: String, peerId: String? = peer) {
         val hello = link.read()
         val txt = String(hello.payload, Charsets.US_ASCII)
         if (hello.type != Gw.HELLO || !txt.startsWith(Gw.MAGIC) || !checkPin(txt.removePrefix(Gw.MAGIC))) {
             runCatching { link.write(Frame(Gw.HELLO_ERR, 0, "PIN incorrect".toByteArray())) }
             log("passerelle refusée ($peer)"); return
         }
-        link.write(Frame(Gw.HELLO_OK, 0))
-        mux?.let { log("nouvelle passerelle, l'ancienne est remplacée") }
-        mux = link; peerName = peer; attaches++
+        val mine = Session(link, peerId)
+        var replaced: Session? = null
+        val busy = synchronized(slot) {
+            val cur = session
+            if (cur != null && (peerId == null || cur.peerId != peerId)) true
+            else { replaced = cur; session = mine; peerName = peer; attaches++; false }
+        }
+        if (busy) {
+            runCatching { link.write(Frame(Gw.HELLO_ERR, 0, Gw.BUSY.toByteArray(Charsets.UTF_8))) }
+            log("passerelle refusée : un autre téléphone est servi"); return
+        }
+        try { link.write(Frame(Gw.HELLO_OK, 0)) } catch (e: IOException) { leave(mine); throw e }
+        replaced?.let { log("même téléphone, nouvelle liaison : l'ancienne est fermée"); it.retire() }
         log("Internet via $peer")
         try {
             while (true) {
                 val f = link.read()
                 when (f.type) {
-                    Gw.OPEN_OK -> pending.remove(f.stream)?.complete(0)
-                    Gw.OPEN_ERR -> pending.remove(f.stream)?.complete(f.payload.firstOrNull()?.toInt() ?: Gw.SOCKS_FAIL)
-                    Gw.DATA -> relays[f.stream]?.onData(f.payload)
-                    Gw.ACK -> relays[f.stream]?.onAck(f.payload)
-                    Gw.CLOSE -> relays.remove(f.stream)?.onRemoteClose()
-                    Gw.EOF -> relays[f.stream]?.onRemoteEof()
-                    Gw.DIAG_OUT -> diags[f.stream]?.first?.invoke(String(f.payload, Charsets.UTF_8))
-                    Gw.DIAG_END -> diags.remove(f.stream)?.second?.countDown()
-                    Gw.PING -> pings.poll()?.complete(Unit)
+                    Gw.OPEN_OK -> mine.pending.remove(f.stream)?.complete(0)
+                    Gw.OPEN_ERR -> mine.pending.remove(f.stream)?.complete(f.payload.firstOrNull()?.toInt() ?: Gw.SOCKS_FAIL)
+                    Gw.DATA -> mine.relays[f.stream]?.onData(f.payload)
+                    Gw.ACK -> mine.relays[f.stream]?.onAck(f.payload)
+                    Gw.CLOSE -> mine.relays.remove(f.stream)?.onRemoteClose()
+                    Gw.EOF -> mine.relays[f.stream]?.onRemoteEof()
+                    Gw.DIAG_OUT -> mine.diags[f.stream]?.first?.invoke(String(f.payload, Charsets.UTF_8))
+                    Gw.DIAG_END -> mine.diags.remove(f.stream)?.second?.countDown()
+                    Gw.PING -> mine.pings.poll()?.complete(Unit)
                 }
             }
         } catch (_: IOException) {
         } finally {
-            if (mux === link) { mux = null; peerName = null }
-            relays.values.toList().forEach { it.finish(sendClose = false) }
-            pending.values.forEach { it.complete(Gw.SOCKS_NET) }; pending.clear()
-            diags.values.forEach { (l, d) -> l("lien Bluetooth coupé"); d.countDown() }; diags.clear()
-            pings.forEach { it.cancel(false) }; pings.clear()
+            leave(mine)
             log("passerelle déconnectée")
         }
     }
 
+    /** The link [s] is over: it stops being the current one (if it still is) and everything on IT ends; the streams of any other link are never touched. */
+    private fun leave(s: Session) {
+        synchronized(slot) { if (session === s) { session = null; peerName = null } }
+        s.endAll()
+    }
+
     /** Asks the phone to run ping/traceroute; [onLine] gets each output line. Blocks until done (max [timeoutS]). */
     fun diag(kind: String, host: String, timeoutS: Long = 90, onLine: (String) -> Unit): Boolean {
-        val m = mux ?: return false
+        val s = session ?: return false
         require((kind == "ping" || kind == "trace") && Gw.validHost(host))
         val id = nextId.getAndUpdate { if (it >= 65000) 1 else it + 1 }
         val done = java.util.concurrent.CountDownLatch(1)
-        diags[id] = onLine to done
-        m.write(Frame(Gw.DIAG, id, "$kind $host".toByteArray(Charsets.UTF_8)))
+        s.diags[id] = onLine to done
+        s.link.write(Frame(Gw.DIAG, id, "$kind $host".toByteArray(Charsets.UTF_8)))
         val ok = done.await(timeoutS, java.util.concurrent.TimeUnit.SECONDS)
-        diags.remove(id)
+        s.diags.remove(id)
         return ok
     }
 
@@ -324,13 +377,13 @@ class Entry(
      * link, not the phone's Internet: the phone echoes the frame at once. One measurement at a time (the echo carries no id).
      */
     @Synchronized fun ping(timeoutMs: Long = 5_000): Long? {
-        val m = mux ?: return null
+        val s = session ?: return null
         val f = java.util.concurrent.CompletableFuture<Unit>()
-        pings.add(f)
+        s.pings.add(f)
         val t0 = System.nanoTime()
-        try { m.write(Frame(Gw.PING, 0)) } catch (e: IOException) { pings.remove(f); return null }
+        try { s.link.write(Frame(Gw.PING, 0)) } catch (e: IOException) { s.pings.remove(f); return null }
         return try { f.get(timeoutMs, java.util.concurrent.TimeUnit.MILLISECONDS); (System.nanoTime() - t0) / 1_000_000 }
-        catch (e: Exception) { pings.remove(f); null }
+        catch (e: Exception) { s.pings.remove(f); null }
     }
 
     /** "TCP ping": time to open a connection to host:port through the phone (what the TV app really experiences). */
@@ -359,19 +412,19 @@ class Entry(
         }
         val port = i.readUnsignedShort()
         if (cmd != 1) { reply(o, Gw.SOCKS_CMD); c.close(); return }
-        val m = mux
-        if (m == null || relays.size >= Gw.MAX_STREAMS) { reply(o, Gw.SOCKS_NET); c.close(); return }
+        val s = session
+        if (s == null || s.relays.size >= Gw.MAX_STREAMS) { reply(o, Gw.SOCKS_NET); c.close(); return }
         val id = nextId.getAndUpdate { if (it >= 65000) 1 else it + 1 }
         val fut = java.util.concurrent.CompletableFuture<Int>()
         // the stream is registered BEFORE the phone is asked to open: a server that speaks first (an SSH banner) has its bytes sent right behind OPEN_OK, and a frame for a stream
         // that is not registered yet is dropped (relay-R1: found with a phone that sends OPEN_OK, DATA and EOF in one burst). Not started: DATA/EOF only queue until then.
-        val r = Relay(m, id, c) { relays.remove(it) }
-        relays[id] = r
-        pending[id] = fut
-        try { m.write(Frame(Gw.OPEN, id, GwTarget(host, port).encode())) } catch (e: IOException) { relays.remove(id); pending.remove(id); throw e }
-        val code = try { fut.get(30, java.util.concurrent.TimeUnit.SECONDS) } catch (e: Exception) { pending.remove(id); Gw.SOCKS_NET }
+        val r = Relay(s.link, id, c) { s.relays.remove(it) }
+        s.relays[id] = r
+        s.pending[id] = fut
+        try { s.link.write(Frame(Gw.OPEN, id, GwTarget(host, port).encode())) } catch (e: IOException) { s.relays.remove(id); s.pending.remove(id); throw e }
+        val code = try { fut.get(30, java.util.concurrent.TimeUnit.SECONDS) } catch (e: Exception) { s.pending.remove(id); Gw.SOCKS_NET }
         reply(o, code)
-        if (code != 0) { relays.remove(id); c.close(); return }
+        if (code != 0) { s.relays.remove(id); c.close(); return }
         c.soTimeout = 0
         r.start()
     }

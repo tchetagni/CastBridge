@@ -61,15 +61,52 @@ enum class TunnelPath { DIRECT, GATEWAY, OFFLINE }
 object TunnelConnectivity {
     /**
      * The TV's own network (Wi-Fi / Ethernet) when it reaches the Internet; else the phone's Internet shared over Bluetooth (CastBridge-TV's local SOCKS5 proxy), when a phone is attached AND
-     * the probe through it worked; else offline: the tunnel makes no attempt and queues nothing.
+     * the end-to-end check through it worked AND the pipe is for the tunnel ([assistPipe]); else offline: the tunnel makes no attempt and queues nothing.
      * relay-R1: no definition of its own any more, the path is read from the single truth [castbridge.core.connect.NetState].
+     *
+     * R-45 (audit anti-régression 2026-10-07 b, I-7): the tunnel used to ride ANY open pipe and keep its SSH session on it for ever (a permanent reverse tunnel waiting for an expert); the
+     * phone's pipe stops 10 minutes after its last open connection, and that session counts as one: the pipe, its notification and its keep-alive on mobile data never ended, the 5 MB
+     * a day went, then the game was refused. Now the pipe is the tunnel's ONLY while an assistance session was asked for or the pipe is the phone owner's own manual sharing
+     * ([assistPipe], [AssistPipePolicy]); otherwise [TunnelPath.OFFLINE]: the machine closes the session, the pipe's open-connection count falls to zero and its idle stop can run.
      */
-    fun choose(directOk: Boolean, gatewayConnected: Boolean, gatewayOk: Boolean): TunnelPath =
-        path(castbridge.core.connect.NetStates.of(directOk, gatewayConnected, gatewayOk))
-
-    fun path(net: castbridge.core.connect.NetState): TunnelPath = when (net) {
+    fun path(net: castbridge.core.connect.NetState, assistPipe: Boolean = false): TunnelPath = when (net) {
         castbridge.core.connect.NetState.DIRECT -> TunnelPath.DIRECT
-        castbridge.core.connect.NetState.VIA_RELAY -> TunnelPath.GATEWAY
+        castbridge.core.connect.NetState.VIA_RELAY -> if (assistPipe) TunnelPath.GATEWAY else TunnelPath.OFFLINE
         castbridge.core.connect.NetState.NONE -> TunnelPath.OFFLINE
+    }
+
+    fun choose(directOk: Boolean, gatewayConnected: Boolean, gatewayOk: Boolean, assistPipe: Boolean = false): TunnelPath =
+        path(castbridge.core.connect.NetStates.of(directOk, gatewayConnected, gatewayOk), assistPipe)
+}
+
+/**
+ * Who may use the phone's pipe among the TV's tasks of assistance (R-45): the tunnel, ONLY during
+ *  - an assistance session the user asked for ([requested]: « Se connecter maintenant » on the TV), for [windowMs] from the request (asking again renews it; a clock wound back never
+ *    stretches it beyond the window);
+ *  - or while the attached pipe is the phone owner's MANUAL sharing (the TV had not asked for it: [attached] with `tvAskedForIt` false), which the owner controls himself.
+ * A pipe the TV asked for to play, to sync the wallet or to update is never the tunnel's. Pure: the time and the identity of the current pipe ([TvNet.attachId]) come from the caller.
+ */
+class AssistPipePolicy(private val windowMs: Long = ASSIST_WINDOW_MS) {
+    @Volatile private var until = 0L
+    @Volatile private var manualAttach = NONE
+
+    /** The user asked for assistance now. */
+    fun requested(now: Long) { until = now + windowMs }
+
+    /** The assistance ended (or was withdrawn): the pipe is no longer the tunnel's. */
+    fun released() { until = 0L }
+
+    /** A pipe attached (identity [attachId]); [tvAskedForIt] = a live TV need (game, wallet, update, assistance) had asked for a pipe when it attached. */
+    fun attached(attachId: Int, tvAskedForIt: Boolean) { manualAttach = if (tvAskedForIt) NONE else attachId }
+
+    /** The phone's link ended. */
+    fun detached() { manualAttach = NONE }
+
+    fun allowed(now: Long, attachId: Int): Boolean = (until - now) in 1..windowMs || (attachId != NONE && attachId == manualAttach)
+
+    companion object {
+        /** How long an assistance session asked for with « Se connecter maintenant » may use the pipe: time for the expert to come, not for ever. */
+        const val ASSIST_WINDOW_MS = 30 * 60_000L
+        private const val NONE = -1
     }
 }

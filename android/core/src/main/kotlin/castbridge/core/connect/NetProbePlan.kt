@@ -24,9 +24,20 @@ class NetProbePlan(
     private var lastRelayAt = NEVER
     private var lastRelayOk = false
     private var failureSeen = false
+    private var directFailedAt = 0L
 
     /** Un changement d'état de la TV elle-même (réseau apparu ou perdu, lien changé) : la prochaine sonde directe est due tout de suite. */
     @Synchronized fun markChanged() { changed = true }
+
+    /**
+     * Un appel réel au serveur a échoué sur le RÉSEAU PROPRE de la TV (hors réponse du serveur) à [now] (R-41, audit 2026-10-07 b, I-2) : la sonde directe est due au prochain tour de la
+     * boucle réseau (60 s au plus + sa durée : de quoi se dire hors ligne sous 90 s, [DirectLeg.RECHECK_BUDGET_MS]) et la date de l'échec est gardée ([directFailedAt]) pour que la preuve
+     * d'un contact direct PLUS ANCIEN ne masque plus la coupure ([NetStates.contactRecent]).
+     */
+    @Synchronized fun directFailureSeen(now: Long) { directFailedAt = now; changed = true }
+
+    /** Date du dernier appel réel échoué sur le réseau propre ([directFailureSeen]), 0 = aucun. */
+    @Synchronized fun directFailedAt(): Long = directFailedAt
 
     /** Un appel réel à travers le tuyau a échoué (hors réponse du serveur) : une vérification est due. */
     @Synchronized fun relayFailureSeen() { failureSeen = true }

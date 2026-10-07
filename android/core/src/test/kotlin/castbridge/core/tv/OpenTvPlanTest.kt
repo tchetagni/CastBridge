@@ -228,6 +228,36 @@ class OpenTvPlanTest {
         assertEquals(5, OpenTvScreen.values().size)
     }
 
+    // ---------------------------------------------------------------- ce qui revient à l'écran (R-40, audit 2026-10-07 b, I-1)
+
+    private val tops = listOf("castbridge.receiver.PlayerActivity", "castbridge.receiver.QuizActivity", "castbridge.receiver.quiz.PlayOnlineActivity",
+        "castbridge.receiver.ChessActivity", "castbridge.receiver.LanguesActivity", "castbridge.receiver.wallet.WalletActivity", "castbridge.receiver.GameActivity")
+
+    @Test fun withoutAScreenTheTaskComesBackAsItWasWhateverIsOnTop() {
+        // PlayerActivity est singleTask : la démarrer ferme tout ce qui est au-dessus (la partie en ligne s'arrête dans son onDestroy). Sans écran demandé on ne démarre RIEN de tel.
+        for (top in tops) assertEquals(OpenTarget.Resume(top), OpenTvPlan.target(null, top, taskAlive = true), top)
+    }
+
+    @Test fun anExplicitScreenIsOpenedWhateverIsOnTop() {
+        for (s in OpenTvScreen.values()) for (top in tops + listOf(null))
+            assertEquals(OpenTarget.Screen(s), OpenTvPlan.target(s, top, taskAlive = top != null), "$s over $top")
+    }
+
+    @Test fun aTaskThatIsAliveButWhoseTopIsUnknownIsStillResumedNotRelaunched() {
+        // le processus a redémarré pendant que YouTube était devant : le système connaît le sommet de la tâche, pas nous
+        assertEquals(OpenTarget.Resume(null), OpenTvPlan.target(null, null, taskAlive = true))
+    }
+
+    @Test fun onlyWithNoTaskAtAllTheLauncherIsStarted() {
+        assertEquals(OpenTarget.Launch, OpenTvPlan.target(null, null, taskAlive = false))
+        assertEquals(OpenTarget.Resume("castbridge.receiver.QuizActivity"), OpenTvPlan.target(null, "castbridge.receiver.QuizActivity", taskAlive = false), "un sommet connu suffit : la tâche existe")
+    }
+
+    @Test fun thePlayerScreenIsAnExplicitRequestToo() {
+        // `player` figure dans la liste des écrans : le demander, c'est demander PlayerActivity (les écrans au-dessus se ferment, c'est ce qui est demandé)
+        assertEquals(OpenTarget.Screen(OpenTvScreen.PLAYER), OpenTvPlan.target(OpenTvScreen.PLAYER, "castbridge.receiver.QuizActivity", taskAlive = true))
+    }
+
     // ---------------------------------------------------------------- la ligne de MENU, une seule fois
 
     @Test fun theMenuLineIsOfferedOnceAfterAPhoneCouldNotOpenTheTv() {

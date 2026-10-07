@@ -57,7 +57,10 @@ object NetStates {
     /** Avant la première mesure, la TV ne se dit pas hors ligne (même optimisme qu'avant pour le portefeuille). */
     fun reachable(f: NetFacts): Boolean = !f.checked || of(f).up
 
-    /** Le dernier contact avec le serveur a été fait EN DIRECT, a réussi, et date de moins de [CONTACT_FRESH_MS] (une date dans le futur ne compte pas). */
-    fun contactRecent(lastOk: Boolean, via: String?, lastAt: Long, now: Long): Boolean =
-        lastOk && via == Routes.Via.DIRECT.key && lastAt > 0 && lastAt <= now && now - lastAt <= CONTACT_FRESH_MS
+    /**
+     * Le dernier contact avec le serveur a été fait EN DIRECT, a réussi, et date de moins de [CONTACT_FRESH_MS] (une date dans le futur ne compte pas). [directFailedAt] : date du dernier
+     * appel réel ÉCHOUÉ sur le réseau propre (0 = aucun, [NetProbePlan.directFailedAt]) ; un échec POSTÉRIEUR au contact annule la preuve (R-41, I-2) : la box a perdu Internet depuis.
+     */
+    fun contactRecent(lastOk: Boolean, via: String?, lastAt: Long, now: Long, directFailedAt: Long = 0L): Boolean =
+        lastOk && via == Routes.Via.DIRECT.key && lastAt > 0 && lastAt <= now && now - lastAt <= CONTACT_FRESH_MS && !(directFailedAt > lastAt)
 }

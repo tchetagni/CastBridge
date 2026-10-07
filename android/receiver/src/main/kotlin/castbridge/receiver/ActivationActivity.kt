@@ -310,7 +310,8 @@ class ActivationActivity : Activity() {
 
     /** The banner at the top: the « Activer » button when a key verifies for this TV, else the exact reason; nothing while there is no key (the key's way says so) or the terms are pending (so does the key's way). */
     private fun refreshBanner(v: UsbActivationBanner.View) {
-        val quiet = v.state == UsbActivationBanner.State.IDLE || v.state == UsbActivationBanner.State.NO_KEY || v.state == UsbActivationBanner.State.TERMS_PENDING
+        // INSTALLED (R-44): the key on the drive is the activation already installed: nothing to announce (only an explicit search says it, in the result line)
+        val quiet = v.state == UsbActivationBanner.State.IDLE || v.state == UsbActivationBanner.State.NO_KEY || v.state == UsbActivationBanner.State.TERMS_PENDING || v.state == UsbActivationBanner.State.INSTALLED
         bannerButton.visibility = if (v.canActivate) View.VISIBLE else View.GONE
         if (v.canActivate) bannerButton.text = v.text
         bannerText.visibility = if (!quiet && !v.canActivate) View.VISIBLE else View.GONE

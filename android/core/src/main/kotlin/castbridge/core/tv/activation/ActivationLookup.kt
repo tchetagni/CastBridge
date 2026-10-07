@@ -8,11 +8,14 @@ import java.io.IOException
 /** Where a candidate file lives: the shared Download folder of a volume (not readable by the app under scoped storage) or the app's own folder of that volume (always readable). */
 enum class Place { DOWNLOAD, OWN_DIR }
 
-/** What was found at one candidate path. Never carries the content. */
-enum class Probe { ABSENT, UNREADABLE, EMPTY, TOO_BIG, NOT_VALID, WRONG_DEVICE, EXPIRED, ACCEPTED }
+/** What was found at one candidate path. Never carries the content. [INSTALLED] = this very key is already installed on this TV (R-44: nothing to announce). */
+enum class Probe { ABSENT, UNREADABLE, EMPTY, TOO_BIG, NOT_VALID, WRONG_DEVICE, EXPIRED, ACCEPTED, INSTALLED }
 
-/** The verdict the receiver gives to the first line of a readable file (it maps `ActivationResult`; the core never sees the key's text again). */
-enum class Verdict { ACCEPTED, NOT_VALID, WRONG_DEVICE, EXPIRED }
+/**
+ * The verdict the receiver gives to the first line of a readable file (it maps `ActivationResult`; the core never sees the key's text again). [INSTALLED]: the key is the one that is
+ * ALREADY installed on this TV ([UsbKeyJudge]): neither « found » (there is nothing to activate) nor « expired » (its 48 h are only the window to INSTALL it).
+ */
+enum class Verdict { ACCEPTED, NOT_VALID, WRONG_DEVICE, EXPIRED, INSTALLED }
 
 data class Candidate(val file: File, val volumeId: String?, val place: Place)
 data class VolumeFact(val id: String, val readOnly: Boolean)
@@ -102,10 +105,11 @@ object ActivationLookup {
             val (p, line) = read(fs, c.file)
             val probe = if (line == null) p else when (verify(line)) {
                 Verdict.ACCEPTED -> Probe.ACCEPTED; Verdict.WRONG_DEVICE -> Probe.WRONG_DEVICE; Verdict.EXPIRED -> Probe.EXPIRED; Verdict.NOT_VALID -> Probe.NOT_VALID
+                Verdict.INSTALLED -> Probe.INSTALLED
             }
             probes += ProbeFact(c.place, c.volumeId, probe)
             if (probe == Probe.ACCEPTED) { accepted = true; decided = true; break }
-            if (probe in setOf(Probe.NOT_VALID, Probe.WRONG_DEVICE, Probe.EXPIRED)) decided = true
+            if (probe in setOf(Probe.NOT_VALID, Probe.WRONG_DEVICE, Probe.EXPIRED, Probe.INSTALLED)) decided = true
         }
         val ownPaths = dirs.filter { it.third == Place.OWN_DIR && it.first.name != "CastBridge" }.map { it.first.path }
         return Outcome(LookupFacts(volumes, probes, if (accepted) emptyList() else allDirs, access, ownPaths), accepted, decided)
@@ -143,7 +147,7 @@ object ActivationLookupReport {
     fun noKeyHeadline(access: StorageAccess, ownPath: String?): String =
         if (access == StorageAccess.MISSING) missingAccess(ownPath) else "Aucune clé trouvée sur la clé USB."
 
-    private val READ = setOf(Probe.ACCEPTED, Probe.NOT_VALID, Probe.WRONG_DEVICE, Probe.EXPIRED, Probe.EMPTY, Probe.TOO_BIG)
+    private val READ = setOf(Probe.ACCEPTED, Probe.NOT_VALID, Probe.WRONG_DEVICE, Probe.EXPIRED, Probe.EMPTY, Probe.TOO_BIG, Probe.INSTALLED)
 
     fun lines(f: LookupFacts): List<String> {
         val out = ArrayList<String>()
@@ -180,6 +184,7 @@ object ActivationLookupReport {
             Probe.WRONG_DEVICE in s -> "fichier « activation » : lu, mais cette clé est celle d'une autre TV (vérifiez le code d'appareil donné)"
             Probe.EXPIRED in s -> "fichier « activation » : lu, mais la clé est périmée (valable 48 h) : demandez-en une nouvelle"
             Probe.NOT_VALID in s -> "fichier « activation » : lu, mais ce n'est pas une clé valable (texte incomplet ou abîmé)"
+            Probe.INSTALLED in s -> "fichier « activation » : lu, cette activation est déjà installée sur cette TV (rien à faire)"
             Probe.UNREADABLE in s -> "fichier « activation » : présent mais Android refuse de le lire : déposez-le dans ${ActivationLookup.OWN_DIR_TEXT}/activation, ou utilisez le téléphone"
             Probe.TOO_BIG in s -> "fichier « activation » : trop gros (16 ko au plus), ce n'est pas une clé"
             Probe.EMPTY in s -> "fichier « activation » : vide"

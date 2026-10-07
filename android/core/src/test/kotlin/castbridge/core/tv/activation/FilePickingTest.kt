@@ -63,6 +63,7 @@ class FilePickingTest {
         assertTrue("périmée" in PickerPlan.verdictText(Verdict.EXPIRED))
         assertTrue("pas une activation" in PickerPlan.verdictText(Verdict.NOT_VALID))
         assertTrue("vérification" in PickerPlan.verdictText(Verdict.ACCEPTED))
+        assertTrue("déjà installée" in PickerPlan.verdictText(Verdict.INSTALLED))
     }
 
     // ---- built-in explorer ----

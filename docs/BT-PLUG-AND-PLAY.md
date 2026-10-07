@@ -166,6 +166,27 @@ table d'abord**.
 - **À valider sur matériel** : un téléphone neuf avec une TV ancienne (repli sur `…0002`, durée de l'échec de `…0007`) ; un ancien téléphone avec une TV neuve, SSH éteint puis allumé ; que
   la pile du S21+ n'enregistre pas deux fois le même UUID pendant la bascule.
 
+## La passerelle de la TV survit au redémarrage du Bluetooth et ne sert qu'UN téléphone à la fois (R-42, R-43)
+Audit anti-régression 2026-10-07 b, I-12 et I-11.
+- **R-42, la boucle d'acceptation.** Avant : `BtGatewayHost` sortait de sa boucle au premier `accept()` échoué (Bluetooth éteint puis rallumé, pile redémarrée) mais gardait `running = true` et la
+  socket morte : `start()` ne faisait plus rien, l'écran disait « prête », la TV continuait de frapper aux téléphones, jusqu'au redémarrage de l'application. Maintenant la boucle est celle du
+  cœur (`core/gateway/AcceptLoop.kt`, testée avec de fausses sockets serveur) : elle **réécoute** (5 échecs de suite au plus, pauses de 2, 4, 6, 8 puis 10 s : une demi-minute), un lien
+  accepté remet le compte à zéro, une socket fermée exprès (`sshBluetoothChanged`) ou un `stop()` pendant une pause finissent la boucle sans bruit ; si elle renonce, l'hôte est marqué arrêté
+  (« Passerelle Bluetooth : arrêtée ») et libère le port SOCKS, donc un nouveau `start()` marche. **Et** au retour du Bluetooth (`BluetoothAdapter.ACTION_STATE_CHANGED`, règle pure
+  `BtAdapterWatch.listenAgain`) `TvService` appelle `gateway?.restart()` (arrêt puis démarrage).
+- **Pas encore fait** (même défaut, hors de ce constat) : `BtServer` (fichiers, télécommande, HELLO), `BtApiControl`, le canal propriétaire et le SSH par Bluetooth ne réécoutent pas non plus
+  au `STATE_ON` (`BtServer` repasse seulement `running = false`) ; le crochet de `TvService` (`watchBluetooth`) est l'endroit où les redémarrer.
+- **R-43, un seul téléphone.** `Entry.attach` (`core/gateway/BtGateway.kt`) remplaçait le lien courant par un second SANS fermer l'ancien, et le `finally` du lien remplacé terminait TOUS les
+  flux, requêtes et mesures du lien courant (la partie ou le tunnel tombait quand le téléphone remplacé, sans flux, s'arrêtait 10 minutes plus tard). Chaque lien a maintenant ses propres flux,
+  requêtes et mesures (`Session`) : la fin d'un lien ne touche qu'aux siens. Politique : la TV **ne coupe jamais un lien sain pour un second** (un téléphone dont le lien est fermé se reconnecte
+  tout seul, `BtGatewayService.loop` : deux téléphones se reprendraient le tuyau sans fin) ; un **second téléphone** reçoit `HELLO_ERR « occupée »` (`Gw.BUSY`, lu côté téléphone comme
+  `GatewayRefused.busy` ; rien n'est annoncé à un téléphone qui n'a pas donné le bon PIN) ; le **même appareil** (même adresse Bluetooth, celle de la socket appairée) qui revient remplace son
+  ancien lien, qui est fermé proprement (ses flux se terminent, ceux du nouveau lien sont intacts). Tests : `GatewayTwoPhonesTest`, `AcceptLoopTest`, `BtAdapterWatchTest`.
+- **Pour fix-phone** (code téléphone, non modifié ici) : `BtGatewayService.loop` traite `GatewayRefused.busy` comme une erreur ordinaire et réessaie (1 à 15 s, jusqu'à l'arrêt sur inactivité de 10 min) ;
+  l'audit demande d'en faire `RelayReason.BUSY` et de ne plus réessayer (`catch (e: GatewayRefused) { if (e.busy) … }`).
+- **À valider sur matériel** : éteindre puis rallumer le Bluetooth de la TV (MENU › Infos : la passerelle accepte-t-elle encore « Partager l'Internet du téléphone » ?) ; deux téléphones
+  synchronisés qui ouvrent le tuyau en même temps (le premier sert, le second est refusé « occupée », la partie du premier continue) ; le même téléphone qui revient après une coupure.
+
 ## Limites connues
 - API par Bluetooth active par défaut : un appareil appairé (donc approuvé à l'appairage sur la TV) qui connaît le PIN peut tout faire par ce canal, comme par le Wi-Fi ; couper l'interrupteur pour ne garder que les téléphones de confiance.
 - Jeton en clair sur le Wi-Fi local (HTTP) : rejouable par quelqu'un sur le même réseau pendant sa durée de vie.

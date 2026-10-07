@@ -1,5 +1,6 @@
 package castbridge.receiver
 
+import castbridge.core.connect.DirectLeg
 import java.net.HttpURLConnection
 import java.net.InetAddress
 import java.net.InetSocketAddress
@@ -24,7 +25,7 @@ object TvNetDiag {
     fun probe(proxy: Proxy?): Long? = runCatching {
         val t0 = System.nanoTime()
         (URL("http://connectivitycheck.gstatic.com/generate_204").openConnection(proxy ?: Proxy.NO_PROXY) as HttpURLConnection).run {
-            connectTimeout = 6000; readTimeout = 6000; instanceFollowRedirects = false
+            connectTimeout = DirectLeg.PROBE_TIMEOUT_MS.toInt(); readTimeout = DirectLeg.PROBE_TIMEOUT_MS.toInt(); instanceFollowRedirects = false      // the budget of « hors ligne sous 90 s » (DirectLeg.RECHECK_BUDGET_MS)
             val c = responseCode; disconnect()
             if (c == 204) ms(t0) else null
         }

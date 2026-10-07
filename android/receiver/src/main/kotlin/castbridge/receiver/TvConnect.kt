@@ -82,8 +82,8 @@ object TvConnect {
             installed = ServerLink.Installed(code, pi?.versionName, Build.SUPPORTED_ABIS.toList(), Build.VERSION.SDK_INT),
             state = state, facts = { TvFacts(app) }, salt = SALT,
             // the TV's own network first, then the Internet of a phone shared over Bluetooth (BtGatewayHost, SOCKS 127.0.0.1:1080). relay-R1: the single truth of the TV (TvNet) says which
-            // path goes first; a failed call tells it at once (the TV's own network is then checked now, the pipe is confirmed once: no periodic probe)
-            routes = Routes(gateway = { TvNet.gatewayProxy() }, preferred = TvNet::preferredVia, onGatewayFailure = TvNet::relayFailureSeen, onDirectFailure = TvNet::markChanged),
+            // path goes first; a failed call tells it at once (the TV's own network is then checked at the next round, 90 s at most, and an older direct contact no longer proves it works: R-41; the pipe is confirmed once: no periodic probe)
+            routes = Routes(gateway = { TvNet.gatewayProxy() }, preferred = TvNet::preferredVia, onGatewayFailure = TvNet::relayFailureSeen, onDirectFailure = TvNet::directFailed),
             queue = EventQueue(File(app.filesDir, "telemetry/events.jsonl")),
             crashes = CrashStore(File(app.filesDir, "crashes")),
             keys = keys, hooks = Hooks, quiz = QuizSync(QuizHub.cachedSource(app), quizFile), quizPacks = QuizHub.packHook(app, keys),

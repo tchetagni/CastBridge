@@ -2,9 +2,11 @@ package castbridge.receiver
 
 import android.annotation.SuppressLint
 import android.bluetooth.BluetoothManager
-import android.bluetooth.BluetoothServerSocket
+import android.bluetooth.BluetoothSocket
 import android.content.Context
 import android.util.Log
+import castbridge.core.gateway.AcceptLoop
+import castbridge.core.gateway.Acceptor
 import castbridge.core.gateway.Entry
 import castbridge.core.gateway.GatewayService
 import castbridge.core.gateway.Gw
@@ -49,8 +51,9 @@ class BtGatewayHost(private val ctx: Context, private val guard: PinGuard, priva
         if (pin == castbridge.core.trust.TvAuth.NO_PIN) peerAddress.get()?.let(trusted) == true
         else guard.check("bt-gateway", pin) == PinGuard.Result.OK
     }, PORT, { if (socksAuthDisabled) null else socksToken }) { m -> Log.i(TAG, m); refresh() }
-    /** One server socket per UUID the gateway listens on (see [castbridge.core.gateway.GatewayService.tvListens]); guarded by `this`. */
-    private val servers = HashMap<String, BluetoothServerSocket>()
+    /** One listener per UUID the gateway listens on (see [castbridge.core.gateway.GatewayService.tvListens]); guarded by `this`. */
+    private val servers = HashMap<String, Acceptor<BluetoothSocket>>()
+    /** True while the gateway listens: set by [start], cleared by [stop] and when an accept loop gives up (a gateway that gave up can be started again). */
     @Volatile private var running = false
 
     @Synchronized fun start() {
@@ -65,26 +68,62 @@ class BtGatewayHost(private val ctx: Context, private val guard: PinGuard, priva
         sshBluetoothChanged(sshBluetoothWanted())    // R-28-LEGACY-TV: the old UUID too, unless the SSH over Bluetooth owns it
     }
 
-    /** Opens the RFCOMM service [uuid] and accepts the phones that connect to it, until that server socket is closed. Throws if the service cannot be opened. */
-    private fun listen(uuid: String) {
+    /** Opens a listener on the RFCOMM service [uuid]. Throws if the service cannot be opened (Bluetooth off, permission). */
+    private fun open(uuid: String): Acceptor<BluetoothSocket> {
         val ad = ctx.getSystemService(BluetoothManager::class.java)?.adapter ?: throw IOException("Bluetooth indisponible")
         val name = if (uuid == Gw.SERVICE_UUID) "CastBridge Internet" else "CastBridge Internet (ancien)"
         val ss = ad.listenUsingRfcommWithServiceRecord(name, UUID.fromString(uuid))
-        servers[uuid] = ss; running = true
+        return object : Acceptor<BluetoothSocket> {
+            override fun accept(): BluetoothSocket = ss.accept()
+            override fun close() { ss.close() }
+        }
+    }
+
+    /**
+     * Opens the RFCOMM service [uuid] and accepts the phones that connect to it. Throws if the service cannot be opened. The loop SURVIVES a failed accept (R-42, audit 2026-10-07 b, I-12:
+     * Bluetooth switched off and on, stack restarted): it listens again a bounded number of times, then gives up and marks the gateway as stopped so that a new [start] works
+     * ([AcceptLoop], tested in the core); [restart] at the adapter's `STATE_ON` covers a longer outage.
+     */
+    private fun listen(uuid: String) {
+        val first = open(uuid)
+        servers[uuid] = first; running = true
         Thread({
-            while (running) {
-                val sock = try { ss.accept() } catch (e: IOException) { break }
-                val peer = runCatching { sock.remoteDevice.name ?: sock.remoteDevice.address }.getOrDefault("téléphone")
-                val peerAddr = runCatching { sock.remoteDevice.address }.getOrNull()
-                Thread({
-                    val startedAt = System.currentTimeMillis()
-                    var mux: Mux? = null
-                    try { mux = Mux(sock.inputStream, sock.outputStream); peerAddress.set(peerAddr); socksToken = SocksAuth.newToken(); entry.attach(mux, peer) }
-                    catch (e: Exception) { Log.w(TAG, "gateway link: ${e.javaClass.simpleName}") }
-                    finally { runCatching { sock.close() }; refresh(); mux?.let { m -> runCatching { sessionEnded(startedAt, m) } } }
-                }, "gw-link").apply { isDaemon = true; start() }
-            }
+            AcceptLoop<BluetoothSocket>(
+                wanted = { l -> synchronized(this) { running && servers[uuid] === l } },
+                reopen = { runCatching { open(uuid) }.getOrNull() },
+                replace = { old, new -> synchronized(this) { if (running && servers[uuid] === old) { servers[uuid] = new; true } else false } },
+                serve = { sock -> serveLink(sock) },
+                gaveUp = { gaveUp(uuid) },
+                log = { m -> Log.i(TAG, "service …${uuid.takeLast(4)}: $m") },
+            ).run(first)
         }, "gw-accept-${uuid.takeLast(4)}").apply { isDaemon = true; start() }
+    }
+
+    /** One accepted phone link, served on its own thread (the TV serves ONE phone at a time: [Entry.attach] answers a second phone « occupée »). */
+    private fun serveLink(sock: BluetoothSocket) {
+        val peer = runCatching { sock.remoteDevice.name ?: sock.remoteDevice.address }.getOrDefault("téléphone")
+        val peerAddr = runCatching { sock.remoteDevice.address }.getOrNull()
+        Thread({
+            val startedAt = System.currentTimeMillis()
+            var mux: Mux? = null
+            var served = false
+            try {
+                mux = Mux(sock.inputStream, sock.outputStream); peerAddress.set(peerAddr); socksToken = SocksAuth.newToken()
+                val before = entry.attaches
+                entry.attach(mux, peer, peerAddr)
+                served = entry.attaches != before                    // a refused phone (wrong PIN, « occupée ») is not a session: nothing to report
+            }
+            catch (e: Exception) { Log.w(TAG, "gateway link: ${e.javaClass.simpleName}") }
+            finally { runCatching { sock.close() }; refresh(); if (served) mux?.let { m -> runCatching { sessionEnded(startedAt, m) } } }
+        }, "gw-link").apply { isDaemon = true; start() }
+    }
+
+    /** An accept loop gave up (Bluetooth stayed off): everything is closed and the gateway is marked stopped, so that [start] (or [restart] at `STATE_ON`) listens again. */
+    private fun gaveUp(uuid: String) = synchronized(this) {
+        Log.w(TAG, "gateway listener …${uuid.takeLast(4)} gave up: gateway stopped until Bluetooth is back")
+        running = false
+        servers.values.forEach { runCatching { it.close() } }; servers.clear()
+        entry.stop()                                     // the local SOCKS port is freed: a later start() must be able to bind it again
     }
 
     /**
@@ -130,6 +169,9 @@ class BtGatewayHost(private val ctx: Context, private val guard: PinGuard, priva
     }
 
     @Synchronized fun stop() { running = false; servers.values.forEach { s -> runCatching { s.close() } }; servers.clear(); entry.stop() }
+
+    /** The Bluetooth adapter is back ON ([castbridge.core.gateway.BtAdapterWatch]): its server sockets died with it, so listen again (stop, then start). */
+    @Synchronized fun restart() { stop(); start() }
 
     private fun refresh(): Unit = run {
         if (entry.connected && connectedSince == 0L) connectedSince = System.currentTimeMillis()

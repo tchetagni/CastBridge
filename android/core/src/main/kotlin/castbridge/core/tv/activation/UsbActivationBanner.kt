@@ -30,6 +30,11 @@ object UsbActivationBanner {
         HIDDEN,
         /** A key is there, no activation file in the places the TV can read. */
         NOT_FOUND,
+        /**
+         * The file on the key is the activation ALREADY installed on this TV (R-44, audit 2026-10-07 b, I-16): a trial key left plugged in used to come back « found › Activer » at every
+         * plug-in, then « périmée » once its 48 h were over. Nothing to announce: the banner stays quiet, only an explicit search says it (and the home says nothing).
+         */
+        INSTALLED,
     }
 
     /**
@@ -41,7 +46,7 @@ object UsbActivationBanner {
     private const val DROP = ActivationLookup.OWN_DIR_TEXT + "/"
     private const val TERMS_LINE = "Clé USB : cochez d'abord les conditions d'usage, la clé sera lue ensuite"
     private const val NO_KEY_LINE = "Aucune clé USB détectée : branchez-la, la TV la lit aussitôt"
-    private val READ = setOf(Probe.ACCEPTED, Probe.NOT_VALID, Probe.WRONG_DEVICE, Probe.EXPIRED, Probe.EMPTY, Probe.TOO_BIG)
+    private val READ = setOf(Probe.ACCEPTED, Probe.NOT_VALID, Probe.WRONG_DEVICE, Probe.EXPIRED, Probe.EMPTY, Probe.TOO_BIG, Probe.INSTALLED)
 
     fun idle() = View(State.IDLE, "", LineTone.INFO, false, false, NO_KEY_LINE)
     fun termsPending() = View(State.TERMS_PENDING, TERMS_LINE, LineTone.INFO, false, false, "Cochez d'abord les conditions d'usage : la clé USB sera lue ensuite")
@@ -59,6 +64,7 @@ object UsbActivationBanner {
             Probe.WRONG_DEVICE in states -> State.WRONG_TV
             Probe.EXPIRED in states -> State.EXPIRED
             Probe.NOT_VALID in states -> State.NOT_VALID
+            Probe.INSTALLED in states -> State.INSTALLED           // la clé de ce fichier est l'activation DÉJÀ installée : rien à annoncer (R-44)
             !keyPresent -> State.NO_KEY
             facts.access == StorageAccess.MISSING && states.none { it in READ } -> State.HIDDEN
             Probe.UNREADABLE in states -> State.UNREADABLE
@@ -83,11 +89,12 @@ object UsbActivationBanner {
         State.UNREADABLE -> "Clé USB : fichier « activation » présent mais Android refuse de le lire : déposez-le dans $DROP"
         State.HIDDEN -> "Clé USB : dossier Download invisible : déposez le fichier dans $DROP"
         State.NOT_FOUND -> "Clé USB : aucun fichier « activation » trouvé : déposez-le dans $DROP"
+        State.INSTALLED -> "Clé USB : cette activation est déjà installée sur cette TV"
     }
 
     private fun toneOf(s: State): LineTone = when (s) {
         State.FOUND -> LineTone.GOOD
-        State.IDLE, State.TERMS_PENDING, State.SEARCHING, State.NO_KEY -> LineTone.INFO
+        State.IDLE, State.TERMS_PENDING, State.SEARCHING, State.NO_KEY, State.INSTALLED -> LineTone.INFO
         else -> LineTone.WARN
     }
 

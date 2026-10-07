@@ -142,8 +142,10 @@ object TunnelHub {
         override fun activation(): String? = TunnelEnroll.pickActivation(ActivationCenter.allActivations(), ActivationCenter.now())?.encode()
         override fun connectivity(): TunnelPath {
             if (TvService.running == null || !TvNet.checked()) return TunnelPath.OFFLINE   // not measured yet: a few seconds after the start
-            // relay-R1: the path is read from the single truth of the TV (direct / via_relay / none), like every other consumer; no definition of its own
-            return TunnelConnectivity.path(TvNet.state()).also { lastPath = it }
+            // relay-R1: the path is read from the single truth of the TV (direct / via_relay / none), like every other consumer; no definition of its own.
+            // R-45 (audit 2026-10-07 b, I-7): the phone's pipe is the tunnel's ONLY during an assistance session the user asked for, or the phone owner's own manual sharing; else OFFLINE:
+            // the machine closes its SSH session (it counted as an open connection for ever: the phone's 10-minute idle stop never came) and the pipe is released
+            return TunnelConnectivity.path(TvNet.state(), TvNet.assistPipeAllowed()).also { lastPath = it }
         }
         override fun keyId() = client.keyId()
     }

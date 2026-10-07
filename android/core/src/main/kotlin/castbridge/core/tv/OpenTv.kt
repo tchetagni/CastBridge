@@ -79,12 +79,22 @@ data class OpenTvReply(val opened: Boolean, val how: String, val needs: String?,
     }
 }
 
+/** Ce que le geste « Ouvrir sur la TV » ramène à l'écran ([OpenTvPlan.target], R-40). */
+sealed class OpenTarget {
+    /** CastBridge-TV revient TEL QU'IL ÉTAIT : sa tâche passe devant avec l'écran du sommet ([top] = nom de sa classe, null = inconnu) ; rien n'est fermé ni relancé. */
+    data class Resume(val top: String?) : OpenTarget()
+    /** L'écran que le téléphone a demandé explicitement. */
+    data class Screen(val screen: OpenTvScreen) : OpenTarget()
+    /** Aucune tâche de CastBridge-TV n'est vivante : le lanceur (l'accueil). */
+    object Launch : OpenTarget() { override fun toString() = "Launch" }
+}
+
 /**
  * Comment faire passer CastBridge-TV devant une autre application, dans l'ordre, et comment le dire au téléphone. Depuis Android 10, une application qui n'est
  * pas à l'écran ne peut plus ouvrir un écran toute seule, sauf exemptions :
  *
- *  1. **direct** : `startActivity` (NEW_TASK | CLEAR_TOP), possible si l'application a l'autorisation « Afficher par-dessus les autres applications » (ou avant
- *     Android 10) ;
+ *  1. **direct** : le système ramène la tâche de CastBridge-TV devant (`AppTask.moveToFront`), ou démarre l'écran demandé (`startActivity`, [target]), possible si l'application
+ *     a l'autorisation « Afficher par-dessus les autres applications » (ou avant Android 10) ;
  *  2. **fullscreen** : la notification du canal « Demandes du téléphone » (intention plein écran si Android l'autorise ; sinon une notification qu'on ouvre avec
  *     la télécommande) ;
  *  3. **accessibility** : le service d'accessibilité « CastBridge Télécommande », s'il est actif (Android lui permet de démarrer un écran).
@@ -133,6 +143,20 @@ object OpenTvPlan {
         fun awaitFront(maxMs: Long): Boolean
         /** Retire la notification « Demandes du téléphone » (elle a fait son travail). */
         fun withdraw()
+    }
+
+    /**
+     * Ce que le geste fait venir à l'écran (R-40, audit anti-régression 2026-10-07 b, I-1). [PlayerActivity] est `singleTask` et racine de la tâche : la démarrer alors que
+     * d'autres écrans (Quiz, partie en ligne, Échecs, Langues, Portefeuille…) sont au-dessus l'ÉVACUE tous, et `PlayOnlineActivity.onDestroy` arrête la partie en ligne. Donc :
+     *  - un écran DEMANDÉ explicitement par le téléphone ([screen] non nul) s'ouvre ([OpenTarget.Screen]) : c'est ce qu'il a demandé, y compris `home` qui quitte la vidéo ;
+     *  - sans écran demandé, CastBridge-TV revient TEL QU'IL ÉTAIT ([OpenTarget.Resume]) : sa tâche passe devant avec l'écran qui était au sommet ([top], null = inconnu : le système
+     *    sait), rien n'est fermé, relancé ni navigué ;
+     *  - seulement si aucune tâche de CastBridge-TV n'est vivante ([taskAlive] faux et [top] nul) : le lanceur ([OpenTarget.Launch]).
+     */
+    fun target(screen: OpenTvScreen?, top: String?, taskAlive: Boolean): OpenTarget = when {
+        screen != null -> OpenTarget.Screen(screen)
+        top != null || taskAlive -> OpenTarget.Resume(top)
+        else -> OpenTarget.Launch
     }
 
     /** Essaie les façons dans l'ordre jusqu'à ce que l'écran soit là, et rend ce que la TV répond au téléphone. */

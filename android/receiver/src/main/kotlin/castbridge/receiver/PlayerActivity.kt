@@ -218,9 +218,10 @@ class PlayerActivity : Activity(), TvService.Screen {
             .setView(android.widget.ScrollView(this).apply { addView(tv); setBackgroundColor(TvStyle.BG_ELEVATED) })
             .setPositiveButton("Fermer", null)
             .setNeutralButton("Lire les conditions…") { _, _ -> showTermsDialog() }
-        // relay-R1 : une demande EXPLICITE d'assistance sans Internet : un téléphone synchronisé ouvre un tuyau (jamais en tâche de fond : le tunnel permanent ne réveille aucun téléphone)
-        if (TunnelHub.termsAccepted(this) && TunnelHub.state() != castbridge.core.tunnel.TunnelState.UP && !TvNet.state().up)
-            b.setNegativeButton("Se connecter maintenant") { _, _ -> TvNet.need(castbridge.core.relay.PipeNeed.ASSIST, force = true); TunnelHub.poke(); flash(castbridge.core.relay.RelayText.ASKING) }
+        // relay-R1 : une demande EXPLICITE d'assistance sans Internet par la TV elle-même : un téléphone synchronisé ouvre un tuyau (jamais en tâche de fond : le tunnel permanent ne réveille aucun téléphone).
+        // R-45 : c'est aussi la SEULE façon d'autoriser le tunnel à employer un tuyau déjà ouvert pour autre chose (partie, portefeuille…) : le bouton reste donc proposé tant que le réseau propre ne porte pas Internet
+        if (TunnelHub.termsAccepted(this) && TunnelHub.state() != castbridge.core.tunnel.TunnelState.UP && TvNet.state() != castbridge.core.connect.NetState.DIRECT)
+            b.setNegativeButton("Se connecter maintenant") { _, _ -> TvNet.requestAssistance(); TunnelHub.poke(); flash(castbridge.core.relay.RelayText.ASKING) }
         b.show()
     }
 

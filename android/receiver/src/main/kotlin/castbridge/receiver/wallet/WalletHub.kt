@@ -76,6 +76,11 @@ object WalletHub {
     @Volatile var policy: PolicyView? = null; private set
     @Volatile var lastSync: SyncData? = null; private set
     @Volatile var lastSyncAt: Long? = null; private set
+    /**
+     * La dernière TENTATIVE de synchronisation, réussie ou non (R-46) : le tick de 60 s ne se règle plus sur le dernier SUCCÈS seulement (un serveur qui refuse, 409 « TV non activée », faisait
+     * recommencer la TV chaque minute : 280 refus en 2 h en production). En mémoire : au redémarrage elle repart de la dernière synchronisation réussie gardée.
+     */
+    @Volatile private var lastAttempt: WalletSyncSchedule.Attempt? = null
     @Volatile var lastFail: WalletMessages.Shown? = null; private set
     /** Le dernier appel a échoué faute de réseau (une réponse du serveur, même un refus, remet à faux). */
     @Volatile private var lastCallOffline = false
@@ -98,6 +103,7 @@ object WalletHub {
         cache = c
         server = runCatching { ServerWallet.valueOf(prefs().getString("server", null) ?: "UNKNOWN") }.getOrDefault(ServerWallet.UNKNOWN)
         lastSyncAt = prefs().getLong("last_sync", 0L).takeIf { it > 0 }
+        lastAttempt = lastSyncAt?.let { WalletSyncSchedule.Attempt(it, WalletSyncSchedule.Outcome.OK) }
         SafeFile.read(File(dir(), "last-sync.json"))?.text?.let { lastSync = WalletReplies.parseSync(it) }
         client = WalletClient(RoutesTransport(), ::identity, c, System::currentTimeMillis)
         ready = true
@@ -130,22 +136,27 @@ object WalletHub {
 
     // ---- synchronisation ----
 
-    /** Synchronise si la règle du calendrier le veut ([Trigger.OPEN] : à l'ouverture ; [Trigger.AFTER_OPERATION] : après chaque opération ; [Trigger.TICK] : toutes les 15 min). */
+    /**
+     * Synchronise si la règle du calendrier le veut ([Trigger.OPEN] : à l'ouverture ; [Trigger.AFTER_OPERATION] : après chaque opération ; [Trigger.TICK] : toutes les 15 min depuis la dernière
+     * TENTATIVE, avec un repli de 1 à 15 minutes après un refus du serveur et 2 minutes après un échec réseau : [WalletSyncSchedule], R-46).
+     */
     fun refresh(trigger: Trigger, done: (() -> Unit)? = null) {
         if (!ready || !flag() || !activated()) return
         if (trigger == Trigger.OPEN && !networkUp()) TvNet.need(PipeNeed.WALLET)      // relay-R1 : l'écran du portefeuille vient de s'ouvrir sans Internet : un téléphone peut en donner (la synchronisation suit seule)
         io.execute {
-            if (!schedule.shouldSync(trigger, networkUp(), System.currentTimeMillis(), lastSyncAt, inFlight.get())) return@execute
+            if (!schedule.shouldSyncAfter(trigger, networkUp(), System.currentTimeMillis(), lastAttempt, inFlight.get())) return@execute
             if (!inFlight.compareAndSet(false, true)) return@execute
+            var outcome = WalletSyncSchedule.Outcome.REFUSED               // une exception compte comme un refus : jamais une nouvelle tentative à chaque tick
             try {
                 val r = client!!.sync()
+                outcome = schedule.outcomeOf(r)
                 apply(r)
                 if (r is WalletResult.Ok) {
                     lastSync = r.value; lastSyncAt = System.currentTimeMillis()
                     prefs().edit().putLong("last_sync", lastSyncAt!!).apply()
                     runCatching { SafeFile.write(File(dir(), "last-sync.json"), syncJson(r.value)) }
                 }
-            } finally { inFlight.set(false) }
+            } finally { lastAttempt = schedule.after(lastAttempt, System.currentTimeMillis(), outcome); inFlight.set(false) }
             notifyListeners()
             if (done != null) main.post { done() }
         }

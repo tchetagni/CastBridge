@@ -74,6 +74,7 @@ object PickerPlan {
         Verdict.NOT_VALID -> "Ce fichier n'est pas une activation CastBridge (texte incomplet, abîmé ou autre fichier)"
         Verdict.WRONG_DEVICE -> "Cette clé est celle d'une autre TV : vérifiez le code d'appareil donné"
         Verdict.EXPIRED -> "Cette clé est périmée (valable 48 h) : demandez-en une nouvelle"
+        Verdict.INSTALLED -> "Cette activation est déjà installée sur cette TV : rien à faire"
     }
 }
 

@@ -3,6 +3,7 @@ package castbridge.receiver
 import android.annotation.SuppressLint
 import android.bluetooth.BluetoothManager
 import android.util.Log
+import castbridge.core.connect.DirectLeg
 import castbridge.core.connect.NetFacts
 import castbridge.core.connect.NetProbePlan
 import castbridge.core.connect.NetState
@@ -25,6 +26,7 @@ import castbridge.core.relay.RelayFrames
 import castbridge.core.relay.RelayReason
 import castbridge.core.relay.RelayText
 import castbridge.core.trust.TrustRegistry
+import castbridge.core.tunnel.AssistPipePolicy
 import castbridge.core.tv.BtProtocol
 import java.io.IOException
 import java.util.UUID
@@ -51,6 +53,10 @@ object TvNet : PipeEnv {
     const val PIPE_WAIT_MS = 40_000L
 
     private val plan = NetProbePlan()
+    /** La jambe directe (réseau propre) de la vérité : sonde, avis du système, appels échoués (R-41). */
+    private val direct = DirectLeg(plan) { TvNetDiag.probe(null) }
+    /** Qui peut employer le tuyau d'un téléphone parmi les tâches d'assistance : le tunnel seulement pendant une assistance demandée ou un partage manuel (R-45). */
+    private val assist = AssistPipePolicy()
     private val meter = RelayLinkMeter()
     private val broker = PipeBroker(this)
     /** Téléphones vus AVEC le bit « tuyau à la demande » dans leur HELLO (vrai) ou SANS (faux : un CastBridge ancien) ; absent = pas vu depuis le démarrage. */
@@ -63,7 +69,6 @@ object TvNet : PipeEnv {
     private val pumping = AtomicBoolean(false)
     private var started = false
 
-    @Volatile private var lastDirectMs: Long? = null
     private class RelayCheck(val attach: Int, val ok: Boolean, val ms: Long?)
     @Volatile private var relayCheck: RelayCheck? = null
     @Volatile private var seenAttach = -1
@@ -95,7 +100,8 @@ object TvNet : PipeEnv {
             checked = s.netCheckedAt > 0,
             linkUp = TvNetDiag.linkKind(s) != LinkKind.NONE,
             directValidated = s.netDirectMs != null,
-            directContactRecent = st != null && NetStates.contactRecent(st.lastContactOk, st.lastContactVia, st.lastContactAt, System.currentTimeMillis()),
+            // R-41 : un appel réel échoué sur le réseau propre APRÈS ce contact annule la preuve (la box a perdu Internet depuis)
+            directContactRecent = st != null && NetStates.contactRecent(st.lastContactOk, st.lastContactVia, st.lastContactAt, System.currentTimeMillis(), direct.failedAt()),
             relayConnected = connected,
             relayConfirmed = gw != null && connected && relayMs(gw) != null,
         )
@@ -128,22 +134,34 @@ object TvNet : PipeEnv {
      * manuel) et entre deux sondes on reprend la dernière réponse ; la jambe du tuyau ne coûte aucune requête : sa vie se lit sur ses trames PING.
      */
     fun measure(probeMode: Boolean, manual: Boolean, systemValidated: Boolean): Measured {
-        val now = System.currentTimeMillis()
-        var probed = false
-        val directMs: Long? = when {
-            probeMode && plan.directDue(now, manual) -> { probed = true; plan.directDone(now); TvNetDiag.probe(null).also { lastDirectMs = it } }
-            systemValidated -> if (probeMode) (lastDirectMs ?: 0L) else 0L
-            probeMode -> lastDirectMs
-            else -> null
-        }
+        // la décision (R-41) est pure et testée : [DirectLeg] ; en mode sonde la sonde fait foi, l'avis du système ne remplace jamais une sonde ratée
+        val round = direct.measure(System.currentTimeMillis(), probeMode, manual, systemValidated)
         val gw = svc?.gateway
         if (manual && gw?.connected == true) checkRelayNow()                    // « Tests Internet » : l'utilisateur le demande, le tuyau aussi est vérifié
         val gatewayMs = if (gw?.connected == true) relayMs(gw) else null
-        return Measured(directMs, gatewayMs, probed, measured = probed || (probeMode && lastDirectMs != null))
+        return Measured(round.ms, gatewayMs, round.probed, measured = round.probed || (probeMode && direct.lastProbeMs != null))
     }
 
     /** Un changement d'état de la TV elle-même (réseau apparu ou perdu, passerelle branchée ou débranchée, appel direct échoué) : la prochaine sonde directe est due. */
-    fun markChanged() { plan.markChanged() }
+    fun markChanged() { direct.networkChanged() }
+
+    /**
+     * Un appel réel au serveur a échoué sur le réseau PROPRE de la TV (hors réponse du serveur : [castbridge.core.connect.Routes.onDirectFailure]) : la TV revérifie son réseau au prochain tour
+     * (90 s au plus, [DirectLeg.RECHECK_BUDGET_MS]) et la preuve d'un contact direct plus ancien ne la dit plus joignable (R-41).
+     */
+    fun directFailed() { direct.callFailed(System.currentTimeMillis()) }
+
+    /**
+     * L'utilisateur demande une assistance maintenant (« Se connecter maintenant ») : un tuyau est demandé aux téléphones synchronisés ET le tunnel pourra l'employer pendant la fenêtre
+     * ([AssistPipePolicy.ASSIST_WINDOW_MS]). Sans cette demande le tunnel n'emprunte jamais le tuyau d'un téléphone (R-45).
+     */
+    fun requestAssistance() { assist.requested(System.currentTimeMillis()); need(PipeNeed.ASSIST, force = true) }
+
+    /** Le tunnel d'assistance peut-il employer le tuyau d'un téléphone maintenant ? (une assistance demandée, ou le partage manuel du propriétaire du téléphone) */
+    fun assistPipeAllowed(): Boolean {
+        val gw = svc?.gateway?.takeIf { it.connected } ?: return false
+        return assist.allowed(System.currentTimeMillis(), gw.attachId)
+    }
 
     /** Un appel réel a échoué à travers le tuyau (hors réponse du serveur) : une vérification est due. */
     fun relayFailureSeen() { plan.relayFailureSeen(); pump() }
@@ -182,9 +200,10 @@ object TvNet : PipeEnv {
         val s = svc ?: return
         val gw = s.gateway
         val now = System.currentTimeMillis()
-        if (gw == null || !gw.connected) { seenAttach = -1; return }
+        if (gw == null || !gw.connected) { seenAttach = -1; assist.detached(); return }
         if (gw.attachId != seenAttach) {            // un nouveau tuyau : mesures remises à zéro, un premier PING tout de suite
             seenAttach = gw.attachId; attachedAt = now; lastPingAt = 0L; lastPingOkAt = 0L
+            assist.attached(gw.attachId, tvAskedForIt = broker.currentNeeds().isNotEmpty() || broker.wanted())     // sans demande de la TV : le partage manuel du propriétaire du téléphone
             meter.reset(); sampleAt = now; sampleBytes = gw.linkBytes()
         }
         // la vie du tuyau : un PING toutes les minutes tant qu'il sert ou qu'une opération attend, toutes les 5 minutes sinon (14 octets sur la liaison Bluetooth, rien sur les données mobiles)

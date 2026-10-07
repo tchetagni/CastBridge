@@ -249,8 +249,18 @@ class FeatureGateTest {
     }
 
     @Test fun lockedScreenTexts() {
-        assertContains(LockedTexts.REQUEST, "Usage soumis à autorisation"); assertContains(LockedTexts.REQUEST, "code d'appareil")
         assertContains(LockedTexts.shareMessage(code, Subject.TV), code); assertContains(LockedTexts.NOTICE, "à valider par le propriétaire")
+    }
+
+    @Test fun theCodeUnderTheDeviceCodeSaysWhatItIsAndHowTheKeyIsAskedFor() {
+        // propriétaire bloqué : le texte disait « fournissez ce code d'appareil à CastBridge pour obtenir votre clé », FAUX : l'émetteur exige les empreintes de facteurs (le code n'en est que le haché,
+        // ActivationIssuer l. 104-105) ; la clé se demande avec CastBridge › Activer la TV sur le téléphone, qui lit la demande complète de la TV
+        assertEquals("Code d'appareil (il identifie cette TV ; la clé se demande avec CastBridge › Activer la TV sur le téléphone, qui lit la demande complète de la TV)", LockedTexts.REQUEST)
+        for (t in listOf(LockedTexts.REQUEST, LockedTexts.WAYS, LockedTexts.GRACE)) {
+            val low = t.lowercase()
+            for (false_claim in listOf("fournissez", "envoyer le code", "envoyez le code", "communiquez le code", "donnez le code", "obtenir votre clé")) assertFalse(false_claim in low, "« $false_claim » dans « $t »")
+        }
+        assertContains(LockedTexts.WAYS, "demande d'appareil"); assertContains(LockedTexts.GRACE, "Activer la TV")
     }
 }
 
