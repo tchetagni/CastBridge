@@ -1,3 +1,5 @@
+@file:OptIn(androidx.compose.foundation.layout.ExperimentalLayoutApi::class)
+
 package castbridge.sender
 
 import android.Manifest
@@ -40,7 +42,7 @@ fun TvHubAdvanced(start: Channel = Channel.WIFI) {
         SingleChoiceSegmentedButtonRow(Modifier.fillMaxWidth().padding(horizontal = 16.dp, vertical = 8.dp)) {
             Channel.values().forEachIndexed { i, c ->
                 SegmentedButton(channel == c, { channel = c }, SegmentedButtonDefaults.itemShape(i, Channel.values().size)) {
-                    Text(c.label, maxLines = 1)
+                    Text(c.label, maxLines = 1, overflow = androidx.compose.ui.text.style.TextOverflow.Ellipsis)
                 }
             }
         }
@@ -267,7 +269,7 @@ fun UpdatePanel(client: TvClient) {
             style = MaterialTheme.typography.bodySmall)
     }
     val busy = upload is UploadService.State.Uploading || upload is UploadService.State.Waiting
-    Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
+    FlowRow(horizontalArrangement = Arrangement.spacedBy(8.dp), verticalArrangement = Arrangement.spacedBy(4.dp)) {
         OutlinedButton(onClick = { launcher.launch(arrayOf("application/vnd.android.package-archive", "application/octet-stream", "*/*")) }) { Text("Choisir des APK") }
         Button(enabled = !busy && next < 0 && picked.isNotEmpty() && picked.all { it.second.endsWith(".apk", true) },
             onClick = { startUpload(0) }) { Text("Envoyer et installer") }

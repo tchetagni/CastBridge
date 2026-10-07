@@ -1,3 +1,5 @@
+@file:OptIn(androidx.compose.foundation.layout.ExperimentalLayoutApi::class)
+
 package castbridge.sender
 
 import android.content.Context
@@ -575,7 +577,7 @@ fun TransferQueueCard() {
                         else TextButton(onClick = { TransferQueue.cancel(ctx, q.id) }) { Text("Annuler") }
                     }
                 }
-                Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
+                FlowRow(horizontalArrangement = Arrangement.spacedBy(8.dp), verticalArrangement = Arrangement.spacedBy(4.dp)) {
                     if (waiting > 1) TextButton(onClick = { TransferQueue.cancelWaiting(ctx) }) { Text("Annuler les envois en attente") }
                     if (shownQueue.any { it.status == castbridge.core.tv.QueueStatus.FAILED || it.status == castbridge.core.tv.QueueStatus.DONE }) TextButton(onClick = { TransferQueue.clearFinished(ctx) }) { Text("Effacer les terminés") }
                 }

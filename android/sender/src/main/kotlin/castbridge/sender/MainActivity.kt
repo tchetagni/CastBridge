@@ -119,23 +119,30 @@ class MainActivity : ComponentActivity() {
                             Box(hidden) { CastBridgeLogo(32.dp) }
                         },
                         actions = {
-                            TextButton({ ActivateTvActivity.open(this@MainActivity) }) { Text("Activer la TV") }
-                            TextButton({ TvDeviceRequestActivity.open(this@MainActivity) }) { Text("Demande d'appareil") }
-                            TextButton({ RentalDeliveryActivity.open(this@MainActivity) }) { Text("Locations") }
-                            IconButton({ ParentalActivity.open(this@MainActivity) }) { Icon(Icons.Filled.Lock, "Contrôle parental") }
-                            IconButton({ settings = true }) { CbIcon(R.drawable.ic_cb_reglages, "Réglages") }
+                            // R-23: the logo (hidden owner entry) stays visible; AppBarBudget allows 2 actions at most, the rest goes in « ⋮ »
+                            var more by remember { mutableStateOf(false) }
+                            IconButton({ settings = true }) { CbIcon(R.drawable.ic_cb_reglages, castbridge.core.ux.UxLabels.SETTINGS) }
+                            Box {
+                                IconButton({ more = true }) { Icon(Icons.Filled.MoreVert, castbridge.core.ux.UxLabels.MORE) }
+                                DropdownMenu(more, { more = false }) {
+                                    DropdownMenuItem(text = { Text(castbridge.core.ux.UxLabels.ACTIVATE_TV, maxLines = 1) }, onClick = { more = false; ActivateTvActivity.open(this@MainActivity) })
+                                    DropdownMenuItem(text = { Text(castbridge.core.ux.UxLabels.DEVICE_REQUEST, maxLines = 1) }, onClick = { more = false; TvDeviceRequestActivity.open(this@MainActivity) })
+                                    DropdownMenuItem(text = { Text(castbridge.core.ux.UxLabels.RENTALS, maxLines = 1) }, onClick = { more = false; RentalDeliveryActivity.open(this@MainActivity) })
+                                    DropdownMenuItem(text = { Text(castbridge.core.ux.UxLabels.PARENTAL, maxLines = 1) }, onClick = { more = false; ParentalActivity.open(this@MainActivity) })
+                                }
+                            }
                         },
                         colors = TopAppBarDefaults.topAppBarColors(containerColor = MaterialTheme.colorScheme.surface),
                     )
                     // scrollable: four tabs never squeeze or wrap their labels on a narrow phone
                     ScrollableTabRow(selectedTabIndex = tab, containerColor = MaterialTheme.colorScheme.surface, edgePadding = 0.dp) {
                         val ic = Modifier.size(20.dp)
-                        LeadingIconTab(tab == 0, onClick = { select(0) }, text = { Text(castbridge.core.ux.PhoneTabs.Tab.DLNA.label, maxLines = 1) }, icon = { CbIcon(R.drawable.ic_cb_caster, null, ic) })
-                        LeadingIconTab(tab == 1, onClick = { select(1) }, text = { Text(castbridge.core.ux.PhoneTabs.Tab.HOME.label, maxLines = 1) }, icon = { CbIcon(R.drawable.ic_cb_recevoir_du_telephone, null, ic) })
-                        LeadingIconTab(tab == 2, onClick = { select(2) }, text = { Text(castbridge.core.ux.PhoneTabs.Tab.GAMES.label, maxLines = 1) }, icon = { CbIcon(R.drawable.ic_cb_quiz, null, ic) })
-                        LeadingIconTab(tab == 3, onClick = { select(3) }, text = { Text(castbridge.core.ux.PhoneTabs.Tab.PHONE.label, maxLines = 1) }, icon = { CbIcon(R.drawable.ic_cb_sur_le_telephone, null, ic) })
-                        LeadingIconTab(tab == 4, onClick = { select(4) }, text = { Text(castbridge.core.ux.PhoneTabs.Tab.LEARN.label, maxLines = 1) }, icon = { CbIcon(R.drawable.ic_cb_apprendre, null, ic) })
-                        LeadingIconTab(tab == 5, onClick = { select(5) }, text = { Text(castbridge.core.ux.PhoneTabs.Tab.PARENTAL.label, maxLines = 1) }, icon = { Icon(Icons.Filled.Lock, null, ic) })
+                        LeadingIconTab(tab == 0, onClick = { select(0) }, text = { Text(castbridge.core.ux.PhoneTabs.Tab.DLNA.label, maxLines = 1, overflow = androidx.compose.ui.text.style.TextOverflow.Ellipsis) }, icon = { CbIcon(R.drawable.ic_cb_caster, null, ic) })
+                        LeadingIconTab(tab == 1, onClick = { select(1) }, text = { Text(castbridge.core.ux.PhoneTabs.Tab.HOME.label, maxLines = 1, overflow = androidx.compose.ui.text.style.TextOverflow.Ellipsis) }, icon = { CbIcon(R.drawable.ic_cb_recevoir_du_telephone, null, ic) })
+                        LeadingIconTab(tab == 2, onClick = { select(2) }, text = { Text(castbridge.core.ux.PhoneTabs.Tab.GAMES.label, maxLines = 1, overflow = androidx.compose.ui.text.style.TextOverflow.Ellipsis) }, icon = { CbIcon(R.drawable.ic_cb_quiz, null, ic) })
+                        LeadingIconTab(tab == 3, onClick = { select(3) }, text = { Text(castbridge.core.ux.PhoneTabs.Tab.PHONE.label, maxLines = 1, overflow = androidx.compose.ui.text.style.TextOverflow.Ellipsis) }, icon = { CbIcon(R.drawable.ic_cb_sur_le_telephone, null, ic) })
+                        LeadingIconTab(tab == 4, onClick = { select(4) }, text = { Text(castbridge.core.ux.PhoneTabs.Tab.LEARN.label, maxLines = 1, overflow = androidx.compose.ui.text.style.TextOverflow.Ellipsis) }, icon = { CbIcon(R.drawable.ic_cb_apprendre, null, ic) })
+                        LeadingIconTab(tab == 5, onClick = { select(5) }, text = { Text(castbridge.core.ux.PhoneTabs.Tab.PARENTAL.label, maxLines = 1, overflow = androidx.compose.ui.text.style.TextOverflow.Ellipsis) }, icon = { Icon(Icons.Filled.Lock, null, ic) })
                     }
                 }
             },

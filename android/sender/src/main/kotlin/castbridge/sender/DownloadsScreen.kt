@@ -1,3 +1,5 @@
+@file:OptIn(androidx.compose.foundation.layout.ExperimentalLayoutApi::class)
+
 package castbridge.sender
 
 import android.content.Context
@@ -57,7 +59,7 @@ fun DownloadsEntry(client: TvClient) {
         modifier = Modifier.clickable { PhoneConnect.feature("downloads", "menu"); open = true },
         colors = ListItemDefaults.colors(containerColor = MaterialTheme.colorScheme.background),
         leadingContent = { Icon(cbv(R.drawable.ic_cb_telechargements), null, tint = MaterialTheme.colorScheme.primary) },
-        headlineContent = { Text("Téléchargements sur la TV") },
+        headlineContent = { Text("Téléchargements sur la TV", maxLines = 1, overflow = androidx.compose.ui.text.style.TextOverflow.Ellipsis) },
         supportingContent = { Text("La TV télécharge elle-même un lien ou un torrent, même téléphone éteint.") },
         trailingContent = { Icon(Icons.Filled.ChevronRight, null) },
     )
@@ -146,7 +148,7 @@ fun DownloadsScreen(dc: DownloadsClient, onClose: () -> Unit, initialLink: Strin
         TopAppBar(
             title = {
                 Column {
-                    Text("Téléchargements sur la TV")
+                    Text("Téléchargements sur la TV", maxLines = 1, overflow = androidx.compose.ui.text.style.TextOverflow.Ellipsis)
                     state?.takeIf { it.down > 0 }?.let { Text("↓ ${speed(it.down)}", style = MaterialTheme.typography.bodySmall, color = cs.onSurfaceVariant) }
                 }
             },
@@ -290,7 +292,7 @@ private fun TaskCard(t: DownloadsClient.Task, onPause: () -> Unit, onResume: () 
             Text(t.label + (if (parts.isNotEmpty()) " · " + parts.joinToString(" · ") else ""), style = MaterialTheme.typography.bodySmall,
                 color = if (bad) cs.error else cs.onSurfaceVariant)
             t.error?.let { Text(it, style = MaterialTheme.typography.bodySmall, color = if (bad) cs.error else cs.onSurfaceVariant) }
-            Row(horizontalArrangement = Arrangement.spacedBy(4.dp), verticalAlignment = Alignment.CenterVertically) {
+            FlowRow(horizontalArrangement = Arrangement.spacedBy(4.dp), verticalArrangement = Arrangement.spacedBy(4.dp), ) {
                 if (t.canPause) IconButton(onClick = onPause) { Icon(cbv(R.drawable.ic_cb_pause), "Pause") }
                 if (t.canResume) IconButton(onClick = onResume) { Icon(if (t.state == "error") Icons.Filled.Refresh else cbv(R.drawable.ic_cb_lecture), "Reprendre") }
                 if (t.state == "queued" || t.state == "paused") IconButton(onClick = onTop) { Icon(Icons.Filled.VerticalAlignTop, "Passer en premier") }

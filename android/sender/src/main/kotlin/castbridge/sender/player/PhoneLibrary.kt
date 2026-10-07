@@ -140,7 +140,7 @@ fun PhoneLibraryScreen() {
             placeholder = { Text("Rechercher sur le téléphone") }, leadingIcon = { Icon(Icons.Filled.Search, null) },
             trailingIcon = { if (query.isNotEmpty()) IconButton({ query = "" }) { Icon(Icons.Filled.Close, "Effacer") } })
         if (folder == null) ScrollableTabRow(tab, edgePadding = 8.dp, containerColor = MaterialTheme.colorScheme.background) {
-            LibTab.entries.forEachIndexed { i, x -> Tab(tab == i, { tab = i }, text = { Text(x.label) }) }
+            LibTab.entries.forEachIndexed { i, x -> Tab(tab == i, { tab = i }, text = { Text(x.label, maxLines = 1, overflow = androidx.compose.ui.text.style.TextOverflow.Ellipsis) }) }
         } else Row(verticalAlignment = Alignment.CenterVertically) {
             IconButton({ folder = null }) { Icon(Icons.AutoMirrored.Filled.ArrowBack, "Dossiers") }
             Text(folder!!.name, style = MaterialTheme.typography.titleMedium, maxLines = 1, overflow = TextOverflow.Ellipsis)

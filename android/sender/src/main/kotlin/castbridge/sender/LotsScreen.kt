@@ -1,3 +1,5 @@
+@file:OptIn(androidx.compose.foundation.layout.ExperimentalLayoutApi::class)
+
 package castbridge.sender
 
 import androidx.compose.foundation.layout.*
@@ -47,7 +49,7 @@ fun LotsScreen(onClose: () -> Unit) {
     Dialog(onDismissRequest = onClose, properties = DialogProperties(usePlatformDefaultWidth = false)) {
         Surface(Modifier.fillMaxSize(), color = MaterialTheme.colorScheme.background) {
             Column(Modifier.fillMaxSize()) {
-                TopAppBar(title = { Text("Données hors ligne") }, navigationIcon = { IconButton(onClose) { Icon(Icons.Filled.ArrowBack, "Retour") } },
+                TopAppBar(title = { Text("Données hors ligne", maxLines = 1, overflow = androidx.compose.ui.text.style.TextOverflow.Ellipsis) }, navigationIcon = { IconButton(onClose) { Icon(Icons.Filled.ArrowBack, "Retour") } },
                     colors = TopAppBarDefaults.topAppBarColors(containerColor = MaterialTheme.colorScheme.surface))
                 Column(Modifier.fillMaxSize().verticalScroll(rememberScrollState()).padding(16.dp), verticalArrangement = Arrangement.spacedBy(12.dp)) {
                     // ---- storage meter ----
@@ -76,7 +78,7 @@ fun LotsScreen(onClose: () -> Unit) {
                         }
                         Switch(LotsRuntime.wifiOnly, { LotsRuntime.wifiOnly = it; LotsRuntime.schedule(LotsRuntime.appContext) })
                     }
-                    Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
+                    FlowRow(horizontalArrangement = Arrangement.spacedBy(8.dp), verticalArrangement = Arrangement.spacedBy(4.dp)) {
                         Button(enabled = !busy, onClick = { scope.launch { message = withContext(Dispatchers.IO) { LotsRuntime.syncNow(userAsked = true) } } }) { Text("Tout mettre à jour") }
                         OutlinedButton(enabled = !busy, onClick = { scope.launch { message = withContext(Dispatchers.IO) { LotsRuntime.deliverNow(userAsked = true) ?: "Rien à envoyer à la TV : tout est déjà sur la TV." } } }) { Text("Envoyer à la TV") }
                     }
@@ -100,7 +102,7 @@ fun LotsScreen(onClose: () -> Unit) {
                                 held?.let { Text("Version ${it.meta.version} · ${LotStore.mo(it.meta.bytes)} · mis à jour ${LotStatusText.age(it.installedAt, now)}", style = MaterialTheme.typography.bodySmall) }
                                 Text(st.label, style = MaterialTheme.typography.bodyMedium, color = MaterialTheme.colorScheme.primary)
                                 Text(st.detail, style = MaterialTheme.typography.bodySmall, color = MaterialTheme.colorScheme.onSurfaceVariant)
-                                Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
+                                FlowRow(horizontalArrangement = Arrangement.spacedBy(8.dp), verticalArrangement = Arrangement.spacedBy(4.dp)) {
                                     TextButton(enabled = !busy, onClick = { scope.launch { message = withContext(Dispatchers.IO) { LotsRuntime.syncNow(only = id, userAsked = true) } } }) {
                                         Text(if (held == null) "Télécharger" else "Mettre à jour")
                                     }
@@ -150,7 +152,7 @@ private fun Wizard(busy: Boolean, onMessage: (String?) -> Unit) {
     }
     val est = LotsRuntime.estimate(picked)
     if (scopes.isNotEmpty()) Text("Taille estimée : ${LotStore.mo(est)} (maximum ${LotStore.mo(LotBudget.PHONE_MAX_BYTES)})", style = MaterialTheme.typography.bodySmall)
-    Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
+    FlowRow(horizontalArrangement = Arrangement.spacedBy(8.dp), verticalArrangement = Arrangement.spacedBy(4.dp)) {
         OutlinedButton(enabled = !busy, onClick = { scope.launch { onMessage(withContext(Dispatchers.IO) { LotsRuntime.refreshCatalog() } ?: "Liste des classes actualisée") } }) { Text("Actualiser la liste") }
         Button(enabled = !busy && picked.isNotEmpty() && est <= LotBudget.PHONE_MAX_BYTES, onClick = {
             LotsRuntime.selectedScopes = picked

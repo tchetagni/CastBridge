@@ -168,7 +168,7 @@ private fun ParentalHome(onClose: (() -> Unit)?) {
             TextButton({ ParentalSession.lockNow() }) { Icon(Icons.Filled.Lock, null, Modifier.size(16.dp)); Spacer(Modifier.width(4.dp)); Text("Verrouiller") }
         }
         ScrollableTabRow(selectedTabIndex = section, containerColor = MaterialTheme.colorScheme.surface, edgePadding = 8.dp) {
-            SECTIONS.forEachIndexed { i, t -> Tab(section == i, { section = i }, text = { Text(t, maxLines = 1) }) }
+            SECTIONS.forEachIndexed { i, t -> Tab(section == i, { section = i }, text = { Text(t, maxLines = 1, overflow = androidx.compose.ui.text.style.TextOverflow.Ellipsis) }) }
         }
         Column(Modifier.weight(1f).fillMaxWidth().verticalScroll(rememberScrollState()).padding(16.dp), verticalArrangement = Arrangement.spacedBy(10.dp)) {
             FreshnessBanner(env)

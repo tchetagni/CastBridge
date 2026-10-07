@@ -1,3 +1,5 @@
+@file:OptIn(androidx.compose.foundation.layout.ExperimentalLayoutApi::class)
+
 package castbridge.sender.player
 
 import castbridge.sender.cbv
@@ -233,7 +235,7 @@ fun VideoPlayerScreen(act: PlayerActivity, p: ExoPlayer) {
                         Icon(Icons.Filled.ErrorOutline, null, tint = MaterialTheme.colorScheme.secondary); Spacer(Modifier.width(8.dp))
                         Text(formatMsg, style = MaterialTheme.typography.bodyMedium)
                     }
-                    Row(Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.End) {
+                    FlowRow(Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.End) {
                         if (fatal) TextButton({ p.prepare(); p.play() }) { Text("Réessayer") }
                         TextButton({ formatDismissed = true }) { Text("Fermer") }
                         Button({ castOpen = true }) { Icon(cbv(castbridge.sender.R.drawable.ic_cb_caster), null); Spacer(Modifier.width(6.dp)); Text(castbridge.core.ux.SendWays.SHEET_TITLE) }

@@ -1,3 +1,5 @@
+@file:OptIn(androidx.compose.foundation.layout.ExperimentalLayoutApi::class)
+
 package castbridge.sender
 
 import androidx.compose.foundation.layout.*
@@ -154,7 +156,7 @@ internal fun ReportsBlock(client: ParentalClient, profiles: List<ChildProfile>, 
         CheckRow("Alerte : surveillance affaiblie (valable pour toute la TV)", o.alertTamper) { v -> ch { it.copy(alertTamper = v) } }
         CheckRow("Alerte : nouvelle application (valable pour toute la TV)", o.alertNewApp) { v -> ch { it.copy(alertNewApp = v) } }
     }
-    Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
+    FlowRow(horizontalArrangement = Arrangement.spacedBy(8.dp), verticalArrangement = Arrangement.spacedBy(4.dp)) {
         Button(enabled = dirty, onClick = {
             scope.launch { io { client.saveReportsConfig(pin, c) }.onSuccess { rl = it; cfg = it.config; dirty = false; onMsg("Options des rapports enregistrées sur la TV.") }
                 .onFailure { e -> onMsg(why(e)); if (e is ParentalError && e.code == 409) load() } }
@@ -193,7 +195,7 @@ private fun InboxList(tick: Int, onChanged: () -> Unit) {
             }
         }
     }
-    Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
+    FlowRow(horizontalArrangement = Arrangement.spacedBy(8.dp), verticalArrangement = Arrangement.spacedBy(4.dp)) {
         OutlinedButton({ ParentalInbox.inbox.markAllRead(); onChanged() }) { Text("Tout marquer comme lu") }
         OutlinedButton({ ParentalInbox.inbox.clear(); onChanged() }) { Text("Effacer les rapports reçus") }
     }

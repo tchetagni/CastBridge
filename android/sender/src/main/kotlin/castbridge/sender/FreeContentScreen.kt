@@ -144,7 +144,7 @@ fun FreeContentScreen(onClose: () -> Unit) {
     }
 
     Scaffold(topBar = {
-        TopAppBar(title = { Text("Contenus libres (CC BY-SA)") },
+        TopAppBar(title = { Text("Contenus libres (CC BY-SA)", maxLines = 1, overflow = androidx.compose.ui.text.style.TextOverflow.Ellipsis) },
             navigationIcon = { IconButton(onClose) { Icon(Icons.Filled.ArrowBack, "Retour") } },
             colors = TopAppBarDefaults.topAppBarColors(containerColor = MaterialTheme.colorScheme.surface))
     }) { pad ->

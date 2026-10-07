@@ -1,3 +1,5 @@
+@file:OptIn(androidx.compose.foundation.layout.ExperimentalLayoutApi::class)
+
 package castbridge.sender
 
 import android.content.Context
@@ -65,7 +67,7 @@ fun QuizThemesSection(tvLots: List<LotMeta>?) {
                         color = if (t.tvBehind) MaterialTheme.colorScheme.primary else MaterialTheme.colorScheme.onSurfaceVariant)
                     if (t.state == QuizThemes.State.NOT_DOWNLOADED || t.state == QuizThemes.State.UPDATE_AVAILABLE) {
                         val dl = QuizLotHooks.download
-                        Row(verticalAlignment = Alignment.CenterVertically, horizontalArrangement = Arrangement.spacedBy(8.dp)) {
+                        FlowRow(horizontalArrangement = Arrangement.spacedBy(8.dp), verticalArrangement = Arrangement.spacedBy(4.dp)) {
                             if (dl != null) Button(onClick = { dl(LotId(QuizLotScopes.FEATURE, t.scope)); refresh++ }) {
                                 Text(if (t.state == QuizThemes.State.UPDATE_AVAILABLE) "Mettre à jour" else "Télécharger")
                             }

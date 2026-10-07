@@ -1,3 +1,5 @@
+@file:OptIn(androidx.compose.foundation.layout.ExperimentalLayoutApi::class)
+
 package castbridge.sender
 
 import android.content.Intent
@@ -130,7 +132,7 @@ class ShareToTvActivity : ComponentActivity() {
                 }
                 else -> {
                     Text(result!!)
-                    Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
+                    FlowRow(horizontalArrangement = Arrangement.spacedBy(8.dp), verticalArrangement = Arrangement.spacedBy(4.dp)) {
                         Button(onClick = { showList = true }) { Text("Voir les téléchargements") }
                         OutlinedButton(onClick = { finish() }) { Text("Fermer") }
                     }

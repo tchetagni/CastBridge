@@ -1,3 +1,5 @@
+@file:OptIn(androidx.compose.foundation.layout.ExperimentalLayoutApi::class)
+
 package castbridge.sender
 
 import android.content.Intent
@@ -104,7 +106,7 @@ fun TvTransferDialog(client: TvClient, onDismiss: () -> Unit) {
     Dialog(onDismissRequest = onDismiss, properties = DialogProperties(usePlatformDefaultWidth = false)) {
         Surface(Modifier.fillMaxSize(), color = MaterialTheme.colorScheme.background) {
             Column {
-                TopAppBar(title = { Text("Échange de fichiers") },
+                TopAppBar(title = { Text("Échange de fichiers", maxLines = 1, overflow = androidx.compose.ui.text.style.TextOverflow.Ellipsis) },
                     navigationIcon = { IconButton(onDismiss) { Icon(Icons.Filled.ArrowBack, "Retour") } },
                     colors = TopAppBarDefaults.topAppBarColors(containerColor = MaterialTheme.colorScheme.surface))
                 Column(Modifier.verticalScroll(rememberScrollState()).padding(16.dp), verticalArrangement = Arrangement.spacedBy(8.dp)) {
@@ -121,7 +123,7 @@ fun TvTransferDialog(client: TvClient, onDismiss: () -> Unit) {
                             FilterChip(dest == v.id, { dest = v.id }, { Text("${v.label} · ${if (v.free >= 0) formatSize(v.free) else "?"} libres") })
                         }
                     }
-                    Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
+                    FlowRow(horizontalArrangement = Arrangement.spacedBy(8.dp), verticalArrangement = Arrangement.spacedBy(4.dp)) {
                         OutlinedButton(onClick = { pick.launch(arrayOf("*/*")) }) { Icon(Icons.Filled.AttachFile, null); Spacer(Modifier.width(6.dp)); Text("Choisir des fichiers") }
                         val allOk = picked.isNotEmpty() && picked.all { checks[it.name]?.ok == true }
                         Button(enabled = allOk, onClick = { startAll() }) { Icon(cbv(R.drawable.ic_cb_envoyer), null); Spacer(Modifier.width(6.dp)); Text("Envoyer") }

@@ -1,3 +1,5 @@
+@file:OptIn(androidx.compose.foundation.layout.ExperimentalLayoutApi::class)
+
 package castbridge.sender.agent
 
 import androidx.activity.compose.BackHandler
@@ -155,9 +157,9 @@ private fun Intro(m: AssistantModel, tvAvailable: Boolean, pickFolder: () -> Uni
         Button({ m.analyze() }, Modifier.fillMaxWidth().heightIn(min = 56.dp), enabled = if (m.source == Origin.TV) tvAvailable else m.phoneTree != null) {
             Icon(Icons.Filled.Search, null); Spacer(Modifier.width(8.dp)); Text("Analyser", style = MaterialTheme.typography.titleMedium)
         }
-        Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
-            OutlinedButton({ m.loadBin(); m.step = Step.TRASH }, Modifier.weight(1f), enabled = if (m.source == Origin.TV) tvAvailable else m.phoneTree != null) { Icon(Icons.Filled.DeleteSweep, null); Spacer(Modifier.width(6.dp)); Text("Corbeille") }
-            OutlinedButton({ m.refreshHistory(); m.step = Step.HISTORY }, Modifier.weight(1f)) { Icon(Icons.Filled.Undo, null); Spacer(Modifier.width(6.dp)); Text("Annuler un rangement") }
+        FlowRow(horizontalArrangement = Arrangement.spacedBy(8.dp), verticalArrangement = Arrangement.spacedBy(4.dp)) {
+            OutlinedButton({ m.loadBin(); m.step = Step.TRASH }, enabled = if (m.source == Origin.TV) tvAvailable else m.phoneTree != null) { Icon(Icons.Filled.DeleteSweep, null); Spacer(Modifier.width(6.dp)); Text("Corbeille") }
+            OutlinedButton({ m.refreshHistory(); m.step = Step.HISTORY }) { Icon(Icons.Filled.Undo, null); Spacer(Modifier.width(6.dp)); Text("Annuler un rangement") }
         }
     }
 }

@@ -1,3 +1,5 @@
+@file:OptIn(androidx.compose.foundation.layout.ExperimentalLayoutApi::class)
+
 package castbridge.sender
 
 import android.graphics.BitmapFactory
@@ -124,12 +126,19 @@ fun TvLibraryDialog(client: TvClient, onDismiss: () -> Unit, onDownload: ((TvLib
     Dialog(onDismissRequest = onDismiss, properties = DialogProperties(usePlatformDefaultWidth = false)) {
         Surface(Modifier.fillMaxSize(), color = MaterialTheme.colorScheme.background) {
             Column {
-                TopAppBar(title = { Text("Bibliothèque de la TV") },
+                TopAppBar(title = { Text("Bibliothèque de la TV", maxLines = 1, overflow = androidx.compose.ui.text.style.TextOverflow.Ellipsis) },
                     navigationIcon = { IconButton(onDismiss) { Icon(Icons.Filled.ArrowBack, "Retour") } },
                     actions = {
-                        IconButton({ showAssistant = true }) { Icon(Icons.Filled.AutoAwesome, "Ranger ma bibliothèque (Assistant)") }
-                        IconButton({ showOrganize = true }) { Icon(Icons.Filled.CreateNewFolder, "Ranger les fichiers de la TV dans des dossiers") }
-                        IconButton({ reload++ }) { Icon(Icons.Filled.Refresh, "Actualiser") }
+                        // R-23: 2 visible actions at most (AppBarBudget); the two « ranger » actions go in the « ⋮ » menu
+                        var more by remember { mutableStateOf(false) }
+                        IconButton({ reload++ }) { Icon(Icons.Filled.Refresh, castbridge.core.ux.UxLabels.REFRESH) }
+                        Box {
+                            IconButton({ more = true }) { Icon(Icons.Filled.MoreVert, castbridge.core.ux.UxLabels.MORE) }
+                            DropdownMenu(more, { more = false }) {
+                                DropdownMenuItem(text = { Text(castbridge.core.ux.UxLabels.ASSISTANT) }, leadingIcon = { Icon(Icons.Filled.AutoAwesome, null) }, onClick = { more = false; showAssistant = true })
+                                DropdownMenuItem(text = { Text(castbridge.core.ux.UxLabels.ORGANIZE) }, leadingIcon = { Icon(Icons.Filled.CreateNewFolder, null) }, onClick = { more = false; showOrganize = true })
+                            }
+                        }
                     },
                     colors = TopAppBarDefaults.topAppBarColors(containerColor = MaterialTheme.colorScheme.surface))
                 castbridge.sender.agent.AssistantBanner(client) { showAssistant = true }
@@ -235,7 +244,7 @@ fun TvTools(client: TvClient) {
     val ctx = androidx.compose.ui.platform.LocalContext.current
     var library by remember { mutableStateOf(false) }
     var transfer by remember { mutableStateOf(false) }
-    Row(Modifier.fillMaxWidth().padding(vertical = 4.dp), horizontalArrangement = Arrangement.spacedBy(8.dp)) {
+    FlowRow(Modifier.fillMaxWidth().padding(vertical = 4.dp), horizontalArrangement = Arrangement.spacedBy(8.dp), verticalArrangement = Arrangement.spacedBy(4.dp)) {
         FilledTonalButton(onClick = { library = true }) { Icon(cbv(R.drawable.ic_cb_bibliotheque), null); Spacer(Modifier.width(6.dp)); Text("Bibliothèque") }
         FilledTonalButton(onClick = { transfer = true }) { Icon(Icons.Filled.SwapVert, null); Spacer(Modifier.width(6.dp)); Text("Échange de fichiers") }
     }

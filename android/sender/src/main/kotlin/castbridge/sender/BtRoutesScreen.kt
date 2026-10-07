@@ -89,7 +89,7 @@ fun BtRoutesScreen(onClose: () -> Unit) {
     }
 
     Scaffold(topBar = {
-        TopAppBar(title = { Text("Ma TV · Bluetooth") }, navigationIcon = { IconButton(onClose) { Icon(Icons.AutoMirrored.Filled.ArrowBack, "Fermer") } })
+        TopAppBar(title = { Text("Ma TV · Bluetooth", maxLines = 1, overflow = androidx.compose.ui.text.style.TextOverflow.Ellipsis) }, navigationIcon = { IconButton(onClose) { Icon(Icons.AutoMirrored.Filled.ArrowBack, "Fermer") } })
     }) { padding ->
         Column(Modifier.padding(padding).fillMaxSize().verticalScroll(rememberScrollState()).padding(16.dp), verticalArrangement = Arrangement.spacedBy(12.dp)) {
             if (!btOk) btUi()
