@@ -69,6 +69,7 @@ class TvDownloads private constructor(private val app: Context, @Volatile privat
     @Volatile private var idleSince = 0L
 
     init {
+        manager.systemSync = castbridge.core.tv.ShellSync.shared          // a download that reaches a USB key asks for one best-effort system sync at the end of its file (docs/STORAGE.md)
         manager.addFinishedListener { f ->
             val what = f.files.firstOrNull() ?: f.name
             main.post { runCatching { Toast.makeText(app, "Téléchargement terminé : $what", Toast.LENGTH_LONG).show() } }

@@ -82,6 +82,10 @@ class DownloadManager(
     }
 
     private val lock = Any()
+    /** « Préparer le retrait de la clé USB » (docs/STORAGE.md) : les volumes dont les téléchargements sont retenus (en pause, et gardés en pause) jusqu'à [hold] faux. */
+    private val held: MutableSet<String> = java.util.concurrent.ConcurrentHashMap.newKeySet()
+    /** Le `sync` du système demandé UNE fois à la fin d'un fichier arrivé dans la bibliothèque d'une clé (la TV donne le vrai ; aucun par défaut). */
+    @Volatile var systemSync: castbridge.core.tv.SystemSync = castbridge.core.tv.SystemSync.NONE
     private val tasks = ArrayList<Task>()
     private val done = ArrayList<Finished>()
     private val moving = HashSet<String>()
@@ -180,6 +184,11 @@ class DownloadManager(
                 if (t.gid?.let { byGid[it] } == null && t.metaGid?.let { byGid[it] } != null) { t.gid = t.metaGid; dirty = true }
                 val st = t.gid?.let { byGid[it] }
                 val status = st?.s("status")
+                if (vol != null && t.volumeId in held) {                    // « Préparer le retrait » : nothing is written to this drive, whatever its state
+                    if (status == "active" || status == "waiting") runCatching { r.pause(t.gid!!) }
+                    if (t.pausedBy == null) { t.pausedBy = PausedBy.DRIVE; dirty = true }          // his own pause stays his: only a running download is held
+                    continue
+                }
                 if (vol == null) {                                          // the drive holding it is gone
                     if (status == "active" || status == "waiting") runCatching { r.pause(t.gid!!) }
                     if (t.pausedBy != PausedBy.DRIVE) { t.pausedBy = PausedBy.DRIVE; dirty = true }
@@ -294,8 +303,13 @@ class DownloadManager(
                 if (!single && !isLibraryFile(src.name)) continue
                 val dest = uniqueDest(vol, src.name)
                 val ok = src.renameTo(dest) || runCatching { src.copyTo(dest); src.delete(); true }.getOrDefault(false)
-                if (ok) { moved += dest.name; size += dest.length() }
+                if (ok) {
+                    moved += dest.name; size += dest.length()
+                    // aria2 wrote it without a sync: on a removable drive the file is flushed to the medium before it is announced finished (docs/STORAGE.md)
+                    if (vol.kind != castbridge.core.tv.VolumeKind.INTERNAL) castbridge.core.tv.DiskFlush.file(dest)
+                }
             }
+            if (moved.isNotEmpty() && vol.kind != castbridge.core.tv.VolumeKind.INTERNAL) systemSync.soon()          // the directory entries too, once for the whole task
             val extras = tidy(dirOf(vol, t.id))
             val f = Finished(t.id, t.name, moved, vol.id, vol.label, size, now(), extras)
             synchronized(lock) {
@@ -400,7 +414,7 @@ class DownloadManager(
         if (volume != null && volume != "auto" && volume.isNotEmpty() && volumes[volume] == null && volume != "internal")
             return Result.Refused(400, "bad volume", "Stockage inconnu ou absent.")
         val status = runCatching { r.tellAll() }.getOrDefault(emptyList()).associateBy { it.s("gid").orEmpty() }
-        val choice = synchronized(lock) { DownloadSpace.choose(volumes.snapshot(), want, size, reserved(status), minFree) }
+        val choice = synchronized(lock) { DownloadSpace.choose(volumes.snapshot().filter { it.id !in held }, want, size, reserved(status), minFree) }
         val vol = when (choice) {
             is DownloadSpace.Choice.Refused -> return Result.Refused(507, "space", choice.message)
             is DownloadSpace.Choice.Ok -> choice.volume
@@ -460,6 +474,7 @@ class DownloadManager(
         val t = task(id) ?: return notFound()
         val r = rpc() ?: return engineDown()
         val vol = volumes[t.volumeId] ?: return Result.Refused(503, "drive", "La clé USB de ce téléchargement est absente : rebranchez-la.")
+        if (t.volumeId in held) return Result.Refused(409, "drive", "La clé USB est en cours de retrait : le téléchargement reprendra quand elle sera de retour.")
         val st = t.gid?.let { g -> runCatching { r.tellStatus(g) }.getOrNull() }
         synchronized(lock) {
             when (st?.s("status")) {
@@ -476,6 +491,35 @@ class DownloadManager(
             t.pausedBy = null; t.note = null
         }
         save(); return Result.Ok(id)
+    }
+
+    /**
+     * « Préparer le retrait de la clé USB » : retient ([on]) ou rend ([on] faux) le volume [volumeId]. Retenu : ses téléchargements en cours sont mis en pause TOUT DE SUITE (le marquage d'une clé retirée :
+     * ils repartent d'eux-mêmes quand la clé est rendue, au battement suivant), aucun nouveau téléchargement n'y est placé, et une reprise à la main est refusée. Celui que le propriétaire avait mis en pause reste en pause.
+     */
+    fun hold(volumeId: String, on: Boolean) {
+        if (!on) { held -= volumeId; return }
+        held += volumeId
+        val r = rpc()
+        synchronized(lock) {
+            for (t in tasks) {
+                if (t.volumeId != volumeId || t.id in moving) continue
+                if (t.pausedBy == null) { r?.let { c -> t.gid?.let { g -> runCatching { c.pause(g) } } }; t.pausedBy = PausedBy.DRIVE }
+            }
+        }
+        save()
+    }
+
+    /** Les téléchargements qui écrivent sur [volumeId] maintenant (nom, avancement ou -1), d'après le dernier battement : aucun appel à aria2, sans danger depuis n'importe quel fil. */
+    fun writingOn(volumeId: String): List<Pair<String, Int>> = synchronized(lock) {
+        tasks.filter { it.volumeId == volumeId }.mapNotNull { t ->
+            if (t.pausedBy != null) return@mapNotNull null
+            val st = t.gid?.let { lastStatus[it] }
+            val state = when { t.id in moving -> DlState.MOVING; st == null -> null; else -> StateMapper.map(st, null) }
+            if (state != DlState.DOWNLOADING && state != DlState.CONNECTING && state != DlState.MOVING) return@mapNotNull null
+            val total = st?.n("totalLength")?.takeIf { it > 0 } ?: t.size ?: 0L
+            t.name to (if (total > 0 && st != null) (st.n("completedLength") * 100 / total).toInt().coerceIn(0, 100) else -1)
+        }
     }
 
     fun pauseAll(): Result { val r = rpc() ?: return engineDown(); runCatching { r.pauseAll() }

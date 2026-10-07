@@ -63,10 +63,15 @@ data class TvFacts(
     val parentalLock: Boolean = false,
     val transferFailed: Boolean = false,
     val pinRotating: Boolean = false,
+    /** L'état de la clé USB quand il demande de l'attention (null = rien à dire). */
+    val usbNote: UsbNote? = null,
 ) {
     /** Une adresse du réseau local est active (Wi-Fi OU Ethernet) : un téléphone peut joindre la TV sans Bluetooth. */
     val lanUp: Boolean get() = lan != LanKind.NONE && !(lan == LanKind.WIFI && wifiNoAddress)
 }
+
+/** Ce que la TV sait d'une clé USB qui demande de l'attention (en vérification par Android, illisible, retirée sans éjection) ou qui peut être retirée : voir `castbridge.core.tv.UsbVolumeState.note`. */
+data class UsbNote(val level: SignalLevel, val text: String, val action: String?)
 
 data class Indicator(val kind: IndicatorKind, val level: SignalLevel, val text: String, val action: String? = null) {
     /** Mot court pour la rangée de l'accueil (la phrase entière est dans les réglages) : seul Internet noir est raccourci. */
@@ -112,6 +117,7 @@ object TvSignal {
         if (!f.lanUp && btWorks) raise(SignalLevel.ORANGE, "Bluetooth seulement", "Le téléphone doit rester près de la TV. Pour plus de confort : $ACTION_NETWORK")
         if (f.lanUp && f.weakSignal) raise(SignalLevel.ORANGE, "Signal Wi-Fi faible", "Rapprochez la TV du routeur ou branchez le câble réseau")
         if (f.storage == StorageState.LOW) raise(SignalLevel.ORANGE, "Stockage presque plein", "Libérez de la place ou branchez une clé USB : Bibliothèque")
+        f.usbNote?.let { raise(it.level, it.text, it.action) }                       // une clé qu'Android vérifie, qu'il ne lit pas, ou retirée sans éjection (vert : « prête à retirer », ne lève rien)
         if (f.transferFailed) raise(SignalLevel.ORANGE, "Un transfert a échoué et attend", "Il reprendra tout seul ; sinon renvoyez-le depuis le téléphone")
         if (f.usbSlow) raise(SignalLevel.ORANGE, "Clé USB lente", "Branchez la clé sur un port USB 3 : MENU > Clé USB")
         if (f.pinRotating) raise(SignalLevel.ORANGE, "Le code de la TV va changer", "Regardez le nouveau code : MENU > Connexion & réglages")
@@ -148,6 +154,7 @@ object TvSignal {
             f.storage == StorageState.FULL -> Indicator(IndicatorKind.STORAGE, SignalLevel.RED, "Stockage : plein$free$key", "Libérez de la place ou branchez une clé USB")
             f.storage == StorageState.LOW -> Indicator(IndicatorKind.STORAGE, SignalLevel.ORANGE, "Stockage : presque plein$free$key", "Libérez de la place ou branchez une clé USB")
             f.usbSlow -> Indicator(IndicatorKind.STORAGE, SignalLevel.ORANGE, "Stockage : clé lente$free", "Branchez la clé sur un port USB 3")
+            f.usbNote != null -> Indicator(IndicatorKind.STORAGE, f.usbNote.level, "Stockage : ${f.usbNote.text}$free", f.usbNote.action)
             else -> Indicator(IndicatorKind.STORAGE, SignalLevel.GREEN, "Stockage$free$key")
         }
     }

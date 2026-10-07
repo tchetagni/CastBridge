@@ -33,6 +33,9 @@ class FilePickActivity : Activity() {
     private lateinit var browser: FileBrowser
     private lateinit var title: TextView
     private lateinit var notice: TextView
+    /** What Android says of the USB key (docs/STORAGE.md): « vérification par Android… patientez », or the guide of an unreadable key with its button. */
+    private lateinit var keyNote: TextView
+    private lateinit var keyAction: Button
     private lateinit var list: ListView
     /** Rows as drawn: large type for a 720p TV seen from the sofa; a file that cannot be chosen stays listed, greyed, with its reason. */
     private var shown: List<castbridge.core.tv.activation.BrowseRow> = emptyList()
@@ -52,6 +55,8 @@ class FilePickActivity : Activity() {
         val col = LinearLayout(this).apply { orientation = LinearLayout.VERTICAL; setPadding(60, 30, 60, 30) }
         col.addView(TextView(this).apply { text = "Choisir le fichier d'activation"; textSize = 26f; setTextColor(0xFFF5B027.toInt()); setTypeface(typeface, Typeface.BOLD) })
         title = TextView(this).apply { textSize = 20f; setTextColor(Color.WHITE); setPadding(0, 8, 0, 8) }; col.addView(title)
+        keyNote = TextView(this).apply { textSize = 20f; setTextColor(0xFFF5B027.toInt()); visibility = View.GONE; setPadding(0, 6, 0, 6) }; col.addView(keyNote)
+        keyAction = Button(this).apply { textSize = 20f; isAllCaps = false; visibility = View.GONE }; col.addView(keyAction)
         notice = TextView(this).apply { textSize = 20f; setTextColor(0xFFFF8A80.toInt()); visibility = View.GONE }; col.addView(notice)
         list = ListView(this).apply {
             this.adapter = this@FilePickActivity.adapter; isFocusable = true; isFocusableInTouchMode = true; divider = null
@@ -65,7 +70,24 @@ class FilePickActivity : Activity() {
         build()
     }
 
+    /** The key that Android checks or cannot read, said above the list; the button opens the storage settings when the key is unreadable. */
+    private fun showKeyNote() {
+        val e = UsbVolumeWatch.attention()
+        keyNote.visibility = if (e == null) View.GONE else View.VISIBLE
+        keyNote.text = e?.verdict?.line.orEmpty()
+        val wantsSettings = e?.verdict?.action == castbridge.core.tv.UsbAction.OPEN_STORAGE_SETTINGS
+        keyAction.visibility = if (wantsSettings) View.VISIBLE else View.GONE
+        keyAction.text = e?.verdict?.actionLabel ?: castbridge.core.tv.UsbVolumeState.SETTINGS_LABEL
+        keyAction.setOnClickListener { if (!UsbVolumeWatch.openStorageSettings(this)) { notice.visibility = View.VISIBLE; notice.text = NO_SETTINGS } }
+    }
+
+    /** A key under check: its folders cannot be listed yet; the list is read again ONCE when Android mounts it ([UsbVolumeWatch]: one retry per mount). */
+    private val volumeListener: () -> Unit = { runOnUiThread { if (!isFinishing) showKeyNote() } }
+    private val remount: () -> Unit = { runOnUiThread { if (!isFinishing && ::browser.isInitialized) build() } }
+
     private fun build() {
+        showKeyNote()
+        if (UsbVolumeWatch.entries().any { it.verdict.phase == castbridge.core.tv.UsbPhase.CHECKING }) UsbVolumeWatch.readerFailed(READER)
         val own = getExternalFilesDirs(null).filterNotNull()
         val roots = ArrayList<BrowseRoot>(); val places = ArrayList<File>()
         for (d in own) {
@@ -124,11 +146,19 @@ class FilePickActivity : Activity() {
     /** True when the settings screen exists on this box (no dead button otherwise). */
     private fun canAskAll(): Boolean = Build.VERSION.SDK_INT >= 30 && allFilesIntent().resolveActivity(packageManager) != null
     private fun askAccess() { if (canAskAll()) runCatching { startActivity(allFilesIntent()) } }
-    override fun onResume() { super.onResume(); if (::browser.isInitialized) build() }
+    override fun onResume() {
+        super.onResume()
+        UsbVolumeWatch.addListener(volumeListener); UsbVolumeWatch.setMountListener(READER, remount)
+        if (::browser.isInitialized) build()
+    }
+    override fun onPause() { super.onPause(); UsbVolumeWatch.removeListener(volumeListener); UsbVolumeWatch.removeMountListener(READER) }
 
     private fun size(b: Long) = when { b < 1024 -> "$b o"; b < 1024 * 1024 -> "${b / 1024} Kio"; else -> "${b / (1024 * 1024)} Mio" }
 
     companion object {
+        /** The name under which this explorer waits for the mount of a checked key. */
+        private const val READER = "explorateur"
+        private const val NO_SETTINGS = "Cette TV n'a pas d'écran de réglages de stockage : branchez la clé sur un ordinateur pour la réparer (Mac : Utilitaire de disque › S.O.S ; Windows : clic droit › Propriétés › Outils › Vérifier)."
         const val EXTRA_PATH = "path"
         /** Result: the owner chose « Ouvrir l'explorateur du système » (the activation screen opens it). */
         const val EXTRA_SYSTEM = "system"

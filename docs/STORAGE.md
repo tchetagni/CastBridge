@@ -109,6 +109,8 @@ Sources de détection : `BroadcastReceiver` enregistré dynamiquement (`ACTION_M
 un déplacement échoue en gardant la source intacte. Aucune exception non attrapée : tout passe par `try/catch` et des `use` (pas de descripteur qui fuit). Au retour : le volume est re-détecté, le `.part` retrouvé, le téléphone (qui réessayait) reprend
 à la taille du `.part`.
 
+**Clé retirée SANS éjection, clé « en vérification » ou « illisible », « Préparer le retrait de la clé USB » : voir §11** (ce que la TV peut et ne peut pas faire, sans aucun droit système).
+
 ## 7. Sécurité
 
 Toutes les routes nouvelles sont derrière le PIN existant (test `everyNewRouteNeedsThePin`), aucun chemin absolu n'est accepté ni divulgué (`value=`/`to=` sont des identifiants de volume, `name` passe par `safeName`),
@@ -223,3 +225,72 @@ Une coupure à n'importe quelle étape (copie, vérification, renommage, suppres
 
 **Ce qui n'est pas fait** : déplacer un fichier d'un volume à l'autre (`Mover`) le pose à plat sur la destination ; le rangement de l'assistant du téléphone (dossiers virtuels) ne déplace toujours aucun octet ; pas de bouton sur l'écran de la TV (retour D-pad : une notification « Bibliothèque rangée : N fichiers » et « Vidéo reçue ✓ Titre → Dossier ») ; pas de réglage visible pour `file_on_receive` ; langue des dossiers fixée à « fr » ; pas d'annulation du rangement (le plan et la réponse listent les déplacements). Tests : `FilingTest` (règles, ≥ 40 noms), `FilingServerTest` (serveur réel : réception, reprise, doublons, essai, parental, enfant, clé USB, transfert multi-connexion).
 
+
+## 11. Clé USB mal éjectée : ce que la TV peut et ne peut pas faire (2026-10-07, NON VÉRIFIÉ SUR TV)
+
+Demande du propriétaire : « pouvoir lire la clé USB même si elle a été mal éjectée ». Terrain : les clés (Lexar exFAT 128 Go, une autre en FAT32) sont retirées sans éjection ; une autre TV affiche « mal débranchée » ; parfois Android marque la clé « en vérification » ou « illisible / endommagée ».
+
+### Les faits d'Android (sans aucun droit système)
+
+- Au branchement, `vold` lance le contrôle du système de fichiers (`fsck`) : le volume passe à l'état `checking` (diffusion `ACTION_MEDIA_CHECKING`), puis à `mounted` (`ACTION_MEDIA_MOUNTED`, `mounted_ro` si le montage est en lecture seule) ou à `unmountable` (`ACTION_MEDIA_UNMOUNTABLE`), `nofs` (aucun système de fichiers connu). Le contrôle dure quelques secondes sur une clé propre, **plusieurs minutes** sur une grosse clé retirée sans éjection.
+- Une clé retirée sans éjection donne `bad_removal` (`ACTION_MEDIA_BAD_REMOVAL`), puis `unmounted` et `removed` ; une éjection demandée donne `ejecting` (`ACTION_MEDIA_EJECT`) puis `unmounted`.
+- **Une application ne peut ni réparer, ni formater, ni démonter, ni forcer le montage d'un volume** : `MOUNT_UNMOUNT_FILESYSTEMS` et `MOUNT_FORMAT_FILESYSTEMS` sont des permissions de la plateforme. CastBridge-TV ne les demande pas, n'utilise aucun `su`, et ne prétend rien faire de tout cela.
+
+### Ce que la TV fait
+
+1. **Lire l'état de chaque clé** : `receiver/UsbVolumeWatch.kt` écoute les diffusions média, relit `StorageManager.storageVolumes` au démarrage, à chaque question d'un écran, toutes les 5 s tant qu'une clé est là (toutes les 15 s sinon : une diffusion perdue par un boîtier ne laisse pas la TV aveugle), et le rappel de volume d'Android 11 et plus. Toutes les décisions sont dans le cœur pur : `core/tv/UsbVolumeTracker.kt` (l'historique : depuis quand dure la vérification, retrait sans éjection retenu d'un démarrage à l'autre, fichier coupé), `core/tv/UsbVolumeState.kt` (la règle : l'état et l'historique donnent la ligne française et l'action) et `core/tv/UsbMountRetry.kt` (le réessai). Rien dans les journaux de ce qui identifie un fichier.
+2. **Attendre la fin de la vérification, et le dire** (la ligne dit aussi pourquoi, quand elle le sait) :
+
+   | État d'Android | Ligne (extrait) | Action |
+   |---|---|---|
+   | `checking` | « Clé « Lexar » : vérification par Android (elle a été retirée sans éjection)… patientez » ; après 20 s « … en cours depuis 35 s… ne la retirez pas » ; après 2 min « c'est long : laissez-la faire encore quelques minutes ; sinon retirez-la et vérifiez-la sur un ordinateur » | attendre |
+   | `mounted` après `checking` | « Clé « Lexar » prête » (10 s, puis plus rien : une clé prête ne harcèle pas l'accueil) | aucune |
+   | `mounted_ro` | « … lecture seule. Les vidéos se lisent, mais rien ne peut y être copié. Retirez le verrou de la clé, ou réparez-la sur un ordinateur » | aucune |
+   | `unmountable` | « Clé illisible : Android n'a pas pu la réparer. Sur un ordinateur : Mac › Utilitaire de disque › S.O.S ; Windows › clic droit › Propriétés › Outils › Vérifier ; ou Réglages de la TV › Stockage › Réparer/Formater (le formatage efface tout) » | bouton « Ouvrir les réglages de stockage » |
+   | `nofs` | « … format non reconnu par la TV (clé vierge, ou format qu'Android ne lit pas). Sur un ordinateur, formatez-la en exFAT (le formatage efface tout)… » | le même bouton |
+   | `bad_removal` pendant une copie | « Clé retirée pendant une copie : le fichier « … » est incomplet, il sera repris » (10 min) | aucune |
+   | `bad_removal` sans copie | « Clé « … » retirée sans éjection. La prochaine fois : MENU › Préparer le retrait de la clé USB » | aucune |
+   | `bad_removal` APRÈS « Préparer le retrait » | « Clé « Lexar » retirée : elle était préparée, rien n'est perdu. Au prochain branchement Android la vérifiera : c'est normal sans éjection » (en vert, une minute, pas de pastille orange) | aucune |
+   | `ejecting`, `unmounted` | « éjection en cours, ne la retirez pas encore » ; « éjectée : vous pouvez la retirer » | aucune |
+   | copie vers la clé | « Ne retirez pas la clé : copie en cours » (devant la ligne de réception de l'accueil) | aucune |
+
+   Android appelle « retrait brutal » toute clé retirée sans éjection, même si « Préparer le retrait » avait tout vidé : la TV, elle, sait que tout était écrit (`UsbVolumeTracker` retient « préparée » au moment du `bad_removal`), le dit en vert et annonce que la vérification du prochain branchement est normale. La puce de l'accueil (deux lignes au plus) garde une **version courte** des longs guides (« … illisible : Android n'a pas pu la réparer (le guide : MENU > Clé USB) ») ; le guide entier est dans la tuile « Clé USB » et dans MENU (« Clé USB : que faire de la clé ? (le guide) », avec le bouton des réglages de stockage), dans la bibliothèque et dans l'explorateur.
+
+   La cause « retirée sans éjection » n'est affirmée que si la TV l'a **vue** (diffusion `bad_removal`, retenue dans les préférences d'un démarrage à l'autre, huit clés au plus) ; sinon, une vérification longue dit « sans doute ». Une TV éteinte ou une application tuée ne voit rien : elle ne dit alors pas ce qu'elle ne sait pas.
+3. **Montrer l'état là où la personne regarde** : la ligne d'état et la pastille de l'accueil (orange : vérification, clé illisible, retrait sans éjection ; verte : « prête à être retirée »), la tuile « Clé USB » (« Vérification par Android… » au lieu d'un faux « Aucune clé »), « Connexion & réglages » (« État de la clé USB »), la bibliothèque (le mot « patientez » ou le guide en en-tête et dans la bibliothèque vide, avec le bouton), l'explorateur de fichiers (la même ligne et le même bouton), la bannière de l'écran d'activation.
+4. **Tolérance de lecture : un seul réessai par montage.** Quand la recherche du fichier d'activation, l'explorateur ou la bibliothèque échouent pendant que la clé est en `checking`, ils sont relancés UNE fois quand elle passe à `mounted` (`UsbMountRetry` : un lecteur qui échoue encore sur la clé montée n'est pas relancé, pas de boucle ; un nouveau montage renouvelle le crédit). L'écran d'activation, lui, ne cherche pas pendant la vérification : il dit « vérification par Android… la recherche de l'activation reprend dès qu'elle est prête », puis cherche au montage.
+5. **Lire une clé montée en lecture seule** : `AndroidVolumeProvider` accepte `mounted_ro` en plus de `mounted` (la clé est lue et listée, jamais écrite : `writable = false`, « lecture seule, ignorée » pour les envois).
+
+### Retrait sûr : MENU › « Préparer le retrait de la clé USB »
+
+Aussi dans la tuile « Clé USB » de l'accueil. Écran `UsbRemovalActivity` ; les étapes et les mots sont dans le cœur pur `core/tv/UsbSafeRemoval.kt` (22 tests, mutations tuées) ; le déroulement vit dans `receiver/UsbRemoval.kt` (il continue si l'écran est fermé).
+
+1. **Des copies écrivent sur la clé** (réceptions du téléphone en un flux ou en multivoie, déplacement vers la clé, téléchargement) : l'écran les nomme avec leur avancement et propose **« Attendre la fin de la copie »** (plus aucune nouvelle copie n'est acceptée sur la clé, celles en cours finissent) ou **« Mettre en pause et préparer le retrait »** (elles s'arrêtent au bloc suivant).
+2. **Ce que « barrer la clé » veut dire côté serveur** (`ReceiverServer.fenceVolume`) : toute nouvelle copie vers la clé est refusée par `503 {"error":"volume removed","cause":"held","retry":true}` : le téléphone attend comme pour une clé retirée (« Clé USB retirée ou indisponible : remettez-la, l'envoi reprendra »), **rien n'est redirigé sur la mémoire interne et rien n'est perdu** ; une copie multivoie dont l'état est sur la clé n'est jamais recommencée ailleurs. En arrêt net (STOP) : l'envoi en un flux est coupé au tampon suivant (ce qui est arrivé est écrit), les sessions multivoies finissent leur bloc, sont forcées sur le support (`force`), fermées (carte des blocs sauvée) et oubliées de la TV, un déplacement est annulé (le `.part` est gardé), les téléchargements sont mis en pause et repartent tout seuls à la levée. Un « attendre » tardif n'affaiblit jamais un « pause ».
+3. **Quand plus rien n'écrit** : arrêt net, puis vidage : `fsync` de chaque `.part` et de chaque fichier d'un transfert multivoie inachevé, puis `sync` du système (attendu, 15 s au plus, au mieux : la commande `sync` d'Android, sans permission). Une copie arrivée à 100 % dont la TV relit tout le fichier pour le contrôle final (des minutes sur une clé) **n'est jamais coupée** : elle finit, prend son nom, puis lâche la clé ; si elle y est encore 20 s après l'ordre d'arrêt, l'écran dit « La copie « … » finit sa vérification : attendez-la, puis réessayez » (et non « ne s'arrête pas »). Si une copie ne lâche pas la clé 20 s après l'ordre d'arrêt, ou si un fichier n'est pas confirmé : l'écran dit « La TV n'a pas pu confirmer que tout est écrit sur la clé. Ne la retirez pas tout de suite » (boutons : réessayer, réglages de stockage, reprendre l'utilisation) ; **jamais un faux « prête »**.
+4. **« Vous pouvez retirer la clé « Lexar ». »** (et « Les copies en pause reprendront quand vous remettrez la clé » si des copies ont été mises en pause) + « Pour une éjection complète : Réglages › Stockage › Éjecter », avec le bouton « Ouvrir les réglages de stockage » : Android seul peut démonter le volume. L'accueil dit « Vous pouvez retirer la clé… (les copies sont en pause) » tant que la clé est préparée.
+5. La clé retirée : tout est rendu (le prochain branchement reprend les copies). Dix minutes sans retrait : les copies reprennent toutes seules (« La clé n'a pas été retirée : les copies reprennent »). Le bouton « Reprendre l'utilisation de la clé » rend la clé à tout moment.
+
+Limites dites : lire une vidéo de la clé peut encore écrire une petite marque « vu » au bout du fichier (écriture atomique avec `fsync`) ; un téléchargement mis en pause par la préparation repart seul, celui que le propriétaire avait mis en pause reste en pause ; le `sync` d'Android ne vide pas le cache de la clé elle-même (aucune API ne le permet : certaines clés bon marché mentent) : l'éjection d'Android reste la voie complète.
+
+### Écritures de CastBridge-TV vers un volume amovible (audit du 2026-10-07)
+
+La règle : un fichier écrit sur un volume amovible est fermé avec `fsync` **à la fin du fichier**, jamais un `fsync` par bloc (R-20 l'a retiré : la clé et le lecteur partagent le bus) ; le commit final demande un `sync` du système, au mieux, **une fois, groupé** (`ShellSync` : un seul fil, au plus un vidage toutes les 3 s, une demande faite pendant un vidage en obtient un autre). Test `DiskFlushTest` : 500 blocs de 64 Kio = aucun vidage, un seul à la fin du fichier, après le renommage, jamais sur la mémoire interne.
+
+| Écriture | `fsync` | `sync` du système |
+|---|---|---|
+| Réception en un flux (`PUT /upload`) | tous les 64 Mo (R-20) et à la fin (`FileStore.commit`) avant le renommage | demandé après le renommage |
+| Réception multivoie (`PartAssembler`) | `force(false)` tous les 64 Mo (hors fil de requête), `force(true)` avant le contrôle final, puis `commit` | demandé après le renommage |
+| Déplacement (`Mover`) | tous les 64 Mo, `syncPart`, puis `commit` | demandé après le renommage |
+| Rangement / renommage d'un fichier d'une clé | `fsync` de la cible renommée | — |
+| Migration vers la clé (`UsbMigration`) | `fsync` du `.part`, puis de la cible renommée | — |
+| Corbeille (`TvTrash`) | `fsync` du fichier déplacé | — |
+| Archive des contenus libres (`FreeExportFiles`) | `fsync` avant le renommage | demandé à la fin |
+| **Demande d'appareil `device-request.txt`** (`ActivationCenter.exportRequest`) | **ajouté** : écrit puis `fsync` | **ajouté** |
+| **Téléchargement terminé** (`DownloadManager.finish`, aria2 n'appelle pas `fsync`) | **ajouté** : `fsync` du fichier avant d'annoncer « terminé » | **ajouté** (une fois par tâche) |
+| Index, marques « vu », rangement (`AtomicFile`, `SafeFile`) | fichier temporaire, `fsync`, renommage | — |
+| Lots, packs Quiz et Apprendre | mémoire interne (jamais sur la clé) | — |
+
+### Ce qui n'est pas vérifié
+
+Rien de ce chapitre n'a tourné sur la TV : les états réels qu'une TV GaiaOS diffuse pour une clé exFAT (a-t-elle un `checking` visible ? combien de temps ?), la présence de `Settings.ACTION_INTERNAL_STORAGE_SETTINGS` ou de « Éjecter » dans ses réglages, l'effet réel de la commande `sync` (permise par l'application ? sur ce noyau ?), la lecture d'une clé montée en lecture seule, l'écran à 720p et le focus. Parcours : **P-90** de `docs/test-plans/PARCOURS-CRITIQUES.md`. Vérifié en JVM (2026-10-07 ; `:core:test` : 4668 tests verts, `:receiver:compileDebugKotlin` sans erreur) : la règle (`UsbVolumeStateTest`, 36 tests), l'historique (`UsbVolumeTrackerTest`, 23), le réessai « un seul par montage » (`UsbMountRetryTest`, 12), le déroulement du retrait (`UsbSafeRemovalTest`, 22), le serveur réel (`SafeRemovalServerTest`, 23 : barrage, arrêt au bloc suivant, reprise octet pour octet, copie multivoie, déplacement, flux d'arrêt, copie en vérification jamais coupée), le vidage (`DiskFlushTest`, 16), les téléchargements (`DownloadHoldTest`, 10), la bannière d'activation (`UsbActivationBannerTest`) et la pastille (`TvSignalUsbNoteTest`). 136 mutations (règle, historique, réessai, retrait, serveur, téléchargements, vidage, bannière, pastille) : toutes tuées par un test qui passe au rouge. Ces tests ne remplacent pas l'essai sur la TV : voir P-90.
