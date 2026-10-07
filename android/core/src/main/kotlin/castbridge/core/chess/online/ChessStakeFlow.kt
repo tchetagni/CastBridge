@@ -11,17 +11,23 @@ import java.util.Base64
 
 /**
  * Ce que la TV demande à l'API portefeuille pour une partie misée (option B de la conception W22 § 3.3) ; implémenté côté TV par `WalletHub`, par un faux dans les tests. BLOQUANT : à appeler hors du fil de
- * l'écran. La TV ne crée jamais un jeton : elle obtient un blocage signé, puis poste le résultat signé du service.
+ * l'écran. La TV ne crée jamais un jeton : elle obtient un blocage signé, puis poste le résultat signé du service. Partagé par les échecs en ligne et par le Quiz misé (games-G5).
  */
 interface ChessWallet {
-    /** Bloque [per] [cur] pour une partie de [game] avec la clé d'idempotence [idem] (rejouée telle quelle sur une coupure : l'API rend le MÊME blocage). */
-    fun lockEscrow(cur: WalletCurrency, per: Long, game: String, idem: String): WalletResult<EscrowDone>
+    /**
+     * Bloque [per] [cur] par siège, pour [seats] sièges (1 aux échecs ; 1 à 8 au Quiz misé : une mise par siège, payée par le compte de la TV), pour une partie de [game], avec la clé d'idempotence [idem]
+     * (rejouée telle quelle sur une coupure : l'API rend le MÊME blocage).
+     */
+    fun lockEscrow(cur: WalletCurrency, per: Long, game: String, idem: String, seats: Int = 1): WalletResult<EscrowDone>
     /** Poste le résultat signé `cbr1` à l'API (idempotent). */
     fun settle(token: String): WalletResult<SettleDone>
 }
 
-/** Un blocage obtenu et pas encore employé par une salle : il reste valable jusqu'à [expMs] ; une TV qui échoue à ouvrir sa partie le réutilise au lieu d'en bloquer un second. */
-data class PendingEscrow(val cur: String, val per: Long, val cbe1: String, val eid: String, val expMs: Long) {
+/**
+ * Un blocage obtenu et pas encore employé par une salle : il reste valable jusqu'à [expMs] ; une TV qui échoue à ouvrir sa partie le réutilise au lieu d'en bloquer un second. Il n'est réutilisé que pour le
+ * MÊME jeu, la même monnaie, la même mise et le même nombre de [seats] (sièges qui misent).
+ */
+data class PendingEscrow(val cur: String, val per: Long, val cbe1: String, val eid: String, val expMs: Long, val seats: Int = 1, val game: String = "chess") {
     /** Jamais le blocage signé dans un journal ni dans un message d'échec de test. */
     override fun toString() = "PendingEscrow(cur=$cur, per=$per, eid=$eid, expMs=$expMs)"
 }
@@ -102,22 +108,29 @@ class ChessStakeFlow(private val wallet: ChessWallet, private val store: ChessSt
         data class Failed(val text: String, val network: Boolean, val reason: String?) : Lock()
     }
 
-    /** Un blocage valable de cette monnaie et de cette mise (au moins [MIN_LEFT_MS] de validité restante : la partie doit pouvoir s'ouvrir). */
-    fun reusable(spec: StakeSpec, nowMs: Long): PendingEscrow? = store.pendingEscrow()?.takeIf { it.cur == spec.cur && it.per == spec.per && it.expMs - nowMs >= MIN_LEFT_MS }
+    /**
+     * Un blocage valable de ce jeu, de cette monnaie, de cette mise et de ce nombre de sièges (au moins [MIN_LEFT_MS] de validité restante : la partie doit pouvoir s'ouvrir). Un blocage fait pour un autre
+     * nombre de sièges ne sert pas : l'API a posé exactement `mise × sièges`.
+     */
+    fun reusable(spec: StakeSpec, nowMs: Long, seats: Int = 1): PendingEscrow? =
+        store.pendingEscrow()?.takeIf { it.cur == spec.cur && it.per == spec.per && it.seats == seats && it.game == game && it.expMs - nowMs >= MIN_LEFT_MS }
 
-    fun lock(spec: StakeSpec, nowMs: Long): Lock {
-        reusable(spec, nowMs)?.let { return Lock.Ok(it, reused = true) }
+    /** Bloque la mise de [seats] sièges (1 aux échecs) ou réutilise un blocage encore valable pour exactement cela. */
+    fun lock(spec: StakeSpec, nowMs: Long, seats: Int = 1): Lock {
+        reusable(spec, nowMs, seats)?.let { return Lock.Ok(it, reused = true) }
         val cur = WalletCurrency.values().firstOrNull { it.name == spec.cur } ?: return Lock.Failed("Monnaie inconnue", false, null)
-        val key = store.lockKey(spec.cur, spec.per) ?: newKey().also { store.saveLockKey(spec.cur, spec.per, it) }
-        return when (val r = wallet.lockEscrow(cur, spec.per, game, key)) {
+        // la clé d'idempotence d'un essai sans réponse est gardée PAR (jeu, monnaie, sièges, mise) : rejouée telle quelle elle redonne le même blocage, jamais un contenu différent (IDEM_CONFLICT) ; les clés des échecs gardent leur forme d'avant
+        val keyCur = if (game == "chess" && seats == 1) spec.cur else "$game.${spec.cur}.k$seats"
+        val key = store.lockKey(keyCur, spec.per) ?: newKey().also { store.saveLockKey(keyCur, spec.per, it) }
+        return when (val r = wallet.lockEscrow(cur, spec.per, game, key, seats)) {
             is WalletResult.Ok -> {
-                store.saveLockKey(spec.cur, spec.per, null)
-                val p = PendingEscrow(spec.cur, spec.per, r.value.cbe1, r.value.eid, r.value.exp)
+                store.saveLockKey(keyCur, spec.per, null)
+                val p = PendingEscrow(spec.cur, spec.per, r.value.cbe1, r.value.eid, r.value.exp, seats, game)
                 store.savePendingEscrow(p)
                 Lock.Ok(p, reused = false)
             }
             is WalletResult.Fail -> {
-                if (!r.network) store.saveLockKey(spec.cur, spec.per, null)   // un refus du serveur est définitif pour cet essai ; sans réponse, la MÊME clé sera rejouée
+                if (!r.network) store.saveLockKey(keyCur, spec.per, null)   // un refus du serveur est définitif pour cet essai ; sans réponse, la MÊME clé sera rejouée
                 Lock.Failed(r.shown.text, r.network, r.reason)
             }
         }

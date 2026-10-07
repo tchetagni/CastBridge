@@ -66,7 +66,7 @@ public class WalletHistoryController {
         sw.put("convert", s.convert());
         sw.put("vouchers", s.vouchers());
         out.put("switches", sw);
-        // jeux misés (échecs en ligne) : ce que la TV AFFICHE (échelle de mises, frais, plafonds de parties gagnées) ; le serveur reste l'autorité de chaque blocage
+        // jeux misés (échecs et Quiz en ligne) : ce que la TV AFFICHE (échelle de mises, frais, plafonds de parties gagnées, sièges qui misent par TV : 1 aux échecs, 8 au Quiz) ; le serveur reste l'autorité de chaque blocage
         Map<String, Object> games = new LinkedHashMap<>();
         for (String g : WalletPolicyService.GAMES.stream().sorted().toList()) {
             policies.game(g).ifPresent(gp -> {
@@ -75,7 +75,7 @@ public class WalletHistoryController {
                 m.put("stakes", Map.of("NDEM", gp.scaleNdem(), "MBOKO", gp.scaleMboko()));
                 m.put("feeBp", gp.feeBp());
                 m.put("winCaps", Map.of("day", gp.capDay(), "week", gp.capWeek(), "month", gp.capMonth()));
-                m.put("seats", 1);
+                m.put("seats", gp.seats());
                 m.put("trialStakes", false);
                 games.put(g, m);
             });

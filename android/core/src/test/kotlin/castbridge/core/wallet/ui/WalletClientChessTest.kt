@@ -132,6 +132,20 @@ class WalletClientChessTest {
         assertEquals(250, g.feeBp); assertEquals(3, g.capDay); assertEquals(10, g.capWeek); assertEquals(15, g.capMonth)
     }
 
+    @Test fun thePolicyTellsBothGamesTheirSeatsAndAnOlderServerWithoutSeatsMeansOne() {
+        // games-G5 : le Quiz mise jusqu'à 8 sièges par TV (une mise par siège), les échecs un seul ; un serveur plus ancien ne dit pas `seats`
+        val body = policyBody(""","games":{"chess":{"enabled":true,"stakes":{"NDEM":[10,20],"MBOKO":[1]},"feeBp":0,"winCaps":{"day":3,"week":10,"month":15},"seats":1},
+            "quiz":{"enabled":true,"stakes":{"NDEM":[10,20,50,100,200],"MBOKO":[1,2,5,10]},"feeBp":0,"winCaps":{"day":3,"week":10,"month":15},"seats":8}}""")
+        val g = WalletReplies.parsePolicy(body)!!.games
+        assertEquals(setOf("chess", "quiz"), g.keys)
+        assertEquals(1, g.getValue("chess").seats); assertEquals(8, g.getValue("quiz").seats)
+        assertEquals(listOf(10L, 20L, 50L, 100L, 200L), g.getValue("quiz").stakesNdem); assertEquals(listOf(1L, 2L, 5L, 10L), g.getValue("quiz").stakesMboko)
+        val old = WalletReplies.parsePolicy(policyBody(""","games":{"quiz":{"enabled":true,"stakes":{"NDEM":[10],"MBOKO":[]},"feeBp":0}}"""))!!.games.getValue("quiz")
+        assertEquals(1, old.seats, "pas de `seats` : un seul siège, jamais plus que ce que le serveur dit")
+        val absurd = WalletReplies.parsePolicy(policyBody(""","games":{"quiz":{"enabled":true,"stakes":{"NDEM":[10],"MBOKO":[]},"seats":99}}"""))!!.games.getValue("quiz")
+        assertEquals(8, absurd.seats, "borné à 8")
+    }
+
     @Test fun anOlderServerWithoutGamesStillGivesAPolicy() {
         val p = WalletReplies.parsePolicy(policyBody(""))!!
         assertTrue(p.games.isEmpty())

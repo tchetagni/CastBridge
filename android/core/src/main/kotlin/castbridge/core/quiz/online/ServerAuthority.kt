@@ -69,7 +69,7 @@ class ServerAuthority(transport: PlayTransport, override val scope: PlayScope = 
                 is ServerMsg.Question -> lastQuestion = m
                 is ServerMsg.Reveal -> lastReveal = m
                 is ServerMsg.RoomGone -> lastGone = m
-                is ServerMsg.Ping, is ServerMsg.Replay, is ServerMsg.Result -> {}   // `result` : parties misées d'échecs, jamais dans une salle de Quiz
+                is ServerMsg.Ping, is ServerMsg.Replay, is ServerMsg.Result -> {}   // `result` (parties misées : échecs, Quiz misé) : lu par l'écouteur de messages ([onServerMessage]), jamais gardé ici
             }
             lock.notifyAll()
         }
@@ -101,7 +101,10 @@ class ServerAuthority(transport: PlayTransport, override val scope: PlayScope = 
     fun sendOpening(m: ClientMsg) { synchronized(lock) { welcome = null; lastError = null }; send(m) }
     /** Envoie une action de jeu (`move`, `resign`, `draw`, `cancel`) et rend sa référence (`seq`) : l'accusé arrive à l'écouteur de messages. Faux = pas envoyée (liaison en réouverture : mise en file bornée). */
     fun gameAct(op: String, arg: String?, ply: Int?): Long { val ref = synchronized(lock) { ++clientSeq }; send(ClientMsg.GameAct(op, arg, ply, ref)); return ref }
-    fun create(name: String?, mode: String?, activation: String? = null, rentals: List<String> = emptyList(), proof: String? = null) { send(ClientMsg.Create(name, mode, activation, rentals, proof)) }
+    /** Crée la salle (hôte). [stake] + [escrow] (blocage `cbe1` signé par l'API) = Quiz MISÉ (games-G5) ; sans eux, salle libre, message identique à celui d'avant. */
+    fun create(name: String?, mode: String?, activation: String? = null, rentals: List<String> = emptyList(), proof: String? = null, stake: StakeSpec? = null, escrow: String? = null) {
+        send(ClientMsg.Create(name, mode, activation, rentals, proof, stake = stake, escrow = escrow))
+    }
     fun resume(roomId: String, token: String, lastSeq: Long) { send(ClientMsg.Resume(roomId, token, lastSeq)) }
     fun setScope(open: Boolean) { send(ClientMsg.Scope(open)) }
     /** Relaie la réponse d'un téléphone local ; rend la référence (`seq`) dont l'accusé arrive à [onRelayAck]. */
@@ -131,7 +134,10 @@ class ServerAuthority(transport: PlayTransport, override val scope: PlayScope = 
      * L'activation `cbx1` est jointe au `join` (w20-04b : le service l'exige quand le jeu hors TV est fermé).
      */
     @Suppress("UNUSED_PARAMETER")
-    fun joinRoom(code: String, name: String?, deviceHash: String?, activation: String?, spectate: Boolean = true, proof: String? = null) { synchronized(lock) { welcome = null; lastError = null }; send(ClientMsg.Join(code, name, null, deviceHash, spectate, activation, proof)) }
+    fun joinRoom(code: String, name: String?, deviceHash: String?, activation: String?, spectate: Boolean = true, proof: String? = null, escrow: String? = null) {
+        synchronized(lock) { welcome = null; lastError = null }
+        send(ClientMsg.Join(code, name, null, deviceHash, spectate, activation, proof, escrow))   // [escrow] : le blocage `cbe1` de CETTE TV quand la salle est misée (Quiz misé, games-G5)
+    }
 
     /** Réveille [awaitChanges] (changement local sans message serveur). */
     fun poke() = synchronized(lock) { changes++; lock.notifyAll() }

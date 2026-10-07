@@ -1,10 +1,13 @@
 package castbridge.core.quiz.online
 
+import castbridge.core.owner.Signer
 import castbridge.core.quiz.QuizBank
 import castbridge.core.quiz.QuizDuel
 import castbridge.core.quiz.QuizGame
 import castbridge.core.quiz.QuizHistoryBook
 import castbridge.core.quiz.QuizRoom
+import castbridge.core.wallet.PlayResult
+import castbridge.core.wallet.WalletCurrency
 
 /**
  * Salle Internet autoritaire côté serveur (DESIGN-W20 § 2.4) : `roomId`, code (8 car.), hôte, spectateurs, 1 table (= le MÊME `QuizRoom`,
@@ -17,6 +20,11 @@ import castbridge.core.quiz.QuizRoom
  * suivante (fin de l'écran de classement) ; la dernière question n'est suivie d'aucun délai ; `LAN` et `TV_ONLY` : délai 0, comportement inchangé.
  * Pour ne pas modifier `QuizDuel`, la table lit une horloge décalée (`serveur − décalage`) : le décalage grandit du délai à chaque ouverture,
  * si bien que la fenêtre de réponse reste entière.
+ *
+ * **Quiz misé (games-G5, W22 § 3.3 option B)** : avec [stake] la salle est un Duel dont chaque TV a bloqué sa mise (blocage `cbe1` DÉJÀ vérifié par le service, [Admission]) : une mise par SIÈGE (les téléphones
+ * relayés par la TV, au plus le `k` de son blocage), payée par le compte de la TV. La partie ne commence qu'avec au moins DEUX TV qui misent ; les sièges qui misent sont figés au départ ; à la fin
+ * la cagnotte est partagée selon le classement ([QuizSettlement]) et la salle SIGNE le résultat `cbr1` avec la clé dédiée du service ([signer]) ; une partie interrompue rend chaque blocage en entier
+ * (`ABORT`). Le service ne détient aucun secret du grand livre, ne parle jamais à l'API et n'écrit aucun solde : l'API règle. Sans [stake], RIEN ne change (salle libre, protocole d'avant).
  */
 class ServerRoom(
     val roomId: String,
@@ -27,6 +35,12 @@ class ServerRoom(
     val settings: Settings = Settings(),
     private val gapRequestedMs: Long = PlayTiming.INTER_QUESTION_GAP_MS,
     histories: QuizHistoryBook = QuizHistoryBook(null),
+    /** Mise de la salle (monnaie et montant par siège) ; null = salle LIBRE, comportement d'avant. */
+    val stake: StakeSpec? = null,
+    /** Clé dédiée du service qui signe `cbr1` ; null = le service ne sait pas signer (alors une salle misée n'existe pas : le hub la refuse). */
+    private val signer: Signer? = null,
+    /** Appelé (sous le verrou de la salle) avec `(rid, jeton cbr1)` : le service le dépose dans son volume pour le collecteur de l'hôte. */
+    private val onResult: (String, String) -> Unit = { _, _ -> },
 ) {
     data class Settings(val allowSpectators: Boolean = true, val maxSpectators: Int = 50, val seatsPerTable: Int = 8, val duelCount: Int = 10, val duelQuestionMs: Long = 20_000,
                         /** w20-04b : joueurs locaux qu'une TV (hôte ou invitée) peut relayer, 8 au plus. */
@@ -37,6 +51,12 @@ class ServerRoom(
 
     /** Un message à envoyer à la connexion `to`. */
     data class Out(val to: String, val msg: ServerMsg)
+
+    /**
+     * Admission d'une connexion, jugée par le hub AVANT la salle (Quiz misé) : identité de la TV (code d'appareil de son activation) et blocage `cbe1` vérifié. La salle ne revérifie aucune signature.
+     * Sans mise, ignorée.
+     */
+    data class Admission(val identity: String?, val escrow: QuizEscrow? = null)
 
     /** Un siège : l'hôte, un joueur ou un spectateur. `token` (128 bits) est le seul secret ; `viaTv` : joueur local relayé par la TV. */
     class Seat internal constructor(val token: String, var role: PlayRole, val name: String, val deviceHash: String?, val viaTv: Boolean) {
@@ -51,6 +71,9 @@ class ServerRoom(
         var relayedBy: Seat? = null; internal set
         /** Clé d'adresse du client (IPv4, ou préfixe /64 en IPv6) : sert au bannissement par adresse. */
         var ip: String? = null; internal set
+        /** Quiz misé : identité de la TV (code d'appareil) et son blocage ; null pour un téléphone relayé, un spectateur sans mise, ou une salle libre. */
+        var identity: String? = null; internal set
+        var escrow: QuizEscrow? = null; internal set
     }
 
     /** Une réponse retenue. `choice` et `correct` sont additifs (w20-07) : ils nourrissent [BotScore], jamais l'écran. */
@@ -109,6 +132,98 @@ class ServerRoom(
     private val safetySeen = HashSet<String>()
     private val reports = ArrayList<Triple<String, String?, String>>()
 
+    // ------------------------------------------------------------------ Quiz misé (games-G5)
+
+    /** Les sièges qui misent, par identifiant de blocage et dans l'ordre des sièges : FIGÉS au départ de la partie (personne n'entre ni ne change après). */
+    private val stakers = LinkedHashMap<String, List<String>>()
+    private var stakeStarted = false
+    /** Issue du règlement (une fois signé) : `SPLIT` (cagnotte partagée), `REFUND` (personne n'a marqué : chacun reprend sa mise) ou `ABORT` (partie interrompue). */
+    private var stakeOutcome: String? = null
+    /** Parts de la cagnotte par joueur, avant frais éventuels de la plateforme (affichage ; seul le règlement de l'API fait foi). */
+    private var stakePayouts: Map<String, Long>? = null
+    private val pendingOuts = ArrayList<Out>()
+    /** Résultat `cbr1` signé (parties misées) une fois la partie finie ou interrompue ; reste dans la salle pour la reprise d'une TV qui l'aurait manqué. */
+    var resultToken: String? = null; private set
+
+    val isStaked: Boolean get() = stake != null
+    /** Les identifiants de blocage portés par les sièges (pour que le hub n'emploie jamais deux fois le même blocage). */
+    fun escrowIds(): List<String> = synchronized(lock) { escrowSeats().mapNotNull { it.escrow?.eid } }
+    /** Les sièges qui misent, figés au départ (tests, journal) : identifiant de blocage → joueurs. */
+    fun stakers(): Map<String, List<String>> = synchronized(lock) { LinkedHashMap(stakers) }
+
+    /** Les TV qui ont bloqué une mise, dans l'ordre d'arrivée (l'hôte d'abord). */
+    private fun escrowSeats(): List<Seat> = seats.values.filter { it.escrow != null }
+
+    /** Les sièges qui misent pour [tv] : son propre siège de joueur s'il en a un, puis les téléphones qu'elle relaie, dans l'ordre d'arrivée ; au plus le `k` de son blocage. */
+    private fun stakingSeatsOf(tv: Seat): List<Seat> = ((if (tv.playerId != null) listOf(tv) else emptyList()) + relayedOf(tv).filter { it.playerId != null }).take(tv.escrow?.seats ?: 0)
+
+    private fun stakeRequired(conn: String): Out {
+        val st = stake!!
+        val r = GameReason.STAKE_ESCROW_REQUIRED
+        return Out(conn, ServerMsg.Error(seq, r.code, r.message, r.retryable, 0L, linkedMapOf("game" to PlayProtocol.GAME_QUIZ, "cur" to st.cur, "per" to st.per)))
+    }
+
+    private fun err(conn: String, r: GameReason) = Out(conn, ServerMsg.Error(seq, r.code, r.message, r.retryable))
+
+    /**
+     * Une TV prend part à la partie si sa liaison est vivante AU DÉPART (l'hôte l'est toujours : c'est lui qui démarre). Une TV invitée partie ou coupée à ce moment ne joue pas : ses téléphones quittent la table
+     * (sans leur TV ils n'y joueraient que pour perdre) et son blocage figure au résultat avec « utilisé 0 », rendu en entier : « Quitter avant le départ : votre mise est rendue » reste vrai.
+     */
+    private fun takesPart(tv: Seat): Boolean = tv.conn != null
+
+    /** Pourquoi une partie misée ne démarre pas encore (texte français), ou null : au moins deux TV doivent miser, chacune avec un joueur ; une salle misée ne joue qu'UNE partie. */
+    private fun stakeStartRefusal(): String? = when {
+        resultToken != null -> "Cette partie avec mise est terminée : ouvrez une nouvelle salle pour rejouer."
+        escrowSeats().count { takesPart(it) && stakingSeatsOf(it).isNotEmpty() } < 2 -> "Une partie avec mise a besoin d'au moins deux TV qui misent, chacune avec un joueur."
+        else -> null
+    }
+
+    /** Avant le départ : les téléphones des TV qui ne sont plus là quittent la table (ils ne partiraient pas dans le Duel pour rien). */
+    private fun dropAbsentTvs() {
+        for (tv in escrowSeats().filter { !takesPart(it) }) for (r in relayedOf(tv)) { r.quizToken?.let { table0.room.leave(it) }; seats.remove(r.token) }
+    }
+
+    private fun freezeStakers() {
+        stakers.clear()
+        for (tv in escrowSeats()) stakers[tv.escrow!!.eid] = if (takesPart(tv)) stakingSeatsOf(tv).mapNotNull { it.playerId } else emptyList()
+        stakeStarted = true
+    }
+
+    /**
+     * Signe le résultat `cbr1` UNE fois, dès que la partie est finie ou interrompue : `END` quand le Duel est allé au bout (cagnotte partagée selon le classement des sièges qui misent ; un siège sorti du
+     * classement par [BotScore] compte 0 : un robot ne gagne pas de cagnotte, et sa TV garde sa mise en jeu : un joueur ne se fait pas rembourser en imitant un robot), `ABORT` sinon (salle fermée, expirée,
+     * annulée avant le départ, arrêt du service : chaque blocage est rendu en entier ; un hôte perdu n'en fait pas partie, voir [hostWatch]). Le résultat part à toutes les TV qui ont bloqué une mise et est
+     * déposé pour le collecteur de l'hôte.
+     */
+    private fun settleIfDue() {
+        val st = stake ?: return
+        if (resultToken != null) return
+        val sig = signer ?: return          // un service sans clé n'ouvre pas de salle misée : défense en profondeur
+        val book = escrowSeats().mapNotNull { it.escrow }
+        if (book.isEmpty()) return
+        val cur = WalletCurrency.values().firstOrNull { it.name == st.cur } ?: return
+        val d = table0.room.duel
+        val ended = stakeStarted && table0.abandoned == null && d != null && d.phase == QuizDuel.Phase.FINISHED
+        val scores = if (ended) stakers.values.flatten().associateWith { pid -> if (isRanked(pid)) d!!.score(pid) else 0 } else null
+        val result = QuizSettlement.result(sig.keyId, roomId, cur, st.per, clock.now, book, stakers, scores)
+        val token = PlayResult.sign(result, sig)
+        resultToken = token
+        val shares = if (scores != null) QuizSettlement.shares(st.per, stakers, scores) else null
+        stakeOutcome = when { shares == null -> "ABORT"; shares.values.sum() > 0L -> "SPLIT"; else -> "REFUND" }
+        stakePayouts = shares?.takeIf { stakeOutcome == "SPLIT" }
+        runCatching { onResult(result.rid, token) }
+        for (s in escrowSeats()) s.conn?.let { pendingOuts += Out(it, ServerMsg.Result(seq, token)) }
+    }
+
+    /** Le bloc `stake` de la vue (additif, absent d'une salle libre) : la mise, la cagnotte et, la partie réglée, l'issue et la part de chaque joueur. */
+    private fun stakeView(): Map<String, Any?>? {
+        val st = stake ?: return null
+        val n = if (stakeStarted) stakers.values.sumOf { it.size } else escrowSeats().filter { takesPart(it) }.sumOf { stakingSeatsOf(it).size }
+        val tvs = if (stakeStarted) stakers.values.count { it.isNotEmpty() } else escrowSeats().count { takesPart(it) }   // les TV qui jouent (avant le départ : celles dont la liaison est là)
+        return linkedMapOf("game" to PlayProtocol.GAME_QUIZ, "cur" to st.cur, "per" to st.per, "tvs" to tvs, "seats" to n, "pot" to st.per * n,
+            "started" to stakeStarted, "settled" to (resultToken != null), "outcome" to stakeOutcome, "payouts" to stakePayouts)
+    }
+
     fun phase(): State = synchronized(lock) { state }
     fun currentQuestionId(): String? = synchronized(lock) { table0.room.currentQuestion()?.id }
     fun currentQuestionIndex(): Int = synchronized(lock) { table0.room.duel?.index ?: table0.room.game?.index ?: -1 }
@@ -166,14 +281,14 @@ class ServerRoom(
 
     // ------------------------------------------------------------------ messages
 
-    fun handle(conn: String, msg: ClientMsg, now: Long, ip: String? = null): List<Out> = synchronized(lock) {
+    fun handle(conn: String, msg: ClientMsg, now: Long, ip: String? = null, admission: Admission = Admission(null)): List<Out> = synchronized(lock) {
         val out = ArrayList<Out>()
         clock.now = now
         if (state == State.GONE) { out += err(conn, PlayReason.PLAY_ROOM_GONE); return out }
         when (msg) {
             is ClientMsg.Hello -> {}   // négociation faite par le service (intersection des capacités)
-            is ClientMsg.Create -> create(conn, msg, now, out)
-            is ClientMsg.Join -> join(conn, msg, now, ip, out)
+            is ClientMsg.Create -> create(conn, msg, now, admission, out)
+            is ClientMsg.Join -> join(conn, msg, now, ip, admission, out)
             is ClientMsg.Resume -> resume(conn, msg, now, ip, out)
             is ClientMsg.Act -> {
                 val seat = byConn[conn]
@@ -186,7 +301,11 @@ class ServerRoom(
             is ClientMsg.Mute -> hostOnly(conn, out) { _ -> seats.values.firstOrNull { it.playerId == msg.playerId }?.muted = msg.muted; dirty() }
             is ClientMsg.Report -> { byConn[conn]?.let { if (reports.size < 100) reports += Triple(it.token.take(6), msg.questionId, msg.reason) } }
             is ClientMsg.Pong -> pendingPings[conn]?.let { (id, sentAt) -> if (id == msg.id) { rtt.sample(conn, now - sentAt); pendingPings.remove(conn) } }
-            is ClientMsg.GameAct -> out += errp(conn, PlayProtocol.FORBIDDEN, "Cette salle est une salle de Quiz : les actions de jeu à tour de rôle n'y ont pas cours.")   // les parties d'échecs vivent dans `ChessServerRoom`
+            is ClientMsg.GameAct -> {
+                // seule action de jeu d'une salle de Quiz MISÉ : `cancel` (l'hôte renonce avant le départ : chaque blocage est rendu) ; les coups d'échecs vivent dans `ChessServerRoom`
+                if (stake != null && msg.op == "cancel") out += Out(conn, ServerMsg.Ack(seq, msg.seq, cancelStaked(conn)))
+                else out += errp(conn, PlayProtocol.FORBIDDEN, "Cette salle est une salle de Quiz : les actions de jeu à tour de rôle n'y ont pas cours.")
+            }
         }
         flush(now, out)
         out
@@ -243,22 +362,28 @@ class ServerRoom(
 
     // ------------------------------------------------------------------ create / join / resume
 
-    private fun create(conn: String, m: ClientMsg.Create, now: Long, out: MutableList<Out>) {
+    private fun create(conn: String, m: ClientMsg.Create, now: Long, admission: Admission, out: MutableList<Out>) {
         if (host != null || state != State.OPEN) { out += errp(conn, PlayProtocol.FORBIDDEN, "Cette salle a déjà un hôte."); return }
+        if (stake != null) {
+            // Quiz misé : un Duel (la cagnotte se partage selon le classement) dont l'hôte a bloqué SA mise ; sans blocage, la mise à bloquer est dite
+            if (admission.escrow == null) { out += stakeRequired(conn); return }
+            if (m.mode != null && m.mode != QuizRoom.Mode.DUEL.name) { out += errp(conn, PlayProtocol.BAD_REQUEST, "Une partie avec mise se joue en Duel."); return }
+        }
         val seat = Seat(newToken(), PlayRole.HOST, QuizRoom.cleanName(m.name) ?: "TV", null, false)
         if (m.name != null) {
             val j = table0.room.join(table0.room.code, m.name, null, null)
             if (j.status != QuizRoom.Join.OK) { out += errp(conn, PlayProtocol.BAD_REQUEST, "Nom invalide."); return }
             seat.quizToken = j.player!!.token; seat.playerId = j.player.id
         }
+        if (stake != null) { seat.identity = admission.identity; seat.escrow = admission.escrow }
         seats[seat.token] = seat; host = seat
         attach(seat, conn)
-        m.mode?.let { runCatching { QuizRoom.Mode.valueOf(it) }.getOrNull() }?.let { table0.room.setMode(it) }
+        (if (stake != null) QuizRoom.Mode.DUEL else m.mode?.let { runCatching { QuizRoom.Mode.valueOf(it) }.getOrNull() })?.let { table0.room.setMode(it) }
         out += welcome(seat, conn)
         pending += Ev("created")
     }
 
-    private fun join(conn: String, m: ClientMsg.Join, now: Long, ip: String?, out: MutableList<Out>) {
+    private fun join(conn: String, m: ClientMsg.Join, now: Long, ip: String?, admission: Admission, out: MutableList<Out>) {
         if (RoomCode.expired(createdAt, now)) { out += err(conn, PlayReason.PLAY_ROOM_GONE); return }
         val typed = RoomCode.normalize(m.code)
         // Une connexion déjà assise n'essaie pas de deviner un code : refus sans compter (sinon un spectateur ferait tourner le code de la salle).
@@ -275,6 +400,7 @@ class ServerRoom(
         if (m.deviceHash != null && m.deviceHash in bannedDevices || ip != null && ip in bannedIps) { out += err(conn, PlayReason.PLAY_BANNED); return }
         if (scope == PlayScope.INTERNET && (m.deviceHash == null || m.deviceHash.length < MIN_DEVICE_HASH)) { out += errp(conn, PlayProtocol.BAD_REQUEST, "Appareil non identifié : mettez CastBridge à jour."); return }
         val name = QuizRoom.cleanName(m.name) ?: if (m.spectate) "TV" else run { out += errp(conn, PlayProtocol.BAD_REQUEST, "Choisissez un pseudonyme."); return }   // audit C-1 : une TV qui regarde n'a pas de pseudonyme
+        if (stake != null) { stakedJoin(conn, m, name, ip, admission, now, out); return }   // salle misée : seule une TV qui a bloqué sa mise y entre (aucun téléphone ne parle au service)
         val dup = m.deviceHash != null && seats.values.any { it.deviceHash == m.deviceHash && it.role != PlayRole.SPECTATOR }
         val full = table0.room.players().size >= settings.seatsPerTable
         if (m.spectate || dup) {
@@ -296,10 +422,29 @@ class ServerRoom(
         pending += Ev("joined", mapOf("playerId" to s.playerId))
     }
 
+    /**
+     * Entrée d'une TV dans une salle MISÉE : son blocage `cbe1` (vérifié par le hub) est obligatoire, sinon la mise à bloquer lui est dite (`STAKE_ESCROW_REQUIRED`, rien n'est consommé) ; une TV par
+     * identité ; jamais une fois la partie commencée (les sièges qui misent sont figés). Elle prend un siège de SPECTATRICE relais (le service lui accorde le droit de relayer) : ses téléphones jouent par elle.
+     */
+    private fun stakedJoin(conn: String, m: ClientMsg.Join, name: String, ip: String?, admission: Admission, now: Long, out: MutableList<Out>) {
+        if (state != State.OPEN) { out += err(conn, GameReason.STAKE_ROOM_STARTED); return }
+        val escrow = admission.escrow ?: run { out += stakeRequired(conn); return }
+        if (admission.identity != null && seats.values.any { it.identity == admission.identity }) { out += err(conn, GameReason.SAME_TV); return }
+        if (escrowSeats().size >= PlayProtocol.MAX_STAKE_TVS || !settings.allowSpectators || seats.values.count { it.role == PlayRole.SPECTATOR } >= settings.maxSpectators) { out += err(conn, PlayReason.PLAY_ROOM_FULL); return }
+        val s = Seat(newToken(), PlayRole.SPECTATOR, name, m.deviceHash, false).also { it.ip = ip; it.identity = admission.identity; it.escrow = escrow }
+        seats[s.token] = s; attach(s, conn); out += welcome(s, conn); announcement(now)?.let { out += Out(conn, it) }; pending += Ev("spectator")
+    }
+
     private fun relayJoin(tv: Seat, conn: String, m: ClientMsg.Join, out: MutableList<Out>) {
         // reprise d'un siège relayé : seulement par la TV qui le relaie (le jeton d'une autre TV n'ouvre rien)
         m.token?.let { t -> seats[t]?.takeIf { it.viaTv && it.relayedBy === tv }?.let { out += welcome(it, conn); return } }
         val name = QuizRoom.cleanName(m.name) ?: run { out += errp(conn, PlayProtocol.BAD_REQUEST, "Choisissez un pseudonyme."); return }
+        if (stake != null) {
+            // Quiz misé : on ne s'assoit que dans la salle d'attente (les sièges qui misent sont figés au départ), et au plus autant de joueurs ici que de mises bloquées par cette TV
+            if (state != State.OPEN) { out += err(conn, GameReason.STAKE_ROOM_STARTED); return }
+            val esc = tv.escrow ?: run { out += stakeRequired(conn); return }
+            if (stakingSeatsOf(tv).size >= esc.seats) { out += err(conn, PlayReason.PLAY_ROOM_FULL); return }
+        }
         if (table0.room.players().size >= settings.seatsPerTable || relayedOf(tv).size >= settings.maxRelayedPerTv.coerceIn(1, 8)) { out += err(conn, PlayReason.PLAY_ROOM_FULL); return }
         val j = table0.room.join(table0.room.code, name, null, m.deviceHash)
         if (j.status != QuizRoom.Join.OK) { out += errp(conn, PlayProtocol.BAD_REQUEST, "Impossible de rejoindre."); return }
@@ -322,7 +467,8 @@ class ServerRoom(
     /** Un spectateur déconnecté depuis [SPECTATOR_PURGE_MS] perd son siège (les joueurs gardent le leur pour la reprise). */
     private fun purgeSpectators(now: Long) {
         // un spectateur relais (TV invitée) n'est pas purgé tant qu'il porte des sièges : ses joueurs locaux perdraient leur TV
-        val gone = seats.values.filter { it.role == PlayRole.SPECTATOR && it.conn == null && (it.lostAt?.let { t -> now - t >= SPECTATOR_PURGE_MS } ?: false) && relayedOf(it).isEmpty() }
+        // une TV qui a bloqué une mise n'est jamais purgée : son blocage doit figurer dans le résultat signé (sinon il ne serait rendu qu'à l'échéance)
+        val gone = seats.values.filter { it.role == PlayRole.SPECTATOR && it.conn == null && it.escrow == null && (it.lostAt?.let { t -> now - t >= SPECTATOR_PURGE_MS } ?: false) && relayedOf(it).isEmpty() }
         for (s in gone) seats.remove(s.token)
     }
 
@@ -336,6 +482,7 @@ class ServerRoom(
         if (lastSeq != null && missed != null && missed.isNotEmpty()) out += Out(conn, ServerMsg.Replay(seq, missed))
         out += Out(conn, ServerMsg.State(seq, viewFor(s, clock.now), full = lastSeq == null || missed == null))
         announcement(clock.now)?.let { out += Out(conn, it) }
+        resultToken?.takeIf { s.escrow != null }?.let { out += Out(conn, ServerMsg.Result(seq, it)) }   // une TV qui revient après la fin retrouve son résultat signé
         pending += Ev("back", mapOf("role" to s.role.name))
     }
 
@@ -375,19 +522,26 @@ class ServerRoom(
         return when (m.action) {
             "answer" -> answer(seat, conn, m.questionId, m.choice, now, null)
             "mode" -> if (state != State.OPEN && state != State.FINISHED) ActResult.FORBIDDEN
+                else if (stake != null) { if (m.arg == QuizRoom.Mode.DUEL.name) ActResult.OK else ActResult.FORBIDDEN }   // une salle misée est un Duel, pour toujours
                 else (runCatching { QuizRoom.Mode.valueOf(m.arg.orEmpty()) }.getOrNull()?.let { if (room.setMode(it)) { dirty(); ActResult.OK } else ActResult.FORBIDDEN } ?: ActResult.BAD_REQUEST)
             "start" -> {
                 if (state != State.OPEN && state != State.FINISHED) return ActResult.FORBIDDEN
+                if (stake != null) stakeStartRefusal()?.let { why -> out += errp(conn, PlayProtocol.BAD_REQUEST, why); return ActResult.BAD_REQUEST }
                 val seed = if (scope == PlayScope.INTERNET) random.nextLong() else m.arg?.toLongOrNull() ?: random.nextLong()   // Internet : la graine est tirée par le serveur seul
+                if (stake != null) dropAbsentTvs()   // une TV qui a quitté la salle avant le départ ne joue pas : ses téléphones partent, sa mise sera rendue
                 val reason = room.startGame(seed)
                 if (reason != null) { out += errp(conn, PlayProtocol.BAD_REQUEST, reason); ActResult.BAD_REQUEST }
-                else { table0.reset(); botCache = null; state = State.PLAYING; pending += Ev("started"); ActResult.OK }
+                else { table0.reset(); botCache = null; state = State.PLAYING; if (stake != null) freezeStakers(); pending += Ev("started"); ActResult.OK }
             }
             "skip" -> if (state != State.PLAYING || table0.abandoned != null || table0.pausedAt != null) ActResult.IGNORED
                 else if (room.duel?.phase == QuizDuel.Phase.QUESTION && now < table0.opensAtServerMs) ActResult.IGNORED   // jamais pendant le délai
                 else if (room.hostSkip()) ActResult.OK else ActResult.IGNORED
-            "lobby" -> if (room.backToLobby()) { table0.reset(); botCache = null; state = State.OPEN; autoHost = false; pending += Ev("lobby"); ActResult.OK } else ActResult.FORBIDDEN
-            "end" -> if (state == State.PLAYING) { table0.abandoned = "HOST_ENDED"; state = State.FINISHED; pending += Ev("ended"); ActResult.OK } else ActResult.FORBIDDEN
+            // une salle misée ne joue qu'UNE partie : pas de retour en salle d'attente une fois la partie commencée (les mises sont figées, le résultat est signé une fois)
+            "lobby" -> if (stake != null && (stakeStarted || resultToken != null)) ActResult.FORBIDDEN
+                else if (room.backToLobby()) { table0.reset(); botCache = null; state = State.OPEN; autoHost = false; pending += Ev("lobby"); ActResult.OK } else ActResult.FORBIDDEN
+            // « fin pour tout le monde » : refusée avec une mise en jeu (un hôte qui perd n'arrête pas la partie pour se faire rembourser) ; quitter fait perdre la mise, comme aux échecs
+            "end" -> if (state == State.PLAYING && stake != null) { out += errp(conn, PlayProtocol.FORBIDDEN, "Une partie avec mise ne s'arrête pas en cours de route : elle va jusqu'au bout."); ActResult.FORBIDDEN }
+                else if (state == State.PLAYING) { table0.abandoned = "HOST_ENDED"; state = State.FINISHED; pending += Ev("ended"); ActResult.OK } else ActResult.FORBIDDEN
             "autohost" -> { autoHost = true; pending += Ev("autohost"); ActResult.OK }
             "candidate" -> if (room.setCandidate(m.arg?.takeIf { it.isNotEmpty() })) ActResult.OK else ActResult.FORBIDDEN
             else -> {
@@ -448,6 +602,17 @@ class ServerRoom(
         return ActResult.OK
     }
 
+    /**
+     * `game{op:"cancel"}` d'une salle MISÉE : l'hôte renonce avant le départ de la partie ; elle est interrompue et chaque blocage est rendu en entier (`cbr1` ABORT, envoyé aux TV qui ont bloqué une mise).
+     * Rend le résultat de l'accusé (`OK`, ou `FORBIDDEN` : pas l'hôte, ou la partie a commencé).
+     */
+    private fun cancelStaked(conn: String): String {
+        val s = byConn[conn] ?: return "UNKNOWN_PLAYER"
+        if (s !== host || state != State.OPEN) return "FORBIDDEN"
+        table0.abandoned = "CANCELLED"; state = State.FINISHED; pending += Ev("ended")
+        return "OK"
+    }
+
     private fun setScope(conn: String, open: Boolean, now: Long, out: MutableList<Out>) = hostOnly(conn, out) {
         if (!open) {
             if (state == State.PLAYING) { out += errp(conn, PlayProtocol.FORBIDDEN, "Fermer Internet : seulement en salle d'attente."); return@hostOnly }
@@ -480,7 +645,9 @@ class ServerRoom(
         val h = host ?: return
         val t = table0
         val lost = h.conn == null && h.lostAt != null
-        if (!lost || state != State.PLAYING || autoHost || t.abandoned != null) return
+        // Un Quiz MISÉ continue sans son hôte, comme avec l'« hôte automatique » que la TV demande toujours en démarrant : l'hôte ne peut pas débrancher sa TV pour interrompre la partie qu'il perd et reprendre
+        // sa mise (jamais d'issue plus favorable à qui coupe) ; ses joueurs ne marquent plus aux questions manquées et sa mise reste en jeu, comme celle d'une TV invitée perdue.
+        if (!lost || state != State.PLAYING || autoHost || stake != null || t.abandoned != null) return
         // « derrière l'hôte » = relayé par l'hôte ; les joueurs d'une autre TV (et cette TV) sont distants : la table continue sans l'hôte
         val remote = seats.values.any { it.role == PlayRole.PLAYER && !(it.viaTv && it.relayedBy === h) && it !== h }
         if (!remote && t.pausedAt == null) { t.pausedAt = now; pending += Ev("paused") }
@@ -527,11 +694,18 @@ class ServerRoom(
         }
     }
 
+    /** Diffuse les changements (états, annonces, révélations, signe « Partie sûre »), PUIS les résultats signés d'une partie misée (après le dernier état : une TV les lit dans cet ordre). */
     private fun flush(now: Long, out: MutableList<Out>) {
+        flushState(now, out)
+        if (pendingOuts.isNotEmpty()) { out += pendingOuts; pendingOuts.clear() }
+    }
+
+    private fun flushState(now: Long, out: MutableList<Out>) {
         clock.now = now
         val evs = ArrayList<Ev>(pending); pending.clear()
         for (t in tables) sync(t, now, evs)
         if (state == State.PLAYING && table0.room.stage == QuizRoom.Stage.FINISHED) { state = State.FINISHED; evs += Ev("finished") }
+        if (state == State.FINISHED) settleIfDue()   // la partie est finie ou interrompue (fin du Duel, annulation, fermeture) : le résultat signé est produit UNE fois
         val version = table0.room.version
         val safety = safety()
         val changed = evs.isNotEmpty() || version != lastVersion
@@ -591,6 +765,9 @@ class ServerRoom(
             (v["room"] as MutableMap<String, Any?>).let { it["ranked"] = ranked; it["rankNote"] = if (ranked) null else BotScore.NEUTRAL_TEXT }
         }
         v["timing"] = linkedMapOf("gapMs" to PlayTiming.gapFor(scope, gapRequestedMs), "opensAtServerMs" to t.opensAtServerMs, "serverNowMs" to now, "waitMs" to wait)
+        stakeView()?.let { v["stake"] = it }   // additif : seulement une salle misée (le bloc dit la mise, la cagnotte, l'issue et la part de chacun une fois réglée)
+        // une salle MISÉE se dit « Partie avec mise » (et non « Compétition entre amis », le libellé d'une salle libre) : la page des téléphones l'écrit sous « Vous êtes dans la salle »
+        if (stake != null) (v["settings"] as? Map<String, Any?>)?.let { s -> v["settings"] = LinkedHashMap(s).also { it["playLabel"] = STAKED_PLAY_LABEL } }
         v
     }
 
@@ -608,6 +785,9 @@ class ServerRoom(
     }
 
     private fun gone(reason: String, out: MutableList<Out>): List<Out> {
+        // une salle misée qui s'éteint sans résultat (fermée, expirée, arrêt du service) : ABORT, chaque blocage est rendu en entier ; le résultat part AVANT la fin de la salle
+        settleIfDue()
+        if (pendingOuts.isNotEmpty()) { out += pendingOuts; pendingOuts.clear() }
         state = State.GONE; seq++
         ring.add(seq, "gone", mapOf("reason" to reason))
         for (c in byConn.keys) out += Out(c, ServerMsg.RoomGone(seq, reason))
@@ -628,6 +808,8 @@ class ServerRoom(
         /** Délai minimal entre deux rotations du code d'une salle. */
         const val ROTATE_MIN_MS = 60_000L
         const val HOST_LOST_MS = 60_000L
+        /** Le libellé de la partie dans la vue d'une salle MISÉE (`settings.playLabel`). */
+        const val STAKED_PLAY_LABEL = "Partie avec mise"
         const val SPECTATOR_GRACE_MS = 30_000L
         const val PURGE_MS = 10 * 60_000L
         const val SPECTATOR_PURGE_MS = 5 * 60_000L

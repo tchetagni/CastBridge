@@ -21,13 +21,13 @@ Pillow est nécessaire (`pip install pillow`, ou dans un environnement virtuel :
 
 Les blocs de texte du guide (`ns` étapes numérotées, `bl` listes, `say` ce que dit un écran mot pour mot, `qa` message et « Que faire », `card`/`cards`, `ver` repère de version) sont des fonctions de `build_guide.py` ; un repère « TV 0.14.45 ou plus récente · téléphone 1.2.53 ou plus récent » marque une fonction du 2026-10-07. On n'invente pas d'image : quand une capture manque, `miss("…")` laisse un cadre en pointillés avec sa légende.
 
-## Illustrations à ajouter (2026-10-07, 15 légendes laissées dans le guide)
+## Illustrations à ajouter (2026-10-07, 16 légendes laissées dans le guide)
 
 Le guide décrit les évolutions du 2026-10-07 avec les captures existantes (CastBridge 1.2.50, CastBridge-TV 0.14.43) ; les écrans nouveaux n'ont pas encore de capture. Pour chacune : faire la capture (voir plus bas), l'ajouter à `tools/spec.py`, puis remplacer l'appel `miss(…)` par un appel `step(…)` dans `build_guide.py`.
 
 - Activation : écran d'activation de CastBridge-TV (code en très gros, QR code) ; écran « Activer la TV » avec « Code affiché sur la TV » ; boîte d'Android « Se connecter ? » ; « TV trouvée », « Partager la demande », « Copier », « Coller la clé reçue » ; bandeau « Clé USB : activation trouvée pour cette TV › Activer ».
 - Ouvrir sur la TV : bouton « Ouvrir sur la TV » de l'onglet « CastBridge TV » et touche « TV » de la télécommande.
-- Jeux : liste « Jeux » de la TV avec la Bataille, Fap-Fap et Agraham Tia (les captures 6.1 et 6.2 datent d'avant la Bataille) ; salon de la Bataille (QR code, code à 4 chiffres, places) ; table de la Bataille sur un téléphone ; Échecs › Adversaire : En ligne (Internet).
+- Jeux : liste « Jeux » de la TV avec la Bataille, Fap-Fap et Agraham Tia (les captures 6.1 et 6.2 datent d'avant la Bataille) ; salon de la Bataille (QR code, code à 4 chiffres, places) ; table de la Bataille sur un téléphone ; Échecs › Adversaire : En ligne (Internet) ; Quiz › Partie Internet › « Créer une partie » avec « Mise », « Montant » et le nombre de joueurs de la TV qui misent (games-G5, `docs/QUIZ.md` § 5 bis).
 - Internet par le téléphone : « Demande d'Internet au téléphone… » sur la TV ; notification « CastBridge relaie pour <TV> ».
 - Clé USB : « vérification par Android… patientez » ; « Préparer le retrait de la clé USB » (MENU) ; guide « Clé illisible » avec « Ouvrir les réglages de stockage ».
 - La capture 2.4 (écran « Activer la TV » du téléphone) est celle de la version précédente : à refaire avec le champ « Code affiché sur la TV ».

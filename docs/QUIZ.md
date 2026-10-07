@@ -16,7 +16,8 @@ téléphone ni réseau) ou **à plusieurs** : chacun répond sur son téléphone
 | Mode | Principe |
 |---|---|
 | Compétition entre amis | gratuit, pour le plaisir |
-| Compétition avec mise | mise en **jetons virtuels sans valeur** (voir § 5), en Duel seulement |
+| Compétition à points | **points sans valeur** entre les téléphones d'une même TV (voir § 5), en Duel seulement |
+| Partie Internet, libre ou avec mise | entre TV ; la mise est en **NDEM ou MBOKO** (voir § 5 bis), en Duel |
 | Entraînement | sans enjeu ni chrono, l'explication de chaque réponse s'affiche, une erreur n'arrête pas la partie |
 
 | Parcours | Contenu |
@@ -100,17 +101,64 @@ Une TV **sans Internet** peut jouer une « Partie Internet » si un téléphone 
 - Les tâches de fond volumineuses de la TV (mise à jour de l'application, questions, lots de questions) **attendent** pendant une partie par relais (REL-F7).
 - Testé en JVM : `PlayRelayProfileTest` (règles et mesure), `RelayAuthorityWindowTest` (fenêtre des téléphones), `PlayHttpTransportViaRelayTest` (en-tête), `PlayGateRelayTest` (tuile), `ServerLinkBulkGateTest` (tâches de fond). **Non vérifié sur appareil** : la qualité réelle d'une partie par une liaison Bluetooth de référence (EDGE, 40 kbit/s), le temps d'ouverture du tuyau.
 
-## 5. « Mise payante » : jetons virtuels seulement
+## 5. « Compétition à points » : des points, jamais des jetons
 
-**Dans ce POC il n'y a aucun paiement ni argent réel** : pas d'intégration de paiement, aucune donnée bancaire ni Mobile
-Money. La mise est en **jetons virtuels sans valeur** (1 000 offerts à chaque téléphone, remis à zéro au redémarrage de
-l'app), affichés « Jetons virtuels — démo ». Mises égales ; la cagnotte est partagée selon le classement (1 joueur 100 % ;
-2 : 70/30 ; 3 et plus : 60/30/10 ; ex æquo à parts égales ; 0 point = rien) ; partie abandonnée = mises rendues.
+*Ce mode s'appelait « Compétition avec mise », puis « Défi en points » ; depuis games-G5 il s'appelle **« Compétition à points »** (le mot « mise » est réservé aux parties en NDEM ou MBOKO, § 5 bis).*
 
-Tout passe par l'interface `WalletProvider` (`core/.../quiz/Wallet.kt`) ; l'implémentation actuelle est `VirtualWallet`.
-**Avant de brancher un vrai prestataire**, vérifier le cadre légal camerounais sur les jeux d'argent et concours (jeu
-d'adresse ou de hasard, licence éventuelle, âge minimum, identification KYC, fiscalité), puis implémenter `WalletProvider`
-côté serveur (jamais de secret de paiement sur la TV).
+Les téléphones d'une même TV **partagent un seul portefeuille, celui de la TV** : aucun jeton ne peut circuler entre eux. Leur
+compétition se joue donc en **points sans valeur** (1 000 offerts à chaque téléphone, remis à zéro au redémarrage de l'app),
+affichés « Points sans valeur » ; **jamais** « jetons », jamais NDEM ni MBOKO, jamais de paiement ni d'argent réel (aucune
+intégration de paiement, aucune donnée bancaire ni Mobile Money). Enjeu de 50, 100 ou 200 points par joueur ; la cagnotte de points
+est partagée selon le classement (1 joueur 100 % ; 2 : 70/30 ; 3 et plus : 60/30/10 ; ex æquo à parts égales ; 0 point = rien) ;
+partie abandonnée = points rendus. Textes : « Compétition à points », « Points sans valeur : rien à payer, rien à gagner »,
+« Enjeu : 100 points par joueur », « Points gagnés : +140 » (TV, page `/quiz`, téléphone).
+
+Tout passe par l'interface `WalletProvider` (`core/.../quiz/Wallet.kt`) ; l'implémentation est `ChallengePointsWallet`
+(anciennement `VirtualWallet`, alias déprécié). Les « jetons » de la boutique (commodités du Millionnaire) et les points de cette
+compétition restent **distincts** de NDEM et MBOKO (décision D-W22-11).
+
+## 5 bis. « Mises » : Partie Internet en NDEM ou MBOKO (chantier games-G5)
+
+Une **vraie** mise n'existe qu'en **Partie Internet** (TV contre TV, `docs/PLAY-PROTOCOL.md`) : c'est là que chaque joueur a un compte
+distinct (celui de sa TV). Elle suit **exactement** le mécanisme des échecs en ligne (`docs/CHESS.md` § 6.4, option B de la conception
+W22 § 3.3) : la TV obtient de l'API un blocage `cbe1` signé, le service de jeu arbitre et signe le résultat `cbr1`, l'API règle. Aucun
+téléphone ne parle jamais au service ; le service ne détient aucun secret du grand livre.
+
+**Ce que choisit la TV** (« Partie Internet › Créer une partie », comme « Échecs › En ligne ») :
+
+| Choix | Valeurs |
+|---|---|
+| Mise | **Libre** (rien en jeu) · **NDEM** · **MBOKO** (seules les monnaies que la TV peut miser sont offertes) |
+| Montant | l'échelle du jeu `quiz` de la politique du serveur : NDEM 10 · 20 · 50 · 100 · 200 ; MBOKO 1 · 2 · 5 · 10 (par défaut, modifiable sans redéploiement) |
+| Joueurs de cette TV qui misent | de 1 à 8 : **une mise par siège** (un téléphone relayé = un siège), payée par le compte de la TV ; le blocage vaut `mise × sièges` |
+
+Solde affiché, confirmation (« Créer une partie avec mise ? — 20 NDEM par joueur · 2 joueurs ici · bloqué : 40 NDEM · votre solde 150 NDEM »)
+et avertissement : *quitter la partie fait perdre la mise ; plus de 60 s hors ligne, vos joueurs ne marquent plus*. Les TV qui rejoignent
+apprennent la mise **avant** de bloquer quoi que ce soit (« Cette partie se joue avec une mise de 20 NDEM par joueur. Combien de joueurs de cette
+TV misent ? »), puis bloquent la leur sur la même liaison. **Libre** est toujours possible. La **TV d'essai ne mise jamais** (parties libres seulement,
+dit à l'écran) ; MBOKO : production seulement (règle du portefeuille).
+
+**Règles de la partie misée** (service, `ServerRoom` du cœur) :
+
+- c'est un **Duel** (la cagnotte se partage selon le classement) ; **une salle misée ne joue qu'une partie** (pas de « Nouvelle partie » : les mises sont réglées) ;
+- **chaque TV bloque sa mise** (l'hôte à la création, les autres à l'entrée) ; une TV ne mise qu'une fois ; au plus 8 TV ; **jamais de simple regard** sur une salle misée ;
+- une TV ne s'assoit pas plus de joueurs qu'elle n'a de mises bloquées (le 9e téléphone ; ou le 3e quand elle n'en a bloqué que 2 : « La salle est complète : cette TV n'a bloqué sa mise que pour 2 joueurs. ») ;
+- **il faut au moins deux TV qui misent, chacune avec un joueur** : une partie à une seule TV ne fait circuler aucun jeton (« Une partie avec mise a besoin d'au moins deux TV… ») ;
+- au départ les **sièges qui misent sont figés** (plus personne n'entre ; un téléphone qui revient avec son jeton reprend sa place) ; une TV invitée qui a **quitté la salle avant le départ** (ou dont la liaison est coupée à ce moment) **ne joue pas** : ses téléphones quittent la table et sa mise est rendue en entier, comme le dit l'écran « Quitter » ;
+- **cagnotte** = somme des mises utilisées (`mise × sièges présents`, le non-utilisé est rendu) partagée selon le classement **des sièges qui misent** par `Pot.split` : 1 siège 100 % ; 2 : 70/30 ; 3 et plus : 60/30/10 ; **ex æquo à parts égales** (ils se partagent les places qu'ils couvrent) ; 0 point = rien ; le reste de l'arrondi au meilleur ; la part d'une TV = la somme des parts de ses sièges ; **personne n'a marqué : chacun reprend sa mise** ; un siège sorti du classement par l'anti-robot compte 0 ;
+- **frais de plateforme** : politique du serveur (`game.quiz.feeBp`, **0 %** au lancement), prélevés sur la plus grosse part d'une partie décisive seulement ; **plafonds** de parties **gagnées** (gain strictement supérieur à la mise utilisée) par identité : 3 par jour, 10 par semaine, 15 par mois (calendrier Africa/Douala), comptés **par jeu** (le Quiz et les échecs ont chacun les leurs) ;
+- **partie interrompue** (salle fermée ou expirée, hôte qui annule avant le départ, arrêt du service) : `cbr1` de type `ABORT`, **chaque blocage est rendu en entier** ; l'hôte qui **quitte avant le départ** annule la salle (mise rendue tout de suite) ; « fin pour tout le monde » est **refusée** pendant une partie misée (un hôte qui perd n'arrête pas la partie pour se faire rembourser) ; quitter une partie commencée fait perdre la mise ;
+- **une TV perdue en cours de partie**, l'hôte comme une invitée, **n'interrompt rien** : plus de 60 s hors ligne, ses joueurs ne marquent plus aux questions manquées, la partie continue et sa mise reste en jeu (le service enchaîne les questions sans l'hôte : personne ne peut débrancher sa TV pour annuler la partie qu'il perd et reprendre sa mise).
+
+**Ce que voient les joueurs** : à la TV la ligne « Mise : 20 NDEM par joueur · cagnotte 80 NDEM » reste sous la question ; sur le téléphone « Mise : 20 NDEM par joueur — la cagnotte est partagée selon le classement. » dans la salle d'attente ; en fin de partie la TV lit **la réponse de l'API** (jamais un calcul local) : « Vous gagnez 18 NDEM », « Vous perdez 20 NDEM », « Partie interrompue : mise rendue », puis « Voir « Mes jetons » » ; le téléphone dit « Votre part de la cagnotte : 42 NDEM (mise : 20 NDEM) » (avant frais éventuels) ou « Mise rendue : personne n'a marqué. » / « Mise rendue : partie interrompue. », avec « La mise est réglée par votre TV : voyez « Jetons » sur la TV. ». Si la TV n'a pas pu régler (hors ligne), elle garde le résultat signé et le reposte ; le service en garde aussi une copie 7 jours pour le collecteur de l'hôte.
+
+**Compatibilité** (aucun changement cassant pour les salles libres : mêmes messages, octet pour octet) : un service ou un serveur **sans la capacité `quizStakes`** (`GET /play/.well-known/caps`) ou sans le jeu `quiz` dans la politique de l'API ne propose que **« Libre »**, avec la ligne **« Mises NDEM/MBOKO : mettez à jour »** (la même ligne quand le service coupe les mises par `CASTBRIDGE_PLAY_STAKES=off`, puisqu'il n'annonce alors pas `quizStakes`) ; une TV d'avant games-G5 ne propose pas de mise et, en rejoignant une salle misée, lit « Cette partie se joue avec une mise : bloquez votre mise pour entrer ».
+
+**Limites connues** : (1) si la création échoue **après** que le service a accepté le blocage sans que la TV reçoive la réponse, ce blocage reste employé jusqu'à la fin de la salle (30 min au plus) : la TV en demande un nouveau (le premier est rendu à son échéance) ; (2) l'API ne voit pas les points : elle tient la conservation (Σ versé = Σ utilisé), l'entier de mises par ligne, la forme de la table (une ligne par TV, au moins deux TV engagées) ; le partage lui-même est celui du service ; (3) **décisions du propriétaire à confirmer** : échelle de mises, plafonds 3/10/15, frais 0 %, et le **partage selon le classement** (70/30, 60/30/10) plutôt que « le gagnant prend tout ».
+
+Fichiers : cœur `quiz/online/ServerRoom.kt` (la salle misée), `QuizStake.kt` (règlement), `QuizOnlineStake.kt` (enchaînement d'argent de la TV, textes), `PlayTvScreens.kt` (écrans), `chess/online/ChessStakeFlow.kt` et `ChessOnline.kt` (blocage, règlement, choix de mise : partagés avec les échecs) ; service `server-play/…/RoomRegistry.kt`, `stake/` ; API `wallet/ops/{EscrowService,SettleService}`, migration `V69__quiz_stakes.sql` ; TV `receiver/quiz/{PlayHub,PlayOnlineActivity}.kt`. Tests : `ServerRoomStakeTest` (la salle misée), `QuizSettlementTest` (le règlement pur, dont une conservation sur 500 tables aléatoires), `QuizStakeScreensTest` (écrans, mises permises, textes), `PlayTvSessionTest`, `RelayAuthorityTest` (cœur), `QuizStakeHubTest`, `StakeUnitTest` (service), `QuizStakeApiTest` (API), `QuizPageTextTest` (la page `/quiz`).
+
+**Avant de brancher un vrai prestataire de paiement** (hors périmètre : NDEM et MBOKO sont des jetons virtuels sans retrait), vérifier le cadre légal camerounais sur les jeux d'argent et concours (jeu d'adresse ou de hasard, licence éventuelle, âge minimum, identification KYC, fiscalité) : revue juridique reportée au 2027-01-01 (`docs/coordination/DESIGN-W22-JETONS-NDEM-MBOKO-2026-10-04.md` § 6).
 
 ## 6. Banque de questions — ajouter vos questions
 
@@ -369,10 +417,10 @@ Une carte par thème : version, taille, **fraîcheur** (« mis à jour il y a 3 
 `QuizThemes.CatalogCache`) : l'écran est complet sans Internet. La TV signale ses lots dans `GET /api/quiz/packs/status` (clé `lots`).
 
 ### Fusion des données quand les appareils se rencontrent (`QuizMerge`)
-Historique, scores et jetons restent **locaux à chaque appareil** et se fusionnent à la rencontre (TV ↔ téléphone) avec des règles commutatives et idempotentes (testées) :
+Historique, scores et points de la compétition restent **locaux à chaque appareil** et se fusionnent à la rencontre (TV ↔ téléphone) avec des règles commutatives et idempotentes (testées) :
 - **meilleurs scores** : union des deux tableaux (une entrée identique compte une fois), puis le meilleur (`HighScores` garde 10 par tableau, un tableau = une façon de jouer et un parcours) : **meilleur score par profil et par jeu** ;
 - **historique des questions** (300 parties) : par parcours, une question compte comme posée au plus récent de ses deux moments (mesurés en « parties écoulées » sur chaque appareil), compteur de parties = le plus grand ; dans le doute elle reste « récente » ;
-- **jetons virtuels** : dernière écriture par joueur (horodatée) ; égalité = le plus grand solde (déterministe).
+- **points de la « Compétition à points »** (autrefois « jetons virtuels », sans valeur ; ce ne sont ni des NDEM ni des MBOKO) : dernière écriture par joueur (horodatée) ; égalité = le plus grand solde (déterministe).
 
 ### Politique de jeu : un seul endroit, `QuizPlay.isPlayable(question, channel)`
 Le propriétaire validera la qualité **3 mois après la distribution aux bêta-testeurs** : les questions marquées `review` doivent être **jouables dans le canal bêta**, avec la

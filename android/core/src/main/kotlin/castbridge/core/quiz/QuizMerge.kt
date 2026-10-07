@@ -8,7 +8,8 @@ package castbridge.core.quiz
  *   board (one board per way of playing and course): the best score per profile and per game wins;
  * - history of questions: per course, a question counts as asked at the MORE RECENT of its two moments, each measured in games
  *   ago on its own device ([QuizHistory.mergeFrom]); when in doubt a question stays « recent », never the opposite;
- * - virtual tokens: last write per player wins ([mergeBalances]); equal time = the larger balance (deterministic).
+ * - competition points (« Compétition à points », no value: neither NDEM nor MBOKO; the field keeps its old name `tokens`): last write per player
+ *   wins ([mergeBalances]); equal time = the larger balance (deterministic).
  */
 object QuizMerge {
     fun mergeScores(a: HighScores, b: HighScores, perBoard: Int = 10): HighScores {
@@ -18,7 +19,7 @@ object QuizMerge {
         return out
     }
 
-    /** A virtual-token balance with the moment it was written (ms). */
+    /** A competition-points balance with the moment it was written (ms). */
     data class StampedBalance(val player: String, val tokens: Long, val atMs: Long)
 
     fun mergeBalances(a: List<StampedBalance>, b: List<StampedBalance>): List<StampedBalance> {

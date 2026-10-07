@@ -1,17 +1,17 @@
 package castbridge.core.quiz
 
 /**
- * Stakes of the « Défi en points » mode (formerly « avec mise »), behind an interface. Points have no value, cannot be bought, and are never linked to the tokens of the shop.
+ * Stakes of the « Compétition à points » mode (formerly « Défi en points », and before « avec mise »), behind an interface. Points have no value, cannot be bought, and are NEVER linked to the tokens of the
+ * shop, nor to NDEM or MBOKO: the phones of one TV share ONE wallet (the TV's), so no token can circulate between them. A game with a REAL stake (NDEM or MBOKO) only exists online between TVs
+ * (docs/QUIZ.md, « Mises »).
  *
- * IMPORTANT — POC: the only implementation is [ChallengePointsWallet]: challenge points WITHOUT ANY VALUE, created from nothing,
- * never bought, never cashed out. No real money, no payment integration, no bank or Mobile Money data. Plugging a real
- * provider requires first checking the Cameroonian legal framework on games of chance / contests (skill vs chance,
- * licence, minimum age, KYC): see docs/QUIZ.md, « Mise payante ».
+ * IMPORTANT — the only implementation is [ChallengePointsWallet]: points WITHOUT ANY VALUE, created from nothing,
+ * never bought, never cashed out. No real money, no payment integration, no bank or Mobile Money data.
  */
 interface WalletProvider {
-    /** true = points without value (the UI must then say « Points de défi — sans valeur »). */
+    /** true = points without value (the UI must then say « Points sans valeur »). */
     val virtual: Boolean
-    /** Name of the unit shown to players ("points de défi"). */
+    /** Name of the unit shown to players ("points"). */
     val unit: String
     fun balance(player: String): Long
     /** Takes [amount] from [player] for the game [gameId]; false (nothing taken) if the balance is too low. */
@@ -22,10 +22,10 @@ interface WalletProvider {
     fun refund(gameId: String)
 }
 
-/** In-memory challenge points: no value, not purchasable, never linked to shop tokens. Every new player starts with [initial] points; forgotten when the app stops. */
+/** In-memory competition points: no value, not purchasable, never linked to shop tokens, NDEM or MBOKO. Every new player starts with [initial] points; forgotten when the app stops. */
 class ChallengePointsWallet(private val initial: Long = 1_000) : WalletProvider {
     override val virtual = true
-    override val unit = "points de défi"
+    override val unit = "points"
     private val balances = HashMap<String, Long>()
     private val stakes = HashMap<String, MutableMap<String, Long>>()
 
@@ -85,5 +85,5 @@ object Pot {
 }
 
 /** Former name of [ChallengePointsWallet], kept so nothing breaks. */
-@Deprecated("Renamed: points de défi, not tokens", ReplaceWith("ChallengePointsWallet(initial)"))
+@Deprecated("Renamed: competition points, not tokens", ReplaceWith("ChallengePointsWallet(initial)"))
 fun VirtualWallet(initial: Long = 1_000): ChallengePointsWallet = ChallengePointsWallet(initial)

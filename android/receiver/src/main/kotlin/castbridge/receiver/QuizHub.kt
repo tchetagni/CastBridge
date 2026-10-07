@@ -20,7 +20,7 @@ import castbridge.core.quiz.courseKey
 import castbridge.core.quiz.filterOfCourse
 import castbridge.core.quiz.QuestionSource
 import castbridge.core.quiz.QuizHistoryBook
-import castbridge.core.quiz.VirtualWallet
+import castbridge.core.quiz.ChallengePointsWallet
 import castbridge.core.quiz.QuizHttp
 import castbridge.core.quiz.QuizRoom
 import castbridge.core.tv.ApiReply
@@ -36,8 +36,8 @@ object QuizHub {
     @Volatile var room: QuizRoom? = null
         private set
     private val asked = LinkedHashSet<String>()
-    /** Demo tokens only (no real money): see docs/QUIZ.md, « Mise payante ». */
-    private val wallet = VirtualWallet()
+    /** « Compétition à points » between the phones of this TV: points without value (no real money, no NDEM or MBOKO): see docs/QUIZ.md, § 5. */
+    private val wallet = ChallengePointsWallet()
     @Volatile private var source: CachedQuestionSource? = null
     /** Anti-repetition histories (the TV's own + one per phone), in files/quiz/history: see docs/QUIZ.md, Règle des 300 parties. */
     @Volatile private var histories: QuizHistoryBook? = null

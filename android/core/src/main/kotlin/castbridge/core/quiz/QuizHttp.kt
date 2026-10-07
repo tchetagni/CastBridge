@@ -157,7 +157,8 @@ class QuizHttp private constructor(
                 synchronized(f) { f.count++ }
                 json(403, """{"error":"bad code","message":"Code de salle incorrect."}""")
             }
-            QuizRoom.Join.FULL -> json(409, """{"error":"full","message":"La salle est complète (${r.maxPlayers()} joueurs)."}""")
+            QuizRoom.Join.FULL -> json(409, if (res.note != null) """{"error":"full","message":${Json.quote(res.note)}}"""   // Quiz misé : la limite de CETTE TV (ses mises bloquées)
+                else """{"error":"full","message":"La salle est complète (${r.maxPlayers()} joueurs)."}""")
             QuizRoom.Join.BAD_NAME -> json(400, """{"error":"bad name","message":"Choisissez un pseudo."}""")
             QuizRoom.Join.CLOSED -> json(410, """{"error":"closed","message":"La partie est terminée."}""")
         }

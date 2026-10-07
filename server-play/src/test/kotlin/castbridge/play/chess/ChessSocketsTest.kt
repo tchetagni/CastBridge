@@ -62,10 +62,10 @@ class ChessSocketsTest {
         val tokens = CopyOnWriteArrayList<String>()
         var locks = 0
 
-        override fun lockEscrow(cur: WalletCurrency, per: Long, game: String, idem: String): WalletResult<EscrowDone> {
+        override fun lockEscrow(cur: WalletCurrency, per: Long, game: String, idem: String, seats: Int): WalletResult<EscrowDone> {
             locks++
             val eid = StakeKit.eid()
-            return WalletResult.Ok(EscrowDone(StakeKit.escrow(tv.code, cur.name, per, eid = eid, signer = signer), eid, System.currentTimeMillis(), System.currentTimeMillis() + 30 * 60_000L, false, null))
+            return WalletResult.Ok(EscrowDone(StakeKit.escrow(tv.code, cur.name, per, seats, eid = eid, signer = signer), eid, System.currentTimeMillis(), System.currentTimeMillis() + 30 * 60_000L, false, null))
         }
 
         override fun settle(token: String): WalletResult<SettleDone> {
@@ -118,11 +118,12 @@ class ChessSocketsTest {
 
     @Test fun theCapsPageTellsWhatTheServiceHostsAndWhatTheTvReads() {
         val full = ChessServiceCaps.parse(URL("http://127.0.0.1:${server().port}/play/.well-known/caps").readText())!!
-        assertTrue(full.chess && full.stakes)
+        assertTrue(full.chess && full.stakes && full.quizStakes, "games-G5 : le Quiz misé est annoncé avec les mises")
         val noStakes = ChessServiceCaps.parse(URL("http://127.0.0.1:${server(stakes = false).port}/play/.well-known/caps").readText())!!
-        assertTrue(noStakes.chess); assertFalse(noStakes.stakes)
+        assertTrue(noStakes.chess); assertFalse(noStakes.stakes); assertFalse(noStakes.quizStakes)
         val off = ChessServiceCaps.parse(URL("http://127.0.0.1:${server(chess = false).port}/play/.well-known/caps").readText())!!
         assertFalse(off.chess); assertFalse(off.stakes)
+        assertTrue(off.quizStakes, "les échecs coupés ne coupent pas le Quiz misé")
     }
 
     @Test fun aServiceWithChessOffRefusesWithTheFrenchText() {

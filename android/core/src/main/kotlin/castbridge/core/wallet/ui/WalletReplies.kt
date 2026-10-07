@@ -47,7 +47,8 @@ object WalletReplies {
             fun scale(cur: String) = (stakes[cur] as? List<*>).orEmpty().mapNotNull { (it as? Number)?.toLong()?.takeIf { n -> n > 0 } }.distinct().sorted()
             val caps = e.map("winCaps")
             out[name] = GamePolicyView(e.flag("enabled", true), scale("NDEM"), scale("MBOKO"), (e.long("feeBp") ?: 0L).toInt().coerceIn(0, 2_000),
-                (caps?.long("day") ?: 0L).toInt().coerceAtLeast(0), (caps?.long("week") ?: 0L).toInt().coerceAtLeast(0), (caps?.long("month") ?: 0L).toInt().coerceAtLeast(0))
+                (caps?.long("day") ?: 0L).toInt().coerceAtLeast(0), (caps?.long("week") ?: 0L).toInt().coerceAtLeast(0), (caps?.long("month") ?: 0L).toInt().coerceAtLeast(0),
+                (e.long("seats") ?: 1L).toInt().coerceIn(1, 8))   // sièges qui misent par TV : 1 aux échecs, 8 au Quiz (un serveur plus ancien ne le dit pas : 1)
         }
         return out
     }

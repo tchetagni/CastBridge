@@ -209,15 +209,34 @@ class StakeUnitTest {
     @Test fun capsAdvertiseChessAndStakesOnlyWhenTheServiceCanReallyServeThem() {
         val plain = caps(server())
         assertEquals(true, plain["chess"]); assertEquals(false, plain["stakes"], "sans clés : pas de mises") ; assertEquals(PlayProtocol.CAPS, plain["caps"]); assertEquals(listOf("chess"), plain["games"])
+        assertEquals(false, plain["quizStakes"], "sans clés : pas de Quiz misé non plus (la TV ne propose que « Libre »)")
         val keyFile = file(Base64.getEncoder().encodeToString(seed))
         val staked = caps(server("wallet" to listOf(StakeKit.walletPub), "key" to keyFile))
-        assertEquals(true, staked["stakes"]); assertEquals(PlayProtocol.CAPS + PlayProtocol.CAP_STAKES, staked["caps"])
-        assertEquals(false, caps(server("wallet" to listOf(StakeKit.walletPub), "key" to keyFile, "stakes" to false))["stakes"], "interrupteur d'exploitation")
+        assertEquals(true, staked["stakes"]); assertEquals(PlayProtocol.CAPS + PlayProtocol.CAP_STAKES + PlayProtocol.CAP_QUIZ_STAKES, staked["caps"])
+        assertEquals(true, staked["quizStakes"], "games-G5 : le service arbitre aussi un Quiz misé, et le dit")
+        val noSwitch = caps(server("wallet" to listOf(StakeKit.walletPub), "key" to keyFile, "stakes" to false))
+        assertEquals(false, noSwitch["stakes"], "interrupteur d'exploitation"); assertEquals(false, noSwitch["quizStakes"], "le même interrupteur coupe le Quiz misé")
         assertEquals(false, caps(server("wallet" to listOf(StakeKit.walletPub)))["stakes"], "clé « résultat » absente")
         assertEquals(false, caps(server("key" to keyFile))["stakes"], "clé publique du portefeuille absente")
+        assertEquals(false, caps(server("wallet" to listOf(StakeKit.walletPub)))["quizStakes"], "clé « résultat » absente : pas de Quiz misé")
         val off = caps(server("chess" to false, "wallet" to listOf(StakeKit.walletPub), "key" to keyFile))
-        assertEquals(false, off["chess"]); assertEquals(false, off["stakes"]); assertEquals(PlayProtocol.CAPS.filter { it != "chess" }, off["caps"]); assertEquals(emptyList<String>(), off["games"])
+        assertEquals(false, off["chess"]); assertEquals(false, off["stakes"]); assertEquals(emptyList<String>(), off["games"])
+        assertEquals(true, off["quizStakes"], "les échecs coupés ne coupent pas le Quiz misé : ce sont deux jeux")
+        assertEquals(PlayProtocol.CAPS.filter { it != "chess" } + PlayProtocol.CAP_QUIZ_STAKES, off["caps"])
         val health = Json.parse(get(server(), "/play/health").body()) as Map<*, *>
         assertEquals(true, health["chess"]); assertEquals(0, (health["chessRooms"] as Number).toInt()); assertNotNull(health["stakes"])
+        assertEquals(false, health["quizStakes"]); assertEquals(0, (health["stakedRooms"] as Number).toInt())
+    }
+
+    @Test fun anEscrowCoversOneSeatForChessAndUpToEightForTheQuiz() {
+        val g = EscrowGate(listOf(StakeKit.walletPub))
+        fun why(token: String, maxSeats: Int) = (g.check(token, now, id, spec, maxSeats) as? EscrowGate.Result.Refused)?.why
+        assertEquals(EscrowGate.Why.BAD_SEATS, why(StakeKit.escrow(id, k = 2), 1), "aux échecs : une mise par TV")
+        for (k in 1..8) assertNull(why(StakeKit.escrow(id, k = k), 8), "$k sièges au Quiz")
+        val ok = g.check(StakeKit.escrow(id, k = 3), now, id, spec, 8) as EscrowGate.Result.Ok
+        assertEquals(castbridge.core.quiz.online.QuizEscrow(ok.ticket.eid, id, 3, 60), ok.quizEscrow(), "le blocage du Quiz porte ses sièges et son montant (mise × sièges)")
+        assertEquals(EscrowGate.Why.OTHER, why(StakeKit.escrow(id, k = 9, amt = 180), 8), "neuf sièges : refusé dès la lecture du blocage")
+        assertEquals(EscrowGate.Why.OTHER, why(StakeKit.escrow(id, k = 0, amt = 0), 8))
+        assertEquals(EscrowGate.Why.BAD_SEATS, why(StakeKit.escrow(id, k = 5), 4), "au-dessus de ce que la salle permet")
     }
 }

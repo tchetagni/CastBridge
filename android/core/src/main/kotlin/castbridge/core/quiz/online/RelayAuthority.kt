@@ -48,7 +48,9 @@ class RelayAuthority(
             token?.let { t -> phones[t]?.let { p -> clean?.let { n -> p.name = n }; return QuizRoom.JoinResult(QuizRoom.Join.OK, QuizRoom.Player(p.playerId, p.local, p.name, 0L)) } }
             if (session.gone || session.stopped) return QuizRoom.JoinResult(QuizRoom.Join.CLOSED)
             if (clean == null) return QuizRoom.JoinResult(QuizRoom.Join.BAD_NAME)
-            if (phones.size >= maxPhones) return QuizRoom.JoinResult(QuizRoom.Join.FULL)   // « salle complète » : au plus 8 téléphones par TV
+            // « salle complète » : au plus 8 téléphones par TV ; moins quand la TV n'a bloqué sa mise (Quiz misé) que pour quelques joueurs : la phrase le dit, sinon la page écrirait « 8 joueurs »
+            if (phones.size >= maxPhones) return QuizRoom.JoinResult(QuizRoom.Join.FULL, null,
+                if (maxPhones < MAX_PHONES) "La salle est complète : cette TV n'a bloqué sa mise que pour $maxPhones joueur${if (maxPhones > 1) "s" else ""}." else null)
         }
         val a = session.authority
         val roomCode = a.code ?: return QuizRoom.JoinResult(QuizRoom.Join.CLOSED)

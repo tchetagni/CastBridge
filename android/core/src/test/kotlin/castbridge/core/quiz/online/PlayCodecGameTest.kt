@@ -94,7 +94,7 @@ class PlayCodecGameTest {
     }
 
     @Test fun gameReasonsAreStableAndSpeakFrench() {
-        assertEquals(listOf("GAME_UNAVAILABLE", "GAME_UNKNOWN", "STAKES_SUSPENDED", "STAKE_TRIAL_FREE_ONLY", "STAKE_ESCROW_REQUIRED", "STAKE_ESCROW_INVALID", "STAKE_BAD", "SEATS_TAKEN", "SAME_TV"),
+        assertEquals(listOf("GAME_UNAVAILABLE", "GAME_UNKNOWN", "STAKES_SUSPENDED", "STAKE_TRIAL_FREE_ONLY", "STAKE_ESCROW_REQUIRED", "STAKE_ESCROW_INVALID", "STAKE_BAD", "SEATS_TAKEN", "SAME_TV", "STAKE_ROOM_STARTED"),
             GameReason.values().map { it.code })
         GameReason.values().forEach { assertTrue(it.message.length > 20 && it.http in 400..599, it.code) }
         // aucun code n'est partagé avec PlayReason (le Quiz garde les siens)

@@ -268,6 +268,14 @@ le décompte du forfait) et `stake:{cur, per, pot, settled}` (partie misée). `r
 - La pendule du service est **stricte** (aucune grâce de latence) ; un coup qui arrive après l'échéance est refusé même si la TV l'a
   joué à temps sur sa liaison lente.
 - Décisions du propriétaire : plafonds de parties gagnées (3 / 10 / 15), frais de plateforme (0 %), échelle de mises.
+- **Quiz misé (games-G5)** : le Quiz en ligne mise en NDEM ou MBOKO par le même mécanisme (`docs/QUIZ.md` § 5 bis) ; les
+  plafonds de parties gagnées, les frais et l'échelle sont **par jeu** (lignes `game.quiz.*`, migration `V69__quiz_stakes.sql`) :
+  gagner aux échecs ne remplit pas le plafond du Quiz. Le blocage `cbe1` d'une TV du Quiz couvre de 1 à 8 sièges, celui des échecs
+  un seul (`k` = 1 : inchangé).
+- **Correctif du hub (games-G5)** : refuser une création ne libère plus que le blocage **réservé par cet essai**. Avant, un `cbe1`
+  rejoué (deuxième `create`, refusé parce que le blocage servait déjà dans une salle vivante) libérait la réservation de la
+  première salle : un troisième `create` avec le même blocage ouvrait alors une seconde salle misée, dont la mise n'était plus
+  couverte (l'API ne règle un blocage qu'une fois).
 
 ## 7. Écrans et mise en page
 

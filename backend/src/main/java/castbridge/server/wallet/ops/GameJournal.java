@@ -9,8 +9,9 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Service;
 
 /**
- * Le journal des parties avec mise (W22 § 5, games-G2) : une ligne par TV et par résultat réglé, écrite DANS la transaction du règlement (la garde de {@code JdbcLedger.post}) : jamais un règlement
- * sans sa ligne, jamais une ligne sans règlement. Il sert (1) aux plafonds de parties GAGNÉES par identité, relus au blocage d'une mise ; (2) à la surveillance des gains répétés entre deux mêmes
+ * Le journal des parties avec mise (W22 § 5, games-G2 pour les échecs, games-G5 pour le Quiz) : une ligne par TV et par résultat réglé (deux aux échecs, jusqu'à huit à une table du Quiz), écrite DANS la
+ * transaction du règlement (la garde de {@code JdbcLedger.post}) : jamais un règlement sans sa ligne, jamais une ligne sans règlement. Il sert (1) aux plafonds de parties GAGNÉES par identité ET PAR JEU, relus
+ * au blocage d'une mise ; (2) à la surveillance des gains répétés entre deux mêmes
  * identités (R-E9) : la lecture {@code GET /api/v1/admin/wallet/games} la permet, une alerte AUTOMATIQUE n'est pas faite (jamais de blocage automatique) ; (3) à l'audit (qui a joué qui, pour quelle
  * mise, avec quelle issue). Il ne garde ni coup ni partie : le service de jeu les a, pas l'API. Aucune écriture ailleurs que dans {@code wallet_game_log}.
  */
@@ -21,7 +22,7 @@ public class GameJournal {
 
     public GameJournal(JdbcTemplate jdbc) { this.jdbc = jdbc; }
 
-    /** Issue d'une partie pour une TV : gagnée, perdue, nulle ou interrompue (mise rendue en entier). */
+    /** Issue d'une partie pour une TV : gagnée (elle reçoit plus que sa mise utilisée), perdue (moins), nulle (exactement sa mise utilisée) ou interrompue (mise rendue en entier). */
     public enum Outcome { WIN, LOSS, DRAW, ABORT }
 
     /** Une ligne du journal. {@code pay} : ce que le résultat du service attribue (avant frais) ; {@code fee} : frais prélevés sur ce titulaire. */

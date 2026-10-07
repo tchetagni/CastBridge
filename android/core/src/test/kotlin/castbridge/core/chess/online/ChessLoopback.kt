@@ -91,7 +91,7 @@ internal class FakeChessWallet(private val identity: String, private val service
     val settledRids = HashSet<String>()
     private var n = 0
 
-    override fun lockEscrow(cur: WalletCurrency, per: Long, game: String, idem: String): WalletResult<EscrowDone> {
+    override fun lockEscrow(cur: WalletCurrency, per: Long, game: String, idem: String, seats: Int): WalletResult<EscrowDone> {
         locks++; lockKeys += idem
         if (offline) return WalletResult.Fail(WalletMessages.offline(), null, null, true)
         refuseLock?.let { return it }

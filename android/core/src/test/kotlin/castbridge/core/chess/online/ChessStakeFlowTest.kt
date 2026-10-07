@@ -21,7 +21,7 @@ class ChessStakeFlowTest {
         var settle: (String) -> WalletResult<SettleDone> = { WalletResult.Ok(SettleDone("r".repeat(32), "END", "NDEM", "chess", 0, listOf(SettleLine("EidAAAAAAAAAAAAAAAAAAA", "AAAA-AAAA-AAAA-AAAA", 20, 40, 0)))) }
         val keys = ArrayList<String>()
         var settles = 0
-        override fun lockEscrow(cur: WalletCurrency, per: Long, game: String, idem: String): WalletResult<EscrowDone> { keys += idem; return lock() }
+        override fun lockEscrow(cur: WalletCurrency, per: Long, game: String, idem: String, seats: Int): WalletResult<EscrowDone> { keys += idem; return lock() }
         override fun settle(token: String): WalletResult<SettleDone> { settles++; return settle.invoke(token) }
     }
 

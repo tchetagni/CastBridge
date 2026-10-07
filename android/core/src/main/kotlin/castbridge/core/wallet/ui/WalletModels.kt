@@ -7,8 +7,11 @@ enum class ConvertDir(val wire: String) { N2M("N2M"), M2N("M2N") }
 data class PolicyView(val rate: Long, val reverseFeeBp: Long, val convert: Boolean, val transfer: Boolean, val vouchers: Boolean, val stakesNdem: Boolean, val stakesMboko: Boolean,
                       val transferCapNdem: Long, val transferCapMboko: Long, val games: Map<String, GamePolicyView> = emptyMap())
 
-/** La politique d'un jeu misé telle que le serveur la dit : interrupteur, échelle de mises par monnaie, frais de plateforme (points de base), plafonds de parties GAGNÉES (0 = sans plafond). */
-data class GamePolicyView(val enabled: Boolean, val stakesNdem: List<Long>, val stakesMboko: List<Long>, val feeBp: Int, val capDay: Int, val capWeek: Int, val capMonth: Int)
+/**
+ * La politique d'un jeu misé telle que le serveur la dit : interrupteur, échelle de mises par monnaie, frais de plateforme (points de base), plafonds de parties GAGNÉES (0 = sans plafond), et [seats] = sièges
+ * qui misent au plus par TV (1 aux échecs ; 8 au Quiz : une mise par siège, payée par le compte de la TV).
+ */
+data class GamePolicyView(val enabled: Boolean, val stakesNdem: List<Long>, val stakesMboko: List<Long>, val feeBp: Int, val capDay: Int, val capWeek: Int, val capMonth: Int, val seats: Int = 1)
 
 /** Réponse de `POST /escrow` : le blocage `cbe1` signé par l'API (à porter au service de jeu), son identifiant, sa validité ; l'instantané `cbw1` neuf est donné au cache signé. */
 data class EscrowDone(val cbe1: String, val eid: String, val iat: Long, val exp: Long, val replayed: Boolean, val snapshotToken: String?) {
