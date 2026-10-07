@@ -69,7 +69,8 @@ object LangPackJson {
         val fmt = root.int("format") ?: 1
         if (fmt > FORMAT) throw ParseError("langue.json : format $fmt non pris en charge (max $FORMAT)")
         val id = root.req("id", "langue.json")
-        val parts = LangLots.parse(id.substringBeforeLast("-v")) ?: throw ParseError("langue.json : id « $id » n'est pas <cible>-<niveau>-<thème>-<départ>")
+        // the id IS the scope, split explicitly into its 4 segments (it used to be cut at its last « -v », which made every theme starting with `v` unreadable: voyage, ville…)
+        val parts = LangLots.parse(id) ?: throw ParseError("langue.json : id « $id » n'est pas <cible>-<niveau>-<thème>-<départ>")
         val declared = LangLots.Parts(Lang.of(root.str("target")) ?: throw ParseError("langue.json : langue cible inconnue"), LangLevel.of(root.str("level")) ?: throw ParseError("langue.json : niveau inconnu"),
             root.req("theme", "langue.json"), Lang.of(root.str("source")) ?: throw ParseError("langue.json : langue de départ inconnue"))
         if (declared != parts) throw ParseError("langue.json : id et champs target/level/theme/source incohérents")

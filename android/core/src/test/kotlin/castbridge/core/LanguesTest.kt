@@ -27,6 +27,19 @@ class LanguesTest {
         assertNull(LangLots.parse("cm2")); assertNull(LangLots.parse("xx-a1-salut-fr")); assertNull(LangLots.parse("zh-a1-salut-zh"))
         assertFalse(LangLots.isLanguage(LotId("learn", "zh-a1-salut-fr")))
     }
+    @Test fun aThemeStartingWithVIsReadable() {
+        // regression: the reader cut a pack id at its last « -v » (a version suffix no pack carries), so `voyage`, `ville`, `vacances`… were unreadable (ParseError)
+        for ((id, parts) in listOf("de-a1-voyage-fr" to LangLots.Parts(Lang.DE, LangLevel.A1, "voyage", Lang.FR), "zh-a0-ville-fr" to LangLots.Parts(Lang.ZH, LangLevel.A0, "ville", Lang.FR))) {
+            assertEquals(parts, LangLots.parse(id), id); assertEquals(id, LangLots.scope(parts.target, parts.level, parts.theme, parts.source))
+            val p = LangPackJson.parse(mapOf("langue.json" to
+                """{"format":1,"type":"langue","id":"$id","version":1,"target":"${parts.target.code}","level":"${parts.level.key.uppercase()}","theme":"${parts.theme}","source":"fr","title":"t","state":"review","units":[{"id":"$id-u1","title":"u"}]}"""))
+            assertEquals(parts, p.parts); assertEquals(id, p.id); assertEquals(emptyList(), LangValidator.validate(p))
+        }
+        // the split is explicit: exactly 4 segments <target>-<level>-<theme>-<start>; a theme with a dash stays refused, with the same message
+        assertNull(LangLots.parse("zh-a1-ma-famille-fr"))
+        val e = assertFailsWith<LangPackJson.ParseError> { LangPackJson.parse(mapOf("langue.json" to """{"format":1,"type":"langue","id":"zh-a1-ma-famille-fr","target":"zh","level":"A1","theme":"ma-famille","source":"fr","title":"t","units":[]}""")) }
+        assertContains(e.message!!, "<cible>-<niveau>-<thème>-<départ>")
+    }
 
     // ---- pack format ----
     @Test fun samplePackParsesAndValidates() {

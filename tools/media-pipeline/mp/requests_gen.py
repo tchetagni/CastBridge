@@ -99,8 +99,32 @@ class Builder:
         old = self.requests.get(media_id)
         if old is None:
             self.requests[media_id] = row
+        elif old["fingerprint"] == fingerprint:
+            pass
+        elif kind == "audio" and self._same_content(old, body, voice):
+            self._merge(old, source, bitrate, max_s, payload.get("reading"))
         elif old["fingerprint"] != fingerprint:
             self.conflicts.append({"id": media_id, "message": "même identifiant média avec deux demandes différentes", "a": old["source"], "b": source})
+
+    @staticmethod
+    def _same_content(old, body, voice):
+        # même contenu à dire (texte, lecture, segments, classe de voix) ; seules les contraintes techniques diffèrent
+        a, b = old["payload"], body["payload"]
+        if old.get("voiceClass") != voice or a.get("text") != b.get("text") or a.get("segments") != b.get("segments"):
+            return False
+        return a.get("reading") in (None, b.get("reading")) or b.get("reading") is None
+
+    def _merge(self, old, source, bitrate, max_s, new_reading=None):
+        # un seul fichier sert les deux usages : on retient la contrainte la plus stricte
+        c = old["constraints"]
+        if old["payload"].get("reading") is None and new_reading:
+            old["payload"]["reading"] = new_reading
+        for key, new in (("bitrateKbps", bitrate), ("maxDurationS", max_s)):
+            if new is not None and (c.get(key) is None or new < c[key]):
+                c[key] = new
+        body = {"kind": old["kind"], "lang": old["lang"], "payload": old["payload"], "constraints": c, "voiceClass": old["voiceClass"]}
+        old["fingerprint"] = sha256_text(canonical(body))
+        old.setdefault("sharedWith", []).append(source)
 
     def pack(self, pack):
         a = self.policy["audio"]
@@ -136,8 +160,10 @@ class Builder:
                 mid = _mid(x.get("audio"))
                 if mid:
                     answers = x.get("answers") or []
-                    text = answers[0] if (x.get("kind") == "dictation" and answers) else None
-                    self._add(pack, mid, "audio", "exercise", {"pack": pack["id"], "unit": unit, "element": x.get("id"), "field": "answers[0]"},
+                    text, field = (answers[0], "answers[0]") if (x.get("kind") == "dictation" and answers) else (None, "answers[0]")
+                    if text is None and isinstance(x.get("text"), str) and x["text"].strip():
+                        text, field = x["text"], "text"   # champ additif : le mot ou la phrase EXACTS dits par l'audio d'un exercice (QCM, paire minimale, vrai/faux…)
+                    self._add(pack, mid, "audio", "exercise", {"pack": pack["id"], "unit": unit, "element": x.get("id"), "field": field},
                               {"text": text, "voiceClass": self._voice_class(pack, None, "mot")}, a["phraseBitrateKbps"], a["phraseMaxDurationS"])
             for s in u.get("stories", []):
                 for i, para in enumerate(s.get("paragraphs", [])):
