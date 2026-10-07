@@ -55,6 +55,7 @@ import castbridge.core.owner.ActivationRoutePlan.Route
 import castbridge.core.owner.ActivationScreenState
 import castbridge.core.owner.KeyAcquisition
 import castbridge.core.owner.LockedRequestRoute
+import castbridge.core.owner.ShareRequestPlan
 import castbridge.core.quiz.QrCode
 import castbridge.core.tv.TvClient
 import castbridge.core.tv.WdCode
@@ -112,12 +113,14 @@ class ActivateTvActivity : ComponentActivity() {
         (getSystemService(Context.CLIPBOARD_SERVICE) as ClipboardManager).setPrimaryClip(clip)
     }
 
-    /** « Partager la demande » : le texte (ce que lisent les outils de l'agent) et, quand il tient, le QR en image (WhatsApp : l'image avec le texte en légende). Sans image, le texte seul. */
-    private fun shareRequest(text: String, qr: QrCode?) {
-        val png = qr?.let { runCatching { writeQrPng(it) }.getOrNull() }
-        val send = Intent(Intent.ACTION_SEND).putExtra(Intent.EXTRA_SUBJECT, LockedRequestRoute.SHARE_SUBJECT).putExtra(Intent.EXTRA_TEXT, text)
-        if (png != null) send.setType("image/png").putExtra(Intent.EXTRA_STREAM, png).addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION) else send.setType("text/plain")
-        startActivity(Intent.createChooser(send, "Partager la demande"))
+    /** « Partager la demande » : le TEXTE seul, ce que lisent les outils de l'agent (R-50 : WhatsApp envoie l'image et abandonne le texte d'un partage image + texte) ; ce que porte l'intention est décidé par [ShareRequestPlan]. */
+    private fun shareRequest(plan: ShareRequestPlan.Send) = startActivity(ShareRequestIntents.chooser(plan))
+
+    /** « Partager le code QR » : l'image du QR, SEULE (bouton à part, présent seulement quand le QR tient), avec l'autorisation de lecture sur l'intention et sur le sélecteur ; si l'image ne s'écrit pas, le dit et ne partage rien. */
+    private fun shareQr(plan: ShareRequestPlan.Send) {
+        val png = plan.image?.let { runCatching { writeQrPng(it) }.getOrNull() }
+        if (png == null) { android.widget.Toast.makeText(this, ShareRequestPlan.QR_FAILED, android.widget.Toast.LENGTH_LONG).show(); return }
+        startActivity(ShareRequestIntents.chooser(plan, png))
     }
 
     /** Le QR en PNG (noir sur blanc, marge de 4 modules, 10 pixels par module) dans le cache privé, rendu par le fournisseur de fichiers de l'application ; supprimé à la fermeture de l'écran. */
@@ -294,9 +297,13 @@ class ActivateTvActivity : ComponentActivity() {
                                 Text("Vérifiez que ce code d'appareil est bien celui de l'écran d'activation de la TV.", style = MaterialTheme.typography.bodySmall, color = cs.onSurfaceVariant)
                                 val share = LockedRequestRoute.shareText(req)
                                 val qr = remember(share) { LockedRequestRoute.qr(req) }
+                                // R-50 : le texte part seul ; le code QR part par un bouton à part, qui n'existe que quand le QR tient (ShareRequestPlan)
+                                val textShare = remember(share) { ShareRequestPlan.request(LockedRequestRoute.SHARE_SUBJECT, share) }
+                                val qrShare = remember(share, qr) { ShareRequestPlan.qr(LockedRequestRoute.SHARE_SUBJECT, share, qr) }
                                 FlowRow(horizontalArrangement = Arrangement.spacedBy(8.dp), verticalArrangement = Arrangement.spacedBy(4.dp)) {
-                                    Button({ shareRequest(share, qr) }) { Text("Partager la demande") }
-                                    OutlinedButton({ copyRequest(share) }) { Text("Copier") }
+                                    Button({ shareRequest(textShare) }) { Text(ShareRequestPlan.REQUEST_BUTTON) }
+                                    qrShare?.let { q -> OutlinedButton({ shareQr(q) }) { Text(ShareRequestPlan.QR_BUTTON) } }
+                                    OutlinedButton({ copyRequest(share) }) { Text(ShareRequestPlan.COPY_BUTTON) }
                                 }
                                 Text("À envoyer à l'agent (WhatsApp, e-mail) pour recevoir la clé de cette TV.", style = MaterialTheme.typography.bodySmall, color = cs.onSurfaceVariant)
                                 if (qr != null) {

@@ -18,11 +18,13 @@ class ActivationPhoneGuardTest {
         "sender/src/main/kotlin/castbridge/sender/ActivationDriver.kt", "sender/src/main/kotlin/castbridge/sender/ActivationGroupJoin.kt",
         "sender/src/main/kotlin/castbridge/sender/ActivationNotice.kt", "sender/src/main/kotlin/castbridge/sender/ActivateTvActivity.kt",
         "sender/src/main/kotlin/castbridge/sender/BtActivationClient.kt",                       // act-bt : le balayage BLE et le canal sans appairage voient le code, la clé et la demande
+        "sender/src/main/kotlin/castbridge/sender/ShareRequestIntents.kt",                      // act-fix-2 (R-50) : l'intention de partage porte la demande complète
     )
     private val coreFiles = listOf(
         "core/src/main/kotlin/castbridge/core/owner/ActivationRoutePlan.kt", "core/src/main/kotlin/castbridge/core/owner/KeyAcquisition.kt", "core/src/main/kotlin/castbridge/core/owner/LockedRequestRoute.kt",
         "core/src/main/kotlin/castbridge/core/owner/DeviceRequestText.kt",           // la demande complète et sa forme pour le serveur : jamais dans un journal
         "core/src/main/kotlin/castbridge/core/owner/DeviceRequestInput.kt",          // ce que l'on colle dans la console : la ligne fautive est nommée à l'écran, jamais écrite dans un journal
+        "core/src/main/kotlin/castbridge/core/owner/ShareRequestPlan.kt",            // act-fix-2 (R-50) : le plan de partage de la demande (texte seul, QR à part) ; aucun texte d'état ne la recopie
         // act-bt : la PAKE sur le code et le canal chiffré qui porte la demande et la clé ; la porte de tentatives partagée avec la route HTTP
         "core/src/main/kotlin/castbridge/core/owner/BleSearch.kt", "core/src/main/kotlin/castbridge/core/btact/Cpace.kt", "core/src/main/kotlin/castbridge/core/btact/BtActWire.kt",
         "core/src/main/kotlin/castbridge/core/btact/BtActKeys.kt", "core/src/main/kotlin/castbridge/core/btact/BtActChannel.kt", "core/src/main/kotlin/castbridge/core/btact/BtActClient.kt",
