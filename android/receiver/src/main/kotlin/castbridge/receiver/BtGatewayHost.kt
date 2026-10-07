@@ -140,6 +140,8 @@ class BtGatewayHost(private val ctx: Context, private val guard: PinGuard, priva
 
     val connected get() = entry.connected
     val phoneName get() = entry.peerName
+    /** The Bluetooth address of the phone whose pipe is in place (null without a pipe): what the TV keeps the phone's announced network under (R-47). */
+    val phoneAddress: String? get() = entry.peerId
     @Volatile var connectedSince = 0L; private set
     /** relay-R1: identifies the current pipe (changes when a phone attaches, even in place of another); the end-to-end check is made once per pipe. */
     val attachId: Int get() = entry.attaches

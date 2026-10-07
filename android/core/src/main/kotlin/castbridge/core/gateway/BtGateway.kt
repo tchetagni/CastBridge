@@ -292,6 +292,8 @@ class Entry(
     /** relay-R1: how many phone links this Entry accepted (changes when a phone attaches, even when it replaces another): the identity of « the current pipe ». */
     @Volatile var attaches = 0; private set
     val connected get() = session != null
+    /** The identity (Bluetooth address, as the host gave it to [attach]) of the phone served now: null without a link, or when the host did not know it. */
+    val peerId: String? get() = session?.peerId
     val openStreams get() = session?.relays?.size ?: 0
     fun stats(): Pair<Long, Long> = session?.link?.let { it.received.get() to it.sent.get() } ?: (0L to 0L)
 

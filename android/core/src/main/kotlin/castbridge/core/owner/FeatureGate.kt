@@ -186,7 +186,7 @@ object TrialIssuance {
 /** The French texts of the locked screens (TV and phone). The legal wording of the usage notice is the owner's to validate: it is a placeholder, not legal advice. */
 object LockedTexts {
     /**
-     * Under the device code on the activation screen (R-47). The text before said « fournissez ce code d'appareil à CastBridge pour obtenir votre clé »: FALSE, it blocked the owner. The
+     * Under the device code on the activation screen (R-48). The text before said « fournissez ce code d'appareil à CastBridge pour obtenir votre clé »: FALSE, it blocked the owner. The
      * device code only IDENTIFIES the TV: the issuer needs the factor fingerprints the code is the hash of (`ActivationIssuer`). The key is asked for with CastBridge › Activer la TV on the
      * phone, which reads the TV's complete device request.
      */

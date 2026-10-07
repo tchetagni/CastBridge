@@ -84,6 +84,16 @@ class FixTvSourceTest {
         assertTrue("assist.attached(" in net && "assist.detached()" in net, "l'origine du tuyau (demandé par la TV ou partage manuel) est retenue à chaque liaison")
     }
 
+    // ---- R-47 (I-13, moitié TV) : la garde de coût du fond est par téléphone, inconnu = facturé ----
+    @Test fun theBackgroundBulkGateIsPerPhoneAndUnknownIsBilled() {
+        val net = code("TvNet.kt")
+        assertTrue("TvBulkGate()" in net && "bulkGate.bulkAllowed(" in net, "TvNet.backgroundBulkAllowed passe par la règle commune (RelayCost.tvBulkAllowed, via TvBulkGate)")
+        assertTrue("bulkGate.said(" in net && "bulkGate.pipeCut()" in net, "la valeur est gardée par téléphone et oubliée à la coupure du tuyau")
+        assertFalse("phoneMetered ==" in net || "var phoneMetered" in net, "plus de valeur globale et volatile dont `null` autorise le fond")
+        assertTrue("backgroundBulkAllowed()" in code("TvConnect.kt") && "TvNet.backgroundBulkAllowed()" in code("TvConnect.kt"), "la garde du serveur (ServerLink.Hooks) lit la décision de TvNet")
+        assertTrue("val phoneAddress" in code("BtGatewayHost.kt"), "l'adresse du téléphone du tuyau en place est connue de la TV")
+    }
+
     // ---- R-46 : le portefeuille se règle sur la dernière tentative ----
     @Test fun theWalletScheduleReadsTheLastAttemptNotOnlyTheLastSuccess() {
         val c = code("wallet/WalletHub.kt")

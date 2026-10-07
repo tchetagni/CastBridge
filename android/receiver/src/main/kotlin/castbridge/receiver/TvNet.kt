@@ -25,6 +25,7 @@ import castbridge.core.relay.RelayChannelHost
 import castbridge.core.relay.RelayFrames
 import castbridge.core.relay.RelayReason
 import castbridge.core.relay.RelayText
+import castbridge.core.relay.TvBulkGate
 import castbridge.core.trust.TrustRegistry
 import castbridge.core.tunnel.AssistPipePolicy
 import castbridge.core.tv.BtProtocol
@@ -77,8 +78,11 @@ object TvNet : PipeEnv {
     @Volatile private var lastPingOkAt = 0L
     @Volatile private var sampleAt = 0L
     @Volatile private var sampleBytes = 0L
-    /** Le réseau du téléphone qui relaie est facturé (dit par le téléphone dans `RELAY_STATE`) : les gros téléchargements de fond attendent. */
-    @Volatile private var phoneMetered: Boolean? = null
+    /**
+     * Ce que chaque téléphone a dit de son réseau (`RELAY_STATE`), par téléphone et par tuyau, oublié à la coupure : les gros téléchargements de fond n'ont lieu que sur un téléphone qui a dit
+     * « non facturé » sur CE tuyau (R-47, inconnu = facturé : [TvBulkGate]).
+     */
+    private val bulkGate = TvBulkGate()
 
     private val svc get() = TvService.running
 
@@ -168,7 +172,7 @@ object TvNet : PipeEnv {
 
     /** La passerelle vient de se brancher ou de se débrancher. */
     fun gatewayChanged(connected: Boolean) {
-        if (!connected) { meter.reset(); phoneMetered = null }
+        if (!connected) { meter.reset(); bulkGate.pipeCut() }
         pump()
     }
 
@@ -300,7 +304,8 @@ object TvNet : PipeEnv {
                 capable[a] = true
                 broker.report(a, if (state.phase == RelayFrames.Phase.REFUSED) (state.reason ?: RelayReason.BUSY) else null)
             }
-            state.metered?.let { phoneMetered = it }
+            // R-47 : la valeur est gardée PAR téléphone et pour le tuyau en place ; le RELAY_STATE d'un autre téléphone n'écrase plus celle du téléphone qui relaie
+            if (peer != null) state.metered?.let { bulkGate.said(TrustRegistry.norm(peer), svc?.gateway?.attachId ?: -1, it) }
             publishStatus()
             if (!pipeWanted()) return null
             return RelayFrames.Ask(broker.currentNeeds().ifEmpty { listOf(PipeNeed.PLAY) }, RelayFrames.DEFAULT_TTL_SEC)
@@ -357,7 +362,10 @@ object TvNet : PipeEnv {
      * Les tâches de fond qui déplacent beaucoup d'octets (mise à jour de l'application, questions, lots de questions) attendent tant que le tuyau d'un téléphone est précieux : une
      * partie en cours, ou un téléphone sur données mobiles (REL-F7). Le battement de cœur et les actions de l'utilisateur ne sont jamais retenus.
      */
-    fun backgroundBulkAllowed(): Boolean = !(state() == NetState.VIA_RELAY && (castbridge.receiver.quiz.PlayHub.active() || phoneMetered == true))
+    fun backgroundBulkAllowed(): Boolean {
+        val gw = svc?.gateway?.takeIf { it.connected }
+        return bulkGate.bulkAllowed(state(), castbridge.receiver.quiz.PlayHub.active(), gw?.phoneAddress?.let { TrustRegistry.norm(it) }, gw?.attachId ?: -1)
+    }
 
     /** État lisible pour `GET /api/relay` : des comptes seulement, jamais un nom ni une adresse. */
     fun json(): String {
@@ -370,7 +378,7 @@ object TvNet : PipeEnv {
             "link" to linkedMapOf("rttMs" to link.rttMs, "kbps" to link.kbps, "samples" to link.samples),
             "check" to (c?.let { linkedMapOf("ok" to it.ok, "ms" to it.ms) }),
             "socksAuth" to (svc?.gateway?.socksAuthDisabled?.not()),
-            "phoneMetered" to phoneMetered,
+            "phoneMetered" to svc?.gateway?.takeIf { it.connected }?.let { gw -> bulkGate.metered(gw.phoneAddress?.let { TrustRegistry.norm(it) }, gw.attachId) },
         ))
     }
 
