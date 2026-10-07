@@ -20,7 +20,7 @@ object PlayRedact {
 
     private val hex32 = Regex("(?i)(?<![0-9a-f])[0-9a-f]{32,}(?![0-9a-f])")
     private val ticket = Regex("\\bv1\\.[A-Za-z0-9_-]{8,}\\.[A-Za-z0-9_-]{8,}")
-    private val activation = Regex("\\b(?:cbx1|cbp1)[A-Za-z0-9._~+/=-]*", RegexOption.IGNORE_CASE)
+    private val activation = Regex("\\b(?:cbx1|cbp1|cbe1|cbr1|cbw1)[A-Za-z0-9._~+/=-]*", RegexOption.IGNORE_CASE)   // activation, ticket, et les pièces signées du portefeuille (blocage, résultat, instantané : identité et montants)
     private val header = Regex("(?i)\\b(authorization|x-play-ticket|x-cb-play-token|cookie|set-cookie)\\s*[:=]\\s*[^\\r\\n]*")
     private val cookie = Regex("__Host-cbp-[A-Za-z0-9_-]*\\s*=\\s*[^;\\s\"]*")
     private val param = Regex("(?i)\\b(token|ticket|secret|activation|jti)\\s*[=:]\\s*[\"']?[^\\s\"'&,;}]+")

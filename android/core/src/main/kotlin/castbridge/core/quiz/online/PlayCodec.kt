@@ -16,14 +16,22 @@ object PlayCodec {
 
     private class BadField(val detail: String) : Exception(detail)
 
+    private val GAME_NAME = Regex("^[a-z0-9_]{1,16}$")
+
     // ------------------------------------------------------------------ client → serveur
 
     fun encode(m: ClientMsg): String = Json.write(when (m) {
         is ClientMsg.Hello -> linkedMapOf("t" to m.type, "proto" to m.proto, "caps" to m.caps, "deviceHash" to m.deviceHash, "ticket" to m.ticket)
         is ClientMsg.Create -> linkedMapOf<String, Any?>("t" to m.type, "name" to m.name, "mode" to m.mode, "activation" to m.activation, "rentals" to m.rentals)
-            .also { if (m.proof != null) it["proof"] = m.proof }   // additif : absent du fil quand il n'y en a pas
+            .also {
+                if (m.proof != null) it["proof"] = m.proof   // additif : absent du fil quand il n'y en a pas
+                if (m.game != null) it["game"] = m.game
+                m.chess?.let { c -> it["chess"] = linkedMapOf("perMoveSeconds" to c.perMoveSeconds, "mode" to c.mode, "color" to c.color) }
+                m.stake?.let { s -> it["stake"] = linkedMapOf("cur" to s.cur, "per" to s.per) }
+                if (m.escrow != null) it["escrow"] = m.escrow
+            }
         is ClientMsg.Join -> linkedMapOf<String, Any?>("t" to m.type, "code" to m.code, "name" to m.name, "token" to m.token, "deviceHash" to m.deviceHash, "spectate" to m.spectate)
-            .also { if (m.activation != null) it["activation"] = m.activation; if (m.proof != null) it["proof"] = m.proof }   // additif : absent du fil quand il n'y en a pas
+            .also { if (m.activation != null) it["activation"] = m.activation; if (m.proof != null) it["proof"] = m.proof; if (m.escrow != null) it["escrow"] = m.escrow }   // additif : absent du fil quand il n'y en a pas
         is ClientMsg.Resume -> linkedMapOf("t" to m.type, "roomId" to m.roomId, "token" to m.token, "lastSeq" to m.lastSeq)
         is ClientMsg.Act -> linkedMapOf("t" to m.type, "seq" to m.seq, "questionId" to m.questionId, "action" to m.action, "choice" to m.choice, "arg" to m.arg)
         is ClientMsg.RelayAct -> linkedMapOf("t" to m.type, "seq" to m.seq, "token" to m.token, "questionId" to m.questionId, "choice" to m.choice, "localElapsedMono" to m.localElapsedMono)
@@ -32,6 +40,7 @@ object PlayCodec {
         is ClientMsg.Mute -> linkedMapOf("t" to m.type, "playerId" to m.playerId, "muted" to m.muted)
         is ClientMsg.Report -> linkedMapOf("t" to m.type, "questionId" to m.questionId, "reason" to m.reason)
         is ClientMsg.Pong -> linkedMapOf("t" to m.type, "id" to m.id)
+        is ClientMsg.GameAct -> linkedMapOf("t" to m.type, "seq" to m.seq, "op" to m.op, "arg" to m.arg, "ply" to m.ply)
     })
 
     fun decodeClient(text: String): Decoded {
@@ -46,9 +55,12 @@ object PlayCodec {
         return try {
             Decoded.Ok(when (t) {
                 "hello" -> ClientMsg.Hello(f.int("proto", 1..1_000), f.strings("caps"), f.str("deviceHash", PlayProtocol.MAX_ID, false), f.str("ticket", PlayProtocol.MAX_TICKET, false))
-                "create" -> ClientMsg.Create(f.str("name", PlayProtocol.MAX_NAME_WIRE, false), f.str("mode", 16, false), f.token("activation"), f.tokens("rentals"), f.str("proof", PlayProtocol.MAX_PROOF, false))
+                "create" -> ClientMsg.Create(f.str("name", PlayProtocol.MAX_NAME_WIRE, false), f.str("mode", 16, false), f.token("activation"), f.tokens("rentals"), f.str("proof", PlayProtocol.MAX_PROOF, false),
+                    f.game(), f.chess(), f.stake(), f.signed("escrow", PlayProtocol.MAX_ESCROW))
                 "join" -> ClientMsg.Join(f.str("code", 16, true)!!, f.str("name", PlayProtocol.MAX_NAME_WIRE, false), f.str("token", PlayProtocol.MAX_TOKEN, false),
-                    f.str("deviceHash", PlayProtocol.MAX_ID, false), f.boolOr("spectate", false), f.token("activation"), f.str("proof", PlayProtocol.MAX_PROOF, false))
+                    f.str("deviceHash", PlayProtocol.MAX_ID, false), f.boolOr("spectate", false), f.token("activation"), f.str("proof", PlayProtocol.MAX_PROOF, false), f.signed("escrow", PlayProtocol.MAX_ESCROW))
+                "game" -> ClientMsg.GameAct(f.str("op", PlayProtocol.MAX_OP, true)!!, f.str("arg", PlayProtocol.MAX_GAME_ARG, false), f.long("ply", 0L..PlayProtocol.MAX_PLY.toLong(), false)?.toInt(),
+                    f.long("seq", 0L..(1L shl 53), false) ?: 0L)
                 "resume" -> ClientMsg.Resume(f.str("roomId", PlayProtocol.MAX_ID, true)!!, f.str("token", PlayProtocol.MAX_TOKEN, true)!!, f.long("lastSeq", 0L..(1L shl 53), true)!!)
                 "act" -> {
                     val action = f.str("action", 16, true)!!
@@ -96,6 +108,31 @@ object PlayCodec {
             if (l.size > PlayProtocol.MAX_RENTALS) throw BadField("$k : trop d'éléments")
             return l.map { e -> (e as? String)?.takeIf { it.length in 1..PlayProtocol.MAX_ACTIVATION && it.all { c -> c.code in 33..126 } } ?: throw BadField("$k : élément invalide") }
         }
+        /** Le jeu d'une salle (`create`) : minuscules, chiffres et `_`, 1 à 16 caractères ; un jeu inconnu du service est refusé par lui (`GAME_UNKNOWN`), pas par le codec (un client plus récent n'est pas un message mal formé). */
+        fun game(): String? {
+            val s = (m["game"] ?: return null) as? String ?: throw BadField("game : texte attendu")
+            if (!GAME_NAME.matches(s)) throw BadField("game : nom invalide")
+            return s
+        }
+        fun chess(): ChessOptions? {
+            val o = (m["chess"] ?: return null) as? Map<*, *> ?: throw BadField("chess : objet attendu")
+            val f = Fields(o)
+            return ChessOptions(f.int("perMoveSeconds", 1..3_600), f.str("mode", 16, true)!!, f.str("color", 8, true)!!)
+        }
+        fun stake(): StakeSpec? {
+            val o = (m["stake"] ?: return null) as? Map<*, *> ?: throw BadField("stake : objet attendu")
+            val f = Fields(o)
+            val cur = f.str("cur", 8, true)!!
+            if (cur !in PlayProtocol.STAKE_CURRENCIES) throw BadField("stake : monnaie inconnue")
+            return StakeSpec(cur, f.long("per", 1L..1_000_000_000L, true)!!)
+        }
+        /** Un jeton signé d'au plus [max] caractères (`cbe1.…`) : texte ASCII visible ; absent ou vide = aucun. */
+        fun signed(k: String, max: Int): String? {
+            val s = (m[k] ?: return null) as? String ?: throw BadField("$k : texte attendu")
+            if (s.length > max) throw BadField("$k trop long")
+            if (s.any { it.code !in 33..126 }) throw BadField("$k : caractère interdit")
+            return s.ifEmpty { null }
+        }
         fun long(k: String, r: LongRange, required: Boolean): Long? {
             val v = m[k] ?: if (required) throw BadField("$k manquant") else return null
             val n = (v as? Number)?.takeIf { it is Long || it is Int } ?: throw BadField("$k : entier attendu")
@@ -113,8 +150,8 @@ object PlayCodec {
     // ------------------------------------------------------------------ serveur → client
 
     fun encode(m: ServerMsg): String = Json.write(when (m) {
-        is ServerMsg.Welcome -> linkedMapOf("t" to m.type, "seq" to m.seq, "roomId" to m.roomId, "code" to m.code, "token" to m.token, "role" to m.role.name,
-            "playerId" to m.playerId, "proto" to m.proto, "caps" to m.caps)
+        is ServerMsg.Welcome -> linkedMapOf<String, Any?>("t" to m.type, "seq" to m.seq, "roomId" to m.roomId, "code" to m.code, "token" to m.token, "role" to m.role.name,
+            "playerId" to m.playerId, "proto" to m.proto, "caps" to m.caps).also { if (m.game != null) it["game"] = m.game }
         is ServerMsg.State -> linkedMapOf("t" to m.type, "seq" to m.seq, "full" to m.full, "view" to m.view)
         is ServerMsg.Question -> linkedMapOf("t" to m.type, "seq" to m.seq, "questionId" to m.questionId, "index" to m.index, "count" to m.count, "text" to m.text,
             "choices" to m.choices, "opensAtServerMs" to m.opensAtServerMs, "serverNowMs" to m.serverNowMs, "windowMs" to m.windowMs)
@@ -123,10 +160,11 @@ object PlayCodec {
             "text" to m.view.text, "action" to m.view.action, "detail" to m.view.detail)
         is ServerMsg.Ping -> linkedMapOf("t" to m.type, "seq" to m.seq, "id" to m.id, "serverNowMs" to m.serverNowMs)
         is ServerMsg.Error -> linkedMapOf<String, Any?>("t" to m.type, "seq" to m.seq, "reason" to m.reason, "message" to m.message, "retryable" to m.retryable)
-            .also { if (m.retryAfterMs > 0) it["retryAfterMs"] = m.retryAfterMs }
+            .also { if (m.retryAfterMs > 0) it["retryAfterMs"] = m.retryAfterMs; if (m.data != null) it["data"] = m.data }
         is ServerMsg.RoomGone -> linkedMapOf("t" to m.type, "seq" to m.seq, "reason" to m.reason)
         is ServerMsg.Replay -> linkedMapOf("t" to m.type, "seq" to m.seq, "events" to m.events.map { linkedMapOf("seq" to it.seq, "kind" to it.kind, "data" to it.data) })
         is ServerMsg.Ack -> linkedMapOf("t" to m.type, "seq" to m.seq, "ref" to m.ref, "result" to m.result)
+        is ServerMsg.Result -> linkedMapOf("t" to m.type, "seq" to m.seq, "token" to m.token)
     })
 
     /** Décodage côté client : null si le message est inconnu ou mal formé (un client ignore ce qu'il ne comprend pas). */
@@ -138,7 +176,7 @@ object PlayCodec {
         val seq = l("seq") ?: 0L
         when (s("t")) {
             "welcome" -> ServerMsg.Welcome(seq, s("roomId")!!, s("code")!!, s("token")!!, PlayRole.valueOf(s("role")!!), s("playerId"), l("proto")?.toInt() ?: 1,
-                (m["caps"] as? List<*>)?.filterIsInstance<String>() ?: emptyList())
+                (m["caps"] as? List<*>)?.filterIsInstance<String>() ?: emptyList(), s("game"))
             "state" -> ServerMsg.State(seq, m["view"] as Map<String, Any?>, m["full"] as? Boolean ?: false)
             "question" -> ServerMsg.Question(seq, s("questionId")!!, l("index")!!.toInt(), l("count")!!.toInt(), s("text")!!, (m["choices"] as List<*>).map { it.toString() },
                 l("opensAtServerMs")!!, l("serverNowMs")!!, l("windowMs")!!)
@@ -146,7 +184,8 @@ object PlayCodec {
             "safety" -> ServerMsg.Safety(seq, SafetyView(PlayScope.valueOf(s("scope")!!), SignalLevel.valueOf(s("level")!!), s("word")!!, s("text")!!, s("action"),
                 (m["detail"] as? List<*>)?.map { it.toString() } ?: emptyList()))
             "ping" -> ServerMsg.Ping(seq, s("id")!!, l("serverNowMs") ?: 0L)
-            "error" -> ServerMsg.Error(seq, s("reason")!!, s("message") ?: "", m["retryable"] as? Boolean ?: false, l("retryAfterMs")?.coerceIn(0L, 3_600_000L) ?: 0L)
+            "error" -> ServerMsg.Error(seq, s("reason")!!, s("message") ?: "", m["retryable"] as? Boolean ?: false, l("retryAfterMs")?.coerceIn(0L, 3_600_000L) ?: 0L, m["data"] as? Map<String, Any?>)
+            "result" -> s("token")?.takeIf { it.isNotBlank() && it.length <= 6_000 }?.let { ServerMsg.Result(seq, it) }
             "roomGone" -> ServerMsg.RoomGone(seq, s("reason") ?: "")
             "replay" -> ServerMsg.Replay(seq, (m["events"] as List<Map<String, Any?>>).map { EventRing.Event((it["seq"] as Number).toLong(), it["kind"] as String, (it["data"] as? Map<String, Any?>) ?: emptyMap()) })
             "ack" -> ServerMsg.Ack(seq, l("ref") ?: 0L, s("result")!!)

@@ -69,7 +69,7 @@ class ServerAuthority(transport: PlayTransport, override val scope: PlayScope = 
                 is ServerMsg.Question -> lastQuestion = m
                 is ServerMsg.Reveal -> lastReveal = m
                 is ServerMsg.RoomGone -> lastGone = m
-                is ServerMsg.Ping, is ServerMsg.Replay -> {}
+                is ServerMsg.Ping, is ServerMsg.Replay, is ServerMsg.Result -> {}   // `result` : parties misées d'échecs, jamais dans une salle de Quiz
             }
             lock.notifyAll()
         }

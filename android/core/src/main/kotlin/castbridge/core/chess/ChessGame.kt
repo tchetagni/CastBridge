@@ -115,6 +115,12 @@ class ChessGame(
         result = GameResult.win(color xor 1, EndReason.RESIGNATION); return true
     }
 
+    /** The player of [color] stayed away too long (online: 60 s without a connection): the other side wins by forfeit. */
+    fun forfeit(color: Int): Boolean {
+        if (over) return false
+        result = GameResult.win(color xor 1, EndReason.FORFEIT); return true
+    }
+
     fun offerDraw(color: Int): Boolean {
         if (over || drawOffer == color) return false
         if (drawOffer == color xor 1) return answerDraw(color, true)      // both offered: agreed

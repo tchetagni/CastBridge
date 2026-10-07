@@ -5,7 +5,12 @@ object PlayProtocol {
     const val PROTO = 1
     const val NAME = "play-v1"
     /** Capacités annoncées dans `hello` ; le serveur répond avec l'intersection. */
-    val CAPS = listOf("play1", "sse", "longpoll", "relay", "spectate", "play-ticket")
+    val CAPS = listOf("play1", "sse", "longpoll", "relay", "spectate", "play-ticket", "chess")
+    /** Capacité additive annoncée par `/play/.well-known/caps` SEULEMENT quand le service accepte les mises (clés du portefeuille et du résultat présentes, interrupteur actif). */
+    const val CAP_STAKES = "stakes"
+    /** Jeux à tour de rôle servis par le service (salle `game:<id>`) ; `chess` aujourd'hui, les jeux de cartes viendront (DESIGN-JEUX-CARTES-ET-ECHECS-EN-LIGNE).*/
+    const val GAME_CHESS = "chess"
+    val GAMES = setOf(GAME_CHESS)
 
     /** Taille maximale d'un message client (octets UTF-8). */
     const val MAX_MESSAGE_BYTES = 2_048
@@ -23,6 +28,14 @@ object PlayProtocol {
     /** H-3 : preuve de possession `<clé publique base64>.<signature base64>` (≈ 133 caractères). */
     const val MAX_PROOF = 200
     const val MAX_CAPS = 12
+    /** Jeton `cbe1` (blocage de mise signé par l'API) joint à `create` / `join` : 1 200 caractères au plus ([castbridge.core.wallet.EscrowTicket.MAX_LENGTH]). */
+    const val MAX_ESCROW = 1_200
+    /** Message de partie `game` : opération (`move`, `resign`, `draw`, `cancel`), argument (coup UCI, `offer|accept|decline`), numéro de demi-coup. */
+    const val MAX_OP = 16
+    const val MAX_GAME_ARG = 64
+    const val MAX_PLY = 100_000
+    /** Monnaies des mises (noms de [castbridge.core.wallet.WalletCurrency]). */
+    val STAKE_CURRENCIES = setOf("NDEM", "MBOKO")
     const val MAX_REASON = 64
     const val MAX_ELAPSED_MS = 60_000L
 
@@ -55,19 +68,26 @@ sealed class ClientMsg {
         override val type get() = "hello"
         override fun toString() = "Hello(proto=$proto, device=${PlayRedact.device(deviceHash)}, ticket=${if (ticket == null) "-" else PlayRedact.REDACTED})"   // jamais le ticket (T-18)
     }
-    /** Premier message de l'hôte (TV) : crée la salle ; `mode` = MILLIONAIRE | DUEL (facultatif). `name` null = la TV ne joue pas. */
+    /**
+     * Premier message de l'hôte (TV) : crée la salle ; `mode` = MILLIONAIRE | DUEL (facultatif). `name` null = la TV ne joue pas.
+     * Salles de jeu à tour de rôle (additif, capacité `chess`) : [game] = `chess` crée une salle `game:chess` (la TV joue ; [chess] = ses réglages) ; [stake] = mise par joueur, prouvée
+     * par [escrow] (blocage `cbe1` signé par l'API, jamais écrit par le service dans le grand livre) ; sans [stake], partie libre.
+     */
     data class Create(val name: String?, val mode: String?,
                       /** w20-04 (additif, capacité `play-ticket`) : l'activation `cbx1` de la TV (preuve d'édition, évaluée par le SERVICE avec son horloge) et, au plus [PlayProtocol.MAX_RENTALS], ses lignes de location signées (autres activations `cbx1`). */
                       val activation: String? = null, val rentals: List<String> = emptyList(),
                       /** Audit Opus H-3 (additif) : preuve de possession de la clé d'installation de la TV, liée au ticket ([PlayProof]). */
-                      val proof: String? = null) : ClientMsg() {
+                      val proof: String? = null,
+                      val game: String? = null, val chess: ChessOptions? = null, val stake: StakeSpec? = null, val escrow: String? = null) : ClientMsg() {
         override val type get() = "create"
-        override fun toString() = "Create(name=${PlayRedact.pseudo(name)}, mode=$mode, activation=${if (activation == null) "-" else PlayRedact.REDACTED}, rentals=${rentals.size})"   // jamais l'activation `cbx1` (T-18)
+        override fun toString() = "Create(name=${PlayRedact.pseudo(name)}, mode=$mode, activation=${if (activation == null) "-" else PlayRedact.REDACTED}, rentals=${rentals.size}, game=$game, stake=$stake, escrow=${if (escrow == null) "-" else PlayRedact.REDACTED})"   // jamais l'activation `cbx1` ni le blocage `cbe1` (T-18)
     }
     /** `activation` (w20-04b, additif) : l'activation `cbx1` de la TV qui rejoint ; le service l'exige de toute connexion non assise quand `CASTBRIDGE_PLAY_WEB=0` (seule une TV activée entre). */
-    data class Join(val code: String, val name: String?, val token: String?, val deviceHash: String?, val spectate: Boolean, val activation: String? = null, /** H-3 (additif) : voir [Create.proof]. */ val proof: String? = null) : ClientMsg() {
+    data class Join(val code: String, val name: String?, val token: String?, val deviceHash: String?, val spectate: Boolean, val activation: String? = null, /** H-3 (additif) : voir [Create.proof]. */ val proof: String? = null,
+                    /** Salle misée (additif) : le blocage `cbe1` de CETTE TV ; sans lui, une salle misée répond `STAKE_ESCROW_REQUIRED` (avec la mise) et la TV peut aussi entrer en spectatrice. */
+                    val escrow: String? = null) : ClientMsg() {
         override val type get() = "join"
-        override fun toString() = "Join(code=${PlayRedact.code(code)}, name=${PlayRedact.pseudo(name)}, token=${if (token == null) "-" else PlayRedact.REDACTED}, device=${PlayRedact.device(deviceHash)}, spectate=$spectate, activation=${if (activation == null) "-" else PlayRedact.REDACTED})"
+        override fun toString() = "Join(code=${PlayRedact.code(code)}, name=${PlayRedact.pseudo(name)}, token=${if (token == null) "-" else PlayRedact.REDACTED}, device=${PlayRedact.device(deviceHash)}, spectate=$spectate, activation=${if (activation == null) "-" else PlayRedact.REDACTED}, escrow=${if (escrow == null) "-" else PlayRedact.REDACTED})"
     }
     data class Resume(val roomId: String, val token: String, val lastSeq: Long) : ClientMsg() {
         override val type get() = "resume"
@@ -84,7 +104,18 @@ sealed class ClientMsg {
     data class Mute(val playerId: String, val muted: Boolean) : ClientMsg() { override val type get() = "mute" }
     data class Report(val questionId: String?, val reason: String) : ClientMsg() { override val type get() = "report" }
     data class Pong(val id: String) : ClientMsg() { override val type get() = "pong" }
+    /**
+     * Une action de jeu à tour de rôle dans une salle `game:<id>` (échecs : `move` avec [arg] = le coup en UCI et [ply] = le demi-coup auquel il répond, `resign`, `draw` avec [arg] =
+     * `offer` | `accept` | `decline`, `cancel` = l'hôte annule avant l'arrivée de l'adversaire). Un coup périmé ou en double reçoit l'accusé `STALE`. [seq] : compteur du client (écho dans `ack`).
+     */
+    data class GameAct(val op: String, val arg: String?, val ply: Int?, val seq: Long) : ClientMsg() { override val type get() = "game" }
 }
+
+/** Réglages d'une partie d'échecs en ligne (message `create`) : [perMoveSeconds] (ramené à 10..60 s par le service), [mode] `COMPETITION` | `PRACTICE`, [color] `white` | `black` | `random` (couleur de l'hôte). */
+data class ChessOptions(val perMoveSeconds: Int, val mode: String, val color: String)
+
+/** Mise par joueur d'une salle de jeu : monnaie (`NDEM` | `MBOKO`) et montant ; le blocage `cbe1` de chaque TV doit dire exactement la même chose. */
+data class StakeSpec(val cur: String, val per: Long)
 
 /** Messages serveur → client. `seq` est le numéro d'évènement de la salle (croissant). */
 sealed class ServerMsg {
@@ -92,7 +123,7 @@ sealed class ServerMsg {
     abstract val seq: Long
 
     data class Welcome(override val seq: Long, val roomId: String, val code: String, val token: String, val role: PlayRole, val playerId: String?,
-                       val proto: Int, val caps: List<String>) : ServerMsg() {
+                       val proto: Int, val caps: List<String>, /** Jeu de la salle (additif) : `chess` ; null = salle de Quiz. */ val game: String? = null) : ServerMsg() {
         override val type get() = "welcome"
         override fun toString() = "Welcome(seq=$seq, roomId=$roomId, code=${PlayRedact.code(code)}, token=${PlayRedact.REDACTED}, role=$role, playerId=$playerId)"
     }
@@ -106,9 +137,19 @@ sealed class ServerMsg {
     data class Safety(override val seq: Long, val view: SafetyView) : ServerMsg() { override val type get() = "safety" }
     data class Ping(override val seq: Long, val id: String, val serverNowMs: Long) : ServerMsg() { override val type get() = "ping" }
     /** `retryAfterMs` (additif, w20-07) : attente conseillée avant de réessayer ; 0 = non précisée (le champ n'est alors pas écrit). */
-    data class Error(override val seq: Long, val reason: String, val message: String, val retryable: Boolean, val retryAfterMs: Long = 0L) : ServerMsg() { override val type get() = "error" }
+    data class Error(override val seq: Long, val reason: String, val message: String, val retryable: Boolean, val retryAfterMs: Long = 0L,
+                     /** Détail structuré du refus (additif) : une salle misée répond `STAKE_ESCROW_REQUIRED` avec `{game, cur, per}` pour que la TV sache quoi bloquer. Absent du fil quand il n'y en a pas. */
+                     val data: Map<String, Any?>? = null) : ServerMsg() { override val type get() = "error" }
     data class RoomGone(override val seq: Long, val reason: String) : ServerMsg() { override val type get() = "roomGone" }
     data class Replay(override val seq: Long, val events: List<EventRing.Event>) : ServerMsg() { override val type get() = "replay" }
     /** Accusé d'un `act` : `ref` = `seq` du client ; `result` ∈ OK, SAME, CLOSED, UNKNOWN_QUESTION, TOO_EARLY, FORBIDDEN, BAD_REQUEST, UNKNOWN_PLAYER, IGNORED. */
     data class Ack(override val seq: Long, val ref: Long, val result: String) : ServerMsg() { override val type get() = "ack" }
+    /**
+     * Résultat de partie `cbr1` signé par le SERVICE avec sa clé dédiée (parties misées, additif) : la TV le poste à l'API qui règle ; le service en garde aussi une copie pour le collecteur de
+     * l'hôte. Le jeton n'est jamais journalisé (toString masqué).
+     */
+    data class Result(override val seq: Long, val token: String) : ServerMsg() {
+        override val type get() = "result"
+        override fun toString() = "Result(seq=$seq, token=${PlayRedact.REDACTED})"
+    }
 }

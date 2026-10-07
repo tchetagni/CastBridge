@@ -186,6 +186,7 @@ class ServerRoom(
             is ClientMsg.Mute -> hostOnly(conn, out) { _ -> seats.values.firstOrNull { it.playerId == msg.playerId }?.muted = msg.muted; dirty() }
             is ClientMsg.Report -> { byConn[conn]?.let { if (reports.size < 100) reports += Triple(it.token.take(6), msg.questionId, msg.reason) } }
             is ClientMsg.Pong -> pendingPings[conn]?.let { (id, sentAt) -> if (id == msg.id) { rtt.sample(conn, now - sentAt); pendingPings.remove(conn) } }
+            is ClientMsg.GameAct -> out += errp(conn, PlayProtocol.FORBIDDEN, "Cette salle est une salle de Quiz : les actions de jeu à tour de rôle n'y ont pas cours.")   // les parties d'échecs vivent dans `ChessServerRoom`
         }
         flush(now, out)
         out
