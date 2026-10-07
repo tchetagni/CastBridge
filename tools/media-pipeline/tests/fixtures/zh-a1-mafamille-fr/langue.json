@@ -1,0 +1,172 @@
+{
+ "format": 1,
+ "type": "langue",
+ "id": "zh-a1-mafamille-fr",
+ "version": 1,
+ "target": "zh",
+ "level": "A1",
+ "theme": "mafamille",
+ "source": "fr",
+ "title": "Chinois A1 — Ma famille et moi",
+ "state": "review",
+ "units": [
+  {
+   "id": "zh-a1-mafamille-fr-u1",
+   "title": "Je me présente : mon nom et mon pays",
+   "minutes": 10,
+   "skills": ["co", "ce", "po", "pe"],
+   "prerequisites": [],
+   "prereq": ["zh.a0-co", "zh.a0-ce", "zh.a0-po", "zh.a0-pe", "zh.a0-pinyin", "zh.a0-tons", "zh.a0-traits"],
+   "vocab": [
+    {
+     "id": "zh-a1-mafamille-fr-u1-v1",
+     "term": "是",
+     "reading": "shì",
+     "gloss": "être",
+     "pos": "v",
+     "audio": "m:zh-shi"
+    },
+    {
+     "id": "zh-a1-mafamille-fr-u1-v2",
+     "term": "人",
+     "reading": "rén",
+     "gloss": "personne",
+     "pos": "n",
+     "audio": "m:zh-ren"
+    },
+    {
+     "id": "zh-a1-mafamille-fr-u1-v3",
+     "term": "喀麦隆",
+     "reading": "Kāmàilóng",
+     "gloss": "Cameroun",
+     "pos": "npr",
+     "audio": "m:zh-kamailong"
+    },
+    {
+     "id": "zh-a1-mafamille-fr-u1-v4",
+     "term": "中国",
+     "reading": "Zhōngguó",
+     "gloss": "Chine",
+     "pos": "npr",
+     "audio": "m:zh-zhongguo"
+    },
+    {
+     "id": "zh-a1-mafamille-fr-u1-v5",
+     "term": "呢",
+     "reading": "ne",
+     "gloss": "et … ? (particule, bloc figé : 你呢？ = et toi ?)",
+     "pos": "part",
+     "audio": "m:zh-ne"
+    },
+    {
+     "id": "zh-a1-mafamille-fr-u1-v6",
+     "term": "阿米",
+     "reading": "Āmǐ",
+     "gloss": "Ami (prénom)",
+     "pos": "npr",
+     "audio": "m:zh-ami"
+    }
+   ],
+   "dialogues": [
+    {
+     "id": "zh-a1-mafamille-fr-u1-d1",
+     "title": "Se présenter : nom et pays",
+     "audio": "m:zh-u1-d1",
+     "lines": [
+      {
+       "who": "A",
+       "text": "你好！我叫阿米。",
+       "reading": "nǐ hǎo! wǒ jiào Āmǐ.",
+       "tr": "Bonjour ! Je m'appelle Ami.",
+       "audio": "m:zh-u1-d1-a"
+      },
+      {
+       "who": "B",
+       "text": "你好！我是喀麦隆人。你呢？",
+       "reading": "nǐ hǎo! wǒ shì Kāmàilóng rén. nǐ ne?",
+       "tr": "Bonjour ! Je suis camerounais. Et toi ?",
+       "audio": "m:zh-u1-d1-b"
+      }
+     ]
+    }
+   ],
+   "grammar": [
+    {
+     "id": "zh-a1-mafamille-fr-u1-g1",
+     "title": "是 + nom de pays + 人",
+     "md": "Pour dire sa nationalité : **sujet + 是 + nom de pays + 人**. 是 (*shì*) joue le rôle du verbe « être ». 人 (*rén*) veut dire « personne » : 喀麦隆人 = « personne du Cameroun » = camerounais(e). Le verbe ne change jamais : 是 reste 是 pour tous.",
+     "examples": [
+      {
+       "text": "我是喀麦隆人。",
+       "tr": "wǒ shì Kāmàilóng rén. — Je suis camerounais(e)."
+      },
+      {
+       "text": "我是中国人。",
+       "tr": "wǒ shì Zhōngguó rén. — Je suis chinois(e)."
+      }
+     ]
+    }
+   ],
+   "exercises": [
+    {
+     "id": "zh-a1-mafamille-fr-u1-x1",
+     "kind": "mcq",
+     "prompt": "Écoute : quel mot ?",
+     "audio": "m:zh-shi-paire",
+     "choices": ["十 shí — dix", "是 shì — être"],
+     "correct": 1,
+     "skill": "co",
+     "explanation": "Seul le ton change : 十 shí est au 2e ton (montant), 是 shì est au 4e ton (descendant). Trait distinctif : ton 2 / ton 4.",
+     "wrongWhy": ["十 shí monte (2e ton) ; le mot entendu descend (4e ton).", "—"]
+    },
+    {
+     "id": "zh-a1-mafamille-fr-u1-x2",
+     "kind": "truefalse",
+     "prompt": "Vrai ou faux ? 阿米 est chinoise.",
+     "choices": ["Vrai", "Faux"],
+     "correct": 1,
+     "skill": "ce",
+     "explanation": "B dit être camerounais ; la nationalité d'Ami n'est pas donnée.",
+     "wrongWhy": ["Rien dans le dialogue ne dit qu'Ami est chinoise.", "—"]
+    },
+    {
+     "id": "zh-a1-mafamille-fr-u1-x3",
+     "kind": "order",
+     "prompt": "Remets les mots dans l'ordre : « Je suis camerounais. »",
+     "words": ["我", "喀麦隆", "人", "是"],
+     "answers": ["我是喀麦隆人"],
+     "skill": "pe",
+     "explanation": "Sujet 我 + verbe 是 + pays 喀麦隆 + 人."
+    },
+    {
+     "id": "zh-a1-mafamille-fr-u1-x4",
+     "kind": "match",
+     "prompt": "Rappel de l'A0 : associe chaque mot à son sens.",
+     "pairs": [
+      {"a": "我", "b": "je / moi"},
+      {"a": "你", "b": "tu / toi"},
+      {"a": "叫", "b": "s'appeler"},
+      {"a": "名字", "b": "nom / prénom"},
+      {"a": "再见", "b": "au revoir"},
+      {"a": "谢谢", "b": "merci"}
+     ],
+     "skill": "ce",
+     "explanation": "Mots déjà vus en A0 : 我 wǒ, 你 nǐ, 叫 jiào, 名字 míngzi, 再见 zàijiàn, 谢谢 xièxie."
+    }
+   ],
+   "stories": [],
+   "cards": [
+    {"id": "zh-a1-mafamille-fr-u1-c1", "vocab": "zh-a1-mafamille-fr-u1-v1"},
+    {"id": "zh-a1-mafamille-fr-u1-c2", "vocab": "zh-a1-mafamille-fr-u1-v2"},
+    {"id": "zh-a1-mafamille-fr-u1-c3", "vocab": "zh-a1-mafamille-fr-u1-v3"},
+    {"id": "zh-a1-mafamille-fr-u1-c4", "vocab": "zh-a1-mafamille-fr-u1-v4"},
+    {"id": "zh-a1-mafamille-fr-u1-c5", "vocab": "zh-a1-mafamille-fr-u1-v5"},
+    {"id": "zh-a1-mafamille-fr-u1-c6", "vocab": "zh-a1-mafamille-fr-u1-v6"}
+   ],
+   "animations": [
+    {"id": "zh-a1-mafamille-fr-u1-a1", "kind": "strokes", "label": "Ordre des traits de 是"},
+    {"id": "zh-a1-mafamille-fr-u1-a2", "kind": "strokes", "label": "Ordre des traits de 人"}
+   ]
+  }
+ ]
+}

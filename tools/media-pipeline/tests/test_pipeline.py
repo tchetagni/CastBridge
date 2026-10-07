@@ -108,6 +108,57 @@ class Requests(unittest.TestCase):
         mixed, _ = self.build([pack(level="a1")])
         self.assertEqual({"lent"}, {r["voiceClass"]["register"] for r in mixed if r["kind"] == "audio"})
 
+    # ---- champ additif `text` d'un exercice à audio : exemplaire zh-a1-mafamille-fr (leçon 1 de Gemini, paire minimale 十 / 是) ----
+    def exemplar(self, text=None, audio=None):
+        # copie fidèle de castbridge-content `langues/zh-a1-mafamille-fr/langue.json` (2026-10-07) ; seuls `text` et `audio` du QCM de la paire (x1) sont modifiés ici
+        p = json.loads((Path(__file__).parent / "fixtures" / "zh-a1-mafamille-fr" / "langue.json").read_text(encoding="utf-8"))
+        x1 = p["units"][0]["exercises"][0]
+        self.assertEqual(("mcq", "m:zh-shi-paire"), (x1["kind"], x1["audio"]))
+        if text is not None:
+            x1["text"] = text
+        if audio is not None:
+            x1["audio"] = audio
+        return p
+
+    def test_exemplar_quiz_audio_without_text_stays_blocked_never_guessed(self):
+        rows, conflicts = self.build([self.exemplar()])
+        self.assertEqual([], conflicts)
+        self.assertEqual(["zh-shi-paire"], [r["id"] for r in rows if r.get("blocked")])
+        self.assertEqual(10, len(rows))
+
+    def test_exercise_text_is_the_exact_text_of_its_audio_request(self):
+        rows, conflicts = self.build([self.exemplar(text="是")])
+        self.assertEqual([], conflicts, "0 conflit")
+        self.assertEqual([], [r["id"] for r in rows if r.get("blocked")], "0 bloquée")
+        self.assertEqual(10, len(rows))
+        row = next(r for r in rows if r["id"] == "zh-shi-paire")
+        self.assertEqual("是", row["payload"]["text"])
+        self.assertEqual("text", row["source"]["field"])
+
+    def test_exercise_audio_shared_with_a_word_merges_on_the_strictest_when_the_text_is_the_same(self):
+        rows, conflicts = self.build([self.exemplar(text="是", audio="m:zh-shi")])
+        self.assertEqual([], conflicts, "0 conflit")
+        self.assertEqual([], [r["id"] for r in rows if r.get("blocked")], "0 bloquée")
+        self.assertEqual(9, len(rows), "un seul fichier pour le mot et pour la paire")
+        row = next(r for r in rows if r["id"] == "zh-shi")
+        self.assertEqual((16, 4), (row["constraints"]["bitrateKbps"], row["constraints"]["maxDurationS"]), "la contrainte du mot, plus stricte que celle d'une phrase")
+        self.assertEqual("shì", row["payload"]["reading"])
+        self.assertEqual(["zh-a1-mafamille-fr-u1-x1"], [s["element"] for s in row["sharedWith"]])
+
+    def test_exercise_audio_shared_with_a_word_stays_a_conflict_when_the_text_differs_or_is_missing(self):
+        _, other = self.build([self.exemplar(text="十", audio="m:zh-shi")])
+        self.assertEqual(["zh-shi"], [c["id"] for c in other])
+        _, missing = self.build([self.exemplar(audio="m:zh-shi")])
+        self.assertEqual(["zh-shi"], [c["id"] for c in missing], "texte inconnu : jamais deviné")
+
+    def test_same_text_with_other_constraints_is_merged_on_the_strictest(self):
+        p = pack(); p["units"][0]["exercises"][0]["audio"] = "m:t-xiexie"   # dictée « 谢谢 » sur l'identifiant du mot « 谢谢 »
+        rows, conflicts = self.build([p])
+        self.assertEqual([], conflicts)
+        row = next(r for r in rows if r["id"] == "t-xiexie")
+        self.assertEqual(16, row["constraints"]["bitrateKbps"])
+        self.assertEqual(1, len(row["sharedWith"]))
+
 
 class Estimate(unittest.TestCase):
     def rows(self):
