@@ -110,7 +110,7 @@ class Requests(unittest.TestCase):
 
     # ---- champ additif `text` d'un exercice à audio : exemplaire zh-a1-mafamille-fr (leçon 1 de Gemini, paire minimale 十 / 是) ----
     def exemplar(self, text=None, audio=None):
-        # copie fidèle de castbridge-content `langues/zh-a1-mafamille-fr/langue.json` (2026-10-07) ; seuls `text` et `audio` du QCM de la paire (x1) sont modifiés ici
+        # copie fidèle de castbridge-content `langues/zh-a1-mafamille-fr/langue.json` au commit ed30406, AVANT l'ajout de `text` à x1 ; seuls `text` et `audio` du QCM de la paire (x1) sont modifiés ici
         p = json.loads((Path(__file__).parent / "fixtures" / "zh-a1-mafamille-fr" / "langue.json").read_text(encoding="utf-8"))
         x1 = p["units"][0]["exercises"][0]
         self.assertEqual(("mcq", "m:zh-shi-paire"), (x1["kind"], x1["audio"]))
@@ -158,6 +158,55 @@ class Requests(unittest.TestCase):
         row = next(r for r in rows if r["id"] == "t-xiexie")
         self.assertEqual(16, row["constraints"]["bitrateKbps"])
         self.assertEqual(1, len(row["sharedWith"]))
+
+    # ---- exercice oral (`speak`) sans texte propre : il réutilise l'audio déjà demandé sous le même identifiant ----
+    def test_speak_modelling_a_dialogue_line_shares_the_audio_of_that_line(self):
+        base = len(self.build([pack()])[0])
+        p = pack(); p["units"][0]["exercises"].append({"id": "x5", "kind": "speak", "prompt": "Répète.", "model": "你好，谢谢。", "audio": "m:t-d1-b"})   # modèle = texte de la réplique B
+        rows, conflicts = self.build([p])
+        self.assertEqual([], conflicts, "0 conflit")
+        self.assertEqual(base, len(rows), "même identifiant : aucune demande en plus")
+        row = next(r for r in rows if r["id"] == "t-d1-b")
+        self.assertNotIn("blocked", row)
+        self.assertEqual("你好，谢谢。", row["payload"]["text"])
+        self.assertEqual([("x5", "audio (réutilisé)")], [(s["element"], s["field"]) for s in row["sharedWith"]], "réutilisation tracée")
+        q = pack(); q["units"][0]["exercises"].append({"id": "x5", "kind": "speak", "prompt": "Répète.", "model": "nǐ hǎo! (1er et 3e tons)", "audio": "m:t-d1-a"})   # modèle = lecture de la réplique A, note entre parenthèses ignorée
+        rows, conflicts = self.build([q])
+        self.assertEqual([], conflicts)
+        self.assertEqual(["x5"], [s["element"] for s in next(r for r in rows if r["id"] == "t-d1-a")["sharedWith"]])
+
+    def test_speak_without_text_reuses_the_existing_audio(self):
+        p = pack(); p["units"][0]["exercises"].append({"id": "x4", "kind": "speak", "prompt": "Dis.", "model": "xièxie", "audio": "m:t-xiexie"})
+        rows, conflicts = self.build([p])
+        self.assertEqual([], conflicts)
+        row = next(r for r in rows if r["id"] == "t-xiexie")
+        self.assertNotIn("blocked", row)
+        self.assertEqual("x4", row["sharedWith"][0]["element"])
+
+    def test_speak_reusing_an_audio_that_says_something_else_is_a_conflict(self):
+        p = pack(); p["units"][0]["exercises"].append({"id": "x4", "kind": "speak", "prompt": "Dis.", "model": "zàijiàn", "audio": "m:t-xiexie"})
+        _, conflicts = self.build([p])
+        self.assertEqual("t-xiexie", conflicts[0]["id"])
+        self.assertIn("zàijiàn", conflicts[0]["message"])
+
+    def test_speak_without_model_cannot_reuse_an_audio(self):
+        p = pack(); p["units"][0]["exercises"].append({"id": "x4", "kind": "speak", "prompt": "Dis.", "audio": "m:t-xiexie"})
+        _, conflicts = self.build([p])
+        self.assertIn("invérifiable", conflicts[0]["message"])
+
+    def test_speak_without_text_and_without_other_source_is_blocked(self):
+        p = pack(); p["units"][0]["exercises"].append({"id": "x4", "kind": "speak", "prompt": "Dis.", "model": "x", "audio": "m:t-seul"})
+        rows, _ = self.build([p])
+        self.assertIn("blocked", next(r for r in rows if r["id"] == "t-seul"))
+
+    def test_speak_with_its_own_text_is_an_ordinary_exercise_audio(self):
+        p = pack(); p["units"][0]["exercises"].append({"id": "x4", "kind": "speak", "prompt": "Dis.", "model": "xièxie", "audio": "m:t-xiexie", "text": "谢谢"})
+        rows, conflicts = self.build([p])
+        self.assertEqual([], conflicts)
+        row = next(r for r in rows if r["id"] == "t-xiexie")
+        self.assertEqual("text", row["sharedWith"][0]["field"], "texte propre : fusion, pas de réutilisation sur la foi du modèle")
+        q = pack(); q["units"][0]["exercises"].append({"id": "x4", "kind": "speak", "prompt": "Dis.", "model": "xièxie", "audio": "m:t-xiexie", "text": "再见"})
+        self.assertEqual(["t-xiexie"], [c["id"] for c in self.build([q])[1]], "texte propre différent : conflit")
 
 
 class Estimate(unittest.TestCase):
