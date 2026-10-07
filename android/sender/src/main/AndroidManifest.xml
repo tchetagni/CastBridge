@@ -166,6 +166,9 @@
             android:foregroundServiceType="connectedDevice" />
         <service android:name=".ServerService" android:exported="false"
             android:foregroundServiceType="dataSync" />
+        <!-- R-22: « Choisir le fichier » : the owner picks again the files whose provider no longer gives access (persistable right). -->
+        <activity android:name=".ReselectActivity" android:exported="false" android:excludeFromRecents="true" android:taskAffinity=""
+            android:theme="@android:style/Theme.Translucent.NoTitleBar" />
         <!-- « Ouvrir avec » on a local video, audio or image: copy or move to the TV in the background, or play here. -->
         <activity android:name=".OpenWithActivity" android:exported="true" android:label="CastBridge"
             android:launchMode="standard" android:excludeFromRecents="true" android:taskAffinity=""

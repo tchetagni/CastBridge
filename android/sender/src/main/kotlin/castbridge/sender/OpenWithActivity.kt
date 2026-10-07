@@ -78,6 +78,12 @@ class OpenWithActivity : ComponentActivity() {
     private val pinRev = MutableStateFlow(0)
     private val wipeTick = MutableStateFlow(0)
 
+    /** R-22: what to do once the (single, first-use) media permission question is answered, whatever the answer. */
+    private var afterMediaPermission: (() -> Unit)? = null
+    private val mediaPermission = registerForActivityResult(androidx.activity.result.contract.ActivityResultContracts.RequestPermission()) {
+        afterMediaPermission?.invoke(); afterMediaPermission = null
+    }
+
     override fun onStop() { wipeTick.value++; super.onStop() }       // the typed code never survives the background
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -230,7 +236,24 @@ class OpenWithActivity : ComponentActivity() {
         finish()
     }
 
+    /**
+     * R-22: the file shared by another app (Telegram) is not persistable; the same file may sit in MediaStore, which only a media permission lets us see.
+     * Asked ONCE (first use, never in a loop, whatever the answer), with one clear sentence; the queue then anchors the file (MediaStore, else a copy in the cache).
+     */
     private fun send(uri: Uri, name: String, move: Boolean, choice: SendChoice, pinTv: String?, pins: PinStore) {
+        val kind = MediaKind.of(intent.type, name)
+        val perm = SourceAnchoring.mediaPermission(kind)
+        val prefs = getSharedPreferences("castbridge_anchor", Context.MODE_PRIVATE)
+        val needsAsk = perm != null && uri.scheme == "content" && uri.authority != "media" && !SourceAnchoring.hasMediaPermission(this, kind) &&
+            !prefs.getBoolean("media_perm_asked", false) && !SourceAnchoring.tryPersist(this, uri)
+        if (!needsAsk) { doSend(uri, name, move, choice, pinTv, pins); return }
+        prefs.edit().putBoolean("media_perm_asked", true).apply()
+        Toast.makeText(this, castbridge.core.tv.ReshareTexts.MEDIA_PERMISSION_WHY, Toast.LENGTH_LONG).show()
+        afterMediaPermission = { doSend(uri, name, move, choice, pinTv, pins) }
+        runCatching { mediaPermission.launch(perm!!) }.onFailure { afterMediaPermission = null; doSend(uri, name, move, choice, pinTv, pins) }
+    }
+
+    private fun doSend(uri: Uri, name: String, move: Boolean, choice: SendChoice, pinTv: String?, pins: PinStore) {
         // Keep read access beyond this window when the provider allows it (a move deletes the original once the TV holds it).
         runCatching { contentResolver.takePersistableUriPermission(uri, Intent.FLAG_GRANT_READ_URI_PERMISSION or Intent.FLAG_GRANT_WRITE_URI_PERMISSION) }
             .onFailure { runCatching { contentResolver.takePersistableUriPermission(uri, Intent.FLAG_GRANT_READ_URI_PERMISSION) } }

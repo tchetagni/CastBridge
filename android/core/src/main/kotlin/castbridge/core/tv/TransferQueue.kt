@@ -36,7 +36,17 @@ data class QueueItem(
     val heldAs: String? = null,
     /** French line shown with a finished file (« Déjà sur la TV : Films/… »); null once « Copier quand même » was offered and used. */
     val note: String? = null,
-)
+    /** R-22: how the file stays readable after a restart ([Anchor]); null = a queue saved before R-22 (the original URI, tried as is). */
+    val anchor: Anchor? = null,
+    /** R-22: the durable URI to read (MediaStore, or `file:` in the cache); null = [uri] itself. [uri] stays the original, for the display and the same-file check. */
+    val anchored: String? = null,
+    /** R-22: « Préparation du fichier… n % » while the copy to the cache runs (0..100), -1 = not preparing. Never saved. */
+    val prep: Int = -1,
+) {
+    /** The URI the runner reads. */
+    val source: String get() = anchored ?: uri
+    val preparing: Boolean get() = prep >= 0
+}
 
 /** An add the queue refuses, with the reason in French (the same file already queued with the other action). */
 class QueueRefused(message: String) : IllegalStateException(message)
@@ -84,7 +94,7 @@ object QueueRules {
 
     /** The next file to send, only when none is running (the running file is never interrupted). */
     fun next(items: List<QueueItem>): QueueItem? =
-        if (items.any { it.status == QueueStatus.RUNNING }) null else runOrder(items).firstOrNull()
+        if (items.any { it.status == QueueStatus.RUNNING }) null else runOrder(items).firstOrNull { !it.preparing }
 
     /** 1 = running (or the next to run when nothing runs), 2 = the one after it, …; 0 = not waiting/running. */
     fun position(items: List<QueueItem>, id: Long): Int {
@@ -208,6 +218,36 @@ class TransferQueueModel(private val keepFinished: Int = 12, private val now: ()
     /** The file can no longer be read (grant lost after a restart, file moved): failed with the cause, the others go on. */
     @Synchronized fun lost(id: Long) = finish(id, false, QueueTexts.SOURCE_LOST)
 
+    /** R-22: the file is anchored durably: [anchored] is what is read from now on (null = the original). */
+    @Synchronized fun setAnchor(id: Long, anchor: Anchor, anchored: String? = null) { update(id) { it.copy(anchor = anchor, anchored = anchored, prep = -1) }; save() }
+
+    /** R-22: the copy to the cache starts / advances (only the start is saved: a restart during it leaves [Anchor.PENDING], which cannot be resumed). */
+    @Synchronized fun preparing(id: Long, pct: Int) { update(id) { it.copy(anchor = Anchor.PENDING, prep = pct.coerceIn(0, 100)) }; if (pct <= 0) save() }
+
+    /** R-22: nothing durable could be made, or the file is no longer readable: failed with [reason], marked « à repartager » (no automatic retry, no loop). */
+    @Synchronized fun reshare(id: Long, reason: String) {
+        update(id) { it.copy(anchor = Anchor.RESHARE, prep = -1) }
+        finish(id, false, reason)
+    }
+
+    /** R-22: the owner picked the file again (persistable URI): it is read from there, and waits again. */
+    @Synchronized fun reanchor(id: Long, uri: String): Boolean {
+        val i = list.indexOfFirst { it.id == id }
+        if (i < 0 || list[i].status != QueueStatus.FAILED) return false
+        val old = list.removeAt(i)
+        list += old.copy(status = QueueStatus.WAITING, error = null, attempts = old.attempts + 1, playOnTv = false, anchor = Anchor.PERSISTED, anchored = uri, prep = -1)
+        save(); return true
+    }
+
+    /** R-22: the items marked « à repartager » (failed, nothing readable), in queue order. */
+    @Synchronized fun toReshare(): List<QueueItem> = list.filter { it.status == QueueStatus.FAILED && it.anchor == Anchor.RESHARE }
+
+    /** R-22: the cache file names ([cacheName]) still needed by an item that can run or be retried; the others are orphans ([CacheGuard.orphans]). */
+    @Synchronized fun cacheReferenced(cacheName: (String) -> String?): Set<String> =
+        // finished and cancelled items need nothing; a DONE item that kept its note still offers « Copier quand même »; a copy in progress owns the file named by its id
+        (list.filter { it.status != QueueStatus.CANCELLED && (it.status != QueueStatus.DONE || it.note != null) }.mapNotNull { i -> i.anchored?.let(cacheName) } +
+            list.filter { it.preparing }.map { it.id.toString() }).toSet()
+
     /** « Réessayer » a failed or cancelled file: it waits again, at the end of the queue. */
     @Synchronized fun retry(id: Long): Boolean {
         val i = list.indexOfFirst { it.id == id }
@@ -252,6 +292,7 @@ class TransferQueueModel(private val keepFinished: Int = 12, private val now: ()
         mapOf("id" to i.id, "uri" to i.uri, "name" to i.name, "size" to i.size, "move" to i.move, "autoPlay" to i.autoPlay, "progressive" to i.progressive,
             "status" to i.status.name, "error" to i.error, "playOnTv" to i.playOnTv, "ordered" to i.ordered, "tvName" to i.tvName, "host" to i.host,
             "target" to i.target, "enqueuedAt" to i.enqueuedAt, "attempts" to i.attempts, "linkTv" to i.linkTv) +
+            listOfNotNull(i.anchor?.let { "anchor" to it.name }, i.anchored?.let { "anchored" to it }) +
             // R-12 fields only when set (a hash of the user's own file and the TV's name of it: never a credential)
             listOfNotNull(i.sha256?.let { "sha256" to it }, if (i.force) "force" to true else null, i.heldAs?.let { "heldAs" to it }, i.note?.let { "note" to it })
     }))
@@ -269,7 +310,13 @@ class TransferQueueModel(private val keepFinished: Int = 12, private val now: ()
                 if (st == QueueStatus.RUNNING) QueueStatus.WAITING else st, m.str("error"), playOnTv = false, ordered = m.bool("ordered") ?: false,
                 tvName = m.str("tvName"), host = m.str("host"), target = m.str("target"), enqueuedAt = m.long("enqueuedAt") ?: 0, attempts = (m.long("attempts") ?: 0).toInt(),
                 linkTv = m.str("linkTv"), sha256 = m.str("sha256")?.takeIf { ContentHash.valid(it) }, force = m.bool("force") ?: false,
-                heldAs = m.str("heldAs"), note = m.str("note"))
+                heldAs = m.str("heldAs"), note = m.str("note"),
+                anchor = m.str("anchor")?.let { a -> runCatching { Anchor.valueOf(a) }.getOrNull() }, anchored = m.str("anchored"))
+                .let { q ->
+                    // a copy to the cache that was running when the process died: its grant is gone, the partial file is useless (R-22, no loop)
+                    if (q.anchor == Anchor.PENDING && (q.status == QueueStatus.WAITING || q.status == QueueStatus.RUNNING))
+                        q.copy(anchor = Anchor.RESHARE, status = QueueStatus.FAILED, error = ReshareTexts.lost(q.uri)) else q
+                }
         }
         list.clear(); list += read
         seq = maxOf(o.long("seq") ?: 0, read.maxOfOrNull { it.id } ?: 0)

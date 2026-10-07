@@ -34,7 +34,7 @@ object CopyReport {
     fun step(ctx: Context, step: CopyStep, event: String) { runCatching { journal(ctx).log(step, event) } }
 
     /** Une copie a échoué : texte de la cause (gardé dans la fiche), notification, journal. Rend le texte. [e] ou [reason] disent pourquoi. */
-    fun failed(ctx: Context, item: QueueItem, step: CopyStep, percent: Int?, e: Throwable? = null, reason: String? = null, text: String? = null, cause: String? = null): String {
+    fun failed(ctx: Context, item: QueueItem, step: CopyStep, percent: Int?, e: Throwable? = null, reason: String? = null, text: String? = null, cause: String? = null, notify: Boolean = true): String {
         val info = e?.let { UploadFailure.ofException(it) } ?: UploadFailure.ofReason(reason ?: "")
         val shown = text ?: UploadFailure.message(info, percent)
         runCatching {
@@ -42,7 +42,8 @@ object CopyReport {
             j.log(step, "échec ${cause ?: info.cause} : ${info.technical}" + if (percent != null) " à $percent %" else "")
             j.record(CopyEntry(System.currentTimeMillis(), item.name, false, cause ?: info.cause.name, step.label, percent ?: 0, shown))
         }
-        notify(ctx, item, shown)
+        // R-22: a file that can no longer be read joins ONE grouped notification (« 5 fichiers à repartager »), never one per file
+        if (notify) { if (cause == "FILE_UNREADABLE" || info.cause == UploadFailure.Cause.FILE_UNREADABLE) reshareNotice(ctx, item) else notify(ctx, item, shown) }
         return shown
     }
 
@@ -56,12 +57,33 @@ object CopyReport {
         runCatching { ctx.getSystemService(NotificationManager::class.java)?.cancel(NOTIF) }
     }
 
+    private const val NOTIF_RESHARE = 13
+
+    /**
+     * R-22: UNE seule notification pour tous les fichiers à repartager (même identifiant : elle se met à jour au lieu de se multiplier). [extra] = un fichier
+     * qui vient de l'être et que la file ne marque pas encore. Toucher ouvre le choix des fichiers ([ReselectActivity], droit persistant).
+     */
+    fun reshareNotice(ctx: Context, extra: QueueItem?) {
+        runCatching {
+            val names = (TransferQueue.toReshare() + listOfNotNull(extra)).distinctBy { it.id }.map { it.name }
+            if (names.isEmpty()) return
+            val nm = ctx.getSystemService(NotificationManager::class.java) ?: return
+            nm.createNotificationChannel(NotificationChannel(CHANNEL, "Envois refusés par la TV", NotificationManager.IMPORTANCE_DEFAULT))
+            val tap = PendingIntent.getActivity(ctx, NOTIF_RESHARE, Intent(ctx, ReselectActivity::class.java).addFlags(Intent.FLAG_ACTIVITY_NEW_TASK),
+                PendingIntent.FLAG_IMMUTABLE or PendingIntent.FLAG_UPDATE_CURRENT)
+            val text = castbridge.core.tv.ReshareTexts.groupText(names)
+            nm.notify(NOTIF_RESHARE, Notification.Builder(ctx, CHANNEL).setSmallIcon(android.R.drawable.stat_notify_error)
+                .setContentTitle(castbridge.core.tv.ReshareTexts.groupTitle(names)).setContentText(text).setStyle(Notification.BigTextStyle().bigText(text))
+                .setContentIntent(tap).setAutoCancel(true).build())
+        }
+    }
+
     /** La notification d'échec : la cause et l'action ; toucher rouvre « Ouvrir avec CastBridge » sur le même fichier. */
     fun notify(ctx: Context, item: QueueItem, text: String) {
         runCatching {
             val nm = ctx.getSystemService(NotificationManager::class.java) ?: return
             nm.createNotificationChannel(NotificationChannel(CHANNEL, "Envois refusés par la TV", NotificationManager.IMPORTANCE_DEFAULT))
-            val uri = Uri.parse(item.uri)
+            val uri = Uri.parse(item.source)
             val reopen = Intent(ctx, OpenWithActivity::class.java).setAction(Intent.ACTION_VIEW).setDataAndType(uri, ctx.contentResolver.getType(uri))
                 .addFlags(Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_GRANT_READ_URI_PERMISSION)
             val tap = PendingIntent.getActivity(ctx, NOTIF, reopen, PendingIntent.FLAG_IMMUTABLE or PendingIntent.FLAG_UPDATE_CURRENT)
