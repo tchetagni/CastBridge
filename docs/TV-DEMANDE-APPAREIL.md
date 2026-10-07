@@ -28,6 +28,10 @@ Nom ou modèle de la TV, version, édition et durée, état d'activation ou de n
 - Ouverte à l'édition d'essai (une TV d'essai est précisément celle qu'on active).
 - Une TV plus ancienne répond 404 : le téléphone dit de mettre CastBridge-TV à jour.
 
+### La même demande sur une TV verrouillée (2026-10-07)
+
+Une TV **verrouillée** n'a pas cette route (403 « locked »). Elle en a une autre, `GET /api/activation/device-request` (`LockedActivationApi`, détail dans `docs/TV-ACTIVATION-CLE-USB.md`) : mêmes gardes que son installation de clé (code de connexion à 6 chiffres obligatoire, conditions d'usage, plafonds), réponse en `text/plain; charset=utf-8` au format « pour le serveur » : lignes `code=`, `k=`, `factor=` et `install_sig=`, **jamais `install=`**. Le téléphone la lit par le groupe Wi-Fi Direct d'activation de la TV (192.168.49.1) ou par le réseau local, et la parse avec le même `OwnerFrames.parseDeviceInfo`.
+
 ## L'écran du téléphone
 
 Nom : « Demande d'appareil de la TV ». Accès : bouton « Demande d'appareil » de la barre de l'écran d'accueil (à côté de « Activer la TV »), et menu « ⋮ » de la télécommande.
