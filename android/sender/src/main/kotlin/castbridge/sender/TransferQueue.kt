@@ -78,7 +78,12 @@ object TransferQueue {
             .onFailure { android.util.Log.w("TransferQueue", "file d'attente non relue", it) }
         loaded = true
         publish()
+        // R-22: the copies in the cache that no item needs any more (finished, cancelled, a restart during their copy) are deleted at start
+        runCatching { SourceAnchoring.purge(app, model.cacheReferenced(SourceAnchoring::cacheNameOf) + preparingNames()) }
     }
+
+    private fun preparingNames(): Set<String> = model.items().filter { it.preparing }.map { it.id.toString() }.toSet()
+    private fun purgeCache(app: Context) { runCatching { SourceAnchoring.purge(app, model.cacheReferenced(SourceAnchoring::cacheNameOf)) } }
 
     private fun readable(app: Context, uri: Uri): Boolean =
         runCatching { app.contentResolver.openFileDescriptor(uri, "r")!!.use { true } }.getOrDefault(false)
@@ -94,7 +99,7 @@ object TransferQueue {
             runCatching { ensure(app) }
             if (model.busy() && !pumping) {
                 _note.value = null
-                withContext(Dispatchers.Main) { model.items().firstOrNull { it.status == QueueStatus.WAITING }?.let { keepAlive(app, Uri.parse(it.uri)) } }
+                withContext(Dispatchers.Main) { model.items().firstOrNull { it.status == QueueStatus.WAITING }?.let { keepAlive(app, Uri.parse(it.source)) } }
                 pump(app)
             }
         }
@@ -118,6 +123,8 @@ object TransferQueue {
         val it = model.enqueue(uri.toString(), name, size, move, autoPlay, progressive, playOnTv, ordered, tvName, host, target, linkTv, force)
         credential?.takeIf { c -> c.isNotEmpty() }?.let { c -> credentials[it.id] = c }
         if (paused) { paused = false; _note.value = null }           // added from the app in front: the paused queue may go on (audit, minor 9)
+        // R-22: while the right to read exists, make the file readable for good (once, for a new item)
+        if (it.anchor == null) anchorNew(app, it, uri)
         publish()
         keepAlive(app, uri)
         pump(app)
@@ -133,12 +140,69 @@ object TransferQueue {
         // only the upload this queue launched for THIS file (never another screen's upload the file is still waiting for)
         if (QueueCancel.onCancel(before, launched) == QueueCancel.Action.STOP_UPLOAD) { UploadService.cancel(ctx); BtUploadService.cancel(ctx) }
         publish()
+        purgeCache(ctx.applicationContext)
+    }
+
+    /** R-22: the owner picked a file again (« Choisir le fichier »): it becomes the source of the failed item [id]; false when nothing waits for it. */
+    fun reanchor(ctx: Context, id: Long, uri: Uri): Boolean {
+        val app = ctx.applicationContext
+        ensure(app)
+        if (!model.reanchor(id, uri.toString())) return false
+        publish(); keepAlive(app, uri); paused = false; pump(app); return true
+    }
+
+    /** The items marked « à repartager » (nothing readable): the « Choisir le fichier » button and the grouped notification. */
+    fun toReshare(): List<QueueItem> = model.toReshare()
+
+    /**
+     * R-22: decides how the new item stays readable ([castbridge.core.tv.SourceAnchor], pure) and does it. (a) and (b) are quick and done here; (c) the
+     * copy to the cache runs in the background (« Préparation du fichier… n % », the item waits) — the queue service already holds the process;
+     * (d) fails the item at once with the reason (no loop, no automatic retry).
+     */
+    private fun anchorNew(app: Context, it: QueueItem, uri: Uri) {
+        when {
+            // already durable by nature: a MediaStore URI (READ_MEDIA_*), or a file of our own cache (« Copier quand même »)
+            uri.authority == "media" -> { model.setAnchor(it.id, castbridge.core.tv.Anchor.MEDIASTORE); return }
+            SourceAnchoring.isCacheUri(app, uri) -> { model.setAnchor(it.id, castbridge.core.tv.Anchor.CACHE, uri.toString()); return }
+            uri.scheme != "content" -> { model.setAnchor(it.id, castbridge.core.tv.Anchor.PERSISTED); return }
+        }
+        val persisted = SourceAnchoring.tryPersist(app, uri)
+        val media = if (persisted) null else SourceAnchoring.findInMediaStore(app, uri, it.name, it.size)
+        val free = SourceAnchoring.freeBytes(app)
+        when (castbridge.core.tv.SourceAnchor.choose(castbridge.core.tv.SourceAnchor.Facts(persisted, media != null, it.size, free))) {
+            castbridge.core.tv.Anchor.PERSISTED -> model.setAnchor(it.id, castbridge.core.tv.Anchor.PERSISTED)
+            castbridge.core.tv.Anchor.MEDIASTORE -> model.setAnchor(it.id, castbridge.core.tv.Anchor.MEDIASTORE, media.toString())
+            castbridge.core.tv.Anchor.CACHE -> prepareCopy(app, it, uri)
+            else -> {
+                model.reshare(it.id, CopyReport.failed(app, it, CopyStep.START, null, notify = false,
+                    text = castbridge.core.tv.ReshareTexts.notAnchored(it.uri, castbridge.core.tv.SourceAnchor.reshareReason(it.size))))
+                CopyReport.reshareNotice(app, null)
+            }
+        }
+    }
+
+    private fun prepareCopy(app: Context, it: QueueItem, uri: Uri) {
+        model.preparing(it.id, 0)
+        scope.launch(Dispatchers.IO) {
+            try {
+                val done = SourceAnchoring.copyToCache(app, it.id, uri, it.size, { model.item(it.id)?.status != QueueStatus.WAITING }) { pct -> model.preparing(it.id, pct); publish() }
+                if (done == null) { purgeCache(app); publish(); return@launch }          // cancelled meanwhile
+                model.setAnchor(it.id, castbridge.core.tv.Anchor.CACHE, done.toString())
+                publish(); pump(app)
+            } catch (e: Throwable) {
+                android.util.Log.w("TransferQueue", "préparation du fichier impossible", e)
+                val full = (e.message.orEmpty().contains("ENOSPC") || e.message.orEmpty().contains("No space"))
+                val text = if (full) castbridge.core.tv.ReshareTexts.notAnchored(it.uri, castbridge.core.tv.SourceAnchor.reshareReason(it.size)) else castbridge.core.tv.ReshareTexts.lost(it.uri)
+                model.reshare(it.id, CopyReport.failed(app, it, CopyStep.START, null, text = text, notify = false))
+                purgeCache(app); publish(); CopyReport.reshareNotice(app, null); pump(app)
+            }
+        }
     }
 
     /** « Réessayer » a failed file: it waits again at the end of the queue (its cause is cleared, the runner restarts if idle). */
     fun retry(ctx: Context, id: Long) {
         val app = ctx.applicationContext
-        if (model.retry(id)) { publish(); model.item(id)?.let { keepAlive(app, Uri.parse(it.uri)) }; paused = false; pump(app) }
+        if (model.retry(id)) { publish(); model.item(id)?.let { keepAlive(app, Uri.parse(it.source)) }; paused = false; pump(app) }
     }
 
     /**
@@ -149,15 +213,15 @@ object TransferQueue {
         val it = model.item(id) ?: return null
         model.dropNote(id)
         val t = runCatching {
-            add(ctx, Uri.parse(it.uri), it.name, it.size, it.move, it.autoPlay, it.progressive, playOnTv = false, ordered = it.ordered, tvName = it.tvName,
+            add(ctx, Uri.parse(it.source), it.name, it.size, it.move, it.autoPlay, it.progressive, playOnTv = false, ordered = it.ordered, tvName = it.tvName,
                 credential = credentials[id], host = it.host, target = it.target, force = true)
         }.getOrNull()
         publish()
         return t
     }
 
-    fun cancelWaiting() { model.cancelWaiting(); publish() }
-    fun clearFinished() { model.clearFinished(); publish() }
+    fun cancelWaiting(app: Context? = null) { model.cancelWaiting(); publish(); app?.let { purgeCache(it) } }
+    fun clearFinished(app: Context? = null) { model.clearFinished(); publish(); app?.let { purgeCache(it) } }
 
     /** Holds the read permission of the queued files and keeps the process alive while the queue is not empty. */
     private fun keepAlive(app: Context, uri: Uri) {
@@ -215,8 +279,16 @@ object TransferQueue {
         if (!model.start(item.id)) { publish(); return }            // cancelled between next() and here: never started
         publish()
         if (!waitForFreeTv(item)) return
-        val uri = Uri.parse(item.uri)
-        if (!readable(app, uri)) { model.finish(item.id, false, CopyReport.failed(app, item, CopyStep.START, null, reason = QueueTexts.SOURCE_LOST)); publish(); return }
+        var uri = Uri.parse(item.source)
+        if (!readable(app, uri)) {
+            // R-22: the grant is gone (provider not found, SecurityException, file missing): the same file in MediaStore (name + size, one match) before giving up
+            val again = SourceAnchoring.findAgain(app, item.name, item.size)
+            if (again != null) { model.setAnchor(item.id, castbridge.core.tv.Anchor.MEDIASTORE, again.toString()); publish(); uri = again }
+            else {
+                model.reshare(item.id, CopyReport.failed(app, item, CopyStep.START, null, text = castbridge.core.tv.ReshareTexts.lost(item.uri), cause = "FILE_UNREADABLE"))
+                publish(); return
+            }
+        }
         val launch: () -> Unit
         var viaBt = false
         var viaWd = false; var wdSince = 0L
@@ -291,7 +363,11 @@ object TransferQueue {
             when {
                 e is UploadService.Busy -> if (!waitForFreeTv(item)) return       // another screen started an upload meanwhile: it goes first, then this one
                 isBackgroundRefusal(e) -> { requeuePaused(item, QueueTexts.PAUSED_BACKGROUND); return }
-                else -> { model.finish(item.id, false, CopyReport.failed(app, item, CopyStep.START, null, e = e)); publish(); return }
+                else -> {
+                    val text = CopyReport.failed(app, item, CopyStep.START, null, e = e)
+                    if (castbridge.core.trust.UploadFailure.ofException(e).cause == castbridge.core.trust.UploadFailure.Cause.FILE_UNREADABLE) model.reshare(item.id, text) else model.finish(item.id, false, text)
+                    publish(); return
+                }
             }
         }
         launchedAttempt = item.attempts; launchedId = item.id
@@ -302,11 +378,12 @@ object TransferQueue {
         if (QueueCancel.afterLaunch(model.cancelAsked(item.id)) == QueueCancel.Action.STOP_UPLOAD) { UploadService.cancel(app); BtUploadService.cancel(app) }
         val outcome = watch(viaBt, item.id)
         when (castbridge.core.tv.QueueOutcome.of(outcome, model.cancelAsked(item.id), isBackgroundRefusal(outcome?.let { Exception(it) }))) {
-            castbridge.core.tv.QueueOutcome.Kind.CANCELLED -> model.finishCancelled(item.id)
+            castbridge.core.tv.QueueOutcome.Kind.CANCELLED -> { model.finishCancelled(item.id); purgeCache(app) }
             castbridge.core.tv.QueueOutcome.Kind.DONE -> {
                 model.finish(item.id, true)
                 CopyReport.succeeded(app, item)
                 credentials.remove(item.id)
+                purgeCache(app)                                      // R-22: the copy kept in the cache goes once the TV holds the file
                 // the name the TV holds (the assistant may have renamed it on the way), then « Titre / Saison » for a series
                 val held = (UploadService.state.value as? UploadService.State.Done)?.job?.fileName ?: item.name
                 val tvBase = afterBase
@@ -371,7 +448,7 @@ object TransferQueue {
      */
     private suspend fun contentDedupe(app: Context, item: QueueItem, base: String, cred: String?, sameName: Boolean = false): DedupRun = withContext(Dispatchers.IO) {
         val client = castbridge.core.tv.TvClient(base, cred)
-        val uri = Uri.parse(item.uri)
+        val uri = Uri.parse(item.source)
         val size = runCatching { app.contentResolver.openFileDescriptor(uri, "r")!!.use { it.statSize } }.getOrNull()?.takeIf { it > 0 } ?: item.size
         if (size <= 0) return@withContext DedupRun(if (sameName) Dedup.SAME_NAME_UNKNOWN else Dedup.COPY)
         val action = when {
@@ -394,7 +471,7 @@ object TransferQueue {
         model.setHash(item.id, sha)
         // the same-size files this queue already SENT: their hash too (once, kept with the queue), to recognise the same content under another name
         for (s in siblings) if (s.sha256 == null && s.status == QueueStatus.DONE && !cancelled())
-            hashUri(app, Uri.parse(s.uri), s.name, s.size, cancelled)?.let { model.setHash(s.id, it) }
+            hashUri(app, Uri.parse(s.source), s.name, s.size, cancelled)?.let { model.setHash(s.id, it) }
         if (cancelled()) return@withContext DedupRun(Dedup.CANCELLED)
         var tv = if (bySize is DedupDecision.Tv.Unsupported) bySize else ask(sha)
         // the TV hashes a same-size candidate first when it is asked about it: a short wait (longer for a MOVE: the TV re-reads its file), never a block

@@ -81,3 +81,24 @@ Mesuré sur le terrain (S21+ 1.2.49, TV 0.14.39, AVI 348 Mo, Wi-Fi TV à 300 Ko/
 | Ligne d'état | sous 1 Mo/s : « Wi-Fi de la TV lent : ~300 Ko/s · ~20 min restantes » (débit arrondi à 10 Ko/s, estimation absente au-delà de 48 h) ; bon débit mais confirmations en retard : « La TV écrit lentement (disque) » ; sinon « 74 % envoyés · 60 % confirmés » seulement si l'écart est d'au moins 2 points |
 
 Où la TV écrit les blocs partiels : dans `<dossier du volume cible>/.cbx/<id>.data` (le volume choisi par `StoragePolicy`, même volume que le fichier final : pas de stockage interne intermédiaire), dimensionné d'un coup sur ext4/f2fs (fichier creux : l'espace n'est PAS réservé, un disque qui se remplit en cours de copie répond « plus de place » 507, arrêt net) ; sur FAT/exFAT il grandit avec les blocs. L'espace libre n'est vérifié qu'au début (`ensureRoom`). Non mesuré sur appareil.
+
+## 11. D'où viennent les fichiers : droit de lecture et file qui survit (R-22, 2026-10-07)
+
+Un fichier envoyé par « Ouvrir avec CastBridge » depuis une autre application (Telegram : `content://org.telegram.messenger.provider/...`, ACTION_SEND avec FLAG_GRANT_READ_URI_PERMISSION) n'est lisible que tant que le droit temporaire vit ; il meurt avec le processus. Chaque élément de la file est donc ANCRÉ au moment de la mise en file (`SourceAnchor.choose`, règle pure testée), dans cet ordre :
+
+| Voie | Quand | Ce qui est lu ensuite |
+|---|---|---|
+| (a) persistable | `takePersistableUriPermission` réussit (ACTION_OPEN_DOCUMENT, Fichiers) | l'URI d'origine |
+| (b) MediaStore | même `_display_name` ET même `_size` dans Vidéos / Audio / Images / Téléchargements, et mêmes 64 Kio de début (`MediaMatch`) | `content://media/external/...` (lisible avec READ_MEDIA_VIDEO/AUDIO/IMAGES, API < 33 : READ_EXTERNAL_STORAGE) |
+| (c) copie dans le cache | fichier ≤ 25 % de l'espace libre et ≤ 2 Go (`CacheGuard`) | `cacheDir/queue/<id>` ; copie en arrière-plan, ligne « Préparation du fichier… n % » ; supprimée après envoi réussi ou annulation, copies orphelines purgées au démarrage |
+| (d) à repartager | rien de ce qui précède ne marche | rien : l'élément échoue avec la raison, sans boucle |
+
+L'URI d'origine est gardée en plus, pour l'affichage et la détection du même fichier. Pour Telegram, qui garde ses vidéos en stockage privé (mesuré : absentes de MediaStore), seule la voie (c) fonctionne ; (b) sert aux fichiers de la Galerie, des Téléchargements, de Fichiers.
+
+Permission média : `READ_MEDIA_VIDEO/AUDIO/IMAGES` sont déclarées au manifeste mais n'étaient jamais demandées. Elle est demandée UNE fois (préférence `media_perm_asked`), à la première mise en file d'un fichier non persistable, avec la phrase « CastBridge cherche ce fichier dans la galerie du téléphone pour le retrouver même après un redémarrage. » ; refus ou accord, la file continue (le refus laisse la voie (c)). Jamais MANAGE_EXTERNAL_STORAGE.
+
+Reprise : si l'ouverture échoue (SecurityException, fichier absent, fournisseur introuvable), un seul résultat MediaStore de même nom et même taille est tenté avant d'abandonner. Sinon : « Le téléphone n'a plus accès à ce fichier (partagé depuis Telegram) : rouvrez-le avec « Ouvrir avec CastBridge » », bouton « Choisir le fichier » (`ReselectActivity`, ACTION_OPEN_DOCUMENT multiple, droit persistant ; chaque fichier choisi est relié à l'élément du même nom ; Android ne permet pas de pré-remplir le sélecteur sur un nom, les noms sont dits dans un message). Le canal `queue-refused` n'émet qu'UNE notification (identifiant 13, mise à jour) : « 5 fichiers à repartager ».
+
+`<queries>` (Android 11+, visibilité des paquets) : inutile ici. Tant que le droit existe, l'URI donne l'accès au fournisseur sans le déclarer ; une fois le droit mort, `<queries>` ne rendrait pas le droit de lire, seulement la visibilité du paquet. Aucun `<queries>` n'est donc ajouté pour Telegram (le bloc existant ne sert qu'aux applications de télécommande).
+
+Non mesuré : tout ce chapitre sur appareil (voir P-76).

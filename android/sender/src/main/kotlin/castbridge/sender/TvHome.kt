@@ -563,19 +563,21 @@ fun TransferQueueCard() {
                             Text((if (n > 0) "$n. " else "") + LibraryLogic.title(q.name), maxLines = 1, overflow = TextOverflow.Ellipsis, style = MaterialTheme.typography.bodyMedium)
                             Text(when (q.status) {
                                 castbridge.core.tv.QueueStatus.RUNNING -> "En cours$kind"
-                                castbridge.core.tv.QueueStatus.WAITING -> "En attente$kind" + if (q.size > 0) " · ${formatSize(q.size)}" else ""
+                                castbridge.core.tv.QueueStatus.WAITING -> if (q.preparing) castbridge.core.tv.ReshareTexts.preparing(q.prep) else "En attente$kind" + if (q.size > 0) " · ${formatSize(q.size)}" else ""
                                 castbridge.core.tv.QueueStatus.DONE -> q.note ?: "Terminé"
-                                else -> q.error?.let { if (it.startsWith("Échec") || it.startsWith("Copie ")) it else "Échec : $it" } ?: "Échec : envoi interrompu"
+                                else -> q.error?.let { if (it.startsWith("Échec") || it.startsWith("Copie ") || q.anchor == castbridge.core.tv.Anchor.RESHARE) it else "Échec : $it" } ?: "Échec : envoi interrompu"
                             }, style = MaterialTheme.typography.bodySmall, color = if (q.status == castbridge.core.tv.QueueStatus.FAILED) cs.error else cs.onSurfaceVariant)
                         }
-                        if (q.status == castbridge.core.tv.QueueStatus.FAILED) TextButton(onClick = { TransferQueue.retry(ctx, q.id) }) { Text("Réessayer") }
+                        if (q.status == castbridge.core.tv.QueueStatus.FAILED && q.anchor == castbridge.core.tv.Anchor.RESHARE)
+                            TextButton(onClick = { ctx.startActivity(android.content.Intent(ctx, ReselectActivity::class.java)) }) { Text(castbridge.core.tv.ReshareTexts.PICK_BUTTON) }
+                        else if (q.status == castbridge.core.tv.QueueStatus.FAILED) TextButton(onClick = { TransferQueue.retry(ctx, q.id) }) { Text("Réessayer") }
                         else if (q.status == castbridge.core.tv.QueueStatus.DONE) TextButton(onClick = { TransferQueue.copyAnyway(ctx, q.id) }) { Text(castbridge.core.tv.DedupTexts.COPY_ANYWAY) }
                         else TextButton(onClick = { TransferQueue.cancel(ctx, q.id) }) { Text("Annuler") }
                     }
                 }
                 Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
-                    if (waiting > 1) TextButton(onClick = { TransferQueue.cancelWaiting() }) { Text("Annuler les envois en attente") }
-                    if (shownQueue.any { it.status == castbridge.core.tv.QueueStatus.FAILED || it.status == castbridge.core.tv.QueueStatus.DONE }) TextButton(onClick = { TransferQueue.clearFinished() }) { Text("Effacer les terminés") }
+                    if (waiting > 1) TextButton(onClick = { TransferQueue.cancelWaiting(ctx) }) { Text("Annuler les envois en attente") }
+                    if (shownQueue.any { it.status == castbridge.core.tv.QueueStatus.FAILED || it.status == castbridge.core.tv.QueueStatus.DONE }) TextButton(onClick = { TransferQueue.clearFinished(ctx) }) { Text("Effacer les terminés") }
                 }
             }
         }
