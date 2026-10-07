@@ -2,6 +2,7 @@ package castbridge.sender
 
 import android.content.Context
 import castbridge.core.connect.KeyValueStore
+import castbridge.core.relay.PipeNeed
 import castbridge.core.trust.TrustRegistry
 
 /**
@@ -32,17 +33,18 @@ class RelaySettings(ctx: Context) {
     }
 
     /** La session en cours d'un tuyau automatique, pour que le système, s'il tue puis relance le service, le reprenne (START_STICKY) tant que l'activité est récente. */
-    class Session(val address: String, val name: String, val limitBytes: Long?, val metered: Boolean, val lastActivityAt: Long)
+    class Session(val address: String, val name: String, val limitBytes: Long?, val metered: Boolean, val lastActivityAt: Long, val need: PipeNeed? = null)
 
     fun saveSession(s: Session) {
         sp.edit().putString("session.address", s.address).putString("session.name", s.name).putLong("session.limit", s.limitBytes ?: -1L)
-            .putBoolean("session.metered", s.metered).putLong("session.activity", s.lastActivityAt).commit()
+            .putBoolean("session.metered", s.metered).putLong("session.activity", s.lastActivityAt).apply { if (s.need == null) remove("session.need") else putString("session.need", s.need.wire) }.commit()
     }
 
     fun loadSession(): Session? {
         val a = sp.getString("session.address", null) ?: return null
-        return Session(a, sp.getString("session.name", null) ?: "la TV", sp.getLong("session.limit", -1L).takeIf { it >= 0 }, sp.getBoolean("session.metered", false), sp.getLong("session.activity", 0L))
+        return Session(a, sp.getString("session.name", null) ?: "la TV", sp.getLong("session.limit", -1L).takeIf { it >= 0 }, sp.getBoolean("session.metered", false), sp.getLong("session.activity", 0L),
+            PipeNeed.of(sp.getString("session.need", null)))
     }
 
-    fun clearSession() { sp.edit().remove("session.address").remove("session.name").remove("session.limit").remove("session.metered").remove("session.activity").commit() }
+    fun clearSession() { sp.edit().remove("session.address").remove("session.name").remove("session.limit").remove("session.metered").remove("session.activity").remove("session.need").commit() }
 }

@@ -213,7 +213,7 @@ object LotsRuntime {
     private fun transport(): LotTransport? {
         val tv = TvLinkManager.saved.default() ?: return null
         val session = (TvLinkManager.state.value as? LinkUi.Connected)?.session?.takeIf { it.tv.address == tv.address }
-        val cred = session?.credential ?: TvLinkManager.credentialFor("bt:${tv.address}")
+        val cred = session?.credential ?: TvLinkManager.credentialFor(castbridge.core.trust.PinKeys.btKey(tv.address))
         val base = session?.base ?: tv.lastIps.firstOrNull { TvLinkManager.reachable("http://$it:${tv.port}") }?.let { "http://$it:${tv.port}" }
         if (base != null && cred != null) return HttpLotTransport(base, cred, label = session?.route?.label ?: "Wi-Fi")
         return Cbt1LotTransport(TvAuth.btPin(cred), { AndroidBtTransport(app).connect(tv.address) })    // a trusted phone needs no PIN over the paired link
@@ -330,15 +330,17 @@ class LotsDeliverJob : JobService() {
     override fun onStopJob(p: JobParameters): Boolean { thread?.interrupt(); return true }
 }
 
-/** Wakes the delivery when the TV's Bluetooth link comes up (ACL connected), without opening the app. Not exported: only the system sends it. */
+/**
+ * Wakes the delivery when the TV's Bluetooth link comes up (ACL connected), without opening the app. EXPORTED (R-31, audit I-9: the broadcast comes from the Bluetooth app, uid 1002, which a
+ * non-exported receiver never hears); both actions are the system's protected broadcasts and anything else is ignored ([castbridge.core.link.BluetoothWake.accepts]).
+ */
 class LotsTriggerReceiver : BroadcastReceiver() {
     override fun onReceive(c: Context, i: Intent) {
-        if (i.action == android.bluetooth.BluetoothDevice.ACTION_ACL_CONNECTED || i.action == Intent.ACTION_BOOT_COMPLETED) {
-            LotsRuntime.init(c)
-            if (i.action == Intent.ACTION_BOOT_COMPLETED) LotsRuntime.schedule(c)
-            val tv = TvLinkManager.saved.default()
-            val dev = @Suppress("DEPRECATION") i.getParcelableExtra<android.bluetooth.BluetoothDevice>(android.bluetooth.BluetoothDevice.EXTRA_DEVICE)
-            if (i.action == Intent.ACTION_BOOT_COMPLETED || (tv != null && dev?.address.equals(tv.address, ignoreCase = true))) LotsRuntime.requestDelivery(c)
-        }
+        if (!castbridge.core.link.BluetoothWake.accepts(castbridge.core.link.BluetoothWake.Receiver.LOTS, i.action)) return
+        LotsRuntime.init(c)
+        if (i.action == Intent.ACTION_BOOT_COMPLETED) LotsRuntime.schedule(c)
+        val tv = TvLinkManager.saved.default()
+        val dev = @Suppress("DEPRECATION") i.getParcelableExtra<android.bluetooth.BluetoothDevice>(android.bluetooth.BluetoothDevice.EXTRA_DEVICE)
+        if (i.action == Intent.ACTION_BOOT_COMPLETED || (tv != null && dev?.address.equals(tv.address, ignoreCase = true))) LotsRuntime.requestDelivery(c)
     }
 }

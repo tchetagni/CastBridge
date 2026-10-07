@@ -23,10 +23,13 @@ import castbridge.core.relay.RelayFrames
 import castbridge.core.relay.RelayInput
 import castbridge.core.relay.RelayMeter
 import castbridge.core.relay.RelayPolicy
+import castbridge.core.link.BluetoothWake
 import castbridge.core.relay.RelayReason
+import castbridge.core.relay.RelaySync
+import castbridge.core.relay.meteredFlag
+import castbridge.core.trust.PinKeys
 import castbridge.core.trust.SavedTv
 import castbridge.core.trust.TrustRegistry
-import castbridge.core.trust.TvAuth
 import castbridge.core.tunnel.BtConnectLock
 import java.io.IOException
 import java.util.UUID
@@ -139,11 +142,8 @@ object RelayRuntime {
         }
     }
 
-    private fun currentState(ctx: Context): RelayFrames.State {
-        val net = phoneNet(ctx)
-        val metered = if (net == PhoneNet.NONE) null else net == PhoneNet.METERED
-        return RelayFrames.State(if (BtGatewayService.running) RelayFrames.Phase.OPEN else RelayFrames.Phase.IDLE, metered = metered)
-    }
+    private fun currentState(ctx: Context): RelayFrames.State =
+        RelayFrames.State(if (BtGatewayService.running) RelayFrames.Phase.OPEN else RelayFrames.Phase.IDLE, metered = phoneNet(ctx).meteredFlag())
 
     /** Un seul `connect()` à la fois vers une même TV, comme le tunnel d'API et la télécommande : le verrou est partagé ([BtConnectLock]). */
     private fun connectOwner(ad: BluetoothAdapter, address: String): BluetoothSocket {
@@ -157,20 +157,22 @@ object RelayRuntime {
     /** La politique de coût et de retrait ([RelayPolicy], testée en JVM) puis, si elle dit oui, le démarrage silencieux. Rend l'état à dire à la TV. */
     private fun decideAndStart(ctx: Context, tv: SavedTv, ask: RelayFrames.Ask): RelayFrames.State {
         val address = TrustRegistry.norm(tv.address)
-        val credential = runCatching { PinStore(ctx).get(address, tv.name) }.getOrDefault("")
+        // R-30 (audit B2): the code of a TV known by its Bluetooth address is kept under « bt:<ADDRESS> » ([PinKeys.btKey]), never under the bare address (which finds nothing)
+        val credential = runCatching { PinStore(ctx).get(PinKeys.btKey(address), tv.name) }.getOrDefault("")
         val net = phoneNet(ctx)
         val withdrawn = settings.optedOut(address) || System.currentTimeMillis() < settings.snoozedUntil(address)
         val need = ask.needs.firstOrNull { it.bulk } ?: ask.needs.firstOrNull()
         val decision = RelayPolicy.decide(RelayInput(
-            synced = TvAuth.isUsable(credential), optedOut = withdrawn, net = net, allowMobile = settings.allowMobile,
+            // a TV the phone has SAVED is synchronized even when its token expired (a phone woken after 12 h): the TV checks the trust again at the gateway HELLO
+            synced = RelaySync.synced(TvLinkManager.saved.get(address), credential), optedOut = withdrawn, net = net, allowMobile = settings.allowMobile,
             usedTodayBytes = meter.usedToday(), need = need,
         ))
-        val metered = if (net == PhoneNet.NONE) null else net == PhoneNet.METERED
+        val metered = net.meteredFlag()
         return when (decision) {
             is RelayDecision.Refuse -> RelayFrames.State(RelayFrames.Phase.REFUSED, decision.reason, metered)
             is RelayDecision.Open ->
                 if (BtGatewayService.running) RelayFrames.State(RelayFrames.Phase.OPEN, metered = metered)
-                else if (BtGatewayService.startAuto(ctx, address, tv.name, decision.limitBytes, metered == true))
+                else if (BtGatewayService.startAuto(ctx, address, tv.name, decision.limitBytes, metered == true, need))
                     RelayFrames.State(RelayFrames.Phase.OPENING, metered = metered, leftKb = decision.limitBytes?.let { it / 1024 })
                 else RelayFrames.State(RelayFrames.Phase.REFUSED, RelayReason.BACKGROUND, metered)    // Android refuse un service au premier plan depuis l'arrière-plan
         }
@@ -209,12 +211,13 @@ object RelayRuntime {
 }
 
 /**
- * Manifeste, non exporté : la diffusion système « appareil Bluetooth connecté » d'une TV enregistrée réveille CastBridge même fermé (comme le font déjà la reprise de la liaison et la
- * livraison des lots) : la TV qui veut un tuyau frappe à la porte du téléphone, qui vient lire sa demande.
+ * Manifeste, EXPORTÉ (R-31, audit I-9 : « appareil Bluetooth connecté » vient de l'application Bluetooth d'Android, uid 1002 : un récepteur non exporté ne la reçoit jamais) : la diffusion
+ * système « appareil Bluetooth connecté » d'une TV enregistrée réveille CastBridge même fermé : la TV qui veut un tuyau frappe à la porte du téléphone, qui vient lire sa demande.
+ * Sans danger : cette diffusion est protégée (aucune application ne peut l'envoyer) et `onReceive` ne traite que cette action ([BluetoothWake.accepts]), d'une TV enregistrée seulement.
  */
 class RelayWakeReceiver : BroadcastReceiver() {
     override fun onReceive(c: Context, i: Intent) {
-        if (i.action != BluetoothDevice.ACTION_ACL_CONNECTED) return
+        if (!BluetoothWake.accepts(BluetoothWake.Receiver.RELAY, i.action)) return
         @Suppress("DEPRECATION")
         val dev = i.getParcelableExtra<BluetoothDevice>(BluetoothDevice.EXTRA_DEVICE) ?: return
         val app = c.applicationContext

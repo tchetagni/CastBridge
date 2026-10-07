@@ -15,8 +15,10 @@ import castbridge.core.remote.OpenTvLink
 import castbridge.core.remote.OpenTvOutcome
 import castbridge.core.remote.OpenTvRoute
 import castbridge.core.remote.OpenTvRoutes
+import castbridge.core.remote.OpenTvSessionLink
 import castbridge.core.remote.OpenTvWire
 import castbridge.core.remote.RemoteBt
+import castbridge.core.trust.PinKeys
 import castbridge.core.trust.SavedTv
 import castbridge.core.trust.TvAuth
 import castbridge.core.tv.BtProtocol
@@ -89,6 +91,12 @@ object OpenTv {
     fun isLink(uri: Uri?): Boolean = uri != null && uri.scheme == SCHEME && uri.host == HOST
 
     /**
+     * R-34 (audit I-15): the intent that launched [MainActivity] is not a gesture (the activity was recreated, or the user came back through the recent apps): the link is taken out of it
+     * WITHOUT opening anything. Android keeps the ORIGINAL intent of a task and gives it back after the death of the process: consuming the link in memory only (see [handleLink]) was not enough.
+     */
+    fun discardLink(intent: Intent?) { if (isLink(intent?.data)) intent?.data = null }
+
+    /**
      * Appelé par [MainActivity] : le raccourci « Ouvrir CastBridge-TV » (res/xml/shortcuts.xml) ou `castbridge://open-tv[?screen=library]`. Vrai quand l'intention en était une
      * (elle est alors consommée : une rotation de l'écran ne relance rien). Le résultat est dit par un message court, et par la ligne de l'onglet « CastBridge TV ».
      * CastBridge-TV déjà devant : on ouvre la télécommande, comme le bouton de l'onglet.
@@ -139,7 +147,7 @@ internal object OpenTvTargets {
         val bt = rp.btFallback
         val manual = rp.manualHost?.takeIf { name?.startsWith("manual:") == true }
         if (name == null && bt == null && manual == null) return OpenTvTarget(false, emptyList())
-        val key = when { manual != null -> "$manual:${rp.manualPort}"; name == "bt" && bt != null -> "bt:$bt"; else -> name ?: "bt:$bt" }
+        val key = when { manual != null -> "$manual:${rp.manualPort}"; name == "bt" && bt != null -> PinKeys.btKey(bt); else -> name ?: bt?.let { PinKeys.btKey(it) } }
         val pin = pins.get(key).takeIf { TvAuth.isUsable(it) }
         val lan = listOfNotNull(manual?.let { "http://$it:${rp.manualPort}" }, name?.let { UploadService.hintFor(it) }, name?.let { runCatching { UploadService.addressMemory(ctx).recall(it) }.getOrNull() },
             home.host?.let { "http://$it:${ReceiverServer.PORT}" }).firstOrNull { TvEndpointResolver.kindOf(it) != EndpointKind.BLUETOOTH }
@@ -153,7 +161,8 @@ internal object OpenTvTargets {
         return OpenTvTarget(true, c.routes.map { r ->
             when (r) {
                 OpenTvRoute.LAN -> OpenTvHttpLink(r, lan!!, credential)
-                OpenTvRoute.BLUETOOTH -> BtOpenLink(ctx, btAddress!!, credential)
+                // R-35 (audit I-14): the remote's own Bluetooth link to this TV, when it is up, carries the command; a second link to the same service would be refused
+                OpenTvRoute.BLUETOOTH -> OpenTvSessionLink(live = { RemoteController.liveBluetooth(btAddress!!) }, fresh = BtOpenLink(ctx, btAddress!!, credential))
                 OpenTvRoute.TUNNEL -> OpenTvHttpLink(r, tunnel!!, credential)
             }
         })

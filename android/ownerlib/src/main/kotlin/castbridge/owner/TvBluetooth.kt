@@ -122,7 +122,8 @@ object TvBluetooth {
             throw IllegalStateException("La TV est jointe mais n'annonce pas le canal d'activation (${offered.count { it.startsWith(CB_PREFIX, true) }} service(s) CastBridge). Ouvrez CastBridge-TV (0.14.4 ou plus) : l'écran d'activation affiche « Bluetooth d'activation : prêt ».")
         val sock = dev.createRfcommSocketToServiceRecord(UUID.fromString(OwnerFrames.SERVICE_UUID))
         try {
-            try { sock.connect() } catch (e: java.io.IOException) {
+            // R-32 (audit I-10): one connect() at a time to the same TV (the lock of the trusted link, the remote, the pipe…): the activation by Bluetooth no longer collides with them
+            try { synchronized(castbridge.core.tunnel.BtConnectLock.of(tv.address)) { sock.connect() } } catch (e: java.io.IOException) {
                 android.util.Log.w("CbOwnerBt", "connect: ${e.message}")
                 throw IllegalStateException("Connexion impossible : ouvrez CastBridge-TV (version 0.14.2 ou plus) sur la TV, puis réessayez")
             }

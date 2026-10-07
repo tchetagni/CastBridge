@@ -21,6 +21,8 @@ import castbridge.core.remote.RemoteSession
 import castbridge.core.remote.RemoteTarget
 import castbridge.core.remote.RemoteTransport
 import castbridge.core.remote.TextMode
+import castbridge.core.trust.PinKeys
+import castbridge.core.trust.TrustRegistry
 import castbridge.core.tv.BtProtocol
 import castbridge.core.tv.ReceiverServer
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -31,7 +33,7 @@ import java.util.UUID
 /** The TV the remote talks to: found by mDNS (name), typed by hand (host), and/or a paired Bluetooth TV as a fallback. */
 data class RemoteTv(val name: String, val host: String?, val port: Int = ReceiverServer.PORT, val btAddress: String? = null) {
     /** Key of the PIN in [PinStore] (TV name for mDNS TVs, "host:port" for a typed address, "bt:<address>" for Bluetooth only). */
-    val pinKey: String get() = when { host == null && btAddress != null -> "bt:$btAddress"; name.startsWith("manual:") -> "$host:$port"; else -> name }
+    val pinKey: String get() = when { host == null && btAddress != null -> PinKeys.btKey(btAddress); name.startsWith("manual:") -> "$host:$port"; else -> name }
     val label: String get() = when {
         name.startsWith("manual:") -> "$host"
         host == null -> "Bluetooth"
@@ -152,6 +154,17 @@ object RemoteController {
 
     /** A session exists (connected or retrying): the background service keeps it alive. */
     val hasSession: Boolean get() = session != null
+
+    /**
+     * R-35 (audit I-14): the Bluetooth link the remote already holds to the TV at [address], while it is up, or null (no session, another TV, Wi-Fi link, link down). « Ouvrir sur la TV »
+     * (touche « TV », [OpenTvSessionLink]) sends its `open` command on it: a second RFCOMM link to the same service is refused by the TV, which made the TV look off while the remote worked.
+     */
+    fun liveBluetooth(address: String): RemoteTransport? {
+        val cur = current ?: return null
+        val sessionAddress = cur.first.btAddress ?: cur.third ?: return null
+        if (TrustRegistry.norm(sessionAddress) != TrustRegistry.norm(address)) return null
+        return session?.liveTransport()
+    }
 
     val connected: Boolean get() = SmartRemote.handles() || session != null && _status.value.link == RemoteSession.Link.CONNECTED
 

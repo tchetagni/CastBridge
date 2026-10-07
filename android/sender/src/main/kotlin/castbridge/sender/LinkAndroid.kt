@@ -214,9 +214,13 @@ class LinkJobService : JobService() {
     }
 }
 
-/** Manifest-registered, not exported: system broadcasts about the Bluetooth link of a phone that has a TV saved start one quick job. */
+/**
+ * Manifest-registered, EXPORTED (R-31, audit I-9: « device connected » comes from the Bluetooth app, uid 1002; a non-exported receiver never gets it): system broadcasts about the Bluetooth
+ * link of a phone that has a TV saved start one quick job. Only the system's protected broadcasts act ([BluetoothWake.accepts]).
+ */
 class LinkWakeReceiver : BroadcastReceiver() {
     override fun onReceive(c: Context, i: Intent) {
+        if (!castbridge.core.link.BluetoothWake.accepts(castbridge.core.link.BluetoothWake.Receiver.LINK, i.action)) return
         val app = c.applicationContext
         TvLinkManager.init(app)
         if (TvLinkManager.saved.list().isEmpty()) return

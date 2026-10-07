@@ -19,7 +19,10 @@ import castbridge.core.gateway.Exit
 import castbridge.core.gateway.GatewayService
 import castbridge.core.gateway.Mux
 import castbridge.core.relay.IdleStop
+import castbridge.core.relay.MeteredAnnouncer
 import castbridge.core.relay.PhoneNet
+import castbridge.core.relay.PipeNeed
+import castbridge.core.relay.RelayCost
 import castbridge.core.relay.RelayDecision
 import castbridge.core.relay.RelayDialer
 import castbridge.core.relay.RelayFrames
@@ -28,6 +31,8 @@ import castbridge.core.relay.RelayMeter
 import castbridge.core.relay.RelayPolicy
 import castbridge.core.relay.RelayReason
 import castbridge.core.relay.RelayText
+import castbridge.core.relay.meteredFlag
+import castbridge.core.trust.PinKeys
 import castbridge.core.trust.TvAuth
 import castbridge.core.tunnel.BtConnectLock
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -57,8 +62,12 @@ class BtGatewayService : Service() {
     @Volatile private var sock: BluetoothSocket? = null
     @Volatile private var run: Run? = null
 
-    /** One run of the pipe. [auto] = opened by the TV's request; [limitBytes] = what the cost policy allowed at the start (null = no ceiling); [metered] = the phone's network was metered at the start. */
-    private class Run(val address: String, val name: String, val auto: Boolean, val limitBytes: Long?, val metered: Boolean)
+    /**
+     * One run of the pipe. [auto] = opened by the TV's request; [limitBytes] = what the cost policy allowed at the start (null = no ceiling); [metered] = the phone's network was metered at the start;
+     * [need] = what the TV asked the pipe for (R-33 / audit I-13: the watchdog judges the cost policy with it, so a pipe opened for a big download on Wi-Fi stops when the phone moves to mobile data
+     * instead of eating the 5 MB of the day kept for the game and the wallet).
+     */
+    private class Run(val address: String, val name: String, val auto: Boolean, val limitBytes: Long?, val metered: Boolean, val need: PipeNeed?)
 
     /** What the TV may open from here: the project's hosts on their ports, nothing of the phone's own network (castbridge.core.relay.RelayScope). */
     private val dialer = RelayDialer(
@@ -81,6 +90,7 @@ class BtGatewayService : Service() {
         val name = intent?.getStringExtra(EXTRA_NAME) ?: resumed?.name ?: TvLinkManager.saved.get(address)?.name ?: "la TV"
         val limit = intent?.getLongExtra(EXTRA_LIMIT, -1L)?.takeIf { it >= 0 } ?: resumed?.limitBytes
         val metered = intent?.getBooleanExtra(EXTRA_METERED, false) ?: resumed?.metered ?: false
+        val need = intent?.getStringExtra(EXTRA_NEED)?.let { PipeNeed.of(it) } ?: resumed?.need
         try {
             val n = notification(name)
             if (Build.VERSION.SDK_INT >= 29) startForeground(NOTIF, n, ServiceInfo.FOREGROUND_SERVICE_TYPE_CONNECTED_DEVICE) else startForeground(NOTIF, n)
@@ -91,10 +101,10 @@ class BtGatewayService : Service() {
             stopSelf(); return START_NOT_STICKY
         }
         stopping = false
-        val r = Run(address, name, auto, limit, metered)
+        val r = Run(address, name, auto, limit, metered, need)
         run = r
         running = true
-        if (auto) RelayRuntime.settings(this).saveSession(RelaySettings.Session(address, name, limit, metered, System.currentTimeMillis()))
+        if (auto) RelayRuntime.settings(this).saveSession(RelaySettings.Session(address, name, limit, metered, System.currentTimeMillis(), need))
         worker = thread(name = "bt-gateway") { loop(r, pin) }
         return if (auto) START_STICKY else START_NOT_STICKY
     }
@@ -121,10 +131,19 @@ class BtGatewayService : Service() {
         }
     }
 
+    /**
+     * R-33 (audit I-13): tells the TV, on its owner channel (RELAY_STATE), whether the phone's network is billed: after every handshake (the TV forgets it at each disconnection) and at
+     * each change while the pipe is up. Best effort, rate-limited by [MeteredAnnouncer]; an unknown network says nothing (the TV then counts it as billed).
+     */
+    private fun announce(r: Run, a: MeteredAnnouncer, net: PhoneNet) {
+        a.next(net, System.currentTimeMillis())?.let { RelayRuntime.report(this, r.address, it) }
+    }
+
     private fun loop(r: Run, manualPin: String?) {
         val adapter = getSystemService(BluetoothManager::class.java)?.adapter
         var backoff = 1000L
-        val choice = GatewayService.PhoneChoice()            // remembers « old TV » for a while (R-28)
+        val choice = GatewayService.PhoneChoice()            // remembers « old TV » for a while (R-28), once the gateway HELLO was answered (R-36)
+        val announcer = MeteredAnnouncer()                   // what the TV was told about the phone's network during this run (R-33)
         val idle = IdleStop(start = System.currentTimeMillis())
         while (!stopping) {
             if (r.auto && idle.expired(System.currentTimeMillis())) { Log.i(TAG, "idle: the pipe closes"); break }
@@ -140,9 +159,12 @@ class BtGatewayService : Service() {
                 val t0 = System.currentTimeMillis()
                 active = true
                 // automatic: the credential is read from the phone's own keeping (the PIN typed once, or the trust token) each time, never carried in an Intent
-                val credential = manualPin ?: runCatching { PinStore(applicationContext).get(r.address, r.name) }.getOrDefault("")
-                val exit = Exit(mux, TvAuth.btPin(credential), connect = dialer::connect, log = { Log.i(TAG, it) }, diag = ::runDiag)
-                val watch = if (r.auto) watchdog(r, mux, exit, idle) else null
+                // R-30: a TV known by its Bluetooth address keeps its code under « bt:<ADDRESS> » (PinKeys.btKey), not under the bare address
+                val credential = manualPin ?: runCatching { PinStore(applicationContext).get(PinKeys.btKey(r.address), r.name) }.getOrDefault("")
+                val exit = Exit(mux, TvAuth.btPin(credential), connect = dialer::connect, log = { Log.i(TAG, it) }, diag = ::runDiag,
+                    // the TV answered HELLO_OK: this connection IS its gateway (R-36: only now an old UUID means an old TV) and it forgot the phone's network (R-33: say it again)
+                    onHello = { choice.helloAnswered(); announcer.connected(); announce(r, announcer, RelayRuntime.phoneNet(this)) })
+                val watch = if (r.auto) watchdog(r, mux, exit, idle, announcer) else null
                 try {
                     exit.run()
                 } finally {
@@ -171,7 +193,7 @@ class BtGatewayService : Service() {
      * Every 5 s while an automatic pipe is linked: counts the bytes on a metered network (REL-F7), re-judges the cost policy (the network may have become metered, the daily cap reached,
      * the relay withdrawn for this TV), closes the pipe 10 minutes after the last connection, and keeps the session fresh for a restart by the system. Stops with the reason told to the TV.
      */
-    private fun watchdog(r: Run, mux: Mux, exit: Exit, idle: IdleStop): Thread = thread(name = "bt-gateway-watch", isDaemon = true) {
+    private fun watchdog(r: Run, mux: Mux, exit: Exit, idle: IdleStop, announcer: MeteredAnnouncer): Thread = thread(name = "bt-gateway-watch", isDaemon = true) {
         val settings = RelayRuntime.settings(this)
         val meter: RelayMeter = RelayRuntime.meter(this)
         var last = mux.received.get() + mux.sent.get()
@@ -184,13 +206,16 @@ class BtGatewayService : Service() {
                 val total = mux.received.get() + mux.sent.get()
                 val delta = (total - last).coerceAtLeast(0L); last = total
                 val net = RelayRuntime.phoneNet(this)
-                if (net == PhoneNet.METERED && !settings.allowMobile) meter.add(delta)         // framing included: a few per cent more than what the carrier counts
+                // framing included: a few per cent more than what the carrier counts ; a network that is not SURELY free counts (R-33: unknown = billed, e.g. mobile data not yet validated)
+                if (RelayCost.countsAgainstCap(net, settings.allowMobile)) meter.add(delta)
+                announce(r, announcer, net)                                                    // the phone moved from Wi-Fi to mobile data (or back): the TV must know (REL-F7)
                 idle.update(now, exit.openStreams, total)
                 offlineSince = if (net == PhoneNet.NONE) (if (offlineSince == 0L) now else offlineSince) else 0L
                 if ((exit.openStreams > 0 || delta >= IdleStop.NOISE_BYTES) && now - savedAt >= 60_000L) {
-                    savedAt = now; settings.saveSession(RelaySettings.Session(r.address, r.name, r.limitBytes, r.metered, now))
+                    savedAt = now; settings.saveSession(RelaySettings.Session(r.address, r.name, r.limitBytes, r.metered, now, r.need))
                 }
-                val d = RelayPolicy.decide(RelayInput(synced = true, optedOut = settings.optedOut(r.address), net = net, allowMobile = settings.allowMobile, usedTodayBytes = meter.usedToday()))
+                // judged with the need the pipe was opened for (R-33): a big download opened on Wi-Fi stops on mobile data instead of eating the cap kept for the game and the wallet
+                val d = RelayPolicy.decide(RelayInput(synced = true, optedOut = settings.optedOut(r.address), net = net, allowMobile = settings.allowMobile, usedTodayBytes = meter.usedToday(), need = r.need))
                 val why: RelayReason? = when {
                     d is RelayDecision.Refuse && d.reason != RelayReason.OFFLINE -> d.reason
                     offlineSince != 0L && now - offlineSince > 2 * 60_000L -> RelayReason.OFFLINE
@@ -198,7 +223,7 @@ class BtGatewayService : Service() {
                 }
                 if (why != null) {
                     Log.i(TAG, "pipe stopped: ${why.wire}")
-                    RelayRuntime.report(this, r.address, RelayFrames.State(RelayFrames.Phase.REFUSED, why, net == PhoneNet.METERED))
+                    RelayRuntime.report(this, r.address, RelayFrames.State(RelayFrames.Phase.REFUSED, why, net.meteredFlag()))
                     stopping = true; runCatching { sock?.close() }
                     return@thread
                 }
@@ -261,6 +286,7 @@ class BtGatewayService : Service() {
         private const val EXTRA_AUTO = "auto"
         private const val EXTRA_LIMIT = "limit"
         private const val EXTRA_METERED = "metered"
+        private const val EXTRA_NEED = "need"
         private const val ACTION_STOP = "castbridge.sender.GATEWAY_STOP"
         private val _state = MutableStateFlow("Partage inactif")
         /** A TV is using the phone's Internet right now (reported to the server as btGateway). */
@@ -278,10 +304,10 @@ class BtGatewayService : Service() {
          * relay-R1: the TV asked for a pipe and the policy allowed it: starts the service silently (no credential in the Intent: the service reads it from the phone's own keeping).
          * False when Android refuses to start a foreground service from the background (the phone then answers « background » to the TV).
          */
-        fun startAuto(ctx: Context, tvAddress: String, tvName: String, limitBytes: Long?, metered: Boolean): Boolean = try {
+        fun startAuto(ctx: Context, tvAddress: String, tvName: String, limitBytes: Long?, metered: Boolean, need: PipeNeed?): Boolean = try {
             PhoneConnect.feature("bt_gateway")
             ctx.startForegroundService(Intent(ctx, BtGatewayService::class.java).putExtra(EXTRA_ADDR, tvAddress).putExtra(EXTRA_NAME, tvName)
-                .putExtra(EXTRA_AUTO, true).putExtra(EXTRA_LIMIT, limitBytes ?: -1L).putExtra(EXTRA_METERED, metered))
+                .putExtra(EXTRA_AUTO, true).putExtra(EXTRA_LIMIT, limitBytes ?: -1L).putExtra(EXTRA_METERED, metered).putExtra(EXTRA_NEED, need?.wire))
             true
         } catch (e: Exception) { Log.w(TAG, "automatic start refused: ${e.javaClass.simpleName}"); false }
 
