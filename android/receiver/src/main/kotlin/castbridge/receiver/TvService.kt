@@ -274,13 +274,19 @@ class TvService : Service(), Device {
         }
         lockedHttp = s; lockedPin = pin
         castbridge.core.tv.activation.LockedPinRotation.onLockedRouteOpened(tvPrefs.lockedPinStore())   // M1 d: this code is replaced at the activation
+        // act-bt: « Bluetooth sans appairage » shares the attempt gate of this route (one budget of wrong codes, one global cap) and serves the same two messages: the complete request and the key
+        activationBt = ActivationBtHost(this, castbridge.core.btact.BtActServer(
+            code = { lockedPin }, gate = api.gate, termsAccepted = { TunnelHub.termsAccepted(this) }, deviceRequest = { ActivationCenter.requestText() },
+            install = { key -> ActivationCenter.installFromWifi(key) }, tvName = ::tvName, tvVersion = BuildConfig.VERSION_NAME, onAuthorized = { ActivationCenter.phoneAuthorized() }), { lockedPin })
         register(locked = true)
         tryStartActivationGroup()                                            // the activation screen was already open and waiting for the code
+        tryStartActivationBle()
     }
 
     private fun stopLockedHttp() {
         val s = lockedHttp ?: return
         lockedHttp = null; lockedPin = null
+        runCatching { activationBt?.release() }; activationBt = null
         runCatching { s.stop() }
         runCatching { nsdListener?.let { nsd?.unregisterService(it) } }; nsdListener = null
         runCatching { multicastLock?.release() }
@@ -294,6 +300,8 @@ class TvService : Service(), Device {
      * ([WifiDirectGroup.activationState]) and the local-network way stays open.
      */
     private var activationWd: WifiDirectGroup? = null
+    /** act-bt: the BLE advertisement and the insecure listeners of the activation without pairing; same life as the group (asked with the screen, given back with it). */
+    private var activationBt: ActivationBtHost? = null
     @Volatile private var activationGroupWanted = false
     @Volatile private var activationClients: Int? = null
     /** act-tv-2 ([castbridge.core.tv.activation.ActivationGroupPolicy]): the person asked for the direct network on this opening of the screen; kept until the group is given back. */
@@ -302,13 +310,18 @@ class TvService : Service(), Device {
     @Volatile private var activationDecision: castbridge.core.tv.activation.ActivationGroupPolicy.Decision? = null
 
     /** The activation screen is in front: ask for the group, as the policy allows (idempotent for the same code; a group that failed is tried again, which is what the « Réessayer » button and a return from the settings use). Main thread. */
-    fun startActivationGroup() { activationGroupWanted = true; tryStartActivationGroup() }
+    fun startActivationGroup() { activationGroupWanted = true; tryStartActivationGroup(); tryStartActivationBle() }
+
+    private fun tryStartActivationBle() { if (activationGroupWanted && !started && ActivationCenter.locked()) activationBt?.want() }
+
+    /** « 2. Bluetooth : tapez le code… » is listed on the activation screen only while the TV really advertises (box able to, Bluetooth on, permissions granted). */
+    fun activationBleReady(): Boolean = activationBt?.state == ActivationBtHost.State.READY
 
     /** « Le téléphone n'est pas sur ce Wi-Fi ? OK : réseau direct » and « Réessayer le réseau direct »: the person asks for the group, whatever the TV's network. Main thread. */
     fun requestActivationDirect() { activationDirectAsked = true; startActivationGroup() }
 
     /** The 2 s tick of the activation screen: a group kept for later is made as soon as the TV loses its Wi-Fi network (nothing left to cut). Main thread. */
-    fun activationTick() { if (activationDecision == castbridge.core.tv.activation.ActivationGroupPolicy.Decision.WIFI_PRESENT) tryStartActivationGroup() }
+    fun activationTick() { if (activationDecision == castbridge.core.tv.activation.ActivationGroupPolicy.Decision.WIFI_PRESENT) tryStartActivationGroup(); activationBt?.tick() }
 
     private fun tryStartActivationGroup() {
         if (!activationGroupWanted || started || !ActivationCenter.locked()) return
@@ -325,6 +338,7 @@ class TvService : Service(), Device {
         activationGroupWanted = false; activationClients = null
         activationDirectAsked = false; activationDecision = null             // the next opening decides again
         main.removeCallbacks(stopActivationGroupLater)
+        runCatching { activationBt?.stop() }
         val g = activationWd ?: return
         activationWd = null
         runCatching { g.stop() }

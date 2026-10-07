@@ -21,15 +21,82 @@ class ActivationProbesTest {
 
     // ------------------------------------------------------------------ qui interroger
 
-    @Test fun lockedAnnouncedTvsComeFirstThenTheLinkedOneAndNeverMoreThanThree() {
+    @Test fun lockedAnnouncedTvsComeFirstThenTheLinkedOneAndNoneIsLeftOutInAdvance() {
+        // audit I-4 : la liste ne se coupe PLUS à trois d'avance (la 4e TV d'une boutique n'était jamais lue) ; le plafond de trois vaut par TOUR d'interrogation (LanProbes.due)
         val announced = listOf(cand(21), cand(22), cand(23), cand(24), cand(30, locked = false))
         val linked = cand(40, locked = false, name = "Ma TV")
-        assertEquals(listOf(cand(21), cand(22), cand(23)), ActivationRoutePlan.candidates(announced, linked))
+        assertEquals(listOf(cand(21), cand(22), cand(23), cand(24), linked), ActivationRoutePlan.candidates(announced, linked))
         assertEquals(listOf(cand(21), cand(40, locked = false, name = "Ma TV")), ActivationRoutePlan.candidates(listOf(cand(21), cand(30, locked = false)), linked))
         assertEquals(listOf(linked), ActivationRoutePlan.candidates(emptyList(), linked))
         assertTrue(ActivationRoutePlan.candidates(emptyList(), null).isEmpty())
         assertEquals(3, ActivationRoutePlan.MAX_CANDIDATES)
     }
+
+    // ------------------------------------------------------------------ audit I-4 : toutes les TV verrouillées annoncées sont interrogées à tour de rôle (avec le même plafond de trois par tour)
+
+    @Test fun everyAnnouncedLockedTvIsAskedInTurnNotOnlyTheFirstThree() {
+        val tvs = (21..25).map { cand(it) }                                  // une boutique d'agent : cinq TV verrouillées sur le même Wi-Fi ; la bonne est la 5e
+        val all = ActivationRoutePlan.candidates(tvs, null)
+        val p = ActivationRoutePlan.LanProbes()
+        val first = p.due(all, 1_000)
+        assertEquals(tvs.take(3), first, "premier tour : trois TV au plus")
+        first.forEach { assertNotNull(p.answered(it, Reply.CodeRefused)) }     // les trois premières ne sont pas la bonne : « code refusé »
+        val second = p.due(all, 1_500)
+        assertEquals(listOf(tvs[3], tvs[4]), second, "le tour suivant interroge la 4e et la 5e (avant le correctif : liste vide, la bonne TV n'était jamais lue)")
+        assertEquals(Event.Observed(Route.LAN, Cause(Cause.Kind.CODE_REFUSED, "CastBridge TV 24")), p.answered(tvs[3], Reply.CodeRefused))
+        assertIs<Event.Reached>(p.answered(tvs[4], Reply.Request(request)), "la 5e est la bonne : sa demande est lue")
+        assertTrue(p.due(all, 99_000).isEmpty(), "toutes ont répondu : plus aucune interrogation")
+    }
+
+    @Test fun theCapOfThreeAppliesToEachRoundAndEveryTvIsAskedOnceWhateverTheirNumber() {
+        val tvs = (21..30).map { cand(it) }                                  // dix TV
+        val all = ActivationRoutePlan.candidates(tvs, null)
+        assertEquals(10, all.size)
+        val p = ActivationRoutePlan.LanProbes()
+        val rounds = ArrayList<List<Candidate>>()
+        var t = 0L
+        while (true) {
+            val due = p.due(all, t)
+            if (due.isEmpty()) break
+            rounds += due; due.forEach { p.answered(it, Reply.CodeRefused) }; t += 500
+        }
+        assertEquals(listOf(3, 3, 3, 1), rounds.map { it.size }, "trois au plus par tour (le plafond d'essais d'un tour ne change pas)")
+        assertEquals(tvs, rounds.flatten(), "toutes interrogées, une fois chacune, dans l'ordre annoncé")
+    }
+
+    @Test fun silentTvsDoNotStarveTheOnesBehindThem() {
+        val tvs = (21..25).map { cand(it) }
+        val all = ActivationRoutePlan.candidates(tvs, null)
+        val p = ActivationRoutePlan.LanProbes()
+        assertEquals(tvs.take(3), p.due(all, 0))                              // trois TV muettes (connexion refusée, délai) : rien n'est réglé
+        assertEquals(listOf(tvs[3], tvs[4]), p.due(all, 500), "les muettes attendent leur délai de 2,5 s, les suivantes passent tout de suite")
+        assertTrue(p.due(all, 1_000).isEmpty())
+        assertEquals(tvs.take(3), p.due(all, ActivationRoutePlan.RE_PROBE_MS), "les muettes sont réinterrogées une fois leur délai écoulé")
+    }
+
+    @Test fun aTvThatAnsweredIsNeverAskedAgainEvenWhenItIsTheFourth() {
+        val tvs = (21..24).map { cand(it) }
+        val all = ActivationRoutePlan.candidates(tvs, null)
+        val p = ActivationRoutePlan.LanProbes()
+        p.due(all, 0).forEach { p.answered(it, Reply.CodeRefused) }
+        assertEquals(listOf(tvs[3]), p.due(all, 500))
+        p.answered(tvs[3], Reply.LockedOut(40))
+        assertTrue(p.due(all, 1_000_000).isEmpty(), "chaque essai compte un code faux sur la TV : une TV qui a répondu n'est plus interrogée")
+    }
+
+    @Test fun theKeyGoesToTheTvThatAnsweredTheReadAndTheScreenShowsItsAddress() {
+        // « le code n'est envoyé qu'aux TV qui l'ont accepté par une lecture sans effet » : la TV de « TV trouvée » est celle qui a répondu 200, c'est à son adresse que la clé et le code partiront
+        val tvs = (21..25).map { cand(it) }
+        val p = ActivationRoutePlan.LanProbes()
+        val found = (p.answered(tvs[4], Reply.Request(request)) as Event.Reached).found
+        assertEquals(tvs[4].base, found.base, "la clé part à l'adresse de la TV qui a répondu, pas à une autre TV annoncée")
+        assertEquals("192.168.1.25", found.address())
+        val connected = ActivationRoutePlan.reduce(ActivationRoutePlan.start(ActivationRoutePlan.Facts("482913", 34, true, true, ActivationRoutePlan.Bt.OFF), 0).run, Event.Reached(found)).run
+        assertEquals("Réseau local : TV trouvée (CastBridge TV 25, 192.168.1.25).", connected.lines().first().text, "l'adresse est dite : à comparer avec celle de l'écran de la TV")
+        assertNull(Found(Route.GROUP, "CastBridge-TV", "http://192.168.49.1:8765", null).address(), "l'adresse du groupe n'apprend rien : seulement le réseau local")
+        assertNull(Found(Route.BLUETOOTH, "TV", null, null, btAddress = "AA:BB:CC:DD:EE:FF").address())
+    }
+
 
     @Test fun aTvOfANeighbourThatIsAlreadyActivatedIsNeverGivenTheCode() {
         // announced but not locked, not the TV this phone is linked to: no probe

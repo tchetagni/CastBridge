@@ -402,7 +402,7 @@ curl / app téléphone --TCP--> 127.0.0.1:18765 --RFCOMM « CastBridge API »-->
                               (téléphone : passerelle ; Mac : cbt-rfcomm proxy ; Linux : bt-ssh-bridge.py --service api)
 ```
 
-**Services RFCOMM de la TV** (sockets sécurisés, appareils appairés seulement). Tous ont l'UUID `7c5e3b9a-4d2f-4c61-9b0e-cb00000000` + deux chiffres. **La table unique est
+**Services RFCOMM de la TV** (sockets sécurisés, appareils appairés seulement, **sauf `…0008`**, l'activation sans appairage : sockets « insecure », le code de connexion prouvé par une PAKE remplace l'appairage). Tous ont l'UUID `7c5e3b9a-4d2f-4c61-9b0e-cb00000000` + deux chiffres. **La table unique est
 `BtProtocol.SERVICES`** (`C/tv/BtProtocol.kt`) ; le test `BtServicesTest` interdit deux services sur un même UUID, un UUID du préfixe écrit ailleurs que dans la table et le canal
 propriétaire, et un service absent de la table.
 
@@ -415,6 +415,7 @@ propriétaire, et un service absent de la table.
 | `…0005` | CastBridge Owner | canal propriétaire CBTO (activation, ordres signés) |
 | `…0006` | (aucun) | **réservé** : canal de synchronisation de W7 (conçu, pas codé) |
 | `…0007` | CastBridge Internet | passerelle Internet CBG1 (« Partager l'Internet du téléphone ») |
+| `…0008` | CastBridge Activation | **activation sans appairage** CBTA (act-bt, 2026-10-07) : annonce BLE de cet UUID par une TV VERROUILLÉE dont l'écran d'activation est ouvert, sockets RFCOMM et L2CAP « insecure », PAKE (CPace) sur le code de connexion à 6 chiffres puis canal AES-GCM qui porte la demande d'appareil et la clé ; détail : `docs/BT-PLUG-AND-PLAY.md` « Activation sans appairage » et `docs/TV-ACTIVATION-CLE-USB.md` « Bluetooth sans appairage » |
 
 Le service API (`…0003`, UUID `7c5e3b9a-4d2f-4c61-9b0e-cb0000000003`) répond d'abord **1 octet d'état** (0 = ok, 1 trop de liaisons, 2 appareil non autorisé, 3 serveur local arrêté,
 4 erreur interne), puis relaie du HTTP brut. Le service SSH reste sans octet d'état (compatibilité avec `ssh`, `bt-ssh-bridge.py`).

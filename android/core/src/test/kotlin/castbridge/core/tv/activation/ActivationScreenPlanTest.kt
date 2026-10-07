@@ -252,4 +252,41 @@ class ActivationScreenPlanTest {
             assertFalse(code in ActivationQr.uri(code), "the code itself is not in the QR: only what derives from it")
         }
     }
+
+    // ---- act-bt : « 2. Bluetooth : tapez le code dans CastBridge › Activer la TV », seulement quand la TV annonce en BLE ----
+
+    @Test fun `the Bluetooth way is listed second under the code when the TV advertises, and absent otherwise`() {
+        assertEquals("2. Bluetooth : tapez le code dans CastBridge › Activer la TV", P.BLUETOOTH_LINE)
+        for (g in everyGroup) {
+            val with = P.phoneView(code, g, bluetooth = true)
+            assertEquals(P.BLUETOOTH_LINE, with.bluetoothLine, "$g")
+            assertTrue(with.instruction.startsWith("1. "), "la première voie porte « 1. » quand il y en a deux : ${with.instruction}")
+            assertEquals("1. " + P.phoneView(code, g).instruction, with.instruction, "$g : la même phrase, numérotée")
+            val without = P.phoneView(code, g, bluetooth = false)
+            assertEquals(null, without.bluetoothLine, "voie absente : $g")
+            assertFalse(without.instruction.startsWith("1. "), "sans deuxième voie la phrase n'est pas numérotée : ${without.instruction}")
+            assertEquals(null, P.phoneView(code, g).bluetoothLine, "par défaut la voie est absente")
+        }
+    }
+
+    @Test fun `the Bluetooth way adds nothing to the other lines of the phone way`() {
+        for (g in everyGroup) {
+            val a = P.phoneView(code, g, bluetooth = false); val b = P.phoneView(code, g, bluetooth = true)
+            assertEquals(a.code, b.code); assertEquals(a.qr, b.qr); assertEquals(a.offer, b.offer); assertEquals(a.retry, b.retry)
+        }
+    }
+
+    @Test fun `without a code nothing is advertised on screen, the Bluetooth line included`() {
+        for (g in everyGroup) {
+            val v = P.phoneView(null, g, bluetooth = true)
+            assertEquals(null, v.bluetoothLine, "$g")
+            assertEquals("Sur votre téléphone, ouvrez CastBridge › Activer la TV.", v.instruction, "$g")
+        }
+    }
+
+    @Test fun `the Bluetooth line never holds the code and never says sender or receiver`() {
+        assertFalse(code in P.BLUETOOTH_LINE)
+        assertFalse(Regex("sender|receiver|émetteur|récepteur", RegexOption.IGNORE_CASE).containsMatchIn(P.BLUETOOTH_LINE))
+        assertTrue("CastBridge › Activer la TV" in P.BLUETOOTH_LINE)
+    }
 }

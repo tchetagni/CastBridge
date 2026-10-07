@@ -30,19 +30,9 @@ object ActivationSend {
     const val ASK_PIN_TEXT = "Pour envoyer la clé par le Wi-Fi, saisissez le code de connexion de la TV (6 chiffres, affiché sur l'écran d'activation de CastBridge-TV, ou dans « Connexion & réglages »). Il n'est utilisé que pour cet envoi et n'est pas enregistré. Sinon, l'envoi par Bluetooth reste possible."
     const val WRONG_PIN_TEXT = "Code de connexion refusé par la TV. Vérifiez-le sur l'écran d'activation de CastBridge-TV (ou « Connexion & réglages »), ou envoyez par Bluetooth."
 
-    /** A CastBridge-TV announced on the Wi-Fi (mDNS); [locked] = it announces `locked=1` (waiting for its key). */
-    data class Found(val name: String, val base: String, val locked: Boolean)
-
-    /**
-     * Where to send the key over the Wi-Fi: the TV the phone is linked to ([linked] = base and credential), otherwise the TV found on the Wi-Fi whose base the customer
-     * TOUCHED ([chosenBase]); never an automatic choice (audit M2: a fake « TV à activer » announced on the network must not receive the key and the code by default),
-     * never an address outside the local network ([Lan.isLocal]), never the phone's own Bluetooth gateway (loopback). No code is known for a found TV: it is asked.
-     */
-    fun lanTarget(linked: Pair<String, String?>?, found: List<Found>, chosenBase: String?): Pair<String, String?>? {
-        if (linked != null) return linked.takeIf { hostOf(it.first)?.let(Lan::isLocal) == true }
-        val pick = found.firstOrNull { it.base == chosenBase && isLanTv(it.base) } ?: return null   // only what the customer touched, no fallback
-        return pick.base to null
-    }
+    // The M2 rule of 2026-10-06 (« no automatic choice of a TV, the customer touches it ») is REPLACED by the owner's rule of 2026-10-07 (« the connection code is enough »,
+    // DESIGN-ACTIVATION-SIMPLE § 7): the phone asks every announced locked TV, in turn, with the code ([ActivationRoutePlan.LanProbes]), and sends the key ONLY to the TV that answered
+    // the read without effect (`device-request` 200, [ActivationRoutePlan.Found.base]). The helpers of the old rule (`lanTarget`, `targetLabel`) had no caller left and are gone (audit I-4).
 
     /** A TV found on the Wi-Fi: a private address literal, not loopback (the phone's own Bluetooth gateway). */
     fun isLanTv(base: String): Boolean {
@@ -62,9 +52,6 @@ object ActivationSend {
             else -> rest.substringBeforeLast(':')
         }.takeIf { it.isNotEmpty() }
     }
-
-    /** Shown next to the code field (audit M2): the customer sees WHICH address will receive the key and the code, « TV 192.168.1.21 ». */
-    fun targetLabel(base: String?): String? = base?.let(::hostOf)?.let { "TV $it" }
 
     /**
      * A new mDNS announce [incoming] merged into [current] (audit M2): a TV re-announced from the SAME address is updated; an announce with the same name from ANOTHER
