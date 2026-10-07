@@ -178,6 +178,31 @@ object WalletHub {
     }
 
     fun loadPolicy(done: (WalletResult<PolicyView>) -> Unit) = run({ client!!.policy().also { if (it is WalletResult.Ok) policy = it.value } }, done)
+
+    /**
+     * Une opération BLOQUANTE sur le fil réseau du portefeuille (échecs en ligne : la partie attend la réponse de l'API avant d'ouvrir ou de régler). À appeler depuis un fil de travail, jamais
+     * depuis le fil principal ni depuis le fil réseau du portefeuille lui-même. Sans réponse en [BLOCKING_MS] : « hors ligne » (rien n'est connu de l'opération, la MÊME clé d'idempotence sera rejouée).
+     */
+    private fun <T> blocking(op: () -> WalletResult<T>): WalletResult<T> {
+        if (!ready) return WalletResult.Fail(WalletMessages.offline(), null, null, true)
+        val f = io.submit<WalletResult<T>> {
+            val r = try { op() } catch (e: Exception) { Log.w(TAG, "opération en échec (${e.javaClass.simpleName})"); WalletResult.Fail(WalletMessages.of(500, null), null, null, false) }
+            apply(r)
+            notifyListeners()
+            r
+        }
+        return try { f.get(BLOCKING_MS, java.util.concurrent.TimeUnit.MILLISECONDS) } catch (e: Exception) { f.cancel(false); WalletResult.Fail(WalletMessages.offline(), null, null, true) }
+    }
+
+    private const val BLOCKING_MS = 75_000L
+
+    /** Bloque la mise d'une partie en ligne (option B : l'API signe un `cbe1` que la TV porte au service de jeu). Ensuite le solde est resynchronisé. */
+    fun escrowBlocking(cur: WalletCurrency, per: Long, game: String, idem: String): WalletResult<castbridge.core.wallet.ui.EscrowDone> =
+        blocking { client!!.escrow(cur, per, 1, idem, game) }.also { if (it is WalletResult.Ok) refresh(Trigger.AFTER_OPERATION) }
+
+    /** Poste le résultat signé `cbr1` d'une partie misée (le service l'a signé, l'API règle). Ensuite le solde et l'historique (« Mes jetons ») sont resynchronisés. */
+    fun settleBlocking(token: String): WalletResult<castbridge.core.wallet.ui.SettleDone> =
+        blocking { client!!.settle(token) }.also { if (it is WalletResult.Ok) refresh(Trigger.AFTER_OPERATION) }
     fun convert(dir: ConvertDir, q: Long, idem: String, done: (WalletResult<ConvertDone>) -> Unit) =
         run({ client!!.convert(dir, q, idem) }) { r -> done(r); if (r is WalletResult.Ok) refresh(Trigger.AFTER_OPERATION) }
     fun transfer(cur: WalletCurrency, code: String, amt: Long, idem: String, done: (WalletResult<TransferDone>) -> Unit) =

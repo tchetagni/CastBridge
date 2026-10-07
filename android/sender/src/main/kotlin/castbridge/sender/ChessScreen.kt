@@ -36,13 +36,11 @@ import androidx.compose.ui.graphics.vector.PathParser
 import androidx.compose.ui.input.pointer.pointerInput
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.text.input.KeyboardCapitalization
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import castbridge.core.chess.ChessPieces
-import castbridge.core.chess.ChessRelayClient
 import castbridge.core.chess.ChessSession
 import castbridge.core.chess.ChessTransport
 import castbridge.core.chess.LanChessClient
@@ -57,8 +55,8 @@ import kotlinx.coroutines.withContext
 /**
  * « Échecs » tab of the phone app: finds the TV on the Wi-Fi, opens the chess screen on it if needed (with the TV's PIN),
  * fetches the room code, joins and plays on a native board (tap a piece, then its destination). The TV hosts the game
- * and checks every move ([LanChessClient]); Internet games go through the central relay ([ChessRelayClient]) once the
- * TV reports it switched on.
+ * and checks every move ([LanChessClient]). Internet games are played BY the TV (« Échecs › En ligne », docs/CHESS.md § 6); a phone watches its
+ * TV's game through the TV and never talks to the online service.
  */
 @Composable
 fun ChessScreen() {
@@ -73,8 +71,6 @@ fun ChessScreen() {
     var selected by rememberSaveable { mutableStateOf<String?>(null) }
     var name by rememberSaveable { mutableStateOf(prefs.getString("name", "").orEmpty()) }
     var code by rememberSaveable { mutableStateOf("") }
-    var online by rememberSaveable { mutableStateOf(false) }
-    var onlineAvailable by remember { mutableStateOf(false) }
     var roomOpen by remember { mutableStateOf<Boolean?>(null) }
     var message by remember { mutableStateOf("") }
     var busy by remember { mutableStateOf(false) }
@@ -88,8 +84,7 @@ fun ChessScreen() {
         while (tv != null && session == null) {
             val st = withContext(Dispatchers.IO) { chessStatus(tv.base, pin) }
             roomOpen = st?.open
-            onlineAvailable = st?.online == true
-            st?.code?.let { if (!online && code != it) code = it }
+            st?.code?.let { if (code != it) code = it }
             delay(3000)
         }
     }
@@ -103,8 +98,8 @@ fun ChessScreen() {
         val n = name.trim()
         prefs.edit().putString("name", n).apply()
         busy = true; message = ""
-        val transport: ChessTransport = if (online) ChessRelayClient(enabled = onlineAvailable) else LanChessClient(tv?.base ?: return)
-        val c = if (online) ChessRelayClient.normalizeCode(code) ?: code else code
+        val transport: ChessTransport = LanChessClient(tv?.base ?: return)    // a phone only ever talks to ITS TV, never to the online service
+        val c = code
         scope.launch {
             val res = withContext(Dispatchers.IO) { runCatching { transport.join(c, n, prefs.getString("token_$c", null)) } }
             busy = false
@@ -117,11 +112,9 @@ fun ChessScreen() {
         Text("Échecs", style = MaterialTheme.typography.headlineSmall, fontWeight = FontWeight.Bold)
         Text("Jouez contre un ami sur la TV, ou regardez la partie. Chaque coup est vérifié par la TV, qui tient aussi le compte à rebours.",
             style = MaterialTheme.typography.bodyMedium, color = MaterialTheme.colorScheme.onSurfaceVariant)
-        Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
-            FilterChip(!online, { online = false }, label = { Text("À la maison") })
-            FilterChip(online, { online = true }, label = { Text("En ligne") }, enabled = onlineAvailable || online)
-        }
-        if (!online) {
+        Text("Les parties sur Internet (libres ou avec mise) se jouent sur la TV : « Échecs › En ligne ». Pendant l'une d'elles, saisissez ici le code à 4 chiffres de la TV pour la regarder : " +
+            "le téléphone ne se connecte jamais au service, c'est la TV qui vous montre la partie.", style = MaterialTheme.typography.bodySmall, color = MaterialTheme.colorScheme.onSurfaceVariant)
+        run {
             if (tvs.isEmpty()) {
                 Row(verticalAlignment = Alignment.CenterVertically) {
                     CircularProgressIndicator(Modifier.size(20.dp), strokeWidth = 2.dp); Spacer(Modifier.width(12.dp))
@@ -146,16 +139,13 @@ fun ChessScreen() {
                 if (pin.isEmpty()) Text("Pour ouvrir les échecs depuis le téléphone, entrez d'abord le PIN de la TV dans l'onglet « CastBridge TV ». " +
                     "Sinon, ouvrez la tuile « Échecs » avec la télécommande.", style = MaterialTheme.typography.bodySmall)
             }
-        } else {
-            Text(if (onlineAvailable) "Entrez le code à 6 caractères de votre ami." else ChessRelayClient.DISABLED,
-                color = MaterialTheme.colorScheme.onSurfaceVariant)
         }
         OutlinedTextField(name, { name = it.take(16) }, Modifier.fillMaxWidth(), singleLine = true, label = { Text("Votre pseudo") })
-        OutlinedTextField(code, { v -> code = if (online) v.uppercase().filter { it.isLetterOrDigit() }.take(6) else v.filter(Char::isDigit).take(4) },
-            Modifier.fillMaxWidth(), singleLine = true, label = { Text(if (online) "Code en ligne (6 caractères)" else "Code de la partie (affiché sur la TV)") },
+        OutlinedTextField(code, { v -> code = v.filter(Char::isDigit).take(4) },
+            Modifier.fillMaxWidth(), singleLine = true, label = { Text("Code de la partie (affiché sur la TV)") },
             textStyle = LocalTextStyle.current.copy(fontSize = 24.sp, fontWeight = FontWeight.Bold),
-            keyboardOptions = if (online) KeyboardOptions(capitalization = KeyboardCapitalization.Characters) else KeyboardOptions(keyboardType = KeyboardType.NumberPassword))
-        val ready = name.isNotBlank() && !busy && (if (online) onlineAvailable && code.length == 6 else tv != null && code.length == 4)
+            keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.NumberPassword))
+        val ready = name.isNotBlank() && !busy && tv != null && code.length == 4
         Button(enabled = ready, onClick = ::join, modifier = Modifier.fillMaxWidth().height(56.dp)) {
             Icon(cbv(R.drawable.ic_cb_lecture), null); Spacer(Modifier.width(8.dp)); Text("Rejoindre la partie", fontSize = 18.sp)
         }
@@ -163,19 +153,19 @@ fun ChessScreen() {
     }
 }
 
-private data class ChessStatus(val open: Boolean, val code: String?, val online: Boolean)
+private data class ChessStatus(val open: Boolean, val code: String?)
 
-/** GET /api/chess with the PIN (gives the code and whether Internet play is on), else the public /chess/api/hello. */
+/** GET /api/chess with the PIN (gives the code of the room, or of the TV's Internet game to watch), else the public /chess/api/hello. */
 private fun chessStatus(base: String, pin: String): ChessStatus? {
     if (pin.isNotEmpty()) runCatching {
         val j = Json.obj(TvClient(base, pin).raw("GET", "/api/chess"))
-        return ChessStatus(j["open"] == true, j["code"] as? String, j["online"] == true)
+        return ChessStatus(j["open"] == true, j["code"] as? String)
     }
     return runCatching {
         val c = java.net.URL("$base/chess/api/hello").openConnection() as java.net.HttpURLConnection
         c.connectTimeout = 3000; c.readTimeout = 3000
         val j = Json.obj(c.inputStream.use { String(it.readBytes()) })
-        ChessStatus(j["open"] == true, null, false)
+        ChessStatus(j["open"] == true, null)
     }.getOrNull()
 }
 

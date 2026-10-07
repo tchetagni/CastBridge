@@ -4,6 +4,7 @@ import android.content.Context
 import android.net.ConnectivityManager
 import android.net.NetworkCapabilities
 import android.os.SystemClock
+import castbridge.core.chess.online.ChessServiceCaps
 import castbridge.core.connect.Routes
 import castbridge.core.net.HttpLite
 import castbridge.core.owner.GateState
@@ -66,7 +67,8 @@ object PlayHub {
         return runCatching { cm.getNetworkCapabilities(cm.activeNetwork)?.hasCapability(NetworkCapabilities.NET_CAPABILITY_INTERNET) == true }.getOrDefault(false)
     }
 
-    private fun edition(): HostEdition = PlayGate.editionOf(ActivationCenter.locked(), ActivationCenter.trial(), ActivationCenter.state() is GateState.Grace)
+    /** L'édition que la TV connaît d'elle-même (jamais une preuve : le service et l'API la relisent) ; partagée avec les échecs en ligne. */
+    fun edition(): HostEdition = PlayGate.editionOf(ActivationCenter.locked(), ActivationCenter.trial(), ActivationCenter.state() is GateState.Grace)
 
     /** La tuile « Partie Internet » : rien, une raison, ou disponible (toute la décision est dans [PlayGate]). */
     fun tile(ctx: Context): PlayTile = PlayGate.tile(flagOn(ctx), edition(), hasInternet(ctx), ParentalHub.kidHomeActive(), ActivationCenter.clockSuspended(), serviceUp(),
@@ -81,6 +83,9 @@ object PlayHub {
     /** Le sondage a appris que le service n'applique pas encore les révocations (`"revocations":"off"`) : le menu le dit (audit Opus, honnêteté). */
     @Volatile var revocationsOff = false; private set
 
+    /** Ce que le service dit de ses jeux (`chess`, `stakes`) d'après le même sondage ; null tant qu'il n'a pas répondu (les échecs en ligne remplacent l'ancien drapeau `online=1`). */
+    @Volatile var chessCaps: ChessServiceCaps? = null; private set
+
     /** Dernier sondage du service (null : pas encore sondé ⇒ on essaie). */
     fun serviceUp(): Boolean? = probeUp
 
@@ -93,7 +98,11 @@ object PlayHub {
                 val link = TvConnect.link
                 val base = link?.state?.baseUrl?.takeIf { it.isNotBlank() }
                 probeUp = if (link == null || base == null) null else try {
-                    link.routes.call { p -> HttpLite(p, connectTimeoutMs = 8_000, readTimeoutMs = 8_000, userAgent = "CastBridge-TV").request("GET", "$base/play/.well-known/caps").let { r -> revocationsOff = r.body.contains("\"revocations\":\"off\""); r.code in 200..299 } }
+                    link.routes.call { p -> HttpLite(p, connectTimeoutMs = 8_000, readTimeoutMs = 8_000, userAgent = "CastBridge-TV").request("GET", "$base/play/.well-known/caps").let { r ->
+                        revocationsOff = r.body.contains("\"revocations\":\"off\"")
+                        chessCaps = if (r.code in 200..299) ChessServiceCaps.parse(r.body) else null
+                        r.code in 200..299
+                    } }
                 } catch (e: IOException) { false }
                 probeAt = SystemClock.elapsedRealtime()
             } finally { probing = false }
@@ -119,6 +128,38 @@ object PlayHub {
             }
             PlayTicketReply.parse(r.code, r.body)
         } catch (e: IOException) { PlayTicketReply.Refused(PlayErrors.NO_INTERNET) }
+    }
+
+    // ------------------------------------------------------------------ une session pour un autre jeu (échecs en ligne)
+
+    /** L'activation que le service sait vérifier (M-4), ou null : le jeu en ligne exige une TV activée. */
+    fun activationText(): String? = PlayActivation.pick(ActivationCenter.allActivations(), ActivationCenter.now())?.encode()
+
+    /** Le code d'appareil haché que le service connaît de cette TV (jamais le code en clair), ou null avant l'activation. */
+    fun deviceHash(): String? = runCatching { TvConnect.hash(ActivationCenter.deviceCode) }.getOrNull()
+
+    /**
+     * Une session de liaison NEUVE pour un jeu à tour de rôle (échecs, games-G2) : même ticket `cbp1` (un par création ou entrée), même transport `PlayHttpTransport` (réseau direct, puis passerelle du
+     * téléphone), même preuve de possession de la clé d'installation que le Quiz en ligne, même reprise ; seul l'appelant ([castbridge.core.chess.ChessRelayClient]) choisit le message d'ouverture.
+     * BLOQUANT (premier ticket demandé ici pour que son refus soit dit clairement) : jamais sur le fil principal. Lève [castbridge.core.chess.ChessTransportException] avec le texte français du refus.
+     * Même câblage que [start], qui n'est pas touché.
+     */
+    fun newGameSession(ctx: Context): PlayTvSession {
+        val first = fetchTicket()
+        if (first !is PlayTicketReply.Ok) throw castbridge.core.chess.ChessTransportException(403, (first as PlayTicketReply.Refused).text)
+        val link = TvConnect.link ?: throw castbridge.core.chess.ChessTransportException(503, PlayErrors.NO_INTERNET)
+        val routes = link.routes
+        val base = link.state.baseUrl
+        var pending: String? = first.ticket
+        val cache = TicketCache(mono) { (fetchTicket() as? PlayTicketReply.Ok)?.ticket }.also { it.adopt(first.ticket) }
+        val ticket = { synchronized(this) { pending?.also { pending = null } } ?: cache.fresh() }
+        val signer = WalletHub.installSigner()
+        val factory = TransportFactory { t ->
+            PlayHttpTransport(base, t, proxy = { if (routes.lastVia == Routes.Via.GATEWAY) gatewayProxy() else null }, clock = mono, ticketOnEveryPost = false)
+        }
+        return PlayTvSession(clock = mono, transports = factory, ticket = ticket, via = { routes.lastVia }, tvHasNetwork = { hasInternet(ctx) },
+            resumeTicket = { cache.reusable() },
+            prover = { t, a -> signer?.let { PlayProof.build(it::sign, it.publicKeyBase64, t, a) } })
     }
 
     // ------------------------------------------------------------------ la session
