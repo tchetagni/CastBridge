@@ -132,6 +132,29 @@ class WalletClient(private val transport: WalletTransport, private val identity:
         return r
     }
 
+    /**
+     * Bloque la mise d'une partie en ligne (option B de la conception W22 : la TV obtient de l'API un blocage `cbe1` SIGNÉ, qu'elle porte au service de jeu ; le service n'a aucun secret du grand
+     * livre). [per] par siège, [k] sièges (aux échecs : 1), [game] = le jeu (`chess` : l'API applique son échelle, refuse l'essai, relit les plafonds de parties gagnées). [idem] : clé générée UNE fois
+     * par blocage, rejouée telle quelle sur une coupure (l'API rend alors le MÊME `cbe1`, jamais un second blocage). Les activations de la TV sont jointes (l'API relit l'édition à chaque mise).
+     */
+    fun escrow(cur: WalletCurrency, per: Long, k: Int, idem: String, game: String? = null): WalletResult<EscrowDone> {
+        val id = identity() ?: return noIdentity()
+        val body = linkedMapOf<String, Any?>("deviceCode" to code(id), "cur" to cur.name, "per" to per, "k" to k, "idem" to idem, "activations" to id.activations)
+        if (game != null) body["game"] = game
+        val r = result(exchange("POST", "$BASE/escrow", JsonLite.write(body)), available(cur), cur) { WalletReplies.parseEscrow(it) }
+        if (r is WalletResult.Ok) offer(r.value.snapshotToken)           // le blocage est posé : un instantané refusé se corrigera à la prochaine synchronisation
+        return r
+    }
+
+    /**
+     * Poste à l'API le résultat signé `cbr1` d'une partie misée (voie rapide ; le collecteur de l'hôte est la voie de secours). Aucune authentification : c'est la signature du service qui fait foi. Idempotent :
+     * rejouer rend la même réponse. Les gains arrivent dans le portefeuille ; un instantané neuf n'est pas rendu ici (la TV se synchronise ensuite).
+     */
+    fun settle(token: String): WalletResult<SettleDone> {
+        if (identity() == null) return noIdentity()
+        return result(exchange("POST", "$BASE/settle", JsonLite.write(linkedMapOf("cbr1" to token)))) { WalletReplies.parseSettle(it) }
+    }
+
     fun receiveCode(): WalletResult<ReceiveCodeView> {
         val id = identity() ?: return noIdentity()
         return result(exchange("POST", "$BASE/receive-code", JsonLite.write(linkedMapOf("deviceCode" to code(id))))) { WalletReplies.parseReceive(it) }

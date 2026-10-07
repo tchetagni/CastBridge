@@ -18,12 +18,12 @@ import java.util.concurrent.atomic.AtomicBoolean
 class ChessRoom(
     private val clock: () -> Long = { System.nanoTime() / 1_000_000 },
     private val random: java.util.Random = SecureRandom(),
-    val maxPlayers: Int = 10,
+    override val maxPlayers: Int = 10,
     autoTick: Boolean = true,
     /** Where the computer thinks (a background thread on the TV; the calling thread in tests). */
     private val aiExecutor: Executor = Executors.newSingleThreadExecutor { r -> Thread(r, "chess-ai").apply { isDaemon = true; priority = Thread.NORM_PRIORITY - 1 } },
     private val ai: ChessAi = ChessAi(),
-) {
+) : ChessHost {
     enum class Seat(val label: String) { REMOTE("Télécommande"), PHONE("Téléphone"), AI("Ordinateur") }
     enum class Stage { LOBBY, PLAYING, FINISHED, CLOSED }
     enum class Join { OK, BAD_CODE, FULL, CLOSED, BAD_NAME }
@@ -38,8 +38,8 @@ class ChessRoom(
 
     val lock = Object()
     val code: String = "%04d".format(random.nextInt(10_000))
-    @Volatile var version = 1L; private set
-    var stage = Stage.LOBBY; private set
+    @Volatile override var version = 1L; private set
+    override var stage = Stage.LOBBY; private set
     /** Who plays each colour (index = Piece.WHITE / Piece.BLACK). */
     val seats = arrayOf(Seat.REMOTE, Seat.AI)
     /** Player id sitting on a PHONE seat, per colour. */
@@ -66,7 +66,7 @@ class ChessRoom(
 
     // ---------------------------------------------------------------- players
 
-    fun join(code: String?, name: String?, token: String? = null): JoinResult = synchronized(lock) {
+    override fun join(code: String?, name: String?, token: String?): JoinResult = synchronized(lock) {
         if (stage == Stage.CLOSED) return JoinResult(Join.CLOSED)
         if (code?.trim() != this.code) return JoinResult(Join.BAD_CODE)
         token?.let { t -> byToken[t]?.let { p ->
@@ -88,14 +88,14 @@ class ChessRoom(
         for (c in 0..1) if (seats[c] == Seat.PHONE && seated[c] == null) { seated[c] = p.id; return }
     }
 
-    fun player(token: String?): Player? = token?.let { synchronized(lock) { byToken[it] } }
-    fun players(): List<Player> = synchronized(lock) { players.values.filter { !it.left } }
+    override fun player(token: String?): Player? = token?.let { synchronized(lock) { byToken[it] } }
+    override fun players(): List<Player> = synchronized(lock) { players.values.filter { !it.left } }
     fun isConnected(p: Player, now: Long = now()) = !p.left && (p.streams > 0 || now - p.lastSeen < PRESENCE_MS)
-    fun touch(p: Player) = synchronized(lock) { p.lastSeen = now() }
-    fun streamOpened(p: Player) = synchronized(lock) { p.streams++; p.lastSeen = now(); changed() }
-    fun streamClosed(p: Player) = synchronized(lock) { p.streams = maxOf(0, p.streams - 1); p.lastSeen = now(); changed() }
+    override fun touch(p: Player) = synchronized(lock) { p.lastSeen = now() }
+    override fun streamOpened(p: Player) = synchronized(lock) { p.streams++; p.lastSeen = now(); changed() }
+    override fun streamClosed(p: Player) = synchronized(lock) { p.streams = maxOf(0, p.streams - 1); p.lastSeen = now(); changed() }
 
-    fun leave(token: String?): Boolean = synchronized(lock) {
+    override fun leave(token: String?): Boolean = synchronized(lock) {
         val p = token?.let { byToken[it] } ?: return false
         p.left = true
         if (stage != Stage.PLAYING) for (c in 0..1) if (seated[c] == p.id) seated[c] = null
@@ -103,7 +103,7 @@ class ChessRoom(
     }
 
     /** Colour of [p] in the current seating, or null for a spectator. */
-    fun colorOf(p: Player?): Int? = p?.let { pl -> (0..1).firstOrNull { seats[it] == Seat.PHONE && seated[it] == pl.id } }
+    override fun colorOf(p: Player?): Int? = p?.let { pl -> (0..1).firstOrNull { seats[it] == Seat.PHONE && seated[it] == pl.id } }
 
     // ---------------------------------------------------------------- host (TV) settings and actions
 
@@ -268,7 +268,7 @@ class ChessRoom(
      * A phone's command: move (arg = UCI, ply = the game's ply the move answers), resign, draw (arg = offer / accept /
      * decline), sit (arg = w / b: take a free phone seat before the game), stand.
      */
-    fun act(token: String?, action: String, arg: String? = null, ply: Int? = null): Act = synchronized(lock) {
+    override fun act(token: String?, action: String, arg: String?, ply: Int?): Act = synchronized(lock) {
         val p = token?.let { byToken[it] } ?: return Act.UNKNOWN_PLAYER
         if (stage == Stage.CLOSED) return Act.CLOSED
         p.lastSeen = now()
@@ -384,7 +384,7 @@ class ChessRoom(
         runCatching { onChange?.invoke() }
     }
 
-    fun awaitChange(since: Long, timeoutMs: Long): Long = synchronized(lock) {
+    override fun awaitChange(since: Long, timeoutMs: Long): Long = synchronized(lock) {
         val end = System.nanoTime() / 1_000_000 + timeoutMs
         while (version <= since && stage != Stage.CLOSED) {
             val left = end - System.nanoTime() / 1_000_000
@@ -461,7 +461,7 @@ class ChessRoom(
         }, "level" to (if (seats[c] == Seat.AI) level else null), "playerId" to p?.id)
     }
 
-    fun viewJson(token: String?): String = Json.write(view(token))
+    override fun viewJson(token: String?): String = Json.write(view(token))
 
     // ---------------------------------------------------------------- helpers
 

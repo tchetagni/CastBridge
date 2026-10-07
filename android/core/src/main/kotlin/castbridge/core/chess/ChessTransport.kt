@@ -7,7 +7,8 @@ import java.net.URL
 import java.net.URLEncoder
 
 /** A seat in a hosted game: the token is the only secret (reconnection = join again with it). */
-data class ChessSession(val code: String, val token: String, val playerId: String, val name: String, val color: String?)
+data class ChessSession(val code: String, val token: String, val playerId: String, val name: String, val color: String?,
+                        /** Online only (play-v1): the room's identifier, to come back after a long cut with the seat token. */ val roomId: String = "")
 
 /** Answer to a command: the host's verdict (OK, ILLEGAL, NOT_YOUR_TURN, STALE…) and the state after it. */
 data class ChessAct(val result: String, val state: Map<String, Any?>?) {
@@ -15,19 +16,19 @@ data class ChessAct(val result: String, val state: Map<String, Any?>?) {
 }
 
 /** An HTTP error from the host, with a message fit for the screen when the host gave one. */
-class ChessTransportException(val status: Int, message: String) : IOException(message)
+open class ChessTransportException(val status: Int, message: String, /** The service's stable refusal code (online play), or null. */ val reason: String? = null) : IOException(message)
 
 /**
  * How a player's device talks to the game host. Two implementations share the same state format (see docs/CHESS.md):
- * [LanChessClient] — the TV of the house hosts the room (fully working), and [ChessRelayClient] — the project's
- * server relays a game between two places on the Internet (enabled by a flag once the server has the routes).
+ * [LanChessClient] — the TV of the house hosts the room (a phone of the house), and [ChessRelayClient] — a TV plays another TV through the
+ * online service `castbridge-play` (`/play/`, docs/PLAY-PROTOCOL.md « salle game:chess »). No phone ever talks to the service.
  * Blocking calls: run them off the UI thread.
  */
 interface ChessTransport {
     /** Where the games are hosted, for the screens (« la TV du salon », « Internet »). */
     val label: String
 
-    /** Creates a game and sits in it (Internet only: at home the TV creates the room). */
+    /** Creates a game and sits in it (Internet only, by a TV: at home the TV creates the room). */
     fun create(name: String, perMoveSeconds: Int, color: String = "random", mode: ClockMode = ClockMode.COMPETITION): ChessSession =
         throw ChessTransportException(405, "Ici, c'est la TV qui ouvre la partie.")
 
@@ -109,69 +110,4 @@ class LanChessClient(private val base: String) : ChessTransport {
     override fun resign(s: ChessSession) = act(s, "resign")
     override fun draw(s: ChessSession, action: String) = act(s, "draw", action)
     override fun leave(s: ChessSession) { runCatching { HttpJson.call("POST", u("/chess/api/leave", mapOf("token" to s.token))) } }
-}
-
-/**
- * Internet play through the project's server (relay): see docs/CHESS.md « Protocole du relais ». The server creates
- * games with a 6-character code, checks every move with its own engine and keeps the clock. Disabled ([enabled] =
- * false) until the server exposes the routes: every call then fails with a clear message and no network access.
- */
-class ChessRelayClient(
-    private val base: String = DEFAULT_URL,
-    val enabled: Boolean = false,
-    /** Connect timeout of the availability probe (tests lower it so they never wait for the 5 s default). */
-    private val probeConnectTimeoutMs: Int = 5_000,
-) : ChessTransport {
-    override val label = "Internet"
-    private fun u(path: String) = base.trimEnd('/') + API + path
-    private fun auth(s: ChessSession) = mapOf("Authorization" to "Bearer ${s.token}")
-    private fun on() { if (!enabled) throw ChessTransportException(503, DISABLED) }
-
-    /** Does the server answer the chess protocol? (false when disabled, offline, or routes missing). */
-    fun available(): Boolean = enabled && runCatching {
-        val (c, t) = HttpJson.call("GET", u("/hello"), readTimeoutMs = 4_000, connectTimeoutMs = probeConnectTimeoutMs)
-        c == 200 && (Json.obj(t)["protocol"] as? Number)?.toInt() == ChessRoom.PROTOCOL
-    }.getOrDefault(false)
-
-    override fun create(name: String, perMoveSeconds: Int, color: String, mode: ClockMode): ChessSession {
-        on()
-        val body = Json.write(linkedMapOf("name" to name, "perMoveSeconds" to MoveTimer.clamp(perMoveSeconds), "color" to color, "mode" to mode.name))
-        val j = HttpJson.obj(HttpJson.call("POST", u("/games"), body))
-        return HttpJson.session(j["code"] as? String ?: throw ChessTransportException(500, "code absent"), j)
-    }
-
-    override fun join(code: String, name: String, token: String?): ChessSession {
-        on()
-        val c = normalizeCode(code) ?: throw ChessTransportException(400, "Le code en ligne a 6 caractères (lettres et chiffres).")
-        val body = Json.write(linkedMapOf("name" to name, "token" to token))
-        return HttpJson.session(c, HttpJson.obj(HttpJson.call("POST", u("/games/$c/join"), body)))
-    }
-
-    override fun state(s: ChessSession, since: Long, waitSeconds: Int): Map<String, Any?> {
-        on()
-        val w = waitSeconds.coerceIn(0, 25)
-        return HttpJson.obj(HttpJson.call("GET", u("/games/${s.code}/state?since=$since&wait=$w"), headers = auth(s), readTimeoutMs = (w + 10) * 1000))
-    }
-
-    private fun post(s: ChessSession, what: String, body: Map<String, Any?> = emptyMap()): ChessAct {
-        on()
-        return HttpJson.act(HttpJson.call("POST", u("/games/${s.code}/$what"), Json.write(body), auth(s)))
-    }
-
-    override fun move(s: ChessSession, uci: String, ply: Int) = post(s, "move", linkedMapOf("uci" to uci, "ply" to ply))
-    override fun resign(s: ChessSession) = post(s, "resign")
-    override fun draw(s: ChessSession, action: String) = post(s, "draw", linkedMapOf("action" to action))
-    override fun leave(s: ChessSession) { if (enabled) runCatching { post(s, "leave") } }
-
-    companion object {
-        const val DEFAULT_URL = "https://bridge.sti-cm.com"
-        const val API = "/api/chess/v1"
-        const val DISABLED = "Le jeu en ligne n'est pas encore ouvert sur le serveur CastBridge."
-        /** Code alphabet: no 0/O, 1/I/L (read aloud or typed on a phone without mistakes). */
-        const val CODE_ALPHABET = "ABCDEFGHJKMNPQRSTUVWXYZ23456789"
-
-        /** « abc 23k » → « ABC23K », or null if it is not 6 characters of the alphabet. */
-        fun normalizeCode(code: String): String? = code.uppercase().filter { !it.isWhitespace() && it != '-' }
-            .takeIf { it.length == 6 && it.all { c -> c in CODE_ALPHABET } }
-    }
 }

@@ -32,6 +32,10 @@ object WalletMessages {
         "BAD_TXN" to "Opération invalide : vérifiez les valeurs saisies",
         "ESCROW_UNKNOWN" to "Mise inconnue",
         "ESCROW_CLOSED" to "Mise déjà réglée ou rendue",
+        // échecs en ligne avec mise (games-G2)
+        "TRIAL_FREE_ONLY" to "Version d'essai : parties libres seulement, sans mise",
+        "STAKE_NOT_OFFERED" to "Cette mise n'est pas proposée aux échecs : choisissez un des montants de la liste",
+        "STAKE_WIN_CAP" to "Limite de parties gagnées atteinte : la prochaine partie avec mise s'ouvrira plus tard",
     )
     private val LATER = setOf("RATE_LIMIT", "CONVERT_SUSPENDED", "TRANSFER_SUSPENDED", "LOOKUP_LIMIT", "CODE_LIMIT")
     private const val BIND_TEXT = "Cette TV doit prouver qu'elle est bien la sienne : vérifiez l'heure de la TV, puis réessayez"
@@ -48,6 +52,9 @@ object WalletMessages {
                 "BIND_PROOF" -> Shown(BIND_TEXT, code, Kind.BIND_PROOF)
                 "OFFLINE" -> Shown(WalletReason.OFFLINE.text(), code, Kind.NETWORK)
                 "INSUFFICIENT" -> Shown(WalletReason.INSUFFICIENT.text(available, cur), code, Kind.REFUSED)
+                // le plafond de parties gagnées dit lui-même quand la prochaine partie avec mise s'ouvre (« demain à 00:00 », « lundi 05/10 à 00:00 »…) : le texte du serveur, borné, fait foi
+                "STAKE_WIN_CAP" -> Shown(serverMessage?.takeIf { it.startsWith("Limite atteinte") }?.take(200) ?: EXTRA.getValue(code), code, Kind.REFUSED)
+                "STAKE_NOT_OFFERED" -> Shown(serverMessage?.takeIf { it.startsWith("Cette mise n'est pas proposée") }?.take(200) ?: EXTRA.getValue(code), code, Kind.REFUSED)
                 else -> {
                     val known = WalletReason.values().firstOrNull { it.name == code }
                     val extra = EXTRA[code]

@@ -65,7 +65,7 @@ class ServerAuthority(transport: PlayTransport, override val scope: PlayScope = 
                     }
                 }
                 is ServerMsg.Error -> { lastError = m; if (pendingRelayJoin && isJoinRefusal(m.reason)) { relayError = m; pendingRelayJoin = false } }
-                is ServerMsg.Ack -> if (relayRefs.remove(m.ref)) relayAck = m.ref to m.result else acks[m.ref] = m.result
+                is ServerMsg.Ack -> if (relayRefs.remove(m.ref)) relayAck = m.ref to m.result else { acks[m.ref] = m.result; while (acks.size > MAX_ACKS) acks.remove(acks.keys.first()) }   // les accusés d'une partie d'échecs (un par coup) sont lus par l'écouteur de messages : la table reste bornée
                 is ServerMsg.Question -> lastQuestion = m
                 is ServerMsg.Reveal -> lastReveal = m
                 is ServerMsg.RoomGone -> lastGone = m
@@ -97,6 +97,10 @@ class ServerAuthority(transport: PlayTransport, override val scope: PlayScope = 
     }
 
     fun hello(deviceHash: String? = null, ticket: String? = null) { send(ClientMsg.Hello(PlayProtocol.PROTO, PlayProtocol.CAPS, deviceHash, ticket)) }
+    /** Envoie un premier message déjà construit (salles de jeu à tour de rôle : `create{game…}` ou `join{escrow…}`) ; la réponse arrive par [token], [role], [lastErrorOrNull] comme pour [joinRoom]. */
+    fun sendOpening(m: ClientMsg) { synchronized(lock) { welcome = null; lastError = null }; send(m) }
+    /** Envoie une action de jeu (`move`, `resign`, `draw`, `cancel`) et rend sa référence (`seq`) : l'accusé arrive à l'écouteur de messages. Faux = pas envoyée (liaison en réouverture : mise en file bornée). */
+    fun gameAct(op: String, arg: String?, ply: Int?): Long { val ref = synchronized(lock) { ++clientSeq }; send(ClientMsg.GameAct(op, arg, ply, ref)); return ref }
     fun create(name: String?, mode: String?, activation: String? = null, rentals: List<String> = emptyList(), proof: String? = null) { send(ClientMsg.Create(name, mode, activation, rentals, proof)) }
     fun resume(roomId: String, token: String, lastSeq: Long) { send(ClientMsg.Resume(roomId, token, lastSeq)) }
     fun setScope(open: Boolean) { send(ClientMsg.Scope(open)) }
@@ -188,5 +192,5 @@ class ServerAuthority(transport: PlayTransport, override val scope: PlayScope = 
 
     override fun safety(): SafetyView = synchronized(lock) { safety } ?: SafetySign.of(SafetyFacts(scope))
 
-    companion object { const val MAX_OUTBOX = 20; const val MAX_RELAY_REFS = 64 }
+    companion object { const val MAX_OUTBOX = 20; const val MAX_RELAY_REFS = 64; const val MAX_ACKS = 128 }
 }

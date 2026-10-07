@@ -23,7 +23,7 @@ import java.util.concurrent.atomic.AtomicInteger
  * Same limits as the quiz: requests per IP, wrong codes per IP, event streams per player and in total.
  */
 class ChessHttp(
-    private val room: () -> ChessRoom?,
+    private val room: () -> ChessHost?,
     private val clock: () -> Long = { System.nanoTime() / 1_000_000 },
     private val streamMaxMs: Long = 10 * 60_000L,
     private val pingMs: Long = 15_000,
@@ -56,7 +56,7 @@ class ChessHttp(
         }
     }
 
-    private fun openRoom(): ChessRoom? = room()?.takeIf { it.stage != ChessRoom.Stage.CLOSED }
+    private fun openRoom(): ChessHost? = room()?.takeIf { it.stage != ChessRoom.Stage.CLOSED }
 
     private fun hello(): Response {
         val r = openRoom() ?: return json(200, """{"open":false,"protocol":${ChessRoom.PROTOCOL}}""")
@@ -125,7 +125,7 @@ class ChessHttp(
         return res
     }
 
-    private inner class SseStream(private val r: ChessRoom, private val pl: ChessRoom.Player) : InputStream() {
+    private inner class SseStream(private val r: ChessHost, private val pl: ChessRoom.Player) : InputStream() {
         private var buf = ByteArray(0)
         private var pos = 0
         private var sent = -1L
