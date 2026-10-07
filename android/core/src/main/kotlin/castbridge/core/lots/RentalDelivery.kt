@@ -24,7 +24,8 @@ fun interface TvTransport {
 class HttpTvTransport(private val base: String, private val pin: String?, private val timeoutMs: Int = 8000) : TvTransport {
     override fun call(method: String, path: String, params: Map<String, String>, body: ByteArray?): TvReply {
         val q = if (params.isEmpty()) "" else params.entries.joinToString("&", "?") { (k, v) -> k + "=" + URLEncoder.encode(v, "UTF-8").replace("+", "%20") }
-        val c = URL(base.trimEnd('/') + path + q).openConnection() as HttpURLConnection
+        // BoundRoute: a call to a Wi-Fi Direct group (192.168.49.x) leaves by the group's network (Android 10+ : the group is not the default network); any other address opens as usual
+        val c = castbridge.core.net.BoundRoute.open(URL(base.trimEnd('/') + path + q)) as HttpURLConnection
         try {
             c.requestMethod = method; c.connectTimeout = timeoutMs; c.readTimeout = timeoutMs * 4
             castbridge.core.trust.TvCredential.apply(c, pin)

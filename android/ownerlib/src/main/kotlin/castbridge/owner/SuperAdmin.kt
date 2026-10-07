@@ -27,6 +27,17 @@ object SuperAdmin {
     /** False when the build carries no valid bcrypt hash: the gesture must not even react (nothing is revealed). */
     val enabled: Boolean get() = SuperAdminGate(BuildConfig.SUPERADMIN_BCRYPT, castbridge.core.owner.UnlockGuard({ 0L })).enabled
     fun open(ctx: Context) = ctx.startActivity(Intent(ctx, SuperAdminActivity::class.java))
+
+    /** « Émettre et installer » (écran « Activer la TV ») : la demande d'appareil lue sur la TV, à pré-remplir dans l'écran « Activer » de la console. */
+    const val EXTRA_DEVICE_REQUEST = "castbridge.owner.device_request"
+    /** La console a été ouverte par l'écran « Activer la TV » : une fois la clé générée, « Installer sur la TV » la lui rend ([RESULT_KEY]) au lieu de la laisser sur place. */
+    const val EXTRA_RETURN_KEY = "castbridge.owner.return_key"
+    /** La clé (jeton `cbx1`) rendue à l'écran appelant, par `setResult` : le propriétaire a déjà touché « Installer sur la TV ». */
+    const val RESULT_KEY = "castbridge.owner.key"
+
+    /** L'intention de l'écran « Activer la TV » : la même console, ouverte pré-remplie ; le mot de passe reste demandé à chaque fois. */
+    fun intentForActivation(ctx: Context, deviceRequest: String?): Intent =
+        Intent(ctx, SuperAdminActivity::class.java).putExtra(EXTRA_RETURN_KEY, true).apply { if (deviceRequest != null) putExtra(EXTRA_DEVICE_REQUEST, deviceRequest) }
 }
 
 /**
