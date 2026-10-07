@@ -39,6 +39,11 @@ def _mid(ref):
     return ref[2:] if isinstance(ref, str) and ref.startswith("m:") else None
 
 
+def _level(pack):
+    # « a0 » et « A0 » désignent le même niveau (le lecteur du cœur ignore la casse) : forme canonique en majuscules, pour le registre et la priorité
+    return str(pack["level"]).strip().upper()
+
+
 class Builder:
     def __init__(self, policy=None):
         self.policy = policy or DEFAULT_POLICY
@@ -47,13 +52,14 @@ class Builder:
 
     def _voice_class(self, pack, role, kind_of):
         p = self.policy
-        level = pack["level"]
+        level = _level(pack)
+        registers = {str(k).upper(): v for k, v in p["register"].items()}
         gender = p["speakerGender"].get(role, p["speakerGenderDefault"]) if role else p["speakerGenderDefault"]
-        return {"ageBand": p["ageBand"], "gender": gender, "register": p["register"].get(level, p["registerDefault"]),
+        return {"ageBand": p["ageBand"], "gender": gender, "register": registers.get(level, p["registerDefault"]),
                 "role": role or kind_of, "variety": p["varieties"].get(pack["target"])}
 
     def _add(self, pack, media_id, kind, element, source, payload, bitrate=None, max_s=None):
-        level = pack["level"]
+        level = _level(pack)
         level_rank = LEVEL_RANK.get(level, 9)
         tier = 0 if level_rank <= 2 else 1
         priority = tier * 100000 + KINDS.index(kind) * 10000 + level_rank * 100 + ELEMENT_RANK[element]
