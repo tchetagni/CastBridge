@@ -35,6 +35,15 @@ def _lang_code(target):
     return {"zh": "zh", "ja": "ja", "en": "en", "de": "de", "fr": "fr", "it": "it", "es": "es"}.get(target, target)
 
 
+def _head(model):
+    # « xièxie (4e ton, ton neutre) » -> « xièxie »
+    return (model or "").split("(")[0].split("（")[0]
+
+
+def _norm(s):
+    return "".join(ch for ch in (s or "").lower() if ch.isalnum())
+
+
 def _mid(ref):
     return ref[2:] if isinstance(ref, str) and ref.startswith("m:") else None
 
@@ -49,6 +58,7 @@ class Builder:
         self.policy = policy or DEFAULT_POLICY
         self.requests = {}
         self.conflicts = []
+        self.refs = []
 
     def _voice_class(self, pack, role, kind_of):
         p = self.policy
@@ -126,6 +136,24 @@ class Builder:
         old["fingerprint"] = sha256_text(canonical(body))
         old.setdefault("sharedWith", []).append(source)
 
+    def _resolve_refs(self):
+        # exercice oral sans texte propre : il réutilise l'audio déjà demandé sous le même identifiant
+        for pack, mid, source, voice, bitrate, max_s, model in self.refs:
+            old = self.requests.get(mid)
+            if old is None:
+                self._add(pack, mid, "audio", "exercise", source, {"text": None, "voiceClass": voice}, bitrate, max_s)
+                continue
+            # la réutilisation n'est permise que si l'oral demande bien ce que l'audio dit
+            said = {_norm(old["payload"].get("reading")), _norm(old["payload"].get("text"))} - {""}
+            wanted = _norm(_head(model))
+            if wanted and said and wanted in said:
+                old.setdefault("sharedWith", []).append(source)
+            else:
+                why = "modèle absent : réutilisation invérifiable" if not wanted else (
+                    "lecture de l'audio inconnue : réutilisation invérifiable" if not said else
+                    "l'oral demande « %s » mais l'audio réutilisé dit « %s »" % (_head(model), old["payload"].get("reading") or old["payload"].get("text")))
+                self.conflicts.append({"id": mid, "message": "oral réutilisant un audio : " + why, "a": old["source"], "b": source})
+
     def pack(self, pack):
         a = self.policy["audio"]
         for u in pack.get("units", []):
@@ -163,6 +191,10 @@ class Builder:
                     text, field = (answers[0], "answers[0]") if (x.get("kind") == "dictation" and answers) else (None, "answers[0]")
                     if text is None and isinstance(x.get("text"), str) and x["text"].strip():
                         text, field = x["text"], "text"   # champ additif : le mot ou la phrase EXACTS dits par l'audio d'un exercice (QCM, paire minimale, vrai/faux…)
+                    if text is None and x.get("kind") == "speak":
+                        src = {"pack": pack["id"], "unit": unit, "element": x.get("id"), "field": "audio (réutilisé)"}
+                        self.refs.append((pack, mid, src, self._voice_class(pack, None, "mot"), a["phraseBitrateKbps"], a["phraseMaxDurationS"], x.get("model")))
+                        continue
                     self._add(pack, mid, "audio", "exercise", {"pack": pack["id"], "unit": unit, "element": x.get("id"), "field": field},
                               {"text": text, "voiceClass": self._voice_class(pack, None, "mot")}, a["phraseBitrateKbps"], a["phraseMaxDurationS"])
             for s in u.get("stories", []):
@@ -201,6 +233,7 @@ def build(root, policy=None):
     b = Builder(policy)
     for p in load_packs(root):
         b.pack(p)
+    b._resolve_refs()
     rows = sorted(b.requests.values(), key=lambda r: (r["priority"], r["id"]))
     return rows, b.conflicts
 
