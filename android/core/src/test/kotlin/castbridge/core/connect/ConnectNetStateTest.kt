@@ -50,6 +50,25 @@ class ConnectNetStateTest {
         assertFalse(NetStates.contactRecent(lastOk = true, via = null, lastAt = now, now = now))
     }
 
+    @Test fun aDirectFailureAfterTheLastContactCancelsTheProof() {
+        // R-41 (I-2) : le battement de cœur direct date de 5 minutes, puis un appel réel a ÉCHOUÉ sur le réseau propre : la box a perdu Internet depuis, la preuve ne vaut plus
+        val now = 10_000_000L; val contact = now - 5 * 60_000L
+        assertTrue(NetStates.contactRecent(true, "direct", contact, now, directFailedAt = 0L), "aucun échec connu : la preuve vaut")
+        assertTrue(NetStates.contactRecent(true, "direct", contact, now, directFailedAt = contact - 1), "un échec ANTÉRIEUR au contact : le contact l'a démenti, la preuve vaut")
+        assertTrue(NetStates.contactRecent(true, "direct", contact, now, directFailedAt = contact), "au même instant : on garde la preuve (rien ne dit lequel est venu en dernier)")
+        assertFalse(NetStates.contactRecent(true, "direct", contact, now, directFailedAt = contact + 1), "un échec POSTÉRIEUR au contact annule la preuve")
+        assertFalse(NetStates.contactRecent(true, "direct", contact, now, directFailedAt = now), "même tout juste maintenant")
+        // et la vérité qui en découle : avec le lien relié mais ni validation ni preuve, la TV est hors ligne (et le tuyau peut être demandé)
+        val failed = NetStates.contactRecent(true, "direct", contact, now, directFailedAt = now - 1_000)
+        assertEquals(NetState.NONE, NetStates.of(facts(directValidated = false, contactRecent = failed)))
+        assertFalse(NetStates.reachable(facts(directValidated = false, contactRecent = failed)), "le portefeuille ne se dit plus en ligne")
+    }
+
+    @Test fun aNewContactAfterTheFailureBringsTheProofBack() {
+        val now = 10_000_000L; val failedAt = now - 10 * 60_000L
+        assertTrue(NetStates.contactRecent(true, "direct", lastAt = now - 60_000L, now = now, directFailedAt = failedAt), "le serveur a répondu en direct depuis l'échec : la box a retrouvé Internet")
+    }
+
     @Test fun beforeTheFirstMeasureTheTvDoesNotClaimToBeOffline() {
         assertTrue(NetStates.reachable(facts(checked = false)), "optimisme avant la première mesure (comme l'ancien WalletHub.networkUp)")
         assertFalse(NetStates.reachable(facts(checked = true)))
@@ -67,7 +86,8 @@ class ConnectNetStateTest {
     @Test fun theTunnelPathIsDerivedFromTheSameTruth() {
         // plus de définition propre : choose() = path(NetStates.of(...)), et path() lit NetState
         assertEquals(TunnelPath.DIRECT, TunnelConnectivity.path(NetState.DIRECT))
-        assertEquals(TunnelPath.GATEWAY, TunnelConnectivity.path(NetState.VIA_RELAY))
+        assertEquals(TunnelPath.GATEWAY, TunnelConnectivity.path(NetState.VIA_RELAY, assistPipe = true), "le tuyau du téléphone, quand une assistance l'a demandé (R-45)")
+        assertEquals(TunnelPath.OFFLINE, TunnelConnectivity.path(NetState.VIA_RELAY), "sans assistance demandée le tunnel n'emprunte pas le tuyau")
         assertEquals(TunnelPath.OFFLINE, TunnelConnectivity.path(NetState.NONE))
         for (d in listOf(true, false)) for (c in listOf(true, false)) for (ok in listOf(true, false))
             assertEquals(TunnelConnectivity.path(NetStates.of(d, c, ok)), TunnelConnectivity.choose(d, c, ok), "directOk=$d connected=$c gatewayOk=$ok")

@@ -111,6 +111,16 @@ class ActivationScreenPlanTest {
         assertTrue(P.plan(P.Facts()).first { it.lane == P.Lane.USB }.title.contains("clé USB"))
     }
 
+    @Test fun `the phone way says the phone reads the device request and obtains the key, and never asks to send the code`() {
+        // R-46 bis : la TV disait « fournissez ce code d'appareil à CastBridge » : faux, le code seul ne permet pas d'émettre une clé (l'émetteur exige les empreintes de facteurs)
+        assertEquals("le téléphone lit la demande d'appareil et obtient la clé", P.PHONE_WAY)
+        val phone = P.plan(P.Facts()).first { it.lane == P.Lane.PHONE }
+        assertTrue(P.PHONE_WAY in phone.title, phone.title)
+        val texts = listOf(P.Facts(), P.Facts(phoneLinked = true), P.Facts(group = P.Group.Offered, lanIps = lan), P.Facts(group = P.Group.Failed(null))).flatMap { f -> P.plan(f).flatMap { listOf(it.title, it.status) } } +
+            listOf(P.phoneInstruction("482913", true), P.phoneInstruction("482913", false), P.phoneInstruction("482913", false, sameWifi = true), P.NO_ROUTE_INSTRUCTION)
+        for (t in texts) for (bad in listOf("envoyez le code", "envoyer le code", "fournissez", "communiquez")) assertFalse(bad in t.lowercase(), "« $bad » dans « $t »")
+    }
+
     @Test fun `no way's text mentions sender or receiver, only the product names`() {
         val all = P.plan(P.Facts(phoneLinked = true, usb = keyUnusable, group = P.Group.Failed(WifiDirect.Err.UNSUPPORTED), lanIps = lan)).flatMap { listOf(it.title, it.status) } +
             P.plan(P.Facts(group = P.Group.Offered, lanIps = lan)).flatMap { listOf(it.title, it.status) } +

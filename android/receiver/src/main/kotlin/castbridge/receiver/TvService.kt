@@ -8,6 +8,7 @@ import android.app.NotificationManager
 import android.app.PendingIntent
 import android.annotation.SuppressLint
 import android.app.Service
+import android.bluetooth.BluetoothAdapter
 import android.bluetooth.BluetoothDevice
 import android.bluetooth.BluetoothManager
 import android.content.BroadcastReceiver
@@ -413,6 +414,7 @@ class TvService : Service(), Device {
         icons.setInternet(NetState.CHECKING)
         main.postDelayed(iconTick, 2000)
         watchNetwork()
+        watchBluetooth()
     }
 
     /** 32 random bytes made at the first start, in the app's private files (never a volume): the HMAC key of the content index caches (R-12). */
@@ -721,11 +723,18 @@ class TvService : Service(), Device {
     /** relay-R1: castbridge.receiver.TvNet just learnt something about the pipe (end-to-end check done): the badge and the screens read the state again soon (no new probe of the TV's own network). */
     fun netRecheck() { main.removeCallbacks(netKick); main.postDelayed(netKick, 1500) }
 
+    /** The system's « Internet validated » verdict, per network (R-41): only a CHANGE of the overall verdict wakes the network loop (bandwidth and signal updates fire the same callback). */
+    private val netValidation = castbridge.core.connect.ValidationWatch<android.net.Network>()
+
     private fun watchNetwork() {
         if (netCallback != null) return
         val cb = object : android.net.ConnectivityManager.NetworkCallback() {
             override fun onAvailable(network: android.net.Network) = netChanged()
-            override fun onLost(network: android.net.Network) = netChanged()
+            override fun onLost(network: android.net.Network) { netValidation.lost(network); netChanged() }
+            // R-41: Android re-validates the network by itself (Internet lost behind the box, or back): read it at once instead of at the next 60 s round
+            override fun onCapabilitiesChanged(network: android.net.Network, caps: android.net.NetworkCapabilities) {
+                if (netValidation.reported(network, caps.hasCapability(android.net.NetworkCapabilities.NET_CAPABILITY_VALIDATED))) netChanged()
+            }
         }
         runCatching {
             getSystemService(android.net.ConnectivityManager::class.java)
@@ -738,6 +747,34 @@ class TvService : Service(), Device {
         netCallback?.let { cb -> runCatching { getSystemService(android.net.ConnectivityManager::class.java).unregisterNetworkCallback(cb) } }
         netCallback = null
     }
+
+    // ------------------------------------------------------------------ the Bluetooth adapter comes back (R-42, audit 2026-10-07 b, I-12)
+    /**
+     * Switching Bluetooth off kills every server socket of the TV: the Internet gateway ([BtGatewayHost]) listens again when the adapter is back ON ([castbridge.core.gateway.BtAdapterWatch]),
+     * whatever its accept loop could do during a short outage. Hook only: the rule and the loop are in the core, the restart in [BtGatewayHost.restart].
+     */
+    private var btStateReceiver: BroadcastReceiver? = null
+    private var btAdapterState: Int? = null
+
+    private fun watchBluetooth() {
+        if (btStateReceiver != null) return
+        btAdapterState = runCatching { getSystemService(BluetoothManager::class.java)?.adapter?.state }.getOrNull()
+        val r = object : BroadcastReceiver() {
+            override fun onReceive(c: Context, i: Intent) {
+                val now = i.getIntExtra(BluetoothAdapter.EXTRA_STATE, BluetoothAdapter.ERROR)
+                val again = castbridge.core.gateway.BtAdapterWatch.listenAgain(btAdapterState, now)
+                btAdapterState = now
+                if (again) { Log.i(TAG, "Bluetooth is back: the gateway listens again"); runCatching { gateway?.restart() } }
+            }
+        }
+        runCatching {
+            val f = IntentFilter(BluetoothAdapter.ACTION_STATE_CHANGED)
+            if (Build.VERSION.SDK_INT >= 33) registerReceiver(r, f, Context.RECEIVER_NOT_EXPORTED) else registerReceiver(r, f)
+            btStateReceiver = r
+        }.onFailure { Log.w(TAG, "bluetooth state receiver: ${it.javaClass.simpleName}") }
+    }
+
+    private fun unwatchBluetooth() { btStateReceiver?.let { runCatching { unregisterReceiver(it) } }; btStateReceiver = null }
 
     /** Gateway status callback: re-probe when a phone connects or disconnects. */
     private fun gatewayStatus(st: String?) {
@@ -1311,6 +1348,7 @@ class TvService : Service(), Device {
         unregisterUsbEvents()
         stopCore()
         unwatchNetwork()
+        unwatchBluetooth()
         reception.removeListener(receptionNotifier)
         runCatching { val nm = getSystemService(NotificationManager::class.java); notifTokens.keys.forEach { nm.cancel(it) } }   // no « reprise en attente » left behind
         main.removeCallbacksAndMessages(null)

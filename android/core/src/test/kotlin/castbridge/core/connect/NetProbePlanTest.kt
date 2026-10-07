@@ -46,6 +46,20 @@ class NetProbePlanTest {
         assertFalse(p.directDue(t + 1_000, false))
     }
 
+    @Test fun aFailedRealCallOnTheOwnNetworkProbesAtOnceAndIsRemembered() {
+        // R-41 (I-2) : un appel réel au serveur a échoué sur le réseau propre : la sonde est due au prochain tour (pas dans 5 minutes), et la date de l'échec est gardée
+        val p = NetProbePlan(); var t = 1_000_000L
+        p.directDone(t)
+        t += 20_000
+        assertFalse(p.directDue(t, false)); assertEquals(0L, p.directFailedAt())
+        p.directFailureSeen(t)
+        assertTrue(p.directDue(t, false))
+        assertEquals(t, p.directFailedAt(), "la date reste connue après la sonde : elle sert à annuler la preuve d'un contact plus ancien")
+        p.directDone(t + 1_000)
+        assertFalse(p.directDue(t + 2_000, false), "une seule sonde par échec : la cadence reprend")
+        assertEquals(t, p.directFailedAt())
+    }
+
     @Test fun aManualTestAlwaysProbes() {
         val p = NetProbePlan(); p.directDone(1_000_000)
         assertTrue(p.directDue(1_000_001, manual = true))

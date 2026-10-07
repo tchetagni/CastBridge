@@ -213,7 +213,12 @@ object ActivationCenter {
             val downloads = downloadDirs(own)
             val volumes = own.mapNotNull { (d, id) -> id?.let { VolumeFact(it, readOnly(d)) } }.distinctBy { it.id }
             var accepted: ActivationResult? = null; var refused: ActivationResult? = null
+            // R-44 (audit 2026-10-07 b, I-16): a key ALREADY installed on this TV (same text, or same activation) is neither « found » nor « expired »: it is not verified again, not installed
+            // again and not announced. The memory is the installed keys themselves: their fingerprints and signatures.
+            val prints = synchronized(stored) { stored.map { UsbKeyJudge.fingerprint(it.third) }.toSet() }
+            val signatures = allActivations().map { it.signature }.filter { it.isNotEmpty() }.toSet()
             val o = ActivationLookup.run(ActivationLookup.candidates(downloads, own), ActivationLookup.dirsToList(downloads, own), volumes, access = storageAccess()) { line ->
+                if (UsbKeyJudge.installed(line, prints, signatures)) return@run Verdict.INSTALLED
                 val r = if (install) accept(Channel.MANUAL, line.toByteArray(Charsets.UTF_8)) else check(line)
                 if (r is ActivationResult.Accepted) { if (accepted == null) accepted = r } else if (refused == null) refused = r
                 verdictOf(r)

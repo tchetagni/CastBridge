@@ -1,6 +1,7 @@
 package castbridge.receiver
 
 import android.app.Activity
+import android.app.ActivityManager
 import android.app.Notification
 import android.app.NotificationChannel
 import android.app.NotificationManager
@@ -12,6 +13,7 @@ import android.os.Build
 import android.os.SystemClock
 import android.provider.Settings
 import android.util.Log
+import castbridge.core.tv.OpenTarget
 import castbridge.core.tv.OpenTvPlan
 import castbridge.core.tv.OpenTvReply
 import castbridge.core.tv.OpenTvScreen
@@ -25,9 +27,13 @@ import java.util.concurrent.locks.ReentrantLock
  *
  * L'ordre d'essai, la vérification après chaque essai et la réponse sont la règle pure [OpenTvPlan] (testée en JVM) ; ce fichier ne fait que les gestes Android :
  *
- *  - **direct** : `startActivity(NEW_TASK | CLEAR_TOP)` depuis le service, permis par « Afficher par-dessus les autres applications » (ou avant Android 10) ;
+ *  - **direct** : depuis le service, permis par « Afficher par-dessus les autres applications » (ou avant Android 10) ;
  *  - **fullscreen** : la notification du canal « Demandes du téléphone » (le même que la lecture demandée à distance), avec l'intention plein écran quand Android l'autorise ;
  *  - **accessibility** : le service d'accessibilité « CastBridge Télécommande » (Android lui permet de démarrer un écran depuis l'arrière-plan), s'il est connecté.
+ *
+ * Ce qui revient à l'écran est la règle pure [OpenTvPlan.target] (R-40, audit anti-régression 2026-10-07 b, I-1) : **sans écran demandé, la TÂCHE de CastBridge-TV revient telle qu'elle
+ * était** (`AppTask.moveToFront`, ou une intention vers l'écran du sommet avec `NEW_TASK | REORDER_TO_FRONT` : rien n'est fermé) ; `PlayerActivity` est `singleTask` et racine de la tâche,
+ * la démarrer fermerait Quiz, partie en ligne (`PlayOnlineActivity.onDestroy` l'arrête), Échecs, Langues, Portefeuille. Un écran demandé explicitement s'ouvre (`CLEAR_TOP`).
  *
  * Rien ici n'allume une TV éteinte (pas de HDMI-CEC, pas de Wake-on-LAN) et aucune permission n'est ajoutée : `SYSTEM_ALERT_WINDOW` et `USE_FULL_SCREEN_INTENT`
  * étaient déjà déclarées. Si aucun chemin ne marche, la TV propose UNE fois dans son MENU la ligne « Autoriser CastBridge-TV à s'afficher par-dessus les autres applications ».
@@ -83,8 +89,31 @@ object TvForeground {
     }.getOrNull()
     private fun overlayScreenExists(ctx: Context) = overlayIntent(ctx) != null
 
-    /** L'intention de l'écran demandé ; sans écran précis, CastBridge-TV tel qu'il était (une vidéo qui joue n'est pas interrompue). */
-    internal fun intentFor(ctx: Context, screen: OpenTvScreen?): Intent {
+    /** Le nom de la classe de l'écran qui est au sommet de la tâche de CastBridge-TV (le dernier repris et encore vivant), null = aucun connu. */
+    private fun topName(): String? = ScreenCapture.top?.takeIf { !it.isFinishing && !it.isDestroyed }?.javaClass?.name
+
+    /** La tâche de CastBridge-TV, si le système en garde une (même quand notre processus a redémarré pendant que YouTube était devant). */
+    private fun appTask(ctx: Context): ActivityManager.AppTask? = runCatching { ctx.getSystemService(ActivityManager::class.java).appTasks.firstOrNull() }.getOrNull()
+
+    /** Ce que le geste ramène à l'écran : la règle pure [OpenTvPlan.target] avec ce que la TV sait de sa tâche. */
+    private fun targetOf(ctx: Context, screen: OpenTvScreen?): OpenTarget = OpenTvPlan.target(screen, topName(), appTask(ctx) != null)
+
+    /** Le système ramène la tâche de l'application devant, TELLE QU'ELLE EST (même exemption de démarrage depuis l'arrière-plan qu'un `startActivity`). Faux si elle n'existe plus. */
+    private fun moveTaskToFront(ctx: Context): Boolean = runCatching { appTask(ctx)!!.moveToFront() }.isSuccess
+
+    /**
+     * L'intention du geste. [OpenTarget.Resume] : l'écran du sommet est seulement REMIS DEVANT dans sa tâche (jamais `CLEAR_TOP`, jamais `PlayerActivity` quand autre chose est au-dessus) ;
+     * [OpenTarget.Screen] : l'écran demandé (une vidéo n'est pas interrompue par `player`) ; [OpenTarget.Launch] : rien de vivant, le lanceur.
+     */
+    internal fun intentFor(ctx: Context, target: OpenTarget): Intent = when (target) {
+        is OpenTarget.Resume -> (target.top?.let { Intent().setClassName(ctx, it) } ?: Intent(ctx, PlayerActivity::class.java))
+            .addFlags(Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_REORDER_TO_FRONT)
+        is OpenTarget.Screen -> screenIntent(ctx, target.screen)
+        OpenTarget.Launch -> Intent(ctx, PlayerActivity::class.java).addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+    }
+
+    /** L'écran demandé explicitement : ce que demande le téléphone, y compris `home` qui quitte la vidéo ; les écrans au-dessus se ferment, c'est ce qui est demandé. */
+    private fun screenIntent(ctx: Context, screen: OpenTvScreen): Intent {
         val flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_SINGLE_TOP
         return when (screen) {
             OpenTvScreen.GAMES -> Intent(ctx, GamesActivity::class.java)
@@ -101,9 +130,11 @@ object TvForeground {
 
     private class AndroidActions(private val svc: TvService) : OpenTvPlan.Actions {
         override fun start(way: OpenTvPlan.Way, screen: OpenTvScreen?, fullScreenIntent: Boolean): Boolean {
-            val i = intentFor(svc, screen)
+            val target = targetOf(svc, screen)
+            val i = intentFor(svc, target)
             return when (way) {
-                OpenTvPlan.Way.DIRECT -> runCatching { svc.startActivity(i) }.isSuccess        // sous Android 10+, un démarrage bloqué ne lève rien : awaitFront le voit
+                // sous Android 10+, un démarrage bloqué ne lève rien : awaitFront le voit
+                OpenTvPlan.Way.DIRECT -> (target is OpenTarget.Resume && moveTaskToFront(svc)) || runCatching { svc.startActivity(i) }.isSuccess
                 OpenTvPlan.Way.FULLSCREEN -> post(svc, i, fullScreenIntent)
                 OpenTvPlan.Way.ACCESSIBILITY -> RemoteAccessibilityService.instance?.let { a -> runCatching { a.startActivity(i) }.isSuccess } ?: false
             }

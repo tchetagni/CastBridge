@@ -105,6 +105,7 @@ class UsbActivationBannerTest {
         B.State.NOT_VALID -> B.from(facts(Probe.NOT_VALID)); B.State.TOO_BIG -> B.from(facts(Probe.TOO_BIG))
         B.State.EMPTY -> B.from(facts(Probe.EMPTY)); B.State.UNREADABLE -> B.from(facts(Probe.UNREADABLE))
         B.State.HIDDEN -> B.from(facts(Probe.ABSENT, access = StorageAccess.MISSING)); B.State.NOT_FOUND -> B.from(facts(Probe.ABSENT))
+        B.State.INSTALLED -> B.from(facts(Probe.INSTALLED))
         B.State.WAITING_CHECK -> B.waitingForCheck("Clé « Lexar » : vérification par Android… patientez")
         B.State.DAMAGED -> B.from(facts(volumes = emptyList()), B.KeyNote(UsbPhase.DAMAGED, "Clé illisible : Android n'a pas pu la réparer."))
     }
@@ -137,7 +138,7 @@ class UsbActivationBannerTest {
             assertEquals(viewOf(s).text, B.homeLine(viewOf(s)), "$s")
         }
         // a key plugged to watch videos must not nag the home
-        for (s in listOf(B.State.IDLE, B.State.TERMS_PENDING, B.State.SEARCHING, B.State.NO_KEY, B.State.HIDDEN, B.State.NOT_FOUND)) assertNull(B.homeLine(viewOf(s)), "$s")
+        for (s in listOf(B.State.IDLE, B.State.TERMS_PENDING, B.State.SEARCHING, B.State.NO_KEY, B.State.HIDDEN, B.State.NOT_FOUND, B.State.INSTALLED)) assertNull(B.homeLine(viewOf(s)), "$s")
     }
 
     @Test fun `the search at plug-in is retried briefly while the volume settles, never in a loop`() {
@@ -149,6 +150,31 @@ class UsbActivationBannerTest {
         }
         for (s in B.State.values().filter { it !in listOf(B.State.NO_KEY, B.State.NOT_FOUND, B.State.HIDDEN) }) assertNull(B.nextRetryDelayMs(s, 0), "$s is decisive or waiting: no retry")
         assertTrue(B.nextRetryDelayMs(B.State.NO_KEY, 0)!! + B.nextRetryDelayMs(B.State.NO_KEY, 1)!! <= 5_000L, "the banner is there within 5 s of the mount (ACT-F6)")
+    }
+
+    @Test fun `a key that is already installed is not announced, whatever the number of copies`() {
+        // R-44 (I-16) : l'outil de bureau écrit trois copies, la clé reste branchée : « trouvée » puis « périmée » à chaque branchement. Maintenant : rien à annoncer.
+        for (copies in 1..4) {
+            val v = B.from(facts(*Array(copies) { Probe.INSTALLED }))
+            assertEquals(B.State.INSTALLED, v.state, "$copies copie(s)")
+            assertFalse(v.canActivate, "il n'y a rien à activer")
+            assertEquals(LineTone.INFO, v.tone, "ni vert (« trouvée ») ni orange (« périmée »)")
+            assertTrue(v.keyPresent)
+            assertEquals("Clé USB : cette activation est déjà installée sur cette TV", v.text)
+        }
+        assertNull(B.homeLine(B.from(facts(Probe.INSTALLED))), "l'accueil ne dit rien")
+    }
+
+    @Test fun `an installed key hides nothing that is worth saying about another file, and nothing hides it but a real verdict`() {
+        assertEquals(B.State.FOUND, state(Probe.INSTALLED, Probe.ACCEPTED), "une AUTRE clé bonne reste annoncée")
+        assertEquals(B.State.WRONG_TV, state(Probe.INSTALLED, Probe.WRONG_DEVICE), "la clé d'une autre TV, déposée à côté, reste signalée")
+        assertEquals(B.State.EXPIRED, state(Probe.INSTALLED, Probe.EXPIRED))
+        assertEquals(B.State.NOT_VALID, state(Probe.INSTALLED, Probe.NOT_VALID))
+        // les fichiers absents, illisibles, vides ou trop gros ne sont pas des verdicts : la clé installée parle
+        assertEquals(B.State.INSTALLED, state(Probe.ABSENT, Probe.INSTALLED, Probe.UNREADABLE, Probe.EMPTY, Probe.TOO_BIG))
+        // Android 11 cache Download mais un fichier a été LU dans le dossier de l'application : ce n'est pas un dossier invisible
+        assertEquals(B.State.INSTALLED, state(Probe.ABSENT, Probe.INSTALLED, access = StorageAccess.MISSING))
+        assertEquals(B.State.INSTALLED, state(Probe.INSTALLED, volumes = emptyList()), "un verdict reste un verdict, même sans volume vu")
     }
 
     @Test fun `no key text can be in a banner, only paths and states`() {

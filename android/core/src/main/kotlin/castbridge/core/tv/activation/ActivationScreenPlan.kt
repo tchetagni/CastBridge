@@ -44,6 +44,12 @@ object ActivationScreenPlan {
         val lanIps: List<String> = emptyList(),
     )
 
+    /**
+     * What the phone way does (said in its heading): the phone reads the TV's whole device request and obtains the key. NOT « send the code »: the device code alone cannot make a key
+     * (the issuer needs the factor fingerprints it is the hash of): a text that said so blocked the owner.
+     */
+    const val PHONE_WAY = "le téléphone lit la demande d'appareil et obtient la clé"
+
     /** [number] = the position on screen (1, 2, 3); [status] = ONE line. */
     data class LaneView(val number: Int, val lane: Lane, val title: String, val status: String, val tone: LineTone)
 
@@ -56,7 +62,7 @@ object ActivationScreenPlan {
 
     fun plan(f: Facts): List<LaneView> = order(f).mapIndexed { i, lane ->
         val (title, status, tone) = when (lane) {
-            Lane.PHONE -> phoneStatus(f).let { Triple("Avec votre téléphone (le plus simple)", it.first, it.second) }
+            Lane.PHONE -> phoneStatus(f).let { Triple("Avec votre téléphone (le plus simple) : $PHONE_WAY", it.first, it.second) }
             Lane.USB -> Triple("Avec une clé USB", f.usb.presence, if (f.usb.canActivate) LineTone.GOOD else LineTone.INFO)
             Lane.TYPED -> Triple("Saisie à la télécommande (dernier recours)", "À utiliser seulement si les autres voies échouent : collez ou saisissez la clé, ou choisissez un fichier", LineTone.INFO)
         }

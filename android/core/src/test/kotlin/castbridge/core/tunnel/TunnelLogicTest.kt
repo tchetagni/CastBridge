@@ -112,7 +112,9 @@ class TunnelLogicTest {
     @Test fun connectivityGate() {
         assertEquals(TunnelPath.DIRECT, TunnelConnectivity.choose(true, true, true))
         assertEquals(TunnelPath.DIRECT, TunnelConnectivity.choose(true, false, false))
-        assertEquals(TunnelPath.GATEWAY, TunnelConnectivity.choose(false, true, true))
+        assertEquals(TunnelPath.OFFLINE, TunnelConnectivity.choose(false, true, true), "R-45 : le tuyau du téléphone n'est pas celui du tunnel tant qu'aucune assistance n'est demandée")
+        assertEquals(TunnelPath.GATEWAY, TunnelConnectivity.choose(false, true, true, assistPipe = true))
+        assertEquals(TunnelPath.OFFLINE, TunnelConnectivity.choose(false, true, false, assistPipe = true), "phone attached but no Internet behind it")
         assertEquals(TunnelPath.OFFLINE, TunnelConnectivity.choose(false, true, false), "phone attached but no Internet behind it")
         assertEquals(TunnelPath.OFFLINE, TunnelConnectivity.choose(false, false, false))
     }

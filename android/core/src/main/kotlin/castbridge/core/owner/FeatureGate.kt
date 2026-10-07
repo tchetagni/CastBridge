@@ -185,12 +185,17 @@ object TrialIssuance {
 
 /** The French texts of the locked screens (TV and phone). The legal wording of the usage notice is the owner's to validate: it is a placeholder, not legal advice. */
 object LockedTexts {
-    const val REQUEST = "Usage soumis à autorisation : fournissez ce code d'appareil à CastBridge pour obtenir votre clé."
+    /**
+     * Under the device code on the activation screen (R-48). The text before said « fournissez ce code d'appareil à CastBridge pour obtenir votre clé »: FALSE, it blocked the owner. The
+     * device code only IDENTIFIES the TV: the issuer needs the factor fingerprints the code is the hash of (`ActivationIssuer`). The key is asked for with CastBridge › Activer la TV on the
+     * phone, which reads the TV's complete device request.
+     */
+    const val REQUEST = "Code d'appareil (il identifie cette TV ; la clé se demande avec CastBridge › Activer la TV sur le téléphone, qui lit la demande complète de la TV)"
     const val NOTICE_TITLE = "Avis d'usage"
     const val NOTICE = "CastBridge peut être installé librement, mais son usage est soumis à l'autorisation du propriétaire. " +
         "Pour l'utiliser, communiquez le code d'appareil affiché à CastBridge : une clé d'activation vous sera remise. " +
         "[Texte à valider par le propriétaire : il ne constitue pas un avis juridique.]"
-    const val WAYS = "Envoyer le code : le lire à voix haute, le copier, ou le partager par WhatsApp, SMS ou e-mail depuis le téléphone."
+    const val WAYS = "La demande d'appareil complète de la TV (pas seulement son code) se donne à CastBridge : le téléphone la lit tout seul avec « Activer la TV », ou le fichier device-request.txt."
     /** The three real ways to give the key to the TV (activation screen), short on purpose; see docs/TV-ACTIVATION-CLE-USB.md. */
     val KEY_WAYS = listOf(
         "1. Le plus simple : sur le téléphone, CastBridge > « Activer la TV ». Par le Wi-Fi si la TV et le téléphone sont sur le même réseau (code de connexion ci-dessous), sinon par Bluetooth, qui marche sur tous les boîtiers.",
@@ -199,7 +204,7 @@ object LockedTexts {
     const val SEARCHING = "Recherche…"
     const val KEY_FOUND = "Clé trouvée : vérification…"
     const val PHONE_CARRIER = "Ce téléphone peut recevoir une clé d'activation pour votre TV et la lui remettre par Bluetooth, sans rien débloquer pour lui-même."
-    const val GRACE = "Votre appareil était déjà installé : il continue de fonctionner pendant la période de grâce. Fournissez votre code d'appareil pour obtenir votre clé."
+    const val GRACE = "Votre appareil était déjà installé : il continue de fonctionner pendant la période de grâce. La clé se demande avec CastBridge › Activer la TV, sur le téléphone."
 
     /** The text the phone shares (WhatsApp, SMS, e-mail) with the device code. */
     fun shareMessage(code: String, subject: Subject) =

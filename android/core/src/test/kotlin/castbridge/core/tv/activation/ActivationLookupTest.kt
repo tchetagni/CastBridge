@@ -73,6 +73,15 @@ class ActivationLookupTest {
         }
     }
 
+    @Test fun `an installed key is a decided probe that accepts nothing and says so in the report`() {
+        val f = "${own.path}/activation"
+        val o = run(FakeFs(files = mapOf(f to text("T"))), Verdict.INSTALLED)
+        assertEquals(Probe.INSTALLED, o.facts.probes.first { it.probe != Probe.ABSENT }.probe)
+        assertFalse(o.accepted); assertTrue(o.decided, "le fichier a été lu et jugé")
+        assertTrue(ActivationLookupReport.lines(o.facts).any { "déjà installée" in it }, ActivationLookupReport.lines(o.facts).toString())
+        assertFalse(ActivationLookupReport.lines(o.facts).any { "périmée" in it || "trouvé, vérification" in it })
+    }
+
     @Test fun `own folder file is found when Download is unreadable`() {
         val seen = ArrayList<String>()
         val fs = FakeFs(files = mapOf("${dl.path}/CastBridge/activation" to SecurityException("scoped"), "${own.path}/activation" to text("﻿GOOD-LINE\r\nsecond")))
