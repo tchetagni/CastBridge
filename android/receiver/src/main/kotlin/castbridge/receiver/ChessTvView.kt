@@ -42,7 +42,7 @@ class ChessMenu(val title: String, val subtitle: String?, val items: List<ChessI
 }
 
 /** What the lobby shows: QR code and code to join, and who is where. */
-class ChessLobby(val title: String, val code: String, val url: String?, val qr: QrCode?, val lines: List<Pair<String, Boolean>>, val note: String?)
+class ChessLobby(val title: String, val code: String, val url: String?, val qr: QrCode?, val lines: List<Pair<String, Boolean>>, val note: String?, val noQrNote: String? = null)
 
 /** Everything [ChessTvView] draws; [ChessActivity] changes it and calls invalidate(). */
 class ChessTvState {
@@ -364,10 +364,12 @@ class ChessTvView(ctx: Context, val st: ChessTvState) : View(ctx) {
         lb.qr?.let { drawQr(c, it, qrBox) } ?: run {
             panel(c, qrBox, l.u * 2)
             textSize(l.subText, false, MUTED)
-            wrap("Pas de réseau local : les téléphones ne peuvent pas rejoindre.", qrBox.w - 4 * l.u, 4).forEachIndexed { i, t -> line(c, t, qrBox.l + 2 * l.u, qrBox.t + 2 * l.u + i * l.subText * 1.3f, qrBox.w - 4 * l.u) }
+            wrap(lb.noQrNote ?: "Pas de réseau local : les téléphones ne peuvent pas rejoindre.", qrBox.w - 4 * l.u, 4).forEachIndexed { i, t -> line(c, t, qrBox.l + 2 * l.u, qrBox.t + 2 * l.u + i * l.subText * 1.3f, qrBox.w - 4 * l.u) }
         }
-        textSize(l.subText, false, MUTED)
-        line(c, "Scannez ce code avec le téléphone", (qrBox.l + qrBox.r) / 2, qrBox.b + l.u * 1.5f, qrBox.w + 2 * l.margin, Paint.Align.CENTER)
+        if (lb.qr != null || lb.noQrNote == null) {      // an Internet game has no QR code: the friend types the code
+            textSize(l.subText, false, MUTED)
+            line(c, "Scannez ce code avec le téléphone", (qrBox.l + qrBox.r) / 2, qrBox.b + l.u * 1.5f, qrBox.w + 2 * l.margin, Paint.Align.CENTER)
+        }
         val info = l.lobbyInfo
         var y = info.t
         textSize(l.titleText, true, GOLD); line(c, lb.title, info.l, y, info.w); y += l.titleText * 1.4f

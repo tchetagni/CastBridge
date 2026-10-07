@@ -111,6 +111,19 @@ class PlayConfig(
     val requireProof: Boolean = true,
     /** H-4 : sockets tenues (flux SSE + long-polls) par adresse (/64 en IPv6) ; `CASTBRIDGE_PLAY_MAX_HELD_PER_ADDR`. */
     val maxHeldPerAddress: Int = 48,
+    /** Échecs en ligne (salle `game:chess`, chantier games-G2) : `CASTBRIDGE_PLAY_CHESS` = `on` (défaut) | `off`. Éteint : `create{game:"chess"}` répond `GAME_UNAVAILABLE`, `/play/.well-known/caps` dit `"chess":false`. */
+    val chess: Boolean = true,
+    /** Interrupteur d'exploitation des MISES : `CASTBRIDGE_PLAY_STAKES` = `on` (défaut) | `off`. Effectif seulement avec une clé publique « portefeuille » ET la clé « résultat » ; sinon les salles misées répondent `STAKES_SUSPENDED` et les parties libres restent ouvertes. */
+    val stakes: Boolean = true,
+    /** Clés PUBLIQUES « portefeuille » de l'API qui vérifient les blocages `cbe1` (Base64 : 32 octets bruts ou SPKI) : `CASTBRIDGE_PLAY_WALLET_PUBKEY`, `_2` (rotation). Aucune clé privée du grand livre ici. */
+    val walletPubKeys: List<String> = emptyList(),
+    /** Fichier de la clé privée DÉDIÉE « résultat » du service (`CASTBRIDGE_PLAY_RESULT_KEY_FILE`) : la seule clé privée du service ; elle ne signe que les `cbr1`. */
+    val resultKeyFile: File? = null,
+    /** Dossier où le service dépose les `cbr1` pour le collecteur de l'hôte (`CASTBRIDGE_PLAY_RESULTS_DIR`, défaut du volume d'état) ; absent = pas de dépôt (les TV portent le résultat). */
+    val resultsDir: File? = null,
+    /** Mise par joueur maximale que le service admet (défense en profondeur ; l'échelle exacte est celle de l'API) : `CASTBRIDGE_PLAY_STAKE_MAX_NDEM` (1 000) et `_MBOKO` (100). */
+    val stakeMaxNdem: Long = 1_000L,
+    val stakeMaxMboko: Long = 100L,
 ) {
     companion object {
         const val VERSION = "w20-04"
@@ -122,7 +135,20 @@ class PlayConfig(
             "CASTBRIDGE_PLAY_TICKET_PUBKEY_3", "CASTBRIDGE_PLAY_TRUSTED_KEYS", "CASTBRIDGE_PLAY_RESERVED_DIR", "CASTBRIDGE_PLAY_RESERVED_IDS", "CASTBRIDGE_PLAY_REVOCATIONS_URL",
             "CASTBRIDGE_PLAY_MAX_ROOMS_PER_SUBJECT", "CASTBRIDGE_PLAY_CREATES_PER_IP_HOUR", "CASTBRIDGE_PLAY_MAX_USED_TICKETS", "CASTBRIDGE_PLAY_DIRECT",
             "CASTBRIDGE_PLAY_CREATES_PER_IDENTITY_DAY", "CASTBRIDGE_PLAY_CREATES_PER_48_HOUR", "CASTBRIDGE_PLAY_REVOCATIONS_FILE",
-            "CASTBRIDGE_PLAY_WEB", "CASTBRIDGE_PLAY_MAX_RELAYED_PER_TV", "CASTBRIDGE_PLAY_REVOCATIONS", "CASTBRIDGE_PLAY_REQUIRE_PROOF", "CASTBRIDGE_PLAY_MAX_HELD_PER_ADDR")
+            "CASTBRIDGE_PLAY_WEB", "CASTBRIDGE_PLAY_MAX_RELAYED_PER_TV", "CASTBRIDGE_PLAY_REVOCATIONS", "CASTBRIDGE_PLAY_REQUIRE_PROOF", "CASTBRIDGE_PLAY_MAX_HELD_PER_ADDR",
+            // échecs en ligne et mises (games-G2) : une SEULE clé privée, la clé « résultat » ; le reste est public
+            "CASTBRIDGE_PLAY_CHESS", "CASTBRIDGE_PLAY_STAKES", "CASTBRIDGE_PLAY_WALLET_PUBKEY", "CASTBRIDGE_PLAY_WALLET_PUBKEY_2", "CASTBRIDGE_PLAY_RESULT_KEY_FILE", "CASTBRIDGE_PLAY_RESULTS_DIR",
+            "CASTBRIDGE_PLAY_STAKE_MAX_NDEM", "CASTBRIDGE_PLAY_STAKE_MAX_MBOKO")
+
+        /** Dossier des résultats `cbr1` par défaut : dans le volume d'état inscriptible du conteneur (voir `docker-compose.play.yml`). */
+        const val DEFAULT_RESULTS_DIR = "/var/lib/castbridge-play/results"
+
+        private fun onOff(name: String, value: String?, default: Boolean): Boolean = when (value?.lowercase()) {
+            null -> default
+            "on", "1", "true" -> true
+            "off", "0", "false" -> false
+            else -> throw IllegalStateException("$name vaut on ou off")
+        }
 
         /**
          * Les réseaux de confiance sont OBLIGATOIRES (adresse exacte de nginx en /32) : absents, le service refuse de démarrer, sauf `CASTBRIDGE_PLAY_DIRECT=1` (staging, tests :
@@ -192,6 +218,13 @@ class PlayConfig(
                 revocationsMode = revocationsMode,
                 requireProof = when (e("CASTBRIDGE_PLAY_REQUIRE_PROOF")) { null, "1" -> true; "0" -> false; else -> throw IllegalStateException("CASTBRIDGE_PLAY_REQUIRE_PROOF vaut 0 ou 1") },
                 maxHeldPerAddress = e("CASTBRIDGE_PLAY_MAX_HELD_PER_ADDR")?.toIntOrNull()?.coerceIn(2, 1_000) ?: d.maxHeldPerAddress,
+                chess = onOff("CASTBRIDGE_PLAY_CHESS", e("CASTBRIDGE_PLAY_CHESS"), d.chess),
+                stakes = onOff("CASTBRIDGE_PLAY_STAKES", e("CASTBRIDGE_PLAY_STAKES"), d.stakes),
+                walletPubKeys = listOf("CASTBRIDGE_PLAY_WALLET_PUBKEY", "CASTBRIDGE_PLAY_WALLET_PUBKEY_2").mapNotNull { e(it) },
+                resultKeyFile = e("CASTBRIDGE_PLAY_RESULT_KEY_FILE")?.let { File(it) },
+                resultsDir = File(e("CASTBRIDGE_PLAY_RESULTS_DIR") ?: DEFAULT_RESULTS_DIR),
+                stakeMaxNdem = e("CASTBRIDGE_PLAY_STAKE_MAX_NDEM")?.toLongOrNull()?.coerceIn(1L, 1_000_000_000L) ?: d.stakeMaxNdem,
+                stakeMaxMboko = e("CASTBRIDGE_PLAY_STAKE_MAX_MBOKO")?.toLongOrNull()?.coerceIn(1L, 1_000_000_000L) ?: d.stakeMaxMboko,
             )
         }
     }

@@ -1,6 +1,7 @@
 package castbridge.core.tv.activation
 
 import castbridge.core.owner.TrialPolicy
+import castbridge.core.tv.UsbPhase
 import castbridge.core.tv.activation.UsbActivationBanner as B
 import kotlin.test.Test
 import kotlin.test.assertEquals
@@ -105,6 +106,8 @@ class UsbActivationBannerTest {
         B.State.EMPTY -> B.from(facts(Probe.EMPTY)); B.State.UNREADABLE -> B.from(facts(Probe.UNREADABLE))
         B.State.HIDDEN -> B.from(facts(Probe.ABSENT, access = StorageAccess.MISSING)); B.State.NOT_FOUND -> B.from(facts(Probe.ABSENT))
         B.State.INSTALLED -> B.from(facts(Probe.INSTALLED))
+        B.State.WAITING_CHECK -> B.waitingForCheck("Clé « Lexar » : vérification par Android… patientez")
+        B.State.DAMAGED -> B.from(facts(volumes = emptyList()), B.KeyNote(UsbPhase.DAMAGED, "Clé illisible : Android n'a pas pu la réparer."))
     }
 
     @Test fun `the waiting states say so`() {
@@ -178,6 +181,68 @@ class UsbActivationBannerTest {
         for (s in B.State.values()) {
             val t = viewOf(s).text
             assertFalse("cbx1" in t || "ed25519" in t, t)
+        }
+    }
+    // ---- the key itself: Android checks it (fsck after an unclean removal) or could not read it (docs/STORAGE.md « Clé USB mal éjectée ») ----
+
+    private val checkingLine = "Clé « Lexar » : vérification par Android (elle a été retirée sans éjection)… patientez"
+    private val checking = B.KeyNote(UsbPhase.CHECKING, checkingLine)
+    private val damaged = B.KeyNote(UsbPhase.DAMAGED, "Clé illisible : Android n'a pas pu la réparer. Sur un ordinateur : Mac › Utilitaire de disque › S.O.S ; Windows › clic droit › Propriétés › Outils › Vérifier ; ou Réglages de la TV › Stockage › Réparer/Formater (le formatage efface tout)")
+
+    @Test fun `the TV says why it waits while Android checks the key`() {
+        val v = B.waitingForCheck(checkingLine)
+        assertEquals(B.State.WAITING_CHECK, v.state)
+        assertFalse(v.canActivate)
+        assertEquals(LineTone.INFO, v.tone)
+        assertTrue(v.keyPresent, "a key is there: its way comes first on the screen")
+        assertTrue(checkingLine in v.text && "reprend dès qu'elle est prête" in v.text, v.text)
+        assertEquals(checkingLine, v.presence)
+    }
+
+    @Test fun `nothing found while a key is checked is not an answer, the search waits for the mount`() {
+        assertEquals(B.State.WAITING_CHECK, B.from(facts(Probe.ABSENT), checking).state, "no file seen yet")
+        assertEquals(B.State.WAITING_CHECK, B.from(facts(volumes = emptyList()), checking).state, "the key is not even listed yet")
+        assertEquals(B.State.WAITING_CHECK, B.from(facts(Probe.ABSENT, access = StorageAccess.MISSING), checking).state, "Download hidden is not the cause while Android checks")
+        assertEquals(B.State.WAITING_CHECK, B.from(facts(Probe.UNREADABLE), checking).state, "a refusal to read during a check is not final")
+        val v = B.from(facts(Probe.ABSENT), checking)
+        assertEquals(checkingLine, v.presence)
+        assertTrue(v.keyPresent && !v.canActivate)
+    }
+
+    @Test fun `a verdict on a file that was read always wins over a key under check`() {
+        for ((p, s) in listOf(Probe.ACCEPTED to B.State.FOUND, Probe.WRONG_DEVICE to B.State.WRONG_TV, Probe.EXPIRED to B.State.EXPIRED, Probe.NOT_VALID to B.State.NOT_VALID,
+            Probe.TOO_BIG to B.State.TOO_BIG, Probe.EMPTY to B.State.EMPTY)) assertEquals(s, B.from(facts(p), checking).state, "$p")
+    }
+
+    @Test fun `an unreadable key explains why no key was found, with the guide`() {
+        val v = B.from(facts(volumes = emptyList()), damaged)
+        assertEquals(B.State.DAMAGED, v.state)
+        assertEquals(damaged.line, v.text)
+        assertEquals(LineTone.WARN, v.tone)
+        assertFalse(v.canActivate)
+        assertTrue(v.keyPresent)
+        assertEquals(damaged.line, v.presence)
+        assertEquals(B.State.DAMAGED, B.from(facts(volumes = emptyList()), B.KeyNote(UsbPhase.NO_FILESYSTEM, "Clé : format non reconnu")).state)
+        assertEquals(B.State.NO_KEY, B.from(facts(volumes = emptyList())).state, "no note: as before")
+    }
+
+    @Test fun `a healthy key without the file is the real news, not the damaged other key`() {
+        assertEquals(B.State.NOT_FOUND, B.from(facts(Probe.ABSENT), damaged).state)
+        assertEquals(B.State.HIDDEN, B.from(facts(Probe.ABSENT, access = StorageAccess.MISSING), damaged).state)
+        assertEquals(B.State.FOUND, B.from(facts(Probe.ACCEPTED), damaged).state)
+    }
+
+    @Test fun `the other key phases change nothing`() {
+        for (phase in UsbPhase.values().filter { it != UsbPhase.CHECKING && it != UsbPhase.DAMAGED && it != UsbPhase.NO_FILESYSTEM }) {
+            assertEquals(B.State.NO_KEY, B.from(facts(volumes = emptyList()), B.KeyNote(phase, "x")).state, "$phase")
+            assertEquals(B.State.NOT_FOUND, B.from(facts(Probe.ABSENT), B.KeyNote(phase, "x")).state, "$phase")
+        }
+    }
+
+    @Test fun `waiting and damaged are not on the home line, and are not retried by the plug-in series`() {
+        for (v in listOf(B.waitingForCheck(checkingLine), B.from(facts(volumes = emptyList()), damaged))) {
+            assertNull(B.homeLine(v), "the key's own line says it: ${v.state}")
+            assertNull(B.nextRetryDelayMs(v.state, 0), "${v.state}: the mount retries, not a timer")
         }
     }
 }

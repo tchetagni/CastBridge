@@ -19,6 +19,8 @@
 #   CASTBRIDGE_PLAY_CREATES_PER_IP_HOUR / CASTBRIDGE_PLAY_CREATES_PER_IDENTITY_DAY / CASTBRIDGE_PLAY_CREATES_PER_48_HOUR   créations de salle (20 / 30 / 200 par défaut)
 #   CASTBRIDGE_PLAY_MAX_PER_IP (24) / CASTBRIDGE_PLAY_MAX_PER_48 (512) / CASTBRIDGE_PLAY_MAX_PER_IP_SHARED (64)             connexions ouvertes par adresse, par /48, adresse partagée (classe)
 #   CASTBRIDGE_PLAY_RESERVED_DIR=/reserved et CASTBRIDGE_PLAY_RESERVED_IDS=/reserved/reserved-ids.json   lots RÉSERVÉS (volume monté ci-dessous, jamais sur LOTS_DIR)
+#   Échecs en ligne et mises (games-G2) : CASTBRIDGE_PLAY_CHESS (on), CASTBRIDGE_PLAY_STAKES (on), CASTBRIDGE_PLAY_WALLET_PUBKEY (clé PUBLIQUE), CASTBRIDGE_PLAY_RESULT_KEY_FILE=/run/secrets/play-result.key
+#   (le SEUL secret du service : voir le bloc « secrets » décommentable ci-dessous), CASTBRIDGE_PLAY_RESULTS_DIR (défaut /var/lib/castbridge-play/results, dans le volume play-state)
 name: castbridge-play
 
 x-logging: &logging
@@ -69,10 +71,20 @@ services:
       # Lots RÉSERVÉS (facultatif, lecture seule, avec reserved-ids.json) : se montent sur RESERVED_DIR, JAMAIS sur LOTS_DIR (un lot « -reserved- » posé dans LOTS_DIR est ignoré,
       # et le service refuse de démarrer si LOTS_DIR et RESERVED_DIR sont le même dossier). Décommenter avec CASTBRIDGE_PLAY_RESERVED_DIR=/reserved dans .env.play
       #   - /home/ubuntu/castbridge/services/play/reserved:/reserved:ro    # chemin proposé : à confirmer sur la machine
+    # MISES (games-G2, facultatif) : la clé privée « résultat » du service, montée en secret de fichier dans /run/secrets/play-result.key (jamais dans .env.play, jamais dans l'image). Décommenter
+    # ce bloc ET le bloc « secrets » de la fin quand les mises s'ouvrent (docs/PLAY-OPS.md § 4.2 ter) ; le fichier DOIT exister avant « up » (sinon Compose refuse de démarrer), appartenir à
+    # l'uid 10002 et être en lecture seule (chown 10002:10002, chmod 0400). Sans lui le service tourne : les parties libres sont ouvertes, les mises refusées (STAKES_SUSPENDED).
+    #secrets:
+    #  - source: play_result_key
+    #    target: play-result.key
     logging: *logging
 
 volumes:
   play-state:
+
+#secrets:
+#  play_result_key:
+#    file: /home/ubuntu/castbridge/services/play/secrets/play-result.key     # chemin proposé : à confirmer sur la machine
 
 # réseau de nginx (infra-nginx) : créé et possédé par le compose d'infrastructure, qui n'est pas dans ce dépôt ; ne jamais le créer ni le supprimer d'ici
 networks:

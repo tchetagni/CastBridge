@@ -9,9 +9,18 @@ package castbridge.core.trust
  */
 object PinKeys {
     const val DEFAULT_PORT = 8765
+    /** Prefix of the key of a TV known only by its Bluetooth address (`bt:<ADDRESS>`): see [btKey]. */
+    const val BT_PREFIX = "bt:"
     private const val BT_SUFFIX = " (Bluetooth)"
     private val DECOR = Regex("""\s*\((Bluetooth|\d+)\)\s*$""", RegexOption.IGNORE_CASE)
     private val IPV4 = Regex("""\d{1,3}(\.\d{1,3}){3}""")
+
+    /**
+     * THE key of a TV designated by its Bluetooth [address] (R-30, audit B2): `bt:` + the address as [TrustRegistry.norm] writes it (trimmed, upper case). Every caller that has only an
+     * address (the relay's wake-up, the gateway service, the Bluetooth TV of the remote, « Envoyer par Bluetooth »…) builds the key HERE, never by hand: [resolve] and `PinBook.formOf` do
+     * not know a BARE address (`AA:BB:…` is read as an IPv6 host: neither the token nor the code is found, the phone says « not synchronized » to a TV it is paired with).
+     */
+    fun btKey(address: String): String = BT_PREFIX + TrustRegistry.norm(address)
 
     private fun hostPort(host: String, port: Int?): String {
         val h = host.trim()
@@ -22,7 +31,7 @@ object PinKeys {
     /** Every key of one TV, deduplicated, normalized, names first. [hosts] = `SavedTv.lastIps` (several addresses per TV). A host without port gets [DEFAULT_PORT]. */
     fun keysOf(name: String?, mdns: String?, btAddress: String?, hosts: List<String>, port: Int?): List<String> = (listOf(
         name, mdns,
-        btAddress?.takeIf { it.isNotBlank() }?.let { "bt:$it" },
+        btAddress?.takeIf { it.isNotBlank() }?.let { btKey(it) },
     ) + hosts.filter { it.isNotBlank() }.map { hostPort(it, port) }).filterNotNull().map { normalize(it) }.filter { it.isNotBlank() }.distinct()
 
     /** Keys to SEARCH with: the normalized ones of [keysOf] first, then the raw legacy spellings (bare host, as typed/stored before normalization). Distinct. */
@@ -37,7 +46,7 @@ object PinKeys {
         val ports = listOf(tv.port, apiPort).distinct()
         val hosts = tv.lastIps.map { it.trim() }.filter { it.isNotBlank() }
         val names = listOfNotNull(tv.name.trim().takeIf { it.isNotBlank() }, tv.mdns?.trim()?.takeIf { it.isNotBlank() })
-        return (names + names.take(1).map { "$it$BT_SUFFIX" } + listOf("bt:${TrustRegistry.norm(tv.address)}") +
+        return (names + names.take(1).map { "$it$BT_SUFFIX" } + listOf(btKey(tv.address)) +
             hosts.flatMap { h -> listOf(h) + ports.flatMap { listOf(hostPort(h, it), "http://${hostPort(h, it)}") } }).filter { it.isNotBlank() }.distinct()
     }
 
@@ -59,8 +68,8 @@ object PinKeys {
     fun resolve(key: String, saved: List<SavedTv>, default: SavedTv?, apiPort: Int = DEFAULT_PORT, tunnelPort: Int? = null, tunnelTv: String? = null): SavedTv? {
         val raw = key.trim()
         if (raw.isBlank() || saved.isEmpty()) return null
-        if (raw.startsWith("bt:", ignoreCase = true)) {
-            val a = TrustRegistry.norm(raw.substring(3))
+        if (raw.startsWith(BT_PREFIX, ignoreCase = true)) {
+            val a = TrustRegistry.norm(raw.substring(BT_PREFIX.length))
             return saved.firstOrNull { TrustRegistry.norm(it.address) == a }
         }
         val (host, port) = hostAndPort(raw)

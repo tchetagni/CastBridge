@@ -33,7 +33,41 @@ object WalletReplies {
         val bp = m.long("reverseFeeBp")?.takeIf { it >= 0 } ?: return null
         val sw = m.map("switches"); val cap = m.map("transferDailyCap")
         return PolicyView(rate, bp, sw?.flag("convert", true) ?: true, sw?.flag("transfer", true) ?: true, sw?.flag("vouchers", true) ?: true,
-            sw?.flag("stakesNdem", true) ?: true, sw?.flag("stakesMboko", true) ?: true, cap?.long("NDEM") ?: 0, cap?.long("MBOKO") ?: 0)
+            sw?.flag("stakesNdem", true) ?: true, sw?.flag("stakesMboko", true) ?: true, cap?.long("NDEM") ?: 0, cap?.long("MBOKO") ?: 0, games(m.map("games")))
+    }
+
+    /** Les jeux misés de la politique (champ additif `games` : un serveur plus ancien n'en a pas, la TV garde alors son échelle de repli). Une entrée illisible est ignorée. */
+    private fun games(g: Map<*, *>?): Map<String, GamePolicyView> {
+        if (g == null) return emptyMap()
+        val out = LinkedHashMap<String, GamePolicyView>()
+        for ((k, v) in g) {
+            val name = k as? String ?: continue
+            val e = v as? Map<*, *> ?: continue
+            val stakes = e.map("stakes") ?: continue
+            fun scale(cur: String) = (stakes[cur] as? List<*>).orEmpty().mapNotNull { (it as? Number)?.toLong()?.takeIf { n -> n > 0 } }.distinct().sorted()
+            val caps = e.map("winCaps")
+            out[name] = GamePolicyView(e.flag("enabled", true), scale("NDEM"), scale("MBOKO"), (e.long("feeBp") ?: 0L).toInt().coerceIn(0, 2_000),
+                (caps?.long("day") ?: 0L).toInt().coerceAtLeast(0), (caps?.long("week") ?: 0L).toInt().coerceAtLeast(0), (caps?.long("month") ?: 0L).toInt().coerceAtLeast(0))
+        }
+        return out
+    }
+
+    /** Réponse de `POST /escrow` : le blocage `cbe1` et ce qui le décrit ; sans `cbe1` ni `eid` la réponse est « illisible ». */
+    fun parseEscrow(body: String): EscrowDone? {
+        val m = obj(body) ?: return null
+        val cbe1 = m.str("cbe1")?.takeIf { it.startsWith("cbe1.") && it.length <= 1_200 } ?: return null
+        return EscrowDone(cbe1, m.str("eid") ?: return null, m.long("iat") ?: return null, m.long("exp") ?: return null, m.flag("replayed", false), m.str("snapshot"))
+    }
+
+    /** Réponse de `POST /settle` : le règlement, avec les frais (champ additif : 0 s'il est absent). */
+    fun parseSettle(body: String): SettleDone? {
+        val m = obj(body) ?: return null
+        val lines = (m["lines"] as? List<*>).orEmpty().mapNotNull { l ->
+            val x = l as? Map<*, *> ?: return@mapNotNull null
+            SettleLine(x.str("eid") ?: return@mapNotNull null, x.str("id") ?: return@mapNotNull null, x.long("used") ?: return@mapNotNull null, x.long("pay") ?: return@mapNotNull null, x.long("fee") ?: 0L)
+        }
+        if (lines.isEmpty()) return null
+        return SettleDone(m.str("rid") ?: return null, m.str("kind") ?: return null, m.str("cur") ?: return null, m.str("game"), m.long("fee") ?: 0L, lines)
     }
 
     fun parseHistory(body: String): HistoryPage? {

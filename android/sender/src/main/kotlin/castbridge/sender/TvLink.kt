@@ -69,7 +69,8 @@ class AndroidBtTransport(private val ctx: Context) : BtTransport {
         if (!adapter.isEnabled) throw BtUnavailable(BtUnavailable.Reason.OFF)
         runCatching { adapter.cancelDiscovery() }          // a running discovery slows and breaks connections; needs SCAN, optional
         val sock = adapter.getRemoteDevice(address).createRfcommSocketToServiceRecord(UUID.fromString(BtProtocol.SERVICE_UUID))
-        try { sock.connect() } catch (e: IOException) { runCatching { sock.close() }; throw e }
+        // R-32 (audit I-10): one connect() at a time to the same TV, like the remote, « Ouvrir sur la TV », the pipe and the owner channel (« already at opened state » otherwise)
+        try { synchronized(castbridge.core.tunnel.BtConnectLock.of(address)) { sock.connect() } } catch (e: IOException) { runCatching { sock.close() }; throw e }
         return object : Link {
             override val input = sock.inputStream
             override val output = sock.outputStream

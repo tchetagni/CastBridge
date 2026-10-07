@@ -65,6 +65,8 @@ enum class EndReason(val text: String) {
     INSUFFICIENT("Matériel insuffisant"),
     AGREEMENT("Nulle d'un commun accord"),
     ABANDONED("Partie interrompue"),
+    /** Online only: a player stayed disconnected beyond the grace period (60 s): the other side wins (the stake is lost). */
+    FORFEIT("Forfait (déconnexion)"),
 }
 
 data class GameResult(val outcome: Outcome, val reason: EndReason) {

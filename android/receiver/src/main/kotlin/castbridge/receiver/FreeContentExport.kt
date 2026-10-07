@@ -67,6 +67,8 @@ object FreeContentExport {
                     val pct = if (t <= 0) 100 else (d * 100 / t).toInt()
                     if (pct != last) { last = pct; post { onProgress(pct) } }
                 }, cancelled = { cancel })
+                // the archive was fsync'd at the end of its file (FreeExportFiles); the directory entry of the renamed file goes to a USB key with one best-effort system sync (docs/STORAGE.md)
+                castbridge.core.tv.ShellSync.shared.soon()
                 return Outcome.Success(done.message())
             } catch (e: FreeExportException) {
                 if (e.message == "Export annulé." || e.javaClass.simpleName == "FreeExportEmpty") return Outcome.Failure(e.message ?: "Export impossible.")

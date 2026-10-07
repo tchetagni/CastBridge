@@ -111,8 +111,15 @@ public record Txn(TxnKind kind, String idemKey, List<Entry> entries, List<String
     }
 
     /** Règlement d'une partie en une transaction : chaque blocage sort de BLOQUE, la cagnotte transite par {@code SYS:POT} (retour à 0), le non-utilisé est rendu. */
-    public static Txn settle(String rid, List<Settlement.Line> lines, Currency cur) {
+    public static Txn settle(String rid, List<Settlement.Line> lines, Currency cur) { return settle(rid, lines, cur, 0); }
+
+    /**
+     * Règlement avec FRAIS de plateforme (politique du jeu, games-G2) : [fee] sort de la cagnotte vers {@code SYS:FEE} dans la MÊME transaction ; les lignes portent ce que chaque titulaire reçoit APRÈS frais,
+     * donc Σ payé + frais = Σ utilisé (la cagnotte revient toujours à 0). Frais nuls : exactement le règlement d'avant.
+     */
+    public static Txn settle(String rid, List<Settlement.Line> lines, Currency cur, long fee) {
         if (lines == null || lines.isEmpty()) throw new LedgerException(WalletReason.BAD_TXN, "Règlement sans blocage");
+        if (fee < 0) throw new LedgerException(WalletReason.BAD_TXN, "Frais négatifs");
         AccountRef pot = AccountRef.sys(AccountRef.POT, cur);
         List<Entry> es = new ArrayList<>();
         List<String> refs = new ArrayList<>();
@@ -126,6 +133,10 @@ public record Txn(TxnKind kind, String idemKey, List<Entry> entries, List<String
                 es.add(new Entry(pot, -l.pay()));
                 es.add(new Entry(AccountRef.dispo(l.id(), cur), l.pay()));
             }
+        }
+        if (fee > 0) {
+            es.add(new Entry(pot, -fee));
+            es.add(new Entry(AccountRef.sys(AccountRef.FEE, cur), fee));
         }
         return new Txn(TxnKind.SETTLE, "settle:" + rid, es, refs);
     }

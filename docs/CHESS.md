@@ -1,8 +1,9 @@
 # Échecs sur la TV (branche `feat/tv-chess`)
 
 Jeu d'échecs sur CastBridge TV : **seul contre l'ordinateur**, **à deux sur la TV**, **télécommande contre téléphone**,
-**deux téléphones** (la TV affiche la partie) et, dès que le serveur central l'ouvrira, **en ligne** (TV ou téléphone
-ailleurs sur Internet). Chaque coup a un **compte à rebours réglable de 10 à 60 s, jamais plus**.
+**deux téléphones** (la TV affiche la partie) et **en ligne : une TV contre une autre TV sur Internet, en partie libre ou
+avec mise de jetons NDEM / MBOKO** (§ 6 ; un téléphone ne se connecte jamais au service, il regarde par sa TV).
+Chaque coup a un **compte à rebours réglable de 10 à 60 s, jamais plus**.
 
 - Ouvrir : tuile **Échecs** de l'accueil TV, ou onglet **Échecs** de l'app téléphone (« Ouvrir les échecs sur la TV »,
   avec le PIN déjà connu de l'app).
@@ -90,8 +91,10 @@ Depuis la plateforme de jeux (docs/GAMES.md § 3, chantier games-G1) la salle (c
 notification des changements) est la classe générique `GameRoom` dont `ChessRoom` hérite, et les routes `/chess/*` sont servies
 par le `RoomHttp` commun à tous les jeux (`ChessHttp` n'en dit que ce qui est propre aux échecs : préfixe, page, paramètre `ply`,
 messages). **Rien ne change pour les échecs** : mêmes réponses octet pour octet (`ChessGoldenTest`), mêmes tests (`ChessRoomTest`,
-`ChessHttpTest`, `ChessRelayTest` non modifiés). Le moteur, l'ordinateur, la pendule et les nulles restent ceux d'ici ; les
-échecs en `GameRules` (pour la salle `game:chess` du serveur) viennent avec le chantier G2.
+`ChessHttpTest`). Le moteur, l'ordinateur, la pendule et les nulles restent ceux d'ici. La salle `game:chess` du service en ligne
+(§ 6) n'est pas une `GameRules` : elle reprend directement le moteur pur `core/chess` (`ChessGame`), qui fait foi pour les règles,
+et les téléphones du foyer regardent la partie en ligne de leur TV par une salle de la plateforme sans place
+(`OnlineChessHost`, servie par le même `RoomHttp` sur `/chess`).
 
 **Anti-triche de base** : la TV vérifie chaque coup avec le moteur (coup illégal → refusé, rien ne change), seul le joueur
 dont c'est le tour peut jouer, un spectateur ne peut rien jouer, chaque coup porte le numéro du demi-coup auquel il répond
@@ -110,8 +113,10 @@ Routes publiques (sans PIN, port 8765, à côté de `/quiz`) :
 | `POST /chess/api/leave?token=` | quitter |
 
 Limites : requêtes par IP, 10 codes faux par IP / 5 min, 2 flux par joueur, 12 flux au total.
-Routes avec PIN pour l'app : `GET /api/chess` (salle ouverte, code, `online`), `POST /api/chess/open` (ouvre l'écran sur
-la TV), `POST /api/chess/config?online=0|1[&relay=https://…]` (jeu en ligne, voir § 6).
+Routes avec PIN pour l'app : `GET /api/chess` (salle ouverte, son code ; pendant une partie en ligne de la TV : `onlineGame:true`
+et le code à 4 chiffres de la vitrine, voir § 6.6 ; `online` reste `false`), `POST /api/chess/open` (ouvre l'écran sur la TV).
+`POST /api/chess/config` n'a plus d'effet (l'ancien interrupteur `online=0|1` n'existe plus : c'est le service qui dit s'il
+héberge les échecs) ; la route répond encore l'état pour les anciennes applications.
 
 ### Format d'état (commun TV, téléphone, web et relais)
 
@@ -132,44 +137,137 @@ la TV), `POST /api/chess/config?online=0|1[&relay=https://…]` (jeu en ligne, v
 `legal` n'est rempli que pour le joueur qui a le trait ; aucun jeton d'un autre joueur n'apparaît jamais.
 `remainingMs` est relatif à l'instant de la réponse : le client décompte localement jusqu'au prochain état.
 
-## 6. Jeu en ligne : protocole du relais (serveur central)
+## 6. Jeu en ligne : une TV contre une autre TV, libre ou avec mise (chantier games-G2, réalisé)
 
-Le serveur du projet (Spring Boot, `https://bridge.sti-cm.com`, branche `feat/backend`, **non modifié ici**) servira de
-relais. Côté appareils, tout est prêt dans `core` : interface `ChessTransport`, implémentée par `LanChessClient` (TV de la
-maison, **fonctionnel**) et `ChessRelayClient` (Internet, **testé contre un faux serveur**, `ChessRelayTest`). Le relais
-est **désactivé par défaut** : l'option « En ligne » affiche « bientôt » et aucune requête ne part. Pour l'activer quand
-le serveur exposera les routes : `POST /api/chess/config?online=1` (avec le PIN) sur la TV ; l'app téléphone suit ce que
-la TV annonce. `ChessRelayClient.available()` vérifie `GET …/hello` (protocole 1) avant de jouer.
+Les échecs en ligne sont **réalisés dans `castbridge-play`** (le service de jeu, `/play/`), pas dans l'API : la salle `game:chess`
+tient la partie, l'API ne fait que **bloquer** puis **régler** les jetons. L'ancien projet de routes REST `/api/chess/v1/*` et son
+client (`ChessRelayClient` REST, `FakeRelay`) sont **supprimés** ; le drapeau `POST /api/chess/config?online=1` n'existe plus : la
+capacité vient de `GET /play/.well-known/caps` (clés `chess` et `stakes`).
 
-### Routes à implémenter par le serveur central
+### 6.1 Qui joue, qui voit
 
-Base : `https://bridge.sti-cm.com/api/chess/v1`. Corps et réponses en JSON UTF-8. Authentification par jeton de joueur :
-en-tête `Authorization: Bearer <token>` (aussi accepté en `?token=` pour `events`, EventSource ne sachant pas envoyer
-d'en-tête). Codes de partie : **6 caractères** de l'alphabet `ABCDEFGHJKMNPQRSTUVWXYZ23456789` (sans 0/O, 1/I/L),
-insensibles à la casse côté client.
+- **Seule une TV activée, connectée à Internet (directement ou par le tuyau d'un téléphone synchronisé, relay-R1), joue** : ticket
+  `cbp1` + activation `cbx1` + preuve de possession de la clé d'installation, comme le Quiz en ligne. Une TV d'essai joue en
+  ligne **en partie libre seulement** (règle du propriétaire : essai = pas de mise).
+- **Aucun téléphone ne parle au service.** Pendant une partie en ligne, les téléphones du foyer **regardent par leur TV** (code
+  à 4 chiffres + page `/chess` de la TV, routes inchangées) : vitrine `OnlineChessHost` (`GameRoom` sans place), sans coups
+  légaux, sans identifiant de salle, sans aucun jeton de siège, blocage `cbe1` ou résultat `cbr1`. Un téléphone ne commande rien
+  (`FORBIDDEN`) ; la place en ligne est celle de la TV (télécommande).
+- **Aucune page web de jeu publique** : `/play` reste une page d'information.
 
-| Méthode et route | Corps | Réponse |
-|---|---|---|
-| `GET /hello` | — | `200 {"ok":true,"protocol":1}` |
-| `POST /games` | `{"name","perMoveSeconds","color":"white|black|random","mode":"COMPETITION|PRACTICE"}` | `201 {"code","token","id","name","color":"w|b"}` |
-| `POST /games/{code}/join` | `{"name","token"?}` | `200 {"token","id","name","color":"w|b|null"}` — même jeton = même place (reconnexion) ; 3e personne = spectateur (`color` null) ; `404` code inconnu |
-| `GET /games/{code}/state?since=&wait=` | — | `200` état (format § 5), long-poll : attend jusqu'à `wait` s (≤ 25) que `v` > `since` ; `401` jeton inconnu |
-| `GET /games/{code}/events?token=` | — | flux SSE `event: state` / `data: <état>` à chaque changement, `: ping` toutes les 15 s |
-| `POST /games/{code}/move` | `{"uci":"e2e4","ply":0}` | `{"result":"OK|ILLEGAL|NOT_YOUR_TURN|STALE|OVER|FORBIDDEN","state":{…}}` (`400` si ILLEGAL, `409` si NOT_YOUR_TURN) |
-| `POST /games/{code}/resign` | `{}` | `{"result","state"}` |
-| `POST /games/{code}/draw` | `{"action":"offer|accept|decline"}` | `{"result","state"}` |
-| `POST /games/{code}/leave` | `{}` | `{"result":"OK"}` (la place reste réservée au jeton ; la pendule continue) |
+### 6.2 Écran « Échecs › Adversaire : En ligne (Internet) »
 
-Obligations du serveur (mêmes que la TV, cf. `ChessGame`, `ChessRoom` et le faux serveur `FakeRelay` des tests) :
-1. **Valider chaque coup** avec un moteur d'échecs complet (le moteur `core/chess` est du Kotlin pur sans dépendance :
-   il peut être repris tel quel côté Spring Boot) ; refuser un coup hors tour, un doublon (`ply` ≠ demi-coups joués →
-   `STALE`), un coup d'un spectateur.
-2. **Tenir l'horloge** : `perMoveSeconds` ramené dans 10..60, compteur relancé à chaque coup, démarré quand le 2e joueur
-   arrive, dépassement = perte (ou nulle si l'adversaire ne peut plus mater), `PRACTICE` = coup joué d'office ;
-   vérifier l'échéance à chaque requête et par une tâche périodique (≤ 1 s).
-3. Détecter mat, pat, 50 coups, triple répétition, matériel insuffisant ; nulle proposée / acceptée ; abandon.
-4. Limiter : requêtes par IP, créations de parties par IP, codes faux par IP ; purger les parties finies ou inactives
-   (ex. 30 min) ; ne jamais renvoyer le jeton d'un autre joueur.
+La porte est celle du cœur (`ChessOnlineGate`, testée) : interrupteur « jeu en ligne » des réglages, TV activée avec une activation
+vérifiable par le service, heure fiable, profil adulte, Internet (ou un téléphone synchronisé capable de donner un tuyau),
+service qui annonce `chess`. Sinon **une raison est toujours dite** (« Connexion Internet requise », « Les échecs en ligne ne sont
+pas encore ouverts sur le service CastBridge… »), jamais un écran vide, et aucune connexion ne s'ouvre. Menu :
+
+1. **Créer une partie** : « Mise » (*Libre* / *NDEM* / *MBOKO* ; seules les monnaies que la TV peut miser sont offertes), « Montant »
+   (parmi l'échelle du serveur : NDEM 10, 20, 50, 100, 200 ; MBOKO 1, 2, 5, 10), solde affiché, couleur, compte à rebours, « Créer
+   la partie ». Une mise demande une confirmation (« Créer une partie avec mise ? 20 NDEM par joueur · votre solde 150 NDEM ») et
+   rappelle : *abandonner ou quitter la partie fait perdre la mise ; plus de 60 s hors ligne = abandon*. Une partie misée se joue
+   en **compétition** (jamais de coup tiré au hasard avec des jetons en jeu).
+2. **Rejoindre avec un code** (`XXXX-XXXX`, 8 symboles, saisis avec ‹ ›) ou **Regarder une partie avec un code** (sans mise).
+   Si la salle est misée, la TV apprend la mise **avant** de bloquer quoi que ce soit : « Cette partie se joue avec une mise — 20
+   NDEM par joueur · votre solde… » ; elle bloque alors sa mise et revient **sur la même liaison** (même ticket). Solde
+   insuffisant ou mises indisponibles : le choix « Regarder seulement » reste offert.
+3. **Reprendre la partie en cours** : l'application a été fermée en pleine partie ; le siège gardé (6 min au plus) permet de
+   revenir (`resume`), y compris pour récupérer le résultat d'une partie déjà finie et la régler.
+4. Un écran recréé par le système **ne quitte pas la partie** : elle vit dans l'application, pas dans l'écran.
+
+Pendant la partie, le pied de l'écran dit, par ordre d'importance : le **règlement** de la mise, une liaison dégradée (reprise en cours,
+tuyau d'un téléphone), le décompte « Adversaire déconnecté : forfait dans N s », puis la mise en jeu et, sans alarme, « Partie par
+relais : liaison lente » quand Internet ne vient que du tuyau d'un téléphone. Une liaison perdue (60 s) ouvre « Connexion perdue » :
+le service tranche (forfait). En fin de
+partie : « Vous avez gagné ! / perdu », « Partie nulle », ou « **Partie interrompue** » (jamais « nulle » pour une interruption),
+et pour une partie misée « Voir « Mes jetons » ».
+
+### 6.3 Règles de la salle `game:chess` (service, `ChessServerRoom`)
+
+Le **service est l'arbitre** (moteur pur `core/chess`, `ChessGame`, partagé avec la TV : c'est lui qui fait foi pour les règles) :
+
+- **Deux joueurs** : l'hôte (couleur au choix ou au hasard) et celui qui entre par le code ; **spectateurs** : des TV (8 au plus,
+  sans mise). Une TV ne joue pas contre elle-même.
+- **Coups numérotés** : chaque coup porte le numéro du demi-coup auquel il répond (`ply`, obligatoire) ; un doublon ou un coup en
+  retard est refusé `STALE` (liaison lente, renvois). Seul le trait joue ; un coup illégal est refusé `ILLEGAL`.
+- **Pendule du serveur** : 10 à 60 s par coup, jamais plus, compteur relancé à chaque coup ; **temps dépassé = partie perdue**
+  (nulle si l'adversaire ne peut plus mater) ; en `PRACTICE` (parties libres seulement) le coup est joué d'office. La TV n'envoie
+  jamais un temps ni un état, seulement des coups ; elle décompte localement entre deux positions.
+- **Abandon** (`resign`), **nulle** proposée / acceptée / refusée, mat, pat, 50 coups, triple répétition, matériel insuffisant.
+- **Déconnexion** : la place est gardée (reprise par `resume{roomId, token, lastSeq}`), la pendule continue ; **une TV absente 60 s
+  perd par forfait** si l'autre est là ; si les deux sont absentes la partie est **interrompue** (mises rendues).
+- **Salle d'attente** : une salle sans adversaire vit 30 min au plus ; l'hôte peut **annuler** (`cancel`) : sa mise est rendue.
+  Une partie dure 3 h au plus (puis : interrompue, mises rendues). Une partie finie reste consultable 5 min (résultat, reprise).
+- **Quotas** : les salles de jeu partagent l'espace de codes, `CASTBRIDGE_PLAY_MAX_ROOMS` et les plafonds par adresse et par
+  identité du Quiz ; un code faux n'est jamais distingué d'un code inconnu.
+
+Protocole : `docs/PLAY-PROTOCOL.md`, section « Salle de jeu `game:chess` ». Exploitation : `docs/PLAY-OPS.md` § 4.2 ter.
+
+### 6.4 Mises (option B de la conception W22)
+
+Le service **ne détient aucun secret du grand livre** et ne parle jamais à l'API : il vérifie un blocage signé par l'API et signe un
+résultat avec **sa propre clé dédiée**. Enchaînement :
+
+1. **Blocage** : la TV demande à l'API `POST /api/v1/wallet/escrow` (`game:"chess"`, monnaie, montant, clé d'idempotence, activations).
+   L'API applique l'échelle de mises du jeu, **refuse l'essai** (`TRIAL_FREE_ONLY`), refuse un montant hors échelle
+   (`STAKE_NOT_OFFERED`), un solde insuffisant (`INSUFFICIENT`) et un plafond de parties gagnées atteint (`STAKE_WIN_CAP`, avec le
+   moment où la prochaine partie avec mise s'ouvre), puis rend un blocage signé **`cbe1`** (valable 30 min). Rejouer la même clé
+   rend le **même** blocage : une coupure n'en crée jamais deux. Un blocage non employé (échec d'ouverture) est réutilisé pour la
+   partie suivante.
+2. **Entrée** : la TV porte `cbe1` au service (`create` ou `join`). Le service le vérifie (signature de la clé « portefeuille »
+   publique, audience `aud`, échéance, identité de la TV = celle de son activation, monnaie, montant, un seul siège, **pas déjà
+   employé** dans une salle vivante). Une salle misée sans blocage répond `STAKE_ESCROW_REQUIRED` avec la mise.
+3. **Partie** : arbitrée comme ci-dessus ; une mise ne se joue qu'en compétition.
+4. **Résultat** : à la fin (ou à l'interruption) le service signe **`cbr1`** (domaine `castbridge-play-result-v1`, lignes
+   `[eid, id, utilisé, versé]`, somme versée = somme utilisée : rien ne se crée) avec sa clé dédiée, l'envoie aux deux TV (message
+   `result`) **et** en dépose une copie dans son volume pour le collecteur de l'hôte (`tools/wallet/collect-results.sh`).
+5. **Règlement** : la TV poste `cbr1` à l'API (`POST /api/v1/wallet/settle`, aucune authentification : la signature fait foi) ; à
+   défaut, le collecteur de l'hôte le fait. L'API est **idempotente par identifiant de salle** (rejouer rend la même réponse).
+
+| Issue | Règlement |
+|---|---|
+| Victoire (mat, temps, abandon de l'adversaire, **forfait**) | le gagnant reçoit la cagnotte (2 mises) **moins les frais de plateforme** ; le perdant perd sa mise |
+| Nulle (accord, pat, 50 coups, triple répétition, matériel) | chaque mise est **rendue** (aucuns frais) |
+| Interruption (annulation de l'hôte, salle expirée, deux TV absentes, partie trop longue, arrêt du service) | chaque mise est **rendue** (`cbr1` de type `ABORT`) |
+
+Frais de plateforme : **politique du serveur** (`wallet_policy`, points de base sur la cagnotte d'une partie décidée seulement),
+**0 % par défaut** ; les frais s'écrivent sur le compte système `SYS:FEE`. Plafonds de parties **gagnées** avec mise, par identité
+(jour / semaine du lundi au dimanche / mois civil, calendrier Africa/Douala, comme les plafonds du Quiz) : **3 / 10 / 15 par
+défaut, à confirmer par le propriétaire** (politique modifiable sans redéploiement). Chaque partie misée s'inscrit au **journal des
+parties misées** (W22 § 5) lu par `GET /api/v1/admin/wallet/games`. Voir `docs/LICENSE-ADMIN.md` § « Échecs misés ».
+
+Si la TV n'a pas pu régler (hors ligne), elle **garde** le résultat signé (8 au plus), le **reposte** à l'ouverture de l'écran et au
+retour de la connexion, et l'écran dit « Règlement en attente… » ; le service en garde une copie 7 jours pour le collecteur. Un
+refus définitif de l'API (« rendu à l'échéance », déjà réglé…) est dit et n'est pas renvoyé. **La TV ne calcule jamais un solde** :
+le texte de fin (« Vous gagnez 16 NDEM ») vient de la réponse de l'API, après frais.
+
+### 6.5 Messages (extrait ; voir `docs/PLAY-PROTOCOL.md`)
+
+| Sens | Message |
+|---|---|
+| TV → service | `create{game:"chess", chess:{perMoveSeconds, mode, color}, stake?:{cur, per}, escrow?:<cbe1>, activation, proof}` ; `join{code, escrow?, spectate?, activation, proof}` ; `resume{roomId, token, lastSeq}` ; `game{op:"move"\|"resign"\|"draw"\|"cancel", arg?, ply?, seq}` |
+| service → TV | `welcome{…, game:"chess"}` ; `state` (vue d'échecs de la TV : `legal` seulement pour qui a le trait) ; `ack{ref, result}` (`OK`, `ILLEGAL`, `NOT_YOUR_TURN`, `STALE`, `OVER`, `FORBIDDEN`, `IGNORED`) ; `result{token:<cbr1>}` ; `error{reason, data?}` |
+
+Refus propres aux jeux (`GameReason`, textes français côté TV) : `GAME_UNAVAILABLE`, `GAME_UNKNOWN`, `STAKES_SUSPENDED`,
+`STAKE_TRIAL_FREE_ONLY`, `STAKE_ESCROW_REQUIRED` (avec `data:{game, cur, per}`), `STAKE_ESCROW_INVALID`, `STAKE_BAD`, `SEATS_TAKEN`,
+`SAME_TV`.
+
+### 6.6 Format d'état en ligne (ajouts au § 5, additifs)
+
+La vue d'une TV reprend le format du § 5 avec `white.kind = black.kind = "ONLINE"` et, en plus : `room:{id, game:"chess", code,
+state, role, seq, serverNowMs, hostConnected, forfeitMs, away:{w, b}}` (`away` = depuis combien de ms chaque couleur est absente, pour
+le décompte du forfait) et `stake:{cur, per, pot, settled}` (partie misée). `result.reason = "ABANDONED"` dit une partie
+**interrompue** (jamais une nulle). Aux téléphones du foyer la TV sert la même vue **sans `legal`, sans `room`, sans `me`**, avec
+`"online":true`, la pendule corrigée du temps écoulé depuis la dernière position ; `GET /chess/api/hello` ajoute alors `"online":true`.
+
+### 6.7 Limites connues et décisions à confirmer
+
+- Si la création échoue **après** que le service a accepté le blocage sans que la TV reçoive la réponse, ce blocage reste employé
+  jusqu'à la fin de la salle (30 min au plus) ; il n'existe pas de route « libérer » (elle ouvrirait une triche : débloquer pendant
+  la partie) ; l'API rend les blocages non réglés à leur échéance.
+- La pendule du service est **stricte** (aucune grâce de latence) ; un coup qui arrive après l'échéance est refusé même si la TV l'a
+  joué à temps sur sa liaison lente.
+- Décisions du propriétaire : plafonds de parties gagnées (3 / 10 / 15), frais de plateforme (0 %), échelle de mises.
 
 ## 7. Écrans et mise en page
 
@@ -187,8 +285,15 @@ Obligations du serveur (mêmes que la TV, cf. `ChessGame`, `ChessRoom` et le fau
 
 `core/chess/` : `Position.kt` (échiquier 0x88, coups légaux, FEN, hachage Zobrist), `Notation.kt` (SAN, PGN, règles de
 fin), `ChessAi.kt` (IA + bibliothèque d'ouvertures), `ChessGame.kt` (partie + compte à rebours), `ChessRoom.kt` (salle TV,
-héritière de `core/games/GameRoom`), `ChessHttp.kt` (routes `/chess`, sur `core/games/RoomHttp`), `ChessTransport.kt` (LAN +
-relais), `ChessPieces.kt`, `ChessTvLayout.kt` ;
-`core/tv/CombinedRoutes.kt` ; `resources/castbridge/chess/play.html`. TV : `ChessActivity.kt`, `ChessTvView.kt`,
-`ChessHub.kt`, `ic_t_chess.xml`. Téléphone : `ChessScreen.kt`. Tests : `ChessEngineTest` (perft), `ChessAiTest`,
-`ChessRoomTest` (horloge, salle, HTTP), `ChessRelayTest` (faux relais), `ChessLayoutTest`.
+héritière de `core/games/GameRoom`), `ChessHttp.kt` (routes `/chess`, sur `core/games/RoomHttp`), `ChessTransport.kt` (LAN),
+`ChessRelayClient.kt` (client des échecs en ligne de la TV sur `/play/`, § 6), `ChessPieces.kt`, `ChessTvLayout.kt` ;
+`core/chess/online/` : `ChessServerRoom.kt` (la salle `game:chess` du service, pure), `ChessSettlement.kt` (règlement pur,
+échelle de mises), `ChessOnline.kt` (porte, mises permises, écran de création, textes), `ChessStakeFlow.kt` (blocage, règlement,
+mémoire), `ChessOnlineGame.kt` (la partie de la TV), `OnlineChessHost.kt` (vitrine des téléphones du foyer) ;
+`core/tv/CombinedRoutes.kt` ; `resources/castbridge/chess/play.html`. Service : `server-play/…/RoomRegistry.kt` (salles de jeu),
+`stake/` (porte des blocages, clé « résultat », dépôt des `cbr1`). API : `wallet/ops/EscrowService`, `SettleService`,
+`GameJournal`, migration `V68__chess_stakes.sql`. TV : `ChessActivity.kt`, `ChessOnlineHub.kt`, `ChessTvView.kt`, `ChessHub.kt`,
+`ic_t_chess.xml`. Téléphone : `ChessScreen.kt`. Tests : `ChessEngineTest` (perft), `ChessAiTest`, `ChessRoomTest` (horloge, salle,
+HTTP), `ChessLayoutTest`, `ChessServerRoomTest`, `ChessSettlementTest`, `ChessOnlineGameTest` (deux TV sur un service en mémoire),
+`ChessOnlineScreensTest`, `OnlineChessHostTest`, `WalletClientChessTest` ; `server-play` : `ChessHubTest`, `StakeUnitTest` ;
+API : `ChessStakeApiTest`, `SettleFeeTest`, `WinWindowsTest`.

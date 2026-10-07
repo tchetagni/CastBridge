@@ -192,6 +192,8 @@ class Exit(
     private val log: (String) -> Unit = {},
     /** Runs "ping"/"trace" towards a validated host, calling the line callback as output arrives. */
     private val diag: (kind: String, host: String, line: (String) -> Unit) -> Unit = { _, _, l -> l("diagnostic indisponible") },
+    /** The TV answered HELLO_OK: this link IS a gateway (R-36 / audit I-8: [GatewayService.PhoneChoice.helloAnswered]; R-33 / I-13: the phone tells the TV its network). Never throws out of [run]. */
+    private val onHello: () -> Unit = {},
 ) {
     private val relays = ConcurrentHashMap<Int, Relay>()
     val openStreams get() = relays.size
@@ -201,6 +203,7 @@ class Exit(
         mux.write(Frame(Gw.HELLO, 0, (Gw.MAGIC + pin).toByteArray(Charsets.US_ASCII)))
         val first = mux.read()
         if (first.type != Gw.HELLO_OK) throw if (first.type == Gw.HELLO_ERR) GatewayRefused(String(first.payload, Charsets.UTF_8)) else IOException("réponse inattendue")
+        runCatching { onHello() }
         log("passerelle active")
         try {
             while (true) {

@@ -68,7 +68,7 @@ object OrdersRuntime {
                 val adapter = app.getSystemService(BluetoothManager::class.java)?.adapter?.takeIf { it.isEnabled } ?: return
                 val sock = adapter.getRemoteDevice(address).createRfcommSocketToServiceRecord(UUID.fromString(OwnerFrames.SERVICE_UUID))
                 try {
-                    sock.connect()
+                    synchronized(castbridge.core.tunnel.BtConnectLock.of(address)) { sock.connect() }      // R-32 (audit I-10): one connect() at a time to the same TV
                     val r = OrderCourier(queue, object : OrderServerApi { override fun fetch(since: Long) = null; override fun postAcks(acks: List<PendingAck>) = false })
                         .deliver(code, StreamOrderLink(sock.inputStream, sock.outputStream))
                     Log.i(TAG, "livraison: ${r::class.simpleName}")        // never log tokens or codes

@@ -114,6 +114,8 @@ public class MemoryLedger implements Ledger {
             AccountRef a = n.getKey();
             if (a.holder().equals(AccountRef.POT)) {
                 if (txn.kind() != TxnKind.SETTLE || n.getValue() != 0) throw bad("SYS:POT doit revenir à 0 dans le règlement");
+            } else if (a.holder().equals(AccountRef.FEE) && a.isSystem() && txn.kind() == TxnKind.SETTLE && n.getValue() > 0) {
+                // frais de plateforme du jeu (politique) : seul un règlement les crédite, jamais négatifs ; ils sortent de la cagnotte, qui revient à 0 (la conservation est vérifiée ci-dessus)
             } else if (a.isSystem() || !allowed.contains(a.holder()) || (a.pocket() != Pocket.DISPO && a.pocket() != Pocket.BLOQUE)) {
                 throw bad("Aucun gain hors des blocages listés");
             }

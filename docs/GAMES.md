@@ -87,7 +87,7 @@ Une « fiche de règles » du propriétaire (questions 1 à 8 de la conception �
 
 ### 3.6 Les échecs sur la plateforme (sans rien changer)
 
-`ChessRoom` hérite de `GameRoom` et `ChessHttp` n'est plus qu'une instance de `RoomHttp` (préfixe `/chess`, paramètre `ply`, page des échecs). **Comportement observable inchangé**, prouvé : les tests existants (`ChessRoomTest`, `ChessHttpTest`, `ChessRelayTest`…) passent **sans modification**, et `ChessGoldenTest` compare **octet pour octet** deux scénarios (états JSON complets avec versions `v`, codes, jetons dérivés de l'aléa à graine, notices ; codes et corps HTTP de chaque route, trame SSE, page, verrou des codes faux) à des fichiers de référence produits **avant** la migration (`src/test/resources/castbridge/games/chess-golden-*.txt`). Les énumérations `ChessRoom.Stage`, `Join`, `Act`, `Seat` restent (façade de compatibilité sur `RoomStage`, `JoinStatus`, `ActResult`, `SeatKind`, mêmes noms, épinglés égaux par `GameRoomFacadeTest`) ; elles disparaîtront quand les échecs deviendront un `GameRules` (G2).
+`ChessRoom` hérite de `GameRoom` et `ChessHttp` n'est plus qu'une instance de `RoomHttp` (préfixe `/chess`, paramètre `ply`, page des échecs). **Comportement observable inchangé**, prouvé : les tests existants (`ChessRoomTest`, `ChessHttpTest`…) passent **sans modification** (`ChessRelayTest`, qui visait l'ancien client REST des échecs en ligne jamais ouvert, est supprimé avec lui : chantier G2), et `ChessGoldenTest` compare **octet pour octet** deux scénarios (états JSON complets avec versions `v`, codes, jetons dérivés de l'aléa à graine, notices ; codes et corps HTTP de chaque route, trame SSE, page, verrou des codes faux) à des fichiers de référence produits **avant** la migration (`src/test/resources/castbridge/games/chess-golden-*.txt`). Les énumérations `ChessRoom.Stage`, `Join`, `Act`, `Seat` restent (façade de compatibilité sur `RoomStage`, `JoinStatus`, `ActResult`, `SeatKind`, mêmes noms, épinglés égaux par `GameRoomFacadeTest`) ; elles ne disparaîtront que si les échecs deviennent un `GameRules` : le chantier G2 ne l'a PAS fait (la salle `game:chess` du service reprend le moteur pur `core/chess`, voir `docs/CHESS.md` § 6).
 
 ## 4. Bataille (démonstration)
 
@@ -108,7 +108,7 @@ Deux jeux de cartes dont les règles **doivent être fournies par le propriétai
 
 ## 6. Ce qui n'est PAS ici (chantiers suivants)
 
-G2 : échecs en ligne et mises (NDEM/MBOKO, `cbe1`/`cbr1`, salle `game:chess` de `castbridge-play` avec le même module de règles, échecs réécrits en `GameRules`). G3, G4 : Fap-Fap et Agraham Tia après réception des fiches. Aucune mise, aucun jeton, aucune route du service de jeu ou de l'API n'est touchée ; le journal `cbg1` est produit, signé et gardé, jamais envoyé.
+G2 (réalisé, `docs/CHESS.md` § 6) : échecs en ligne TV à TV, libres ou avec mise (NDEM/MBOKO, `cbe1`/`cbr1`, salle `game:chess` de `castbridge-play` sur le moteur pur `core/chess`, règlement par l'API, vitrine des téléphones du foyer par une `GameRoom` sans place) ; les échecs ne sont pas réécrits en `GameRules`. G3, G4 : Fap-Fap et Agraham Tia après réception des fiches. Pour la plateforme G1 seule : aucune mise, aucun jeton, aucune route du service de jeu ou de l'API n'était touchée ; le journal `cbg1` est produit, signé et gardé, jamais envoyé.
 
 ## 7. Tests JVM (`gradle :core:test`)
 

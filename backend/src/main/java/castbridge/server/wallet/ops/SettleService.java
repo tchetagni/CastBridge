@@ -38,16 +38,18 @@ public class SettleService {
     private final JdbcTemplate jdbc;
     private final WalletModuleConfig.WalletClock clock;
     private final WalletPolicyService policies;
+    private final GameJournal journal;
 
-    public SettleService(PlayResultKeys keys, JdbcLedger ledger, JdbcTemplate jdbc, WalletModuleConfig.WalletClock clock, WalletPolicyService policies) {
+    public SettleService(PlayResultKeys keys, JdbcLedger ledger, JdbcTemplate jdbc, WalletModuleConfig.WalletClock clock, WalletPolicyService policies, GameJournal journal) {
         this.policies = policies;
+        this.journal = journal;
         this.keys = keys;
         this.ledger = ledger;
         this.jdbc = jdbc;
         this.clock = clock;
     }
 
-    private record Row(String eid, String holder, Currency cur, Long per, Long k, long amount, String state, String settledRid, String room) {}
+    private record Row(String eid, String holder, Currency cur, Long per, Long k, long amount, String state, String settledRid, String room, String game) {}
 
     public Map<String, Object> settle(String token) {
         if (!keys.configured()) throw new ApiException(HttpStatus.SERVICE_UNAVAILABLE, "Règlement indisponible : aucune clé de service de jeu configurée");
@@ -59,6 +61,11 @@ public class SettleService {
         if (!prior.isEmpty()) {
             if (!prior.get(0)[0].equals(r.sha())) throw new LedgerException(WalletReason.IDEM_CONFLICT, "Ce résultat existe déjà avec un autre contenu : " + r.rid());
             if ("AFTER_REFUND".equals(prior.get(0)[1])) throw afterRefund(r);
+            return response(r);
+        }
+        // une coupure entre la transaction du règlement et la mémorisation du résultat : le règlement existe déjà (même clé), on le rejoue sans rien recalculer (la politique de frais a pu changer entre-temps)
+        if (!jdbc.queryForList("SELECT 1 FROM wallet_txn WHERE idem_key = ?", Integer.class, "settle:" + r.rid()).isEmpty()) {
+            remember(r, r.kind() == Settlement.Kind.ABORT ? "ABORT" : "SETTLED", r.lines().stream().mapToLong(Settlement.Line::pay).sum());
             return response(r);
         }
         // 2. chaque blocage existe, avec la même monnaie, la même mise par siège et le même titulaire
@@ -78,6 +85,8 @@ public class SettleService {
             if (row.per() != null ? row.per() != r.per() : row.amount() % r.per() != 0) throw new LedgerException(WalletReason.BAD_TXN, "Mise par siège différente de celle du blocage : " + l.eid());
             long k = row.amount() / r.per();
             if (k < 1 || k > Txn.MAX_SEATS || row.amount() != r.per() * k) throw new LedgerException(WalletReason.BAD_TXN, "Blocage incohérent avec la mise par siège : " + l.eid());
+            // le JEU : un blocage fait pour un jeu ne se règle que par le résultat de CE jeu, et le résultat d'un jeu misé (échecs) ne règle que des blocages faits pour lui (jamais ceux du Quiz)
+            if (row.game() != null ? !row.game().equals(r.game()) : WalletPolicyService.GAMES.contains(r.game())) throw new LedgerException(WalletReason.BAD_TXN, "Jeu différent de celui du blocage : " + l.eid());
         }
         // 3. états : un rendu refuse tout ; un règlement par un autre résultat ferme le blocage
         for (Row row : rows.values()) if ("REFUNDED".equals(row.state())) throw recordAfterRefund(r);
@@ -96,6 +105,14 @@ public class SettleService {
             lines.add(new Settlement.Line(l.eid(), l.id(), row.amount(), l.used(), l.pay()));
         }
         Settlement.check(lines, escrows);
+        // jeux misés (échecs) : la FORME du résultat est vérifiée avant de payer (défense en profondeur : un service compromis ne peut attribuer que les deux mises à l'une des deux TV, ou rendre à chacune la sienne)
+        WalletPolicyService.GamePolicy gp = policies.game(r.game()).orElse(null);
+        if (gp != null) duelShape(r, rows, lines);
+        // frais de plateforme (politique du jeu, 0 au lancement) : prélevés sur la cagnotte d'une partie DÉCISIVE seulement, jamais sur une nulle ni sur une interruption
+        long totalUsed = lines.stream().mapToLong(Settlement.Line::used).sum();
+        boolean decisive = r.kind() == Settlement.Kind.END && lines.stream().anyMatch(l -> l.pay() > l.used());
+        long fee = gp != null && decisive ? totalUsed * gp.feeBp() / 10_000L : 0L;
+        List<Settlement.Line> ledgerLines = fee == 0 ? lines : afterFee(lines, fee);
         // M3 : plafonds du règlement (une clé « résultat » compromise ne vide pas le serveur) ; le refus laisse une alerte, le collecteur réessaie ou l'administrateur tranche
         long totalPay = 0;
         for (Settlement.Line l : lines) totalPay += l.pay();
@@ -104,9 +121,10 @@ public class SettleService {
         long paidToday = jdbc.queryForObject("SELECT COALESCE(SUM(paid), 0) FROM wallet_result WHERE cur = ? AND outcome = 'SETTLED' AND received_at >= ?", Long.class, r.cur().name(),
                 Timestamp.from(clock.now().minus(java.time.Duration.ofHours(24))));
         if (paidToday + totalPay > caps.perDay()) throw capRefusal(r, "règlement de " + totalPay + " " + r.cur() + " : le plafond des dernières 24 h (" + caps.perDay() + ", déjà payé " + paidToday + ") serait dépassé");
-        // 5. UNE transaction : le grand livre revérifie tout sous verrou (blocages ouverts, conservation) ; un rejeu concurrent y devient « replayed »
+        // 5. UNE transaction : le grand livre revérifie tout sous verrou (blocages ouverts, conservation) ; un rejeu concurrent y devient « replayed » ; le journal des parties s'écrit DANS cette transaction
+        List<GameJournal.Row> journalRows = gp == null ? List.of() : journalRows(r, lines, fee, clock.now());
         try {
-            ledger.post(Txn.settle(r.rid(), lines, r.cur()), "play", null, null);
+            ledger.post(Txn.settle(r.rid(), ledgerLines, r.cur(), fee), "play", null, null, tx -> journal.record(tx, journalRows));
         } catch (LedgerException e) {
             if (e.reason() == WalletReason.ESCROW_CLOSED) {
                 for (Settlement.Line l : r.lines()) {
@@ -126,10 +144,52 @@ public class SettleService {
     }
 
     private Row load(String eid) {
-        List<Row> l = jdbc.query("SELECT eid, holder, cur, per, k, amount, state, settled_rid, room FROM wallet_escrow WHERE eid = ?",
+        List<Row> l = jdbc.query("SELECT eid, holder, cur, per, k, amount, state, settled_rid, room, game FROM wallet_escrow WHERE eid = ?",
                 (rs, i) -> new Row(rs.getString("eid"), rs.getString("holder"), Currency.valueOf(rs.getString("cur")), nullableLong(rs, "per"), nullableLong(rs, "k"),
-                        rs.getLong("amount"), rs.getString("state"), rs.getString("settled_rid"), rs.getString("room")), eid);
+                        rs.getLong("amount"), rs.getString("state"), rs.getString("settled_rid"), rs.getString("room"), rs.getString("game")), eid);
         return l.isEmpty() ? null : l.get(0);
+    }
+
+    /**
+     * Forme d'un résultat de DUEL (échecs) : une mise par TV (un siège) ; une partie interrompue porte une ou deux TV (rien n'est utilisé) ; une partie terminée exactement deux TV DISTINCTES qui engagent
+     * chacune leur mise entière, et la répartition est « les deux mises à l'une », « les deux mises à l'autre » ou « chacune reprend la sienne » : rien d'autre ne s'attribue.
+     */
+    private static void duelShape(PlayResultKeys.Result r, Map<String, Row> rows, List<Settlement.Line> lines) {
+        for (Row row : rows.values()) if (row.amount() != r.per()) throw new LedgerException(WalletReason.BAD_TXN, "Une mise par TV aux échecs : " + row.eid());
+        if (lines.size() > 2) throw new LedgerException(WalletReason.BAD_TXN, "Un duel n'a pas plus de deux TV");
+        if (lines.size() == 2 && lines.get(0).id().equals(lines.get(1).id())) throw new LedgerException(WalletReason.BAD_TXN, "Une TV ne joue pas contre elle-même");
+        if (r.kind() == Settlement.Kind.ABORT) return;
+        if (lines.size() != 2) throw new LedgerException(WalletReason.BAD_TXN, "Une partie terminée a exactement deux TV");
+        long per = r.per();
+        for (Settlement.Line l : lines) if (l.used() != per) throw new LedgerException(WalletReason.BAD_TXN, "Chaque joueur engage sa mise entière : " + l.eid());
+        long a = lines.get(0).pay(), b = lines.get(1).pay();
+        if (!((a == 2 * per && b == 0) || (a == 0 && b == 2 * per) || (a == per && b == per))) {
+            throw new LedgerException(WalletReason.BAD_TXN, "Répartition impossible aux échecs : le gagnant prend les deux mises, ou chacun reprend la sienne");
+        }
+    }
+
+    /** Les lignes du grand livre après frais : le gagnant (la plus grosse part) reçoit {@code fee} de moins ; Σ payé + frais = Σ utilisé. */
+    private static List<Settlement.Line> afterFee(List<Settlement.Line> lines, long fee) {
+        int top = 0;
+        for (int i = 1; i < lines.size(); i++) if (lines.get(i).pay() > lines.get(top).pay()) top = i;
+        Settlement.Line w = lines.get(top);
+        if (fee > w.pay()) throw new LedgerException(WalletReason.BAD_TXN, "Frais supérieurs au gain");
+        List<Settlement.Line> out = new ArrayList<>(lines);
+        out.set(top, new Settlement.Line(w.eid(), w.id(), w.amount(), w.used(), w.pay() - fee));
+        return out;
+    }
+
+    /** Les lignes du journal d'un résultat de duel : une par TV, avec l'issue, l'adversaire et les frais (prélevés sur le gagnant). */
+    private static List<GameJournal.Row> journalRows(PlayResultKeys.Result r, List<Settlement.Line> lines, long fee, java.time.Instant at) {
+        int top = 0;
+        for (int i = 1; i < lines.size(); i++) if (lines.get(i).pay() > lines.get(top).pay()) top = i;
+        List<GameJournal.Row> out = new ArrayList<>();
+        for (int i = 0; i < lines.size(); i++) {
+            Settlement.Line l = lines.get(i);
+            GameJournal.Outcome o = r.kind() == Settlement.Kind.ABORT ? GameJournal.Outcome.ABORT : l.pay() > l.used() ? GameJournal.Outcome.WIN : l.pay() == 0 ? GameJournal.Outcome.LOSS : GameJournal.Outcome.DRAW;
+            out.add(new GameJournal.Row(r.rid(), r.room(), r.game(), l.id(), lines.size() == 2 ? lines.get(1 - i).id() : null, r.cur().name(), r.per(), l.used(), l.pay(), i == top && o == GameJournal.Outcome.WIN ? fee : 0L, o, at));
+        }
+        return out;
     }
 
     private static Long nullableLong(java.sql.ResultSet rs, String col) throws java.sql.SQLException {
@@ -174,12 +234,20 @@ public class SettleService {
         return new ApiException(HttpStatus.CONFLICT, "Résultat arrivé après le rendu des mises : rien n'est réglé pour cette partie", List.of("RESULT_AFTER_REFUND"));
     }
 
-    private static Map<String, Object> response(PlayResultKeys.Result r) {
+    /**
+     * La réponse d'un règlement (aussi pour un rejeu) : le résultat tel que le service l'a signé ({@code used}, {@code pay}) et, pour un jeu misé, les FRAIS prélevés ({@code fee}, par ligne et au total,
+     * lus du journal) : la TV montre ce qu'elle reçoit vraiment, {@code pay − fee}.
+     */
+    private Map<String, Object> response(PlayResultKeys.Result r) {
         Map<String, Object> out = new LinkedHashMap<>();
         out.put("rid", r.rid());
         out.put("kind", r.kind().name());
         out.put("cur", r.cur().name());
+        out.put("game", r.game());
         out.put("status", "SETTLED");
+        Map<String, Long> fees = new java.util.HashMap<>();
+        long totalFee = 0;
+        for (GameJournal.Row j : journal.byResult(r.rid())) { fees.put(j.holder(), j.fee()); totalFee += j.fee(); }
         List<Map<String, Object>> ls = new ArrayList<>();
         for (Settlement.Line l : r.lines()) {
             Map<String, Object> m = new LinkedHashMap<>();
@@ -187,8 +255,10 @@ public class SettleService {
             m.put("id", l.id());
             m.put("used", l.used());
             m.put("pay", l.pay());
+            m.put("fee", fees.getOrDefault(l.id(), 0L));
             ls.add(m);
         }
+        out.put("fee", totalFee);
         out.put("lines", ls);
         return out;
     }

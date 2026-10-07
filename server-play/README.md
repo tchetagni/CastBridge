@@ -46,6 +46,12 @@ Le secret de la session de repli (128 bits, vie courte) n'est JAMAIS dans une ad
 | `CASTBRIDGE_PLAY_REVOCATIONS` | on | w20-04b : `on` = fermé tant qu'aucune liste signée récente n'est acceptée ; `off` = POC seulement (refusé si `MAX_ROOMS` > 20), visible : journal au démarrage et santé `"revocations":"disabled"` |
 | `CASTBRIDGE_PLAY_REQUIRE_PROOF` | 1 | audit Opus H-3 : `create` et `join` exigent la preuve de possession de la clé d'installation de la TV, liée au ticket ; `0` = migration d'une flotte mixte seulement (santé `"proof":"optional"`) |
 | `CASTBRIDGE_PLAY_MAX_HELD_PER_ADDR` | 48 | audit Opus H-4 : sockets tenues (flux SSE + long-polls) par adresse (/64 en IPv6) ; un seul long-poll par session |
+| `CASTBRIDGE_PLAY_CHESS` | on | games-G2 : salles d'échecs en ligne (`game:chess`) ; `off` : `create{game:"chess"}` répond `GAME_UNAVAILABLE`, `caps` dit `"chess":false` |
+| `CASTBRIDGE_PLAY_STAKES` | on | games-G2 : interrupteur des mises ; effectif seulement avec la clé publique « portefeuille » ET la clé « résultat » ; sinon `STAKES_SUSPENDED` (les parties libres restent ouvertes) |
+| `CASTBRIDGE_PLAY_WALLET_PUBKEY`, `_2` | (vide) | clés PUBLIQUES du portefeuille de l'API (vérifient les blocages `cbe1`), 32 octets bruts en Base64 ou SPKI ; **aucun secret du grand livre dans le service** |
+| `CASTBRIDGE_PLAY_RESULT_KEY_FILE` | (vide) | CHEMIN du fichier de la clé privée dédiée « résultat » (la seule clé privée du service ; elle ne signe que les `cbr1`) : PEM PKCS#8 Ed25519 ou graine Base64 ; créée par `tools/play/gen-result-keypair.sh`, montée en secret Docker |
+| `CASTBRIDGE_PLAY_RESULTS_DIR` | `/var/lib/castbridge-play/results` | copies des `cbr1` pour le collecteur de l'hôte (`tools/wallet/collect-results.sh`), 7 jours, 10 000 fichiers au plus |
+| `CASTBRIDGE_PLAY_STAKE_MAX_NDEM`, `_MBOKO` | 1 000, 100 | mise maximale par joueur acceptée (défense en profondeur ; l'échelle exacte est celle de la politique de l'API) |
 | `CASTBRIDGE_PLAY_RESERVED_DIR` | (vide) | dossier en lecture seule des paquets réservés `quiz-<lot>-reserved-pN-vN.quiz.zip` (lus à la demande) |
 | `CASTBRIDGE_PLAY_RESERVED_IDS` | `<RESERVED_DIR>/reserved-ids.json` | gel des ids réservables ; absent = aucune question réservée servie |
 | `CASTBRIDGE_PLAY_MAX_ROOMS_PER_SUBJECT` | 2 | salles ouvertes en même temps par appareil attesté (l'essai : 1) |

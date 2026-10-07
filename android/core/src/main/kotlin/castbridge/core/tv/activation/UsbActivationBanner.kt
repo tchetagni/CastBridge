@@ -1,6 +1,7 @@
 package castbridge.core.tv.activation
 
 import castbridge.core.owner.TrialPolicy
+import castbridge.core.tv.UsbPhase
 
 /** How a line of the activation screen is coloured: green = done or ready, grey = information, amber = a reason to act. */
 enum class LineTone { GOOD, INFO, WARN }
@@ -10,6 +11,9 @@ enum class LineTone { GOOD, INFO, WARN }
  * (broadcast « media mounted »), when the activation screen opens and on the « Chercher » button, and says EXACTLY what it found:
  * « Clé USB : activation trouvée pour cette TV › Activer » (the banner is a focusable button: OK installs the key) or the precise reason (another TV's key, expired, Download hidden by
  * Android and the folder to use instead, …). No silent search every 15 s any more.
+ *
+ * A key that Android is still CHECKING (fsck after an unclean removal) cannot be read yet: [State.WAITING_CHECK] says so and why, the search resumes at the mount (docs/STORAGE.md « Clé USB mal
+ * éjectée »). A key Android could not mount explains why no key was found ([State.DAMAGED], the guide of `UsbVolumeState`).
  *
  * Pure: it is built from the FACTS of the lookup ([LookupFacts]: paths, counts, file states), never from a key, so no key text can reach a banner, a log or a status line.
  * The verdict of a file is the one of [ActivationLookup] (the same verifier as a pasted key); the order of precedence is the one of [ActivationLookupReport].
@@ -35,7 +39,14 @@ object UsbActivationBanner {
          * plug-in, then « périmée » once its 48 h were over. Nothing to announce: the banner stays quiet, only an explicit search says it (and the home says nothing).
          */
         INSTALLED,
+        /** Android is checking the key (fsck): nothing can be read until it is mounted; the search resumes then. */
+        WAITING_CHECK,
+        /** Android could not mount the key (unreadable, or no file system it knows): the guide says what to do. */
+        DAMAGED,
     }
+
+    /** What the TV knows of the key ITSELF, not of its files (from `UsbVolumeState`): the phase and its French line. */
+    data class KeyNote(val phase: UsbPhase, val line: String)
 
     /**
      * [text] = the banner (« Clé USB : … »); [canActivate] = it is the « Activer » button; [keyPresent] = a USB key is plugged in; [presence] = the line of the key's way
@@ -52,11 +63,20 @@ object UsbActivationBanner {
     fun termsPending() = View(State.TERMS_PENDING, TERMS_LINE, LineTone.INFO, false, false, "Cochez d'abord les conditions d'usage : la clé USB sera lue ensuite")
     fun searching(keyPresent: Boolean = false, presence: String = NO_KEY_LINE) = View(State.SEARCHING, "Clé USB : recherche…", LineTone.INFO, false, keyPresent, presence)
 
+    /** Android checks the key: [keyLine] (« Clé « Lexar » : vérification par Android… patientez ») is the reason, and the search says it resumes by itself. */
+    fun waitingForCheck(keyLine: String) = View(State.WAITING_CHECK, "$keyLine La recherche de l'activation reprend dès qu'elle est prête.", LineTone.INFO, false, true, keyLine)
+
     /** The line of the « clé USB » way: which key is detected, or that none is. [facts] null = nothing searched yet. */
     fun presence(facts: LookupFacts?): String = if (facts == null || facts.volumes.isEmpty()) NO_KEY_LINE else ActivationLookupReport.lines(facts).first()
 
-    /** The banner for what the last lookup saw. */
-    fun from(facts: LookupFacts): View {
+    /** Where nothing was found: while Android checks a key this is not an answer yet. */
+    private val NOTHING_FOUND = setOf(State.NO_KEY, State.NOT_FOUND, State.HIDDEN, State.UNREADABLE)
+
+    /**
+     * The banner for what the last lookup saw. [key] = what the TV knows of the key itself: a key under check turns « nothing found » (or a refusal to read) into [State.WAITING_CHECK]; a key Android
+     * could not mount explains « no key » ([State.DAMAGED]). A verdict on a file that WAS read, and a healthy key without the file, are never overridden.
+     */
+    fun from(facts: LookupFacts, key: KeyNote? = null): View {
         val states = facts.probes.map { it.probe }.toSet()
         val keyPresent = facts.volumes.isNotEmpty()
         val state = when {
@@ -72,6 +92,9 @@ object UsbActivationBanner {
             Probe.EMPTY in states -> State.EMPTY
             else -> State.NOT_FOUND
         }
+        if (key != null && state in NOTHING_FOUND && key.phase == UsbPhase.CHECKING) return waitingForCheck(key.line)
+        if (key != null && state == State.NO_KEY && (key.phase == UsbPhase.DAMAGED || key.phase == UsbPhase.NO_FILESYSTEM))
+            return View(State.DAMAGED, key.line, LineTone.WARN, false, true, key.line)
         return View(state, textOf(state), toneOf(state), state == State.FOUND, keyPresent, presence(facts))
     }
 
@@ -90,11 +113,13 @@ object UsbActivationBanner {
         State.HIDDEN -> "Clé USB : dossier Download invisible : déposez le fichier dans $DROP"
         State.NOT_FOUND -> "Clé USB : aucun fichier « activation » trouvé : déposez-le dans $DROP"
         State.INSTALLED -> "Clé USB : cette activation est déjà installée sur cette TV"
+        State.WAITING_CHECK -> "Clé USB : vérification par Android… patientez, la recherche reprend dès que la clé est prête"
+        State.DAMAGED -> "Clé USB : illisible, Android n'a pas pu la réparer (réglages de stockage de la TV, ou un ordinateur)"
     }
 
     private fun toneOf(s: State): LineTone = when (s) {
         State.FOUND -> LineTone.GOOD
-        State.IDLE, State.TERMS_PENDING, State.SEARCHING, State.NO_KEY, State.INSTALLED -> LineTone.INFO
+        State.IDLE, State.TERMS_PENDING, State.SEARCHING, State.NO_KEY, State.WAITING_CHECK, State.INSTALLED -> LineTone.INFO
         else -> LineTone.WARN
     }
 

@@ -95,7 +95,7 @@ fun BtScreen() {
         else emptyList()
     }
     var selected by rememberSaveable { mutableStateOf<String?>(null) }
-    var pin by remember(selected) { mutableStateOf(pins.get(selected?.let { "bt:$it" })) }
+    var pin by remember(selected) { mutableStateOf(pins.get(selected?.let { castbridge.core.trust.PinKeys.btKey(it) })) }
     var fileUri by remember { mutableStateOf<Uri?>(null) }
     var fileName by rememberSaveable { mutableStateOf<String?>(null) }
     val pick = rememberFilePicker { u, n -> fileUri = u; fileName = n }
@@ -120,7 +120,7 @@ fun BtScreen() {
                 OutlinedButton(onClick = { refresh++ }) { Text("Actualiser") }
             }
         }
-        PinField(pins, selected?.let { "bt:$it" }, pin, { pin = it }, Modifier.fillMaxWidth())
+        PinField(pins, selected?.let { castbridge.core.trust.PinKeys.btKey(it) }, pin, { pin = it }, Modifier.fillMaxWidth())
         OutlinedButton(onClick = pick) { Text("Choisir un fichier") }
         Text("Fichier : ${fileName ?: "aucun"}")
         val busy = state is ResumableUpload.State.Uploading || state is ResumableUpload.State.Waiting

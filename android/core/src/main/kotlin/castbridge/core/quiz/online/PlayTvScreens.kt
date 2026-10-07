@@ -234,6 +234,7 @@ object PlayErrors {
             val wait = if (retryAfterMs > 0) retryAfterMs else known.retryAfterMs
             return if (known.retryable && wait > 0) known.message + " Nouvel essai possible dans ${(wait + 999) / 1000} s." else known.message
         }
+        GameReason.of(r)?.let { return it.message }   // salles de jeu à tour de rôle et mises (échecs en ligne)
         return when (r) {
             PlayProtocol.UNSUPPORTED -> "Cette version de CastBridge-TV ne sait pas jouer en ligne : mettez-la à jour."
             PlayProtocol.BAD_REQUEST -> "Le service a refusé la demande : mettez CastBridge-TV à jour."

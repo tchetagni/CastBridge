@@ -197,6 +197,28 @@ Une activation de **production** émise hors ligne et présentée par la TV (`PO
 - Limite connue : la TV 0.14.32 n'envoie pas l'heure d'installation ; le jeton est accepté tant que sa fenêtre de 48 h court (marqué `install_time_unproven`), au-delà il attend votre décision sauf émission déclarée par le registre ou le serveur.
 - Rattrapage du portefeuille : périodes commencées au plus 90 jours avant la première notification versées ; entre 90 et 366 jours seulement si l'émission est déclarée (registre, serveur) ou acceptée par vous ; jamais au-delà ; une fois par (licence, période).
 
+### 5.2 Échecs misés (games-G2) : routes, politique, journal, plafonds
+Les échecs en ligne avec mise (NDEM ou MBOKO) ajoutent au portefeuille **sans changer le Quiz** (migration additive `V68__chess_stakes.sql`, retour arrière `U68`) ; le texte du joueur est dans `docs/CHESS.md` § 6, l'exploitation du service dans `docs/PLAY-OPS.md` § 4.2 ter.
+- **`POST /api/v1/wallet/escrow`** (jeton d'appareil) accepte `game:"chess"` : l'échelle de mises du jeu s'applique (`STAKE_NOT_OFFERED`), **un siège** (`k` = 1), une TV d'**essai** est refusée (`TRIAL_FREE_ONLY`), un jeu éteint est refusé (`STAKES_SUSPENDED`), et les **plafonds de parties gagnées** de l'identité sont relus (`STAKE_WIN_CAP`, dont le message dit quand la prochaine partie avec mise s'ouvre). Sans `game` : le Quiz, comme avant. La clé d'idempotence rejouée rend le **même** blocage.
+- **`POST /api/v1/wallet/settle`** (sans authentification : le résultat `cbr1` est signé par le service de jeu) règle une partie d'échecs : le blocage doit avoir été posé pour le **même jeu** (sinon refus) ; le **gagnant** reçoit la cagnotte moins les **frais de plateforme**, une **nulle** et une **interruption** rendent chaque mise en entier ; la réponse donne, par ligne, `pay` (avant frais) et `fee` ; idempotent par identifiant de résultat.
+- **`GET /api/v1/wallet/policy`** publie `games.chess` : `enabled`, `stakes` (`NDEM`, `MBOKO` : paliers), `feeBp`, `winCaps` (`day`, `week`, `month`), `seats`, `trialStakes:false` (affichage seulement : l'API reste l'autorité de chaque blocage).
+- **`GET /api/v1/admin/wallet/games?game=chess&holder=XXXX-XXXX-XXXX-XXXX&limit=50`** (jeton d'administration, lecture seule) : le **journal des parties misées** (W22 § 5), une ligne par TV et par résultat réglé (salle, adversaire, mise, utilisé, payé, frais, issue `WIN|LOSS|DRAW|ABORT`), écrite dans la **même transaction** que le règlement. `GET /reconcile` contrôle aussi le compte système des frais (`SYS:FEE`, jamais négatif).
+- **Politique** (table `wallet_policy`, relue à chaque usage, **sans redéploiement** ; valeurs de lancement posées par `V68`, à confirmer par le propriétaire) :
+
+| Clé | Lancement | Sens |
+|---|---|---|
+| `game.chess.switch` | 1 | 0 = plus aucun blocage de mise aux échecs (les parties libres ne dépendent pas de l'API) |
+| `game.chess.tier.NDEM.1` … `.6` | 10, 20, 50, 100, 200, 0 | échelle des mises en NDEM ; 0 = palier libre (jusqu'à 6) |
+| `game.chess.tier.MBOKO.1` … `.6` | 1, 2, 5, 10, 0, 0 | échelle des mises en MBOKO |
+| `game.chess.feeBp` | 0 | frais de plateforme en points de base (0 à 2 000) sur la cagnotte d'une partie **décidée** ; jamais sur une nulle ni une interruption |
+| `game.chess.cap.win.day` / `.week` / `.month` | 3 / 10 / 15 | parties **gagnées** avec mise par identité et par période (jour, semaine du lundi au dimanche, mois civil, calendrier **Africa/Douala**) ; 0 = sans plafond. Valeurs du Défi, reprises telles quelles : **à confirmer pour les échecs** |
+
+```sql
+UPDATE wallet_policy SET val = 250, updated_at = CURRENT_TIMESTAMP(6), updated_by = 'proprietaire' WHERE name = 'game.chess.feeBp';        -- frais de 2,5 %
+UPDATE wallet_policy SET val = 500, updated_at = CURRENT_TIMESTAMP(6), updated_by = 'proprietaire' WHERE name = 'game.chess.tier.NDEM.6';   -- ajoute un palier de 500 NDEM
+UPDATE wallet_policy SET val = 0,   updated_at = CURRENT_TIMESTAMP(6), updated_by = 'proprietaire' WHERE name = 'game.chess.cap.win.day';   -- plus de plafond journalier
+```
+
 ## 6. Écarts assumés avec le format (à connaître)
 - **Conflits en attente** : là où le format applique ou rejette automatiquement (licence inconnue, dépassement de postes, doublon de matériel, plafond de transferts), le serveur met l'événement en attente de décision du propriétaire (le brief l'exige). L'événement est gardé et exporté (c'est un fait signé) mais **sans effet** sur les postes tant qu'il n'est pas accepté. La politique `auto` redonne le comportement exact du format (vérifié par les vecteurs).
 - **Une licence d'essai** est un objet du serveur (1 poste, sous contrôle du propriétaire) mais s'écrit `license=trial` dans l'activation, et ses événements `issue` ne sont jamais comptés comme poste dans les outils (format § 8.2).

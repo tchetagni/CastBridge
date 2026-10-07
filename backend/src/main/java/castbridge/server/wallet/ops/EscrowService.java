@@ -17,6 +17,7 @@ import castbridge.server.wallet.core.LedgerException;
 import castbridge.server.wallet.core.StakeRules;
 import castbridge.server.wallet.core.Txn;
 import castbridge.server.wallet.core.WalletReason;
+import castbridge.server.wallet.core.WinWindows;
 import castbridge.server.web.ApiException;
 import java.nio.charset.StandardCharsets;
 import java.security.MessageDigest;
@@ -55,10 +56,12 @@ public class EscrowService {
     private final JdbcTemplate jdbc;
     private final WalletKey key;
     private final GrantService grants;
+    private final GameJournal journal;
 
     public EscrowService(JdbcLedger ledger, WalletPolicyService policies, LicenseFacts licenses, EditionReader reader, WalletModuleConfig.WalletClock clock,
-                         JdbcTemplate jdbc, WalletProperties props, GrantService grants, PlayResultKeys playKeys) {
+                         JdbcTemplate jdbc, WalletProperties props, GrantService grants, PlayResultKeys playKeys, GameJournal journal) {
         this.grants = grants;
+        this.journal = journal;
         this.ledger = ledger;
         this.policies = policies;
         this.licenses = licenses;
@@ -111,10 +114,24 @@ public class EscrowService {
     }
 
     public Issued lock(String code, WalletRepository.Identity row, Currency cur, long per, int k, String idem, List<String> activations, String room) {
+        return lock(code, row, cur, per, k, idem, activations, room, null);
+    }
+
+    /** Un nom de jeu : minuscules, chiffres, `_` et `-`, 1 à 32 caractères. */
+    static final Pattern GAME = Pattern.compile("^[a-z0-9_-]{1,32}$");
+
+    /**
+     * Blocage d'une mise, avec le JEU pour lequel elle est faite ({@code game}, facultatif : null = Quiz et usages d'avant). Un jeu misé connu ({@link WalletPolicyService#GAMES}) ajoute ses règles, lues de la
+     * table de politique à chaque blocage : interrupteur du jeu, mise parmi l'ÉCHELLE du jeu, UN siège (aux échecs une mise par TV), TV d'essai refusée (parties libres seulement), plafonds de parties GAGNÉES
+     * par identité (jour, semaine, mois civil d'Africa/Douala) relus du journal. Un rejeu (même clé, même contenu) rend le même {@code cbe1} sans revérifier : le blocage existe déjà.
+     */
+    public Issued lock(String code, WalletRepository.Identity row, Currency cur, long per, int k, String idem, List<String> activations, String room, String game) {
         if (key == null) throw new ApiException(HttpStatus.SERVICE_UNAVAILABLE, "Portefeuille indisponible");
         if (idem == null || !IDEM.matcher(idem).matches()) throw ApiException.badRequest("Clé d'idempotence invalide : 3 à 64 caractères parmi A-Z a-z 0-9 . _ : -");
         if (per < 1 || per > 1_000_000_000L) throw new LedgerException(WalletReason.BAD_TXN, "Mise hors bornes");
         if (room != null && !ROOM.matcher(room).matches()) throw ApiException.badRequest("Salle invalide : 1 à 32 caractères parmi A-Z a-z 0-9 . _ : -");
+        if (game != null && !GAME.matcher(game).matches()) throw ApiException.badRequest("Jeu invalide : 1 à 32 caractères parmi a-z 0-9 _ -");
+        WalletPolicyService.GamePolicy gp = game == null ? null : policies.game(game).orElseThrow(() -> ApiException.badRequest("Jeu inconnu : les parties misées en ligne ne sont ouvertes qu'aux échecs (chess)"));
         String eid = eidOf(code, idem);
         Txn txn = Txn.lock(code, cur, per, k, eid);
         boolean known = !jdbc.queryForList("SELECT eid FROM wallet_escrow WHERE eid = ?", String.class, eid).isEmpty();
@@ -133,29 +150,47 @@ public class EscrowService {
             StakeRules.refusal(eff.edition(), cur, eff.grace()).ifPresent(r -> {
                 throw new LedgerException(r);
             });
+            if (gp != null) gameRules(gp, code, cur, per, k, eff, now);
         }
         Ledger.Posted posted = ledger.post(txn, "tv", code, null);
-        Stored st = readAndFill(eid, per, k, room);
+        Stored st = readAndFill(eid, per, k, room, game);
         return new Issued(sign(eid, code, cur, st.per(), st.k(), st.iat(), st.exp()), eid, st.iat(), st.exp(), posted.replayed());
+    }
+
+    /** Les règles propres à un jeu misé (échecs) ; chaque refus a son motif fermé et son texte français. */
+    private void gameRules(WalletPolicyService.GamePolicy gp, String code, Currency cur, long per, int k, Eff eff, Instant now) {
+        if (!gp.enabled()) throw new LedgerException(WalletReason.STAKES_SUSPENDED);
+        // règle du propriétaire : l'essai joue en ligne sans mise (ni NDEM, ni MBOKO) ; seules les TV de production, illimitées, en grâce ou « super » misent
+        if (eff.edition() == Edition.TRIAL) throw new ApiException(HttpStatus.CONFLICT, "Version d'essai : parties libres seulement, sans mise", List.of("TRIAL_FREE_ONLY"));
+        if (k != 1) throw new LedgerException(WalletReason.BAD_TXN, "Aux échecs, une seule mise par TV (un siège)");
+        List<Long> scale = gp.scale(cur);
+        if (!scale.contains(per)) {
+            throw new ApiException(HttpStatus.CONFLICT, "Cette mise n'est pas proposée aux échecs : " + scale.stream().map(String::valueOf).collect(java.util.stream.Collectors.joining(", ")) + " " + cur + " par joueur", List.of("STAKE_NOT_OFFERED"));
+        }
+        WinWindows.Windows w = WinWindows.of(now);
+        WinWindows.reached(w, journal.wins(code, gp.game(), w.dayStart()), journal.wins(code, gp.game(), w.weekStart()), journal.wins(code, gp.game(), w.monthStart()), gp.capDay(), gp.capWeek(), gp.capMonth())
+                .ifPresent(c -> {
+                    throw new ApiException(HttpStatus.CONFLICT, c.text(), List.of("STAKE_WIN_CAP"));
+                });
     }
 
     private record Stored(long per, int k, long iat, long exp) {}
 
     /**
-     * Renseigne per, k, salle et échéance du blocage (une seule fois) puis RELIT la base : le {@code cbe1} est toujours signé depuis ce que la base contient (M1) ; une requête qui diffère de
-     * ce qui est inscrit (autre mise, autres sièges, autre salle) est un {@code IDEM_CONFLICT}, jamais un second {@code cbe1} qui contredirait le blocage (M4 : la salle ne se change pas).
+     * Renseigne per, k, salle, jeu et échéance du blocage (une seule fois) puis RELIT la base : le {@code cbe1} est toujours signé depuis ce que la base contient (M1) ; une requête qui diffère de
+     * ce qui est inscrit (autre mise, autres sièges, autre salle, autre jeu) est un {@code IDEM_CONFLICT}, jamais un second {@code cbe1} qui contredirait le blocage (M4 : la salle ne se change pas).
      */
-    private Stored readAndFill(String eid, long per, int k, String room) {
+    private Stored readAndFill(String eid, long per, int k, String room, String game) {
         List<Object[]> r = jdbc.query("SELECT created_at, exp_at FROM wallet_escrow WHERE eid = ?", (rs, i) -> new Object[] {rs.getTimestamp("created_at"), rs.getTimestamp("exp_at")}, eid);
         Timestamp created = (Timestamp) r.get(0)[0], exp = (Timestamp) r.get(0)[1];
         long iat = created.toInstant().toEpochMilli();
         long expMs = exp == null ? created.toInstant().plus(TTL).toEpochMilli() : exp.toInstant().toEpochMilli();
-        jdbc.update("UPDATE wallet_escrow SET per = ?, k = ?, room = ?, exp_at = ? WHERE eid = ? AND per IS NULL", per, k, room, Timestamp.from(Instant.ofEpochMilli(expMs)), eid);
-        Object[] now = jdbc.query("SELECT per, k, room, amount FROM wallet_escrow WHERE eid = ?", (rs, i) -> new Object[] {rs.getLong("per"), rs.getInt("k"), rs.getString("room"), rs.getLong("amount")}, eid).get(0);
+        jdbc.update("UPDATE wallet_escrow SET per = ?, k = ?, room = ?, game = ?, exp_at = ? WHERE eid = ? AND per IS NULL", per, k, room, game, Timestamp.from(Instant.ofEpochMilli(expMs)), eid);
+        Object[] now = jdbc.query("SELECT per, k, room, amount, game FROM wallet_escrow WHERE eid = ?", (rs, i) -> new Object[] {rs.getLong("per"), rs.getInt("k"), rs.getString("room"), rs.getLong("amount"), rs.getString("game")}, eid).get(0);
         long dbPer = (Long) now[0];
         int dbK = (Integer) now[1];
         String dbRoom = (String) now[2];
-        if (dbPer != per || dbK != k || !java.util.Objects.equals(dbRoom, room) || dbPer * dbK != (Long) now[3]) throw new LedgerException(WalletReason.IDEM_CONFLICT);
+        if (dbPer != per || dbK != k || !java.util.Objects.equals(dbRoom, room) || !java.util.Objects.equals(now[4], game) || dbPer * dbK != (Long) now[3]) throw new LedgerException(WalletReason.IDEM_CONFLICT);
         return new Stored(dbPer, dbK, iat, expMs);
     }
 

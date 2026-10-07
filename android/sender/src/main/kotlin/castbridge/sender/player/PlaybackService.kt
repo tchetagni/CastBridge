@@ -50,7 +50,7 @@ class PlaybackService : MediaLibraryService() {
         val upstream = ResolvingDataSource.Factory(DefaultDataSource.Factory(this, http)) { spec: DataSpec ->
             // asked at every request: a token renewed while a long film plays is picked up, never the one that was current when playback started
             val host = spec.uri.host
-            val live = host?.let { h -> TvLinkManager.savedForHost(h)?.let { TvLinkManager.credentialFor("bt:${it.address}") } }
+            val live = host?.let { h -> TvLinkManager.savedForHost(h)?.let { TvLinkManager.credentialFor(castbridge.core.trust.PinKeys.btKey(it.address)) } }
             val pin = live ?: host?.let { TvStreamAuth.pins[it] }
             val auth = runCatching { castbridge.core.trust.TvCredential.headers(pin) }.getOrDefault(emptyMap())
             if (auth.isNotEmpty()) spec.withAdditionalHeaders(auth) else spec

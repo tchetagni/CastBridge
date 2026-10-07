@@ -29,6 +29,11 @@ class PlayTvSession(
     sealed class Intent {
         data class Create(val name: String?, val mode: String?, val rentals: List<String> = emptyList()) : Intent()
         data class Join(val code: String, val name: String?) : Intent()
+        /**
+         * Une salle de JEU à tour de rôle (échecs en ligne, games-G2) : le premier message est construit par l'appelant à partir de l'activation et de la preuve de possession (qui dépendent du ticket) ;
+         * `create{game:"chess", chess, stake, escrow}` ou `join{code, escrow, spectate}`. Rejoué tel quel si la liaison tombe avant le `welcome` (comme une création de Quiz).
+         */
+        class Game(val open: (activation: String?, proof: String?) -> ClientMsg) : Intent() { override fun toString() = "Game" }
     }
 
     /** L'ouverture locale d'une question : `opensAtLocalMono` sur l'horloge monotone de la TV (peut être dans le passé si l'annonce est tardive). */
@@ -63,10 +68,14 @@ class PlayTvSession(
     fun start(deviceHash: String?, activation: String?, intent: Intent) {
         this.deviceHash = deviceHash; this.activation = activation; this.intent = intent
         val tkt = ticket()
+        openedTicket = tkt
         val tr = open(tkt)
         authority = ServerAuthority(tr).also { wire(it) }
         sendOpening(tkt)
     }
+
+    /** Le ticket avec lequel la session de service courante a été ouverte (la preuve de possession lui est liée) ; jamais exposé. */
+    @Volatile private var openedTicket: String? = null
 
     private fun open(tkt: String?): PlayTransport = transports.open(tkt).also { tr ->
         transport = tr
@@ -88,8 +97,21 @@ class PlayTvSession(
         when (val i = intent!!) {
             is Intent.Create -> authority.create(i.name, i.mode, activation, i.rentals, proofFor(tkt))
             is Intent.Join -> authority.joinRoom(i.code, i.name, deviceHash, activation, proof = proofFor(tkt))
+            is Intent.Game -> authority.sendOpening(i.open(activation, proofFor(tkt)))
         }
     }
+
+    /**
+     * Remplace l'ouverture à rejouer si la liaison tombe avant le `welcome` ET l'envoie tout de suite sur la liaison courante (même ticket, même connexion) : la TV qui apprend, par `STAKE_ESCROW_REQUIRED`, la mise d'une
+     * salle, bloque sa mise puis revient avec son blocage SANS redemander de ticket (le refus n'a rien consommé côté service).
+     */
+    fun reopenWith(next: Intent.Game) {
+        intent = next
+        authority.sendOpening(next.open(activation, proofFor(openedTicket)))
+    }
+
+    /** Branche un écouteur de TOUS les messages serveur (en plus du traitement de la session) : le client de jeu y lit accusés, résultat et refus. Un seul écouteur. */
+    @Volatile var onServerMessage: ((ServerMsg) -> Unit)? = null
 
     /** Relaie la réponse d'un téléphone local ; le départ est daté pour mesurer l'aller-retour (accusé). */
     fun relayAnswer(seatToken: String, questionId: String, choice: Int, localElapsedMono: Long): Long {
@@ -114,6 +136,7 @@ class PlayTvSession(
             else -> {}
         }
         onChange?.invoke()
+        onServerMessage?.invoke(m)
     }
 
     /** À appeler souvent (200 ms à 1 s) : suit la santé de la liaison, rouvre une session perdue (courbe), passe à `Lost` à 60 s. */
@@ -148,6 +171,7 @@ class PlayTvSession(
         // Un ticket frais à chaque NOUVELLE session de service : jamais assise = nouvelle création ou entrée (un ticket sert une fois) ; assise = reprise, mais le service
         // exige un ticket valide sur chaque POST d'un client sans `Origin` (OriginCheck) ; la fonction injectée peut mettre le dernier en cache quelques dizaines de secondes.
         val tkt = if (seatToken != null) (resumeTicket ?: ticket)() else ticket()   // M-6 : une reprise réutilise le ticket courant (rien n'est consommé)
+        openedTicket = tkt
         val tr = open(tkt)
         authority.rebind(tr)
         if (seatToken == null) { sendOpening(tkt); return }

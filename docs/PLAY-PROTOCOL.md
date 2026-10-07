@@ -7,7 +7,7 @@
 | Élément | Valeur |
 |---|---|
 | Nom / numéro | `play-v1`, `PlayProtocol.PROTO = 1` |
-| Capacités (`caps`, additives) | `play1`, `sse`, `longpoll`, `relay`, `spectate`, `play-ticket` (w20-04 : `create` porte l'activation `cbx1`) ; le serveur répond avec l'intersection |
+| Capacités (`caps`, additives) | `play1`, `sse`, `longpoll`, `relay`, `spectate`, `play-ticket` (w20-04 : `create` porte l'activation `cbx1`), `chess` (games-G2 : salles d'échecs `game:chess`) ; le serveur répond avec l'intersection. La page `GET /play/.well-known/caps` annonce en plus `"chess":true|false` et `"stakes":true|false` (mises ouvertes : clé « portefeuille » et clé « résultat » configurées, interrupteur allumé) : c'est ce que lit la TV, plus aucun drapeau saisi |
 | Règle d'évolution | additive : une clé inconnue est ignorée ; une clé retirée ou un champ obligatoire neuf = nouveau `PROTO` |
 | Forme | JSON UTF-8, un objet par message ; `t` = type ; `seq` = compteur du client (client → serveur) ou numéro d'évènement de la salle (serveur → client) |
 
@@ -112,9 +112,42 @@ Ordre des contrôles : salle en jeu et table active (sinon `CLOSED`) → questio
 | Fermer Internet | refusé pendant une partie (`FORBIDDEN`, « seulement en salle d'attente ») ; en salle d'attente : les joueurs distants (dont les sièges relayés par une autre TV) deviennent spectateurs, puis `roomGone(HOST_CLOSED_INTERNET)` après 30 s ; rouvrir annule |
 | Secret | aucun message avant la clôture ne contient `answer`, `explanation` ni la bonne réponse sous une autre clé (`NoAnswerLeakTest`, 1 000 parties) ; le 50:50 ne retire que de mauvaises réponses ; aucun message ne liste plus d'une question |
 
+## Salle de jeu `game:chess` (chantier games-G2)
+
+Une salle d'échecs en ligne : **deux TV** jouent, des TV regardent. Conception : `docs/coordination/DESIGN-JEUX-CARTES-ET-ECHECS-EN-LIGNE-2026-10-07.md` ; usage : `docs/CHESS.md` § 6. Code : `core/chess/online/` (`ChessServerRoom`, pure ; `ChessSettlement` ; `GameReason`), service `server-play` (`RoomRegistry`, `stake/`). **Additif : aucun message ni champ du Quiz ne change** (`PlayCodecGameTest` prouve que `create` et `join` d'un Quiz sont identiques octet pour octet) ; un client ancien ignore les clés neuves, un service ancien répond `UNSUPPORTED`/`BAD_REQUEST`.
+
+| Sens | `t` | Champs (additifs) | Rôle |
+|---|---|---|---|
+| client → serveur | `create` | `game:"chess"`, `chess:{perMoveSeconds 1..3600, mode "COMPETITION"\|"PRACTICE", color "white"\|"black"\|"random"}`, `stake?:{cur "NDEM"\|"MBOKO", per}`, `escrow?:<cbe1 ≤ 1 200 car.>` | l'hôte (TV) ouvre une salle d'échecs ; le service ramène `perMoveSeconds` dans 10..60 ; avec `stake`, la partie est en `COMPETITION` et `escrow` est **obligatoire** (sans lui : `STAKE_ESCROW_REQUIRED` avec la mise) |
+| client → serveur | `join` | `escrow?` | l'adversaire entre par le code ; une salle misée sans `escrow` répond `STAKE_ESCROW_REQUIRED` (**rien n'est consommé** : la TV bloque sa mise et renvoie `join` sur la **même** liaison) ; `spectate:true` regarde sans mise |
+| client → serveur | `resume` | — | reprise d'un siège (joueur ou spectateur) par `roomId` + `token` : `welcome` (même jeton), vue complète, et `result` si la partie est finie |
+| client → serveur | `game` | `op` ≤ 16 car., `arg?` ≤ 64, `ply?` 0..100 000, `seq` | `op` = `move` (`arg` = UCI, `ply` **obligatoire**), `resign`, `draw` (`arg` = `offer`\|`accept`\|`decline`), `cancel` (l'hôte renonce avant l'arrivée de l'adversaire) |
+| serveur → client | `welcome` | `game:"chess"` | entrée acceptée dans une salle d'échecs |
+| serveur → client | `state` | `view` = format d'état des échecs (`docs/CHESS.md` § 5 et § 6.6) | la vue **du siège** : `legal` seulement pour qui a le trait ; `room:{id, game, code, state, role, seq, serverNowMs, hostConnected, forfeitMs, away}` ; `stake:{cur, per, pot, settled}` |
+| serveur → client | `ack` | `result` | accusé d'un `game` : `OK`, `ILLEGAL`, `NOT_YOUR_TURN`, `STALE` (doublon ou retard : rien n'est joué), `OVER`, `FORBIDDEN` (spectateur, hors rôle), `IGNORED`, `BAD_REQUEST`, `UNKNOWN_PLAYER` |
+| serveur → client | `result` | `token` = `cbr1` (≤ 6 000 car.) | partie misée finie ou interrompue : le résultat **signé** par la clé dédiée du service ; envoyé aux deux joueurs (jamais aux spectateurs) ; un jeton n'est jamais journalisé (`PlayRedact` le remplace par `[retiré]`, comme `cbe1`, `cbw1`, `cbx1` et `cbp1`) |
+| serveur → client | `error` | `data?` | refus structuré ; `STAKE_ESCROW_REQUIRED` : `data:{game:"chess", cur, per}` |
+
+**Refus propres aux jeux** (`GameReason`, code stable, texte français côté TV) : `GAME_UNAVAILABLE` (échecs coupés : `CASTBRIDGE_PLAY_CHESS=off`), `GAME_UNKNOWN` (jeu inconnu), `STAKES_SUSPENDED` (mises coupées, les parties libres restent ouvertes), `STAKE_TRIAL_FREE_ONLY` (TV d'essai : jamais de mise), `STAKE_ESCROW_REQUIRED`, `STAKE_ESCROW_INVALID` (signature, audience, échéance, autre TV, autre monnaie ou montant, **déjà employé**), `STAKE_BAD` (monnaie ou montant hors de ce que le service admet), `SEATS_TAKEN`, `SAME_TV`. Les refus du Quiz (`PLAY_*`) s'appliquent aussi (code faux, salle pleine, ticket, droits).
+
+**Règles** : le service est l'arbitre (moteur `core/chess`) ; pendule du service, 10 à 60 s ; coups numérotés ; forfait d'une TV absente **60 s** ; deux TV absentes = partie interrompue (mises rendues) ; salle d'attente 30 min ; partie 3 h au plus ; partie finie gardée 5 min ; 8 TV spectatrices au plus.
+
+**Blocage `cbe1`** (signé par l'API, domaine `castbridge-wallet-escrow-v1`) vérifié par le service avec la **clé publique** « portefeuille » (`CASTBRIDGE_PLAY_WALLET_PUBKEY`) : audience `castbridge-play`, `id` = l'identité d'appareil de l'activation présentée, monnaie et montant = ceux de la salle, un siège, valable (30 min), **jamais déjà employé dans une salle vivante** (un refus d'entrée **libère** le blocage). **Résultat `cbr1`** (domaine `castbridge-play-result-v1`) : `{kid, rid, room, game:"chess", cur, per, kind "END"\|"ABORT", at, lines:[[eid, id, utilisé, versé]…]}` où `room` est l'identifiant de la salle et `rid` un identifiant de résultat DÉTERMINISTE de cette salle (SHA-256 de `castbridge-chess-rid-v1\n<room>`, 128 bits en hexadécimal : un seul résultat possible par salle, d'où l'idempotence du règlement) ; Σ versé = Σ utilisé ; `ABORT` : tout à zéro (chaque blocage est rendu en entier). Le service **ne parle jamais à l'API** et ne détient **aucun secret du grand livre** : il dépose aussi une copie de chaque `cbr1` dans son volume (`CASTBRIDGE_PLAY_RESULTS_DIR`) pour le collecteur de l'hôte (`tools/wallet/collect-results.sh`).
+
+**Quotas** : les salles de jeu comptent dans les mêmes plafonds que le Quiz (`CASTBRIDGE_PLAY_MAX_ROOMS`, par appareil attesté et par identité, créations par adresse et par heure) ; le code est tiré de l'espace commun (jamais deux salles de même code, Quiz ou échecs) ; l'essai : 3 parties par jour, libres.
+
+**Santé et arrêt** : `GET /play/health` ajoute `chess` (booléen), `chessRooms` (salles d'échecs ouvertes) et `stakes` (booléen : mises acceptées) ; `GET /play/.well-known/caps` ajoute `games`, `chess`, `stakes` (et la capacité `stakes`). Un arrêt du service (`drain`) **interrompt** les parties en cours (`cbr1` `ABORT` : les mises sont rendues) avant de fermer.
+
 ## Exemples
 
 ```json
+{"t":"create","name":"TV Salon","activation":"cbx1.…","proof":"…","game":"chess","chess":{"perMoveSeconds":30,"mode":"COMPETITION","color":"random"},"stake":{"cur":"NDEM","per":20},"escrow":"cbe1.…"}
+{"t":"welcome","seq":2,"roomId":"0f…","code":"K7M2QX4T","token":"9f2c…","role":"HOST","playerId":"p1","proto":1,"caps":["play1","chess"],"game":"chess"}
+{"t":"join","code":"K7M2-QX4T","name":"TV Chambre","activation":"cbx1.…","proof":"…"}
+{"t":"error","seq":1,"reason":"STAKE_ESCROW_REQUIRED","message":"Cette partie se joue avec une mise : …","retryable":true,"data":{"game":"chess","cur":"NDEM","per":20}}
+{"t":"game","seq":7,"op":"move","arg":"e2e4","ply":0}
+{"t":"ack","seq":9,"ref":7,"result":"OK"}
+{"t":"result","seq":31,"token":"cbr1.…"}
 {"t":"join","code":"K7M2-QX4T","name":"Awa","spectate":false}
 {"t":"welcome","seq":4,"roomId":"r1","code":"K7M2QX4T","token":"9f2c…","role":"PLAYER","playerId":"p1","proto":1,"caps":["play1","sse","longpoll","relay","spectate"]}
 {"t":"question","seq":9,"questionId":"q-0412","index":1,"count":10,"text":"…","choices":["…","…","…","…"],"opensAtServerMs":88500,"serverNowMs":87000,"windowMs":20000}

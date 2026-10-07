@@ -16,8 +16,8 @@ import org.testcontainers.junit.jupiter.Container;
 import org.testcontainers.junit.jupiter.Testcontainers;
 
 /**
- * Second audit Opus w23-05, LOW-C : les scripts de retour arrière {@code U66}, {@code U65}, {@code U64} sont EXÉCUTÉS sur un vrai MySQL 8.4 (l'auditeur n'a trouvé qu'un test qui lisait leur texte).
- * Ils sont REJOUABLES (un second passage ne casse rien) et effacent eux-mêmes les lignes de {@code flyway_schema_history} : V64, V65 et V66 se réappliquent ensuite sans réparation manuelle.
+ * Second audit Opus w23-05, LOW-C : les scripts de retour arrière {@code U68} (échecs misés, games-G2), {@code U67}, {@code U66}, {@code U65}, {@code U64} sont EXÉCUTÉS sur un vrai MySQL 8.4 (l'auditeur n'a trouvé qu'un test qui lisait leur texte).
+ * Ils sont REJOUABLES (un second passage ne casse rien) et effacent eux-mêmes les lignes de {@code flyway_schema_history} : V64 à V68 se réappliquent ensuite sans réparation manuelle.
  * Un échec de V64 à mi-chemin se répare par {@code U64} seul (ligne en échec comprise).
  */
 @Testcontainers(disabledWithoutDocker = true)
@@ -42,7 +42,7 @@ class MigrationRollbackMySqlTest {
         }
     }
 
-    private static long historyRows(Connection c) throws Exception { return one(c, "SELECT COUNT(*) FROM flyway_schema_history WHERE version IN ('64','65','66','67')"); }
+    private static long historyRows(Connection c) throws Exception { return one(c, "SELECT COUNT(*) FROM flyway_schema_history WHERE version IN ('64','65','66','67','68')"); }
 
     private static long columns(Connection c, String table, String column) throws Exception {
         return one(c, "SELECT COUNT(*) FROM information_schema.COLUMNS WHERE TABLE_SCHEMA = DATABASE() AND TABLE_NAME = '" + table + "' AND COLUMN_NAME = '" + column + "'");
@@ -57,25 +57,29 @@ class MigrationRollbackMySqlTest {
         flyway().clean();
         assertTrue(flyway().migrate().migrationsExecuted > 0);
         try (Connection c = DriverManager.getConnection(url(), MYSQL.getUsername(), MYSQL.getPassword())) {
-            assertEquals(4, historyRows(c), "V64 à V67 appliquées");
+            assertEquals(5, historyRows(c), "V64 à V68 appliquées");
             assertEquals(1, columns(c, "wallet_identity", "expected_install_fp"));
             for (int pass = 1; pass <= 2; pass++) {   // le second passage prouve que les scripts sont rejouables
+                script(c, "U68__chess_stakes_rollback.sql");
                 script(c, "U67__transfer_cap_zero_rollback.sql");
                 script(c, "U66__install_key_binding_rollback.sql");
                 script(c, "U65__registration_hardening_rollback.sql");
                 script(c, "U64__activation_registration_rollback.sql");
-                assertEquals(0, historyRows(c), "passage " + pass + " : les quatre lignes Flyway sont effacées par les scripts eux-mêmes");
+                assertEquals(0, historyRows(c), "passage " + pass + " : les cinq lignes Flyway sont effacées par les scripts eux-mêmes");
                 assertEquals(0, columns(c, "wallet_identity", "expected_install_fp"), "passage " + pass);
                 assertEquals(0, columns(c, "lic_registration", "ik_signed"), "passage " + pass);
                 assertEquals(0, tables(c, "lic_registration"), "passage " + pass);
                 assertEquals(0, tables(c, "wallet_period_claim"), "passage " + pass);
                 assertEquals(0, tables(c, "lic_key_gate"), "passage " + pass);
+                assertEquals(0, tables(c, "wallet_game_log"), "passage " + pass + " : le journal des parties misées (V68) est retiré");
+                assertEquals(0, columns(c, "wallet_escrow", "game"), "passage " + pass + " : la colonne `game` des blocages (V68) est retirée");
+                assertEquals(0, one(c, "SELECT COUNT(*) FROM wallet_policy WHERE name LIKE 'game.%'"), "passage " + pass + " : la politique des jeux (V68) est retirée");
                 assertEquals(1, one(c, "SELECT success FROM flyway_schema_history ORDER BY installed_rank DESC LIMIT 1"), "la dernière ligne est un succès (V63)");
             }
         }
-        assertEquals(4, flyway().migrate().migrationsExecuted, "V64 à V67 se réappliquent sans réparation manuelle");
+        assertEquals(5, flyway().migrate().migrationsExecuted, "V64 à V68 se réappliquent sans réparation manuelle");
         try (Connection c = DriverManager.getConnection(url(), MYSQL.getUsername(), MYSQL.getPassword())) {
-            assertEquals(4, historyRows(c));
+            assertEquals(5, historyRows(c));
             assertEquals(1, columns(c, "wallet_identity", "expected_install_fp"));
             assertEquals(1, tables(c, "lic_registration"));
         }
@@ -86,6 +90,7 @@ class MigrationRollbackMySqlTest {
         flyway().clean();
         try (Connection c = DriverManager.getConnection(url(), MYSQL.getUsername(), MYSQL.getPassword())) {
             flyway().migrate();
+            script(c, "U68__chess_stakes_rollback.sql");
             script(c, "U67__transfer_cap_zero_rollback.sql");
             script(c, "U66__install_key_binding_rollback.sql");
             script(c, "U65__registration_hardening_rollback.sql");
@@ -100,6 +105,6 @@ class MigrationRollbackMySqlTest {
             assertEquals(0, one(c, "SELECT COUNT(*) FROM flyway_schema_history WHERE version = '64'"), "la ligne en échec est effacée par U64 lui-même");
             assertEquals(0, tables(c, "lic_registration"));
         }
-        assertEquals(4, flyway().migrate().migrationsExecuted);
+        assertEquals(5, flyway().migrate().migrationsExecuted);
     }
 }
