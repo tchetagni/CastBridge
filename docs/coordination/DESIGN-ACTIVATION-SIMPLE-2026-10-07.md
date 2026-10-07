@@ -67,3 +67,11 @@ Date : 2026-10-07. Décision du propriétaire : « j'ai eu de la peine à active
 - **act-phone** : F1 (jonction par code, `WifiNetworkSpecifier`), F2, F3 (console / coller / partager ; la voie serveur attend la décision 1), F4, tests JVM, docs.
 - **act-usb-tool** : F7 (`--cle-usb`), LISEZMOI, test JVM sur dossier temporaire.
 - Guide utilisateur à réécrire (section 2) après livraison : « Activer en 3 gestes ».
+
+## 7. Règle produit (propriétaire, 2026-10-07) : « le code de connexion de la TV doit suffire pour activer une liaison dans le mode sans clé »
+Le code à 6 chiffres affiché par la TV verrouillée est la **seule** chose que l'utilisateur fournit au téléphone ; tout le reste (trouver la TV, lire sa demande d'appareil, obtenir et poser la clé) se fait sans autre geste, par la première voie qui marche. Conséquences :
+- Réseau local : fait (route verrouillée `device-request` + `install`, TV 0.14.45, téléphone 1.2.53).
+- Réseau direct dérivé du code : fait (groupe à la demande quand la TV a déjà un Wi-Fi) ; sa faiblesse connue (I-3 : le nom du groupe révèle le code) disparaît avec la voie ci-dessous.
+- **Bluetooth sans appairage (chantier act-bt)** : la TV verrouillée **annonce en BLE** (sans dialogue système) un service CastBridge dont les données portent un court haché du code ; le téléphone, code tapé, retrouve la TV, se connecte (GATT ou RFCOMM « insecure », aucune boîte d'appairage) et prouve le code par un **PAKE** (le code ne circule jamais, aucune attaque hors ligne sur 6 chiffres ; essais en ligne limités par `PinGuard`) ; la session chiffrée qui en sort transporte la demande d'appareil et la clé, puis la liaison de confiance s'établit comme aujourd'hui. Permission « Appareils à proximité » demandée une fois ; TV sans BLE ⇒ la voie est absente, les deux autres restent. Ordre des voies côté téléphone : réseau local, Bluetooth sans appairage, réseau direct (dernier, car il peut couper le Wi-Fi de la TV).
+- L'appairage Bluetooth classique reste pour les anciennes TV seulement ; aucune TV neuve ne doit l'exiger.
+Ouverture du chantier après la fusion d'act-fix-1 et de fix-phone (mêmes fichiers côté téléphone).
