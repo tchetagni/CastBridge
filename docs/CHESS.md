@@ -175,8 +175,10 @@ pas encore ouverts sur le service CastBridge… »), jamais un écran vide, et a
    revenir (`resume`), y compris pour récupérer le résultat d'une partie déjà finie et la régler.
 4. Un écran recréé par le système **ne quitte pas la partie** : elle vit dans l'application, pas dans l'écran.
 
-Pendant la partie, le pied de l'écran dit, par ordre d'importance : le **règlement** de la mise, le décompte « Adversaire déconnecté :
-forfait dans N s », une liaison dégradée (« Partie par relais : liaison lente », reprise en cours), puis la mise en jeu. En fin de
+Pendant la partie, le pied de l'écran dit, par ordre d'importance : le **règlement** de la mise, une liaison dégradée (reprise en cours,
+tuyau d'un téléphone), le décompte « Adversaire déconnecté : forfait dans N s », puis la mise en jeu et, sans alarme, « Partie par
+relais : liaison lente » quand Internet ne vient que du tuyau d'un téléphone. Une liaison perdue (60 s) ouvre « Connexion perdue » :
+le service tranche (forfait). En fin de
 partie : « Vous avez gagné ! / perdu », « Partie nulle », ou « **Partie interrompue** » (jamais « nulle » pour une interruption),
 et pour une partie misée « Voir « Mes jetons » ».
 

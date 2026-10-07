@@ -420,7 +420,8 @@ class ChessActivity : Activity() {
         val link = g.client.linkView(TvConnect.link?.routes?.lastVia, PlayHub.hasInternet(this))
         if (link.message != null) return link.message
         ChessOnlineTexts.awayLine(s, SystemClock.uptimeMillis() - st.sAt)?.let { return it }
-        return g.stake?.let { ChessOnlineTexts.stakeLine(it) }
+        // l'information qui reste : la mise en jeu d'abord (elle ne doit jamais être coupée), puis, sans alarme, « Partie par relais : liaison lente » quand Internet vient du tuyau d'un téléphone
+        return listOfNotNull(g.stake?.let { ChessOnlineTexts.stakeLine(it) }, ChessOnlineHub.networkLine()).joinToString(" · ").ifEmpty { null }
     }
 
     /** Une fois par changement de règlement : un message à l'écran (la TV montre ensuite le résultat de la mise dans « Mes jetons »). */
