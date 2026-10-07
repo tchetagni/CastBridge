@@ -1,3 +1,5 @@
+@file:OptIn(androidx.compose.foundation.layout.ExperimentalLayoutApi::class)
+
 package castbridge.sender
 
 import android.annotation.SuppressLint
@@ -301,17 +303,19 @@ fun RemoteScreen(onClose: () -> Unit) {
             TopAppBar(
                 title = {
                     Column(Modifier.clickable { chooser = true }) {
-                        Text("Télécommande", maxLines = 1, style = MaterialTheme.typography.titleMedium)
+                        Text("Télécommande", maxLines = 1, overflow = TextOverflow.Ellipsis, style = MaterialTheme.typography.titleMedium)
                         Text(tv?.label ?: "Choisir la TV ▾", style = MaterialTheme.typography.bodySmall, color = cs.onSurfaceVariant, maxLines = 1, overflow = TextOverflow.Ellipsis)
                     }
                 },
                 navigationIcon = { IconButton(onClose) { Icon(Icons.AutoMirrored.Filled.ArrowBack, "Fermer") } },
                 actions = {
-                    if (smartKeys != null) Text(smartUi.activeLabel ?: "Ma TV", style = MaterialTheme.typography.labelSmall, maxLines = 1, modifier = Modifier.padding(end = 4.dp))
-                    else LinkBadge(status, rtt)
-                    IconButton({ chooser = true }) { Icon(Icons.Filled.Tv, "Choisir la TV") }
-                    IconButton({ menu = true }) { Icon(Icons.Filled.MoreVert, "Options") }
+                    // R-23: badge + « ⋮ » only (the title is also a « choose the TV » button); the badge is capped so the title keeps its room
+                    if (smartKeys != null) Text(smartUi.activeLabel ?: "Ma TV", style = MaterialTheme.typography.labelSmall, maxLines = 1, overflow = TextOverflow.Ellipsis, modifier = Modifier.widthIn(max = 96.dp).padding(end = 4.dp))
+                    else Box(Modifier.widthIn(max = 120.dp)) { LinkBadge(status, rtt) }
+                    IconButton({ menu = true }) { Icon(Icons.Filled.MoreVert, castbridge.core.ux.UxLabels.OPTIONS) }
                     DropdownMenu(menu, { menu = false }) {
+                        DropdownMenuItem(text = { Text(castbridge.core.ux.UxLabels.PICK_TV) }, onClick = { menu = false; chooser = true },
+                            leadingIcon = { Icon(Icons.Filled.Tv, null) })
                         DropdownMenuItem(text = { Text("Boutons de volume du téléphone → TV") }, onClick = { volumeKeys = !volumeKeys; prefs.volumeKeys = volumeKeys },
                             trailingIcon = { Checkbox(volumeKeys, null) })
                         DropdownMenuItem(text = { Text("Garder la télécommande en arrière-plan") }, onClick = {
@@ -368,7 +372,7 @@ fun RemoteScreen(onClose: () -> Unit) {
             }
 
             SingleChoiceSegmentedButtonRow(Modifier.fillMaxWidth()) {
-                Pad.values().forEachIndexed { i, p -> SegmentedButton(pad == p, { pad = p }, SegmentedButtonDefaults.itemShape(i, Pad.values().size)) { Text(p.label, maxLines = 1) } }
+                Pad.values().forEachIndexed { i, p -> SegmentedButton(pad == p, { pad = p }, SegmentedButtonDefaults.itemShape(i, Pad.values().size)) { Text(p.label, maxLines = 1, overflow = androidx.compose.ui.text.style.TextOverflow.Ellipsis) } }
             }
             BoxWithConstraints(Modifier.fillMaxWidth(), contentAlignment = Alignment.Center) {
                 val side = minOf(maxWidth.value * 0.82f, 320f).toInt()
@@ -441,7 +445,7 @@ private fun LinkBadge(s: RemoteSession.Status, rtt: Long?) {
     Row(verticalAlignment = Alignment.CenterVertically, modifier = Modifier.padding(end = 4.dp).semantics { contentDescription = "Liaison : $text" }) {
         Box(Modifier.size(10.dp).clip(CircleShape).background(color))
         Spacer(Modifier.width(6.dp))
-        Text(text, style = MaterialTheme.typography.labelSmall, maxLines = 1)
+        Text(text, style = MaterialTheme.typography.labelSmall, maxLines = 1, overflow = TextOverflow.Ellipsis)
     }
 }
 
@@ -499,7 +503,7 @@ private fun KeyboardSheet(fieldOnTv: Boolean, onDismiss: () -> Unit) {
             }, Modifier.fillMaxWidth(), singleLine = true, label = { Text("Texte") },
                 keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Text, imeAction = ImeAction.Send),
                 keyboardActions = KeyboardActions(onSend = { RemoteController.key(RemoteKey.ENTER); value = "" }))
-            Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
+            FlowRow(horizontalArrangement = Arrangement.spacedBy(8.dp), verticalArrangement = Arrangement.spacedBy(4.dp)) {
                 Button(onClick = { RemoteController.key(RemoteKey.ENTER); value = "" }) { Text("Entrée") }
                 OutlinedButton(onClick = { RemoteController.key(RemoteKey.DEL) }) { Icon(Icons.Filled.Backspace, "Effacer un caractère") }
                 OutlinedButton(onClick = { RemoteController.text("", TextMode.CLEAR); value = "" }) { Text("Vider le champ") }

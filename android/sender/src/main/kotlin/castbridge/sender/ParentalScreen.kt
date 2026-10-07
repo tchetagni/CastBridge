@@ -1,3 +1,5 @@
+@file:OptIn(androidx.compose.foundation.layout.ExperimentalLayoutApi::class)
+
 package castbridge.sender
 
 import android.content.Context
@@ -39,7 +41,7 @@ fun ParentalSection() {
 fun ParentalScreen(onClose: () -> Unit) {
     val ctx = LocalContext.current
     Column(Modifier.fillMaxSize()) {
-        TopAppBar(title = { Text("Contrôle parental") }, navigationIcon = { IconButton(onClose) { Icon(Icons.Filled.ArrowBack, "Retour") } },
+        TopAppBar(title = { Text("Contrôle parental", maxLines = 1, overflow = androidx.compose.ui.text.style.TextOverflow.Ellipsis) }, navigationIcon = { IconButton(onClose) { Icon(Icons.Filled.ArrowBack, "Retour") } },
             colors = TopAppBarDefaults.topAppBarColors(containerColor = MaterialTheme.colorScheme.surface))
         Column(Modifier.fillMaxSize().verticalScroll(rememberScrollState()).padding(16.dp), verticalArrangement = Arrangement.spacedBy(10.dp)) {
             ParentalTvPicker(ctx) { client -> ParentalPanel(client) }
@@ -301,7 +303,7 @@ private fun Editor(client: ParentalClient, loaded: ParentalClient.Loaded, pin: S
     HorizontalDivider()
     Text("TV déverrouillée", style = MaterialTheme.typography.titleSmall)
     Text("Suspend les règles sur la TV le temps d'une séance des parents (${cfg.sessionMin} minutes).", style = MaterialTheme.typography.bodySmall)
-    Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
+    FlowRow(horizontalArrangement = Arrangement.spacedBy(8.dp), verticalArrangement = Arrangement.spacedBy(4.dp)) {
         OutlinedButton({ scope.launch { io { client.unlock(pin) }.onSuccess { remaining = (cfg.sessionMin * 60).toLong(); onMsg("TV déverrouillée ${cfg.sessionMin} min.") }.onFailure { onMsg(why(it)) } } }) { Text("Déverrouiller la TV") }
         OutlinedButton({ scope.launch { io { client.lock() }.onSuccess { remaining = 0; onMsg("Règles de nouveau actives sur la TV.") }.onFailure { onMsg(why(it)) } } }) { Text("Reverrouiller") }
     }
@@ -310,7 +312,7 @@ private fun Editor(client: ParentalClient, loaded: ParentalClient.Loaded, pin: S
     Text("Rapport d'activité", style = MaterialTheme.typography.titleSmall)
     Text("Temps passé par profil et contenus bloqués. Ces informations restent sur la TV et sur ce téléphone, rien n'est envoyé à un serveur.", style = MaterialTheme.typography.bodySmall)
     ReportView(report)
-    Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
+    FlowRow(horizontalArrangement = Arrangement.spacedBy(8.dp), verticalArrangement = Arrangement.spacedBy(4.dp)) {
         OutlinedButton({ scope.launch { io { client.report(pin) }.onSuccess { report = it }.onFailure { onMsg(why(it)) } } }) { Text("Actualiser") }
         OutlinedButton({ scope.launch { io { client.clearHistory(pin) }.onSuccess { onMsg("Historique effacé."); report = null }.onFailure { onMsg(why(it)) } } }) { Text("Effacer l'historique") }
     }
@@ -319,7 +321,7 @@ private fun Editor(client: ParentalClient, loaded: ParentalClient.Loaded, pin: S
     WholeTvPanel(client, cfg.profiles, pin, scope, onMsg)
 
     HorizontalDivider()
-    Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
+    FlowRow(horizontalArrangement = Arrangement.spacedBy(8.dp), verticalArrangement = Arrangement.spacedBy(4.dp)) {
         OutlinedButton({ changePin = true }) { Text("Changer le code parental") }
         TextButton(onForget) { Text("Verrouiller cet écran") }
     }
@@ -374,7 +376,7 @@ private fun AdminZone(client: ParentalClient, scope: kotlinx.coroutines.Coroutin
     HorizontalDivider()
     Text("Administrateur de la TV", style = MaterialTheme.typography.titleSmall)
     Text("Avec le code de la TV, sans le code parental : désactiver le contrôle, ou effacer le code parental oublié.", style = MaterialTheme.typography.bodySmall)
-    Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
+    FlowRow(horizontalArrangement = Arrangement.spacedBy(8.dp), verticalArrangement = Arrangement.spacedBy(4.dp)) {
         OutlinedButton({ dlg = "disable" }) { Text("Désactiver le contrôle") }
         OutlinedButton({ dlg = "reset" }) { Text("Code oublié…") }
     }

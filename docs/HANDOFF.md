@@ -386,3 +386,9 @@ Démarrage automatique après redémarrage de la TV (signal de démarrage sur Ga
 ## Guide utilisateur en ligne (2026-10-07)
 
 - Le serveur sert le guide en page libre `https://bridge.sti-cm.com/guide/` (`GuideController`, chaîne de sécurité publique `/guide/**`, dossier `/data/apk/guide`). Code prêt, **à déployer** (`deploy-server.sh`) puis à publier à la main : `docs/GUIDE-PUBLICATION.md`. Aucune route existante modifiée.
+
+## Barres du haut du téléphone : budget d'actions (R-23, 2026-10-07)
+
+- Régression : les actions de l'accueil cachaient le logo (entrée propriétaire). Barre d'accueil = logo (geste caché inchangé) + Réglages + menu « ⋮ » (Activer la TV, Demande d'appareil, Locations, Contrôle parental).
+- Règle pure `core/ux/AppBarBudget` + libellés `UxLabels` (testés par `AppBarBudgetTest`) : 2 actions visibles au plus, étiquette texte <= 14 caractères, sinon menu. Ajouter une action = l'ajouter dans `UxLabels.BARS`.
+- Passe largeur 360 dp : menus de débordement (Télécommande, Bibliothèque de la TV), `FlowRow` pour les rangées de boutons à libellés longs, `maxLines = 1` + ellipsis sur titres, onglets et boutons segmentés. Non vérifié sur appareil (pas de capture, pas d'APK, pas de version).

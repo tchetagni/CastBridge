@@ -1,3 +1,5 @@
+@file:OptIn(androidx.compose.foundation.layout.ExperimentalLayoutApi::class)
+
 package castbridge.sender
 
 import android.provider.OpenableColumns
@@ -157,7 +159,7 @@ private fun Label(text: String) = Text(text, style = MaterialTheme.typography.la
 @Composable
 private fun DelayRow(label: String, ms: Long, step: (Long) -> Unit) {
     Label("$label : ${PlayerParams.delayLabel(ms)}")
-    Row(verticalAlignment = Alignment.CenterVertically, horizontalArrangement = Arrangement.spacedBy(6.dp)) {
+    FlowRow(horizontalArrangement = Arrangement.spacedBy(6.dp), verticalArrangement = Arrangement.spacedBy(4.dp)) {
         OutlinedButton({ step(-500) }) { Text("-500") }
         OutlinedButton({ step(-50) }) { Text("-50 ms") }
         OutlinedButton({ step(50) }) { Text("+50 ms") }

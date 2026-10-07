@@ -1,3 +1,5 @@
+@file:OptIn(androidx.compose.foundation.layout.ExperimentalLayoutApi::class)
+
 package castbridge.sender
 
 import android.content.ClipData
@@ -46,7 +48,7 @@ fun MyTvScreen(onClose: () -> Unit) {
     var code by remember { mutableStateOf("") }
     val cs = MaterialTheme.colorScheme
     Scaffold(containerColor = cs.background, topBar = {
-        TopAppBar(title = { Text("Ma TV") }, navigationIcon = { IconButton(onClose) { Icon(Icons.AutoMirrored.Filled.ArrowBack, "Fermer") } },
+        TopAppBar(title = { Text("Ma TV", maxLines = 1, overflow = androidx.compose.ui.text.style.TextOverflow.Ellipsis) }, navigationIcon = { IconButton(onClose) { Icon(Icons.AutoMirrored.Filled.ArrowBack, "Fermer") } },
             colors = TopAppBarDefaults.topAppBarColors(containerColor = cs.surface))
     }) { padding ->
         Column(Modifier.padding(padding).fillMaxSize().verticalScroll(rememberScrollState()).padding(16.dp), verticalArrangement = Arrangement.spacedBy(12.dp)) {
@@ -70,7 +72,7 @@ fun MyTvScreen(onClose: () -> Unit) {
                     Text("Stratégie active : $label", style = MaterialTheme.typography.titleMedium)
                     if (ui.limits.isNotBlank()) Text("Limites : ${ui.limits}", style = MaterialTheme.typography.bodySmall)
                     ui.warnings.forEach { Text("⚠ $it", style = MaterialTheme.typography.bodySmall, color = Cb.warning) }
-                    Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
+                    FlowRow(horizontalArrangement = Arrangement.spacedBy(8.dp), verticalArrangement = Arrangement.spacedBy(4.dp)) {
                         Button(enabled = ui.busy == null, onClick = { SmartRemote.test() }) { Text("Tester") }
                         if (ui.activeId == castbridge.core.remote.smart.StrategyIds.VENDOR_APP) OutlinedButton(onClick = { SmartRemote.openVendorApp() }) { Text("Ouvrir l'app") }
                         OutlinedButton(enabled = ui.busy == null, onClick = { SmartRemote.retry() }) { Text("Réessayer") }

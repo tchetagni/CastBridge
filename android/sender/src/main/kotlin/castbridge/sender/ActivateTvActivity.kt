@@ -1,3 +1,5 @@
+@file:OptIn(androidx.compose.foundation.layout.ExperimentalLayoutApi::class)
+
 package castbridge.sender
 
 import android.content.ClipboardManager
@@ -161,7 +163,7 @@ class ActivateTvActivity : ComponentActivity() {
                 else FlowRow(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
                     shown.forEach { tv -> FilterChip(chosen?.address == tv.address, { chosen = tv; msg = null }, { Text(tv.name + if (!tv.bonded) " (à appairer)" else "") }) }
                 }
-                Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
+                FlowRow(horizontalArrangement = Arrangement.spacedBy(8.dp), verticalArrangement = Arrangement.spacedBy(4.dp)) {
                     OutlinedButton({ search() }, enabled = !scanning) { Text(if (scanning) "Recherche…" else "Chercher à nouveau") }
                     TextButton({ allPaired = !allPaired; refresh() }) { Text(if (allPaired) "Masquer les autres appareils" else "Ma TV n'apparaît pas") }
                 }

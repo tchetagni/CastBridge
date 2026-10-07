@@ -55,9 +55,9 @@ fun LearnScreen() {
     Column(Modifier.fillMaxSize()) {
         Box(Modifier.fillMaxWidth().padding(end = 8.dp), contentAlignment = Alignment.CenterEnd) { LotsEntry() }   // « Données hors ligne » (docs/LOTS.md)
         TabRow(selectedTabIndex = sub) {
-            Tab(sub == 0, onClick = { sub = 0 }, text = { Text("Leçons", maxLines = 1) })
-            Tab(sub == 1, onClick = { sub = 1 }, text = { Text("Piloter la TV", maxLines = 1) })
-            Tab(sub == 2, onClick = { sub = 2 }, text = { Text("Parents", maxLines = 1) })
+            Tab(sub == 0, onClick = { sub = 0 }, text = { Text("Leçons", maxLines = 1, overflow = androidx.compose.ui.text.style.TextOverflow.Ellipsis) })
+            Tab(sub == 1, onClick = { sub = 1 }, text = { Text("Piloter la TV", maxLines = 1, overflow = androidx.compose.ui.text.style.TextOverflow.Ellipsis) })
+            Tab(sub == 2, onClick = { sub = 2 }, text = { Text("Parents", maxLines = 1, overflow = androidx.compose.ui.text.style.TextOverflow.Ellipsis) })
         }
         Box(Modifier.fillMaxSize()) { when (sub) { 0 -> LessonsTab(); 1 -> RemoteTab(); else -> DashboardTab() } }
     }

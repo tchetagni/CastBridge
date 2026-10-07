@@ -78,7 +78,7 @@ fun DeviceRequestScreen(onClose: () -> Unit) {
         copied = TvDeviceRequestTexts.COPIED
     }
     Scaffold(containerColor = cs.background, topBar = {
-        TopAppBar(title = { Text(TvDeviceRequestTexts.TITLE) }, navigationIcon = { IconButton(onClose) { Icon(Icons.AutoMirrored.Filled.ArrowBack, "Fermer") } },
+        TopAppBar(title = { Text(TvDeviceRequestTexts.TITLE, maxLines = 1, overflow = androidx.compose.ui.text.style.TextOverflow.Ellipsis) }, navigationIcon = { IconButton(onClose) { Icon(Icons.AutoMirrored.Filled.ArrowBack, "Fermer") } },
             colors = TopAppBarDefaults.topAppBarColors(containerColor = cs.surface))
     }) { padding ->
         Column(Modifier.padding(padding).fillMaxSize().verticalScroll(rememberScrollState()).padding(16.dp), verticalArrangement = Arrangement.spacedBy(12.dp)) {
