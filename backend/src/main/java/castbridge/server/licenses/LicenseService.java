@@ -469,6 +469,10 @@ public class LicenseService {
     /** Writes the seat to the revocation list (and, with the server key, to the registry as a signed `revoke` event). */
     void revokeSeatRow(String wireLicense, String seatId, String reason, String by, Instant instant) {
         Instant at = instant.truncatedTo(java.time.temporal.ChronoUnit.SECONDS); // whole seconds, like the issue dates (an activation is revoked when issuedAt <= this date)
+        // an issue date can be AHEAD of the clock (ActivationService.doIssue keeps it >= the last one of the key and > the last revocation of the seat): the revocation
+        // must never be dated before the last activation issued for this seat, otherwise that activation (issuedAt > revoked_at) would survive the release
+        Timestamp lastIssued = jdbc.queryForObject("SELECT MAX(i.issued_at) FROM lic_issuance i JOIN lic_license l ON l.id = i.license_pk WHERE l.license_id = ? AND i.seat_id = ?", Timestamp.class, wireLicense, seatId);
+        if (lastIssued != null && lastIssued.toInstant().isAfter(at)) at = lastIssued.toInstant().truncatedTo(java.time.temporal.ChronoUnit.SECONDS);
         jdbc.update("INSERT INTO lic_revocation (license_id, seat_id, reason, revoked_by, revoked_at) VALUES (?,?,?,?,?)", wireLicense, seatId, AuditLog.clip(reason, 500), AuditLog.clip(by, 64), ts(at));
         registry.emitRevokeSeat(wireLicense, seatId, at);
     }
