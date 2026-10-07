@@ -28,7 +28,7 @@ import castbridge.core.owner.GateState
 import castbridge.core.owner.LockedTexts
 import castbridge.core.owner.TrialPolicy
 import castbridge.core.tunnel.TunnelTerms
-import castbridge.core.tv.WdCode
+import castbridge.core.tv.activation.ActivationGroupPolicy
 import castbridge.core.tv.activation.ActivationQr
 import castbridge.core.tv.activation.ActivationScreenPlan
 import castbridge.core.tv.activation.KeyScan
@@ -45,7 +45,10 @@ import java.util.Date
 /**
  * The start screen of a TV that needs an activation (docs/TRIAL-EDITION.md, docs/TV-ACTIVATION-CLE-USB.md): GUIDED. The ways to activate are numbered in the order the TV detects
  * ([ActivationScreenPlan], pure and tested), one status line each, large type, five keys (up, down, left, right, OK) are enough:
- *  - the phone: the connection code in very large type and a QR of the TV's own Wi-Fi Direct group (the group exists only while this screen is open: [TvService.startActivationGroup]);
+ *  - the phone: the connection code in very large type and a QR of the TV's own Wi-Fi Direct group (the group exists only while this screen is open: [TvService.startActivationGroup]).
+ *    Two cases ([ActivationGroupPolicy], act-tv-2): a TV with no Wi-Fi network, or a cable, makes the group at once (QR); a TV on a Wi-Fi network does NOT (a single-radio box may lose its
+ *    link): the code stands alone with « Téléphone sur le même Wi-Fi : tapez le code … » and a focusable line « Le téléphone n'est pas sur ce Wi-Fi ? OK : réseau direct » that makes the group
+ *    on request (the QR comes when the group exists);
  *  - the USB key: a banner at the top « Clé USB : activation trouvée pour cette TV › Activer » (OK installs it) or the exact reason, read at plug-in, at the opening of this screen and on the
  *    « Chercher » button ([UsbActivationWatch]), never silently every 15 s;
  *  - typing or pasting the key with the remote: the LAST RESORT, at the bottom.
@@ -71,6 +74,9 @@ class ActivationActivity : Activity() {
     private lateinit var instructionView: TextView
     private lateinit var qrHolder: FrameLayout
     private lateinit var retryGroup: Button
+    /** act-tv-2: « Le téléphone n'est pas sur ce Wi-Fi ? OK : réseau direct » and its warning, drawn only while the TV's own group is kept for later ([ActivationGroupPolicy]). */
+    private lateinit var directButton: Button
+    private lateinit var directWarning: TextView
     private lateinit var freeButton: Button
     private lateinit var freeStatus: TextView
     private val laneBoxes = HashMap<ActivationScreenPlan.Lane, LinearLayout>()
@@ -96,6 +102,7 @@ class ActivationActivity : Activity() {
             ActivationCenter.takeWifiAccepted()?.let { r -> show(r, "le Wi-Fi"); return }
             // the service may not have been up yet when the screen opened: ask for the activation group as soon as it is
             if (!groupAsked && !upgrade && !p2pDialog) TvService.running?.let { it.activationScreenResumed(); groupAsked = true }
+            else if (!upgrade && !p2pDialog) TvService.running?.activationTick()          // act-tv-2: a group kept for later is made when the TV loses its Wi-Fi network
             ActivationCenter.pending?.let { k ->
                 if (input.text.toString().trim() != k) {
                     input.setText(k)
@@ -248,31 +255,39 @@ class ActivationActivity : Activity() {
             addView(qrHolder, LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT).apply { rightMargin = 40 })
             addView(text, LinearLayout.LayoutParams(0, LinearLayout.LayoutParams.WRAP_CONTENT, 1f))
         })
+        // act-tv-2: the TV is on a Wi-Fi network, so its own group is not made unless asked: a focusable line (OK on the remote) and the warning said BEFORE the press
+        directButton = button(ActivationGroupPolicy.OFFER_LINE) { askP2pPermission(); TvService.running?.requestActivationDirect(); refresh() }.apply { visibility = View.GONE }
+        box.addView(directButton)
+        directWarning = tv(ActivationGroupPolicy.OFFER_WARNING, 16f, AMBER).apply { visibility = View.GONE }
+        box.addView(directWarning)
         box.addView(st)
         // the line older phones read (« Activer la TV » asks for this code and compares this address)
         wifiView = tv("", 16f, DIM).apply { visibility = View.GONE }; box.addView(wifiView)
         btLine = tv("Bluetooth d'activation : …", 16f, DIM); box.addView(btLine)
         box.addView(button("Rendre la TV visible pour le téléphone (Bluetooth)") { makeVisible() })
-        retryGroup = button("Réessayer le réseau direct") { askP2pPermission(); TvService.running?.startActivationGroup(); refresh() }.apply { visibility = View.GONE }
+        retryGroup = button("Réessayer le réseau direct") { askP2pPermission(); TvService.running?.requestActivationDirect(); refresh() }.apply { visibility = View.GONE }
         box.addView(retryGroup)
     }
 
     private fun refreshPhoneLane(info: Pair<String, List<String>>?, group: ActivationScreenPlan.Group) {
+        // what is drawn is decided by the pure plan (tested): the QR only while the group EXISTS (else the code stands alone), the « réseau direct » line only while the group is kept for later
+        val v = ActivationScreenPlan.phoneView(info?.first, group)
+        instructionView.text = v.instruction
+        directButton.visibility = if (v.offer != null) View.VISIBLE else View.GONE
+        directWarning.visibility = directButton.visibility
+        v.offer?.let { directButton.text = it.line; directWarning.text = it.warning }
         if (info == null) {
             codeView.visibility = View.GONE; wifiView.visibility = View.GONE; qrHolder.visibility = View.GONE; retryGroup.visibility = View.GONE
-            instructionView.text = "Sur votre téléphone, ouvrez CastBridge › Activer la TV."
             return
         }
         val code = info.first
-        val qrOk = group is ActivationScreenPlan.Group.Ready && WdCode.isValid(code)
-        codeView.visibility = View.VISIBLE; codeView.text = ActivationScreenPlan.groupedCode(code)
-        instructionView.text = ActivationScreenPlan.phoneInstruction(code, qrShown = qrOk)
-        if (qrOk) {
+        codeView.visibility = View.VISIBLE; codeView.text = v.code
+        if (v.qr) {
             if (qrFor != code) { qrHolder.removeAllViews(); qrHolder.addView(ActivationQrView(this, ActivationQr.encode(code))); qrFor = code }
             qrHolder.visibility = View.VISIBLE
         } else qrHolder.visibility = View.GONE
         wifiView.visibility = View.VISIBLE; wifiView.text = LockedWifiTexts.line(code, info.second, groupReady = group is ActivationScreenPlan.Group.Ready)
-        retryGroup.visibility = if (group is ActivationScreenPlan.Group.Failed) View.VISIBLE else View.GONE
+        retryGroup.visibility = if (v.retry) View.VISIBLE else View.GONE
     }
 
     // ---- way 2: the USB key ----

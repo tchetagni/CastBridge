@@ -43,6 +43,8 @@ class WifiDirectGroup(private val ctx: Context, private val prefs: TvPrefs, priv
     @Volatile private var wanted: String? = null
     /** Bumped by every [startActivation] and by [stop]: a late answer of Android to an older request is ignored and its group removed (the screen closed or reopened meanwhile). */
     @Volatile private var generation = 0
+    /** The TV was on a Wi-Fi network before an activation group touched it (read at every request, kept once true): [stop] relaunches that link if the group cut it ([ActivationNet.restoreLater]). */
+    @Volatile private var wifiBefore = false
 
     fun permission(): String = if (Build.VERSION.SDK_INT >= 33) Manifest.permission.NEARBY_WIFI_DEVICES else Manifest.permission.ACCESS_FINE_LOCATION
     override fun hasPermission() = ctx.checkSelfPermission(permission()) == PackageManager.PERMISSION_GRANTED
@@ -71,6 +73,7 @@ class WifiDirectGroup(private val ctx: Context, private val prefs: TvPrefs, priv
         val name = castbridge.core.tv.WdCode.networkName(code)
         if (wanted == name && (active?.first == name || starting)) return
         wanted = name; generation += 1
+        wifiBefore = wifiBefore || ActivationNet.read(ctx).wifiConnected      // before the group can touch the link
         start(forPhone = false, recreated = false, forceAuto = true, fixed = name to castbridge.core.tv.WdCode.passphrase(code), ticket = generation)
         // one line for `adb logcat`, never the name, the password or the code: asked, or why it cannot be
         Log.i(TAG, if (starting) "groupe d'activation : demandé à Android" else "groupe d'activation impossible : ${lastError ?: "?"}")
@@ -181,12 +184,15 @@ class WifiDirectGroup(private val ctx: Context, private val prefs: TvPrefs, priv
     override fun stop() {
         val m = mgr ?: return
         val ch = channel ?: return
+        val wasActivation = wanted != null
         active = null; auto = false
         starting = false; wanted = null; generation += 1            // an activation request still in flight is dropped (its late answer removes its group)
         runCatching { m.removeGroup(ch, null) }
         runCatching { if (Build.VERSION.SDK_INT >= 27) ch.close() }
         channel = null
         status(null)
+        // a single-radio TV may have lost its Wi-Fi link while the activation group existed: looked at again in a few seconds, reconnect() best effort (act-tv-2)
+        if (wasActivation) { ActivationNet.restoreLater(ctx, wifiBefore); wifiBefore = false }
     }
 
     companion object {
