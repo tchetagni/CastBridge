@@ -47,13 +47,48 @@ public class WalletAdminController {
     private final WalletPolicyService policies;
     private final AdminAccess access;
     private final WalletModuleConfig.WalletClock clock;
+    private final castbridge.server.wallet.ops.GameJournal journal;
 
-    public WalletAdminController(JdbcLedger ledger, WalletRepository repo, WalletPolicyService policies, AdminAccess access, WalletModuleConfig.WalletClock clock) {
+    public WalletAdminController(JdbcLedger ledger, WalletRepository repo, WalletPolicyService policies, AdminAccess access, WalletModuleConfig.WalletClock clock,
+                                 castbridge.server.wallet.ops.GameJournal journal) {
         this.ledger = ledger;
         this.repo = repo;
         this.policies = policies;
         this.access = access;
         this.clock = clock;
+        this.journal = journal;
+    }
+
+    /**
+     * Le journal des parties avec mise (W22 § 5, games-G2), lecture seule : les dernières parties réglées, filtrables par jeu et par TV ({@code ?game=chess&holder=XXXX-XXXX-XXXX-XXXX&limit=50}, au plus
+     * 200) : salle, résultat, les deux identités, mise, utilisé, payé, frais, issue (WIN, LOSS, DRAW, ABORT). Jeton d'administration seulement : aucune écriture, aucun secret.
+     */
+    @GetMapping("/games")
+    public ResponseEntity<Map<String, Object>> games(@org.springframework.web.bind.annotation.RequestParam(name = "game", required = false) String game,
+                                                     @org.springframework.web.bind.annotation.RequestParam(name = "holder", required = false) String holder,
+                                                     @org.springframework.web.bind.annotation.RequestParam(name = "limit", required = false, defaultValue = "50") int limit) {
+        if (game != null && !game.matches("^[a-z0-9_-]{1,32}$")) throw ApiException.badRequest("Jeu invalide : 1 à 32 caractères parmi a-z 0-9 _ -");
+        if (holder != null && !AccountRef.IDENTITY.matcher(holder).matches()) throw ApiException.badRequest("Identité invalide : format XXXX-XXXX-XXXX-XXXX");
+        List<Map<String, Object>> rows = new java.util.ArrayList<>();
+        for (castbridge.server.wallet.ops.GameJournal.Row r : journal.recent(game, holder, limit)) {
+            Map<String, Object> m = new LinkedHashMap<>();
+            m.put("rid", r.rid());
+            m.put("room", r.room());
+            m.put("game", r.game());
+            m.put("holder", r.holder());
+            m.put("opponent", r.opponent());
+            m.put("currency", r.cur());
+            m.put("per", r.per());
+            m.put("used", r.used());
+            m.put("pay", r.pay());
+            m.put("fee", r.fee());
+            m.put("outcome", r.outcome().name());
+            m.put("at", r.at().toEpochMilli());
+            rows.add(m);
+        }
+        Map<String, Object> out = new LinkedHashMap<>();
+        out.put("games", rows);
+        return ResponseEntity.ok().cacheControl(CacheControl.noStore()).body(out);
     }
 
     public record GrantBody(String identity, String currency, Long amount, String reason, String idem) {}
@@ -217,7 +252,8 @@ public class WalletAdminController {
             i3.put("bloqueMatchesEscrows" + c.name(), bloqueOk);
             i3ok &= massOk && bloqueOk && potOk;
         }
-        boolean feeOk = repo.systemBalance(AccountRef.FEE, "NDEM") >= 0 && repo.systemBalance(AccountRef.FEE, "MBOKO") == 0;
+        // frais jamais négatifs, dans les DEUX monnaies : NDEM (conversion MBOKO → NDEM, parties misées) et MBOKO (parties misées : frais de plateforme du jeu, politique à 0 au lancement)
+        boolean feeOk = repo.systemBalance(AccountRef.FEE, "NDEM") >= 0 && repo.systemBalance(AccountRef.FEE, "MBOKO") >= 0;
         i3ok &= feeOk;
         WalletPolicy pol = policies.get();
         long convN = repo.systemBalance(AccountRef.CONVERT, "NDEM"), convM = repo.systemBalance(AccountRef.CONVERT, "MBOKO");
