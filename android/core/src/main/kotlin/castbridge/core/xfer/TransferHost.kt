@@ -76,6 +76,9 @@ class TransferHost(
 
     fun session(id: String): Session? = sessions[id]
 
+    /** The sessions that write to the volume [volumeId] (« Préparer le retrait de la clé USB »: which copies hold the key, which to close). */
+    fun sessionsOn(volumeId: String): List<Session> = sessions.values.filter { it.volumeId == volumeId }
+
     /**
      * Head first: on a volume where the data file is NOT preallocated, a block far beyond the contiguous prefix would make the kernel zero-fill the gap
      * synchronously (the phone's 20 s watchdog trips, the copy stalls): it is refused (429 busy, the phone retries) until the prefix catches up.

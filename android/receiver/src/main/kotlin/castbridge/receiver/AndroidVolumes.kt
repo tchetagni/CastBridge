@@ -45,8 +45,9 @@ class AndroidVolumeProvider(private val ctx: Context, private val prefs: TvPrefs
     private val probes = ConcurrentHashMap<String, Probe>()
     @Volatile var saf: SafStoreImpl? = null; private set
 
+    // the end of a file written to a removable volume asks for a best-effort system `sync` (castbridge.core.tv.ShellSync, coalesced): docs/STORAGE.md « Clé USB mal éjectée »
     override fun storeFor(volume: StorageVolume): VolumeStore =
-        if (volume.kind == VolumeKind.SAF) saf ?: throw IOException("no SAF folder") else FileStore(volume)
+        if (volume.kind == VolumeKind.SAF) saf ?: throw IOException("no SAF folder") else FileStore(volume, sync = castbridge.core.tv.ShellSync.shared)
 
     override fun scan(remeasure: Boolean): List<StorageVolume> {
         val out = ArrayList<StorageVolume>()
@@ -61,7 +62,10 @@ class AndroidVolumeProvider(private val ctx: Context, private val prefs: TvPrefs
         for (base in dirs.drop(1)) {
             if (base == null) continue
             val removable = runCatching { Environment.isExternalStorageRemovable(base) }.getOrDefault(false)
-            val mounted = runCatching { Environment.getExternalStorageState(base) == Environment.MEDIA_MOUNTED }.getOrDefault(false)
+            // « mounted » AND « mounted read-only »: a key Android could only mount read-only (write-protected, or after an unclean removal) is still READ (the library lists it, it is never written)
+            val state = runCatching { Environment.getExternalStorageState(base) }.getOrDefault(Environment.MEDIA_UNKNOWN)
+            val readOnlyMount = state == Environment.MEDIA_MOUNTED_READ_ONLY
+            val mounted = state == Environment.MEDIA_MOUNTED || readOnlyMount
             if (!removable || !mounted) continue
             val appDir = File(base, "videos")
             // Heavy data in <clé>/Download/CastBridge/Bibliotheque (survives the uninstall), unless the user turned it off or the drive refuses it.
@@ -75,8 +79,9 @@ class AndroidVolumeProvider(private val ctx: Context, private val prefs: TvPrefs
             fun probe(d: File): Probe { val r = WriteProbe.run(d, speedBytes = if (canMeasure) PROBE_BYTES else 0); return Probe(r.writable, if (canMeasure) r.bytesPerSec else 0, r.error) }
             var dir = heavyLib ?: appDir
             if (p == null || (remeasure && canMeasure) || (p.writable && p.bps <= 0 && canMeasure)) { p = probe(dir); probes[id] = p }
-            // The shared Download folder refuses writes on some Android versions: fall back to the app's own folder on the drive.
-            if (heavyLib != null && !p.writable) {
+            // The shared Download folder refuses writes on some Android versions: fall back to the app's own folder on the drive (not for a read-only mount: nothing is writable there, the files are read where they are).
+            if (readOnlyMount && !dir.isDirectory) continue
+            if (heavyLib != null && !p.writable && !readOnlyMount) {
                 dir = appDir
                 if (!(dir.isDirectory || dir.mkdirs())) continue
                 p = probe(dir); probes[id] = p
