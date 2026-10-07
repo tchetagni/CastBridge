@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- « Ouvrir CastBridge-TV » : appui long sur l'icône de CastBridge. Même geste que le bouton de l'onglet « CastBridge TV » et la touche « TV » de la télécommande
+     (docs/REMOTE.md). Le lien est traité par MainActivity (OpenTv.handleLink) ; un test du cœur (OpenTvShortcutTest) garde ce fichier, le manifeste et les mots d'accord. -->
+<shortcuts xmlns:android="http://schemas.android.com/apk/res/android">
+    <shortcut
+        android:shortcutId="open_tv"
+        android:enabled="true"
+        android:icon="@drawable/ic_cb_ouvrir_tv"
+        android:shortcutShortLabel="@string/shortcut_open_tv_short"
+        android:shortcutLongLabel="@string/shortcut_open_tv_long"
+        android:shortcutDisabledMessage="@string/shortcut_open_tv_disabled">
+        <intent
+            android:action="android.intent.action.VIEW"
+            android:data="castbridge://open-tv"
+            android:targetPackage="castbridge.sender"
+            android:targetClass="castbridge.sender.MainActivity" />
+    </shortcut>
+</shortcuts>

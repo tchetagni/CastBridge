@@ -354,16 +354,24 @@ fun RemoteScreen(onClose: () -> Unit) {
             RemoteController.statusLine(status, prefs.btOnly)?.let { Text(it, style = MaterialTheme.typography.labelMedium, color = cs.onSurfaceVariant) }
             WholeTvRow(wholeTv, st) { on -> wholeTv = on; prefs.wholeTv = on; RemoteController.setWholeTv(on) }
 
-            Row(Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.SpaceEvenly) {
-                RemoteKeyButton(RemoteKey.BACK, Icons.AutoMirrored.Filled.ArrowBack)
-                RemoteKeyButton(RemoteKey.HOME, Icons.Filled.Home)
-                RemoteKeyButton(RemoteKey.MENU, Icons.Filled.Menu)
-                RemoteKeyButton(RemoteKey.INFO, Icons.Filled.Info)
-                Box(Modifier.size(56.dp).clip(CircleShape).background(if (st?.textField == true) cs.primary.copy(alpha = 0.5f) else cs.surfaceVariant)
-                    .clickable { keyboard = true }.semantics { contentDescription = "Clavier : saisir du texte sur la TV" }, contentAlignment = Alignment.Center) {
-                    Icon(Icons.Filled.Keyboard, null, Modifier.size(28.dp))
+            // Rangée système : la sixième touche, « TV » (OpenTv.kt), fait passer CastBridge-TV devant l'application affichée sur la TV, comme une touche YouTube ou Netflix.
+            // Les touches suivent la largeur (jamais sous 40 dp, jamais collées) ; avec une autre stratégie (« Ma TV ») la touche n'existe pas.
+            BoxWithConstraints(Modifier.fillMaxWidth()) {
+                val n = if (smartKeys == null) 6 else 5
+                val ks = ((maxWidth.value - 8f * (n + 1)) / n).toInt().coerceIn(40, 56)
+                Row(Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.SpaceEvenly) {
+                    RemoteKeyButton(RemoteKey.BACK, Icons.AutoMirrored.Filled.ArrowBack, size = ks)
+                    RemoteKeyButton(RemoteKey.HOME, Icons.Filled.Home, size = ks)
+                    RemoteKeyButton(RemoteKey.MENU, Icons.Filled.Menu, size = ks)
+                    RemoteKeyButton(RemoteKey.INFO, Icons.Filled.Info, size = ks)
+                    Box(Modifier.size(ks.dp).clip(CircleShape).background(if (st?.textField == true) cs.primary.copy(alpha = 0.5f) else cs.surfaceVariant)
+                        .clickable { keyboard = true }.semantics { contentDescription = "Clavier : saisir du texte sur la TV" }, contentAlignment = Alignment.Center) {
+                        Icon(Icons.Filled.Keyboard, null, Modifier.size((ks / 2).dp))
+                    }
+                    if (smartKeys == null) OpenTvKey(ks)
                 }
             }
+            OpenTvLine(Modifier.fillMaxWidth())
             if (wholeTv && st?.systemConnected == true) Row(Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.SpaceEvenly) {
                 SystemButton(Icons.Filled.Tv, "Accueil TV") { RemoteController.global(RemoteGlobal.HOME) }
                 SystemButton(Icons.Filled.ViewCarousel, "Récents") { RemoteController.global(RemoteGlobal.RECENTS) }

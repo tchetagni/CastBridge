@@ -50,6 +50,7 @@ class MainActivity : ComponentActivity() {
 
     /** « Mise à jour prête — Installer » notification: install now (Android asks for confirmation). */
     private fun installFrom(i: Intent?) {
+        if (OpenTv.handleLink(this, i)) return      // raccourci « Ouvrir CastBridge-TV » (appui long sur l'icône) ou castbridge://open-tv : CastBridge-TV passe devant l'application de la TV
         i?.getStringExtra(TvHomeRequest.EXTRA)?.let { TvHomeRequest.pending.value = it; i.removeExtra(TvHomeRequest.EXTRA) }   // « Ouvrir avec CastBridge »
         if (i?.getBooleanExtra(PhoneUpdater.EXTRA_INSTALL, false) != true) return
         i.removeExtra(PhoneUpdater.EXTRA_INSTALL)

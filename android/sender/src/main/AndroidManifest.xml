@@ -59,6 +59,14 @@
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+            <!-- « Ouvrir CastBridge-TV » (docs/REMOTE.md) : le lien castbridge://open-tv. Volontairement SANS BROWSABLE : une page web ne peut pas faire apparaître la TV. -->
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <data android:scheme="castbridge" android:host="open-tv" />
+            </intent-filter>
+            <!-- raccourci statique de l'icône (appui long) : « Ouvrir CastBridge-TV » -->
+            <meta-data android:name="android.app.shortcuts" android:resource="@xml/shortcuts" />
         </activity>
         <!-- "Share > CastBridge" of a link, magnet: links and .torrent files: the TV downloads them (docs/DOWNLOADS.md) -->
         <activity android:name=".ShareToTvActivity" android:exported="true" android:label="Télécharger sur la TV"

@@ -51,6 +51,8 @@
         <intent><action android:name="android.settings.WIFI_SETTINGS" /></intent>
         <intent><action android:name="android.settings.USAGE_ACCESS_SETTINGS" /></intent>
         <intent><action android:name="android.settings.action.MANAGE_OVERLAY_PERMISSION" /></intent>
+        <!-- avec le schéma package: : l'écran de cette autorisation en demande un (TvForeground sait ainsi s'il existe sur le boîtier avant de proposer sa ligne de MENU, une seule fois) -->
+        <intent><action android:name="android.settings.action.MANAGE_OVERLAY_PERMISSION" /><data android:scheme="package" /></intent>
         <intent><action android:name="android.intent.action.VIEW" /><data android:mimeType="application/vnd.android.package-archive" /></intent>
     </queries>
     <uses-feature android:name="android.software.leanback" android:required="false" />

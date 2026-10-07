@@ -140,6 +140,7 @@ class PlayerActivity : Activity(), TvService.Screen {
         s.attach(this)                                       // may run a play request that arrived while the screen was closed
         requestRuntimePermissions()
         if (current == null && libScreen?.visible != true) showHome()
+        openLibraryIfAsked(intent)
     }
 
     /** « Accueil » of the phone remote (RemoteHub): leave the video / library / other screen for the home. */
@@ -147,6 +148,15 @@ class PlayerActivity : Activity(), TvService.Screen {
         super.onNewIntent(intent)
         setIntent(intent)
         if (intent.getBooleanExtra(RemoteHub.EXTRA_HOME, false)) { if (current != null) stop() else showHome() }
+        openLibraryIfAsked(intent)
+    }
+
+    /** « Ouvrir CastBridge-TV » du téléphone avec l'écran « library » (TvForeground) : la bibliothèque, à l'arrivée de l'intention comme à la création de l'écran. */
+    private fun openLibraryIfAsked(i: Intent) {
+        if (!i.getBooleanExtra(TvForeground.EXTRA_LIBRARY, false)) return
+        i.removeExtra(TvForeground.EXTRA_LIBRARY)
+        if (current != null) stop()
+        showLibrary()
     }
 
     override fun onResume() {
@@ -816,6 +826,10 @@ class PlayerActivity : Activity(), TvService.Screen {
         }
         BatteryExemption.offerIntent(this, prefs)?.let { i ->
             items += castbridge.core.tv.BatteryExemptionPolicy.LINE to { BatteryExemption.markAsked(prefs); runCatching { startActivity(i) }.onFailure { flash("Réglage indisponible sur cette TV") } }
+        }
+        // « Ouvrir CastBridge-TV » du téléphone n'a rien pu faire seul : cette ligne est proposée UNE fois (jamais de boucle ; refus mémorisé), l'écran de réglage est ouvert d'ici (GaiaOS ignore un lancement venu d'un fil HTTP)
+        TvForeground.overlayOffer(this, prefs)?.let { i ->
+            items += castbridge.core.tv.OverlayOfferPolicy.LINE to { TvForeground.markOverlayAsked(prefs); runCatching { startActivity(i) }.onFailure { flash("Réglage indisponible sur cette TV") } }
         }
         items += "Lecture à distance : autoriser l'affichage par-dessus les autres apps" + (if (s.overlayAllowed()) " (autorisé)" else "") to {
             s.openOverlaySettings(this)?.let { flash(it) }

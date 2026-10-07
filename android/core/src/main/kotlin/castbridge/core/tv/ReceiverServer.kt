@@ -696,8 +696,10 @@ class ReceiverServer(
         if (!loopbackStream) denied(s, p)?.let { return it }
         if (isStream) return stream(s, path.removePrefix("/stream/"))
         val ext = if (!path.startsWith("/api/")) null
-            else if (s.method == Method.POST && extension?.wantsBody(path) == true) extBody(s)?.let { extension.handleBody(path, s.method.name, p, it) }
-                ?: ApiReply(413, """{"error":"body missing or too large"}""")
+            else if (s.method == Method.POST && extension?.wantsBody(path) == true)
+                // « corps facultatif » (BODY_OPTIONAL) : un POST qui n'annonce aucun corps est un appel simple ; un corps annoncé est lu comme avant (borné)
+                (if (noBody(s) && path in BODY_OPTIONAL) extension.handle(path, s.method.name, p)
+                else extBody(s)?.let { extension.handleBody(path, s.method.name, p, it) } ?: ApiReply(413, """{"error":"body missing or too large"}"""))
             else extension?.handle(path, s.method.name, p)
         return when {
             // NanoHTTPD already percent-decoded the URI. A rejected upload leaves its body unread on the
@@ -859,6 +861,9 @@ class ReceiverServer(
             else -> json(Response.Status.NOT_FOUND, """{"error":"not found"}""")
         }
     }
+
+    /** The request announces no body at all (no Content-Length, or 0, and no chunked encoding): nothing is left unread on the connection. */
+    private fun noBody(s: IHTTPSession): Boolean = (s.headers["content-length"]?.toLongOrNull() ?: 0L) <= 0L && s.headers["transfer-encoding"] == null
 
     /** Body of a POST for an extension route (a .torrent...), null if absent or larger than [MAX_EXT_BODY]. */
     private fun extBody(s: IHTTPSession): ByteArray? {
@@ -1896,6 +1901,12 @@ class ReceiverServer(
         const val PENDING_FILE = ".cbfiling-pending"
         const val VERSION = "0.7"
         const val MAX_EXT_BODY = 4 shl 20
+        /**
+         * POST routes of an extension that wants a body ([ApiExtension.wantsBody]) but works WITHOUT one (« corps facultatif ») : a POST that announces no body at all is an ordinary call,
+         * not a 413. Today only `POST /api/tv/open` (« Ouvrir CastBridge-TV », body `{"screen":"library"}` optional). A constant here, not a new method of the interface: adding a default method to
+         * [ApiExtension] would force every implementor (and every incremental build) to be recompiled for its bridge, and a stale one fails at run time.
+         */
+        val BODY_OPTIONAL: Set<String> = setOf("/api/tv/open")
         /** A partial copy written less than this long ago (or being written) is busy: /api/reset refuses to drop it. */
         const val PART_BUSY_MS = 60_000L
         /** Longest a /stream/ reader waits for a byte while the copy is still alive (then the player's http-reconnect takes over). */
