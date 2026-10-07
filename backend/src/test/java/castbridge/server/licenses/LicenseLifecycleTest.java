@@ -78,7 +78,8 @@ class LicenseLifecycleTest extends LicenseTestBase {
         assertThat(f.factors()).isEqualTo(d.fp());
         assertThat(f.k()).isEqualTo(4);
         assertThat(f.seat()).isEqualTo(seatOf(l.licenseId(), d)).hasSize(16);
-        assertThat(f.issuedAt()).isLessThanOrEqualTo(System.currentTimeMillis() + 1500);
+        // the issue dates of a key never go back: after a release+reissue made in the same second by another test, the next date may be a few seconds ahead of the clock
+        assertThat(f.issuedAt()).isLessThanOrEqualTo(System.currentTimeMillis() + 5000);
         assertThat(f.notBefore()).isLessThanOrEqualTo(f.issuedAt());
         assertThat(f.notAfter() - f.notBefore()).isEqualTo(48 * 3_600_000L); // default installation window: 48 h from the creation
         assertThat(f.rights()).hasSize(2).anyMatch(r -> r.startsWith("purchase|p-test|classe-test|"))
@@ -179,6 +180,21 @@ class LicenseLifecycleTest extends LicenseTestBase {
         Timestamp lastRevoked = jdbc.queryForObject("select max(revoked_at) from lic_revocation where license_id = ? and seat_id = ?", Timestamp.class, l.licenseId(), a1.seatId());
         assertThat(back.issuedAt()).as("issuedAt doit dépasser la date de révocation du poste (sinon l'activation serait révoquée dès l'installation)").isAfter(lastRevoked.toInstant());
         assertThat(licenses.get(l.licenseId()).seatsUsed()).isEqualTo(1);
+    }
+
+    @Test
+    void aSeatReleasedRightAfterAnIssueDatedAheadOfTheClockStillRevokesThatActivation() {
+        var l = license(1);
+        var a1 = issue(l.licenseId(), dev());
+        // deterministic: an issue date ahead of the clock (what doIssue produces after a release bump or when the key's last issue date is in the future)
+        Timestamp original = jdbc.queryForObject("select max(issued_at) from lic_issuance where license_pk = ?", Timestamp.class, l.id());
+        jdbc.update("update lic_issuance set issued_at = ? where license_pk = ?", Timestamp.from(java.time.Instant.now().plusSeconds(30)), l.id());
+        Timestamp issued = jdbc.queryForObject("select max(issued_at) from lic_issuance where license_pk = ?", Timestamp.class, l.id());
+        licenses.releaseSeat(OWNER, l.licenseId(), a1.seatId(), "poste remplacé");
+        // the issue dates of a kid are shared by the whole suite: put it back so that the other tests do not see a date in the future
+        jdbc.update("update lic_issuance set issued_at = ? where license_pk = ?", original, l.id());
+        Timestamp revoked = jdbc.queryForObject("select max(revoked_at) from lic_revocation where license_id = ? and seat_id = ?", Timestamp.class, l.licenseId(), a1.seatId());
+        assertThat(revoked.toInstant()).as("la révocation doit couvrir l'activation émise (issuedAt <= revoked_at)").isAfterOrEqualTo(issued.toInstant().truncatedTo(java.time.temporal.ChronoUnit.SECONDS));
     }
 
     @Test
