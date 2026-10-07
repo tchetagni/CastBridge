@@ -40,7 +40,7 @@ Code (`src/main/java/castbridge/server/`) :
 
 | Paquet | Rôle |
 |---|---|
-| `updates` | releases (entité, dépôt, lecture du manifeste binaire de l'APK), politique de version minimale, signature Ed25519 des manifestes, téléchargements `/dl` |
+| `updates` | releases (entité, dépôt, lecture du manifeste binaire de l'APK), politique de version minimale, signature Ed25519 des manifestes, téléchargements `/dl` (dont l'adresse stable `/dl/{app}/latest.apk`), page publique `/telecharger` |
 | `quiz` | questions, validation, import/export JSON/CSV, synchro avec tombstones, tirages, seed initial |
 | `devices` | enregistrement, heartbeats, plantages, historique (installations, versions, jours), rétention, géolocalisation approximative |
 | `telemetry` | ingestion des événements d'usage (catalogue fermé, liste blanche, consentement, dédoublonnage), agrégats KPI, calculs des indicateurs, rétention |
@@ -372,7 +372,7 @@ Mettre à jour ces commandes dans le runbook (wiki ou document partagé) ; forme
 - Télémétrie : consentement à deux niveaux (essentiel / statistiques d'usage, désactivées par défaut), catalogue
   fermé, clés interdites refusées, messages nettoyés des chemins/URL/noms de fichiers, événements bruts 13 mois,
   droits d'accès (`GET /api/v1/devices/me`) et d'effacement (`DELETE /api/v1/devices/me`, ou par l'admin).
-- Limite de débit par IP (seau à jetons en mémoire) sur `/api`, `/dl` et la connexion web ; CORS fermé ; en-têtes
+- Limite de débit par IP (seau à jetons en mémoire) sur `/api`, `/dl`, `/guide`, `/telecharger` et la connexion web ; CORS fermé ; en-têtes
   `X-Content-Type-Options`, `X-Frame-Options: DENY`, CSP, `Referrer-Policy`, HSTS derrière HTTPS.
 - Conteneurs : MySQL sans port publié sur un réseau interne sans Internet ; API non-root, système de fichiers en
   lecture seule, aucune capability, `no-new-privileges`, limites mémoire ; actuator sur un port non publié.

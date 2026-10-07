@@ -39,11 +39,16 @@ cd ~/castbridge/incoming
 T="$(sudo docker exec castbridge-api printenv CASTBRIDGE_ADMIN_TOKEN 2>/dev/null || true)"
 if [ -z "$T" ]; then echo JETON_ABSENT; exit 3; fi
 curl -sS -m 300 -H "Authorization: Bearer $T" \
-  -F "app=$2" -F "abi=$3" -F "versionCode=$4" -F "versionName=$5" -F "channel=$6" -F "mandatory=$7" -F "rollout=$8" -F "notes=${10}" \
+  -F "app=$2" -F "abi=$3" -F "versionCode=$4" -F "versionName=$5" -F "channel=$6" -F "mandatory=$7" -F "rollout=$8" --form-string "notes=${10}" \
   -F "file=@$1" "$9/api/v1/admin/releases"
 rm -f -- "$1"
 REMOTE
-out="$(ssh -o ConnectTimeout=10 -o BatchMode=yes "$SERVER" bash -s -- "$base" "$app" "$ABI" "$code" "$name" "$CHANNEL" "$MANDATORY" "$ROLLOUT" "$API" "$notes" < "$remote")"
+# ssh joint ses arguments par des espaces et le shell du serveur relit la chaîne : sans protection, des notes avec des espaces seraient
+# coupées au premier mot et une apostrophe (fréquente en français) ferait échouer la commande. Chaque paramètre est donc mis entre
+# apostrophes pour le shell distant (' devient '\'').
+shq() { printf "'"; printf '%s' "$1" | sed "s/'/'\\\\''/g"; printf "'"; }
+params="$(shq "$base") $(shq "$app") $(shq "$ABI") $(shq "$code") $(shq "$name") $(shq "$CHANNEL") $(shq "$MANDATORY") $(shq "$ROLLOUT") $(shq "$API") $(shq "$notes")"
+out="$(ssh -o ConnectTimeout=10 -o BatchMode=yes "$SERVER" "bash -s -- $params" < "$remote")"
 
 OUT="$out" SHA_LOCAL="$sha_local" PUBLIC="$PUBLIC" python3 -I - <<'PY'
 import json, os, sys

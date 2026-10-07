@@ -83,12 +83,15 @@ public class SecurityConfig {
         return http.build();
     }
 
-    /** Public user guide ({@code /guide/**}): read-only, no authentication, stateless, no cookie; the controller sets the cache headers. */
+    /**
+     * Public pages: the user guide ({@code /guide/**}) and the APK download page ({@code /telecharger/**}). Read-only, no authentication,
+     * stateless, no cookie; the controllers set the cache headers; same strict CSP for both ({@link castbridge.server.guide.GuideController#CSP}).
+     */
     @Bean
     @Order(0)
     SecurityFilterChain guideChain(HttpSecurity http) throws Exception {
         http
-                .securityMatcher("/guide", "/guide/**")
+                .securityMatcher("/guide", "/guide/**", "/telecharger", "/telecharger/**")
                 .csrf(AbstractHttpConfigurer::disable)
                 .httpBasic(AbstractHttpConfigurer::disable)
                 .formLogin(AbstractHttpConfigurer::disable)

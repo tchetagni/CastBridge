@@ -13,9 +13,10 @@ import org.springframework.core.annotation.Order;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 import org.springframework.web.filter.OncePerRequestFilter;
+import org.springframework.web.util.UrlPathHelper;
 
 /**
- * Simple per-IP token bucket on /api, /dl and the admin login form (in memory: one server instance). A request
+ * Simple per-IP token bucket on /api, /dl, the public pages (/guide, /telecharger) and the admin login form (in memory: one server instance). A request
  * carrying the valid admin token is not limited. The client IP is the X-Forwarded-For set by the local nginx
  * (server.forward-headers-strategy=framework; the port is only published on 127.0.0.1).
  */
@@ -37,10 +38,19 @@ public class RateLimitFilter extends OncePerRequestFilter {
         this.json = json;
     }
 
+    /**
+     * The path as the controllers see it: percent-decoded, without ";params" and doubled slashes, context path removed. The raw request
+     * URI alone let "/%64l/…", "/%61pi/…" or "/%74elecharger" (a percent-encoded letter) past the limiter while Spring MVC still served them.
+     */
+    static String publicPath(HttpServletRequest req) {
+        return UrlPathHelper.defaultInstance.getPathWithinApplication(req);
+    }
+
     @Override
     protected boolean shouldNotFilter(HttpServletRequest req) {
-        String p = req.getRequestURI().substring(Math.min(req.getRequestURI().length(), req.getContextPath().length()));
+        String p = publicPath(req);
         return !(p.startsWith("/api/") || p.startsWith("/dl/") || p.startsWith("/v3/") || p.equals("/guide") || p.startsWith("/guide/")
+                || p.equals("/telecharger") || p.startsWith("/telecharger/")
                 || ("POST".equals(req.getMethod()) && (p.equals("/admin/login") || p.startsWith("/admin/licenses"))));
     }
 
