@@ -7,6 +7,16 @@ object CopyCauses {
     private const val STALLED = "Le disque de la TV ne répond plus (clé USB bloquée ou pleine) : débranchez-la puis rebranchez-la, puis relancez"
     private const val UNKNOWN = "La TV reçoit les blocs mais ne les enregistre pas (disque de la TV bloqué ou plein) : vérifiez sa clé USB puis relancez"
 
+    /** M6 : le texte d'une TV verrouillée (403 avec `locked`/`trial`) : ce n'est PAS « code requis ». */
+    const val LOCKED = "La TV est verrouillée (édition d'essai ou non activée) : activez CastBridge-TV puis relancez"
+
+    /** M6 : l'assembleur a été fermé en parallèle (`closeIdle`, une autre voie, la fin de session) : une écriture interrompue, jamais une panne de disque. */
+    fun isClosedChannel(e: Throwable?): Boolean {
+        var t = e; var depth = 0
+        while (t != null && depth++ < 6) { if (t is java.nio.channels.ClosedChannelException) return true; t = t.cause }
+        return false
+    }
+
     /** Un même bloc renvoyé plusieurs fois, rien de confirmé : [cause] est celle que la TV a donnée (`stalled`), ou null. */
     fun noConfirm(cause: String?): String = if (cause == "stalled") STALLED else UNKNOWN
 }

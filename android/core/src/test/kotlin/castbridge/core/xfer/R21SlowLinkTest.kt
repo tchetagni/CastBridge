@@ -105,9 +105,39 @@ class R21SlowLinkTest {
         assertTrue("disque de la TV" in r.reason && "relancez" in r.reason, r.reason)
     }
 
-    @Test fun busyWithoutKnownCauseStillStopsWithAClearMessage() {
-        val r = runWith(laneOf { Outcome.Busy(500) })
-        assertEquals(CopyCauses.noConfirm(null), (r as Scheduler.Result.Failed).reason)
+    /** H2: a 429 of flow regulation (no cause, TV 0.14.39 or a throttled stream) is NOT a stalled disk: never counted, never a failure. */
+    @Test fun busyWithoutCauseNeverCountsAsAResend() {
+        val n = AtomicInteger()
+        val r = runWith(laneOf { if (n.incrementAndGet() <= 40) Outcome.Busy(500) else Outcome.Ok(MIB) })
+        assertEquals(Scheduler.Result.Done, r)
+    }
+
+    private fun slowBlockPlusBusy(cause: String?): Scheduler.Result {
+        val m = Manifest("a.bin", 2 * MIB, MIB.toInt()); val ns = AtomicLong()
+        val slowStarted = AtomicInteger(); val slowDone = java.util.concurrent.atomic.AtomicBoolean(false)
+        val lane = object : Lane {
+            override val id = "wifi"; override val maxWorkers = 2; override val sent = AtomicLong()
+            override fun send(worker: Int, idx: Int, ctx: SendContext): Outcome {
+                if (worker == 0) {                                  // 200 s simulated, bytes written all along, nothing confirmed before the end
+                    slowStarted.incrementAndGet()
+                    repeat(200) { ctx.onBytes(5_000); ns.addAndGet(1_000_000_000L); Thread.sleep(1) }
+                    slowDone.set(true); return Outcome.Ok(MIB)
+                }
+                return if (slowStarted.get() > 0 && !slowDone.get()) Outcome.Busy(500, cause) else Outcome.Ok(MIB)
+            }
+        }
+        return Scheduler(m, BlockMap(m.blocks), listOf(lane), { c -> SendContext(m, Src, HashBook(m, Src), c, false) },
+            clock = { ns.get() }, sleepMs = { ns.addAndGet(it * 1_000_000); Thread.sleep(1) }).run { false }
+    }
+
+    /** H2: a slow block still being written while another worker is throttled (429 of regulation, no cause) is not « la TV ne les enregistre pas ». */
+    @Test fun slowBlockInFlightPlusRegulation429OnAnotherWorkerIsNoFailure() {
+        assertEquals(Scheduler.Result.Done, slowBlockPlusBusy(null))
+    }
+
+    /** H2: even a « stalled » answer elsewhere is no failure while bytes of another block keep being written (written counts as progress). */
+    @Test fun writtenBytesCountAsProgress() {
+        assertEquals(Scheduler.Result.Done, slowBlockPlusBusy("stalled"))
     }
 
     @Test fun twoBusyAnswersThenAConfirmationIsNotAFailure() {
@@ -127,6 +157,24 @@ class R21SlowLinkTest {
         assertTrue(statusOutcome(429, """{"error":"busy","retryMs":300}""", 0).let { it is Outcome.Busy && it.cause == null })
         assertTrue(statusOutcome(503, """{"error":"volume read-only"}""", 0).let { it is Outcome.Failed && !it.fatal })
         assertTrue("lecture seule" in CopyCauses.READONLY && "TV ne peut pas écrire" in CopyCauses.IO)
+    }
+
+    /** M6 : un assembleur fermé en parallèle est une écriture interrompue (503 interrupted, retry), jamais un 500 « io » fatal. */
+    @Test fun closedAssemblerIsTransientNotAFatalDiskError() {
+        assertTrue(CopyCauses.isClosedChannel(java.nio.channels.ClosedChannelException()))
+        assertTrue(CopyCauses.isClosedChannel(java.io.IOException("x", java.nio.channels.AsynchronousCloseException())), "dans la chaîne des causes")
+        assertFalse(CopyCauses.isClosedChannel(java.io.IOException("EIO"))); assertFalse(CopyCauses.isClosedChannel(null))
+        val o = statusOutcome(503, """{"error":"interrupted","cause":"interrupted","retry":true,"retryMs":1000}""", 0)
+        assertTrue(o is Outcome.Busy && o.retryMs == 1000L && o.cause == null, o.toString())
+    }
+
+    /** LOW : le 403 d'une TV verrouillée n'est pas « code requis ». */
+    @Test fun lockedTvIsNotCodeRequired() {
+        val locked = statusOutcome(403, """{"error":"édition d'essai","trial":true}""", 0)
+        assertTrue(locked is Outcome.Failed && locked.reason == CopyCauses.LOCKED, locked.toString())
+        assertFalse(castbridge.core.trust.LinkRefusalTexts.isCodeRequired(CopyCauses.LOCKED))
+        val pin = statusOutcome(403, """{"error":"pin required"}""", 0) as Outcome.Failed
+        assertTrue(castbridge.core.trust.LinkRefusalTexts.isCodeRequired(pin.reason))
     }
 
     // ---- la TV : disque bloqué, voies et sessions ----

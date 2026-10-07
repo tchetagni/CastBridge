@@ -136,7 +136,17 @@ class CopyTuningTest {
         assertEquals(false, RecoveryCandidates.declaresCastBridge(listOf("0000110b-0000-1000-8000-00805f9b34fb")))   // écouteurs : A2DP
         assertNull(RecoveryCandidates.declaresCastBridge(null)); assertNull(RecoveryCandidates.declaresCastBridge(emptyList()))
         assertTrue(RecoveryCandidates.eligible(true, false)); assertTrue(RecoveryCandidates.eligible(false, true)); assertTrue(RecoveryCandidates.eligible(null, true))
-        assertFalse(RecoveryCandidates.eligible(false, false)); assertFalse(RecoveryCandidates.eligible(null, false), "HOCO Y12 Ultra")
+        assertFalse(RecoveryCandidates.eligible(false, false), "services étrangers sans CastBridge : écouteurs, voiture")
+    }
+
+    /** M3 : une vraie TV aux services inconnus (cache SDP vide) est retrouvée ; un appareil muet n'est pas rappelé en boucle. */
+    @Test fun unknownServicesAreEligibleButBackedOff() {
+        assertTrue(RecoveryCandidates.eligible(null, false), "TV appairée avant que le service écoute")
+        var now = 0L
+        val b = UntrustedBackoff({ now })
+        assertTrue(b.mayTry("hoco")); b.onNoAnswer("HOCO")
+        assertFalse(b.mayTry("hoco")); now = 30_000; assertTrue(b.mayTry("hoco"))
+        b.onNoAnswer("hoco"); now += 59_999; assertFalse(b.mayTry("hoco"))
     }
 
     // ---- le code demandé dans la boite d'envoi

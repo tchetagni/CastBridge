@@ -10,8 +10,12 @@ import castbridge.core.tv.BtProtocol
 object RecoveryCandidates {
     const val UUID_PREFIX = "7c5e3b9a-4d2f-4c61-9b0e-cb00000000"
     fun declaresCastBridge(uuids: Collection<String>?): Boolean? = if (uuids.isNullOrEmpty()) null else uuids.any { it.lowercase().startsWith(UUID_PREFIX) }
-    /** [declares] : services lus (true = CastBridge, false = autre chose, null = pas encore connus : on ne devine pas). */
-    fun eligible(declares: Boolean?, registered: Boolean): Boolean = declares == true || registered
+    /**
+     * [declares] : services lus (true = CastBridge, false = services étrangers SANS l'UUID CastBridge, null = inconnus : cache SDP vide, TV appairée avant que
+     * son service écoute). M3 (audit 2026-10-07) : « inconnu » est ÉLIGIBLE (une vraie TV ne doit pas être perdue après une réinstallation) ; la
+     * protection contre les écouteurs sans UUID repose sur [UntrustedBackoff.onNoAnswer] (30 s, 1 min, 5 min), pas sur l'exclusion.
+     */
+    fun eligible(declares: Boolean?, registered: Boolean): Boolean = declares != false || registered
 }
 
 /**
@@ -34,6 +38,12 @@ class UntrustedBackoff(private val now: () -> Long, private val stepsMs: LongArr
         s.nextAt = now() + stepsMs[s.count.coerceAtMost(stepsMs.size - 1)]
         s.count++
         return first
+    }
+    /** M3 : un appareil aux services inconnus qui n'a pas répondu comme une TV (écouteurs…) : même rythme que le refus, mais sans message à l'écran. */
+    @Synchronized fun onNoAnswer(address: String) {
+        val s = state.getOrPut(TrustRegistry.norm(address)) { S(0, 0) }
+        s.nextAt = now() + stepsMs[s.count.coerceAtMost(stepsMs.size - 1)]
+        s.count++
     }
     /** La TV reconnaît de nouveau ce téléphone (code saisi, connecté) : on oublie les refus. */
     @Synchronized fun clear(address: String) { state.remove(TrustRegistry.norm(address)) }

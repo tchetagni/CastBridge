@@ -74,6 +74,7 @@ object LinkRefusalTexts {
         if (reason == null) return false
         if (KNOWN_CODES.any { asksPin(it) && reason == ticket(it) }) return true
         val r = reason.lowercase()
+        if ("verrouillée" in r || "locked" in r) return false      // a locked TV (403 with `locked`/`trial`): activation, not the TV's code
         return "autorisation de la tv" in r || "code pin" in r || "pinrequired" in r || "(401)" in r || "(403)" in r || "jeton" in r && "refus" in r
     }
 }

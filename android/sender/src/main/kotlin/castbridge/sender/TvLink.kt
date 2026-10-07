@@ -182,6 +182,8 @@ object TvLinkManager {
                         return@let
                     }
                     if (r is PhoneLink.Result.Refused && r.code == castbridge.core.tv.BtProtocol.ERR_UNTRUSTED) continue
+                    // M3: a device whose services are unknown and that did not answer as a TV is asked again only after 30 s, 1 min, 5 min
+                    if (!c.sure && r !is PhoneLink.Result.Connected) untrustedBackoff.onNoAnswer(tv.address)
                     Log.i(TAG, "reprise de ${c.name}: ${r?.javaClass?.simpleName}" + ((r as? PhoneLink.Result.Refused)?.let { " code ${it.code} (${castbridge.core.tv.BtProtocol.describe(it.code)}) indice ${it.hint}" } ?: ""))
                     if (r is PhoneLink.Result.Connected) {
                         saved.upsert(r.session.tv, makeDefault = true)

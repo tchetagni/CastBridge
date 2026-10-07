@@ -6,15 +6,19 @@ package castbridge.core.device
  * d'avant ce profil (aucune régression sur une TV normale). Voir docs/TV-RESSOURCES-FAIBLES.md.
  *
  * Entrées inconnues : 0 (RAM, heap, memoryClass) = on ne sait pas, ce critère ne compte pas.
- * Économe si l'UN de ces critères est vrai : le système se déclare « low RAM » ; RAM totale connue <= [LOW_RAM_BYTES] (768 Mo : un boîtier 512 Mo
- * annonce ~450-500 Mo) ; heap d'application (memoryClass) connu <= [LOW_HEAP_MB] (96 Mo) ; 32 bits avec 1 ou 2 coeurs et <= 1 Go de RAM.
- * Le 32 bits seul ne suffit pas : une TV 32 bits de 1 Go à 192 Mo de heap et 4 coeurs reste NORMALE.
+ * Économe si l'UN de ces critères est vrai : RAM totale connue <= [LOW_RAM_BYTES] (768 Mo : un boîtier 512 Mo annonce ~450-500 Mo) ;
+ * heap d'application (memoryClass) connu <= [LOW_HEAP_MB] (96 Mo) ; 32 bits avec 1 ou 2 coeurs et <= 1 Go de RAM.
+ * Le drapeau `isLowRamDevice` SEUL ne suffit plus (audit 2026-10-07) : la TV de référence (SMART_TV GaiaOS : `ro.config.low_ram=true`, heapgrowthlimit
+ * 160 Mo, heapsize 224 Mo, RAM 981 Mo, 4 coeurs, 32 bits) est NORMALE (« NORMAL = comportement d'avant »), avec seulement un cache de vignettes réduit.
+ * Le 32 bits seul ne suffit pas non plus : une TV 32 bits de 1 Go à 192 Mo de heap et 4 coeurs reste NORMALE.
  */
 class ResourceProfile private constructor(
     val economy: Boolean,
     val ramBytes: Long,
     val heapBytes: Long,
     val is64Bit: Boolean,
+    /** M2 : le système se déclare « low RAM » (`ro.config.low_ram`) : seul, ce drapeau ne rend PAS économe, il réduit seulement le cache de vignettes. */
+    val lowRamFlag: Boolean = false,
 ) {
     /** Valeur du champ optionnel `profile` de `/api/transfer/caps` : « low » ou « normal ». Une TV ancienne sans champ = normal. */
     val capsName: String get() = if (economy) "low" else "normal"
@@ -32,7 +36,8 @@ class ResourceProfile private constructor(
     val writeBufferBytes: Int get() = if (economy) 128 * 1024 else 256 * 1024
 
     /** Cache LRU des vignettes décodées, EN OCTETS : 4 Mo sinon (valeur d'avant) ; en économe 1/8 du heap, entre 1 et 3 Mo. */
-    val thumbCacheBytes: Long get() = if (!economy) 4L shl 20 else (heapBytes / 8).coerceIn(1L shl 20, 3L shl 20)
+    val thumbCacheBytes: Long get() =
+        if (economy || (lowRamFlag && heapBytes > 0)) (heapBytes / 8).coerceIn(1L shl 20, 3L shl 20) else 4L shl 20
 
     /** Fiches gardées en mémoire par la base de la bibliothèque (`LibraryDb.maxEntries`) : 500 en économe, 2000 sinon. */
     val libraryEntries: Int get() = if (economy) 500 else 2000
@@ -77,8 +82,8 @@ class ResourceProfile private constructor(
             val ram = ramTotalBytes.coerceAtLeast(0)
             val heap = if (heapBytes > 0) heapBytes else memoryClassMb.coerceAtLeast(0).toLong() shl 20
             val slow32 = !is64Bit && cores in 1..2 && ram in 1..ONE_GB
-            val low = isLowRamDevice || ram in 1..LOW_RAM_BYTES || memoryClassMb in 1..LOW_HEAP_MB || slow32
-            return ResourceProfile(low, ram, heap, is64Bit)
+            val low = ram in 1..LOW_RAM_BYTES || memoryClassMb in 1..LOW_HEAP_MB || slow32
+            return ResourceProfile(low, ram, heap, is64Bit, isLowRamDevice)
         }
 
         /** Tout inconnu : normal (comportement d'avant). */

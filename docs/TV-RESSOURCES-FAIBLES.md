@@ -6,7 +6,7 @@ Cibles : toutes sortes de TV, dont des boîtiers de 512 Mo de RAM, Android 32 bi
 
 Entrées : RAM totale, `memoryClass`, `isLowRamDevice`, nombre de coeurs, 32/64 bits (+ `Runtime.maxMemory()`). Lues une fois par `ResourceProfiles` (receiver) ; une lecture qui échoue = inconnu = comportement d'avant.
 
-**ÉCONOME** si l'un de ces critères est vrai : `isLowRamDevice` ; RAM totale connue <= 768 Mo (un boîtier « 512 Mo » annonce ~450-500 Mo) ; `memoryClass` connu <= 96 Mo ; 32 bits avec 1 ou 2 coeurs et <= 1 Go. Sinon **NORMAL**. Une TV 32 bits de 1 Go à 4 coeurs et 192 Mo de heap reste NORMALE (aucune régression).
+**ÉCONOME** si l'un de ces critères est vrai : RAM totale connue <= 768 Mo (un boîtier « 512 Mo » annonce ~450-500 Mo) ; `memoryClass` connu <= 96 Mo ; 32 bits avec 1 ou 2 coeurs et <= 1 Go. Sinon **NORMAL**. Le drapeau `isLowRamDevice` (`ro.config.low_ram`) SEUL ne rend plus économe (audit 2026-10-07, R-27) : avec RAM > 768 Mo et heap > 96 Mo il donne NORMAL, avec pour seule différence un cache de vignettes réduit (heap/8, entre 1 et 3 Mo au lieu de 4 Mo). **Mesuré sur la TV de référence (SMART_TV, GaiaOS)** : `ro.config.low_ram=true`, `dalvik.vm.heapgrowthlimit=160m`, `heapsize=224m`, RAM 981 Mo, 4 coeurs, 32 bits ⇒ NORMAL (test `ResourceProfileTest.referenceTvMeasuredValuesAreNormalWithASmallerThumbCache`) ; un boîtier de 512 Mo ⇒ ÉCONOME. Une TV 32 bits de 1 Go à 4 coeurs et 192 Mo de heap reste NORMALE (aucune régression).
 
 | Borne | Économe | Normal (= avant) | Pourquoi |
 |---|---|---|---|

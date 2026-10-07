@@ -58,7 +58,7 @@ class ResourceProfileTest {
     }
 
     @Test fun eachCriterionAloneMakesItEconomical() {
-        assertTrue(ResourceProfile.decide(0, 0, true, 8, true).economy)                       // isLowRamDevice
+        assertFalse(ResourceProfile.decide(0, 0, true, 8, true).economy)                      // isLowRamDevice SEUL : plus économe (M2)
         assertTrue(ResourceProfile.decide(768 * MB, 0, false, 8, true).economy)               // RAM <= 768 Mo
         assertFalse(ResourceProfile.decide(769 * MB, 0, false, 8, true).economy)
         assertTrue(ResourceProfile.decide(0, 96, false, 8, true).economy)                     // memoryClass <= 96
@@ -66,6 +66,16 @@ class ResourceProfileTest {
         assertTrue(ResourceProfile.decide(1024 * MB, 192, false, 2, false).economy)           // slow 32-bit with 2 cores and 1 Go
         assertFalse(ResourceProfile.decide(1024 * MB, 192, false, 4, false).economy)          // reference-like 1 Go TV with 4 cores stays normal
         assertFalse(ResourceProfile.decide(2048 * MB, 192, false, 2, false).economy)          // more RAM: not the 32-bit rule
+    }
+
+    /** M2 : valeurs MESURÉES sur la TV de référence (SMART_TV, GaiaOS) : le drapeau low_ram seul donne NORMAL, avec le seul cache de vignettes réduit. */
+    @Test fun referenceTvMeasuredValuesAreNormalWithASmallerThumbCache() {
+        val p = ResourceProfile.decide(ramTotalBytes = 981 * MB, memoryClassMb = 160, isLowRamDevice = true, cores = 4, is64Bit = false, heapBytes = 224 * MB)
+        assertFalse(p.economy)
+        assertEquals(6, p.maxStreams); assertEquals(8, p.httpThreads); assertEquals(64 * 1024, p.receiveBufferBytes)
+        assertEquals(3 * MB, p.thumbCacheBytes, "heap/8 borné, plus petit que les 4 Mo d'avant")
+        assertTrue(ResourceProfile.decide(512 * MB, 160, true, 4, false, 224 * MB).economy, "512 Mo : économe")
+        assertEquals(4 * MB, ResourceProfile.decide(981 * MB, 160, false, 4, false, 224 * MB).thumbCacheBytes, "sans le drapeau : 4 Mo d'avant")
     }
 
     @Test fun thumbCacheFollowsTheHeapInsideBounds() {

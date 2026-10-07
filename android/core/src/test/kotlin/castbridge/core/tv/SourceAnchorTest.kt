@@ -17,7 +17,20 @@ class SourceAnchorTest {
         assertEquals(Anchor.PERSISTED, SourceAnchor.choose(f(persisted = true, media = true)))
         assertEquals(Anchor.MEDIASTORE, SourceAnchor.choose(f(media = true)))
         assertEquals(Anchor.CACHE, SourceAnchor.choose(f()))
-        assertEquals(Anchor.RESHARE, SourceAnchor.choose(f(free = 1 * GB)))
+        assertEquals(Anchor.VOLATILE, SourceAnchor.choose(f(free = 1 * GB)))
+    }
+
+    /** H1: a file that cannot be anchored (unknown size, 1,5 Go with 4 Go free, over 2 Go) is NOT refused in advance: the queue sends it. */
+    @Test fun unanchorableFileIsSentNotReshared() {
+        for (size in listOf(0L, 1536 * MB, 3 * GB)) {
+            assertEquals(Anchor.VOLATILE, SourceAnchor.choose(f(size = size, free = 4 * GB)), "size=$size")
+            val m = TransferQueueModel(store = MemoryQueueStore())
+            val a = m.enqueue("content://org.telegram.messenger.provider/a", "a.mp4", size, false)
+            m.setAnchor(a.id, Anchor.VOLATILE)
+            assertTrue(m.toReshare().isEmpty(), "pas à repartager d'avance")
+            assertEquals(a.id, m.next()!!.id, "l'envoi part")
+        }
+
     }
 
     @Test fun cacheCopyBounds() {

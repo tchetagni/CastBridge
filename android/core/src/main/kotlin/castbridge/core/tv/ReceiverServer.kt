@@ -1133,7 +1133,7 @@ class ReceiverServer(
         try {
             val a = sess.assembler
             val r = playback.receive(sess.manifest.name, v?.id).use { rx ->
-                p["slice"]?.let { k -> a.writeSlice(idx, k.toIntOrNull() ?: return bad("bad slice"), sha, s.inputStream, len) }
+                p["slice"]?.let { k -> lane?.touch(); a.writeSlice(idx, k.toIntOrNull() ?: return bad("bad slice"), sha, s.inputStream, len) }
                     ?: a.writeBlock(idx, sha, s.inputStream, len, s.headers["x-cb-enc"].equals("gzip", true), pace = { n -> lane?.touch(); rx.onBytes(n) }, readCap = rx::readCap)
             }
             return when (r) {
@@ -1249,6 +1249,8 @@ class ReceiverServer(
     /** Why a disk write failed: drive pulled (503, retry), read-only (503), file too big for the FS (413), no space (507). */
     private fun diskFailure(v: StorageVolume, e: DiskError): Response {
         val msg = e.message.orEmpty()
+        // M6: the assembler was closed in parallel (closeIdle, another lane): the phone retries, it is not a disk failure
+        if (castbridge.core.xfer.CopyCauses.isClosedChannel(e)) return json(SERVICE_UNAVAILABLE, """{"error":"interrupted","cause":"interrupted","retry":true,"retryMs":1000}""")
         if (!volumes.store(v).reachable() || msg == "volume removed" || !volumes.alive(v)) {
             volumes.markRemoved(v.id); return removed()
         }

@@ -45,6 +45,7 @@ internal class ChunkClient(val host: String, val id: String, private val credent
 internal fun statusOutcome(status: Int, body: String, bytes: Long): Outcome = when {
     // R-21 : la TV dit que son écriture échoue (champ optionnel `cause`, une TV 0.14.39 ne l'envoie pas) : on s'arrête avec la raison, on ne renvoie pas
     status != 200 && "\"cause\":\"readonly\"" in body -> Outcome.Failed(CopyCauses.READONLY, fatal = true)
+    status == 503 && "\"cause\":\"interrupted\"" in body -> Outcome.Busy(Regex("\"retryMs\":(\\d+)").find(body)?.groupValues?.get(1)?.toLongOrNull() ?: 1000)   // M6: transient, retried
     status != 200 && "\"cause\":\"io\"" in body -> Outcome.Failed(CopyCauses.IO, fatal = true)
     status == 429 && "\"cause\":\"stalled\"" in body -> Outcome.Busy(Regex("\"retryMs\":(\\d+)").find(body)?.groupValues?.get(1)?.toLongOrNull() ?: 2000, "stalled")
     status == 200 -> if ("\"already\":true" in body) Outcome.Already else Outcome.Ok(bytes)
@@ -52,6 +53,8 @@ internal fun statusOutcome(status: Int, body: String, bytes: Long): Outcome = wh
     status == 429 -> Outcome.Busy(Regex("\"retryMs\":(\\d+)").find(body)?.groupValues?.get(1)?.toLongOrNull() ?: 200)
     status == 404 -> Outcome.SessionLost
     status == 401 -> Outcome.Failed("Autorisation de la TV expirée : reconnectez le téléphone à la TV (401)", fatal = true)
+    // LOW: a locked TV (trial edition / not activated) says `trial` or `locked`: that is not « code requis »
+    status == 403 && ("\"trial\":true" in body || "\"locked\"" in body) -> Outcome.Failed(CopyCauses.LOCKED, fatal = true)
     status == 403 -> Outcome.Failed("autorisation refusée par la TV (403)", fatal = true)
     status == 507 || status == 413 -> Outcome.Failed("la TV n'a plus de place ($status)", fatal = true)
     // a 400 that says « interrupted » / retry (TV 0.14.25-26 answered it for a stalled read) is a link problem, not a refusal
