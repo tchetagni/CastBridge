@@ -13,6 +13,9 @@ import castbridge.play.entitlement.RevocationsFeed
 import castbridge.play.entitlement.TicketVerifier
 import castbridge.play.entitlement.TrustedIssuers
 import castbridge.play.guard.PlayGuard
+import castbridge.play.stake.EscrowGate
+import castbridge.play.stake.ResultKey
+import castbridge.play.stake.ResultSpool
 import java.io.File
 import java.io.IOException
 import java.net.InetAddress
@@ -46,7 +49,16 @@ class PlayServer(
     private val feed = RevocationsFeed(trusted.ring, cfg.revocationsUrl?.let { RevocationsFeed.httpFetcher(it) } ?: { null }, file = cfg.revocationsFile)
     /** La banque libre du service SANS les ids réservables, et les paquets réservés lus à la demande (w20-04). */
     private val reserved = ReservedBank(bank ?: loadBank(cfg.lotsDir), DirReservedSource(cfg.reservedDir), ReservedBank.readIds(cfg.reservedIdsFile))
-    val hub = PlayHub(cfg, clock, reserved.freeBank, verifier, random, roomScope, settings, limits, reserved, feed::current, revocationsReady = { cfg.revocationsMode == RevocationsMode.OFF || feed.usable() }).also { it.guard = guard }   // fermé : plus de « adresse absente ⇒ prêt » (w20-04b)
+    /**
+     * Les mises (games-G2) : actives SEULEMENT si l'interrupteur est allumé, qu'au moins une clé PUBLIQUE « portefeuille » est lisible ET que la clé « résultat » (la seule clé privée du service) se charge.
+     * Sinon, `STAKES_SUSPENDED` pour les salles misées ; les parties libres et le Quiz ne changent pas.
+     */
+    private val stakes: StakeServices? = if (!cfg.stakes) null else {
+        val gate = EscrowGate(cfg.walletPubKeys, cfg.stakeMaxNdem, cfg.stakeMaxMboko)
+        val signer = ResultKey.load(cfg.resultKeyFile)
+        if (gate.configured && signer != null) StakeServices(gate, signer, ResultSpool(cfg.resultsDir)) else null
+    }
+    val hub = PlayHub(cfg, clock, reserved.freeBank, verifier, random, roomScope, settings, limits, reserved, feed::current, revocationsReady = { cfg.revocationsMode == RevocationsMode.OFF || feed.usable() }, stakes = stakes).also { it.guard = guard }   // fermé : plus de « adresse absente ⇒ prêt » (w20-04b)
     private val fallback = PlayFallbackController(cfg, hub, limits, verifier, origin)
     private val pages = PlayPageController(cfg.webPlay)
     private val health = HealthController(cfg, hub, limits, revocations = { if (cfg.revocationsMode == RevocationsMode.OFF) "disabled" else feed.status() })
@@ -67,6 +79,9 @@ class PlayServer(
         trusted.warnings.forEachIndexed { i, w -> guard.log.event("play.config.warning.$i", w, level = "warn") }
         // le mode `off` des révocations est VISIBLE : journal au démarrage, santé « disabled » (une TV révoquée peut encore créer et rejoindre)
         if (cfg.revocationsMode == RevocationsMode.OFF) guard.log.event("play.config.revocations_off", "ATTENTION : révocations désactivées (CASTBRIDGE_PLAY_REVOCATIONS=off) : POC seulement, une TV révoquée n'est pas refusée", level = "warn")
+        // les mises suspendues par défaut de clé sont DITES au démarrage (jamais un échec silencieux) ; aucune matière de clé dans le journal
+        if (cfg.chess && cfg.stakes && stakes == null) guard.log.event("play.config.stakes_off", "Mises suspendues : clé publique du portefeuille (CASTBRIDGE_PLAY_WALLET_PUBKEY) ou clé de résultat (CASTBRIDGE_PLAY_RESULT_KEY_FILE) absente ou illisible ; les parties libres restent ouvertes", level = "warn")
+        else if (cfg.chess && stakes != null) guard.log.event("play.config.stakes_on", "Mises actives : blocages vérifiés par clé publique, résultats signés par la clé dédiée du service")
         ticker.start()
         if (cfg.revocationsUrl != null) Thread.ofPlatform().name("play-revocations").daemon(true).start { refreshRevocations() }
         Thread.ofPlatform().name("play-accept").daemon(true).start { acceptLoop() }
@@ -157,6 +172,8 @@ class PlayServer(
         hub.startDrain()
         val end = System.currentTimeMillis() + graceMs
         while (System.currentTimeMillis() < end && hub.connectionsOpen() > 0) Thread.sleep(50)
+        // parties d'échecs misées encore en cours : chacune produit son ABORT (mises rendues), envoyé aux TV et déposé pour le collecteur, avant que les connexions ne tombent
+        if (hub.finishGames("DRAIN") > 0) Thread.sleep(300)
         close()
     }
 

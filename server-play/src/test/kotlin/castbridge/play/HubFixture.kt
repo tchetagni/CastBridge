@@ -38,8 +38,9 @@ object HubFixture {
     }
 
     fun hub(cfg: PlayConfig = config(), verifier: TicketVerifier = TicketVerifier(listOf(TestKeys.pub)), reserved: ReservedBank? = null, bank: QuizBank = this.bank,
-            settings: castbridge.core.quiz.online.ServerRoom.Settings = castbridge.core.quiz.online.ServerRoom.Settings(), ready: () -> Boolean = { true }): PlayHub =
-        PlayHub(cfg, System::currentTimeMillis, reserved?.freeBank ?: bank, verifier, settings = settings, limits = ConnectionLimits(100_000, 100_000), reserved = reserved, revocationsReady = ready)
+            settings: castbridge.core.quiz.online.ServerRoom.Settings = castbridge.core.quiz.online.ServerRoom.Settings(), ready: () -> Boolean = { true },
+            stakes: StakeServices? = null, clock: () -> Long = System::currentTimeMillis): PlayHub =
+        PlayHub(cfg, clock, reserved?.freeBank ?: bank, verifier, settings = settings, limits = ConnectionLimits(100_000, 100_000), reserved = reserved, revocationsReady = ready, stakes = stakes)
 
     /** `hello` (ticket) puis `create` (activation) sur [c] ; rend la connexion. */
     fun open(hub: PlayHub, ticket: String?, create: ClientMsg.Create = TestRights.create(), c: TestConn = TestConn()): TestConn {
