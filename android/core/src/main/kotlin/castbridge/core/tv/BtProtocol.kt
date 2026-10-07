@@ -93,7 +93,9 @@ object BtProtocol {
     //   0005 owner channel (CBTO: activation, signed orders)                    "CastBridge Owner"    castbridge.core.owner.OwnerFrames.SERVICE_UUID
     //   0006 RESERVED: the synchronisation channel of W7 (designed, not built)  ([RESERVED_NUMBERS])
     //   0007 Internet gateway (CBG1: SOCKS5 on the TV, exit on the phone)       "CastBridge Internet" GATEWAY_SERVICE_UUID (R-28: it used to share …0002 with the SSH tunnel)
-    //   0008 and up: free
+    //   0008 activation WITHOUT pairing (CBTA: CPace PAKE on the connection code, then AES-GCM)  "CastBridge Activation" ACTIVATION_SERVICE_UUID. Also the BLE service UUID the TV advertises
+    //        while its activation screen is open (castbridge.core.btact.BtActAd). RFCOMM « insecure » (no pairing box): the code, not Android's pairing, authenticates.
+    //   0009 and up: free
 
     /** RFCOMM service UUID shared by the TV and the phone app. */
     const val SERVICE_UUID = "7c5e3b9a-4d2f-4c61-9b0e-cb0000000001"
@@ -108,6 +110,12 @@ object BtProtocol {
      * [castbridge.core.gateway.GatewayService] for how an old TV or an old phone still meets it there for two versions.
      */
     const val GATEWAY_SERVICE_UUID = "7c5e3b9a-4d2f-4c61-9b0e-cb0000000007"
+    /**
+     * Eighth service (act-bt, DESIGN-ACTIVATION-SIMPLE § 7): activation of a LOCKED TV from the connection code alone, with NO pairing. The TV advertises this UUID over BLE while its activation screen is
+     * open and listens on it with an INSECURE RFCOMM socket (and an insecure L2CAP channel where Android has one); every connection runs a PAKE on the code ([castbridge.core.btact]) then an encrypted
+     * channel that carries the device request and the key. Never started on an activated TV.
+     */
+    const val ACTIVATION_SERVICE_UUID = "7c5e3b9a-4d2f-4c61-9b0e-cb0000000008"
 
     /** One entry of [SERVICES]: [number] = the last two digits of the UUID, [sdpName] = the service name the TV registers with its UUID. */
     class Service(val number: Int, val uuid: String, val sdpName: String, val use: String) {
@@ -122,6 +130,7 @@ object BtProtocol {
         Service(4, API_MUX_SERVICE_UUID, "CastBridge API v2", "HTTP API tunnel, one shared link"),
         Service(5, castbridge.core.owner.OwnerFrames.SERVICE_UUID, "CastBridge Owner", "owner channel CBTO"),
         Service(7, GATEWAY_SERVICE_UUID, "CastBridge Internet", "Internet gateway CBG1"),
+        Service(8, ACTIVATION_SERVICE_UUID, "CastBridge Activation", "activation without pairing CBTA (BLE + PAKE)"),
     )
 
     /** Numbers kept free on purpose (a design uses them, no code yet): 6 = the synchronisation channel of W7 (docs/coordination/DESIGN-W7-PLUG-AND-PLAY-SYNC.md). */

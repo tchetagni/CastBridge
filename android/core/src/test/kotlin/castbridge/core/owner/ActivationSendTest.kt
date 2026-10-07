@@ -39,44 +39,25 @@ class ActivationSendTest {
         assertTrue(ActivationSend.sendLan({ _, _, _, _ -> throw IOException("down") }, "k").linkDown)
     }
 
-    // ---- « Activer par le Wi-Fi » a TV the phone has never been linked to (a locked TV announces itself on the Wi-Fi) ----
-    private val found = listOf(ActivationSend.Found("CastBridge TV salon", "http://192.168.1.21:8765", locked = true), ActivationSend.Found("CastBridge TV chambre", "http://192.168.1.22:8765", locked = false))
-
-    @Test fun theLinkedTvComesFirstThenTheTvTheCustomerTouched() {
-        assertEquals(base to "812345", ActivationSend.lanTarget(base to "812345", found, null))
-        assertEquals("http://192.168.1.22:8765" to null, ActivationSend.lanTarget(null, found, "http://192.168.1.22:8765"))
-        assertEquals("http://192.168.1.21:8765" to null, ActivationSend.lanTarget(null, found, "http://192.168.1.21:8765"))
-        assertNull(ActivationSend.lanTarget(null, emptyList(), null))
-        // the phone's own Bluetooth gateway (127.0.0.1) is not the Wi-Fi
-        assertNull(ActivationSend.lanTarget(null, listOf(ActivationSend.Found("TV (Bluetooth)", "http://127.0.0.1:8766", false)), "http://127.0.0.1:8766"))
-        // a TV found but no code known: the code is asked, Bluetooth stays offered
-        assertEquals(Channel.LAN_ASKS_PIN, ActivationSend.choose(ActivationSend.lanTarget(null, found, "http://192.168.1.21:8765")!!.first, null, null).channel)
-    }
-
-    // ---- audit M2: never an automatic choice, never a public address ----
-
-    @Test fun noTvIsChosenAutomaticallyWhenThePhoneIsNotLinked() {
-        assertNull(ActivationSend.lanTarget(null, found, null), "even a TV announcing locked=1 must be touched by the customer")
-        assertNull(ActivationSend.lanTarget(null, listOf(found.first()), null), "even a single one")
-        assertNull(ActivationSend.lanTarget(null, found, "http://192.168.1.99:8765"), "a TV that is no longer announced")
-    }
+    // ---- « Activer par le Wi-Fi » une TV que le téléphone n'a jamais liée : la règle M2 (« la cliente touche la TV ») est REMPLACÉE par la règle du propriétaire du 2026-10-07 (« le code suffit »,
+    // DESIGN-ACTIVATION-SIMPLE § 7) : le téléphone interroge à tour de rôle toutes les TV verrouillées annoncées avec le code (ActivationRoutePlan.LanProbes, ActivationProbesTest) et n'envoie la clé qu'à la
+    // TV qui a répondu par une lecture sans effet. Restent ici les garde-fous d'adresse que cette règle utilise toujours. ----
 
     @Test fun onlyPrivateAddressesAreTargets() {
-        for (b in listOf("http://8.8.8.8:8765", "http://100.64.1.2:8765", "http://evil.example.com:8765", "http://192.168.1.21.evil.com:8765", "https://192.168.1.21:8765", "192.168.1.21:8765"))
-            assertNull(ActivationSend.lanTarget(null, listOf(ActivationSend.Found("TV", b, true)), b), b)
-        for (b in listOf("http://10.0.0.5:8765", "http://172.20.1.1:8765", "http://[fe80::1%wlan0]:8765", "http://fd12::5:8765"))
-            assertEquals(b to null, ActivationSend.lanTarget(null, listOf(ActivationSend.Found("TV", b, true)), b), b)
-        // a linked TV with a public address is refused too
-        assertNull(ActivationSend.lanTarget("http://8.8.8.8:8765" to "812345", found, null))
+        for (b in listOf("http://8.8.8.8:8765", "http://100.64.1.2:8765", "http://evil.example.com:8765", "http://192.168.1.21.evil.com:8765", "https://192.168.1.21:8765", "192.168.1.21:8765", "http://127.0.0.1:8766", "http://localhost:8765"))
+            assertFalse(ActivationSend.isLanTv(b), b)
+        for (b in listOf("http://10.0.0.5:8765", "http://172.20.1.1:8765", "http://[fe80::1%wlan0]:8765", "http://fd12::5:8765", "http://192.168.1.21:8765"))
+            assertTrue(ActivationSend.isLanTv(b), b)
         assertEquals("192.168.1.21", ActivationSend.hostOf("http://192.168.1.21:8765"))
         assertEquals("fe80::1%wlan0", ActivationSend.hostOf("http://[fe80::1%wlan0]:8765"))
         assertEquals("fd12::5", ActivationSend.hostOf("http://fd12::5:8765"))
         assertNull(ActivationSend.hostOf("ftp://192.168.1.21:8765"))
     }
 
-    @Test fun theScreenShowsTheTargetAddressNextToTheCode() {
-        assertEquals("TV 192.168.1.21", ActivationSend.targetLabel("http://192.168.1.21:8765"))
-        assertNull(ActivationSend.targetLabel(null))
+    @Test fun theHelpersOfTheReplacedM2RuleAreGoneAndNothingChoosesATvBehindTheBack() {
+        // audit I-4 : lanTarget / targetLabel n'avaient plus d'appelant et leur test restait vert sur une garde morte ; la règle vit dans ActivationRoutePlan (candidates / LanProbes.due / Found.base)
+        val names = ActivationSend::class.java.declaredMethods.map { it.name }
+        assertFalse("lanTarget" in names || "targetLabel" in names, names.toString())
     }
 
     // ---- audit M2: an announce with the same name from another address does not replace the TV silently ----

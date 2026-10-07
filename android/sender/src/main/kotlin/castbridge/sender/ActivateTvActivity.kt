@@ -170,20 +170,26 @@ class ActivateTvActivity : ComponentActivity() {
         var keyText by rememberSaveable { mutableStateOf("") }
         var fileNote by remember { mutableStateOf<String?>(null) }
         var askedNearby by remember { mutableStateOf(false) }
+        var permissionTick by remember { mutableStateOf(0) }
         var pendingCode by remember { mutableStateOf<String?>(null) }
         val focus = remember { FocusRequester() }
         val found = (run?.phase as? Phase.Connected)?.found
 
-        // permissions: « Appareils à proximité » is asked ONCE before the group is joined (Android 13+), and by a button for Bluetooth; nothing new in the manifest
-        val ask = rememberLauncherForActivityResult(ActivityResultContracts.RequestMultiplePermissions()) { pendingCode?.let { c -> pendingCode = null; driver.start(c) } }
+        // permissions: « Appareils à proximité » (Bluetooth: finding the TV without pairing, Android 12+; the location before; and the Wi-Fi network of the TV, Android 13+) is asked ONCE when the sixth digit
+        // is typed, with its sentence on screen above the system box ([ActivationRoutePlan.BLE_PERMISSION_WHY]); a button asks again after a refusal; nothing new in the manifest
+        val ask = rememberLauncherForActivityResult(ActivityResultContracts.RequestMultiplePermissions()) { permissionTick++; pendingCode?.let { c -> pendingCode = null; driver.start(c) } }
         fun missingPermissions(): Array<String> {
             val bt = TvBluetooth.missingPermissions(this@ActivateTvActivity).toList()
             val nearby = if (Build.VERSION.SDK_INT >= 33 && checkSelfPermission(android.Manifest.permission.NEARBY_WIFI_DEVICES) != android.content.pm.PackageManager.PERMISSION_GRANTED) listOf(android.Manifest.permission.NEARBY_WIFI_DEVICES) else emptyList()
             return (bt + nearby).toTypedArray()
         }
         fun begin(code: String) {
-            val nearbyMissing = Build.VERSION.SDK_INT >= 33 && checkSelfPermission(android.Manifest.permission.NEARBY_WIFI_DEVICES) != android.content.pm.PackageManager.PERMISSION_GRANTED
-            if (nearbyMissing && !askedNearby) { askedNearby = true; pendingCode = code; ask.launch(missingPermissions()) } else driver.start(code)
+            val missing = missingPermissions()
+            if (missing.isNotEmpty() && !askedNearby) { askedNearby = true; pendingCode = code; ask.launch(missing) } else driver.start(code)
+        }
+        val permissionWhy = remember(permissionTick) {
+            if (TvBluetooth.missingPermissions(this@ActivateTvActivity).isEmpty()) null
+            else ActivationRoutePlan.BLE_PERMISSION_WHY + (if (Build.VERSION.SDK_INT < 31) ". " + ActivationRoutePlan.BLE_PERMISSION_WHY_LOCATION else "")
         }
 
         val pickFile = rememberLauncherForActivityResult(ActivityResultContracts.OpenDocument()) { uri ->
@@ -237,6 +243,8 @@ class ActivateTvActivity : ComponentActivity() {
                     keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number, imeAction = ImeAction.Done),
                     supportingText = { Text("6 chiffres, affichés en gros sur l'écran d'activation de CastBridge-TV.") },
                     modifier = Modifier.fillMaxWidth().focusRequester(focus))
+                // act-bt: the sentence that goes with the permission box, shown once on screen as long as the permission is missing
+                permissionWhy?.let { Text(it, style = MaterialTheme.typography.bodySmall, color = cs.onSurfaceVariant) }
 
                 if (run != null && run.phase !is Phase.Idle) {
                     Column(verticalArrangement = Arrangement.spacedBy(4.dp)) {
@@ -264,7 +272,7 @@ class ActivateTvActivity : ComponentActivity() {
                             FlowRow(horizontalArrangement = Arrangement.spacedBy(8.dp), verticalArrangement = Arrangement.spacedBy(4.dp)) {
                                 Button({ begin(codeText) }, enabled = codeText.length == WdCode.DIGITS) { Text("Réessayer") }
                                 val causes = run.causes.values.map { it.kind }
-                                if (Cause.Kind.BT_PERMISSION in causes || Cause.Kind.GROUP_PERMISSION in causes)
+                                if (Cause.Kind.BT_PERMISSION in causes || Cause.Kind.GROUP_PERMISSION in causes || Cause.Kind.BLE_PERMISSION in causes)
                                     OutlinedButton({ askedNearby = false; pendingCode = codeText.takeIf { it.length == WdCode.DIGITS }; ask.launch(missingPermissions()) }) { Text("Autoriser") }
                                 if (Cause.Kind.WIFI_OFF in causes) OutlinedButton({ open(Intent(if (Build.VERSION.SDK_INT >= 29) Settings.Panel.ACTION_WIFI else Settings.ACTION_WIFI_SETTINGS)) }) { Text("Allumer le Wi-Fi") }
                                 if (Cause.Kind.BT_OFF in causes) OutlinedButton({ open(Intent(Settings.ACTION_BLUETOOTH_SETTINGS)) }) { Text("Allumer le Bluetooth") }
@@ -280,7 +288,8 @@ class ActivateTvActivity : ComponentActivity() {
                         Column(Modifier.padding(16.dp), verticalArrangement = Arrangement.spacedBy(8.dp)) {
                             val req = found.request
                             Text("TV trouvée : ${found.name}" + (req?.let { " · code d'appareil ${it.code}" } ?: ""), style = MaterialTheme.typography.titleMedium)
-                            Text("Jointe par : ${found.route.label}", style = MaterialTheme.typography.bodySmall, color = cs.onSurfaceVariant)
+                            // l'adresse de la TV qui a répondu (réseau local) : à comparer avec « TV 192.168… » sur l'écran d'activation de la TV (audit I-4)
+                            Text("Jointe par : ${found.route.label}" + (found.address()?.let { " · TV $it" } ?: ""), style = MaterialTheme.typography.bodySmall, color = cs.onSurfaceVariant)
                             if (req != null) {
                                 Text("Vérifiez que ce code d'appareil est bien celui de l'écran d'activation de la TV.", style = MaterialTheme.typography.bodySmall, color = cs.onSurfaceVariant)
                                 val share = LockedRequestRoute.shareText(req)

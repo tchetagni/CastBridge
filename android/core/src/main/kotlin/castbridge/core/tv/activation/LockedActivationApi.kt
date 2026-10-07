@@ -41,6 +41,11 @@ class LockedActivationApi(
     private val deviceRequest: () -> String? = { null },
     /** Told the ADDRESS (never the code) of every peer that presented the right code, on either route: the activation screen shows « téléphone relié ». A failing listener changes nothing. */
     private val onAuthorized: (String) -> Unit = {},
+    /**
+     * The attempts of every way in at the code (this route AND the Bluetooth channel without pairing share it: one budget of wrong codes, one global cap): per-peer allowances, global cap, [guard].
+     * Built from [guard] when not given (the tests); the TV passes the one it also gives to [castbridge.core.btact.BtActServer].
+     */
+    val gate: ActivationAttemptGate = ActivationAttemptGate(guard, now),
 ) {
     sealed class Install {
         class Accepted(val label: String) : Install()
@@ -50,19 +55,8 @@ class LockedActivationApi(
     /** What the guard needs from an HTTP request (headers already lower-cased by the server). */
     data class Request(val method: String, val path: String, val remoteIp: String?, val host: String?, val pin: String?, val token: String?, val contentLength: Long?)
 
-    /** Per-address counters (access-ordered, at most [MAX_ADDRESSES] addresses: the least recently seen is forgotten first, audit M1 c). */
-    private fun addressTable() = object : LinkedHashMap<String, ArrayDeque<Long>>(64, 0.75f, true) {
-        override fun removeEldestEntry(eldest: MutableMap.MutableEntry<String, ArrayDeque<Long>>?) = size > MAX_ADDRESSES
-    }
-    /** Key verifications per address. */
-    private val tries = addressTable()
-    /** Reads of the device request per address: counted apart, so reading it never uses up the key verifications of the same address. */
-    private val reads = addressTable()
-    /** Times of the wrong codes, every address together (audit M1 a): at most [GLOBAL_MAX_WRONG] per [WINDOW_MS], then 429 for everyone. */
-    private val wrong = ArrayDeque<Long>()
-
-    fun trackedAddresses(): Int = synchronized(tries) { tries.size }
-    fun trackedReaders(): Int = synchronized(reads) { reads.size }
+    fun trackedAddresses(): Int = gate.trackedAddresses()
+    fun trackedReaders(): Int = gate.trackedReaders()
 
     /** [readBody] reads exactly n bytes of the body (null if the peer sent fewer); it is called only once the request passed every check. */
     fun handle(r: Request, readBody: (Int) -> ByteArray?): ApiReply {
@@ -77,18 +71,18 @@ class LockedActivationApi(
         // the terms BEFORE the code (audit M1 b): a TV whose terms are not accepted never says whether a code is right
         if (!termsAccepted()) return reply(409, """{"error":${JsonLite.quote(TunnelTerms.MUST_ACCEPT_ON_TV)}}""")
         // the global cap BEFORE the code (audit M1 a): once reached, no code is compared any more, from any address
-        if (globalClosed()) return reply(429, """{"error":${JsonLite.quote(GLOBAL_CLOSED)}}""")
+        if (gate.globalClosed()) return reply(429, """{"error":${JsonLite.quote(GLOBAL_CLOSED)}}""")
         when (guard.check(ip, r.pin)) {
             PinGuard.Result.OK -> {}
-            PinGuard.Result.BAD -> { countWrong(); return reply(401, """{"error":"bad pin"}""") }
-            PinGuard.Result.LOCKED -> { countWrong(); return reply(401, """{"error":"locked","retryAfter":${guard.retryAfterSeconds(ip)}}""") }
+            PinGuard.Result.BAD -> { gate.countWrong(); return reply(401, """{"error":"bad pin"}""") }
+            PinGuard.Result.LOCKED -> { gate.countWrong(); return reply(401, """{"error":"locked","retryAfter":${guard.retryAfterSeconds(ip)}}""") }
         }
         runCatching { onAuthorized(ip) }
         if (readsRequest) return deviceRequestReply(ip)
         val len = r.contentLength ?: return reply(400, """{"error":"body missing"}""")
         if (len <= 0) return reply(400, """{"error":"body missing"}""")
         if (len > MAX_BODY) return reply(413, """{"error":"body too large","max":$MAX_BODY}""")
-        if (!take(tries, ip, MAX_TRIES)) return reply(429, """{"error":"trop d'essais : réessayez dans 10 minutes"}""")
+        if (!gate.takeTry(ip)) return reply(429, """{"error":"trop d'essais : réessayez dans 10 minutes"}""")
         val body = readBody(len.toInt()) ?: return reply(400, """{"error":"body incomplete"}""")
         return when (val res = install(String(body, Charsets.UTF_8).removePrefix("﻿").trim())) {
             is Install.Accepted -> reply(200, """{"installed":true,"label":${JsonLite.quote(res.label)},"notes":[]}""")
@@ -98,23 +92,10 @@ class LockedActivationApi(
 
     /** The complete device request as plain text; nothing is built for an address that already read it [MAX_READS] times in the window. */
     private fun deviceRequestReply(ip: String): ApiReply {
-        if (!take(reads, ip, MAX_READS)) return reply(429, """{"error":"trop de lectures : réessayez dans 10 minutes"}""")
+        if (!gate.takeRead(ip)) return reply(429, """{"error":"trop de lectures : réessayez dans 10 minutes"}""")
         val text = runCatching { deviceRequest()?.let(DeviceRequestText::complete) }.getOrNull() ?: return reply(503, """{"error":"demande d'appareil indisponible"}""")
         return ApiReply(200, text, mime = TEXT_PLAIN)
     }
-
-    /** One use of [table] for [ip] if fewer than [max] were made in the last [WINDOW_MS]. */
-    private fun take(table: MutableMap<String, ArrayDeque<Long>>, ip: String, max: Int): Boolean = synchronized(table) {
-        val q = table.getOrPut(ip) { ArrayDeque() }
-        val t = now()
-        prune(q, t)
-        if (q.size >= max) return false
-        q.addLast(t); true
-    }
-
-    private fun prune(q: ArrayDeque<Long>, t: Long) { while (q.isNotEmpty() && t - q.first() > WINDOW_MS) q.removeFirst() }
-    private fun globalClosed(): Boolean = synchronized(wrong) { prune(wrong, now()); wrong.size >= GLOBAL_MAX_WRONG }
-    private fun countWrong() { synchronized(wrong) { val t = now(); prune(wrong, t); wrong.addLast(t) } }
 
     private fun reply(status: Int, json: String) = ApiReply(status, json)
 
@@ -124,14 +105,15 @@ class LockedActivationApi(
         const val DEVICE_REQUEST_PATH = "/api/activation/device-request"
         const val TEXT_PLAIN = "text/plain; charset=utf-8"
         const val MAX_BODY = 16_384
-        const val MAX_TRIES = 10
+        // the allowances live in the shared gate ([ActivationAttemptGate]); the names stay here for the callers and tests that already use them
+        const val MAX_TRIES = ActivationAttemptGate.MAX_TRIES
         /** Reads of the device request per address and per [WINDOW_MS] (the phone reads it once or twice); apart from [MAX_TRIES]. */
-        const val MAX_READS = 20
-        const val WINDOW_MS = 10 * 60_000L
+        const val MAX_READS = ActivationAttemptGate.MAX_READS
+        const val WINDOW_MS = ActivationAttemptGate.WINDOW_MS
         /** Wrong codes accepted per [WINDOW_MS] from every address together (audit M1 a), then the route answers 429 to everyone until the window slides. */
-        const val GLOBAL_MAX_WRONG = 20
+        const val GLOBAL_MAX_WRONG = ActivationAttemptGate.GLOBAL_MAX_WRONG
         /** Addresses tracked by the per-address limiter (audit M1 c). */
-        const val MAX_ADDRESSES = 1_000
+        const val MAX_ADDRESSES = ActivationAttemptGate.MAX_ADDRESSES
         const val GLOBAL_CLOSED = "Trop de codes faux reçus par cette TV : l'activation par le Wi-Fi est fermée pour 10 minutes. Utilisez le Bluetooth (CastBridge > « Activer la TV »), le fichier d'activation ou collez la clé sur la TV."
 
         /** L3: the locked route opens only on a LOCKED TV and only while the gate lets [Feature.ACTIVATION_WIFI] through (an activated TV runs its full server instead). */

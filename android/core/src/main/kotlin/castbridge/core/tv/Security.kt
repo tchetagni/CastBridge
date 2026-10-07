@@ -68,6 +68,33 @@ open class PinGuard(
     fun retryAfterSeconds(ip: String): Long =
         ((synchronized(entries) { entries[ip] }?.lockedUntil ?: 0) - now()).coerceAtLeast(0).let { (it + 999) / 1000 }
 
+    // ---- for a code that is proven elsewhere than by comparing a string: the PAKE of « activer par Bluetooth sans appairage » (castbridge.core.btact) never receives the code, so it cannot call [check] ----
+
+    /** Is [ip] locked right now? Counts nothing and compares nothing: a PAKE session asks BEFORE it computes anything for a peer. */
+    fun isLocked(ip: String): Boolean {
+        val e = synchronized(entries) { entries[ip] } ?: return false
+        return synchronized(e) { e.lockedUntil > now() }
+    }
+
+    /** A wrong code, known by a proof that did not match (a PAKE confirmation): counted exactly like a wrong PIN of [check] ([maxFailures] ⇒ locked for [lockMs]). [Result.BAD] or [Result.LOCKED]. */
+    fun recordFailure(ip: String): Result {
+        val e = synchronized(entries) { entries.getOrPut(ip) { Entry() } }
+        synchronized(e) {
+            val t = now()
+            if (e.lockedUntil > t) return Result.LOCKED
+            if (e.lockedUntil != 0L) { e.lockedUntil = 0; e.failures = 0 }  // lock expired
+            e.failures++
+            if (e.failures >= maxFailures) { e.lockedUntil = t + lockMs; return Result.LOCKED }
+            return Result.BAD
+        }
+    }
+
+    /** The right code was proven: the failures of [ip] are forgotten (a lock that is running stays: the right code does not lift it, as with [check]). */
+    fun recordSuccess(ip: String) {
+        val e = synchronized(entries) { entries[ip] } ?: return
+        synchronized(e) { if (e.lockedUntil <= now()) { e.failures = 0; e.lockedUntil = 0 } }
+    }
+
     companion object { const val MAX_ENTRIES = 1_000 }
 }
 

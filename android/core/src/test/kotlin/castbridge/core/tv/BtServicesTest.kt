@@ -20,7 +20,7 @@ class BtServicesTest {
     /** Every RFCOMM UUID that the code names with a constant, wherever the constant lives (the gateway's and the owner channel's are not in BtProtocol). */
     private val constantsOfTheCode = mapOf(
         "files" to BtProtocol.SERVICE_UUID, "ssh" to BtProtocol.SSH_SERVICE_UUID, "api" to BtProtocol.API_SERVICE_UUID, "api-v2" to BtProtocol.API_MUX_SERVICE_UUID,
-        "owner" to OwnerFrames.SERVICE_UUID, "gateway" to Gw.SERVICE_UUID)
+        "owner" to OwnerFrames.SERVICE_UUID, "gateway" to Gw.SERVICE_UUID, "activation" to BtProtocol.ACTIVATION_SERVICE_UUID)
 
     @Test fun theInternetGatewayAndTheSshTunnelDoNotShareAnRfcommUuid() {
         assertNotEquals(BtProtocol.SSH_SERVICE_UUID, Gw.SERVICE_UUID, "a phone that asks for the SSH tunnel could reach the Internet gateway, and the other way round")
@@ -43,6 +43,14 @@ class BtServicesTest {
     @Test fun theConstantsOfTheCodeAreExactlyTheTable() {
         assertEquals(constantsOfTheCode.values.toSet(), table.map { it.uuid }.toSet(), "a service constant is not in BtProtocol.SERVICES, or the table lists a UUID no constant names")
         assertEquals(constantsOfTheCode.size, constantsOfTheCode.values.toSet().size, "two constants name the same UUID: ${constantsOfTheCode.entries.groupBy({ it.value }, { it.key }).filterValues { it.size > 1 }}")
+    }
+
+    @Test fun theActivationWithoutPairingIsServiceEightAndTheNextNumberIsFree() {
+        // act-bt : …0008 (BLE advertisement + insecure RFCOMM, PAKE on the connection code). Documented in ADMIN.md § 11 and BT-PLUG-AND-PLAY.md.
+        assertEquals("7c5e3b9a-4d2f-4c61-9b0e-cb0000000008", BtProtocol.ACTIVATION_SERVICE_UUID)
+        assertEquals(listOf(8), table.filter { it.uuid == BtProtocol.ACTIVATION_SERVICE_UUID }.map { it.number })
+        assertEquals("CastBridge Activation", table.single { it.number == 8 }.sdpName)
+        assertEquals(8, table.maxOf { it.number }, "no service beyond …0008 yet: the next one takes …0009 in the table first")
     }
 
     @Test fun aNumberReservedByADesignIsNotGivenToAnotherService() {
@@ -74,6 +82,6 @@ class BtServicesTest {
     @Test fun everyServiceNameOfTheTableIsRegisteredByTheTv() {
         val receiver = sources().filter { "/receiver/" in it.path.replace('\\', '/') }.joinToString("\n") { it.readText() }
         assertTrue(receiver.isNotEmpty(), "receiver sources not found")
-        for (s in table) assertTrue("\"${s.sdpName}\"" in receiver, "$s : no listenUsingRfcommWithServiceRecord with that name in the receiver (the table drifted from the code)")
+        for (s in table) assertTrue("\"${s.sdpName}\"" in receiver, "$s : no listenUsing…RfcommWithServiceRecord (secure or insecure) with that name in the receiver (the table drifted from the code)")
     }
 }

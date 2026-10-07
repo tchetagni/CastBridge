@@ -72,6 +72,8 @@ class ActivationActivity : Activity() {
     private lateinit var lanesBox: LinearLayout
     private lateinit var codeView: TextView
     private lateinit var instructionView: TextView
+    /** act-bt: « 2. Bluetooth : tapez le code dans CastBridge › Activer la TV », drawn only while the TV advertises over BLE ([TvService.activationBleReady]). */
+    private lateinit var bluetoothView: TextView
     private lateinit var qrHolder: FrameLayout
     private lateinit var retryGroup: Button
     /** act-tv-2: « Le téléphone n'est pas sur ce Wi-Fi ? OK : réseau direct » and its warning, drawn only while the TV's own group is kept for later ([ActivationGroupPolicy]). */
@@ -248,8 +250,9 @@ class ActivationActivity : Activity() {
     private fun buildPhoneLane(box: LinearLayout, st: TextView) {
         codeView = tv("", 72f, AMBER, bold = true, mono = true).apply { visibility = View.GONE }
         instructionView = tv("", 24f, Color.WHITE)
+        bluetoothView = tv("", 24f, Color.WHITE).apply { visibility = View.GONE }
         qrHolder = FrameLayout(this).apply { visibility = View.GONE }
-        val text = LinearLayout(this).apply { orientation = LinearLayout.VERTICAL; addView(codeView); addView(instructionView) }
+        val text = LinearLayout(this).apply { orientation = LinearLayout.VERTICAL; addView(codeView); addView(instructionView); addView(bluetoothView) }
         box.addView(LinearLayout(this).apply {
             orientation = LinearLayout.HORIZONTAL; gravity = Gravity.CENTER_VERTICAL
             addView(qrHolder, LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT).apply { rightMargin = 40 })
@@ -271,8 +274,10 @@ class ActivationActivity : Activity() {
 
     private fun refreshPhoneLane(info: Pair<String, List<String>>?, group: ActivationScreenPlan.Group) {
         // what is drawn is decided by the pure plan (tested): the QR only while the group EXISTS (else the code stands alone), the « réseau direct » line only while the group is kept for later
-        val v = ActivationScreenPlan.phoneView(info?.first, group)
+        val v = ActivationScreenPlan.phoneView(info?.first, group, bluetooth = TvService.running?.activationBleReady() == true)
         instructionView.text = v.instruction
+        bluetoothView.visibility = if (v.bluetoothLine != null) View.VISIBLE else View.GONE
+        v.bluetoothLine?.let { bluetoothView.text = it }
         directButton.visibility = if (v.offer != null) View.VISIBLE else View.GONE
         directWarning.visibility = directButton.visibility
         v.offer?.let { directButton.text = it.line; directWarning.text = it.warning }

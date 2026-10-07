@@ -23,6 +23,8 @@
     <uses-permission android:name="android.permission.BLUETOOTH_CONNECT" />
     <uses-permission android:name="android.permission.BLUETOOTH_ADVERTISE" />
     <uses-feature android:name="android.hardware.bluetooth" android:required="false" />
+    <!-- act-bt : activation sans appairage (annonce et balayage BLE) ; facultatif : sans BLE la voie est simplement absente -->
+    <uses-feature android:name="android.hardware.bluetooth_le" android:required="false" />
     <!-- Wi-Fi Direct group: NEARBY_WIFI_DEVICES on 33+, fine location on 29-32 (runtime, opt-in from the MENU) -->
     <uses-permission android:name="android.permission.CHANGE_WIFI_STATE" />
     <uses-permission android:name="android.permission.NEARBY_WIFI_DEVICES" android:usesPermissionFlags="neverForLocation" />

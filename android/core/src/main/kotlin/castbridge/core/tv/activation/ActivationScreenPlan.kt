@@ -103,16 +103,25 @@ object ActivationScreenPlan {
     /**
      * What the phone way draws under its title (the Android screen only draws it). [code] = the connection code grouped 3+3 (null = the locked route is not open yet: nothing to
      * show); [qr] = the QR of the group, drawn ONLY while the group exists (without one the code stands alone, a QR would describe a network that is not there); [instruction] = the
-     * sentence under the code; [offer] = the « réseau direct » line, only while the group is kept for later; [retry] = « Réessayer le réseau direct », only when the group failed.
+     * sentence under the code; [offer] = the « réseau direct » line, only while the group is kept for later; [retry] = « Réessayer le réseau direct », only when the group failed;
+     * [bluetoothLine] = « 2. Bluetooth : tapez le code dans CastBridge › Activer la TV », ONLY while the TV advertises over BLE (act-bt: [BLUETOOTH_LINE]); null = that way is absent.
      */
-    data class PhoneView(val code: String?, val qr: Boolean, val instruction: String, val offer: DirectOffer?, val retry: Boolean)
+    data class PhoneView(val code: String?, val qr: Boolean, val instruction: String, val offer: DirectOffer?, val retry: Boolean, val bluetoothLine: String? = null)
 
     const val NO_ROUTE_INSTRUCTION = "Sur votre téléphone, ouvrez CastBridge › Activer la TV."
 
-    fun phoneView(code: String?, group: Group): PhoneView {
+    /**
+     * The way « Bluetooth sans appairage » (act-bt, DESIGN-ACTIVATION-SIMPLE § 7), listed second under the code when the TV advertises over BLE: nothing to pair, nothing to configure, the code is enough.
+     * The first way (the Wi-Fi sentence above) then carries « 1. » so that the two read as a list. Absent when the box cannot advertise, Bluetooth is off or a permission is missing.
+     */
+    const val BLUETOOTH_LINE = "2. Bluetooth : tapez le code dans CastBridge › Activer la TV"
+
+    /** [bluetooth] = the TV advertises over BLE right now ([castbridge.receiver.ActivationBtHost.State.READY]). */
+    fun phoneView(code: String?, group: Group, bluetooth: Boolean = false): PhoneView {
         if (code == null) return PhoneView(null, false, NO_ROUTE_INSTRUCTION, null, false)
         val qr = group is Group.Ready && WdCode.isValid(code)
-        return PhoneView(groupedCode(code), qr, phoneInstruction(code, qrShown = qr, sameWifi = group is Group.Offered), directOffer(group), group is Group.Failed)
+        val first = phoneInstruction(code, qrShown = qr, sameWifi = group is Group.Offered)
+        return PhoneView(groupedCode(code), qr, if (bluetooth) "1. $first" else first, directOffer(group), group is Group.Failed, if (bluetooth) BLUETOOTH_LINE else null)
     }
 
     /** A phone presented the right code this recently, or is in the group, counts as « relié ». */

@@ -10,12 +10,14 @@ import android.os.SystemClock
 import castbridge.core.lots.HttpTvTransport
 import castbridge.core.owner.ActivationExecutors
 import castbridge.core.owner.ActivationRoutePlan
+import castbridge.core.owner.ActivationRoutePlan.Ble
 import castbridge.core.owner.ActivationRoutePlan.Bt
 import castbridge.core.owner.ActivationRoutePlan.Cause
 import castbridge.core.owner.ActivationRoutePlan.Found
 import castbridge.core.owner.ActivationRoutePlan.Phase
 import castbridge.core.owner.ActivationRoutePlan.Route
 import castbridge.core.owner.ActivationSend
+import castbridge.core.owner.BleSearch
 import castbridge.core.owner.KeyAcquisition
 import castbridge.core.owner.LockedRequestRoute
 import castbridge.core.owner.LockedRequestRoute.Reply
@@ -67,6 +69,8 @@ class ActivationDriver(ctx: Context, private val discovery: TvDiscovery, val con
     /** Les TV annoncées par mDNS. [TvDiscovery.tvs] ne vit que tant que quelqu'un le collecte (`WhileSubscribed`) : l'exécutant le collecte lui-même, sinon sa valeur resterait vide. */
     @Volatile private var announced: List<Tv> = emptyList()
     private val scope = CoroutineScope(SupervisorJob() + Dispatchers.Default)
+    /** « Bluetooth sans appairage » (act-bt) : balayage BLE, canal vers la TV, PAKE sur le code ; les décisions sont dans [BleSearch] et `core/btact`. */
+    private val ble = BtActivationClient(app)
 
     init {
         runCatching { TvLinkManager.init(app) }
@@ -86,7 +90,7 @@ class ActivationDriver(ctx: Context, private val discovery: TvDiscovery, val con
         this.code = code; generation++
         btNote = null
         handleAcq(KeyAcquisition.reduce(acq, KeyAcquisition.Event.TvLost))                    // un envoi en cours échoue, la clé reste prête
-        val facts = ActivationRoutePlan.Facts(code, Build.VERSION.SDK_INT, wifiOn(), onWifi(), btFact())
+        val facts = ActivationRoutePlan.Facts(code, Build.VERSION.SDK_INT, wifiOn(), onWifi(), btFact(), bleFact())
         applyPlan(ActivationRoutePlan.start(facts, now()))
     }
 
@@ -150,7 +154,7 @@ class ActivationDriver(ctx: Context, private val discovery: TvDiscovery, val con
     fun release() {
         active = null
         scope.cancel()
-        exec.release { ticker?.cancel(false); group?.release(); group = null }
+        exec.release { ticker?.cancel(false); group?.release(); group = null; ble.release() }
     }
 
     // ------------------------------------------------------------------ la machine
@@ -203,6 +207,7 @@ class ActivationDriver(ctx: Context, private val discovery: TvDiscovery, val con
                 active = e.route to g
                 when (e.route) {
                     Route.LAN -> onIo { lanLoop(g) }
+                    Route.BLE -> onIo { bleAttempt(g) }
                     Route.GROUP -> startGroup(g, e.manual)
                     Route.BLUETOOTH -> onIo { bluetoothAttempt(g) }
                 }
@@ -231,7 +236,7 @@ class ActivationDriver(ctx: Context, private val discovery: TvDiscovery, val con
 
     // ------------------------------------------------------------------ voie 1 : le réseau local
 
-    /** Les TV annoncées et la TV liée, telles que le plan les trie ([ActivationRoutePlan.candidates] : verrouillées d'abord, adresses privées, trois au plus). */
+    /** Les TV annoncées et la TV liée, telles que le plan les trie ([ActivationRoutePlan.candidates] : toutes les verrouillées d'abord, adresses privées) ; [ActivationRoutePlan.LanProbes.due] en rend trois au plus par tour (audit I-4). */
     private fun lanCandidates(): List<ActivationRoutePlan.Candidate> {
         val linked = (TvLinkManager.state.value as? LinkUi.Connected)?.session?.let { s -> s.base?.let { ActivationRoutePlan.Candidate(s.tv.name, it, false) } }
         return ActivationRoutePlan.candidates(announced.map { ActivationRoutePlan.Candidate(it.name, it.base, it.locked) }, linked)
@@ -254,7 +259,22 @@ class ActivationDriver(ctx: Context, private val discovery: TvDiscovery, val con
     /** La demande d'appareil de la TV avec le code (cœur : [LockedRequestRoute.probe], testé contre de vraies conversations HTTP) ; null = la TV n'a pas répondu (réessayer). */
     private fun probe(base: String, locked: Boolean, code: String): Reply? = LockedRequestRoute.probe(base, code, locked)
 
-    // ------------------------------------------------------------------ voie 2 : le groupe Wi-Fi Direct d'activation
+    // ------------------------------------------------------------------ voie 2 : le Bluetooth SANS appairage (act-bt)
+
+    /** Balaie, essaie les TV au tag de ce code, lit la demande de la première qui prouve le code ([BtActivationClient.find]) ; ce que dit chaque TV qui refuse sert de cause si la borne arrive avant. */
+    private fun bleAttempt(g: Int) {
+        val code = this.code ?: return
+        when (val r = ble.find(code, { isActive(Route.BLE, g) }) { cause -> postRoute(g, ActivationRoutePlan.Event.Observed(Route.BLE, cause)) }) {
+            null -> {}                                                                                  // abandonné : le plan est passé à autre chose
+            is BtActivationClient.Search.Failed -> postRoute(g, ActivationRoutePlan.Event.Failed(Route.BLE, r.cause, now()))
+            is BtActivationClient.Search.Tv -> {
+                val req = r.requestText?.let { (LockedRequestRoute.parse(it) as? DeviceRequestParse.Ok)?.request }
+                postRoute(g, ActivationRoutePlan.Event.Reached(Found(Route.BLE, ActivationRoutePlan.cleanName(r.name), null, req, note = if (req == null) Cause(Cause.Kind.UNREADABLE) else null)))
+            }
+        }
+    }
+
+    // ------------------------------------------------------------------ voie 3 : le groupe Wi-Fi Direct d'activation
 
     private fun startGroup(g: Int, manual: Boolean) {
         val code = this.code ?: return
@@ -280,7 +300,7 @@ class ActivationDriver(ctx: Context, private val discovery: TvDiscovery, val con
         }
     }
 
-    // ------------------------------------------------------------------ voie 3 : Bluetooth (le canal d'activation existant)
+    // ------------------------------------------------------------------ voie 4 : Bluetooth appairé (le canal d'activation existant, pour les anciennes TV)
 
     /** La TV Bluetooth déjà appairée (celle qui déclare un service CastBridge, sinon la seule appairée), ou null. */
     private fun bluetoothTv(): TvBluetooth.Tv? = TvBluetooth.pairedTvs(app).let { l -> l.firstOrNull { it.sure } ?: l.singleOrNull() }
@@ -311,6 +331,7 @@ class ActivationDriver(ctx: Context, private val discovery: TvDiscovery, val con
     private fun installNow(f: Found, code: String, key: String, g: Int) {
         val result: KeyAcquisition.Event.Result = try {
             when {
+                f.route == Route.BLE -> installBle(code, key, g)
                 f.base != null -> installHttp(f, code, key)
                 f.btAddress != null -> installBluetooth(TvBluetooth.Tv(f.name, f.btAddress!!, true, true), key)
                 else -> KeyAcquisition.Event.Result(KeyAcquisition.ResultKind.UNREACHABLE, "", now())
@@ -324,6 +345,12 @@ class ActivationDriver(ctx: Context, private val discovery: TvDiscovery, val con
         // le Wi-Fi ne répond plus : repli sur le Bluetooth appairé, comme l'ancien écran ; sinon le résultat est celui du cœur
         if (r.linkDown) bluetoothTv()?.let { tv -> runCatching { installBluetooth(tv, key) }.getOrNull()?.let { return it } }
         return KeyAcquisition.resultOf(r, now())
+    }
+
+    /** Le canal sans appairage est rouvert (balayage, PAKE sur le même code) et la clé y est envoyée chiffrée ; le résultat est celui des autres voies ([BleSearch.installResult]). */
+    private fun installBle(code: String, key: String, g: Int): KeyAcquisition.Event.Result {
+        val r = ble.install(code, key) { !released && g == generation } ?: return KeyAcquisition.Event.Result(KeyAcquisition.ResultKind.UNREACHABLE, "", now())
+        return BleSearch.installResult(r, now())
     }
 
     private fun installBluetooth(tv: TvBluetooth.Tv, key: String): KeyAcquisition.Event.Result {
@@ -346,6 +373,14 @@ class ActivationDriver(ctx: Context, private val discovery: TvDiscovery, val con
         if (!TvBluetooth.permitted(app)) return Bt.NO_PERMISSION
         if (!adapter.isEnabled) return Bt.OFF
         return if (bluetoothTv() != null) Bt.PAIRED else Bt.SEARCH
+    }
+
+    /** Le Bluetooth tel que la voie SANS appairage le voit : allumé, autorisé (« Appareils à proximité », la localisation avant Android 12), avec un balayeur BLE. */
+    private fun bleFact(): Ble {
+        val adapter = (app.getSystemService(Context.BLUETOOTH_SERVICE) as? BluetoothManager)?.adapter ?: return Ble.NO_ADAPTER
+        if (!TvBluetooth.permitted(app)) return Ble.NO_PERMISSION
+        if (!adapter.isEnabled) return Ble.OFF
+        return if (adapter.bluetoothLeScanner == null) Ble.NO_LE else Ble.SEARCH
     }
 
     /** Ce téléphone est-il déjà de confiance pour cette TV ? (alors « Ajouter ma TV » n'est pas reproposé) */
