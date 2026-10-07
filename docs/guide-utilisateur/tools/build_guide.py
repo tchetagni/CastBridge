@@ -7,6 +7,7 @@ captures en data: URI (JPEG réduit), repères dessinés en HTML/CSS aux bornes 
 Usage : python3 build_guide.py
 """
 import base64, io, json, os, re
+from html import unescape as html_unescape
 from PIL import Image
 
 HERE = os.path.dirname(os.path.abspath(__file__))
@@ -19,6 +20,8 @@ BY = {s["name"]: s for s in DATA["screens"]}
 USED = []          # ordre d'apparition (pour n'embarquer que ce qui sert)
 STEPS = {}         # name -> [{"step": "4.2", "keys": [...]}]  (écrit dans annotations.json)
 sentences = []     # contrôle des 12 mots
+VIOLATIONS = []    # phrases de plus de 12 mots : le build échoue à la fin s'il y en a
+MISSING = []       # illustrations qui manquent : une légende est laissée dans le guide (affichée en fin de build)
 
 
 def esc(t):
@@ -26,7 +29,27 @@ def esc(t):
 
 
 def words(t):
-    return len([w for w in re.sub(r"<[^>]+>", "", t).split() if w not in ("«", "»", "·", ":")])
+    """Nombre de mots d'une phrase : les signes seuls (« » · : ? › …) ne comptent pas."""
+    return len([w for w in re.sub(r"<[^>]+>", "", t).split() if re.search(r"\w", w)])
+
+
+def typo(html):
+    """Typographie française dans le texte (jamais dans les balises) : espace insécable avant « : ; ? ! » et dans les guillemets,
+    pour qu'une ligne ne finisse pas par « ni ne commence par : »."""
+    parts = re.split(r"(<[^>]+>)", html)
+    for i in range(0, len(parts), 2):          # les éléments pairs sont du texte, les impairs des balises
+        t = re.sub(r" ([:;?!»])", "\u00a0" + r"\1", parts[i])
+        parts[i] = re.sub(r"(«) ", r"\1" + "\u00a0", t)
+    return "".join(parts)
+
+
+def check(sentence, where=""):
+    """Contrôle des 12 mots : mémorise la phrase ; le build échoue à la fin si l'une dépasse."""
+    n = words(sentence)
+    if n > 12:
+        VIOLATIONS.append("%s (%d mots) : %s" % (where, n, re.sub(r"<[^>]+>", "", sentence)))
+    sentences.append(sentence)
+    return sentence
 
 
 def fig(name, keys, stepno, alt):
@@ -55,8 +78,7 @@ def fig(name, keys, stepno, alt):
 
 def step(stepno, name, keys, sentence, alt, note=None, cls=""):
     f, legend = fig(name, keys, stepno, alt)
-    assert words(sentence) <= 12, (stepno, sentence, words(sentence))
-    sentences.append(sentence)
+    check(sentence, stepno)
     leg = "".join('<li><b>%d</b><span>%s</span></li>' % (n, esc(l)) for n, l in legend)
     nt = '<p class="note">%s</p>' % note if note else ""
     return ('<article class="step %s" id="e%s"><span class="no">%s</span>%s<ol class="leg">%s</ol>'
@@ -64,8 +86,7 @@ def step(stepno, name, keys, sentence, alt, note=None, cls=""):
 
 
 def drawn(stepno, svg, sentence, labels=None, note=None, cls=""):
-    assert words(sentence) <= 12, (stepno, sentence, words(sentence))
-    sentences.append(sentence)
+    check(sentence, stepno)
     leg = ""
     if labels:
         leg = '<ol class="leg">' + "".join('<li><b>%d</b><span>%s</span></li>' % (i, esc(l)) for i, l in enumerate(labels, 1)) + "</ol>"
@@ -123,34 +144,25 @@ def svg_installer_phone():
                txt(110, 50, "CastBridge", 14, "start", "tx b") + arrow(108, 62, 92, 64), "Installer CastBridge sur le téléphone")
 
 
+FILE_TV = "castbridge-tv-….apk"    # le fichier téléchargé s'appelle castbridge-tv-<version>-…apk (docs/RELEASES.md § 8)
+
+
 def svg_tv_install():
     p1 = svg(150, 100, '<rect x="30" y="38" width="64" height="26" rx="4" class="st"/><rect x="94" y="45" width="20" height="12" class="fl"/>'
-             + txt(62, 55, "USB", 11) + txt(75, 88, "castbridge-tv.apk", 11), "Clé USB avec le fichier castbridge-tv.apk")
+             + txt(62, 55, "USB", 11) + txt(75, 88, FILE_TV, 10), "Clé USB avec le fichier castbridge-tv téléchargé")
     p2 = svg(150, 100, tv(18, 10, 100, 58) + '<rect x="118" y="72" width="26" height="12" class="fl"/>'
              + arrow(142, 92, 128, 86) + txt(75, 96, "Branchez la clé", 11), "Clé USB branchée sur la TV")
     p3 = svg(150, 100, '<rect x="14" y="10" width="122" height="78" rx="6" class="st"/><rect x="14" y="10" width="122" height="14" rx="6" class="fl"/>'
              + '<rect x="24" y="34" width="14" height="14" rx="2" class="fa"/>' + txt(44, 45, "Download", 10, "start")
-             + '<rect x="24" y="56" width="14" height="14" rx="2" class="fa"/>' + txt(44, 67, "castbridge-tv.apk", 10, "start"),
-             "Explorateur de fichiers de la TV avec le fichier castbridge-tv.apk")
-    p4 = svg(150, 100, '<rect x="20" y="14" width="110" height="72" rx="8" class="st"/>' + txt(75, 40, "castbridge-tv.apk", 11)
+             + '<rect x="24" y="56" width="14" height="14" rx="2" class="fa"/>' + txt(44, 67, FILE_TV, 9, "start"),
+             "Explorateur de fichiers de la TV avec le fichier castbridge-tv")
+    p4 = svg(150, 100, '<rect x="20" y="14" width="110" height="72" rx="8" class="st"/>' + txt(75, 40, FILE_TV, 10)
              + '<rect x="40" y="52" width="70" height="24" rx="12" class="fa"/>' + '<text x="75" y="68" font-size="12" text-anchor="middle" fill="#1b2540" font-weight="700">Installer</text>',
              "Bouton Installer d'Android")
-    caps = ["Copiez castbridge-tv.apk sur une clé USB.", "Branchez la clé sur la TV.",
-            "Ouvrez l'explorateur de fichiers, dossier Download.", "Touchez castbridge-tv.apk, puis Installer."]
+    caps = ["Téléchargez le fichier, puis copiez-le dans Download sur une clé USB.", "Branchez la clé sur la TV.",
+            "Ouvrez l'explorateur de fichiers, dossier Download.", "Touchez le fichier castbridge-tv, puis Installer."]
     return ('<div class="quad">' + "".join('<div class="q"><span class="qn">%d</span>%s<p>%s</p></div>' % (i + 1, s, esc(c))
                                           for i, (s, c) in enumerate(zip([p1, p2, p3, p4], caps))) + '</div>')
-
-
-def svg_activation():
-    p1 = svg(150, 100, tv(14, 8, 122, 66, inner="") + txt(75, 30, "Code d'appareil", 10) + txt(75, 52, "XXXX-XXXX-XXXX-XXXX", 9, "middle", "tx b"),
-             "La TV affiche son code d'appareil")
-    p2 = svg(150, 100, phone(20, 8, 40, 80) + phone(90, 8, 40, 80) + arrow(62, 40, 88, 40) + txt(75, 98, "code → votre agent", 10),
-             "Le code d'appareil est envoyé à votre agent")
-    p3 = svg(150, 100, phone(20, 8, 40, 80) + tv(76, 14, 64, 40) + arrow(62, 40, 74, 36) +
-             '<path d="M92 34 l6 6 l12 -14" class="ln ok"/>' + txt(108, 80, "Activée", 11), "La clé d'activation envoyée à la TV")
-    caps = ["La TV affiche son « Code d'appareil ».", "Donnez ce code à votre agent.", "Collez la clé reçue sur le téléphone."]
-    return ('<div class="quad tri">' + "".join('<div class="q"><span class="qn">%d</span>%s<p>%s</p></div>' % (i + 1, s, esc(c))
-                                              for i, (s, c) in enumerate(zip([p1, p2, p3], caps))) + '</div>')
 
 
 def trio(items, cls="quad tri"):
@@ -158,17 +170,18 @@ def trio(items, cls="quad tri"):
                                               for i, (sv, c) in enumerate(items)) + '</div>')
 
 
-def svg_activation_wifi():
-    p1 = svg(150, 100, tv(14, 8, 122, 66) + txt(75, 28, "Par le Wi-Fi", 10) + txt(75, 44, "code de connexion", 9) +
-             txt(75, 62, "482915 · TV 192.168.1.20", 8, "middle", "tx b"), "La TV verrouillée affiche son code de connexion")
+def svg_activation_code():
+    """Activer en 3 gestes (docs/coordination/DESIGN-ACTIVATION-SIMPLE-2026-10-07.md) : mêmes dessins qu'avant, textes mis à jour."""
+    p1 = svg(150, 100, tv(14, 8, 122, 66) + txt(75, 30, "Code de la TV", 10) + txt(75, 57, "482 913", 20, "middle", "tx b"),
+             "La TV affiche son code à 6 chiffres")
     p2 = svg(150, 100, phone(14, 8, 40, 80) + wifi(75, 40, 16) + tv(88, 18, 56, 36) +
-             '<rect x="90" y="62" width="52" height="16" rx="8" class="fa"/>' + txt(116, 74, "Ma TV", 9), "Le téléphone trouve la TV sur le Wi-Fi")
+             '<rect x="90" y="62" width="52" height="16" rx="8" class="fa"/>' + txt(116, 74, "TV trouvée", 8), "Le téléphone trouve la TV avec le code")
     p3 = svg(150, 100, phone(14, 8, 40, 80) + tv(76, 14, 64, 40) + arrow(56, 40, 74, 36) +
              '<rect x="26" y="30" width="16" height="12" rx="3" class="fa"/>' + '<path d="M92 34 l6 6 l12 -14" class="ln ok"/>' + txt(108, 80, "Activée", 11),
-             "Le code de connexion active la TV")
-    return trio([(p1, "La TV affiche « Par le Wi-Fi : code de connexion »."),
-                 (p2, "Sur le téléphone, « Activer la TV » : touchez votre TV."),
-                 (p3, "Tapez le code de connexion : la TV s'active.")])
+             "La clé reçue active la TV")
+    return trio([(p1, "La TV affiche un code à 6 chiffres."),
+                 (p2, "Tapez ce code dans « Activer la TV » : le téléphone trouve la TV."),
+                 (p3, "Collez la clé reçue : la TV s'active.")])
 
 
 def svg_usb_picker():
@@ -287,16 +300,14 @@ def svg_case(kind):
 
 
 def case(no, title, svgx, sentence, extra=""):
-    assert words(sentence) <= 12, sentence
-    sentences.append(sentence)
+    check(sentence, "cas %d" % no)
     return ('<article class="step drawn case" id="c%d"><span class="no">%d</span><figure class="dr">%s<figcaption>Dessin, pas une capture</figcaption></figure>'
             '<h4>%s</h4><p class="s">%s</p>%s</article>' % (no, no, svgx, title, sentence, extra))
 
 
 def case_real(no, title, name, keys, sentence, alt):
-    f, legend = fig(name, keys, "7.%d" % no, alt)
-    assert words(sentence) <= 12, sentence
-    sentences.append(sentence)
+    f, legend = fig(name, keys, sn("probleme", no), alt)
+    check(sentence, "cas %d" % no)
     leg = "".join('<li><b>%d</b><span>%s</span></li>' % (n, esc(l)) for n, l in legend)
     return ('<article class="step case" id="c%d"><span class="no">%d</span>%s<h4>%s</h4><ol class="leg">%s</ol><p class="s">%s</p></article>'
             % (no, no, f, title, leg, sentence))
@@ -306,134 +317,686 @@ def grid(items, cls):
     return '<div class="steps %s">%s</div>' % (cls, "".join(items))
 
 
+# ------------------------------------------------ sections, repères de version et blocs de texte
+URL_PAGE = "https://bridge.sti-cm.com/telecharger"            # docs/RELEASES.md § 8 (serveur 1.2.5)
+URL_TV = "https://bridge.sti-cm.com/dl/tv/latest.apk"
+URL_PHONE = "https://bridge.sti-cm.com/dl/phone/latest.apk"
+VERS = "TV 0.14.45 ou plus récente · téléphone 1.2.53 ou plus récent"     # nouveautés du 2026-10-07
+VERS_TV = "TV 0.14.45 ou plus récente"
+
+# l'ordre fait la numérotation (« 7 Internet »…) ; les identifiants (ancres) ne changent jamais
+SECTIONS = [("materiel", "Matériel"), ("installer", "Installer"), ("relier", "Relier"), ("envoyer", "Envoyer"),
+            ("apprendre", "Apprendre"), ("jeux", "Jeux"), ("internet", "Internet"), ("usb", "Clé USB"),
+            ("parental", "Parental"), ("probleme", "Problèmes"), ("donnees", "Données"), ("aide", "Aide")]
+SEC = {sid: i for i, (sid, _) in enumerate(SECTIONS, 1)}
+
+
+def sn(sec, k):
+    """Numéro d'étape « <numéro de section>.<k> »."""
+    return "%d.%d" % (SEC[sec], k)
+
+
+def seq(sec):
+    """Numéroteur d'étapes d'une section, dans l'ordre d'appel (= l'ordre d'apparition)."""
+    c = [0]
+
+    def nxt():
+        c[0] += 1
+        return sn(sec, c[0])
+    return nxt
+
+
+def h2(sid, title):
+    return '<section id="%s"><h2><span>%d</span>%s</h2>' % (sid, SEC[sid], title)
+
+
+def ver(t=VERS, cls=""):
+    """Repère de version : la fonction demande ces versions."""
+    return '<p class="ver %s">%s</p>' % (cls, esc(t))
+
+
+def h3(t, anchor=None, v=None):
+    return '<h3%s>%s</h3>%s' % (' id="%s"' % anchor if anchor else "", t, ver(v) if v else "")
+
+
+def gh(t):
+    return '<h4 class="gh">%s</h4>' % t
+
+
+def xref(sid, label=None):
+    return '<a class="lk" href="#%s">section %d%s</a>' % (sid, SEC[sid], " « %s »" % label if label else "")
+
+
+def sent(t):
+    return check(t, "texte")
+
+
+def p(t, cls="s2"):
+    return '<p class="%s">%s</p>' % (cls, sent(t))
+
+
+def nt(*ss, cls=""):
+    return '<p class="note %s">%s</p>' % (cls, " ".join(sent(s) for s in ss))
+
+
+def lead(*ss):
+    return '<p class="lead">%s</p>' % " ".join(sent(s) for s in ss)
+
+
+def ns(items):
+    """Étapes numérotées, texte seul (une phrase de 12 mots au plus par étape)."""
+    return '<ol class="ns">%s</ol>' % "".join('<li><b>%d</b><span>%s</span></li>' % (i, sent(t)) for i, t in enumerate(items, 1))
+
+
+def bl(items):
+    return '<ul class="bl">%s</ul>' % "".join('<li><span>%s</span></li>' % sent(t) for t in items)
+
+
+def say(who, text):
+    """Ce que dit l'écran, mot pour mot (texte des documents)."""
+    return '<blockquote class="say"><b>%s</b>%s</blockquote>' % (who, text)
+
+
+def qa(who, msg, *todo):
+    return '<div class="qa">%s<p><b>Que faire :</b> %s</p></div>' % (say(who, msg), " ".join(sent(t) for t in todo))
+
+
+def qas(items):
+    return '<div class="qas">%s</div>' % "".join(items)
+
+
+def card(title, body, cls=""):
+    return '<div class="card %s"><h4>%s</h4>%s</div>' % (cls, title, body)
+
+
+def cards(items, cls=""):
+    return '<div class="cards %s">%s</div>' % (cls, "".join(items))
+
+
+def split(left, right):
+    return '<div class="split">%s%s</div>' % (left, right)
+
+
+def miss(caption):
+    """Illustration qui manque : on n'invente pas d'image, on laisse une légende."""
+    MISSING.append(re.sub(r"<[^>]+>", "", caption))
+    return '<figure class="miss"><b>Illustration à venir</b><figcaption>%s</figcaption></figure>' % caption
+
+
+def missrow(*captions):
+    return '<div class="missrow">%s</div>' % "".join(miss(c) for c in captions)
+
+
 # ---------------------------------------------------------------------- contenu
 def build_body():
     B = []
     # 1 -------------------------------------------------------------------
-    B.append('<section id="materiel"><h2><span>1</span>Ce qu\'il vous faut</h2>'
+    B.append(h2("materiel", "Ce qu'il vous faut") +
              '<div class="need">'
              '<div class="nd">%s<b>Une TV Android</b></div>'
              '<div class="nd">%s<b>Un téléphone Android</b></div>'
-             '<div class="nd">%s<b>Le même Wi-Fi</b></div></div>'
-             '<p class="note c">Une box ou un partage de connexion suffit. La TV n\'a pas besoin d\'Internet.</p></section>'
-             % (ICON_TV, ICON_PHONE, ICON_WIFI))
+             '<div class="nd">%s<b>Le même Wi-Fi</b></div></div>' % (ICON_TV, ICON_PHONE, ICON_WIFI) +
+             nt("Une box ou un partage de connexion suffit.", "La TV n'a pas besoin d'Internet, sauf pour jouer en ligne.", cls="c") +
+             ver(VERS, "c") + nt("Ce repère marque une nouveauté : elle demande ces versions.", cls="c") + '</section>')
+
     # 2 -------------------------------------------------------------------
+    n2 = seq("installer")
+
+    def dl_card(icon, name, who, url):
+        return ('<div class="card dlc">%s<h4>%s</h4><p class="s2">%s</p><p class="url"><a class="lk" href="%s">%s</a></p></div>'
+                % (icon, name, who, url, url))
+
+    telecharger = (
+        h3("Télécharger les applications", "telecharger") +
+        card("La page de téléchargement",
+             '<p class="url"><a class="lk" href="%s">%s</a></p>' % (URL_PAGE, URL_PAGE) +
+             p("Pour chaque application : version, date, taille, bouton « Télécharger », code QR.") +
+             ns(["Ouvrez cette page sur l'ordinateur ou sur le téléphone.",
+                 "Touchez « Télécharger », ou scannez le code QR avec le téléphone."]), "dlp") +
+        cards([dl_card(ICON_PHONE, "CastBridge", "Pour le téléphone", URL_PHONE),
+               dl_card(ICON_TV, "CastBridge-TV", "Pour la TV", URL_TV)]) +
+        nt("Ces deux liens mènent toujours à la dernière version.", cls="c"))
     s2 = [
-        drawn("2.1", svg_installer_phone(), "Installez CastBridge sur le téléphone."),
-        step("2.2", "telephone-donnees-et-consentement", ["essentiel", "stats"],
+        drawn(n2(), svg_installer_phone(), "Téléchargez et installez CastBridge sur le téléphone.",
+              note="Android peut demander « Installer des apps inconnues » : acceptez pour le navigateur."),
+        step(n2(), "telephone-donnees-et-consentement", ["essentiel", "stats"],
              "Choisissez ce que vous partagez : l'essentiel, ou aussi les statistiques.",
              "Écran CastBridge et vos données du téléphone"),
     ]
-    B.append('<section id="installer"><h2><span>2</span>Installer et activer</h2>'
-             '<h3>Sur le téléphone</h3>' + grid(s2, "ph") +
-             '<h3>Sur la TV : installer depuis une clé USB</h3>' + svg_tv_install() +
-             '<h3>Activer la TV : par le Wi-Fi, en premier</h3>' + svg_activation_wifi() +
-             '<p class="note c">Pas de Wi-Fi commun ? Le Bluetooth prend le relais.</p>' +
-             '<h3>Activer la TV : avec un code d\'appareil</h3>' + svg_activation() +
-             grid([step("2.3", "telephone-activer-la-tv", ["conditions", "etapes"],
-                        "Lisez les conditions, puis collez la clé d'activation reçue.",
-                        "Écran Activer la TV du téléphone",
-                        note="Autre voie : le fichier « activation » sur une clé USB branchée sur la TV.")], "ph") +
-             '<h3>Activer la TV : avec une clé USB</h3>' + svg_usb_picker() +
-             '<p class="note c">La clé peut être n\'importe où dans le fichier.</p>' +
-             '<aside class="box"><h4>Si votre agent vous a remis une location…</h4>'
-             '<p>Ouvrez « Activer la TV », puis « Locations ».</p>' +
-             grid([step("2.4", "telephone-locations", ["choisir", "loc", "envoyer"],
-                        "Touchez « Choisir les fichiers », puis « 2. Envoyer à la TV ».",
-                        "Écran Locations sur la TV du téléphone")], "ph") + '</aside></section>')
+
+    # -- activer avec le seul code (docs/TV-ACTIVATION-CLE-USB.md, DESIGN-ACTIVATION-SIMPLE-2026-10-07.md)
+    act = [
+        h3("Activer en 3 gestes : le code de la TV suffit", "activer-code", VERS),
+        lead("Le code de la TV suffit.", "Pas de Wi-Fi à régler, pas de fichier à copier.", "Votre téléphone garde son Internet."),
+        svg_activation_code(),
+        gh("Geste 1 : lisez le code sur la TV"),
+        cards([
+            card("Sur la TV",
+                 ns(["Ouvrez CastBridge-TV : l'écran d'activation s'affiche.",
+                     "Cochez « J'ai lu et j'accepte les conditions d'usage ».",
+                     "La TV affiche son code à 6 chiffres, en très gros."]) +
+                 nt("Exemple : 482 913.", "Sans la case cochée, la TV refuse toute clé.")),
+            card("La TV n'est sur aucun Wi-Fi, ou elle est sur câble",
+                 p("Elle crée son réseau tout de suite.") + p("Elle affiche le code et un QR code.") +
+                 say("La TV dit", "« Réseau direct prêt · en attente du téléphone »")),
+            card("La TV est sur le Wi-Fi de votre box",
+                 p("Elle affiche le code, sans QR code.") + p("Mettez le téléphone sur le même Wi-Fi.") +
+                 say("La TV dit", "« Téléphone sur le même Wi-Fi : tapez le code dans CastBridge › Activer la TV »")),
+        ]),
+        miss("Capture à ajouter : l'écran d'activation de CastBridge-TV, avec le code en très gros et le QR code."),
+        gh("Geste 2 : tapez le code sur le téléphone"),
+        split(
+            step(n2(), "telephone-onglet-castbridge-tv", ["activer"], "Sur le téléphone, ouvrez « Activer la TV ».",
+                 "Bouton Activer la TV, en haut du téléphone"),
+            cards([
+                card("Sur le téléphone",
+                     ns(["Tapez les 6 chiffres dans « Code affiché sur la TV ».",
+                         "Au sixième chiffre, la recherche part seule : aucun bouton.",
+                         "Si Android demande « Se connecter ? », touchez « Connecter ».",
+                         "Le téléphone lit seul la demande de la TV : rien à recopier.",
+                         "Il dit « TV trouvée », avec le nom de la TV.",
+                         "Comparez le code d'appareil avec celui de la TV."]) +
+                     say("Le téléphone dit", "« TV trouvée : &lt;nom de la TV&gt; · code d'appareil ABCD-… »")),
+                card("Le téléphone essaie trois chemins",
+                     ns(["Réseau local : la TV et le téléphone sont sur le même Wi-Fi.",
+                         "Réseau de la TV : le téléphone rejoint le réseau qu'elle crée.",
+                         "Bluetooth : le recours qui marche sur tous les boîtiers."]) +
+                     nt("Temps limite de chaque chemin : 10 s, 50 s, 20 s.", "Un appairage Bluetooth à valider peut allonger l'attente.")),
+                card("Pendant ce temps",
+                     bl(["Votre Internet mobile reste actif.",
+                         "Wi-Fi du téléphone éteint : le Bluetooth commence tout de suite.",
+                         "Android 13 et plus : acceptez « Appareils à proximité », une fois."])),
+            ], "one")),
+        missrow("Capture à ajouter : l'écran « Activer la TV » avec le champ « Code affiché sur la TV ».",
+                "Capture à ajouter : la boîte d'Android « Se connecter ? » avec le bouton « Connecter »."),
+        gh("Geste 3 : donnez la clé à la TV"),
+        lead("La clé active cette TV, et elle seule.", "Elle vient de votre agent.", "Posez-la dans les 48 heures."),
+        split(
+            step(n2(), "telephone-activer-la-tv", ["conditions", "etapes"], "Lisez les conditions, puis collez la clé reçue.",
+                 "Écran Activer la TV du téléphone",
+                 note="Capture de la version précédente : le champ « Code affiché sur la TV » n'y est pas encore."),
+            cards([
+                card("Votre agent est là",
+                     p("Il émet la clé avec sa console : « Émettre et installer ».") + p("La TV s'active tout de suite.")),
+                card("Votre agent n'est pas là",
+                     ns(["Touchez « Partager la demande », ou « Copier ».",
+                         "Envoyez-la à votre agent : WhatsApp, SMS ou e-mail.",
+                         "Copiez la clé qu'il vous renvoie.",
+                         "Revenez dans CastBridge : touchez « Installer cette clé »."]) +
+                     nt("Sinon, collez la clé dans « Coller la clé reçue ».", "Une clé dans un fichier ? Touchez « Choisir un fichier ».")),
+                card("Votre agent a préparé une clé USB",
+                     p("Branchez-la sur la TV.") + p('Suivez <a class="lk" href="#activer-usb">« Activer avec une clé USB »</a>.')),
+            ], "one")),
+        miss("Capture à ajouter : « TV trouvée », « Partager la demande », « Copier » et « Coller la clé reçue » sur le téléphone."),
+        cards([
+            card("Avant l'envoi, le téléphone dit quelle clé c'est",
+                 say("Le téléphone dit", "« Clé de production illimitée, faite pour cette TV. »") +
+                 say("Le téléphone dit", "« Clé d'essai de 30 jours… »") +
+                 say("Le téléphone dit", "« clé d'une autre TV »") +
+                 p("Une clé d'une autre TV n'est jamais envoyée.")),
+            card("Quand la clé est acceptée",
+                 ns(["La TV répond « Clé acceptée par la TV. »",
+                     "Une notification « TV activée » apparaît sur le téléphone.",
+                     "CastBridge propose « Ajouter ma TV » : touchez-le pour lier ce téléphone."]) +
+                 nt("Le code de connexion de la TV peut changer une fois.", "Les téléphones de confiance ne sont pas touchés.",
+                    "Les autres téléphones lisent le nouveau code dans « Connexion &amp; réglages ».")),
+        ]),
+        gh("Cas particuliers"),
+        cards([
+            card("Le téléphone n'est pas sur le Wi-Fi de la TV",
+                 ns(["Sur la TV, descendez jusqu'à la ligne sous le code.",
+                     "Appuyez sur OK : « Réseau direct en préparation… ».",
+                     "Le QR code et « Réseau direct prêt » apparaissent.",
+                     "Tapez le code sur le téléphone."]) +
+                 say("La TV dit", "« Le téléphone n'est pas sur ce Wi-Fi ? OK : réseau direct »") +
+                 say("La TV dit", "« Le Wi-Fi de la TV peut se couper le temps de l'activation. »") +
+                 nt("Il revient ensuite, sur la plupart des boîtiers.", "Sinon : Paramètres › Réseau de la TV.")),
+            card("Téléphone sous Android 9 ou plus ancien",
+                 ns(["Le téléphone montre le nom « DIRECT-CB-… » et son mot de passe.",
+                     "Connectez-le à ce Wi-Fi dans les réglages d'Android.",
+                     "Touchez « C'est fait » dans CastBridge."]) +
+                 nt("Ou touchez « Passer au Bluetooth ».")),
+            card("Le QR code de la TV",
+                 p("Scannez-le avec l'appareil photo du téléphone.") + p("Il propose de rejoindre le réseau « DIRECT-CB-… ».") +
+                 p("Ensuite, tapez le code dans « Activer la TV ».")),
+            card("TV ou téléphone plus anciens",
+                 bl(["TV 0.14.43 et téléphone récent : réseau local ou Bluetooth.",
+                     "Le téléphone dit alors de mettre la TV à jour.",
+                     "TV récente et téléphone ancien : scannez le QR code.",
+                     "Puis ouvrez « Activer la TV » comme avant."])),
+        ]),
+        nt("Dernier recours : collez la clé en bas de l'écran de la TV.", "Puis touchez « Valider la clé ».", cls="c"),
+        '<p class="note c">Un message d\'erreur ? Voir la <a class="lk" href="#probleme-activation">section %d, « Activer la TV avec le code »</a>.</p>' % SEC["probleme"],
+    ]
+    usbact = [
+        h3("Activer avec une clé USB préparée par l'agent", "activer-usb", VERS_TV),
+        lead("L'agent prépare votre clé USB sur son ordinateur.", "Vous n'avez ni fichier à copier, ni réglage Android à faire."),
+        cards([
+            card("Sur la TV",
+                 ns(["Branchez la clé sur la TV, dans n'importe quelle prise USB.",
+                     "Ouvrez l'écran d'activation et cochez les conditions d'usage.",
+                     "Un bandeau apparaît en haut de l'écran.",
+                     "Appuyez sur OK sur le bandeau : la TV est activée."]) +
+                 say("La TV dit", "« Clé USB : activation trouvée pour cette TV › Activer »")),
+            card("À savoir",
+                 bl(["La TV lit la clé dès le branchement.",
+                     "Le bandeau arrive en quelques secondes.",
+                     "L'agent prépare la clé juste avant de vous la remettre.",
+                     "Utilisez-la dans les 48 heures.",
+                     "Elle marche avec ou sans « Accès à tous les fichiers »."])),
+        ]),
+        miss("Capture à ajouter : le bandeau « Clé USB : activation trouvée pour cette TV › Activer » sur CastBridge-TV."),
+        gh("Si la TV ne montre pas le bandeau"),
+        bl(["Touchez « Chercher la clé sur la clé USB ».",
+            "Sinon, touchez « Choisir le fichier d'activation (explorateur) »."]),
+        svg_usb_picker(),
+        nt("La clé peut être n'importe où dans le fichier.", cls="c"),
+    ]
+    locations = ('<aside class="box"><h4>Si votre agent vous a remis une location…</h4>'
+                 '<p>Ouvrez « Activer la TV », puis « Locations ».</p>' +
+                 grid([step(n2(), "telephone-locations", ["choisir", "loc", "envoyer"],
+                            "Touchez « Choisir les fichiers », puis « 2. Envoyer à la TV ».",
+                            "Écran Locations sur la TV du téléphone")], "ph") + '</aside>')
+    B.append(h2("installer", "Télécharger, installer, activer") + telecharger +
+             h3("Sur le téléphone", "installer-telephone") + grid(s2, "ph") +
+             h3("Sur la TV : installer depuis une clé USB", "installer-tv") + svg_tv_install() +
+             nt("Android peut demander « Installer des apps inconnues » pour l'explorateur de fichiers.",
+                "Acceptez une fois, puis touchez Installer.", cls="c") +
+             "".join(act) + "".join(usbact) + locations + '</section>')
+
     # 3 -------------------------------------------------------------------
     chips = "".join('<span class="chip">%s</span>' % t for t in ["TV DLNA", "CastBridge TV", "Jeux", "Sur le téléphone", "Apprendre", "Parental"])
     intro = [
-        step("3.1", "telephone-onglet-castbridge-tv", ["onglet", "ajouter"],
+        step(sn("relier", 1), "telephone-onglet-castbridge-tv", ["onglet", "ajouter"],
              "Ouvrez CastBridge : l'onglet « CastBridge TV » s'affiche en premier.", "Premier écran du téléphone"),
-        step("3.2", "telephone-onglets-suite", ["surtel", "apprendre", "parental"],
+        step(sn("relier", 2), "telephone-onglets-suite", ["surtel", "apprendre", "parental"],
              "Faites glisser les onglets : il y en a six.", "Onglets du téléphone, suite", note=chips),
-        step("3.3", "tv-accueil-avec-videos", ["biblio", "ajouter", "apprendre", "langues", "jeux", "telech"],
+        step(sn("relier", 3), "tv-accueil-avec-videos", ["biblio", "ajouter", "apprendre", "langues", "jeux", "telech"],
              "Sur la TV, l'accueil montre une tuile par fonction.", "Accueil de CastBridge-TV", cls="wide"),
-        step("3.4", "tv-tuile-recevoir-du-telephone", ["recevoir", "usb", "bt", "internet", "wd"],
+        step(sn("relier", 4), "tv-tuile-recevoir-du-telephone", ["recevoir", "usb", "bt", "internet", "wd"],
              "Les tuiles de droite : code, clé USB, Bluetooth, Internet.", "Tuiles suivantes de l'accueil de la TV", cls="wide"),
     ]
     wayA = [
-        step("3.5", "tv-accueil-avec-videos", ["ajouter"], "Sur la TV, ouvrez la tuile « Ajouter un téléphone ».", "Tuile Ajouter un téléphone", cls="wide"),
-        step("3.6", "tv-bluetooth-visible", ["allow"], "Si la TV demande d'être visible en Bluetooth, acceptez.", "Fenêtre Bluetooth de la TV", cls="wide"),
-        step("3.7", "tv-ajouter-un-telephone", ["consigne", "visible", "prolonger"], "La TV attend votre téléphone pendant quelques minutes.", "Écran Ajouter un téléphone", cls="wide"),
-        step("3.8", "telephone-onglet-castbridge-tv", ["ajouter"], "Sur le téléphone, touchez « Ajouter ma TV (Bluetooth, sans code) ».", "Bouton Ajouter ma TV"),
+        step(sn("relier", 5), "tv-accueil-avec-videos", ["ajouter"], "Sur la TV, ouvrez la tuile « Ajouter un téléphone ».", "Tuile Ajouter un téléphone", cls="wide"),
+        step(sn("relier", 6), "tv-bluetooth-visible", ["allow"], "Si la TV demande d'être visible en Bluetooth, acceptez.", "Fenêtre Bluetooth de la TV", cls="wide"),
+        step(sn("relier", 7), "tv-ajouter-un-telephone", ["consigne", "visible", "prolonger"], "La TV attend votre téléphone pendant quelques minutes.", "Écran Ajouter un téléphone", cls="wide"),
+        step(sn("relier", 8), "telephone-onglet-castbridge-tv", ["ajouter"], "Sur le téléphone, touchez « Ajouter ma TV (Bluetooth, sans code) ».", "Bouton Ajouter ma TV"),
     ]
     wayB = [
-        step("3.9", "tv-tuile-recevoir-du-telephone", ["recevoir"], "Sur la TV, ouvrez la tuile « Recevoir du téléphone ».", "Tuile Recevoir du téléphone", cls="wide"),
-        step("3.10", "tv-aide-recevoir-du-telephone", ["titre", "compris"], "La TV montre son code (masqué ici) : touchez « Compris ».", "Aide de la TV", cls="wide"),
-        step("3.11", "telephone-onglet-castbridge-tv", ["manuel"], "Sur le téléphone, touchez « Ma TV n'apparaît pas… ».", "Lien Ma TV n'apparaît pas"),
-        step("3.12", "telephone-adresse-manuelle", ["case", "ip", "pin"], "Cochez la case, puis tapez l'adresse de la TV et son code.", "Saisie manuelle de la TV",
+        step(sn("relier", 9), "tv-tuile-recevoir-du-telephone", ["recevoir"], "Sur la TV, ouvrez la tuile « Recevoir du téléphone ».", "Tuile Recevoir du téléphone", cls="wide"),
+        step(sn("relier", 10), "tv-aide-recevoir-du-telephone", ["titre", "compris"], "La TV montre son code (masqué ici) : touchez « Compris ».", "Aide de la TV", cls="wide"),
+        step(sn("relier", 11), "telephone-onglet-castbridge-tv", ["manuel"], "Sur le téléphone, touchez « Ma TV n'apparaît pas… ».", "Lien Ma TV n'apparaît pas"),
+        step(sn("relier", 12), "telephone-adresse-manuelle", ["case", "ip", "pin"], "Cochez la case, puis tapez l'adresse de la TV et son code.", "Saisie manuelle de la TV",
              note="L'adresse de la TV est dans « Connexion &amp; réglages » sur la TV."),
-        step("3.13", "telephone-code-saisi-masque", ["ip", "pin"], "Le code que vous tapez reste caché par des points.", "Champs adresse et code remplis"),
-        step("3.14", "telephone-tv-jointe", ["surlatv"], "Quand « SUR LA TV » apparaît, la TV est jointe.", "Téléphone relié à la TV"),
+        step(sn("relier", 13), "telephone-code-saisi-masque", ["ip", "pin"], "Le code que vous tapez reste caché par des points.", "Champs adresse et code remplis"),
+        step(sn("relier", 14), "telephone-tv-jointe", ["surlatv"], "Quand « SUR LA TV » apparaît, la TV est jointe.", "Téléphone relié à la TV"),
     ]
-    B.append('<section id="relier"><h2><span>3</span>Relier le téléphone à la TV</h2>' + grid(intro[:2], "ph") + grid(intro[2:], "tv") +
+    B.append(h2("relier", "Relier le téléphone à la TV") + grid(intro[:2], "ph") + grid(intro[2:], "tv") +
              '<h3>Voie A : Bluetooth, sans code</h3>' + grid(wayA[:3], "tv") + grid(wayA[3:], "ph") +
              '<h3>Voie B : avec le code de la TV</h3>' + grid(wayB[:2], "tv") + grid(wayB[2:], "ph") +
-             '<h3>Wi-Fi Direct</h3>' + grid([drawn("3.15", svg_wd5(), "En Wi-Fi Direct, la TV demande la 5 GHz si possible.")], "ph") + '</section>')
+             '<h3>Wi-Fi Direct</h3>' + grid([drawn(sn("relier", 15), svg_wd5(), "En Wi-Fi Direct, la TV demande la 5 GHz si possible.")], "ph") + '</section>')
+
     # 4 -------------------------------------------------------------------
     s4 = [
-        step("4.1", "telephone-sur-le-telephone", ["videos", "video"], "Dans « Sur le téléphone », touchez la vidéo à envoyer.", "Onglet Sur le téléphone"),
-        step("4.2", "telephone-ouvrir-avec-castbridge", ["copierlire", "copier", "deplacer", "lireici"],
+        step(sn("envoyer", 1), "telephone-sur-le-telephone", ["videos", "video"], "Dans « Sur le téléphone », touchez la vidéo à envoyer.", "Onglet Sur le téléphone"),
+        step(sn("envoyer", 2), "telephone-ouvrir-avec-castbridge", ["copierlire", "copier", "deplacer", "lireici"],
              "Dans « Ouvrir avec CastBridge », choisissez comment envoyer.", "Ouvrir avec CastBridge",
              note="Les boutons sont grisés sur cette capture : aucune TV n'était reliée."),
-        step("4.3", "telephone-lecteur", ["lire"], "Dans le lecteur, touchez « Lire sur la TV ».", "Lecteur du téléphone", cls="wide2"),
-        step("4.4", "telephone-feuille-lire-sur-la-tv", ["titre", "tv"], "La feuille liste les TV trouvées et les façons d'envoyer.", "Feuille Lire sur la TV", cls="wide2"),
+        step(sn("envoyer", 3), "telephone-lecteur", ["lire"], "Dans le lecteur, touchez « Lire sur la TV ».", "Lecteur du téléphone", cls="wide2"),
+        step(sn("envoyer", 4), "telephone-feuille-lire-sur-la-tv", ["titre", "tv"], "La feuille liste les TV trouvées et les façons d'envoyer.", "Feuille Lire sur la TV", cls="wide2"),
     ]
     s4b = [
-        drawn("4.5", svg_queue(), "La barre du haut montre l'envoi et les fichiers en attente."),
-        step("4.6", "tv-bibliotheque", ["toutes", "carte1", "carte2"], "Les vidéos reçues arrivent dans la « Bibliothèque » de la TV.", "Bibliothèque de la TV", cls="wide"),
-        step("4.7", "tv-lecture", [], "Touchez OK sur une vidéo : elle se lit.", "Une vidéo se lit sur la TV", cls="wide"),
+        drawn(sn("envoyer", 5), svg_queue(), "La barre du haut montre l'envoi et les fichiers en attente."),
+        step(sn("envoyer", 6), "tv-bibliotheque", ["toutes", "carte1", "carte2"], "Les vidéos reçues arrivent dans la « Bibliothèque » de la TV.", "Bibliothèque de la TV", cls="wide"),
+        step(sn("envoyer", 7), "tv-lecture", [], "Touchez OK sur une vidéo : elle se lit.", "Une vidéo se lit sur la TV", cls="wide"),
     ]
-    B.append('<section id="envoyer"><h2><span>4</span>Envoyer une vidéo</h2>' + grid(s4[:2], "ph") + grid(s4[2:], "land") +
+    # -- Ouvrir sur la TV (docs/REMOTE.md, « Ouvrir CastBridge-TV depuis le téléphone »)
+    ouvrir = (
+        h3("Ouvrir CastBridge-TV depuis le téléphone", "ouvrir-tv", VERS) +
+        lead("Un geste sur le téléphone fait apparaître CastBridge-TV à l'écran.", "Même si une autre application est devant.") +
+        cards([
+            card("1. Le bouton", p("Touchez « Ouvrir sur la TV », en haut de l'onglet « CastBridge TV ».")),
+            card("2. La télécommande", p("Touchez la touche « TV », après Retour, Accueil, Menu, Info et Clavier.")),
+            card("3. L'icône", p("Faites un appui long sur l'icône CastBridge, puis « Ouvrir CastBridge-TV ».")),
+        ]) +
+        miss("Capture à ajouter : le bouton « Ouvrir sur la TV » de l'onglet « CastBridge TV » et la touche « TV » de la télécommande.") +
+        cards([
+            card("Si CastBridge-TV est déjà devant",
+                 p("Le bouton ouvre alors la télécommande.") + p("Rien n'est touché sur la TV : la vidéo ne s'arrête pas.")),
+            card("Ce qui peut se passer sur la TV",
+                 bl(["CastBridge-TV s'ouvre devant les autres applications.",
+                     "Ou la TV affiche une notification : validez-la avec sa télécommande.",
+                     "Ou la TV demande une autorisation « par-dessus » : acceptez-la."]) +
+                 say("Dans MENU, une seule fois", "« Autoriser CastBridge-TV à s'afficher par-dessus les autres applications »")),
+            card("Les limites",
+                 bl(["Cela n'allume pas la TV : allumez-la d'abord.",
+                     "Une TV éteinte ou en veille profonde ne répond pas.",
+                     "Android ne permet pas à CastBridge de l'allumer.",
+                     "La touche « TV » manque si « Ma TV » est d'une autre marque."])),
+        ]) +
+        gh("Ce que dit le téléphone") +
+        nt("Il essaie plusieurs voies : Wi-Fi, puis Bluetooth.", "Il attend 10 secondes au plus, puis affiche une seule ligne.") +
+        qas([
+            qa("Le téléphone dit", "« CastBridge-TV est à l'écran »", "C'est fait."),
+            qa("Le téléphone dit", "« La TV demande une autorisation : MENU › Afficher par-dessus »", "Sur la TV, ouvrez MENU, puis cette ligne."),
+            qa("Le téléphone dit", "« La TV affiche une notification « CastBridge-TV » : validez-la avec la télécommande de la TV »",
+               "Validez la notification avec la télécommande de la TV."),
+            qa("Le téléphone dit", "« La TV ne répond pas : allumez-la (le Wi-Fi ou le Bluetooth de la TV est éteint) »", "Allumez la TV, puis réessayez."),
+            qa("Le téléphone dit", "« Aucune TV n'est associée : touchez « Ajouter ma TV »… »", "Reliez d'abord le téléphone à la TV."),
+            qa("Le téléphone dit", "« La TV ne reconnaît pas ce téléphone : réassociez-la… ou saisissez son code »",
+               "Reliez de nouveau le téléphone, ou tapez le code de la TV."),
+            qa("Le téléphone dit", "« Cette TV ne connaît pas encore ce raccourci : mettez CastBridge-TV à jour »", "Mettez CastBridge-TV à jour."),
+        ]))
+    B.append(h2("envoyer", "Envoyer une vidéo") + grid(s4[:2], "ph") + grid(s4[2:], "land") +
              '<h3>Quelle façon choisir ?</h3>' + svg_decision() + '<h3>Suivre l\'envoi</h3>' + grid(s4b, "tv") +
-             grid([drawn("4.8", svg_progress(), "La copie montre « envoyés » et « confirmés ».",
+             grid([drawn(sn("envoyer", 8), svg_progress(), "La copie montre « envoyés » et « confirmés ».",
                          note="Sur un Wi-Fi lent, la ligne le dit : débit et temps restant."),
-                   drawn("4.9", svg_stop_cause(), "Une copie impossible s'arrête, avec sa cause.")], "ph") +
+                   drawn(sn("envoyer", 9), svg_stop_cause(), "Une copie impossible s'arrête, avec sa cause.")], "ph") +
              '<h3>Quand la TV demande le code</h3>' +
-             grid([drawn("4.10", svg_code_box(), "Si la TV ne vous reconnaît plus, tapez son code.",
+             grid([drawn(sn("envoyer", 10), svg_code_box(), "Si la TV ne vous reconnaît plus, tapez son code.",
                          note="Touchez « Valider et envoyer » : le code est gardé ensuite.")], "ph") +
              '<h3>Télécommande</h3>' +
-             grid([drawn("4.11", svg_remote(), "Pavé et OK pour choisir, Retour pour revenir.", note="Avancer ou reculer de 10 secondes : ▶▶| avance, |◀◀ recule.")], "ph") + '</section>')
+             grid([drawn(sn("envoyer", 11), svg_remote(), "Pavé et OK pour choisir, Retour pour revenir.", note="Avancer ou reculer de 10 secondes : ▶▶| avance, |◀◀ recule.")], "ph") +
+             ouvrir + '</section>')
+
     # 5 -------------------------------------------------------------------
+    n5 = seq("apprendre")
     langs = "".join('<span class="chip">%s</span>' % t for t in ["Chinois", "anglais", "allemand", "français", "italien", "espagnol", "japonais"])
     s5a = [
-        step("5.1", "telephone-apprendre", ["lecons", "piloter", "parents", "lots"], "L'onglet « Apprendre » propose des leçons, de la maternelle à la licence.", "Onglet Apprendre"),
-        step("5.2", "telephone-jeux", ["quiz", "echecs", "sudoku"], "L'onglet « Jeux » propose Quiz des Millions, Échecs, Sudoku.", "Onglet Jeux"),
+        step(n5(), "telephone-apprendre", ["lecons", "piloter", "parents", "lots"], "L'onglet « Apprendre » propose des leçons, de la maternelle à la licence.", "Onglet Apprendre"),
     ]
     s5b = [
-        step("5.3", "tv-apprendre", ["eleve", "classe", "contenus"], "Sur la TV, la tuile « Apprendre » ouvre les élèves.", "Apprendre sur la TV"),
-        step("5.4", "tv-jeux", ["quiz", "echecs", "sudoku"], "Sur la TV, la tuile « Jeux » ouvre les mêmes jeux.", "Jeux sur la TV"),
-        step("5.5", "tv-quiz-des-millions", ["amis", "entrainement", "scores"], "Dans Quiz des Millions, choisissez un mode, puis jouez.", "Menu du Quiz des Millions"),
+        step(n5(), "tv-apprendre", ["eleve", "classe", "contenus"], "Sur la TV, la tuile « Apprendre » ouvre les élèves.", "Apprendre sur la TV"),
     ]
     s5c = [
-        step("5.6", "tv-langues", ["chinois", "japonais", "maj"], "La tuile « Langues » liste les langues déjà reçues.", "Langues sur la TV"),
-        step("5.7", "tv-langue-niveaux", ["niveau"], "Choisissez un niveau : les leçons se lisent sans Internet.", "Niveaux d'une langue"),
+        step(n5(), "tv-langues", ["chinois", "japonais", "maj"], "La tuile « Langues » liste les langues déjà reçues.", "Langues sur la TV"),
+        step(n5(), "tv-langue-niveaux", ["niveau"], "Choisissez un niveau : les leçons se lisent sans Internet.", "Niveaux d'une langue"),
     ]
     s5d = [
-        step("5.8", "telephone-donnees-hors-ligne", ["wifi", "maj", "envoyer"], "Dans « Données hors ligne » : mettez à jour, puis envoyez.", "Données hors ligne"),
-        step("5.9", "telephone-donnees-hors-ligne", ["langue", "telecharger"], "Choisissez la langue, puis « Télécharger mes leçons de langue ».", "Section Langues de Données hors ligne",
+        step(n5(), "telephone-donnees-hors-ligne", ["wifi", "maj", "envoyer"], "Dans « Données hors ligne » : mettez à jour, puis envoyez.", "Données hors ligne"),
+        step(n5(), "telephone-donnees-hors-ligne", ["langue", "telecharger"], "Choisissez la langue, puis « Télécharger mes leçons de langue ».", "Section Langues de Données hors ligne",
              note="Pour un lot précis : « Envoyer à la TV » ou « Télécharger et envoyer »."),
-        step("5.10", "telephone-donnees-hors-ligne-suite", ["actualiser", "voir", "surlatv"], "Plus bas : les leçons du serveur et l'état de la TV.", "Données hors ligne, suite"),
+        step(n5(), "telephone-donnees-hors-ligne-suite", ["actualiser", "voir", "surlatv"], "Plus bas : les leçons du serveur et l'état de la TV.", "Données hors ligne, suite"),
     ]
-    B.append('<section id="apprendre"><h2><span>5</span>Apprendre, Quiz, Langues</h2><h3>Sur le téléphone</h3>' + grid(s5a, "ph") +
-             '<h3>Sur la TV</h3>' + grid(s5b, "tv") +
+    B.append(h2("apprendre", "Apprendre et Langues") + '<h3>Sur le téléphone</h3>' + grid(s5a, "ph") +
+             '<h3>Sur la TV</h3>' + grid(s5b, "tv1") +
              '<h3>Langues : gratuit</h3><p class="chips">%s</p>' % langs + grid(s5c, "tv") +
              '<h3>Télécharger des leçons, les envoyer à la TV</h3><p class="note">« Wi-Fi uniquement » évite d\'utiliser vos données mobiles.</p>' +
              grid(s5d, "ph") + '</section>')
-    # 6 -------------------------------------------------------------------
+
+    # 6 : Jeux (docs/GAMES.md, docs/CHESS.md § 6) ------------------------------
+    n6 = seq("jeux")
+    s6a = [step(n6(), "telephone-jeux", ["quiz", "echecs", "sudoku"], "L'onglet « Jeux » propose Quiz, Échecs, Sudoku et Bataille.", "Onglet Jeux",
+                note="Capture d'avant la Bataille. Fap-Fap et Agraham Tia y figurent aussi, « Bientôt ».")]
+    s6b = [step(n6(), "tv-jeux", ["quiz", "echecs", "sudoku"], "Sur la TV, la tuile « Jeux » ouvre la liste des jeux.", "Jeux sur la TV",
+                note="Capture d'avant la Bataille. La liste montre aussi Fap-Fap et Agraham Tia, « Bientôt ». La tuile « Jeux » de l'accueil annonce « 4 jeux ».")]
+    s6c = [step(n6(), "tv-quiz-des-millions", ["amis", "entrainement", "scores"], "Dans Quiz des Millions, choisissez un mode, puis jouez.", "Menu du Quiz des Millions")]
+    bataille = (
+        h3("Bataille (démonstration)", "bataille", VERS) +
+        lead("Un jeu de cartes simple, à deux joueurs.", "C'est une démonstration des jeux à tour de rôle.") +
+        cards([
+            card("Les règles",
+                 bl(["52 cartes : chacun en reçoit 26, faces cachées.",
+                     "Chacun retourne la carte du dessus.",
+                     "La plus forte carte gagne les deux cartes.",
+                     "L'as est la plus forte ; les couleurs ne comptent pas.",
+                     "Égalité : c'est la bataille.",
+                     "Chacun pose une carte cachée, puis retourne une carte visible.",
+                     "La plus forte carte visible prend toute la table.",
+                     "Qui n'a plus de carte perd la partie.",
+                     "Au bout de 200 retournements, le plus gros paquet gagne.",
+                     "Paquets égaux : partie nulle."])),
+            card("Seul contre l'ordinateur",
+                 ns(["Sur la TV, ouvrez « Jeux », puis « Bataille (démonstration) ».",
+                     "Réglez « Mode » sur le solo contre l'ordinateur.",
+                     "Touchez « Commencer la partie ».",
+                     "Appuyez sur OK pour retourner votre carte."]) +
+                 nt("Troisième mode : la télécommande de la TV contre un téléphone.")),
+            card("À deux téléphones, à la maison",
+                 ns(["Réglez « Mode » sur le jeu avec les téléphones.",
+                     "La TV affiche un QR code et un code à 4 chiffres.",
+                     "Sur chaque téléphone, scannez le QR code.",
+                     "Entrez votre pseudo et le code.",
+                     "La TV liste les places : ● présent, ○ attendu.",
+                     "Quand les deux sont là, touchez « Commencer la partie ».",
+                     "À votre tour, touchez « Retourner ma carte »."]) +
+                 nt("Ou, dans CastBridge, onglet « Jeux », carte « Bataille » : « Rejoindre avec ce téléphone ».",
+                    "Sans QR code, ouvrez http://&lt;adresse de la TV&gt;:8765/jeux/bataille.",
+                    "L'adresse de la TV est dans « Connexion &amp; réglages ».")),
+        ]) +
+        missrow("Capture à ajouter : la liste « Jeux » de la TV avec la Bataille, Fap-Fap et Agraham Tia.",
+                "Capture à ajouter : le salon de la Bataille sur la TV (QR code, code à 4 chiffres, places).",
+                "Capture à ajouter : la table de la Bataille sur un téléphone, avec « Retourner ma carte ».") +
+        cards([
+            card("Si un téléphone se coupe",
+                 bl(["Rouvrez la page : même place, même partie.",
+                     "Sans retour au bout de 60 secondes, vous perdez la partie.",
+                     "Si tout le monde part, la partie est abandonnée, sans perdant."]))]))
+    echecs = (
+        h3("Échecs en ligne : une TV contre une autre TV", "echecs-ligne", VERS) +
+        lead("Jouez aux échecs contre une autre TV, sur Internet.", "Partie libre, ou avec une mise de jetons NDEM ou MBOKO.",
+             "Les parties en ligne marchent quand le service est ouvert.") +
+        cards([
+            card("Ce qu'il faut",
+                 bl(["Une TV activée, avec Internet.",
+                     'Pas d\'Internet ? Le téléphone peut en prêter : <a class="lk" href="#internet">section %d</a>.' % SEC["internet"],
+                     "Une TV d'essai joue en partie libre seulement.",
+                     "Le téléphone ne joue pas : il regarde par sa TV."])),
+            card("Créer une partie",
+                 ns(["Sur la TV : « Jeux », « Échecs », puis « Adversaire : En ligne (Internet) ».",
+                     "Touchez « Créer une partie ».",
+                     "Choisissez la « Mise » : Libre, NDEM ou MBOKO.",
+                     "Avec une mise, choisissez aussi le « Montant ».",
+                     "Choisissez la couleur et le compte à rebours.",
+                     "Touchez « Créer la partie »."]) +
+                 nt("Seules les monnaies que votre TV peut miser sont proposées.")),
+            card("Rejoindre ou regarder",
+                 ns(["Choisissez « Rejoindre avec un code ».",
+                     "Entrez les 8 symboles du code avec les touches ‹ et ›.",
+                     "Une partie avec mise : la TV l'annonce avant de bloquer vos jetons.",
+                     "Sans mise : « Regarder une partie avec un code ».",
+                     "Partie fermée par erreur ? « Reprendre la partie en cours »."]) +
+                 nt("La place est gardée 6 minutes au plus.")),
+        ]) +
+        miss("Capture à ajouter : Échecs › Adversaire : En ligne (Internet), avec « Créer une partie », « Mise » et « Montant ».") +
+        cards([
+            card("Les règles à connaître",
+                 bl(["Chaque coup : 10 à 60 secondes, jamais plus.",
+                     "Compétition : temps dépassé, partie perdue.",
+                     "Une partie avec mise se joue toujours en compétition.",
+                     "Abandonner ou quitter la partie fait perdre la mise.",
+                     "Plus de 60 secondes hors ligne : c'est un abandon.",
+                     "Victoire : le gagnant reçoit les deux mises, moins les frais éventuels.",
+                     "Nulle ou partie interrompue : chaque mise est rendue."])),
+            card("Ce que dit la TV",
+                 say("La TV demande (exemple)", "« Créer une partie avec mise ? 20 NDEM par joueur · votre solde 150 NDEM »") +
+                 say("La TV dit", "« Cette partie se joue avec une mise — 20 NDEM par joueur · votre solde… »") +
+                 say("En fin de partie", "« Vous avez gagné ! » · « Partie nulle » · « Partie interrompue »") +
+                 say("Après une partie avec mise", "« Voir « Mes jetons » »") +
+                 say("Hors ligne en fin de partie", "« Règlement en attente… »")),
+            card("Quand la TV ne peut pas jouer",
+                 say("La TV dit", "« Connexion Internet requise »") +
+                 say("La TV dit", "« Les échecs en ligne ne sont pas encore ouverts sur le service CastBridge… »") +
+                 p("La TV dit toujours pourquoi : jamais un écran vide.") +
+                 p("Solde trop bas ? « Regarder seulement » reste possible.")),
+        ]))
+    bientot = (
+        h3("Bientôt : Fap-Fap et Agraham Tia", "bientot") +
+        lead("Deux jeux de cartes arrivent bientôt.", "Ils figurent dans la liste, grisés, avec « Bientôt ».", "On ne peut pas encore les lancer."))
+    B.append(h2("jeux", "Jeux") +
+             lead("Quiz, Échecs, Sudoku, Bataille : on joue sur la TV.", "Le téléphone sert de manette ou de joueur.") +
+             h3("Choisir un jeu", "jeux-liste") + grid(s6a, "ph") + grid(s6b, "tv1") +
+             h3("Quiz des Millions") + grid(s6c, "tv1") +
+             h3("Sudoku") + p("Touchez « Jouer sur la TV », puis pilotez avec la manette du téléphone.") +
+             nt("Quatre niveaux : Facile, Moyen, Difficile, Expert.") +
+             bataille + echecs + bientot + '</section>')
+
+    # 7 : Internet par le téléphone (docs/REMOTE-TUNNEL-TV.md § 5, docs/QUIZ.md § 4 bis) -----------------
+    internet = (
+        h2("internet", "Internet par le téléphone") + ver() +
+        lead("Votre TV n'a pas Internet ? Votre téléphone peut lui prêter le sien.", "La TV le demande elle-même.",
+             "Le téléphone répond sans poser de question.") +
+        cards([
+            card("À quoi ça sert",
+                 bl(["Jouer en ligne : « Partie Internet » du Quiz, échecs en ligne.",
+                     "Utiliser vos jetons.",
+                     "Mettre la TV à jour tout de suite.",
+                     "Recevoir l'assistance que vous demandez."])),
+            card("Ce qu'il faut",
+                 bl(["Le téléphone est déjà relié à la TV (code donné une fois).",
+                     "C'est votre accord : aucun écran de plus.",
+                     "Le Bluetooth du téléphone est allumé.",
+                     "CastBridge est à jour : 1.2.53 ou plus récent."])),
+        ]) +
+        h3("Comment ça se passe", "internet-comment") +
+        cards([
+            card("Étape par étape",
+                 ns(["La TV a besoin d'Internet et n'en a pas.",
+                     "Elle dit : « Demande d'Internet au téléphone… ».",
+                     "Le téléphone ouvre le tuyau, sans rien demander.",
+                     "Une seule notification : « CastBridge relaie pour &lt;nom de la TV&gt; ».",
+                     "L'opération se fait : partie en ligne, jetons ou mise à jour.",
+                     "Le tuyau se ferme 10 minutes après la dernière connexion."])),
+            card("Ce que vous voyez",
+                 say("La TV dit", "« Demande d'Internet au téléphone… »") +
+                 say("Notification du téléphone", "« CastBridge relaie pour &lt;nom de la TV&gt; »") +
+                 p("La notification est discrète : elle a un bouton « Arrêter ».")),
+        ]) +
+        missrow("Capture à ajouter : « Demande d'Internet au téléphone… » sur CastBridge-TV.",
+                "Capture à ajouter : la notification « CastBridge relaie pour &lt;TV&gt; » sur le téléphone.") +
+        h3("Vos données mobiles : vous gardez la main", "internet-donnees") +
+        cards([
+            card("Les règles du téléphone",
+                 bl(["Sur Wi-Fi : le tuyau est libre.",
+                     "Sur données mobiles : seulement le serveur CastBridge, 5 Mo par jour.",
+                     "Pas de gros téléchargement sur données mobiles.",
+                     "Exemple : une mise à jour de 41 Mo.",
+                     "Sauf si vous activez « Données mobiles pour la TV »."])),
+            card("Vos réglages",
+                 bl(["« Données mobiles pour la TV » : autorise les gros téléchargements.",
+                     "« Ne plus relayer pour cette TV » : le téléphone refuse pour cette TV.",
+                     "« Ne plus relayer » est éteint au départ, pour chaque TV.",
+                     "« Arrêter » dans la notification : cette TV attend 10 minutes."])),
+        ]) +
+        h3("Si le téléphone refuse", "internet-refus") +
+        qas([
+            qa("La TV dit", "« Le téléphone a atteint son plafond de données mobiles pour aujourd'hui »",
+               "Passez le téléphone en Wi-Fi, ou réessayez demain."),
+            qa("La TV dit", "« Ouvrez CastBridge sur le téléphone… »", "Ouvrez CastBridge sur le téléphone, puis réessayez."),
+            qa("La TV dit", "« Aucun téléphone n'est synchronisé avec la TV… »", "Reliez d'abord le téléphone à la TV, avec son code."),
+            qa("La TV dit", "« Mettez CastBridge à jour pour l'Internet par relais »", "Mettez CastBridge à jour : 1.2.53 ou plus récent."),
+        ]) +
+        h3("Jouer en ligne par le téléphone", "internet-jeu") +
+        cards([
+            card("Partie par relais",
+                 say("La TV dit", "« Partie par relais : liaison lente »") +
+                 bl(["Ce n'est pas une alarme : la partie continue.",
+                     "Aucune pénalité de classement n'est liée au relais.",
+                     "Mises à jour et gros téléchargements attendent la fin de la partie.",
+                     "Une coupure de moins de 60 secondes ne coûte rien."])),
+            card("Ce que le téléphone laisse passer",
+                 bl(["Pour la TV, le téléphone n'ouvre que le serveur CastBridge.",
+                     "Aucun autre site, aucun test de débit : tout le reste est refusé.",
+                     "La notification est neutre, avec un bouton « Arrêter »."])),
+        ]) + '</section>')
+    B.append(internet)
+
+    # 8 : Clé USB mal éjectée (docs/STORAGE.md § 11) -----------------------------------
+    n8 = seq("usb")
+    usb = (
+        h2("usb", "La clé USB") + ver(VERS_TV) +
+        lead("La TV lit votre clé USB dès qu'on la branche.", "Retirée sans éjection, une clé peut demander un contrôle.") +
+        h3("Retirer la clé sans risque", "usb-retrait") +
+        grid([step(n8(), "tv-tuile-recevoir-du-telephone", ["usb"], "La tuile « Clé USB » dit si une clé est là.", "Tuile Clé USB de la TV", cls="wide")], "tv1") +
+        cards([
+            card("Avant de retirer la clé",
+                 ns(["Sur la TV, appuyez sur MENU.",
+                     "Choisissez « Préparer le retrait de la clé USB ».",
+                     "Une copie écrit sur la clé ? Choisissez : attendre, ou mettre en pause.",
+                     "Attendez le message : vous pouvez retirer la clé.",
+                     "Retirez la clé."]) +
+                 nt("La même ligne existe dans la tuile « Clé USB » de l'accueil.")),
+            card("Si des copies écrivent sur la clé",
+                 bl(["« Attendre la fin de la copie » : les copies en cours finissent.",
+                     "« Mettre en pause et préparer le retrait » : elles s'arrêtent aussitôt.",
+                     "Les copies en pause reprendront quand vous remettrez la clé.",
+                     "Dix minutes sans retrait : les copies reprennent toutes seules.",
+                     "« Reprendre l'utilisation de la clé » la rend à tout moment."])),
+            card("Ce que dit la TV",
+                 say("La TV dit", "« Vous pouvez retirer la clé « Lexar ». »") +
+                 say("La TV dit", "« Pour une éjection complète : Réglages › Stockage › Éjecter »") +
+                 p("Le bouton « Ouvrir les réglages de stockage » mène aux Réglages.") +
+                 p("Android seul peut éjecter complètement la clé.")),
+        ]) +
+        h3("Clé retirée sans éjection : la TV la vérifie", "usb-verification") +
+        lead("Au branchement, Android contrôle d'abord la clé.", "Cela dure quelques secondes, parfois plusieurs minutes.") +
+        cards([
+            card("Ce que vous voyez",
+                 ns(["Branchez la clé : la TV dit « vérification par Android ».",
+                     "Ne retirez pas la clé : patientez.",
+                     "Après 20 secondes, la TV donne la durée écoulée.",
+                     "Après 2 minutes, la TV dit « c'est long ».",
+                     "Quand la clé est prête, la TV le dit."])),
+            card("Ce que dit la TV",
+                 say("La TV dit", "« Clé « Lexar » : vérification par Android (elle a été retirée sans éjection)… patientez »") +
+                 say("La TV dit", "« Clé « Lexar » prête »") +
+                 p("La TV reprend seule ce qu'elle cherchait sur la clé.")),
+            card("Toujours en vérification ?",
+                 p("Laissez-la faire encore quelques minutes.") +
+                 p("Sinon, retirez la clé et vérifiez-la sur un ordinateur.")),
+        ]) +
+        missrow("Capture à ajouter : « Clé « Lexar » : vérification par Android… patientez » sur CastBridge-TV.",
+                "Capture à ajouter : l'écran « Préparer le retrait de la clé USB » (MENU).") +
+        h3("Clé illisible : la marche à suivre", "usb-illisible") +
+        say("La TV dit", "« Clé illisible : Android n'a pas pu la réparer. Sur un ordinateur : Mac › Utilitaire de disque › S.O.S ; "
+                         "Windows › clic droit › Propriétés › Outils › Vérifier ; ou Réglages de la TV › Stockage › Réparer/Formater "
+                         "(le formatage efface tout) »") +
+        cards([
+            card("Sur un ordinateur",
+                 bl(["Mac : Utilitaire de disque, puis S.O.S.",
+                     "Windows : clic droit sur la clé, Propriétés, Outils, Vérifier."])),
+            card("Sur la TV",
+                 bl(["Réglages de la TV › Stockage › Réparer ou Formater.",
+                     "Le formatage efface tout."]) +
+                 p("Le bouton « Ouvrir les réglages de stockage » est dans l'explorateur de fichiers.") +
+                 p("On le trouve aussi dans la bibliothèque et dans « Préparer le retrait ».")),
+            card("Une promesse", p("CastBridge-TV ne répare et ne formate jamais rien lui-même.")),
+        ]) +
+        miss("Capture à ajouter : le guide « Clé illisible » avec le bouton « Ouvrir les réglages de stockage ».") +
+        h3("Les autres messages de la TV", "usb-messages") +
+        qas([
+            qa("La TV dit", "« … lecture seule. Les vidéos se lisent, mais rien ne peut y être copié. Retirez le verrou de la clé, ou réparez-la sur un ordinateur »",
+               "Retirez le verrou de la clé, ou réparez-la."),
+            qa("La TV dit", "« … format non reconnu par la TV (clé vierge, ou format qu'Android ne lit pas). Sur un ordinateur, formatez-la en exFAT (le formatage efface tout)… »",
+               "Formatez-la en exFAT sur un ordinateur : cela efface tout."),
+            qa("La TV dit", "« Clé retirée pendant une copie : le fichier « … » est incomplet, il sera repris »",
+               "Remettez la clé : la copie reprend là où elle s'est arrêtée."),
+            qa("La TV dit", "« Clé « … » retirée sans éjection. La prochaine fois : MENU › Préparer le retrait de la clé USB »",
+               "La prochaine fois, préparez le retrait avant de débrancher."),
+            qa("La TV dit (en vert)", "« Clé « Lexar » retirée : elle était préparée, rien n'est perdu. Au prochain branchement Android la vérifiera : c'est normal sans éjection »",
+               "Rien à faire : tout était écrit."),
+            qa("La TV dit", "« éjection en cours, ne la retirez pas encore » · « éjectée : vous pouvez la retirer »",
+               "Attendez le message « éjectée » avant de retirer la clé."),
+            qa("La TV dit", "« La copie « … » finit sa vérification : attendez-la, puis réessayez »",
+               "Attendez la fin de la vérification, puis réessayez."),
+            qa("La TV dit", "« La TV n'a pas pu confirmer que tout est écrit sur la clé. Ne la retirez pas tout de suite »",
+               "Ne retirez pas la clé : réessayez, ou reprenez l'utilisation de la clé."),
+        ]) + '</section>')
+    B.append(usb)
+
+    # 9 -------------------------------------------------------------------
     s6 = [
-        step("6.1", "tv-tuile-controle-parental", ["parental"], "Sur la TV, ouvrez la tuile « Contrôle parental ».", "Tuile Contrôle parental"),
-        step("6.2", "tv-parental-accueil", ["creer"], "Créez un code parental de 4 à 6 chiffres.", "Créer le code parental"),
-        step("6.3", "tv-parental-clavier-code", ["valider"], "Tapez le code deux fois, puis « Valider ».", "Clavier du code parental"),
-        step("6.4", "tv-parental-reglages", ["etat", "profils"], "Ouvrez « Profils des enfants ».", "Réglages des parents"),
-        step("6.5", "tv-parental-profils", ["ajouter"], "Touchez « + Ajouter un profil » pour chaque enfant.", "Profils des enfants"),
+        step(sn("parental", 1), "tv-tuile-controle-parental", ["parental"], "Sur la TV, ouvrez la tuile « Contrôle parental ».", "Tuile Contrôle parental"),
+        step(sn("parental", 2), "tv-parental-accueil", ["creer"], "Créez un code parental de 4 à 6 chiffres.", "Créer le code parental"),
+        step(sn("parental", 3), "tv-parental-clavier-code", ["valider"], "Tapez le code deux fois, puis « Valider ».", "Clavier du code parental"),
+        step(sn("parental", 4), "tv-parental-reglages", ["etat", "profils"], "Ouvrez « Profils des enfants ».", "Réglages des parents"),
+        step(sn("parental", 5), "tv-parental-profils", ["ajouter"], "Touchez « + Ajouter un profil » pour chaque enfant.", "Profils des enfants"),
     ]
-    s6b = [step("6.6", "telephone-onglets-suite", ["parental"], "Sur le téléphone, l'onglet « Parental » suit la TV.", "Onglet Parental du téléphone")]
-    B.append('<section id="parental"><h2><span>6</span>Contrôle parental</h2>' + grid(s6, "tv") + grid(s6b, "ph") +
+    s6b = [step(sn("parental", 6), "telephone-onglets-suite", ["parental"], "Sur le téléphone, l'onglet « Parental » suit la TV.", "Onglet Parental du téléphone")]
+    B.append(h2("parental", "Contrôle parental") + grid(s6, "tv") + grid(s6b, "ph") +
              '<p class="note c">L\'écran « Parental » du téléphone est protégé : il ne se capture pas.</p></section>')
-    # 7 -------------------------------------------------------------------
+
+    # 10 ------------------------------------------------------------------
     cases = [
         case_real(1, "La TV n'est pas trouvée", "telephone-onglet-castbridge-tv", ["chercher", "manuel"],
                   "Allumez la TV, ouvrez CastBridge-TV, puis « Chercher à nouveau ».", "Boutons de recherche de la TV"),
@@ -453,28 +1016,84 @@ def build_body():
         case(7, "Mauvais Wi-Fi", svg_case("wifi2"), "Mettez le téléphone sur le même Wi-Fi que la TV."),
         case(8, "Demander de l'aide", svg_case("help"), "Écrivez au support : +237 686 03 10 70."),
     ]
-    B.append('<section id="probleme"><h2><span>7</span>Si ça ne marche pas</h2><div class="steps cases">%s</div>'
-             '<p class="note c">« Déplacer vers la TV » libère la place du téléphone, pas celle de la TV.</p></section>' % "".join(cases))
-    # 8 -------------------------------------------------------------------
+    pb_act = (
+        h3("Activer la TV avec le code", "probleme-activation") +
+        qas([
+            qa("Le téléphone dit", "« La TV n'a pas pu être jointe avec ce code. » (une ligne par chemin : réseau local, réseau de la TV, Bluetooth)",
+               "Relisez les 6 chiffres, puis réessayez.", "Cochez les conditions sur la TV.", "Gardez la TV sur son écran d'activation."),
+            qa("Le téléphone dit", "« Réseau de la TV introuvable. Si la TV affiche « Le téléphone n'est pas sur ce Wi-Fi ? », appuyez sur OK sur la TV, puis « Réessayer ». »",
+               "Sur la TV, appuyez sur OK sur cette ligne.", "Puis touchez « Réessayer » sur le téléphone."),
+            qa("Le téléphone dit", "« Mettez la TV à jour pour l'activation sans réseau. »",
+               "Mettez CastBridge-TV à jour : 0.14.45 ou plus récente.", "Ou touchez « Lire la demande par Bluetooth »."),
+            qa("Le téléphone propose", "« Changer le code »",
+               "Retapez le code affiché sur la TV.", "Après 5 codes faux, la TV attend 60 secondes."),
+            qa("La TV dit", "« Cochez d'abord les conditions d'usage : la clé USB sera lue ensuite »",
+               "Cochez la case sur la TV, puis recommencez."),
+            qa("Le téléphone propose", "« Autoriser »",
+               "Acceptez « Appareils à proximité » : le téléphone en a besoin."),
+            qa("Le téléphone ou la TV dit", "« clé d'une autre TV : refaites la demande avec le code d'appareil de cette TV »",
+               "Demandez à l'agent une clé faite pour cette TV."),
+            qa("La TV dit", "« clé périmée (valable 48 h) »", "Demandez une nouvelle clé à votre agent."),
+            qa("Le téléphone dit", "« Installation… »",
+               "Rien n'est cassé si vous quittez l'écran.", "Regardez la TV : elle est peut-être activée."),
+            qa("La TV dit", "« Aucune clé USB détectée : branchez-la, la TV la lit aussitôt »",
+               "Rebranchez la clé, ou essayez une autre prise USB."),
+            qa("La TV dit", "« Android n'autorise pas CastBridge-TV à lire Download : donnez « Accès à tous les fichiers » (Réglages), ou déposez le fichier dans le dossier de l'application : &lt;chemin&gt; »",
+               "Demandez une clé préparée par l'agent, ou utilisez le téléphone."),
+        ]))
+    pb_autres = (
+        h3("Clé USB", "probleme-usb") +
+        qas([
+            qa("La TV dit", "« … vérification par Android … patientez »", "Patientez, sans retirer la clé.", "Voir la " + xref("usb", "La clé USB") + "."),
+            qa("La TV dit", "« Clé illisible : Android n'a pas pu la réparer… »", "Réparez la clé sur un ordinateur.", "Voir la " + xref("usb", "La clé USB") + "."),
+            qa("La TV dit", "« Clé retirée pendant une copie… »", "Remettez la clé : la copie reprend."),
+        ]) +
+        h3("Ouvrir sur la TV", "probleme-ouvrir") +
+        qas([
+            qa("Le téléphone dit", "« La TV ne répond pas : allumez-la… »", "Allumez la TV : « Ouvrir sur la TV » ne l'allume pas.",
+               "Voir la " + xref("envoyer", "Envoyer une vidéo") + "."),
+        ]) +
+        h3("Internet par le téléphone", "probleme-internet") +
+        qas([
+            qa("La TV dit", "« Aucun téléphone n'est synchronisé avec la TV… »", "Reliez d'abord le téléphone à la TV.",
+               "Voir la " + xref("internet", "Internet par le téléphone") + "."),
+        ]) +
+        h3("Jeux", "probleme-jeux") +
+        qas([
+            qa("La TV et les autres joueurs voient", "« déconnecté · reprise possible encore NN s »",
+               "Le joueur coupé rouvre la page : même place, même partie."),
+            qa("La TV dit", "« Connexion Internet requise »", "Donnez Internet à la TV, ou utilisez le tuyau du téléphone."),
+            qa("La TV dit", "« Les échecs en ligne ne sont pas encore ouverts sur le service CastBridge… »",
+               "Le service n'est pas ouvert : réessayez plus tard."),
+        ]))
+    B.append(h2("probleme", "Si ça ne marche pas") + '<div class="steps cases">%s</div>' % "".join(cases) +
+             '<p class="note c">« Déplacer vers la TV » libère la place du téléphone, pas celle de la TV.</p>' +
+             pb_act + pb_autres + '</section>')
+
+    # 11 ------------------------------------------------------------------
     lines = [
-        ("La TV n'a pas besoin d'Internet.", '<svg viewBox="0 0 40 40"><path d="M6 20 h28 M20 6 v28" class="ln er"/><circle cx="20" cy="20" r="14" class="st"/></svg>'),
+        ("La TV n'a pas besoin d'Internet, sauf pour jouer en ligne.", '<svg viewBox="0 0 40 40"><path d="M6 20 h28 M20 6 v28" class="ln er"/><circle cx="20" cy="20" r="14" class="st"/></svg>'),
         ("Les statistiques d'usage : seulement si vous acceptez.", '<svg viewBox="0 0 40 40"><path d="M8 22 l8 8 l16 -18" class="ln ok"/></svg>'),
         ("Vous changez d'avis à tout moment dans « Réglages ».", '<svg viewBox="0 0 40 40"><circle cx="20" cy="20" r="8" class="st"/><path d="M20 4 v6 M20 30 v6 M4 20 h6 M30 20 h6" class="ln"/></svg>'),
+        ("Si le téléphone prête son Internet, seul le serveur CastBridge est joignable.", '<svg viewBox="0 0 40 40"><path d="M8 22 l8 8 l16 -18" class="ln ok"/></svg>'),
     ]
+    for t, _ in lines:
+        check(t, "données")
     s8 = [
-        step("8.1", "telephone-donnees-hors-ligne-suite", ["surlatv"], "Sur la TV : « La TV n'a jamais besoin d'Internet ».", "Texte Sur la TV"),
-        step("8.2", "telephone-donnees-et-consentement", ["essentiel", "stats"], "Vous choisissez au premier lancement.", "Choix des statistiques"),
-        step("8.3", "telephone-reglages", ["stats", "mesdonnees", "effacer"], "Dans « Réglages » : « Mes données » et « Effacer mes données ».", "Réglages du téléphone"),
+        step(sn("donnees", 1), "telephone-donnees-hors-ligne-suite", ["surlatv"], "Sur la TV : « La TV n'a jamais besoin d'Internet ».", "Texte Sur la TV"),
+        step(sn("donnees", 2), "telephone-donnees-et-consentement", ["essentiel", "stats"], "Vous choisissez au premier lancement.", "Choix des statistiques"),
+        step(sn("donnees", 3), "telephone-reglages", ["stats", "mesdonnees", "effacer"], "Dans « Réglages » : « Mes données » et « Effacer mes données ».", "Réglages du téléphone"),
     ]
-    B.append('<section id="donnees"><h2><span>8</span>Vos données</h2><ul class="three">%s</ul>' %
+    B.append(h2("donnees", "Vos données") + '<ul class="three">%s</ul>' %
              "".join('<li>%s<span>%s</span></li>' % (ic, esc(t)) for t, ic in lines) + grid(s8, "ph") + '</section>')
-    # 9 -------------------------------------------------------------------
-    B.append('<section id="aide"><h2><span>9</span>Aide</h2>'
+    # 12 ------------------------------------------------------------------
+    B.append(h2("aide", "Aide") +
              '<div class="help" role="note"><p class="hp">Écrivez-nous sur WhatsApp ou appelez :</p>'
              '<p class="num" id="tel">+237 686 03 10 70</p>'
              '<button type="button" class="cp" onclick="var t=document.getElementById(\'tel\').textContent,b=this;try{navigator.clipboard.writeText(t).then(function(){b.textContent=\'Copié\'})}catch(e){var r=document.createRange();r.selectNode(document.getElementById(\'tel\'));getSelection().removeAllRanges();getSelection().addRange(r)}">Copier</button>'
              '</div></section>')
     return "".join(B)
+
 
 
 CSS = r"""
@@ -533,6 +1152,37 @@ svg .st[fill="#f5b025"]{fill:#f5b025}
 .help{border:3px dashed var(--er);border-radius:18px;padding:24px;text-align:center;font-size:1.2rem;background:var(--card)}.help p{margin:0}.help .num{font-size:1.8rem;font-weight:700;margin:8px 0;user-select:all;-webkit-user-select:all}.help .cp{min-height:44px;padding:0 20px;border-radius:22px;border:2px solid var(--ac2);background:var(--chip);color:var(--fg);font:600 1rem system-ui,sans-serif}
 footer{margin-top:36px;color:var(--mut);font-size:.82rem;text-align:center}
 @media (min-width:700px){.step.wide{grid-column:auto}}
+.steps.tv1{grid-template-columns:minmax(0,560px);justify-content:center}
+a.lk{color:var(--ac);font-weight:700}
+.lead{margin:4px 0 12px;font-size:1.05rem}
+.ver{display:block;width:fit-content;max-width:100%;margin:2px 0 12px;padding:3px 12px;border:1px solid var(--ac);border-radius:14px;background:var(--chip);color:var(--ac);font-size:.8rem;font-weight:700}
+.ver.c{margin:10px auto 0;text-align:center}
+.gh{margin:24px 0 6px;font-size:1.12rem}
+.cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,270px),1fr));gap:14px;margin:12px 0;align-items:start}
+.cards.one{grid-template-columns:minmax(0,1fr);margin:0}
+.card{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:14px;display:flex;flex-direction:column;gap:8px;min-width:0}
+.card h4{margin:0}.card .s2{margin:0}
+.card.dlp{margin:12px 0}
+.dlc{align-items:center;text-align:center}.dlc svg{width:110px;height:auto}
+.url{margin:0;font-weight:700;font-size:.9rem;word-break:break-all;user-select:all;-webkit-user-select:all}
+.ns{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:8px}
+.ns li{display:flex;gap:10px;align-items:flex-start;font-weight:600}
+.ns li b{flex:none;width:26px;height:26px;border-radius:50%;background:var(--hl);color:#111;display:inline-grid;place-items:center;font-size:.85rem;margin-top:1px}
+.bl{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:6px}
+.bl li{display:flex;gap:8px;align-items:flex-start;font-weight:600}
+.bl li::before{content:"•";color:var(--ac);font-weight:700}
+.say{margin:2px 0;padding:8px 12px;border-left:4px solid var(--ac2);background:var(--chip);border-radius:8px;font-size:.92rem;font-weight:600}
+.say b{display:block;font-size:.7rem;font-weight:700;text-transform:uppercase;letter-spacing:.05em;color:var(--mut);margin-bottom:2px}
+.miss{margin:8px 0;padding:10px 12px;border:2px dashed var(--line);border-radius:12px;color:var(--mut);font-size:.84rem;text-align:center}
+.miss b{display:block;color:var(--fg);font-size:.72rem;text-transform:uppercase;letter-spacing:.05em}
+.miss figcaption{margin-top:2px}
+.missrow{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,260px),1fr));gap:10px;margin:8px 0}
+.missrow .miss{margin:0}
+.split{display:grid;gap:16px;align-items:start;margin:12px 0}
+@media (min-width:700px){.split{grid-template-columns:300px minmax(0,1fr)}}
+.qas{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,300px),1fr));gap:12px;margin:12px 0;align-items:stretch}
+.qa{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:10px 12px;display:flex;flex-direction:column;gap:6px;min-width:0}
+.qa .say{margin:0}.qa p{margin:0;font-weight:700;font-size:.98rem}.qa p b{color:var(--ac)}
 """
 
 
@@ -548,18 +1198,25 @@ def jpeg_uri(path, kind):
 
 def main():
     body = build_body()
+    if VIOLATIONS:
+        print("phrases de plus de 12 mots (%d) :" % len(VIOLATIONS))
+        for v in VIOLATIONS:
+            print("  -", v)
+        raise SystemExit(1)
+    body = typo(body)
     css_imgs = []
     for name in USED:
         s = BY[name]
         css_imgs.append(".im-%s{background-image:url(%s)}" % (s["id"], jpeg_uri(os.path.join(SCR, s["file"]), s["kind"])))
-    toc = [("materiel", "1", "Matériel"), ("installer", "2", "Installer"), ("relier", "3", "Relier"), ("envoyer", "4", "Envoyer"),
-           ("apprendre", "5", "Apprendre"), ("parental", "6", "Parental"), ("probleme", "7", "Problèmes"), ("donnees", "8", "Données"), ("aide", "9", "Aide")]
+    toc = [(sid, str(i), label) for i, (sid, label) in enumerate(SECTIONS, 1)]
     nav = "".join('<a href="#%s"><b>%s</b>%s</a>' % (i, n, t) for i, n, t in toc)
     html = ('<!doctype html><html lang="fr"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">'
             '<title>Guide CastBridge</title><meta name="color-scheme" content="light dark"><style>%s%s</style></head><body>%s'
             '<div class="wrap"><header class="top"><h1>Guide CastBridge</h1><p class="sub">Envoyer vos vidéos du téléphone vers la TV. CastBridge sur le téléphone, CastBridge-TV sur la TV.</p></header>'
             '<nav class="toc" aria-label="Sommaire">%s</nav>%s'
-            '<footer>Les captures viennent d\'un émulateur avec des vidéos de test et des codes masqués. Les dessins sont signalés.<br>Version du guide : 2026-10-07 · CastBridge 1.2.50 · CastBridge-TV 0.14.43</footer></div></body></html>'
+            '<footer>Les captures viennent d\'un émulateur avec des vidéos de test et des codes masqués. Les dessins sont signalés. '
+            'Un cadre en pointillés marque une illustration qui manque encore.<br>'
+            'Version du guide : 2026-10-07 · CastBridge 1.2.53 · CastBridge-TV 0.14.45 (captures de CastBridge 1.2.50 et CastBridge-TV 0.14.43)</footer></div></body></html>'
             % (CSS, "".join(css_imgs), DEFS, nav, body))
     open(OUTFILE, "w", encoding="utf-8").write(html)
     # numéros d'étapes dans annotations.json
@@ -570,6 +1227,9 @@ def main():
     unused = [s["name"] for s in DATA["screens"] if s["name"] not in USED]
     print("non utilisées :", unused)
     print("phrases :", len(sentences), "max mots :", max(words(x) for x in sentences))
+    print("illustrations manquantes (légendes laissées dans le guide) :", len(MISSING))
+    for m in MISSING:
+        print("  -", html_unescape(m))
 
 
 if __name__ == "__main__":
