@@ -31,6 +31,17 @@ class ServerIssuedInstallKeyTest extends LicenseTestBase {
         assertThat(WireActivation.installKeyOf(f.rights())).isEqualTo(java.util.Base64.getEncoder().encodeToString(java.util.HexFormat.of().parseHex(SIG)));
     }
 
+    /** ACT-F4 amendée le 2026-10-07 : la demande COMPLÈTE de la TV (avec {@code install=x25519|<64 hex>}, clé publique) est émise comme la forme « pour le serveur » : la ligne est tolérée et ignorée. */
+    @Test
+    void theCompleteRequestOfTheTvWithItsPublicInstallKeyIsIssuedLikeTheServerForm() {
+        String lic = newLicense();
+        Dev d = dev();
+        var serverForm = issueWith(lic, d, "\ninstall_sig=ed25519|" + SIG);
+        var complete = issueWith(lic, d, "\ninstall=x25519|" + "0a".repeat(32) + "\ninstall_sig=ed25519|" + SIG);
+        assertThat(complete.text()).isEqualTo(serverForm.text());
+        assertThat(WireActivation.decode(complete.text()).fields().rights()).contains("ik|" + SIG);
+    }
+
     @Test
     void aRequestWithoutItBindsNoKeyAndTheSameRequestIsIdempotent() {
         String lic = newLicense();

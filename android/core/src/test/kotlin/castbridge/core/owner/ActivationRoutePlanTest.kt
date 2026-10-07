@@ -10,11 +10,13 @@ import castbridge.core.owner.ActivationRoutePlan.LineState
 import castbridge.core.owner.ActivationRoutePlan.Phase
 import castbridge.core.owner.ActivationRoutePlan.Route
 import castbridge.core.owner.ActivationRoutePlan.Run
+import castbridge.core.link.JoinMethod
+import castbridge.core.link.WdJoin
 import castbridge.core.tv.WdCode
 import kotlin.test.*
 
 /**
- * « Code affiché sur la TV » : l'ordre des voies (réseau local, groupe Wi-Fi Direct dérivé du code, Bluetooth), leurs bornes (10 s, 20 s, 20 s), la ligne d'état de chaque étape,
+ * « Code affiché sur la TV » : l'ordre des voies (réseau local, groupe Wi-Fi Direct dérivé du code, Bluetooth), leurs bornes (10 s, 50 s, 20 s), la ligne d'état de chaque étape,
  * la cause par voie à l'échec, Android 9 et moins (jonction à la main). Temps simulé : aucun fil, aucune horloge.
  * (docs/coordination/DESIGN-ACTIVATION-SIMPLE-2026-10-07.md, ACT-F2, ACT-F3, ACT-NF2, ACT-NF4)
  */
@@ -32,10 +34,22 @@ class ActivationRoutePlanTest {
 
     // ------------------------------------------------------------------ l'ordre et les bornes
 
-    @Test fun theBoundsAreTenTwentyAndTwentySeconds() {
-        assertEquals(10_000L, ActivationRoutePlan.LAN_MS); assertEquals(20_000L, ActivationRoutePlan.GROUP_MS); assertEquals(20_000L, ActivationRoutePlan.BT_MS)
-        assertEquals(listOf(10_000L, 20_000L, 20_000L), Route.values().map(ActivationRoutePlan::boundMs))
+    // la borne du groupe est celle de la boîte « Se connecter ? » d'Android ailleurs dans l'application (audit I-6 : 20 s étaient trop courts, la TV met jusqu'à 10 s à créer son groupe après un OK)
+    private val groupEnd = 11_000L + ActivationRoutePlan.GROUP_MS             // le réseau local a abandonné à 11 000 (départ à 1 000 + 10 s), le groupe 50 s plus tard
+    private val bluetoothEnd = groupEnd + ActivationRoutePlan.BT_MS
+
+    @Test fun theBoundsAreTenFiftyAndTwentySeconds() {
+        assertEquals(10_000L, ActivationRoutePlan.LAN_MS); assertEquals(50_000L, ActivationRoutePlan.GROUP_MS); assertEquals(20_000L, ActivationRoutePlan.BT_MS)
+        assertEquals(listOf(10_000L, 50_000L, 20_000L), Route.values().map(ActivationRoutePlan::boundMs))
         assertEquals(listOf(Route.LAN, Route.GROUP, Route.BLUETOOTH), Route.values().toList(), "l'ordre : réseau local, groupe, Bluetooth")
+    }
+
+    @Test fun theGroupBoundIsTheOneOfTheSystemBoxEverywhereElseInTheApp() {
+        assertEquals(WdJoin.joinTimeoutMs(JoinMethod.NETWORK_SPECIFIER), ActivationRoutePlan.boundMs(Route.GROUP), "une seule valeur pour la boîte « Se connecter ? »")
+        assertEquals(WdJoin.NETWORK_SPECIFIER_JOIN_MS, ActivationRoutePlan.GROUP_MS)
+        assertEquals(50_000L, ActivationRoutePlan.GROUP_MS)
+        assertEquals(Phase.Trying(Route.GROUP, 11_000, 50_000), start().run.on(Event.Tick(11_000)).run.phase, "le plan tente le groupe pendant 50 s")
+        assertEquals(50_000L, WdJoin.NETWORK_SPECIFIER_JOIN_MS); assertEquals(20_000L, WdJoin.joinTimeoutMs(JoinMethod.P2P_CONNECT), "la jonction P2P garde ses 20 s")
     }
 
     @Test fun itStartsWithTheLocalNetworkAndAsksTheExecutorToTryIt() {
@@ -48,19 +62,19 @@ class ActivationRoutePlanTest {
         val s = start()
         assertEquals(s.run, s.run.on(Event.Tick(10_999)).run, "9,999 s : rien ne change")
         val next = s.run.on(Event.Tick(11_000))
-        assertEquals(Phase.Trying(Route.GROUP, 11_000, 20_000), next.run.phase)
-        assertEquals(listOf(Effect.Abort(Route.LAN), Effect.Try(Route.GROUP, 20_000)), next.effects, "l'étape précédente est arrêtée, la suivante commence")
+        assertEquals(Phase.Trying(Route.GROUP, 11_000, 50_000), next.run.phase)
+        assertEquals(listOf(Effect.Abort(Route.LAN), Effect.Try(Route.GROUP, 50_000)), next.effects, "l'étape précédente est arrêtée, la suivante commence")
         assertEquals(Cause.Kind.NOT_ANNOUNCED, next.run.causes.getValue(Route.LAN).kind)
     }
 
-    @Test fun theGroupGivesUpAfterTwentySecondsThenBluetoothAfterTwentyMoreThenItFails() {
+    @Test fun theGroupGivesUpAfterFiftySecondsThenBluetoothAfterTwentyMoreThenItFails() {
         var s = start().run.on(Event.Tick(11_000))
-        assertEquals(s.run, s.run.on(Event.Tick(30_999)).run)
-        s = s.run.on(Event.Tick(31_000))
-        assertEquals(Phase.Trying(Route.BLUETOOTH, 31_000, 20_000), s.run.phase)
+        assertEquals(s.run, s.run.on(Event.Tick(60_999)).run, "49,999 s : le groupe est encore tenté")
+        s = s.run.on(Event.Tick(61_000))
+        assertEquals(Phase.Trying(Route.BLUETOOTH, 61_000, 20_000), s.run.phase)
         assertEquals(listOf(Effect.Abort(Route.GROUP), Effect.Try(Route.BLUETOOTH, 20_000)), s.effects)
-        assertEquals(s.run, s.run.on(Event.Tick(50_999)).run)
-        val end = s.run.on(Event.Tick(51_000))
+        assertEquals(s.run, s.run.on(Event.Tick(80_999)).run)
+        val end = s.run.on(Event.Tick(81_000))
         assertIs<Phase.Failed>(end.run.phase)
         assertEquals(listOf<Effect>(Effect.Abort(Route.BLUETOOTH)), end.effects)
     }
@@ -87,9 +101,9 @@ class ActivationRoutePlanTest {
 
     @Test fun aDefinitiveFailureMovesOnAtOnceWithoutWaitingForTheBound() {
         val s = start().run.on(Event.Failed(Route.LAN, Cause(Cause.Kind.CLOSED), 2_500))
-        assertEquals(Phase.Trying(Route.GROUP, 2_500, 20_000), s.run.phase)
+        assertEquals(Phase.Trying(Route.GROUP, 2_500, 50_000), s.run.phase)
         assertEquals(Cause.Kind.CLOSED, s.run.causes.getValue(Route.LAN).kind)
-        assertEquals(listOf(Effect.Abort(Route.LAN), Effect.Try(Route.GROUP, 20_000)), s.effects)
+        assertEquals(listOf(Effect.Abort(Route.LAN), Effect.Try(Route.GROUP, 50_000)), s.effects)
     }
 
     @Test fun eventsOfARouteThatIsNotTheCurrentOneAreIgnored() {
@@ -129,13 +143,13 @@ class ActivationRoutePlanTest {
 
     @Test fun notBeingOnAnyWifiSkipsOnlyTheLocalNetwork() {
         val s = start(facts(onWifi = false))
-        assertEquals(Phase.Trying(Route.GROUP, 1_000, 20_000), s.run.phase)
+        assertEquals(Phase.Trying(Route.GROUP, 1_000, 50_000), s.run.phase)
         assertEquals(Cause.Kind.NOT_ON_WIFI, s.run.causes.getValue(Route.LAN).kind)
     }
 
     @Test fun bluetoothThatCannotWorkIsSkippedWithItsCauseAndNeverWaitedFor() {
         for ((bt, kind) in listOf(Bt.OFF to Cause.Kind.BT_OFF, Bt.NO_PERMISSION to Cause.Kind.BT_PERMISSION, Bt.NO_ADAPTER to Cause.Kind.BT_NO_ADAPTER)) {
-            val end = start(facts(bt = bt)).run.on(Event.Tick(11_000)).run.on(Event.Tick(31_000))
+            val end = start(facts(bt = bt)).run.on(Event.Tick(11_000)).run.on(Event.Tick(groupEnd))
             val failed = assertIs<Phase.Failed>(end.run.phase, "$bt")
             assertEquals(kind, end.run.causes.getValue(Route.BLUETOOTH).kind)
             assertTrue(end.effects.none { it is Effect.Try }, "aucune étape Bluetooth lancée")
@@ -164,13 +178,13 @@ class ActivationRoutePlanTest {
         assertEquals(s.run, s.run.on(Event.Tick(500_000)).run, "attente de l'usager : aucune borne qui tourne")
     }
 
-    @Test fun theManualJoinThenProbesTheGroupFor20Seconds() {
+    @Test fun theManualJoinThenProbesTheGroupFor50Seconds() {
         val waiting = start(facts(api = 26)).run.on(Event.Tick(11_000)).run
         val go = waiting.on(Event.UserJoined(40_000))
-        assertEquals(Phase.Trying(Route.GROUP, 40_000, 20_000), go.run.phase)
-        assertEquals(listOf<Effect>(Effect.Try(Route.GROUP, 20_000, manual = true)), go.effects)
-        val late = go.run.on(Event.Tick(60_000))
-        assertEquals(Phase.Trying(Route.BLUETOOTH, 60_000, 20_000), late.run.phase)
+        assertEquals(Phase.Trying(Route.GROUP, 40_000, 50_000), go.run.phase)
+        assertEquals(listOf<Effect>(Effect.Try(Route.GROUP, 50_000, manual = true)), go.effects)
+        val late = go.run.on(Event.Tick(90_000))
+        assertEquals(Phase.Trying(Route.BLUETOOTH, 90_000, 20_000), late.run.phase)
         assertEquals(Cause.Kind.NOT_JOINED, late.run.causes.getValue(Route.GROUP).kind)
         assertEquals(listOf(Effect.Abort(Route.GROUP), Effect.Try(Route.BLUETOOTH, 20_000)), late.effects)
     }
@@ -184,7 +198,7 @@ class ActivationRoutePlanTest {
     @Test fun fromAndroid10TheGroupIsJoinedByTheApp() {
         for (api in listOf(29, 30, 31, 33, 34, 35)) {
             val s = start(facts(api = api)).run.on(Event.Tick(11_000))
-            assertEquals(Phase.Trying(Route.GROUP, 11_000, 20_000), s.run.phase, "api $api")
+            assertEquals(Phase.Trying(Route.GROUP, 11_000, 50_000), s.run.phase, "api $api")
             assertFalse((s.effects.last() as Effect.Try).manual)
         }
         assertEquals(29, ActivationRoutePlan.GROUP_MIN_API)
@@ -215,7 +229,7 @@ class ActivationRoutePlanTest {
         assertEquals(listOf(LineState.ACTIVE, LineState.WAITING, LineState.WAITING), l.map { it.state })
         assertTrue("10 s" in l[0].text && l[0].text.startsWith("Réseau local"), l[0].text)
         val g = r.on(Event.Tick(11_000)).run.lines()[1]
-        assertTrue("20 s" in g.text && WdCode.networkName(code) in g.text, g.text)
+        assertTrue("(50 s au plus)" in g.text && WdCode.networkName(code) in g.text, g.text)
         val b = start(facts(wifiOn = false)).run.lines()[2]
         assertTrue("20 s" in b.text && b.text.startsWith("Bluetooth"), b.text)
         assertEquals("Recherche de la TV…", r.headline().take(19))
@@ -232,8 +246,8 @@ class ActivationRoutePlanTest {
 
     @Test fun theFinalFailureNamesEveryRouteAndItsOwnCause() {
         var s = start().run.on(Event.Observed(Route.LAN, Cause(Cause.Kind.CODE_REFUSED, "CastBridge TV salon"))).run.on(Event.Tick(11_000))
-        s = s.run.on(Event.Tick(31_000))
-        s = s.run.on(Event.Tick(51_000))
+        s = s.run.on(Event.Tick(groupEnd))
+        s = s.run.on(Event.Tick(bluetoothEnd))
         val m = assertIs<Phase.Failed>(s.run.phase).message
         assertTrue(m.startsWith("La TV n'a pas pu être jointe avec ce code."), m)
         assertTrue("Réseau local : La TV « CastBridge TV salon » a refusé ce code" in m, m)
@@ -247,7 +261,7 @@ class ActivationRoutePlanTest {
         fun advice(cause: Cause?): String {
             var s = start()
             if (cause != null) s = s.run.on(Event.Observed(Route.LAN, cause))
-            s = s.run.on(Event.Tick(11_000)); s = s.run.on(Event.Tick(31_000)); s = s.run.on(Event.Tick(51_000))
+            s = s.run.on(Event.Tick(11_000)); s = s.run.on(Event.Tick(groupEnd)); s = s.run.on(Event.Tick(bluetoothEnd))
             return (s.run.phase as Phase.Failed).message.lines().last()
         }
         assertTrue(advice(null).startsWith("Vérifiez que la TV est allumée et affiche son écran d'activation de CastBridge-TV"), advice(null))
@@ -323,9 +337,11 @@ class ActivationRoutePlanTest {
         s = s.run.on(Event.Observed(Route.LAN, Cause(Cause.Kind.CODE_REFUSED, "TV"))); runs += s.run
         s = s.run.on(Event.Tick(11_000)); runs += s.run
         s = s.run.on(Event.UserJoined(12_000)); runs += s.run
-        s = s.run.on(Event.Tick(40_000)); runs += s.run
-        s = s.run.on(Event.Tick(70_000)); runs += s.run
+        s = s.run.on(Event.Tick(12_000 + ActivationRoutePlan.GROUP_MS)); runs += s.run
+        s = s.run.on(Event.Tick(12_000 + ActivationRoutePlan.GROUP_MS + ActivationRoutePlan.BT_MS)); runs += s.run
         runs += start().run.on(Event.Reached(lan())).run
+        runs += start().run.on(Event.Tick(11_000)).run.on(Event.Tick(groupEnd)).run               // le réseau de la TV introuvable (Bluetooth en cours)
+        runs += runs.last().on(Event.Tick(bluetoothEnd)).run                                       // … puis l'échec final
         for (r in runs) for (t in allTexts(r)) assertFalse(code in t, "le code ne doit figurer dans aucun texte : $t")
         assertFalse(code in Facts(code, 34, true, true, Bt.PAIRED).toString())
         assertFalse(WdCode.passphrase(code) in Phase.ManualJoin(WdCode.networkName(code), WdCode.passphrase(code)).toString(), "le mot de passe dérivé ne va pas non plus dans un journal")
@@ -355,5 +371,126 @@ class ActivationRoutePlanTest {
         assertEquals("TV", ActivationRoutePlan.cleanName("\u202ETV\u202C"), "les marques de sens d'écriture sont retirées")
         assertEquals("CastBridge-TV", ActivationRoutePlan.cleanName(""), "un nom vide devient le nom de l'application")
         assertEquals(40, ActivationRoutePlan.cleanName("x".repeat(500)).length)
+    }
+
+    // ------------------------------------------------------------------ « Réseau de la TV introuvable » : la TV attend peut-être un geste (act-tv-2, ActivationGroupPolicy)
+    // Une TV déjà reliée à un Wi-Fi ne crée PAS le groupe d'activation d'emblée : son écran montre le code seul et la ligne « Le téléphone n'est pas sur ce Wi-Fi ? » (OK : réseau direct), qui le crée à la demande.
+
+    private val notFoundLine = "Réseau de la TV introuvable. Si la TV affiche « Le téléphone n'est pas sur ce Wi-Fi ? », appuyez sur OK sur la TV, puis « Réessayer »."
+
+    @Test fun whenTheLocalNetworkFoundNoTvTheExpiredGroupLineTellsToPressOkOnTheTvThenRetry() {
+        val group = start().run.on(Event.Tick(11_000))                                    // réseau local : aucune TV en 10 s ; le groupe est tenté
+        assertEquals(Phase.Trying(Route.GROUP, 11_000, 50_000), group.run.phase)
+        assertEquals(group.run, group.run.on(Event.Tick(groupEnd - 1)).run, "49,999 s : le groupe est encore tenté")
+        val next = group.run.on(Event.Tick(groupEnd))                                     // 50 s : le groupe expire
+        assertEquals(Cause(Cause.Kind.GROUP_NOT_FOUND), next.run.causes.getValue(Route.GROUP))
+        assertEquals(ActivationRoutePlan.Line(Route.GROUP, LineState.FAILED, notFoundLine), next.run.lines()[1], "la ligne de cette voie est exactement cette phrase")
+        // le Bluetooth continue comme aujourd'hui : il commence tout de suite, borné à 20 s
+        assertEquals(Phase.Trying(Route.BLUETOOTH, groupEnd, 20_000), next.run.phase)
+        assertEquals(listOf(Effect.Abort(Route.GROUP), Effect.Try(Route.BLUETOOTH, 20_000)), next.effects)
+        assertEquals(Cause.Kind.NOT_ANNOUNCED, next.run.causes.getValue(Route.LAN).kind)
+    }
+
+    @Test fun aPhoneOnNoWifiThatCannotJoinTheGroupGetsTheSameLine() {
+        // le cas de P-77 : téléphone en données mobiles, la TV est sur sa box et n'a pas créé le groupe
+        val s = start(facts(onWifi = false)).run.on(Event.Tick(1_000 + ActivationRoutePlan.GROUP_MS))
+        assertEquals(Cause.Kind.NOT_ON_WIFI, s.run.causes.getValue(Route.LAN).kind)
+        assertEquals(Cause.Kind.GROUP_NOT_FOUND, s.run.causes.getValue(Route.GROUP).kind)
+        assertEquals(notFoundLine, s.run.lines()[1].text)
+    }
+
+    @Test fun theTimeoutThatAndroidReportsAtTheBoundIsTheSameAsTheOneOfTheClock() {
+        // le délai de la demande de réseau (WifiNetworkSpecifier) est le même que celui du plan : Android rapporte « indisponible » vers la 20e seconde, parfois avant le tic du plan
+        val trying = start().run.on(Event.Tick(11_000)).run
+        assertEquals(1_000L, ActivationRoutePlan.GROUP_TIMEOUT_SLACK_MS)
+        for (at in listOf(groupEnd - 1_000, groupEnd, groupEnd + 300)) {                                // 49 s (la marge), 50 s, 50,3 s
+            val s = trying.on(Event.Failed(Route.GROUP, Cause(Cause.Kind.NOT_JOINED), at))
+            assertEquals(Cause.Kind.GROUP_NOT_FOUND, s.run.causes.getValue(Route.GROUP).kind, "at=$at")
+            assertEquals(Phase.Trying(Route.BLUETOOTH, at, 20_000), s.run.phase, "at=$at")
+        }
+        // un refus (l'usager décline la boîte d'Android) ou un échec tout de suite n'est PAS « introuvable » : l'ancienne phrase, qui dit d'accepter la connexion
+        for (at in listOf(11_500L, 15_000L, groupEnd - 1_001)) {
+            val s = trying.on(Event.Failed(Route.GROUP, Cause(Cause.Kind.NOT_JOINED), at))
+            assertEquals(Cause.Kind.NOT_JOINED, s.run.causes.getValue(Route.GROUP).kind, "at=$at")
+        }
+        // une autre cause d'échec définitive reste ce qu'elle est
+        for (k in listOf(Cause.Kind.BUSY, Cause.Kind.GROUP_PERMISSION, Cause.Kind.CODE_REFUSED)) {
+            assertEquals(k, trying.on(Event.Failed(Route.GROUP, Cause(k), groupEnd)).run.causes.getValue(Route.GROUP).kind)
+        }
+    }
+
+    @Test fun whenATvAnsweredOnTheLocalNetworkTheGroupKeepsItsOldSentenceAndNoRetryIsOffered() {
+        // la TV est là (elle a refusé le code, attend les conditions…) : le réseau de la TV n'est pas « introuvable », le conseil est celui de la cause
+        for (seen in listOf(Cause(Cause.Kind.CODE_REFUSED, "CastBridge TV salon"), Cause(Cause.Kind.LOCKED_OUT, "30"), Cause(Cause.Kind.TERMS), Cause(Cause.Kind.CLOSED), Cause(Cause.Kind.UNREADABLE), Cause(Cause.Kind.NEEDS_UPDATE))) {
+            val s = start().run.on(Event.Observed(Route.LAN, seen)).run.on(Event.Tick(11_000)).run.on(Event.Tick(groupEnd))
+            assertEquals(seen.kind, s.run.causes.getValue(Route.LAN).kind)
+            assertEquals(Cause.Kind.NOT_JOINED, s.run.causes.getValue(Route.GROUP).kind, "${seen.kind}")
+            assertFalse(s.run.retryOffered(), "${seen.kind}")
+            assertFalse(notFoundLine in s.run.lines().map { it.text })
+        }
+    }
+
+    @Test fun aGroupThatWasJoinedButWhoseTvIsSilentStaysSilentNotNotFound() {
+        val s = start().run.on(Event.Tick(11_000)).run.on(Event.Observed(Route.GROUP, Cause(Cause.Kind.TV_SILENT))).run.on(Event.Tick(groupEnd))
+        assertEquals(Cause.Kind.TV_SILENT, s.run.causes.getValue(Route.GROUP).kind)
+        assertFalse(s.run.retryOffered())
+    }
+
+    @Test fun theGroupJoinedByHandBeforeAndroid10KeepsItsOldSentence() {
+        val s = start(facts(api = 28)).run.on(Event.Tick(11_000)).run.on(Event.UserJoined(12_000)).run.on(Event.Tick(12_000 + ActivationRoutePlan.GROUP_MS))
+        assertEquals(Cause.Kind.NOT_JOINED, s.run.causes.getValue(Route.GROUP).kind)
+        assertFalse(s.run.retryOffered())
+    }
+
+    @Test fun theGroupDroppingWhileTryingStaysNotJoinedAsBefore() {
+        val s = start().run.on(Event.Tick(11_000)).run.on(Event.Lost(Route.GROUP, 31_000))
+        assertEquals(Cause.Kind.NOT_JOINED, s.run.causes.getValue(Route.GROUP).kind)
+    }
+
+    @Test fun retryIsOfferedAsSoonAsTheNetworkIsNotFoundWithoutWaitingForBluetooth() {
+        val first = start().run
+        assertFalse(first.retryOffered(), "le réseau local est tenté")
+        val group = first.on(Event.Tick(11_000)).run
+        assertFalse(group.retryOffered(), "le groupe est encore tenté : rien à relancer")
+        val inBluetooth = group.on(Event.Tick(groupEnd)).run
+        assertIs<Phase.Trying>(inBluetooth.phase)
+        assertTrue(inBluetooth.retryOffered(), "le Bluetooth est en cours et « Réessayer » est déjà là")
+        val ended = inBluetooth.on(Event.Tick(bluetoothEnd)).run
+        assertIs<Phase.Failed>(ended.phase)
+        assertTrue(ended.retryOffered())
+        // la TV est trouvée (par le Bluetooth) ou la recherche annulée : plus rien à relancer
+        assertFalse(inBluetooth.on(Event.Reached(bt())).run.retryOffered())
+        assertFalse(inBluetooth.on(Event.Cancel).run.retryOffered())
+        // l'ancienne phrase n'en propose pas
+        assertFalse(start().run.on(Event.Tick(11_000)).run.on(Event.Lost(Route.GROUP, 12_000)).run.retryOffered())
+    }
+
+    @Test fun retryingIsOneNewPlanPerGestureNeverALoop() {
+        // toute la chronologie, sans geste : le réseau local, le groupe et le Bluetooth ne sont lancés qu'UNE fois, quel que soit le temps qui passe
+        var s = start()
+        val effects = ArrayList(s.effects)
+        var t = 1_000L
+        while (t < 900_000) { t += 500; s = s.run.on(Event.Tick(t)); effects += s.effects }
+        assertIs<Phase.Failed>(s.run.phase)
+        for (r in Route.values()) assertEquals(1, effects.count { it is Effect.Try && it.route == r }, "${r.label} : une seule fois")
+        // « Réessayer » est un geste : un nouveau plan, réseau local puis groupe, qui ne se souvient de rien (l'expiration suivante est un nouveau geste)
+        val again = ActivationRoutePlan.start(facts(), 1_000_000)
+        assertEquals(listOf<Effect>(Effect.Try(Route.LAN, 10_000)), again.effects)
+        assertTrue(again.run.causes.isEmpty() && !again.run.retryOffered())
+    }
+
+    @Test fun theFinalFailureCarriesTheLineWithoutTheDoubledRouteName() {
+        val end = start(facts(bt = Bt.OFF)).run.on(Event.Tick(11_000)).run.on(Event.Tick(groupEnd))
+        val m = assertIs<Phase.Failed>(end.run.phase).message
+        assertTrue("• $notFoundLine" in m.lines(), m)
+        assertFalse("Réseau de la TV (Wi-Fi Direct) : Réseau de la TV introuvable" in m, m)
+        assertEquals(3, m.lines().count { it.startsWith("• ") }, m)
+        assertTrue(m.lines().last().startsWith("Vérifiez que la TV est allumée"), "le conseil final ne change pas : $m")
+        assertTrue(end.run.retryOffered())
+    }
+
+    @Test fun theNotFoundSentenceIsTheSameWhateverTheRouteOrTheNetworkName() {
+        for (route in Route.values()) assertEquals(notFoundLine, Cause(Cause.Kind.GROUP_NOT_FOUND).text(route, WdCode.networkName(code)))
+        assertFalse(code in notFoundLine)
     }
 }

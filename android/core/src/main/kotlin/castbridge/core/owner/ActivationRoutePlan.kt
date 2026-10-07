@@ -1,5 +1,6 @@
 package castbridge.core.owner
 
+import castbridge.core.link.WdJoin
 import castbridge.core.trust.TvDeviceRequest
 import castbridge.core.tv.WdCode
 
@@ -9,8 +10,10 @@ import castbridge.core.tv.WdCode
  * (`sender/ActivationDriver`) lance les [Effect.Try], rapporte des [Event] et fait tourner l'horloge avec [Event.Tick] ; toutes les décisions sont ici.
  *
  *  1. [Route.LAN] (10 s) : une TV verrouillée annoncée sur le réseau local (mDNS `locked=1`) qui accepte le code ;
- *  2. [Route.GROUP] (20 s) : le groupe Wi-Fi Direct que la TV crée et dont le nom et le mot de passe dérivent du code ([WdCode]) ; le téléphone le rejoint seul (Android 10 et plus,
- *     `WifiNetworkSpecifier`, réseau local seulement : ses données mobiles restent) ; avant Android 10 l'usager le rejoint à la main ([Phase.ManualJoin]) ;
+ *  2. [Route.GROUP] (50 s, la boîte « Se connecter ? » d'Android comme dans la copie rapide) : le groupe Wi-Fi Direct que la TV crée et dont le nom et le mot de passe dérivent du code ([WdCode]) ; le téléphone le rejoint seul (Android 10 et plus,
+ *     `WifiNetworkSpecifier`, réseau local seulement : ses données mobiles restent) ; avant Android 10 l'usager le rejoint à la main ([Phase.ManualJoin]). Une TV déjà reliée à un Wi-Fi ne crée pas
+ *     ce groupe d'emblée (elle attend un geste, OK, sur son écran) : si le groupe expire alors que le réseau local n'a trouvé aucune TV, la ligne de la voie devient « Réseau de la TV introuvable… appuyez
+ *     sur OK sur la TV, puis « Réessayer » » ([Cause.Kind.GROUP_NOT_FOUND]) et « Réessayer » est proposé sans attendre le Bluetooth ([Run.retryOffered]) ; ce geste est un nouveau plan, jamais une boucle ;
  *  3. [Route.BLUETOOTH] (20 s ; 90 s si Android demande de valider un appairage) : le canal d'activation Bluetooth, existant.
  *
  * Le code n'apparaît dans AUCUN texte, ni dans un `toString` (ACT-NF2) ; le mot de passe dérivé non plus, sauf la ligne de la jonction manuelle qui l'affiche exprès.
@@ -21,12 +24,18 @@ object ActivationRoutePlan {
     }
 
     const val LAN_MS = 10_000L
-    const val GROUP_MS = 20_000L
+    /** Le groupe : la boîte « Se connecter ? » d'Android et la création du groupe par la TV après un OK, comme la copie rapide ([WdJoin.NETWORK_SPECIFIER_JOIN_MS], 50 s : audit I-6, 20 s étaient trop courts). */
+    const val GROUP_MS = WdJoin.NETWORK_SPECIFIER_JOIN_MS
     const val BT_MS = 20_000L
     /** Android demande de valider un appairage sur les deux écrans : la validation d'un humain n'entre pas dans les 20 s. */
     const val BT_PAIRING_MS = 90_000L
     /** `WifiNetworkSpecifier` existe depuis Android 10 (API 29). */
     const val GROUP_MIN_API = 29
+    /**
+     * La demande de réseau du téléphone (`WifiNetworkSpecifier`) a la même borne que le plan ([GROUP_MS]) et Android rapporte « indisponible » (cause NOT_JOINED) à cette borne, parfois avant le tic du
+     * plan : un échec de cette cause qui arrive à moins de cette marge de la borne est le délai écoulé, pas un refus ; un refus de l'usager ou un échec immédiat arrive bien avant.
+     */
+    const val GROUP_TIMEOUT_SLACK_MS = 1_000L
     const val UPDATE_LINE = "Mettez la TV à jour pour l'activation sans réseau."
     const val LINK_LOST_TEXT = "La liaison avec le réseau de la TV s'est interrompue (téléphone resté en arrière-plan ?) : touchez « Réessayer »."
     private const val TV_NAME = "CastBridge-TV"
@@ -49,7 +58,7 @@ object ActivationRoutePlan {
     data class Cause(val kind: Kind, val detail: String? = null) {
         enum class Kind {
             WIFI_OFF, NOT_ON_WIFI, NOT_ANNOUNCED, CODE_REFUSED, LOCKED_OUT, TERMS, CLOSED, NEEDS_UPDATE, UNREADABLE,
-            NOT_JOINED, MANUAL_SKIPPED, GROUP_PERMISSION, BUSY, TV_SILENT,
+            NOT_JOINED, MANUAL_SKIPPED, GROUP_PERMISSION, BUSY, TV_SILENT, GROUP_NOT_FOUND,
             BT_OFF, BT_PERMISSION, BT_NO_ADAPTER, BT_NO_TV, BT_NO_CHANNEL, BT_PAIRING, TIMEOUT
         }
 
@@ -69,6 +78,7 @@ object ActivationRoutePlan {
             Kind.GROUP_PERMISSION -> "L'autorisation « Appareils à proximité » est refusée : donnez-la à CastBridge dans les réglages d'Android."
             Kind.BUSY -> "Une autre liaison Wi-Fi Direct de CastBridge est déjà en cours."
             Kind.TV_SILENT -> "Le réseau de la TV est rejoint, mais la TV n'y répond pas."
+            Kind.GROUP_NOT_FOUND -> "Réseau de la TV introuvable. Si la TV affiche « Le téléphone n'est pas sur ce Wi-Fi ? », appuyez sur OK sur la TV, puis « Réessayer »."
             Kind.BT_OFF -> "Le Bluetooth du téléphone est éteint."
             Kind.BT_PERMISSION -> "CastBridge n'a pas l'autorisation « Appareils à proximité » (Bluetooth)."
             Kind.BT_NO_ADAPTER -> "Ce téléphone n'a pas de Bluetooth."
@@ -138,7 +148,7 @@ object ActivationRoutePlan {
                 when {
                     connected == route -> Line(route, LineState.DONE, "${route.label} : TV trouvée (${(phase as Phase.Connected).found.name}).")
                     connected != null && cause == null -> Line(route, LineState.UNUSED, "${route.label} : non nécessaire.")
-                    cause != null -> Line(route, if (plannedKind(route) == Kind.SKIP) LineState.SKIPPED else LineState.FAILED, "${route.label} : ${cause.text(route, ssid())}")
+                    cause != null -> Line(route, if (plannedKind(route) == Kind.SKIP) LineState.SKIPPED else LineState.FAILED, lineText(route, cause, ssid()))
                     phase is Phase.Trying && phase.route == route -> Line(route, LineState.ACTIVE, "${route.label} : ${activeText(route, phase)}")
                     phase is Phase.ManualJoin && route == Route.GROUP ->
                         Line(route, LineState.ASKING, "${route.label} : Connectez le téléphone au Wi-Fi « ${phase.ssid} » affiché sur la TV (mot de passe : ${phase.passphrase}), puis touchez « C'est fait ».")
@@ -165,6 +175,12 @@ object ActivationRoutePlan {
             is Phase.Failed -> p.message
             Phase.Cancelled -> "Recherche annulée."
         }
+
+        /**
+         * « Réessayer » est proposé tout de suite, sans attendre la fin du Bluetooth, quand le réseau de la TV est INTROUVABLE ([Cause.Kind.GROUP_NOT_FOUND]) : une TV déjà reliée à un Wi-Fi ne crée pas son
+         * groupe d'activation d'emblée, elle attend un geste (OK sur la TV). Le geste est un NOUVEAU plan ([start] : réseau local puis groupe, une fois), jamais une boucle : ce plan-ci ne relance rien seul.
+         */
+        fun retryOffered(): Boolean = (phase is Phase.Trying || phase is Phase.Failed) && causes[Route.GROUP]?.kind == Cause.Kind.GROUP_NOT_FOUND
 
         /** Une ligne en plus quand la TV jointe est trop ancienne pour l'activation sans réseau (CastBridge-TV 0.14.43 et avant), sinon null. */
         fun hint(): String? = (phase as? Phase.Connected)?.found?.note?.takeIf { it.kind == Cause.Kind.NEEDS_UPDATE }?.let { UPDATE_LINE }
@@ -227,10 +243,10 @@ object ActivationRoutePlan {
         return when (e) {
             is Event.Reached -> if (ph is Phase.Trying && ph.route == e.found.route) Step(run.copy(phase = Phase.Connected(e.found))) else Step(run)
             is Event.Observed -> if (ph is Phase.Trying && ph.route == e.route) Step(run.copy(observed = run.observed + (e.route to e.cause))) else Step(run)
-            is Event.Failed -> if (ph is Phase.Trying && ph.route == e.route) fail(run, ph.route, e.cause, e.at) else Step(run)
+            is Event.Failed -> if (ph is Phase.Trying && ph.route == e.route) fail(run, ph.route, failedCause(run, ph, e), e.at) else Step(run)
             is Event.Pairing -> if (ph is Phase.Trying && ph.route == Route.BLUETOOTH && ph.boundMs < BT_PAIRING_MS) Step(run.copy(phase = ph.copy(boundMs = BT_PAIRING_MS))) else Step(run)
             is Event.Tick ->
-                if (ph is Phase.Trying && e.now - ph.since >= ph.boundMs) fail(run, ph.route, run.observed[ph.route] ?: timeoutCause(ph.route, ph.boundMs), e.now) else Step(run)
+                if (ph is Phase.Trying && e.now - ph.since >= ph.boundMs) fail(run, ph.route, run.observed[ph.route] ?: timeoutCause(run, ph.route, ph.boundMs), e.now) else Step(run)
             is Event.UserJoined ->
                 if (ph is Phase.ManualJoin) Step(run.copy(phase = Phase.Trying(Route.GROUP, e.at, GROUP_MS)), listOf(Effect.Try(Route.GROUP, GROUP_MS, manual = true))) else Step(run)
             is Event.UserSkipped ->
@@ -248,11 +264,27 @@ object ActivationRoutePlan {
         }
     }
 
-    private fun timeoutCause(route: Route, boundMs: Long): Cause = when (route) {
+    /**
+     * La cause d'une voie dont la borne arrive sans réponse. Le groupe d'activation est INTROUVABLE ([Cause.Kind.GROUP_NOT_FOUND]) quand il est rejoint automatiquement (Android 10 et plus) ET que le réseau
+     * local n'a trouvé aucune TV (rien d'annoncé, ou téléphone sur aucun Wi-Fi) : une TV déjà reliée à un Wi-Fi ne crée pas son groupe d'emblée, elle attend un geste sur son écran. Si une TV a répondu sur le
+     * réseau local (code refusé, conditions…), ou si le groupe se rejoint à la main, la cause reste [Cause.Kind.NOT_JOINED] et son conseil.
+     */
+    private fun timeoutCause(run: Run, route: Route, boundMs: Long): Cause = when (route) {
         Route.LAN -> Cause(Cause.Kind.NOT_ANNOUNCED)
-        Route.GROUP -> Cause(Cause.Kind.NOT_JOINED)
+        Route.GROUP -> Cause(if (groupMayWaitForAGesture(run)) Cause.Kind.GROUP_NOT_FOUND else Cause.Kind.NOT_JOINED)
         Route.BLUETOOTH -> Cause(Cause.Kind.TIMEOUT, (boundMs / 1000).toString())
     }
+
+    private fun groupMayWaitForAGesture(run: Run): Boolean =
+        run.plan.firstOrNull { it.route == Route.GROUP }?.kind == Kind.TRY && run.causes[Route.LAN]?.kind.let { it == Cause.Kind.NOT_ANNOUNCED || it == Cause.Kind.NOT_ON_WIFI }
+
+    /** Android rapporte « réseau indisponible » (NOT_JOINED) à la borne de sa demande : c'est le délai de la voie écoulé ([GROUP_TIMEOUT_SLACK_MS]), traité comme l'expiration ; tout autre échec reste ce qu'il est. */
+    private fun failedCause(run: Run, ph: Phase.Trying, e: Event.Failed): Cause =
+        if (e.route == Route.GROUP && e.cause.kind == Cause.Kind.NOT_JOINED && e.at - ph.since >= ph.boundMs - GROUP_TIMEOUT_SLACK_MS) timeoutCause(run, e.route, ph.boundMs) else e.cause
+
+    /** La ligne d'une voie terminée : « voie : cause ». Le réseau de la TV introuvable est une phrase qui nomme déjà la voie (« Réseau de la TV introuvable. … ») : elle est la ligne entière. */
+    private fun lineText(route: Route, cause: Cause, ssid: String): String =
+        if (cause.kind == Cause.Kind.GROUP_NOT_FOUND) cause.text(route, ssid) else "${route.label} : ${cause.text(route, ssid)}"
 
     private fun fail(run: Run, route: Route, cause: Cause, now: Long): Step = advance(run.copy(causes = run.causes + (route to cause)), now, listOf(Effect.Abort(route)))
 
@@ -340,7 +372,7 @@ object ActivationRoutePlan {
     /** L'échec final : une phrase, une ligne par voie avec sa cause, puis quoi faire. */
     private fun failureMessage(r: Run): String {
         val ssid = WdCode.networkName(r.facts.code)
-        val lines = Route.values().map { route -> "• ${route.label} : ${(r.causes[route] ?: timeoutCause(route, boundMs(route))).text(route, ssid)}" }
+        val lines = Route.values().map { route -> "• " + lineText(route, r.causes[route] ?: timeoutCause(r, route, boundMs(route)), ssid) }
         val kinds = r.causes.values.map { it.kind }
         val advice = when {
             Cause.Kind.CODE_REFUSED in kinds -> "Relisez les 6 chiffres affichés sur la TV (écran d'activation de CastBridge-TV) et saisissez-les à nouveau."

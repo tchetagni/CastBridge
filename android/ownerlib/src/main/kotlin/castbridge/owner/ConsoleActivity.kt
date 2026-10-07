@@ -165,6 +165,11 @@ open class ConsoleActivity : ComponentActivity() {
             ConsoleInstallKey.before(OwnerFrames.parseDeviceInfo(input.trim().replace("\r", "")), production)?.let { n ->
                 Text(n.text, style = MaterialTheme.typography.bodySmall, color = if (n.warning) MaterialTheme.colorScheme.error else MaterialTheme.colorScheme.primary)
             }
+            // ce qui est tapé, dit tout de suite : un code d'appareil seul ne suffit pas à une activation complète, une demande collée dont une ligne est fautive la nomme (un code à moitié tapé ne dit rien)
+            val typed = DeviceRequestInput.classify(input)
+            if (typed is DeviceRequestInput.Kind.CodeOnly || typed is DeviceRequestInput.Kind.Unreadable) DeviceRequestInput.message(typed)?.let { m ->
+                Text(m, style = MaterialTheme.typography.bodySmall, color = if (typed is DeviceRequestInput.Kind.Unreadable) MaterialTheme.colorScheme.error else MaterialTheme.colorScheme.primary)
+            }
             Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
                 FilterChip(!production, { form = ProductionForm.withProduction(form, false); token = null }, { Text("Essai") }); FilterChip(production, { form = ProductionForm.withProduction(form, true); token = null }, { Text("Production") })
             }
@@ -191,7 +196,8 @@ open class ConsoleActivity : ComponentActivity() {
                 error = null; info = null; token = null; fileContent = null
                 runCatching {
                                         val issuer = ActivationIssuer(signer); val now = System.currentTimeMillis(); val day = 24L * 3600 * 1000; val start = now / day * day
-                    val full = OwnerFrames.parseDeviceInfo(input.trim().replace("\r", ""))
+                    val read = DeviceRequestInput.classify(input)
+                    val full = (read as? DeviceRequestInput.Kind.Request)?.info
                     if (full != null) {
                         if (DeviceCode.of(full.fp) != full.code) throw IssueException("Le code d'appareil ne correspond pas aux empreintes de la demande (texte altéré ?)")
                         val plan = form.build(now)
@@ -203,8 +209,7 @@ open class ConsoleActivity : ComponentActivity() {
                         // the box is v2 (for the TV's installation key) unless the owner forces v1 for an old TV (refused without the switch, and after the v1 sunset)
                         val v1 = !production && boxV1 && full.installPub == null
                         if (!production) {
-                            if (full.installPub == null && !boxV1) throw IssueException("Cette TV n'a pas fourni sa clé d'installation (CastBridge-TV trop ancien) : mettez-la à jour, ou activez « Enveloppe v1 (TV ancienne) »" +
-                                if (returnKey) ". La lecture par le code ne donne pas cette clé : pour un essai en enveloppe v2, lisez la demande complète par Bluetooth (« 1. Lire le code de la TV »)." else "")
+                            if (full.installPub == null && !boxV1) throw IssueException(ConsoleTrialBox.noKeyMessage(readByCode = returnKey))      // the request read by the code carries `install=` (public key): v2 as is
                             rights += RentalIssuing.right(RentalSpec(RentalLines.TRIAL_PRODUCT, listOf(Right.ALL_BUNDLE), RentalLines.TRIAL_DAYS, RentalLines.TRIAL_USAGE_MINUTES),
                                 now, Activation.TRIAL_LICENSE, SeatIds.of(Activation.TRIAL_LICENSE, full.fp), full.fp, RentalKeys.masterFrom(signer), full.installPub, null, boxV1)
                         }
@@ -212,17 +217,22 @@ open class ConsoleActivity : ComponentActivity() {
                         token = issued.token; fileContent = issued.fileContent
                         if (production) info = listOfNotNull("Licence $lic (générée)", ConsoleInstallKey.after(issued)).joinToString("\n")
                         store.journal(if (form.superUnlimited && production) "super" else "activation", full.code, kind.name + (if (production) "" else if (v1) "+v1" else "+v2"), lic, ActivationPolicy.CODE_VALIDITY_HOURS)
-                    } else {
-                        val code = DeviceCode.parse(input.trim()) ?: throw IssueException("Code d'appareil mal formé (16 caractères, contrôle compris) et demande complète illisible")
-                        val kind = if (production) ActivationKind.PRODUCTION else ActivationKind.TRIAL
-                        val hourIdx = ((now - 1767225600000L) / ActivationPolicy.HOUR_MS).toInt()
-                        if (form.superUnlimited && production) throw IssueException("SUPER_UNLIMITED exige la demande d'appareil complète (fichier ou Bluetooth) : une clé à saisir ne porte aucun droit")
-                        token = issuer.issueCompact(kind, code, hourIdx)
-                        store.journal("compact", code, kind.name, "-", ActivationPolicy.CODE_VALIDITY_HOURS)
-                        info = "Clé compacte (à saisir) : liée à ce code d'appareil, sans droits ni clés de lots. Pour une activation complète, collez la demande d'appareil exportée par la TV."
-                    }
+                    } else throw IssueException(DeviceRequestInput.message(read).orEmpty())                // un code seul, un code mal recopié, une ligne fautive : dit et nommé, jamais une « erreur de format » muette
                 }.onFailure { error = (it as? IssueException)?.message ?: "Erreur : ${it.message}" }
-            }, enabled = input.isNotBlank(), modifier = Modifier.fillMaxWidth()) { Text("Générer") }
+            }, enabled = input.isNotBlank() && typed !is DeviceRequestInput.Kind.CodeOnly, modifier = Modifier.fillMaxWidth()) { Text("Générer") }
+            // le code d'appareil seul ne donne que la clé compacte à saisir sur la TV (sans droits ni clés de lots) : dernier recours, à part et nommé
+            if (typed is DeviceRequestInput.Kind.CodeOnly) OutlinedButton({
+                error = null; info = null; token = null; fileContent = null
+                runCatching {
+                    val now = System.currentTimeMillis()
+                    val kind = if (production) ActivationKind.PRODUCTION else ActivationKind.TRIAL
+                    val hourIdx = ((now - 1767225600000L) / ActivationPolicy.HOUR_MS).toInt()
+                    if (form.superUnlimited && production) throw IssueException("SUPER_UNLIMITED exige la demande d'appareil complète (fichier ou Bluetooth) : une clé à saisir ne porte aucun droit")
+                    token = ActivationIssuer(signer).issueCompact(kind, typed.code, hourIdx)
+                    store.journal("compact", typed.code, kind.name, "-", ActivationPolicy.CODE_VALIDITY_HOURS)
+                    info = "Clé compacte (à saisir sur la TV) : liée à ce code d'appareil, sans droits ni clés de lots. Dernier recours : pour une activation complète, collez la demande d'appareil complète."
+                }.onFailure { error = (it as? IssueException)?.message ?: "Erreur : ${it.message}" }
+            }, modifier = Modifier.fillMaxWidth()) { Text("Clé compacte à saisir (dernier recours)") }
             error?.let { Text(it, color = MaterialTheme.colorScheme.error) }
             info?.let { Text(it, style = MaterialTheme.typography.bodySmall) }
             token?.let { t ->

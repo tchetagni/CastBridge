@@ -30,7 +30,7 @@ Nom ou modèle de la TV, version, édition et durée, état d'activation ou de n
 
 ### La même demande sur une TV verrouillée (2026-10-07)
 
-Une TV **verrouillée** n'a pas cette route (403 « locked »). Elle en a une autre, `GET /api/activation/device-request` (`LockedActivationApi`, détail dans `docs/TV-ACTIVATION-CLE-USB.md`) : mêmes gardes que son installation de clé (code de connexion à 6 chiffres obligatoire, conditions d'usage, plafonds), réponse en `text/plain; charset=utf-8` au format « pour le serveur » : lignes `code=`, `k=`, `factor=` et `install_sig=`, **jamais `install=`**. Le téléphone la lit par le groupe Wi-Fi Direct d'activation de la TV (192.168.49.1) ou par le réseau local, et la parse avec le même `OwnerFrames.parseDeviceInfo`.
+Une TV **verrouillée** n'a pas cette route (403 « locked »). Elle en a une autre, `GET /api/activation/device-request` (`LockedActivationApi`, détail dans `docs/TV-ACTIVATION-CLE-USB.md`) : mêmes gardes que son installation de clé (code de connexion à 6 chiffres obligatoire, conditions d'usage, plafonds), réponse en `text/plain; charset=utf-8`, la demande **complète** (même texte que « Copier la demande complète ») : lignes `code=`, `k=`, `factor=`, `install=` (clé publique X25519, quand la TV a sa clé) et `install_sig=`. **Amendé le 2026-10-07 (act-fix-1)** : la route retirait d'abord `install=` (jugée privée, et un ancien serveur refusait les lignes inconnues) ; c'est une clé **publique**, et une clé d'essai en enveloppe v2 l'exige (un essai « s'installe » donc par le code). La ligne est absente, jamais vide, quand la TV n'a pas encore sa clé. Le texte est reconstruit à partir de la demande analysée (`DeviceRequestText.complete`), jamais recopié ; la variante sans `install=` (`DeviceRequestText.forServer`) ne sert qu'à l'envoi au serveur (voie B2, future). Le téléphone la lit par le groupe Wi-Fi Direct d'activation de la TV (192.168.49.1) ou par le réseau local, et la parse avec le même `OwnerFrames.parseDeviceInfo` ; son texte partagé et son QR (s'il tient : 271 octets, soit 1 facteur avec `install=`) sont cette demande complète.
 
 ## L'écran du téléphone
 
@@ -44,7 +44,7 @@ Actions, dans l'ordre du focus :
 
 1. **Copier la demande complète** (action principale) : `code=`, `k=`, `factor=…`, `install=x25519|…`. C'est le format que lisent les outils du propriétaire (`DeviceRequest.parse`).
 2. **Partager la demande complète** : même texte, par la feuille de partage Android.
-3. **Copier pour le serveur** (secondaire) : sans la ligne `install=` mais **avec** `install_sig=` (le serveur la signe dans l'activation qu'il émet). Un serveur d'avant le correctif refuse toute ligne autre que `code`, `k` et `factor` (« Demande d'appareil : ligne inattendue ») : mettez le serveur à jour avant la TV.
+3. **Copier pour le serveur** (secondaire) : sans la ligne `install=` (le serveur n'en a pas l'usage : il la tolère et l'ignore depuis le 2026-10-04, `DeviceRequestInstallLineTest`) mais **avec** `install_sig=` (le serveur la signe dans l'activation qu'il émet). Un serveur d'avant le correctif refuse toute ligne autre que `code`, `k` et `factor` (« Demande d'appareil : ligne inattendue ») : mettez le serveur à jour avant la TV.
 
 ## Fichiers
 

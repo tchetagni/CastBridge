@@ -31,4 +31,29 @@ class ConsoleInstallKeyTest {
         assertNull(ConsoleInstallKey.after(issue(null)))
         assertEquals(tvKey.toList(), ActivationBinding.installKeyOf(issue(tvKey).activation)!!.toList())
     }
+
+    // ---- une clé d'ESSAI en enveloppe v2 demande `install=` (la clé PUBLIQUE X25519 de la TV), que la demande lue par le code porte depuis le 2026-10-07
+
+    @Test fun aTrialWithoutTheInstallationKeyOfAScreenOpenedByActivateTheTvNeverSendsTheOwnerRoundByBluetoothOrV1() {
+        val m = ConsoleTrialBox.noKeyMessage(readByCode = true)
+        assertTrue("clé d'installation" in m && m.first().isUpperCase() && m.endsWith("."), m)
+        assertFalse("Bluetooth" in m, "the Bluetooth read gives the very same text: no detour\n$m")
+        assertFalse("v1" in m || "Enveloppe" in m || "enveloppe" in m, "no detour through the weak envelope either\n$m")
+        assertTrue("relisez" in m.lowercase() || "attendez" in m.lowercase(), "it says what to do: read the request again\n$m")
+        assertTrue("mettez" in m.lowercase() && "CastBridge-TV" in m, "or update the TV\n$m")
+    }
+
+    @Test fun thePastedRequestOfAnOldTvKeepsItsSwitchForTheWeakEnvelope() {
+        val m = ConsoleTrialBox.noKeyMessage(readByCode = false)
+        assertTrue("clé d'installation" in m && "Enveloppe v1 (TV ancienne)" in m, m)
+        assertFalse("Bluetooth" in m && "code" in m, "never the old sentence about the code: $m")
+    }
+
+    @Test fun noMessageEverNamesTheOldWordsOfTheScreen() {
+        for (read in listOf(true, false)) {
+            val m = ConsoleTrialBox.noKeyMessage(read)
+            assertFalse(m.contains("sender", true) || m.contains("receiver", true), m)
+            assertFalse("La lecture par le code ne donne pas cette clé" in m, m)
+        }
+    }
 }

@@ -8,6 +8,7 @@ import android.net.wifi.WifiManager
 import android.os.Build
 import android.os.SystemClock
 import castbridge.core.lots.HttpTvTransport
+import castbridge.core.owner.ActivationExecutors
 import castbridge.core.owner.ActivationRoutePlan
 import castbridge.core.owner.ActivationRoutePlan.Bt
 import castbridge.core.owner.ActivationRoutePlan.Cause
@@ -29,9 +30,7 @@ import kotlinx.coroutines.cancel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
-import java.util.concurrent.Executors
 import java.util.concurrent.ScheduledFuture
-import java.util.concurrent.TimeUnit
 
 /**
  * L'exécutant de « Activer la TV » (DESIGN-ACTIVATION-SIMPLE-2026-10-07) : mince. Tout ce qui décide est dans le cœur, testé en JVM : l'ordre, les bornes, les lignes d'état et les causes
@@ -39,15 +38,18 @@ import java.util.concurrent.TimeUnit
  * [ActivationGroupJoin], Bluetooth par [TvBluetooth]), rapporter les événements, faire tourner l'horloge (monotone), envoyer la clé, publier l'état.
  *
  * Un seul fil « machine » réduit les événements dans l'ordre ; le travail qui bloque (HTTP, Bluetooth) tourne ailleurs et rapporte par [postRoute] : le résultat d'une exécution
- * abandonnée (autre code saisi, voie arrêtée) est ignoré (génération). Aucun code, aucune clé, aucune demande dans un journal : ce fichier n'écrit AUCUNE ligne de journal.
+ * abandonnée (autre code saisi, voie arrêtée) est ignoré (génération). Toute soumission aux deux exécuteurs passe par [ActivationExecutors] (audit B1) : une réponse de la TV qui arrive après
+ * [release] (écran quitté pendant « Installation… ») est ignorée, jamais jetée dans un fil du pool. Aucun code, aucune clé, aucune demande dans un journal : ce fichier n'écrit AUCUNE ligne de journal.
  */
 class ActivationDriver(ctx: Context, private val discovery: TvDiscovery, val consolePresent: Boolean) {
     /** Ce que l'écran dessine. [reading] : la demande est lue par Bluetooth ; [btNote] : le résultat de cette lecture. */
     data class Ui(val run: ActivationRoutePlan.Run?, val acq: KeyAcquisition.Model, val reading: Boolean = false, val btNote: String? = null)
 
     private val app = ctx.applicationContext
-    private val machine = Executors.newSingleThreadScheduledExecutor { r -> Thread(r, "activation-machine").apply { isDaemon = true } }
-    private val io = Executors.newCachedThreadPool { r -> Thread(r, "activation-io").apply { isDaemon = true } }
+    /** Le fil « machine » et le pool de ce qui bloque, gardés : aucune soumission après [release], jamais de `RejectedExecutionException` dans un fil de pool. */
+    private val exec = ActivationExecutors.standard()
+    private fun onMachine(task: () -> Unit) { exec.onMachine(task) }
+    private fun onIo(task: () -> Unit) { exec.onIo(task) }
     private val _ui = MutableStateFlow(Ui(null, KeyAcquisition.Model()))
     val ui: StateFlow<Ui> = _ui
 
@@ -61,7 +63,7 @@ class ActivationDriver(ctx: Context, private val discovery: TvDiscovery, val con
     private var ticker: ScheduledFuture<*>? = null
     @Volatile private var generation = 0
     @Volatile private var active: Pair<Route, Int>? = null
-    @Volatile private var released = false
+    private val released: Boolean get() = exec.released
     /** Les TV annoncées par mDNS. [TvDiscovery.tvs] ne vit que tant que quelqu'un le collecte (`WhileSubscribed`) : l'exécutant le collecte lui-même, sinon sa valeur resterait vide. */
     @Volatile private var announced: List<Tv> = emptyList()
     private val scope = CoroutineScope(SupervisorJob() + Dispatchers.Default)
@@ -69,7 +71,7 @@ class ActivationDriver(ctx: Context, private val discovery: TvDiscovery, val con
     init {
         runCatching { TvLinkManager.init(app) }
         scope.launch { discovery.tvs.collect { announced = it } }
-        ticker = machine.scheduleWithFixedDelay({ runCatching { tick() } }, TICK_MS, TICK_MS, TimeUnit.MILLISECONDS)
+        ticker = exec.every(TICK_MS) { tick() }
     }
 
     private fun now() = SystemClock.elapsedRealtime()
@@ -78,8 +80,8 @@ class ActivationDriver(ctx: Context, private val discovery: TvDiscovery, val con
     // ------------------------------------------------------------------ ce que l'écran demande
 
     /** Le sixième chiffre est saisi : lancer le plan. Un plan en cours est abandonné. */
-    fun start(code: String) = machine.execute {
-        if (released || !WdCode.isValid(code)) return@execute
+    fun start(code: String) = onMachine {
+        if (released || !WdCode.isValid(code)) return@onMachine
         abortRoutes()
         this.code = code; generation++
         btNote = null
@@ -92,7 +94,7 @@ class ActivationDriver(ctx: Context, private val discovery: TvDiscovery, val con
     fun retry() { code?.let(::start) }
 
     /** Le code est effacé ou modifié : tout s'arrête, la clé reste. */
-    fun cancel() = machine.execute {
+    fun cancel() = onMachine {
         abortRoutes(); generation++
         run = null; code = null
         handleAcq(KeyAcquisition.reduce(acq, KeyAcquisition.Event.TvLost))
@@ -114,11 +116,11 @@ class ActivationDriver(ctx: Context, private val discovery: TvDiscovery, val con
     fun serverRequest() = postAcq(KeyAcquisition.Event.ServerRequest(now()))
 
     /** La TV jointe par le réseau ne livre pas sa demande (version ancienne) : la lire par Bluetooth si une TV est appairée. */
-    fun readRequestByBluetooth() = machine.execute {
-        val f = (run?.phase as? Phase.Connected)?.found ?: return@execute
-        if (reading) return@execute
+    fun readRequestByBluetooth() = onMachine {
+        val f = (run?.phase as? Phase.Connected)?.found ?: return@onMachine
+        if (reading) return@onMachine
         reading = true; btNote = null; publish()
-        io.execute {
+        onIo {
             val tv = bluetoothTv()
             val outcome: Pair<DeviceRequestParse?, String?> = when {
                 tv == null -> null to "Aucune TV appairée en Bluetooth : appairez-la d'abord (« Ajouter ma TV »)."
@@ -127,7 +129,7 @@ class ActivationDriver(ctx: Context, private val discovery: TvDiscovery, val con
                     if (text == null) null to "La TV n'a pas donné sa demande d'appareil." else LockedRequestRoute.parse(text) to null
                 } catch (e: Exception) { null to ActivationRoutePlan.btCause(e.message).text(Route.BLUETOOTH, WdCode.networkName(code ?: "000000")) }
             }
-            machine.execute {
+            onMachine {
                 reading = false
                 val parsed = outcome.first
                 if (parsed is DeviceRequestParse.Ok && run?.phase is Phase.Connected) {
@@ -141,22 +143,23 @@ class ActivationDriver(ctx: Context, private val discovery: TvDiscovery, val con
         }
     }
 
-    /** Rend tout : réseau demandé, liaison des sockets, fils. */
+    /**
+     * Rend tout : réseau demandé, liaison des sockets, fils. Dès cet instant plus rien ne se lance ([ActivationExecutors]) : la réponse de la TV qui arrive plus tard dans un fil du pool est ignorée,
+     * jamais jetée (audit B1 : `RejectedExecutionException` dans un fil de pool = processus tué).
+     */
     fun release() {
-        released = true
         active = null
         scope.cancel()
-        runCatching { machine.execute { ticker?.cancel(false); group?.release(); group = null; machine.shutdown() } }
-        io.shutdownNow()
+        exec.release { ticker?.cancel(false); group?.release(); group = null }
     }
 
     // ------------------------------------------------------------------ la machine
 
-    private fun postPlan(e: ActivationRoutePlan.Event) = machine.execute { run?.let { applyPlan(ActivationRoutePlan.reduce(it, e)) } }
-    private fun postAcq(e: KeyAcquisition.Event) = machine.execute { handleAcq(KeyAcquisition.reduce(acq, e)) }
+    private fun postPlan(e: ActivationRoutePlan.Event) = onMachine { run?.let { applyPlan(ActivationRoutePlan.reduce(it, e)) } }
+    private fun postAcq(e: KeyAcquisition.Event) = onMachine { handleAcq(KeyAcquisition.reduce(acq, e)) }
 
-    /** Rapport d'une voie : ignoré s'il vient d'une exécution abandonnée. */
-    private fun postRoute(g: Int, e: ActivationRoutePlan.Event) = machine.execute {
+    /** Rapport d'une voie : ignoré s'il vient d'une exécution abandonnée, ou arrive après [release]. */
+    private fun postRoute(g: Int, e: ActivationRoutePlan.Event) = onMachine {
         if (g == generation) run?.let { applyPlan(ActivationRoutePlan.reduce(it, e)) }
     }
 
@@ -199,9 +202,9 @@ class ActivationDriver(ctx: Context, private val discovery: TvDiscovery, val con
                 val g = generation
                 active = e.route to g
                 when (e.route) {
-                    Route.LAN -> io.execute { lanLoop(g) }
+                    Route.LAN -> onIo { lanLoop(g) }
                     Route.GROUP -> startGroup(g, e.manual)
-                    Route.BLUETOOTH -> io.execute { bluetoothAttempt(g) }
+                    Route.BLUETOOTH -> onIo { bluetoothAttempt(g) }
                 }
             }
         }
@@ -211,7 +214,7 @@ class ActivationDriver(ctx: Context, private val discovery: TvDiscovery, val con
         when (e) {
             is KeyAcquisition.Effect.Install -> {
                 val found = (run?.phase as? Phase.Connected)?.found; val c = code; val g = generation
-                io.execute { if (found != null && c != null) installNow(found, c, e.key, g) else postAcq(KeyAcquisition.Event.Result(KeyAcquisition.ResultKind.UNREACHABLE, "", now())) }
+                onIo { if (found != null && c != null) installNow(found, c, e.key, g) else postAcq(KeyAcquisition.Event.Result(KeyAcquisition.ResultKind.UNREACHABLE, "", now())) }
             }
             is KeyAcquisition.Effect.Notify -> ActivationNotice.post(app, e.title, e.text)
             // capacité éteinte (KeyAcquisition.ServerActivationRequests.ENABLED = false) : le cœur n'émet jamais ces effets, et aucune requête réseau n'existe ici
@@ -258,9 +261,9 @@ class ActivationDriver(ctx: Context, private val discovery: TvDiscovery, val con
         val join = ActivationGroupJoin(app)
         group?.release(); group = join
         val ssid = WdCode.networkName(code)
-        val joined = { io.execute { probeGroup(g, code) } }
+        val joined = { onIo { probeGroup(g, code) } }
         val failed = { cause: Cause -> postRoute(g, ActivationRoutePlan.Event.Failed(Route.GROUP, cause, now())) }
-        io.execute {
+        onIo {
             if (manual) join.bindToJoinedWifi(joined, failed)
             else join.join(ssid, WdCode.passphrase(code), ActivationRoutePlan.GROUP_MS.toInt(), joined, failed) { postRoute(g, ActivationRoutePlan.Event.Lost(Route.GROUP, now())) }
         }
@@ -313,7 +316,7 @@ class ActivationDriver(ctx: Context, private val discovery: TvDiscovery, val con
                 else -> KeyAcquisition.Event.Result(KeyAcquisition.ResultKind.UNREACHABLE, "", now())
             }
         } catch (e: Exception) { KeyAcquisition.Event.Result(KeyAcquisition.ResultKind.UNREACHABLE, "", now()) }
-        machine.execute { if (g == generation) handleAcq(KeyAcquisition.reduce(acq, result)) }
+        onMachine { if (g == generation) handleAcq(KeyAcquisition.reduce(acq, result)) }
     }
 
     private fun installHttp(f: Found, code: String, key: String): KeyAcquisition.Event.Result {

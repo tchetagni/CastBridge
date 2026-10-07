@@ -42,7 +42,10 @@ object KeyAcquisition {
     const val FILE_TOO_BIG = "Ce fichier est trop gros pour contenir une clé (256 Kio au plus)."
     const val SERVER_WAIT_TIMEOUT = "Toujours en attente de CastBridge : réessayez plus tard ou utilisez une autre voie."
 
-    /** « L'activation par le serveur » : la route (`POST /api/v1/tv/activation-requests`) n'est pas décidée (DESIGN-ACTIVATION-SIMPLE § 6.1) ; tant que c'est faux, rien n'est envoyé. */
+    /**
+     * « L'activation par le serveur » : la route (`POST /api/v1/tv/activation-requests`) n'est pas décidée (DESIGN-ACTIVATION-SIMPLE § 6.1) ; tant que c'est faux, rien n'est envoyé. La demande qui lui serait
+     * envoyée est la forme SANS `install=` ([DeviceRequestText.forServer], ou `TvDeviceRequest.serverText()`) : le serveur n'en a pas l'usage ; la demande complète ne sert qu'à la console, à l'agent et aux outils.
+     */
     object ServerActivationRequests { const val ENABLED = false }
 
     enum class Source { CONSOLE, SERVER, PASTE, FILE }

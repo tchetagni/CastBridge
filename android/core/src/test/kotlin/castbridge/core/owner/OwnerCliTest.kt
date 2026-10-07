@@ -67,6 +67,22 @@ class OwnerCliTest {
         val io = Rec(); assertEquals(2, OwnerCli.run(listOf("compact", "--vault", v.path, "--device", "1234"), io) { now }); assertTrue(io.err.single().contains("mal formé"))
     }
 
+    @Test fun aRequestFileThatIsOnlyTheDeviceCodeOrIsMissingALineSaysSoInsteadOfAMuteError() {
+        val d = dir(); val v = File(d, "c.txt"); OwnerCli.run(listOf("init", "--vault", v.path), Rec()) { now }
+        val fp = device(); val code = DeviceCode.of(fp)
+        fun refuse(text: String): String {
+            val f = File(d, "demande-${text.hashCode()}.txt").also { it.writeText(text) }
+            val io = Rec(); assertEquals(2, OwnerCli.run(listOf("activation", "--vault", v.path, "--request", f.path, "--journal", File(d, "j.log").path), io) { now })
+            return io.err.single()
+        }
+        assertTrue(DeviceRequestInput.CODE_ONLY in refuse(code + "\n"), "a device code alone is named for what it is")
+        assertTrue(DeviceRequestInput.BAD_CODE in refuse(code.dropLast(1) + (if (code.last() == 'Q') 'R' else 'Q')), "a mis-copied code gives the format")
+        val noK = OwnerFrames.deviceInfo(code, fp).lines().filterNot { it.startsWith("k=") }.joinToString("\n")
+        assertTrue("« k=… »" in refuse(noK), "the missing line is named")
+        val badFactor = OwnerFrames.deviceInfo(code, fp).replace("factor=FLASH|", "factor=EVIL|")
+        assertTrue("« factor=EVIL|" in refuse(badFactor), "the faulty line is named")
+    }
+
     @Test fun fullActivationIsAcceptedByTheTvVerifierAndFileIsWritten() {
         val d = dir(); val v = File(d, "c.txt"); OwnerCli.run(listOf("init", "--vault", v.path), Rec()) { now }
         val fp = device(); val req = request(d, fp); val io = Rec()

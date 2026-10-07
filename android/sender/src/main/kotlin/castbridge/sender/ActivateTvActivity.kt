@@ -246,7 +246,11 @@ class ActivateTvActivity : ComponentActivity() {
                         if (run.phase !is Phase.Failed) run.lines().filter { it.state != LineState.UNUSED }.forEach { RouteLine(it) }
                     }
                     when (val ph = run.phase) {
-                        is Phase.Trying -> OutlinedButton({ driver.cancel(); codeText = "" }, modifier = Modifier.fillMaxWidth()) { Text("Annuler") }
+                        is Phase.Trying -> {
+                            // le réseau de la TV est introuvable : « Réessayer » tout de suite (OK sur la TV, puis ce geste : un nouveau plan, jamais une boucle), sans attendre la fin du Bluetooth
+                            if (run.retryOffered()) Button({ begin(codeText) }, enabled = codeText.length == WdCode.DIGITS, modifier = Modifier.fillMaxWidth()) { Text("Réessayer") }
+                            OutlinedButton({ driver.cancel(); codeText = "" }, modifier = Modifier.fillMaxWidth()) { Text("Annuler") }
+                        }
                         is Phase.ManualJoin -> {
                             Text("Sur Android 9 et moins, l'application ne peut pas rejoindre ce réseau seule : ouvrez les réglages Wi-Fi, rejoignez « ${ph.ssid} » avec le mot de passe ci-dessus, puis revenez ici.", style = MaterialTheme.typography.bodySmall)
                             Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {

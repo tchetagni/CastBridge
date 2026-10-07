@@ -80,18 +80,13 @@ object ActivationCenter {
         return base.copy(flashSerial = "TESTFLASH-$w", flashCid = "testcid-$w", systemSerial = "TESTSYS-$w")
     }
 
-    /** The « demande d'appareil » (code + full fingerprint set): what the owner's tools need for a complete activation. */
+    /**
+     * The « demande d'appareil » (code + full fingerprint set): what the owner's tools need for a complete activation. Also what the locked route `GET /api/activation/device-request` hands to a phone
+     * that holds the connection code, once rebuilt by `LockedActivationApi` (docs/TV-ACTIVATION-CLE-USB.md): `install=` is the installation's PUBLIC X25519 key, nothing secret, and a trial key in a v2
+     * envelope needs it (ACT-F4 amended on 2026-10-07). Called from the HTTP thread, the Keystore is awaited for 2 s at most, then the line is simply absent. Never logged.
+     */
     fun requestText(): String = OwnerFrames.deviceInfo(deviceCode, fp, RentalHub.installPubOrNull(app),      // never blocks the main thread on the Keystore
         castbridge.receiver.wallet.WalletHub.installSigner()?.publicKey)      // the Ed25519 key of the wallet `bind` proof (file, no Keystore): the issuer signs it into the activation (W23-05 audit HIGH-1)
-
-    /**
-     * The device request in the form the licence server reads: `code=`, `k=`, `factor=` and `install_sig=` lines, NEVER the private `install=` line (it is not even built, so the Keystore is
-     * not touched). What the locked route `GET /api/activation/device-request` hands to a phone that holds the connection code (docs/TV-ACTIVATION-CLE-USB.md); never logged.
-     */
-    fun serverRequestText(): String {
-        if (!ready) init(app)
-        return OwnerFrames.deviceInfo(deviceCode, fp, null, castbridge.receiver.wallet.WalletHub.installSigner()?.publicKey)
-    }
 
     /** A phone presented the right connection code to the locked route (any address: Wi-Fi network or Wi-Fi Direct group): the screen then says « Téléphone relié ». The address is not kept. */
     @Volatile var phoneAuthorizedAt = 0L; private set

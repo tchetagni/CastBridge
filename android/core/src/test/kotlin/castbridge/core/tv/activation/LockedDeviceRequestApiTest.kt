@@ -19,8 +19,9 @@ import kotlin.test.assertTrue
 
 /**
  * `GET /api/activation/device-request` of a LOCKED TV (docs/DESIGN-ACTIVATION-SIMPLE-2026-10-07.md, F2): the phone that holds the connection code reads the TV's device
- * request by itself instead of having it recopied by hand. Same guards as the installation (local address, `Host`, terms before the code, global cap, [PinGuard]),
- * text for the licence server: `code=`, `k=`, `factor=` and `install_sig=` lines, NEVER the private `install=` line, nothing else.
+ * request by itself instead of having it recopied by hand. Same guards as the installation (local address, `Host`, terms before the code, global cap, [PinGuard]).
+ * The answer is the COMPLETE request (same text as « Copier la demande complète »): `code=`, `k=`, `factor=`, `install=` (the installation's PUBLIC X25519 key, nothing secret, needed
+ * by a trial key in a v2 envelope; absent when the TV has no key yet) and `install_sig=`, rebuilt from the parsed request, nothing else (ACT-F4 amended on 2026-10-07).
  */
 class LockedDeviceRequestApiTest {
     private val pin = "482915"
@@ -33,7 +34,7 @@ class LockedDeviceRequestApiTest {
     private val sigPub = ByteArray(32) { (it + 7).toByte() }
     private fun hex(b: ByteArray) = b.joinToString("") { "%02x".format(it) }
     private val canaries = listOf("CANARY-MODEL-Bravia", "CANARY-TOKEN-cbk_42", "CANARY-OWNERPW-13")
-    /** What the TV's own `requestText()` gives: the FULL request (with the private `install=` line) plus lines of other things a newer TV might add. */
+    /** What the TV's own `requestText()` gives: the FULL request (with the `install=` line) plus lines of other things a newer TV might add. */
     private val fullText = OwnerFrames.deviceInfo(DeviceCode.of(fp), fp, installPub, sigPub) + "\nmodel=${canaries[0]}\ntoken=${canaries[1]}\nowner=${canaries[2]}"
     private var supplier: () -> String? = { fullText }
     private val installed = ArrayList<String>()
@@ -84,7 +85,7 @@ class LockedDeviceRequestApiTest {
 
     // ---- the answer ----
 
-    @Test fun `the right code gives the server form of the request as plain text`() {
+    @Test fun `the right code gives the complete request as plain text`() {
         val r = api().handle(get(), noBody)
         assertEquals(200, r.status)
         assertEquals("text/plain; charset=utf-8", r.mime)
@@ -92,32 +93,61 @@ class LockedDeviceRequestApiTest {
         assertEquals("code=${DeviceCode.of(fp)}", lines[0])
         assertTrue(lines[1].startsWith("k="), lines[1])
         assertTrue(lines.any { it == "factor=FLASH|0a1b2c3d4e5f60718293a4b5c6d7e8f9" } && lines.any { it == "factor=WIFI|fedcba9876543210fedcba9876543210" }, r.json)
+        assertTrue("install=x25519|" + hex(installPub) in lines, "the installation's public key is there: a trial key in a v2 envelope needs it\n${r.json}")
         assertEquals("install_sig=ed25519|" + hex(sigPub), lines.last(), "the signing key stays: the server signs it into the production activation")
         assertEquals(1, supplied)
-        // the very text the phone's « Copier pour le serveur » gives: the licence server reads it
+        // the very text the phone's « Copier la demande complète » gives: the owner's tools read it
         val parsed = assertNotNull(OwnerFrames.parseDeviceInfo(r.json))
-        assertEquals(DeviceCode.of(fp), parsed.code); assertNull(parsed.installPub); assertContentEquals(sigPub, parsed.installSig)
+        assertEquals(DeviceCode.of(fp), parsed.code); assertContentEquals(installPub, parsed.installPub); assertContentEquals(sigPub, parsed.installSig)
         assertTrue(parsed.unknown.isEmpty())
         assertEquals(listOf("192.168.1.30"), authorized, "told which address presented the right code")
     }
 
-    @Test fun `never an install= line, never another line, whatever the TV supplies`() {
+    @Test fun `the install= line is present, the text is complete, and nothing else leaves whatever the TV supplies`() {
         val r = api().handle(get(), noBody)
         assertEquals(200, r.status)
-        assertTrue(fullText.lines().any { it.startsWith("install=x25519|") }, "the fixture does hold the private line")
-        for (l in r.json.lines()) assertTrue(l.startsWith("code=") || l.startsWith("k=") || l.startsWith("factor=") || l.startsWith("install_sig="), "unexpected line: $l")
-        assertFalse(r.json.lines().any { it.startsWith("install=") }, r.json)
-        assertFalse("x25519" in r.json, "the private install key does not leave")
-        assertFalse(hex(installPub) in r.json)
+        assertTrue(fullText.lines().any { it.startsWith("install=x25519|") }, "the fixture does hold the install= line")
+        assertEquals(OwnerFrames.deviceInfo(DeviceCode.of(fp), fp, installPub, sigPub), r.json, "the complete request, byte for byte, as the TV's « Copier la demande complète »")
+        for (l in r.json.lines()) assertTrue(l.startsWith("code=") || l.startsWith("k=") || l.startsWith("factor=") || l.startsWith("install=x25519|") || l.startsWith("install_sig="), "unexpected line: $l")
+        assertEquals(1, r.json.lines().count { it.startsWith("install=") }, r.json)
         for (c in canaries) assertFalse(c in r.json, "$c must not leave the TV")
         assertFalse(pin in r.json, "the connection code is never echoed")
+    }
+
+    @Test fun `a TV without its installation key yet answers without the install= line, never an empty one`() {
+        supplier = { OwnerFrames.deviceInfo(DeviceCode.of(fp), fp, null, sigPub) }
+        val r = api().handle(get(), noBody)
+        assertEquals(200, r.status)
+        assertEquals(OwnerFrames.deviceInfo(DeviceCode.of(fp), fp, null, sigPub), r.json)
+        assertTrue(r.json.lines().none { it.startsWith("install=") }, r.json)
+        assertEquals("install_sig=ed25519|" + hex(sigPub), r.json.lines().last())
+    }
+
+    @Test fun `the text is rebuilt from the parsed request, never copied raw`() {
+        // noise a TV could produce: CRLF, blank lines, indentation, the optional readable fingerprint, an install= of another algorithm, lines of other things
+        supplier = { "\r\n  " + fullText.replace("\n", "\r\n\r\n  ") + "\r\ninstall=rsa|0123\r\nname=${canaries[0]}\r\n" }
+        val r = api().handle(get(), noBody)
+        assertEquals(200, r.status)
+        assertEquals(OwnerFrames.deviceInfo(DeviceCode.of(fp), fp, installPub, sigPub), r.json)
+        assertFalse("\r" in r.json); assertFalse("rsa" in r.json); assertFalse(r.json.lines().any { it.isBlank() })
+    }
+
+    @Test fun `a malformed install= line makes the request unreadable, a clean 503, and no raw line leaves`() {
+        for (bad in listOf("install=x25519|zz", "install=x25519|" + hex(installPub).dropLast(2), "install=x25519|" + hex(installPub).uppercase())) {
+            supplier = { OwnerFrames.deviceInfo(DeviceCode.of(fp), fp, null, sigPub) + "\n" + bad }
+            val r = api().handle(get(), noBody)
+            assertEquals(503, r.status, bad); assertFalse("x25519" in r.json || "zz" in r.json, r.json)
+        }
+        // a second install= line is as unreadable as a doubled signing key
+        supplier = { fullText + "\ninstall=x25519|" + hex(installPub) }
+        assertEquals(503, api().handle(get(), noBody).status)
     }
 
     @Test fun `a TV without a signing key answers without the install_sig line`() {
         supplier = { OwnerFrames.deviceInfo(DeviceCode.of(fp), fp, installPub, null) }
         val r = api().handle(get(), noBody)
         assertEquals(200, r.status)
-        assertEquals(listOf("code=", "k=", "factor=", "factor="), r.json.lines().map { it.substringBefore('=') + "=" })
+        assertEquals(listOf("code=", "k=", "factor=", "factor=", "install="), r.json.lines().map { it.substringBefore('=') + "=" })
     }
 
     @Test fun `an unavailable or unreadable request is a clean 503`() {
@@ -232,7 +262,7 @@ class LockedDeviceRequestApiTest {
             val ok = call("127.0.0.1", pin)
             assertEquals(200, ok.first, ok.third)
             assertEquals("text/plain; charset=utf-8", ok.second)
-            assertTrue(ok.third.startsWith("code="), ok.third); assertFalse(ok.third.lines().any { it.startsWith("install=") })
+            assertTrue(ok.third.startsWith("code="), ok.third); assertTrue(ok.third.lines().any { it.startsWith("install=x25519|") }, "the complete request, install= included")
             // through the machine's own LAN address (not the loopback): what a phone in the group does on 192.168.49.1
             val lan = runCatching { NetworkInterface.getNetworkInterfaces().toList().filter { it.isUp && !it.isLoopback }.flatMap { it.inetAddresses.toList() }.filterIsInstance<Inet4Address>().firstOrNull { it.isSiteLocalAddress }?.hostAddress }.getOrNull()
             if (lan != null) assertEquals(200, call(lan, pin).first, "reachable through $lan")

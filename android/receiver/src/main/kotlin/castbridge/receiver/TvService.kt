@@ -263,7 +263,7 @@ class TvService : Service(), Device {
         val pin = tvPrefs.pin()
         val api = castbridge.core.tv.activation.LockedActivationApi(PinGuard(pin), { key -> ActivationCenter.installFromWifi(key) },
             { TunnelHub.termsAccepted(this) }, BuildConfig.VERSION_NAME,
-            deviceRequest = { ActivationCenter.serverRequestText() },          // the server form: never the private install= line (and never logged)
+            deviceRequest = { ActivationCenter.requestText() },          // the complete request (install= is the installation's PUBLIC key; absent while the key is not ready), rebuilt by the pure API, never logged
             onAuthorized = { ActivationCenter.phoneAuthorized() })              // « téléphone relié » on the activation screen (no address kept)
         val s = castbridge.core.tv.activation.LockedActivationServer(api)
         try { s.start(15_000, false) } catch (e: Exception) {

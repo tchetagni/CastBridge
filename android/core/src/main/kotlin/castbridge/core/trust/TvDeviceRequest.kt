@@ -23,8 +23,9 @@ data class TvDeviceRequest(val code: String, val k: Int, val factors: List<Pair<
     fun fullText(): String = OwnerFrames.deviceInfo(code, fingerprints(), pub(), sigPub())
 
     /**
-     * The same without the `install=` line (the licence server's admin API refuses any line but code, k, factor and `install_sig` since the W23-05 audit corrections: « ligne inattendue »). The
-     * `install_sig=` line stays: the server signs that key into the production activation it issues, so only this TV gets its licence registered and paid automatically.
+     * The same without the `install=` line: the form for the licence server (button « Copier pour le serveur », and the future route « Demander l'activation à CastBridge »; its text-level twin is
+     * [castbridge.core.owner.DeviceRequestText.forServer]). The server has no use of that line (it tolerates it and ignores it since 2026-10-04; an older server refused every line it did not know),
+     * so it is not sent. The `install_sig=` line stays: the server signs that key into the production activation it issues, so only this TV gets its licence registered and paid automatically.
      */
     fun serverText(): String = OwnerFrames.deviceInfo(code, fingerprints(), null, sigPub())
 
@@ -90,7 +91,7 @@ object TvDeviceRequestTexts {
     const val SHARE = "Partager la demande complète"
     const val COPY_SERVER = "Copier pour le serveur"
     const val EXPLAIN_FULL = "La demande complète contient la clé publique d'installation (ligne install=) : elle n'est pas secrète, mais seuls les outils du propriétaire s'en servent (clés de location)."
-    const val EXPLAIN_SERVER = "Le serveur de licences refuse la ligne install= : envoyez-lui cette copie, sans cette ligne."
+    const val EXPLAIN_SERVER = "Le serveur de licences n'a pas besoin de la ligne install= : envoyez-lui cette copie, sans cette ligne."
     const val COPIED = "Copié."
     const val NOT_AUTHORISED = "Ce téléphone n'est pas autorisé pour cette TV : ajoutez la TV dans CastBridge (téléphone de confiance) ou saisissez le code à 6 chiffres de la TV, puis rouvrez cet écran. Rien n'a été demandé à la TV."
     const val UNREACHABLE = "La TV est injoignable : vérifiez qu'elle est allumée, que CastBridge-TV est ouvert et sur le même Wi-Fi, puis réessayez."

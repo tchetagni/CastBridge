@@ -1,10 +1,10 @@
 package castbridge.core.tv.activation
 
 import castbridge.core.net.JsonLite
+import castbridge.core.owner.DeviceRequestText
 import castbridge.core.owner.Feature
 import castbridge.core.owner.FeatureGate
 import castbridge.core.owner.GateState
-import castbridge.core.owner.OwnerFrames
 import castbridge.core.ssh.Lan
 import castbridge.core.tunnel.TunnelTerms
 import castbridge.core.tv.ApiReply
@@ -25,8 +25,9 @@ import java.io.IOException
  *    SAME verifier as a pasted key (signature by a trusted key, binding to this TV's device code, window). The key is never logged nor echoed.
  *  - `GET /api/activation/device-request` (docs/coordination/DESIGN-ACTIVATION-SIMPLE-2026-10-07.md, F2): the phone that holds the connection code reads the TV's device
  *    request instead of having it recopied by hand. EXACTLY the same guards as the installation (local address and `Host`, terms before the code, global cap, [PinGuard]
- *    shared with it, a trusted-phone token never opens it); the answer is [serverText] (`text/plain`: `code=`, `k=`, `factor=` and `install_sig=` lines, NEVER the private
- *    `install=` line, nothing else); at most [MAX_READS] per address and per [WINDOW_MS], counted apart from the key verifications;
+ *    shared with it, a trusted-phone token never opens it); the answer is the COMPLETE request ([DeviceRequestText.complete], `text/plain`: `code=`, `k=`, `factor=`, `install=` and `install_sig=`
+ *    lines, nothing else): `install=` is the installation's PUBLIC X25519 key, nothing secret, and a trial key in a v2 envelope needs it (ACT-F4 amended on 2026-10-07); the line is ABSENT when the TV has
+ *    no key yet. The text is rebuilt from the parsed request, never copied raw. At most [MAX_READS] per address and per [WINDOW_MS], counted apart from the key verifications;
  *  - anything else: 403 `locked`.
  * Pure but for [LockedActivationServer], the thin NanoHTTPD shell.
  */
@@ -36,7 +37,7 @@ class LockedActivationApi(
     private val termsAccepted: () -> Boolean,
     private val version: String,
     private val now: () -> Long = System::currentTimeMillis,
-    /** The TV's own device request, full text (`ActivationCenter`); only its [serverText] form ever leaves. null = unavailable (503). Called only for a peer that passed every guard. */
+    /** The TV's own device request, full text (`ActivationCenter.requestText()`); only its rebuilt [DeviceRequestText.complete] form ever leaves. null = unavailable (503). Called only for a peer that passed every guard. */
     private val deviceRequest: () -> String? = { null },
     /** Told the ADDRESS (never the code) of every peer that presented the right code, on either route: the activation screen shows « téléphone relié ». A failing listener changes nothing. */
     private val onAuthorized: (String) -> Unit = {},
@@ -95,10 +96,10 @@ class LockedActivationApi(
         }
     }
 
-    /** The device request in the server's form, as plain text; nothing is built for an address that already read it [MAX_READS] times in the window. */
+    /** The complete device request as plain text; nothing is built for an address that already read it [MAX_READS] times in the window. */
     private fun deviceRequestReply(ip: String): ApiReply {
         if (!take(reads, ip, MAX_READS)) return reply(429, """{"error":"trop de lectures : réessayez dans 10 minutes"}""")
-        val text = runCatching { deviceRequest()?.let(::serverText) }.getOrNull() ?: return reply(503, """{"error":"demande d'appareil indisponible"}""")
+        val text = runCatching { deviceRequest()?.let(DeviceRequestText::complete) }.getOrNull() ?: return reply(503, """{"error":"demande d'appareil indisponible"}""")
         return ApiReply(200, text, mime = TEXT_PLAIN)
     }
 
@@ -136,13 +137,6 @@ class LockedActivationApi(
         /** L3: the locked route opens only on a LOCKED TV and only while the gate lets [Feature.ACTIVATION_WIFI] through (an activated TV runs its full server instead). */
         fun mayOpen(state: GateState): Boolean = state is GateState.Locked && FeatureGate.canUse(Feature.ACTIVATION_WIFI, state)
         const val LOCKED = "Usage soumis à autorisation : seule l'activation est ouverte sur cette TV"
-
-        /**
-         * The device request in the form the licence server reads (the very text of the phone's « Copier pour le serveur »): `code=`, `k=`, the `factor=` lines and `install_sig=`.
-         * Rebuilt from the parsed request, so the private `install=` line, any other line a newer TV might know and any malformed text can never leave; null when [full] is not a
-         * readable device request.
-         */
-        fun serverText(full: String): String? = OwnerFrames.parseDeviceInfo(full)?.let { OwnerFrames.deviceInfo(it.code, it.fp, null, it.installSig) }
     }
 }
 
