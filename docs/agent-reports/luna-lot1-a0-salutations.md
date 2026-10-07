@@ -7,7 +7,7 @@ Reçu le 2026-10-07 via le propriétaire (copie collée). Luna n'a modifié aucu
 Conformes au cahier : objectifs observables A0 repris de `LANGUES.md` § 1.2 ; six leçons, 12 items/leçon, ≥ 8 réemployés (67 %) ; parcours complet sans médias ; budgets très en dessous des plafonds (lot média ≈ 5 Mo, texte ≈ 0,4 Mo) ; un ID média = un texte exact ; aucune voix/validation inventée ; clips conditionnés à l'autorisation ; relecteurs natifs demandés et non présumés.
 
 À corriger ou à faire relire (transmis à Luna au prochain ordre) :
-1. **Clip zh** : 很高兴认识你 dépasse la liste A0 (cinq syllabes, tons 3-1-4-4-2/3) ; à garder en reconnaissance seulement ou remplacer par 再见 / 谢谢 ; décision native.
+1. **Clip zh** : 很高兴认识你 (SIX syllabes, hěn gāoxìng rènshi nǐ, tons 3-1-4-4-neutre-3 ; formule HSK 1) est absente du banc : l'y ajouter en reconnaissance comme bloc figé (correction de mon contrôle initial par l'évaluation Opus, voir eval-luna-lot1.md).
 2. **Clip ja** : ordre des répliques — はじめまして se dit d'ordinaire *avant* d'échanger les noms ; よろしくお願いします en clôture de présentation, puis さようなら. À faire trancher par le relecteur japonophone.
 3. **Prérequis du graphe** : « à confirmer par Claude » — les nœuds `graph/langue-{zh,ja,de}.json` existent dans CastBridge (`content/graph/`) ; à aligner à l'intégration.
 4. **Gabarit JSON de demande** : champs éditoriaux ; le schéma de `mp.py requests` (CastBridge `tools/media-pipeline/`) fait foi, Luna l'a dit.
