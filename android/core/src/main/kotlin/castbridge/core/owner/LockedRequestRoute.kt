@@ -12,11 +12,13 @@ import java.io.IOException
 
 /**
  * La demande d'appareil d'une TV VERROUILLÉE, lue par le téléphone avec le code à 6 chiffres (docs/TV-DEMANDE-APPAREIL.md, DESIGN-ACTIVATION-SIMPLE § 3 F2) :
- * `GET /api/activation/device-request`, en-tête `X-CB-Pin`, réponse en TEXTE BRUT (`code=`, `k=`, `factor=…`, `install_sig=…`, jamais `install=` : ACT-F4). Une TV qui n'a pas encore la
- * route (CastBridge-TV 0.14.43 et avant) répond 403 comme pour toute autre route : [Reply.RouteMissing], la clé peut quand même lui être envoyée avec le code.
+ * `GET /api/activation/device-request`, en-tête `X-CB-Pin`, réponse en TEXTE BRUT : la demande COMPLÈTE (`code=`, `k=`, `factor=…`, `install=x25519|…`, `install_sig=…`). `install=` est la clé
+ * PUBLIQUE X25519 de l'installation de la TV, rien de secret, et une clé d'essai en enveloppe v2 l'exige (ACT-F4 amendée le 2026-10-07) ; la ligne est absente quand la TV n'a pas encore sa clé.
+ * Une TV qui n'a pas encore la route (CastBridge-TV 0.14.43 et avant) répond 403 comme pour toute autre route : [Reply.RouteMissing], la clé peut quand même lui être envoyée avec le code.
  *
- * Pur. Lecture stricte (code contrôlé, empreintes de 32 hexadécimaux, code d'accord avec les empreintes) ; ce qui n'est pas dans le modèle ne sort jamais : le texte partagé et le QR
- * sont reconstruits à partir des champs, sans la ligne `install=`. Aucun texte ne recopie le code, la demande ou le corps d'une réponse (ACT-NF2).
+ * Pur. Lecture stricte (code contrôlé, empreintes de 32 hexadécimaux, `install=` de 64 hexadécimaux en minuscules et une seule fois, code d'accord avec les empreintes) ; ce qui n'est pas dans le
+ * modèle ne sort jamais : le texte partagé et le QR sont reconstruits à partir des champs ([TvDeviceRequest.fullText]), `install=` comprise quand la TV l'a donnée ; la variante sans cette ligne
+ * ([DeviceRequestText.forServer]) ne sert qu'à l'envoi au serveur. Aucun texte ne recopie le code, la demande ou le corps d'une réponse (ACT-NF2).
  */
 object LockedRequestRoute {
     const val PATH = "/api/activation/device-request"
@@ -92,10 +94,16 @@ object LockedRequestRoute {
         return DeviceRequestParse.Ok(TvDeviceRequest(info.code, info.k, info.fp.byKind.toList(), hex(info.installPub), hex(info.installSig)))
     }
 
-    /** Ce que l'usager envoie à l'agent (WhatsApp, e-mail) : la demande pour le serveur, jamais la ligne `install=`. Les lignes sont celles que lisent les outils du propriétaire. */
-    fun shareText(r: TvDeviceRequest): String = r.serverText()
+    /**
+     * Ce que l'usager envoie à l'agent (WhatsApp, e-mail) : la demande COMPLÈTE, `install=` comprise quand la TV l'a donnée (clé publique, nécessaire à un essai en enveloppe v2). Les lignes sont celles
+     * que lisent les outils du propriétaire (`DeviceRequest.parse`) ; le serveur de licences tolère `install=` et l'ignore.
+     */
+    fun shareText(r: TvDeviceRequest): String = r.fullText()
 
-    /** Le QR du texte partagé : correction M si elle tient, sinon L ; null quand même L ne suffit pas (le texte partagé reste alors la seule voie, jamais un QR tronqué). */
+    /**
+     * Le QR du texte partagé (donc de la demande complète) : correction M si elle tient, sinon L ; null quand même L ne suffit pas (version 10 : 271 octets au plus ; une TV de 3 facteurs et `install=`
+     * en fait 343) : le texte partagé reste alors la seule voie, jamais un QR tronqué.
+     */
     fun qr(r: TvDeviceRequest): QrCode? {
         val t = shareText(r)
         return listOf(QrCode.Ecl.M, QrCode.Ecl.L).firstNotNullOfOrNull { ecl -> runCatching { QrCode.encode(t, ecl) }.getOrNull() }

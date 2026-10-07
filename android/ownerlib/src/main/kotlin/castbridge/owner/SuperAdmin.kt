@@ -28,7 +28,10 @@ object SuperAdmin {
     val enabled: Boolean get() = SuperAdminGate(BuildConfig.SUPERADMIN_BCRYPT, castbridge.core.owner.UnlockGuard({ 0L })).enabled
     fun open(ctx: Context) = ctx.startActivity(Intent(ctx, SuperAdminActivity::class.java))
 
-    /** « Émettre et installer » (écran « Activer la TV ») : la demande d'appareil lue sur la TV, à pré-remplir dans l'écran « Activer » de la console. */
+    /**
+     * « Émettre et installer » (écran « Activer la TV ») : la demande d'appareil COMPLÈTE lue sur la TV (`install=` comprise quand la TV l'a donnée : clé publique, qu'un essai en enveloppe v2 exige),
+     * à pré-remplir dans l'écran « Activer » de la console.
+     */
     const val EXTRA_DEVICE_REQUEST = "castbridge.owner.device_request"
     /** La console a été ouverte par l'écran « Activer la TV » : une fois la clé générée, « Installer sur la TV » la lui rend ([RESULT_KEY]) au lieu de la laisser sur place. */
     const val EXTRA_RETURN_KEY = "castbridge.owner.return_key"

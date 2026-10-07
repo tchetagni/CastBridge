@@ -20,6 +20,8 @@ class ActivationPhoneGuardTest {
     )
     private val coreFiles = listOf(
         "core/src/main/kotlin/castbridge/core/owner/ActivationRoutePlan.kt", "core/src/main/kotlin/castbridge/core/owner/KeyAcquisition.kt", "core/src/main/kotlin/castbridge/core/owner/LockedRequestRoute.kt",
+        "core/src/main/kotlin/castbridge/core/owner/DeviceRequestText.kt",           // la demande complète et sa forme pour le serveur : jamais dans un journal
+        "core/src/main/kotlin/castbridge/core/owner/DeviceRequestInput.kt",          // ce que l'on colle dans la console : la ligne fautive est nommée à l'écran, jamais écrite dans un journal
     )
 
     @Test fun noFileThatSeesTheCodeTheKeyOrTheRequestWritesToALog() {
@@ -35,6 +37,29 @@ class ActivationPhoneGuardTest {
         val added = console.lines().filter { "RESULT_KEY" in it || "EXTRA_RETURN_KEY" in it || "EXTRA_DEVICE_REQUEST" in it }
         assertTrue(added.isNotEmpty())
         assertTrue(added.none { "Log." in it || "println" in it }, added.toString())
+    }
+
+    @Test fun theConsoleDoesNotSendTheOwnerRoundByBluetoothForATrialKeyAnyMore() {
+        // ACT-F4 amended (2026-10-07): the request read by the code carries `install=` (public key), a trial in a v2 envelope is issued from it; its one sentence lives in the pure core
+        val console = source("ownerlib/src/main/kotlin/castbridge/owner/ConsoleActivity.kt")
+        assertFalse("La lecture par le code ne donne pas cette clé" in console, "the old sentence is gone")
+        assertFalse("lisez la demande complète par Bluetooth" in console)
+        assertTrue("ConsoleTrialBox.noKeyMessage" in console, "the sentence of the console comes from the tested core")
+    }
+
+    @Test fun theTvHandsItsCompleteRequestToTheLockedRouteNothingStripsTheInstallLineThere() {
+        // the receiver module has no JVM test: its one hook is pinned on the source (ACT-F4 amended on 2026-10-07; the pure API rebuilds the text, `DeviceRequestText.complete`)
+        val service = source("receiver/src/main/kotlin/castbridge/receiver/TvService.kt")
+        assertTrue("deviceRequest = { ActivationCenter.requestText() }" in service, "the locked route is fed with the TV's complete request")
+        assertFalse("serverRequestText" in service || "serverRequestText" in source("receiver/src/main/kotlin/castbridge/receiver/ActivationCenter.kt"), "no more server-only form on the TV")
+    }
+
+    @Test fun theDriverSubmitsOnlyThroughTheGuardedExecutors() {
+        // audit B1 (2026-10-07) : une réponse de la TV qui arrive après release() ne doit jamais atteindre un exécuteur arrêté (RejectedExecutionException dans un fil de pool = processus tué)
+        val code = source("sender/src/main/kotlin/castbridge/sender/ActivationDriver.kt").lineSequence().filterNot { it.trim().startsWith("//") || it.trim().startsWith("*") || it.trim().startsWith("/*") }.joinToString("\n")
+        assertTrue("ActivationExecutors.standard()" in code, "the pair of executors is the guarded one")
+        val raw = Regex("""\bExecutors\b|\.execute\(|\.submit\(|\.schedule\w*\(|\.shutdown\w*\(""").find(code)
+        assertNull(raw, "the driver never touches an executor directly (found: ${raw?.value}): everything goes through ActivationExecutors.onMachine / onIo / every / release")
     }
 
     @Test fun noCameraNeitherAScannerNorAPermissionForIt() {

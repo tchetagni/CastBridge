@@ -191,8 +191,9 @@ Le code de déverrouillage est demandé au clavier (jamais en argument) ; en scr
     /** The device request, v1 or v2 (a v2 one also carries the installation's public key, `install=x25519|…`). */
     private fun readRequest(f: File): OwnerFrames.DeviceInfo {
         if (!f.isFile) throw Fail("Demande introuvable : ${f.path}")
-        val text = f.readText().trim().replace("\r", "")
-        val r = OwnerFrames.parseDeviceInfo(text) ?: throw Fail(if (text.lines().any { it.trim().startsWith("install=") }) "Demande d'appareil illisible (clé d'installation)" else "Demande d'appareil illisible (attendu : code=…, k=…, factor=TYPE|empreinte)")
+        val read = DeviceRequestInput.classify(f.readText())
+        // un code seul, un code mal recopié, une ligne manquante ou fautive : dit et nommé (DeviceRequestInput), jamais un « illisible » muet
+        val r = (read as? DeviceRequestInput.Kind.Request)?.info ?: throw Fail(DeviceRequestInput.message(read).orEmpty())
         if (DeviceCode.of(r.fp) != r.code) throw Fail("Le code d'appareil ne correspond pas aux empreintes de la demande (fichier altéré ?)")
         return r
     }

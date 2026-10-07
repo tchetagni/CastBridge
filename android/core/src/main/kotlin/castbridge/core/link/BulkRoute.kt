@@ -42,8 +42,14 @@ object WdJoin {
     /** Android affiche-t-il une boîte de confirmation à chaque jonction ? */
     fun systemDialog(m: JoinMethod): Boolean = m == JoinMethod.NETWORK_SPECIFIER
 
-    /** P2P : 20 s suffisent (association WPA2 + DHCP) ; boîte système : le temps que l'usager touche « Se connecter ». */
-    fun joinTimeoutMs(m: JoinMethod): Long = when (m) { JoinMethod.P2P_CONNECT -> 20_000L; JoinMethod.NETWORK_SPECIFIER -> 50_000L; JoinMethod.NONE -> 0L }
+    /**
+     * La boîte système « Se connecter ? » d'Android (`WifiNetworkSpecifier`) : le temps que l'usager la touche, et que la TV crée son groupe (jusqu'à 10 s après un OK sur la TV). Une seule valeur pour toute
+     * l'application : la copie rapide ([joinTimeoutMs]) et « Activer la TV » (`ActivationRoutePlan.GROUP_MS`) ; l'audit anti-régression I-6 avait trouvé 20 s dans le second, contre 50 s dans le premier.
+     */
+    const val NETWORK_SPECIFIER_JOIN_MS = 50_000L
+
+    /** P2P : 20 s suffisent (association WPA2 + DHCP) ; boîte système : le temps que l'usager touche « Se connecter » ([NETWORK_SPECIFIER_JOIN_MS]). */
+    fun joinTimeoutMs(m: JoinMethod): Long = when (m) { JoinMethod.P2P_CONNECT -> 20_000L; JoinMethod.NETWORK_SPECIFIER -> NETWORK_SPECIFIER_JOIN_MS; JoinMethod.NONE -> 0L }
 }
 
 /** L'adresse HTTP de la TV dans le groupe : celle que donne Android (`WifiP2pInfo.groupOwnerAddress`), sinon celle que dit la TV, sinon 192.168.49.1. */

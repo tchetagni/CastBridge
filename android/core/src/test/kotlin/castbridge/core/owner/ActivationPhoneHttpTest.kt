@@ -21,7 +21,8 @@ import kotlin.test.*
 class ActivationPhoneHttpTest {
     private val code = "482913"
     private val fp = Fingerprints(mapOf(FactorKind.FLASH to "0a1b2c3d4e5f60718293a4b5c6d7e8f9", FactorKind.SYSTEM_SERIAL to "aaaaaaaabbbbbbbbccccccccdddddddd", FactorKind.BLUETOOTH to "00112233445566778899aabbccddeeff"))
-    private val routeText = OwnerFrames.deviceInfo(DeviceCode.of(fp), fp, null, ByteArray(32) { (it * 3 + 2).toByte() })
+    /** What a locked TV answers: the COMPLETE request, with its installation's PUBLIC key (`install=`), ACT-F4 amended on 2026-10-07. */
+    private val routeText = OwnerFrames.deviceInfo(DeviceCode.of(fp), fp, ByteArray(32) { (it * 7 + 1).toByte() }, ByteArray(32) { (it * 3 + 2).toByte() })
     private val servers = ArrayList<HttpServer>()
 
     @AfterTest fun tearDown() { servers.forEach { it.stop(0) }; BoundRoute.clear() }
@@ -54,7 +55,8 @@ class ActivationPhoneHttpTest {
             }
         }
         val ok = assertIs<LockedRequestRoute.Reply.Request>(LockedRequestRoute.probe(base, code, locked = true))
-        assertEquals(routeText, ok.request.serverText())
+        assertEquals(routeText, ok.request.fullText(), "la demande complète, install= comprise, est lue telle quelle")
+        assertNotNull(ok.request.installHex)
         assertEquals(Triple("GET", "/api/activation/device-request", code), seen.single(), "un GET, avec le code dans l'en-tête X-CB-Pin")
         assertEquals(LockedRequestRoute.Reply.CodeRefused, LockedRequestRoute.probe(base, "000000", locked = true))
         assertEquals(LockedRequestRoute.Reply.CodeRefused, LockedRequestRoute.probe(base, "000001", locked = true))

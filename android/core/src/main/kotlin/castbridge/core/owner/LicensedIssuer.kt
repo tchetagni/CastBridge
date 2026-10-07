@@ -13,10 +13,13 @@ class DeviceRequest(val code: String, val k: Int, val factors: Fingerprints, val
     val installFingerprint: String? get() = installSig?.let { ActivationBinding.fingerprint(it) }
 
     companion object {
-        /** From the TV's text (`code=…` / `k=…` / `factor=TYPE|hash` lines). Tolerates CRLF and blank lines. */
+        /**
+         * From the TV's text (`code=…` / `k=…` / `factor=TYPE|hash` lines). Tolerates CRLF and blank lines. What cannot be read is EXPLAINED ([DeviceRequestInput], shared by the owner's console, the desk tool and the
+         * CLI): a device code alone does not suffice, a mis-copied code gives its format, a missing `k=` or a faulty line is named.
+         */
         fun parse(text: String): DeviceRequest {
-            val clean = text.replace("\r", "").lines().map { it.trim() }.filter { it.isNotEmpty() }.joinToString("\n")
-            val info = OwnerFrames.parseDeviceInfo(clean) ?: throw IssueException("Demande d'appareil illisible : attendu « code=… », « k=… » puis des lignes « factor=TYPE|empreinte » (et « install=x25519|… » pour une CastBridge-TV récente)")
+            val read = DeviceRequestInput.classify(text)
+            val info = (read as? DeviceRequestInput.Kind.Request)?.info ?: throw IssueException(DeviceRequestInput.message(read).orEmpty())
             if (info.code != DeviceCode.of(info.fp)) throw IssueException("Le code d'appareil ne correspond pas aux empreintes : demande corrompue ou modifiée")
             return DeviceRequest(info.code, info.k, info.fp, info.installPub, info.installSig)
         }

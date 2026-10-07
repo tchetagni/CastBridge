@@ -1,6 +1,19 @@
 package castbridge.core.owner
 
 /**
+ * The one sentence of the owner phone's « Activer » screen when a TRIAL key cannot be issued because the device request carries no `install=` line (the installation's PUBLIC X25519 key: the rented
+ * lots of a trial are boxed for it, v2). Since 2026-10-07 (ACT-F4 amended) EVERY request read from a recent TV carries it, whether read by the connection code (route
+ * `GET /api/activation/device-request`) or by Bluetooth (the same `requestText()`): a request without it means a key not ready yet (the TV's key store is still preparing it) or an older TV, so the
+ * screen opened by « Activer la TV » ([readByCode]) never sends the owner round by Bluetooth (it would give the same text) nor by the weak v1 envelope. A request pasted by hand keeps its switch
+ * « Enveloppe v1 (TV ancienne) », accepted until 2027-01-01.
+ */
+object ConsoleTrialBox {
+    fun noKeyMessage(readByCode: Boolean): String =
+        if (readByCode) "Cette TV n'a pas encore fourni sa clé d'installation (son coffre de clés n'est pas prêt, ou CastBridge-TV est trop ancienne) : relisez sa demande dans quelques secondes (« Activer la TV », saisissez à nouveau le code) ou mettez CastBridge-TV à jour."
+        else "Cette TV n'a pas fourni sa clé d'installation (CastBridge-TV trop ancien) : mettez-la à jour, ou activez « Enveloppe v1 (TV ancienne) »"
+}
+
+/**
  * What the owner phone's « Activer » screen says about the TV's installation key (`install_sig=`), before and after it signs a PRODUCTION activation (w23-05, second audit MEDIUM-C).
  * The device request is not signed: the owner must compare [ActivationBinding.fingerprint] of the key with the TV's activation screen BEFORE handing the activation over. Pure: no Android.
  */
