@@ -11,6 +11,12 @@ object WifiDirect {
     // No look-alike characters (0/O, 1/l/I): the password is read off a TV screen and typed on a phone.
     private const val ALPHABET = "abcdefghijkmnpqrstuvwxyzABCDEFGHJKLMNPQRSTUVWXYZ23456789"
 
+    /** [length] characters of [ALPHABET] chosen by the bytes (one byte per character, cycled): for codes derived from a secret ([WdCode]). */
+    fun charsFromBytes(bytes: ByteArray, length: Int): String {
+        require(bytes.isNotEmpty() && length in 1..63)
+        return (0 until length).joinToString("") { ALPHABET[(bytes[it % bytes.size].toInt() and 0xff) % ALPHABET.length].toString() }
+    }
+
     /** Length of a group's WPA2-PSK passphrase: 16 random characters of [ALPHABET] (about 93 bits), fresh for every group. */
     const val PASSPHRASE_LENGTH = 16
 
