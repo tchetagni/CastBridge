@@ -14,6 +14,10 @@
 
 ## 0. Journal en direct (le plus récent en haut)
 
+### 2026-10-07 : serveur 1.2.4 DÉPLOYÉ (00:54 UTC) ; guide public en ligne
+- `deploy-server.sh server-1.2.4 --apply` : sauvegarde base + licences, image `candidate`, santé OK, en service `releases/server-1.2.4-20261007T005332Z` (e1559860). Contient : route publique `/guide/` (+ 301 depuis `/guide`), correctif révocation de poste datée ≥ émission, V63→V67 déjà en place depuis 1.2.3.
+- Guide utilisateur publié : https://bridge.sti-cm.com/guide/ (200, 2,5 Mo, cache 300 s, CSP, traversée refusée 400) ; fichier `/data/apk/guide/index.html` du volume, sha256 = `docs/guide-utilisateur/guide-utilisateur.html` (version 2026-10-07). Mise à jour sans redéploiement : `scp` + `sudo docker cp` (docs/GUIDE-PUBLICATION.md).
+
 ### 2026-10-07 : la file survit à la mort du processus pour les fichiers partagés depuis Telegram (R-22) (branche d'agent, non construit, NON MESURÉ sur appareil depuis le correctif)
 - Mesure (ADB, S21+ Android 14, CastBridge 1.2.50) : après redémarrage du processus, `Failed to find provider info for org.telegram.messenger.provider` et « Copie impossible » pour chaque fichier de la file ; Telegram n'indexe pas ses vidéos dans MediaStore ; `READ_MEDIA_VIDEO` jamais accordée. Correctif : ancrage durable à la mise en file (persistable, MediaStore, copie dans `cacheDir/queue`, sinon « à repartager »), reprise par MediaStore (nom + taille), une notification groupée, bouton « Choisir le fichier ». Détails : `docs/TRANSFER.md` §11, `docs/REGRESSIONS.md` R-22, parcours P-76. Limites : la permission média est demandée une seule fois (à la première mise en file d'un fichier non persistable) ; le sélecteur Android ne peut pas être pré-rempli sur un nom ; la copie du cache peut être vidée par Android si le téléphone manque d'espace (le fichier passe alors en « à repartager »).
 
