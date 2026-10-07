@@ -32,6 +32,8 @@ class RemoteSession(
 
     @Volatile private var running = false
     private var thread: Thread? = null
+    /** The transport of the link that is up right now (null while connecting, retrying or stopped), see [liveTransport]. */
+    @Volatile private var live: RemoteTransport? = null
     @Volatile var rttMs: Long? = null; private set
     @Volatile var status = Status(Link.CONNECTING); private set
 
@@ -83,6 +85,7 @@ class RemoteSession(
                     }
                     failures = 0
                     lastPing = 0
+                    live = link
                 }
                 val l = link
                 val now = System.currentTimeMillis()
@@ -123,6 +126,12 @@ class RemoteSession(
 
     val isRunning: Boolean get() = running
 
+    /**
+     * The link of this session while it is up, or null (R-35, audit I-14). « Ouvrir sur la TV » sends its `open` command on it (see [OpenTvSessionLink]) instead of dialling a second link to
+     * the same Bluetooth service, which the TV refuses (same RFCOMM channel). The link may close under the caller's feet: its `send` then throws [IOException] like any other.
+     */
+    fun liveTransport(): RemoteTransport? = live.takeIf { running }
+
     private class TokenRefused : IOException("token refused")
     private fun badToken(r: RemoteReply) = r.status == 401 && "bad token" in r.body
 
@@ -146,7 +155,7 @@ class RemoteSession(
         if (r.status == 200) runCatching { listener.state(r.body) }
     }
 
-    private fun closeQuietly(l: RemoteTransport?) { runCatching { l?.close() } }
+    private fun closeQuietly(l: RemoteTransport?) { if (l != null && l === live) live = null; runCatching { l?.close() } }
 
     companion object {
         /** The French message of a refusal ("message" or "error" of the JSON answer). */

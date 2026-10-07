@@ -144,23 +144,24 @@
         <!-- Lots (docs/LOTS.md): periodic sync with the server, deferred delivery to the TV, woken by the TV's Bluetooth link (system broadcast only) -->
         <service android:name=".LotsSyncJob" android:exported="false" android:permission="android.permission.BIND_JOB_SERVICE" />
         <service android:name=".LotsDeliverJob" android:exported="false" android:permission="android.permission.BIND_JOB_SERVICE" />
-        <receiver android:name=".LotsTriggerReceiver" android:exported="false">
+        <!-- Exported ON PURPOSE (R-31, audit I-9): "device connected" is sent by the Bluetooth app (uid 1002), which a non-exported receiver never hears. Safe: both actions are protected system broadcasts (no app can send them) and onReceive only acts on them (BluetoothWake). -->
+        <receiver android:name=".LotsTriggerReceiver" android:exported="true">
             <intent-filter>
                 <action android:name="android.bluetooth.device.action.ACL_CONNECTED" />
                 <action android:name="android.intent.action.BOOT_COMPLETED" />
             </intent-filter>
         </receiver>
-        <!-- Plug and play in the background (docs/BT-PLUG-AND-PLAY.md): a periodic job and a one-shot job started by the Bluetooth broadcasts below. Not exported. -->
+        <!-- Plug and play in the background (docs/BT-PLUG-AND-PLAY.md): a periodic job and a one-shot job started by the Bluetooth broadcasts below. The job is not exported; the receiver is, on purpose (R-31, audit I-9: only protected system broadcasts, checked by onReceive). -->
         <service android:name=".LinkJobService" android:exported="false" android:permission="android.permission.BIND_JOB_SERVICE" />
-        <receiver android:name=".LinkWakeReceiver" android:exported="false">
+        <receiver android:name=".LinkWakeReceiver" android:exported="true">
             <intent-filter>
                 <action android:name="android.bluetooth.device.action.ACL_CONNECTED" />
                 <action android:name="android.bluetooth.device.action.BOND_STATE_CHANGED" />
                 <action android:name="android.bluetooth.adapter.action.STATE_CHANGED" />
             </intent-filter>
         </receiver>
-        <!-- Relay (docs/coordination/DESIGN-RELAIS-TELEPHONE-2026-10-07.md): a TV that wants an Internet pipe knocks at the phone's door over Bluetooth ("device connected"); the saved TV's request is read and the pipe opens silently. Not exported: only the system sends it. -->
-        <receiver android:name=".RelayWakeReceiver" android:exported="false">
+        <!-- Relay (docs/coordination/DESIGN-RELAIS-TELEPHONE-2026-10-07.md): a TV that wants an Internet pipe knocks at the phone's door over Bluetooth ("device connected"); the saved TV's request is read and the pipe opens silently. Exported on purpose (R-31, audit I-9: the Bluetooth app, uid 1002, sends "device connected"; a non-exported receiver never hears it): the action is a protected system broadcast and onReceive only acts on it, for a saved TV. -->
+        <receiver android:name=".RelayWakeReceiver" android:exported="true">
             <intent-filter>
                 <action android:name="android.bluetooth.device.action.ACL_CONNECTED" />
             </intent-filter>

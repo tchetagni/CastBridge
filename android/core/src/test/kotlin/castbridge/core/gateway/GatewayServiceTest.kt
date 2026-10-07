@@ -95,10 +95,54 @@ class GatewayServiceTest {
         assertEquals(listOf(new, old), tried)
         assertEquals(listOf(GatewayService.GAP_MS), pauses, "never two connect() back to back to the same TV")
         assertTrue(log.any { "old TV" in it }, log.toString())
-        // the next connection of the same run goes straight to the old service: no failed attempt, no pause
+        // the gateway HELLO is answered on that connection (R-36: only now is the TV known to be an old one): the next connection of the same run goes straight to the old service, no failed attempt, no pause
+        c.helloAnswered()
         tried.clear(); pauses.clear()
         assertEquals("link:$old", c.connect(null, sleep = { pauses += it }, dial = tv(old, tried = tried)))
         assertEquals(listOf(old), tried); assertEquals(emptyList(), pauses)
+    }
+
+    @Test fun aLegacyServiceThatAnswersTheConnectionButNotTheHelloIsNotRememberedAsAnOldTv() {
+        // R-36 (audit I-8) : une TV À JOUR dont le SSH par Bluetooth est allumé écoute …0002 pour son tunnel SSH ; si …0007 échoue un instant (connexion concurrente, cache SDP sans …0007),
+        // sshd répond à la connexion sur …0002 : ce n'est PAS la passerelle (aucune poignée de main). Retenir « TV ancienne » 10 minutes enverrait chaque essai suivant au seul …0002.
+        val c = GatewayService.PhoneChoice()
+        val tried = mutableListOf<String>()
+        var newIsBusy = true                                   // …0007 échoue la première fois seulement
+        assertEquals("link:$old", c.connect(null, sleep = {}) { u -> tried += u; if (u == new && newIsBusy) { newIsBusy = false; throw IOException("already at opened state") } else "link:$u" })
+        assertEquals(listOf(new, old), tried)
+        assertEquals(listOf(new, old), c.order(null), "…0002 a répondu à la connexion, personne n'a répondu au HELLO de la passerelle : la TV n'est pas connue comme ancienne")
+        tried.clear()
+        assertEquals("link:$new", c.connect(null, sleep = {}) { u -> tried += u; "link:$u" })
+        assertEquals(listOf(new), tried, "l'essai suivant revient à …0007 : la passerelle n'est pas perdue 10 minutes")
+    }
+
+    @Test fun theOldUuidIsRememberedOnlyWhenTheGatewayHelloWasAnswered() {
+        var t = 0L
+        val c = GatewayService.PhoneChoice(now = { t }, legacyRecheckMs = 10 * 60_000L)
+        assertEquals("link:$old", c.connect(null, sleep = {}, dial = tv(old)))
+        assertEquals(listOf(new, old), c.order(null), "connected, not yet answered")
+        c.helloAnswered()
+        assertEquals(listOf(old), c.order(null), "the HELLO was answered on the old UUID: an old TV")
+        t += 10 * 60_000L + 1; assertEquals(listOf(new, old), c.order(null), "…for ten minutes")
+        c.helloAnswered()                                       // nothing connected since: nothing changes
+        assertEquals(listOf(new, old), c.order(null))
+    }
+
+    @Test fun aHelloAnsweredOnTheNewUuidForgetsAnOldTv() {
+        val c = GatewayService.PhoneChoice()
+        c.connected(old)                                        // an old TV was met
+        assertEquals("link:$new", c.connect(listOf(new), sleep = {}, dial = tv(new)))
+        c.helloAnswered()
+        assertEquals(listOf(new, old), c.order(null), "the TV was updated since")
+    }
+
+    @Test fun aNewerConnectionReplacesTheOneWaitingForItsHello() {
+        // …0002 answered a connection but no HELLO ever came ; the next attempt reaches …0007 : a late helloAnswered() must not resurrect the old UUID
+        val c = GatewayService.PhoneChoice()
+        assertEquals("link:$old", c.connect(null, sleep = {}, dial = tv(old)))
+        assertEquals("link:$new", c.connect(null, sleep = {}, dial = tv(new, old)))
+        c.helloAnswered()
+        assertEquals(listOf(new, old), c.order(null))
     }
 
     @Test fun aTvThatIsAwayFailsOnBothAttemptsAndTheLastErrorIsRaised() {

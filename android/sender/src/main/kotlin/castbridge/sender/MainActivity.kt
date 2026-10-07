@@ -25,6 +25,7 @@ import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
+import castbridge.core.remote.OpenTvLaunch
 import castbridge.core.upnp.Didl
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
@@ -34,8 +35,11 @@ class MainActivity : ComponentActivity() {
         setTheme(R.style.Theme_CastBridge) // leaves the launch theme (splash) for the normal one
         super.onCreate(savedInstanceState)
         setContent { CastTheme { SyncSystemBars(); Surface(Modifier.fillMaxSize(), color = MaterialTheme.colorScheme.background) { Gate() } } }
-        installFrom(intent)
+        // R-34 (audit I-15): a recreated activity (saved state) or a return through the recent apps is not a gesture: Android hands back the ORIGINAL intent of the task, shortcut link included
+        installFrom(intent, gesture = OpenTvLaunch.fires(restored = savedInstanceState != null, fromHistory = fromHistory(intent)))
     }
+
+    private fun fromHistory(i: Intent?): Boolean = i != null && i.flags and Intent.FLAG_ACTIVITY_LAUNCHED_FROM_HISTORY != 0
 
     override fun onResume() {
         super.onResume()
@@ -45,11 +49,18 @@ class MainActivity : ComponentActivity() {
     override fun onNewIntent(intent: Intent) {
         super.onNewIntent(intent)
         setIntent(intent)
-        installFrom(intent)
+        installFrom(intent, gesture = OpenTvLaunch.fires(restored = false, fromHistory = fromHistory(intent)))
     }
 
-    /** « Mise à jour prête — Installer » notification: install now (Android asks for confirmation). */
-    private fun installFrom(i: Intent?) {
+    /**
+     * « Mise à jour prête — Installer » notification: install now (Android asks for confirmation). [gesture] false = a replayed intent (see [onCreate]): what it carries was consumed by
+     * the first instance, so it is taken out and nothing happens (R-34: the TV must not leave what it is playing without a gesture).
+     */
+    private fun installFrom(i: Intent?, gesture: Boolean) {
+        if (!gesture) {
+            OpenTv.discardLink(i); i?.removeExtra(TvHomeRequest.EXTRA); i?.removeExtra(PhoneUpdater.EXTRA_INSTALL)
+            return
+        }
         if (OpenTv.handleLink(this, i)) return      // raccourci « Ouvrir CastBridge-TV » (appui long sur l'icône) ou castbridge://open-tv : CastBridge-TV passe devant l'application de la TV
         i?.getStringExtra(TvHomeRequest.EXTRA)?.let { TvHomeRequest.pending.value = it; i.removeExtra(TvHomeRequest.EXTRA) }   // « Ouvrir avec CastBridge »
         if (i?.getBooleanExtra(PhoneUpdater.EXTRA_INSTALL, false) != true) return

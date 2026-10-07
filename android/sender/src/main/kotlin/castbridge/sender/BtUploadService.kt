@@ -81,7 +81,8 @@ class BtUploadService : Service() {
         fun connect(): Link {
             runCatching { adapter.cancelDiscovery() }   // needs BLUETOOTH_SCAN on Android 12+: optional, never fatal
             val sock = adapter.getRemoteDevice(address).createRfcommSocketToServiceRecord(UUID.fromString(BtProtocol.SERVICE_UUID))
-            try { sock.connect() } catch (e: IOException) { runCatching { sock.close() }; throw e }
+            // R-32 (audit I-10): one connect() at a time to the same TV (the lock shared with the remote, the pipe, the owner channel and the trusted link)
+            try { synchronized(castbridge.core.tunnel.BtConnectLock.of(address)) { sock.connect() } } catch (e: IOException) { runCatching { sock.close() }; throw e }
             return object : Link {
                 override val input = sock.inputStream
                 override val output = sock.outputStream

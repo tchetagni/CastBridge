@@ -22,6 +22,7 @@ import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import castbridge.core.trust.DeviceRequestResult
+import castbridge.core.trust.PinKeys
 import castbridge.core.trust.TvDeviceRequestReader
 import castbridge.core.trust.TvDeviceRequestTexts
 import castbridge.core.tv.TvClient
@@ -49,7 +50,7 @@ private fun authorisation(ctx: Context): Pair<String?, String?> {
     (ui as? LinkUi.Connected)?.session?.let { s -> s.base?.let { return it to s.credential } }
     val tv = (ui as? LinkUi.Status)?.tv ?: TvLinkManager.saved.default()
     val ip = tv?.lastIps?.firstOrNull() ?: return null to null
-    val pin = pins.pinOnly(tv.address)
+    val pin = pins.pinOnly(PinKeys.btKey(tv.address))        // R-30 (audit B2): the code of a TV known by its Bluetooth address lives under « bt:<ADDRESS> », not under the bare address
     return if (pin.isNotBlank()) "http://$ip:${tv.port}" to pin else null to null
 }
 

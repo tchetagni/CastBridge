@@ -11,8 +11,9 @@ import java.io.IOException
  *    SSH over Bluetooth is OFF, so that the old UUID never has two owners. While the SSH is on, an OLD phone that asks for the old UUID reaches the SSH tunnel and fails: it has to
  *    wait for the SSH to end (or update).
  *  - Phone ([PhoneChoice], marker `R-28-OLD-TV`, to keep as long as old TVs are in the field, TVs being updated by hand): asks for the new UUID first; falls back on the old one when the
- *    TV is (possibly) old, and remembers « old TV » for [LEGACY_RECHECK_MS]. A TV that announces the new UUID is never asked for the old one: on an updated TV that UUID may be the
- *    SSH tunnel's.
+ *    TV is (possibly) old, and remembers « old TV » for [LEGACY_RECHECK_MS] ONLY once the gateway HELLO was answered on that connection ([PhoneChoice.helloAnswered], R-36 / audit I-8:
+ *    an updated TV with its SSH over Bluetooth on also ANSWERS a connection on the old UUID, with its SSH tunnel, which is not the gateway). A TV that announces the new UUID is never
+ *    asked for the old one: on an updated TV that UUID may be the SSH tunnel's.
  */
 object GatewayService {
     /** How long a phone keeps « this TV only has the old service » before asking for the new one again (an updated TV may have appeared). Same as the API v2 tunnel (LinkPool). */
@@ -27,6 +28,8 @@ object GatewayService {
     /** Phone side, one per gateway run. [now] is injectable (tests). */
     class PhoneChoice(private val now: () -> Long = System::currentTimeMillis, private val legacyRecheckMs: Long = LEGACY_RECHECK_MS) {
         @Volatile private var legacyUntil = 0L
+        /** The UUID of the last connection [connect] handed out, until the gateway HELLO on it is answered ([helloAnswered]) or another connection replaces it. */
+        @Volatile private var dialed: String? = null
 
         /**
          * The UUIDs to try for one connection, in this order. [advertised] = the service UUIDs Android knows the TV offers (its cached SDP answer; null = not known): a TV that
@@ -38,8 +41,17 @@ object GatewayService {
             else -> listOf(Gw.SERVICE_UUID, Gw.LEGACY_SERVICE_UUID)                       // R-28-OLD-TV: unknown TV: the new service first, the old one if it does not exist
         }
 
-        /** The connection to [uuid] succeeded: the TV is old if it was the old UUID (remembered for a while), updated if it was the new one. */
+        /**
+         * The gateway of the TV ANSWERED on [uuid] (its HELLO was answered, or the new service accepted a connection): the TV is old if it was the old UUID (remembered for a while),
+         * updated if it was the new one. A mere connection to the old UUID proves nothing: see [helloAnswered].
+         */
         fun connected(uuid: String) { legacyUntil = if (uuid.equals(Gw.LEGACY_SERVICE_UUID, ignoreCase = true)) now() + legacyRecheckMs else 0L }
+
+        /**
+         * The gateway HELLO of the connection [connect] returned was answered OK (R-36, audit I-8): only now is a connection to the old UUID known to be the TV's gateway, hence the TV an
+         * old one. Until then (a refused HELLO, an SSH banner, a link closed by the TV) nothing is remembered and the next attempt asks for the new UUID first again.
+         */
+        fun helloAnswered() { dialed?.let { connected(it) }; dialed = null }
 
         /**
          * One connection to the gateway of a TV: [dial] opens ONE connection to the service [uuid] and throws [IOException] when the TV has no such service or cannot be reached
@@ -53,8 +65,10 @@ object GatewayService {
                 if (i > 0) sleep(GAP_MS)
                 try {
                     val c = dial(uuid)
-                    connected(uuid)
-                    if (uuid.equals(Gw.LEGACY_SERVICE_UUID, ignoreCase = true)) log("old TV: the gateway is on the shared service …${uuid.takeLast(4)}")
+                    dialed = uuid
+                    // the new service exists only on an updated TV: a connection to it is proof enough ; the old one is also the SSH tunnel's (R-28): proof only after the HELLO ([helloAnswered])
+                    if (!uuid.equals(Gw.LEGACY_SERVICE_UUID, ignoreCase = true)) connected(uuid)
+                    else log("old TV (to be confirmed by the HELLO): the gateway is tried on the shared service …${uuid.takeLast(4)}")
                     return c
                 } catch (e: IOException) { last = e; log("gateway service …${uuid.takeLast(4)}: ${e.message}") }
             }

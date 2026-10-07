@@ -63,7 +63,7 @@ class PinBook(private val kv: PinKv) {
     fun formOf(key: String): String? {
         val raw = key.trim()
         if (raw.isBlank()) return null
-        if (raw.startsWith("bt:", ignoreCase = true)) return TrustRegistry.norm(raw.substring(3)).takeIf { it.isNotBlank() }?.let { "bt:$it" }
+        if (raw.startsWith(PinKeys.BT_PREFIX, ignoreCase = true)) return raw.substring(PinKeys.BT_PREFIX.length).takeIf { it.isNotBlank() }?.let { PinKeys.btKey(it) }
         val (host, port) = PinKeys.hostAndPort(raw)
         if (host != null) {
             val h = host.substringBefore('%').lowercase()
@@ -76,12 +76,12 @@ class PinBook(private val kv: PinKv) {
     /** The stable id [key] designates, or null (blank, or the tunnel loopback with no gateway TV). */
     fun tvId(key: String?, scope: PinScope, seenName: String? = null): String? {
         if (key.isNullOrBlank()) return null
-        scope.resolve(key)?.let { return "bt:" + TrustRegistry.norm(it.address) }
+        scope.resolve(key)?.let { return PinKeys.btKey(it.address) }
         // the tunnel loopback while the gateway runs: the Bluetooth address it reaches (saved or not); with no gateway, no TV at all
         val (host, port) = PinKeys.hostAndPort(key)
         if (host != null && isLoopback(host.lowercase())) {
             val t = scope.tunnelTv
-            return if (t != null && scope.tunnelPort != null && port == scope.tunnelPort) "bt:" + TrustRegistry.norm(t) else null
+            return if (t != null && scope.tunnelPort != null && port == scope.tunnelPort) PinKeys.btKey(t) else null
         }
         val f = formOf(key) ?: return null
         val a = kv.get(ALIAS + f)?.takeIf { it.isNotBlank() } ?: return f

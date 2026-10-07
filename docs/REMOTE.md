@@ -52,9 +52,9 @@ Comme la touche YouTube ou Netflix d'une télécommande : **un geste sur le tél
 ### Les gestes (téléphone CastBridge)
 
 - **Bouton « Ouvrir sur la TV »** (icône TV) en tête de l'onglet « CastBridge TV ». Si CastBridge-TV est déjà au premier plan, le bouton **ouvre la télécommande** (rien n'est touché sur la TV : une vidéo qui joue n'est jamais interrompue).
-- **Touche « TV »** dans la rangée système de la télécommande (Retour, Accueil, Menu, Info, Clavier, TV), ronde comme les autres ; elle n'existe pas quand « Ma TV » pilote une autre marque que CastBridge-TV.
+- **Touche « TV »** dans la rangée système de la télécommande (Retour, Accueil, Menu, Info, Clavier, TV), ronde comme les autres ; elle n'existe pas quand « Ma TV » pilote une autre marque que CastBridge-TV. **En Bluetooth**, la commande `open` part sur la liaison que la télécommande tient DÉJÀ vers la TV (`OpenTvSessionLink`, R-35) : une seconde liaison vers le même service serait refusée (même canal) et la ligne dirait « La TV ne répond pas » alors que la télécommande marche ; sans liaison de télécommande, la voie ouvre la sienne.
 - **Raccourci d'application** : appui long sur l'icône de CastBridge › « Ouvrir CastBridge-TV » (`res/xml/shortcuts.xml`).
-- **Lien** `castbridge://open-tv[?screen=library]`, traité par `MainActivity` (même action ; un message court dit le résultat). Il n'est volontairement **pas** « BROWSABLE » (une page web ne peut pas faire apparaître la TV) et une seconde demande dans les 2 s est ignorée.
+- **Lien** `castbridge://open-tv[?screen=library]`, traité par `MainActivity` (même action ; un message court dit le résultat). Il n'est volontairement **pas** « BROWSABLE » (une page web ne peut pas faire apparaître la TV) et une seconde demande dans les 2 s est ignorée. **Seule une intention neuve ouvre la TV** (`OpenTvLaunch.fires`, R-34) : une activité recréée (état sauvegardé) ou un retour par les applications récentes (`FLAG_ACTIVITY_LAUNCHED_FROM_HISTORY`) après la mort du processus rend à Android l'intention d'origine, lien compris, et ne rejoue rien (le lien en est retiré).
 
 ### Ce que dit le téléphone : une ligne, 10 s d'attente au plus, aucun réessai sans fin
 
