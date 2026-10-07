@@ -77,6 +77,24 @@ class LanguesTest {
         // backward compatibility: a « learn » pack.json never parses as a language pack, and its folder is not under content/langues
         assertFailsWith<LangPackJson.ParseError> { LangPackJson.parse(mapOf("langue.json" to "{\"format\":1,\"id\":\"6e-english\"}")) }
     }
+    @Test fun additiveExerciseFieldsAreReadWhenPresentAndIgnoredWhenMissing() {
+        fun parse(vararg exercises: String) = LangPackJson.parse(mapOf("langue.json" to
+            """{"format":1,"type":"langue","id":"zh-a1-test-fr","version":1,"target":"zh","level":"A1","theme":"test","source":"fr","title":"t","state":"review",
+               "units":[{"id":"zh-a1-test-fr-u1","title":"u","exercises":[${exercises.joinToString(",")}]}]}""")).units.single().exercises
+        val with = """{"id":"zh-a1-test-fr-x1","kind":"mcq","prompt":"p","choices":["十 shí — dix","是 shì — être"],"correct":1,"explanation":"Seul le ton change.","wrongWhy":["Le 2e ton monte.","—"]}"""
+        val without = """{"id":"zh-a1-test-fr-x2","kind":"mcq","prompt":"p","choices":["a","b"],"correct":0}"""
+        val (x1, x2) = parse(with, without)
+        assertEquals("Seul le ton change.", x1.explanation); assertEquals(listOf("Le 2e ton monte.", "—"), x1.wrongWhy)
+        assertEquals(1, x1.correct); assertEquals(listOf("十 shí — dix", "是 shì — être"), x1.choices)   // the fields the reader already knew are untouched
+        assertNull(x2.explanation); assertEquals(emptyList(), x2.wrongWhy)                                  // absent = ignored
+        // never an error: a blank explanation and a `wrongWhy` that is not a list read as « nothing »; a non-text item keeps its place so the list stays aligned on `choices`
+        val odd = parse("""{"id":"zh-a1-test-fr-x3","kind":"mcq","prompt":"p","choices":["a","b","c"],"correct":0,"explanation":"  ","wrongWhy":"une chaîne"}""",
+            """{"id":"zh-a1-test-fr-x4","kind":"mcq","prompt":"p","choices":["a","b","c"],"correct":0,"wrongWhy":["x",3,"z"]}""")
+        assertNull(odd[0].explanation); assertEquals(emptyList(), odd[0].wrongWhy)
+        assertEquals(listOf("x", "", "z"), odd[1].wrongWhy)
+        // the bundled sample pack, written before these fields existed, reads exactly as before
+        assertTrue(samplePack().units.flatMap { it.exercises }.all { it.explanation == null && it.wrongWhy.isEmpty() })
+    }
 
     // ---- marking ----
     @Test fun markingIgnoresCasePunctuationWidthAndOptionallyAccents() {

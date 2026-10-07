@@ -96,6 +96,18 @@ class Requests(unittest.TestCase):
         _, conflicts = self.build([p])
         self.assertEqual("t-nihao", conflicts[0]["id"])
 
+    def test_level_is_compared_without_regard_to_case(self):
+        # « a0 » (casse des anciens paquets) = « A0 » : même registre (« lent », pas « naturel »), même priorité, mêmes empreintes
+        low, c1 = self.build([pack(level="a0")])
+        up, c2 = self.build([pack(level="A0")])
+        self.assertEqual([], c1 + c2)
+        self.assertEqual([canonical(r) for r in up], [canonical(r) for r in low])
+        self.assertEqual({"lent"}, {r["voiceClass"]["register"] for r in low if r["kind"] == "audio"})
+        self.assertEqual({"A0"}, {r["level"] for r in low})
+        self.assertEqual(0, low[0]["priority"] // 100000, "A0-A2 : première tranche")
+        mixed, _ = self.build([pack(level="a1")])
+        self.assertEqual({"lent"}, {r["voiceClass"]["register"] for r in mixed if r["kind"] == "audio"})
+
 
 class Estimate(unittest.TestCase):
     def rows(self):

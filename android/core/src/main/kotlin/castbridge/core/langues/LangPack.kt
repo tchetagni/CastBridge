@@ -25,10 +25,15 @@ enum class LangExerciseKind(val key: String) {
     companion object { fun of(k: String?) = entries.firstOrNull { it.key == k } }
 }
 
-/** [answers]: accepted answers (dictation, cloze, translate, order = the right sentence); [choices]/[correct]: mcq/truefalse; [pairs]: match; [words]: shuffled pieces (order). */
+/**
+ * [answers]: accepted answers (dictation, cloze, translate, order = the right sentence); [choices]/[correct]: mcq/truefalse; [pairs]: match; [words]: shuffled pieces (order).
+ * Additive, optional (docs/LANGUES.md § 3.2, CONTENT-ARCHITECTURE § 5), absent = `null` / empty: [explanation] = the commented correction;
+ * [wrongWhy] = why each wrong choice is wrong, ALIGNED on [choices] (same index; "" when there is nothing to say for that choice).
+ */
 data class LangExercise(
     val id: String, val kind: LangExerciseKind, val prompt: String, val audio: String?, val answers: List<String>,
     val choices: List<String>, val correct: Int?, val pairs: List<Pair<String, String>>, val words: List<String>, val model: String?, val skill: LangSkill,
+    val explanation: String? = null, val wrongWhy: List<String> = emptyList(),
 )
 
 data class LangUnit(
@@ -99,7 +104,8 @@ object LangPackJson {
         val id = m.req("id", "exercice"); val w = "exercice $id"
         val kind = LangExerciseKind.of(m.str("kind")) ?: throw ParseError("$w : \"kind\" inconnu « ${m.str("kind")} »")
         return LangExercise(id, kind, m.req("prompt", w), m.str("audio"), m.ss("answers"), m.ss("choices"), m.int("correct"),
-            m.l("pairs").map { p -> p.o(w).let { it.req("a", w) to it.req("b", w) } }, m.ss("words"), m.str("model"), LangSkill.of(m.str("skill")) ?: defaultSkill(kind))
+            m.l("pairs").map { p -> p.o(w).let { it.req("a", w) to it.req("b", w) } }, m.ss("words"), m.str("model"), LangSkill.of(m.str("skill")) ?: defaultSkill(kind),
+            m.str("explanation")?.takeIf { it.isNotBlank() }, m.l("wrongWhy").map { it as? String ?: "" })   // additive: a missing key, or a `wrongWhy` that is not a list, reads as « nothing »
     }
 
     fun defaultSkill(k: LangExerciseKind) = when (k) {
