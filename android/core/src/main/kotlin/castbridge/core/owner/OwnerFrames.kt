@@ -5,8 +5,9 @@ import java.io.DataInputStream
 import java.io.InputStream
 
 /**
- * Frames of the OWNER Bluetooth channel (docs/TRIAL-EDITION.md § Canal Bluetooth propriétaire): a service of its own ([SERVICE_UUID], the next one after the
- * API service 0003), so old TVs and phones never see it (additive, backward compatible). Frame = magic "CBTO" once at connection, then repeated
+ * Frames of the OWNER Bluetooth channel (docs/TRIAL-EDITION.md § Canal Bluetooth propriétaire): a service of its own ([SERVICE_UUID] = …0005, the one after the shared
+ * API tunnel 0004; the table of every RFCOMM service is [castbridge.core.tv.BtProtocol.SERVICES]), so old TVs and phones never see it (additive, backward compatible).
+ * Frame = magic "CBTO" once at connection, then repeated
  * [type:1][length:2 big-endian][payload]. Nothing here is secret: every command inside is signed (see [OwnerCommand]).
  */
 object OwnerFrames {

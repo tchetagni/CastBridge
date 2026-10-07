@@ -151,7 +151,10 @@ class BtUploadService : Service() {
         }
     }
 
-    /** Joins the TV's Wi-Fi Direct group (Android shows its approval dialog) and routes this app through it; null if refused. */
+    /**
+     * Joins the TV's Wi-Fi Direct group (Android shows its approval dialog); null if refused. Only the sockets towards the group go through its network ([GroupNetworkRoute] /
+     * [castbridge.core.net.BoundRoute], one socket at a time): the rest of the app keeps its Internet during the join (R-29; `bindProcessToNetwork` used to cut it).
+     */
     private fun joinWifiDirect(ssid: String, pass: String): android.net.ConnectivityManager.NetworkCallback? {
         if (Build.VERSION.SDK_INT < 29) return null
         val cm = getSystemService(android.net.ConnectivityManager::class.java)
@@ -161,7 +164,7 @@ class BtUploadService : Service() {
         val got = java.util.concurrent.CountDownLatch(1)
         var ok = false
         val cb = object : android.net.ConnectivityManager.NetworkCallback() {
-            override fun onAvailable(network: android.net.Network) { ok = cm.bindProcessToNetwork(network); got.countDown() }
+            override fun onAvailable(network: android.net.Network) { groupRoute = GroupNetworkRoute.install(network); ok = true; got.countDown() }
             override fun onUnavailable() { got.countDown() }
         }
         return try {
@@ -171,9 +174,12 @@ class BtUploadService : Service() {
         } catch (e: Exception) { Log.i(TAG, "wifi direct: ${e.javaClass.simpleName}"); null }
     }
 
+    /** The route to the joined group's addresses (null when no group is joined by this service). */
+    @Volatile private var groupRoute: castbridge.core.net.BoundRoute.Binding? = null
+
     private fun leaveWifiDirect(cb: android.net.ConnectivityManager.NetworkCallback) {
         val cm = getSystemService(android.net.ConnectivityManager::class.java)
-        runCatching { cm.bindProcessToNetwork(null) }
+        GroupNetworkRoute.release(groupRoute); groupRoute = null
         runCatching { cm.unregisterNetworkCallback(cb) }
     }
 

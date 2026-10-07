@@ -18,9 +18,10 @@ import androidx.compose.ui.unit.dp
 import castbridge.core.tv.WifiDirect
 
 /**
- * Joins the Wi-Fi Direct group created by the TV (WifiNetworkSpecifier, Android 10+), then routes this
- * app's traffic through it so the normal HTTP API works at 192.168.49.1:8765. The system shows its own
- * approval dialog; the phone's other apps keep their usual connection.
+ * Joins the Wi-Fi Direct group created by the TV (WifiNetworkSpecifier, Android 10+), then routes the sockets towards the group
+ * through it ([GroupNetworkRoute] / [castbridge.core.net.BoundRoute], one socket at a time) so the normal HTTP API works at
+ * 192.168.49.1:8765. The system shows its own approval dialog; the phone's other apps keep their usual connection, and so does the
+ * rest of this app (R-29: `bindProcessToNetwork` used to cut the Internet of the whole app while the group was joined).
  */
 class DirectLink(ctx: Context) {
     sealed class State {
@@ -32,6 +33,8 @@ class DirectLink(ctx: Context) {
 
     private val cm = ctx.applicationContext.getSystemService(ConnectivityManager::class.java)
     private var callback: ConnectivityManager.NetworkCallback? = null
+    /** The route to the joined group's addresses, null while no group is joined. */
+    @Volatile private var route: castbridge.core.net.BoundRoute.Binding? = null
     var state by mutableStateOf<State>(State.Idle)
         private set
 
@@ -43,9 +46,9 @@ class DirectLink(ctx: Context) {
         val req = NetworkRequest.Builder().addTransportType(NetworkCapabilities.TRANSPORT_WIFI)
             .removeCapability(NetworkCapabilities.NET_CAPABILITY_INTERNET).setNetworkSpecifier(spec).build()
         val cb = object : ConnectivityManager.NetworkCallback() {
-            override fun onAvailable(network: Network) { cm.bindProcessToNetwork(network); state = State.Connected }
+            override fun onAvailable(network: Network) { route = GroupNetworkRoute.install(network); state = State.Connected }
             override fun onUnavailable() { state = State.Failed("Connexion refusée ou TV introuvable") }
-            override fun onLost(network: Network) { cm.bindProcessToNetwork(null); state = State.Failed("Liaison perdue") }
+            override fun onLost(network: Network) { GroupNetworkRoute.release(route); route = null; state = State.Failed("Liaison perdue") }
         }
         callback = cb
         state = State.Connecting
@@ -56,7 +59,7 @@ class DirectLink(ctx: Context) {
     fun disconnect() {
         callback?.let { runCatching { cm.unregisterNetworkCallback(it) } }
         callback = null
-        runCatching { cm.bindProcessToNetwork(null) }
+        GroupNetworkRoute.release(route); route = null
         if (state !is State.Failed) state = State.Idle
     }
 }
@@ -82,8 +85,8 @@ fun WifiDirectScreen() {
     }
     Column(Modifier.fillMaxSize().verticalScroll(rememberScrollState()).padding(16.dp), verticalArrangement = Arrangement.spacedBy(8.dp)) {
         Text("Wi-Fi Direct : sur la TV, appuyez sur MENU > « Wi-Fi Direct : activer ». La TV affiche le nom du réseau, " +
-            "le mot de passe et le PIN. Aucun routeur n'est nécessaire ; pendant la connexion, ce téléphone n'a pas Internet " +
-            "pour cette app.", style = MaterialTheme.typography.bodySmall)
+            "le mot de passe et le PIN. Aucun routeur n'est nécessaire ; seuls les échanges avec la TV passent par ce réseau, " +
+            "le reste de l'app garde son Internet.", style = MaterialTheme.typography.bodySmall)
         OutlinedTextField(ssid, { ssid = it }, Modifier.fillMaxWidth(), singleLine = true, label = { Text("Nom du réseau (SSID)") })
         OutlinedTextField(pass, { pass = it }, Modifier.fillMaxWidth(), singleLine = true, label = { Text("Mot de passe") })
         val ok = WifiDirect.isValidNetworkName(ssid.trim()) && WifiDirect.isValidPassphrase(pass)

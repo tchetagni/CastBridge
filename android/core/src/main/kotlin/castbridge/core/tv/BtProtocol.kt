@@ -75,14 +75,52 @@ object BtProtocol {
     const val HINT_NONE = 0
     const val HINT_OTHER_INSTALL = 1
     const val HINT_SAME_INSTALL = 2
+    // ---------------------------------------------------------------- RFCOMM services: THE table
+    //
+    // A service = the CastBridge prefix + a two-digit number. A number is given ONCE, here ([SERVICES]); the test BtServicesTest forbids two services on one UUID (R-28: the
+    // SSH tunnel and the Internet gateway were both on …0002, so a phone asking for one could reach the other), a literal UUID of the prefix anywhere in the apps other than
+    // this file and OwnerFrames, and a service that is missing from the table. Documents: docs/ADMIN.md § 11, docs/BT-PLUG-AND-PLAY.md.
+    //
+    //   0001 files and control (CBT1, CBTN, CBTH, CBTP, CBTR)                  "CastBridge TV"       SERVICE_UUID
+    //   0002 SSH tunnel (raw SSH bytes)                                         "CastBridge SSH"      SSH_SERVICE_UUID
+    //   0003 HTTP API tunnel, one link per connection                           "CastBridge API"      API_SERVICE_UUID
+    //   0004 HTTP API tunnel, ONE shared link per phone (frames)                "CastBridge API v2"   API_MUX_SERVICE_UUID
+    //   0005 owner channel (CBTO: activation, signed orders)                    "CastBridge Owner"    castbridge.core.owner.OwnerFrames.SERVICE_UUID
+    //   0006 RESERVED: the synchronisation channel of W7 (designed, not built)  ([RESERVED_NUMBERS])
+    //   0007 Internet gateway (CBG1: SOCKS5 on the TV, exit on the phone)       "CastBridge Internet" GATEWAY_SERVICE_UUID (R-28: it used to share …0002 with the SSH tunnel)
+    //   0008 and up: free
+
     /** RFCOMM service UUID shared by the TV and the phone app. */
     const val SERVICE_UUID = "7c5e3b9a-4d2f-4c61-9b0e-cb0000000001"
-    /** Second RFCOMM service: a plain byte tunnel to the TV's SSH server (see castbridge.core.ssh.SshTunnel). */
+    /** Second RFCOMM service: a plain byte tunnel to the TV's SSH server (see castbridge.core.ssh.SshTunnel). Since R-28 it carries nothing else. */
     const val SSH_SERVICE_UUID = "7c5e3b9a-4d2f-4c61-9b0e-cb0000000002"
     /** Third RFCOMM service: a byte tunnel to the TV's own HTTP API (127.0.0.1:8765), see castbridge.core.tunnel.TcpTunnel and docs/ADMIN.md. */
     const val API_SERVICE_UUID = "7c5e3b9a-4d2f-4c61-9b0e-cb0000000003"
     /** Fourth RFCOMM service: the same HTTP API over ONE shared link per phone (frames, see castbridge.core.tunnel.MuxSession). The third service stays for old phones/TVs. */
     const val API_MUX_SERVICE_UUID = "7c5e3b9a-4d2f-4c61-9b0e-cb0000000004"
+    /**
+     * Seventh RFCOMM service: the Internet gateway (castbridge.core.gateway.Gw: the phone shares its connection with the TV). Until R-28 it was on [SSH_SERVICE_UUID]; see
+     * [castbridge.core.gateway.GatewayService] for how an old TV or an old phone still meets it there for two versions.
+     */
+    const val GATEWAY_SERVICE_UUID = "7c5e3b9a-4d2f-4c61-9b0e-cb0000000007"
+
+    /** One entry of [SERVICES]: [number] = the last two digits of the UUID, [sdpName] = the service name the TV registers with its UUID. */
+    class Service(val number: Int, val uuid: String, val sdpName: String, val use: String) {
+        override fun toString() = "…%04d %s (%s)".format(number, sdpName, use)
+    }
+
+    /** Every RFCOMM service that CastBridge-TV offers. A new service takes the next free number HERE first. */
+    val SERVICES: List<Service> = listOf(
+        Service(1, SERVICE_UUID, "CastBridge TV", "files and control CBT1/CBTN/CBTH/CBTP/CBTR"),
+        Service(2, SSH_SERVICE_UUID, "CastBridge SSH", "SSH tunnel"),
+        Service(3, API_SERVICE_UUID, "CastBridge API", "HTTP API tunnel, one link per connection"),
+        Service(4, API_MUX_SERVICE_UUID, "CastBridge API v2", "HTTP API tunnel, one shared link"),
+        Service(5, castbridge.core.owner.OwnerFrames.SERVICE_UUID, "CastBridge Owner", "owner channel CBTO"),
+        Service(7, GATEWAY_SERVICE_UUID, "CastBridge Internet", "Internet gateway CBG1"),
+    )
+
+    /** Numbers kept free on purpose (a design uses them, no code yet): 6 = the synchronisation channel of W7 (docs/coordination/DESIGN-W7-PLUG-AND-PLAY-SYNC.md). */
+    val RESERVED_NUMBERS: Set<Int> = setOf(6)
     const val OK = 0
     const val ERR_MAGIC = 1
     const val ERR_PIN = 2

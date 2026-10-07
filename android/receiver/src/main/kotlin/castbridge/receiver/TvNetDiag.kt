@@ -16,8 +16,10 @@ object TvNetDiag {
     private fun ms(t0: Long) = (System.nanoTime() - t0) / 1_000_000
 
     /**
-     * NEVER PERIODIC (offline profile, audit SE-7): this request leaves for a third party (connectivitycheck.gstatic.com). It runs only on a manual
-     * action (Tests Internet screen), when the « netProbe » setting is on, or when a feature that needs Internet asks (remote-assistance tunnel).
+     * This request leaves for a third party (connectivitycheck.gstatic.com), so it is NOT sent by default (offline profile, audit SE-7): only on a manual action (Tests Internet screen),
+     * when the « netProbe » setting is on, or once the terms of the remote-assistance tunnel were accepted (`TvService.netTick`: `probe = manual || netProbe || termsAccepted`).
+     * In the last two cases it IS periodic: one round every 60 s while Internet works (10 to 30 s while it does not), on the TV's own network and, when a phone shares its Internet,
+     * through the phone's gateway as well (the comment used to say « never periodic », inventory I-15).
      * One quick HTTP check (204 expected) on a path; returns the time in ms, or null if Internet does not answer. */
     fun probe(proxy: Proxy?): Long? = runCatching {
         val t0 = System.nanoTime()

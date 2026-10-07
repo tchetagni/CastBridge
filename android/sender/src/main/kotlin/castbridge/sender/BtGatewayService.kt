@@ -5,7 +5,9 @@ import android.app.Notification
 import android.app.NotificationChannel
 import android.app.NotificationManager
 import android.app.Service
+import android.bluetooth.BluetoothAdapter
 import android.bluetooth.BluetoothManager
+import android.bluetooth.BluetoothSocket
 import android.content.Context
 import android.content.Intent
 import android.content.pm.ServiceInfo
@@ -13,6 +15,7 @@ import android.os.Build
 import android.os.IBinder
 import android.util.Log
 import castbridge.core.gateway.Exit
+import castbridge.core.gateway.GatewayService
 import castbridge.core.gateway.Gw
 import castbridge.core.gateway.Mux
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -50,17 +53,30 @@ class BtGatewayService : Service() {
         return START_NOT_STICKY
     }
 
+    /**
+     * One secure RFCOMM connection to the gateway service of the TV: its own service (…0007) first, the old one it shared with the SSH tunnel (…0002) only for a TV that is, or
+     * may be, old (R-28; the choice, the pause between attempts and the memory of an old TV are [GatewayService.PhoneChoice], tested on the JVM).
+     */
+    private fun connectGateway(adapter: BluetoothAdapter, address: String, choice: GatewayService.PhoneChoice): BluetoothSocket {
+        val dev = adapter.getRemoteDevice(address)
+        val advertised = runCatching { dev.uuids?.map { it.uuid.toString() } }.getOrNull()      // Android's cached SDP answer; null when unknown
+        return choice.connect(advertised, stopping = { stopping }, log = { Log.i(TAG, it) }) { uuid ->
+            val s = dev.createRfcommSocketToServiceRecord(UUID.fromString(uuid))
+            sock = s
+            try { s.connect(); s } catch (e: IOException) { runCatching { s.close() }; throw e }
+        }
+    }
+
     private fun loop(address: String, pin: String) {
         val adapter = getSystemService(BluetoothManager::class.java)?.adapter
         var backoff = 1000L
+        val choice = GatewayService.PhoneChoice()            // remembers « old TV » for a while (R-28)
         while (!stopping) {
             if (adapter == null || !adapter.isEnabled) { _state.value = "Bluetooth désactivé"; Thread.sleep(3000); continue }
             try {
                 runCatching { adapter.cancelDiscovery() }   // needs BLUETOOTH_SCAN on Android 12+: optional, never fatal
                 _state.value = "Connexion à la TV…"
-                val s = adapter.getRemoteDevice(address).createRfcommSocketToServiceRecord(UUID.fromString(Gw.SERVICE_UUID))
-                sock = s
-                s.connect()
+                val s = connectGateway(adapter, address, choice)
                 backoff = 1000
                 _state.value = "La TV utilise l'Internet du téléphone"
                 notify("La TV utilise l'Internet du téléphone")

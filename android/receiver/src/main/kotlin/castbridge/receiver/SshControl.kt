@@ -14,14 +14,19 @@ import java.io.File
  * SSH administration of the TV, off until someone switches it on (MENU on the remote, or the
  * PIN-protected API). Keys and the host key live in the app's private storage.
  */
-class SshControl(ctx: Context, private val onChange: (String?) -> Unit, onBtStatus: (String?) -> Unit = {}, onSessions: (Int) -> Unit = {}) {
+class SshControl(ctx: Context, private val onChange: (String?) -> Unit, onBtStatus: (String?) -> Unit = {}, onSessions: (Int) -> Unit = {},
+                 /**
+                  * R-28: the SSH over Bluetooth is about to own the RFCOMM UUID …0002 (true, called BEFORE its listener opens) or lets it go (false): the Internet gateway, which shared
+                  * that UUID before R-28, leaves it and takes it back (BtGatewayHost.sshBluetoothChanged).
+                  */
+                 private val onBluetoothBridge: (Boolean) -> Unit = {}) {
     private val server: TvSshServer = TvSshServer(
         dataDir = File(ctx.filesDir, "ssh"),
         sftpRoot = ctx.getExternalFilesDir(null) ?: ctx.filesDir,
         policy = SshPolicy().also { it.onSessions = onSessions },
         log = { m ->
             Log.i(TAG, m)                                       // never contains keys or the PIN
-            if ("stopping" in m) { onChange(null); bridge.stop() }
+            if ("stopping" in m) { onChange(null); bridgeStop() }
         },
     )
     /** SSH over Bluetooth: an RFCOMM byte tunnel to this server, on only while SSH is on (docs/ADMIN.md). */
@@ -29,6 +34,17 @@ class SshControl(ctx: Context, private val onChange: (String?) -> Unit, onBtStat
     private val bridge: BtSshBridge = BtSshBridge(ctx, tunnel, onBtStatus)
 
     val running get() = server.running
+
+    /** True from just before the SSH tunnel over Bluetooth opens its listener (UUID …0002) until just after it closes: the Internet gateway keeps off that UUID meanwhile (R-28). */
+    @Volatile var bluetoothWanted = false; private set
+
+    private fun bridgeStart() {
+        bluetoothWanted = true; onBluetoothBridge(true)             // the gateway lets go of …0002 BEFORE the SSH listener takes it
+        bridge.start()
+        if (!bridge.running) { bluetoothWanted = false; onBluetoothBridge(false) }   // refused (permission, Bluetooth off): …0002 stays the gateway's
+    }
+
+    private fun bridgeStop() { bridge.stop(); bluetoothWanted = false; onBluetoothBridge(false) }
 
     /** Sessions carried by the Bluetooth tunnel right now (the rest of the SSH sessions come over the LAN). */
     fun btSessions(): Int = tunnel.active().size
@@ -42,13 +58,14 @@ class SshControl(ctx: Context, private val onChange: (String?) -> Unit, onBtStat
         // The trial edition never opens a shell or SFTP on the TV (the CastBridge Dev app is separate).
         if (ActivationCenter.trial()) { disable(); throw IllegalStateException(castbridge.core.owner.TrialPolicy.SSH_MESSAGE) }
         server.start(minutes)
-        bridge.start()
+        bridgeStart()
         return statusLine().also(onChange)
     }
 
-    fun disable() { bridge.stop(); server.stop(); onChange(null) }
+    fun disable() { bridgeStop(); server.stop(); onChange(null) }
 
-    fun stop() { bridge.stop(); server.stop() }
+    /** The TV service is shutting down (the gateway is stopped by it too: no need to tell it). */
+    fun stop() { bridge.stop(); bluetoothWanted = false; server.stop() }
 
     /** Routes /api/ssh*, or null if [path] is not one of them. */
     fun api(path: String, method: String, p: Map<String, String>): ApiReply? = try { route(path, method, p) } catch (t: Throwable) {

@@ -42,8 +42,13 @@ object Gw {
     const val WINDOW = 256 * 1024L          // bytes in flight per stream
     const val CHUNK = 16 * 1024             // DATA payload size (RFCOMM likes big writes, the window keeps RAM bounded)
     const val MAX_STREAMS = 32
-    /** Bluetooth RFCOMM service of the gateway (distinct from the file service). */
-    const val SERVICE_UUID = "7c5e3b9a-4d2f-4c61-9b0e-cb0000000002"
+    /** Bluetooth RFCOMM service of the gateway: its own UUID (…0007, the table of services in [castbridge.core.tv.BtProtocol]). */
+    const val SERVICE_UUID = castbridge.core.tv.BtProtocol.GATEWAY_SERVICE_UUID
+    /**
+     * The UUID the gateway had before R-28 (…0002), which is the SSH tunnel's. A phone still asks for it when the TV is old (`R-28-OLD-TV`), and a new TV still serves the gateway
+     * there while its SSH over Bluetooth is off, for two versions (`R-28-LEGACY-TV`); see [GatewayService].
+     */
+    const val LEGACY_SERVICE_UUID = castbridge.core.tv.BtProtocol.SSH_SERVICE_UUID
 
     // SOCKS5 reply codes, reused in OPEN_ERR
     const val SOCKS_FAIL = 1; const val SOCKS_NOT_ALLOWED = 2; const val SOCKS_NET = 3; const val SOCKS_HOST = 4
