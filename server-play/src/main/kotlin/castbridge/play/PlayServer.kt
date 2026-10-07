@@ -80,8 +80,8 @@ class PlayServer(
         // le mode `off` des révocations est VISIBLE : journal au démarrage, santé « disabled » (une TV révoquée peut encore créer et rejoindre)
         if (cfg.revocationsMode == RevocationsMode.OFF) guard.log.event("play.config.revocations_off", "ATTENTION : révocations désactivées (CASTBRIDGE_PLAY_REVOCATIONS=off) : POC seulement, une TV révoquée n'est pas refusée", level = "warn")
         // les mises suspendues par défaut de clé sont DITES au démarrage (jamais un échec silencieux) ; aucune matière de clé dans le journal
-        if (cfg.chess && cfg.stakes && stakes == null) guard.log.event("play.config.stakes_off", "Mises suspendues : clé publique du portefeuille (CASTBRIDGE_PLAY_WALLET_PUBKEY) ou clé de résultat (CASTBRIDGE_PLAY_RESULT_KEY_FILE) absente ou illisible ; les parties libres restent ouvertes", level = "warn")
-        else if (cfg.chess && stakes != null) guard.log.event("play.config.stakes_on", "Mises actives : blocages vérifiés par clé publique, résultats signés par la clé dédiée du service")
+        if (cfg.stakes && stakes == null) guard.log.event("play.config.stakes_off", "Mises suspendues : clé publique du portefeuille (CASTBRIDGE_PLAY_WALLET_PUBKEY) ou clé de résultat (CASTBRIDGE_PLAY_RESULT_KEY_FILE) absente ou illisible ; les parties libres restent ouvertes", level = "warn")
+        else if (stakes != null) guard.log.event("play.config.stakes_on", "Mises actives : blocages vérifiés par clé publique, résultats signés par la clé dédiée du service")
         ticker.start()
         if (cfg.revocationsUrl != null) Thread.ofPlatform().name("play-revocations").daemon(true).start { refreshRevocations() }
         Thread.ofPlatform().name("play-accept").daemon(true).start { acceptLoop() }

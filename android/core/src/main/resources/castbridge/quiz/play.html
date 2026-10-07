@@ -214,11 +214,14 @@ function render() {
   if (s.stage === "CLOSED") { who.textContent = ""; show($("div", { class: "card center" }, $("h1", {}, "Partie terminée"),
     $("p", { class: "muted" }, "La salle est fermée. Merci d'avoir joué !")), $("button", { class: "ghost", onclick: () => { err = ""; renderJoin(); } }, "Rejoindre une autre partie")); return; }
   const st = s.settings || {};
-  who.textContent = s.me ? s.me.name + (s.mode === "DUEL" ? " · " + s.me.score + " pts" : "") + (st.play === "STAKE" && s.me.balance != null ? " · " + s.me.balance + " jetons" : "") : "";
-  const demo = st.play === "STAKE" ? $("p", { class: "pill center" }, "🪙 " + st.tokens + " — aucune valeur, rien à payer") : null;
+  const pts = st.play === "STAKE";         // « Compétition à points » entre les téléphones d'une même TV : des POINTS sans valeur (rien ne circule entre les comptes)
+  const bet = s.stake || null;             // partie Internet MISÉE : la mise de la salle (monnaie et montant), payée par le compte de chaque TV
+  who.textContent = s.me ? s.me.name + (s.mode === "DUEL" ? " · " + s.me.score + " pts" : "") + (pts && s.me.balance != null ? " · " + s.me.balance + " points" : "") : "";
+  const demo = demoPill(s);
   if (s.stage === "LOBBY") return show(
     $("div", { class: "card center" }, $("h2", {}, "Vous êtes dans la salle ✓"), $("p", {}, (st.playLabel || "") + (st.label ? " · " + st.label : "")),
-      st.play === "STAKE" ? $("p", {}, "Mise : " + st.stake + " jetons par joueur — la cagnotte est partagée selon le classement.") : null,
+      pts ? $("p", {}, "Enjeu : " + st.stake + " points par joueur — ils sont partagés selon le classement.") : null,
+      bet ? $("p", {}, "Mise : " + nb(bet.per) + " " + bet.cur + " par joueur — la cagnotte est partagée selon le classement.") : null,
       st.play === "PRACTICE" ? $("p", {}, "Entraînement : pas d'enjeu, prenez le temps de lire les explications.") : null,
       $("p", { class: "muted" },
       s.mode === "DUEL" ? "Mode Duel : tout le monde répond en même temps. Soyez juste ET rapide !" :
@@ -249,11 +252,22 @@ function renderDuel(s) {
   const list = $("ul", { class: "pl" }, d.ranking.map(r => $("li", { class: s.me && r.id === s.me.id ? "me" : "" },
     $("span", {}, r.rank + ". " + r.name), $("span", {}, r.score + " pts" + (r.gained ? "  (+" + r.gained + ")" : "")))));
   if (d.phase === "BOARD") return show(head, $("h2", {}, "Classement"), me ? $("p", { class: "big" }, me.rank + (me.rank === 1 ? "er" : "e")) : null, list, $("p", { class: "muted center" }, "Question suivante dans un instant…"));
-  const pay = s.pot && s.pot.payouts && s.me ? s.pot.payouts[s.me.id] : null;
+  const pay = s.pot && s.pot.payouts && s.me ? s.pot.payouts[s.me.id] : null;                       // points gagnés (compétition à points)
+  const bet = s.stake || null;
+  const won = bet && bet.payouts && s.me ? bet.payouts[s.me.id] : null;                             // votre part de la cagnotte misée, AVANT les frais éventuels de la plateforme
+  const betLine = !bet || !bet.settled ? null
+    : bet.outcome === "SPLIT" ? "Votre part de la cagnotte : " + nb(won || 0) + " " + bet.cur + " (mise : " + nb(bet.per) + " " + bet.cur + ")"
+    : "Mise rendue : " + (bet.outcome === "ABORT" ? "partie interrompue." : "personne n'a marqué.");
   return show($("div", { class: "card center" }, $("h1", {}, "🏆 Fin du duel"), me ? $("p", { class: "big" }, me.rank === 1 ? "Victoire !" : me.rank + "e place") : null,
-    me ? $("p", {}, me.score + " points") : null, pay != null ? $("p", {}, "Cagnotte : +" + pay + " jetons") : null), list, demo,
-    $("p", { class: "muted center" }, "La TV peut relancer une partie : restez connecté."));
+    me ? $("p", {}, me.score + " points") : null, pay != null ? $("p", {}, "Points gagnés : +" + pay) : null, betLine ? $("p", {}, betLine) : null), list, demoPill(s),
+    $("p", { class: "muted center" }, bet ? "La mise est réglée par votre TV : voyez « Jetons » sur la TV." : "La TV peut relancer une partie : restez connecté."));
 }
+
+/** « 20 000 » : un montant lisible (séparateur de milliers français). */
+function nb(n) { return Number(n).toLocaleString("fr-FR"); }
+
+/** Le rappel d'une compétition à points : des points sans valeur, rien à payer ni à gagner. */
+function demoPill(s) { const st = s.settings || {}; return st.play === "STAKE" ? $("p", { class: "pill center" }, "🏅 " + st.tokens + " : rien à payer, rien à gagner") : null; }
 
 function renderGame(s) {
   const g = s.game, q = g.question, role = s.me ? s.me.role : "audience";

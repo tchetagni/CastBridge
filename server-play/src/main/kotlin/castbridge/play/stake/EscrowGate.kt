@@ -3,6 +3,7 @@ package castbridge.play.stake
 import castbridge.core.chess.online.ChessEscrow
 import castbridge.core.owner.KeyRing
 import castbridge.core.owner.TrustedKey
+import castbridge.core.quiz.online.QuizEscrow
 import castbridge.core.quiz.online.StakeSpec
 import castbridge.core.wallet.EscrowTicket
 import castbridge.core.wallet.Verdict
@@ -16,8 +17,9 @@ import java.util.Base64
  * identifiant du blocage), et ne débite rien : un blocage forgé ne correspond à aucun blocage réel, l'API refuse alors de régler (conception § 5.2, S-8).
  *
  * Contrôles, fermés (au moindre doute : refus) : signature d'une clé du jeu de clés, audience `castbridge-play`, validité (≤ 30 min, ni échu ni futur), [EscrowTicket.verify] ; puis, pour CETTE
- * connexion : identité = celle de l'activation prouvée à l'entrée (une TV ne mise pas avec le blocage d'une autre), même monnaie et même mise que la salle, un seul siège (`k` = 1 : aux échecs une
- * mise par TV), mise dans les bornes du service. L'employer ensuite ([reserve]) est un acte à part : un blocage ne sert qu'à UNE salle, jamais deux (sinon une partie ne se règlerait pas).
+ * connexion : identité = celle de l'activation prouvée à l'entrée (une TV ne mise pas avec le blocage d'une autre), même monnaie et même mise que la salle, des sièges en nombre permis (`k` de 1 à
+ * `maxSeats` : aux échecs une mise par TV, `maxSeats` = 1 ; au Quiz misé jusqu'à 8 sièges par TV, une mise par siège), mise dans les bornes du service. L'employer ensuite ([reserve]) est un acte à
+ * part : un blocage ne sert qu'à UNE salle, jamais deux (sinon une partie ne se règlerait pas).
  */
 class EscrowGate(walletPubKeys: List<String>, private val maxNdem: Long = DEFAULT_MAX_NDEM, private val maxMboko: Long = DEFAULT_MAX_MBOKO, private val maxReserved: Int = 50_000) {
     private val ring: KeyRing = KeyRing(walletPubKeys.mapNotNull { WalletKeys.rawBase64(it) }.distinct().map { TrustedKey(KeyRing.idOf(it), it, emptySet()) })
@@ -27,12 +29,16 @@ class EscrowGate(walletPubKeys: List<String>, private val maxNdem: Long = DEFAUL
     enum class Why { NO_KEY, UNREADABLE, BAD_SIGNATURE, UNKNOWN_KEY, EXPIRED, NOT_YET_VALID, OTHER_TV, OTHER_STAKE, BAD_SEATS, BAD_AMOUNT, OTHER }
 
     sealed class Result {
-        class Ok(val ticket: EscrowTicket) : Result() { fun escrow() = ChessEscrow(ticket.eid, ticket.id, ticket.amt) }
+        class Ok(val ticket: EscrowTicket) : Result() {
+            fun escrow() = ChessEscrow(ticket.eid, ticket.id, ticket.amt)
+            /** Le même blocage pour le Quiz misé : avec ses sièges (`k`) et son montant (mise × sièges). */
+            fun quizEscrow() = QuizEscrow(ticket.eid, ticket.id, ticket.k, ticket.amt)
+        }
         class Refused(val why: Why) : Result()
     }
 
-    /** Vérifie [token] pour la TV d'identité [identity] qui entre dans une salle misée [spec]. SANS ÉTAT : rien n'est réservé. */
-    fun check(token: String?, nowMs: Long, identity: String, spec: StakeSpec): Result {
+    /** Vérifie [token] pour la TV d'identité [identity] qui entre dans une salle misée [spec] ; [maxSeats] = sièges permis au blocage (1 : échecs). SANS ÉTAT : rien n'est réservé. */
+    fun check(token: String?, nowMs: Long, identity: String, spec: StakeSpec, maxSeats: Int = 1): Result {
         if (!configured) return Result.Refused(Why.NO_KEY)
         val t = when (val v = EscrowTicket.verify(token, ring, nowMs)) {
             is Verdict.Accepted -> v.value
@@ -47,7 +53,7 @@ class EscrowGate(walletPubKeys: List<String>, private val maxNdem: Long = DEFAUL
         }
         if (t.id != identity) return Result.Refused(Why.OTHER_TV)
         if (t.cur.name != spec.cur || t.per != spec.per) return Result.Refused(Why.OTHER_STAKE)
-        if (t.k != 1) return Result.Refused(Why.BAD_SEATS)
+        if (t.k !in 1..maxSeats) return Result.Refused(Why.BAD_SEATS)
         if (!inBounds(spec)) return Result.Refused(Why.BAD_AMOUNT)
         return Result.Ok(t)
     }

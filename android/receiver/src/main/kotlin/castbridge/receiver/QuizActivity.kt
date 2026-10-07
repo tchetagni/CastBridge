@@ -373,7 +373,8 @@ class QuizActivity : Activity() {
         private fun content(): Triple<String, String?, List<Choice>> = when (step) {
             "home" -> Triple("◆  LE QUIZ DES MILLIONS  ◆", "Culture générale, école et université : à vous de jouer !", listOf(
                 Choice("Compétition entre amis", "Gratuit, pour le plaisir") { play = QuizRoom.Play.FRIENDS; push("track") },
-                Choice("Compétition avec mise", "${QuizRoom.TOKENS_LABEL} : aucun argent réel") { play = QuizRoom.Play.STAKE; push("track") },
+                // les téléphones d'une même TV partagent UN portefeuille : ici on joue des POINTS sans valeur (aucun jeton ne circule) ; une vraie mise en NDEM ou MBOKO existe seulement en « Partie Internet », entre TV
+                Choice(QuizRoom.Play.STAKE.label, "${QuizRoom.TOKENS_LABEL} : ni jeton, ni argent") { play = QuizRoom.Play.STAKE; push("track") },
                 Choice("Entraînement", "Sans enjeu ni chrono, avec les explications") { play = QuizRoom.Play.PRACTICE; push("track") },
                 Choice("Meilleurs scores", "Vos records sur cette TV") { push("scores") }) +
                 onlineChoice() + listOf(Choice("Quitter", null) { finish() }))
@@ -393,8 +394,8 @@ class QuizActivity : Activity() {
                 // the level is chosen: its bundled file may be read now (one level at a time)
                 QuizLevelAvailability.Counts(0, count(QuestionFilter(track, level, f)))
             }).map { s -> levelChoice(s) { field = s.level.key; afterFilter() } })
-            "stake" -> Triple("Quelle mise par joueur ?", "${QuizRoom.TOKENS_LABEL} : sans aucune valeur, rien à payer. La cagnotte est partagée selon le classement.",
-                listOf(50L, 100L, 200L).map { m -> Choice("$m jetons", if (m == 100L) "conseillé" else null) { stakeChosen = m; push("duel-format") } })
+            "stake" -> Triple("Combien de points par joueur ?", "${QuizRoom.TOKENS_LABEL} : rien à payer, rien à gagner. Les points en jeu sont partagés selon le classement.",
+                listOf(50L, 100L, 200L).map { m -> Choice("$m points", if (m == 100L) "conseillé" else null) { stakeChosen = m; push("duel-format") } })
             "duel-format" -> Triple("Quel format de duel ?", "Réponse en 20 secondes au plus", castbridge.core.quiz.QuizDuel.Format.values().map { f ->
                 Choice(f.label, f.description) { duelFormat = f; push("duel-time") }
             })
@@ -492,7 +493,7 @@ class QuizActivity : Activity() {
             settings.text = listOfNotNull(st?.s("playLabel"), st?.s("label")).joinToString("  ·  ")
             val stake = st?.i("stake") ?: 0
             badge.visibility = if (stake > 0) View.VISIBLE else View.GONE
-            badge.text = "Mise : $stake jetons par joueur  —  ${QuizRoom.TOKENS_LABEL}"
+            badge.text = "Enjeu : $stake points par joueur  —  ${QuizRoom.TOKENS_LABEL}"
             players = s.maps("players")
             count.text = "Joueurs : ${players.size} / ${s.i("maxPlayers")}"
             list.removeAllViews()
@@ -972,7 +973,7 @@ class QuizActivity : Activity() {
                     val f = it.animatedValue as Float
                     line.translationY = ((prev - 1) + (rank - prev) * f) * rowH
                     val cur = from + ((score - from) * f).toInt()
-                    pts.text = "$cur pts" + (if (gained > 0 && pay == null) "  (+$gained)" else "") + (pay?.let { "   ·   +$it jetons" } ?: "")
+                    pts.text = "$cur pts" + (if (gained > 0 && pay == null) "  (+$gained)" else "") + (pay?.let { "   ·   +$it points d'enjeu" } ?: "")
                     bar.layoutParams = (bar.layoutParams as FrameLayout.LayoutParams).apply { width = maxOf(dpi(8), (fullW * 0.98f * cur / max).toInt()) }
                     bar.requestLayout()
                 }
@@ -1005,7 +1006,7 @@ class QuizActivity : Activity() {
             val ranking = d.maps("ranking")
             title.text = ranking.firstOrNull()?.let { "Victoire de ${it.s("name")} !" } ?: "Fin du duel"
             val pot = s.m("pot")
-            if (pot != null) title.text = "${title.text}\nCagnotte : ${pot.l("total")} jetons  —  ${QuizRoom.TOKENS_LABEL}"
+            if (pot != null) title.text = "${title.text}\nEnjeu total : ${pot.l("total")} points  —  ${QuizRoom.TOKENS_LABEL}"
             box.post { animateRanking(box, ranking, pot?.m("payouts")) }
             play(QuizSound.Clip.WIN)
         }

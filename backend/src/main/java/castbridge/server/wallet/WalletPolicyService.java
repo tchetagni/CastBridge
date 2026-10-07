@@ -74,27 +74,34 @@ public class WalletPolicyService {
         return new SettleCaps(v(r, "settle.maxPerSettle." + cur.name(), n ? 20_000 : 1_000), v(r, "settle.dailyMax." + cur.name(), n ? 5_000_000 : 50_000), v(r, "settle.alert." + cur.name(), n ? 200_000 : 200));
     }
 
-    // ---- politique des jeux à tour de rôle misés (games-G2) ----
+    // ---- politique des jeux misés (games-G2 : les échecs ; games-G5 : le Quiz) ----
+
+    /**
+     * Sièges qui misent par TV, pour chaque jeu misé connu : une CONSTANTE du code (pas une ligne de la table de politique, car elle décrit la forme du jeu et non un réglage d'exploitation) : aux échecs
+     * une mise par TV, au Quiz jusqu'à 8 (les téléphones relayés de la TV et sa télécommande). Les clés de cette table SONT la liste des jeux misés connus : ajouter un jeu, c'est ajouter une entrée ici,
+     * ses lignes {@code game.<jeu>.*} dans une migration, et sa FORME de règlement dans {@code SettleService}.
+     */
+    private static final Map<String, Integer> SEATS = Map.of("chess", 1, "quiz", 8);
 
     /** Les jeux dont le service arbitre des parties misées ; chacun a ses lignes {@code game.<jeu>.*} dans la table de politique. */
-    public static final java.util.Set<String> GAMES = java.util.Set.of("chess");
+    public static final java.util.Set<String> GAMES = SEATS.keySet();
 
     /**
      * Politique d'un jeu misé : [enabled] (interrupteur du jeu), échelle de mises par monnaie ([scaleNdem], [scaleMboko] : paliers non nuls, triés), frais de plateforme en points de base
      * ({@code feeBp}, 0 au lancement, prélevés sur la cagnotte d'une partie DÉCISIVE seulement), plafonds de parties GAGNÉES par identité et par fenêtre calendaire d'Africa/Douala
-     * ({@code capDay}, {@code capWeek}, {@code capMonth} ; 0 = sans plafond).
+     * ({@code capDay}, {@code capWeek}, {@code capMonth} ; 0 = sans plafond), et [seats] = nombre maximal de sièges qui misent par TV (constante du jeu, voir {@link #SEATS}).
      */
-    public record GamePolicy(String game, boolean enabled, java.util.List<Long> scaleNdem, java.util.List<Long> scaleMboko, int feeBp, int capDay, int capWeek, int capMonth) {
+    public record GamePolicy(String game, boolean enabled, java.util.List<Long> scaleNdem, java.util.List<Long> scaleMboko, int feeBp, int capDay, int capWeek, int capMonth, int seats) {
         public java.util.List<Long> scale(castbridge.server.wallet.core.Currency cur) { return cur == castbridge.server.wallet.core.Currency.NDEM ? scaleNdem : scaleMboko; }
     }
 
-    /** La politique de ce jeu, lue à CHAQUE usage ; vide si le jeu n'est pas un jeu misé connu. Une ligne absente prend la valeur de lancement. */
+    /** La politique de ce jeu, lue à CHAQUE usage ; vide si le jeu n'est pas un jeu misé connu. Une ligne absente prend la valeur de lancement (les mêmes pour tous les jeux). */
     public java.util.Optional<GamePolicy> game(String game) {
         if (game == null || !GAMES.contains(game)) return java.util.Optional.empty();
         Map<String, WalletRepository.PolicyRow> r = repo.policyRows();
         String p = "game." + game + ".";
         return java.util.Optional.of(new GamePolicy(game, on(r, p + "switch"), tiers(r, p + "tier.NDEM.", java.util.List.of(10L, 20L, 50L, 100L, 200L)), tiers(r, p + "tier.MBOKO.", java.util.List.of(1L, 2L, 5L, 10L)),
-                (int) v(r, p + "feeBp", 0), (int) v(r, p + "cap.win.day", 3), (int) v(r, p + "cap.win.week", 10), (int) v(r, p + "cap.win.month", 15)));
+                (int) v(r, p + "feeBp", 0), (int) v(r, p + "cap.win.day", 3), (int) v(r, p + "cap.win.week", 10), (int) v(r, p + "cap.win.month", 15), SEATS.get(game)));
     }
 
     /** Les paliers {@code <préfixe>1..8} non nuls, triés et sans doublon ; si aucune ligne n'existe, les valeurs de lancement. */

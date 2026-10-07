@@ -731,6 +731,72 @@ def build_body():
     s6b = [step(n6(), "tv-jeux", ["quiz", "echecs", "sudoku"], "Sur la TV, la tuile « Jeux » ouvre la liste des jeux.", "Jeux sur la TV",
                 note="Capture d'avant la Bataille. La liste montre aussi Fap-Fap et Agraham Tia, « Bientôt ». La tuile « Jeux » de l'accueil annonce « 4 jeux ».")]
     s6c = [step(n6(), "tv-quiz-des-millions", ["amis", "entrainement", "scores"], "Dans Quiz des Millions, choisissez un mode, puis jouez.", "Menu du Quiz des Millions")]
+    # Quiz en ligne avec mise (docs/QUIZ.md § 5 bis, chantier games-G5) : jamais « jetons » pour une mise ; les points de la maison n'ont aucune valeur
+    quizmise = (
+        h3("Quiz en ligne : libre, ou avec une mise", "quiz-mise") +
+        lead("Jouez au Quiz contre d'autres TV, sur Internet.", "Partie libre, ou avec une mise en NDEM ou MBOKO.",
+             "Les téléphones de chaque TV jouent par leur TV.") +
+        cards([
+            card("Ce qu'il faut",
+                 bl(["Une CastBridge-TV à jour, activée, avec Internet.",
+                     'Pas d\'Internet ? Le téléphone peut en prêter : <a class="lk" href="#internet">section %d</a>.' % SEC["internet"],
+                     "Une TV d'essai joue en partie libre seulement.",
+                     "Avec une mise : au moins deux TV, un joueur chacune.",
+                     "Les téléphones restent sur le Wi-Fi de leur TV."])),
+            card("Créer une partie",
+                 ns(["Sur la TV : « Quiz », puis « Partie Internet ».",
+                     "Touchez « Créer une partie ».",
+                     "Choisissez la « Mise » : Libre, NDEM ou MBOKO.",
+                     "Avec une mise, choisissez aussi le « Montant ».",
+                     "Choisissez combien de joueurs de cette TV misent.",
+                     "Touchez « Créer la partie », puis « Bloquer ma mise et créer »."]) +
+                 nt("Chaque joueur qui mise paie une mise, du compte de la TV.",
+                    "Seules les monnaies que votre TV peut miser sont proposées.")),
+            card("Rejoindre une partie",
+                 ns(["Choisissez « Rejoindre avec un code ».",
+                     "Entrez les 8 symboles du code, puis « Valider ».",
+                     "La TV annonce la mise avant de bloquer la vôtre.",
+                     "Choisissez combien de joueurs de cette TV misent.",
+                     "Touchez « Bloquer ma mise et rejoindre »."]) +
+                 nt("Une partie libre se rejoint sans rien bloquer.")),
+        ]) +
+        miss("Capture à ajouter : Quiz › Partie Internet › « Créer une partie », avec « Mise », « Montant » et le nombre de joueurs.") +
+        cards([
+            card("Les règles à connaître",
+                 bl(["Chaque joueur qui mise paie la même mise.",
+                     "La cagnotte est partagée selon le classement.",
+                     "À deux joueurs : 70 % et 30 %.",
+                     "À trois joueurs et plus : 60 %, 30 % et 10 %.",
+                     "Personne n'a marqué : chacun reprend sa mise.",
+                     "La partie commence quand deux TV au moins ont misé.",
+                     "Après le départ, plus personne n'entre.",
+                     "Quitter la partie commencée fait perdre la mise.",
+                     "Plus de 60 secondes hors ligne : vos joueurs ne marquent plus.",
+                     "Hôte parti avant le départ : les mises sont rendues.",
+                     "Partie interrompue : chaque mise est rendue.",
+                     "Une partie avec mise se joue une seule fois."])),
+            card("Ce que dit la TV",
+                 say("La TV demande (exemple)", "« Créer une partie avec mise ? 20 NDEM par joueur · 2 joueurs ici · bloqué : 40 NDEM · votre solde 150 NDEM »") +
+                 say("La TV dit", "« Cette partie se joue avec une mise de 20 NDEM par joueur. Combien de joueurs de cette TV misent ? »") +
+                 say("Pendant la partie", "« Mise : 20 NDEM par joueur · cagnotte 60 NDEM »") +
+                 say("En fin de partie", "« Vous gagnez 2 NDEM » · « Vous perdez 2 NDEM » · « Partie interrompue : mise rendue »") +
+                 say("Après une partie avec mise", "« Voir « Mes jetons » »") +
+                 say("Hors ligne en fin de partie", "« Règlement en attente… »") +
+                 say("Si la TV ne peut pas miser", "« Mises NDEM/MBOKO : mettez à jour »")),
+            card("Sur le téléphone",
+                 p("Le téléphone ne parle qu'à sa TV.") +
+                 say("La page dit, avant le départ", "« Mise : 20 NDEM par joueur — la cagnotte est partagée selon le classement. »") +
+                 say("La page dit, à la fin", "« Votre part de la cagnotte : 42 NDEM (mise : 20 NDEM) »") +
+                 say("Si la partie est interrompue", "« Mise rendue : partie interrompue. »")),
+        ]) +
+        h3("Compétition à points : à la maison", "quiz-points") +
+        lead("Entre les téléphones d'une même TV, on joue en points.", "Ces points n'ont aucune valeur.") +
+        cards([
+            card("Ce qu'il faut savoir",
+                 bl(["Rien à payer, rien à gagner.",
+                     "Choisissez 50, 100 ou 200 points par joueur.",
+                     "Les points en jeu sont partagés selon le classement.",
+                     "Ce ne sont ni des NDEM ni des MBOKO."]))]))
     bataille = (
         h3("Bataille (démonstration)", "bataille", VERS) +
         lead("Un jeu de cartes simple, à deux joueurs.", "C'est une démonstration des jeux à tour de rôle.") +
@@ -826,7 +892,7 @@ def build_body():
     B.append(h2("jeux", "Jeux") +
              lead("Quiz, Échecs, Sudoku, Bataille : on joue sur la TV.", "Le téléphone sert de manette ou de joueur.") +
              h3("Choisir un jeu", "jeux-liste") + grid(s6a, "ph") + grid(s6b, "tv1") +
-             h3("Quiz des Millions") + grid(s6c, "tv1") +
+             h3("Quiz des Millions") + grid(s6c, "tv1") + quizmise +
              h3("Sudoku") + p("Touchez « Jouer sur la TV », puis pilotez avec la manette du téléphone.") +
              nt("Quatre niveaux : Facile, Moyen, Difficile, Expert.") +
              bataille + echecs + bientot + '</section>')

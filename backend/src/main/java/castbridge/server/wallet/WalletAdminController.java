@@ -60,8 +60,9 @@ public class WalletAdminController {
     }
 
     /**
-     * Le journal des parties avec mise (W22 § 5, games-G2), lecture seule : les dernières parties réglées, filtrables par jeu et par TV ({@code ?game=chess&holder=XXXX-XXXX-XXXX-XXXX&limit=50}, au plus
-     * 200) : salle, résultat, les deux identités, mise, utilisé, payé, frais, issue (WIN, LOSS, DRAW, ABORT). Jeton d'administration seulement : aucune écriture, aucun secret.
+     * Le journal des parties avec mise (W22 § 5, games-G2 et G5), lecture seule : les dernières parties réglées, filtrables par jeu (échecs : {@code chess}, Quiz : {@code quiz}) et par TV
+     * ({@code ?game=quiz&holder=XXXX-XXXX-XXXX-XXXX&limit=50}, au plus 200) : une ligne par TV et par résultat avec la salle, l'adversaire (seulement quand la partie n'a que deux TV), mise, utilisé, payé,
+     * frais, issue (WIN, LOSS, DRAW, ABORT). Jeton d'administration seulement : aucune écriture, aucun secret.
      */
     @GetMapping("/games")
     public ResponseEntity<Map<String, Object>> games(@org.springframework.web.bind.annotation.RequestParam(name = "game", required = false) String game,

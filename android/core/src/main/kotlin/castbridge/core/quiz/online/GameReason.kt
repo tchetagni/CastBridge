@@ -1,7 +1,7 @@
 package castbridge.core.quiz.online
 
 /**
- * Refus propres aux salles de jeu à tour de rôle (`game:chess`) et à leurs mises (DESIGN-JEUX-CARTES-ET-ECHECS-EN-LIGNE, chantier games-G2). Codes STABLES, textes français pour l'écran de la
+ * Refus propres aux salles de jeu à tour de rôle (`game:chess`) et à leurs mises (échecs, et Quiz misé, games-G5) (DESIGN-JEUX-CARTES-ET-ECHECS-EN-LIGNE, chantier games-G2). Codes STABLES, textes français pour l'écran de la
  * TV ; additif : [PlayReason] (Quiz) n'est pas touché. Le message `error` les porte dans `reason` ; `STAKE_ESCROW_REQUIRED` ajoute `data = {game, cur, per}` (la mise à bloquer).
  */
 enum class GameReason(val http: Int, val retryable: Boolean, val message: String) {
@@ -22,7 +22,9 @@ enum class GameReason(val http: Int, val retryable: Boolean, val message: String
     /** La salle n'a plus de place de joueur (deux TV jouent déjà, ou la partie a commencé). */
     SEATS_TAKEN(409, true, "Cette partie a déjà ses deux joueurs : vous pouvez la regarder."),
     /** La même TV ne joue pas contre elle-même. */
-    SAME_TV(409, false, "Votre TV est déjà dans cette partie : une TV ne joue pas contre elle-même.");
+    SAME_TV(409, false, "Votre TV est déjà dans cette partie : une TV ne joue pas contre elle-même."),
+    /** Quiz misé (games-G5) : la partie a commencé (ou est finie) ; les mises sont figées, une nouvelle TV n'y entre plus. */
+    STAKE_ROOM_STARTED(409, false, "Cette partie avec mise a déjà commencé : vous ne pouvez plus la rejoindre.");
 
     val code: String get() = name
 

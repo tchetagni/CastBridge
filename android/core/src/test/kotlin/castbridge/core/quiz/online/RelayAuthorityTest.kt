@@ -66,6 +66,21 @@ class RelayAuthorityTest {
         assertEquals(8, relay.phoneCount())
     }
 
+    @Test fun aStakedTvSeatsAsManyPhonesAsItBlockedStakesAndSaysSoWhenFull() {
+        // Quiz misé (games-G5) : la TV n'a bloqué sa mise que pour 2 joueurs ; le 3e téléphone ne part pas au service et la phrase dit pourquoi (pas « 8 joueurs »)
+        val relay = RelayAuthority(session, { now }, maxPhones = 2)
+        repeat(2) { assertEquals(QuizRoom.Join.OK, relay.join(null, "J$it", null, "dev-phone-%04d".format(it)).status) }
+        val third = relay.join(null, "Troisième", null, "dev-phone-0003")
+        assertEquals(QuizRoom.Join.FULL, third.status)
+        assertEquals("La salle est complète : cette TV n'a bloqué sa mise que pour 2 joueurs.", third.note)
+        assertEquals(2, t.all<ClientMsg.Join>().count { it.token == null }, "le 3e ne part même pas au service")
+        // une TV qui n'a bloqué qu'un siège : le singulier ; une salle libre garde le message d'avant (aucune note)
+        assertEquals("La salle est complète : cette TV n'a bloqué sa mise que pour 1 joueur.", RelayAuthority(session, { now }, maxPhones = 1).also { it.join(null, "Seul", null, "dev-phone-0010") }.join(null, "Autre", null, "dev-phone-0011").note)
+        val free = RelayAuthority(session, { now })
+        repeat(8) { free.join(null, "L$it", null, "dev-phone-%04d".format(20 + it)) }
+        assertNull(free.join(null, "Neuvième", null, "dev-phone-0099").note, "salle libre : le message habituel, sans note")
+    }
+
     @Test fun rejoinWithTheLocalTokenKeepsTheSeatWithoutAskingTheService() {
         val relay = RelayAuthority(session, { now })
         val a = relay.join(null, "Awa", null, "dev-phone-0001").player!!

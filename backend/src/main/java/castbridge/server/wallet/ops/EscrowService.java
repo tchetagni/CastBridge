@@ -121,9 +121,10 @@ public class EscrowService {
     static final Pattern GAME = Pattern.compile("^[a-z0-9_-]{1,32}$");
 
     /**
-     * Blocage d'une mise, avec le JEU pour lequel elle est faite ({@code game}, facultatif : null = Quiz et usages d'avant). Un jeu misé connu ({@link WalletPolicyService#GAMES}) ajoute ses règles, lues de la
-     * table de politique à chaque blocage : interrupteur du jeu, mise parmi l'ÉCHELLE du jeu, UN siège (aux échecs une mise par TV), TV d'essai refusée (parties libres seulement), plafonds de parties GAGNÉES
-     * par identité (jour, semaine, mois civil d'Africa/Douala) relus du journal. Un rejeu (même clé, même contenu) rend le même {@code cbe1} sans revérifier : le blocage existe déjà.
+     * Blocage d'une mise, avec le JEU pour lequel elle est faite ({@code game}, facultatif : null = usages d'avant, sans règles de jeu). Un jeu misé connu ({@link WalletPolicyService#GAMES} : les échecs et le
+     * Quiz) ajoute ses règles, lues de la table de politique à chaque blocage : interrupteur du jeu, mise parmi l'ÉCHELLE du jeu, nombre de sièges (aux échecs UN, une mise par TV ; au Quiz de 1 à 8), TV d'essai
+     * refusée (parties libres seulement), plafonds de parties GAGNÉES par identité et PAR JEU (jour, semaine, mois civil d'Africa/Douala) relus du journal. Un rejeu (même clé, même contenu) rend le même
+     * {@code cbe1} sans revérifier : le blocage existe déjà.
      */
     public Issued lock(String code, WalletRepository.Identity row, Currency cur, long per, int k, String idem, List<String> activations, String room, String game) {
         if (key == null) throw new ApiException(HttpStatus.SERVICE_UNAVAILABLE, "Portefeuille indisponible");
@@ -131,7 +132,7 @@ public class EscrowService {
         if (per < 1 || per > 1_000_000_000L) throw new LedgerException(WalletReason.BAD_TXN, "Mise hors bornes");
         if (room != null && !ROOM.matcher(room).matches()) throw ApiException.badRequest("Salle invalide : 1 à 32 caractères parmi A-Z a-z 0-9 . _ : -");
         if (game != null && !GAME.matcher(game).matches()) throw ApiException.badRequest("Jeu invalide : 1 à 32 caractères parmi a-z 0-9 _ -");
-        WalletPolicyService.GamePolicy gp = game == null ? null : policies.game(game).orElseThrow(() -> ApiException.badRequest("Jeu inconnu : les parties misées en ligne ne sont ouvertes qu'aux échecs (chess)"));
+        WalletPolicyService.GamePolicy gp = game == null ? null : policies.game(game).orElseThrow(() -> ApiException.badRequest("Jeu inconnu : les parties misées en ligne ne sont ouvertes qu'aux échecs (chess) et au Quiz (quiz)"));
         String eid = eidOf(code, idem);
         Txn txn = Txn.lock(code, cur, per, k, eid);
         boolean known = !jdbc.queryForList("SELECT eid FROM wallet_escrow WHERE eid = ?", String.class, eid).isEmpty();
@@ -157,15 +158,29 @@ public class EscrowService {
         return new Issued(sign(eid, code, cur, st.per(), st.k(), st.iat(), st.exp()), eid, st.iat(), st.exp(), posted.replayed());
     }
 
-    /** Les règles propres à un jeu misé (échecs) ; chaque refus a son motif fermé et son texte français. */
+    /** Le jeu dans une phrase française (« aux échecs », « au Quiz ») ; un jeu sans formule connue est cité par son identifiant. */
+    private static String at(String game) {
+        return switch (game) {
+            case "chess" -> "aux échecs";
+            case "quiz" -> "au Quiz";
+            default -> "à " + game;
+        };
+    }
+
+    /** Les règles propres à un jeu misé (échecs, Quiz) ; chaque refus a son motif fermé et son texte français, propre au jeu. */
     private void gameRules(WalletPolicyService.GamePolicy gp, String code, Currency cur, long per, int k, Eff eff, Instant now) {
         if (!gp.enabled()) throw new LedgerException(WalletReason.STAKES_SUSPENDED);
         // règle du propriétaire : l'essai joue en ligne sans mise (ni NDEM, ni MBOKO) ; seules les TV de production, illimitées, en grâce ou « super » misent
         if (eff.edition() == Edition.TRIAL) throw new ApiException(HttpStatus.CONFLICT, "Version d'essai : parties libres seulement, sans mise", List.of("TRIAL_FREE_ONLY"));
-        if (k != 1) throw new LedgerException(WalletReason.BAD_TXN, "Aux échecs, une seule mise par TV (un siège)");
+        // les sièges qui misent : de 1 à `seats` du jeu (une mise est PAR SIÈGE, payée par le compte de la TV ; aux échecs une seule, au Quiz les téléphones relayés de la TV et sa télécommande)
+        if (k < 1 || k > gp.seats()) {
+            String where = at(gp.game());
+            String phrase = gp.seats() == 1 ? ", une seule mise par TV (un siège)" : ", 1 à " + gp.seats() + " sièges par TV";
+            throw new LedgerException(WalletReason.BAD_TXN, Character.toUpperCase(where.charAt(0)) + where.substring(1) + phrase);
+        }
         List<Long> scale = gp.scale(cur);
         if (!scale.contains(per)) {
-            throw new ApiException(HttpStatus.CONFLICT, "Cette mise n'est pas proposée aux échecs : " + scale.stream().map(String::valueOf).collect(java.util.stream.Collectors.joining(", ")) + " " + cur + " par joueur", List.of("STAKE_NOT_OFFERED"));
+            throw new ApiException(HttpStatus.CONFLICT, "Cette mise n'est pas proposée " + at(gp.game()) + " : " + scale.stream().map(String::valueOf).collect(java.util.stream.Collectors.joining(", ")) + " " + cur + " par joueur", List.of("STAKE_NOT_OFFERED"));
         }
         WinWindows.Windows w = WinWindows.of(now);
         WinWindows.reached(w, journal.wins(code, gp.game(), w.dayStart()), journal.wins(code, gp.game(), w.weekStart()), journal.wins(code, gp.game(), w.monthStart()), gp.capDay(), gp.capWeek(), gp.capMonth())

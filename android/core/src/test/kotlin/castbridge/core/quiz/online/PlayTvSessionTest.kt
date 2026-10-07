@@ -33,6 +33,42 @@ class PlayTvSessionTest {
         start(PlayTvSession.Intent.Join("K7M2QX4T", "TV B"))
         val j = made[0].all<ClientMsg.Join>().single()
         assertEquals("K7M2QX4T", j.code); assertEquals("TV B", j.name); assertNull(j.token)
+        assertNull(j.escrow, "une salle libre : aucun blocage dans le message (identique à celui d'avant)")
+    }
+
+    // ------------------------------------------------------------------ Quiz misé (games-G5)
+
+    @Test fun aStakedCreationCarriesTheStakeAndTheEscrowAndAFreeOneDoesNot() {
+        start(PlayTvSession.Intent.Create(null, "DUEL", stake = StakeSpec("NDEM", 20), escrow = "cbe1.test.escrow"))
+        val c = made[0].all<ClientMsg.Create>().single()
+        assertEquals(StakeSpec("NDEM", 20), c.stake); assertEquals("cbe1.test.escrow", c.escrow); assertEquals("DUEL", c.mode); assertEquals("cbx1.act", c.activation)
+        assertFalse(c.toString().contains("cbe1.test.escrow"), "jamais le blocage dans un journal")
+        made.clear(); tickets = 0
+        val free = PlayTvSession(clock = { now }, transports = { ScriptedTransport().also { made += it } }, ticket = { "cbp1.t" })
+        free.start("dev-tv-000001", "cbx1.act", PlayTvSession.Intent.Create(null, "DUEL"))
+        val f = made[0].all<ClientMsg.Create>().single()
+        assertNull(f.stake); assertNull(f.escrow)
+        assertEquals(PlayCodec.encode(ClientMsg.Create(null, "DUEL", "cbx1.act", emptyList(), null)), PlayCodec.encode(f), "le message d'une salle libre est octet pour octet celui d'avant")
+    }
+
+    @Test fun aStakedRoomTellsTheStakeThenTheTvComesBackWithItsEscrowOnTheSameLinkAndTicket() {
+        made.clear()
+        val refusing = PlayTvSession(clock = { now }, transports = { ScriptedTransport().also { t ->
+            made += t
+            t.reply = { m -> if (m is ClientMsg.Join && m.escrow == null) t.push(ServerMsg.Error(1, "STAKE_ESCROW_REQUIRED", "mise", true, 0L, linkedMapOf("game" to "quiz", "cur" to "NDEM", "per" to 20L)))
+                else if (m is ClientMsg.Join) t.push(ServerMsg.Welcome(2, "room-9", "K7M2QX4T", "tv-token", PlayRole.SPECTATOR, null, 1, emptyList())) }
+        } }, ticket = { tickets++; "cbp1.ticket-$tickets" })
+        refusing.start("dev-tv-000001", "cbx1.act", PlayTvSession.Intent.Join("K7M2QX4T", "TV B"))
+        val err = refusing.authority.lastErrorOrNull()!!
+        assertEquals("STAKE_ESCROW_REQUIRED", err.reason); assertEquals(StakeSpec("NDEM", 20), QuizStakeTexts.specOf(err.data))
+        assertFalse(refusing.seated)
+        // la TV bloque sa mise puis revient : même liaison, même ticket (aucun nouveau `hello`, aucun ticket redemandé)
+        refusing.reopenWith(PlayTvSession.Intent.Join("K7M2QX4T", "TV B", escrow = "cbe1.test.escrow"))
+        assertTrue(refusing.seated)
+        assertEquals(1, tickets, "le refus n'a rien consommé : un seul ticket"); assertEquals(1, made.size, "une seule liaison"); assertEquals(1, made[0].all<ClientMsg.Hello>().size)
+        val joins = made[0].all<ClientMsg.Join>()
+        assertEquals(listOf(null, "cbe1.test.escrow"), joins.map { it.escrow }); assertEquals("cbx1.act", joins.last().activation)
+        assertNull(refusing.authority.lastErrorOrNull(), "le refus précédent est effacé par la nouvelle entrée")
     }
 
     @Test fun rule11SubtractsHalfTheRttOnTheClient() {

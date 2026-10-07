@@ -91,7 +91,11 @@ data class RoomCodeEntry(val chars: String = "") {
     }
 }
 
-enum class PlayScreen { MENU, OPENING, ENTER_CODE, ROOM, CONFIRM_LEAVE, LOST, FAILED, BLOCKED, CLOSED }
+/**
+ * Les écrans de la « Partie Internet ». Quiz misé (games-G5) : [STAKE_CHOICE] (Libre / NDEM / MBOKO, montant, joueurs d'ici qui misent), [STAKE_CONFIRM] (confirmation avant de bloquer une mise),
+ * [JOIN_STAKE] (la salle qu'on rejoint est misée : la TV bloque la sienne ou renonce).
+ */
+enum class PlayScreen { MENU, OPENING, ENTER_CODE, ROOM, CONFIRM_LEAVE, LOST, FAILED, BLOCKED, CLOSED, STAKE_CHOICE, STAKE_CONFIRM, JOIN_STAKE }
 
 sealed class PlayEvent {
     object ChooseCreate : PlayEvent()
@@ -103,62 +107,108 @@ sealed class PlayEvent {
     object Back : PlayEvent()
     object ConfirmLeave : PlayEvent()
     object FlagOff : PlayEvent()
+    /** Écran de mise : la TV a choisi sa mise ([plan] non nul : mise à confirmer) ou « Libre » (null : la partie s'ouvre tout de suite). */
+    data class StakeChosen(val plan: PlayStakePlan?) : PlayEvent()
+    /** « Bloquer ma mise et créer » : confirmé. */
+    object StakeConfirmed : PlayEvent()
+    /** Le service dit que la salle qu'on rejoint est misée de [spec] : la TV doit bloquer sa mise (ou renoncer). */
+    data class NeedsStake(val spec: StakeSpec) : PlayEvent()
+    /** La TV rejoint la salle misée avec [seats] sièges qui misent (le blocage se prend alors, sur la MÊME liaison). */
+    data class JoinWithSeats(val seats: Int) : PlayEvent()
+}
+
+/** Ce que la TV a décidé de miser : la mise par siège (monnaie, montant) et le nombre de sièges de CETTE TV qui misent (1 à 8) ; le blocage vaut `mise × sièges`. */
+data class PlayStakePlan(val spec: StakeSpec, val seats: Int) {
+    val blocked: Long get() = spec.per * seats
 }
 
 sealed class PlayIntent {
     object Create : PlayIntent() { override fun toString() = "Create" }
+    /** Créer une salle MISÉE (Quiz misé, games-G5) : la TV bloque d'abord sa mise, puis crée avec son blocage. */
+    data class CreateStaked(val plan: PlayStakePlan) : PlayIntent()
     data class Join(val code: String) : PlayIntent()
 }
 
-data class PlayFlowState(val screen: PlayScreen, val message: String? = null, val intent: PlayIntent? = null)
+/**
+ * L'état des écrans. [stakeOffer] : le menu propose-t-il une partie MISÉE (mises permises à cette TV, service et serveur à jour) ? Faux : « Créer une partie » ouvre tout de suite une partie libre, comme avant.
+ * [plan] : la mise choisie (écran de confirmation, ouverture) ; [joinStake] : la mise de la salle qu'on rejoint (écran [PlayScreen.JOIN_STAKE]).
+ */
+data class PlayFlowState(val screen: PlayScreen, val message: String? = null, val intent: PlayIntent? = null, val stakeOffer: Boolean = false, val plan: PlayStakePlan? = null, val joinStake: StakeSpec? = null)
 
 /** L'automate des écrans (pur) : un évènement qui n'a pas de sens dans l'écran courant ne change rien. `CLOSED` = retour au menu du Quiz. */
 object PlayFlow {
     const val MSG_BAD_CODE = "Le code a 8 symboles : XXXX-XXXX."
 
-    fun start(tile: PlayTile): PlayFlowState = when (tile) {
+    fun start(tile: PlayTile, stakeOffer: Boolean = false): PlayFlowState = when (tile) {
         PlayTile.Hidden -> PlayFlowState(PlayScreen.CLOSED)
         is PlayTile.Blocked -> PlayFlowState(PlayScreen.BLOCKED, tile.reason)
-        PlayTile.Available -> PlayFlowState(PlayScreen.MENU)
+        PlayTile.Available -> PlayFlowState(PlayScreen.MENU, stakeOffer = stakeOffer)
     }
 
     fun next(s: PlayFlowState, e: PlayEvent): PlayFlowState {
         if (e is PlayEvent.FlagOff) return PlayFlowState(PlayScreen.CLOSED)
         val lost = PlayFlowState(PlayScreen.LOST, LinkCause.LOST_TEXT)
+        val menu = PlayFlowState(PlayScreen.MENU, stakeOffer = s.stakeOffer)
         return when (s.screen) {
             PlayScreen.MENU -> when (e) {
-                PlayEvent.ChooseCreate -> PlayFlowState(PlayScreen.OPENING, intent = PlayIntent.Create)
-                PlayEvent.ChooseJoin -> PlayFlowState(PlayScreen.ENTER_CODE)
+                // sans mise possible : une partie libre s'ouvre tout de suite (comme avant) ; avec : l'écran de mise (« Libre » en fait partie)
+                PlayEvent.ChooseCreate -> if (s.stakeOffer) PlayFlowState(PlayScreen.STAKE_CHOICE, stakeOffer = true) else PlayFlowState(PlayScreen.OPENING, intent = PlayIntent.Create)
+                PlayEvent.ChooseJoin -> PlayFlowState(PlayScreen.ENTER_CODE, stakeOffer = s.stakeOffer)
                 PlayEvent.Back -> PlayFlowState(PlayScreen.CLOSED)
                 else -> s
             }
+            PlayScreen.STAKE_CHOICE -> when (e) {
+                is PlayEvent.StakeChosen -> if (e.plan == null) PlayFlowState(PlayScreen.OPENING, intent = PlayIntent.Create, stakeOffer = s.stakeOffer)
+                    else if (e.plan.seats !in 1..PlayProtocol.MAX_STAKE_SEATS || e.plan.spec.per < 1) s
+                    else PlayFlowState(PlayScreen.STAKE_CONFIRM, stakeOffer = s.stakeOffer, plan = e.plan)
+                PlayEvent.Back -> menu
+                else -> s
+            }
+            PlayScreen.STAKE_CONFIRM -> when (e) {
+                PlayEvent.StakeConfirmed -> s.plan?.let { PlayFlowState(PlayScreen.OPENING, intent = PlayIntent.CreateStaked(it), stakeOffer = s.stakeOffer, plan = it) } ?: s
+                PlayEvent.Back -> PlayFlowState(PlayScreen.STAKE_CHOICE, stakeOffer = s.stakeOffer)
+                else -> s
+            }
             PlayScreen.ENTER_CODE -> when (e) {
-                is PlayEvent.CodeSubmitted -> RoomCode.normalize(e.raw)?.let { PlayFlowState(PlayScreen.OPENING, intent = PlayIntent.Join(it)) } ?: s.copy(message = MSG_BAD_CODE)
-                PlayEvent.Back -> PlayFlowState(PlayScreen.MENU)
+                is PlayEvent.CodeSubmitted -> RoomCode.normalize(e.raw)?.let { PlayFlowState(PlayScreen.OPENING, intent = PlayIntent.Join(it), stakeOffer = s.stakeOffer) } ?: s.copy(message = MSG_BAD_CODE)
+                PlayEvent.Back -> menu
                 else -> s
             }
             PlayScreen.OPENING -> when (e) {
                 PlayEvent.Seated -> s.copy(screen = PlayScreen.ROOM)
-                is PlayEvent.Failed -> PlayFlowState(PlayScreen.FAILED, e.text)
+                is PlayEvent.Failed -> PlayFlowState(PlayScreen.FAILED, e.text, stakeOffer = s.stakeOffer)
                 PlayEvent.LinkLost -> lost
-                PlayEvent.Back -> PlayFlowState(PlayScreen.MENU)
+                // la salle qu'on rejoint est misée : la liaison reste ouverte, rien n'est consommé ; la TV choisit (une seule fois par ouverture)
+                is PlayEvent.NeedsStake -> if (s.intent is PlayIntent.Join && s.plan == null) PlayFlowState(PlayScreen.JOIN_STAKE, intent = s.intent, stakeOffer = s.stakeOffer, joinStake = e.spec) else s
+                PlayEvent.Back -> menu
+                else -> s
+            }
+            PlayScreen.JOIN_STAKE -> when (e) {
+                is PlayEvent.JoinWithSeats -> {
+                    val spec = s.joinStake
+                    if (spec == null || e.seats !in 1..PlayProtocol.MAX_STAKE_SEATS) s
+                    else PlayFlowState(PlayScreen.OPENING, intent = s.intent, stakeOffer = s.stakeOffer, plan = PlayStakePlan(spec, e.seats))
+                }
+                is PlayEvent.Failed -> PlayFlowState(PlayScreen.FAILED, e.text, stakeOffer = s.stakeOffer)
+                PlayEvent.LinkLost -> lost
+                PlayEvent.Back -> menu
                 else -> s
             }
             PlayScreen.ROOM -> when (e) {
                 PlayEvent.Back -> s.copy(screen = PlayScreen.CONFIRM_LEAVE)
                 PlayEvent.LinkLost -> lost
-                is PlayEvent.Failed -> PlayFlowState(PlayScreen.FAILED, e.text)
+                is PlayEvent.Failed -> PlayFlowState(PlayScreen.FAILED, e.text, stakeOffer = s.stakeOffer)
                 else -> s
             }
             PlayScreen.CONFIRM_LEAVE -> when (e) {
                 PlayEvent.Back -> s.copy(screen = PlayScreen.ROOM)         // « Annuler » est présélectionné : Retour = Annuler
-                PlayEvent.ConfirmLeave -> PlayFlowState(PlayScreen.MENU)
+                PlayEvent.ConfirmLeave -> menu
                 PlayEvent.LinkLost -> lost
-                is PlayEvent.Failed -> PlayFlowState(PlayScreen.FAILED, e.text)
+                is PlayEvent.Failed -> PlayFlowState(PlayScreen.FAILED, e.text, stakeOffer = s.stakeOffer)
                 else -> s
             }
             PlayScreen.LOST -> if (e == PlayEvent.Back) PlayFlowState(PlayScreen.CLOSED) else s
-            PlayScreen.FAILED -> if (e == PlayEvent.Back) PlayFlowState(PlayScreen.MENU) else s
+            PlayScreen.FAILED -> if (e == PlayEvent.Back) menu else s
             PlayScreen.BLOCKED -> if (e == PlayEvent.Back) PlayFlowState(PlayScreen.CLOSED) else s
             PlayScreen.CLOSED -> s
         }
@@ -201,9 +251,10 @@ data class PlayBannerModel(val scopeLine: String, val level: SignalLevel, val wo
 /** Quel signe « TV seule / réseau local / Internet » chaque écran montre (via [SafetySign]). */
 object PlayBanner {
     fun sign(screen: PlayScreen, session: SafetyView?): SafetyView? = when (screen) {
-        // avant toute ouverture rien ne sort de la maison : « TV seule »
-        PlayScreen.MENU, PlayScreen.ENTER_CODE -> SafetySign.of(SafetyFacts(PlayScope.TV_ONLY))
-        PlayScreen.OPENING, PlayScreen.ROOM, PlayScreen.CONFIRM_LEAVE, PlayScreen.LOST -> session ?: SafetySign.of(SafetyFacts(PlayScope.INTERNET))
+        // avant toute ouverture rien ne sort de la maison : « TV seule » (les écrans de mise aussi : le blocage se prend à l'API, rien n'est ouvert vers le service de jeu)
+        PlayScreen.MENU, PlayScreen.ENTER_CODE, PlayScreen.STAKE_CHOICE, PlayScreen.STAKE_CONFIRM -> SafetySign.of(SafetyFacts(PlayScope.TV_ONLY))
+        // la salle qu'on rejoint est misée : la liaison au service est ouverte, en attente du choix de la TV
+        PlayScreen.OPENING, PlayScreen.JOIN_STAKE, PlayScreen.ROOM, PlayScreen.CONFIRM_LEAVE, PlayScreen.LOST -> session ?: SafetySign.of(SafetyFacts(PlayScope.INTERNET))
         PlayScreen.FAILED, PlayScreen.BLOCKED, PlayScreen.CLOSED -> null
     }
 }

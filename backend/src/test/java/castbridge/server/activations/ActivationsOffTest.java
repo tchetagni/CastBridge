@@ -67,7 +67,10 @@ class ActivationsOffTest extends ApiTestBase {
             // changed with games-G2: V68 (chess_stakes, wallet module: `game` column of the escrows, staked-games journal, game policy) is the next number; nothing above it
             assertEquals(1, names.stream().filter(n -> n.startsWith("V68__")).count());
             assertTrue(names.contains("V68__chess_stakes.sql"));
-            assertEquals(0, names.stream().filter(n -> n.matches("V(69|[7-9][0-9])__.*")).count(), "V69 and above are not this module's");
+            // changed with games-G5: V69 (quiz_stakes, wallet module: `game.quiz.*` policy rows, no schema change) is the next number; nothing above it
+            assertEquals(1, names.stream().filter(n -> n.startsWith("V69__")).count());
+            assertTrue(names.contains("V69__quiz_stakes.sql"));
+            assertEquals(0, names.stream().filter(n -> n.matches("V[7-9][0-9]__.*")).count(), "V70 and above are not this module's");
         }
     }
 }

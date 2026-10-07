@@ -108,7 +108,7 @@ Deux jeux de cartes dont les règles **doivent être fournies par le propriétai
 
 ## 6. Ce qui n'est PAS ici (chantiers suivants)
 
-G2 (réalisé, `docs/CHESS.md` § 6) : échecs en ligne TV à TV, libres ou avec mise (NDEM/MBOKO, `cbe1`/`cbr1`, salle `game:chess` de `castbridge-play` sur le moteur pur `core/chess`, règlement par l'API, vitrine des téléphones du foyer par une `GameRoom` sans place) ; les échecs ne sont pas réécrits en `GameRules`. G3, G4 : Fap-Fap et Agraham Tia après réception des fiches. Pour la plateforme G1 seule : aucune mise, aucun jeton, aucune route du service de jeu ou de l'API n'était touchée ; le journal `cbg1` est produit, signé et gardé, jamais envoyé.
+G2 (réalisé, `docs/CHESS.md` § 6) : échecs en ligne TV à TV, libres ou avec mise (NDEM/MBOKO, `cbe1`/`cbr1`, salle `game:chess` de `castbridge-play` sur le moteur pur `core/chess`, règlement par l'API, vitrine des téléphones du foyer par une `GameRoom` sans place) ; les échecs ne sont pas réécrits en `GameRules`. G5 (réalisé, `docs/QUIZ.md` § 5 bis) : le **Quiz en ligne se joue aussi avec une mise en NDEM ou MBOKO**, par le même mécanisme (`cbe1` par TV, une mise par joueur de la TV, `cbr1` signé par le service, règlement par l'API ; salle de Quiz `ServerRoom` et non une salle `game:<id>`) ; la mise virtuelle du Quiz de la maison s'appelle désormais « Compétition à points » (des points sans valeur, jamais des « jetons »). G3, G4 : Fap-Fap et Agraham Tia après réception des fiches. Pour la plateforme G1 seule : aucune mise, aucun jeton, aucune route du service de jeu ou de l'API n'était touchée ; le journal `cbg1` est produit, signé et gardé, jamais envoyé.
 
 ## 7. Tests JVM (`gradle :core:test`)
 

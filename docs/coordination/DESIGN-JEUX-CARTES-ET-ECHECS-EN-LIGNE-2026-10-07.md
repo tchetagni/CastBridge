@@ -54,6 +54,7 @@ Format accepté : texte, photo d'un carnet, vidéo ; l'orchestrateur transcrit e
 - **games-G1 Plateforme (Sonnet)** : `GameRules`, `CardDeck`, `TurnEngine`, `GameRoom` générique (migration de `ChessRoom` dessus sans changer son comportement), `GameJournal`, page web `/jeux/<id>`, hub `Games.all` + téléphone `PHONE_GAMES` ; tests JVM (graine, vues par joueur, `STALE`, reprise).
 - **games-G2 Échecs en ligne + mises (Sonnet)** : salle `game:chess` dans `castbridge-play` (même module de règles), caps, `ChessRelayClient` branché sur `/play/`, `Stake` option B (`cbe1`/`cbr1`) côté API et service, échelle et plafonds, écrans « libre / mise », règlement et journal ; TV d'essai = libre seulement.
 - **games-G3 Fap-Fap** et **games-G4 Agraham Tia** : après réception des fiches § 4 : règles pures + tests de la partie exemple + IA simple + textes ; branchées sur G1/G2.
+- **games-G5 Quiz en ligne misé (Sonnet)** : réalisé (2026-10-07) : le Quiz de `castbridge-play` mise en NDEM ou MBOKO comme les échecs (option B de W22 : `cbe1` par TV, une mise par siège, `cbr1` signé par le service, règlement par l'API ; `game.quiz` dans la politique, migration `V69`) ; la mise virtuelle de la maison devient la « Compétition à points » ; voir `docs/QUIZ.md` § 5 bis et `docs/coordination/DESIGN-W22-JETONS-NDEM-MBOKO-2026-10-04.md` § 15.
 - Guide utilisateur : section Jeux à compléter à la livraison.
 
 ## 6. Décisions du propriétaire

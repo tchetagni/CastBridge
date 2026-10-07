@@ -15,6 +15,7 @@ import castbridge.core.quiz.online.HostEdition
 import castbridge.core.quiz.online.PlayReason
 import castbridge.core.quiz.online.PlayRules
 import castbridge.core.quiz.online.PlayScope
+import castbridge.core.quiz.online.QuizEscrow
 import castbridge.core.quiz.online.RoomCode
 import castbridge.core.quiz.online.ServerMsg
 import castbridge.core.quiz.online.StakeSpec
@@ -218,6 +219,18 @@ class PlayHub(
         val subjectCap = if (trial) minOf(1, cfg.maxRoomsPerSubject) else cfg.maxRoomsPerSubject
         val subjectFull = ServerMsg.Error(0, BUSY, "Vous avez déjà $subjectCap partie${if (subjectCap > 1) "s" else ""} ouverte${if (subjectCap > 1) "s" else ""} : terminez-en une avant d'en ouvrir une autre.", true)
         val identity = rights.identity
+        // Quiz misé (games-G5) : un Duel dont l'hôte a bloqué sa mise (une mise par siège, jusqu'à 8 sièges). Le blocage `cbe1` est vérifié ICI (clé publique du portefeuille, identité de CETTE TV, mise de la
+        // salle) et ne sert qu'à UNE salle ; l'essai ne mise jamais (le ticket n'est pas brûlé : la TV peut recommencer en partie libre). Sans mise ni blocage : salle libre, comme avant. Rien n'est consommé ici.
+        var ok: StakeCheck.Ok? = null
+        if (m.stake != null || m.escrow != null) {
+            val who = identity ?: run { send(c, err(PlayReason.PLAY_SCOPE_FORBIDDEN)); return }
+            if (m.mode != null && m.mode != "DUEL") { send(c, gerr(GameReason.STAKE_BAD)); return }   // la cagnotte se partage selon le classement : un Duel
+            when (val check = stakeCheck(rights, who, m.stake, m.escrow, requireEscrow = true, real, PlayProtocol.GAME_QUIZ, PlayProtocol.MAX_STAKE_SEATS)) {
+                is StakeCheck.Refused -> { send(c, check.error); return }
+                is StakeCheck.Ok -> ok = check
+                StakeCheck.Free -> {}
+            }
+        }
         // M-2 : une salle dont l'hôte est parti (« Quitter ») ne bloque plus son créateur ; elle vit encore pour ses invités
         fun openRooms() = openRoomsOf(ticket.deviceId, identity)   // l'appareil API se recrée à volonté : l'activation signée compte aussi
         if (openRooms() >= subjectCap) { send(c, subjectFull); return }
@@ -228,27 +241,37 @@ class PlayHub(
         val baseSettings = settings.copy(maxRelayedPerTv = minOf(settings.maxRelayedPerTv, cfg.maxRelayedPerTv))
         val roomSettings = if (trial) baseSettings.copy(seatsPerTable = minOf(baseSettings.seatsPerTable, PlayRules.TRIAL_MAX_PLAYERS)) else baseSettings
         var refusal: ServerMsg.Error? = null
+        // le blocage n'est rendu QUE s'il a été réservé par CET essai : un refus avant la réservation ne doit jamais libérer le blocage d'une autre salle (le même `cbe1` rejoué)
+        var reservedHere = false
+        fun release() { if (reservedHere) { ok?.let { stakes?.gate?.release(it.escrow.eid) }; reservedHere = false } }
         val e = synchronized(roomLock) {
+            fun fail(error: ServerMsg.Error): RoomEntry? { release(); refusal = error; return null }
             when {
-                rooms.size + chessRooms.size >= cfg.maxRooms -> { refusal = err(PlayReason.PLAY_BUSY); null }
-                openRooms() >= subjectCap -> { refusal = subjectFull; null }
-                !trial && identityDays.count(identity ?: "", real) >= cfg.createsPerIdentityPerDay -> {
-                    refusal = ServerMsg.Error(0, BUSY, "Trop de parties ouvertes aujourd'hui avec cette activation : réessayez demain.", true); null }
+                rooms.size + chessRooms.size >= cfg.maxRooms -> fail(err(PlayReason.PLAY_BUSY))
+                openRooms() >= subjectCap -> fail(subjectFull)
+                !trial && identityDays.count(identity ?: "", real) >= cfg.createsPerIdentityPerDay ->
+                    fail(ServerMsg.Error(0, BUSY, "Trop de parties ouvertes aujourd'hui avec cette activation : réessayez demain.", true))
                 // les contrôles sont passés : on consomme maintenant (quota de l'adresse, `jti`, compteur du jour), puis on crée
-                !createRate.allow(c.ip, real) || !create48.allow(ip48, real) -> { refusal = tooMany; null }
+                !createRate.allow(c.ip, real) || !create48.allow(ip48, real) -> fail(tooMany)
+                ok != null && !stakes!!.gate.reserve(ok!!.escrow.eid, ok!!.expMs, real).also { reservedHere = it } -> fail(gerr(GameReason.STAKE_ESCROW_INVALID))
                 else -> when (used.use(ticket.jti, ticket.exp, real)) {
-                    UsedTickets.Use.REPLAY -> { refusal = err(PlayReason.PLAY_TICKET_REFUSED); null }
-                    UsedTickets.Use.FULL -> { refusal = err(PlayReason.PLAY_BUSY); null }
+                    UsedTickets.Use.REPLAY -> fail(err(PlayReason.PLAY_TICKET_REFUSED))
+                    UsedTickets.Use.FULL -> fail(err(PlayReason.PLAY_BUSY))
                     UsedTickets.Use.OK -> when {
-                        trial && !trialDays.record(identity ?: "", real) -> { refusal = err(PlayReason.PLAY_BUSY); null }
-                        !trial && !identityDays.record(identity ?: "", real) -> { refusal = err(PlayReason.PLAY_BUSY); null }
-                        else -> RoomEntry(ServerRoom(id, scope, roomBank, rnd, createdAt = now, settings = roomSettings), ticket.deviceId, identity, trial).also { rooms[id] = it }
+                        trial && !trialDays.record(identity ?: "", real) -> fail(err(PlayReason.PLAY_BUSY))
+                        !trial && !identityDays.record(identity ?: "", real) -> fail(err(PlayReason.PLAY_BUSY))
+                        else -> RoomEntry(ServerRoom(id, scope, roomBank, rnd, createdAt = now, settings = roomSettings,
+                            stake = if (ok != null) m.stake else null, signer = stakes?.signer, onResult = { rid, token -> stakes?.spool?.write(rid, token) }),
+                            ticket.deviceId, identity, trial).also { rooms[id] = it }
                     }
                 }
             }
         }
         if (e == null) { send(c, refusal!!); return }
-        if (attachAndForward(e, c, m, now)) e.hostSeen = true
+        if (attachAndForward(e, c, m, now, admission = ServerRoom.Admission(identity, ok?.quiz))) {
+            e.hostSeen = true
+            if (ok != null) guard.log.event("play.game.created", "", mapOf("roomId" to id, "ip" to c.ip, "game" to PlayProtocol.GAME_QUIZ, "staked" to true))
+        } else release()
     }
 
     /** H-3 : la preuve de possession manque ou est fausse. Un ticket qui porte l'empreinte `ik` l'exige toujours ; sans `ik`, seul `requireProof` (défaut) la rend obligatoire. */
@@ -319,6 +342,11 @@ class PlayHub(
             val why = verdict.reason ?: PlayReason.PLAY_SCOPE_FORBIDDEN
             send(c, ServerMsg.Error(0, why.code, verdict.message, why.retryable)); return
         }
+        // Quiz misé (games-G5) : la TV qui entre dans une salle MISÉE doit joindre SON blocage (vérifié ici : clé publique du portefeuille, identité de cette TV, monnaie et mise de la salle, `k` de 1 à 8) ; l'essai
+        // n'y entre jamais (`STAKE_TRIAL_FREE_ONLY`) ; sans blocage, la salle dit la mise à bloquer (rien n'est consommé : la TV bloque puis revient sur la MÊME liaison). Un blocage dans une salle libre est refusé.
+        val check = stakeCheck(rights, identity, e.room.stake, m.escrow, requireEscrow = false, real, PlayProtocol.GAME_QUIZ, PlayProtocol.MAX_STAKE_SEATS)
+        if (check is StakeCheck.Refused) { send(c, check.error); return }
+        val ok = check as? StakeCheck.Ok
         val cap = if (trial) minOf(1, cfg.maxRoomsPerSubject) else cfg.maxRoomsPerSubject
         val ownRoom = e.identity == identity   // rejoindre sa propre salle (spectateur) ne compte pas deux fois
         // M-2 : seules comptent les salles dont l'hôte est encore là ; une entrée vivante compte tant que sa connexion l'est
@@ -335,12 +363,13 @@ class PlayHub(
                 trial && trialDays.count(identity, real) >= PlayRules.TRIAL_GAMES_PER_DAY -> refusal = ServerMsg.Error(0, PlayReason.PLAY_SCOPE_FORBIDDEN.code, PlayRules.MSG_TRIAL_DAILY, false)   // recontrôle sous verrou (course)
                 !used.admits(ticket.jti, real) -> refusal = err(PlayReason.PLAY_TICKET_REFUSED)
                 trial && !trialDays.canRecord(identity, real) -> refusal = err(PlayReason.PLAY_BUSY)
+                ok != null && !stakes!!.gate.reserve(ok.escrow.eid, ok.expMs, real) -> refusal = gerr(GameReason.STAKE_ESCROW_INVALID)   // ce blocage sert déjà dans une salle vivante
                 else -> {
                     e.joined[c.id] = identity
-                    if (attachAndForward(e, c, m, now, grantRelay = true)) {
+                    if (attachAndForward(e, c, m, now, grantRelay = true, admission = ServerRoom.Admission(identity, ok?.quiz))) {
                         used.use(ticket.jti, ticket.exp, real)
                         if (trial) trialDays.record(identity, real)
-                    } else e.joined.remove(c.id)   // refus de la salle : rien n'est consommé, le ticket reste utilisable
+                    } else { e.joined.remove(c.id); ok?.let { stakes!!.gate.release(it.escrow.eid) } }   // refus de la salle : rien n'est consommé, le ticket reste utilisable, le blocage aussi
                 }
             }
         }
@@ -367,12 +396,12 @@ class PlayHub(
             chessRooms.values.count { it.identity == who && it.counts() } + chessRooms.values.filter { it.identity != who }.sumOf { r -> r.joined.entries.count { (cid, idn) -> idn == who && r.conns.containsKey(cid) } }
 
     /** Attache la connexion à la salle le temps d'un message d'entrée ; sans `welcome` en retour, elle est détachée (et la salle neuve supprimée). */
-    private fun attachAndForward(e: RoomEntry, c: PlayConn, m: ClientMsg, now: Long, grantRelay: Boolean = false): Boolean {
+    private fun attachAndForward(e: RoomEntry, c: PlayConn, m: ClientMsg, now: Long, grantRelay: Boolean = false, admission: ServerRoom.Admission = ServerRoom.Admission(null)): Boolean {
         val overflow = ArrayList<PlayConn>()
         var seatedRole: castbridge.core.quiz.online.PlayRole? = null
         synchronized(e) {
             e.conns[c.id] = c; c.entry = e
-            val outs = e.room.handle(c.id, m, now, c.ip)
+            val outs = e.room.handle(c.id, m, now, c.ip, admission)
             e.lastActiveRealMs = System.currentTimeMillis()
             val welcome = outs.firstOrNull { it.to == c.id && it.msg is ServerMsg.Welcome }?.msg as? ServerMsg.Welcome
             seatedRole = welcome?.role
@@ -415,30 +444,31 @@ class PlayHub(
 
     private fun gerr(r: GameReason) = ServerMsg.Error(0, r.code, r.message, r.retryable)
 
-    /** Les mises d'une entrée : libre, blocage vérifié, ou refus à envoyer à la TV. */
+    /** Les mises d'une entrée : libre, blocage vérifié (vu comme blocage d'échecs ET comme blocage de Quiz misé : le jeu choisit), ou refus à envoyer à la TV. */
     private sealed class StakeCheck {
         object Free : StakeCheck()
-        class Ok(val escrow: ChessEscrow, val expMs: Long) : StakeCheck()
+        class Ok(val escrow: ChessEscrow, val quiz: QuizEscrow, val expMs: Long) : StakeCheck()
         class Refused(val error: ServerMsg.Error) : StakeCheck()
     }
 
-    private fun stakeRequired(spec: StakeSpec) = ServerMsg.Error(0, GameReason.STAKE_ESCROW_REQUIRED.code, GameReason.STAKE_ESCROW_REQUIRED.message, true, 0L,
-        linkedMapOf("game" to PlayProtocol.GAME_CHESS, "cur" to spec.cur, "per" to spec.per))
+    private fun stakeRequired(spec: StakeSpec, game: String = PlayProtocol.GAME_CHESS) = ServerMsg.Error(0, GameReason.STAKE_ESCROW_REQUIRED.code, GameReason.STAKE_ESCROW_REQUIRED.message, true, 0L,
+        linkedMapOf("game" to game, "cur" to spec.cur, "per" to spec.per))
 
     /**
      * Les mises d'une création ou de l'entrée d'un joueur. Fermé et SANS RIEN CONSOMMER : une TV d'essai ne mise jamais (parties libres seulement), l'interrupteur des mises et les clés doivent être là
      * (`STAKES_SUSPENDED`), la mise reste dans les bornes du service, le blocage `cbe1` (clé publique du portefeuille, identité de CETTE TV, monnaie et mise de la salle) est vérifié. [requireEscrow] :
-     * à la création le blocage est obligatoire ; à l'entrée son absence est laissée à la salle, qui répond `STAKE_ESCROW_REQUIRED` avec la mise à bloquer.
+     * à la création le blocage est obligatoire ; à l'entrée son absence est laissée à la salle, qui répond `STAKE_ESCROW_REQUIRED` avec la mise à bloquer. [game] et [maxSeats] : le jeu de la salle et le nombre
+     * de sièges qu'un blocage peut couvrir (échecs : 1 ; Quiz misé : 8, une mise par siège).
      */
-    private fun stakeCheck(rights: HostRights, identity: String, spec: StakeSpec?, token: String?, requireEscrow: Boolean, real: Long): StakeCheck {
+    private fun stakeCheck(rights: HostRights, identity: String, spec: StakeSpec?, token: String?, requireEscrow: Boolean, real: Long, game: String = PlayProtocol.GAME_CHESS, maxSeats: Int = 1): StakeCheck {
         if (spec == null) return if (token == null) StakeCheck.Free else StakeCheck.Refused(gerr(GameReason.STAKE_BAD))   // un blocage sans mise : la mise de la TV resterait bloquée pour rien
         if (rights.edition == HostEdition.TRIAL) return StakeCheck.Refused(gerr(GameReason.STAKE_TRIAL_FREE_ONLY))
         val s = stakes ?: return StakeCheck.Refused(gerr(GameReason.STAKES_SUSPENDED))
         if (!s.gate.inBounds(spec)) return StakeCheck.Refused(gerr(GameReason.STAKE_BAD))
-        if (token == null) return if (requireEscrow) StakeCheck.Refused(stakeRequired(spec)) else StakeCheck.Free
-        return when (val r = s.gate.check(token, real, identity, spec)) {
-            is EscrowGate.Result.Ok -> StakeCheck.Ok(r.escrow(), r.ticket.exp)
-            is EscrowGate.Result.Refused -> { guard.log.event("play.stake.refused", "blocage refusé", mapOf("why" to r.why.name), level = "warn"); StakeCheck.Refused(gerr(GameReason.STAKE_ESCROW_INVALID)) }
+        if (token == null) return if (requireEscrow) StakeCheck.Refused(stakeRequired(spec, game)) else StakeCheck.Free
+        return when (val r = s.gate.check(token, real, identity, spec, maxSeats)) {
+            is EscrowGate.Result.Ok -> StakeCheck.Ok(r.escrow(), r.quizEscrow(), r.ticket.exp)
+            is EscrowGate.Result.Refused -> { guard.log.event("play.stake.refused", "blocage refusé", mapOf("why" to r.why.name, "game" to game), level = "warn"); StakeCheck.Refused(gerr(GameReason.STAKE_ESCROW_INVALID)) }
         }
     }
 
@@ -489,7 +519,10 @@ class PlayHub(
         val mode = if (m.stake != null) ClockMode.COMPETITION else runCatching { ClockMode.valueOf(chess?.mode.orEmpty()) }.getOrDefault(ClockMode.COMPETITION)
         val options = ChessServerRoom.Options(chess?.perMoveSeconds ?: castbridge.core.chess.MoveTimer.DEFAULT_SECONDS, mode, chess?.color ?: "random", m.stake)
         var refusal: ServerMsg.Error? = null
-        fun release() { ok?.let { stakes?.gate?.release(it.escrow.eid) } }
+        // le blocage n'est rendu QUE s'il a été réservé par CET essai (games-G5) : un refus avant la réservation, ou une réservation refusée parce que le blocage sert déjà dans une autre salle vivante, ne doit
+        // jamais libérer la réservation de cette autre salle (sinon le même `cbe1` rejoué ouvrirait une seconde salle)
+        var reservedHere = false
+        fun release() { if (reservedHere) { ok?.let { stakes?.gate?.release(it.escrow.eid) }; reservedHere = false } }
         val e = synchronized(roomLock) {
             fun fail(error: ServerMsg.Error): ChessEntry? { release(); refusal = error; return null }
             when {
@@ -497,7 +530,7 @@ class PlayHub(
                 openRoomsOf(ticket.deviceId, identity) >= subjectCap -> fail(subjectFull)
                 !trial && identityDays.count(identity, real) >= cfg.createsPerIdentityPerDay -> fail(ServerMsg.Error(0, BUSY, "Trop de parties ouvertes aujourd'hui avec cette activation : réessayez demain.", true))
                 !createRate.allow(c.ip, real) || !create48.allow(ip48, real) -> fail(tooMany)
-                ok != null && !stakes!!.gate.reserve(ok.escrow.eid, ok.expMs, real) -> fail(gerr(GameReason.STAKE_ESCROW_INVALID))
+                ok != null && !stakes!!.gate.reserve(ok.escrow.eid, ok.expMs, real).also { reservedHere = it } -> fail(gerr(GameReason.STAKE_ESCROW_INVALID))
                 else -> when (used.use(ticket.jti, ticket.exp, real)) {
                     UsedTickets.Use.REPLAY -> fail(err(PlayReason.PLAY_TICKET_REFUSED))
                     UsedTickets.Use.FULL -> fail(err(PlayReason.PLAY_BUSY))
@@ -602,7 +635,8 @@ class PlayHub(
 
     /**
      * Arrêt du service (déploiement, `close`) : chaque salle d'échecs ENCORE OUVERTE ou en jeu est INTERROMPUE (un `cbr1` ABORT par salle misée : envoyé aux TV et déposé pour le collecteur, chaque
-     * blocage est rendu en entier), puis fermée (`roomGone`). Rend le nombre de salles interrompues. Une partie déjà finie a déjà son résultat : elle est seulement fermée.
+     * blocage est rendu en entier), puis fermée (`roomGone`) ; de même chaque salle de Quiz MISÉE (games-G5). Rend le nombre de salles interrompues. Une partie déjà finie a déjà son résultat : elle est
+     * seulement fermée.
      */
     fun finishGames(reason: String): Int {
         var n = 0
@@ -616,8 +650,26 @@ class PlayHub(
             }
             overflow.forEach { dropOverflow(it) }
         }
+        // Quiz misé (games-G5) : une salle MISÉE encore ouverte ou en jeu est interrompue de la même façon (résultat ABORT envoyé aux TV et déposé pour le collecteur : chaque blocage est rendu en entier) ;
+        // une salle LIBRE garde son comportement d'avant (elle tombe avec les connexions)
+        for (e in ArrayList(rooms.values)) {
+            if (e.room.stake == null) continue
+            val overflow = ArrayList<PlayConn>()
+            synchronized(e) {
+                val ongoing = e.room.phase() == ServerRoom.State.OPEN || e.room.phase() == ServerRoom.State.PLAYING
+                if (e.room.phase() != ServerRoom.State.GONE) deliver(e, e.room.close(reason, clock()), overflow)
+                if (ongoing) n++
+                rooms.remove(e.room.roomId); e.conns.values.forEach { it.entry = null }; e.conns.clear()
+            }
+            overflow.forEach { dropOverflow(it) }
+        }
         return n
     }
+
+    /** Parties MISÉES vivantes (Quiz et échecs, ni finies ni éteintes) : à vider avant un déploiement (l'arrêt les interrompt, mises rendues). */
+    fun stakedRoomCount(): Int =
+        rooms.values.count { it.room.stake != null && it.room.phase().let { p -> p == ServerRoom.State.OPEN || p == ServerRoom.State.PLAYING } } +
+            chessRooms.values.count { it.room.isStaked && it.room.phase().let { p -> p == ChessServerRoom.State.OPEN || p == ChessServerRoom.State.PLAYING } }
 
     private fun deliver(e: RoomEntry, outs: List<ServerRoom.Out>, overflow: MutableList<PlayConn>) {
         for (o in outs) {

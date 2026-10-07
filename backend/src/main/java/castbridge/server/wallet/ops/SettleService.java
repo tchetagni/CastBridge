@@ -28,6 +28,8 @@ import org.springframework.stereotype.Service;
  * en UNE transaction {@code SETTLE} (clé {@code settle:<rid>}) : chaque blocage listé doit exister, être ouvert, avoir la même monnaie, la même mise par siège et le même titulaire ;
  * {@link Settlement#check} impose Σ payé = Σ utilisé ; le non-utilisé est rendu. Un {@code ABORT} rend tout. Un blocage déjà rendu (échéance) refuse le résultat entier
  * ({@code RESULT_AFTER_REFUND}, journalisé). Idempotent : un rejeu du même résultat rend la même réponse sans rien reposer.
+ * <p>Jeux misés ({@link WalletPolicyService#GAMES}) : le résultat d'un jeu ne règle que des blocages faits POUR CE JEU ; sa FORME est vérifiée (un duel aux échecs, une table au Quiz), les frais de
+ * plateforme de sa politique sont prélevés sur la cagnotte d'une partie décisive, et une ligne par TV s'inscrit au journal des parties misées dans la transaction du règlement.
  */
 @Service
 @WalletModuleConfig.Enabled
@@ -85,7 +87,8 @@ public class SettleService {
             if (row.per() != null ? row.per() != r.per() : row.amount() % r.per() != 0) throw new LedgerException(WalletReason.BAD_TXN, "Mise par siège différente de celle du blocage : " + l.eid());
             long k = row.amount() / r.per();
             if (k < 1 || k > Txn.MAX_SEATS || row.amount() != r.per() * k) throw new LedgerException(WalletReason.BAD_TXN, "Blocage incohérent avec la mise par siège : " + l.eid());
-            // le JEU : un blocage fait pour un jeu ne se règle que par le résultat de CE jeu, et le résultat d'un jeu misé (échecs) ne règle que des blocages faits pour lui (jamais ceux du Quiz)
+            // le JEU : un blocage fait pour un jeu ne se règle que par le résultat de CE jeu, et le résultat d'un jeu misé (échecs, Quiz) ne règle que des blocages faits pour lui (jamais ceux d'un autre jeu,
+            // ni ceux d'avant, posés sans jeu donc sans les règles du jeu : sinon bloquer sans `game` contournerait l'échelle, l'essai et les plafonds)
             if (row.game() != null ? !row.game().equals(r.game()) : WalletPolicyService.GAMES.contains(r.game())) throw new LedgerException(WalletReason.BAD_TXN, "Jeu différent de celui du blocage : " + l.eid());
         }
         // 3. états : un rendu refuse tout ; un règlement par un autre résultat ferme le blocage
@@ -105,9 +108,10 @@ public class SettleService {
             lines.add(new Settlement.Line(l.eid(), l.id(), row.amount(), l.used(), l.pay()));
         }
         Settlement.check(lines, escrows);
-        // jeux misés (échecs) : la FORME du résultat est vérifiée avant de payer (défense en profondeur : un service compromis ne peut attribuer que les deux mises à l'une des deux TV, ou rendre à chacune la sienne)
+        // jeux misés (échecs, Quiz) : la FORME du résultat est vérifiée avant de payer (défense en profondeur : aux échecs un service compromis ne peut attribuer que les deux mises à l'une des deux TV, ou rendre
+        // à chacune la sienne ; au Quiz il ne peut que redistribuer les mises utilisées entre les TV de la table, jamais en créer ni payer une TV qui n'a pas misé)
         WalletPolicyService.GamePolicy gp = policies.game(r.game()).orElse(null);
-        if (gp != null) duelShape(r, rows, lines);
+        if (gp != null) shape(gp, r, rows, lines);
         // frais de plateforme (politique du jeu, 0 au lancement) : prélevés sur la cagnotte d'une partie DÉCISIVE seulement, jamais sur une nulle ni sur une interruption
         long totalUsed = lines.stream().mapToLong(Settlement.Line::used).sum();
         boolean decisive = r.kind() == Settlement.Kind.END && lines.stream().anyMatch(l -> l.pay() > l.used());
@@ -150,6 +154,38 @@ public class SettleService {
         return l.isEmpty() ? null : l.get(0);
     }
 
+    /** Au plus 8 TV autour d'une table du Quiz (une ligne par TV dans le résultat). */
+    static final int MAX_TABLE_TVS = 8;
+
+    /** La forme d'un résultat selon le jeu : un DUEL aux échecs, une TABLE au Quiz. Un jeu misé connu sans forme est un oubli de programmation : refusé, jamais réglé au hasard. */
+    private static void shape(WalletPolicyService.GamePolicy gp, PlayResultKeys.Result r, Map<String, Row> rows, List<Settlement.Line> lines) {
+        switch (gp.game()) {
+            case "chess" -> duelShape(r, rows, lines);
+            case "quiz" -> tableShape(gp, r, rows, lines);
+            default -> throw new LedgerException(WalletReason.BAD_TXN, "Jeu sans forme de règlement : " + gp.game());
+        }
+    }
+
+    /**
+     * Forme d'un résultat de TABLE (Quiz) : UNE ligne par TV (une TV n'apparaît qu'une fois : elle ne joue pas contre elle-même), au plus {@link #MAX_TABLE_TVS} TV ; chaque blocage porte de 1 à {@code seats}
+     * sièges (sa mise est un nombre entier de mises par siège : déjà imposé plus haut, revérifié ici contre le jeu) ; une partie interrompue ne déplace rien (imposé plus haut), avec une ou plusieurs TV ;
+     * une partie TERMINÉE engage au moins DEUX TV distinctes (utilisé > 0) : une TV seule ne joue contre personne et aucun jeton ne circule. Le partage lui-même est celui du service (cagnotte par siège,
+     * agrégée par TV) : l'API ne voit pas les points ; elle tient la conservation (Σ payé = Σ utilisé), l'entier de mises par ligne et « pas de gain sans mise utilisée » (contrôles génériques plus haut).
+     */
+    private static void tableShape(WalletPolicyService.GamePolicy gp, PlayResultKeys.Result r, Map<String, Row> rows, List<Settlement.Line> lines) {
+        for (Row row : rows.values()) {
+            long k = row.amount() / r.per();
+            if (k < 1 || k > gp.seats()) throw new LedgerException(WalletReason.BAD_TXN, "Au Quiz, 1 à " + gp.seats() + " sièges par TV : " + row.eid());
+        }
+        if (lines.size() > MAX_TABLE_TVS) throw new LedgerException(WalletReason.BAD_TXN, "Une table du Quiz n'a pas plus de " + MAX_TABLE_TVS + " TV");
+        Set<String> tvs = new HashSet<>();
+        for (Settlement.Line l : lines) if (!tvs.add(l.id())) throw new LedgerException(WalletReason.BAD_TXN, "Une TV ne joue pas contre elle-même");
+        if (r.kind() == Settlement.Kind.ABORT) return;
+        if (lines.stream().filter(l -> l.used() > 0).count() < 2) {
+            throw new LedgerException(WalletReason.BAD_TXN, "Une partie terminée engage au moins deux TV : aucun jeton ne circule dans une partie à une seule TV");
+        }
+    }
+
     /**
      * Forme d'un résultat de DUEL (échecs) : une mise par TV (un siège) ; une partie interrompue porte une ou deux TV (rien n'est utilisé) ; une partie terminée exactement deux TV DISTINCTES qui engagent
      * chacune leur mise entière, et la répartition est « les deux mises à l'une », « les deux mises à l'autre » ou « chacune reprend la sienne » : rien d'autre ne s'attribue.
@@ -179,15 +215,19 @@ public class SettleService {
         return out;
     }
 
-    /** Les lignes du journal d'un résultat de duel : une par TV, avec l'issue, l'adversaire et les frais (prélevés sur le gagnant). */
+    /**
+     * Les lignes du journal d'un résultat : une par TV, avec l'issue, l'adversaire (seulement quand la partie n'a que deux TV) et les frais (prélevés sur la plus grosse part, la même ligne que dans le grand
+     * livre). Issue d'une ligne : {@code ABORT} si le résultat est une interruption ; sinon {@code WIN} si la TV reçoit plus que ce qu'elle a engagé, {@code DRAW} si elle reprend exactement sa mise utilisée,
+     * {@code LOSS} si elle reçoit moins (aux échecs : gagnant 2 mises, nulle 1 mise, perdant 0).
+     */
     private static List<GameJournal.Row> journalRows(PlayResultKeys.Result r, List<Settlement.Line> lines, long fee, java.time.Instant at) {
         int top = 0;
         for (int i = 1; i < lines.size(); i++) if (lines.get(i).pay() > lines.get(top).pay()) top = i;
         List<GameJournal.Row> out = new ArrayList<>();
         for (int i = 0; i < lines.size(); i++) {
             Settlement.Line l = lines.get(i);
-            GameJournal.Outcome o = r.kind() == Settlement.Kind.ABORT ? GameJournal.Outcome.ABORT : l.pay() > l.used() ? GameJournal.Outcome.WIN : l.pay() == 0 ? GameJournal.Outcome.LOSS : GameJournal.Outcome.DRAW;
-            out.add(new GameJournal.Row(r.rid(), r.room(), r.game(), l.id(), lines.size() == 2 ? lines.get(1 - i).id() : null, r.cur().name(), r.per(), l.used(), l.pay(), i == top && o == GameJournal.Outcome.WIN ? fee : 0L, o, at));
+            GameJournal.Outcome o = r.kind() == Settlement.Kind.ABORT ? GameJournal.Outcome.ABORT : l.pay() > l.used() ? GameJournal.Outcome.WIN : l.pay() == l.used() ? GameJournal.Outcome.DRAW : GameJournal.Outcome.LOSS;
+            out.add(new GameJournal.Row(r.rid(), r.room(), r.game(), l.id(), lines.size() == 2 ? lines.get(1 - i).id() : null, r.cur().name(), r.per(), l.used(), l.pay(), i == top ? fee : 0L, o, at));
         }
         return out;
     }

@@ -212,8 +212,8 @@ object WalletHub {
     private const val BLOCKING_MS = 75_000L
 
     /** Bloque la mise d'une partie en ligne (option B : l'API signe un `cbe1` que la TV porte au service de jeu). Ensuite le solde est resynchronisé. */
-    fun escrowBlocking(cur: WalletCurrency, per: Long, game: String, idem: String): WalletResult<castbridge.core.wallet.ui.EscrowDone> =
-        blocking { client!!.escrow(cur, per, 1, idem, game) }.also { if (it is WalletResult.Ok) refresh(Trigger.AFTER_OPERATION) }
+    fun escrowBlocking(cur: WalletCurrency, per: Long, game: String, idem: String, seats: Int = 1): WalletResult<castbridge.core.wallet.ui.EscrowDone> =
+        blocking { client!!.escrow(cur, per, seats, idem, game) }.also { if (it is WalletResult.Ok) refresh(Trigger.AFTER_OPERATION) }
 
     /** Poste le résultat signé `cbr1` d'une partie misée (le service l'a signé, l'API règle). Ensuite le solde et l'historique (« Mes jetons ») sont resynchronisés. */
     fun settleBlocking(token: String): WalletResult<castbridge.core.wallet.ui.SettleDone> =

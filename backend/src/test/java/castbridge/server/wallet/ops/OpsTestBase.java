@@ -198,9 +198,16 @@ public abstract class OpsTestBase extends WalletTestBase {
     /** Une ligne de résultat : blocage, titulaire, utilisé, payé. */
     public record Line(String eid, String id, long used, long pay) {}
 
+    /**
+     * Le jeu des résultats des blocages posés SANS jeu (les usages d'avant : {@link #escrow}) : ni les échecs ni le Quiz, qui sont des jeux misés dont le résultat ne règle que des blocages faits pour eux
+     * (games-G2, games-G5). Ces résultats-là passent par les seuls contrôles génériques du règlement (signature, conservation, idempotence, plafonds), sans forme de jeu, sans frais ni journal.
+     */
+    public static final String LEGACY_GAME = "legacy";
+
+    /** Un résultat d'un blocage sans jeu (jeu {@link #LEGACY_GAME}, salle « ROOM1 »). */
     public static String cbr1(KeyPair signer, String rid, String cur, long per, String kind, List<Line> lines) {
         String kid = LicenseKeyring.kidOf(rawPublicBytes(signer));
-        StringBuilder sb = new StringBuilder("{\"kid\":\"").append(kid).append("\",\"rid\":\"").append(rid).append("\",\"room\":\"ROOM1\",\"game\":\"quiz\",\"cur\":\"").append(cur)
+        StringBuilder sb = new StringBuilder("{\"kid\":\"").append(kid).append("\",\"rid\":\"").append(rid).append("\",\"room\":\"ROOM1\",\"game\":\"").append(LEGACY_GAME).append("\",\"cur\":\"").append(cur)
                 .append("\",\"per\":").append(per).append(",\"kind\":\"").append(kind).append("\",\"at\":").append(NOW).append(",\"lines\":[");
         for (int i = 0; i < lines.size(); i++) {
             Line l = lines.get(i);

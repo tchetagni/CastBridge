@@ -9,7 +9,7 @@ import java.time.temporal.TemporalAdjusters;
 import java.util.Optional;
 
 /**
- * Les fenêtres calendaires des plafonds de parties GAGNÉES par identité (règle du propriétaire du 2026-10-04 pour le Défi, reprise pour les échecs en ligne : D-W22-22, D-W22-24) :
+ * Les fenêtres calendaires des plafonds de parties GAGNÉES par identité (règle du propriétaire du 2026-10-04 pour le Défi, reprise pour les échecs et le Quiz en ligne, comptée PAR JEU : D-W22-22, D-W22-24) :
  * jour 00:00-24:00, semaine lundi-dimanche, mois civil, en heure d'Africa/Douala (UTC+1, sans heure d'été). PUR : l'instant est passé par l'appelant. Même découpage que le compteur scellé de la TV
  * ({@code MillionsWinCaps}), qui est le modèle de ce code.
  */

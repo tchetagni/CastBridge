@@ -141,7 +141,7 @@ class AuditW2205EscrowTest extends OpsTestBase {
     }
 
     private String settleRoom(String rid, String room, String eid, Tv tv, long used, long pay) {
-        return sign(RESULT, "{\"kid\":\"" + resultKid() + "\",\"rid\":\"" + rid + "\",\"room\":\"" + room + "\",\"game\":\"quiz\",\"cur\":\"NDEM\",\"per\":10,\"kind\":\"END\",\"at\":" + NOW + ",\"lines\":[[\""
+        return sign(RESULT, "{\"kid\":\"" + resultKid() + "\",\"rid\":\"" + rid + "\",\"room\":\"" + room + "\",\"game\":\"" + LEGACY_GAME + "\",\"cur\":\"NDEM\",\"per\":10,\"kind\":\"END\",\"at\":" + NOW + ",\"lines\":[[\""
                 + eid + "\",\"" + tv.code() + "\"," + used + "," + pay + "]]}");
     }
 

@@ -3,7 +3,7 @@ package castbridge.core
 import castbridge.core.quiz.*
 import kotlin.test.*
 
-/** Boosts of the Millionnaire game (seconde chance, joker en plus, changer de question) and the « points de défi » unit. */
+/** Boosts of the Millionnaire game (seconde chance, joker en plus, changer de question) and the « Compétition à points » unit (points without value, never tokens). */
 class QuizBoostsTest {
     /** Test double: a fixed balance, a price of 10 for everything, a log of the debits. */
     private class Fake(var tokens: Long = 100, val on: Boolean = true) : QuizBoosts {
@@ -239,14 +239,19 @@ class QuizBoostsTest {
         f.tokens = 100; assertNull(r.hostBoost(Boost.SWAP_QUESTION)); assertNotEquals(id, g.question.id)
     }
 
-    @Test fun stakeUnitIsChallengePointsNeverTokens() {
+    @Test fun stakeUnitIsCompetitionPointsNeverTokens() {
         val w = ChallengePointsWallet()
-        assertEquals("points de défi", w.unit)
-        assertEquals("Défi en points", QuizRoom.Play.STAKE.label)
+        assertEquals("points", w.unit)
+        assertEquals("Compétition à points", QuizRoom.Play.STAKE.label, "la compétition entre téléphones d'une même TV se joue en POINTS (games-G5)")
         val r = room(NoBoosts); val a = r.join(r.code, "Awa").player!!
         @Suppress("UNCHECKED_CAST") val s = r.view(a.token)["settings"] as Map<String, Any?>
-        assertEquals("points de défi", s["unit"])
-        @Suppress("DEPRECATION") assertEquals("points de défi", VirtualWallet().unit)
-        assertFalse(QuizRoom.TOKENS_LABEL.lowercase().contains("jeton"))
+        assertEquals("points", s["unit"])
+        @Suppress("DEPRECATION") assertEquals("points", VirtualWallet().unit)
+        assertEquals("Points sans valeur", QuizRoom.TOKENS_LABEL)
+        for (t in listOf(QuizRoom.TOKENS_LABEL, QuizRoom.Play.STAKE.label, w.unit)) {
+            assertFalse(t.lowercase().contains("jeton"), t)
+            assertFalse(t.lowercase().contains("mise"), "« mise » est réservé aux parties en NDEM ou MBOKO : $t")
+            assertFalse(t.contains("NDEM") || t.contains("MBOKO"), t)
+        }
     }
 }

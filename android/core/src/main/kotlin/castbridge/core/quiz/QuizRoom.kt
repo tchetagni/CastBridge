@@ -33,7 +33,7 @@ class QuizRoom(
     val callMs: Long = 20_000,
     /** Ids already asked in this TV session (no repeat until the bank runs dry). */
     private val asked: MutableSet<String> = LinkedHashSet(),
-    /** Stakes of the « Défi en points » competition: points without value in the POC (see [WalletProvider]), never shop tokens. */
+    /** Stakes of the « Compétition à points »: points without value (see [WalletProvider]) between the phones of ONE TV: no token circulates, never shop tokens, never NDEM or MBOKO. */
     val wallet: WalletProvider = ChallengePointsWallet(),
     /** Paid conveniences of the Millionnaire game, only reachable from the TV (never from a phone). Free default. */
     val boosts: QuizBoosts = NoBoosts,
@@ -47,8 +47,11 @@ class QuizRoom(
     private val onNewGame: ((QuestionFilter) -> Unit)? = null,
 ) {
     enum class Mode(val label: String) { MILLIONAIRE("Millionnaire"), DUEL("Duel") }
-    /** How the game is played: free competition, competition with a (virtual) stake, or practice without anything at stake. */
-    enum class Play(val label: String) { FRIENDS("Compétition entre amis"), STAKE("Défi en points"), PRACTICE("Entraînement") }
+    /**
+     * How the game is played: free competition, « Compétition à points » (points without value shared by ranking among the phones of ONE TV: [STAKE], the name of the constant is kept), or practice without
+     * anything at stake. A game with a REAL stake (NDEM or MBOKO) only exists online, between TVs (docs/QUIZ.md, « Mises »): it never goes through this room.
+     */
+    enum class Play(val label: String) { FRIENDS("Compétition entre amis"), STAKE("Compétition à points"), PRACTICE("Entraînement") }
     enum class Stage { LOBBY, PLAYING, FINISHED, CLOSED }
     enum class Join { OK, BAD_CODE, FULL, CLOSED, BAD_NAME }
     enum class Act { OK, IGNORED, FORBIDDEN, BAD_REQUEST, UNKNOWN_PLAYER, CLOSED }
@@ -58,7 +61,8 @@ class QuizRoom(
         var streams = 0
         var left = false
     }
-    data class JoinResult(val status: Join, val player: Player? = null)
+    /** [note] : une phrase française plus précise que le message habituel du refus (Quiz misé : « cette TV n'a bloqué sa mise que pour 2 joueurs »), null = le message habituel. */
+    data class JoinResult(val status: Join, val player: Player? = null, val note: String? = null)
     private class Vote(val questionId: String, val deadline: Long, val votes: MutableMap<String, Int> = LinkedHashMap())
     private class Call(val questionId: String, val friendId: String, val deadline: Long)
 
@@ -67,7 +71,7 @@ class QuizRoom(
     var mode = Mode.MILLIONAIRE; private set
     var play = Play.FRIENDS; private set
     var filter = QuestionFilter.GENERAL; private set
-    /** Tokens each player stakes in [Play.STAKE]. */
+    /** Points each player puts in the pot in [Play.STAKE] (points without value). */
     var stake = 100L; private set
     private var gameNo = 0
     private var potGame: String? = null
@@ -577,8 +581,8 @@ class QuizRoom(
         const val PRESENCE_MS = 35_000L
         const val MAX_NAME = 16
         const val MIN_QUESTIONS = 5
-        /** Shown wherever tokens appear: they are a demo, without any value. */
-        const val TOKENS_LABEL = "Points de défi — sans valeur"
+        /** Shown wherever the points of the « Compétition à points » appear: points without any value, nothing to pay or to win (the name is kept: it is the old name of the label, they are no tokens). */
+        const val TOKENS_LABEL = "Points sans valeur"
 
         /** Trimmed, control characters removed, at most [MAX_NAME] characters; null if nothing is left. */
         fun cleanName(n: String?): String? = n?.filter { !it.isISOControl() && it != '<' && it != '>' }?.trim()

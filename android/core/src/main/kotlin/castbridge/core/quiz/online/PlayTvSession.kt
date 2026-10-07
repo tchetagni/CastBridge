@@ -27,8 +27,14 @@ class PlayTvSession(
     private val prover: ((String?, String) -> String?)? = null,
 ) {
     sealed class Intent {
-        data class Create(val name: String?, val mode: String?, val rentals: List<String> = emptyList()) : Intent()
-        data class Join(val code: String, val name: String?) : Intent()
+        /** [stake] + [escrow] : Quiz MISÉ (games-G5), le blocage `cbe1` de cette TV ; sans eux, salle libre (message d'avant). `toString` ne montre jamais le blocage. */
+        data class Create(val name: String?, val mode: String?, val rentals: List<String> = emptyList(), val stake: StakeSpec? = null, val escrow: String? = null) : Intent() {
+            override fun toString() = "Create(name=$name, mode=$mode, stake=$stake, escrow=${if (escrow == null) "-" else PlayRedact.REDACTED})"
+        }
+        /** [escrow] : le blocage de cette TV quand la salle est misée (la TV l'a bloqué après que le service lui a dit la mise). */
+        data class Join(val code: String, val name: String?, val escrow: String? = null) : Intent() {
+            override fun toString() = "Join(code=${PlayRedact.code(code)}, name=$name, escrow=${if (escrow == null) "-" else PlayRedact.REDACTED})"
+        }
         /**
          * Une salle de JEU à tour de rôle (échecs en ligne, games-G2) : le premier message est construit par l'appelant à partir de l'activation et de la preuve de possession (qui dépendent du ticket) ;
          * `create{game:"chess", chess, stake, escrow}` ou `join{code, escrow, spectate}`. Rejoué tel quel si la liaison tombe avant le `welcome` (comme une création de Quiz).
@@ -94,20 +100,24 @@ class PlayTvSession(
 
     private fun sendOpening(tkt: String?) {
         authority.hello(deviceHash, tkt)
-        when (val i = intent!!) {
-            is Intent.Create -> authority.create(i.name, i.mode, activation, i.rentals, proofFor(tkt))
-            is Intent.Join -> authority.joinRoom(i.code, i.name, deviceHash, activation, proof = proofFor(tkt))
+        sendIntent(intent!!, tkt)
+    }
+
+    private fun sendIntent(i: Intent, tkt: String?) {
+        when (i) {
+            is Intent.Create -> authority.create(i.name, i.mode, activation, i.rentals, proofFor(tkt), i.stake, i.escrow)
+            is Intent.Join -> authority.joinRoom(i.code, i.name, deviceHash, activation, proof = proofFor(tkt), escrow = i.escrow)
             is Intent.Game -> authority.sendOpening(i.open(activation, proofFor(tkt)))
         }
     }
 
     /**
      * Remplace l'ouverture à rejouer si la liaison tombe avant le `welcome` ET l'envoie tout de suite sur la liaison courante (même ticket, même connexion) : la TV qui apprend, par `STAKE_ESCROW_REQUIRED`, la mise d'une
-     * salle, bloque sa mise puis revient avec son blocage SANS redemander de ticket (le refus n'a rien consommé côté service).
+     * salle, bloque sa mise puis revient avec son blocage SANS redemander de ticket (le refus n'a rien consommé côté service). Échecs : [Intent.Game] ; Quiz misé : [Intent.Join] avec son blocage.
      */
-    fun reopenWith(next: Intent.Game) {
+    fun reopenWith(next: Intent) {
         intent = next
-        authority.sendOpening(next.open(activation, proofFor(openedTicket)))
+        sendIntent(next, openedTicket)
     }
 
     /** Branche un écouteur de TOUS les messages serveur (en plus du traitement de la session) : le client de jeu y lit accusés, résultat et refus. Un seul écouteur. */

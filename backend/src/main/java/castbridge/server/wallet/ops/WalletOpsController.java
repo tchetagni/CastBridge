@@ -142,7 +142,8 @@ public class WalletOpsController {
         if (b.path("activations").isArray()) for (JsonNode a : b.get("activations")) if (a.isTextual() && acts.size() < 4) acts.add(a.asText());
         long k = integer(b, "k");
         if (k < 1 || k > 8) throw new LedgerException(WalletReason.BAD_TXN, "Blocage : 1 à 8 sièges");
-        // `game` (facultatif, ex. « chess ») : les règles du jeu s'appliquent au blocage (échelle de mises, un siège, essai refusé, plafonds de parties gagnées) ; absent = Quiz, comme avant
+        // `game` (facultatif : « chess » ou « quiz ») : les règles du jeu s'appliquent au blocage (échelle de mises, sièges par TV : un aux échecs, 1 à 8 au Quiz, essai refusé, plafonds de parties gagnées) ;
+        // absent = usages d'avant, sans règles de jeu (un tel blocage ne se règle que par un résultat qui n'est pas celui d'un jeu misé)
         EscrowService.Issued i = escrows.lock(w.code(), w.row(), currency(b), integer(b, "per"), (int) k, text(b, "idem"), acts, text(b, "room"), text(b, "game"));
         Map<String, Object> out = new LinkedHashMap<>();
         out.put("cbe1", i.cbe1());

@@ -8,9 +8,23 @@ object PlayProtocol {
     val CAPS = listOf("play1", "sse", "longpoll", "relay", "spectate", "play-ticket", "chess")
     /** Capacité additive annoncée par `/play/.well-known/caps` SEULEMENT quand le service accepte les mises (clés du portefeuille et du résultat présentes, interrupteur actif). */
     const val CAP_STAKES = "stakes"
+    /**
+     * Capacité additive annoncée par `/play/.well-known/caps` (clé `quizStakes` et capacité du même nom) SEULEMENT quand ce service sait arbitrer un Quiz misé (games-G5) : mêmes conditions que
+     * [CAP_STAKES] (clés présentes, interrupteur allumé). Un service plus ancien ne l'annonce pas : la TV ne propose alors que « Libre » au Quiz, avec « Mises NDEM/MBOKO : mettez à jour ».
+     */
+    const val CAP_QUIZ_STAKES = "quizStakes"
     /** Jeux à tour de rôle servis par le service (salle `game:<id>`) ; `chess` aujourd'hui, les jeux de cartes viendront (DESIGN-JEUX-CARTES-ET-ECHECS-EN-LIGNE).*/
     const val GAME_CHESS = "chess"
     val GAMES = setOf(GAME_CHESS)
+    /**
+     * Le Quiz misé (games-G5) : ce n'est PAS une salle `game:<id>` (le Quiz garde son propre `create` sans clé `game`, inchangé pour une salle libre) ; `quiz` est le nom du jeu dans le blocage
+     * (`POST /api/v1/wallet/escrow`), dans le résultat signé `cbr1` et dans le journal des parties misées. Jamais dans [GAMES] : `create{game:"quiz"}` serait refusé `GAME_UNKNOWN`.
+     */
+    const val GAME_QUIZ = "quiz"
+    /** Sièges qui misent au plus par TV dans un Quiz misé (les téléphones d'une TV : 8 au plus, `RelayAuthority.MAX_PHONES`). */
+    const val MAX_STAKE_SEATS = 8
+    /** TV qui misent au plus dans un Quiz misé (une ligne du résultat `cbr1` par blocage : 16 au plus, la table compte 8 sièges). */
+    const val MAX_STAKE_TVS = 8
 
     /** Taille maximale d'un message client (octets UTF-8). */
     const val MAX_MESSAGE_BYTES = 2_048

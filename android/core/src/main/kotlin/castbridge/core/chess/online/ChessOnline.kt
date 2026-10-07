@@ -10,17 +10,18 @@ import castbridge.core.wallet.WalletView
 import castbridge.core.wallet.ui.GamePolicyView
 
 /**
- * Ce que le service dit de lui (`GET /play/.well-known/caps`, sans secret) : les échecs sont-ils ouverts, les mises acceptées. Remplace le drapeau `POST /api/chess/config?online=1` de la TV : la capacité
- * vient du service lui-même ; un service plus ancien (sans clé `chess`) dit « pas d'échecs ».
+ * Ce que le service dit de lui (`GET /play/.well-known/caps`, sans secret) : les échecs sont-ils ouverts, les mises acceptées, le Quiz misé arbitré. Remplace le drapeau `POST /api/chess/config?online=1` de la TV :
+ * la capacité vient du service lui-même ; un service plus ancien (sans clé `chess`) dit « pas d'échecs », sans clé `quizStakes` il dit « pas de Quiz misé » (games-G5 : la TV ne propose alors que « Libre »).
  */
-data class ChessServiceCaps(val chess: Boolean, val stakes: Boolean, val revocationsOff: Boolean = false) {
+data class ChessServiceCaps(val chess: Boolean, val stakes: Boolean, val revocationsOff: Boolean = false, val quizStakes: Boolean = false) {
     companion object {
         /** null = réponse illisible (service injoignable ou page d'un proxy) ; un service sans `chess` rend `chess = false` (TV plus récente que le service). */
         fun parse(body: String?): ChessServiceCaps? {
             val m = runCatching { JsonLite.obj(body.orEmpty()) }.getOrNull() ?: return null
             if (m["name"] != "play-v1") return null
             val caps = (m["caps"] as? List<*>).orEmpty()
-            return ChessServiceCaps(chess = m["chess"] == true || "chess" in caps, stakes = m["stakes"] == true || "stakes" in caps, revocationsOff = m["revocations"] == "off")
+            return ChessServiceCaps(chess = m["chess"] == true || "chess" in caps, stakes = m["stakes"] == true || "stakes" in caps, revocationsOff = m["revocations"] == "off",
+                quizStakes = m["quizStakes"] == true || "quizStakes" in caps)
         }
     }
 }
@@ -77,18 +78,32 @@ sealed class StakeAvailability {
         const val MSG_FROZEN = "Compte en vérification : contactez votre point focal. Parties libres seulement."
         const val MSG_GAME_OFF = "Mises aux échecs suspendues pour maintenance : parties libres seulement."
         const val MSG_NO_WALLET = "Portefeuille indisponible : parties libres seulement."
+        /** Quiz misé (games-G5) : service ou serveur sans la capacité `quizStakes`, ou TV ancienne : seule « Libre » est proposée, avec cette ligne. */
+        const val MSG_QUIZ_UPDATE = "Mises NDEM/MBOKO : mettez à jour"
+        const val MSG_QUIZ_OFF = "Mises au Quiz suspendues pour maintenance : parties libres seulement."
 
         /**
          * [edition] : celle que la TV connaît (jamais une preuve : l'API et le service la relisent) ; [caps] : ce que le service annonce ; [walletKnown] : un instantané signé existe ; [stakesN] / [stakesM] / [frozen] :
          * les drapeaux de CET instantané ; [policy] : la politique du jeu lue de l'API (null = serveur plus ancien : l'échelle de repli du propriétaire).
          */
-        fun of(edition: HostEdition, caps: ChessServiceCaps?, walletKnown: Boolean, stakesN: Boolean, stakesM: Boolean, frozen: Boolean, policy: GamePolicyView?): StakeAvailability {
+        fun of(edition: HostEdition, caps: ChessServiceCaps?, walletKnown: Boolean, stakesN: Boolean, stakesM: Boolean, frozen: Boolean, policy: GamePolicyView?): StakeAvailability =
+            decide(edition, if (caps != null && !caps.stakes) MSG_SERVICE_OFF else null, walletKnown, stakesN, stakesM, frozen, policy, MSG_GAME_OFF)
+
+        /**
+         * Les mises du QUIZ en ligne (games-G5) : mêmes règles que les échecs, avec la capacité `quizStakes` du service (absente, ou service injoignable à la sonde : « Mises NDEM/MBOKO : mettez à jour », seule
+         * « Libre » est proposée) et la politique du jeu `quiz` lue de l'API ([policyLoaded] : la politique a été lue ; si elle ne liste pas `quiz`, le serveur est plus ancien : même ligne).
+         */
+        fun ofQuiz(edition: HostEdition, caps: ChessServiceCaps?, walletKnown: Boolean, stakesN: Boolean, stakesM: Boolean, frozen: Boolean, policy: GamePolicyView?, policyLoaded: Boolean): StakeAvailability =
+            decide(edition, if (caps == null || !caps.quizStakes || (policyLoaded && policy == null)) MSG_QUIZ_UPDATE else null, walletKnown, stakesN, stakesM, frozen, policy, MSG_QUIZ_OFF)
+
+        /** [serviceBlock] : la raison, déjà écrite, pour laquelle le service ou le serveur ne sait pas miser à ce jeu (null = il sait) ; [gameOff] : la phrase quand la politique éteint le jeu. */
+        private fun decide(edition: HostEdition, serviceBlock: String?, walletKnown: Boolean, stakesN: Boolean, stakesM: Boolean, frozen: Boolean, policy: GamePolicyView?, gameOff: String): StakeAvailability {
             if (edition == HostEdition.TRIAL) return FreeOnly(MSG_TRIAL)
             if (edition == HostEdition.NONE) return FreeOnly(MSG_ACTIVATE)
-            if (caps != null && !caps.stakes) return FreeOnly(MSG_SERVICE_OFF)
+            if (serviceBlock != null) return FreeOnly(serviceBlock)
             if (!walletKnown) return FreeOnly(MSG_NO_WALLET)
             if (frozen) return FreeOnly(MSG_FROZEN)
-            if (policy != null && !policy.enabled) return FreeOnly(MSG_GAME_OFF)
+            if (policy != null && !policy.enabled) return FreeOnly(gameOff)
             val ndem = if (stakesN) policy?.stakesNdem ?: ChessStakeScale.NDEM else emptyList()
             val mboko = if (stakesM) policy?.stakesMboko ?: ChessStakeScale.MBOKO else emptyList()
             return if (ndem.isEmpty() && mboko.isEmpty()) FreeOnly(MSG_SERVICE_OFF) else Allowed(ndem, mboko)
@@ -99,8 +114,13 @@ sealed class StakeAvailability {
 /**
  * L'écran « Créer une partie en ligne » : libre / mise, monnaie, montant (parmi l'échelle), solde, avertissement. Un modèle PUR piloté par ‹ › : l'écran Canvas ne décide rien. Le choix libre est TOUJOURS
  * permis ; une mise exige que la monnaie ait des paliers et que le solde connu les couvre.
+ *
+ * Partagé avec le QUIZ en ligne (games-G5, alias [StakeChoice]) : [maxSeats] > 1 ajoute le choix du nombre de sièges de CETTE TV qui misent (une mise par siège, payée par le compte de la TV ; le blocage vaut
+ * `mise × sièges`), [shared] dit que la cagnotte se partage selon le classement (au lieu d'aller au gagnant d'un duel), [warning] est l'avertissement d'abandon propre au jeu. Aux échecs rien ne change
+ * (un siège, cagnotte du gagnant, avertissement des échecs).
  */
-class ChessStakeChoice(val availability: StakeAvailability, private val balanceNdem: Long?, private val balanceMboko: Long?) {
+class ChessStakeChoice(val availability: StakeAvailability, private val balanceNdem: Long?, private val balanceMboko: Long?, private val maxSeats: Int = 1, private val shared: Boolean = false,
+                       private val abandonWarning: String = ChessOnlineTexts.ABANDON_WARNING) {
     enum class Mode(val label: String) { FREE("Libre (sans mise)"), NDEM("Mise en NDEM"), MBOKO("Mise en MBOKO") }
 
     var mode: Mode = Mode.FREE; private set
@@ -125,17 +145,36 @@ class ChessStakeChoice(val availability: StakeAvailability, private val balanceN
 
     private fun balance(): Long? = when (mode) { Mode.NDEM -> balanceNdem; Mode.MBOKO -> balanceMboko; Mode.FREE -> null }
 
-    /** Le solde connu couvre-t-il la mise ? Sans solde connu on laisse l'API juger (elle dit « Solde insuffisant : N disponibles »). */
-    fun affordable(): Boolean { val s = stake() ?: return true; val b = balance() ?: return true; return b >= s.per }
+    /** Sièges de CETTE TV qui misent (1 aux échecs ; 1 à [maxSeats] au Quiz) : une mise par siège. */
+    var seats: Int = 1; private set
+
+    /** Plusieurs sièges sont-ils possibles (Quiz) ? Sinon la ligne « Joueurs ici qui misent » n'existe pas. */
+    val multiSeat: Boolean get() = maxSeats > 1
+
+    fun cycleSeats(d: Int) { if (maxSeats > 1) seats = (seats - 1 + d + maxSeats) % maxSeats + 1 }
+
+    /** Ce que le blocage met de côté : mise × sièges (null = partie libre). */
+    fun blocked(): Long? = stake()?.let { it.per * seats }
+
+    /** Le solde connu couvre-t-il ce qui sera bloqué (mise × sièges) ? Sans solde connu on laisse l'API juger (elle dit « Solde insuffisant : N disponibles »). */
+    fun affordable(): Boolean { val s = stake() ?: return true; val b = balance() ?: return true; return b >= s.per * seats }
 
     fun modeText(): String = mode.label
     fun amountText(): String = stake()?.let { "${WalletView.thousands(it.per)} ${it.cur} par joueur" } ?: "—"
+    fun seatsText(): String = if (seats == 1) "1 joueur de cette TV mise" else "$seats joueurs de cette TV misent"
     fun balanceLine(): String? = cur()?.let { c -> balance()?.let { "Votre solde : ${WalletView.thousands(it)} ${c.name}" } }
-    fun potLine(): String? = stake()?.let { "Cagnotte : ${WalletView.thousands(2 * it.per)} ${it.cur} pour le gagnant" }
+    /** Aux échecs : la cagnotte du gagnant ; au Quiz (cagnotte partagée) : ce qui est bloqué pour cette TV et la règle du partage. */
+    fun potLine(): String? = stake()?.let {
+        if (shared) "Mise bloquée : ${WalletView.thousands(it.per * seats)} ${it.cur} · cagnotte partagée selon le classement"
+        else "Cagnotte : ${WalletView.thousands(2 * it.per)} ${it.cur} pour le gagnant"
+    }
     /** Pourquoi les mises ne sont pas proposées, ou null. */
     fun freeOnlyReason(): String? = (availability as? StakeAvailability.FreeOnly)?.reason
-    fun warning(): String? = if (stake() != null) ChessOnlineTexts.ABANDON_WARNING else null
+    fun warning(): String? = if (stake() != null) abandonWarning else null
 }
+
+/** Le choix de mise est le même aux échecs et au Quiz (games-G5) : un seul modèle, deux jeux. */
+typealias StakeChoice = ChessStakeChoice
 
 /** Les textes des échecs en ligne, identiques sur la TV et dans les tests (jamais un code brut). */
 object ChessOnlineTexts {

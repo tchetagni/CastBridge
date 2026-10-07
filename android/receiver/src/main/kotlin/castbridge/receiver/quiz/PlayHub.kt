@@ -5,6 +5,8 @@ import android.net.ConnectivityManager
 import android.net.NetworkCapabilities
 import android.os.SystemClock
 import castbridge.core.chess.online.ChessServiceCaps
+import castbridge.core.chess.online.ChessStakeFlow
+import castbridge.core.chess.online.StakeAvailability
 import castbridge.core.connect.Routes
 import castbridge.core.net.HttpLite
 import castbridge.core.owner.GateState
@@ -14,8 +16,17 @@ import castbridge.core.quiz.online.OpenGate
 import castbridge.core.quiz.online.PlayActivation
 import castbridge.core.quiz.online.PlayErrors
 import castbridge.core.quiz.online.PlayProof
+import castbridge.core.quiz.online.PlayProtocol
 import castbridge.core.quiz.online.PlayRelay
+import castbridge.core.quiz.online.PlayRole
+import castbridge.core.quiz.online.PlayStakePlan
 import castbridge.core.quiz.online.PlayTvName
+import castbridge.core.quiz.online.QuizOnlineStake
+import castbridge.core.quiz.online.ServerMsg
+import castbridge.core.wallet.ui.WalletIdem
+import castbridge.core.wallet.ui.WalletSyncSchedule
+import castbridge.receiver.wallet.StakePrefsStore
+import castbridge.receiver.wallet.StakeWalletBridge
 import castbridge.core.relay.PipeNeed
 import castbridge.core.relay.PipeOutcome
 import castbridge.receiver.TvNet
@@ -84,6 +95,64 @@ object PlayHub {
 
     /** La ligne de la demande de tuyau en cours (« Demande d'Internet au téléphone… », ou pourquoi aucun téléphone ne peut), sinon null. */
     fun requestLine(): String? = TvNet.requestLine()
+
+    // ------------------------------------------------------------------ mises (Quiz misé, games-G5) : AUCUNE décision ici (cœur : `QuizOnlineStake`, `StakeAvailability.ofQuiz`, testés par JVM)
+
+    private const val STAKE_PREFS = "castbridge_quiz_online_stake"
+
+    /** L'enchaînement d'argent de la partie en cours de CETTE TV (null : partie libre, ou aucune partie). Survit à [stop] : le résultat d'une partie qu'on vient de quitter se règle quand même. */
+    @Volatile var stake: QuizOnlineStake? = null; private set
+
+    /** Les mises permises à CETTE TV pour le Quiz (jamais une preuve : l'API et le service relisent tout) ; sinon « Libre » seulement, avec la raison dite (essai, service ou serveur à mettre à jour…). */
+    fun stakeAvailability(): StakeAvailability {
+        val snap = WalletHub.snapshot()
+        val policy = WalletHub.policy
+        return StakeAvailability.ofQuiz(edition(), chessCaps, walletKnown = snap != null && WalletHub.activated() && WalletHub.flag(), stakesN = snap?.flags?.stakesN == true,
+            stakesM = snap?.flags?.stakesM == true, frozen = snap?.flags?.frozen == true, policy = policy?.games?.get(PlayProtocol.GAME_QUIZ), policyLoaded = policy != null)
+    }
+
+    /** Sièges de cette TV qui peuvent miser au plus : celui de la politique du jeu lue de l'API, sinon 8 (les téléphones d'une TV). */
+    fun maxStakeSeats(): Int = WalletHub.policy?.games?.get(PlayProtocol.GAME_QUIZ)?.seats ?: PlayProtocol.MAX_STAKE_SEATS
+    fun balanceNdem(): Long? = WalletHub.snapshot()?.n
+    fun balanceMboko(): Long? = WalletHub.snapshot()?.m
+
+    /** Le portefeuille et la politique du jeu, relus à l'ouverture de l'écran (l'API reste l'autorité de chaque blocage). */
+    fun prepareStakes(ctx: Context) {
+        WalletHub.init(ctx)
+        if (WalletHub.flag() && WalletHub.activated()) { WalletHub.loadPolicy { }; WalletHub.refresh(WalletSyncSchedule.Trigger.OPEN) }
+    }
+
+    private fun stakeStore(ctx: Context) = StakePrefsStore(ctx.applicationContext.getSharedPreferences(STAKE_PREFS, Context.MODE_PRIVATE))
+
+    /** Un enchaînement d'argent neuf pour la partie qui s'ouvre (blocage, résultat, règlement) ; réseau, mémoire persistante et horloge sont ceux de la TV. */
+    private fun newStake(ctx: Context): QuizOnlineStake =
+        QuizOnlineStake(ChessStakeFlow(StakeWalletBridge, stakeStore(ctx), newKey = { WalletIdem.newKey() }, game = PlayProtocol.GAME_QUIZ), clock = { ActivationCenter.now() },
+            async = { r -> Thread(r, "quiz-online-settle").apply { isDaemon = true }.start() }).also { stake = it }
+
+    /** Reposte les résultats signés gardés d'une partie précédente (règlements restés en attente faute de connexion). Bloquant : fil de travail. */
+    fun retryPendingSettlements(ctx: Context): Int {
+        val store = stakeStore(ctx)
+        if (store.pendingResults().isEmpty()) return 0
+        return ChessStakeFlow(StakeWalletBridge, store, newKey = { WalletIdem.newKey() }, game = PlayProtocol.GAME_QUIZ).retryPending().size
+    }
+
+    /** Pourquoi la partie n'a pas démarré quand l'hôte a demandé « Commencer » (« Une partie avec mise a besoin d'au moins deux TV… », « Aucun joueur connecté… ») ; effacé à la demande suivante. */
+    @Volatile var startRefusal: String? = null; private set
+    /** Quand l'hôte a demandé « Commencer » (horloge monotone) : seul un refus qui arrive dans les secondes qui suivent est un refus du départ (un autre « BAD_REQUEST », l'entrée refusée d'un téléphone, n'en est pas un). */
+    @Volatile private var startAskedAt = Long.MIN_VALUE / 2
+    private const val START_ANSWER_MS = 5_000L
+
+    /** Les messages du service qui comptent pour l'argent et pour le départ : le service assoit la TV avec son blocage (employé), refuse un blocage (oublié), signe le résultat (gardé puis réglé), refuse le départ (dit). */
+    private fun onServiceMessage(m: ServerMsg) {
+        if (m is ServerMsg.Error && m.reason == PlayProtocol.BAD_REQUEST && SystemClock.elapsedRealtime() - startAskedAt < START_ANSWER_MS) startRefusal = m.message.takeIf { it.isNotBlank() }
+        val st = stake ?: return
+        when (m) {
+            is ServerMsg.Welcome -> st.escrowUsed()
+            is ServerMsg.Result -> st.onResultMessage(m.token)
+            is ServerMsg.Error -> if (m.reason == castbridge.core.quiz.online.GameReason.STAKE_ESCROW_INVALID.name) st.escrowRejected()
+            else -> {}
+        }
+    }
 
     // ------------------------------------------------------------------ le service répond-il ?
 
@@ -210,6 +279,7 @@ object PlayHub {
 
     fun start(ctx: Context, intent: PlayIntent, onResult: (String?) -> Unit) {
         stop()   // annule aussi toute ouverture encore en cours (génération)
+        startRefusal = null
         val gen = gate.begin()
         worker.execute {
             try {
@@ -219,6 +289,18 @@ object PlayHub {
                     if (!gate.isCurrent(gen)) return@execute
                     if (o is PipeOutcome.Failed) { onResult(o.text); return@execute }
                 }
+                // Quiz misé (games-G5) : la mise se bloque AVANT toute ouverture (un refus du portefeuille n'ouvre rien : « Solde insuffisant : 120 NDEM disponibles », la TV recommence) ; le blocage vaut
+                // `mise × sièges qui misent` et se porte au service avec la création. Une partie libre n'a aucune mise.
+                var escrow: String? = null
+                var plan: PlayStakePlan? = null
+                if (intent is PlayIntent.CreateStaked) {
+                    val st = newStake(ctx)
+                    when (val l = st.lock(intent.plan)) {
+                        is ChessStakeFlow.Lock.Ok -> { escrow = l.escrow.cbe1; plan = intent.plan }
+                        is ChessStakeFlow.Lock.Failed -> { if (gate.isCurrent(gen)) onResult(l.text); return@execute }
+                    }
+                    if (!gate.isCurrent(gen)) return@execute
+                } else stake = null
                 val first = fetchTicket()
                 if (!gate.isCurrent(gen)) return@execute   // M-5 : « Retour » pendant l'attente du ticket : rien n'est ouvert, aucune salle fantôme
                 if (first !is PlayTicketReply.Ok) { onResult((first as PlayTicketReply.Refused).text); return@execute }
@@ -245,13 +327,16 @@ object PlayHub {
                     resumeTicket = { cache.reusable() },   // une reprise réutilise le ticket courant (< 9 min)
                     prover = { t, a -> signer?.let { PlayProof.build(it::sign, it.publicKeyBase64, t, a) } })   // H-3 : preuve de possession de la clé d'installation
                 val deviceHash = TvConnect.hash(ActivationCenter.deviceCode)
+                s.onServerMessage = { m -> onServiceMessage(m) }   // le blocage employé, le résultat signé, le refus du départ : avant le premier message
                 s.start(deviceHash, activation, when (intent) {
                     PlayIntent.Create -> PlayTvSession.Intent.Create(name = null, mode = "DUEL")   // la TV ne joue pas : elle héberge ; ses téléphones jouent par elle
+                    is PlayIntent.CreateStaked -> PlayTvSession.Intent.Create(name = null, mode = "DUEL", stake = intent.plan.spec, escrow = escrow)   // misé : un Duel, avec le blocage de CETTE TV
                     is PlayIntent.Join -> PlayTvSession.Intent.Join(RoomCode.normalize(intent.code) ?: intent.code, PlayTvName.of(android.os.Build.MODEL))   // C-1 : la TV envoie un nom
                 })
                 if (!gate.isCurrent(gen)) { runCatching { s.stop() }; return@execute }   // annulée pendant l'ouverture : on ferme ce qu'on vient d'ouvrir
                 session = s
-                relay = RelayAuthority(s, mono, extraWindowMs = { TvNet.playRules().answerExtraMs })
+                // une partie misée : au plus autant de téléphones ici que de mises bloquées (le service refuse le suivant de la même façon)
+                relay = RelayAuthority(s, mono, maxPhones = plan?.seats ?: RelayAuthority.MAX_PHONES, extraWindowMs = { TvNet.playRules().answerExtraMs })
                 ticking?.cancel(false)
                 var beat = 0
                 ticking = worker.scheduleWithFixedDelay({
@@ -274,10 +359,56 @@ object PlayHub {
         castbridge.core.connect.NetState.NONE -> if (routes.lastVia == Routes.Via.GATEWAY) gatewayProxy() else null
     }
 
+    /**
+     * Rejoint une salle MISÉE (le service a dit sa mise par `STAKE_ESCROW_REQUIRED`, la liaison est restée ouverte, rien n'a été consommé) : bloque la mise de [plan] (mise × sièges qui misent) puis revient avec
+     * son blocage sur la MÊME liaison et le MÊME ticket. Un refus du portefeuille ferme la liaison laissée ouverte et dit pourquoi ([onResult] reçoit le texte) ; réussi, [onResult] reçoit null et l'écran suit
+     * `session` comme pour toute ouverture.
+     */
+    fun joinWithStake(ctx: Context, code: String, plan: PlayStakePlan, onResult: (String?) -> Unit) {
+        val s = session ?: run { onResult(PlayErrors.GENERIC); return }
+        worker.execute {
+            try {
+                when (val l = newStake(ctx).lock(plan)) {
+                    is ChessStakeFlow.Lock.Failed -> { stop(); onResult(l.text) }
+                    is ChessStakeFlow.Lock.Ok -> {
+                        relay = RelayAuthority(s, mono, maxPhones = plan.seats, extraWindowMs = { TvNet.playRules().answerExtraMs })   // au plus autant de téléphones ici que de mises bloquées
+                        s.reopenWith(PlayTvSession.Intent.Join(RoomCode.normalize(code) ?: code, PlayTvName.of(android.os.Build.MODEL), escrow = l.escrow.cbe1))
+                        onResult(null)
+                    }
+                }
+            } catch (e: Exception) { onResult(PlayErrors.GENERIC) }
+        }
+    }
+
     /** Commandes de l'hôte : « Commencer » = duel, hôte automatique (le service enchaîne les questions), départ. */
     fun hostStart() {
         val a = session?.authority ?: return
+        startRefusal = null; startAskedAt = SystemClock.elapsedRealtime()
         a.act(null, "mode", null, null, "DUEL"); a.act(null, "autohost", null, null, null); a.act(null, "start", null, null, null)
+    }
+
+    /** L'état de la salle vu de cette TV (`OPEN`, `PLAYING`, `FINISHED`), ou null. */
+    @Suppress("UNCHECKED_CAST")
+    fun roomState(): String? = ((session?.authority?.view(null)?.get("room")) as? Map<String, Any?>)?.get("state") as? String
+
+    /**
+     * Quitter la partie. Une salle MISÉE encore en attente que son HÔTE quitte est d'abord ANNULÉE (`cancel`) : le service rend chaque blocage tout de suite et envoie le résultat, que la TV règle (quelques
+     * secondes d'attente, sur le fil de travail) ; sinon on s'en va simplement : quitter une partie COMMENCÉE fait perdre la mise (dit avant), une TV invitée qui part avant le départ voit son blocage rendu
+     * au règlement de la salle.
+     */
+    fun leave() {
+        val s = session
+        val st = stake
+        val a = s?.authority
+        val cancelable = st?.plan != null && s != null && s.seated && a?.role == PlayRole.HOST && roomState() == "OPEN"
+        if (!cancelable) { stop(); return }
+        worker.execute {
+            try {
+                a!!.gameAct("cancel", null, null)
+                val end = SystemClock.elapsedRealtime() + CANCEL_WAIT_MS
+                while (st!!.settlement is castbridge.core.chess.online.ChessOnlineGame.Settlement.None && SystemClock.elapsedRealtime() < end) Thread.sleep(50)
+            } finally { stop() }
+        }
     }
 
     /** Arrêt volontaire : retour au menu. */
@@ -292,6 +423,9 @@ object PlayHub {
     fun statusJson(url: String): String {
         val r = relay ?: return """{"open":false}"""
         val code = session?.authority?.code?.let { RoomCode.display(it) } ?: ""
-        return """{"open":true,"code":"$code","stage":"LOBBY","mode":"DUEL","players":${r.phoneCount()},"max":${RelayAuthority.MAX_PHONES},"url":${castbridge.core.tv.ReceiverServer.q(url)},"online":true}"""
+        val max = stake?.plan?.seats ?: RelayAuthority.MAX_PHONES   // une partie misée : autant de téléphones que de mises bloquées
+        return """{"open":true,"code":"$code","stage":"LOBBY","mode":"DUEL","players":${r.phoneCount()},"max":$max,"url":${castbridge.core.tv.ReceiverServer.q(url)},"online":true}"""
     }
+
+    private const val CANCEL_WAIT_MS = 4_000L
 }

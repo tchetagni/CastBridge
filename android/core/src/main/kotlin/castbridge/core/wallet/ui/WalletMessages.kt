@@ -32,9 +32,9 @@ object WalletMessages {
         "BAD_TXN" to "Opération invalide : vérifiez les valeurs saisies",
         "ESCROW_UNKNOWN" to "Mise inconnue",
         "ESCROW_CLOSED" to "Mise déjà réglée ou rendue",
-        // échecs en ligne avec mise (games-G2)
+        // parties en ligne avec mise : échecs (games-G2), Quiz (games-G5) ; le serveur dit lui-même le jeu (« aux échecs », « au Quiz »), ce texte n'est que le repli
         "TRIAL_FREE_ONLY" to "Version d'essai : parties libres seulement, sans mise",
-        "STAKE_NOT_OFFERED" to "Cette mise n'est pas proposée aux échecs : choisissez un des montants de la liste",
+        "STAKE_NOT_OFFERED" to "Cette mise n'est pas proposée pour ce jeu : choisissez un des montants de la liste",
         "STAKE_WIN_CAP" to "Limite de parties gagnées atteinte : la prochaine partie avec mise s'ouvrira plus tard",
     )
     private val LATER = setOf("RATE_LIMIT", "CONVERT_SUSPENDED", "TRANSFER_SUSPENDED", "LOOKUP_LIMIT", "CODE_LIMIT")
