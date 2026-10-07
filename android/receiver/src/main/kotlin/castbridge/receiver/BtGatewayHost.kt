@@ -6,6 +6,7 @@ import android.bluetooth.BluetoothServerSocket
 import android.content.Context
 import android.util.Log
 import castbridge.core.gateway.Entry
+import castbridge.core.gateway.GatewayService
 import castbridge.core.gateway.Gw
 import castbridge.core.gateway.Mux
 import castbridge.core.tv.ApiReply
@@ -22,9 +23,15 @@ import java.util.UUID
  * Internet through the phone over Bluetooth: the phone app connects to this RFCOMM service and becomes the TV
  * app's gateway; the TV app's own network calls (quiz questions, updates, downloads) go through the local SOCKS5
  * proxy [PORT] while a phone is attached. It does not change the TV's system-wide connection.
+ *
+ * The service has its own UUID ([Gw.SERVICE_UUID], …0007). R-28-LEGACY-TV, for two TV versions: an OLD phone still asks for the UUID the gateway used to share with the SSH tunnel
+ * (…0002, [Gw.LEGACY_SERVICE_UUID]); the TV listens there too, but only while its SSH over Bluetooth is not wanted ([sshBluetoothWanted], [sshBluetoothChanged]), so that UUID never
+ * has two owners (castbridge.core.gateway.GatewayService).
  */
 @SuppressLint("MissingPermission")
-class BtGatewayHost(private val ctx: Context, private val guard: PinGuard, private val trusted: (String) -> Boolean = { false }, private val status: (String?) -> Unit) {
+class BtGatewayHost(private val ctx: Context, private val guard: PinGuard, private val trusted: (String) -> Boolean = { false }, private val status: (String?) -> Unit,
+                    /** Is the TV's SSH over Bluetooth wanted (it owns …0002 from before its listener opens until after it closes)? */
+                    private val sshBluetoothWanted: () -> Boolean = { false }) {
     /** Address of the phone whose link is being attached on this thread (the paired device of the socket: what "trusted" is checked on). */
     private val peerAddress = ThreadLocal<String?>()
     private val entry: Entry = Entry({ pin ->
@@ -32,32 +39,53 @@ class BtGatewayHost(private val ctx: Context, private val guard: PinGuard, priva
         if (pin == castbridge.core.trust.TvAuth.NO_PIN) peerAddress.get()?.let(trusted) == true
         else guard.check("bt-gateway", pin) == PinGuard.Result.OK
     }, PORT) { m -> Log.i(TAG, m); refresh() }
-    @Volatile private var server: BluetoothServerSocket? = null
+    /** One server socket per UUID the gateway listens on (see [castbridge.core.gateway.GatewayService.tvListens]); guarded by `this`. */
+    private val servers = HashMap<String, BluetoothServerSocket>()
     @Volatile private var running = false
 
-    fun start() {
+    @Synchronized fun start() {
         if (running) return
-        val ad = ctx.getSystemService(BluetoothManager::class.java)?.adapter ?: return
+        if (ctx.getSystemService(BluetoothManager::class.java)?.adapter == null) return
         try {
             entry.startSocks()
-            val ss = ad.listenUsingRfcommWithServiceRecord("CastBridge Internet", UUID.fromString(Gw.SERVICE_UUID))
-            server = ss; running = true
-            Thread({
-                while (running) {
-                    val sock = try { ss.accept() } catch (e: IOException) { break }
-                    val peer = runCatching { sock.remoteDevice.name ?: sock.remoteDevice.address }.getOrDefault("téléphone")
-                    val peerAddr = runCatching { sock.remoteDevice.address }.getOrNull()
-                    Thread({
-                        val startedAt = System.currentTimeMillis()
-                        var mux: Mux? = null
-                        try { mux = Mux(sock.inputStream, sock.outputStream); peerAddress.set(peerAddr); entry.attach(mux, peer) }
-                        catch (e: Exception) { Log.w(TAG, "gateway link: ${e.javaClass.simpleName}") }
-                        finally { runCatching { sock.close() }; refresh(); mux?.let { m -> runCatching { sessionEnded(startedAt, m) } } }
-                    }, "gw-link").apply { isDaemon = true; start() }
-                }
-            }, "gw-accept").apply { isDaemon = true; start() }
+            listen(Gw.SERVICE_UUID)                  // the gateway's own service: if it cannot open there is no gateway, and nothing is marked as running (a later start() retries)
             refresh()
-        } catch (e: Exception) { Log.w(TAG, "gateway start", e); entry.stop() }
+        } catch (e: Exception) { Log.w(TAG, "gateway start", e); entry.stop(); return }
+        sshBluetoothChanged(sshBluetoothWanted())    // R-28-LEGACY-TV: the old UUID too, unless the SSH over Bluetooth owns it
+    }
+
+    /** Opens the RFCOMM service [uuid] and accepts the phones that connect to it, until that server socket is closed. Throws if the service cannot be opened. */
+    private fun listen(uuid: String) {
+        val ad = ctx.getSystemService(BluetoothManager::class.java)?.adapter ?: throw IOException("Bluetooth indisponible")
+        val name = if (uuid == Gw.SERVICE_UUID) "CastBridge Internet" else "CastBridge Internet (ancien)"
+        val ss = ad.listenUsingRfcommWithServiceRecord(name, UUID.fromString(uuid))
+        servers[uuid] = ss; running = true
+        Thread({
+            while (running) {
+                val sock = try { ss.accept() } catch (e: IOException) { break }
+                val peer = runCatching { sock.remoteDevice.name ?: sock.remoteDevice.address }.getOrDefault("téléphone")
+                val peerAddr = runCatching { sock.remoteDevice.address }.getOrNull()
+                Thread({
+                    val startedAt = System.currentTimeMillis()
+                    var mux: Mux? = null
+                    try { mux = Mux(sock.inputStream, sock.outputStream); peerAddress.set(peerAddr); entry.attach(mux, peer) }
+                    catch (e: Exception) { Log.w(TAG, "gateway link: ${e.javaClass.simpleName}") }
+                    finally { runCatching { sock.close() }; refresh(); mux?.let { m -> runCatching { sessionEnded(startedAt, m) } } }
+                }, "gw-link").apply { isDaemon = true; start() }
+            }
+        }, "gw-accept-${uuid.takeLast(4)}").apply { isDaemon = true; start() }
+    }
+
+    /**
+     * R-28-LEGACY-TV: the TV's SSH over Bluetooth is now [wanted] or no longer wanted. The old UUID (…0002) is the SSH tunnel's while it is, so the gateway gives it up first
+     * (called BEFORE the SSH listener opens) and takes it back once the SSH is off. A link already accepted on it is not cut.
+     */
+    @Synchronized fun sshBluetoothChanged(wanted: Boolean) {
+        if (!running) return                                    // start() reads the state itself
+        val legacy = Gw.LEGACY_SERVICE_UUID in GatewayService.tvListens(wanted)
+        val open = servers[Gw.LEGACY_SERVICE_UUID]
+        if (!legacy && open != null) { servers.remove(Gw.LEGACY_SERVICE_UUID); runCatching { open.close() }; Log.i(TAG, "old gateway service closed: the SSH over Bluetooth owns it") }
+        else if (legacy && open == null) try { listen(Gw.LEGACY_SERVICE_UUID); Log.i(TAG, "old gateway service open again") } catch (e: Exception) { Log.w(TAG, "old gateway service: ${e.javaClass.simpleName}") }
     }
 
     val connected get() = entry.connected
@@ -75,7 +103,7 @@ class BtGatewayHost(private val ctx: Context, private val guard: PinGuard, priva
             "Reçu du téléphone : ${rx / 1024} ko · envoyé : ${tx / 1024} ko")
     }
 
-    fun stop() { running = false; runCatching { server?.close() }; entry.stop() }
+    @Synchronized fun stop() { running = false; servers.values.forEach { s -> runCatching { s.close() } }; servers.clear(); entry.stop() }
 
     private fun refresh(): Unit = run {
         if (entry.connected && connectedSince == 0L) connectedSince = System.currentTimeMillis()

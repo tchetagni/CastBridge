@@ -136,6 +136,30 @@ Défaut mesuré (S21+ Android 15 ↔ TV 0.13.3, Wi-Fi du téléphone coupé) : u
 - Tests JVM : `BtMuxTunnelTest` (faux transport RFCOMM : ouverture lente, `already opened`, 3 échecs puis pause, coupure en pleine réponse, 4 requêtes simultanées, TV qui ferme à 30 s (mise à l'échelle), garde-vivant, TV ancienne, téléphone ancien, gros fichier + petite requête en parallèle).
 - **À valider sur matériel** : que le S21+ ouvre bien le service v2 sans « already opened » ; la durée réelle de libération d'une liaison (1,5 s suffit-il ?) ; que 15 s de PING évite la fermeture à 30 s ; la télécommande sur Bluetooth seul (latence, reprise). Résultat dans le cloud : `BtMuxTunnelTest` 12/12 et `BtApiTunnelTest` 12/12 verts (le `gradle :core:test` complet n'a pas pu être lancé : `kotlin-test` non téléchargeable (429) ; tests compilés avec le compilateur Kotlin et un mini-shim `kotlin.test`). Code Android (`BtSshGateway.kt`, `BtApiControl.kt`, `RemoteController.kt`) non compilé dans le cloud.
 
+
+## Service « CastBridge Internet » (passerelle) et numéros de services (R-28)
+Constat de l'inventaire du relais (I-1) : la passerelle Internet (« Partager l'Internet du téléphone », protocole CBG1) et le tunnel SSH étaient sur le **même UUID `…0002`**. La TV
+démarrait les deux (la passerelle à chaque démarrage, le SSH quand il est activé) : un téléphone qui demandait l'un pouvait tomber sur l'autre. La documentation plaçait même la
+passerelle sur `…0001`. Désormais **une seule table** (`BtProtocol.SERVICES`, `C/tv/BtProtocol.kt`) : `…0001` fichiers et contrôle, `…0002` SSH, `…0003` API, `…0004` API v2, `…0005`
+propriétaire, `…0006` réservé (synchronisation W7, non codée), `…0007` **passerelle Internet** (nom SDP « CastBridge Internet »). Un nouveau service prend le numéro libre suivant **dans la
+table d'abord**.
+- **TV (`BtGatewayHost`).** Écoute toujours sur `…0007`. Elle écoute aussi sur l'ancien `…0002` (nom SDP « CastBridge Internet (ancien) »), **mais seulement tant que son SSH par
+  Bluetooth n'est pas voulu** : `SshControl` prévient la passerelle AVANT d'ouvrir son écoute (la passerelle ferme alors l'ancien service) et APRÈS l'avoir fermée (elle le rouvre) ; l'UUID
+  `…0002` n'a donc jamais deux propriétaires. Une liaison déjà acceptée n'est pas coupée. Règle pure : `GatewayService.tvListens`.
+- **Téléphone (`BtGatewayService`).** Demande `…0007` d'abord. Si cela échoue et que la TV n'annonce pas ce service (cache SDP d'Android), il attend **1,5 s** (la pile Bluetooth peut
+  tenir encore la tentative ratée) puis essaie l'ancien `…0002` ; si celui-ci répond, il retient « TV ancienne » **10 min** (même règle que le tunnel API v2) et va droit à `…0002`, puis
+  redemande `…0007` (une TV mise à jour a pu apparaître). Une TV qui annonce `…0007` n'est **jamais** interrogée sur `…0002` : sur une TV à jour, ce serait son SSH, qui recevrait le HELLO
+  et le PIN du téléphone. Règle pure : `GatewayService.PhoneChoice`.
+- **Limite connue.** Ancien téléphone + TV neuve + SSH par Bluetooth allumé : l'ancien téléphone tombe sur le tunnel SSH et échoue (« Liaison perdue… nouvel essai »). Il faut éteindre le SSH
+  ou mettre le téléphone à jour. Téléphone neuf + TV ancienne : comme avant (l'ancienne TV avait déjà la collision).
+- **Retrait.** Côté TV : après **deux versions publiées** de CastBridge-TV portant `…0007`, retirer les repères `R-28-LEGACY-TV` (l'écoute de l'ancien `…0002` dans `BtGatewayHost`, le crochet
+  `SshControl.onBluetoothBridge`, la branche héritée de `GatewayService.tvListens`). Côté téléphone : les repères `R-28-OLD-TV` (le repli de `GatewayService.PhoneChoice`) restent tant qu'il y a
+  des TV anciennes sur le terrain (les TV se mettent à jour à la main) ; le propriétaire décide.
+- Tests JVM : `BtServicesTest` (aucun doublon d'UUID ni de numéro, préfixe + numéro, constantes du code = table, aucun UUID écrit hors de la table, noms SDP présents dans le receiver),
+  `GatewayServiceTest` (TV : l'ancien UUID seulement SSH éteint ; téléphone : ordre, pause, mémoire, jamais l'ancien UUID pour une TV à jour, arrêt demandé).
+- **À valider sur matériel** : un téléphone neuf avec une TV ancienne (repli sur `…0002`, durée de l'échec de `…0007`) ; un ancien téléphone avec une TV neuve, SSH éteint puis allumé ; que
+  la pile du S21+ n'enregistre pas deux fois le même UUID pendant la bascule.
+
 ## Limites connues
 - API par Bluetooth active par défaut : un appareil appairé (donc approuvé à l'appairage sur la TV) qui connaît le PIN peut tout faire par ce canal, comme par le Wi-Fi ; couper l'interrupteur pour ne garder que les téléphones de confiance.
 - Jeton en clair sur le Wi-Fi local (HTTP) : rejouable par quelqu'un sur le même réseau pendant sa durée de vie.

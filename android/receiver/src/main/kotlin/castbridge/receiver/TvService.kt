@@ -378,7 +378,8 @@ class TvService : Service(), Device {
             onSessions = { n ->
                 setStatus("4-ssh-n", if (n > 0) (if (n == 1) "SSH : 1 connexion active" else "SSH : $n connexions actives") else null)
                 icons.setSsh(n, ssh?.btSessions() ?: 0); iconsChanged()
-            })
+            },
+            onBluetoothBridge = { wanted -> gateway?.sshBluetoothChanged(wanted) })      // R-28: the UUID …0002 is the SSH tunnel's while it is on
         updater = UpdateInstaller(this, { registry.volumes().filter { it.kind != VolumeKind.SAF }.map { it.dir } },
             launch = { i, what -> launchScreen(i, what) }) { m -> setStatus("5-update", m); notice(m) }
         onPermissionsReady()                                    // Bluetooth starts if its permission was granted earlier
@@ -620,7 +621,7 @@ class TvService : Service(), Device {
         startOwnerChannel()
         bt?.start()
         btApi?.start()
-        gateway = gateway ?: BtGatewayHost(this, guard, ::btTrusted, ::gatewayStatus)
+        gateway = gateway ?: BtGatewayHost(this, guard, ::btTrusted, ::gatewayStatus) { ssh?.bluetoothWanted == true }
         gateway?.start()
         // Wi-Fi Direct is opt-in (MENU): creating a group can disturb the TV's own Wi-Fi connection.
         if (prefs.getBool("wd_enabled", false) && wd?.hasPermission() == true) wd?.start()
@@ -650,8 +651,9 @@ class TvService : Service(), Device {
                 bg.execute {
                     try {
                         val wasDirect = netDirectMs != null; val wasGateway = netGatewayMs != null; val first = netCheckedAt == 0L
-                        // The probe (a request to a third party) is never periodic by default: only on a manual test, when the user turned « netProbe » on,
-                        // or when the remote-assistance tunnel is enabled (terms accepted) and needs to know whether Internet is reachable.
+                        // The probe (a request to a third party) is not sent by default: only on a manual test, when the user turned « netProbe » on,
+                        // or once the remote-assistance tunnel's terms are accepted (it needs to know whether Internet is reachable). In those last two cases it IS periodic:
+                        // one round per tick (60 s while Internet works, 10-30 s while it does not), also through the phone's gateway when one is connected.
                         val manual = netManual; netManual = false
                         val probe = manual || prefs.netProbe || runCatching { TunnelHub.termsAccepted(this@TvService) }.getOrDefault(false)
                         val link = TvNetDiag.linkKind(this@TvService)

@@ -101,7 +101,7 @@ class ReportHandoffClient(private val base: String, private val credential: Stri
     }
 
     private fun call(method: String, route: String): String? {
-        val c = URL(base.trimEnd('/') + route).openConnection() as HttpURLConnection
+        val c = castbridge.core.net.BoundRoute.open(URL(base.trimEnd('/') + route)) as HttpURLConnection   // R-29: the manual Wi-Fi Direct screen reaches the TV by its group's route, not by a process-wide binding
         return try {
             c.requestMethod = method; c.connectTimeout = 4000; c.readTimeout = 10_000
             castbridge.core.trust.TvCredential.apply(c, credential)

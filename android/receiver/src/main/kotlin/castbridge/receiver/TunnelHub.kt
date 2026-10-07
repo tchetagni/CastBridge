@@ -46,8 +46,11 @@ import java.net.Socket
  */
 object TunnelHub {
     private const val TAG = "CastBridgeTunnel"
-    /** Where the tunnel-only sshd of the TV listens (loopback). NOT 2222: that is the user's SSH feature ([TvSshServer.DEFAULT_PORT]) and both can run at once. The server only knows the REMOTE port. */
-    const val LOCAL_PORT = 2223
+    /**
+     * Where the tunnel-only sshd of the TV listens (loopback). NOT 2222: that is the user's SSH feature ([TvSshServer.DEFAULT_PORT]) and both can run at once. NOT 2223 either (R-28, inventory I-8):
+     * that is the SSH of the development app « CastBridge Dev » (DevService.PORT, all interfaces) on the same device, whichever started second could not listen. The server only knows the REMOTE port.
+     */
+    const val LOCAL_PORT = 2224
 
     private lateinit var app: Context
     @Volatile private var ready = false

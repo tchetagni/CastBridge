@@ -363,7 +363,7 @@ Termux / ordinateur --TCP--> téléphone 127.0.0.1:2222 --RFCOMM « CastBridge S
 ordinateur Linux (ProxyCommand) --------------RFCOMM « CastBridge SSH »--> TV --TCP--> 127.0.0.1:2222
 ```
 
-- **TV** : quand SSH est activé, un **second service RFCOMM** « CastBridge SSH » (UUID `7c5e3b9a-4d2f-4c61-9b0e-cb0000000002`, distinct du service fichiers `…0001`)
+- **TV** : quand SSH est activé, un **second service RFCOMM** « CastBridge SSH » (UUID `7c5e3b9a-4d2f-4c61-9b0e-cb0000000002`, distinct du service fichiers `…0001` ; **le SSH seul** y est servi depuis R-28 : la passerelle Internet l'avait en commun, elle est passée sur `…0007`, voir § 11)
   accepte les appareils **appairés** ; chaque connexion ouvre une connexion TCP vers `127.0.0.1:2222` et relaie dans les deux sens (tampons de 32 Ko, deux fils,
   fermeture des deux côtés dès que l'un se termine), **2 connexions simultanées au plus**. Le service s'arrête avec SSH (désactivation ou délai d'inactivité).
   Bandeau sur l'écran d'attente : « SSH par Bluetooth : prêt » / « connecté (nom de l'appareil) » ; `GET /api/ssh` -> `bluetooth: {listening, active:[noms]}`.
@@ -400,9 +400,29 @@ curl / app téléphone --TCP--> 127.0.0.1:18765 --RFCOMM « CastBridge API »-->
                               (téléphone : passerelle ; Mac : cbt-rfcomm proxy ; Linux : bt-ssh-bridge.py --service api)
 ```
 
-**Services RFCOMM de la TV** (sockets sécurisés, appareils appairés seulement) : `…0001` fichiers (CBT1/CBTN/CBTH/CBTR/passerelle), `…0002` SSH (octets SSH bruts),
-`…0003` **API** (UUID `7c5e3b9a-4d2f-4c61-9b0e-cb0000000003`, nom SDP « CastBridge API »). Le service API répond d'abord **1 octet d'état** (0 = ok, 1 trop de liaisons,
-2 appareil non autorisé, 3 serveur local arrêté, 4 erreur interne), puis relaie du HTTP brut. Le service SSH reste sans octet d'état (compatibilité avec `ssh`, `bt-ssh-bridge.py`).
+**Services RFCOMM de la TV** (sockets sécurisés, appareils appairés seulement). Tous ont l'UUID `7c5e3b9a-4d2f-4c61-9b0e-cb00000000` + deux chiffres. **La table unique est
+`BtProtocol.SERVICES`** (`C/tv/BtProtocol.kt`) ; le test `BtServicesTest` interdit deux services sur un même UUID, un UUID du préfixe écrit ailleurs que dans la table et le canal
+propriétaire, et un service absent de la table.
+
+| UUID | Nom SDP | Usage |
+|---|---|---|
+| `…0001` | CastBridge TV | fichiers et contrôle : CBT1, CBTN, CBTH, CBTP, CBTR |
+| `…0002` | CastBridge SSH | SSH (octets SSH bruts) : **le SSH seul** depuis R-28 |
+| `…0003` | CastBridge API | tunnel de l'API HTTP, une liaison par connexion |
+| `…0004` | CastBridge API v2 | le même tunnel sur UNE liaison partagée (trames) |
+| `…0005` | CastBridge Owner | canal propriétaire CBTO (activation, ordres signés) |
+| `…0006` | (aucun) | **réservé** : canal de synchronisation de W7 (conçu, pas codé) |
+| `…0007` | CastBridge Internet | passerelle Internet CBG1 (« Partager l'Internet du téléphone ») |
+
+Le service API (`…0003`, UUID `7c5e3b9a-4d2f-4c61-9b0e-cb0000000003`) répond d'abord **1 octet d'état** (0 = ok, 1 trop de liaisons, 2 appareil non autorisé, 3 serveur local arrêté,
+4 erreur interne), puis relaie du HTTP brut. Le service SSH reste sans octet d'état (compatibilité avec `ssh`, `bt-ssh-bridge.py`).
+
+**R-28 : la passerelle Internet n'est plus sur `…0002`.** Elle partageait cet UUID avec le SSH : la TV écoutait sur les deux (la passerelle à chaque démarrage, le SSH quand il était
+activé) et un téléphone qui demandait l'un pouvait tomber sur l'autre. Elle a maintenant le sien, `…0007`. Compatibilité : côté TV pendant **deux versions** de CastBridge-TV (repères
+`R-28-LEGACY-TV` dans le code, à retirer ensuite) : la TV écoute sur `…0007` toujours, et sur l'ancien `…0002` **seulement tant que son SSH par Bluetooth est éteint** (elle le ferme
+avant d'ouvrir celui du SSH et le rouvre quand le SSH s'arrête) ; côté téléphone (repères `R-28-OLD-TV`, à garder tant qu'il reste des TV anciennes) il demande `…0007` d'abord et n'essaie `…0002` que si la TV
+n'annonce pas `…0007` (TV ancienne, mémorisée 10 min). Limite : un ancien téléphone ne partage pas son Internet avec une TV neuve dont le SSH par Bluetooth est allumé. Détail : `docs/BT-PLUG-AND-PLAY.md`,
+« Service CastBridge Internet ».
 
 **Ports locaux sur le téléphone** : SSH `127.0.0.1:2222`, API `127.0.0.1:18765`. L'API n'est **jamais** exposée sur le réseau (seul le SSH offre l'option « réseau local »).
 

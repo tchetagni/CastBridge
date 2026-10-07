@@ -4,8 +4,10 @@ import castbridge.core.owner.OwnerFrames
 import java.io.IOException
 
 /**
- * Frames of the order transfer, carried by the OWNER Bluetooth channel (service `…0004`, handshake `CBTO`, frame layout of [OwnerFrames]) after the existing trust link / carrier mode:
- * NEW frame types 16..21, so an old TV or an old phone that does not know them simply ignores them (the channel's dispatcher drops an unknown type; tested). Nothing new is opened.
+ * Frames of the order transfer, carried by the OWNER Bluetooth channel (service `…0005` = [OwnerFrames.SERVICE_UUID], handshake `CBTO`, frame layout of [OwnerFrames]) after the
+ * existing trust link / carrier mode: NEW frame types 16..21. A TV whose channel does not handle them (an old TV; today the current one too, the orders are not wired, inventory M7)
+ * does NOT ignore them: its [castbridge.core.owner.OwnerChannelServer] answers any type it does not know with RESULT(0) « Non pris en charge par cette TV » (the sender must read that
+ * as « TV not able »); an old phone never sends them. Nothing new is opened.
  *
  *   phone → TV  16 ORDER_HELLO   `have=<kid>:<seq>` lines: for each key, the highest acknowledgement the phone already holds
  *   TV → phone  17 ORDER_STATE   `v=1` · `policyVersion=n` · `seq=<kid>:<last accepted>` lines   (then the missing acknowledgements, one ORDER_ACK each)

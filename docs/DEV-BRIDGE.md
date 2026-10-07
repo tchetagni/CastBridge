@@ -3,7 +3,7 @@
 **Jamais distribué.** Application séparée (`castbridge.dev`, module `:devbridge`), pour dépanner et déployer sur la TV de développement sans passer par la clé USB à chaque version. Elle **survit à la désinstallation de CastBridge-TV**, ce qui permet les cycles désinstaller / réinstaller.
 
 ## Ce qu'elle fait
-- **Serveur SSH permanent** (port **2223**, authentification par **clé seulement**, **réseau local seulement**, verrouillage après échecs), relancé tout seul toutes les 30 s et au démarrage de la TV. Les clés publiques autorisées sont lues **au build** dans un fichier hors dépôt (`~/.ssh/id_ed25519.pub` par défaut, `-PdevKeysFile=`).
+- **Serveur SSH permanent** (port **2223**, authentification par **clé seulement**, **réseau local seulement**, verrouillage après échecs), relancé tout seul toutes les 30 s et au démarrage de la TV. Les clés publiques autorisées sont lues **au build** dans un fichier hors dépôt (`~/.ssh/id_ed25519.pub` par défaut, `-PdevKeysFile=`). Le port 2223 est le sien seul : le sshd du tunnel d'assistance de CastBridge-TV est sur 127.0.0.1:2224 depuis R-28 (il était sur 2223 : la seconde application à démarrer n'écoutait pas ; `docs/REMOTE-TUNNEL-TV.md` § 3).
 - **Commandes** : `ssh -p 2223 tv@<TV> cbdev status | install <apk> | uninstall <paquet> | start <paquet>`. Dépôt d'un APK : `ssh -p 2223 tv@<TV> 'cat > /data/user/0/castbridge.dev/files/inbox/x.apk' < x.apk`.
 
 ## À faire une fois sur la TV (ouvrir « CastBridge Dev »)
