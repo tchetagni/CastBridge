@@ -1,7 +1,10 @@
 package castbridge.core.remote
 
+import castbridge.core.quiz.Json
 import castbridge.core.tv.ApiExtension
 import castbridge.core.tv.ApiReply
+import castbridge.core.tv.OpenTvReply
+import castbridge.core.tv.OpenTvScreen
 import castbridge.core.tv.ReceiverServer.Companion.q
 
 /** Result of one remote action on the TV. [via]: "app" (a CastBridge screen), "system" (accessibility service), "audio" (AudioManager). */
@@ -21,6 +24,11 @@ interface RemoteSink {
     fun stateJson(): String
     /** Shows the step-by-step help for the "whole TV" mode on the TV screen. */
     fun openSetup(): Outcome = Outcome.refused("indisponible", 501)
+    /**
+     * Brings CastBridge-TV in front of whatever is on the TV's screen, and says how it went (docs/REMOTE.md, « Ouvrir CastBridge-TV depuis le téléphone »).
+     * May block a few seconds (it checks that the screen is really up). null = this sink cannot do it.
+     */
+    fun openTv(screen: OpenTvScreen?): OpenTvReply? = null
 }
 
 /**
@@ -33,6 +41,8 @@ interface RemoteSink {
  *  POST /api/remote/ping            cheap keep-alive / latency probe
  *  GET  /api/remote/state           what the remote can do right now
  *  POST /api/remote/system/setup    opens the "whole TV" help on the TV
+ *  POST /api/tv/open[?screen=home|library|player|games|quiz]   brings CastBridge-TV to the front of the other apps (the same action is `POST open` on the
+ *                                   Bluetooth channel = /api/remote/open); the body is optional: {"screen":"library"}. Answer: {"opened","how","needs"}
  *
  * [sid]/[seq] make resends after a reconnection harmless ([SeqFilter]). A held key the phone never releases is released
  * by [releaseStale], which the app calls a few times a second while [holding] is true.
@@ -45,6 +55,7 @@ class RemoteApi(private val sink: RemoteSink, private val now: () -> Long = Syst
     val holding: Boolean get() = holds.any()
 
     override fun handle(path: String, method: String, params: Map<String, String>): ApiReply? {
+        if (path == OPEN_TV_PATH) return openTv(method, params)
         if (!path.startsWith(PREFIX)) return null
         val route = path.removePrefix(PREFIX)
         if (route == "state") return if (method == "GET") ApiReply(200, sink.stateJson()) else err(405, "use GET")
@@ -56,8 +67,37 @@ class RemoteApi(private val sink: RemoteSink, private val now: () -> Long = Syst
             "pointer" -> withSeq(params) { pointer(params) }
             "global" -> withSeq(params) { global(params) }
             "system/setup" -> reply(sink.openSetup(), null)
+            "open" -> openTv(method, params)
             else -> err(404, "not found")
         }
+    }
+
+    /** `POST /api/tv/open` may carry a small JSON body `{"screen":"library"}`, but needs none (query `?screen=` or nothing at all: [castbridge.core.tv.ReceiverServer.BODY_OPTIONAL]). */
+    override fun wantsBody(path: String) = path == OPEN_TV_PATH
+
+    override fun handleBody(path: String, method: String, params: Map<String, String>, body: ByteArray): ApiReply? {
+        if (path != OPEN_TV_PATH) return null
+        if (method != "POST") return err(405, "use POST")
+        if (body.size > MAX_OPEN_BODY) return err(413, "body too large")
+        val inBody = try {
+            val text = String(body, Charsets.UTF_8).trim()
+            if (text.isEmpty()) null else when (val raw = Json.obj(text)["screen"]) {
+                null -> null
+                is String -> if (raw.isBlank()) null else OpenTvScreen.parse(raw) ?: return err(400, "screen must be ${OpenTvScreen.LIST}")
+                else -> return err(400, "screen must be a string")
+            }
+        } catch (e: Json.ParseError) { return err(400, "the body must be a JSON object like {\"screen\":\"library\"}") }
+        return openTv(method, params, inBody)
+    }
+
+    /** The query wins over the body; no screen at all means « wherever the TV was ». */
+    private fun openTv(method: String, params: Map<String, String>, fromBody: OpenTvScreen? = null): ApiReply {
+        if (method != "POST") return err(405, "use POST")
+        val raw = params["screen"]?.takeIf { it.isNotBlank() }
+        val screen = if (raw == null) fromBody else OpenTvScreen.parse(raw) ?: return err(400, "screen must be ${OpenTvScreen.LIST}")
+        val r = sink.openTv(screen) ?: return err(501, "indisponible")
+        // 200 whatever the result: the TV did answer, the phone reads {"opened":false,…} and says what to do
+        return ApiReply(200, r.toJson())
     }
 
     /** Releases keys held longer than the hold timeout without news from the phone (link lost). */
@@ -137,6 +177,9 @@ class RemoteApi(private val sink: RemoteSink, private val now: () -> Long = Syst
 
     companion object {
         const val PREFIX = "/api/remote/"
+        /** « Ouvrir CastBridge-TV » : the same action as [PREFIX] + `open`, under the name the phone's shortcut and the owner's scripts use. */
+        const val OPEN_TV_PATH = "/api/tv/open"
+        private const val MAX_OPEN_BODY = 1024
         const val MAX_TEXT = 500
         const val MAX_REPEAT = 100_000
         const val MAX_MOVE = 4000
