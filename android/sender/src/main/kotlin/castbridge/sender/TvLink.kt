@@ -206,7 +206,19 @@ object TvLinkManager {
     /** One step from the background job: no loop, no UI. */
     fun stepOnce(trigger: Trigger) {
         if (!::app.isInitialized || saved.list().isEmpty()) return
-        publish(driver.step(trigger))
+        val step = driver.step(trigger)
+        publish(step)
+        relayHint(step)
+    }
+
+    /**
+     * relay-R1: the TV's answer to the HELLO says whether it wants an Internet pipe (`pipeWanted`, additive key): CastBridge then goes and reads its request on the owner channel and,
+     * if the cost policy allows it, opens the pipe silently (RelayRuntime). The same hint reaches a phone on the Wi-Fi API through the keep-alive (AndroidLinkEnv.check).
+     */
+    private fun relayHint(step: LinkDriver.Step) {
+        val tv = saved.default() ?: return
+        val s = step.session ?: return
+        if (s.tv.address == tv.address && s.info.pipeWanted) RelayRuntime.onHint(app, tv)
     }
 
     // ---- credential for the existing screens: PinStore.get(key) asks here first ----
@@ -306,6 +318,7 @@ object TvLinkManager {
             val step = driver.step(trigger)
             publish(step)
             onSession(step)
+            relayHint(step)
             val d = step.nextInMs
             trigger = if (d == null) wake.receive() else withTimeoutOrNull(d) { wake.receive() } ?: Trigger.TIMER
         }

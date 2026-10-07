@@ -4,6 +4,7 @@ import android.annotation.SuppressLint
 import android.app.Notification
 import android.app.NotificationChannel
 import android.app.NotificationManager
+import android.app.PendingIntent
 import android.app.Service
 import android.bluetooth.BluetoothAdapter
 import android.bluetooth.BluetoothManager
@@ -16,8 +17,19 @@ import android.os.IBinder
 import android.util.Log
 import castbridge.core.gateway.Exit
 import castbridge.core.gateway.GatewayService
-import castbridge.core.gateway.Gw
 import castbridge.core.gateway.Mux
+import castbridge.core.relay.IdleStop
+import castbridge.core.relay.PhoneNet
+import castbridge.core.relay.RelayDecision
+import castbridge.core.relay.RelayDialer
+import castbridge.core.relay.RelayFrames
+import castbridge.core.relay.RelayInput
+import castbridge.core.relay.RelayMeter
+import castbridge.core.relay.RelayPolicy
+import castbridge.core.relay.RelayReason
+import castbridge.core.relay.RelayText
+import castbridge.core.trust.TvAuth
+import castbridge.core.tunnel.BtConnectLock
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import java.io.IOException
@@ -30,32 +42,74 @@ import kotlin.concurrent.thread
 /**
  * Shares the phone's Internet with CastBridge TV over Bluetooth: connects to the TV's gateway service and opens,
  * on the phone's network, the connections the TV app asks for. Reconnects by itself until stopped.
+ *
+ * relay-R1 (docs/coordination/DESIGN-RELAIS-TELEPHONE-2026-10-07.md § 2.4, § 2.6): two ways to start it.
+ *  - by the user's own switch (« Partager l'Internet du téléphone avec la TV »): as before, no cap, no idle stop ([Run.auto] false);
+ *  - by the TV's request ([RelayRuntime], [startAuto]): silent, a single neutral notification « CastBridge relaie pour <TV> » (private on the lock screen, LOW, button « Arrêter »), bounded by
+ *    the cost policy ([RelayPolicy]: free on an unmetered network; on a metered one only the project's server, 5 MB a day by default, re-judged every 5 s), closed 10 minutes after the last
+ *    connection, resumed by the system (START_STICKY) after a kill while the session is recent. The pipe only opens towards the project's server and never reaches the phone's own network ([RelayDialer]).
+ * Every connect() to the TV goes through [BtConnectLock], shared with the API tunnel and the remote: never two at once to the same TV (« already at opened state »).
  */
 @SuppressLint("MissingPermission")
 class BtGatewayService : Service() {
     @Volatile private var stopping = false
     private var worker: Thread? = null
-    @Volatile private var sock: android.bluetooth.BluetoothSocket? = null
+    @Volatile private var sock: BluetoothSocket? = null
+    @Volatile private var run: Run? = null
+
+    /** One run of the pipe. [auto] = opened by the TV's request; [limitBytes] = what the cost policy allowed at the start (null = no ceiling); [metered] = the phone's network was metered at the start. */
+    private class Run(val address: String, val name: String, val auto: Boolean, val limitBytes: Long?, val metered: Boolean)
+
+    /** What the TV may open from here: the project's hosts on their ports, nothing of the phone's own network (castbridge.core.relay.RelayScope). */
+    private val dialer = RelayDialer(
+        resolve = { host -> InetAddress.getAllByName(host).toList() },
+        open = { a, p -> Socket().apply { tcpNoDelay = true; connect(InetSocketAddress(a, p), 15_000) } },
+    )
 
     override fun onBind(intent: Intent?): IBinder? = null
 
     override fun onStartCommand(intent: Intent?, flags: Int, startId: Int): Int {
-        if (intent?.action == ACTION_STOP) { stopping = true; runCatching { sock?.close() }; _state.value = "Partage arrêté"; stopSelf(); return START_NOT_STICKY }
-        val address = intent?.getStringExtra(EXTRA_ADDR) ?: return START_NOT_STICKY
-        val pin = intent.getStringExtra(EXTRA_PIN) ?: return START_NOT_STICKY
-        if (worker?.isAlive == true) return START_NOT_STICKY
+        if (intent?.action == ACTION_STOP) { userStop(); return START_NOT_STICKY }
+        // a null intent = the system restarted a START_STICKY service that was killed: resume only a recent automatic session
+        val resumed = if (intent == null) RelayRuntime.settings(this).loadSession()?.takeIf { System.currentTimeMillis() - it.lastActivityAt < RelayPolicy.IDLE_STOP_MS } else null
+        if (intent == null && resumed == null) { stopSelf(); return START_NOT_STICKY }
+        val address = intent?.getStringExtra(EXTRA_ADDR) ?: resumed?.address ?: return START_NOT_STICKY
+        val auto = intent?.getBooleanExtra(EXTRA_AUTO, false) ?: true
+        val pin = intent?.getStringExtra(EXTRA_PIN)
+        if (!auto && pin == null) return START_NOT_STICKY
+        if (worker?.isAlive == true) return if (auto) START_STICKY else START_NOT_STICKY
+        val name = intent?.getStringExtra(EXTRA_NAME) ?: resumed?.name ?: TvLinkManager.saved.get(address)?.name ?: "la TV"
+        val limit = intent?.getLongExtra(EXTRA_LIMIT, -1L)?.takeIf { it >= 0 } ?: resumed?.limitBytes
+        val metered = intent?.getBooleanExtra(EXTRA_METERED, false) ?: resumed?.metered ?: false
         try {
-            val n = notification("Partage d'Internet avec la TV…")
+            val n = notification(name)
             if (Build.VERSION.SDK_INT >= 29) startForeground(NOTIF, n, ServiceInfo.FOREGROUND_SERVICE_TYPE_CONNECTED_DEVICE) else startForeground(NOTIF, n)
-        } catch (e: Exception) { Log.e(TAG, "startForeground", e); stopSelf(); return START_NOT_STICKY }
+        } catch (e: Exception) {
+            // Android 12+: a foreground service may not start from the background except in a few cases; the TV is told to ask the user to open CastBridge
+            Log.e(TAG, "startForeground: ${e.javaClass.simpleName}")
+            if (auto) RelayRuntime.serviceRefused(this, address)
+            stopSelf(); return START_NOT_STICKY
+        }
         stopping = false
-        worker = thread(name = "bt-gateway") { loop(address, pin) }
-        return START_NOT_STICKY
+        val r = Run(address, name, auto, limit, metered)
+        run = r
+        running = true
+        if (auto) RelayRuntime.settings(this).saveSession(RelaySettings.Session(address, name, limit, metered, System.currentTimeMillis()))
+        worker = thread(name = "bt-gateway") { loop(r, pin) }
+        return if (auto) START_STICKY else START_NOT_STICKY
+    }
+
+    /** « Arrêter » of the notification, or the user's switch turned off: an automatic pipe puts THIS TV to sleep for ten minutes (the user just said no). */
+    private fun userStop() {
+        run?.takeIf { it.auto }?.let { RelayRuntime.userStopped(it.address) }
+        stopping = true; runCatching { sock?.close() }; _state.value = "Partage arrêté"
+        stopSelf()
     }
 
     /**
      * One secure RFCOMM connection to the gateway service of the TV: its own service (…0007) first, the old one it shared with the SSH tunnel (…0002) only for a TV that is, or
-     * may be, old (R-28; the choice, the pause between attempts and the memory of an old TV are [GatewayService.PhoneChoice], tested on the JVM).
+     * may be, old (R-28; the choice, the pause between attempts and the memory of an old TV are [GatewayService.PhoneChoice], tested on the JVM). The connect itself goes through the
+     * lock shared with the API tunnel and the remote control ([BtConnectLock]): two connect() to the same TV at once make the Bluetooth stack answer « already at opened state ».
      */
     private fun connectGateway(adapter: BluetoothAdapter, address: String, choice: GatewayService.PhoneChoice): BluetoothSocket {
         val dev = adapter.getRemoteDevice(address)
@@ -63,41 +117,94 @@ class BtGatewayService : Service() {
         return choice.connect(advertised, stopping = { stopping }, log = { Log.i(TAG, it) }) { uuid ->
             val s = dev.createRfcommSocketToServiceRecord(UUID.fromString(uuid))
             sock = s
-            try { s.connect(); s } catch (e: IOException) { runCatching { s.close() }; throw e }
+            try { synchronized(BtConnectLock.of(address)) { s.connect() }; s } catch (e: IOException) { runCatching { s.close() }; throw e }
         }
     }
 
-    private fun loop(address: String, pin: String) {
+    private fun loop(r: Run, manualPin: String?) {
         val adapter = getSystemService(BluetoothManager::class.java)?.adapter
         var backoff = 1000L
         val choice = GatewayService.PhoneChoice()            // remembers « old TV » for a while (R-28)
+        val idle = IdleStop(start = System.currentTimeMillis())
         while (!stopping) {
+            if (r.auto && idle.expired(System.currentTimeMillis())) { Log.i(TAG, "idle: the pipe closes"); break }
             if (adapter == null || !adapter.isEnabled) { _state.value = "Bluetooth désactivé"; Thread.sleep(3000); continue }
             try {
                 runCatching { adapter.cancelDiscovery() }   // needs BLUETOOTH_SCAN on Android 12+: optional, never fatal
                 _state.value = "Connexion à la TV…"
-                val s = connectGateway(adapter, address, choice)
+                val s = connectGateway(adapter, r.address, choice)
                 backoff = 1000
                 _state.value = "La TV utilise l'Internet du téléphone"
-                notify("La TV utilise l'Internet du téléphone")
+                notify(r.name)
                 val mux = Mux(s.inputStream, s.outputStream)
                 val t0 = System.currentTimeMillis()
                 active = true
+                // automatic: the credential is read from the phone's own keeping (the PIN typed once, or the trust token) each time, never carried in an Intent
+                val credential = manualPin ?: runCatching { PinStore(applicationContext).get(r.address, r.name) }.getOrDefault("")
+                val exit = Exit(mux, TvAuth.btPin(credential), connect = dialer::connect, log = { Log.i(TAG, it) }, diag = ::runDiag)
+                val watch = if (r.auto) watchdog(r, mux, exit, idle) else null
                 try {
-                    Exit(mux, castbridge.core.trust.TvAuth.btPin(pin), connect = ::openOutbound, log = { Log.i(TAG, it) }, diag = ::runDiag).run()
+                    exit.run()
                 } finally {
+                    watch?.interrupt()
                     active = false
                     PhoneConnect.track("gateway_session", mapOf("ms" to System.currentTimeMillis() - t0,
                         "bytes" to mux.received.get() + mux.sent.get()))
                 }
             } catch (e: Exception) {
-                Log.w(TAG, "gateway link ended", e)
-                if (e.message?.contains("PIN") == true) { _state.value = "Code PIN refusé par la TV"; stopping = true; break }
+                Log.w(TAG, "gateway link ended: ${e.javaClass.simpleName}")
+                if (e.message?.contains("PIN") == true) {
+                    _state.value = "Code PIN refusé par la TV"; stopping = true
+                    if (r.auto) { RelayRuntime.userStopped(r.address); RelayRuntime.report(this, r.address, RelayFrames.State(RelayFrames.Phase.REFUSED, RelayReason.NOT_SYNCED)) }
+                    break
+                }
                 if (!stopping) _state.value = "Liaison perdue (${e.javaClass.simpleName}: ${e.message}), nouvel essai…"
             } finally { runCatching { sock?.close() } }
             if (!stopping) { Thread.sleep(backoff); backoff = minOf(backoff * 2, 15_000) }
         }
+        running = false
+        if (r.auto) RelayRuntime.settings(this).clearSession()
         stopForeground(STOP_FOREGROUND_REMOVE); stopSelf()
+    }
+
+    /**
+     * Every 5 s while an automatic pipe is linked: counts the bytes on a metered network (REL-F7), re-judges the cost policy (the network may have become metered, the daily cap reached,
+     * the relay withdrawn for this TV), closes the pipe 10 minutes after the last connection, and keeps the session fresh for a restart by the system. Stops with the reason told to the TV.
+     */
+    private fun watchdog(r: Run, mux: Mux, exit: Exit, idle: IdleStop): Thread = thread(name = "bt-gateway-watch", isDaemon = true) {
+        val settings = RelayRuntime.settings(this)
+        val meter: RelayMeter = RelayRuntime.meter(this)
+        var last = mux.received.get() + mux.sent.get()
+        var offlineSince = 0L
+        var savedAt = 0L
+        try {
+            while (!stopping) {
+                Thread.sleep(5_000)
+                val now = System.currentTimeMillis()
+                val total = mux.received.get() + mux.sent.get()
+                val delta = (total - last).coerceAtLeast(0L); last = total
+                val net = RelayRuntime.phoneNet(this)
+                if (net == PhoneNet.METERED && !settings.allowMobile) meter.add(delta)         // framing included: a few per cent more than what the carrier counts
+                idle.update(now, exit.openStreams, total)
+                offlineSince = if (net == PhoneNet.NONE) (if (offlineSince == 0L) now else offlineSince) else 0L
+                if ((exit.openStreams > 0 || delta >= IdleStop.NOISE_BYTES) && now - savedAt >= 60_000L) {
+                    savedAt = now; settings.saveSession(RelaySettings.Session(r.address, r.name, r.limitBytes, r.metered, now))
+                }
+                val d = RelayPolicy.decide(RelayInput(synced = true, optedOut = settings.optedOut(r.address), net = net, allowMobile = settings.allowMobile, usedTodayBytes = meter.usedToday()))
+                val why: RelayReason? = when {
+                    d is RelayDecision.Refuse && d.reason != RelayReason.OFFLINE -> d.reason
+                    offlineSince != 0L && now - offlineSince > 2 * 60_000L -> RelayReason.OFFLINE
+                    else -> null
+                }
+                if (why != null) {
+                    Log.i(TAG, "pipe stopped: ${why.wire}")
+                    RelayRuntime.report(this, r.address, RelayFrames.State(RelayFrames.Phase.REFUSED, why, net == PhoneNet.METERED))
+                    stopping = true; runCatching { sock?.close() }
+                    return@thread
+                }
+                if (idle.expired(now)) { Log.i(TAG, "idle for 10 minutes: the pipe closes"); stopping = true; runCatching { sock?.close() }; return@thread }
+            }
+        } catch (_: InterruptedException) {}
     }
 
     /** ping / traceroute from the phone (the TV's way out to the Internet); host already validated by the gateway. */
@@ -128,27 +235,21 @@ class BtGatewayService : Service() {
         line("Destination non atteinte en 20 sauts.")
     }
 
-    /** Outbound connection for the TV, on the phone's own network; the phone's loopback is off limits. */
-    private fun openOutbound(t: castbridge.core.gateway.GwTarget): Socket {
-        val addrs = InetAddress.getAllByName(t.host)
-        if (addrs.any { it.isLoopbackAddress || it.isAnyLocalAddress }) throw SecurityException("loopback")
-        var last: Exception? = null
-        for (a in addrs) {
-            try { return Socket().apply { tcpNoDelay = true; connect(InetSocketAddress(a, t.port), 15_000) } } catch (e: Exception) { last = e }
-        }
-        throw last ?: IOException("no address")
-    }
-
-    private fun notification(text: String): Notification {
+    /**
+     * The only notification of the relay: neutral (« CastBridge relaie pour <TV> »: no file name, no content), LOW, private on the lock screen (the public version says nothing but
+     * « CastBridge »), with a button « Arrêter ». The same text for both ways to start it.
+     */
+    private fun notification(tvName: String): Notification {
         val nm = getSystemService(NotificationManager::class.java)
-        if (Build.VERSION.SDK_INT >= 26) nm.createNotificationChannel(NotificationChannel(CHANNEL, "Internet partagé avec la TV", NotificationManager.IMPORTANCE_LOW))
-        val stop = android.app.PendingIntent.getService(this, 1, Intent(this, BtGatewayService::class.java).setAction(ACTION_STOP),
-            android.app.PendingIntent.FLAG_IMMUTABLE)
+        if (Build.VERSION.SDK_INT >= 26) nm.createNotificationChannel(NotificationChannel(CHANNEL, RelayText.NOTIFICATION_CHANNEL, NotificationManager.IMPORTANCE_LOW).apply { lockscreenVisibility = Notification.VISIBILITY_PRIVATE })
+        val stop = PendingIntent.getService(this, 1, Intent(this, BtGatewayService::class.java).setAction(ACTION_STOP), PendingIntent.FLAG_IMMUTABLE)
+        val generic = Notification.Builder(this, CHANNEL).setSmallIcon(R.drawable.ic_stat_castbridge).setContentTitle(RelayText.NOTIFICATION_PUBLIC).build()
         return Notification.Builder(this, CHANNEL).setSmallIcon(R.drawable.ic_stat_castbridge)
-            .setContentTitle("CastBridge").setContentText(text).setOngoing(true)
-            .addAction(Notification.Action.Builder(null, "Arrêter", stop).build()).build()
+            .setContentTitle("CastBridge").setContentText(RelayText.notification(tvName)).setOngoing(true)
+            .setVisibility(Notification.VISIBILITY_PRIVATE).setPublicVersion(generic).setCategory(Notification.CATEGORY_SERVICE).setShowWhen(false)
+            .addAction(Notification.Action.Builder(null, RelayText.STOP, stop).build()).build()
     }
-    private fun notify(text: String) = getSystemService(NotificationManager::class.java).notify(NOTIF, notification(text))
+    private fun notify(tvName: String) = getSystemService(NotificationManager::class.java).notify(NOTIF, notification(tvName))
 
     companion object {
         private const val TAG = "CastBridgeGW"
@@ -156,16 +257,34 @@ class BtGatewayService : Service() {
         private const val NOTIF = 43
         private const val EXTRA_ADDR = "addr"
         private const val EXTRA_PIN = "pin"
+        private const val EXTRA_NAME = "name"
+        private const val EXTRA_AUTO = "auto"
+        private const val EXTRA_LIMIT = "limit"
+        private const val EXTRA_METERED = "metered"
         private const val ACTION_STOP = "castbridge.sender.GATEWAY_STOP"
         private val _state = MutableStateFlow("Partage inactif")
         /** A TV is using the phone's Internet right now (reported to the server as btGateway). */
         @Volatile var active = false; private set
+        /** The service is up (linked or reconnecting): the TV's request needs no second start. */
+        @Volatile var running = false; private set
         val state: StateFlow<String> = _state
 
         fun start(ctx: Context, tvAddress: String, pin: String) {
             PhoneConnect.feature("bt_gateway")
             ctx.startForegroundService(Intent(ctx, BtGatewayService::class.java).putExtra(EXTRA_ADDR, tvAddress).putExtra(EXTRA_PIN, pin))
         }
+
+        /**
+         * relay-R1: the TV asked for a pipe and the policy allowed it: starts the service silently (no credential in the Intent: the service reads it from the phone's own keeping).
+         * False when Android refuses to start a foreground service from the background (the phone then answers « background » to the TV).
+         */
+        fun startAuto(ctx: Context, tvAddress: String, tvName: String, limitBytes: Long?, metered: Boolean): Boolean = try {
+            PhoneConnect.feature("bt_gateway")
+            ctx.startForegroundService(Intent(ctx, BtGatewayService::class.java).putExtra(EXTRA_ADDR, tvAddress).putExtra(EXTRA_NAME, tvName)
+                .putExtra(EXTRA_AUTO, true).putExtra(EXTRA_LIMIT, limitBytes ?: -1L).putExtra(EXTRA_METERED, metered))
+            true
+        } catch (e: Exception) { Log.w(TAG, "automatic start refused: ${e.javaClass.simpleName}"); false }
+
         fun stop(ctx: Context) = ctx.startService(Intent(ctx, BtGatewayService::class.java).setAction(ACTION_STOP))
     }
 }

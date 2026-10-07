@@ -9,6 +9,9 @@ import castbridge.core.gateway.Entry
 import castbridge.core.gateway.GatewayService
 import castbridge.core.gateway.Gw
 import castbridge.core.gateway.Mux
+import castbridge.core.gateway.SocksAuth
+import castbridge.core.gateway.SocksTokenAuthenticator
+import castbridge.core.relay.RelayScope
 import castbridge.core.tv.ApiReply
 import castbridge.core.tv.PinGuard
 import castbridge.core.tv.ReceiverServer
@@ -34,11 +37,18 @@ class BtGatewayHost(private val ctx: Context, private val guard: PinGuard, priva
                     private val sshBluetoothWanted: () -> Boolean = { false }) {
     /** Address of the phone whose link is being attached on this thread (the paired device of the socket: what "trusted" is checked on). */
     private val peerAddress = ThreadLocal<String?>()
+    /**
+     * relay-R1 (inventory I-5: « any process of the TV may use the SOCKS »): the local proxy only serves THIS process. Each phone link gets a fresh random token, kept in memory; the proxy
+     * asks for it (SOCKS5 user/password, RFC 1929) and the JDK client of the app presents it through [SocksTokenAuthenticator], installed at [start]. See [SocksAuth].
+     */
+    @Volatile private var socksToken: String = SocksAuth.newToken()
+    /** Safety net: set when the Android of this TV does not present the token (see [disableSocksToken]); the proxy then stays open on the loopback as before relay-R1. */
+    @Volatile var socksAuthDisabled = false; private set
     private val entry: Entry = Entry({ pin ->
         // a trusted phone sends "no PIN"; anybody else (or a PIN sent on purpose) goes through the usual PIN check and lockout
         if (pin == castbridge.core.trust.TvAuth.NO_PIN) peerAddress.get()?.let(trusted) == true
         else guard.check("bt-gateway", pin) == PinGuard.Result.OK
-    }, PORT) { m -> Log.i(TAG, m); refresh() }
+    }, PORT, { if (socksAuthDisabled) null else socksToken }) { m -> Log.i(TAG, m); refresh() }
     /** One server socket per UUID the gateway listens on (see [castbridge.core.gateway.GatewayService.tvListens]); guarded by `this`. */
     private val servers = HashMap<String, BluetoothServerSocket>()
     @Volatile private var running = false
@@ -48,6 +58,7 @@ class BtGatewayHost(private val ctx: Context, private val guard: PinGuard, priva
         if (ctx.getSystemService(BluetoothManager::class.java)?.adapter == null) return
         try {
             entry.startSocks()
+            SocksTokenAuthenticator.install(PORT) { if (socksAuthDisabled) null else socksToken }
             listen(Gw.SERVICE_UUID)                  // the gateway's own service: if it cannot open there is no gateway, and nothing is marked as running (a later start() retries)
             refresh()
         } catch (e: Exception) { Log.w(TAG, "gateway start", e); entry.stop(); return }
@@ -68,7 +79,7 @@ class BtGatewayHost(private val ctx: Context, private val guard: PinGuard, priva
                 Thread({
                     val startedAt = System.currentTimeMillis()
                     var mux: Mux? = null
-                    try { mux = Mux(sock.inputStream, sock.outputStream); peerAddress.set(peerAddr); entry.attach(mux, peer) }
+                    try { mux = Mux(sock.inputStream, sock.outputStream); peerAddress.set(peerAddr); socksToken = SocksAuth.newToken(); entry.attach(mux, peer) }
                     catch (e: Exception) { Log.w(TAG, "gateway link: ${e.javaClass.simpleName}") }
                     finally { runCatching { sock.close() }; refresh(); mux?.let { m -> runCatching { sessionEnded(startedAt, m) } } }
                 }, "gw-link").apply { isDaemon = true; start() }
@@ -91,6 +102,21 @@ class BtGatewayHost(private val ctx: Context, private val guard: PinGuard, priva
     val connected get() = entry.connected
     val phoneName get() = entry.peerName
     @Volatile var connectedSince = 0L; private set
+    /** relay-R1: identifies the current pipe (changes when a phone attaches, even in place of another); the end-to-end check is made once per pipe. */
+    val attachId: Int get() = entry.attaches
+    val openStreams: Int get() = entry.openStreams
+    /** Bytes exchanged on the phone link so far (both ways, framing included): the TV's throughput measure. */
+    fun linkBytes(): Long = entry.stats().let { it.first + it.second }
+    /** Round trip of one PING frame over the Bluetooth link (ms), or null: the life of the pipe is read from its own frames, never from a request to a third party. */
+    fun pingLink(timeoutMs: Long = 5_000): Long? = entry.ping(timeoutMs)
+
+    /**
+     * The end-to-end check failed with « SOCKS authentication failed »: this Android does not present the token through [SocksTokenAuthenticator] (never expected on a TV: the JDK client
+     * does, and the check runs on every new pipe so that such a TV is detected at once). The proxy is left open on the loopback as it was before relay-R1 rather than breaking the pipe.
+     */
+    fun disableSocksToken() {
+        if (!socksAuthDisabled) { socksAuthDisabled = true; Log.w(TAG, "SOCKS token not presented by this Android: proxy left open on the loopback") }
+    }
 
     /** Plain-language state of the gateway for the TV screen. */
     fun statusLines(): List<String> {
@@ -125,10 +151,13 @@ class BtGatewayHost(private val ctx: Context, private val guard: PinGuard, priva
             """"socksPort":$PORT,"streams":${entry.openStreams},"bytesFromPhone":$rx,"bytesToPhone":$tx}"""
     }
 
-    /** Fetches small known pages through the phone and reports status and time: proves the path works end to end. */
+    /** The project's server, the only host the phone's relay serves (castbridge.core.relay.RelayScope): the administration tools below measure THAT path. */
+    private fun serverBase(): String = (TvConnect.link?.state?.baseUrl?.takeIf { it.isNotBlank() } ?: BuildConfig.DEFAULT_SERVER).trimEnd('/')
+
+    /** Fetches a small page of the project's server through the phone and reports status and time: proves the path works end to end (a third-party address is refused by the phone's relay). */
     fun test(): ApiReply {
         val p = proxy() ?: return ApiReply(409, """{"error":"aucun téléphone ne partage sa connexion"}""")
-        val urls = listOf("http://connectivitycheck.gstatic.com/generate_204", "https://www.google.com/generate_204", "https://example.com/")
+        val urls = listOf(serverBase() + "/api/v1/updates/public-key")
         val out = urls.joinToString(",", "[", "]") { u ->
             val t0 = System.nanoTime()
             val r = runCatching {
@@ -155,7 +184,8 @@ class BtGatewayHost(private val ctx: Context, private val guard: PinGuard, priva
         out("══ Réseau de la TV ══")
         TvNetDiag.run(host, null, out)
         if (!entry.connected) { out("══ Passerelle du téléphone : aucun téléphone ne partage sa connexion en Bluetooth ══"); out("— Terminé —"); return }
-        out("══ Via le téléphone ${entry.peerName ?: ""} (Bluetooth) ══")
+        if (!RelayScope.hostAllowed(host)) { out("══ Via le téléphone : adresse non relayée (le partage d'Internet ne sert que le serveur CastBridge) ══"); out("— Terminé —"); return }
+        out("══ Via le téléphone (Bluetooth) ══")
         TvNetDiag.run(host, proxy(), out)
         repeat(3) { i -> out("connexion TCP ${i + 1} vers $host:443 : " + (entry.tcpPing(host)?.let { "$it ms" } ?: "échec")) }
         entry.diag("ping", host) { out(it) }
@@ -170,17 +200,17 @@ class BtGatewayHost(private val ctx: Context, private val guard: PinGuard, priva
         entry.diag("trace", host, timeoutS = 120) { out(it) }
     }
 
-    /** Download speed test through the phone: [bytes] from a public speed-test endpoint. */
+    /** Download speed test through the phone: up to [bytes] of the public guide page of the project's server (a third-party speed-test endpoint is refused by the phone's relay). */
     fun speed(bytes: Long): ApiReply {
         val p = proxy() ?: return ApiReply(409, """{"error":"aucun téléphone ne partage sa connexion"}""")
-        val n = bytes.coerceIn(100_000, 20_000_000)
-        val u = "https://speed.cloudflare.com/__down?bytes=$n"
+        val n = bytes.coerceIn(100_000, 2_000_000)
+        val u = serverBase() + "/guide/"
         val t0 = System.nanoTime()
         return runCatching {
             (URL(u).openConnection(p) as HttpURLConnection).run {
                 connectTimeout = 20_000; readTimeout = 30_000
                 var got = 0L; val buf = ByteArray(32 * 1024)
-                inputStream.use { while (true) { val r = it.read(buf); if (r < 0) break; got += r } }
+                inputStream.use { while (got < n) { val r = it.read(buf); if (r < 0) break; got += r } }
                 val s = (System.nanoTime() - t0) / 1e9
                 ApiReply(200, """{"bytes":$got,"seconds":${"%.2f".format(java.util.Locale.ROOT, s)},"kBps":${(got / 1024 / s).toLong()}}""")
             }

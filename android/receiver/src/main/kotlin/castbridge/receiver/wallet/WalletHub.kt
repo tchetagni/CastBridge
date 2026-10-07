@@ -40,11 +40,12 @@ import castbridge.core.wallet.ui.WalletSyncSchedule
 import castbridge.core.wallet.ui.WalletSyncSchedule.Trigger
 import java.time.ZoneId
 import castbridge.core.wallet.ui.WalletTransport
+import castbridge.core.relay.PipeNeed
 import castbridge.receiver.ActivationCenter
 import castbridge.receiver.BuildConfig
 import castbridge.receiver.TvConnect
+import castbridge.receiver.TvNet
 import castbridge.receiver.TvPrefs
-import castbridge.receiver.TvService
 import java.io.File
 import java.io.IOException
 import java.util.Timer
@@ -117,8 +118,8 @@ object WalletHub {
     fun cardStatus(): String = WalletStatus.cardLine(statusView(), snapshot())
     fun online(): Boolean = networkUp() && !lastCallOffline
 
-    /** Même règle que la tuile « Internet » de l'accueil. */
-    fun networkUp(): Boolean = TvService.running?.let { it.netDirectMs != null || it.netGatewayMs != null || it.netCheckedAt == 0L } != false
+    /** relay-R1 : la vérité réseau unique de la TV (`castbridge.receiver.TvNet` : direct, via_relay, none), plus de définition propre au portefeuille ; avant la première mesure la TV ne se dit pas hors ligne. */
+    fun networkUp(): Boolean = TvNet.reachable()
 
     fun addListener(l: () -> Unit) { listeners += l }
     fun removeListener(l: () -> Unit) { listeners -= l }
@@ -132,6 +133,7 @@ object WalletHub {
     /** Synchronise si la règle du calendrier le veut ([Trigger.OPEN] : à l'ouverture ; [Trigger.AFTER_OPERATION] : après chaque opération ; [Trigger.TICK] : toutes les 15 min). */
     fun refresh(trigger: Trigger, done: (() -> Unit)? = null) {
         if (!ready || !flag() || !activated()) return
+        if (trigger == Trigger.OPEN && !networkUp()) TvNet.need(PipeNeed.WALLET)      // relay-R1 : l'écran du portefeuille vient de s'ouvrir sans Internet : un téléphone peut en donner (la synchronisation suit seule)
         io.execute {
             if (!schedule.shouldSync(trigger, networkUp(), System.currentTimeMillis(), lastSyncAt, inFlight.get())) return@execute
             if (!inFlight.compareAndSet(false, true)) return@execute
@@ -170,6 +172,8 @@ object WalletHub {
 
     private fun <T> run(op: () -> WalletResult<T>, done: (WalletResult<T>) -> Unit) {
         io.execute {
+            // relay-R1 : une opération vivante de l'utilisateur (conversion, transfert, historique…) sans Internet demande un tuyau à un téléphone synchronisé et l'attend (borné)
+            if (!networkUp()) TvNet.ensure(PipeNeed.WALLET)
             val r = try { op() } catch (e: Exception) { Log.w(TAG, "opération en échec (${e.javaClass.simpleName})"); WalletResult.Fail(WalletMessages.of(500, null), null, null, false) }
             apply(r)
             notifyListeners()

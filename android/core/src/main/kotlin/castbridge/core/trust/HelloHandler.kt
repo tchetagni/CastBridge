@@ -30,6 +30,8 @@ class HelloHandler(
     private val onRefused: (name: String, decision: PairingSession.Decision) -> Unit = { _, _ -> },
     /** The 8-phone cap (see [TrustRegistry.MAX_PHONES]): a ninth phone waits for the owner to choose which one to remove. */
     private val capacity: PairCapacityFlow? = null,
+    /** relay-R1: does the TV want an Internet pipe right now? Only a TRUSTED phone ever reads it (it rides on the answer that carries the token). */
+    private val pipeWanted: () -> Boolean = { false },
 ) {
     /** What an unknown phone is told: nothing but "no", plus (only when it is paired and gave the install id it remembers) whether the TV is another installation. */
     private fun untrusted(paired: Boolean) = HelloReply.Err(BtProtocol.ERR_UNTRUSTED,
@@ -73,6 +75,6 @@ class HelloHandler(
         }
         val t = registry.issueToken(peer) ?: return untrusted(true)   // revoked while we waited
         registry.get(peer)?.let(onConnected)
-        return HelloReply.Ok(HelloInfo(tvName(), version, mdnsName(), t.token, registry.tokenTtlMs / 1000, link(), registry.installId, TrustRegistry.MAX_PHONES))
+        return HelloReply.Ok(HelloInfo(tvName(), version, mdnsName(), t.token, registry.tokenTtlMs / 1000, link(), registry.installId, TrustRegistry.MAX_PHONES, runCatching { pipeWanted() }.getOrDefault(false)))
     }
 }

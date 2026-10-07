@@ -218,6 +218,9 @@ class PlayerActivity : Activity(), TvService.Screen {
             .setView(android.widget.ScrollView(this).apply { addView(tv); setBackgroundColor(TvStyle.BG_ELEVATED) })
             .setPositiveButton("Fermer", null)
             .setNeutralButton("Lire les conditions…") { _, _ -> showTermsDialog() }
+        // relay-R1 : une demande EXPLICITE d'assistance sans Internet : un téléphone synchronisé ouvre un tuyau (jamais en tâche de fond : le tunnel permanent ne réveille aucun téléphone)
+        if (TunnelHub.termsAccepted(this) && TunnelHub.state() != castbridge.core.tunnel.TunnelState.UP && !TvNet.state().up)
+            b.setNegativeButton("Se connecter maintenant") { _, _ -> TvNet.need(castbridge.core.relay.PipeNeed.ASSIST, force = true); TunnelHub.poke(); flash(castbridge.core.relay.RelayText.ASKING) }
         b.show()
     }
 
@@ -598,7 +601,7 @@ class PlayerActivity : Activity(), TvService.Screen {
         val drives = s?.registry?.let { r -> runCatching { r.volumes().filter { it.kind == castbridge.core.tv.VolumeKind.REMOVABLE } }.getOrNull() }.orEmpty()
         val btOk = st["1-bt"]?.contains("prêt") == true || st["1-bt"]?.contains("réception") == true
         val net = st["6-gw"]
-        val internetUp = s?.let { it.netDirectMs != null || it.netGatewayMs != null || it.netCheckedAt == 0L } != false
+        val internetUp = TvNet.reachable()      // relay-R1 : la vérité réseau unique de la TV (castbridge.receiver.TvNet), la même que le portefeuille, le jeu, « Langues » et le tunnel
         val wdOn = prefs.getBool("wd_enabled", false)
         val sshOn = ssh?.running == true
         val upgrade = if (ActivationCenter.trial()) listOf(
@@ -659,7 +662,7 @@ class PlayerActivity : Activity(), TvService.Screen {
             },
             tile("internet", R.drawable.ic_cb_test_internet, "Internet", "Connectivité de la TV (Wi-Fi/Ethernet) et de la passerelle Bluetooth du téléphone : état et tests.",
                 s?.takeIf { it.netCheckedAt > 0 }?.netSummary()?.take(34) ?: "Vérification…",
-                s?.netDirectMs != null || s?.netGatewayMs != null) { internetMenu() },
+                TvNet.state().up) { internetMenu() },
             tile("wifi_direct", R.drawable.ic_cb_wifi_direct, "Wi-Fi Direct", "Un réseau direct TV ↔ téléphone, sans box.", if (wdOn) "Activé" else "Désactivé", wdOn) { toggleWifiDirect() },
             tile("admin", R.drawable.ic_cb_administration, "Administration", "Page web et SSH pour gérer la TV à distance.",
                 if (sshOn) "SSH actif" else "SSH arrêté", sshOn) {
@@ -692,7 +695,7 @@ class PlayerActivity : Activity(), TvService.Screen {
         val ip = TvService.localIp()
         val labels = mapOf("0-storage" to "Stockage", "1-bt" to "Bluetooth", "2-wd" to "Wi-Fi Direct (sans box)", "3-usb" to "Import depuis une clé",
             "4-ssh" to "Administration à distance (SSH)", "4-ssh-bt" to "SSH par Bluetooth", "4-api-bt" to "API par Bluetooth", "5-update" to "Installation d'applications",
-            "5-notice" to "Dernier événement", "9-server" to "Serveur", "1-phone" to "Téléphone connecté")
+            "5-notice" to "Dernier événement", "9-server" to "Serveur", "1-phone" to "Téléphone connecté", "6-relay" to "Internet par le téléphone")
         val sig = castbridge.core.ux.TvSignal.of(TvSignalViews.facts(this, s, server != null))
         val info = buildList {
             add("Signalétique : " + sig.text to (sig.action ?: castbridge.core.ux.TvSignal.LEGEND))

@@ -18,8 +18,8 @@ object TvNetDiag {
     /**
      * This request leaves for a third party (connectivitycheck.gstatic.com), so it is NOT sent by default (offline profile, audit SE-7): only on a manual action (Tests Internet screen),
      * when the « netProbe » setting is on, or once the terms of the remote-assistance tunnel were accepted (`TvService.netTick`: `probe = manual || netProbe || termsAccepted`).
-     * In the last two cases it IS periodic: one round every 60 s while Internet works (10 to 30 s while it does not), on the TV's own network and, when a phone shares its Internet,
-     * through the phone's gateway as well (the comment used to say « never periodic », inventory I-15).
+     * In the last two cases it IS periodic, but only on the TV's OWN network and only every 5 minutes (castbridge.core.connect.NetProbePlan; it was every 60 s, 10 to 30 s while offline),
+     * or at once when the network changes. Through a phone's gateway it is NEVER sent any more (it cost mobile data and woke the phone's radio every minute): see [probeServer].
      * One quick HTTP check (204 expected) on a path; returns the time in ms, or null if Internet does not answer. */
     fun probe(proxy: Proxy?): Long? = runCatching {
         val t0 = System.nanoTime()
@@ -29,6 +29,31 @@ object TvNetDiag {
             if (c == 204) ms(t0) else null
         }
     }.getOrNull()
+
+    /** Result of [probeServer]: the time in ms (any HTTP answer counts), or why there is none. [authBroken] = the local SOCKS refused our token (see [BtGatewayHost.disableSocksToken]). */
+    class ServerProbe(val ms: Long?, val authBroken: Boolean = false)
+
+    /**
+     * relay-R1 (consigne du coordinateur après l'hygiène R4): the end-to-end check of a phone's pipe goes to the PROJECT's server, never to a third party: one tiny public GET
+     * (`/api/v1/updates/public-key`, about 250 bytes) on the base address of the TV. Any HTTP answer proves TCP, TLS (certificate checked, no custom trust) and HTTP through the pipe.
+     * It is made once per new pipe, after a real call failed through it, on a manual test, and while an operation waits for Internet (castbridge.core.connect.NetProbePlan): never periodically.
+     */
+    fun probeServer(base: String, proxy: Proxy?): ServerProbe {
+        val t0 = System.nanoTime()
+        return try {
+            (URL(base.trimEnd('/') + "/api/v1/updates/public-key").openConnection(proxy ?: Proxy.NO_PROXY) as HttpURLConnection).run {
+                connectTimeout = 10_000; readTimeout = 10_000; instanceFollowRedirects = false; useCaches = false
+                setRequestProperty("User-Agent", "CastBridge-TV")
+                val code = responseCode
+                runCatching { (if (code < 400) inputStream else errorStream)?.use { it.readBytes() } }
+                disconnect()
+                ServerProbe(if (code in 100..599) ms(t0) else null)
+            }
+        } catch (e: java.net.SocketException) {
+            val m = e.message.orEmpty()
+            ServerProbe(null, authBroken = m.contains("authentication failed", ignoreCase = true) || m.contains("No acceptable methods", ignoreCase = true))
+        } catch (e: Exception) { ServerProbe(null) }
+    }
 
     /** How the TV itself is connected, in plain words (Wi-Fi name if readable, Ethernet, or none). */
     fun localLink(ctx: android.content.Context): String = runCatching {

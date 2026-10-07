@@ -141,10 +141,9 @@ object TunnelHub {
         override fun locked() = ActivationCenter.locked()
         override fun activation(): String? = TunnelEnroll.pickActivation(ActivationCenter.allActivations(), ActivationCenter.now())?.encode()
         override fun connectivity(): TunnelPath {
-            val svc = TvService.running ?: return TunnelPath.OFFLINE
-            if (svc.netCheckedAt == 0L) return TunnelPath.OFFLINE                 // not probed yet: a few seconds after the start
-            val gw = svc.gateway
-            return TunnelConnectivity.choose(svc.netDirectMs != null, gw?.connected == true, svc.netGatewayMs != null).also { lastPath = it }
+            if (TvService.running == null || !TvNet.checked()) return TunnelPath.OFFLINE   // not measured yet: a few seconds after the start
+            // relay-R1: the path is read from the single truth of the TV (direct / via_relay / none), like every other consumer; no definition of its own
+            return TunnelConnectivity.path(TvNet.state()).also { lastPath = it }
         }
         override fun keyId() = client.keyId()
     }

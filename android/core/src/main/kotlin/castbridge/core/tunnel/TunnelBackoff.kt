@@ -62,10 +62,14 @@ object TunnelConnectivity {
     /**
      * The TV's own network (Wi-Fi / Ethernet) when it reaches the Internet; else the phone's Internet shared over Bluetooth (CastBridge-TV's local SOCKS5 proxy), when a phone is attached AND
      * the probe through it worked; else offline: the tunnel makes no attempt and queues nothing.
+     * relay-R1: no definition of its own any more, the path is read from the single truth [castbridge.core.connect.NetState].
      */
-    fun choose(directOk: Boolean, gatewayConnected: Boolean, gatewayOk: Boolean): TunnelPath = when {
-        directOk -> TunnelPath.DIRECT
-        gatewayConnected && gatewayOk -> TunnelPath.GATEWAY
-        else -> TunnelPath.OFFLINE
+    fun choose(directOk: Boolean, gatewayConnected: Boolean, gatewayOk: Boolean): TunnelPath =
+        path(castbridge.core.connect.NetStates.of(directOk, gatewayConnected, gatewayOk))
+
+    fun path(net: castbridge.core.connect.NetState): TunnelPath = when (net) {
+        castbridge.core.connect.NetState.DIRECT -> TunnelPath.DIRECT
+        castbridge.core.connect.NetState.VIA_RELAY -> TunnelPath.GATEWAY
+        castbridge.core.connect.NetState.NONE -> TunnelPath.OFFLINE
     }
 }

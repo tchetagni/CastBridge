@@ -131,6 +131,7 @@ fun BtScreen() {
             if (busy) OutlinedButton(onClick = { BtUploadService.cancel(ctx) }) { Text("Annuler") }
         }
         GatewaySwitch(selected, pin, granted)
+        RelaySettingsRows(selected)
         when (val u = state) {
             is ResumableUpload.State.Uploading -> {
                 LinearProgressIndicator({ u.sent.toFloat() / u.total }, Modifier.fillMaxWidth())
@@ -285,6 +286,36 @@ fun UpdatePanel(client: TvClient) {
         style = MaterialTheme.typography.bodySmall)
 }
 
+
+/**
+ * relay-R1 (DESIGN-RELAIS § 4, décisions 1 et 2): the two settings of the automatic Internet pipe. When a TV this phone is synchronized with asks for Internet, CastBridge opens the pipe by
+ * itself, without a question (the PIN given once IS the consent). « Données mobiles pour la TV » lifts the limit on a metered network (by default: only the project's server, 5 MB a day, nothing
+ * big); « Ne plus relayer pour cette TV » is the way out (off by default).
+ */
+@Composable
+fun RelaySettingsRows(tvAddress: String?) {
+    val ctx = LocalContext.current
+    val settings = remember { RelaySettings(ctx) }
+    var mobile by remember { mutableStateOf(settings.allowMobile) }
+    var withdrawn by remember(tvAddress) { mutableStateOf(tvAddress?.let { settings.optedOut(it) } ?: false) }
+    HorizontalDivider()
+    Row(verticalAlignment = Alignment.CenterVertically) {
+        Column(Modifier.weight(1f)) {
+            Text("Données mobiles pour la TV", style = MaterialTheme.typography.titleSmall)
+            Text("Quand la TV demande Internet et que ce téléphone n'est pas sur un Wi-Fi : par défaut, seulement CastBridge et 5 Mo par jour. Activé : sans limite.",
+                style = MaterialTheme.typography.bodySmall, color = MaterialTheme.colorScheme.onSurfaceVariant)
+        }
+        Switch(checked = mobile, onCheckedChange = { mobile = it; settings.allowMobile = it })
+    }
+    if (tvAddress != null) Row(verticalAlignment = Alignment.CenterVertically) {
+        Column(Modifier.weight(1f)) {
+            Text("Ne plus relayer pour cette TV", style = MaterialTheme.typography.titleSmall)
+            Text("Éteint : ce téléphone ouvre Internet à cette TV quand elle le demande. Allumé : jamais, sauf si vous le partagez vous-même ci-dessus.",
+                style = MaterialTheme.typography.bodySmall, color = MaterialTheme.colorScheme.onSurfaceVariant)
+        }
+        Switch(checked = withdrawn, onCheckedChange = { withdrawn = it; settings.setOptedOut(tvAddress, it) })
+    }
+}
 
 /** "Share the phone's Internet with the TV" over Bluetooth (TV app downloads, quiz questions, updates). */
 @Composable

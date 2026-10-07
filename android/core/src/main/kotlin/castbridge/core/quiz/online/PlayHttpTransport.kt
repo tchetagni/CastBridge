@@ -42,6 +42,8 @@ class PlayHttpTransport(
     private val ticketMaxAgeMs: Long = 8 * 60_000L,
     /** Vrai tant que le service exige un ticket valide sur chaque POST d'un client sans `Origin` ; faux = seulement au premier (service qui ne juge que la création de session). */
     private val ticketOnEveryPost: Boolean = true,
+    /** relay-R1: true while the TV reaches the service only through a phone's pipe: every request then says so in the informational header `X-CB-Via: relay` (no authority, no change of protocol). Read at each request. */
+    private val viaRelay: () -> Boolean = { false },
 ) : PlayTransport, RttSource, TransportHealth, AutoCloseable {
     private val base = baseUrl.trimEnd('/')
     @Volatile private var ticket: String? = ticket
@@ -145,6 +147,7 @@ class PlayHttpTransport(
             useCaches = false
             connectTimeout = connectTimeoutMs
             setRequestProperty("User-Agent", "CastBridge-TV")
+            if (viaRelay()) setRequestProperty(VIA_HEADER, VIA_RELAY)
             secret?.let { setRequestProperty("X-Play-Conn", it) }
         }.also { live += it }
     }
@@ -260,6 +263,9 @@ class PlayHttpTransport(
     private fun fail(why: String) { lastFailure = why }
 
     companion object {
+        /** Informational only (relay-R1): the service may log it, it decides nothing from it. */
+        const val VIA_HEADER = "X-CB-Via"
+        const val VIA_RELAY = "relay"
         const val MAX_PARALLEL = 8
         const val MAX_QUEUE = 64
         const val POLL_READ_TIMEOUT_MS = 40_000

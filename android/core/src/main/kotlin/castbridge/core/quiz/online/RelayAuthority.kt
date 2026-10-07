@@ -17,6 +17,8 @@ class RelayAuthority(
     private val maxPhones: Int = MAX_PHONES,
     private val random: java.util.Random = SecureRandom(),
     private val safetyOf: () -> SafetyView = { session.safety() },
+    /** relay-R1: added to the window the home phones see when this TV has Internet only through a phone ([PlayRelayProfile.windowFor], bounded by the service's own grace); 0 otherwise. Read at each call. */
+    private val extraWindowMs: () -> Long = { 0L },
 ) : GameAuthority {
     override val scope: PlayScope get() = PlayScope.INTERNET
 
@@ -146,7 +148,8 @@ class RelayAuthority(
         val qc = session.questionClock
         if (d["phase"] == "QUESTION" && qc != null && qc.questionId == id) {
             val sinceOpen = localClock() - qc.opensAtLocalMono
-            d["remainingMs"] = if (sinceOpen < 0) qc.windowMs else (qc.windowMs - sinceOpen).coerceAtLeast(0L)
+            val window = qc.windowMs + extraWindowMs().coerceAtLeast(0L)
+            d["remainingMs"] = if (sinceOpen < 0) window else (window - sinceOpen).coerceAtLeast(0L)
             d["waitMs"] = (-sinceOpen).coerceAtLeast(0L)
         }
         return d

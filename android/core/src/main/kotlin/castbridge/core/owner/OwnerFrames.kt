@@ -27,6 +27,10 @@ object OwnerFrames {
     const val PROOF_REQUEST = 9
     /** TV -> phone: ASCII "cbx1.…" envelope of type `proof` signed by the installation key over the challenge (see [TvProof]; docs/coordination/DESIGN-W6-PARENTAL-PHONE-GATE.md § 3.3). */
     const val PROOF = 10
+    /** TV -> phone (relay-R1, docs/coordination/DESIGN-RELAIS-TELEPHONE-2026-10-07.md § 2.4) : « la TV veut un tuyau Internet » (answer to [RELAY_STATE]); payload `castbridge.core.relay.RelayFrames.Ask`. Types 11-15 : relay. */
+    const val RELAY_ASK_PIPE = 11
+    /** Phone -> TV : the relay state of a synchronized phone (`RelayFrames.State`); the TV answers [RELAY_ASK_PIPE] or RESULT(1). 13-15 are kept for the courier (relay-R2). */
+    const val RELAY_STATE = 12
 
     class Frame(val type: Int, val payload: ByteArray) {
         val text: String get() = String(payload, Charsets.UTF_8)

@@ -18,6 +18,9 @@ object QuizOnlineFlag {
     fun enabled(settingsValue: Boolean?, flagOrder: Boolean?, compiledDefault: Boolean): Boolean = settingsValue ?: flagOrder ?: compiledDefault
 }
 
+/** relay-R1 : un téléphone synchronisé peut-il donner Internet à la TV qui n'en a pas ? [UNKNOWN] = l'appelant ne sait pas (comportement d'avant). */
+enum class PlayRelay { UNKNOWN, NO_PHONE, OLD_PHONE, POSSIBLE }
+
 /** Ce que le Quiz montre de la partie Internet : rien, une raison (jamais un écran vide), ou la tuile. */
 sealed class PlayTile {
     object Hidden : PlayTile() { override fun toString() = "Hidden" }
@@ -36,12 +39,17 @@ object PlayGate {
     /** Dite au menu quand le service tourne avec `CASTBRIDGE_PLAY_REVOCATIONS=off` (POC) : une TV révoquée y joue encore. */
     const val NOTE_REVOCATIONS_OFF = "Service d'essai : les activations révoquées ne sont pas encore vérifiées."
 
-    fun tile(flagOn: Boolean, edition: HostEdition, hasInternet: Boolean, childProfile: Boolean, clockDoubt: Boolean = false, serviceUp: Boolean? = null, verifiableActivation: Boolean = true): PlayTile = when {
+    fun tile(flagOn: Boolean, edition: HostEdition, hasInternet: Boolean, childProfile: Boolean, clockDoubt: Boolean = false, serviceUp: Boolean? = null, verifiableActivation: Boolean = true,
+             relay: PlayRelay = PlayRelay.UNKNOWN): PlayTile = when {
         !flagOn -> PlayTile.Hidden
         edition == HostEdition.NONE -> PlayTile.Blocked(PlayRules.MSG_ACTIVATE)
         !verifiableActivation -> PlayTile.Blocked(MSG_ACTIVATION_FILE)   // M-4 : même règle que le service (clé courte invérifiable)
         clockDoubt -> PlayTile.Blocked(TvAccess.CHECK_CLOCK_LABEL)
         childProfile -> PlayTile.Blocked(PlayRules.MSG_CHILD)
+        // relay-R1 : sans Internet, la tuile reste proposée si un téléphone synchronisé peut ouvrir un tuyau (la TV le lui demandera à l'appui) ; sinon la raison est dite avec les mots du relais
+        !hasInternet && relay == PlayRelay.POSSIBLE -> PlayTile.Available     // le service ne peut pas être sondé sans Internet : on essaiera à l'appui, par le tuyau
+        !hasInternet && relay == PlayRelay.NO_PHONE -> PlayTile.Blocked(castbridge.core.relay.RelayText.NO_PHONE)
+        !hasInternet && relay == PlayRelay.OLD_PHONE -> PlayTile.Blocked(castbridge.core.relay.RelayText.OLD_PHONE)
         !hasInternet -> PlayTile.Blocked(MSG_NO_INTERNET)
         serviceUp == false -> PlayTile.Blocked(MSG_SERVICE_DOWN)
         else -> PlayTile.Available

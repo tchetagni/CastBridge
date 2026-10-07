@@ -67,6 +67,11 @@ class ServerLink(
         fun installReady(apk: File, m: UpdateManifest, mandatory: Boolean, userAsked: Boolean): Boolean
         /** Something shown on a screen changed (status, progress). Called on the link's thread. */
         fun changed() {}
+        /**
+         * relay-R1 (REL-F7): may the BACKGROUND work that moves a lot of bytes (update check and download, questions, question packs) run now? The TV says no while its only Internet
+         * is a phone's pipe that is precious (a game is running, or the phone is on mobile data). The heartbeat and the user's own actions are never held back. Default: yes.
+         */
+        fun backgroundBulkAllowed(): Boolean = true
     }
 
     enum class Phase { IDLE, CHECKING, UP_TO_DATE, DOWNLOADING, READY, INSTALLING, FAILED, BLOCKED }
@@ -167,12 +172,15 @@ class ServerLink(
         val u = update
         if (u.phase == Phase.READY && u.file != null && u.manifest != null && u.manifest.versionCode != declinedVersion) offerInstall(userAsked = false)
         else checkUpdate(trigger)
+        if (!bulkAllowed()) return@synchronized                      // relay-R1: the questions and the packs wait with the update (see Hooks.backgroundBulkAllowed)
         if (quiz != null) {
             val due = state.quizSyncedAt == 0L || now - state.quizSyncedAt >= QUIZ_PERIOD_MS || now < state.quizSyncedAt
             if (due && now - state.quizAttemptAt >= QUIZ_RETRY_MS) syncQuiz()
         }
         if (quizPacks != null && !state.blocked && now - quizPackAttemptAt >= QUIZ_PACK_PERIOD_MS) refillQuizPacks()
     }
+
+    private fun bulkAllowed(): Boolean = runCatching { hooks.backgroundBulkAllowed() }.getOrDefault(true)
 
     /** Heartbeat (registers first if needed); true if the server answered. */
     fun contact(): Boolean = synchronized(lock) {
@@ -250,6 +258,7 @@ class ServerLink(
     fun checkUpdate(trigger: UpdateSchedule.Trigger): UpdateStatus = synchronized(lock) {
         if (state.needsConsent) return update
         if (state.blocked) { update = UpdateStatus(Phase.BLOCKED, "Appareil bloqué par l'administrateur : pas de mise à jour"); hooks.changed(); return update }
+        if (trigger != UpdateSchedule.Trigger.USER && !bulkAllowed()) return update      // held back, nothing consumed (the schedule, the server's « check now ») : it runs when the gate opens
         val now = clock()
         if (!schedule.isDue(state.updateSchedule, now, trigger)) return update
         if (trigger == UpdateSchedule.Trigger.FORCED) forcedCheck = false

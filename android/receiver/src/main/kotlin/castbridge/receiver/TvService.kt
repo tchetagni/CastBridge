@@ -389,7 +389,7 @@ class TvService : Service(), Device {
         LotsHub.startup(this, videosDir)
         Thread { RentalHub.sweep(this, castbridge.core.lots.SweepTrigger.APP_START).forEach { notice(it) }; main.postDelayed(rentalTick, 15 * 60_000L) }.start()   // the autonomous deletion of ended rentals
         bt = BtServer(this, videosDir, guard, negotiate = ::linkInfo, hello = ::btHello, trusted = ::btTrusted, parental = ParentalHub.syncHost,
-            progress = { reception }) { setStatus("1-bt", it) }
+            progress = { reception }, helloFlags = TvNet::onHelloFlags) { setStatus("1-bt", it) }
         wd = WifiDirectGroup(this, prefs) { setStatus("2-wd", it); syncIconsAsync() }
         usb = UsbImporter(this, videosDir) { setStatus("3-usb", it) }
         ssh = SshControl(this, { setStatus("4-ssh", it) }, { setStatus("4-ssh-bt", it) },
@@ -403,6 +403,7 @@ class TvService : Service(), Device {
         onPermissionsReady()                                    // Bluetooth starts if its permission was granted earlier
         // server link (docs/API-SERVER.md): registration, heartbeat every 15 min, updates, usage events, quiz questions
         TvConnect.start(this)
+        TvNet.start()                                            // relay-R1: the single Internet truth and the request for a phone's pipe (castbridge.receiver.TvNet)
         TunnelHub.start(this)                                    // remote administration of the editor (docs/REMOTE-TUNNEL-TV.md): waits for the terms, a key and Internet
         bg.execute { cleanUpdateFiles() }
         registerStorageEvents()
@@ -455,6 +456,8 @@ class TvService : Service(), Device {
             contentIndexing = true,
             // R-17 : une ligne INFO par requête refusée (route, statut, code ; jamais de code PIN, jeton ni corps) : `adb logcat -s CastBridgeTV` ou ssh logcat
             onLog = { Log.i(TAG, it) },
+            // relay-R1: while the TV wants an Internet pipe, the trusted phone's keep-alive (GET /api/info) learns it from the header X-CB-Pipe and opens the pipe by itself
+            pipeHint = TvNet::pipeWanted,
             // clé propre à cette TV (stockage privé de l'app, jamais sur la clé USB) : signe les caches .cbhash ; un cache forgé ou venu d'ailleurs est ignoré
             contentIndexKey = runCatching { contentIndexKey() }.getOrNull(),
             // pas d'empreintes pendant un téléchargement ni un import USB (R-06, R-11 : bus USB et Wi-Fi partagés)
@@ -521,7 +524,8 @@ class TvService : Service(), Device {
     private val helloHandler by lazy {
         castbridge.core.trust.HelloHandler(trust, pairing, ::btBonded, ::tvName, runCatching { packageManager.getPackageInfo(packageName, 0).versionName }.getOrNull() ?: "?",
             { "CastBridge TV " + (Build.MODEL ?: "") }, { linkInfo(null, 0) }, { p -> phoneConnected(p) }, castbridge.core.trust.AttemptLimiter(global = 40, perPeer = 10),
-            { name, d -> castbridge.core.trust.TvRefusals.message(name, d)?.let { notice(it); setStatus("1-phone", it) } }, capacity)
+            { name, d -> castbridge.core.trust.TvRefusals.message(name, d)?.let { notice(it); setStatus("1-phone", it) } }, capacity,
+            pipeWanted = TvNet::pipeWanted)       // relay-R1: the trusted phone learns from its HELLO answer that the TV wants an Internet pipe
     }
 
     /** « Retirer » on the TV (any screen): the phone loses its access and its tokens at once, and disappears from the status bar. */
@@ -670,28 +674,25 @@ class TvService : Service(), Device {
                     try {
                         val wasDirect = netDirectMs != null; val wasGateway = netGatewayMs != null; val first = netCheckedAt == 0L
                         // The probe (a request to a third party) is not sent by default: only on a manual test, when the user turned « netProbe » on,
-                        // or once the remote-assistance tunnel's terms are accepted (it needs to know whether Internet is reachable). In those last two cases it IS periodic:
-                        // one round per tick (60 s while Internet works, 10-30 s while it does not), also through the phone's gateway when one is connected.
+                        // or once the remote-assistance tunnel's terms are accepted (it needs to know whether Internet is reachable). Even then (relay-R1, castbridge.receiver.TvNet.measure):
+                        // on the TV's own network only, every 5 minutes or at once when the network changes; NEVER through the phone's gateway, whose life is read from its own PING frames
+                        // (one check towards the project's server per new pipe): it cost mobile data and a radio wake-up every minute.
                         val manual = netManual; netManual = false
                         val probe = manual || prefs.netProbe || runCatching { TunnelHub.termsAccepted(this@TvService) }.getOrDefault(false)
                         val link = TvNetDiag.linkKind(this@TvService)
-                        if (probe) {
-                            netDirectMs = TvNetDiag.probe(null)
-                            netGatewayMs = gateway?.proxy()?.let { TvNetDiag.probe(it) }
-                        } else {
-                            // No traffic: the system's own validation (NET_CAPABILITY_VALIDATED) and the gateway state.
-                            netDirectMs = if (systemValidated()) 0L else null
-                            netGatewayMs = if (gateway?.connected == true) 0L else null
-                        }
-                        netMeasured = probe
+                        val m = TvNet.measure(probe, manual, systemValidated())
+                        netDirectMs = m.directMs
+                        netGatewayMs = m.gatewayMs
+                        netMeasured = m.measured
                         netCheckedAt = System.currentTimeMillis()
                         setStatus("7-net", netSummary())
                         synchronized(netTracker) {
                             // Without a probe, a link that the system did not validate is « not verified » (CHECKING), never a red « Pas d'Internet »: only « no link at all » is NONE.
-                            if (probe || netDirectMs != null || netGatewayMs != null || link == castbridge.core.net.LinkKind.NONE)
+                            // a round without a new probe adds no evidence of a failure (the last answer is carried): the badge is only fed by a real probe, a validated link or « no link at all »
+                            if (m.probed || netDirectMs != null || netGatewayMs != null || link == castbridge.core.net.LinkKind.NONE)
                                 netState = netTracker.update(link, netDirectMs, gateway?.connected == true, netGatewayMs, android.os.SystemClock.elapsedRealtime())
                             netGatewayAlso = netTracker.gatewayAlsoAvailable
-                            delay = if (probe) netTracker.nextDelayMs() else NetStateTracker.STEADY_MS   // 60 s while Internet works, 10-30 s while it does not (probing only)
+                            delay = NetStateTracker.STEADY_MS      // 60 s: the rounds themselves cost nothing (local reads); a network change or a failed call re-runs one at once (netChanged)
                         }
                         icons.setInternet(netState)
                         main.post { screen?.statusesChanged() }; iconsChanged(); syncIconsAsync()      // the network just changed: re-read the badges now (no extra loop)
@@ -715,8 +716,10 @@ class TvService : Service(), Device {
     private var netGwUp = false
 
     /** Network lost/available (and gateway connect/disconnect): probe again soon instead of waiting for the next tick. */
-    private fun netChanged() { main.removeCallbacks(netKick); main.postDelayed(netKick, 1500) }
+    private fun netChanged() { TvNet.markChanged(); netRecheck() }
     private val netKick = Runnable { if (netCheckedAt > 0) netTick.run() }
+    /** relay-R1: castbridge.receiver.TvNet just learnt something about the pipe (end-to-end check done): the badge and the screens read the state again soon (no new probe of the TV's own network). */
+    fun netRecheck() { main.removeCallbacks(netKick); main.postDelayed(netKick, 1500) }
 
     private fun watchNetwork() {
         if (netCallback != null) return
@@ -739,7 +742,7 @@ class TvService : Service(), Device {
     /** Gateway status callback: re-probe when a phone connects or disconnects. */
     private fun gatewayStatus(st: String?) {
         setStatus("6-gw", st); syncIconsAsync()
-        if ((st != null) != netGwUp) { netGwUp = st != null; netChanged() }
+        if ((st != null) != netGwUp) { netGwUp = st != null; netChanged(); TvNet.gatewayChanged(st != null) }
     }
 
     /** « connectivity_check » event: [via] null = the TV's own link (Wi-Fi / Ethernet). */
@@ -1104,12 +1107,14 @@ class TvService : Service(), Device {
         path == "/api/connections" && method == "GET" -> ApiReply(200, castbridge.core.status.StatusIconModel.json(icons.snapshot(), System.currentTimeMillis()))
         path == "/api/net" && method == "GET" -> ApiReply(200, synchronized(netTracker) {
             netJson(netTracker, TvNetDiag.linkKind(this), netDirectMs, gateway?.connected == true, netGatewayMs, netCheckedAt) })
+        // relay-R1: the single Internet truth (direct / via_relay / none), the request for a phone's pipe and the measured link: counts only, never a name or an address
+        path == "/api/relay" && method == "GET" -> ApiReply(200, TvNet.json())
         path == "/api/gateway" && method == "GET" -> ApiReply(200, gateway?.json() ?: """{"listening":false,"connected":false}""")
         path == "/api/gateway/test" && method == "GET" -> gateway?.test() ?: ApiReply(409, """{"error":"passerelle non démarrée"}""")
         path == "/api/gateway/speed" && method == "GET" -> gateway?.speed(params["bytes"]?.toLongOrNull() ?: 2_000_000)
             ?: ApiReply(409, """{"error":"passerelle non démarrée"}""")
         path == "/api/gateway/diag" && method == "GET" -> gateway?.let { g ->
-            val host = params["host"]?.takeIf { it.isNotBlank() } ?: "8.8.8.8"
+            val host = params["host"]?.takeIf { it.isNotBlank() } ?: castbridge.core.relay.RelayScope.SERVER_HOST      // the phone's relay only serves the project's server
             val lines = java.util.Collections.synchronizedList(mutableListOf<String>())
             val act = screen?.takeIf { it.shown }?.activity as? PlayerActivity
             act?.let { a -> main.post { a.showDiag(host) } }                 // also shown on the TV when the screen is up

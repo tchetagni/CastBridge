@@ -36,6 +36,8 @@ class BtServer(
     private val parental: castbridge.core.parental.ReportSyncHost? = null,
     /** The single reception progress of the TV (ReceiverServer.progress): a file received here appears on the screen and in the notification like a Wi-Fi one. */
     private val progress: () -> castbridge.core.xfer.TransferProgress? = { null },
+    /** relay-R1: the flags byte of every HELLO with its peer (the pipe-on-demand capability bit of the phone, [BtProtocol.HELLO_RELAY]). */
+    private val helloFlags: ((String, Int) -> Unit)? = null,
     private val status: (String?) -> Unit,
 ) {
     @Volatile private var server: BluetoothServerSocket? = null
@@ -122,6 +124,7 @@ class BtServer(
                 hello = hello?.let { h -> { p, req -> wasHello = true; idleLimit.set(90_000); last.set(System.currentTimeMillis())
                     val name = runCatching { sock.remoteDevice.name }.getOrNull()
                     h(p, name, req).also { last.set(System.currentTimeMillis()) } } },
+                helloFlags = helloFlags,
                 trusted = trusted, parental = parental,
                 acceptFile = { n -> !ActivationCenter.trial() || castbridge.core.owner.TrialPolicy.btFileAllowed(n) })
             sink?.end(r == BtProtocol.OK, BtProtocol.describe(r))

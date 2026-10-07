@@ -105,6 +105,8 @@ class ReceiverServer(
     private val indexBusy: () -> Boolean = { false },
     /** One diagnostic line per refused request (route, status, reason code; never a PIN, token or body): the TV app writes it to logcat at INFO (R-17). */
     private val onLog: (String) -> Unit = {},
+    /** relay-R1: does the TV want an Internet pipe right now? When true, `GET /api/info` (authenticated, polled by the trusted phone's keep-alive) carries the header `X-CB-Pipe: 1`: the phone then opens the pipe by itself. */
+    private val pipeHint: () -> Boolean = { false },
 ) : NanoHTTPD(port) {
 
     /** The socket of the connection this thread serves (NanoHTTPD: one thread per connection), for [hungUp]. */
@@ -710,7 +712,7 @@ class ReceiverServer(
             path.startsWith("/api/transfer/") -> transfer(s, path.removePrefix("/api/transfer/"), p).also {
                 if (it.status != Response.Status.OK && !(it.status.requestStatus == 429 && bodyDrained.get() == true)) it.addHeader("Connection", "close")
             }
-            path == "/api/info" -> ok(info())
+            path == "/api/info" -> ok(info()).also { r -> if (runCatching { pipeHint() }.getOrDefault(false)) r.addHeader("X-CB-Pipe", "1") }
             path == "/api/storage" -> storage(s.method, p)
             path == "/api/storage/check" -> if (s.method == Method.GET) check(p) else json(Response.Status.METHOD_NOT_ALLOWED, """{"error":"use GET"}""")
             path == "/api/have" -> if (s.method == Method.GET) have(p) else json(Response.Status.METHOD_NOT_ALLOWED, """{"error":"use GET"}""")

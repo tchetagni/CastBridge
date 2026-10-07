@@ -159,6 +159,12 @@
                 <action android:name="android.bluetooth.adapter.action.STATE_CHANGED" />
             </intent-filter>
         </receiver>
+        <!-- Relay (docs/coordination/DESIGN-RELAIS-TELEPHONE-2026-10-07.md): a TV that wants an Internet pipe knocks at the phone's door over Bluetooth ("device connected"); the saved TV's request is read and the pipe opens silently. Not exported: only the system sends it. -->
+        <receiver android:name=".RelayWakeReceiver" android:exported="false">
+            <intent-filter>
+                <action android:name="android.bluetooth.device.action.ACL_CONNECTED" />
+            </intent-filter>
+        </receiver>
         <activity android:name=".agent.AssistantActivity" android:exported="false" android:label="Ranger ma bibliothèque"
             android:theme="@style/Theme.CastBridge" />
         <service android:name=".UploadService" android:exported="false"

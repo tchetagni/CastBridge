@@ -4,9 +4,14 @@ import android.content.Context
 import castbridge.core.langues.EmbeddedLangSource
 import castbridge.core.langues.LangLotConsumer
 import castbridge.core.langues.LangPack
+import castbridge.core.connect.RoutedLotRemote
+import castbridge.core.connect.Routes
 import castbridge.core.connect.ServerUrl
 import castbridge.core.lots.LotConsumer
 import castbridge.core.lots.SecureHttpLotRemote
+import castbridge.core.quiz.online.PlayRelay
+import castbridge.core.relay.PipeNeed
+import castbridge.core.relay.PipeOutcome
 import castbridge.core.lots.TvLotFetcher
 import castbridge.core.update.UpdateKeys
 import castbridge.core.lots.LotId
@@ -39,25 +44,29 @@ object LanguesHub {
     }
 
     /**
-     * Does the system say this TV has working Internet (its own validation, no traffic from CastBridge-TV)? Same check as the Internet badge of TvService.
-     * The « Mettre à jour les lots Langues » button is shown only then.
+     * Does this TV have working Internet right now, by its own network or by the pipe of a phone? The single truth of the TV ([TvNet.state], relay-R1: no definition of its own any
+     * more, and the phone's pipe counts: the button used to be hidden on a TV that only had the phone's Internet).
      */
-    fun hasInternet(ctx: Context): Boolean = runCatching {
-        val cm = ctx.getSystemService(android.net.ConnectivityManager::class.java)
-        cm.getNetworkCapabilities(cm.activeNetwork)?.let {
-            it.hasCapability(android.net.NetworkCapabilities.NET_CAPABILITY_INTERNET) && it.hasCapability(android.net.NetworkCapabilities.NET_CAPABILITY_VALIDATED)
-        } == true
-    }.getOrDefault(false)
+    @Suppress("UNUSED_PARAMETER")
+    fun hasInternet(ctx: Context): Boolean = TvNet.state().up
+
+    /** The « Mettre à jour les lots Langues » button is shown when the TV has Internet, or when a synchronized phone could give it one (the TV asks for the pipe when the button is pressed). */
+    fun canUpdate(ctx: Context): Boolean = hasInternet(ctx) || TvNet.relayAvailability() == PlayRelay.POSSIBLE
 
     /**
      * The server -> TV downloader, built ONLY when the user presses the button (nothing is scheduled, nothing listens). HTTPS only, no redirect,
      * the server's production key (plus the optional test key of a local build); installs through the same [LotsHub] store as a phone upload.
+     * relay-R1: every request goes through [Routes] like any call of the TV to the server (its own network first, then the phone's pipe), and pressing the button without Internet asks a
+     * synchronized phone for a pipe and waits for it (bounded).
      * @throws IllegalArgumentException if the configured server address is not HTTPS (a test build pointing at plain http: use the phone)
      */
     fun fetcher(ctx: Context): TvLotFetcher {
         val server = ServerUrl.normalize(castbridge.receiver.TvConnect.link?.state?.baseUrl ?: BuildConfig.DEFAULT_SERVER.ifBlank { null }) ?: ServerUrl.DEFAULT
         val keys = (UpdateKeys.PUBLIC_KEYS + BuildConfig.EXTRA_UPDATE_KEY).filter { it.isNotBlank() }
-        return TvLotFetcher(SecureHttpLotRemote(server), LotsHub.store(ctx), keys, LotsHub.appVersion(ctx), { hasInternet(ctx) })
+        SecureHttpLotRemote(server)                      // validates the address now (IllegalArgumentException for plain http), as before
+        val routes = castbridge.receiver.TvConnect.link?.routes ?: Routes()
+        return TvLotFetcher(RoutedLotRemote(routes) { p -> SecureHttpLotRemote(server, p) }, LotsHub.store(ctx), keys, LotsHub.appVersion(ctx),
+            { hasInternet(ctx) || TvNet.ensure(PipeNeed.UPDATE_NOW, force = true) is PipeOutcome.Up })
     }
 
     /** The free starter bundled in the APK (zh-a0): usable on a fresh TV without any lot. */

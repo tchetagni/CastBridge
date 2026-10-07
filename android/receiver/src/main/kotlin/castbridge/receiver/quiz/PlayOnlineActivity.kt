@@ -120,8 +120,14 @@ class PlayOnlineActivity : Activity() {
         }
     }
 
+    private var lastWaitLine: String? = null
+
     private fun tick() {
-        if (!started) return
+        if (!started) {
+            // relay-R1 : sans Internet, la TV demande un tuyau au téléphone avant de sonder le service : l'utilisateur voit où l'on en est
+            PlayHub.requestLine()?.let { l -> if (l != lastWaitLine) { lastWaitLine = l; showMessage("Vérification du service de jeu…\n$l", null) } }
+            return
+        }
         val s = PlayHub.session
         when (flow.screen) {
             PlayScreen.OPENING -> if (s != null && s.started) {
@@ -160,8 +166,10 @@ class PlayOnlineActivity : Activity() {
         banner.contentDescription = m.description
         banner.setCompoundDrawablesRelativeWithIntrinsicBounds(TvSignalViews.drawable(this, m.level, PlayerIcons.ICON_DP), null, null, null)
         banner.setTextColor(SignalColors.TEXT)
-        here.visibility = if (m.hereLine != null) View.VISIBLE else View.GONE
-        here.text = m.hereLine.orEmpty()
+        // relay-R1 : la demande de tuyau en cours, puis « Partie par relais : liaison lente » (information, jamais une alarme) ; rien hors partie
+        val hereText = (listOfNotNull(m.hereLine) + (if (online) listOfNotNull(PlayHub.requestLine() ?: PlayHub.relayLine()) else emptyList())).joinToString("   ·   ")
+        here.visibility = if (hereText.isNotEmpty()) View.VISIBLE else View.GONE
+        here.text = hereText
     }
 
     // ------------------------------------------------------------------ écrans
