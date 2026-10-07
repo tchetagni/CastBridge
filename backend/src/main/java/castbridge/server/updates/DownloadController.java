@@ -13,17 +13,23 @@ import java.nio.file.Path;
 import java.nio.file.StandardOpenOption;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+import org.springframework.http.CacheControl;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 /**
  * Serves the APK files. Downloads through the phone's Bluetooth link are slow and get cut: single byte ranges
  * (206 / 416), If-Range, ETag (= "sha256"), If-None-Match (304), Content-Length and a long immutable cache (a file name
  * never changes content: it carries the version and the start of its hash).
+ * <p>
+ * Plus the stable public address of the newest version, {@code /dl/{app}/latest.apk} (a redirect to one of those immutable files).
  */
 @RestController
 @RequestMapping("/dl")
@@ -34,6 +40,34 @@ public class DownloadController {
     private final ReleaseService service;
 
     public DownloadController(ReleaseService service) { this.service = service; }
+
+    /**
+     * The stable address of the newest download: 302 to {@code /dl/{app}/{file}} of the release {@link ReleaseService#latestForDownload}
+     * picks (newest stable, not revoked, fully rolled out; {@code ?abi=} optional). The target changes with every publication, so the
+     * redirect is never cached; the hash and the version travel in headers so a script can see what it is about to get.
+     * {@code latest.apk} can never be a published file name (they all start with "castbridge-"), and this literal path is more specific
+     * than the generic file route below, which therefore never sees it.
+     */
+    @RequestMapping(path = "/{app}/latest.apk", method = {RequestMethod.GET, RequestMethod.HEAD})
+    public ResponseEntity<Void> latest(@PathVariable String app, @RequestParam(required = false) String abi, HttpServletRequest req) {
+        Release r = service.latestForDownload(app, abi).orElseThrow(() -> ApiException.notFound(noRelease(app, abi)));
+        return ResponseEntity.status(HttpStatus.FOUND)
+                .header(HttpHeaders.LOCATION, DownloadPageController.safePrefix(req) + "/dl/" + r.getApp() + "/" + r.getFileName())
+                .cacheControl(CacheControl.noStore())
+                .header("X-Content-SHA256", r.getSha256())
+                .header("X-CastBridge-Version", printableAscii(r.getVersionName()))
+                .build();
+    }
+
+    private static String noRelease(String app, String abi) {
+        String architecture = abi == null || abi.isBlank() ? "" : ", architecture " + abi.trim();
+        return DownloadPage.NONE + " : " + ReleaseService.appLabel(app) + architecture;
+    }
+
+    /** A header value is no place for accents or control characters. */
+    private static String printableAscii(String s) {
+        return s == null ? "" : s.replaceAll("[^\\x20-\\x7E]", "?");
+    }
 
     @RequestMapping(path = "/{app}/{file:.+}", method = {RequestMethod.GET, RequestMethod.HEAD})
     public void download(@PathVariable String app, @PathVariable String file, HttpServletRequest req, HttpServletResponse res)

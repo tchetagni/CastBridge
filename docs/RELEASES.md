@@ -286,7 +286,7 @@ a1b2c3d4e5f6g7h8i9j0... sender-release.apk
    ssh user@<TV_IP> "cp ~/CastBridge-release/*.apk /mnt/usb-key/Download/"
    ssh user@<TV_IP> "cp ~/CastBridge-release/SHA256SUMS /mnt/usb-key/Download/"
    ```
-4. **Serveur** (`/admin/releases`) : télécharger les APK depuis `~/CastBridge-release/`
+4. **Serveur** : publier chaque APK signé avec `tools/release/publish-apk.sh` (ci-dessous), ou par la page `/admin/releases`. Les adresses publiques stables et la page `/telecharger` se mettent à jour toutes seules
 5. **Tags Git** :
    - `tv-<version>` pour CastBridge-TV (ex. `tv-0.14.17-beta`)
    - `phone-<version>` pour CastBridge (ex. `phone-1.2.29-beta`)
@@ -298,6 +298,37 @@ a1b2c3d4e5f6g7h8i9j0... sender-release.apk
 - Affiche les sommes SHA256
 - Permet le téléchargement direct
 - Historique des versions publiées
+
+### Publier sur le serveur : `tools/release/publish-apk.sh` (ajouté le 2026-10-07)
+
+Un seul ordre publie un APK signé sur `bridge.sti-cm.com` (route admin `POST /api/v1/admin/releases`, `docs/API-SERVER.md` § 1) et affiche son adresse publique :
+
+```bash
+tools/release/publish-apk.sh tv    ~/CastBridge-release/SIGNED/CastBridge-TV-0.14.44-beta-verrouillee-armeabi-v7a.apk 115 0.14.44-beta-verrouillee "Notes de version en français."
+tools/release/publish-apk.sh phone ~/CastBridge-release/SIGNED/CastBridge-phone-1.2.52-beta.apk                      82  1.2.52-beta              "Notes de version en français."
+```
+
+Arguments : `app` (`tv` ou `phone`), chemin de l'APK, `versionCode`, `versionName`, notes (facultatives ; accents, apostrophes et retours à la ligne permis). Variables facultatives : `ABI` (défaut `armeabi-v7a` pour `tv`, `universal` pour `phone`), `CHANNEL` (`stable`), `ROLLOUT` (`100`), `MANDATORY` (`false`), `SERVER` (`ubuntu@bridge.sti-cm.com`), `API` (`http://127.0.0.1:7090`, vu du serveur), `PUBLIC` (`https://bridge.sti-cm.com`).
+
+Le script refuse un nom de fichier contenant `-test`, `superadmin` ou `debug`, calcule le SHA-256 local, dépose l'APK dans `~/castbridge/incoming/` du serveur (`scp`), lit **sur le serveur, dans le conteneur** `castbridge-api`, le jeton d'administration (jamais affiché, jamais copié sur ce Mac), appelle la route de publication, efface le fichier déposé, compare le SHA-256 renvoyé par le serveur à celui du fichier local (« ALERTE » s'ils diffèrent) et affiche l'adresse `/dl/<app>/<fichier>`.
+
+Règles (§ 3 et § 6) : seulement des builds signés avec la clé de release ; jamais un build `-test`, ni la variante superadmin du téléphone ; pour la TV, la variante verrouillée (`-PrequireActivation=true`, code +1). Un `versionCode` déjà publié pour la même app, la même architecture et le même canal est refusé (409) : on ne republie jamais un code, on en monte un nouveau.
+
+### Adresses publiques stables et page `/telecharger` (ajouté le 2026-10-07, serveur 1.2.5)
+
+Disponibles à partir du déploiement de `server-1.2.5` (avant : 404).
+
+| Adresse | Mène à |
+|---|---|
+| `https://bridge.sti-cm.com/dl/tv/latest.apk` | la dernière CastBridge-TV |
+| `https://bridge.sti-cm.com/dl/phone/latest.apk` | la dernière CastBridge (téléphone) |
+| `https://bridge.sti-cm.com/telecharger` | la page de téléchargement : version, date, taille, SHA-256, bouton « Télécharger » et code QR de chaque application |
+
+`/dl/<app>/latest.apk` répond **302** vers `/dl/<app>/<fichier>` de la version qui a la plus haute `versionCode` parmi les versions **stables, non retirées et à 100 % de déploiement**. Une version publiée avec `ROLLOUT` inférieur à 100, une bêta (`CHANNEL=beta`) ou une version retirée (`/revoke`) n'est jamais servie à cette adresse ; elle le devient (ou cesse de l'être) dès que le déploiement atteint 100 % (ou que la version est retirée), sans rien d'autre à faire. À `versionCode` égal, l'architecture se choisit ainsi : `tv` → `armeabi-v7a`, puis `universal`, puis `arm64-v8a` (une TV 64 bits exécute le 32 bits, et les TV du parc sont en `armeabi-v7a`) ; `phone` → `universal`, puis `arm64-v8a`, puis `armeabi-v7a`. `?abi=<architecture>` demande cette architecture puis, à défaut, l'APK `universal` (jamais une autre architecture) ; `x86` et `x86_64` ne sont servies que sur demande. Aucune version publiée : 404 en français.
+
+La réponse 302 porte `Cache-Control: no-store` (la cible change à chaque publication : ne jamais figer cette adresse dans un cache), `X-Content-SHA256` (SHA-256 du fichier cible) et `X-CastBridge-Version` (son `versionName`) : `curl -sI https://bridge.sti-cm.com/dl/tv/latest.apk`. Le fichier lui-même reste sous son nom immuable `/dl/<app>/<fichier>` (reprise de téléchargement, ETag, cache d'un an). Le nom `latest.apk` est réservé : tout fichier publié s'appelle `castbridge-<app>-<version>-<code>-<abi>-<début du hash>.apk`. Pour vérifier un téléchargement : `curl -L -o CastBridge-TV.apk https://bridge.sti-cm.com/dl/tv/latest.apk && shasum -a 256 CastBridge-TV.apk` doit donner le SHA-256 de la page.
+
+La page `/telecharger` (et `/telecharger/`) se met à jour toute seule à chaque publication ou retrait (cache navigateur de 5 minutes) : rien à régénérer, rien à copier sur le serveur, aucune modification de nginx attendue (`location /` envoie tout ce qui n'est pas `/play/` à `castbridge-api`, relevé dans `docs/PLAY-OPS.md` ; à confirmer par `nginx -T` avant le déploiement). Elle n'affiche que la version que mènent les deux adresses ci-dessus, jamais l'historique, jamais une version retirée, jamais un canal bêta. Même sécurité que `/guide/` : sans authentification ni cookie, CSP stricte, limite de débit par adresse IP. Détail des routes : `docs/API-SERVER.md` § 1.
 
 ## 9. Journal des versions
 
@@ -379,6 +410,7 @@ Tableau reconstruit à partir de l'historique de `version.properties` (`git log 
 | `bash tools/release/tag-plan.sh [--apply] [--push] [--app tv\|phone\|owner]` | Propose les tags annotés `tv-`, `phone-`, `owner-` sur le commit qui a introduit chaque version ; sans `--apply` : plan seulement ; ne déplace jamais un tag existant ; ne pousse que avec `--apply --push` | Seulement avec `--apply` |
 | `bash tools/release/deploy-server.sh <tag> [--apply]` | Déploiement traçable du serveur (voir § 14) | Seulement avec `--apply` |
 | `bash tools/release/sha256sums.sh DIR` | Sommes SHA-256 des APK (déjà décrit au § 7) | `DIR/SHA256SUMS` |
+| `tools/release/publish-apk.sh <tv\|phone> <apk> <versionCode> <versionName> [notes]` | Publie un APK signé sur le serveur et affiche son adresse `/dl/…` (voir § 8) ; les adresses `latest.apk` et la page `/telecharger` suivent seules | Oui : publie sur `bridge.sti-cm.com` (un `versionCode` ne se republie pas ; retrait par `/revoke`) |
 
 Tests : `python3 -m unittest discover -s tools/tests -p 'test_release_tools.py'`.
 

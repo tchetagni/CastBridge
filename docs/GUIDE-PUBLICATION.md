@@ -30,3 +30,5 @@ curl -sI https://bridge.sti-cm.com/guide    # 301 vers /guide/
 ```
 
 Sans fichier publié : 404 « Guide non publié ». La route est limitée par IP comme `/api` (`RateLimitFilter`).
+
+La page voisine `/telecharger` (télécharger les APK de la TV et du téléphone, même sécurité, même CSP et même cache) renvoie vers ce guide et se met à jour seule à chaque publication d'APK : rien à copier à la main, voir `docs/RELEASES.md` § 8.

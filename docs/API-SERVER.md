@@ -131,6 +131,40 @@ plage hors du fichier → `416` ; `If-None-Match` → `304` ; version retirée �
 curl -C - -o app.apk "$CB/dl/tv/castbridge-tv-0.6-8-armeabi-v7a-1a2b3c4d.apk"    # reprend un téléchargement coupé
 ```
 
+### Adresse stable de la dernière version (libre, serveur 1.2.5)
+
+`GET|HEAD /dl/{app}/latest.apk[?abi=…]` (`app` = `tv` ou `phone`) : **302** vers `/dl/{app}/{fichier}` de la dernière version, c'est-à-dire,
+parmi les versions **stables, non retirées et à 100 % de déploiement**, celle qui a la plus haute `versionCode`. Les versions bêta, les
+versions retirées (`revoke`) et les déploiements partiels (`rollout` < 100) ne sont jamais proposés ici : c'est une adresse publique, pas un
+appareil. À `versionCode` égal, l'architecture est choisie ainsi :
+
+| Appel | Ordre des architectures |
+|---|---|
+| `tv`, sans `abi` | `armeabi-v7a`, puis `universal`, puis `arm64-v8a` (une TV 64 bits exécute le 32 bits ; `x86` et `x86_64` jamais) |
+| `phone`, sans `abi` | `universal`, puis `arm64-v8a`, puis `armeabi-v7a` |
+| `?abi=X` (une des cinq valeurs de la publication) | `X`, puis `universal` ; jamais une autre architecture ; vide = absent ; autre valeur : `400` « abi : … attendu » |
+
+En-têtes de la réponse `302` : `Location: /dl/{app}/{fichier}` (même hôte), `Cache-Control: no-store` (la cible change à chaque publication), `X-Content-SHA256`
+(SHA-256 du fichier cible, celui de l'`ETag` de la cible) et `X-CastBridge-Version` (son `versionName`). Aucune version à proposer : `404` JSON en français
+(« Aucune version publiée pour l'instant : CastBridge-TV »). `latest.apk` ne peut jamais être un fichier publié : tous les noms commencent par `castbridge-`.
+Limité par IP comme le reste de `/dl`.
+
+```sh
+curl -sI "$CB/dl/tv/latest.apk"                       # 302, Location, X-Content-SHA256, X-CastBridge-Version
+curl -L -o tv.apk "$CB/dl/tv/latest.apk"               # télécharge la dernière CastBridge-TV
+curl -L -o tv64.apk "$CB/dl/tv/latest.apk?abi=arm64-v8a"
+```
+
+### Page de téléchargement (libre, serveur 1.2.5)
+
+`GET /telecharger` (et `/telecharger/`, `HEAD` aussi) : page HTML autonome en français « Télécharger CastBridge » (CSS en ligne, codes QR en SVG en ligne,
+aucun script, aucune ressource externe). Pour CastBridge-TV et CastBridge : version, date, taille, SHA-256, architecture, bouton « Télécharger » vers
+`/dl/{app}/latest.apk` et code QR de ce lien ; les trois lignes d'installation sur la TV (clé USB, ou « CastBridge TV › Mettre à jour la TV » depuis le
+téléphone) et le lien vers `/guide/`. Elle montre exactement la version vers laquelle mène chaque adresse stable (jamais une version retirée, jamais la bêta,
+jamais un déploiement partiel) ; sans version : « Aucune version publiée pour l'instant ». Sans authentification ni cookie ; même chaîne de sécurité, même
+CSP et même cache que `/guide/` (`Cache-Control: public, max-age=300`, `ETag` + `304`) ; limitée par IP. Les liens absolus et les codes QR utilisent
+`CASTBRIDGE_PUBLIC_BASE_URL` (à défaut, l'adresse de la requête). Procédure de publication : `docs/RELEASES.md` § 8.
+
 ## 2. Banque de questions du quiz
 
 Format d'échange = celui de la TV (`QuizBank.parse`, format version 2, branche `feat/tv-quiz`) :

@@ -18,8 +18,10 @@ import java.time.Instant;
 import java.time.format.DateTimeFormatter;
 import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.HexFormat;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 import java.util.Set;
 import java.util.UUID;
@@ -126,6 +128,7 @@ public class ReleaseService {
                 inspection = "vérifié : " + i.packageName() + " " + i.versionCode() + " (" + i.versionName() + ")";
             }
 
+            // always "castbridge-<app>-…": the reserved name "latest.apk" (stable address /dl/{app}/latest.apk) can never be a published file
             String fileName = "castbridge-%s-%s-%d-%s-%s.apk".formatted(form.app(), safe(form.versionName()), form.versionCode(),
                     form.abi(), sha256.substring(0, 8));
             Path dir = props.storageDir().resolve(form.app());
@@ -214,6 +217,43 @@ public class ReleaseService {
 
     public Optional<Release> byFile(String app, String fileName) {
         return repo.findByAppAndFileName(app, fileName);
+    }
+
+    // ---------------------------------------------------------------- public download addresses
+
+    /**
+     * Order in which a public download that names no ABI looks for an APK (the device is unknown). A 64-bit TV runs the 32-bit APK and the
+     * TVs of the fleet are armeabi-v7a, so that comes first; the universal APK next; the 64-bit one last (a 32-bit TV cannot run it).
+     * An ABI that is not listed (x86, x86_64) is never chosen unless it is asked for.
+     */
+    private static final Map<String, List<String>> DOWNLOAD_ABIS = Map.of(
+            "tv", List.of("armeabi-v7a", "universal", "arm64-v8a"),
+            "phone", List.of("universal", "arm64-v8a", "armeabi-v7a"));
+
+    /** The name people know the app by. */
+    public static String appLabel(String app) {
+        return "tv".equals(app) ? "CastBridge-TV" : "CastBridge";
+    }
+
+    /**
+     * The release behind the stable public address {@code /dl/{app}/latest.apk} and behind the page {@code /telecharger}: among the
+     * <b>stable</b>, <b>not revoked</b> releases at <b>100 %</b> rollout, the one with the highest versionCode; for the same versionCode,
+     * the most preferred ABI. With {@code abi} null or blank the order is {@link #DOWNLOAD_ABIS}; with an ABI, that ABI then the universal
+     * APK (never another architecture). Beta releases, revoked ones and partial rollouts are never offered: this is a public address,
+     * not a device that can be told apart by its identifier.
+     */
+    public Optional<Release> latestForDownload(String app, String abi) {
+        if (!APPS.contains(app)) throw ApiException.notFound("Application inconnue : « tv » ou « phone » attendu");
+        String wanted = abi == null || abi.isBlank() ? null : abi.trim();
+        if (wanted != null && !ABIS.contains(wanted))
+            throw ApiException.badRequest("abi : " + String.join(", ", ABIS.stream().sorted().toList()) + " attendu");
+        List<String> order = wanted == null ? DOWNLOAD_ABIS.get(app)
+                : "universal".equals(wanted) ? List.of("universal") : List.of(wanted, "universal");
+        return repo.findByAppAndRevokedFalseAndChannelInAndAbiInOrderByVersionCodeDesc(app, List.of("stable"), order).stream()
+                .filter(r -> r.getRolloutPercent() >= 100)
+                .min(Comparator.comparingInt((Release r) -> -r.getVersionCode())
+                        .thenComparingInt(r -> order.indexOf(r.getAbi()))
+                        .thenComparingLong(r -> r.getId() == null ? 0L : -r.getId()));
     }
 
     // ---------------------------------------------------------------- devices

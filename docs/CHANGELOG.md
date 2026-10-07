@@ -169,6 +169,16 @@ Tag proposé `owner-0.2.0` sur `e40173a`. Droit `SUPER_UNLIMITED`.
 ### [0.1.0] (code 1) : 2026-10-01
 Tag proposé `owner-0.1.0` sur `0ff64ed`. Console du téléphone propriétaire (coffre, garde de déverrouillage, verrouillage automatique, émission d'activation, clé publique, journal chaîné), outil `castbridge-owner` en ligne de commande, bibliothèque partagée `:ownerlib`, entrée super administrateur locale.
 
-## Serveur (`backend/`, pom 1.0.0)
+## Serveur (`backend/`, pom 1.2.5)
 
-Pas de version propre ni de tag à ce jour. Jalons tirés de l'historique : module de gestion des licences (désactivé par défaut) fusionné le 2026-10-01 puis aligné sur `cbx1` ; fenêtre d'installation de 48 h ; service d'ordres différés ; locations (règles de dates, vecteurs) ; correctif de l'adresse `/admin/` ; tunnel d'administration à distance côté serveur (désactivé par défaut) ; WireGuard ouvert sans pair. Le serveur de production n'a pas de révision traçable avant le premier déploiement par `tools/release/deploy-server.sh` (« révision initiale inconnue »).
+### [1.2.5] (code 9) : 2026-10-07
+Étiquette `server-1.2.5` (à poser par l'orchestrateur ; aucun déploiement fait).
+- **Adresses stables de téléchargement** : `GET|HEAD /dl/{app}/latest.apk` répond `302` vers `/dl/{app}/{fichier}` de la dernière version **stable, non retirée, à 100 % de déploiement** (plus haute `versionCode`) ; sans `abi`, une TV prend `armeabi-v7a`, puis `universal`, puis `arm64-v8a`, un téléphone `universal` ; `?abi=` choisit cette architecture puis `universal` ; `Cache-Control: no-store`, `X-Content-SHA256`, `X-CastBridge-Version` ; `404` en français sans version. Le nom `latest.apk` ne peut pas être un fichier publié (tous commencent par `castbridge-`) : la route `/dl/{app}/{fichier}` est inchangée.
+- **Page publique `GET /telecharger`** (et `/telecharger/`) : « Télécharger CastBridge », version, date, taille, SHA-256, bouton et code QR (SVG en ligne, générateur `QrSvg` existant) pour CastBridge-TV et CastBridge, lignes d'installation sur la TV, lien vers `/guide/` ; HTML construit en Java sans Thymeleaf, aucun script ; même chaîne de sécurité, même CSP et même cache que `/guide/` ; ne révèle ni versions retirées ni canaux non stables.
+- Limite de débit par IP étendue à `/telecharger`, et **correction d'un contournement qui existait déjà** pour `/api`, `/dl` et `/guide` : le filtre lisait l'URI brute, donc `/%64l/…`, `/%61pi/…` ou `/%67uide/` (une lettre encodée en `%XX`, que Spring décode et sert) passaient sans limite. Le chemin est lu décodé (`UrlPathHelper`), comme le voient les contrôleurs. Aucune route modifiée.
+- Procédure : `tools/release/publish-apk.sh` (publication par une commande, jeton lu dans le conteneur ; notes avec espaces, apostrophes et `$` transmises intactes : `ssh` recolle ses arguments, le serveur coupait les notes au premier mot), `docs/RELEASES.md` § 8, `docs/API-SERVER.md` § 1.
+- Tests : `DownloadLinksTest`, `DownloadLinksRateLimitTest`, `DownloadPageTest`, `QrSvgTest` (`backend/src/test/java/castbridge/server/updates/`).
+
+### Jalons antérieurs aux versions numérotées (`server-<version>`, `docs/RELEASES.md` § 13)
+
+Jalons tirés de l'historique : module de gestion des licences (désactivé par défaut) fusionné le 2026-10-01 puis aligné sur `cbx1` ; fenêtre d'installation de 48 h ; service d'ordres différés ; locations (règles de dates, vecteurs) ; correctif de l'adresse `/admin/` ; tunnel d'administration à distance côté serveur (désactivé par défaut) ; WireGuard ouvert sans pair. Le serveur de production n'a pas de révision traçable avant le premier déploiement par `tools/release/deploy-server.sh` (« révision initiale inconnue »).
