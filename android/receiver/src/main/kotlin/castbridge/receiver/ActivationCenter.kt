@@ -84,6 +84,19 @@ object ActivationCenter {
     fun requestText(): String = OwnerFrames.deviceInfo(deviceCode, fp, RentalHub.installPubOrNull(app),      // never blocks the main thread on the Keystore
         castbridge.receiver.wallet.WalletHub.installSigner()?.publicKey)      // the Ed25519 key of the wallet `bind` proof (file, no Keystore): the issuer signs it into the activation (W23-05 audit HIGH-1)
 
+    /**
+     * The device request in the form the licence server reads: `code=`, `k=`, `factor=` and `install_sig=` lines, NEVER the private `install=` line (it is not even built, so the Keystore is
+     * not touched). What the locked route `GET /api/activation/device-request` hands to a phone that holds the connection code (docs/TV-ACTIVATION-CLE-USB.md); never logged.
+     */
+    fun serverRequestText(): String {
+        if (!ready) init(app)
+        return OwnerFrames.deviceInfo(deviceCode, fp, null, castbridge.receiver.wallet.WalletHub.installSigner()?.publicKey)
+    }
+
+    /** A phone presented the right connection code to the locked route (any address: Wi-Fi network or Wi-Fi Direct group): the screen then says « Téléphone relié ». The address is not kept. */
+    @Volatile var phoneAuthorizedAt = 0L; private set
+    fun phoneAuthorized() { phoneAuthorizedAt = android.os.SystemClock.elapsedRealtime() }
+
     /** What the last accepted activation said about its rentals (« enveloppée pour une autre installation… »), for the activation screen; empty when all went well. */
     @Volatile var lastRentalNotes: List<String> = emptyList(); private set
 
@@ -177,28 +190,50 @@ object ActivationCenter {
 
     /** Lines for the activation screen explaining what the last [scanFiles] saw (volumes, folders, file state); built by the pure `ActivationLookupReport`, never carries the key. */
     @Volatile var lastReport: List<String> = emptyList()
+    /** What the last lookup saw (paths, counts, file states; never the key): the pure `UsbActivationBanner` turns it into the banner. */
+    @Volatile var lastFacts: LookupFacts? = null
     private val scanning = java.util.concurrent.atomic.AtomicBoolean(false)
+
+    /** [facts] = what the lookup saw; [result] = the first accepted key, else the first refusal, else null (no readable file). With `install = false` an ACCEPTED result was only VERIFIED, nothing is installed. */
+    class UsbLookup(val facts: LookupFacts, val result: ActivationResult?)
+
+    /**
+     * Verifies a key WITHOUT installing it: the same verifier as [accept] (signature by a trusted key, binding to this TV's device code, window), no side effect. The USB banner uses it to say
+     * « activation trouvée pour cette TV » before the owner presses « Activer ».
+     */
+    @Synchronized fun check(text: String): ActivationResult {
+        if (!ready) init(app)
+        return receiver().receive(Channel.MANUAL, text.toByteArray(Charsets.UTF_8), now())
+    }
 
     /**
      * Looks for the `activation` file: `Download/CastBridge/activation` and `Download/activation` of every volume and of the public Download folder, then (always readable under scoped
-     * storage) `<Android/data/castbridge.receiver/files>/activation` and `.../CastBridge/activation` of every mounted volume. Read-only; the first accepted file wins; sets [lastReport].
+     * storage) `<Android/data/castbridge.receiver/files>/activation` and `.../CastBridge/activation` of every mounted volume. Read-only; the first accepted file wins; sets [lastReport]
+     * and [lastFacts]. [install] false = verify only (the banner), true = the accepted key is installed (the « Activer » button). null = another lookup is running (one at a time).
      */
-    fun scanFiles(): ActivationResult? {
-        if (!scanning.compareAndSet(false, true)) return null            // one scan at a time (timer, mount event, button)
+    fun lookup(install: Boolean): UsbLookup? {
+        if (!scanning.compareAndSet(false, true)) return null            // one scan at a time (mount event, screen opening, button)
         try {
             val own = ownDirs()
             val downloads = downloadDirs(own)
             val volumes = own.mapNotNull { (d, id) -> id?.let { VolumeFact(it, readOnly(d)) } }.distinctBy { it.id }
             var accepted: ActivationResult? = null; var refused: ActivationResult? = null
             val o = ActivationLookup.run(ActivationLookup.candidates(downloads, own), ActivationLookup.dirsToList(downloads, own), volumes, access = storageAccess()) { line ->
-                val r = accept(Channel.MANUAL, line.toByteArray(Charsets.UTF_8))
+                val r = if (install) accept(Channel.MANUAL, line.toByteArray(Charsets.UTF_8)) else check(line)
                 if (r is ActivationResult.Accepted) { if (accepted == null) accepted = r } else if (refused == null) refused = r
                 verdictOf(r)
             }
             lastReport = ActivationLookupReport.lines(o.facts)
-            return accepted ?: refused
+            lastFacts = o.facts
+            return UsbLookup(o.facts, accepted ?: refused)
         } finally { scanning.set(false) }
     }
+
+    /** The historical entry point: looks and INSTALLS the first accepted key. null = busy or no readable file. */
+    fun scanFiles(): ActivationResult? = lookup(install = true)?.result
+
+    /** Is an activation still useful on this TV (locked, grace period or trial key)? Then the USB key is watched at plug-in and the home says what it found. */
+    fun usbWatchWanted(): Boolean = ready && required && (state() !is GateState.Activated || trial())
 
     /** Can the app read the shared Download folder? (all files access on API 30+, READ_EXTERNAL_STORAGE below 33.) */
     fun storageAccess(): StorageAccess = runCatching {

@@ -194,10 +194,13 @@ class TvService : Service(), Device {
     }
 
     // ------------------------------------------------------------------ activation
+    /**
+     * Waits for the end of the lock (a key accepted by any channel: Bluetooth, Wi-Fi, USB button, typed) to start the core. It no longer looks for a USB file by itself: that silent search
+     * is replaced by the one at plug-in, at the opening of the activation screen and on its button ([UsbActivationWatch]), and a key found there is installed by an explicit « Activer ».
+     */
     private val activationWatch = object : Runnable {
         override fun run() {
             if (started) return
-            if (TunnelHub.termsAccepted(this@TvService)) ActivationCenter.scanFiles()      // a key is read only after the terms of use were accepted on this TV (activation screen)
             if (!ActivationCenter.locked()) { startCore(); return }
             main.postDelayed(this, 5_000)
         }
@@ -210,15 +213,38 @@ class TvService : Service(), Device {
     private fun watchForActivation() {
         setStatus("0-storage", "Usage soumis à autorisation : activation requise")
         startLockedHttp()
+        registerUsbEvents()
         main.removeCallbacks(activationWatch); main.postDelayed(activationWatch, 5_000)
     }
 
+    // ------------------------------------------------------------------ the USB key at plug-in while locked (docs/TV-ACTIVATION-CLE-USB.md)
+    /** A locked TV starts no storage events of its own: this receiver only tells [UsbActivationWatch] that a key came or went (the banner of the activation screen, the line of the home). */
+    private var usbEventsReceiver: BroadcastReceiver? = null
+
+    private fun registerUsbEvents() {
+        if (usbEventsReceiver != null) return
+        val f = IntentFilter().apply {
+            listOf(Intent.ACTION_MEDIA_MOUNTED, Intent.ACTION_MEDIA_UNMOUNTED, Intent.ACTION_MEDIA_EJECT, Intent.ACTION_MEDIA_REMOVED, Intent.ACTION_MEDIA_BAD_REMOVAL).forEach { addAction(it) }
+            addDataScheme("file")
+        }
+        val r = object : BroadcastReceiver() { override fun onReceive(c: Context, i: Intent) { UsbActivationWatch.onStorageEvent(c, i.action) } }
+        runCatching {
+            if (Build.VERSION.SDK_INT >= 33) registerReceiver(r, f, Context.RECEIVER_EXPORTED) else registerReceiver(r, f)
+            usbEventsReceiver = r
+        }.onFailure { Log.w(TAG, "usb activation receiver: ${it.javaClass.simpleName}") }
+    }
+
+    private fun unregisterUsbEvents() { usbEventsReceiver?.let { runCatching { unregisterReceiver(it) } }; usbEventsReceiver = null }
+
     // ------------------------------------------------------------------ « Activer par le Wi-Fi » while locked (docs/TV-ACTIVATION-CLE-USB.md)
-    /** The ONLY HTTP surface of a locked TV: POST /api/activation/install behind the connection code ([castbridge.core.tv.activation.LockedActivationApi]). */
+    /**
+     * The ONLY HTTP surface of a locked TV: `POST /api/activation/install` and `GET /api/activation/device-request`, both behind the connection code
+     * ([castbridge.core.tv.activation.LockedActivationApi]). It listens on every interface (NanoHTTPD without a host name), so the activation group's address (192.168.49.1) is served too.
+     */
     private var lockedHttp: castbridge.core.tv.activation.LockedActivationServer? = null
     @Volatile private var lockedPin: String? = null
 
-    /** What the activation screen shows for the Wi-Fi way: the connection code and the TV's addresses; null when the route is not open. */
+    /** What the activation screen shows for the Wi-Fi way: the connection code and the TV's addresses on a LOCAL NETWORK (never the group's own 192.168.49.x); null when the route is not open. */
     fun lockedWifiInfo(): Pair<String, List<String>>? {
         val p = lockedPin ?: return null
         if (lockedHttp == null) return null
@@ -226,7 +252,7 @@ class TvService : Service(), Device {
             NetworkInterface.getNetworkInterfaces().toList().filter { it.isUp && !it.isLoopback }
                 .flatMap { it.inetAddresses.toList() }.filterIsInstance<Inet4Address>().filter { it.isSiteLocalAddress }.mapNotNull { it.hostAddress }
         }.getOrDefault(emptyList())
-        return p to ips
+        return p to castbridge.core.link.HelloIps.lanOnly(ips)
     }
 
     private fun startLockedHttp(attempt: Int = 0) {
@@ -236,7 +262,9 @@ class TvService : Service(), Device {
         val tvPrefs = TvPrefs(this)
         val pin = tvPrefs.pin()
         val api = castbridge.core.tv.activation.LockedActivationApi(PinGuard(pin), { key -> ActivationCenter.installFromWifi(key) },
-            { TunnelHub.termsAccepted(this) }, BuildConfig.VERSION_NAME)
+            { TunnelHub.termsAccepted(this) }, BuildConfig.VERSION_NAME,
+            deviceRequest = { ActivationCenter.serverRequestText() },          // the server form: never the private install= line (and never logged)
+            onAuthorized = { ActivationCenter.phoneAuthorized() })              // « téléphone relié » on the activation screen (no address kept)
         val s = castbridge.core.tv.activation.LockedActivationServer(api)
         try { s.start(15_000, false) } catch (e: Exception) {
             Log.w(TAG, "activation Wi-Fi : port ${ReceiverServer.PORT} indisponible (${e.javaClass.simpleName}), nouvel essai")
@@ -246,6 +274,7 @@ class TvService : Service(), Device {
         lockedHttp = s; lockedPin = pin
         castbridge.core.tv.activation.LockedPinRotation.onLockedRouteOpened(tvPrefs.lockedPinStore())   // M1 d: this code is replaced at the activation
         register(locked = true)
+        tryStartActivationGroup()                                            // the activation screen was already open and waiting for the code
     }
 
     private fun stopLockedHttp() {
@@ -254,6 +283,53 @@ class TvService : Service(), Device {
         runCatching { s.stop() }
         runCatching { nsdListener?.let { nsd?.unregisterService(it) } }; nsdListener = null
         runCatching { multicastLock?.release() }
+    }
+
+    // ------------------------------------------------------------------ the ACTIVATION group: the TV hosts its own Wi-Fi Direct network (docs/TV-ACTIVATION-CLE-USB.md)
+    /**
+     * While the activation screen of a LOCKED TV is open, the TV creates a Wi-Fi Direct group whose name and password DERIVE from the 6-digit connection code the screen shows
+     * ([castbridge.core.tv.WdCode]): a phone that read the code (or the QR) joins it by itself, with no box, no Bluetooth pairing, no USB key. It exists only for that screen: given back
+     * when the screen closes (after [ACTIVATION_GROUP_GRACE_MS] if it is only hidden behind a picker of its own) or as soon as the TV is activated. If it cannot exist, the screen says why
+     * ([WifiDirectGroup.activationState]) and the local-network way stays open.
+     */
+    private var activationWd: WifiDirectGroup? = null
+    @Volatile private var activationGroupWanted = false
+    @Volatile private var activationClients: Int? = null
+
+    /** The activation screen is in front: ask for the group (idempotent for the same code; a group that failed is tried again, which is what the « Réessayer » button and a return from the settings use). Main thread. */
+    fun startActivationGroup() { activationGroupWanted = true; tryStartActivationGroup() }
+
+    private fun tryStartActivationGroup() {
+        if (!activationGroupWanted || started || !ActivationCenter.locked()) return
+        val code = lockedPin ?: return                                       // the locked route is open: its code is the one on the screen
+        val g = activationWd ?: WifiDirectGroup(this, TvPrefs(this)) { /* no line: the screen reads activationGroupState(); the password is the QR's and goes nowhere else */ }.also { activationWd = it }
+        g.startActivation(code)
+    }
+
+    fun stopActivationGroup() {
+        activationGroupWanted = false; activationClients = null
+        main.removeCallbacks(stopActivationGroupLater)
+        val g = activationWd ?: return
+        activationWd = null
+        runCatching { g.stop() }
+    }
+
+    private val stopActivationGroupLater = Runnable { stopActivationGroup() }
+
+    /** The activation screen came back (or opened): cancel a pending release and ask for the group. */
+    fun activationScreenResumed() { main.removeCallbacks(stopActivationGroupLater); startActivationGroup() }
+
+    /** The activation screen left: given back at once when it closed for good, else after a short delay (a file picker of its own, the Bluetooth dialog, a screen rotation). */
+    fun activationScreenPaused(finishing: Boolean) {
+        if (finishing) stopActivationGroup() else { main.removeCallbacks(stopActivationGroupLater); main.postDelayed(stopActivationGroupLater, ACTIVATION_GROUP_GRACE_MS) }
+    }
+
+    fun activationGroupState(): castbridge.core.tv.activation.ActivationScreenPlan.Group = activationWd?.activationState() ?: castbridge.core.tv.activation.ActivationScreenPlan.Group.NotTried
+
+    /** A phone is « reliée »: in the group, or it presented the right connection code a moment ago (Wi-Fi network, group or any other local way). */
+    fun activationPhoneLinked(): Boolean {
+        activationWd?.clients { activationClients = it }                     // answered later on the main looper: read at the next call
+        return castbridge.core.tv.activation.ActivationScreenPlan.phoneLinked(SystemClock.elapsedRealtime(), ActivationCenter.phoneAuthorizedAt, activationClients)
     }
 
     // ------------------------------------------------------------------ core
@@ -265,6 +341,8 @@ class TvService : Service(), Device {
         startOwnerChannel()                                      // the owner's phone can push the activation by Bluetooth, locked or not
         if (ActivationCenter.locked()) { watchForActivation(); return }
         stopLockedHttp()                                         // frees port 8765 and the locked mDNS announce for the full server
+        stopActivationGroup()                                    // the TV is activated: the activation group is given back at once
+        unregisterUsbEvents()                                    // the storage events below take over (the home still hears about a key on a trial TV)
         started = true
         prefs = TvPrefs(this)
         // M1 d: the code shown while locked is replaced once, before the full API takes it (never logged)
@@ -925,6 +1003,7 @@ class TvService : Service(), Device {
         }
         val r = object : BroadcastReceiver() {
             override fun onReceive(c: Context, i: Intent) {
+                UsbActivationWatch.onStorageEvent(c, i.action)            // a key plugged in while an activation is still useful (trial / grace): the home says what it found
                 val path = i.data?.path
                 if (i.action != Intent.ACTION_MEDIA_MOUNTED && path != null)
                     registry.volumes().filter { it.kind == VolumeKind.REMOVABLE && it.dir.absolutePath.startsWith(path) }.forEach { registry.markRemoved(it.id) }
@@ -1203,6 +1282,8 @@ class TvService : Service(), Device {
 
     override fun onDestroy() {
         stopLockedHttp()
+        stopActivationGroup()
+        unregisterUsbEvents()
         stopCore()
         unwatchNetwork()
         reception.removeListener(receptionNotifier)
@@ -1222,6 +1303,8 @@ class TvService : Service(), Device {
         private const val NOTIF = 1
         /** A phone that said hello (or used its token) is shown connected this long without news; each sign of life renews it. */
         private const val PHONE_LEASE_MS = 10 * 60_000L
+        /** The activation group outlives a short absence of the activation screen (a file picker of its own, the Bluetooth dialog, a rotation) by this long, then is given back. */
+        private const val ACTIVATION_GROUP_GRACE_MS = 20_000L
         private const val NOTIF_LAUNCH = 2
         @Volatile var running: TvService? = null; private set
 

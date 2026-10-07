@@ -492,7 +492,8 @@ class PlayerActivity : Activity(), TvService.Screen {
             val s = server
             // ONE source for every path (Wi-Fi, Wi-Fi multivoie, Bluetooth), held by the service (independent of the HTTP server): castbridge.core.xfer.ReceiveCards
             val cards = castbridge.core.xfer.ReceiveCards.of(svc?.reception?.shown().orEmpty(), s?.receiving().orEmpty(), s != null)
-            return Triple(castbridge.core.xfer.ReceiveCards.ready(s != null), ParentalHub.shownPin(pin), castbridge.core.xfer.ReceiveCards.headline(cards))
+            // a transfer in progress tells more than anything; otherwise, on a trial / grace TV, the line of a USB key that carries an activation (UsbActivationWatch: only when a file « activation » was really seen)
+            return Triple(castbridge.core.xfer.ReceiveCards.ready(s != null), ParentalHub.shownPin(pin), castbridge.core.xfer.ReceiveCards.headline(cards) ?: UsbActivationWatch.homeLine())
         }
         override fun signal() = castbridge.core.ux.TvSignal.of(TvSignalViews.facts(this@PlayerActivity, svc, server != null))
         override fun open(i: castbridge.core.tv.LibraryItem, row: List<castbridge.core.tv.LibraryItem>, index: Int) { libScreen?.open(i, row, index) }
