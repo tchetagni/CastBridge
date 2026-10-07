@@ -14,7 +14,12 @@ enum class Anchor {
     CACHE,
     /** The copy to the cache is running (the item waits, « Préparation du fichier… n % »). A restart during it leaves nothing readable. */
     PENDING,
-    /** Nothing durable could be made: the file must be shared again (with the reason, never a loop). */
+    /**
+     * H1 (audit 2026-10-07): nothing durable could be made (unknown size, over 2 GiB, over a quarter of the free space), but the file is STILL readable:
+     * the original URI is kept and the queue sends it now. It is « à repartager » only if `readable()` fails when the send starts.
+     */
+    VOLATILE,
+    /** The file was lost (grant gone, copy failed): it must be shared again (with the reason, never a loop). */
     RESHARE
 }
 
@@ -27,15 +32,15 @@ object SourceAnchor {
         val freeBytes: Long,              // free space of the cache directory
     )
 
-    /** (a) persistable, else (b) MediaStore, else (c) cache copy when it fits, else (d) to share again. */
+    /** (a) persistable, else (b) MediaStore, else (c) cache copy when it fits, else (d) volatile: the original URI, sent without delay (never a refusal in advance). */
     fun choose(f: Facts): Anchor = when {
         f.persisted -> Anchor.PERSISTED
         f.mediaStoreMatch -> Anchor.MEDIASTORE
         CacheGuard.fits(f.size, f.freeBytes) -> Anchor.CACHE
-        else -> Anchor.RESHARE
+        else -> Anchor.VOLATILE
     }
 
-    /** Why (d) was chosen, in French: the size is unknown, over 2 GiB, or more than a quarter of the free space. */
+    /** Why a file could not be kept (used when a copy fails for lack of space, or by [ReshareTexts.notAnchored]): was chosen, in French: the size is unknown, over 2 GiB, or more than a quarter of the free space. */
     fun reshareReason(size: Long): String = when {
         size <= 0 -> "la taille du fichier est inconnue, il ne peut pas être gardé sur le téléphone"
         size > CacheGuard.MAX_BYTES -> "le fichier dépasse 2 Go, trop gros pour être gardé le temps de la file"

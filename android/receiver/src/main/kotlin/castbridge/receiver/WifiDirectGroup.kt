@@ -50,7 +50,9 @@ class WifiDirectGroup(private val ctx: Context, private val prefs: TvPrefs, priv
         ?: WifiDirect.groupPassphrase().also { prefs.putString("wd_pass", it) }
 
     /** [forPhone] = an automatic group for a phone that asked over Bluetooth; false = the owner's group (MENU). */
-    override fun start(forPhone: Boolean) {
+    override fun start(forPhone: Boolean) = start(forPhone, recreated = false)
+
+    private fun start(forPhone: Boolean, recreated: Boolean, forceAuto: Boolean = false) {
         val m = mgr
         when {
             m == null || !ctx.packageManager.hasSystemFeature(PackageManager.FEATURE_WIFI_DIRECT) -> {
@@ -68,12 +70,12 @@ class WifiDirectGroup(private val ctx: Context, private val prefs: TvPrefs, priv
         // owner decision 2026-10-06: ask for 5 GHz first (core WdBand), fall back to Android's automatic band if the radio refuses
         // a TV without a 5 GHz radio, or one that already refused a 5 GHz group, goes straight to the automatic band
         val radio5 = runCatching { (ctx.applicationContext.getSystemService(Context.WIFI_SERVICE) as? android.net.wifi.WifiManager)?.is5GHzBandSupported }.getOrNull()
-        val band = castbridge.core.link.WdBand.first(Build.VERSION.SDK_INT, radio5, (prefs.getString("wd_5ghz_failed") == "1"))
+        val band = if (forceAuto) castbridge.core.link.WdBand.Band.AUTO else castbridge.core.link.WdBand.first(Build.VERSION.SDK_INT, radio5, (prefs.getString("wd_5ghz_failed") == "1"), forPhone)
         val cfg = config(name, pass, band) ?: return
         // A stale group from a previous run would make createGroup fail with BUSY: remove it first.
         m.removeGroup(ch, object : WifiP2pManager.ActionListener {
-            override fun onSuccess() = create(m, ch, cfg, name, pass, forPhone, band)
-            override fun onFailure(reason: Int) = create(m, ch, cfg, name, pass, forPhone, band)
+            override fun onSuccess() = create(m, ch, cfg, name, pass, forPhone, band, recreated)
+            override fun onFailure(reason: Int) = create(m, ch, cfg, name, pass, forPhone, band, recreated)
         })
     }
 
@@ -83,7 +85,7 @@ class WifiDirectGroup(private val ctx: Context, private val prefs: TvPrefs, priv
             .build()
     } catch (e: Exception) { Log.w(TAG, "config: ${e.javaClass.simpleName}"); lastError = WifiDirect.Err.FAILED; status("Wi-Fi Direct : configuration refusée"); null }
 
-    private fun create(m: WifiP2pManager, ch: WifiP2pManager.Channel, cfg: WifiP2pConfig, name: String, pass: String, forPhone: Boolean, band: castbridge.core.link.WdBand.Band) {
+    private fun create(m: WifiP2pManager, ch: WifiP2pManager.Channel, cfg: WifiP2pConfig, name: String, pass: String, forPhone: Boolean, band: castbridge.core.link.WdBand.Band, recreated: Boolean) {
         m.createGroup(ch, cfg, object : WifiP2pManager.ActionListener {
             override fun onSuccess() {
                 auto = forPhone; lastError = null
@@ -94,13 +96,26 @@ class WifiDirectGroup(private val ctx: Context, private val prefs: TvPrefs, priv
                     else "Wi-Fi Direct : réseau « $name »  mot de passe : $pass  (${WifiDirect.GROUP_OWNER_IP}:8765, ${castbridge.core.link.WdBand.label(band)})")
                 // the band really obtained (AUTO may land on 2.4 GHz): one log line, read on the TV with logcat
                 runCatching { m.requestGroupInfo(ch) { g -> castbridge.core.link.WdBand.frequencyLabel(g?.frequency ?: 0)?.let { Log.i(TAG, "groupe Wi-Fi Direct : $it") } } }
+                // H3: a 5 GHz group nobody joins in 45 s is recreated once on the automatic band (a 2.4 GHz-only phone cannot see it)
+                if (band == castbridge.core.link.WdBand.Band.GHZ5 && !recreated) {
+                    val born = createdAt
+                    android.os.Handler(Looper.getMainLooper()).postDelayed({
+                        if (createdAt != born || active == null) return@postDelayed          // stopped or replaced meanwhile
+                        clients { n ->
+                            if (createdAt == born && castbridge.core.link.WdBand.recreateAuto(band, n, System.currentTimeMillis() - born, recreated)) {
+                                Log.i(TAG, "personne n'a rejoint le groupe 5 GHz en 45 s : recréé en bande automatique")
+                                start(forPhone, recreated = true, forceAuto = true)
+                            }
+                        }
+                    }, castbridge.core.link.WdBand.NO_CLIENT_MS)
+                }
             }
             override fun onFailure(reason: Int) {
                 Log.w(TAG, "createGroup failed: $reason (${castbridge.core.link.WdBand.label(band)})")
                 castbridge.core.link.WdBand.retry(band, reason)?.let { next ->
                     prefs.putString("wd_5ghz_failed", "1")      // remembered: next groups skip the 5 GHz attempt
                     val again = config(name, pass, next) ?: return
-                    create(m, ch, again, name, pass, forPhone, next); return
+                    create(m, ch, again, name, pass, forPhone, next, recreated); return
                 }
                 lastError = if (reason == WifiP2pManager.P2P_UNSUPPORTED) WifiDirect.Err.UNSUPPORTED else WifiDirect.Err.FAILED
                 status("Wi-Fi Direct : échec de création du groupe (" + when (reason) {

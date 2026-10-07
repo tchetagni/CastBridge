@@ -482,7 +482,7 @@ class UploadService : Service() {
 
         /** A short « hello » (GET /api/hello, 1.5 s; 10 s through the Bluetooth gateway): does a CastBridge-TV answer at [base]? Never on the main thread. */
         fun helloOk(base: String): Boolean = runCatching {
-            val c = java.net.URL("$base/api/hello").openConnection() as java.net.HttpURLConnection
+            val c = castbridge.core.net.BoundRoute.open(java.net.URL("$base/api/hello")) as java.net.HttpURLConnection   // M4: via the Wi-Fi Direct network when bound
             try {
                 val t = if (base.startsWith("http://127.0.0.1")) 10_000 else 1_500
                 c.connectTimeout = t; c.readTimeout = t

@@ -14,6 +14,9 @@
 
 ## 0. Journal en direct (le plus récent en haut)
 
+### 2026-10-07 : correctifs de l'audit anti-régression (H1-H3, M1-M4, M6, LOW), branche de l'agent, sans APK
+- H1 ancrage « volatil » (`Anchor.VOLATILE` : URI d'origine gardée, la file l'envoie ; « à repartager » seulement si `readable()` échoue à l'envoi) ; M1 ancrage hors du fil principal, copies sérialisées, espace libre remesuré avant chaque copie. H2 `Scheduler` : seuls les `Busy` « stalled » comptent, les octets en cours d'écriture comptent comme progrès. H3 groupe automatique pour téléphone en bande AUTO, 5 GHz seulement pour le groupe du propriétaire, recréation en AUTO après 45 s sans client. M2 `ResourceProfile` : le drapeau `low_ram` seul = NORMAL (voir TV-RESSOURCES-FAIBLES.md). M3 services inconnus éligibles à la reprise avec backoff. M4 `helloOk` via `BoundRoute.open`. M6 assembleur fermé = 503 `interrupted`. LOW : `touch()` sur les tranches, 403 « verrouillée » distinct de « code requis », touches de la télécommande >= 40 dp (facteur min 0,85). Détail : R-24 à R-27 dans REGRESSIONS.md. Rien n'a été installé sur appareil.
+
 ### 2026-10-07 : serveur 1.2.4 DÉPLOYÉ (00:54 UTC) ; guide public en ligne
 - `deploy-server.sh server-1.2.4 --apply` : sauvegarde base + licences, image `candidate`, santé OK, en service `releases/server-1.2.4-20261007T005332Z` (e1559860). Contient : route publique `/guide/` (+ 301 depuis `/guide`), correctif révocation de poste datée ≥ émission, V63→V67 déjà en place depuis 1.2.3.
 - Guide utilisateur publié : https://bridge.sti-cm.com/guide/ (200, 2,5 Mo, cache 300 s, CSP, traversée refusée 400) ; fichier `/data/apk/guide/index.html` du volume, sha256 = `docs/guide-utilisateur/guide-utilisateur.html` (version 2026-10-07). Mise à jour sans redéploiement : `scp` + `sudo docker cp` (docs/GUIDE-PUBLICATION.md).

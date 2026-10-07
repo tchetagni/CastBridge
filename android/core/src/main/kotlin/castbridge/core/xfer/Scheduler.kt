@@ -103,7 +103,8 @@ class Scheduler(
     /** Sous [lock] : publie « envoyé / confirmé » au plus toutes les [publishEveryMs] quand ça a changé, et arrête une copie qui renvoie sans que rien ne soit confirmé. */
     private fun tick() {
         val nowMs = clock() / 1_000_000
-        val moved = lanes.sumOf { it.bytesMoved() } + running.values.sumOf { rs -> rs.maxOfOrNull { it.acked.get() } ?: 0L }
+        // H2: bytes being written count as progress too (a 4-8 MiB block at 50 KB/s takes over 90 s: the TV is not stuck while the socket moves)
+        val moved = lanes.sumOf { it.bytesMoved() } + running.values.sumOf { rs -> (rs.maxOfOrNull { it.acked.get() } ?: 0L) + (rs.maxOfOrNull { it.written.get() } ?: 0L) }
         if (moved != lastMoved) { lastMoved = moved; lastProgressMs = nowMs }
         if (failure == null && nowMs - lastProgressMs >= noConfirmMs && resends.values.any { it >= resendsToStop }) {
             failure = CopyCauses.noConfirm(lastCause); lock.notifyAll(); return
@@ -184,7 +185,7 @@ class Scheduler(
                     listener.laneEvent(lane.id, "bloc $idx corrompu (${out.reason})")
                     if (n > maxCorrupt) failure = "bloc $idx refusé ${n} fois par la TV (${out.reason})" else requeue()
                 }
-                is Outcome.Busy -> { if (!run.abort.get()) { resends[idx] = (resends[idx] ?: 0) + 1; lastCause = out.cause ?: lastCause }; requeue() }
+                is Outcome.Busy -> { if (!run.abort.get() && out.cause == "stalled") { resends[idx] = (resends[idx] ?: 0) + 1; lastCause = out.cause }; requeue() }   // H2: only a real « stalled » counts, never the TV's flow regulation
                 Outcome.SessionLost -> { sessionLost = true }
                 Outcome.Cancelled -> { if (!run.abort.get() && !cancelled()) requeue() }
                 is Outcome.Failed -> {

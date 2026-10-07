@@ -24,6 +24,7 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.isActive
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.sync.withLock
 import java.io.File
 import java.util.concurrent.ConcurrentHashMap
 
@@ -154,10 +155,14 @@ object TransferQueue {
     /** The items marked « à repartager » (nothing readable): the « Choisir le fichier » button and the grouped notification. */
     fun toReshare(): List<QueueItem> = model.toReshare()
 
+    /** M1: one copy to the cache at a time, and the free space is measured again before each (two big files never fill the phone together). */
+    private val copyLock = kotlinx.coroutines.sync.Mutex()
+
     /**
-     * R-22: decides how the new item stays readable ([castbridge.core.tv.SourceAnchor], pure) and does it. (a) and (b) are quick and done here; (c) the
-     * copy to the cache runs in the background (« Préparation du fichier… n % », the item waits) — the queue service already holds the process;
-     * (d) fails the item at once with the reason (no loop, no automatic retry).
+     * R-22: decides how the new item stays readable ([castbridge.core.tv.SourceAnchor], pure) and does it. M1 (audit 2026-10-07): the cheap decisions
+     * (already durable URIs) are made here; everything that touches the disk or MediaStore (persist, 4 queries, 64 KiB head, free space, copy) runs on
+     * IO with the item in « préparation », never on the main thread. (c) the copy is serialised; (d) H1: a file that cannot be anchored keeps its
+     * original URI ([castbridge.core.tv.Anchor.VOLATILE]) and is sent; it is « à repartager » only when it is no longer readable at send time (runOneInner).
      */
     private fun anchorNew(app: Context, it: QueueItem, uri: Uri) {
         when {
@@ -166,36 +171,45 @@ object TransferQueue {
             SourceAnchoring.isCacheUri(app, uri) -> { model.setAnchor(it.id, castbridge.core.tv.Anchor.CACHE, uri.toString()); return }
             uri.scheme != "content" -> { model.setAnchor(it.id, castbridge.core.tv.Anchor.PERSISTED); return }
         }
-        val persisted = SourceAnchoring.tryPersist(app, uri)
-        val media = if (persisted) null else SourceAnchoring.findInMediaStore(app, uri, it.name, it.size)
-        val free = SourceAnchoring.freeBytes(app)
-        when (castbridge.core.tv.SourceAnchor.choose(castbridge.core.tv.SourceAnchor.Facts(persisted, media != null, it.size, free))) {
-            castbridge.core.tv.Anchor.PERSISTED -> model.setAnchor(it.id, castbridge.core.tv.Anchor.PERSISTED)
-            castbridge.core.tv.Anchor.MEDIASTORE -> model.setAnchor(it.id, castbridge.core.tv.Anchor.MEDIASTORE, media.toString())
-            castbridge.core.tv.Anchor.CACHE -> prepareCopy(app, it, uri)
-            else -> {
-                model.reshare(it.id, CopyReport.failed(app, it, CopyStep.START, null, notify = false,
-                    text = castbridge.core.tv.ReshareTexts.notAnchored(it.uri, castbridge.core.tv.SourceAnchor.reshareReason(it.size))))
-                CopyReport.reshareNotice(app, null)
+        model.preparing(it.id, 0)                                  // the item waits while the disk work runs off the main thread
+        scope.launch(Dispatchers.IO) {
+            try {
+                val persisted = SourceAnchoring.tryPersist(app, uri)
+                val media = if (persisted) null else SourceAnchoring.findInMediaStore(app, uri, it.name, it.size)
+                if (model.item(it.id)?.status == QueueStatus.CANCELLED) { purgeCache(app); publish(); return@launch }
+                // the copy is serialised and the free space measured inside the lock (M1)
+                copyLock.withLock {
+                    val free = SourceAnchoring.freeBytes(app)
+                    when (castbridge.core.tv.SourceAnchor.choose(castbridge.core.tv.SourceAnchor.Facts(persisted, media != null, it.size, free))) {
+                        castbridge.core.tv.Anchor.PERSISTED -> model.setAnchor(it.id, castbridge.core.tv.Anchor.PERSISTED)
+                        castbridge.core.tv.Anchor.MEDIASTORE -> model.setAnchor(it.id, castbridge.core.tv.Anchor.MEDIASTORE, media.toString())
+                        castbridge.core.tv.Anchor.CACHE -> copyToCache(app, it, uri)
+                        else -> model.setAnchor(it.id, castbridge.core.tv.Anchor.VOLATILE)
+                    }
+                }
+            } catch (e: Throwable) {
+                if (e is kotlinx.coroutines.CancellationException) throw e
+                android.util.Log.w("TransferQueue", "ancrage impossible, l'URI d'origine est gardée", e)
+                model.setAnchor(it.id, castbridge.core.tv.Anchor.VOLATILE)
             }
+            publish(); pump(app)
         }
     }
 
-    private fun prepareCopy(app: Context, it: QueueItem, uri: Uri) {
-        model.preparing(it.id, 0)
-        scope.launch(Dispatchers.IO) {
-            try {
-                val done = SourceAnchoring.copyToCache(app, it.id, uri, it.size, { model.item(it.id)?.status != QueueStatus.WAITING }) { pct -> model.preparing(it.id, pct); publish() }
-                if (done == null) { purgeCache(app); publish(); return@launch }          // cancelled meanwhile
-                model.setAnchor(it.id, castbridge.core.tv.Anchor.CACHE, done.toString())
-                publish(); pump(app)
-            } catch (e: Throwable) {
-                android.util.Log.w("TransferQueue", "préparation du fichier impossible", e)
-                val full = (e.message.orEmpty().contains("ENOSPC") || e.message.orEmpty().contains("No space"))
-                val text = if (full) castbridge.core.tv.ReshareTexts.notAnchored(it.uri, castbridge.core.tv.SourceAnchor.reshareReason(it.size)) else castbridge.core.tv.ReshareTexts.lost(it.uri)
-                model.reshare(it.id, CopyReport.failed(app, it, CopyStep.START, null, text = text, notify = false))
-                purgeCache(app); publish(); CopyReport.reshareNotice(app, null); pump(app)
-            }
+    /** The copy itself (inside [copyLock]). A failure for lack of space keeps the original URI (H1); any other failure is « à repartager ». */
+    private fun copyToCache(app: Context, it: QueueItem, uri: Uri) {
+        try {
+            val done = SourceAnchoring.copyToCache(app, it.id, uri, it.size, { model.item(it.id)?.status != QueueStatus.WAITING }) { pct -> model.preparing(it.id, pct); publish() }
+            if (done == null) { purgeCache(app); return }          // cancelled meanwhile
+            model.setAnchor(it.id, castbridge.core.tv.Anchor.CACHE, done.toString())
+        } catch (e: Throwable) {
+            android.util.Log.w("TransferQueue", "préparation du fichier impossible", e)
+            val full = (e.message.orEmpty().contains("ENOSPC") || e.message.orEmpty().contains("No space"))
+            purgeCache(app)
+            if (full) { model.setAnchor(it.id, castbridge.core.tv.Anchor.VOLATILE); return }
+            val text = castbridge.core.tv.ReshareTexts.lost(it.uri)
+            model.reshare(it.id, CopyReport.failed(app, it, CopyStep.START, null, text = text, notify = false))
+            CopyReport.reshareNotice(app, null)
         }
     }
 

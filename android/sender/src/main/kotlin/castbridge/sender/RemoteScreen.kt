@@ -388,8 +388,8 @@ fun RemoteScreen(onClose: () -> Unit) {
 
             // Playback: six keys must never touch each other, so their sizes follow the width (gaps stay >= 8 dp on a 320 dp phone)
             BoxWithConstraints(Modifier.fillMaxWidth()) {
-                val f = ((maxWidth.value - 8f * 7) / 288f).coerceIn(0.7f, 1f)
-                fun d(v: Int) = (v * f).toInt()
+                val f = ((maxWidth.value - 8f * 7) / 288f).coerceIn(0.85f, 1f)
+                fun d(v: Int) = (v * f).toInt().coerceAtLeast(40)      // LOW (audit 2026-10-07): a key is never under 40 dp
                 Row(Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.SpaceEvenly, verticalAlignment = Alignment.CenterVertically) {
                     RemoteKeyButton(RemoteKey.PREVIOUS, Icons.Filled.SkipPrevious, size = d(44))
                     RemoteKeyButton(RemoteKey.REWIND, cbv(R.drawable.ic_cb_recul_10s), size = d(48))

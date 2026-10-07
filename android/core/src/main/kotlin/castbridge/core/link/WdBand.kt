@@ -17,8 +17,17 @@ object WdBand {
      * (owner, 2026-10-06): [radio5GHz] = what Android says of the Wi-Fi card (null = unknown, treated as possible), [failedBefore] = a
      * 5 GHz group was already refused on this TV (remembered): then no attempt at all, the automatic band at once.
      */
-    fun first(sdk: Int, radio5GHz: Boolean? = null, failedBefore: Boolean = false): Band =
-        if (sdk >= 29 && radio5GHz != false && !failedBefore) Band.GHZ5 else Band.AUTO
+    fun first(sdk: Int, radio5GHz: Boolean? = null, failedBefore: Boolean = false, forPhone: Boolean = false): Band =
+        // H3 (audit 2026-10-07): a 5 GHz group is invisible to a phone with a 2.4 GHz-only radio (Tecno, Itel): the AUTOMATIC group made for a
+        // phone keeps the automatic band; 5 GHz applies only to the owner's group (MENU), which the owner joins knowingly.
+        if (!forPhone && sdk >= 29 && radio5GHz != false && !failedBefore) Band.GHZ5 else Band.AUTO
+
+    /** A 5 GHz group nobody joined within this time is recreated once on the automatic band (the phone may only see 2.4 GHz). */
+    const val NO_CLIENT_MS = 45_000L
+
+    /** True = recreate the group on [Band.AUTO] now: a 5 GHz group, no client after [NO_CLIENT_MS], and not already recreated once. */
+    fun recreateAuto(band: Band, clients: Int?, elapsedMs: Long, alreadyRecreated: Boolean): Boolean =
+        band == Band.GHZ5 && clients == 0 && elapsedMs >= NO_CLIENT_MS && !alreadyRecreated
 
     /**
      * After a failed createGroup with [tried]: the band to retry with, or null to give up. Only a 5 GHz attempt is retried, and
