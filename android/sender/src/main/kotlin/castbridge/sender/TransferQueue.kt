@@ -522,7 +522,7 @@ object TransferQueue {
                     out = out.copy(deleteSource = false, text = castbridge.core.tv.MoveProof.CHANGED_TEXT)
                 // « Copier sur la TV et lire » from the phone's player (playOnTv): CastSession starts the TV's file at the phone's position (heldAs);
                 // a plain « Copier et lire » (autoPlay) is started here
-                if (out.play && !item.playOnTv && out.tvName.isNotEmpty()) runCatching { client.play(out.tvName) }
+                if (out.play && !item.playOnTv && out.tvName.isNotEmpty()) runCatching { OpenTv.playOpeningTv(app) { client.play(out.tvName) } }
                 // « Annuler » landed during the checks: nothing is offered for deletion (R-09)
                 if (cancelled()) return@withContext DedupRun(Dedup.CANCELLED)
                 // MOVE: the original goes ONLY with both proofs (fresh hash + the phone's own reading), unchanged since, and the user confirms (MoveHandler)

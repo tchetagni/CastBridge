@@ -75,6 +75,34 @@ object OpenTv {
         }
     }
 
+    /**
+     * « Lire » / « Copier et lire » : lance [play] ; si la TV répond « il faut être devant » (CastBridge-TV fermé ou derrière une autre application, 409 needsForeground),
+     * ouvre CastBridge-TV par la même voie que « Ouvrir sur la TV » puis réessaie quelques secondes. À appeler hors du fil principal (bloquant, 10 s + 5 s au plus).
+     * Une autre ouverture déjà en cours, ou une issue qui n'a pas mis la TV devant (notification, permission, TV injoignable) : l'erreur d'origine est relancée.
+     */
+    fun <T> playOpeningTv(ctx: Context, play: () -> T): T {
+        val first = try { return play() } catch (e: castbridge.core.tv.TvClient.HttpError) {
+            if (e.code != 409 || "needsForeground" !in e.message.orEmpty()) throw e
+            e
+        }
+        if (!running.compareAndSet(false, true)) throw first
+        _state.value = State.Working
+        var outcome: OpenTvOutcome = OpenTvOutcome.Failed(null)
+        try { outcome = run(ctx.applicationContext, null) } catch (e: Exception) { /* Failed */ }
+        finally { _state.value = State.Done(outcome, System.currentTimeMillis()); running.set(false) }
+        val opened = outcome as? OpenTvOutcome.Opened
+        if (opened == null || opened.already) throw first
+        var last: Exception = first
+        repeat(5) {
+            Thread.sleep(1_000)
+            try { return play() } catch (e: castbridge.core.tv.TvClient.HttpError) {
+                if (e.code != 409 || "needsForeground" !in e.message.orEmpty()) throw e
+                last = e
+            }
+        }
+        throw last
+    }
+
     private fun run(app: Context, screen: OpenTvScreen?): OpenTvOutcome {
         val t = OpenTvTargets.of(app)
         if (t.needsCode) return OpenTvOutcome.Refused

@@ -186,7 +186,7 @@ class UploadService : Service() {
                     val base = resolve()
                     if (base != null) thread(name = "progressive-start") {
                         // 409 "buffering" just means: not enough yet, the next attempt in a second will do.
-                        if (runCatching { TvClient(base, job.pin).play(job.fileName) }.isSuccess) started = true
+                        if (runCatching { OpenTv.playOpeningTv(this@UploadService) { TvClient(base, job.pin).play(job.fileName) } }.isSuccess) started = true
                     }
                 }
             }
@@ -223,7 +223,7 @@ class UploadService : Service() {
         if (result == ResumableUpload.State.Done) {
             if (started || !job.autoPlay) { finish(State.Done(job)); return }      // already playing (or the caller starts it)
             val base = resolve()
-            val r = if (base != null) runCatching { TvClient(base, job.pin).play(job.fileName) } else Result.failure(IllegalStateException())
+            val r = if (base != null) runCatching { OpenTv.playOpeningTv(this) { TvClient(base, job.pin).play(job.fileName) } } else Result.failure(IllegalStateException())
             val why = (r.exceptionOrNull() as? TvClient.HttpError)?.message?.takeIf { "needsForeground" in it }
                 ?.let { TvClient.str(it.substringAfter(": "), "message") }
             finish(if (r.isSuccess) State.Done(job) else State.Failed(job, why?.let { "Fichier envoyé. $it" } ?: "Fichier envoyé, mais lancement impossible : réessayez « Lire »"))

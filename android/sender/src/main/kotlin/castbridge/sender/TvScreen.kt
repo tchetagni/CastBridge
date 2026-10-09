@@ -264,7 +264,7 @@ fun TvScreen(fixedBase: String? = null, extra: @Composable (TvClient) -> Unit = 
                 item { SectionHeader("Sur la TV · ${size(i.free)} libres") }
                 items(i.files) { (name, sz) ->
                     ListItem(
-                        modifier = Modifier.clickable { cmd("Lire") { play(name) } },
+                        modifier = Modifier.clickable { cmd("Lire") { OpenTv.playOpeningTv(ctx) { play(name) } } },
                         colors = ListItemDefaults.colors(containerColor = Color.Transparent),
                         leadingContent = { Artwork(40.dp) },
                         headlineContent = { Text(name, maxLines = 1) },

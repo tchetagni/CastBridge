@@ -87,7 +87,7 @@ fun HandoffButton(fileUri: Uri?, fileName: String?, posSec: Long, durSec: Long, 
                     status = if (moovAtEnd) "Ce fichier MP4 doit être copié en entier avant la reprise sur la TV (${f.received * 100 / total} %). La diffusion continue."
                     else "Copie vers la TV : ${f.received * 100 / total} %, reprise dès ${(want * 100 / total).coerceAtMost(100)} %. La diffusion continue."
                     if (f.received >= want) {
-                        val ok = withContext(Dispatchers.IO) { runCatching { client.play(fileName, pos * 1000) }.isSuccess }
+                        val ok = withContext(Dispatchers.IO) { runCatching { OpenTv.playOpeningTv(ctx) { client.play(fileName, pos * 1000) } }.isSuccess }
                         if (ok) started = true
                     }
                 } else {

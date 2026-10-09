@@ -254,7 +254,7 @@ object CastSession {
                 if (Handoff.copyReady(f.received, total, dur, pos, moovAtEnd, if (own) UploadService.speed.value else 0L)) {
                     val start = Handoff.phoneToTv(pos, dur)
                     // f.name: the TV's own name of the file (the clean one it filed it under once complete)
-                    val ok = try { client.play(f.name, start); true } catch (e: TvClient.HttpError) {
+                    val ok = try { castbridge.sender.OpenTv.playOpeningTv(ctx) { client.play(f.name, start) }; true } catch (e: TvClient.HttpError) {
                         if (e.code == 409 && "needsForeground" in e.message.orEmpty())
                             update { it.copy(message = TvClient.str(e.message.orEmpty().substringAfter(": "), "message") ?: "Ouvrez CastBridge sur la TV") }
                         false
