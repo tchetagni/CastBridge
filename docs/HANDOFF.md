@@ -3,6 +3,11 @@
 > À tenir à jour à chaque étape. **Aucun secret ici** (mots de passe, PIN, jetons, clés) : voir « Où sont les secrets ».
 > Dernière mise à jour : 2026-10-01 (branche de travail `claude/plug-and-play-robust`, base `feat/ssh`). **Règle du propriétaire : ce document se met à jour en temps réel** (à chaque fusion, publication, lancement/fin d'agent, décision ou problème), commité et poussé aussitôt.
 
+## TV 0.14.48-beta verrouillée (code 123), 2026-10-11
+- **Défaut** : sur une TV verrouillée, la demande d'appareil n'avait jamais la ligne `install_sig=` (`WalletHub.app` jamais initialisé, `WalletHub.init` n'étant appelé que par PlayerActivity/WalletActivity/PlayHub/ChessOnlineHub) ; la console du téléphone affichait à tort « TV trop ancienne » et la clé de production n'était pas liée.
+- **Correctif** : `WalletHub.installSigner(ctx)` pose le contexte applicatif si besoin (même fichier `wallet/install-signer.b64`, même format) ; utilisé par `ActivationCenter` (`requestText`, `receiver`) et `ActivationActivity` ; tous les chemins de demande (HTTP, Bluetooth) passent par `requestText()`. Texte de la console (`ConsoleInstallKey`) rendu exact.
+- **APK** `~/CastBridge-release/SIGNED/CastBridge-TV-0.14.48-beta-verrouillee-armeabi-v7a.apk` construite et signée (certificat ef2908…), sha256 dans `SHA256SUMS-2026-10-11.txt`. PAS encore installée sur la TV, PAS copiée sur la clé USB, PAS publiée sur le serveur.
+
 ## Reprendre dans une session cloud (lire d'abord)
 - **Dépôt** : `git@github.com:tchetagni/CastBridge.git`. **`main` et `feat/ssh` sont identiques depuis le 2026-10-01** (avance simple, rien écrasé) : une session cloud peut partir de `main` ; `feat/ssh` reste la branche d'intégration à tenir à jour (pousser aussi vers `main` après chaque fusion validée). Créer sa branche de travail depuis `origin/main`.
 - **Noms** : l'app du téléphone s'appelle **CastBridge**, celle de la TV **CastBridge-TV** (modules Gradle `:sender` / `:receiver`, applicationId inchangés).
