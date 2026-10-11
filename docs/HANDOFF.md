@@ -3,6 +3,10 @@
 > À tenir à jour à chaque étape. **Aucun secret ici** (mots de passe, PIN, jetons, clés) : voir « Où sont les secrets ».
 > Dernière mise à jour : 2026-10-01 (branche de travail `claude/plug-and-play-robust`, base `feat/ssh`). **Règle du propriétaire : ce document se met à jour en temps réel** (à chaque fusion, publication, lancement/fin d'agent, décision ou problème), commité et poussé aussitôt.
 
+## TV 0.14.49-beta verrouillée (code 125), 2026-10-11
+- **Coffre de la console du S21+ recréé** (données de l'app effacées sans réinstallation) : la console signe désormais avec **kid `3447e18686dfba19`**, inconnu des TV ⇒ « Activation signée par une clé inconnue de cet appareil ». Clé publique ajoutée par le propriétaire à `~/.castbridge-signing/activation-trusted-keys.txt` (mêmes portées que l'ancienne ; sauvegarde `.bak-2026-10-11`). L'ancienne `35662fec…` reste inscrite : la retirer quand son coffre est certainement perdu.
+- **APK** `~/CastBridge-release/SIGNED/CastBridge-TV-0.14.49-beta-verrouillee-armeabi-v7a.apk` (cert ef2908…, sha256 68682800…, kid embarqués 3447e186 / 35662fec / 5f70298e / a86646ae), construite par le propriétaire (le contrôle automatique refuse à l'assistant un build qui ajoute une clé de confiance). Toute TV en 0.14.48 ou moins refuse les clés du S21+ : la mettre à jour.
+
 ## TV 0.14.48-beta verrouillée (code 123), 2026-10-11
 - **Défaut** : sur une TV verrouillée, la demande d'appareil n'avait jamais la ligne `install_sig=` (`WalletHub.app` jamais initialisé, `WalletHub.init` n'étant appelé que par PlayerActivity/WalletActivity/PlayHub/ChessOnlineHub) ; la console du téléphone affichait à tort « TV trop ancienne » et la clé de production n'était pas liée.
 - **Correctif** : `WalletHub.installSigner(ctx)` pose le contexte applicatif si besoin (même fichier `wallet/install-signer.b64`, même format) ; utilisé par `ActivationCenter` (`requestText`, `receiver`) et `ActivationActivity` ; tous les chemins de demande (HTTP, Bluetooth) passent par `requestText()`. Texte de la console (`ConsoleInstallKey`) rendu exact.
