@@ -221,7 +221,7 @@ class ActivationActivity : Activity() {
         col.addView(lanesBox)
         refresh()
         // What the agent needs, and what is free
-        runCatching { castbridge.receiver.wallet.WalletHub.installSigner()?.fingerprintText() }.getOrNull()?.let { col.addView(tv("Empreinte de la clé d'installation : " + it, 16f, DIM, mono = true)) }
+        runCatching { castbridge.receiver.wallet.WalletHub.installSigner(applicationContext)?.fingerprintText() }.getOrNull()?.let { col.addView(tv("Empreinte de la clé d'installation : " + it, 16f, DIM, mono = true)) }
         if (upgrade) { col.addView(tv("Demande d'appareil complète (à donner à CastBridge) :", 16f, GREY)); col.addView(tv(ActivationCenter.requestText(), 13f, DIM, mono = true)) }
         col.addView(tv(LockedTexts.WAYS, 16f, GREY))
         val where = tv("", 15f, DIM)

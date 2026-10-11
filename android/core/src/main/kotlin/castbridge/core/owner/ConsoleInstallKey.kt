@@ -25,7 +25,7 @@ object ConsoleInstallKey {
     fun before(info: OwnerFrames.DeviceInfo?, production: Boolean): Notice? {
         if (info == null || !production) return null
         val key = info.installSig
-            ?: return Notice("Cette TV n'envoie pas sa clé de signature d'installation (CastBridge-TV trop ancien) : l'activation sera émise sans clé liée ; le serveur attendra votre décision. Mettez la TV à jour (0.14.37 ou plus) pour une activation automatique.", true)
+            ?: return Notice("Cette TV n'envoie pas sa clé de signature d'installation (CastBridge-TV ancienne, avant 0.14.37, ou 0.14.47 et moins encore verrouillée) : l'activation sera émise sans clé liée ; le serveur attendra votre décision. Mettez la TV à jour en 0.14.48 ou plus pour une activation automatique.", true)
         return Notice("Clé d'installation de la TV : empreinte ${ActivationBinding.fingerprint(key)}. COMPAREZ-LA avec celle de l'écran d'activation de la TV avant de remettre l'activation.", false)
     }
 

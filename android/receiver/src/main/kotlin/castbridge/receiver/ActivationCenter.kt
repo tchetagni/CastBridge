@@ -86,7 +86,7 @@ object ActivationCenter {
      * envelope needs it (ACT-F4 amended on 2026-10-07). Called from the HTTP thread, the Keystore is awaited for 2 s at most, then the line is simply absent. Never logged.
      */
     fun requestText(): String = OwnerFrames.deviceInfo(deviceCode, fp, RentalHub.installPubOrNull(app),      // never blocks the main thread on the Keystore
-        castbridge.receiver.wallet.WalletHub.installSigner()?.publicKey)      // the Ed25519 key of the wallet `bind` proof (file, no Keystore): the issuer signs it into the activation (W23-05 audit HIGH-1)
+        castbridge.receiver.wallet.WalletHub.installSigner(app)?.publicKey)      // the Ed25519 key of the wallet `bind` proof (file, no Keystore): the issuer signs it into the activation (W23-05 audit HIGH-1)
 
     /** A phone presented the right connection code to the locked route (any address: Wi-Fi network or Wi-Fi Direct group): the screen then says « Téléphone relié ». The address is not kept. */
     @Volatile var phoneAuthorizedAt = 0L; private set
@@ -129,7 +129,7 @@ object ActivationCenter {
     }
 
     // ---- activation channels (file, typed text): one verification path ----
-    private fun receiver() = ActivationReceiver(ring, trusted, fp, Subject.TV, ownInstallKey = runCatching { castbridge.receiver.wallet.WalletHub.installSigner()?.publicKey }.getOrNull())
+    private fun receiver() = ActivationReceiver(ring, trusted, fp, Subject.TV, ownInstallKey = runCatching { castbridge.receiver.wallet.WalletHub.installSigner(app)?.publicKey }.getOrNull())
 
     /** A key pushed by the owner's phone over Bluetooth: verified (nothing installed) and kept here for the activation screen to paste in its field; the owner confirms with « Valider ». */
     @Volatile var pending: String? = null

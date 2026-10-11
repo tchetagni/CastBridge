@@ -250,8 +250,18 @@ object WalletHub {
      */
     @Synchronized fun installSigner(): InstallSigner? {
         signer?.let { return it }
+        if (!::app.isInitialized) return null      // ni init() ni installSigner(ctx) : pas de dossier privé connu
         return runCatching { InstallSigner.loadOrCreate(FileInstallSignerStore(File(dir(), "install-signer.b64")), PlainWrapper()).signer }
             .onFailure { Log.w(TAG, "clé d'installation indisponible (${it.javaClass.simpleName})") }.getOrNull()?.also { signer = it }
+    }
+
+    /**
+     * Idem, sans dépendre de [init] : une TV verrouillée ne passe jamais par PlayerActivity/WalletHub.init, mais sa demande d'appareil et son écran d'activation doivent porter la clé.
+     * Même fichier, même format : les TV déjà activées gardent leur identité. Ne touche pas à `ready`.
+     */
+    @Synchronized fun installSigner(ctx: Context): InstallSigner? {
+        if (!::app.isInitialized) app = ctx.applicationContext
+        return installSigner()
     }
 
     /** HTTPS vers l'API par les mêmes chemins que le reste de la TV (réseau direct, puis passerelle Bluetooth du téléphone), avec le jeton d'appareil existant. */
